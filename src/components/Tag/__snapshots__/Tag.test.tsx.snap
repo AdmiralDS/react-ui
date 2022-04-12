@@ -1,0 +1,439 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tag should render component with kind "green" and determined width 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": .c0 {
+  position: relative;
+  box-sizing: border-box;
+  height: 24px;
+  width: 60px;
+  margin-top: 8px;
+  padding: 3px 7px;
+  border-radius: 4px;
+  background: #E2E5E9;
+  border: 1px solid #E2E5E9;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: default;
+  pointer-events: none;
+}
+
+.c0:hover,
+.c0:active {
+  background: #D3D8DE;
+}
+
+.c0:focus {
+  outline: none;
+}
+
+.c0:focus:before {
+  content: '';
+  position: absolute;
+  top: -4px;
+  bottom: -4px;
+  left: -4px;
+  right: -4px;
+  border-radius: 6px;
+  border: 2px solid #0A54C2;
+}
+
+.c2 {
+  color: #2B313B;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 16px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #2B313B;
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 6px;
+  background: #05A13A;
+}
+
+<body>
+    <div>
+      <button
+        class="c0"
+        width="60px"
+      >
+        <div
+          class="c1"
+        />
+        <span
+          class="c2"
+        >
+          test
+        </span>
+      </button>
+    </div>
+  </body>,
+  "container": .c0 {
+  position: relative;
+  box-sizing: border-box;
+  height: 24px;
+  width: 60px;
+  margin-top: 8px;
+  padding: 3px 7px;
+  border-radius: 4px;
+  background: #E2E5E9;
+  border: 1px solid #E2E5E9;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: default;
+  pointer-events: none;
+}
+
+.c0:hover,
+.c0:active {
+  background: #D3D8DE;
+}
+
+.c0:focus {
+  outline: none;
+}
+
+.c0:focus:before {
+  content: '';
+  position: absolute;
+  top: -4px;
+  bottom: -4px;
+  left: -4px;
+  right: -4px;
+  border-radius: 6px;
+  border: 2px solid #0A54C2;
+}
+
+.c2 {
+  color: #2B313B;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 16px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #2B313B;
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 6px;
+  background: #05A13A;
+}
+
+<div>
+    <button
+      class="c0"
+      width="60px"
+    >
+      <div
+        class="c1"
+      />
+      <span
+        class="c2"
+      >
+        test
+      </span>
+    </button>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`Tag should render default component 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": .c0 {
+  position: relative;
+  box-sizing: border-box;
+  height: 24px;
+  margin-top: 8px;
+  padding: 3px 7px;
+  border-radius: 4px;
+  background: #E2E5E9;
+  border: 1px solid #E2E5E9;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: default;
+  pointer-events: none;
+}
+
+.c0:hover,
+.c0:active {
+  background: #D3D8DE;
+}
+
+.c0:focus {
+  outline: none;
+}
+
+.c0:focus:before {
+  content: '';
+  position: absolute;
+  top: -4px;
+  bottom: -4px;
+  left: -4px;
+  right: -4px;
+  border-radius: 6px;
+  border: 2px solid #0A54C2;
+}
+
+.c1 {
+  color: #2B313B;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 16px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #2B313B;
+}
+
+<body>
+    <div>
+      <button
+        class="c0"
+      >
+        <span
+          class="c1"
+        >
+          test
+        </span>
+      </button>
+    </div>
+  </body>,
+  "container": .c0 {
+  position: relative;
+  box-sizing: border-box;
+  height: 24px;
+  margin-top: 8px;
+  padding: 3px 7px;
+  border-radius: 4px;
+  background: #E2E5E9;
+  border: 1px solid #E2E5E9;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: default;
+  pointer-events: none;
+}
+
+.c0:hover,
+.c0:active {
+  background: #D3D8DE;
+}
+
+.c0:focus {
+  outline: none;
+}
+
+.c0:focus:before {
+  content: '';
+  position: absolute;
+  top: -4px;
+  bottom: -4px;
+  left: -4px;
+  right: -4px;
+  border-radius: 6px;
+  border: 2px solid #0A54C2;
+}
+
+.c1 {
+  color: #2B313B;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 16px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #2B313B;
+}
+
+<div>
+    <button
+      class="c0"
+    >
+      <span
+        class="c1"
+      >
+        test
+      </span>
+    </button>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;

@@ -1,0 +1,190 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProgressBar should render component 1`] = `
+.c1 {
+  background: #E2E5E9;
+  border-radius: 2px;
+  min-width: 140px;
+  min-height: 4px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c2 {
+  background: #0D69F2;
+  width: 0%;
+  border-radius: 2px;
+  -webkit-transition: all 0.3s linear;
+  transition: all 0.3s linear;
+}
+
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding-bottom: 8px;
+  font-size: 12px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  width: 100%;
+  line-height: 16px;
+  font-style: normal;
+  font-weight: normal;
+  font-family: 'VTB Group UI',sans-serif;
+  color: #2B313B;
+}
+
+<div>
+  <div
+    class=""
+  >
+    <div
+      class="c0"
+    >
+      Загрузка данных...
+    </div>
+    <div
+      class="c1"
+    >
+      <div
+        class="c2"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`ProgressBar should render component with prop appearance=error 1`] = `
+.c1 {
+  background: #E2E5E9;
+  border-radius: 2px;
+  min-width: 140px;
+  min-height: 4px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c2 {
+  background: #DA0B20;
+  width: 0%;
+  border-radius: 2px;
+  -webkit-transition: all 0.3s linear;
+  transition: all 0.3s linear;
+}
+
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding-bottom: 8px;
+  font-size: 12px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  width: 100%;
+  line-height: 16px;
+  font-style: normal;
+  font-weight: normal;
+  font-family: 'VTB Group UI',sans-serif;
+  color: #DA0B20;
+}
+
+<div>
+  <div
+    class=""
+  >
+    <div
+      class="c0"
+    >
+      Загрузка данных...
+    </div>
+    <div
+      class="c1"
+    >
+      <div
+        class="c2"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`ProgressBar should render component with prop percent 1`] = `
+.c1 {
+  background: #E2E5E9;
+  border-radius: 2px;
+  min-width: 140px;
+  min-height: 4px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c2 {
+  background: #0D69F2;
+  width: 50%;
+  border-radius: 2px;
+  -webkit-transition: all 0.3s linear;
+  transition: all 0.3s linear;
+}
+
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding-bottom: 8px;
+  font-size: 12px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  width: 100%;
+  line-height: 16px;
+  font-style: normal;
+  font-weight: normal;
+  font-family: 'VTB Group UI',sans-serif;
+  color: #2B313B;
+}
+
+<div>
+  <div
+    class=""
+  >
+    <div
+      class="c0"
+    >
+      Загрузка данных...
+    </div>
+    <div
+      class="c1"
+    >
+      <div
+        class="c2"
+      />
+    </div>
+  </div>
+</div>
+`;

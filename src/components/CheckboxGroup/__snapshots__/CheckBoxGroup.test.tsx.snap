@@ -1,0 +1,2165 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CheckboxGroup should render component with disabled state 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": .c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  box-sizing: border-box;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: normal;
+  font-family: 'VTB Group UI',sans-serif;
+  color: #A7B0BE;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.c0 > div {
+  margin-top: 16px;
+}
+
+.c9 {
+  pointer-events: none;
+}
+
+.c9 *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c4 {
+  position: relative;
+  box-sizing: border-box;
+  overflow: visible;
+  width: 20px;
+  height: 20px;
+}
+
+fieldset[data-dimension='s'] .c3 {
+  width: 16px;
+}
+
+fieldset[data-dimension='s'] .c3 {
+  height: 16px;
+}
+
+.c8 {
+  pointer-events: none;
+  display: inline-block;
+  position: absolute;
+  margin: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 4px;
+  outline: 0;
+  -webkit-transition: background 0.1s ease-in;
+  transition: background 0.1s ease-in;
+  line-height: initial;
+  background-color: #FFFFFF;
+  border: 1px solid #8A96A8;
+}
+
+.c6 {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: calc(100% + 2px);
+  height: calc(100% + 2px);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  box-sizing: border-box;
+  cursor: pointer;
+  border-radius: 5px;
+  margin: 0;
+  padding: 0;
+}
+
+.c6::-ms-check {
+  display: none;
+}
+
+.c6:disabled {
+  pointer-events: none;
+}
+
+.c6:checked + .c7 {
+  background-color: #0D69F2;
+  border: none;
+}
+
+.c6:not(:checked) + .c7 > * {
+  display: none;
+}
+
+.c6:not(:checked):focus + .c7,
+.c6:not(:disabled):not(:checked):hover + .c7 {
+  background-color: #F1F2F4;
+  border: 1px solid #0A54C2;
+}
+
+.c6:checked:focus + .c7,
+.c6:not(:disabled):checked:hover + .c7 {
+  background-color: #0A54C2;
+  border: none;
+}
+
+.c6:not(:checked):disabled + .c7 {
+  background-color: #FFFFFF;
+  border: 1px solid #A7B0BE;
+}
+
+.c6:disabled + .c7 {
+  background-color: #A7B0BE;
+  border: none;
+}
+
+.c5 {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+}
+
+.c2 {
+  display: inline-block;
+  position: relative;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-left: 32px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #2B313B;
+  color: #A7B0BE;
+  cursor: default;
+}
+
+fieldset[data-dimension='s'] .c1 {
+  padding-left: 28px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 16px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #2B313B;
+}
+
+fieldset:disabled .c1 {
+  color: #A7B0BE;
+  cursor: default;
+}
+
+<body>
+    <div>
+      <div
+        class="c0"
+        disabled=""
+      >
+        <label
+          class="c1 c2"
+          disabled=""
+        >
+          <div
+            class="c3 c4 c5"
+          >
+            <input
+              class="c6"
+              disabled=""
+              type="checkbox"
+            />
+            <div
+              class="c7 c8"
+            >
+              <div
+                aria-hidden="true"
+                class="c9"
+                focusable="false"
+              />
+            </div>
+          </div>
+          Москва
+        </label>
+        <label
+          class="c1 c2"
+          disabled=""
+        >
+          <div
+            class="c3 c4 c5"
+          >
+            <input
+              class="c6"
+              disabled=""
+              type="checkbox"
+            />
+            <div
+              class="c7 c8"
+            >
+              <div
+                aria-hidden="true"
+                class="c9"
+                focusable="false"
+              />
+            </div>
+          </div>
+          Воронеж
+        </label>
+        <label
+          class="c1 c2"
+          disabled=""
+        >
+          <div
+            class="c3 c4 c5"
+          >
+            <input
+              class="c6"
+              disabled=""
+              type="checkbox"
+            />
+            <div
+              class="c7 c8"
+            >
+              <div
+                aria-hidden="true"
+                class="c9"
+                focusable="false"
+              />
+            </div>
+          </div>
+          Самара
+        </label>
+      </div>
+    </div>
+  </body>,
+  "container": .c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  box-sizing: border-box;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: normal;
+  font-family: 'VTB Group UI',sans-serif;
+  color: #A7B0BE;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.c0 > div {
+  margin-top: 16px;
+}
+
+.c9 {
+  pointer-events: none;
+}
+
+.c9 *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c4 {
+  position: relative;
+  box-sizing: border-box;
+  overflow: visible;
+  width: 20px;
+  height: 20px;
+}
+
+fieldset[data-dimension='s'] .c3 {
+  width: 16px;
+}
+
+fieldset[data-dimension='s'] .c3 {
+  height: 16px;
+}
+
+.c8 {
+  pointer-events: none;
+  display: inline-block;
+  position: absolute;
+  margin: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 4px;
+  outline: 0;
+  -webkit-transition: background 0.1s ease-in;
+  transition: background 0.1s ease-in;
+  line-height: initial;
+  background-color: #FFFFFF;
+  border: 1px solid #8A96A8;
+}
+
+.c6 {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: calc(100% + 2px);
+  height: calc(100% + 2px);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  box-sizing: border-box;
+  cursor: pointer;
+  border-radius: 5px;
+  margin: 0;
+  padding: 0;
+}
+
+.c6::-ms-check {
+  display: none;
+}
+
+.c6:disabled {
+  pointer-events: none;
+}
+
+.c6:checked + .c7 {
+  background-color: #0D69F2;
+  border: none;
+}
+
+.c6:not(:checked) + .c7 > * {
+  display: none;
+}
+
+.c6:not(:checked):focus + .c7,
+.c6:not(:disabled):not(:checked):hover + .c7 {
+  background-color: #F1F2F4;
+  border: 1px solid #0A54C2;
+}
+
+.c6:checked:focus + .c7,
+.c6:not(:disabled):checked:hover + .c7 {
+  background-color: #0A54C2;
+  border: none;
+}
+
+.c6:not(:checked):disabled + .c7 {
+  background-color: #FFFFFF;
+  border: 1px solid #A7B0BE;
+}
+
+.c6:disabled + .c7 {
+  background-color: #A7B0BE;
+  border: none;
+}
+
+.c5 {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+}
+
+.c2 {
+  display: inline-block;
+  position: relative;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-left: 32px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #2B313B;
+  color: #A7B0BE;
+  cursor: default;
+}
+
+fieldset[data-dimension='s'] .c1 {
+  padding-left: 28px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 16px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #2B313B;
+}
+
+fieldset:disabled .c1 {
+  color: #A7B0BE;
+  cursor: default;
+}
+
+<div>
+    <div
+      class="c0"
+      disabled=""
+    >
+      <label
+        class="c1 c2"
+        disabled=""
+      >
+        <div
+          class="c3 c4 c5"
+        >
+          <input
+            class="c6"
+            disabled=""
+            type="checkbox"
+          />
+          <div
+            class="c7 c8"
+          >
+            <div
+              aria-hidden="true"
+              class="c9"
+              focusable="false"
+            />
+          </div>
+        </div>
+        Москва
+      </label>
+      <label
+        class="c1 c2"
+        disabled=""
+      >
+        <div
+          class="c3 c4 c5"
+        >
+          <input
+            class="c6"
+            disabled=""
+            type="checkbox"
+          />
+          <div
+            class="c7 c8"
+          >
+            <div
+              aria-hidden="true"
+              class="c9"
+              focusable="false"
+            />
+          </div>
+        </div>
+        Воронеж
+      </label>
+      <label
+        class="c1 c2"
+        disabled=""
+      >
+        <div
+          class="c3 c4 c5"
+        >
+          <input
+            class="c6"
+            disabled=""
+            type="checkbox"
+          />
+          <div
+            class="c7 c8"
+          >
+            <div
+              aria-hidden="true"
+              class="c9"
+              focusable="false"
+            />
+          </div>
+        </div>
+        Самара
+      </label>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`CheckboxGroup should render component with label 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": .c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  box-sizing: border-box;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: normal;
+  font-family: 'VTB Group UI',sans-serif;
+  color: #2B313B;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.c0 > div {
+  margin-top: 16px;
+}
+
+.c9 {
+  pointer-events: none;
+}
+
+.c9 *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c4 {
+  position: relative;
+  box-sizing: border-box;
+  overflow: visible;
+  width: 20px;
+  height: 20px;
+}
+
+fieldset[data-dimension='s'] .c3 {
+  width: 16px;
+}
+
+fieldset[data-dimension='s'] .c3 {
+  height: 16px;
+}
+
+.c8 {
+  pointer-events: none;
+  display: inline-block;
+  position: absolute;
+  margin: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 4px;
+  outline: 0;
+  -webkit-transition: background 0.1s ease-in;
+  transition: background 0.1s ease-in;
+  line-height: initial;
+  background-color: #FFFFFF;
+  border: 1px solid #8A96A8;
+}
+
+.c6 {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: calc(100% + 2px);
+  height: calc(100% + 2px);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  box-sizing: border-box;
+  cursor: pointer;
+  border-radius: 5px;
+  margin: 0;
+  padding: 0;
+}
+
+.c6::-ms-check {
+  display: none;
+}
+
+.c6:disabled {
+  pointer-events: none;
+}
+
+.c6:checked + .c7 {
+  background-color: #0D69F2;
+  border: none;
+}
+
+.c6:not(:checked) + .c7 > * {
+  display: none;
+}
+
+.c6:not(:checked):focus + .c7,
+.c6:not(:disabled):not(:checked):hover + .c7 {
+  background-color: #F1F2F4;
+  border: 1px solid #0A54C2;
+}
+
+.c6:checked:focus + .c7,
+.c6:not(:disabled):checked:hover + .c7 {
+  background-color: #0A54C2;
+  border: none;
+}
+
+.c6:not(:checked):disabled + .c7 {
+  background-color: #FFFFFF;
+  border: 1px solid #A7B0BE;
+}
+
+.c6:disabled + .c7 {
+  background-color: #A7B0BE;
+  border: none;
+}
+
+.c5 {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+}
+
+.c2 {
+  display: inline-block;
+  position: relative;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-left: 32px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #2B313B;
+  color: #2B313B;
+  cursor: pointer;
+}
+
+fieldset[data-dimension='s'] .c1 {
+  padding-left: 28px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 16px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #2B313B;
+}
+
+fieldset:disabled .c1 {
+  color: #A7B0BE;
+  cursor: default;
+}
+
+<body>
+    <div>
+      <div
+        class="c0"
+      >
+        Выберите города
+        <label
+          class="c1 c2"
+        >
+          <div
+            class="c3 c4 c5"
+          >
+            <input
+              class="c6"
+              type="checkbox"
+            />
+            <div
+              class="c7 c8"
+            >
+              <div
+                aria-hidden="true"
+                class="c9"
+                focusable="false"
+              />
+            </div>
+          </div>
+          Москва
+        </label>
+        <label
+          class="c1 c2"
+        >
+          <div
+            class="c3 c4 c5"
+          >
+            <input
+              class="c6"
+              type="checkbox"
+            />
+            <div
+              class="c7 c8"
+            >
+              <div
+                aria-hidden="true"
+                class="c9"
+                focusable="false"
+              />
+            </div>
+          </div>
+          Воронеж
+        </label>
+        <label
+          class="c1 c2"
+        >
+          <div
+            class="c3 c4 c5"
+          >
+            <input
+              class="c6"
+              type="checkbox"
+            />
+            <div
+              class="c7 c8"
+            >
+              <div
+                aria-hidden="true"
+                class="c9"
+                focusable="false"
+              />
+            </div>
+          </div>
+          Самара
+        </label>
+      </div>
+    </div>
+  </body>,
+  "container": .c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  box-sizing: border-box;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: normal;
+  font-family: 'VTB Group UI',sans-serif;
+  color: #2B313B;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.c0 > div {
+  margin-top: 16px;
+}
+
+.c9 {
+  pointer-events: none;
+}
+
+.c9 *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c4 {
+  position: relative;
+  box-sizing: border-box;
+  overflow: visible;
+  width: 20px;
+  height: 20px;
+}
+
+fieldset[data-dimension='s'] .c3 {
+  width: 16px;
+}
+
+fieldset[data-dimension='s'] .c3 {
+  height: 16px;
+}
+
+.c8 {
+  pointer-events: none;
+  display: inline-block;
+  position: absolute;
+  margin: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 4px;
+  outline: 0;
+  -webkit-transition: background 0.1s ease-in;
+  transition: background 0.1s ease-in;
+  line-height: initial;
+  background-color: #FFFFFF;
+  border: 1px solid #8A96A8;
+}
+
+.c6 {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: calc(100% + 2px);
+  height: calc(100% + 2px);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  box-sizing: border-box;
+  cursor: pointer;
+  border-radius: 5px;
+  margin: 0;
+  padding: 0;
+}
+
+.c6::-ms-check {
+  display: none;
+}
+
+.c6:disabled {
+  pointer-events: none;
+}
+
+.c6:checked + .c7 {
+  background-color: #0D69F2;
+  border: none;
+}
+
+.c6:not(:checked) + .c7 > * {
+  display: none;
+}
+
+.c6:not(:checked):focus + .c7,
+.c6:not(:disabled):not(:checked):hover + .c7 {
+  background-color: #F1F2F4;
+  border: 1px solid #0A54C2;
+}
+
+.c6:checked:focus + .c7,
+.c6:not(:disabled):checked:hover + .c7 {
+  background-color: #0A54C2;
+  border: none;
+}
+
+.c6:not(:checked):disabled + .c7 {
+  background-color: #FFFFFF;
+  border: 1px solid #A7B0BE;
+}
+
+.c6:disabled + .c7 {
+  background-color: #A7B0BE;
+  border: none;
+}
+
+.c5 {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+}
+
+.c2 {
+  display: inline-block;
+  position: relative;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-left: 32px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #2B313B;
+  color: #2B313B;
+  cursor: pointer;
+}
+
+fieldset[data-dimension='s'] .c1 {
+  padding-left: 28px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 16px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #2B313B;
+}
+
+fieldset:disabled .c1 {
+  color: #A7B0BE;
+  cursor: default;
+}
+
+<div>
+    <div
+      class="c0"
+    >
+      Выберите города
+      <label
+        class="c1 c2"
+      >
+        <div
+          class="c3 c4 c5"
+        >
+          <input
+            class="c6"
+            type="checkbox"
+          />
+          <div
+            class="c7 c8"
+          >
+            <div
+              aria-hidden="true"
+              class="c9"
+              focusable="false"
+            />
+          </div>
+        </div>
+        Москва
+      </label>
+      <label
+        class="c1 c2"
+      >
+        <div
+          class="c3 c4 c5"
+        >
+          <input
+            class="c6"
+            type="checkbox"
+          />
+          <div
+            class="c7 c8"
+          >
+            <div
+              aria-hidden="true"
+              class="c9"
+              focusable="false"
+            />
+          </div>
+        </div>
+        Воронеж
+      </label>
+      <label
+        class="c1 c2"
+      >
+        <div
+          class="c3 c4 c5"
+        >
+          <input
+            class="c6"
+            type="checkbox"
+          />
+          <div
+            class="c7 c8"
+          >
+            <div
+              aria-hidden="true"
+              class="c9"
+              focusable="false"
+            />
+          </div>
+        </div>
+        Самара
+      </label>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`CheckboxGroup should render component with small dimension 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": .c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  box-sizing: border-box;
+  font-size: 14px;
+  line-height: 16px;
+  font-weight: normal;
+  font-family: 'VTB Group UI',sans-serif;
+  color: #2B313B;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.c0 > div {
+  margin-top: 12px;
+}
+
+.c9 {
+  pointer-events: none;
+}
+
+.c9 *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c4 {
+  position: relative;
+  box-sizing: border-box;
+  overflow: visible;
+  width: 16px;
+  height: 16px;
+}
+
+fieldset[data-dimension='s'] .c3 {
+  width: 16px;
+}
+
+fieldset[data-dimension='s'] .c3 {
+  height: 16px;
+}
+
+.c8 {
+  pointer-events: none;
+  display: inline-block;
+  position: absolute;
+  margin: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 4px;
+  outline: 0;
+  -webkit-transition: background 0.1s ease-in;
+  transition: background 0.1s ease-in;
+  line-height: initial;
+  background-color: #FFFFFF;
+  border: 1px solid #8A96A8;
+}
+
+.c6 {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: calc(100% + 2px);
+  height: calc(100% + 2px);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  box-sizing: border-box;
+  cursor: pointer;
+  border-radius: 5px;
+  margin: 0;
+  padding: 0;
+}
+
+.c6::-ms-check {
+  display: none;
+}
+
+.c6:disabled {
+  pointer-events: none;
+}
+
+.c6:checked + .c7 {
+  background-color: #0D69F2;
+  border: none;
+}
+
+.c6:not(:checked) + .c7 > * {
+  display: none;
+}
+
+.c6:not(:checked):focus + .c7,
+.c6:not(:disabled):not(:checked):hover + .c7 {
+  background-color: #F1F2F4;
+  border: 1px solid #0A54C2;
+}
+
+.c6:checked:focus + .c7,
+.c6:not(:disabled):checked:hover + .c7 {
+  background-color: #0A54C2;
+  border: none;
+}
+
+.c6:not(:checked):disabled + .c7 {
+  background-color: #FFFFFF;
+  border: 1px solid #A7B0BE;
+}
+
+.c6:disabled + .c7 {
+  background-color: #A7B0BE;
+  border: none;
+}
+
+.c5 {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+}
+
+.c2 {
+  display: inline-block;
+  position: relative;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-left: 28px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 16px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #2B313B;
+  color: #2B313B;
+  cursor: pointer;
+}
+
+fieldset[data-dimension='s'] .c1 {
+  padding-left: 28px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 16px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #2B313B;
+}
+
+fieldset:disabled .c1 {
+  color: #A7B0BE;
+  cursor: default;
+}
+
+<body>
+    <div>
+      <div
+        class="c0"
+      >
+        <label
+          class="c1 c2"
+        >
+          <div
+            class="c3 c4 c5"
+          >
+            <input
+              class="c6"
+              type="checkbox"
+            />
+            <div
+              class="c7 c8"
+            >
+              <div
+                aria-hidden="true"
+                class="c9"
+                focusable="false"
+              />
+            </div>
+          </div>
+          Москва
+        </label>
+        <label
+          class="c1 c2"
+        >
+          <div
+            class="c3 c4 c5"
+          >
+            <input
+              class="c6"
+              type="checkbox"
+            />
+            <div
+              class="c7 c8"
+            >
+              <div
+                aria-hidden="true"
+                class="c9"
+                focusable="false"
+              />
+            </div>
+          </div>
+          Воронеж
+        </label>
+        <label
+          class="c1 c2"
+        >
+          <div
+            class="c3 c4 c5"
+          >
+            <input
+              class="c6"
+              type="checkbox"
+            />
+            <div
+              class="c7 c8"
+            >
+              <div
+                aria-hidden="true"
+                class="c9"
+                focusable="false"
+              />
+            </div>
+          </div>
+          Самара
+        </label>
+      </div>
+    </div>
+  </body>,
+  "container": .c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  box-sizing: border-box;
+  font-size: 14px;
+  line-height: 16px;
+  font-weight: normal;
+  font-family: 'VTB Group UI',sans-serif;
+  color: #2B313B;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.c0 > div {
+  margin-top: 12px;
+}
+
+.c9 {
+  pointer-events: none;
+}
+
+.c9 *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c4 {
+  position: relative;
+  box-sizing: border-box;
+  overflow: visible;
+  width: 16px;
+  height: 16px;
+}
+
+fieldset[data-dimension='s'] .c3 {
+  width: 16px;
+}
+
+fieldset[data-dimension='s'] .c3 {
+  height: 16px;
+}
+
+.c8 {
+  pointer-events: none;
+  display: inline-block;
+  position: absolute;
+  margin: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 4px;
+  outline: 0;
+  -webkit-transition: background 0.1s ease-in;
+  transition: background 0.1s ease-in;
+  line-height: initial;
+  background-color: #FFFFFF;
+  border: 1px solid #8A96A8;
+}
+
+.c6 {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: calc(100% + 2px);
+  height: calc(100% + 2px);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  box-sizing: border-box;
+  cursor: pointer;
+  border-radius: 5px;
+  margin: 0;
+  padding: 0;
+}
+
+.c6::-ms-check {
+  display: none;
+}
+
+.c6:disabled {
+  pointer-events: none;
+}
+
+.c6:checked + .c7 {
+  background-color: #0D69F2;
+  border: none;
+}
+
+.c6:not(:checked) + .c7 > * {
+  display: none;
+}
+
+.c6:not(:checked):focus + .c7,
+.c6:not(:disabled):not(:checked):hover + .c7 {
+  background-color: #F1F2F4;
+  border: 1px solid #0A54C2;
+}
+
+.c6:checked:focus + .c7,
+.c6:not(:disabled):checked:hover + .c7 {
+  background-color: #0A54C2;
+  border: none;
+}
+
+.c6:not(:checked):disabled + .c7 {
+  background-color: #FFFFFF;
+  border: 1px solid #A7B0BE;
+}
+
+.c6:disabled + .c7 {
+  background-color: #A7B0BE;
+  border: none;
+}
+
+.c5 {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+}
+
+.c2 {
+  display: inline-block;
+  position: relative;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-left: 28px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 16px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #2B313B;
+  color: #2B313B;
+  cursor: pointer;
+}
+
+fieldset[data-dimension='s'] .c1 {
+  padding-left: 28px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 16px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #2B313B;
+}
+
+fieldset:disabled .c1 {
+  color: #A7B0BE;
+  cursor: default;
+}
+
+<div>
+    <div
+      class="c0"
+    >
+      <label
+        class="c1 c2"
+      >
+        <div
+          class="c3 c4 c5"
+        >
+          <input
+            class="c6"
+            type="checkbox"
+          />
+          <div
+            class="c7 c8"
+          >
+            <div
+              aria-hidden="true"
+              class="c9"
+              focusable="false"
+            />
+          </div>
+        </div>
+        Москва
+      </label>
+      <label
+        class="c1 c2"
+      >
+        <div
+          class="c3 c4 c5"
+        >
+          <input
+            class="c6"
+            type="checkbox"
+          />
+          <div
+            class="c7 c8"
+          >
+            <div
+              aria-hidden="true"
+              class="c9"
+              focusable="false"
+            />
+          </div>
+        </div>
+        Воронеж
+      </label>
+      <label
+        class="c1 c2"
+      >
+        <div
+          class="c3 c4 c5"
+        >
+          <input
+            class="c6"
+            type="checkbox"
+          />
+          <div
+            class="c7 c8"
+          >
+            <div
+              aria-hidden="true"
+              class="c9"
+              focusable="false"
+            />
+          </div>
+        </div>
+        Самара
+      </label>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`CheckboxGroup should render components 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": .c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  box-sizing: border-box;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: normal;
+  font-family: 'VTB Group UI',sans-serif;
+  color: #2B313B;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.c0 > div {
+  margin-top: 16px;
+}
+
+.c9 {
+  pointer-events: none;
+}
+
+.c9 *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c4 {
+  position: relative;
+  box-sizing: border-box;
+  overflow: visible;
+  width: 20px;
+  height: 20px;
+}
+
+fieldset[data-dimension='s'] .c3 {
+  width: 16px;
+}
+
+fieldset[data-dimension='s'] .c3 {
+  height: 16px;
+}
+
+.c8 {
+  pointer-events: none;
+  display: inline-block;
+  position: absolute;
+  margin: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 4px;
+  outline: 0;
+  -webkit-transition: background 0.1s ease-in;
+  transition: background 0.1s ease-in;
+  line-height: initial;
+  background-color: #FFFFFF;
+  border: 1px solid #8A96A8;
+}
+
+.c6 {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: calc(100% + 2px);
+  height: calc(100% + 2px);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  box-sizing: border-box;
+  cursor: pointer;
+  border-radius: 5px;
+  margin: 0;
+  padding: 0;
+}
+
+.c6::-ms-check {
+  display: none;
+}
+
+.c6:disabled {
+  pointer-events: none;
+}
+
+.c6:checked + .c7 {
+  background-color: #0D69F2;
+  border: none;
+}
+
+.c6:not(:checked) + .c7 > * {
+  display: none;
+}
+
+.c6:not(:checked):focus + .c7,
+.c6:not(:disabled):not(:checked):hover + .c7 {
+  background-color: #F1F2F4;
+  border: 1px solid #0A54C2;
+}
+
+.c6:checked:focus + .c7,
+.c6:not(:disabled):checked:hover + .c7 {
+  background-color: #0A54C2;
+  border: none;
+}
+
+.c6:not(:checked):disabled + .c7 {
+  background-color: #FFFFFF;
+  border: 1px solid #A7B0BE;
+}
+
+.c6:disabled + .c7 {
+  background-color: #A7B0BE;
+  border: none;
+}
+
+.c5 {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+}
+
+.c2 {
+  display: inline-block;
+  position: relative;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-left: 32px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #2B313B;
+  color: #2B313B;
+  cursor: pointer;
+}
+
+fieldset[data-dimension='s'] .c1 {
+  padding-left: 28px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 16px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #2B313B;
+}
+
+fieldset:disabled .c1 {
+  color: #A7B0BE;
+  cursor: default;
+}
+
+<body>
+    <div>
+      <div
+        class="c0"
+      >
+        <label
+          class="c1 c2"
+        >
+          <div
+            class="c3 c4 c5"
+          >
+            <input
+              class="c6"
+              type="checkbox"
+            />
+            <div
+              class="c7 c8"
+            >
+              <div
+                aria-hidden="true"
+                class="c9"
+                focusable="false"
+              />
+            </div>
+          </div>
+          Москва
+        </label>
+        <label
+          class="c1 c2"
+        >
+          <div
+            class="c3 c4 c5"
+          >
+            <input
+              class="c6"
+              type="checkbox"
+            />
+            <div
+              class="c7 c8"
+            >
+              <div
+                aria-hidden="true"
+                class="c9"
+                focusable="false"
+              />
+            </div>
+          </div>
+          Воронеж
+        </label>
+        <label
+          class="c1 c2"
+        >
+          <div
+            class="c3 c4 c5"
+          >
+            <input
+              class="c6"
+              type="checkbox"
+            />
+            <div
+              class="c7 c8"
+            >
+              <div
+                aria-hidden="true"
+                class="c9"
+                focusable="false"
+              />
+            </div>
+          </div>
+          Самара
+        </label>
+      </div>
+    </div>
+  </body>,
+  "container": .c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  box-sizing: border-box;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: normal;
+  font-family: 'VTB Group UI',sans-serif;
+  color: #2B313B;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.c0 > div {
+  margin-top: 16px;
+}
+
+.c9 {
+  pointer-events: none;
+}
+
+.c9 *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c4 {
+  position: relative;
+  box-sizing: border-box;
+  overflow: visible;
+  width: 20px;
+  height: 20px;
+}
+
+fieldset[data-dimension='s'] .c3 {
+  width: 16px;
+}
+
+fieldset[data-dimension='s'] .c3 {
+  height: 16px;
+}
+
+.c8 {
+  pointer-events: none;
+  display: inline-block;
+  position: absolute;
+  margin: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 4px;
+  outline: 0;
+  -webkit-transition: background 0.1s ease-in;
+  transition: background 0.1s ease-in;
+  line-height: initial;
+  background-color: #FFFFFF;
+  border: 1px solid #8A96A8;
+}
+
+.c6 {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: calc(100% + 2px);
+  height: calc(100% + 2px);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  box-sizing: border-box;
+  cursor: pointer;
+  border-radius: 5px;
+  margin: 0;
+  padding: 0;
+}
+
+.c6::-ms-check {
+  display: none;
+}
+
+.c6:disabled {
+  pointer-events: none;
+}
+
+.c6:checked + .c7 {
+  background-color: #0D69F2;
+  border: none;
+}
+
+.c6:not(:checked) + .c7 > * {
+  display: none;
+}
+
+.c6:not(:checked):focus + .c7,
+.c6:not(:disabled):not(:checked):hover + .c7 {
+  background-color: #F1F2F4;
+  border: 1px solid #0A54C2;
+}
+
+.c6:checked:focus + .c7,
+.c6:not(:disabled):checked:hover + .c7 {
+  background-color: #0A54C2;
+  border: none;
+}
+
+.c6:not(:checked):disabled + .c7 {
+  background-color: #FFFFFF;
+  border: 1px solid #A7B0BE;
+}
+
+.c6:disabled + .c7 {
+  background-color: #A7B0BE;
+  border: none;
+}
+
+.c5 {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+}
+
+.c2 {
+  display: inline-block;
+  position: relative;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-left: 32px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #2B313B;
+  color: #2B313B;
+  cursor: pointer;
+}
+
+fieldset[data-dimension='s'] .c1 {
+  padding-left: 28px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 16px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #2B313B;
+}
+
+fieldset:disabled .c1 {
+  color: #A7B0BE;
+  cursor: default;
+}
+
+<div>
+    <div
+      class="c0"
+    >
+      <label
+        class="c1 c2"
+      >
+        <div
+          class="c3 c4 c5"
+        >
+          <input
+            class="c6"
+            type="checkbox"
+          />
+          <div
+            class="c7 c8"
+          >
+            <div
+              aria-hidden="true"
+              class="c9"
+              focusable="false"
+            />
+          </div>
+        </div>
+        Москва
+      </label>
+      <label
+        class="c1 c2"
+      >
+        <div
+          class="c3 c4 c5"
+        >
+          <input
+            class="c6"
+            type="checkbox"
+          />
+          <div
+            class="c7 c8"
+          >
+            <div
+              aria-hidden="true"
+              class="c9"
+              focusable="false"
+            />
+          </div>
+        </div>
+        Воронеж
+      </label>
+      <label
+        class="c1 c2"
+      >
+        <div
+          class="c3 c4 c5"
+        >
+          <input
+            class="c6"
+            type="checkbox"
+          />
+          <div
+            class="c7 c8"
+          >
+            <div
+              aria-hidden="true"
+              class="c9"
+              focusable="false"
+            />
+          </div>
+        </div>
+        Самара
+      </label>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;

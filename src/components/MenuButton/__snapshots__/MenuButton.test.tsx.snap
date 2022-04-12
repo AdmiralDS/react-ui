@@ -1,0 +1,2342 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MenuButton should render component 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": .c3 {
+  -webkit-transition: -webkit-transform 0.3s ease-in-out;
+  -webkit-transition: transform 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out;
+  -webkit-transform: rotate(0deg);
+  -ms-transform: rotate(0deg);
+  transform: rotate(0deg);
+}
+
+.c3 *[fill^='#'] {
+  fill: #8A96A8;
+}
+
+.c3.c3[data-disabled] {
+  pointer-events: none;
+}
+
+.c3:not([data-disabled]):hover {
+  cursor: pointer;
+}
+
+.c3:not([data-disabled]):hover *[fill^='#'] {
+  fill: #0A54C2;
+}
+
+.c0 {
+  box-sizing: border-box;
+  display: inline-block;
+  border: none;
+  border-radius: 4px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  vertical-align: center;
+  padding: 0;
+  height: 56px;
+  padding: 0 30px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+}
+
+.c0[data-appearance~='primary'] {
+  background-color: #0D69F2;
+  color: #FFFFFF;
+  border: 2px solid #0D69F2;
+}
+
+.c0[data-appearance~='primary'] *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c0[data-appearance~='primary']:focus,
+.c0[data-appearance~='primary']:hover {
+  background-color: #0A54C2;
+  border-color: #0A54C2;
+}
+
+.c0[data-appearance~='primary']:active {
+  background-color: #083F91;
+  border-color: #083F91;
+}
+
+.c0[data-appearance~='primary'][data-appearance~='disabled'],
+.c0[data-appearance~='primary']:disabled {
+  background-color: #C4CAD4;
+  color: #FFFFFF;
+  border-color: #C4CAD4;
+}
+
+.c0[data-appearance~='primary'][data-appearance~='disabled'] *[fill^='#'],
+.c0[data-appearance~='primary']:disabled *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c0[data-appearance~='secondary'] {
+  background-color: transparent;
+  color: #0D69F2;
+  border: 2px solid #0D69F2;
+}
+
+.c0[data-appearance~='secondary'] *[fill^='#'] {
+  fill: #0D69F2;
+}
+
+.c0[data-appearance~='secondary']:focus,
+.c0[data-appearance~='secondary']:hover {
+  background-color: #F1F2F4;
+  color: #0A54C2;
+  border-color: #0A54C2;
+}
+
+.c0[data-appearance~='secondary']:focus *[fill^='#'],
+.c0[data-appearance~='secondary']:hover *[fill^='#'] {
+  fill: #0A54C2;
+}
+
+.c0[data-appearance~='secondary']:active {
+  background-color: #F1F2F4;
+  color: #083F91;
+  border-color: #083F91;
+}
+
+.c0[data-appearance~='secondary']:active *[fill^='#'] {
+  fill: #083F91;
+}
+
+.c0[data-appearance~='secondary'][data-appearance~='disabled'],
+.c0[data-appearance~='secondary']:disabled {
+  background-color: #FFFFFF;
+  color: #A7B0BE;
+  border-color: #A7B0BE;
+}
+
+.c0[data-appearance~='secondary'][data-appearance~='disabled'] *[fill^='#'],
+.c0[data-appearance~='secondary']:disabled *[fill^='#'] {
+  fill: #A7B0BE;
+}
+
+.c0[data-appearance~='ghost'] {
+  background-color: transparent;
+  color: #0D69F2;
+  border: 2px solid transparent;
+}
+
+.c0[data-appearance~='ghost'] *[fill^='#'] {
+  fill: #0D69F2;
+}
+
+.c0[data-appearance~='ghost']:focus,
+.c0[data-appearance~='ghost']:hover {
+  background-color: #F1F2F4;
+  color: #0A54C2;
+  border-color: #F1F2F4;
+}
+
+.c0[data-appearance~='ghost']:focus *[fill^='#'],
+.c0[data-appearance~='ghost']:hover *[fill^='#'] {
+  fill: #0A54C2;
+}
+
+.c0[data-appearance~='ghost']:active {
+  background-color: #F1F2F4;
+  color: #083F91;
+  border-color: #F1F2F4;
+}
+
+.c0[data-appearance~='ghost']:active *[fill^='#'] {
+  fill: #083F91;
+}
+
+.c0[data-appearance~='ghost'][data-appearance~='disabled'],
+.c0[data-appearance~='ghost']:disabled {
+  background-color: transparent;
+  color: #A7B0BE;
+  border-color: transparent;
+}
+
+.c0[data-appearance~='ghost'][data-appearance~='disabled'] *[fill^='#'],
+.c0[data-appearance~='ghost']:disabled *[fill^='#'] {
+  fill: #A7B0BE;
+}
+
+.c0[data-appearance~='white'] {
+  background-color: transparent;
+  color: #FFFFFF;
+  border: 2px solid #FFFFFF;
+}
+
+.c0[data-appearance~='white'] *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c0[data-appearance~='white'][data-appearance~='disabled'],
+.c0[data-appearance~='white']:disabled {
+  border-color: #8A96A8;
+  color: #8A96A8;
+}
+
+.c0[data-appearance~='white'][data-appearance~='disabled'] *[fill^='#'],
+.c0[data-appearance~='white']:disabled *[fill^='#'] {
+  fill: #8A96A8;
+}
+
+.c0[data-appearance~='danger'] {
+  background-color: #DA0B20;
+  color: #FFFFFF;
+  border: 2px solid #DA0B20;
+}
+
+.c0[data-appearance~='danger'] *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c0[data-appearance~='danger']:focus,
+.c0[data-appearance~='danger']:hover {
+  background-color: #A90919;
+  border-color: #A90919;
+}
+
+.c0[data-appearance~='danger']:active {
+  background-color: #790612;
+  border-color: #790612;
+}
+
+.c0[data-appearance~='danger'][data-appearance~='disabled'],
+.c0[data-appearance~='danger']:disabled {
+  background-color: #C4CAD4;
+  color: #FFFFFF;
+  border-color: #C4CAD4;
+}
+
+.c0[data-appearance~='danger'][data-appearance~='disabled'] *[fill^='#'],
+.c0[data-appearance~='danger']:disabled *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c0[data-appearance~='success'] {
+  background-color: #05A13A;
+  color: #FFFFFF;
+  border: 2px solid #05A13A;
+}
+
+.c0[data-appearance~='success'] *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c0[data-appearance~='success']:focus,
+.c0[data-appearance~='success']:hover {
+  background-color: #219246;
+  border-color: #219246;
+}
+
+.c0[data-appearance~='success']:active {
+  background-color: #186832;
+  border-color: #186832;
+}
+
+.c0[data-appearance~='success'][data-appearance~='disabled'],
+.c0[data-appearance~='success']:disabled {
+  background-color: #C4CAD4;
+  color: #FFFFFF;
+  border-color: #C4CAD4;
+}
+
+.c0[data-appearance~='success'][data-appearance~='disabled'] *[fill^='#'],
+.c0[data-appearance~='success']:disabled *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c0[data-dimension='xl'] {
+  padding: 0;
+  height: 56px;
+  padding: 0 30px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+}
+
+.c0[data-dimension='l'] {
+  height: 48px;
+  padding: 0 22px;
+}
+
+.c0[data-dimension='m'] {
+  height: 40px;
+  padding: 0 18px;
+}
+
+.c0[data-dimension='s'] {
+  height: 32px;
+  padding: 0 14px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+}
+
+.c0:hover {
+  cursor: pointer;
+}
+
+.c0:disabled {
+  cursor: not-allowed;
+}
+
+.c2 {
+  vertical-align: top;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  overflow: hidden;
+  -webkit-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 24px;
+}
+
+.c2 > * {
+  display: inline-block;
+  -webkit-flex: 0 1 auto;
+  -ms-flex: 0 1 auto;
+  flex: 0 1 auto;
+  white-space: nowrap;
+}
+
+.c2 > *:not(:first-child) {
+  margin-left: 8px;
+}
+
+.c2 > svg {
+  width: 24px;
+  height: 24px;
+}
+
+[data-dimension='s'] .c1 {
+  height: 20px;
+}
+
+[data-dimension='s'] .c1 > svg {
+  width: 20px;
+  height: 20px;
+}
+
+<body>
+    <div>
+      <button
+        aria-expanded="false"
+        class="c0"
+        data-appearance="primary"
+        data-dimension="l"
+        data-testid="btn"
+        type="button"
+      >
+        <span
+          class="c1 c2"
+        >
+          <span>
+            test
+          </span>
+          <div
+            aria-hidden="true"
+            class="c3"
+          />
+        </span>
+      </button>
+    </div>
+  </body>,
+  "container": .c3 {
+  -webkit-transition: -webkit-transform 0.3s ease-in-out;
+  -webkit-transition: transform 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out;
+  -webkit-transform: rotate(0deg);
+  -ms-transform: rotate(0deg);
+  transform: rotate(0deg);
+}
+
+.c3 *[fill^='#'] {
+  fill: #8A96A8;
+}
+
+.c3.c3[data-disabled] {
+  pointer-events: none;
+}
+
+.c3:not([data-disabled]):hover {
+  cursor: pointer;
+}
+
+.c3:not([data-disabled]):hover *[fill^='#'] {
+  fill: #0A54C2;
+}
+
+.c0 {
+  box-sizing: border-box;
+  display: inline-block;
+  border: none;
+  border-radius: 4px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  vertical-align: center;
+  padding: 0;
+  height: 56px;
+  padding: 0 30px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+}
+
+.c0[data-appearance~='primary'] {
+  background-color: #0D69F2;
+  color: #FFFFFF;
+  border: 2px solid #0D69F2;
+}
+
+.c0[data-appearance~='primary'] *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c0[data-appearance~='primary']:focus,
+.c0[data-appearance~='primary']:hover {
+  background-color: #0A54C2;
+  border-color: #0A54C2;
+}
+
+.c0[data-appearance~='primary']:active {
+  background-color: #083F91;
+  border-color: #083F91;
+}
+
+.c0[data-appearance~='primary'][data-appearance~='disabled'],
+.c0[data-appearance~='primary']:disabled {
+  background-color: #C4CAD4;
+  color: #FFFFFF;
+  border-color: #C4CAD4;
+}
+
+.c0[data-appearance~='primary'][data-appearance~='disabled'] *[fill^='#'],
+.c0[data-appearance~='primary']:disabled *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c0[data-appearance~='secondary'] {
+  background-color: transparent;
+  color: #0D69F2;
+  border: 2px solid #0D69F2;
+}
+
+.c0[data-appearance~='secondary'] *[fill^='#'] {
+  fill: #0D69F2;
+}
+
+.c0[data-appearance~='secondary']:focus,
+.c0[data-appearance~='secondary']:hover {
+  background-color: #F1F2F4;
+  color: #0A54C2;
+  border-color: #0A54C2;
+}
+
+.c0[data-appearance~='secondary']:focus *[fill^='#'],
+.c0[data-appearance~='secondary']:hover *[fill^='#'] {
+  fill: #0A54C2;
+}
+
+.c0[data-appearance~='secondary']:active {
+  background-color: #F1F2F4;
+  color: #083F91;
+  border-color: #083F91;
+}
+
+.c0[data-appearance~='secondary']:active *[fill^='#'] {
+  fill: #083F91;
+}
+
+.c0[data-appearance~='secondary'][data-appearance~='disabled'],
+.c0[data-appearance~='secondary']:disabled {
+  background-color: #FFFFFF;
+  color: #A7B0BE;
+  border-color: #A7B0BE;
+}
+
+.c0[data-appearance~='secondary'][data-appearance~='disabled'] *[fill^='#'],
+.c0[data-appearance~='secondary']:disabled *[fill^='#'] {
+  fill: #A7B0BE;
+}
+
+.c0[data-appearance~='ghost'] {
+  background-color: transparent;
+  color: #0D69F2;
+  border: 2px solid transparent;
+}
+
+.c0[data-appearance~='ghost'] *[fill^='#'] {
+  fill: #0D69F2;
+}
+
+.c0[data-appearance~='ghost']:focus,
+.c0[data-appearance~='ghost']:hover {
+  background-color: #F1F2F4;
+  color: #0A54C2;
+  border-color: #F1F2F4;
+}
+
+.c0[data-appearance~='ghost']:focus *[fill^='#'],
+.c0[data-appearance~='ghost']:hover *[fill^='#'] {
+  fill: #0A54C2;
+}
+
+.c0[data-appearance~='ghost']:active {
+  background-color: #F1F2F4;
+  color: #083F91;
+  border-color: #F1F2F4;
+}
+
+.c0[data-appearance~='ghost']:active *[fill^='#'] {
+  fill: #083F91;
+}
+
+.c0[data-appearance~='ghost'][data-appearance~='disabled'],
+.c0[data-appearance~='ghost']:disabled {
+  background-color: transparent;
+  color: #A7B0BE;
+  border-color: transparent;
+}
+
+.c0[data-appearance~='ghost'][data-appearance~='disabled'] *[fill^='#'],
+.c0[data-appearance~='ghost']:disabled *[fill^='#'] {
+  fill: #A7B0BE;
+}
+
+.c0[data-appearance~='white'] {
+  background-color: transparent;
+  color: #FFFFFF;
+  border: 2px solid #FFFFFF;
+}
+
+.c0[data-appearance~='white'] *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c0[data-appearance~='white'][data-appearance~='disabled'],
+.c0[data-appearance~='white']:disabled {
+  border-color: #8A96A8;
+  color: #8A96A8;
+}
+
+.c0[data-appearance~='white'][data-appearance~='disabled'] *[fill^='#'],
+.c0[data-appearance~='white']:disabled *[fill^='#'] {
+  fill: #8A96A8;
+}
+
+.c0[data-appearance~='danger'] {
+  background-color: #DA0B20;
+  color: #FFFFFF;
+  border: 2px solid #DA0B20;
+}
+
+.c0[data-appearance~='danger'] *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c0[data-appearance~='danger']:focus,
+.c0[data-appearance~='danger']:hover {
+  background-color: #A90919;
+  border-color: #A90919;
+}
+
+.c0[data-appearance~='danger']:active {
+  background-color: #790612;
+  border-color: #790612;
+}
+
+.c0[data-appearance~='danger'][data-appearance~='disabled'],
+.c0[data-appearance~='danger']:disabled {
+  background-color: #C4CAD4;
+  color: #FFFFFF;
+  border-color: #C4CAD4;
+}
+
+.c0[data-appearance~='danger'][data-appearance~='disabled'] *[fill^='#'],
+.c0[data-appearance~='danger']:disabled *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c0[data-appearance~='success'] {
+  background-color: #05A13A;
+  color: #FFFFFF;
+  border: 2px solid #05A13A;
+}
+
+.c0[data-appearance~='success'] *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c0[data-appearance~='success']:focus,
+.c0[data-appearance~='success']:hover {
+  background-color: #219246;
+  border-color: #219246;
+}
+
+.c0[data-appearance~='success']:active {
+  background-color: #186832;
+  border-color: #186832;
+}
+
+.c0[data-appearance~='success'][data-appearance~='disabled'],
+.c0[data-appearance~='success']:disabled {
+  background-color: #C4CAD4;
+  color: #FFFFFF;
+  border-color: #C4CAD4;
+}
+
+.c0[data-appearance~='success'][data-appearance~='disabled'] *[fill^='#'],
+.c0[data-appearance~='success']:disabled *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c0[data-dimension='xl'] {
+  padding: 0;
+  height: 56px;
+  padding: 0 30px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+}
+
+.c0[data-dimension='l'] {
+  height: 48px;
+  padding: 0 22px;
+}
+
+.c0[data-dimension='m'] {
+  height: 40px;
+  padding: 0 18px;
+}
+
+.c0[data-dimension='s'] {
+  height: 32px;
+  padding: 0 14px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+}
+
+.c0:hover {
+  cursor: pointer;
+}
+
+.c0:disabled {
+  cursor: not-allowed;
+}
+
+.c2 {
+  vertical-align: top;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  overflow: hidden;
+  -webkit-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 24px;
+}
+
+.c2 > * {
+  display: inline-block;
+  -webkit-flex: 0 1 auto;
+  -ms-flex: 0 1 auto;
+  flex: 0 1 auto;
+  white-space: nowrap;
+}
+
+.c2 > *:not(:first-child) {
+  margin-left: 8px;
+}
+
+.c2 > svg {
+  width: 24px;
+  height: 24px;
+}
+
+[data-dimension='s'] .c1 {
+  height: 20px;
+}
+
+[data-dimension='s'] .c1 > svg {
+  width: 20px;
+  height: 20px;
+}
+
+<div>
+    <button
+      aria-expanded="false"
+      class="c0"
+      data-appearance="primary"
+      data-dimension="l"
+      data-testid="btn"
+      type="button"
+    >
+      <span
+        class="c1 c2"
+      >
+        <span>
+          test
+        </span>
+        <div
+          aria-hidden="true"
+          class="c3"
+        />
+      </span>
+    </button>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`MenuButton should render component with loading state 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": .c0 {
+  box-sizing: border-box;
+  display: inline-block;
+  border: none;
+  border-radius: 4px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  vertical-align: center;
+  padding: 0;
+  height: 56px;
+  padding: 0 30px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+}
+
+.c0[data-appearance~='primary'] {
+  background-color: #0D69F2;
+  color: #FFFFFF;
+  border: 2px solid #0D69F2;
+}
+
+.c0[data-appearance~='primary'] *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c0[data-appearance~='primary']:focus,
+.c0[data-appearance~='primary']:hover {
+  background-color: #0A54C2;
+  border-color: #0A54C2;
+}
+
+.c0[data-appearance~='primary']:active {
+  background-color: #083F91;
+  border-color: #083F91;
+}
+
+.c0[data-appearance~='primary'][data-appearance~='disabled'],
+.c0[data-appearance~='primary']:disabled {
+  background-color: #C4CAD4;
+  color: #FFFFFF;
+  border-color: #C4CAD4;
+}
+
+.c0[data-appearance~='primary'][data-appearance~='disabled'] *[fill^='#'],
+.c0[data-appearance~='primary']:disabled *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c0[data-appearance~='secondary'] {
+  background-color: transparent;
+  color: #0D69F2;
+  border: 2px solid #0D69F2;
+}
+
+.c0[data-appearance~='secondary'] *[fill^='#'] {
+  fill: #0D69F2;
+}
+
+.c0[data-appearance~='secondary']:focus,
+.c0[data-appearance~='secondary']:hover {
+  background-color: #F1F2F4;
+  color: #0A54C2;
+  border-color: #0A54C2;
+}
+
+.c0[data-appearance~='secondary']:focus *[fill^='#'],
+.c0[data-appearance~='secondary']:hover *[fill^='#'] {
+  fill: #0A54C2;
+}
+
+.c0[data-appearance~='secondary']:active {
+  background-color: #F1F2F4;
+  color: #083F91;
+  border-color: #083F91;
+}
+
+.c0[data-appearance~='secondary']:active *[fill^='#'] {
+  fill: #083F91;
+}
+
+.c0[data-appearance~='secondary'][data-appearance~='disabled'],
+.c0[data-appearance~='secondary']:disabled {
+  background-color: #FFFFFF;
+  color: #A7B0BE;
+  border-color: #A7B0BE;
+}
+
+.c0[data-appearance~='secondary'][data-appearance~='disabled'] *[fill^='#'],
+.c0[data-appearance~='secondary']:disabled *[fill^='#'] {
+  fill: #A7B0BE;
+}
+
+.c0[data-appearance~='ghost'] {
+  background-color: transparent;
+  color: #0D69F2;
+  border: 2px solid transparent;
+}
+
+.c0[data-appearance~='ghost'] *[fill^='#'] {
+  fill: #0D69F2;
+}
+
+.c0[data-appearance~='ghost']:focus,
+.c0[data-appearance~='ghost']:hover {
+  background-color: #F1F2F4;
+  color: #0A54C2;
+  border-color: #F1F2F4;
+}
+
+.c0[data-appearance~='ghost']:focus *[fill^='#'],
+.c0[data-appearance~='ghost']:hover *[fill^='#'] {
+  fill: #0A54C2;
+}
+
+.c0[data-appearance~='ghost']:active {
+  background-color: #F1F2F4;
+  color: #083F91;
+  border-color: #F1F2F4;
+}
+
+.c0[data-appearance~='ghost']:active *[fill^='#'] {
+  fill: #083F91;
+}
+
+.c0[data-appearance~='ghost'][data-appearance~='disabled'],
+.c0[data-appearance~='ghost']:disabled {
+  background-color: transparent;
+  color: #A7B0BE;
+  border-color: transparent;
+}
+
+.c0[data-appearance~='ghost'][data-appearance~='disabled'] *[fill^='#'],
+.c0[data-appearance~='ghost']:disabled *[fill^='#'] {
+  fill: #A7B0BE;
+}
+
+.c0[data-appearance~='white'] {
+  background-color: transparent;
+  color: #FFFFFF;
+  border: 2px solid #FFFFFF;
+}
+
+.c0[data-appearance~='white'] *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c0[data-appearance~='white'][data-appearance~='disabled'],
+.c0[data-appearance~='white']:disabled {
+  border-color: #8A96A8;
+  color: #8A96A8;
+}
+
+.c0[data-appearance~='white'][data-appearance~='disabled'] *[fill^='#'],
+.c0[data-appearance~='white']:disabled *[fill^='#'] {
+  fill: #8A96A8;
+}
+
+.c0[data-appearance~='danger'] {
+  background-color: #DA0B20;
+  color: #FFFFFF;
+  border: 2px solid #DA0B20;
+}
+
+.c0[data-appearance~='danger'] *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c0[data-appearance~='danger']:focus,
+.c0[data-appearance~='danger']:hover {
+  background-color: #A90919;
+  border-color: #A90919;
+}
+
+.c0[data-appearance~='danger']:active {
+  background-color: #790612;
+  border-color: #790612;
+}
+
+.c0[data-appearance~='danger'][data-appearance~='disabled'],
+.c0[data-appearance~='danger']:disabled {
+  background-color: #C4CAD4;
+  color: #FFFFFF;
+  border-color: #C4CAD4;
+}
+
+.c0[data-appearance~='danger'][data-appearance~='disabled'] *[fill^='#'],
+.c0[data-appearance~='danger']:disabled *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c0[data-appearance~='success'] {
+  background-color: #05A13A;
+  color: #FFFFFF;
+  border: 2px solid #05A13A;
+}
+
+.c0[data-appearance~='success'] *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c0[data-appearance~='success']:focus,
+.c0[data-appearance~='success']:hover {
+  background-color: #219246;
+  border-color: #219246;
+}
+
+.c0[data-appearance~='success']:active {
+  background-color: #186832;
+  border-color: #186832;
+}
+
+.c0[data-appearance~='success'][data-appearance~='disabled'],
+.c0[data-appearance~='success']:disabled {
+  background-color: #C4CAD4;
+  color: #FFFFFF;
+  border-color: #C4CAD4;
+}
+
+.c0[data-appearance~='success'][data-appearance~='disabled'] *[fill^='#'],
+.c0[data-appearance~='success']:disabled *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c0[data-dimension='xl'] {
+  padding: 0;
+  height: 56px;
+  padding: 0 30px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+}
+
+.c0[data-dimension='l'] {
+  height: 48px;
+  padding: 0 22px;
+}
+
+.c0[data-dimension='m'] {
+  height: 40px;
+  padding: 0 18px;
+}
+
+.c0[data-dimension='s'] {
+  height: 32px;
+  padding: 0 14px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+}
+
+.c0:hover {
+  cursor: pointer;
+}
+
+.c0:disabled {
+  cursor: not-allowed;
+}
+
+.c2 {
+  vertical-align: top;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  overflow: hidden;
+  -webkit-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 24px;
+}
+
+.c2 > * {
+  display: inline-block;
+  -webkit-flex: 0 1 auto;
+  -ms-flex: 0 1 auto;
+  flex: 0 1 auto;
+  white-space: nowrap;
+}
+
+.c2 > *:not(:first-child) {
+  margin-left: 8px;
+}
+
+.c2 > svg {
+  width: 24px;
+  height: 24px;
+}
+
+[data-dimension='s'] .c1 {
+  height: 20px;
+}
+
+[data-dimension='s'] .c1 > svg {
+  width: 20px;
+  height: 20px;
+}
+
+.c3 {
+  position: relative;
+  width: 24px;
+  height: 24px;
+}
+
+.c3 svg {
+  -webkit-animation: cilQsd 1s linear infinite;
+  animation: cilQsd 1s linear infinite;
+}
+
+.c3 svg path {
+  fill: #0D69F2;
+}
+
+<body>
+    <div>
+      <button
+        aria-expanded="false"
+        class="c0"
+        data-appearance="primary"
+        data-dimension="l"
+        data-testid="btn"
+        disabled=""
+        type="button"
+      >
+        <span
+          class="c1 c2"
+        >
+          <div
+            aria-live="assertive"
+            class="c3"
+            role="alert"
+          >
+            <div />
+          </div>
+        </span>
+      </button>
+    </div>
+  </body>,
+  "container": .c0 {
+  box-sizing: border-box;
+  display: inline-block;
+  border: none;
+  border-radius: 4px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  vertical-align: center;
+  padding: 0;
+  height: 56px;
+  padding: 0 30px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+}
+
+.c0[data-appearance~='primary'] {
+  background-color: #0D69F2;
+  color: #FFFFFF;
+  border: 2px solid #0D69F2;
+}
+
+.c0[data-appearance~='primary'] *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c0[data-appearance~='primary']:focus,
+.c0[data-appearance~='primary']:hover {
+  background-color: #0A54C2;
+  border-color: #0A54C2;
+}
+
+.c0[data-appearance~='primary']:active {
+  background-color: #083F91;
+  border-color: #083F91;
+}
+
+.c0[data-appearance~='primary'][data-appearance~='disabled'],
+.c0[data-appearance~='primary']:disabled {
+  background-color: #C4CAD4;
+  color: #FFFFFF;
+  border-color: #C4CAD4;
+}
+
+.c0[data-appearance~='primary'][data-appearance~='disabled'] *[fill^='#'],
+.c0[data-appearance~='primary']:disabled *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c0[data-appearance~='secondary'] {
+  background-color: transparent;
+  color: #0D69F2;
+  border: 2px solid #0D69F2;
+}
+
+.c0[data-appearance~='secondary'] *[fill^='#'] {
+  fill: #0D69F2;
+}
+
+.c0[data-appearance~='secondary']:focus,
+.c0[data-appearance~='secondary']:hover {
+  background-color: #F1F2F4;
+  color: #0A54C2;
+  border-color: #0A54C2;
+}
+
+.c0[data-appearance~='secondary']:focus *[fill^='#'],
+.c0[data-appearance~='secondary']:hover *[fill^='#'] {
+  fill: #0A54C2;
+}
+
+.c0[data-appearance~='secondary']:active {
+  background-color: #F1F2F4;
+  color: #083F91;
+  border-color: #083F91;
+}
+
+.c0[data-appearance~='secondary']:active *[fill^='#'] {
+  fill: #083F91;
+}
+
+.c0[data-appearance~='secondary'][data-appearance~='disabled'],
+.c0[data-appearance~='secondary']:disabled {
+  background-color: #FFFFFF;
+  color: #A7B0BE;
+  border-color: #A7B0BE;
+}
+
+.c0[data-appearance~='secondary'][data-appearance~='disabled'] *[fill^='#'],
+.c0[data-appearance~='secondary']:disabled *[fill^='#'] {
+  fill: #A7B0BE;
+}
+
+.c0[data-appearance~='ghost'] {
+  background-color: transparent;
+  color: #0D69F2;
+  border: 2px solid transparent;
+}
+
+.c0[data-appearance~='ghost'] *[fill^='#'] {
+  fill: #0D69F2;
+}
+
+.c0[data-appearance~='ghost']:focus,
+.c0[data-appearance~='ghost']:hover {
+  background-color: #F1F2F4;
+  color: #0A54C2;
+  border-color: #F1F2F4;
+}
+
+.c0[data-appearance~='ghost']:focus *[fill^='#'],
+.c0[data-appearance~='ghost']:hover *[fill^='#'] {
+  fill: #0A54C2;
+}
+
+.c0[data-appearance~='ghost']:active {
+  background-color: #F1F2F4;
+  color: #083F91;
+  border-color: #F1F2F4;
+}
+
+.c0[data-appearance~='ghost']:active *[fill^='#'] {
+  fill: #083F91;
+}
+
+.c0[data-appearance~='ghost'][data-appearance~='disabled'],
+.c0[data-appearance~='ghost']:disabled {
+  background-color: transparent;
+  color: #A7B0BE;
+  border-color: transparent;
+}
+
+.c0[data-appearance~='ghost'][data-appearance~='disabled'] *[fill^='#'],
+.c0[data-appearance~='ghost']:disabled *[fill^='#'] {
+  fill: #A7B0BE;
+}
+
+.c0[data-appearance~='white'] {
+  background-color: transparent;
+  color: #FFFFFF;
+  border: 2px solid #FFFFFF;
+}
+
+.c0[data-appearance~='white'] *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c0[data-appearance~='white'][data-appearance~='disabled'],
+.c0[data-appearance~='white']:disabled {
+  border-color: #8A96A8;
+  color: #8A96A8;
+}
+
+.c0[data-appearance~='white'][data-appearance~='disabled'] *[fill^='#'],
+.c0[data-appearance~='white']:disabled *[fill^='#'] {
+  fill: #8A96A8;
+}
+
+.c0[data-appearance~='danger'] {
+  background-color: #DA0B20;
+  color: #FFFFFF;
+  border: 2px solid #DA0B20;
+}
+
+.c0[data-appearance~='danger'] *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c0[data-appearance~='danger']:focus,
+.c0[data-appearance~='danger']:hover {
+  background-color: #A90919;
+  border-color: #A90919;
+}
+
+.c0[data-appearance~='danger']:active {
+  background-color: #790612;
+  border-color: #790612;
+}
+
+.c0[data-appearance~='danger'][data-appearance~='disabled'],
+.c0[data-appearance~='danger']:disabled {
+  background-color: #C4CAD4;
+  color: #FFFFFF;
+  border-color: #C4CAD4;
+}
+
+.c0[data-appearance~='danger'][data-appearance~='disabled'] *[fill^='#'],
+.c0[data-appearance~='danger']:disabled *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c0[data-appearance~='success'] {
+  background-color: #05A13A;
+  color: #FFFFFF;
+  border: 2px solid #05A13A;
+}
+
+.c0[data-appearance~='success'] *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c0[data-appearance~='success']:focus,
+.c0[data-appearance~='success']:hover {
+  background-color: #219246;
+  border-color: #219246;
+}
+
+.c0[data-appearance~='success']:active {
+  background-color: #186832;
+  border-color: #186832;
+}
+
+.c0[data-appearance~='success'][data-appearance~='disabled'],
+.c0[data-appearance~='success']:disabled {
+  background-color: #C4CAD4;
+  color: #FFFFFF;
+  border-color: #C4CAD4;
+}
+
+.c0[data-appearance~='success'][data-appearance~='disabled'] *[fill^='#'],
+.c0[data-appearance~='success']:disabled *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c0[data-dimension='xl'] {
+  padding: 0;
+  height: 56px;
+  padding: 0 30px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+}
+
+.c0[data-dimension='l'] {
+  height: 48px;
+  padding: 0 22px;
+}
+
+.c0[data-dimension='m'] {
+  height: 40px;
+  padding: 0 18px;
+}
+
+.c0[data-dimension='s'] {
+  height: 32px;
+  padding: 0 14px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+}
+
+.c0:hover {
+  cursor: pointer;
+}
+
+.c0:disabled {
+  cursor: not-allowed;
+}
+
+.c2 {
+  vertical-align: top;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  overflow: hidden;
+  -webkit-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 24px;
+}
+
+.c2 > * {
+  display: inline-block;
+  -webkit-flex: 0 1 auto;
+  -ms-flex: 0 1 auto;
+  flex: 0 1 auto;
+  white-space: nowrap;
+}
+
+.c2 > *:not(:first-child) {
+  margin-left: 8px;
+}
+
+.c2 > svg {
+  width: 24px;
+  height: 24px;
+}
+
+[data-dimension='s'] .c1 {
+  height: 20px;
+}
+
+[data-dimension='s'] .c1 > svg {
+  width: 20px;
+  height: 20px;
+}
+
+.c3 {
+  position: relative;
+  width: 24px;
+  height: 24px;
+}
+
+.c3 svg {
+  -webkit-animation: cilQsd 1s linear infinite;
+  animation: cilQsd 1s linear infinite;
+}
+
+.c3 svg path {
+  fill: #0D69F2;
+}
+
+<div>
+    <button
+      aria-expanded="false"
+      class="c0"
+      data-appearance="primary"
+      data-dimension="l"
+      data-testid="btn"
+      disabled=""
+      type="button"
+    >
+      <span
+        class="c1 c2"
+      >
+        <div
+          aria-live="assertive"
+          class="c3"
+          role="alert"
+        >
+          <div />
+        </div>
+      </span>
+    </button>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`MenuButton should render component with skeleton state 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": .c0 {
+  box-sizing: border-box;
+  display: inline-block;
+  border: none;
+  border-radius: 4px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  vertical-align: center;
+  padding: 0;
+  height: 56px;
+  padding: 0 30px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+}
+
+.c0[data-appearance~='primary'] {
+  background-color: #0D69F2;
+  color: #FFFFFF;
+  border: 2px solid #0D69F2;
+}
+
+.c0[data-appearance~='primary'] *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c0[data-appearance~='primary']:focus,
+.c0[data-appearance~='primary']:hover {
+  background-color: #0A54C2;
+  border-color: #0A54C2;
+}
+
+.c0[data-appearance~='primary']:active {
+  background-color: #083F91;
+  border-color: #083F91;
+}
+
+.c0[data-appearance~='primary'][data-appearance~='disabled'],
+.c0[data-appearance~='primary']:disabled {
+  background-color: #C4CAD4;
+  color: #FFFFFF;
+  border-color: #C4CAD4;
+}
+
+.c0[data-appearance~='primary'][data-appearance~='disabled'] *[fill^='#'],
+.c0[data-appearance~='primary']:disabled *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c0[data-appearance~='secondary'] {
+  background-color: transparent;
+  color: #0D69F2;
+  border: 2px solid #0D69F2;
+}
+
+.c0[data-appearance~='secondary'] *[fill^='#'] {
+  fill: #0D69F2;
+}
+
+.c0[data-appearance~='secondary']:focus,
+.c0[data-appearance~='secondary']:hover {
+  background-color: #F1F2F4;
+  color: #0A54C2;
+  border-color: #0A54C2;
+}
+
+.c0[data-appearance~='secondary']:focus *[fill^='#'],
+.c0[data-appearance~='secondary']:hover *[fill^='#'] {
+  fill: #0A54C2;
+}
+
+.c0[data-appearance~='secondary']:active {
+  background-color: #F1F2F4;
+  color: #083F91;
+  border-color: #083F91;
+}
+
+.c0[data-appearance~='secondary']:active *[fill^='#'] {
+  fill: #083F91;
+}
+
+.c0[data-appearance~='secondary'][data-appearance~='disabled'],
+.c0[data-appearance~='secondary']:disabled {
+  background-color: #FFFFFF;
+  color: #A7B0BE;
+  border-color: #A7B0BE;
+}
+
+.c0[data-appearance~='secondary'][data-appearance~='disabled'] *[fill^='#'],
+.c0[data-appearance~='secondary']:disabled *[fill^='#'] {
+  fill: #A7B0BE;
+}
+
+.c0[data-appearance~='ghost'] {
+  background-color: transparent;
+  color: #0D69F2;
+  border: 2px solid transparent;
+}
+
+.c0[data-appearance~='ghost'] *[fill^='#'] {
+  fill: #0D69F2;
+}
+
+.c0[data-appearance~='ghost']:focus,
+.c0[data-appearance~='ghost']:hover {
+  background-color: #F1F2F4;
+  color: #0A54C2;
+  border-color: #F1F2F4;
+}
+
+.c0[data-appearance~='ghost']:focus *[fill^='#'],
+.c0[data-appearance~='ghost']:hover *[fill^='#'] {
+  fill: #0A54C2;
+}
+
+.c0[data-appearance~='ghost']:active {
+  background-color: #F1F2F4;
+  color: #083F91;
+  border-color: #F1F2F4;
+}
+
+.c0[data-appearance~='ghost']:active *[fill^='#'] {
+  fill: #083F91;
+}
+
+.c0[data-appearance~='ghost'][data-appearance~='disabled'],
+.c0[data-appearance~='ghost']:disabled {
+  background-color: transparent;
+  color: #A7B0BE;
+  border-color: transparent;
+}
+
+.c0[data-appearance~='ghost'][data-appearance~='disabled'] *[fill^='#'],
+.c0[data-appearance~='ghost']:disabled *[fill^='#'] {
+  fill: #A7B0BE;
+}
+
+.c0[data-appearance~='white'] {
+  background-color: transparent;
+  color: #FFFFFF;
+  border: 2px solid #FFFFFF;
+}
+
+.c0[data-appearance~='white'] *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c0[data-appearance~='white'][data-appearance~='disabled'],
+.c0[data-appearance~='white']:disabled {
+  border-color: #8A96A8;
+  color: #8A96A8;
+}
+
+.c0[data-appearance~='white'][data-appearance~='disabled'] *[fill^='#'],
+.c0[data-appearance~='white']:disabled *[fill^='#'] {
+  fill: #8A96A8;
+}
+
+.c0[data-appearance~='danger'] {
+  background-color: #DA0B20;
+  color: #FFFFFF;
+  border: 2px solid #DA0B20;
+}
+
+.c0[data-appearance~='danger'] *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c0[data-appearance~='danger']:focus,
+.c0[data-appearance~='danger']:hover {
+  background-color: #A90919;
+  border-color: #A90919;
+}
+
+.c0[data-appearance~='danger']:active {
+  background-color: #790612;
+  border-color: #790612;
+}
+
+.c0[data-appearance~='danger'][data-appearance~='disabled'],
+.c0[data-appearance~='danger']:disabled {
+  background-color: #C4CAD4;
+  color: #FFFFFF;
+  border-color: #C4CAD4;
+}
+
+.c0[data-appearance~='danger'][data-appearance~='disabled'] *[fill^='#'],
+.c0[data-appearance~='danger']:disabled *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c0[data-appearance~='success'] {
+  background-color: #05A13A;
+  color: #FFFFFF;
+  border: 2px solid #05A13A;
+}
+
+.c0[data-appearance~='success'] *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c0[data-appearance~='success']:focus,
+.c0[data-appearance~='success']:hover {
+  background-color: #219246;
+  border-color: #219246;
+}
+
+.c0[data-appearance~='success']:active {
+  background-color: #186832;
+  border-color: #186832;
+}
+
+.c0[data-appearance~='success'][data-appearance~='disabled'],
+.c0[data-appearance~='success']:disabled {
+  background-color: #C4CAD4;
+  color: #FFFFFF;
+  border-color: #C4CAD4;
+}
+
+.c0[data-appearance~='success'][data-appearance~='disabled'] *[fill^='#'],
+.c0[data-appearance~='success']:disabled *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c0[data-dimension='xl'] {
+  padding: 0;
+  height: 56px;
+  padding: 0 30px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+}
+
+.c0[data-dimension='l'] {
+  height: 48px;
+  padding: 0 22px;
+}
+
+.c0[data-dimension='m'] {
+  height: 40px;
+  padding: 0 18px;
+}
+
+.c0[data-dimension='s'] {
+  height: 32px;
+  padding: 0 14px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+}
+
+.c0:hover {
+  cursor: pointer;
+}
+
+.c0:disabled {
+  cursor: not-allowed;
+}
+
+.c2 {
+  vertical-align: top;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  overflow: hidden;
+  -webkit-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 24px;
+}
+
+.c2 > * {
+  display: inline-block;
+  -webkit-flex: 0 1 auto;
+  -ms-flex: 0 1 auto;
+  flex: 0 1 auto;
+  white-space: nowrap;
+}
+
+.c2 > *:not(:first-child) {
+  margin-left: 8px;
+}
+
+.c2 > svg {
+  width: 24px;
+  height: 24px;
+}
+
+[data-dimension='s'] .c1 {
+  height: 20px;
+}
+
+[data-dimension='s'] .c1 > svg {
+  width: 20px;
+  height: 20px;
+}
+
+.c3 {
+  border-radius: 4px;
+  width: 74px;
+  height: 12px;
+  background: #F1F2F4;
+}
+
+.c5 {
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  background: #F1F2F4;
+}
+
+.c4 {
+  margin-right: 8px;
+}
+
+<body>
+    <div>
+      <button
+        aria-expanded="false"
+        class="c0"
+        data-appearance="primary"
+        data-dimension="l"
+        data-testid="btn"
+        disabled=""
+        type="button"
+      >
+        <span
+          class="c1 c2"
+        >
+          <div
+            class="c3 c4"
+          />
+          <div
+            class="c5"
+          />
+        </span>
+      </button>
+    </div>
+  </body>,
+  "container": .c0 {
+  box-sizing: border-box;
+  display: inline-block;
+  border: none;
+  border-radius: 4px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  vertical-align: center;
+  padding: 0;
+  height: 56px;
+  padding: 0 30px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+}
+
+.c0[data-appearance~='primary'] {
+  background-color: #0D69F2;
+  color: #FFFFFF;
+  border: 2px solid #0D69F2;
+}
+
+.c0[data-appearance~='primary'] *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c0[data-appearance~='primary']:focus,
+.c0[data-appearance~='primary']:hover {
+  background-color: #0A54C2;
+  border-color: #0A54C2;
+}
+
+.c0[data-appearance~='primary']:active {
+  background-color: #083F91;
+  border-color: #083F91;
+}
+
+.c0[data-appearance~='primary'][data-appearance~='disabled'],
+.c0[data-appearance~='primary']:disabled {
+  background-color: #C4CAD4;
+  color: #FFFFFF;
+  border-color: #C4CAD4;
+}
+
+.c0[data-appearance~='primary'][data-appearance~='disabled'] *[fill^='#'],
+.c0[data-appearance~='primary']:disabled *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c0[data-appearance~='secondary'] {
+  background-color: transparent;
+  color: #0D69F2;
+  border: 2px solid #0D69F2;
+}
+
+.c0[data-appearance~='secondary'] *[fill^='#'] {
+  fill: #0D69F2;
+}
+
+.c0[data-appearance~='secondary']:focus,
+.c0[data-appearance~='secondary']:hover {
+  background-color: #F1F2F4;
+  color: #0A54C2;
+  border-color: #0A54C2;
+}
+
+.c0[data-appearance~='secondary']:focus *[fill^='#'],
+.c0[data-appearance~='secondary']:hover *[fill^='#'] {
+  fill: #0A54C2;
+}
+
+.c0[data-appearance~='secondary']:active {
+  background-color: #F1F2F4;
+  color: #083F91;
+  border-color: #083F91;
+}
+
+.c0[data-appearance~='secondary']:active *[fill^='#'] {
+  fill: #083F91;
+}
+
+.c0[data-appearance~='secondary'][data-appearance~='disabled'],
+.c0[data-appearance~='secondary']:disabled {
+  background-color: #FFFFFF;
+  color: #A7B0BE;
+  border-color: #A7B0BE;
+}
+
+.c0[data-appearance~='secondary'][data-appearance~='disabled'] *[fill^='#'],
+.c0[data-appearance~='secondary']:disabled *[fill^='#'] {
+  fill: #A7B0BE;
+}
+
+.c0[data-appearance~='ghost'] {
+  background-color: transparent;
+  color: #0D69F2;
+  border: 2px solid transparent;
+}
+
+.c0[data-appearance~='ghost'] *[fill^='#'] {
+  fill: #0D69F2;
+}
+
+.c0[data-appearance~='ghost']:focus,
+.c0[data-appearance~='ghost']:hover {
+  background-color: #F1F2F4;
+  color: #0A54C2;
+  border-color: #F1F2F4;
+}
+
+.c0[data-appearance~='ghost']:focus *[fill^='#'],
+.c0[data-appearance~='ghost']:hover *[fill^='#'] {
+  fill: #0A54C2;
+}
+
+.c0[data-appearance~='ghost']:active {
+  background-color: #F1F2F4;
+  color: #083F91;
+  border-color: #F1F2F4;
+}
+
+.c0[data-appearance~='ghost']:active *[fill^='#'] {
+  fill: #083F91;
+}
+
+.c0[data-appearance~='ghost'][data-appearance~='disabled'],
+.c0[data-appearance~='ghost']:disabled {
+  background-color: transparent;
+  color: #A7B0BE;
+  border-color: transparent;
+}
+
+.c0[data-appearance~='ghost'][data-appearance~='disabled'] *[fill^='#'],
+.c0[data-appearance~='ghost']:disabled *[fill^='#'] {
+  fill: #A7B0BE;
+}
+
+.c0[data-appearance~='white'] {
+  background-color: transparent;
+  color: #FFFFFF;
+  border: 2px solid #FFFFFF;
+}
+
+.c0[data-appearance~='white'] *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c0[data-appearance~='white'][data-appearance~='disabled'],
+.c0[data-appearance~='white']:disabled {
+  border-color: #8A96A8;
+  color: #8A96A8;
+}
+
+.c0[data-appearance~='white'][data-appearance~='disabled'] *[fill^='#'],
+.c0[data-appearance~='white']:disabled *[fill^='#'] {
+  fill: #8A96A8;
+}
+
+.c0[data-appearance~='danger'] {
+  background-color: #DA0B20;
+  color: #FFFFFF;
+  border: 2px solid #DA0B20;
+}
+
+.c0[data-appearance~='danger'] *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c0[data-appearance~='danger']:focus,
+.c0[data-appearance~='danger']:hover {
+  background-color: #A90919;
+  border-color: #A90919;
+}
+
+.c0[data-appearance~='danger']:active {
+  background-color: #790612;
+  border-color: #790612;
+}
+
+.c0[data-appearance~='danger'][data-appearance~='disabled'],
+.c0[data-appearance~='danger']:disabled {
+  background-color: #C4CAD4;
+  color: #FFFFFF;
+  border-color: #C4CAD4;
+}
+
+.c0[data-appearance~='danger'][data-appearance~='disabled'] *[fill^='#'],
+.c0[data-appearance~='danger']:disabled *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c0[data-appearance~='success'] {
+  background-color: #05A13A;
+  color: #FFFFFF;
+  border: 2px solid #05A13A;
+}
+
+.c0[data-appearance~='success'] *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c0[data-appearance~='success']:focus,
+.c0[data-appearance~='success']:hover {
+  background-color: #219246;
+  border-color: #219246;
+}
+
+.c0[data-appearance~='success']:active {
+  background-color: #186832;
+  border-color: #186832;
+}
+
+.c0[data-appearance~='success'][data-appearance~='disabled'],
+.c0[data-appearance~='success']:disabled {
+  background-color: #C4CAD4;
+  color: #FFFFFF;
+  border-color: #C4CAD4;
+}
+
+.c0[data-appearance~='success'][data-appearance~='disabled'] *[fill^='#'],
+.c0[data-appearance~='success']:disabled *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c0[data-dimension='xl'] {
+  padding: 0;
+  height: 56px;
+  padding: 0 30px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+}
+
+.c0[data-dimension='l'] {
+  height: 48px;
+  padding: 0 22px;
+}
+
+.c0[data-dimension='m'] {
+  height: 40px;
+  padding: 0 18px;
+}
+
+.c0[data-dimension='s'] {
+  height: 32px;
+  padding: 0 14px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+}
+
+.c0:hover {
+  cursor: pointer;
+}
+
+.c0:disabled {
+  cursor: not-allowed;
+}
+
+.c2 {
+  vertical-align: top;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  overflow: hidden;
+  -webkit-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 24px;
+}
+
+.c2 > * {
+  display: inline-block;
+  -webkit-flex: 0 1 auto;
+  -ms-flex: 0 1 auto;
+  flex: 0 1 auto;
+  white-space: nowrap;
+}
+
+.c2 > *:not(:first-child) {
+  margin-left: 8px;
+}
+
+.c2 > svg {
+  width: 24px;
+  height: 24px;
+}
+
+[data-dimension='s'] .c1 {
+  height: 20px;
+}
+
+[data-dimension='s'] .c1 > svg {
+  width: 20px;
+  height: 20px;
+}
+
+.c3 {
+  border-radius: 4px;
+  width: 74px;
+  height: 12px;
+  background: #F1F2F4;
+}
+
+.c5 {
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  background: #F1F2F4;
+}
+
+.c4 {
+  margin-right: 8px;
+}
+
+<div>
+    <button
+      aria-expanded="false"
+      class="c0"
+      data-appearance="primary"
+      data-dimension="l"
+      data-testid="btn"
+      disabled=""
+      type="button"
+    >
+      <span
+        class="c1 c2"
+      >
+        <div
+          class="c3 c4"
+        />
+        <div
+          class="c5"
+        />
+      </span>
+    </button>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;

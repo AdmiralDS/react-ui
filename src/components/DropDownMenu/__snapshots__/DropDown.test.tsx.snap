@@ -1,0 +1,2284 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DropDown should render component 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": .c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-flex-flow: wrap;
+  -ms-flex-flow: wrap;
+  flex-flow: wrap;
+  position: relative;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  outline: none;
+  white-space: pre;
+  margin: 0;
+  padding: 12px 16px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 24px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #2B313B;
+  text-overflow: ellipsis;
+  color: #2B313B;
+  background: #FFFFFF;
+}
+
+ul[data-dimension='m'] .c2.c2 {
+  padding: 8px 16px;
+}
+
+ul[data-dimension='s'] .c2.c2 {
+  padding: 6px 12px;
+}
+
+ul[data-dimension='s'] .c1 {
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #2B313B;
+}
+
+.c2:hover {
+  background-color: #F1F2F4;
+  cursor: pointer;
+}
+
+.c2:focus {
+  background-color: #F1F2F4;
+}
+
+.c2.c2[data-disabled='true'] {
+  cursor: not-allowed;
+  background-color: #FFFFFF;
+  color: #A7B0BE;
+}
+
+.c2.c2[data-disabled='true'].c2.c2[data-disabled='true'] *[fill^='#'] {
+  fill: #A7B0BE;
+}
+
+.c0 {
+  box-shadow: 0 4px 16px rgba(138,150,168,0.4),0 0 6px rgba(138,150,168,0.08);
+  border-radius: 4px;
+  background: #FFFFFF;
+  max-height: 288px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  cursor: pointer;
+  position: absolute;
+  padding: 8px 0;
+  outline: none;
+  margin: 0;
+}
+
+<body>
+    <div>
+      <ul
+        class="c0"
+      >
+        <li
+          class="c1 c2"
+          tabindex="0"
+          value="1"
+        >
+          Option
+        </li>
+      </ul>
+    </div>
+  </body>,
+  "container": .c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-flex-flow: wrap;
+  -ms-flex-flow: wrap;
+  flex-flow: wrap;
+  position: relative;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  outline: none;
+  white-space: pre;
+  margin: 0;
+  padding: 12px 16px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 24px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #2B313B;
+  text-overflow: ellipsis;
+  color: #2B313B;
+  background: #FFFFFF;
+}
+
+ul[data-dimension='m'] .c2.c2 {
+  padding: 8px 16px;
+}
+
+ul[data-dimension='s'] .c2.c2 {
+  padding: 6px 12px;
+}
+
+ul[data-dimension='s'] .c1 {
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #2B313B;
+}
+
+.c2:hover {
+  background-color: #F1F2F4;
+  cursor: pointer;
+}
+
+.c2:focus {
+  background-color: #F1F2F4;
+}
+
+.c2.c2[data-disabled='true'] {
+  cursor: not-allowed;
+  background-color: #FFFFFF;
+  color: #A7B0BE;
+}
+
+.c2.c2[data-disabled='true'].c2.c2[data-disabled='true'] *[fill^='#'] {
+  fill: #A7B0BE;
+}
+
+.c0 {
+  box-shadow: 0 4px 16px rgba(138,150,168,0.4),0 0 6px rgba(138,150,168,0.08);
+  border-radius: 4px;
+  background: #FFFFFF;
+  max-height: 288px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  cursor: pointer;
+  position: absolute;
+  padding: 8px 0;
+  outline: none;
+  margin: 0;
+}
+
+<div>
+    <ul
+      class="c0"
+    >
+      <li
+        class="c1 c2"
+        tabindex="0"
+        value="1"
+      >
+        Option
+      </li>
+    </ul>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`DropDown should render group components 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": .c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-flex-flow: wrap;
+  -ms-flex-flow: wrap;
+  flex-flow: wrap;
+  position: relative;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  outline: none;
+  white-space: pre;
+  margin: 0;
+  padding: 12px 16px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 24px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #2B313B;
+  text-overflow: ellipsis;
+  color: #2B313B;
+  background: #FFFFFF;
+}
+
+ul[data-dimension='m'] .c2.c2 {
+  padding: 8px 16px;
+}
+
+ul[data-dimension='s'] .c2.c2 {
+  padding: 6px 12px;
+}
+
+ul[data-dimension='s'] .c1 {
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #2B313B;
+}
+
+.c2:hover {
+  background-color: #F1F2F4;
+  cursor: pointer;
+}
+
+.c2:focus {
+  background-color: #F1F2F4;
+}
+
+.c2.c2[data-disabled='true'] {
+  cursor: not-allowed;
+  background-color: #FFFFFF;
+  color: #A7B0BE;
+}
+
+.c2.c2[data-disabled='true'].c2.c2[data-disabled='true'] *[fill^='#'] {
+  fill: #A7B0BE;
+}
+
+.c3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-flex-flow: wrap;
+  -ms-flex-flow: wrap;
+  flex-flow: wrap;
+  position: relative;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  outline: none;
+  white-space: pre;
+  margin: 0;
+  padding: 12px 16px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 24px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #2B313B;
+  text-overflow: ellipsis;
+  color: #2B313B;
+  background: #FFFFFF;
+}
+
+ul[data-dimension='m'] .c3.c3 {
+  padding: 8px 16px;
+}
+
+ul[data-dimension='s'] .c3.c3 {
+  padding: 6px 12px;
+}
+
+ul[data-dimension='s'] .c1 {
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #2B313B;
+}
+
+ul[data-selectedid="2"] .c3.c3 {
+  background: #E2E5E9;
+}
+
+.c3:hover {
+  background-color: #F1F2F4;
+  cursor: pointer;
+}
+
+.c3:focus {
+  background-color: #F1F2F4;
+}
+
+.c3.c3[data-disabled='true'] {
+  cursor: not-allowed;
+  background-color: #FFFFFF;
+  color: #A7B0BE;
+}
+
+.c3.c3[data-disabled='true'].c3.c3[data-disabled='true'] *[fill^='#'] {
+  fill: #A7B0BE;
+}
+
+.c4 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-flex-flow: wrap;
+  -ms-flex-flow: wrap;
+  flex-flow: wrap;
+  position: relative;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  outline: none;
+  white-space: pre;
+  margin: 0;
+  padding: 12px 16px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 24px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #2B313B;
+  text-overflow: ellipsis;
+  color: #2B313B;
+  background: #FFFFFF;
+}
+
+ul[data-dimension='m'] .c4.c4 {
+  padding: 8px 16px;
+}
+
+ul[data-dimension='s'] .c4.c4 {
+  padding: 6px 12px;
+}
+
+ul[data-dimension='s'] .c1 {
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #2B313B;
+}
+
+ul[data-selectedid="3"] .c4.c4 {
+  background: #E2E5E9;
+}
+
+.c4:hover {
+  background-color: #F1F2F4;
+  cursor: pointer;
+}
+
+.c4:focus {
+  background-color: #F1F2F4;
+}
+
+.c4.c4[data-disabled='true'] {
+  cursor: not-allowed;
+  background-color: #FFFFFF;
+  color: #A7B0BE;
+}
+
+.c4.c4[data-disabled='true'].c4.c4[data-disabled='true'] *[fill^='#'] {
+  fill: #A7B0BE;
+}
+
+.c5 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-flex-flow: wrap;
+  -ms-flex-flow: wrap;
+  flex-flow: wrap;
+  position: relative;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  outline: none;
+  white-space: pre;
+  margin: 0;
+  padding: 12px 16px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 24px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #2B313B;
+  text-overflow: ellipsis;
+  color: #2B313B;
+  background: #FFFFFF;
+}
+
+ul[data-dimension='m'] .c5.c5 {
+  padding: 8px 16px;
+}
+
+ul[data-dimension='s'] .c5.c5 {
+  padding: 6px 12px;
+}
+
+ul[data-dimension='s'] .c1 {
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #2B313B;
+}
+
+ul[data-selectedid="4"] .c5.c5 {
+  background: #E2E5E9;
+}
+
+.c5:hover {
+  background-color: #F1F2F4;
+  cursor: pointer;
+}
+
+.c5:focus {
+  background-color: #F1F2F4;
+}
+
+.c5.c5[data-disabled='true'] {
+  cursor: not-allowed;
+  background-color: #FFFFFF;
+  color: #A7B0BE;
+}
+
+.c5.c5[data-disabled='true'].c5.c5[data-disabled='true'] *[fill^='#'] {
+  fill: #A7B0BE;
+}
+
+.c6 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-flex-flow: wrap;
+  -ms-flex-flow: wrap;
+  flex-flow: wrap;
+  position: relative;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  outline: none;
+  white-space: pre;
+  margin: 0;
+  padding: 12px 16px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 24px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #2B313B;
+  text-overflow: ellipsis;
+  color: #2B313B;
+  background: #FFFFFF;
+}
+
+ul[data-dimension='m'] .c6.c6 {
+  padding: 8px 16px;
+}
+
+ul[data-dimension='s'] .c6.c6 {
+  padding: 6px 12px;
+}
+
+ul[data-dimension='s'] .c1 {
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #2B313B;
+}
+
+ul[data-selectedid="5"] .c6.c6 {
+  background: #E2E5E9;
+}
+
+.c6:hover {
+  background-color: #F1F2F4;
+  cursor: pointer;
+}
+
+.c6:focus {
+  background-color: #F1F2F4;
+}
+
+.c6.c6[data-disabled='true'] {
+  cursor: not-allowed;
+  background-color: #FFFFFF;
+  color: #A7B0BE;
+}
+
+.c6.c6[data-disabled='true'].c6.c6[data-disabled='true'] *[fill^='#'] {
+  fill: #A7B0BE;
+}
+
+.c7 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-flex-flow: wrap;
+  -ms-flex-flow: wrap;
+  flex-flow: wrap;
+  position: relative;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  outline: none;
+  white-space: pre;
+  margin: 0;
+  padding: 12px 16px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 24px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #2B313B;
+  text-overflow: ellipsis;
+  color: #2B313B;
+  background: #FFFFFF;
+}
+
+ul[data-dimension='m'] .c7.c7 {
+  padding: 8px 16px;
+}
+
+ul[data-dimension='s'] .c7.c7 {
+  padding: 6px 12px;
+}
+
+ul[data-dimension='s'] .c1 {
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #2B313B;
+}
+
+ul[data-selectedid="10"] .c7.c7 {
+  background: #E2E5E9;
+}
+
+.c7:hover {
+  background-color: #F1F2F4;
+  cursor: pointer;
+}
+
+.c7:focus {
+  background-color: #F1F2F4;
+}
+
+.c7.c7[data-disabled='true'] {
+  cursor: not-allowed;
+  background-color: #FFFFFF;
+  color: #A7B0BE;
+}
+
+.c7.c7[data-disabled='true'].c7.c7[data-disabled='true'] *[fill^='#'] {
+  fill: #A7B0BE;
+}
+
+.c8 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-flex-flow: wrap;
+  -ms-flex-flow: wrap;
+  flex-flow: wrap;
+  position: relative;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  outline: none;
+  white-space: pre;
+  margin: 0;
+  padding: 12px 16px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 24px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #2B313B;
+  text-overflow: ellipsis;
+  color: #2B313B;
+  background: #FFFFFF;
+}
+
+ul[data-dimension='m'] .c8.c8 {
+  padding: 8px 16px;
+}
+
+ul[data-dimension='s'] .c8.c8 {
+  padding: 6px 12px;
+}
+
+ul[data-dimension='s'] .c1 {
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #2B313B;
+}
+
+ul[data-selectedid="11"] .c8.c8 {
+  background: #E2E5E9;
+}
+
+.c8:hover {
+  background-color: #F1F2F4;
+  cursor: pointer;
+}
+
+.c8:focus {
+  background-color: #F1F2F4;
+}
+
+.c8.c8[data-disabled='true'] {
+  cursor: not-allowed;
+  background-color: #FFFFFF;
+  color: #A7B0BE;
+}
+
+.c8.c8[data-disabled='true'].c8.c8[data-disabled='true'] *[fill^='#'] {
+  fill: #A7B0BE;
+}
+
+.c9 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-flex-flow: wrap;
+  -ms-flex-flow: wrap;
+  flex-flow: wrap;
+  position: relative;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  outline: none;
+  white-space: pre;
+  margin: 0;
+  padding: 12px 16px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 24px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #2B313B;
+  text-overflow: ellipsis;
+  color: #2B313B;
+  background: #FFFFFF;
+}
+
+ul[data-dimension='m'] .c9.c9 {
+  padding: 8px 16px;
+}
+
+ul[data-dimension='s'] .c9.c9 {
+  padding: 6px 12px;
+}
+
+ul[data-dimension='s'] .c1 {
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #2B313B;
+}
+
+ul[data-selectedid="12"] .c9.c9 {
+  background: #E2E5E9;
+}
+
+.c9:hover {
+  background-color: #F1F2F4;
+  cursor: pointer;
+}
+
+.c9:focus {
+  background-color: #F1F2F4;
+}
+
+.c9.c9[data-disabled='true'] {
+  cursor: not-allowed;
+  background-color: #FFFFFF;
+  color: #A7B0BE;
+}
+
+.c9.c9[data-disabled='true'].c9.c9[data-disabled='true'] *[fill^='#'] {
+  fill: #A7B0BE;
+}
+
+.c10 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-flex-flow: wrap;
+  -ms-flex-flow: wrap;
+  flex-flow: wrap;
+  position: relative;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  outline: none;
+  white-space: pre;
+  margin: 0;
+  padding: 12px 16px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 24px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #2B313B;
+  text-overflow: ellipsis;
+  color: #2B313B;
+  background: #FFFFFF;
+}
+
+ul[data-dimension='m'] .c10.c10 {
+  padding: 8px 16px;
+}
+
+ul[data-dimension='s'] .c10.c10 {
+  padding: 6px 12px;
+}
+
+ul[data-dimension='s'] .c1 {
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #2B313B;
+}
+
+ul[data-selectedid="13"] .c10.c10 {
+  background: #E2E5E9;
+}
+
+.c10:hover {
+  background-color: #F1F2F4;
+  cursor: pointer;
+}
+
+.c10:focus {
+  background-color: #F1F2F4;
+}
+
+.c10.c10[data-disabled='true'] {
+  cursor: not-allowed;
+  background-color: #FFFFFF;
+  color: #A7B0BE;
+}
+
+.c10.c10[data-disabled='true'].c10.c10[data-disabled='true'] *[fill^='#'] {
+  fill: #A7B0BE;
+}
+
+.c0 {
+  box-shadow: 0 4px 16px rgba(138,150,168,0.4),0 0 6px rgba(138,150,168,0.08);
+  border-radius: 4px;
+  background: #FFFFFF;
+  max-height: 288px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  cursor: pointer;
+  position: absolute;
+  padding: 8px 0;
+  outline: none;
+  margin: 0;
+}
+
+<body>
+    <div>
+      <ul
+        class="c0"
+        tabindex="-1"
+      >
+        <li
+          class="c1 c2"
+          data-disabled="true"
+        >
+          Категория 1
+        </li>
+        <li
+          class="c1 c3"
+          id="2"
+          tabindex="0"
+        >
+          Номер Карты /****45
+           
+          <div
+            height="24"
+            width="24"
+          />
+          <div>
+            Дополнительный текст
+          </div>
+        </li>
+        <li
+          class="c1 c4"
+          id="3"
+          tabindex="0"
+        >
+          Номер Карты /****75
+           
+          <div
+            height="24"
+            width="24"
+          />
+          <div>
+            Дополнительный текст
+          </div>
+        </li>
+        <li
+          class="c1 c5"
+          id="4"
+          tabindex="0"
+        >
+          Номер Карты /****22
+           
+          <div
+            height="24"
+            width="24"
+          />
+          <div>
+            Дополнительный текст
+          </div>
+        </li>
+        <li
+          class="c1 c6"
+          id="5"
+          tabindex="0"
+        >
+          Номер Карты /****33
+           
+          <div
+            height="24"
+            width="24"
+          />
+          <div>
+            Дополнительный текст
+          </div>
+        </li>
+        <li
+          class="c1 c2"
+          data-disabled="true"
+        >
+          Категория 2
+        </li>
+        <li
+          class="c1 c7"
+          id="10"
+          tabindex="0"
+        >
+          Номер Карты /****21
+           
+          <div
+            height="24"
+            width="24"
+          />
+          <div>
+            Дополнительный текст
+          </div>
+        </li>
+        <li
+          class="c1 c8"
+          id="11"
+          tabindex="0"
+        >
+          Номер Карты /****35
+           
+          <div
+            height="24"
+            width="24"
+          />
+          <div>
+            Дополнительный текст
+          </div>
+        </li>
+        <li
+          class="c1 c9"
+          id="12"
+          tabindex="0"
+        >
+          Номер Карты /****39
+           
+          <div
+            height="24"
+            width="24"
+          />
+          <div>
+            Дополнительный текст
+          </div>
+        </li>
+        <li
+          class="c1 c10"
+          id="13"
+          tabindex="0"
+        >
+          Номер Карты /****41
+           
+          <div
+            height="24"
+            width="24"
+          />
+          <div>
+            Дополнительный текст
+          </div>
+        </li>
+      </ul>
+      ,
+    </div>
+  </body>,
+  "container": .c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-flex-flow: wrap;
+  -ms-flex-flow: wrap;
+  flex-flow: wrap;
+  position: relative;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  outline: none;
+  white-space: pre;
+  margin: 0;
+  padding: 12px 16px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 24px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #2B313B;
+  text-overflow: ellipsis;
+  color: #2B313B;
+  background: #FFFFFF;
+}
+
+ul[data-dimension='m'] .c2.c2 {
+  padding: 8px 16px;
+}
+
+ul[data-dimension='s'] .c2.c2 {
+  padding: 6px 12px;
+}
+
+ul[data-dimension='s'] .c1 {
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #2B313B;
+}
+
+.c2:hover {
+  background-color: #F1F2F4;
+  cursor: pointer;
+}
+
+.c2:focus {
+  background-color: #F1F2F4;
+}
+
+.c2.c2[data-disabled='true'] {
+  cursor: not-allowed;
+  background-color: #FFFFFF;
+  color: #A7B0BE;
+}
+
+.c2.c2[data-disabled='true'].c2.c2[data-disabled='true'] *[fill^='#'] {
+  fill: #A7B0BE;
+}
+
+.c3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-flex-flow: wrap;
+  -ms-flex-flow: wrap;
+  flex-flow: wrap;
+  position: relative;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  outline: none;
+  white-space: pre;
+  margin: 0;
+  padding: 12px 16px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 24px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #2B313B;
+  text-overflow: ellipsis;
+  color: #2B313B;
+  background: #FFFFFF;
+}
+
+ul[data-dimension='m'] .c3.c3 {
+  padding: 8px 16px;
+}
+
+ul[data-dimension='s'] .c3.c3 {
+  padding: 6px 12px;
+}
+
+ul[data-dimension='s'] .c1 {
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #2B313B;
+}
+
+ul[data-selectedid="2"] .c3.c3 {
+  background: #E2E5E9;
+}
+
+.c3:hover {
+  background-color: #F1F2F4;
+  cursor: pointer;
+}
+
+.c3:focus {
+  background-color: #F1F2F4;
+}
+
+.c3.c3[data-disabled='true'] {
+  cursor: not-allowed;
+  background-color: #FFFFFF;
+  color: #A7B0BE;
+}
+
+.c3.c3[data-disabled='true'].c3.c3[data-disabled='true'] *[fill^='#'] {
+  fill: #A7B0BE;
+}
+
+.c4 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-flex-flow: wrap;
+  -ms-flex-flow: wrap;
+  flex-flow: wrap;
+  position: relative;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  outline: none;
+  white-space: pre;
+  margin: 0;
+  padding: 12px 16px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 24px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #2B313B;
+  text-overflow: ellipsis;
+  color: #2B313B;
+  background: #FFFFFF;
+}
+
+ul[data-dimension='m'] .c4.c4 {
+  padding: 8px 16px;
+}
+
+ul[data-dimension='s'] .c4.c4 {
+  padding: 6px 12px;
+}
+
+ul[data-dimension='s'] .c1 {
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #2B313B;
+}
+
+ul[data-selectedid="3"] .c4.c4 {
+  background: #E2E5E9;
+}
+
+.c4:hover {
+  background-color: #F1F2F4;
+  cursor: pointer;
+}
+
+.c4:focus {
+  background-color: #F1F2F4;
+}
+
+.c4.c4[data-disabled='true'] {
+  cursor: not-allowed;
+  background-color: #FFFFFF;
+  color: #A7B0BE;
+}
+
+.c4.c4[data-disabled='true'].c4.c4[data-disabled='true'] *[fill^='#'] {
+  fill: #A7B0BE;
+}
+
+.c5 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-flex-flow: wrap;
+  -ms-flex-flow: wrap;
+  flex-flow: wrap;
+  position: relative;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  outline: none;
+  white-space: pre;
+  margin: 0;
+  padding: 12px 16px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 24px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #2B313B;
+  text-overflow: ellipsis;
+  color: #2B313B;
+  background: #FFFFFF;
+}
+
+ul[data-dimension='m'] .c5.c5 {
+  padding: 8px 16px;
+}
+
+ul[data-dimension='s'] .c5.c5 {
+  padding: 6px 12px;
+}
+
+ul[data-dimension='s'] .c1 {
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #2B313B;
+}
+
+ul[data-selectedid="4"] .c5.c5 {
+  background: #E2E5E9;
+}
+
+.c5:hover {
+  background-color: #F1F2F4;
+  cursor: pointer;
+}
+
+.c5:focus {
+  background-color: #F1F2F4;
+}
+
+.c5.c5[data-disabled='true'] {
+  cursor: not-allowed;
+  background-color: #FFFFFF;
+  color: #A7B0BE;
+}
+
+.c5.c5[data-disabled='true'].c5.c5[data-disabled='true'] *[fill^='#'] {
+  fill: #A7B0BE;
+}
+
+.c6 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-flex-flow: wrap;
+  -ms-flex-flow: wrap;
+  flex-flow: wrap;
+  position: relative;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  outline: none;
+  white-space: pre;
+  margin: 0;
+  padding: 12px 16px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 24px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #2B313B;
+  text-overflow: ellipsis;
+  color: #2B313B;
+  background: #FFFFFF;
+}
+
+ul[data-dimension='m'] .c6.c6 {
+  padding: 8px 16px;
+}
+
+ul[data-dimension='s'] .c6.c6 {
+  padding: 6px 12px;
+}
+
+ul[data-dimension='s'] .c1 {
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #2B313B;
+}
+
+ul[data-selectedid="5"] .c6.c6 {
+  background: #E2E5E9;
+}
+
+.c6:hover {
+  background-color: #F1F2F4;
+  cursor: pointer;
+}
+
+.c6:focus {
+  background-color: #F1F2F4;
+}
+
+.c6.c6[data-disabled='true'] {
+  cursor: not-allowed;
+  background-color: #FFFFFF;
+  color: #A7B0BE;
+}
+
+.c6.c6[data-disabled='true'].c6.c6[data-disabled='true'] *[fill^='#'] {
+  fill: #A7B0BE;
+}
+
+.c7 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-flex-flow: wrap;
+  -ms-flex-flow: wrap;
+  flex-flow: wrap;
+  position: relative;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  outline: none;
+  white-space: pre;
+  margin: 0;
+  padding: 12px 16px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 24px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #2B313B;
+  text-overflow: ellipsis;
+  color: #2B313B;
+  background: #FFFFFF;
+}
+
+ul[data-dimension='m'] .c7.c7 {
+  padding: 8px 16px;
+}
+
+ul[data-dimension='s'] .c7.c7 {
+  padding: 6px 12px;
+}
+
+ul[data-dimension='s'] .c1 {
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #2B313B;
+}
+
+ul[data-selectedid="10"] .c7.c7 {
+  background: #E2E5E9;
+}
+
+.c7:hover {
+  background-color: #F1F2F4;
+  cursor: pointer;
+}
+
+.c7:focus {
+  background-color: #F1F2F4;
+}
+
+.c7.c7[data-disabled='true'] {
+  cursor: not-allowed;
+  background-color: #FFFFFF;
+  color: #A7B0BE;
+}
+
+.c7.c7[data-disabled='true'].c7.c7[data-disabled='true'] *[fill^='#'] {
+  fill: #A7B0BE;
+}
+
+.c8 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-flex-flow: wrap;
+  -ms-flex-flow: wrap;
+  flex-flow: wrap;
+  position: relative;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  outline: none;
+  white-space: pre;
+  margin: 0;
+  padding: 12px 16px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 24px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #2B313B;
+  text-overflow: ellipsis;
+  color: #2B313B;
+  background: #FFFFFF;
+}
+
+ul[data-dimension='m'] .c8.c8 {
+  padding: 8px 16px;
+}
+
+ul[data-dimension='s'] .c8.c8 {
+  padding: 6px 12px;
+}
+
+ul[data-dimension='s'] .c1 {
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #2B313B;
+}
+
+ul[data-selectedid="11"] .c8.c8 {
+  background: #E2E5E9;
+}
+
+.c8:hover {
+  background-color: #F1F2F4;
+  cursor: pointer;
+}
+
+.c8:focus {
+  background-color: #F1F2F4;
+}
+
+.c8.c8[data-disabled='true'] {
+  cursor: not-allowed;
+  background-color: #FFFFFF;
+  color: #A7B0BE;
+}
+
+.c8.c8[data-disabled='true'].c8.c8[data-disabled='true'] *[fill^='#'] {
+  fill: #A7B0BE;
+}
+
+.c9 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-flex-flow: wrap;
+  -ms-flex-flow: wrap;
+  flex-flow: wrap;
+  position: relative;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  outline: none;
+  white-space: pre;
+  margin: 0;
+  padding: 12px 16px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 24px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #2B313B;
+  text-overflow: ellipsis;
+  color: #2B313B;
+  background: #FFFFFF;
+}
+
+ul[data-dimension='m'] .c9.c9 {
+  padding: 8px 16px;
+}
+
+ul[data-dimension='s'] .c9.c9 {
+  padding: 6px 12px;
+}
+
+ul[data-dimension='s'] .c1 {
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #2B313B;
+}
+
+ul[data-selectedid="12"] .c9.c9 {
+  background: #E2E5E9;
+}
+
+.c9:hover {
+  background-color: #F1F2F4;
+  cursor: pointer;
+}
+
+.c9:focus {
+  background-color: #F1F2F4;
+}
+
+.c9.c9[data-disabled='true'] {
+  cursor: not-allowed;
+  background-color: #FFFFFF;
+  color: #A7B0BE;
+}
+
+.c9.c9[data-disabled='true'].c9.c9[data-disabled='true'] *[fill^='#'] {
+  fill: #A7B0BE;
+}
+
+.c10 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-flex-flow: wrap;
+  -ms-flex-flow: wrap;
+  flex-flow: wrap;
+  position: relative;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  outline: none;
+  white-space: pre;
+  margin: 0;
+  padding: 12px 16px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 24px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #2B313B;
+  text-overflow: ellipsis;
+  color: #2B313B;
+  background: #FFFFFF;
+}
+
+ul[data-dimension='m'] .c10.c10 {
+  padding: 8px 16px;
+}
+
+ul[data-dimension='s'] .c10.c10 {
+  padding: 6px 12px;
+}
+
+ul[data-dimension='s'] .c1 {
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #2B313B;
+}
+
+ul[data-selectedid="13"] .c10.c10 {
+  background: #E2E5E9;
+}
+
+.c10:hover {
+  background-color: #F1F2F4;
+  cursor: pointer;
+}
+
+.c10:focus {
+  background-color: #F1F2F4;
+}
+
+.c10.c10[data-disabled='true'] {
+  cursor: not-allowed;
+  background-color: #FFFFFF;
+  color: #A7B0BE;
+}
+
+.c10.c10[data-disabled='true'].c10.c10[data-disabled='true'] *[fill^='#'] {
+  fill: #A7B0BE;
+}
+
+.c0 {
+  box-shadow: 0 4px 16px rgba(138,150,168,0.4),0 0 6px rgba(138,150,168,0.08);
+  border-radius: 4px;
+  background: #FFFFFF;
+  max-height: 288px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  cursor: pointer;
+  position: absolute;
+  padding: 8px 0;
+  outline: none;
+  margin: 0;
+}
+
+<div>
+    <ul
+      class="c0"
+      tabindex="-1"
+    >
+      <li
+        class="c1 c2"
+        data-disabled="true"
+      >
+        Категория 1
+      </li>
+      <li
+        class="c1 c3"
+        id="2"
+        tabindex="0"
+      >
+        Номер Карты /****45
+         
+        <div
+          height="24"
+          width="24"
+        />
+        <div>
+          Дополнительный текст
+        </div>
+      </li>
+      <li
+        class="c1 c4"
+        id="3"
+        tabindex="0"
+      >
+        Номер Карты /****75
+         
+        <div
+          height="24"
+          width="24"
+        />
+        <div>
+          Дополнительный текст
+        </div>
+      </li>
+      <li
+        class="c1 c5"
+        id="4"
+        tabindex="0"
+      >
+        Номер Карты /****22
+         
+        <div
+          height="24"
+          width="24"
+        />
+        <div>
+          Дополнительный текст
+        </div>
+      </li>
+      <li
+        class="c1 c6"
+        id="5"
+        tabindex="0"
+      >
+        Номер Карты /****33
+         
+        <div
+          height="24"
+          width="24"
+        />
+        <div>
+          Дополнительный текст
+        </div>
+      </li>
+      <li
+        class="c1 c2"
+        data-disabled="true"
+      >
+        Категория 2
+      </li>
+      <li
+        class="c1 c7"
+        id="10"
+        tabindex="0"
+      >
+        Номер Карты /****21
+         
+        <div
+          height="24"
+          width="24"
+        />
+        <div>
+          Дополнительный текст
+        </div>
+      </li>
+      <li
+        class="c1 c8"
+        id="11"
+        tabindex="0"
+      >
+        Номер Карты /****35
+         
+        <div
+          height="24"
+          width="24"
+        />
+        <div>
+          Дополнительный текст
+        </div>
+      </li>
+      <li
+        class="c1 c9"
+        id="12"
+        tabindex="0"
+      >
+        Номер Карты /****39
+         
+        <div
+          height="24"
+          width="24"
+        />
+        <div>
+          Дополнительный текст
+        </div>
+      </li>
+      <li
+        class="c1 c10"
+        id="13"
+        tabindex="0"
+      >
+        Номер Карты /****41
+         
+        <div
+          height="24"
+          width="24"
+        />
+        <div>
+          Дополнительный текст
+        </div>
+      </li>
+    </ul>
+    ,
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`DropDown should render small components 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": .c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-flex-flow: wrap;
+  -ms-flex-flow: wrap;
+  flex-flow: wrap;
+  position: relative;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  outline: none;
+  white-space: pre;
+  margin: 0;
+  padding: 6px 12px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #2B313B;
+  text-overflow: ellipsis;
+  color: #2B313B;
+  background: #FFFFFF;
+}
+
+ul[data-dimension='m'] .c2.c2 {
+  padding: 8px 16px;
+}
+
+ul[data-dimension='s'] .c2.c2 {
+  padding: 6px 12px;
+}
+
+ul[data-dimension='s'] .c1 {
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #2B313B;
+}
+
+.c2:hover {
+  background-color: #F1F2F4;
+  cursor: pointer;
+}
+
+.c2:focus {
+  background-color: #F1F2F4;
+}
+
+.c2.c2[data-disabled='true'] {
+  cursor: not-allowed;
+  background-color: #FFFFFF;
+  color: #A7B0BE;
+}
+
+.c2.c2[data-disabled='true'].c2.c2[data-disabled='true'] *[fill^='#'] {
+  fill: #A7B0BE;
+}
+
+.c0 {
+  box-shadow: 0 4px 16px rgba(138,150,168,0.4),0 0 6px rgba(138,150,168,0.08);
+  border-radius: 4px;
+  background: #FFFFFF;
+  max-height: 192px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  cursor: pointer;
+  position: absolute;
+  padding: 8px 0;
+  outline: none;
+  margin: 0;
+}
+
+<body>
+    <div>
+      <ul
+        class="c0"
+      >
+        <li
+          class="c1 c2"
+          tabindex="0"
+        >
+          Option
+        </li>
+      </ul>
+    </div>
+  </body>,
+  "container": .c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-flex-flow: wrap;
+  -ms-flex-flow: wrap;
+  flex-flow: wrap;
+  position: relative;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  outline: none;
+  white-space: pre;
+  margin: 0;
+  padding: 6px 12px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #2B313B;
+  text-overflow: ellipsis;
+  color: #2B313B;
+  background: #FFFFFF;
+}
+
+ul[data-dimension='m'] .c2.c2 {
+  padding: 8px 16px;
+}
+
+ul[data-dimension='s'] .c2.c2 {
+  padding: 6px 12px;
+}
+
+ul[data-dimension='s'] .c1 {
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #2B313B;
+}
+
+.c2:hover {
+  background-color: #F1F2F4;
+  cursor: pointer;
+}
+
+.c2:focus {
+  background-color: #F1F2F4;
+}
+
+.c2.c2[data-disabled='true'] {
+  cursor: not-allowed;
+  background-color: #FFFFFF;
+  color: #A7B0BE;
+}
+
+.c2.c2[data-disabled='true'].c2.c2[data-disabled='true'] *[fill^='#'] {
+  fill: #A7B0BE;
+}
+
+.c0 {
+  box-shadow: 0 4px 16px rgba(138,150,168,0.4),0 0 6px rgba(138,150,168,0.08);
+  border-radius: 4px;
+  background: #FFFFFF;
+  max-height: 192px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  cursor: pointer;
+  position: absolute;
+  padding: 8px 0;
+  outline: none;
+  margin: 0;
+}
+
+<div>
+    <ul
+      class="c0"
+    >
+      <li
+        class="c1 c2"
+        tabindex="0"
+      >
+        Option
+      </li>
+    </ul>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;

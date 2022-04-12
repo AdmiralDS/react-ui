@@ -1,0 +1,33 @@
+import { InputStatus } from '#/components/input/types';
+import * as React from 'react';
+import { ReactComponent as ErrorStatusSvg } from '@admiral-ds/icons/build/service/ErrorSolid.svg';
+import { ReactComponent as SuccessStatusSvg } from '@admiral-ds/icons/build/service/CheckSolid.svg';
+import styled from 'styled-components';
+
+const ErrorIcon = styled(ErrorStatusSvg)`
+  & *[fill^='#'] {
+    fill: ${(props) => props.theme.color.status.danger};
+  }
+`;
+
+const SuccessIcon = styled(SuccessStatusSvg)`
+  & *[fill^='#'] {
+    fill: ${(props) => props.theme.color.status.success};
+  }
+`;
+
+export interface StatusIconProps {
+  status?: InputStatus;
+}
+
+export function StatusIcon({ status, ...props }: StatusIconProps): JSX.Element | null {
+  switch (status) {
+    case 'success':
+      return <SuccessIcon {...props} />;
+    case 'error':
+      return <ErrorIcon {...props} />;
+
+    default:
+      return null;
+  }
+}

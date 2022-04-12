@@ -1,0 +1,153 @@
+import React, { useState } from 'react';
+import { ComponentMeta, ComponentStory, Story } from '@storybook/react';
+import { PaginationOne, PaginationOneProps } from '#/components/PaginationOne';
+import { withDesign } from 'storybook-addon-designs';
+import { Field } from '#/components/Field';
+import styled from 'styled-components';
+
+const Separator = styled.div`
+  width: 100%;
+  height: 40px;
+`;
+
+export default {
+  title: 'Example/PaginationOne',
+  decorators: [withDesign],
+  component: PaginationOne,
+  parameters: {
+    design: [
+      {
+        type: 'figma',
+        url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=39%3A41329',
+      },
+      {
+        type: 'figma',
+        url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=39%3A41617',
+      },
+    ],
+  },
+  argTypes: {
+    page: {
+      control: { type: 'number' },
+    },
+    pageSize: {
+      control: { type: 'number' },
+    },
+    totalItems: {
+      control: { type: 'number' },
+    },
+    simple: {
+      control: { type: 'boolean' },
+    },
+    pageSelectDisabled: {
+      control: { type: 'boolean' },
+    },
+    pageSizeSelectDisabled: {
+      control: { type: 'boolean' },
+    },
+    itemsPerPageText: {
+      control: { type: 'string' },
+    },
+    backwardText: {
+      control: { type: 'string' },
+    },
+    forwardText: {
+      control: { type: 'string' },
+    },
+  },
+} as ComponentMeta<typeof PaginationOne>;
+
+const Template1: ComponentStory<typeof PaginationOne> = (args) => {
+  const [pageSize, setPageSize] = useState(8);
+  const [page, setPage] = useState(1);
+  const pageSizes = [8, 20, 50, 100, 200];
+  const totalElements = 100;
+  return (
+    <PaginationOne
+      {...args}
+      onChange={({ page, pageSize }) => {
+        setPage(page);
+        setPageSize(pageSize);
+      }}
+      page={page}
+      pageSize={pageSize}
+      totalItems={totalElements}
+      pageSizes={pageSizes}
+    />
+  );
+};
+
+const Template2: ComponentStory<typeof PaginationOne> = () => {
+  const [pageSize1, setPageSize1] = useState(8);
+  const [page1, setPage1] = useState(1);
+  const [pageSize2, setPageSize2] = useState(8);
+  const [page2, setPage2] = useState(1);
+  const pageSizes = [8, 20, 50, 100, 200];
+  const totalElements = 100;
+  return (
+    <>
+      <Field label="Pagination One Complex">
+        <PaginationOne
+          onChange={({ page, pageSize }) => {
+            setPage1(page);
+            setPageSize1(pageSize);
+          }}
+          page={page1}
+          pageSize={pageSize1}
+          totalItems={totalElements}
+          pageSizes={pageSizes}
+        />
+      </Field>
+      <Separator />
+      <Field label="Pagination One Complex. Minimal size">
+        <PaginationOne
+          style={{ width: 'fit-content' }}
+          onChange={({ page, pageSize }) => {
+            setPage1(page);
+            setPageSize1(pageSize);
+          }}
+          page={page1}
+          pageSize={pageSize1}
+          totalItems={totalElements}
+          pageSizes={pageSizes}
+        />
+      </Field>
+      <Separator />
+      <Field label="Pagination One Simple">
+        <PaginationOne
+          onChange={({ page, pageSize }) => {
+            setPage2(page);
+            setPageSize2(pageSize);
+          }}
+          page={page2}
+          pageSize={pageSize2}
+          totalItems={totalElements}
+          pageSizes={pageSizes}
+          simple
+        />
+      </Field>
+      <Separator />
+      <Field label="Pagination One Simple. Minimal size">
+        <PaginationOne
+          style={{ width: 'fit-content' }}
+          onChange={({ page, pageSize }) => {
+            setPage2(page);
+            setPageSize2(pageSize);
+          }}
+          page={page2}
+          pageSize={pageSize2}
+          totalItems={totalElements}
+          pageSizes={pageSizes}
+          simple
+        />
+      </Field>
+    </>
+  );
+};
+
+export const Playground = Template1.bind({});
+Playground.args = {};
+
+export const PaginationTypes = Template2.bind({});
+PaginationTypes.args = {};
+PaginationTypes.storyName = 'PaginationOne: Complex and Simple';
