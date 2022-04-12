@@ -14,7 +14,7 @@ admiral-react - Это библиотека компонентов React, осн
 admiral-react требует зависимостей :
 
 1. `styled-components@^5.1.0`
-2. `@openvtb/fonts@1.0.0`
+2. `@admiral-ds/fonts@1.0.0`
 3. `@admiral-ds/icons@^2.0.1`
 4. `react > 16.0.0`
 5. `react-dom > 16.0.0`
@@ -22,7 +22,7 @@ admiral-react требует зависимостей :
 Установить admiral-react и зависимости одной командой:
 
 ```sh
-npm i @openvtb/admiral-react styled-components @openvtb/fonts
+npm i @admiral-ds/react-ui styled-components @admiral-ds/fonts
 ```
 
 ## Подключение
@@ -34,7 +34,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { ThemeProvider } from 'styled-components';
 import App from './App';
-import { DARK_THEME, FontsVTBGroup } from '@openvtb/admiral-react';
+import { DARK_THEME, FontsVTBGroup } from '@admiral-ds/react-ui';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -108,7 +108,7 @@ module: {
 ## Примеры
 
 ```tsx
-import { Button, InputField } from '@openvtb/admiral-react';
+import { Button, InputField } from '@admiral-ds/react-ui';
 import React from 'react';
 import { Box } from 'reflexbox';
 

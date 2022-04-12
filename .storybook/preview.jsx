@@ -2,7 +2,6 @@ import * as React from 'react';
 import { version } from '../package.json';
 import { ThemeProvider } from 'styled-components';
 import { themes } from '@storybook/theming';
-import LogoVTB from './Logo.svg';
 
 import { DARK_THEME, LIGHT_THEME } from '#/components/themes';
 import { FontsVTBGroup } from '#/components/FontsVTBGroup';
@@ -10,7 +9,6 @@ import { useDarkMode } from 'storybook-dark-mode';
 import styled from 'styled-components';
 
 const customTheme = {
-  brandImage: LogoVTB,
   brandTitle: `version ${version}`,
 };
 

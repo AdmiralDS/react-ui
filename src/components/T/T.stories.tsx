@@ -150,7 +150,7 @@ const Template: ComponentStory<typeof T> = () => {
         <tbody>
           {NEW_FONTS.map((item: any, index: number) => {
             const text = `
-            import { T, typography } from '@openvtb/admiral-react';
+            import { T, typography } from '@admiral-ds/react-ui';
             import styled from 'styled-components';
 
             const Paragraph = styled.p\`
@@ -212,7 +212,7 @@ const Template: ComponentStory<typeof T> = () => {
         <tbody>
           {FONTS.map((item: any, index: number) => {
             const text = `
-            import { T, typography } from '@openvtb/admiral-react';
+            import { T, typography } from '@admiral-ds/react-ui';
             import styled from 'styled-components';
 
             const Paragraph = styled.p\`
