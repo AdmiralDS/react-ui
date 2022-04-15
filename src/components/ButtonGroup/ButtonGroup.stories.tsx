@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { ComponentMeta, ComponentStory, Story } from '@storybook/react';
 import { ButtonGroup } from '../ButtonGroup';
-import { ButtonGroupItem } from '#/components/ButtonGroup/ButtonGroupItem';
+import { ButtonGroupItem } from '#src/components/ButtonGroup/ButtonGroupItem';
 import { ReactComponent as StarSolid } from '@admiral-ds/icons/build/system/StarSolid.svg';
-import { T } from '#/components/T';
+import { T } from '#src/components/T';
 import { withDesign } from 'storybook-addon-designs';
-import { Badge } from '#/components/Badge';
+import { Badge } from '#src/components/Badge';
 
 const Divider = styled.div`
   width: 10px;
@@ -24,35 +24,35 @@ export default {
     design: [
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=7582%3A70132',
+        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=7582%3A70132',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=7582%3A70273',
+        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=7582%3A70273',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=7582%3A70157',
+        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=7582%3A70157',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=7582%3A70180',
+        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=7582%3A70180',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=7582%3A70203',
+        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=7582%3A70203',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=7582%3A70134',
+        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=7582%3A70134',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=7582%3A70226',
+        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=7582%3A70226',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=7582%3A70249',
+        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=7582%3A70249',
       },
     ],
   },
@@ -74,7 +74,7 @@ const ButtonGroupDemo: ComponentStory<typeof ButtonGroup> = () => {
   ];
   return (
     <>
-      <T font="Additional/L" as="div">
+      <T font="Body/Body 1 Long" as="div">
         Dimension - l
       </T>
       <Separator />
@@ -98,7 +98,7 @@ const ButtonGroupDemo: ComponentStory<typeof ButtonGroup> = () => {
         })}
       </ButtonGroup>
       <Separator />
-      <T font="Additional/L" as="div">
+      <T font="Body/Body 1 Long" as="div">
         Dimension - m
       </T>
       <Separator />
@@ -112,7 +112,7 @@ const ButtonGroupDemo: ComponentStory<typeof ButtonGroup> = () => {
         })}
       </ButtonGroup>
       <Separator />
-      <T font="Additional/L" as="div">
+      <T font="Body/Body 1 Long" as="div">
         Dimension - s
       </T>
       <Separator />
@@ -130,7 +130,7 @@ const ButtonGroupDemo: ComponentStory<typeof ButtonGroup> = () => {
 };
 
 const ButtonGroupWithIconDemo = () => (
-  <ButtonGroup dimension={'l'}>
+  <ButtonGroup dimension={'l'} appearance="secondary">
     <ButtonGroupItem active>
       <StarSolid width={20} />
       <Divider />

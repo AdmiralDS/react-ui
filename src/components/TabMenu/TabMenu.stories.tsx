@@ -13,11 +13,11 @@ export default {
     design: [
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=39%3A31118',
+        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A31118',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=39%3A31386',
+        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A31386',
       },
     ],
   },
@@ -129,14 +129,26 @@ const overflowTabs = [
   },
   {
     id: '6',
-    content: 'Some very long long long long option',
+    content: 'Option 666666',
+  },
+  {
+    id: '7',
+    content: 'Option 7777777',
+  },
+  {
+    id: '8',
+    content: 'Option 88888888',
+  },
+  {
+    id: '9',
+    content: 'Option 999999999',
   },
 ];
 
 const Template1: ComponentStory<typeof TabMenu> = (args) => {
   const [selected, setSelected] = React.useState<string>('3');
   return (
-    <div style={{ display: 'flex', width: '100%' }}>
+    <div style={{ display: 'flex', width: '800px' }}>
       <TabMenu
         {...args}
         activeTab={selected}
@@ -152,43 +164,49 @@ const Template1: ComponentStory<typeof TabMenu> = (args) => {
 const Template2: ComponentStory<typeof TabMenu> = (args) => {
   const [selected, setSelected] = React.useState<string>('3');
   return (
-    <TabMenu
-      {...args}
-      activeTab={selected}
-      onChange={(id) => {
-        setSelected(id);
-      }}
-      tabs={tabs}
-      underline
-    />
+    <div style={{ display: 'flex', width: '800px' }}>
+      <TabMenu
+        {...args}
+        activeTab={selected}
+        onChange={(id) => {
+          setSelected(id);
+        }}
+        tabs={tabs}
+        underline
+      />
+    </div>
   );
 };
 
 const Template3: ComponentStory<typeof TabMenu> = (args) => {
   const [selected, setSelected] = React.useState<string>('3');
   return (
-    <TabMenu
-      {...args}
-      activeTab={selected}
-      onChange={(id) => {
-        setSelected(id);
-      }}
-      tabs={disabledTabs}
-    />
+    <div style={{ display: 'flex', width: '800px' }}>
+      <TabMenu
+        {...args}
+        activeTab={selected}
+        onChange={(id) => {
+          setSelected(id);
+        }}
+        tabs={disabledTabs}
+      />
+    </div>
   );
 };
 
 const Template4: ComponentStory<typeof TabMenu> = (args) => {
   const [selected, setSelected] = React.useState<string>('3');
   return (
-    <TabMenu
-      {...args}
-      activeTab={selected}
-      onChange={(id) => {
-        setSelected(id);
-      }}
-      tabs={overflowTabs}
-    />
+    <div style={{ display: 'flex', width: '500px' }}>
+      <TabMenu
+        {...args}
+        activeTab={selected}
+        onChange={(id) => {
+          setSelected(id);
+        }}
+        tabs={overflowTabs}
+      />
+    </div>
   );
 };
 
@@ -206,4 +224,4 @@ OverflowMenuDisabled.storyName = 'TabMenu. Пример с задизейбле�
 
 export const OverflowMenuTooltip = Template4.bind({});
 OverflowMenuTooltip.args = {};
-OverflowMenuTooltip.storyName = 'TabMenu. Пример с тултипом.';
+OverflowMenuTooltip.storyName = 'TabMenu. Пример с OverflowMenu.';

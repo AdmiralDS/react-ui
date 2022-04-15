@@ -1,12 +1,11 @@
 import * as React from 'react';
-import ReactDOM from 'react-dom';
 import { ReactComponent as CloseOutline } from '@admiral-ds/icons/build/service/CloseOutline.svg';
-import { keyboardKey } from '#/components/common/keyboardKey';
-import { useClickOutside } from '#/components/common/hooks/useClickOutside';
-import { getKeyboardFocusableElements } from '#/components/common/utils/getKeyboardFocusableElements';
-import { throttle } from '#/components/common/utils/throttle';
+import { keyboardKey } from '#src/components/common/keyboardKey';
+import { useClickOutside } from '#src/components/common/hooks/useClickOutside';
+import { getKeyboardFocusableElements } from '#src/components/common/utils/getKeyboardFocusableElements';
+import { throttle } from '#src/components/common/utils/throttle';
 
-import { CloseButton, HintDialog, HintWrapper } from './styled';
+import { CloseButton, HintDialog, HintContent, HintWrapper } from './style';
 import type { ActionsType } from './reducer';
 
 type PropsType = {
@@ -14,11 +13,11 @@ type PropsType = {
   isMobile: boolean;
   dimension: 's' | 'm' | 'l';
   content: React.ReactNode;
-  portal: Element;
   dispatch: React.Dispatch<ActionsType>;
   scrollableParents: Array<Element>;
   anchorElementRef: any;
   anchorId: string;
+  trapFocus: boolean;
 };
 
 type RefType = HTMLDivElement | null;
@@ -30,11 +29,11 @@ export const HintContainer = React.forwardRef<RefType, PropsType & React.HTMLAtt
       isMobile,
       content,
       visibilityTrigger,
-      portal,
       scrollableParents,
       anchorElementRef,
       anchorId,
       dispatch,
+      trapFocus,
       ...props
     },
     ref,
@@ -56,13 +55,13 @@ export const HintContainer = React.forwardRef<RefType, PropsType & React.HTMLAtt
     }, []);
 
     React.useLayoutEffect(() => {
-      if (hintRef.current && visibilityTrigger === 'click') {
+      if (hintRef.current && visibilityTrigger === 'click' && trapFocus) {
         const focusableEls = getKeyboardFocusableElements(hintRef.current);
         setFirstFocusableChild(focusableEls[0]);
         setLastFocusableChild(focusableEls[focusableEls.length - 1]);
-        firstFocusableChild?.focus();
+        (focusableEls[0] as any)?.focus();
       }
-    }, [hintRef.current, visibilityTrigger, content]);
+    }, [hintRef.current, visibilityTrigger, content, trapFocus]);
 
     React.useImperativeHandle(ref, () => hintRef.current);
 
@@ -111,10 +110,16 @@ export const HintContainer = React.forwardRef<RefType, PropsType & React.HTMLAtt
       }
     };
 
-    return ReactDOM.createPortal(
+    return (
       <HintWrapper {...props} role="tooltip" ref={hintRef} onKeyDown={handleKeyDown}>
-        <HintDialog role="dialog" aria-labelledby={anchorId} dimension={dimension} isMobile={isMobile}>
-          {content}
+        <HintDialog
+          role="dialog"
+          aria-labelledby={anchorId}
+          dimension={dimension}
+          isMobile={isMobile}
+          data-trigger={visibilityTrigger}
+        >
+          <HintContent>{content}</HintContent>
           {visibilityTrigger === 'click' && (
             <CloseButton
               aria-label="Закрыть подсказку"
@@ -128,8 +133,7 @@ export const HintContainer = React.forwardRef<RefType, PropsType & React.HTMLAtt
             </CloseButton>
           )}
         </HintDialog>
-      </HintWrapper>,
-      portal,
+      </HintWrapper>
     );
   },
 );

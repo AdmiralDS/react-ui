@@ -1,6 +1,6 @@
 import { css } from 'styled-components';
-import { TYPOGRAPHY } from '#/components/Typography';
-import { CheckboxDimension } from '#/components/Checkbox/CheckboxDimension';
+import { TYPOGRAPHY } from '#src/components/Typography';
+import { CheckboxDimension } from '#src/components/Checkbox/CheckboxDimension';
 
 export const width = css<{ dimension: CheckboxDimension }>`
   width: ${({ dimension }) => {

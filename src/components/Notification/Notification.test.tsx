@@ -1,8 +1,8 @@
-import { LIGHT_THEME } from '#/components/themes';
+import { LIGHT_THEME } from '#src/components/themes';
 import React from 'react';
 import { render } from '@testing-library/react';
 import { ThemeProvider } from 'styled-components';
-import { Notification } from '#/components/Notification';
+import { Notification } from '#src/components/Notification';
 
 describe('Notification', () => {
   it('should render error components with all properties', () => {

@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { keyboardKey } from '#/components/common/keyboardKey';
-import observeRect from '#/components/common/observeRect';
+import { keyboardKey } from '#src/components/common/keyboardKey';
+import observeRect from '#src/components/common/observeRect';
 
 import { Badge } from '../Badge';
 import { TabOverflowMenu } from '../TabOverflowMenu';
@@ -39,7 +39,7 @@ export interface TabMenuProps extends Omit<React.HTMLAttributes<HTMLDivElement>,
   /** Мобильная версия компонента */
   mobile?: boolean;
   /** Выравнивание выпадающего меню относительно компонента https://developer.mozilla.org/en-US/docs/Web/CSS/align-self */
-  alignSelf?: string;
+  alignSelf?: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
 }
 
 export const TabMenu: React.FC<TabMenuProps> = ({
@@ -61,6 +61,7 @@ export const TabMenu: React.FC<TabMenuProps> = ({
   const tablistRef = React.useRef<HTMLDivElement | null>(null);
   const overflowBtnRef = React.useRef<HTMLButtonElement | null>(null);
   const underlineRef = React.useRef<HTMLDivElement | null>(null);
+  const tabsWrapperWidthRef = React.useRef(0);
   const [update, setUpdate] = React.useState({});
   const [visibleTabsAmount, setVisibleTabsAmount] = React.useState(tabsWithRef.length);
   const [menuFocus, setMenuFocus] = React.useState<'firstOption' | 'lastOption' | 'activeOption'>('activeOption');
@@ -115,10 +116,17 @@ export const TabMenu: React.FC<TabMenuProps> = ({
 
   const setUnderline = () => {
     const activeTabRef = tabsWithRef.filter((tab) => tab.id === activeTab)?.[0]?.ref.current;
-    const left = Number(underlineRef.current?.style.left || 0);
-    const underlineWidth = Number(underlineRef.current?.style.width || 0);
-    if (activeTabRef && (activeTabRef.offsetLeft !== left || activeTabRef.clientWidth !== underlineWidth)) {
-      styleUnderline(activeTabRef.offsetLeft, activeTabRef.clientWidth);
+    const left = parseFloat(underlineRef.current?.style.left || '0');
+    const underlineWidth = parseFloat(underlineRef.current?.style.width || '0');
+
+    if (activeTabRef && tablistRef.current) {
+      // используем метод getBoundingClientRect, так как он дает точность до сотых пикселя
+      const activeTabWidth = activeTabRef.getBoundingClientRect().width;
+      const activeTabLeft = activeTabRef.getBoundingClientRect().left - tablistRef.current.getBoundingClientRect().left;
+
+      if (activeTabLeft !== left || activeTabWidth !== underlineWidth) {
+        styleUnderline(activeTabLeft, activeTabWidth);
+      }
     }
     if (!activeTabRef || hiddenTabs.filter((tab) => tab.id === activeTab).length) {
       styleUnderline(0, 0);
@@ -153,6 +161,7 @@ export const TabMenu: React.FC<TabMenuProps> = ({
     if (tablistRef.current) {
       const observer = observeRect(tablistRef.current, (rect) => {
         const tablistWidth = rect?.width || 0;
+
         const tabsTotalWidth = tabsWithRef.reduce((sum, item) => {
           return sum + (item.width || 0);
         }, 0);
@@ -179,19 +188,29 @@ export const TabMenu: React.FC<TabMenuProps> = ({
     }
   }, [tablistRef.current, update]);
 
+  /**
+   * При срабатывании observer обязательно проверяем, что изменилось интересующее нас свойство (ширина).
+   * Это важно учитывать, так как observer срабатывает при изменении целого ряда свойств
+   * элемента (bottom, height, left, right, top, width), большая часть из которых для нас не важна.
+   */
+
   // recalculation on Tabs Wrapper resize. For example, it happens after fonts loading
   React.useLayoutEffect(() => {
     if (tabsWrapperRef.current) {
-      const observer = observeRect(tabsWrapperRef.current, () => {
-        setUnderline();
-        measureTabs();
+      const observer = observeRect(tabsWrapperRef.current, (rect) => {
+        const width = rect?.width || 0;
+        if (tabsWrapperWidthRef.current !== width) {
+          tabsWrapperWidthRef.current = width;
+          setUnderline();
+          measureTabs();
+        }
       });
       observer.observe();
       return () => {
         observer.unobserve();
       };
     }
-  }, [tabsWrapperRef.current]);
+  }, [tabsWrapperRef.current, dimension]);
 
   const handleTabClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     mobile && event.currentTarget.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
@@ -298,3 +317,5 @@ export const TabMenu: React.FC<TabMenuProps> = ({
     </Wrapper>
   );
 };
+
+TabMenu.displayName = 'TabMenu';

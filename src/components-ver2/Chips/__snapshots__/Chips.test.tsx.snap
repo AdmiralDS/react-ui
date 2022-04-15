@@ -1,0 +1,832 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Chips should render component with appearanceTypeFilled prop  1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": .c0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  box-sizing: border-box;
+  position: relative;
+  max-width: 190px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  pointer-events: auto;
+  cursor: default;
+  background-color: #E5E7EB;
+  border: 1px solid transparent;
+  border-radius: 16px;
+  height: 32px;
+  padding: 6px 12px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #22242A;
+}
+
+.c0 *[fill^='#'] {
+  fill: #74777F;
+}
+
+.c0:hover {
+  background-color: #D6D8DD;
+}
+
+.c0:active {
+  color: #0062FF;
+  background-color: #D6D8DD;
+}
+
+.c0:focus-visible {
+  outline: 0;
+}
+
+.c0:focus-visible:before {
+  border: 2px solid #0062FF;
+  border-radius: 20px;
+  content: '';
+  display: block;
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  pointer-events: none;
+}
+
+.c0:hover {
+  color: #22242A;
+}
+
+.c1 {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  height: 20px;
+}
+
+.c1 svg {
+  height: 20px;
+  width: 20px;
+}
+
+.c1 svg *[fill^='#'] {
+  fill: #B1B5BB;
+}
+
+.c2 {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-block;
+}
+
+<body>
+    <div>
+      <div
+        class="c0"
+        tabindex="0"
+      >
+        <div
+          class="c1"
+        >
+          <div
+            class="c2"
+          >
+            test
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": .c0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  box-sizing: border-box;
+  position: relative;
+  max-width: 190px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  pointer-events: auto;
+  cursor: default;
+  background-color: #E5E7EB;
+  border: 1px solid transparent;
+  border-radius: 16px;
+  height: 32px;
+  padding: 6px 12px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #22242A;
+}
+
+.c0 *[fill^='#'] {
+  fill: #74777F;
+}
+
+.c0:hover {
+  background-color: #D6D8DD;
+}
+
+.c0:active {
+  color: #0062FF;
+  background-color: #D6D8DD;
+}
+
+.c0:focus-visible {
+  outline: 0;
+}
+
+.c0:focus-visible:before {
+  border: 2px solid #0062FF;
+  border-radius: 20px;
+  content: '';
+  display: block;
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  pointer-events: none;
+}
+
+.c0:hover {
+  color: #22242A;
+}
+
+.c1 {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  height: 20px;
+}
+
+.c1 svg {
+  height: 20px;
+  width: 20px;
+}
+
+.c1 svg *[fill^='#'] {
+  fill: #B1B5BB;
+}
+
+.c2 {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-block;
+}
+
+<div>
+    <div
+      class="c0"
+      tabindex="0"
+    >
+      <div
+        class="c1"
+      >
+        <div
+          class="c2"
+        >
+          test
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`Chips should render component with selected prop  1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": .c0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  box-sizing: border-box;
+  position: relative;
+  max-width: 190px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  pointer-events: auto;
+  cursor: pointer;
+  background-color: #0062FF;
+  border: 1px solid #0062FF;
+  border-radius: 16px;
+  height: 32px;
+  padding: 6px 12px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #FFFFFF;
+}
+
+.c0 *[fill^='#'] {
+  fill: #0062FF;
+}
+
+.c0:hover {
+  background-color: #0046E2;
+}
+
+.c0:active {
+  color: #FFFFFF;
+  background-color: #0062FF;
+}
+
+.c0:focus-visible {
+  outline: 0;
+}
+
+.c0:focus-visible:before {
+  border: 2px solid #0062FF;
+  border-radius: 20px;
+  content: '';
+  display: block;
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  pointer-events: none;
+}
+
+.c0:hover {
+  color: #FFFFFF;
+}
+
+.c1 {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  height: 20px;
+}
+
+.c1 svg {
+  height: 20px;
+  width: 20px;
+}
+
+.c1 svg *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c2 {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-block;
+}
+
+<body>
+    <div>
+      <div
+        class="c0"
+        tabindex="0"
+      >
+        <div
+          class="c1"
+        >
+          <div
+            class="c2"
+          >
+            test
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": .c0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  box-sizing: border-box;
+  position: relative;
+  max-width: 190px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  pointer-events: auto;
+  cursor: pointer;
+  background-color: #0062FF;
+  border: 1px solid #0062FF;
+  border-radius: 16px;
+  height: 32px;
+  padding: 6px 12px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #FFFFFF;
+}
+
+.c0 *[fill^='#'] {
+  fill: #0062FF;
+}
+
+.c0:hover {
+  background-color: #0046E2;
+}
+
+.c0:active {
+  color: #FFFFFF;
+  background-color: #0062FF;
+}
+
+.c0:focus-visible {
+  outline: 0;
+}
+
+.c0:focus-visible:before {
+  border: 2px solid #0062FF;
+  border-radius: 20px;
+  content: '';
+  display: block;
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  pointer-events: none;
+}
+
+.c0:hover {
+  color: #FFFFFF;
+}
+
+.c1 {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  height: 20px;
+}
+
+.c1 svg {
+  height: 20px;
+  width: 20px;
+}
+
+.c1 svg *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c2 {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-block;
+}
+
+<div>
+    <div
+      class="c0"
+      tabindex="0"
+    >
+      <div
+        class="c1"
+      >
+        <div
+          class="c2"
+        >
+          test
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`Chips should render default component 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": .c0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  box-sizing: border-box;
+  position: relative;
+  max-width: 190px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  pointer-events: auto;
+  cursor: default;
+  background-color: #FFFFFF;
+  border: 1px solid #0062FF;
+  border-radius: 16px;
+  height: 32px;
+  padding: 6px 12px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #0062FF;
+}
+
+.c0 *[fill^='#'] {
+  fill: #0062FF;
+}
+
+.c0:hover {
+  background-color: #0000000D;
+}
+
+.c0:active {
+  color: #FFFFFF;
+  background-color: #0000000D;
+}
+
+.c0:focus-visible {
+  outline: 0;
+}
+
+.c0:focus-visible:before {
+  border: 2px solid #0062FF;
+  border-radius: 20px;
+  content: '';
+  display: block;
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  pointer-events: none;
+}
+
+.c0:hover {
+  color: #0062FF;
+}
+
+.c1 {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  height: 20px;
+}
+
+.c1 svg {
+  height: 20px;
+  width: 20px;
+}
+
+.c1 svg *[fill^='#'] {
+  fill: #0062FF;
+}
+
+.c2 {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-block;
+}
+
+<body>
+    <div>
+      <div
+        class="c0"
+        tabindex="0"
+      >
+        <div
+          class="c1"
+        >
+          <div
+            class="c2"
+          >
+            test
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": .c0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  box-sizing: border-box;
+  position: relative;
+  max-width: 190px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  pointer-events: auto;
+  cursor: default;
+  background-color: #FFFFFF;
+  border: 1px solid #0062FF;
+  border-radius: 16px;
+  height: 32px;
+  padding: 6px 12px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #0062FF;
+}
+
+.c0 *[fill^='#'] {
+  fill: #0062FF;
+}
+
+.c0:hover {
+  background-color: #0000000D;
+}
+
+.c0:active {
+  color: #FFFFFF;
+  background-color: #0000000D;
+}
+
+.c0:focus-visible {
+  outline: 0;
+}
+
+.c0:focus-visible:before {
+  border: 2px solid #0062FF;
+  border-radius: 20px;
+  content: '';
+  display: block;
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  pointer-events: none;
+}
+
+.c0:hover {
+  color: #0062FF;
+}
+
+.c1 {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  height: 20px;
+}
+
+.c1 svg {
+  height: 20px;
+  width: 20px;
+}
+
+.c1 svg *[fill^='#'] {
+  fill: #0062FF;
+}
+
+.c2 {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-block;
+}
+
+<div>
+    <div
+      class="c0"
+      tabindex="0"
+    >
+      <div
+        class="c1"
+      >
+        <div
+          class="c2"
+        >
+          test
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;

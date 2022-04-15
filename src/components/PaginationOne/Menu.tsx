@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { ReactComponent as ChevronDownOutline } from '@admiral-ds/icons/build/system/ChevronDownOutline.svg';
 import styled, { FlattenInterpolation, DefaultTheme, ThemeProps } from 'styled-components';
-import { refSetter } from '#/components/common/utils/refSetter';
-import { typography } from '#/components/Typography';
-import { DropDownItem } from '#/components/DropDownItem';
-import { useClickOutside } from '#/components/common/hooks/useClickOutside';
-import { Dropdown } from '#/components/Dropdown';
+import { refSetter } from '#src/components/common/utils/refSetter';
+import { typography } from '#src/components/Typography';
+import { DropDownItem } from '#src/components/DropDownItem';
+import { useClickOutside } from '#src/components/common/hooks/useClickOutside';
+import { Dropdown } from '#src/components/Dropdown';
 
 const Button = styled.button<{ $menuOpened?: boolean }>`
   position: relative;
@@ -19,7 +19,7 @@ const Button = styled.button<{ $menuOpened?: boolean }>`
   appearance: none;
   -webkit-tap-highlight-color: transparent;
   background-color: transparent;
-  ${typography['Additional/S']}
+  ${typography['Body/Body 2 Long']}
   & *[fill^='#'] {
     fill: ${({ theme }) => theme.color.text.secondary};
   }
@@ -156,7 +156,10 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
       }
     };
 
-    const clickOutside = () => {
+    const clickOutside = (e: Event) => {
+      if (e.target && btnRef.current?.contains(e.target as Node)) {
+        return;
+      }
       setMenuOpened(false);
     };
 

@@ -1,4 +1,4 @@
-import { ComponentDimension } from '#/components/input/types';
+import { ComponentDimension } from '#src/components/input/types';
 import styled, { css } from 'styled-components';
 
 export const containerHeights = css<{ dimension?: ComponentDimension }>`
@@ -21,8 +21,4 @@ export const Container = styled.div<{ disabled?: boolean; dimension?: ComponentD
   border: none;
 
   ${containerHeights}
-  &[data-read-only] {
-    user-select: none;
-    pointer-events: none;
-  }
 `;

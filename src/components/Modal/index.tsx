@@ -1,13 +1,12 @@
-import { getKeyboardFocusableElements } from '#/components/common/utils/getKeyboardFocusableElements';
-import { refSetter } from '#/components/common/utils/refSetter';
-import { typography } from '#/components/Typography';
+import { getKeyboardFocusableElements } from '#src/components/common/utils/getKeyboardFocusableElements';
+import { refSetter } from '#src/components/common/utils/refSetter';
+import { typography } from '#src/components/Typography';
 import { ReactComponent as CloseOutline } from '@admiral-ds/icons/build/service/CloseOutline.svg';
 import * as React from 'react';
 import ReactDOM from 'react-dom';
 import styled, { css, Interpolation } from 'styled-components';
 import { hexToRgba } from '../common/utils/hexToRgba';
-
-import { preventPageScroll } from './utils';
+import ModalManager from './manager';
 
 type Dimension = 'xl' | 'l' | 'm' | 's';
 
@@ -47,7 +46,7 @@ const width = css<{ dimension: Dimension; mobile?: boolean }>`
 `;
 
 const Title = styled.h5<{ mobile?: boolean }>`
-  ${typography['Main/S']}
+  ${typography['Header/H5']}
   margin: 0 32px 16px 0;
 `;
 
@@ -86,7 +85,7 @@ const ModalComponent = styled.div<{ dimension: Dimension; mobile?: boolean }>`
   background-color: ${({ theme }) => theme.color.background.primary};
   ${({ theme }) => theme.shadow.ClickableHover}
   border-radius: 8px;
-  ${({ mobile }) => (mobile ? typography['Additional/S'] : typography['Additional/L'])}
+  ${({ mobile }) => (mobile ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
   color: ${({ theme }) => theme.color.text.primary};
   outline: none;
 
@@ -94,7 +93,7 @@ const ModalComponent = styled.div<{ dimension: Dimension; mobile?: boolean }>`
     mobile &&
     `
     & > ${Title} {
-      ${typography['Main/XS']}
+      ${typography['Subtitle/Subtitle 1']}
       margin: 0 30px 16px 0;
     }
     & > ${ButtonPanel} {
@@ -129,7 +128,7 @@ const CloseButton = styled.button<{ mobile?: boolean }>`
   -webkit-tap-highlight-color: transparent;
 
   & *[fill^='#'] {
-    fill: ${(p) => p.theme.color.basic.tertiary};
+    fill: ${(p) => p.theme.color.text.secondary};
   }
 
   &:hover,
@@ -199,6 +198,8 @@ export interface ModalProps extends React.HTMLAttributes<HTMLDivElement> {
   overlayStyledCss?: Interpolation<any>;
 }
 
+const manager = new ModalManager();
+
 export const Modal = React.forwardRef<HTMLDivElement, ModalProps>(
   (
     {
@@ -214,19 +215,31 @@ export const Modal = React.forwardRef<HTMLDivElement, ModalProps>(
     },
     ref,
   ) => {
+    const modal = React.useRef<any>({});
     const modalRef: any = React.useRef<HTMLDivElement>(null);
     const overlayRef = React.useRef<HTMLDivElement>(null);
     const previousFocusedElement: any = React.useRef(null);
+
+    const getModal = () => {
+      modal.current.modalEl = modalRef.current;
+      modal.current.containerEl = container || document.body;
+      return modal.current;
+    };
 
     React.useLayoutEffect(() => {
       previousFocusedElement.current = document.activeElement;
       // set focus inside modalComponent
       modalRef.current?.focus();
-      const restoreInitialStyle = preventPageScroll(container || document.body);
+
+      manager.add(getModal(), container || document.body);
+      if (modalRef.current) {
+        manager.mount(getModal());
+      }
       return () => {
         // return focus on close/unmount of modal
         previousFocusedElement.current?.focus();
-        restoreInitialStyle();
+
+        manager.remove(getModal());
       };
     }, []);
 
@@ -293,3 +306,5 @@ export const Modal = React.forwardRef<HTMLDivElement, ModalProps>(
     );
   },
 );
+
+Modal.displayName = 'Modal';

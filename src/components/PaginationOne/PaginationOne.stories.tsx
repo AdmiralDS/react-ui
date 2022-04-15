@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { ComponentMeta, ComponentStory, Story } from '@storybook/react';
-import { PaginationOne, PaginationOneProps } from '#/components/PaginationOne';
+import { PaginationOne, PaginationOneProps } from '#src/components/PaginationOne';
 import { withDesign } from 'storybook-addon-designs';
-import { Field } from '#/components/Field';
+import { Field } from '#src/components/Field';
 import styled from 'styled-components';
 
 const Separator = styled.div`
@@ -18,11 +18,11 @@ export default {
     design: [
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=39%3A41329',
+        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A41329',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=39%3A41617',
+        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A41617',
       },
     ],
   },

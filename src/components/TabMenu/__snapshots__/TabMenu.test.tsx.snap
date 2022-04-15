@@ -177,15 +177,15 @@ Object {
 }
 
 .c3:active:not(:disabled) {
-  color: #083F91;
+  color: #0949AA;
 }
 
 .c3:active:not(:disabled) *[fill^='#'] {
-  fill: #083F91;
+  fill: #0949AA;
 }
 
 .c3:active:not(:disabled) [data-badge] {
-  background: #083F91;
+  background: #0949AA;
   color: #FFFFFF;
 }
 
@@ -279,15 +279,15 @@ Object {
 }
 
 .c7:active:not(:disabled) {
-  color: #083F91;
+  color: #0949AA;
 }
 
 .c7:active:not(:disabled) *[fill^='#'] {
-  fill: #083F91;
+  fill: #0949AA;
 }
 
 .c7:active:not(:disabled) [data-badge] {
-  background: #083F91;
+  background: #0949AA;
   color: #FFFFFF;
 }
 
@@ -550,15 +550,15 @@ Object {
 }
 
 .c3:active:not(:disabled) {
-  color: #083F91;
+  color: #0949AA;
 }
 
 .c3:active:not(:disabled) *[fill^='#'] {
-  fill: #083F91;
+  fill: #0949AA;
 }
 
 .c3:active:not(:disabled) [data-badge] {
-  background: #083F91;
+  background: #0949AA;
   color: #FFFFFF;
 }
 
@@ -652,15 +652,15 @@ Object {
 }
 
 .c7:active:not(:disabled) {
-  color: #083F91;
+  color: #0949AA;
 }
 
 .c7:active:not(:disabled) *[fill^='#'] {
-  fill: #083F91;
+  fill: #0949AA;
 }
 
 .c7:active:not(:disabled) [data-badge] {
-  background: #083F91;
+  background: #0949AA;
   color: #FFFFFF;
 }
 

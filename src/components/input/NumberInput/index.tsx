@@ -1,14 +1,13 @@
 import * as React from 'react';
-import { TextInput } from '#/components/input/TextInput';
-import { InputData } from '#/components/common/dom/changeInputData';
-import { refSetter } from '#/components/common/utils/refSetter';
-import { TextInputProps } from '#/components/input/TextInput';
+import { TextInput, TextInputProps } from '#src/components/input/TextInput';
+import { InputData, changeInputData } from '#src/components/common/dom/changeInputData';
+import { refSetter } from '#src/components/common/utils/refSetter';
 import { ReactComponent as MinusOutline } from '@admiral-ds/icons/build/service/MinusOutline.svg';
 import { ReactComponent as PlusOutline } from '@admiral-ds/icons/build/service/PlusOutline.svg';
-import { changeInputData } from '#/components/common/dom/changeInputData';
 import styled, { css } from 'styled-components';
 
 import { fitToCurrency, clearValue } from './utils';
+export { fitToCurrency, clearValue } from './utils';
 
 const Icon = css`
   & *[fill^='#'] {
@@ -58,7 +57,9 @@ export interface NumberInputProps extends Omit<TextInputProps, 'onChange'> {
   maxValue?: number;
   /** Отображать иконки плюса минуса */
   displayPlusMinusIcons?: boolean;
-  /** Колбек на изменение значения компонента (fullStr - строка вместе с префиксом/суффиксом/разделителями, shortStr - строка только с числом) */
+  /** Колбек на изменение значения компонента (fullStr - строка вместе с префиксом/суффиксом/разделителями, shortStr - строка только с числом)
+   * Примечание: в качестве value компонента необходимо использовать fullStr (строку вместе с префиксом/суффиксом/разделителями).
+   */
   onChange?: (fullStr: string, shortStr: string) => void;
 }
 
@@ -69,7 +70,7 @@ export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       prefix = '',
       suffix = '₽',
       thousand: userThousand = ' ',
-      decimal = '.',
+      decimal: userDecimal = '.',
       onBlur,
       onChange,
       placeholder = '0 ₽',
@@ -85,24 +86,33 @@ export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
     const [plusDisabled, setPlusDisabled] = React.useState(false);
     const [minusDisabled, setMinusDisabled] = React.useState(false);
 
-    // thousand - не более одного символа
+    // thousand, decimal - не более одного символа
     const thousand = userThousand.slice(0, 1);
+    const decimal = userDecimal.slice(0, 1);
 
     React.useEffect(() => {
-      if (inputRef.current && inputRef.current.value) {
+      // проверка на undefined и пустую строку
+      const valueExist = rest.value !== undefined && !!String(rest.value);
+      const defaultValueExist = rest.defaultValue !== undefined && !!String(rest.defaultValue);
+      const value = valueExist ? String(rest.value) : String(rest.defaultValue);
+      if (valueExist || defaultValueExist) {
         if (typeof minValue === 'number') {
-          const minusDsb = Number(clearValue(inputRef.current.value, precision)) - step < minValue;
-          setMinusDisabled(minusDsb);
+          const minusDsb = Number(clearValue(value, precision, decimal)) - step < minValue;
+          minusDisabled !== minusDsb && setMinusDisabled(minusDsb);
         }
         if (typeof maxValue === 'number') {
-          const plusDsb = Number(clearValue(inputRef.current.value, precision)) + step > maxValue;
-          setPlusDisabled(plusDsb);
+          const plusDsb = Number(clearValue(value, precision, decimal)) + step > maxValue;
+          plusDisabled !== plusDsb && setPlusDisabled(plusDsb);
         }
+      } else {
+        // Если параметры value, defaultValue не заданы или являются пустыми строками, тогда кнопки +/- не могут быть задизейблены
+        minusDisabled && setMinusDisabled(false);
+        plusDisabled && setPlusDisabled(false);
       }
-    }, [inputRef.current?.value]);
+    }, [rest.value, rest.defaultValue]);
 
-    const handleInputChange = (inputData: InputData): InputData => {
-      const { value, selectionStart } = inputData;
+    const handleInputChange = (inputData: InputData | null): InputData => {
+      const { value, selectionStart } = inputData || {};
       const cursor = selectionStart || 0;
       const init_value = value || '';
       const newValue = fitToCurrency(init_value, precision, decimal, thousand, prefix, suffix);
@@ -115,10 +125,10 @@ export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
         return {
           ...inputData,
           value: newValue,
-          selectionStart: newValue.length - suffix.length - 1,
-          selectionEnd: newValue.length - suffix.length - 1,
+          selectionStart: suffix ? newValue.length - suffix.length - 1 : newValue.length,
+          selectionEnd: suffix ? newValue.length - suffix.length - 1 : newValue.length,
         };
-      } else if (init_value.charAt(cursor - 1) === thousand && newValue.length === init_value.length) {
+      } else if (thousand && init_value.charAt(cursor - 1) === thousand && newValue.length === init_value.length) {
         // если пытаемся стереть разделитель thousand, то курсор перескакивает через него
         return {
           ...inputData,
@@ -140,40 +150,31 @@ export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       const newValue = fitToCurrency(event.currentTarget.value, precision, decimal, thousand, prefix, suffix, true);
       if (inputRef.current) {
         if (typeof minValue === 'number') {
-          if (Number(clearValue(newValue, precision)) < minValue) {
-            inputRef.current.value = fitToCurrency(
-              String(minValue),
-              precision,
-              decimal,
-              thousand,
-              prefix,
-              suffix,
-              true,
-            );
+          if (Number(clearValue(newValue, precision, decimal)) < minValue) {
+            const fullValue = fitToCurrency(String(minValue), precision, decimal, thousand, prefix, suffix, true);
+            const shortValue = clearValue(fullValue, precision, decimal);
+
+            onChange?.(fullValue, shortValue);
+            inputRef.current.value = fullValue;
             return;
           }
         }
         if (typeof maxValue === 'number') {
-          if (Number(clearValue(newValue, precision)) > maxValue) {
-            inputRef.current.value = fitToCurrency(
-              String(maxValue),
-              precision,
-              decimal,
-              thousand,
-              prefix,
-              suffix,
-              true,
-            );
+          if (Number(clearValue(newValue, precision, decimal)) > maxValue) {
+            const fullValue = fitToCurrency(String(maxValue), precision, decimal, thousand, prefix, suffix, true);
+            const shortValue = clearValue(fullValue, precision, decimal);
+
+            onChange?.(fullValue, shortValue);
+            inputRef.current.value = fullValue;
             return;
           }
         }
-        inputRef.current.value = newValue;
       }
       onBlur?.(event);
     };
     const handleMinus = () => {
       const current = inputRef.current?.value || '';
-      const newValue = Number(clearValue(current, precision)) - step;
+      const newValue = Number(clearValue(current, precision, decimal)) - step;
       const newValueStr = fitToCurrency(String(newValue), precision, decimal, thousand, prefix, suffix, true);
       if (inputRef.current) {
         if (typeof minValue === 'number') {
@@ -187,7 +188,7 @@ export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
     };
     const handlePlus = () => {
       const current = inputRef.current?.value || '';
-      const newValue = Number(clearValue(current, precision)) + step;
+      const newValue = Number(clearValue(current, precision, decimal)) + step;
       const newValueStr = fitToCurrency(String(newValue), precision, decimal, thousand, prefix, suffix, true);
 
       if (inputRef.current) {
@@ -204,8 +205,22 @@ export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       const newVal = event.currentTarget.value;
 
+      if (typeof minValue === 'number' && newVal) {
+        const minusDsb = Number(clearValue(newVal, precision, decimal)) - step < minValue;
+        minusDisabled !== minusDsb && setMinusDisabled(minusDsb);
+      }
+      if (typeof maxValue === 'number' && newVal) {
+        const plusDsb = Number(clearValue(newVal, precision, decimal)) + step > maxValue;
+        plusDisabled !== plusDsb && setPlusDisabled(plusDsb);
+      }
+      if (newVal === '') {
+        // когда в инпут ничего не введено, кнопки +/- не должны быть задизейблены
+        minusDisabled && setMinusDisabled(false);
+        plusDisabled && setPlusDisabled(false);
+      }
+
       const fullValue = newVal;
-      const shortValue = clearValue(newVal, precision);
+      const shortValue = clearValue(newVal, precision, decimal);
 
       onChange?.(fullValue, shortValue);
     };
@@ -232,3 +247,5 @@ export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
     );
   },
 );
+
+NumberInput.displayName = 'NumberInput';

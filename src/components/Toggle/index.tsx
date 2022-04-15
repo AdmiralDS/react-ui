@@ -70,7 +70,7 @@ const Label = styled.div<{
   display: flex;
   flex-direction: column;
   ${({ position }) => (position === 'right' ? `margin-left: ${LABEL_MARGIN};` : `margin-right: ${LABEL_MARGIN};`)}
-  ${({ dimension }) => (dimension === 's' ? typography['Additional/XS'] : typography['Additional/M'])}
+  ${({ dimension }) => (dimension === 's' ? typography['Body/Body 2 Short'] : typography['Body/Body 1 Short'])}
   color: ${({ disabled, theme }) => (disabled ? theme.color.text.tertiary : theme.color.text.primary)};
 `;
 
@@ -79,7 +79,7 @@ const Hint = styled.div<{
   disabled: boolean;
 }>`
   margin-top: 4px;
-  ${({ dimension }) => (dimension === 's' ? typography['Caption/XS'] : typography['Additional/XS'])}
+  ${({ dimension }) => (dimension === 's' ? typography['Caption/Caption 1'] : typography['Body/Body 2 Short'])}
   color: ${({ theme, disabled }) => (disabled ? theme.color.text.tertiary : theme.color.text.secondary)};
 `;
 
@@ -147,3 +147,5 @@ export const Toggle = React.forwardRef<HTMLInputElement, ToggleProps>(
     );
   },
 );
+
+Toggle.displayName = 'Toggle';

@@ -75,7 +75,7 @@ Object {
   height: 8px;
   border-radius: 50%;
   margin-right: 6px;
-  background: #05A13A;
+  background: #2ABB5B;
 }
 
 <body>
@@ -167,7 +167,7 @@ Object {
   height: 8px;
   border-radius: 50%;
   margin-right: 6px;
-  background: #05A13A;
+  background: #2ABB5B;
 }
 
 <div>

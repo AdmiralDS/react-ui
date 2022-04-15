@@ -1,14 +1,12 @@
 import * as React from 'react';
-import ReactDOM from 'react-dom';
 
 import type { RefCallback, RefObject } from '../common/utils/handleRef';
 import { handleRef } from '../common/utils/handleRef';
 import { getScrollableParents } from '../common/utils/getScrollableParents';
 
-import { AnchorWrapper } from './AnchorWrapper';
-import { TooltipWrapper } from './TooltipWrapper';
-import type { CalculationResult, TooltipPositionType } from './utils';
-import { calculateDirection, getContainingBlockOffset } from './utils';
+import { TooltipWrapper, FakeTarget, Portal, AnchorWrapper, TooltipContainer } from './style';
+import type { TooltipPositionType } from './utils';
+import { getTooltipDirection } from './utils';
 
 export interface ITooltipProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Функция, которая возвращает реакт-компонент с контентом тултипа. Если этому компоненту нужны props, используйте замыкание */
@@ -31,7 +29,7 @@ const TOOLTIP_DELAY = 1500;
 
 export const Tooltip: React.FC<ITooltipProps> = ({
   renderContent,
-  container,
+  container: userContainer,
   withDelay,
   tooltipRef,
   tooltipPosition,
@@ -42,31 +40,54 @@ export const Tooltip: React.FC<ITooltipProps> = ({
 }) => {
   const anchorElementRef = React.useRef<HTMLDivElement | null>(null);
   const tooltipElementRef = React.useRef<HTMLDivElement | null>(null);
-  const portal: Element = container || document.body;
+  const container: Element = userContainer || document.body;
   let scrollableParents: Array<Element> | undefined = undefined;
   let showTooltipTimer: any;
 
   const [visible, setVisible] = React.useState<boolean>(false);
+  const [portalFlexDirection, setPortalFlexDirection] = React.useState<
+    undefined | 'row' | 'row-reverse' | 'column' | 'column-reverse'
+  >();
+  const [portalFullWidth, setPortalFullWidth] = React.useState(false);
 
   const hideTooltip = () => setVisible(false);
 
   const manageTooltip = () => {
     if (anchorElementRef.current && tooltipElementRef.current) {
-      const directionCalculationResult: CalculationResult = calculateDirection(
-        anchorElementRef.current,
-        tooltipElementRef.current,
-        tooltipPosition,
-      );
-      const { parentTop, parentLeft } = getContainingBlockOffset(portal);
-      const anchorElementRect = anchorElementRef.current.getBoundingClientRect();
-      const tooltipElementRect = tooltipElementRef.current.getBoundingClientRect();
-      const calculatedStyles = directionCalculationResult.getStyles(
-        anchorElementRect,
-        tooltipElementRect,
-        parentTop,
-        parentLeft,
-      );
-      tooltipElementRef.current.style.transform = calculatedStyles;
+      const direction = getTooltipDirection(anchorElementRef.current, tooltipElementRef.current, tooltipPosition);
+      const tooltip = tooltipElementRef.current;
+      switch (direction) {
+        case 'topPageCenter':
+          setPortalFlexDirection('column-reverse');
+          setPortalFullWidth(true);
+          tooltip.style.margin = '0 0 8px 0';
+          break;
+        case 'bottomPageCenter':
+          setPortalFlexDirection('column');
+          setPortalFullWidth(true);
+          tooltip.style.margin = '8px 0 0 0';
+          break;
+        case 'left':
+          setPortalFlexDirection('row-reverse');
+          setPortalFullWidth(false);
+          tooltip.style.margin = '0 8px 0 0';
+          break;
+        case 'right':
+          setPortalFlexDirection('row');
+          setPortalFullWidth(false);
+          tooltip.style.margin = '0 0 0 8px';
+          break;
+        case 'top':
+          setPortalFlexDirection('column-reverse');
+          setPortalFullWidth(false);
+          tooltip.style.margin = '0 0 8px 0';
+          break;
+        case 'bottom':
+        default:
+          setPortalFlexDirection('column');
+          setPortalFullWidth(false);
+          tooltip.style.margin = '8px 0 0 0';
+      }
     }
   };
 
@@ -94,6 +115,14 @@ export const Tooltip: React.FC<ITooltipProps> = ({
     manageTooltip();
   }, [renderContent(), anchorElementRef, tooltipPosition, container]);
 
+  // First container render always happens downward and transparent,
+  // after size and position settled transparency returns to normal
+  React.useEffect(() => {
+    if (tooltipElementRef.current) {
+      tooltipElementRef.current.style.opacity = '1';
+    }
+  }, [tooltipElementRef.current, visible]);
+
   const handleMouseEnter = () => {
     showTooltipTimer = window.setTimeout(
       () => {
@@ -120,13 +149,23 @@ export const Tooltip: React.FC<ITooltipProps> = ({
       id={anchorId}
     >
       {children}
-      {visible &&
-        ReactDOM.createPortal(
-          <TooltipWrapper role="tooltip" ref={attachRef} {...props}>
-            {renderContent()}
-          </TooltipWrapper>,
-          portal,
-        )}
+      {visible && (
+        <Portal
+          targetRef={anchorElementRef}
+          container={container}
+          flexDirection={portalFlexDirection}
+          fullContainerWidth={portalFullWidth}
+        >
+          <FakeTarget />
+          <TooltipWrapper ref={attachRef}>
+            <TooltipContainer role="tooltip" {...props}>
+              {renderContent()}
+            </TooltipContainer>
+          </TooltipWrapper>
+        </Portal>
+      )}
     </AnchorWrapper>
   );
 };
+
+Tooltip.displayName = 'Tooltip';

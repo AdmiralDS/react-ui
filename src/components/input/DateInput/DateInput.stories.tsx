@@ -2,7 +2,7 @@ import React, { ChangeEvent, useState, useEffect } from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { DateInput } from '../DateInput';
 import { withDesign } from 'storybook-addon-designs';
-import { INPUT_DIMENSIONS_VALUES } from '#/components/input/types';
+import { INPUT_DIMENSIONS_VALUES } from '#src/components/input/types';
 
 export default {
   title: 'Input/DateInput',
@@ -12,15 +12,15 @@ export default {
     design: [
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=39%3A53678',
+        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A53678',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=39%3A53728',
+        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A53728',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=39%3A53758',
+        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A53758',
       },
     ],
   },
@@ -28,6 +28,9 @@ export default {
     dimension: {
       options: INPUT_DIMENSIONS_VALUES,
       control: { type: 'radio' },
+    },
+    disabled: {
+      control: { type: 'boolean' },
     },
     defaultIsCalendarOpen: { type: 'boolean' },
     value: { control: { type: 'text', disabled: true }, description: 'Значение DateInput' },
@@ -46,6 +49,10 @@ export default {
     range: {
       control: { type: 'boolean' },
     },
+    placeholder: {
+      type: 'string',
+    },
+    readOnly: { type: 'boolean' },
   },
 } as ComponentMeta<typeof DateInput>;
 
@@ -67,7 +74,15 @@ const Template: ComponentStory<typeof DateInput> = (props) => {
     setValue(inputValue);
     props.onChange?.(e);
   };
-  return <DateInput {...cleanProps} value={localValue} onChange={handleChange} style={{ maxWidth: '30%' }} />;
+  return (
+    <DateInput
+      {...cleanProps}
+      value={localValue}
+      onChange={handleChange}
+      style={{ maxWidth: '30%' }}
+      placeholder={'Some placeholder'}
+    />
+  );
 };
 
 export const DateInputStory = Template.bind({});

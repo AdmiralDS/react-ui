@@ -3,12 +3,12 @@ import styled from 'styled-components';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { ReactComponent as StarSolid } from '@admiral-ds/icons/build/system/StarSolid.svg';
 import { Button } from './index';
-import { PseudoText } from '#/components/skeleton/PseudoText';
-import { PseudoIcon } from '#/components/skeleton/PseudoIcon';
-import { T } from '#/components/T';
-import { Spinner } from '#/components/Spinner';
+import { PseudoText } from '#src/components/skeleton/PseudoText';
+import { PseudoIcon } from '#src/components/skeleton/PseudoIcon';
+import { T } from '#src/components/T';
+import { Spinner } from '#src/components/Spinner';
 import { withDesign } from 'storybook-addon-designs';
-import { filterKeysWithUndefinedValues } from '#/components/common/utils/filterKeysWithUndefinedValues';
+import { filterKeysWithUndefinedValues } from '#src/components/common/utils/filterKeysWithUndefinedValues';
 
 const WrapperButton = styled.div`
   display: flex;
@@ -31,11 +31,11 @@ export default {
     design: [
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=39%3A19734',
+        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A19734',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=39%3A16209',
+        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=108393%3A69845',
       },
     ],
   },
@@ -76,7 +76,7 @@ const ButtonWithIconDemo: ComponentStory<typeof Button> = () => (
   <>
     <WrapperButton>
       <div>
-        <T font="Additional/L" as="div">
+        <T font="Body/Body 1 Long" as="div">
           {' '}
           Dimension - xl
         </T>
@@ -86,7 +86,7 @@ const ButtonWithIconDemo: ComponentStory<typeof Button> = () => (
         </Button>
       </div>
       <div>
-        <T font="Additional/L" as="div">
+        <T font="Body/Body 1 Long" as="div">
           {' '}
           Dimension - l
         </T>
@@ -96,7 +96,7 @@ const ButtonWithIconDemo: ComponentStory<typeof Button> = () => (
         </Button>
       </div>
       <div>
-        <T font="Additional/L" as="div">
+        <T font="Body/Body 1 Long" as="div">
           {' '}
           Dimension - m
         </T>
@@ -106,7 +106,7 @@ const ButtonWithIconDemo: ComponentStory<typeof Button> = () => (
         </Button>
       </div>
       <div>
-        <T font="Additional/L" as="div">
+        <T font="Body/Body 1 Long" as="div">
           {' '}
           Dimension - s
         </T>
@@ -118,7 +118,7 @@ const ButtonWithIconDemo: ComponentStory<typeof Button> = () => (
     </WrapperButton>
     <Separator />
     <div>
-      <T font="Additional/L" as="div">
+      <T font="Body/Body 1 Long" as="div">
         Button with icon stretch
       </T>
       <Button dimension="l" appearance="primary" style={{ width: '100%' }}>
@@ -131,7 +131,7 @@ const ButtonWithIconDemo: ComponentStory<typeof Button> = () => (
 
 const ButtonLoaderDemo: ComponentStory<typeof Button> = () => (
   <div>
-    <T font="Additional/L" as="div">
+    <T font="Body/Body 1 Long" as="div">
       Button with loader
     </T>
     <Separator />
@@ -140,7 +140,7 @@ const ButtonLoaderDemo: ComponentStory<typeof Button> = () => (
     </Button>
     <Separator />
     <div>
-      <T font="Additional/L" as="div">
+      <T font="Body/Body 1 Long" as="div">
         Button with loader stretch
       </T>
       <Separator />

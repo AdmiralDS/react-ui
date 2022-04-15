@@ -1,7 +1,7 @@
 import * as React from 'react';
 import ReactDOM from 'react-dom';
 import { ThemeProvider } from 'styled-components';
-import { LIGHT_THEME } from '#/components/themes';
+import { LIGHT_THEME } from '#src/components/themes';
 
 import { Separator, Wrapper } from './style';
 import { Crumb, CrumbAnchor, Content } from './BreadCrumb';

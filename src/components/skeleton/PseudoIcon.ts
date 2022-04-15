@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import type { Appearance, Dimension } from '#/components/Button/types';
-import { backGroundColorMixin } from '#/components/skeleton/PseudoText';
+import type { Appearance, Dimension } from '#src/components/Button/types';
+import { backGroundColorMixin } from '#src/components/skeleton/PseudoText';
 
 export const PseudoIcon = styled.div<{ dimension: Dimension; appearance: Appearance }>`
   border-radius: 50%;

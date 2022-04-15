@@ -1,7 +1,7 @@
-import { uid } from '#/components/common/uid';
-import { refSetter } from '#/components/common/utils/refSetter';
-import { Field, FieldOwnProps } from '#/components/Field';
-import { TextInput as Input, TextInputProps } from '#/components/input';
+import { uid } from '#src/components/common/uid';
+import { refSetter } from '#src/components/common/utils/refSetter';
+import { Field, FieldOwnProps } from '#src/components/Field';
+import { TextInput as Input, TextInputProps } from '#src/components/input';
 import * as React from 'react';
 
 export interface InputFieldProps extends TextInputProps, Omit<FieldOwnProps, 'inputRef'> {}
@@ -33,7 +33,16 @@ export const InputField = React.forwardRef<HTMLInputElement, InputFieldProps>((p
     maxLength,
     inputRef,
     displayCharacterCounter,
-  };
+    'data-field-id': id,
+    'data-field-name': restProps.name,
+  } as Record<string, any>;
+
+  (Object.keys(restProps) as Array<keyof typeof restProps>).forEach((key) => {
+    if (key.startsWith('data-field')) {
+      fieldContainerProps[key] = restProps[key];
+    }
+  });
+
   const inputProps = {
     ref: refSetter(ref, inputRef),
     id,

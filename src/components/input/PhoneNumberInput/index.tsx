@@ -1,21 +1,30 @@
 import * as React from 'react';
 import styled, { css } from 'styled-components';
-import { changeInputData } from '#/components/common/dom/changeInputData';
-import { refSetter } from '#/components/common/utils/refSetter';
-import { TextInput, TextInputProps } from '#/components/input/TextInput';
-import { Dropdown } from '#/components/Dropdown';
+import { changeInputData } from '#src/components/common/dom/changeInputData';
+import { refSetter } from '#src/components/common/utils/refSetter';
+import { TextInput, TextInputProps } from '#src/components/input/TextInput';
+import { Dropdown } from '#src/components/Dropdown';
 import { ReactComponent as ChevronRightOutline } from '@admiral-ds/icons/build/system/ChevronRightOutline.svg';
-import { countriesList } from '#/components/input/PhoneNumberInput/constants';
-import { CountryBlockProps } from '#/components/input/PhoneNumberInput/CountryBlock';
-import { Flag } from '#/components/input/PhoneNumberInput/Flag';
-import { Dimension } from '#/components/input/PhoneNumberInput/utils';
 import {
-  defaultPhoneNumberInputHandle,
-  ICountry,
-  handler,
-} from '#/components/input/PhoneNumberInput/defaultPhoneNumberInputHandle';
-import { CountriesList } from '#/components/input/PhoneNumberInput/CountriesList';
-import { useEffect } from 'react';
+  COUNTRY_ISO3_CODES,
+  CountryCodes,
+  CountryIso3Code,
+  CountryNames,
+  CountryRusNames,
+} from '#src/components/input/PhoneNumberInput/constants';
+import { Flag } from '#src/components/input/PhoneNumberInput/Flag';
+import { Dimension } from '#src/components/input/PhoneNumberInput/utils';
+import {
+  defaultPhoneNumberInputHandler,
+  clojureHandler,
+} from '#src/components/input/PhoneNumberInput/defaultPhoneNumberInputHandle';
+import { CountriesList, CountryInfo } from '#src/components/input/PhoneNumberInput/CountriesList';
+import { uid } from '#src/components/common/uid';
+import { getIcon } from '#src/components/input/PhoneNumberInput/iconsPack';
+import getFindCountryFunction, {
+  findCountryFunction,
+  CountryPhoneCode,
+} from '#src/components/input/PhoneNumberInput/findCoutryWithPriority';
 
 const Chevron = styled(ChevronRightOutline)`
   transition: all 0.3s;
@@ -23,7 +32,7 @@ const Chevron = styled(ChevronRightOutline)`
   margin-left: 5px;
 
   & path {
-    fill: ${(p) => p.theme.color.basic.tertiary};
+    fill: ${(p) => p.theme.color.text.secondary};
   }
 `;
 
@@ -54,7 +63,6 @@ const CountryContainer = styled.div<{ dimension: Dimension; isOpened?: boolean; 
   top: 50%;
   left: 16px;
   transform: translateY(-50%);
-  z-index: ${(p) => p.theme.zIndex.hint};
   display: flex;
 
   & ${Chevron} {
@@ -71,15 +79,24 @@ const CountryContainer = styled.div<{ dimension: Dimension; isOpened?: boolean; 
 export interface PhoneNumberInputProps extends Omit<TextInputProps, 'value'> {
   value?: string;
   /** Код ISO A3 страны для определния префикса номера по умолчанию */
-  defaultCountry?: string;
+  defaultCountry?: CountryIso3Code;
   /** Список стран для выпадающего списка. Отмечается кодом ISO A3 страны */
-  onlyCountries?: string[];
+  onlyCountries?: Array<CountryIso3Code>;
 }
 
 export const PhoneNumberInput = React.forwardRef<HTMLInputElement, PhoneNumberInputProps>(
-  ({ value = '', disabled = false, dimension = 'xl', defaultCountry = 'RUS', onlyCountries = [], ...props }, ref) => {
-    const handleInput = props.handleInput || defaultPhoneNumberInputHandle;
-    const [selectedCountry, setSelectedCountry] = React.useState<any | null>(null);
+  (
+    {
+      value = '',
+      disabled = false,
+      dimension = 'xl',
+      defaultCountry = 'RUS',
+      onlyCountries = COUNTRY_ISO3_CODES,
+      handleInput,
+      ...props
+    },
+    ref,
+  ) => {
     const [activeIndex, setActiveIndex] = React.useState<number>(-1);
     const [selectedIndex, setSelectedIndex] = React.useState<number>(-1);
     const inputContainerRef = React.useRef<HTMLDivElement>(null);
@@ -87,74 +104,74 @@ export const PhoneNumberInput = React.forwardRef<HTMLInputElement, PhoneNumberIn
     const containerRef = React.useRef<HTMLDivElement>(null);
     const [isOpened, setIsOpened] = React.useState<boolean>(false);
 
-    const getFilteredCountryList = (
-      countryCodes: CountryBlockProps['iso3'][],
-      sourceCountryList: CountryBlockProps[],
-    ) => {
-      if (countryCodes.length === 0) return sourceCountryList.sort((a, b) => a.value.localeCompare(b.value, 'ru'));
-      return sourceCountryList
-        .filter((country) => countryCodes.includes(country.iso3))
-        .sort((a, b) => a.value.localeCompare(b.value, 'ru'));
-    };
+    const countryList = React.useMemo<CountryInfo[]>(() => {
+      return onlyCountries
+        .reduce((acc: CountryPhoneCode[], iso3) => {
+          const codes = CountryCodes[iso3];
+          if (codes) {
+            codes.forEach((code) => acc.push({ iso3, code }));
+          }
+          return acc;
+        }, [])
+        .map((item) => {
+          const { iso3, code } = item,
+            name = CountryNames[iso3];
+          return {
+            ...item,
+            rusName: CountryRusNames[iso3],
+            SvgFlag: getIcon(name),
+            uid: uid(),
+            handleInput: handleInput ? handleInput : clojureHandler(code),
+          };
+        })
+        .sort((a, b) => a.rusName.localeCompare(b.rusName, 'ru'));
+    }, [onlyCountries]);
 
-    const filteredList: Array<CountryBlockProps> = React.useMemo(() => {
-      return getFilteredCountryList(onlyCountries, countriesList);
-    }, [onlyCountries, countriesList]);
+    const findCountry = React.useMemo<findCountryFunction>(() => getFindCountryFunction(countryList), [countryList]);
 
-    useEffect(() => {
-      handler.setCountriesList(filteredList as Array<ICountry>);
-    }, [filteredList]);
+    const currentCountry = React.useMemo<CountryPhoneCode | null>(() => findCountry(value), [value]);
+    const currentCountryIndex = currentCountry
+      ? countryList.findIndex((item) => item.iso3 === currentCountry.iso3 && item.code === currentCountry.code)
+      : -1;
+    const selectedCountryCode = selectedIndex > -1 ? countryList[selectedIndex].code : null;
+    const sameCountryCode = currentCountry?.code === selectedCountryCode;
+
+    if (currentCountryIndex !== selectedIndex && !sameCountryCode) setSelectedIndex(currentCountryIndex);
+
+    const handleInputRef =
+      currentCountryIndex > -1 ? countryList[currentCountryIndex].handleInput : defaultPhoneNumberInputHandler;
 
     React.useEffect(() => {
-      if (defaultCountry && selectedCountry === null) {
-        const index = filteredList.findIndex((country) => country.iso3 === defaultCountry);
+      if (defaultCountry && selectedIndex === -1) {
+        const index = countryList.findIndex((country) => country.iso3 === defaultCountry);
         if (index > -1) {
           selectCountry(index);
         }
       }
     }, [defaultCountry]);
 
-    React.useEffect(() => {
-      if (selectedCountry !== handler.currentCountry) {
-        setSelectedCountry(handler.currentCountry);
-        if (isOpened) {
-          setActiveIndex(handler.currentCountryIndex);
-        } else {
-          setSelectedIndex(handler.currentCountryIndex);
-        }
-      }
-    }, [value]);
-
     const handleButtonClick = () => {
       setIsOpened((prev) => !prev);
     };
 
     const selectCountry = (indexNumber: number) => {
-      if (!inputRef.current) return;
+      if (!inputRef.current || indexNumber === selectedIndex) return;
 
-      const hasOldSelected = !!selectedCountry;
+      const hasOldSelected = selectedIndex > -1;
+
+      const oldCode = hasOldSelected ? countryList[selectedIndex].code.replace(/[^0-9+]/g, '') : '';
+      const newCode = countryList[indexNumber].code.replace(/[^0-9+]/g, '');
+
+      changeInputData(inputRef.current, {
+        value: hasOldSelected
+          ? value.replace(/\s+/g, '').replace(oldCode, newCode)
+          : newCode + value.replace(/\s+/g, ''),
+        selectionStart: 1,
+        selectionEnd: newCode.length,
+      });
 
       setSelectedIndex(indexNumber);
-
-      const country = filteredList[indexNumber];
-      if (country) {
-        setSelectedCountry(country);
-        handler.setSelectedCountry(country as ICountry);
-
-        handler.beginDirectlyChange();
-        try {
-          changeInputData(inputRef.current, {
-            value: hasOldSelected
-              ? value
-                  .replace(/\s+/g, '')
-                  .replace(selectedCountry.code.replace(/[^0-9+]/g, ''), country.code.replace(/[^0-9+]/g, ''))
-              : country.code.replace(/[^0-9+]/g, '') + value.replace(/\s+/g, ''),
-          });
-        } finally {
-          handler.endDirectlyChange();
-          setIsOpened(false);
-        }
-      }
+      setIsOpened(false);
     };
 
     const handleKeyUp = (e: React.KeyboardEvent) => {
@@ -162,6 +179,7 @@ export const PhoneNumberInput = React.forwardRef<HTMLInputElement, PhoneNumberIn
         case 'Enter':
           if (isOpened && activeIndex > -1) {
             selectCountry(activeIndex);
+            e.preventDefault();
           }
           break;
         case 'ArrowUp':
@@ -171,7 +189,7 @@ export const PhoneNumberInput = React.forwardRef<HTMLInputElement, PhoneNumberIn
           }
 
           if (activeIndex <= 0) {
-            setActiveIndex(filteredList.length - 1);
+            setActiveIndex(countryList.length - 1);
           } else {
             setActiveIndex(activeIndex - 1);
           }
@@ -181,7 +199,7 @@ export const PhoneNumberInput = React.forwardRef<HTMLInputElement, PhoneNumberIn
             setIsOpened(true);
             break;
           }
-          if (activeIndex >= filteredList.length - 1) {
+          if (activeIndex >= countryList.length - 1) {
             setActiveIndex(0);
           } else {
             setActiveIndex(activeIndex + 1);
@@ -209,28 +227,31 @@ export const PhoneNumberInput = React.forwardRef<HTMLInputElement, PhoneNumberIn
       setIsOpened(false);
     };
 
-    const IconComponent = () => {
-      if (selectedCountry && selectedCountry.Component) {
-        return <Flag dimension={dimension} Component={selectedCountry.Component} />;
+    const IconComponent = React.useMemo<JSX.Element | null>(() => {
+      if (selectedIndex > -1) {
+        const SvgComponent = countryList[selectedIndex].SvgFlag;
+        return SvgComponent ? <Flag dimension={dimension} Component={SvgComponent} /> : null;
       }
       return null;
-    };
+    }, [selectedIndex]);
 
-    useEffect(() => {
+    React.useEffect(() => {
       setActiveIndex(isOpened ? selectedIndex : -1);
     }, [isOpened]);
 
+    React.useEffect(() => {
+      if (isOpened) {
+        setActiveIndex(selectedIndex);
+      }
+    }, [selectedIndex]);
+
     return (
       <PhoneContainer ref={containerRef} dimension={dimension} disabled={disabled}>
-        <CountryContainer dimension={dimension} isOpened={isOpened} disabled={disabled}>
-          {IconComponent()}
-          <Chevron onClick={handleButtonClick} />
-        </CountryContainer>
         <TextInput
           {...props}
           type="tel"
           ref={refSetter(ref, inputRef)}
-          handleInput={handleInput}
+          handleInput={handleInputRef}
           containerRef={inputContainerRef}
           value={value}
           disabled={disabled}
@@ -247,16 +268,22 @@ export const PhoneNumberInput = React.forwardRef<HTMLInputElement, PhoneNumberIn
           {isOpened && !disabled && (
             <Dropdown targetRef={inputRef} onClickOutside={clickOutside}>
               <CountriesList
-                countries={filteredList}
-                selectedIndex={selectedIndex}
+                countries={countryList}
                 activeIndex={activeIndex}
                 dimension={dimension}
                 onItemClick={selectCountry}
+                onActivateItem={(index: number) => setActiveIndex(index)}
               />
             </Dropdown>
           )}
         </TextInput>
+        <CountryContainer dimension={dimension} isOpened={isOpened} disabled={disabled}>
+          {IconComponent}
+          <Chevron onClick={handleButtonClick} />
+        </CountryContainer>
       </PhoneContainer>
     );
   },
 );
+
+PhoneNumberInput.displayName = 'PhoneNumberInput';

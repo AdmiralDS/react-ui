@@ -1,7 +1,7 @@
 import { HTMLAttributes, FC, ReactNode } from 'react';
 import * as React from 'react';
 import styled, { css, DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
-import { typography } from '#/components/Typography';
+import { typography } from '#src/components/Typography';
 
 type Dimension = 'm' | 's';
 
@@ -31,7 +31,7 @@ const StatusContainer = styled.div<{
   align-items: center;
   flex-direction: ${(p) => (p.displayRight ? 'row' : 'row-reverse')};
   height: ${(p) => (p.dimension === 'm' ? '24px' : '20px')};
-  ${(p) => (p.dimension === 'm' ? typography['Additional/L'] : typography['Additional/S'])}
+  ${(p) => (p.dimension === 'm' ? typography['Body/Body 1 Long'] : typography['Body/Body 2 Long'])}
   > ${Circle} {
     width: ${(p) => (p.dimension === 'm' ? '20px' : '16px')};
     height: ${(p) => (p.dimension === 'm' ? '20px' : '16px')};
@@ -67,3 +67,5 @@ export const StatusIndicator: FC<StatusIndicatorProps> = ({
     </StatusContainer>
   );
 };
+
+StatusIndicator.displayName = 'StatusIndicator';

@@ -1,14 +1,14 @@
-import { ComponentDimension } from '#/components/input';
-import type { InputStatus } from '#/components/input';
-import { StatusIcon } from '#/components/input/StatusIcon';
-import { OpenStatusButton } from '#/components/OpenStatusButton';
+import { ComponentDimension } from '#src/components/input';
+import type { InputStatus } from '#src/components/input';
+import { StatusIcon } from '#src/components/input/StatusIcon';
+import { OpenStatusButton } from '#src/components/OpenStatusButton';
 import type { HTMLAttributes, KeyboardEvent, ReactElement, ReactNode } from 'react';
 import * as React from 'react';
 import styled, { css, DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
-import { keyboardKey } from '#/components/common/keyboardKey';
-import { refSetter } from '#/components/common/utils/refSetter';
-import { Dropdown } from '#/components/Dropdown';
-import { TYPOGRAPHY } from '#/components/Typography';
+import { keyboardKey } from '#src/components/common/keyboardKey';
+import { refSetter } from '#src/components/common/utils/refSetter';
+import { Dropdown } from '#src/components/Dropdown';
+import { TYPOGRAPHY } from '#src/components/Typography';
 
 export const SELECT_DIMENSIONS = ['xl', 'm', 's'] as const;
 export type SelectDimension = typeof SELECT_DIMENSIONS[number];
@@ -111,6 +111,7 @@ const IconPanel = styled.div<{ disabled?: boolean; dimension?: ComponentDimensio
 const SelectWrapper = styled.div<{
   disabled?: boolean;
   dimension: SelectDimension;
+  focused: boolean;
 }>`
   box-sizing: border-box;
 
@@ -126,8 +127,9 @@ const SelectWrapper = styled.div<{
   border-radius: 4px;
   ${heights};
 
-  border-color: ${({ theme, disabled }) => {
+  border-color: ${({ theme, disabled, focused }) => {
     if (disabled) return 'transparent';
+    if (focused) return theme.color.basic.press;
     return theme.color.basic.tertiary;
   }};
 
@@ -237,21 +239,71 @@ export const Select = React.forwardRef<HTMLDivElement, SelectProps>(
     ref,
   ) => {
     const [open, setOpen] = React.useState(false);
+    const [hovered, setHovered] = React.useState('');
     const refWrapper = React.useRef<HTMLInputElement>(null);
+    const childrenArray = React.Children.toArray(children);
+    const findOptionValue = (option: (React.ReactChild | React.ReactFragment | React.ReactPortal)[]) => {
+      if (React.isValidElement(option[0]) && 'props' in option[0]) {
+        return option[0].props.value;
+      }
+    };
+
+    const hoverIndex = React.useMemo(
+      () =>
+        childrenArray?.findIndex((child) => {
+          if (React.isValidElement(child) && 'props' in child) {
+            return child.props.value === +hovered;
+          }
+          return -1;
+        }),
+      [childrenArray, hovered],
+    );
+
+    const findNextHoverValue = React.useCallback(() => {
+      const nextAbledOptionValue = findOptionValue(childrenArray.slice(hoverIndex + 1));
+      if (nextAbledOptionValue) return nextAbledOptionValue;
+      return findOptionValue(childrenArray);
+    }, [hoverIndex, childrenArray]);
+
+    const findPrevHoverValue = React.useCallback(() => {
+      const sliceInd = hoverIndex === -1 ? undefined : hoverIndex;
+      const prevAbledOptionValue = findOptionValue(childrenArray.slice(0, sliceInd).reverse());
+      if (prevAbledOptionValue) return prevAbledOptionValue;
+      return findOptionValue(childrenArray.slice().reverse());
+    }, [hoverIndex, childrenArray]);
 
     const handleKeyDownItem = (e: KeyboardEvent) => {
       const code = keyboardKey.getCode(e);
       e.preventDefault();
-      const value = (e?.currentTarget as HTMLElement).getAttribute('value') ?? '';
-      if (code === keyboardKey.Enter || code === keyboardKey[' ']) {
-        setOpen(false);
-        onClose?.();
-        onChange && onChange(value);
-        (refWrapper.current as HTMLElement).focus();
-      } else if (code === keyboardKey.Escape || code === keyboardKey.Tab) {
-        onClose?.();
-        setOpen(false);
-        (refWrapper.current as HTMLElement).focus();
+      switch (code) {
+        case keyboardKey[' ']:
+        case keyboardKey.Enter: {
+          setOpen(false);
+          onClose?.();
+          onChange && onChange(hovered);
+          setHovered(hovered);
+          (refWrapper.current as HTMLElement).focus();
+          break;
+        }
+        case keyboardKey.ArrowUp: {
+          const prevValue = findPrevHoverValue();
+          if (!prevValue) break;
+          setHovered(prevValue);
+          break;
+        }
+        case keyboardKey.ArrowDown: {
+          const nextValue = findNextHoverValue();
+          if (!nextValue) break;
+          setHovered(nextValue);
+          break;
+        }
+        case keyboardKey.Tab:
+        case keyboardKey.Escape: {
+          onClose?.();
+          setOpen(false);
+          (refWrapper.current as HTMLElement).focus();
+          break;
+        }
       }
     };
 
@@ -277,6 +329,7 @@ export const Select = React.forwardRef<HTMLDivElement, SelectProps>(
               onKeyDown: handleKeyDownItem,
               dimension: dimension === 'xl' ? 'l' : dimension,
               selected: value?.toString() === child.props.value?.toString(),
+              hovered: hovered === child.props.value,
               ...child.props,
             });
           });
@@ -288,6 +341,7 @@ export const Select = React.forwardRef<HTMLDivElement, SelectProps>(
           onKeyDown: handleKeyDownItem,
           dimension: dimension === 'xl' ? 'l' : dimension,
           selected: value?.toString() === child.props.value?.toString(),
+          hovered: hovered === child.props.value,
           ...child.props,
         });
       });
@@ -360,6 +414,7 @@ export const Select = React.forwardRef<HTMLDivElement, SelectProps>(
         data-status={status}
         data-read-only={readOnly ? true : undefined}
         aria-readonly={readOnly ? true : undefined}
+        focused={open}
       >
         <SelectComponent dimension={dimension} disabled={disabled}>
           {renderSelectValue()}
@@ -383,3 +438,5 @@ export const Select = React.forwardRef<HTMLDivElement, SelectProps>(
     );
   },
 );
+
+Select.displayName = 'Select';

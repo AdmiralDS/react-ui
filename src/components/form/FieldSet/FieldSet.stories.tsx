@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { CheckboxField } from '#/components/form';
+import { CheckboxField } from '#src/components/form';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import styled from 'styled-components';
 
-import { RadioButton } from '#/components/RadioButton';
-import { FieldSet, PropsType as FieldSetPropsType } from '#/components/form/FieldSet';
+import { RadioButton } from '#src/components/RadioButton';
+import { FieldSet, PropsType as FieldSetPropsType } from '#src/components/form/FieldSet';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';

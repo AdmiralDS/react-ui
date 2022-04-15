@@ -1,8 +1,8 @@
-import { INPUT_DIMENSIONS_VALUES } from '#/components/input';
-import { Spinner } from '#/components/Spinner';
+import { INPUT_DIMENSIONS_VALUES } from '#src/components/input';
+import { Spinner } from '#src/components/Spinner';
 import * as React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import { InputField } from '#/components/form/InputField';
+import { InputField } from '#src/components/form/InputField';
 import { withDesign } from 'storybook-addon-designs';
 import styled from 'styled-components';
 
@@ -14,15 +14,15 @@ export default {
     design: [
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=39%3A60376',
+        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A60376',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=39%3A60982',
+        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A60982',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=39%3A61046',
+        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A61046',
       },
     ],
   },
@@ -53,6 +53,9 @@ export default {
       control: { type: 'boolean' },
     },
     icons: {
+      control: false,
+    },
+    handleInput: {
       control: false,
     },
   },
@@ -88,7 +91,7 @@ const Template: ComponentStory<typeof InputField> = (props) => {
         status="success"
         displayStatusIcon
         label="Поле с индикацией успеха"
-        extraText="Поле не прошло валидацию, необходимо ввести корректное значение"
+        extraText="Поле успешно прошло валидацию"
       />
       <InputField
         displayClearIcon

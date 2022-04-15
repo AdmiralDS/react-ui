@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
-import { typography } from '#/components/Typography';
+import { typography } from '#src/components/Typography';
 
 import { ProgressStepper } from '../ProgressStepper';
 
@@ -19,7 +19,7 @@ const Separator = styled.div`
 
 const Sect = styled.div`
   margin-bottom: 60px;
-  ${typography['Additional/L']}
+  ${typography['Body/Body 1 Long']}
   label {
     display: block;
     margin-bottom: 20px;
@@ -27,7 +27,7 @@ const Sect = styled.div`
 `;
 
 const H6 = styled.div`
-  ${typography['Main/XS']}
+  ${typography['Subtitle/Subtitle 1']}
 `;
 
 const Section = ({ title, children }: any) => (
@@ -62,7 +62,7 @@ export default {
     layout: 'centered',
     design: {
       type: 'figma',
-      url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=37%3A16832',
+      url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=37%3A16832',
     },
   },
   argTypes: {

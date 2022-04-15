@@ -1,7 +1,7 @@
 import React, { HTMLAttributes } from 'react';
 import type { FC } from 'react';
 import styled from 'styled-components';
-import { typography } from '#/components/Typography';
+import { typography } from '#src/components/Typography';
 
 import {
   convertNumberToIntegerPercent,
@@ -38,23 +38,23 @@ const Header = styled.div<{ mobile?: boolean }>`
 `;
 
 const ActiveStep = styled.div`
-  ${typography['Additional/S']}
+  ${typography['Body/Body 2 Long']}
   color: ${({ theme }) => theme.color.text.primary};
 `;
 
 const ProgressText = styled.div`
   white-space: nowrap;
   flex-shrink: 0;
+  ${typography['Caption/Caption 1']}
   color: ${({ theme }) => theme.color.text.secondary};
-  ${typography['Caption/XS']}
 `;
 
 const NextStep = styled.div`
   width: 100%;
   align-text: left;
   margin-top: 8px;
+  ${typography['Caption/Caption 1']}
   color: ${({ theme }) => theme.color.text.secondary};
-  ${typography['Caption/XS']}
 `;
 
 export interface ProgressStepperProps extends HTMLAttributes<HTMLDivElement> {
@@ -114,3 +114,5 @@ export const ProgressStepper: FC<ProgressStepperProps> = ({
     </Wrapper>
   );
 };
+
+ProgressStepper.displayName = 'ProgressStepper';

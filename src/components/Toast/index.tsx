@@ -2,7 +2,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { useToast } from './useToast';
 import type { PositionToasts } from './ToastProvider';
-import { AnimationToast } from '#/components/Toast/AnimationToast';
+import { AnimationToast } from '#src/components/Toast/AnimationToast';
 
 const Container = styled.div<{ position: PositionToasts }>`
   position: fixed;
@@ -39,3 +39,5 @@ export const Toast = ({ position = 'top-right', ...props }: ToastTransitionProps
 
 export * from './useToast';
 export * from './ToastProvider';
+
+Toast.displayName = 'Toast';

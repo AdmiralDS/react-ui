@@ -13,11 +13,12 @@ Object {
 }
 
 .c6 *[fill^='#'] {
-  fill: #8A96A8;
+  fill: #626F84;
 }
 
 .c6.c6[data-disabled] {
   pointer-events: none;
+  fill: #A7B0BE;
 }
 
 .c6:not([data-disabled]):hover {
@@ -117,7 +118,7 @@ Object {
 
 [data-focus-within] .c0,
 .c1:focus {
-  border-color: #083F91;
+  border-color: #0949AA;
 }
 
 .c1:hover {
@@ -137,7 +138,7 @@ Object {
 }
 
 .c1[data-status='success'] {
-  border-color: #05A13A;
+  border-color: #2ABB5B;
 }
 
 .c4 {
@@ -186,11 +187,12 @@ Object {
 }
 
 .c6 *[fill^='#'] {
-  fill: #8A96A8;
+  fill: #626F84;
 }
 
 .c6.c6[data-disabled] {
   pointer-events: none;
+  fill: #A7B0BE;
 }
 
 .c6:not([data-disabled]):hover {
@@ -290,7 +292,7 @@ Object {
 
 [data-focus-within] .c0,
 .c1:focus {
-  border-color: #083F91;
+  border-color: #0949AA;
 }
 
 .c1:hover {
@@ -310,7 +312,7 @@ Object {
 }
 
 .c1[data-status='success'] {
-  border-color: #05A13A;
+  border-color: #2ABB5B;
 }
 
 .c4 {
@@ -414,11 +416,12 @@ Object {
 }
 
 .c6 *[fill^='#'] {
-  fill: #8A96A8;
+  fill: #626F84;
 }
 
 .c6.c6[data-disabled] {
   pointer-events: none;
+  fill: #A7B0BE;
 }
 
 .c6:not([data-disabled]):hover {
@@ -518,7 +521,7 @@ Object {
 
 [data-focus-within] .c0,
 .c1:focus {
-  border-color: #083F91;
+  border-color: #0949AA;
 }
 
 .c1:hover {
@@ -538,7 +541,7 @@ Object {
 }
 
 .c1[data-status='success'] {
-  border-color: #05A13A;
+  border-color: #2ABB5B;
 }
 
 .c4 {
@@ -587,11 +590,12 @@ Object {
 }
 
 .c6 *[fill^='#'] {
-  fill: #8A96A8;
+  fill: #626F84;
 }
 
 .c6.c6[data-disabled] {
   pointer-events: none;
+  fill: #A7B0BE;
 }
 
 .c6:not([data-disabled]):hover {
@@ -691,7 +695,7 @@ Object {
 
 [data-focus-within] .c0,
 .c1:focus {
-  border-color: #083F91;
+  border-color: #0949AA;
 }
 
 .c1:hover {
@@ -711,7 +715,7 @@ Object {
 }
 
 .c1[data-status='success'] {
-  border-color: #05A13A;
+  border-color: #2ABB5B;
 }
 
 .c4 {

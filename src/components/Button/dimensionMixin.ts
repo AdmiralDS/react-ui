@@ -1,12 +1,12 @@
 import { css } from 'styled-components';
-import { typography } from '#/components/Typography';
+import { typography } from '#src/components/Typography';
 
 const defaultDimensionMixin = css<{ displayAsSquare?: boolean }>`
   padding: 0;
   height: 56px;
   ${(props) => (props.displayAsSquare ? 'width: 56px;' : 'padding: 0 30px;')}
 
-  ${typography['Button/M']}
+  ${typography['Button/Button 1']}
 `;
 
 export const dimensionMixin = css<{ displayAsSquare?: boolean }>`
@@ -29,6 +29,6 @@ export const dimensionMixin = css<{ displayAsSquare?: boolean }>`
   &[data-dimension='s'] {
     height: 32px;
     ${(props) => (props.displayAsSquare ? 'width: 32px;' : 'padding: 0 14px;')}
-    ${typography['Button/S']}
+    ${typography['Button/Button 2']}
   }
 `;

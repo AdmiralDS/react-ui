@@ -5,12 +5,12 @@ import { Select, SELECT_DIMENSIONS } from './index';
 import { withDesign } from 'storybook-addon-designs';
 import { ReactComponent as CardSolid } from '@admiral-ds/icons/build/finance/CardSolid.svg';
 import { ReactComponent as StarSolid } from '@admiral-ds/icons/build/system/StarSolid.svg';
-import { DropDownItem } from '#/components/DropDownItem';
+import { DropDownItem } from '#src/components/DropDownItem';
 import { typography } from '../Typography';
-import { Tooltip } from '#/components/Tooltip';
+import { Tooltip } from '#src/components/Tooltip';
 
 const StyledText = styled.div`
-  ${typography['Additional/S']}
+  ${typography['Body/Body 2 Long']}
   color: ${({ theme }) => theme.color.text.primary};
   pointer-events: none;
 `;
@@ -66,11 +66,11 @@ export default {
     design: [
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=39%3A72270',
+        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A72270',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=39%3A72636',
+        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A72636',
       },
     ],
   },
@@ -116,7 +116,13 @@ const Template: ComponentStory<typeof Select> = (props) => {
   };
 
   return (
-    <Select {...props} value={selectValue} placeholder={'Placeholder'} onChange={handleChange}>
+    <Select
+      {...props}
+      value={selectValue}
+      placeholder={'Placeholder'}
+      onChange={handleChange}
+      renderInputValue={(value) => options.find((option) => option.value == value)?.label}
+    >
       {options.map((item) => {
         return (
           <DropDownItem role="option" value={item.value} key={item.id}>

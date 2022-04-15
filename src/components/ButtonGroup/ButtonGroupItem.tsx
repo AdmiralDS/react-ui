@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
-import { typography } from '#/components/Typography';
-import { BadgeComponent } from '#/components/Badge';
+import { typography } from '#src/components/Typography';
+import { BadgeComponent } from '#src/components/Badge';
 
 export type ButtonGroupItemProps = {
   /** Активная кнопка */
@@ -35,7 +35,7 @@ export const ButtonGroupItem = styled.button<ButtonGroupItemProps>`
   background-color: ${({ theme, disabled, active }) =>
     active && !disabled ? theme.color.background.primary : 'transparent'};
 
-  ${typography['Button/M']};
+  ${typography['Button/Button 1']};
   white-space: nowrap;
 
   ${colorMixin};
@@ -46,8 +46,7 @@ export const ButtonGroupItem = styled.button<ButtonGroupItemProps>`
   }
 
   & *[fill^='#'] {
-    fill: ${({ active, disabled, theme }) => {
-      if (active) return theme.color.text.primary;
+    fill: ${({ disabled, theme }) => {
       if (disabled) return theme.color.text.tertiary;
       return theme.color.text.secondary;
     }};
@@ -62,7 +61,7 @@ export const ButtonGroupItem = styled.button<ButtonGroupItemProps>`
   }
 
   & ${BadgeComponent} {
-    background-color: ${(p) => (p.active ? p.theme.color.basic.tertiary : p.theme.color.background.primary)};
+    background-color: ${(p) => (p.active ? p.theme.color.text.secondary : p.theme.color.background.primary)};
     color: ${(p) => (p.active ? p.theme.color.text.staticWhite : p.theme.color.text.secondary)};
   }
 

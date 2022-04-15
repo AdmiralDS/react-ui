@@ -1,13 +1,13 @@
-import { HintDialog } from '#/components/Hint/styled';
-import { INPUT_DIMENSIONS_VALUES } from '#/components/input';
+import { HintDialog } from '#src/components/Hint/style';
+import { INPUT_DIMENSIONS_VALUES } from '#src/components/input';
 import * as React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import { TextField } from '#/components/form/TextField';
+import { TextField } from '#src/components/form/TextField';
 import { withDesign } from 'storybook-addon-designs';
 import styled from 'styled-components';
 import { ReactComponent as HelpSolidSVG } from '@admiral-ds/icons/build/service/HelpSolid.svg';
-import { Hint } from '#/components/Hint';
-import { T } from '#/components/T';
+import { Hint } from '#src/components/Hint';
+import { T } from '#src/components/T';
 
 export default {
   title: 'Form Field Components/TextField',
@@ -16,7 +16,7 @@ export default {
   parameters: {
     design: {
       type: 'figma',
-      url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=39%3A61323',
+      url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A61323',
     },
   },
   argTypes: {
@@ -49,6 +49,10 @@ export default {
       control: { type: 'boolean' },
     },
 
+    readOnly: {
+      control: { type: 'boolean' },
+    },
+
     displayCharacterCounter: {
       control: { type: 'boolean' },
     },
@@ -59,6 +63,16 @@ export default {
 
     icons: {
       control: false,
+    },
+
+    handleInput: {
+      control: false,
+    },
+    containerRef: {
+      control: false,
+    },
+    autoHeight: {
+      control: { type: 'boolean' },
     },
   },
 } as ComponentMeta<typeof TextField>;
@@ -108,7 +122,7 @@ const Template: ComponentStory<typeof TextField> = (props) => {
           <InverseBackgroundHint
             target={fieldRef}
             renderContent={() => (
-              <InverseColor as="span" font="Additional/S">
+              <InverseColor as="span" font="Body/Body 2 Long">
                 Тема сочинения: "Как я использую компоненты?"
               </InverseColor>
             )}

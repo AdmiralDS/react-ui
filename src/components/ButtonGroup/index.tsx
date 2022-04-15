@@ -2,7 +2,7 @@ import React, { HTMLAttributes, KeyboardEvent, ReactNode, useRef } from 'react';
 import type { Dimension } from './ButtonGroupComponent';
 import { ButtonGroupComponent } from './ButtonGroupComponent';
 import { moveFocus, nextItem, previousItem } from './utils';
-import { keyboardKey } from '#/components/common/keyboardKey';
+import { keyboardKey } from '#src/components/common/keyboardKey';
 
 export interface ButtonGroupProps extends HTMLAttributes<HTMLDivElement> {
   /** Размер компонента */
@@ -47,3 +47,5 @@ export const ButtonGroup = ({
     />
   );
 };
+
+ButtonGroup.displayName = 'ButtonGroup';

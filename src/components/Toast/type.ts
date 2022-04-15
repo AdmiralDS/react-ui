@@ -1,4 +1,4 @@
-import { NotificationProps } from '#/components/Notification';
+import { NotificationProps } from '#src/components/Notification';
 
 export type ID = number | string;
 

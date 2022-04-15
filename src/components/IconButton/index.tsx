@@ -1,7 +1,7 @@
 import * as React from 'react';
 import type { FC, ButtonHTMLAttributes } from 'react';
 import styled from 'styled-components';
-import { Spinner } from '#/components/Spinner';
+import { Spinner } from '#src/components/Spinner';
 
 type Dimension = 'xl' | 'l' | 'm' | 's';
 
@@ -105,7 +105,7 @@ const PseudoIcon = styled.div<{ dimension?: Dimension }>`
   border-radius: 50%;
   width: ${({ dimension }) => (dimension === 's' ? 20 : 24)}px;
   height: ${({ dimension }) => (dimension === 's' ? 20 : 24)}px;
-  background: ${({ theme }) => theme.color.basic.tertiary};
+  background: ${({ theme }) => theme.color.background.tertiary};
 `;
 
 export const IconButton: FC<IconButtonProps> = ({
@@ -143,3 +143,5 @@ export const IconButton: FC<IconButtonProps> = ({
     </StyledButton>
   );
 };
+
+IconButton.displayName = 'IconButton';

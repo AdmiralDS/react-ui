@@ -133,7 +133,7 @@ Object {
   height: 8px;
   border-radius: 50%;
   margin-right: 6px;
-  background: #05A13A;
+  background: #2ABB5B;
 }
 
 .c5 {
@@ -331,7 +331,7 @@ Object {
   height: 8px;
   border-radius: 50%;
   margin-right: 6px;
-  background: #05A13A;
+  background: #2ABB5B;
 }
 
 .c5 {

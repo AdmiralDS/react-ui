@@ -36,13 +36,10 @@ Object {
 }
 
 .c0 *[fill^='#'] {
-  fill: #8A96A8;
+  fill: #626F84;
 }
 
-.c0:hover {
-  background-color: #D3D8DE;
-}
-
+.c0:hover,
 .c0:active {
   color: #2B313B;
   background-color: #D3D8DE;
@@ -65,10 +62,6 @@ Object {
   pointer-events: none;
 }
 
-.c0:hover {
-  color: #2B313B;
-}
-
 .c1 {
   text-overflow: ellipsis;
   overflow: hidden;
@@ -86,7 +79,7 @@ Object {
 }
 
 .c1 svg *[fill^='#'] {
-  fill: #8A96A8;
+  fill: #626F84;
 }
 
 .c2 {
@@ -147,13 +140,10 @@ Object {
 }
 
 .c0 *[fill^='#'] {
-  fill: #8A96A8;
+  fill: #626F84;
 }
 
-.c0:hover {
-  background-color: #D3D8DE;
-}
-
+.c0:hover,
 .c0:active {
   color: #2B313B;
   background-color: #D3D8DE;
@@ -176,10 +166,6 @@ Object {
   pointer-events: none;
 }
 
-.c0:hover {
-  color: #2B313B;
-}
-
 .c1 {
   text-overflow: ellipsis;
   overflow: hidden;
@@ -197,7 +183,7 @@ Object {
 }
 
 .c1 svg *[fill^='#'] {
-  fill: #8A96A8;
+  fill: #626F84;
 }
 
 .c2 {
@@ -316,13 +302,11 @@ Object {
   fill: #0D69F2;
 }
 
-.c0:hover {
-  background-color: #0A54C2;
-}
-
+.c0:hover,
 .c0:active {
-  color: #083F91;
-  background-color: #0D69F2;
+  color: #FFFFFF;
+  background-color: #0A54C2;
+  border-color: #0A54C2;
 }
 
 .c0:focus-visible {
@@ -342,8 +326,12 @@ Object {
   pointer-events: none;
 }
 
-.c0:hover {
-  color: #FFFFFF;
+.c0:hover *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c0:active *[fill^='#'] {
+  fill: #0949AA;
 }
 
 .c1 {
@@ -427,13 +415,11 @@ Object {
   fill: #0D69F2;
 }
 
-.c0:hover {
-  background-color: #0A54C2;
-}
-
+.c0:hover,
 .c0:active {
-  color: #083F91;
-  background-color: #0D69F2;
+  color: #FFFFFF;
+  background-color: #0A54C2;
+  border-color: #0A54C2;
 }
 
 .c0:focus-visible {
@@ -453,8 +439,12 @@ Object {
   pointer-events: none;
 }
 
-.c0:hover {
-  color: #FFFFFF;
+.c0:hover *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c0:active *[fill^='#'] {
+  fill: #0949AA;
 }
 
 .c1 {
@@ -593,13 +583,11 @@ Object {
   fill: #0D69F2;
 }
 
-.c0:hover {
-  background-color: #F1F2F4;
-}
-
+.c0:hover,
 .c0:active {
-  color: #083F91;
+  color: #0A54C2;
   background-color: #F1F2F4;
+  border-color: #0A54C2;
 }
 
 .c0:focus-visible {
@@ -617,6 +605,14 @@ Object {
   right: -5px;
   bottom: -5px;
   pointer-events: none;
+}
+
+.c0:hover *[fill^='#'] {
+  fill: #0A54C2;
+}
+
+.c0:active *[fill^='#'] {
+  fill: #0949AA;
 }
 
 .c1 {
@@ -700,13 +696,11 @@ Object {
   fill: #0D69F2;
 }
 
-.c0:hover {
-  background-color: #F1F2F4;
-}
-
+.c0:hover,
 .c0:active {
-  color: #083F91;
+  color: #0A54C2;
   background-color: #F1F2F4;
+  border-color: #0A54C2;
 }
 
 .c0:focus-visible {
@@ -724,6 +718,14 @@ Object {
   right: -5px;
   bottom: -5px;
   pointer-events: none;
+}
+
+.c0:hover *[fill^='#'] {
+  fill: #0A54C2;
+}
+
+.c0:active *[fill^='#'] {
+  fill: #0949AA;
 }
 
 .c1 {

@@ -1,9 +1,9 @@
 import React from 'react';
 import type { FC } from 'react';
 import { ThemeContext } from 'styled-components';
-import { Tooltip } from '#/components/Tooltip';
-import type { ITooltipProps } from '#/components/Tooltip';
-import { DARK_THEME, LIGHT_THEME } from '#/components/themes';
+import { Tooltip } from '#src/components/Tooltip';
+import type { ITooltipProps } from '#src/components/Tooltip';
+import { DARK_THEME, LIGHT_THEME } from '#src/components/themes';
 
 import { Content, ContentWrapper } from './style';
 import StepperContext from './StepperContext';

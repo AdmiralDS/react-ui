@@ -21,6 +21,7 @@ export type Background = {
   surfaceDanger: string;
   surfaceWarn: string;
   surfaceSuccess: string;
+  page: string;
 };
 
 export type Text = {
@@ -45,27 +46,117 @@ export type Status = {
 };
 
 export type Special = {
-  blue: string;
-  softBlue: string;
+  blueLight: string;
+  /**
+   * @deprecated Используйте цвет blueLight
+   */
   lightBlue: string;
-  softLightBlue: string;
-  turquoise: string;
-  softTurquoise: string;
+  blue: string;
+  blueDeep: string;
+  greenLight: string;
   green: string;
-  softGreen: string;
+  greenDeep: string;
+  tiffany: string;
+  tiffanyDeep: string;
+  tiffanyDark: string;
+  tiffanyBlue: string;
   yellow: string;
-  softYellow: string;
-  red: string;
-  softRed: string;
-  magenta: string;
-  softMagenta: string;
-  purple: string;
-  softPurple: string;
+  orangeLight: string;
+  orange: string;
+  orangeDeep: string;
+  violetLight: string;
   violet: string;
-  softViolet: string;
+  violetDeep: string;
+  fuchsia: string;
+  fuchsiaDeep: string;
+  rainySky: string;
+  night: string;
   gray: string;
+  softBlue: string;
+  softNiceBlue: string;
+  softSkyBlue: string;
+  softTiffany: string;
+  softGreen: string;
+  softYellow: string;
+  softPapaya: string;
+  softRed: string;
+  softPink: string;
+  softPurple: string;
+  softMallowPurple: string;
   softGray: string;
+  /**
+   * @deprecated Используйте другой цвет
+   */
+  softLightBlue: string;
+  /**
+   * @deprecated Используйте другой цвет
+   */
+  turquoise: string;
+  /**
+   * @deprecated Используйте другой цвет
+   */
+  softTurquoise: string;
+  /**
+   * @deprecated Используйте другой цвет
+   */
+  red: string;
+  /**
+   * @deprecated Используйте другой цвет
+   */
+  magenta: string;
+  /**
+   * @deprecated Используйте другой цвет
+   */
+  softMagenta: string;
+  /**
+   * @deprecated Используйте другой цвет
+   */
+  purple: string;
+  /**
+   * @deprecated Используйте другой цвет
+   */
+  softViolet: string;
+  /**
+   * @deprecated Используйте другой цвет или blueDark из SpecialInvert
+   */
   blueDark: string;
+};
+
+export type SpecialInvert = {
+  blueLight: string;
+  blue: string;
+  blueDeep: string;
+  greenLight: string;
+  green: string;
+  greenDeep: string;
+  tiffany: string;
+  tiffanyDeep: string;
+  tiffanyDark: string;
+  tiffanyBlue: string;
+  yellow: string;
+  orangeLight: string;
+  orange: string;
+  orangeDeep: string;
+  violetLight: string;
+  violet: string;
+  violetDeep: string;
+  fuchsia: string;
+  fuchsiaDeep: string;
+  rainySky: string;
+  gray: string;
+  blueDark: string;
+  softBlue: string;
+  softNiceBlue: string;
+  softSkyBlue: string;
+  softTiffany: string;
+  softGreen: string;
+  softYellow: string;
+  softPapaya: string;
+  softRed: string;
+  softPink: string;
+  softPurple: string;
+  softMallowPurple: string;
+  softGray: string;
 };
 
 export type Color = {
@@ -74,4 +165,5 @@ export type Color = {
   text: Text;
   status: Status;
   special: Special;
+  specialInvert: SpecialInvert;
 };

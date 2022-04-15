@@ -34,7 +34,7 @@ const focusStyle = css`
   border: 2px solid ${({ theme }) => theme.color.basic.hover};
 `;
 
-const ButtonComponent = styled.button<{ dimension: Dimension; menuOpened: boolean }>`
+const ButtonComponent = styled.button<{ dimension: Dimension; menuOpened: boolean; isActive: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -55,7 +55,7 @@ const ButtonComponent = styled.button<{ dimension: Dimension; menuOpened: boolea
   }
 
   & *[fill^='#'] {
-    fill: ${({ theme }) => theme.color.basic.tertiary};
+    fill: ${({ theme, isActive: isActive }) => (isActive ? theme.color.basic.press : theme.color.text.secondary)};
   }
 
   &:hover *[fill^='#'] {
@@ -83,12 +83,13 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children?: React.ReactNode;
   dimension?: Dimension;
   menuOpened: boolean;
+  isActive: boolean;
 }
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ dimension = 'l', menuOpened, type = 'button', ...props }, ref) => {
+  ({ dimension = 'l', type = 'button', ...props }, ref) => {
     return (
-      <ButtonComponent ref={ref} dimension={dimension} menuOpened={menuOpened} type={type} {...props}>
+      <ButtonComponent ref={ref} dimension={dimension} type={type} {...props}>
         {dimension === 'l' ? <ButtonL width={18} /> : <ButtonM width={14} />}
       </ButtonComponent>
     );

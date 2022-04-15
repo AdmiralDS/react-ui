@@ -1,5 +1,5 @@
-import { Field } from '#/components/Field';
-import { TextInput } from '#/components/input';
+import { Field } from '#src/components/Field';
+import { TextInput } from '#src/components/input';
 import React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
@@ -23,7 +23,7 @@ export default {
       control: { type: 'boolean' },
     },
     extraText: {
-      control: false,
+      control: { type: 'text' },
     },
   },
 } as ComponentMeta<typeof Field>;
@@ -49,7 +49,7 @@ export const FieldStory = Template.bind({});
 
 FieldStory.args = {
   label: 'some label of wrapped component',
-  id: 'some_id',
+  id: 'some_id_one',
 };
 
 FieldStory.storyName = 'Пример обертывания компонента TextInput';

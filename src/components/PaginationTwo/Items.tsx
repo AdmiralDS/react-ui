@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled, { css } from 'styled-components';
-import { typography } from '#/components/Typography';
+import { typography } from '#src/components/Typography';
 import { ReactComponent as ChevronLeftOutline } from '@admiral-ds/icons/build/system/ChevronLeftOutline.svg';
 import { ReactComponent as ChevronRightOutline } from '@admiral-ds/icons/build/system/ChevronRightOutline.svg';
 
@@ -44,7 +44,7 @@ const Button = styled.button<{ selected: boolean }>`
   justify-content: center;
   border: 2px solid transparent;
   border-radius: 20px;
-  ${typography['Additional/M']}
+  ${typography['Body/Body 1 Short']}
   background: transparent;
   border: none;
   appearance: none;
@@ -129,7 +129,7 @@ const EllipsisWrapper = styled.div`
   height: 40px;
   align-items: center;
   justify-content: center;
-  ${typography['Additional/M']}
+  ${typography['Body/Body 1 Short']}
   background: transparent;
 `;
 

@@ -1,5 +1,5 @@
-import { Button } from '#/components/Button';
-import { Hint, HintProps } from '#/components/Hint';
+import { Button } from '#src/components/Button';
+import { Hint, HintProps } from '#src/components/Hint';
 import React, { useRef } from 'react';
 import styled, { css } from 'styled-components';
 import { ReactComponent as HelpOutline } from '@admiral-ds/icons/build/service/HelpOutline.svg';
@@ -42,15 +42,15 @@ export default {
     design: [
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=37%3A31273',
+        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=37%3A31273',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=37%3A31388',
+        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=37%3A31388',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=37%3A31455',
+        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=37%3A31455',
       },
     ],
     actions: { argTypesRegex: '^on.*' },
@@ -163,7 +163,8 @@ HintPosition.parameters = {
       story: `Компонент имеет 4 варианта позиционирования: снизу справа, снизу слева, сверху справа, 
       сверху слева. Позиции перечислены в порядке приоритета. Данный пример демонстрирует все 4 варианта. Если 
       нужно увидеть расположение хинта сверху, следует прокрутить страницу таким образом, чтобы пространтсва 
-      под кнопками было недостаточно для отображения хинта. `,
+      под кнопками было недостаточно для отображения хинта.\n\nНа экранах мобильных устройств, меньше 640px, 
+      компонент адаптируется по ширине к рабочей области устройства.`,
     },
   },
 };
@@ -198,17 +199,6 @@ HintTarget.parameters = {
   docs: {
     source: {
       type: 'code',
-    },
-  },
-};
-
-export const HintMobile = Template2.bind({});
-HintMobile.args = { isMobile: true, anchorId1: 'hint_pos1_mobile', anchorId2: 'hint_pos2_mobile' };
-HintMobile.storyName = 'Hint. Адаптив.';
-HintMobile.parameters = {
-  docs: {
-    description: {
-      story: `На экранах мобильных устройств, меньше 640px, компонент адаптируется по ширине к рабочей области устройства. `,
     },
   },
 };

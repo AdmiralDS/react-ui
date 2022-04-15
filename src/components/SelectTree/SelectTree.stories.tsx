@@ -2,10 +2,11 @@ import React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import styled from 'styled-components';
-import { SelectTree } from '#/components/SelectTree';
-import { SelectTreeNodeProps } from '#/components/SelectTree/SelectTreeNode';
+import { SelectTree } from '#src/components/SelectTree';
+import { SelectTreeNodeProps } from '#src/components/SelectTree/SelectTreeNode';
 import { ReactComponent as FolderSolid } from '@admiral-ds/icons/build/documents/FolderSolid.svg';
-import { T } from '#/components/T';
+import RNBLogoLight from './RNBLogoLight.svg';
+import { T } from '#src/components/T';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -28,7 +29,7 @@ export default {
     componentSubtitle: <Description />,
     design: {
       type: 'figma',
-      url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=39%3A10953',
+      url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A12752',
     },
   },
   argTypes: {
@@ -44,7 +45,7 @@ export default {
 const selectTreeListM = [
   {
     label: (
-      <T as="span" font="Additional/L-bold">
+      <T as="span" font="Subtitle/Subtitle 2">
         Текст заголовка, первый уровень компонента, размер M 40 1
       </T>
     ),
@@ -69,7 +70,7 @@ const selectTreeListM = [
         checked: false,
         children: [
           {
-            label: <img src="https://upload.wikimedia.org/wikipedia/commons/3/34/Vtb-logo.png" alt={''} />,
+            label: <img src={RNBLogoLight} alt={''} />,
             id: '2-1',
             checked: false,
           },
@@ -135,7 +136,7 @@ const selectTreeListS = [
         checked: false,
         children: [
           {
-            label: <img src="https://upload.wikimedia.org/wikipedia/commons/3/34/Vtb-logo.png" alt={''} />,
+            label: <img src={RNBLogoLight} alt={''} />,
             id: '2-1',
             checked: false,
           },
@@ -193,7 +194,7 @@ const treeViewList = [
         icon: <FolderSolid />,
         children: [
           {
-            label: <img src="https://upload.wikimedia.org/wikipedia/commons/3/34/Vtb-logo.png" alt={''} />,
+            label: <img src={RNBLogoLight} alt={''} />,
             id: '2-1',
             icon: <FolderSolid />,
           },

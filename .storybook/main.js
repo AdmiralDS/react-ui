@@ -17,11 +17,32 @@ const getCircularReplacer = () => {
 module.exports = {
   stories: ['../src/**/*.stories.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
   addons: [
+    {
+      name: '@storybook/addon-docs',
+      options: {
+        sourceLoaderOptions: {
+          injectStoryParameters: false,
+        },
+      },
+    },
     '@storybook/addon-links',
     '@storybook/addon-essentials',
     'storybook-css-modules-preset',
     'storybook-addon-designs',
     'storybook-dark-mode',
+    {
+      name: '@storybook/addon-storysource',
+      options: {
+        rule: {
+          test: [/\.stories\.tsx?$/],
+          include: [path.resolve(__dirname, '../src')],
+        },
+        loaderOptions: {
+          prettierConfig: { printWidth: 80, singleQuote: false },
+          injectStoryParameters: false,
+        },
+      },
+    },
   ],
   typescript: {
     check: true, // type-check stories during Storybook build
@@ -57,7 +78,7 @@ module.exports = {
       ...config.module.rules,
     ];
 
-    config.resolve.alias['#'] = path.resolve(__dirname, '../src');
+    config.resolve.alias['#src'] = path.resolve(__dirname, '../src');
     // Return the altered config
     return config;
   },

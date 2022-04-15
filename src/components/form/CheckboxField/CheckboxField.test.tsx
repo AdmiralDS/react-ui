@@ -1,10 +1,10 @@
-import { LIGHT_THEME } from '#/components/themes';
+import { LIGHT_THEME } from '#src/components/themes';
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
 import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent, { specialChars } from '@testing-library/user-event';
 
-import { CheckboxField } from '#/components/form';
+import { CheckboxField } from '#src/components/form';
 
 describe('CheckboxField', () => {
   beforeEach(() => {

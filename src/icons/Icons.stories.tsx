@@ -1,5 +1,5 @@
-import { Tooltip } from '#/components/Tooltip';
-import { typography } from '#/components/Typography';
+import { Tooltip } from '#src/components/Tooltip';
+import { typography } from '#src/components/Typography';
 import { withDesign } from 'storybook-addon-designs';
 import React from 'react';
 import { Meta, Story } from '@storybook/react';

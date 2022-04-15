@@ -1,4 +1,4 @@
-import { LIGHT_THEME } from '#/components/themes';
+import { LIGHT_THEME } from '#src/components/themes';
 import React from 'react';
 import { render } from '@testing-library/react';
 

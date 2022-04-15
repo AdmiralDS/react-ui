@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled, { css } from 'styled-components';
-import { Tooltip } from '#/components/Tooltip';
-import { typography } from '#/components/Typography';
+import { Tooltip } from '#src/components/Tooltip';
+import { typography } from '#src/components/Typography';
 
 const circleBackground = css<{ background: TagKind | string }>`
   background: ${({ background, theme }) => {
@@ -113,7 +113,7 @@ const Text = styled.span`
   text-overflow: ellipsis;
   white-space: nowrap;
 
-  ${typography['Caption/XS']}
+  ${typography['Caption/Caption 1']}
 `;
 
 const Circle = styled.div<{ background: TagKind | string }>`
@@ -213,3 +213,5 @@ export const Tag: React.FC<React.PropsWithChildren<TagProps>> = ({
     renderTag()
   );
 };
+
+Tag.displayName = 'Tag';

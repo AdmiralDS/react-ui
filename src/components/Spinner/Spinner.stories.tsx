@@ -1,5 +1,5 @@
-import { Button } from '#/components/Button';
-import { Spinner, SpinnerProps } from '#/components/Spinner';
+import { Button } from '#src/components/Button';
+import { Spinner, SpinnerProps } from '#src/components/Spinner';
 import React from 'react';
 import styled from 'styled-components';
 import { ComponentMeta, ComponentStory, Story } from '@storybook/react';
@@ -55,7 +55,7 @@ export default {
     componentSubtitle: <Description />,
     design: {
       type: 'figma',
-      url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=37%3A24955',
+      url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=37%3A24955',
     },
   },
   argTypes: {

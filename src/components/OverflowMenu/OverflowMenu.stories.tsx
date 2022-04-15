@@ -15,11 +15,11 @@ export default {
     design: [
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=39%3A25674',
+        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A25674',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=39%3A25733',
+        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A25733',
       },
     ],
   },
@@ -71,7 +71,10 @@ const Template1: ComponentStory<typeof OverflowMenu> = (args) => {
     <OverflowMenu
       {...args}
       selected={selected}
-      onChange={(id) => setSelected(id)}
+      onChange={(id) => {
+        console.log(`onChange('${id}')`);
+        setSelected(id);
+      }}
       onOpen={() => console.log('open menu')}
       onClose={() => console.log('close menu')}
       aria-label="Overflow Menu component"

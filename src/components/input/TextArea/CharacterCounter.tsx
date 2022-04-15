@@ -1,10 +1,10 @@
-import { typography } from '#/components/Typography';
+import { typography } from '#src/components/Typography';
 import * as React from 'react';
 import styled from 'styled-components';
 
 const Container = styled.div<{ error?: boolean; transparent?: boolean }>`
   white-space: nowrap;
-  ${typography['Additional/S']}
+  ${typography['Body/Body 2 Long']}
   color: ${(p) => (p.error ? p.theme.color.status.danger : p.theme.color.text.secondary)};
   transition: all 0.5s, color 0.5s;
   opacity: ${(p) => (p.transparent && !p.error ? 0 : 1)};

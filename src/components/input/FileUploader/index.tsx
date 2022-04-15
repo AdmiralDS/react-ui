@@ -1,7 +1,7 @@
-import { refSetter } from '#/components/common/utils/refSetter';
+import { refSetter } from '#src/components/common/utils/refSetter';
 import { FileInfo, FileProps } from './FileInfo';
-import { typography } from '#/components/Typography';
-import { ReactComponent as UploadSVG } from '@admiral-ds/icons/build/system/UploadOutline.svg';
+import { typography } from '#src/components/Typography';
+import { ReactComponent as AttachFileOutline } from '@admiral-ds/icons/build/system/AttachFileOutline.svg';
 import * as React from 'react';
 import { InputHTMLAttributes, ReactNode } from 'react';
 import styled, { css } from 'styled-components';
@@ -14,8 +14,10 @@ export interface FileUploaderProps extends Omit<InputHTMLAttributes<HTMLInputEle
   dimension?: Dimension;
   /** Размер компонента загруженного файла */
   fileDimension?: Dimension;
-  /** Текстовое описание загрузчика */
+  /** Текст для лейбла компонента */
   title?: React.ReactNode;
+  /** Текст для кнопки */
+  description?: React.ReactNode;
   /** Принимаемые типы файлов, например, .jpg */
   acceptFiles?: string[];
   /** Список файлов */
@@ -24,9 +26,11 @@ export interface FileUploaderProps extends Omit<InputHTMLAttributes<HTMLInputEle
   onRemoveFile?: (index: number) => void;
   /** Функция, возвращающая компонент с кастомным списком файлов */
   renderFileInfoList?: (files: FileProps[]) => ReactNode;
+  /** Кастомные элементы содержимого компонента */
+  children?: ReactNode;
 }
 
-const Icon = styled(UploadSVG)<{ dimension?: Dimension }>`
+const Icon = styled(AttachFileOutline)<{ dimension?: Dimension }>`
   height: ${(p) => (p.dimension === 'xl' ? '40px' : '24px')};
   width: ${(p) => (p.dimension === 'xl' ? '40px' : '24px')};
   margin-right: ${(p) => (p.dimension === 'm' ? '14px' : '')};
@@ -38,12 +42,11 @@ const Icon = styled(UploadSVG)<{ dimension?: Dimension }>`
 `;
 
 const disabledStyles = css`
-  border: ${(p) => `1px dashed ${p.theme.color.background.tertiary}`};
-  color: ${(p) => p.theme.color.text.tertiary};
+  border: ${(p) => `1px dashed ${p.theme.color.basic.disable}`};
 
   & svg {
     > * {
-      fill: ${(p) => p.theme.color.basic.tertiary};
+      fill: ${(p) => p.theme.color.basic.disable};
     }
   }
 `;
@@ -62,6 +65,10 @@ const hoverStyles = css`
   }
 `;
 
+const CustomWrapper = styled.div`
+  position: relative;
+`;
+
 const UploaderWrapperXL = styled.div<{ disabled?: boolean }>`
   position: relative;
   display: flex;
@@ -71,6 +78,7 @@ const UploaderWrapperXL = styled.div<{ disabled?: boolean }>`
   padding: 24px 0;
   border: ${(p) => `1px dashed ${p.theme.color.text.secondary}`};
   border-radius: 8px;
+  pointer-events: ${({ disabled }) => (disabled ? 'none' : 'all')};
   cursor: ${(p) => (p.disabled ? 'not-allowed' : 'default')};
   ${(p) => (p.disabled ? disabledStyles : hoverStyles)};
 `;
@@ -88,16 +96,18 @@ const UploaderWrapperM = styled.div<{ disabled?: boolean }>`
   ${(p) => (p.disabled ? disabledStyles : hoverStyles)};
 `;
 
-const TitleText = styled.div<{ dimension?: Dimension }>`
+const TitleText = styled.div<{ dimension?: Dimension; disabled?: boolean }>`
   text-align: ${(p) => (p.dimension === 'xl' ? 'center' : 'start')};
   margin: 0 ${(p) => (p.dimension === 'xl' ? '24px' : '')};
   margin-bottom: ${(p) => (p.dimension === 'm' ? '16px' : '0px')};
   max-width: 100%;
-  ${typography['Additional/S']}
+  ${typography['Body/Body 2 Long']}
+  color: ${(p) => p.disabled && p.theme.color.basic.disable};
 `;
 
-const Desc = styled.div`
-  ${typography['Additional/L']};
+const Desc = styled.div<{ disabled?: boolean }>`
+  ${typography['Body/Body 1 Long']};
+  color: ${(p) => p.disabled && p.theme.color.basic.disable};
 `;
 
 const FileInput = styled.input`
@@ -117,7 +127,7 @@ const FileInput = styled.input`
 `;
 
 const Wrapper = styled.div`
-  ${typography['Additional/S']};
+  ${typography['Body/Body 2 Long']};
 `;
 
 const FileWrapper = styled.div`
@@ -135,7 +145,9 @@ export const FileUploader = React.forwardRef<HTMLInputElement, FileUploaderProps
       renderFileInfoList: r,
       disabled,
       title,
+      description,
       acceptFiles,
+      children,
       uploadedFiles,
       style,
       className,
@@ -148,8 +160,6 @@ export const FileUploader = React.forwardRef<HTMLInputElement, FileUploaderProps
     const inputRef = React.useRef<HTMLInputElement>(null);
     const [files, setFiles] = React.useState<FileProps[] | undefined>(uploadedFiles);
     const previewProps = { dimension, fileDimension };
-
-    const Title = title || <>Для добавления файлов перетащите или нажмите на компонент</>;
 
     const validateFileFormat = (files: FileProps[], acceptFiles: string[]) => {
       return files.filter(({ file }) =>
@@ -216,33 +226,65 @@ export const FileUploader = React.forwardRef<HTMLInputElement, FileUploaderProps
       <Wrapper ref={wrapperRef} style={style} className={className}>
         {dimension === 'xl' ? (
           <>
-            <UploaderWrapperXL disabled={disabled}>
-              <Icon dimension={dimension} />
-              <TitleText dimension={dimension} children={Title} />
-              <FileInput
-                {...props}
-                ref={refSetter(ref, inputRef)}
-                accept={acceptFiles?.join(',') || '*'}
-                type="file"
-                multiple={multiple}
-              />
-            </UploaderWrapperXL>
+            {React.Children.count(children) ? (
+              <CustomWrapper>
+                {children}
+                <FileInput
+                  {...props}
+                  ref={refSetter(ref, inputRef)}
+                  accept={acceptFiles?.join(',') || '*'}
+                  type="file"
+                  multiple={multiple}
+                  disabled={disabled}
+                />
+              </CustomWrapper>
+            ) : (
+              <UploaderWrapperXL disabled={disabled}>
+                <Icon dimension={dimension} />
+                {title && <TitleText dimension={dimension} disabled={disabled} children={title} />}
+                <FileInput
+                  {...props}
+                  ref={refSetter(ref, inputRef)}
+                  accept={acceptFiles?.join(',') || '*'}
+                  type="file"
+                  multiple={multiple}
+                  disabled={disabled}
+                />
+              </UploaderWrapperXL>
+            )}
             {files && <FileWrapper>{renderFileInfoList(files)}</FileWrapper>}
           </>
         ) : (
           <>
-            <TitleText dimension={dimension} children={Title} />
-            <UploaderWrapperM disabled={disabled}>
-              <Icon dimension={dimension} />
-              <Desc>Добавьте файлы</Desc>
-              <FileInput
-                {...props}
-                ref={refSetter(ref, inputRef)}
-                accept={acceptFiles?.join(',') || '*'}
-                type="file"
-                multiple={multiple}
-              />
-            </UploaderWrapperM>
+            {React.Children.count(children) ? (
+              <CustomWrapper>
+                {children}
+                <FileInput
+                  {...props}
+                  ref={refSetter(ref, inputRef)}
+                  accept={acceptFiles?.join(',') || '*'}
+                  type="file"
+                  multiple={multiple}
+                  disabled={disabled}
+                />
+              </CustomWrapper>
+            ) : (
+              <>
+                {title && <TitleText dimension={dimension} disabled={disabled} children={title} />}
+                <UploaderWrapperM disabled={disabled}>
+                  <Icon dimension={dimension} />
+                  {description && <Desc disabled={disabled}>{description}</Desc>}
+                  <FileInput
+                    {...props}
+                    ref={refSetter(ref, inputRef)}
+                    accept={acceptFiles?.join(',') || '*'}
+                    type="file"
+                    multiple={multiple}
+                    disabled={disabled}
+                  />
+                </UploaderWrapperM>
+              </>
+            )}
             {files && <FileWrapper>{renderFileInfoList(files)}</FileWrapper>}
           </>
         )}
@@ -250,3 +292,5 @@ export const FileUploader = React.forwardRef<HTMLInputElement, FileUploaderProps
     );
   },
 );
+
+FileUploader.displayName = 'FileUploader';

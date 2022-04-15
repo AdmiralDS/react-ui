@@ -28,9 +28,13 @@ import { Tooltip } from '../../Tooltip';
 import { Button } from './Button';
 
 interface IPanelProps {
-  onChangeYearsView(event: MouseEvent<HTMLDivElement>): void;
+  onYearsViewShow(event: MouseEvent<HTMLDivElement>): void;
 
-  onChangeMonthsView(event: MouseEvent<HTMLDivElement>): void;
+  onYearsViewHide(event: MouseEvent<HTMLDivElement>): void;
+
+  onMonthsViewShow(event: MouseEvent<HTMLDivElement>): void;
+
+  onMonthsViewHide(event: MouseEvent<HTMLDivElement>): void;
 
   onNext(event: MouseEvent<HTMLDivElement>): void;
 
@@ -52,8 +56,10 @@ export const Panel: FC<IPanelProps> = ({
   yearsView,
   monthsView,
   localeName,
-  onChangeYearsView,
-  onChangeMonthsView,
+  onYearsViewShow,
+  onYearsViewHide,
+  onMonthsViewShow,
+  onMonthsViewHide,
   onNext,
   onPrevious,
 }) => {
@@ -66,16 +72,14 @@ export const Panel: FC<IPanelProps> = ({
 
   const monthMouseDownHandle = (event: any) => {
     event.preventDefault();
-    onChangeMonthsView(event);
-    yearsView && onChangeYearsView(event);
+    monthsView ? onMonthsViewHide(event) : onMonthsViewShow(event);
   };
   const yearMouseDownHandle = (event: any) => {
     event.preventDefault();
-    onChangeYearsView(event);
-    monthsView && onChangeMonthsView(event);
+    yearsView ? onYearsViewHide(event) : onYearsViewShow(event);
   };
   return (
-    <PanelComponent yearsView={yearsView} monthsView={monthsView}>
+    <PanelComponent yearsView={yearsView} monthsView={monthsView} className="ui-kit-calendar-panel-component">
       {!monthsView && (
         <Tooltip renderContent={() => (yearsView ? BACK : PREVIOUS_MONTH)}>
           <Button onMouseDown={onPrevious} disabled={previousDisabled} type="left" />

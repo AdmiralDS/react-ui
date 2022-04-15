@@ -102,7 +102,11 @@ export const Chips: FC<ChipsProps> = ({
         {onClose && (
           <IconAfterWrapperStyled>
             <IconWrapperStyled dimension={dimension}>
-              <CloseIconWrapperStyled disabled={disabled} onClick={disabled ? void 0 : handleClickCloseIcon} />
+              <CloseIconWrapperStyled
+                disabled={disabled}
+                onClick={disabled ? void 0 : handleClickCloseIcon}
+                selected={selected}
+              />
             </IconWrapperStyled>
           </IconAfterWrapperStyled>
         )}
@@ -112,3 +116,5 @@ export const Chips: FC<ChipsProps> = ({
 
   return withTooltip ? <Tooltip renderContent={renderContentTooltip}>{Chip}</Tooltip> : Chip;
 };
+
+Chips.displayName = 'Chips';

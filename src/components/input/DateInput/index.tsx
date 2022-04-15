@@ -3,14 +3,14 @@ import { useRef, useState } from 'react';
 import styled from 'styled-components';
 import { ReactComponent as CalendarSVG } from '@admiral-ds/icons/build/system/CalendarSolid.svg';
 import { TextInput, TextInputProps } from '../TextInput';
-import { Calendar as CalendarBase, CalendarPropType } from '#/components/Calendar';
-import { refSetter } from '#/components/common/utils/refSetter';
-import { defaultDateInputHandle } from '#/components/input/DateInput/defaultDateInputHandle';
-import { changeInputData } from '#/components/common/dom/changeInputData';
-import { Dropdown as DropdownComponent } from '#/components/Dropdown';
+import { Calendar as CalendarBase, CalendarPropType } from '#src/components/Calendar';
+import { refSetter } from '#src/components/common/utils/refSetter';
+import { defaultDateInputHandle } from '#src/components/input/DateInput/defaultDateInputHandle';
+import { changeInputData } from '#src/components/common/dom/changeInputData';
+import { Dropdown as DropdownComponent } from '#src/components/Dropdown';
 import { isValidDate } from './isValidDate';
 import { defaultParser } from './defaultParser';
-import { defaultDateRangeInputHandle } from '#/components/input/DateInput/defaultDateRangeInputHandle';
+import { defaultDateRangeInputHandle } from '#src/components/input/DateInput/defaultDateRangeInputHandle';
 
 const Dropdown = styled(DropdownComponent)<{ alignDropdown?: string }>`
   align-self: ${(p) => (p.alignSelf ? p.alignSelf : 'end')};
@@ -28,11 +28,14 @@ const Input = styled(TextInput)`
 
 const Icon = styled(CalendarSVG)`
   & *[fill^='#'] {
-    fill: ${(props) => props.theme.color.basic.tertiary};
+    fill: ${(props) => props.theme.color.text.secondary};
   }
 
   [disabled] & {
     pointer-events: none;
+    & *[fill^='#'] {
+      fill: ${(props) => props.theme.color.text.tertiary};
+    }
   }
 
   &:hover {
@@ -67,6 +70,8 @@ export interface DateInputProps extends TextInputProps, Omit<CalendarPropType, '
    * Принимает стандартные значения css свойства align-self (start, end, center)
    */
   alignDropdown?: string;
+  /** Ref для календаря */
+  calendarRef?: React.RefObject<HTMLDivElement>;
 }
 
 export const DateInput = React.forwardRef<HTMLInputElement, DateInputProps>(
@@ -82,17 +87,41 @@ export const DateInput = React.forwardRef<HTMLInputElement, DateInputProps>(
       filterDate,
       localeName,
       alignDropdown = 'end',
+      currentActiveView,
+      currentActiveViewImportant,
+      onMonthSelect,
+      onYearSelect,
+      onViewEnter,
+      onViewLeave,
+      onViewMonthSelect,
+      onViewYearSelect,
+      selected,
+      calendarRef,
       ...props
     },
     ref,
   ) => {
-    const calendarProps = { minDate, maxDate, validator, filterDate, localeName };
+    const calendarProps = {
+      minDate,
+      maxDate,
+      validator,
+      filterDate,
+      localeName,
+      currentActiveView,
+      currentActiveViewImportant,
+      onMonthSelect,
+      onYearSelect,
+      onViewEnter,
+      onViewLeave,
+      onViewMonthSelect,
+      onViewYearSelect,
+      selected,
+    };
     const isDateRange = type === 'date-range';
     const handleInput = props.handleInput || (isDateRange ? defaultDateRangeInputHandle : defaultDateInputHandle);
     const [calendarValue, setCalendarValue] = useState<Date | (Date | null)[] | null>(null);
     const inputRef = useRef<HTMLInputElement>(null);
     const inputContainerRef = useRef<HTMLDivElement>(null);
-    const calendarRef = useRef<HTMLDivElement>(null);
     const [isCalendarOpen, setCalendarOpen] = useState<boolean>(defaultIsCalendarOpen);
 
     const [startDate, endDate, selectedCalendarValue] = Array.isArray(calendarValue)
@@ -139,7 +168,7 @@ export const DateInput = React.forwardRef<HTMLInputElement, DateInputProps>(
         {...props}
         ref={refSetter(ref, inputRef)}
         handleInput={handleInput}
-        icons={<Icon onClick={handleButtonClick} tabIndex={0} />}
+        icons={props.readOnly ? undefined : <Icon onClick={handleButtonClick} tabIndex={0} />}
         containerRef={inputContainerRef}
       >
         {isCalendarOpen && (

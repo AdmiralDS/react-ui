@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { Link } from './index';
-import { T } from '#/components/T';
+import { T } from '#src/components/T';
 import { ReactComponent as ArrowLeftOutline } from '@admiral-ds/icons/build/system/ArrowLeftOutline.svg';
 import { ReactComponent as ArrowRightOutline } from '@admiral-ds/icons/build/system/ArrowRightOutline.svg';
 import { withDesign } from 'storybook-addon-designs';
@@ -15,11 +15,11 @@ export default {
     design: [
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=37%3A8620',
+        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=37%3A8620',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=37%3A8697',
+        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=37%3A8697',
       },
     ],
   },
@@ -59,14 +59,14 @@ const Devider = styled.div`
 const LinkPrimary: ComponentStory<typeof Link> = () => {
   return (
     <>
-      <T font="Additional/L" as="div">
+      <T font="Body/Body 1 Long" as="div">
         Dimension - M
       </T>
       <Link appearance={'primary'} href="" onClick={(e) => e.preventDefault()}>
         Link
       </Link>
       <Separator />
-      <T font="Additional/L" as="div">
+      <T font="Body/Body 1 Long" as="div">
         Dimension - S
       </T>
       <Link appearance={'primary'} dimension="s" href="" onClick={(e) => e.preventDefault()}>
@@ -78,14 +78,14 @@ const LinkPrimary: ComponentStory<typeof Link> = () => {
 
 const LinkSecondary: ComponentStory<typeof Link> = () => (
   <>
-    <T font="Additional/L" as="div">
+    <T font="Body/Body 1 Long" as="div">
       Dimension - M
     </T>
     <Link appearance={'secondary'} href="" onClick={(e) => e.preventDefault()}>
       Link
     </Link>
     <Separator />
-    <T font="Additional/L" as="div">
+    <T font="Body/Body 1 Long" as="div">
       Dimension - S
     </T>
     <Link appearance={'secondary'} dimension="s" href="" onClick={(e) => e.preventDefault()}>
@@ -97,7 +97,7 @@ const LinkSecondary: ComponentStory<typeof Link> = () => (
 const LinkWithIcon: ComponentStory<typeof Link> = () => {
   return (
     <>
-      <T font="Additional/L" as="div">
+      <T font="Body/Body 1 Long" as="div">
         Link with icon. Dimension - m
       </T>
       <Separator />
@@ -107,7 +107,7 @@ const LinkWithIcon: ComponentStory<typeof Link> = () => {
         Link
       </Link>
       <Separator />
-      <T font="Additional/L" as="div">
+      <T font="Body/Body 1 Long" as="div">
         Link with icon. Dimension - s
       </T>
       <Separator />

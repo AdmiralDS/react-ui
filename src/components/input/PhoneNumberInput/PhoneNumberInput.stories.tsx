@@ -2,7 +2,7 @@ import React, { ChangeEvent } from 'react';
 import styled from 'styled-components';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
-import { PhoneNumberInput } from '#/components/input';
+import { PhoneNumberInput } from '#src/components/input';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -31,11 +31,11 @@ export default {
     design: [
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=39%3A61244',
+        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A61244',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=39%3A61271',
+        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A61271',
       },
     ],
   },
@@ -46,6 +46,24 @@ export default {
     },
     disabled: {
       control: { type: 'boolean' },
+    },
+    disableCopying: {
+      control: { type: 'boolean' },
+    },
+    displayStatusIcon: {
+      control: { type: 'boolean' },
+    },
+    displayClearIcon: {
+      control: { type: 'boolean' },
+    },
+    icons: {
+      control: false,
+    },
+    containerRef: {
+      control: false,
+    },
+    handleInput: {
+      control: false,
     },
   },
 } as ComponentMeta<typeof PhoneNumberInput>;

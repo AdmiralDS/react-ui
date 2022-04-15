@@ -3,13 +3,13 @@ import { useRef, useState } from 'react';
 import styled from 'styled-components';
 import { ReactComponent as TimeSVG } from '@admiral-ds/icons/build/system/TimeSolid.svg';
 import { TextInput, TextInputProps } from '../TextInput';
-import { refSetter } from '#/components/common/utils/refSetter';
-import { defaultTimeInputHandle } from '#/components/input/TimeInput/defaultTimeInputHandle';
-import { changeInputData } from '#/components/common/dom/changeInputData';
-import { Dropdown } from '#/components/Dropdown';
+import { refSetter } from '#src/components/common/utils/refSetter';
+import { defaultTimeInputHandle } from '#src/components/input/TimeInput/defaultTimeInputHandle';
+import { changeInputData } from '#src/components/common/dom/changeInputData';
+import { Dropdown } from '#src/components/Dropdown';
 import { Slot, SlotProps } from './Slot';
 import { parseStringToTime, getTimeInMinutes } from './utils';
-import { typography } from '#/components/Typography';
+import { typography } from '#src/components/Typography';
 
 const slots: SlotProps[] = [
   { value: '00:00', disabled: false },
@@ -64,7 +64,7 @@ const slots: SlotProps[] = [
 
 const Icon = styled(TimeSVG)`
   & *[fill^='#'] {
-    fill: ${(p) => p.theme.color.basic.tertiary};
+    fill: ${(p) => p.theme.color.text.secondary};
   }
 
   [disabled] & {
@@ -90,7 +90,7 @@ const SlotContainer = styled.ul`
   border-radius: 4px;
   ${(p) => p.theme.shadow.NonClickable}
   flex: 0 0 auto;
-  ${typography['Additional/L']};
+  ${typography['Body/Body 1 Long']};
   &[data-dimension='xl'] {
     width: 84px;
     height: 288px;
@@ -100,7 +100,7 @@ const SlotContainer = styled.ul`
     height: 240px;
   }
   &[data-dimension='s'] {
-    ${typography['Additional/S']};
+    ${typography['Body/Body 2 Long']};
     width: 68px;
     height: 192px;
   }
@@ -110,9 +110,9 @@ export interface TimeInputProps extends Omit<TextInputProps, 'value'> {
   /** Выбранное значение времени */
   value?: string;
   /** Начало временного диапазона */
-  startTime?: string | null;
+  startTime?: string;
   /** Конец временного диапазона */
-  endTime?: string | null;
+  endTime?: string;
   /** Задизейбленный инпут */
   disabled?: boolean;
   /** Задизейбленное значение временного диапозона */
@@ -131,7 +131,7 @@ export const TimeInput = React.forwardRef<HTMLInputElement, TimeInputProps>(
       value = '',
       dimension = 'm',
       disabled = false,
-      disabledSlots,
+      disabledSlots = [],
       parser = parseStringToTime,
       icon,
       icons,
@@ -185,11 +185,11 @@ export const TimeInput = React.forwardRef<HTMLInputElement, TimeInputProps>(
     };
 
     const availableSlots =
-      !disabledSlots && (startTime || endTime || (startTime && endTime))
+      !disabledSlots?.length && (startTime || endTime || (startTime && endTime))
         ? slots.filter((slot) => filterTime(slot.value, startTime, endTime))
-        : !!disabledSlots && !(startTime || endTime || (startTime && endTime))
+        : disabledSlots?.length > 0 && !(startTime || endTime || (startTime && endTime))
         ? disableSlots(slots, disabledSlots)
-        : !!disabledSlots && !!(startTime || endTime || (startTime && endTime))
+        : disabledSlots?.length > 0 && (startTime || endTime || (startTime && endTime))
         ? disableSlots(slots, disabledSlots)?.filter((slot) => filterTime(slot.value, startTime, endTime))
         : slots;
 
@@ -298,5 +298,4 @@ export const TimeInput = React.forwardRef<HTMLInputElement, TimeInputProps>(
   },
 );
 
-TimeInput.defaultProps = { dimension: 's' };
 TimeInput.displayName = 'TimeInput';

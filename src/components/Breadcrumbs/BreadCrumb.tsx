@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { refSetter } from '#/components/common/utils/refSetter';
+import { refSetter } from '#src/components/common/utils/refSetter';
 import styled from 'styled-components';
-import { typography } from '#/components/Typography';
+import { typography } from '#src/components/Typography';
 
 import { InverseTooltip } from './InverseTooltip';
 
@@ -9,13 +9,13 @@ export const Crumb = styled.li`
   display: flex;
   align-items: center;
   white-space: nowrap;
-  ${typography['Additional/M']}
+  ${typography['Body/Body 1 Short']}
 
   [data-dimension='m'] & {
-    ${typography['Additional/XS']}
+    ${typography['Body/Body 2 Short']}
   }
   [data-dimension='s'] & {
-    ${typography['Caption/XS']}
+    ${typography['Caption/Caption 1']}
   }
 `;
 

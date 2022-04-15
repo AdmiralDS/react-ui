@@ -1,16 +1,12 @@
-import React, { Fragment, KeyboardEventHandler, MouseEventHandler, useEffect, useRef, useState } from 'react';
+import React, { Fragment, KeyboardEventHandler, MouseEventHandler, useRef, useState } from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import observeRect from '#/components/common/observeRect';
-import { DropDownMenu } from './index';
-import { DropDownItem } from '../DropDownItem';
-import { Button } from '../Button';
-import styled, { css } from 'styled-components';
-import { typography } from '../Typography';
+import { DropDownMenu } from '#src/components/DropDownMenu';
+import { DropDownItem } from '#src/components/DropDownItem';
+import { Button } from '#src/components/Button';
+import styled from 'styled-components';
+import { typography } from '#src/components/Typography';
 import { ReactComponent as CardSolid } from '@admiral-ds/icons/build/finance/CardSolid.svg';
 import { withDesign } from 'storybook-addon-designs';
-import useInterval_DEPRECATED from '#/components/common/hooks/useInterval_DEPRECATED';
-import { useClickOutside } from '#/components/common/hooks/useClickOutside';
-import { createPortal } from 'react-dom';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -33,11 +29,11 @@ export default {
     design: [
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=39%3A68967',
+        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A68967',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=39%3A68937',
+        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A68937',
       },
     ],
   },
@@ -56,111 +52,10 @@ export default {
 } as ComponentMeta<typeof DropDownMenu>;
 
 const StyledText = styled.div`
-  ${typography['Additional/S']}
+  ${typography['Body/Body 2 Long']}
   color: ${({ theme }) => theme.color.text.primary};
   pointer-events: none;
 `;
-
-const StyledDropDown = styled(DropDownMenu)`
-  width: 100%;
-`;
-
-const PositionedPortalContainer = styled.div`
-  position: fixed;
-  overflow: visible;
-  z-index: 100;
-`;
-
-const POSITIONS = ['top', 'bottom'] as const;
-type Position = typeof POSITIONS[number];
-
-const bottomDropDownPosition = css`
-  bottom: 0;
-
-  ${StyledDropDown} {
-    right: 0;
-    top: 8px;
-  }
-`;
-
-const topDropDownPosition = css`
-  top: 0;
-
-  ${StyledDropDown} {
-    right: 0;
-    bottom: 8px;
-  }
-`;
-
-const Container = styled.div<{ position?: Position }>`
-  position: absolute;
-  left: 0;
-  right: 0;
-  height: 0;
-  ${({ position }) => (position === 'top' ? topDropDownPosition : bottomDropDownPosition)}
-`;
-
-const PositionInPortal = ({
-  targetRef,
-  children,
-  positionComponentRef,
-}: {
-  targetRef: React.RefObject<HTMLElement>;
-  children: React.ReactNode;
-  positionComponentRef: React.RefObject<HTMLElement>;
-}) => {
-  const positionedPortalContainerRef = useRef<HTMLDivElement>(null);
-  const [dropDownDisplay, setdropDownDisplay] = useState<Position>('bottom');
-
-  const checkDropDownOpenPosition = (
-    calendarRef: React.RefObject<HTMLDivElement>,
-    dropDownDisplay: Position,
-    setdropDownDisplay: React.Dispatch<React.SetStateAction<Position>>,
-  ) => {
-    if (calendarRef.current && setdropDownDisplay) {
-      const node = calendarRef.current;
-      const rect = node.getBoundingClientRect();
-      const viewportHeight = window.innerHeight;
-
-      if (dropDownDisplay === 'bottom' && viewportHeight - rect.bottom < 0) {
-        setdropDownDisplay('top');
-      } else if (dropDownDisplay === 'top' && viewportHeight - rect.bottom - rect.height - 100 > 0) {
-        setdropDownDisplay('bottom');
-      }
-    }
-  };
-
-  useInterval_DEPRECATED(checkDropDownOpenPosition, 500, positionComponentRef, dropDownDisplay, setdropDownDisplay);
-
-  useEffect(() => {
-    const node = positionedPortalContainerRef.current;
-    if (node && targetRef.current) {
-      const observer = observeRect(targetRef.current, (rect) => {
-        if (rect) {
-          const { x, y, height, width } = rect;
-          const { style } = node;
-          style.top = `${y}px`;
-          style.left = `${x}px`;
-          style.height = `${height}px`;
-          style.width = `${width}px`;
-        }
-      });
-      observer.observe();
-      return () => {
-        observer.unobserve();
-      };
-    }
-  }, [targetRef.current, positionedPortalContainerRef.current]);
-
-  return createPortal(
-    <PositionedPortalContainer ref={positionedPortalContainerRef}>
-      <Container position={dropDownDisplay} tabIndex={-1}>
-        {children}
-      </Container>
-    </PositionedPortalContainer>,
-    document.body,
-  );
-};
 
 const Template1: ComponentStory<typeof DropDownMenu> = (args) => {
   const category = [
@@ -213,10 +108,6 @@ const Template1: ComponentStory<typeof DropDownMenu> = (args) => {
   const [selected, setSelected] = useState<string | number>(category[0].content[0].id);
   const [open, setOpen] = useState(false);
   const buttonRef = useRef(null);
-  const dropDownRef = useRef(null);
-  const outsideClick = () => setOpen(false);
-
-  useClickOutside([buttonRef], outsideClick);
 
   const handleKeyDown: KeyboardEventHandler = (e) => {
     if (e.keyCode === 27) {
@@ -229,88 +120,85 @@ const Template1: ComponentStory<typeof DropDownMenu> = (args) => {
   };
 
   return (
-    <div style={{ width: '100%' }}>
+    <div style={{ display: 'flex', justifyContent: 'center' }}>
       <Button ref={buttonRef} onClick={() => setOpen(!open)}>
         Нажми
       </Button>
       {open && (
-        <PositionInPortal positionComponentRef={dropDownRef} targetRef={buttonRef}>
-          <StyledDropDown ref={dropDownRef} tabIndex={-1} {...args}>
-            {category.map((item, index) => {
-              return (
-                <Fragment key={index}>
-                  <DropDownItem disabled key={item.id}>
-                    <StyledText> {item.name}</StyledText>
-                  </DropDownItem>
-                  {item.content.map((subCategory) => {
-                    return (
-                      <DropDownItem
-                        dimension={args.dimension}
-                        tabIndex={0}
-                        onMouseDown={() => setSelected(subCategory.id)}
-                        selected={selected === subCategory.id}
-                        key={subCategory.id}
-                        id={subCategory.id}
-                        onKeyDown={handleKeyDown}
-                      >
-                        <div style={{ width: '100%' }}>
-                          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                            {subCategory.label} <CardSolid width={24} height={24} />
-                          </div>
-                          <StyledText>Дополнительный текст</StyledText>
+        <DropDownMenu alignSelf="flex-end" {...args} targetRef={buttonRef} onClickOutside={() => setOpen(!open)}>
+          {category.map((item, index) => {
+            return (
+              <Fragment key={index}>
+                <DropDownItem disabled key={item.id}>
+                  <StyledText> {item.name}</StyledText>
+                </DropDownItem>
+                {item.content.map((subCategory) => {
+                  return (
+                    <DropDownItem
+                      dimension={args.dimension}
+                      tabIndex={0}
+                      onMouseDown={() => setSelected(subCategory.id)}
+                      selected={selected === subCategory.id}
+                      key={subCategory.id}
+                      id={subCategory.id}
+                      onKeyDown={handleKeyDown}
+                    >
+                      <div style={{ width: '100%' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                          {subCategory.label} <CardSolid width={24} height={24} />
                         </div>
-                      </DropDownItem>
-                    );
-                  })}
-                </Fragment>
-              );
-            })}
-          </StyledDropDown>
-        </PositionInPortal>
+                        <StyledText>Дополнительный текст</StyledText>
+                      </div>
+                    </DropDownItem>
+                  );
+                })}
+              </Fragment>
+            );
+          })}
+        </DropDownMenu>
       )}
     </div>
   );
 };
 
-const Template2: ComponentStory<typeof DropDownMenu> = (args) => {
-  const items = [
-    {
-      id: '1',
-      label: 'Option one',
-      value: 1,
-    },
-    {
-      id: '2',
-      label: 'Option two',
-      value: 2,
-    },
-    {
-      id: '3',
-      label: 'Option three',
-      value: 3,
-    },
-    {
-      id: '4',
-      label: 'Option four',
-      value: 4,
-    },
-    {
-      id: '5',
-      label: 'Option five',
-      value: 5,
-    },
-    { id: '6', label: 'Option six', value: 7 },
-    {
-      id: '7',
-      label: 'Option seven',
-      value: 6,
-    },
-  ];
+const items = [
+  {
+    id: '1',
+    label: 'Option one',
+    value: 1,
+  },
+  {
+    id: '2',
+    label: 'Option two',
+    value: 2,
+  },
+  {
+    id: '3',
+    label: 'Option three',
+    value: 3,
+  },
+  {
+    id: '4',
+    label: 'Option four',
+    value: 4,
+  },
+  {
+    id: '5',
+    label: 'Option five',
+    value: 5,
+  },
+  { id: '6', label: 'Option six', value: 7 },
+  {
+    id: '7',
+    label: 'Option seven',
+    value: 6,
+  },
+];
 
-  const [selected, setSelected] = useState<number | string>(items[0].id);
+const Temp2: ComponentStory<typeof DropDownMenu> = (args) => {
+  const [selected, setSelected] = useState<number | string>('');
   const [open, setOpen] = useState(false);
   const buttonRef = useRef(null);
-  const dropDownRef = useRef(null);
 
   const handleKeyDown: KeyboardEventHandler = (e) => {
     if (e.keyCode === 32) {
@@ -327,40 +215,34 @@ const Template2: ComponentStory<typeof DropDownMenu> = (args) => {
     setOpen(false);
   };
 
-  const outsideClick = () => setOpen(false);
-
-  useClickOutside([buttonRef], outsideClick);
-
   return (
-    <div style={{ width: '100%' }}>
-      <Button ref={buttonRef} onClick={() => setOpen(!open)}>
+    <div style={{ width: 'fit-content' }}>
+      <Button ref={buttonRef} onClick={() => setOpen(!open)} style={{ margin: 'auto' }}>
         Нажми
       </Button>
       {open && (
-        <PositionInPortal positionComponentRef={dropDownRef} targetRef={buttonRef}>
-          <StyledDropDown ref={dropDownRef} tabIndex={-1} {...args}>
-            {items.map((item) => {
-              return (
-                <DropDownItem
-                  dimension={args.dimension}
-                  id={item.id}
-                  onMouseDown={handleClick}
-                  selected={selected === item.id}
-                  key={item.id}
-                  onKeyDown={handleKeyDown}
-                >
-                  {item.label}
-                </DropDownItem>
-              );
-            })}
-          </StyledDropDown>
-        </PositionInPortal>
+        <DropDownMenu {...args} targetRef={buttonRef} alignSelf="flex-start" onClickOutside={() => setOpen(!open)}>
+          {items.map((item) => {
+            return (
+              <DropDownItem
+                dimension={args.dimension}
+                id={item.id}
+                onMouseDown={handleClick}
+                selected={selected === item.id}
+                key={item.id}
+                onKeyDown={handleKeyDown}
+              >
+                {item.label}
+              </DropDownItem>
+            );
+          })}
+        </DropDownMenu>
       )}
     </div>
   );
 };
 
-export const BaseDropDown = Template2.bind({});
+export const BaseDropDown = Temp2.bind({});
 export const Category = Template1.bind({});
 
 BaseDropDown.storyName = 'Базовый пример';

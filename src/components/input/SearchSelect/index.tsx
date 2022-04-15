@@ -1,11 +1,10 @@
 import * as React from 'react';
-import { OpenStatusButton } from '#/components/OpenStatusButton';
-import { keyboardKey } from '#/components/common/keyboardKey';
-import { refSetter } from '#/components/common/utils/refSetter';
+import { OpenStatusButton } from '#src/components/OpenStatusButton';
+import { keyboardKey } from '#src/components/common/keyboardKey';
+import { refSetter } from '#src/components/common/utils/refSetter';
 import { TextInput } from '../TextInput';
-import type { InputStatus, ComponentDimension } from '#/components/input/types';
+import type { InputStatus, ComponentDimension } from '#src/components/input/types';
 import { DropDownSearchSelectProvider, ConstantSearchSelectProvider } from './useSearchSelectContext';
-import { renderValueDefault } from './Option';
 import type { IConstantOption, IDropdownOption, HighlightFormat } from './types';
 import { MultipleSelectChips } from './MultipleSelectChips';
 import {
@@ -18,18 +17,21 @@ import {
   Hidden,
   ClearIcon,
   DropDownText,
-  Placeholder,
+  StringValueWrapper,
 } from './styled';
-import { useClickOutside } from '#/components/common/hooks/useClickOutside';
 import { StatusIcon } from '../StatusIcon';
 import { scrollToNotVisibleELem, preventDefault } from './utils';
-import { changeInputData } from '#/components/common/dom/changeInputData';
+import { changeInputData } from '#src/components/common/dom/changeInputData';
+import { useClickOutside } from '#src/components/common/hooks/useClickOutside';
 
 /**
  * Осталось сделать:
  * Активное состояние у крестика на чипсах по стрелкам
  * Проверить Перфоманс
- * Мобилка (isMobile)
+ * Тултип и длинного текста в selectValue
+ * Возможность, если используется renderValue, задать значение, которое будет появляться при вводе поиска и для опций
+ * Разбить компонент на хуки для большей читаемости и императивности (useHeight, useInput, ...)
+ * Разбить тесты по пропсам и функционалу. Например, тесты проверящие placeholder И т.д.
  */
 
 const DEFAULT_LOADING_TEXT = 'Поиск совпадений';
@@ -45,8 +47,11 @@ export interface SearchSelectProps extends Omit<React.InputHTMLAttributes<HTMLSe
   /** Отображать статус загрузки данных */
   isLoading?: boolean;
 
+  /** Позволяет использовать SearchSelect как select */
+  mode?: 'select' | 'searchSelect';
+
   /** Сообщение, отображаемое при наличии флага isLoading */
-  loadingMessage?: string;
+  loadingMessage?: React.ReactNode;
 
   /** Добавить селекту возможность множественного выбора */
   multiple?: boolean;
@@ -64,6 +69,9 @@ export interface SearchSelectProps extends Omit<React.InputHTMLAttributes<HTMLSe
   displayStatusIcon?: boolean;
 
   displayClearIcon?: boolean;
+
+  /** Позволяет определить действия при нажатии на иконку очистки. По умолчанию произойдет очистка выбранных значений */
+  onClearIconClick?: () => void;
 
   idleHeight?: 'full' | 'fixed';
 
@@ -84,6 +92,12 @@ export interface SearchSelectProps extends Omit<React.InputHTMLAttributes<HTMLSe
   status?: InputStatus;
 
   renderSelectValue?: (value: string | string[] | undefined, searchText: string) => React.ReactNode;
+
+  /**  Значение введенное пользователем для поиска */
+  inputValue?: string;
+
+  /** первоначальное значение в строке поиска без переведения строки в контролируемый компонент */
+  defaultInputValue?: string;
 
   onInputChange?: React.ChangeEventHandler<HTMLInputElement>;
 
@@ -107,14 +121,18 @@ export const SearchSelect = React.forwardRef<HTMLSelectElement, SearchSelectProp
       defaultValue,
       dimension = 'm',
       idleHeight = 'fixed',
+      mode = 'searchSelect',
       highlightFormat = 'word',
       multiple = false,
       defaultHighlighted = true,
       showCheckbox = true,
       displayStatusIcon = false,
       displayClearIcon = false,
+      onClearIconClick,
       loadingMessage = DEFAULT_LOADING_TEXT,
       onInputChange,
+      inputValue,
+      defaultInputValue,
       renderSelectValue,
       onFocus: onFocusFromProps,
       onBlur: onBlurFromProps,
@@ -124,7 +142,8 @@ export const SearchSelect = React.forwardRef<HTMLSelectElement, SearchSelectProp
     ref,
   ) => {
     const [localValue, setLocalValue] = React.useState(value ?? defaultValue);
-    const [searchValue, setSearchValue] = React.useState('');
+    const [internalSearchValue, setSearchValue] = React.useState('');
+    const searchValue = inputValue === undefined ? internalSearchValue : inputValue;
     const [hoverValue, setHoverValue] = React.useState('');
     const [shouldRenderSelectValue, setShouldRenderSelectValue] = React.useState(false);
 
@@ -135,6 +154,7 @@ export const SearchSelect = React.forwardRef<HTMLSelectElement, SearchSelectProp
     const [isFocused, setIsFocused] = React.useState(false);
 
     const selectIsUncontrolled = value === undefined;
+    const modeIsSelect = mode === 'select';
 
     const selectedOption = React.useMemo(
       () => (multiple ? null : constantOptions.find((option) => option.value === localValue)),
@@ -164,10 +184,9 @@ export const SearchSelect = React.forwardRef<HTMLSelectElement, SearchSelectProp
     const selectRef = React.useRef<HTMLSelectElement | null>(null);
     const containerRef = React.useRef<HTMLDivElement | null>(null);
     const dropDownRef = React.useRef<HTMLDivElement | null>(null);
-
-    const shouldFixHeight = idleHeight === 'fixed' && !isSearchPanelOpen && multiple;
-
-    const renderSelectedOption = React.useCallback(() => selectedOption?.children, [selectedOption?.children]);
+    const mutableState = React.useRef<{ shouldExtendInputValue: boolean }>({
+      shouldExtendInputValue: false,
+    });
 
     const onConstantOptionMount = React.useCallback(
       (option: IConstantOption) => setConstantOptions((prev) => [...prev, option]),
@@ -224,36 +243,63 @@ export const SearchSelect = React.forwardRef<HTMLSelectElement, SearchSelectProp
 
       if (!selectElem) return;
 
-      selectElem.value = '';
+      selectElem.selectedIndex = -1;
       selectElem.dispatchEvent(new Event('change', { bubbles: true }));
     }, []);
+
+    const handleOnClear = onClearIconClick || resetOptions;
+
+    const shouldFixMultiSelectHeight = idleHeight === 'fixed' && !isSearchPanelOpen;
 
     const renderMultipleSelectValue = React.useCallback(
       () => (
         <MultipleSelectChips
           options={selectedOptions}
-          shouldShowCount={shouldFixHeight}
+          shouldShowCount={shouldFixMultiSelectHeight}
           onChipRemove={handleOptionSelect}
           onChipClick={stopPropagation}
         />
       ),
-      [selectedOptions, shouldFixHeight, handleOptionSelect, stopPropagation],
+      [selectedOptions, shouldFixMultiSelectHeight, handleOptionSelect, stopPropagation],
     );
 
-    const renderPlaceholderDefault = React.useCallback(() => <Placeholder>{placeholder}</Placeholder>, [placeholder]);
+    const isEmptyValue = multiple ? !localValue?.length : !localValue;
+    const isEmpty = isEmptyValue && !!placeholder && !searchValue;
+
+    const renderedSelectValue = renderSelectValue?.(localValue, searchValue);
+
+    const renderedSelectedOption = selectedOption?.children;
+    const renderedDefaultSelectValue = multiple ? renderMultipleSelectValue() : renderedSelectedOption;
+    const visibleValue = renderedSelectValue || renderedDefaultSelectValue || localValue || null;
+
+    const visibleValueIsString = typeof visibleValue === 'string';
+
+    const shouldFixSingleSelectHeight = idleHeight === 'fixed' && visibleValueIsString;
+    const shouldFixHeight = multiple ? shouldFixMultiSelectHeight : shouldFixSingleSelectHeight;
+
+    const wrappedVisibleValue = visibleValueIsString ? (
+      <StringValueWrapper>{visibleValue}</StringValueWrapper>
+    ) : (
+      visibleValue
+    );
 
     const handleSearchPanelToggle = () => {
       setIsSearchPanelOpen((prev) => !prev);
     };
 
-    const onLocalInputChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
-      if (!multiple) setShouldRenderSelectValue(false);
-      setSearchValue(evt.target.value);
-      onInputChange?.(evt);
+    const mutateAndExtendTargetInputValue = (evt: React.ChangeEvent<HTMLInputElement>) => {
+      if (!mutableState.current.shouldExtendInputValue || !visibleValueIsString) return;
+      evt.target.value = `${visibleValue}${evt.target.value}`;
+      mutableState.current.shouldExtendInputValue = false;
     };
 
-    const onSingleSelectBackSpace = () => {
-      setShouldRenderSelectValue(false);
+    const onSingleLocalInputChange = () => setShouldRenderSelectValue(false);
+
+    const onLocalInputChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
+      if (!multiple) onSingleLocalInputChange();
+      mutateAndExtendTargetInputValue(evt);
+      if (inputValue === undefined) setSearchValue(evt.target.value);
+      onInputChange?.(evt);
     };
 
     const onMultipleSelectBackSpace = () => {
@@ -262,9 +308,9 @@ export const SearchSelect = React.forwardRef<HTMLSelectElement, SearchSelectProp
       handleOptionSelect(lastAbledSelectedOptionValue);
     };
 
-    const onBackspace = () => {
+    const deleteOrHideSelectValueOnBackspace = () => {
       if (searchValue || !localValue) return;
-      if (!multiple) return onSingleSelectBackSpace();
+      if (!multiple) return setShouldRenderSelectValue(false);
       onMultipleSelectBackSpace();
     };
 
@@ -287,7 +333,7 @@ export const SearchSelect = React.forwardRef<HTMLSelectElement, SearchSelectProp
     };
 
     const scrollToOption = (optionValue: string) => {
-      const scrollElem = dropDownRef.current?.parentElement;
+      const scrollElem = dropDownRef.current;
       const optionElem = dropDownOptions.find((option) => option.value === optionValue)?.ref?.current;
       if (!scrollElem || !optionElem) return;
 
@@ -336,22 +382,6 @@ export const SearchSelect = React.forwardRef<HTMLSelectElement, SearchSelectProp
       }
     };
 
-    const handleKeyDown = (e: React.KeyboardEvent) => {
-      const code = keyboardKey.getCode(e);
-
-      switch (code) {
-        case keyboardKey.Enter: {
-          // prevent submit form on Enter press when selection is available
-          if (isSearchPanelOpen) e.preventDefault();
-          break;
-        }
-        case keyboardKey.Backspace: {
-          onBackspace();
-          break;
-        }
-      }
-    };
-
     const onSelectKeyDown = (e: React.KeyboardEvent) => {
       const code = keyboardKey.getCode(e);
 
@@ -368,18 +398,33 @@ export const SearchSelect = React.forwardRef<HTMLSelectElement, SearchSelectProp
       setIsSearchPanelOpen(true);
     };
 
-    const onInputKeyDown = (evt: React.KeyboardEvent) => {
+    const extendSelectValueToInputValue = () => {
+      if (!visibleValueIsString || searchValue || !shouldRenderSelectValue) return;
+
+      mutableState.current.shouldExtendInputValue = true;
+    };
+
+    const narrowSelectValueToInputValue = (evt: React.KeyboardEvent) => {
+      if (!visibleValueIsString || !inputRef.current || searchValue || !shouldRenderSelectValue || !localValue) return;
+
+      // Предотвратить удаление выделенного с помощью selection символа
+      evt.preventDefault();
+      const newInputValue = visibleValue.slice(0, -1);
+      changeInputData(inputRef.current, {
+        value: newInputValue,
+        selectionEnd: newInputValue.length,
+        selectionStart: newInputValue.length,
+      });
+    };
+
+    const onWrapperKeyDown = (evt: React.KeyboardEvent) => {
       const code = keyboardKey.getCode(evt);
-      switch (code) {
-        case keyboardKey.ArrowUp: {
-          evt.preventDefault();
-          break;
-        }
-        case keyboardKey.ArrowDown: {
-          evt.preventDefault();
-          break;
-        }
-      }
+
+      if (code === keyboardKey.ArrowUp || code === keyboardKey.ArrowDown) evt.preventDefault();
+      if (evt.key.length === 1) extendSelectValueToInputValue();
+      if (code === keyboardKey.Backspace && !evt.repeat) deleteOrHideSelectValueOnBackspace();
+      if (code === keyboardKey.Backspace) narrowSelectValueToInputValue(evt);
+      if (code === keyboardKey.Enter && isSearchPanelOpen) evt.preventDefault();
     };
 
     const onFocus = (evt: React.FocusEvent<HTMLDivElement>) => {
@@ -405,12 +450,6 @@ export const SearchSelect = React.forwardRef<HTMLSelectElement, SearchSelectProp
       props.onChange?.(evt);
     };
 
-    useClickOutside([containerRef, dropDownRef], onCloseSelect);
-
-    const renderPlaceholder = localValue ? undefined : renderPlaceholderDefault;
-    const renderSelectValueDefault = multiple ? renderMultipleSelectValue : renderSelectedOption;
-    const renderValue = renderPlaceholder || renderSelectValue || renderSelectValueDefault || renderValueDefault;
-
     React.useEffect(() => {
       if (!Array.isArray(localValue)) setHoverValue(localValue || '');
     }, [localValue]);
@@ -420,15 +459,18 @@ export const SearchSelect = React.forwardRef<HTMLSelectElement, SearchSelectProp
     }, [multiple, isFocused]);
 
     React.useEffect(() => {
-      if (isSearchPanelOpen) inputRef.current?.focus();
-      else inputRef.current?.blur();
-    }, [isSearchPanelOpen]);
+      if (isSearchPanelOpen) {
+        modeIsSelect ? selectRef.current?.focus() : inputRef.current?.focus();
+      } else {
+        modeIsSelect ? selectRef.current?.blur() : inputRef.current?.blur();
+      }
+    }, [isSearchPanelOpen, modeIsSelect]);
 
     React.useEffect(() => {
       if (!selectIsUncontrolled) setLocalValue(value);
     }, [value, selectIsUncontrolled]);
 
-    const valueIsString = typeof selectedOption?.children === 'string';
+    useClickOutside([containerRef, dropDownRef], onCloseSelect);
 
     return (
       <SelectWrapper
@@ -442,7 +484,7 @@ export const SearchSelect = React.forwardRef<HTMLSelectElement, SearchSelectProp
         ref={containerRef}
         data-status={status}
         onKeyUp={handleKeyUp}
-        onKeyDown={handleKeyDown}
+        onKeyDown={onWrapperKeyDown}
         onClick={onWrapperClick}
         onBlur={onBlur}
         onFocus={onFocus}
@@ -476,18 +518,20 @@ export const SearchSelect = React.forwardRef<HTMLSelectElement, SearchSelectProp
           id="selectValueWrapper"
           dimension={dimension}
           multiple={multiple}
-          hideChips={shouldFixHeight}
-          valueIsString={valueIsString}
+          fixHeight={shouldFixHeight}
+          isEmpty={isEmpty}
         >
-          {shouldRenderSelectValue && renderValue(localValue, searchValue)}
+          {shouldRenderSelectValue && wrappedVisibleValue}
           <Input
+            placeholder={isEmpty ? placeholder : ''}
             tabIndex={-1}
             ref={inputRef}
-            isHidden={!isSearchPanelOpen}
+            disabled={modeIsSelect}
             value={searchValue}
+            defaultValue={defaultInputValue}
             isMultiple={multiple}
+            dimension={dimension}
             onChange={onLocalInputChange}
-            onKeyDown={onInputKeyDown}
           />
         </ValueWrapper>
         {isSearchPanelOpen && (
@@ -497,29 +541,34 @@ export const SearchSelect = React.forwardRef<HTMLSelectElement, SearchSelectProp
             data-dimension={dimension || TextInput.defaultProps?.dimension}
             // Запретит перенос фокуса с инпута при клике по всему, что внутри Dropdown
             onMouseDown={preventDefault}
+            ref={dropDownRef}
           >
-            <div ref={dropDownRef}>
-              <DropDownSearchSelectProvider
-                onOptionClick={handleOptionSelect}
-                onMouseEnter={setHoverValue}
-                onDropDownOptionMount={onDropDownOptionMount}
-                onDropDownOptionUnMount={onDropDownOptionUnMount}
-                highlightFormat={highlightFormat}
-                selectValue={localValue}
-                searchValue={searchValue}
-                hoverValue={hoverValue}
-                dimension={dimension}
-                multiple={multiple}
-                defaultHighlighted={defaultHighlighted}
-                showCheckbox={showCheckbox}
-              >
-                {dropDownChildren}
-              </DropDownSearchSelectProvider>
-            </div>
+            <DropDownSearchSelectProvider
+              onOptionClick={handleOptionSelect}
+              onMouseEnter={setHoverValue}
+              onDropDownOptionMount={onDropDownOptionMount}
+              onDropDownOptionUnMount={onDropDownOptionUnMount}
+              highlightFormat={highlightFormat}
+              selectValue={localValue}
+              searchValue={searchValue}
+              hoverValue={hoverValue}
+              dimension={dimension}
+              multiple={multiple}
+              defaultHighlighted={defaultHighlighted}
+              showCheckbox={showCheckbox}
+            >
+              {dropDownChildren}
+            </DropDownSearchSelectProvider>
           </Dropdown>
         )}
-        <IconPanel disabled={disabled} dimension={dimension} onClick={stopPropagation} onMouseDown={preventDefault}>
-          {displayClearIcon && <ClearIcon id="searchSelectClearIcon" onClick={resetOptions} aria-hidden />}
+        <IconPanel
+          disabled={disabled}
+          multiple={multiple}
+          dimension={dimension}
+          onClick={stopPropagation}
+          onMouseDown={preventDefault}
+        >
+          {displayClearIcon && <ClearIcon id="searchSelectClearIcon" onClick={handleOnClear} aria-hidden />}
           {icons}
           {displayStatusIcon && <StatusIcon status={status} aria-hidden />}
           <OpenStatusButton

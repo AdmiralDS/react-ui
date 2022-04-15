@@ -1,9 +1,9 @@
 import * as React from 'react';
 import styled, { css } from 'styled-components';
-import { typography } from '#/components/Typography';
-import type { CheckBoxProps } from '#/components/Checkbox';
-import { Checkbox } from '#/components/Checkbox';
-import type { CheckboxDimension } from '#/components/Checkbox/CheckboxDimension';
+import { typography } from '#src/components/Typography';
+import type { CheckBoxProps } from '#src/components/Checkbox';
+import { Checkbox } from '#src/components/Checkbox';
+import type { CheckboxDimension } from '#src/components/Checkbox/CheckboxDimension';
 
 export interface CheckboxFieldProps extends Omit<CheckBoxProps, 'children'> {
   /** Текст будет виден ниже компонента */
@@ -64,10 +64,10 @@ const Label = styled.label<{
 
   padding-left: ${(props) => (props.dimension === 's' ? 28 : 32)}px;
 
-  ${(props) => (props.dimension === 's' ? typography['Additional/XS'] : typography['Additional/M'])}
+  ${(props) => (props.dimension === 's' ? typography['Body/Body 2 Short'] : typography['Body/Body 1 Short'])}
   fieldset[data-dimension='s'] & {
     padding-left: 28px;
-    ${typography['Additional/XS']}
+    ${typography['Body/Body 2 Short']}
   }
 
   color: ${(props) => (props.disabled ? props.theme.color.text.tertiary : props.theme.color.text.primary)};
@@ -84,18 +84,28 @@ const ExtrasContainer = styled.div<{
 }>`
   padding-top: 4px;
 
-  ${(props) => (props.dimension === 's' ? typography['Caption/XS'] : typography['Additional/XS'])}
+  ${(props) => (props.dimension === 's' ? typography['Caption/Caption 1'] : typography['Body/Body 2 Short'])}
   fieldset[data-dimension='s'] & {
-    ${typography['Caption/XS']}
+    ${typography['Caption/Caption 1']}
   }
 
   color: ${(props) => props.theme.color.text.secondary};
+
+  [disabled] & {
+    color: ${(props) => props.theme.color.text.tertiary};
+  }
 `;
 
 export const CheckboxField = React.forwardRef<HTMLInputElement, CheckboxFieldProps>(
   ({ extraText, className, children, dimension = 'm', ...props }, ref) => {
     return (
-      <Label className={className} dimension={dimension} disabled={props.disabled}>
+      <Label
+        className={className}
+        dimension={dimension}
+        disabled={props.disabled}
+        data-field-id={props.id}
+        data-field-name={props.name}
+      >
         <PositionedCheckbox dimension={dimension} ref={ref} {...props} />
         {children}
         {extraText && <ExtrasContainer dimension={dimension} children={extraText} />}
@@ -103,3 +113,5 @@ export const CheckboxField = React.forwardRef<HTMLInputElement, CheckboxFieldPro
     );
   },
 );
+
+CheckboxField.displayName = 'CheckboxField';

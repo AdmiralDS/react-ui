@@ -1,8 +1,8 @@
-import { INPUT_DIMENSIONS_VALUES } from '#/components/input';
+import { INPUT_DIMENSIONS_VALUES } from '#src/components/input';
 import { ChangeEvent, useEffect, useState } from 'react';
 import * as React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import { TimeField } from '#/components/form';
+import { TimeField } from '#src/components/form';
 import { withDesign } from 'storybook-addon-designs';
 import styled from 'styled-components';
 
@@ -14,15 +14,15 @@ export default {
     design: [
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=39%3A60618',
+        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A60618',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=39%3A60644',
+        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A60644',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=39%3A60669',
+        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A60669',
       },
     ],
   },
@@ -49,6 +49,24 @@ export default {
     displayInline: {
       control: { type: 'boolean' },
     },
+    startTime: {
+      type: 'string',
+    },
+    endTime: {
+      type: 'string',
+    },
+    disabledSlots: {
+      control: false,
+    },
+    value: {
+      control: { type: 'text' },
+    },
+    icons: {
+      control: false,
+    },
+    extraText: {
+      control: { type: 'text' },
+    },
   },
 } as ComponentMeta<typeof TimeField>;
 
@@ -57,15 +75,6 @@ const DisplayContainer = styled.div`
     margin-bottom: 24px;
   }
 `;
-
-const OPTIONS = [
-  'text 1',
-  'text 2 text text 2 text text 2 text text 2 text text 2 text text 2 text text 2 text ',
-  'text 3',
-  'text 4',
-  'text 5',
-  'text 6',
-];
 
 const Template: ComponentStory<typeof TimeField> = (props) => {
   const cleanProps = (Object.keys(props) as Array<keyof typeof props>).reduce((acc, key) => {

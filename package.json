@@ -16,13 +16,15 @@
   "main": "./dist/admiral-react.cjs.js",
   "module": "./dist/admiral-react.es.js",
   "exports": {
+    "./package.json": "./package.json",
     ".": {
+      "types": "./dist/index.d.ts",
       "require": "./dist/admiral-react.cjs.js",
       "import": "./dist/admiral-react.es.js"
     }
   },
   "imports": {
-    "#/*": "./src/*"
+    "#src/*": "./src/*"
   },
   "types": "./dist",
   "scripts": {
@@ -37,8 +39,8 @@
     "generate-svg-icon-exports": "node ./scripts/generate-svg-icon-exports.js"
   },
   "dependencies": {
-    "@admiral-ds/icons": "^1.0.0",
     "@admiral-ds/fonts": "^1.0.0",
+    "@admiral-ds/icons": "^1.0.0",
     "react": ">=16",
     "react-dom": ">=16",
     "styled-components": "^5.1.0"
@@ -55,6 +57,7 @@
     "@storybook/addon-docs": "^6.4.12",
     "@storybook/addon-essentials": "^6.4.12",
     "@storybook/addon-links": "^6.4.12",
+    "@storybook/addon-storysource": "^6.4.22",
     "@storybook/addons": "^6.4.12",
     "@storybook/react": "^6.4.12",
     "@storybook/theming": "^6.4.12",

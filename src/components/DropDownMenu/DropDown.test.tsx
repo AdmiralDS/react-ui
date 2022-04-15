@@ -1,6 +1,6 @@
-import { DropDownItem } from '#/components/DropDownItem';
-import { DropDownMenu } from '#/components/DropDownMenu';
-import { LIGHT_THEME } from '#/components/themes';
+import { DropDownItem } from '#src/components/DropDownItem';
+import { DropDownMenu } from '#src/components/DropDownMenu';
+import { LIGHT_THEME } from '#src/components/themes';
 import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { ThemeProvider } from 'styled-components';
@@ -58,10 +58,14 @@ describe('DropDown', () => {
     jest.clearAllTimers();
   });
 
+  const mockRef = {
+    current: null,
+  };
+
   it('should render component', () => {
     const wrapper = render(
       <ThemeProvider theme={LIGHT_THEME}>
-        <DropDownMenu>
+        <DropDownMenu targetRef={mockRef}>
           <DropDownItem value={1}>Option</DropDownItem>
         </DropDownMenu>
       </ThemeProvider>,
@@ -71,7 +75,7 @@ describe('DropDown', () => {
   it('should render small components', () => {
     const wrapper = render(
       <ThemeProvider theme={LIGHT_THEME}>
-        <DropDownMenu dimension={'s'}>
+        <DropDownMenu dimension={'s'} targetRef={mockRef}>
           <DropDownItem dimension={'s'}>Option</DropDownItem>
         </DropDownMenu>
       </ThemeProvider>,
@@ -81,7 +85,7 @@ describe('DropDown', () => {
   it('should render group components', () => {
     const wrapper = render(
       <ThemeProvider theme={LIGHT_THEME}>
-        <DropDownMenu tabIndex={-1}>
+        <DropDownMenu tabIndex={-1} targetRef={mockRef}>
           {category.map((item, index) => {
             return (
               <React.Fragment key={index}>
@@ -110,7 +114,7 @@ describe('DropDown', () => {
     const handleClick = jest.fn();
     const wrapper = render(
       <ThemeProvider theme={LIGHT_THEME}>
-        <DropDownMenu tabIndex={-1}>
+        <DropDownMenu tabIndex={-1} targetRef={mockRef}>
           {category.map((item, index) => {
             return (
               <React.Fragment key={index}>
@@ -140,7 +144,7 @@ describe('DropDown', () => {
     const handleClick = jest.fn();
     render(
       <ThemeProvider theme={LIGHT_THEME}>
-        <DropDownMenu dimension={'s'}>
+        <DropDownMenu dimension={'s'} targetRef={mockRef}>
           <DropDownItem onClick={handleClick}>Option</DropDownItem>
         </DropDownMenu>
       </ThemeProvider>,

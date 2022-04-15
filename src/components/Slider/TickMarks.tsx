@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { typography } from '#/components/Typography';
+import { typography } from '#src/components/Typography';
 
 const Wrapper = styled.div<{ position: number }>`
   position: absolute;
@@ -19,7 +19,7 @@ export const Content = styled.div`
     top: 14px;
   }
   white-space: nowrap;
-  ${typography['Additional/XS']}
+  ${typography['Body/Body 2 Short']}
   &:hover {
     color: ${({ theme }) => theme.color.basic.hover};
   }

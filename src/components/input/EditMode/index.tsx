@@ -1,9 +1,9 @@
 import * as React from 'react';
 import styled, { css, DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
-import { Button } from '#/components/Button';
-import { typography } from '#/components/Typography';
-import { refSetter } from '#/components/common/utils/refSetter';
-import { changeInputData } from '#/components/common/dom/changeInputData';
+import { Button } from '#src/components/Button';
+import { typography } from '#src/components/Typography';
+import { refSetter } from '#src/components/common/utils/refSetter';
+import { changeInputData } from '#src/components/common/dom/changeInputData';
 
 import { ReactComponent as EditSolid } from '@admiral-ds/icons/build/system/EditSolid.svg';
 import { ReactComponent as CheckClearOutline } from '@admiral-ds/icons/build/service/CheckClearOutline.svg';
@@ -15,19 +15,19 @@ const EditInput = styled(TextInput)`
   flex: 1 1 auto;
   & input {
     [data-dimension='s'] & {
-      ${typography['Additional/S']}
+      ${typography['Body/Body 2 Long']}
     }
     [data-dimension='s-bold'] & {
-      ${typography['Additional/S-bold']}
+      ${typography['Subtitle/Subtitle 3']}
     }
     [data-dimension='m'] & {
-      ${typography['Additional/L']}
+      ${typography['Body/Body 1 Long']}
     }
     [data-dimension='m-bold'] & {
-      ${typography['Additional/L-bold']}
+      ${typography['Subtitle/Subtitle 2']}
     }
     [data-dimension='xl'] & {
-      ${typography['Main/S']}
+      ${typography['Header/H5']}
     }
   }
 `;
@@ -67,15 +67,9 @@ const EditIcon = styled(EditSolid)`
 
 const CheckIcon = styled(CheckClearOutline)`
   ${iconStyle}
-  & *[fill^='#'] {
-    fill: ${({ theme }) => theme.color.basic.primary};
-  }
 `;
 const ClearIcon = styled(CloseOutline)`
   ${iconStyle}
-  & *[fill^='#'] {
-    fill: ${({ theme }) => theme.color.status.danger};
-  }
 `;
 
 const Wrapper = styled.div<{ cssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>> }>`
@@ -94,29 +88,29 @@ const Text = styled.div`
   margin-right: 12px;
   padding-left: 16px;
   [data-dimension='s'] & {
-    ${typography['Additional/S']}
+    ${typography['Body/Body 2 Long']}
     height: 32px;
     line-height: 32px;
     padding-left: 12px;
   }
   [data-dimension='s-bold'] & {
-    ${typography['Additional/S-bold']}
+    ${typography['Subtitle/Subtitle 3']}
     height: 32px;
     line-height: 32px;
     padding-left: 12px;
   }
   [data-dimension='m'] & {
-    ${typography['Additional/L']}
+    ${typography['Body/Body 1 Long']}
     height: 40px;
     line-height: 40px;
   }
   [data-dimension='m-bold'] & {
-    ${typography['Additional/L-bold']}
+    ${typography['Subtitle/Subtitle 2']}
     height: 40px;
     line-height: 40px;
   }
   [data-dimension='xl'] & {
-    ${typography['Main/S']}
+    ${typography['Header/H5']}
     height: 56px;
     line-height: 56px;
   }
@@ -157,13 +151,19 @@ export interface EditModeProps extends Omit<TextInputProps, 'dimension'> {
 
 export const EditMode = React.forwardRef<HTMLInputElement, EditModeProps>(
   (
-    { dimension = 'm', bold = false, containerCssMixin, disabled = false, onEdit, onConfirm, onClear, ...props },
+    { dimension = 'm', bold = false, containerCssMixin, disabled = false, onEdit, onConfirm, onClear, value, ...props },
     ref,
   ) => {
     const [edit, setEdit] = React.useState(false);
+    const [localVal, setLocalVal] = React.useState(value);
     const iconSize = dimension === 's' ? 20 : 24;
     const inputRef = React.useRef<HTMLInputElement>(null);
 
+    React.useEffect(() => {
+      if (!localVal && value) {
+        setLocalVal(value);
+      }
+    }, [value, localVal]);
     const enableEdit = () => {
       setEdit(true);
       onEdit?.();
@@ -172,11 +172,13 @@ export const EditMode = React.forwardRef<HTMLInputElement, EditModeProps>(
       setEdit(false);
       if (inputRef.current) {
         onConfirm?.(inputRef.current.value);
+        setLocalVal(inputRef.current.value);
       }
     };
     const handleClear = () => {
+      setEdit(false);
       if (inputRef.current) {
-        changeInputData(inputRef.current, { value: '' });
+        changeInputData(inputRef.current, { value: localVal.toString() });
         onClear?.();
       }
     };
@@ -194,6 +196,7 @@ export const EditMode = React.forwardRef<HTMLInputElement, EditModeProps>(
                 autoFocus
                 disabled={disabled}
                 dimension={dimension}
+                value={value}
                 {...props}
               />
               <EditButton
@@ -212,7 +215,7 @@ export const EditMode = React.forwardRef<HTMLInputElement, EditModeProps>(
           )
         ) : (
           <>
-            <Text onClick={enableEdit}>{props.value}</Text>
+            <Text onClick={enableEdit}>{value}</Text>
             <EditIcon height={iconSize} width={iconSize} onClick={enableEdit} />
           </>
         )}
@@ -220,3 +223,5 @@ export const EditMode = React.forwardRef<HTMLInputElement, EditModeProps>(
     );
   },
 );
+
+EditMode.displayName = 'EditMode';

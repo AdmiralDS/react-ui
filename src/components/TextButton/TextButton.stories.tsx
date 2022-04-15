@@ -4,7 +4,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import { ReactComponent as AttachFileOutline } from '@admiral-ds/icons/build/system/AttachFileOutline.svg';
 import { TextButton } from './index';
-import { T } from '#/components/T';
+import { T } from '#src/components/T';
 
 const StyledText = styled(T)`
   margin: 10px 0;
@@ -22,7 +22,7 @@ export default {
   parameters: {
     design: {
       type: 'figma',
-      url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=39%3A17830',
+      url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=108393%3A69880',
     },
   },
 } as ComponentMeta<typeof TextButton>;
@@ -30,7 +30,7 @@ export default {
 const TextButtonStory: ComponentStory<typeof TextButton> = () => {
   return (
     <>
-      <StyledText font="Additional/L" as="div">
+      <StyledText font="Body/Body 1 Long" as="div">
         Dimension - M
       </StyledText>
       <TextButton dimension="m" text="Text Button" icon={<AttachFileOutline />} />
@@ -39,7 +39,9 @@ const TextButtonStory: ComponentStory<typeof TextButton> = () => {
       <Separator />
       <TextButton dimension="m" text="Text Button" />
       <Separator />
-      <StyledText font="Additional/L" as="div">
+      <TextButton dimension="m" text="Text Button Secondary" icon={<AttachFileOutline />} appearance="secondary" />
+      <Separator />
+      <StyledText font="Body/Body 1 Long" as="div">
         Dimension - S
       </StyledText>
       <TextButton dimension="s" text="Text Button" icon={<AttachFileOutline />} />
@@ -47,6 +49,8 @@ const TextButtonStory: ComponentStory<typeof TextButton> = () => {
       <TextButton dimension="s" text="Text Button" icon={<AttachFileOutline />} displayRight />
       <Separator />
       <TextButton dimension="s" text="Text Button" />
+      <Separator />
+      <TextButton dimension="s" text="Text Button Secondary" icon={<AttachFileOutline />} appearance="secondary" />
     </>
   );
 };
@@ -58,7 +62,7 @@ TextButtonStoryDemo.storyName = 'Text Button';
 const TextButtonStatusStory: ComponentStory<typeof TextButton> = () => {
   return (
     <>
-      <StyledText font="Additional/L" as="div">
+      <StyledText font="Body/Body 1 Long" as="div">
         Загрузка
       </StyledText>
       <TextButton dimension="m" text="Text Button" icon={<AttachFileOutline />} loading />
@@ -67,7 +71,7 @@ const TextButtonStatusStory: ComponentStory<typeof TextButton> = () => {
       <Separator />
       <TextButton dimension="m" text="Text Button" loading />
       <Separator />
-      <StyledText font="Additional/L" as="div">
+      <StyledText font="Body/Body 1 Long" as="div">
         Скелетон
       </StyledText>
       <TextButton dimension="m" text="Text Button" icon={<AttachFileOutline />} skeleton />

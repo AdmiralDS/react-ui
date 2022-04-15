@@ -3,7 +3,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { Checkbox } from './index';
 
 import { withDesign } from 'storybook-addon-designs';
-import { ALL_DIMENSIONS_VALUES } from '#/components/Checkbox/CheckboxDimension';
+import { ALL_DIMENSIONS_VALUES } from '#src/components/Checkbox/CheckboxDimension';
 import styled from 'styled-components';
 
 export default {
@@ -14,11 +14,11 @@ export default {
     design: [
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=37%3A21015',
+        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=37%3A21015',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=37%3A21143',
+        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=37%3A21143',
       },
     ],
   },
@@ -31,7 +31,8 @@ export default {
       control: { type: 'boolean' },
     },
     checked: {
-      control: { type: 'boolean' },
+      options: [false, true],
+      control: { type: 'radio' },
     },
     disabled: {
       control: { type: 'boolean' },
@@ -71,6 +72,7 @@ const CheckboxDemo: ComponentStory<typeof Checkbox> = (props) => {
       />
       <Checkbox dimension="s" />
       <Checkbox disabled defaultChecked />
+      <Checkbox disabled />
       <Checkbox error />
       <Checkbox dimension="s" indeterminate />
     </Container>

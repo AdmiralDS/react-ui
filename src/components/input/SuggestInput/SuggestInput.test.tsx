@@ -1,5 +1,5 @@
-import { SuggestInput } from '#/components/input';
-import { LIGHT_THEME } from '#/components/themes';
+import { SuggestInput } from '#src/components/input';
+import { LIGHT_THEME } from '#src/components/themes';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';

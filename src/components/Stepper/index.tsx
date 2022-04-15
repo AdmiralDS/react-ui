@@ -12,7 +12,9 @@ export type Orientation = 'horizontal' | 'vertical';
 export interface StepperProps extends HTMLAttributes<HTMLUListElement> {
   /** Ориентация компонента */
   orientation?: Orientation;
-  /** Индекс активного шага, нумерация шагов начинается с 0 */
+  /** Индекс активного шага, нумерация шагов начинается с 0.
+   * Этот параметр будет перезаписан, если какому-то шагу задан параметр active равный true
+   */
   activeStep: number;
   /** Количество строк в шаге, все шаги по высоте вмещают одинаковое количество строк */
   lineClamp?: 1 | 2 | 3;
@@ -66,3 +68,5 @@ export const Stepper: FC<StepperProps> = ({
     </StepperContext.Provider>
   );
 };
+
+Stepper.displayName = 'Stepper';

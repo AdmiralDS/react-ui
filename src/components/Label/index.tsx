@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import { TYPOGRAPHY } from '#/components/Typography';
+import { TYPOGRAPHY } from '#src/components/Typography';
 
-export const Label = styled.label`
+export const Label = styled.label<{ disabled?: boolean }>`
   text-align: left;
   font-family: ${() => TYPOGRAPHY.fontFamily};
   font-style: normal;
@@ -15,7 +15,7 @@ export const Label = styled.label`
   }
 
   [data-focus-within] & {
-    color: ${(props) => props.theme.color.basic.press};
+    color: ${(props) => (props.disabled ? '' : props.theme.color.basic.press)};
   }
   [data-required-within] &:before {
     content: '* ';
@@ -23,3 +23,5 @@ export const Label = styled.label`
   }
   margin-bottom: 8px;
 `;
+
+Label.displayName = 'Label';

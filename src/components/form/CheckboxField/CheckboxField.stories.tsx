@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import { CheckboxField } from '#/components/form/CheckboxField';
+import { CheckboxField } from '#src/components/form/CheckboxField';
 
 import { withDesign } from 'storybook-addon-designs';
-import { ALL_DIMENSIONS_VALUES } from '#/components/Checkbox/CheckboxDimension';
+import { ALL_DIMENSIONS_VALUES } from '#src/components/Checkbox/CheckboxDimension';
 import styled from 'styled-components';
+import { ReactComponent as InfoSolidSVG } from '@admiral-ds/icons/build/service/InfoSolid.svg';
+import { Hint } from '#src/components/Hint';
+import { HintDialog } from '#src/components/Hint/style';
+import { T } from '#src/components/T';
+import type { CheckboxDimension } from '#src/components/Checkbox/CheckboxDimension';
 
 export default {
   title: 'Form Field Components/CheckboxField',
@@ -14,11 +19,11 @@ export default {
     design: [
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=37%3A21015',
+        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=37%3A21015',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=37%3A21143',
+        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=37%3A21143',
       },
     ],
   },
@@ -31,16 +36,18 @@ export default {
       control: { type: 'boolean' },
     },
     checked: {
-      control: { type: 'boolean' },
+      options: [false, true],
+      control: { type: 'radio' },
     },
     disabled: {
-      control: { type: 'boolean' },
+      options: [undefined, true],
+      control: { type: 'radio' },
     },
     error: {
       control: { type: 'boolean' },
     },
     extraText: {
-      control: false,
+      control: { type: 'text' },
     },
   },
 } as ComponentMeta<typeof CheckboxField>;
@@ -53,6 +60,38 @@ const Container = styled.div`
     margin-top: 16px;
   }
 `;
+
+const InfoSolid = styled(InfoSolidSVG)<{ dimension: CheckboxDimension }>`
+  margin-left: 5px;
+  margin-top: ${(props) => (props.dimension === 'm' ? '-2px' : '-1px')};
+  width: ${(props) => (props.dimension === 'm' ? '24px' : '20px')};
+
+  & *[fill^='#'] {
+    fill: ${(p) => p.theme.color.text.secondary};
+  }
+  [data-focus-within] & *[fill^='#'] {
+    fill: ${(props) => props.theme.color.basic.hover};
+  }
+  &:hover *[fill^='#'] {
+    fill: ${(props) => props.theme.color.basic.hover};
+  }
+`;
+
+const CheckboxWithInformer = styled.div`
+  display: flex;
+  align-items: flex-start;
+`;
+
+const InverseColor = styled(T)`
+  color: ${(p) => p.theme.color.text.staticWhite};
+`;
+
+const InverseBackgroundHint = styled(Hint)`
+  & ${HintDialog} {
+    background-color: ${(p) => p.theme.color.background.inversion};
+  }
+`;
+
 const CheckboxFieldDemo: ComponentStory<typeof CheckboxField> = (props) => {
   const args = (Object.keys(props) as Array<keyof typeof props>).reduce((acc, key) => {
     if (props[key] !== undefined) acc[key] = props[key];
@@ -76,7 +115,7 @@ const CheckboxFieldDemo: ComponentStory<typeof CheckboxField> = (props) => {
         Управляемый чекбокс
       </CheckboxField>
       <CheckboxField dimension="s">Не управляемый маленький чекбокс</CheckboxField>
-      <CheckboxField disabled defaultChecked>
+      <CheckboxField disabled defaultChecked extraText="Дополнительный текст. Additional text">
         Disabled не управляемый чекбокс
       </CheckboxField>
       <CheckboxField
@@ -92,6 +131,38 @@ const CheckboxFieldDemo: ComponentStory<typeof CheckboxField> = (props) => {
       <CheckboxField dimension="s" indeterminate extraText="Вариация с дополнительным текстом">
         Не управляемый маленький чекбокс indeterminate
       </CheckboxField>
+      <CheckboxWithInformer>
+        <CheckboxField dimension="m" extraText="Вариация с информером">
+          Чекбокс с информером
+        </CheckboxField>
+        <InverseBackgroundHint
+          {...args}
+          renderContent={() => (
+            <InverseColor as="span" font="Body/Body 2 Long">
+              At breakpoint boundaries, mini units divide the screen into a fixed master grid, and multiples of mini
+              units map to fluid grid column widths and row heights.
+            </InverseColor>
+          )}
+        >
+          <InfoSolid dimension="m" aria-hidden />
+        </InverseBackgroundHint>
+      </CheckboxWithInformer>
+      <CheckboxWithInformer>
+        <CheckboxField dimension="s" extraText="Вариация с информером">
+          Маленький чекбокс с информером
+        </CheckboxField>
+        <InverseBackgroundHint
+          {...args}
+          renderContent={() => (
+            <InverseColor as="span" font="Body/Body 2 Long">
+              At breakpoint boundaries, mini units divide the screen into a fixed master grid, and multiples of mini
+              units map to fluid grid column widths and row heights.
+            </InverseColor>
+          )}
+        >
+          <InfoSolid dimension="s" aria-hidden />
+        </InverseBackgroundHint>
+      </CheckboxWithInformer>
     </Container>
   );
 };

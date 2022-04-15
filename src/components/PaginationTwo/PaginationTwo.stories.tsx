@@ -39,11 +39,11 @@ export default {
     design: [
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=39%3A41441',
+        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A41441',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=39%3A41584',
+        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A41584',
       },
     ],
   },
@@ -59,6 +59,12 @@ export default {
     },
     showNextBtnMobile: {
       control: { type: 'boolean' },
+    },
+    showInput: {
+      control: { type: 'boolean' },
+    },
+    disabledPages: {
+      control: false,
     },
   },
 } as ComponentMeta<typeof PaginationTwo>;

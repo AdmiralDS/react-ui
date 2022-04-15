@@ -1,11 +1,13 @@
 import styled, { css } from 'styled-components';
-import { typography } from '#/components/Typography';
-import { Dropdown as DropComponent } from '#/components/Dropdown';
-import type { ExtraProps, ComponentDimension } from '#/components/input/types';
+import { typography } from '#src/components/Typography';
+import { Dropdown as DropComponent } from '#src/components/Dropdown';
+import type { DropdownProps } from '#src/components/Dropdown';
+import type { ComponentDimension } from '#src/components/input/types';
 import { ReactComponent as CloseOutlineSvg } from '@admiral-ds/icons/build/service/CloseOutline.svg';
 import { CHIP_OFFSET, COUNTER_WIDTH } from './constants';
 
-const getInputHeight = (dimension?: ComponentDimension) => (dimension === 's' ? 20 : 24);
+const getSelectValueHeight = (dimension?: ComponentDimension, multiple?: boolean) =>
+  dimension === 's' && !multiple ? 20 : 24;
 
 export const ClearIcon = styled(CloseOutlineSvg)`
   & *[fill^='#'] {
@@ -21,7 +23,7 @@ export const ClearIcon = styled(CloseOutlineSvg)`
   }
 `;
 
-export const Dropdown = styled(DropComponent)`
+export const Dropdown = styled(DropComponent)<DropdownProps>`
   padding: 8px 0;
 
   max-height: 256px;
@@ -43,41 +45,41 @@ export const NativeSelect = styled.select`
   pointer-events: none;
 `;
 
-const hideChipsStyle = css`
-  height: 28px;
-  overflow: hidden;
+const fixHeightStyle = css<{ multiple?: boolean; dimension?: ComponentDimension }>`
+  height: ${({ multiple, dimension }) => getSelectValueHeight(dimension, multiple)}px;
 `;
 
-const hideStyle = css`
-  width: 0;
-  opacity: 0;
-  pointer-events: none;
+const chipsShiftStyle = css`
+  > * {
+    margin-left: ${`-${COUNTER_WIDTH + CHIP_OFFSET}px`};
+  }
+  padding-left: ${`${COUNTER_WIDTH + CHIP_OFFSET}px`};
 `;
 
 export const ValueWrapper = styled.div<{
   dimension?: ComponentDimension;
   multiple?: boolean;
-  hideChips?: boolean;
-  valueIsString?: boolean;
+  fixHeight?: boolean;
+  isEmpty?: boolean;
 }>`
   flex: 1 1 auto;
+  display: flex;
+  overflow: hidden;
 
-  display: ${({ valueIsString, multiple }) => (!multiple && valueIsString ? 'block' : 'flex')};
+  ${({ multiple, isEmpty }) => multiple && !isEmpty && chipsShiftStyle}
 
-  > * {
-    margin-left: ${({ multiple }) => (multiple ? `-${COUNTER_WIDTH + CHIP_OFFSET}px` : '0')};
-  }
-  padding-left: ${({ multiple }) => (multiple ? `${COUNTER_WIDTH + CHIP_OFFSET}px` : '0')};
-
+  gap: 4px;
   flex-wrap: ${({ multiple }) => (multiple ? 'wrap' : 'unset')};
   align-items: center;
 
-  ${(props) => (props.dimension === 's' ? typography['Additional/S'] : typography['Additional/L'])}
-  ${({ hideChips }) => (hideChips ? hideChipsStyle : '')}
+  ${(props) => (props.dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
+  ${({ fixHeight }) => fixHeight && fixHeightStyle}
 `;
 
-export const Placeholder = styled.div`
-  color: ${({ theme }) => theme.color.text.secondary};
+export const StringValueWrapper = styled.div`
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 const ieFixes = css`
@@ -91,7 +93,7 @@ const disabledColors = css`
   background-color: ${(props) => props.theme.color.background.tertiary};
 `;
 
-export const Input = styled.input<ExtraProps & { isMultiple?: boolean; isHidden?: boolean }>`
+export const Input = styled.input<{ dimension?: ComponentDimension; isMultiple?: boolean }>`
   outline: none;
   appearance: none;
 
@@ -103,12 +105,9 @@ export const Input = styled.input<ExtraProps & { isMultiple?: boolean; isHidden?
   text-overflow: ellipsis;
   padding: 0;
 
-  ${({ isMultiple }) => (isMultiple ? 'margin-bottom: 4px' : '')};
-  ${({ isHidden }) => (isHidden ? hideStyle : '')};
-
   color: ${(props) => props.theme.color.text.primary};
 
-  ${(props) => (props.dimension === 's' ? typography['Additional/S'] : typography['Additional/L'])}
+  ${({ dimension }) => (dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
 
   &::placeholder {
     color: ${(props) => props.theme.color.text.secondary};
@@ -116,8 +115,7 @@ export const Input = styled.input<ExtraProps & { isMultiple?: boolean; isHidden?
 
   &:disabled,
   &:disabled::placeholder {
-    color: ${(props) => props.theme.color.text.tertiary};
-    ${disabledColors}
+    cursor: inherit;
   }
 
   [data-read-only] & {
@@ -126,7 +124,8 @@ export const Input = styled.input<ExtraProps & { isMultiple?: boolean; isHidden?
     ${disabledColors}
   }
 
-  height: ${({ dimension }) => `${getInputHeight(dimension)}px`};
+  height: ${({ dimension, isMultiple }) => `${getSelectValueHeight(dimension, isMultiple)}px`};
+
   ${ieFixes};
 
   [data-status='error'] &,
@@ -166,11 +165,11 @@ export const SelectWrapper = styled.div<{
   padding: ${({ dimension, multiple }) => {
     switch (dimension) {
       case 'xl':
-        return multiple ? '16px 16px 12px' : '16px 16px';
+        return '15px 16px';
       case 's':
-        return multiple ? '6px 12px 2px' : '6px 12px';
+        return multiple ? '3px 12px' : '5px 12px';
       default:
-        return multiple ? '8px 16px 4px' : '8px 16px';
+        return '7px 16px';
     }
   }};
 
@@ -197,11 +196,13 @@ export const SelectWrapper = styled.div<{
   }
 `;
 
-export const IconPanel = styled.div<{ disabled?: boolean; dimension?: ComponentDimension }>`
+export const IconPanel = styled.div<{ disabled?: boolean; multiple?: boolean; dimension?: ComponentDimension }>`
   flex: 0 0 auto;
 
   display: flex;
   align-items: center;
+
+  padding: ${({ dimension, multiple }) => (dimension === 's' && multiple ? '2px 0' : '0')};
 
   & > * {
     margin-left: 8px;
@@ -223,6 +224,7 @@ export const Hidden = styled.div`
 export const OptionWrapper = styled.div<{ dimension?: ComponentDimension }>`
   flex: 0 0 auto;
 
+  word-break: break-word;
   display: flex;
   align-items: center;
   padding: ${({ dimension }) => {
@@ -241,11 +243,11 @@ export const OptionWrapper = styled.div<{ dimension?: ComponentDimension }>`
   ${({ dimension }) => {
     switch (dimension) {
       case 'xl':
-        return typography['Additional/L'];
+        return typography['Body/Body 1 Long'];
       case 's':
-        return typography['Additional/S'];
+        return typography['Body/Body 2 Long'];
       default:
-        return typography['Additional/M'];
+        return typography['Body/Body 1 Short'];
     }
   }}
 `;

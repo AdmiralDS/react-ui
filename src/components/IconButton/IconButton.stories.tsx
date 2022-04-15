@@ -4,7 +4,7 @@ import { withDesign } from 'storybook-addon-designs';
 import styled from 'styled-components';
 import { IconButton } from './index';
 import { ReactComponent as StarSolid } from '@admiral-ds/icons/build/system/StarSolid.svg';
-import { T } from '#/components/T';
+import { T } from '#src/components/T';
 
 const WrapperIconButton = styled.div`
   display: flex;
@@ -25,23 +25,23 @@ export default {
     design: [
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=39%3A17787',
+        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A17787',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=39%3A18110',
+        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A18110',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=39%3A18298',
+        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A18298',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=39%3A18322',
+        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A18322',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=39%3A18345',
+        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A18345',
       },
     ],
   },
@@ -67,7 +67,7 @@ const IconButtonDemo: ComponentStory<typeof IconButton> = () => {
     <>
       <WrapperIconButton>
         <div>
-          <T font="Additional/L" as="div">
+          <T font="Body/Body 1 Long" as="div">
             Dimension - xl
           </T>
           <IconButton dimension="xl">
@@ -75,7 +75,7 @@ const IconButtonDemo: ComponentStory<typeof IconButton> = () => {
           </IconButton>
         </div>
         <div>
-          <T font="Additional/L" as="div">
+          <T font="Body/Body 1 Long" as="div">
             Dimension - l
           </T>
           <IconButton dimension="l">
@@ -83,7 +83,7 @@ const IconButtonDemo: ComponentStory<typeof IconButton> = () => {
           </IconButton>
         </div>
         <div>
-          <T font="Additional/L" as="div">
+          <T font="Body/Body 1 Long" as="div">
             Dimension - m
           </T>
           <IconButton dimension="m">
@@ -91,7 +91,7 @@ const IconButtonDemo: ComponentStory<typeof IconButton> = () => {
           </IconButton>
         </div>
         <div>
-          <T font="Additional/L" as="div">
+          <T font="Body/Body 1 Long" as="div">
             Dimension - s
           </T>
           <IconButton dimension="s">
@@ -107,13 +107,13 @@ const IconButtonStateDemo: ComponentStory<typeof IconButton> = () => (
   <>
     <WrapperIconButton>
       <div>
-        <T font="Additional/L" as="div">
+        <T font="Body/Body 1 Long" as="div">
           Loading
         </T>
         <IconButton loading dimension="xl" />
       </div>
       <div>
-        <T font="Additional/L" as="div">
+        <T font="Body/Body 1 Long" as="div">
           Disabled
         </T>
         <IconButton disabled dimension="xl">
@@ -121,7 +121,7 @@ const IconButtonStateDemo: ComponentStory<typeof IconButton> = () => (
         </IconButton>
       </div>
       <div>
-        <T font="Additional/L" as="div">
+        <T font="Body/Body 1 Long" as="div">
           Skeleton
         </T>
         <IconButton skeleton dimension="xl" />

@@ -1,6 +1,5 @@
 import styled from 'styled-components';
-
-import { DEFAULT_THEME } from '../../common';
+import { typography } from '#src/components/Typography';
 
 const CALENDAR_WIDTH = 284;
 const YEARS_VIEW_PADDING = '20px 12px 16px';
@@ -27,12 +26,5 @@ export const CalendarComponent = styled.div<CalendarComponentProps>`
 
   width: ${CALENDAR_WIDTH}px;
   background: ${({ theme }) => theme.color.background.primary};
-  font-family: 'VTB Group UI', sans-serif;
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 20px;
+  ${typography['Body/Body 2 Long']}
 `;
-
-CalendarComponent.defaultProps = {
-  theme: DEFAULT_THEME,
-};

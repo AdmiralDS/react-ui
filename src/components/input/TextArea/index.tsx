@@ -1,7 +1,7 @@
-import { changeInputData, CustomInputHandler, InputData } from '#/components/common/dom/changeInputData';
-import { refSetter } from '#/components/common/utils/refSetter';
-import type { ExtraProps, InputStatus, ComponentDimension } from '#/components/input/types';
-import { typography } from '#/components/Typography';
+import { changeInputData, CustomInputHandler, InputData } from '#src/components/common/dom/changeInputData';
+import { refSetter } from '#src/components/common/utils/refSetter';
+import type { ExtraProps, InputStatus, ComponentDimension } from '#src/components/input/types';
+import { typography } from '#src/components/Typography';
 import { ReactComponent as CloseOutlineSvg } from '@admiral-ds/icons/build/service/CloseOutline.svg';
 import type { ForwardedRef, TextareaHTMLAttributes } from 'react';
 import * as React from 'react';
@@ -10,7 +10,7 @@ import { StatusIcon } from '../StatusIcon';
 
 const ClearIcon = styled(CloseOutlineSvg)`
   & *[fill^='#'] {
-    fill: ${(props) => props.theme.color.basic.tertiary};
+    fill: ${(props) => props.theme.color.text.secondary};
   }
 
   &:hover {
@@ -86,11 +86,10 @@ const Text = styled.textarea<ExtraProps>`
   border: none;
   background: transparent;
   overflow: auto;
-  padding: 8px ${horizontalPaddingValue}px;
-
+  padding: ${(props) => (props.dimension === 'xl' ? '' : '8px ')}${horizontalPaddingValue}px;
   color: ${(props) => props.theme.color.text.primary};
 
-  ${(props) => (props.dimension === 's' ? typography['Additional/S'] : typography['Additional/L'])}
+  ${(props) => (props.dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
   &::placeholder {
     color: ${(props) => props.theme.color.text.secondary};
   }
@@ -100,8 +99,6 @@ const Text = styled.textarea<ExtraProps>`
   }
 
   [data-read-only] & {
-    user-select: none;
-    pointer-events: none;
     ${disabledColors}
   }
 
@@ -123,11 +120,6 @@ const Container = styled.div<{ disabled?: boolean; dimension?: ComponentDimensio
   display: flex;
   align-items: stretch;
   border: none;
-
-  &[data-read-only] {
-    user-select: none;
-    pointer-events: none;
-  }
 `;
 
 const IconPanel = styled.div<{ disabled?: boolean; dimension?: ComponentDimension }>`
@@ -187,6 +179,9 @@ export interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElemen
 
   /**  Наличие этого атрибута отключает возможность выделения и копирования значения поля */
   disableCopying?: boolean;
+
+  /**  Включает автоматическое изменение высоты компонента в зависимости от количества текста */
+  autoHeight?: boolean;
 }
 
 export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
@@ -202,11 +197,13 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
       icons,
       children,
       className,
+      autoHeight,
       ...props
     },
     ref,
   ) => {
     const inputRef = React.useRef<HTMLTextAreaElement>(null);
+    const [textRows, setTextRows] = React.useState<number>(rows);
 
     const iconArray = React.Children.toArray(icons);
 
@@ -255,6 +252,26 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
         };
       }
     }, [inputRef.current, handleInput]);
+
+    const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+      if (autoHeight) {
+        const textareaLineHeight = 24;
+        const previousRows = e.target.rows;
+        e.target.rows = rows;
+        const currentRows = ~~(e.target.scrollHeight / textareaLineHeight);
+        if (currentRows === previousRows) {
+          e.target.rows = currentRows;
+        }
+        if (currentRows >= previousRows) {
+          e.target.rows = currentRows;
+          e.target.scrollTop = e.target.scrollHeight;
+        }
+        const rowCount = currentRows > rows ? currentRows : rows;
+        setTextRows(rowCount);
+      }
+      props.onChange?.(e);
+    };
+
     return (
       <Container
         className={className}
@@ -267,7 +284,14 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
           onMouseDown: stopEvent,
         })}
       >
-        <Text ref={refSetter(ref, inputRef)} {...props} iconCount={iconCount} value={inputData.value} rows={rows} />
+        <Text
+          ref={refSetter(ref, inputRef)}
+          {...props}
+          iconCount={iconCount}
+          value={inputData.value}
+          rows={textRows}
+          onChange={onChange}
+        />
         {iconCount > 0 && (
           <IconPanel disabled={props.disabled} dimension={props.dimension}>
             {iconArray}
@@ -278,9 +302,5 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
     );
   },
 );
-
-TextArea.defaultProps = {
-  dimension: 'm',
-} as const;
 
 TextArea.displayName = 'TextArea';

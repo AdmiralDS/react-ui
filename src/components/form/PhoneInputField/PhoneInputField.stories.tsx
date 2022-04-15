@@ -1,5 +1,5 @@
-import { PhoneInputField } from '#/components/form/PhoneInputField';
-import { INPUT_DIMENSIONS_VALUES } from '#/components/input';
+import { PhoneInputField } from '#src/components/form/PhoneInputField';
+import { INPUT_DIMENSIONS_VALUES } from '#src/components/input';
 import * as React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
@@ -12,7 +12,7 @@ export default {
   parameters: {
     design: {
       type: 'figma',
-      url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=39%3A61244',
+      url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A61244',
     },
   },
   argTypes: {

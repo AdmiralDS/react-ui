@@ -1,15 +1,14 @@
 import * as React from 'react';
 import { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
-import type { RefCallback, RefObject } from '#/components/common/utils/handleRef';
-import { handleRef } from '#/components/common/utils/handleRef';
-import { getScrollableParents } from '#/components/common/utils/getScrollableParents';
-import { uid } from '#/components/common/uid';
-import { keyboardKey } from '#/components/common/keyboardKey';
+import type { RefCallback, RefObject } from '#src/components/common/utils/handleRef';
+import { handleRef } from '#src/components/common/utils/handleRef';
+import { getScrollableParents } from '#src/components/common/utils/getScrollableParents';
+import { uid } from '#src/components/common/uid';
+import { keyboardKey } from '#src/components/common/keyboardKey';
 
-import type { Dimension } from './styled';
-import { AnchorWrapper } from './styled';
-import type { CalculationResult } from './utils';
-import { calculateDirection } from './utils';
+import type { Dimension } from './style';
+import { AnchorWrapper, Portal, FakeTarget } from './style';
+import { getHintDirection } from './utils';
 import { HintContainer } from './HintContainer';
 import { initialState, reducer } from './reducer';
 
@@ -24,8 +23,6 @@ export interface HintProps extends React.HTMLAttributes<HTMLDivElement> {
   target?: React.MutableRefObject<Element | null | undefined>;
   /** Триггер появления компонента (событие, которое вызывает появление хинта) */
   visibilityTrigger?: Trigger;
-  /** Отображение компонента для мобильной версии (менее 640px), хинт адаптируется под ширину экрана */
-  isMobile?: boolean;
   /** Размер компонента */
   dimension?: Dimension;
   /** Ссылка на тултип */
@@ -40,10 +37,9 @@ export interface HintProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export const Hint: React.FC<HintProps> = ({
   renderContent,
-  container,
+  container: userContainer,
   target,
   visibilityTrigger = 'hover',
-  isMobile = false,
   dimension = 'l',
   hintRef,
   children,
@@ -52,48 +48,104 @@ export const Hint: React.FC<HintProps> = ({
   anchorCssMixin,
   ...props
 }) => {
-  const targetRef = target;
   const anchorElementRef = React.useRef<HTMLDivElement | null>(null);
   const hintElementRef = React.useRef<HTMLDivElement | null>(null);
-  const portal: Element = container || document.body;
+  const container: Element = userContainer || document.body;
   const content = renderContent();
   const anchorId = anchorIdProp || uid();
 
+  const targetRef: any = target || anchorElementRef;
+  const targetElement: any = target?.current || anchorElementRef.current;
+
   const [state, dispatch] = React.useReducer(reducer, initialState);
+  const [portalFlexDirection, setPortalFlexDirection] = React.useState<
+    'row' | 'row-reverse' | 'column' | 'column-reverse' | undefined
+  >();
+  const [portalFullWidth, setPortalFullWidth] = React.useState(false);
+  const [isMobile, setMobile] = React.useState(window.innerWidth < 640);
+  const [trapFocus, setTrapFocus] = React.useState(false);
 
   const hideHint = () => dispatch({ type: 'setInvisible' });
 
+  // если ширина экрана меньше 640 пикселей, хинт переходит в состояние mobile (адаптируется по ширине к экрану)
   React.useLayoutEffect(() => {
-    const anchorElement = targetRef?.current || anchorElementRef.current;
-
-    if (state.visible && anchorElement && hintElementRef.current) {
-      const anchorElementRect = anchorElement.getBoundingClientRect();
-      const hintElementRect = hintElementRef.current.getBoundingClientRect();
-
-      if (isMobile) {
-        // рассчитываем ширину хинта
-        const hintWidth =
-          anchorElementRect.right > window.innerWidth - anchorElementRect.left
-            ? anchorElementRect.right
-            : window.innerWidth - anchorElementRect.left;
-        hintElementRef.current.style.maxWidth = `${hintWidth}px`;
-        dispatch({ type: 'setHintWidth', payload: hintWidth });
+    const listener = () => {
+      if (window.innerWidth < 640) {
+        setMobile(true);
+      } else {
+        setMobile(false);
       }
+    };
+    window.addEventListener('resize', listener);
 
-      const directionCalculationResult: CalculationResult = calculateDirection(
-        anchorElement as HTMLElement,
-        hintElementRef.current,
-      );
-      const calculatedStyles = directionCalculationResult.getStyles(anchorElementRect, hintElementRect);
-      hintElementRef.current.style.transform = calculatedStyles;
+    return () => {
+      window.removeEventListener('resize', listener);
+    };
+  });
+
+  React.useLayoutEffect(() => {
+    const hint = hintElementRef.current;
+
+    if (state.visible && targetElement && hint) {
+      const anchorElementRect = targetElement.getBoundingClientRect();
+      const hintElementRect = hint.getBoundingClientRect();
+      if (isMobile) {
+        if (window.innerHeight - anchorElementRect.bottom > hintElementRect.height) {
+          setPortalFlexDirection('column');
+        } else {
+          setPortalFlexDirection('column-reverse');
+        }
+        setPortalFullWidth(true);
+        hint.style.alignSelf = 'center';
+        hint.style.margin = '0';
+      } else {
+        const direction = getHintDirection(targetElement, hint);
+        switch (direction) {
+          case 'top-pageCenter':
+            setPortalFlexDirection('column-reverse');
+            setPortalFullWidth(true);
+            hint.style.alignSelf = 'center';
+            hint.style.margin = '0';
+            break;
+          case 'bottom-pageCenter':
+            setPortalFlexDirection('column');
+            setPortalFullWidth(true);
+            hint.style.alignSelf = 'center';
+            hint.style.margin = '0';
+            break;
+          case 'top-right':
+            setPortalFlexDirection('column-reverse');
+            setPortalFullWidth(false);
+            hint.style.alignSelf = 'flex-start';
+            hint.style.margin = '0 0 0 -8px';
+            break;
+          case 'bottom-right':
+            setPortalFlexDirection('column');
+            setPortalFullWidth(false);
+            hint.style.alignSelf = 'flex-start';
+            hint.style.margin = '0 0 0 -8px';
+            break;
+          case 'top-left':
+            setPortalFlexDirection('column-reverse');
+            setPortalFullWidth(false);
+            hint.style.alignSelf = 'flex-end';
+            hint.style.margin = '0 -8px 0 0';
+            break;
+          case 'bottom-left':
+          default:
+            setPortalFlexDirection('column');
+            setPortalFullWidth(false);
+            hint.style.alignSelf = 'flex-end';
+            hint.style.margin = '0 -8px 0 0';
+        }
+      }
     }
   }, [
-    targetRef?.current,
+    target?.current,
     anchorElementRef.current,
     hintElementRef.current,
     state.visible,
     state.recalculation,
-    state.hintWidth,
     dimension,
     content,
     isMobile,
@@ -116,6 +168,15 @@ export const Hint: React.FC<HintProps> = ({
     }
   };
 
+  // First container render always happens downward and transparent,
+  // after size and position settled transparency returns to normal
+  React.useEffect(() => {
+    if (hintElementRef.current) {
+      hintElementRef.current.style.opacity = '1';
+      setTrapFocus(true);
+    }
+  }, [hintElementRef.current, state.visible]);
+
   return (
     <AnchorWrapper
       onMouseEnter={visibilityTrigger === 'click' ? undefined : handleMouseEnter}
@@ -131,20 +192,30 @@ export const Hint: React.FC<HintProps> = ({
     >
       {children}
       {state.visible && (
-        <HintContainer
-          ref={attachRef}
-          dimension={dimension}
-          isMobile={isMobile}
-          content={content}
-          visibilityTrigger={visibilityTrigger}
-          portal={portal}
-          scrollableParents={scrollableParents}
-          dispatch={dispatch}
-          anchorElementRef={anchorElementRef}
-          anchorId={anchorId}
-          {...props}
-        />
+        <Portal
+          targetRef={targetRef}
+          container={container}
+          flexDirection={portalFlexDirection}
+          fullContainerWidth={portalFullWidth}
+        >
+          <FakeTarget />
+          <HintContainer
+            ref={attachRef}
+            dimension={dimension}
+            isMobile={isMobile}
+            content={content}
+            visibilityTrigger={visibilityTrigger}
+            scrollableParents={scrollableParents}
+            dispatch={dispatch}
+            anchorElementRef={anchorElementRef}
+            anchorId={anchorId}
+            trapFocus={trapFocus}
+            {...props}
+          />
+        </Portal>
       )}
     </AnchorWrapper>
   );
 };
+
+Hint.displayName = 'Hint';

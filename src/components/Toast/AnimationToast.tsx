@@ -1,10 +1,10 @@
 import type { FC } from 'react';
 import * as React from 'react';
 import styled, { css, keyframes } from 'styled-components';
-import { Notification } from '#/components/Notification';
+import { Notification } from '#src/components/Notification';
 import { useToast } from './useToast';
-import type { PositionToasts } from '#/components/Toast/ToastProvider';
-import type { IdentifyToast } from '#/components/Toast/type';
+import type { PositionToasts } from '#src/components/Toast/ToastProvider';
+import type { IdentifyToast } from '#src/components/Toast/type';
 
 const fadeInRight = keyframes`
   from {
@@ -42,16 +42,22 @@ export interface ToastTransitionProps {
 
 const Transition = styled.div<{ position?: PositionToasts }>`
   margin-bottom: 16px;
+  &:last-child {
+    margin-bottom: 0;
+  }
   animation-duration: 1s;
   animation-timing-function: ease-out;
   ${fadeMixin}
-  ${(props) => props.theme.shadow.ClickableDefault}
 `;
 
 interface AnimationToast {
   position: PositionToasts;
   item: IdentifyToast;
 }
+
+const StyledNotification = styled(Notification)`
+  ${(props) => props.theme.shadow.ClickableDefault}
+`;
 
 export const AnimationToast: FC<AnimationToast> = ({ position, item }) => {
   const { removeToast } = useToast();
@@ -62,9 +68,9 @@ export const AnimationToast: FC<AnimationToast> = ({ position, item }) => {
 
   return (
     <Transition key={item.id} position={position}>
-      <Notification {...item} onClose={item.onClose || handleOnClose}>
+      <StyledNotification {...item} onClose={item.onClose || handleOnClose}>
         {item.children}
-      </Notification>
+      </StyledNotification>
     </Transition>
   );
 };

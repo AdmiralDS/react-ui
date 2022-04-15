@@ -1,10 +1,11 @@
 import { ButtonHTMLAttributes, ReactNode } from 'react';
 import * as React from 'react';
 import styled, { css, keyframes } from 'styled-components';
-import { typography } from '#/components/Typography';
-import { Spinner } from '#/components/Spinner';
+import { typography } from '#src/components/Typography';
+import { Spinner } from '#src/components/Spinner';
 
 type Dimension = 'm' | 's';
+type Appearance = 'primary' | 'secondary';
 
 const IconContainer = styled.div``;
 
@@ -37,6 +38,7 @@ export const skeletonMixin = css`
 
 const StyledButton = styled.button<{
   dimension?: Dimension;
+  appearance?: Appearance;
   displayRight?: boolean;
   $loading?: boolean;
   skeleton?: boolean;
@@ -50,14 +52,14 @@ const StyledButton = styled.button<{
   appearance: none;
   border: none;
   background: transparent;
-  color: ${(p) => p.theme.color.basic.primary};
+
   > ${IconContainer} {
     ${(p) => p.skeleton && skeletonMixin};
     border-radius: ${(p) => (p.skeleton ? '50%' : '')};
     svg {
       visibility: ${(p) => (p.skeleton || p.$loading ? 'hidden' : 'visible')};
       path {
-        fill: ${(p) => p.theme.color.basic.primary};
+        fill: ${(p) => (p.appearance === 'secondary' ? p.theme.color.text.primary : p.theme.color.basic.primary)};
       }
     }
   }
@@ -68,7 +70,10 @@ const StyledButton = styled.button<{
       visibility: ${(p) => (p.skeleton || p.$loading ? 'hidden' : 'visible')};
     }
   }
-  ${(p) => (p.dimension === 'm' ? typography['Button/M'] : typography['Button/S'])}
+  ${(p) => (p.dimension === 'm' ? typography['Button/Button 1'] : typography['Button/Button 2'])}
+
+  color: ${(p) => (p.appearance === 'secondary' ? p.theme.color.text.primary : p.theme.color.basic.primary)};
+
   &:focus,
   &:hover {
     cursor: pointer;
@@ -107,6 +112,8 @@ const StyledButton = styled.button<{
 export interface TextButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   /** Размер кнопки */
   dimension?: Dimension;
+  /** Внешний вид кнопки */
+  appearance?: Appearance;
   /** Иконка кнопки */
   icon?: ReactNode;
   /** Текст кнопки */
@@ -121,7 +128,17 @@ export interface TextButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>
 
 export const TextButton = React.forwardRef<HTMLButtonElement, TextButtonProps>(
   (
-    { dimension = 'm', icon, type = 'button', text, displayRight = false, loading = false, skeleton = false, ...props },
+    {
+      dimension = 'm',
+      appearance = 'primary',
+      icon,
+      type = 'button',
+      text,
+      displayRight = false,
+      loading = false,
+      skeleton = false,
+      ...props
+    },
     ref,
   ) => {
     return (
@@ -129,6 +146,7 @@ export const TextButton = React.forwardRef<HTMLButtonElement, TextButtonProps>(
         {...props}
         ref={ref}
         dimension={dimension}
+        appearance={appearance}
         displayRight={displayRight}
         type={type}
         $loading={loading}
@@ -143,3 +161,5 @@ export const TextButton = React.forwardRef<HTMLButtonElement, TextButtonProps>(
     );
   },
 );
+
+TextButton.displayName = 'TextButton';

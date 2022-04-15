@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
-import { DropDownItem } from '#/components/DropDownItem';
+import { DropDownItem } from '#src/components/DropDownItem';
 import styled from 'styled-components';
 import { MultiSelectField } from './index';
-import { CheckboxField } from '#/components/form/CheckboxField';
-import { INPUT_DIMENSIONS_VALUES } from '#/components/input/types';
+import { CheckboxField } from '#src/components/form/CheckboxField';
+import { INPUT_DIMENSIONS_VALUES } from '#src/components/input/types';
 
 export default {
   title: 'Form Field Components/ MultiSelectField',
@@ -15,15 +15,15 @@ export default {
     design: [
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=39%3A72815',
+        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A72815',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=39%3A72897',
+        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A72897',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=39%3A72973',
+        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A72973',
       },
     ],
   },
@@ -45,7 +45,7 @@ export default {
       control: { type: 'boolean' },
     },
     extraText: {
-      control: false,
+      control: { type: 'text' },
     },
   },
 } as ComponentMeta<typeof MultiSelectField>;
@@ -95,4 +95,4 @@ SelectFieldFieldInput.args = {
   label: 'Label',
 };
 
-SelectFieldFieldInput.storyName = 'МултиСелект field';
+SelectFieldFieldInput.storyName = 'MultiSelectField example';

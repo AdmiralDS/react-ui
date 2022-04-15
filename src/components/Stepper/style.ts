@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { typography } from '#/components/Typography';
+import { typography } from '#src/components/Typography';
 
 import { ReactComponent as StepSvg } from './svg/Step.svg';
 
@@ -168,7 +168,7 @@ export const Content = styled.div<{ lineClamp: 1 | 2 | 3 }>`
   }};
   overflow: hidden;
   color: ${({ theme }) => theme.color.text.primary};
-  ${typography['Additional/S']}
+  ${typography['Body/Body 2 Long']}
   margin: 0 12px 0 0;
 `;
 

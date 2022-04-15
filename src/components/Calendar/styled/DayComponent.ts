@@ -1,7 +1,5 @@
 import styled, { css } from 'styled-components';
-
-import { DEFAULT_THEME } from '../../common';
-import { typography } from '../../Typography';
+import { typography } from '#src/components/Typography';
 
 import type { CornerKeys, Corners } from '../constants';
 
@@ -35,7 +33,7 @@ export const DayComponent = styled.div<DayComponentProps>`
   height: ${DAY_SIZE};
   padding: ${DAY_PADDING};
   margin-bottom: ${DAY_MARGIN_BOTOM};
-  ${typography['Additional/S']}
+  ${typography['Body/Body 2 Long']}
   color: ${({ theme }) => theme.color.text.primary};
   box-sizing: border-box;
   user-select: none;
@@ -71,9 +69,6 @@ export const DayComponent = styled.div<DayComponentProps>`
       &:hover {
         background: ${theme.color.basic.hover};
       }
-      &:active {
-        background: ${theme.color.basic.press};
-      }
     `}
 
   ${({ disabled, inRange, theme, corners, selected, isActiveDate }) =>
@@ -105,7 +100,3 @@ export const DayComponent = styled.div<DayComponentProps>`
       }
     `}
 `;
-
-DayComponent.defaultProps = {
-  theme: DEFAULT_THEME,
-};

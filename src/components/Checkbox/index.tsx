@@ -86,7 +86,7 @@ export const Background = styled.div<{ error?: boolean }>`
   /* disable inheritance from parent elements */
   line-height: initial;
   background-color: ${({ theme }) => theme.color.background.primary};
-  border: 1px solid ${({ error, theme }) => (error ? theme.color.status.danger : theme.color.basic.tertiary)};
+  border: 1px solid ${({ error, theme }) => (error ? theme.color.status.danger : theme.color.text.secondary)};
 `;
 
 const Input = styled.input<{ indeterminate?: boolean }>`
@@ -138,12 +138,17 @@ const Input = styled.input<{ indeterminate?: boolean }>`
 
   &:not(:checked):disabled + ${Background} {
     background-color: ${({ theme }) => theme.color.background.primary};
-    border: 1px solid ${({ theme }) => theme.color.text.tertiary};
+    border: 1px solid ${({ theme }) => theme.color.basic.disable};
   }
 
   &:disabled + ${Background} {
-    background-color: ${({ theme }) => theme.color.text.tertiary};
+    background-color: ${({ theme }) => theme.color.basic.disable};
     border: none;
+  }
+
+  &:focus-visible {
+    outline-offset: 2px;
+    outline: ${(p) => p.theme.color.basic.hover} solid 2px;
   }
 `;
 
@@ -163,3 +168,5 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckBoxProps>(
     );
   },
 );
+
+Checkbox.displayName = 'Checkbox';

@@ -32,10 +32,10 @@ export const Step: FC<StepProps> = ({
   ...props
 }) => {
   const { activeStep, orientation, stepWidth } = React.useContext(StepperContext);
-  const clickable = !propDisabled && (!!onClick || !!link) && index <= activeStep;
-  const active = propActive || activeStep === index;
-  const completed = (propCompleted || activeStep > index) && !propDisabled;
-  const disabled = activeStep < index || propDisabled;
+  const clickable = !propDisabled && (!!onClick || !!link) && !!propCompleted;
+  const active = propActive !== undefined ? propActive : activeStep === index;
+  const completed = !!propCompleted && !propDisabled;
+  const disabled = (!completed && !active) || !!propDisabled;
   const icon = error || warning ? StepError : completed ? StepCompleted : StepDefault;
   const stepRef = React.useRef<HTMLLIElement | null>(null);
 

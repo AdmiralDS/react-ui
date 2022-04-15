@@ -1,9 +1,9 @@
-import type { SelectProps } from '#/components/Select';
-import { Select as BaseSelect } from '#/components/Select';
+import type { SelectProps } from '#src/components/Select';
+import { Select as BaseSelect } from '#src/components/Select';
 import * as React from 'react';
-import { Field, FieldOwnProps } from '#/components/Field';
+import { Field, FieldOwnProps } from '#src/components/Field';
 import styled from 'styled-components';
-import { uid } from '#/components/common/uid';
+import { uid } from '#src/components/common/uid';
 
 const Select = styled(BaseSelect)`
   [data-status='error'] & {
@@ -15,6 +15,10 @@ export interface SelectFieldProps
   extends SelectProps,
     Omit<FieldOwnProps, 'inputRef' | 'onChange' | 'displayCharacterCounter' | 'maxLength'> {}
 
+/**
+ * @deprecated Используйте SearchSelectField
+ * @type {React.ForwardRefExoticComponent<React.PropsWithoutRef<SelectFieldProps> & React.RefAttributes<HTMLDivElement>>}
+ */
 export const SelectField = React.forwardRef<HTMLDivElement, SelectFieldProps>((props, ref) => {
   const fieldRef = React.useRef(null);
   const { className, displayInline, status, required, extraText, label, id = uid(), disabled, ...restProps } = props;

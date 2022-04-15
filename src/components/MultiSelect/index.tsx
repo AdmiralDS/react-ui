@@ -1,16 +1,13 @@
-import { ComponentDimension } from '#/components/input';
+import { ComponentDimension } from '#src/components/input';
 import type { HTMLAttributes, KeyboardEvent, MouseEvent, ReactElement, ReactNode } from 'react';
 import * as React from 'react';
 import { Children, cloneElement, Fragment, isValidElement, useEffect, useRef, useState } from 'react';
 import styled, { css, DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
-import { ReactComponent as ChevronDownOutline } from '@admiral-ds/icons/build/system/ChevronDownOutline.svg';
-import { ReactComponent as ChevronUpOutline } from '@admiral-ds/icons/build/system/ChevronUpOutline.svg';
-import { OpenStatusButton } from '#/components/OpenStatusButton';
-import { TYPOGRAPHY } from '#/components/Typography';
-import { DropDownMenu } from '#/components/DropDownMenu';
-import { keyboardKey } from '#/components/common/keyboardKey';
-import { Dropdown } from '#/components/Dropdown';
-import { refSetter } from '#/components/common/utils/refSetter';
+import { OpenStatusButton } from '#src/components/OpenStatusButton';
+import { TYPOGRAPHY } from '#src/components/Typography';
+import { keyboardKey } from '#src/components/common/keyboardKey';
+import { Dropdown } from '#src/components/Dropdown';
+import { refSetter } from '#src/components/common/utils/refSetter';
 import { Chips } from '../Chips';
 
 export type MultiSelectDimension = 'xl' | 'm' | 's';
@@ -34,24 +31,6 @@ const styleText = css<{ dimension: MultiSelectDimension; disabled?: boolean }>`
   font-family: ${TYPOGRAPHY.fontFamily};
 `;
 
-const styleIcon = css<{ focused: boolean; disabled?: boolean }>`
-  & *[fill^='#'] {
-    fill: ${({ focused, theme, disabled }) => {
-      if (focused) return theme.color.basic.press;
-      if (disabled) return theme.color.text.tertiary;
-      return theme.color.basic.tertiary;
-    }};
-  }
-
-  &:hover {
-    cursor: ${({ disabled }) => (disabled ? 'default' : 'pointer')};
-  }
-
-  &:hover *[fill^='#'] {
-    fill: ${({ theme, disabled }) => (disabled ? theme.color.text.tertiary : theme.color.basic.hover)};
-  }
-`;
-
 const SelectComponent = styled.div<{ dimension: MultiSelectDimension; disabled?: boolean; focused: boolean }>`
   white-space: nowrap;
   position: relative;
@@ -69,13 +48,6 @@ const SelectComponent = styled.div<{ dimension: MultiSelectDimension; disabled?:
   border-radius: 4px;
   height: inherit;
   cursor: ${({ disabled }) => (disabled ? 'default' : 'pointer')};
-
-  & *[fill^='#'] {
-    fill: ${({ theme, disabled }) => {
-      if (disabled) return theme.color.text.tertiary;
-      return theme.color.basic.tertiary;
-    }};
-  }
 `;
 
 const Placeholder = styled.div<{ dimension: MultiSelectDimension; focused: boolean; disabled?: boolean }>`
@@ -90,12 +62,15 @@ const Placeholder = styled.div<{ dimension: MultiSelectDimension; focused: boole
   text-overflow: ellipsis;
 `;
 
-const StyledDropDownMenu = styled(DropDownMenu)<{
+const StyledDropDown = styled(Dropdown)<{
+  cssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
   disabled: boolean;
   dropMaxHeight: string | number;
 }>`
-  width: 100%;
-  position: relative;
+  padding: 8px 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  min-width: 100%;
   max-height: ${(p) => p.dropMaxHeight};
 
   // checkbox svgs should stay white colored.
@@ -105,23 +80,7 @@ const StyledDropDownMenu = styled(DropDownMenu)<{
       return theme.color.basic.tertiary;
     }};
   }
-`;
-
-const StyledDropDown = styled(Dropdown)<{
-  alignDropdown?: string;
-  cssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
-}>`
-  min-width: 100%;
-  ${(p) => p.cssMixin || ''}
-  ${(p) => (p.alignDropdown ? `align-self: ${p.alignDropdown}` : '')};
-`;
-
-const WrapperIcon = styled.div<{ dimension: MultiSelectDimension; focused: boolean; disabled?: boolean }>`
-  padding-right: ${({ dimension }) => (dimension === 's' ? 12 : 16)}px;
-  height: ${({ dimension }) => (dimension === 's' ? 20 : 24)}px;
-  display: flex;
-  align-items: center;
-  ${styleIcon}
+  ${(p) => p.cssMixin || ''};
 `;
 
 const IconPanel = styled.div<{ disabled?: boolean; dimension?: ComponentDimension }>`
@@ -177,6 +136,12 @@ const SelectWrapper = styled.div<{
   &:active {
     outline: none;
   }
+  [data-status='success'] & {
+    border-color: ${(props) => props.theme.color.status.success};
+  }
+  [data-status='error'] & {
+    border-color: ${(props) => props.theme.color.status.danger};
+  }
 `;
 
 const WrapperChip = styled.div`
@@ -221,7 +186,7 @@ export interface MultiSelectProps extends Omit<HTMLAttributes<HTMLDivElement>, '
   /** Обработчик для изменения состояния селекта */
   onChange: (value: string[]) => void;
   /** Ссылка на Дропдаун */
-  dropDownRef?: any;
+  dropDownRef?: React.RefObject<HTMLElement>;
   /** Колбек на открытие селекта */
   onOpen?: () => void;
   /** Колбек на закрытие селекта */
@@ -235,8 +200,6 @@ export interface MultiSelectProps extends Omit<HTMLAttributes<HTMLDivElement>, '
   dropMaxHeight?: string | number;
   /** Позволяет добавлять миксин на дроп контейнер созданный с помощью styled css  */
   dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
-  /** Референс на контейнер для правильного позиционирования выпадающего списка */
-  portalTargetRef?: React.RefObject<HTMLElement>;
 }
 
 export const MultiSelect = React.forwardRef<HTMLDivElement, MultiSelectProps>(
@@ -255,14 +218,13 @@ export const MultiSelect = React.forwardRef<HTMLDivElement, MultiSelectProps>(
       alignDropdown,
       dropMaxHeight = '300px',
       dropContainerCssMixin,
-      portalTargetRef,
       ...props
     },
     ref,
   ) => {
     const [open, setOpen] = useState(false);
     const [focused, setFocused] = useState(false);
-    const localDropDownRef = useRef<HTMLUListElement>(null);
+    const [hovered, setHovered] = React.useState('');
 
     const refWrapper = useRef<HTMLDivElement>(null);
 
@@ -274,14 +236,30 @@ export const MultiSelect = React.forwardRef<HTMLDivElement, MultiSelectProps>(
 
     const handleKeyDownItem = (e: KeyboardEvent) => {
       const code = keyboardKey.getCode(e);
+      const targetValue = (e?.currentTarget as HTMLElement).getAttribute('value') ?? '';
       e.preventDefault();
-      if (code === keyboardKey.Enter || code === keyboardKey[' ']) {
-        const targetValue = (e?.currentTarget as HTMLElement).getAttribute('value') ?? '';
-        targetValue && onChange && onChange(detectedDuplicate(targetValue, [...value, targetValue]));
-      } else if (code === keyboardKey.Escape || code === keyboardKey.Tab) {
-        onClose?.();
-        setOpen(false);
-        (refWrapper.current as HTMLElement).focus();
+      switch (code) {
+        case keyboardKey[' ']:
+        case keyboardKey.Enter: {
+          targetValue && onChange && onChange(detectedDuplicate(hovered, [...value, hovered]));
+          setHovered('');
+          break;
+        }
+        case keyboardKey.Escape:
+        case keyboardKey.Tab: {
+          onClose?.();
+          setOpen(false);
+          (refWrapper.current as HTMLElement).focus();
+          break;
+        }
+        case keyboardKey.ArrowUp: {
+          setHovered(targetValue);
+          break;
+        }
+        case keyboardKey.ArrowDown: {
+          setHovered(targetValue);
+          break;
+        }
       }
     };
 
@@ -305,6 +283,7 @@ export const MultiSelect = React.forwardRef<HTMLDivElement, MultiSelectProps>(
               disabled: disabled || child?.props?.disabled,
               onMouseDown: (e: MouseEvent) => handleClickItem(e, child.props.disabled),
               onKeyDown: handleKeyDownItem,
+              hovered: hovered === child.props.value,
               dimension: dimension === 'xl' ? 'l' : dimension,
               selected: value.length === 0 ? false : value.includes(child?.props?.value?.toString?.()),
               ...child.props,
@@ -316,6 +295,7 @@ export const MultiSelect = React.forwardRef<HTMLDivElement, MultiSelectProps>(
           disabled: disabled || child.props.disabled,
           onMouseDown: (e: MouseEvent) => handleClickItem(e, child.props.disabled),
           onKeyDown: handleKeyDownItem,
+          hovered: hovered === child.props.value,
           dimension: dimension === 'xl' ? 'l' : dimension,
           selected: value.length === 0 ? false : value.includes(child?.props?.value?.toString?.()),
           ...child.props,
@@ -331,7 +311,7 @@ export const MultiSelect = React.forwardRef<HTMLDivElement, MultiSelectProps>(
 
     useEffect(() => {
       const listener = (event: any) => {
-        if (refWrapper?.current?.contains(event.target) || localDropDownRef?.current?.contains(event.target)) {
+        if (refWrapper?.current?.contains(event.target)) {
           return;
         }
         outsideClick();
@@ -342,7 +322,7 @@ export const MultiSelect = React.forwardRef<HTMLDivElement, MultiSelectProps>(
         document.removeEventListener('mousedown', listener);
         document.removeEventListener('touchstart', listener);
       };
-    }, [refWrapper?.current, localDropDownRef?.current, outsideClick]);
+    }, [refWrapper?.current, outsideClick]);
 
     const handleKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
       const code = keyboardKey.getCode(e);
@@ -437,24 +417,20 @@ export const MultiSelect = React.forwardRef<HTMLDivElement, MultiSelectProps>(
         </SelectComponent>
         {open && (
           <StyledDropDown
-            targetRef={portalTargetRef || refWrapper}
+            targetRef={dropDownRef || refWrapper}
             data-dimension={dimension === 'xl' ? 'l' : dimension}
-            alignDropdown={alignDropdown}
+            alignSelf={alignDropdown}
             cssMixin={dropContainerCssMixin}
+            dropMaxHeight={dropMaxHeight}
+            disabled={disabled}
+            role="listbox"
           >
-            <StyledDropDownMenu
-              dropMaxHeight={dropMaxHeight}
-              disabled={disabled}
-              ref={refSetter(dropDownRef, localDropDownRef)}
-              dimension={dimension === 'xl' ? 'l' : dimension}
-              role="listbox"
-              tabIndex={-1}
-            >
-              {renderChildrenDropDown()}
-            </StyledDropDownMenu>
+            {renderChildrenDropDown()}
           </StyledDropDown>
         )}
       </SelectWrapper>
     );
   },
 );
+
+MultiSelect.displayName = 'MultiSelect';

@@ -3,8 +3,12 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import styled from 'styled-components';
 
-import { RadioButton, RadioButtonProps } from '../RadioButton';
-import { Button } from '../Button';
+import { RadioButton, RadioButtonProps } from '#src/components/RadioButton';
+import { Button } from '#src/components/Button';
+import { ReactComponent as InfoSolidSVG } from '@admiral-ds/icons/build/service/InfoSolid.svg';
+import { Hint } from '#src/components/Hint';
+import { HintDialog } from '#src/components/Hint/style';
+import { T } from '#src/components/T';
 
 const Separator = styled.div`
   height: 20px;
@@ -15,6 +19,39 @@ const Desc = styled.div`
   font-family: 'VTB Group UI';
   font-size: 16px;
   line-height: 24px;
+`;
+
+type Dimension = 'm' | 's';
+
+const InfoSolid = styled(InfoSolidSVG)<{ dimension: Dimension }>`
+  margin-left: 5px;
+  margin-top: ${(props) => (props.dimension === 'm' ? '-2px' : '-1px')};
+  width: ${(props) => (props.dimension === 'm' ? '24px' : '20px')};
+
+  & *[fill^='#'] {
+    fill: ${(p) => p.theme.color.text.secondary};
+  }
+  [data-focus-within] & *[fill^='#'] {
+    fill: ${(props) => props.theme.color.basic.hover};
+  }
+  &:hover *[fill^='#'] {
+    fill: ${(props) => props.theme.color.basic.hover};
+  }
+`;
+
+const RadioWithInformer = styled.div`
+  display: flex;
+  align-items: flex-start;
+`;
+
+const InverseColor = styled(T)`
+  color: ${(p) => p.theme.color.text.staticWhite};
+`;
+
+const InverseBackgroundHint = styled(Hint)`
+  & ${HintDialog} {
+    background-color: ${(p) => p.theme.color.background.inversion};
+  }
 `;
 
 const Description = () => (
@@ -31,11 +68,11 @@ export default {
     design: [
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=37%3A21629',
+        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=37%3A21629',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=37%3A21739',
+        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=37%3A21739',
       },
     ],
     componentSubtitle: <Description />,
@@ -129,6 +166,44 @@ const Template4: ComponentStory<typeof RadioButton> = () => {
   );
 };
 
+const Template5: ComponentStory<typeof RadioButton> = () => {
+  return (
+    <>
+      <RadioWithInformer>
+        <RadioButton value={1} extraText="Add text">
+          Dimension - m
+        </RadioButton>
+        <InverseBackgroundHint
+          renderContent={() => (
+            <InverseColor as="span" font="Body/Body 2 Long">
+              At breakpoint boundaries, mini units divide the screen into a fixed master grid, and multiples of mini
+              units map to fluid grid column widths and row heights.
+            </InverseColor>
+          )}
+        >
+          <InfoSolid dimension="m" aria-hidden />
+        </InverseBackgroundHint>
+      </RadioWithInformer>
+      <Separator />
+      <RadioWithInformer>
+        <RadioButton value={1} dimension="s" extraText="Add text">
+          Dimension - s
+        </RadioButton>
+        <InverseBackgroundHint
+          renderContent={() => (
+            <InverseColor as="span" font="Body/Body 2 Long">
+              At breakpoint boundaries, mini units divide the screen into a fixed master grid, and multiples of mini
+              units map to fluid grid column widths and row heights.
+            </InverseColor>
+          )}
+        >
+          <InfoSolid dimension="s" aria-hidden />
+        </InverseBackgroundHint>
+      </RadioWithInformer>
+    </>
+  );
+};
+
 export const Playground = Template3.bind({});
 Playground.args = {};
 Playground.parameters = {
@@ -150,3 +225,7 @@ RadioState.storyName = 'RadioButton. Состояния';
 export const RadioExtraText = Template4.bind({});
 RadioExtraText.args = {};
 RadioExtraText.storyName = 'RadioButton. Дополнительный текст';
+
+export const RadioInformer = Template5.bind({});
+RadioInformer.args = {};
+RadioInformer.storyName = 'RadioButton. Информер';

@@ -1,0 +1,1421 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Toggle should render component with disabled state 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": .c1 {
+  position: absolute;
+  width: 0;
+  height: 0;
+  opacity: 0;
+}
+
+.c1:checked + span {
+  background: #0062FF;
+}
+
+.c1:checked + span:before {
+  left: calc(100% - 2px - 16px);
+}
+
+.c1:checked + span:hover:after {
+  visibility: visible;
+  left: calc(100% + -12px - 16px);
+}
+
+.c1:disabled + span {
+  background: #B1B5BB;
+}
+
+.c1:checked:not(:disabled):hover + span,
+.c1:checked:not(:disabled):focus + span {
+  background: #0062FF;
+}
+
+.c1:checked:not(:disabled):hover + span:hover:after,
+.c1:checked:not(:disabled):focus + span:hover:after {
+  visibility: visible;
+  left: calc(100% + -12px - 16px);
+}
+
+.c1:not(:checked):not(:disabled):hover + span,
+.c1:not(:checked):not(:disabled):focus + span {
+  background: #74777F;
+}
+
+.c3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  margin-left: 8px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #B1B5BB;
+}
+
+.c2 {
+  position: relative;
+  width: 36px;
+  height: 20px;
+  border-radius: 10px;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  background: #74777F;
+}
+
+.c2:before {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  border-radius: 16px;
+  background: #FFFFFF;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.c2:after {
+  content: '';
+  visibility: hidden;
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  width: 36px;
+  height: 36px;
+  border-radius: 36px;
+  background: #0000000D;
+}
+
+.c2:hover:after {
+  visibility: visible;
+}
+
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  position: relative;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  cursor: default;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+<body>
+    <div>
+      <label
+        class="c0"
+        disabled=""
+        role="switch"
+      >
+        <input
+          class="c1"
+          data-testid="element"
+          disabled=""
+          type="checkbox"
+        />
+        <span
+          aria-hidden="true"
+          class="c2"
+          disabled=""
+        />
+        <div
+          class="c3"
+          disabled=""
+        >
+          text
+        </div>
+      </label>
+    </div>
+  </body>,
+  "container": .c1 {
+  position: absolute;
+  width: 0;
+  height: 0;
+  opacity: 0;
+}
+
+.c1:checked + span {
+  background: #0062FF;
+}
+
+.c1:checked + span:before {
+  left: calc(100% - 2px - 16px);
+}
+
+.c1:checked + span:hover:after {
+  visibility: visible;
+  left: calc(100% + -12px - 16px);
+}
+
+.c1:disabled + span {
+  background: #B1B5BB;
+}
+
+.c1:checked:not(:disabled):hover + span,
+.c1:checked:not(:disabled):focus + span {
+  background: #0062FF;
+}
+
+.c1:checked:not(:disabled):hover + span:hover:after,
+.c1:checked:not(:disabled):focus + span:hover:after {
+  visibility: visible;
+  left: calc(100% + -12px - 16px);
+}
+
+.c1:not(:checked):not(:disabled):hover + span,
+.c1:not(:checked):not(:disabled):focus + span {
+  background: #74777F;
+}
+
+.c3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  margin-left: 8px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #B1B5BB;
+}
+
+.c2 {
+  position: relative;
+  width: 36px;
+  height: 20px;
+  border-radius: 10px;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  background: #74777F;
+}
+
+.c2:before {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  border-radius: 16px;
+  background: #FFFFFF;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.c2:after {
+  content: '';
+  visibility: hidden;
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  width: 36px;
+  height: 36px;
+  border-radius: 36px;
+  background: #0000000D;
+}
+
+.c2:hover:after {
+  visibility: visible;
+}
+
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  position: relative;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  cursor: default;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+<div>
+    <label
+      class="c0"
+      disabled=""
+      role="switch"
+    >
+      <input
+        class="c1"
+        data-testid="element"
+        disabled=""
+        type="checkbox"
+      />
+      <span
+        aria-hidden="true"
+        class="c2"
+        disabled=""
+      />
+      <div
+        class="c3"
+        disabled=""
+      >
+        text
+      </div>
+    </label>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`Toggle should render component with left labelPosition 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": .c1 {
+  position: absolute;
+  width: 0;
+  height: 0;
+  opacity: 0;
+}
+
+.c1:checked + span {
+  background: #0062FF;
+}
+
+.c1:checked + span:before {
+  left: calc(100% - 2px - 16px);
+}
+
+.c1:checked + span:hover:after {
+  visibility: visible;
+  left: calc(100% + -12px - 16px);
+}
+
+.c1:disabled + span {
+  background: #B1B5BB;
+}
+
+.c1:checked:not(:disabled):hover + span,
+.c1:checked:not(:disabled):focus + span {
+  background: #0062FF;
+}
+
+.c1:checked:not(:disabled):hover + span:hover:after,
+.c1:checked:not(:disabled):focus + span:hover:after {
+  visibility: visible;
+  left: calc(100% + -12px - 16px);
+}
+
+.c1:not(:checked):not(:disabled):hover + span,
+.c1:not(:checked):not(:disabled):focus + span {
+  background: #74777F;
+}
+
+.c3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  margin-right: 8px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #22242A;
+}
+
+.c2 {
+  position: relative;
+  width: 36px;
+  height: 20px;
+  border-radius: 10px;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  background: #74777F;
+}
+
+.c2:before {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  border-radius: 16px;
+  background: #FFFFFF;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.c2:after {
+  content: '';
+  visibility: hidden;
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  width: 36px;
+  height: 36px;
+  border-radius: 36px;
+  background: #0000000D;
+}
+
+.c2:hover:after {
+  visibility: visible;
+}
+
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row-reverse;
+  -ms-flex-direction: row-reverse;
+  flex-direction: row-reverse;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  position: relative;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+<body>
+    <div>
+      <label
+        class="c0"
+        role="switch"
+      >
+        <input
+          class="c1"
+          data-testid="element"
+          type="checkbox"
+        />
+        <span
+          aria-hidden="true"
+          class="c2"
+        />
+        <div
+          class="c3"
+        >
+          text
+        </div>
+      </label>
+    </div>
+  </body>,
+  "container": .c1 {
+  position: absolute;
+  width: 0;
+  height: 0;
+  opacity: 0;
+}
+
+.c1:checked + span {
+  background: #0062FF;
+}
+
+.c1:checked + span:before {
+  left: calc(100% - 2px - 16px);
+}
+
+.c1:checked + span:hover:after {
+  visibility: visible;
+  left: calc(100% + -12px - 16px);
+}
+
+.c1:disabled + span {
+  background: #B1B5BB;
+}
+
+.c1:checked:not(:disabled):hover + span,
+.c1:checked:not(:disabled):focus + span {
+  background: #0062FF;
+}
+
+.c1:checked:not(:disabled):hover + span:hover:after,
+.c1:checked:not(:disabled):focus + span:hover:after {
+  visibility: visible;
+  left: calc(100% + -12px - 16px);
+}
+
+.c1:not(:checked):not(:disabled):hover + span,
+.c1:not(:checked):not(:disabled):focus + span {
+  background: #74777F;
+}
+
+.c3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  margin-right: 8px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #22242A;
+}
+
+.c2 {
+  position: relative;
+  width: 36px;
+  height: 20px;
+  border-radius: 10px;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  background: #74777F;
+}
+
+.c2:before {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  border-radius: 16px;
+  background: #FFFFFF;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.c2:after {
+  content: '';
+  visibility: hidden;
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  width: 36px;
+  height: 36px;
+  border-radius: 36px;
+  background: #0000000D;
+}
+
+.c2:hover:after {
+  visibility: visible;
+}
+
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row-reverse;
+  -ms-flex-direction: row-reverse;
+  flex-direction: row-reverse;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  position: relative;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+<div>
+    <label
+      class="c0"
+      role="switch"
+    >
+      <input
+        class="c1"
+        data-testid="element"
+        type="checkbox"
+      />
+      <span
+        aria-hidden="true"
+        class="c2"
+      />
+      <div
+        class="c3"
+      >
+        text
+      </div>
+    </label>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`Toggle should render component with required properties 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": .c1 {
+  position: absolute;
+  width: 0;
+  height: 0;
+  opacity: 0;
+}
+
+.c1:checked + span {
+  background: #0062FF;
+}
+
+.c1:checked + span:before {
+  left: calc(100% - 2px - 16px);
+}
+
+.c1:checked + span:hover:after {
+  visibility: visible;
+  left: calc(100% + -12px - 16px);
+}
+
+.c1:disabled + span {
+  background: #B1B5BB;
+}
+
+.c1:checked:not(:disabled):hover + span,
+.c1:checked:not(:disabled):focus + span {
+  background: #0062FF;
+}
+
+.c1:checked:not(:disabled):hover + span:hover:after,
+.c1:checked:not(:disabled):focus + span:hover:after {
+  visibility: visible;
+  left: calc(100% + -12px - 16px);
+}
+
+.c1:not(:checked):not(:disabled):hover + span,
+.c1:not(:checked):not(:disabled):focus + span {
+  background: #74777F;
+}
+
+.c3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  margin-left: 8px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #22242A;
+}
+
+.c2 {
+  position: relative;
+  width: 36px;
+  height: 20px;
+  border-radius: 10px;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  background: #74777F;
+}
+
+.c2:before {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  border-radius: 16px;
+  background: #FFFFFF;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.c2:after {
+  content: '';
+  visibility: hidden;
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  width: 36px;
+  height: 36px;
+  border-radius: 36px;
+  background: #0000000D;
+}
+
+.c2:hover:after {
+  visibility: visible;
+}
+
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  position: relative;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+<body>
+    <div>
+      <label
+        class="c0"
+        role="switch"
+      >
+        <input
+          class="c1"
+          data-testid="element"
+          type="checkbox"
+        />
+        <span
+          aria-hidden="true"
+          class="c2"
+        />
+        <div
+          class="c3"
+        >
+          text
+        </div>
+      </label>
+    </div>
+  </body>,
+  "container": .c1 {
+  position: absolute;
+  width: 0;
+  height: 0;
+  opacity: 0;
+}
+
+.c1:checked + span {
+  background: #0062FF;
+}
+
+.c1:checked + span:before {
+  left: calc(100% - 2px - 16px);
+}
+
+.c1:checked + span:hover:after {
+  visibility: visible;
+  left: calc(100% + -12px - 16px);
+}
+
+.c1:disabled + span {
+  background: #B1B5BB;
+}
+
+.c1:checked:not(:disabled):hover + span,
+.c1:checked:not(:disabled):focus + span {
+  background: #0062FF;
+}
+
+.c1:checked:not(:disabled):hover + span:hover:after,
+.c1:checked:not(:disabled):focus + span:hover:after {
+  visibility: visible;
+  left: calc(100% + -12px - 16px);
+}
+
+.c1:not(:checked):not(:disabled):hover + span,
+.c1:not(:checked):not(:disabled):focus + span {
+  background: #74777F;
+}
+
+.c3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  margin-left: 8px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #22242A;
+}
+
+.c2 {
+  position: relative;
+  width: 36px;
+  height: 20px;
+  border-radius: 10px;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  background: #74777F;
+}
+
+.c2:before {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  border-radius: 16px;
+  background: #FFFFFF;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.c2:after {
+  content: '';
+  visibility: hidden;
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  width: 36px;
+  height: 36px;
+  border-radius: 36px;
+  background: #0000000D;
+}
+
+.c2:hover:after {
+  visibility: visible;
+}
+
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  position: relative;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+<div>
+    <label
+      class="c0"
+      role="switch"
+    >
+      <input
+        class="c1"
+        data-testid="element"
+        type="checkbox"
+      />
+      <span
+        aria-hidden="true"
+        class="c2"
+      />
+      <div
+        class="c3"
+      >
+        text
+      </div>
+    </label>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`Toggle should render component with small dimension 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": .c1 {
+  position: absolute;
+  width: 0;
+  height: 0;
+  opacity: 0;
+}
+
+.c1:checked + span {
+  background: #0062FF;
+}
+
+.c1:checked + span:before {
+  left: calc(100% - 2px - 12px);
+}
+
+.c1:checked + span:hover:after {
+  visibility: visible;
+  left: calc(100% + -12px - 12px);
+}
+
+.c1:disabled + span {
+  background: #B1B5BB;
+}
+
+.c1:checked:not(:disabled):hover + span,
+.c1:checked:not(:disabled):focus + span {
+  background: #0062FF;
+}
+
+.c1:checked:not(:disabled):hover + span:hover:after,
+.c1:checked:not(:disabled):focus + span:hover:after {
+  visibility: visible;
+  left: calc(100% + -12px - 12px);
+}
+
+.c1:not(:checked):not(:disabled):hover + span,
+.c1:not(:checked):not(:disabled):focus + span {
+  background: #74777F;
+}
+
+.c3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  margin-left: 8px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 16px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #22242A;
+}
+
+.c2 {
+  position: relative;
+  width: 28px;
+  height: 16px;
+  border-radius: 10px;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  background: #74777F;
+}
+
+.c2:before {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 12px;
+  height: 12px;
+  border-radius: 12px;
+  background: #FFFFFF;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.c2:after {
+  content: '';
+  visibility: hidden;
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  width: 32px;
+  height: 32px;
+  border-radius: 32px;
+  background: #0000000D;
+}
+
+.c2:hover:after {
+  visibility: visible;
+}
+
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  position: relative;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+<body>
+    <div>
+      <label
+        class="c0"
+        role="switch"
+      >
+        <input
+          class="c1"
+          data-testid="element"
+          type="checkbox"
+        />
+        <span
+          aria-hidden="true"
+          class="c2"
+        />
+        <div
+          class="c3"
+        >
+          text
+        </div>
+      </label>
+    </div>
+  </body>,
+  "container": .c1 {
+  position: absolute;
+  width: 0;
+  height: 0;
+  opacity: 0;
+}
+
+.c1:checked + span {
+  background: #0062FF;
+}
+
+.c1:checked + span:before {
+  left: calc(100% - 2px - 12px);
+}
+
+.c1:checked + span:hover:after {
+  visibility: visible;
+  left: calc(100% + -12px - 12px);
+}
+
+.c1:disabled + span {
+  background: #B1B5BB;
+}
+
+.c1:checked:not(:disabled):hover + span,
+.c1:checked:not(:disabled):focus + span {
+  background: #0062FF;
+}
+
+.c1:checked:not(:disabled):hover + span:hover:after,
+.c1:checked:not(:disabled):focus + span:hover:after {
+  visibility: visible;
+  left: calc(100% + -12px - 12px);
+}
+
+.c1:not(:checked):not(:disabled):hover + span,
+.c1:not(:checked):not(:disabled):focus + span {
+  background: #74777F;
+}
+
+.c3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  margin-left: 8px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 16px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #22242A;
+}
+
+.c2 {
+  position: relative;
+  width: 28px;
+  height: 16px;
+  border-radius: 10px;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  background: #74777F;
+}
+
+.c2:before {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 12px;
+  height: 12px;
+  border-radius: 12px;
+  background: #FFFFFF;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.c2:after {
+  content: '';
+  visibility: hidden;
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  width: 32px;
+  height: 32px;
+  border-radius: 32px;
+  background: #0000000D;
+}
+
+.c2:hover:after {
+  visibility: visible;
+}
+
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  position: relative;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+<div>
+    <label
+      class="c0"
+      role="switch"
+    >
+      <input
+        class="c1"
+        data-testid="element"
+        type="checkbox"
+      />
+      <span
+        aria-hidden="true"
+        class="c2"
+      />
+      <div
+        class="c3"
+      >
+        text
+      </div>
+    </label>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;

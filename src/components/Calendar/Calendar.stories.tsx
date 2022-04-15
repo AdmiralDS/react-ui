@@ -3,6 +3,8 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 
 import { Calendar, CalendarPropType } from './index';
+import { ViewScreenType } from './interfaces';
+import { Button } from '../Button';
 
 export default {
   title: 'Example/Calendar',
@@ -11,7 +13,7 @@ export default {
   parameters: {
     design: {
       type: 'figma',
-      url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=39%3A53407',
+      url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A53407',
     },
     docs: {
       source: {
@@ -26,6 +28,34 @@ export default {
     },
     range: {
       control: { type: 'boolean' },
+    },
+    currentActiveViewImportant: {
+      control: { type: 'boolean' },
+    },
+    currentActiveView: {
+      options: ['YEAR', 'MONTH', 'DAY'],
+      control: { type: 'radio' },
+    },
+    validator: {
+      control: false,
+    },
+    tooltipContainer: {
+      control: false,
+    },
+    startDate: {
+      control: false,
+    },
+    selected: {
+      control: false,
+    },
+    endDate: {
+      control: false,
+    },
+    minDate: {
+      control: false,
+    },
+    maxDate: {
+      control: false,
     },
   },
 } as ComponentMeta<typeof Calendar>;
@@ -132,18 +162,180 @@ const Template4: ComponentStory<typeof Calendar> = ({ range, ...args }: Calendar
   );
 };
 
+const Template5: ComponentStory<typeof Calendar> = ({ range, ...args }: CalendarPropType) => {
+  const [selected, setSelected] = useState<Date | null>(null);
+
+  return (
+    <>
+      <h3>Коллбеки (смотри в консоль)</h3>
+      <p>Открытие экранов выбора года и месяца `(onViewEnter, onViewLeave)`</p>
+      <p>Изменение даты после выбора года или месяца по стрелкам `(onIncreaseDecreaseDate)`</p>
+
+      <Calendar
+        {...args}
+        selected={selected}
+        onChange={(value: any) => {
+          setSelected(value);
+        }}
+        onDateIncreaseDecrease={(value: any) => {
+          console.log('onIncreaseDecreaseDate', value);
+        }}
+        onViewEnter={(view: ViewScreenType) => {
+          console.log('onViewEnter', view);
+        }}
+        onViewLeave={(view: ViewScreenType) => {
+          console.log('onViewLeave', view);
+        }}
+      />
+    </>
+  );
+};
+
+const Template6: ComponentStory<typeof Calendar> = ({ range, ...args }: CalendarPropType) => {
+  const [selected, setSelected] = useState<Date | null>(null);
+  const [currentActiveView, setCurrentActiveView] = useState<ViewScreenType | null>(null);
+
+  return (
+    <>
+      <h3>Переключение экранов выбора дат - месяц/год/день</h3>
+      <div style={{ display: 'flex' }}>
+        <Button dimension="s" onClick={() => setCurrentActiveView('MONTH')}>
+          Month
+        </Button>
+        &nbsp;
+        <Button dimension="s" onClick={() => setCurrentActiveView('YEAR')}>
+          Year
+        </Button>
+        &nbsp;
+        <Button dimension="s" onClick={() => setCurrentActiveView('DAY')}>
+          Day
+        </Button>
+      </div>
+      <br />
+      <Calendar
+        {...args}
+        selected={selected}
+        currentActiveView={currentActiveView}
+        currentActiveViewImportant={true}
+        onDateIncreaseDecrease={() => {
+          setCurrentActiveView(null);
+        }}
+        onYearSelect={(data) => {
+          setSelected(data as Date);
+          setCurrentActiveView('MONTH');
+        }}
+        onMonthSelect={(data) => {
+          setSelected(data as Date);
+        }}
+        onViewMonthSelect={() => {
+          console.log('onViewMonthSelect');
+          setCurrentActiveView('MONTH');
+        }}
+        onViewYearSelect={() => {
+          console.log('onViewYearSelect');
+          setCurrentActiveView('YEAR');
+        }}
+        onChange={(value: any) => {
+          setSelected(value);
+        }}
+      />
+    </>
+  );
+};
+
+const Template7: ComponentStory<typeof Calendar> = ({ range, ...args }: CalendarPropType) => {
+  const [selected, setSelected] = useState<Date | null>(null);
+  const [currentActiveView, setActiveViewDateScreen] = useState<ViewScreenType | null>(null);
+
+  return (
+    <>
+      <h3>Открытие экрана выбора месяца после выбора года</h3>
+      <Calendar
+        {...args}
+        selected={selected}
+        currentActiveView={currentActiveView}
+        onDateIncreaseDecrease={(date: any) => {
+          setActiveViewDateScreen(null);
+          console.log(date, 'onIncreaseDecreaseDate');
+        }}
+        onChange={(value: any) => {
+          setSelected(value);
+          console.log(value, 'onChange');
+        }}
+        onYearSelect={() => {
+          setActiveViewDateScreen('MONTH');
+        }}
+      />
+    </>
+  );
+};
+
+const Template8: ComponentStory<typeof Calendar> = ({ range, ...args }: CalendarPropType) => {
+  const [selected, setSelected] = useState<Date | null>(null);
+  const [currentActiveView, setCurrentActiveView] = useState<ViewScreenType | null>('MONTH');
+
+  return (
+    <>
+      <h3>Показываем только экраны выбора месяца и года</h3>
+      <p>Если выставлен currentActiveViewImportant, то необходимо самому управлять открытием экранов</p>
+      <div>
+        <Button onClick={() => setSelected(new Date())}>set Date now</Button>
+      </div>
+      <br />
+      <Calendar
+        {...args}
+        selected={selected}
+        currentActiveView={currentActiveView}
+        currentActiveViewImportant={true}
+        onDateIncreaseDecrease={(date: any) => {
+          console.log(date, 'onIncreaseDecreaseDate');
+          setSelected(date);
+        }}
+        onChange={(value: any) => {
+          setSelected(value);
+          console.log(value, 'onChange');
+        }}
+        onViewMonthSelect={() => {
+          console.log('onViewMonthSelect');
+          setCurrentActiveView('MONTH');
+        }}
+        onViewYearSelect={() => {
+          console.log('onViewYearSelect');
+          setCurrentActiveView('YEAR');
+        }}
+      />
+    </>
+  );
+};
+
 export const CalendarSimple = Template1.bind({});
 CalendarSimple.args = {};
-CalendarSimple.storyName = 'Calendar. Simple.';
+CalendarSimple.storyName = 'Simple.';
 
 export const Range = Template2.bind({});
 Range.args = {};
-Range.storyName = 'Calendar. Range.';
+Range.storyName = 'Range.';
 
 export const SimpleWithMaxDate = Template3.bind({});
 SimpleWithMaxDate.args = {};
-SimpleWithMaxDate.storyName = 'Calendar. Simple with maxDate.';
+SimpleWithMaxDate.storyName = 'maxDate.';
 
 export const SimpleWithFilterDate = Template4.bind({});
 SimpleWithFilterDate.args = {};
-SimpleWithFilterDate.storyName = 'Calendar. Simple with filterDate.';
+SimpleWithFilterDate.storyName = 'FilterDate.';
+
+export const SimpleWithChangeViewDate = Template5.bind({});
+SimpleWithChangeViewDate.args = {};
+SimpleWithChangeViewDate.storyName = 'Callback';
+
+export const SimpleWithSetActiveViewDate = Template6.bind({});
+SimpleWithSetActiveViewDate.args = {};
+SimpleWithSetActiveViewDate.storyName = 'Active ViewDate screen';
+
+export const SimpleWithSetActiveViewDateAfterChooseYear = Template7.bind({});
+SimpleWithSetActiveViewDateAfterChooseYear.args = {};
+SimpleWithSetActiveViewDateAfterChooseYear.storyName = 'ViewDate screen after choose year';
+
+export const SimpleWithSetActiveViewWithOutDay = Template8.bind({});
+SimpleWithSetActiveViewWithOutDay.args = {};
+SimpleWithSetActiveViewWithOutDay.storyName = 'ViewDate year/month';

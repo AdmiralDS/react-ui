@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { HTMLAttributes, useEffect, useCallback } from 'react';
 import styled, { css } from 'styled-components';
-import { ErrorBlock } from '#/components/input/FileUploader/ErrorBlock';
-import { Spinner } from '#/components/Spinner';
-import { Tooltip } from '#/components/Tooltip';
+import { ErrorBlock } from '#src/components/input/FileUploader/ErrorBlock';
+import { Spinner } from '#src/components/Spinner';
+import { Tooltip } from '#src/components/Tooltip';
 import { formatBytes, Dimension, Status, dataTransferConstructorSupported } from './utils';
 import { ReactComponent as FilePDFSolid } from '@admiral-ds/icons/build/documents/FilePDFSolid.svg';
 import { ReactComponent as FilePPTSolid } from '@admiral-ds/icons/build/documents/FilePPTSolid.svg';
@@ -19,6 +19,8 @@ export type FileProps = {
   status?: Status;
   /** Ошибка при загрузке файла */
   error?: string;
+  /** Отображение превью изображений  */
+  showPreview?: boolean;
 };
 
 export interface FilePreviewProps extends Omit<HTMLAttributes<HTMLDivElement>, 'id' | 'onClick'> {
@@ -29,7 +31,6 @@ export interface FilePreviewProps extends Omit<HTMLAttributes<HTMLDivElement>, '
   /** Размер файлового компонента */
   fileDimension?: Dimension;
   onClick?: (id: number) => void;
-  maxFileSize?: number;
 }
 
 const getIcon = (type: string) => {
@@ -196,13 +197,14 @@ export const FileInfo = ({ id, file, dimension, fileDimension, onClick, children
     file: { type, name, size },
     status,
     error,
+    showPreview,
   } = file;
   const PreviewIcon = getIcon(type);
   const fileFormat = getFormat(type);
   const fileSize = formatBytes(size);
   const fileName = name.substring(0, name.lastIndexOf('.'));
   const [imageSrc, setImageSrc] = React.useState('');
-  const imageFile = type.startsWith('image');
+  const imageFile = showPreview && type.startsWith('image');
   const fileInfo = `${fileFormat}・${fileSize} Mb`;
 
   const handleClick = useCallback(() => {

@@ -9,6 +9,8 @@ export function useToast(): IContextProps {
     addToast: context?.addToast,
     removeToast: context?.removeToast,
     toasts: context?.toasts,
+    clearToasts: context?.clearToasts,
+    removeToastById: context?.removeToastById,
     autoDeleteTime: context?.autoDeleteTime,
   };
 }

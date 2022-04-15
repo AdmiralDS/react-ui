@@ -1,4 +1,3 @@
-import type { FC } from 'react';
 import React, { HTMLAttributes } from 'react';
 import styled, { css } from 'styled-components';
 import { ReactComponent as CloseOutline } from '@admiral-ds/icons/build/service/CloseOutline.svg';
@@ -8,8 +7,8 @@ import { ReactComponent as SuccessIcon } from '@admiral-ds/icons/build/service/C
 import { ReactComponent as ErrorIcon } from '@admiral-ds/icons/build/service/CloseSolid.svg';
 
 import { DEFAULT_THEME } from '../common';
-import { typography } from '#/components/Typography';
-import { Link } from '#/components/Link';
+import { typography } from '#src/components/Typography';
+import { Link } from '#src/components/Link';
 
 type Status = 'info' | 'error' | 'success' | 'warning';
 
@@ -83,13 +82,13 @@ const Content = styled.div`
 `;
 
 const Title = styled.div`
-  ${typography['Additional/S-bold']}
+  ${typography['Subtitle/Subtitle 3']}
   color: ${({ theme }) => theme.color.text.primary};
   margin-bottom: 4px;
 `;
 
 const CustomBody = styled.div`
-  ${typography['Additional/S']}
+  ${typography['Body/Body 2 Long']}
   color: ${({ theme }) => theme.color.text.primary};
 `;
 
@@ -139,7 +138,8 @@ const IconWrapper = styled.div<{ status?: Status }>`
 
 const LinkWrapper = styled(Link)`
   margin-top: 4px;
-  ${typography['Button/S']}
+  ${typography['Button/Button 2']}
+  color: ${({ theme }) => theme.color.basic.primary};
 `;
 
 NotificationWrapper.defaultProps = {
@@ -189,3 +189,5 @@ export const Notification = ({
     </NotificationWrapper>
   );
 };
+
+Notification.displayName = 'Notification';

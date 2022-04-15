@@ -2,15 +2,15 @@ import type { HTMLAttributes, KeyboardEvent, MouseEvent, ReactNode } from 'react
 import * as React from 'react';
 import styled from 'styled-components';
 
-import { keyboardKey } from '#/components/common/keyboardKey';
-import { uid } from '#/components/common/uid';
-import { refSetter } from '#/components/common/utils/refSetter';
-import { OpenStatusButton } from '#/components/OpenStatusButton';
-import { Dropdown } from '#/components/Dropdown';
+import { keyboardKey } from '#src/components/common/keyboardKey';
+import { uid } from '#src/components/common/uid';
+import { refSetter } from '#src/components/common/utils/refSetter';
+import { OpenStatusButton } from '#src/components/OpenStatusButton';
+import { Dropdown } from '#src/components/Dropdown';
 import { Button } from '../Button';
 
-import { PseudoText } from '#/components/skeleton/PseudoText';
-import { PseudoIcon } from '#/components/skeleton/PseudoIcon';
+import { PseudoText } from '#src/components/skeleton/PseudoText';
+import { PseudoIcon } from '#src/components/skeleton/PseudoIcon';
 import { DropDownItem } from '../DropDownItem';
 import { Spinner } from '../Spinner';
 
@@ -52,8 +52,14 @@ export interface MenuButtonProps extends Omit<HTMLAttributes<HTMLButtonElement>,
   /** Состояние skeleton */
   skeleton?: boolean;
   /** Выравнивание выпадающего меню относительно компонента https://developer.mozilla.org/en-US/docs/Web/CSS/align-self */
-  alignSelf?: string;
+  alignSelf?: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
 }
+
+const OpenButton = styled(OpenStatusButton)`
+  &:not([data-disabled]):hover *[fill^='#'] {
+    fill: ${(props) => props.theme.color.text.staticWhite};
+  }
+`;
 
 export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
   (
@@ -76,9 +82,26 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
   ) => {
     const [menuOpened, setMenuOpened] = React.useState<boolean>(false);
     const btnRef = React.useRef<HTMLButtonElement>(null);
+    const [hovered, setHovered] = React.useState('');
     const menuDimension = dimension === 'xl' ? 'l' : dimension;
     const menuWidth = dimension === 's' ? '240px' : '280px';
     const spinnerDimension = dimension === 's' ? 's' : 'm';
+
+    const findOptionValue = (options: MenuButtonItem[]) => options.find(({ disabled }) => !disabled)?.id;
+    const hoverIndex = React.useMemo(() => options.findIndex((option) => option.id === hovered), [options, hovered]);
+
+    const findNextHoverValue = React.useCallback(() => {
+      const nextAbledOptionValue = findOptionValue(options.slice(hoverIndex + 1));
+      if (nextAbledOptionValue) return nextAbledOptionValue;
+      return findOptionValue(options);
+    }, [hoverIndex, options]);
+
+    const findPrevHoverValue = React.useCallback(() => {
+      const sliceInd = hoverIndex === -1 ? undefined : hoverIndex;
+      const prevAbledOptionValue = findOptionValue(options.slice(0, sliceInd).reverse());
+      if (prevAbledOptionValue) return prevAbledOptionValue;
+      return findOptionValue(options.slice().reverse());
+    }, [hoverIndex, options]);
 
     const reverseMenu = () => {
       setMenuOpened((prevOpened) => {
@@ -121,7 +144,7 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
           {React.Children.toArray(children).map((child) =>
             typeof child === 'string' ? <span key={uid()}>{child}</span> : child,
           )}
-          <OpenStatusButton $isOpen={menuOpened} aria-hidden />
+          <OpenButton $isOpen={menuOpened} aria-hidden />
         </>
       );
     };
@@ -131,10 +154,26 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
     };
     const handleKeyDown = (e: KeyboardEvent<HTMLLIElement>) => {
       const code = keyboardKey.getCode(e);
-      if (code === keyboardKey.Enter || code === keyboardKey[' ']) {
-        onChange(e.currentTarget.id);
-        closeMenu();
-        e.preventDefault();
+      switch (code) {
+        case keyboardKey[' ']:
+        case keyboardKey.Enter: {
+          onChange(hovered);
+          closeMenu();
+          e.preventDefault();
+          break;
+        }
+        case keyboardKey.ArrowUp: {
+          const prevValue = findPrevHoverValue();
+          if (!prevValue) break;
+          setHovered(prevValue);
+          break;
+        }
+        case keyboardKey.ArrowDown: {
+          const nextValue = findNextHoverValue();
+          if (!nextValue) break;
+          setHovered(nextValue);
+          break;
+        }
       }
     };
 
@@ -174,6 +213,7 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
                 key={id}
                 id={id}
                 dimension={menuDimension}
+                hovered={hovered === id}
                 disabled={disabled || optionDisabled}
                 selected={selected === id}
                 aria-selected={selected === id}
@@ -197,3 +237,5 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
     );
   },
 );
+
+MenuButton.displayName = 'MenuButton';

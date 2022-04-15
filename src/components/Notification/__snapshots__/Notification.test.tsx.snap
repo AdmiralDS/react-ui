@@ -45,11 +45,11 @@ Object {
 }
 
 .c5:active {
-  color: #083F91;
+  color: #0949AA;
 }
 
 .c5:active *[fill^='#'] {
-  fill: #083F91;
+  fill: #0949AA;
 }
 
 .c5 *[fill^='#'] {
@@ -161,6 +161,8 @@ Object {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  color: #2B313B;
+  color: #0D69F2;
 }
 
 <body>
@@ -246,11 +248,11 @@ Object {
 }
 
 .c5:active {
-  color: #083F91;
+  color: #0949AA;
 }
 
 .c5:active *[fill^='#'] {
-  fill: #083F91;
+  fill: #0949AA;
 }
 
 .c5 *[fill^='#'] {
@@ -362,6 +364,8 @@ Object {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  color: #2B313B;
+  color: #0D69F2;
 }
 
 <div>

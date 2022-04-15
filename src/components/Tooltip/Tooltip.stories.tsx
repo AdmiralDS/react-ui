@@ -19,8 +19,8 @@ const Desc = styled.div`
 
 const Description = () => (
   <Desc>
-    Тултип — компонент отвечающий за подсказки, детализацию информации или пояснения. Появляется при наведении на
-    элемент к которому он привязан сразу, либо с задержкой в 1.5 секунды (опционально). Позиционируется по центру
+    Тултип — компонент, отвечающий за подсказки, детализацию информации или пояснения. Появляется при наведении на
+    элемент, к которому он привязан, сразу, либо с задержкой в 1.5 секунды (опционально). Позиционируется по центру
     объекта, сверху, снизу, слева или справа с отступом 8px.
     <Separator />
     Рекомендуется максимальная ширина 488px. При большем объеме используйте компонент Hint.
@@ -38,11 +38,11 @@ export default {
     design: [
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=37%3A31354',
+        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=37%3A31354',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=37%3A31490',
+        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=37%3A31490',
       },
     ],
     componentSubtitle: <Description />,
@@ -58,7 +58,7 @@ export default {
       control: { type: 'boolean' },
     },
     tooltipPosition: {
-      options: ['bottom', 'top', 'left', 'right'],
+      options: ['bottom', 'top', 'left', 'right', 'bottomPageCenter', 'topPageCenter'],
       control: { type: 'radio' },
     },
   },
@@ -67,15 +67,14 @@ export default {
 const Template1: ComponentStory<typeof Tooltip> = ({ withDelay, tooltipPosition }: ITooltipProps) => {
   return (
     <Tooltip
-      renderContent={() => (
-        <div style={{ maxWidth: 400 }}>
-          Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin
+      renderContent={() =>
+        `Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin
           literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney
           College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage,
           and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem
-          Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum'
-        </div>
-      )}
+          Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum'`
+      }
+      style={{ minWidth: '200px', maxWidth: '300px' }}
       withDelay={withDelay}
       tooltipPosition={tooltipPosition}
       id="test1"
@@ -111,9 +110,7 @@ const Template3: ComponentStory<typeof Tooltip> = () => {
 const Template4: ComponentStory<typeof Tooltip> = ({ className }) => {
   return (
     <Tooltip
-      renderContent={() => (
-        <div style={{ maxWidth: 400 }}>Contrary to popular belief, Lorem Ipsum is not simply random text.</div>
-      )}
+      renderContent={() => `Contrary to popular belief, Lorem Ipsum is not simply random text.`}
       className={className}
     >
       <Button dimension="m" displayAsSquare aria-label="Delete" title={'Это title на кнопке'}>

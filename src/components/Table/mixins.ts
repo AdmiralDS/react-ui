@@ -1,82 +1,82 @@
 import { css } from 'styled-components';
-import { typography } from '#/components/Typography';
+import { typography } from '#src/components/Typography';
 
-export const firstCellPadding = css`
-  & *[data-first='true'] {
-    padding: 0 12px 0 20px;
-    [data-dimension='l'] & {
-      padding: 0 16px 0 24px;
-    }
-    [data-dimension='xl'] & {
-      padding: 0 16px 0 24px;
-    }
-  }
-`;
-
+// padding-bottom меньше padding-top на 1px, т.к. 1px остается для border-bottom ячейки
+// padding-right больше padding-left на 1px, т.к. 1px остается для линии resizerа
 export const cellStyle = css`
-  padding: 0 20px 0 4px;
-  line-height: 40px;
   [data-dimension='s'] & {
-    line-height: 32px;
+    padding: 6px 13px 5px 12px;
   }
-  [data-dimension='l'] & {
-    padding: 0 24px 0 8px;
-    line-height: 48px;
-  }
-  [data-dimension='xl'] & {
-    padding: 0 24px 0 8px;
-    line-height: 56px;
-  }
-`;
 
-export const headerCellStyle = css`
-  padding: 0 0 0 4px;
-  line-height: 40px;
-  [data-dimension='s'] & {
-    line-height: 32px;
+  [data-dimension='m'] & {
+    padding: 10px 13px 9px 12px;
   }
+
   [data-dimension='l'] & {
-    padding: 0 0 0 8px;
-    line-height: 48px;
+    padding: 12px 17px 11px 16px;
   }
+
   [data-dimension='xl'] & {
-    padding: 0 0 0 8px;
-    line-height: 56px;
+    padding: 16px 17px 15px 16px;
   }
 `;
 
 export const rowStyle = css`
-  ${typography['Additional/XS']}
-  height: 40px;
-  cursor: pointer;
+  ${typography['Body/Body 2 Short']}
 
-  [data-dimension='s'] & {
-    height: 32px;
-  }
   [data-dimension='l'] & {
-    ${typography['Additional/M']}
-    height: 48px;
+    ${typography['Body/Body 1 Short']}
   }
   [data-dimension='xl'] & {
-    ${typography['Additional/M']}
-    height: 56px;
+    ${typography['Body/Body 1 Short']}
   }
 `;
 
 export const headerStyle = css`
-  ${typography['Additional/S-bold']}
-  height: 40px;
+  ${typography['Subtitle/Subtitle 3']}
 
-  [data-dimension='s'] & {
-    ${typography['Additional/S-bold']}
-    height: 32px;
-  }
   [data-dimension='l'] & {
-    ${typography['Additional/L-bold']}
-    height: 48px;
+    ${typography['Subtitle/Subtitle 2']}
   }
   [data-dimension='xl'] & {
-    ${typography['Additional/L-bold']}
-    height: 56px;
+    ${typography['Subtitle/Subtitle 2']}
+  }
+`;
+
+export const singleLineTitle = css`
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+`;
+
+export const multiLineTitle = css<{ lineClamp: number }>`
+  display: -webkit-inline-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: ${({ lineClamp }) => lineClamp};
+  overflow: hidden;
+`;
+
+export const disabledRow = css`
+  color: ${({ theme }) => theme.color.text.tertiary};
+  pointer-events: none;
+`;
+
+export const underlineRow = css`
+  border-bottom: 1px solid ${({ theme }) => theme.color.basic.disable};
+`;
+
+export const rowBackground = css`
+  [data-selected='true'] & {
+    background: ${({ theme }) => theme.color.special.softBlue};
+  }
+  [data-error='true'] & {
+    background: ${({ theme }) => theme.color.background.surfaceDanger};
+  }
+  [data-success='true'] & {
+    background: ${({ theme }) => theme.color.background.surfaceSuccess};
+  }
+  [data-disabled='true'] & {
+    background: ${({ theme }) => theme.color.background.primary};
   }
 `;

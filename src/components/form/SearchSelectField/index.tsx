@@ -1,9 +1,9 @@
-import type { SearchSelectProps } from '#/components/input/SearchSelect';
-import { SearchSelect as BaseSelect } from '#/components/input/SearchSelect';
+import type { SearchSelectProps } from '#src/components/input/SearchSelect';
+import { SearchSelect as BaseSelect } from '#src/components/input/SearchSelect';
 import * as React from 'react';
-import { Field, FieldOwnProps } from '#/components/Field';
+import { Field, FieldOwnProps } from '#src/components/Field';
 import styled from 'styled-components';
-import { uid } from '#/components/common/uid';
+import { uid } from '#src/components/common/uid';
 
 const Select = styled(BaseSelect)`
   [data-status='error'] & {
@@ -28,7 +28,16 @@ export const SearchSelectField = React.forwardRef<HTMLSelectElement, SearchSelec
     displayInline,
     disabled,
     ref: fieldRef,
-  };
+    'data-field-id': id,
+    'data-field-name': restProps.name,
+  } as Record<string, any>;
+
+  (Object.keys(restProps) as Array<keyof typeof restProps>).forEach((key) => {
+    if (key.startsWith('data-field')) {
+      fieldContainerProps[key] = restProps[key];
+    }
+  });
+
   const selectProps = {
     ref,
     id,

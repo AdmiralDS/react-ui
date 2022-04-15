@@ -1,11 +1,11 @@
-import { INPUT_DIMENSIONS_VALUES } from '#/components/input';
+import { INPUT_DIMENSIONS_VALUES } from '#src/components/input';
 import React, { useState } from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { SelectField } from './';
 import { withDesign } from 'storybook-addon-designs';
-import { DropDownItem } from '#/components/DropDownItem';
+import { DropDownItem } from '#src/components/DropDownItem';
 import styled, { css } from 'styled-components';
-import { T } from '#/components/T';
+import { T } from '#src/components/T';
 
 export default {
   title: 'Form Field Components/ SelectField',
@@ -15,11 +15,11 @@ export default {
     design: [
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=39%3A72270',
+        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A72270',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=39%3A72636',
+        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A72636',
       },
     ],
   },
@@ -74,7 +74,7 @@ const options = [
   },
   {
     label: (
-      <T as="span" font="Caption/XS">
+      <T as="span" font="Caption/Caption 1">
         <Red>*</Red> опция другим шрифтом
       </T>
     ),

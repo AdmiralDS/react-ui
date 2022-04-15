@@ -1,5 +1,5 @@
-import { SliderRangeField } from '#/components/form/SliderRangeField';
-import { INPUT_DIMENSIONS_VALUES } from '#/components/input';
+import { SliderRangeField } from '#src/components/form/SliderRangeField';
+import { INPUT_DIMENSIONS_VALUES } from '#src/components/input';
 import * as React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
@@ -11,7 +11,7 @@ export default {
   parameters: {
     design: {
       type: 'figma',
-      url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=39%3A61377',
+      url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A61377',
     },
   },
   argTypes: {
@@ -32,7 +32,22 @@ export default {
       control: { type: 'boolean' },
     },
     extraText: {
-      control: false,
+      control: { type: 'text' },
+    },
+    thousand: {
+      control: { type: 'text' },
+    },
+    prefix: {
+      control: { type: 'text' },
+    },
+    suffix: {
+      control: { type: 'text' },
+    },
+    placeholder: {
+      control: { type: 'text' },
+    },
+    maxLength: {
+      control: { type: 'number' },
     },
   },
 } as ComponentMeta<typeof SliderRangeField>;

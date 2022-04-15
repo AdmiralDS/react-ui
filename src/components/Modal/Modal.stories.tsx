@@ -1,8 +1,8 @@
-import { Button } from '#/components/Button';
-import { hexToRgba } from '#/components/common/utils/hexToRgba';
-import { DropDownItem } from '#/components/DropDownItem';
-import { InputField, SelectField } from '#/components/form';
-import { Modal, ModalButtonPanel, ModalContent, ModalTitle } from '#/components/Modal';
+import { Button } from '#src/components/Button';
+import { hexToRgba } from '#src/components/common/utils/hexToRgba';
+import { Option } from '#src/components/input/SearchSelect';
+import { InputField, SearchSelectField } from '#src/components/form';
+import { Modal, ModalButtonPanel, ModalContent, ModalTitle } from '#src/components/Modal';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 import { withDesign } from 'storybook-addon-designs';
@@ -31,11 +31,11 @@ export default {
     design: [
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=39%3A49211',
+        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A49211',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=39%3A49265',
+        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A49265',
       },
     ],
   },
@@ -56,14 +56,13 @@ export default {
   },
 } as ComponentMeta<typeof Modal>;
 
-const options = [
-  { id: 1, label: 'Option one', value: '1' },
-  { id: 2, label: 'Option two', value: '2' },
-  { id: 3, label: 'Option three', value: '3' },
-  { id: 4, label: 'Option four', value: '4' },
-  { id: 5, label: 'Option five', value: '5' },
-  { id: 6, label: 'Option six', value: '6' },
-  { id: 7, label: 'Option seven', value: '7' },
+const OPTIONS_SIMPLE = [
+  'teeext 1',
+  'text 2 text text 2 text text 2 text text 2 text text 2 text text 2 text text 2 text ',
+  'text 3',
+  'text 4',
+  'text 5',
+  'texttt 6',
 ];
 
 interface Props {
@@ -72,11 +71,10 @@ interface Props {
 }
 
 const ModalForm = ({ onYesClick, onNoClick }: Props) => {
-  const [selected, setSelected] = React.useState<any>(null);
+  const [selected, setSelected] = React.useState('');
   const [inputValue, setInputValue] = React.useState('');
-  const handleSelectChange = (value: number | string | null) => {
-    console.log(`>>>>> value ${value}`);
-    setSelected(value);
+  const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelected(e.target.value);
   };
 
   return (
@@ -84,15 +82,19 @@ const ModalForm = ({ onYesClick, onNoClick }: Props) => {
       <ModalContent>
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. At cupiditate ducimus nisi nulla numquam obcaecati
         quam quasi quod ut veritatis?
-        <SelectField label="select Field" placeholder="Выберете опцию" value={selected} onChange={handleSelectChange}>
-          {options.map((item) => {
-            return (
-              <DropDownItem role="option" value={item.label} key={item.id}>
-                {item.label}
-              </DropDownItem>
-            );
-          })}
-        </SelectField>
+        <SearchSelectField
+          label="label"
+          className="Search"
+          value={selected}
+          onChange={handleSelectChange}
+          placeholder="Placeholder"
+        >
+          {OPTIONS_SIMPLE.map((option, ind) => (
+            <Option key={option} value={option} disabled={ind === 4}>
+              {option}
+            </Option>
+          ))}
+        </SearchSelectField>
         <InputField
           label="введите значение"
           value={inputValue}

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import type { ComponentDimension } from '#/components/input/types';
+import type { ComponentDimension } from '#src/components/input/types';
 import {
   OptionProvider,
   useConstantSearchSelectContext,
@@ -36,8 +36,6 @@ const StyledCheckbox = styled(Checkbox)`
   margin-right: 8px;
   flex-shrink: 0;
 `;
-
-export const renderValueDefault = (value: string | undefined) => value || null;
 
 interface IRenderOptionProps {
   disabled?: boolean;

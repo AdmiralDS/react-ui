@@ -1,6 +1,6 @@
-import { DropDownItem } from '#/components/DropDownItem';
-import { Select } from '#/components/Select';
-import { LIGHT_THEME } from '#/components/themes';
+import { DropDownItem } from '#src/components/DropDownItem';
+import { Select } from '#src/components/Select';
+import { LIGHT_THEME } from '#src/components/themes';
 import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
 import { ThemeProvider } from 'styled-components';

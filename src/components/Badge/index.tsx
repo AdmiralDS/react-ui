@@ -31,7 +31,7 @@ const background = css<{ appearance: Appearance }>`
       case 'error':
         return theme.color.status.danger;
       case 'grey':
-        return theme.color.background.shadow;
+        return theme.color.text.secondary;
       case 'dark':
         return theme.color.basic.secondary;
       case 'white':
@@ -59,9 +59,9 @@ const color = css<{ appearance: Appearance }>`
       case 'dark':
         return theme.color.text.inversion;
       case 'lightInactive':
-      case 'lightDisable':
       case 'whiteInactive':
         return theme.color.text.secondary;
+      case 'lightDisable':
       case 'whiteDisable':
         return theme.color.text.tertiary;
       case 'white':
@@ -81,7 +81,7 @@ export const BadgeComponent = styled.div<{ dimension: Dimension; appearance: App
   padding: ${({ dimension }) => (dimension === 's' ? '0 5px' : '0 7px')};
   height: ${({ dimension }) => (dimension === 's' ? '16px' : '20px')};
   border-radius: ${({ dimension }) => (dimension === 's' ? '8px' : '10px')};
-  ${({ dimension }) => (dimension === 's' ? typography['Caption/XS'] : typography['Additional/S'])}
+  ${({ dimension }) => (dimension === 's' ? typography['Caption/Caption 1'] : typography['Body/Body 2 Long'])}
   ${background}
   ${color}
   user-select: none;
@@ -102,3 +102,5 @@ export const Badge: FC<BadgeProps> = ({ children, dimension = 'm', appearance = 
     </BadgeComponent>
   );
 };
+
+Badge.displayName = 'Badge';

@@ -1,20 +1,18 @@
 import * as React from 'react';
 import styled, { css } from 'styled-components';
 import { Chips } from '../../Chips';
-import { Hint } from '#/components/Hint';
+import { Hint } from '#src/components/Hint';
 import type { IConstantOption, IChipProps } from './types';
 import { COUNTER_WIDTH } from './constants';
 import { preventDefault } from './utils';
 
 export const ChipBox = styled.div`
   display: flex;
-  margin-bottom: 4px;
 `;
 
 const CounterChipWrap = styled.div`
   display: flex;
   width: ${COUNTER_WIDTH}px;
-  margin-right: 4px;
   > * {
     width: ${COUNTER_WIDTH}px;
     border-radius: 16px;
@@ -26,16 +24,13 @@ const CounterChipWrap = styled.div`
 const ShadowCounterChip = styled.div`
   width: ${COUNTER_WIDTH}px;
   height: 24px;
-  margin-right: 4px;
 `;
 
 const ChipsHintWrap = styled.div`
   display: flex;
+  gap: 4px;
   flex-direction: column;
   align-items: flex-start;
-  > * {
-    margin-bottom: 4px;
-  }
 `;
 
 // К сожалению, пришлось переопределить стили disabled чипса, так как при pointer-events: none
@@ -56,7 +51,11 @@ const StyledChip = styled(Chips)`
   margin-right: 4px;
   // Убирает пробел от inline-flex
   display: flex;
-  ${({ disabled }) => (disabled ? disabledChipStyle : '')}
+  ${({ disabled }) => (disabled ? disabledChipStyle : '')};
+
+  @media (max-width: 768px) {
+    max-width: 140px;
+  }
 `;
 
 const StyledCounterChip = styled(Chips)`
@@ -71,6 +70,10 @@ const StyledCounterChip = styled(Chips)`
 
 const ContentTooltop = styled.div`
   max-width: 488px;
+
+  @media (max-width: 768px) {
+    max-width: 250px;
+  }
 `;
 
 interface IMultipleChipsProps {

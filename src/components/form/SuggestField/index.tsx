@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { SuggestInput as Suggest, SuggestInputProps } from '#/components/input';
-import { Field, FieldOwnProps } from '#/components/Field';
-import { uid } from '#/components/common/uid';
+import { SuggestInput as Suggest, SuggestInputProps } from '#src/components/input';
+import { Field, FieldOwnProps } from '#src/components/Field';
+import { uid } from '#src/components/common/uid';
 
 export interface SuggestFieldProps extends SuggestInputProps, Omit<FieldOwnProps, 'inputRef'> {}
 
@@ -30,7 +30,16 @@ export const SuggestField = React.forwardRef<HTMLInputElement, SuggestFieldProps
     disabled,
     displayCharacterCounter,
     ref: fieldRef,
-  };
+    'data-field-id': id,
+    'data-field-name': restProps.name,
+  } as Record<string, any>;
+
+  (Object.keys(restProps) as Array<keyof typeof restProps>).forEach((key) => {
+    if (key.startsWith('data-field')) {
+      fieldContainerProps[key] = restProps[key];
+    }
+  });
+
   const suggestProps = {
     ref,
     id,
@@ -40,6 +49,7 @@ export const SuggestField = React.forwardRef<HTMLInputElement, SuggestFieldProps
     ...restProps,
     portalTargetRef: fieldRef,
   };
+
   return (
     <Field {...fieldContainerProps}>
       <Suggest {...suggestProps} />

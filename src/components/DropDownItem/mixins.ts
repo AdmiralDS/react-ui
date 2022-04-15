@@ -4,9 +4,9 @@ import { typography } from '../Typography';
 export type DropDownItemDimension = 'l' | 'm' | 's';
 
 export const styleTextMixin = css<{ dimension: DropDownItemDimension }>`
-  ${({ dimension }) => (dimension === 's' ? typography['Additional/S'] : typography['Additional/L'])}
+  ${({ dimension }) => (dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
   ul[data-dimension='s'] & {
-    ${typography['Additional/S']}
+    ${typography['Body/Body 2 Long']}
   }
   text-overflow: ellipsis;
 `;

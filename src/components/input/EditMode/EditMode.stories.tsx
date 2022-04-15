@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { EditMode } from './index';
 import { withDesign } from 'storybook-addon-designs';
-import { INPUT_DIMENSIONS_VALUES } from '#/components/input/types';
+import { INPUT_DIMENSIONS_VALUES } from '#src/components/input/types';
 
 const Separator = styled.div`
   height: 20px;
@@ -25,11 +25,11 @@ export default {
     design: [
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=38%3A10602',
+        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=108393%3A70235',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=38%3A10901',
+        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=38%3A10901',
       },
     ],
   },

@@ -41,3 +41,5 @@ export const ProgressHeader: FC<ProgressHeaderProps> = ({ percent = 0, appearanc
     </Container>
   );
 };
+
+ProgressHeader.displayName = 'ProgressHeader';

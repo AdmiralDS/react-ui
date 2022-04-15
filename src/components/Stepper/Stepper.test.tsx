@@ -1,4 +1,4 @@
-import { Orientation, Step, StepContent, Stepper } from '#/components/Stepper';
+import { Orientation, Step, StepContent, Stepper } from '#src/components/Stepper';
 import { render } from '@testing-library/react';
 import React from 'react';
 import { ThemeProvider } from 'styled-components';

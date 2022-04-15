@@ -1,9 +1,9 @@
-import { typography } from '#/components/Typography';
+import { typography } from '#src/components/Typography';
 import styled from 'styled-components';
 
 export const MessagePanel = styled.div`
   height: 40px;
-  ${typography['Additional/L']}
+  ${typography['Body/Body 1 Long']}
   line-height: 40px;
   padding: 0 16px;
   color: ${(p) => p.theme.color.text.primary};
@@ -15,7 +15,7 @@ export const MessagePanel = styled.div`
 
   [data-dimension='s'] & {
     height: 32px;
-    ${typography['Additional/S']}
+    ${typography['Body/Body 2 Long']}
     line-height: 32px;
     padding: 0 12px;
   }

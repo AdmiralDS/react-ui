@@ -1,6 +1,6 @@
 import type { HTMLAttributes } from 'react';
 import * as React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { backgroundColor, colorTextMixin, DropDownItemDimension, paddings, styleTextMixin } from './mixins';
 
 export interface DropDownItemProps extends HTMLAttributes<HTMLLIElement> {
@@ -10,13 +10,21 @@ export interface DropDownItemProps extends HTMLAttributes<HTMLLIElement> {
   dimension?: DropDownItemDimension;
   /** Активная секция DropDownItems */
   selected?: boolean;
+  /** Акцентная секция DropDownItems */
+  hovered?: boolean;
   /** Значение DropDownItems */
   value?: string | number | undefined;
 }
 
+const hoverStyle = css`
+  background-color: ${(p) => p.theme.color.background.secondary};
+  cursor: pointer;
+`;
+
 const Item = styled.li<{
   dimension: DropDownItemDimension;
   selected?: boolean;
+  hovered?: boolean;
   width?: number;
   id?: string;
 }>`
@@ -33,14 +41,10 @@ const Item = styled.li<{
   ${styleTextMixin}
   ${colorTextMixin}
   ${backgroundColor}
-  
-  &:hover {
-    background-color: ${(p) => p.theme.color.background.secondary};
-    cursor: pointer;
-  }
+  ${(p) => p.hovered && hoverStyle};
 
-  &:focus {
-    background-color: ${(p) => p.theme.color.background.secondary};
+  &:hover {
+    ${hoverStyle}
   }
 
   &&[data-disabled='true'] {
@@ -54,13 +58,14 @@ const Item = styled.li<{
 `;
 
 export const DropDownItem = React.forwardRef<HTMLLIElement, DropDownItemProps>(
-  ({ children, disabled, dimension = 'l', selected = false, id, ...props }, ref) => {
+  ({ children, disabled, hovered, dimension = 'l', selected = false, id, ...props }, ref) => {
     return (
       <Item
         ref={ref}
         dimension={dimension}
         tabIndex={!disabled ? props.tabIndex || 0 : undefined}
         selected={selected}
+        hovered={hovered}
         id={id}
         data-disabled={disabled}
         {...props}
@@ -70,3 +75,5 @@ export const DropDownItem = React.forwardRef<HTMLLIElement, DropDownItemProps>(
     );
   },
 );
+
+DropDownItem.displayName = 'DropDownItem';

@@ -1,16 +1,45 @@
-import { Field } from '#/components/Field';
-import type { FieldOwnProps } from '#/components/Field';
-import type { DateInputProps } from '#/components/input/DateInput';
-import { DateInput } from '#/components/input/DateInput';
+import { Field } from '#src/components/Field';
+import type { FieldOwnProps } from '#src/components/Field';
+import type { DateInputProps } from '#src/components/input/DateInput';
+import { DateInput } from '#src/components/input/DateInput';
 import * as React from 'react';
-import { uid } from '#/components/common/uid';
+import { uid } from '#src/components/common/uid';
 
 export interface DateFieldProps extends DateInputProps, Omit<FieldOwnProps, 'inputRef'> {}
 
 export const DateField = React.forwardRef<HTMLInputElement, DateFieldProps>((props, ref) => {
-  const { className, displayInline, status, required, extraText, label, id = uid(), disabled, ...restProps } = props;
-  const fieldContainerProps = { className, extraText, status, required, label, id, displayInline, disabled };
-  const inputProps = { ref, id, 'aria-required': required, status, disabled, ...restProps };
+  const {
+    className,
+    displayInline,
+    status,
+    required,
+    extraText,
+    label,
+    id = uid(),
+    name,
+    disabled,
+    ...restProps
+  } = props;
+
+  const fieldContainerProps = {
+    className,
+    extraText,
+    status,
+    required,
+    label,
+    'data-field-id': id,
+    'data-field-name': name,
+    displayInline,
+    disabled,
+  } as Record<string, any>;
+
+  (Object.keys(restProps) as Array<keyof typeof restProps>).forEach((key) => {
+    if (key.startsWith('data-field')) {
+      fieldContainerProps[key] = restProps[key];
+    }
+  });
+
+  const inputProps = { ref, id, name, 'aria-required': required, status, disabled, ...restProps };
   return (
     <Field {...fieldContainerProps}>
       <DateInput {...inputProps} />

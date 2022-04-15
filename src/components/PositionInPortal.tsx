@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import * as React from 'react';
-import observeRect from '#/components/common/observeRect';
+import observeRect from '#src/components/common/observeRect';
 import { createPortal } from 'react-dom';
 
 export const PositionedPortalContainer = styled.div`
@@ -11,10 +11,32 @@ export const PositionedPortalContainer = styled.div`
 `;
 
 export interface PositionInPortalProps {
+  /** Ref на элемент, относительно которого позиционируется портал */
   targetRef: React.RefObject<HTMLElement>;
+  /** Контейнер, внутри которого будет отрисован портал, по умолчанию портал рендерится в document.body */
+  container?: Element;
+  /** Отрисовка портала на всю ширину контейнера */
+  fullContainerWidth?: boolean;
 }
 
-export const PositionInPortal = ({ targetRef, ...props }: React.PropsWithChildren<PositionInPortalProps>) => {
+/**
+ * При фиксированном позиционировании (как у PositionedPortalContainer) элемент позиционируется
+ * всегда относительно исходного содержащего блока (окна браузера).
+ * Исключение, когда один из его предков имеет свойство transform, perspective, или filter,
+ * установленное на что-то иное, кроме none, в этом случае этот предок ведет
+ * себя как содержащий блок. Тогда top, right, bottom и left элемента рассчитываются относительно этого содержащего блока.
+ * Если у такого предка кроме transform задано свойство overflow: hidden, то элемент будет обрезаться по его краям.
+ *
+ * В связи с вышеописанным в качестве контейнера для портала рекомендуется выбирать элемент, у предков которого нет свойств
+ * transform, perspective, или filter отличных от none. Также рекомендуется размещать контейнер портала в самом низу dom-дерева,
+ * чтобы избежать возможных конфликтов стилей.
+ */
+export const PositionInPortal = ({
+  targetRef,
+  container,
+  fullContainerWidth,
+  ...props
+}: React.PropsWithChildren<PositionInPortalProps>) => {
   const positionedPortalContainerRef = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
@@ -25,9 +47,9 @@ export const PositionInPortal = ({ targetRef, ...props }: React.PropsWithChildre
           const { x, y, height, width } = rect;
           const { style } = node;
           style.top = `${y}px`;
-          style.left = `${x}px`;
+          style.left = fullContainerWidth ? '0px' : `${x}px`;
           style.height = `${height}px`;
-          style.width = `${width}px`;
+          style.width = fullContainerWidth ? '100%' : `${width}px`;
         }
       });
       observer.observe();
@@ -35,7 +57,10 @@ export const PositionInPortal = ({ targetRef, ...props }: React.PropsWithChildre
         observer.unobserve();
       };
     }
-  }, [targetRef.current, positionedPortalContainerRef.current]);
+  }, [targetRef.current, positionedPortalContainerRef.current, fullContainerWidth]);
 
-  return createPortal(<PositionedPortalContainer ref={positionedPortalContainerRef} {...props} />, document.body);
+  return createPortal(
+    <PositionedPortalContainer ref={positionedPortalContainerRef} {...props} />,
+    container || document.body,
+  );
 };

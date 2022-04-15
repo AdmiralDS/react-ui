@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import type { Appearance, Dimension } from '#/components/Button/types';
+import type { Appearance, Dimension } from '#src/components/Button/types';
 
 export const backGroundColorMixin = css<{ appearance: Appearance }>`
   background: ${({ theme, appearance }) =>

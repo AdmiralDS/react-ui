@@ -1,5 +1,5 @@
-import { INPUT_DIMENSIONS_VALUES } from '#/components/input';
-import { Modal, ModalButtonPanel, ModalContent, ModalTitle } from '#/components/Modal';
+import { INPUT_DIMENSIONS_VALUES } from '#src/components/input';
+import { Modal, ModalButtonPanel, ModalContent, ModalTitle } from '#src/components/Modal';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import type { ChangeEvent } from 'react';
 import * as React from 'react';
@@ -7,7 +7,7 @@ import { withDesign } from 'storybook-addon-designs';
 import styled, { css, keyframes } from 'styled-components';
 import { Highlight, Option, OptionGroup, SearchSelect } from './index';
 import { IOnCloseProps } from './types';
-import { Button } from '#/components/Button';
+import { Button } from '#src/components/Button';
 import { useState } from '@storybook/addons';
 
 export default {
@@ -17,7 +17,7 @@ export default {
   parameters: {
     design: {
       type: 'figma',
-      url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=39%3A72429',
+      url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A72429',
     },
   },
   argTypes: {
@@ -114,7 +114,7 @@ const ExtraText = styled.div`
 
 const OPTIONS_SIMPLE = [
   'teeext 1',
-  'text 2 text text 2 text text 2 text text 2 text text 2 text text 2 text text 2 text ',
+  'Гигантский текст, который настолько большой, что, когда он проходил мимо телевизора, ты пропустил 2 серии любимого сериала',
   'text 3',
   'text 4',
   'text 5',
@@ -280,6 +280,20 @@ const OptionGroupTemplate: ComponentStory<typeof SearchSelect> = () => {
   );
 };
 
+const SelectTemplate: ComponentStory<typeof SearchSelect> = () => {
+  const [selectValue, setSelectValue] = React.useState('Похо Торо Моронго');
+
+  const onChange = (e: ChangeEvent<HTMLSelectElement>) => setSelectValue(e.target.value);
+
+  return (
+    <SearchSelect value={selectValue} onChange={onChange} dimension="xl" mode="select">
+      <Option value="Анигиляторная пушка">Анигиляторная пушка</Option>
+      <Option value="Похо Торо Моронго">Похо Торо Моронго</Option>
+      <Option value="Саша Даль">Саша Даль</Option>
+    </SearchSelect>
+  );
+};
+
 const AsyncTemplate: ComponentStory<typeof SearchSelect> = (props) => {
   const [selectValue, setSelectValue] = React.useState(props.value ? String(props.value) : OPTIONS[2].value);
   const [options, setOptions] = React.useState<Array<{ value: string; text: string }>>([]);
@@ -376,10 +390,9 @@ const UncontrolledTemplate: ComponentStory<typeof SearchSelect> = () => {
 };
 
 const TemplateSimpleMultiSelect: ComponentStory<typeof SearchSelect> = (props) => {
-  const [selectValue, setSelectValue] = React.useState<string[]>([
-    ...Array.from({ length: 5 }).map((_, ind) => String(ind)),
-    'big',
-  ]);
+  const [selectValue, setSelectValue] = React.useState<string[]>(
+    Array.from({ length: 40 }).map((_, ind) => String(ind)),
+  );
 
   const onChange = (e: ChangeEvent<HTMLSelectElement>) => {
     const newValues = Array.from(e.target.selectedOptions).map((option) => option.value);
@@ -388,15 +401,53 @@ const TemplateSimpleMultiSelect: ComponentStory<typeof SearchSelect> = (props) =
   };
 
   return (
-    <SearchSelect value={selectValue} multiple={true} onChange={onChange} dimension="xl" displayClearIcon={true}>
+    <SearchSelect
+      value={selectValue}
+      multiple={true}
+      onChange={onChange}
+      dimension="xl"
+      displayClearIcon={true}
+      placeholder="Placeholder"
+    >
+      <Option value="big">
+        Здесь ооооочень большой текст, который может, так сказать, и не поместиться в одну строку
+      </Option>
+      {Array.from({ length: 40 }).map((_option, ind) => (
+        <Option key={ind} value={String(ind)} disabled={[1, 3].includes(ind)}>
+          {`${ind}0000`}
+        </Option>
+      ))}
+    </SearchSelect>
+  );
+};
+
+const TemplateMultiSelect: ComponentStory<typeof SearchSelect> = (props) => {
+  const [selectValue, setSelectValue] = React.useState<string[]>([]);
+
+  const onChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    const newValues = Array.from(e.target.selectedOptions).map((option) => option.value);
+    setSelectValue(newValues);
+    props.onChange?.(e);
+  };
+
+  return (
+    <SearchSelect
+      value={selectValue}
+      multiple={true}
+      onChange={onChange}
+      dimension="xl"
+      displayClearIcon={true}
+      placeholder="Placeholder"
+      mode="select"
+    >
+      <Option value="big">
+        Здесь ооооочень большой текст, который может, так сказать, и не поместиться в одну строку
+      </Option>
       {Array.from({ length: 20 }).map((_option, ind) => (
         <Option key={ind} value={String(ind)} disabled={[1, 3].includes(ind)}>
           {`${ind}0000`}
         </Option>
       ))}
-      <Option value="big">
-        Здесь ооооочень большой текст, который может, так сказать, и не поместиться в одну строку
-      </Option>
     </SearchSelect>
   );
 };
@@ -519,6 +570,9 @@ RenderPropsSearchSelectStory.storyName = 'SearchSelect с кастомными �
 export const OptionGroupSearchSelectStory = OptionGroupTemplate.bind({});
 OptionGroupSearchSelectStory.storyName = 'SearchSelect с группами';
 
+export const SelectStory = SelectTemplate.bind({});
+SelectStory.storyName = 'Select на основе SearchSelect';
+
 export const AsyncSearchSelectStory = AsyncTemplate.bind({});
 AsyncSearchSelectStory.storyName = 'Асинхронный SearchSelect';
 
@@ -527,6 +581,9 @@ UncontrolledSearchSelectStory.storyName = 'Некотролируемый Search
 
 export const SimpleMultiSearchSelectStory = TemplateSimpleMultiSelect.bind({});
 SimpleMultiSearchSelectStory.storyName = 'Простой MultiSearchSelect';
+
+export const MultiSelectStory = TemplateMultiSelect.bind({});
+MultiSelectStory.storyName = 'MultiSelect на основе SearchSelect';
 
 export const ExpandedHeightMultiSearchSelectStory = TemplateNotFixedMultiSelect.bind({});
 ExpandedHeightMultiSearchSelectStory.storyName = 'MultiSearchSelect с увеличенной по умолчанию высотой';

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { uid } from '#/components/common/uid';
+import { uid } from '#src/components/common/uid';
 
 const Wrapper = styled.ul`
   position: relative;
@@ -126,3 +126,5 @@ export const PaginationSimpleItem: React.FC<React.HTMLAttributes<HTMLButtonEleme
     </Item>
   );
 };
+
+PaginationSimple.displayName = 'PaginationSimple';

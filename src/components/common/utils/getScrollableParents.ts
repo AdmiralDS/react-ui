@@ -1,4 +1,4 @@
-export const getScrollableParents = (parent: Element | null) => {
+export const getScrollableParents = (parent: Element | null | undefined) => {
   const parents: Array<Element> = [];
 
   if (parent) {

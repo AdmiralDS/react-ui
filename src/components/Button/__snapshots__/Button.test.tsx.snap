@@ -19,6 +19,42 @@ exports[`Button should render component 1`] = `
   font-size: 16px;
   line-height: 24px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  color: #2B313B;
+}
+
+.c0[data-dimension='xl'] {
+  padding: 0;
+  height: 56px;
+  padding: 0 30px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #2B313B;
+}
+
+.c0[data-dimension='l'] {
+  height: 48px;
+  padding: 0 22px;
+}
+
+.c0[data-dimension='m'] {
+  height: 40px;
+  padding: 0 18px;
+}
+
+.c0[data-dimension='s'] {
+  height: 32px;
+  padding: 0 14px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #2B313B;
 }
 
 .c0[data-appearance~='primary'] {
@@ -38,8 +74,8 @@ exports[`Button should render component 1`] = `
 }
 
 .c0[data-appearance~='primary']:active {
-  background-color: #083F91;
-  border-color: #083F91;
+  background-color: #0949AA;
+  border-color: #0949AA;
 }
 
 .c0[data-appearance~='primary'][data-appearance~='disabled'],
@@ -78,12 +114,12 @@ exports[`Button should render component 1`] = `
 
 .c0[data-appearance~='secondary']:active {
   background-color: #F1F2F4;
-  color: #083F91;
-  border-color: #083F91;
+  color: #0949AA;
+  border-color: #0949AA;
 }
 
 .c0[data-appearance~='secondary']:active *[fill^='#'] {
-  fill: #083F91;
+  fill: #0949AA;
 }
 
 .c0[data-appearance~='secondary'][data-appearance~='disabled'],
@@ -122,12 +158,12 @@ exports[`Button should render component 1`] = `
 
 .c0[data-appearance~='ghost']:active {
   background-color: #F1F2F4;
-  color: #083F91;
+  color: #0949AA;
   border-color: #F1F2F4;
 }
 
 .c0[data-appearance~='ghost']:active *[fill^='#'] {
-  fill: #083F91;
+  fill: #0949AA;
 }
 
 .c0[data-appearance~='ghost'][data-appearance~='disabled'],
@@ -180,8 +216,8 @@ exports[`Button should render component 1`] = `
 }
 
 .c0[data-appearance~='danger']:active {
-  background-color: #790612;
-  border-color: #790612;
+  background-color: #910815;
+  border-color: #910815;
 }
 
 .c0[data-appearance~='danger'][data-appearance~='disabled'],
@@ -197,9 +233,9 @@ exports[`Button should render component 1`] = `
 }
 
 .c0[data-appearance~='success'] {
-  background-color: #05A13A;
+  background-color: #2ABB5B;
   color: #FFFFFF;
-  border: 2px solid #05A13A;
+  border: 2px solid #2ABB5B;
 }
 
 .c0[data-appearance~='success'] *[fill^='#'] {
@@ -213,8 +249,8 @@ exports[`Button should render component 1`] = `
 }
 
 .c0[data-appearance~='success']:active {
-  background-color: #186832;
-  border-color: #186832;
+  background-color: #1C7D3C;
+  border-color: #1C7D3C;
 }
 
 .c0[data-appearance~='success'][data-appearance~='disabled'],
@@ -227,39 +263,6 @@ exports[`Button should render component 1`] = `
 .c0[data-appearance~='success'][data-appearance~='disabled'] *[fill^='#'],
 .c0[data-appearance~='success']:disabled *[fill^='#'] {
   fill: #FFFFFF;
-}
-
-.c0[data-dimension='xl'] {
-  padding: 0;
-  height: 56px;
-  padding: 0 30px;
-  font-family: 'VTB Group UI',sans-serif;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 24px;
-  font-feature-settings: 'tnum' on,'lnum' on;
-}
-
-.c0[data-dimension='l'] {
-  height: 48px;
-  padding: 0 22px;
-}
-
-.c0[data-dimension='m'] {
-  height: 40px;
-  padding: 0 18px;
-}
-
-.c0[data-dimension='s'] {
-  height: 32px;
-  padding: 0 14px;
-  font-family: 'VTB Group UI',sans-serif;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 20px;
-  font-feature-settings: 'tnum' on,'lnum' on;
 }
 
 .c0:hover {
@@ -353,6 +356,42 @@ exports[`Button should render component with text 1`] = `
   font-size: 16px;
   line-height: 24px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  color: #2B313B;
+}
+
+.c0[data-dimension='xl'] {
+  padding: 0;
+  height: 56px;
+  padding: 0 30px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #2B313B;
+}
+
+.c0[data-dimension='l'] {
+  height: 48px;
+  padding: 0 22px;
+}
+
+.c0[data-dimension='m'] {
+  height: 40px;
+  padding: 0 18px;
+}
+
+.c0[data-dimension='s'] {
+  height: 32px;
+  padding: 0 14px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #2B313B;
 }
 
 .c0[data-appearance~='primary'] {
@@ -372,8 +411,8 @@ exports[`Button should render component with text 1`] = `
 }
 
 .c0[data-appearance~='primary']:active {
-  background-color: #083F91;
-  border-color: #083F91;
+  background-color: #0949AA;
+  border-color: #0949AA;
 }
 
 .c0[data-appearance~='primary'][data-appearance~='disabled'],
@@ -412,12 +451,12 @@ exports[`Button should render component with text 1`] = `
 
 .c0[data-appearance~='secondary']:active {
   background-color: #F1F2F4;
-  color: #083F91;
-  border-color: #083F91;
+  color: #0949AA;
+  border-color: #0949AA;
 }
 
 .c0[data-appearance~='secondary']:active *[fill^='#'] {
-  fill: #083F91;
+  fill: #0949AA;
 }
 
 .c0[data-appearance~='secondary'][data-appearance~='disabled'],
@@ -456,12 +495,12 @@ exports[`Button should render component with text 1`] = `
 
 .c0[data-appearance~='ghost']:active {
   background-color: #F1F2F4;
-  color: #083F91;
+  color: #0949AA;
   border-color: #F1F2F4;
 }
 
 .c0[data-appearance~='ghost']:active *[fill^='#'] {
-  fill: #083F91;
+  fill: #0949AA;
 }
 
 .c0[data-appearance~='ghost'][data-appearance~='disabled'],
@@ -514,8 +553,8 @@ exports[`Button should render component with text 1`] = `
 }
 
 .c0[data-appearance~='danger']:active {
-  background-color: #790612;
-  border-color: #790612;
+  background-color: #910815;
+  border-color: #910815;
 }
 
 .c0[data-appearance~='danger'][data-appearance~='disabled'],
@@ -531,9 +570,9 @@ exports[`Button should render component with text 1`] = `
 }
 
 .c0[data-appearance~='success'] {
-  background-color: #05A13A;
+  background-color: #2ABB5B;
   color: #FFFFFF;
-  border: 2px solid #05A13A;
+  border: 2px solid #2ABB5B;
 }
 
 .c0[data-appearance~='success'] *[fill^='#'] {
@@ -547,8 +586,8 @@ exports[`Button should render component with text 1`] = `
 }
 
 .c0[data-appearance~='success']:active {
-  background-color: #186832;
-  border-color: #186832;
+  background-color: #1C7D3C;
+  border-color: #1C7D3C;
 }
 
 .c0[data-appearance~='success'][data-appearance~='disabled'],
@@ -561,39 +600,6 @@ exports[`Button should render component with text 1`] = `
 .c0[data-appearance~='success'][data-appearance~='disabled'] *[fill^='#'],
 .c0[data-appearance~='success']:disabled *[fill^='#'] {
   fill: #FFFFFF;
-}
-
-.c0[data-dimension='xl'] {
-  padding: 0;
-  height: 56px;
-  padding: 0 30px;
-  font-family: 'VTB Group UI',sans-serif;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 24px;
-  font-feature-settings: 'tnum' on,'lnum' on;
-}
-
-.c0[data-dimension='l'] {
-  height: 48px;
-  padding: 0 22px;
-}
-
-.c0[data-dimension='m'] {
-  height: 40px;
-  padding: 0 18px;
-}
-
-.c0[data-dimension='s'] {
-  height: 32px;
-  padding: 0 14px;
-  font-family: 'VTB Group UI',sans-serif;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 20px;
-  font-feature-settings: 'tnum' on,'lnum' on;
 }
 
 .c0:hover {

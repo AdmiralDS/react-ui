@@ -1,4 +1,4 @@
-import { uid } from '#/components/common/uid';
+import { uid } from '#src/components/common/uid';
 import type { Appearance, Dimension } from './types';
 import type { ButtonHTMLAttributes } from 'react';
 import * as React from 'react';
@@ -35,9 +35,10 @@ const StyledButton = styled.button.attrs<ButtonProps, { 'data-dimension'?: Dimen
   appearance: none;
   vertical-align: center;
 
+  ${dimensionMixin}
+
   ${appearanceMixin};
 
-  ${dimensionMixin}
   &:hover {
     cursor: pointer;
   }
@@ -96,3 +97,5 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     );
   },
 );
+
+Button.displayName = 'Button';

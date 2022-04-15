@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled, { FlattenInterpolation, DefaultTheme, ThemeProps } from 'styled-components';
-import { typography } from '#/components/Typography';
+import { typography } from '#src/components/Typography';
 import { ReactComponent as ChevronLeft } from '@admiral-ds/icons/build/system/ChevronLeftOutline.svg';
 import { ReactComponent as ChevronRight } from '@admiral-ds/icons/build/system/ChevronRightOutline.svg';
 
@@ -10,7 +10,7 @@ import { MenuButton } from './Menu';
 const ComplexWrapper = styled.div`
   display: flex;
   align-items: center;
-  ${typography['Additional/S']}
+  ${typography['Body/Body 2 Long']}
   white-space: nowrap;
   user-select: none;
   min-width: 696px;
@@ -34,11 +34,9 @@ const Devider = styled.div`
 
 const PageAdditional = styled.span`
   margin: 0 4px;
-  width: 112px;
   min-width: 112px;
 `;
 const PageSizeAdditional = styled.div`
-  width: 172px;
   min-width: 172px;
   margin: 0 12px;
   [data-simple='true'] & {
@@ -210,3 +208,5 @@ export const PaginationOne: React.FC<PaginationOneProps> = ({
 
   return simple ? renderSimple() : renderComplex();
 };
+
+PaginationOne.displayName = 'PaginationOne';

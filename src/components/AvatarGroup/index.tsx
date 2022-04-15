@@ -1,10 +1,10 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import observeRect from '#/components/common/observeRect';
-import { uid } from '#/components/common/uid';
-import { DropDownItem } from '#/components/DropDownItem';
-import { Avatar } from '#/components/Avatar';
-import type { AvatarProps } from '#/components/Avatar';
+import observeRect from '#src/components/common/observeRect';
+import { uid } from '#src/components/common/uid';
+import { DropDownItem } from '#src/components/DropDownItem';
+import { Avatar } from '#src/components/Avatar';
+import type { AvatarProps } from '#src/components/Avatar';
 
 import { Menu } from './Menu';
 
@@ -142,3 +142,5 @@ export const AvatarGroup: React.FC<AvatarGroupProps> = ({
     </AvatarsWrapper>
   );
 };
+
+AvatarGroup.displayName = 'AvatarGroup';

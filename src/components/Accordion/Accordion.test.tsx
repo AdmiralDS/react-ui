@@ -4,7 +4,7 @@ import { ThemeProvider } from 'styled-components';
 
 import { LIGHT_THEME } from '../themes';
 
-import { Accordion, AccordionItem } from '#/components/Accordion';
+import { Accordion, AccordionItem } from '#src/components/Accordion';
 
 describe('Spinner', () => {
   const Comp = (props: any) => (

@@ -1,5 +1,5 @@
 import { SearchSelect, SearchSelectProps, Option } from './index';
-import { LIGHT_THEME } from '#/components/themes';
+import { LIGHT_THEME } from '#src/components/themes';
 import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React, { ChangeEvent, PropsWithChildren, useState } from 'react';
@@ -63,17 +63,40 @@ describe('SearchSelect', () => {
       expect(visibleText).toBeInTheDocument();
       expect(selectElem.value).toBe(options[1]);
     });
-    test('Empty when no value is provided', () => {
+    test('SingleSelect empty when no value is provided', () => {
       render(<SelectComponent placeholder="placeholder" />);
 
       const valueWrapper = document.getElementById('selectValueWrapper') as HTMLElement;
       const selectElem = screen.getByRole('combobox') as HTMLSelectElement;
 
-      expect(within(valueWrapper).getByText('placeholder')).toBeInTheDocument();
+      expect(within(valueWrapper).getByPlaceholderText('placeholder')).toBeInTheDocument();
       options.forEach((option) => {
         expect(within(valueWrapper).queryByText(option)).toBeNull();
       });
       expect(!!selectElem.value).toBeFalsy();
+    });
+    test('MultiSelect empty when no value is provided', () => {
+      render(<SelectComponent multiple placeholder="placeholder" />);
+
+      const valueWrapper = document.getElementById('selectValueWrapper') as HTMLElement;
+      const selectElem = screen.getByRole('listbox') as HTMLSelectElement;
+
+      expect(within(valueWrapper).getByPlaceholderText('placeholder')).toBeInTheDocument();
+      options.forEach((option) => {
+        expect(within(valueWrapper).queryByText(option)).toBeNull();
+      });
+      expect(!!selectElem.value).toBeFalsy();
+    });
+    test('Correct inputValue with placeholder', () => {
+      render(<SelectComponent placeholder="placeholder" />);
+
+      const inputELem = screen.getByRole('textbox') as HTMLInputElement;
+
+      userEvent.tab();
+      userEvent.keyboard('{enter}');
+      userEvent.keyboard('a');
+
+      expect(inputELem.value).toBe('a');
     });
     test('Renders visible multiselect value correctly', () => {
       render(<SelectComponent multiple initialValue={['one', 'two']} />);
@@ -178,6 +201,31 @@ describe('SearchSelect', () => {
     });
   });
 
+  describe('Correct backspace behavior', () => {
+    test('Search value should be narrowed to input value on backspace', () => {
+      render(<SelectComponent initialValue="one" />);
+
+      const inputELem = screen.getByRole('textbox') as HTMLInputElement;
+
+      userEvent.tab();
+      userEvent.keyboard('{enter}');
+      expect(!!inputELem.value).toBeFalsy();
+      userEvent.keyboard('{Backspace}');
+      expect(inputELem.value).toBe('on');
+    });
+    test('Search value should be extended to input value on keyboard', () => {
+      render(<SelectComponent initialValue="one" />);
+
+      const inputELem = screen.getByRole('textbox') as HTMLInputElement;
+
+      userEvent.tab();
+      userEvent.keyboard('{enter}');
+      expect(!!inputELem.value).toBeFalsy();
+      userEvent.keyboard('r');
+      expect(inputELem.value).toBe('oner');
+    });
+  });
+
   describe('selecting and deleting a value', () => {
     test('selects a value with arrows', () => {
       render(<SelectComponent />);
@@ -214,6 +262,7 @@ describe('SearchSelect', () => {
       expect(dropDownContainer).not.toBeInTheDocument();
       expect(selectElem.value).toBe(options[1]);
     });
+
     test('selects multiselect value with arrows', () => {
       render(<SelectComponent multiple />);
 

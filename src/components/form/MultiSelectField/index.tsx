@@ -1,20 +1,17 @@
-import type { MultiSelectProps } from '#/components/MultiSelect';
+import type { MultiSelectProps } from '#src/components/MultiSelect';
 import * as React from 'react';
-import styled from 'styled-components';
-import { Field } from '#/components/Field';
-import { uid } from '#/components/common/uid';
-import { MultiSelect as BaseMultiSelect } from '#/components/MultiSelect';
-
-const Select = styled(BaseMultiSelect)`
-  [data-status='error'] & {
-    border-color: ${(props) => props.theme.color.status.danger};
-  }
-`;
+import { Field } from '#src/components/Field';
+import { uid } from '#src/components/common/uid';
+import { MultiSelect } from '#src/components/MultiSelect';
 
 export interface MultiSelectFieldProps
   extends MultiSelectProps,
     Omit<React.ComponentPropsWithoutRef<typeof Field>, 'onChange'> {}
 
+/**
+ * @deprecated Используйте SearchSelectField
+ * @type {React.ForwardRefExoticComponent<React.PropsWithoutRef<MultiSelectFieldProps> & React.RefAttributes<HTMLDivElement>>}
+ */
 export const MultiSelectField = React.forwardRef<HTMLDivElement, MultiSelectFieldProps>((props, ref) => {
   const { className, displayInline, status, required, extraText, label, id = uid(), disabled, ...restProps } = props;
   const fieldContainerProps = {
@@ -30,7 +27,7 @@ export const MultiSelectField = React.forwardRef<HTMLDivElement, MultiSelectFiel
   const selectProps = { ref, id, disabled, ...restProps };
   return (
     <Field {...fieldContainerProps}>
-      <Select {...selectProps} />
+      <MultiSelect {...selectProps} />
     </Field>
   );
 });

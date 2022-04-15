@@ -1,11 +1,11 @@
-import { INPUT_DIMENSIONS_VALUES } from '#/components/input';
+import { INPUT_DIMENSIONS_VALUES } from '#src/components/input';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import type { ChangeEvent } from 'react';
 import * as React from 'react';
 import { withDesign } from 'storybook-addon-designs';
 import styled, { css, keyframes } from 'styled-components';
 import { SearchSelectField } from './index';
-import { Highlight, Option, OptionGroup } from '#/components/input/SearchSelect';
+import { Highlight, Option, OptionGroup } from '#src/components/input/SearchSelect';
 
 export default {
   title: 'Form Field Components/SearchSelectField',
@@ -14,7 +14,7 @@ export default {
   parameters: {
     design: {
       type: 'figma',
-      url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=39%3A72429',
+      url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A72429',
     },
   },
   argTypes: {
@@ -143,10 +143,23 @@ async function wait(ms: number) {
 
 const SimpleTemplate: ComponentStory<typeof SearchSelectField> = (props) => {
   const [selectValue, setSelectValue] = React.useState('');
+  const [inputValue, setInputValue] = React.useState('');
 
   const onChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    setSelectValue(e.target.value);
+    const value = e.target.value;
+    console.log(value);
+    setSelectValue(value);
     props.onChange?.(e);
+  };
+
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setInputValue(value);
+    props.onInputChange?.(e);
+  };
+
+  const handleOnClearIconClick = () => {
+    setInputValue('');
   };
 
   return (
@@ -154,8 +167,12 @@ const SimpleTemplate: ComponentStory<typeof SearchSelectField> = (props) => {
       label="label"
       className="Search"
       value={selectValue}
+      inputValue={inputValue}
       onChange={onChange}
+      onInputChange={handleInputChange}
+      onClearIconClick={handleOnClearIconClick}
       placeholder="Placeholder"
+      displayClearIcon={true}
     >
       {OPTIONS_SIMPLE.map((option, ind) => (
         <Option key={option} value={option} disabled={ind === 4}>
@@ -175,7 +192,7 @@ const CustomOptionTemplate: ComponentStory<typeof SearchSelectField> = (props) =
   };
 
   return (
-    <SearchSelectField label="label" value={selectValue} onChange={onChange}>
+    <SearchSelectField label="label" value={selectValue} onChange={onChange} displayClearIcon={true}>
       {OPTIONS.map((option) => (
         <Option key={option.value} value={option.value}>
           <Icon />

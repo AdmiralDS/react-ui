@@ -1,8 +1,13 @@
-import { changeInputData, CustomInputHandler, InputData } from '#/components/common/dom/changeInputData';
-import { refSetter } from '#/components/common/utils/refSetter';
+import {
+  changeInputData,
+  CustomInputHandler,
+  InputData,
+  isInputDataDifferent,
+} from '#src/components/common/dom/changeInputData';
+import { refSetter } from '#src/components/common/utils/refSetter';
 import { Container } from '../Container';
-import type { ExtraProps, InputStatus, ComponentDimension } from '#/components/input/types';
-import { typography } from '#/components/Typography';
+import type { ExtraProps, InputStatus, ComponentDimension } from '#src/components/input/types';
+import { typography } from '#src/components/Typography';
 import { ReactComponent as CloseOutlineSvg } from '@admiral-ds/icons/build/service/CloseOutline.svg';
 import { ReactComponent as EyeCloseOutlineSvg } from '@admiral-ds/icons/build/service/EyeCloseOutline.svg';
 import { ReactComponent as EyeOutlineSvg } from '@admiral-ds/icons/build/service/EyeOutline.svg';
@@ -13,7 +18,7 @@ import { StatusIcon } from '../StatusIcon';
 
 const EyeCloseIcon = styled(EyeCloseOutlineSvg)`
   & *[fill^='#'] {
-    fill: ${(props) => props.theme.color.basic.tertiary};
+    fill: ${(props) => props.theme.color.text.secondary};
   }
 
   &:hover {
@@ -27,7 +32,7 @@ const EyeCloseIcon = styled(EyeCloseOutlineSvg)`
 
 const EyeIcon = styled(EyeOutlineSvg)`
   & *[fill^='#'] {
-    fill: ${(props) => props.theme.color.basic.tertiary};
+    fill: ${(props) => props.theme.color.text.secondary};
   }
 
   &:hover {
@@ -41,7 +46,7 @@ const EyeIcon = styled(EyeOutlineSvg)`
 
 const ClearIcon = styled(CloseOutlineSvg)`
   & *[fill^='#'] {
-    fill: ${(props) => props.theme.color.basic.tertiary};
+    fill: ${(props) => props.theme.color.text.secondary};
   }
 
   &:hover {
@@ -119,9 +124,9 @@ const Input = styled.input<ExtraProps>`
   text-overflow: ellipsis;
   padding: 0 ${horizontalPaddingValue}px;
 
+  ${(props) => (props.dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
   color: ${(props) => props.theme.color.text.primary};
 
-  ${(props) => (props.dimension === 's' ? typography['Additional/S'] : typography['Additional/L'])}
   &::placeholder {
     color: ${(props) => props.theme.color.text.secondary};
   }
@@ -173,8 +178,8 @@ const IconPanel = styled.div<{ disabled?: boolean; dimension?: ComponentDimensio
   }
 `;
 
-function defaultHandleInput(newInputData: InputData): InputData {
-  return newInputData;
+function defaultHandleInput(newInputData: InputData | null): InputData {
+  return newInputData || {};
 }
 
 const stopEvent = (e: React.MouseEvent) => e.preventDefault();
@@ -212,7 +217,7 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
   (
     {
       type,
-      value,
+
       displayStatusIcon,
       displayClearIcon,
       status,
@@ -222,6 +227,7 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
       children,
       className,
       style,
+      placeholder,
       ...props
     },
     ref,
@@ -264,15 +270,21 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
 
     const iconCount = iconArray.length;
 
-    const inputData = value !== undefined && value !== null ? handleInput({ value: String(value) }) : {};
+    // const inputData = value !== undefined && value !== null ? handleInput({ value: String(value) }) : {};
 
     React.useLayoutEffect(() => {
+      const nullHandledValue = handleInput(null);
       function oninput(this: HTMLInputElement) {
         const { value, selectionStart, selectionEnd } = this;
         const currentInputData = { value, selectionStart, selectionEnd };
 
         const inputData = handleInput(currentInputData);
-        changeInputData(this, inputData);
+
+        if (placeholder && !isInputDataDifferent(nullHandledValue, inputData)) {
+          changeInputData(this, { ...inputData, value: '' });
+        } else {
+          changeInputData(this, inputData);
+        }
       }
 
       // Чтение selectionStart в Safari при type='date' вызывает ошибку
@@ -283,13 +295,18 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
         const { value, selectionStart, selectionEnd } = node;
         const currentInputData = { value, selectionStart, selectionEnd };
         const inputData = handleInput(currentInputData);
-        changeInputData(node, inputData);
+
+        if (placeholder && !isInputDataDifferent(nullHandledValue, inputData)) {
+          changeInputData(node, { ...inputData, value: '' });
+        } else {
+          changeInputData(node, inputData);
+        }
 
         return () => {
           node.removeEventListener('input', oninput);
         };
       }
-    }, [inputRef.current, handleInput]);
+    }, [inputRef.current, handleInput, placeholder]);
     return (
       <Container
         className={className}
@@ -306,8 +323,8 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
         <Input
           ref={refSetter(ref, inputRef)}
           {...props}
+          placeholder={placeholder}
           iconCount={iconCount}
-          value={inputData.value}
           type={type === 'password' && isPasswordVisible ? 'text' : type}
         />
         {iconCount > 0 && (

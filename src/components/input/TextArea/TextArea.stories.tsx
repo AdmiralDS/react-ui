@@ -2,7 +2,7 @@ import React, { ChangeEvent, useState } from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { TextArea } from './index';
 import { withDesign } from 'storybook-addon-designs';
-import { INPUT_DIMENSIONS_VALUES } from '#/components/input/types';
+import { INPUT_DIMENSIONS_VALUES } from '#src/components/input/types';
 
 export default {
   title: 'Input/TextArea',
@@ -11,7 +11,7 @@ export default {
   parameters: {
     design: {
       type: 'figma',
-      url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=39%3A61323',
+      url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A61323',
     },
   },
   argTypes: {
@@ -52,6 +52,15 @@ export default {
     },
     icons: {
       control: false,
+    },
+    handleInput: {
+      control: false,
+    },
+    containerRef: {
+      control: false,
+    },
+    autoHeight: {
+      control: { type: 'boolean' },
     },
   },
 } as ComponentMeta<typeof TextArea>;

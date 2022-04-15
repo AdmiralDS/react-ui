@@ -2,8 +2,8 @@ import React from 'react';
 import { render } from '@testing-library/react';
 
 import { CheckboxGroup, CheckboxGroupProps } from './';
-import { CheckboxField as Checkbox } from '#/components/form/CheckboxField';
-import { LIGHT_THEME } from '#/components/themes';
+import { CheckboxField as Checkbox } from '#src/components/form/CheckboxField';
+import { LIGHT_THEME } from '#src/components/themes';
 import { ThemeProvider } from 'styled-components';
 
 describe('CheckboxGroup', () => {

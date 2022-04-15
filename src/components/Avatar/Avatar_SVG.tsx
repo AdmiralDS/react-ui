@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { uid } from '#/components/common/uid';
-import { LIGHT_THEME } from '#/components/themes';
+import { uid } from '#src/components/common/uid';
+import { LIGHT_THEME } from '#src/components/themes';
 import { ThemeContext } from 'styled-components';
-import type { AvatarProps } from '#/components/Avatar';
+import type { AvatarProps } from '#src/components/Avatar';
 
 type AvatarSVGProps = {
   dimension: AvatarProps['dimension'];
@@ -12,6 +12,7 @@ type AvatarSVGProps = {
   status?: AvatarProps['status'];
   appearance?: AvatarProps['appearance'];
   group?: boolean;
+  svgMaskId?: string;
 };
 
 const VIEWBOX = {
@@ -46,9 +47,10 @@ export const AvatarSVG: React.FC<AvatarSVGProps> = ({
   size,
   appearance: appearanceProp,
   group = false,
+  svgMaskId,
 }) => {
   const theme = React.useContext(ThemeContext) || LIGHT_THEME;
-  const id = uid();
+  const id = svgMaskId || uid();
   const useId = `url(#${id})`;
 
   const getBackgroundColor = (appearance: 'light' | 'white' | 'grey' | 'dark') => {

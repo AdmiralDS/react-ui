@@ -3,7 +3,7 @@ import React, { FC } from 'react';
 import { addWeeks, startOfMonth, startOfWeek, weekInMonth } from '../date-utils';
 import { Week } from './Week';
 import type { IMonthCalendarProps } from '../interfaces';
-import { DEFAULT_LOCALE_NAME } from '#/components/Calendar/constants';
+import { DEFAULT_LOCALE_NAME } from '#src/components/Calendar/constants';
 
 const FIXED_WEEK_COUNT = 6;
 

@@ -6,7 +6,7 @@ import { ReactComponent as InfoSolid } from '@admiral-ds/icons/build/service/Inf
 import { ReactComponent as CheckOutline } from '@admiral-ds/icons/build/service/CheckOutline.svg';
 import { ReactComponent as ErrorSolid } from '@admiral-ds/icons/build/service/ErrorSolid.svg';
 import { StatusIndicator } from './index';
-import { T } from '#/components/T';
+import { T } from '#src/components/T';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI', serif;
@@ -30,7 +30,7 @@ const OrangeColor = css`
 `;
 
 const Description = () => (
-  <Desc>Компонент Status Indicator используется для отображения состоянии объекта или действия.</Desc>
+  <Desc>Компонент Status Indicator используется для отображения состояния объекта или действия.</Desc>
 );
 
 export default {
@@ -42,7 +42,7 @@ export default {
     layout: 'centered',
     design: {
       type: 'figma',
-      url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=37%3A18744',
+      url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=37%3A18744',
     },
   },
 } as unknown as ComponentMeta<typeof StatusIndicator>;
@@ -50,11 +50,11 @@ export default {
 const StatusIndicatorDemoDefaultStory: ComponentStory<typeof StatusIndicator> = () => {
   return (
     <>
-      <StyledText font="Additional/L" as="div">
+      <StyledText font="Body/Body 1 Long" as="div">
         Dimension - M
       </StyledText>
       <StatusIndicator dimension="m" text="P 16px/24 book" icon={<CheckOutline />} />
-      <StyledText font="Additional/L" as="div">
+      <StyledText font="Body/Body 1 Long" as="div">
         Dimension - S
       </StyledText>
       <StatusIndicator dimension="s" text="P 14px/20 book" icon={<InfoSolid />} />
@@ -76,15 +76,15 @@ StatusIndicatorDemoDefault.parameters = {
 const StatusIndicatorDemoStoryPosition: ComponentStory<typeof StatusIndicator> = () => {
   return (
     <>
-      <StyledText font="Additional/L" as="div">
+      <StyledText font="Body/Body 1 Long" as="div">
         Кастомное цветовое отображение статуса
       </StyledText>
       <StatusIndicator cssMixin={OrangeColor} dimension="m" text="P 16px/24 book" icon={<InfoSolid />} />
-      <StyledText font="Additional/L" as="div">
+      <StyledText font="Body/Body 1 Long" as="div">
         Позиционирование иконки индикатора справа
       </StyledText>
       <StatusIndicator dimension="m" text="P 16px/24 book" displayRight={false} icon={<ErrorSolid />} />
-      <StyledText font="Additional/L" as="div">
+      <StyledText font="Body/Body 1 Long" as="div">
         Без иконки
       </StyledText>
       <StatusIndicator dimension="m" text="P 16px/24 book" />

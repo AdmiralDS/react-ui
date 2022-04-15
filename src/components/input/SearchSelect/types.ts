@@ -1,5 +1,5 @@
 import * as React from 'react';
-import type { ComponentDimension } from '#/components/input/types';
+import type { ComponentDimension } from '#src/components/input/types';
 
 export type HighlightFormat = 'word' | 'wholly';
 

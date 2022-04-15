@@ -1,8 +1,8 @@
 import * as React from 'react';
 import styled, { ThemeContext, css } from 'styled-components';
-import { LIGHT_THEME, DARK_THEME } from '#/components/themes';
-import { Tooltip } from '#/components/Tooltip';
-import { typography } from '#/components/Typography';
+import { LIGHT_THEME, DARK_THEME } from '#src/components/themes';
+import { Tooltip } from '#src/components/Tooltip';
+import { typography } from '#src/components/Typography';
 
 import { useLoaded } from './useLoaded';
 import { AvatarSVG } from './Avatar_SVG';
@@ -37,7 +37,7 @@ const getTextColor = css<{ appearance: Appearance | { background: string; text: 
       case 'dark':
         return theme.color.text.inversion;
       default:
-        appearance.text;
+        return appearance.text;
     }
   }}
 `;
@@ -47,13 +47,13 @@ const getTypography = css<{ dimension: Dimension }>`
     switch (dimension) {
       case 'xs':
       case 's':
-        return typography['Caption/XS'];
+        return typography['Caption/Caption 1'];
       case 'm':
       case 'l':
-        return typography['Additional/M'];
+        return typography['Body/Body 1 Short'];
       case 'xl':
       default:
-        return typography['Main/XS'];
+        return typography['Subtitle/Subtitle 1'];
     }
   }}
 `;
@@ -120,6 +120,8 @@ export interface AvatarProps extends React.HTMLAttributes<HTMLButtonElement> {
   appearance?: Appearance | { background: string; text: string };
   /** Размер компонента */
   dimension?: Dimension;
+  /** Уникальный идентификатор svg маски */
+  svgMaskId?: string;
 }
 
 export interface AvatarInternalProps {
@@ -141,6 +143,7 @@ export const Avatar = ({
   group = false,
   showTooltip = true,
   isMenuAvatar = false,
+  svgMaskId,
   ...props
 }: AvatarProps & AvatarInternalProps) => {
   const loaded = useLoaded(href);
@@ -182,6 +185,7 @@ export const Avatar = ({
         status={status}
         appearance={appearance}
         group={group}
+        svgMaskId={svgMaskId}
       />
       {hasAbbr && (
         <Text dimension={dimension} appearance={appearance}>
@@ -203,3 +207,5 @@ export const Avatar = ({
     </Wrapper>
   );
 };
+
+Avatar.displayName = 'Avatar';

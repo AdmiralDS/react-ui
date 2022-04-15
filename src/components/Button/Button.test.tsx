@@ -2,8 +2,8 @@ import * as React from 'react';
 import { ThemeProvider } from 'styled-components';
 import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { LIGHT_THEME } from '#/components/themes';
-import { Button } from '#/components/Button';
+import { LIGHT_THEME } from '#src/components/themes';
+import { Button } from '#src/components/Button';
 
 const BUTTON_TEXT = 'Button';
 

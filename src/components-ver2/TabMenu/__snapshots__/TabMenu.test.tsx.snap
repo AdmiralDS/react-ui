@@ -1,0 +1,758 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TabMenu should render default component 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": .c0 {
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex: 1 1 auto;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  -webkit-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  width: 100%;
+  box-sizing: border-box;
+  box-shadow: inset 0 -2px 0 0 transparent;
+  overflow-x: visible;
+  overflow: -moz-scrollbars-none;
+  -ms-overflow-style: none;
+  -webkit-scrollbar-width: none;
+  -moz-scrollbar-width: none;
+  -ms-scrollbar-width: none;
+  scrollbar-width: none;
+  -webkit-scrollbar-height: none;
+  -moz-scrollbar-height: none;
+  -ms-scrollbar-height: none;
+  scrollbar-height: none;
+}
+
+.c0::-webkit-scrollbar {
+  width: 0 !important;
+  height: 0 !important;
+}
+
+.c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin-right: auto;
+}
+
+.c1 {
+  position: absolute;
+  bottom: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  background-color: #0062FF;
+  height: 2px;
+  -webkit-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+}
+
+.c6 {
+  height: 100%;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  white-space: nowrap;
+}
+
+.c5 {
+  position: relative;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 0 16px;
+}
+
+.c3 {
+  position: relative;
+  box-sizing: border-box;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 48px;
+  padding: 0;
+  background: transparent;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: none;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 24px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.c3:focus:not(:active):before {
+  position: absolute;
+  content: '';
+  border: 2px solid #0062FF;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.c3:focus,
+.c3 > .c4 {
+  outline: none;
+}
+
+.c3 svg {
+  display: inline-block;
+  -webkit-flex: 1 0 auto;
+  -ms-flex: 1 0 auto;
+  flex: 1 0 auto;
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+}
+
+.c3 svg *[fill^='#'] {
+  fill: #74777F;
+}
+
+.c3 [data-badge] {
+  margin-left: 8px;
+}
+
+.c3:hover:not(:disabled) {
+  background: #0000000D;
+}
+
+.c3:active:not(:disabled) {
+  color: #0062FF;
+}
+
+.c3:active:not(:disabled) *[fill^='#'] {
+  fill: #0062FF;
+}
+
+.c3:active:not(:disabled) [data-badge] {
+  color: #FFFFFF;
+}
+
+.c3:disabled {
+  color: #B1B5BB;
+  cursor: default;
+}
+
+.c3:disabled *[fill^='#'] {
+  fill: #B1B5BB;
+}
+
+.c7 {
+  position: relative;
+  box-sizing: border-box;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 48px;
+  padding: 0;
+  background: transparent;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: none;
+  color: #74777F;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 24px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.c7:focus:not(:active):before {
+  position: absolute;
+  content: '';
+  border: 2px solid #0062FF;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.c7:focus,
+.c7 > .c4 {
+  outline: none;
+}
+
+.c7 svg {
+  display: inline-block;
+  -webkit-flex: 1 0 auto;
+  -ms-flex: 1 0 auto;
+  flex: 1 0 auto;
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+}
+
+.c7 svg *[fill^='#'] {
+  fill: #74777F;
+}
+
+.c7 [data-badge] {
+  margin-left: 8px;
+}
+
+.c7:hover:not(:disabled) {
+  background: #0000000D;
+}
+
+.c7:active:not(:disabled) {
+  color: #0062FF;
+}
+
+.c7:active:not(:disabled) *[fill^='#'] {
+  fill: #0062FF;
+}
+
+.c7:active:not(:disabled) [data-badge] {
+  color: #FFFFFF;
+}
+
+.c7:disabled {
+  color: #B1B5BB;
+  cursor: default;
+}
+
+.c7:disabled *[fill^='#'] {
+  fill: #B1B5BB;
+}
+
+<body>
+    <div>
+      <div
+        class="c0"
+        id="tabmenu"
+        role="tablist"
+      >
+        <div
+          aria-hidden="true"
+          class="c1"
+        />
+        <div
+          class="c2"
+        >
+          <button
+            aria-selected="true"
+            class="c3 tag"
+            data-testid="1"
+            id="1"
+            role="tab"
+            tabindex="0"
+            type="button"
+          >
+            <span
+              class="c4 c5"
+              tabindex="-1"
+            >
+              <div
+                class="c6"
+              >
+                Option 1
+              </div>
+            </span>
+          </button>
+          <button
+            aria-selected="false"
+            class="c7 tag"
+            id="2"
+            role="tab"
+            tabindex="-1"
+            type="button"
+          >
+            <span
+              class="c4 c5"
+              tabindex="-1"
+            >
+              <div
+                class="c6"
+              >
+                Option 22
+              </div>
+            </span>
+          </button>
+          <button
+            aria-selected="false"
+            class="c7 tag"
+            id="3"
+            role="tab"
+            tabindex="-1"
+            type="button"
+          >
+            <span
+              class="c4 c5"
+              tabindex="-1"
+            >
+              <div
+                class="c6"
+              >
+                Option 333
+              </div>
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": .c0 {
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex: 1 1 auto;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  -webkit-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  width: 100%;
+  box-sizing: border-box;
+  box-shadow: inset 0 -2px 0 0 transparent;
+  overflow-x: visible;
+  overflow: -moz-scrollbars-none;
+  -ms-overflow-style: none;
+  -webkit-scrollbar-width: none;
+  -moz-scrollbar-width: none;
+  -ms-scrollbar-width: none;
+  scrollbar-width: none;
+  -webkit-scrollbar-height: none;
+  -moz-scrollbar-height: none;
+  -ms-scrollbar-height: none;
+  scrollbar-height: none;
+}
+
+.c0::-webkit-scrollbar {
+  width: 0 !important;
+  height: 0 !important;
+}
+
+.c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin-right: auto;
+}
+
+.c1 {
+  position: absolute;
+  bottom: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  background-color: #0062FF;
+  height: 2px;
+  -webkit-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+}
+
+.c6 {
+  height: 100%;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  white-space: nowrap;
+}
+
+.c5 {
+  position: relative;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 0 16px;
+}
+
+.c3 {
+  position: relative;
+  box-sizing: border-box;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 48px;
+  padding: 0;
+  background: transparent;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: none;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 24px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.c3:focus:not(:active):before {
+  position: absolute;
+  content: '';
+  border: 2px solid #0062FF;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.c3:focus,
+.c3 > .c4 {
+  outline: none;
+}
+
+.c3 svg {
+  display: inline-block;
+  -webkit-flex: 1 0 auto;
+  -ms-flex: 1 0 auto;
+  flex: 1 0 auto;
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+}
+
+.c3 svg *[fill^='#'] {
+  fill: #74777F;
+}
+
+.c3 [data-badge] {
+  margin-left: 8px;
+}
+
+.c3:hover:not(:disabled) {
+  background: #0000000D;
+}
+
+.c3:active:not(:disabled) {
+  color: #0062FF;
+}
+
+.c3:active:not(:disabled) *[fill^='#'] {
+  fill: #0062FF;
+}
+
+.c3:active:not(:disabled) [data-badge] {
+  color: #FFFFFF;
+}
+
+.c3:disabled {
+  color: #B1B5BB;
+  cursor: default;
+}
+
+.c3:disabled *[fill^='#'] {
+  fill: #B1B5BB;
+}
+
+.c7 {
+  position: relative;
+  box-sizing: border-box;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 48px;
+  padding: 0;
+  background: transparent;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: none;
+  color: #74777F;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 24px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.c7:focus:not(:active):before {
+  position: absolute;
+  content: '';
+  border: 2px solid #0062FF;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.c7:focus,
+.c7 > .c4 {
+  outline: none;
+}
+
+.c7 svg {
+  display: inline-block;
+  -webkit-flex: 1 0 auto;
+  -ms-flex: 1 0 auto;
+  flex: 1 0 auto;
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+}
+
+.c7 svg *[fill^='#'] {
+  fill: #74777F;
+}
+
+.c7 [data-badge] {
+  margin-left: 8px;
+}
+
+.c7:hover:not(:disabled) {
+  background: #0000000D;
+}
+
+.c7:active:not(:disabled) {
+  color: #0062FF;
+}
+
+.c7:active:not(:disabled) *[fill^='#'] {
+  fill: #0062FF;
+}
+
+.c7:active:not(:disabled) [data-badge] {
+  color: #FFFFFF;
+}
+
+.c7:disabled {
+  color: #B1B5BB;
+  cursor: default;
+}
+
+.c7:disabled *[fill^='#'] {
+  fill: #B1B5BB;
+}
+
+<div>
+    <div
+      class="c0"
+      id="tabmenu"
+      role="tablist"
+    >
+      <div
+        aria-hidden="true"
+        class="c1"
+      />
+      <div
+        class="c2"
+      >
+        <button
+          aria-selected="true"
+          class="c3 tag"
+          data-testid="1"
+          id="1"
+          role="tab"
+          tabindex="0"
+          type="button"
+        >
+          <span
+            class="c4 c5"
+            tabindex="-1"
+          >
+            <div
+              class="c6"
+            >
+              Option 1
+            </div>
+          </span>
+        </button>
+        <button
+          aria-selected="false"
+          class="c7 tag"
+          id="2"
+          role="tab"
+          tabindex="-1"
+          type="button"
+        >
+          <span
+            class="c4 c5"
+            tabindex="-1"
+          >
+            <div
+              class="c6"
+            >
+              Option 22
+            </div>
+          </span>
+        </button>
+        <button
+          aria-selected="false"
+          class="c7 tag"
+          id="3"
+          role="tab"
+          tabindex="-1"
+          type="button"
+        >
+          <span
+            class="c4 c5"
+            tabindex="-1"
+          >
+            <div
+              class="c6"
+            >
+              Option 333
+            </div>
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;

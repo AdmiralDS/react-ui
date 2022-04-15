@@ -2,8 +2,8 @@ import { withDesign } from 'storybook-addon-designs';
 import * as React from 'react';
 import { ComponentMeta, ComponentStory, Story } from '@storybook/react';
 import styled from 'styled-components';
-import { AvatarGroup } from '#/components/AvatarGroup';
-import type { AvatarGroupProps } from '#/components/AvatarGroup';
+import { AvatarGroup } from '#src/components/AvatarGroup';
+import type { AvatarGroupProps } from '#src/components/AvatarGroup';
 import { ReactComponent as PersonSolid } from '@admiral-ds/icons/build/system/PersonSolid.svg';
 
 const imageURL = 'https://github.com/DrUNE.png?size=100';
@@ -38,7 +38,7 @@ export default {
     componentSubtitle: <Desc>Avatar - компонент отображающий аватарку пользователя и его статус</Desc>,
     design: {
       type: 'figma',
-      url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=37%3A32367',
+      url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=37%3A32367',
     },
   },
 } as ComponentMeta<typeof AvatarGroup>;

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { typography } from '#/components/Typography';
+import { typography } from '#src/components/Typography';
 
 type Dimension = 'm' | 's';
 
@@ -30,9 +30,9 @@ export const Span = styled.span<{ dimension: Dimension; disabled?: boolean }>`
     height: ${DIMENSION_S};
   }
   border: ${BORDER_WIDTH_DEFAULT} solid
-    ${({ theme, disabled }) => (disabled ? theme.color.text.tertiary : theme.color.basic.tertiary)};
+    ${({ theme, disabled }) => (disabled ? theme.color.basic.disable : theme.color.text.secondary)};
   fieldset:disabled & {
-    border: ${BORDER_WIDTH_DEFAULT} solid ${({ theme }) => theme.color.text.tertiary};
+    border: ${BORDER_WIDTH_DEFAULT} solid ${({ theme }) => theme.color.basic.disable};
   }
   border-radius: 50%;
   transition: all 0.25s ease-in-out;
@@ -57,7 +57,7 @@ export const Input = styled.input`
   height: 0;
 
   &:checked:disabled + ${Span} {
-    border: ${BORDER_WIDTH_CHECKED} solid ${({ theme }) => theme.color.text.tertiary};
+    border: ${BORDER_WIDTH_CHECKED} solid ${({ theme }) => theme.color.basic.disable};
   }
 
   &:checked:not(disabled) + ${Span} {
@@ -68,7 +68,7 @@ export const Input = styled.input`
     &:focus + ${Span}, &:hover + ${Span} {
       ${({ theme }) =>
         `
-          background-color: ${theme.color.background.secondary};
+          background-color: ${theme.color.background.primary};
           border: ${BORDER_WIDTH_CHECKED} solid ${theme.color.basic.hover};
         `}
     }
@@ -92,12 +92,12 @@ export const Label = styled.span<{
   display: inline-flex;
   flex-direction: column;
   box-sizing: content-box;
-  ${({ dimension }) => (dimension === 's' ? typography['Additional/XS'] : typography['Additional/M'])}
+  ${({ dimension }) => (dimension === 's' ? typography['Body/Body 2 Short'] : typography['Body/Body 1 Short'])}
   padding-left: ${({ dimension }) => (dimension === 's' ? TEXT_PADDING_S : TEXT_PADDING_M)};
   color: ${({ disabled, theme }) => (disabled ? theme.color.text.tertiary : theme.color.basic.secondary)};
 
   fieldset[data-dimension='s'] && {
-    ${typography['Additional/XS']}
+    ${typography['Body/Body 2 Short']}
     padding-left: ${TEXT_PADDING_S};
     color: ${({ disabled, theme }) => (disabled ? theme.color.text.tertiary : theme.color.basic.secondary)};
   }
@@ -110,11 +110,11 @@ export const Label = styled.span<{
 
 export const Hint = styled.span<{ dimension: Dimension; disabled?: boolean }>`
   margin-top: 6px;
-  ${({ dimension }) => (dimension === 's' ? typography['Caption/XS'] : typography['Additional/XS'])}
+  ${({ dimension }) => (dimension === 's' ? typography['Caption/Caption 1'] : typography['Body/Body 2 Short'])}
   color: ${({ disabled, theme }) => (disabled ? theme.color.text.tertiary : theme.color.text.secondary)};
 
   fieldset[data-dimension='s'] && {
-    ${typography['Caption/XS']}
+    ${typography['Caption/Caption 1']}
     color: ${({ disabled, theme }) => (disabled ? theme.color.text.tertiary : theme.color.text.secondary)};
   }
 `;

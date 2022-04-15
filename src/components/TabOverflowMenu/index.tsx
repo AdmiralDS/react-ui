@@ -1,9 +1,9 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { keyboardKey } from '#/components/common/keyboardKey';
-import { refSetter } from '#/components/common/utils/refSetter';
+import { keyboardKey } from '#src/components/common/keyboardKey';
+import { refSetter } from '#src/components/common/utils/refSetter';
 
-import { Dropdown } from '#/components/Dropdown';
+import { Dropdown } from '#src/components/Dropdown';
 import { Item } from './Item';
 import type { Dimension } from './Buton';
 import { Button } from './Buton';
@@ -16,7 +16,17 @@ const HiddenTab = styled.div`
   z-index: -10;
 `;
 
-export interface OverflowMenuItem extends React.HTMLAttributes<HTMLLIElement> {
+const StyledDropdown = styled(Dropdown)`
+  padding: 8px 0;
+`;
+
+export interface ItemWithId {
+  id: string;
+  content: React.ReactNode;
+  disabled?: boolean;
+}
+
+export interface OverflowMenuItem extends ItemWithId, React.HTMLAttributes<HTMLLIElement> {
   id: string;
   content: React.ReactNode;
   disabled?: boolean;
@@ -25,7 +35,7 @@ export interface OverflowMenuItem extends React.HTMLAttributes<HTMLLIElement> {
 }
 
 export interface OverflowMenuProps extends Omit<React.HTMLAttributes<HTMLButtonElement>, 'onChange'> {
-  options: Array<OverflowMenuItem>;
+  options: Array<ItemWithId>;
   selected: string | null;
   onChange: (id: string) => void;
   dimension?: Dimension;
@@ -34,10 +44,10 @@ export interface OverflowMenuProps extends Omit<React.HTMLAttributes<HTMLButtonE
   onMenuReachBottom: () => void;
   menuFocus: 'firstOption' | 'lastOption' | 'activeOption';
   setMenuFocus: React.Dispatch<React.SetStateAction<'firstOption' | 'lastOption' | 'activeOption'>>;
-  alignSelf?: string;
+  alignSelf?: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
 }
 
-export const TabOverflowMenu: React.FC<any> = React.forwardRef<HTMLButtonElement, OverflowMenuProps>(
+export const TabOverflowMenu = React.forwardRef<HTMLButtonElement, OverflowMenuProps>(
   (
     {
       dimension = 'l',
@@ -56,6 +66,10 @@ export const TabOverflowMenu: React.FC<any> = React.forwardRef<HTMLButtonElement
   ) => {
     const [menuOpened, setMenuOpened] = React.useState<boolean>(false);
     const btnRef = React.useRef<HTMLButtonElement | null>(null);
+    const containsActiveTab: boolean = React.useMemo(
+      () => options.findIndex((item) => item.id === selected) != -1,
+      [options, selected],
+    );
 
     const reverseMenu = (e: any) => {
       e.preventDefault();
@@ -104,13 +118,14 @@ export const TabOverflowMenu: React.FC<any> = React.forwardRef<HTMLButtonElement
           dimension={dimension}
           disabled={disabled}
           menuOpened={menuOpened}
+          isActive={containsActiveTab}
           onMouseDown={reverseMenu}
           onFocus={handleBtnFocus}
           role="none"
           aria-hidden
         />
         {menuOpened && (
-          <Dropdown
+          <StyledDropdown
             targetRef={btnRef}
             alignSelf={alignSelf}
             onMenuReachTop={handleReachTop}
@@ -118,6 +133,7 @@ export const TabOverflowMenu: React.FC<any> = React.forwardRef<HTMLButtonElement
             menuFocus={menuFocus}
             setMenuFocus={setMenuFocus}
             role="none"
+            onClickOutside={closeMenu}
           >
             {options.map(({ disabled: optionDisabled, id, ...props }) => {
               const isDisabled = disabled || optionDisabled;
@@ -132,6 +148,7 @@ export const TabOverflowMenu: React.FC<any> = React.forwardRef<HTMLButtonElement
                 if ((code === keyboardKey.Enter || code === keyboardKey[' ']) && !isDisabled) {
                   onChange(e.currentTarget.id);
                   e.preventDefault();
+                  closeMenu();
                 }
               };
               return (
@@ -147,9 +164,11 @@ export const TabOverflowMenu: React.FC<any> = React.forwardRef<HTMLButtonElement
                 />
               );
             })}
-          </Dropdown>
+          </StyledDropdown>
         )}
       </>
     );
   },
 );
+
+TabOverflowMenu.displayName = 'TabOverflowMenu';

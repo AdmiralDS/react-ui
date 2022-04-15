@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { ExtraTextContainer } from '#/components/Field';
-import { InputStatus } from '#/components/input';
+import { ExtraTextContainer } from '#src/components/Field';
+import { InputStatus } from '#src/components/input';
 import styled from 'styled-components';
-import { typography } from '#/components/Typography';
+import { typography } from '#src/components/Typography';
 
 export const ALL_FIELDSET_DIMENSIONS_VALUES = ['m', 's'] as const;
 
@@ -10,7 +10,7 @@ export const ALL_FIELDSET_DIMENSIONS_VALUES = ['m', 's'] as const;
 export type FieldSetDimension = typeof ALL_FIELDSET_DIMENSIONS_VALUES[number];
 
 const Legend = styled.legend<{ dimension?: FieldSetDimension }>`
-  ${(props) => (props.dimension === 's' ? typography['Additional/S'] : typography['Additional/L'])}
+  ${(props) => (props.dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
   color: ${(props) => props.theme.color.text.primary};
   fieldset:disabled & {
     color: ${(props) => props.theme.color.text.tertiary};
@@ -91,3 +91,5 @@ export const FieldSet: React.FC<PropsType> = (props) => {
     </FieldSetContainer>
   );
 };
+
+FieldSet.displayName = 'FieldSet';

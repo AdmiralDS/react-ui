@@ -1,11 +1,11 @@
 import * as React from 'react';
 import styled, { css } from 'styled-components';
-import { refSetter } from '#/components/common/utils/refSetter';
-import { InputStatus } from '#/components/input';
-import { CharacterCounter } from '#/components/input/TextArea/CharacterCounter';
-import { Label } from '#/components/Label';
-import { uid } from '#/components/common/uid';
-import { typography } from '#/components/Typography';
+import { refSetter } from '#src/components/common/utils/refSetter';
+import { InputStatus } from '#src/components/input';
+import { CharacterCounter } from '#src/components/input/TextArea/CharacterCounter';
+import { Label } from '#src/components/Label';
+import { uid } from '#src/components/common/uid';
+import { typography } from '#src/components/Typography';
 
 const inlineMixin = css`
   flex-direction: row;
@@ -38,7 +38,7 @@ export const ExtraTextContainer = styled.div`
 
   text-align: left;
 
-  ${typography['Additional/S']}
+  ${typography['Body/Body 2 Long']}
 
   color: ${(props) => props.theme.color.text.secondary};
 
@@ -97,10 +97,22 @@ export const Field = React.forwardRef<HTMLDivElement, FieldProps>(
     const containerRef = React.useRef<HTMLDivElement>(null);
     const [hasFocus, setFocus] = React.useState(false);
 
-    const { className, style, displayInline, status, extraText, label, required, disabled } = props;
-    const { id = uid() } = props;
-    const fieldContainerProps = { className, style, displayInline };
-    const labelProps = { htmlFor: id, children: label, required };
+    const {
+      className,
+      style,
+      displayInline,
+      status,
+      extraText,
+      label,
+      required,
+      disabled,
+      id = uid(),
+      ...restFieldProps
+    } = props;
+
+    const fieldContainerProps = { className, style, displayInline, ...restFieldProps } as Record<string, any>;
+
+    const labelProps = { htmlFor: id, children: label, required, disabled };
 
     React.useEffect(() => {
       const onFocusIn = (ev: FocusEvent) => {
@@ -151,3 +163,5 @@ export const Field = React.forwardRef<HTMLDivElement, FieldProps>(
     );
   },
 );
+
+Field.displayName = 'Field';

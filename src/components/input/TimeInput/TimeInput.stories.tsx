@@ -2,9 +2,9 @@ import React, { ChangeEvent, useState, useEffect } from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { TimeInput } from '../TimeInput';
 import { withDesign } from 'storybook-addon-designs';
-import { INPUT_DIMENSIONS_VALUES } from '#/components/input/types';
+import { INPUT_DIMENSIONS_VALUES } from '#src/components/input/types';
 import styled from 'styled-components';
-import { ReactComponent as CloseOutline } from '@admiral-ds/icons/build/service/CloseOutline.svg';
+import { ReactComponent as GPSOutline } from '@admiral-ds/icons/build/location/GPSOutline.svg';
 import { ReactComponent as TimeSVG } from '@admiral-ds/icons/build/system/TimeOutline.svg';
 
 const Icon = styled(TimeSVG)`
@@ -53,15 +53,15 @@ export default {
     design: [
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=39%3A60618',
+        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A60618',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=39%3A60644',
+        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A60644',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=39%3A60669',
+        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A60669',
       },
     ],
   },
@@ -92,6 +92,18 @@ export default {
     icon: {
       control: false,
     },
+    handleInput: {
+      control: false,
+    },
+    startTime: {
+      type: 'string',
+    },
+    endTime: {
+      type: 'string',
+    },
+    disabledSlots: {
+      control: false,
+    },
   },
 } as ComponentMeta<typeof TimeInput>;
 
@@ -118,7 +130,7 @@ const TimeInputIconAlternative: ComponentStory<typeof TimeInput> = (props) => {
     <TimeInput
       {...cleanProps}
       style={{ maxWidth: '320px' }}
-      icons={<CloseOutline onClick={() => setValue('')} />}
+      icons={<GPSOutline onClick={() => setValue('12:00')} />}
       icon={Icon}
       value={localValue}
       onChange={handleChange}

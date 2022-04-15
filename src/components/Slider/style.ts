@@ -9,16 +9,18 @@ export const Wrapper = styled.div`
 
 export const TrackWrapper = styled.div`
   position: relative;
+  box-sizing: border-box;
   width: 100%;
   cursor: pointer;
   display: flex;
   align-items: center;
-  height: 20px;
+  height: 40px;
   padding-bottom: 20px;
   [data-dimension='m'] & {
-    height: 16px;
+    height: 36px;
   }
   [data-disabled='true'] && {
+    pointer-events: none;
     cursor: auto;
   }
 `;

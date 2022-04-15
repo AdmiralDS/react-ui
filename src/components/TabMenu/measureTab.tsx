@@ -36,7 +36,8 @@ const measureElement = ({ icon, badge, content }: any, dimension: Dimension, cal
 
   // Renders the React element into the hidden div
   ReactDOM.render(element, container, () => {
-    const width = container.clientWidth;
+    // const width = container.clientWidth;
+    const width = container.getBoundingClientRect().width;
     callback(width);
     // remove hidden container from dom
     ReactDOM.unmountComponentAtNode(container);

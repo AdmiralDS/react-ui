@@ -34,7 +34,7 @@ Object {
 }
 
 .c0 *[fill^='#'] {
-  fill: #8A96A8;
+  fill: #626F84;
 }
 
 .c0:hover *[fill^='#'] {
@@ -57,7 +57,7 @@ Object {
 }
 
 .c0:active *[fill^='#'] {
-  fill: #083F91;
+  fill: #0949AA;
 }
 
 .c0:disabled {
@@ -134,7 +134,7 @@ Object {
 }
 
 .c0 *[fill^='#'] {
-  fill: #8A96A8;
+  fill: #626F84;
 }
 
 .c0:hover *[fill^='#'] {
@@ -157,7 +157,7 @@ Object {
 }
 
 .c0:active *[fill^='#'] {
-  fill: #083F91;
+  fill: #0949AA;
 }
 
 .c0:disabled {

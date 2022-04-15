@@ -1,16 +1,16 @@
 import * as React from 'react';
-import { changeInputData } from '#/components/common/dom/changeInputData';
-import { keyboardKey } from '#/components/common/keyboardKey';
-import { refSetter } from '#/components/common/utils/refSetter';
-import { typography } from '#/components/Typography';
+import { changeInputData } from '#src/components/common/dom/changeInputData';
+import { keyboardKey } from '#src/components/common/keyboardKey';
+import { refSetter } from '#src/components/common/utils/refSetter';
+import { typography } from '#src/components/Typography';
 import { ReactComponent as SearchOutlineSVG } from '@admiral-ds/icons/build/system/SearchOutline.svg';
 import { HTMLAttributes } from 'react';
 import styled from 'styled-components';
 import { TextInput, TextInputProps } from '../TextInput';
-import { Dropdown as DropComponent } from '#/components/Dropdown';
+import { Dropdown as DropComponent } from '#src/components/Dropdown';
 import { MessagePanel } from './MessagePanel';
 import { SuggestPanel } from './SuggestPanel';
-import { Spinner } from '#/components/Spinner';
+import { Spinner } from '#src/components/Spinner';
 
 const Dropdown = styled(DropComponent)`
   padding: 8px 0;
@@ -18,7 +18,7 @@ const Dropdown = styled(DropComponent)`
 
 const SearchIcon = styled(SearchOutlineSVG)`
   & *[fill^='#'] {
-    fill: ${(props) => props.theme.color.basic.tertiary};
+    fill: ${(props) => props.theme.color.text.secondary};
   }
 
   &:hover {
@@ -34,7 +34,7 @@ const SearchingPanelContainer = styled.div`
   display: flex;
   align-items: center;
   height: 40px;
-  ${typography['Additional/L']};
+  ${typography['Body/Body 1 Long']};
 
   [data-dimension='xl'] & {
     height: 48px;
@@ -43,7 +43,7 @@ const SearchingPanelContainer = styled.div`
 
   [data-dimension='s'] & {
     height: 32px;
-    ${typography['Additional/S']}
+    ${typography['Body/Body 2 Long']}
     line-height: 32px;
   }
 

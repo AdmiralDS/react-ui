@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { Slider as SliderComponent } from '#/components/Slider';
-import { TextInputProps } from '#/components/input/TextInput';
+import { Slider as SliderComponent } from '#src/components/Slider';
+import { TextInputProps } from '#src/components/input/TextInput';
 
 import { NumberInput } from '../NumberInput';
 import { clearValue, fitToCurrency, repeatStringNumTimes } from '../NumberInput/utils';
@@ -53,6 +53,8 @@ export interface SliderInputProps extends Omit<TextInputProps, 'onChange' | 'val
   suffix?: string;
   /** плейсхолдер */
   placeholder?: string;
+  /** Стандартные html-атрибуты, которые будут переданы wrapper-контейнеру компонента */
+  wrapperProps?: React.HTMLAttributes<HTMLDivElement>;
 }
 
 export const SliderInput = React.forwardRef<HTMLInputElement, SliderInputProps>(
@@ -71,6 +73,7 @@ export const SliderInput = React.forwardRef<HTMLInputElement, SliderInputProps>(
       suffix = '₽',
       placeholder = '0 ₽',
       disabled,
+      wrapperProps,
       ...props
     },
     ref,
@@ -82,8 +85,8 @@ export const SliderInput = React.forwardRef<HTMLInputElement, SliderInputProps>(
     const [sliderValue, setSliderValue] = React.useState<number>(minValue);
 
     React.useEffect(() => {
-      setInputValue(defaultValue);
-      setSliderValue(+clearValue(defaultValue, precision));
+      setInputValue(fitToCurrency(defaultValue, precision, decimal, thousand, prefix, suffix));
+      setSliderValue(+clearValue(defaultValue, precision, decimal));
     }, [defaultValue]);
 
     const handleSliderChange = (e: any, value: number) => {
@@ -91,7 +94,7 @@ export const SliderInput = React.forwardRef<HTMLInputElement, SliderInputProps>(
       const fullValue = fitToCurrency(shortValue, precision, decimal, thousand, prefix, suffix);
 
       setSliderValue(value);
-      setInputValue(shortValue);
+      setInputValue(fullValue);
 
       onChange?.(fullValue, shortValue);
     };
@@ -103,14 +106,14 @@ export const SliderInput = React.forwardRef<HTMLInputElement, SliderInputProps>(
     };
     const handleInputBlur = (event: React.FocusEvent<HTMLInputElement>) => {
       const value = event.currentTarget.value;
-      if (Number(clearValue(value, precision)) < minValue) {
+      if (Number(clearValue(value, precision, decimal)) < minValue) {
         const fullValue = fitToCurrency(String(minValue), precision, decimal, thousand, prefix, suffix);
 
         setSliderValue(minValue);
         setInputValue(fullValue);
 
         onChange?.(fullValue, String(minValue));
-      } else if (Number(clearValue(value, precision)) > maxValue) {
+      } else if (Number(clearValue(value, precision, decimal)) > maxValue) {
         const fullValue = fitToCurrency(String(maxValue), precision, decimal, thousand, prefix, suffix);
 
         setSliderValue(maxValue);
@@ -121,7 +124,7 @@ export const SliderInput = React.forwardRef<HTMLInputElement, SliderInputProps>(
       props.onBlur?.(event);
     };
     return (
-      <Wrapper data-dimension={dimension} dimension={dimension}>
+      <Wrapper data-dimension={dimension} dimension={dimension} {...wrapperProps}>
         <Input
           {...props}
           ref={ref}
@@ -154,3 +157,5 @@ export const SliderInput = React.forwardRef<HTMLInputElement, SliderInputProps>(
     );
   },
 );
+
+SliderInput.displayName = 'SliderInput';

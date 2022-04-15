@@ -1,6 +1,6 @@
-import { Button } from '#/components/Button';
-import { Toast, ToastProps, ToastProvider, useToast } from '#/components/Toast';
-import { IdentifyToast } from '#/components/Toast/type';
+import { Button } from '#src/components/Button';
+import { Toast, ToastProps, ToastProvider, useToast } from '#src/components/Toast';
+import { IdentifyToast } from '#src/components/Toast/type';
 import * as React from 'react';
 import styled from 'styled-components';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
@@ -28,9 +28,10 @@ const Description = () => (
 
 const items: IdentifyToast[] = [
   {
+    id: '1234',
     status: 'error',
     children: `Запрос завершился ошибкой`,
-    title: 'Заголовок',
+    title: 'Заголовок 1234',
     isClosable: true,
     linkText: 'Link',
     displayStatusIcon: true,
@@ -71,7 +72,7 @@ export default {
     componentSubtitle: <Description />,
     design: {
       type: 'figma',
-      url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=37%3A27525',
+      url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=37%3A27525',
     },
   },
   argTypes: {
@@ -89,14 +90,14 @@ const Temp1: ComponentStory<typeof Toast> = (args: ToastProps) => {
     <ToastProvider autoDeleteTime={args.autoDeleteTime}>
       <NotificationEmitter />
 
-      <Toast style={{ top: 128, left: 64 }} />
+      <Toast style={{ top: 128, left: 164 }} />
     </ToastProvider>
   );
 };
 
 const Temp2: ComponentStory<typeof Toast> = (args: ToastProps) => {
   return (
-    <ToastProvider autoDeleteTime={args.autoDeleteTime}>
+    <ToastProvider>
       <NotificationEmitter />
 
       <Toast position={args.position} />
@@ -105,9 +106,21 @@ const Temp2: ComponentStory<typeof Toast> = (args: ToastProps) => {
 };
 
 const NotificationEmitter = () => {
-  const { addToast } = useToast();
+  const { addToast, clearToasts, removeToastById } = useToast();
   const customItem = random(0, 3);
-  return <Button onClick={() => addToast(items[customItem])}>Добавить сообщение</Button>;
+  return (
+    <div style={{ display: 'flex' }}>
+      <div style={{ marginRight: 15 }}>
+        <Button onClick={() => addToast(items[customItem])}>Добавить сообщение</Button>
+      </div>
+      <div style={{ marginRight: 15 }}>
+        <Button onClick={() => clearToasts()}>Удалить все нотификации</Button>
+      </div>
+      <div style={{ marginRight: 15 }}>
+        <Button onClick={() => removeToastById('1234')}>Удалить нотификацию по id '1234'</Button>
+      </div>
+    </div>
+  );
 };
 
 export const ToastNotification = Temp1.bind({});

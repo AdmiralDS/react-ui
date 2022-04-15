@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 
-import { DEFAULT_THEME } from '../../common';
-
 const BUTTON_SIZE = '32px';
 const BUTTON_PADDING = '4px';
 
@@ -26,26 +24,15 @@ export const PanelButton = styled.div<{
     `}
 
   & *[fill^='#'] {
-    fill: ${({ disabled, theme }) => (disabled ? theme.color.basic.disable : theme.color.basic.tertiary)};
+    fill: ${({ disabled, theme }) => (disabled ? theme.color.text.tertiary : theme.color.text.secondary)};
   }
 
   ${({ disabled, theme }) => `
-    &:hover,
-    &:focus {
+    &:hover {
       background-color: ${disabled ? 'transparent' : theme.color.background.secondary};
       & *[fill^='#'] {
-        fill: ${theme.color.basic.hover};
-      }
-    }
-    &:active {
-      background-color: ${disabled ? 'transparent' : theme.color.background.secondary};
-      & *[fill^='#'] {
-        fill: ${theme.color.basic.press};
+        fill: ${disabled ? theme.color.text.tertiary : theme.color.text.secondary};
       }
     }
   `}
 `;
-
-PanelButton.defaultProps = {
-  theme: DEFAULT_THEME,
-};

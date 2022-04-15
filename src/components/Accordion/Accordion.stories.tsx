@@ -1,11 +1,11 @@
-import { Button } from '#/components/Button';
-import { SelectField as Select } from '#/components/form/SelectField';
-import { DropDownItem } from '#/components/DropDownItem';
 import React from 'react';
 import styled from 'styled-components';
+import { Button } from '#src/components/Button';
+import { SearchSelectField as Select } from '#src/components/form/SearchSelectField';
+import { Option } from '#src/components/input/SearchSelect';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import { FieldSet } from '#/components/form';
-import { RadioButton } from '#/components/RadioButton';
+import { FieldSet } from '#src/components/form';
+import { RadioButton } from '#src/components/RadioButton';
 import { Accordion, AccordionItem } from '../Accordion';
 
 const Separator = styled.div`
@@ -30,7 +30,7 @@ const Description = () => (
   </Desc>
 );
 
-const SelectField = styled(Select)`
+const SearchSelectField = styled(Select)`
   margin-top: 24px;
 `;
 
@@ -42,15 +42,15 @@ export default {
     design: [
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=39%3A9887',
+        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=108393%3A69960',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=39%3A10059',
+        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A10059',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=39%3A10103',
+        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A10103',
       },
     ],
   },
@@ -61,49 +61,36 @@ export default {
     },
   },
 } as ComponentMeta<typeof Accordion>;
-const options = [
-  {
-    id: 1,
-    label:
-      'Option one very long very long very long very long very long very long very long very long very long very long very long ',
-    value: '1',
-  },
-  { id: 2, label: 'Option two', value: '2' },
-  { id: 3, label: 'Option three', value: '3' },
-  { id: 4, label: 'Option four', value: '4' },
-  { id: 5, label: 'Option five', value: '5' },
-  { id: 6, label: 'Option six', value: '6' },
-  { id: 7, label: 'Option seven', value: '7' },
-  { id: 8, label: 'Option seven', value: '7' },
-  { id: 9, label: 'Option seven', value: '7' },
-  { id: 10, label: 'Option seven', value: '7' },
-  { id: 11, label: 'Option seven', value: '7' },
-  { id: 12, label: 'Option seven', value: '7' },
-  { id: 13, label: 'Option seven', value: '7' },
-  { id: 14, label: 'Option seven', value: '7' },
-  { id: 15, label: 'Option seven', value: '7' },
-  { id: 16, label: 'Option seven', value: '7' },
-  { id: 17, label: 'Option seven', value: '7' },
-  { id: 18, label: 'Option seven', value: '7' },
+const OPTIONS_SIMPLE = [
+  'teeext 1',
+  'text 2 text text 2 text text 2 text text 2 text text 2 text text 2 text text 2 text ',
+  'text 3',
+  'text 4',
+  'text 5',
+  'texttt 6',
 ];
 
 const Template1: ComponentStory<typeof Accordion> = (args) => {
   const values = ['1', '2', '3'];
   const [selected, setSelected] = React.useState<number | string | null>('');
-  const [selectValue, setValue] = React.useState<number | string | null>('');
+  const [selectValue, setSelectValue] = React.useState('');
+
+  const onChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectValue(e.target.value);
+  };
   return (
     <Accordion {...args}>
       <AccordionItem
         id="accordion1-item1"
         title="Первый пункт"
-        onClick={(title, isOpen, event) => console.log({ title, isOpen, event })}
+        onClick={(title, expanded, event) => console.log({ title, expanded, event })}
       >
         Контент первого пункта
       </AccordionItem>
       <AccordionItem
         id="accordion1-item2"
         title="Второй пункт"
-        onClick={(title, isOpen, event) => console.log({ title, isOpen, event })}
+        onClick={(title, expanded, event) => console.log({ title, expanded, event })}
       >
         Аккордеон — это вертикальный список заголовков, которые, при нажатии, показывают контент находящийся под ними.
         <FieldSet
@@ -124,21 +111,25 @@ const Template1: ComponentStory<typeof Accordion> = (args) => {
             Third option
           </RadioButton>
         </FieldSet>
-        <SelectField label="Опции" value={selectValue} onChange={setValue} required>
-          {options.map((item, index) => {
-            return (
-              <DropDownItem role="option" value={item.label} key={index}>
-                {item.label}
-              </DropDownItem>
-            );
-          })}
-        </SelectField>
+        <SearchSelectField
+          label="label"
+          className="Search"
+          value={selectValue}
+          onChange={onChange}
+          placeholder="Placeholder"
+        >
+          {OPTIONS_SIMPLE.map((option, ind) => (
+            <Option key={option} value={option} disabled={ind === 4}>
+              {option}
+            </Option>
+          ))}
+        </SearchSelectField>
       </AccordionItem>
       <AccordionItem
         id="accordion1-item3"
-        isDefaultOpen
+        defaultExpanded
         title="Третий пункт"
-        onClick={(title, isOpen, event) => console.log({ title, isOpen, event })}
+        onClick={(title, expanded, event) => console.log({ title, expanded, event })}
       >
         Будущее игр никогда не было таким вдохновляющим. Творчество в играх процветает. Новые сервисы позволяют находить
         больше игр, а также приближают игроков к любимым играм, стримерам и создателям. Облако создает огромную
@@ -149,35 +140,24 @@ const Template1: ComponentStory<typeof Accordion> = (args) => {
     </Accordion>
   );
 };
-const Text = `
-  Будущее игр никогда не было таким вдохновляющим. Творчество в играх процветает. Новые сервисы позволяют
-          находить больше игр, а также приближают игроков к любимым играм, стримерам и создателям. Облако создает
-          огромную возможность для потоковой передачи игр консольного уровня, что позволит людям играть с теми игроками,
-          с кем хочется и где захочется. И для многих из нас нет ничего более вдохновляющего, чем рассвет нового
-          поколения консолей.
-`;
 
 const Template2: ComponentStory<typeof Accordion> = () => {
-  const [content, setContent] = React.useState(Text);
-
   return (
     <>
       <Desc style={{ textDecoration: 'underline' }}>Размер l</Desc>
-      <Separator />
-      <Button
-        onClick={() => {
-          setContent(content + Text);
-        }}
-      >
-        Добавить контент
-      </Button>
       <Separator />
       <Accordion>
         <AccordionItem title="Первый пункт">Контент первого пункта</AccordionItem>
         <AccordionItem title="Второй пункт">
           Аккордеон — это вертикальный список заголовков, которые, при нажатии, показывают контент находящийся под ними.
         </AccordionItem>
-        <AccordionItem title="Третий пункт" children={content} />
+        <AccordionItem title="Третий пункт">
+          Будущее игр никогда не было таким вдохновляющим. Творчество в играх процветает. Новые сервисы позволяют
+          находить больше игр, а также приближают игроков к любимым играм, стримерам и создателям. Облако создает
+          огромную возможность для потоковой передачи игр консольного уровня, что позволит людям играть с теми игроками,
+          с кем хочется и где захочется. И для многих из нас нет ничего более вдохновляющего, чем рассвет нового
+          поколения консолей.
+        </AccordionItem>
       </Accordion>
       <Separator />
       <Desc style={{ textDecoration: 'underline' }}>Размер m</Desc>
@@ -187,15 +167,45 @@ const Template2: ComponentStory<typeof Accordion> = () => {
         <AccordionItem title="Второй пункт">
           Аккордеон — это вертикальный список заголовков, которые, при нажатии, показывают контент находящийся под ними.
         </AccordionItem>
-        <AccordionItem title="Третий пункт" contentMaxHeight="300px">
+        <AccordionItem title="Третий пункт" contentMaxHeight="150px">
           Будущее игр никогда не было таким вдохновляющим. Творчество в играх процветает. Новые сервисы позволяют
           находить больше игр, а также приближают игроков к любимым играм, стримерам и создателям. Облако создает
           огромную возможность для потоковой передачи игр консольного уровня, что позволит людям играть с теми игроками,
           с кем хочется и где захочется. И для многих из нас нет ничего более вдохновляющего, чем рассвет нового
-          поколения консолей.
+          поколения консолей. Будущее игр никогда не было таким вдохновляющим. Творчество в играх процветает. Новые
+          сервисы позволяют находить больше игр, а также приближают игроков к любимым играм, стримерам и создателям.
+          Облако создает огромную возможность для потоковой передачи игр консольного уровня, что позволит людям играть с
+          теми игроками, с кем хочется и где захочется. И для многих из нас нет ничего более вдохновляющего, чем рассвет
+          нового поколения консолей.
         </AccordionItem>
       </Accordion>
     </>
+  );
+};
+
+const Template3: ComponentStory<typeof Accordion> = (args) => {
+  const [expanded, setExpanded] = React.useState(false);
+  return (
+    <Accordion {...args}>
+      <AccordionItem
+        defaultExpanded
+        title="Неконтролируемый режим использования (uncontrolled)"
+        onClick={(title, expanded, event) => console.log({ title, expanded, event })}
+      >
+        Контент первого пункта
+      </AccordionItem>
+      <AccordionItem
+        expanded={expanded}
+        title="Контролируемый режим использования (controlled)"
+        onClick={(title, expanded, event) => setExpanded(expanded)}
+      >
+        Будущее игр никогда не было таким вдохновляющим. Творчество в играх процветает. Новые сервисы позволяют находить
+        больше игр, а также приближают игроков к любимым играм, стримерам и создателям. Облако создает огромную
+        возможность для потоковой передачи игр консольного уровня, что позволит людям играть с теми игроками, с кем
+        хочется и где захочется. И для многих из нас нет ничего более вдохновляющего, чем рассвет нового поколения
+        консолей.
+      </AccordionItem>
+    </Accordion>
   );
 };
 
@@ -206,3 +216,18 @@ AccordionPlayground.storyName = 'Accordion. Playground.';
 export const AccordionDimension = Template2.bind({});
 AccordionDimension.args = {};
 AccordionDimension.storyName = 'Accordion. Размеры.';
+
+export const AccordionModes = Template3.bind({});
+AccordionModes.args = {};
+AccordionModes.storyName = 'Accordion. Режимы использования.';
+AccordionModes.parameters = {
+  docs: {
+    description: {
+      story: `Компонент AccordionItem может работать в контролируемом и неконтролируемом режимах. 
+      Параметр expanded задает состояние компонента в контролируемом режиме:\n\n - если true, 
+      разворачивает тело аккордеона;\n\n- если false, сворачивает тело аккордеона.\n\nЕсли свойство 
+      expanded передано - автоматическое сворачивание/разворачивание блокируется. В неконтролируемом режиме дефолтное
+      состояние аккордеона можно задать с помощью свойства defaultExpanded.`,
+    },
+  },
+};

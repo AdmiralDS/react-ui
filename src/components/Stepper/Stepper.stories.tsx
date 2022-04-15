@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 
-import { Button } from '#/index';
+import { Button } from '#src/index';
 import { Step, StepContent, Stepper } from '../Stepper';
 
 const Desc = styled.div`
@@ -39,15 +39,15 @@ export default {
     design: [
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=37%3A16671',
+        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=37%3A16671',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=37%3A16789',
+        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=37%3A16789',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=37%3A16767',
+        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=37%3A16767',
       },
     ],
   },
@@ -68,8 +68,9 @@ const Template0: ComponentStory<typeof Stepper> = ({ lineClamp, activeStep, orie
     {
       key: 0,
       content: 'Завершенный шаг, текст занимает максимум три строки, далее идет сокращение',
+      completed: true,
     },
-    { key: 1, content: 'Шаг с ошибкой, текст занимает максимум три строки', error: true },
+    { key: 1, content: 'Завершенный шаг, текст занимает максимум три строки, далее идет сокращение', completed: true },
     { key: 2, content: 'Активный шаг, текст занимает максимум три строки' },
     { key: 3, content: 'Неактивный шаг, текст занимает максимум три строки' },
   ];
@@ -91,8 +92,9 @@ const Template1: ComponentStory<typeof Stepper> = (args) => {
     {
       key: 0,
       content: 'Завершенный шаг, текст занимает максимум три строки, далее идет сокращение',
+      completed: true,
     },
-    { key: 1, content: 'Шаг с ошибкой, текст занимает максимум три строки', error: true },
+    { key: 1, content: 'Завершенный шаг, текст занимает максимум три строки, далее идет сокращение', completed: true },
     { key: 2, content: 'Активный шаг, текст занимает максимум три строки' },
     { key: 3, content: 'Неактивный шаг, текст занимает максимум три строки' },
   ];
@@ -114,7 +116,7 @@ const Template2: ComponentStory<typeof Stepper> = (args) => {
     { key: 0, content: 'Шаг с предупреждением', warning: true },
     { key: 1, content: 'Disabled шаг', disabled: true },
     { key: 2, content: 'Шаг с ошибкой', error: true },
-    { key: 3, content: 'Завершенный шаг' },
+    { key: 3, content: 'Завершенный шаг', completed: true },
     { key: 4, content: 'Активный шаг' },
     { key: 5, content: 'Неактивный шаг' },
   ];
@@ -124,7 +126,7 @@ const Template2: ComponentStory<typeof Stepper> = (args) => {
         {steps.map(({ content, ...step }) => {
           return (
             <Step {...step}>
-              <i>{content}</i>
+              <StepContent tooltipProps={{ style: { maxWidth: '300px', textAlign: 'center' } }}>{content}</StepContent>
             </Step>
           );
         })}
@@ -139,8 +141,14 @@ const Template3: ComponentStory<typeof Stepper> = (args) => {
       key: 0,
       content: 'Завершенный шаг, текст занимает максимум три строки, далее идет сокращение',
       link: '#',
+      completed: true,
     },
-    { key: 1, content: 'Шаг с ошибкой, текст занимает максимум три строки', link: '#', warning: true },
+    {
+      key: 1,
+      content: 'Завершенный шаг, текст занимает максимум три строки, далее идет сокращение',
+      link: '#',
+      completed: true,
+    },
     { key: 2, content: 'Активный шаг, текст занимает максимум три строки', link: '#' },
     { key: 3, content: 'Неактивный шаг, текст занимает максимум три строки', link: '#' },
   ];
@@ -174,8 +182,9 @@ const Template4: ComponentStory<typeof Stepper> = (args) => {
     {
       key: 0,
       content: 'Завершенный шаг, текст занимает максимум три строки, далее идет сокращение',
+      completed: true,
     },
-    { key: 1, content: 'Шаг с ошибкой, текст занимает максимум три строки', error: true },
+    { key: 1, content: 'Завершенный шаг, текст занимает максимум три строки, далее идет сокращение', completed: true },
     { key: 2, content: 'Активный шаг, текст занимает максимум три строки' },
     { key: 3, content: 'Неактивный шаг, текст занимает максимум три строки' },
   ];
@@ -205,23 +214,76 @@ const Template4: ComponentStory<typeof Stepper> = (args) => {
 };
 
 const Template5: ComponentStory<typeof Stepper> = (args) => {
-  const steps = [
+  const initialSteps = [
     {
       key: 0,
-      content: 'Завершенный шаг, текст занимает максимум три строки, далее идет сокращение',
+      content: '1. Пройденный шаг',
+      completed: true,
     },
-    { key: 1, content: 'Шаг с ошибкой, текст занимает максимум три строки' },
-    { key: 2, content: 'Активный шаг, текст занимает максимум три строки' },
-    { key: 3, content: 'Неактивный шаг, текст занимает максимум три строки' },
+    { key: 1, content: '2. Ранее пройденный шаг, на котрый мы вернулись с 4го шага' },
+    { key: 2, content: '3. Пройденный шаг', completed: true },
+    { key: 3, content: '4. Отсюда мы вернулись на 2 шаг.', completed: true },
+    { key: 4, content: '5. Неактивный шаг, еще не пройденный' },
+  ];
+
+  const [activeStep, setActiveStep] = React.useState(1);
+  const [steps, setSteps] = React.useState(initialSteps);
+  const handleStepClick = ({ index }: any) => {
+    const newSteps = [...steps].map((step, i) => (i < 4 ? { ...step, completed: i !== index } : step));
+    setSteps(newSteps);
+    setActiveStep(index);
+  };
+  return (
+    <div style={{ maxWidth: '800px', overflow: 'hidden' }}>
+      <Stepper lineClamp={2} activeStep={activeStep}>
+        {steps.map(({ content, ...step }) => {
+          return (
+            <Step {...step} onClick={handleStepClick}>
+              <StepContent tooltipProps={{ style: { maxWidth: '300px', textAlign: 'center' } }}>{content}</StepContent>
+            </Step>
+          );
+        })}
+      </Stepper>
+    </div>
+  );
+};
+
+const Template6: ComponentStory<typeof Stepper> = (args) => {
+  const initialSteps = [
+    {
+      key: 0,
+      content: 'Текст занимает максимум три строки, далее идет сокращение',
+    },
+    { key: 1, content: 'Текст занимает максимум три строки, далее идет сокращение' },
+    { key: 2, content: 'Текст занимает максимум три строки, далее идет сокращение' },
+    { key: 3, content: 'Текст занимает максимум три строки, далее идет сокращение' },
   ];
   const [activeStep, setActiveStep] = React.useState(0);
+  const [steps, setSteps] = React.useState(initialSteps);
+
   return (
     <div style={{ width: '400px', overflow: 'hidden' }}>
       <div style={{ display: 'flex', width: '100%', justifyContent: 'space-between', marginBottom: '40px' }}>
-        <Button onClick={() => setActiveStep(activeStep - 1)} disabled={activeStep === 0} dimension="s">
+        <Button
+          onClick={() => {
+            const newSteps = [...steps].map((step, i) => (i === activeStep - 1 ? { ...step, completed: false } : step));
+            setSteps(newSteps);
+            setActiveStep(activeStep - 1);
+          }}
+          disabled={activeStep === 0}
+          dimension="s"
+        >
           Шаг назад
         </Button>
-        <Button onClick={() => setActiveStep(activeStep + 1)} disabled={activeStep === 3} dimension="s">
+        <Button
+          onClick={() => {
+            const newSteps = [...steps].map((step, i) => (i === activeStep ? { ...step, completed: true } : step));
+            setSteps(newSteps);
+            setActiveStep(activeStep + 1);
+          }}
+          disabled={activeStep === 3}
+          dimension="s"
+        >
           Шаг вперёд
         </Button>
       </div>
@@ -245,6 +307,17 @@ Playground.storyName = 'Stepper. Playground.';
 export const StepKinds = Template2.bind({});
 StepKinds.args = {};
 StepKinds.storyName = 'Stepper. Виды шагов.';
+StepKinds.parameters = {
+  docs: {
+    description: {
+      story: `Для обозначения активного шага в компонент Stepper нужно передать параметр activeStep, равный индексу активного шага.
+      Либо для самого Step можно задать параметр active (перезаписывает собой параметр activeStep). \n\n Чтобы обозначить завершенные 
+      (пройденные) шаги, для соответствующих шагов необходимо задать параметр completed. Также компонент Step имеет параметры disabled, 
+      error, warning.\n\nПройденные шаги могут быть кликабельными, для этого у них 
+      должен быть задан колбек onClick или параметр link.`,
+    },
+  },
+};
 
 export const CutomStepContent = Template1.bind({});
 CutomStepContent.args = {};
@@ -258,16 +331,28 @@ export const ClickProp = Template4.bind({});
 ClickProp.args = {};
 ClickProp.storyName = 'Stepper. Кликабельные шаги.';
 
-export const Mobile = Template5.bind({});
+export const Previous = Template5.bind({});
+Previous.args = {};
+Previous.storyName = 'Stepper. Возврат к предыдущим шагам.';
+Previous.parameters = {
+  docs: {
+    description: {
+      story: `В случаях необходимости и когда это позволяет логика шагов, например, результаты предыдущих 
+      шагов не влияют на последующие, допускается возможность возврата к предыдущим шагам.`,
+    },
+  },
+};
+
+export const Mobile = Template6.bind({});
 Mobile.args = {};
 Mobile.storyName = 'Stepper. Мобильная версия.';
 Mobile.parameters = {
   docs: {
     description: {
-      story: `В мобильной версии применяется только горизонтальный вариант компонента 
-      с автоматическим скроллом по горизонтали по мере прохождения шагов.\n\nКомпонент можно скроллить пальцем, 
-      если нужно посмотреть пройденные или будущие шаги.\n\nПри переходе на следующий шаг, который становится 
-      текущим, он выравнивается относительно левого края на расстоянии 16px (боковой падинг). Шаг перед текущим 
+      story: `В мобильной версии применяется только горизонтальный вариант компонента
+      с автоматическим скроллом по горизонтали по мере прохождения шагов.\n\nКомпонент можно скроллить пальцем,
+      если нужно посмотреть пройденные или будущие шаги.\n\nПри переходе на следующий шаг, который становится
+      текущим, он выравнивается относительно левого края на расстоянии 16px (боковой падинг). Шаг перед текущим
       уходит за границы экрана.`,
     },
   },

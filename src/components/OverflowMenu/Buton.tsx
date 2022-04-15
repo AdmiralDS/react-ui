@@ -44,7 +44,7 @@ const ButtonComponent = styled.button<{ dimension: Dimension; menuOpened: boolea
   }
 
   & *[fill^='#'] {
-    fill: ${({ theme }) => theme.color.basic.tertiary};
+    fill: ${({ theme }) => theme.color.text.secondary};
   }
 
   &:hover *[fill^='#'] {

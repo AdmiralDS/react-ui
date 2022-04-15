@@ -98,3 +98,5 @@ export const Spinner: FC<SpinnerProps> = ({ dimension = 'm', inverse = false, ..
     </SpinnerWrapper>
   );
 };
+
+Spinner.displayName = 'Spinner';

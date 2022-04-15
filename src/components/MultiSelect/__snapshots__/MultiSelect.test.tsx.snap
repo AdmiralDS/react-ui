@@ -13,11 +13,12 @@ Object {
 }
 
 .c5 *[fill^='#'] {
-  fill: #8A96A8;
+  fill: #626F84;
 }
 
 .c5.c5[data-disabled] {
   pointer-events: none;
+  fill: #A7B0BE;
 }
 
 .c5:not([data-disabled]):hover {
@@ -61,10 +62,6 @@ Object {
   cursor: pointer;
 }
 
-.c2 *[fill^='#'] {
-  fill: #8A96A8;
-}
-
 .c4 {
   -webkit-flex: 0 0 auto;
   -ms-flex: 0 0 auto;
@@ -103,7 +100,7 @@ Object {
 
 [data-focus-within] .c0,
 .c1:focus {
-  border-color: #083F91;
+  border-color: #0949AA;
 }
 
 .c1:hover {
@@ -116,6 +113,14 @@ Object {
 
 .c1:active {
   outline: none;
+}
+
+[data-status='success'] .c0 {
+  border-color: #2ABB5B;
+}
+
+[data-status='error'] .c0 {
+  border-color: #DA0B20;
 }
 
 .c3 {
@@ -175,11 +180,12 @@ Object {
 }
 
 .c5 *[fill^='#'] {
-  fill: #8A96A8;
+  fill: #626F84;
 }
 
 .c5.c5[data-disabled] {
   pointer-events: none;
+  fill: #A7B0BE;
 }
 
 .c5:not([data-disabled]):hover {
@@ -223,10 +229,6 @@ Object {
   cursor: pointer;
 }
 
-.c2 *[fill^='#'] {
-  fill: #8A96A8;
-}
-
 .c4 {
   -webkit-flex: 0 0 auto;
   -ms-flex: 0 0 auto;
@@ -265,7 +267,7 @@ Object {
 
 [data-focus-within] .c0,
 .c1:focus {
-  border-color: #083F91;
+  border-color: #0949AA;
 }
 
 .c1:hover {
@@ -278,6 +280,14 @@ Object {
 
 .c1:active {
   outline: none;
+}
+
+[data-status='success'] .c0 {
+  border-color: #2ABB5B;
+}
+
+[data-status='error'] .c0 {
+  border-color: #DA0B20;
 }
 
 .c3 {
@@ -392,11 +402,12 @@ Object {
 }
 
 .c5 *[fill^='#'] {
-  fill: #8A96A8;
+  fill: #626F84;
 }
 
 .c5.c5[data-disabled] {
   pointer-events: none;
+  fill: #A7B0BE;
 }
 
 .c5:not([data-disabled]):hover {
@@ -440,10 +451,6 @@ Object {
   cursor: pointer;
 }
 
-.c2 *[fill^='#'] {
-  fill: #8A96A8;
-}
-
 .c4 {
   -webkit-flex: 0 0 auto;
   -ms-flex: 0 0 auto;
@@ -482,7 +489,7 @@ Object {
 
 [data-focus-within] .c0,
 .c1:focus {
-  border-color: #083F91;
+  border-color: #0949AA;
 }
 
 .c1:hover {
@@ -495,6 +502,14 @@ Object {
 
 .c1:active {
   outline: none;
+}
+
+[data-status='success'] .c0 {
+  border-color: #2ABB5B;
+}
+
+[data-status='error'] .c0 {
+  border-color: #DA0B20;
 }
 
 .c3 {
@@ -554,11 +569,12 @@ Object {
 }
 
 .c5 *[fill^='#'] {
-  fill: #8A96A8;
+  fill: #626F84;
 }
 
 .c5.c5[data-disabled] {
   pointer-events: none;
+  fill: #A7B0BE;
 }
 
 .c5:not([data-disabled]):hover {
@@ -602,10 +618,6 @@ Object {
   cursor: pointer;
 }
 
-.c2 *[fill^='#'] {
-  fill: #8A96A8;
-}
-
 .c4 {
   -webkit-flex: 0 0 auto;
   -ms-flex: 0 0 auto;
@@ -644,7 +656,7 @@ Object {
 
 [data-focus-within] .c0,
 .c1:focus {
-  border-color: #083F91;
+  border-color: #0949AA;
 }
 
 .c1:hover {
@@ -657,6 +669,14 @@ Object {
 
 .c1:active {
   outline: none;
+}
+
+[data-status='success'] .c0 {
+  border-color: #2ABB5B;
+}
+
+[data-status='error'] .c0 {
+  border-color: #DA0B20;
 }
 
 .c3 {

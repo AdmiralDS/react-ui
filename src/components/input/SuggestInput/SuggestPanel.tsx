@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled, { css } from 'styled-components';
-import { typography } from '#/components/Typography';
+import { typography } from '#src/components/Typography';
 import type { SuggestItem } from './';
 import { HTMLAttributes } from 'react';
 
@@ -39,7 +39,7 @@ export const Panel = styled.div<{ active?: boolean }>`
   white-space: nowrap;
 
   height: 40px;
-  ${typography['Additional/L']}
+  ${typography['Body/Body 1 Long']}
   line-height: 40px;
   padding: 0 16px;
 
@@ -49,7 +49,7 @@ export const Panel = styled.div<{ active?: boolean }>`
   }
   [data-dimension='s'] & {
     height: 32px;
-    ${typography['Additional/S']}
+    ${typography['Body/Body 2 Long']}
     line-height: 32px;
     padding: 0 12px;
   }

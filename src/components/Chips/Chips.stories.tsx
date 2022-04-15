@@ -35,10 +35,16 @@ const listDataIcon = [
     iconAfter: <AlertSolid />,
     selected: false,
   },
-  { id: '2', label: 'Тверь', disabled: false, iconBefore: <TrophyIcon />, selected: false },
+  { id: '2', label: 'Тверь', disabled: true, onClose: () => undefined, iconBefore: <TrophyIcon />, selected: false },
   { id: '3', label: 'Самара', disabled: false, iconAfter: <BurnIcon />, selected: false },
   { id: '4', label: 'Омск', disabled: false, iconAfter: <DiamondSolid />, selected: false },
-  { id: '5', label: 'Вильнус', disabled: false, iconAfter: <BurnIcon />, onClose: () => undefined, selected: false },
+  {
+    id: '5',
+    label: 'Вильнус',
+    disabled: false,
+    onClose: () => undefined,
+    selected: false,
+  },
 ];
 
 const listDataIconTooltip = [
@@ -82,15 +88,15 @@ export default {
     design: [
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=37%3A18081',
+        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=37%3A18081',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=37%3A18222',
+        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=37%3A18222',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=37%3A18353',
+        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=37%3A18353',
       },
     ],
     componentSubtitle: <Description />,
@@ -153,20 +159,41 @@ const ChipsTagsCloseDemo: ComponentStory<typeof Chips> = (props) => {
 };
 
 const ChipsIconDemo: ComponentStory<typeof Chips> = (props) => (
-  <WrapperChip dimension={props.dimension}>
-    {listDataIcon.map((d) => (
-      <Chips
-        {...props}
-        key={d.id}
-        iconBefore={d?.iconBefore}
-        iconAfter={d?.iconAfter}
-        // Если onClose указан, вместо iconAfter отобразится closeIcon
-        onClose={d?.onClose}
-      >
-        {d.label}
-      </Chips>
-    ))}
-  </WrapperChip>
+  <>
+    <WrapperChip dimension={props.dimension}>
+      {listDataIcon.map((d) => (
+        <Chips
+          {...props}
+          key={d.id}
+          iconBefore={d?.iconBefore}
+          iconAfter={d?.iconAfter}
+          // Если onClose указан, вместо iconAfter отобразится closeIcon
+          onClose={d?.onClose}
+          appearance="outlined"
+          disabled={d?.disabled}
+        >
+          {d.label}
+        </Chips>
+      ))}
+    </WrapperChip>
+    <Separator />
+    <WrapperChip dimension={props.dimension}>
+      {listDataIcon.map((d) => (
+        <Chips
+          {...props}
+          key={d.id}
+          iconBefore={d?.iconBefore}
+          iconAfter={d?.iconAfter}
+          // Если onClose указан, вместо iconAfter отобразится closeIcon
+          onClose={d?.onClose}
+          appearance="filled"
+          disabled={d?.disabled}
+        >
+          {d.label}
+        </Chips>
+      ))}
+    </WrapperChip>
+  </>
 );
 
 const ChipsSelectDemo: ComponentStory<typeof Chips> = (props) => {
@@ -201,6 +228,7 @@ const ChipsMultiSelectIconDemo: ComponentStory<typeof Chips> = (props) => {
           key={item.id}
           onClick={props.disabled ? void 0 : handleKey.bind(null, item.id)}
           selected={item.selected}
+          onClose={item.onClose}
         >
           <WrapperContent>{item.label}</WrapperContent>
         </Chips>

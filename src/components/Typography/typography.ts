@@ -75,6 +75,9 @@ export const TYPOGRAPHY: Typography = {
 };
 
 export const typography = {
+  /**
+   * @deprecated Используйте шрифт 'Header/H3'
+   */
   'Main/XXL': css`
     font-family: ${FONT_FAMILY};
     font-style: normal;
@@ -85,6 +88,9 @@ export const typography = {
     color: ${(p) => p.theme.color.text.primary};
   `,
 
+  /**
+   * @deprecated Используйте шрифт 'Header/H1'
+   */
   'Main/XL': css`
     font-family: ${FONT_FAMILY};
     font-style: normal;
@@ -95,6 +101,9 @@ export const typography = {
     color: ${(p) => p.theme.color.text.primary};
   `,
 
+  /**
+   * @deprecated Используйте шрифт 'Header/H2'
+   */
   'Main/L': css`
     font-family: ${FONT_FAMILY};
     font-style: normal;
@@ -105,6 +114,9 @@ export const typography = {
     color: ${(p) => p.theme.color.text.primary};
   `,
 
+  /**
+   * @deprecated Используйте шрифт 'Header/H3'
+   */
   'Main/M': css`
     font-family: ${FONT_FAMILY};
     font-style: normal;
@@ -115,6 +127,9 @@ export const typography = {
     color: ${(p) => p.theme.color.text.primary};
   `,
 
+  /**
+   * @deprecated Используйте шрифт 'Header/H5'
+   */
   'Main/S': css`
     font-family: ${FONT_FAMILY};
     font-style: normal;
@@ -125,6 +140,9 @@ export const typography = {
     color: ${(p) => p.theme.color.text.primary};
   `,
 
+  /**
+   * @deprecated Используйте шрифт 'Header/H6'
+   */
   'Main/XS-bold': css`
     font-family: ${FONT_FAMILY};
     font-style: normal;
@@ -135,6 +153,9 @@ export const typography = {
     color: ${(p) => p.theme.color.text.primary};
   `,
 
+  /**
+   * @deprecated Используйте шрифт 'Subtitle/Subtitle 1'
+   */
   'Main/XS': css`
     font-family: ${FONT_FAMILY};
     font-style: normal;
@@ -145,6 +166,9 @@ export const typography = {
     color: ${(p) => p.theme.color.text.primary};
   `,
 
+  /**
+   * @deprecated Используйте шрифт 'Subtitle/Subtitle 2'
+   */
   'Additional/L-bold': css`
     font-family: ${FONT_FAMILY};
     font-style: normal;
@@ -155,6 +179,9 @@ export const typography = {
     color: ${(p) => p.theme.color.text.primary};
   `,
 
+  /**
+   * @deprecated Используйте шрифт 'Body/Body 1 Long'
+   */
   'Additional/L': css`
     font-family: ${FONT_FAMILY};
     font-style: normal;
@@ -165,6 +192,9 @@ export const typography = {
     color: ${(p) => p.theme.color.text.primary};
   `,
 
+  /**
+   * @deprecated Используйте шрифт 'Body/Body 1 Short'
+   */
   'Additional/M': css`
     font-family: ${FONT_FAMILY};
     font-style: normal;
@@ -175,6 +205,9 @@ export const typography = {
     color: ${(p) => p.theme.color.text.primary};
   `,
 
+  /**
+   * @deprecated Используйте шрифт 'Body/Body 2 Long'
+   */
   'Additional/S': css`
     font-family: ${FONT_FAMILY};
     font-style: normal;
@@ -185,6 +218,9 @@ export const typography = {
     color: ${(p) => p.theme.color.text.primary};
   `,
 
+  /**
+   * @deprecated Используйте шрифт 'Subtitle/Subtitle 3'
+   */
   'Additional/S-bold': css`
     font-family: ${FONT_FAMILY};
     font-style: normal;
@@ -195,6 +231,9 @@ export const typography = {
     color: ${(p) => p.theme.color.text.primary};
   `,
 
+  /**
+   * @deprecated Используйте шрифт 'Body/Body 2 Short'
+   */
   'Additional/XS': css`
     font-family: ${FONT_FAMILY};
     font-style: normal;
@@ -205,6 +244,9 @@ export const typography = {
     color: ${(p) => p.theme.color.text.primary};
   `,
 
+  /**
+   * @deprecated Используйте шрифт 'Button/Button 1'
+   */
   'Button/M': css`
     font-family: ${FONT_FAMILY};
     font-style: normal;
@@ -216,6 +258,9 @@ export const typography = {
     font-feature-settings: 'tnum' on, 'lnum' on;
   `,
 
+  /**
+   * @deprecated Используйте шрифт 'Button/Button 2'
+   */
   'Button/S': css`
     font-family: ${FONT_FAMILY};
     font-style: normal;
@@ -227,6 +272,9 @@ export const typography = {
     font-feature-settings: 'tnum' on, 'lnum' on;
   `,
 
+  /**
+   * @deprecated Используйте шрифт 'Caption/Caption 1'
+   */
   'Caption/XS': css`
     font-family: ${FONT_FAMILY};
     font-style: normal;

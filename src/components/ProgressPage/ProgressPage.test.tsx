@@ -1,5 +1,5 @@
-import { ProgressPage } from '#/components/ProgressPage';
-import { LIGHT_THEME } from '#/components/themes';
+import { ProgressPage } from '#src/components/ProgressPage';
+import { LIGHT_THEME } from '#src/components/themes';
 import React from 'react';
 import { render } from '@testing-library/react';
 import { ThemeProvider } from 'styled-components';

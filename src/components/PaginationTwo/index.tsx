@@ -1,8 +1,8 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { uid } from '#/components/common/uid';
-import { TextInput } from '#/components/input/TextInput';
-import { Button as SecondaryButton } from '#/components/Button';
+import { uid } from '#src/components/common/uid';
+import { TextInput } from '#src/components/input/TextInput';
+import { Button as SecondaryButton } from '#src/components/Button';
 
 import { Ellipsis, PaginationItem } from './Items';
 import { getListOfPages, range } from './utils';
@@ -43,9 +43,9 @@ const Button = styled(SecondaryButton)`
 `;
 
 export interface PaginationTwoProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'> {
-  /** Текущая страница*/
+  /** Текущая страница */
   page: number;
-  /** Колбек на изменение текущей страницы*/
+  /** Колбек на изменение текущей страницы */
   onChange: (event: any, page: number) => void;
   /** Количество страниц*/
   count?: number;
@@ -55,6 +55,8 @@ export interface PaginationTwoProps extends Omit<React.HTMLAttributes<HTMLDivEle
   mobile?: boolean;
   /** Отображение кнопки "Дальше" в мобильной версии */
   showNextBtnMobile?: boolean;
+  /** Отображение инпута, если страниц больше 21й  */
+  showInput?: boolean;
 }
 
 export const PaginationTwo: React.FC<PaginationTwoProps> = ({
@@ -63,12 +65,13 @@ export const PaginationTwo: React.FC<PaginationTwoProps> = ({
   mobile = false,
   disabledPages = [],
   showNextBtnMobile = true,
+  showInput = true,
   onChange,
   ...props
 }) => {
   const hideNextButton = mobile || false;
   const hidePrevButton = mobile || false;
-  const showInput = count > 21 && !mobile;
+  const isInputVisible = showInput && count > 21 && !mobile;
 
   const [inputValue, setInputValue] = React.useState('');
   const itemList = getListOfPages(page, count, hidePrevButton, hideNextButton);
@@ -174,7 +177,7 @@ export const PaginationTwo: React.FC<PaginationTwoProps> = ({
           );
         })}
       </PagesWrapper>
-      {showInput && (
+      {isInputVisible && (
         <Input
           pattern="[0-9]+"
           placeholder="№ страницы"
@@ -187,3 +190,5 @@ export const PaginationTwo: React.FC<PaginationTwoProps> = ({
     </Wrapper>
   );
 };
+
+PaginationTwo.displayName = 'PaginationTwo';

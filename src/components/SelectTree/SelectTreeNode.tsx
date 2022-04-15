@@ -1,7 +1,7 @@
 import React, { ChangeEvent, FC, HTMLAttributes, KeyboardEvent, MouseEvent } from 'react';
 import styled from 'styled-components';
-import { typography } from '#/components/Typography';
-import { Checkbox } from '#/components/Checkbox';
+import { typography } from '#src/components/Typography';
+import { Checkbox } from '#src/components/Checkbox';
 import { ReactComponent as ChevronRightOutline } from '@admiral-ds/icons/build/system/ChevronRightOutline.svg';
 
 type Dimension = 'm' | 's';
@@ -28,8 +28,15 @@ const Chevron = styled(ChevronRightOutline)`
   transition: all 0.3s;
   flex-shrink: 0;
   margin-right: 16px;
+  cursor: pointer;
   & path {
-    fill: ${(p) => p.theme.color.basic.tertiary};
+    fill: ${(p) => p.theme.color.text.secondary};
+  }
+
+  &:hover {
+    & path {
+      fill: ${(p) => p.theme.color.basic.hover};
+    }
   }
 `;
 
@@ -46,7 +53,7 @@ const Wrapper = styled.li<{ isOpened?: boolean; dimension?: Dimension; level: nu
     height: ${(p) => (p.dimension === 'm' ? '24px' : '20px')};
     transform: ${(p) => (p.isOpened ? 'rotate(90deg)' : 'rotate(0deg)')};
   }
-  ${(p) => (p.dimension === 'm' ? typography['Additional/M'] : typography['Additional/XS'])};
+  ${(p) => (p.dimension === 'm' ? typography['Body/Body 1 Short'] : typography['Body/Body 2 Short'])};
   display: flex;
   align-items: flex-start;
   padding: ${(p) => (p.dimension === 'm' ? `16px 16px 16px ${p.level * 40}px` : `10px 16px 10px ${p.level * 36}px`)};

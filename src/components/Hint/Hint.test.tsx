@@ -67,7 +67,7 @@ describe('Hint', () => {
       fireEvent.click(screen.getByTestId('wrapped-component'));
     });
     act(() => {
-      fireEvent.click(screen.getByText('hintText')?.lastElementChild as Element);
+      fireEvent.click(screen.getByLabelText('Закрыть подсказку'));
     });
     expect(screen.queryByText('hintText')).not.toBeInTheDocument();
   });

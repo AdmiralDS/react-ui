@@ -1,7 +1,5 @@
 import styled from 'styled-components';
-
-import { typography } from '../../Typography';
-import { DEFAULT_THEME } from '../../common';
+import { typography } from '#src/components/Typography';
 
 type YearComponentProps = {
   today?: boolean;
@@ -26,7 +24,7 @@ export const YearComponent = styled.div<YearComponentProps>`
   border: 1px solid ${({ today, theme }) => (today ? theme.color.basic.secondary : 'transparent')};
   border-radius: ${YEAR_BORDER_RADIUS};
   background: transparent;
-  ${typography['Additional/S']}
+  ${typography['Body/Body 2 Long']}
   color: ${({ theme }) => theme.color.text.primary};
   user-select: none;
   cursor: pointer;
@@ -59,7 +57,3 @@ export const YearComponent = styled.div<YearComponentProps>`
       }
     `}
 `;
-
-YearComponent.defaultProps = {
-  theme: DEFAULT_THEME,
-};

@@ -2,10 +2,10 @@ import React, { HTMLAttributes, useRef, useState } from 'react';
 import type { FC, ReactNode, FocusEvent, MouseEvent, KeyboardEvent } from 'react';
 import styled from 'styled-components';
 import { ReactComponent as ChevronDownOutline } from '@admiral-ds/icons/build/system/ChevronDownOutline.svg';
-import { Button } from '#/components/Button';
-import { Dropdown } from '#/components/Dropdown';
-import { DropDownItem } from '#/components/DropDownItem';
-import { keyboardKey } from '#/components/common/keyboardKey';
+import { Button } from '#src/components/Button';
+import { Dropdown } from '#src/components/Dropdown';
+import { DropDownItem } from '#src/components/DropDownItem';
+import { keyboardKey } from '#src/components/common/keyboardKey';
 
 const MainButton = styled(Button)`
   &[data-appearance~='primary'] {
@@ -49,7 +49,8 @@ const Separator = styled.div<SeparatorProps>`
 const Wrapper = styled.div`
   display: inline-flex;
 
-  &[data-focused='true'] {
+  &[data-focused='true'],
+  &:hover {
     & [data-appearance='secondary'] {
       border-color: ${({ theme }) => theme.color.basic.hover};
     }
@@ -109,7 +110,7 @@ export interface MultiButtonProps extends Omit<HTMLAttributes<HTMLDivElement>, '
   /** Отключение компонента */
   disabled?: boolean;
   /** Выравнивание выпадающего меню относительно компонента https://developer.mozilla.org/en-US/docs/Web/CSS/align-self */
-  alignSelf?: string;
+  alignSelf?: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
 }
 
 export const MultiButton: FC<MultiButtonProps> = ({
@@ -249,3 +250,5 @@ export const MultiButton: FC<MultiButtonProps> = ({
     </Wrapper>
   );
 };
+
+MultiButton.displayName = 'MultiButton';

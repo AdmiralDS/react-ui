@@ -1,7 +1,7 @@
-import { uid } from '#/components/common/uid';
-import { refSetter } from '#/components/common/utils/refSetter';
-import { Field, FieldOwnProps } from '#/components/Field';
-import { NumberInput, NumberInputProps } from '#/components/input/NumberInput';
+import { uid } from '#src/components/common/uid';
+import { refSetter } from '#src/components/common/utils/refSetter';
+import { Field, FieldOwnProps } from '#src/components/Field';
+import { NumberInput, NumberInputProps } from '#src/components/input/NumberInput';
 import * as React from 'react';
 
 export interface NumberInputFieldProps extends NumberInputProps, Omit<FieldOwnProps, 'inputRef'> {}
@@ -32,7 +32,16 @@ export const NumberInputField = React.forwardRef<HTMLInputElement, NumberInputFi
     disabled,
     maxLength,
     inputRef,
-  };
+    displayCharacterCounter,
+    'data-field-id': id,
+    'data-field-name': restProps.name,
+  } as Record<string, any>;
+
+  (Object.keys(restProps) as Array<keyof typeof restProps>).forEach((key) => {
+    if (key.startsWith('data-field')) {
+      fieldContainerProps[key] = restProps[key];
+    }
+  });
   const inputProps = {
     ref: refSetter(ref, inputRef),
     id,
@@ -40,7 +49,6 @@ export const NumberInputField = React.forwardRef<HTMLInputElement, NumberInputFi
     status,
     disabled,
     maxLength,
-    displayCharacterCounter,
     ...restProps,
   };
 

@@ -1,0 +1,16 @@
+export const OPACITY_LEVEL_1 = 0.02;
+export const OPACITY_LEVEL_2 = 0.04;
+export const OPACITY_LEVEL_3 = 0.08;
+export const OPACITY_LEVEL_4 = 0.1;
+export const OPACITY_LEVEL_5 = 0.15;
+export const OPACITY_LEVEL_6 = 0.16;
+export const OPACITY_LEVEL_7 = 0.2;
+export const OPACITY_LEVEL_8 = 0.25;
+export const OPACITY_LEVEL_9 = 0.3;
+export const OPACITY_LEVEL_10 = 0.35;
+export const OPACITY_LEVEL_11 = 0.4;
+export const OPACITY_LEVEL_12 = 0.5;
+export const OPACITY_LEVEL_13 = 0.6;
+export const OPACITY_LEVEL_14 = 0.8;
+export const OPACITY_LEVEL_15 = 0.95;
+export const OPACITY_MAX_LEVEL = 1;

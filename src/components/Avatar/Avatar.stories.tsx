@@ -2,8 +2,8 @@ import { withDesign } from 'storybook-addon-designs';
 import * as React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import styled from 'styled-components';
-import { Avatar } from '#/components/Avatar';
-import type { AvatarProps } from '#/components/Avatar';
+import { Avatar } from '#src/components/Avatar';
+import type { AvatarProps } from '#src/components/Avatar';
 import { ReactComponent as PersonSolid } from '@admiral-ds/icons/build/system/PersonSolid.svg';
 
 const imageURL = 'https://github.com/DrUNE.png?size=100';
@@ -41,14 +41,19 @@ export default {
     ),
     design: {
       type: 'figma',
-      url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=37%3A32367',
+      url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=37%3A32367',
     },
-    argTypes: {
-      dimension: {
-        options: ['xl', 'l', 'm', 's', 'xs'],
-        control: { type: 'radio' },
-      },
-      group: false,
+  },
+  argTypes: {
+    dimension: {
+      options: ['xl', 'l', 'm', 's', 'xs'],
+      control: { type: 'radio' },
+    },
+    group: {
+      control: false,
+    },
+    icon: {
+      control: false,
     },
   },
 } as ComponentMeta<typeof Avatar>;
@@ -99,6 +104,7 @@ const Template2: ComponentStory<typeof Avatar> = () => (
 
 export const Playground = Template1.bind({});
 Playground.args = {};
+//Playground.parameters = { controls: { exclude: ['icon', 'group'] } };
 Playground.storyName = 'Playground';
 
 export const Single = Template2.bind({});

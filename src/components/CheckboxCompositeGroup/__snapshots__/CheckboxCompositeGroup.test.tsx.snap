@@ -105,7 +105,7 @@ fieldset[data-dimension='s'] .c3 {
   transition: background 0.1s ease-in;
   line-height: initial;
   background-color: #FFFFFF;
-  border: 1px solid #8A96A8;
+  border: 1px solid #626F84;
 }
 
 .c6 {
@@ -163,12 +163,17 @@ fieldset[data-dimension='s'] .c3 {
 
 .c6:not(:checked):disabled + .c7 {
   background-color: #FFFFFF;
-  border: 1px solid #A7B0BE;
+  border: 1px solid #C4CAD4;
 }
 
 .c6:disabled + .c7 {
-  background-color: #A7B0BE;
+  background-color: #C4CAD4;
   border: none;
+}
+
+.c6:focus-visible {
+  outline-offset: 2px;
+  outline: #0A54C2 solid 2px;
 }
 
 .c12 {
@@ -221,12 +226,17 @@ fieldset[data-dimension='s'] .c3 {
 
 .c12:not(:checked):disabled + .c7 {
   background-color: #FFFFFF;
-  border: 1px solid #A7B0BE;
+  border: 1px solid #C4CAD4;
 }
 
 .c12:disabled + .c7 {
-  background-color: #A7B0BE;
+  background-color: #C4CAD4;
   border: none;
+}
+
+.c12:focus-visible {
+  outline-offset: 2px;
+  outline: #0A54C2 solid 2px;
 }
 
 .c5 {
@@ -304,6 +314,7 @@ fieldset:disabled .c1 {
         >
           <label
             class="c1 c2"
+            data-field-name="Москва"
             disabled=""
           >
             <div
@@ -329,6 +340,7 @@ fieldset:disabled .c1 {
           </label>
           <label
             class="c1 c2"
+            data-field-name="Воронеж"
             disabled=""
           >
             <div
@@ -354,6 +366,7 @@ fieldset:disabled .c1 {
           </label>
           <label
             class="c1 c2"
+            data-field-name="Самара"
             disabled=""
           >
             <div
@@ -379,6 +392,7 @@ fieldset:disabled .c1 {
           </label>
           <label
             class="c1 c2"
+            data-field-name="Омск"
             disabled=""
           >
             <div
@@ -508,7 +522,7 @@ fieldset[data-dimension='s'] .c3 {
   transition: background 0.1s ease-in;
   line-height: initial;
   background-color: #FFFFFF;
-  border: 1px solid #8A96A8;
+  border: 1px solid #626F84;
 }
 
 .c6 {
@@ -566,12 +580,17 @@ fieldset[data-dimension='s'] .c3 {
 
 .c6:not(:checked):disabled + .c7 {
   background-color: #FFFFFF;
-  border: 1px solid #A7B0BE;
+  border: 1px solid #C4CAD4;
 }
 
 .c6:disabled + .c7 {
-  background-color: #A7B0BE;
+  background-color: #C4CAD4;
   border: none;
+}
+
+.c6:focus-visible {
+  outline-offset: 2px;
+  outline: #0A54C2 solid 2px;
 }
 
 .c12 {
@@ -624,12 +643,17 @@ fieldset[data-dimension='s'] .c3 {
 
 .c12:not(:checked):disabled + .c7 {
   background-color: #FFFFFF;
-  border: 1px solid #A7B0BE;
+  border: 1px solid #C4CAD4;
 }
 
 .c12:disabled + .c7 {
-  background-color: #A7B0BE;
+  background-color: #C4CAD4;
   border: none;
+}
+
+.c12:focus-visible {
+  outline-offset: 2px;
+  outline: #0A54C2 solid 2px;
 }
 
 .c5 {
@@ -706,6 +730,7 @@ fieldset:disabled .c1 {
       >
         <label
           class="c1 c2"
+          data-field-name="Москва"
           disabled=""
         >
           <div
@@ -731,6 +756,7 @@ fieldset:disabled .c1 {
         </label>
         <label
           class="c1 c2"
+          data-field-name="Воронеж"
           disabled=""
         >
           <div
@@ -756,6 +782,7 @@ fieldset:disabled .c1 {
         </label>
         <label
           class="c1 c2"
+          data-field-name="Самара"
           disabled=""
         >
           <div
@@ -781,6 +808,7 @@ fieldset:disabled .c1 {
         </label>
         <label
           class="c1 c2"
+          data-field-name="Омск"
           disabled=""
         >
           <div
@@ -966,7 +994,7 @@ fieldset[data-dimension='s'] .c3 {
   transition: background 0.1s ease-in;
   line-height: initial;
   background-color: #FFFFFF;
-  border: 1px solid #8A96A8;
+  border: 1px solid #626F84;
 }
 
 .c6 {
@@ -1024,12 +1052,17 @@ fieldset[data-dimension='s'] .c3 {
 
 .c6:not(:checked):disabled + .c7 {
   background-color: #FFFFFF;
-  border: 1px solid #A7B0BE;
+  border: 1px solid #C4CAD4;
 }
 
 .c6:disabled + .c7 {
-  background-color: #A7B0BE;
+  background-color: #C4CAD4;
   border: none;
+}
+
+.c6:focus-visible {
+  outline-offset: 2px;
+  outline: #0A54C2 solid 2px;
 }
 
 .c12 {
@@ -1082,12 +1115,17 @@ fieldset[data-dimension='s'] .c3 {
 
 .c12:not(:checked):disabled + .c7 {
   background-color: #FFFFFF;
-  border: 1px solid #A7B0BE;
+  border: 1px solid #C4CAD4;
 }
 
 .c12:disabled + .c7 {
-  background-color: #A7B0BE;
+  background-color: #C4CAD4;
   border: none;
+}
+
+.c12:focus-visible {
+  outline-offset: 2px;
+  outline: #0A54C2 solid 2px;
 }
 
 .c5 {
@@ -1161,6 +1199,7 @@ fieldset:disabled .c1 {
         >
           <label
             class="c1 c2"
+            data-field-name="Москва"
           >
             <div
               class="c3 c4 c5"
@@ -1184,6 +1223,7 @@ fieldset:disabled .c1 {
           </label>
           <label
             class="c1 c2"
+            data-field-name="Воронеж"
           >
             <div
               class="c3 c4 c5"
@@ -1207,6 +1247,7 @@ fieldset:disabled .c1 {
           </label>
           <label
             class="c1 c2"
+            data-field-name="Самара"
           >
             <div
               class="c3 c4 c5"
@@ -1230,6 +1271,7 @@ fieldset:disabled .c1 {
           </label>
           <label
             class="c1 c2"
+            data-field-name="Омск"
           >
             <div
               class="c3 c4 c5"
@@ -1357,7 +1399,7 @@ fieldset[data-dimension='s'] .c3 {
   transition: background 0.1s ease-in;
   line-height: initial;
   background-color: #FFFFFF;
-  border: 1px solid #8A96A8;
+  border: 1px solid #626F84;
 }
 
 .c6 {
@@ -1415,12 +1457,17 @@ fieldset[data-dimension='s'] .c3 {
 
 .c6:not(:checked):disabled + .c7 {
   background-color: #FFFFFF;
-  border: 1px solid #A7B0BE;
+  border: 1px solid #C4CAD4;
 }
 
 .c6:disabled + .c7 {
-  background-color: #A7B0BE;
+  background-color: #C4CAD4;
   border: none;
+}
+
+.c6:focus-visible {
+  outline-offset: 2px;
+  outline: #0A54C2 solid 2px;
 }
 
 .c12 {
@@ -1473,12 +1520,17 @@ fieldset[data-dimension='s'] .c3 {
 
 .c12:not(:checked):disabled + .c7 {
   background-color: #FFFFFF;
-  border: 1px solid #A7B0BE;
+  border: 1px solid #C4CAD4;
 }
 
 .c12:disabled + .c7 {
-  background-color: #A7B0BE;
+  background-color: #C4CAD4;
   border: none;
+}
+
+.c12:focus-visible {
+  outline-offset: 2px;
+  outline: #0A54C2 solid 2px;
 }
 
 .c5 {
@@ -1551,6 +1603,7 @@ fieldset:disabled .c1 {
       >
         <label
           class="c1 c2"
+          data-field-name="Москва"
         >
           <div
             class="c3 c4 c5"
@@ -1574,6 +1627,7 @@ fieldset:disabled .c1 {
         </label>
         <label
           class="c1 c2"
+          data-field-name="Воронеж"
         >
           <div
             class="c3 c4 c5"
@@ -1597,6 +1651,7 @@ fieldset:disabled .c1 {
         </label>
         <label
           class="c1 c2"
+          data-field-name="Самара"
         >
           <div
             class="c3 c4 c5"
@@ -1620,6 +1675,7 @@ fieldset:disabled .c1 {
         </label>
         <label
           class="c1 c2"
+          data-field-name="Омск"
         >
           <div
             class="c3 c4 c5"
@@ -1803,7 +1859,7 @@ fieldset[data-dimension='s'] .c3 {
   transition: background 0.1s ease-in;
   line-height: initial;
   background-color: #FFFFFF;
-  border: 1px solid #8A96A8;
+  border: 1px solid #626F84;
 }
 
 .c6 {
@@ -1861,12 +1917,17 @@ fieldset[data-dimension='s'] .c3 {
 
 .c6:not(:checked):disabled + .c7 {
   background-color: #FFFFFF;
-  border: 1px solid #A7B0BE;
+  border: 1px solid #C4CAD4;
 }
 
 .c6:disabled + .c7 {
-  background-color: #A7B0BE;
+  background-color: #C4CAD4;
   border: none;
+}
+
+.c6:focus-visible {
+  outline-offset: 2px;
+  outline: #0A54C2 solid 2px;
 }
 
 .c12 {
@@ -1919,12 +1980,17 @@ fieldset[data-dimension='s'] .c3 {
 
 .c12:not(:checked):disabled + .c7 {
   background-color: #FFFFFF;
-  border: 1px solid #A7B0BE;
+  border: 1px solid #C4CAD4;
 }
 
 .c12:disabled + .c7 {
-  background-color: #A7B0BE;
+  background-color: #C4CAD4;
   border: none;
+}
+
+.c12:focus-visible {
+  outline-offset: 2px;
+  outline: #0A54C2 solid 2px;
 }
 
 .c5 {
@@ -1998,6 +2064,7 @@ fieldset:disabled .c1 {
         >
           <label
             class="c1 c2"
+            data-field-name="Москва"
           >
             <div
               class="c3 c4 c5"
@@ -2021,6 +2088,7 @@ fieldset:disabled .c1 {
           </label>
           <label
             class="c1 c2"
+            data-field-name="Воронеж"
           >
             <div
               class="c3 c4 c5"
@@ -2044,6 +2112,7 @@ fieldset:disabled .c1 {
           </label>
           <label
             class="c1 c2"
+            data-field-name="Самара"
           >
             <div
               class="c3 c4 c5"
@@ -2067,6 +2136,7 @@ fieldset:disabled .c1 {
           </label>
           <label
             class="c1 c2"
+            data-field-name="Омск"
           >
             <div
               class="c3 c4 c5"
@@ -2194,7 +2264,7 @@ fieldset[data-dimension='s'] .c3 {
   transition: background 0.1s ease-in;
   line-height: initial;
   background-color: #FFFFFF;
-  border: 1px solid #8A96A8;
+  border: 1px solid #626F84;
 }
 
 .c6 {
@@ -2252,12 +2322,17 @@ fieldset[data-dimension='s'] .c3 {
 
 .c6:not(:checked):disabled + .c7 {
   background-color: #FFFFFF;
-  border: 1px solid #A7B0BE;
+  border: 1px solid #C4CAD4;
 }
 
 .c6:disabled + .c7 {
-  background-color: #A7B0BE;
+  background-color: #C4CAD4;
   border: none;
+}
+
+.c6:focus-visible {
+  outline-offset: 2px;
+  outline: #0A54C2 solid 2px;
 }
 
 .c12 {
@@ -2310,12 +2385,17 @@ fieldset[data-dimension='s'] .c3 {
 
 .c12:not(:checked):disabled + .c7 {
   background-color: #FFFFFF;
-  border: 1px solid #A7B0BE;
+  border: 1px solid #C4CAD4;
 }
 
 .c12:disabled + .c7 {
-  background-color: #A7B0BE;
+  background-color: #C4CAD4;
   border: none;
+}
+
+.c12:focus-visible {
+  outline-offset: 2px;
+  outline: #0A54C2 solid 2px;
 }
 
 .c5 {
@@ -2388,6 +2468,7 @@ fieldset:disabled .c1 {
       >
         <label
           class="c1 c2"
+          data-field-name="Москва"
         >
           <div
             class="c3 c4 c5"
@@ -2411,6 +2492,7 @@ fieldset:disabled .c1 {
         </label>
         <label
           class="c1 c2"
+          data-field-name="Воронеж"
         >
           <div
             class="c3 c4 c5"
@@ -2434,6 +2516,7 @@ fieldset:disabled .c1 {
         </label>
         <label
           class="c1 c2"
+          data-field-name="Самара"
         >
           <div
             class="c3 c4 c5"
@@ -2457,6 +2540,7 @@ fieldset:disabled .c1 {
         </label>
         <label
           class="c1 c2"
+          data-field-name="Омск"
         >
           <div
             class="c3 c4 c5"
@@ -2640,7 +2724,7 @@ fieldset[data-dimension='s'] .c3 {
   transition: background 0.1s ease-in;
   line-height: initial;
   background-color: #FFFFFF;
-  border: 1px solid #8A96A8;
+  border: 1px solid #626F84;
 }
 
 .c6 {
@@ -2698,12 +2782,17 @@ fieldset[data-dimension='s'] .c3 {
 
 .c6:not(:checked):disabled + .c7 {
   background-color: #FFFFFF;
-  border: 1px solid #A7B0BE;
+  border: 1px solid #C4CAD4;
 }
 
 .c6:disabled + .c7 {
-  background-color: #A7B0BE;
+  background-color: #C4CAD4;
   border: none;
+}
+
+.c6:focus-visible {
+  outline-offset: 2px;
+  outline: #0A54C2 solid 2px;
 }
 
 .c12 {
@@ -2756,12 +2845,17 @@ fieldset[data-dimension='s'] .c3 {
 
 .c12:not(:checked):disabled + .c7 {
   background-color: #FFFFFF;
-  border: 1px solid #A7B0BE;
+  border: 1px solid #C4CAD4;
 }
 
 .c12:disabled + .c7 {
-  background-color: #A7B0BE;
+  background-color: #C4CAD4;
   border: none;
+}
+
+.c12:focus-visible {
+  outline-offset: 2px;
+  outline: #0A54C2 solid 2px;
 }
 
 .c5 {
@@ -2835,6 +2929,7 @@ fieldset:disabled .c1 {
         >
           <label
             class="c1 c2"
+            data-field-name="Москва"
           >
             <div
               class="c3 c4 c5"
@@ -2858,6 +2953,7 @@ fieldset:disabled .c1 {
           </label>
           <label
             class="c1 c2"
+            data-field-name="Воронеж"
           >
             <div
               class="c3 c4 c5"
@@ -2881,6 +2977,7 @@ fieldset:disabled .c1 {
           </label>
           <label
             class="c1 c2"
+            data-field-name="Самара"
           >
             <div
               class="c3 c4 c5"
@@ -2904,6 +3001,7 @@ fieldset:disabled .c1 {
           </label>
           <label
             class="c1 c2"
+            data-field-name="Омск"
           >
             <div
               class="c3 c4 c5"
@@ -3031,7 +3129,7 @@ fieldset[data-dimension='s'] .c3 {
   transition: background 0.1s ease-in;
   line-height: initial;
   background-color: #FFFFFF;
-  border: 1px solid #8A96A8;
+  border: 1px solid #626F84;
 }
 
 .c6 {
@@ -3089,12 +3187,17 @@ fieldset[data-dimension='s'] .c3 {
 
 .c6:not(:checked):disabled + .c7 {
   background-color: #FFFFFF;
-  border: 1px solid #A7B0BE;
+  border: 1px solid #C4CAD4;
 }
 
 .c6:disabled + .c7 {
-  background-color: #A7B0BE;
+  background-color: #C4CAD4;
   border: none;
+}
+
+.c6:focus-visible {
+  outline-offset: 2px;
+  outline: #0A54C2 solid 2px;
 }
 
 .c12 {
@@ -3147,12 +3250,17 @@ fieldset[data-dimension='s'] .c3 {
 
 .c12:not(:checked):disabled + .c7 {
   background-color: #FFFFFF;
-  border: 1px solid #A7B0BE;
+  border: 1px solid #C4CAD4;
 }
 
 .c12:disabled + .c7 {
-  background-color: #A7B0BE;
+  background-color: #C4CAD4;
   border: none;
+}
+
+.c12:focus-visible {
+  outline-offset: 2px;
+  outline: #0A54C2 solid 2px;
 }
 
 .c5 {
@@ -3225,6 +3333,7 @@ fieldset:disabled .c1 {
       >
         <label
           class="c1 c2"
+          data-field-name="Москва"
         >
           <div
             class="c3 c4 c5"
@@ -3248,6 +3357,7 @@ fieldset:disabled .c1 {
         </label>
         <label
           class="c1 c2"
+          data-field-name="Воронеж"
         >
           <div
             class="c3 c4 c5"
@@ -3271,6 +3381,7 @@ fieldset:disabled .c1 {
         </label>
         <label
           class="c1 c2"
+          data-field-name="Самара"
         >
           <div
             class="c3 c4 c5"
@@ -3294,6 +3405,7 @@ fieldset:disabled .c1 {
         </label>
         <label
           class="c1 c2"
+          data-field-name="Омск"
         >
           <div
             class="c3 c4 c5"

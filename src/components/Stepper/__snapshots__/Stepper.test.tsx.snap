@@ -51,7 +51,7 @@ Object {
 }
 
 [data-warning='true'] .c6 path {
-  fill: #F59300;
+  fill: #FF8C19;
 }
 
 [data-disabled='true'] .c6 path {
@@ -79,7 +79,7 @@ Object {
 }
 
 [data-warning='true'] .c8 {
-  background-color: #F59300;
+  background-color: #FF8C19;
 }
 
 [data-disabled='true'] .c8 {
@@ -420,7 +420,7 @@ Object {
 }
 
 [data-warning='true'] .c6 path {
-  fill: #F59300;
+  fill: #FF8C19;
 }
 
 [data-disabled='true'] .c6 path {
@@ -448,7 +448,7 @@ Object {
 }
 
 [data-warning='true'] .c8 {
-  background-color: #F59300;
+  background-color: #FF8C19;
 }
 
 [data-disabled='true'] .c8 {
@@ -844,7 +844,7 @@ Object {
 }
 
 [data-warning='true'] .c6 path {
-  fill: #F59300;
+  fill: #FF8C19;
 }
 
 [data-disabled='true'] .c6 path {
@@ -872,7 +872,7 @@ Object {
 }
 
 [data-warning='true'] .c8 {
-  background-color: #F59300;
+  background-color: #FF8C19;
 }
 
 [data-disabled='true'] .c8 {
@@ -1213,7 +1213,7 @@ Object {
 }
 
 [data-warning='true'] .c6 path {
-  fill: #F59300;
+  fill: #FF8C19;
 }
 
 [data-disabled='true'] .c6 path {
@@ -1241,7 +1241,7 @@ Object {
 }
 
 [data-warning='true'] .c8 {
-  background-color: #F59300;
+  background-color: #FF8C19;
 }
 
 [data-disabled='true'] .c8 {
@@ -1637,7 +1637,7 @@ Object {
 }
 
 [data-warning='true'] .c6 path {
-  fill: #F59300;
+  fill: #FF8C19;
 }
 
 [data-disabled='true'] .c6 path {
@@ -1665,7 +1665,7 @@ Object {
 }
 
 [data-warning='true'] .c8 {
-  background-color: #F59300;
+  background-color: #FF8C19;
 }
 
 [data-disabled='true'] .c8 {
@@ -2006,7 +2006,7 @@ Object {
 }
 
 [data-warning='true'] .c6 path {
-  fill: #F59300;
+  fill: #FF8C19;
 }
 
 [data-disabled='true'] .c6 path {
@@ -2034,7 +2034,7 @@ Object {
 }
 
 [data-warning='true'] .c8 {
-  background-color: #F59300;
+  background-color: #FF8C19;
 }
 
 [data-disabled='true'] .c8 {
@@ -2430,7 +2430,7 @@ Object {
 }
 
 [data-warning='true'] .c6 path {
-  fill: #F59300;
+  fill: #FF8C19;
 }
 
 [data-disabled='true'] .c6 path {
@@ -2458,7 +2458,7 @@ Object {
 }
 
 [data-warning='true'] .c8 {
-  background-color: #F59300;
+  background-color: #FF8C19;
 }
 
 [data-disabled='true'] .c8 {
@@ -2799,7 +2799,7 @@ Object {
 }
 
 [data-warning='true'] .c6 path {
-  fill: #F59300;
+  fill: #FF8C19;
 }
 
 [data-disabled='true'] .c6 path {
@@ -2827,7 +2827,7 @@ Object {
 }
 
 [data-warning='true'] .c8 {
-  background-color: #F59300;
+  background-color: #FF8C19;
 }
 
 [data-disabled='true'] .c8 {
@@ -3223,7 +3223,7 @@ Object {
 }
 
 [data-warning='true'] .c6 path {
-  fill: #F59300;
+  fill: #FF8C19;
 }
 
 [data-disabled='true'] .c6 path {
@@ -3251,7 +3251,7 @@ Object {
 }
 
 [data-warning='true'] .c8 {
-  background-color: #F59300;
+  background-color: #FF8C19;
 }
 
 [data-disabled='true'] .c8 {
@@ -3591,7 +3591,7 @@ Object {
 }
 
 [data-warning='true'] .c6 path {
-  fill: #F59300;
+  fill: #FF8C19;
 }
 
 [data-disabled='true'] .c6 path {
@@ -3619,7 +3619,7 @@ Object {
 }
 
 [data-warning='true'] .c8 {
-  background-color: #F59300;
+  background-color: #FF8C19;
 }
 
 [data-disabled='true'] .c8 {

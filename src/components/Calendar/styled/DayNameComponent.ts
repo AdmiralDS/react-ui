@@ -1,7 +1,5 @@
 import styled from 'styled-components';
-
-import { typography } from '../../Typography';
-import { DEFAULT_THEME } from '../../common';
+import { typography } from '#src/components/Typography';
 
 const DAY_NAME_SIZE = '36px';
 const DAY_NAME_MARGIN_BOTTOM = '4px';
@@ -14,11 +12,7 @@ export const DayNameComponent = styled.div`
   height: ${DAY_NAME_SIZE};
   padding: ${DAY_NAME_PADDING};
   margin-bottom: ${DAY_NAME_MARGIN_BOTTOM};
-  ${typography['Additional/S']}
+  ${typography['Body/Body 2 Long']}
   color: ${({ theme }) => theme.color.text.primary};
   box-sizing: border-box;
 `;
-
-DayNameComponent.defaultProps = {
-  theme: DEFAULT_THEME,
-};

@@ -1,4 +1,4 @@
-import type { Shadow } from '#/components/themes/common';
+import type { Shadow } from '#src/components/themes/common';
 
 export const shadow = {
   ClickableActive: `

@@ -1,5 +1,5 @@
-import { SelectTree, SelectTreeProps } from '#/components/SelectTree';
-import { LIGHT_THEME } from '#/components/themes';
+import { SelectTree, SelectTreeProps } from '#src/components/SelectTree';
+import { LIGHT_THEME } from '#src/components/themes';
 import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
 import { ThemeProvider } from 'styled-components';

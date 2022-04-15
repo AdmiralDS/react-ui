@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 import { ReactComponent as CloseOutline } from '@admiral-ds/icons/build/service/CloseOutline.svg';
-import { TYPOGRAPHY } from '#/components/Typography';
-import type { ChipAppearance, ChipDimension } from '#/components/Chips';
+import { TYPOGRAPHY } from '#src/components/Typography';
+import type { ChipAppearance, ChipDimension } from '#src/components/Chips';
 
 const heights = css<{ dimension: ChipDimension }>`
   height: ${({ dimension }) => {
@@ -87,13 +87,6 @@ const typography = css<{
 
     return appearance === 'filled' ? theme.color.text.primary : theme.color.basic.primary;
   }};
-
-  &:hover {
-    color: ${({ theme, appearance, selected }) => {
-      if (selected) return theme.color.text.staticWhite;
-      if (appearance === 'filled') return theme.color.text.primary;
-      else theme.color.basic.hover;
-    }}
 `;
 
 const colorsBorderAndBackground = css<{
@@ -119,21 +112,22 @@ const colorsBorderAndBackground = css<{
 
   border-radius: 16px;
 
-  &:hover {
+  &:hover,
+  &:active {
+    color: ${({ theme, appearance, selected }) => {
+      if (selected) return theme.color.text.staticWhite;
+      if (appearance === 'filled') return theme.color.text.primary;
+      else return theme.color.basic.hover;
+    }};
     background-color: ${({ theme, appearance, selected }) => {
       if (selected) return theme.color.basic.hover;
       if (appearance === 'filled') return theme.color.background.tertiaryHover;
       else return theme.color.background.secondary;
     }};
-  }
-
-  &:active {
-    color: ${({ theme, appearance }) => (appearance === 'filled' ? theme.color.text.primary : theme.color.basic.press)};
-    background-color: ${({ theme, appearance, selected }) => {
-      if (selected) {
-        return theme.color.basic.primary;
+    border-color: ${({ theme, appearance, disabled }) => {
+      if (appearance === 'outlined' && !disabled) {
+        return theme.color.basic.hover;
       }
-      return appearance === 'filled' ? theme.color.background.tertiaryHover : theme.color.background.secondary;
     }};
   }
 
@@ -170,32 +164,64 @@ export const ChipComponentStyled = styled.div<{
   pointer-events: ${({ disabled }) => (disabled ? 'none' : 'auto')};
   & *[fill^='#'] {
     fill: ${({ theme, appearance, disabled }) =>
-      appearance === 'filled' || disabled ? theme.color.basic.tertiary : theme.color.basic.primary};
+      disabled
+        ? theme.color.text.tertiary
+        : appearance === 'filled'
+        ? theme.color.text.secondary
+        : theme.color.basic.primary};
   }
   cursor: ${({ defaultChip, disabled }) => (defaultChip && !disabled ? 'pointer' : 'default')};
   ${colorsBorderAndBackground}
   ${heights}
   ${paddings}
   ${typography}
-`;
-export const CloseIconWrapperStyled = styled(CloseOutline)<{
-  disabled?: boolean;
-}>`
-  cursor: ${({ disabled }) => (disabled ? 'default' : 'pointer')};
 
   &:hover {
-    outline: none;
-    cursor: pointer;
     & *[fill^='#'] {
-      fill: ${({ theme }) => theme.color.basic.hover};
+      fill: ${({ theme, appearance, disabled, selected }) => {
+        if (selected) return theme.color.text.staticWhite;
+        if (appearance === 'outlined' && !disabled) {
+          return theme.color.basic.hover;
+        }
+      }};
     }
   }
 
   &:active {
-    outline: none;
-    border: none;
     & *[fill^='#'] {
-      fill: ${({ theme }) => theme.color.basic.press};
+      fill: ${({ theme, appearance, disabled }) => {
+        if (appearance === 'outlined' && !disabled) {
+          return theme.color.basic.press;
+        }
+      }};
+    }
+  }
+`;
+export const CloseIconWrapperStyled = styled(CloseOutline)<{
+  disabled?: boolean;
+  selected?: boolean;
+}>`
+  cursor: ${({ disabled }) => (disabled ? 'default' : 'pointer')};
+
+  &:hover {
+    & *[fill^='#'] {
+      fill: ${({ theme, disabled, selected }) => {
+        if (selected) return theme.color.text.staticWhite;
+        if (!disabled) {
+          return theme.color.basic.hover;
+        }
+      }};
+    }
+  }
+
+  &:active {
+    & *[fill^='#'] {
+      fill: ${({ theme, disabled, selected }) => {
+        if (selected) return theme.color.text.staticWhite;
+        if (!disabled) {
+          return theme.color.basic.press;
+        }
+      }};
     }
   }
 `;
@@ -219,7 +245,11 @@ export const ChipContentWrapperStyled = styled.div<{
         if (selected) {
           return theme.color.background.primary;
         }
-        return appearance === 'filled' || disabled ? theme.color.basic.tertiary : theme.color.basic.primary;
+        return disabled
+          ? theme.color.text.tertiary
+          : appearance === 'filled'
+          ? theme.color.text.secondary
+          : theme.color.basic.primary;
       }};
     }
   }

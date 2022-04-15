@@ -21,7 +21,7 @@ export default {
     componentSubtitle: <Description />,
     design: {
       type: 'figma',
-      url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=39%3A60588',
+      url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A60588',
     },
   },
   argTypes: {
@@ -67,6 +67,12 @@ export default {
     icons: {
       control: false,
     },
+    containerRef: {
+      control: false,
+    },
+    handleInput: {
+      control: false,
+    },
   },
 } as ComponentMeta<typeof NumberInput>;
 
@@ -74,7 +80,7 @@ const Template0: ComponentStory<typeof NumberInput> = (args) => {
   return (
     <NumberInput
       {...args}
-      defaultValue="2"
+      defaultValue="2 ₽"
       onChange={(fullStr, shortStr) => {
         console.log({ fullStr, shortStr });
       }}
@@ -111,6 +117,51 @@ const Template3: ComponentStory<typeof NumberInput> = (args) => {
       precision={0}
       placeholder="0 $"
     />
+  );
+};
+
+const Template4: ComponentStory<typeof NumberInput> = () => {
+  const [value1, setValue1] = React.useState('From 50 $');
+  const [value2, setValue2] = React.useState('1 минута');
+  const [suffix, setSuffix] = React.useState('минута');
+
+  function declOfNum(n: number, text_forms: Array<string>) {
+    n = Math.abs(n) % 100;
+    const n1 = n % 10;
+    if (n > 10 && n < 20) {
+      return text_forms[2];
+    }
+    if (n1 > 1 && n1 < 5) {
+      return text_forms[1];
+    }
+    if (n1 == 1) {
+      return text_forms[0];
+    }
+    return text_forms[2];
+  }
+
+  return (
+    <>
+      <NumberInput
+        value={value1}
+        onChange={(fullStr, shortStr) => {
+          console.log({ fullStr, shortStr });
+          setValue1(fullStr);
+        }}
+        prefix="From"
+        suffix="$"
+        style={{ marginBottom: '40px' }}
+      />
+      <NumberInput
+        value={value2}
+        onChange={(fullStr, shortStr) => {
+          console.log({ fullStr, shortStr });
+          setValue2(fullStr);
+          setSuffix(declOfNum(Number(shortStr), ['минута', 'минуты', 'минут']));
+        }}
+        suffix={suffix}
+      />
+    </>
   );
 };
 
@@ -159,5 +210,23 @@ Customised.parameters = {
     source: {
       type: 'code',
     },
+  },
+};
+
+export const Controlled = Template4.bind({});
+Controlled.args = {};
+Controlled.storyName = 'NumberInput. Примеры контролируемого инпута.';
+Controlled.parameters = {
+  docs: {
+    source: {
+      type: 'code',
+    },
+  },
+  description: {
+    story: `В случае использования контролируемого инпута в value необходимо передавать уже 
+    отформатированную строку с префиксом/суффиксом/разделителем (данная строка возвращается в 
+    колбеке onChange в виде параметра fullStr).\n\nБиблиотека предоставляет также утилиту fitToCurrency, 
+    котороая возвращает строку отформатированную в денежном формате. В качестве параметров данная утилита принимает value - 
+    значение, которое надо отформатировать, а также параметры precision, decimal, thousand, prefix, suffix.`,
   },
 };

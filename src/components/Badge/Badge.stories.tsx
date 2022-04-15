@@ -1,4 +1,4 @@
-import { typography } from '#/components/Typography';
+import { typography } from '#src/components/Typography';
 import * as React from 'react';
 import styled from 'styled-components';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
@@ -40,7 +40,7 @@ const String = styled.div<{ appearance?: BadgeProps['appearance'] }>`
   & > *:last-child {
     margin-right: 40px;
   }
-  ${typography['Additional/S']}
+  ${typography['Body/Body 2 Long']}
 `;
 
 const Description = () => (
@@ -62,11 +62,11 @@ export default {
     design: [
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=37%3A18581',
+        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=37%3A18581',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=37%3A18684',
+        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=37%3A18684',
       },
     ],
   },
@@ -182,11 +182,11 @@ const Template2: ComponentStory<typeof Badge> = (args) => {
         White
       </String>
       <String appearance="whiteInactive">
-        <Badge appearance="whiteDisable">5</Badge>
-        <Badge appearance="whiteDisable" dimension="s">
+        <Badge appearance="whiteInactive">5</Badge>
+        <Badge appearance="whiteInactive" dimension="s">
           5
         </Badge>
-        White Disable
+        White Inactive
       </String>
       <String appearance="whiteDisable">
         <Badge appearance="whiteDisable">5</Badge>

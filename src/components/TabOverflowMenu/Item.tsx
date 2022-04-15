@@ -28,7 +28,7 @@ const DropDownItem = styled.li<{ dimension: Dimension; disabled?: boolean; selec
   height: ${({ dimension }) => (dimension === 'm' ? TAB_HEIGHT_M : TAB_HEIGHT_L)}px;
   background: ${({ theme, selected }) => (selected ? theme.color.background.tertiary : theme.color.background.primary)};
   color: ${({ theme }) => theme.color.text.primary};
-  ${typography['Additional/L']}
+  ${typography['Body/Body 1 Long']}
   user-select: none;
   cursor: pointer;
 

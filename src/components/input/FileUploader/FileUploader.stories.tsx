@@ -2,10 +2,12 @@ import * as React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import styled from 'styled-components';
-import { FileUploader } from '#/components/input';
-import { FileInfo, FileProps } from '#/components/input/FileUploader/FileInfo';
-import { T } from '#/components/T';
+import { FileUploader } from '#src/components/input';
+import { FileInfo, FileProps } from '#src/components/input/FileUploader/FileInfo';
+import { T } from '#src/components/T';
 import { Status } from './utils';
+import { TextButton } from '#src/components/TextButton';
+import { ReactComponent as UploadSVG } from '@admiral-ds/icons/build/system/UploadOutline.svg';
 
 const Separator = styled.div`
   height: 40px;
@@ -39,7 +41,7 @@ export default {
   parameters: {
     design: {
       type: 'figma',
-      url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=39%3A27389',
+      url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A27389',
     },
     componentSubtitle: <Description />,
     layout: 'centered',
@@ -76,6 +78,7 @@ const FileUploaderXL: ComponentStory<typeof FileUploader> = (props) => {
       style={{ maxWidth: '480px' }}
       dimension="xl"
       fileDimension="xl"
+      title="Загрузите не более 3-х файлов до 5 MB каждый"
     />
   );
 };
@@ -94,6 +97,7 @@ const FileUploaderM: ComponentStory<typeof FileUploader> = (props) => {
       dimension="m"
       fileDimension="m"
       title="Загрузите не более 3-х файлов до 5 MB каждый"
+      description="Добавьте файлы"
     />
   );
 };
@@ -108,12 +112,14 @@ const FileUploaderWithStatus: ComponentStory<typeof FileUploader> = (props) => {
   const [files, setFiles] = React.useState<FileProps[]>([]);
   const [isLoading, setIsLoading] = React.useState(false);
   const statusOptions: Status[] = ['Loading', 'Queue', 'Uploaded', 'Error'];
+  const previewOptions = [true, false];
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       const filesToAdd = Array.from(e.target.files).map((file, i) => ({
         file,
         status: i === 0 ? statusOptions[0] : statusOptions[1],
+        showPreview: i === 0 ? previewOptions[0] : previewOptions[1],
       }));
       setFiles(filesToAdd);
       setIsLoading(true);
@@ -147,6 +153,7 @@ const FileUploaderWithStatus: ComponentStory<typeof FileUploader> = (props) => {
       dimension="xl"
       fileDimension="xl"
       onChange={handleChange}
+      title="Загрузите не более 3-х файлов до 5 MB каждый"
     />
   );
 };
@@ -186,7 +193,7 @@ const FileUploaderCustomFiles: ComponentStory<typeof FileUploader> = (props) => 
           return (
             <FileInfo key={index} id={index} dimension="xl" fileDimension="xl" file={file} onClick={handleRemove}>
               <T
-                font="Additional/S"
+                font="Body/Body 2 Long"
                 as="p"
                 style={{ textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}
               >
@@ -201,6 +208,21 @@ const FileUploaderCustomFiles: ComponentStory<typeof FileUploader> = (props) => 
       title="Загрузите не более 5-х файлов до 5 MB каждый, в формате JPG"
       onChange={handleChange}
     />
+  );
+};
+
+const FileUploaderCustom: ComponentStory<typeof FileUploader> = (props) => {
+  const cleanProps = (Object.keys(props) as Array<keyof typeof props>).reduce((acc, key) => {
+    if (props[key] !== undefined) acc[key] = props[key];
+
+    return acc;
+  }, {} as Record<any, any>);
+
+  return (
+    <FileUploader {...cleanProps} style={{ maxWidth: '288px' }} dimension="xl" fileDimension="m">
+      <p>Загрузите не более 3-х файлов до 5 MB каждый, в формате JPG</p>
+      <TextButton dimension="m" icon={<UploadSVG />} text="Загрузить документы" />
+    </FileUploader>
   );
 };
 
@@ -239,6 +261,17 @@ FileUploaderCustomFilesDemo.parameters = {
   docs: {
     description: {
       story: `В случае, если необходима кастомизация компонента выбранного файла, нужно воспользоваться методом renderFileInfoList для отрисовки реакт-компонента.`,
+    },
+  },
+};
+
+export const FileUploaderCustomDemo = FileUploaderCustom.bind({});
+FileUploaderCustomDemo.args = {};
+FileUploaderCustomDemo.storyName = 'Другой визуальный компонент с функционалом FileUploader';
+FileUploaderCustomDemo.parameters = {
+  docs: {
+    description: {
+      story: `В случае, если необходимо добавить функционал загрузчика к другому компоненту, данный компонент нужно вложить в компонент FileUploader.`,
     },
   },
 };

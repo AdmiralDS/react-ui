@@ -3,10 +3,10 @@ import styled, { css, ThemeContext } from 'styled-components';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import { FONTS, NEW_FONTS } from './storyDescriptions';
-import { TYPOGRAPHY, typography } from '#/components/Typography';
+import { TYPOGRAPHY, typography } from '#src/components/Typography';
 import { ReactComponent as CopyOutline } from '@admiral-ds/icons/build/documents/CopyOutline.svg';
-import { Tooltip } from '#/components/Tooltip';
-import { LIGHT_THEME } from '#/components/themes';
+import { Tooltip } from '#src/components/Tooltip';
+import { LIGHT_THEME } from '#src/components/themes';
 import { T } from './index';
 
 const Desc = styled.div`
@@ -35,7 +35,7 @@ export default {
     layout: 'centered',
     design: {
       type: 'figma',
-      url: 'https://www.figma.com/file/HCiO63zg2hPSXTHuEdpRtG/Admiral-2.0-UI-Kit?node-id=10%3A6409',
+      url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=10%3A6409',
     },
   },
 } as unknown as ComponentMeta<typeof T>;
@@ -57,7 +57,7 @@ const Wrapper = styled.div`
 `;
 
 const Table = styled.table`
-  ${typography['Additional/S']}
+  ${typography['Body/Body 2 Long']}
   border-collapse: collapse;
   border-spacing: 0;
   width: 100%;
@@ -70,7 +70,7 @@ const Table = styled.table`
     border-bottom: 1px solid ${({ theme }) => theme.color.basic.tertiary};
   }
   th {
-    ${typography['Main/M']}
+    ${typography['Header/H3']}
     color: ${({ theme }) => theme.color.text.secondary};
   }
   td[data-label]:last-child {
@@ -118,15 +118,15 @@ const CopyButton = ({ text }: { text: string }) => {
 const Template1: ComponentStory<typeof T> = () => {
   return (
     <>
-      <BlueText font={'Additional/M'} as={'a'} href={'https://'}>
-        Это ссылка со стилем Additional/M, цветом шрифта Primary.
+      <BlueText font={'Body/Body 1 Short'} as={'a'} href={'https://'}>
+        Это ссылка со стилем Body/Body 1 Short, цветом шрифта Primary.
       </BlueText>
       <br />
-      <T font="Additional/L" as="h3" cssMixin={OrangeColor}>
-        Это заголовок третьего уровня и стилем Additional/L.
+      <T font="Body/Body 1 Long" as="h3" cssMixin={OrangeColor}>
+        Это заголовок третьего уровня и стилем Body/Body 1 Long.
       </T>
-      <CustomParagraph font="Main/S" as="p">
-        Это параграф со стилем Main/S и цветом шрифта Tertiary.
+      <CustomParagraph font="Header/H5" as="p">
+        Это параграф со стилем Header/H5 и цветом шрифта Tertiary.
       </CustomParagraph>
     </>
   );
@@ -150,7 +150,7 @@ const Template: ComponentStory<typeof T> = () => {
         <tbody>
           {NEW_FONTS.map((item: any, index: number) => {
             const text = `
-            import { T, typography } from '@admiral-ds/react-ui';
+            import { T, typography } from '@vtb/ui-kit3';
             import styled from 'styled-components';
 
             const Paragraph = styled.p\`
@@ -212,7 +212,7 @@ const Template: ComponentStory<typeof T> = () => {
         <tbody>
           {FONTS.map((item: any, index: number) => {
             const text = `
-            import { T, typography } from '@admiral-ds/react-ui';
+            import { T, typography } from '@vtb/ui-kit3';
             import styled from 'styled-components';
 
             const Paragraph = styled.p\`

@@ -1,9 +1,9 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { NumberInput } from '#/components/input/NumberInput';
-import { Range } from '#/components/Range';
-import { clearValue, fitToCurrency } from '#/components/input/NumberInput/utils';
-import type { TextInputProps } from '#/components/input/TextInput';
+import { NumberInput } from '#src/components/input/NumberInput';
+import { Range } from '#src/components/Range';
+import { clearValue, fitToCurrency } from '#src/components/input/NumberInput/utils';
+import type { TextInputProps } from '#src/components/input/TextInput';
 
 const Wrapper = styled.div`
   position: relative;
@@ -95,7 +95,9 @@ export const SliderRange: React.FC<SliderRangeProps> = ({
 
   React.useEffect(() => {
     if (defaultValue) {
-      const [newInput1, newInput2] = defaultValue;
+      const [defaultInput1, defaultInput2] = defaultValue;
+      const newInput1 = getFull(defaultInput1, 0);
+      const newInput2 = getFull(defaultInput2, 1);
       const newSlider1 = Number(clearValue(newInput1, precision));
       const newSlider2 = Number(clearValue(newInput2, precision));
       const diff = newSlider2 - newSlider1;
@@ -113,7 +115,7 @@ export const SliderRange: React.FC<SliderRangeProps> = ({
         const delta = step - diff;
         if (newSlider1 - delta > minValue) {
           const newInput1 = newSlider1 - delta;
-          setInput1(String(newInput1));
+          setInput1(getFull(newInput1, 0));
           setInput2(newInput2);
           setSlider1(newInput1);
           setSlider2(newSlider2);
@@ -124,7 +126,7 @@ export const SliderRange: React.FC<SliderRangeProps> = ({
         } else {
           const newInput2 = newSlider2 + delta;
           setInput1(newInput1);
-          setInput2(String(newInput2));
+          setInput2(getFull(newInput2, 1));
           setSlider1(newSlider1);
           setSlider2(newInput2);
           onChange?.([
@@ -198,14 +200,14 @@ export const SliderRange: React.FC<SliderRangeProps> = ({
     const value1Num = Number(clearValue(input1Value, precision) || minValue);
     const value2Num = Number(clearValue(input2Value, precision) || maxValue);
     if (value1Num < minValue) {
-      setInput1(String(minValue));
+      setInput1(getFull(minValue, 0));
       setSlider1(minValue);
       onChange?.([
         { str: getFull(minValue, 0), num: minValue },
         { str: input2Value, num: slider2 },
       ]);
     } else if (value1Num > value2Num - step) {
-      setInput1(String(value2Num - step));
+      setInput1(getFull(value2Num - step, 0));
       setSlider1(value2Num - step);
       onChange?.([
         { str: getFull(value2Num - step, 0), num: value2Num - step },
@@ -223,18 +225,18 @@ export const SliderRange: React.FC<SliderRangeProps> = ({
     const value1Num = Number(clearValue(input1Value, precision) || minValue);
     const value2Num = Number(clearValue(input2Value, precision) || maxValue);
     if (value2Num > maxValue) {
-      setInput2(String(maxValue));
+      setInput2(getFull(maxValue, 1));
       setSlider2(maxValue);
       onChange?.([
         { str: input1Value, num: slider1 },
-        { str: getFull(value1Num + step, 1), num: maxValue },
+        { str: getFull(maxValue, 1), num: maxValue },
       ]);
     } else if (value2Num < value1Num + step) {
-      setInput2(String(value1Num + step));
+      setInput2(getFull(value1Num + step, 1));
       setSlider2(value1Num + step);
       onChange?.([
         { str: input1Value, num: slider1 },
-        { str: getFull(maxValue, 1), num: value1Num + step },
+        { str: getFull(value1Num + step, 1), num: value1Num + step },
       ]);
     } else {
       setSlider2(value2Num);
@@ -285,3 +287,5 @@ export const SliderRange: React.FC<SliderRangeProps> = ({
     </Wrapper>
   );
 };
+
+SliderRange.displayName = 'SliderRange';
