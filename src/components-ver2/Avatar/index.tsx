@@ -8,11 +8,6 @@ import { DefaultFontColorName } from '#src/components-ver2/themes/common';
 import { useLoaded } from './useLoaded';
 import { AvatarSVG } from './Avatar_SVG';
 
-const InverseTooltip = (props: any) => {
-  const themeContext = React.useContext(ThemeContext);
-  return <Tooltip {...props} theme={themeContext.name == 'dark' ? LIGHT_THEME : DARK_THEME} />;
-};
-
 const Wrapper = styled.button<{ size: string }>`
   position: relative;
   width: ${({ size }) => size};
@@ -200,9 +195,9 @@ export const Avatar = ({
   return (
     <Wrapper size={getSize()} {...props}>
       {showTooltip ? (
-        <InverseTooltip anchorClassName="avatar-tooltip" renderContent={() => userName}>
+        <Tooltip anchorClassName="avatar-tooltip" renderContent={() => userName}>
           {renderContent()}
-        </InverseTooltip>
+        </Tooltip>
       ) : (
         renderContent()
       )}
