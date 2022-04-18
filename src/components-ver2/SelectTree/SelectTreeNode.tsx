@@ -24,13 +24,17 @@ export interface SelectTreeBranchProps {
   onKeyDown?: (event: KeyboardEvent<HTMLLIElement>) => void;
 }
 
-const Chevron = styled(ChevronRightOutline)`
+const Chevron = styled(ChevronRightOutline)<{ isOpened?: boolean; dimension?: Dimension }>`
   transition: all 0.3s;
   flex-shrink: 0;
   margin-right: 16px;
+  cursor: pointer;
   & path {
     fill: ${(p) => p.theme.color['Neutral/Neutral 50']};
   }
+  width: ${(p) => (p.dimension === 'm' ? '24px' : '20px')};
+  height: ${(p) => (p.dimension === 'm' ? '24px' : '20px')};
+  transform: ${(p) => (p.isOpened ? 'rotate(90deg)' : 'rotate(0deg)')};
 `;
 
 const TreeItem = styled.ul`
@@ -41,11 +45,6 @@ const TreeItem = styled.ul`
 
 const Wrapper = styled.li<{ isOpened?: boolean; dimension?: Dimension; level: number }>`
   color: ${(p) => p.theme.color['Neutral/Neutral 90']};
-  & ${Chevron} {
-    width: ${(p) => (p.dimension === 'm' ? '24px' : '20px')};
-    height: ${(p) => (p.dimension === 'm' ? '24px' : '20px')};
-    transform: ${(p) => (p.isOpened ? 'rotate(90deg)' : 'rotate(0deg)')};
-  }
   ${(p) => (p.dimension === 'm' ? typography['Body/Body 1 Short'] : typography['Body/Body 2 Short'])};
   display: flex;
   align-items: flex-start;
@@ -84,7 +83,9 @@ export const SelectTreeNode: FC<SelectTreeBranchProps> = ({
   return (
     <>
       <Wrapper isOpened={node.expanded} dimension={dimension} level={level} onKeyDown={onKeyDown}>
-        {node.children && <Chevron data-key={node.id} onClick={onButtonClick} />}
+        {node.children && (
+          <Chevron data-key={node.id} onClick={onButtonClick} isOpened={node.expanded} dimension={dimension} />
+        )}
         {'checked' in node && (
           <StyledCheckbox
             id={node.id}
