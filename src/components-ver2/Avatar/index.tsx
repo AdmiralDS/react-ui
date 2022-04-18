@@ -1,6 +1,5 @@
 import * as React from 'react';
-import styled, { ThemeContext, css } from 'styled-components';
-import { LIGHT_THEME, DARK_THEME } from '#src/components-ver2/themes';
+import styled, { css } from 'styled-components';
 import { typography } from '#src/components-ver2/Typography';
 import { Tooltip } from '#src/components-ver2/Tooltip';
 import { DefaultFontColorName } from '#src/components-ver2/themes/common';
