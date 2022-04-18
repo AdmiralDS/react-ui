@@ -26,15 +26,43 @@ export interface SelectTreeBranchProps {
 
 const Chevron = styled(ChevronRightOutline)<{ isOpened?: boolean; dimension?: Dimension }>`
   transition: all 0.3s;
-  flex-shrink: 0;
-  margin-right: 16px;
-  cursor: pointer;
   & path {
     fill: ${(p) => p.theme.color['Neutral/Neutral 50']};
   }
+  width: 100%;
+  height: 100%;
+  transform: ${(p) => (p.isOpened ? 'rotate(90deg)' : 'rotate(0deg)')};
+  &:hover *[fill^='#'] {
+    fill: ${(p) => p.theme.color['Primary/Primary 60 Main']};
+  }
+`;
+
+const ChevronWrapper = styled.div<{
+  isOpened?: boolean;
+  dimension?: Dimension;
+}>`
+  flex-shrink: 0;
+  margin-right: 16px;
+  box-sizing: border-box;
+  cursor: pointer;
+  position: relative;
+
   width: ${(p) => (p.dimension === 'm' ? '24px' : '20px')};
   height: ${(p) => (p.dimension === 'm' ? '24px' : '20px')};
-  transform: ${(p) => (p.isOpened ? 'rotate(90deg)' : 'rotate(0deg)')};
+
+  &:hover {
+    &::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      width: ${(p) => (p.dimension === 'm' ? '36px' : '32px')};
+      height: ${(p) => (p.dimension === 'm' ? '36px' : '32px')};
+      background-color: ${(p) => p.theme.color['Opacity/Hover']};
+    }
+  }
 `;
 
 const TreeItem = styled.ul`
@@ -84,7 +112,9 @@ export const SelectTreeNode: FC<SelectTreeBranchProps> = ({
     <>
       <Wrapper isOpened={node.expanded} dimension={dimension} level={level} onKeyDown={onKeyDown}>
         {node.children && (
-          <Chevron data-key={node.id} onClick={onButtonClick} isOpened={node.expanded} dimension={dimension} />
+          <ChevronWrapper data-key={node.id} isOpened={node.expanded} dimension={dimension}>
+            <Chevron data-key={node.id} onClick={onButtonClick} isOpened={node.expanded} dimension={dimension} />
+          </ChevronWrapper>
         )}
         {'checked' in node && (
           <StyledCheckbox
