@@ -1,12 +1,12 @@
 {
   "name": "@admiral-ds/react-ui",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "React component library for Admiral design system 2.1",
   "keywords": [],
   "author": "",
   "license": "See license in ./LICENSE",
   "engines": {
-    "node": ">=12"
+    "node": ">=14"
   },
   "files": [
     "dist",
