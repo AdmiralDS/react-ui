@@ -20,7 +20,7 @@ export interface SelectTreeBranchProps {
   level: number;
   expandAll: boolean;
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
-  onButtonClick?: (event: MouseEvent<SVGSVGElement>) => void;
+  onButtonClick?: (event: MouseEvent<HTMLDivElement>) => void;
   onKeyDown?: (event: KeyboardEvent<HTMLLIElement>) => void;
 }
 
@@ -113,8 +113,8 @@ export const SelectTreeNode: FC<SelectTreeBranchProps> = ({
     <>
       <Wrapper isOpened={node.expanded} dimension={dimension} level={level} onKeyDown={onKeyDown}>
         {node.children && (
-          <ChevronWrapper data-key={node.id} isOpened={node.expanded} dimension={dimension}>
-            <Chevron data-key={node.id} onClick={onButtonClick} $isOpened={node.expanded} dimension={dimension} />
+          <ChevronWrapper data-key={node.id} isOpened={node.expanded} dimension={dimension} onClick={onButtonClick}>
+            <Chevron data-key={node.id} $isOpened={node.expanded} dimension={dimension} />
           </ChevronWrapper>
         )}
         {'checked' in node && (
