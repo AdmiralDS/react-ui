@@ -5,7 +5,7 @@ import { LIGHT_THEME, DARK_THEME } from '#src/components/themes';
 import { OverflowMenu } from '#src/components/OverflowMenu';
 
 import type { BreadcrumbProps } from './BreadCrumb';
-import { InverseTooltip } from './InverseTooltip';
+import { Tooltip } from '#src/components-ver2/Tooltip';
 
 const Option = styled.a`
   position: relative;
@@ -43,9 +43,9 @@ export const MenuButton: React.FC<MenuButtonProps> = ({ options }) => {
           const tooltip = text.length > 40;
           const renderText = () =>
             tooltip ? (
-              <InverseTooltip style={{ marginTop: '8px' }} renderContent={() => text}>
+              <Tooltip style={{ marginTop: '8px' }} renderContent={() => text}>
                 {text.slice(0, 37) + '...'}
-              </InverseTooltip>
+              </Tooltip>
             ) : (
               text
             );
