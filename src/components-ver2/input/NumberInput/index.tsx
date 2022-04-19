@@ -6,7 +6,7 @@ import { ReactComponent as MinusOutline } from '@admiral-ds/icons/build/service/
 import { ReactComponent as PlusOutline } from '@admiral-ds/icons/build/service/PlusOutline.svg';
 import styled, { css } from 'styled-components';
 
-import { fitToCurrency, clearValue } from './utils';
+import { fitToCurrency, clearValue, validateThousand } from './utils';
 export { fitToCurrency, clearValue } from './utils';
 
 const Icon = css`
@@ -87,7 +87,7 @@ export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
     const [minusDisabled, setMinusDisabled] = React.useState(false);
 
     // thousand, decimal - не более одного символа
-    const thousand = userThousand.slice(0, 1);
+    const thousand = validateThousand(userThousand) ? userThousand.slice(0, 1) : ' ';
     const decimal = userDecimal.slice(0, 1);
 
     React.useEffect(() => {

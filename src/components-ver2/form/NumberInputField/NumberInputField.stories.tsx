@@ -83,6 +83,12 @@ export default {
     icons: {
       control: false,
     },
+    containerRef: {
+      control: false,
+    },
+    handleInput: {
+      control: false,
+    },
     extraText: {
       control: { type: 'text' },
     },

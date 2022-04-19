@@ -144,3 +144,7 @@ export function fitToCurrency(
 
   return newValue;
 }
+
+export const validateThousand = (thousand: string): boolean => {
+  return /[^a-zA-Z]+/.test(thousand);
+};

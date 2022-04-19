@@ -65,6 +65,12 @@ export default {
     placeholder: {
       control: { type: 'text' },
     },
+    minDate: {
+      control: false,
+    },
+    maxDate: {
+      control: false,
+    },
   },
 } as ComponentMeta<typeof DateField>;
 

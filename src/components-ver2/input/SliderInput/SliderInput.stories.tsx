@@ -47,6 +47,9 @@ export default {
     ],
   },
   argTypes: {
+    thousand: {
+      type: 'string',
+    },
     displayStatusIcon: {
       control: { type: 'boolean' },
     },
