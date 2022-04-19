@@ -32,9 +32,6 @@ const Chevron = styled(ChevronRightOutline)<{ $isOpened?: boolean; dimension?: D
   width: 100%;
   height: 100%;
   transform: ${(p) => (p.$isOpened ? 'rotate(90deg)' : 'rotate(0deg)')};
-  &:hover *[fill^='#'] {
-    fill: ${(p) => p.theme.color['Primary/Primary 60 Main']};
-  }
 `;
 
 const ChevronWrapper = styled.div<{
