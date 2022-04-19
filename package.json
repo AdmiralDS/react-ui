@@ -13,14 +13,14 @@
     "src",
     "tsconfig.json"
   ],
-  "main": "./dist/admiral-react.cjs.js",
-  "module": "./dist/admiral-react.es.js",
+  "main": "./dist/react-ui.cjs.js",
+  "module": "./dist/react-ui.es.js",
   "exports": {
     "./package.json": "./package.json",
     ".": {
       "types": "./dist/index.d.ts",
-      "require": "./dist/admiral-react.cjs.js",
-      "import": "./dist/admiral-react.es.js"
+      "require": "./dist/react-ui.cjs.js",
+      "import": "./dist/react-ui.es.js"
     }
   },
   "imports": {
