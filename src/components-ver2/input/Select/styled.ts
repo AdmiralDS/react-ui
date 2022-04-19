@@ -57,7 +57,8 @@ export const BorderedDiv = styled.div`
     border: 1px solid ${(props) => props.theme.color['Success/Success 50 Main']};
   }
 
-  [data-read-only] & {
+  [data-read-only],
+  [data-disabled='true'] & {
     border-color: transparent;
   }
 `;
@@ -103,6 +104,10 @@ export const ValueWrapper = styled.div<{
   ${(props) => (props.dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
   color: ${(props) => props.theme.color['Neutral/Neutral 90']};
   ${({ fixHeight }) => fixHeight && fixHeightStyle}
+
+  [data-disabled='true'] & {
+    color: ${(props) => props.theme.color['Neutral/Neutral 30']};
+  }
 `;
 
 export const StringValueWrapper = styled.div`
@@ -116,10 +121,6 @@ const ieFixes = css`
   ::-ms-reveal {
     display: none;
   }
-`;
-
-const disabledColors = css`
-  background-color: ${(props) => props.theme.color['Neutral/Neutral 10']};
 `;
 
 export const Input = styled.input<{ dimension?: ComponentDimension; isMultiple?: boolean }>`
@@ -145,12 +146,12 @@ export const Input = styled.input<{ dimension?: ComponentDimension; isMultiple?:
   &:disabled,
   &:disabled::placeholder {
     cursor: inherit;
+    color: ${(props) => props.theme.color['Neutral/Neutral 30']};
   }
 
   [data-read-only] & {
     user-select: none;
     pointer-events: none;
-    ${disabledColors}
   }
 
   height: ${({ dimension, isMultiple }) => `${getSelectValueHeight(dimension, isMultiple)}px`};
@@ -208,7 +209,7 @@ export const SelectWrapper = styled.div<{
   }
 `;
 
-export const IconPanel = styled.div<{ disabled?: boolean; multiple?: boolean; dimension?: ComponentDimension }>`
+export const IconPanel = styled.div<{ multiple?: boolean; dimension?: ComponentDimension }>`
   flex: 0 0 auto;
 
   display: flex;
@@ -221,6 +222,12 @@ export const IconPanel = styled.div<{ disabled?: boolean; multiple?: boolean; di
     display: block;
     width: ${({ dimension }) => (dimension === 's' ? 20 : 24)}px;
     height: ${({ dimension }) => (dimension === 's' ? 20 : 24)}px;
+  }
+
+  [data-disabled='true'] & {
+    & *[fill^='#'] {
+      fill: ${(props) => props.theme.color['Neutral/Neutral 30']};
+    }
   }
 `;
 

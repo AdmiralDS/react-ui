@@ -42,7 +42,7 @@ const disabledChipStyle = css`
     background-color: ${({ theme }) => theme.color['Neutral/Neutral 10']};
     border: 1px solid ${({ theme }) => theme.color['Neutral/Neutral 10']};
   }
-  svg {
+  & > * {
     pointer-events: none;
   }
 `;
@@ -79,16 +79,18 @@ const ContentTooltop = styled.div`
 interface IMultipleChipsProps {
   options: IConstantOption[];
   shouldShowCount: boolean;
+  disabled?: boolean;
   onChipRemove: (value: string) => void;
   onChipClick?: (evt: React.MouseEvent) => void;
 }
 
 interface ICounterChipsProps {
   count: number;
+  disabled?: boolean;
   onClick?: (evt: React.MouseEvent) => void;
 }
 
-const CounterChip = ({ children, count, onClick }: React.PropsWithChildren<ICounterChipsProps>) => {
+const CounterChip = ({ children, count, disabled, onClick }: React.PropsWithChildren<ICounterChipsProps>) => {
   const ref = React.useRef<HTMLDivElement>(null);
 
   const renderContent = React.useCallback(() => <ChipsHintWrap>{children}</ChipsHintWrap>, [children]);
@@ -98,7 +100,7 @@ const CounterChip = ({ children, count, onClick }: React.PropsWithChildren<ICoun
   return (
     <CounterChipWrap onClick={onClick} ref={ref}>
       <Hint renderContent={renderContent} target={ref} dimension="s">
-        <StyledCounterChip tabIndex={-1} dimension="s" appearance="filled">
+        <StyledCounterChip tabIndex={-1} dimension="s" appearance="filled" disabled={disabled}>
           +{count}
         </StyledCounterChip>
       </Hint>
@@ -109,11 +111,12 @@ const CounterChip = ({ children, count, onClick }: React.PropsWithChildren<ICoun
 interface IChipWrapperProps {
   option: IConstantOption;
   className?: string;
+  disabled?: boolean;
   onChipRemove: (value: string) => void;
   onClick?: (evt: React.MouseEvent) => void;
 }
 
-const Chip = ({ className, option, onClick, onChipRemove }: IChipWrapperProps) => {
+const Chip = ({ className, option, disabled, onClick, onChipRemove }: IChipWrapperProps) => {
   const renderContentTooltip = React.useCallback(
     (children: React.ReactNode) => () => <ContentTooltop>{children}</ContentTooltop>,
     [],
@@ -127,7 +130,7 @@ const Chip = ({ className, option, onClick, onChipRemove }: IChipWrapperProps) =
       appearance="filled"
       onClick={onClick}
       onClose={getChipMeta(option, onChipRemove).onClose}
-      disabled={getChipMeta(option, onChipRemove).disabled}
+      disabled={getChipMeta(option, onChipRemove).disabled || disabled}
       renderContentTooltip={renderContentTooltip(getChipMeta(option, onChipRemove).children)}
     >
       {getChipMeta(option, onChipRemove).children}
@@ -145,15 +148,27 @@ const getChipMeta = ({ value, disabled, renderChip }: IConstantOption, onChipRem
     : { disabled, onClose: () => onChipRemove(value), children: chip };
 };
 
-export const MultipleSelectChips = ({ options, shouldShowCount, onChipClick, onChipRemove }: IMultipleChipsProps) => (
+export const MultipleSelectChips = ({
+  options,
+  shouldShowCount,
+  disabled,
+  onChipClick,
+  onChipRemove,
+}: IMultipleChipsProps) => (
   <>
     {options.map((option, optionInd) => (
       <ChipBox key={option.value} onMouseDown={preventDefault}>
-        <Chip className="chip" option={option} onClick={onChipClick} onChipRemove={onChipRemove} />
+        <Chip className="chip" option={option} disabled={disabled} onClick={onChipClick} onChipRemove={onChipRemove} />
         {shouldShowCount && (
-          <CounterChip onClick={onChipClick} count={options.length - optionInd - 1}>
+          <CounterChip onClick={onChipClick} count={options.length - optionInd - 1} disabled={disabled}>
             {options.slice(optionInd + 1).map((innerOption) => (
-              <Chip key={innerOption.value} option={innerOption} onClick={onChipClick} onChipRemove={onChipRemove} />
+              <Chip
+                key={innerOption.value}
+                option={innerOption}
+                disabled={disabled}
+                onClick={onChipClick}
+                onChipRemove={onChipRemove}
+              />
             ))}
           </CounterChip>
         )}

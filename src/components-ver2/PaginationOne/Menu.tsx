@@ -119,7 +119,7 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
   ) => {
     const [menuOpened, setMenuOpened] = React.useState<boolean>(false);
     const btnRef = React.useRef<HTMLButtonElement>(null);
-    const menuRef = React.useRef<HTMLUListElement>(null);
+    const menuRef = React.useRef<HTMLDivElement>(null);
 
     const reverseMenu = () => {
       setMenuOpened((prevOpened) => {
@@ -180,6 +180,7 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
         </Button>
         {menuOpened && (
           <StyledDropDown
+            ref={menuRef}
             targetRef={btnRef}
             onClickOutside={clickOutside}
             dropMaxHeight={dropMaxHeight}
