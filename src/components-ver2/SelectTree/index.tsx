@@ -86,7 +86,7 @@ export const SelectTree: FC<SelectTreeProps> = ({ list, dimension = 'm', expandA
     onChange?.([...list]);
   };
 
-  const handleButtonClick = React.useCallback((e: MouseEvent<SVGSVGElement>) => {
+  const handleButtonClick = React.useCallback((e: MouseEvent<HTMLDivElement>) => {
     handleChangeList('buttonclick', e);
   }, []);
 
