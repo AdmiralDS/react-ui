@@ -534,7 +534,6 @@ export const Table: React.FC<TableProps> = ({
               )}
               {cols.map((col) => (col.sticky ? null : renderBodyCell(row, col)))}
               <Filler />
-              <ScrollbarCompensator width={verticalScrollWidth} />
             </SimpleRow>
             {row.expandedRowRender && (
               <ExpandedRow opened={row.expanded} contentMaxHeight="90vh" className="tr-expanded">

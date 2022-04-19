@@ -4,12 +4,7 @@ import React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
-import {
-  DARK_THEME,
-  LIGHT_THEME,
-  DefaultBackgroundColorName,
-  MainPrimaryColorName,
-} from '#src/components-ver2/themes';
+import { DARK_THEME, LIGHT_THEME, DefaultBackgroundColorName, MainPrimaryColorName } from '#src/components-ver2/themes';
 import { useDarkMode } from 'storybook-dark-mode';
 
 const Separator = styled.div`
