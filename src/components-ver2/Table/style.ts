@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { ReactComponent as ArrowUpOutline } from '@admiral-ds/icons/build/system/ArrowUpOutline.svg';
-import { ReactComponent as ChevronDownOutline } from '@admiral-ds/icons/build/system/ChevronDownOutline.svg';
+import { OpenStatusButton } from '#src/components-ver2/OpenStatusButton';
 
 import {
   cellStyle,
@@ -68,33 +68,35 @@ export const ScrollTableBody = styled.div`
   flex: 1 1 auto;
 `;
 
-export const ExpandIcon = styled(ChevronDownOutline)`
+export const ExpandIconWrapper = styled.div`
   position: relative;
   display: flex;
-  flex-shrink: 0;
+  flex: 1 0 auto;
   width: 100%;
   height: 100%;
-  transition: transform 0.3s ease-in-out;
-  transform: rotate(0deg);
   cursor: pointer;
-  & *[fill^='#'] {
-    fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
-  }
-  &:hover *[fill^='#'] {
+  &:hover {
     &:before {
       position: absolute;
       content: '';
-      top: 6px;
-      bottom: 6px;
-      left: 6px;
-      right: 6px;
+      top: -6px;
+      bottom: -6px;
+      left: -6px;
+      right: -6px;
       border-radius: 50%;
       background: ${({ theme }) => theme.color['Opacity/Hover']};
     }
   }
-  [data-disabled='true'] & {
+`;
+
+export const ExpandIcon = styled(OpenStatusButton)`
+  display: flex;
+  flex-shrink: 0;
+  width: 100%;
+  height: 100%;
+  &&:hover {
     & *[fill^='#'] {
-      fill: ${({ theme }) => theme.color['Neutral/Neutral 30']};
+      fill: ${(props) => props.theme.color['Neutral/Neutral 50']};
     }
   }
 `;
@@ -160,6 +162,7 @@ export const CheckboxCell = styled(Cell)`
 
 // padding-bottom меньше padding-top на 1px, т.к. 1px остается для border-bottom ячейки
 export const ExpandCell = styled(Cell)`
+  overflow: visible;
   [data-dimension='s'] && {
     padding: 6px 0px 5px 12px;
     width: 32px;

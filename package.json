@@ -1,26 +1,26 @@
 {
   "name": "@admiral-ds/react-ui",
-  "version": "1.0.0",
+  "version": "0.0.2",
   "description": "React component library for Admiral design system 2.1",
   "keywords": [],
   "author": "",
   "license": "See license in ./LICENSE",
   "engines": {
-    "node": ">=12"
+    "node": ">=14"
   },
   "files": [
     "dist",
     "src",
     "tsconfig.json"
   ],
-  "main": "./dist/admiral-react.cjs.js",
-  "module": "./dist/admiral-react.es.js",
+  "main": "./dist/react-ui.cjs.js",
+  "module": "./dist/react-ui.es.js",
   "exports": {
     "./package.json": "./package.json",
     ".": {
       "types": "./dist/index.d.ts",
-      "require": "./dist/admiral-react.cjs.js",
-      "import": "./dist/admiral-react.es.js"
+      "require": "./dist/react-ui.cjs.js",
+      "import": "./dist/react-ui.es.js"
     }
   },
   "imports": {

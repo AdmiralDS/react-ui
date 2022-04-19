@@ -1,54 +1,67 @@
-# Библиотека компонентов
+# @admiral-ds/react-ui
 
-admiral-react - Это библиотека компонентов React, основанная на дизайн системе Admiral.
+Библиотека компонентов React, основанная на дизайн системе Admiral 2.1
 
 ## Содержимое
 
 - [Соглашения и внесение изменений](CONTRIBUTING.md)
 - [Установка](#Установка)
 - [Подключение](#Подключение)
-- [Примеры](#Примеры)
 
 ## Установка
 
-admiral-react требует зависимостей :
+@admiral-ds/react-ui требует зависимостей :
 
-1. `styled-components@^5.1.0`
-2. `@admiral-ds/fonts@1.0.0`
-3. `@admiral-ds/icons@^2.0.1`
-4. `react > 16.0.0`
-5. `react-dom > 16.0.0`
+1. `styled-components > 5.1.0`
+2. `react > 16.0.0`
+3. `react-dom > 16.0.0`
 
-Установить admiral-react и зависимости одной командой:
+Создать новый проект и установить библиотеку:
 
-```sh
-npm i @admiral-ds/react-ui styled-components @admiral-ds/fonts
+```shell
+npx create-react-app@5.0.1 admiral-web-app --template typescript
+
+npm i @admiral-ds/react-ui styled-components
+
+npm i -D @types/styled-components
 ```
 
 ## Подключение
 
-Для правильной работы admiral-react требуется использовать `<ThemeProvider>` и `<FontsVTBGroup />`, их **рекомендуется** подключать в корне проекта:
+Для правильной работы @admiral-ds/react-ui требуется использовать `<ThemeProvider>` и `<FontsVTBGroup />`, их **рекомендуется** подключать в корне проекта:
 
+index.tsx
 ```tsx
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 import { ThemeProvider } from 'styled-components';
-import App from './App';
 import { DARK_THEME, FontsVTBGroup } from '@admiral-ds/react-ui';
 
-ReactDOM.render(
+import './index.css';
+import App from './App';
+
+import reportWebVitals from './reportWebVitals';
+
+const root = ReactDOM.createRoot(
+  document.getElementById('root') as HTMLElement
+);
+
+root.render(
   <React.StrictMode>
     <ThemeProvider theme={DARK_THEME}>
       <FontsVTBGroup />
       <App />
     </ThemeProvider>
-  </React.StrictMode>,
-  document.getElementById('root'),
+  </React.StrictMode>
 );
-```
 
-Для правильной работы шрифтов требуется настройка webpack file-loader,
-а для импорта svg иконок в виде реакт компонентов [SVGR](https://github.com/gregberge/svgr/tree/main/packages/webpack).
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals();
+```
+Если ваш проект не использует *create-react-app* для правильной работы шрифтов вам потребуется настройка webpack file-loader,
+а для импорта svg иконок в виде React компонентов [SVGR](https://github.com/gregberge/svgr/tree/main/packages/webpack).
 
 ```sh
 npm i @svgr/webpack --dev
@@ -103,24 +116,4 @@ module: {
         
         ]
     }
-```
-
-## Примеры
-
-```tsx
-import { Button, InputField } from '@admiral-ds/react-ui';
-import React from 'react';
-import { Box } from 'reflexbox';
-
-export const Form = () => (
-  <>
-    <InputField label="login" />
-    <Box mt={16}>
-      <InputField label="password" type="password" />
-    </Box>
-    <Box mt={16}>
-      <Button type="button">Войти</Button>
-    </Box>
-  </>
-);
 ```

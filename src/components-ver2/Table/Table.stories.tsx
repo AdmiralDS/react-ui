@@ -496,7 +496,7 @@ export const Sticky = Template.bind({});
 Sticky.args = {
   rowList,
   columnList: columnListSticky,
-  style: { maxHeight: '300px' },
+  style: { maxHeight: '300px', maxWidth: '700px' },
 };
 Sticky.storyName = 'Table. Фиксированные столбцы.';
 Sticky.parameters = {

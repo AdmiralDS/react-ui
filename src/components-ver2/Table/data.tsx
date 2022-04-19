@@ -454,11 +454,6 @@ export const columnListSticky: Column[] = [
     title: 'Валюта',
   },
   {
-    name: 'customer',
-    title: 'Покупатель',
-    width: 200,
-  },
-  {
     name: 'rate',
     title: 'Ставка',
   },

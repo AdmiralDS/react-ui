@@ -197,7 +197,7 @@ const SearchSelectSimpleTemplate: ComponentStory<typeof Select> = (props) => {
 
   return (
     <ThemeProvider theme={useDarkMode() ? DARK_THEME : LIGHT_THEME}>
-      <Select placeholder="Placeholder" {...props} mode="searchSelect" value={selectValue} onChange={onChange}>
+      <Select {...props} placeholder="Placeholder" mode="searchSelect" value={selectValue} onChange={onChange}>
         {OPTIONS_SIMPLE.map((option, ind) => (
           <Option key={option} value={option} disabled={ind === 4}>
             {option}
@@ -274,14 +274,14 @@ const RenderPropsTemplate: ComponentStory<typeof Select> = (props) => {
   );
 };
 
-const OptionGroupTemplate: ComponentStory<typeof Select> = () => {
+const OptionGroupTemplate: ComponentStory<typeof Select> = (props) => {
   const [selectValue, setSelectValue] = React.useState('Похо Торо Моронго');
 
   const onChange = (e: ChangeEvent<HTMLSelectElement>) => setSelectValue(e.target.value);
 
   return (
     <ThemeProvider theme={useDarkMode() ? DARK_THEME : LIGHT_THEME}>
-      <Select value={selectValue} mode="searchSelect" onChange={onChange} dimension="xl">
+      <Select {...props} value={selectValue} mode="searchSelect" onChange={onChange} dimension="xl">
         <OptionGroup label="Сегодня выступают">
           <Option value="Анигиляторная пушка">Анигиляторная пушка</Option>
           <Option value="Похо Торо Моронго">Похо Торо Моронго</Option>
@@ -366,7 +366,7 @@ const formDataToObject = (data: FormData) => {
   return obj;
 };
 
-const UncontrolledTemplate: ComponentStory<typeof Select> = () => {
+const UncontrolledTemplate: ComponentStory<typeof Select> = (props) => {
   const [submitValues, setSubmitValues] = useState<null | Record<string, any>>(null);
 
   const onSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
@@ -381,7 +381,7 @@ const UncontrolledTemplate: ComponentStory<typeof Select> = () => {
   return (
     <ThemeProvider theme={useDarkMode() ? DARK_THEME : LIGHT_THEME}>
       <Form action="" onSubmit={onSubmit}>
-        <Select name="myOwesomeField" mode="searchSelect" defaultValue={OPTIONS_SIMPLE[0]}>
+        <Select {...props} name="myOwesomeField" mode="searchSelect" defaultValue={OPTIONS_SIMPLE[0]}>
           {OPTIONS_SIMPLE.map((option, ind) => (
             <Option key={option} value={option} disabled={ind === 4}>
               {option}
@@ -436,7 +436,11 @@ const TemplateSimpleMultiSelect: ComponentStory<typeof Select> = (props) => {
 };
 
 const TemplateMultiSelect: ComponentStory<typeof Select> = (props) => {
-  const [selectValue, setSelectValue] = React.useState<string[]>([]);
+  const [selectValue, setSelectValue] = React.useState<string[]>(
+    Array.from({ length: 20 })
+      .map((_, ind) => String(ind))
+      .slice(0, 10),
+  );
 
   const onChange = (e: ChangeEvent<HTMLSelectElement>) => {
     const newValues = Array.from(e.target.selectedOptions).map((option) => option.value);
@@ -492,7 +496,7 @@ const TemplateNotFixedMultiSelect: ComponentStory<typeof Select> = (props) => {
   );
 };
 
-const TemplateMultiSelectCustomOption: ComponentStory<typeof Select> = () => {
+const TemplateMultiSelectCustomOption: ComponentStory<typeof Select> = (props) => {
   const [selectValue, setSelectValue] = React.useState<string[]>(
     Array.from({ length: 15 }).map((_, ind) => String(ind)),
   );
@@ -503,7 +507,7 @@ const TemplateMultiSelectCustomOption: ComponentStory<typeof Select> = () => {
 
   return (
     <ThemeProvider theme={useDarkMode() ? DARK_THEME : LIGHT_THEME}>
-      <Select value={selectValue} multiple={true} onChange={onChange} mode="searchSelect">
+      <Select {...props} value={selectValue} multiple={true} onChange={onChange} mode="searchSelect">
         {Array.from({ length: 20 }).map((_option, ind) => (
           <Option key={ind} value={String(ind)} renderChip={() => String(ind)}>
             <TextWrapper>
@@ -519,7 +523,7 @@ const TemplateMultiSelectCustomOption: ComponentStory<typeof Select> = () => {
   );
 };
 
-const TemplateMultiSelectCustomChip: ComponentStory<typeof Select> = () => {
+const TemplateMultiSelectCustomChip: ComponentStory<typeof Select> = (props) => {
   const [selectValue, setSelectValue] = React.useState<string[]>(
     Array.from({ length: 5 }).map((_, ind) => String(ind)),
   );
@@ -550,7 +554,7 @@ const TemplateMultiSelectCustomChip: ComponentStory<typeof Select> = () => {
 
   return (
     <ThemeProvider theme={useDarkMode() ? DARK_THEME : LIGHT_THEME}>
-      <Select value={selectValue} multiple={true} onChange={onChange} mode="searchSelect">
+      <Select {...props} value={selectValue} multiple={true} onChange={onChange} mode="searchSelect">
         {Array.from({ length: 20 }).map((_option, ind) => (
           <Option key={ind} value={String(ind)} renderChip={renderChip(ind)} disabled={[0, 2].includes(ind)}>
             {ind}
