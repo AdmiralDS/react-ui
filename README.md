@@ -10,21 +10,17 @@
 
 ## Установка
 
-admiral-react требует зависимостей :
+@admiral-ds/react-ui требует зависимостей :
 
 1. `styled-components > 5.1.0`
 2. `react > 16.0.0`
 3. `react-dom > 16.0.0`
 
-Создать новый проект:
+Создать новый проект и установить библиотеку:
 
 ```shell
 npx create-react-app@5.0.1 admiral-web-app --template typescript
-```
 
-Установить admiral-react и зависимости одной командой:
-
-```shell
 npm i @admiral-ds/react-ui styled-components
 
 npm i -D @types/styled-components
@@ -32,8 +28,9 @@ npm i -D @types/styled-components
 
 ## Подключение
 
-Для правильной работы admiral-react требуется использовать `<ThemeProvider>` и `<FontsVTBGroup />`, их **рекомендуется** подключать в корне проекта:
+Для правильной работы @admiral-ds/react-ui требуется использовать `<ThemeProvider>` и `<FontsVTBGroup />`, их **рекомендуется** подключать в корне проекта:
 
+index.tsx
 ```tsx
 import React from 'react';
 import ReactDOM from 'react-dom/client';
@@ -63,9 +60,8 @@ root.render(
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
 ```
-
-Для правильной работы шрифтов требуется настройка webpack file-loader,
-а для импорта svg иконок в виде реакт компонентов [SVGR](https://github.com/gregberge/svgr/tree/main/packages/webpack).
+Если ваш проект не использует *create-react-app* для правильной работы шрифтов вам потребуется настройка webpack file-loader,
+а для импорта svg иконок в виде React компонентов [SVGR](https://github.com/gregberge/svgr/tree/main/packages/webpack).
 
 ```sh
 npm i @svgr/webpack --dev
