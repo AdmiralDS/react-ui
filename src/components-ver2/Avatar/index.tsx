@@ -1,17 +1,11 @@
 import * as React from 'react';
-import styled, { ThemeContext, css } from 'styled-components';
-import { LIGHT_THEME, DARK_THEME } from '#src/components-ver2/themes';
+import styled, { css } from 'styled-components';
 import { typography } from '#src/components-ver2/Typography';
 import { Tooltip } from '#src/components-ver2/Tooltip';
 import { DefaultFontColorName } from '#src/components-ver2/themes/common';
 
 import { useLoaded } from './useLoaded';
 import { AvatarSVG } from './Avatar_SVG';
-
-const InverseTooltip = (props: any) => {
-  const themeContext = React.useContext(ThemeContext);
-  return <Tooltip {...props} theme={themeContext.name == 'dark' ? LIGHT_THEME : DARK_THEME} />;
-};
 
 const Wrapper = styled.button<{ size: string }>`
   position: relative;
@@ -200,9 +194,9 @@ export const Avatar = ({
   return (
     <Wrapper size={getSize()} {...props}>
       {showTooltip ? (
-        <InverseTooltip anchorClassName="avatar-tooltip" renderContent={() => userName}>
+        <Tooltip anchorClassName="avatar-tooltip" renderContent={() => userName}>
           {renderContent()}
-        </InverseTooltip>
+        </Tooltip>
       ) : (
         renderContent()
       )}
