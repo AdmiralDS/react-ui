@@ -6,6 +6,7 @@ import { RowWidthResizer } from './RowWidthResizer';
 import { Filter } from './filter/Filter';
 import { SCROLLBAR } from './scrollbarUtil';
 import {
+  ExpandIconWrapper,
   ExpandIcon,
   ExpandCell,
   ExpandedRow,
@@ -515,7 +516,16 @@ export const Table: React.FC<TableProps> = ({
                 <StickyWrapper>
                   {displayRowExpansionColumn && (
                     <ExpandCell>
-                      {row.expandedRowRender && <ExpandIcon onClick={() => handleExpansionChange(row.id)} />}
+                      {row.expandedRowRender && (
+                        <ExpandIconWrapper>
+                          <ExpandIcon
+                            $isOpen={row.expanded}
+                            data-disabled={row.disabled ? true : undefined}
+                            onClick={() => handleExpansionChange(row.id)}
+                            aria-hidden
+                          />
+                        </ExpandIconWrapper>
+                      )}
                     </ExpandCell>
                   )}
                   {displayRowSelectionColumn && (
