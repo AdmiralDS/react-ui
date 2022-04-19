@@ -24,14 +24,14 @@ export interface SelectTreeBranchProps {
   onKeyDown?: (event: KeyboardEvent<HTMLLIElement>) => void;
 }
 
-const Chevron = styled(ChevronRightOutline)<{ isOpened?: boolean; dimension?: Dimension }>`
+const Chevron = styled(ChevronRightOutline)<{ $isOpened?: boolean; dimension?: Dimension }>`
   transition: all 0.3s;
   & path {
     fill: ${(p) => p.theme.color['Neutral/Neutral 50']};
   }
   width: 100%;
   height: 100%;
-  transform: ${(p) => (p.isOpened ? 'rotate(90deg)' : 'rotate(0deg)')};
+  transform: ${(p) => (p.$isOpened ? 'rotate(90deg)' : 'rotate(0deg)')};
   &:hover *[fill^='#'] {
     fill: ${(p) => p.theme.color['Primary/Primary 60 Main']};
   }
@@ -114,7 +114,7 @@ export const SelectTreeNode: FC<SelectTreeBranchProps> = ({
       <Wrapper isOpened={node.expanded} dimension={dimension} level={level} onKeyDown={onKeyDown}>
         {node.children && (
           <ChevronWrapper data-key={node.id} isOpened={node.expanded} dimension={dimension}>
-            <Chevron data-key={node.id} onClick={onButtonClick} isOpened={node.expanded} dimension={dimension} />
+            <Chevron data-key={node.id} onClick={onButtonClick} $isOpened={node.expanded} dimension={dimension} />
           </ChevronWrapper>
         )}
         {'checked' in node && (
