@@ -55,8 +55,8 @@ const ChevronWrapper = styled.div<{
       top: 50%;
       transform: translate(-50%, -50%);
       border-radius: 50%;
-      width: ${(p) => (p.dimension === 'm' ? '36px' : '32px')};
-      height: ${(p) => (p.dimension === 'm' ? '36px' : '32px')};
+      width: calc(100% + 12px);
+      height: calc(100% + 12px);
       background-color: ${(p) => p.theme.color['Opacity/Hover']};
     }
   }
