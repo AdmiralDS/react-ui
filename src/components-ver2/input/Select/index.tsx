@@ -257,11 +257,12 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
         <MultipleSelectChips
           options={selectedOptions}
           shouldShowCount={shouldFixMultiSelectHeight}
+          disabled={disabled}
           onChipRemove={handleOptionSelect}
           onChipClick={stopPropagation}
         />
       ),
-      [selectedOptions, shouldFixMultiSelectHeight, handleOptionSelect, stopPropagation],
+      [selectedOptions, shouldFixMultiSelectHeight, disabled, handleOptionSelect, stopPropagation],
     );
 
     const isEmptyValue = multiple ? !localValue?.length : !localValue;
@@ -480,6 +481,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
         focused={isFocused}
         multiple={multiple}
         disabled={disabled}
+        data-disabled={disabled}
         readonly={props.readOnly}
         dimension={dimension}
         ref={containerRef}
@@ -528,7 +530,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
             placeholder={isEmpty ? placeholder : ''}
             tabIndex={-1}
             ref={inputRef}
-            disabled={modeIsSelect}
+            disabled={modeIsSelect || disabled}
             value={searchValue}
             defaultValue={defaultInputValue}
             isMultiple={multiple}
@@ -563,13 +565,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
             </DropDownSelectProvider>
           </Dropdown>
         )}
-        <IconPanel
-          disabled={disabled}
-          multiple={multiple}
-          dimension={dimension}
-          onClick={stopPropagation}
-          onMouseDown={preventDefault}
-        >
+        <IconPanel multiple={multiple} dimension={dimension} onClick={stopPropagation} onMouseDown={preventDefault}>
           {displayClearIcon && <ClearIcon id="searchSelectClearIcon" onClick={handleOnClear} aria-hidden />}
           {icons}
           {displayStatusIcon && <StatusIcon status={status} aria-hidden />}
