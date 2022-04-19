@@ -87,11 +87,10 @@ const IconWrapper = styled.div<{ dimension?: Dimension }>`
   }
 `;
 
-const StyledCheckbox = styled(Checkbox)<{ dimension?: Dimension }>`
+const StyledCheckbox = styled(Checkbox)`
   margin: 2px;
   margin-right: 16px;
-  height: ${(p) => (p.dimension === 'm' ? '20px' : '16px')};
-  min-width: ${(p) => (p.dimension === 'm' ? '20px' : '16px')};
+  flex-shrink: 0;
 `;
 
 const TitleContent = styled.div``;
