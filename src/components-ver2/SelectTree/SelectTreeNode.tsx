@@ -110,7 +110,7 @@ export const SelectTreeNode: FC<SelectTreeBranchProps> = ({
       <Wrapper isOpened={node.expanded} dimension={dimension} level={level} onKeyDown={onKeyDown}>
         {node.children && (
           <ChevronWrapper data-key={node.id} isOpened={node.expanded} dimension={dimension} onClick={onButtonClick}>
-            <Chevron data-key={node.id} $isOpened={node.expanded} dimension={dimension} />
+            <Chevron $isOpened={node.expanded} dimension={dimension} />
           </ChevronWrapper>
         )}
         {'checked' in node && (
