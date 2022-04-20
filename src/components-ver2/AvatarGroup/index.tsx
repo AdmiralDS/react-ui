@@ -5,7 +5,6 @@ import { uid } from '#src/components/common/uid';
 import { DropDownItem } from '#src/components-ver2/DropDownItem';
 import { Avatar } from '#src/components-ver2/Avatar';
 import type { AvatarProps } from '#src/components-ver2/Avatar';
-import { LIGHT_THEME as LIGHT_THEME_ADMIRAL1, DARK_THEME as DARK_THEME_ADMIRAL1 } from '#src/components/themes';
 import { LIGHT_THEME } from '#src/components-ver2/themes';
 
 import { Menu } from './Menu';
@@ -125,24 +124,22 @@ export const AvatarGroup: React.FC<AvatarGroupProps> = ({
         <Menu alignDropdown="flex-start" appearance={appearance} dimension={dimension} onAvatarSelect={onAvatarSelect}>
           {hidden.map(({ id: idProp, onClick, onKeyDown, ...item }) => {
             const id = idProp || uid();
-            // оборачиваю MenuItem в старую тему до тех пор, пока DropdownItem не будет переведен на новые цветовые токены
+
             return (
-              <ThemeProvider theme={theme.name == 'dark' ? DARK_THEME_ADMIRAL1 : LIGHT_THEME_ADMIRAL1} key={id}>
-                <MenuItem
-                  role="option"
-                  key={id}
-                  id={id}
-                  value={item.userName}
-                  dimension="m"
-                  onClick={onClick as any}
-                  onKeyDown={onKeyDown as any}
-                >
-                  <ThemeProvider theme={theme} key={id}>
-                    <Avatar {...item} dimension="xs" appearance={appearance} showTooltip={false} status={undefined} />
-                  </ThemeProvider>
-                  {item.userName}
-                </MenuItem>
-              </ThemeProvider>
+              <MenuItem
+                role="option"
+                key={id}
+                id={id}
+                value={item.userName}
+                dimension="m"
+                onClick={onClick as any}
+                onKeyDown={onKeyDown as any}
+              >
+                <ThemeProvider theme={theme} key={id}>
+                  <Avatar {...item} dimension="xs" appearance={appearance} showTooltip={false} status={undefined} />
+                </ThemeProvider>
+                {item.userName}
+              </MenuItem>
             );
           })}
         </Menu>
