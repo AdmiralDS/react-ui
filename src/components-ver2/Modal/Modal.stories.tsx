@@ -1,7 +1,7 @@
 import { Button } from '#src/components-ver2/Button';
 import { hexToRgba } from '#src/components/common/utils/hexToRgba';
-import { Option } from '#src/components/input/SearchSelect';
-import { SearchSelectField } from '#src/components/form';
+import { Option } from '#src/components-ver2/input/Select';
+import { SelectField } from '#src/components-ver2/form/SelectField';
 import { InputField } from '#src/components-ver2/form';
 import { Modal, ModalButtonPanel, ModalContent, ModalTitle } from '#src/components-ver2/Modal';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
