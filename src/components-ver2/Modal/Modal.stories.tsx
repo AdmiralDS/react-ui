@@ -10,7 +10,6 @@ import { withDesign } from 'storybook-addon-designs';
 import styled, { css, ThemeProvider } from 'styled-components';
 import { useDarkMode } from 'storybook-dark-mode';
 import { DARK_THEME, LIGHT_THEME } from '#src/components-ver2/themes';
-import { DARK_THEME as DARK_THEME_ADMIRAL0, LIGHT_THEME as LIGHT_THEME_ADMIRAL0 } from '#src/components/themes';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -90,21 +89,19 @@ const ModalForm = ({ onYesClick, onNoClick }: Props) => {
       <ModalContent>
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. At cupiditate ducimus nisi nulla numquam obcaecati
         quam quasi quod ut veritatis?
-        <ThemeProvider theme={useDarkMode() ? DARK_THEME_ADMIRAL0 : LIGHT_THEME_ADMIRAL0}>
-          <SearchSelectField
-            label="label"
-            className="Search"
-            value={selected}
-            onChange={handleSelectChange}
-            placeholder="Placeholder"
-          >
-            {OPTIONS_SIMPLE.map((option, ind) => (
-              <Option key={option} value={option} disabled={ind === 4}>
-                {option}
-              </Option>
-            ))}
-          </SearchSelectField>
-        </ThemeProvider>
+        <SelectField
+          label="label"
+          className="Search"
+          value={selected}
+          onChange={handleSelectChange}
+          placeholder="Placeholder"
+        >
+          {OPTIONS_SIMPLE.map((option, ind) => (
+            <Option key={option} value={option} disabled={ind === 4}>
+              {option}
+            </Option>
+          ))}
+        </SelectField>
         <InputField
           label="введите значение"
           value={inputValue}
