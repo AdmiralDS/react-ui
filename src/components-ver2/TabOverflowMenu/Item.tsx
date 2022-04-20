@@ -1,8 +1,6 @@
 import type { FC, ReactNode } from 'react';
-import React, { HTMLAttributes, useContext, useLayoutEffect, useRef, useState } from 'react';
-import styled, { ThemeContext } from 'styled-components';
-
-import { DARK_THEME, LIGHT_THEME } from '#src/components-ver2/themes';
+import React, { HTMLAttributes, useLayoutEffect, useRef, useState } from 'react';
+import styled from 'styled-components';
 
 import { typography } from '#src/components-ver2/Typography';
 import { Badge } from '#src/components-ver2/Badge';
@@ -98,11 +96,6 @@ const DropdownContent = styled.div`
   }
 `;
 
-const InverseTooltip = (props: any) => {
-  const themeContext = useContext(ThemeContext);
-  return <Tooltip {...props} theme={themeContext.name == 'dark' ? LIGHT_THEME : DARK_THEME} />;
-};
-
 interface ItemProps extends HTMLAttributes<HTMLLIElement> {
   id: string;
   dimension: Dimension;
@@ -162,7 +155,7 @@ export const Item: FC<ItemProps> = ({
       onClick={onClick}
       onKeyDown={onKeyDown}
     >
-      {overflow ? <InverseTooltip renderContent={() => content}>{renderContent()}</InverseTooltip> : renderContent()}
+      {overflow ? <Tooltip renderContent={() => content}>{renderContent()}</Tooltip> : renderContent()}
     </DropDownItem>
   );
 };

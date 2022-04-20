@@ -1,8 +1,6 @@
 import * as React from 'react';
-import { ThemeContext } from 'styled-components';
 import type { FC, HTMLAttributes, MouseEvent, ReactNode } from 'react';
 
-import { LIGHT_THEME, DARK_THEME } from '#src/components-ver2/themes';
 import { Tooltip } from '#src/components-ver2/Tooltip';
 
 import {
@@ -24,11 +22,6 @@ export type ChipAppearance = 'filled' | 'outlined';
  */
 const MIN_MEASURABLE_DIFFERENCE = 2;
 const defaultRenderContent = () => '';
-
-const InverseTooltip = (props: any) => {
-  const themeContext = React.useContext(ThemeContext);
-  return <Tooltip {...props} theme={themeContext.name == 'dark' ? LIGHT_THEME : DARK_THEME} />;
-};
 
 export interface ChipsProps extends HTMLAttributes<HTMLDivElement> {
   /** Делает высоту компонента больше или меньше обычной */
@@ -133,7 +126,7 @@ export const Chips: FC<ChipsProps> = ({
     </ChipComponentStyled>
   );
 
-  return withTooltip ? <InverseTooltip renderContent={renderContentTooltip}>{Chip}</InverseTooltip> : Chip;
+  return withTooltip ? <Tooltip renderContent={renderContentTooltip}>{Chip}</Tooltip> : Chip;
 };
 
 Chips.displayName = 'Chips';
