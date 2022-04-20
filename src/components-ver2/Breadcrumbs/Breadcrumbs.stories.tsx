@@ -4,9 +4,9 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import { Link as RouterLink, MemoryRouter as Router } from 'react-router-dom';
 import { useDarkMode } from 'storybook-dark-mode';
-import { DARK_THEME, LIGHT_THEME } from '#src/components-ver2/themes';
 
-import { Breadcrumbs } from '.';
+import { DARK_THEME, LIGHT_THEME } from '#src/components-ver2/themes';
+import { Breadcrumbs } from '#src/components-ver2/Breadcrumbs';
 
 const Separator = styled.div`
   height: 20px;

@@ -2,8 +2,7 @@ import * as React from 'react';
 import { refSetter } from '#src/components/common/utils/refSetter';
 import styled from 'styled-components';
 import { typography } from '#src/components-ver2/Typography';
-
-import { InverseTooltip } from './InverseTooltip';
+import { Tooltip } from '#src/components-ver2/Tooltip';
 
 export const Crumb = styled.li`
   display: flex;
@@ -83,7 +82,7 @@ export const Breadcrumb = React.forwardRef<HTMLLIElement, BreadcrumbProps>(
       <Crumb ref={refSetter(ref, crumbRef)} {...props}>
         <CrumbAnchor href={url} as={linkAs} {...linkProps}>
           <Content tabIndex={-1} role="link">
-            <InverseTooltip renderContent={() => text}>{text.slice(0, 37) + '...'}</InverseTooltip>
+            <Tooltip renderContent={() => text}>{text.slice(0, 37) + '...'}</Tooltip>
             {children}
           </Content>
         </CrumbAnchor>
