@@ -2,7 +2,7 @@ import * as React from 'react';
 import { ThemeProvider } from 'styled-components';
 import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { LIGHT_THEME } from '#src/components/themes';
+import { LIGHT_THEME } from '#src/components-ver2/themes';
 import { IconButton } from '#src/components-ver2/IconButton';
 
 describe('IconButton', () => {
