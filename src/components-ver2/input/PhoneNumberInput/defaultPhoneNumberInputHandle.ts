@@ -1,5 +1,5 @@
 import { CustomInputHandler, InputData } from '#src/components/common/dom/changeInputData';
-import { CountryIso3Code } from '#src/components/input/PhoneNumberInput/constants';
+import { CountryIso3Code } from '#src/components-ver2/input/PhoneNumberInput/constants';
 
 type ParsedData = {
   mask: CountryIso3Code;

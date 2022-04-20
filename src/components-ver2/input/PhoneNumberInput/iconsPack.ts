@@ -1,7 +1,7 @@
 import metadata from '@admiral-ds/icons/metadata.json';
 import * as FlagsIcons from '#src/icons/IconComponents-flags';
 import { ElementType } from 'react';
-import { CountryName } from '#src/components/input/PhoneNumberInput/constants';
+import { CountryName } from '#src/components-ver2/input/PhoneNumberInput/constants';
 
 type IconMeta = {
   name: string;
