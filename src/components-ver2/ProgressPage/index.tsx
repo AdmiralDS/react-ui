@@ -1,7 +1,7 @@
 import type { FC, HTMLAttributes, ReactNode } from 'react';
 import React from 'react';
 import styled from 'styled-components';
-import { TYPOGRAPHY } from '#src/components/Typography';
+import { TYPOGRAPHY } from '#src/components-ver2/Typography';
 
 export type AppearanceProgressPage = 'primary' | 'error';
 
