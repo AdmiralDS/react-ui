@@ -2,7 +2,7 @@ import React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { EditModeField } from './index';
 import { withDesign } from 'storybook-addon-designs';
-import { INPUT_DIMENSIONS_VALUES } from '#src/components/input/types';
+import { INPUT_DIMENSIONS_VALUES } from '#src/components-ver2/input/types';
 import { useDarkMode } from 'storybook-dark-mode';
 import { DARK_THEME, LIGHT_THEME } from '#src/components-ver2/themes';
 import { ThemeProvider } from 'styled-components';

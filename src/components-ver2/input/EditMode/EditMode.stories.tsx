@@ -2,7 +2,7 @@ import React, { ChangeEvent, useState } from 'react';
 import styled, { css, ThemeProvider } from 'styled-components';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
-import { INPUT_DIMENSIONS_VALUES } from '#src/components/input/types';
+import { INPUT_DIMENSIONS_VALUES } from '#src/components-ver2/input/types';
 import { useDarkMode } from 'storybook-dark-mode';
 import { DARK_THEME, LIGHT_THEME } from '#src/components-ver2/themes';
 

@@ -1,6 +1,6 @@
 import { changeInputData, CustomInputHandler, InputData } from '#src/components/common/dom/changeInputData';
 import { refSetter } from '#src/components/common/utils/refSetter';
-import type { ExtraProps, InputStatus, ComponentDimension } from '#src/components/input/types';
+import type { ExtraProps, InputStatus, ComponentDimension } from '#src/components-ver2/input/types';
 import { typography } from '#src/components-ver2/Typography';
 import { ReactComponent as CloseOutlineSvg } from '@admiral-ds/icons/build/service/CloseOutline.svg';
 import type { ForwardedRef, TextareaHTMLAttributes } from 'react';

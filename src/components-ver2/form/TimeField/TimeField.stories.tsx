@@ -1,4 +1,4 @@
-import { INPUT_DIMENSIONS_VALUES } from '#src/components/input';
+import { INPUT_DIMENSIONS_VALUES } from '#src/components-ver2/input';
 import { ChangeEvent, useEffect, useState } from 'react';
 import * as React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';

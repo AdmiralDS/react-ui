@@ -1,4 +1,4 @@
-import { ComponentDimension } from '#src/components/input/types';
+import { ComponentDimension } from '#src/components-ver2/input/types';
 import styled, { css } from 'styled-components';
 
 export const containerHeights = css<{ dimension?: ComponentDimension }>`

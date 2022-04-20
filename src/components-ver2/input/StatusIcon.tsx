@@ -1,4 +1,4 @@
-import { InputStatus } from '#src/components/input/types';
+import { InputStatus } from '#src/components-ver2/input/types';
 import * as React from 'react';
 import { ReactComponent as ErrorStatusSvg } from '@admiral-ds/icons/build/service/ErrorSolid.svg';
 import { ReactComponent as SuccessStatusSvg } from '@admiral-ds/icons/build/service/CheckSolid.svg';

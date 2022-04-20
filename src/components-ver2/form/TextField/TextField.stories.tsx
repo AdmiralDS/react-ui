@@ -1,5 +1,5 @@
 // import { HintDialog } from '#src/components/Hint/styled';
-import { INPUT_DIMENSIONS_VALUES } from '#src/components/input';
+import { INPUT_DIMENSIONS_VALUES } from '#src/components-ver2/input';
 import * as React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { TextField } from '#src/components-ver2/form/TextField';
