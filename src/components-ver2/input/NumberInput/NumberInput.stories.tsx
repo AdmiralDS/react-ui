@@ -94,8 +94,8 @@ const Template0: ComponentStory<typeof NumberInput> = (args) => {
       <NumberInput
         {...args}
         defaultValue="2 ₽"
-        onChange={(fullStr, shortStr) => {
-          console.log({ fullStr, shortStr });
+        onChange={(fullStr, shortStr, event) => {
+          console.log({ fullStr, shortStr, event });
         }}
       />
     </ThemeProvider>
@@ -115,8 +115,8 @@ const Template2: ComponentStory<typeof NumberInput> = (args) => {
     <ThemeProvider theme={useDarkMode() ? DARK_THEME : LIGHT_THEME}>
       <NumberInput
         {...args}
-        onChange={(fullStr, shortStr) => {
-          console.log({ fullStr, shortStr });
+        onChange={(fullStr, shortStr, event) => {
+          console.log({ fullStr, shortStr, event });
         }}
         minValue={0}
         maxValue={2000}
@@ -130,8 +130,8 @@ const Template3: ComponentStory<typeof NumberInput> = (args) => {
     <ThemeProvider theme={useDarkMode() ? DARK_THEME : LIGHT_THEME}>
       <NumberInput
         {...args}
-        onChange={(fullStr, shortStr) => {
-          console.log({ fullStr, shortStr });
+        onChange={(fullStr, shortStr, event) => {
+          console.log({ fullStr, shortStr, event });
         }}
         suffix="$"
         thousand=","
@@ -166,8 +166,8 @@ const Template4: ComponentStory<typeof NumberInput> = () => {
     <ThemeProvider theme={useDarkMode() ? DARK_THEME : LIGHT_THEME}>
       <NumberInput
         value={value1}
-        onChange={(fullStr, shortStr) => {
-          console.log({ fullStr, shortStr });
+        onChange={(fullStr, shortStr, event) => {
+          console.log({ fullStr, shortStr, event });
           setValue1(fullStr);
         }}
         prefix="From"
@@ -176,8 +176,8 @@ const Template4: ComponentStory<typeof NumberInput> = () => {
       />
       <NumberInput
         value={value2}
-        onChange={(fullStr, shortStr) => {
-          console.log({ fullStr, shortStr });
+        onChange={(fullStr, shortStr, event) => {
+          console.log({ fullStr, shortStr, event });
           setValue2(fullStr);
           setSuffix(declOfNum(Number(shortStr), ['минута', 'минуты', 'минут']));
         }}
