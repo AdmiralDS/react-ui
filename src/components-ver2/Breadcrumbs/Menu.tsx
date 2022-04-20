@@ -1,8 +1,8 @@
 import * as React from 'react';
-import styled, { ThemeProvider, ThemeContext } from 'styled-components';
 import { DropDownItem } from '#src/components/DropDownItem';
 import { LIGHT_THEME, DARK_THEME } from '#src/components/themes';
 import { OverflowMenu } from '#src/components/OverflowMenu';
+import styled from 'styled-components';
 
 import type { BreadcrumbProps } from './BreadCrumb';
 import { Tooltip } from '#src/components-ver2/Tooltip';
@@ -34,10 +34,8 @@ export interface MenuButtonProps {
 }
 
 export const MenuButton: React.FC<MenuButtonProps> = ({ options }) => {
-  const themeContext = React.useContext(ThemeContext);
-
   return (
-    <ThemeProvider theme={themeContext.name == 'dark' ? DARK_THEME : LIGHT_THEME}>
+    <>
       <Menu dimension="s">
         {options.map(({ text, url }) => {
           const tooltip = text.length > 40;
@@ -56,6 +54,6 @@ export const MenuButton: React.FC<MenuButtonProps> = ({ options }) => {
           );
         })}
       </Menu>
-    </ThemeProvider>
+    </>
   );
 };
