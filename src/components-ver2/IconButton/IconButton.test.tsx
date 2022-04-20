@@ -3,7 +3,7 @@ import { ThemeProvider } from 'styled-components';
 import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { LIGHT_THEME } from '#src/components/themes';
-import { IconButton } from '#src/components/IconButton';
+import { IconButton } from '#src/components-ver2/IconButton';
 
 describe('IconButton', () => {
   test('should render component', () => {
