@@ -98,11 +98,17 @@ export const SliderInput = React.forwardRef<HTMLInputElement, SliderInputProps>(
 
       onChange?.(fullValue, shortValue);
     };
-    const handleInputChange = (fullStr: string, shortStr: string) => {
-      setInputValue(fullStr);
-      setSliderValue(+shortStr);
+    const handleInputChange = (
+      event: React.ChangeEvent<HTMLInputElement> | React.FocusEvent<HTMLInputElement>,
+      fullStr?: string,
+      shortStr?: string,
+    ) => {
+      const full = fullStr || '';
+      const short = shortStr || '';
+      setInputValue(full);
+      setSliderValue(+short);
 
-      onChange?.(fullStr, shortStr);
+      onChange?.(full, short);
     };
     const handleInputBlur = (event: React.FocusEvent<HTMLInputElement>) => {
       const value = event.currentTarget.value;

@@ -58,16 +58,16 @@ export interface NumberInputProps extends Omit<TextInputProps, 'onChange'> {
   /** Отображать иконки плюса минуса */
   displayPlusMinusIcons?: boolean;
   /** Колбек на изменение значения компонента
-   * 1) fullStr - строка вместе с префиксом/суффиксом/разделителями;
-   * 2) shortStr - строка только с числом;
-   * 3) event - событие ChangeEvent или FocusEvent (колбек onChange может быть вызван не только при изменении значения инпута,
+   * 1) event - событие ChangeEvent или FocusEvent (колбек onChange может быть вызван не только при изменении значения инпута,
    * но и при потере фокуса инпутом, если значение в инпуте выходит за границы minValue/maxValue и требует корректировки.
+   * 2) fullStr - строка вместе с префиксом/суффиксом/разделителями;
+   * 3) shortStr - строка только с числом;
    * Примечание: в качестве value компонента необходимо использовать fullStr (строку вместе с префиксом/суффиксом/разделителями).
    */
   onChange?: (
-    fullStr: string,
-    shortStr: string,
     event: React.ChangeEvent<HTMLInputElement> | React.FocusEvent<HTMLInputElement>,
+    fullStr?: string,
+    shortStr?: string,
   ) => void;
 }
 
@@ -162,7 +162,7 @@ export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
             const fullValue = fitToCurrency(String(minValue), precision, decimal, thousand, prefix, suffix, true);
             const shortValue = clearValue(fullValue, precision, decimal);
 
-            onChange?.(fullValue, shortValue, event);
+            onChange?.(event, fullValue, shortValue);
             inputRef.current.value = fullValue;
             return;
           }
@@ -172,7 +172,7 @@ export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
             const fullValue = fitToCurrency(String(maxValue), precision, decimal, thousand, prefix, suffix, true);
             const shortValue = clearValue(fullValue, precision, decimal);
 
-            onChange?.(fullValue, shortValue, event);
+            onChange?.(event, fullValue, shortValue);
             inputRef.current.value = fullValue;
             return;
           }
@@ -230,7 +230,7 @@ export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       const fullValue = newVal;
       const shortValue = clearValue(newVal, precision, decimal);
 
-      onChange?.(fullValue, shortValue, event);
+      onChange?.(event, fullValue, shortValue);
     };
 
     return (
