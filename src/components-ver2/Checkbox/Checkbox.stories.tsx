@@ -3,7 +3,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { Checkbox } from './index';
 
 import { withDesign } from 'storybook-addon-designs';
-import { ALL_DIMENSIONS_VALUES } from '#src/components/Checkbox/CheckboxDimension';
+import { ALL_DIMENSIONS_VALUES } from '#src/components-ver2/Checkbox/CheckboxDimension';
 import styled, { ThemeProvider } from 'styled-components';
 import { useDarkMode } from 'storybook-dark-mode';
 import { DARK_THEME, LIGHT_THEME } from '#src/components-ver2/themes';
