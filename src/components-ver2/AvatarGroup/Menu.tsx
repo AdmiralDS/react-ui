@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { refSetter } from '#src/components/common/utils/refSetter';
-import { Dropdown } from '#src/components/Dropdown';
+import { Dropdown } from '#src/components-ver2/Dropdown';
 import styled, { ThemeProvider, ThemeContext } from 'styled-components';
 import { Avatar } from '#src/components-ver2/Avatar';
 import type { AvatarProps } from '#src/components-ver2/Avatar';

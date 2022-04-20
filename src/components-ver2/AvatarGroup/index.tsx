@@ -2,7 +2,7 @@ import * as React from 'react';
 import styled, { ThemeProvider, ThemeContext } from 'styled-components';
 import observeRect from '#src/components/common/observeRect';
 import { uid } from '#src/components/common/uid';
-import { DropDownItem } from '#src/components/DropDownItem';
+import { DropDownItem } from '#src/components-ver2/DropDownItem';
 import { Avatar } from '#src/components-ver2/Avatar';
 import type { AvatarProps } from '#src/components-ver2/Avatar';
 import { LIGHT_THEME as LIGHT_THEME_ADMIRAL1, DARK_THEME as DARK_THEME_ADMIRAL1 } from '#src/components/themes';
