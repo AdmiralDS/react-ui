@@ -94,8 +94,8 @@ const Template0: ComponentStory<typeof NumberInput> = (args) => {
       <NumberInput
         {...args}
         defaultValue="2 ₽"
-        onChange={(fullStr, shortStr) => {
-          console.log({ fullStr, shortStr });
+        onChange={(event, fullStr, shortStr) => {
+          console.log({ event, fullStr, shortStr });
         }}
       />
     </ThemeProvider>
@@ -115,8 +115,8 @@ const Template2: ComponentStory<typeof NumberInput> = (args) => {
     <ThemeProvider theme={useDarkMode() ? DARK_THEME : LIGHT_THEME}>
       <NumberInput
         {...args}
-        onChange={(fullStr, shortStr) => {
-          console.log({ fullStr, shortStr });
+        onChange={(event, fullStr, shortStr) => {
+          console.log({ event, fullStr, shortStr });
         }}
         minValue={0}
         maxValue={2000}
@@ -130,8 +130,8 @@ const Template3: ComponentStory<typeof NumberInput> = (args) => {
     <ThemeProvider theme={useDarkMode() ? DARK_THEME : LIGHT_THEME}>
       <NumberInput
         {...args}
-        onChange={(fullStr, shortStr) => {
-          console.log({ fullStr, shortStr });
+        onChange={(event, fullStr, shortStr) => {
+          console.log({ event, fullStr, shortStr });
         }}
         suffix="$"
         thousand=","
@@ -143,8 +143,8 @@ const Template3: ComponentStory<typeof NumberInput> = (args) => {
 };
 
 const Template4: ComponentStory<typeof NumberInput> = () => {
-  const [value1, setValue1] = React.useState('From 50 $');
-  const [value2, setValue2] = React.useState('1 минута');
+  const [value1, setValue1] = React.useState<string | undefined>('From 50 $');
+  const [value2, setValue2] = React.useState<string | undefined>('1 минута');
   const [suffix, setSuffix] = React.useState('минута');
 
   function declOfNum(n: number, text_forms: Array<string>) {
@@ -166,8 +166,8 @@ const Template4: ComponentStory<typeof NumberInput> = () => {
     <ThemeProvider theme={useDarkMode() ? DARK_THEME : LIGHT_THEME}>
       <NumberInput
         value={value1}
-        onChange={(fullStr, shortStr) => {
-          console.log({ fullStr, shortStr });
+        onChange={(event, fullStr, shortStr) => {
+          console.log({ event, fullStr, shortStr });
           setValue1(fullStr);
         }}
         prefix="From"
@@ -176,8 +176,8 @@ const Template4: ComponentStory<typeof NumberInput> = () => {
       />
       <NumberInput
         value={value2}
-        onChange={(fullStr, shortStr) => {
-          console.log({ fullStr, shortStr });
+        onChange={(event, fullStr, shortStr) => {
+          console.log({ event, fullStr, shortStr });
           setValue2(fullStr);
           setSuffix(declOfNum(Number(shortStr), ['минута', 'минуты', 'минут']));
         }}

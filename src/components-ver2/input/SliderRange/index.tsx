@@ -246,8 +246,14 @@ export const SliderRange: React.FC<SliderRangeProps> = ({
       ]);
     }
   };
-  const handleInput1Change = (fullStr: string) => setInput1(fullStr);
-  const handleInput2Change = (fullStr: string) => setInput2(fullStr);
+  const handleInput1Change = (
+    event: React.ChangeEvent<HTMLInputElement> | React.FocusEvent<HTMLInputElement>,
+    fullStr?: string,
+  ) => setInput1(fullStr || '');
+  const handleInput2Change = (
+    event: React.ChangeEvent<HTMLInputElement> | React.FocusEvent<HTMLInputElement>,
+    fullStr?: string,
+  ) => setInput2(fullStr || '');
 
   const inputProps = { dimension, precision, thousand, suffix, disabled, displayPlusMinusIcons: false, step };
 
