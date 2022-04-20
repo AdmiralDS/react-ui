@@ -1,11 +1,10 @@
 import * as React from 'react';
-import { DropDownItem } from '#src/components/DropDownItem';
-import { LIGHT_THEME, DARK_THEME } from '#src/components/themes';
-import { OverflowMenu } from '#src/components/OverflowMenu';
 import styled from 'styled-components';
 
-import type { BreadcrumbProps } from './BreadCrumb';
+import { DropDownItem } from '#src/components-ver2/DropDownItem';
+import { OverflowMenu } from '#src/components-ver2/OverflowMenu';
 import { Tooltip } from '#src/components-ver2/Tooltip';
+import { BreadcrumbProps } from '#src/components-ver2/Breadcrumbs/BreadCrumb';
 
 const Option = styled.a`
   position: relative;
