@@ -1,11 +1,9 @@
-// import { HintDialog } from '#src/components/Hint/styled';
 import { INPUT_DIMENSIONS_VALUES } from '#src/components-ver2/input';
 import * as React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { TextField } from '#src/components-ver2/form/TextField';
 import { withDesign } from 'storybook-addon-designs';
 import { ReactComponent as HelpSolidSVG } from '@admiral-ds/icons/build/service/HelpSolid.svg';
-// import { Hint } from '#src/components/Hint';
 import { T } from '#src/components-ver2/T';
 import styled, { ThemeProvider } from 'styled-components';
 import { useDarkMode } from 'storybook-dark-mode';
