@@ -4,7 +4,7 @@ import { ThemeProvider } from 'styled-components';
 import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { RadioButton } from '#src/components/RadioButton';
+import { RadioButton } from '#src/components-ver2/RadioButton';
 
 describe('RadioButton', () => {
   beforeEach(() => {
