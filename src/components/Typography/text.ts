@@ -29,7 +29,7 @@ export const getTextStyle = ({
  * @deprecated since version 0.0.35
  * Will be deleted in version 0.0.38
  *
- * use component <T font='Main/XXL'/> instead
+ * use component <T font='Header/HL3'/> instead
  */
 export const Main_XXL = styled.div<TextProps>`
   ${({ color }) => getTextStyle({ color, fontSize: 42, fontWeight: 'bold', lineHeight: 52 })};
@@ -39,7 +39,7 @@ export const Main_XXL = styled.div<TextProps>`
  * @deprecated since version 0.0.35
  * Will be deleted in version 0.0.38
  *
- * use component <T font='Main/XX'/> instead
+ * use component <T font='Header/H1'/> instead
  */
 export const Main_XL = styled.div<TextProps>`
   ${({ color }) => getTextStyle({ color, fontSize: 36, fontWeight: 'bold', lineHeight: 44 })};
@@ -49,7 +49,7 @@ export const Main_XL = styled.div<TextProps>`
  * @deprecated since version 0.0.35
  * Will be deleted in version 0.0.38
  *
- * use component <T font='Main/L'/> instead
+ * use component <T font='Header/H2'/> instead
  */
 export const Main_L = styled.h1<TextProps>`
   ${({ color }) => getTextStyle({ color, fontSize: 32, fontWeight: 'bold', lineHeight: 40 })};
@@ -59,7 +59,7 @@ export const Main_L = styled.h1<TextProps>`
  * @deprecated since version 0.0.35
  * Will be deleted in version 0.0.38
  *
- * use component <T font='Main/M'/> instead
+ * use component <T font='Header/H3'/> instead
  */
 export const Main_M = styled.h2<TextProps>`
   ${({ color }) => getTextStyle({ color, fontSize: 28, fontWeight: 'bold', lineHeight: 36 })};
@@ -69,7 +69,7 @@ export const Main_M = styled.h2<TextProps>`
  * @deprecated since version 0.0.35
  * Will be deleted in version 0.0.38
  *
- * use component <T font='Main/S'/> instead
+ * use component <T font='Header/H5'/> instead
  */
 export const Main_S = styled.h3<TextProps>`
   ${({ color }) => getTextStyle({ color, fontSize: 22, fontWeight: 'bold', lineHeight: 28 })};
@@ -79,7 +79,7 @@ export const Main_S = styled.h3<TextProps>`
  * @deprecated since version 0.0.35
  * Will be deleted in version 0.0.38
  *
- * use component <T font='Main/XS-bold'/> instead
+ * use component <T font='Header/H6'/> instead
  */
 export const Main_XS_bold = styled.h4<TextProps>`
   ${({ color }) => getTextStyle({ color, fontSize: 18, fontWeight: 'bold', lineHeight: 24 })};
@@ -89,7 +89,7 @@ export const Main_XS_bold = styled.h4<TextProps>`
  * @deprecated since version 0.0.35
  * Will be deleted in version 0.0.38
  *
- * use component <T font='Main/XS'/> instead
+ * use component <T font='Subtitle/Subtitle 1'/> instead
  */
 export const Main_XS_normal = styled.h5<TextProps>`
   ${({ color }) =>
@@ -105,7 +105,7 @@ export const Main_XS_normal = styled.h5<TextProps>`
  * @deprecated since version 0.0.35
  * Will be deleted in version 0.0.38
  *
- * use component <T font='Additional/L-bold'/> instead
+ * use component <T font='Subtitle/Subtitle 2'/> instead
  */
 export const Additional_L_bold = styled.h6<TextProps>`
   ${({ color }) => getTextStyle({ color, fontSize: 16, fontWeight: 'bold', lineHeight: 24 })};
@@ -115,7 +115,7 @@ export const Additional_L_bold = styled.h6<TextProps>`
  * @deprecated since version 0.0.35
  * Will be deleted in version 0.0.38
  *
- * use component <T font='Additional/L'/> instead
+ * use component <T font='Body/Body 1 Long'/> instead
  */
 export const Additional_L_normal = styled.div<TextProps>`
   ${({ color }) =>
@@ -131,7 +131,7 @@ export const Additional_L_normal = styled.div<TextProps>`
  * @deprecated since version 0.0.35
  * Will be deleted in version 0.0.38
  *
- * use component <T font='Additional/M'/> instead
+ * use component <T font='Body/Body 1 Short'/> instead
  */
 export const Additional_M_normal = styled.div<TextProps>`
   ${({ color }) =>
@@ -147,7 +147,7 @@ export const Additional_M_normal = styled.div<TextProps>`
  * @deprecated since version 0.0.35
  * Will be deleted in version 0.0.38
  *
- * use component <T font='Additional/S-bold'/> instead
+ * use component <T font='Subtitle/Subtitle 3'/> instead
  */
 export const Additional_S_bold = styled.div<TextProps>`
   ${({ color }) => getTextStyle({ color, fontSize: 14, fontWeight: 'bold', lineHeight: 20 })};
@@ -157,7 +157,7 @@ export const Additional_S_bold = styled.div<TextProps>`
  * @deprecated since version 0.0.35
  * Will be deleted in version 0.0.38
  *
- * use component <T font='Additional/S'/> instead
+ * use component <T font='Body/Body 2 Long'/> instead
  */
 export const Additional_S_normal = styled.div<TextProps>`
   ${({ color }) =>
@@ -173,7 +173,7 @@ export const Additional_S_normal = styled.div<TextProps>`
  * @deprecated since version 0.0.35
  * Will be deleted in version 0.0.38
  *
- * use component <T font='Additional/XS'/> instead
+ * use component <T font='Body/Body 2 Short'/> instead
  */
 export const Additional_XS_normal = styled.div<TextProps>`
   ${({ color }) =>
@@ -189,7 +189,7 @@ export const Additional_XS_normal = styled.div<TextProps>`
  * @deprecated since version 0.0.35
  * Will be deleted in version 0.0.38
  *
- * use component <T font='Button/M'/> instead
+ * use component <T font='Button/Button 1'/> instead
  */
 export const Button_M = styled.div<TextProps>`
   ${({ color }) =>
@@ -205,7 +205,7 @@ export const Button_M = styled.div<TextProps>`
  * @deprecated since version 0.0.35
  * Will be deleted in version 0.0.38
  *
- * use component <T font='Button/S'/> instead
+ * use component <T font='Button/Button 2'/> instead
  */
 export const Button_S = styled.div<TextProps>`
   ${({ color }) =>
@@ -221,7 +221,7 @@ export const Button_S = styled.div<TextProps>`
  * @deprecated since version 0.0.35
  * Will be deleted in version 0.0.38
  *
- * use component <T font='Caption/XS'/> instead
+ * use component <T font='Caption/Caption 1'/> instead
  */
 export const Caption_XS = styled.div<TextProps>`
   ${({ color }) =>

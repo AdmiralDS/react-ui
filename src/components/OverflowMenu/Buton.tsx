@@ -2,15 +2,22 @@ import type { ButtonHTMLAttributes, ReactNode } from 'react';
 import * as React from 'react';
 import styled, { css } from 'styled-components';
 
-import { ReactComponent as ButtonL } from './svgs/ButtonL.svg';
-import { ReactComponent as ButtonM } from './svgs/ButtonM.svg';
-import { ReactComponent as ButtonS } from './svgs/ButtonS.svg';
+import { ReactComponent as ButtonL } from '#src/components/OverflowMenu/svgs/ButtonL.svg';
+import { ReactComponent as ButtonM } from '#src/components/OverflowMenu/svgs/ButtonM.svg';
+import { ReactComponent as ButtonS } from '#src/components/OverflowMenu/svgs/ButtonS.svg';
 
 export type Dimension = 'l' | 'm' | 's';
 
+export const SIZE = {
+  l: 36,
+  m: 32,
+  s: 24,
+};
+
 const focusStyle = css`
+  background-color: transparent;
   & *[fill^='#'] {
-    fill: ${({ theme }) => theme.color.basic.hover};
+    fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
   }
 
   &:before {
@@ -20,7 +27,7 @@ const focusStyle = css`
     left: -4px;
     bottom: -4px;
     right: -4px;
-    border: 2px solid ${({ theme }) => theme.color.basic.hover};
+    border: 2px solid ${({ theme }) => theme.color['Primary/Primary 60 Main']};
     border-radius: 4px;
   }
 `;
@@ -38,17 +45,24 @@ const ButtonComponent = styled.button<{ dimension: Dimension; menuOpened: boolea
   background: transparent;
   -webkit-tap-highlight-color: transparent;
   overflow: visible;
+  height: ${({ dimension }) => SIZE[dimension]}px;
+  width: ${({ dimension }) => SIZE[dimension]}px;
 
   & svg {
     flex-shrink: 0;
   }
 
   & *[fill^='#'] {
-    fill: ${({ theme }) => theme.color.text.secondary};
+    fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
+  }
+
+  &:hover {
+    border-radius: 50%;
+    background-color: ${({ theme }) => theme.color['Opacity/Hover']};
   }
 
   &:hover *[fill^='#'] {
-    fill: ${({ theme }) => theme.color.basic.hover};
+    fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
   }
 
   ${({ menuOpened }) => menuOpened && focusStyle}
@@ -56,15 +70,20 @@ const ButtonComponent = styled.button<{ dimension: Dimension; menuOpened: boolea
     ${focusStyle}
   }
 
+  &:active {
+    border-radius: 50%;
+    background-color: ${({ theme }) => theme.color['Opacity/Focus']};
+  }
+
   &:active *[fill^='#'] {
-    fill: ${({ theme }) => theme.color.basic.press};
+    fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
   }
 
   &:disabled {
     cursor: default;
 
     & *[fill^='#'] {
-      fill: ${({ theme }) => theme.color.text.tertiary};
+      fill: ${({ theme }) => theme.color['Neutral/Neutral 30']};
     }
   }
 `;
@@ -73,7 +92,6 @@ export const ButtonContent = styled.span`
   position: relative;
   display: inline-flex;
   align-items: center;
-  width: 100%;
   height: 100%;
 `;
 

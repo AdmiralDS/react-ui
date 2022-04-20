@@ -10,9 +10,9 @@ import { refSetter } from '#src/components/common/utils/refSetter';
 const Container = styled.div<{ alignSelf?: string }>`
   pointer-events: initial;
   margin: 8px 0;
-  background-color: ${(p) => p.theme.color.background.primary};
+  background-color: ${(p) => p.theme.color['Special/Elevated BG']};
   border-radius: 4px;
-  ${(p) => p.theme.shadow.NonClickable}
+  ${(p) => p.theme.shadow['Shadow 08']}
   flex: 0 0 auto;
   ${(p) => (p.alignSelf ? `align-self: ${p.alignSelf};` : '')};
   max-width: calc(100vw - 32px);

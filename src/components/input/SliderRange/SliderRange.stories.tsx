@@ -1,8 +1,8 @@
 import React from 'react';
-import styled from 'styled-components';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import { SliderRange } from './index';
+import styled from 'styled-components';
 
 const Separator = styled.div`
   height: 20px;
@@ -23,16 +23,26 @@ const Description = () => (
 );
 
 export default {
-  title: 'Input/SliderRange',
+  title: 'Admiral-2.1/Input/SliderRange',
   decorators: [withDesign],
   component: SliderRange,
   parameters: {
     componentSubtitle: <Description />,
     layout: 'centered',
-    design: {
-      type: 'figma',
-      url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A61377',
-    },
+    design: [
+      {
+        type: 'figma',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A61377',
+      },
+      {
+        type: 'figma',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A61446',
+      },
+      {
+        type: 'figma',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A61513',
+      },
+    ],
   },
   argTypes: {
     disabled: {
@@ -46,18 +56,24 @@ export default {
 
 const Template1: ComponentStory<typeof SliderRange> = ({ defaultValue, onChange, ...args }) => {
   const handleChange = (value: any) => console.log(value);
-  return <SliderRange defaultValue={defaultValue || ['2', '6']} onChange={onChange || handleChange} {...args} />;
+  return (
+    <>
+      <SliderRange defaultValue={defaultValue || ['2', '6']} onChange={onChange || handleChange} {...args} />
+    </>
+  );
 };
 
 const Template2: ComponentStory<typeof SliderRange> = () => {
   return (
-    <SliderRange
-      onChange={(value: any) => console.log(value)}
-      minValue={10}
-      maxValue={100}
-      prefix={['From', 'To']}
-      suffix="$"
-    />
+    <>
+      <SliderRange
+        onChange={(value: any) => console.log(value)}
+        minValue={10}
+        maxValue={100}
+        prefix={['From', 'To']}
+        suffix="$"
+      />
+    </>
   );
 };
 

@@ -5,18 +5,18 @@ import { withDesign } from 'storybook-addon-designs';
 import { INPUT_DIMENSIONS_VALUES } from '#src/components/input/types';
 
 export default {
-  title: 'Form Field Components/EditModeField',
+  title: 'Admiral-2.1/Form Field/EditModeField',
   component: EditModeField,
   decorators: [withDesign],
   parameters: {
     design: [
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=108393%3A70235',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=38%3A10602',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=38%3A10901',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=38%3A10901',
       },
     ],
   },
@@ -79,7 +79,11 @@ const Template1: ComponentStory<typeof EditModeField> = (props) => {
     props.onChange?.(e);
   };
 
-  return <EditModeField {...props} value={localValue} onChange={handleChange} label="Label" />;
+  return (
+    <>
+      <EditModeField {...props} value={localValue} onChange={handleChange} label="Label" />
+    </>
+  );
 };
 
 const Template2: ComponentStory<typeof EditModeField> = (props) => {
@@ -93,14 +97,16 @@ const Template2: ComponentStory<typeof EditModeField> = (props) => {
   };
 
   return (
-    <EditModeField
-      value={localValue}
-      onChange={handleChange}
-      onEdit={() => setExtraText('Additional text')}
-      onConfirm={() => setExtraText(undefined)}
-      label="Поле для ввода логина (не более 6 символов)"
-      extraText={extraText}
-    />
+    <>
+      <EditModeField
+        value={localValue}
+        onChange={handleChange}
+        onEdit={() => setExtraText('Additional text')}
+        onConfirm={() => setExtraText(undefined)}
+        label="Поле для ввода логина (не более 6 символов)"
+        extraText={extraText}
+      />
+    </>
   );
 };
 
@@ -123,14 +129,16 @@ const Template3: ComponentStory<typeof EditModeField> = (props) => {
   };
 
   return (
-    <EditModeField
-      value={localValue}
-      onChange={handleChange}
-      onSubmit={() => setExtraText(undefined)}
-      status={status}
-      label="Поле для ввода логина (не более 6 символов)"
-      extraText={extraText}
-    />
+    <>
+      <EditModeField
+        value={localValue}
+        onChange={handleChange}
+        onSubmit={() => setExtraText(undefined)}
+        status={status}
+        label="Поле для ввода логина (не более 6 символов)"
+        extraText={extraText}
+      />
+    </>
   );
 };
 

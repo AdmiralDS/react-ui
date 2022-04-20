@@ -1,5 +1,5 @@
-import { HTMLAttributes, FC, ReactNode } from 'react';
 import * as React from 'react';
+import { FC, HTMLAttributes, ReactNode } from 'react';
 import styled, { css, DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import { typography } from '#src/components/Typography';
 
@@ -11,12 +11,12 @@ const Circle = styled.div``;
 
 const cssDefault = css`
   > ${Text} {
-    color: ${(p) => p.theme.color.text.primary};
+    color: ${(p) => p.theme.color['Neutral/Neutral 90']};
   }
   > ${Circle} {
     svg {
       path {
-        fill: ${(p) => p.theme.color.text.secondary};
+        fill: ${(p) => p.theme.color['Neutral/Neutral 50']};
       }
     }
   }

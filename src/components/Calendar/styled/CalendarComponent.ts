@@ -25,6 +25,7 @@ export const CalendarComponent = styled.div<CalendarComponentProps>`
   }};
 
   width: ${CALENDAR_WIDTH}px;
-  background: ${({ theme }) => theme.color.background.primary};
+  background: ${({ theme }) => theme.color['Special/Elevated BG']};
   ${typography['Body/Body 2 Long']}
+  color: ${({ theme }) => theme.color['Neutral/Neutral 90']}
 `;

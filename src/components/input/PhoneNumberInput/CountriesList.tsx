@@ -29,9 +29,8 @@ const StyledCountriesList = styled.ul<{ dimension: Dimension }>`
   margin: 0;
   overflow-x: hidden;
   overflow-y: auto;
-  background-color: ${(p) => p.theme.color.background.primary};
   border-radius: 4px;
-  ${(p) => p.theme.shadow.NonClickable}
+  ${(p) => p.theme.shadow['Shadow 08']}
   flex: 0 0 auto;
   max-height: ${(p) => (p.dimension === 'xl' ? '192px' : p.dimension === 'm' ? '160px' : '128px')};
   ${(p) => (p.dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}

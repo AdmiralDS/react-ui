@@ -22,14 +22,14 @@ const Description = () => (
 );
 
 export default {
-  title: 'Example/PaginationSimple',
+  title: 'Admiral-2.1/PaginationSimple',
   decorators: [withDesign],
   component: PaginationSimple,
   parameters: {
     componentSubtitle: <Description />,
     design: {
       type: 'figma',
-      url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A41560',
+      url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A41560',
     },
   },
   argTypes: {
@@ -46,16 +46,18 @@ const Template1: ComponentStory<typeof PaginationSimple> = ({ totalItems, curren
   const [current, setCurrent] = React.useState(1);
   const items = ['first item', 'second item', 'third item', 'forth item', 'fifth item', 'sixth item'];
   return (
-    <PaginationSimple
-      {...args}
-      totalItems={totalItems || 5}
-      currentItem={currentItem || current}
-      onChange={(_, item) => setCurrent(item)}
-    >
-      {items.map((item) => (
-        <PaginationSimpleItem aria-label={item} key={item} />
-      ))}
-    </PaginationSimple>
+    <>
+      <PaginationSimple
+        {...args}
+        totalItems={totalItems || 5}
+        currentItem={currentItem || current}
+        onChange={(_, item) => setCurrent(item)}
+      >
+        {items.map((item) => (
+          <PaginationSimpleItem aria-label={item} key={item} />
+        ))}
+      </PaginationSimple>
+    </>
   );
 };
 

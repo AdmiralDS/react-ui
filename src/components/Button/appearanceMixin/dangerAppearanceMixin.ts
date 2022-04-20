@@ -1,31 +1,31 @@
 import { css } from 'styled-components';
 
 export const dangerAppearanceMixin = css`
-  background-color: ${({ theme }) => theme.color.status.danger};
-  color: ${({ theme }) => theme.color.text.staticWhite};
-  border: 2px solid ${({ theme }) => theme.color.status.danger};
+  background-color: ${({ theme }) => theme.color['Error/Error 60 Main']};
+  color: ${({ theme }) => theme.color['Special/Static White']};
+  border: 1px solid ${({ theme }) => theme.color['Error/Error 60 Main']};
   & *[fill^='#'] {
-    fill: ${({ theme }) => theme.color.text.staticWhite};
+    fill: ${({ theme }) => theme.color['Special/Static White']};
   }
 
   &:focus,
   &:hover {
-    background-color: ${({ theme }) => theme.color.status.hoverDanger};
-    border-color: ${({ theme }) => theme.color.status.hoverDanger};
+    background-color: ${({ theme }) => theme.color['Error/Error 70']};
+    border-color: ${({ theme }) => theme.color['Error/Error 70']};
   }
 
   &:active {
-    background-color: ${({ theme }) => theme.color.status.pressDanger};
-    border-color: ${({ theme }) => theme.color.status.pressDanger};
+    background-color: ${({ theme }) => theme.color['Error/Error 80']};
+    border-color: ${({ theme }) => theme.color['Error/Error 80']};
   }
 
   &[data-appearance~='disabled'],
   &:disabled {
-    background-color: ${({ theme }) => theme.color.basic.disable};
-    color: ${({ theme }) => theme.color.text.inversion};
-    border-color: ${({ theme }) => theme.color.basic.disable};
+    background-color: ${({ theme }) => theme.color['Neutral/Neutral 10']};
+    color: ${({ theme }) => theme.color['Neutral/Neutral 30']};
+    border-color: ${({ theme }) => theme.color['Neutral/Neutral 10']};
     & *[fill^='#'] {
-      fill: ${({ theme }) => theme.color.text.inversion};
+      fill: ${({ theme }) => theme.color['Neutral/Neutral 30']};
     }
   }
 `;

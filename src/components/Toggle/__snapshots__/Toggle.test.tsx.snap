@@ -11,25 +11,36 @@ Object {
 }
 
 .c1:checked + span {
-  background: #0D69F2;
+  background: #0062FF;
 }
 
 .c1:checked + span:before {
   left: calc(100% - 2px - 16px);
 }
 
+.c1:checked + span:hover:after {
+  visibility: visible;
+  left: calc(100% + -12px - 16px);
+}
+
 .c1:disabled + span {
-  background: #A7B0BE;
+  background: #B1B5BB;
 }
 
 .c1:checked:not(:disabled):hover + span,
 .c1:checked:not(:disabled):focus + span {
-  background: #0A54C2;
+  background: #0062FF;
+}
+
+.c1:checked:not(:disabled):hover + span:hover:after,
+.c1:checked:not(:disabled):focus + span:hover:after {
+  visibility: visible;
+  left: calc(100% + -12px - 16px);
 }
 
 .c1:not(:checked):not(:disabled):hover + span,
 .c1:not(:checked):not(:disabled):focus + span {
-  background: #626F84;
+  background: #74777F;
 }
 
 .c3 {
@@ -47,8 +58,7 @@ Object {
   font-size: 16px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
-  color: #A7B0BE;
+  color: #B1B5BB;
 }
 
 .c2 {
@@ -59,7 +69,7 @@ Object {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
-  background: #8A96A8;
+  background: #74777F;
 }
 
 .c2:before {
@@ -73,6 +83,22 @@ Object {
   background: #FFFFFF;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
+}
+
+.c2:after {
+  content: '';
+  visibility: hidden;
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  width: 36px;
+  height: 36px;
+  border-radius: 36px;
+  background: #0000000D;
+}
+
+.c2:hover:after {
+  visibility: visible;
 }
 
 .c0 {
@@ -138,25 +164,36 @@ Object {
 }
 
 .c1:checked + span {
-  background: #0D69F2;
+  background: #0062FF;
 }
 
 .c1:checked + span:before {
   left: calc(100% - 2px - 16px);
 }
 
+.c1:checked + span:hover:after {
+  visibility: visible;
+  left: calc(100% + -12px - 16px);
+}
+
 .c1:disabled + span {
-  background: #A7B0BE;
+  background: #B1B5BB;
 }
 
 .c1:checked:not(:disabled):hover + span,
 .c1:checked:not(:disabled):focus + span {
-  background: #0A54C2;
+  background: #0062FF;
+}
+
+.c1:checked:not(:disabled):hover + span:hover:after,
+.c1:checked:not(:disabled):focus + span:hover:after {
+  visibility: visible;
+  left: calc(100% + -12px - 16px);
 }
 
 .c1:not(:checked):not(:disabled):hover + span,
 .c1:not(:checked):not(:disabled):focus + span {
-  background: #626F84;
+  background: #74777F;
 }
 
 .c3 {
@@ -174,8 +211,7 @@ Object {
   font-size: 16px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
-  color: #A7B0BE;
+  color: #B1B5BB;
 }
 
 .c2 {
@@ -186,7 +222,7 @@ Object {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
-  background: #8A96A8;
+  background: #74777F;
 }
 
 .c2:before {
@@ -200,6 +236,22 @@ Object {
   background: #FFFFFF;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
+}
+
+.c2:after {
+  content: '';
+  visibility: hidden;
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  width: 36px;
+  height: 36px;
+  border-radius: 36px;
+  background: #0000000D;
+}
+
+.c2:hover:after {
+  visibility: visible;
 }
 
 .c0 {
@@ -320,25 +372,36 @@ Object {
 }
 
 .c1:checked + span {
-  background: #0D69F2;
+  background: #0062FF;
 }
 
 .c1:checked + span:before {
   left: calc(100% - 2px - 16px);
 }
 
+.c1:checked + span:hover:after {
+  visibility: visible;
+  left: calc(100% + -12px - 16px);
+}
+
 .c1:disabled + span {
-  background: #A7B0BE;
+  background: #B1B5BB;
 }
 
 .c1:checked:not(:disabled):hover + span,
 .c1:checked:not(:disabled):focus + span {
-  background: #0A54C2;
+  background: #0062FF;
+}
+
+.c1:checked:not(:disabled):hover + span:hover:after,
+.c1:checked:not(:disabled):focus + span:hover:after {
+  visibility: visible;
+  left: calc(100% + -12px - 16px);
 }
 
 .c1:not(:checked):not(:disabled):hover + span,
 .c1:not(:checked):not(:disabled):focus + span {
-  background: #626F84;
+  background: #74777F;
 }
 
 .c3 {
@@ -356,8 +419,7 @@ Object {
   font-size: 16px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
-  color: #2B313B;
+  color: #22242A;
 }
 
 .c2 {
@@ -368,7 +430,7 @@ Object {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
-  background: #8A96A8;
+  background: #74777F;
 }
 
 .c2:before {
@@ -382,6 +444,22 @@ Object {
   background: #FFFFFF;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
+}
+
+.c2:after {
+  content: '';
+  visibility: hidden;
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  width: 36px;
+  height: 36px;
+  border-radius: 36px;
+  background: #0000000D;
+}
+
+.c2:hover:after {
+  visibility: visible;
 }
 
 .c0 {
@@ -443,25 +521,36 @@ Object {
 }
 
 .c1:checked + span {
-  background: #0D69F2;
+  background: #0062FF;
 }
 
 .c1:checked + span:before {
   left: calc(100% - 2px - 16px);
 }
 
+.c1:checked + span:hover:after {
+  visibility: visible;
+  left: calc(100% + -12px - 16px);
+}
+
 .c1:disabled + span {
-  background: #A7B0BE;
+  background: #B1B5BB;
 }
 
 .c1:checked:not(:disabled):hover + span,
 .c1:checked:not(:disabled):focus + span {
-  background: #0A54C2;
+  background: #0062FF;
+}
+
+.c1:checked:not(:disabled):hover + span:hover:after,
+.c1:checked:not(:disabled):focus + span:hover:after {
+  visibility: visible;
+  left: calc(100% + -12px - 16px);
 }
 
 .c1:not(:checked):not(:disabled):hover + span,
 .c1:not(:checked):not(:disabled):focus + span {
-  background: #626F84;
+  background: #74777F;
 }
 
 .c3 {
@@ -479,8 +568,7 @@ Object {
   font-size: 16px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
-  color: #2B313B;
+  color: #22242A;
 }
 
 .c2 {
@@ -491,7 +579,7 @@ Object {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
-  background: #8A96A8;
+  background: #74777F;
 }
 
 .c2:before {
@@ -505,6 +593,22 @@ Object {
   background: #FFFFFF;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
+}
+
+.c2:after {
+  content: '';
+  visibility: hidden;
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  width: 36px;
+  height: 36px;
+  border-radius: 36px;
+  background: #0000000D;
+}
+
+.c2:hover:after {
+  visibility: visible;
 }
 
 .c0 {
@@ -621,25 +725,36 @@ Object {
 }
 
 .c1:checked + span {
-  background: #0D69F2;
+  background: #0062FF;
 }
 
 .c1:checked + span:before {
   left: calc(100% - 2px - 16px);
 }
 
+.c1:checked + span:hover:after {
+  visibility: visible;
+  left: calc(100% + -12px - 16px);
+}
+
 .c1:disabled + span {
-  background: #A7B0BE;
+  background: #B1B5BB;
 }
 
 .c1:checked:not(:disabled):hover + span,
 .c1:checked:not(:disabled):focus + span {
-  background: #0A54C2;
+  background: #0062FF;
+}
+
+.c1:checked:not(:disabled):hover + span:hover:after,
+.c1:checked:not(:disabled):focus + span:hover:after {
+  visibility: visible;
+  left: calc(100% + -12px - 16px);
 }
 
 .c1:not(:checked):not(:disabled):hover + span,
 .c1:not(:checked):not(:disabled):focus + span {
-  background: #626F84;
+  background: #74777F;
 }
 
 .c3 {
@@ -657,8 +772,7 @@ Object {
   font-size: 16px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
-  color: #2B313B;
+  color: #22242A;
 }
 
 .c2 {
@@ -669,7 +783,7 @@ Object {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
-  background: #8A96A8;
+  background: #74777F;
 }
 
 .c2:before {
@@ -683,6 +797,22 @@ Object {
   background: #FFFFFF;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
+}
+
+.c2:after {
+  content: '';
+  visibility: hidden;
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  width: 36px;
+  height: 36px;
+  border-radius: 36px;
+  background: #0000000D;
+}
+
+.c2:hover:after {
+  visibility: visible;
 }
 
 .c0 {
@@ -744,25 +874,36 @@ Object {
 }
 
 .c1:checked + span {
-  background: #0D69F2;
+  background: #0062FF;
 }
 
 .c1:checked + span:before {
   left: calc(100% - 2px - 16px);
 }
 
+.c1:checked + span:hover:after {
+  visibility: visible;
+  left: calc(100% + -12px - 16px);
+}
+
 .c1:disabled + span {
-  background: #A7B0BE;
+  background: #B1B5BB;
 }
 
 .c1:checked:not(:disabled):hover + span,
 .c1:checked:not(:disabled):focus + span {
-  background: #0A54C2;
+  background: #0062FF;
+}
+
+.c1:checked:not(:disabled):hover + span:hover:after,
+.c1:checked:not(:disabled):focus + span:hover:after {
+  visibility: visible;
+  left: calc(100% + -12px - 16px);
 }
 
 .c1:not(:checked):not(:disabled):hover + span,
 .c1:not(:checked):not(:disabled):focus + span {
-  background: #626F84;
+  background: #74777F;
 }
 
 .c3 {
@@ -780,8 +921,7 @@ Object {
   font-size: 16px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
-  color: #2B313B;
+  color: #22242A;
 }
 
 .c2 {
@@ -792,7 +932,7 @@ Object {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
-  background: #8A96A8;
+  background: #74777F;
 }
 
 .c2:before {
@@ -806,6 +946,22 @@ Object {
   background: #FFFFFF;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
+}
+
+.c2:after {
+  content: '';
+  visibility: hidden;
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  width: 36px;
+  height: 36px;
+  border-radius: 36px;
+  background: #0000000D;
+}
+
+.c2:hover:after {
+  visibility: visible;
 }
 
 .c0 {
@@ -922,25 +1078,36 @@ Object {
 }
 
 .c1:checked + span {
-  background: #0D69F2;
+  background: #0062FF;
 }
 
 .c1:checked + span:before {
   left: calc(100% - 2px - 12px);
 }
 
+.c1:checked + span:hover:after {
+  visibility: visible;
+  left: calc(100% + -12px - 12px);
+}
+
 .c1:disabled + span {
-  background: #A7B0BE;
+  background: #B1B5BB;
 }
 
 .c1:checked:not(:disabled):hover + span,
 .c1:checked:not(:disabled):focus + span {
-  background: #0A54C2;
+  background: #0062FF;
+}
+
+.c1:checked:not(:disabled):hover + span:hover:after,
+.c1:checked:not(:disabled):focus + span:hover:after {
+  visibility: visible;
+  left: calc(100% + -12px - 12px);
 }
 
 .c1:not(:checked):not(:disabled):hover + span,
 .c1:not(:checked):not(:disabled):focus + span {
-  background: #626F84;
+  background: #74777F;
 }
 
 .c3 {
@@ -958,8 +1125,7 @@ Object {
   font-size: 14px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
-  color: #2B313B;
+  color: #22242A;
 }
 
 .c2 {
@@ -970,7 +1136,7 @@ Object {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
-  background: #8A96A8;
+  background: #74777F;
 }
 
 .c2:before {
@@ -984,6 +1150,22 @@ Object {
   background: #FFFFFF;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
+}
+
+.c2:after {
+  content: '';
+  visibility: hidden;
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  width: 32px;
+  height: 32px;
+  border-radius: 32px;
+  background: #0000000D;
+}
+
+.c2:hover:after {
+  visibility: visible;
 }
 
 .c0 {
@@ -1045,25 +1227,36 @@ Object {
 }
 
 .c1:checked + span {
-  background: #0D69F2;
+  background: #0062FF;
 }
 
 .c1:checked + span:before {
   left: calc(100% - 2px - 12px);
 }
 
+.c1:checked + span:hover:after {
+  visibility: visible;
+  left: calc(100% + -12px - 12px);
+}
+
 .c1:disabled + span {
-  background: #A7B0BE;
+  background: #B1B5BB;
 }
 
 .c1:checked:not(:disabled):hover + span,
 .c1:checked:not(:disabled):focus + span {
-  background: #0A54C2;
+  background: #0062FF;
+}
+
+.c1:checked:not(:disabled):hover + span:hover:after,
+.c1:checked:not(:disabled):focus + span:hover:after {
+  visibility: visible;
+  left: calc(100% + -12px - 12px);
 }
 
 .c1:not(:checked):not(:disabled):hover + span,
 .c1:not(:checked):not(:disabled):focus + span {
-  background: #626F84;
+  background: #74777F;
 }
 
 .c3 {
@@ -1081,8 +1274,7 @@ Object {
   font-size: 14px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
-  color: #2B313B;
+  color: #22242A;
 }
 
 .c2 {
@@ -1093,7 +1285,7 @@ Object {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
-  background: #8A96A8;
+  background: #74777F;
 }
 
 .c2:before {
@@ -1107,6 +1299,22 @@ Object {
   background: #FFFFFF;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
+}
+
+.c2:after {
+  content: '';
+  visibility: hidden;
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  width: 32px;
+  height: 32px;
+  border-radius: 32px;
+  background: #0000000D;
+}
+
+.c2:hover:after {
+  visibility: visible;
 }
 
 .c0 {

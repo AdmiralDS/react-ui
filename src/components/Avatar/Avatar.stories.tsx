@@ -2,9 +2,10 @@ import { withDesign } from 'storybook-addon-designs';
 import * as React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import styled from 'styled-components';
-import { Avatar } from '#src/components/Avatar';
-import type { AvatarProps } from '#src/components/Avatar';
 import { ReactComponent as PersonSolid } from '@admiral-ds/icons/build/system/PersonSolid.svg';
+import { DefaultFontColorName } from '#src/components/themes';
+
+import { Avatar } from '.';
 
 const imageURL = 'https://github.com/DrUNE.png?size=100';
 
@@ -28,11 +29,11 @@ const Text = styled.div`
   font-size: 16px;
   line-height: 24px;
   margin-bottom: 8px;
-  color: rgba(51, 51, 51, 0.75);
+  color: ${({ theme }) => theme.color[DefaultFontColorName]};
 `;
 
 export default {
-  title: 'Example/Avatar',
+  title: 'Admiral-2.1/Avatar',
   decorators: [withDesign],
   component: Avatar,
   parameters: {
@@ -41,7 +42,7 @@ export default {
     ),
     design: {
       type: 'figma',
-      url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=37%3A32367',
+      url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=37%3A32367',
     },
   },
   argTypes: {
@@ -58,8 +59,12 @@ export default {
   },
 } as ComponentMeta<typeof Avatar>;
 
-const Template1: ComponentStory<typeof Avatar> = ({ userName, ...args }: AvatarProps) => {
-  return <Avatar userName={userName || 'Just Example'} {...args} />;
+const Template1: ComponentStory<typeof Avatar> = ({ userName, ...args }) => {
+  return (
+    <>
+      <Avatar userName={userName || 'Just Example'} {...args} />
+    </>
+  );
 };
 
 const Template2: ComponentStory<typeof Avatar> = () => (
@@ -87,7 +92,6 @@ const Template2: ComponentStory<typeof Avatar> = () => (
     <Container>
       <Avatar userName="Letter Avatar" />
       <Avatar userName="Icon Avatar" icon={<PersonSolid />} />
-      <Avatar userName="Icon Avatar with customized styles" icon={<PersonSolid style={{ fill: 'green' }} />} />
       <Avatar userName="Image Avatar" href={imageURL} />
     </Container>
     <Text>Статусы компонента</Text>
@@ -104,7 +108,6 @@ const Template2: ComponentStory<typeof Avatar> = () => (
 
 export const Playground = Template1.bind({});
 Playground.args = {};
-//Playground.parameters = { controls: { exclude: ['icon', 'group'] } };
 Playground.storyName = 'Playground';
 
 export const Single = Template2.bind({});

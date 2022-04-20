@@ -4,8 +4,8 @@ import { ThemeProvider } from 'styled-components';
 
 import { LIGHT_THEME } from '../themes';
 
-import { ProgressStepper } from '.';
 import type { ProgressStepperProps } from '.';
+import { ProgressStepper } from '.';
 
 describe('Spinner', () => {
   const steps = [

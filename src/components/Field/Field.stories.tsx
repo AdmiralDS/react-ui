@@ -6,7 +6,7 @@ import { withDesign } from 'storybook-addon-designs';
 import styled from 'styled-components';
 
 export default {
-  title: 'Atoms/Field',
+  title: 'Admiral-2.1/Atoms/Field',
   component: Field,
   decorators: [withDesign],
   argTypes: {
@@ -34,14 +34,16 @@ const Container = styled.div`
 `;
 const Template: ComponentStory<typeof Field> = (props) => {
   return (
-    <Container>
-      <Field {...props}>
-        <TextInput id={props.id} />
-      </Field>
-      <Field label="Inline label" id="some_id" displayInline>
-        <TextInput id="some_id" />
-      </Field>
-    </Container>
+    <>
+      <Container>
+        <Field {...props}>
+          <TextInput id={props.id} />
+        </Field>
+        <Field label="Inline label" id="some_id" displayInline>
+          <TextInput id="some_id" />
+        </Field>
+      </Container>
+    </>
   );
 };
 
@@ -49,7 +51,7 @@ export const FieldStory = Template.bind({});
 
 FieldStory.args = {
   label: 'some label of wrapped component',
-  id: 'some_id_one',
+  id: 'some_id',
 };
 
 FieldStory.storyName = 'Пример обертывания компонента TextInput';

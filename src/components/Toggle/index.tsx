@@ -1,11 +1,11 @@
 import type { ChangeEventHandler, InputHTMLAttributes, ReactNode } from 'react';
 import * as React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-import { typography } from '../Typography';
+import { typography } from '#src/components/Typography';
 
-import type { Dimension, LabelPosition } from './mixins';
-import { sizes, SLIDER_SIZE_M, SLIDER_SIZE_S, sliderSizes } from './mixins';
+import type { Dimension, LabelPosition } from '#src/components/Toggle/mixins';
+import { hoverSizes, sizes, SLIDER_SIZE_M, SLIDER_SIZE_S, sliderSizes } from '#src/components/Toggle/mixins';
 
 export interface ToggleProps extends InputHTMLAttributes<HTMLInputElement> {
   /** Состояние компонента */
@@ -28,8 +28,20 @@ export interface ToggleProps extends InputHTMLAttributes<HTMLInputElement> {
 const LABEL_MARGIN = '8px';
 const BORDER_RADIUS = '10px';
 const SLIDER_INDENT = '2px';
+const HOVER_INDENT_X = '-12px';
+const HOVER_INDENT = '-8px';
 
-const Input = styled.input<{ dimension: Dimension }>`
+const hoverInputStyles = css<{ dimension: Dimension }>`
+  &:hover {
+    &:after {
+      visibility: visible;
+      ${({ dimension }) =>
+        `left: calc(100% + ${HOVER_INDENT_X} - ${dimension === 'm' ? SLIDER_SIZE_M : SLIDER_SIZE_S});`}
+    }
+  }
+`;
+
+const Input = styled.input<{ dimension: Dimension; checked?: boolean }>`
   position: absolute;
   width: 0;
   height: 0;
@@ -40,25 +52,27 @@ const Input = styled.input<{ dimension: Dimension }>`
       ${({ dimension }) =>
         `left: calc(100% - ${SLIDER_INDENT} - ${dimension === 'm' ? SLIDER_SIZE_M : SLIDER_SIZE_S});`}
     }
+    ${hoverInputStyles};
 
-    background: ${({ theme }) => theme.color.basic.primary};
+    background: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
   }
 
   &:disabled + span {
-    background: ${({ theme }) => theme.color.text.tertiary};
+    background: ${({ theme }) => theme.color['Neutral/Neutral 30']};
   }
 
   &:checked:not(:disabled) {
     &:hover + span,
     &:focus + span {
-      background: ${({ theme }) => theme.color.basic.hover};
+      background: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
+      ${hoverInputStyles};
     }
   }
 
   &:not(:checked):not(:disabled) {
     &:hover + span,
     &:focus + span {
-      background: ${({ theme }) => theme.color.text.secondary};
+      background: ${({ theme }) => theme.color['Neutral/Neutral 50']};
     }
   }
 `;
@@ -71,7 +85,7 @@ const Label = styled.div<{
   flex-direction: column;
   ${({ position }) => (position === 'right' ? `margin-left: ${LABEL_MARGIN};` : `margin-right: ${LABEL_MARGIN};`)}
   ${({ dimension }) => (dimension === 's' ? typography['Body/Body 2 Short'] : typography['Body/Body 1 Short'])}
-  color: ${({ disabled, theme }) => (disabled ? theme.color.text.tertiary : theme.color.text.primary)};
+  color: ${({ disabled, theme }) => (disabled ? theme.color['Neutral/Neutral 30'] : theme.color['Neutral/Neutral 90'])};
 `;
 
 const Hint = styled.div<{
@@ -80,12 +94,13 @@ const Hint = styled.div<{
 }>`
   margin-top: 4px;
   ${({ dimension }) => (dimension === 's' ? typography['Caption/Caption 1'] : typography['Body/Body 2 Short'])}
-  color: ${({ theme, disabled }) => (disabled ? theme.color.text.tertiary : theme.color.text.secondary)};
+  color: ${({ theme, disabled }) => (disabled ? theme.color['Neutral/Neutral 30'] : theme.color['Neutral/Neutral 50'])};
 `;
 
 const Slider = styled.span<{
   dimension: Dimension;
   disabled: boolean;
+  checked?: boolean;
 }>`
   position: relative;
   ${sizes}
@@ -98,11 +113,25 @@ const Slider = styled.span<{
     top: ${SLIDER_INDENT};
     left: ${SLIDER_INDENT};
     ${sliderSizes}
-    background: ${({ theme }) => theme.color.background.primary};
+    background: ${({ theme }) => theme.color['Special/Static White']};
     transition: all 0.3s;
   }
+  &:after {
+    content: '';
+    visibility: hidden;
+    position: absolute;
+    top: ${HOVER_INDENT};
+    left: ${HOVER_INDENT};
+    ${hoverSizes}
+    background: ${({ theme }) => theme.color['Opacity/Hover']};
+  }
+  &:hover {
+    &:after {
+      visibility: visible;
+    }
+  }
 
-  background: ${({ theme }) => theme.color.basic.tertiary};
+  background: ${({ theme }) => theme.color['Neutral/Neutral 50']};
 `;
 
 const Wrapper = styled.label<{ width?: number | string; disabled: boolean; labelPosition: LabelPosition }>`
@@ -132,7 +161,7 @@ export const Toggle = React.forwardRef<HTMLInputElement, ToggleProps>(
         aria-checked={props.checked || props['aria-checked']}
       >
         <Input ref={ref} type="checkbox" dimension={dimension} disabled={disabled} {...props} />
-        <Slider dimension={dimension} disabled={disabled} aria-hidden />
+        <Slider dimension={dimension} checked={props.checked} disabled={disabled} aria-hidden />
         {children && (
           <Label dimension={dimension} disabled={disabled} position={labelPosition}>
             {children}

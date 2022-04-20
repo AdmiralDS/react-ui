@@ -1,11 +1,9 @@
-import type { HTMLAttributes, MutableRefObject, ReactNode } from 'react';
 import * as React from 'react';
-import { ReactElement, useRef } from 'react';
+import { ReactElement } from 'react';
 import styled, { css } from 'styled-components';
-import { Dropdown } from '#src/components/Dropdown';
 import type { DropdownProps } from '#src/components/Dropdown';
+import { Dropdown } from '#src/components/Dropdown';
 import { keyboardKey } from '#src/components/common/keyboardKey';
-import { refSetter } from '#src/components/common/utils/refSetter';
 
 export type DropDownDimensions = 'l' | 'm' | 's';
 

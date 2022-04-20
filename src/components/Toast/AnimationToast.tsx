@@ -2,7 +2,7 @@ import type { FC } from 'react';
 import * as React from 'react';
 import styled, { css, keyframes } from 'styled-components';
 import { Notification } from '#src/components/Notification';
-import { useToast } from './useToast';
+import { useToast } from '#src/components/Toast/useToast';
 import type { PositionToasts } from '#src/components/Toast/ToastProvider';
 import type { IdentifyToast } from '#src/components/Toast/type';
 
@@ -42,9 +42,6 @@ export interface ToastTransitionProps {
 
 const Transition = styled.div<{ position?: PositionToasts }>`
   margin-bottom: 16px;
-  &:last-child {
-    margin-bottom: 0;
-  }
   animation-duration: 1s;
   animation-timing-function: ease-out;
   ${fadeMixin}
@@ -56,7 +53,7 @@ interface AnimationToast {
 }
 
 const StyledNotification = styled(Notification)`
-  ${(props) => props.theme.shadow.ClickableDefault}
+  ${(props) => props.theme.shadow['Shadow 08']}
 `;
 
 export const AnimationToast: FC<AnimationToast> = ({ position, item }) => {

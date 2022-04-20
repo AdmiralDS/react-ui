@@ -7,10 +7,6 @@ Object {
   pointer-events: none;
 }
 
-.c10 *[fill^='#'] {
-  fill: #FFFFFF;
-}
-
 .c5 {
   position: relative;
   box-sizing: border-box;
@@ -42,15 +38,19 @@ fieldset[data-dimension='s'] .c4 {
   transition: background 0.1s ease-in;
   line-height: initial;
   background-color: #FFFFFF;
-  border: 1px solid #626F84;
+  border: 1px solid #74777F;
+}
+
+.c9 *[fill^='#'] {
+  fill: #FFFFFF;
 }
 
 .c7 {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  width: calc(100% + 2px);
-  height: calc(100% + 2px);
+  width: 100%;
+  height: 100%;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -59,7 +59,7 @@ fieldset[data-dimension='s'] .c4 {
   transform: translate(-50%,-50%);
   box-sizing: border-box;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 1px;
   margin: 0;
   padding: 0;
 }
@@ -73,7 +73,7 @@ fieldset[data-dimension='s'] .c4 {
 }
 
 .c7:checked + .c8 {
-  background-color: #0D69F2;
+  background-color: #0062FF;
   border: none;
 }
 
@@ -81,60 +81,87 @@ fieldset[data-dimension='s'] .c4 {
   display: none;
 }
 
-.c7:not(:checked):focus + .c8,
-.c7:not(:disabled):not(:checked):hover + .c8 {
-  background-color: #F1F2F4;
-  border: 1px solid #0A54C2;
-}
-
-.c7:checked:focus + .c8,
-.c7:not(:disabled):checked:hover + .c8 {
-  background-color: #0A54C2;
-  border: none;
-}
-
-.c7:not(:checked):disabled + .c8 {
-  background-color: #FFFFFF;
-  border: 1px solid #C4CAD4;
+.c7:not(:disabled):hover::after,
+.c7:not(:disabled):focus::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  border-radius: 50%;
+  width: calc(100% + 16px);
+  height: calc(100% + 16px);
+  background-color: #0000000D;
 }
 
 .c7:disabled + .c8 {
-  background-color: #C4CAD4;
+  border: 1px solid #B1B5BB;
+}
+
+.c7:checked:disabled + .c8 {
+  background-color: #A7C7FF;
   border: none;
+}
+
+.c7:checked:disabled + .c8 *[fill^='#'] {
+  fill: #FFFFFF;
 }
 
 .c7:focus-visible {
   outline-offset: 2px;
-  outline: #0A54C2 solid 2px;
+  outline: #0062FF solid 2px;
 }
 
 .c3 {
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
+  width: 100%;
+  height: 100%;
+  -webkit-transform: rotate(0deg);
+  -ms-transform: rotate(0deg);
+  transform: rotate(0deg);
+}
+
+.c3 path {
+  fill: #74777F;
+}
+
+.c2 {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
   margin-right: 16px;
+  box-sizing: border-box;
   cursor: pointer;
+  position: relative;
+  width: 24px;
+  height: 24px;
 }
 
-.c3 path {
-  fill: #626F84;
-}
-
-.c3:hover path {
-  fill: #0A54C2;
+.c2:hover::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  border-radius: 50%;
+  width: calc(100% + 12px);
+  height: calc(100% + 12px);
+  background-color: #0000000D;
 }
 
 .c1 {
-  color: #2B313B;
+  color: #22242A;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -146,18 +173,12 @@ fieldset[data-dimension='s'] .c4 {
   padding: 16px 16px 16px 0px;
 }
 
-.c1 .c2 {
-  width: 24px;
-  height: 24px;
-  -webkit-transform: rotate(0deg);
-  -ms-transform: rotate(0deg);
-  transform: rotate(0deg);
-}
-
 .c6 {
+  margin: 2px;
   margin-right: 16px;
-  height: 24px;
-  min-width: 24px;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
 }
 
 .c0 {
@@ -175,9 +196,13 @@ fieldset[data-dimension='s'] .c4 {
           class="c1"
         >
           <div
-            class="c2 c3"
+            class="c2"
             data-key="1"
-          />
+          >
+            <div
+              class="c3"
+            />
+          </div>
           <div
             class="c4 c5 c6"
           >
@@ -256,10 +281,6 @@ fieldset[data-dimension='s'] .c4 {
   pointer-events: none;
 }
 
-.c10 *[fill^='#'] {
-  fill: #FFFFFF;
-}
-
 .c5 {
   position: relative;
   box-sizing: border-box;
@@ -291,15 +312,19 @@ fieldset[data-dimension='s'] .c4 {
   transition: background 0.1s ease-in;
   line-height: initial;
   background-color: #FFFFFF;
-  border: 1px solid #626F84;
+  border: 1px solid #74777F;
+}
+
+.c9 *[fill^='#'] {
+  fill: #FFFFFF;
 }
 
 .c7 {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  width: calc(100% + 2px);
-  height: calc(100% + 2px);
+  width: 100%;
+  height: 100%;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -308,7 +333,7 @@ fieldset[data-dimension='s'] .c4 {
   transform: translate(-50%,-50%);
   box-sizing: border-box;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 1px;
   margin: 0;
   padding: 0;
 }
@@ -322,7 +347,7 @@ fieldset[data-dimension='s'] .c4 {
 }
 
 .c7:checked + .c8 {
-  background-color: #0D69F2;
+  background-color: #0062FF;
   border: none;
 }
 
@@ -330,60 +355,87 @@ fieldset[data-dimension='s'] .c4 {
   display: none;
 }
 
-.c7:not(:checked):focus + .c8,
-.c7:not(:disabled):not(:checked):hover + .c8 {
-  background-color: #F1F2F4;
-  border: 1px solid #0A54C2;
-}
-
-.c7:checked:focus + .c8,
-.c7:not(:disabled):checked:hover + .c8 {
-  background-color: #0A54C2;
-  border: none;
-}
-
-.c7:not(:checked):disabled + .c8 {
-  background-color: #FFFFFF;
-  border: 1px solid #C4CAD4;
+.c7:not(:disabled):hover::after,
+.c7:not(:disabled):focus::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  border-radius: 50%;
+  width: calc(100% + 16px);
+  height: calc(100% + 16px);
+  background-color: #0000000D;
 }
 
 .c7:disabled + .c8 {
-  background-color: #C4CAD4;
+  border: 1px solid #B1B5BB;
+}
+
+.c7:checked:disabled + .c8 {
+  background-color: #A7C7FF;
   border: none;
+}
+
+.c7:checked:disabled + .c8 *[fill^='#'] {
+  fill: #FFFFFF;
 }
 
 .c7:focus-visible {
   outline-offset: 2px;
-  outline: #0A54C2 solid 2px;
+  outline: #0062FF solid 2px;
 }
 
 .c3 {
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
+  width: 100%;
+  height: 100%;
+  -webkit-transform: rotate(0deg);
+  -ms-transform: rotate(0deg);
+  transform: rotate(0deg);
+}
+
+.c3 path {
+  fill: #74777F;
+}
+
+.c2 {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
   margin-right: 16px;
+  box-sizing: border-box;
   cursor: pointer;
+  position: relative;
+  width: 24px;
+  height: 24px;
 }
 
-.c3 path {
-  fill: #626F84;
-}
-
-.c3:hover path {
-  fill: #0A54C2;
+.c2:hover::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  border-radius: 50%;
+  width: calc(100% + 12px);
+  height: calc(100% + 12px);
+  background-color: #0000000D;
 }
 
 .c1 {
-  color: #2B313B;
+  color: #22242A;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -395,18 +447,12 @@ fieldset[data-dimension='s'] .c4 {
   padding: 16px 16px 16px 0px;
 }
 
-.c1 .c2 {
-  width: 24px;
-  height: 24px;
-  -webkit-transform: rotate(0deg);
-  -ms-transform: rotate(0deg);
-  transform: rotate(0deg);
-}
-
 .c6 {
+  margin: 2px;
   margin-right: 16px;
-  height: 24px;
-  min-width: 24px;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
 }
 
 .c0 {
@@ -423,9 +469,13 @@ fieldset[data-dimension='s'] .c4 {
         class="c1"
       >
         <div
-          class="c2 c3"
+          class="c2"
           data-key="1"
-        />
+        >
+          <div
+            class="c3"
+          />
+        </div>
         <div
           class="c4 c5 c6"
         >
@@ -560,10 +610,6 @@ Object {
   pointer-events: none;
 }
 
-.c10 *[fill^='#'] {
-  fill: #FFFFFF;
-}
-
 .c5 {
   position: relative;
   box-sizing: border-box;
@@ -595,15 +641,19 @@ fieldset[data-dimension='s'] .c4 {
   transition: background 0.1s ease-in;
   line-height: initial;
   background-color: #FFFFFF;
-  border: 1px solid #626F84;
+  border: 1px solid #74777F;
+}
+
+.c9 *[fill^='#'] {
+  fill: #FFFFFF;
 }
 
 .c7 {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  width: calc(100% + 2px);
-  height: calc(100% + 2px);
+  width: 100%;
+  height: 100%;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -612,7 +662,7 @@ fieldset[data-dimension='s'] .c4 {
   transform: translate(-50%,-50%);
   box-sizing: border-box;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 1px;
   margin: 0;
   padding: 0;
 }
@@ -626,7 +676,7 @@ fieldset[data-dimension='s'] .c4 {
 }
 
 .c7:checked + .c8 {
-  background-color: #0D69F2;
+  background-color: #0062FF;
   border: none;
 }
 
@@ -634,60 +684,87 @@ fieldset[data-dimension='s'] .c4 {
   display: none;
 }
 
-.c7:not(:checked):focus + .c8,
-.c7:not(:disabled):not(:checked):hover + .c8 {
-  background-color: #F1F2F4;
-  border: 1px solid #0A54C2;
-}
-
-.c7:checked:focus + .c8,
-.c7:not(:disabled):checked:hover + .c8 {
-  background-color: #0A54C2;
-  border: none;
-}
-
-.c7:not(:checked):disabled + .c8 {
-  background-color: #FFFFFF;
-  border: 1px solid #C4CAD4;
+.c7:not(:disabled):hover::after,
+.c7:not(:disabled):focus::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  border-radius: 50%;
+  width: calc(100% + 16px);
+  height: calc(100% + 16px);
+  background-color: #0000000D;
 }
 
 .c7:disabled + .c8 {
-  background-color: #C4CAD4;
+  border: 1px solid #B1B5BB;
+}
+
+.c7:checked:disabled + .c8 {
+  background-color: #A7C7FF;
   border: none;
+}
+
+.c7:checked:disabled + .c8 *[fill^='#'] {
+  fill: #FFFFFF;
 }
 
 .c7:focus-visible {
   outline-offset: 2px;
-  outline: #0A54C2 solid 2px;
+  outline: #0062FF solid 2px;
 }
 
 .c3 {
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
+  width: 100%;
+  height: 100%;
+  -webkit-transform: rotate(0deg);
+  -ms-transform: rotate(0deg);
+  transform: rotate(0deg);
+}
+
+.c3 path {
+  fill: #74777F;
+}
+
+.c2 {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
   margin-right: 16px;
+  box-sizing: border-box;
   cursor: pointer;
+  position: relative;
+  width: 24px;
+  height: 24px;
 }
 
-.c3 path {
-  fill: #626F84;
-}
-
-.c3:hover path {
-  fill: #0A54C2;
+.c2:hover::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  border-radius: 50%;
+  width: calc(100% + 12px);
+  height: calc(100% + 12px);
+  background-color: #0000000D;
 }
 
 .c1 {
-  color: #2B313B;
+  color: #22242A;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -699,18 +776,12 @@ fieldset[data-dimension='s'] .c4 {
   padding: 16px 16px 16px 0px;
 }
 
-.c1 .c2 {
-  width: 24px;
-  height: 24px;
-  -webkit-transform: rotate(0deg);
-  -ms-transform: rotate(0deg);
-  transform: rotate(0deg);
-}
-
 .c6 {
+  margin: 2px;
   margin-right: 16px;
-  height: 24px;
-  min-width: 24px;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
 }
 
 .c0 {
@@ -728,9 +799,13 @@ fieldset[data-dimension='s'] .c4 {
           class="c1"
         >
           <div
-            class="c2 c3"
+            class="c2"
             data-key="1"
-          />
+          >
+            <div
+              class="c3"
+            />
+          </div>
           <div
             class="c4 c5 c6"
           >
@@ -809,10 +884,6 @@ fieldset[data-dimension='s'] .c4 {
   pointer-events: none;
 }
 
-.c10 *[fill^='#'] {
-  fill: #FFFFFF;
-}
-
 .c5 {
   position: relative;
   box-sizing: border-box;
@@ -844,15 +915,19 @@ fieldset[data-dimension='s'] .c4 {
   transition: background 0.1s ease-in;
   line-height: initial;
   background-color: #FFFFFF;
-  border: 1px solid #626F84;
+  border: 1px solid #74777F;
+}
+
+.c9 *[fill^='#'] {
+  fill: #FFFFFF;
 }
 
 .c7 {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  width: calc(100% + 2px);
-  height: calc(100% + 2px);
+  width: 100%;
+  height: 100%;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -861,7 +936,7 @@ fieldset[data-dimension='s'] .c4 {
   transform: translate(-50%,-50%);
   box-sizing: border-box;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 1px;
   margin: 0;
   padding: 0;
 }
@@ -875,7 +950,7 @@ fieldset[data-dimension='s'] .c4 {
 }
 
 .c7:checked + .c8 {
-  background-color: #0D69F2;
+  background-color: #0062FF;
   border: none;
 }
 
@@ -883,60 +958,87 @@ fieldset[data-dimension='s'] .c4 {
   display: none;
 }
 
-.c7:not(:checked):focus + .c8,
-.c7:not(:disabled):not(:checked):hover + .c8 {
-  background-color: #F1F2F4;
-  border: 1px solid #0A54C2;
-}
-
-.c7:checked:focus + .c8,
-.c7:not(:disabled):checked:hover + .c8 {
-  background-color: #0A54C2;
-  border: none;
-}
-
-.c7:not(:checked):disabled + .c8 {
-  background-color: #FFFFFF;
-  border: 1px solid #C4CAD4;
+.c7:not(:disabled):hover::after,
+.c7:not(:disabled):focus::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  border-radius: 50%;
+  width: calc(100% + 16px);
+  height: calc(100% + 16px);
+  background-color: #0000000D;
 }
 
 .c7:disabled + .c8 {
-  background-color: #C4CAD4;
+  border: 1px solid #B1B5BB;
+}
+
+.c7:checked:disabled + .c8 {
+  background-color: #A7C7FF;
   border: none;
+}
+
+.c7:checked:disabled + .c8 *[fill^='#'] {
+  fill: #FFFFFF;
 }
 
 .c7:focus-visible {
   outline-offset: 2px;
-  outline: #0A54C2 solid 2px;
+  outline: #0062FF solid 2px;
 }
 
 .c3 {
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
+  width: 100%;
+  height: 100%;
+  -webkit-transform: rotate(0deg);
+  -ms-transform: rotate(0deg);
+  transform: rotate(0deg);
+}
+
+.c3 path {
+  fill: #74777F;
+}
+
+.c2 {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
   margin-right: 16px;
+  box-sizing: border-box;
   cursor: pointer;
+  position: relative;
+  width: 24px;
+  height: 24px;
 }
 
-.c3 path {
-  fill: #626F84;
-}
-
-.c3:hover path {
-  fill: #0A54C2;
+.c2:hover::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  border-radius: 50%;
+  width: calc(100% + 12px);
+  height: calc(100% + 12px);
+  background-color: #0000000D;
 }
 
 .c1 {
-  color: #2B313B;
+  color: #22242A;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -948,18 +1050,12 @@ fieldset[data-dimension='s'] .c4 {
   padding: 16px 16px 16px 0px;
 }
 
-.c1 .c2 {
-  width: 24px;
-  height: 24px;
-  -webkit-transform: rotate(0deg);
-  -ms-transform: rotate(0deg);
-  transform: rotate(0deg);
-}
-
 .c6 {
+  margin: 2px;
   margin-right: 16px;
-  height: 24px;
-  min-width: 24px;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
 }
 
 .c0 {
@@ -976,9 +1072,13 @@ fieldset[data-dimension='s'] .c4 {
         class="c1"
       >
         <div
-          class="c2 c3"
+          class="c2"
           data-key="1"
-        />
+        >
+          <div
+            class="c3"
+          />
+        </div>
         <div
           class="c4 c5 c6"
         >
@@ -1113,10 +1213,6 @@ Object {
   pointer-events: none;
 }
 
-.c10 *[fill^='#'] {
-  fill: #FFFFFF;
-}
-
 .c5 {
   position: relative;
   box-sizing: border-box;
@@ -1148,15 +1244,19 @@ fieldset[data-dimension='s'] .c4 {
   transition: background 0.1s ease-in;
   line-height: initial;
   background-color: #FFFFFF;
-  border: 1px solid #626F84;
+  border: 1px solid #74777F;
+}
+
+.c9 *[fill^='#'] {
+  fill: #FFFFFF;
 }
 
 .c7 {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  width: calc(100% + 2px);
-  height: calc(100% + 2px);
+  width: 100%;
+  height: 100%;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -1165,7 +1265,7 @@ fieldset[data-dimension='s'] .c4 {
   transform: translate(-50%,-50%);
   box-sizing: border-box;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 1px;
   margin: 0;
   padding: 0;
 }
@@ -1179,7 +1279,7 @@ fieldset[data-dimension='s'] .c4 {
 }
 
 .c7:checked + .c8 {
-  background-color: #0D69F2;
+  background-color: #0062FF;
   border: none;
 }
 
@@ -1187,60 +1287,87 @@ fieldset[data-dimension='s'] .c4 {
   display: none;
 }
 
-.c7:not(:checked):focus + .c8,
-.c7:not(:disabled):not(:checked):hover + .c8 {
-  background-color: #F1F2F4;
-  border: 1px solid #0A54C2;
-}
-
-.c7:checked:focus + .c8,
-.c7:not(:disabled):checked:hover + .c8 {
-  background-color: #0A54C2;
-  border: none;
-}
-
-.c7:not(:checked):disabled + .c8 {
-  background-color: #FFFFFF;
-  border: 1px solid #C4CAD4;
+.c7:not(:disabled):hover::after,
+.c7:not(:disabled):focus::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  border-radius: 50%;
+  width: calc(100% + 16px);
+  height: calc(100% + 16px);
+  background-color: #0000000D;
 }
 
 .c7:disabled + .c8 {
-  background-color: #C4CAD4;
+  border: 1px solid #B1B5BB;
+}
+
+.c7:checked:disabled + .c8 {
+  background-color: #A7C7FF;
   border: none;
+}
+
+.c7:checked:disabled + .c8 *[fill^='#'] {
+  fill: #FFFFFF;
 }
 
 .c7:focus-visible {
   outline-offset: 2px;
-  outline: #0A54C2 solid 2px;
+  outline: #0062FF solid 2px;
 }
 
 .c3 {
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
+  width: 100%;
+  height: 100%;
+  -webkit-transform: rotate(0deg);
+  -ms-transform: rotate(0deg);
+  transform: rotate(0deg);
+}
+
+.c3 path {
+  fill: #74777F;
+}
+
+.c2 {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
   margin-right: 16px;
+  box-sizing: border-box;
   cursor: pointer;
+  position: relative;
+  width: 20px;
+  height: 20px;
 }
 
-.c3 path {
-  fill: #626F84;
-}
-
-.c3:hover path {
-  fill: #0A54C2;
+.c2:hover::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  border-radius: 50%;
+  width: calc(100% + 12px);
+  height: calc(100% + 12px);
+  background-color: #0000000D;
 }
 
 .c1 {
-  color: #2B313B;
+  color: #22242A;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1252,18 +1379,12 @@ fieldset[data-dimension='s'] .c4 {
   padding: 10px 16px 10px 0px;
 }
 
-.c1 .c2 {
-  width: 20px;
-  height: 20px;
-  -webkit-transform: rotate(0deg);
-  -ms-transform: rotate(0deg);
-  transform: rotate(0deg);
-}
-
 .c6 {
+  margin: 2px;
   margin-right: 16px;
-  height: 20px;
-  min-width: 20px;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
 }
 
 .c0 {
@@ -1281,9 +1402,13 @@ fieldset[data-dimension='s'] .c4 {
           class="c1"
         >
           <div
-            class="c2 c3"
+            class="c2"
             data-key="1"
-          />
+          >
+            <div
+              class="c3"
+            />
+          </div>
           <div
             class="c4 c5 c6"
           >
@@ -1362,10 +1487,6 @@ fieldset[data-dimension='s'] .c4 {
   pointer-events: none;
 }
 
-.c10 *[fill^='#'] {
-  fill: #FFFFFF;
-}
-
 .c5 {
   position: relative;
   box-sizing: border-box;
@@ -1397,15 +1518,19 @@ fieldset[data-dimension='s'] .c4 {
   transition: background 0.1s ease-in;
   line-height: initial;
   background-color: #FFFFFF;
-  border: 1px solid #626F84;
+  border: 1px solid #74777F;
+}
+
+.c9 *[fill^='#'] {
+  fill: #FFFFFF;
 }
 
 .c7 {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  width: calc(100% + 2px);
-  height: calc(100% + 2px);
+  width: 100%;
+  height: 100%;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -1414,7 +1539,7 @@ fieldset[data-dimension='s'] .c4 {
   transform: translate(-50%,-50%);
   box-sizing: border-box;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 1px;
   margin: 0;
   padding: 0;
 }
@@ -1428,7 +1553,7 @@ fieldset[data-dimension='s'] .c4 {
 }
 
 .c7:checked + .c8 {
-  background-color: #0D69F2;
+  background-color: #0062FF;
   border: none;
 }
 
@@ -1436,60 +1561,87 @@ fieldset[data-dimension='s'] .c4 {
   display: none;
 }
 
-.c7:not(:checked):focus + .c8,
-.c7:not(:disabled):not(:checked):hover + .c8 {
-  background-color: #F1F2F4;
-  border: 1px solid #0A54C2;
-}
-
-.c7:checked:focus + .c8,
-.c7:not(:disabled):checked:hover + .c8 {
-  background-color: #0A54C2;
-  border: none;
-}
-
-.c7:not(:checked):disabled + .c8 {
-  background-color: #FFFFFF;
-  border: 1px solid #C4CAD4;
+.c7:not(:disabled):hover::after,
+.c7:not(:disabled):focus::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  border-radius: 50%;
+  width: calc(100% + 16px);
+  height: calc(100% + 16px);
+  background-color: #0000000D;
 }
 
 .c7:disabled + .c8 {
-  background-color: #C4CAD4;
+  border: 1px solid #B1B5BB;
+}
+
+.c7:checked:disabled + .c8 {
+  background-color: #A7C7FF;
   border: none;
+}
+
+.c7:checked:disabled + .c8 *[fill^='#'] {
+  fill: #FFFFFF;
 }
 
 .c7:focus-visible {
   outline-offset: 2px;
-  outline: #0A54C2 solid 2px;
+  outline: #0062FF solid 2px;
 }
 
 .c3 {
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
+  width: 100%;
+  height: 100%;
+  -webkit-transform: rotate(0deg);
+  -ms-transform: rotate(0deg);
+  transform: rotate(0deg);
+}
+
+.c3 path {
+  fill: #74777F;
+}
+
+.c2 {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
   margin-right: 16px;
+  box-sizing: border-box;
   cursor: pointer;
+  position: relative;
+  width: 20px;
+  height: 20px;
 }
 
-.c3 path {
-  fill: #626F84;
-}
-
-.c3:hover path {
-  fill: #0A54C2;
+.c2:hover::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  border-radius: 50%;
+  width: calc(100% + 12px);
+  height: calc(100% + 12px);
+  background-color: #0000000D;
 }
 
 .c1 {
-  color: #2B313B;
+  color: #22242A;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1501,18 +1653,12 @@ fieldset[data-dimension='s'] .c4 {
   padding: 10px 16px 10px 0px;
 }
 
-.c1 .c2 {
-  width: 20px;
-  height: 20px;
-  -webkit-transform: rotate(0deg);
-  -ms-transform: rotate(0deg);
-  transform: rotate(0deg);
-}
-
 .c6 {
+  margin: 2px;
   margin-right: 16px;
-  height: 20px;
-  min-width: 20px;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
 }
 
 .c0 {
@@ -1529,9 +1675,13 @@ fieldset[data-dimension='s'] .c4 {
         class="c1"
       >
         <div
-          class="c2 c3"
+          class="c2"
           data-key="1"
-        />
+        >
+          <div
+            class="c3"
+          />
+        </div>
         <div
           class="c4 c5 c6"
         >

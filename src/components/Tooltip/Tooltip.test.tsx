@@ -5,7 +5,7 @@ import { ThemeProvider } from 'styled-components';
 
 import type { ITooltipProps } from '../Tooltip';
 import { Tooltip } from '../Tooltip';
-import { LIGHT_THEME } from '../themes';
+import { LIGHT_THEME } from '#src/components/themes';
 
 describe('Tooltip', () => {
   jest.useFakeTimers();

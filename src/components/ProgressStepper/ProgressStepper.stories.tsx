@@ -1,9 +1,8 @@
 import React from 'react';
-import styled from 'styled-components';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import { typography } from '#src/components/Typography';
-
+import styled from 'styled-components';
 import { ProgressStepper } from '../ProgressStepper';
 
 const Desc = styled.div`
@@ -20,14 +19,11 @@ const Separator = styled.div`
 const Sect = styled.div`
   margin-bottom: 60px;
   ${typography['Body/Body 1 Long']}
+  color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
   label {
     display: block;
     margin-bottom: 20px;
   }
-`;
-
-const H6 = styled.div`
-  ${typography['Subtitle/Subtitle 1']}
 `;
 
 const Section = ({ title, children }: any) => (
@@ -54,7 +50,7 @@ const Description = () => (
 );
 
 export default {
-  title: 'Example/ProgressStepper',
+  title: 'Admiral-2.1/ProgressStepper',
   decorators: [withDesign],
   component: ProgressStepper,
   parameters: {
@@ -62,7 +58,7 @@ export default {
     layout: 'centered',
     design: {
       type: 'figma',
-      url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=37%3A16832',
+      url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=37%3A16832',
     },
   },
   argTypes: {
@@ -87,7 +83,11 @@ const Template0: ComponentStory<typeof ProgressStepper> = (args) => {
     'Название пятого шага',
     'Название шестого шага',
   ];
-  return <ProgressStepper {...args} steps={steps} />;
+  return (
+    <>
+      <ProgressStepper {...args} steps={steps} />
+    </>
+  );
 };
 
 const Template1: ComponentStory<typeof ProgressStepper> = (args) => {

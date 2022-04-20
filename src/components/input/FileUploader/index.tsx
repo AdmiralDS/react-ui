@@ -14,10 +14,8 @@ export interface FileUploaderProps extends Omit<InputHTMLAttributes<HTMLInputEle
   dimension?: Dimension;
   /** Размер компонента загруженного файла */
   fileDimension?: Dimension;
-  /** Текст для лейбла компонента */
+  /** Текстовое описание загрузчика */
   title?: React.ReactNode;
-  /** Текст для кнопки */
-  description?: React.ReactNode;
   /** Принимаемые типы файлов, например, .jpg */
   acceptFiles?: string[];
   /** Список файлов */
@@ -37,16 +35,17 @@ const Icon = styled(AttachFileOutline)<{ dimension?: Dimension }>`
   margin-bottom: ${(p) => (p.dimension === 'xl' ? '14px' : '')};
 
   > * {
-    fill: ${(p) => p.theme.color.basic.primary};
+    fill: ${(p) => p.theme.color['Primary/Primary 60 Main']};
   }
 `;
 
 const disabledStyles = css`
-  border: ${(p) => `1px dashed ${p.theme.color.basic.disable}`};
+  border: ${(p) => `1px dashed ${p.theme.color['Neutral/Neutral 30']}`};
+  color: ${(p) => p.theme.color['Neutral/Neutral 30']};
 
   & svg {
     > * {
-      fill: ${(p) => p.theme.color.basic.disable};
+      fill: ${(p) => p.theme.color['Neutral/Neutral 30']};
     }
   }
 `;
@@ -54,14 +53,11 @@ const disabledStyles = css`
 const hoverStyles = css`
   &:hover {
     cursor: pointer;
-    border: 1px dashed ${(p) => p.theme.color.basic.hover};
-    background: ${(p) => p.theme.color.background.secondary};
-
-    & svg {
-      > * {
-        fill: ${(p) => p.theme.color.basic.hover};
-      }
-    }
+    background: ${(p) => p.theme.color['Opacity/Hover']};
+  }
+  &:active {
+    cursor: pointer;
+    background: ${(p) => p.theme.color['Opacity/Press']};
   }
 `;
 
@@ -76,9 +72,9 @@ const UploaderWrapperXL = styled.div<{ disabled?: boolean }>`
   align-items: center;
   flex-direction: column;
   padding: 24px 0;
-  border: ${(p) => `1px dashed ${p.theme.color.text.secondary}`};
+  border: ${(p) => `1px dashed ${p.theme.color['Neutral/Neutral 40']}`};
   border-radius: 8px;
-  pointer-events: ${({ disabled }) => (disabled ? 'none' : 'all')};
+  pointer-events: ${(p) => (p.disabled ? 'none' : 'all')};
   cursor: ${(p) => (p.disabled ? 'not-allowed' : 'default')};
   ${(p) => (p.disabled ? disabledStyles : hoverStyles)};
 `;
@@ -90,7 +86,7 @@ const UploaderWrapperM = styled.div<{ disabled?: boolean }>`
   justify-content: center;
   flex-direction: row;
   padding: 8px 0;
-  border: ${(p) => `1px dashed ${p.theme.color.text.secondary}`};
+  border: ${(p) => `1px dashed ${p.theme.color['Neutral/Neutral 40']}`};
   border-radius: 8px;
   cursor: ${(p) => (p.disabled ? 'not-allowed' : 'default')};
   ${(p) => (p.disabled ? disabledStyles : hoverStyles)};
@@ -101,13 +97,13 @@ const TitleText = styled.div<{ dimension?: Dimension; disabled?: boolean }>`
   margin: 0 ${(p) => (p.dimension === 'xl' ? '24px' : '')};
   margin-bottom: ${(p) => (p.dimension === 'm' ? '16px' : '0px')};
   max-width: 100%;
-  ${typography['Body/Body 2 Long']}
-  color: ${(p) => p.disabled && p.theme.color.basic.disable};
+  color: ${(p) => (p.disabled ? p.theme.color['Neutral/Neutral 30'] : p.theme.color['Neutral/Neutral 90'])};
+  ${typography['Body/Body 2 Long']};
 `;
 
 const Desc = styled.div<{ disabled?: boolean }>`
+  color: ${(p) => (p.disabled ? p.theme.color['Neutral/Neutral 30'] : p.theme.color['Neutral/Neutral 90'])};
   ${typography['Body/Body 1 Long']};
-  color: ${(p) => p.disabled && p.theme.color.basic.disable};
 `;
 
 const FileInput = styled.input`
@@ -145,7 +141,6 @@ export const FileUploader = React.forwardRef<HTMLInputElement, FileUploaderProps
       renderFileInfoList: r,
       disabled,
       title,
-      description,
       acceptFiles,
       children,
       uploadedFiles,
@@ -160,6 +155,8 @@ export const FileUploader = React.forwardRef<HTMLInputElement, FileUploaderProps
     const inputRef = React.useRef<HTMLInputElement>(null);
     const [files, setFiles] = React.useState<FileProps[] | undefined>(uploadedFiles);
     const previewProps = { dimension, fileDimension };
+
+    const Title = title || <>Для добавления файлов перетащите или нажмите на компонент</>;
 
     const validateFileFormat = (files: FileProps[], acceptFiles: string[]) => {
       return files.filter(({ file }) =>
@@ -241,7 +238,7 @@ export const FileUploader = React.forwardRef<HTMLInputElement, FileUploaderProps
             ) : (
               <UploaderWrapperXL disabled={disabled}>
                 <Icon dimension={dimension} />
-                {title && <TitleText dimension={dimension} disabled={disabled} children={title} />}
+                <TitleText dimension={dimension} disabled={disabled} children={Title} />
                 <FileInput
                   {...props}
                   ref={refSetter(ref, inputRef)}
@@ -270,10 +267,10 @@ export const FileUploader = React.forwardRef<HTMLInputElement, FileUploaderProps
               </CustomWrapper>
             ) : (
               <>
-                {title && <TitleText dimension={dimension} disabled={disabled} children={title} />}
+                <TitleText dimension={dimension} disabled={disabled} children={Title} />
                 <UploaderWrapperM disabled={disabled}>
                   <Icon dimension={dimension} />
-                  {description && <Desc disabled={disabled}>{description}</Desc>}
+                  <Desc disabled={disabled}>Добавьте файлы</Desc>
                   <FileInput
                     {...props}
                     ref={refSetter(ref, inputRef)}

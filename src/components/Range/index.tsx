@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { throttle } from '#src/components/common/utils/throttle';
 
-import { calcValueByPos, sortNum } from './utils';
 import type { NumberRange } from './utils';
-import { Wrapper, TrackWrapper, Track, DefaultTrack, FilledTrack, Thumb, ThumbCircle } from './style';
+import { calcValueByPos, sortNum } from './utils';
+import { DefaultTrack, FilledTrack, Thumb, ThumbCircle, Track, TrackWrapper, Wrapper } from './style';
 
 export interface RangeProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'> {
   /** Значение компонента */

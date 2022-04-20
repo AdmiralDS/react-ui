@@ -1,23 +1,24 @@
 import * as React from 'react';
 import { TextInput, TextInputProps } from '#src/components/input/TextInput';
-import { InputData, changeInputData } from '#src/components/common/dom/changeInputData';
+import { changeInputData, InputData } from '#src/components/common/dom/changeInputData';
 import { refSetter } from '#src/components/common/utils/refSetter';
 import { ReactComponent as MinusOutline } from '@admiral-ds/icons/build/service/MinusOutline.svg';
 import { ReactComponent as PlusOutline } from '@admiral-ds/icons/build/service/PlusOutline.svg';
 import styled, { css } from 'styled-components';
 
-import { fitToCurrency, clearValue } from './utils';
+import { clearValue, fitToCurrency, validateThousand } from './utils';
+
 export { fitToCurrency, clearValue } from './utils';
 
 const Icon = css`
   & *[fill^='#'] {
-    fill: ${(props) => props.theme.color.text.secondary};
+    fill: ${(props) => props.theme.color['Neutral/Neutral 50']};
   }
   &:hover {
     cursor: pointer;
   }
   &:hover *[fill^='#'] {
-    fill: ${(props) => props.theme.color.basic.hover};
+    fill: ${(props) => props.theme.color['Primary/Primary 70']};
   }
 `;
 
@@ -25,7 +26,7 @@ const IconDisabled = css`
   cursor: default;
   pointer-events: none;
   & *[fill^='#'] {
-    fill: ${(props) => props.theme.color.text.tertiary};
+    fill: ${(props) => props.theme.color['Neutral/Neutral 30']};
   }
 `;
 
@@ -57,10 +58,18 @@ export interface NumberInputProps extends Omit<TextInputProps, 'onChange'> {
   maxValue?: number;
   /** Отображать иконки плюса минуса */
   displayPlusMinusIcons?: boolean;
-  /** Колбек на изменение значения компонента (fullStr - строка вместе с префиксом/суффиксом/разделителями, shortStr - строка только с числом)
+  /** Колбек на изменение значения компонента
+   * 1) event - событие ChangeEvent или FocusEvent (колбек onChange может быть вызван не только при изменении значения инпута,
+   * но и при потере фокуса инпутом, если значение в инпуте выходит за границы minValue/maxValue и требует корректировки.
+   * 2) fullStr - строка вместе с префиксом/суффиксом/разделителями;
+   * 3) shortStr - строка только с числом;
    * Примечание: в качестве value компонента необходимо использовать fullStr (строку вместе с префиксом/суффиксом/разделителями).
    */
-  onChange?: (fullStr: string, shortStr: string) => void;
+  onChange?: (
+    event: React.ChangeEvent<HTMLInputElement> | React.FocusEvent<HTMLInputElement>,
+    fullStr?: string,
+    shortStr?: string,
+  ) => void;
 }
 
 export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
@@ -87,7 +96,7 @@ export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
     const [minusDisabled, setMinusDisabled] = React.useState(false);
 
     // thousand, decimal - не более одного символа
-    const thousand = userThousand.slice(0, 1);
+    const thousand = validateThousand(userThousand) ? userThousand.slice(0, 1) : ' ';
     const decimal = userDecimal.slice(0, 1);
 
     React.useEffect(() => {
@@ -154,7 +163,7 @@ export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
             const fullValue = fitToCurrency(String(minValue), precision, decimal, thousand, prefix, suffix, true);
             const shortValue = clearValue(fullValue, precision, decimal);
 
-            onChange?.(fullValue, shortValue);
+            onChange?.(event, fullValue, shortValue);
             inputRef.current.value = fullValue;
             return;
           }
@@ -164,7 +173,7 @@ export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
             const fullValue = fitToCurrency(String(maxValue), precision, decimal, thousand, prefix, suffix, true);
             const shortValue = clearValue(fullValue, precision, decimal);
 
-            onChange?.(fullValue, shortValue);
+            onChange?.(event, fullValue, shortValue);
             inputRef.current.value = fullValue;
             return;
           }
@@ -222,7 +231,7 @@ export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       const fullValue = newVal;
       const shortValue = clearValue(newVal, precision, decimal);
 
-      onChange?.(fullValue, shortValue);
+      onChange?.(event, fullValue, shortValue);
     };
 
     return (

@@ -10,16 +10,16 @@ export const ALL_FIELDSET_DIMENSIONS_VALUES = ['m', 's'] as const;
 export type FieldSetDimension = typeof ALL_FIELDSET_DIMENSIONS_VALUES[number];
 
 const Legend = styled.legend<{ dimension?: FieldSetDimension }>`
-  ${(props) => (props.dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
-  color: ${(props) => props.theme.color.text.primary};
+  ${(props) => (props.dimension === 's' ? typography['Body/Body 2 Short'] : typography['Body/Body 1 Short'])}
+  color: ${(props) => props.theme.color['Neutral/Neutral 90']};
   fieldset:disabled & {
-    color: ${(props) => props.theme.color.text.tertiary};
+    color: ${(props) => props.theme.color['Neutral/Neutral 30']};
     cursor: default;
   }
 
   [aria-required] &:before {
     content: '* ';
-    color: ${(props) => props.theme.color.status.danger};
+    color: ${(props) => props.theme.color['Error/Error 60 Main']};
   }
 `;
 

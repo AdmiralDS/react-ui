@@ -3,7 +3,7 @@ import { ReactComponent as ChevronRight } from '@admiral-ds/icons/build/system/C
 
 export const Separator = styled(ChevronRight)`
   & *[fill^='#'] {
-    fill: ${({ theme }) => theme.color.text.secondary};
+    fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
   }
   flex-shrink: 0;
   margin-left: 8px;

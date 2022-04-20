@@ -27,9 +27,8 @@ Object {
   font-size: 12px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
-  background: #E2E5E9;
-  color: #2B313B;
+  background: #E5E7EB;
+  color: #22242A;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -70,9 +69,8 @@ Object {
   font-size: 12px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
-  background: #E2E5E9;
-  color: #2B313B;
+  background: #E5E7EB;
+  color: #22242A;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -168,9 +166,8 @@ Object {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
-  background: #E2E5E9;
-  color: #2B313B;
+  background: #E5E7EB;
+  color: #22242A;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -211,9 +208,8 @@ Object {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
-  background: #E2E5E9;
-  color: #2B313B;
+  background: #E5E7EB;
+  color: #22242A;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;

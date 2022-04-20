@@ -1,7 +1,7 @@
 import { Button } from '#src/components/Button';
 import { hexToRgba } from '#src/components/common/utils/hexToRgba';
-import { Option } from '#src/components/input/SearchSelect';
-import { InputField, SearchSelectField } from '#src/components/form';
+import { Option } from '#src/components/input/Select';
+import { InputField, SelectField } from '#src/components/form';
 import { Modal, ModalButtonPanel, ModalContent, ModalTitle } from '#src/components/Modal';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
@@ -23,7 +23,7 @@ const Description = () => (
 );
 
 export default {
-  title: 'Example/Modal',
+  title: 'Admiral-2.1/Modal',
   decorators: [withDesign],
   component: Modal,
   parameters: {
@@ -31,11 +31,15 @@ export default {
     design: [
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A49211',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A49046',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A49265',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A49211',
+      },
+      {
+        type: 'figma',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A49265',
       },
     ],
   },
@@ -82,19 +86,21 @@ const ModalForm = ({ onYesClick, onNoClick }: Props) => {
       <ModalContent>
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. At cupiditate ducimus nisi nulla numquam obcaecati
         quam quasi quod ut veritatis?
-        <SearchSelectField
-          label="label"
-          className="Search"
-          value={selected}
-          onChange={handleSelectChange}
-          placeholder="Placeholder"
-        >
-          {OPTIONS_SIMPLE.map((option, ind) => (
-            <Option key={option} value={option} disabled={ind === 4}>
-              {option}
-            </Option>
-          ))}
-        </SearchSelectField>
+        <>
+          <SelectField
+            label="label"
+            className="Search"
+            value={selected}
+            onChange={handleSelectChange}
+            placeholder="Placeholder"
+          >
+            {OPTIONS_SIMPLE.map((option, ind) => (
+              <Option key={option} value={option} disabled={ind === 4}>
+                {option}
+              </Option>
+            ))}
+          </SelectField>
+        </>
         <InputField
           label="введите значение"
           value={inputValue}
@@ -253,7 +259,7 @@ const Template4: ComponentStory<typeof Modal> = (args) => {
 };
 
 const overlayStyles = css`
-  background-color: ${({ theme }) => hexToRgba(theme.color.background.secondary, 0.6)};
+  background-color: ${({ theme }) => hexToRgba(theme.color['Error/Error 20'], 0.6)};
 `;
 
 const Template5: ComponentStory<typeof Modal> = (args) => {

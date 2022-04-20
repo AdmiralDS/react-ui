@@ -1,25 +1,25 @@
 import React from 'react';
 import styled from 'styled-components';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import { Link } from './index';
+import { withDesign } from 'storybook-addon-designs';
+import { Link } from '#src/components/Link';
 import { T } from '#src/components/T';
 import { ReactComponent as ArrowLeftOutline } from '@admiral-ds/icons/build/system/ArrowLeftOutline.svg';
 import { ReactComponent as ArrowRightOutline } from '@admiral-ds/icons/build/system/ArrowRightOutline.svg';
-import { withDesign } from 'storybook-addon-designs';
 
 export default {
-  title: 'Example/Link',
+  title: 'Admiral-2.1/Link',
   decorators: [withDesign],
   component: Link,
   parameters: {
     design: [
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=37%3A8620',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=37%3A8489',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=37%3A8697',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=37%3A8620',
       },
     ],
   },

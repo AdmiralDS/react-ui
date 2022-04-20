@@ -93,7 +93,6 @@ export const Filter = React.forwardRef<HTMLButtonElement, FilterCompProps>(
           aria-expanded={menuOpened}
           aria-haspopup={menuOpened}
           isFilterActive={isFilterActive}
-          isFilterOpen={menuOpened}
           renderFilterIcon={renderFilterIcon}
           {...props}
         />

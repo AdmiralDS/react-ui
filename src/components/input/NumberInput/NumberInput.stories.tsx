@@ -1,7 +1,7 @@
 import React from 'react';
-import styled from 'styled-components';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
+import styled from 'styled-components';
 
 import { NumberInput } from '.';
 
@@ -14,15 +14,25 @@ const Desc = styled.div`
 const Description = () => <Desc>Поле ввода с возможностью ввода числовых значений через нажатие с заданным шагом</Desc>;
 
 export default {
-  title: 'Input/NumberInput',
+  title: 'Admiral-2.1/Input/NumberInput',
   decorators: [withDesign],
   component: NumberInput,
   parameters: {
     componentSubtitle: <Description />,
-    design: {
-      type: 'figma',
-      url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A60588',
-    },
+    design: [
+      {
+        type: 'figma',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A60588',
+      },
+      {
+        type: 'figma',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A60694',
+      },
+      {
+        type: 'figma',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A60723',
+      },
+    ],
   },
   argTypes: {
     placeholder: {
@@ -78,51 +88,61 @@ export default {
 
 const Template0: ComponentStory<typeof NumberInput> = (args) => {
   return (
-    <NumberInput
-      {...args}
-      defaultValue="2 ₽"
-      onChange={(fullStr, shortStr) => {
-        console.log({ fullStr, shortStr });
-      }}
-    />
+    <>
+      <NumberInput
+        {...args}
+        defaultValue="2 ₽"
+        onChange={(event, fullStr, shortStr) => {
+          console.log({ event, fullStr, shortStr });
+        }}
+      />
+    </>
   );
 };
 
 const Template1: ComponentStory<typeof NumberInput> = (args) => {
-  return <NumberInput {...args} disabled />;
+  return (
+    <>
+      <NumberInput {...args} disabled />
+    </>
+  );
 };
 
 const Template2: ComponentStory<typeof NumberInput> = (args) => {
   return (
-    <NumberInput
-      {...args}
-      onChange={(fullStr, shortStr) => {
-        console.log({ fullStr, shortStr });
-      }}
-      minValue={0}
-      maxValue={2000}
-    />
+    <>
+      <NumberInput
+        {...args}
+        onChange={(event, fullStr, shortStr) => {
+          console.log({ event, fullStr, shortStr });
+        }}
+        minValue={0}
+        maxValue={2000}
+      />
+    </>
   );
 };
 
 const Template3: ComponentStory<typeof NumberInput> = (args) => {
   return (
-    <NumberInput
-      {...args}
-      onChange={(fullStr, shortStr) => {
-        console.log({ fullStr, shortStr });
-      }}
-      suffix="$"
-      thousand=","
-      precision={0}
-      placeholder="0 $"
-    />
+    <>
+      <NumberInput
+        {...args}
+        onChange={(event, fullStr, shortStr) => {
+          console.log({ event, fullStr, shortStr });
+        }}
+        suffix="$"
+        thousand=","
+        precision={0}
+        placeholder="0 $"
+      />
+    </>
   );
 };
 
 const Template4: ComponentStory<typeof NumberInput> = () => {
-  const [value1, setValue1] = React.useState('From 50 $');
-  const [value2, setValue2] = React.useState('1 минута');
+  const [value1, setValue1] = React.useState<string | undefined>('From 50 $');
+  const [value2, setValue2] = React.useState<string | undefined>('1 минута');
   const [suffix, setSuffix] = React.useState('минута');
 
   function declOfNum(n: number, text_forms: Array<string>) {
@@ -144,8 +164,8 @@ const Template4: ComponentStory<typeof NumberInput> = () => {
     <>
       <NumberInput
         value={value1}
-        onChange={(fullStr, shortStr) => {
-          console.log({ fullStr, shortStr });
+        onChange={(event, fullStr, shortStr) => {
+          console.log({ event, fullStr, shortStr });
           setValue1(fullStr);
         }}
         prefix="From"
@@ -154,8 +174,8 @@ const Template4: ComponentStory<typeof NumberInput> = () => {
       />
       <NumberInput
         value={value2}
-        onChange={(fullStr, shortStr) => {
-          console.log({ fullStr, shortStr });
+        onChange={(event, fullStr, shortStr) => {
+          console.log({ event, fullStr, shortStr });
           setValue2(fullStr);
           setSuffix(declOfNum(Number(shortStr), ['минута', 'минуты', 'минут']));
         }}
@@ -196,7 +216,7 @@ MinMax.parameters = {
     },
     description: {
       story: `Максимальное, минимальное значение. При достижении лимита, кнопки “+” или “-” принимают состояние Disabled.
-      Если вручную введенное значение больше-меньше указанного диапазона, то оно принимает наиболее близкое 
+      Если вручную введенное значение больше-меньше указанного диапазона, то оно принимает наиболее близкое
       значение из возможных при выводе фокуса из поля.`,
     },
   },
@@ -223,10 +243,10 @@ Controlled.parameters = {
     },
   },
   description: {
-    story: `В случае использования контролируемого инпута в value необходимо передавать уже 
-    отформатированную строку с префиксом/суффиксом/разделителем (данная строка возвращается в 
-    колбеке onChange в виде параметра fullStr).\n\nБиблиотека предоставляет также утилиту fitToCurrency, 
-    котороая возвращает строку отформатированную в денежном формате. В качестве параметров данная утилита принимает value - 
+    story: `В случае использования контролируемого инпута в value необходимо передавать уже
+    отформатированную строку с префиксом/суффиксом/разделителем (данная строка возвращается в
+    колбеке onChange в виде параметра fullStr).\n\nБиблиотека предоставляет также утилиту fitToCurrency,
+    котороая возвращает строку отформатированную в денежном формате. В качестве параметров данная утилита принимает value -
     значение, которое надо отформатировать, а также параметры precision, decimal, thousand, prefix, suffix.`,
   },
 };

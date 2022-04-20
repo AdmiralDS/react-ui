@@ -5,8 +5,8 @@ import { keyboardKey } from '#src/components/common/keyboardKey';
 import { refSetter } from '#src/components/common/utils/refSetter';
 import { Dropdown } from '#src/components/Dropdown';
 
-import type { Dimension } from './Buton';
-import { Button } from './Buton';
+import type { Dimension } from '#src/components/OverflowMenu/Buton';
+import { Button } from '#src/components/OverflowMenu/Buton';
 
 const StyledDropdown = styled(Dropdown)`
   padding: 8px 0;

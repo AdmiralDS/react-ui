@@ -1,11 +1,11 @@
 import * as React from 'react';
-import styled, { FlattenInterpolation, DefaultTheme, ThemeProps } from 'styled-components';
+import styled, { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import { typography } from '#src/components/Typography';
 import { ReactComponent as ChevronLeft } from '@admiral-ds/icons/build/system/ChevronLeftOutline.svg';
 import { ReactComponent as ChevronRight } from '@admiral-ds/icons/build/system/ChevronRightOutline.svg';
 
-import { PaginationButton } from './PaginationButton';
-import { MenuButton } from './Menu';
+import { PaginationButton } from '#src/components/PaginationOne/PaginationButton';
+import { MenuButton } from '#src/components/PaginationOne/Menu';
 
 const ComplexWrapper = styled.div`
   display: flex;
@@ -15,6 +15,7 @@ const ComplexWrapper = styled.div`
   user-select: none;
   min-width: 696px;
   justify-content: space-between;
+  color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
 `;
 
 const SimpleWrapper = styled(ComplexWrapper)`
@@ -26,10 +27,10 @@ const Part = styled.div`
   align-items: center;
 `;
 
-const Devider = styled.div`
+const Divider = styled.div`
   width: 1px;
   height: 24px;
-  background-color: ${({ theme }) => theme.color.background.tertiary};
+  background-color: ${({ theme }) => theme.color['Neutral/Neutral 20']};
 `;
 
 const PageAdditional = styled.span`
@@ -148,7 +149,7 @@ export const PaginationOne: React.FC<PaginationOneProps> = ({
           >
             {pageSize}
           </MenuButton>
-          <Devider />
+          <Divider />
           <PageSizeAdditional>
             {itemRangeText(
               Math.min(pageSize * (page - 1) + 1, totalItems),
@@ -158,7 +159,7 @@ export const PaginationOne: React.FC<PaginationOneProps> = ({
           </PageSizeAdditional>
         </Part>
         <Part>
-          <Devider />
+          <Divider />
           <MenuButton
             options={pages}
             selected={page}

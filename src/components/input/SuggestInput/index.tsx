@@ -1,10 +1,10 @@
 import * as React from 'react';
+import { HTMLAttributes } from 'react';
 import { changeInputData } from '#src/components/common/dom/changeInputData';
 import { keyboardKey } from '#src/components/common/keyboardKey';
 import { refSetter } from '#src/components/common/utils/refSetter';
 import { typography } from '#src/components/Typography';
 import { ReactComponent as SearchOutlineSVG } from '@admiral-ds/icons/build/system/SearchOutline.svg';
-import { HTMLAttributes } from 'react';
 import styled from 'styled-components';
 import { TextInput, TextInputProps } from '../TextInput';
 import { Dropdown as DropComponent } from '#src/components/Dropdown';
@@ -18,7 +18,7 @@ const Dropdown = styled(DropComponent)`
 
 const SearchIcon = styled(SearchOutlineSVG)`
   & *[fill^='#'] {
-    fill: ${(props) => props.theme.color.text.secondary};
+    fill: ${(props) => props.theme.color['Neutral/Neutral 50']};
   }
 
   &:hover {
@@ -26,7 +26,7 @@ const SearchIcon = styled(SearchOutlineSVG)`
   }
 
   &:hover *[fill^='#'] {
-    fill: ${(props) => props.theme.color.basic.hover};
+    fill: ${(props) => props.theme.color['Primary/Primary 70']};
   }
 `;
 
@@ -47,7 +47,7 @@ const SearchingPanelContainer = styled.div`
     line-height: 32px;
   }
 
-  color: ${(p) => p.theme.color.text.secondary};
+  color: ${(p) => p.theme.color['Neutral/Neutral 50']};
 `;
 
 const SearchTextContainer = styled.div`

@@ -1,13 +1,13 @@
 import { INPUT_DIMENSIONS_VALUES } from '#src/components/input';
-import { ChangeEvent } from 'react';
 import * as React from 'react';
+import { ChangeEvent } from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { SuggestField } from '#src/components/form/SuggestField';
 import { withDesign } from 'storybook-addon-designs';
 import styled from 'styled-components';
 
 export default {
-  title: 'Form Field Components/SuggestField',
+  title: 'Admiral-2.1/Form Field/SuggestField',
   component: SuggestField,
   decorators: [withDesign],
   parameters: {

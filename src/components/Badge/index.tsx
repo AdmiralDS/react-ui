@@ -1,8 +1,6 @@
-import type { FC } from 'react';
-import React, { HTMLAttributes } from 'react';
+import * as React from 'react';
 import styled, { css } from 'styled-components';
-
-import { typography } from '../Typography';
+import { typography } from '#src/components/Typography';
 
 type Dimension = 'm' | 's';
 type Appearance =
@@ -17,32 +15,35 @@ type Appearance =
   | 'lightDisable'
   | 'white'
   | 'whiteInactive'
-  | 'whiteDisable';
+  | 'whiteDisable'
+  | 'whiteBlue';
 
 const background = css<{ appearance: Appearance }>`
   background: ${({ appearance, theme }) => {
     switch (appearance) {
       case 'info':
-        return theme.color.basic.primary;
+        return theme.color['Primary/Primary 60 Main'];
       case 'warning':
-        return theme.color.status.warn;
+        return theme.color['Warning/Warning 50 Main'];
       case 'success':
-        return theme.color.status.success;
+        return theme.color['Success/Success 50 Main'];
       case 'error':
-        return theme.color.status.danger;
+        return theme.color['Error/Error 60 Main'];
       case 'grey':
-        return theme.color.text.secondary;
+        return theme.color['Neutral/Neutral 50'];
       case 'dark':
-        return theme.color.basic.secondary;
+        return theme.color['Neutral/Neutral 80'];
+      case 'whiteBlue':
+        return theme.color['Special/Static White'];
       case 'white':
       case 'whiteInactive':
       case 'whiteDisable':
-        return theme.color.background.primary;
+        return theme.color['Neutral/Neutral 00'];
       case 'light':
       case 'lightInactive':
       case 'lightDisable':
       default:
-        return theme.color.background.tertiary;
+        return theme.color['Neutral/Neutral 10'];
     }
   }};
 `;
@@ -55,19 +56,21 @@ const color = css<{ appearance: Appearance }>`
       case 'success':
       case 'error':
       case 'grey':
-        return theme.color.text.staticWhite;
+        return theme.color['Special/Static White'];
       case 'dark':
-        return theme.color.text.inversion;
+        return theme.color['Neutral/Neutral 00'];
+      case 'whiteBlue':
+        return theme.color['Primary/Primary 60 Main'];
       case 'lightInactive':
       case 'whiteInactive':
-        return theme.color.text.secondary;
-      case 'lightDisable':
+        return theme.color['Neutral/Neutral 50'];
       case 'whiteDisable':
-        return theme.color.text.tertiary;
+      case 'lightDisable':
+        return theme.color['Neutral/Neutral 30'];
       case 'white':
       case 'light':
       default:
-        return theme.color.text.primary;
+        return theme.color['Neutral/Neutral 90'];
     }
   }};
 `;
@@ -87,14 +90,14 @@ export const BadgeComponent = styled.div<{ dimension: Dimension; appearance: App
   user-select: none;
 `;
 
-export interface BadgeProps extends HTMLAttributes<HTMLDivElement> {
+export interface BadgeProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Размер компонента */
   dimension?: Dimension;
   /** Внешний вид компонента */
   appearance?: Appearance;
 }
 
-export const Badge: FC<BadgeProps> = ({ children, dimension = 'm', appearance = 'light', ...props }) => {
+export const Badge: React.FC<BadgeProps> = ({ children, dimension = 'm', appearance = 'light', ...props }) => {
   const ariaLabel = `Количество ${children}`;
   return (
     <BadgeComponent dimension={dimension} appearance={appearance} aria-label={ariaLabel} {...props}>

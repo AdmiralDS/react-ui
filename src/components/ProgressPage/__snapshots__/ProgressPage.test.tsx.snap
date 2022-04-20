@@ -2,7 +2,7 @@
 
 exports[`ProgressBar should render component 1`] = `
 .c1 {
-  background: #E2E5E9;
+  background: #D6D8DD;
   border-radius: 2px;
   min-width: 140px;
   min-height: 4px;
@@ -13,7 +13,7 @@ exports[`ProgressBar should render component 1`] = `
 }
 
 .c2 {
-  background: #0D69F2;
+  background: #0062FF;
   width: 0%;
   border-radius: 2px;
   -webkit-transition: all 0.3s linear;
@@ -27,10 +27,6 @@ exports[`ProgressBar should render component 1`] = `
   display: flex;
   padding-bottom: 8px;
   font-size: 12px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
   -webkit-box-pack: justify;
   -webkit-justify-content: space-between;
   -ms-flex-pack: justify;
@@ -40,7 +36,7 @@ exports[`ProgressBar should render component 1`] = `
   font-style: normal;
   font-weight: normal;
   font-family: 'VTB Group UI',sans-serif;
-  color: #2B313B;
+  color: #22242A;
 }
 
 <div>
@@ -65,7 +61,7 @@ exports[`ProgressBar should render component 1`] = `
 
 exports[`ProgressBar should render component with prop appearance=error 1`] = `
 .c1 {
-  background: #E2E5E9;
+  background: #D6D8DD;
   border-radius: 2px;
   min-width: 140px;
   min-height: 4px;
@@ -76,7 +72,7 @@ exports[`ProgressBar should render component with prop appearance=error 1`] = `
 }
 
 .c2 {
-  background: #DA0B20;
+  background: #D92020;
   width: 0%;
   border-radius: 2px;
   -webkit-transition: all 0.3s linear;
@@ -90,10 +86,6 @@ exports[`ProgressBar should render component with prop appearance=error 1`] = `
   display: flex;
   padding-bottom: 8px;
   font-size: 12px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
   -webkit-box-pack: justify;
   -webkit-justify-content: space-between;
   -ms-flex-pack: justify;
@@ -103,7 +95,7 @@ exports[`ProgressBar should render component with prop appearance=error 1`] = `
   font-style: normal;
   font-weight: normal;
   font-family: 'VTB Group UI',sans-serif;
-  color: #DA0B20;
+  color: #D92020;
 }
 
 <div>
@@ -128,7 +120,7 @@ exports[`ProgressBar should render component with prop appearance=error 1`] = `
 
 exports[`ProgressBar should render component with prop percent 1`] = `
 .c1 {
-  background: #E2E5E9;
+  background: #D6D8DD;
   border-radius: 2px;
   min-width: 140px;
   min-height: 4px;
@@ -139,7 +131,7 @@ exports[`ProgressBar should render component with prop percent 1`] = `
 }
 
 .c2 {
-  background: #0D69F2;
+  background: #0062FF;
   width: 50%;
   border-radius: 2px;
   -webkit-transition: all 0.3s linear;
@@ -153,10 +145,6 @@ exports[`ProgressBar should render component with prop percent 1`] = `
   display: flex;
   padding-bottom: 8px;
   font-size: 12px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
   -webkit-box-pack: justify;
   -webkit-justify-content: space-between;
   -ms-flex-pack: justify;
@@ -166,7 +154,7 @@ exports[`ProgressBar should render component with prop percent 1`] = `
   font-style: normal;
   font-weight: normal;
   font-family: 'VTB Group UI',sans-serif;
-  color: #2B313B;
+  color: #22242A;
 }
 
 <div>

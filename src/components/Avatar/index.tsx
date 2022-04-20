@@ -1,16 +1,11 @@
 import * as React from 'react';
-import styled, { ThemeContext, css } from 'styled-components';
-import { LIGHT_THEME, DARK_THEME } from '#src/components/themes';
-import { Tooltip } from '#src/components/Tooltip';
+import styled, { css } from 'styled-components';
 import { typography } from '#src/components/Typography';
+import { Tooltip } from '#src/components/Tooltip';
+import { DefaultFontColorName } from '#src/components/themes/common';
 
 import { useLoaded } from './useLoaded';
 import { AvatarSVG } from './Avatar_SVG';
-
-const InverseTooltip = (props: any) => {
-  const themeContext = React.useContext(ThemeContext);
-  return <Tooltip {...props} theme={themeContext.name == 'dark' ? LIGHT_THEME : DARK_THEME} />;
-};
 
 const Wrapper = styled.button<{ size: string }>`
   position: relative;
@@ -32,10 +27,11 @@ const getTextColor = css<{ appearance: Appearance | { background: string; text: 
     switch (appearance) {
       case 'light':
       case 'white':
-        return theme.color.text.primary;
+        return theme.color[DefaultFontColorName];
       case 'grey':
+        return theme.color['Special/Static White'];
       case 'dark':
-        return theme.color.text.inversion;
+        return theme.color['Neutral/Neutral 00'];
       default:
         return appearance.text;
     }
@@ -96,7 +92,7 @@ const IconWrapper = styled.div<{ dimension: Dimension }>`
 
   & svg {
     & *[fill^='#'] {
-      fill: ${({ theme }) => theme.color.basic.tertiary};
+      fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
     }
     width: 100%;
     height: 100%;
@@ -198,9 +194,9 @@ export const Avatar = ({
   return (
     <Wrapper size={getSize()} {...props}>
       {showTooltip ? (
-        <InverseTooltip anchorClassName="avatar-tooltip" renderContent={() => userName}>
+        <Tooltip anchorClassName="avatar-tooltip" renderContent={() => userName}>
           {renderContent()}
-        </InverseTooltip>
+        </Tooltip>
       ) : (
         renderContent()
       )}

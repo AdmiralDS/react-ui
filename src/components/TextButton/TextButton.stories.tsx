@@ -15,42 +15,100 @@ const Separator = styled.div`
   width: 8px;
 `;
 
+const WrapperButton = styled.div`
+  display: flex;
+  flex-direction: row;
+  > * {
+    flex: 1 0 200px;
+    max-width: 300px;
+  }
+`;
+
 export default {
-  title: 'Example/Text Button',
+  title: 'Admiral-2.1/Text Button',
   decorators: [withDesign],
   component: TextButton,
   parameters: {
-    design: {
-      type: 'figma',
-      url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=108393%3A69880',
-    },
+    design: [
+      {
+        type: 'figma',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A17830',
+      },
+      {
+        type: 'figma',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A18134',
+      },
+      {
+        type: 'figma',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A18216',
+      },
+      {
+        type: 'figma',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A18175',
+      },
+      {
+        type: 'figma',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A18257',
+      },
+    ],
   },
 } as ComponentMeta<typeof TextButton>;
 
 const TextButtonStory: ComponentStory<typeof TextButton> = () => {
   return (
     <>
-      <StyledText font="Body/Body 1 Long" as="div">
-        Dimension - M
-      </StyledText>
-      <TextButton dimension="m" text="Text Button" icon={<AttachFileOutline />} />
-      <Separator />
-      <TextButton dimension="m" text="Text Button" icon={<AttachFileOutline />} displayRight />
-      <Separator />
-      <TextButton dimension="m" text="Text Button" />
-      <Separator />
-      <TextButton dimension="m" text="Text Button Secondary" icon={<AttachFileOutline />} appearance="secondary" />
-      <Separator />
-      <StyledText font="Body/Body 1 Long" as="div">
-        Dimension - S
-      </StyledText>
-      <TextButton dimension="s" text="Text Button" icon={<AttachFileOutline />} />
-      <Separator />
-      <TextButton dimension="s" text="Text Button" icon={<AttachFileOutline />} displayRight />
-      <Separator />
-      <TextButton dimension="s" text="Text Button" />
-      <Separator />
-      <TextButton dimension="s" text="Text Button Secondary" icon={<AttachFileOutline />} appearance="secondary" />
+      <WrapperButton>
+        <div>
+          <StyledText font="Body/Body 1 Long" as="div">
+            Dimension - M
+          </StyledText>
+          <TextButton dimension="m" text="Text Button" icon={<AttachFileOutline />} appearance="primary" />
+          <Separator />
+          <TextButton dimension="m" text="Text Button" icon={<AttachFileOutline />} displayRight />
+          <Separator />
+          <TextButton dimension="m" text="Text Button" icon={<AttachFileOutline />} disabled={true} />
+          <Separator />
+          <StyledText font="Body/Body 1 Long" as="div">
+            Dimension - S
+          </StyledText>
+          <TextButton dimension="s" text="Text Button" icon={<AttachFileOutline />} />
+          <Separator />
+          <TextButton dimension="s" text="Text Button" icon={<AttachFileOutline />} displayRight />
+          <Separator />
+          <TextButton dimension="s" text="Text Button" />
+        </div>
+        <div>
+          <StyledText font="Body/Body 1 Long" as="div">
+            Dimension - M
+          </StyledText>
+          <TextButton dimension="m" text="Text Button" icon={<AttachFileOutline />} appearance="secondary" />
+          <Separator />
+          <TextButton
+            dimension="m"
+            text="Text Button"
+            icon={<AttachFileOutline />}
+            appearance="secondary"
+            displayRight
+          />
+          <Separator />
+          <TextButton dimension="m" text="Text Button" icon={<AttachFileOutline />} appearance="secondary" disabled />
+          <Separator />
+          <StyledText font="Body/Body 1 Long" as="div">
+            Dimension - S
+          </StyledText>
+          <TextButton dimension="s" text="Text Button" icon={<AttachFileOutline />} appearance="secondary" />
+          <Separator />
+          <TextButton
+            dimension="s"
+            text="Text Button"
+            icon={<AttachFileOutline />}
+            appearance="secondary"
+            displayRight
+          />
+          <Separator />
+          <TextButton dimension="s" text="Text Button" appearance="secondary" />
+        </div>
+      </WrapperButton>
     </>
   );
 };

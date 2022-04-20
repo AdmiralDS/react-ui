@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { ComponentMeta, ComponentStory, Story } from '@storybook/react';
-import { PaginationOne, PaginationOneProps } from '#src/components/PaginationOne';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
+import styled from 'styled-components';
+import { PaginationOne } from '#src/components/PaginationOne';
 import { withDesign } from 'storybook-addon-designs';
 import { Field } from '#src/components/Field';
-import styled from 'styled-components';
 
 const Separator = styled.div`
   width: 100%;
@@ -11,18 +11,18 @@ const Separator = styled.div`
 `;
 
 export default {
-  title: 'Example/PaginationOne',
+  title: 'Admiral-2.1/PaginationOne',
   decorators: [withDesign],
   component: PaginationOne,
   parameters: {
     design: [
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A41329',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A41329',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A41617',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A41617',
       },
     ],
   },
@@ -63,17 +63,19 @@ const Template1: ComponentStory<typeof PaginationOne> = (args) => {
   const pageSizes = [8, 20, 50, 100, 200];
   const totalElements = 100;
   return (
-    <PaginationOne
-      {...args}
-      onChange={({ page, pageSize }) => {
-        setPage(page);
-        setPageSize(pageSize);
-      }}
-      page={page}
-      pageSize={pageSize}
-      totalItems={totalElements}
-      pageSizes={pageSizes}
-    />
+    <>
+      <PaginationOne
+        {...args}
+        onChange={({ page, pageSize }) => {
+          setPage(page);
+          setPageSize(pageSize);
+        }}
+        page={page}
+        pageSize={pageSize}
+        totalItems={totalElements}
+        pageSizes={pageSizes}
+      />
+    </>
   );
 };
 

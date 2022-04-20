@@ -19,12 +19,11 @@ const PanelItem = styled.h6<{
   ${typography['Subtitle/Subtitle 2']}
 
   ${({ theme, view }) => `
-    color: ${theme.color.basic.primary};
-    background: ${view ? theme.color.background.tertiary : 'transparent'};
+    color: ${theme.color['Primary/Primary 60 Main']};
+    background: ${view ? theme.color['Opacity/Focus'] : 'transparent'};
 
     &:hover {
-      color: ${theme.color.basic.hover};
-      background: ${theme.color.background.secondary};
+      background: ${theme.color['Opacity/Hover']};
     }
   `}
 `;

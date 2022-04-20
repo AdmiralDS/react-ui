@@ -1,11 +1,11 @@
 import * as React from 'react';
+import { HTMLAttributes } from 'react';
 import styled, { css } from 'styled-components';
 import { typography } from '#src/components/Typography';
 import type { SuggestItem } from './';
-import { HTMLAttributes } from 'react';
 
 const Highlight = styled.span`
-  color: ${(p) => p.theme.color.basic.primary};
+  color: ${(p) => p.theme.color['Primary/Primary 60 Main']};
 `;
 
 function getHighlightedText(text = '', highlight = '') {
@@ -29,7 +29,7 @@ function getHighlightedText(text = '', highlight = '') {
 }
 
 const activePanel = css`
-  background-color: ${(p) => p.theme.color.background.secondary};
+  background-color: ${(p) => p.theme.color['Neutral/Neutral 05']};
   cursor: pointer;
 `;
 
@@ -54,7 +54,7 @@ export const Panel = styled.div<{ active?: boolean }>`
     padding: 0 12px;
   }
 
-  color: ${(p) => p.theme.color.text.primary};
+  color: ${(p) => p.theme.color['Neutral/Neutral 90']};
 
   ${(p) => (p.active ? activePanel : '')}
 `;

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import { ProgressPage } from './index';
+import styled from 'styled-components';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -21,7 +21,7 @@ const Description = () => (
 );
 
 export default {
-  title: 'Example/ ProgressPage',
+  title: 'Admiral-2.1/ProgressPage',
   decorators: [withDesign],
   component: ProgressPage,
   parameters: {
@@ -34,11 +34,11 @@ export default {
     design: [
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=37%3A25008',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=37%3A25008',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=37%3A25036',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=37%3A25036',
       },
     ],
   },
@@ -53,18 +53,20 @@ export default {
 
 const Template1: ComponentStory<typeof ProgressPage> = ({ ...args }) => {
   return (
-    <ProgressPage
-      {...args}
-      label={
-        <>
-          <div>{args.appearance === 'error' ? 'Ошибка загрузки' : 'Загрузка данных...'}</div>
-          <div> {args.percent}%</div>
-        </>
-      }
-      percent={args.percent}
-      role="alert"
-      aria-live="assertive"
-    />
+    <>
+      <ProgressPage
+        {...args}
+        label={
+          <>
+            <div>{args.appearance === 'error' ? 'Ошибка загрузки' : 'Загрузка данных...'}</div>
+            <div> {args.percent}%</div>
+          </>
+        }
+        percent={args.percent}
+        role="alert"
+        aria-live="assertive"
+      />
+    </>
   );
 };
 
@@ -83,18 +85,20 @@ const Template2: ComponentStory<typeof ProgressPage> = ({ ...args }) => {
   }, [tik]);
 
   return (
-    <ProgressPage
-      {...args}
-      label={
-        <>
-          <div>{args.appearance === 'error' ? 'Ошибка загрузки' : 'Загрузка данных...'}</div>
-          <div> {args.percent || tik}%</div>
-        </>
-      }
-      percent={args.percent || tik}
-      role="alert"
-      aria-live="assertive"
-    />
+    <>
+      <ProgressPage
+        {...args}
+        label={
+          <>
+            <div>{args.appearance === 'error' ? 'Ошибка загрузки' : 'Загрузка данных...'}</div>
+            <div> {args.percent || tik}%</div>
+          </>
+        }
+        percent={args.percent || tik}
+        role="alert"
+        aria-live="assertive"
+      />
+    </>
   );
 };
 

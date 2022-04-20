@@ -2,9 +2,9 @@ import * as React from 'react';
 import styled, { css } from 'styled-components';
 import { ReactComponent as MoreHorizontalOutline } from '@admiral-ds/icons/build/system/MoreHorizontalOutline.svg';
 
-const activeFilter = css<{ isFilterOpen?: boolean }>`
+const activeFilter = css`
   & *[fill^='#'] {
-    fill: ${({ theme, isFilterOpen }) => (isFilterOpen ? theme.color.basic.press : theme.color.basic.primary)};
+    fill: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
   }
 `;
 
@@ -23,7 +23,7 @@ const ButtonComponent = styled.button`
   margin: 2px 0;
 `;
 
-export const ButtonContent = styled.span<{ isFilterActive?: boolean; isFilterOpen?: boolean; iconSize: string }>`
+export const ButtonContent = styled.span<{ isFilterActive?: boolean; iconSize: string }>`
   position: relative;
   display: inline-flex;
   align-items: center;
@@ -37,12 +37,12 @@ export const ButtonContent = styled.span<{ isFilterActive?: boolean; isFilterOpe
   }
 
   & *[fill^='#'] {
-    fill: ${({ theme }) => theme.color.text.secondary};
+    fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
   }
 
   &:hover {
     *[fill^='#'] {
-      fill: ${({ theme }) => theme.color.basic.hover};
+      fill: ${({ theme }) => theme.color['Primary/Primary 70']};
     }
   }
 
@@ -54,15 +54,14 @@ interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   dimension?: Dimension;
   renderFilterIcon?: () => React.ReactNode;
   isFilterActive?: boolean;
-  isFilterOpen?: boolean;
 }
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ dimension, renderFilterIcon, isFilterActive, isFilterOpen, ...props }, ref) => {
+  ({ dimension, renderFilterIcon, isFilterActive, ...props }, ref) => {
     const iconSize = dimension === 's' || dimension === 'm' ? '16px' : '20px';
     return (
       <ButtonComponent ref={ref} type="button" {...props}>
-        <ButtonContent isFilterActive={isFilterActive} isFilterOpen={isFilterOpen} iconSize={iconSize}>
+        <ButtonContent isFilterActive={isFilterActive} iconSize={iconSize}>
           {renderFilterIcon ? renderFilterIcon() : <MoreHorizontalOutline aria-hidden />}
         </ButtonContent>
       </ButtonComponent>

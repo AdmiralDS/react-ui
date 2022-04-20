@@ -122,7 +122,7 @@ Object {
 }
 
 .c0 svg path {
-  fill: #0D69F2;
+  fill: #0062FF;
 }
 
 <body>
@@ -148,7 +148,7 @@ Object {
 }
 
 .c0 svg path {
-  fill: #0D69F2;
+  fill: #0062FF;
 }
 
 <div>
@@ -229,7 +229,7 @@ Object {
 }
 
 .c0 svg path {
-  fill: #0D69F2;
+  fill: #0062FF;
 }
 
 <body>
@@ -255,7 +255,7 @@ Object {
 }
 
 .c0 svg path {
-  fill: #0D69F2;
+  fill: #0062FF;
 }
 
 <div>

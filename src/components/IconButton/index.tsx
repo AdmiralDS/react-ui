@@ -1,5 +1,5 @@
+import type { ButtonHTMLAttributes, FC } from 'react';
 import * as React from 'react';
-import type { FC, ButtonHTMLAttributes } from 'react';
 import styled from 'styled-components';
 import { Spinner } from '#src/components/Spinner';
 
@@ -51,14 +51,15 @@ const StyledButton = styled.button.attrs<IconButtonProps, { 'data-dimension'?: D
 
   &:hover {
     cursor: pointer;
-    background: ${({ theme }) => theme.color.background.secondary};
+    background: ${({ theme }) => theme.color['Opacity/Hover']};
     & *[fill^='#'] {
-      fill: ${({ theme }) => theme.color.basic.hover};
+      fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
     }
   }
   &:active {
+    background: ${({ theme }) => theme.color['Opacity/Press']};
     & *[fill^='#'] {
-      fill: ${({ theme }) => theme.color.basic.press};
+      fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
     }
   }
 
@@ -66,7 +67,7 @@ const StyledButton = styled.button.attrs<IconButtonProps, { 'data-dimension'?: D
     cursor: not-allowed;
     background-color: transparent;
     & *[fill^='#'] {
-      fill: ${({ theme }) => theme.color.text.tertiary};
+      fill: ${({ theme }) => theme.color['Neutral/Neutral 30']};
     }
   }
 `;
@@ -92,7 +93,7 @@ const IconButtonContent = styled.span<{ dimension?: Dimension }>`
   }
 
   & *[fill^='#'] {
-    fill: ${(p) => p.theme.color.text.secondary};
+    fill: ${(p) => p.theme.color['Neutral/Neutral 50']};
   }
 
   & > svg {
@@ -105,7 +106,7 @@ const PseudoIcon = styled.div<{ dimension?: Dimension }>`
   border-radius: 50%;
   width: ${({ dimension }) => (dimension === 's' ? 20 : 24)}px;
   height: ${({ dimension }) => (dimension === 's' ? 20 : 24)}px;
-  background: ${({ theme }) => theme.color.background.tertiary};
+  background: ${({ theme }) => theme.color['Neutral/Neutral 50']};
 `;
 
 export const IconButton: FC<IconButtonProps> = ({

@@ -1,31 +1,31 @@
 import { css } from 'styled-components';
 
 export const primaryAppearanceMixin = css`
-  background-color: ${({ theme }) => theme.color.basic.primary};
-  color: ${({ theme }) => theme.color.text.staticWhite};
-  border: 2px solid ${({ theme }) => theme.color.basic.primary};
+  background-color: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
+  color: ${({ theme }) => theme.color['Special/Static White']};
+  border: 1px solid ${({ theme }) => theme.color['Primary/Primary 60 Main']};
   & *[fill^='#'] {
-    fill: ${({ theme }) => theme.color.text.staticWhite};
+    fill: ${({ theme }) => theme.color['Special/Static White']};
   }
 
   :focus,
   :hover {
-    background-color: ${({ theme }) => theme.color.basic.hover};
-    border-color: ${({ theme }) => theme.color.basic.hover};
+    background-color: ${({ theme }) => theme.color['Primary/Primary 70']};
+    border-color: ${({ theme }) => theme.color['Primary/Primary 70']};
   }
 
   :active {
-    background-color: ${({ theme }) => theme.color.basic.press};
-    border-color: ${({ theme }) => theme.color.basic.press};
+    background-color: ${({ theme }) => theme.color['Primary/Primary 80']};
+    border-color: ${({ theme }) => theme.color['Primary/Primary 80']};
   }
 
   &[data-appearance~='disabled'],
   :disabled {
-    background-color: ${({ theme }) => theme.color.basic.disable};
-    color: ${({ theme }) => theme.color.text.inversion};
-    border-color: ${({ theme }) => theme.color.basic.disable};
+    background-color: ${({ theme }) => theme.color['Neutral/Neutral 10']};
+    color: ${({ theme }) => theme.color['Neutral/Neutral 30']};
+    border-color: ${({ theme }) => theme.color['Neutral/Neutral 10']};
     & *[fill^='#'] {
-      fill: ${({ theme }) => theme.color.text.inversion};
+      fill: ${({ theme }) => theme.color['Neutral/Neutral 30']};
     }
   }
 `;

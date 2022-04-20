@@ -35,10 +35,9 @@ const StyledButton = styled.button.attrs<ButtonProps, { 'data-dimension'?: Dimen
   appearance: none;
   vertical-align: center;
 
-  ${dimensionMixin}
-
   ${appearanceMixin};
 
+  ${dimensionMixin}
   &:hover {
     cursor: pointer;
   }

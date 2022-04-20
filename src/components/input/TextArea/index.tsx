@@ -1,6 +1,6 @@
 import { changeInputData, CustomInputHandler, InputData } from '#src/components/common/dom/changeInputData';
 import { refSetter } from '#src/components/common/utils/refSetter';
-import type { ExtraProps, InputStatus, ComponentDimension } from '#src/components/input/types';
+import type { ComponentDimension, ExtraProps, InputStatus } from '#src/components/input/types';
 import { typography } from '#src/components/Typography';
 import { ReactComponent as CloseOutlineSvg } from '@admiral-ds/icons/build/service/CloseOutline.svg';
 import type { ForwardedRef, TextareaHTMLAttributes } from 'react';
@@ -10,7 +10,7 @@ import { StatusIcon } from '../StatusIcon';
 
 const ClearIcon = styled(CloseOutlineSvg)`
   & *[fill^='#'] {
-    fill: ${(props) => props.theme.color.text.secondary};
+    fill: ${(props) => props.theme.color['Neutral/Neutral 50']};
   }
 
   &:hover {
@@ -18,7 +18,7 @@ const ClearIcon = styled(CloseOutlineSvg)`
   }
 
   &:hover *[fill^='#'] {
-    fill: ${(props) => props.theme.color.basic.hover};
+    fill: ${(props) => props.theme.color['Primary/Primary 70']};
   }
 `;
 
@@ -48,23 +48,69 @@ const extraPadding = css<ExtraProps>`
 `;
 
 const disabledColors = css`
-  background-color: ${(props) => props.theme.color.background.tertiary};
-  border-color: ${(props) => props.theme.color.background.tertiary};
+  background-color: ${(props) => props.theme.color['Neutral/Neutral 10']};
+  border-color: transparent;
+`;
+
+const BorderedDiv = styled.div`
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  pointer-events: none;
+  overflow: hidden;
+  min-width: 0;
+
+  background: none;
+  border: 1px solid ${(props) => props.theme.color['Neutral/Neutral 40']};
+  border-radius: inherit;
+
+  [data-status='error'] & {
+    border: 1px solid ${(props) => props.theme.color['Error/Error 60 Main']};
+  }
+
+  [data-status='success'] & {
+    border: 1px solid ${(props) => props.theme.color['Success/Success 50 Main']};
+  }
+
+  [data-read-only] & {
+    border-color: transparent;
+  }
 `;
 
 const colorsBorderAndBackground = css<{ disabled?: boolean }>`
-  background-color: ${(props) => props.theme.color.background.primary};
-  border: 1px solid ${(props) => props.theme.color.basic.tertiary};
-  border-radius: 4px;
+  background-color: ${(props) => props.theme.color['Neutral/Neutral 00']};
 
-  ${({ disabled }) => (disabled ? disabledColors : '')}
-
-  &:focus {
-    border-color: ${(props) => props.theme.color.basic.press};
+  &:focus + ${BorderedDiv} {
+    border: 2px solid ${(props) => props.theme.color['Primary/Primary 60 Main']};
   }
 
-  &:hover {
-    border-color: ${(props) => props.theme.color.basic.hover};
+  &:disabled + ${BorderedDiv}, [data-read-only] & + ${BorderedDiv} {
+    border-color: transparent;
+  }
+
+  &:hover:not(:focus) + ${BorderedDiv} {
+    border-color: ${(props) => (props.disabled ? 'transparent' : props.theme.color['Neutral/Neutral 60'])};
+  }
+
+  &:invalid + ${BorderedDiv}, &:invalid:hover + ${BorderedDiv} {
+    border: 1px solid ${(props) => props.theme.color['Error/Error 60 Main']};
+  }
+
+  [data-status='error'] &:hover + ${BorderedDiv}, [data-status='error'] &:focus + ${BorderedDiv} {
+    border: 1px solid ${(props) => props.theme.color['Error/Error 60 Main']};
+  }
+
+  [data-status='success'] &:hover + ${BorderedDiv}, [data-status='success'] &:focus + ${BorderedDiv} {
+    border: 1px solid ${(props) => props.theme.color['Success/Success 50 Main']};
+  }
+
+  [data-read-only] &,
+  &:disabled {
+    ${disabledColors}
+  }
+
+  [data-read-only] &:hover + ${BorderedDiv}, [data-read-only] &:focus + ${BorderedDiv} {
+    border-color: transparent;
   }
 `;
 
@@ -79,6 +125,7 @@ const Text = styled.textarea<ExtraProps>`
   outline: none;
   appearance: none;
   resize: none;
+  border-radius: inherit;
 
   box-sizing: border-box;
   flex: 1 1 auto;
@@ -87,32 +134,25 @@ const Text = styled.textarea<ExtraProps>`
   background: transparent;
   overflow: auto;
   padding: ${(props) => (props.dimension === 'xl' ? '' : '8px ')}${horizontalPaddingValue}px;
-  color: ${(props) => props.theme.color.text.primary};
+  color: ${(props) => props.theme.color['Neutral/Neutral 90']};
 
   ${(props) => (props.dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
   &::placeholder {
-    color: ${(props) => props.theme.color.text.secondary};
+    color: ${(props) => props.theme.color['Neutral/Neutral 50']};
   }
 
   &:disabled::placeholder {
-    color: ${(props) => props.theme.color.text.tertiary};
+    color: ${(props) => props.theme.color['Neutral/Neutral 30']};
   }
 
   [data-read-only] & {
-    ${disabledColors}
+    user-select: none;
+    pointer-events: none;
   }
 
   ${colorsBorderAndBackground}
   ${extraPadding}
   ${ieFixes}
-  [data-status='error'] &,
-  &:invalid {
-    border-color: ${(props) => props.theme.color.status.danger};
-  }
-
-  [data-status='success'] & {
-    border-color: ${(props) => props.theme.color.status.success};
-  }
 `;
 
 const Container = styled.div<{ disabled?: boolean; dimension?: ComponentDimension }>`
@@ -120,6 +160,7 @@ const Container = styled.div<{ disabled?: boolean; dimension?: ComponentDimensio
   display: flex;
   align-items: stretch;
   border: none;
+  border-radius: 4px;
 `;
 
 const IconPanel = styled.div<{ disabled?: boolean; dimension?: ComponentDimension }>`
@@ -292,6 +333,7 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
           rows={textRows}
           onChange={onChange}
         />
+        <BorderedDiv />
         {iconCount > 0 && (
           <IconPanel disabled={props.disabled} dimension={props.dimension}>
             {iconArray}

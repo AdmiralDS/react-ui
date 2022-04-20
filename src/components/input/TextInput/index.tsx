@@ -6,7 +6,7 @@ import {
 } from '#src/components/common/dom/changeInputData';
 import { refSetter } from '#src/components/common/utils/refSetter';
 import { Container } from '../Container';
-import type { ExtraProps, InputStatus, ComponentDimension } from '#src/components/input/types';
+import type { ComponentDimension, ExtraProps, InputStatus } from '#src/components/input/types';
 import { typography } from '#src/components/Typography';
 import { ReactComponent as CloseOutlineSvg } from '@admiral-ds/icons/build/service/CloseOutline.svg';
 import { ReactComponent as EyeCloseOutlineSvg } from '@admiral-ds/icons/build/service/EyeCloseOutline.svg';
@@ -18,7 +18,7 @@ import { StatusIcon } from '../StatusIcon';
 
 const EyeCloseIcon = styled(EyeCloseOutlineSvg)`
   & *[fill^='#'] {
-    fill: ${(props) => props.theme.color.text.secondary};
+    fill: ${(props) => props.theme.color['Neutral/Neutral 50']};
   }
 
   &:hover {
@@ -26,13 +26,13 @@ const EyeCloseIcon = styled(EyeCloseOutlineSvg)`
   }
 
   &:hover *[fill^='#'] {
-    fill: ${(props) => props.theme.color.basic.hover};
+    fill: ${(props) => props.theme.color['Primary/Primary 70']};
   }
 `;
 
 const EyeIcon = styled(EyeOutlineSvg)`
   & *[fill^='#'] {
-    fill: ${(props) => props.theme.color.text.secondary};
+    fill: ${(props) => props.theme.color['Neutral/Neutral 50']};
   }
 
   &:hover {
@@ -40,13 +40,13 @@ const EyeIcon = styled(EyeOutlineSvg)`
   }
 
   &:hover *[fill^='#'] {
-    fill: ${(props) => props.theme.color.basic.hover};
+    fill: ${(props) => props.theme.color['Primary/Primary 70']};
   }
 `;
 
 const ClearIcon = styled(CloseOutlineSvg)`
   & *[fill^='#'] {
-    fill: ${(props) => props.theme.color.text.secondary};
+    fill: ${(props) => props.theme.color['Neutral/Neutral 50']};
   }
 
   &:hover {
@@ -54,7 +54,7 @@ const ClearIcon = styled(CloseOutlineSvg)`
   }
 
   &:hover *[fill^='#'] {
-    fill: ${(props) => props.theme.color.basic.hover};
+    fill: ${(props) => props.theme.color['Primary/Primary 70']};
   }
 `;
 
@@ -87,21 +87,73 @@ const extraPadding = css<ExtraProps>`
 `;
 
 const disabledColors = css`
-  background-color: ${(props) => props.theme.color.background.tertiary};
-  border-color: ${(props) => props.theme.color.background.tertiary};
+  background-color: ${(props) => props.theme.color['Neutral/Neutral 10']};
+  border-color: transparent;
+`;
+
+const BorderedDiv = styled.div`
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  pointer-events: none;
+  overflow: hidden;
+  min-width: 0;
+
+  background: none;
+  border: 1px solid ${(props) => props.theme.color['Neutral/Neutral 40']};
+  border-radius: inherit;
+
+  [data-status='error'] & {
+    border: 1px solid ${(props) => props.theme.color['Error/Error 60 Main']};
+  }
+
+  [data-status='success'] & {
+    border: 1px solid ${(props) => props.theme.color['Success/Success 50 Main']};
+  }
+
+  [data-read-only] & {
+    border-color: transparent;
+  }
 `;
 
 const colorsBorderAndBackground = css<{ disabled?: boolean }>`
-  background-color: ${(props) => props.theme.color.background.primary};
-  border: 1px solid ${(props) => props.theme.color.basic.tertiary};
-  border-radius: 4px;
+  background-color: ${(props) => props.theme.color['Neutral/Neutral 00']};
 
-  &:focus {
-    border: 1px solid ${(props) => props.theme.color.basic.press};
+  &:focus + ${BorderedDiv} {
+    border: 2px solid ${(props) => props.theme.color['Primary/Primary 60 Main']};
   }
 
-  &:hover {
-    border-color: ${(props) => props.theme.color.basic.hover};
+  &:disabled + ${BorderedDiv} {
+    border-color: transparent;
+  }
+
+  &:hover:not(:focus) + ${BorderedDiv} {
+    border-color: ${(props) => (props.disabled ? 'transparent' : props.theme.color['Neutral/Neutral 60'])};
+  }
+
+  &:invalid + ${BorderedDiv}, &:invalid:hover + ${BorderedDiv} {
+    border: 1px solid ${(props) => props.theme.color['Error/Error 60 Main']};
+  }
+
+  [data-status='error'] &:hover + ${BorderedDiv}, [data-status='error'] &:focus + ${BorderedDiv} {
+    border: 1px solid ${(props) => props.theme.color['Error/Error 60 Main']};
+  }
+
+  [data-status='success'] &:hover + ${BorderedDiv}, [data-status='success'] &:focus + ${BorderedDiv} {
+    border: 1px solid ${(props) => props.theme.color['Success/Success 50 Main']};
+  }
+
+  [data-read-only] &,
+  &:disabled {
+    ${disabledColors}
+  }
+
+  &:disabled {
+    color: ${(props) => props.theme.color['Neutral/Neutral 30']};
+  }
+
+  [data-read-only] &:hover + ${BorderedDiv}, [data-read-only] &:focus + ${BorderedDiv} {
+    border-color: transparent;
   }
 `;
 
@@ -115,6 +167,7 @@ const ieFixes = css`
 const Input = styled.input<ExtraProps>`
   outline: none;
   appearance: none;
+  border-radius: inherit;
 
   box-sizing: border-box;
   flex: 1 1 auto;
@@ -124,37 +177,25 @@ const Input = styled.input<ExtraProps>`
   text-overflow: ellipsis;
   padding: 0 ${horizontalPaddingValue}px;
 
-  ${(props) => (props.dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
-  color: ${(props) => props.theme.color.text.primary};
+  color: ${(props) => props.theme.color['Neutral/Neutral 90']};
 
+  ${(props) => (props.dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
   &::placeholder {
-    color: ${(props) => props.theme.color.text.secondary};
+    color: ${(props) => props.theme.color['Neutral/Neutral 50']};
   }
 
-  ${colorsBorderAndBackground}
-
-  &:disabled,
   &:disabled::placeholder {
-    color: ${(props) => props.theme.color.text.tertiary};
-    ${disabledColors}
+    color: ${(props) => props.theme.color['Neutral/Neutral 30']};
   }
 
   [data-read-only] & {
     user-select: none;
     pointer-events: none;
-    ${disabledColors}
   }
 
+  ${colorsBorderAndBackground}
   ${extraPadding}
   ${ieFixes}
-  [data-status='error'] &,
-  &:invalid {
-    border-color: ${(props) => props.theme.color.status.danger};
-  }
-
-  [data-status='success'] & {
-    border-color: ${(props) => props.theme.color.status.success};
-  }
 `;
 
 const IconPanel = styled.div<{ disabled?: boolean; dimension?: ComponentDimension }>`
@@ -168,7 +209,7 @@ const IconPanel = styled.div<{ disabled?: boolean; dimension?: ComponentDimensio
 
   padding-right: ${horizontalPaddingValue}px;
 
-  & > * {
+  & > svg {
     display: block;
     width: ${iconSizeValue}px;
   }
@@ -327,6 +368,7 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
           iconCount={iconCount}
           type={type === 'password' && isPasswordVisible ? 'text' : type}
         />
+        <BorderedDiv />
         {iconCount > 0 && (
           <IconPanel disabled={props.disabled} dimension={props.dimension}>
             {iconArray}

@@ -47,15 +47,12 @@ const height = css<{ dimension: CheckboxDimension }>`
 
 const Check = styled(CheckSVG)`
   pointer-events: none;
-  & *[fill^='#'] {
-    fill: ${({ theme }) => theme.color.text.staticWhite};
-  }
 `;
 
 const Indeterminate = styled(IndeterminateSVG)`
   pointer-events: none;
   & *[fill^='#'] {
-    fill: ${({ theme }) => theme.color.text.staticWhite};
+    fill: ${({ theme }) => theme.color['Special/Static White']};
   }
 `;
 
@@ -85,8 +82,22 @@ export const Background = styled.div<{ error?: boolean }>`
 
   /* disable inheritance from parent elements */
   line-height: initial;
-  background-color: ${({ theme }) => theme.color.background.primary};
-  border: 1px solid ${({ error, theme }) => (error ? theme.color.status.danger : theme.color.text.secondary)};
+  background-color: ${({ theme }) => theme.color['Neutral/Neutral 00']};
+  border: 1px solid
+    ${({ error, theme }) => (error ? theme.color['Error/Error 60 Main'] : theme.color['Neutral/Neutral 50'])};
+  & *[fill^='#'] {
+    fill: ${({ theme }) => theme.color['Special/Static White']};
+  }
+`;
+
+const indeterminate = css<{ indeterminate?: boolean }>`
+  &:not(:checked) + ${Background} {
+    background-color: ${({ theme, indeterminate }) => indeterminate && theme.color['Primary/Primary 60 Main']};
+    border: ${({ indeterminate }) => indeterminate && 'none'};
+    > * {
+      display: ${(p) => (p.indeterminate ? 'block' : 'none')};
+    }
+  }
 `;
 
 const Input = styled.input<{ indeterminate?: boolean }>`
@@ -94,8 +105,8 @@ const Input = styled.input<{ indeterminate?: boolean }>`
   ::-ms-check {
     display: none;
   }
-  width: calc(100% + 2px);
-  height: calc(100% + 2px);
+  width: 100%;
+  height: 100%;
 
   position: absolute;
   top: 50%;
@@ -104,7 +115,7 @@ const Input = styled.input<{ indeterminate?: boolean }>`
 
   box-sizing: border-box;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 1px;
   margin: 0;
   padding: 0;
 
@@ -113,42 +124,42 @@ const Input = styled.input<{ indeterminate?: boolean }>`
   }
 
   &:checked + ${Background} {
-    background-color: ${({ theme }) => theme.color.basic.primary};
+    background-color: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
     border: none;
   }
 
-  &:not(:checked) + ${Background} {
-    background-color: ${({ theme, indeterminate }) => indeterminate && theme.color.basic.primary};
-    border: ${({ indeterminate }) => indeterminate && 'none'};
-    > * {
-      display: ${(p) => (p.indeterminate ? 'block' : 'none')};
+  ${indeterminate}
+
+  &:not(:disabled):hover,
+  &:not(:disabled):focus {
+    &::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      width: calc(100% + 16px);
+      height: calc(100% + 16px);
+      background-color: ${({ theme }) => theme.color['Opacity/Hover']};
     }
   }
 
-  &:not(:checked):focus + ${Background}, &:not(:disabled):not(:checked):hover + ${Background} {
-    background-color: ${({ theme, indeterminate }) =>
-      indeterminate ? theme.color.basic.hover : theme.color.background.secondary};
-    border: ${(p) => (p.indeterminate ? 'none' : `1px solid ${p.theme.color.basic.hover}`)};
-  }
-
-  &:checked:focus + ${Background}, &:not(:disabled):checked:hover + ${Background} {
-    background-color: ${({ theme }) => theme.color.basic.hover};
-    border: none;
-  }
-
-  &:not(:checked):disabled + ${Background} {
-    background-color: ${({ theme }) => theme.color.background.primary};
-    border: 1px solid ${({ theme }) => theme.color.basic.disable};
-  }
-
   &:disabled + ${Background} {
-    background-color: ${({ theme }) => theme.color.basic.disable};
+    border: 1px solid ${({ theme }) => theme.color['Neutral/Neutral 30']};
+  }
+
+  &:checked:disabled + ${Background} {
+    background-color: ${({ theme }) => theme.color['Primary/Primary 30']};
     border: none;
+    & *[fill^='#'] {
+      fill: ${({ theme }) => theme.color['Neutral/Neutral 00']};
+    }
   }
 
   &:focus-visible {
     outline-offset: 2px;
-    outline: ${(p) => p.theme.color.basic.hover} solid 2px;
+    outline: ${(p) => p.theme.color['Primary/Primary 60 Main']} solid 2px;
   }
 `;
 

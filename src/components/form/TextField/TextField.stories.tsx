@@ -1,23 +1,29 @@
-import { HintDialog } from '#src/components/Hint/style';
 import { INPUT_DIMENSIONS_VALUES } from '#src/components/input';
 import * as React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { TextField } from '#src/components/form/TextField';
 import { withDesign } from 'storybook-addon-designs';
 import styled from 'styled-components';
-import { ReactComponent as HelpSolidSVG } from '@admiral-ds/icons/build/service/HelpSolid.svg';
-import { Hint } from '#src/components/Hint';
-import { T } from '#src/components/T';
 
 export default {
-  title: 'Form Field Components/TextField',
+  title: 'Admiral-2.1/Form Field/TextField',
   component: TextField,
   decorators: [withDesign],
   parameters: {
-    design: {
-      type: 'figma',
-      url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A61323',
-    },
+    design: [
+      {
+        type: 'figma',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A61323',
+      },
+      {
+        type: 'figma',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=23873%3A69875',
+      },
+      {
+        type: 'figma',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=23873%3A70116',
+      },
+    ],
   },
   argTypes: {
     dimension: {
@@ -49,10 +55,6 @@ export default {
       control: { type: 'boolean' },
     },
 
-    readOnly: {
-      control: { type: 'boolean' },
-    },
-
     displayCharacterCounter: {
       control: { type: 'boolean' },
     },
@@ -77,25 +79,6 @@ export default {
   },
 } as ComponentMeta<typeof TextField>;
 
-const HelpSolid = styled(HelpSolidSVG)`
-  & *[fill^='#'] {
-    fill: ${(p) => p.theme.color.text.secondary};
-  }
-  [data-focus-within] & *[fill^='#'] {
-    fill: ${(props) => props.theme.color.basic.hover};
-  }
-`;
-
-const InverseColor = styled(T)`
-  color: ${(p) => p.theme.color.text.staticWhite};
-`;
-
-const InverseBackgroundHint = styled(Hint)`
-  & ${HintDialog} {
-    background-color: ${(p) => p.theme.color.background.inversion};
-  }
-`;
-
 const DisplayContainer = styled.div`
   > * {
     margin-bottom: 24px;
@@ -112,26 +95,13 @@ const Template: ComponentStory<typeof TextField> = (props) => {
   };
 
   return (
-    <DisplayContainer>
-      <TextField {...props} value={localValue} onChange={handleChange} />
-      <TextField required label="Поле необходимо заполнить" />
-      <TextField
-        ref={fieldRef}
-        label="Напишите сочинение на заданную тему"
-        icons={
-          <InverseBackgroundHint
-            target={fieldRef}
-            renderContent={() => (
-              <InverseColor as="span" font="Body/Body 2 Long">
-                Тема сочинения: "Как я использую компоненты?"
-              </InverseColor>
-            )}
-          >
-            <HelpSolid />
-          </InverseBackgroundHint>
-        }
-      />
-    </DisplayContainer>
+    <>
+      <DisplayContainer>
+        <TextField {...props} value={localValue} onChange={handleChange} />
+        <TextField required label="Поле необходимо заполнить" />
+        <TextField ref={fieldRef} label="Напишите сочинение на заданную тему" />
+      </DisplayContainer>
+    </>
   );
 };
 

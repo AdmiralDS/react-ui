@@ -1,6 +1,6 @@
 import * as React from 'react';
-import type { IContextProps } from './ToastProvider';
-import { ToastContext } from './ToastProvider';
+import type { IContextProps } from '#src/components/Toast/ToastProvider';
+import { ToastContext } from '#src/components/Toast/ToastProvider';
 
 export function useToast(): IContextProps {
   const context = React.useContext(ToastContext);
@@ -9,8 +9,6 @@ export function useToast(): IContextProps {
     addToast: context?.addToast,
     removeToast: context?.removeToast,
     toasts: context?.toasts,
-    clearToasts: context?.clearToasts,
-    removeToastById: context?.removeToastById,
     autoDeleteTime: context?.autoDeleteTime,
   };
 }

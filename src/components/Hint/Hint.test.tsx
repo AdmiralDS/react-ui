@@ -2,10 +2,10 @@ import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { act } from 'react-dom/test-utils';
 import { ThemeProvider } from 'styled-components';
+import { LIGHT_THEME } from '#src/components/themes';
 
 import type { HintProps } from '../Hint';
 import { Hint } from '../Hint';
-import { LIGHT_THEME } from '../themes';
 
 jest.mock('@admiral-ds/icons/build/service/CloseOutline.svg', () => ({
   ReactComponent: () => <div> CloseOutline </div>,

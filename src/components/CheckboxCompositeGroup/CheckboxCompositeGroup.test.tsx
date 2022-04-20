@@ -3,7 +3,7 @@ import React from 'react';
 import { render } from '@testing-library/react';
 
 import { CheckboxCompositeGroup, CheckboxCompositeGroupProps } from './';
-import { CheckboxField as Checkbox } from '../form/CheckboxField';
+import { CheckboxField } from '../form/CheckboxField';
 import { CheckboxGroup } from '../CheckboxGroup';
 import { ThemeProvider } from 'styled-components';
 
@@ -22,13 +22,13 @@ describe('CheckboxCompositeGroup', () => {
   const Component = (props: CheckboxCompositeGroupProps) => (
     <ThemeProvider theme={LIGHT_THEME}>
       <CheckboxCompositeGroup {...props}>
-        <Checkbox indeterminate>Города :</Checkbox>
+        <CheckboxField indeterminate>Города :</CheckboxField>
         <CheckboxGroup>
           {initialValue.map((item) => {
             return (
-              <Checkbox name={item.label} key={item.id}>
+              <CheckboxField name={item.label} key={item.id}>
                 {item.label}
-              </Checkbox>
+              </CheckboxField>
             );
           })}
         </CheckboxGroup>

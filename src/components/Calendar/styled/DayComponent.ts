@@ -20,8 +20,8 @@ const DAY_MARGIN_BOTOM = '4px';
 
 const hoverMixin = css`
   &:hover:after {
-    border: 1px solid ${(p) => p.theme.color.basic.primary};
-    background: ${(p) => p.theme.color.background.primary};
+    border: 1px solid ${(p) => p.theme.color['Primary/Primary 60 Main']};
+    background: ${(p) => p.theme.color['Special/Elevated BG']};
     z-index: -1;
   }
 `;
@@ -34,7 +34,7 @@ export const DayComponent = styled.div<DayComponentProps>`
   padding: ${DAY_PADDING};
   margin-bottom: ${DAY_MARGIN_BOTOM};
   ${typography['Body/Body 2 Long']}
-  color: ${({ theme }) => theme.color.text.primary};
+  color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
   box-sizing: border-box;
   user-select: none;
   cursor: ${({ disabled }) => (disabled ? 'default' : 'pointer')};
@@ -47,14 +47,14 @@ export const DayComponent = styled.div<DayComponentProps>`
     top: 0;
     bottom: 0;
     border: 1px solid
-      ${({ theme, today, selected }) => (today && !selected ? theme.color.basic.secondary : 'transparent')};
+      ${({ theme, today, selected }) => (today && !selected ? theme.color['Neutral/Neutral 90'] : 'transparent')};
     border-radius: 50%;
   }
 
   ${({ disabled, theme, outsideMonth }) =>
     (disabled || outsideMonth) &&
     `
-      color: ${theme.color.text.tertiary};
+      color: ${theme.color['Neutral/Neutral 30']};
     `}
 
   ${(p) => (p.disabled ? '' : hoverMixin)}
@@ -63,11 +63,11 @@ export const DayComponent = styled.div<DayComponentProps>`
     !disabled &&
     selected &&
     `
-      color: ${theme.color.text.staticWhite};
-      background: ${inSelectingRange ? theme.color.basic.hover : theme.color.basic.primary};
+      color: ${theme.color['Special/Static White']};
+      background: ${inSelectingRange ? theme.color['Primary/Primary 70'] : theme.color['Primary/Primary 60 Main']};
       border-radius: 50%;
       &:hover {
-        background: ${theme.color.basic.hover};
+        background: ${theme.color['Primary/Primary 70']};
       }
     `}
 
@@ -84,7 +84,7 @@ export const DayComponent = styled.div<DayComponentProps>`
         right: 0;
         top: 0;
         bottom: 0;
-        background: ${theme.color.background.tertiary};
+        background: ${theme.color['Opacity/Hover']};
         ${
           corners &&
           Object.keys(corners)

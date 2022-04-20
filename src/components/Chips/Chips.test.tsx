@@ -2,9 +2,9 @@ import React from 'react';
 import { fireEvent, render } from '@testing-library/react';
 import { ThemeProvider } from 'styled-components';
 import userEvent from '@testing-library/user-event';
-import { LIGHT_THEME } from '../themes';
+import { LIGHT_THEME } from '#src/components/themes';
 
-import { Chips } from './';
+import { Chips } from '#src/components/Chips';
 
 describe('Chips', () => {
   it('should render default component', () => {

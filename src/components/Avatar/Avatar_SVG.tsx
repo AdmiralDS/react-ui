@@ -56,27 +56,27 @@ export const AvatarSVG: React.FC<AvatarSVGProps> = ({
   const getBackgroundColor = (appearance: 'light' | 'white' | 'grey' | 'dark') => {
     switch (appearance) {
       case 'white':
-        return theme.color.background.primary;
+        return theme.color['Neutral/Neutral 00'];
       case 'grey':
-        return theme.color.basic.tertiary;
+        return theme.color['Neutral/Neutral 50'];
       case 'dark':
-        return theme.color.background.inversion;
+        return theme.color['Neutral/Neutral 80'];
       case 'light':
       default:
-        return theme.color.background.tertiary;
+        return theme.color['Neutral/Neutral 10'];
     }
   };
   const getStatusColor = (status: AvatarProps['status']) => {
     switch (status) {
       case 'success':
-        return theme.color.status.success;
+        return theme.color['Success/Success 50 Main'];
       case 'warn':
-        return theme.color.status.warn;
+        return theme.color['Attention/Attention 50 Main'];
       case 'danger':
-        return theme.color.status.danger;
+        return theme.color['Error/Error 60 Main'];
       case 'inactive':
       default:
-        return theme.color.background.shadow;
+        return theme.color['Neutral/Neutral 50'];
     }
   };
   const appearance = appearanceProp || 'light';

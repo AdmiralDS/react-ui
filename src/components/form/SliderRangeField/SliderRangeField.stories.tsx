@@ -5,14 +5,24 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 
 export default {
-  title: 'Form Field Components/SliderRangeField',
+  title: 'Admiral-2.1/Form Field/SliderRangeField',
   component: SliderRangeField,
   decorators: [withDesign],
   parameters: {
-    design: {
-      type: 'figma',
-      url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A61377',
-    },
+    design: [
+      {
+        type: 'figma',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A61377',
+      },
+      {
+        type: 'figma',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A61446',
+      },
+      {
+        type: 'figma',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A61513',
+      },
+    ],
   },
   argTypes: {
     dimension: {
@@ -53,7 +63,11 @@ export default {
 } as ComponentMeta<typeof SliderRangeField>;
 
 const Template: ComponentStory<typeof SliderRangeField> = (props) => {
-  return <SliderRangeField {...props} />;
+  return (
+    <>
+      <SliderRangeField {...props} />
+    </>
+  );
 };
 
 export const InputFieldInput = Template.bind({});

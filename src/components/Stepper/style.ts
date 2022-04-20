@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 import { typography } from '#src/components/Typography';
 
-import { ReactComponent as StepSvg } from './svg/Step.svg';
+import { ReactComponent as StepSvg } from '#src/components/Stepper/svg/Step.svg';
 
 type Orientation = 'horizontal' | 'vertical';
 
@@ -27,22 +27,22 @@ export const StepIcon = styled(StepSvg)`
   }
   [data-active='true'] & {
     path {
-      fill: ${({ theme }) => theme.color.basic.primary};
+      fill: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
     }
   }
   [data-error='true'] & {
     path {
-      fill: ${({ theme }) => theme.color.status.danger};
+      fill: ${({ theme }) => theme.color['Error/Error 60 Main']};
     }
   }
   [data-warning='true'] & {
     path {
-      fill: ${({ theme }) => theme.color.status.warn};
+      fill: ${({ theme }) => theme.color['Warning/Warning 50 Main']};
     }
   }
   [data-disabled='true'] & {
     path {
-      fill: ${({ theme }) => theme.color.basic.primaryLight};
+      fill: ${({ theme }) => theme.color['Primary/Primary 30']};
     }
   }
   flex-shrink: 0;
@@ -55,18 +55,18 @@ export const StepRail = styled.div`
     height: 100%;
     width: 2px;
   }
-  background-color: ${({ theme }) => theme.color.basic.disable};
+  background-color: ${({ theme }) => theme.color['Neutral/Neutral 20']};
   [data-completed='true'] & {
-    background-color: ${({ theme }) => theme.color.basic.primary};
+    background-color: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
   }
   [data-error='true'] & {
-    background-color: ${({ theme }) => theme.color.status.danger};
+    background-color: ${({ theme }) => theme.color['Error/Error 60 Main']};
   }
   [data-warning='true'] & {
-    background-color: ${({ theme }) => theme.color.status.warn};
+    background-color: ${({ theme }) => theme.color['Warning/Warning 50 Main']};
   }
   [data-disabled='true'] & {
-    background-color: ${({ theme }) => theme.color.basic.primaryLight};
+    background-color: ${({ theme }) => theme.color['Primary/Primary 30']};
   }
   border-radius: 1px;
 `;
@@ -87,9 +87,9 @@ const clickableCss = css<{ error?: boolean; warning?: boolean }>`
   &:hover svg {
     path {
       fill: ${({ error, warning, theme }) => {
-        if (error) return theme.color.status.hoverDanger;
-        if (warning) return theme.color.status.hoverWarn;
-        return theme.color.basic.hover;
+        if (error) return theme.color['Error/Error 70'];
+        if (warning) return theme.color['Warning/Warning 70'];
+        return theme.color['Primary/Primary 70'];
       }};
     }
   }
@@ -98,9 +98,9 @@ const clickableCss = css<{ error?: boolean; warning?: boolean }>`
 const clickableNotActiveCss = css<{ error?: boolean; warning?: boolean }>`
   &:hover ${StepRail} {
     background-color: ${({ error, warning, theme }) => {
-      if (error) return theme.color.status.hoverDanger;
-      if (warning) return theme.color.status.hoverWarn;
-      return theme.color.basic.hover;
+      if (error) return theme.color['Error/Error 70'];
+      if (warning) return theme.color['Warning/Warning 70'];
+      return theme.color['Primary/Primary 70'];
     }};
   }
 `;
@@ -136,7 +136,7 @@ export const StepWrapper = styled.li<{
     &:before {
       position: absolute;
       content: '';
-      border: 2px solid ${({ theme }) => theme.color.basic.hover};
+      border: 2px solid ${({ theme }) => theme.color['Primary/Primary 60 Main']};
       border-radius: 4px;
       top: 0px;
       left: 0px;
@@ -167,7 +167,10 @@ export const Content = styled.div<{ lineClamp: 1 | 2 | 3 }>`
     return 3;
   }};
   overflow: hidden;
-  color: ${({ theme }) => theme.color.text.primary};
+  color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
+  [data-disabled='true'] & {
+    color: ${({ theme }) => theme.color['Neutral/Neutral 30']};
+  }
   ${typography['Body/Body 2 Long']}
   margin: 0 12px 0 0;
 `;

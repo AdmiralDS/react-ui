@@ -1,10 +1,10 @@
 import * as React from 'react';
 
-import type { RefCallback, RefObject } from '../common/utils/handleRef';
-import { handleRef } from '../common/utils/handleRef';
-import { getScrollableParents } from '../common/utils/getScrollableParents';
+import type { RefCallback, RefObject } from '#src/components/common/utils/handleRef';
+import { handleRef } from '#src/components/common/utils/handleRef';
+import { getScrollableParents } from '#src/components/common/utils/getScrollableParents';
 
-import { TooltipWrapper, FakeTarget, Portal, AnchorWrapper, TooltipContainer } from './style';
+import { AnchorWrapper, FakeTarget, Portal, TooltipContainer, TooltipWrapper } from './style';
 import type { TooltipPositionType } from './utils';
 import { getTooltipDirection } from './utils';
 
@@ -45,9 +45,7 @@ export const Tooltip: React.FC<ITooltipProps> = ({
   let showTooltipTimer: any;
 
   const [visible, setVisible] = React.useState<boolean>(false);
-  const [portalFlexDirection, setPortalFlexDirection] = React.useState<
-    undefined | 'row' | 'row-reverse' | 'column' | 'column-reverse'
-  >();
+  const [portalFlexDirection, setPortalFlexDirection] = React.useState('');
   const [portalFullWidth, setPortalFullWidth] = React.useState(false);
 
   const hideTooltip = () => setVisible(false);

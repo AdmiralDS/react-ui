@@ -2,23 +2,26 @@ import React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import styled from 'styled-components';
+
 import { Table } from '#src/components/Table';
+import { FieldSet } from '#src/components/form';
+import { RadioButton } from '#src/components/RadioButton';
+import { Button } from '#src/components/Button';
+import { DateInput } from '#src/components/input/DateInput';
 import {
-  rowList,
   columnList,
-  columnListWithWidth,
+  columnListLineClamp,
   columnListOrientation,
   columnListSort,
-  rowListSort,
-  columnListLineClamp,
-  rowListLineClamp,
   columnListSticky,
-  rowListRowState,
+  columnListWithWidth,
+  rowList,
   rowListExpanded,
+  rowListLineClamp,
+  rowListRowState,
+  rowListSort,
 } from '#src/components/Table/data';
 import { ReactComponent as AcceptSolid } from '@admiral-ds/icons/build/category/AcceptSolid.svg';
-
-import { FieldSet, RadioButton, Button, DateInput } from '../../index';
 
 const Separator = styled.div`
   height: 20px;
@@ -39,7 +42,7 @@ const Description = () => (
 );
 
 export default {
-  title: 'Example/Table',
+  title: 'Admiral-2.1/Table',
   decorators: [withDesign],
   component: Table,
   parameters: {
@@ -47,15 +50,27 @@ export default {
     design: [
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A90544',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A90544',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A90707',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A90707',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A90947',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A90947',
+      },
+      {
+        type: 'figma',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=109602%3A61149',
+      },
+      {
+        type: 'figma',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A91211',
+      },
+      {
+        type: 'figma',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A91521',
       },
     ],
     docs: {
@@ -94,7 +109,11 @@ export default {
 } as ComponentMeta<typeof Table>;
 
 const Template: ComponentStory<typeof Table> = (args) => {
-  return <Table {...args} />;
+  return (
+    <>
+      <Table {...args} />
+    </>
+  );
 };
 
 const StrToTime = (str: string) => {
@@ -134,7 +153,11 @@ const Template2: ComponentStory<typeof Table> = ({ rowList, ...args }) => {
       setRows(newRows);
     }
   };
-  return <Table {...args} rowList={rows} onSortChange={handleSort} />;
+  return (
+    <>
+      <Table {...args} rowList={rows} onSortChange={handleSort} />
+    </>
+  );
 };
 
 const Template3: ComponentStory<typeof Table> = ({ rowList, ...args }) => {
@@ -145,7 +168,11 @@ const Template3: ComponentStory<typeof Table> = ({ rowList, ...args }) => {
     setRows(updRows);
   };
 
-  return <Table {...args} rowList={rows} onRowSelectionChange={handleSelectionChange} />;
+  return (
+    <>
+      <Table {...args} rowList={rows} onRowSelectionChange={handleSelectionChange} />
+    </>
+  );
 };
 
 const Wrapper = styled.div`
@@ -263,7 +290,11 @@ const Template4: ComponentStory<typeof Table> = (args) => {
       };
     } else return col;
   });
-  return <Table columnList={cols} rowList={rows} />;
+  return (
+    <>
+      <Table columnList={cols} rowList={rows} />
+    </>
+  );
 };
 
 const CellTextContent = styled.div`
@@ -282,7 +313,11 @@ const Template5: ComponentStory<typeof Table> = (args) => {
       </CellTextContent>
     );
   };
-  return <Table headerLineClamp={2} displayRowSelectionColumn renderCell={renderCell} {...args} />;
+  return (
+    <>
+      <Table headerLineClamp={2} displayRowSelectionColumn renderCell={renderCell} {...args} />
+    </>
+  );
 };
 
 const Template6: ComponentStory<typeof Table> = ({ rowList, ...args }) => {
@@ -293,7 +328,11 @@ const Template6: ComponentStory<typeof Table> = ({ rowList, ...args }) => {
     setRows(updRows);
   };
 
-  return <Table {...args} rowList={rows} onRowExpansionChange={handleExpansionChange} />;
+  return (
+    <>
+      <Table {...args} rowList={rows} onRowExpansionChange={handleExpansionChange} />
+    </>
+  );
 };
 
 export const Playground = Template.bind({});
@@ -314,7 +353,7 @@ ColumnWidth.parameters = {
       story: `По умолчанию ширина столбца составляет 100 пикселей (не менее). Чтобы изменить этот 
       параметр в массиве columnList для столбца, чью ширину нужно изменить, следует задать параметр width.
       Также ширину столбца можно регулировать с помощью ручного ресайза, для этого нужно 
-      потянуть разделитель между столбцами в нужном направлении. С помощью колбека onColumnResize можно получать сведения
+      потянуть разделитель между столбцами в нужном направлении.С помощью колбека onColumnResize можно получать сведения
       о том, как изменилась ширина столбца в результате ручного ресайза.`,
     },
   },
@@ -455,7 +494,7 @@ export const Sticky = Template.bind({});
 Sticky.args = {
   rowList,
   columnList: columnListSticky,
-  style: { maxHeight: '300px' },
+  style: { maxHeight: '300px', maxWidth: '700px' },
 };
 Sticky.storyName = 'Table. Фиксированные столбцы.';
 Sticky.parameters = {

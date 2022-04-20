@@ -1,8 +1,5 @@
-import type { FC } from 'react';
 import React, { HTMLAttributes } from 'react';
 import styled, { css, keyframes } from 'styled-components';
-
-import { DEFAULT_THEME } from '../common';
 
 import { ReactComponent as SpinnerXL } from './svgs/Subtract_xl.svg';
 import { ReactComponent as SpinnerL } from './svgs/Subtract_l.svg';
@@ -81,16 +78,13 @@ const SpinnerWrapper = styled.div<{
   & svg {
     animation: ${spin} 1s linear infinite;
     path {
-      fill: ${({ inverse, theme }) => (inverse ? theme.color.background.primary : theme.color.basic.primary)};
+      fill: ${({ inverse, theme }) =>
+        inverse ? theme.color['Special/Static White'] : theme.color['Primary/Primary 60 Main']};
     }
   }
 `;
 
-SpinnerWrapper.defaultProps = {
-  theme: DEFAULT_THEME,
-};
-
-export const Spinner: FC<SpinnerProps> = ({ dimension = 'm', inverse = false, ...props }) => {
+export const Spinner = ({ dimension = 'm', inverse = false, ...props }: SpinnerProps) => {
   const SpinnerIcon = getIcon(dimension);
   return (
     <SpinnerWrapper inverse={inverse} dimension={dimension} role="alert" aria-live="assertive" {...props}>

@@ -3,7 +3,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import styled from 'styled-components';
 
-import { Toggle, ToggleProps } from '../Toggle';
+import { Toggle, ToggleProps } from '#src/components/Toggle';
 
 const Separator = styled.div`
   height: 20px;
@@ -26,14 +26,20 @@ const Description = () => (
 );
 
 export default {
-  title: 'Example/Toggle',
+  title: 'Admiral-2.1/Toggle',
   decorators: [withDesign],
   component: Toggle,
   parameters: {
-    design: {
-      type: 'figma',
-      url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=37%3A21376',
-    },
+    design: [
+      {
+        type: 'figma',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=37%3A21193',
+      },
+      {
+        type: 'figma',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=37%3A21376',
+      },
+    ],
     componentSubtitle: <Description />,
     actions: {
       argTypesRegex: 'onChange',
@@ -127,21 +133,23 @@ const Template4: ComponentStory<typeof Toggle> = () => {
 
 const Template5: ComponentStory<typeof Toggle> = () => {
   return (
-    <div style={{ width: '400px' }}>
-      <Toggle labelPosition="left">Some label</Toggle>
-      <Separator />
-      <Toggle labelPosition="left" width="200px">
-        Some label
-      </Toggle>
-      <Separator />
-      <Toggle labelPosition="left" width={300}>
-        Some label
-      </Toggle>
-      <Separator />
-      <Toggle labelPosition="left" width="100%">
-        Some label
-      </Toggle>
-    </div>
+    <>
+      <div style={{ width: '400px' }}>
+        <Toggle labelPosition="left">Some label</Toggle>
+        <Separator />
+        <Toggle labelPosition="left" width="200px">
+          Some label
+        </Toggle>
+        <Separator />
+        <Toggle labelPosition="left" width={300}>
+          Some label
+        </Toggle>
+        <Separator />
+        <Toggle labelPosition="left" width="100%">
+          Some label
+        </Toggle>
+      </div>
+    </>
   );
 };
 

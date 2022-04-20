@@ -5,23 +5,23 @@ import { ReactComponent as ChevronLeftOutline } from '@admiral-ds/icons/build/sy
 import { ReactComponent as ChevronRightOutline } from '@admiral-ds/icons/build/system/ChevronRightOutline.svg';
 
 const selectedMixin = css`
-  background: ${({ theme }) => theme.color.basic.primary};
-  color: ${({ theme }) => theme.color.text.staticWhite};
+  background: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
+  color: ${({ theme }) => theme.color['Special/Static White']};
 `;
 
 const hoverMixin = css`
-  background: ${({ theme }) => theme.color.background.tertiary};
-  color: ${({ theme }) => theme.color.basic.hover};
+  background: ${({ theme }) => theme.color['Opacity/Hover']};
+  color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
   & *[fill^='#'] {
-    fill: ${({ theme }) => theme.color.basic.hover};
+    fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
   }
 `;
 
 const pressMixin = css`
-  background: ${({ theme }) => theme.color.background.tertiary};
-  color: ${({ theme }) => theme.color.basic.press};
+  background: ${({ theme }) => theme.color['Opacity/Press']};
+  color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
   & *[fill^='#'] {
-    fill: ${({ theme }) => theme.color.basic.press};
+    fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
   }
 `;
 
@@ -34,7 +34,7 @@ const ButtonContent = styled.span`
   height: 100%;
 `;
 
-const Button = styled.button<{ selected: boolean }>`
+const Button = styled.button<{ selected: boolean; current: boolean }>`
   display: flex;
   flex: 1 1 auto;
   position: relative;
@@ -45,6 +45,7 @@ const Button = styled.button<{ selected: boolean }>`
   border: 2px solid transparent;
   border-radius: 20px;
   ${typography['Body/Body 1 Short']}
+  color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
   background: transparent;
   border: none;
   appearance: none;
@@ -56,15 +57,15 @@ const Button = styled.button<{ selected: boolean }>`
   -webkit-tap-highlight-color: transparent;
 
   & *[fill^='#'] {
-    fill: ${({ theme }) => theme.color.text.secondary};
+    fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
   }
 
   &:disabled {
     cursor: default;
     & *[fill^='#'] {
-      fill: ${({ theme }) => theme.color.text.tertiary};
+      fill: ${({ theme }) => theme.color['Neutral/Neutral 30']};
     }
-    ${({ selected, theme }) => !selected && `color: ${theme.color.text.tertiary};`}
+    ${({ selected, theme }) => !selected && `color: ${theme.color['Neutral/Neutral 30']};`}
   }
 
   ${({ selected }) => selected && selectedMixin}
@@ -76,7 +77,18 @@ const Button = styled.button<{ selected: boolean }>`
   }
 
   &:focus:not(:active) {
-    border: 2px solid ${({ theme }) => theme.color.basic.hover};
+    &:before {
+      position: absolute;
+      content: '';
+      border: 2px solid
+        ${({ theme, current }) =>
+          current ? theme.color['Neutral/Neutral 00'] : theme.color['Primary/Primary 60 Main']};
+      top: ${({ current }) => (current ? '2px' : '0px')};
+      bottom: ${({ current }) => (current ? '2px' : '0px')};
+      left: ${({ current }) => (current ? '2px' : '0px')};
+      right: ${({ current }) => (current ? '2px' : '0px')};
+      border-radius: 40px;
+    }
   }
 `;
 
@@ -110,6 +122,7 @@ export const PaginationItem: React.FC<PageProps> = ({ onClick, page, selected, d
       aria-current={selected}
       aria-label={label}
       tabIndex={disabled ? -1 : 0}
+      current={selected}
       disabled={disabled}
       selected={selected}
       onClick={onClick}

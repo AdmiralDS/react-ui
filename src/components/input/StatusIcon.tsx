@@ -6,13 +6,13 @@ import styled from 'styled-components';
 
 const ErrorIcon = styled(ErrorStatusSvg)`
   & *[fill^='#'] {
-    fill: ${(props) => props.theme.color.status.danger};
+    fill: ${(props) => props.theme.color['Error/Error 60 Main']};
   }
 `;
 
 const SuccessIcon = styled(SuccessStatusSvg)`
   & *[fill^='#'] {
-    fill: ${(props) => props.theme.color.status.success};
+    fill: ${(props) => props.theme.color['Success/Success 50 Main']};
   }
 `;
 

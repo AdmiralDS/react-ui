@@ -2,39 +2,39 @@ import { css } from 'styled-components';
 
 export const ghostAppearanceMixin = css`
   background-color: transparent;
-  color: ${({ theme }) => theme.color.basic.primary};
-  border: 2px solid transparent;
+  color: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
+  border: 1px solid transparent;
 
   & *[fill^='#'] {
-    fill: ${({ theme }) => theme.color.basic.primary};
+    fill: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
   }
 
   &:focus,
   &:hover {
-    background-color: ${({ theme }) => theme.color.background.secondary};
-    color: ${({ theme }) => theme.color.basic.hover};
-    border-color: ${({ theme }) => theme.color.background.secondary};
+    background-color: ${({ theme }) => theme.color['Opacity/Hover']};
+    color: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
+    border-color: transparent;
     & *[fill^='#'] {
-      fill: ${({ theme }) => theme.color.basic.hover};
+      fill: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
     }
   }
 
   &:active {
-    background-color: ${({ theme }) => theme.color.background.secondary};
-    color: ${({ theme }) => theme.color.basic.press};
-    border-color: ${({ theme }) => theme.color.background.secondary};
+    background-color: ${({ theme }) => theme.color['Opacity/Press']};
+    color: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
+    border-color: transparent;
     & *[fill^='#'] {
-      fill: ${({ theme }) => theme.color.basic.press};
+      fill: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
     }
   }
 
   &[data-appearance~='disabled'],
   &:disabled {
     background-color: transparent;
-    color: ${({ theme }) => theme.color.text.tertiary};
+    color: ${({ theme }) => theme.color['Neutral/Neutral 30']};
     border-color: transparent;
     & *[fill^='#'] {
-      fill: ${({ theme }) => theme.color.text.tertiary};
+      fill: ${({ theme }) => theme.color['Neutral/Neutral 30']};
     }
   }
 `;

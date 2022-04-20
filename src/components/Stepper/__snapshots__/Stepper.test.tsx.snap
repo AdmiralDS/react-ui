@@ -43,25 +43,25 @@ Object {
 }
 
 [data-active='true'] .c6 path {
-  fill: #0D69F2;
+  fill: #0062FF;
 }
 
 [data-error='true'] .c6 path {
-  fill: #DA0B20;
+  fill: #D92020;
 }
 
 [data-warning='true'] .c6 path {
-  fill: #FF8C19;
+  fill: #FF5C22;
 }
 
 [data-disabled='true'] .c6 path {
-  fill: #6EA5F7;
+  fill: #A7C7FF;
 }
 
 .c9 {
   height: 2px;
   width: 100%;
-  background-color: #C4CAD4;
+  background-color: #D6D8DD;
   border-radius: 1px;
 }
 
@@ -71,19 +71,19 @@ Object {
 }
 
 [data-completed='true'] .c8 {
-  background-color: #0D69F2;
+  background-color: #0062FF;
 }
 
 [data-error='true'] .c8 {
-  background-color: #DA0B20;
+  background-color: #D92020;
 }
 
 [data-warning='true'] .c8 {
-  background-color: #FF8C19;
+  background-color: #FF5C22;
 }
 
 [data-disabled='true'] .c8 {
-  background-color: #6EA5F7;
+  background-color: #A7C7FF;
 }
 
 .c3 {
@@ -135,7 +135,7 @@ Object {
 .c1:focus:before {
   position: absolute;
   content: '';
-  border: 2px solid #0A54C2;
+  border: 2px solid #0062FF;
   border-radius: 4px;
   top: 0px;
   left: 0px;
@@ -160,20 +160,23 @@ Object {
   margin: 0 0 20px 0;
 }
 
-.c12 {
+.c13 {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
   overflow: hidden;
-  color: #2B313B;
+  color: #22242A;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
   margin: 0 12px 0 0;
+}
+
+[data-disabled='true'] .c12 {
+  color: #B1B5BB;
 }
 
 .c0 {
@@ -250,7 +253,7 @@ Object {
               class="c10 c11"
             >
               <div
-                class="c12"
+                class="c12 c13"
               >
                 Завершенный шаг, текст занимает максимум три строки, далее идет сокращение
               </div>
@@ -288,7 +291,7 @@ Object {
               class="c10 c11"
             >
               <div
-                class="c12"
+                class="c12 c13"
               >
                 Шаг с ошибкой, текст занимает максимум три строки
               </div>
@@ -325,7 +328,7 @@ Object {
               class="c10 c11"
             >
               <div
-                class="c12"
+                class="c12 c13"
               >
                 Активный шаг, текст занимает максимум три строки
               </div>
@@ -362,7 +365,7 @@ Object {
               class="c10 c11"
             >
               <div
-                class="c12"
+                class="c12 c13"
               >
                 Неактивный шаг, текст занимает максимум три строки
               </div>
@@ -412,25 +415,25 @@ Object {
 }
 
 [data-active='true'] .c6 path {
-  fill: #0D69F2;
+  fill: #0062FF;
 }
 
 [data-error='true'] .c6 path {
-  fill: #DA0B20;
+  fill: #D92020;
 }
 
 [data-warning='true'] .c6 path {
-  fill: #FF8C19;
+  fill: #FF5C22;
 }
 
 [data-disabled='true'] .c6 path {
-  fill: #6EA5F7;
+  fill: #A7C7FF;
 }
 
 .c9 {
   height: 2px;
   width: 100%;
-  background-color: #C4CAD4;
+  background-color: #D6D8DD;
   border-radius: 1px;
 }
 
@@ -440,19 +443,19 @@ Object {
 }
 
 [data-completed='true'] .c8 {
-  background-color: #0D69F2;
+  background-color: #0062FF;
 }
 
 [data-error='true'] .c8 {
-  background-color: #DA0B20;
+  background-color: #D92020;
 }
 
 [data-warning='true'] .c8 {
-  background-color: #FF8C19;
+  background-color: #FF5C22;
 }
 
 [data-disabled='true'] .c8 {
-  background-color: #6EA5F7;
+  background-color: #A7C7FF;
 }
 
 .c3 {
@@ -504,7 +507,7 @@ Object {
 .c1:focus:before {
   position: absolute;
   content: '';
-  border: 2px solid #0A54C2;
+  border: 2px solid #0062FF;
   border-radius: 4px;
   top: 0px;
   left: 0px;
@@ -529,20 +532,23 @@ Object {
   margin: 0 0 20px 0;
 }
 
-.c12 {
+.c13 {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
   overflow: hidden;
-  color: #2B313B;
+  color: #22242A;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
   margin: 0 12px 0 0;
+}
+
+[data-disabled='true'] .c12 {
+  color: #B1B5BB;
 }
 
 .c0 {
@@ -618,7 +624,7 @@ Object {
             class="c10 c11"
           >
             <div
-              class="c12"
+              class="c12 c13"
             >
               Завершенный шаг, текст занимает максимум три строки, далее идет сокращение
             </div>
@@ -656,7 +662,7 @@ Object {
             class="c10 c11"
           >
             <div
-              class="c12"
+              class="c12 c13"
             >
               Шаг с ошибкой, текст занимает максимум три строки
             </div>
@@ -693,7 +699,7 @@ Object {
             class="c10 c11"
           >
             <div
-              class="c12"
+              class="c12 c13"
             >
               Активный шаг, текст занимает максимум три строки
             </div>
@@ -730,7 +736,7 @@ Object {
             class="c10 c11"
           >
             <div
-              class="c12"
+              class="c12 c13"
             >
               Неактивный шаг, текст занимает максимум три строки
             </div>
@@ -836,25 +842,25 @@ Object {
 }
 
 [data-active='true'] .c6 path {
-  fill: #0D69F2;
+  fill: #0062FF;
 }
 
 [data-error='true'] .c6 path {
-  fill: #DA0B20;
+  fill: #D92020;
 }
 
 [data-warning='true'] .c6 path {
-  fill: #FF8C19;
+  fill: #FF5C22;
 }
 
 [data-disabled='true'] .c6 path {
-  fill: #6EA5F7;
+  fill: #A7C7FF;
 }
 
 .c9 {
   height: 2px;
   width: 100%;
-  background-color: #C4CAD4;
+  background-color: #D6D8DD;
   border-radius: 1px;
 }
 
@@ -864,19 +870,19 @@ Object {
 }
 
 [data-completed='true'] .c8 {
-  background-color: #0D69F2;
+  background-color: #0062FF;
 }
 
 [data-error='true'] .c8 {
-  background-color: #DA0B20;
+  background-color: #D92020;
 }
 
 [data-warning='true'] .c8 {
-  background-color: #FF8C19;
+  background-color: #FF5C22;
 }
 
 [data-disabled='true'] .c8 {
-  background-color: #6EA5F7;
+  background-color: #A7C7FF;
 }
 
 .c3 {
@@ -928,7 +934,7 @@ Object {
 .c1:focus:before {
   position: absolute;
   content: '';
-  border: 2px solid #0A54C2;
+  border: 2px solid #0062FF;
   border-radius: 4px;
   top: 0px;
   left: 0px;
@@ -953,20 +959,23 @@ Object {
   margin: 0 0 20px 0;
 }
 
-.c12 {
+.c13 {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
   overflow: hidden;
-  color: #2B313B;
+  color: #22242A;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
   margin: 0 12px 0 0;
+}
+
+[data-disabled='true'] .c12 {
+  color: #B1B5BB;
 }
 
 .c0 {
@@ -1043,7 +1052,7 @@ Object {
               class="c10 c11"
             >
               <div
-                class="c12"
+                class="c12 c13"
               >
                 Завершенный шаг, текст занимает максимум три строки, далее идет сокращение
               </div>
@@ -1081,7 +1090,7 @@ Object {
               class="c10 c11"
             >
               <div
-                class="c12"
+                class="c12 c13"
               >
                 Шаг с ошибкой, текст занимает максимум три строки
               </div>
@@ -1118,7 +1127,7 @@ Object {
               class="c10 c11"
             >
               <div
-                class="c12"
+                class="c12 c13"
               >
                 Активный шаг, текст занимает максимум три строки
               </div>
@@ -1155,7 +1164,7 @@ Object {
               class="c10 c11"
             >
               <div
-                class="c12"
+                class="c12 c13"
               >
                 Неактивный шаг, текст занимает максимум три строки
               </div>
@@ -1205,25 +1214,25 @@ Object {
 }
 
 [data-active='true'] .c6 path {
-  fill: #0D69F2;
+  fill: #0062FF;
 }
 
 [data-error='true'] .c6 path {
-  fill: #DA0B20;
+  fill: #D92020;
 }
 
 [data-warning='true'] .c6 path {
-  fill: #FF8C19;
+  fill: #FF5C22;
 }
 
 [data-disabled='true'] .c6 path {
-  fill: #6EA5F7;
+  fill: #A7C7FF;
 }
 
 .c9 {
   height: 2px;
   width: 100%;
-  background-color: #C4CAD4;
+  background-color: #D6D8DD;
   border-radius: 1px;
 }
 
@@ -1233,19 +1242,19 @@ Object {
 }
 
 [data-completed='true'] .c8 {
-  background-color: #0D69F2;
+  background-color: #0062FF;
 }
 
 [data-error='true'] .c8 {
-  background-color: #DA0B20;
+  background-color: #D92020;
 }
 
 [data-warning='true'] .c8 {
-  background-color: #FF8C19;
+  background-color: #FF5C22;
 }
 
 [data-disabled='true'] .c8 {
-  background-color: #6EA5F7;
+  background-color: #A7C7FF;
 }
 
 .c3 {
@@ -1297,7 +1306,7 @@ Object {
 .c1:focus:before {
   position: absolute;
   content: '';
-  border: 2px solid #0A54C2;
+  border: 2px solid #0062FF;
   border-radius: 4px;
   top: 0px;
   left: 0px;
@@ -1322,20 +1331,23 @@ Object {
   margin: 0 0 20px 0;
 }
 
-.c12 {
+.c13 {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
   overflow: hidden;
-  color: #2B313B;
+  color: #22242A;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
   margin: 0 12px 0 0;
+}
+
+[data-disabled='true'] .c12 {
+  color: #B1B5BB;
 }
 
 .c0 {
@@ -1411,7 +1423,7 @@ Object {
             class="c10 c11"
           >
             <div
-              class="c12"
+              class="c12 c13"
             >
               Завершенный шаг, текст занимает максимум три строки, далее идет сокращение
             </div>
@@ -1449,7 +1461,7 @@ Object {
             class="c10 c11"
           >
             <div
-              class="c12"
+              class="c12 c13"
             >
               Шаг с ошибкой, текст занимает максимум три строки
             </div>
@@ -1486,7 +1498,7 @@ Object {
             class="c10 c11"
           >
             <div
-              class="c12"
+              class="c12 c13"
             >
               Активный шаг, текст занимает максимум три строки
             </div>
@@ -1523,7 +1535,7 @@ Object {
             class="c10 c11"
           >
             <div
-              class="c12"
+              class="c12 c13"
             >
               Неактивный шаг, текст занимает максимум три строки
             </div>
@@ -1629,25 +1641,25 @@ Object {
 }
 
 [data-active='true'] .c6 path {
-  fill: #0D69F2;
+  fill: #0062FF;
 }
 
 [data-error='true'] .c6 path {
-  fill: #DA0B20;
+  fill: #D92020;
 }
 
 [data-warning='true'] .c6 path {
-  fill: #FF8C19;
+  fill: #FF5C22;
 }
 
 [data-disabled='true'] .c6 path {
-  fill: #6EA5F7;
+  fill: #A7C7FF;
 }
 
 .c9 {
   height: 2px;
   width: 100%;
-  background-color: #C4CAD4;
+  background-color: #D6D8DD;
   border-radius: 1px;
 }
 
@@ -1657,19 +1669,19 @@ Object {
 }
 
 [data-completed='true'] .c8 {
-  background-color: #0D69F2;
+  background-color: #0062FF;
 }
 
 [data-error='true'] .c8 {
-  background-color: #DA0B20;
+  background-color: #D92020;
 }
 
 [data-warning='true'] .c8 {
-  background-color: #FF8C19;
+  background-color: #FF5C22;
 }
 
 [data-disabled='true'] .c8 {
-  background-color: #6EA5F7;
+  background-color: #A7C7FF;
 }
 
 .c3 {
@@ -1721,7 +1733,7 @@ Object {
 .c1:focus:before {
   position: absolute;
   content: '';
-  border: 2px solid #0A54C2;
+  border: 2px solid #0062FF;
   border-radius: 4px;
   top: 0px;
   left: 0px;
@@ -1746,20 +1758,23 @@ Object {
   margin: 0 0 20px 0;
 }
 
-.c12 {
+.c13 {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
   overflow: hidden;
-  color: #2B313B;
+  color: #22242A;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
   margin: 0 12px 0 0;
+}
+
+[data-disabled='true'] .c12 {
+  color: #B1B5BB;
 }
 
 .c0 {
@@ -1836,7 +1851,7 @@ Object {
               class="c10 c11"
             >
               <div
-                class="c12"
+                class="c12 c13"
               >
                 Завершенный шаг, текст занимает максимум три строки, далее идет сокращение
               </div>
@@ -1874,7 +1889,7 @@ Object {
               class="c10 c11"
             >
               <div
-                class="c12"
+                class="c12 c13"
               >
                 Шаг с ошибкой, текст занимает максимум три строки
               </div>
@@ -1911,7 +1926,7 @@ Object {
               class="c10 c11"
             >
               <div
-                class="c12"
+                class="c12 c13"
               >
                 Активный шаг, текст занимает максимум три строки
               </div>
@@ -1948,7 +1963,7 @@ Object {
               class="c10 c11"
             >
               <div
-                class="c12"
+                class="c12 c13"
               >
                 Неактивный шаг, текст занимает максимум три строки
               </div>
@@ -1998,25 +2013,25 @@ Object {
 }
 
 [data-active='true'] .c6 path {
-  fill: #0D69F2;
+  fill: #0062FF;
 }
 
 [data-error='true'] .c6 path {
-  fill: #DA0B20;
+  fill: #D92020;
 }
 
 [data-warning='true'] .c6 path {
-  fill: #FF8C19;
+  fill: #FF5C22;
 }
 
 [data-disabled='true'] .c6 path {
-  fill: #6EA5F7;
+  fill: #A7C7FF;
 }
 
 .c9 {
   height: 2px;
   width: 100%;
-  background-color: #C4CAD4;
+  background-color: #D6D8DD;
   border-radius: 1px;
 }
 
@@ -2026,19 +2041,19 @@ Object {
 }
 
 [data-completed='true'] .c8 {
-  background-color: #0D69F2;
+  background-color: #0062FF;
 }
 
 [data-error='true'] .c8 {
-  background-color: #DA0B20;
+  background-color: #D92020;
 }
 
 [data-warning='true'] .c8 {
-  background-color: #FF8C19;
+  background-color: #FF5C22;
 }
 
 [data-disabled='true'] .c8 {
-  background-color: #6EA5F7;
+  background-color: #A7C7FF;
 }
 
 .c3 {
@@ -2090,7 +2105,7 @@ Object {
 .c1:focus:before {
   position: absolute;
   content: '';
-  border: 2px solid #0A54C2;
+  border: 2px solid #0062FF;
   border-radius: 4px;
   top: 0px;
   left: 0px;
@@ -2115,20 +2130,23 @@ Object {
   margin: 0 0 20px 0;
 }
 
-.c12 {
+.c13 {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
   overflow: hidden;
-  color: #2B313B;
+  color: #22242A;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
   margin: 0 12px 0 0;
+}
+
+[data-disabled='true'] .c12 {
+  color: #B1B5BB;
 }
 
 .c0 {
@@ -2204,7 +2222,7 @@ Object {
             class="c10 c11"
           >
             <div
-              class="c12"
+              class="c12 c13"
             >
               Завершенный шаг, текст занимает максимум три строки, далее идет сокращение
             </div>
@@ -2242,7 +2260,7 @@ Object {
             class="c10 c11"
           >
             <div
-              class="c12"
+              class="c12 c13"
             >
               Шаг с ошибкой, текст занимает максимум три строки
             </div>
@@ -2279,7 +2297,7 @@ Object {
             class="c10 c11"
           >
             <div
-              class="c12"
+              class="c12 c13"
             >
               Активный шаг, текст занимает максимум три строки
             </div>
@@ -2316,7 +2334,7 @@ Object {
             class="c10 c11"
           >
             <div
-              class="c12"
+              class="c12 c13"
             >
               Неактивный шаг, текст занимает максимум три строки
             </div>
@@ -2422,25 +2440,25 @@ Object {
 }
 
 [data-active='true'] .c6 path {
-  fill: #0D69F2;
+  fill: #0062FF;
 }
 
 [data-error='true'] .c6 path {
-  fill: #DA0B20;
+  fill: #D92020;
 }
 
 [data-warning='true'] .c6 path {
-  fill: #FF8C19;
+  fill: #FF5C22;
 }
 
 [data-disabled='true'] .c6 path {
-  fill: #6EA5F7;
+  fill: #A7C7FF;
 }
 
 .c9 {
   height: 2px;
   width: 100%;
-  background-color: #C4CAD4;
+  background-color: #D6D8DD;
   border-radius: 1px;
 }
 
@@ -2450,19 +2468,19 @@ Object {
 }
 
 [data-completed='true'] .c8 {
-  background-color: #0D69F2;
+  background-color: #0062FF;
 }
 
 [data-error='true'] .c8 {
-  background-color: #DA0B20;
+  background-color: #D92020;
 }
 
 [data-warning='true'] .c8 {
-  background-color: #FF8C19;
+  background-color: #FF5C22;
 }
 
 [data-disabled='true'] .c8 {
-  background-color: #6EA5F7;
+  background-color: #A7C7FF;
 }
 
 .c3 {
@@ -2514,7 +2532,7 @@ Object {
 .c1:focus:before {
   position: absolute;
   content: '';
-  border: 2px solid #0A54C2;
+  border: 2px solid #0062FF;
   border-radius: 4px;
   top: 0px;
   left: 0px;
@@ -2539,20 +2557,23 @@ Object {
   margin: 0 0 20px 0;
 }
 
-.c12 {
+.c13 {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
   overflow: hidden;
-  color: #2B313B;
+  color: #22242A;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
   margin: 0 12px 0 0;
+}
+
+[data-disabled='true'] .c12 {
+  color: #B1B5BB;
 }
 
 .c0 {
@@ -2629,7 +2650,7 @@ Object {
               class="c10 c11"
             >
               <div
-                class="c12"
+                class="c12 c13"
               >
                 Завершенный шаг, текст занимает максимум три строки, далее идет сокращение
               </div>
@@ -2667,7 +2688,7 @@ Object {
               class="c10 c11"
             >
               <div
-                class="c12"
+                class="c12 c13"
               >
                 Шаг с ошибкой, текст занимает максимум три строки
               </div>
@@ -2704,7 +2725,7 @@ Object {
               class="c10 c11"
             >
               <div
-                class="c12"
+                class="c12 c13"
               >
                 Активный шаг, текст занимает максимум три строки
               </div>
@@ -2741,7 +2762,7 @@ Object {
               class="c10 c11"
             >
               <div
-                class="c12"
+                class="c12 c13"
               >
                 Неактивный шаг, текст занимает максимум три строки
               </div>
@@ -2791,25 +2812,25 @@ Object {
 }
 
 [data-active='true'] .c6 path {
-  fill: #0D69F2;
+  fill: #0062FF;
 }
 
 [data-error='true'] .c6 path {
-  fill: #DA0B20;
+  fill: #D92020;
 }
 
 [data-warning='true'] .c6 path {
-  fill: #FF8C19;
+  fill: #FF5C22;
 }
 
 [data-disabled='true'] .c6 path {
-  fill: #6EA5F7;
+  fill: #A7C7FF;
 }
 
 .c9 {
   height: 2px;
   width: 100%;
-  background-color: #C4CAD4;
+  background-color: #D6D8DD;
   border-radius: 1px;
 }
 
@@ -2819,19 +2840,19 @@ Object {
 }
 
 [data-completed='true'] .c8 {
-  background-color: #0D69F2;
+  background-color: #0062FF;
 }
 
 [data-error='true'] .c8 {
-  background-color: #DA0B20;
+  background-color: #D92020;
 }
 
 [data-warning='true'] .c8 {
-  background-color: #FF8C19;
+  background-color: #FF5C22;
 }
 
 [data-disabled='true'] .c8 {
-  background-color: #6EA5F7;
+  background-color: #A7C7FF;
 }
 
 .c3 {
@@ -2883,7 +2904,7 @@ Object {
 .c1:focus:before {
   position: absolute;
   content: '';
-  border: 2px solid #0A54C2;
+  border: 2px solid #0062FF;
   border-radius: 4px;
   top: 0px;
   left: 0px;
@@ -2908,20 +2929,23 @@ Object {
   margin: 0 0 20px 0;
 }
 
-.c12 {
+.c13 {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
   overflow: hidden;
-  color: #2B313B;
+  color: #22242A;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
   margin: 0 12px 0 0;
+}
+
+[data-disabled='true'] .c12 {
+  color: #B1B5BB;
 }
 
 .c0 {
@@ -2997,7 +3021,7 @@ Object {
             class="c10 c11"
           >
             <div
-              class="c12"
+              class="c12 c13"
             >
               Завершенный шаг, текст занимает максимум три строки, далее идет сокращение
             </div>
@@ -3035,7 +3059,7 @@ Object {
             class="c10 c11"
           >
             <div
-              class="c12"
+              class="c12 c13"
             >
               Шаг с ошибкой, текст занимает максимум три строки
             </div>
@@ -3072,7 +3096,7 @@ Object {
             class="c10 c11"
           >
             <div
-              class="c12"
+              class="c12 c13"
             >
               Активный шаг, текст занимает максимум три строки
             </div>
@@ -3109,7 +3133,7 @@ Object {
             class="c10 c11"
           >
             <div
-              class="c12"
+              class="c12 c13"
             >
               Неактивный шаг, текст занимает максимум три строки
             </div>
@@ -3215,25 +3239,25 @@ Object {
 }
 
 [data-active='true'] .c6 path {
-  fill: #0D69F2;
+  fill: #0062FF;
 }
 
 [data-error='true'] .c6 path {
-  fill: #DA0B20;
+  fill: #D92020;
 }
 
 [data-warning='true'] .c6 path {
-  fill: #FF8C19;
+  fill: #FF5C22;
 }
 
 [data-disabled='true'] .c6 path {
-  fill: #6EA5F7;
+  fill: #A7C7FF;
 }
 
 .c9 {
   height: 2px;
   width: 100%;
-  background-color: #C4CAD4;
+  background-color: #D6D8DD;
   border-radius: 1px;
 }
 
@@ -3243,19 +3267,19 @@ Object {
 }
 
 [data-completed='true'] .c8 {
-  background-color: #0D69F2;
+  background-color: #0062FF;
 }
 
 [data-error='true'] .c8 {
-  background-color: #DA0B20;
+  background-color: #D92020;
 }
 
 [data-warning='true'] .c8 {
-  background-color: #FF8C19;
+  background-color: #FF5C22;
 }
 
 [data-disabled='true'] .c8 {
-  background-color: #6EA5F7;
+  background-color: #A7C7FF;
 }
 
 .c3 {
@@ -3307,7 +3331,7 @@ Object {
 .c1:focus:before {
   position: absolute;
   content: '';
-  border: 2px solid #0A54C2;
+  border: 2px solid #0062FF;
   border-radius: 4px;
   top: 0px;
   left: 0px;
@@ -3332,20 +3356,23 @@ Object {
   margin: 0 0 20px 0;
 }
 
-.c12 {
+.c13 {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
   overflow: hidden;
-  color: #2B313B;
+  color: #22242A;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
   margin: 0 12px 0 0;
+}
+
+[data-disabled='true'] .c12 {
+  color: #B1B5BB;
 }
 
 .c0 {
@@ -3421,7 +3448,7 @@ Object {
               class="c10 c11"
             >
               <div
-                class="c12"
+                class="c12 c13"
               >
                 Завершенный шаг, текст занимает максимум три строки, далее идет сокращение
               </div>
@@ -3459,7 +3486,7 @@ Object {
               class="c10 c11"
             >
               <div
-                class="c12"
+                class="c12 c13"
               >
                 Шаг с ошибкой, текст занимает максимум три строки
               </div>
@@ -3496,7 +3523,7 @@ Object {
               class="c10 c11"
             >
               <div
-                class="c12"
+                class="c12 c13"
               >
                 Активный шаг, текст занимает максимум три строки
               </div>
@@ -3533,7 +3560,7 @@ Object {
               class="c10 c11"
             >
               <div
-                class="c12"
+                class="c12 c13"
               >
                 Неактивный шаг, текст занимает максимум три строки
               </div>
@@ -3583,25 +3610,25 @@ Object {
 }
 
 [data-active='true'] .c6 path {
-  fill: #0D69F2;
+  fill: #0062FF;
 }
 
 [data-error='true'] .c6 path {
-  fill: #DA0B20;
+  fill: #D92020;
 }
 
 [data-warning='true'] .c6 path {
-  fill: #FF8C19;
+  fill: #FF5C22;
 }
 
 [data-disabled='true'] .c6 path {
-  fill: #6EA5F7;
+  fill: #A7C7FF;
 }
 
 .c9 {
   height: 2px;
   width: 100%;
-  background-color: #C4CAD4;
+  background-color: #D6D8DD;
   border-radius: 1px;
 }
 
@@ -3611,19 +3638,19 @@ Object {
 }
 
 [data-completed='true'] .c8 {
-  background-color: #0D69F2;
+  background-color: #0062FF;
 }
 
 [data-error='true'] .c8 {
-  background-color: #DA0B20;
+  background-color: #D92020;
 }
 
 [data-warning='true'] .c8 {
-  background-color: #FF8C19;
+  background-color: #FF5C22;
 }
 
 [data-disabled='true'] .c8 {
-  background-color: #6EA5F7;
+  background-color: #A7C7FF;
 }
 
 .c3 {
@@ -3675,7 +3702,7 @@ Object {
 .c1:focus:before {
   position: absolute;
   content: '';
-  border: 2px solid #0A54C2;
+  border: 2px solid #0062FF;
   border-radius: 4px;
   top: 0px;
   left: 0px;
@@ -3700,20 +3727,23 @@ Object {
   margin: 0 0 20px 0;
 }
 
-.c12 {
+.c13 {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
   overflow: hidden;
-  color: #2B313B;
+  color: #22242A;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
   margin: 0 12px 0 0;
+}
+
+[data-disabled='true'] .c12 {
+  color: #B1B5BB;
 }
 
 .c0 {
@@ -3788,7 +3818,7 @@ Object {
             class="c10 c11"
           >
             <div
-              class="c12"
+              class="c12 c13"
             >
               Завершенный шаг, текст занимает максимум три строки, далее идет сокращение
             </div>
@@ -3826,7 +3856,7 @@ Object {
             class="c10 c11"
           >
             <div
-              class="c12"
+              class="c12 c13"
             >
               Шаг с ошибкой, текст занимает максимум три строки
             </div>
@@ -3863,7 +3893,7 @@ Object {
             class="c10 c11"
           >
             <div
-              class="c12"
+              class="c12 c13"
             >
               Активный шаг, текст занимает максимум три строки
             </div>
@@ -3900,7 +3930,7 @@ Object {
             class="c10 c11"
           >
             <div
-              class="c12"
+              class="c12 c13"
             >
               Неактивный шаг, текст занимает максимум три строки
             </div>

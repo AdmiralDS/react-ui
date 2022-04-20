@@ -2,11 +2,11 @@ import ReactDOM from 'react-dom';
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
 
-import { Badge } from '../Badge';
-import { LIGHT_THEME } from '../themes';
+import { Badge } from '#src/components/Badge';
+import { LIGHT_THEME } from '#src/components/themes';
 
-import { Tab, TabContent, TabContentWrapper } from './style';
-import type { Dimension } from './constants';
+import { Tab, TabContent, TabContentWrapper } from '#src/components/TabMenu/style';
+import type { Dimension } from '#src/components/TabMenu/constants';
 
 const measureElement = ({ icon, badge, content }: any, dimension: Dimension, callback: (width: number) => void) => {
   // Creates the hidden div appended to the document body

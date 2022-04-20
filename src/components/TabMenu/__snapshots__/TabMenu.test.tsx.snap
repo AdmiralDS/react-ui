@@ -59,7 +59,7 @@ Object {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  background-color: #0D69F2;
+  background-color: #0062FF;
   height: 2px;
   -webkit-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
@@ -121,7 +121,6 @@ Object {
   font-size: 16px;
   line-height: 24px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -133,7 +132,7 @@ Object {
 .c3:focus:not(:active):before {
   position: absolute;
   content: '';
-  border: 2px solid #0A54C2;
+  border: 2px solid #0062FF;
   top: 0;
   left: 0;
   bottom: 0;
@@ -156,7 +155,7 @@ Object {
 }
 
 .c3 svg *[fill^='#'] {
-  fill: #626F84;
+  fill: #74777F;
 }
 
 .c3 [data-badge] {
@@ -164,38 +163,29 @@ Object {
 }
 
 .c3:hover:not(:disabled) {
-  color: #0A54C2;
-}
-
-.c3:hover:not(:disabled) *[fill^='#'] {
-  fill: #0A54C2;
-}
-
-.c3:hover:not(:disabled) [data-badge] {
-  background: #0A54C2;
-  color: #FFFFFF;
+  background: #0000000D;
 }
 
 .c3:active:not(:disabled) {
-  color: #0949AA;
+  color: #0062FF;
 }
 
 .c3:active:not(:disabled) *[fill^='#'] {
-  fill: #0949AA;
+  fill: #0062FF;
 }
 
 .c3:active:not(:disabled) [data-badge] {
-  background: #0949AA;
+  background: #0062FF;
   color: #FFFFFF;
 }
 
 .c3:disabled {
-  color: #A7B0BE;
+  color: #B1B5BB;
   cursor: default;
 }
 
 .c3:disabled *[fill^='#'] {
-  fill: #A7B0BE;
+  fill: #B1B5BB;
 }
 
 .c7 {
@@ -216,14 +206,13 @@ Object {
   -moz-appearance: none;
   appearance: none;
   border: none;
+  color: #74777F;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
   line-height: 24px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
-  color: #626F84;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -235,7 +224,7 @@ Object {
 .c7:focus:not(:active):before {
   position: absolute;
   content: '';
-  border: 2px solid #0A54C2;
+  border: 2px solid #0062FF;
   top: 0;
   left: 0;
   bottom: 0;
@@ -258,7 +247,7 @@ Object {
 }
 
 .c7 svg *[fill^='#'] {
-  fill: #626F84;
+  fill: #74777F;
 }
 
 .c7 [data-badge] {
@@ -266,38 +255,29 @@ Object {
 }
 
 .c7:hover:not(:disabled) {
-  color: #0A54C2;
-}
-
-.c7:hover:not(:disabled) *[fill^='#'] {
-  fill: #0A54C2;
-}
-
-.c7:hover:not(:disabled) [data-badge] {
-  background: #0A54C2;
-  color: #FFFFFF;
+  background: #0000000D;
 }
 
 .c7:active:not(:disabled) {
-  color: #0949AA;
+  color: #0062FF;
 }
 
 .c7:active:not(:disabled) *[fill^='#'] {
-  fill: #0949AA;
+  fill: #0062FF;
 }
 
 .c7:active:not(:disabled) [data-badge] {
-  background: #0949AA;
+  background: #0062FF;
   color: #FFFFFF;
 }
 
 .c7:disabled {
-  color: #A7B0BE;
+  color: #B1B5BB;
   cursor: default;
 }
 
 .c7:disabled *[fill^='#'] {
-  fill: #A7B0BE;
+  fill: #B1B5BB;
 }
 
 <body>
@@ -432,7 +412,7 @@ Object {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  background-color: #0D69F2;
+  background-color: #0062FF;
   height: 2px;
   -webkit-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
@@ -494,7 +474,6 @@ Object {
   font-size: 16px;
   line-height: 24px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -506,7 +485,7 @@ Object {
 .c3:focus:not(:active):before {
   position: absolute;
   content: '';
-  border: 2px solid #0A54C2;
+  border: 2px solid #0062FF;
   top: 0;
   left: 0;
   bottom: 0;
@@ -529,7 +508,7 @@ Object {
 }
 
 .c3 svg *[fill^='#'] {
-  fill: #626F84;
+  fill: #74777F;
 }
 
 .c3 [data-badge] {
@@ -537,38 +516,29 @@ Object {
 }
 
 .c3:hover:not(:disabled) {
-  color: #0A54C2;
-}
-
-.c3:hover:not(:disabled) *[fill^='#'] {
-  fill: #0A54C2;
-}
-
-.c3:hover:not(:disabled) [data-badge] {
-  background: #0A54C2;
-  color: #FFFFFF;
+  background: #0000000D;
 }
 
 .c3:active:not(:disabled) {
-  color: #0949AA;
+  color: #0062FF;
 }
 
 .c3:active:not(:disabled) *[fill^='#'] {
-  fill: #0949AA;
+  fill: #0062FF;
 }
 
 .c3:active:not(:disabled) [data-badge] {
-  background: #0949AA;
+  background: #0062FF;
   color: #FFFFFF;
 }
 
 .c3:disabled {
-  color: #A7B0BE;
+  color: #B1B5BB;
   cursor: default;
 }
 
 .c3:disabled *[fill^='#'] {
-  fill: #A7B0BE;
+  fill: #B1B5BB;
 }
 
 .c7 {
@@ -589,14 +559,13 @@ Object {
   -moz-appearance: none;
   appearance: none;
   border: none;
+  color: #74777F;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
   line-height: 24px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
-  color: #626F84;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -608,7 +577,7 @@ Object {
 .c7:focus:not(:active):before {
   position: absolute;
   content: '';
-  border: 2px solid #0A54C2;
+  border: 2px solid #0062FF;
   top: 0;
   left: 0;
   bottom: 0;
@@ -631,7 +600,7 @@ Object {
 }
 
 .c7 svg *[fill^='#'] {
-  fill: #626F84;
+  fill: #74777F;
 }
 
 .c7 [data-badge] {
@@ -639,38 +608,29 @@ Object {
 }
 
 .c7:hover:not(:disabled) {
-  color: #0A54C2;
-}
-
-.c7:hover:not(:disabled) *[fill^='#'] {
-  fill: #0A54C2;
-}
-
-.c7:hover:not(:disabled) [data-badge] {
-  background: #0A54C2;
-  color: #FFFFFF;
+  background: #0000000D;
 }
 
 .c7:active:not(:disabled) {
-  color: #0949AA;
+  color: #0062FF;
 }
 
 .c7:active:not(:disabled) *[fill^='#'] {
-  fill: #0949AA;
+  fill: #0062FF;
 }
 
 .c7:active:not(:disabled) [data-badge] {
-  background: #0949AA;
+  background: #0062FF;
   color: #FFFFFF;
 }
 
 .c7:disabled {
-  color: #A7B0BE;
+  color: #B1B5BB;
   cursor: default;
 }
 
 .c7:disabled *[fill^='#'] {
-  fill: #A7B0BE;
+  fill: #B1B5BB;
 }
 
 <div>

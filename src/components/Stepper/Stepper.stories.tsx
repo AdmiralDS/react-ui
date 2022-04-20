@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 
-import { Button } from '#src/index';
-import { Step, StepContent, Stepper } from '../Stepper';
+import { Button } from '#src/components/Button';
+import { Step, StepContent, Stepper } from '#src/components/Stepper';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -30,7 +30,7 @@ const Description = () => (
 );
 
 export default {
-  title: 'Example/Stepper',
+  title: 'Admiral-2.1/Stepper',
   decorators: [withDesign],
   component: Stepper,
   parameters: {
@@ -39,15 +39,15 @@ export default {
     design: [
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=37%3A16671',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=37%3A16671',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=37%3A16789',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=37%3A16789',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=37%3A16767',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=37%3A16767',
       },
     ],
   },
@@ -59,6 +59,9 @@ export default {
     lineClamp: {
       options: [1, 2, 3],
       control: { type: 'radio' },
+    },
+    hideLastStepLine: {
+      control: { type: 'boolean' },
     },
   },
 } as ComponentMeta<typeof Stepper>;
@@ -75,15 +78,17 @@ const Template0: ComponentStory<typeof Stepper> = ({ lineClamp, activeStep, orie
     { key: 3, content: 'Неактивный шаг, текст занимает максимум три строки' },
   ];
   return (
-    <Stepper lineClamp={lineClamp} activeStep={activeStep || 2} orientation={orientation} {...args}>
-      {steps.map(({ content, ...step }) => {
-        return (
-          <Step {...step} onClick={(step: any) => console.log(step.index)}>
-            <StepContent tooltipProps={{ style: { maxWidth: '300px', textAlign: 'center' } }}>{content}</StepContent>
-          </Step>
-        );
-      })}
-    </Stepper>
+    <>
+      <Stepper lineClamp={lineClamp} activeStep={activeStep || 2} orientation={orientation} {...args}>
+        {steps.map(({ content, ...step }) => {
+          return (
+            <Step {...step} onClick={(step: any) => console.log(step.index)}>
+              <StepContent tooltipProps={{ style: { maxWidth: '300px', textAlign: 'center' } }}>{content}</StepContent>
+            </Step>
+          );
+        })}
+      </Stepper>
+    </>
   );
 };
 
@@ -99,15 +104,17 @@ const Template1: ComponentStory<typeof Stepper> = (args) => {
     { key: 3, content: 'Неактивный шаг, текст занимает максимум три строки' },
   ];
   return (
-    <Stepper lineClamp={2} activeStep={2}>
-      {steps.map(({ content, ...step }) => {
-        return (
-          <Step {...step}>
-            <i>{content}</i>
-          </Step>
-        );
-      })}
-    </Stepper>
+    <>
+      <Stepper lineClamp={2} activeStep={2}>
+        {steps.map(({ content, ...step }) => {
+          return (
+            <Step {...step}>
+              <i>{content}</i>
+            </Step>
+          );
+        })}
+      </Stepper>
+    </>
   );
 };
 
@@ -121,17 +128,21 @@ const Template2: ComponentStory<typeof Stepper> = (args) => {
     { key: 5, content: 'Неактивный шаг' },
   ];
   return (
-    <div style={{ maxWidth: '800px', overflow: 'hidden' }}>
-      <Stepper activeStep={4}>
-        {steps.map(({ content, ...step }) => {
-          return (
-            <Step {...step}>
-              <StepContent tooltipProps={{ style: { maxWidth: '300px', textAlign: 'center' } }}>{content}</StepContent>
-            </Step>
-          );
-        })}
-      </Stepper>
-    </div>
+    <>
+      <div style={{ maxWidth: '800px', overflow: 'hidden' }}>
+        <Stepper activeStep={4}>
+          {steps.map(({ content, ...step }) => {
+            return (
+              <Step {...step}>
+                <StepContent tooltipProps={{ style: { maxWidth: '300px', textAlign: 'center' } }}>
+                  {content}
+                </StepContent>
+              </Step>
+            );
+          })}
+        </Stepper>
+      </div>
+    </>
   );
 };
 
@@ -234,17 +245,21 @@ const Template5: ComponentStory<typeof Stepper> = (args) => {
     setActiveStep(index);
   };
   return (
-    <div style={{ maxWidth: '800px', overflow: 'hidden' }}>
-      <Stepper lineClamp={2} activeStep={activeStep}>
-        {steps.map(({ content, ...step }) => {
-          return (
-            <Step {...step} onClick={handleStepClick}>
-              <StepContent tooltipProps={{ style: { maxWidth: '300px', textAlign: 'center' } }}>{content}</StepContent>
-            </Step>
-          );
-        })}
-      </Stepper>
-    </div>
+    <>
+      <div style={{ maxWidth: '800px', overflow: 'hidden' }}>
+        <Stepper lineClamp={2} activeStep={activeStep}>
+          {steps.map(({ content, ...step }) => {
+            return (
+              <Step {...step} onClick={handleStepClick}>
+                <StepContent tooltipProps={{ style: { maxWidth: '300px', textAlign: 'center' } }}>
+                  {content}
+                </StepContent>
+              </Step>
+            );
+          })}
+        </Stepper>
+      </div>
+    </>
   );
 };
 
@@ -262,41 +277,47 @@ const Template6: ComponentStory<typeof Stepper> = (args) => {
   const [steps, setSteps] = React.useState(initialSteps);
 
   return (
-    <div style={{ width: '400px', overflow: 'hidden' }}>
-      <div style={{ display: 'flex', width: '100%', justifyContent: 'space-between', marginBottom: '40px' }}>
-        <Button
-          onClick={() => {
-            const newSteps = [...steps].map((step, i) => (i === activeStep - 1 ? { ...step, completed: false } : step));
-            setSteps(newSteps);
-            setActiveStep(activeStep - 1);
-          }}
-          disabled={activeStep === 0}
-          dimension="s"
-        >
-          Шаг назад
-        </Button>
-        <Button
-          onClick={() => {
-            const newSteps = [...steps].map((step, i) => (i === activeStep ? { ...step, completed: true } : step));
-            setSteps(newSteps);
-            setActiveStep(activeStep + 1);
-          }}
-          disabled={activeStep === 3}
-          dimension="s"
-        >
-          Шаг вперёд
-        </Button>
+    <>
+      <div style={{ width: '400px', overflow: 'hidden' }}>
+        <div style={{ display: 'flex', width: '100%', justifyContent: 'space-between', marginBottom: '40px' }}>
+          <Button
+            onClick={() => {
+              const newSteps = [...steps].map((step, i) =>
+                i === activeStep - 1 ? { ...step, completed: false } : step,
+              );
+              setSteps(newSteps);
+              setActiveStep(activeStep - 1);
+            }}
+            disabled={activeStep === 0}
+            dimension="s"
+          >
+            Шаг назад
+          </Button>
+          <Button
+            onClick={() => {
+              const newSteps = [...steps].map((step, i) => (i === activeStep ? { ...step, completed: true } : step));
+              setSteps(newSteps);
+              setActiveStep(activeStep + 1);
+            }}
+            disabled={activeStep === 3}
+            dimension="s"
+          >
+            Шаг вперёд
+          </Button>
+        </div>
+        <Stepper activeStep={activeStep}>
+          {steps.map(({ content, ...step }) => {
+            return (
+              <Step {...step}>
+                <StepContent tooltipProps={{ style: { maxWidth: '300px', textAlign: 'center' } }}>
+                  {content}
+                </StepContent>
+              </Step>
+            );
+          })}
+        </Stepper>
       </div>
-      <Stepper activeStep={activeStep}>
-        {steps.map(({ content, ...step }) => {
-          return (
-            <Step {...step}>
-              <StepContent tooltipProps={{ style: { maxWidth: '300px', textAlign: 'center' } }}>{content}</StepContent>
-            </Step>
-          );
-        })}
-      </Stepper>
-    </div>
+    </>
   );
 };
 

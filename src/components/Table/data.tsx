@@ -11,7 +11,7 @@ const AmountCell = styled.div`
 
   [data-disabled='true'] & {
     & > * {
-      color: ${({ theme }) => theme.color.text.tertiary};
+      color: ${({ theme }) => theme.color['Neutral/Neutral 30']};
     }
   }
 `;
@@ -454,11 +454,6 @@ export const columnListSticky: Column[] = [
     title: 'Валюта',
   },
   {
-    name: 'customer',
-    title: 'Покупатель',
-    width: 200,
-  },
-  {
     name: 'rate',
     title: 'Ставка',
   },
@@ -522,7 +517,7 @@ export const rowListRowState: RowData[] = [
 const Wrapper = styled.div`
   display: flex;
   width: 100%;
-  background: ${({ theme }) => theme.color.special.softBlue};
+  background: ${({ theme }) => theme.color['Cyan/Cyan 10']};
   padding: 16px;
 `;
 const Content = styled.div`
@@ -531,7 +526,7 @@ const Content = styled.div`
   height: 100%;
   flex-direction: column;
   padding-left: 16px;
-  background: ${({ theme }) => theme.color.background.primary};
+  background: ${({ theme }) => theme.color['Special/Elevated BG']};
   & > div {
     margin-bottom: 8px;
   }

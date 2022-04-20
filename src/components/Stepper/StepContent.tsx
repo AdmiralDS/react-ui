@@ -1,17 +1,10 @@
-import React from 'react';
 import type { FC } from 'react';
-import { ThemeContext } from 'styled-components';
-import { Tooltip } from '#src/components/Tooltip';
+import React from 'react';
 import type { ITooltipProps } from '#src/components/Tooltip';
-import { DARK_THEME, LIGHT_THEME } from '#src/components/themes';
+import { Tooltip } from '#src/components/Tooltip';
 
-import { Content, ContentWrapper } from './style';
-import StepperContext from './StepperContext';
-
-const InverseTooltip = (props: any) => {
-  const themeContext = React.useContext(ThemeContext);
-  return <Tooltip {...props} theme={themeContext.name == 'dark' ? LIGHT_THEME : DARK_THEME} />;
-};
+import { Content, ContentWrapper } from '#src/components/Stepper/style';
+import StepperContext from '#src/components/Stepper/StepperContext';
 
 export const StepContent: FC<{ children: string; tooltipProps?: Partial<ITooltipProps> }> = ({
   children,
@@ -30,13 +23,13 @@ export const StepContent: FC<{ children: string; tooltipProps?: Partial<ITooltip
   }, [children, orientation, stepWidth, lineClamp]);
 
   return overflow ? (
-    <InverseTooltip renderContent={() => children} {...tooltipProps}>
+    <Tooltip renderContent={() => children} {...tooltipProps}>
       <ContentWrapper>
         <Content ref={contentRef} lineClamp={lineClamp}>
           {children}
         </Content>
       </ContentWrapper>
-    </InverseTooltip>
+    </Tooltip>
   ) : (
     <ContentWrapper>
       <Content ref={contentRef} lineClamp={lineClamp}>

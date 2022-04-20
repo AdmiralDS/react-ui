@@ -7,13 +7,13 @@ const circleBackground = css<{ background: TagKind | string }>`
   background: ${({ background, theme }) => {
     switch (background) {
       case 'green':
-        return theme.color.status.success;
+        return theme.color['Success/Success 50 Main'];
       case 'blue':
-        return theme.color.basic.primary;
+        return theme.color['Primary/Primary 60 Main'];
       case 'red':
-        return theme.color.status.danger;
+        return theme.color['Error/Error 60 Main'];
       case 'orange':
-        return theme.color.status.warn;
+        return theme.color['Warning/Warning 50 Main'];
       default:
         return background;
     }
@@ -24,17 +24,17 @@ const wrapperBackground = css<{ background: TagKind | string }>`
   background: ${({ background, theme }) => {
     switch (background) {
       case 'green':
-        return theme.color.special.softGreen;
+        return theme.color['Success/Success 10'];
       case 'blue':
-        return theme.color.special.softLightBlue;
+        return theme.color['Primary/Primary 10'];
       case 'red':
-        return theme.color.special.softRed;
+        return theme.color['Error/Error 10'];
       case 'orange':
-        return theme.color.special.softYellow;
+        return theme.color['Warning/Warning 10'];
       case 'neutral':
-        return theme.color.background.tertiary;
+        return theme.color['Neutral/Neutral 10'];
       default:
-        return background || theme.color.background.tertiary;
+        return background || theme.color['Neutral/Neutral 10'];
     }
   }};
 `;
@@ -44,19 +44,38 @@ const wrapperBorder = css<{ border: TagKind | string }>`
     ${({ border, theme }) => {
       switch (border) {
         case 'green':
-          return theme.color.special.green;
+          return theme.color['Success/Success 40'];
         case 'blue':
-          return theme.color.special.blue;
+          return theme.color['Primary/Primary 50'];
         case 'red':
-          return theme.color.special.red;
+          return theme.color['Error/Error 50'];
         case 'orange':
-          return theme.color.special.yellow;
+          return theme.color['Warning/Warning 40'];
         case 'neutral':
-          return theme.color.basic.tertiary;
+          return theme.color['Neutral/Neutral 40'];
         default:
-          return border || theme.color.basic.tertiary;
+          return border || theme.color['Neutral/Neutral 40'];
       }
     }};
+`;
+
+const wrapperHover = css<{ background: TagKind | string }>`
+  background: ${({ background, theme }) => {
+    switch (background) {
+      case 'green':
+        return theme.color['Success/Success 20'];
+      case 'blue':
+        return theme.color['Primary/Primary 20'];
+      case 'red':
+        return theme.color['Error/Error 20'];
+      case 'orange':
+        return theme.color['Warning/Warning 20'];
+      case 'neutral':
+        return theme.color['Neutral/Neutral 20'];
+      default:
+        return background || theme.color['Neutral/Neutral 20'];
+    }
+  }};
 `;
 
 const Wrapper = styled.button<{
@@ -75,9 +94,9 @@ const Wrapper = styled.button<{
   padding: 3px 7px;
   border-radius: 4px;
   ${({ statusViaBackground, theme }) =>
-    statusViaBackground ? wrapperBackground : `background: ${theme.color.background.tertiary};`}
+    statusViaBackground ? wrapperBackground : `background: ${theme.color['Neutral/Neutral 10']};`}
   ${({ statusViaBackground, theme }) =>
-    statusViaBackground ? wrapperBorder : `border: 1px solid ${theme.color.background.tertiary};`}
+    statusViaBackground ? wrapperBorder : `border: 1px solid ${theme.color['Neutral/Neutral 10']};`}
 
   display: inline-flex;
   align-items: center;
@@ -87,7 +106,7 @@ const Wrapper = styled.button<{
   &:hover,
   &:active {
     ${({ statusViaBackground, theme }) =>
-      statusViaBackground ? '' : `background: ${theme.color.background.tertiaryHover};`}
+      statusViaBackground ? wrapperHover : `background: ${theme.color['Neutral/Neutral 20']};`}
   }
 
   &:focus {
@@ -101,13 +120,13 @@ const Wrapper = styled.button<{
       left: -4px;
       right: -4px;
       border-radius: 6px;
-      border: 2px solid ${({ theme }) => theme.color.basic.hover};
+      border: 2px solid ${({ theme }) => theme.color['Primary/Primary 60 Main']};
     }
   }
 `;
 
 const Text = styled.span`
-  color: ${({ theme }) => theme.color.text.primary};
+  color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
   user-select: none;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -134,7 +153,7 @@ const Icon = styled.div`
   margin-right: 4px;
 
   & *[fill^='#'] {
-    fill: ${({ theme }) => theme.color.text.secondary};
+    fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
   }
 `;
 

@@ -7,7 +7,7 @@ export const styleTextMixin = css<{ dimension: CheckboxDimension; disabled?: boo
   line-height: ${({ dimension }) => (dimension === 'm' ? 20 : 16)}px;
   font-weight: normal;
   font-family: ${TYPOGRAPHY.fontFamily};
-  color: ${({ disabled, theme }) => (disabled ? theme.color.basic.disable : theme.color.basic.secondary)};
+  color: ${({ disabled, theme }) => (disabled ? theme.color['Neutral/Neutral 30'] : theme.color['Neutral/Neutral 90'])};
   user-select: none;
 `;
 

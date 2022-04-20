@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { useToast } from './useToast';
-import type { PositionToasts } from './ToastProvider';
+import { useToast } from '#src/components/Toast/useToast';
+import type { PositionToasts } from '#src/components/Toast/ToastProvider';
 import { AnimationToast } from '#src/components/Toast/AnimationToast';
 
 const Container = styled.div<{ position: PositionToasts }>`

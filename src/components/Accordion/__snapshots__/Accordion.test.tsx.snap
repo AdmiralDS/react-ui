@@ -3,7 +3,7 @@
 exports[`Spinner should render component with dimension m 1`] = `
 Object {
   "asFragment": [Function],
-  "baseElement": .c9 {
+  "baseElement": .c10 {
   overflow: hidden;
   -webkit-transition: max-height 250ms cubic-bezier(0.4,0,0.2,1),visibility 250ms cubic-bezier(0.4,0,0.2,1);
   transition: max-height 250ms cubic-bezier(0.4,0,0.2,1),visibility 250ms cubic-bezier(0.4,0,0.2,1);
@@ -11,7 +11,7 @@ Object {
   visibility: hidden;
 }
 
-.c8 {
+.c9 {
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
   -webkit-flex-shrink: 0;
@@ -19,18 +19,22 @@ Object {
   flex-shrink: 0;
   width: 24px;
   height: 24px;
-  margin-left: 8px;
+  margin: 0 0 0 8px;
 }
 
-.c8 *[fill^='#'] {
-  fill: #626F84;
+[data-icon='left'] .c8 {
+  margin: 0 8px 0 0;
 }
 
-[data-disabled='true'] .c7 *[fill^='#'] {
-  fill: #A7B0BE;
+.c9 *[fill^='#'] {
+  fill: #74777F;
 }
 
-[data-dimension='m'] .c7 {
+[data-disabled='true'] .c8 *[fill^='#'] {
+  fill: #B1B5BB;
+}
+
+[data-dimension='m'] .c8 {
   width: 20px;
   height: 20px;
 }
@@ -43,10 +47,6 @@ Object {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
   -webkit-align-items: flex-start;
   -webkit-box-align: flex-start;
   -ms-flex-align: flex-start;
@@ -56,6 +56,22 @@ Object {
 
 [data-dimension='m'] .c6.c6 {
   padding: 10px 16px 9px 16px;
+}
+
+[data-icon='left'] .c5 {
+  -webkit-flex-direction: row-reverse;
+  -ms-flex-direction: row-reverse;
+  flex-direction: row-reverse;
+}
+
+.c7 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-flex: 1 1 auto;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
 }
 
 .c4 {
@@ -83,27 +99,23 @@ Object {
   padding: 0;
   cursor: pointer;
   overflow: visible;
+  color: #22242A;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
-  font-weight: 500;
+  font-weight: 550;
   font-size: 16px;
   line-height: 24px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
 }
 
 .c4:hover {
-  background: #F1F2F4;
-}
-
-.c4:hover *[fill^='#'] {
-  fill: #0A54C2;
+  background: #0000000D;
 }
 
 .c4:focus:before {
   position: absolute;
   content: '';
-  border: 2px solid #0A54C2;
+  border: 2px solid #0062FF;
   top: -1px;
   left: 0;
   bottom: -1px;
@@ -119,26 +131,24 @@ Object {
   min-height: 38px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
-  font-weight: 500;
+  font-weight: 550;
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
 }
 
 .c2 {
-  border-bottom: 1px solid #E2E5E9;
-  color: #2B313B;
+  border-bottom: 1px solid #D6D8DD;
 }
 
-.c2 > .c3 .c7 {
+.c2 > .c3 .c8 {
   -webkit-transform: rotate(0deg);
   -ms-transform: rotate(0deg);
   transform: rotate(0deg);
 }
 
-.c11 {
-  box-sizing: border-box;
+.c12 {
+  color: #22242A;
   overflow-y: auto;
   max-height: 100vh;
   padding: 4px 16px 16px 16px;
@@ -148,10 +158,9 @@ Object {
   font-size: 16px;
   line-height: 24px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
 }
 
-[data-dimension='m'] .c10 {
+[data-dimension='m'] .c11 {
   padding: 4px 16px 10px 16px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
@@ -159,7 +168,6 @@ Object {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
 }
 
 .c0 {
@@ -167,11 +175,15 @@ Object {
 }
 
 .c0 > .c1:first-child {
-  border-top: 1px solid #E2E5E9;
+  border-top: 1px solid #D6D8DD;
 }
 
 .c0 > .c1:first-child .c5 {
   padding: 9px 16px;
+}
+
+.c0 > .c1:last-child {
+  border-bottom: 1px solid #D6D8DD;
 }
 
 <body>
@@ -179,6 +191,7 @@ Object {
       <div
         class="c0"
         data-dimension="m"
+        data-icon="right"
       >
         <div
           class="c1 c2"
@@ -194,19 +207,23 @@ Object {
               class="c5 c6"
               tabindex="-1"
             >
-              Первый пункт
+              <span
+                class="c7"
+              >
+                Первый пункт
+              </span>
               <div
                 aria-hidden="true"
-                class="c7 c8"
+                class="c8 c9"
               />
             </span>
           </button>
           <div
-            class="c9"
+            class="c10"
           >
             <div
               aria-labelledby="accordion_title_AccordionItem_1"
-              class="c10 c11"
+              class="c11 c12"
               id="accordion_content_AccordionItem_1"
               role="region"
             >
@@ -228,19 +245,23 @@ Object {
               class="c5 c6"
               tabindex="-1"
             >
-              Второй пункт
+              <span
+                class="c7"
+              >
+                Второй пункт
+              </span>
               <div
                 aria-hidden="true"
-                class="c7 c8"
+                class="c8 c9"
               />
             </span>
           </button>
           <div
-            class="c9"
+            class="c10"
           >
             <div
               aria-labelledby="accordion_title_AccordionItem_2"
-              class="c10 c11"
+              class="c11 c12"
               id="accordion_content_AccordionItem_2"
               role="region"
             >
@@ -262,19 +283,23 @@ Object {
               class="c5 c6"
               tabindex="-1"
             >
-              Третий пункт
+              <span
+                class="c7"
+              >
+                Третий пункт
+              </span>
               <div
                 aria-hidden="true"
-                class="c7 c8"
+                class="c8 c9"
               />
             </span>
           </button>
           <div
-            class="c9"
+            class="c10"
           >
             <div
               aria-labelledby="accordion_title_AccordionItem_3"
-              class="c10 c11"
+              class="c11 c12"
               id="accordion_content_AccordionItem_3"
               role="region"
             >
@@ -285,7 +310,7 @@ Object {
       </div>
     </div>
   </body>,
-  "container": .c9 {
+  "container": .c10 {
   overflow: hidden;
   -webkit-transition: max-height 250ms cubic-bezier(0.4,0,0.2,1),visibility 250ms cubic-bezier(0.4,0,0.2,1);
   transition: max-height 250ms cubic-bezier(0.4,0,0.2,1),visibility 250ms cubic-bezier(0.4,0,0.2,1);
@@ -293,7 +318,7 @@ Object {
   visibility: hidden;
 }
 
-.c8 {
+.c9 {
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
   -webkit-flex-shrink: 0;
@@ -301,18 +326,22 @@ Object {
   flex-shrink: 0;
   width: 24px;
   height: 24px;
-  margin-left: 8px;
+  margin: 0 0 0 8px;
 }
 
-.c8 *[fill^='#'] {
-  fill: #626F84;
+[data-icon='left'] .c8 {
+  margin: 0 8px 0 0;
 }
 
-[data-disabled='true'] .c7 *[fill^='#'] {
-  fill: #A7B0BE;
+.c9 *[fill^='#'] {
+  fill: #74777F;
 }
 
-[data-dimension='m'] .c7 {
+[data-disabled='true'] .c8 *[fill^='#'] {
+  fill: #B1B5BB;
+}
+
+[data-dimension='m'] .c8 {
   width: 20px;
   height: 20px;
 }
@@ -325,10 +354,6 @@ Object {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
   -webkit-align-items: flex-start;
   -webkit-box-align: flex-start;
   -ms-flex-align: flex-start;
@@ -338,6 +363,22 @@ Object {
 
 [data-dimension='m'] .c6.c6 {
   padding: 10px 16px 9px 16px;
+}
+
+[data-icon='left'] .c5 {
+  -webkit-flex-direction: row-reverse;
+  -ms-flex-direction: row-reverse;
+  flex-direction: row-reverse;
+}
+
+.c7 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-flex: 1 1 auto;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
 }
 
 .c4 {
@@ -365,27 +406,23 @@ Object {
   padding: 0;
   cursor: pointer;
   overflow: visible;
+  color: #22242A;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
-  font-weight: 500;
+  font-weight: 550;
   font-size: 16px;
   line-height: 24px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
 }
 
 .c4:hover {
-  background: #F1F2F4;
-}
-
-.c4:hover *[fill^='#'] {
-  fill: #0A54C2;
+  background: #0000000D;
 }
 
 .c4:focus:before {
   position: absolute;
   content: '';
-  border: 2px solid #0A54C2;
+  border: 2px solid #0062FF;
   top: -1px;
   left: 0;
   bottom: -1px;
@@ -401,26 +438,24 @@ Object {
   min-height: 38px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
-  font-weight: 500;
+  font-weight: 550;
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
 }
 
 .c2 {
-  border-bottom: 1px solid #E2E5E9;
-  color: #2B313B;
+  border-bottom: 1px solid #D6D8DD;
 }
 
-.c2 > .c3 .c7 {
+.c2 > .c3 .c8 {
   -webkit-transform: rotate(0deg);
   -ms-transform: rotate(0deg);
   transform: rotate(0deg);
 }
 
-.c11 {
-  box-sizing: border-box;
+.c12 {
+  color: #22242A;
   overflow-y: auto;
   max-height: 100vh;
   padding: 4px 16px 16px 16px;
@@ -430,10 +465,9 @@ Object {
   font-size: 16px;
   line-height: 24px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
 }
 
-[data-dimension='m'] .c10 {
+[data-dimension='m'] .c11 {
   padding: 4px 16px 10px 16px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
@@ -441,7 +475,6 @@ Object {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
 }
 
 .c0 {
@@ -449,17 +482,22 @@ Object {
 }
 
 .c0 > .c1:first-child {
-  border-top: 1px solid #E2E5E9;
+  border-top: 1px solid #D6D8DD;
 }
 
 .c0 > .c1:first-child .c5 {
   padding: 9px 16px;
 }
 
+.c0 > .c1:last-child {
+  border-bottom: 1px solid #D6D8DD;
+}
+
 <div>
     <div
       class="c0"
       data-dimension="m"
+      data-icon="right"
     >
       <div
         class="c1 c2"
@@ -475,19 +513,23 @@ Object {
             class="c5 c6"
             tabindex="-1"
           >
-            Первый пункт
+            <span
+              class="c7"
+            >
+              Первый пункт
+            </span>
             <div
               aria-hidden="true"
-              class="c7 c8"
+              class="c8 c9"
             />
           </span>
         </button>
         <div
-          class="c9"
+          class="c10"
         >
           <div
             aria-labelledby="accordion_title_AccordionItem_1"
-            class="c10 c11"
+            class="c11 c12"
             id="accordion_content_AccordionItem_1"
             role="region"
           >
@@ -509,19 +551,23 @@ Object {
             class="c5 c6"
             tabindex="-1"
           >
-            Второй пункт
+            <span
+              class="c7"
+            >
+              Второй пункт
+            </span>
             <div
               aria-hidden="true"
-              class="c7 c8"
+              class="c8 c9"
             />
           </span>
         </button>
         <div
-          class="c9"
+          class="c10"
         >
           <div
             aria-labelledby="accordion_title_AccordionItem_2"
-            class="c10 c11"
+            class="c11 c12"
             id="accordion_content_AccordionItem_2"
             role="region"
           >
@@ -543,19 +589,23 @@ Object {
             class="c5 c6"
             tabindex="-1"
           >
-            Третий пункт
+            <span
+              class="c7"
+            >
+              Третий пункт
+            </span>
             <div
               aria-hidden="true"
-              class="c7 c8"
+              class="c8 c9"
             />
           </span>
         </button>
         <div
-          class="c9"
+          class="c10"
         >
           <div
             aria-labelledby="accordion_title_AccordionItem_3"
-            class="c10 c11"
+            class="c11 c12"
             id="accordion_content_AccordionItem_3"
             role="region"
           >
@@ -622,7 +672,7 @@ Object {
 exports[`Spinner should render default component 1`] = `
 Object {
   "asFragment": [Function],
-  "baseElement": .c9 {
+  "baseElement": .c10 {
   overflow: hidden;
   -webkit-transition: max-height 250ms cubic-bezier(0.4,0,0.2,1),visibility 250ms cubic-bezier(0.4,0,0.2,1);
   transition: max-height 250ms cubic-bezier(0.4,0,0.2,1),visibility 250ms cubic-bezier(0.4,0,0.2,1);
@@ -630,7 +680,7 @@ Object {
   visibility: hidden;
 }
 
-.c8 {
+.c9 {
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
   -webkit-flex-shrink: 0;
@@ -638,18 +688,22 @@ Object {
   flex-shrink: 0;
   width: 24px;
   height: 24px;
-  margin-left: 8px;
+  margin: 0 0 0 8px;
 }
 
-.c8 *[fill^='#'] {
-  fill: #626F84;
+[data-icon='left'] .c8 {
+  margin: 0 8px 0 0;
 }
 
-[data-disabled='true'] .c7 *[fill^='#'] {
-  fill: #A7B0BE;
+.c9 *[fill^='#'] {
+  fill: #74777F;
 }
 
-[data-dimension='m'] .c7 {
+[data-disabled='true'] .c8 *[fill^='#'] {
+  fill: #B1B5BB;
+}
+
+[data-dimension='m'] .c8 {
   width: 20px;
   height: 20px;
 }
@@ -662,10 +716,6 @@ Object {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
   -webkit-align-items: flex-start;
   -webkit-box-align: flex-start;
   -ms-flex-align: flex-start;
@@ -675,6 +725,22 @@ Object {
 
 [data-dimension='m'] .c6.c6 {
   padding: 10px 16px 9px 16px;
+}
+
+[data-icon='left'] .c5 {
+  -webkit-flex-direction: row-reverse;
+  -ms-flex-direction: row-reverse;
+  flex-direction: row-reverse;
+}
+
+.c7 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-flex: 1 1 auto;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
 }
 
 .c4 {
@@ -702,27 +768,23 @@ Object {
   padding: 0;
   cursor: pointer;
   overflow: visible;
+  color: #22242A;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
-  font-weight: 500;
+  font-weight: 550;
   font-size: 16px;
   line-height: 24px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
 }
 
 .c4:hover {
-  background: #F1F2F4;
-}
-
-.c4:hover *[fill^='#'] {
-  fill: #0A54C2;
+  background: #0000000D;
 }
 
 .c4:focus:before {
   position: absolute;
   content: '';
-  border: 2px solid #0A54C2;
+  border: 2px solid #0062FF;
   top: -1px;
   left: 0;
   bottom: -1px;
@@ -738,26 +800,24 @@ Object {
   min-height: 38px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
-  font-weight: 500;
+  font-weight: 550;
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
 }
 
 .c2 {
-  border-bottom: 1px solid #E2E5E9;
-  color: #2B313B;
+  border-bottom: 1px solid #D6D8DD;
 }
 
-.c2 > .c3 .c7 {
+.c2 > .c3 .c8 {
   -webkit-transform: rotate(0deg);
   -ms-transform: rotate(0deg);
   transform: rotate(0deg);
 }
 
-.c11 {
-  box-sizing: border-box;
+.c12 {
+  color: #22242A;
   overflow-y: auto;
   max-height: 100vh;
   padding: 4px 16px 16px 16px;
@@ -767,10 +827,9 @@ Object {
   font-size: 16px;
   line-height: 24px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
 }
 
-[data-dimension='m'] .c10 {
+[data-dimension='m'] .c11 {
   padding: 4px 16px 10px 16px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
@@ -778,7 +837,6 @@ Object {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
 }
 
 .c0 {
@@ -786,11 +844,15 @@ Object {
 }
 
 .c0 > .c1:first-child {
-  border-top: 1px solid #E2E5E9;
+  border-top: 1px solid #D6D8DD;
 }
 
 .c0 > .c1:first-child .c5 {
   padding: 15px 16px;
+}
+
+.c0 > .c1:last-child {
+  border-bottom: 1px solid #D6D8DD;
 }
 
 <body>
@@ -798,6 +860,7 @@ Object {
       <div
         class="c0"
         data-dimension="l"
+        data-icon="right"
       >
         <div
           class="c1 c2"
@@ -813,19 +876,23 @@ Object {
               class="c5 c6"
               tabindex="-1"
             >
-              Первый пункт
+              <span
+                class="c7"
+              >
+                Первый пункт
+              </span>
               <div
                 aria-hidden="true"
-                class="c7 c8"
+                class="c8 c9"
               />
             </span>
           </button>
           <div
-            class="c9"
+            class="c10"
           >
             <div
               aria-labelledby="accordion_title_AccordionItem_1"
-              class="c10 c11"
+              class="c11 c12"
               id="accordion_content_AccordionItem_1"
               role="region"
             >
@@ -847,19 +914,23 @@ Object {
               class="c5 c6"
               tabindex="-1"
             >
-              Второй пункт
+              <span
+                class="c7"
+              >
+                Второй пункт
+              </span>
               <div
                 aria-hidden="true"
-                class="c7 c8"
+                class="c8 c9"
               />
             </span>
           </button>
           <div
-            class="c9"
+            class="c10"
           >
             <div
               aria-labelledby="accordion_title_AccordionItem_2"
-              class="c10 c11"
+              class="c11 c12"
               id="accordion_content_AccordionItem_2"
               role="region"
             >
@@ -881,19 +952,23 @@ Object {
               class="c5 c6"
               tabindex="-1"
             >
-              Третий пункт
+              <span
+                class="c7"
+              >
+                Третий пункт
+              </span>
               <div
                 aria-hidden="true"
-                class="c7 c8"
+                class="c8 c9"
               />
             </span>
           </button>
           <div
-            class="c9"
+            class="c10"
           >
             <div
               aria-labelledby="accordion_title_AccordionItem_3"
-              class="c10 c11"
+              class="c11 c12"
               id="accordion_content_AccordionItem_3"
               role="region"
             >
@@ -904,7 +979,7 @@ Object {
       </div>
     </div>
   </body>,
-  "container": .c9 {
+  "container": .c10 {
   overflow: hidden;
   -webkit-transition: max-height 250ms cubic-bezier(0.4,0,0.2,1),visibility 250ms cubic-bezier(0.4,0,0.2,1);
   transition: max-height 250ms cubic-bezier(0.4,0,0.2,1),visibility 250ms cubic-bezier(0.4,0,0.2,1);
@@ -912,7 +987,7 @@ Object {
   visibility: hidden;
 }
 
-.c8 {
+.c9 {
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
   -webkit-flex-shrink: 0;
@@ -920,18 +995,22 @@ Object {
   flex-shrink: 0;
   width: 24px;
   height: 24px;
-  margin-left: 8px;
+  margin: 0 0 0 8px;
 }
 
-.c8 *[fill^='#'] {
-  fill: #626F84;
+[data-icon='left'] .c8 {
+  margin: 0 8px 0 0;
 }
 
-[data-disabled='true'] .c7 *[fill^='#'] {
-  fill: #A7B0BE;
+.c9 *[fill^='#'] {
+  fill: #74777F;
 }
 
-[data-dimension='m'] .c7 {
+[data-disabled='true'] .c8 *[fill^='#'] {
+  fill: #B1B5BB;
+}
+
+[data-dimension='m'] .c8 {
   width: 20px;
   height: 20px;
 }
@@ -944,10 +1023,6 @@ Object {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
   -webkit-align-items: flex-start;
   -webkit-box-align: flex-start;
   -ms-flex-align: flex-start;
@@ -957,6 +1032,22 @@ Object {
 
 [data-dimension='m'] .c6.c6 {
   padding: 10px 16px 9px 16px;
+}
+
+[data-icon='left'] .c5 {
+  -webkit-flex-direction: row-reverse;
+  -ms-flex-direction: row-reverse;
+  flex-direction: row-reverse;
+}
+
+.c7 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-flex: 1 1 auto;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
 }
 
 .c4 {
@@ -984,27 +1075,23 @@ Object {
   padding: 0;
   cursor: pointer;
   overflow: visible;
+  color: #22242A;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
-  font-weight: 500;
+  font-weight: 550;
   font-size: 16px;
   line-height: 24px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
 }
 
 .c4:hover {
-  background: #F1F2F4;
-}
-
-.c4:hover *[fill^='#'] {
-  fill: #0A54C2;
+  background: #0000000D;
 }
 
 .c4:focus:before {
   position: absolute;
   content: '';
-  border: 2px solid #0A54C2;
+  border: 2px solid #0062FF;
   top: -1px;
   left: 0;
   bottom: -1px;
@@ -1020,26 +1107,24 @@ Object {
   min-height: 38px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
-  font-weight: 500;
+  font-weight: 550;
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
 }
 
 .c2 {
-  border-bottom: 1px solid #E2E5E9;
-  color: #2B313B;
+  border-bottom: 1px solid #D6D8DD;
 }
 
-.c2 > .c3 .c7 {
+.c2 > .c3 .c8 {
   -webkit-transform: rotate(0deg);
   -ms-transform: rotate(0deg);
   transform: rotate(0deg);
 }
 
-.c11 {
-  box-sizing: border-box;
+.c12 {
+  color: #22242A;
   overflow-y: auto;
   max-height: 100vh;
   padding: 4px 16px 16px 16px;
@@ -1049,10 +1134,9 @@ Object {
   font-size: 16px;
   line-height: 24px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
 }
 
-[data-dimension='m'] .c10 {
+[data-dimension='m'] .c11 {
   padding: 4px 16px 10px 16px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
@@ -1060,7 +1144,6 @@ Object {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
 }
 
 .c0 {
@@ -1068,17 +1151,22 @@ Object {
 }
 
 .c0 > .c1:first-child {
-  border-top: 1px solid #E2E5E9;
+  border-top: 1px solid #D6D8DD;
 }
 
 .c0 > .c1:first-child .c5 {
   padding: 15px 16px;
 }
 
+.c0 > .c1:last-child {
+  border-bottom: 1px solid #D6D8DD;
+}
+
 <div>
     <div
       class="c0"
       data-dimension="l"
+      data-icon="right"
     >
       <div
         class="c1 c2"
@@ -1094,19 +1182,23 @@ Object {
             class="c5 c6"
             tabindex="-1"
           >
-            Первый пункт
+            <span
+              class="c7"
+            >
+              Первый пункт
+            </span>
             <div
               aria-hidden="true"
-              class="c7 c8"
+              class="c8 c9"
             />
           </span>
         </button>
         <div
-          class="c9"
+          class="c10"
         >
           <div
             aria-labelledby="accordion_title_AccordionItem_1"
-            class="c10 c11"
+            class="c11 c12"
             id="accordion_content_AccordionItem_1"
             role="region"
           >
@@ -1128,19 +1220,23 @@ Object {
             class="c5 c6"
             tabindex="-1"
           >
-            Второй пункт
+            <span
+              class="c7"
+            >
+              Второй пункт
+            </span>
             <div
               aria-hidden="true"
-              class="c7 c8"
+              class="c8 c9"
             />
           </span>
         </button>
         <div
-          class="c9"
+          class="c10"
         >
           <div
             aria-labelledby="accordion_title_AccordionItem_2"
-            class="c10 c11"
+            class="c11 c12"
             id="accordion_content_AccordionItem_2"
             role="region"
           >
@@ -1162,19 +1258,23 @@ Object {
             class="c5 c6"
             tabindex="-1"
           >
-            Третий пункт
+            <span
+              class="c7"
+            >
+              Третий пункт
+            </span>
             <div
               aria-hidden="true"
-              class="c7 c8"
+              class="c8 c9"
             />
           </span>
         </button>
         <div
-          class="c9"
+          class="c10"
         >
           <div
             aria-labelledby="accordion_title_AccordionItem_3"
-            class="c10 c11"
+            class="c11 c12"
             id="accordion_content_AccordionItem_3"
             role="region"
           >

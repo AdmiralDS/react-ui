@@ -10,14 +10,14 @@ export interface SlotProps extends HTMLAttributes<HTMLLIElement> {
 }
 
 const activeSlot = css`
-  background-color: ${(p) => p.theme.color.background.secondary};
+  background-color: ${(p) => p.theme.color['Opacity/Focus']};
 `;
 
 const SlotStyle = styled.li<{ disabled?: boolean; selected?: boolean; active?: boolean }>`
   position: relative;
   display: flex;
   justify-content: center;
-  color: ${(p) => (p.disabled ? p.theme.color.text.tertiary : p.theme.color.text.primary)};
+  color: ${(p) => (p.disabled ? p.theme.color['Neutral/Neutral 30'] : p.theme.color['Neutral/Neutral 90'])};
   cursor: ${(p) => (p.disabled ? 'not-allowed' : 'pointer')};
   &[data-dimension='xl'] {
     padding: 12px 16px;
@@ -30,7 +30,7 @@ const SlotStyle = styled.li<{ disabled?: boolean; selected?: boolean; active?: b
   }
 
   &:hover {
-    background: ${(p) => (p.disabled ? '' : p.theme.color.background.secondary)};
+    background: ${(p) => (p.disabled ? '' : p.theme.color['Opacity/Hover'])};
   }
 
   ${(p) => ((p.selected && !p.active && !p.disabled) || (p.active && !p.disabled) ? activeSlot : '')}

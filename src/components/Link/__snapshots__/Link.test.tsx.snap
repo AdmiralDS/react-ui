@@ -18,7 +18,7 @@ exports[`Link should render component 1`] = `
   -webkit-text-decoration: none;
   text-decoration: none;
   position: relative;
-  color: #0D69F2;
+  color: #0062FF;
   font-size: 16px;
   font-weight: normal;
   line-height: 24px;
@@ -26,32 +26,32 @@ exports[`Link should render component 1`] = `
 }
 
 .c0:hover {
-  color: #0A54C2;
+  color: #0046E2;
 }
 
 .c0:hover *[fill^='#'] {
-  fill: #0A54C2;
+  fill: #0046E2;
 }
 
 .c0:focus {
-  color: #0A54C2;
-  outline-color: #0A54C2;
+  color: #0046E2;
+  outline-color: #0046E2;
 }
 
 .c0:focus *[fill^='#'] {
-  fill: #0A54C2;
+  fill: #0046E2;
 }
 
 .c0:active {
-  color: #0949AA;
+  color: #0132B0;
 }
 
 .c0:active *[fill^='#'] {
-  fill: #0949AA;
+  fill: #0132B0;
 }
 
 .c0 *[fill^='#'] {
-  fill: #0D69F2;
+  fill: #0062FF;
 }
 
 <div>

@@ -2,10 +2,10 @@ import React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import { ReactComponent as MinusCircleOutline } from '@admiral-ds/icons/build/service/MinusCircleOutline.svg';
-import { TabMenu } from '.';
+import { TabMenu } from '#src/components/TabMenu';
 
 export default {
-  title: 'Example/TabMenu',
+  title: 'Admiral-2.1/TabMenu',
   decorators: [withDesign],
   component: TabMenu,
   parameters: {
@@ -13,11 +13,11 @@ export default {
     design: [
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A31118',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A31118',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A31386',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A31257',
       },
     ],
   },
@@ -64,14 +64,24 @@ const tabs = [
     id: '6',
     content: 'Option 666666',
   },
+  {
+    id: '7',
+    content: 'Option 7777777',
+  },
+  {
+    id: '8',
+    content: 'Option 88888888',
+  },
+  {
+    id: '9',
+    content: 'Option 999999999',
+  },
 ];
 
 const disabledTabs = [
   {
     id: '1',
     content: 'Option 1',
-    icon: <MinusCircleOutline />,
-    disabled: true,
   },
   {
     id: '2',
@@ -80,16 +90,17 @@ const disabledTabs = [
   {
     id: '3',
     content: 'Option 333',
-    badge: 5,
+    disabled: true,
   },
   {
     id: '4',
     content: 'Option 4444',
-    disabled: true,
   },
   {
     id: '5',
     content: 'Option 55555',
+    icon: <MinusCircleOutline />,
+    disabled: true,
   },
   {
     id: '6',
@@ -98,6 +109,7 @@ const disabledTabs = [
   {
     id: '7',
     content: 'Option 77',
+    badge: 5,
     disabled: true,
   },
 ];
@@ -148,65 +160,73 @@ const overflowTabs = [
 const Template1: ComponentStory<typeof TabMenu> = (args) => {
   const [selected, setSelected] = React.useState<string>('3');
   return (
-    <div style={{ display: 'flex', width: '800px' }}>
-      <TabMenu
-        {...args}
-        activeTab={selected}
-        onChange={(id) => {
-          setSelected(id);
-        }}
-        tabs={tabs}
-      />
-    </div>
+    <>
+      <div style={{ display: 'flex', width: '800px' }}>
+        <TabMenu
+          {...args}
+          activeTab={selected}
+          onChange={(id) => {
+            setSelected(id);
+          }}
+          tabs={tabs}
+        />
+      </div>
+    </>
   );
 };
 
 const Template2: ComponentStory<typeof TabMenu> = (args) => {
   const [selected, setSelected] = React.useState<string>('3');
   return (
-    <div style={{ display: 'flex', width: '800px' }}>
-      <TabMenu
-        {...args}
-        activeTab={selected}
-        onChange={(id) => {
-          setSelected(id);
-        }}
-        tabs={tabs}
-        underline
-      />
-    </div>
+    <>
+      <div style={{ display: 'flex', width: '800px' }}>
+        <TabMenu
+          {...args}
+          activeTab={selected}
+          onChange={(id) => {
+            setSelected(id);
+          }}
+          tabs={tabs}
+          underline
+        />
+      </div>
+    </>
   );
 };
 
 const Template3: ComponentStory<typeof TabMenu> = (args) => {
-  const [selected, setSelected] = React.useState<string>('3');
+  const [selected, setSelected] = React.useState<string>('2');
   return (
-    <div style={{ display: 'flex', width: '800px' }}>
-      <TabMenu
-        {...args}
-        activeTab={selected}
-        onChange={(id) => {
-          setSelected(id);
-        }}
-        tabs={disabledTabs}
-      />
-    </div>
+    <>
+      <div style={{ display: 'flex', width: '800px' }}>
+        <TabMenu
+          {...args}
+          activeTab={selected}
+          onChange={(id) => {
+            setSelected(id);
+          }}
+          tabs={disabledTabs}
+        />
+      </div>
+    </>
   );
 };
 
 const Template4: ComponentStory<typeof TabMenu> = (args) => {
   const [selected, setSelected] = React.useState<string>('3');
   return (
-    <div style={{ display: 'flex', width: '500px' }}>
-      <TabMenu
-        {...args}
-        activeTab={selected}
-        onChange={(id) => {
-          setSelected(id);
-        }}
-        tabs={overflowTabs}
-      />
-    </div>
+    <>
+      <div style={{ display: 'flex', width: '500px' }}>
+        <TabMenu
+          {...args}
+          activeTab={selected}
+          onChange={(id) => {
+            setSelected(id);
+          }}
+          tabs={overflowTabs}
+        />
+      </div>
+    </>
   );
 };
 

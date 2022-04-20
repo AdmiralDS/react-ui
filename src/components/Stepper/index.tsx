@@ -1,11 +1,11 @@
-import React, { HTMLAttributes } from 'react';
 import type { FC } from 'react';
+import React, { HTMLAttributes } from 'react';
 
-import StepperContext from './StepperContext';
-import { List } from './style';
+import StepperContext from '#src/components/Stepper/StepperContext';
+import { List } from '#src/components/Stepper/style';
 
-export * from './StepContent';
-export * from './Step';
+export * from '#src/components/Stepper/StepContent';
+export * from '#src/components/Stepper/Step';
 
 export type Orientation = 'horizontal' | 'vertical';
 
@@ -20,6 +20,8 @@ export interface StepperProps extends HTMLAttributes<HTMLUListElement> {
   lineClamp?: 1 | 2 | 3;
   /** Ширина шага */
   stepWidth?: number | string;
+  /** В последнем шаге опционально можно выключать статусную полосу */
+  hideLastStepLine?: boolean;
 }
 
 export const Stepper: FC<StepperProps> = ({
@@ -27,6 +29,7 @@ export const Stepper: FC<StepperProps> = ({
   activeStep = -1,
   lineClamp = 3,
   stepWidth,
+  hideLastStepLine = false,
   children,
   ...props
 }) => {
@@ -40,11 +43,13 @@ export const Stepper: FC<StepperProps> = ({
           index,
           role: 'listitem',
           'aria-current': 'step',
+          hideLine: index === React.Children.toArray(children).length - 1 && hideLastStepLine,
           ...step.props,
         })
       : React.cloneElement(step, {
           index,
           role: 'listitem',
+          hideLine: index === React.Children.toArray(children).length - 1 && hideLastStepLine,
           ...step.props,
         });
   });

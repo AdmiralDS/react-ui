@@ -70,11 +70,12 @@ const Label = styled.label<{
     ${typography['Body/Body 2 Short']}
   }
 
-  color: ${(props) => (props.disabled ? props.theme.color.text.tertiary : props.theme.color.text.primary)};
+  color: ${(props) =>
+    props.disabled ? props.theme.color['Neutral/Neutral 30'] : props.theme.color['Neutral/Neutral 90']};
   cursor: ${(props) => (props.disabled ? 'default' : 'pointer')};
 
   fieldset:disabled & {
-    color: ${(props) => props.theme.color.text.tertiary};
+    color: ${(props) => props.theme.color['Neutral/Neutral 30']};
     cursor: default;
   }
 `;
@@ -89,23 +90,17 @@ const ExtrasContainer = styled.div<{
     ${typography['Caption/Caption 1']}
   }
 
-  color: ${(props) => props.theme.color.text.secondary};
+  color: ${(props) => props.theme.color['Neutral/Neutral 50']};
 
   [disabled] & {
-    color: ${(props) => props.theme.color.text.tertiary};
+    color: ${(props) => props.theme.color['Neutral/Neutral 30']};
   }
 `;
 
 export const CheckboxField = React.forwardRef<HTMLInputElement, CheckboxFieldProps>(
   ({ extraText, className, children, dimension = 'm', ...props }, ref) => {
     return (
-      <Label
-        className={className}
-        dimension={dimension}
-        disabled={props.disabled}
-        data-field-id={props.id}
-        data-field-name={props.name}
-      >
+      <Label className={className} dimension={dimension} disabled={props.disabled}>
         <PositionedCheckbox dimension={dimension} ref={ref} {...props} />
         {children}
         {extraText && <ExtrasContainer dimension={dimension} children={extraText} />}

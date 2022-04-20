@@ -1,11 +1,10 @@
 import { Button } from '#src/components/Button';
-import { Spinner, SpinnerProps } from '#src/components/Spinner';
+import { Spinner } from '#src/components/Spinner';
 import React from 'react';
 import styled from 'styled-components';
-import { ComponentMeta, ComponentStory, Story } from '@storybook/react';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
-
-import { DEFAULT_THEME } from '../common';
+import { DefaultBackgroundColorName, MainPrimaryColorName } from '#src/components/themes';
 
 const Separator = styled.div`
   height: 20px;
@@ -26,17 +25,14 @@ const Layout = styled.div<{
   display: flex;
   flex-wrap: wrap;
   padding: 50px;
-  background: ${({ theme, inverse }) => (inverse ? theme.color.basic.primary : theme.color.background.primary)};
+  background: ${({ theme, inverse }) =>
+    inverse ? theme.color[MainPrimaryColorName] : theme.color[DefaultBackgroundColorName]};
 
   > * {
     flex: 0 0 auto;
     margin: 24px;
   }
 `;
-
-Layout.defaultProps = {
-  theme: DEFAULT_THEME,
-};
 
 const Description = () => (
   <Desc>
@@ -48,14 +44,14 @@ const Description = () => (
 );
 
 export default {
-  title: 'Example/Spinner',
+  title: 'Admiral-2.1/Spinner',
   decorators: [withDesign],
   component: Spinner,
   parameters: {
     componentSubtitle: <Description />,
     design: {
       type: 'figma',
-      url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=37%3A24955',
+      url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=37%3A24955',
     },
   },
   argTypes: {
@@ -71,33 +67,39 @@ export default {
 
 const Template1: ComponentStory<typeof Spinner> = (args) => {
   return (
-    <Layout inverse={args.inverse}>
-      <Spinner {...args} />
-    </Layout>
+    <>
+      <Layout inverse={args.inverse}>
+        <Spinner {...args} />
+      </Layout>
+    </>
   );
 };
 
 const Template2: ComponentStory<typeof Spinner> = (args) => {
   return (
-    <Layout inverse={args.inverse}>
-      <Spinner dimension="xl" inverse={args.inverse} />
-      <Spinner dimension="l" inverse={args.inverse} />
-      <Spinner dimension="m" inverse={args.inverse} />
-      <Spinner dimension="s" inverse={args.inverse} />
-    </Layout>
+    <>
+      <Layout inverse={args.inverse}>
+        <Spinner dimension="xl" inverse={args.inverse} />
+        <Spinner dimension="l" inverse={args.inverse} />
+        <Spinner dimension="m" inverse={args.inverse} />
+        <Spinner dimension="s" inverse={args.inverse} />
+      </Layout>
+    </>
   );
 };
 
-const Template3: ComponentStory<typeof Spinner> = (args) => {
+const Template3: ComponentStory<typeof Spinner> = () => {
   return (
-    <Layout>
-      <StyledButton dimension="m" appearance="secondary">
-        <Spinner dimension="m" />
-      </StyledButton>
-      <StyledButton dimension="m" appearance="primary">
-        <Spinner dimension="m" inverse />
-      </StyledButton>
-    </Layout>
+    <>
+      <Layout>
+        <StyledButton dimension="m" appearance="secondary">
+          <Spinner dimension="m" />
+        </StyledButton>
+        <StyledButton dimension="m" appearance="primary">
+          <Spinner dimension="m" inverse />
+        </StyledButton>
+      </Layout>
+    </>
   );
 };
 

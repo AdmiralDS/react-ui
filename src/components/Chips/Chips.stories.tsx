@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
-import { Chips } from './index';
 import { withDesign } from 'storybook-addon-designs';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { Chips } from '#src/components/Chips';
 
 import { ReactComponent as VacationIcon } from '@admiral-ds/icons/build/category/VacationSolid.svg';
 import { ReactComponent as AlertSolid } from '@admiral-ds/icons/build/category/AlertSolid.svg';
@@ -35,16 +35,10 @@ const listDataIcon = [
     iconAfter: <AlertSolid />,
     selected: false,
   },
-  { id: '2', label: 'Тверь', disabled: true, onClose: () => undefined, iconBefore: <TrophyIcon />, selected: false },
+  { id: '2', label: 'Тверь', disabled: false, iconBefore: <TrophyIcon />, selected: false },
   { id: '3', label: 'Самара', disabled: false, iconAfter: <BurnIcon />, selected: false },
   { id: '4', label: 'Омск', disabled: false, iconAfter: <DiamondSolid />, selected: false },
-  {
-    id: '5',
-    label: 'Вильнус',
-    disabled: false,
-    onClose: () => undefined,
-    selected: false,
-  },
+  { id: '5', label: 'Вильнус', disabled: false, iconAfter: <BurnIcon />, onClose: () => undefined, selected: false },
 ];
 
 const listDataIconTooltip = [
@@ -81,22 +75,22 @@ const Description = () => (
 );
 
 export default {
-  title: 'Example/Chips',
+  title: 'Admiral-2.1/Chips',
   component: Chips,
   decorators: [withDesign],
   parameters: {
     design: [
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=37%3A18081',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=37%3A17861',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=37%3A18222',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=37%3A18081',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=37%3A18353',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=37%3A18222',
       },
     ],
     componentSubtitle: <Description />,
@@ -135,26 +129,30 @@ export default {
 
 const ChipsTagsDemo: ComponentStory<typeof Chips> = (props) => {
   return (
-    <WrapperChip dimension={props.dimension}>
-      {listData.map((item) => (
-        <Chips {...props} key={item.id}>
-          {item.label}
-        </Chips>
-      ))}
-    </WrapperChip>
+    <>
+      <WrapperChip dimension={props.dimension}>
+        {listData.map((item) => (
+          <Chips {...props} key={item.id}>
+            {item.label}
+          </Chips>
+        ))}
+      </WrapperChip>
+    </>
   );
 };
 
 const ChipsTagsCloseDemo: ComponentStory<typeof Chips> = (props) => {
   const [dataList, setData] = useState(listData);
   return (
-    <WrapperChip dimension={props.dimension}>
-      {dataList.map((item) => (
-        <Chips key={item.id} {...props} onClose={() => setData((prev) => prev.filter((d) => d.id !== item.id))}>
-          {item.label}
-        </Chips>
-      ))}
-    </WrapperChip>
+    <>
+      <WrapperChip dimension={props.dimension}>
+        {dataList.map((item) => (
+          <Chips key={item.id} {...props} onClose={() => setData((prev) => prev.filter((d) => d.id !== item.id))}>
+            {item.label}
+          </Chips>
+        ))}
+      </WrapperChip>
+    </>
   );
 };
 
@@ -169,25 +167,6 @@ const ChipsIconDemo: ComponentStory<typeof Chips> = (props) => (
           iconAfter={d?.iconAfter}
           // Если onClose указан, вместо iconAfter отобразится closeIcon
           onClose={d?.onClose}
-          appearance="outlined"
-          disabled={d?.disabled}
-        >
-          {d.label}
-        </Chips>
-      ))}
-    </WrapperChip>
-    <Separator />
-    <WrapperChip dimension={props.dimension}>
-      {listDataIcon.map((d) => (
-        <Chips
-          {...props}
-          key={d.id}
-          iconBefore={d?.iconBefore}
-          iconAfter={d?.iconAfter}
-          // Если onClose указан, вместо iconAfter отобразится closeIcon
-          onClose={d?.onClose}
-          appearance="filled"
-          disabled={d?.disabled}
         >
           {d.label}
         </Chips>
@@ -199,18 +178,20 @@ const ChipsIconDemo: ComponentStory<typeof Chips> = (props) => (
 const ChipsSelectDemo: ComponentStory<typeof Chips> = (props) => {
   const [selected, setSelected] = useState('');
   return (
-    <WrapperChip dimension={props.dimension}>
-      {listData.map((item) => (
-        <Chips
-          {...props}
-          key={item.id}
-          selected={selected === item.id}
-          onClick={() => (props.disabled ? null : setSelected(item.id))}
-        >
-          {item.label}
-        </Chips>
-      ))}
-    </WrapperChip>
+    <>
+      <WrapperChip dimension={props.dimension}>
+        {listData.map((item) => (
+          <Chips
+            {...props}
+            key={item.id}
+            selected={selected === item.id}
+            onClick={() => (props.disabled ? null : setSelected(item.id))}
+          >
+            {item.label}
+          </Chips>
+        ))}
+      </WrapperChip>
+    </>
   );
 };
 
@@ -221,31 +202,34 @@ const ChipsMultiSelectIconDemo: ComponentStory<typeof Chips> = (props) => {
   };
 
   return (
-    <WrapperChip dimension={props.dimension}>
-      {list.map((item) => (
-        <Chips
-          {...props}
-          key={item.id}
-          onClick={props.disabled ? void 0 : handleKey.bind(null, item.id)}
-          selected={item.selected}
-          onClose={item.onClose}
-        >
-          <WrapperContent>{item.label}</WrapperContent>
-        </Chips>
-      ))}
-    </WrapperChip>
+    <>
+      <WrapperChip dimension={props.dimension}>
+        {list.map((item) => (
+          <Chips
+            {...props}
+            key={item.id}
+            onClick={props.disabled ? void 0 : handleKey.bind(null, item.id)}
+            selected={item.selected}
+          >
+            <WrapperContent>{item.label}</WrapperContent>
+          </Chips>
+        ))}
+      </WrapperChip>
+    </>
   );
 };
 
 const ChipsTagsCloseTooltipDemo: ComponentStory<typeof Chips> = (props) => {
   return (
-    <WrapperChip>
-      {listDataIconTooltip.map((item) => (
-        <StyledChipsTooltip {...props} renderContentTooltip={() => item.label} key={item.id}>
-          {item.label}
-        </StyledChipsTooltip>
-      ))}
-    </WrapperChip>
+    <>
+      <WrapperChip>
+        {listDataIconTooltip.map((item) => (
+          <StyledChipsTooltip {...props} renderContentTooltip={() => item.label} key={item.id}>
+            {item.label}
+          </StyledChipsTooltip>
+        ))}
+      </WrapperChip>
+    </>
   );
 };
 

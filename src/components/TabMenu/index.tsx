@@ -2,13 +2,13 @@ import * as React from 'react';
 import { keyboardKey } from '#src/components/common/keyboardKey';
 import observeRect from '#src/components/common/observeRect';
 
-import { Badge } from '../Badge';
-import { TabOverflowMenu } from '../TabOverflowMenu';
+import { Badge } from '#src/components/Badge';
+import { TabOverflowMenu } from '#src/components/TabOverflowMenu';
 
-import measureTab from './measureTab';
-import { Tab, TabContent, TabContentWrapper, TabsWrapper, Underline, Wrapper } from './style';
-import type { Dimension } from './constants';
-import { OVERFLOW_MARGIN_LEFT, OVERFLOW_SIZE_L, OVERFLOW_SIZE_M } from './constants';
+import measureTab from '#src/components/TabMenu/measureTab';
+import { Tab, TabContent, TabContentWrapper, TabsWrapper, Underline, Wrapper } from '#src/components/TabMenu/style';
+import type { Dimension } from '#src/components/TabMenu/constants';
+import { OVERFLOW_MARGIN_LEFT, OVERFLOW_SIZE_L, OVERFLOW_SIZE_M } from '#src/components/TabMenu/constants';
 
 export interface TabProps extends React.HTMLAttributes<HTMLButtonElement> {
   /** Контент вкладки */
@@ -116,17 +116,10 @@ export const TabMenu: React.FC<TabMenuProps> = ({
 
   const setUnderline = () => {
     const activeTabRef = tabsWithRef.filter((tab) => tab.id === activeTab)?.[0]?.ref.current;
-    const left = parseFloat(underlineRef.current?.style.left || '0');
-    const underlineWidth = parseFloat(underlineRef.current?.style.width || '0');
-
-    if (activeTabRef && tablistRef.current) {
-      // используем метод getBoundingClientRect, так как он дает точность до сотых пикселя
-      const activeTabWidth = activeTabRef.getBoundingClientRect().width;
-      const activeTabLeft = activeTabRef.getBoundingClientRect().left - tablistRef.current.getBoundingClientRect().left;
-
-      if (activeTabLeft !== left || activeTabWidth !== underlineWidth) {
-        styleUnderline(activeTabLeft, activeTabWidth);
-      }
+    const left = Number(underlineRef.current?.style.left || 0);
+    const underlineWidth = Number(underlineRef.current?.style.width || 0);
+    if (activeTabRef && (activeTabRef.offsetLeft !== left || activeTabRef.clientWidth !== underlineWidth)) {
+      styleUnderline(activeTabRef.offsetLeft, activeTabRef.clientWidth);
     }
     if (!activeTabRef || hiddenTabs.filter((tab) => tab.id === activeTab).length) {
       styleUnderline(0, 0);

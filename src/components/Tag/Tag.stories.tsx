@@ -4,8 +4,8 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import { ReactComponent as CheckOutline } from '@admiral-ds/icons/build/service/CheckOutline.svg';
 
-import { Tag, TagProps } from '../Tag';
-import { Tags } from '../Tags';
+import { Tag, TagProps } from '#src/components/Tag';
+import { Tags } from '#src/components/Tags';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -21,7 +21,7 @@ const Description = () => (
 );
 
 export default {
-  title: 'Example/Tag',
+  title: 'Admiral-2.1/Tag',
   decorators: [withDesign],
   component: Tag,
   parameters: {
@@ -30,11 +30,11 @@ export default {
     design: [
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=37%3A18530',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=37%3A18375',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=37%3A18660',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=37%3A18530',
       },
     ],
   },
@@ -57,89 +57,107 @@ export default {
 } as ComponentMeta<typeof Tag>;
 
 const Template0: ComponentStory<typeof Tag> = (args: TagProps) => {
-  return <Tag {...args}>Playground</Tag>;
+  return (
+    <>
+      <Tag {...args}>Playground</Tag>
+    </>
+  );
 };
 
 const Template1: ComponentStory<typeof Tag> = (args: TagProps) => {
   return (
-    <Tags>
-      <Tag>Neutral</Tag>
-      <Tag kind="green">Green</Tag>
-      <Tag kind="blue">Blue</Tag>
-      <Tag as="span" kind="red">
-        Red
-      </Tag>
-      <Tag kind="orange">Orange</Tag>
-    </Tags>
+    <>
+      <Tags>
+        <Tag>Neutral</Tag>
+        <Tag kind="green">Green</Tag>
+        <Tag kind="blue">Blue</Tag>
+        <Tag as="span" kind="red">
+          Red
+        </Tag>
+        <Tag kind="orange">Orange</Tag>
+      </Tags>
+    </>
   );
 };
 
 const Template2: ComponentStory<typeof Tag> = (args: TagProps) => {
   return (
-    <Tags>
-      <Tag statusViaBackground>Neutral</Tag>
-      <Tag statusViaBackground kind="green">
-        Green
-      </Tag>
-      <Tag statusViaBackground kind="blue">
-        Blue
-      </Tag>
-      <Tag statusViaBackground kind="red">
-        Red
-      </Tag>
-      <Tag statusViaBackground kind="orange">
-        Orange
-      </Tag>
-    </Tags>
+    <>
+      <Tags>
+        <Tag statusViaBackground>Neutral</Tag>
+        <Tag statusViaBackground kind="green">
+          Green
+        </Tag>
+        <Tag statusViaBackground kind="blue">
+          Blue
+        </Tag>
+        <Tag statusViaBackground kind="red">
+          Red
+        </Tag>
+        <Tag statusViaBackground kind="orange">
+          Orange
+        </Tag>
+      </Tags>
+    </>
   );
 };
 
 const Template3: ComponentStory<typeof Tag> = (args: TagProps) => {
   return (
-    <Tags>
-      <Tag kind={{ background: '#E052BD' }}>Green</Tag>
-      <Tag statusViaBackground kind={{ background: '#EAFAF9', border: '#4AD2CA' }}>
-        Turquoise
-      </Tag>
-      <Tag statusViaBackground kind={{ background: '#FBE9F7', border: '#E052BD' }}>
-        Magenta
-      </Tag>
-    </Tags>
+    <>
+      <Tags>
+        <Tag kind={{ background: '#E052BD' }}>Green</Tag>
+        <Tag statusViaBackground kind={{ background: '#EAFAF9', border: '#4AD2CA' }}>
+          Turquoise
+        </Tag>
+        <Tag statusViaBackground kind={{ background: '#FBE9F7', border: '#E052BD' }}>
+          Magenta
+        </Tag>
+      </Tags>
+    </>
   );
 };
 
 const Template4: ComponentStory<typeof Tag> = (args: TagProps) => {
   return (
-    <Tags>
-      <Tag onClick={() => console.log('click active tag')}>Active</Tag>
-      <Tag>Passive</Tag>
-    </Tags>
+    <>
+      <Tags>
+        <Tag onClick={() => console.log('click active tag')}>Active</Tag>
+        <Tag>Passive</Tag>
+      </Tags>
+    </>
   );
 };
 
 const Template5: ComponentStory<typeof Tag> = (args) => {
-  return <Tag width={150}>Если текст длинее ширины тэга, добавляется тултип </Tag>;
+  return (
+    <>
+      <Tag width={150}>Если текст длинее ширины тэга, добавляется тултип </Tag>
+    </>
+  );
 };
 
 const Template6: ComponentStory<typeof Tag> = (args: TagProps) => {
   return (
-    <Tags>
-      <Tag statusViaBackground icon={<CheckOutline />}>
-        Neutral
-      </Tag>
-      <Tag statusViaBackground icon={<CheckOutline />} kind="green">
-        Green
-      </Tag>
-      <Tag statusViaBackground icon={<CheckOutline />} kind="blue">
-        Blue
-      </Tag>
-      <Tag statusViaBackground icon={<CheckOutline />} kind="red">
-        Red
-      </Tag>
-      <Tag statusViaBackground icon={<CheckOutline />} kind="orange">
-        Orange
-      </Tag>
-    </Tags>
+    <>
+      <Tags>
+        <Tag statusViaBackground icon={<CheckOutline />}>
+          Neutral
+        </Tag>
+        <Tag statusViaBackground icon={<CheckOutline />} kind="green">
+          Green
+        </Tag>
+        <Tag statusViaBackground icon={<CheckOutline />} kind="blue">
+          Blue
+        </Tag>
+        <Tag statusViaBackground icon={<CheckOutline />} kind="red">
+          Red
+        </Tag>
+        <Tag statusViaBackground icon={<CheckOutline />} kind="orange">
+          Orange
+        </Tag>
+      </Tags>
+    </>
   );
 };
 
@@ -164,9 +182,9 @@ TagStatusBackground.storyName = 'Tag. Статус через цвет обво�
 TagStatusBackground.parameters = {
   docs: {
     description: {
-      story: `Тэг может отображать статус через цвет обводки и фона, когда нужен выраженный цветовой акцент (опция). 
-      В этом случае цвет статусов берется из палитры Special, допускается окрашивание тэга в любой парный цвет 
-      (фон, обводка) из этой палитры. \n\nЧтобы отобразить статус через цвет обводки и фона необходимо передать 
+      story: `Тэг может отображать статус через цвет обводки и фона, когда нужен выраженный цветовой акцент (опция).
+      В этом случае цвет статусов берется из палитры Special, допускается окрашивание тэга в любой парный цвет
+      (фон, обводка) из этой палитры. \n\nЧтобы отобразить статус через цвет обводки и фона необходимо передать
       в компонент параметр statusViaBackground, установленный в true.`,
     },
   },
@@ -178,10 +196,10 @@ TagCustomColors.storyName = 'Tag. Кастомные цвета.';
 TagCustomColors.parameters = {
   docs: {
     description: {
-      story: `Тэг может иметь цветную статусную метку. Помимо предложенных вариантов, метка может быть 
-      окрашена в любой цвет на усмотрение пользователя с помощью свойства background. \n\n Либо тэг может отображать 
-      статус через цвет обводки и фона, когда нужен выраженный цветовой акцент (опция). 
-      В этом случае, помимо предложенных вариантов, цвет фона и обводки можно задать через свойства background и border. 
+      story: `Тэг может иметь цветную статусную метку. Помимо предложенных вариантов, метка может быть
+      окрашена в любой цвет на усмотрение пользователя с помощью свойства background. \n\n Либо тэг может отображать
+      статус через цвет обводки и фона, когда нужен выраженный цветовой акцент (опция).
+      В этом случае, помимо предложенных вариантов, цвет фона и обводки можно задать через свойства background и border.
       Следует учесть, что цвета надо брать из палитры Special, допускается окрашивание тэга в любой парный цвет (фон, обводка) из этой палитры.`,
     },
   },
@@ -216,7 +234,7 @@ TagIcon.storyName = 'Tag. С иконкой.';
 TagIcon.parameters = {
   docs: {
     description: {
-      story: `Тэги могут быть с иконками, но только в том случае, если статус отображается 
+      story: `Тэги могут быть с иконками, но только в том случае, если статус отображается
       через цвет обводки и фона (параметр statusViaBackground установлен в true)`,
     },
   },

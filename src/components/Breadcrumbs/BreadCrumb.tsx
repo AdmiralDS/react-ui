@@ -2,8 +2,7 @@ import * as React from 'react';
 import { refSetter } from '#src/components/common/utils/refSetter';
 import styled from 'styled-components';
 import { typography } from '#src/components/Typography';
-
-import { InverseTooltip } from './InverseTooltip';
+import { Tooltip } from '#src/components/Tooltip';
 
 export const Crumb = styled.li`
   display: flex;
@@ -32,24 +31,24 @@ export const CrumbAnchor = styled.a`
   align-items: center;
   text-decoration: none;
   position: relative;
-  color: ${({ theme }) => theme.color.text.secondary};
+  color: ${({ theme }) => theme.color['Neutral/Neutral 50']};
 
   [aria-current='page'] & {
     pointer-events: none;
   }
 
   &:hover {
-    color: ${({ theme }) => theme.color.basic.hover};
+    color: ${({ theme }) => theme.color['Primary/Primary 70']};
   }
   &:active {
-    color: ${({ theme }) => theme.color.basic.press};
+    color: ${({ theme }) => theme.color['Primary/Primary 80']};
   }
 
   &:focus {
     &:before {
       position: absolute;
       content: '';
-      border: 2px solid ${({ theme }) => theme.color.basic.hover};
+      border: 2px solid ${({ theme }) => theme.color['Primary/Primary 60 Main']};
       border-radius: 4px;
       top: 0;
       left: 0;
@@ -83,7 +82,7 @@ export const Breadcrumb = React.forwardRef<HTMLLIElement, BreadcrumbProps>(
       <Crumb ref={refSetter(ref, crumbRef)} {...props}>
         <CrumbAnchor href={url} as={linkAs} {...linkProps}>
           <Content tabIndex={-1} role="link">
-            <InverseTooltip renderContent={() => text}>{text.slice(0, 37) + '...'}</InverseTooltip>
+            <Tooltip renderContent={() => text}>{text.slice(0, 37) + '...'}</Tooltip>
             {children}
           </Content>
         </CrumbAnchor>

@@ -34,7 +34,7 @@ const Description = () => (
 );
 
 export default {
-  title: 'Example/Hint',
+  title: 'Admiral-2.1/Hint',
   decorators: [withDesign],
   component: Hint,
   parameters: {
@@ -42,15 +42,15 @@ export default {
     design: [
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=37%3A31273',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=37%3A31273',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=37%3A31388',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=37%3A31388',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=37%3A31455',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=37%3A31455',
       },
     ],
     actions: { argTypesRegex: '^on.*' },
@@ -75,28 +75,32 @@ of mini units map to fluid grid column widths and row heights.`;
 
 const Template1: ComponentStory<typeof Hint> = ({ anchorId, ...args }) => {
   return (
-    <Hint {...args} anchorId={anchorId}>
-      <StyledButton dimension="s" aria-label="Additional information" aria-describedby={anchorId}>
-        <HelpOutline height={24} width={24} aria-hidden />
-      </StyledButton>
-    </Hint>
+    <>
+      <Hint {...args} anchorId={anchorId}>
+        <StyledButton dimension="s" aria-label="Additional information" aria-describedby={anchorId}>
+          <HelpOutline height={24} width={24} aria-hidden />
+        </StyledButton>
+      </Hint>
+    </>
   );
 };
 
 const Template2: Story<HintProps & { anchorId1: string; anchorId2: string }> = ({ anchorId1, anchorId2, ...args }) => {
   return (
-    <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
-      <Hint {...args} renderContent={() => text} anchorId={anchorId1}>
-        <StyledButton dimension="s" aria-label="Additional information" aria-describedby={anchorId1}>
-          <HelpOutline height={24} width={24} aria-hidden />
-        </StyledButton>
-      </Hint>
-      <Hint {...args} renderContent={() => text} id={anchorId2}>
-        <StyledButton dimension="s" aria-label="Additional information" aria-describedby={anchorId2}>
-          <HelpOutline height={24} width={24} aria-hidden />
-        </StyledButton>
-      </Hint>
-    </div>
+    <>
+      <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
+        <Hint {...args} renderContent={() => text} anchorId={anchorId1}>
+          <StyledButton dimension="s" aria-label="Additional information" aria-describedby={anchorId1}>
+            <HelpOutline height={24} width={24} aria-hidden />
+          </StyledButton>
+        </Hint>
+        <Hint {...args} renderContent={() => text} id={anchorId2}>
+          <StyledButton dimension="s" aria-label="Additional information" aria-describedby={anchorId2}>
+            <HelpOutline height={24} width={24} aria-hidden />
+          </StyledButton>
+        </Hint>
+      </div>
+    </>
   );
 };
 
@@ -104,33 +108,37 @@ const Template3: ComponentStory<typeof Hint> = ({ anchorId, ...args }) => {
   const btnRef = useRef<HTMLButtonElement>(null);
 
   return (
-    <StyledButton dimension="s" ref={btnRef}>
-      Press&nbsp;&nbsp;&nbsp;
-      <Hint {...args} renderContent={() => text} target={btnRef} anchorId={anchorId}>
-        <HelpOutline tabIndex={0} height={24} width={24} aria-label="Help Icon" aria-describedby={anchorId} />
-      </Hint>
-    </StyledButton>
+    <>
+      <StyledButton dimension="s" ref={btnRef}>
+        Press&nbsp;&nbsp;&nbsp;
+        <Hint {...args} renderContent={() => text} target={btnRef} anchorId={anchorId}>
+          <HelpOutline tabIndex={0} height={24} width={24} aria-label="Help Icon" aria-describedby={anchorId} />
+        </Hint>
+      </StyledButton>
+    </>
   );
 };
 
 const Template4: ComponentStory<typeof Hint> = ({ anchorId, ...args }) => {
   return (
-    <Hint
-      {...args}
-      visibilityTrigger="click"
-      renderContent={() => (
-        <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
-          {text}
-          <Separator height={8} />
-          <a href="#">Link</a>
-        </div>
-      )}
-      anchorId={anchorId}
-    >
-      <StyledButton dimension="s" aria-label="Additional information" aria-describedby={anchorId}>
-        <HelpOutline height={24} width={24} />
-      </StyledButton>
-    </Hint>
+    <>
+      <Hint
+        {...args}
+        visibilityTrigger="click"
+        renderContent={() => (
+          <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
+            {text}
+            <Separator height={8} />
+            <a href="#">Link</a>
+          </div>
+        )}
+        anchorId={anchorId}
+      >
+        <StyledButton dimension="s" aria-label="Additional information" aria-describedby={anchorId}>
+          <HelpOutline height={24} width={24} />
+        </StyledButton>
+      </Hint>
+    </>
   );
 };
 
@@ -141,11 +149,13 @@ const Template5: ComponentStory<typeof Hint> = ({ anchorId, ...args }) => {
     border: 2px dotted red;
   `;
   return (
-    <Hint {...args} renderContent={() => text} anchorId={anchorId} anchorCssMixin={anchorCss}>
-      <StyledButton dimension="s" aria-label="Additional information" aria-describedby={anchorId}>
-        <HelpOutline height={24} width={24} aria-hidden />
-      </StyledButton>
-    </Hint>
+    <>
+      <Hint {...args} renderContent={() => text} anchorId={anchorId} anchorCssMixin={anchorCss}>
+        <StyledButton dimension="s" aria-label="Additional information" aria-describedby={anchorId}>
+          <HelpOutline height={24} width={24} aria-hidden />
+        </StyledButton>
+      </Hint>
+    </>
   );
 };
 

@@ -5,14 +5,24 @@ import { withDesign } from 'storybook-addon-designs';
 import { INPUT_DIMENSIONS_VALUES } from '#src/components/input/types';
 
 export default {
-  title: 'Input/TextArea',
+  title: 'Admiral-2.1/Input/TextArea',
   component: TextArea,
   decorators: [withDesign],
   parameters: {
-    design: {
-      type: 'figma',
-      url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A61323',
-    },
+    design: [
+      {
+        type: 'figma',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A61323',
+      },
+      {
+        type: 'figma',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=23873%3A69875',
+      },
+      {
+        type: 'figma',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=23873%3A70116',
+      },
+    ],
   },
   argTypes: {
     dimension: {
@@ -79,7 +89,11 @@ const Template: ComponentStory<typeof TextArea> = (props) => {
     setValue(inputValue);
     props.onChange?.(e);
   };
-  return <TextArea {...cleanProps} value={localValue} onChange={handleChange} />;
+  return (
+    <>
+      <TextArea {...cleanProps} value={localValue} onChange={handleChange} />
+    </>
+  );
 };
 
 export const TextAreaStory = Template.bind({});

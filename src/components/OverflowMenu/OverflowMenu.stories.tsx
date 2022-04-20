@@ -3,11 +3,11 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import { ReactComponent as MinusCircleOutline } from '@admiral-ds/icons/build/service/MinusCircleOutline.svg';
 
-import { OverflowMenu } from '../OverflowMenu';
-import { DropDownItem } from '../DropDownItem';
+import { OverflowMenu } from '#src/components/OverflowMenu';
+import { DropDownItem } from '#src/components/DropDownItem';
 
 export default {
-  title: 'Example/OverflowMenu',
+  title: 'Admiral-2.1/OverflowMenu',
   decorators: [withDesign],
   component: OverflowMenu,
   parameters: {
@@ -15,11 +15,11 @@ export default {
     design: [
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A25674',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A25623',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A25733',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A25674',
       },
     ],
   },
@@ -68,25 +68,27 @@ const Template1: ComponentStory<typeof OverflowMenu> = (args) => {
 
   const [selected, setSelected] = React.useState<string | null>(null);
   return (
-    <OverflowMenu
-      {...args}
-      selected={selected}
-      onChange={(id) => {
-        console.log(`onChange('${id}')`);
-        setSelected(id);
-      }}
-      onOpen={() => console.log('open menu')}
-      onClose={() => console.log('close menu')}
-      aria-label="Overflow Menu component"
-    >
-      {items.map((item) => {
-        return (
-          <DropDownItem role="option" key={item.id} id={item.id}>
-            {item.display}
-          </DropDownItem>
-        );
-      })}
-    </OverflowMenu>
+    <>
+      <OverflowMenu
+        {...args}
+        selected={selected}
+        onChange={(id) => {
+          console.log(`onChange('${id}')`);
+          setSelected(id);
+        }}
+        onOpen={() => console.log('open menu')}
+        onClose={() => console.log('close menu')}
+        aria-label="Overflow Menu component"
+      >
+        {items.map((item) => {
+          return (
+            <DropDownItem role="option" key={item.id} id={item.id}>
+              {item.display}
+            </DropDownItem>
+          );
+        })}
+      </OverflowMenu>
+    </>
   );
 };
 
@@ -118,22 +120,24 @@ const Template2: ComponentStory<typeof OverflowMenu> = (args) => {
 
   const [selected, setSelected] = React.useState<string | null>(null);
   return (
-    <OverflowMenu
-      {...args}
-      selected={selected}
-      onChange={(id) => setSelected(id)}
-      onOpen={() => console.log('open menu')}
-      onClose={() => console.log('close menu')}
-      aria-label="Overflow Menu component"
-    >
-      {items.map((item) => {
-        return (
-          <DropDownItem role="option" key={item.id} id={item.id} disabled={item.disabled}>
-            {item.display}
-          </DropDownItem>
-        );
-      })}
-    </OverflowMenu>
+    <>
+      <OverflowMenu
+        {...args}
+        selected={selected}
+        onChange={(id) => setSelected(id)}
+        onOpen={() => console.log('open menu')}
+        onClose={() => console.log('close menu')}
+        aria-label="Overflow Menu component"
+      >
+        {items.map((item) => {
+          return (
+            <DropDownItem role="option" key={item.id} id={item.id} disabled={item.disabled}>
+              {item.display}
+            </DropDownItem>
+          );
+        })}
+      </OverflowMenu>
+    </>
   );
 };
 

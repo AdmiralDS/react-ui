@@ -1,13 +1,11 @@
 import type { FC, ReactNode } from 'react';
-import React, { HTMLAttributes, useContext, useLayoutEffect, useRef, useState } from 'react';
-import styled, { ThemeContext } from 'styled-components';
+import React, { HTMLAttributes, useLayoutEffect, useRef, useState } from 'react';
+import styled from 'styled-components';
 
-import { DARK_THEME, LIGHT_THEME } from '../themes';
-
-import { typography } from '../Typography';
-import { Badge } from '../Badge';
-import { Tooltip } from '../Tooltip';
-import type { Dimension } from '../TabMenu/constants';
+import { typography } from '#src/components/Typography';
+import { Badge } from '#src/components/Badge';
+import { Tooltip } from '#src/components/Tooltip';
+import type { Dimension } from '#src/components/TabMenu/constants';
 import {
   BADGE_MARGIN,
   ICON_MARGIN,
@@ -17,7 +15,7 @@ import {
   TAB_HEIGHT_M,
   TAB_PADDING_L,
   TAB_PADDING_M,
-} from '../TabMenu/constants';
+} from '#src/components/TabMenu/constants';
 
 const DropDownItem = styled.li<{ dimension: Dimension; disabled?: boolean; selected?: boolean }>`
   position: relative;
@@ -26,9 +24,10 @@ const DropDownItem = styled.li<{ dimension: Dimension; disabled?: boolean; selec
   align-items: center;
   width: 100%;
   height: ${({ dimension }) => (dimension === 'm' ? TAB_HEIGHT_M : TAB_HEIGHT_L)}px;
-  background: ${({ theme, selected }) => (selected ? theme.color.background.tertiary : theme.color.background.primary)};
-  color: ${({ theme }) => theme.color.text.primary};
-  ${typography['Body/Body 1 Long']}
+  background: ${({ theme, selected }) =>
+    selected ? theme.color['Opacity/Focus'] : theme.color['Special/Elevated BG']};
+  color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
+  ${({ dimension }) => (dimension === 'm' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
   user-select: none;
   cursor: pointer;
 
@@ -42,7 +41,7 @@ const DropDownItem = styled.li<{ dimension: Dimension; disabled?: boolean; selec
     flex-shrink: 0;
 
     & *[fill^='#'] {
-      fill: ${({ theme }) => theme.color.basic.tertiary};
+      fill: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
     }
     width: ${({ dimension }) => (dimension === 'm' ? ICON_SIZE_M : ICON_SIZE_L)}px;
     height: ${({ dimension }) => (dimension === 'm' ? ICON_SIZE_M : ICON_SIZE_L)}px;
@@ -52,20 +51,24 @@ const DropDownItem = styled.li<{ dimension: Dimension; disabled?: boolean; selec
     margin-left: ${BADGE_MARGIN};
   }
 
-  &:hover,
+  &:hover {
+    outline: none;
+    ${({ disabled, theme }) => !disabled && `background: ${theme.color['Opacity/Hover']};`}
+  }
+
   &:focus {
     outline: none;
-    ${({ disabled, theme }) => !disabled && `background: ${theme.color.background.secondary};`}
+    ${({ disabled, theme }) => !disabled && `background: ${theme.color['Opacity/Hover']};`}
   }
 
   ${({ disabled, theme }) =>
     disabled &&
     `
-  color: ${theme.color.text.tertiary};
-  background: ${theme.color.background.primary};
+  color: ${theme.color['Neutral/Neutral 30']};
+  background: ${theme.color['Special/Elevated BG']};
   cursor: default;
   & *[fill^='#'] {
-    fill: ${theme.color.text.tertiary};
+    fill: ${theme.color['Neutral/Neutral 30']};
   }
   `}
 `;
@@ -92,11 +95,6 @@ const DropdownContent = styled.div`
     align-items: center;
   }
 `;
-
-const InverseTooltip = (props: any) => {
-  const themeContext = useContext(ThemeContext);
-  return <Tooltip {...props} theme={themeContext.name == 'dark' ? LIGHT_THEME : DARK_THEME} />;
-};
 
 interface ItemProps extends HTMLAttributes<HTMLLIElement> {
   id: string;
@@ -157,7 +155,7 @@ export const Item: FC<ItemProps> = ({
       onClick={onClick}
       onKeyDown={onKeyDown}
     >
-      {overflow ? <InverseTooltip renderContent={() => content}>{renderContent()}</InverseTooltip> : renderContent()}
+      {overflow ? <Tooltip renderContent={() => content}>{renderContent()}</Tooltip> : renderContent()}
     </DropDownItem>
   );
 };

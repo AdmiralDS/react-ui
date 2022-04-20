@@ -2,8 +2,8 @@ import * as React from 'react';
 import { fireEvent, render } from '@testing-library/react';
 import { ThemeProvider } from 'styled-components';
 
-import { LIGHT_THEME } from '../themes';
-import { TabMenu, TabMenuProps } from '../TabMenu';
+import { LIGHT_THEME } from '#src/components/themes';
+import { TabMenu, TabMenuProps } from '#src/components/TabMenu';
 
 /**
  * В компоненте TabMenu для вычисления ширины всего компонента используется метод getBoundingClientRect().width,

@@ -6,7 +6,7 @@ import { ReactComponent as WarningIcon } from '@admiral-ds/icons/build/service/E
 import { ReactComponent as SuccessIcon } from '@admiral-ds/icons/build/service/CheckSolid.svg';
 import { ReactComponent as ErrorIcon } from '@admiral-ds/icons/build/service/CloseSolid.svg';
 
-import { DEFAULT_THEME } from '../common';
+import { LIGHT_THEME as DEFAULT_THEME } from '#src/components/themes';
 import { typography } from '#src/components/Typography';
 import { Link } from '#src/components/Link';
 
@@ -45,19 +45,19 @@ const getIcon = (status: Status) => {
 
 const backGroundColorMixin = css<{ status?: Status }>`
   background-color: ${({ theme, status }) => {
-    if (status === 'warning') return theme.color.background.surfaceWarn;
-    if (status === 'error') return theme.color.background.surfaceDanger;
-    if (status === 'success') return theme.color.background.surfaceSuccess;
-    return theme.color.background.secondary;
+    if (status === 'warning') return theme.color['Warning/Warning 10'];
+    if (status === 'error') return theme.color['Error/Error 10'];
+    if (status === 'success') return theme.color['Success/Success 10'];
+    return theme.color['Primary/Primary 10'];
   }};
 `;
 
 const borderColorMixin = css<{ status?: Status }>`
   border-color: ${({ theme, status }) => {
-    if (status === 'warning') return theme.color.status.warn;
-    if (status === 'error') return theme.color.status.danger;
-    if (status === 'success') return theme.color.status.success;
-    return theme.color.basic.primary;
+    if (status === 'warning') return theme.color['Warning/Warning 50 Main'];
+    if (status === 'error') return theme.color['Error/Error 60 Main'];
+    if (status === 'success') return theme.color['Success/Success 50 Main'];
+    return theme.color['Primary/Primary 60 Main'];
   }};
 `;
 
@@ -78,18 +78,18 @@ const NotificationWrapper = styled.div<{ status?: Status; displayStatusIcon: boo
 const Content = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 2px 0px;
+  padding: 2px 0;
 `;
 
 const Title = styled.div`
   ${typography['Subtitle/Subtitle 3']}
-  color: ${({ theme }) => theme.color.text.primary};
+  color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
   margin-bottom: 4px;
 `;
 
 const CustomBody = styled.div`
   ${typography['Body/Body 2 Long']}
-  color: ${({ theme }) => theme.color.text.primary};
+  color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
 `;
 
 const Close = styled.div`
@@ -108,11 +108,11 @@ const Close = styled.div`
     width: 20px;
     height: 20px;
     & *[fill^='#'] {
-      fill: ${({ theme }) => theme.color.text.secondary};
+      fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
     }
   }
   & svg:hover *[fill^='#'] {
-    fill: ${({ theme }) => theme.color.basic.hover};
+    fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
   }
 `;
 
@@ -127,10 +127,10 @@ const IconWrapper = styled.div<{ status?: Status }>`
     height: 24px;
     & *[fill^='#'] {
       fill: ${({ theme, status }) => {
-        if (status === 'warning') return theme.color.status.warn;
-        if (status === 'error') return theme.color.status.danger;
-        if (status === 'success') return theme.color.status.success;
-        return theme.color.basic.primary;
+        if (status === 'warning') return theme.color['Warning/Warning 50 Main'];
+        if (status === 'error') return theme.color['Error/Error 60 Main'];
+        if (status === 'success') return theme.color['Success/Success 50 Main'];
+        return theme.color['Primary/Primary 60 Main'];
       }};
     }
   }
@@ -139,7 +139,6 @@ const IconWrapper = styled.div<{ status?: Status }>`
 const LinkWrapper = styled(Link)`
   margin-top: 4px;
   ${typography['Button/Button 2']}
-  color: ${({ theme }) => theme.color.basic.primary};
 `;
 
 NotificationWrapper.defaultProps = {

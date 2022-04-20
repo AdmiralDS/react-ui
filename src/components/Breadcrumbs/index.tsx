@@ -4,9 +4,9 @@ import observeRect from '#src/components/common/observeRect';
 
 import { measureCrumb } from './utils';
 import { MenuButton } from './Menu';
-import { Breadcrumb } from './BreadCrumb';
 import type { BreadcrumbProps } from './BreadCrumb';
-import { Wrapper, Content, Separator } from './style';
+import { Breadcrumb } from './BreadCrumb';
+import { Content, Separator, Wrapper } from './style';
 
 type Dimension = 'l' | 'm' | 's';
 type CrumbWithRefProps = BreadcrumbProps & { ref: React.RefObject<HTMLLIElement>; width?: number };

@@ -20,7 +20,7 @@ Object {
   -webkit-text-decoration: none;
   text-decoration: none;
   position: relative;
-  color: #0D69F2;
+  color: #0062FF;
   font-size: 16px;
   font-weight: normal;
   line-height: 24px;
@@ -28,32 +28,32 @@ Object {
 }
 
 .c5:hover {
-  color: #0A54C2;
+  color: #0046E2;
 }
 
 .c5:hover *[fill^='#'] {
-  fill: #0A54C2;
+  fill: #0046E2;
 }
 
 .c5:focus {
-  color: #0A54C2;
-  outline-color: #0A54C2;
+  color: #0046E2;
+  outline-color: #0046E2;
 }
 
 .c5:focus *[fill^='#'] {
-  fill: #0A54C2;
+  fill: #0046E2;
 }
 
 .c5:active {
-  color: #0949AA;
+  color: #0132B0;
 }
 
 .c5:active *[fill^='#'] {
-  fill: #0949AA;
+  fill: #0132B0;
 }
 
 .c5 *[fill^='#'] {
-  fill: #0D69F2;
+  fill: #0062FF;
 }
 
 .c0 {
@@ -64,8 +64,8 @@ Object {
   padding: 12px 44px 12px 52px;
   border-width: 1px;
   border-style: solid;
-  border-color: #0D69F2;
-  background-color: #F1F2F4;
+  border-color: #0062FF;
+  background-color: #EDF5FF;
 }
 
 .c2 {
@@ -76,18 +76,17 @@ Object {
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
-  padding: 2px 0px;
+  padding: 2px 0;
 }
 
 .c3 {
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
-  font-weight: 500;
+  font-weight: 550;
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
-  color: #2B313B;
+  color: #22242A;
   margin-bottom: 4px;
 }
 
@@ -98,8 +97,7 @@ Object {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
-  color: #2B313B;
+  color: #22242A;
 }
 
 .c7 {
@@ -129,11 +127,11 @@ Object {
 }
 
 .c7 svg *[fill^='#'] {
-  fill: #626F84;
+  fill: #74777F;
 }
 
 .c7 svg:hover *[fill^='#'] {
-  fill: #0A54C2;
+  fill: #74777F;
 }
 
 .c1 {
@@ -150,7 +148,7 @@ Object {
 }
 
 .c1 svg *[fill^='#'] {
-  fill: #0D69F2;
+  fill: #0062FF;
 }
 
 .c6 {
@@ -161,8 +159,6 @@ Object {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
-  color: #0D69F2;
 }
 
 <body>
@@ -223,7 +219,7 @@ Object {
   -webkit-text-decoration: none;
   text-decoration: none;
   position: relative;
-  color: #0D69F2;
+  color: #0062FF;
   font-size: 16px;
   font-weight: normal;
   line-height: 24px;
@@ -231,32 +227,32 @@ Object {
 }
 
 .c5:hover {
-  color: #0A54C2;
+  color: #0046E2;
 }
 
 .c5:hover *[fill^='#'] {
-  fill: #0A54C2;
+  fill: #0046E2;
 }
 
 .c5:focus {
-  color: #0A54C2;
-  outline-color: #0A54C2;
+  color: #0046E2;
+  outline-color: #0046E2;
 }
 
 .c5:focus *[fill^='#'] {
-  fill: #0A54C2;
+  fill: #0046E2;
 }
 
 .c5:active {
-  color: #0949AA;
+  color: #0132B0;
 }
 
 .c5:active *[fill^='#'] {
-  fill: #0949AA;
+  fill: #0132B0;
 }
 
 .c5 *[fill^='#'] {
-  fill: #0D69F2;
+  fill: #0062FF;
 }
 
 .c0 {
@@ -267,8 +263,8 @@ Object {
   padding: 12px 44px 12px 52px;
   border-width: 1px;
   border-style: solid;
-  border-color: #0D69F2;
-  background-color: #F1F2F4;
+  border-color: #0062FF;
+  background-color: #EDF5FF;
 }
 
 .c2 {
@@ -279,18 +275,17 @@ Object {
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
-  padding: 2px 0px;
+  padding: 2px 0;
 }
 
 .c3 {
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
-  font-weight: 500;
+  font-weight: 550;
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
-  color: #2B313B;
+  color: #22242A;
   margin-bottom: 4px;
 }
 
@@ -301,8 +296,7 @@ Object {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
-  color: #2B313B;
+  color: #22242A;
 }
 
 .c7 {
@@ -332,11 +326,11 @@ Object {
 }
 
 .c7 svg *[fill^='#'] {
-  fill: #626F84;
+  fill: #74777F;
 }
 
 .c7 svg:hover *[fill^='#'] {
-  fill: #0A54C2;
+  fill: #74777F;
 }
 
 .c1 {
@@ -353,7 +347,7 @@ Object {
 }
 
 .c1 svg *[fill^='#'] {
-  fill: #0D69F2;
+  fill: #0062FF;
 }
 
 .c6 {
@@ -364,8 +358,6 @@ Object {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
-  color: #0D69F2;
 }
 
 <div>

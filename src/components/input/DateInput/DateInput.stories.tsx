@@ -1,26 +1,26 @@
-import React, { ChangeEvent, useState, useEffect } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import { DateInput } from '../DateInput';
+import { DateInput } from '#src/components/input/DateInput';
 import { withDesign } from 'storybook-addon-designs';
 import { INPUT_DIMENSIONS_VALUES } from '#src/components/input/types';
 
 export default {
-  title: 'Input/DateInput',
+  title: 'Admiral-2.1/Input/DateInput',
   component: DateInput,
   decorators: [withDesign],
   parameters: {
     design: [
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A53678',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A53407',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A53728',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A53678',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A53758',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A53659',
       },
     ],
   },
@@ -52,7 +52,12 @@ export default {
     placeholder: {
       type: 'string',
     },
-    readOnly: { type: 'boolean' },
+    minDate: {
+      control: false,
+    },
+    maxDate: {
+      control: false,
+    },
   },
 } as ComponentMeta<typeof DateInput>;
 
@@ -75,13 +80,15 @@ const Template: ComponentStory<typeof DateInput> = (props) => {
     props.onChange?.(e);
   };
   return (
-    <DateInput
-      {...cleanProps}
-      value={localValue}
-      onChange={handleChange}
-      style={{ maxWidth: '30%' }}
-      placeholder={'Some placeholder'}
-    />
+    <>
+      <DateInput
+        {...cleanProps}
+        value={localValue}
+        onChange={handleChange}
+        style={{ maxWidth: '30%' }}
+        placeholder={'Some placeholder'}
+      />
+    </>
   );
 };
 

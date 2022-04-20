@@ -6,22 +6,22 @@ import { withDesign } from 'storybook-addon-designs';
 import styled from 'styled-components';
 
 export default {
-  title: 'Form Field Components/DateField',
+  title: 'Admiral-2.1/Form Field/DateField',
   component: DateField,
   decorators: [withDesign],
   parameters: {
     design: [
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A53678',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A53407',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A53728',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A53678',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A53758',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A53659',
       },
     ],
   },
@@ -63,6 +63,12 @@ export default {
     placeholder: {
       control: { type: 'text' },
     },
+    minDate: {
+      control: false,
+    },
+    maxDate: {
+      control: false,
+    },
   },
 } as ComponentMeta<typeof DateField>;
 
@@ -97,23 +103,19 @@ const Template: ComponentStory<typeof DateField> = (props) => {
     `);
   };
 
-  const isWeekday = (date: Date) => {
-    const day = date.getDay();
-    return day !== 0 && day !== 6;
-  };
-
   return (
-    <FormContainer id="form 1" onBlur={handleFormBlur} onFocus={handleFormFocus}>
-      <DateField {...props} value={localValue} onChange={handleChange} id={'date 1'} placeholder="Это placeholder" />
-      <DateField required label="uncontrolled input" id={'date 2'} />
-      <DateField
-        type="date-range"
-        id="date range 1"
-        label="uncontrolled date range"
-        placeholder={'Введите отрезок времени'}
-        filterDate={isWeekday}
-      />
-    </FormContainer>
+    <>
+      <FormContainer id="form 1" onBlur={handleFormBlur} onFocus={handleFormFocus}>
+        <DateField {...props} value={localValue} onChange={handleChange} id={'date 1'} placeholder="Это placeholder" />
+        <DateField required label="uncontrolled input" id={'date 2'} />
+        <DateField
+          type="date-range"
+          id="date range 1"
+          label="uncontrolled date range"
+          placeholder={'Введите отрезок времени'}
+        />
+      </FormContainer>
+    </>
   );
 };
 

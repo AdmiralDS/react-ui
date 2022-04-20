@@ -1,8 +1,8 @@
 import React, { ChangeEvent } from 'react';
-import styled from 'styled-components';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import { PhoneNumberInput } from '#src/components/input';
+import styled from 'styled-components';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -23,7 +23,7 @@ const Description = () => (
 );
 
 export default {
-  title: 'Input/PhoneNumberInput',
+  title: 'Admiral-2.1/Input/PhoneNumberInput',
   component: PhoneNumberInput,
   decorators: [withDesign],
   parameters: {
@@ -31,11 +31,15 @@ export default {
     design: [
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A61244',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A61244',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A61271',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A61271',
+      },
+      {
+        type: 'figma',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A61297',
       },
     ],
   },
@@ -90,13 +94,15 @@ const PhoneNumberInputXL: ComponentStory<typeof PhoneNumberInput> = (props) => {
   };
 
   return (
-    <PhoneNumberInput
-      {...cleanProps}
-      dimension="xl"
-      value={localValue}
-      style={{ maxWidth: '320px' }}
-      onChange={handleChange}
-    />
+    <>
+      <PhoneNumberInput
+        {...cleanProps}
+        dimension="xl"
+        value={localValue}
+        style={{ maxWidth: '320px' }}
+        onChange={handleChange}
+      />
+    </>
   );
 };
 
@@ -122,14 +128,16 @@ const PhoneNumberInputM: ComponentStory<typeof PhoneNumberInput> = (props) => {
   };
 
   return (
-    <PhoneNumberInput
-      {...cleanProps}
-      dimension="m"
-      value={localValue}
-      onlyCountries={['RUS', 'BLR', 'TJK', 'UZB']}
-      style={{ maxWidth: '320px' }}
-      onChange={handleChange}
-    />
+    <>
+      <PhoneNumberInput
+        {...cleanProps}
+        dimension="m"
+        value={localValue}
+        onlyCountries={['RUS', 'BLR', 'TJK', 'UZB']}
+        style={{ maxWidth: '320px' }}
+        onChange={handleChange}
+      />
+    </>
   );
 };
 
@@ -155,14 +163,16 @@ const PhoneNumberInputS: ComponentStory<typeof PhoneNumberInput> = (props) => {
   };
 
   return (
-    <PhoneNumberInput
-      {...cleanProps}
-      dimension="s"
-      value={localValue}
-      defaultCountry="AUT"
-      style={{ maxWidth: '320px' }}
-      onChange={handleChange}
-    />
+    <>
+      <PhoneNumberInput
+        {...cleanProps}
+        dimension="s"
+        value={localValue}
+        defaultCountry="AUT"
+        style={{ maxWidth: '320px' }}
+        onChange={handleChange}
+      />
+    </>
   );
 };
 

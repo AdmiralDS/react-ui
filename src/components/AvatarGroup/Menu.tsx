@@ -1,10 +1,14 @@
 import * as React from 'react';
 import { refSetter } from '#src/components/common/utils/refSetter';
 import { Dropdown } from '#src/components/Dropdown';
-import styled from 'styled-components';
-import { Avatar } from '#src/components/Avatar';
+import styled, { ThemeContext, ThemeProvider } from 'styled-components';
 import type { AvatarProps } from '#src/components/Avatar';
-import { keyboardKey } from '#src/components/common/keyboardKey';
+import { Avatar } from '#src/components/Avatar';
+import {
+  DARK_THEME as DARK_THEME_ADMIRAL1,
+  LIGHT_THEME as LIGHT_THEME_ADMIRAL1,
+  LIGHT_THEME,
+} from '#src/components/themes';
 
 const StyledDropDown = styled(Dropdown)<{ alignDropdown?: string; dropMaxHeight: string | number }>`
   padding: 8px 0;
@@ -57,72 +61,20 @@ export const Menu = React.forwardRef<HTMLDivElement, SelectProps>(
     },
     ref,
   ) => {
+    const theme = React.useContext(ThemeContext) || LIGHT_THEME;
     const [open, setOpen] = React.useState(false);
     const refWrapper = React.useRef<HTMLInputElement>(null);
-    const [hovered, setHovered] = React.useState<string | undefined>('');
-    const childrenArray = React.Children.toArray(children);
-    const findOptionValue = (option: (React.ReactChild | React.ReactFragment | React.ReactPortal)[]) => {
-      if (React.isValidElement(option[0]) && 'props' in option[0]) {
-        return option[0].props.id;
-      }
-    };
-
-    const hoverIndex = React.useMemo(
-      () =>
-        childrenArray?.findIndex((child) => {
-          if (React.isValidElement(child) && 'props' in child) {
-            return child.props.id === hovered;
-          }
-          return -1;
-        }),
-      [childrenArray, hovered],
-    );
-
-    const findNextHoverValue = React.useCallback(() => {
-      const nextAbledOptionValue = findOptionValue(childrenArray.slice(hoverIndex + 1));
-      if (nextAbledOptionValue) return nextAbledOptionValue;
-      return findOptionValue(childrenArray);
-    }, [hoverIndex, childrenArray]);
-
-    const findPrevHoverValue = React.useCallback(() => {
-      const sliceInd = hoverIndex === -1 ? undefined : hoverIndex;
-      const prevAbledOptionValue = findOptionValue(childrenArray.slice(0, sliceInd).reverse());
-      if (prevAbledOptionValue) return prevAbledOptionValue;
-      return findOptionValue(childrenArray.slice().reverse());
-    }, [hoverIndex, childrenArray]);
 
     const handleKeyDownItem = (e: React.KeyboardEvent<HTMLElement>, onKeyDown: (e: any) => void) => {
       e.preventDefault();
-      const code = keyboardKey.getCode(e);
-      switch (code) {
-        case keyboardKey.ArrowUp: {
-          onKeyDown?.(e);
-          const prevValue = findPrevHoverValue();
-          if (!prevValue) break;
-          setHovered(prevValue);
-          break;
-        }
-        case keyboardKey.ArrowDown: {
-          onKeyDown?.(e);
-          const nextValue = findNextHoverValue();
-          if (!nextValue) break;
-          setHovered(nextValue);
-          break;
-        }
-        case keyboardKey[' ']:
-        case keyboardKey.Enter: {
-          onKeyDown?.(e);
-          onAvatarSelect?.(e);
-          setOpen(false);
-          (refWrapper.current as HTMLElement).focus();
-          break;
-        }
-        case keyboardKey.Escape:
-        case keyboardKey.Tab: {
-          setOpen(false);
-          (refWrapper.current as HTMLElement).focus();
-          break;
-        }
+      if (e.key === 'Enter' || e.key === ' ') {
+        onKeyDown?.(e);
+        onAvatarSelect?.(e);
+        setOpen(false);
+        (refWrapper.current as HTMLElement).focus();
+      } else if (e.key === 'Escape' || e.key === 'Tab') {
+        setOpen(false);
+        (refWrapper.current as HTMLElement).focus();
       }
     };
 
@@ -140,7 +92,6 @@ export const Menu = React.forwardRef<HTMLDivElement, SelectProps>(
 
         return React.cloneElement(child, {
           ...child.props,
-          hovered: hovered === child.props.id,
           onClick: (e: React.MouseEvent<HTMLElement>) => handleClickItem(e, child.props.onClick),
           onKeyDown: (e: React.KeyboardEvent<HTMLElement>) => handleKeyDownItem(e, child.props.onKeyDown),
         });
@@ -165,6 +116,7 @@ export const Menu = React.forwardRef<HTMLDivElement, SelectProps>(
       setOpen((open) => !open);
     };
 
+    // оборачиваю StyledDropDown в старую тему до тех пор, пока Dropdown не будет переведен на новые цветовые токены
     return (
       <SelectWrapper
         ref={refSetter(ref, refWrapper)}
@@ -184,15 +136,17 @@ export const Menu = React.forwardRef<HTMLDivElement, SelectProps>(
           />
         ) : null}
         {open && (
-          <StyledDropDown
-            targetRef={portalTargetRef || refWrapper}
-            data-dimension="m"
-            onClickOutside={clickOutside}
-            alignDropdown={alignDropdown}
-            dropMaxHeight={dropMaxHeight}
-          >
-            {renderChildrenDropDown()}
-          </StyledDropDown>
+          <ThemeProvider theme={theme.name == 'dark' ? DARK_THEME_ADMIRAL1 : LIGHT_THEME_ADMIRAL1}>
+            <StyledDropDown
+              targetRef={portalTargetRef || refWrapper}
+              data-dimension="m"
+              onClickOutside={clickOutside}
+              alignDropdown={alignDropdown}
+              dropMaxHeight={dropMaxHeight}
+            >
+              {renderChildrenDropDown()}
+            </StyledDropDown>
+          </ThemeProvider>
         )}
       </SelectWrapper>
     );

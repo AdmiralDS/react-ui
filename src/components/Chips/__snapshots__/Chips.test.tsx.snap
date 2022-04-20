@@ -21,7 +21,7 @@ Object {
   user-select: none;
   pointer-events: auto;
   cursor: default;
-  background-color: #E2E5E9;
+  background-color: #E5E7EB;
   border: 1px solid transparent;
   border-radius: 16px;
   height: 32px;
@@ -32,17 +32,20 @@ Object {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
+  color: #22242A;
 }
 
 .c0 *[fill^='#'] {
-  fill: #626F84;
+  fill: #74777F;
 }
 
-.c0:hover,
+.c0:hover {
+  background-color: #D6D8DD;
+}
+
 .c0:active {
-  color: #2B313B;
-  background-color: #D3D8DE;
+  color: #0062FF;
+  background-color: #D6D8DD;
 }
 
 .c0:focus-visible {
@@ -50,7 +53,7 @@ Object {
 }
 
 .c0:focus-visible:before {
-  border: 2px solid #0A54C2;
+  border: 2px solid #0062FF;
   border-radius: 20px;
   content: '';
   display: block;
@@ -60,6 +63,10 @@ Object {
   right: -5px;
   bottom: -5px;
   pointer-events: none;
+}
+
+.c0:hover {
+  color: #22242A;
 }
 
 .c1 {
@@ -79,7 +86,7 @@ Object {
 }
 
 .c1 svg *[fill^='#'] {
-  fill: #626F84;
+  fill: #B1B5BB;
 }
 
 .c2 {
@@ -125,7 +132,7 @@ Object {
   user-select: none;
   pointer-events: auto;
   cursor: default;
-  background-color: #E2E5E9;
+  background-color: #E5E7EB;
   border: 1px solid transparent;
   border-radius: 16px;
   height: 32px;
@@ -136,17 +143,20 @@ Object {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
+  color: #22242A;
 }
 
 .c0 *[fill^='#'] {
-  fill: #626F84;
+  fill: #74777F;
 }
 
-.c0:hover,
+.c0:hover {
+  background-color: #D6D8DD;
+}
+
 .c0:active {
-  color: #2B313B;
-  background-color: #D3D8DE;
+  color: #0062FF;
+  background-color: #D6D8DD;
 }
 
 .c0:focus-visible {
@@ -154,7 +164,7 @@ Object {
 }
 
 .c0:focus-visible:before {
-  border: 2px solid #0A54C2;
+  border: 2px solid #0062FF;
   border-radius: 20px;
   content: '';
   display: block;
@@ -164,6 +174,10 @@ Object {
   right: -5px;
   bottom: -5px;
   pointer-events: none;
+}
+
+.c0:hover {
+  color: #22242A;
 }
 
 .c1 {
@@ -183,7 +197,7 @@ Object {
 }
 
 .c1 svg *[fill^='#'] {
-  fill: #626F84;
+  fill: #B1B5BB;
 }
 
 .c2 {
@@ -284,8 +298,8 @@ Object {
   user-select: none;
   pointer-events: auto;
   cursor: pointer;
-  background-color: #0D69F2;
-  border: 1px solid #0D69F2;
+  background-color: #0062FF;
+  border: 1px solid #0062FF;
   border-radius: 16px;
   height: 32px;
   padding: 6px 12px;
@@ -299,14 +313,16 @@ Object {
 }
 
 .c0 *[fill^='#'] {
-  fill: #0D69F2;
+  fill: #0062FF;
 }
 
-.c0:hover,
+.c0:hover {
+  background-color: #0046E2;
+}
+
 .c0:active {
   color: #FFFFFF;
-  background-color: #0A54C2;
-  border-color: #0A54C2;
+  background-color: #0062FF;
 }
 
 .c0:focus-visible {
@@ -314,7 +330,7 @@ Object {
 }
 
 .c0:focus-visible:before {
-  border: 2px solid #0A54C2;
+  border: 2px solid #0062FF;
   border-radius: 20px;
   content: '';
   display: block;
@@ -326,12 +342,8 @@ Object {
   pointer-events: none;
 }
 
-.c0:hover *[fill^='#'] {
-  fill: #FFFFFF;
-}
-
-.c0:active *[fill^='#'] {
-  fill: #0949AA;
+.c0:hover {
+  color: #FFFFFF;
 }
 
 .c1 {
@@ -397,8 +409,8 @@ Object {
   user-select: none;
   pointer-events: auto;
   cursor: pointer;
-  background-color: #0D69F2;
-  border: 1px solid #0D69F2;
+  background-color: #0062FF;
+  border: 1px solid #0062FF;
   border-radius: 16px;
   height: 32px;
   padding: 6px 12px;
@@ -412,14 +424,16 @@ Object {
 }
 
 .c0 *[fill^='#'] {
-  fill: #0D69F2;
+  fill: #0062FF;
 }
 
-.c0:hover,
+.c0:hover {
+  background-color: #0046E2;
+}
+
 .c0:active {
   color: #FFFFFF;
-  background-color: #0A54C2;
-  border-color: #0A54C2;
+  background-color: #0062FF;
 }
 
 .c0:focus-visible {
@@ -427,7 +441,7 @@ Object {
 }
 
 .c0:focus-visible:before {
-  border: 2px solid #0A54C2;
+  border: 2px solid #0062FF;
   border-radius: 20px;
   content: '';
   display: block;
@@ -439,12 +453,8 @@ Object {
   pointer-events: none;
 }
 
-.c0:hover *[fill^='#'] {
-  fill: #FFFFFF;
-}
-
-.c0:active *[fill^='#'] {
-  fill: #0949AA;
+.c0:hover {
+  color: #FFFFFF;
 }
 
 .c1 {
@@ -566,7 +576,7 @@ Object {
   pointer-events: auto;
   cursor: default;
   background-color: #FFFFFF;
-  border: 1px solid #0D69F2;
+  border: 1px solid #0062FF;
   border-radius: 16px;
   height: 32px;
   padding: 6px 12px;
@@ -576,18 +586,20 @@ Object {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #0D69F2;
+  color: #0062FF;
 }
 
 .c0 *[fill^='#'] {
-  fill: #0D69F2;
+  fill: #0062FF;
 }
 
-.c0:hover,
+.c0:hover {
+  background-color: #0000000D;
+}
+
 .c0:active {
-  color: #0A54C2;
-  background-color: #F1F2F4;
-  border-color: #0A54C2;
+  color: #FFFFFF;
+  background-color: #0000000D;
 }
 
 .c0:focus-visible {
@@ -595,7 +607,7 @@ Object {
 }
 
 .c0:focus-visible:before {
-  border: 2px solid #0A54C2;
+  border: 2px solid #0062FF;
   border-radius: 20px;
   content: '';
   display: block;
@@ -607,12 +619,8 @@ Object {
   pointer-events: none;
 }
 
-.c0:hover *[fill^='#'] {
-  fill: #0A54C2;
-}
-
-.c0:active *[fill^='#'] {
-  fill: #0949AA;
+.c0:hover {
+  color: #0062FF;
 }
 
 .c1 {
@@ -632,7 +640,7 @@ Object {
 }
 
 .c1 svg *[fill^='#'] {
-  fill: #0D69F2;
+  fill: #0062FF;
 }
 
 .c2 {
@@ -679,7 +687,7 @@ Object {
   pointer-events: auto;
   cursor: default;
   background-color: #FFFFFF;
-  border: 1px solid #0D69F2;
+  border: 1px solid #0062FF;
   border-radius: 16px;
   height: 32px;
   padding: 6px 12px;
@@ -689,18 +697,20 @@ Object {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #0D69F2;
+  color: #0062FF;
 }
 
 .c0 *[fill^='#'] {
-  fill: #0D69F2;
+  fill: #0062FF;
 }
 
-.c0:hover,
+.c0:hover {
+  background-color: #0000000D;
+}
+
 .c0:active {
-  color: #0A54C2;
-  background-color: #F1F2F4;
-  border-color: #0A54C2;
+  color: #FFFFFF;
+  background-color: #0000000D;
 }
 
 .c0:focus-visible {
@@ -708,7 +718,7 @@ Object {
 }
 
 .c0:focus-visible:before {
-  border: 2px solid #0A54C2;
+  border: 2px solid #0062FF;
   border-radius: 20px;
   content: '';
   display: block;
@@ -720,12 +730,8 @@ Object {
   pointer-events: none;
 }
 
-.c0:hover *[fill^='#'] {
-  fill: #0A54C2;
-}
-
-.c0:active *[fill^='#'] {
-  fill: #0949AA;
+.c0:hover {
+  color: #0062FF;
 }
 
 .c1 {
@@ -745,7 +751,7 @@ Object {
 }
 
 .c1 svg *[fill^='#'] {
-  fill: #0D69F2;
+  fill: #0062FF;
 }
 
 .c2 {

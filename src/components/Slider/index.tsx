@@ -1,9 +1,9 @@
-import React, { useState, useRef, useEffect, useCallback, MutableRefObject, HTMLAttributes } from 'react';
+import React, { HTMLAttributes, MutableRefObject, useCallback, useEffect, useRef, useState } from 'react';
 import { keyboardKey } from '#src/components/common/keyboardKey';
 import { throttle } from '#src/components/common/utils/throttle';
 
-import { correctValueWithRanges, calcValueByPos } from './utils';
-import { Wrapper, TrackWrapper, Track, DefaultTrack, FilledTrack, Thumb, ThumbCircle } from './style';
+import { calcValueByPos, correctValueWithRanges } from './utils';
+import { DefaultTrack, FilledTrack, Thumb, ThumbCircle, Track, TrackWrapper, Wrapper } from './style';
 import { TickMarks } from './TickMarks';
 
 export interface SliderProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> {

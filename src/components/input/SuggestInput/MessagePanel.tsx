@@ -6,7 +6,7 @@ export const MessagePanel = styled.div`
   ${typography['Body/Body 1 Long']}
   line-height: 40px;
   padding: 0 16px;
-  color: ${(p) => p.theme.color.text.primary};
+  color: ${(p) => p.theme.color['Neutral/Neutral 90']};
 
   [data-dimension='xl'] & {
     height: 48px;

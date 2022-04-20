@@ -1,5 +1,6 @@
 import type { FC, MouseEvent } from 'react';
 import React from 'react';
+import { Tooltip } from '#src/components/Tooltip';
 
 import {
   addMonths,
@@ -23,7 +24,6 @@ import {
   SELECT_MONTH,
   SELECT_YEAR,
 } from '../constants';
-import { Tooltip } from '../../Tooltip';
 
 import { Button } from './Button';
 

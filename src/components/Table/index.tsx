@@ -6,27 +6,28 @@ import { RowWidthResizer } from './RowWidthResizer';
 import { Filter } from './filter/Filter';
 import { SCROLLBAR } from './scrollbarUtil';
 import {
-  ExpandIcon,
+  Cell,
+  CellTextContent,
+  CheckboxCell,
   ExpandCell,
   ExpandedRow,
   ExpandedRowContent,
+  ExpandIcon,
+  ExpandIconWrapper,
+  Filler,
   Header,
   HeaderCell,
   HeaderCellContent,
   HeaderCellSpacer,
   HeaderCellTitle,
-  TableContainer,
-  Title,
-  ScrollTableBody,
+  Row,
   ScrollbarCompensator,
+  ScrollTableBody,
   SimpleRow,
   SortIcon,
   StickyWrapper,
-  Filler,
-  Row,
-  Cell,
-  CellTextContent,
-  CheckboxCell,
+  TableContainer,
+  Title,
 } from './style';
 
 export const DEFAULT_COLUMN_WIDTH = 100;
@@ -515,7 +516,16 @@ export const Table: React.FC<TableProps> = ({
                 <StickyWrapper>
                   {displayRowExpansionColumn && (
                     <ExpandCell>
-                      {row.expandedRowRender && <ExpandIcon onClick={() => handleExpansionChange(row.id)} />}
+                      {row.expandedRowRender && (
+                        <ExpandIconWrapper>
+                          <ExpandIcon
+                            $isOpen={row.expanded}
+                            data-disabled={row.disabled ? true : undefined}
+                            onClick={() => handleExpansionChange(row.id)}
+                            aria-hidden
+                          />
+                        </ExpandIconWrapper>
+                      )}
                     </ExpandCell>
                   )}
                   {displayRowSelectionColumn && (
@@ -534,7 +544,6 @@ export const Table: React.FC<TableProps> = ({
               )}
               {cols.map((col) => (col.sticky ? null : renderBodyCell(row, col)))}
               <Filler />
-              <ScrollbarCompensator width={verticalScrollWidth} />
             </SimpleRow>
             {row.expandedRowRender && (
               <ExpandedRow opened={row.expanded} contentMaxHeight="90vh" className="tr-expanded">

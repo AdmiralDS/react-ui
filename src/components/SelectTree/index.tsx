@@ -1,7 +1,7 @@
 import type { FC, HTMLAttributes } from 'react';
 import React, { ChangeEvent, KeyboardEvent, MouseEvent } from 'react';
 import styled from 'styled-components';
-import { SelectTreeNode, SelectTreeNodeProps } from './SelectTreeNode';
+import { SelectTreeNode, SelectTreeNodeProps } from '#src/components/SelectTree/SelectTreeNode';
 import { keyboardKey } from '#src/components/common/keyboardKey';
 
 type Dimension = 'm' | 's';
@@ -86,7 +86,7 @@ export const SelectTree: FC<SelectTreeProps> = ({ list, dimension = 'm', expandA
     onChange?.([...list]);
   };
 
-  const handleButtonClick = React.useCallback((e: MouseEvent<SVGSVGElement>) => {
+  const handleButtonClick = React.useCallback((e: MouseEvent<HTMLDivElement>) => {
     handleChangeList('buttonclick', e);
   }, []);
 

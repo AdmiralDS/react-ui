@@ -1,11 +1,11 @@
-import React, { HTMLAttributes } from 'react';
 import type { FC } from 'react';
+import React, { HTMLAttributes } from 'react';
 
-import { ReactComponent as StepDefault } from './svg/Step.svg';
-import { ReactComponent as StepCompleted } from './svg/StepCompleted.svg';
-import { ReactComponent as StepError } from './svg/StepError.svg';
-import { StepTrack, StepRail, StepIcon, StepWrapper, StepContentWrapper } from './style';
-import StepperContext from './StepperContext';
+import { ReactComponent as StepDefault } from '#src/components/Stepper/svg/Step.svg';
+import { ReactComponent as StepCompleted } from '#src/components/Stepper/svg/StepCompleted.svg';
+import { ReactComponent as StepError } from '#src/components/Stepper/svg/StepError.svg';
+import { StepContentWrapper, StepIcon, StepRail, StepTrack, StepWrapper } from '#src/components/Stepper/style';
+import StepperContext from '#src/components/Stepper/StepperContext';
 
 export interface StepProps
   extends Omit<HTMLAttributes<HTMLLIElement | HTMLButtonElement | HTMLAnchorElement>, 'onClick'> {
@@ -16,6 +16,7 @@ export interface StepProps
   completed?: boolean;
   link?: string;
   index?: number;
+  hideLine?: boolean;
   onClick?: (step: { index: number; active: boolean; completed: boolean; disabled?: boolean }) => void;
 }
 
@@ -27,6 +28,7 @@ export const Step: FC<StepProps> = ({
   disabled: propDisabled,
   completed: propCompleted,
   active: propActive,
+  hideLine,
   onClick,
   children,
   ...props
@@ -71,7 +73,7 @@ export const Step: FC<StepProps> = ({
       <StepContentWrapper tabIndex={-1}>
         <StepTrack aria-hidden>
           <StepIcon as={icon} width={20} height={20} />
-          <StepRail />
+          {!hideLine && <StepRail />}
         </StepTrack>
         {children}
       </StepContentWrapper>

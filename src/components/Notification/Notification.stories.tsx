@@ -23,11 +23,10 @@ const Description = () => (
 const title = 'Заголовок оповещения';
 const body = 'Тут находится текст короткого оповещения';
 const linkText = 'Link';
-const href =
-  'https://www.figma.com/file/nwmAE2QMjzDD1FECyC2EUL/01-%E2%9C%85-UI-Kit-2.1-Internet-bank?node-id=63767%3A71823';
+const href = 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=37%3A26531';
 
 export default {
-  title: 'Example/Notification',
+  title: 'Admiral-2.1/Notification',
   decorators: [withDesign],
   component: Notification,
   parameters: {
@@ -35,11 +34,15 @@ export default {
     design: [
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=37%3A27484',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=37%3A26531',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=37%3A27651',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=37%3A27484',
+      },
+      {
+        type: 'figma',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=37%3A27651',
       },
     ],
   },
@@ -74,7 +77,11 @@ export default {
 } as ComponentMeta<typeof Notification>;
 
 const Template1: ComponentStory<typeof Notification> = (args) => {
-  return <Notification {...args}>{body}</Notification>;
+  return (
+    <>
+      <Notification {...args}>{body}</Notification>
+    </>
+  );
 };
 
 const Template2: ComponentStory<typeof Notification> = (args) => {

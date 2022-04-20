@@ -1,141 +1,141 @@
-import type { Background, Basic, Color, Special, SpecialInvert, Status, Text } from '../common';
-
-const BASIC: Basic = {
-  primary: '#0D69F2',
-  secondary: '#2B313B',
-  tertiary: '#8A96A8',
-  hover: '#0A54C2',
-  press: '#0949AA',
-  disable: '#C4CAD4',
-  primaryLight: '#6EA5F7',
-} as const;
-
-const BACKGROUND: Background = {
-  primary: '#FFFFFF',
-  secondary: '#F1F2F4',
-  tertiary: '#E2E5E9',
-  tertiaryHover: '#D3D8DE',
-  card: '#FFFFFF',
-  cardHover: '#FFFFFF',
-  inversion: '#2B313B',
-  shadow: '#8A96A8',
-  header: '#0949AA',
-  surfaceDanger: '#FEF0F1',
-  surfaceWarn: '#FFF7F0',
-  surfaceSuccess: '#F2FCF5',
-  page: '#F1F2F4',
-} as const;
-
-const TEXT: Text = {
-  primary: '#2B313B',
-  secondary: '#626F84',
-  tertiary: '#A7B0BE',
-  inversion: '#FFFFFF',
-  staticWhite: '#FFFFFF',
-  staticBlack: '#2B313B',
-} as const;
-
-const STATUS: Status = {
-  warn: '#FF8C19',
-  hoverWarn: '#E57300',
-  pressWarn: '#CC6600',
-  success: '#2ABB5B',
-  hoverSuccess: '#219246',
-  pressSuccess: '#1C7D3C',
-  danger: '#DA0B20',
-  hoverDanger: '#A90919',
-  pressDanger: '#910815',
-} as const;
-
-const SPECIAL: Special = {
-  blueLight: '#0ABBFB',
-  lightBlue: '#0ABBFB',
-  blue: '#3F7DFE',
-  blueDeep: '#3E51B5',
-  greenLight: '#C0D20F',
-  green: '#5ECF70',
-  greenDeep: '#44BF78',
-  tiffany: '#5BD8D1',
-  tiffanyDeep: '#24A79F',
-  tiffanyDark: '#147F94',
-  tiffanyBlue: '#00BCD4',
-  yellow: '#F0DE37',
-  orangeLight: '#FFAF37',
-  orange: '#FF8515',
-  orangeDeep: '#FF5A32',
-  violetLight: '#ED6CCD',
-  violet: '#C368DA',
-  violetDeep: '#9A64F7',
-  fuchsia: '#F86D86',
-  fuchsiaDeep: '#D9477C',
-  rainySky: '#62676F',
-  night: '#2B313B',
-  gray: '#98ABCD',
-  softBlue: '#E0F2FF',
-  softNiceBlue: '#E0E9FF',
-  softSkyBlue: '#E2F4FE',
-  softTiffany: '#DBF8FF',
-  softGreen: '#D8F5E8',
-  softYellow: '#FFF1D4',
-  softPapaya: '#F9EECF',
-  softRed: '#FFEBED',
-  softPink: '#FFEBF8',
-  softPurple: '#EDF1FF',
-  softMallowPurple: '#E8E6FF',
-  softGray: '#F1F2F4',
-  softLightBlue: '#E6F8FF',
-  turquoise: '#4AD2CA',
-  softTurquoise: '#EAFAF9',
-  red: '#FF525C',
-  magenta: '#E052BD',
-  softMagenta: '#FBE9F7',
-  purple: '#BF67C7',
-  softViolet: '#F0E7FD',
-  blueDark: '#001157',
-} as const;
-
-const SPECIAL_INVERT: SpecialInvert = {
-  blueLight: '#0ABBFB',
-  blue: '#3F7DFE',
-  blueDeep: '#3E51B5',
-  greenLight: '#C0D20F',
-  green: '#5ECF70',
-  greenDeep: '#44BF78',
-  tiffany: '#5BD8D1',
-  tiffanyDeep: '#24A79F',
-  tiffanyDark: '#147F94',
-  tiffanyBlue: '#00BCD4',
-  yellow: '#F0DE37',
-  orangeLight: '#FFAF37',
-  orange: '#FF8515',
-  orangeDeep: '#FF5A32',
-  violetLight: '#ED6CCD',
-  violet: '#C368DA',
-  violetDeep: '#9A64F7',
-  fuchsia: '#F86D86',
-  fuchsiaDeep: '#D9477C',
-  rainySky: '#62676F',
-  gray: '#98ABCD',
-  blueDark: '#001157',
-  softBlue: '#E0F2FF',
-  softNiceBlue: '#E0E9FF',
-  softSkyBlue: '#E2F4FE',
-  softTiffany: '#DBF8FF',
-  softGreen: '#D8F5E8',
-  softYellow: '#FFF1D4',
-  softPapaya: '#F9EECF',
-  softRed: '#FFEBED',
-  softPink: '#FFEBF8',
-  softPurple: '#EDF1FF',
-  softMallowPurple: '#E8E6FF',
-  softGray: '#F1F2F4',
-} as const;
+import type { Color } from '../common';
 
 export const COLOR: Color = {
-  basic: BASIC,
-  background: BACKGROUND,
-  text: TEXT,
-  status: STATUS,
-  special: SPECIAL,
-  specialInvert: SPECIAL_INVERT,
+  //<editor-fold desc="Neutral">
+  'Neutral/Neutral 00': '#FFFFFF',
+  'Neutral/Neutral 05': '#F3F4F6',
+  'Neutral/Neutral 10': '#E5E7EB',
+  'Neutral/Neutral 20': '#D6D8DD',
+  'Neutral/Neutral 30': '#B1B5BB',
+  'Neutral/Neutral 40': '#9CA0A7',
+  'Neutral/Neutral 50': '#74777F',
+  'Neutral/Neutral 60': '#666970',
+  'Neutral/Neutral 70': '#505258',
+  'Neutral/Neutral 80': '#37383C',
+  'Neutral/Neutral 90': '#22242A',
+  //</editor-fold>
+
+  //<editor-fold desc="Primary">
+  'Primary/Primary 10': '#EDF5FF',
+  'Primary/Primary 20': '#DDE9FF',
+  'Primary/Primary 30': '#A7C7FF',
+  'Primary/Primary 40': '#6FA3FF',
+  'Primary/Primary 50': '#3A85FF',
+  'Primary/Primary 60 Main': '#0062FF',
+  'Primary/Primary 70': '#0046E2',
+  'Primary/Primary 80': '#0132B0',
+  //</editor-fold>
+
+  //<editor-fold desc="Special">
+  'Special/Static White': '#FFFFFF',
+  'Special/Elevated BG': '#FFFFFF',
+  'Special/Dark Static Neutral 00': '#141618',
+  'Special/Dark Static Neutral 05': '#1F2024',
+  'Special/Dark Static Neutral 10': '#292A2E',
+  'Special/Dark Static Neutral 20': '#3A3C41',
+  'Special/Dark Static Neutral 30': '#4E5158',
+  'Special/Dark Static Neutral 50': '#7B8088',
+  'Special/Dark Static Neutral 80': '#CDD0D6',
+  'Special/Dark Static Neutral 90': '#EBEDF0',
+  'Special/Dark Static Primary 60': '#3481FF',
+  'Special/Dark Static Primary 70': '#5290FF',
+  'Special/Dark Static Primary 80': '#689FFF',
+  'Special/Dark Static Error 60': '#EA3C3C',
+  'Special/Dark Static Success 50': '#16913F',
+  //</editor-fold>
+
+  //<editor-fold desc="Opacity">
+  'Opacity/Hover': '#0000000D',
+  'Opacity/Focus': '#00000017',
+  'Opacity/Press': '#0000001F',
+  'Opacity/Modal': '#00000066',
+  'Opacity/Dark Static Hover': '#FFFFFF0F',
+  'Opacity/Dark Static Focus': '#FFFFFF17',
+  'Opacity/Dark Static Press': '#FFFFFF1F',
+  //</editor-fold>
+
+  //<editor-fold desc="Error">
+  'Error/Error 10': '#FFEFEF',
+  'Error/Error 20': '#FFDDDD',
+  'Error/Error 30': '#FFA7A7',
+  'Error/Error 40': '#FF7C7C',
+  'Error/Error 50': '#F64E4E',
+  'Error/Error 60 Main': '#D92020',
+  'Error/Error 70': '#BA1717',
+  'Error/Error 80': '#981111',
+  //</editor-fold>
+
+  //<editor-fold desc="Success">
+  'Success/Success 10': '#EAFCF1',
+  'Success/Success 20': '#C3F4D3',
+  'Success/Success 30': '#80DCA0',
+  'Success/Success 40': '#32C665',
+  'Success/Success 50 Main': '#1BA049',
+  'Success/Success 60': '#128238',
+  'Success/Success 70': '#0B682A',
+  //</editor-fold>
+
+  //<editor-fold desc="Warning">
+  'Warning/Warning 10': '#FFF1E5',
+  'Warning/Warning 20': '#FFDECE',
+  'Warning/Warning 30': '#FFB799',
+  'Warning/Warning 40': '#FF8D64',
+  'Warning/Warning 50 Main': '#FF5C22',
+  'Warning/Warning 60': '#D63F09',
+  'Warning/Warning 70': '#A63208',
+  //</editor-fold>
+
+  //<editor-fold desc="Attention">
+  'Attention/Attention 10': '#FEF5D7',
+  'Attention/Attention 20': '#FEE7A0',
+  'Attention/Attention 30': '#FDDD77',
+  'Attention/Attention 40': '#FDD14C',
+  'Attention/Attention 50 Main': '#FFC400',
+  'Attention/Attention 60': '#F0B902',
+  'Attention/Attention 70': '#DFAB00',
+  //</editor-fold>
+
+  //<editor-fold desc="Purple">
+  'Purple/Purple 10': '#F6F2FF',
+  'Purple/Purple 20': '#EBE0FF',
+  'Purple/Purple 30': '#D4BBFF',
+  'Purple/Purple 40': '#BE95FF',
+  'Purple/Purple 50': '#A56EFF',
+  'Purple/Purple 60 Main': '#8A3FFC',
+  'Purple/Purple 70': '#6929C4',
+  'Purple/Purple 80': '#491D8B',
+  //</editor-fold>
+
+  //<editor-fold desc="Magenta">
+  'Magenta/Magenta 10': '#FFF0F7',
+  'Magenta/Magenta 20': '#FFDBEB',
+  'Magenta/Magenta 30': '#FFAFD2',
+  'Magenta/Magenta 40': '#FF7EB6',
+  'Magenta/Magenta 50': '#EE5396',
+  'Magenta/Magenta 60 Main': '#D02670',
+  'Magenta/Magenta 70': '#9F1853',
+  'Magenta/Magenta 80': '#740937',
+  //</editor-fold>
+
+  //<editor-fold desc="Cyan">
+  'Cyan/Cyan 10': '#E5F6FF',
+  'Cyan/Cyan 20': '#C4EAFF',
+  'Cyan/Cyan 30': '#82CFFF',
+  'Cyan/Cyan 40': '#33B1FF',
+  'Cyan/Cyan 50': '#1192E8',
+  'Cyan/Cyan 60 Main': '#0072C3',
+  'Cyan/Cyan 70': '#00539A',
+  'Cyan/Cyan 80': '#003A6D',
+  //</editor-fold>
+
+  //<editor-fold desc="Teal">
+  'Teal/Teal 10': '#D9FBFB',
+  'Teal/Teal 20': '#B0F0F0',
+  'Teal/Teal 30': '#3DDBD9',
+  'Teal/Teal 40': '#08BDBA',
+  'Teal/Teal 50': '#009D9A',
+  'Teal/Teal 60 Main': '#007D79',
+  'Teal/Teal 70': '#005D5D',
+  'Teal/Teal 80': '#004144',
+  //</editor-fold>
 } as const;

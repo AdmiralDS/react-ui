@@ -4,10 +4,10 @@ import type { Appearance, Dimension } from '#src/components/Button/types';
 export const backGroundColorMixin = css<{ appearance: Appearance }>`
   background: ${({ theme, appearance }) =>
     appearance === 'secondary' || appearance === 'ghost'
-      ? theme.color.background.tertiary
+      ? theme.color['Neutral/Neutral 10']
       : appearance === 'white'
-      ? theme.color.basic.tertiary
-      : theme.color.background.secondary};
+      ? theme.color['Neutral/Neutral 50']
+      : theme.color['Neutral/Neutral 05']};
 `;
 
 export const PseudoText = styled.div<{ dimension: Dimension; appearance: Appearance }>`

@@ -16,6 +16,19 @@ const heights = css<{ dimension: ChipDimension }>`
   }};
 `;
 
+const widths = css<{ dimension: ChipDimension }>`
+  width: ${({ dimension }) => {
+    switch (dimension) {
+      case 'm':
+        return '32px';
+      case 's':
+        return '24px';
+      default:
+        return '24px';
+    }
+  }};
+`;
+
 const heightIcons = css<{ dimension: ChipDimension }>`
   height: ${({ dimension }) => {
     switch (dimension) {
@@ -81,12 +94,19 @@ const typography = css<{
   line-height: ${({ dimension }) => (dimension === 's' ? '16px' : '20px')};
   font-feature-settings: 'tnum' on, 'lnum' on;
   color: ${({ theme, appearance, disabled, selected }) => {
-    if (disabled && !selected) return theme.color.text.tertiary;
+    if (disabled && !selected) return theme.color['Neutral/Neutral 30'];
 
-    if (selected || (selected && disabled)) return theme.color.text.staticWhite;
+    if (selected || (selected && disabled)) return theme.color['Special/Static White'];
 
-    return appearance === 'filled' ? theme.color.text.primary : theme.color.basic.primary;
+    return appearance === 'filled' ? theme.color['Neutral/Neutral 90'] : theme.color['Primary/Primary 60 Main'];
   }};
+
+  &:hover {
+    color: ${({ theme, appearance, selected }) => {
+      if (selected) return theme.color['Special/Static White'];
+      if (appearance === 'filled' && !selected) return theme.color['Neutral/Neutral 90'];
+      else return theme.color['Primary/Primary 60 Main'];
+    }}
 `;
 
 const colorsBorderAndBackground = css<{
@@ -94,40 +114,41 @@ const colorsBorderAndBackground = css<{
   disabled?: boolean;
   selected?: boolean;
   appearance?: ChipAppearance;
+  withCloseIcon?: boolean;
 }>`
   background-color: ${({ theme, appearance, selected, disabled }) => {
     if (selected && !disabled) {
-      return theme.color.basic.primary;
+      return theme.color['Primary/Primary 60 Main'];
     }
-    if (selected && disabled) return theme.color.basic.disable;
-    return appearance === 'filled' ? theme.color.background.tertiary : theme.color.background.primary;
+    if (selected && disabled) return theme.color['Neutral/Neutral 30'];
+    return appearance === 'filled' ? theme.color['Neutral/Neutral 10'] : theme.color['Special/Static White'];
   }};
 
   border: 1px solid
     ${({ theme, appearance, disabled }) => {
-      if (disabled) return theme.color.background.tertiary;
+      if (disabled && appearance !== 'filled') return theme.color['Neutral/Neutral 30'];
       if (appearance === 'filled') return 'transparent';
-      else return theme.color.basic.primary;
+      else return theme.color['Primary/Primary 60 Main'];
     }};
 
   border-radius: 16px;
 
-  &:hover,
+  &:hover {
+    background-color: ${({ theme, appearance, selected, withCloseIcon }) => {
+      if (selected) return theme.color['Primary/Primary 70'];
+      if (appearance === 'filled') return theme.color['Neutral/Neutral 20'];
+      else if (!withCloseIcon) return theme.color['Opacity/Hover'];
+    }};
+  }
+
   &:active {
-    color: ${({ theme, appearance, selected }) => {
-      if (selected) return theme.color.text.staticWhite;
-      if (appearance === 'filled') return theme.color.text.primary;
-      else return theme.color.basic.hover;
-    }};
+    color: ${({ theme, appearance }) =>
+      appearance === 'filled' ? theme.color['Primary/Primary 60 Main'] : theme.color['Special/Static White']};
     background-color: ${({ theme, appearance, selected }) => {
-      if (selected) return theme.color.basic.hover;
-      if (appearance === 'filled') return theme.color.background.tertiaryHover;
-      else return theme.color.background.secondary;
-    }};
-    border-color: ${({ theme, appearance, disabled }) => {
-      if (appearance === 'outlined' && !disabled) {
-        return theme.color.basic.hover;
+      if (selected) {
+        return theme.color['Primary/Primary 60 Main'];
       }
+      return appearance === 'filled' ? theme.color['Neutral/Neutral 20'] : theme.color['Opacity/Hover'];
     }};
   }
 
@@ -135,7 +156,7 @@ const colorsBorderAndBackground = css<{
     outline: 0;
 
     &:before {
-      border: 2px solid ${({ theme }) => theme.color.basic.hover};
+      border: 2px solid ${({ theme }) => theme.color['Primary/Primary 60 Main']};
       border-radius: 20px;
       content: '';
       display: block;
@@ -154,6 +175,7 @@ export const ChipComponentStyled = styled.div<{
   appearance?: ChipAppearance;
   selected?: boolean;
   defaultChip?: boolean;
+  withCloseIcon?: boolean;
 }>`
   display: inline-flex;
   align-items: center;
@@ -164,92 +186,69 @@ export const ChipComponentStyled = styled.div<{
   pointer-events: ${({ disabled }) => (disabled ? 'none' : 'auto')};
   & *[fill^='#'] {
     fill: ${({ theme, appearance, disabled }) =>
-      disabled
-        ? theme.color.text.tertiary
-        : appearance === 'filled'
-        ? theme.color.text.secondary
-        : theme.color.basic.primary};
+      appearance === 'filled' || disabled ? theme.color['Neutral/Neutral 50'] : theme.color['Primary/Primary 60 Main']};
   }
   cursor: ${({ defaultChip, disabled }) => (defaultChip && !disabled ? 'pointer' : 'default')};
   ${colorsBorderAndBackground}
   ${heights}
-  ${paddings}
+  ${(p) => (p.withCloseIcon ? 'padding-left: 12px;' : paddings)}
   ${typography}
-
-  &:hover {
-    & *[fill^='#'] {
-      fill: ${({ theme, appearance, disabled, selected }) => {
-        if (selected) return theme.color.text.staticWhite;
-        if (appearance === 'outlined' && !disabled) {
-          return theme.color.basic.hover;
-        }
-      }};
-    }
-  }
-
-  &:active {
-    & *[fill^='#'] {
-      fill: ${({ theme, appearance, disabled }) => {
-        if (appearance === 'outlined' && !disabled) {
-          return theme.color.basic.press;
-        }
-      }};
-    }
-  }
 `;
 export const CloseIconWrapperStyled = styled(CloseOutline)<{
   disabled?: boolean;
-  selected?: boolean;
+  appearance?: ChipAppearance;
 }>`
   cursor: ${({ disabled }) => (disabled ? 'default' : 'pointer')};
 
   &:hover {
+    outline: none;
+    cursor: pointer;
     & *[fill^='#'] {
-      fill: ${({ theme, disabled, selected }) => {
-        if (selected) return theme.color.text.staticWhite;
-        if (!disabled) {
-          return theme.color.basic.hover;
-        }
-      }};
+      fill: ${({ theme, appearance }) =>
+        appearance === 'filled' ? theme.color['Neutral/Neutral 50'] : theme.color['Primary/Primary 60 Main']};
     }
   }
 
   &:active {
+    outline: none;
+    border: none;
     & *[fill^='#'] {
-      fill: ${({ theme, disabled, selected }) => {
-        if (selected) return theme.color.text.staticWhite;
-        if (!disabled) {
-          return theme.color.basic.press;
-        }
-      }};
+      fill: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
     }
   }
 `;
+
+const closeIconWrapperStyle = css`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
 export const ChipContentWrapperStyled = styled.div<{
   appearance?: ChipAppearance;
   disabled?: boolean;
   selected?: boolean;
   dimension: ChipDimension;
+  withCloseIcon?: boolean;
 }>`
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
   display: inline-flex;
 
-  ${heightText}
+  ${(p) => p.withCloseIcon && closeIconWrapperStyle}
+  ${(p) => (p.withCloseIcon ? heights : heightText)}
   & svg {
     ${heightIcons}
     ${widthIcons}
     & *[fill^='#'] {
       fill: ${({ theme, appearance, disabled, selected }) => {
         if (selected) {
-          return theme.color.background.primary;
+          return theme.color['Special/Static White'];
         }
-        return disabled
-          ? theme.color.text.tertiary
-          : appearance === 'filled'
-          ? theme.color.text.secondary
-          : theme.color.basic.primary;
+        return appearance === 'filled' || disabled
+          ? theme.color['Neutral/Neutral 30']
+          : theme.color['Primary/Primary 60 Main'];
       }};
     }
   }
@@ -264,17 +263,27 @@ export const IconBeforeWrapperStyled = styled.div`
   display: inline-block;
   margin-right: 8px;
 `;
-export const IconAfterWrapperStyled = styled.div`
+export const IconAfterWrapperStyled = styled.div<{ withCloseIcon?: boolean }>`
   display: inline-block;
-  margin-left: 8px;
+  margin-left: ${(p) => (p.withCloseIcon ? '2px' : '8px')};
 `;
 export const IconWrapperStyled = styled.div<{
   dimension: ChipDimension;
+  withCloseIcon?: boolean;
 }>`
-  ${heightIcons}
-  ${widthIcons}
+  ${(p) => p.withCloseIcon && closeIconWrapperStyle}
+  ${(p) => (p.withCloseIcon ? heights : heightIcons)}
+  ${(p) => (p.withCloseIcon ? widths : widthIcons)}
   & > svg {
     ${heightIcons}
     ${widthIcons}
+  }
+  &:hover {
+    border-radius: 50%;
+    background-color: ${({ theme }) => theme.color['Opacity/Hover']};
+  }
+  &:focus {
+    border-radius: 50%;
+    background-color: ${({ theme }) => theme.color['Opacity/Press']};
   }
 `;

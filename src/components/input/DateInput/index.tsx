@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { useRef, useState } from 'react';
 import styled from 'styled-components';
-import { ReactComponent as CalendarSVG } from '@admiral-ds/icons/build/system/CalendarSolid.svg';
-import { TextInput, TextInputProps } from '../TextInput';
+import { ReactComponent as CalendarSVG } from '@admiral-ds/icons/build/system/CalendarOutline.svg';
+import { TextInput, TextInputProps } from '#src/components/input/TextInput';
 import { Calendar as CalendarBase, CalendarPropType } from '#src/components/Calendar';
 import { refSetter } from '#src/components/common/utils/refSetter';
 import { defaultDateInputHandle } from '#src/components/input/DateInput/defaultDateInputHandle';
@@ -28,13 +28,13 @@ const Input = styled(TextInput)`
 
 const Icon = styled(CalendarSVG)`
   & *[fill^='#'] {
-    fill: ${(props) => props.theme.color.text.secondary};
+    fill: ${(props) => props.theme.color['Neutral/Neutral 50']};
   }
 
   [disabled] & {
     pointer-events: none;
     & *[fill^='#'] {
-      fill: ${(props) => props.theme.color.text.tertiary};
+      fill: ${(props) => props.theme.color['Neutral/Neutral 30']};
     }
   }
 
@@ -43,7 +43,7 @@ const Icon = styled(CalendarSVG)`
   }
 
   &:hover *[fill^='#'] {
-    fill: ${(props) => props.theme.color.basic.hover};
+    fill: ${(props) => props.theme.color['Primary/Primary 70']};
   }
 `;
 
@@ -168,7 +168,7 @@ export const DateInput = React.forwardRef<HTMLInputElement, DateInputProps>(
         {...props}
         ref={refSetter(ref, inputRef)}
         handleInput={handleInput}
-        icons={props.readOnly ? undefined : <Icon onClick={handleButtonClick} tabIndex={0} />}
+        icons={<Icon onClick={handleButtonClick} tabIndex={0} />}
         containerRef={inputContainerRef}
       >
         {isCalendarOpen && (

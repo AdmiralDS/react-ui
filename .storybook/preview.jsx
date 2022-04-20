@@ -39,7 +39,7 @@ function ThemeWrapper(props) {
 
 const StoryContainer = styled.div`
   padding: 3em;
-  background-color: ${(props) => props.theme.color.background.primary};
+  background-color: ${(props) => props.theme.color['Neutral/Neutral 00']};
 `;
 
 export const decorators = [

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { ReactComponent as ChevronDownOutline } from '@admiral-ds/icons/build/system/ChevronDownOutline.svg';
-import styled, { FlattenInterpolation, DefaultTheme, ThemeProps } from 'styled-components';
+import styled, { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import { refSetter } from '#src/components/common/utils/refSetter';
 import { typography } from '#src/components/Typography';
 import { DropDownItem } from '#src/components/DropDownItem';
@@ -21,7 +21,7 @@ const Button = styled.button<{ $menuOpened?: boolean }>`
   background-color: transparent;
   ${typography['Body/Body 2 Long']}
   & *[fill^='#'] {
-    fill: ${({ theme }) => theme.color.text.secondary};
+    fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
   }
   & > span {
     min-width: 20px;
@@ -30,38 +30,38 @@ const Button = styled.button<{ $menuOpened?: boolean }>`
   &:hover {
     cursor: pointer;
     & *[fill^='#'] {
-      fill: ${({ theme }) => theme.color.basic.hover};
+      fill: ${({ theme }) => theme.color['Primary/Primary 70']};
     }
   }
 
   &:active {
     & *[fill^='#'] {
-      fill: ${({ theme }) => theme.color.basic.press};
+      fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
     }
   }
 
   &:focus {
     outline: none;
-    border-color: ${({ theme }) => theme.color.basic.hover};
+    border-color: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
     & *[fill^='#'] {
-      fill: ${({ theme }) => theme.color.basic.hover};
+      fill: ${({ theme }) => theme.color['Primary/Primary 70']};
     }
   }
 
   ${({ $menuOpened, theme }) =>
     $menuOpened &&
     `
-      border-color: ${theme.color.basic.hover};
+    border-color: ${theme.color['Primary/Primary 60 Main']};
       & *[fill^='#'] {
-        fill: ${theme.color.basic.hover};
+        fill: ${theme.color['Primary/Primary 70']};
       }
     `}
 
   &:disabled {
     cursor: not-allowed;
-    color: ${({ theme }) => theme.color.basic.disable};
+    color: ${({ theme }) => theme.color['Neutral/Neutral 30']};
     & *[fill^='#'] {
-      fill: ${({ theme }) => theme.color.basic.disable};
+      fill: ${({ theme }) => theme.color['Neutral/Neutral 30']};
     }
   }
 `;
@@ -119,7 +119,7 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
   ) => {
     const [menuOpened, setMenuOpened] = React.useState<boolean>(false);
     const btnRef = React.useRef<HTMLButtonElement>(null);
-    const menuRef = React.useRef<HTMLUListElement>(null);
+    const menuRef = React.useRef<HTMLDivElement>(null);
 
     const reverseMenu = () => {
       setMenuOpened((prevOpened) => {
@@ -180,6 +180,7 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
         </Button>
         {menuOpened && (
           <StyledDropDown
+            ref={menuRef}
             targetRef={btnRef}
             onClickOutside={clickOutside}
             dropMaxHeight={dropMaxHeight}

@@ -1,15 +1,11 @@
-import { ButtonHTMLAttributes, ReactNode } from 'react';
 import * as React from 'react';
-import styled, { css, keyframes } from 'styled-components';
-import { typography } from '#src/components/Typography';
+import { ButtonHTMLAttributes, ReactNode } from 'react';
+import styled from 'styled-components';
 import { Spinner } from '#src/components/Spinner';
-
-type Dimension = 'm' | 's';
-type Appearance = 'primary' | 'secondary';
-
-const IconContainer = styled.div``;
-
-const ButtonContainer = styled.div``;
+import { Appearance, Dimension, StyledButtonProps } from './types';
+import { appearanceMixin } from './appearanceMixin';
+import { ButtonContainer, IconContainer, skeletonMixin } from '#src/components/TextButton/commonMixin';
+import { dimensionMixin } from '#src/components/TextButton/dimensionMixin';
 
 const StyledSpinner = styled(Spinner)<{ dimension?: Dimension }>`
   position: absolute;
@@ -20,29 +16,10 @@ const StyledSpinner = styled(Spinner)<{ dimension?: Dimension }>`
   height: ${(p) => (p.dimension === 'm' ? '20px' : '16px')};
 `;
 
-const loadingKeyframes = keyframes`
-  to {
-    background-position: 315px 0, 0 0, 0 190px, 50px 195px;
-  }
-`;
-
-export const skeletonMixin = css`
-  cursor: progress;
-  background-image: linear-gradient(0.25turn, transparent, #fff, transparent), linear-gradient(#eee, #eee),
-    radial-gradient(38px circle at 19px 19px, #eee 50%, transparent 51%), linear-gradient(#eee, #eee);
-  background-repeat: no-repeat;
-  background-size: 315px 250px, 315px 180px, 100px 100px, 225px 30px;
-  background-position: -315px 0, 0 0, 0 190px, 50px 195px;
-  animation: ${loadingKeyframes} 1.5s infinite;
-`;
-
-const StyledButton = styled.button<{
-  dimension?: Dimension;
-  appearance?: Appearance;
-  displayRight?: boolean;
-  $loading?: boolean;
-  skeleton?: boolean;
-}>`
+const StyledButton = styled.button.attrs<StyledButtonProps>((props) => ({
+  'data-dimension': props.dimension,
+  'data-appearance': props.appearance,
+}))<StyledButtonProps>`
   position: relative;
   box-sizing: border-box;
   display: inline-flex;
@@ -53,67 +30,24 @@ const StyledButton = styled.button<{
   border: none;
   background: transparent;
 
-  > ${IconContainer} {
-    ${(p) => p.skeleton && skeletonMixin};
-    border-radius: ${(p) => (p.skeleton ? '50%' : '')};
-    svg {
-      visibility: ${(p) => (p.skeleton || p.$loading ? 'hidden' : 'visible')};
-      path {
-        fill: ${(p) => (p.appearance === 'secondary' ? p.theme.color.text.primary : p.theme.color.basic.primary)};
-      }
-    }
-  }
-  > ${ButtonContainer} {
+  ${ButtonContainer} {
     ${(p) => p.skeleton && skeletonMixin};
     border-radius: ${(p) => (p.skeleton ? '4px' : '')};
     span {
       visibility: ${(p) => (p.skeleton || p.$loading ? 'hidden' : 'visible')};
     }
   }
-  ${(p) => (p.dimension === 'm' ? typography['Button/Button 1'] : typography['Button/Button 2'])}
 
-  color: ${(p) => (p.appearance === 'secondary' ? p.theme.color.text.primary : p.theme.color.basic.primary)};
+  ${appearanceMixin};
 
-  &:focus,
-  &:hover {
-    cursor: pointer;
-    color: ${(p) => p.theme.color.basic.hover};
-    > ${IconContainer} {
-      svg {
-        path {
-          fill: ${(p) => p.theme.color.basic.hover};
-        }
-      }
-    }
-  }
-
-  &:active {
-    color: ${(p) => p.theme.color.basic.press};
-    > ${IconContainer} {
-      svg {
-        path {
-          fill: ${(p) => p.theme.color.basic.press};
-        }
-      }
-    }
-  }
-
-  &:disabled {
-    cursor: not-allowed;
-    color: ${(p) => p.theme.color.text.tertiary};
-  }
-  > ${IconContainer} {
-    width: ${(p) => (p.dimension === 'm' ? (p.skeleton ? '24px' : '20px') : p.skeleton ? '20px' : '16px')};
-    height: ${(p) => (p.dimension === 'm' ? (p.skeleton ? '24px' : '20px') : p.skeleton ? '20px' : '16px')};
-    margin: ${(p) => (p.displayRight ? '0 0 0 10px' : '0 10px 0 0')};
-  }
+  ${dimensionMixin};
 `;
 
 export interface TextButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  /** Размер кнопки */
-  dimension?: Dimension;
   /** Внешний вид кнопки */
   appearance?: Appearance;
+  /** Размер кнопки */
+  dimension?: Dimension;
   /** Иконка кнопки */
   icon?: ReactNode;
   /** Текст кнопки */
@@ -129,8 +63,8 @@ export interface TextButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>
 export const TextButton = React.forwardRef<HTMLButtonElement, TextButtonProps>(
   (
     {
-      dimension = 'm',
       appearance = 'primary',
+      dimension = 'm',
       icon,
       type = 'button',
       text,
@@ -145,8 +79,8 @@ export const TextButton = React.forwardRef<HTMLButtonElement, TextButtonProps>(
       <StyledButton
         {...props}
         ref={ref}
-        dimension={dimension}
         appearance={appearance}
+        dimension={dimension}
         displayRight={displayRight}
         type={type}
         $loading={loading}

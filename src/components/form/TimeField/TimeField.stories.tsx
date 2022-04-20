@@ -1,28 +1,28 @@
 import { INPUT_DIMENSIONS_VALUES } from '#src/components/input';
-import { ChangeEvent, useEffect, useState } from 'react';
 import * as React from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { TimeField } from '#src/components/form';
 import { withDesign } from 'storybook-addon-designs';
 import styled from 'styled-components';
 
 export default {
-  title: 'Form Field Components/TimeField',
+  title: 'Admiral-2.1/Form Field/TimeField',
   component: TimeField,
   decorators: [withDesign],
   parameters: {
     design: [
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A60618',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A60618',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A60644',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A60644',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A60669',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A60669',
       },
     ],
   },
@@ -97,16 +97,18 @@ const Template: ComponentStory<typeof TimeField> = (props) => {
   };
 
   return (
-    <DisplayContainer>
-      <TimeField
-        {...cleanProps}
-        style={{ maxWidth: '320px' }}
-        startTime="09:00"
-        endTime="18:00"
-        value={localValue}
-        onChange={handleChange}
-      />
-    </DisplayContainer>
+    <>
+      <DisplayContainer>
+        <TimeField
+          {...cleanProps}
+          style={{ maxWidth: '320px' }}
+          startTime="09:00"
+          endTime="18:00"
+          value={localValue}
+          onChange={handleChange}
+        />
+      </DisplayContainer>
+    </>
   );
 };
 

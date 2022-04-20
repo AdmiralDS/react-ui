@@ -1,7 +1,7 @@
 import React from 'react';
-import styled from 'styled-components';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
+import styled from 'styled-components';
 
 import { SliderInput } from '.';
 
@@ -24,17 +24,30 @@ const Description = () => (
 );
 
 export default {
-  title: 'Input/SliderInput',
+  title: 'Admiral-2.1/Input/SliderInput',
   decorators: [withDesign],
   component: SliderInput,
   parameters: {
     componentSubtitle: <Description />,
-    design: {
-      type: 'figma',
-      url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A61110',
-    },
+    design: [
+      {
+        type: 'figma',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A61110',
+      },
+      {
+        type: 'figma',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A61184',
+      },
+      {
+        type: 'figma',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A61214',
+      },
+    ],
   },
   argTypes: {
+    thousand: {
+      type: 'string',
+    },
     displayStatusIcon: {
       control: { type: 'boolean' },
     },
@@ -57,31 +70,39 @@ export default {
 } as ComponentMeta<typeof SliderInput>;
 
 const Template0: ComponentStory<typeof SliderInput> = (args) => {
-  return <SliderInput {...args} onChange={(full, short) => console.log({ full, short })} />;
+  return (
+    <>
+      <SliderInput {...args} onChange={(full, short) => console.log({ full, short })} />
+    </>
+  );
 };
 
 const Template1: ComponentStory<typeof SliderInput> = (args) => {
   return (
-    <SliderInput
-      {...args}
-      defaultValue="15"
-      onChange={(full, short) => console.log({ full, short })}
-      tickMarks={[5, 10, 15]}
-    />
+    <>
+      <SliderInput
+        {...args}
+        defaultValue="15"
+        onChange={(full, short) => console.log({ full, short })}
+        tickMarks={[5, 10, 15]}
+      />
+    </>
   );
 };
 
 const Template2: ComponentStory<typeof SliderInput> = (args) => {
   return (
-    <SliderInput
-      {...args}
-      defaultValue="5"
-      onChange={(full, short) => console.log({ full, short })}
-      suffix="$"
-      thousand=","
-      precision={3}
-      placeholder="0 $"
-    />
+    <>
+      <SliderInput
+        {...args}
+        defaultValue="5"
+        onChange={(full, short) => console.log({ full, short })}
+        suffix="$"
+        thousand=","
+        precision={3}
+        placeholder="0 $"
+      />
+    </>
   );
 };
 

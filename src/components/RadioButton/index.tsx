@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { Hint, Input, InputContainer, Label, RadioButtonComponent, Span } from './style';
+import { Hint, Input, InputContainer, RadioButtonComponent, Span } from '#src/components/RadioButton/style';
 
 type Dimension = 'm' | 's';
 
@@ -18,19 +18,17 @@ export interface RadioButtonProps extends React.InputHTMLAttributes<HTMLInputEle
 export const RadioButton = React.forwardRef<HTMLInputElement, RadioButtonProps>(
   ({ children, disabled, dimension = 'm', extraText, className, ...props }, ref) => {
     return (
-      <RadioButtonComponent disabled={disabled} className={className}>
+      <RadioButtonComponent disabled={disabled} className={className} dimension={dimension}>
         <InputContainer dimension={dimension}>
-          <Input ref={ref} type="radio" disabled={disabled} {...props} />
+          <Input ref={ref} type="radio" disabled={disabled} dimension={dimension} {...props} />
           <Span disabled={disabled} dimension={dimension} />
         </InputContainer>
-        <Label disabled={disabled} dimension={dimension}>
-          {children}
-          {extraText && (
-            <Hint disabled={disabled} dimension={dimension}>
-              {extraText}
-            </Hint>
-          )}
-        </Label>
+        {children}
+        {extraText && (
+          <Hint disabled={disabled} dimension={dimension}>
+            {extraText}
+          </Hint>
+        )}
       </RadioButtonComponent>
     );
   },

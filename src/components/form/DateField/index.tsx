@@ -1,5 +1,5 @@
-import { Field } from '#src/components/Field';
 import type { FieldOwnProps } from '#src/components/Field';
+import { Field } from '#src/components/Field';
 import type { DateInputProps } from '#src/components/input/DateInput';
 import { DateInput } from '#src/components/input/DateInput';
 import * as React from 'react';

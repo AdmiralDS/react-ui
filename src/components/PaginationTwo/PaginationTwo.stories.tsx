@@ -31,7 +31,7 @@ const Description = () => (
 );
 
 export default {
-  title: 'Example/PaginationTwo',
+  title: 'Admiral-2.1/PaginationTwo',
   decorators: [withDesign],
   component: PaginationTwo,
   parameters: {
@@ -39,11 +39,11 @@ export default {
     design: [
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A41441',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A41441',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A41584',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A41584',
       },
     ],
   },
@@ -52,6 +52,12 @@ export default {
       control: { type: 'number' },
     },
     page: {
+      control: { type: 'number' },
+    },
+    pageSize: {
+      control: { type: 'number' },
+    },
+    totalItems: {
       control: { type: 'number' },
     },
     mobile: {
@@ -72,7 +78,11 @@ export default {
 const Template0: ComponentStory<typeof PaginationTwo> = ({ page, onChange, count, ...args }) => {
   const [page1, setPage1] = React.useState(1);
   const handleChange = (event: any, page: number) => setPage1(page);
-  return <PaginationTwo count={count || 7} page={page || page1} onChange={onChange || handleChange} {...args} />;
+  return (
+    <>
+      <PaginationTwo count={count || 7} page={page || page1} onChange={onChange || handleChange} {...args} />
+    </>
+  );
 };
 
 const Template1: ComponentStory<typeof PaginationTwo> = (args) => {
@@ -80,6 +90,8 @@ const Template1: ComponentStory<typeof PaginationTwo> = (args) => {
   const [page2, setPage2] = React.useState(1);
   const [page3, setPage3] = React.useState(1);
   const [page4, setPage4] = React.useState(1);
+  const [page5, setPage5] = React.useState(1);
+  const [page6, setPage6] = React.useState(1);
   const style = { marginBottom: '60px' };
 
   return (
@@ -96,7 +108,32 @@ const Template1: ComponentStory<typeof PaginationTwo> = (args) => {
         Возможны случаи, когда некоторые страницы недоступны. Также блокируются боковые стрелки по достижении
         начала/конца списка
       </Text>
-      <PaginationTwo {...args} count={7} page={page4} disabledPages={[3]} onChange={(_, page) => setPage4(page)} />
+      <PaginationTwo
+        {...args}
+        count={7}
+        page={page4}
+        disabledPages={[3]}
+        onChange={(_, page) => setPage4(page)}
+        style={style}
+      />
+      <Text>Опционально можно показывать количество записей:</Text>
+      <PaginationTwo
+        {...args}
+        count={7}
+        page={page5}
+        pageSize={20}
+        totalItems={130}
+        onChange={(_, page) => setPage5(page)}
+        style={style}
+      />
+      <PaginationTwo
+        {...args}
+        count={22}
+        page={page6}
+        pageSize={10}
+        totalItems={215}
+        onChange={(_, page) => setPage6(page)}
+      />
     </>
   );
 };

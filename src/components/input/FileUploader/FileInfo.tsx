@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { HTMLAttributes, useEffect, useCallback } from 'react';
+import { HTMLAttributes, useCallback, useEffect } from 'react';
 import styled, { css } from 'styled-components';
 import { ErrorBlock } from '#src/components/input/FileUploader/ErrorBlock';
 import { Spinner } from '#src/components/Spinner';
 import { Tooltip } from '#src/components/Tooltip';
-import { formatBytes, Dimension, Status, dataTransferConstructorSupported } from './utils';
+import { dataTransferConstructorSupported, Dimension, formatBytes, Status } from './utils';
 import { ReactComponent as FilePDFSolid } from '@admiral-ds/icons/build/documents/FilePDFSolid.svg';
 import { ReactComponent as FilePPTSolid } from '@admiral-ds/icons/build/documents/FilePPTSolid.svg';
 import { ReactComponent as FileWordSolid } from '@admiral-ds/icons/build/documents/FileWordSolid.svg';
@@ -92,12 +92,11 @@ const Container = styled.div<{ dimension?: Dimension }>`
 
 const statusMixin = css<{ status?: Status }>`
   border-color: ${(p) => {
-    if (p.status === 'Error') return p.theme.color.status.danger;
-    return p.theme.color.basic.disable;
+    if (p.status === 'Error') return p.theme.color['Error/Error 60 Main'];
+    return p.theme.color['Neutral/Neutral 40'];
   }};
-  color: ${(p) => (p.status === 'Queue' ? p.theme.color.text.tertiary : p.theme.color.text.primary)};
-  background: ${(p) =>
-    p.status === 'Loading' ? p.theme.color.background.secondary : p.theme.color.background.primary};
+  color: ${(p) => (p.status === 'Queue' ? p.theme.color['Neutral/Neutral 30'] : p.theme.color['Neutral/Neutral 90'])};
+  background: ${(p) => p.theme.color['Special/Static White']};
 `;
 
 const PreviewWrapper = styled.div<{ dimension?: Dimension; fileDimension?: Dimension; status?: Status }>`
@@ -108,7 +107,7 @@ const PreviewWrapper = styled.div<{ dimension?: Dimension; fileDimension?: Dimen
   border-radius: 4px;
   border-width: 1px;
   border-style: solid;
-  padding: ${(p) => (p.fileDimension === 'xl' ? '7px 8px' : '7px 15px')};
+  padding: ${(p) => (p.fileDimension === 'xl' ? '7px 3px 7px 8px' : '7px 15px')};
   ${statusMixin};
 `;
 
@@ -138,9 +137,8 @@ const IconWrapper = styled.div<{ status?: Status }>`
     width: 40px;
     height: 40px;
     fill: ${(p) => {
-      if (p.status === 'Loading') return p.theme.color.text.secondary;
-      if (p.status === 'Queue') return p.theme.color.text.tertiary;
-      return p.theme.color.text.primary;
+      if (p.status === 'Queue') return p.theme.color['Neutral/Neutral 30'];
+      return p.theme.color['Neutral/Neutral 50'];
     }};
   }
 `;
@@ -164,7 +162,7 @@ const Title = styled.div`
 `;
 
 const Size = styled.span<{ fileDimension?: Dimension; status?: Status }>`
-  color: ${(p) => (p.status === 'Queue' ? p.theme.color.text.tertiary : p.theme.color.text.secondary)};
+  color: ${(p) => (p.status === 'Queue' ? p.theme.color['Neutral/Neutral 30'] : p.theme.color['Neutral/Neutral 50'])};
   margin-left: ${(p) => (p.fileDimension === 'xl' ? '0' : '4px')};
   white-space: nowrap;
 `;
@@ -182,13 +180,18 @@ const StyledSpinner = styled(Spinner)`
 const Close = styled.div`
   cursor: pointer;
   display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 32px;
+  height: 32px;
+  &:hover {
+    border-radius: 50%;
+    background-color: ${(p) => p.theme.color['Opacity/Hover']};
+  }
   & svg {
     width: 24px;
     height: 24px;
-    fill: ${(p) => p.theme.color.basic.tertiary};
-  }
-  & svg:hover {
-    fill: ${(p) => p.theme.color.basic.hover};
+    fill: ${(p) => p.theme.color['Neutral/Neutral 50']};
   }
 `;
 

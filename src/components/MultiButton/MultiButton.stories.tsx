@@ -1,58 +1,58 @@
 import { MultiButton, MultiButtonItem } from '#src/components/MultiButton';
 import React from 'react';
-import styled from 'styled-components';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
+import styled from 'styled-components';
 
 const Separator = styled.div`
   height: 20px;
 `;
 
 export default {
-  title: 'Example/MultiButton',
+  title: 'Admiral-2.1/MultiButton',
   decorators: [withDesign],
   component: MultiButton,
   parameters: {
     design: [
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=108393%3A69914',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A17173',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A19900',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A19496',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A19496',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A19544',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A19544',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A19592',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A19592',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A19640',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A19640',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A19520',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A19520',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A19568',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A19568',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A19616',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A19616',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A19664',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A19664',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A19900',
       },
     ],
   },
@@ -106,33 +106,35 @@ const Template1: ComponentStory<typeof MultiButton> = (args) => {
   const [selected, setSelected] = React.useState<string | null>(null);
   const [selected2, setSelected2] = React.useState<string | null>(null);
   return (
-    <div style={{ display: 'flex', justifyContent: 'space-around' }}>
-      <MultiButton
-        {...args}
-        appearance="primary"
-        selected={selected}
-        onChange={(id) => {
-          console.log('select item with id: ', id);
-          setSelected(id);
-        }}
-        options={items}
-        onOpen={() => console.log('open menu')}
-        onClose={() => console.log('close menu')}
-      />
-      <Separator />
-      <MultiButton
-        {...args}
-        appearance="secondary"
-        selected={selected2}
-        onChange={(id) => {
-          console.log('select item with id: ', id);
-          setSelected2(id);
-        }}
-        options={items}
-        onOpen={() => console.log('open menu')}
-        onClose={() => console.log('close menu')}
-      />
-    </div>
+    <>
+      <div style={{ display: 'flex', justifyContent: 'space-around' }}>
+        <MultiButton
+          {...args}
+          appearance="primary"
+          selected={selected}
+          onChange={(id) => {
+            console.log('select item with id: ', id);
+            setSelected(id);
+          }}
+          options={items}
+          onOpen={() => console.log('open menu')}
+          onClose={() => console.log('close menu')}
+        />
+        <Separator />
+        <MultiButton
+          {...args}
+          appearance="secondary"
+          selected={selected2}
+          onChange={(id) => {
+            console.log('select item with id: ', id);
+            setSelected2(id);
+          }}
+          options={items}
+          onOpen={() => console.log('open menu')}
+          onClose={() => console.log('close menu')}
+        />
+      </div>
+    </>
   );
 };
 
@@ -173,33 +175,35 @@ const Template2: ComponentStory<typeof MultiButton> = (args) => {
   const [selected, setSelected] = React.useState<string | null>(null);
   const [selected2, setSelected2] = React.useState<string | null>(null);
   return (
-    <div style={{ display: 'flex', justifyContent: 'space-around' }}>
-      <MultiButton
-        {...args}
-        appearance="primary"
-        selected={selected}
-        onChange={(id) => {
-          console.log('select item with id: ', id);
-          setSelected(id);
-        }}
-        options={items}
-        onOpen={() => console.log('open menu')}
-        onClose={() => console.log('close menu')}
-      />
-      <Separator />
-      <MultiButton
-        {...args}
-        selected={selected2}
-        disabled
-        onChange={(id) => {
-          console.log('select item with id: ', id);
-          setSelected2(id);
-        }}
-        options={items}
-        onOpen={() => console.log('open menu')}
-        onClose={() => console.log('close menu')}
-      />
-    </div>
+    <>
+      <div style={{ display: 'flex', justifyContent: 'space-around' }}>
+        <MultiButton
+          {...args}
+          appearance="primary"
+          selected={selected}
+          onChange={(id) => {
+            console.log('select item with id: ', id);
+            setSelected(id);
+          }}
+          options={items}
+          onOpen={() => console.log('open menu')}
+          onClose={() => console.log('close menu')}
+        />
+        <Separator />
+        <MultiButton
+          {...args}
+          selected={selected2}
+          disabled
+          onChange={(id) => {
+            console.log('select item with id: ', id);
+            setSelected2(id);
+          }}
+          options={items}
+          onOpen={() => console.log('open menu')}
+          onClose={() => console.log('close menu')}
+        />
+      </div>
+    </>
   );
 };
 

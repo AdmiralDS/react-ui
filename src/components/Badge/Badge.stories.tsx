@@ -1,11 +1,11 @@
-import { typography } from '#src/components/Typography';
 import * as React from 'react';
 import styled from 'styled-components';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
+import { Button } from '#src/components/Button';
+import { typography } from '#src/components/Typography';
 
-import { Badge, BadgeProps } from '../Badge';
-import { Button } from '../Button';
+import { Badge, BadgeProps } from '.';
 
 const Separator = styled.div`
   height: 20px;
@@ -17,9 +17,7 @@ const Desc = styled.div`
   line-height: 24px;
 `;
 
-const Layout = styled.div<{
-  inverse?: boolean;
-}>`
+const Layout = styled.div`
   display: flex;
   flex-direction: column;
   padding: 50px;
@@ -32,7 +30,7 @@ const String = styled.div<{ appearance?: BadgeProps['appearance'] }>`
   display: flex;
   align-items: center;
   ${({ appearance, theme }) =>
-    appearance && appearance.indexOf('white') > -1 && `background: ${theme.color.background.secondary};`}
+    appearance && appearance.indexOf('white') > -1 && `background: ${theme.color['Neutral/Neutral 05']};`}
   & > * {
     margin-right: 16px;
   }
@@ -54,7 +52,7 @@ const Description = () => (
 );
 
 export default {
-  title: 'Example/Badge',
+  title: 'Admiral-2.1/Badge',
   decorators: [withDesign],
   component: Badge,
   parameters: {
@@ -62,11 +60,11 @@ export default {
     design: [
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=37%3A18581',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=37%3A18581',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=37%3A18684',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=37%3A18684',
       },
     ],
   },
@@ -91,6 +89,7 @@ export default {
           'white',
           'whiteInactive',
           'whiteDisable',
+          'whiteBlue',
         ],
       },
     },
@@ -99,122 +98,135 @@ export default {
 
 const Template1: ComponentStory<typeof Badge> = (args) => {
   return (
-    <Layout>
-      <String appearance={args.appearance}>
-        <Badge {...args}>4</Badge>
-        Appearance: {args.appearance || 'light'}
-        <br />
-        Dimension: {args.dimension || 'm'}
-      </String>
-    </Layout>
+    <>
+      <Layout>
+        <String appearance={args.appearance}>
+          <Badge {...args}>4</Badge>
+          Appearance: {args.appearance || 'light'}
+          <br />
+          Dimension: {args.dimension || 'm'}
+        </String>
+      </Layout>
+    </>
   );
 };
 
 const Template2: ComponentStory<typeof Badge> = (args) => {
   return (
-    <Layout>
-      <String>
-        <Badge>5</Badge>
-        <Badge dimension="s">5</Badge>
-        Light
-      </String>
-      <String>
-        <Badge appearance="info">5</Badge>
-        <Badge appearance="info" dimension="s">
-          5
-        </Badge>
-        Info
-      </String>
-      <String>
-        <Badge appearance="warning">5</Badge>
-        <Badge appearance="warning" dimension="s">
-          5
-        </Badge>
-        Warning
-      </String>
-      <String>
-        <Badge appearance="success">5</Badge>
-        <Badge appearance="success" dimension="s">
-          5
-        </Badge>
-        Success
-      </String>
-      <String>
-        <Badge appearance="error">5</Badge>
-        <Badge appearance="error" dimension="s">
-          5
-        </Badge>
-        Error
-      </String>
-      <String>
-        <Badge appearance="grey">5</Badge>
-        <Badge appearance="grey" dimension="s">
-          5
-        </Badge>
-        Grey
-      </String>
-      <String>
-        <Badge appearance="dark">5</Badge>
-        <Badge appearance="dark" dimension="s">
-          5
-        </Badge>
-        Dark
-      </String>
-      <String>
-        <Badge appearance="lightInactive">5</Badge>
-        <Badge appearance="lightInactive" dimension="s">
-          5
-        </Badge>
-        Light Inactive
-      </String>
-      <String>
-        <Badge appearance="lightDisable">5</Badge>
-        <Badge appearance="lightDisable" dimension="s">
-          5
-        </Badge>
-        Light Disable
-      </String>
-      <String appearance="white">
-        <Badge appearance="white">5</Badge>
-        <Badge appearance="white" dimension="s">
-          5
-        </Badge>
-        White
-      </String>
-      <String appearance="whiteInactive">
-        <Badge appearance="whiteInactive">5</Badge>
-        <Badge appearance="whiteInactive" dimension="s">
-          5
-        </Badge>
-        White Inactive
-      </String>
-      <String appearance="whiteDisable">
-        <Badge appearance="whiteDisable">5</Badge>
-        <Badge appearance="whiteDisable" dimension="s">
-          5
-        </Badge>
-        White Disable
-      </String>
-    </Layout>
+    <>
+      <Layout>
+        <String>
+          <Badge>5</Badge>
+          <Badge dimension="s">5</Badge>
+          Light
+        </String>
+        <String>
+          <Badge appearance="info">5</Badge>
+          <Badge appearance="info" dimension="s">
+            5
+          </Badge>
+          Info
+        </String>
+        <String>
+          <Badge appearance="warning">5</Badge>
+          <Badge appearance="warning" dimension="s">
+            5
+          </Badge>
+          Warning
+        </String>
+        <String>
+          <Badge appearance="success">5</Badge>
+          <Badge appearance="success" dimension="s">
+            5
+          </Badge>
+          Success
+        </String>
+        <String>
+          <Badge appearance="error">5</Badge>
+          <Badge appearance="error" dimension="s">
+            5
+          </Badge>
+          Error
+        </String>
+        <String>
+          <Badge appearance="grey">5</Badge>
+          <Badge appearance="grey" dimension="s">
+            5
+          </Badge>
+          Grey
+        </String>
+        <String>
+          <Badge appearance="dark">5</Badge>
+          <Badge appearance="dark" dimension="s">
+            5
+          </Badge>
+          Dark
+        </String>
+        <String>
+          <Badge appearance="lightInactive">5</Badge>
+          <Badge appearance="lightInactive" dimension="s">
+            5
+          </Badge>
+          Light Inactive
+        </String>
+        <String>
+          <Badge appearance="lightDisable">5</Badge>
+          <Badge appearance="lightDisable" dimension="s">
+            5
+          </Badge>
+          Light Disable
+        </String>
+        <String appearance="white">
+          <Badge appearance="white">5</Badge>
+          <Badge appearance="white" dimension="s">
+            5
+          </Badge>
+          White
+        </String>
+        <String appearance="whiteInactive">
+          <Badge appearance="whiteInactive">5</Badge>
+          <Badge appearance="whiteInactive" dimension="s">
+            5
+          </Badge>
+          White Inactive
+        </String>
+        <String appearance="whiteDisable">
+          <Badge appearance="whiteDisable">5</Badge>
+          <Badge appearance="whiteDisable" dimension="s">
+            5
+          </Badge>
+          White Disable
+        </String>
+        <String appearance="whiteBlue">
+          <Badge appearance="whiteBlue">5</Badge>
+          <Badge appearance="whiteBlue" dimension="s">
+            5
+          </Badge>
+          White Blue
+        </String>
+      </Layout>
+    </>
   );
 };
 
 const Template3: ComponentStory<typeof Badge> = (args) => {
   return (
-    <String>
-      <Button>
-        Пример
-        <Separator />
-        <Badge appearance="whiteInactive">4</Badge>
-      </Button>
-      <Button>
-        Example
-        <Separator />
-        <Badge appearance="whiteInactive" aria-label="Amount 4">
-          4
-        </Badge>
-      </Button>
-    </String>
+    <>
+      <String>
+        <Button>
+          Пример
+          <Separator />
+          <Badge appearance="whiteInactive">4</Badge>
+        </Button>
+        <Button>
+          Example
+          <Separator />
+          <Badge appearance="whiteInactive" aria-label="Amount 4">
+            4
+          </Badge>
+        </Button>
+      </String>
+    </>
   );
 };
 

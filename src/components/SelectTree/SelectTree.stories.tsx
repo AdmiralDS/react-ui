@@ -22,15 +22,25 @@ const Description = () => (
 );
 
 export default {
-  title: 'Example/SelectTree',
+  title: 'Admiral-2.1/SelectTree',
   decorators: [withDesign],
   component: SelectTree,
   parameters: {
     componentSubtitle: <Description />,
-    design: {
-      type: 'figma',
-      url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A12752',
-    },
+    design: [
+      {
+        type: 'figma',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=12178%3A70930',
+      },
+      {
+        type: 'figma',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=12236%3A71124',
+      },
+      {
+        type: 'figma',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A12752',
+      },
+    ],
   },
   argTypes: {
     dimension: {
@@ -238,13 +248,15 @@ const SelectTreeDemoM: ComponentStory<typeof SelectTree> = (props) => {
   const [dataList, setDataList] = React.useState<SelectTreeNodeProps[]>(selectTreeListM);
 
   return (
-    <SelectTree
-      {...cleanProps}
-      style={{ maxWidth: '768px' }}
-      list={dataList}
-      dimension="m"
-      onChange={(dataList) => setDataList(dataList)}
-    />
+    <>
+      <SelectTree
+        {...cleanProps}
+        style={{ maxWidth: '768px' }}
+        list={dataList}
+        dimension="m"
+        onChange={(dataList) => setDataList(dataList)}
+      />
+    </>
   );
 };
 
@@ -257,13 +269,15 @@ const SelectTreeDemoS: ComponentStory<typeof SelectTree> = (props) => {
   const [dataList, setDataList] = React.useState<SelectTreeNodeProps[]>(selectTreeListS);
 
   return (
-    <SelectTree
-      {...cleanProps}
-      style={{ maxWidth: '768px' }}
-      list={dataList}
-      dimension="s"
-      onChange={(dataList) => setDataList(dataList)}
-    />
+    <>
+      <SelectTree
+        {...cleanProps}
+        style={{ maxWidth: '768px' }}
+        list={dataList}
+        dimension="s"
+        onChange={(dataList) => setDataList(dataList)}
+      />
+    </>
   );
 };
 
@@ -276,14 +290,16 @@ const SelectTreeDemoNoCheckbox: ComponentStory<typeof SelectTree> = (props) => {
   const [dataList, setDataList] = React.useState<SelectTreeNodeProps[]>(treeViewList);
 
   return (
-    <SelectTree
-      {...cleanProps}
-      style={{ maxWidth: '768px' }}
-      list={dataList}
-      dimension="m"
-      onChange={(dataList) => setDataList(dataList)}
-      expandAll
-    />
+    <>
+      <SelectTree
+        {...cleanProps}
+        style={{ maxWidth: '768px' }}
+        list={dataList}
+        dimension="m"
+        onChange={(dataList) => setDataList(dataList)}
+        expandAll
+      />
+    </>
   );
 };
 

@@ -37,15 +37,19 @@ exports[`IconButton should render component 1`] = `
 
 .c0:hover {
   cursor: pointer;
-  background: #F1F2F4;
+  background: #0000000D;
 }
 
 .c0:hover *[fill^='#'] {
-  fill: #0A54C2;
+  fill: #74777F;
+}
+
+.c0:active {
+  background: #0000001F;
 }
 
 .c0:active *[fill^='#'] {
-  fill: #0949AA;
+  fill: #74777F;
 }
 
 .c0:disabled {
@@ -54,7 +58,7 @@ exports[`IconButton should render component 1`] = `
 }
 
 .c0:disabled *[fill^='#'] {
-  fill: #A7B0BE;
+  fill: #B1B5BB;
 }
 
 .c1 {
@@ -94,7 +98,7 @@ exports[`IconButton should render component 1`] = `
 }
 
 .c1 *[fill^='#'] {
-  fill: #626F84;
+  fill: #74777F;
 }
 
 .c1 > svg {

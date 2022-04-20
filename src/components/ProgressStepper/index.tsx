@@ -1,5 +1,5 @@
-import React, { HTMLAttributes } from 'react';
 import type { FC } from 'react';
+import React, { HTMLAttributes } from 'react';
 import styled from 'styled-components';
 import { typography } from '#src/components/Typography';
 
@@ -22,12 +22,12 @@ const ProgressWrapper = styled.div`
   overflow: hidden;
   height: 4px;
   border-radius: 2px;
-  background-color: ${({ theme }) => theme.color.background.tertiary};
+  background-color: ${({ theme }) => theme.color['Neutral/Neutral 20']};
 `;
 
 const Progress = styled.div<{ percent: number }>`
   width: ${({ percent }) => percent}%;
-  background-color: ${({ theme }) => theme.color.basic.primary};
+  background-color: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
 `;
 
 const Header = styled.div<{ mobile?: boolean }>`
@@ -39,22 +39,22 @@ const Header = styled.div<{ mobile?: boolean }>`
 
 const ActiveStep = styled.div`
   ${typography['Body/Body 2 Long']}
-  color: ${({ theme }) => theme.color.text.primary};
+  color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
 `;
 
 const ProgressText = styled.div`
   white-space: nowrap;
   flex-shrink: 0;
+  color: ${({ theme }) => theme.color['Neutral/Neutral 50']};
   ${typography['Caption/Caption 1']}
-  color: ${({ theme }) => theme.color.text.secondary};
 `;
 
 const NextStep = styled.div`
   width: 100%;
   align-text: left;
   margin-top: 8px;
+  color: ${({ theme }) => theme.color['Neutral/Neutral 50']};
   ${typography['Caption/Caption 1']}
-  color: ${({ theme }) => theme.color.text.secondary};
 `;
 
 export interface ProgressStepperProps extends HTMLAttributes<HTMLDivElement> {

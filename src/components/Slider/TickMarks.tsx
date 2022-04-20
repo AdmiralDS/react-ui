@@ -20,14 +20,15 @@ export const Content = styled.div`
   }
   white-space: nowrap;
   ${typography['Body/Body 2 Short']}
+  color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
   &:hover {
-    color: ${({ theme }) => theme.color.basic.hover};
+    color: ${({ theme }) => theme.color['Primary/Primary 70']};
   }
   &:active {
-    color: ${({ theme }) => theme.color.basic.press};
+    color: ${({ theme }) => theme.color['Primary/Primary 70']};
   }
   [data-disabled='true'] && {
-    color: ${({ theme }) => theme.color.text.tertiary};
+    color: ${({ theme }) => theme.color['Neutral/Neutral 30']};
   }
 `;
 

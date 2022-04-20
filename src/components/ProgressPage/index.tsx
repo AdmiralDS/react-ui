@@ -15,7 +15,7 @@ export interface ProgressPageProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const Wrapper = styled.div<{ appearance?: AppearanceProgressPage }>`
-  background: ${({ theme }) => theme.color.background.tertiary};
+  background: ${({ theme }) => theme.color['Neutral/Neutral 20']};
   border-radius: 2px;
   min-width: 140px;
   min-height: 4px;
@@ -23,7 +23,7 @@ const Wrapper = styled.div<{ appearance?: AppearanceProgressPage }>`
 `;
 const Progress = styled.div<{ percent: number; appearance?: AppearanceProgressPage }>`
   background: ${({ theme, appearance }) =>
-    appearance === 'error' ? theme.color.status.danger : theme.color.basic.primary};
+    appearance === 'error' ? theme.color['Error/Error 60 Main'] : theme.color['Primary/Primary 60 Main']};
   width: ${({ percent }) => percent}%;
   border-radius: 2px;
   transition: all 0.3s linear;
@@ -33,14 +33,14 @@ const Label = styled.div<{ appearance?: AppearanceProgressPage }>`
   display: flex;
   padding-bottom: 8px;
   font-size: 12px;
-  display: flex;
   justify-content: space-between;
   width: 100%;
   line-height: 16px;
   font-style: normal;
   font-weight: normal;
   font-family: ${TYPOGRAPHY.fontFamily};
-  color: ${({ theme, appearance }) => (appearance === 'error' ? theme.color.status.danger : theme.color.text.primary)};
+  color: ${({ theme, appearance }) =>
+    appearance === 'error' ? theme.color['Error/Error 60 Main'] : theme.color['Neutral/Neutral 90']};
 `;
 
 const Container = styled.div``;

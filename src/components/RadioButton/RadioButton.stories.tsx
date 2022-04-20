@@ -7,8 +7,6 @@ import { RadioButton, RadioButtonProps } from '#src/components/RadioButton';
 import { Button } from '#src/components/Button';
 import { ReactComponent as InfoSolidSVG } from '@admiral-ds/icons/build/service/InfoSolid.svg';
 import { Hint } from '#src/components/Hint';
-import { HintDialog } from '#src/components/Hint/style';
-import { T } from '#src/components/T';
 
 const Separator = styled.div`
   height: 20px;
@@ -25,33 +23,22 @@ type Dimension = 'm' | 's';
 
 const InfoSolid = styled(InfoSolidSVG)<{ dimension: Dimension }>`
   margin-left: 5px;
-  margin-top: ${(props) => (props.dimension === 'm' ? '-2px' : '-1px')};
   width: ${(props) => (props.dimension === 'm' ? '24px' : '20px')};
 
   & *[fill^='#'] {
-    fill: ${(p) => p.theme.color.text.secondary};
+    fill: ${(p) => p.theme.color['Neutral/Neutral 50']};
   }
   [data-focus-within] & *[fill^='#'] {
-    fill: ${(props) => props.theme.color.basic.hover};
+    fill: ${(props) => props.theme.color['Primary/Primary 70']};
   }
   &:hover *[fill^='#'] {
-    fill: ${(props) => props.theme.color.basic.hover};
+    fill: ${(props) => props.theme.color['Primary/Primary 70']};
   }
 `;
 
 const RadioWithInformer = styled.div`
   display: flex;
   align-items: flex-start;
-`;
-
-const InverseColor = styled(T)`
-  color: ${(p) => p.theme.color.text.staticWhite};
-`;
-
-const InverseBackgroundHint = styled(Hint)`
-  & ${HintDialog} {
-    background-color: ${(p) => p.theme.color.background.inversion};
-  }
 `;
 
 const Description = () => (
@@ -61,18 +48,18 @@ const Description = () => (
 );
 
 export default {
-  title: 'Example/RadioButton',
+  title: 'Admiral-2.1/RadioButton',
   decorators: [withDesign],
   component: RadioButton,
   parameters: {
     design: [
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=37%3A21629',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=37%3A21470',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=37%3A21739',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=37%3A21629',
       },
     ],
     componentSubtitle: <Description />,
@@ -91,6 +78,9 @@ export default {
     },
     checked: {
       control: { type: 'boolean' },
+    },
+    extraText: {
+      control: { type: 'text' },
     },
   },
 } as ComponentMeta<typeof RadioButton>;
@@ -166,44 +156,6 @@ const Template4: ComponentStory<typeof RadioButton> = () => {
   );
 };
 
-const Template5: ComponentStory<typeof RadioButton> = () => {
-  return (
-    <>
-      <RadioWithInformer>
-        <RadioButton value={1} extraText="Add text">
-          Dimension - m
-        </RadioButton>
-        <InverseBackgroundHint
-          renderContent={() => (
-            <InverseColor as="span" font="Body/Body 2 Long">
-              At breakpoint boundaries, mini units divide the screen into a fixed master grid, and multiples of mini
-              units map to fluid grid column widths and row heights.
-            </InverseColor>
-          )}
-        >
-          <InfoSolid dimension="m" aria-hidden />
-        </InverseBackgroundHint>
-      </RadioWithInformer>
-      <Separator />
-      <RadioWithInformer>
-        <RadioButton value={1} dimension="s" extraText="Add text">
-          Dimension - s
-        </RadioButton>
-        <InverseBackgroundHint
-          renderContent={() => (
-            <InverseColor as="span" font="Body/Body 2 Long">
-              At breakpoint boundaries, mini units divide the screen into a fixed master grid, and multiples of mini
-              units map to fluid grid column widths and row heights.
-            </InverseColor>
-          )}
-        >
-          <InfoSolid dimension="s" aria-hidden />
-        </InverseBackgroundHint>
-      </RadioWithInformer>
-    </>
-  );
-};
-
 export const Playground = Template3.bind({});
 Playground.args = {};
 Playground.parameters = {
@@ -212,6 +164,38 @@ Playground.parameters = {
       type: 'code',
     },
   },
+};
+
+const Template5: ComponentStory<typeof RadioButton> = () => {
+  return (
+    <>
+      <RadioWithInformer>
+        <RadioButton value={1} extraText="Add text">
+          Dimension - m
+        </RadioButton>
+        <Hint
+          renderContent={() =>
+            'At breakpoint boundaries, mini units divide the screen into a fixed master grid, and multiples of mini units map to fluid grid column widths and row heights.'
+          }
+        >
+          <InfoSolid dimension="m" aria-hidden />
+        </Hint>
+      </RadioWithInformer>
+      <Separator />
+      <RadioWithInformer>
+        <RadioButton value={1} dimension="s" extraText="Add text">
+          Dimension - s
+        </RadioButton>
+        <Hint
+          renderContent={() =>
+            'At breakpoint boundaries, mini units divide the screen into a fixed master grid, and multiples of mini units map to fluid grid column widths and row heights.'
+          }
+        >
+          <InfoSolid dimension="s" aria-hidden />
+        </Hint>
+      </RadioWithInformer>
+    </>
+  );
 };
 
 export const RadioSize = Template1.bind({});

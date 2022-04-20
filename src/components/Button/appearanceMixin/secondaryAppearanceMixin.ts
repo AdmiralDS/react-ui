@@ -2,39 +2,39 @@ import { css } from 'styled-components';
 
 export const secondaryAppearanceMixin = css`
   background-color: transparent;
-  color: ${({ theme }) => theme.color.basic.primary};
-  border: 2px solid ${({ theme }) => theme.color.basic.primary};
+  color: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
+  border: 1px solid ${({ theme }) => theme.color['Primary/Primary 60 Main']};
 
   & *[fill^='#'] {
-    fill: ${({ theme }) => theme.color.basic.primary};
+    fill: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
   }
 
   &:focus,
   &:hover {
-    background-color: ${({ theme }) => theme.color.background.secondary};
-    color: ${({ theme }) => theme.color.basic.hover};
-    border-color: ${({ theme }) => theme.color.basic.hover};
+    background-color: ${({ theme }) => theme.color['Opacity/Hover']};
+    color: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
+    border-color: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
     & *[fill^='#'] {
-      fill: ${({ theme }) => theme.color.basic.hover};
+      fill: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
     }
   }
 
   &:active {
-    background-color: ${({ theme }) => theme.color.background.secondary};
-    color: ${({ theme }) => theme.color.basic.press};
-    border-color: ${({ theme }) => theme.color.basic.press};
+    background-color: ${({ theme }) => theme.color['Opacity/Press']};
+    color: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
+    border-color: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
     & *[fill^='#'] {
-      fill: ${({ theme }) => theme.color.basic.press};
+      fill: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
     }
   }
 
   &[data-appearance~='disabled'],
   &:disabled {
-    background-color: ${({ theme }) => theme.color.background.primary};
-    color: ${({ theme }) => theme.color.text.tertiary};
-    border-color: ${({ theme }) => theme.color.text.tertiary};
+    background-color: transparent;
+    color: ${({ theme }) => theme.color['Neutral/Neutral 30']};
+    border-color: ${({ theme }) => theme.color['Neutral/Neutral 30']};
     & *[fill^='#'] {
-      fill: ${({ theme }) => theme.color.text.tertiary};
+      fill: ${({ theme }) => theme.color['Neutral/Neutral 30']};
     }
   }
 `;

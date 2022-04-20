@@ -1,19 +1,29 @@
 import { PhoneInputField } from '#src/components/form/PhoneInputField';
 import { INPUT_DIMENSIONS_VALUES } from '#src/components/input';
 import * as React from 'react';
+import { ChangeEvent } from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
-import { ChangeEvent } from 'react';
 
 export default {
-  title: 'Form Field Components/PhoneInputField',
+  title: 'Admiral-2.1/Form Field/PhoneInputField',
   component: PhoneInputField,
   decorators: [withDesign],
   parameters: {
-    design: {
-      type: 'figma',
-      url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A61244',
-    },
+    design: [
+      {
+        type: 'figma',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A61244',
+      },
+      {
+        type: 'figma',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A61271',
+      },
+      {
+        type: 'figma',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A61297',
+      },
+    ],
   },
   argTypes: {
     dimension: {
@@ -63,7 +73,9 @@ const Template: ComponentStory<typeof PhoneInputField> = (props) => {
   };
 
   return (
-    <PhoneInputField {...cleanProps} value={localValue} defaultCountry="RUS" dimension="xl" onChange={handleChange} />
+    <>
+      <PhoneInputField {...cleanProps} value={localValue} defaultCountry="RUS" dimension="xl" onChange={handleChange} />
+    </>
   );
 };
 

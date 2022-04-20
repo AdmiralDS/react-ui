@@ -1,14 +1,14 @@
 import * as React from 'react';
 import { useRef, useState } from 'react';
 import styled from 'styled-components';
-import { ReactComponent as TimeSVG } from '@admiral-ds/icons/build/system/TimeSolid.svg';
+import { ReactComponent as TimeSVG } from '@admiral-ds/icons/build/system/TimeOutline.svg';
 import { TextInput, TextInputProps } from '../TextInput';
 import { refSetter } from '#src/components/common/utils/refSetter';
 import { defaultTimeInputHandle } from '#src/components/input/TimeInput/defaultTimeInputHandle';
 import { changeInputData } from '#src/components/common/dom/changeInputData';
 import { Dropdown } from '#src/components/Dropdown';
 import { Slot, SlotProps } from './Slot';
-import { parseStringToTime, getTimeInMinutes } from './utils';
+import { getTimeInMinutes, parseStringToTime } from './utils';
 import { typography } from '#src/components/Typography';
 
 const slots: SlotProps[] = [
@@ -64,7 +64,7 @@ const slots: SlotProps[] = [
 
 const Icon = styled(TimeSVG)`
   & *[fill^='#'] {
-    fill: ${(p) => p.theme.color.text.secondary};
+    fill: ${(p) => p.theme.color['Neutral/Neutral 50']};
   }
 
   [disabled] & {
@@ -76,7 +76,7 @@ const Icon = styled(TimeSVG)`
   }
 
   &:hover *[fill^='#'] {
-    fill: ${(p) => p.theme.color.basic.hover};
+    fill: ${(p) => p.theme.color['Primary/Primary 70']};
   }
 `;
 
@@ -86,9 +86,9 @@ const SlotContainer = styled.ul`
   margin: 0;
   overflow-x: hidden;
   overflow-y: auto;
-  background-color: ${(p) => p.theme.color.background.primary};
+  background-color: ${(p) => p.theme.color['Special/Elevated BG']};
   border-radius: 4px;
-  ${(p) => p.theme.shadow.NonClickable}
+  ${(p) => p.theme.shadow['Shadow 08']}
   flex: 0 0 auto;
   ${typography['Body/Body 1 Long']};
   &[data-dimension='xl'] {

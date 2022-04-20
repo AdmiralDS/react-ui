@@ -2,18 +2,37 @@ import { css } from 'styled-components';
 
 export const whiteAppearanceMixin = css`
   background-color: transparent;
-  color: ${({ theme }) => theme.color.text.staticWhite};
-  border: 2px solid ${({ theme }) => theme.color.text.staticWhite};
+  color: ${({ theme }) => theme.color['Special/Static White']};
+  border: 1px solid ${({ theme }) => theme.color['Special/Static White']};
   & *[fill^='#'] {
-    fill: ${({ theme }) => theme.color.text.staticWhite};
+    fill: ${({ theme }) => theme.color['Special/Static White']};
+  }
+
+  &:focus,
+  &:hover {
+    background-color: ${({ theme }) => theme.color['Opacity/Dark Static Hover']};
+    color: ${({ theme }) => theme.color['Special/Static White']};
+    border-color: ${({ theme }) => theme.color['Special/Static White']};
+    & *[fill^='#'] {
+      fill: ${({ theme }) => theme.color['Special/Static White']};
+    }
+  }
+
+  &:active {
+    background-color: ${({ theme }) => theme.color['Opacity/Dark Static Press']};
+    color: ${({ theme }) => theme.color['Special/Static White']};
+    border-color: ${({ theme }) => theme.color['Special/Static White']};
+    & *[fill^='#'] {
+      fill: ${({ theme }) => theme.color['Special/Static White']};
+    }
   }
 
   &[data-appearance~='disabled'],
   &:disabled {
-    border-color: ${({ theme }) => theme.color.basic.tertiary};
-    color: ${({ theme }) => theme.color.basic.tertiary};
+    border-color: ${({ theme }) => theme.color['Special/Dark Static Neutral 30']};
+    color: ${({ theme }) => theme.color['Special/Dark Static Neutral 30']};
     & *[fill^='#'] {
-      fill: ${({ theme }) => theme.color.basic.tertiary};
+      fill: ${({ theme }) => theme.color['Special/Dark Static Neutral 30']};
     }
   }
 `;

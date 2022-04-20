@@ -17,7 +17,7 @@ const WrapperIconButton = styled.div`
 `;
 
 export default {
-  title: 'Example/IconButton',
+  title: 'Admiral-2.1/IconButton',
   decorators: [withDesign],
   component: IconButton,
   parameters: {
@@ -25,23 +25,23 @@ export default {
     design: [
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A17787',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A17787',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A18110',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A18110',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A18298',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A18298',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A18322',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A18322',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A18345',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A18345',
       },
     ],
   },
@@ -56,9 +56,9 @@ export default {
     loading: {
       control: { type: 'boolean' },
     },
-    skeleton: {
-      control: { type: 'boolean' },
-    },
+    // skeleton: {
+    //   control: { type: 'boolean' },
+    // },
   },
 } as ComponentMeta<typeof IconButton>;
 
@@ -120,12 +120,12 @@ const IconButtonStateDemo: ComponentStory<typeof IconButton> = () => (
           <StarSolid />
         </IconButton>
       </div>
-      <div>
-        <T font="Body/Body 1 Long" as="div">
-          Skeleton
-        </T>
-        <IconButton skeleton dimension="xl" />
-      </div>
+      {/*<div>*/}
+      {/*  <T font="Body/Body 1 Long" as="div">*/}
+      {/*    Skeleton*/}
+      {/*  </T>*/}
+      {/*  <IconButton skeleton dimension="xl" />*/}
+      {/*</div>*/}
     </WrapperIconButton>
   </>
 );

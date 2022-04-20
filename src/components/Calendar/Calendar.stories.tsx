@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
+import { Button } from '#src/components/Button';
 
 import { Calendar, CalendarPropType } from './index';
 import { ViewScreenType } from './interfaces';
-import { Button } from '../Button';
 
 export default {
-  title: 'Example/Calendar',
+  title: 'Admiral-2.1/Calendar',
   decorators: [withDesign],
   component: Calendar,
   parameters: {
     design: {
       type: 'figma',
-      url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A53407',
+      url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A53407',
     },
     docs: {
       source: {
@@ -64,24 +64,28 @@ const Template1: ComponentStory<typeof Calendar> = ({ range, ...args }: Calendar
   const [selected, setSelected] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
   return range ? (
-    <Calendar
-      {...args}
-      range
-      startDate={selected}
-      endDate={endDate}
-      onChange={(value: any) => {
-        setSelected(value[0]);
-        setEndDate(value[1]);
-      }}
-    />
+    <>
+      <Calendar
+        {...args}
+        range
+        startDate={selected}
+        endDate={endDate}
+        onChange={(value: any) => {
+          setSelected(value[0]);
+          setEndDate(value[1]);
+        }}
+      />
+    </>
   ) : (
-    <Calendar
-      {...args}
-      selected={selected}
-      onChange={(value: any) => {
-        setSelected(value);
-      }}
-    />
+    <>
+      <Calendar
+        {...args}
+        selected={selected}
+        onChange={(value: any) => {
+          setSelected(value);
+        }}
+      />
+    </>
   );
 };
 
@@ -89,16 +93,18 @@ const Template2: ComponentStory<typeof Calendar> = (args: CalendarPropType) => {
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
   return (
-    <Calendar
-      {...args}
-      range
-      startDate={startDate}
-      endDate={endDate}
-      onChange={(value: any) => {
-        setStartDate(value[0]);
-        setEndDate(value[1]);
-      }}
-    />
+    <>
+      <Calendar
+        {...args}
+        range
+        startDate={startDate}
+        endDate={endDate}
+        onChange={(value: any) => {
+          setStartDate(value[0]);
+          setEndDate(value[1]);
+        }}
+      />
+    </>
   );
 };
 
@@ -108,26 +114,30 @@ const Template3: ComponentStory<typeof Calendar> = ({ range, ...args }: Calendar
   const tomorrow = new Date();
   tomorrow.setDate(new Date().getDate() + 1);
   return range ? (
-    <Calendar
-      {...args}
-      range
-      startDate={selected}
-      endDate={endDate}
-      maxDate={tomorrow}
-      onChange={(value: any) => {
-        setSelected(value[0]);
-        setEndDate(value[1]);
-      }}
-    />
+    <>
+      <Calendar
+        {...args}
+        range
+        startDate={selected}
+        endDate={endDate}
+        maxDate={tomorrow}
+        onChange={(value: any) => {
+          setSelected(value[0]);
+          setEndDate(value[1]);
+        }}
+      />
+    </>
   ) : (
-    <Calendar
-      {...args}
-      maxDate={tomorrow}
-      selected={selected}
-      onChange={(value: any) => {
-        setSelected(value);
-      }}
-    />
+    <>
+      <Calendar
+        {...args}
+        maxDate={tomorrow}
+        selected={selected}
+        onChange={(value: any) => {
+          setSelected(value);
+        }}
+      />
+    </>
   );
 };
 
@@ -139,26 +149,30 @@ const Template4: ComponentStory<typeof Calendar> = ({ range, ...args }: Calendar
     return day !== 0 && day !== 6;
   };
   return range ? (
-    <Calendar
-      {...args}
-      range
-      startDate={selected}
-      endDate={endDate}
-      filterDate={isWeekday}
-      onChange={(value: any) => {
-        setSelected(value[0]);
-        setEndDate(value[1]);
-      }}
-    />
+    <>
+      <Calendar
+        {...args}
+        range
+        startDate={selected}
+        endDate={endDate}
+        filterDate={isWeekday}
+        onChange={(value: any) => {
+          setSelected(value[0]);
+          setEndDate(value[1]);
+        }}
+      />
+    </>
   ) : (
-    <Calendar
-      {...args}
-      filterDate={isWeekday}
-      selected={selected}
-      onChange={(value: any) => {
-        setSelected(value);
-      }}
-    />
+    <>
+      <Calendar
+        {...args}
+        filterDate={isWeekday}
+        selected={selected}
+        onChange={(value: any) => {
+          setSelected(value);
+        }}
+      />
+    </>
   );
 };
 

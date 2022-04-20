@@ -15,33 +15,30 @@ import {
 import { Flag } from '#src/components/input/PhoneNumberInput/Flag';
 import { Dimension } from '#src/components/input/PhoneNumberInput/utils';
 import {
-  defaultPhoneNumberInputHandler,
   clojureHandler,
+  defaultPhoneNumberInputHandler,
 } from '#src/components/input/PhoneNumberInput/defaultPhoneNumberInputHandle';
 import { CountriesList, CountryInfo } from '#src/components/input/PhoneNumberInput/CountriesList';
 import { uid } from '#src/components/common/uid';
 import { getIcon } from '#src/components/input/PhoneNumberInput/iconsPack';
 import getFindCountryFunction, {
-  findCountryFunction,
   CountryPhoneCode,
+  findCountryFunction,
 } from '#src/components/input/PhoneNumberInput/findCoutryWithPriority';
 
-const Chevron = styled(ChevronRightOutline)`
+const Chevron = styled(ChevronRightOutline)<{ disabled?: boolean }>`
   transition: all 0.3s;
   flex-shrink: 0;
   margin-left: 5px;
 
   & path {
-    fill: ${(p) => p.theme.color.text.secondary};
+    fill: ${(p) => (p.disabled ? p.theme.color['Neutral/Neutral 30'] : p.theme.color['Neutral/Neutral 50'])};
   }
 `;
 
 const disabledStyles = css`
   & svg {
-    & *[fill^='#'] {
-      stroke: ${(p) => p.theme.color.text.tertiary};
-      fill: ${(p) => p.theme.color.text.tertiary};
-    }
+    opacity: 0.4;
   }
 `;
 
@@ -279,7 +276,7 @@ export const PhoneNumberInput = React.forwardRef<HTMLInputElement, PhoneNumberIn
         </TextInput>
         <CountryContainer dimension={dimension} isOpened={isOpened} disabled={disabled}>
           {IconComponent}
-          <Chevron onClick={handleButtonClick} />
+          <Chevron onClick={handleButtonClick} disabled={disabled} />
         </CountryContainer>
       </PhoneContainer>
     );

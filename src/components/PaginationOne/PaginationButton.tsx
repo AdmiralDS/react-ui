@@ -13,23 +13,23 @@ const Button = styled.button`
   appearance: none;
   -webkit-tap-highlight-color: transparent;
   overflow: visible;
-  background-color: ${({ theme }) => theme.color.background.tertiary};
+  background-color: ${({ theme }) => theme.color['Neutral/Neutral 10']};
   & *[fill^='#'] {
-    fill: ${({ theme }) => theme.color.text.secondary};
+    fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
   }
 
   &:hover {
     cursor: pointer;
-    background-color: ${({ theme }) => theme.color.background.tertiaryHover};
+    background-color: ${({ theme }) => theme.color['Neutral/Neutral 20']};
     & *[fill^='#'] {
-      fill: ${({ theme }) => theme.color.basic.hover};
+      fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
     }
   }
 
   &:active {
-    background-color: ${({ theme }) => theme.color.background.tertiaryHover};
+    background-color: ${({ theme }) => theme.color['Neutral/Neutral 20']};
     & *[fill^='#'] {
-      fill: ${({ theme }) => theme.color.basic.press};
+      fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
     }
   }
 
@@ -38,24 +38,23 @@ const Button = styled.button`
     &:before {
       position: absolute;
       content: '';
-      border: 2px solid ${({ theme }) => theme.color.basic.primary};
+      border: 2px solid ${({ theme }) => theme.color['Primary/Primary 60 Main']};
       top: -4px;
       bottom: -4px;
       left: -4px;
       right: -4px;
       border-radius: 4px;
     }
-    background-color: ${({ theme }) => theme.color.background.tertiaryHover};
     & *[fill^='#'] {
-      fill: ${({ theme }) => theme.color.basic.hover};
+      fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
     }
   }
 
   &:disabled {
     cursor: not-allowed;
-    background-color: ${({ theme }) => theme.color.background.tertiary};
+    background-color: ${({ theme }) => theme.color['Neutral/Neutral 10']};
     & *[fill^='#'] {
-      fill: ${({ theme }) => theme.color.basic.disable};
+      fill: ${({ theme }) => theme.color['Neutral/Neutral 30']};
     }
   }
 `;

@@ -7,22 +7,22 @@ import { withDesign } from 'storybook-addon-designs';
 import styled from 'styled-components';
 
 export default {
-  title: 'Form Field Components/InputField',
+  title: 'Admiral-2.1/Form Field/InputField',
   component: InputField,
   decorators: [withDesign],
   parameters: {
     design: [
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A60376',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A60376',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A60982',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A60982',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A61046',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A61046',
       },
     ],
   },
@@ -55,9 +55,6 @@ export default {
     icons: {
       control: false,
     },
-    handleInput: {
-      control: false,
-    },
   },
 } as ComponentMeta<typeof InputField>;
 
@@ -77,30 +74,37 @@ const Template: ComponentStory<typeof InputField> = (props) => {
   };
 
   return (
-    <DisplayContainer>
-      <InputField {...props} value={localValue} onChange={handleChange} />
-      <InputField required label="Поле необходимо заполнить" />
-      <InputField readOnly aria-readonly label="Поле с атрибутом readOnly" defaultValue="Этот текст не редактируемый" />
-      <InputField disabled aria-disabled label="Поле с атрибутом disabled" placeholder="Placeholder" />
-      <InputField
-        status="error"
-        label="Поле с ошибкой"
-        extraText="Поле не прошло валидацию, необходимо ввести корректное значение"
-      />
-      <InputField
-        status="success"
-        displayStatusIcon
-        label="Поле с индикацией успеха"
-        extraText="Поле успешно прошло валидацию"
-      />
-      <InputField
-        displayClearIcon
-        placeholder="идет поиск ..."
-        label="Поле с иконкой загрузки"
-        icons={<Spinner dimension="s" />}
-      />
-      <InputField label="Поле для ввода пароля (type='password')" type="password" />
-    </DisplayContainer>
+    <>
+      <DisplayContainer>
+        <InputField {...props} value={localValue} onChange={handleChange} />
+        <InputField required label="Поле необходимо заполнить" />
+        <InputField
+          readOnly
+          aria-readonly
+          label="Поле с атрибутом readOnly"
+          defaultValue="Этот текст не редактируемый"
+        />
+        <InputField disabled aria-disabled label="Поле с атрибутом disabled" placeholder="Placeholder" />
+        <InputField
+          status="error"
+          label="Поле с ошибкой"
+          extraText="Поле не прошло валидацию, необходимо ввести корректное значение"
+        />
+        <InputField
+          status="success"
+          displayStatusIcon
+          label="Поле с индикацией успеха"
+          extraText="Поле успешно прошло валидацию"
+        />
+        <InputField
+          displayClearIcon
+          placeholder="идет поиск ..."
+          label="Поле с иконкой загрузки"
+          icons={<Spinner dimension="s" />}
+        />
+        <InputField label="Поле для ввода пароля (type='password')" type="password" />
+      </DisplayContainer>
+    </>
   );
 };
 

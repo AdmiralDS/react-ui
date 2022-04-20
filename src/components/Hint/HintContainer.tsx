@@ -5,7 +5,7 @@ import { useClickOutside } from '#src/components/common/hooks/useClickOutside';
 import { getKeyboardFocusableElements } from '#src/components/common/utils/getKeyboardFocusableElements';
 import { throttle } from '#src/components/common/utils/throttle';
 
-import { CloseButton, HintDialog, HintContent, HintWrapper } from './style';
+import { CloseButton, HintContent, HintDialog, HintWrapper } from './style';
 import type { ActionsType } from './reducer';
 
 type PropsType = {
@@ -109,7 +109,6 @@ export const HintContainer = React.forwardRef<RefType, PropsType & React.HTMLAtt
         }
       }
     };
-
     return (
       <HintWrapper {...props} role="tooltip" ref={hintRef} onKeyDown={handleKeyDown}>
         <HintDialog

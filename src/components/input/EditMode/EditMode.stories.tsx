@@ -1,9 +1,10 @@
 import React, { ChangeEvent, useState } from 'react';
 import styled, { css } from 'styled-components';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import { EditMode } from './index';
 import { withDesign } from 'storybook-addon-designs';
 import { INPUT_DIMENSIONS_VALUES } from '#src/components/input/types';
+
+import { EditMode } from './index';
 
 const Separator = styled.div`
   height: 20px;
@@ -17,7 +18,7 @@ const Desc = styled.div`
 const Description = () => <Desc>Компонент для редактирования текста. Может быть с лэйблом или без него.</Desc>;
 
 export default {
-  title: 'Input/EditMode',
+  title: 'Admiral-2.1/Input/EditMode',
   component: EditMode,
   decorators: [withDesign],
   parameters: {
@@ -25,11 +26,11 @@ export default {
     design: [
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=108393%3A70235',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=38%3A10602',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=38%3A10901',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=38%3A10901',
       },
     ],
   },
@@ -79,7 +80,11 @@ const Template1: ComponentStory<typeof EditMode> = (props) => {
     setValue(inputValue);
     props.onChange?.(e);
   };
-  return <EditMode {...cleanProps} value={localValue} onChange={handleChange} />;
+  return (
+    <>
+      <EditMode {...cleanProps} value={localValue} onChange={handleChange} />
+    </>
+  );
 };
 
 const Template2: ComponentStory<typeof EditMode> = (props) => {
@@ -125,7 +130,11 @@ const Template3: ComponentStory<typeof EditMode> = (props) => {
     setValue(inputValue);
     props.onChange?.(e);
   };
-  return <EditMode {...cleanProps} value={localValue} onChange={handleChange} disabled />;
+  return (
+    <>
+      <EditMode {...cleanProps} value={localValue} onChange={handleChange} disabled />
+    </>
+  );
 };
 
 const cssMixin = css`
@@ -146,7 +155,11 @@ const Template4: ComponentStory<typeof EditMode> = (props) => {
     setValue(inputValue);
     props.onChange?.(e);
   };
-  return <EditMode {...cleanProps} value={localValue} onChange={handleChange} containerCssMixin={cssMixin} />;
+  return (
+    <>
+      <EditMode {...cleanProps} value={localValue} onChange={handleChange} containerCssMixin={cssMixin} />
+    </>
+  );
 };
 
 export const Playground = Template1.bind({});

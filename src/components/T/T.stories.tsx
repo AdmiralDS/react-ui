@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled, { css, ThemeContext } from 'styled-components';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
@@ -6,7 +6,7 @@ import { FONTS, NEW_FONTS } from './storyDescriptions';
 import { TYPOGRAPHY, typography } from '#src/components/Typography';
 import { ReactComponent as CopyOutline } from '@admiral-ds/icons/build/documents/CopyOutline.svg';
 import { Tooltip } from '#src/components/Tooltip';
-import { LIGHT_THEME } from '#src/components/themes';
+import { DefaultFontColorName, LIGHT_THEME, MainPrimaryColorName } from '#src/components/themes';
 import { T } from './index';
 
 const Desc = styled.div`
@@ -27,29 +27,29 @@ const Description = () => (
 );
 
 export default {
-  title: 'Example/T',
+  title: 'Admiral-2.1/T',
   decorators: [withDesign],
-  component: Text,
+  component: T,
   parameters: {
     componentSubtitle: <Description />,
     layout: 'centered',
     design: {
       type: 'figma',
-      url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=10%3A6409',
+      url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=9%3A24',
     },
   },
-} as unknown as ComponentMeta<typeof T>;
+} as ComponentMeta<typeof T>;
 
 const BlueText = styled(T)`
-  color: ${(p) => p.theme.color.basic.primary};
+  color: ${(p) => p.theme.color[MainPrimaryColorName]};
 `;
 
 const CustomParagraph = styled(T)`
-  color: ${(p) => p.theme.color.basic.tertiary};
+  color: ${(p) => p.theme.color['Neutral/Neutral 70']};
 `;
 
 const OrangeColor = css`
-  color: ${(p) => p.theme.color.status.warn};
+  color: ${(p) => p.theme.color['Warning/Warning 50 Main']};
 `;
 
 const Wrapper = styled.div`
@@ -61,17 +61,17 @@ const Table = styled.table`
   border-collapse: collapse;
   border-spacing: 0;
   width: 100%;
-  color: ${({ theme }) => theme.color.text.primary};
+  color: ${({ theme }) => theme.color[DefaultFontColorName]};
 
   th,
   td[data-label] {
     text-align: left;
     padding: 8px 60px 8px 8px;
-    border-bottom: 1px solid ${({ theme }) => theme.color.basic.tertiary};
+    border-bottom: 1px solid ${({ theme }) => theme.color['Neutral/Neutral 70']};
   }
   th {
     ${typography['Header/H3']}
-    color: ${({ theme }) => theme.color.text.secondary};
+    color: ${({ theme }) => theme.color['Neutral/Neutral 50']};
   }
   td[data-label]:last-child {
     padding: 8px;
@@ -90,13 +90,13 @@ const FontDesc = styled.table`
     white-space: nowrap;
   }
   td:first-child {
-    color: ${({ theme }) => theme.color.text.secondary};
+    color: ${({ theme }) => theme.color['Neutral/Neutral 50']};
     padding-right: 16px;
   }
 `;
 
 const CopyButton = ({ text }: { text: string }) => {
-  const theme = React.useContext(ThemeContext) || LIGHT_THEME;
+  const theme = useContext(ThemeContext) || LIGHT_THEME;
   const copyToClipboard = () => {
     const el = document.createElement('textarea');
     el.value = text;
@@ -109,9 +109,11 @@ const CopyButton = ({ text }: { text: string }) => {
     document.body.removeChild(el);
   };
   return (
-    <Tooltip renderContent={() => 'Копировать пример использования'} style={{ display: 'flex' }}>
-      <CopyOutline width={16} height={16} onClick={copyToClipboard} fill={theme.color.text.primary} />
-    </Tooltip>
+    <>
+      <Tooltip renderContent={() => 'Копировать пример использования'} style={{ display: 'flex' }}>
+        <CopyOutline width={16} height={16} onClick={copyToClipboard} fill={theme.color['Neutral/Neutral 90']} />
+      </Tooltip>
+    </>
   );
 };
 
@@ -124,6 +126,9 @@ const Template1: ComponentStory<typeof T> = () => {
       <br />
       <T font="Body/Body 1 Long" as="h3" cssMixin={OrangeColor}>
         Это заголовок третьего уровня и стилем Body/Body 1 Long.
+      </T>
+      <T font="Body/Body 2 Long" as="h3" color="Purple/Purple 60 Main">
+        Это заголовок третьего уровня и стилем Body/Body 2 Long цвета Purple/Purple 60 Main.
       </T>
       <CustomParagraph font="Header/H5" as="p">
         Это параграф со стилем Header/H5 и цветом шрифта Tertiary.
@@ -268,13 +273,13 @@ Fonts.storyName = 'Список стилей';
 Fonts.parameters = {
   docs: {
     description: {
-      story: `Ниже представлены таблицы стилей типографики, старая и обновленная версия, на которую постепенно будет произведен перевод библиотеки. 
-      Каждый из этих стилей можно передавать в компонент T в виде параметра font и в качестве результата получать StyledComponent с 
+      story: `Ниже представлены таблицы стилей типографики, старая и обновленная версия, на которую постепенно будет произведен перевод библиотеки.
+      Каждый из этих стилей можно передавать в компонент T в виде параметра font и в качестве результата получать StyledComponent с
       необходимыми стилями. \n\nТакже возможен случай, когда пользователю нужен css миксин (ThemedCssFunction) с определенными
-      стилями типографики для последующего использования этого миксина в своих styled-компонентах. 
+      стилями типографики для последующего использования этого миксина в своих styled-компонентах.
       В таком случае можно воспользоваться объектом typography, экспортируемым из нашей библиотеки. Ключами
-      этого объекта служат названия стилей типографики, а значениями css миксины.\n\nРядом с названием стиля типографики 
-      находится иконка копирования, по нажатию на которую можно будет скопировать 
+      этого объекта служат названия стилей типографики, а значениями css миксины.\n\nРядом с названием стиля типографики
+      находится иконка копирования, по нажатию на которую можно будет скопировать
       пример кода для каждого стиля в отдельности.`,
     },
   },

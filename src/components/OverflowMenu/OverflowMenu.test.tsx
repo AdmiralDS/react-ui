@@ -4,8 +4,8 @@ import { act } from 'react-dom/test-utils';
 import userEvent from '@testing-library/user-event';
 import { ThemeProvider } from 'styled-components';
 
-import { OverflowMenu } from '../OverflowMenu';
-import { LIGHT_THEME } from '../themes';
+import { OverflowMenu } from '#src/components/OverflowMenu';
+import { LIGHT_THEME } from '#src/components/themes';
 
 describe('MenuButton', () => {
   jest.useFakeTimers();

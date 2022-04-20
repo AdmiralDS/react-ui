@@ -16,7 +16,7 @@ export interface CountryBlockProps extends HTMLAttributes<HTMLLIElement> {
 }
 
 const activeCountry = css`
-  background-color: ${(p) => p.theme.color.background.secondary};
+  background-color: ${(p) => p.theme.color['Opacity/Focus']};
 `;
 
 const CountryBlockStyle = styled.li<{ disabled?: boolean; selected?: boolean; active?: boolean; dimension?: string }>`
@@ -25,14 +25,10 @@ const CountryBlockStyle = styled.li<{ disabled?: boolean; selected?: boolean; ac
   align-items: center;
   justify-content: flex-start;
   user-select: none;
-  color: ${(p) => (p.disabled ? p.theme.color.text.tertiary : p.theme.color.text.primary)};
+  color: ${(p) => (p.disabled ? p.theme.color['Neutral/Neutral 30'] : p.theme.color['Neutral/Neutral 90'])};
   cursor: ${(p) => (p.disabled ? 'not-allowed' : 'pointer')};
   padding: ${(p) => (p.dimension === 'xl' ? '12px 16px' : p.dimension === 'm' ? '8px 16px' : '6px 12px')};
   ${(p) => (p.dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
-
-  &:hover {
-    background: ${(p) => (p.disabled ? '' : p.theme.color.background.secondary)};
-  }
 
   ${(p) => ((p.selected && !p.active && !p.disabled) || (p.active && !p.disabled) ? activeCountry : '')}
 `;
@@ -46,7 +42,7 @@ const StyledCountryName = styled.span`
 
 const CountryCode = styled.span`
   flex: 0 0 auto;
-  color: ${(p) => p.theme.color.text.secondary};
+  color: ${(p) => p.theme.color['Neutral/Neutral 50']};
 `;
 
 export const CountryBlock = React.forwardRef<HTMLLIElement, CountryBlockProps>((props, ref) => {

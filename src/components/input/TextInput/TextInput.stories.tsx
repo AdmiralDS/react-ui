@@ -5,22 +5,22 @@ import { withDesign } from 'storybook-addon-designs';
 import { INPUT_DIMENSIONS_VALUES } from '#src/components/input/types';
 
 export default {
-  title: 'Input/TextInput',
+  title: 'Admiral-2.1/Input/TextInput',
   component: TextInput,
   decorators: [withDesign],
   parameters: {
     design: [
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A60376',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A60376',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A60982',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A60982',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A61046',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A61046',
       },
     ],
   },
@@ -77,7 +77,11 @@ const Template: ComponentStory<typeof TextInput> = (props) => {
     setValue(inputValue);
     props.onChange?.(e);
   };
-  return <TextInput {...cleanProps} value={localValue} onChange={handleChange} />;
+  return (
+    <>
+      <TextInput {...cleanProps} value={localValue} onChange={handleChange} />
+    </>
+  );
 };
 
 export const TextInputStory = Template.bind({});

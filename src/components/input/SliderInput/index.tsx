@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import { Slider as SliderComponent } from '#src/components/Slider';
 import { TextInputProps } from '#src/components/input/TextInput';
 
-import { NumberInput } from '../NumberInput';
-import { clearValue, fitToCurrency, repeatStringNumTimes } from '../NumberInput/utils';
+import { NumberInput } from '#src/components/input/NumberInput';
+import { clearValue, fitToCurrency, repeatStringNumTimes } from '#src/components/input/NumberInput/utils';
 
 const Wrapper = styled.div<{ dimension: 'xl' | 'm' | 's' }>`
   position: relative;
@@ -98,11 +98,17 @@ export const SliderInput = React.forwardRef<HTMLInputElement, SliderInputProps>(
 
       onChange?.(fullValue, shortValue);
     };
-    const handleInputChange = (fullStr: string, shortStr: string) => {
-      setInputValue(fullStr);
-      setSliderValue(+shortStr);
+    const handleInputChange = (
+      event: React.ChangeEvent<HTMLInputElement> | React.FocusEvent<HTMLInputElement>,
+      fullStr?: string,
+      shortStr?: string,
+    ) => {
+      const full = fullStr || '';
+      const short = shortStr || '';
+      setInputValue(full);
+      setSliderValue(+short);
 
-      onChange?.(fullStr, shortStr);
+      onChange?.(full, short);
     };
     const handleInputBlur = (event: React.FocusEvent<HTMLInputElement>) => {
       const value = event.currentTarget.value;

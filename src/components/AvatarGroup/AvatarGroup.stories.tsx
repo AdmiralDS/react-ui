@@ -1,9 +1,9 @@
 import { withDesign } from 'storybook-addon-designs';
 import * as React from 'react';
-import { ComponentMeta, ComponentStory, Story } from '@storybook/react';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
 import styled from 'styled-components';
-import { AvatarGroup } from '#src/components/AvatarGroup';
 import type { AvatarGroupProps } from '#src/components/AvatarGroup';
+import { AvatarGroup } from '#src/components/AvatarGroup';
 import { ReactComponent as PersonSolid } from '@admiral-ds/icons/build/system/PersonSolid.svg';
 
 const imageURL = 'https://github.com/DrUNE.png?size=100';
@@ -14,31 +14,15 @@ const Desc = styled.div`
   line-height: 24px;
 `;
 
-const Container = styled.div`
-  position: relative;
-  display: flex;
-  & > * {
-    margin-right: 20px;
-  }
-`;
-
-const Text = styled.div`
-  font-family: 'VTB Group UI';
-  font-size: 16px;
-  line-height: 24px;
-  margin-bottom: 8px;
-  color: rgba(51, 51, 51, 0.75);
-`;
-
 export default {
-  title: 'Example/AvatarGroup',
+  title: 'Admiral-2.1/AvatarGroup',
   decorators: [withDesign],
   component: AvatarGroup,
   parameters: {
     componentSubtitle: <Desc>Avatar - компонент отображающий аватарку пользователя и его статус</Desc>,
     design: {
       type: 'figma',
-      url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=37%3A32367',
+      url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=37%3A32367',
     },
   },
 } as ComponentMeta<typeof AvatarGroup>;
@@ -57,11 +41,13 @@ const Template: ComponentStory<typeof AvatarGroup> = ({ onAvatarSelect, ...args 
     { userName: 'Tom Hidlton', appearance: 'dark', status: 'danger', id: '10' },
   ];
   return (
-    <AvatarGroup
-      {...args}
-      items={items}
-      onAvatarSelect={onAvatarSelect || ((e) => console.log('Select item with id: ', e.currentTarget.id))}
-    />
+    <>
+      <AvatarGroup
+        {...args}
+        items={items}
+        onAvatarSelect={onAvatarSelect || ((e) => console.log('Select item with id: ', e.currentTarget.id))}
+      />
+    </>
   );
 };
 
@@ -79,11 +65,13 @@ const Template2: ComponentStory<typeof AvatarGroup> = () => {
     { userName: 'Tom Hidlton', appearance: 'dark', status: 'danger', id: '10' },
   ];
   return (
-    <AvatarGroup
-      style={{ width: '300px' }}
-      items={items}
-      onAvatarSelect={(e) => console.log('Select item with id: ', e.currentTarget.id)}
-    />
+    <>
+      <AvatarGroup
+        style={{ width: '300px' }}
+        items={items}
+        onAvatarSelect={(e) => console.log('Select item with id: ', e.currentTarget.id)}
+      />
+    </>
   );
 };
 

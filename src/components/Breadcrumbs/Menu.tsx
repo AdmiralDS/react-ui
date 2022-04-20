@@ -1,10 +1,10 @@
 import * as React from 'react';
 import styled from 'styled-components';
+
 import { DropDownItem } from '#src/components/DropDownItem';
 import { OverflowMenu } from '#src/components/OverflowMenu';
-
-import type { BreadcrumbProps } from './BreadCrumb';
-import { InverseTooltip } from './InverseTooltip';
+import { Tooltip } from '#src/components/Tooltip';
+import { BreadcrumbProps } from '#src/components/Breadcrumbs/BreadCrumb';
 
 const Option = styled.a`
   position: relative;
@@ -34,23 +34,25 @@ export interface MenuButtonProps {
 
 export const MenuButton: React.FC<MenuButtonProps> = ({ options }) => {
   return (
-    <Menu dimension="s">
-      {options.map(({ text, url }) => {
-        const tooltip = text.length > 40;
-        const renderText = () =>
-          tooltip ? (
-            <InverseTooltip style={{ marginTop: '8px' }} renderContent={() => text}>
-              {text.slice(0, 37) + '...'}
-            </InverseTooltip>
-          ) : (
-            text
+    <>
+      <Menu dimension="s">
+        {options.map(({ text, url }) => {
+          const tooltip = text.length > 40;
+          const renderText = () =>
+            tooltip ? (
+              <Tooltip style={{ marginTop: '8px' }} renderContent={() => text}>
+                {text.slice(0, 37) + '...'}
+              </Tooltip>
+            ) : (
+              text
+            );
+          return (
+            <DropDownItem key="text" role="option" value={text} dimension="s">
+              <Option href={url}>{renderText()}</Option>
+            </DropDownItem>
           );
-        return (
-          <DropDownItem key="text" role="option" value={text} dimension="s">
-            <Option href={url}>{renderText()}</Option>
-          </DropDownItem>
-        );
-      })}
-    </Menu>
+        })}
+      </Menu>
+    </>
   );
 };

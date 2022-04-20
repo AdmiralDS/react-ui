@@ -2,9 +2,9 @@ import * as React from 'react';
 import { render } from '@testing-library/react';
 import { ThemeProvider } from 'styled-components';
 
-import { LIGHT_THEME } from '../themes';
+import { LIGHT_THEME } from '#src/components/themes';
 
-import { Badge } from './';
+import { Badge } from '.';
 
 describe('Badge', () => {
   const Component = (props: any) => (

@@ -2,9 +2,9 @@ import React from 'react';
 import { fireEvent, render } from '@testing-library/react';
 import { ThemeProvider } from 'styled-components';
 
-import { LIGHT_THEME } from '../themes';
+import { LIGHT_THEME } from '#src/components/themes';
 
-import { Tag } from './';
+import { Tag } from '#src/components/Tag';
 
 describe('Tag', () => {
   const clickProps = {

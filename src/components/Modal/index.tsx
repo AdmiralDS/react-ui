@@ -5,7 +5,6 @@ import { ReactComponent as CloseOutline } from '@admiral-ds/icons/build/service/
 import * as React from 'react';
 import ReactDOM from 'react-dom';
 import styled, { css, Interpolation } from 'styled-components';
-import { hexToRgba } from '../common/utils/hexToRgba';
 import ModalManager from './manager';
 
 type Dimension = 'xl' | 'l' | 'm' | 's';
@@ -19,7 +18,7 @@ const Overlay = styled.div<{ overlayStyledCss: Interpolation<any> }>`
   left: 0;
   bottom: 0;
   right: 0;
-  background-color: ${({ theme }) => hexToRgba(theme.color.basic.secondary, 0.6)};
+  background-color: ${({ theme }) => theme.color['Opacity/Modal']};
   backdrop-filter: blur(8px);
   transition: opacity 0.3s ease 0s;
   z-index: ${({ theme }) => theme.zIndex.modal};
@@ -47,6 +46,7 @@ const width = css<{ dimension: Dimension; mobile?: boolean }>`
 
 const Title = styled.h5<{ mobile?: boolean }>`
   ${typography['Header/H5']}
+  color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
   margin: 0 32px 16px 0;
 `;
 
@@ -82,18 +82,18 @@ const ModalComponent = styled.div<{ dimension: Dimension; mobile?: boolean }>`
   padding: ${({ mobile }) => (mobile ? '20px 16px 24px 16px' : '20px 24px 24px 24px')};
   ${width};
   max-height: ${({ mobile }) => (mobile ? '84vh' : '90vh')};
-  background-color: ${({ theme }) => theme.color.background.primary};
-  ${({ theme }) => theme.shadow.ClickableHover}
+  background-color: ${({ theme }) => theme.color['Special/Elevated BG']};
+  ${({ theme }) => theme.shadow['Shadow 16']}
   border-radius: 8px;
   ${({ mobile }) => (mobile ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
-  color: ${({ theme }) => theme.color.text.primary};
+  color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
   outline: none;
 
   ${({ mobile }) =>
     mobile &&
     `
     & > ${Title} {
-      ${typography['Subtitle/Subtitle 1']}
+      ${typography['Header/H6']}
       margin: 0 30px 16px 0;
     }
     & > ${ButtonPanel} {
@@ -126,21 +126,31 @@ const CloseButton = styled.button<{ mobile?: boolean }>`
   height: 24px;
   background: transparent;
   -webkit-tap-highlight-color: transparent;
+  &:before {
+    content: '';
+    position: absolute;
+    top: -4px;
+    bottom: -4px;
+    left: -4px;
+    right: -4px;
+    background: transparent;
+    border-radius: 50%;
+  }
 
   & *[fill^='#'] {
-    fill: ${(p) => p.theme.color.text.secondary};
+    fill: ${(p) => p.theme.color['Neutral/Neutral 50']};
   }
 
   &:hover,
   &:focus {
-    & *[fill^='#'] {
-      fill: ${(p) => p.theme.color.basic.hover};
+    &:before {
+      background: ${(p) => p.theme.color['Opacity/Hover']};
     }
   }
 
   &:active {
-    & *[fill^='#'] {
-      fill: ${(p) => p.theme.color.basic.press};
+    &:before {
+      background: ${(p) => p.theme.color['Opacity/Press']};
     }
   }
 `;
@@ -193,7 +203,7 @@ export interface ModalProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Возможность изменять стили для подложки модального окна.
    * Например цвет фона в зависимости от темы:
-   *  const overlayStyles = css\`background-color: ${({ theme }) => hexToRgba(theme.color.background.secondary, 0.6)};\`
+   *  const overlayStyles = css\`background-color: ${({ theme }) => hexToRgba(theme.color['Neutral/Neutral 05'], 0.6)};\`
    * */
   overlayStyledCss?: Interpolation<any>;
 }

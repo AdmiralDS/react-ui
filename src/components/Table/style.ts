@@ -1,16 +1,16 @@
 import styled from 'styled-components';
 import { ReactComponent as ArrowUpOutline } from '@admiral-ds/icons/build/system/ArrowUpOutline.svg';
-import { ReactComponent as ChevronDownOutline } from '@admiral-ds/icons/build/system/ChevronDownOutline.svg';
+import { OpenStatusButton } from '#src/components/OpenStatusButton';
 
 import {
   cellStyle,
-  rowStyle,
-  headerStyle,
-  singleLineTitle,
-  multiLineTitle,
   disabledRow,
-  underlineRow,
+  headerStyle,
+  multiLineTitle,
   rowBackground,
+  rowStyle,
+  singleLineTitle,
+  underlineRow,
 } from './mixins';
 
 export const TableContainer = styled.div`
@@ -18,7 +18,7 @@ export const TableContainer = styled.div`
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  background: ${({ theme }) => theme.color.background.primary};
+  background: ${({ theme }) => theme.color['Neutral/Neutral 00']};
 `;
 
 export const StickyWrapper = styled.div`
@@ -26,7 +26,7 @@ export const StickyWrapper = styled.div`
   position: sticky;
   left: 0;
   z-index: 5;
-  background: ${({ theme }) => theme.color.background.primary};
+  background: ${({ theme }) => theme.color['Neutral/Neutral 00']};
   ${rowBackground}
   transition: box-shadow 0.3s;
   [data-shadow='true'] & {
@@ -52,12 +52,12 @@ export const Header = styled.div<{ greyHeader?: boolean }>`
   overflow-x: hidden;
   box-sizing: border-box;
   display: flex;
-  ${({ greyHeader, theme }) => greyHeader && `background: ${theme.color.background.tertiary};`}
+  ${({ greyHeader, theme }) => greyHeader && `background: ${theme.color['Neutral/Neutral 10']};`}
   ${headerStyle}
   transform: translateZ(0);
 
   & > * {
-    border-bottom: 1px solid ${({ theme }) => theme.color.basic.disable};
+    border-bottom: 1px solid ${({ theme }) => theme.color['Neutral/Neutral 20']};
   }
 `;
 
@@ -68,32 +68,35 @@ export const ScrollTableBody = styled.div`
   flex: 1 1 auto;
 `;
 
-export const ExpandIcon = styled(ChevronDownOutline)`
+export const ExpandIconWrapper = styled.div`
+  position: relative;
+  display: flex;
+  flex: 1 0 auto;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  &:hover {
+    &:before {
+      position: absolute;
+      content: '';
+      top: -6px;
+      bottom: -6px;
+      left: -6px;
+      right: -6px;
+      border-radius: 50%;
+      background: ${({ theme }) => theme.color['Opacity/Hover']};
+    }
+  }
+`;
+
+export const ExpandIcon = styled(OpenStatusButton)`
   display: flex;
   flex-shrink: 0;
   width: 100%;
   height: 100%;
-  transition: transform 0.3s ease-in-out;
-  transform: rotate(0deg);
-  cursor: pointer;
-  & *[fill^='#'] {
-    fill: ${({ theme }) => theme.color.text.secondary};
-  }
-  &:hover *[fill^='#'] {
-    fill: ${({ theme }) => theme.color.basic.hover};
-  }
-  [data-expanded='true'] & {
-    transform: rotate(180deg);
+  &&:hover {
     & *[fill^='#'] {
-      fill: ${({ theme }) => theme.color.basic.press};
-    }
-    &:hover *[fill^='#'] {
-      fill: ${({ theme }) => theme.color.basic.hover};
-    }
-  }
-  [data-disabled='true'] & {
-    & *[fill^='#'] {
-      fill: ${({ theme }) => theme.color.text.tertiary};
+      fill: ${(props) => props.theme.color['Neutral/Neutral 50']};
     }
   }
 `;
@@ -107,12 +110,12 @@ export const SortIcon = styled(ArrowUpOutline)`
 
   [data-sort='asc'] && {
     & *[fill^='#'] {
-      fill: ${({ theme }) => theme.color.basic.primary};
+      fill: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
     }
   }
   [data-sort='desc'] && {
     & *[fill^='#'] {
-      fill: ${({ theme }) => theme.color.basic.primary};
+      fill: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
     }
     transform: rotate(180deg);
   }
@@ -159,6 +162,7 @@ export const CheckboxCell = styled(Cell)`
 
 // padding-bottom меньше padding-top на 1px, т.к. 1px остается для border-bottom ячейки
 export const ExpandCell = styled(Cell)`
+  overflow: visible;
   [data-dimension='s'] && {
     padding: 6px 0px 5px 12px;
     width: 32px;
@@ -217,13 +221,13 @@ export const HeaderCellTitle = styled.div`
   }
   &:hover {
     [data-sort='asc'] && *[fill^='#'] {
-      fill: ${({ theme }) => theme.color.basic.hover};
+      fill: ${({ theme }) => theme.color['Primary/Primary 70']};
     }
     [data-sort='desc'] && *[fill^='#'] {
-      fill: ${({ theme }) => theme.color.basic.hover};
+      fill: ${({ theme }) => theme.color['Primary/Primary 70']};
     }
     [data-sort='initial'] && *[fill^='#'] {
-      fill: ${({ theme }) => theme.color.text.secondary};
+      fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
     }
   }
 `;
@@ -247,7 +251,7 @@ export const Row = styled.div<{ disabled: boolean; underline: boolean }>`
   display: flex;
   flex-direction: column;
   min-width: fit-content;
-  background: ${({ theme }) => theme.color.background.primary};
+  background: ${({ theme }) => theme.color['Neutral/Neutral 00']};
   ${rowStyle}
   ${({ disabled }) => disabled && disabledRow}
   ${({ underline }) => underline && underlineRow}
@@ -256,7 +260,7 @@ export const Row = styled.div<{ disabled: boolean; underline: boolean }>`
 export const SimpleRow = styled.div`
   display: inline-flex;
   min-width: max-content;
-  background: ${({ theme }) => theme.color.background.primary};
+  background: ${({ theme }) => theme.color['Neutral/Neutral 00']};
   ${rowBackground}
 `;
 

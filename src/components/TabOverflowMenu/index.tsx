@@ -4,9 +4,13 @@ import { keyboardKey } from '#src/components/common/keyboardKey';
 import { refSetter } from '#src/components/common/utils/refSetter';
 
 import { Dropdown } from '#src/components/Dropdown';
-import { Item } from './Item';
-import type { Dimension } from './Buton';
-import { Button } from './Buton';
+import { Item } from '#src/components/TabOverflowMenu/Item';
+import type { Dimension } from '#src/components/TabOverflowMenu/Button';
+import { Button } from '#src/components/TabOverflowMenu/Button';
+
+const StyledDropdown = styled(Dropdown)`
+  padding: 8px 0;
+`;
 
 const HiddenTab = styled.div`
   height: 0;
@@ -14,10 +18,6 @@ const HiddenTab = styled.div`
   opacity: 0;
   flex: 0 0 auto;
   z-index: -10;
-`;
-
-const StyledDropdown = styled(Dropdown)`
-  padding: 8px 0;
 `;
 
 export interface ItemWithId {
@@ -28,8 +28,6 @@ export interface ItemWithId {
 
 export interface OverflowMenuItem extends ItemWithId, React.HTMLAttributes<HTMLLIElement> {
   id: string;
-  content: React.ReactNode;
-  disabled?: boolean;
   icon?: React.ReactNode;
   badge?: number;
 }

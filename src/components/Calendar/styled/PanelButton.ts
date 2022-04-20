@@ -24,14 +24,15 @@ export const PanelButton = styled.div<{
     `}
 
   & *[fill^='#'] {
-    fill: ${({ disabled, theme }) => (disabled ? theme.color.text.tertiary : theme.color.text.secondary)};
+    fill: ${({ disabled, theme }) =>
+      disabled ? theme.color['Neutral/Neutral 30'] : theme.color['Neutral/Neutral 50']};
   }
 
   ${({ disabled, theme }) => `
     &:hover {
-      background-color: ${disabled ? 'transparent' : theme.color.background.secondary};
+      background-color: ${disabled ? 'transparent' : theme.color['Opacity/Hover']};
       & *[fill^='#'] {
-        fill: ${disabled ? theme.color.text.tertiary : theme.color.text.secondary};
+        fill: ${theme.color['Neutral/Neutral 50']};
       }
     }
   `}

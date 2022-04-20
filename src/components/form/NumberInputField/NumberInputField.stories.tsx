@@ -5,14 +5,24 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 
 export default {
-  title: 'Form Field Components/NumberInputField',
+  title: 'Admiral-2.1/Form Field/NumberInputField',
   component: NumberInputField,
   decorators: [withDesign],
   parameters: {
-    design: {
-      type: 'figma',
-      url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A60588',
-    },
+    design: [
+      {
+        type: 'figma',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A60588',
+      },
+      {
+        type: 'figma',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A60694',
+      },
+      {
+        type: 'figma',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A60723',
+      },
+    ],
   },
   argTypes: {
     dimension: {
@@ -70,6 +80,12 @@ export default {
     icons: {
       control: false,
     },
+    containerRef: {
+      control: false,
+    },
+    handleInput: {
+      control: false,
+    },
     extraText: {
       control: { type: 'text' },
     },
@@ -77,7 +93,11 @@ export default {
 } as ComponentMeta<typeof NumberInputField>;
 
 const Template: ComponentStory<typeof NumberInputField> = (props) => {
-  return <NumberInputField {...props} minValue={1000} maxValue={10000} />;
+  return (
+    <>
+      <NumberInputField {...props} minValue={1000} maxValue={10000} />
+    </>
+  );
 };
 
 export const InputFieldInput = Template.bind({});

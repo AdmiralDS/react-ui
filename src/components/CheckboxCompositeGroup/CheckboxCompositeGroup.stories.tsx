@@ -1,32 +1,19 @@
 import React, { ChangeEvent, useState } from 'react';
 import { ComponentMeta, Story } from '@storybook/react';
 import { CheckboxCompositeGroup, CheckboxCompositeGroupProps } from './index';
-import { Checkbox } from '../Checkbox';
 import { CheckboxGroup } from '../CheckboxGroup';
-import styled from 'styled-components';
 import { withDesign } from 'storybook-addon-designs';
-
-const Wrapper = styled.div`
-  display: flex;
-  align-items: center;
-  & > span {
-    padding-left: 20px;
-  }
-`;
+import { CheckboxField } from '#src/components/form';
 
 export default {
-  title: 'Example/CheckboxCompositeGroup',
+  title: 'Admiral-2.1/CheckboxCompositeGroup',
   decorators: [withDesign],
   component: CheckboxCompositeGroup,
   parameters: {
     design: [
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=37%3A21015',
-      },
-      {
-        type: 'figma',
-        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=37%3A21143',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=37%3A21015',
       },
     ],
   },
@@ -43,13 +30,13 @@ export default {
   },
 } as ComponentMeta<typeof CheckboxCompositeGroup>;
 
-interface initialValue {
+interface ItemValue {
   label: string;
   id: string;
   checked: boolean;
 }
 
-const initialValue = [
+const initialValue: Array<ItemValue> = [
   { label: 'Москва', id: '1', checked: false },
   { label: 'Воронеж', id: '2', checked: false },
   { label: 'Самара', id: '3', checked: false },
@@ -57,36 +44,38 @@ const initialValue = [
 ];
 
 const CheckboxCompositeGroupDemo: Story = (args: CheckboxCompositeGroupProps) => {
-  const [list, setValue] = useState(initialValue);
+  const [list, setValue] = useState<Array<ItemValue>>(initialValue);
 
-  const checkedStatus = () => list.some((item) => item.checked);
+  const someItemChecked = () => list.some((item) => item.checked);
 
   const handleOnchangeAll = () => {
-    setValue((prev) => prev.map((item) => ({ ...item, checked: checkedStatus() ? false : true })));
+    setValue((prev) => prev.map((item) => ({ ...item, checked: !someItemChecked() })));
   };
   const handleOnchange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name } = e.target;
     setValue((prev) => prev.map((item) => (name === item.label ? { ...item, checked: !item.checked } : { ...item })));
   };
-  const getIndeterminateStatus = () => !list.every((item) => item.checked) && checkedStatus();
+  const getIndeterminateStatus = () => !list.every((item) => item.checked) && someItemChecked();
 
   return (
-    <CheckboxCompositeGroup {...args}>
-      <Wrapper>
-        <Checkbox indeterminate={getIndeterminateStatus()} checked={checkedStatus()} onChange={handleOnchangeAll} />
-        <span>Города : </span>
-      </Wrapper>
-      <CheckboxGroup>
-        {list.map((item) => {
-          return (
-            <Wrapper>
-              <Checkbox checked={item.checked} name={item.label} key={item.id} onChange={handleOnchange} />
-              <span>{item.label}</span>
-            </Wrapper>
-          );
-        })}
-      </CheckboxGroup>
-    </CheckboxCompositeGroup>
+    <>
+      <CheckboxCompositeGroup {...args}>
+        <CheckboxField
+          indeterminate={getIndeterminateStatus()}
+          checked={someItemChecked()}
+          onChange={handleOnchangeAll}
+        >
+          Города :
+        </CheckboxField>
+        <CheckboxGroup>
+          {list.map((item) => (
+            <CheckboxField checked={item.checked} name={item.label} key={item.id} onChange={handleOnchange}>
+              {item.label}
+            </CheckboxField>
+          ))}
+        </CheckboxGroup>
+      </CheckboxCompositeGroup>
+    </>
   );
 };
 

@@ -24,9 +24,9 @@ export const TrackWrapper = styled.div`
 
 export const Track = styled.div`
   height: 2px;
-  background: ${({ theme }) => theme.color.background.tertiary};
+  background: ${({ theme }) => theme.color['Neutral/Neutral 20']};
   [data-disabled='true'] && {
-    background: ${({ theme }) => theme.color.background.tertiary};
+    background: ${({ theme }) => theme.color['Neutral/Neutral 20']};
   }
   width: 100%;
 `;
@@ -39,12 +39,12 @@ export const DefaultTrack = styled.div`
 export const FilledTrack = styled.div<{ animation?: boolean }>`
   display: block;
   [data-disabled='true'] && {
-    background: ${({ theme }) => theme.color.basic.disable};
+    background: ${({ theme }) => theme.color['Neutral/Neutral 30']};
   }
   position: absolute;
   height: 2px;
   left: 0%;
-  background-color: ${({ theme }) => theme.color.basic.primary};
+  background-color: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
   transition: ${({ animation }) => (animation ? TRANSITION_ANIMATION : 'none')};
 `;
 
@@ -68,14 +68,14 @@ export const ThumbCircle = styled.div`
   position: relative;
   height: 20px;
   width: 20px;
-  background: ${({ theme }) => theme.color.basic.primary};
+  background: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
   border-radius: 50%;
   &:before {
     position: absolute;
     content: '';
     height: 8px;
     width: 8px;
-    background: ${({ theme }) => theme.color.background.primary};
+    background: ${({ theme }) => theme.color['Special/Static White']};
     top: 6px;
     bottom: 6px;
     left: 6px;
@@ -95,18 +95,18 @@ export const ThumbCircle = styled.div`
     }
   }
   &:hover {
-    background: ${({ theme }) => theme.color.basic.hover};
+    background: ${({ theme }) => theme.color['Primary/Primary 70']};
   }
   &:active {
-    background: ${({ theme }) => theme.color.basic.press};
+    background: ${({ theme }) => theme.color['Primary/Primary 70']};
   }
 
   [data-disabled='true'] && {
-    background: ${({ theme }) => theme.color.basic.disable};
+    background: ${({ theme }) => theme.color['Neutral/Neutral 30']};
     pointer-events: none;
     &:hover,
     &:active {
-      background: ${({ theme }) => theme.color.basic.disable};
+      background: ${({ theme }) => theme.color['Neutral/Neutral 30']};
     }
   }
 `;

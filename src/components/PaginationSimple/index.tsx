@@ -41,10 +41,10 @@ const ItemContent = styled.div`
   height: 4px;
   width: 16px;
   border-radius: 2px;
-  background-color: ${({ theme }) => theme.color.background.tertiary};
+  background-color: ${({ theme }) => theme.color['Neutral/Neutral 20']};
 
   [aria-selected='true'] & {
-    background-color: ${({ theme }) => theme.color.basic.primary};
+    background-color: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
   }
 `;
 
@@ -66,9 +66,9 @@ const Item = styled.button`
   -webkit-tap-highlight-color: transparent;
 
   &:focus {
-    border-color: ${({ theme }) => theme.color.basic.primary};
+    border-color: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
     & ${ItemContent} {
-      background-color: ${({ theme }) => theme.color.basic.hover};
+      background-color: ${({ theme }) => theme.color['Primary/Primary 80']};
     }
   }
   &:focus,
@@ -77,10 +77,10 @@ const Item = styled.button`
   }
 
   &:hover ${ItemContent} {
-    background-color: ${({ theme }) => theme.color.basic.hover};
+    background-color: ${({ theme }) => theme.color['Primary/Primary 70']};
   }
   &:active ${ItemContent} {
-    background-color: ${({ theme }) => theme.color.basic.press};
+    background-color: ${({ theme }) => theme.color['Primary/Primary 80']};
   }
 `;
 

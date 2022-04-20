@@ -19,6 +19,7 @@ export const Container = styled.div<{ disabled?: boolean; dimension?: ComponentD
   display: flex;
   align-items: stretch;
   border: none;
+  border-radius: 4px;
 
   ${containerHeights}
 `;

@@ -1,141 +1,141 @@
-import type { Background, Basic, Color, Special, SpecialInvert, Status, Text } from '../common';
-
-const BASIC: Basic = {
-  primary: '#4789EB',
-  secondary: '#E2E5E9',
-  tertiary: '#576375',
-  hover: '#1A6BE5',
-  press: '#1760CF',
-  disable: '#414A58',
-  primaryLight: '#75A6F0',
-};
-
-const BACKGROUND: Background = {
-  primary: '#1A1E23',
-  secondary: '#252A32',
-  tertiary: '#2B313B',
-  tertiaryHover: '#323943',
-  card: '#21252C',
-  cardHover: '#2B313B',
-  inversion: '#E2E5E9',
-  shadow: '#000000',
-  header: '#2B313B',
-  surfaceDanger: '#252A32',
-  surfaceWarn: '#252A32',
-  surfaceSuccess: '#252A32',
-  page: '#0D0F12',
-};
-
-const TEXT: Text = {
-  primary: '#E2E5E9',
-  secondary: '#8A96A8',
-  tertiary: '#4C5767',
-  inversion: '#1A1E23',
-  staticWhite: '#FFFFFF',
-  staticBlack: '#2B313B',
-};
-
-const STATUS: Status = {
-  warn: '#FF9F19',
-  hoverWarn: '#E58600',
-  pressWarn: '#CC7700',
-  success: '#4AB56E',
-  hoverSuccess: '#339956',
-  pressSuccess: '#2D864B',
-  danger: '#E15664',
-  hoverDanger: '#CC3342',
-  pressDanger: '#B82E3C',
-};
-
-const SPECIAL: Special = {
-  blueLight: '#0ABBFB',
-  lightBlue: '#0ABBFB',
-  blue: '#3F7DFE',
-  blueDeep: '#3E51B5',
-  greenLight: '#C0D20F',
-  green: '#5ECF70',
-  greenDeep: '#44BF78',
-  tiffany: '#5BD8D1',
-  tiffanyDeep: '#24A79F',
-  tiffanyDark: '#147F94',
-  tiffanyBlue: '#00BCD4',
-  yellow: '#F0DE37',
-  orangeLight: '#FFAF37',
-  orange: '#FF8515',
-  orangeDeep: '#FF5A32',
-  violetLight: '#ED6CCD',
-  violet: '#C368DA',
-  violetDeep: '#9A64F7',
-  fuchsia: '#F86D86',
-  fuchsiaDeep: '#D9477C',
-  rainySky: '#62676F',
-  night: '#2B313B',
-  gray: '#98ABCD',
-  softBlue: '#E0F2FF',
-  softNiceBlue: '#E0E9FF',
-  softSkyBlue: '#E2F4FE',
-  softTiffany: '#DBF8FF',
-  softGreen: '#D8F5E8',
-  softYellow: '#FFF1D4',
-  softPapaya: '#F9EECF',
-  softRed: '#FFEBED',
-  softPink: '#FFEBF8',
-  softPurple: '#EDF1FF',
-  softMallowPurple: '#E8E6FF',
-  softGray: '#F1F2F4',
-  softLightBlue: '#2B313B',
-  turquoise: '#4AD2CA',
-  softTurquoise: '#2B313B',
-  red: '#FF525C',
-  magenta: '#E052BD',
-  softMagenta: '#2B313B',
-  purple: '#BF67C7',
-  softViolet: '#2B313B',
-  blueDark: '#252A32',
-} as const;
-
-const SPECIAL_INVERT: SpecialInvert = {
-  blueLight: '#2B313B',
-  blue: '#2B313B',
-  blueDeep: '#2B313B',
-  greenLight: '#2B313B',
-  green: '#2B313B',
-  greenDeep: '#2B313B',
-  tiffany: '#2B313B',
-  tiffanyDeep: '#2B313B',
-  tiffanyDark: '#2B313B',
-  tiffanyBlue: '#2B313B',
-  yellow: '#2B313B',
-  orangeLight: '#2B313B',
-  orange: '#2B313B',
-  orangeDeep: '#2B313B',
-  violetLight: '#2B313B',
-  violet: '#2B313B',
-  violetDeep: '#2B313B',
-  fuchsia: '#2B313B',
-  fuchsiaDeep: '#2B313B',
-  rainySky: '#2B313B',
-  gray: '#2B313B',
-  blueDark: '#252A32',
-  softBlue: '#2B313B',
-  softNiceBlue: '#2B313B',
-  softSkyBlue: '#2B313B',
-  softTiffany: '#2B313B',
-  softGreen: '#2B313B',
-  softYellow: '#2B313B',
-  softPapaya: '#2B313B',
-  softRed: '#2B313B',
-  softPink: '#2B313B',
-  softPurple: '#2B313B',
-  softMallowPurple: '#2B313B',
-  softGray: '#2B313B',
-} as const;
+import type { Color } from '../common';
 
 export const COLOR: Color = {
-  basic: BASIC,
-  background: BACKGROUND,
-  text: TEXT,
-  status: STATUS,
-  special: SPECIAL,
-  specialInvert: SPECIAL_INVERT,
-};
+  //<editor-fold desc="Neutral">
+  'Neutral/Neutral 00': '#141618',
+  'Neutral/Neutral 05': '#1F2024',
+  'Neutral/Neutral 10': '#292A2E',
+  'Neutral/Neutral 20': '#3A3C41',
+  'Neutral/Neutral 30': '#4E5158',
+  'Neutral/Neutral 40': '#5E6169',
+  'Neutral/Neutral 50': '#7B8088',
+  'Neutral/Neutral 60': '#898E96',
+  'Neutral/Neutral 70': '#A7ABB3',
+  'Neutral/Neutral 80': '#CDD0D6',
+  'Neutral/Neutral 90': '#EBEDF0',
+  //</editor-fold>
+
+  //<editor-fold desc="Primary">
+  'Primary/Primary 10': '#1F2024',
+  'Primary/Primary 20': '#162B67',
+  'Primary/Primary 30': '#022D9A',
+  'Primary/Primary 40': '#0142D3',
+  'Primary/Primary 50': '#0062FF',
+  'Primary/Primary 60 Main': '#3481FF',
+  'Primary/Primary 70': '#5290FF',
+  'Primary/Primary 80': '#689FFF',
+  //</editor-fold>
+
+  //<editor-fold desc="Special">
+  'Special/Static White': '#FFFFFF',
+  'Special/Elevated BG': '#1F2024',
+  'Special/Dark Static Neutral 00': '#141618',
+  'Special/Dark Static Neutral 05': '#1F2024',
+  'Special/Dark Static Neutral 10': '#292A2E',
+  'Special/Dark Static Neutral 20': '#3A3C41',
+  'Special/Dark Static Neutral 30': '#4E5158',
+  'Special/Dark Static Neutral 50': '#7B8088',
+  'Special/Dark Static Neutral 80': '#CDD0D6',
+  'Special/Dark Static Neutral 90': '#EBEDF0',
+  'Special/Dark Static Primary 60': '#3481FF',
+  'Special/Dark Static Primary 70': '#5290FF',
+  'Special/Dark Static Primary 80': '#689FFF',
+  'Special/Dark Static Error 60': '#EA3C3C',
+  'Special/Dark Static Success 50': '#16913F',
+  //</editor-fold>
+
+  //<editor-fold desc="Opacity">
+  'Opacity/Hover': '#FFFFFF0F',
+  'Opacity/Focus': '#FFFFFF17',
+  'Opacity/Press': '#FFFFFF1F',
+  'Opacity/Modal': '#00000066',
+  'Opacity/Dark Static Hover': '#FFFFFF0F',
+  'Opacity/Dark Static Focus': '#FFFFFF17',
+  'Opacity/Dark Static Press': '#FFFFFF1F',
+  //</editor-fold>
+
+  //<editor-fold desc="Error">
+  'Error/Error 10': '#1F2024',
+  'Error/Error 20': '#571B1B',
+  'Error/Error 30': '#880C0C',
+  'Error/Error 40': '#A71212',
+  'Error/Error 50': '#D92020',
+  'Error/Error 60 Main': '#EA3C3C',
+  'Error/Error 70': '#F55F5F',
+  'Error/Error 80': '#FA7979',
+  //</editor-fold>
+
+  //<editor-fold desc="Success">
+  'Success/Success 10': '#1F2024',
+  'Success/Success 20': '#0E3B1E',
+  'Success/Success 30': '#055320',
+  'Success/Success 40': '#0C7431',
+  'Success/Success 50 Main': '#16913F',
+  'Success/Success 60': '#1FA951',
+  'Success/Success 70': '#2FC063',
+  //</editor-fold>
+
+  //<editor-fold desc="Warning">
+  'Warning/Warning 10': '#1F2024',
+  'Warning/Warning 20': '#591C04',
+  'Warning/Warning 30': '#902C06',
+  'Warning/Warning 40': '#BC3B0D',
+  'Warning/Warning 50 Main': '#EF5018',
+  'Warning/Warning 60': '#FF662F',
+  'Warning/Warning 70': '#FF8559',
+  //</editor-fold>
+
+  //<editor-fold desc="Attention">
+  'Attention/Attention 10': '#1F2024',
+  'Attention/Attention 20': '#CA9B00',
+  'Attention/Attention 30': '#DFAB00',
+  'Attention/Attention 40': '#F0B902',
+  'Attention/Attention 50 Main': '#FFC400',
+  'Attention/Attention 60': '#FDD14C',
+  'Attention/Attention 70': '#FDDD77',
+  //</editor-fold>
+
+  //<editor-fold desc="Purple">
+  'Purple/Purple 10': '#1F2024',
+  'Purple/Purple 20': '#391968',
+  'Purple/Purple 30': '#491D8B',
+  'Purple/Purple 40': '#6929C4',
+  'Purple/Purple 50': '#8A3FFC',
+  'Purple/Purple 60 Main': '#A065FE',
+  'Purple/Purple 70': '#B587FF',
+  'Purple/Purple 80': '#CEB1FF',
+  //</editor-fold>
+
+  //<editor-fold desc="Magenta">
+  'Magenta/Magenta 10': '#1F2024',
+  'Magenta/Magenta 20': '#510224',
+  'Magenta/Magenta 30': '#740937',
+  'Magenta/Magenta 40': '#9F1853',
+  'Magenta/Magenta 50': '#D02670',
+  'Magenta/Magenta 60 Main': '#E84A8E',
+  'Magenta/Magenta 70': '#F970AB',
+  'Magenta/Magenta 80': '#FEA2CA',
+  //</editor-fold>
+
+  //<editor-fold desc="Cyan">
+  'Cyan/Cyan 10': '#1F2024',
+  'Cyan/Cyan 20': '#002D56',
+  'Cyan/Cyan 30': '#003A6D',
+  'Cyan/Cyan 40': '#00539A',
+  'Cyan/Cyan 50': '#0072C3',
+  'Cyan/Cyan 60 Main': '#0E8CE1',
+  'Cyan/Cyan 70': '#28A6F6',
+  'Cyan/Cyan 80': '#70C7FD',
+  //</editor-fold>
+
+  //<editor-fold desc="Teal">
+  'Teal/Teal 10': '#1F2024',
+  'Teal/Teal 20': '#023136',
+  'Teal/Teal 30': '#004144',
+  'Teal/Teal 40': '#005D5D',
+  'Teal/Teal 50': '#007D79',
+  'Teal/Teal 60 Main': '#009692',
+  'Teal/Teal 70': '#06B2AF',
+  'Teal/Teal 80': '#2FD2CF',
+  //</editor-fold>
+} as const;

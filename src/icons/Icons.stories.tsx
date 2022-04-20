@@ -21,17 +21,17 @@ import * as SystemIcons from './IconComponents-system';
 
 const Title = styled.div`
   ${typography['Main/XS-bold']}
-  color: ${({ theme }) => theme.color.text.primary};
+  color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
   margin-bottom: 20px;
 `;
 
 const Text = styled.div`
   ${typography['Additional/M']}
-  color: ${({ theme }) => theme.color.text.primary};
+  color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
 `;
 
 const Code = styled.code`
-  color: ${({ theme }) => theme.color.text.primary};
+  color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
 `;
 
 const Panel = styled.pre`
@@ -39,21 +39,21 @@ const Panel = styled.pre`
   border-radius: 4px;
   padding: 20px;
   width: 100%;
-  background-color: ${({ theme }) => theme.color.background.secondary};
+  background-color: ${({ theme }) => theme.color['Neutral/Neutral 05']};
 `;
 
 const IconsWrapper = styled.div`
   display: flex;
   flex-flow: row wrap;
   gap: 8px;
-  background: ${({ theme }) => theme.color.background.secondary};
+  background: ${({ theme }) => theme.color['Neutral/Neutral 05']};
   padding: 32px 0;
   border-radius: 8px;
   & svg {
     flex-shrink: 0;
     *[fill^='#62'],
     *[fill^='#2B'] {
-      fill: ${({ theme }) => theme.color.text.secondary};
+      fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
     }
   }
   justify-content: center;
@@ -77,7 +77,7 @@ const IconCard = styled.div`
 const IconName = styled.div`
   margin-top: 16px;
   ${typography['Caption/XS']}
-  color: ${({ theme }) => theme.color.text.secondary};
+  color: ${({ theme }) => theme.color['Neutral/Neutral 50']};
   display: flex;
   gap: 8px;
 `;

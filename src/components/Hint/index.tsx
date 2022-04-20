@@ -7,7 +7,7 @@ import { uid } from '#src/components/common/uid';
 import { keyboardKey } from '#src/components/common/keyboardKey';
 
 import type { Dimension } from './style';
-import { AnchorWrapper, Portal, FakeTarget } from './style';
+import { AnchorWrapper, FakeTarget, Portal } from './style';
 import { getHintDirection } from './utils';
 import { HintContainer } from './HintContainer';
 import { initialState, reducer } from './reducer';
@@ -58,9 +58,7 @@ export const Hint: React.FC<HintProps> = ({
   const targetElement: any = target?.current || anchorElementRef.current;
 
   const [state, dispatch] = React.useReducer(reducer, initialState);
-  const [portalFlexDirection, setPortalFlexDirection] = React.useState<
-    'row' | 'row-reverse' | 'column' | 'column-reverse' | undefined
-  >();
+  const [portalFlexDirection, setPortalFlexDirection] = React.useState('');
   const [portalFullWidth, setPortalFullWidth] = React.useState(false);
   const [isMobile, setMobile] = React.useState(window.innerWidth < 640);
   const [trapFocus, setTrapFocus] = React.useState(false);

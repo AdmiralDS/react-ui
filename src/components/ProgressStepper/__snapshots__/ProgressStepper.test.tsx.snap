@@ -22,12 +22,12 @@ Object {
   overflow: hidden;
   height: 4px;
   border-radius: 2px;
-  background-color: #E2E5E9;
+  background-color: #D6D8DD;
 }
 
 .c5 {
   width: 50%;
-  background-color: #0D69F2;
+  background-color: #0062FF;
 }
 
 .c1 {
@@ -52,8 +52,7 @@ Object {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
-  color: #2B313B;
+  color: #22242A;
 }
 
 .c3 {
@@ -61,14 +60,13 @@ Object {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
+  color: #74777F;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 12px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
-  color: #626F84;
 }
 
 .c6 {
@@ -77,14 +75,13 @@ Object {
   -ms-flex-line-packalign-text: left;
   align-text: left;
   margin-top: 8px;
+  color: #74777F;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 12px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
-  color: #626F84;
 }
 
 <body>
@@ -152,12 +149,12 @@ Object {
   overflow: hidden;
   height: 4px;
   border-radius: 2px;
-  background-color: #E2E5E9;
+  background-color: #D6D8DD;
 }
 
 .c5 {
   width: 50%;
-  background-color: #0D69F2;
+  background-color: #0062FF;
 }
 
 .c1 {
@@ -182,8 +179,7 @@ Object {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
-  color: #2B313B;
+  color: #22242A;
 }
 
 .c3 {
@@ -191,14 +187,13 @@ Object {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
+  color: #74777F;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 12px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
-  color: #626F84;
 }
 
 .c6 {
@@ -207,14 +202,13 @@ Object {
   -ms-flex-line-packalign-text: left;
   align-text: left;
   margin-top: 8px;
+  color: #74777F;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 12px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
-  color: #626F84;
 }
 
 <div>
@@ -337,12 +331,12 @@ Object {
   overflow: hidden;
   height: 4px;
   border-radius: 2px;
-  background-color: #E2E5E9;
+  background-color: #D6D8DD;
 }
 
 .c5 {
   width: 50%;
-  background-color: #0D69F2;
+  background-color: #0062FF;
 }
 
 .c1 {
@@ -367,8 +361,7 @@ Object {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
-  color: #2B313B;
+  color: #22242A;
 }
 
 .c3 {
@@ -376,14 +369,13 @@ Object {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
+  color: #74777F;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 12px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
-  color: #626F84;
 }
 
 .c6 {
@@ -392,14 +384,13 @@ Object {
   -ms-flex-line-packalign-text: left;
   align-text: left;
   margin-top: 8px;
+  color: #74777F;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 12px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
-  color: #626F84;
 }
 
 <body>
@@ -467,12 +458,12 @@ Object {
   overflow: hidden;
   height: 4px;
   border-radius: 2px;
-  background-color: #E2E5E9;
+  background-color: #D6D8DD;
 }
 
 .c5 {
   width: 50%;
-  background-color: #0D69F2;
+  background-color: #0062FF;
 }
 
 .c1 {
@@ -497,8 +488,7 @@ Object {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
-  color: #2B313B;
+  color: #22242A;
 }
 
 .c3 {
@@ -506,14 +496,13 @@ Object {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
+  color: #74777F;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 12px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
-  color: #626F84;
 }
 
 .c6 {
@@ -522,14 +511,13 @@ Object {
   -ms-flex-line-packalign-text: left;
   align-text: left;
   margin-top: 8px;
+  color: #74777F;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 12px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
-  color: #626F84;
 }
 
 <div>
@@ -652,12 +640,12 @@ Object {
   overflow: hidden;
   height: 4px;
   border-radius: 2px;
-  background-color: #E2E5E9;
+  background-color: #D6D8DD;
 }
 
 .c5 {
   width: 50%;
-  background-color: #0D69F2;
+  background-color: #0062FF;
 }
 
 .c1 {
@@ -678,8 +666,7 @@ Object {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
-  color: #2B313B;
+  color: #22242A;
 }
 
 .c3 {
@@ -687,14 +674,13 @@ Object {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
+  color: #74777F;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 12px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
-  color: #626F84;
 }
 
 <body>
@@ -756,12 +742,12 @@ Object {
   overflow: hidden;
   height: 4px;
   border-radius: 2px;
-  background-color: #E2E5E9;
+  background-color: #D6D8DD;
 }
 
 .c5 {
   width: 50%;
-  background-color: #0D69F2;
+  background-color: #0062FF;
 }
 
 .c1 {
@@ -782,8 +768,7 @@ Object {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
-  color: #2B313B;
+  color: #22242A;
 }
 
 .c3 {
@@ -791,14 +776,13 @@ Object {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
+  color: #74777F;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 12px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
-  color: #626F84;
 }
 
 <div>
@@ -915,12 +899,12 @@ Object {
   overflow: hidden;
   height: 4px;
   border-radius: 2px;
-  background-color: #E2E5E9;
+  background-color: #D6D8DD;
 }
 
 .c5 {
   width: 50%;
-  background-color: #0D69F2;
+  background-color: #0062FF;
 }
 
 .c1 {
@@ -945,8 +929,7 @@ Object {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
-  color: #2B313B;
+  color: #22242A;
 }
 
 .c3 {
@@ -954,14 +937,13 @@ Object {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
+  color: #74777F;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 12px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
-  color: #626F84;
 }
 
 .c6 {
@@ -970,14 +952,13 @@ Object {
   -ms-flex-line-packalign-text: left;
   align-text: left;
   margin-top: 8px;
+  color: #74777F;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 12px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
-  color: #626F84;
 }
 
 <body>
@@ -1045,12 +1026,12 @@ Object {
   overflow: hidden;
   height: 4px;
   border-radius: 2px;
-  background-color: #E2E5E9;
+  background-color: #D6D8DD;
 }
 
 .c5 {
   width: 50%;
-  background-color: #0D69F2;
+  background-color: #0062FF;
 }
 
 .c1 {
@@ -1075,8 +1056,7 @@ Object {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
-  color: #2B313B;
+  color: #22242A;
 }
 
 .c3 {
@@ -1084,14 +1064,13 @@ Object {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
+  color: #74777F;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 12px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
-  color: #626F84;
 }
 
 .c6 {
@@ -1100,14 +1079,13 @@ Object {
   -ms-flex-line-packalign-text: left;
   align-text: left;
   margin-top: 8px;
+  color: #74777F;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 12px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
-  color: #626F84;
 }
 
 <div>
@@ -1230,12 +1208,12 @@ Object {
   overflow: hidden;
   height: 4px;
   border-radius: 2px;
-  background-color: #E2E5E9;
+  background-color: #D6D8DD;
 }
 
 .c5 {
   width: 50%;
-  background-color: #0D69F2;
+  background-color: #0062FF;
 }
 
 .c1 {
@@ -1256,8 +1234,7 @@ Object {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
-  color: #2B313B;
+  color: #22242A;
 }
 
 .c3 {
@@ -1265,14 +1242,13 @@ Object {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
+  color: #74777F;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 12px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
-  color: #626F84;
 }
 
 .c6 {
@@ -1281,14 +1257,13 @@ Object {
   -ms-flex-line-packalign-text: left;
   align-text: left;
   margin-top: 8px;
+  color: #74777F;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 12px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
-  color: #626F84;
 }
 
 <body>
@@ -1356,12 +1331,12 @@ Object {
   overflow: hidden;
   height: 4px;
   border-radius: 2px;
-  background-color: #E2E5E9;
+  background-color: #D6D8DD;
 }
 
 .c5 {
   width: 50%;
-  background-color: #0D69F2;
+  background-color: #0062FF;
 }
 
 .c1 {
@@ -1382,8 +1357,7 @@ Object {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
-  color: #2B313B;
+  color: #22242A;
 }
 
 .c3 {
@@ -1391,14 +1365,13 @@ Object {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
+  color: #74777F;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 12px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
-  color: #626F84;
 }
 
 .c6 {
@@ -1407,14 +1380,13 @@ Object {
   -ms-flex-line-packalign-text: left;
   align-text: left;
   margin-top: 8px;
+  color: #74777F;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 12px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
-  color: #626F84;
 }
 
 <div>

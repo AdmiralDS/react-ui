@@ -4,8 +4,8 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import styled from 'styled-components';
 
-import { ITooltipProps, Tooltip } from '../Tooltip';
-import { Button } from '../Button';
+import { ITooltipProps, Tooltip } from '#src/components/Tooltip';
+import { Button } from '#src/components/Button';
 
 const Separator = styled.div<{ height?: number }>`
   height: ${({ height }) => (height ? height : 20)}px;
@@ -31,18 +31,18 @@ const Description = () => (
 );
 
 export default {
-  title: 'Example/Tooltip',
+  title: 'Admiral-2.1/Tooltip',
   decorators: [withDesign],
   component: Tooltip,
   parameters: {
     design: [
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=37%3A31354',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=37%3A31354',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=37%3A31490',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=37%3A31490',
       },
     ],
     componentSubtitle: <Description />,
@@ -66,57 +66,71 @@ export default {
 
 const Template1: ComponentStory<typeof Tooltip> = ({ withDelay, tooltipPosition }: ITooltipProps) => {
   return (
-    <Tooltip
-      renderContent={() =>
-        `Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin
+    <>
+      <Tooltip
+        renderContent={() =>
+          `Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin
           literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney
           College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage,
           and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem
           Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum'`
-      }
-      style={{ minWidth: '200px', maxWidth: '300px' }}
-      withDelay={withDelay}
-      tooltipPosition={tooltipPosition}
-      id="test1"
-    >
-      <Button dimension="m" displayAsSquare aria-label="Delete" aria-describedby="test1" title={'Это title на кнопке'}>
-        <DeleteOutline aria-hidden />
-      </Button>
-    </Tooltip>
+        }
+        style={{ minWidth: '200px', maxWidth: '300px' }}
+        withDelay={withDelay}
+        tooltipPosition={tooltipPosition}
+        id="test1"
+      >
+        <Button
+          dimension="m"
+          displayAsSquare
+          aria-label="Delete"
+          aria-describedby="test1"
+          title={'Это title на кнопке'}
+        >
+          <DeleteOutline aria-hidden />
+        </Button>
+      </Tooltip>
+    </>
   );
 };
 
 const Template2: ComponentStory<typeof Tooltip> = () => {
   return (
-    <Tooltip renderContent={() => 'Delete file'} withDelay id="test2">
-      <Button dimension="m" displayAsSquare aria-label="Delete" aria-describedby="test2">
-        <DeleteOutline height={24} width={24} />
-      </Button>
-    </Tooltip>
+    <>
+      <Tooltip renderContent={() => 'Delete file'} withDelay id="test2">
+        <Button dimension="m" displayAsSquare aria-label="Delete" aria-describedby="test2">
+          <DeleteOutline height={24} width={24} />
+        </Button>
+      </Tooltip>
+    </>
   );
 };
 
 const Template3: ComponentStory<typeof Tooltip> = () => {
   const tooltipRef = useRef(null);
   return (
-    <Tooltip renderContent={() => 'Delete file'} tooltipRef={tooltipRef} id="test3">
-      <Button dimension="m" displayAsSquare aria-label="Delete" aria-describedby="test3">
-        <DeleteOutline height={24} width={24} />
-      </Button>
-    </Tooltip>
+    <>
+      <Tooltip renderContent={() => 'Delete file'} tooltipRef={tooltipRef} id="test3">
+        <Button dimension="m" displayAsSquare aria-label="Delete" aria-describedby="test3">
+          <DeleteOutline height={24} width={24} />
+        </Button>
+      </Tooltip>
+    </>
   );
 };
 
 const Template4: ComponentStory<typeof Tooltip> = ({ className }) => {
   return (
-    <Tooltip
-      renderContent={() => `Contrary to popular belief, Lorem Ipsum is not simply random text.`}
-      className={className}
-    >
-      <Button dimension="m" displayAsSquare aria-label="Delete" title={'Это title на кнопке'}>
-        <DeleteOutline aria-hidden />
-      </Button>
-    </Tooltip>
+    <>
+      <Tooltip
+        renderContent={() => `Contrary to popular belief, Lorem Ipsum is not simply random text.`}
+        className={className}
+      >
+        <Button dimension="m" displayAsSquare aria-label="Delete" title={'Это title на кнопке'}>
+          <DeleteOutline aria-hidden />
+        </Button>
+      </Tooltip>
+    </>
   );
 };
 

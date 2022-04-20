@@ -1,18 +1,21 @@
 import * as React from 'react';
 import styled from 'styled-components';
+import { typography } from '#src/components/Typography';
 import { uid } from '#src/components/common/uid';
 import { TextInput } from '#src/components/input/TextInput';
 import { Button as SecondaryButton } from '#src/components/Button';
 
-import { Ellipsis, PaginationItem } from './Items';
-import { getListOfPages, range } from './utils';
+import { Ellipsis, PaginationItem } from '#src/components/PaginationTwo/Items';
+import { getListOfPages, range } from '#src/components/PaginationTwo/utils';
 
 const Wrapper = styled.div<{ mobile?: boolean }>`
   position: relative;
   display: flex;
+  align-items: center;
   flex-direction: ${({ mobile }) => (mobile ? 'column' : 'row')};
   flex: 1 1 auto;
   list-style: none;
+  color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
 
   ${({ mobile }) =>
     mobile &&
@@ -42,6 +45,12 @@ const Button = styled(SecondaryButton)`
   margin-bottom: 20px;
 `;
 
+const PageSize = styled.div`
+  color: ${({ theme }) => theme.color['Neutral/Neutral 50']};
+  ${typography['Body/Body 1 Long']}
+  margin-left: 16px;
+`;
+
 export interface PaginationTwoProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'> {
   /** Текущая страница */
   page: number;
@@ -57,6 +66,12 @@ export interface PaginationTwoProps extends Omit<React.HTMLAttributes<HTMLDivEle
   showNextBtnMobile?: boolean;
   /** Отображение инпута, если страниц больше 21й  */
   showInput?: boolean;
+  /** Функция, возвращающая текст, поясняющий, какой диапазон записей сейчас отображается */
+  itemRangeText?: (min: number, max: number, total: number) => string;
+  /** Размер страницы (сколько максимально умещается записей в одной странице) */
+  pageSize?: number;
+  /** Общее количество записей */
+  totalItems?: number;
 }
 
 export const PaginationTwo: React.FC<PaginationTwoProps> = ({
@@ -67,6 +82,9 @@ export const PaginationTwo: React.FC<PaginationTwoProps> = ({
   showNextBtnMobile = true,
   showInput = true,
   onChange,
+  itemRangeText = (min: number, max: number, total: number) => `${min}–${max} записей из ${total}`,
+  pageSize,
+  totalItems,
   ...props
 }) => {
   const hideNextButton = mobile || false;
@@ -186,6 +204,15 @@ export const PaginationTwo: React.FC<PaginationTwoProps> = ({
           onKeyDown={handleInputKeyDown}
           onBlur={handleInputBlur}
         />
+      )}
+      {pageSize !== undefined && totalItems !== undefined && (
+        <PageSize>
+          {itemRangeText(
+            Math.min(pageSize * (page - 1) + 1, totalItems),
+            Math.min(page * pageSize, totalItems),
+            totalItems,
+          )}
+        </PageSize>
       )}
     </Wrapper>
   );

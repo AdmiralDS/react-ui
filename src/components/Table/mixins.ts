@@ -22,6 +22,7 @@ export const cellStyle = css`
 `;
 
 export const rowStyle = css`
+  color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
   ${typography['Body/Body 2 Short']}
 
   [data-dimension='l'] & {
@@ -33,6 +34,7 @@ export const rowStyle = css`
 `;
 
 export const headerStyle = css`
+  color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
   ${typography['Subtitle/Subtitle 3']}
 
   [data-dimension='l'] & {
@@ -58,25 +60,25 @@ export const multiLineTitle = css<{ lineClamp: number }>`
 `;
 
 export const disabledRow = css`
-  color: ${({ theme }) => theme.color.text.tertiary};
+  color: ${({ theme }) => theme.color['Neutral/Neutral 30']};
   pointer-events: none;
 `;
 
 export const underlineRow = css`
-  border-bottom: 1px solid ${({ theme }) => theme.color.basic.disable};
+  border-bottom: 1px solid ${({ theme }) => theme.color['Neutral/Neutral 20']};
 `;
 
 export const rowBackground = css`
   [data-selected='true'] & {
-    background: ${({ theme }) => theme.color.special.softBlue};
+    background: ${({ theme }) => theme.color['Primary/Primary 20']};
   }
   [data-error='true'] & {
-    background: ${({ theme }) => theme.color.background.surfaceDanger};
+    background: ${({ theme }) => theme.color['Error/Error 20']};
   }
   [data-success='true'] & {
-    background: ${({ theme }) => theme.color.background.surfaceSuccess};
+    background: ${({ theme }) => theme.color['Success/Success 20']};
   }
   [data-disabled='true'] & {
-    background: ${({ theme }) => theme.color.background.primary};
+    background: ${({ theme }) => theme.color['Neutral/Neutral 00']};
   }
 `;

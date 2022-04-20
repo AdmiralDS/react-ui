@@ -13,29 +13,35 @@ import { filterKeysWithUndefinedValues } from '#src/components/common/utils/filt
 const WrapperButton = styled.div`
   display: flex;
   flex-wrap: wrap;
+
   > * {
     margin: 8px;
+    flex-basis: 170px;
   }
+
   justify-content: space-between;
   align-items: center;
 `;
 const Separator = styled.div`
   height: 20px;
 `;
+const DarkDiv = styled.div`
+  background-color: ${({ theme }) => theme.color['Special/Dark Static Neutral 00']};
+`;
 
 export default {
-  title: 'Example/Button',
+  title: 'Admiral-2.1/Button',
   component: Button,
   decorators: [withDesign],
   parameters: {
     design: [
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A19734',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A19734',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=108393%3A69845',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A16209',
       },
     ],
   },
@@ -67,6 +73,7 @@ const ButtonContainer = styled.div`
   padding: 24px;
   position: relative;
   display: block;
+
   > * {
     margin: 8px 16px 0 0;
   }
@@ -108,6 +115,28 @@ const ButtonWithIconDemo: ComponentStory<typeof Button> = () => (
       <div>
         <T font="Body/Body 1 Long" as="div">
           {' '}
+          Ghost - xl
+        </T>
+        <Button dimension="xl" appearance="ghost">
+          Button 56
+          <StarSolid />
+        </Button>
+      </div>
+      <>
+        <DarkDiv>
+          <T font="Body/Body 1 Long" as="div">
+            {' '}
+            White - l
+          </T>
+          <Button dimension="l" appearance="white">
+            Button 48
+            <StarSolid />
+          </Button>
+        </DarkDiv>
+      </>
+      <div>
+        <T font="Body/Body 1 Long" as="div">
+          {' '}
           Dimension - s
         </T>
         <Button dimension="s" appearance="success">
@@ -130,14 +159,51 @@ const ButtonWithIconDemo: ComponentStory<typeof Button> = () => (
 );
 
 const ButtonLoaderDemo: ComponentStory<typeof Button> = () => (
-  <div>
-    <T font="Body/Body 1 Long" as="div">
-      Button with loader
-    </T>
-    <Separator />
-    <Button disabled displayAsSquare>
-      <Spinner dimension="m" />
-    </Button>
+  <>
+    <WrapperButton>
+      <div>
+        <T font="Body/Body 1 Long" as="div">
+          Button with loader
+        </T>
+        <Separator />
+        <Button disabled displayAsSquare>
+          <Spinner dimension="m" />
+        </Button>
+      </div>
+      <div>
+        <T font="Body/Body 1 Long" as="div">
+          {' '}
+          Secondary
+        </T>
+        <Separator />
+        <Button dimension="l" appearance="secondary">
+          <Spinner dimension="m" />
+          {/*Button 48*/}
+        </Button>
+      </div>
+      <div>
+        <T font="Body/Body 1 Short" as="div">
+          {' '}
+          Danger
+        </T>
+        <Separator />
+        <Button dimension="m" appearance="danger">
+          <Spinner dimension="m" inverse={true} />
+          {/*Button 48*/}
+        </Button>
+      </div>
+      <div>
+        <T font="Body/Body 2 Long" as="div">
+          {' '}
+          Danger
+        </T>
+        <Separator />
+        <Button dimension="s" appearance="success">
+          <Spinner dimension="s" inverse={true} />
+          {/*Button 48*/}
+        </Button>
+      </div>
+    </WrapperButton>
     <Separator />
     <div>
       <T font="Body/Body 1 Long" as="div">
@@ -148,34 +214,36 @@ const ButtonLoaderDemo: ComponentStory<typeof Button> = () => (
         <Spinner dimension="m" />
       </Button>
     </div>
-  </div>
+  </>
 );
 
 const ButtonSkeleton: ComponentStory<typeof Button> = ({ appearance = 'primary', dimension = 'xl', ...args }) => (
-  <WrapperButton>
-    <Button disabled dimension={dimension} appearance={appearance} {...args}>
-      <PseudoText dimension={dimension} appearance={appearance} />
-    </Button>
-    <Button disabled dimension={dimension} appearance={appearance} {...args}>
-      <PseudoIcon dimension={dimension} appearance={appearance} />
-      <PseudoText dimension={dimension} appearance={appearance} />
-    </Button>
-    <Button disabled dimension={dimension} appearance={appearance} {...args}>
-      <PseudoText dimension={dimension} appearance={appearance} />
-      <PseudoIcon dimension={dimension} appearance={appearance} />
-    </Button>
-    <div style={{ marginLeft: 10 }}>
-      <Button disabled displayAsSquare dimension={dimension} appearance={appearance} {...args}>
+  <>
+    <WrapperButton>
+      <Button disabled dimension={dimension} appearance={appearance} {...args}>
+        <PseudoText dimension={dimension} appearance={appearance} />
+      </Button>
+      <Button disabled dimension={dimension} appearance={appearance} {...args}>
+        <PseudoIcon dimension={dimension} appearance={appearance} />
+        <PseudoText dimension={dimension} appearance={appearance} />
+      </Button>
+      <Button disabled dimension={dimension} appearance={appearance} {...args}>
+        <PseudoText dimension={dimension} appearance={appearance} />
         <PseudoIcon dimension={dimension} appearance={appearance} />
       </Button>
-    </div>
-  </WrapperButton>
+      <div style={{ marginLeft: 10 }}>
+        <Button disabled displayAsSquare dimension={dimension} appearance={appearance} {...args}>
+          <PseudoIcon dimension={dimension} appearance={appearance} />
+        </Button>
+      </div>
+    </WrapperButton>
+  </>
 );
 
 const ButtonPlaygroundDemo: ComponentStory<typeof Button> = ({ children, ...args }) => {
   const cleanProps = filterKeysWithUndefinedValues(args);
   return (
-    <div>
+    <>
       <ButtonContainer>
         <Button {...cleanProps}>Button 56</Button>
 
@@ -357,13 +425,13 @@ const ButtonPlaygroundDemo: ComponentStory<typeof Button> = ({ children, ...args
           <StarSolid />
         </Button>
       </ButtonContainer>
-    </div>
+    </>
   );
 };
 
 export const ButtonWithIcon = ButtonWithIconDemo.bind({});
 export const ButtonLoader = ButtonLoaderDemo.bind({});
-export const Skeleton = ButtonSkeleton.bind({});
+// export const Skeleton = ButtonSkeleton.bind({});
 
 export const Playground = ButtonPlaygroundDemo.bind({});
 Playground.args = {

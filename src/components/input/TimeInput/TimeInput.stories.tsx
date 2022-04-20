@@ -1,15 +1,15 @@
-import React, { ChangeEvent, useState, useEffect } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { TimeInput } from '../TimeInput';
 import { withDesign } from 'storybook-addon-designs';
 import { INPUT_DIMENSIONS_VALUES } from '#src/components/input/types';
-import styled from 'styled-components';
 import { ReactComponent as GPSOutline } from '@admiral-ds/icons/build/location/GPSOutline.svg';
 import { ReactComponent as TimeSVG } from '@admiral-ds/icons/build/system/TimeOutline.svg';
+import styled from 'styled-components';
 
 const Icon = styled(TimeSVG)`
   & *[fill^='#'] {
-    fill: ${(p) => p.theme.color.basic.tertiary};
+    fill: ${(p) => p.theme.color['Neutral/Neutral 50']};
   }
 
   [disabled] & {
@@ -21,7 +21,25 @@ const Icon = styled(TimeSVG)`
   }
 
   &:hover *[fill^='#'] {
-    fill: ${(p) => p.theme.color.basic.hover};
+    fill: ${(p) => p.theme.color['Primary/Primary 70']};
+  }
+`;
+
+const GPSIcon = styled(GPSOutline)`
+  & *[fill^='#'] {
+    fill: ${(p) => p.theme.color['Neutral/Neutral 50']};
+  }
+
+  [disabled] & {
+    pointer-events: none;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:hover *[fill^='#'] {
+    fill: ${(p) => p.theme.color['Primary/Primary 70']};
   }
 `;
 
@@ -45,7 +63,7 @@ const Description = () => (
 );
 
 export default {
-  title: 'Input/TimeInput',
+  title: 'Admiral-2.1/Input/TimeInput',
   component: TimeInput,
   decorators: [withDesign],
   parameters: {
@@ -53,15 +71,15 @@ export default {
     design: [
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A60618',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A60618',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A60644',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A60644',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A60669',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A60669',
       },
     ],
   },
@@ -127,14 +145,16 @@ const TimeInputIconAlternative: ComponentStory<typeof TimeInput> = (props) => {
     props.onChange?.(e);
   };
   return (
-    <TimeInput
-      {...cleanProps}
-      style={{ maxWidth: '320px' }}
-      icons={<GPSOutline onClick={() => setValue('12:00')} />}
-      icon={Icon}
-      value={localValue}
-      onChange={handleChange}
-    />
+    <>
+      <TimeInput
+        {...cleanProps}
+        style={{ maxWidth: '320px' }}
+        icons={<GPSIcon onClick={() => setValue('12:00')} />}
+        icon={Icon}
+        value={localValue}
+        onChange={handleChange}
+      />
+    </>
   );
 };
 
@@ -157,7 +177,11 @@ const TimeInputSimple: ComponentStory<typeof TimeInput> = (props) => {
     setValue(inputValue);
     props.onChange?.(e);
   };
-  return <TimeInput {...cleanProps} style={{ maxWidth: '320px' }} value={localValue} onChange={handleChange} />;
+  return (
+    <>
+      <TimeInput {...cleanProps} style={{ maxWidth: '320px' }} value={localValue} onChange={handleChange} />
+    </>
+  );
 };
 
 const TimeInputRange: ComponentStory<typeof TimeInput> = (props) => {
@@ -180,14 +204,16 @@ const TimeInputRange: ComponentStory<typeof TimeInput> = (props) => {
     props.onChange?.(e);
   };
   return (
-    <TimeInput
-      {...cleanProps}
-      style={{ maxWidth: '320px' }}
-      startTime="09:00"
-      endTime="18:00"
-      value={localValue}
-      onChange={handleChange}
-    />
+    <>
+      <TimeInput
+        {...cleanProps}
+        style={{ maxWidth: '320px' }}
+        startTime="09:00"
+        endTime="18:00"
+        value={localValue}
+        onChange={handleChange}
+      />
+    </>
   );
 };
 
@@ -211,15 +237,17 @@ const TimeInputRangeDisabled: ComponentStory<typeof TimeInput> = (props) => {
     props.onChange?.(e);
   };
   return (
-    <TimeInput
-      {...cleanProps}
-      style={{ maxWidth: '320px' }}
-      disabledSlots={['12:30', '15:30', '17:00', '19:30']}
-      startTime="11:00"
-      endTime="20:00"
-      value={localValue}
-      onChange={handleChange}
-    />
+    <>
+      <TimeInput
+        {...cleanProps}
+        style={{ maxWidth: '320px' }}
+        disabledSlots={['12:30', '15:30', '17:00', '19:30']}
+        startTime="11:00"
+        endTime="20:00"
+        value={localValue}
+        onChange={handleChange}
+      />
+    </>
   );
 };
 
@@ -243,13 +271,15 @@ const TimeInputSimpleDisabled: ComponentStory<typeof TimeInput> = (props) => {
     props.onChange?.(e);
   };
   return (
-    <TimeInput
-      {...cleanProps}
-      style={{ maxWidth: '320px' }}
-      disabledSlots={['01:00', '03:30', '05:00', '07:30', '10:00', '12:30', '15:30', '17:00', '19:30']}
-      value={localValue}
-      onChange={handleChange}
-    />
+    <>
+      <TimeInput
+        {...cleanProps}
+        style={{ maxWidth: '320px' }}
+        disabledSlots={['01:00', '03:30', '05:00', '07:30', '10:00', '12:30', '15:30', '17:00', '19:30']}
+        value={localValue}
+        onChange={handleChange}
+      />
+    </>
   );
 };
 

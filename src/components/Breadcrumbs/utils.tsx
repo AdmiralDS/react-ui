@@ -4,7 +4,7 @@ import { ThemeProvider } from 'styled-components';
 import { LIGHT_THEME } from '#src/components/themes';
 
 import { Separator, Wrapper } from './style';
-import { Crumb, CrumbAnchor, Content } from './BreadCrumb';
+import { Content, Crumb, CrumbAnchor } from './BreadCrumb';
 
 export const measureCrumb = (
   text: string,

@@ -40,18 +40,18 @@ export const ExtraTextContainer = styled.div`
 
   ${typography['Body/Body 2 Long']}
 
-  color: ${(props) => props.theme.color.text.secondary};
+  color: ${(props) => props.theme.color['Neutral/Neutral 50']};
 
   [data-disabled] & {
-    color: ${(props) => props.theme.color.text.tertiary};
+    color: ${(props) => props.theme.color['Neutral/Neutral 30']};
   }
 
   [data-status='error'] & {
-    color: ${(props) => props.theme.color.status.danger};
+    color: ${(props) => props.theme.color['Error/Error 60 Main']};
   }
 
   [data-status='success'] & {
-    color: ${(props) => props.theme.color.status.success};
+    color: ${(props) => props.theme.color['Success/Success 50 Main']};
   }
 `;
 

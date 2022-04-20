@@ -1,10 +1,10 @@
-import { Button } from '#src/components/Button';
-import { Toast, ToastProps, ToastProvider, useToast } from '#src/components/Toast';
-import { IdentifyToast } from '#src/components/Toast/type';
 import * as React from 'react';
 import styled from 'styled-components';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
+import { Button } from '#src/components/Button';
+import { Toast, ToastProps, ToastProvider, useToast } from '#src/components/Toast';
+import { IdentifyToast } from '#src/components/Toast/type';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -28,10 +28,9 @@ const Description = () => (
 
 const items: IdentifyToast[] = [
   {
-    id: '1234',
     status: 'error',
     children: `Запрос завершился ошибкой`,
-    title: 'Заголовок 1234',
+    title: 'Заголовок',
     isClosable: true,
     linkText: 'Link',
     displayStatusIcon: true,
@@ -65,15 +64,21 @@ const items: IdentifyToast[] = [
 const random = (min: number, max: number) => min + Number(Math.round(Math.random() * (max - min)));
 
 export default {
-  title: 'Example/Toast',
+  title: 'Admiral-2.1/Toast',
   decorators: [withDesign],
   component: Toast,
   parameters: {
     componentSubtitle: <Description />,
-    design: {
-      type: 'figma',
-      url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=37%3A27525',
-    },
+    design: [
+      {
+        type: 'figma',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=37%3A27014',
+      },
+      {
+        type: 'figma',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=37%3A27525',
+      },
+    ],
   },
   argTypes: {
     autoDeleteTime: {
@@ -87,40 +92,30 @@ export default {
 
 const Temp1: ComponentStory<typeof Toast> = (args: ToastProps) => {
   return (
-    <ToastProvider autoDeleteTime={args.autoDeleteTime}>
-      <NotificationEmitter />
-
-      <Toast style={{ top: 128, left: 164 }} />
-    </ToastProvider>
+    <>
+      <ToastProvider autoDeleteTime={args.autoDeleteTime}>
+        <NotificationEmitter />
+        <Toast style={{ top: 128, left: 64 }} />
+      </ToastProvider>
+    </>
   );
 };
 
 const Temp2: ComponentStory<typeof Toast> = (args: ToastProps) => {
   return (
-    <ToastProvider>
-      <NotificationEmitter />
-
-      <Toast position={args.position} />
-    </ToastProvider>
+    <>
+      <ToastProvider autoDeleteTime={args.autoDeleteTime}>
+        <NotificationEmitter />
+        <Toast position={args.position} />
+      </ToastProvider>
+    </>
   );
 };
 
 const NotificationEmitter = () => {
-  const { addToast, clearToasts, removeToastById } = useToast();
+  const { addToast } = useToast();
   const customItem = random(0, 3);
-  return (
-    <div style={{ display: 'flex' }}>
-      <div style={{ marginRight: 15 }}>
-        <Button onClick={() => addToast(items[customItem])}>Добавить сообщение</Button>
-      </div>
-      <div style={{ marginRight: 15 }}>
-        <Button onClick={() => clearToasts()}>Удалить все нотификации</Button>
-      </div>
-      <div style={{ marginRight: 15 }}>
-        <Button onClick={() => removeToastById('1234')}>Удалить нотификацию по id '1234'</Button>
-      </div>
-    </div>
-  );
+  return <Button onClick={() => addToast(items[customItem])}>Добавить сообщение</Button>;
 };
 
 export const ToastNotification = Temp1.bind({});

@@ -17,7 +17,7 @@ export interface DropDownItemProps extends HTMLAttributes<HTMLLIElement> {
 }
 
 const hoverStyle = css`
-  background-color: ${(p) => p.theme.color.background.secondary};
+  background-color: ${(p) => p.theme.color['Opacity/Hover']};
   cursor: pointer;
 `;
 
@@ -49,10 +49,10 @@ const Item = styled.li<{
 
   &&[data-disabled='true'] {
     cursor: not-allowed;
-    background-color: ${(p) => p.theme.color.background.primary};
-    color: ${(p) => p.theme.color.text.tertiary};
+    background-color: ${(p) => p.theme.color['Special/Elevated BG']};
+    color: ${(p) => p.theme.color['Neutral/Neutral 30']};
     && *[fill^='#'] {
-      fill: ${(p) => p.theme.color.text.tertiary};
+      fill: ${(p) => p.theme.color['Neutral/Neutral 30']};
     }
   }
 `;

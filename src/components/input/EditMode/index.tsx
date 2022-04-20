@@ -1,6 +1,7 @@
 import * as React from 'react';
 import styled, { css, DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import { Button } from '#src/components/Button';
+import { TextInput, TextInputProps } from '#src/components/input/TextInput';
 import { typography } from '#src/components/Typography';
 import { refSetter } from '#src/components/common/utils/refSetter';
 import { changeInputData } from '#src/components/common/dom/changeInputData';
@@ -8,8 +9,6 @@ import { changeInputData } from '#src/components/common/dom/changeInputData';
 import { ReactComponent as EditSolid } from '@admiral-ds/icons/build/system/EditSolid.svg';
 import { ReactComponent as CheckClearOutline } from '@admiral-ds/icons/build/service/CheckClearOutline.svg';
 import { ReactComponent as CloseOutline } from '@admiral-ds/icons/build/service/CloseOutline.svg';
-
-import { TextInput, TextInputProps } from '../TextInput';
 
 const EditInput = styled(TextInput)`
   flex: 1 1 auto;
@@ -46,20 +45,20 @@ const iconStyle = css`
 const EditIcon = styled(EditSolid)`
   ${iconStyle}
   & *[fill^='#'] {
-    fill: ${({ theme }) => theme.color.text.secondary};
+    fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
   }
 
   [data-disabled='true'] & {
     cursor: default;
     pointer-events: none;
     & *[fill^='#'] {
-      fill: ${({ theme }) => theme.color.basic.disable};
+      fill: ${({ theme }) => theme.color['Neutral/Neutral 30']};
     }
   }
   [data-disabled='false'] & {
     &:hover {
       & *[fill^='#'] {
-        fill: ${({ theme }) => theme.color.basic.hover};
+        fill: ${({ theme }) => theme.color['Primary/Primary 70']};
       }
     }
   }
@@ -87,6 +86,7 @@ const Text = styled.div`
   cursor: text;
   margin-right: 12px;
   padding-left: 16px;
+  color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
   [data-dimension='s'] & {
     ${typography['Body/Body 2 Long']}
     height: 32px;
@@ -122,7 +122,7 @@ const Text = styled.div`
   [data-disabled='false'] & {
     &:hover {
       & + ${EditIcon} *[fill^='#'] {
-        fill: ${({ theme }) => theme.color.basic.hover};
+        fill: ${({ theme }) => theme.color['Primary/Primary 70']};
       }
     }
   }

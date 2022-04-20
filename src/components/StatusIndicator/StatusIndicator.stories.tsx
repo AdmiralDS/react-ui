@@ -5,7 +5,7 @@ import { withDesign } from 'storybook-addon-designs';
 import { ReactComponent as InfoSolid } from '@admiral-ds/icons/build/service/InfoSolid.svg';
 import { ReactComponent as CheckOutline } from '@admiral-ds/icons/build/service/CheckOutline.svg';
 import { ReactComponent as ErrorSolid } from '@admiral-ds/icons/build/service/ErrorSolid.svg';
-import { StatusIndicator } from './index';
+import { StatusIndicator } from '#src/components/StatusIndicator';
 import { T } from '#src/components/T';
 
 const Desc = styled.div`
@@ -19,11 +19,11 @@ const StyledText = styled(T)`
 `;
 
 const OrangeColor = css`
-  color: ${(p) => p.theme.color.status.warn};
+  color: ${(p) => p.theme.color['Warning/Warning 50 Main']};
   > div {
     svg {
       path {
-        fill: ${(p) => p.theme.color.status.warn};
+        fill: ${(p) => p.theme.color['Warning/Warning 50 Main']};
       }
     }
   }
@@ -34,7 +34,7 @@ const Description = () => (
 );
 
 export default {
-  title: 'Example/StatusIndicator',
+  title: 'Admiral-2.1/StatusIndicator',
   decorators: [withDesign],
   component: StatusIndicator,
   parameters: {
@@ -45,7 +45,7 @@ export default {
       url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=37%3A18744',
     },
   },
-} as unknown as ComponentMeta<typeof StatusIndicator>;
+} as ComponentMeta<typeof StatusIndicator>;
 
 const StatusIndicatorDemoDefaultStory: ComponentStory<typeof StatusIndicator> = () => {
   return (

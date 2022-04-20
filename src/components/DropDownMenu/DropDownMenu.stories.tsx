@@ -21,7 +21,7 @@ const Description = () => (
   </Desc>
 );
 export default {
-  title: 'Example/DropDownMenu',
+  title: 'Admiral-2.1/DropDownMenu',
   decorators: [withDesign],
   component: DropDownMenu,
   parameters: {
@@ -29,11 +29,11 @@ export default {
     design: [
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A68967',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A68931',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A68937',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A68967',
       },
     ],
   },
@@ -53,7 +53,7 @@ export default {
 
 const StyledText = styled.div`
   ${typography['Body/Body 2 Long']}
-  color: ${({ theme }) => theme.color.text.primary};
+  color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
   pointer-events: none;
 `;
 

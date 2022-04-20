@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import { ProgressHeader } from './index';
+import styled from 'styled-components';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -18,7 +18,7 @@ const Description = () => (
 );
 
 export default {
-  title: 'Example/ ProgressHeader',
+  title: 'Admiral-2.1/ProgressHeader',
   decorators: [withDesign],
   component: ProgressHeader,
   parameters: {
@@ -30,7 +30,7 @@ export default {
     componentSubtitle: <Description />,
     design: {
       type: 'figma',
-      url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=37%3A24985',
+      url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=37%3A24985',
     },
   },
   argTypes: {
@@ -43,7 +43,11 @@ export default {
 } as ComponentMeta<typeof ProgressHeader>;
 
 const Template1: ComponentStory<typeof ProgressHeader> = ({ ...args }) => {
-  return <ProgressHeader {...args} percent={args.percent} role="alert" aria-live="assertive" />;
+  return (
+    <>
+      <ProgressHeader {...args} percent={args.percent} role="alert" aria-live="assertive" />
+    </>
+  );
 };
 
 const Template2: ComponentStory<typeof ProgressHeader> = ({ ...args }) => {
@@ -60,7 +64,11 @@ const Template2: ComponentStory<typeof ProgressHeader> = ({ ...args }) => {
     };
   }, [tik]);
 
-  return <ProgressHeader {...args} percent={args.percent || tik} role="alert" aria-live="assertive" />;
+  return (
+    <>
+      <ProgressHeader {...args} percent={args.percent || tik} role="alert" aria-live="assertive" />
+    </>
+  );
 };
 
 export const Progress = Template1.bind({});

@@ -29,8 +29,8 @@ Object {
   margin-top: 8px;
   padding: 3px 7px;
   border-radius: 4px;
-  background: #E2E5E9;
-  border: 1px solid #E2E5E9;
+  background: #E5E7EB;
+  border: 1px solid #E5E7EB;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -44,7 +44,7 @@ Object {
 
 .c1:hover,
 .c1:active {
-  background: #D3D8DE;
+  background: #D6D8DD;
 }
 
 .c1:focus {
@@ -59,7 +59,7 @@ Object {
   left: -4px;
   right: -4px;
   border-radius: 6px;
-  border: 2px solid #0A54C2;
+  border: 2px solid #0062FF;
 }
 
 .c4 {
@@ -70,8 +70,8 @@ Object {
   margin-top: 8px;
   padding: 3px 7px;
   border-radius: 4px;
-  background: #E2E5E9;
-  border: 1px solid #E2E5E9;
+  background: #E5E7EB;
+  border: 1px solid #E5E7EB;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -85,7 +85,7 @@ Object {
 
 .c4:hover,
 .c4:active {
-  background: #D3D8DE;
+  background: #D6D8DD;
 }
 
 .c4:focus {
@@ -100,11 +100,11 @@ Object {
   left: -4px;
   right: -4px;
   border-radius: 6px;
-  border: 2px solid #0A54C2;
+  border: 2px solid #0062FF;
 }
 
 .c3 {
-  color: #2B313B;
+  color: #22242A;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -118,7 +118,6 @@ Object {
   font-size: 12px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
 }
 
 .c2 {
@@ -133,7 +132,7 @@ Object {
   height: 8px;
   border-radius: 50%;
   margin-right: 6px;
-  background: #2ABB5B;
+  background: #1BA049;
 }
 
 .c5 {
@@ -148,7 +147,7 @@ Object {
   height: 8px;
   border-radius: 50%;
   margin-right: 6px;
-  background: #DA0B20;
+  background: #D92020;
 }
 
 <body>
@@ -227,8 +226,8 @@ Object {
   margin-top: 8px;
   padding: 3px 7px;
   border-radius: 4px;
-  background: #E2E5E9;
-  border: 1px solid #E2E5E9;
+  background: #E5E7EB;
+  border: 1px solid #E5E7EB;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -242,7 +241,7 @@ Object {
 
 .c1:hover,
 .c1:active {
-  background: #D3D8DE;
+  background: #D6D8DD;
 }
 
 .c1:focus {
@@ -257,7 +256,7 @@ Object {
   left: -4px;
   right: -4px;
   border-radius: 6px;
-  border: 2px solid #0A54C2;
+  border: 2px solid #0062FF;
 }
 
 .c4 {
@@ -268,8 +267,8 @@ Object {
   margin-top: 8px;
   padding: 3px 7px;
   border-radius: 4px;
-  background: #E2E5E9;
-  border: 1px solid #E2E5E9;
+  background: #E5E7EB;
+  border: 1px solid #E5E7EB;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -283,7 +282,7 @@ Object {
 
 .c4:hover,
 .c4:active {
-  background: #D3D8DE;
+  background: #D6D8DD;
 }
 
 .c4:focus {
@@ -298,11 +297,11 @@ Object {
   left: -4px;
   right: -4px;
   border-radius: 6px;
-  border: 2px solid #0A54C2;
+  border: 2px solid #0062FF;
 }
 
 .c3 {
-  color: #2B313B;
+  color: #22242A;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -316,7 +315,6 @@ Object {
   font-size: 12px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
 }
 
 .c2 {
@@ -331,7 +329,7 @@ Object {
   height: 8px;
   border-radius: 50%;
   margin-right: 6px;
-  background: #2ABB5B;
+  background: #1BA049;
 }
 
 .c5 {
@@ -346,7 +344,7 @@ Object {
   height: 8px;
   border-radius: 50%;
   margin-right: 6px;
-  background: #DA0B20;
+  background: #D92020;
 }
 
 <div>

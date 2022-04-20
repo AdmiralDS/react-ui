@@ -1,4 +1,4 @@
-import { restoreContainer, findIndexOf } from './utils';
+import { findIndexOf, restoreContainer } from './utils';
 
 interface Modal {
   containerEl: Element;

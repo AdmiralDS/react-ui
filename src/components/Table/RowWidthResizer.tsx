@@ -32,7 +32,7 @@ export const Resizer = styled.div`
   box-sizing: border-box;
   width: 1px;
   height: 100%;
-  background: ${({ theme }) => theme.color.basic.disable};
+  background: ${({ theme }) => theme.color['Neutral/Neutral 20']};
 `;
 
 export function RowWidthResizer(props: {

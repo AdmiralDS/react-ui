@@ -1,7 +1,9 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { typography } from '#src/components/Typography';
 import { ReactComponent as ChevronDownOutline } from '@admiral-ds/icons/build/system/ChevronDownOutline.svg';
+
+import { typography } from '#src/components/Typography';
+import { DefaultFontColorName } from '#src/components/themes/common';
 import { uid } from '#src/components/common/uid';
 import { keyboardKey } from '#src/components/common/keyboardKey';
 
@@ -15,13 +17,16 @@ const Chevron = styled(ChevronDownOutline)`
   flex-shrink: 0;
   width: 24px;
   height: 24px;
-  margin-left: 8px;
+  margin: 0 0 0 8px;
+  [data-icon='left'] & {
+    margin: 0 8px 0 0;
+  }
   & *[fill^='#'] {
-    fill: ${({ theme }) => theme.color.text.secondary};
+    fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
   }
   [data-disabled='true'] & {
     & *[fill^='#'] {
-      fill: ${({ theme }) => theme.color.text.tertiary};
+      fill: ${({ theme }) => theme.color['Neutral/Neutral 30']};
     }
   }
   [data-dimension='m'] & {
@@ -35,13 +40,21 @@ const ItemTitleContent = styled.span`
   width: 100%;
   height: 100%;
   display: flex;
-  justify-content: space-between;
   align-items: flex-start;
 
   padding: 16px 16px 15px 16px;
   [data-dimension='m'] && {
     padding: 10px 16px 9px 16px;
   }
+
+  [data-icon='left'] & {
+    flex-direction: row-reverse;
+  }
+`;
+
+const TitleContent = styled.span`
+  display: inline-flex;
+  flex: 1 1 auto;
 `;
 
 const ItemTitle = styled.button`
@@ -60,18 +73,16 @@ const ItemTitle = styled.button`
   padding: 0;
   cursor: pointer;
   overflow: visible;
+  color: ${(p) => p.theme.color[DefaultFontColorName]};
   ${typography['Subtitle/Subtitle 2']}
   &:hover {
-    background: ${(p) => p.theme.color.background.secondary};
-    & *[fill^='#'] {
-      fill: ${(p) => p.theme.color.basic.hover};
-    }
+    background: ${(p) => p.theme.color['Opacity/Hover']};
   }
   &:focus {
     &:before {
       position: absolute;
       content: '';
-      border: 2px solid ${({ theme }) => theme.color.basic.hover};
+      border: 2px solid ${({ theme }) => theme.color['Primary/Primary 60 Main']};
       top: -1px;
       left: 0;
       bottom: -1px;
@@ -90,8 +101,7 @@ const ItemTitle = styled.button`
 `;
 
 const ItemWrapper = styled.div<{ opened?: boolean; disabled?: boolean }>`
-  border-bottom: 1px solid ${(p) => p.theme.color.background.tertiary};
-  color: ${(p) => p.theme.color.text.primary};
+  border-bottom: 1px solid ${(p) => p.theme.color['Neutral/Neutral 20']};
   & > ${ItemTitle} ${Chevron} {
     transform: ${(p) => (p.opened ? 'rotate(180deg)' : 'rotate(0deg)')};
   }
@@ -99,7 +109,7 @@ const ItemWrapper = styled.div<{ opened?: boolean; disabled?: boolean }>`
 `;
 
 const ItemContent = styled.div<{ contentMaxHeight: number | string }>`
-  box-sizing: border-box;
+  color: ${(p) => p.theme.color[DefaultFontColorName]};
   overflow-y: auto;
   max-height: ${(p) => p.contentMaxHeight};
   padding: 4px 16px 16px 16px;
@@ -110,13 +120,19 @@ const ItemContent = styled.div<{ contentMaxHeight: number | string }>`
   }
 `;
 
-const AccordionWrapper = styled.div<{ dimension?: Dimension }>`
+const AccordionWrapper = styled.div<{ hideTopDivider: boolean; hideBottomDivider: boolean; dimension?: Dimension }>`
   position: relative;
+
   & > ${ItemWrapper}:first-child {
     & ${ItemTitleContent} {
       padding: ${({ dimension }) => (dimension === 'l' ? '15px 16px' : '9px 16px')};
     }
-    border-top: 1px solid ${({ theme }) => theme.color.background.tertiary};
+    border-top: 1px solid
+      ${({ theme, hideTopDivider }) => (hideTopDivider ? 'transparent' : theme.color['Neutral/Neutral 20'])};
+  }
+  & > ${ItemWrapper}:last-child {
+    border-bottom: 1px solid
+      ${({ theme, hideBottomDivider }) => (hideBottomDivider ? 'transparent' : theme.color['Neutral/Neutral 20'])};
   }
 `;
 
@@ -167,7 +183,7 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({
   return (
     <ItemWrapper opened={collapseOpened} data-disabled={disabled} disabled={disabled}>
       <ItemTitle
-        onClick={disabled ? undefined : handleClick}
+        onClick={handleClick}
         role="button"
         type="button"
         aria-expanded={collapseOpened}
@@ -176,7 +192,7 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({
         {...props}
       >
         <ItemTitleContent tabIndex={-1}>
-          {title}
+          <TitleContent>{title}</TitleContent>
           <Chevron aria-hidden />
         </ItemTitleContent>
       </ItemTitle>
@@ -195,10 +211,25 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({
 };
 
 export interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
+  /** Размер компонента */
   dimension?: Dimension;
+  /** Расположение иконки шеврона в заголовке. По умолчанию иконка выравнивается по правому краю. */
+  iconPosition?: 'right' | 'left';
+  /** Скрыть верхний разделитель (верхнюю серую полоску) */
+  hideTopDivider?: boolean;
+  /** Скрыть нижний разделитель (нижнюю серую полоску) */
+  hideBottomDivider?: boolean;
 }
 
-export const Accordion: React.FC<AccordionProps> = ({ children, dimension = 'l', onKeyDown, ...props }) => {
+export const Accordion: React.FC<AccordionProps> = ({
+  children,
+  dimension = 'l',
+  iconPosition = 'right',
+  hideTopDivider = false,
+  hideBottomDivider = false,
+  onKeyDown,
+  ...props
+}) => {
   const accordionRef = React.useRef<HTMLDivElement | null>(null);
   const handleKeyDown = React.useCallback(
     (e) => {
@@ -233,6 +264,9 @@ export const Accordion: React.FC<AccordionProps> = ({ children, dimension = 'l',
     <AccordionWrapper
       ref={accordionRef}
       data-dimension={dimension}
+      data-icon={iconPosition}
+      hideTopDivider={hideTopDivider}
+      hideBottomDivider={hideBottomDivider}
       dimension={dimension}
       onKeyDown={handleKeyDown}
       {...props}

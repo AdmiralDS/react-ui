@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 
-import { Tag } from '../Tag';
-import { Tags } from '../Tags';
+import { Tag } from '#src/components/Tag';
+import { Tags } from '#src/components/Tags';
 
 const Separator = styled.div`
   height: 20px;
@@ -28,7 +28,7 @@ const Description = () => (
 );
 
 export default {
-  title: 'Example/Tags',
+  title: 'Admiral-2.1/Tags',
   decorators: [withDesign],
   component: Tags,
   parameters: {
@@ -37,11 +37,11 @@ export default {
     design: [
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=37%3A18530',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=37%3A18375',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=37%3A18660',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=37%3A18530',
       },
     ],
   },
@@ -58,21 +58,23 @@ export default {
 
 const Template1: ComponentStory<typeof Tags> = () => {
   return (
-    <Tags width={50} kind="green" onClick={(event) => console.log(`click tag with id: ${event.currentTarget.id}`)}>
-      <Tag id="1">Neutral</Tag>
-      <Tag id="2" kind="green">
-        Green
-      </Tag>
-      <Tag id="3" kind="blue">
-        Blue
-      </Tag>
-      <Tag id="4" kind="red" width="auto" onClick={() => console.log('click red tag')}>
-        Red
-      </Tag>
-      <Tag id="5" kind="orange">
-        Orange
-      </Tag>
-    </Tags>
+    <>
+      <Tags width={50} kind="green" onClick={(event) => console.log(`click tag with id: ${event.currentTarget.id}`)}>
+        <Tag id="1">Neutral</Tag>
+        <Tag id="2" kind="green">
+          Green
+        </Tag>
+        <Tag id="3" kind="blue">
+          Blue
+        </Tag>
+        <Tag id="4" kind="red" width="auto" onClick={() => console.log('click red tag')}>
+          Red
+        </Tag>
+        <Tag id="5" kind="orange">
+          Orange
+        </Tag>
+      </Tags>
+    </>
   );
 };
 

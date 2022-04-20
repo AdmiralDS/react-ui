@@ -1,7 +1,7 @@
+import type { FC, HTMLAttributes, MouseEvent, ReactNode } from 'react';
 import * as React from 'react';
-import type { FC, HTMLAttributes, MouseEvent, MutableRefObject, ReactNode } from 'react';
 
-import { Tooltip } from '../Tooltip';
+import { Tooltip } from '#src/components/Tooltip';
 
 import {
   ChipChildrenWrapperStyled,
@@ -56,6 +56,7 @@ export const Chips: FC<ChipsProps> = ({
 }) => {
   const defaultChip = selected !== undefined;
   const [withTooltip, setTooltip] = React.useState(false);
+  const withCloseIcon = !!onClose;
 
   const refItems = React.useRef<HTMLDivElement | null>(null);
 
@@ -84,28 +85,39 @@ export const Chips: FC<ChipsProps> = ({
       appearance={appearance}
       selected={selected}
       defaultChip={defaultChip}
+      withCloseIcon={withCloseIcon}
       {...props}
       tabIndex={props.tabIndex ?? 0}
     >
-      <ChipContentWrapperStyled dimension={dimension} disabled={disabled} appearance={appearance} selected={selected}>
+      <ChipContentWrapperStyled
+        dimension={dimension}
+        disabled={disabled}
+        appearance={appearance}
+        selected={selected}
+        withCloseIcon={withCloseIcon}
+      >
         {iconBefore && (
           <IconBeforeWrapperStyled>
-            <IconWrapperStyled dimension={dimension}>{iconBefore}</IconWrapperStyled>
+            <IconWrapperStyled dimension={dimension} withCloseIcon={withCloseIcon}>
+              {iconBefore}
+            </IconWrapperStyled>
           </IconBeforeWrapperStyled>
         )}
         <ChipChildrenWrapperStyled ref={refItems}>{children}</ChipChildrenWrapperStyled>
         {!onClose && iconAfter && (
           <IconAfterWrapperStyled>
-            <IconWrapperStyled dimension={dimension}>{iconAfter}</IconWrapperStyled>
+            <IconWrapperStyled dimension={dimension} withCloseIcon={withCloseIcon}>
+              {iconAfter}
+            </IconWrapperStyled>
           </IconAfterWrapperStyled>
         )}
         {onClose && (
-          <IconAfterWrapperStyled>
-            <IconWrapperStyled dimension={dimension}>
+          <IconAfterWrapperStyled withCloseIcon={withCloseIcon}>
+            <IconWrapperStyled dimension={dimension} withCloseIcon={withCloseIcon}>
               <CloseIconWrapperStyled
+                appearance={appearance}
                 disabled={disabled}
                 onClick={disabled ? void 0 : handleClickCloseIcon}
-                selected={selected}
               />
             </IconWrapperStyled>
           </IconAfterWrapperStyled>

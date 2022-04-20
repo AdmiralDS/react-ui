@@ -6,7 +6,7 @@ import { SuggestInput } from './index';
 import { withDesign } from 'storybook-addon-designs';
 
 export default {
-  title: 'Input/SuggestInput',
+  title: 'Admiral-2.1/Input/SuggestInput',
   component: SuggestInput,
   decorators: [withDesign],
   parameters: {

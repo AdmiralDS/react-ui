@@ -1,9 +1,9 @@
-import { Breadcrumbs } from '../Breadcrumbs';
 import React from 'react';
 import styled from 'styled-components';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import { Link as RouterLink, MemoryRouter as Router } from 'react-router-dom';
+import { Breadcrumbs } from '#src/components/Breadcrumbs';
 
 const Separator = styled.div`
   height: 20px;
@@ -28,7 +28,7 @@ const Description = () => (
 );
 
 export default {
-  title: 'Example/Breadcrumbs',
+  title: 'Admiral-2.1/Breadcrumbs',
   decorators: [withDesign],
   component: Breadcrumbs,
   parameters: {
@@ -36,11 +36,11 @@ export default {
     design: [
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=37%3A6627',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=37%3A6627',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=37%3A6677',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=37%3A6677',
       },
     ],
   },
@@ -62,7 +62,11 @@ const Template1: ComponentStory<typeof Breadcrumbs> = (args) => {
     { url: '#', text: 'page 3' },
     { url: '#', text: 'current page' },
   ];
-  return <Breadcrumbs {...args} items={items} />;
+  return (
+    <>
+      <Breadcrumbs {...args} items={items} />
+    </>
+  );
 };
 
 const Template2: ComponentStory<typeof Breadcrumbs> = (args) => {
@@ -97,7 +101,11 @@ const Template3: ComponentStory<typeof Breadcrumbs> = (args) => {
     { url: '#', text: 'page 11' },
     { url: '#', text: 'current page' },
   ];
-  return <Breadcrumbs items={items} mobile />;
+  return (
+    <>
+      <Breadcrumbs items={items} mobile />
+    </>
+  );
 };
 
 const Template4: ComponentStory<typeof Breadcrumbs> = (args) => {
@@ -109,9 +117,11 @@ const Template4: ComponentStory<typeof Breadcrumbs> = (args) => {
     { linkAs: RouterLink, text: 'current page', linkProps: { to: '#' } },
   ];
   return (
-    <Router>
-      <Breadcrumbs {...args} items={items} />
-    </Router>
+    <>
+      <Router>
+        <Breadcrumbs {...args} items={items} />
+      </Router>
+    </>
   );
 };
 

@@ -4,10 +4,6 @@ exports[`CheckboxGroup should render component with disabled state 1`] = `
 Object {
   "asFragment": [Function],
   "baseElement": .c0 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
@@ -20,23 +16,19 @@ Object {
   line-height: 20px;
   font-weight: normal;
   font-family: 'VTB Group UI',sans-serif;
-  color: #A7B0BE;
+  color: #B1B5BB;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
 }
 
-.c0 > div {
+.c0 > * {
   margin-top: 16px;
 }
 
 .c9 {
   pointer-events: none;
-}
-
-.c9 *[fill^='#'] {
-  fill: #FFFFFF;
 }
 
 .c4 {
@@ -70,15 +62,19 @@ fieldset[data-dimension='s'] .c3 {
   transition: background 0.1s ease-in;
   line-height: initial;
   background-color: #FFFFFF;
-  border: 1px solid #626F84;
+  border: 1px solid #74777F;
+}
+
+.c8 *[fill^='#'] {
+  fill: #FFFFFF;
 }
 
 .c6 {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  width: calc(100% + 2px);
-  height: calc(100% + 2px);
+  width: 100%;
+  height: 100%;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -87,7 +83,7 @@ fieldset[data-dimension='s'] .c3 {
   transform: translate(-50%,-50%);
   box-sizing: border-box;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 1px;
   margin: 0;
   padding: 0;
 }
@@ -101,7 +97,7 @@ fieldset[data-dimension='s'] .c3 {
 }
 
 .c6:checked + .c7 {
-  background-color: #0D69F2;
+  background-color: #0062FF;
   border: none;
 }
 
@@ -109,31 +105,37 @@ fieldset[data-dimension='s'] .c3 {
   display: none;
 }
 
-.c6:not(:checked):focus + .c7,
-.c6:not(:disabled):not(:checked):hover + .c7 {
-  background-color: #F1F2F4;
-  border: 1px solid #0A54C2;
-}
-
-.c6:checked:focus + .c7,
-.c6:not(:disabled):checked:hover + .c7 {
-  background-color: #0A54C2;
-  border: none;
-}
-
-.c6:not(:checked):disabled + .c7 {
-  background-color: #FFFFFF;
-  border: 1px solid #C4CAD4;
+.c6:not(:disabled):hover::after,
+.c6:not(:disabled):focus::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  border-radius: 50%;
+  width: calc(100% + 16px);
+  height: calc(100% + 16px);
+  background-color: #0000000D;
 }
 
 .c6:disabled + .c7 {
-  background-color: #C4CAD4;
+  border: 1px solid #B1B5BB;
+}
+
+.c6:checked:disabled + .c7 {
+  background-color: #A7C7FF;
   border: none;
+}
+
+.c6:checked:disabled + .c7 *[fill^='#'] {
+  fill: #FFFFFF;
 }
 
 .c6:focus-visible {
   outline-offset: 2px;
-  outline: #0A54C2 solid 2px;
+  outline: #0062FF solid 2px;
 }
 
 .c5 {
@@ -154,8 +156,7 @@ fieldset[data-dimension='s'] .c3 {
   font-size: 16px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
-  color: #A7B0BE;
+  color: #B1B5BB;
   cursor: default;
 }
 
@@ -167,11 +168,10 @@ fieldset[data-dimension='s'] .c1 {
   font-size: 14px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
 }
 
 fieldset:disabled .c1 {
-  color: #A7B0BE;
+  color: #B1B5BB;
   cursor: default;
 }
 
@@ -257,10 +257,6 @@ fieldset:disabled .c1 {
     </div>
   </body>,
   "container": .c0 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
@@ -273,23 +269,19 @@ fieldset:disabled .c1 {
   line-height: 20px;
   font-weight: normal;
   font-family: 'VTB Group UI',sans-serif;
-  color: #A7B0BE;
+  color: #B1B5BB;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
 }
 
-.c0 > div {
+.c0 > * {
   margin-top: 16px;
 }
 
 .c9 {
   pointer-events: none;
-}
-
-.c9 *[fill^='#'] {
-  fill: #FFFFFF;
 }
 
 .c4 {
@@ -323,15 +315,19 @@ fieldset[data-dimension='s'] .c3 {
   transition: background 0.1s ease-in;
   line-height: initial;
   background-color: #FFFFFF;
-  border: 1px solid #626F84;
+  border: 1px solid #74777F;
+}
+
+.c8 *[fill^='#'] {
+  fill: #FFFFFF;
 }
 
 .c6 {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  width: calc(100% + 2px);
-  height: calc(100% + 2px);
+  width: 100%;
+  height: 100%;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -340,7 +336,7 @@ fieldset[data-dimension='s'] .c3 {
   transform: translate(-50%,-50%);
   box-sizing: border-box;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 1px;
   margin: 0;
   padding: 0;
 }
@@ -354,7 +350,7 @@ fieldset[data-dimension='s'] .c3 {
 }
 
 .c6:checked + .c7 {
-  background-color: #0D69F2;
+  background-color: #0062FF;
   border: none;
 }
 
@@ -362,31 +358,37 @@ fieldset[data-dimension='s'] .c3 {
   display: none;
 }
 
-.c6:not(:checked):focus + .c7,
-.c6:not(:disabled):not(:checked):hover + .c7 {
-  background-color: #F1F2F4;
-  border: 1px solid #0A54C2;
-}
-
-.c6:checked:focus + .c7,
-.c6:not(:disabled):checked:hover + .c7 {
-  background-color: #0A54C2;
-  border: none;
-}
-
-.c6:not(:checked):disabled + .c7 {
-  background-color: #FFFFFF;
-  border: 1px solid #C4CAD4;
+.c6:not(:disabled):hover::after,
+.c6:not(:disabled):focus::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  border-radius: 50%;
+  width: calc(100% + 16px);
+  height: calc(100% + 16px);
+  background-color: #0000000D;
 }
 
 .c6:disabled + .c7 {
-  background-color: #C4CAD4;
+  border: 1px solid #B1B5BB;
+}
+
+.c6:checked:disabled + .c7 {
+  background-color: #A7C7FF;
   border: none;
+}
+
+.c6:checked:disabled + .c7 *[fill^='#'] {
+  fill: #FFFFFF;
 }
 
 .c6:focus-visible {
   outline-offset: 2px;
-  outline: #0A54C2 solid 2px;
+  outline: #0062FF solid 2px;
 }
 
 .c5 {
@@ -407,8 +409,7 @@ fieldset[data-dimension='s'] .c3 {
   font-size: 16px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
-  color: #A7B0BE;
+  color: #B1B5BB;
   cursor: default;
 }
 
@@ -420,11 +421,10 @@ fieldset[data-dimension='s'] .c1 {
   font-size: 14px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
 }
 
 fieldset:disabled .c1 {
-  color: #A7B0BE;
+  color: #B1B5BB;
   cursor: default;
 }
 
@@ -565,10 +565,6 @@ exports[`CheckboxGroup should render component with label 1`] = `
 Object {
   "asFragment": [Function],
   "baseElement": .c0 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
@@ -581,23 +577,19 @@ Object {
   line-height: 20px;
   font-weight: normal;
   font-family: 'VTB Group UI',sans-serif;
-  color: #2B313B;
+  color: #22242A;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
 }
 
-.c0 > div {
+.c0 > * {
   margin-top: 16px;
 }
 
 .c9 {
   pointer-events: none;
-}
-
-.c9 *[fill^='#'] {
-  fill: #FFFFFF;
 }
 
 .c4 {
@@ -631,15 +623,19 @@ fieldset[data-dimension='s'] .c3 {
   transition: background 0.1s ease-in;
   line-height: initial;
   background-color: #FFFFFF;
-  border: 1px solid #626F84;
+  border: 1px solid #74777F;
+}
+
+.c8 *[fill^='#'] {
+  fill: #FFFFFF;
 }
 
 .c6 {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  width: calc(100% + 2px);
-  height: calc(100% + 2px);
+  width: 100%;
+  height: 100%;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -648,7 +644,7 @@ fieldset[data-dimension='s'] .c3 {
   transform: translate(-50%,-50%);
   box-sizing: border-box;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 1px;
   margin: 0;
   padding: 0;
 }
@@ -662,7 +658,7 @@ fieldset[data-dimension='s'] .c3 {
 }
 
 .c6:checked + .c7 {
-  background-color: #0D69F2;
+  background-color: #0062FF;
   border: none;
 }
 
@@ -670,31 +666,37 @@ fieldset[data-dimension='s'] .c3 {
   display: none;
 }
 
-.c6:not(:checked):focus + .c7,
-.c6:not(:disabled):not(:checked):hover + .c7 {
-  background-color: #F1F2F4;
-  border: 1px solid #0A54C2;
-}
-
-.c6:checked:focus + .c7,
-.c6:not(:disabled):checked:hover + .c7 {
-  background-color: #0A54C2;
-  border: none;
-}
-
-.c6:not(:checked):disabled + .c7 {
-  background-color: #FFFFFF;
-  border: 1px solid #C4CAD4;
+.c6:not(:disabled):hover::after,
+.c6:not(:disabled):focus::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  border-radius: 50%;
+  width: calc(100% + 16px);
+  height: calc(100% + 16px);
+  background-color: #0000000D;
 }
 
 .c6:disabled + .c7 {
-  background-color: #C4CAD4;
+  border: 1px solid #B1B5BB;
+}
+
+.c6:checked:disabled + .c7 {
+  background-color: #A7C7FF;
   border: none;
+}
+
+.c6:checked:disabled + .c7 *[fill^='#'] {
+  fill: #FFFFFF;
 }
 
 .c6:focus-visible {
   outline-offset: 2px;
-  outline: #0A54C2 solid 2px;
+  outline: #0062FF solid 2px;
 }
 
 .c5 {
@@ -715,8 +717,7 @@ fieldset[data-dimension='s'] .c3 {
   font-size: 16px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
-  color: #2B313B;
+  color: #22242A;
   cursor: pointer;
 }
 
@@ -728,11 +729,10 @@ fieldset[data-dimension='s'] .c1 {
   font-size: 14px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
 }
 
 fieldset:disabled .c1 {
-  color: #A7B0BE;
+  color: #B1B5BB;
   cursor: default;
 }
 
@@ -812,10 +812,6 @@ fieldset:disabled .c1 {
     </div>
   </body>,
   "container": .c0 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
@@ -828,23 +824,19 @@ fieldset:disabled .c1 {
   line-height: 20px;
   font-weight: normal;
   font-family: 'VTB Group UI',sans-serif;
-  color: #2B313B;
+  color: #22242A;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
 }
 
-.c0 > div {
+.c0 > * {
   margin-top: 16px;
 }
 
 .c9 {
   pointer-events: none;
-}
-
-.c9 *[fill^='#'] {
-  fill: #FFFFFF;
 }
 
 .c4 {
@@ -878,15 +870,19 @@ fieldset[data-dimension='s'] .c3 {
   transition: background 0.1s ease-in;
   line-height: initial;
   background-color: #FFFFFF;
-  border: 1px solid #626F84;
+  border: 1px solid #74777F;
+}
+
+.c8 *[fill^='#'] {
+  fill: #FFFFFF;
 }
 
 .c6 {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  width: calc(100% + 2px);
-  height: calc(100% + 2px);
+  width: 100%;
+  height: 100%;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -895,7 +891,7 @@ fieldset[data-dimension='s'] .c3 {
   transform: translate(-50%,-50%);
   box-sizing: border-box;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 1px;
   margin: 0;
   padding: 0;
 }
@@ -909,7 +905,7 @@ fieldset[data-dimension='s'] .c3 {
 }
 
 .c6:checked + .c7 {
-  background-color: #0D69F2;
+  background-color: #0062FF;
   border: none;
 }
 
@@ -917,31 +913,37 @@ fieldset[data-dimension='s'] .c3 {
   display: none;
 }
 
-.c6:not(:checked):focus + .c7,
-.c6:not(:disabled):not(:checked):hover + .c7 {
-  background-color: #F1F2F4;
-  border: 1px solid #0A54C2;
-}
-
-.c6:checked:focus + .c7,
-.c6:not(:disabled):checked:hover + .c7 {
-  background-color: #0A54C2;
-  border: none;
-}
-
-.c6:not(:checked):disabled + .c7 {
-  background-color: #FFFFFF;
-  border: 1px solid #C4CAD4;
+.c6:not(:disabled):hover::after,
+.c6:not(:disabled):focus::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  border-radius: 50%;
+  width: calc(100% + 16px);
+  height: calc(100% + 16px);
+  background-color: #0000000D;
 }
 
 .c6:disabled + .c7 {
-  background-color: #C4CAD4;
+  border: 1px solid #B1B5BB;
+}
+
+.c6:checked:disabled + .c7 {
+  background-color: #A7C7FF;
   border: none;
+}
+
+.c6:checked:disabled + .c7 *[fill^='#'] {
+  fill: #FFFFFF;
 }
 
 .c6:focus-visible {
   outline-offset: 2px;
-  outline: #0A54C2 solid 2px;
+  outline: #0062FF solid 2px;
 }
 
 .c5 {
@@ -962,8 +964,7 @@ fieldset[data-dimension='s'] .c3 {
   font-size: 16px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
-  color: #2B313B;
+  color: #22242A;
   cursor: pointer;
 }
 
@@ -975,11 +976,10 @@ fieldset[data-dimension='s'] .c1 {
   font-size: 14px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
 }
 
 fieldset:disabled .c1 {
-  color: #A7B0BE;
+  color: #B1B5BB;
   cursor: default;
 }
 
@@ -1114,10 +1114,6 @@ exports[`CheckboxGroup should render component with small dimension 1`] = `
 Object {
   "asFragment": [Function],
   "baseElement": .c0 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
@@ -1130,23 +1126,19 @@ Object {
   line-height: 16px;
   font-weight: normal;
   font-family: 'VTB Group UI',sans-serif;
-  color: #2B313B;
+  color: #22242A;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
 }
 
-.c0 > div {
+.c0 > * {
   margin-top: 12px;
 }
 
 .c9 {
   pointer-events: none;
-}
-
-.c9 *[fill^='#'] {
-  fill: #FFFFFF;
 }
 
 .c4 {
@@ -1180,15 +1172,19 @@ fieldset[data-dimension='s'] .c3 {
   transition: background 0.1s ease-in;
   line-height: initial;
   background-color: #FFFFFF;
-  border: 1px solid #626F84;
+  border: 1px solid #74777F;
+}
+
+.c8 *[fill^='#'] {
+  fill: #FFFFFF;
 }
 
 .c6 {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  width: calc(100% + 2px);
-  height: calc(100% + 2px);
+  width: 100%;
+  height: 100%;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -1197,7 +1193,7 @@ fieldset[data-dimension='s'] .c3 {
   transform: translate(-50%,-50%);
   box-sizing: border-box;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 1px;
   margin: 0;
   padding: 0;
 }
@@ -1211,7 +1207,7 @@ fieldset[data-dimension='s'] .c3 {
 }
 
 .c6:checked + .c7 {
-  background-color: #0D69F2;
+  background-color: #0062FF;
   border: none;
 }
 
@@ -1219,31 +1215,37 @@ fieldset[data-dimension='s'] .c3 {
   display: none;
 }
 
-.c6:not(:checked):focus + .c7,
-.c6:not(:disabled):not(:checked):hover + .c7 {
-  background-color: #F1F2F4;
-  border: 1px solid #0A54C2;
-}
-
-.c6:checked:focus + .c7,
-.c6:not(:disabled):checked:hover + .c7 {
-  background-color: #0A54C2;
-  border: none;
-}
-
-.c6:not(:checked):disabled + .c7 {
-  background-color: #FFFFFF;
-  border: 1px solid #C4CAD4;
+.c6:not(:disabled):hover::after,
+.c6:not(:disabled):focus::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  border-radius: 50%;
+  width: calc(100% + 16px);
+  height: calc(100% + 16px);
+  background-color: #0000000D;
 }
 
 .c6:disabled + .c7 {
-  background-color: #C4CAD4;
+  border: 1px solid #B1B5BB;
+}
+
+.c6:checked:disabled + .c7 {
+  background-color: #A7C7FF;
   border: none;
+}
+
+.c6:checked:disabled + .c7 *[fill^='#'] {
+  fill: #FFFFFF;
 }
 
 .c6:focus-visible {
   outline-offset: 2px;
-  outline: #0A54C2 solid 2px;
+  outline: #0062FF solid 2px;
 }
 
 .c5 {
@@ -1264,8 +1266,7 @@ fieldset[data-dimension='s'] .c3 {
   font-size: 14px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
-  color: #2B313B;
+  color: #22242A;
   cursor: pointer;
 }
 
@@ -1277,11 +1278,10 @@ fieldset[data-dimension='s'] .c1 {
   font-size: 14px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
 }
 
 fieldset:disabled .c1 {
-  color: #A7B0BE;
+  color: #B1B5BB;
   cursor: default;
 }
 
@@ -1360,10 +1360,6 @@ fieldset:disabled .c1 {
     </div>
   </body>,
   "container": .c0 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
@@ -1376,23 +1372,19 @@ fieldset:disabled .c1 {
   line-height: 16px;
   font-weight: normal;
   font-family: 'VTB Group UI',sans-serif;
-  color: #2B313B;
+  color: #22242A;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
 }
 
-.c0 > div {
+.c0 > * {
   margin-top: 12px;
 }
 
 .c9 {
   pointer-events: none;
-}
-
-.c9 *[fill^='#'] {
-  fill: #FFFFFF;
 }
 
 .c4 {
@@ -1426,15 +1418,19 @@ fieldset[data-dimension='s'] .c3 {
   transition: background 0.1s ease-in;
   line-height: initial;
   background-color: #FFFFFF;
-  border: 1px solid #626F84;
+  border: 1px solid #74777F;
+}
+
+.c8 *[fill^='#'] {
+  fill: #FFFFFF;
 }
 
 .c6 {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  width: calc(100% + 2px);
-  height: calc(100% + 2px);
+  width: 100%;
+  height: 100%;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -1443,7 +1439,7 @@ fieldset[data-dimension='s'] .c3 {
   transform: translate(-50%,-50%);
   box-sizing: border-box;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 1px;
   margin: 0;
   padding: 0;
 }
@@ -1457,7 +1453,7 @@ fieldset[data-dimension='s'] .c3 {
 }
 
 .c6:checked + .c7 {
-  background-color: #0D69F2;
+  background-color: #0062FF;
   border: none;
 }
 
@@ -1465,31 +1461,37 @@ fieldset[data-dimension='s'] .c3 {
   display: none;
 }
 
-.c6:not(:checked):focus + .c7,
-.c6:not(:disabled):not(:checked):hover + .c7 {
-  background-color: #F1F2F4;
-  border: 1px solid #0A54C2;
-}
-
-.c6:checked:focus + .c7,
-.c6:not(:disabled):checked:hover + .c7 {
-  background-color: #0A54C2;
-  border: none;
-}
-
-.c6:not(:checked):disabled + .c7 {
-  background-color: #FFFFFF;
-  border: 1px solid #C4CAD4;
+.c6:not(:disabled):hover::after,
+.c6:not(:disabled):focus::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  border-radius: 50%;
+  width: calc(100% + 16px);
+  height: calc(100% + 16px);
+  background-color: #0000000D;
 }
 
 .c6:disabled + .c7 {
-  background-color: #C4CAD4;
+  border: 1px solid #B1B5BB;
+}
+
+.c6:checked:disabled + .c7 {
+  background-color: #A7C7FF;
   border: none;
+}
+
+.c6:checked:disabled + .c7 *[fill^='#'] {
+  fill: #FFFFFF;
 }
 
 .c6:focus-visible {
   outline-offset: 2px;
-  outline: #0A54C2 solid 2px;
+  outline: #0062FF solid 2px;
 }
 
 .c5 {
@@ -1510,8 +1512,7 @@ fieldset[data-dimension='s'] .c3 {
   font-size: 14px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
-  color: #2B313B;
+  color: #22242A;
   cursor: pointer;
 }
 
@@ -1523,11 +1524,10 @@ fieldset[data-dimension='s'] .c1 {
   font-size: 14px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
 }
 
 fieldset:disabled .c1 {
-  color: #A7B0BE;
+  color: #B1B5BB;
   cursor: default;
 }
 
@@ -1661,10 +1661,6 @@ exports[`CheckboxGroup should render components 1`] = `
 Object {
   "asFragment": [Function],
   "baseElement": .c0 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
@@ -1677,23 +1673,19 @@ Object {
   line-height: 20px;
   font-weight: normal;
   font-family: 'VTB Group UI',sans-serif;
-  color: #2B313B;
+  color: #22242A;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
 }
 
-.c0 > div {
+.c0 > * {
   margin-top: 16px;
 }
 
 .c9 {
   pointer-events: none;
-}
-
-.c9 *[fill^='#'] {
-  fill: #FFFFFF;
 }
 
 .c4 {
@@ -1727,15 +1719,19 @@ fieldset[data-dimension='s'] .c3 {
   transition: background 0.1s ease-in;
   line-height: initial;
   background-color: #FFFFFF;
-  border: 1px solid #626F84;
+  border: 1px solid #74777F;
+}
+
+.c8 *[fill^='#'] {
+  fill: #FFFFFF;
 }
 
 .c6 {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  width: calc(100% + 2px);
-  height: calc(100% + 2px);
+  width: 100%;
+  height: 100%;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -1744,7 +1740,7 @@ fieldset[data-dimension='s'] .c3 {
   transform: translate(-50%,-50%);
   box-sizing: border-box;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 1px;
   margin: 0;
   padding: 0;
 }
@@ -1758,7 +1754,7 @@ fieldset[data-dimension='s'] .c3 {
 }
 
 .c6:checked + .c7 {
-  background-color: #0D69F2;
+  background-color: #0062FF;
   border: none;
 }
 
@@ -1766,31 +1762,37 @@ fieldset[data-dimension='s'] .c3 {
   display: none;
 }
 
-.c6:not(:checked):focus + .c7,
-.c6:not(:disabled):not(:checked):hover + .c7 {
-  background-color: #F1F2F4;
-  border: 1px solid #0A54C2;
-}
-
-.c6:checked:focus + .c7,
-.c6:not(:disabled):checked:hover + .c7 {
-  background-color: #0A54C2;
-  border: none;
-}
-
-.c6:not(:checked):disabled + .c7 {
-  background-color: #FFFFFF;
-  border: 1px solid #C4CAD4;
+.c6:not(:disabled):hover::after,
+.c6:not(:disabled):focus::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  border-radius: 50%;
+  width: calc(100% + 16px);
+  height: calc(100% + 16px);
+  background-color: #0000000D;
 }
 
 .c6:disabled + .c7 {
-  background-color: #C4CAD4;
+  border: 1px solid #B1B5BB;
+}
+
+.c6:checked:disabled + .c7 {
+  background-color: #A7C7FF;
   border: none;
+}
+
+.c6:checked:disabled + .c7 *[fill^='#'] {
+  fill: #FFFFFF;
 }
 
 .c6:focus-visible {
   outline-offset: 2px;
-  outline: #0A54C2 solid 2px;
+  outline: #0062FF solid 2px;
 }
 
 .c5 {
@@ -1811,8 +1813,7 @@ fieldset[data-dimension='s'] .c3 {
   font-size: 16px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
-  color: #2B313B;
+  color: #22242A;
   cursor: pointer;
 }
 
@@ -1824,11 +1825,10 @@ fieldset[data-dimension='s'] .c1 {
   font-size: 14px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
 }
 
 fieldset:disabled .c1 {
-  color: #A7B0BE;
+  color: #B1B5BB;
   cursor: default;
 }
 
@@ -1907,10 +1907,6 @@ fieldset:disabled .c1 {
     </div>
   </body>,
   "container": .c0 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
@@ -1923,23 +1919,19 @@ fieldset:disabled .c1 {
   line-height: 20px;
   font-weight: normal;
   font-family: 'VTB Group UI',sans-serif;
-  color: #2B313B;
+  color: #22242A;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
 }
 
-.c0 > div {
+.c0 > * {
   margin-top: 16px;
 }
 
 .c9 {
   pointer-events: none;
-}
-
-.c9 *[fill^='#'] {
-  fill: #FFFFFF;
 }
 
 .c4 {
@@ -1973,15 +1965,19 @@ fieldset[data-dimension='s'] .c3 {
   transition: background 0.1s ease-in;
   line-height: initial;
   background-color: #FFFFFF;
-  border: 1px solid #626F84;
+  border: 1px solid #74777F;
+}
+
+.c8 *[fill^='#'] {
+  fill: #FFFFFF;
 }
 
 .c6 {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  width: calc(100% + 2px);
-  height: calc(100% + 2px);
+  width: 100%;
+  height: 100%;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -1990,7 +1986,7 @@ fieldset[data-dimension='s'] .c3 {
   transform: translate(-50%,-50%);
   box-sizing: border-box;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 1px;
   margin: 0;
   padding: 0;
 }
@@ -2004,7 +2000,7 @@ fieldset[data-dimension='s'] .c3 {
 }
 
 .c6:checked + .c7 {
-  background-color: #0D69F2;
+  background-color: #0062FF;
   border: none;
 }
 
@@ -2012,31 +2008,37 @@ fieldset[data-dimension='s'] .c3 {
   display: none;
 }
 
-.c6:not(:checked):focus + .c7,
-.c6:not(:disabled):not(:checked):hover + .c7 {
-  background-color: #F1F2F4;
-  border: 1px solid #0A54C2;
-}
-
-.c6:checked:focus + .c7,
-.c6:not(:disabled):checked:hover + .c7 {
-  background-color: #0A54C2;
-  border: none;
-}
-
-.c6:not(:checked):disabled + .c7 {
-  background-color: #FFFFFF;
-  border: 1px solid #C4CAD4;
+.c6:not(:disabled):hover::after,
+.c6:not(:disabled):focus::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  border-radius: 50%;
+  width: calc(100% + 16px);
+  height: calc(100% + 16px);
+  background-color: #0000000D;
 }
 
 .c6:disabled + .c7 {
-  background-color: #C4CAD4;
+  border: 1px solid #B1B5BB;
+}
+
+.c6:checked:disabled + .c7 {
+  background-color: #A7C7FF;
   border: none;
+}
+
+.c6:checked:disabled + .c7 *[fill^='#'] {
+  fill: #FFFFFF;
 }
 
 .c6:focus-visible {
   outline-offset: 2px;
-  outline: #0A54C2 solid 2px;
+  outline: #0062FF solid 2px;
 }
 
 .c5 {
@@ -2057,8 +2059,7 @@ fieldset[data-dimension='s'] .c3 {
   font-size: 16px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
-  color: #2B313B;
+  color: #22242A;
   cursor: pointer;
 }
 
@@ -2070,11 +2071,10 @@ fieldset[data-dimension='s'] .c1 {
   font-size: 14px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #2B313B;
 }
 
 fieldset:disabled .c1 {
-  color: #A7B0BE;
+  color: #B1B5BB;
   cursor: default;
 }
 

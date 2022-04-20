@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-import { typography } from '../Typography';
+import { typography } from '#src/components/Typography';
 
-import type { Dimension } from './constants';
+import type { Dimension } from '#src/components/TabMenu/constants';
 import {
   BADGE_MARGIN,
   ICON_MARGIN,
@@ -13,7 +13,7 @@ import {
   TAB_HEIGHT_M,
   TAB_PADDING_L,
   TAB_PADDING_M,
-} from './constants';
+} from '#src/components/TabMenu/constants';
 
 export const Wrapper = styled.div<{ underline?: boolean; mobile?: boolean }>`
   position: relative;
@@ -24,7 +24,7 @@ export const Wrapper = styled.div<{ underline?: boolean; mobile?: boolean }>`
   justify-content: space-between;
   width: 100%;
   box-sizing: border-box;
-  box-shadow: inset 0 -${LINE_HEIGHT} 0 0 ${({ theme, underline }) => (underline ? theme.color.background.tertiary : 'transparent')};
+  box-shadow: inset 0 -${LINE_HEIGHT} 0 0 ${({ theme, underline }) => (underline ? theme.color['Neutral/Neutral 20'] : 'transparent')};
   overflow-x: ${({ mobile }) => (mobile ? 'scroll' : 'visible')};
 
   &::-webkit-scrollbar {
@@ -52,7 +52,7 @@ export const Underline = styled.div`
   position: absolute;
   bottom: 0;
   display: flex;
-  background-color: ${({ theme }) => theme.color.basic.primary};
+  background-color: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
   height: ${LINE_HEIGHT};
   transition: all 0.2s ease-out;
 `;
@@ -84,8 +84,8 @@ export const Tab = styled.button<{ dimension: Dimension; selected: boolean }>`
   background: transparent;
   appearance: none;
   border: none;
+  ${({ selected, theme }) => !selected && `color: ${theme.color['Neutral/Neutral 50']};`}
   ${({ dimension }) => (dimension === 'm' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
-  ${({ selected, theme }) => !selected && `color: ${theme.color.text.secondary};`}
   user-select: none;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
@@ -94,7 +94,7 @@ export const Tab = styled.button<{ dimension: Dimension; selected: boolean }>`
     &:before {
       position: absolute;
       content: '';
-      border: ${LINE_HEIGHT} solid ${({ theme }) => theme.color.basic.hover};
+      border: ${LINE_HEIGHT} solid ${({ theme }) => theme.color['Primary/Primary 60 Main']};
       top: 0;
       left: 0;
       bottom: 0;
@@ -110,7 +110,7 @@ export const Tab = styled.button<{ dimension: Dimension; selected: boolean }>`
     display: inline-block;
     flex: 1 0 auto;
     & *[fill^='#'] {
-      fill: ${({ theme }) => theme.color.text.secondary};
+      fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
     }
     width: ${({ dimension }) => (dimension === 'm' ? ICON_SIZE_M : ICON_SIZE_L)}px;
     height: ${({ dimension }) => (dimension === 'm' ? ICON_SIZE_M : ICON_SIZE_L)}px;
@@ -121,30 +121,24 @@ export const Tab = styled.button<{ dimension: Dimension; selected: boolean }>`
   }
 
   &:hover:not(:disabled) {
-    color: ${({ theme }) => theme.color.basic.hover};
-    & *[fill^='#'] {
-      fill: ${({ theme }) => theme.color.basic.hover};
-    }
-    [data-badge] {
-      background: ${({ theme }) => theme.color.basic.hover};
-      color: ${({ theme }) => theme.color.text.staticWhite};
+    background: ${({ theme }) => theme.color['Opacity/Hover']};
     }
   }
   &:active:not(:disabled) {
-    color: ${({ theme }) => theme.color.basic.press};
+    color: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
     & *[fill^='#'] {
-      fill: ${({ theme }) => theme.color.basic.press};
+      fill: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
     }
     [data-badge] {
-      background: ${({ theme }) => theme.color.basic.press};
-      color: ${({ theme }) => theme.color.text.staticWhite};
+      background: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
+      color: ${({ theme }) => theme.color['Special/Static White']};
     }
   }
   &:disabled {
-    color: ${({ theme }) => theme.color.text.tertiary};
+    color: ${({ theme }) => theme.color['Neutral/Neutral 30']};
     cursor: default;
     & *[fill^='#'] {
-      fill: ${({ theme }) => theme.color.text.tertiary};
+      fill: ${({ theme }) => theme.color['Neutral/Neutral 30']};
     }
   }
 `;

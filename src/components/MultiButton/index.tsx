@@ -1,5 +1,5 @@
+import type { FC, FocusEvent, KeyboardEvent, MouseEvent, ReactNode } from 'react';
 import React, { HTMLAttributes, useRef, useState } from 'react';
-import type { FC, ReactNode, FocusEvent, MouseEvent, KeyboardEvent } from 'react';
 import styled from 'styled-components';
 import { ReactComponent as ChevronDownOutline } from '@admiral-ds/icons/build/system/ChevronDownOutline.svg';
 import { Button } from '#src/components/Button';
@@ -34,41 +34,19 @@ const MenuButton = styled(Button)`
 `;
 
 const Separator = styled.div<SeparatorProps>`
-  width: 2px;
+  width: 1px;
   &[data-appearance~='primary'] {
     background-color: transparent;
   }
+
   &[data-appearance~='secondary'] {
-    background-color: ${({ theme }) => theme.color.basic.primary};
-  }
-  &[data-appearance~='secondary'] {
-    background-color: ${({ theme, disabled }) => (disabled ? theme.color.text.tertiary : theme.color.basic.primary)};
+    background-color: ${({ theme, disabled }) =>
+      disabled ? theme.color['Neutral/Neutral 30'] : theme.color['Primary/Primary 60 Main']};
   }
 `;
 
 const Wrapper = styled.div`
   display: inline-flex;
-
-  &[data-focused='true'],
-  &:hover {
-    & [data-appearance='secondary'] {
-      border-color: ${({ theme }) => theme.color.basic.hover};
-    }
-    & ${Separator}[data-appearance="secondary"] {
-      background-color: ${({ theme }) => theme.color.basic.hover};
-    }
-  }
-  &:active {
-    & [data-appearance='secondary'] {
-      border-color: ${({ theme }) => theme.color.basic.press};
-    }
-    & ${Separator}[data-appearance="secondary"] {
-      background-color: ${({ theme }) => theme.color.basic.press};
-    }
-  }
-  &[data-appearance~='disabled'] + div {
-    background-color: ${({ theme }) => theme.color.text.tertiary};
-  }
 `;
 
 const Icon = styled(ChevronDownOutline)<{ $menuOpened: boolean }>`

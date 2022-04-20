@@ -5,14 +5,24 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 
 export default {
-  title: 'Form Field Components/SliderInputField',
+  title: 'Admiral-2.1/Form Field/SliderInputField',
   component: SliderInputField,
   decorators: [withDesign],
   parameters: {
-    design: {
-      type: 'figma',
-      url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=39%3A61110',
-    },
+    design: [
+      {
+        type: 'figma',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A61110',
+      },
+      {
+        type: 'figma',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A61184',
+      },
+      {
+        type: 'figma',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A61214',
+      },
+    ],
   },
   argTypes: {
     dimension: {
@@ -62,7 +72,11 @@ export default {
 } as ComponentMeta<typeof SliderInputField>;
 
 const Template: ComponentStory<typeof SliderInputField> = (props) => {
-  return <SliderInputField {...props} minValue={1000} maxValue={10000} />;
+  return (
+    <>
+      <SliderInputField {...props} minValue={1000} maxValue={10000} />
+    </>
+  );
 };
 
 export const InputFieldInput = Template.bind({});

@@ -25,6 +25,8 @@ Object {
   background: transparent;
   -webkit-tap-highlight-color: transparent;
   overflow: visible;
+  height: 36px;
+  width: 36px;
 }
 
 .c0 svg {
@@ -34,15 +36,24 @@ Object {
 }
 
 .c0 *[fill^='#'] {
-  fill: #626F84;
+  fill: #74777F;
+}
+
+.c0:hover {
+  border-radius: 50%;
+  background-color: #0000000D;
 }
 
 .c0:hover *[fill^='#'] {
-  fill: #0A54C2;
+  fill: #74777F;
+}
+
+.c0:focus {
+  background-color: transparent;
 }
 
 .c0:focus *[fill^='#'] {
-  fill: #0A54C2;
+  fill: #74777F;
 }
 
 .c0:focus:before {
@@ -52,12 +63,17 @@ Object {
   left: -4px;
   bottom: -4px;
   right: -4px;
-  border: 2px solid #0A54C2;
+  border: 2px solid #0062FF;
   border-radius: 4px;
 }
 
+.c0:active {
+  border-radius: 50%;
+  background-color: #00000017;
+}
+
 .c0:active *[fill^='#'] {
-  fill: #0949AA;
+  fill: #74777F;
 }
 
 .c0:disabled {
@@ -65,7 +81,7 @@ Object {
 }
 
 .c0:disabled *[fill^='#'] {
-  fill: #A7B0BE;
+  fill: #B1B5BB;
 }
 
 .c1 {
@@ -78,7 +94,6 @@ Object {
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  width: 100%;
   height: 100%;
 }
 
@@ -125,6 +140,8 @@ Object {
   background: transparent;
   -webkit-tap-highlight-color: transparent;
   overflow: visible;
+  height: 36px;
+  width: 36px;
 }
 
 .c0 svg {
@@ -134,15 +151,24 @@ Object {
 }
 
 .c0 *[fill^='#'] {
-  fill: #626F84;
+  fill: #74777F;
+}
+
+.c0:hover {
+  border-radius: 50%;
+  background-color: #0000000D;
 }
 
 .c0:hover *[fill^='#'] {
-  fill: #0A54C2;
+  fill: #74777F;
+}
+
+.c0:focus {
+  background-color: transparent;
 }
 
 .c0:focus *[fill^='#'] {
-  fill: #0A54C2;
+  fill: #74777F;
 }
 
 .c0:focus:before {
@@ -152,12 +178,17 @@ Object {
   left: -4px;
   bottom: -4px;
   right: -4px;
-  border: 2px solid #0A54C2;
+  border: 2px solid #0062FF;
   border-radius: 4px;
 }
 
+.c0:active {
+  border-radius: 50%;
+  background-color: #00000017;
+}
+
 .c0:active *[fill^='#'] {
-  fill: #0949AA;
+  fill: #74777F;
 }
 
 .c0:disabled {
@@ -165,7 +196,7 @@ Object {
 }
 
 .c0:disabled *[fill^='#'] {
-  fill: #A7B0BE;
+  fill: #B1B5BB;
 }
 
 .c1 {
@@ -178,7 +209,6 @@ Object {
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  width: 100%;
   height: 100%;
 }
 
