@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { HTMLAttributes } from 'react';
-import { Dimension } from '#src/components/input/PhoneNumberInput/utils';
+import { Dimension } from '#src/components-ver2/input/PhoneNumberInput/utils';
 
 export interface FlagProps extends HTMLAttributes<HTMLDivElement> {
   Component: React.ElementType;
