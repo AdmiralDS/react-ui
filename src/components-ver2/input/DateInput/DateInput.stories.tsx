@@ -55,6 +55,12 @@ export default {
     placeholder: {
       type: 'string',
     },
+    minDate: {
+      control: false,
+    },
+    maxDate: {
+      control: false,
+    },
   },
 } as ComponentMeta<typeof DateInput>;
 
