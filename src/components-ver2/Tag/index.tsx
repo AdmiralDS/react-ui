@@ -1,13 +1,7 @@
 import * as React from 'react';
-import styled, { css, ThemeContext } from 'styled-components';
-import { Tooltip } from '#src/components/Tooltip';
+import styled, { css } from 'styled-components';
+import { Tooltip } from '#src/components-ver2/Tooltip';
 import { typography } from '#src/components-ver2/Typography';
-import { DARK_THEME, LIGHT_THEME } from '#src/components/themes';
-
-const InverseTooltip = (props: any) => {
-  const themeContext = React.useContext(ThemeContext);
-  return <Tooltip {...props} theme={themeContext.name == 'dark' ? LIGHT_THEME : DARK_THEME} />;
-};
 
 const circleBackground = css<{ background: TagKind | string }>`
   background: ${({ background, theme }) => {
@@ -233,7 +227,7 @@ export const Tag: React.FC<React.PropsWithChildren<TagProps>> = ({
 
   return overflow ? (
     // не связываю тултип и тег через aria-describedby и id, чтобы содержимое тега не зачитывалось дважды
-    <InverseTooltip renderContent={() => children}>{renderTag()}</InverseTooltip>
+    <Tooltip renderContent={() => children}>{renderTag()}</Tooltip>
   ) : (
     renderTag()
   );

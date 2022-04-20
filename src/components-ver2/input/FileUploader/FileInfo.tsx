@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { HTMLAttributes, useEffect, useCallback } from 'react';
-import styled, { css, ThemeContext } from 'styled-components';
+import styled, { css } from 'styled-components';
 import { ErrorBlock } from '#src/components-ver2/input/FileUploader/ErrorBlock';
 import { Spinner } from '#src/components-ver2/Spinner';
 import { Tooltip } from '#src/components-ver2/Tooltip';
@@ -12,7 +12,6 @@ import { ReactComponent as FileXLSSolid } from '@admiral-ds/icons/build/document
 import { ReactComponent as DocsSolid } from '@admiral-ds/icons/build/documents/DocsSolid.svg';
 import { ReactComponent as JpgSolid } from '@admiral-ds/icons/build/documents/JpgSolid.svg';
 import { ReactComponent as CloseOutline } from '@admiral-ds/icons/build/service/CloseOutline.svg';
-import { DARK_THEME, LIGHT_THEME } from '#src/components-ver2/themes';
 
 export type FileProps = {
   file: File;
@@ -78,11 +77,6 @@ const getFormat = (type: string) => {
     default:
       return 'Docs';
   }
-};
-
-const InverseTooltip = (props: any) => {
-  const themeContext = React.useContext(ThemeContext);
-  return <Tooltip {...props} theme={themeContext.name == 'dark' ? LIGHT_THEME : DARK_THEME} />;
 };
 
 const Container = styled.div<{ dimension?: Dimension }>`
@@ -258,9 +252,9 @@ export const FileInfo = ({ id, file, dimension, fileDimension, onClick, children
                 </IconWrapper>
               ))}
             <Content fileDimension={fileDimension}>
-              <InverseTooltip renderContent={() => `${fileName}`}>
+              <Tooltip renderContent={() => `${fileName}`}>
                 <Title>{fileName}</Title>
-              </InverseTooltip>
+              </Tooltip>
               <Size fileDimension={fileDimension} status={status}>
                 {fileInfo}
               </Size>
