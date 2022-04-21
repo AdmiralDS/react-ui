@@ -98,6 +98,7 @@ fieldset[data-dimension='s'] .c4 {
 
 .c7:disabled + .c8 {
   border: 1px solid #B1B5BB;
+  background-color: #E5E7EB;
 }
 
 .c7:checked:disabled + .c8 {
@@ -372,6 +373,7 @@ fieldset[data-dimension='s'] .c4 {
 
 .c7:disabled + .c8 {
   border: 1px solid #B1B5BB;
+  background-color: #E5E7EB;
 }
 
 .c7:checked:disabled + .c8 {
@@ -701,6 +703,7 @@ fieldset[data-dimension='s'] .c4 {
 
 .c7:disabled + .c8 {
   border: 1px solid #B1B5BB;
+  background-color: #E5E7EB;
 }
 
 .c7:checked:disabled + .c8 {
@@ -975,6 +978,7 @@ fieldset[data-dimension='s'] .c4 {
 
 .c7:disabled + .c8 {
   border: 1px solid #B1B5BB;
+  background-color: #E5E7EB;
 }
 
 .c7:checked:disabled + .c8 {
@@ -1304,6 +1308,7 @@ fieldset[data-dimension='s'] .c4 {
 
 .c7:disabled + .c8 {
   border: 1px solid #B1B5BB;
+  background-color: #E5E7EB;
 }
 
 .c7:checked:disabled + .c8 {
@@ -1578,6 +1583,7 @@ fieldset[data-dimension='s'] .c4 {
 
 .c7:disabled + .c8 {
   border: 1px solid #B1B5BB;
+  background-color: #E5E7EB;
 }
 
 .c7:checked:disabled + .c8 {
