@@ -81,6 +81,9 @@ export const underlineRow = css`
 `;
 
 export const rowBackground = css`
+  [data-greyheader='true'] & {
+    background: ${({ theme }) => theme.color['Neutral/Neutral 10']};
+  }
   [data-selected='true'] & {
     background: ${({ theme }) => theme.color['Primary/Primary 20']};
   }

@@ -485,7 +485,7 @@ export const Table: React.FC<TableProps> = ({
 
   return (
     <TableContainer ref={tableRef} data-dimension={dimension} data-shadow={false} {...props} className="table">
-      <Header greyHeader={greyHeader} ref={headerRef} className="tr" data-underline={true}>
+      <Header ref={headerRef} className="tr" data-underline={true} greyHeader={greyHeader} data-greyheader={greyHeader}>
         {(displayRowSelectionColumn || displayRowExpansionColumn || stickyColumns.length > 0) && (
           <StickyWrapper>
             {displayRowExpansionColumn && <ExpandCell />}
