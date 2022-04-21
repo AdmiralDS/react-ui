@@ -15,21 +15,8 @@ export const SIZE = {
 };
 
 const focusStyle = css`
-  background-color: transparent;
-  & *[fill^='#'] {
-    fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
-  }
-
-  &:before {
-    content: '';
-    position: absolute;
-    top: -4px;
-    left: -4px;
-    bottom: -4px;
-    right: -4px;
-    border: 2px solid ${({ theme }) => theme.color['Primary/Primary 60 Main']};
-    border-radius: 4px;
-  }
+  border-radius: 50%;
+  background-color: ${({ theme }) => theme.color['Opacity/Focus']};
 `;
 
 const ButtonComponent = styled.button<{ dimension: Dimension; menuOpened: boolean }>`
@@ -61,13 +48,19 @@ const ButtonComponent = styled.button<{ dimension: Dimension; menuOpened: boolea
     background-color: ${({ theme }) => theme.color['Opacity/Hover']};
   }
 
-  &:hover *[fill^='#'] {
-    fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
-  }
-
   ${({ menuOpened }) => menuOpened && focusStyle}
-  &:focus {
-    ${focusStyle}
+
+  &:focus-visible {
+    &:before {
+      content: '';
+      position: absolute;
+      top: -4px;
+      left: -4px;
+      bottom: -4px;
+      right: -4px;
+      border: 2px solid ${({ theme }) => theme.color['Primary/Primary 60 Main']};
+      border-radius: 4px;
+    }
   }
 
   &:active {
@@ -75,13 +68,8 @@ const ButtonComponent = styled.button<{ dimension: Dimension; menuOpened: boolea
     background-color: ${({ theme }) => theme.color['Opacity/Focus']};
   }
 
-  &:active *[fill^='#'] {
-    fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
-  }
-
   &:disabled {
     cursor: default;
-
     & *[fill^='#'] {
       fill: ${({ theme }) => theme.color['Neutral/Neutral 30']};
     }
