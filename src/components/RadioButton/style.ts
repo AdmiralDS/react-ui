@@ -81,6 +81,14 @@ export const Input = styled.input<{ dimension: Dimension }>`
   cursor: pointer;
   border-radius: 50%;
 
+  &:disabled {
+    pointer-events: none;
+  }
+
+  &:not(:checked):disabled + ${Span} {
+    background-color: ${({ theme }) => theme.color['Neutral/Neutral 10']};
+  }
+
   &:checked:disabled + ${Span} {
     border: ${BORDER_WIDTH_CHECKED}px solid ${({ theme }) => theme.color['Primary/Primary 30']};
   }
