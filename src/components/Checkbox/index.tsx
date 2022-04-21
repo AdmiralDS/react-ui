@@ -147,6 +147,7 @@ const Input = styled.input<{ indeterminate?: boolean }>`
 
   &:disabled + ${Background} {
     border: 1px solid ${({ theme }) => theme.color['Neutral/Neutral 30']};
+    background-color: ${({ theme }) => theme.color['Neutral/Neutral 10']};
   }
 
   &:checked:disabled + ${Background} {
