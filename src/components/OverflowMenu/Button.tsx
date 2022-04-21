@@ -88,11 +88,15 @@ const ButtonComponent = styled.button<{ dimension: Dimension; menuOpened: boolea
   }
 `;
 
-export const ButtonContent = styled.span`
+export const ButtonContent = styled.span<{ $isVertical?: boolean }>`
   position: relative;
   display: inline-flex;
   align-items: center;
   height: 100%;
+
+  & > svg {
+    transform: rotate(${(p) => (p.$isVertical ? 90 : 0)}deg);
+  }
 `;
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -102,13 +106,15 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   dimension?: Dimension;
   /** Состояние меню */
   menuOpened: boolean;
+  /** Ориентация компонента */
+  isVertical?: boolean;
 }
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ dimension = 'l', menuOpened, type = 'button', ...props }, ref) => {
+  ({ dimension = 'l', menuOpened, type = 'button', isVertical = false, ...props }, ref) => {
     return (
       <ButtonComponent ref={ref} dimension={dimension} menuOpened={menuOpened} type={type} {...props}>
-        <ButtonContent>
+        <ButtonContent $isVertical={isVertical}>
           {dimension === 'l' ? (
             <ButtonL width={24} height={24} aria-hidden />
           ) : dimension === 'm' ? (
