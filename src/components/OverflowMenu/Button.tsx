@@ -111,10 +111,10 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ dimension = 'l', menuOpened, type = 'button', ...props }, ref) => {
+  ({ dimension = 'l', menuOpened, type = 'button', isVertical = false, ...props }, ref) => {
     return (
       <ButtonComponent ref={ref} dimension={dimension} menuOpened={menuOpened} type={type} {...props}>
-        <ButtonContent $isVertical={props.isVertical}>
+        <ButtonContent $isVertical={isVertical}>
           {dimension === 'l' ? (
             <ButtonL width={24} height={24} aria-hidden />
           ) : dimension === 'm' ? (
