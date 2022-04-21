@@ -27,6 +27,8 @@ export interface OverflowMenuProps extends Omit<React.HTMLAttributes<HTMLButtonE
   disabled?: boolean;
   /** Выравнивание выпадающего меню относительно компонента https://developer.mozilla.org/en-US/docs/Web/CSS/align-self */
   alignSelf?: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
+  /** Ориентация компонента */
+  isVertical?: boolean;
 }
 
 export const OverflowMenu = React.forwardRef<HTMLButtonElement, OverflowMenuProps>(
@@ -36,6 +38,7 @@ export const OverflowMenu = React.forwardRef<HTMLButtonElement, OverflowMenuProp
       dimension = 'l',
       disabled = false,
       alignSelf = 'flex-end',
+      isVertical = false,
       onClose,
       onOpen,
       selected,
@@ -123,6 +126,7 @@ export const OverflowMenu = React.forwardRef<HTMLButtonElement, OverflowMenuProp
           ref={refSetter(ref, btnRef)}
           dimension={dimension}
           disabled={disabled}
+          isVertical={isVertical}
           menuOpened={menuOpened}
           onKeyDown={handleBtnKeyDown}
           onClick={reverseMenu}
