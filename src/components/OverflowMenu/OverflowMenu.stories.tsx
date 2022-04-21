@@ -14,6 +14,7 @@ const Separator = styled.div`
 
 const DisplayBlock = styled.div`
   display: flex;
+  align-items: flex-start;
 `;
 
 export default {
