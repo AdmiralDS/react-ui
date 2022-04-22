@@ -21,7 +21,7 @@ type Kind = 'neutral' | 'green' | 'blue' | 'red' | 'orange';
 export interface TagsProps extends HTMLAttributes<HTMLDivElement> {
   /** Ширина тэгов */
   width?: number | string;
-  /** Размер тегов (высота) */
+  /** Высота тэгов */
   dimension?: Dimension;
   /** Тип тэгов */
   kind?: Kind;

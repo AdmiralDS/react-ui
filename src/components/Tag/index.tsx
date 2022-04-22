@@ -176,7 +176,7 @@ const Icon = styled.div`
 export type TagKind = 'neutral' | 'green' | 'blue' | 'red' | 'orange';
 
 export interface TagProps extends React.HTMLAttributes<HTMLButtonElement> {
-  /** Размер компонента */
+  /** Высота тэга */
   dimension?: Dimension;
   /** Тип тэга. Можно выбрать из предложенных вариантов, либо задать свои цвета для тэга.
    * В случае когда статус задается через статусную метку (кружок), свойство background отвечает за цвет статусной метки.
@@ -196,7 +196,7 @@ export interface TagProps extends React.HTMLAttributes<HTMLButtonElement> {
   onClick?: (event: React.MouseEvent<HTMLButtonElement> | React.KeyboardEvent<HTMLButtonElement>) => void;
 
   /**
-   * Позволяет рендерить компонент используя другой тег HTML (https://styled-components.com/docs/api#as-polymorphic-prop).
+   * Позволяет рендерить компонент, используя другой тег HTML (https://styled-components.com/docs/api#as-polymorphic-prop).
    * В storybook в качестве примера приведены несколько возможных вариантов этого параметра (кроме них можно использовать любой другой HTML тег).
    */
   as?: React.ElementType;
