@@ -15,21 +15,8 @@ export const SIZE = {
 };
 
 const focusStyle = css`
-  background-color: transparent;
-  & *[fill^='#'] {
-    fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
-  }
-
-  &:before {
-    content: '';
-    position: absolute;
-    top: -4px;
-    left: -4px;
-    bottom: -4px;
-    right: -4px;
-    border: 2px solid ${({ theme }) => theme.color['Primary/Primary 60 Main']};
-    border-radius: 4px;
-  }
+  border-radius: 50%;
+  background-color: ${({ theme }) => theme.color['Opacity/Focus']};
 `;
 
 const ButtonComponent = styled.button<{ dimension: Dimension; menuOpened: boolean }>`
@@ -61,13 +48,19 @@ const ButtonComponent = styled.button<{ dimension: Dimension; menuOpened: boolea
     background-color: ${({ theme }) => theme.color['Opacity/Hover']};
   }
 
-  &:hover *[fill^='#'] {
-    fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
-  }
-
   ${({ menuOpened }) => menuOpened && focusStyle}
-  &:focus {
-    ${focusStyle}
+
+  &:focus-visible {
+    &:before {
+      content: '';
+      position: absolute;
+      top: -4px;
+      left: -4px;
+      bottom: -4px;
+      right: -4px;
+      border: 2px solid ${({ theme }) => theme.color['Primary/Primary 60 Main']};
+      border-radius: 4px;
+    }
   }
 
   &:active {
@@ -75,24 +68,23 @@ const ButtonComponent = styled.button<{ dimension: Dimension; menuOpened: boolea
     background-color: ${({ theme }) => theme.color['Opacity/Focus']};
   }
 
-  &:active *[fill^='#'] {
-    fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
-  }
-
   &:disabled {
     cursor: default;
-
     & *[fill^='#'] {
       fill: ${({ theme }) => theme.color['Neutral/Neutral 30']};
     }
   }
 `;
 
-export const ButtonContent = styled.span`
+export const ButtonContent = styled.span<{ $isVertical?: boolean }>`
   position: relative;
   display: inline-flex;
   align-items: center;
   height: 100%;
+
+  & > svg {
+    transform: rotate(${(p) => (p.$isVertical ? 90 : 0)}deg);
+  }
 `;
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -102,13 +94,15 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   dimension?: Dimension;
   /** Состояние меню */
   menuOpened: boolean;
+  /** Ориентация компонента */
+  isVertical?: boolean;
 }
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ dimension = 'l', menuOpened, type = 'button', ...props }, ref) => {
+  ({ dimension = 'l', menuOpened, type = 'button', isVertical = false, ...props }, ref) => {
     return (
       <ButtonComponent ref={ref} dimension={dimension} menuOpened={menuOpened} type={type} {...props}>
-        <ButtonContent>
+        <ButtonContent $isVertical={isVertical}>
           {dimension === 'l' ? (
             <ButtonL width={24} height={24} aria-hidden />
           ) : dimension === 'm' ? (

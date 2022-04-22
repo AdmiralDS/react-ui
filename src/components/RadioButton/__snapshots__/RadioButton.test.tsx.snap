@@ -69,6 +69,14 @@ fieldset[data-dimension='s'] .c2 {
   display: none;
 }
 
+.c4:disabled {
+  pointer-events: none;
+}
+
+.c4:not(:checked):disabled + .c5 {
+  background-color: #E5E7EB;
+}
+
 .c4:checked:disabled + .c5 {
   border: 5px solid #A7C7FF;
 }
@@ -222,6 +230,14 @@ fieldset[data-dimension='s'] .c2 {
 
 .c4::-ms-check {
   display: none;
+}
+
+.c4:disabled {
+  pointer-events: none;
+}
+
+.c4:not(:checked):disabled + .c5 {
+  background-color: #E5E7EB;
 }
 
 .c4:checked:disabled + .c5 {
@@ -434,6 +450,14 @@ fieldset[data-dimension='s'] .c2 {
   display: none;
 }
 
+.c4:disabled {
+  pointer-events: none;
+}
+
+.c4:not(:checked):disabled + .c5 {
+  background-color: #E5E7EB;
+}
+
 .c4:checked:disabled + .c5 {
   border: 5px solid #A7C7FF;
 }
@@ -584,6 +608,14 @@ fieldset[data-dimension='s'] .c2 {
 
 .c4::-ms-check {
   display: none;
+}
+
+.c4:disabled {
+  pointer-events: none;
+}
+
+.c4:not(:checked):disabled + .c5 {
+  background-color: #E5E7EB;
 }
 
 .c4:checked:disabled + .c5 {
@@ -793,6 +825,14 @@ fieldset[data-dimension='s'] .c2 {
   display: none;
 }
 
+.c4:disabled {
+  pointer-events: none;
+}
+
+.c4:not(:checked):disabled + .c5 {
+  background-color: #E5E7EB;
+}
+
 .c4:checked:disabled + .c5 {
   border: 5px solid #A7C7FF;
 }
@@ -943,6 +983,14 @@ fieldset[data-dimension='s'] .c2 {
 
 .c4::-ms-check {
   display: none;
+}
+
+.c4:disabled {
+  pointer-events: none;
+}
+
+.c4:not(:checked):disabled + .c5 {
+  background-color: #E5E7EB;
 }
 
 .c4:checked:disabled + .c5 {

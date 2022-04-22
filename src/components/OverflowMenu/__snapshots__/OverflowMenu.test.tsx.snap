@@ -44,19 +44,7 @@ Object {
   background-color: #0000000D;
 }
 
-.c0:hover *[fill^='#'] {
-  fill: #74777F;
-}
-
-.c0:focus {
-  background-color: transparent;
-}
-
-.c0:focus *[fill^='#'] {
-  fill: #74777F;
-}
-
-.c0:focus:before {
+.c0:focus-visible:before {
   content: '';
   position: absolute;
   top: -4px;
@@ -70,10 +58,6 @@ Object {
 .c0:active {
   border-radius: 50%;
   background-color: #00000017;
-}
-
-.c0:active *[fill^='#'] {
-  fill: #74777F;
 }
 
 .c0:disabled {
@@ -95,6 +79,12 @@ Object {
   -ms-flex-align: center;
   align-items: center;
   height: 100%;
+}
+
+.c1 > svg {
+  -webkit-transform: rotate(0deg);
+  -ms-transform: rotate(0deg);
+  transform: rotate(0deg);
 }
 
 <body>
@@ -159,19 +149,7 @@ Object {
   background-color: #0000000D;
 }
 
-.c0:hover *[fill^='#'] {
-  fill: #74777F;
-}
-
-.c0:focus {
-  background-color: transparent;
-}
-
-.c0:focus *[fill^='#'] {
-  fill: #74777F;
-}
-
-.c0:focus:before {
+.c0:focus-visible:before {
   content: '';
   position: absolute;
   top: -4px;
@@ -185,10 +163,6 @@ Object {
 .c0:active {
   border-radius: 50%;
   background-color: #00000017;
-}
-
-.c0:active *[fill^='#'] {
-  fill: #74777F;
 }
 
 .c0:disabled {
@@ -210,6 +184,12 @@ Object {
   -ms-flex-align: center;
   align-items: center;
   height: 100%;
+}
+
+.c1 > svg {
+  -webkit-transform: rotate(0deg);
+  -ms-transform: rotate(0deg);
+  transform: rotate(0deg);
 }
 
 <div>
