@@ -39,9 +39,9 @@ export const Tags: FC<TagsProps> = ({ children, width, dimension, kind, onClick 
         return cloneElement(child, {
           onClick: child.props.onClick || onClick,
           width: child.props.width || width,
-          dimension: child.props.dimension || dimension,
           kind: child.props.kind || kind,
           ...child.props,
+          dimension: dimension,
         });
       })}
     </TagsWrapper>
