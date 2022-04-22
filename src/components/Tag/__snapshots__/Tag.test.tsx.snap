@@ -7,9 +7,9 @@ Object {
   position: relative;
   box-sizing: border-box;
   height: 24px;
+  padding: 3px 7px;
   width: 60px;
   margin-top: 8px;
-  padding: 3px 7px;
   border-radius: 4px;
   background: #E5E7EB;
   border: 1px solid #E5E7EB;
@@ -30,11 +30,11 @@ Object {
   background: #D6D8DD;
 }
 
-.c0:focus {
+.c0:focus-visible {
   outline: none;
 }
 
-.c0:focus:before {
+.c0:focus-visible:before {
   content: '';
   position: absolute;
   top: -4px;
@@ -98,9 +98,9 @@ Object {
   position: relative;
   box-sizing: border-box;
   height: 24px;
+  padding: 3px 7px;
   width: 60px;
   margin-top: 8px;
-  padding: 3px 7px;
   border-radius: 4px;
   background: #E5E7EB;
   border: 1px solid #E5E7EB;
@@ -121,11 +121,11 @@ Object {
   background: #D6D8DD;
 }
 
-.c0:focus {
+.c0:focus-visible {
   outline: none;
 }
 
-.c0:focus:before {
+.c0:focus-visible:before {
   content: '';
   position: absolute;
   top: -4px;
@@ -244,8 +244,8 @@ Object {
   position: relative;
   box-sizing: border-box;
   height: 24px;
-  margin-top: 8px;
   padding: 3px 7px;
+  margin-top: 8px;
   border-radius: 4px;
   background: #E5E7EB;
   border: 1px solid #E5E7EB;
@@ -266,11 +266,11 @@ Object {
   background: #D6D8DD;
 }
 
-.c0:focus {
+.c0:focus-visible {
   outline: none;
 }
 
-.c0:focus:before {
+.c0:focus-visible:before {
   content: '';
   position: absolute;
   top: -4px;
@@ -315,8 +315,8 @@ Object {
   position: relative;
   box-sizing: border-box;
   height: 24px;
-  margin-top: 8px;
   padding: 3px 7px;
+  margin-top: 8px;
   border-radius: 4px;
   background: #E5E7EB;
   border: 1px solid #E5E7EB;
@@ -337,11 +337,11 @@ Object {
   background: #D6D8DD;
 }
 
-.c0:focus {
+.c0:focus-visible {
   outline: none;
 }
 
-.c0:focus:before {
+.c0:focus-visible:before {
   content: '';
   position: absolute;
   top: -4px;
