@@ -98,10 +98,16 @@ const Wrapper = styled.button<{
 }>`
   position: relative;
   box-sizing: border-box;
-  height: 24px;
+
+  ${({ dimension }) => `
+    height: ${dimension === 's' ? TAG_HEIGHT_S : TAG_HEIGHT_M}px;
+    padding: ${dimension === 's' ? TAG_PADDING_TOP_S : TAG_PADDING_TOP_M}px ${
+    dimension === 's' ? TAG_PADDING_LEFT_S : TAG_PADDING_LEFT_M
+  }px;
+  `}
+
   ${({ width }) => width && `width: ${typeof width === 'number' ? `${width}px` : width};`}
   margin-top: 8px;
-  padding: 3px 7px;
   border-radius: 4px;
   ${({ statusViaBackground, theme }) =>
     statusViaBackground ? wrapperBackground : `background: ${theme.color['Neutral/Neutral 10']};`}
