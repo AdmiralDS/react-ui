@@ -3,6 +3,15 @@ import styled, { css } from 'styled-components';
 import { Tooltip } from '#src/components/Tooltip';
 import { typography } from '#src/components/Typography';
 
+type Dimension = 'm' | 's';
+
+const TAG_HEIGHT_S = 20;
+const TAG_HEIGHT_M = 24;
+const TAG_PADDING_TOP_S = 1;
+const TAG_PADDING_TOP_M = 3;
+const TAG_PADDING_LEFT_S = 5;
+const TAG_PADDING_LEFT_M = 7;
+
 const circleBackground = css<{ background: TagKind | string }>`
   background: ${({ background, theme }) => {
     switch (background) {
