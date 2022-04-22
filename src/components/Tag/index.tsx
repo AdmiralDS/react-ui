@@ -88,6 +88,7 @@ const wrapperHover = css<{ background: TagKind | string }>`
 `;
 
 const Wrapper = styled.button<{
+  dimension?: Dimension;
   width?: number | string;
   clickable: boolean;
   as?: React.ElementType;
@@ -169,6 +170,8 @@ const Icon = styled.div`
 export type TagKind = 'neutral' | 'green' | 'blue' | 'red' | 'orange';
 
 export interface TagProps extends React.HTMLAttributes<HTMLButtonElement> {
+  /** Размер компонента */
+  dimension?: Dimension;
   /** Тип тэга. Можно выбрать из предложенных вариантов, либо задать свои цвета для тэга.
    * В случае когда статус задается через статусную метку (кружок), свойство background отвечает за цвет статусной метки.
    * В случае когда статус задается через цвет фона и обводки, свойство background отвечает за цвет фона,
@@ -196,6 +199,7 @@ export interface TagProps extends React.HTMLAttributes<HTMLButtonElement> {
 export const Tag: React.FC<React.PropsWithChildren<TagProps>> = ({
   children,
   kind = 'neutral',
+  dimension = 'm',
   width,
   statusViaBackground = false,
   icon,
@@ -226,6 +230,7 @@ export const Tag: React.FC<React.PropsWithChildren<TagProps>> = ({
       statusViaBackground={statusViaBackground}
       border={border}
       background={background}
+      dimension={dimension}
       {...props}
     >
       {background !== 'neutral' && !statusViaBackground && <Circle background={background} />}
