@@ -125,7 +125,7 @@ const Wrapper = styled.button<{
       statusViaBackground ? wrapperHover : `background: ${theme.color['Neutral/Neutral 20']};`}
   }
 
-  &:focus {
+  &:focus-visible {
     outline: none;
 
     &:before {
