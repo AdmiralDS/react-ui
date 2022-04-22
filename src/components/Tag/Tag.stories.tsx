@@ -43,6 +43,10 @@ export default {
       options: ['neutral', 'blue', 'green', 'red', 'orange'],
       control: { type: 'radio' },
     },
+    dimension: {
+      options: ['m', 's'],
+      control: { type: 'radio' },
+    },
     width: {
       control: { type: 'text' },
     },
