@@ -15,6 +15,12 @@ export const SIZE = {
   s: 24,
 };
 
+const ICON_SIZE = {
+  l: 24,
+  m: 20,
+  s: 16,
+};
+
 const focusStyle = css`
   border-radius: 50%;
   background-color: ${({ theme }) => theme.color['Opacity/Focus']};
