@@ -27,7 +27,9 @@ import {
   SortIcon,
   StickyWrapper,
   TableContainer,
+  TitleContent,
   Title,
+  ExtraText,
 } from './style';
 
 export const DEFAULT_COLUMN_WIDTH = 100;
@@ -48,6 +50,8 @@ export type Column = {
   name: string;
   /** Заголовок столбца */
   title: string;
+  /** Дополнительный текст заголовка столбца */
+  extraText?: string;
   /** Ширина столбца. По умолчанию 100px */
   width?: number | string;
   /** Выравнивание контента ячеек столбца по левому или правому краю. По умолчанию left */
@@ -157,6 +161,10 @@ export interface TableProps extends React.HTMLAttributes<HTMLDivElement> {
    * По умолчанию заголовок занимает не более одной строки
    */
   headerLineClamp?: number;
+  /** Параметр, определяющий максимальное количество строк, которое может занимать дополнительный текст заголовка столбца таблицы.
+   * По умолчанию дополнительный текст занимает не более одной строки
+   */
+  headerExtraLineClamp?: number;
   /** Отображение разделителя для последней колонки. По умолчанию разделитель не отображается */
   showDividerForLastColumn?: boolean;
   /** Отключение возможности ресайза колонок. По умолчанию эта возможность включена */
@@ -184,6 +192,7 @@ export const Table: React.FC<TableProps> = ({
   greyHeader = false,
   spacingBetweenItems,
   headerLineClamp = 1,
+  headerExtraLineClamp = 1,
   showDividerForLastColumn = false,
   disableColumnResize = false,
   showLastRowUnderline = true,
@@ -393,6 +402,7 @@ export const Table: React.FC<TableProps> = ({
     {
       name,
       title,
+      extraText,
       width = DEFAULT_COLUMN_WIDTH,
       resizerWidth,
       cellAlign = 'left',
@@ -419,9 +429,10 @@ export const Table: React.FC<TableProps> = ({
       >
         <HeaderCellContent>
           <HeaderCellTitle onClick={sortable ? () => handleSort(name) : undefined}>
-            <Title sortable={sortable} lineClamp={headerLineClamp}>
-              {title}
-            </Title>
+            <TitleContent sortable={sortable}>
+              <Title lineClamp={headerLineClamp}>{title}</Title>
+              {extraText && <ExtraText lineClamp={headerExtraLineClamp}>{extraText}</ExtraText>}
+            </TitleContent>
             {sortable && <SortIcon width={iconSize} height={iconSize} />}
           </HeaderCellTitle>
           <HeaderCellSpacer width={renderFilter ? spacer : `${parseInt(spacer) - parseInt(defaultSpacer)}px`} />
@@ -474,7 +485,7 @@ export const Table: React.FC<TableProps> = ({
 
   return (
     <TableContainer ref={tableRef} data-dimension={dimension} data-shadow={false} {...props} className="table">
-      <Header greyHeader={greyHeader} ref={headerRef} className="tr" data-underline={true}>
+      <Header ref={headerRef} className="tr" data-underline={true} greyHeader={greyHeader} data-greyheader={greyHeader}>
         {(displayRowSelectionColumn || displayRowExpansionColumn || stickyColumns.length > 0) && (
           <StickyWrapper>
             {displayRowExpansionColumn && <ExpandCell />}

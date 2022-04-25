@@ -20,6 +20,7 @@ import {
   rowListLineClamp,
   rowListRowState,
   rowListSort,
+  columnListExtra,
 } from '#src/components/Table/data';
 import { ReactComponent as AcceptSolid } from '@admiral-ds/icons/build/category/AcceptSolid.svg';
 
@@ -99,6 +100,9 @@ export default {
     headerLineClamp: {
       control: { type: 'number' },
     },
+    headerExtraLineClamp: {
+      control: { type: 'number' },
+    },
     disableColumnResize: {
       control: { type: 'boolean' },
     },
@@ -109,11 +113,7 @@ export default {
 } as ComponentMeta<typeof Table>;
 
 const Template: ComponentStory<typeof Table> = (args) => {
-  return (
-    <>
-      <Table {...args} />
-    </>
-  );
+  return <Table {...args} />;
 };
 
 const StrToTime = (str: string) => {
@@ -535,6 +535,24 @@ Expand.parameters = {
       Стрелка позволяет развернуть строку и посмотреть более детализированную информацию о строке. 
       По нажатию на любую из стрелок срабатывает колбек onRowExpansionChange. Развернутое/свернутое состояние строки 
       задается параметром expanded. А с помощью функции expandedRowRender происходит рендер развернутой части строки (рендер детализированной информации).`,
+    },
+  },
+};
+
+export const ExtraText = Template.bind({});
+ExtraText.args = {
+  rowList,
+  columnList: columnListExtra,
+  headerExtraLineClamp: 2,
+};
+ExtraText.storyName = 'Table. Пример c дополнительным текстом в заголовке.';
+ExtraText.parameters = {
+  docs: {
+    description: {
+      story: `При необходимости в заголовке таблицы можно включать дополнительный текст с помощью параметра extraText. 
+      Дополнительный текст по умолчанию выводится в одну строку и при нехватке места сокращается с помощью троеточия. Увеличить высоту 
+      дополнительного текста можно с помощью параметра headerExtraLineClamp, который определяет максимальное количество строк, 
+      которое может занимать дополнительный текст. В примере ниже используется headerExtraLineClamp равный 2.`,
     },
   },
 };
