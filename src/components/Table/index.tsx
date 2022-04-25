@@ -15,13 +15,13 @@ import {
   ExpandIcon,
   ExpandIconWrapper,
   Filler,
+  HeaderWrapper,
   Header,
   HeaderCell,
   HeaderCellContent,
   HeaderCellSpacer,
   HeaderCellTitle,
   Row,
-  ScrollbarCompensator,
   ScrollTableBody,
   SimpleRow,
   SortIcon,
@@ -205,7 +205,7 @@ export const Table: React.FC<TableProps> = ({
 
   const [cols, setColumns] = React.useState([...columnList]);
   const [sort, setSort] = React.useState({} as any);
-  const [verticalScrollWidth, setVerticalScrollWidth] = React.useState('0px');
+  const [verticalScroll, setVerticalScroll] = React.useState(false);
   const [resizerState, updateResizerState] = React.useState({} as any);
 
   const stickyColumns = [...cols].filter((col) => col.sticky);
@@ -265,9 +265,9 @@ export const Table: React.FC<TableProps> = ({
       const observer = observeRect(body, () => {
         // есть вертикальный скролл
         if (body.scrollHeight > body.offsetHeight) {
-          setVerticalScrollWidth(`${SCROLLBAR}px`);
+          setVerticalScroll(true);
         } else {
-          setVerticalScrollWidth('0px');
+          setVerticalScroll(false);
         }
       });
       observer.observe();
@@ -484,29 +484,37 @@ export const Table: React.FC<TableProps> = ({
   };
 
   return (
-    <TableContainer ref={tableRef} data-dimension={dimension} data-shadow={false} {...props} className="table">
-      <Header ref={headerRef} className="tr" data-underline={true} greyHeader={greyHeader} data-greyheader={greyHeader}>
-        {(displayRowSelectionColumn || displayRowExpansionColumn || stickyColumns.length > 0) && (
-          <StickyWrapper>
-            {displayRowExpansionColumn && <ExpandCell />}
-            {displayRowSelectionColumn && (
-              <CheckboxCell className="th_checkbox">
-                <Checkbox
-                  dimension={checkboxDimension}
-                  checked={allRowsChecked || someRowsChecked || headerCheckboxChecked}
-                  indeterminate={(someRowsChecked && !allRowsChecked) || headerCheckboxIndeterminate}
-                  onChange={handleHeaderCheckboxChange}
-                />
-              </CheckboxCell>
-            )}
-            {stickyColumns.length > 0 &&
-              stickyColumns.map((col, index) => renderHeaderCell(col as ColumnWithResizerWidth, index))}
-          </StickyWrapper>
-        )}
-        {cols.map((col, index) => (col.sticky ? null : renderHeaderCell(col as ColumnWithResizerWidth, index)))}
-        <Filler />
-        <ScrollbarCompensator width={verticalScrollWidth} />
-      </Header>
+    <TableContainer
+      ref={tableRef}
+      data-dimension={dimension}
+      data-shadow={false}
+      data-verticalscroll={verticalScroll}
+      {...props}
+      className={`table ${props.className}`}
+    >
+      <HeaderWrapper scrollbar={SCROLLBAR} greyHeader={greyHeader} data-greyheader={greyHeader}>
+        <Header ref={headerRef} className="tr" data-underline={true}>
+          {(displayRowSelectionColumn || displayRowExpansionColumn || stickyColumns.length > 0) && (
+            <StickyWrapper>
+              {displayRowExpansionColumn && <ExpandCell />}
+              {displayRowSelectionColumn && (
+                <CheckboxCell className="th_checkbox">
+                  <Checkbox
+                    dimension={checkboxDimension}
+                    checked={allRowsChecked || someRowsChecked || headerCheckboxChecked}
+                    indeterminate={(someRowsChecked && !allRowsChecked) || headerCheckboxIndeterminate}
+                    onChange={handleHeaderCheckboxChange}
+                  />
+                </CheckboxCell>
+              )}
+              {stickyColumns.length > 0 &&
+                stickyColumns.map((col, index) => renderHeaderCell(col as ColumnWithResizerWidth, index))}
+            </StickyWrapper>
+          )}
+          {cols.map((col, index) => (col.sticky ? null : renderHeaderCell(col as ColumnWithResizerWidth, index)))}
+          <Filler />
+        </Header>
+      </HeaderWrapper>
       <ScrollTableBody ref={scrollBodyRef} className="tbody">
         {rowList.map((row, index) => (
           <Row
