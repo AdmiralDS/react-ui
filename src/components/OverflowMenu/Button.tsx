@@ -21,11 +21,6 @@ const ICON_SIZE = {
   s: 16,
 };
 
-const ButtonIcon = styled(MoreHorizontalOutline)<{ dimension: Dimension }>`
-  height: ${({ dimension }) => ICON_SIZE[dimension]}px;
-  width: ${({ dimension }) => ICON_SIZE[dimension]}px;
-`;
-
 const focusStyle = css`
   border-radius: 50%;
   background-color: ${({ theme }) => theme.color['Opacity/Focus']};
@@ -49,10 +44,6 @@ const ButtonComponent = styled.button<{ dimension: Dimension; menuOpened: boolea
 
   & svg {
     flex-shrink: 0;
-  }
-
-  & *[fill^='#'] {
-    fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
   }
 
   &:hover {
@@ -88,7 +79,7 @@ const ButtonComponent = styled.button<{ dimension: Dimension; menuOpened: boolea
   }
 `;
 
-export const ButtonContent = styled.span<{ $isVertical?: boolean }>`
+export const ButtonContent = styled.span<{ $isVertical?: boolean; dimension: Dimension }>`
   position: relative;
   display: inline-flex;
   align-items: center;
@@ -96,6 +87,12 @@ export const ButtonContent = styled.span<{ $isVertical?: boolean }>`
 
   & > svg {
     transform: rotate(${(p) => (p.$isVertical ? 90 : 0)}deg);
+    height: ${({ dimension }) => ICON_SIZE[dimension]}px;
+    width: ${({ dimension }) => ICON_SIZE[dimension]}px;
+
+    & *[fill^='#'] {
+      fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
+    }
   }
 `;
 
@@ -114,8 +111,8 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ dimension = 'l', menuOpened, type = 'button', isVertical = false, ...props }, ref) => {
     return (
       <ButtonComponent ref={ref} dimension={dimension} menuOpened={menuOpened} type={type} {...props}>
-        <ButtonContent $isVertical={isVertical}>
-          <ButtonIcon dimension={dimension} aria-hidden />
+        <ButtonContent dimension={dimension} $isVertical={isVertical}>
+          <MoreHorizontalOutline aria-hidden />
         </ButtonContent>
       </ButtonComponent>
     );
