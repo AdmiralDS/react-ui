@@ -1,8 +1,7 @@
 import * as React from 'react';
 import styled, { css } from 'styled-components';
 
-import { ReactComponent as ButtonL } from '#src/components/OverflowMenu/svgs/ButtonL.svg';
-import { ReactComponent as ButtonM } from '#src/components/OverflowMenu/svgs/ButtonM.svg';
+import { ReactComponent as MoreHorizontalOutline } from '@admiral-ds/icons/build/system/MoreHorizontalOutline.svg';
 
 export type Dimension = 'l' | 'm';
 export const SIZE = {
@@ -40,7 +39,7 @@ const ButtonComponent = styled.button<{ dimension: Dimension; menuOpened: boolea
       isActive ? theme.color['Primary/Primary 60 Main'] : theme.color['Neutral/Neutral 50']};
   }
 
-  &:hover {
+  &:hover:not(:disabled) {
     border-radius: 50%;
     background-color: ${({ theme }) => theme.color['Opacity/Hover']};
   }
@@ -83,7 +82,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ dimension = 'l', type = 'button', ...props }, ref) => {
     return (
       <ButtonComponent ref={ref} dimension={dimension} type={type} {...props}>
-        {dimension === 'l' ? <ButtonL width={18} /> : <ButtonM width={15} />}
+        {dimension === 'l' ? <MoreHorizontalOutline width={24} /> : <MoreHorizontalOutline width={20} />}
       </ButtonComponent>
     );
   },

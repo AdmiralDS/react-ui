@@ -35,11 +35,7 @@ Object {
   flex-shrink: 0;
 }
 
-.c0 *[fill^='#'] {
-  fill: #74777F;
-}
-
-.c0:hover {
+.c0:hover:not(:disabled) {
   border-radius: 50%;
   background-color: #0000000D;
 }
@@ -85,6 +81,12 @@ Object {
   -webkit-transform: rotate(0deg);
   -ms-transform: rotate(0deg);
   transform: rotate(0deg);
+  height: 24px;
+  width: 24px;
+}
+
+.c1 > svg *[fill^='#'] {
+  fill: #74777F;
 }
 
 <body>
@@ -101,8 +103,6 @@ Object {
         >
           <div
             aria-hidden="true"
-            height="24"
-            width="24"
           />
         </span>
       </button>
@@ -140,11 +140,7 @@ Object {
   flex-shrink: 0;
 }
 
-.c0 *[fill^='#'] {
-  fill: #74777F;
-}
-
-.c0:hover {
+.c0:hover:not(:disabled) {
   border-radius: 50%;
   background-color: #0000000D;
 }
@@ -190,6 +186,12 @@ Object {
   -webkit-transform: rotate(0deg);
   -ms-transform: rotate(0deg);
   transform: rotate(0deg);
+  height: 24px;
+  width: 24px;
+}
+
+.c1 > svg *[fill^='#'] {
+  fill: #74777F;
 }
 
 <div>
@@ -205,8 +207,6 @@ Object {
       >
         <div
           aria-hidden="true"
-          height="24"
-          width="24"
         />
       </span>
     </button>
