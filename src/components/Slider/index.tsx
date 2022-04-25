@@ -17,6 +17,12 @@ export interface SliderProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onCha
   maxValue?: number;
   /** Шаг слайдера */
   step?: number;
+  /** разделитель между целым и десятичным */
+  decimal?: string;
+  /** точность (количество знаков после точки). Если precision равно 0, то точку ввести нельзя, только целые числа */
+  precision?: number;
+  /** разделитель между тысячами */
+  thousand?: string;
   /** Массив отметок */
   tickMarks?: number[];
   /** Отключение компонента */
@@ -28,6 +34,9 @@ export interface SliderProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onCha
 export const Slider = ({
   minValue = 0,
   maxValue = 20,
+  decimal = '.',
+  precision = 2,
+  thousand = ' ',
   value = 0,
   onChange,
   tickMarks: points,
@@ -232,6 +241,9 @@ export const Slider = ({
                 tickMarks={tickMarks ? [minValue, ...tickMarks, maxValue] : [minValue, maxValue]}
                 minValue={minValue}
                 maxValue={maxValue}
+                decimal={decimal}
+                precision={precision}
+                thousand={thousand}
                 onPointClick={onPointClick}
               />
             }

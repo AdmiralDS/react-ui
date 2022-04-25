@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { typography } from '#src/components/Typography';
+import { fitToCurrency } from '#src/components/input/NumberInput';
 
 const Wrapper = styled.div<{ position: number }>`
   position: absolute;
@@ -35,11 +36,22 @@ export const Content = styled.div`
 interface TickMarksProps {
   minValue: number;
   maxValue: number;
+  decimal?: string;
+  precision?: number;
+  thousand?: string;
   tickMarks: number[];
   onPointClick: (e: any, value: number) => void;
 }
 
-export const TickMarks = ({ minValue, maxValue, tickMarks, onPointClick }: TickMarksProps) => {
+export const TickMarks = ({
+  minValue,
+  maxValue,
+  decimal = '.',
+  precision = 2,
+  thousand = ' ',
+  tickMarks,
+  onPointClick,
+}: TickMarksProps) => {
   // filter items that fall into the range between minValue and maxValue
   const items = tickMarks.filter((d) => d >= minValue && d <= maxValue);
   const range = maxValue - minValue;
@@ -59,7 +71,7 @@ export const TickMarks = ({ minValue, maxValue, tickMarks, onPointClick }: TickM
               onPointClick(e, value);
             }}
           >
-            <Content style={style}>{value}</Content>
+            <Content style={style}>{fitToCurrency(value, precision, decimal, thousand)}</Content>
           </Wrapper>
         );
       })}
