@@ -2,9 +2,6 @@ import type { ButtonHTMLAttributes, ReactNode } from 'react';
 import * as React from 'react';
 import styled, { css } from 'styled-components';
 
-import { ReactComponent as ButtonL } from '#src/components/OverflowMenu/svgs/ButtonL.svg';
-import { ReactComponent as ButtonM } from '#src/components/OverflowMenu/svgs/ButtonM.svg';
-import { ReactComponent as ButtonS } from '#src/components/OverflowMenu/svgs/ButtonS.svg';
 import { ReactComponent as MoreHorizontalOutline } from '@admiral-ds/icons/build/system/MoreHorizontalOutline.svg';
 
 export type Dimension = 'l' | 'm' | 's';
