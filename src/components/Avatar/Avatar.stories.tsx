@@ -18,7 +18,7 @@ const Desc = styled.div`
 const Container = styled.div`
   position: relative;
   display: flex;
-  & > * {
+  && > * {
     margin-right: 20px;
   }
   margin-bottom: 40px;
