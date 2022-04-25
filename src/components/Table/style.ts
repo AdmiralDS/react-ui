@@ -11,6 +11,7 @@ import {
   rowStyle,
   singleLineTitle,
   underlineRow,
+  extraTextStyle,
 } from './mixins';
 
 export const TableContainer = styled.div`
@@ -232,9 +233,9 @@ export const HeaderCellTitle = styled.div`
   }
 `;
 
-export const Title = styled.div<{ sortable?: boolean; lineClamp: number }>`
-  position: relative;
-  ${({ lineClamp }) => (lineClamp === 1 ? singleLineTitle : multiLineTitle)}
+export const TitleContent = styled.div<{ sortable?: boolean }>`
+  display: flex;
+  flex-direction: column;
 
   // leave 20px/16px for SortIcon
   max-width: ${({ sortable }) => (sortable ? 'calc(100% - 20px)' : '100%')};
@@ -245,6 +246,21 @@ export const Title = styled.div<{ sortable?: boolean; lineClamp: number }>`
   [data-dimension='m'] && {
     max-width: ${({ sortable }) => (sortable ? 'calc(100% - 16px)' : '100%')};
   }
+`;
+
+export const Title = styled.div<{ lineClamp: number }>`
+  position: relative;
+  width: 100%;
+  ${({ lineClamp }) => (lineClamp === 1 ? singleLineTitle : multiLineTitle)}
+`;
+
+export const ExtraText = styled.div<{ lineClamp: number }>`
+  position: relative;
+  width: 100%;
+  // box-sizing: border-box;
+  margin: 2px 0;
+  ${extraTextStyle}
+  ${({ lineClamp }) => (lineClamp === 1 ? singleLineTitle : multiLineTitle)}
 `;
 
 export const Row = styled.div<{ disabled: boolean; underline: boolean }>`

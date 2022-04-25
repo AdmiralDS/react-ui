@@ -3,6 +3,15 @@ import styled, { css } from 'styled-components';
 import { Tooltip } from '#src/components/Tooltip';
 import { typography } from '#src/components/Typography';
 
+type Dimension = 'm' | 's';
+
+const TAG_HEIGHT_S = 20;
+const TAG_HEIGHT_M = 24;
+const TAG_PADDING_TOP_S = 1;
+const TAG_PADDING_TOP_M = 3;
+const TAG_PADDING_LEFT_S = 5;
+const TAG_PADDING_LEFT_M = 7;
+
 const circleBackground = css<{ background: TagKind | string }>`
   background: ${({ background, theme }) => {
     switch (background) {
@@ -79,6 +88,7 @@ const wrapperHover = css<{ background: TagKind | string }>`
 `;
 
 const Wrapper = styled.button<{
+  dimension?: Dimension;
   width?: number | string;
   clickable: boolean;
   as?: React.ElementType;
@@ -88,10 +98,16 @@ const Wrapper = styled.button<{
 }>`
   position: relative;
   box-sizing: border-box;
-  height: 24px;
+
+  ${({ dimension }) => `
+    height: ${dimension === 's' ? TAG_HEIGHT_S : TAG_HEIGHT_M}px;
+    padding: ${dimension === 's' ? TAG_PADDING_TOP_S : TAG_PADDING_TOP_M}px ${
+    dimension === 's' ? TAG_PADDING_LEFT_S : TAG_PADDING_LEFT_M
+  }px;
+  `}
+
   ${({ width }) => width && `width: ${typeof width === 'number' ? `${width}px` : width};`}
   margin-top: 8px;
-  padding: 3px 7px;
   border-radius: 4px;
   ${({ statusViaBackground, theme }) =>
     statusViaBackground ? wrapperBackground : `background: ${theme.color['Neutral/Neutral 10']};`}
@@ -109,7 +125,7 @@ const Wrapper = styled.button<{
       statusViaBackground ? wrapperHover : `background: ${theme.color['Neutral/Neutral 20']};`}
   }
 
-  &:focus {
+  &:focus-visible {
     outline: none;
 
     &:before {
@@ -160,10 +176,12 @@ const Icon = styled.div`
 export type TagKind = 'neutral' | 'green' | 'blue' | 'red' | 'orange';
 
 export interface TagProps extends React.HTMLAttributes<HTMLButtonElement> {
+  /** Высота тэга */
+  dimension?: Dimension;
   /** Тип тэга. Можно выбрать из предложенных вариантов, либо задать свои цвета для тэга.
    * В случае когда статус задается через статусную метку (кружок), свойство background отвечает за цвет статусной метки.
    * В случае когда статус задается через цвет фона и обводки, свойство background отвечает за цвет фона,
-   * свойстов border отвечает за цвет обводки.
+   * свойство border отвечает за цвет обводки.
    */
   kind?: TagKind | { background: string; border?: string };
   /** Отображение статуса через цвет обводки и фона. По умолчанию, при statusViaBackground = false, отображение статуса
@@ -178,7 +196,7 @@ export interface TagProps extends React.HTMLAttributes<HTMLButtonElement> {
   onClick?: (event: React.MouseEvent<HTMLButtonElement> | React.KeyboardEvent<HTMLButtonElement>) => void;
 
   /**
-   * Позволяет рендерить компонент используя другой тег HTML (https://styled-components.com/docs/api#as-polymorphic-prop).
+   * Позволяет рендерить компонент, используя другой тег HTML (https://styled-components.com/docs/api#as-polymorphic-prop).
    * В storybook в качестве примера приведены несколько возможных вариантов этого параметра (кроме них можно использовать любой другой HTML тег).
    */
   as?: React.ElementType;
@@ -187,6 +205,7 @@ export interface TagProps extends React.HTMLAttributes<HTMLButtonElement> {
 export const Tag: React.FC<React.PropsWithChildren<TagProps>> = ({
   children,
   kind = 'neutral',
+  dimension = 'm',
   width,
   statusViaBackground = false,
   icon,
@@ -217,6 +236,7 @@ export const Tag: React.FC<React.PropsWithChildren<TagProps>> = ({
       statusViaBackground={statusViaBackground}
       border={border}
       background={background}
+      dimension={dimension}
       {...props}
     >
       {background !== 'neutral' && !statusViaBackground && <Circle background={background} />}

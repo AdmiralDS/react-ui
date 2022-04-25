@@ -45,6 +45,18 @@ export const headerStyle = css`
   }
 `;
 
+export const extraTextStyle = css`
+  color: ${({ theme }) => theme.color['Neutral/Neutral 50']};
+  ${typography['Caption/Caption 1']}
+
+  [data-dimension='l'] & {
+    ${typography['Body/Body 2 Long']}
+  }
+  [data-dimension='xl'] & {
+    ${typography['Body/Body 2 Long']}
+  }
+`;
+
 export const singleLineTitle = css`
   display: inline-block;
   overflow: hidden;
@@ -69,6 +81,9 @@ export const underlineRow = css`
 `;
 
 export const rowBackground = css`
+  [data-greyheader='true'] & {
+    background: ${({ theme }) => theme.color['Neutral/Neutral 10']};
+  }
   [data-selected='true'] & {
     background: ${({ theme }) => theme.color['Primary/Primary 20']};
   }
