@@ -35,25 +35,46 @@ export const StickyWrapper = styled.div`
   }
 `;
 
-export const ScrollbarCompensator = styled.div<{ width: string }>`
-  display: flex;
-  flex: 1 1 auto;
-  min-width: ${({ width }) => width};
-  max-width: ${({ width }) => width};
-`;
-
 export const Filler = styled.div`
   display: flex;
   flex: 1 1 auto;
   width: unset;
 `;
 
-export const Header = styled.div<{ greyHeader?: boolean }>`
+export const HeaderWrapper = styled.div<{ scrollbar: number; greyHeader?: boolean }>`
+  box-sizing: border-box;
+  position: relative;
+  display: flex;
   flex: 0 0 auto;
-  overflow-x: hidden;
+  flex-direction: column;
+
+  [data-verticalscroll='true'] && {
+    &:after {
+      position: absolute;
+      content: '';
+      box-sizing: border-box;
+      top: 0;
+      right: 0;
+      height: 100%;
+      background: ${({ theme, greyHeader }) =>
+        greyHeader ? theme.color['Neutral/Neutral 10'] : theme.color['Neutral/Neutral 00']};
+      width: ${({ scrollbar }) => scrollbar}px;
+      border-bottom: 1px solid ${({ theme }) => theme.color['Neutral/Neutral 20']};
+    }
+  }
+`;
+
+export const Header = styled.div`
   box-sizing: border-box;
   display: flex;
-  ${({ greyHeader, theme }) => greyHeader && `background: ${theme.color['Neutral/Neutral 10']};`}
+  flex: 0 0 auto;
+  overflow-x: hidden;
+  [data-verticalscroll='true'] & {
+    overflow-y: scroll;
+  }
+  [data-greyheader='true'] & {
+    background: ${({ theme }) => theme.color['Neutral/Neutral 10']};
+  }
   ${headerStyle}
   transform: translateZ(0);
 
