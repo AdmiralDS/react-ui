@@ -21,6 +21,11 @@ const ICON_SIZE = {
   s: 16,
 };
 
+const ButtonIcon = styled(MoreHorizontalOutline)<{ dimension: Dimension }>`
+  height: ${({ dimension }) => ICON_SIZE[dimension]}px;
+  width: ${({ dimension }) => ICON_SIZE[dimension]}px;
+`;
+
 const focusStyle = css`
   border-radius: 50%;
   background-color: ${({ theme }) => theme.color['Opacity/Focus']};
@@ -110,13 +115,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     return (
       <ButtonComponent ref={ref} dimension={dimension} menuOpened={menuOpened} type={type} {...props}>
         <ButtonContent $isVertical={isVertical}>
-          {dimension === 'l' ? (
-            <ButtonL width={24} height={24} aria-hidden />
-          ) : dimension === 'm' ? (
-            <ButtonM width={20} height={20} aria-hidden />
-          ) : (
-            <ButtonS width={16} height={16} aria-hidden />
-          )}
+          <ButtonIcon dimension={dimension} aria-hidden />
         </ButtonContent>
       </ButtonComponent>
     );
