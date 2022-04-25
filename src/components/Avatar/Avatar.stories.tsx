@@ -1,11 +1,11 @@
 import { withDesign } from 'storybook-addon-designs';
 import * as React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import { ReactComponent as PersonSolid } from '@admiral-ds/icons/build/system/PersonSolid.svg';
 import { DefaultFontColorName } from '#src/components/themes';
 
-import { Avatar } from '.';
+import { Avatar } from './index';
 
 const imageURL = 'https://github.com/DrUNE.png?size=100';
 

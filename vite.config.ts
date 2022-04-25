@@ -1,6 +1,6 @@
 import type { Plugin } from 'vite';
 import { defineConfig } from 'vite';
-import reactRefresh from '@vitejs/plugin-react-refresh';
+import react from '@vitejs/plugin-react';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import svgr from '@svgr/rollup';
@@ -28,5 +28,12 @@ export default defineConfig({
     sourcemap: true,
     target: ['es2019'],
   },
-  plugins: [reactRefresh(), svgr({ dimensions: false, svgProps: { focusable: '{false}' } }) as Plugin],
+  plugins: [
+    react({
+      babel: {
+        babelrc: true,
+      },
+    }),
+    svgr({ dimensions: false, svgProps: { focusable: '{false}' } }) as Plugin,
+  ],
 });

@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { version } from '../package.json';
-import { ThemeProvider } from 'styled-components';
+import { ThemeProvider as StyledThemeProvider } from 'styled-components';
+import { ThemeProvider as EmotionThemeProvider} from '@emotion/react';
+
 import { themes } from '@storybook/theming';
 
 import { DARK_THEME, LIGHT_THEME } from '#src/components/themes';
@@ -34,7 +36,9 @@ export const parameters = {
 // create a component that uses the dark mode hook
 function ThemeWrapper(props) {
   // render your custom theme provider
-  return <ThemeProvider theme={useDarkMode() ? DARK_THEME : LIGHT_THEME}>{props.children}</ThemeProvider>;
+  const theme = useDarkMode() ? DARK_THEME : LIGHT_THEME;
+
+  return <StyledThemeProvider theme={theme}><EmotionThemeProvider theme={theme}>{props.children}</EmotionThemeProvider></StyledThemeProvider>;
 }
 
 const StoryContainer = styled.div`

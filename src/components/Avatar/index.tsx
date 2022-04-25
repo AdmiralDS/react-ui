@@ -1,8 +1,8 @@
 import * as React from 'react';
-import styled, { css } from 'styled-components';
-import { typography } from '#src/components/Typography';
+import styled from '@emotion/styled';
+import { typography } from '#src/components/Typography/emotionTypography';
 import { Tooltip } from '#src/components/Tooltip';
-import { DefaultFontColorName } from '#src/components/themes/common';
+import { DefaultFontColorName, Theme } from '#src/components/themes/common';
 
 import { useLoaded } from './useLoaded';
 import { AvatarSVG } from './Avatar_SVG';
@@ -17,42 +17,45 @@ const Wrapper = styled.button<{ size: string }>`
   appearance: none;
   background: transparent;
   -webkit-tap-highlight-color: transparent;
+
   & .avatar-tooltip {
     display: flex;
   }
 `;
 
-const getTextColor = css<{ appearance: Appearance | { background: string; text: string } }>`
-  ${({ theme, appearance }) => {
-    switch (appearance) {
-      case 'light':
-      case 'white':
-        return theme.color[DefaultFontColorName];
-      case 'grey':
-        return theme.color['Special/Static White'];
-      case 'dark':
-        return theme.color['Neutral/Neutral 00'];
-      default:
-        return appearance.text;
-    }
-  }}
-`;
+const getTextColor = ({
+  theme,
+  appearance,
+}: {
+  theme: Theme;
+  appearance: Appearance | { background: string; text: string };
+}) => {
+  switch (appearance) {
+    case 'light':
+    case 'white':
+      return theme.color[DefaultFontColorName];
+    case 'grey':
+      return theme.color['Special/Static White'];
+    case 'dark':
+      return theme.color['Neutral/Neutral 00'];
+    default:
+      return appearance.text;
+  }
+};
 
-const getTypography = css<{ dimension: Dimension }>`
-  ${({ dimension }) => {
-    switch (dimension) {
-      case 'xs':
-      case 's':
-        return typography['Caption/Caption 1'];
-      case 'm':
-      case 'l':
-        return typography['Body/Body 1 Short'];
-      case 'xl':
-      default:
-        return typography['Subtitle/Subtitle 1'];
-    }
-  }}
-`;
+const getTypography = ({ dimension }: { dimension: Dimension }) => {
+  switch (dimension) {
+    case 'xs':
+    case 's':
+      return typography['Caption/Caption 1'];
+    case 'm':
+    case 'l':
+      return typography['Body/Body 1 Short'];
+    case 'xl':
+    default:
+      return typography['Subtitle/Subtitle 1'];
+  }
+};
 
 const Text = styled.span<{ appearance: Appearance | { background: string; text: string }; dimension: Dimension }>`
   position: absolute;
@@ -60,27 +63,25 @@ const Text = styled.span<{ appearance: Appearance | { background: string; text: 
   left: 50%;
   transform: translate(-50%, -50%);
   user-select: none;
-  ${getTypography}
+  ${getTypography};
   color: ${getTextColor};
 `;
 
-const getIconSize = css<{ dimension: Dimension }>`
-  ${({ dimension }) => {
-    switch (dimension) {
-      case 'xs':
-        return '16px';
-      case 's':
-        return '20px';
-      case 'm':
-        return '24px';
-      case 'l':
-        return '28px';
-      case 'xl':
-      default:
-        return '32px';
-    }
-  }}
-`;
+const getIconSize = ({ dimension }: { dimension: Dimension }) => {
+  switch (dimension) {
+    case 'xs':
+      return '16px';
+    case 's':
+      return '20px';
+    case 'm':
+      return '24px';
+    case 'l':
+      return '28px';
+    case 'xl':
+    default:
+      return '32px';
+  }
+};
 
 const IconWrapper = styled.div<{ dimension: Dimension }>`
   position: absolute;
@@ -94,6 +95,7 @@ const IconWrapper = styled.div<{ dimension: Dimension }>`
     & *[fill^='#'] {
       fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
     }
+
     width: 100%;
     height: 100%;
   }

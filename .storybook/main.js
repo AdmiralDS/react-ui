@@ -16,6 +16,9 @@ const getCircularReplacer = () => {
 
 module.exports = {
   stories: ['../src/**/*.stories.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
+  features: {
+    emotionAlias: false
+  },
   addons: [
     {
       name: '@storybook/addon-docs',
@@ -72,7 +75,12 @@ module.exports = {
         loader: 'babel-loader',
         options: {
           babelrc: false,
-          presets: ['@babel/preset-env'],
+          presets: [
+            '@babel/preset-react',
+            '@babel/preset-env',
+            '@emotion/babel-preset-css-prop',
+          ],
+          plugins: ['@emotion/babel-plugin'],
         },
       },
       ...config.module.rules,
