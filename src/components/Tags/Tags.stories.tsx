@@ -23,7 +23,7 @@ const Description = () => (
     между соседними тэгами равны 8px.
     <Separator />
     Для каждого тэга можно отдельно задать width, kind и onClick, либо можно задать единые width, kind и onClick через
-    Tags.
+    Tags. Dimension задается единый для всех тэгов в группе.
   </Desc>
 );
 
@@ -59,7 +59,12 @@ export default {
 const Template1: ComponentStory<typeof Tags> = () => {
   return (
     <>
-      <Tags width={50} kind="green" onClick={(event) => console.log(`click tag with id: ${event.currentTarget.id}`)}>
+      <Tags
+        dimension="m"
+        width={50}
+        kind="green"
+        onClick={(event) => console.log(`click tag with id: ${event.currentTarget.id}`)}
+      >
         <Tag id="1">Neutral</Tag>
         <Tag id="2" kind="green">
           Green
