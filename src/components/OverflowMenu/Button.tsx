@@ -43,7 +43,7 @@ const ButtonComponent = styled.button<{ dimension: Dimension; menuOpened: boolea
     flex-shrink: 0;
   }
 
-  &:hover {
+  &:hover:not(:disabled) {
     border-radius: 50%;
     background-color: ${({ theme }) => theme.color['Opacity/Hover']};
   }
