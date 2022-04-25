@@ -134,7 +134,7 @@ const Template2: ComponentStory<typeof OverflowMenu> = (args) => {
 
   const [selected, setSelected] = React.useState<string | null>(null);
   return (
-    <>
+    <DisplayBlock>
       <OverflowMenu
         {...args}
         selected={selected}
@@ -151,7 +151,25 @@ const Template2: ComponentStory<typeof OverflowMenu> = (args) => {
           );
         })}
       </OverflowMenu>
-    </>
+      <Separator />
+      <OverflowMenu
+        {...args}
+        selected={selected}
+        onChange={(id) => setSelected(id)}
+        onOpen={() => console.log('open menu')}
+        onClose={() => console.log('close menu')}
+        aria-label="Overflow Menu component"
+        disabled
+      >
+        {items.map((item) => {
+          return (
+            <DropDownItem role="option" key={item.id} id={item.id} disabled={item.disabled}>
+              {item.display}
+            </DropDownItem>
+          );
+        })}
+      </OverflowMenu>
+    </DisplayBlock>
   );
 };
 
