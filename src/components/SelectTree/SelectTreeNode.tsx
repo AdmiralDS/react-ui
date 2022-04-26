@@ -105,7 +105,9 @@ const StyledCheckbox = styled(Checkbox)`
   flex-shrink: 0;
 `;
 
-const TitleContent = styled.div``;
+const TitleContent = styled.div`
+  padding-top: 2px;
+`;
 
 export const SelectTreeNode: FC<SelectTreeBranchProps> = ({
   dimension,
