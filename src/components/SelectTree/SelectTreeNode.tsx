@@ -7,7 +7,7 @@ import { ReactComponent as ChevronRightOutline } from '@admiral-ds/icons/build/s
 const PADDING_LEFT_M = 40;
 const PADDING_LEFT_S = 36;
 const PADDING_VERTICAL_M = 16;
-const PADDING_VERTICAL_S = 10;
+const PADDING_VERTICAL_S = 12;
 const PADDING_RIGHT = 16;
 type Dimension = 'm' | 's';
 
@@ -81,8 +81,8 @@ const Wrapper = styled.li<{ isOpened?: boolean; dimension?: Dimension; level: nu
   align-items: flex-start;
   padding: ${(p) =>
     p.dimension === 'm'
-      ? `${PADDING_VERTICAL_M}px ${PADDING_RIGHT}px ${PADDING_VERTICAL_M}px ${p.level * PADDING_LEFT_M}px`
-      : `${PADDING_VERTICAL_S}px ${PADDING_RIGHT}px ${PADDING_VERTICAL_S}px ${p.level * PADDING_LEFT_S}px`};
+      ? `${PADDING_VERTICAL_M / 2}px ${PADDING_RIGHT}px ${PADDING_VERTICAL_M / 2}px ${p.level * PADDING_LEFT_M}px`
+      : `${PADDING_VERTICAL_S / 2}px ${PADDING_RIGHT}px ${PADDING_VERTICAL_S / 2}px ${p.level * PADDING_LEFT_S}px`};
 `;
 
 const IconWrapper = styled.div<{ dimension?: Dimension }>`
