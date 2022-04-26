@@ -30,6 +30,7 @@ import {
   TitleContent,
   Title,
   ExtraText,
+  OverflowMenuWrapper,
 } from './style';
 
 export const DEFAULT_COLUMN_WIDTH = 100;
@@ -98,6 +99,17 @@ export interface TableRow extends Record<RowId, React.ReactNode> {
   expanded?: boolean;
   /** Функция рендера содержимого раскрытой части строки (детализации строки) */
   expandedRowRender?: (row: any) => React.ReactNode;
+  /** Функция рендера OverflowMenu для строки.
+   * Входные параметры: сама строка, колбеки onMenuOpen и onMenuClose.
+   * Колбеки необходимо вызывать при открытии/закрытии меню для того, чтобы таблица могла управлять видимостью OverflowMenu.
+   * OverflowMenu отображается при ховере на строку или при открытом меню
+   * и располагается по правому краю строки в видимой области таблицы.
+   *
+   * В качестве результата функция должна возвращать OverflowMenu.
+   * Для таблицы с dimension='s' или dimension='m' используется OverflowMenu c dimension='m'.
+   * Для таблицы с dimension='l' или dimension='xl' используется OverflowMenu c dimension='l'.
+   */
+  overflowMenuRender?: (row: any, onMenuOpen: () => void, onMenuClose: () => void) => React.ReactNode;
 }
 
 export interface TableProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -207,6 +219,7 @@ export const Table: React.FC<TableProps> = ({
   const [sort, setSort] = React.useState({} as any);
   const [verticalScroll, setVerticalScroll] = React.useState(false);
   const [resizerState, updateResizerState] = React.useState({} as any);
+  const [tableWidth, setTableWidth] = React.useState(0);
 
   const stickyColumns = [...cols].filter((col) => col.sticky);
 
@@ -262,13 +275,14 @@ export const Table: React.FC<TableProps> = ({
   React.useLayoutEffect(() => {
     const body = scrollBodyRef.current;
     if (body) {
-      const observer = observeRect(body, () => {
+      const observer = observeRect(body, (rect: any) => {
         // есть вертикальный скролл
         if (body.scrollHeight > body.offsetHeight) {
           setVerticalScroll(true);
         } else {
           setVerticalScroll(false);
         }
+        setTableWidth(rect.width);
       });
       observer.observe();
       return () => {
@@ -483,6 +497,76 @@ export const Table: React.FC<TableProps> = ({
     );
   };
 
+  const renderRow = (row: TableRow, index: number) => {
+    const oveflowMenuRef = React.useRef<HTMLDivElement>(null);
+    const handleMenuOpen = () => {
+      if (oveflowMenuRef.current) oveflowMenuRef.current.dataset.opened = 'true';
+    };
+    const handleMenuClose = () => {
+      if (oveflowMenuRef.current) oveflowMenuRef.current.dataset.opened = 'false';
+    };
+    return (
+      <Row
+        onClick={() => handleRowClick(row.id)}
+        onDoubleClick={() => handleRowDoubleClick(row.id)}
+        key={`row_${row.id}`}
+        underline={(index === rowList.length - 1 && showLastRowUnderline) || index < rowList.length - 1}
+        data-expanded={row.expanded}
+        data-selected={!!row.selected}
+        data-disabled={!!row.disabled}
+        disabled={!!row.disabled}
+        data-error={!!row.error}
+        data-success={!!row.success}
+        className={`tr ${row.className}`}
+      >
+        <SimpleRow className="tr-simple">
+          {(displayRowSelectionColumn || displayRowExpansionColumn || stickyColumns.length > 0) && (
+            <StickyWrapper>
+              {displayRowExpansionColumn && (
+                <ExpandCell>
+                  {row.expandedRowRender && (
+                    <ExpandIconWrapper>
+                      <ExpandIcon
+                        $isOpen={row.expanded}
+                        data-disabled={row.disabled ? true : undefined}
+                        onClick={() => handleExpansionChange(row.id)}
+                        aria-hidden
+                      />
+                    </ExpandIconWrapper>
+                  )}
+                </ExpandCell>
+              )}
+              {displayRowSelectionColumn && (
+                <CheckboxCell className="td_checkbox">
+                  <Checkbox
+                    disabled={row.disabled}
+                    dimension={checkboxDimension}
+                    checked={!!row.selected}
+                    onChange={() => handleCheckboxChange(row.id)}
+                    onClick={handleCheckboxClick}
+                  />
+                </CheckboxCell>
+              )}
+              {stickyColumns.length > 0 && stickyColumns.map((col) => renderBodyCell(row, col))}
+            </StickyWrapper>
+          )}
+          {cols.map((col) => (col.sticky ? null : renderBodyCell(row, col)))}
+          <Filler />
+        </SimpleRow>
+        {row.overflowMenuRender && (
+          <OverflowMenuWrapper ref={oveflowMenuRef} data-opened={false} $offset={tableWidth}>
+            {row.overflowMenuRender(row, handleMenuOpen, handleMenuClose)}
+          </OverflowMenuWrapper>
+        )}
+        {row.expandedRowRender && (
+          <ExpandedRow opened={row.expanded} contentMaxHeight="90vh" className="tr-expanded">
+            <ExpandedRowContent>{row.expandedRowRender(row)}</ExpandedRowContent>
+          </ExpandedRow>
+        )}
+      </Row>
+    );
+  };
+
   return (
     <TableContainer
       ref={tableRef}
@@ -516,61 +600,7 @@ export const Table: React.FC<TableProps> = ({
         </Header>
       </HeaderWrapper>
       <ScrollTableBody ref={scrollBodyRef} className="tbody">
-        {rowList.map((row, index) => (
-          <Row
-            onClick={() => handleRowClick(row.id)}
-            onDoubleClick={() => handleRowDoubleClick(row.id)}
-            key={`row_${row.id}`}
-            underline={(index === rowList.length - 1 && showLastRowUnderline) || index < rowList.length - 1}
-            data-expanded={row.expanded}
-            data-selected={!!row.selected}
-            data-disabled={!!row.disabled}
-            disabled={!!row.disabled}
-            data-error={!!row.error}
-            data-success={!!row.success}
-            className={`tr ${row.className}`}
-          >
-            <SimpleRow className="tr-simple">
-              {(displayRowSelectionColumn || displayRowExpansionColumn || stickyColumns.length > 0) && (
-                <StickyWrapper>
-                  {displayRowExpansionColumn && (
-                    <ExpandCell>
-                      {row.expandedRowRender && (
-                        <ExpandIconWrapper>
-                          <ExpandIcon
-                            $isOpen={row.expanded}
-                            data-disabled={row.disabled ? true : undefined}
-                            onClick={() => handleExpansionChange(row.id)}
-                            aria-hidden
-                          />
-                        </ExpandIconWrapper>
-                      )}
-                    </ExpandCell>
-                  )}
-                  {displayRowSelectionColumn && (
-                    <CheckboxCell className="td_checkbox">
-                      <Checkbox
-                        disabled={row.disabled}
-                        dimension={checkboxDimension}
-                        checked={!!row.selected}
-                        onChange={() => handleCheckboxChange(row.id)}
-                        onClick={handleCheckboxClick}
-                      />
-                    </CheckboxCell>
-                  )}
-                  {stickyColumns.length > 0 && stickyColumns.map((col) => renderBodyCell(row, col))}
-                </StickyWrapper>
-              )}
-              {cols.map((col) => (col.sticky ? null : renderBodyCell(row, col)))}
-              <Filler />
-            </SimpleRow>
-            {row.expandedRowRender && (
-              <ExpandedRow opened={row.expanded} contentMaxHeight="90vh" className="tr-expanded">
-                <ExpandedRowContent>{row.expandedRowRender(row)}</ExpandedRowContent>
-              </ExpandedRow>
-            )}
-          </Row>
-        ))}
+        {rowList.map((row, index) => renderRow(row, index))}
       </ScrollTableBody>
     </TableContainer>
   );
