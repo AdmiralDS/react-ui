@@ -9,6 +9,9 @@ const PADDING_LEFT_S = 36;
 const PADDING_VERTICAL_M = 16;
 const PADDING_VERTICAL_S = 12;
 const PADDING_RIGHT = 16;
+const ICON_SIZE_M = 24;
+const ICON_SIZE_S = 20;
+
 type Dimension = 'm' | 's';
 
 export interface SelectTreeNodeProps extends HTMLAttributes<HTMLDivElement> {
@@ -49,8 +52,8 @@ const ChevronWrapper = styled.div<{
   cursor: pointer;
   position: relative;
 
-  width: ${(p) => (p.dimension === 'm' ? '24px' : '20px')};
-  height: ${(p) => (p.dimension === 'm' ? '24px' : '20px')};
+  width: ${(p) => (p.dimension === 'm' ? `${ICON_SIZE_M}px` : `${ICON_SIZE_S}px`)};
+  height: ${(p) => (p.dimension === 'm' ? `${ICON_SIZE_M}px` : `${ICON_SIZE_S}px`)};
 
   &:hover {
     &::after {
@@ -87,9 +90,12 @@ const Wrapper = styled.li<{ isOpened?: boolean; dimension?: Dimension; level: nu
 
 const IconWrapper = styled.div<{ dimension?: Dimension }>`
   margin-right: 8px;
+  flex-shrink: 0;
+  width: ${(p) => (p.dimension === 'm' ? `${ICON_SIZE_M}px` : `${ICON_SIZE_S}px`)};
+  height: ${(p) => (p.dimension === 'm' ? `${ICON_SIZE_M}px` : `${ICON_SIZE_S}px`)};
   > svg {
-    width: ${(p) => (p.dimension === 'm' ? '24px' : '20px')};
-    height: ${(p) => (p.dimension === 'm' ? '24px' : '20px')};
+    width: 100%;
+    height: 100%;
   }
 `;
 
