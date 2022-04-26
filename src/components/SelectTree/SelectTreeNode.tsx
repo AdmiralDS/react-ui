@@ -95,7 +95,7 @@ const IconWrapper = styled.div<{ dimension?: Dimension }>`
 
 const StyledCheckbox = styled(Checkbox)`
   margin: 2px;
-  margin-right: 16px;
+  margin-right: 10px;
   flex-shrink: 0;
 `;
 
