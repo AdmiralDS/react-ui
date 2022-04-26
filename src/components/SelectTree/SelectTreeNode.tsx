@@ -67,10 +67,11 @@ const ChevronWrapper = styled.div<{
   }
 `;
 
-const TreeItem = styled.ul`
+const TreeItem = styled.ul<{ dimension?: Dimension }>`
   list-style: none;
   margin: 0;
   padding: 0;
+  padding-left: ${(p) => (p.dimension === 'm' ? `${PADDING_LEFT_M}px` : `${PADDING_LEFT_S}px`)};
 `;
 
 const Wrapper = styled.li<{ isOpened?: boolean; dimension?: Dimension; level: number }>`
@@ -138,7 +139,7 @@ export const SelectTreeNode: FC<SelectTreeBranchProps> = ({
         node.children &&
         node.children.map((child, i) => {
           return (
-            <TreeItem key={[node.id, i].join('/')}>
+            <TreeItem key={[node.id, i].join('/')} dimension={dimension}>
               <SelectTreeNode
                 key={node.id}
                 dimension={dimension}
