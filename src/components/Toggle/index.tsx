@@ -32,7 +32,7 @@ const HOVER_INDENT_X = '-12px';
 const HOVER_INDENT = '-8px';
 
 const hoverInputStyles = css<{ dimension: Dimension }>`
-  &:hover + div > div {
+  & + div > div {
     ${({ dimension }) =>
       `left: calc(${dimension === 'm' ? SLIDER_SIZE_M : SLIDER_SIZE_S} + ${HOVER_INDENT_X} + ${SLIDER_INDENT * 2}px);`}
   }
@@ -71,12 +71,9 @@ const Input = styled.input<{ dimension: Dimension; checked?: boolean }>`
   }
 
   &:checked:not(:disabled) {
-    &:hover + div > div {
+    &:hover {
       ${hoverInputStyles};
     }
-  }
-
-  &:not(:checked):not(:disabled) {
   }
 `;
 const Label = styled.div<{
