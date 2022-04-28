@@ -28,13 +28,15 @@ export interface ToggleProps extends InputHTMLAttributes<HTMLInputElement> {
 const LABEL_MARGIN = '8px';
 const BORDER_RADIUS = '10px';
 const SLIDER_INDENT = '2px';
+const DOUBLE_SLIDER_INDENT = '4px';
 const HOVER_INDENT_X = '-12px';
 const HOVER_INDENT = '-8px';
 
 const hoverInputStyles = css<{ dimension: Dimension }>`
   &:hover + div {
     visibility: visible;
-    ${({ dimension }) => `left: calc(100% + ${HOVER_INDENT_X} - ${dimension === 'm' ? SLIDER_SIZE_M : SLIDER_SIZE_S});`}
+    ${({ dimension }) =>
+      `left: calc(${dimension === 'm' ? SLIDER_SIZE_M : SLIDER_SIZE_S} + ${HOVER_INDENT_X} + ${DOUBLE_SLIDER_INDENT});`}
   }
 `;
 
