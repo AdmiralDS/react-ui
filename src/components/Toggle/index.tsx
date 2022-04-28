@@ -32,6 +32,9 @@ const HOVER_INDENT_X = '-12px';
 const HOVER_INDENT = '-8px';
 
 const hoverInputStyles = css<{ dimension: Dimension }>`
+  &:hover + div {
+    visibility: visible;
+    ${({ dimension }) => `left: calc(100% + ${HOVER_INDENT_X} - ${dimension === 'm' ? SLIDER_SIZE_M : SLIDER_SIZE_S});`}
   }
 `;
 
@@ -50,6 +53,10 @@ const Input = styled.input<{ dimension: Dimension; checked?: boolean }>`
     background: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
   }
 
+  &:checked {
+    ${hoverInputStyles};
+  }
+
   &:disabled ~ span {
     background: ${({ theme }) => theme.color['Neutral/Neutral 30']};
   }
@@ -58,6 +65,8 @@ const Input = styled.input<{ dimension: Dimension; checked?: boolean }>`
     &:hover ~ span,
     &:focus ~ span {
       background: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
+    }
+    &:hover + div {
       ${hoverInputStyles};
     }
   }
@@ -70,6 +79,10 @@ const Input = styled.input<{ dimension: Dimension; checked?: boolean }>`
     &:hover + div {
       ${hoverInputStyles};
     }
+  }
+
+  &:hover + div {
+    visibility: visible;
   }
 `;
 const Label = styled.div<{
