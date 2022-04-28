@@ -41,7 +41,7 @@ const Input = styled.input<{ dimension: Dimension; checked?: boolean }>`
   height: 0;
   opacity: 0;
 
-  &:checked + span {
+  &:checked ~ span {
     &:before {
       ${({ dimension }) =>
         `left: calc(100% - ${SLIDER_INDENT} - ${dimension === 'm' ? SLIDER_SIZE_M : SLIDER_SIZE_S});`}
@@ -50,21 +50,21 @@ const Input = styled.input<{ dimension: Dimension; checked?: boolean }>`
     background: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
   }
 
-  &:disabled + span {
+  &:disabled ~ span {
     background: ${({ theme }) => theme.color['Neutral/Neutral 30']};
   }
 
   &:checked:not(:disabled) {
-    &:hover + span,
-    &:focus + span {
+    &:hover ~ span,
+    &:focus ~ span {
       background: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
       ${hoverInputStyles};
     }
   }
 
   &:not(:checked):not(:disabled) {
-    &:hover + span,
-    &:focus + span {
+    &:hover ~ span,
+    &:focus ~ span {
       background: ${({ theme }) => theme.color['Neutral/Neutral 50']};
     }
   }
