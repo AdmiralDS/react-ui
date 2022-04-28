@@ -32,12 +32,6 @@ const HOVER_INDENT_X = '-12px';
 const HOVER_INDENT = '-8px';
 
 const hoverInputStyles = css<{ dimension: Dimension }>`
-  &:hover {
-    &:after {
-      visibility: visible;
-      ${({ dimension }) =>
-        `left: calc(100% + ${HOVER_INDENT_X} - ${dimension === 'm' ? SLIDER_SIZE_M : SLIDER_SIZE_S});`}
-    }
   }
 `;
 
@@ -52,7 +46,6 @@ const Input = styled.input<{ dimension: Dimension; checked?: boolean }>`
       ${({ dimension }) =>
         `left: calc(100% - ${SLIDER_INDENT} - ${dimension === 'm' ? SLIDER_SIZE_M : SLIDER_SIZE_S});`}
     }
-    ${hoverInputStyles};
 
     background: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
   }
@@ -115,20 +108,6 @@ const Slider = styled.span<{
     ${sliderSizes}
     background: ${({ theme }) => theme.color['Special/Static White']};
     transition: all 0.3s;
-  }
-  &:after {
-    content: '';
-    visibility: hidden;
-    position: absolute;
-    top: ${HOVER_INDENT};
-    left: ${HOVER_INDENT};
-    ${hoverSizes}
-    background: ${({ theme }) => theme.color['Opacity/Hover']};
-  }
-  &:hover {
-    &:after {
-      visibility: visible;
-    }
   }
 
   background: ${({ theme }) => theme.color['Neutral/Neutral 50']};
