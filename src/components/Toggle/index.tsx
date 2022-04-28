@@ -134,6 +134,16 @@ const Slider = styled.span<{
   background: ${({ theme }) => theme.color['Neutral/Neutral 50']};
 `;
 
+const Hover = styled.div<{ dimension: Dimension }>`
+  visibility: hidden;
+  pointer-events: none;
+  position: absolute;
+  top: ${HOVER_INDENT};
+  left: ${HOVER_INDENT};
+  ${hoverSizes}
+  background: ${({ theme }) => theme.color['Opacity/Hover']};
+`;
+
 const Wrapper = styled.label<{ width?: number | string; disabled: boolean; labelPosition: LabelPosition }>`
   display: flex;
   flex-direction: ${({ labelPosition }) => (labelPosition === 'right' ? 'row' : 'row-reverse')};
@@ -161,6 +171,7 @@ export const Toggle = React.forwardRef<HTMLInputElement, ToggleProps>(
         aria-checked={props.checked || props['aria-checked']}
       >
         <Input ref={ref} type="checkbox" dimension={dimension} disabled={disabled} {...props} />
+        <Hover dimension={dimension} />
         <Slider dimension={dimension} checked={props.checked} disabled={disabled} aria-hidden />
         {children && (
           <Label dimension={dimension} disabled={disabled} position={labelPosition}>
