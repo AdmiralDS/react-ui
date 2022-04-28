@@ -18,40 +18,25 @@ Object {
   left: calc(16px + 2px);
 }
 
-.c1:checked:hover + div > div {
-  visibility: visible;
+.c1:checked + div > div {
   left: calc(16px + -12px + 4px);
+}
+
+.c1:not(:disabled):focus-visible + div > span {
+  outline-offset: 2px;
+  outline: #0062FF solid 2px;
+}
+
+.c1:not(:disabled):hover + div > div {
+  visibility: visible;
 }
 
 .c1:disabled + div > span {
   background: #B1B5BB;
 }
 
-.c1:checked:not(:disabled):hover + div > span {
-  background: #0062FF;
-}
-
-.c1:checked:not(:disabled):hover + div > div:hover + div > div {
-  visibility: visible;
+.c1:checked:not(:disabled):hover + div > div {
   left: calc(16px + -12px + 4px);
-}
-
-.c1:checked:not(:disabled):focus-visible + div > span {
-  outline-offset: 2px;
-  outline: #0062FF solid 2px;
-}
-
-.c1:not(:checked):not(:disabled):hover + div > span {
-  background: #74777F;
-}
-
-.c1:not(:checked):not(:disabled):focus-visible + div > span {
-  outline-offset: 2px;
-  outline: #0062FF solid 2px;
-}
-
-.c1:hover + div > div {
-  visibility: visible;
 }
 
 .c5 {
@@ -194,40 +179,25 @@ Object {
   left: calc(16px + 2px);
 }
 
-.c1:checked:hover + div > div {
-  visibility: visible;
+.c1:checked + div > div {
   left: calc(16px + -12px + 4px);
+}
+
+.c1:not(:disabled):focus-visible + div > span {
+  outline-offset: 2px;
+  outline: #0062FF solid 2px;
+}
+
+.c1:not(:disabled):hover + div > div {
+  visibility: visible;
 }
 
 .c1:disabled + div > span {
   background: #B1B5BB;
 }
 
-.c1:checked:not(:disabled):hover + div > span {
-  background: #0062FF;
-}
-
-.c1:checked:not(:disabled):hover + div > div:hover + div > div {
-  visibility: visible;
+.c1:checked:not(:disabled):hover + div > div {
   left: calc(16px + -12px + 4px);
-}
-
-.c1:checked:not(:disabled):focus-visible + div > span {
-  outline-offset: 2px;
-  outline: #0062FF solid 2px;
-}
-
-.c1:not(:checked):not(:disabled):hover + div > span {
-  background: #74777F;
-}
-
-.c1:not(:checked):not(:disabled):focus-visible + div > span {
-  outline-offset: 2px;
-  outline: #0062FF solid 2px;
-}
-
-.c1:hover + div > div {
-  visibility: visible;
 }
 
 .c5 {
@@ -425,40 +395,25 @@ Object {
   left: calc(16px + 2px);
 }
 
-.c1:checked:hover + div > div {
-  visibility: visible;
+.c1:checked + div > div {
   left: calc(16px + -12px + 4px);
+}
+
+.c1:not(:disabled):focus-visible + div > span {
+  outline-offset: 2px;
+  outline: #0062FF solid 2px;
+}
+
+.c1:not(:disabled):hover + div > div {
+  visibility: visible;
 }
 
 .c1:disabled + div > span {
   background: #B1B5BB;
 }
 
-.c1:checked:not(:disabled):hover + div > span {
-  background: #0062FF;
-}
-
-.c1:checked:not(:disabled):hover + div > div:hover + div > div {
-  visibility: visible;
+.c1:checked:not(:disabled):hover + div > div {
   left: calc(16px + -12px + 4px);
-}
-
-.c1:checked:not(:disabled):focus-visible + div > span {
-  outline-offset: 2px;
-  outline: #0062FF solid 2px;
-}
-
-.c1:not(:checked):not(:disabled):hover + div > span {
-  background: #74777F;
-}
-
-.c1:not(:checked):not(:disabled):focus-visible + div > span {
-  outline-offset: 2px;
-  outline: #0062FF solid 2px;
-}
-
-.c1:hover + div > div {
-  visibility: visible;
 }
 
 .c5 {
@@ -597,40 +552,25 @@ Object {
   left: calc(16px + 2px);
 }
 
-.c1:checked:hover + div > div {
-  visibility: visible;
+.c1:checked + div > div {
   left: calc(16px + -12px + 4px);
+}
+
+.c1:not(:disabled):focus-visible + div > span {
+  outline-offset: 2px;
+  outline: #0062FF solid 2px;
+}
+
+.c1:not(:disabled):hover + div > div {
+  visibility: visible;
 }
 
 .c1:disabled + div > span {
   background: #B1B5BB;
 }
 
-.c1:checked:not(:disabled):hover + div > span {
-  background: #0062FF;
-}
-
-.c1:checked:not(:disabled):hover + div > div:hover + div > div {
-  visibility: visible;
+.c1:checked:not(:disabled):hover + div > div {
   left: calc(16px + -12px + 4px);
-}
-
-.c1:checked:not(:disabled):focus-visible + div > span {
-  outline-offset: 2px;
-  outline: #0062FF solid 2px;
-}
-
-.c1:not(:checked):not(:disabled):hover + div > span {
-  background: #74777F;
-}
-
-.c1:not(:checked):not(:disabled):focus-visible + div > span {
-  outline-offset: 2px;
-  outline: #0062FF solid 2px;
-}
-
-.c1:hover + div > div {
-  visibility: visible;
 }
 
 .c5 {
@@ -824,40 +764,25 @@ Object {
   left: calc(16px + 2px);
 }
 
-.c1:checked:hover + div > div {
-  visibility: visible;
+.c1:checked + div > div {
   left: calc(16px + -12px + 4px);
+}
+
+.c1:not(:disabled):focus-visible + div > span {
+  outline-offset: 2px;
+  outline: #0062FF solid 2px;
+}
+
+.c1:not(:disabled):hover + div > div {
+  visibility: visible;
 }
 
 .c1:disabled + div > span {
   background: #B1B5BB;
 }
 
-.c1:checked:not(:disabled):hover + div > span {
-  background: #0062FF;
-}
-
-.c1:checked:not(:disabled):hover + div > div:hover + div > div {
-  visibility: visible;
+.c1:checked:not(:disabled):hover + div > div {
   left: calc(16px + -12px + 4px);
-}
-
-.c1:checked:not(:disabled):focus-visible + div > span {
-  outline-offset: 2px;
-  outline: #0062FF solid 2px;
-}
-
-.c1:not(:checked):not(:disabled):hover + div > span {
-  background: #74777F;
-}
-
-.c1:not(:checked):not(:disabled):focus-visible + div > span {
-  outline-offset: 2px;
-  outline: #0062FF solid 2px;
-}
-
-.c1:hover + div > div {
-  visibility: visible;
 }
 
 .c5 {
@@ -996,40 +921,25 @@ Object {
   left: calc(16px + 2px);
 }
 
-.c1:checked:hover + div > div {
-  visibility: visible;
+.c1:checked + div > div {
   left: calc(16px + -12px + 4px);
+}
+
+.c1:not(:disabled):focus-visible + div > span {
+  outline-offset: 2px;
+  outline: #0062FF solid 2px;
+}
+
+.c1:not(:disabled):hover + div > div {
+  visibility: visible;
 }
 
 .c1:disabled + div > span {
   background: #B1B5BB;
 }
 
-.c1:checked:not(:disabled):hover + div > span {
-  background: #0062FF;
-}
-
-.c1:checked:not(:disabled):hover + div > div:hover + div > div {
-  visibility: visible;
+.c1:checked:not(:disabled):hover + div > div {
   left: calc(16px + -12px + 4px);
-}
-
-.c1:checked:not(:disabled):focus-visible + div > span {
-  outline-offset: 2px;
-  outline: #0062FF solid 2px;
-}
-
-.c1:not(:checked):not(:disabled):hover + div > span {
-  background: #74777F;
-}
-
-.c1:not(:checked):not(:disabled):focus-visible + div > span {
-  outline-offset: 2px;
-  outline: #0062FF solid 2px;
-}
-
-.c1:hover + div > div {
-  visibility: visible;
 }
 
 .c5 {
@@ -1223,40 +1133,25 @@ Object {
   left: calc(12px + 2px);
 }
 
-.c1:checked:hover + div > div {
-  visibility: visible;
+.c1:checked + div > div {
   left: calc(12px + -12px + 4px);
+}
+
+.c1:not(:disabled):focus-visible + div > span {
+  outline-offset: 2px;
+  outline: #0062FF solid 2px;
+}
+
+.c1:not(:disabled):hover + div > div {
+  visibility: visible;
 }
 
 .c1:disabled + div > span {
   background: #B1B5BB;
 }
 
-.c1:checked:not(:disabled):hover + div > span {
-  background: #0062FF;
-}
-
-.c1:checked:not(:disabled):hover + div > div:hover + div > div {
-  visibility: visible;
+.c1:checked:not(:disabled):hover + div > div {
   left: calc(12px + -12px + 4px);
-}
-
-.c1:checked:not(:disabled):focus-visible + div > span {
-  outline-offset: 2px;
-  outline: #0062FF solid 2px;
-}
-
-.c1:not(:checked):not(:disabled):hover + div > span {
-  background: #74777F;
-}
-
-.c1:not(:checked):not(:disabled):focus-visible + div > span {
-  outline-offset: 2px;
-  outline: #0062FF solid 2px;
-}
-
-.c1:hover + div > div {
-  visibility: visible;
 }
 
 .c5 {
@@ -1395,40 +1290,25 @@ Object {
   left: calc(12px + 2px);
 }
 
-.c1:checked:hover + div > div {
-  visibility: visible;
+.c1:checked + div > div {
   left: calc(12px + -12px + 4px);
+}
+
+.c1:not(:disabled):focus-visible + div > span {
+  outline-offset: 2px;
+  outline: #0062FF solid 2px;
+}
+
+.c1:not(:disabled):hover + div > div {
+  visibility: visible;
 }
 
 .c1:disabled + div > span {
   background: #B1B5BB;
 }
 
-.c1:checked:not(:disabled):hover + div > span {
-  background: #0062FF;
-}
-
-.c1:checked:not(:disabled):hover + div > div:hover + div > div {
-  visibility: visible;
+.c1:checked:not(:disabled):hover + div > div {
   left: calc(12px + -12px + 4px);
-}
-
-.c1:checked:not(:disabled):focus-visible + div > span {
-  outline-offset: 2px;
-  outline: #0062FF solid 2px;
-}
-
-.c1:not(:checked):not(:disabled):hover + div > span {
-  background: #74777F;
-}
-
-.c1:not(:checked):not(:disabled):focus-visible + div > span {
-  outline-offset: 2px;
-  outline: #0062FF solid 2px;
-}
-
-.c1:hover + div > div {
-  visibility: visible;
 }
 
 .c5 {
