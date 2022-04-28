@@ -27,8 +27,7 @@ export interface ToggleProps extends InputHTMLAttributes<HTMLInputElement> {
 
 const LABEL_MARGIN = '8px';
 const BORDER_RADIUS = '10px';
-const SLIDER_INDENT = '2px';
-const DOUBLE_SLIDER_INDENT = '4px';
+const SLIDER_INDENT = 2;
 const HOVER_INDENT_X = '-12px';
 const HOVER_INDENT = '-8px';
 
@@ -36,7 +35,7 @@ const hoverInputStyles = css<{ dimension: Dimension }>`
   &:hover + div {
     visibility: visible;
     ${({ dimension }) =>
-      `left: calc(${dimension === 'm' ? SLIDER_SIZE_M : SLIDER_SIZE_S} + ${HOVER_INDENT_X} + ${DOUBLE_SLIDER_INDENT});`}
+      `left: calc(${dimension === 'm' ? SLIDER_SIZE_M : SLIDER_SIZE_S} + ${HOVER_INDENT_X} + ${SLIDER_INDENT * 2}px);`}
   }
 `;
 
@@ -49,7 +48,7 @@ const Input = styled.input<{ dimension: Dimension; checked?: boolean }>`
   &:checked ~ span {
     &:before {
       ${({ dimension }) =>
-        `left: calc(100% - ${SLIDER_INDENT} - ${dimension === 'm' ? SLIDER_SIZE_M : SLIDER_SIZE_S});`}
+        `left: calc(100% - ${SLIDER_INDENT}px - ${dimension === 'm' ? SLIDER_SIZE_M : SLIDER_SIZE_S});`}
     }
 
     background: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
@@ -121,8 +120,8 @@ const Slider = styled.span<{
   &:before {
     content: '';
     position: absolute;
-    top: ${SLIDER_INDENT};
-    left: ${SLIDER_INDENT};
+    top: ${SLIDER_INDENT}px;
+    left: ${SLIDER_INDENT}px;
     ${sliderSizes}
     background: ${({ theme }) => theme.color['Special/Static White']};
     transition: all 0.3s;
