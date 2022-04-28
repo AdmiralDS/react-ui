@@ -33,7 +33,6 @@ const HOVER_INDENT = '-8px';
 
 const hoverInputStyles = css<{ dimension: Dimension }>`
   &:hover + div > div {
-    visibility: visible;
     ${({ dimension }) =>
       `left: calc(${dimension === 'm' ? SLIDER_SIZE_M : SLIDER_SIZE_S} + ${HOVER_INDENT_X} + ${SLIDER_INDENT * 2}px);`}
   }
@@ -62,6 +61,9 @@ const Input = styled.input<{ dimension: Dimension; checked?: boolean }>`
       outline-offset: 2px;
       outline: ${(p) => p.theme.color['Primary/Primary 60 Main']} solid 2px;
     }
+    &:hover + div > div {
+      visibility: visible;
+    }
   }
 
   &:disabled + div > span {
@@ -75,10 +77,6 @@ const Input = styled.input<{ dimension: Dimension; checked?: boolean }>`
   }
 
   &:not(:checked):not(:disabled) {
-  }
-
-  &:hover + div > div {
-    visibility: visible;
   }
 `;
 const Label = styled.div<{
