@@ -10,40 +10,48 @@ Object {
   opacity: 0;
 }
 
-.c1:checked + span {
+.c1:checked ~ span {
   background: #0062FF;
 }
 
-.c1:checked + span:before {
+.c1:checked ~ span:before {
   left: calc(100% - 2px - 16px);
 }
 
-.c1:checked + span:hover:after {
+.c1:checked:hover + div {
   visibility: visible;
-  left: calc(100% + -12px - 16px);
+  left: calc(16px + -12px + 4px);
 }
 
-.c1:disabled + span {
+.c1:disabled ~ span {
   background: #B1B5BB;
 }
 
-.c1:checked:not(:disabled):hover + span,
-.c1:checked:not(:disabled):focus + span {
+.c1:checked:not(:disabled):hover ~ span,
+.c1:checked:not(:disabled):focus ~ span {
   background: #0062FF;
 }
 
-.c1:checked:not(:disabled):hover + span:hover:after,
-.c1:checked:not(:disabled):focus + span:hover:after {
+.c1:checked:not(:disabled):hover + div:hover + div {
   visibility: visible;
-  left: calc(100% + -12px - 16px);
+  left: calc(16px + -12px + 4px);
 }
 
-.c1:not(:checked):not(:disabled):hover + span,
-.c1:not(:checked):not(:disabled):focus + span {
+.c1:not(:checked):not(:disabled):hover ~ span,
+.c1:not(:checked):not(:disabled):focus ~ span {
   background: #74777F;
 }
 
-.c3 {
+.c1:not(:checked):not(:disabled):hover + div:hover + div {
+  visibility: visible;
+  left: calc(16px + -12px + 4px);
+}
+
+.c1:hover + div {
+  visibility: visible;
+}
+
+.c4 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -61,7 +69,7 @@ Object {
   color: #B1B5BB;
 }
 
-.c2 {
+.c3 {
   position: relative;
   width: 36px;
   height: 20px;
@@ -72,7 +80,7 @@ Object {
   background: #74777F;
 }
 
-.c2:before {
+.c3:before {
   content: '';
   position: absolute;
   top: 2px;
@@ -85,9 +93,9 @@ Object {
   transition: all 0.3s;
 }
 
-.c2:after {
-  content: '';
+.c2 {
   visibility: hidden;
+  pointer-events: none;
   position: absolute;
   top: -8px;
   left: -8px;
@@ -95,10 +103,6 @@ Object {
   height: 36px;
   border-radius: 36px;
   background: #0000000D;
-}
-
-.c2:hover:after {
-  visibility: visible;
 }
 
 .c0 {
@@ -142,13 +146,16 @@ Object {
           disabled=""
           type="checkbox"
         />
+        <div
+          class="c2"
+        />
         <span
           aria-hidden="true"
-          class="c2"
+          class="c3"
           disabled=""
         />
         <div
-          class="c3"
+          class="c4"
           disabled=""
         >
           text
@@ -163,40 +170,48 @@ Object {
   opacity: 0;
 }
 
-.c1:checked + span {
+.c1:checked ~ span {
   background: #0062FF;
 }
 
-.c1:checked + span:before {
+.c1:checked ~ span:before {
   left: calc(100% - 2px - 16px);
 }
 
-.c1:checked + span:hover:after {
+.c1:checked:hover + div {
   visibility: visible;
-  left: calc(100% + -12px - 16px);
+  left: calc(16px + -12px + 4px);
 }
 
-.c1:disabled + span {
+.c1:disabled ~ span {
   background: #B1B5BB;
 }
 
-.c1:checked:not(:disabled):hover + span,
-.c1:checked:not(:disabled):focus + span {
+.c1:checked:not(:disabled):hover ~ span,
+.c1:checked:not(:disabled):focus ~ span {
   background: #0062FF;
 }
 
-.c1:checked:not(:disabled):hover + span:hover:after,
-.c1:checked:not(:disabled):focus + span:hover:after {
+.c1:checked:not(:disabled):hover + div:hover + div {
   visibility: visible;
-  left: calc(100% + -12px - 16px);
+  left: calc(16px + -12px + 4px);
 }
 
-.c1:not(:checked):not(:disabled):hover + span,
-.c1:not(:checked):not(:disabled):focus + span {
+.c1:not(:checked):not(:disabled):hover ~ span,
+.c1:not(:checked):not(:disabled):focus ~ span {
   background: #74777F;
 }
 
-.c3 {
+.c1:not(:checked):not(:disabled):hover + div:hover + div {
+  visibility: visible;
+  left: calc(16px + -12px + 4px);
+}
+
+.c1:hover + div {
+  visibility: visible;
+}
+
+.c4 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -214,7 +229,7 @@ Object {
   color: #B1B5BB;
 }
 
-.c2 {
+.c3 {
   position: relative;
   width: 36px;
   height: 20px;
@@ -225,7 +240,7 @@ Object {
   background: #74777F;
 }
 
-.c2:before {
+.c3:before {
   content: '';
   position: absolute;
   top: 2px;
@@ -238,9 +253,9 @@ Object {
   transition: all 0.3s;
 }
 
-.c2:after {
-  content: '';
+.c2 {
   visibility: hidden;
+  pointer-events: none;
   position: absolute;
   top: -8px;
   left: -8px;
@@ -248,10 +263,6 @@ Object {
   height: 36px;
   border-radius: 36px;
   background: #0000000D;
-}
-
-.c2:hover:after {
-  visibility: visible;
 }
 
 .c0 {
@@ -294,13 +305,16 @@ Object {
         disabled=""
         type="checkbox"
       />
+      <div
+        class="c2"
+      />
       <span
         aria-hidden="true"
-        class="c2"
+        class="c3"
         disabled=""
       />
       <div
-        class="c3"
+        class="c4"
         disabled=""
       >
         text
@@ -371,40 +385,48 @@ Object {
   opacity: 0;
 }
 
-.c1:checked + span {
+.c1:checked ~ span {
   background: #0062FF;
 }
 
-.c1:checked + span:before {
+.c1:checked ~ span:before {
   left: calc(100% - 2px - 16px);
 }
 
-.c1:checked + span:hover:after {
+.c1:checked:hover + div {
   visibility: visible;
-  left: calc(100% + -12px - 16px);
+  left: calc(16px + -12px + 4px);
 }
 
-.c1:disabled + span {
+.c1:disabled ~ span {
   background: #B1B5BB;
 }
 
-.c1:checked:not(:disabled):hover + span,
-.c1:checked:not(:disabled):focus + span {
+.c1:checked:not(:disabled):hover ~ span,
+.c1:checked:not(:disabled):focus ~ span {
   background: #0062FF;
 }
 
-.c1:checked:not(:disabled):hover + span:hover:after,
-.c1:checked:not(:disabled):focus + span:hover:after {
+.c1:checked:not(:disabled):hover + div:hover + div {
   visibility: visible;
-  left: calc(100% + -12px - 16px);
+  left: calc(16px + -12px + 4px);
 }
 
-.c1:not(:checked):not(:disabled):hover + span,
-.c1:not(:checked):not(:disabled):focus + span {
+.c1:not(:checked):not(:disabled):hover ~ span,
+.c1:not(:checked):not(:disabled):focus ~ span {
   background: #74777F;
 }
 
-.c3 {
+.c1:not(:checked):not(:disabled):hover + div:hover + div {
+  visibility: visible;
+  left: calc(16px + -12px + 4px);
+}
+
+.c1:hover + div {
+  visibility: visible;
+}
+
+.c4 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -422,7 +444,7 @@ Object {
   color: #22242A;
 }
 
-.c2 {
+.c3 {
   position: relative;
   width: 36px;
   height: 20px;
@@ -433,7 +455,7 @@ Object {
   background: #74777F;
 }
 
-.c2:before {
+.c3:before {
   content: '';
   position: absolute;
   top: 2px;
@@ -446,9 +468,9 @@ Object {
   transition: all 0.3s;
 }
 
-.c2:after {
-  content: '';
+.c2 {
   visibility: hidden;
+  pointer-events: none;
   position: absolute;
   top: -8px;
   left: -8px;
@@ -456,10 +478,6 @@ Object {
   height: 36px;
   border-radius: 36px;
   background: #0000000D;
-}
-
-.c2:hover:after {
-  visibility: visible;
 }
 
 .c0 {
@@ -501,12 +519,15 @@ Object {
           data-testid="element"
           type="checkbox"
         />
-        <span
-          aria-hidden="true"
+        <div
           class="c2"
         />
-        <div
+        <span
+          aria-hidden="true"
           class="c3"
+        />
+        <div
+          class="c4"
         >
           text
         </div>
@@ -520,40 +541,48 @@ Object {
   opacity: 0;
 }
 
-.c1:checked + span {
+.c1:checked ~ span {
   background: #0062FF;
 }
 
-.c1:checked + span:before {
+.c1:checked ~ span:before {
   left: calc(100% - 2px - 16px);
 }
 
-.c1:checked + span:hover:after {
+.c1:checked:hover + div {
   visibility: visible;
-  left: calc(100% + -12px - 16px);
+  left: calc(16px + -12px + 4px);
 }
 
-.c1:disabled + span {
+.c1:disabled ~ span {
   background: #B1B5BB;
 }
 
-.c1:checked:not(:disabled):hover + span,
-.c1:checked:not(:disabled):focus + span {
+.c1:checked:not(:disabled):hover ~ span,
+.c1:checked:not(:disabled):focus ~ span {
   background: #0062FF;
 }
 
-.c1:checked:not(:disabled):hover + span:hover:after,
-.c1:checked:not(:disabled):focus + span:hover:after {
+.c1:checked:not(:disabled):hover + div:hover + div {
   visibility: visible;
-  left: calc(100% + -12px - 16px);
+  left: calc(16px + -12px + 4px);
 }
 
-.c1:not(:checked):not(:disabled):hover + span,
-.c1:not(:checked):not(:disabled):focus + span {
+.c1:not(:checked):not(:disabled):hover ~ span,
+.c1:not(:checked):not(:disabled):focus ~ span {
   background: #74777F;
 }
 
-.c3 {
+.c1:not(:checked):not(:disabled):hover + div:hover + div {
+  visibility: visible;
+  left: calc(16px + -12px + 4px);
+}
+
+.c1:hover + div {
+  visibility: visible;
+}
+
+.c4 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -571,7 +600,7 @@ Object {
   color: #22242A;
 }
 
-.c2 {
+.c3 {
   position: relative;
   width: 36px;
   height: 20px;
@@ -582,7 +611,7 @@ Object {
   background: #74777F;
 }
 
-.c2:before {
+.c3:before {
   content: '';
   position: absolute;
   top: 2px;
@@ -595,9 +624,9 @@ Object {
   transition: all 0.3s;
 }
 
-.c2:after {
-  content: '';
+.c2 {
   visibility: hidden;
+  pointer-events: none;
   position: absolute;
   top: -8px;
   left: -8px;
@@ -605,10 +634,6 @@ Object {
   height: 36px;
   border-radius: 36px;
   background: #0000000D;
-}
-
-.c2:hover:after {
-  visibility: visible;
 }
 
 .c0 {
@@ -649,12 +674,15 @@ Object {
         data-testid="element"
         type="checkbox"
       />
-      <span
-        aria-hidden="true"
+      <div
         class="c2"
       />
-      <div
+      <span
+        aria-hidden="true"
         class="c3"
+      />
+      <div
+        class="c4"
       >
         text
       </div>
@@ -724,40 +752,48 @@ Object {
   opacity: 0;
 }
 
-.c1:checked + span {
+.c1:checked ~ span {
   background: #0062FF;
 }
 
-.c1:checked + span:before {
+.c1:checked ~ span:before {
   left: calc(100% - 2px - 16px);
 }
 
-.c1:checked + span:hover:after {
+.c1:checked:hover + div {
   visibility: visible;
-  left: calc(100% + -12px - 16px);
+  left: calc(16px + -12px + 4px);
 }
 
-.c1:disabled + span {
+.c1:disabled ~ span {
   background: #B1B5BB;
 }
 
-.c1:checked:not(:disabled):hover + span,
-.c1:checked:not(:disabled):focus + span {
+.c1:checked:not(:disabled):hover ~ span,
+.c1:checked:not(:disabled):focus ~ span {
   background: #0062FF;
 }
 
-.c1:checked:not(:disabled):hover + span:hover:after,
-.c1:checked:not(:disabled):focus + span:hover:after {
+.c1:checked:not(:disabled):hover + div:hover + div {
   visibility: visible;
-  left: calc(100% + -12px - 16px);
+  left: calc(16px + -12px + 4px);
 }
 
-.c1:not(:checked):not(:disabled):hover + span,
-.c1:not(:checked):not(:disabled):focus + span {
+.c1:not(:checked):not(:disabled):hover ~ span,
+.c1:not(:checked):not(:disabled):focus ~ span {
   background: #74777F;
 }
 
-.c3 {
+.c1:not(:checked):not(:disabled):hover + div:hover + div {
+  visibility: visible;
+  left: calc(16px + -12px + 4px);
+}
+
+.c1:hover + div {
+  visibility: visible;
+}
+
+.c4 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -775,7 +811,7 @@ Object {
   color: #22242A;
 }
 
-.c2 {
+.c3 {
   position: relative;
   width: 36px;
   height: 20px;
@@ -786,7 +822,7 @@ Object {
   background: #74777F;
 }
 
-.c2:before {
+.c3:before {
   content: '';
   position: absolute;
   top: 2px;
@@ -799,9 +835,9 @@ Object {
   transition: all 0.3s;
 }
 
-.c2:after {
-  content: '';
+.c2 {
   visibility: hidden;
+  pointer-events: none;
   position: absolute;
   top: -8px;
   left: -8px;
@@ -809,10 +845,6 @@ Object {
   height: 36px;
   border-radius: 36px;
   background: #0000000D;
-}
-
-.c2:hover:after {
-  visibility: visible;
 }
 
 .c0 {
@@ -854,12 +886,15 @@ Object {
           data-testid="element"
           type="checkbox"
         />
-        <span
-          aria-hidden="true"
+        <div
           class="c2"
         />
-        <div
+        <span
+          aria-hidden="true"
           class="c3"
+        />
+        <div
+          class="c4"
         >
           text
         </div>
@@ -873,40 +908,48 @@ Object {
   opacity: 0;
 }
 
-.c1:checked + span {
+.c1:checked ~ span {
   background: #0062FF;
 }
 
-.c1:checked + span:before {
+.c1:checked ~ span:before {
   left: calc(100% - 2px - 16px);
 }
 
-.c1:checked + span:hover:after {
+.c1:checked:hover + div {
   visibility: visible;
-  left: calc(100% + -12px - 16px);
+  left: calc(16px + -12px + 4px);
 }
 
-.c1:disabled + span {
+.c1:disabled ~ span {
   background: #B1B5BB;
 }
 
-.c1:checked:not(:disabled):hover + span,
-.c1:checked:not(:disabled):focus + span {
+.c1:checked:not(:disabled):hover ~ span,
+.c1:checked:not(:disabled):focus ~ span {
   background: #0062FF;
 }
 
-.c1:checked:not(:disabled):hover + span:hover:after,
-.c1:checked:not(:disabled):focus + span:hover:after {
+.c1:checked:not(:disabled):hover + div:hover + div {
   visibility: visible;
-  left: calc(100% + -12px - 16px);
+  left: calc(16px + -12px + 4px);
 }
 
-.c1:not(:checked):not(:disabled):hover + span,
-.c1:not(:checked):not(:disabled):focus + span {
+.c1:not(:checked):not(:disabled):hover ~ span,
+.c1:not(:checked):not(:disabled):focus ~ span {
   background: #74777F;
 }
 
-.c3 {
+.c1:not(:checked):not(:disabled):hover + div:hover + div {
+  visibility: visible;
+  left: calc(16px + -12px + 4px);
+}
+
+.c1:hover + div {
+  visibility: visible;
+}
+
+.c4 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -924,7 +967,7 @@ Object {
   color: #22242A;
 }
 
-.c2 {
+.c3 {
   position: relative;
   width: 36px;
   height: 20px;
@@ -935,7 +978,7 @@ Object {
   background: #74777F;
 }
 
-.c2:before {
+.c3:before {
   content: '';
   position: absolute;
   top: 2px;
@@ -948,9 +991,9 @@ Object {
   transition: all 0.3s;
 }
 
-.c2:after {
-  content: '';
+.c2 {
   visibility: hidden;
+  pointer-events: none;
   position: absolute;
   top: -8px;
   left: -8px;
@@ -958,10 +1001,6 @@ Object {
   height: 36px;
   border-radius: 36px;
   background: #0000000D;
-}
-
-.c2:hover:after {
-  visibility: visible;
 }
 
 .c0 {
@@ -1002,12 +1041,15 @@ Object {
         data-testid="element"
         type="checkbox"
       />
-      <span
-        aria-hidden="true"
+      <div
         class="c2"
       />
-      <div
+      <span
+        aria-hidden="true"
         class="c3"
+      />
+      <div
+        class="c4"
       >
         text
       </div>
@@ -1077,40 +1119,48 @@ Object {
   opacity: 0;
 }
 
-.c1:checked + span {
+.c1:checked ~ span {
   background: #0062FF;
 }
 
-.c1:checked + span:before {
+.c1:checked ~ span:before {
   left: calc(100% - 2px - 12px);
 }
 
-.c1:checked + span:hover:after {
+.c1:checked:hover + div {
   visibility: visible;
-  left: calc(100% + -12px - 12px);
+  left: calc(12px + -12px + 4px);
 }
 
-.c1:disabled + span {
+.c1:disabled ~ span {
   background: #B1B5BB;
 }
 
-.c1:checked:not(:disabled):hover + span,
-.c1:checked:not(:disabled):focus + span {
+.c1:checked:not(:disabled):hover ~ span,
+.c1:checked:not(:disabled):focus ~ span {
   background: #0062FF;
 }
 
-.c1:checked:not(:disabled):hover + span:hover:after,
-.c1:checked:not(:disabled):focus + span:hover:after {
+.c1:checked:not(:disabled):hover + div:hover + div {
   visibility: visible;
-  left: calc(100% + -12px - 12px);
+  left: calc(12px + -12px + 4px);
 }
 
-.c1:not(:checked):not(:disabled):hover + span,
-.c1:not(:checked):not(:disabled):focus + span {
+.c1:not(:checked):not(:disabled):hover ~ span,
+.c1:not(:checked):not(:disabled):focus ~ span {
   background: #74777F;
 }
 
-.c3 {
+.c1:not(:checked):not(:disabled):hover + div:hover + div {
+  visibility: visible;
+  left: calc(12px + -12px + 4px);
+}
+
+.c1:hover + div {
+  visibility: visible;
+}
+
+.c4 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1128,7 +1178,7 @@ Object {
   color: #22242A;
 }
 
-.c2 {
+.c3 {
   position: relative;
   width: 28px;
   height: 16px;
@@ -1139,7 +1189,7 @@ Object {
   background: #74777F;
 }
 
-.c2:before {
+.c3:before {
   content: '';
   position: absolute;
   top: 2px;
@@ -1152,9 +1202,9 @@ Object {
   transition: all 0.3s;
 }
 
-.c2:after {
-  content: '';
+.c2 {
   visibility: hidden;
+  pointer-events: none;
   position: absolute;
   top: -8px;
   left: -8px;
@@ -1162,10 +1212,6 @@ Object {
   height: 32px;
   border-radius: 32px;
   background: #0000000D;
-}
-
-.c2:hover:after {
-  visibility: visible;
 }
 
 .c0 {
@@ -1207,12 +1253,15 @@ Object {
           data-testid="element"
           type="checkbox"
         />
-        <span
-          aria-hidden="true"
+        <div
           class="c2"
         />
-        <div
+        <span
+          aria-hidden="true"
           class="c3"
+        />
+        <div
+          class="c4"
         >
           text
         </div>
@@ -1226,40 +1275,48 @@ Object {
   opacity: 0;
 }
 
-.c1:checked + span {
+.c1:checked ~ span {
   background: #0062FF;
 }
 
-.c1:checked + span:before {
+.c1:checked ~ span:before {
   left: calc(100% - 2px - 12px);
 }
 
-.c1:checked + span:hover:after {
+.c1:checked:hover + div {
   visibility: visible;
-  left: calc(100% + -12px - 12px);
+  left: calc(12px + -12px + 4px);
 }
 
-.c1:disabled + span {
+.c1:disabled ~ span {
   background: #B1B5BB;
 }
 
-.c1:checked:not(:disabled):hover + span,
-.c1:checked:not(:disabled):focus + span {
+.c1:checked:not(:disabled):hover ~ span,
+.c1:checked:not(:disabled):focus ~ span {
   background: #0062FF;
 }
 
-.c1:checked:not(:disabled):hover + span:hover:after,
-.c1:checked:not(:disabled):focus + span:hover:after {
+.c1:checked:not(:disabled):hover + div:hover + div {
   visibility: visible;
-  left: calc(100% + -12px - 12px);
+  left: calc(12px + -12px + 4px);
 }
 
-.c1:not(:checked):not(:disabled):hover + span,
-.c1:not(:checked):not(:disabled):focus + span {
+.c1:not(:checked):not(:disabled):hover ~ span,
+.c1:not(:checked):not(:disabled):focus ~ span {
   background: #74777F;
 }
 
-.c3 {
+.c1:not(:checked):not(:disabled):hover + div:hover + div {
+  visibility: visible;
+  left: calc(12px + -12px + 4px);
+}
+
+.c1:hover + div {
+  visibility: visible;
+}
+
+.c4 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1277,7 +1334,7 @@ Object {
   color: #22242A;
 }
 
-.c2 {
+.c3 {
   position: relative;
   width: 28px;
   height: 16px;
@@ -1288,7 +1345,7 @@ Object {
   background: #74777F;
 }
 
-.c2:before {
+.c3:before {
   content: '';
   position: absolute;
   top: 2px;
@@ -1301,9 +1358,9 @@ Object {
   transition: all 0.3s;
 }
 
-.c2:after {
-  content: '';
+.c2 {
   visibility: hidden;
+  pointer-events: none;
   position: absolute;
   top: -8px;
   left: -8px;
@@ -1311,10 +1368,6 @@ Object {
   height: 32px;
   border-radius: 32px;
   background: #0000000D;
-}
-
-.c2:hover:after {
-  visibility: visible;
 }
 
 .c0 {
@@ -1355,12 +1408,15 @@ Object {
         data-testid="element"
         type="checkbox"
       />
-      <span
-        aria-hidden="true"
+      <div
         class="c2"
       />
-      <div
+      <span
+        aria-hidden="true"
         class="c3"
+      />
+      <div
+        class="c4"
       >
         text
       </div>
