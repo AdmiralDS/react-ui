@@ -67,6 +67,9 @@ const Input = styled.input<{ dimension: Dimension; checked?: boolean }>`
     &:focus ~ span {
       background: ${({ theme }) => theme.color['Neutral/Neutral 50']};
     }
+    &:hover + div {
+      ${hoverInputStyles};
+    }
   }
 `;
 const Label = styled.div<{
