@@ -69,18 +69,12 @@ const Input = styled.input<{ dimension: Dimension; checked?: boolean }>`
   }
 
   &:checked:not(:disabled) {
-    &:hover + div > span {
-      background: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
-    }
     &:hover + div > div {
       ${hoverInputStyles};
     }
   }
 
   &:not(:checked):not(:disabled) {
-    &:hover + div > span {
-      background: ${({ theme }) => theme.color['Neutral/Neutral 50']};
-    }
   }
 
   &:hover + div > div {
