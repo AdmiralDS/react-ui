@@ -62,19 +62,25 @@ const Input = styled.input<{ dimension: Dimension; checked?: boolean }>`
   }
 
   &:checked:not(:disabled) {
-    &:hover + div > span,
-    &:focus + div > span {
+    &:hover + div > span {
       background: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
     }
     &:hover + div > div {
       ${hoverInputStyles};
     }
+    &:focus-visible + div > span {
+      outline-offset: 2px;
+      outline: ${(p) => p.theme.color['Primary/Primary 60 Main']} solid 2px;
+    }
   }
 
   &:not(:checked):not(:disabled) {
-    &:hover + div > span,
-    &:focus + div > span {
+    &:hover + div > span {
       background: ${({ theme }) => theme.color['Neutral/Neutral 50']};
+    }
+    &:focus-visible + div > span {
+      outline-offset: 2px;
+      outline: ${(p) => p.theme.color['Primary/Primary 60 Main']} solid 2px;
     }
   }
 
