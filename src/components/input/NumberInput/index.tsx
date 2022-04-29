@@ -155,28 +155,37 @@ export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       }
     };
 
+    /**
+     * При потере фокуса:
+     * если precision > 0, количество цифр после разделителя decimal должно быть равно precision.
+     * Если условие выше несоблюдено, должна быть произведена корректировка значения. Например: '70.' => '70.00' при precision={2}
+     */
     const handleBlur = (event: React.FocusEvent<HTMLInputElement>) => {
       const newValue = fitToCurrency(event.currentTarget.value, precision, decimal, thousand, prefix, suffix, true);
       if (inputRef.current) {
-        if (typeof minValue === 'number') {
-          if (Number(clearValue(newValue, precision, decimal)) < minValue) {
-            const fullValue = fitToCurrency(String(minValue), precision, decimal, thousand, prefix, suffix, true);
-            const shortValue = clearValue(fullValue, precision, decimal);
+        // если введеное значение меньше minValue
+        if (typeof minValue === 'number' && Number(clearValue(newValue, precision, decimal)) < minValue) {
+          const fullValue = fitToCurrency(String(minValue), precision, decimal, thousand, prefix, suffix, true);
+          const shortValue = clearValue(fullValue, precision, decimal);
 
-            onChange?.(event, fullValue, shortValue);
-            inputRef.current.value = fullValue;
-            return;
-          }
+          onChange?.(event, fullValue, shortValue);
+          inputRef.current.value = fullValue;
         }
-        if (typeof maxValue === 'number') {
-          if (Number(clearValue(newValue, precision, decimal)) > maxValue) {
-            const fullValue = fitToCurrency(String(maxValue), precision, decimal, thousand, prefix, suffix, true);
-            const shortValue = clearValue(fullValue, precision, decimal);
+        // если введеное значение меньше maxValue
+        else if (typeof maxValue === 'number' && Number(clearValue(newValue, precision, decimal)) > maxValue) {
+          const fullValue = fitToCurrency(String(maxValue), precision, decimal, thousand, prefix, suffix, true);
+          const shortValue = clearValue(fullValue, precision, decimal);
 
-            onChange?.(event, fullValue, shortValue);
-            inputRef.current.value = fullValue;
-            return;
-          }
+          onChange?.(event, fullValue, shortValue);
+          inputRef.current.value = fullValue;
+        }
+        // если значение в инпуте неполностью отформатировано, например, не все разряды после запятой проставлены
+        else if (newValue !== event.currentTarget.value) {
+          const fullValue = newValue;
+          const shortValue = clearValue(fullValue, precision, decimal);
+
+          onChange?.(event, fullValue, shortValue);
+          inputRef.current.value = fullValue;
         }
       }
       onBlur?.(event);

@@ -171,15 +171,19 @@ fieldset[data-dimension='s'] .c4 {
   -webkit-box-align: flex-start;
   -ms-flex-align: flex-start;
   align-items: flex-start;
-  padding: 16px 16px 16px 0px;
+  padding: 8px 16px 8px 0px;
 }
 
 .c6 {
   margin: 2px;
-  margin-right: 16px;
+  margin-right: 10px;
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
+}
+
+.c11 {
+  padding-top: 2px;
 }
 
 .c0 {
@@ -224,7 +228,7 @@ fieldset[data-dimension='s'] .c4 {
             </div>
           </div>
           <div
-            class=""
+            class="c11"
           >
             Текст заголовка, первый уровень компонента, размер M 40 1
           </div>
@@ -252,7 +256,7 @@ fieldset[data-dimension='s'] .c4 {
             </div>
           </div>
           <div
-            class=""
+            class="c11"
           >
             Текст заголовка, первый уровень компонента, размер M 40 2
           </div>
@@ -261,7 +265,7 @@ fieldset[data-dimension='s'] .c4 {
           class="c1"
         >
           <div
-            class=""
+            class="c11"
           >
             Текст заголовка, первый уровень компонента, размер M 40 3
           </div>
@@ -270,7 +274,7 @@ fieldset[data-dimension='s'] .c4 {
           class="c1"
         >
           <div
-            class=""
+            class="c11"
           >
             Текст заголовка, первый уровень компонента, размер M 40 4
           </div>
@@ -446,15 +450,19 @@ fieldset[data-dimension='s'] .c4 {
   -webkit-box-align: flex-start;
   -ms-flex-align: flex-start;
   align-items: flex-start;
-  padding: 16px 16px 16px 0px;
+  padding: 8px 16px 8px 0px;
 }
 
 .c6 {
   margin: 2px;
-  margin-right: 16px;
+  margin-right: 10px;
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
+}
+
+.c11 {
+  padding-top: 2px;
 }
 
 .c0 {
@@ -498,7 +506,7 @@ fieldset[data-dimension='s'] .c4 {
           </div>
         </div>
         <div
-          class=""
+          class="c11"
         >
           Текст заголовка, первый уровень компонента, размер M 40 1
         </div>
@@ -526,7 +534,7 @@ fieldset[data-dimension='s'] .c4 {
           </div>
         </div>
         <div
-          class=""
+          class="c11"
         >
           Текст заголовка, первый уровень компонента, размер M 40 2
         </div>
@@ -535,7 +543,7 @@ fieldset[data-dimension='s'] .c4 {
         class="c1"
       >
         <div
-          class=""
+          class="c11"
         >
           Текст заголовка, первый уровень компонента, размер M 40 3
         </div>
@@ -544,7 +552,7 @@ fieldset[data-dimension='s'] .c4 {
         class="c1"
       >
         <div
-          class=""
+          class="c11"
         >
           Текст заголовка, первый уровень компонента, размер M 40 4
         </div>
@@ -776,15 +784,19 @@ fieldset[data-dimension='s'] .c4 {
   -webkit-box-align: flex-start;
   -ms-flex-align: flex-start;
   align-items: flex-start;
-  padding: 16px 16px 16px 0px;
+  padding: 8px 16px 8px 0px;
 }
 
 .c6 {
   margin: 2px;
-  margin-right: 16px;
+  margin-right: 10px;
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
+}
+
+.c11 {
+  padding-top: 2px;
 }
 
 .c0 {
@@ -829,7 +841,7 @@ fieldset[data-dimension='s'] .c4 {
             </div>
           </div>
           <div
-            class=""
+            class="c11"
           >
             Текст заголовка, первый уровень компонента, размер M 40 1
           </div>
@@ -857,7 +869,7 @@ fieldset[data-dimension='s'] .c4 {
             </div>
           </div>
           <div
-            class=""
+            class="c11"
           >
             Текст заголовка, первый уровень компонента, размер M 40 2
           </div>
@@ -866,7 +878,7 @@ fieldset[data-dimension='s'] .c4 {
           class="c1"
         >
           <div
-            class=""
+            class="c11"
           >
             Текст заголовка, первый уровень компонента, размер M 40 3
           </div>
@@ -875,7 +887,7 @@ fieldset[data-dimension='s'] .c4 {
           class="c1"
         >
           <div
-            class=""
+            class="c11"
           >
             Текст заголовка, первый уровень компонента, размер M 40 4
           </div>
@@ -1051,15 +1063,19 @@ fieldset[data-dimension='s'] .c4 {
   -webkit-box-align: flex-start;
   -ms-flex-align: flex-start;
   align-items: flex-start;
-  padding: 16px 16px 16px 0px;
+  padding: 8px 16px 8px 0px;
 }
 
 .c6 {
   margin: 2px;
-  margin-right: 16px;
+  margin-right: 10px;
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
+}
+
+.c11 {
+  padding-top: 2px;
 }
 
 .c0 {
@@ -1103,7 +1119,7 @@ fieldset[data-dimension='s'] .c4 {
           </div>
         </div>
         <div
-          class=""
+          class="c11"
         >
           Текст заголовка, первый уровень компонента, размер M 40 1
         </div>
@@ -1131,7 +1147,7 @@ fieldset[data-dimension='s'] .c4 {
           </div>
         </div>
         <div
-          class=""
+          class="c11"
         >
           Текст заголовка, первый уровень компонента, размер M 40 2
         </div>
@@ -1140,7 +1156,7 @@ fieldset[data-dimension='s'] .c4 {
         class="c1"
       >
         <div
-          class=""
+          class="c11"
         >
           Текст заголовка, первый уровень компонента, размер M 40 3
         </div>
@@ -1149,7 +1165,7 @@ fieldset[data-dimension='s'] .c4 {
         class="c1"
       >
         <div
-          class=""
+          class="c11"
         >
           Текст заголовка, первый уровень компонента, размер M 40 4
         </div>
@@ -1381,15 +1397,19 @@ fieldset[data-dimension='s'] .c4 {
   -webkit-box-align: flex-start;
   -ms-flex-align: flex-start;
   align-items: flex-start;
-  padding: 10px 16px 10px 0px;
+  padding: 6px 16px 6px 0px;
 }
 
 .c6 {
   margin: 2px;
-  margin-right: 16px;
+  margin-right: 10px;
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
+}
+
+.c11 {
+  padding-top: 2px;
 }
 
 .c0 {
@@ -1434,7 +1454,7 @@ fieldset[data-dimension='s'] .c4 {
             </div>
           </div>
           <div
-            class=""
+            class="c11"
           >
             Текст заголовка, первый уровень компонента, размер M 40 1
           </div>
@@ -1462,7 +1482,7 @@ fieldset[data-dimension='s'] .c4 {
             </div>
           </div>
           <div
-            class=""
+            class="c11"
           >
             Текст заголовка, первый уровень компонента, размер M 40 2
           </div>
@@ -1471,7 +1491,7 @@ fieldset[data-dimension='s'] .c4 {
           class="c1"
         >
           <div
-            class=""
+            class="c11"
           >
             Текст заголовка, первый уровень компонента, размер M 40 3
           </div>
@@ -1480,7 +1500,7 @@ fieldset[data-dimension='s'] .c4 {
           class="c1"
         >
           <div
-            class=""
+            class="c11"
           >
             Текст заголовка, первый уровень компонента, размер M 40 4
           </div>
@@ -1656,15 +1676,19 @@ fieldset[data-dimension='s'] .c4 {
   -webkit-box-align: flex-start;
   -ms-flex-align: flex-start;
   align-items: flex-start;
-  padding: 10px 16px 10px 0px;
+  padding: 6px 16px 6px 0px;
 }
 
 .c6 {
   margin: 2px;
-  margin-right: 16px;
+  margin-right: 10px;
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
+}
+
+.c11 {
+  padding-top: 2px;
 }
 
 .c0 {
@@ -1708,7 +1732,7 @@ fieldset[data-dimension='s'] .c4 {
           </div>
         </div>
         <div
-          class=""
+          class="c11"
         >
           Текст заголовка, первый уровень компонента, размер M 40 1
         </div>
@@ -1736,7 +1760,7 @@ fieldset[data-dimension='s'] .c4 {
           </div>
         </div>
         <div
-          class=""
+          class="c11"
         >
           Текст заголовка, первый уровень компонента, размер M 40 2
         </div>
@@ -1745,7 +1769,7 @@ fieldset[data-dimension='s'] .c4 {
         class="c1"
       >
         <div
-          class=""
+          class="c11"
         >
           Текст заголовка, первый уровень компонента, размер M 40 3
         </div>
@@ -1754,7 +1778,7 @@ fieldset[data-dimension='s'] .c4 {
         class="c1"
       >
         <div
-          class=""
+          class="c11"
         >
           Текст заголовка, первый уровень компонента, размер M 40 4
         </div>

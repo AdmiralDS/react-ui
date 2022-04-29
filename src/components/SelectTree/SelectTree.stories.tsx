@@ -55,7 +55,7 @@ export default {
 const selectTreeListM = [
   {
     label: (
-      <T as="span" font="Subtitle/Subtitle 2">
+      <T as="div" style={{ marginTop: -2 }} font="Subtitle/Subtitle 2">
         Текст заголовка, первый уровень компонента, размер M 40 1
       </T>
     ),

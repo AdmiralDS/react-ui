@@ -67,7 +67,7 @@ export const SliderInput = React.forwardRef<HTMLInputElement, SliderInputProps>(
       step = 1,
       tickMarks,
       dimension = 'xl',
-      precision = 2,
+      precision = 0,
       thousand = ' ',
       prefix = '',
       suffix = '₽',
@@ -85,7 +85,7 @@ export const SliderInput = React.forwardRef<HTMLInputElement, SliderInputProps>(
     const [sliderValue, setSliderValue] = React.useState<number>(minValue);
 
     React.useEffect(() => {
-      setInputValue(fitToCurrency(defaultValue, precision, decimal, thousand, prefix, suffix));
+      setInputValue(fitToCurrency(defaultValue, precision, decimal, thousand, prefix, suffix, true));
       setSliderValue(+clearValue(defaultValue, precision, decimal));
     }, [defaultValue]);
 
@@ -110,25 +110,6 @@ export const SliderInput = React.forwardRef<HTMLInputElement, SliderInputProps>(
 
       onChange?.(full, short);
     };
-    const handleInputBlur = (event: React.FocusEvent<HTMLInputElement>) => {
-      const value = event.currentTarget.value;
-      if (Number(clearValue(value, precision, decimal)) < minValue) {
-        const fullValue = fitToCurrency(String(minValue), precision, decimal, thousand, prefix, suffix);
-
-        setSliderValue(minValue);
-        setInputValue(fullValue);
-
-        onChange?.(fullValue, String(minValue));
-      } else if (Number(clearValue(value, precision, decimal)) > maxValue) {
-        const fullValue = fitToCurrency(String(maxValue), precision, decimal, thousand, prefix, suffix);
-
-        setSliderValue(maxValue);
-        setInputValue(fullValue);
-
-        onChange?.(fullValue, String(maxValue));
-      }
-      props.onBlur?.(event);
-    };
     return (
       <Wrapper data-dimension={dimension} dimension={dimension} {...wrapperProps}>
         <Input
@@ -136,7 +117,7 @@ export const SliderInput = React.forwardRef<HTMLInputElement, SliderInputProps>(
           ref={ref}
           value={inputValue}
           onChange={handleInputChange}
-          onBlur={handleInputBlur}
+          onBlur={props.onBlur}
           dimension={dimension}
           disabled={disabled}
           precision={precision}
@@ -147,6 +128,8 @@ export const SliderInput = React.forwardRef<HTMLInputElement, SliderInputProps>(
           placeholder={placeholder}
           step={step}
           displayPlusMinusIcons={false}
+          minValue={minValue}
+          maxValue={maxValue}
         />
         <Slider
           aria-hidden

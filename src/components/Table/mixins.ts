@@ -97,3 +97,30 @@ export const rowBackground = css`
     background: ${({ theme }) => theme.color['Neutral/Neutral 00']};
   }
 `;
+
+export const overflowMenuStyle = css<{ $offset: number }>`
+  [data-dimension='s'] && {
+    width: 31px;
+    height: 31px;
+    padding: 0;
+    left: ${({ $offset }) => `${$offset - 32}px`};
+  }
+  [data-dimension='m'] && {
+    width: 39px;
+    height: 39px;
+    padding: 4px 4px 3px 3px;
+    left: ${({ $offset }) => `${$offset - 39}px`};
+  }
+  [data-dimension='l'] && {
+    width: 47px;
+    height: 47px;
+    padding: 6px 6px 5px 5px;
+    left: ${({ $offset }) => `${$offset - 47}px`};
+  }
+  [data-dimension='xl'] && {
+    width: 55px;
+    height: 55px;
+    padding: 10px 10px 9px 9px;
+    left: ${({ $offset }) => `${$offset - 55}px`};
+  }
+`;

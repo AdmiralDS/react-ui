@@ -12,6 +12,7 @@ import {
   singleLineTitle,
   underlineRow,
   extraTextStyle,
+  overflowMenuStyle,
 } from './mixins';
 
 export const TableContainer = styled.div`
@@ -32,6 +33,22 @@ export const StickyWrapper = styled.div`
   transition: box-shadow 0.3s;
   [data-shadow='true'] & {
     box-shadow: 4px 0px 12px rgba(138, 150, 168, 0.16);
+  }
+`;
+
+export const OverflowMenuWrapper = styled.div<{ $offset: number }>`
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  z-index: 5;
+  background: ${({ theme }) => theme.color['Neutral/Neutral 00']};
+  ${rowBackground}
+  ${overflowMenuStyle}
+  visibility: hidden;
+
+  &:hover {
+    visibility: visible;
   }
 `;
 
@@ -299,6 +316,15 @@ export const SimpleRow = styled.div`
   min-width: max-content;
   background: ${({ theme }) => theme.color['Neutral/Neutral 00']};
   ${rowBackground}
+
+  &:hover {
+    & + ${OverflowMenuWrapper} {
+      visibility: visible;
+    }
+  }
+  & + div[data-opened='true'] {
+    visibility: visible;
+  }
 `;
 
 export const ExpandedRow = styled.div<{ opened?: boolean; contentMaxHeight?: number | string }>`

@@ -80,12 +80,14 @@ export const ButtonContent = styled.span<{ $isVertical?: boolean; dimension: Dim
   position: relative;
   display: inline-flex;
   align-items: center;
+  width: 100%;
   height: 100%;
 
   & > svg {
     transform: rotate(${(p) => (p.$isVertical ? 90 : 0)}deg);
     height: ${({ dimension }) => ICON_SIZE[dimension]}px;
     width: ${({ dimension }) => ICON_SIZE[dimension]}px;
+    margin: auto;
 
     & *[fill^='#'] {
       fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
