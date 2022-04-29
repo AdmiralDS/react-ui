@@ -4,6 +4,14 @@ import { typography } from '#src/components/Typography';
 import { Checkbox } from '#src/components/Checkbox';
 import { ReactComponent as ChevronRightOutline } from '@admiral-ds/icons/build/system/ChevronRightOutline.svg';
 
+const PADDING_LEFT_M = 40;
+const PADDING_LEFT_S = 36;
+const PADDING_VERTICAL_M = 16;
+const PADDING_VERTICAL_S = 12;
+const PADDING_RIGHT = 16;
+const ICON_SIZE_M = 24;
+const ICON_SIZE_S = 20;
+
 type Dimension = 'm' | 's';
 
 export interface SelectTreeNodeProps extends HTMLAttributes<HTMLDivElement> {
@@ -44,8 +52,8 @@ const ChevronWrapper = styled.div<{
   cursor: pointer;
   position: relative;
 
-  width: ${(p) => (p.dimension === 'm' ? '24px' : '20px')};
-  height: ${(p) => (p.dimension === 'm' ? '24px' : '20px')};
+  width: ${(p) => (p.dimension === 'm' ? `${ICON_SIZE_M}px` : `${ICON_SIZE_S}px`)};
+  height: ${(p) => (p.dimension === 'm' ? `${ICON_SIZE_M}px` : `${ICON_SIZE_S}px`)};
 
   &:hover {
     &::after {
@@ -62,10 +70,11 @@ const ChevronWrapper = styled.div<{
   }
 `;
 
-const TreeItem = styled.ul`
+const TreeItem = styled.ul<{ dimension?: Dimension }>`
   list-style: none;
   margin: 0;
   padding: 0;
+  padding-left: ${(p) => (p.dimension === 'm' ? `${PADDING_LEFT_M}px` : `${PADDING_LEFT_S}px`)};
 `;
 
 const Wrapper = styled.li<{ isOpened?: boolean; dimension?: Dimension; level: number }>`
@@ -73,24 +82,32 @@ const Wrapper = styled.li<{ isOpened?: boolean; dimension?: Dimension; level: nu
   ${(p) => (p.dimension === 'm' ? typography['Body/Body 1 Short'] : typography['Body/Body 2 Short'])};
   display: flex;
   align-items: flex-start;
-  padding: ${(p) => (p.dimension === 'm' ? `16px 16px 16px ${p.level * 40}px` : `10px 16px 10px ${p.level * 36}px`)};
+  padding: ${(p) =>
+    p.dimension === 'm'
+      ? `${PADDING_VERTICAL_M / 2}px ${PADDING_RIGHT}px ${PADDING_VERTICAL_M / 2}px ${p.level * PADDING_LEFT_M}px`
+      : `${PADDING_VERTICAL_S / 2}px ${PADDING_RIGHT}px ${PADDING_VERTICAL_S / 2}px ${p.level * PADDING_LEFT_S}px`};
 `;
 
 const IconWrapper = styled.div<{ dimension?: Dimension }>`
   margin-right: 8px;
+  flex-shrink: 0;
+  width: ${(p) => (p.dimension === 'm' ? `${ICON_SIZE_M}px` : `${ICON_SIZE_S}px`)};
+  height: ${(p) => (p.dimension === 'm' ? `${ICON_SIZE_M}px` : `${ICON_SIZE_S}px`)};
   > svg {
-    width: ${(p) => (p.dimension === 'm' ? '24px' : '20px')};
-    height: ${(p) => (p.dimension === 'm' ? '24px' : '20px')};
+    width: 100%;
+    height: 100%;
   }
 `;
 
 const StyledCheckbox = styled(Checkbox)`
   margin: 2px;
-  margin-right: 16px;
+  margin-right: 10px;
   flex-shrink: 0;
 `;
 
-const TitleContent = styled.div``;
+const TitleContent = styled.div`
+  padding-top: 2px;
+`;
 
 export const SelectTreeNode: FC<SelectTreeBranchProps> = ({
   dimension,
@@ -130,7 +147,7 @@ export const SelectTreeNode: FC<SelectTreeBranchProps> = ({
         node.children &&
         node.children.map((child, i) => {
           return (
-            <TreeItem key={[node.id, i].join('/')}>
+            <TreeItem key={[node.id, i].join('/')} dimension={dimension}>
               <SelectTreeNode
                 key={node.id}
                 dimension={dimension}
