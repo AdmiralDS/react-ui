@@ -44,15 +44,15 @@ const Input = styled.input<{ dimension: Dimension; checked?: boolean }>`
   height: 0;
   opacity: 0;
 
-  &:checked + div > span {
-    &:before {
-      ${({ dimension }) => `left: calc(${dimension === 'm' ? SLIDER_SIZE_M : SLIDER_SIZE_S} + ${SLIDER_INDENT}px);`}
+  &:checked {
+    & + div > span {
+      &:before {
+        ${({ dimension }) => `left: calc(${dimension === 'm' ? SLIDER_SIZE_M : SLIDER_SIZE_S} + ${SLIDER_INDENT}px);`}
+      }
+
+      background: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
     }
 
-    background: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
-  }
-
-  &:checked {
     ${hoverInputStyles};
   }
 
@@ -61,6 +61,7 @@ const Input = styled.input<{ dimension: Dimension; checked?: boolean }>`
       outline-offset: 2px;
       outline: ${(p) => p.theme.color['Primary/Primary 60 Main']} solid 2px;
     }
+
     &:hover + div > div {
       visibility: visible;
     }
