@@ -31,12 +31,12 @@ Object {
   visibility: visible;
 }
 
-.c1:disabled + div > span {
-  background: #B1B5BB;
+.c1:not(:disabled):hover:focus-visible + div > span {
+  outline: none;
 }
 
-.c1:checked:not(:disabled):hover + div > div {
-  left: calc(16px + -12px + 4px);
+.c1:disabled + div > span {
+  background: #B1B5BB;
 }
 
 .c5 {
@@ -192,12 +192,12 @@ Object {
   visibility: visible;
 }
 
-.c1:disabled + div > span {
-  background: #B1B5BB;
+.c1:not(:disabled):hover:focus-visible + div > span {
+  outline: none;
 }
 
-.c1:checked:not(:disabled):hover + div > div {
-  left: calc(16px + -12px + 4px);
+.c1:disabled + div > span {
+  background: #B1B5BB;
 }
 
 .c5 {
@@ -408,12 +408,12 @@ Object {
   visibility: visible;
 }
 
-.c1:disabled + div > span {
-  background: #B1B5BB;
+.c1:not(:disabled):hover:focus-visible + div > span {
+  outline: none;
 }
 
-.c1:checked:not(:disabled):hover + div > div {
-  left: calc(16px + -12px + 4px);
+.c1:disabled + div > span {
+  background: #B1B5BB;
 }
 
 .c5 {
@@ -565,12 +565,12 @@ Object {
   visibility: visible;
 }
 
-.c1:disabled + div > span {
-  background: #B1B5BB;
+.c1:not(:disabled):hover:focus-visible + div > span {
+  outline: none;
 }
 
-.c1:checked:not(:disabled):hover + div > div {
-  left: calc(16px + -12px + 4px);
+.c1:disabled + div > span {
+  background: #B1B5BB;
 }
 
 .c5 {
@@ -777,12 +777,12 @@ Object {
   visibility: visible;
 }
 
-.c1:disabled + div > span {
-  background: #B1B5BB;
+.c1:not(:disabled):hover:focus-visible + div > span {
+  outline: none;
 }
 
-.c1:checked:not(:disabled):hover + div > div {
-  left: calc(16px + -12px + 4px);
+.c1:disabled + div > span {
+  background: #B1B5BB;
 }
 
 .c5 {
@@ -934,12 +934,12 @@ Object {
   visibility: visible;
 }
 
-.c1:disabled + div > span {
-  background: #B1B5BB;
+.c1:not(:disabled):hover:focus-visible + div > span {
+  outline: none;
 }
 
-.c1:checked:not(:disabled):hover + div > div {
-  left: calc(16px + -12px + 4px);
+.c1:disabled + div > span {
+  background: #B1B5BB;
 }
 
 .c5 {
@@ -1146,12 +1146,12 @@ Object {
   visibility: visible;
 }
 
-.c1:disabled + div > span {
-  background: #B1B5BB;
+.c1:not(:disabled):hover:focus-visible + div > span {
+  outline: none;
 }
 
-.c1:checked:not(:disabled):hover + div > div {
-  left: calc(12px + -12px + 4px);
+.c1:disabled + div > span {
+  background: #B1B5BB;
 }
 
 .c5 {
@@ -1303,12 +1303,12 @@ Object {
   visibility: visible;
 }
 
-.c1:disabled + div > span {
-  background: #B1B5BB;
+.c1:not(:disabled):hover:focus-visible + div > span {
+  outline: none;
 }
 
-.c1:checked:not(:disabled):hover + div > div {
-  left: calc(12px + -12px + 4px);
+.c1:disabled + div > span {
+  background: #B1B5BB;
 }
 
 .c5 {
