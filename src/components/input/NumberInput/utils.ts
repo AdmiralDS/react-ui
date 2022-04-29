@@ -64,7 +64,10 @@ const reverseString = (str: string) => {
  * @param thousand разделитель между тысячами
  * @param prefix префикс (строка, которая выводится перед числовым значением)
  * @param suffix суффикс (строка, которая выводится после числового значения)
- * @param blur флаг того, что произошло событие blur
+ * @param fillEmptyDecimals если строка должна быть отформатирована как десятичное число (т.е. precision > 0 и в строке есть decimal)
+ * и данный флаг fillEmptyDecimals установлен в true, то утилита fitToCurrency проверит, сколько знаков в числе после разделителя decimal
+ * и если таких знаков меньше, чем precision, недостающее количество будет заполнено нулями.
+ * Например, при precision={3} строка '3.9' превратится '3.900'
  */
 export function fitToCurrency(
   value: string | number,
@@ -73,7 +76,7 @@ export function fitToCurrency(
   thousand: string,
   prefix?: string,
   suffix?: string,
-  blur?: boolean,
+  fillEmptyDecimals?: boolean,
 ): string {
   if (value === '') {
     return value;
@@ -114,7 +117,7 @@ export function fitToCurrency(
   }
 
   // доставляем нули при блюре
-  if (blur) {
+  if (fillEmptyDecimals) {
     if (isDecimal) {
       const dot = newValue.indexOf(decimal);
       const diff = newValue.length - dot - 1;
