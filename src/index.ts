@@ -1,6 +1,4 @@
-export type { Theme } from './components/themes';
-export { LIGHT_THEME, DARK_THEME } from './components/themes';
-
+export * from './components/themes';
 export * from './components/Accordion';
 export * from './components/Badge';
 export * from './components/Calendar';

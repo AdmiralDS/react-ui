@@ -31,7 +31,18 @@ export default defineConfig({
   plugins: [
     react({
       babel: {
-        babelrc: true,
+        plugins: [
+          [
+            '@emotion',
+            {
+              // sourceMap is on by default but source maps are dead code eliminated in production
+              sourceMap: true,
+              autoLabel: 'always',
+              labelFormat: '[local]',
+              cssPropOptimization: true,
+            },
+          ],
+        ],
       },
     }),
     svgr({ dimensions: false, svgProps: { focusable: '{false}' } }) as Plugin,

@@ -17,7 +17,7 @@ const getCircularReplacer = () => {
 module.exports = {
   stories: ['../src/**/*.stories.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
   features: {
-    emotionAlias: false
+    emotionAlias: false,
   },
   addons: [
     {
@@ -68,20 +68,6 @@ module.exports = {
       {
         test: /\.svg$/,
         use: [{ loader: '@svgr/webpack', options: { dimensions: false, svgProps: { focusable: '{false}' } } }],
-      },
-      {
-        test: /\.js$/,
-        include: /node_modules\/ansi-regex|strip-ansi/,
-        loader: 'babel-loader',
-        options: {
-          babelrc: false,
-          presets: [
-            '@babel/preset-react',
-            '@babel/preset-env',
-            '@emotion/babel-preset-css-prop',
-          ],
-          plugins: ['@emotion/babel-plugin'],
-        },
       },
       ...config.module.rules,
     ];

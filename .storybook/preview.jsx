@@ -1,20 +1,20 @@
-import * as React from 'react';
-import { version } from '../package.json';
-import { ThemeProvider as StyledThemeProvider } from 'styled-components';
-import { ThemeProvider as EmotionThemeProvider} from '@emotion/react';
+import * as React from "react";
+import { version } from "../package.json";
+import { ThemeProvider as StyledThemeProvider } from "styled-components";
+import { ThemeProvider as EmotionThemeProvider } from "@emotion/react";
 
-import { themes } from '@storybook/theming';
+import { themes } from "@storybook/theming";
 
-import { DARK_THEME, LIGHT_THEME } from '#src/components/themes';
-import { FontsVTBGroup } from '#src/components/FontsVTBGroup';
-import { useDarkMode } from 'storybook-dark-mode';
-import styled from 'styled-components';
+import { DARK_THEME, LIGHT_THEME } from "#src/components/themes";
+import { FontsVTBGroup } from "#src/components/FontsVTBGroup";
+import { useDarkMode } from "storybook-dark-mode";
+import styled from "styled-components";
 
-import LogoSvg from './Logo.svg';
+import LogoSvg from "./Logo.svg";
 
 const customTheme = {
   brandImage: LogoSvg,
-  brandTitle: `version ${version}`,
+  brandTitle: `version ${version}`
 };
 
 export const parameters = {
@@ -22,15 +22,15 @@ export const parameters = {
     // Override the default dark theme
     dark: { ...themes.dark, ...customTheme },
     // Override the default light theme
-    light: { ...themes.light, ...customTheme },
+    light: { ...themes.light, ...customTheme }
   },
   options: {
     storySort: {
       includeName: true,
-      locales: 'en-US',
-      order: ['Admiral-2.1', ['Atoms', 'Input', 'Form Field']],
-    },
-  },
+      locales: "en-US",
+      order: ["Admiral-2.1", ["Atoms", "Input", "Form Field"]]
+    }
+  }
 };
 
 // create a component that uses the dark mode hook
@@ -43,19 +43,21 @@ function ThemeWrapper(props) {
 
 const StoryContainer = styled.div`
   padding: 3em;
-  background-color: ${(props) => props.theme.color['Neutral/Neutral 00']};
+  background-color: ${(props) => props.theme.color["Neutral/Neutral 00"]};
 `;
 
 export const decorators = [
   (renderStory) => (
-    <ThemeWrapper>
-      <StoryContainer>{renderStory()}</StoryContainer>
-    </ThemeWrapper>
+    <React.StrictMode>
+      <ThemeWrapper>
+        <StoryContainer>{renderStory()}</StoryContainer>
+      </ThemeWrapper>
+    </React.StrictMode>
   ),
   (Story) => (
     <>
       <FontsVTBGroup />
       <Story />
     </>
-  ),
+  )
 ];
