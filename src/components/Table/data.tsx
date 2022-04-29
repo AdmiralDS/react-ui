@@ -1,6 +1,8 @@
 import { T } from '#src/components/T';
 import * as React from 'react';
 import styled from 'styled-components';
+import { OverflowMenu } from '#src/components/OverflowMenu';
+import { DropDownItem } from '#src/components/DropDownItem';
 
 import type { Column } from '../Table';
 
@@ -26,6 +28,7 @@ export type RowData = {
   success?: boolean;
   expanded?: boolean;
   expandedRowRender?: (row: RowData) => React.ReactNode;
+  overflowMenuRender?: (row: RowData, onMenuOpen: () => void, onMenuClose: () => void) => React.ReactNode;
   transfer_type: string;
   transfer_date: string;
   transfer_amount: React.ReactNode;
@@ -652,5 +655,106 @@ export const columnListExtra: Column[] = [
     name: 'rate',
     title: 'Ставка',
     cellAlign: 'right',
+  },
+];
+
+interface MenuProps {
+  row: RowData;
+  onMenuOpen: () => void;
+  onMenuClose: () => void;
+}
+
+const Menu: React.FC<MenuProps> = ({ row, onMenuOpen, onMenuClose }) => {
+  const items: Array<any> = [
+    {
+      id: '1',
+      display: 'Вывести дату сделки в локали ru',
+    },
+    {
+      id: '2',
+      display: 'Вывести дату сделки в локали en-US',
+    },
+    {
+      id: '3',
+      display: 'Вывести дату сделки в локали de-AT',
+    },
+  ];
+
+  const StrToDate = (str: string) => {
+    const res = str.split('.').reverse().join('-');
+    return new Date(res);
+  };
+
+  return (
+    <OverflowMenu
+      onChange={(id) => {
+        const options: any = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        if (id === '1') alert(StrToDate(row['transfer_date']).toLocaleString('ru', options));
+        if (id === '2') alert(StrToDate(row['transfer_date']).toLocaleString('en-US', options));
+        if (id === '3') alert(StrToDate(row['transfer_date']).toLocaleString('de-AT', options));
+      }}
+      onOpen={onMenuOpen}
+      onClose={onMenuClose}
+      aria-label="Overflow Menu component"
+      dimension="m"
+      isVertical
+    >
+      {items.map((item) => {
+        return (
+          <DropDownItem role="option" key={item.id} id={item.id} disabled={item.disabled}>
+            {item.display}
+          </DropDownItem>
+        );
+      })}
+    </OverflowMenu>
+  );
+};
+
+export const rowListMenu: RowData[] = [
+  {
+    id: '0001',
+    transfer_type: 'МНО',
+    transfer_date: new Date('2020-08-06').toLocaleDateString('ru'),
+    transfer_amount: numberFormatter.format(500_000),
+    currency: 'RUB',
+    rate: 2.5,
+    overflowMenuRender: (row: RowData, onMenuOpen: () => void, onMenuClose: () => void) => (
+      <Menu row={row} onMenuOpen={onMenuOpen} onMenuClose={onMenuClose} />
+    ),
+  },
+  {
+    id: '0002',
+    transfer_type: 'МНО',
+    transfer_date: new Date('2021-04-05').toLocaleDateString('ru'),
+    transfer_amount: numberFormatter.format(32_500_000_000),
+    currency: 'RUB',
+    rate: 5.5,
+    overflowMenuRender: (row: RowData, onMenuOpen: () => void, onMenuClose: () => void) => (
+      <Menu row={row} onMenuOpen={onMenuOpen} onMenuClose={onMenuClose} />
+    ),
+  },
+  {
+    id: '0003',
+    transfer_type: 'МНО',
+    transfer_date: new Date('2020-11-06').toLocaleDateString('ru'),
+    transfer_amount: numberFormatter.format(189_000_000),
+    currency: 'RUB',
+    rate: 6,
+  },
+  {
+    id: '0004',
+    transfer_type: 'МНО',
+    transfer_date: new Date('2010-12-09').toLocaleDateString('ru'),
+    transfer_amount: numberFormatter.format(350_000_000),
+    currency: 'RUB',
+    rate: 1,
+  },
+  {
+    id: '0005',
+    transfer_type: 'МНО',
+    transfer_date: new Date('2019-08-06').toLocaleDateString('ru'),
+    transfer_amount: numberFormatter.format(60_000),
+    currency: 'RUB',
+    rate: 4,
   },
 ];

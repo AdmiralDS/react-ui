@@ -21,6 +21,7 @@ import {
   rowListRowState,
   rowListSort,
   columnListExtra,
+  rowListMenu,
 } from '#src/components/Table/data';
 import { ReactComponent as AcceptSolid } from '@admiral-ds/icons/build/category/AcceptSolid.svg';
 
@@ -553,6 +554,29 @@ ExtraText.parameters = {
       Дополнительный текст по умолчанию выводится в одну строку и при нехватке места сокращается с помощью троеточия. Увеличить высоту 
       дополнительного текста можно с помощью параметра headerExtraLineClamp, который определяет максимальное количество строк, 
       которое может занимать дополнительный текст. В примере ниже используется headerExtraLineClamp равный 2.`,
+    },
+  },
+};
+
+export const RowOverflowMenu = Template.bind({});
+RowOverflowMenu.args = {
+  rowList: rowListMenu,
+  columnList,
+};
+RowOverflowMenu.storyName = 'Table. Пример строк с OverflowMenu.';
+RowOverflowMenu.parameters = {
+  docs: {
+    description: {
+      story: `Опционально со строками можно производить набор действий через Overflow Menu, 
+      которое появляется при ховере над строкой. При этом, чтобы не накладываться на возможный текст, 
+      под иконкой меню добавляется квадратная подложка белого цвета. В примере ниже Overflow Menu 
+      задано для первых двух строк.\n\nДля того чтобы задать для строки OverflowMenu необходимо 
+      для строки прописать функцию overflowMenuRender. Входные параметры функции: сама 
+      строка, колбеки onMenuOpen и onMenuClose. Колбеки необходимо вызывать 
+      при открытии/закрытии меню для того, чтобы таблица могла управлять видимостью OverflowMenu.
+      В качестве результата функция должна возвращать компонент OverflowMenu. Размер OverflowMenu 
+      следует задавать согласно правилу:\n\n* Для таблицы с dimension="s" или dimension="m" используется 
+      OverflowMenu c dimension="m"\n\n* Для таблицы с dimension="l" или dimension="xl" используется OverflowMenu c dimension="l"`,
     },
   },
 };

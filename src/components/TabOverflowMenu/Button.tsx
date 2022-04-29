@@ -9,6 +9,11 @@ export const SIZE = {
   m: 32,
 };
 
+const ICON_SIZE = {
+  l: 24,
+  m: 20,
+};
+
 const focusStyle = css`
   border-radius: 50%;
   background-color: ${({ theme }) => theme.color['Opacity/Focus']};
@@ -71,6 +76,24 @@ const ButtonComponent = styled.button<{ dimension: Dimension; menuOpened: boolea
   }
 `;
 
+export const ButtonContent = styled.span<{ dimension: Dimension }>`
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+
+  & > svg {
+    height: ${({ dimension }) => ICON_SIZE[dimension]}px;
+    width: ${({ dimension }) => ICON_SIZE[dimension]}px;
+    margin: auto;
+
+    & *[fill^='#'] {
+      fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
+    }
+  }
+`;
+
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children?: React.ReactNode;
   dimension?: Dimension;
@@ -82,7 +105,9 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ dimension = 'l', type = 'button', ...props }, ref) => {
     return (
       <ButtonComponent ref={ref} dimension={dimension} type={type} {...props}>
-        {dimension === 'l' ? <MoreHorizontalOutline width={24} /> : <MoreHorizontalOutline width={20} />}
+        <ButtonContent dimension={dimension}>
+          {dimension === 'l' ? <MoreHorizontalOutline width={24} /> : <MoreHorizontalOutline width={20} />}
+        </ButtonContent>
       </ButtonComponent>
     );
   },

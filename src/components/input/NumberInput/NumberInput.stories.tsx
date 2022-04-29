@@ -91,7 +91,7 @@ const Template0: ComponentStory<typeof NumberInput> = (args) => {
     <>
       <NumberInput
         {...args}
-        defaultValue="2 ₽"
+        defaultValue="2.00 ₽"
         onChange={(event, fullStr, shortStr) => {
           console.log({ event, fullStr, shortStr });
         }}
@@ -141,7 +141,7 @@ const Template3: ComponentStory<typeof NumberInput> = (args) => {
 };
 
 const Template4: ComponentStory<typeof NumberInput> = () => {
-  const [value1, setValue1] = React.useState<string | undefined>('From 50 $');
+  const [value1, setValue1] = React.useState<string | undefined>('From 50.00 $');
   const [value2, setValue2] = React.useState<string | undefined>('1 минута');
   const [suffix, setSuffix] = React.useState('минута');
 
@@ -180,6 +180,7 @@ const Template4: ComponentStory<typeof NumberInput> = () => {
           setSuffix(declOfNum(Number(shortStr), ['минута', 'минуты', 'минут']));
         }}
         suffix={suffix}
+        precision={0}
       />
     </>
   );
