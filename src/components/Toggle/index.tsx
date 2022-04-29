@@ -62,8 +62,13 @@ const Input = styled.input<{ dimension: Dimension; checked?: boolean }>`
       outline: ${(p) => p.theme.color['Primary/Primary 60 Main']} solid 2px;
     }
 
-    &:hover + div > div {
-      visibility: visible;
+    &:hover {
+      & + div > div {
+        visibility: visible;
+      }
+      &:focus-visible + div > span {
+        outline: none;
+      }
     }
   }
 
