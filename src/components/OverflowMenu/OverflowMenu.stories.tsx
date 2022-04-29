@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { ReactComponent as MinusCircleOutline } from '@admiral-ds/icons/build/service/MinusCircleOutline.svg';
 
 import { OverflowMenu } from '#src/components/OverflowMenu';
-import { DropDownItem } from '#src/components/DropDownItem';
+import { MenuItem } from '#src/components/MenuItem';
 
 const Separator = styled.div`
   height: 20px;
@@ -96,9 +96,9 @@ const Template1: ComponentStory<typeof OverflowMenu> = (args) => {
       >
         {items.map((item) => {
           return (
-            <DropDownItem role="option" key={item.id} id={item.id}>
+            <MenuItem role="option" key={item.id} id={item.id}>
               {item.display}
-            </DropDownItem>
+            </MenuItem>
           );
         })}
       </OverflowMenu>
@@ -145,9 +145,9 @@ const Template2: ComponentStory<typeof OverflowMenu> = (args) => {
       >
         {items.map((item) => {
           return (
-            <DropDownItem role="option" key={item.id} id={item.id} disabled={item.disabled}>
+            <MenuItem role="option" key={item.id} id={item.id} disabled={item.disabled}>
               {item.display}
-            </DropDownItem>
+            </MenuItem>
           );
         })}
       </OverflowMenu>
@@ -163,9 +163,9 @@ const Template2: ComponentStory<typeof OverflowMenu> = (args) => {
       >
         {items.map((item) => {
           return (
-            <DropDownItem role="option" key={item.id} id={item.id} disabled={item.disabled}>
+            <MenuItem role="option" key={item.id} id={item.id} disabled={item.disabled}>
               {item.display}
-            </DropDownItem>
+            </MenuItem>
           );
         })}
       </OverflowMenu>
@@ -213,9 +213,9 @@ const Template3: ComponentStory<typeof OverflowMenu> = (args) => {
         >
           {items.map((item) => {
             return (
-              <DropDownItem role="option" key={item.id} id={item.id} disabled={item.disabled}>
+              <MenuItem role="option" key={item.id} id={item.id} disabled={item.disabled}>
                 {item.display}
-              </DropDownItem>
+              </MenuItem>
             );
           })}
         </OverflowMenu>
@@ -231,9 +231,9 @@ const Template3: ComponentStory<typeof OverflowMenu> = (args) => {
         >
           {items.map((item) => {
             return (
-              <DropDownItem role="option" key={item.id} id={item.id} disabled={item.disabled}>
+              <MenuItem role="option" key={item.id} id={item.id} disabled={item.disabled}>
                 {item.display}
-              </DropDownItem>
+              </MenuItem>
             );
           })}
         </OverflowMenu>
@@ -249,9 +249,9 @@ const Template3: ComponentStory<typeof OverflowMenu> = (args) => {
         >
           {items.map((item) => {
             return (
-              <DropDownItem role="option" key={item.id} id={item.id} disabled={item.disabled}>
+              <MenuItem role="option" key={item.id} id={item.id} disabled={item.disabled}>
                 {item.display}
-              </DropDownItem>
+              </MenuItem>
             );
           })}
         </OverflowMenu>
@@ -272,9 +272,9 @@ const Template3: ComponentStory<typeof OverflowMenu> = (args) => {
         >
           {items.map((item) => {
             return (
-              <DropDownItem role="option" key={item.id} id={item.id}>
+              <MenuItem role="option" key={item.id} id={item.id}>
                 {item.display}
-              </DropDownItem>
+              </MenuItem>
             );
           })}
         </OverflowMenu>
@@ -294,9 +294,9 @@ const Template3: ComponentStory<typeof OverflowMenu> = (args) => {
         >
           {items.map((item) => {
             return (
-              <DropDownItem role="option" key={item.id} id={item.id}>
+              <MenuItem role="option" key={item.id} id={item.id}>
                 {item.display}
-              </DropDownItem>
+              </MenuItem>
             );
           })}
         </OverflowMenu>
@@ -316,9 +316,9 @@ const Template3: ComponentStory<typeof OverflowMenu> = (args) => {
         >
           {items.map((item) => {
             return (
-              <DropDownItem role="option" key={item.id} id={item.id}>
+              <MenuItem role="option" key={item.id} id={item.id}>
                 {item.display}
-              </DropDownItem>
+              </MenuItem>
             );
           })}
         </OverflowMenu>
