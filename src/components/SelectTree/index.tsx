@@ -37,14 +37,14 @@ export const SelectTree: FC<SelectTreeProps> = ({ list, dimension = 'm', expandA
     const checked = e.target.checked;
     const key = (e.target as HTMLElement).getAttribute('data-key');
 
-    const findParent = (root: SelectTreeNodeProps[], node: SelectTreeNodeProps) => {
+    const checkParent = (root: SelectTreeNodeProps[], node: SelectTreeNodeProps) => {
       root.forEach((branch) => {
         if (branch.children) {
           const checked = branch.children.find((child) => child.id === node.id);
           if (checked) {
             branch.checked = true;
           } else {
-            findParent(branch.children, node);
+            checkParent(branch.children, node);
           }
         }
       });
@@ -58,7 +58,7 @@ export const SelectTree: FC<SelectTreeProps> = ({ list, dimension = 'm', expandA
         }
         if (type === 'inputchange') {
           node.checked = checked;
-          findParent(list, node);
+          checkParent(list, node);
           if (node.children) {
             node.children.forEach(checkAllNodes);
           }
