@@ -38,16 +38,22 @@ export const SelectTree: FC<SelectTreeProps> = ({ list, dimension = 'm', expandA
     const key = (e.target as HTMLElement).getAttribute('data-key');
 
     const checkParent = (root: SelectTreeNodeProps[], node: SelectTreeNodeProps) => {
+      let parentChecked = false;
       root.forEach((branch) => {
         if (branch.children) {
           const parentNode = branch.children.find((child) => child.id === node.id);
           if (parentNode) {
             branch.checked = true;
+            parentChecked = true;
           } else {
-            checkParent(branch.children, node);
+            if (checkParent(branch.children, node)) {
+              branch.checked = true;
+              parentChecked = true;
+            }
           }
         }
       });
+      return parentChecked;
     };
 
     const traverseNodes = (node: SelectTreeNodeProps) => {
