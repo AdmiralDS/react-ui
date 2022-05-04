@@ -40,8 +40,8 @@ export const SelectTree: FC<SelectTreeProps> = ({ list, dimension = 'm', expandA
     const checkParent = (root: SelectTreeNodeProps[], node: SelectTreeNodeProps) => {
       root.forEach((branch) => {
         if (branch.children) {
-          const checked = branch.children.find((child) => child.id === node.id);
-          if (checked) {
+          const parentNode = branch.children.find((child) => child.id === node.id);
+          if (parentNode) {
             branch.checked = true;
           } else {
             checkParent(branch.children, node);
