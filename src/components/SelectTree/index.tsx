@@ -56,6 +56,23 @@ export const SelectTree: FC<SelectTreeProps> = ({ list, dimension = 'm', expandA
       return parentChecked;
     };
 
+    const updateParent = (root: SelectTreeNodeProps[]) => {
+      const checkedBranches: boolean[] = [];
+      root.forEach((branch) => {
+        if ('checked' in branch) {
+          let isChecked: boolean;
+          if (branch.children) {
+            isChecked = updateParent(branch.children);
+            branch.checked = isChecked;
+          } else {
+            isChecked = Boolean(branch.checked);
+          }
+          checkedBranches.push(isChecked);
+        }
+      });
+      return checkedBranches.some((check) => check === true);
+    };
+
     const traverseNodes = (node: SelectTreeNodeProps) => {
       if (node.id === key) {
         if (type === 'buttonclick') {
@@ -64,10 +81,13 @@ export const SelectTree: FC<SelectTreeProps> = ({ list, dimension = 'm', expandA
         }
         if (type === 'inputchange') {
           node.checked = checked;
-          checkParent(list, node);
+          if (checked) {
+            checkParent(list, node);
+          }
           if (node.children) {
             node.children.forEach(checkAllNodes);
           }
+          updateParent(list);
         }
         if (type === 'keydown') {
           const code = keyboardKey.getCode(e);
