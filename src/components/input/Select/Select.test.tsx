@@ -143,7 +143,6 @@ describe('SearchSelect', () => {
 
       userEvent.keyboard('{esc}');
       expect(dropDownContainer).not.toBeInTheDocument();
-      expect(inputELem).not.toHaveFocus();
     });
 
     test('should close on click outside of select', () => {
@@ -713,7 +712,7 @@ describe('SearchSelect', () => {
     expect(within(dropDownContainer).queryAllByTestId('option').length).toBe(0);
     expect(within(dropDownContainer).getByText('Нет совпадений')).toBeInTheDocument();
   });
-  test('blur is called ones while select is active', () => {
+  test('blur is called only when click outside component', () => {
     const onBlur = jest.fn();
     render(<SelectComponent onBlur={onBlur} />);
 
@@ -721,6 +720,7 @@ describe('SearchSelect', () => {
     userEvent.keyboard('{enter}');
     userEvent.keyboard('on');
     userEvent.keyboard('{esc}');
+    userEvent.tab();
 
     expect(onBlur).toBeCalledTimes(1);
   });

@@ -431,9 +431,12 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
     };
 
     const onBlur = (evt: React.FocusEvent<HTMLDivElement>) => {
-      setIsFocused(false);
-      onBlurFromProps?.(evt);
-      onCloseSelect();
+      // если фокус переходит не на инпут, содержащийся внутри компонента
+      if (!evt.currentTarget.contains(evt.relatedTarget)) {
+        setIsFocused(false);
+        onBlurFromProps?.(evt);
+        onCloseSelect();
+      }
     };
 
     const onChange = (evt: React.ChangeEvent<HTMLSelectElement>) => {
@@ -443,11 +446,6 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
         );
       }
       props.onChange?.(evt);
-    };
-
-    const onWrapperContentClick = (e: React.MouseEvent<any>) => {
-      stopPropagation(e);
-      handleSearchPanelToggle();
     };
 
     React.useEffect(() => {
@@ -484,7 +482,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
         data-status={status}
         onKeyUp={handleKeyUp}
         onKeyDown={onWrapperKeyDown}
-        onClick={onWrapperContentClick}
+        onClick={handleSearchPanelToggle}
         onMouseDown={preventDefault}
         onBlur={onBlur}
         onFocus={onFocus}
@@ -521,7 +519,6 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
           multiple={multiple}
           fixHeight={shouldFixHeight}
           isEmpty={isEmpty}
-          onClick={onWrapperContentClick}
           onMouseDown={preventDefault}
         >
           {shouldRenderSelectValue && wrappedVisibleValue}
@@ -544,6 +541,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
             data-dimension={dimension || TextInput.defaultProps?.dimension}
             // Запретит перенос фокуса с инпута при клике по всему, что внутри Dropdown
             onMouseDown={preventDefault}
+            onClick={stopPropagation}
             ref={dropDownRef}
           >
             <DropDownSelectProvider
