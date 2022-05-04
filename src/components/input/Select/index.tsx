@@ -396,10 +396,6 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       }
     };
 
-    const onWrapperClick = () => {
-      setIsSearchPanelOpen(true);
-    };
-
     const extendSelectValueToInputValue = () => {
       if (!visibleValueIsString || searchValue || !shouldRenderSelectValue) return;
 
@@ -436,11 +432,8 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
 
     const onBlur = (evt: React.FocusEvent<HTMLDivElement>) => {
       setIsFocused(false);
-
-      if (!evt.currentTarget.contains(evt.relatedTarget)) {
-        onBlurFromProps?.(evt);
-        onCloseSelect();
-      }
+      onBlurFromProps?.(evt);
+      onCloseSelect();
     };
 
     const onChange = (evt: React.ChangeEvent<HTMLSelectElement>) => {
@@ -450,6 +443,11 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
         );
       }
       props.onChange?.(evt);
+    };
+
+    const onWrapperContentClick = (e: React.MouseEvent<any>) => {
+      stopPropagation(e);
+      handleSearchPanelToggle();
     };
 
     React.useEffect(() => {
@@ -463,8 +461,6 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
     React.useEffect(() => {
       if (isSearchPanelOpen) {
         modeIsSelect ? selectRef.current?.focus() : inputRef.current?.focus();
-      } else {
-        modeIsSelect ? selectRef.current?.blur() : inputRef.current?.blur();
       }
     }, [isSearchPanelOpen, modeIsSelect]);
 
@@ -488,7 +484,8 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
         data-status={status}
         onKeyUp={handleKeyUp}
         onKeyDown={onWrapperKeyDown}
-        onClick={onWrapperClick}
+        onClick={onWrapperContentClick}
+        onMouseDown={preventDefault}
         onBlur={onBlur}
         onFocus={onFocus}
       >
@@ -524,6 +521,8 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
           multiple={multiple}
           fixHeight={shouldFixHeight}
           isEmpty={isEmpty}
+          onClick={onWrapperContentClick}
+          onMouseDown={preventDefault}
         >
           {shouldRenderSelectValue && wrappedVisibleValue}
           <Input
