@@ -1,4 +1,4 @@
-import type { Plugin } from 'vite';
+import type { UserConfig } from 'vite';
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -10,8 +10,7 @@ import commonjs from '@rollup/plugin-commonjs';
 // @ts-ignore
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 
-// https://vitejs.dev/config/
-export default defineConfig({
+export const config = {
   resolve: {
     alias: {
       '#src': resolve(__dirname, 'src'),
@@ -45,6 +44,9 @@ export default defineConfig({
         ],
       },
     }),
-    svgr({ dimensions: false, svgProps: { focusable: '{false}' } }) as Plugin,
+    svgr({ dimensions: false, svgProps: { focusable: '{false}' } }),
   ],
-});
+} as UserConfig;
+
+// https://vitejs.dev/config/
+export default defineConfig(config);

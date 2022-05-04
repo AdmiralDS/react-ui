@@ -8,3 +8,4 @@ dist-ssr
 storybook-static
 package-lock.json
 .npmrc
+*.tgz

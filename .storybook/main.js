@@ -1,4 +1,6 @@
-const path = require('path');
+const { mergeConfig } = require('vite');
+const { resolve } = require('path');
+const svgr = require('@svgr/rollup');
 
 // used by JSON stringify to fix circular references
 const getCircularReplacer = () => {
@@ -14,7 +16,13 @@ const getCircularReplacer = () => {
   };
 };
 
+const sourceDir = resolve(__dirname, '../src');
+
 module.exports = {
+  framework: '@storybook/react',
+  core: {
+    builder: '@storybook/builder-vite',
+  },
   stories: ['../src/**/*.stories.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
   features: {
     emotionAlias: false,
@@ -38,7 +46,7 @@ module.exports = {
       options: {
         rule: {
           test: [/\.stories\.tsx?$/],
-          include: [path.resolve(__dirname, '../src')],
+          include: [sourceDir],
         },
         loaderOptions: {
           prettierConfig: { printWidth: 80, singleQuote: false },
@@ -56,24 +64,34 @@ module.exports = {
       propFilter: (prop) => (prop.parent ? !/node_modules/.test(prop.parent.fileName) : true),
     },
   },
-  webpackFinal: async (config, { configType }) => {
-    // `configType` has a value of 'DEVELOPMENT' or 'PRODUCTION'
-    // You can change the configuration based on that.
-    // 'PRODUCTION' is used when building the static version of storybook.
 
-    // For runtime config debugging
-    // console.log(`>>>> ${JSON.stringify(config.module.rules, getCircularReplacer(), 2)}`);
-
-    config.module.rules = [
-      {
-        test: /\.svg$/,
-        use: [{ loader: '@svgr/webpack', options: { dimensions: false, svgProps: { focusable: '{false}' } } }],
+  async viteFinal(storybookConfig) {
+    console.log(`vite config =>>> ${JSON.stringify(storybookConfig, getCircularReplacer(), 2)}`);
+    return mergeConfig(storybookConfig, {
+      resolve: {
+        alias: {
+          '#src': sourceDir,
+        },
       },
-      ...config.module.rules,
-    ];
-
-    config.resolve.alias['#src'] = path.resolve(__dirname, '../src');
-    // Return the altered config
-    return config;
+      plugins: [
+        // react({
+        //   babel: {
+        //     plugins: [
+        //       [
+        //         '@emotion',
+        //         {
+        //           // sourceMap is on by default but source maps are dead code eliminated in production
+        //           sourceMap: true,
+        //           autoLabel: 'always',
+        //           labelFormat: '[local]',
+        //           cssPropOptimization: true,
+        //         },
+        //       ],
+        //     ],
+        //   },
+        // }),
+        svgr({ dimensions: false, svgProps: { focusable: '{false}' } }),
+      ],
+    });
   },
 };
