@@ -36,6 +36,7 @@ export const SelectTree: FC<SelectTreeProps> = ({ list, dimension = 'm', expandA
   const handleChangeList = (type: string, e: any) => {
     const checked = e.target.checked;
     const key = (e.target as HTMLElement).getAttribute('data-key');
+
     const findParent = (root: SelectTreeNodeProps[], node: SelectTreeNodeProps) => {
       root.forEach((branch) => {
         if (branch.children) {
@@ -48,6 +49,7 @@ export const SelectTree: FC<SelectTreeProps> = ({ list, dimension = 'm', expandA
         }
       });
     };
+
     const traverseNodes = (node: SelectTreeNodeProps) => {
       if (node.id === key) {
         if (type === 'buttonclick') {
@@ -74,6 +76,7 @@ export const SelectTree: FC<SelectTreeProps> = ({ list, dimension = 'm', expandA
         node.children.forEach(traverseNodes);
       }
     };
+
     const checkAllNodes = (node: SelectTreeNodeProps) => {
       if ('checked' in node) {
         node.checked = checked;
@@ -82,6 +85,7 @@ export const SelectTree: FC<SelectTreeProps> = ({ list, dimension = 'm', expandA
         }
       }
     };
+
     list.forEach(traverseNodes);
     onChange?.([...list]);
   };
