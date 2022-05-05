@@ -1,13 +1,9 @@
 import type { FC, HTMLAttributes } from 'react';
 import React, { ChangeEvent, KeyboardEvent, MouseEvent } from 'react';
 import styled from 'styled-components';
-import {
-  SelectTreeNode,
-  SelectTreeNodeProps,
-  Dimension,
-  SelectionStatus,
-} from '#src/components/SelectTree/SelectTreeNode';
+import { SelectTreeNode, SelectTreeNodeProps, Dimension } from '#src/components/SelectTree/SelectTreeNode';
 import { keyboardKey } from '#src/components/common/keyboardKey';
+import { updateNodeStatus } from '#src/components/SelectTree/utils';
 
 const TreeItem = styled.ul`
   list-style: none;
@@ -64,35 +60,6 @@ export const SelectTree: FC<SelectTreeProps> = ({ list, dimension = 'm', expandA
       return parentChecked;
     };
 
-    const updateParent = (root: SelectTreeNodeProps[]) => {
-      const defineBranchStatus = (childrenStatus: SelectionStatus[]) => {
-        if (childrenStatus.length === 0) return undefined;
-        if (checkedBranches.every((status) => status === 'unchecked')) return 'unchecked';
-        if (checkedBranches.every((status) => status === 'checked')) return 'checked';
-        return 'indeterminate';
-      };
-      const checkedBranches: SelectionStatus[] = [];
-
-      root.forEach((branch) => {
-        let branchStatus: SelectionStatus | undefined;
-        if (branch.children) {
-          branchStatus = updateParent(branch.children);
-          if ('status' in branch && branchStatus) {
-            branch.status = branchStatus;
-          }
-        } else {
-          if ('status' in branch) {
-            branchStatus = branch.status;
-          }
-        }
-        if (branchStatus) {
-          checkedBranches.push(branchStatus);
-        }
-      });
-
-      return defineBranchStatus(checkedBranches);
-    };
-
     const traverseNodes = (node: SelectTreeNodeProps) => {
       if (node.id === key) {
         if (type === 'buttonclick') {
@@ -107,7 +74,7 @@ export const SelectTree: FC<SelectTreeProps> = ({ list, dimension = 'm', expandA
           if (node.children) {
             node.children.forEach(checkAllNodes);
           }
-          updateParent(list);
+          //updateNodeStatus(list);
         }
         if (type === 'keydown') {
           const code = keyboardKey.getCode(e);
@@ -154,6 +121,8 @@ export const SelectTree: FC<SelectTreeProps> = ({ list, dimension = 'm', expandA
       onChange?.([...list]);
     }
   }, [expandAll]);
+
+  updateNodeStatus(list);
 
   return (
     <TreeItem {...props}>
