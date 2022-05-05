@@ -46,11 +46,11 @@ export const SelectTree: FC<SelectTreeProps> = ({ list, dimension = 'm', expandA
         if (branch.children) {
           const parentNode = branch.children.find((child) => child.id === node.id);
           if (parentNode) {
-            branch.checked = true;
+            branch.status = 'checked';
             parentChecked = true;
           } else {
             if (checkParent(branch.children, node)) {
-              branch.checked = true;
+              branch.status = 'checked';
               parentChecked = true;
             }
           }
@@ -60,20 +60,24 @@ export const SelectTree: FC<SelectTreeProps> = ({ list, dimension = 'm', expandA
     };
 
     const updateParent = (root: SelectTreeNodeProps[]) => {
-      const checkedBranches: boolean[] = [];
+      const checkedBranches: SelectionStatus[] = [];
+
       root.forEach((branch) => {
-        if ('checked' in branch) {
-          let isChecked: boolean;
+        if ('status' in branch) {
+          let branchStatus: SelectionStatus;
           if (branch.children) {
-            isChecked = updateParent(branch.children);
-            branch.checked = isChecked;
+            branchStatus = updateParent(branch.children);
+            branch.status = branchStatus;
           } else {
-            isChecked = Boolean(branch.checked);
+            branchStatus = branch.status || 'unchecked';
           }
-          checkedBranches.push(isChecked);
+          checkedBranches.push(branchStatus);
         }
       });
-      return checkedBranches.some((check) => check === true);
+
+      if (checkedBranches.every((status) => status === 'unchecked')) return 'unchecked';
+      if (checkedBranches.every((status) => status === 'checked')) return 'checked';
+      return 'indeterminate';
     };
 
     const traverseNodes = (node: SelectTreeNodeProps) => {
@@ -83,7 +87,7 @@ export const SelectTree: FC<SelectTreeProps> = ({ list, dimension = 'm', expandA
           node.expanded = !expanded;
         }
         if (type === 'inputchange') {
-          node.checked = checked;
+          node.status = checked ? 'checked' : 'unchecked';
           if (checked) {
             checkParent(list, node);
           }
@@ -107,8 +111,8 @@ export const SelectTree: FC<SelectTreeProps> = ({ list, dimension = 'm', expandA
     };
 
     const checkAllNodes = (node: SelectTreeNodeProps) => {
-      if ('checked' in node) {
-        node.checked = checked;
+      if ('status' in node) {
+        node.status = checked ? 'checked' : 'unchecked';
         if (node.children) {
           node.children.forEach(checkAllNodes);
         }
