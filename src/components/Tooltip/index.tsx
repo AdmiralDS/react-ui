@@ -121,6 +121,20 @@ export const Tooltip: React.FC<ITooltipProps> = ({
     }
   }, [tooltipElementRef.current, visible]);
 
+  /** Вешаю обработчик на mouseenter через addEventListener,
+   * React SyntheticEvent onMouseEnter отрабатывает некорректно в случае,
+   * если мышь была наведена на задизейбленный элемент, а потом была передвинута на AnchorWrapper
+   * https://github.com/facebook/react/issues/19419#:~:text=mouseenter%20does%20not%20fire%20because,element%20of%20the%20opposing%20event.
+   */
+  React.useEffect(() => {
+    anchorElementRef.current?.addEventListener('mouseenter', handleMouseEnter);
+    anchorElementRef.current?.addEventListener('mouseleave', handleMouseLeave);
+    return () => {
+      anchorElementRef.current?.removeEventListener('mouseenter', handleMouseEnter);
+      anchorElementRef.current?.removeEventListener('mouseleave', handleMouseLeave);
+    };
+  }, [anchorElementRef.current]);
+
   const handleMouseEnter = () => {
     showTooltipTimer = window.setTimeout(
       () => {
@@ -138,8 +152,6 @@ export const Tooltip: React.FC<ITooltipProps> = ({
 
   return (
     <AnchorWrapper
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
       onFocus={handleMouseEnter}
       onBlur={handleMouseLeave}
       ref={anchorElementRef}
