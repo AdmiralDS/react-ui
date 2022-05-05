@@ -46,11 +46,15 @@ export const SelectTree: FC<SelectTreeProps> = ({ list, dimension = 'm', expandA
         if (branch.children) {
           const parentNode = branch.children.find((child) => child.id === node.id);
           if (parentNode) {
-            branch.status = 'checked';
+            if ('status' in branch) {
+              branch.status = 'checked';
+            }
             parentChecked = true;
           } else {
             if (checkParent(branch.children, node)) {
-              branch.status = 'checked';
+              if ('status' in branch) {
+                branch.status = 'checked';
+              }
               parentChecked = true;
             }
           }
@@ -69,19 +73,19 @@ export const SelectTree: FC<SelectTreeProps> = ({ list, dimension = 'm', expandA
       const checkedBranches: SelectionStatus[] = [];
 
       root.forEach((branch) => {
-        if ('status' in branch) {
-          let branchStatus: SelectionStatus | undefined;
-          if (branch.children) {
-            branchStatus = updateParent(branch.children);
-            if (branchStatus) {
-              branch.status = branchStatus;
-            }
-          } else {
+        let branchStatus: SelectionStatus | undefined;
+        if (branch.children) {
+          branchStatus = updateParent(branch.children);
+          if ('status' in branch && branchStatus) {
+            branch.status = branchStatus;
+          }
+        } else {
+          if ('status' in branch) {
             branchStatus = branch.status;
           }
-          if (branchStatus) {
-            checkedBranches.push(branchStatus);
-          }
+        }
+        if (branchStatus) {
+          checkedBranches.push(branchStatus);
         }
       });
 
@@ -121,9 +125,9 @@ export const SelectTree: FC<SelectTreeProps> = ({ list, dimension = 'm', expandA
     const checkAllNodes = (node: SelectTreeNodeProps) => {
       if ('status' in node) {
         node.status = checked ? 'checked' : 'unchecked';
-        if (node.children) {
-          node.children.forEach(checkAllNodes);
-        }
+      }
+      if (node.children) {
+        node.children.forEach(checkAllNodes);
       }
     };
 
