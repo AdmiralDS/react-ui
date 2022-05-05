@@ -165,7 +165,7 @@ export const Avatar = ({
       case 's':
         return '32px';
       case 'm':
-        return '55px';
+        return '40px';
       case 'l':
         return '48px';
       case 'xl':
