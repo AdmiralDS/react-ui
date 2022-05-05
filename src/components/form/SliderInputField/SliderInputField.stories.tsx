@@ -82,7 +82,7 @@ const Template: ComponentStory<typeof SliderInputField> = (props) => {
 export const InputFieldInput = Template.bind({});
 
 InputFieldInput.args = {
-  defaultValue: '2000',
+  defaultValue: '2000 ₽',
   label: 'Введите сумму',
 };
 

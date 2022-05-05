@@ -82,7 +82,7 @@ const Template1: ComponentStory<typeof SliderInput> = (args) => {
     <>
       <SliderInput
         {...args}
-        defaultValue="15"
+        defaultValue="15 ₽"
         onChange={(full, short) => console.log({ full, short })}
         tickMarks={[5, 10, 15]}
       />
@@ -95,12 +95,12 @@ const Template2: ComponentStory<typeof SliderInput> = (args) => {
     <>
       <SliderInput
         {...args}
-        defaultValue="5"
+        defaultValue="5.000 $"
         onChange={(full, short) => console.log({ full, short })}
         suffix="$"
         thousand=","
         precision={3}
-        placeholder="0 $"
+        placeholder="0.000 $"
       />
     </>
   );

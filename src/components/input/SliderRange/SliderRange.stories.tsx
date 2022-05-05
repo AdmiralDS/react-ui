@@ -58,7 +58,7 @@ const Template1: ComponentStory<typeof SliderRange> = ({ defaultValue, onChange,
   const handleChange = (value: any) => console.log(value);
   return (
     <>
-      <SliderRange defaultValue={defaultValue || ['2', '6']} onChange={onChange || handleChange} {...args} />
+      <SliderRange defaultValue={defaultValue || ['От 2 ₽', 'До 6 ₽']} onChange={onChange || handleChange} {...args} />
     </>
   );
 };
