@@ -12,12 +12,14 @@ const PADDING_RIGHT = 16;
 const ICON_SIZE_M = 24;
 const ICON_SIZE_S = 20;
 
-type Dimension = 'm' | 's';
+export type Dimension = 'm' | 's';
+export type SelectionStatus = 'checked' | 'indeterminate' | 'unchecked';
 
 export interface SelectTreeNodeProps extends HTMLAttributes<HTMLDivElement> {
   label?: React.ReactNode;
   icon?: React.ReactNode;
   checked?: boolean;
+  status?: SelectionStatus;
   expanded?: boolean;
   children?: SelectTreeNodeProps[];
 }
