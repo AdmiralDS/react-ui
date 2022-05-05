@@ -60,24 +60,32 @@ export const SelectTree: FC<SelectTreeProps> = ({ list, dimension = 'm', expandA
     };
 
     const updateParent = (root: SelectTreeNodeProps[]) => {
+      const defineBranchStatus = (childrenStatus: SelectionStatus[]) => {
+        if (childrenStatus.length === 0) return undefined;
+        if (checkedBranches.every((status) => status === 'unchecked')) return 'unchecked';
+        if (checkedBranches.every((status) => status === 'checked')) return 'checked';
+        return 'indeterminate';
+      };
       const checkedBranches: SelectionStatus[] = [];
 
       root.forEach((branch) => {
         if ('status' in branch) {
-          let branchStatus: SelectionStatus;
+          let branchStatus: SelectionStatus | undefined;
           if (branch.children) {
             branchStatus = updateParent(branch.children);
-            branch.status = branchStatus;
+            if (branchStatus) {
+              branch.status = branchStatus;
+            }
           } else {
-            branchStatus = branch.status || 'unchecked';
+            branchStatus = branch.status;
           }
-          checkedBranches.push(branchStatus);
+          if (branchStatus) {
+            checkedBranches.push(branchStatus);
+          }
         }
       });
 
-      if (checkedBranches.every((status) => status === 'unchecked')) return 'unchecked';
-      if (checkedBranches.every((status) => status === 'checked')) return 'checked';
-      return 'indeterminate';
+      return defineBranchStatus(checkedBranches);
     };
 
     const traverseNodes = (node: SelectTreeNodeProps) => {
