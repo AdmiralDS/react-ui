@@ -3,7 +3,7 @@ import React, { ChangeEvent, KeyboardEvent, MouseEvent } from 'react';
 import styled from 'styled-components';
 import { SelectTreeNode, SelectTreeNodeProps, Dimension } from '#src/components/SelectTree/SelectTreeNode';
 import { keyboardKey } from '#src/components/common/keyboardKey';
-import { updateNodeStatus } from '#src/components/SelectTree/utils';
+import { updateNodeStatus, checkParent } from '#src/components/SelectTree/utils';
 
 const TreeItem = styled.ul`
   list-style: none;
@@ -35,30 +35,6 @@ export const SelectTree: FC<SelectTreeProps> = ({ list, dimension = 'm', expandA
   const handleChangeList = (type: string, e: any) => {
     const checked = e.target.checked;
     const key = (e.target as HTMLElement).getAttribute('data-key');
-
-    const checkParent = (root: SelectTreeNodeProps[], node: SelectTreeNodeProps) => {
-      let parentChecked = false;
-
-      root.forEach((branch) => {
-        if (branch.children) {
-          const searchedNode = branch.children.find((child) => child.id === node.id);
-          if (searchedNode) {
-            if ('status' in branch) {
-              branch.status = 'checked';
-            }
-            parentChecked = true;
-          } else {
-            if (checkParent(branch.children, node)) {
-              if ('status' in branch) {
-                branch.status = 'checked';
-              }
-              parentChecked = true;
-            }
-          }
-        }
-      });
-      return parentChecked;
-    };
 
     const traverseNodes = (node: SelectTreeNodeProps) => {
       if (node.id === key) {
