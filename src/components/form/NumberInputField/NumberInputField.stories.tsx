@@ -103,8 +103,9 @@ const Template: ComponentStory<typeof NumberInputField> = (props) => {
 export const InputFieldInput = Template.bind({});
 
 InputFieldInput.args = {
-  defaultValue: '2000',
+  defaultValue: '2000 ₽',
   label: 'Введите сумму',
+  precision: 0,
 };
 
 InputFieldInput.storyName = 'NumberInputField example';
