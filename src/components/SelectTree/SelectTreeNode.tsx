@@ -120,10 +120,6 @@ export const SelectTreeNode: FC<SelectTreeBranchProps> = ({
   onKeyDown,
   expandAll,
 }) => {
-  const checkStatus = node.children ? node.children.filter((child) => 'checked' in child) : [];
-  const every = checkStatus.every((child) => child.checked === true);
-  const some = checkStatus.some((child) => child.checked === true);
-
   return (
     <>
       <Wrapper isOpened={node.expanded} dimension={dimension} level={level} onKeyDown={onKeyDown}>
@@ -132,13 +128,13 @@ export const SelectTreeNode: FC<SelectTreeBranchProps> = ({
             <Chevron $isOpened={node.expanded} dimension={dimension} />
           </ChevronWrapper>
         )}
-        {'checked' in node && (
+        {'status' in node && (
           <StyledCheckbox
             id={node.id}
             data-key={node.id}
             dimension={dimension}
-            indeterminate={!every && every !== some}
-            checked={node.checked}
+            indeterminate={node.status === 'indeterminate'}
+            checked={node.status !== 'unchecked'}
             onChange={onChange}
           />
         )}
