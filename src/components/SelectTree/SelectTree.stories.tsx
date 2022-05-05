@@ -3,10 +3,19 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import styled from 'styled-components';
 import { SelectTree } from '#src/components/SelectTree';
-import { SelectTreeNodeProps } from '#src/components/SelectTree/SelectTreeNode';
+import { SelectionStatus, SelectTreeNodeProps } from '#src/components/SelectTree/SelectTreeNode';
 import { ReactComponent as FolderSolid } from '@admiral-ds/icons/build/documents/FolderSolid.svg';
 import RNBLogoLight from './RNBLogoLight.svg';
 import { T } from '#src/components/T';
+
+interface TreeNodeProps {
+  id: string;
+  label?: JSX.Element | string;
+  icon?: JSX.Element;
+  status?: SelectionStatus;
+  expanded?: boolean;
+  children?: TreeNodeProps[];
+}
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -52,7 +61,7 @@ export default {
   },
 } as ComponentMeta<typeof SelectTree>;
 
-const selectTreeListM = [
+const selectTreeListM: TreeNodeProps[] = [
   {
     label: (
       <T as="div" style={{ marginTop: -2 }} font="Subtitle/Subtitle 2">
@@ -122,7 +131,7 @@ const selectTreeListM = [
   { label: 'Текст заголовка, первый уровень компонента, размер M 40 4', id: '4' },
 ];
 
-const selectTreeListS = [
+const selectTreeListS: TreeNodeProps[] = [
   {
     label: 'Текст заголовка, первый уровень компонента, размер S 32 1',
     id: '1',
@@ -182,7 +191,7 @@ const selectTreeListS = [
   { label: 'Текст заголовка, первый уровень компонента, размер S 32 2', id: '2', status: 'unchecked' },
 ];
 
-const treeViewList = [
+const treeViewList: TreeNodeProps[] = [
   {
     label: 'Текст заголовка, первый уровень компонента, размер M 40 1',
     id: '1',
