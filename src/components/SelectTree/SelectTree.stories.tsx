@@ -117,7 +117,7 @@ const selectTreeListM: TreeNodeProps[] = [
                 status: 'unchecked',
                 children: [
                   { label: 'Текст  строки с чекбоксом, пятый уровень компонента 1', id: '4-1', status: 'unchecked' },
-                  { label: 'Текст  строки с чекбоксом, пятый уровень компонента 2', id: '4-2', status: 'checked' },
+                  { label: 'Текст  строки с чекбоксом, пятый уровень компонента 2', id: '4-2', status: 'unchecked' },
                 ],
               },
             ],
