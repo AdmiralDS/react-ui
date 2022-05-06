@@ -35,8 +35,8 @@ export const checkParent = (root: SelectTreeNodeProps[], node: SelectTreeNodePro
 
   root.forEach((branch) => {
     if (branch.children) {
-      const searchedNode = branch.children.find((child) => child.id === node.id);
-      if (searchedNode) {
+      const foundNode = branch.children.find((child) => child.id === node.id);
+      if (foundNode) {
         if ('status' in branch) {
           branch.status = 'checked';
         }
