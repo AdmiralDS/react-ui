@@ -31,7 +31,7 @@ export const updateNodeStatus = (root: SelectTreeNodeProps[]) => {
 };
 
 export const checkParent = (root: SelectTreeNodeProps[], node: SelectTreeNodeProps) => {
-  let parentChecked = false;
+  let isParentChecked = false;
 
   for (const branch of root) {
     if (branch.children) {
@@ -40,19 +40,19 @@ export const checkParent = (root: SelectTreeNodeProps[], node: SelectTreeNodePro
         if ('status' in branch) {
           branch.status = 'checked';
         }
-        parentChecked = true;
+        isParentChecked = true;
         break;
       } else {
         if (checkParent(branch.children, node)) {
           if ('status' in branch) {
             branch.status = 'checked';
           }
-          parentChecked = true;
+          isParentChecked = true;
           break;
         }
       }
     }
   }
 
-  return parentChecked;
+  return isParentChecked;
 };
