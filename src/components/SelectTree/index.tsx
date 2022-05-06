@@ -50,7 +50,6 @@ export const SelectTree: FC<SelectTreeProps> = ({ list, dimension = 'm', expandA
           if (node.children) {
             node.children.forEach(checkAllNodes);
           }
-          //updateNodeStatus(list);
         }
         if (type === 'keydown') {
           const code = keyboardKey.getCode(e);
