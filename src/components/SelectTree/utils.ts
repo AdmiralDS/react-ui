@@ -17,10 +17,12 @@ export const updateNodeStatus = (root: SelectTreeNodeProps[]) => {
         branchStatus = updateNodeStatus(branch.children);
         if ('status' in branch && branchStatus) {
           branch.status = branchStatus;
+          branch.checked = branchStatus === 'checked' ? true : branchStatus === 'indeterminate' ? true : false;
         }
       } else {
         if ('status' in branch) {
           branchStatus = branch.status;
+          branch.checked = branchStatus === 'checked' ? true : branchStatus === 'indeterminate' ? true : false;
         }
       }
       return branchStatus;
@@ -37,12 +39,14 @@ export const checkParent = (root: SelectTreeNodeProps[], node: SelectTreeNodePro
       if (foundNode) {
         if ('status' in branch) {
           branch.status = 'checked';
+          branch.checked = true;
         }
         return true;
       } else {
         if (checkParent(branch.children, node)) {
           if ('status' in branch) {
             branch.status = 'checked';
+            branch.checked = true;
           }
           return true;
         }
@@ -51,4 +55,15 @@ export const checkParent = (root: SelectTreeNodeProps[], node: SelectTreeNodePro
   }
 
   return false;
+};
+
+export const setNodeStatus = (list: SelectTreeNodeProps[]) => {
+  list.forEach((node) => {
+    if ('checked' in node) {
+      node.status = node.checked ? 'checked' : 'unchecked';
+    }
+    if (node.children) {
+      setNodeStatus(node.children);
+    }
+  });
 };

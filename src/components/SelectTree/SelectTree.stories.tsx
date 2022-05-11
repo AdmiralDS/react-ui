@@ -3,19 +3,10 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import styled from 'styled-components';
 import { SelectTree } from '#src/components/SelectTree';
-import { SelectionStatus, SelectTreeNodeProps } from '#src/components/SelectTree/SelectTreeNode';
+import { SelectTreeNodeProps } from '#src/components/SelectTree/SelectTreeNode';
 import { ReactComponent as FolderSolid } from '@admiral-ds/icons/build/documents/FolderSolid.svg';
 import RNBLogoLight from './RNBLogoLight.svg';
 import { T } from '#src/components/T';
-
-interface TreeNodeProps {
-  id: string;
-  label?: JSX.Element | string;
-  icon?: JSX.Element;
-  status?: SelectionStatus;
-  expanded?: boolean;
-  children?: TreeNodeProps[];
-}
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -61,7 +52,7 @@ export default {
   },
 } as ComponentMeta<typeof SelectTree>;
 
-const selectTreeListM: TreeNodeProps[] = [
+const selectTreeListM = [
   {
     label: (
       <T as="div" style={{ marginTop: -2 }} font="Subtitle/Subtitle 2">
@@ -69,29 +60,29 @@ const selectTreeListM: TreeNodeProps[] = [
       </T>
     ),
     id: '1',
-    status: 'unchecked',
+    checked: false,
     children: [
       {
         label: 'Текст раскрывающейся строки, второй уровень компонента 1',
         id: '1-1',
-        status: 'unchecked',
+        checked: false,
         icon: <FolderSolid />,
       },
       {
         label: 'Текст раскрывающейся строки, второй уровень компонента 2',
         id: '1-2',
-        status: 'unchecked',
+        checked: false,
         icon: <FolderSolid />,
       },
       {
         label: 'Текст раскрывающейся строки, второй уровень компонента 3',
         id: '1-3',
-        status: 'unchecked',
+        checked: false,
         children: [
           {
             label: <img src={RNBLogoLight} alt={''} />,
             id: '2-1',
-            status: 'unchecked',
+            checked: false,
           },
           { label: 'Текст  строки, третий уровень компонента 2', id: '2-2' },
           { label: 'Текст  строки, третий уровень компонента 3', id: '2-3' },
@@ -99,25 +90,25 @@ const selectTreeListM: TreeNodeProps[] = [
           {
             label: 'Текст  строки с чекбоксом, третий уровень компонента 5',
             id: '2-5',
-            status: 'unchecked',
+            checked: false,
             children: [
-              { label: 'Текст  строки с чекбоксом, четвертый уровень компонента 1', id: '3-1', status: 'unchecked' },
-              { label: 'Текст  строки с чекбоксом, четвертый уровень компонента 2', id: '3-2', status: 'unchecked' },
+              { label: 'Текст  строки с чекбоксом, четвертый уровень компонента 1', id: '3-1', checked: false },
+              { label: 'Текст  строки с чекбоксом, четвертый уровень компонента 2', id: '3-2', checked: false },
               {
                 label:
                   'Текст  строки с чекбоксом, четвертый уровень компонента. Компонент используется для отображения дерева вложенных списков с возможностью выбора отдельных пунктов по логике\n' +
                   '    чекбоксов. Ширина строки настравивается вручную, по умолчанию это 768px. В настройках присутствует до 6ти уровней\n' +
                   '    вложенности.',
                 id: '3-3',
-                status: 'unchecked',
+                checked: false,
               },
               {
                 label: 'Текст  строки с чекбоксом, четвертый уровень компонента 4',
                 id: '3-4',
-                status: 'unchecked',
+                checked: false,
                 children: [
-                  { label: 'Текст  строки с чекбоксом, пятый уровень компонента 1', id: '4-1', status: 'unchecked' },
-                  { label: 'Текст  строки с чекбоксом, пятый уровень компонента 2', id: '4-2', status: 'unchecked' },
+                  { label: 'Текст  строки с чекбоксом, пятый уровень компонента 1', id: '4-1', checked: false },
+                  { label: 'Текст  строки с чекбоксом, пятый уровень компонента 2', id: '4-2', checked: false },
                 ],
               },
             ],
@@ -126,44 +117,44 @@ const selectTreeListM: TreeNodeProps[] = [
       },
     ],
   },
-  { label: 'Текст заголовка, первый уровень компонента, размер M 40 2', id: '2', status: 'unchecked' },
+  { label: 'Текст заголовка, первый уровень компонента, размер M 40 2', id: '2', checked: false },
   { label: 'Текст заголовка, первый уровень компонента, размер M 40 3', id: '3' },
   { label: 'Текст заголовка, первый уровень компонента, размер M 40 4', id: '4' },
 ];
 
-const selectTreeListS: TreeNodeProps[] = [
+const selectTreeListS = [
   {
     label: 'Текст заголовка, первый уровень компонента, размер S 32 1',
     id: '1',
-    status: 'unchecked',
+    checked: false,
     children: [
       {
         label: 'Текст раскрывающейся строки, второй уровень компонента 1',
         id: '1-1',
-        status: 'unchecked',
+        checked: false,
         icon: <FolderSolid />,
       },
       {
         label: 'Текст раскрывающейся строки, второй уровень компонента 2',
         id: '1-2',
-        status: 'unchecked',
+        checked: false,
         icon: <FolderSolid />,
       },
       {
         label: 'Текст раскрывающейся строки, второй уровень компонента 3',
         id: '1-3',
-        status: 'unchecked',
+        checked: false,
         children: [
           {
             label: <img src={RNBLogoLight} alt={''} />,
             id: '2-1',
-            status: 'unchecked',
+            checked: false,
           },
           { label: 'Текст  строки, третий уровень компонента 2', id: '2-2' },
           {
             label: 'Текст  строки с чекбоксом, третий уровень компонента 3',
             id: '2-3',
-            status: 'unchecked',
+            checked: false,
             children: [
               {
                 label:
@@ -171,15 +162,15 @@ const selectTreeListS: TreeNodeProps[] = [
                   '    чекбоксов. Ширина строки настравивается вручную, по умолчанию это 768px. В настройках присутствует до 6ти уровней\n' +
                   '    вложенности.',
                 id: '3-1',
-                status: 'unchecked',
+                checked: false,
               },
               {
                 label: 'Текст  строки с чекбоксом, четвертый уровень компонента 2',
                 id: '3-2',
-                status: 'unchecked',
+                checked: false,
                 children: [
-                  { label: 'Текст  строки с чекбоксом, пятый уровень компонента 1', id: '4-1', status: 'unchecked' },
-                  { label: 'Текст  строки с чекбоксом, пятый уровень компонента 2', id: '4-2', status: 'unchecked' },
+                  { label: 'Текст  строки с чекбоксом, пятый уровень компонента 1', id: '4-1', checked: false },
+                  { label: 'Текст  строки с чекбоксом, пятый уровень компонента 2', id: '4-2', checked: false },
                 ],
               },
             ],
@@ -188,10 +179,10 @@ const selectTreeListS: TreeNodeProps[] = [
       },
     ],
   },
-  { label: 'Текст заголовка, первый уровень компонента, размер S 32 2', id: '2', status: 'unchecked' },
+  { label: 'Текст заголовка, первый уровень компонента, размер S 32 2', id: '2', checked: false },
 ];
 
-const treeViewList: TreeNodeProps[] = [
+const treeViewList = [
   {
     label: 'Текст заголовка, первый уровень компонента, размер M 40 1',
     id: '1',

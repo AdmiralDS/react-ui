@@ -1,9 +1,9 @@
-import type { FC, HTMLAttributes } from 'react';
+import { FC, HTMLAttributes, useState } from 'react';
 import React, { ChangeEvent, KeyboardEvent, MouseEvent } from 'react';
 import styled from 'styled-components';
 import { SelectTreeNode, SelectTreeNodeProps, Dimension } from '#src/components/SelectTree/SelectTreeNode';
 import { keyboardKey } from '#src/components/common/keyboardKey';
-import { updateNodeStatus, checkParent } from '#src/components/SelectTree/utils';
+import { updateNodeStatus, checkParent, setNodeStatus } from '#src/components/SelectTree/utils';
 
 const TreeItem = styled.ul`
   list-style: none;
@@ -23,6 +23,8 @@ export interface SelectTreeProps extends Omit<HTMLAttributes<HTMLUListElement>, 
 }
 
 export const SelectTree: FC<SelectTreeProps> = ({ list, dimension = 'm', expandAll = false, onChange, ...props }) => {
+  const [handleGuard, setHandleGuard] = useState(false);
+
   const handleExpandAll = (node: SelectTreeNodeProps) => {
     if (node.expanded === undefined && node.children) {
       node.expanded = expandAll;
@@ -68,6 +70,7 @@ export const SelectTree: FC<SelectTreeProps> = ({ list, dimension = 'm', expandA
     const checkAllNodes = (node: SelectTreeNodeProps) => {
       if ('status' in node) {
         node.status = checked ? 'checked' : 'unchecked';
+        node.checked = checked;
       }
       if (node.children) {
         node.children.forEach(checkAllNodes);
@@ -97,6 +100,10 @@ export const SelectTree: FC<SelectTreeProps> = ({ list, dimension = 'm', expandA
     }
   }, [expandAll]);
 
+  if (!handleGuard) {
+    setNodeStatus(list);
+    setHandleGuard(true);
+  }
   updateNodeStatus(list);
 
   return (

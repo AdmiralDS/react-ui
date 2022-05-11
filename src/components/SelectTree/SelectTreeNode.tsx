@@ -18,6 +18,7 @@ export type SelectionStatus = 'checked' | 'indeterminate' | 'unchecked';
 export interface SelectTreeNodeProps extends HTMLAttributes<HTMLDivElement> {
   label?: React.ReactNode;
   icon?: React.ReactNode;
+  checked?: boolean;
   status?: SelectionStatus;
   expanded?: boolean;
   children?: SelectTreeNodeProps[];
