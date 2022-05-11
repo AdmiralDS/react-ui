@@ -3,7 +3,119 @@
 exports[`SelectTree should render component 1`] = `
 Object {
   "asFragment": [Function],
-  "baseElement": .c3 {
+  "baseElement": .c10 {
+  pointer-events: none;
+}
+
+.c5 {
+  position: relative;
+  box-sizing: border-box;
+  overflow: visible;
+  width: 20px;
+  height: 20px;
+}
+
+fieldset[data-dimension='s'] .c4 {
+  width: 16px;
+}
+
+fieldset[data-dimension='s'] .c4 {
+  height: 16px;
+}
+
+.c9 {
+  pointer-events: none;
+  display: inline-block;
+  position: absolute;
+  margin: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 4px;
+  outline: 0;
+  -webkit-transition: background 0.1s ease-in;
+  transition: background 0.1s ease-in;
+  line-height: initial;
+  background-color: #FFFFFF;
+  border: 1px solid #74777F;
+}
+
+.c9 *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c7 {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  box-sizing: border-box;
+  cursor: pointer;
+  border-radius: 1px;
+  margin: 0;
+  padding: 0;
+}
+
+.c7::-ms-check {
+  display: none;
+}
+
+.c7:disabled {
+  pointer-events: none;
+}
+
+.c7:checked + .c8 {
+  background-color: #0062FF;
+  border: none;
+}
+
+.c7:not(:checked) + .c8 > * {
+  display: none;
+}
+
+.c7:not(:disabled):hover::after,
+.c7:not(:disabled):focus::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  border-radius: 50%;
+  width: calc(100% + 16px);
+  height: calc(100% + 16px);
+  background-color: #0000000D;
+}
+
+.c7:disabled + .c8 {
+  border: 1px solid #B1B5BB;
+  background-color: #E5E7EB;
+}
+
+.c7:checked:disabled + .c8 {
+  background-color: #A7C7FF;
+  border: none;
+}
+
+.c7:checked:disabled + .c8 *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c7:focus-visible {
+  outline-offset: 2px;
+  outline: #0062FF solid 2px;
+}
+
+.c3 {
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
   width: 100%;
@@ -62,7 +174,15 @@ Object {
   padding: 8px 16px 8px 0px;
 }
 
-.c4 {
+.c6 {
+  margin: 2px;
+  margin-right: 10px;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+}
+
+.c11 {
   padding-top: 2px;
 }
 
@@ -89,7 +209,26 @@ Object {
             />
           </div>
           <div
-            class="c4"
+            class="c4 c5 c6"
+          >
+            <input
+              class="c7"
+              data-key="1"
+              id="1"
+              type="checkbox"
+            />
+            <div
+              class="c8 c9"
+            >
+              <div
+                aria-hidden="true"
+                class="c10"
+                focusable="false"
+              />
+            </div>
+          </div>
+          <div
+            class="c11"
           >
             Текст заголовка, первый уровень компонента, размер M 40 1
           </div>
@@ -98,7 +237,26 @@ Object {
           class="c1"
         >
           <div
-            class="c4"
+            class="c4 c5 c6"
+          >
+            <input
+              class="c7"
+              data-key="2"
+              id="2"
+              type="checkbox"
+            />
+            <div
+              class="c8 c9"
+            >
+              <div
+                aria-hidden="true"
+                class="c10"
+                focusable="false"
+              />
+            </div>
+          </div>
+          <div
+            class="c11"
           >
             Текст заголовка, первый уровень компонента, размер M 40 2
           </div>
@@ -107,7 +265,7 @@ Object {
           class="c1"
         >
           <div
-            class="c4"
+            class="c11"
           >
             Текст заголовка, первый уровень компонента, размер M 40 3
           </div>
@@ -116,7 +274,7 @@ Object {
           class="c1"
         >
           <div
-            class="c4"
+            class="c11"
           >
             Текст заголовка, первый уровень компонента, размер M 40 4
           </div>
@@ -124,7 +282,119 @@ Object {
       </ul>
     </div>
   </body>,
-  "container": .c3 {
+  "container": .c10 {
+  pointer-events: none;
+}
+
+.c5 {
+  position: relative;
+  box-sizing: border-box;
+  overflow: visible;
+  width: 20px;
+  height: 20px;
+}
+
+fieldset[data-dimension='s'] .c4 {
+  width: 16px;
+}
+
+fieldset[data-dimension='s'] .c4 {
+  height: 16px;
+}
+
+.c9 {
+  pointer-events: none;
+  display: inline-block;
+  position: absolute;
+  margin: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 4px;
+  outline: 0;
+  -webkit-transition: background 0.1s ease-in;
+  transition: background 0.1s ease-in;
+  line-height: initial;
+  background-color: #FFFFFF;
+  border: 1px solid #74777F;
+}
+
+.c9 *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c7 {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  box-sizing: border-box;
+  cursor: pointer;
+  border-radius: 1px;
+  margin: 0;
+  padding: 0;
+}
+
+.c7::-ms-check {
+  display: none;
+}
+
+.c7:disabled {
+  pointer-events: none;
+}
+
+.c7:checked + .c8 {
+  background-color: #0062FF;
+  border: none;
+}
+
+.c7:not(:checked) + .c8 > * {
+  display: none;
+}
+
+.c7:not(:disabled):hover::after,
+.c7:not(:disabled):focus::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  border-radius: 50%;
+  width: calc(100% + 16px);
+  height: calc(100% + 16px);
+  background-color: #0000000D;
+}
+
+.c7:disabled + .c8 {
+  border: 1px solid #B1B5BB;
+  background-color: #E5E7EB;
+}
+
+.c7:checked:disabled + .c8 {
+  background-color: #A7C7FF;
+  border: none;
+}
+
+.c7:checked:disabled + .c8 *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c7:focus-visible {
+  outline-offset: 2px;
+  outline: #0062FF solid 2px;
+}
+
+.c3 {
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
   width: 100%;
@@ -183,7 +453,15 @@ Object {
   padding: 8px 16px 8px 0px;
 }
 
-.c4 {
+.c6 {
+  margin: 2px;
+  margin-right: 10px;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+}
+
+.c11 {
   padding-top: 2px;
 }
 
@@ -209,7 +487,26 @@ Object {
           />
         </div>
         <div
-          class="c4"
+          class="c4 c5 c6"
+        >
+          <input
+            class="c7"
+            data-key="1"
+            id="1"
+            type="checkbox"
+          />
+          <div
+            class="c8 c9"
+          >
+            <div
+              aria-hidden="true"
+              class="c10"
+              focusable="false"
+            />
+          </div>
+        </div>
+        <div
+          class="c11"
         >
           Текст заголовка, первый уровень компонента, размер M 40 1
         </div>
@@ -218,7 +515,26 @@ Object {
         class="c1"
       >
         <div
-          class="c4"
+          class="c4 c5 c6"
+        >
+          <input
+            class="c7"
+            data-key="2"
+            id="2"
+            type="checkbox"
+          />
+          <div
+            class="c8 c9"
+          >
+            <div
+              aria-hidden="true"
+              class="c10"
+              focusable="false"
+            />
+          </div>
+        </div>
+        <div
+          class="c11"
         >
           Текст заголовка, первый уровень компонента, размер M 40 2
         </div>
@@ -227,7 +543,7 @@ Object {
         class="c1"
       >
         <div
-          class="c4"
+          class="c11"
         >
           Текст заголовка, первый уровень компонента, размер M 40 3
         </div>
@@ -236,7 +552,7 @@ Object {
         class="c1"
       >
         <div
-          class="c4"
+          class="c11"
         >
           Текст заголовка, первый уровень компонента, размер M 40 4
         </div>
@@ -300,7 +616,119 @@ Object {
 exports[`SelectTree should render component with expanded lists 1`] = `
 Object {
   "asFragment": [Function],
-  "baseElement": .c3 {
+  "baseElement": .c10 {
+  pointer-events: none;
+}
+
+.c5 {
+  position: relative;
+  box-sizing: border-box;
+  overflow: visible;
+  width: 20px;
+  height: 20px;
+}
+
+fieldset[data-dimension='s'] .c4 {
+  width: 16px;
+}
+
+fieldset[data-dimension='s'] .c4 {
+  height: 16px;
+}
+
+.c9 {
+  pointer-events: none;
+  display: inline-block;
+  position: absolute;
+  margin: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 4px;
+  outline: 0;
+  -webkit-transition: background 0.1s ease-in;
+  transition: background 0.1s ease-in;
+  line-height: initial;
+  background-color: #FFFFFF;
+  border: 1px solid #74777F;
+}
+
+.c9 *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c7 {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  box-sizing: border-box;
+  cursor: pointer;
+  border-radius: 1px;
+  margin: 0;
+  padding: 0;
+}
+
+.c7::-ms-check {
+  display: none;
+}
+
+.c7:disabled {
+  pointer-events: none;
+}
+
+.c7:checked + .c8 {
+  background-color: #0062FF;
+  border: none;
+}
+
+.c7:not(:checked) + .c8 > * {
+  display: none;
+}
+
+.c7:not(:disabled):hover::after,
+.c7:not(:disabled):focus::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  border-radius: 50%;
+  width: calc(100% + 16px);
+  height: calc(100% + 16px);
+  background-color: #0000000D;
+}
+
+.c7:disabled + .c8 {
+  border: 1px solid #B1B5BB;
+  background-color: #E5E7EB;
+}
+
+.c7:checked:disabled + .c8 {
+  background-color: #A7C7FF;
+  border: none;
+}
+
+.c7:checked:disabled + .c8 *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c7:focus-visible {
+  outline-offset: 2px;
+  outline: #0062FF solid 2px;
+}
+
+.c3 {
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
   width: 100%;
@@ -359,7 +787,15 @@ Object {
   padding: 8px 16px 8px 0px;
 }
 
-.c4 {
+.c6 {
+  margin: 2px;
+  margin-right: 10px;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+}
+
+.c11 {
   padding-top: 2px;
 }
 
@@ -386,7 +822,26 @@ Object {
             />
           </div>
           <div
-            class="c4"
+            class="c4 c5 c6"
+          >
+            <input
+              class="c7"
+              data-key="1"
+              id="1"
+              type="checkbox"
+            />
+            <div
+              class="c8 c9"
+            >
+              <div
+                aria-hidden="true"
+                class="c10"
+                focusable="false"
+              />
+            </div>
+          </div>
+          <div
+            class="c11"
           >
             Текст заголовка, первый уровень компонента, размер M 40 1
           </div>
@@ -395,7 +850,26 @@ Object {
           class="c1"
         >
           <div
-            class="c4"
+            class="c4 c5 c6"
+          >
+            <input
+              class="c7"
+              data-key="2"
+              id="2"
+              type="checkbox"
+            />
+            <div
+              class="c8 c9"
+            >
+              <div
+                aria-hidden="true"
+                class="c10"
+                focusable="false"
+              />
+            </div>
+          </div>
+          <div
+            class="c11"
           >
             Текст заголовка, первый уровень компонента, размер M 40 2
           </div>
@@ -404,7 +878,7 @@ Object {
           class="c1"
         >
           <div
-            class="c4"
+            class="c11"
           >
             Текст заголовка, первый уровень компонента, размер M 40 3
           </div>
@@ -413,7 +887,7 @@ Object {
           class="c1"
         >
           <div
-            class="c4"
+            class="c11"
           >
             Текст заголовка, первый уровень компонента, размер M 40 4
           </div>
@@ -421,7 +895,119 @@ Object {
       </ul>
     </div>
   </body>,
-  "container": .c3 {
+  "container": .c10 {
+  pointer-events: none;
+}
+
+.c5 {
+  position: relative;
+  box-sizing: border-box;
+  overflow: visible;
+  width: 20px;
+  height: 20px;
+}
+
+fieldset[data-dimension='s'] .c4 {
+  width: 16px;
+}
+
+fieldset[data-dimension='s'] .c4 {
+  height: 16px;
+}
+
+.c9 {
+  pointer-events: none;
+  display: inline-block;
+  position: absolute;
+  margin: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 4px;
+  outline: 0;
+  -webkit-transition: background 0.1s ease-in;
+  transition: background 0.1s ease-in;
+  line-height: initial;
+  background-color: #FFFFFF;
+  border: 1px solid #74777F;
+}
+
+.c9 *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c7 {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  box-sizing: border-box;
+  cursor: pointer;
+  border-radius: 1px;
+  margin: 0;
+  padding: 0;
+}
+
+.c7::-ms-check {
+  display: none;
+}
+
+.c7:disabled {
+  pointer-events: none;
+}
+
+.c7:checked + .c8 {
+  background-color: #0062FF;
+  border: none;
+}
+
+.c7:not(:checked) + .c8 > * {
+  display: none;
+}
+
+.c7:not(:disabled):hover::after,
+.c7:not(:disabled):focus::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  border-radius: 50%;
+  width: calc(100% + 16px);
+  height: calc(100% + 16px);
+  background-color: #0000000D;
+}
+
+.c7:disabled + .c8 {
+  border: 1px solid #B1B5BB;
+  background-color: #E5E7EB;
+}
+
+.c7:checked:disabled + .c8 {
+  background-color: #A7C7FF;
+  border: none;
+}
+
+.c7:checked:disabled + .c8 *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c7:focus-visible {
+  outline-offset: 2px;
+  outline: #0062FF solid 2px;
+}
+
+.c3 {
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
   width: 100%;
@@ -480,7 +1066,15 @@ Object {
   padding: 8px 16px 8px 0px;
 }
 
-.c4 {
+.c6 {
+  margin: 2px;
+  margin-right: 10px;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+}
+
+.c11 {
   padding-top: 2px;
 }
 
@@ -506,7 +1100,26 @@ Object {
           />
         </div>
         <div
-          class="c4"
+          class="c4 c5 c6"
+        >
+          <input
+            class="c7"
+            data-key="1"
+            id="1"
+            type="checkbox"
+          />
+          <div
+            class="c8 c9"
+          >
+            <div
+              aria-hidden="true"
+              class="c10"
+              focusable="false"
+            />
+          </div>
+        </div>
+        <div
+          class="c11"
         >
           Текст заголовка, первый уровень компонента, размер M 40 1
         </div>
@@ -515,7 +1128,26 @@ Object {
         class="c1"
       >
         <div
-          class="c4"
+          class="c4 c5 c6"
+        >
+          <input
+            class="c7"
+            data-key="2"
+            id="2"
+            type="checkbox"
+          />
+          <div
+            class="c8 c9"
+          >
+            <div
+              aria-hidden="true"
+              class="c10"
+              focusable="false"
+            />
+          </div>
+        </div>
+        <div
+          class="c11"
         >
           Текст заголовка, первый уровень компонента, размер M 40 2
         </div>
@@ -524,7 +1156,7 @@ Object {
         class="c1"
       >
         <div
-          class="c4"
+          class="c11"
         >
           Текст заголовка, первый уровень компонента, размер M 40 3
         </div>
@@ -533,7 +1165,7 @@ Object {
         class="c1"
       >
         <div
-          class="c4"
+          class="c11"
         >
           Текст заголовка, первый уровень компонента, размер M 40 4
         </div>
@@ -597,7 +1229,119 @@ Object {
 exports[`SelectTree should render small components 1`] = `
 Object {
   "asFragment": [Function],
-  "baseElement": .c3 {
+  "baseElement": .c10 {
+  pointer-events: none;
+}
+
+.c5 {
+  position: relative;
+  box-sizing: border-box;
+  overflow: visible;
+  width: 16px;
+  height: 16px;
+}
+
+fieldset[data-dimension='s'] .c4 {
+  width: 16px;
+}
+
+fieldset[data-dimension='s'] .c4 {
+  height: 16px;
+}
+
+.c9 {
+  pointer-events: none;
+  display: inline-block;
+  position: absolute;
+  margin: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 4px;
+  outline: 0;
+  -webkit-transition: background 0.1s ease-in;
+  transition: background 0.1s ease-in;
+  line-height: initial;
+  background-color: #FFFFFF;
+  border: 1px solid #74777F;
+}
+
+.c9 *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c7 {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  box-sizing: border-box;
+  cursor: pointer;
+  border-radius: 1px;
+  margin: 0;
+  padding: 0;
+}
+
+.c7::-ms-check {
+  display: none;
+}
+
+.c7:disabled {
+  pointer-events: none;
+}
+
+.c7:checked + .c8 {
+  background-color: #0062FF;
+  border: none;
+}
+
+.c7:not(:checked) + .c8 > * {
+  display: none;
+}
+
+.c7:not(:disabled):hover::after,
+.c7:not(:disabled):focus::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  border-radius: 50%;
+  width: calc(100% + 16px);
+  height: calc(100% + 16px);
+  background-color: #0000000D;
+}
+
+.c7:disabled + .c8 {
+  border: 1px solid #B1B5BB;
+  background-color: #E5E7EB;
+}
+
+.c7:checked:disabled + .c8 {
+  background-color: #A7C7FF;
+  border: none;
+}
+
+.c7:checked:disabled + .c8 *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c7:focus-visible {
+  outline-offset: 2px;
+  outline: #0062FF solid 2px;
+}
+
+.c3 {
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
   width: 100%;
@@ -656,7 +1400,15 @@ Object {
   padding: 6px 16px 6px 0px;
 }
 
-.c4 {
+.c6 {
+  margin: 2px;
+  margin-right: 10px;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+}
+
+.c11 {
   padding-top: 2px;
 }
 
@@ -683,7 +1435,26 @@ Object {
             />
           </div>
           <div
-            class="c4"
+            class="c4 c5 c6"
+          >
+            <input
+              class="c7"
+              data-key="1"
+              id="1"
+              type="checkbox"
+            />
+            <div
+              class="c8 c9"
+            >
+              <div
+                aria-hidden="true"
+                class="c10"
+                focusable="false"
+              />
+            </div>
+          </div>
+          <div
+            class="c11"
           >
             Текст заголовка, первый уровень компонента, размер M 40 1
           </div>
@@ -692,7 +1463,26 @@ Object {
           class="c1"
         >
           <div
-            class="c4"
+            class="c4 c5 c6"
+          >
+            <input
+              class="c7"
+              data-key="2"
+              id="2"
+              type="checkbox"
+            />
+            <div
+              class="c8 c9"
+            >
+              <div
+                aria-hidden="true"
+                class="c10"
+                focusable="false"
+              />
+            </div>
+          </div>
+          <div
+            class="c11"
           >
             Текст заголовка, первый уровень компонента, размер M 40 2
           </div>
@@ -701,7 +1491,7 @@ Object {
           class="c1"
         >
           <div
-            class="c4"
+            class="c11"
           >
             Текст заголовка, первый уровень компонента, размер M 40 3
           </div>
@@ -710,7 +1500,7 @@ Object {
           class="c1"
         >
           <div
-            class="c4"
+            class="c11"
           >
             Текст заголовка, первый уровень компонента, размер M 40 4
           </div>
@@ -718,7 +1508,119 @@ Object {
       </ul>
     </div>
   </body>,
-  "container": .c3 {
+  "container": .c10 {
+  pointer-events: none;
+}
+
+.c5 {
+  position: relative;
+  box-sizing: border-box;
+  overflow: visible;
+  width: 16px;
+  height: 16px;
+}
+
+fieldset[data-dimension='s'] .c4 {
+  width: 16px;
+}
+
+fieldset[data-dimension='s'] .c4 {
+  height: 16px;
+}
+
+.c9 {
+  pointer-events: none;
+  display: inline-block;
+  position: absolute;
+  margin: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 4px;
+  outline: 0;
+  -webkit-transition: background 0.1s ease-in;
+  transition: background 0.1s ease-in;
+  line-height: initial;
+  background-color: #FFFFFF;
+  border: 1px solid #74777F;
+}
+
+.c9 *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c7 {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  box-sizing: border-box;
+  cursor: pointer;
+  border-radius: 1px;
+  margin: 0;
+  padding: 0;
+}
+
+.c7::-ms-check {
+  display: none;
+}
+
+.c7:disabled {
+  pointer-events: none;
+}
+
+.c7:checked + .c8 {
+  background-color: #0062FF;
+  border: none;
+}
+
+.c7:not(:checked) + .c8 > * {
+  display: none;
+}
+
+.c7:not(:disabled):hover::after,
+.c7:not(:disabled):focus::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  border-radius: 50%;
+  width: calc(100% + 16px);
+  height: calc(100% + 16px);
+  background-color: #0000000D;
+}
+
+.c7:disabled + .c8 {
+  border: 1px solid #B1B5BB;
+  background-color: #E5E7EB;
+}
+
+.c7:checked:disabled + .c8 {
+  background-color: #A7C7FF;
+  border: none;
+}
+
+.c7:checked:disabled + .c8 *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c7:focus-visible {
+  outline-offset: 2px;
+  outline: #0062FF solid 2px;
+}
+
+.c3 {
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
   width: 100%;
@@ -777,7 +1679,15 @@ Object {
   padding: 6px 16px 6px 0px;
 }
 
-.c4 {
+.c6 {
+  margin: 2px;
+  margin-right: 10px;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+}
+
+.c11 {
   padding-top: 2px;
 }
 
@@ -803,7 +1713,26 @@ Object {
           />
         </div>
         <div
-          class="c4"
+          class="c4 c5 c6"
+        >
+          <input
+            class="c7"
+            data-key="1"
+            id="1"
+            type="checkbox"
+          />
+          <div
+            class="c8 c9"
+          >
+            <div
+              aria-hidden="true"
+              class="c10"
+              focusable="false"
+            />
+          </div>
+        </div>
+        <div
+          class="c11"
         >
           Текст заголовка, первый уровень компонента, размер M 40 1
         </div>
@@ -812,7 +1741,26 @@ Object {
         class="c1"
       >
         <div
-          class="c4"
+          class="c4 c5 c6"
+        >
+          <input
+            class="c7"
+            data-key="2"
+            id="2"
+            type="checkbox"
+          />
+          <div
+            class="c8 c9"
+          >
+            <div
+              aria-hidden="true"
+              class="c10"
+              focusable="false"
+            />
+          </div>
+        </div>
+        <div
+          class="c11"
         >
           Текст заголовка, первый уровень компонента, размер M 40 2
         </div>
@@ -821,7 +1769,7 @@ Object {
         class="c1"
       >
         <div
-          class="c4"
+          class="c11"
         >
           Текст заголовка, первый уровень компонента, размер M 40 3
         </div>
@@ -830,7 +1778,7 @@ Object {
         class="c1"
       >
         <div
-          class="c4"
+          class="c11"
         >
           Текст заголовка, первый уровень компонента, размер M 40 4
         </div>
