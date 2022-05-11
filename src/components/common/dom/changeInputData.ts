@@ -22,7 +22,10 @@ export function changeInputData(input: HTMLInputElement | HTMLTextAreaElement, t
     nativeInputValueSetter?.call(input, value);
     //input.value = value;
 
-    input.setSelectionRange(selectionStart || 0, selectionEnd || 0);
+    // Safari focus the element containing selection when modifying the seletion programmatically.
+    if (typeof selectionStart === 'number' && typeof selectionEnd === 'number') {
+      input.setSelectionRange(selectionStart, selectionEnd);
+    }
 
     // IE fix: event dispatch
     let event;
