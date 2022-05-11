@@ -1,4 +1,4 @@
-import { FC, HTMLAttributes, useState } from 'react';
+import type { FC, HTMLAttributes } from 'react';
 import React, { ChangeEvent, KeyboardEvent, MouseEvent } from 'react';
 import styled from 'styled-components';
 import { SelectTreeNode, SelectTreeNodeProps, Dimension } from '#src/components/SelectTree/SelectTreeNode';
@@ -23,7 +23,7 @@ export interface SelectTreeProps extends Omit<HTMLAttributes<HTMLUListElement>, 
 }
 
 export const SelectTree: FC<SelectTreeProps> = ({ list, dimension = 'm', expandAll = false, onChange, ...props }) => {
-  const [handleGuard, setHandleGuard] = useState(false);
+  const [handleGuard, setHandleGuard] = React.useState(false);
 
   const handleExpandAll = (node: SelectTreeNodeProps) => {
     if (node.expanded === undefined && node.children) {
