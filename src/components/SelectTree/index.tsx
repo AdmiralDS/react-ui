@@ -1,10 +1,9 @@
 import type { FC, HTMLAttributes } from 'react';
 import React, { ChangeEvent, KeyboardEvent, MouseEvent } from 'react';
 import styled from 'styled-components';
-import { SelectTreeNode, SelectTreeNodeProps } from '#src/components/SelectTree/SelectTreeNode';
+import { SelectTreeNode, SelectTreeNodeProps, Dimension } from '#src/components/SelectTree/SelectTreeNode';
 import { keyboardKey } from '#src/components/common/keyboardKey';
-
-type Dimension = 'm' | 's';
+import { updateNodeStatus, checkParent, setNodeStatus } from '#src/components/SelectTree/utils';
 
 const TreeItem = styled.ul`
   list-style: none;
@@ -24,6 +23,8 @@ export interface SelectTreeProps extends Omit<HTMLAttributes<HTMLUListElement>, 
 }
 
 export const SelectTree: FC<SelectTreeProps> = ({ list, dimension = 'm', expandAll = false, onChange, ...props }) => {
+  const [handleGuard, setHandleGuard] = React.useState(false);
+
   const handleExpandAll = (node: SelectTreeNodeProps) => {
     if (node.expanded === undefined && node.children) {
       node.expanded = expandAll;
@@ -36,18 +37,7 @@ export const SelectTree: FC<SelectTreeProps> = ({ list, dimension = 'm', expandA
   const handleChangeList = (type: string, e: any) => {
     const checked = e.target.checked;
     const key = (e.target as HTMLElement).getAttribute('data-key');
-    const findParent = (root: SelectTreeNodeProps[], node: SelectTreeNodeProps) => {
-      root.forEach((branch) => {
-        if (branch.children) {
-          const checked = branch.children.find((child) => child.id === node.id);
-          if (checked) {
-            branch.checked = true;
-          } else {
-            findParent(branch.children, node);
-          }
-        }
-      });
-    };
+
     const traverseNodes = (node: SelectTreeNodeProps) => {
       if (node.id === key) {
         if (type === 'buttonclick') {
@@ -55,8 +45,10 @@ export const SelectTree: FC<SelectTreeProps> = ({ list, dimension = 'm', expandA
           node.expanded = !expanded;
         }
         if (type === 'inputchange') {
-          node.checked = checked;
-          findParent(list, node);
+          node.status = checked ? 'checked' : 'unchecked';
+          if (checked) {
+            checkParent(list, node);
+          }
           if (node.children) {
             node.children.forEach(checkAllNodes);
           }
@@ -74,14 +66,17 @@ export const SelectTree: FC<SelectTreeProps> = ({ list, dimension = 'm', expandA
         node.children.forEach(traverseNodes);
       }
     };
+
     const checkAllNodes = (node: SelectTreeNodeProps) => {
-      if ('checked' in node) {
+      if ('status' in node) {
+        node.status = checked ? 'checked' : 'unchecked';
         node.checked = checked;
-        if (node.children) {
-          node.children.forEach(checkAllNodes);
-        }
+      }
+      if (node.children) {
+        node.children.forEach(checkAllNodes);
       }
     };
+
     list.forEach(traverseNodes);
     onChange?.([...list]);
   };
@@ -104,6 +99,12 @@ export const SelectTree: FC<SelectTreeProps> = ({ list, dimension = 'm', expandA
       onChange?.([...list]);
     }
   }, [expandAll]);
+
+  if (!handleGuard) {
+    setNodeStatus(list);
+    setHandleGuard(true);
+  }
+  updateNodeStatus(list);
 
   return (
     <TreeItem {...props}>
