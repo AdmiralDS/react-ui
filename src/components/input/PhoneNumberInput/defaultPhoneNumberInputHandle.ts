@@ -14,9 +14,10 @@ export function clojureHandler(mask: CountryIso3Code | null): CustomInputHandler
   const countryCode = mask?.replace(/\D/g, '');
 
   function needFormat(value: string): boolean {
-    if (!value || !countryCode) return false;
-
     const hasPlus = value.charAt(0) === '+';
+
+    if (!countryCode) return !hasPlus;
+
     const hasCountyWs = value.length > countryCode.length + 1 ? value.charAt(countryCode.length + 1) === ' ' : true;
     const hasCityWs = value.length > countryCode.length + 5 ? value.charAt(countryCode.length + 5) === ' ' : true;
     const hasMiddleWs = value.length > countryCode.length + 9 ? value.charAt(countryCode.length + 9) === ' ' : true;
@@ -31,13 +32,11 @@ export function clojureHandler(mask: CountryIso3Code | null): CustomInputHandler
 
   return (inputData: InputData | null): InputData => {
     let selectionStart = inputData?.selectionStart || 1;
+    let selectionEnd = inputData?.selectionEnd || 1;
 
     if (!needFormat(inputData?.value || '')) {
       return inputData || InitialInputData;
     }
-
-    const hasNoPlus = inputData?.value?.charAt(0) !== '+';
-    if (hasNoPlus) selectionStart += 1;
 
     const clearData = (inputData?.value || '').replace(/\D/g, '');
     const value = formatValue(countryCode, clearData);
@@ -52,6 +51,7 @@ export function clojureHandler(mask: CountryIso3Code | null): CustomInputHandler
 
     if (positionWithSpaceBefore && !oldNextChar) {
       selectionStart += 1;
+      selectionEnd += 1;
     }
 
     const noChanges = inputData?.value === value;
@@ -61,7 +61,7 @@ export function clojureHandler(mask: CountryIso3Code | null): CustomInputHandler
           ...inputData,
           value,
           selectionStart,
-          selectionEnd: selectionStart,
+          selectionEnd,
         }
       : inputData;
   };
