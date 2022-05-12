@@ -68,3 +68,5 @@ const Item = styled.div<{
     }
   }
 `;
+
+export type MenuItemType = typeof MenuItem;

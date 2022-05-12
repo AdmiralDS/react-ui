@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import { typography } from '#src/components/Typography';
 import { ReactComponent as CardSolid } from '@admiral-ds/icons/build/finance/CardSolid.svg';
 import { withDesign } from 'storybook-addon-designs';
+import { keyboardKey } from '#src/components/common/keyboardKey';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -109,12 +110,53 @@ const TemplateWithCards: ComponentStory<typeof Menu> = (args) => {
     },
   ];
 
+  const selectableItems = category.reduce((acc: any, item: any) => {
+    return acc.concat(item.content);
+  }, []);
+
   const [selected, setSelected] = useState<string | number>('');
+  const [active, setActive] = useState<string | number>('');
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    const activeOption = e.currentTarget.id;
+    const code = keyboardKey.getCode(e);
+    switch (code) {
+      case keyboardKey[' ']:
+      case keyboardKey.Enter: {
+        if (selected !== activeOption) {
+          setSelected(activeOption);
+        }
+        e.preventDefault();
+        break;
+      }
+      case keyboardKey.ArrowDown: {
+        const currentIndex = selectableItems.findIndex((item: any) => item.id === active);
+        const nextIndex = currentIndex < selectableItems.length - 1 ? currentIndex + 1 : 0;
+        setActive(selectableItems[nextIndex].id);
+        e.preventDefault();
+        break;
+      }
+      case keyboardKey.ArrowUp: {
+        const currentIndex = selectableItems.findIndex((item: any) => item.id === active);
+        const prevIndex = currentIndex > 0 ? currentIndex - 1 : selectableItems.length - 1;
+        setActive(selectableItems[prevIndex].id);
+        e.preventDefault();
+        break;
+      }
+    }
+  };
 
   return (
     <>
       <div style={{ width: 'fit-content' }}>
-        <Menu {...args} selected={selected.toString()} onSelectItem={setSelected}>
+        <Menu
+          {...args}
+          selected={selected.toString()}
+          onSelectItem={setSelected}
+          active={active}
+          onActivateItem={setActive}
+          onKeyDown={handleKeyDown}
+        >
           {category.map((item, index) => {
             return (
               <Fragment key={index}>
@@ -123,14 +165,12 @@ const TemplateWithCards: ComponentStory<typeof Menu> = (args) => {
                 </MenuItem>
                 {item.content.map((subCategory) => {
                   return (
-                    <MenuItem dimension={args.dimension} tabIndex={0} key={subCategory.id} id={subCategory.id}>
-                      <div style={{ width: '100%' }}>
-                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                          {subCategory.label} <CardSolid width={24} height={24} />
-                        </div>
-                        <StyledAdditionalText>Дополнительный текст</StyledAdditionalText>
+                    <div style={{ width: '100%' }} key={subCategory.id} id={subCategory.id}>
+                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                        {subCategory.label} <CardSolid width={24} height={24} />
                       </div>
-                    </MenuItem>
+                      <StyledAdditionalText>Дополнительный текст</StyledAdditionalText>
+                    </div>
                   );
                 })}
               </Fragment>
@@ -180,7 +220,7 @@ const SimpleTemplate: ComponentStory<typeof Menu> = (args) => {
   return (
     <>
       <div style={{ width: 'fit-content' }}>
-        <Menu {...args}>
+        <Menu {...args} maxLines={4} selected={'6'} active={'2'}>
           {items.map((item) => {
             return (
               <MenuItem dimension={args.dimension} id={item.id} key={item.id}>
