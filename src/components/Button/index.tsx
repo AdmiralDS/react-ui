@@ -92,18 +92,6 @@ const ButtonContent = styled.span<{ dimension?: Dimension; loading?: boolean }>`
   }
 `;
 
-const spinnerDimension = (dimension: Dimension) => {
-  return dimension === 's' ? 's' : 'm';
-};
-
-const spinnerInverse = (appearance: Appearance) => {
-  /* return appearance === ('primary' || 'danger' || 'success' || 'white'); */
-  if (appearance === 'primary' || appearance === 'danger' || appearance === 'success' || appearance === 'white') {
-    return true;
-  }
-  return false;
-};
-
 const StyledSpinner = styled(Spinner)<{ dimension?: Dimension }>`
   position: absolute;
   left: 50%;
@@ -113,9 +101,12 @@ const StyledSpinner = styled(Spinner)<{ dimension?: Dimension }>`
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ appearance = 'primary', dimension = 'xl', type = 'button', loading = false, children, ...props }, ref) => {
+    const spinnerDimension = dimension === 's' ? 's' : 'm';
+    const spinnerInverse = appearance !== 'secondary' && appearance !== 'ghost';
+
     return (
       <StyledButton ref={ref} appearance={appearance} dimension={dimension} type={type} loading={loading} {...props}>
-        {loading && <StyledSpinner dimension={spinnerDimension(dimension)} inverse={spinnerInverse(appearance)} />}
+        {loading && <StyledSpinner dimension={spinnerDimension} inverse={spinnerInverse} />}
         <ButtonContent loading={loading}>
           {React.Children.toArray(children).map((child) =>
             typeof child === 'string' ? <span key={uid()}>{child}</span> : child,
