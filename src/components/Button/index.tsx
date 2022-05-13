@@ -84,13 +84,17 @@ const ButtonContent = styled.span<{ dimension?: Dimension; loading?: boolean }>`
       height: 20px;
     }
   }
+
+  span {
+    visibility: ${(p) => (p.loading ? 'hidden' : 'visible')};
+  }
 `;
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ appearance = 'primary', dimension = 'xl', type = 'button', loading = false, children, ...props }, ref) => {
     return (
-        <ButtonContent>
       <StyledButton ref={ref} appearance={appearance} dimension={dimension} type={type} loading={loading} {...props}>
+        <ButtonContent loading={loading}>
           {React.Children.toArray(children).map((child) =>
             typeof child === 'string' ? <span key={uid()}>{child}</span> : child,
           )}
