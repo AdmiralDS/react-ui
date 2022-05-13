@@ -2,6 +2,7 @@
 
 exports[`Button should render component 1`] = `
 .c0 {
+  position: relative;
   box-sizing: border-box;
   display: inline-block;
   border: none;
@@ -340,6 +341,10 @@ exports[`Button should render component 1`] = `
 [data-dimension='s'] .c1 > svg {
   width: 20px;
   height: 20px;
+}
+
+.c2 span {
+  visibility: visible;
 }
 
 <div>
@@ -358,6 +363,7 @@ exports[`Button should render component 1`] = `
 
 exports[`Button should render component with text 1`] = `
 .c0 {
+  position: relative;
   box-sizing: border-box;
   display: inline-block;
   border: none;
@@ -696,6 +702,10 @@ exports[`Button should render component with text 1`] = `
 [data-dimension='s'] .c1 > svg {
   width: 20px;
   height: 20px;
+}
+
+.c2 span {
+  visibility: visible;
 }
 
 <div>
