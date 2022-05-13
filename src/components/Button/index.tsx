@@ -44,7 +44,7 @@ const StyledButton = styled.button.attrs<ButtonProps, { 'data-dimension'?: Dimen
 
   ${dimensionMixin}
   &:hover {
-    cursor: pointer;
+    cursor: ${(p) => (p.loading ? 'not-allowed' : 'pointer')};
   }
 
   &:disabled {
