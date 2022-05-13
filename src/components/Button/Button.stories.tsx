@@ -169,21 +169,24 @@ const ButtonWithIconDemo: ComponentStory<typeof Button> = () => (
   </>
 );
 
+const handleClick = () => {
+  console.log('clicked');
+};
+
 const ButtonLoaderDemo: ComponentStory<typeof Button> = () => (
   <>
-    {/* <T font="Body/Body 1 Long" as="div">
-        Button with loader
-      </T> */}
     <Wrapper>
       <WrapperVertical>
         <T font="Body/Body 1 Long" as="div">
           Size XL
         </T>
-        <Button dimension="xl">Button 56</Button>
-        <Button dimension="xl" appearance="primary" loading>
+        <Button dimension="xl" onClick={handleClick}>
           Button 56
         </Button>
-        <Button dimension="xl" appearance="secondary" loading>
+        <Button dimension="xl" appearance="primary" loading onClick={handleClick}>
+          Button 56
+        </Button>
+        <Button dimension="xl" appearance="secondary" loading onClick={handleClick}>
           Button 56
         </Button>
         <Button dimension="xl" appearance="ghost" loading>
