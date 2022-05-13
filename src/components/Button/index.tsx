@@ -43,13 +43,12 @@ const StyledButton = styled.button.attrs<ButtonProps, { 'data-dimension'?: Dimen
   ${appearanceMixin};
 
   ${dimensionMixin}
+
   &:hover {
-    cursor: ${(p) => (p.loading ? 'not-allowed' : 'pointer')};
+    cursor: pointer;
   }
 
-  &:disabled {
-    cursor: not-allowed;
-  }
+  pointer-events: ${(p) => (p.loading || p.disabled ? 'none' : 'all')};
 `;
 
 const ButtonContent = styled.span<{ dimension?: Dimension; loading?: boolean }>`
