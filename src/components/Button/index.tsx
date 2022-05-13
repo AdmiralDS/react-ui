@@ -3,6 +3,7 @@ import type { Appearance, Dimension } from './types';
 import type { ButtonHTMLAttributes } from 'react';
 import * as React from 'react';
 import styled from 'styled-components';
+import { Spinner } from '#src/components/Spinner';
 import { appearanceMixin } from './appearanceMixin';
 import { dimensionMixin } from './dimensionMixin';
 
@@ -31,6 +32,7 @@ const StyledButton = styled.button.attrs<ButtonProps, { 'data-dimension'?: Dimen
       .join(' '),
   }),
 )<ButtonProps>`
+  position: relative;
   box-sizing: border-box;
   display: inline-block;
   border: none;
@@ -90,10 +92,18 @@ const ButtonContent = styled.span<{ dimension?: Dimension; loading?: boolean }>`
   }
 `;
 
+const StyledSpinner = styled(Spinner)<{ dimension?: Dimension }>`
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+`;
+
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ appearance = 'primary', dimension = 'xl', type = 'button', loading = false, children, ...props }, ref) => {
     return (
       <StyledButton ref={ref} appearance={appearance} dimension={dimension} type={type} loading={loading} {...props}>
+        {loading && <StyledSpinner dimension={dimension === 's' ? 's' : 'm'} />}
         <ButtonContent loading={loading}>
           {React.Children.toArray(children).map((child) =>
             typeof child === 'string' ? <span key={uid()}>{child}</span> : child,
