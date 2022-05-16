@@ -24,6 +24,56 @@ Object {
   fill: #B1B5BB;
 }
 
+.c2 {
+  vertical-align: top;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  overflow: hidden;
+  -webkit-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 24px;
+}
+
+.c2 > * {
+  display: inline-block;
+  -webkit-flex: 0 1 auto;
+  -ms-flex: 0 1 auto;
+  flex: 0 1 auto;
+  white-space: nowrap;
+}
+
+.c2 > *:not(:first-child) {
+  margin-left: 8px;
+}
+
+.c2 > svg {
+  width: 24px;
+  height: 24px;
+}
+
+[data-dimension='s'] .c1 {
+  height: 20px;
+}
+
+[data-dimension='s'] .c1 > svg {
+  width: 20px;
+  height: 20px;
+}
+
 .c0 {
   position: relative;
   box-sizing: border-box;
@@ -43,6 +93,7 @@ Object {
   font-size: 16px;
   line-height: 24px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  pointer-events: all;
 }
 
 .c0[data-appearance~='primary'] {
@@ -308,66 +359,12 @@ Object {
   font-feature-settings: 'tnum' on,'lnum' on;
 }
 
+.c0 .c1 {
+  visibility: visible;
+}
+
 .c0:hover {
   cursor: pointer;
-}
-
-.c0:disabled {
-  cursor: not-allowed;
-}
-
-.c2 {
-  vertical-align: top;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  overflow: hidden;
-  -webkit-flex-wrap: nowrap;
-  -ms-flex-wrap: nowrap;
-  flex-wrap: nowrap;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  height: 24px;
-}
-
-.c2 > * {
-  display: inline-block;
-  -webkit-flex: 0 1 auto;
-  -ms-flex: 0 1 auto;
-  flex: 0 1 auto;
-  white-space: nowrap;
-}
-
-.c2 > *:not(:first-child) {
-  margin-left: 8px;
-}
-
-.c2 > svg {
-  width: 24px;
-  height: 24px;
-}
-
-[data-dimension='s'] .c1 {
-  height: 20px;
-}
-
-[data-dimension='s'] .c1 > svg {
-  width: 20px;
-  height: 20px;
-}
-
-.c2 span {
-  visibility: visible;
 }
 
 <body>
@@ -415,6 +412,56 @@ Object {
   fill: #B1B5BB;
 }
 
+.c2 {
+  vertical-align: top;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  overflow: hidden;
+  -webkit-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 24px;
+}
+
+.c2 > * {
+  display: inline-block;
+  -webkit-flex: 0 1 auto;
+  -ms-flex: 0 1 auto;
+  flex: 0 1 auto;
+  white-space: nowrap;
+}
+
+.c2 > *:not(:first-child) {
+  margin-left: 8px;
+}
+
+.c2 > svg {
+  width: 24px;
+  height: 24px;
+}
+
+[data-dimension='s'] .c1 {
+  height: 20px;
+}
+
+[data-dimension='s'] .c1 > svg {
+  width: 20px;
+  height: 20px;
+}
+
 .c0 {
   position: relative;
   box-sizing: border-box;
@@ -434,6 +481,7 @@ Object {
   font-size: 16px;
   line-height: 24px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  pointer-events: all;
 }
 
 .c0[data-appearance~='primary'] {
@@ -699,66 +747,12 @@ Object {
   font-feature-settings: 'tnum' on,'lnum' on;
 }
 
+.c0 .c1 {
+  visibility: visible;
+}
+
 .c0:hover {
   cursor: pointer;
-}
-
-.c0:disabled {
-  cursor: not-allowed;
-}
-
-.c2 {
-  vertical-align: top;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  overflow: hidden;
-  -webkit-flex-wrap: nowrap;
-  -ms-flex-wrap: nowrap;
-  flex-wrap: nowrap;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  height: 24px;
-}
-
-.c2 > * {
-  display: inline-block;
-  -webkit-flex: 0 1 auto;
-  -ms-flex: 0 1 auto;
-  flex: 0 1 auto;
-  white-space: nowrap;
-}
-
-.c2 > *:not(:first-child) {
-  margin-left: 8px;
-}
-
-.c2 > svg {
-  width: 24px;
-  height: 24px;
-}
-
-[data-dimension='s'] .c1 {
-  height: 20px;
-}
-
-[data-dimension='s'] .c1 > svg {
-  width: 20px;
-  height: 20px;
-}
-
-.c2 span {
-  visibility: visible;
 }
 
 <div>
@@ -840,19 +834,90 @@ Object {
 exports[`MenuButton should render component with loading state 1`] = `
 Object {
   "asFragment": [Function],
-  "baseElement": .c3 {
+  "baseElement": .c5 {
+  -webkit-transition: -webkit-transform 0.3s ease-in-out;
+  -webkit-transition: transform 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out;
+  -webkit-transform: rotate(0deg);
+  -ms-transform: rotate(0deg);
+  transform: rotate(0deg);
+}
+
+.c5 *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c5[data-disabled] {
+  pointer-events: none;
+}
+
+.c5[data-disabled] *[fill^='#'] {
+  fill: #B1B5BB;
+}
+
+.c1 {
   position: relative;
   width: 24px;
   height: 24px;
 }
 
-.c3 svg {
+.c1 svg {
   -webkit-animation: cilQsd 1s linear infinite;
   animation: cilQsd 1s linear infinite;
 }
 
-.c3 svg path {
-  fill: #0062FF;
+.c1 svg path {
+  fill: #FFFFFF;
+}
+
+.c4 {
+  vertical-align: top;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  overflow: hidden;
+  -webkit-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 24px;
+}
+
+.c4 > * {
+  display: inline-block;
+  -webkit-flex: 0 1 auto;
+  -ms-flex: 0 1 auto;
+  flex: 0 1 auto;
+  white-space: nowrap;
+}
+
+.c4 > *:not(:first-child) {
+  margin-left: 8px;
+}
+
+.c4 > svg {
+  width: 24px;
+  height: 24px;
+}
+
+[data-dimension='s'] .c3 {
+  height: 20px;
+}
+
+[data-dimension='s'] .c3 > svg {
+  width: 20px;
+  height: 20px;
 }
 
 .c0 {
@@ -874,6 +939,7 @@ Object {
   font-size: 16px;
   line-height: 24px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  pointer-events: none;
 }
 
 .c0[data-appearance~='primary'] {
@@ -1139,66 +1205,21 @@ Object {
   font-feature-settings: 'tnum' on,'lnum' on;
 }
 
+.c0 .c3 {
+  visibility: hidden;
+}
+
 .c0:hover {
   cursor: pointer;
 }
 
-.c0:disabled {
-  cursor: not-allowed;
-}
-
 .c2 {
-  vertical-align: top;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  overflow: hidden;
-  -webkit-flex-wrap: nowrap;
-  -ms-flex-wrap: nowrap;
-  flex-wrap: nowrap;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  height: 24px;
-}
-
-.c2 > * {
-  display: inline-block;
-  -webkit-flex: 0 1 auto;
-  -ms-flex: 0 1 auto;
-  flex: 0 1 auto;
-  white-space: nowrap;
-}
-
-.c2 > *:not(:first-child) {
-  margin-left: 8px;
-}
-
-.c2 > svg {
-  width: 24px;
-  height: 24px;
-}
-
-[data-dimension='s'] .c1 {
-  height: 20px;
-}
-
-[data-dimension='s'] .c1 > svg {
-  width: 20px;
-  height: 20px;
-}
-
-.c2 span {
-  visibility: visible;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
 }
 
 <body>
@@ -1209,36 +1230,113 @@ Object {
         data-appearance="primary"
         data-dimension="l"
         data-testid="btn"
-        disabled=""
         type="button"
       >
-        <span
+        <div
+          aria-live="assertive"
           class="c1 c2"
+          role="alert"
         >
+          <div />
+        </div>
+        <span
+          class="c3 c4"
+        >
+          <span>
+            test
+          </span>
           <div
-            aria-live="assertive"
-            class="c3"
-            role="alert"
-          >
-            <div />
-          </div>
+            aria-hidden="true"
+            class="c5"
+          />
         </span>
       </button>
     </div>
   </body>,
-  "container": .c3 {
+  "container": .c5 {
+  -webkit-transition: -webkit-transform 0.3s ease-in-out;
+  -webkit-transition: transform 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out;
+  -webkit-transform: rotate(0deg);
+  -ms-transform: rotate(0deg);
+  transform: rotate(0deg);
+}
+
+.c5 *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c5[data-disabled] {
+  pointer-events: none;
+}
+
+.c5[data-disabled] *[fill^='#'] {
+  fill: #B1B5BB;
+}
+
+.c1 {
   position: relative;
   width: 24px;
   height: 24px;
 }
 
-.c3 svg {
+.c1 svg {
   -webkit-animation: cilQsd 1s linear infinite;
   animation: cilQsd 1s linear infinite;
 }
 
-.c3 svg path {
-  fill: #0062FF;
+.c1 svg path {
+  fill: #FFFFFF;
+}
+
+.c4 {
+  vertical-align: top;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  overflow: hidden;
+  -webkit-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 24px;
+}
+
+.c4 > * {
+  display: inline-block;
+  -webkit-flex: 0 1 auto;
+  -ms-flex: 0 1 auto;
+  flex: 0 1 auto;
+  white-space: nowrap;
+}
+
+.c4 > *:not(:first-child) {
+  margin-left: 8px;
+}
+
+.c4 > svg {
+  width: 24px;
+  height: 24px;
+}
+
+[data-dimension='s'] .c3 {
+  height: 20px;
+}
+
+[data-dimension='s'] .c3 > svg {
+  width: 20px;
+  height: 20px;
 }
 
 .c0 {
@@ -1260,6 +1358,7 @@ Object {
   font-size: 16px;
   line-height: 24px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  pointer-events: none;
 }
 
 .c0[data-appearance~='primary'] {
@@ -1525,66 +1624,21 @@ Object {
   font-feature-settings: 'tnum' on,'lnum' on;
 }
 
+.c0 .c3 {
+  visibility: hidden;
+}
+
 .c0:hover {
   cursor: pointer;
 }
 
-.c0:disabled {
-  cursor: not-allowed;
-}
-
 .c2 {
-  vertical-align: top;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  overflow: hidden;
-  -webkit-flex-wrap: nowrap;
-  -ms-flex-wrap: nowrap;
-  flex-wrap: nowrap;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  height: 24px;
-}
-
-.c2 > * {
-  display: inline-block;
-  -webkit-flex: 0 1 auto;
-  -ms-flex: 0 1 auto;
-  flex: 0 1 auto;
-  white-space: nowrap;
-}
-
-.c2 > *:not(:first-child) {
-  margin-left: 8px;
-}
-
-.c2 > svg {
-  width: 24px;
-  height: 24px;
-}
-
-[data-dimension='s'] .c1 {
-  height: 20px;
-}
-
-[data-dimension='s'] .c1 > svg {
-  width: 20px;
-  height: 20px;
-}
-
-.c2 span {
-  visibility: visible;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
 }
 
 <div>
@@ -1594,19 +1648,25 @@ Object {
       data-appearance="primary"
       data-dimension="l"
       data-testid="btn"
-      disabled=""
       type="button"
     >
-      <span
+      <div
+        aria-live="assertive"
         class="c1 c2"
+        role="alert"
       >
+        <div />
+      </div>
+      <span
+        class="c3 c4"
+      >
+        <span>
+          test
+        </span>
         <div
-          aria-live="assertive"
-          class="c3"
-          role="alert"
-        >
-          <div />
-        </div>
+          aria-hidden="true"
+          class="c5"
+        />
       </span>
     </button>
   </div>,
@@ -1688,6 +1748,56 @@ Object {
   fill: #B1B5BB;
 }
 
+.c2 {
+  vertical-align: top;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  overflow: hidden;
+  -webkit-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 24px;
+}
+
+.c2 > * {
+  display: inline-block;
+  -webkit-flex: 0 1 auto;
+  -ms-flex: 0 1 auto;
+  flex: 0 1 auto;
+  white-space: nowrap;
+}
+
+.c2 > *:not(:first-child) {
+  margin-left: 8px;
+}
+
+.c2 > svg {
+  width: 24px;
+  height: 24px;
+}
+
+[data-dimension='s'] .c1 {
+  height: 20px;
+}
+
+[data-dimension='s'] .c1 > svg {
+  width: 20px;
+  height: 20px;
+}
+
 .c0 {
   position: relative;
   box-sizing: border-box;
@@ -1707,6 +1817,7 @@ Object {
   font-size: 16px;
   line-height: 24px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  pointer-events: none;
 }
 
 .c0[data-appearance~='primary'] {
@@ -1972,66 +2083,12 @@ Object {
   font-feature-settings: 'tnum' on,'lnum' on;
 }
 
+.c0 .c1 {
+  visibility: visible;
+}
+
 .c0:hover {
   cursor: pointer;
-}
-
-.c0:disabled {
-  cursor: not-allowed;
-}
-
-.c2 {
-  vertical-align: top;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  overflow: hidden;
-  -webkit-flex-wrap: nowrap;
-  -ms-flex-wrap: nowrap;
-  flex-wrap: nowrap;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  height: 24px;
-}
-
-.c2 > * {
-  display: inline-block;
-  -webkit-flex: 0 1 auto;
-  -ms-flex: 0 1 auto;
-  flex: 0 1 auto;
-  white-space: nowrap;
-}
-
-.c2 > *:not(:first-child) {
-  margin-left: 8px;
-}
-
-.c2 > svg {
-  width: 24px;
-  height: 24px;
-}
-
-[data-dimension='s'] .c1 {
-  height: 20px;
-}
-
-[data-dimension='s'] .c1 > svg {
-  width: 20px;
-  height: 20px;
-}
-
-.c2 span {
-  visibility: visible;
 }
 
 <body>
@@ -2080,6 +2137,56 @@ Object {
   fill: #B1B5BB;
 }
 
+.c2 {
+  vertical-align: top;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  overflow: hidden;
+  -webkit-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 24px;
+}
+
+.c2 > * {
+  display: inline-block;
+  -webkit-flex: 0 1 auto;
+  -ms-flex: 0 1 auto;
+  flex: 0 1 auto;
+  white-space: nowrap;
+}
+
+.c2 > *:not(:first-child) {
+  margin-left: 8px;
+}
+
+.c2 > svg {
+  width: 24px;
+  height: 24px;
+}
+
+[data-dimension='s'] .c1 {
+  height: 20px;
+}
+
+[data-dimension='s'] .c1 > svg {
+  width: 20px;
+  height: 20px;
+}
+
 .c0 {
   position: relative;
   box-sizing: border-box;
@@ -2099,6 +2206,7 @@ Object {
   font-size: 16px;
   line-height: 24px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  pointer-events: none;
 }
 
 .c0[data-appearance~='primary'] {
@@ -2364,66 +2472,12 @@ Object {
   font-feature-settings: 'tnum' on,'lnum' on;
 }
 
+.c0 .c1 {
+  visibility: visible;
+}
+
 .c0:hover {
   cursor: pointer;
-}
-
-.c0:disabled {
-  cursor: not-allowed;
-}
-
-.c2 {
-  vertical-align: top;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  overflow: hidden;
-  -webkit-flex-wrap: nowrap;
-  -ms-flex-wrap: nowrap;
-  flex-wrap: nowrap;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  height: 24px;
-}
-
-.c2 > * {
-  display: inline-block;
-  -webkit-flex: 0 1 auto;
-  -ms-flex: 0 1 auto;
-  flex: 0 1 auto;
-  white-space: nowrap;
-}
-
-.c2 > *:not(:first-child) {
-  margin-left: 8px;
-}
-
-.c2 > svg {
-  width: 24px;
-  height: 24px;
-}
-
-[data-dimension='s'] .c1 {
-  height: 20px;
-}
-
-[data-dimension='s'] .c1 > svg {
-  width: 20px;
-  height: 20px;
-}
-
-.c2 span {
-  visibility: visible;
 }
 
 <div>
