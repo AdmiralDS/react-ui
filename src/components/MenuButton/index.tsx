@@ -77,7 +77,6 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
     const btnRef = React.useRef<HTMLButtonElement>(null);
     const menuDimension = dimension === 'xl' ? 'l' : dimension;
     const menuWidth = dimension === 's' ? '240px' : '280px';
-    const spinnerDimension = dimension === 's' ? 's' : 'm';
 
     const reverseMenu = () => {
       setMenuOpened((prevOpened) => {
@@ -106,28 +105,12 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
         e.preventDefault();
       }
     };
-    const renderContent = () => {
-      if (loading) return <Spinner dimension={spinnerDimension} />;
-      // if (skeleton)
-      //   return (
-      //     <>
-      //       <SkeletonText dimension={dimension} appearance={appearance} />
-      //       <PseudoIcon dimension={dimension} appearance={appearance} />
-      //     </>
-      //   );
-      return (
-        <>
-          {React.Children.toArray(children).map((child) =>
-            typeof child === 'string' ? <span key={uid()}>{child}</span> : child,
-          )}
-          <OpenStatusButton $isOpen={menuOpened} aria-hidden appearance={'white'} />
-        </>
-      );
-    };
+
     const handleClick = (e: MouseEvent<HTMLLIElement>) => {
       onChange(e.currentTarget.id);
       closeMenu();
     };
+
     const handleKeyDown = (e: KeyboardEvent<HTMLLIElement>) => {
       const code = keyboardKey.getCode(e);
       if (code === keyboardKey.Enter || code === keyboardKey[' ']) {
@@ -151,12 +134,16 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
           ref={refSetter(ref, btnRef)}
           dimension={dimension}
           appearance={appearance}
-          disabled={loading || skeleton ? true : disabled}
+          disabled={skeleton ? true : disabled}
+          loading={loading}
           onKeyDown={handleBtnKeyDown}
           onClick={reverseMenu}
           aria-expanded={menuOpened}
         >
-          {renderContent()}
+          {React.Children.toArray(children).map((child) =>
+            typeof child === 'string' ? <span key={uid()}>{child}</span> : child,
+          )}
+          <OpenStatusButton $isOpen={menuOpened} aria-hidden appearance={'white'} />
         </Button>
         {menuOpened && !loading && !skeleton && (
           <Dropdown
