@@ -12,6 +12,7 @@ import { Button } from '#src/components/Button';
 // import { PseudoIcon } from '#src/components/skeleton/PseudoIcon';
 import { DropDownItem } from '#src/components/DropDownItem';
 import { Spinner } from '#src/components/Spinner';
+import styled from 'styled-components';
 
 // const SkeletonText = styled(PseudoText)`
 //   margin-right: 8px;
@@ -53,6 +54,10 @@ export interface MenuButtonProps extends Omit<HTMLAttributes<HTMLButtonElement>,
   /** Выравнивание выпадающего меню относительно компонента https://developer.mozilla.org/en-US/docs/Web/CSS/align-self */
   alignSelf?: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
 }
+
+const StyledDropdown = styled(Dropdown)`
+  padding: 8px 0;
+`;
 
 export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
   (
@@ -159,7 +164,7 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
           {renderContent()}
         </Button>
         {menuOpened && !loading && !skeleton && (
-          <Dropdown
+          <StyledDropdown
             role="listbox"
             targetRef={btnRef}
             onClickOutside={clickOutside}
@@ -190,7 +195,7 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
                 {display}
               </DropDownItem>
             ))}
-          </Dropdown>
+          </StyledDropdown>
         )}
       </>
     );
