@@ -18,7 +18,7 @@ import { Spinner } from '#src/components/Spinner';
 // `;
 
 type Dimension = 'xl' | 'l' | 'm' | 's';
-type Appearance = 'primary' | 'secondary' | 'ghost';
+type Appearance = 'primary' | 'secondary' | 'ghost' | 'white';
 
 export interface MenuButtonItem extends HTMLAttributes<HTMLLIElement> {
   /** Содержимое опции, предназначенное для отображения */

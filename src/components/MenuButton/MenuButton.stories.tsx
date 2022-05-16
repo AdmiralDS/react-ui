@@ -95,7 +95,7 @@ export default {
       control: { type: 'radio' },
     },
     appearance: {
-      options: ['primary', 'secondary', 'ghost'],
+      options: ['primary', 'secondary', 'ghost', 'white'],
       control: { type: 'radio' },
     },
     disabled: {
