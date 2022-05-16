@@ -1,21 +1,12 @@
 import type { HTMLAttributes, KeyboardEvent, MouseEvent, ReactNode } from 'react';
 import * as React from 'react';
-// import styled from 'styled-components';
 import { keyboardKey } from '#src/components/common/keyboardKey';
 import { uid } from '#src/components/common/uid';
 import { refSetter } from '#src/components/common/utils/refSetter';
 import { OpenStatusButton } from '#src/components/OpenStatusButton';
 import { Dropdown } from '#src/components/Dropdown';
 import { Button } from '#src/components/Button';
-
-// import { PseudoText } from '#src/components/skeleton/PseudoText';
-// import { PseudoIcon } from '#src/components/skeleton/PseudoIcon';
 import { DropDownItem } from '#src/components/DropDownItem';
-import { Spinner } from '#src/components/Spinner';
-
-// const SkeletonText = styled(PseudoText)`
-//   margin-right: 8px;
-// `;
 
 type Dimension = 'xl' | 'l' | 'm' | 's';
 type Appearance = 'primary' | 'secondary' | 'ghost';
