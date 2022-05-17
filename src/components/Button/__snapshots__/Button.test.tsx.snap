@@ -1,6 +1,56 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Button should render component 1`] = `
+.c2 {
+  vertical-align: top;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  overflow: hidden;
+  -webkit-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 24px;
+}
+
+.c2 > * {
+  display: inline-block;
+  -webkit-flex: 0 1 auto;
+  -ms-flex: 0 1 auto;
+  flex: 0 1 auto;
+  white-space: nowrap;
+}
+
+.c2 > *:not(:first-child) {
+  margin-left: 8px;
+}
+
+.c2 > svg {
+  width: 24px;
+  height: 24px;
+}
+
+[data-dimension='s'] .c1 {
+  height: 20px;
+}
+
+[data-dimension='s'] .c1 > svg {
+  width: 20px;
+  height: 20px;
+}
+
 .c0 {
   position: relative;
   box-sizing: border-box;
@@ -20,6 +70,7 @@ exports[`Button should render component 1`] = `
   font-size: 16px;
   line-height: 24px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  pointer-events: all;
 }
 
 .c0[data-appearance~='primary'] {
@@ -285,66 +336,12 @@ exports[`Button should render component 1`] = `
   font-feature-settings: 'tnum' on,'lnum' on;
 }
 
+.c0 .c1 {
+  visibility: visible;
+}
+
 .c0:hover {
   cursor: pointer;
-}
-
-.c0:disabled {
-  cursor: not-allowed;
-}
-
-.c2 {
-  vertical-align: top;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  overflow: hidden;
-  -webkit-flex-wrap: nowrap;
-  -ms-flex-wrap: nowrap;
-  flex-wrap: nowrap;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  height: 24px;
-}
-
-.c2 > * {
-  display: inline-block;
-  -webkit-flex: 0 1 auto;
-  -ms-flex: 0 1 auto;
-  flex: 0 1 auto;
-  white-space: nowrap;
-}
-
-.c2 > *:not(:first-child) {
-  margin-left: 8px;
-}
-
-.c2 > svg {
-  width: 24px;
-  height: 24px;
-}
-
-[data-dimension='s'] .c1 {
-  height: 20px;
-}
-
-[data-dimension='s'] .c1 > svg {
-  width: 20px;
-  height: 20px;
-}
-
-.c2 span {
-  visibility: visible;
 }
 
 <div>
@@ -362,6 +359,56 @@ exports[`Button should render component 1`] = `
 `;
 
 exports[`Button should render component with text 1`] = `
+.c2 {
+  vertical-align: top;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  overflow: hidden;
+  -webkit-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 24px;
+}
+
+.c2 > * {
+  display: inline-block;
+  -webkit-flex: 0 1 auto;
+  -ms-flex: 0 1 auto;
+  flex: 0 1 auto;
+  white-space: nowrap;
+}
+
+.c2 > *:not(:first-child) {
+  margin-left: 8px;
+}
+
+.c2 > svg {
+  width: 24px;
+  height: 24px;
+}
+
+[data-dimension='s'] .c1 {
+  height: 20px;
+}
+
+[data-dimension='s'] .c1 > svg {
+  width: 20px;
+  height: 20px;
+}
+
 .c0 {
   position: relative;
   box-sizing: border-box;
@@ -381,6 +428,7 @@ exports[`Button should render component with text 1`] = `
   font-size: 16px;
   line-height: 24px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  pointer-events: all;
 }
 
 .c0[data-appearance~='primary'] {
@@ -646,66 +694,12 @@ exports[`Button should render component with text 1`] = `
   font-feature-settings: 'tnum' on,'lnum' on;
 }
 
+.c0 .c1 {
+  visibility: visible;
+}
+
 .c0:hover {
   cursor: pointer;
-}
-
-.c0:disabled {
-  cursor: not-allowed;
-}
-
-.c2 {
-  vertical-align: top;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  overflow: hidden;
-  -webkit-flex-wrap: nowrap;
-  -ms-flex-wrap: nowrap;
-  flex-wrap: nowrap;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  height: 24px;
-}
-
-.c2 > * {
-  display: inline-block;
-  -webkit-flex: 0 1 auto;
-  -ms-flex: 0 1 auto;
-  flex: 0 1 auto;
-  white-space: nowrap;
-}
-
-.c2 > *:not(:first-child) {
-  margin-left: 8px;
-}
-
-.c2 > svg {
-  width: 24px;
-  height: 24px;
-}
-
-[data-dimension='s'] .c1 {
-  height: 20px;
-}
-
-[data-dimension='s'] .c1 > svg {
-  width: 20px;
-  height: 20px;
-}
-
-.c2 span {
-  visibility: visible;
 }
 
 <div>
