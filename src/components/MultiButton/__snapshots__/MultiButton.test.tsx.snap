@@ -3,7 +3,58 @@
 exports[`MultiButton should render component with disabled state 1`] = `
 Object {
   "asFragment": [Function],
-  "baseElement": .c1 {
+  "baseElement": .c4 {
+  vertical-align: top;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  overflow: hidden;
+  -webkit-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 24px;
+}
+
+.c4 > * {
+  display: inline-block;
+  -webkit-flex: 0 1 auto;
+  -ms-flex: 0 1 auto;
+  flex: 0 1 auto;
+  white-space: nowrap;
+}
+
+.c4 > *:not(:first-child) {
+  margin-left: 8px;
+}
+
+.c4 > svg {
+  width: 24px;
+  height: 24px;
+}
+
+[data-dimension='s'] .c3 {
+  height: 20px;
+}
+
+[data-dimension='s'] .c3 > svg {
+  width: 20px;
+  height: 20px;
+}
+
+.c1 {
+  position: relative;
   box-sizing: border-box;
   display: inline-block;
   border: none;
@@ -21,6 +72,7 @@ Object {
   font-size: 16px;
   line-height: 24px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  pointer-events: none;
 }
 
 .c1[data-appearance~='primary'] {
@@ -286,15 +338,16 @@ Object {
   font-feature-settings: 'tnum' on,'lnum' on;
 }
 
+.c1 .c3 {
+  visibility: visible;
+}
+
 .c1:hover {
   cursor: pointer;
 }
 
-.c1:disabled {
-  cursor: not-allowed;
-}
-
 .c6 {
+  position: relative;
   box-sizing: border-box;
   display: inline-block;
   border: none;
@@ -312,6 +365,7 @@ Object {
   font-size: 16px;
   line-height: 24px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  pointer-events: none;
 }
 
 .c6[data-appearance~='primary'] {
@@ -577,62 +631,12 @@ Object {
   font-feature-settings: 'tnum' on,'lnum' on;
 }
 
+.c6 .c3 {
+  visibility: visible;
+}
+
 .c6:hover {
   cursor: pointer;
-}
-
-.c6:disabled {
-  cursor: not-allowed;
-}
-
-.c4 {
-  vertical-align: top;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  overflow: hidden;
-  -webkit-flex-wrap: nowrap;
-  -ms-flex-wrap: nowrap;
-  flex-wrap: nowrap;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  height: 24px;
-}
-
-.c4 > * {
-  display: inline-block;
-  -webkit-flex: 0 1 auto;
-  -ms-flex: 0 1 auto;
-  flex: 0 1 auto;
-  white-space: nowrap;
-}
-
-.c4 > *:not(:first-child) {
-  margin-left: 8px;
-}
-
-.c4 > svg {
-  width: 24px;
-  height: 24px;
-}
-
-[data-dimension='s'] .c3 {
-  height: 20px;
-}
-
-[data-dimension='s'] .c3 > svg {
-  width: 20px;
-  height: 20px;
 }
 
 .c2[data-appearance~='primary'] {
@@ -733,7 +737,58 @@ Object {
       </div>
     </div>
   </body>,
-  "container": .c1 {
+  "container": .c4 {
+  vertical-align: top;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  overflow: hidden;
+  -webkit-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 24px;
+}
+
+.c4 > * {
+  display: inline-block;
+  -webkit-flex: 0 1 auto;
+  -ms-flex: 0 1 auto;
+  flex: 0 1 auto;
+  white-space: nowrap;
+}
+
+.c4 > *:not(:first-child) {
+  margin-left: 8px;
+}
+
+.c4 > svg {
+  width: 24px;
+  height: 24px;
+}
+
+[data-dimension='s'] .c3 {
+  height: 20px;
+}
+
+[data-dimension='s'] .c3 > svg {
+  width: 20px;
+  height: 20px;
+}
+
+.c1 {
+  position: relative;
   box-sizing: border-box;
   display: inline-block;
   border: none;
@@ -751,6 +806,7 @@ Object {
   font-size: 16px;
   line-height: 24px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  pointer-events: none;
 }
 
 .c1[data-appearance~='primary'] {
@@ -1016,15 +1072,16 @@ Object {
   font-feature-settings: 'tnum' on,'lnum' on;
 }
 
+.c1 .c3 {
+  visibility: visible;
+}
+
 .c1:hover {
   cursor: pointer;
 }
 
-.c1:disabled {
-  cursor: not-allowed;
-}
-
 .c6 {
+  position: relative;
   box-sizing: border-box;
   display: inline-block;
   border: none;
@@ -1042,6 +1099,7 @@ Object {
   font-size: 16px;
   line-height: 24px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  pointer-events: none;
 }
 
 .c6[data-appearance~='primary'] {
@@ -1307,62 +1365,12 @@ Object {
   font-feature-settings: 'tnum' on,'lnum' on;
 }
 
+.c6 .c3 {
+  visibility: visible;
+}
+
 .c6:hover {
   cursor: pointer;
-}
-
-.c6:disabled {
-  cursor: not-allowed;
-}
-
-.c4 {
-  vertical-align: top;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  overflow: hidden;
-  -webkit-flex-wrap: nowrap;
-  -ms-flex-wrap: nowrap;
-  flex-wrap: nowrap;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  height: 24px;
-}
-
-.c4 > * {
-  display: inline-block;
-  -webkit-flex: 0 1 auto;
-  -ms-flex: 0 1 auto;
-  flex: 0 1 auto;
-  white-space: nowrap;
-}
-
-.c4 > *:not(:first-child) {
-  margin-left: 8px;
-}
-
-.c4 > svg {
-  width: 24px;
-  height: 24px;
-}
-
-[data-dimension='s'] .c3 {
-  height: 20px;
-}
-
-[data-dimension='s'] .c3 > svg {
-  width: 20px;
-  height: 20px;
 }
 
 .c2[data-appearance~='primary'] {
@@ -1518,7 +1526,58 @@ Object {
 exports[`MultiButton should render component with primary appearance 1`] = `
 Object {
   "asFragment": [Function],
-  "baseElement": .c1 {
+  "baseElement": .c4 {
+  vertical-align: top;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  overflow: hidden;
+  -webkit-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 24px;
+}
+
+.c4 > * {
+  display: inline-block;
+  -webkit-flex: 0 1 auto;
+  -ms-flex: 0 1 auto;
+  flex: 0 1 auto;
+  white-space: nowrap;
+}
+
+.c4 > *:not(:first-child) {
+  margin-left: 8px;
+}
+
+.c4 > svg {
+  width: 24px;
+  height: 24px;
+}
+
+[data-dimension='s'] .c3 {
+  height: 20px;
+}
+
+[data-dimension='s'] .c3 > svg {
+  width: 20px;
+  height: 20px;
+}
+
+.c1 {
+  position: relative;
   box-sizing: border-box;
   display: inline-block;
   border: none;
@@ -1536,6 +1595,7 @@ Object {
   font-size: 16px;
   line-height: 24px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  pointer-events: all;
 }
 
 .c1[data-appearance~='primary'] {
@@ -1801,15 +1861,16 @@ Object {
   font-feature-settings: 'tnum' on,'lnum' on;
 }
 
+.c1 .c3 {
+  visibility: visible;
+}
+
 .c1:hover {
   cursor: pointer;
 }
 
-.c1:disabled {
-  cursor: not-allowed;
-}
-
 .c6 {
+  position: relative;
   box-sizing: border-box;
   display: inline-block;
   border: none;
@@ -1827,6 +1888,7 @@ Object {
   font-size: 16px;
   line-height: 24px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  pointer-events: all;
 }
 
 .c6[data-appearance~='primary'] {
@@ -2092,62 +2154,12 @@ Object {
   font-feature-settings: 'tnum' on,'lnum' on;
 }
 
+.c6 .c3 {
+  visibility: visible;
+}
+
 .c6:hover {
   cursor: pointer;
-}
-
-.c6:disabled {
-  cursor: not-allowed;
-}
-
-.c4 {
-  vertical-align: top;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  overflow: hidden;
-  -webkit-flex-wrap: nowrap;
-  -ms-flex-wrap: nowrap;
-  flex-wrap: nowrap;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  height: 24px;
-}
-
-.c4 > * {
-  display: inline-block;
-  -webkit-flex: 0 1 auto;
-  -ms-flex: 0 1 auto;
-  flex: 0 1 auto;
-  white-space: nowrap;
-}
-
-.c4 > *:not(:first-child) {
-  margin-left: 8px;
-}
-
-.c4 > svg {
-  width: 24px;
-  height: 24px;
-}
-
-[data-dimension='s'] .c3 {
-  height: 20px;
-}
-
-[data-dimension='s'] .c3 > svg {
-  width: 20px;
-  height: 20px;
 }
 
 .c2[data-appearance~='primary'] {
@@ -2245,7 +2257,58 @@ Object {
       </div>
     </div>
   </body>,
-  "container": .c1 {
+  "container": .c4 {
+  vertical-align: top;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  overflow: hidden;
+  -webkit-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 24px;
+}
+
+.c4 > * {
+  display: inline-block;
+  -webkit-flex: 0 1 auto;
+  -ms-flex: 0 1 auto;
+  flex: 0 1 auto;
+  white-space: nowrap;
+}
+
+.c4 > *:not(:first-child) {
+  margin-left: 8px;
+}
+
+.c4 > svg {
+  width: 24px;
+  height: 24px;
+}
+
+[data-dimension='s'] .c3 {
+  height: 20px;
+}
+
+[data-dimension='s'] .c3 > svg {
+  width: 20px;
+  height: 20px;
+}
+
+.c1 {
+  position: relative;
   box-sizing: border-box;
   display: inline-block;
   border: none;
@@ -2263,6 +2326,7 @@ Object {
   font-size: 16px;
   line-height: 24px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  pointer-events: all;
 }
 
 .c1[data-appearance~='primary'] {
@@ -2528,15 +2592,16 @@ Object {
   font-feature-settings: 'tnum' on,'lnum' on;
 }
 
+.c1 .c3 {
+  visibility: visible;
+}
+
 .c1:hover {
   cursor: pointer;
 }
 
-.c1:disabled {
-  cursor: not-allowed;
-}
-
 .c6 {
+  position: relative;
   box-sizing: border-box;
   display: inline-block;
   border: none;
@@ -2554,6 +2619,7 @@ Object {
   font-size: 16px;
   line-height: 24px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  pointer-events: all;
 }
 
 .c6[data-appearance~='primary'] {
@@ -2819,62 +2885,12 @@ Object {
   font-feature-settings: 'tnum' on,'lnum' on;
 }
 
+.c6 .c3 {
+  visibility: visible;
+}
+
 .c6:hover {
   cursor: pointer;
-}
-
-.c6:disabled {
-  cursor: not-allowed;
-}
-
-.c4 {
-  vertical-align: top;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  overflow: hidden;
-  -webkit-flex-wrap: nowrap;
-  -ms-flex-wrap: nowrap;
-  flex-wrap: nowrap;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  height: 24px;
-}
-
-.c4 > * {
-  display: inline-block;
-  -webkit-flex: 0 1 auto;
-  -ms-flex: 0 1 auto;
-  flex: 0 1 auto;
-  white-space: nowrap;
-}
-
-.c4 > *:not(:first-child) {
-  margin-left: 8px;
-}
-
-.c4 > svg {
-  width: 24px;
-  height: 24px;
-}
-
-[data-dimension='s'] .c3 {
-  height: 20px;
-}
-
-[data-dimension='s'] .c3 > svg {
-  width: 20px;
-  height: 20px;
 }
 
 .c2[data-appearance~='primary'] {
@@ -3027,7 +3043,58 @@ Object {
 exports[`MultiButton should render component with secondary appearance 1`] = `
 Object {
   "asFragment": [Function],
-  "baseElement": .c1 {
+  "baseElement": .c4 {
+  vertical-align: top;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  overflow: hidden;
+  -webkit-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 24px;
+}
+
+.c4 > * {
+  display: inline-block;
+  -webkit-flex: 0 1 auto;
+  -ms-flex: 0 1 auto;
+  flex: 0 1 auto;
+  white-space: nowrap;
+}
+
+.c4 > *:not(:first-child) {
+  margin-left: 8px;
+}
+
+.c4 > svg {
+  width: 24px;
+  height: 24px;
+}
+
+[data-dimension='s'] .c3 {
+  height: 20px;
+}
+
+[data-dimension='s'] .c3 > svg {
+  width: 20px;
+  height: 20px;
+}
+
+.c1 {
+  position: relative;
   box-sizing: border-box;
   display: inline-block;
   border: none;
@@ -3045,6 +3112,7 @@ Object {
   font-size: 16px;
   line-height: 24px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  pointer-events: all;
 }
 
 .c1[data-appearance~='primary'] {
@@ -3310,15 +3378,16 @@ Object {
   font-feature-settings: 'tnum' on,'lnum' on;
 }
 
+.c1 .c3 {
+  visibility: visible;
+}
+
 .c1:hover {
   cursor: pointer;
 }
 
-.c1:disabled {
-  cursor: not-allowed;
-}
-
 .c6 {
+  position: relative;
   box-sizing: border-box;
   display: inline-block;
   border: none;
@@ -3336,6 +3405,7 @@ Object {
   font-size: 16px;
   line-height: 24px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  pointer-events: all;
 }
 
 .c6[data-appearance~='primary'] {
@@ -3601,62 +3671,12 @@ Object {
   font-feature-settings: 'tnum' on,'lnum' on;
 }
 
+.c6 .c3 {
+  visibility: visible;
+}
+
 .c6:hover {
   cursor: pointer;
-}
-
-.c6:disabled {
-  cursor: not-allowed;
-}
-
-.c4 {
-  vertical-align: top;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  overflow: hidden;
-  -webkit-flex-wrap: nowrap;
-  -ms-flex-wrap: nowrap;
-  flex-wrap: nowrap;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  height: 24px;
-}
-
-.c4 > * {
-  display: inline-block;
-  -webkit-flex: 0 1 auto;
-  -ms-flex: 0 1 auto;
-  flex: 0 1 auto;
-  white-space: nowrap;
-}
-
-.c4 > *:not(:first-child) {
-  margin-left: 8px;
-}
-
-.c4 > svg {
-  width: 24px;
-  height: 24px;
-}
-
-[data-dimension='s'] .c3 {
-  height: 20px;
-}
-
-[data-dimension='s'] .c3 > svg {
-  width: 20px;
-  height: 20px;
 }
 
 .c2[data-appearance~='primary'] {
@@ -3754,7 +3774,58 @@ Object {
       </div>
     </div>
   </body>,
-  "container": .c1 {
+  "container": .c4 {
+  vertical-align: top;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  overflow: hidden;
+  -webkit-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 24px;
+}
+
+.c4 > * {
+  display: inline-block;
+  -webkit-flex: 0 1 auto;
+  -ms-flex: 0 1 auto;
+  flex: 0 1 auto;
+  white-space: nowrap;
+}
+
+.c4 > *:not(:first-child) {
+  margin-left: 8px;
+}
+
+.c4 > svg {
+  width: 24px;
+  height: 24px;
+}
+
+[data-dimension='s'] .c3 {
+  height: 20px;
+}
+
+[data-dimension='s'] .c3 > svg {
+  width: 20px;
+  height: 20px;
+}
+
+.c1 {
+  position: relative;
   box-sizing: border-box;
   display: inline-block;
   border: none;
@@ -3772,6 +3843,7 @@ Object {
   font-size: 16px;
   line-height: 24px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  pointer-events: all;
 }
 
 .c1[data-appearance~='primary'] {
@@ -4037,15 +4109,16 @@ Object {
   font-feature-settings: 'tnum' on,'lnum' on;
 }
 
+.c1 .c3 {
+  visibility: visible;
+}
+
 .c1:hover {
   cursor: pointer;
 }
 
-.c1:disabled {
-  cursor: not-allowed;
-}
-
 .c6 {
+  position: relative;
   box-sizing: border-box;
   display: inline-block;
   border: none;
@@ -4063,6 +4136,7 @@ Object {
   font-size: 16px;
   line-height: 24px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  pointer-events: all;
 }
 
 .c6[data-appearance~='primary'] {
@@ -4328,62 +4402,12 @@ Object {
   font-feature-settings: 'tnum' on,'lnum' on;
 }
 
+.c6 .c3 {
+  visibility: visible;
+}
+
 .c6:hover {
   cursor: pointer;
-}
-
-.c6:disabled {
-  cursor: not-allowed;
-}
-
-.c4 {
-  vertical-align: top;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  overflow: hidden;
-  -webkit-flex-wrap: nowrap;
-  -ms-flex-wrap: nowrap;
-  flex-wrap: nowrap;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  height: 24px;
-}
-
-.c4 > * {
-  display: inline-block;
-  -webkit-flex: 0 1 auto;
-  -ms-flex: 0 1 auto;
-  flex: 0 1 auto;
-  white-space: nowrap;
-}
-
-.c4 > *:not(:first-child) {
-  margin-left: 8px;
-}
-
-.c4 > svg {
-  width: 24px;
-  height: 24px;
-}
-
-[data-dimension='s'] .c3 {
-  height: 20px;
-}
-
-[data-dimension='s'] .c3 > svg {
-  width: 20px;
-  height: 20px;
 }
 
 .c2[data-appearance~='primary'] {

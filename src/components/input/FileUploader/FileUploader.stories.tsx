@@ -13,11 +13,6 @@ const Separator = styled.div`
   height: 40px;
 `;
 
-const StyledP = styled.p`
-  height: 40px;
-  color: ${(p) => p.theme.color['Neutral/Neutral 90']};
-`;
-
 const Desc = styled.div`
   font-family: 'VTB Group UI';
   font-size: 16px;
@@ -88,18 +83,24 @@ const FileUploaderXL: ComponentStory<typeof FileUploader> = (props) => {
     return acc;
   }, {} as Record<any, any>);
 
-  const accept = ['.png', '.jpg', '.jpeg'];
+  const accept = ['image/*', '.pdf', 'application/json'];
 
   return (
-    <>
-      <FileUploader
-        {...cleanProps}
-        acceptFiles={accept}
-        style={{ maxWidth: '480px' }}
-        dimension="xl"
-        fileDimension="xl"
-      />
-    </>
+    <FileUploader
+      {...cleanProps}
+      accept={accept.join(', ')}
+      style={{ maxWidth: '480px' }}
+      dimension="xl"
+      fileDimension="xl"
+      title={`Загрузите не более 3-х файлов типа ${accept.join(', ')} до 5 MB каждый`}
+      onChange={(e) =>
+        console.log(
+          `files change event: ${JSON.stringify(
+            Array.from(e.target.files || []).map(({ name, type, size }) => ({ name, type, size })),
+          )}`,
+        )
+      }
+    />
   );
 };
 
@@ -111,15 +112,14 @@ const FileUploaderM: ComponentStory<typeof FileUploader> = (props) => {
   }, {} as Record<any, any>);
 
   return (
-    <>
-      <FileUploader
-        {...cleanProps}
-        style={{ maxWidth: '288px' }}
-        dimension="m"
-        fileDimension="m"
-        title="Загрузите не более 3-х файлов до 5 MB каждый"
-      />
-    </>
+    <FileUploader
+      {...cleanProps}
+      style={{ maxWidth: '288px' }}
+      dimension="m"
+      fileDimension="m"
+      title="Загрузите не более 3-х файлов до 5 MB каждый"
+      description="Добавьте файлы"
+    />
   );
 };
 
@@ -167,16 +167,15 @@ const FileUploaderWithStatus: ComponentStory<typeof FileUploader> = (props) => {
   }, [isLoading, files]);
 
   return (
-    <>
-      <FileUploader
-        {...cleanProps}
-        uploadedFiles={files}
-        style={{ maxWidth: '480px' }}
-        dimension="xl"
-        fileDimension="xl"
-        onChange={handleChange}
-      />
-    </>
+    <FileUploader
+      {...cleanProps}
+      uploadedFiles={files}
+      style={{ maxWidth: '480px' }}
+      dimension="xl"
+      fileDimension="xl"
+      onChange={handleChange}
+      title="Загрузите не более 3-х файлов до 5 MB каждый"
+    />
   );
 };
 
@@ -205,33 +204,37 @@ const FileUploaderCustomFiles: ComponentStory<typeof FileUploader> = (props) => 
   };
 
   return (
-    <>
-      <FileUploader
-        {...cleanProps}
-        uploadedFiles={files}
-        acceptFiles={accept}
-        style={{ maxWidth: '480px' }}
-        renderFileInfoList={(files) => {
-          return files.map((file, index) => {
-            return (
-              <FileInfo key={index} id={index} dimension="xl" fileDimension="xl" file={file} onClick={handleRemove}>
-                <T
-                  font="Body/Body 2 Long"
-                  as="p"
-                  style={{ textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}
-                >
-                  {file.file.name}
-                </T>
-              </FileInfo>
-            );
-          });
-        }}
-        dimension="xl"
-        fileDimension="xl"
-        title="Загрузите не более 5-х файлов до 5 MB каждый, в формате JPG"
-        onChange={handleChange}
-      />
-    </>
+    <FileUploader
+      {...cleanProps}
+      uploadedFiles={files}
+      accept={accept.join(',')}
+      style={{ maxWidth: '480px' }}
+      renderFileInfoList={(files) => {
+        return files.map((file, index) => {
+          return (
+            <FileInfo
+              key={index}
+              dimension="xl"
+              fileDimension="xl"
+              file={file}
+              onCloseClick={() => handleRemove(index)}
+            >
+              <T
+                font="Body/Body 2 Long"
+                as="p"
+                style={{ textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}
+              >
+                {file.file.name}
+              </T>
+            </FileInfo>
+          );
+        });
+      }}
+      dimension="xl"
+      fileDimension="xl"
+      title="Загрузите не более 5-х файлов до 5 MB каждый, в формате JPG"
+      onChange={handleChange}
+    />
   );
 };
 
@@ -243,12 +246,10 @@ const FileUploaderCustom: ComponentStory<typeof FileUploader> = (props) => {
   }, {} as Record<any, any>);
 
   return (
-    <>
-      <FileUploader {...cleanProps} style={{ maxWidth: '288px' }} dimension="xl" fileDimension="m">
-        <StyledP>Загрузите не более 3-х файлов до 5 MB каждый, в формате JPG</StyledP>
-        <TextButton dimension="m" icon={<UploadSVG />} text="Загрузить документы" />
-      </FileUploader>
-    </>
+    <FileUploader {...cleanProps} style={{ maxWidth: '288px' }} dimension="xl" fileDimension="m">
+      <p>Загрузите не более 3-х файлов до 5 MB каждый, в формате JPG</p>
+      <TextButton dimension="m" icon={<UploadSVG />} text="Загрузить документы" />
+    </FileUploader>
   );
 };
 
