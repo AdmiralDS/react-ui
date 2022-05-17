@@ -5,7 +5,7 @@ import { ReactComponent as AttachFileOutline } from '@admiral-ds/icons/build/sys
 import * as React from 'react';
 import { InputHTMLAttributes, ReactNode } from 'react';
 import styled, { css } from 'styled-components';
-import { Dimension } from './utils';
+import { acceptFile, Dimension } from './utils';
 
 export * from './FileInfo';
 
@@ -14,10 +14,15 @@ export interface FileUploaderProps extends Omit<InputHTMLAttributes<HTMLInputEle
   dimension?: Dimension;
   /** Размер компонента загруженного файла */
   fileDimension?: Dimension;
-  /** Текстовое описание загрузчика */
+  /** Текст для лейбла компонента */
   title?: React.ReactNode;
-  /** Принимаемые типы файлов, например, .jpg */
-  acceptFiles?: string[];
+  /** Текст для кнопки */
+  description?: React.ReactNode;
+  /** Строка принимаемых типов файлов разделенных запятой.
+   *  Например ".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+   *  {@link https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#accept}
+   *  */
+  accept?: string;
   /** Список файлов */
   uploadedFiles?: FileProps[];
   /** Обработчик удаления файла */
@@ -141,7 +146,7 @@ export const FileUploader = React.forwardRef<HTMLInputElement, FileUploaderProps
       renderFileInfoList: r,
       disabled,
       title,
-      acceptFiles,
+      description,
       children,
       uploadedFiles,
       style,
@@ -156,45 +161,39 @@ export const FileUploader = React.forwardRef<HTMLInputElement, FileUploaderProps
     const [files, setFiles] = React.useState<FileProps[] | undefined>(uploadedFiles);
     const previewProps = { dimension, fileDimension };
 
-    const Title = title || <>Для добавления файлов перетащите или нажмите на компонент</>;
-
-    const validateFileFormat = (files: FileProps[], acceptFiles: string[]) => {
-      return files.filter(({ file }) =>
-        acceptFiles.some((ext) => ext === file.name.substring(file.name.lastIndexOf('.')).toLowerCase()),
-      );
-    };
-
-    const validFiles = (file: FileProps[]) => {
-      return acceptFiles?.length ? validateFileFormat(file, acceptFiles) : file;
-    };
-
-    const eventListener = () => {
-      if (inputRef.current?.files) {
-        const filesToAdd = Array.from(inputRef.current.files).map((file) => ({ file }));
-        setFiles(validFiles(filesToAdd));
-      }
-    };
-
     React.useEffect(() => {
       if (uploadedFiles !== undefined) {
-        setFiles(validFiles(uploadedFiles));
+        setFiles(uploadedFiles);
       }
     }, [uploadedFiles]);
 
     React.useEffect(() => {
-      const input = inputRef.current;
-      if (input) {
-        input.addEventListener('change', eventListener);
-        return () => input.removeEventListener('change', eventListener);
+      function onChangeEventHandler(this: HTMLInputElement) {
+        const filesToAdd = Array.from(this.files || [])
+          .filter((file) => !props.accept || acceptFile(file, props.accept))
+          .map((file) => ({ file }));
+
+        const dt = new DataTransfer();
+        filesToAdd.forEach(({ file }) => dt.items.add(file));
+        this.files = dt.files;
+        setFiles(filesToAdd);
       }
-    }, [inputRef.current, files]);
+
+      const input = inputRef.current;
+
+      if (input) {
+        input.addEventListener('change', onChangeEventHandler, true);
+        return () => input.removeEventListener('change', onChangeEventHandler, true);
+      }
+    }, [inputRef.current, files, props.accept]);
 
     const handleRemoveFile = (index: number) => {
-      if (inputRef.current && files) {
+      if (inputRef.current && inputRef.current.files) {
+        const files = inputRef.current.files;
         const dt = new DataTransfer();
         for (let i = 0; i < files.length; i++) {
-          const file = files[i].file;
-          if (index !== i) {
+          const file = files.item(i);
+          if (index !== i && file) {
             dt.items.add(file);
           }
         }
@@ -216,7 +215,7 @@ export const FileUploader = React.forwardRef<HTMLInputElement, FileUploaderProps
       r ??
       ((files) =>
         files.map((file, index) => {
-          return <FileInfo {...previewProps} id={index} key={index} file={file} onClick={handleRemoveFile} />;
+          return <FileInfo {...previewProps} key={index} file={file} onCloseClick={() => handleRemoveFile(index)} />;
         }));
 
     return (
@@ -229,7 +228,6 @@ export const FileUploader = React.forwardRef<HTMLInputElement, FileUploaderProps
                 <FileInput
                   {...props}
                   ref={refSetter(ref, inputRef)}
-                  accept={acceptFiles?.join(',') || '*'}
                   type="file"
                   multiple={multiple}
                   disabled={disabled}
@@ -238,11 +236,10 @@ export const FileUploader = React.forwardRef<HTMLInputElement, FileUploaderProps
             ) : (
               <UploaderWrapperXL disabled={disabled}>
                 <Icon dimension={dimension} />
-                <TitleText dimension={dimension} disabled={disabled} children={Title} />
+                {title && <TitleText dimension={dimension} disabled={disabled} children={title} />}
                 <FileInput
                   {...props}
                   ref={refSetter(ref, inputRef)}
-                  accept={acceptFiles?.join(',') || '*'}
                   type="file"
                   multiple={multiple}
                   disabled={disabled}
@@ -259,7 +256,6 @@ export const FileUploader = React.forwardRef<HTMLInputElement, FileUploaderProps
                 <FileInput
                   {...props}
                   ref={refSetter(ref, inputRef)}
-                  accept={acceptFiles?.join(',') || '*'}
                   type="file"
                   multiple={multiple}
                   disabled={disabled}
@@ -267,14 +263,13 @@ export const FileUploader = React.forwardRef<HTMLInputElement, FileUploaderProps
               </CustomWrapper>
             ) : (
               <>
-                <TitleText dimension={dimension} disabled={disabled} children={Title} />
+                {title && <TitleText dimension={dimension} disabled={disabled} children={title} />}
                 <UploaderWrapperM disabled={disabled}>
                   <Icon dimension={dimension} />
-                  <Desc disabled={disabled}>Добавьте файлы</Desc>
+                  {description && <Desc disabled={disabled}>{description}</Desc>}
                   <FileInput
                     {...props}
                     ref={refSetter(ref, inputRef)}
-                    accept={acceptFiles?.join(',') || '*'}
                     type="file"
                     multiple={multiple}
                     disabled={disabled}
