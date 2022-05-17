@@ -47,7 +47,9 @@
     "styled-components": "^5.1.0"
   },
   "peerDependencies": {
+    "@admiral-ds/flags": "^1.0.0",
     "@admiral-ds/fonts": "^1.0.0",
+    "@admiral-ds/icons": "^1.0.0",
     "react": ">=16",
     "react-dom": ">=16",
     "styled-components": "^5.1.0"
