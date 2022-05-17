@@ -4,7 +4,8 @@ import { refSetter } from '#src/components/common/utils/refSetter';
 import type { Dimension } from '#src/components/OverflowMenu/Button';
 import { Button } from '#src/components/OverflowMenu/Button';
 import { DropdownContainer } from '../DropdownContainer';
-import { Menu } from '../Menu';
+import { ItemIdentifier, Menu } from '../Menu';
+import type { ItemProps } from '#src/components/MenuItem';
 
 export interface OverflowMenuProps extends Omit<React.HTMLAttributes<HTMLButtonElement>, 'onChange'> {
   /** Выбранная опция */
@@ -23,12 +24,13 @@ export interface OverflowMenuProps extends Omit<React.HTMLAttributes<HTMLButtonE
   alignSelf?: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
   /** Ориентация компонента */
   isVertical?: boolean;
+  /** Опции выпадающего списка */
+  items: Array<ItemProps>;
 }
 
 export const OverflowMenu = React.forwardRef<HTMLButtonElement, OverflowMenuProps>(
   (
     {
-      children,
       dimension = 'l',
       disabled = false,
       alignSelf = 'flex-end',
@@ -38,7 +40,7 @@ export const OverflowMenu = React.forwardRef<HTMLButtonElement, OverflowMenuProp
       selected,
       onChange,
       onClick,
-      onKeyDown,
+      items,
       ...props
     },
     ref,
@@ -68,8 +70,10 @@ export const OverflowMenu = React.forwardRef<HTMLButtonElement, OverflowMenuProp
       onClose?.();
     };
 
-    const handleClick = (selected: string) => {
-      onChange?.(selected);
+    const handleClick = (selected: ItemIdentifier) => {
+      if (selected) {
+        onChange?.(selected.toString());
+      }
       closeMenu();
     };
 
@@ -88,9 +92,7 @@ export const OverflowMenu = React.forwardRef<HTMLButtonElement, OverflowMenuProp
         />
         {menuOpened && (
           <DropdownContainer alignSelf={alignSelf} targetRef={btnRef} onClickOutside={clickOutside}>
-            <Menu dimension={dimension} selected={selected} onSelectItem={handleClick}>
-              {children}
-            </Menu>
+            <Menu model={items} selected={selected} onSelectItem={handleClick} />
           </DropdownContainer>
         )}
       </>
