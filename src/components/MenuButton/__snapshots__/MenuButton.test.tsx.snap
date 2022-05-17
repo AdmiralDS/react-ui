@@ -25,6 +25,7 @@ Object {
 }
 
 .c0 {
+  position: relative;
   box-sizing: border-box;
   display: inline-block;
   border: none;
@@ -363,6 +364,10 @@ Object {
 [data-dimension='s'] .c1 > svg {
   width: 20px;
   height: 20px;
+}
+
+.c2 span {
+  visibility: visible;
 }
 
 <body>
@@ -411,6 +416,7 @@ Object {
 }
 
 .c0 {
+  position: relative;
   box-sizing: border-box;
   display: inline-block;
   border: none;
@@ -749,6 +755,10 @@ Object {
 [data-dimension='s'] .c1 > svg {
   width: 20px;
   height: 20px;
+}
+
+.c2 span {
+  visibility: visible;
 }
 
 <div>
@@ -830,7 +840,23 @@ Object {
 exports[`MenuButton should render component with loading state 1`] = `
 Object {
   "asFragment": [Function],
-  "baseElement": .c0 {
+  "baseElement": .c3 {
+  position: relative;
+  width: 24px;
+  height: 24px;
+}
+
+.c3 svg {
+  -webkit-animation: cilQsd 1s linear infinite;
+  animation: cilQsd 1s linear infinite;
+}
+
+.c3 svg path {
+  fill: #0062FF;
+}
+
+.c0 {
+  position: relative;
   box-sizing: border-box;
   display: inline-block;
   border: none;
@@ -1171,19 +1197,8 @@ Object {
   height: 20px;
 }
 
-.c3 {
-  position: relative;
-  width: 24px;
-  height: 24px;
-}
-
-.c3 svg {
-  -webkit-animation: cilQsd 1s linear infinite;
-  animation: cilQsd 1s linear infinite;
-}
-
-.c3 svg path {
-  fill: #0062FF;
+.c2 span {
+  visibility: visible;
 }
 
 <body>
@@ -1211,7 +1226,23 @@ Object {
       </button>
     </div>
   </body>,
-  "container": .c0 {
+  "container": .c3 {
+  position: relative;
+  width: 24px;
+  height: 24px;
+}
+
+.c3 svg {
+  -webkit-animation: cilQsd 1s linear infinite;
+  animation: cilQsd 1s linear infinite;
+}
+
+.c3 svg path {
+  fill: #0062FF;
+}
+
+.c0 {
+  position: relative;
   box-sizing: border-box;
   display: inline-block;
   border: none;
@@ -1552,19 +1583,8 @@ Object {
   height: 20px;
 }
 
-.c3 {
-  position: relative;
-  width: 24px;
-  height: 24px;
-}
-
-.c3 svg {
-  -webkit-animation: cilQsd 1s linear infinite;
-  animation: cilQsd 1s linear infinite;
-}
-
-.c3 svg path {
-  fill: #0062FF;
+.c2 span {
+  visibility: visible;
 }
 
 <div>
@@ -1669,6 +1689,7 @@ Object {
 }
 
 .c0 {
+  position: relative;
   box-sizing: border-box;
   display: inline-block;
   border: none;
@@ -2007,6 +2028,10 @@ Object {
 [data-dimension='s'] .c1 > svg {
   width: 20px;
   height: 20px;
+}
+
+.c2 span {
+  visibility: visible;
 }
 
 <body>
@@ -2056,6 +2081,7 @@ Object {
 }
 
 .c0 {
+  position: relative;
   box-sizing: border-box;
   display: inline-block;
   border: none;
@@ -2394,6 +2420,10 @@ Object {
 [data-dimension='s'] .c1 > svg {
   width: 20px;
   height: 20px;
+}
+
+.c2 span {
+  visibility: visible;
 }
 
 <div>

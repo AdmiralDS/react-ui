@@ -4,6 +4,7 @@ exports[`MultiButton should render component with disabled state 1`] = `
 Object {
   "asFragment": [Function],
   "baseElement": .c1 {
+  position: relative;
   box-sizing: border-box;
   display: inline-block;
   border: none;
@@ -295,6 +296,7 @@ Object {
 }
 
 .c6 {
+  position: relative;
   box-sizing: border-box;
   display: inline-block;
   border: none;
@@ -633,6 +635,10 @@ Object {
 [data-dimension='s'] .c3 > svg {
   width: 20px;
   height: 20px;
+}
+
+.c4 span {
+  visibility: visible;
 }
 
 .c2[data-appearance~='primary'] {
@@ -734,6 +740,7 @@ Object {
     </div>
   </body>,
   "container": .c1 {
+  position: relative;
   box-sizing: border-box;
   display: inline-block;
   border: none;
@@ -1025,6 +1032,7 @@ Object {
 }
 
 .c6 {
+  position: relative;
   box-sizing: border-box;
   display: inline-block;
   border: none;
@@ -1363,6 +1371,10 @@ Object {
 [data-dimension='s'] .c3 > svg {
   width: 20px;
   height: 20px;
+}
+
+.c4 span {
+  visibility: visible;
 }
 
 .c2[data-appearance~='primary'] {
@@ -1519,6 +1531,7 @@ exports[`MultiButton should render component with primary appearance 1`] = `
 Object {
   "asFragment": [Function],
   "baseElement": .c1 {
+  position: relative;
   box-sizing: border-box;
   display: inline-block;
   border: none;
@@ -1810,6 +1823,7 @@ Object {
 }
 
 .c6 {
+  position: relative;
   box-sizing: border-box;
   display: inline-block;
   border: none;
@@ -2148,6 +2162,10 @@ Object {
 [data-dimension='s'] .c3 > svg {
   width: 20px;
   height: 20px;
+}
+
+.c4 span {
+  visibility: visible;
 }
 
 .c2[data-appearance~='primary'] {
@@ -2246,6 +2264,7 @@ Object {
     </div>
   </body>,
   "container": .c1 {
+  position: relative;
   box-sizing: border-box;
   display: inline-block;
   border: none;
@@ -2537,6 +2556,7 @@ Object {
 }
 
 .c6 {
+  position: relative;
   box-sizing: border-box;
   display: inline-block;
   border: none;
@@ -2875,6 +2895,10 @@ Object {
 [data-dimension='s'] .c3 > svg {
   width: 20px;
   height: 20px;
+}
+
+.c4 span {
+  visibility: visible;
 }
 
 .c2[data-appearance~='primary'] {
@@ -3028,6 +3052,7 @@ exports[`MultiButton should render component with secondary appearance 1`] = `
 Object {
   "asFragment": [Function],
   "baseElement": .c1 {
+  position: relative;
   box-sizing: border-box;
   display: inline-block;
   border: none;
@@ -3319,6 +3344,7 @@ Object {
 }
 
 .c6 {
+  position: relative;
   box-sizing: border-box;
   display: inline-block;
   border: none;
@@ -3657,6 +3683,10 @@ Object {
 [data-dimension='s'] .c3 > svg {
   width: 20px;
   height: 20px;
+}
+
+.c4 span {
+  visibility: visible;
 }
 
 .c2[data-appearance~='primary'] {
@@ -3755,6 +3785,7 @@ Object {
     </div>
   </body>,
   "container": .c1 {
+  position: relative;
   box-sizing: border-box;
   display: inline-block;
   border: none;
@@ -4046,6 +4077,7 @@ Object {
 }
 
 .c6 {
+  position: relative;
   box-sizing: border-box;
   display: inline-block;
   border: none;
@@ -4384,6 +4416,10 @@ Object {
 [data-dimension='s'] .c3 > svg {
   width: 20px;
   height: 20px;
+}
+
+.c4 span {
+  visibility: visible;
 }
 
 .c2[data-appearance~='primary'] {

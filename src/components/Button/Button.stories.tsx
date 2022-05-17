@@ -6,7 +6,6 @@ import { Button } from './index';
 import { PseudoText } from '#src/components/skeleton/PseudoText';
 import { PseudoIcon } from '#src/components/skeleton/PseudoIcon';
 import { T } from '#src/components/T';
-import { Spinner } from '#src/components/Spinner';
 import { withDesign } from 'storybook-addon-designs';
 import { filterKeysWithUndefinedValues } from '#src/components/common/utils/filterKeysWithUndefinedValues';
 
@@ -22,11 +21,23 @@ const WrapperButton = styled.div`
   justify-content: space-between;
   align-items: center;
 `;
+const WrapperVertical = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 20px;
+`;
+const Wrapper = styled.div`
+  display: flex;
+`;
 const Separator = styled.div`
   height: 20px;
+  width: 20px;
 `;
 const DarkDiv = styled.div`
   background-color: ${({ theme }) => theme.color['Special/Dark Static Neutral 00']};
+  padding: 2px;
 `;
 
 export default {
@@ -160,59 +171,125 @@ const ButtonWithIconDemo: ComponentStory<typeof Button> = () => (
 
 const ButtonLoaderDemo: ComponentStory<typeof Button> = () => (
   <>
-    <WrapperButton>
-      <div>
+    {/* <T font="Body/Body 1 Long" as="div">
+        Button with loader
+      </T> */}
+    <Wrapper>
+      <WrapperVertical>
         <T font="Body/Body 1 Long" as="div">
-          Button with loader
+          Size XL
         </T>
-        <Separator />
-        <Button disabled displayAsSquare>
-          <Spinner dimension="m" />
+        <Button dimension="xl">Button 56</Button>
+        <Button dimension="xl" appearance="primary" loading>
+          Button 56
         </Button>
-      </div>
-      <div>
+        <Button dimension="xl" appearance="secondary" loading>
+          Button 56
+        </Button>
+        <Button dimension="xl" appearance="ghost" loading>
+          Button 56
+        </Button>
+        <DarkDiv>
+          <Button dimension="xl" appearance="white" loading>
+            Button 56
+          </Button>
+        </DarkDiv>
+        <Button dimension="xl" appearance="danger" loading>
+          Button 56
+        </Button>
+        <Button dimension="xl" appearance="success" loading>
+          Button 56
+        </Button>
+      </WrapperVertical>
+      <Separator />
+      <WrapperVertical>
         <T font="Body/Body 1 Long" as="div">
-          {' '}
-          Secondary
+          Size L
         </T>
-        <Separator />
-        <Button dimension="l" appearance="secondary">
-          <Spinner dimension="m" />
-          {/*Button 48*/}
+        <Button dimension="l">Button 48</Button>
+        <Button dimension="l" appearance="primary" loading>
+          Button 48
         </Button>
-      </div>
-      <div>
-        <T font="Body/Body 1 Short" as="div">
-          {' '}
-          Danger
+        <Button dimension="l" appearance="secondary" loading>
+          Button 48
+        </Button>
+        <Button dimension="l" appearance="ghost" loading>
+          Button 48
+        </Button>
+        <DarkDiv>
+          <Button dimension="l" appearance="white" loading>
+            Button 48
+          </Button>
+        </DarkDiv>
+        <Button dimension="l" appearance="danger" loading>
+          Button 48
+        </Button>
+        <Button dimension="l" appearance="success" loading>
+          Button 48
+        </Button>
+      </WrapperVertical>
+      <Separator />
+      <WrapperVertical>
+        <T font="Body/Body 1 Long" as="div">
+          Size M
         </T>
-        <Separator />
-        <Button dimension="m" appearance="danger">
-          <Spinner dimension="m" inverse={true} />
-          {/*Button 48*/}
+        <Button dimension="m">Button 40</Button>
+        <Button dimension="m" appearance="primary" loading>
+          Button 40
         </Button>
-      </div>
-      <div>
-        <T font="Body/Body 2 Long" as="div">
-          {' '}
-          Danger
+        <Button dimension="m" appearance="secondary" loading>
+          Button 40
+        </Button>
+        <Button dimension="m" appearance="ghost" loading>
+          Button 40
+        </Button>
+        <DarkDiv>
+          <Button dimension="m" appearance="white" loading>
+            Button 40
+          </Button>
+        </DarkDiv>
+        <Button dimension="m" appearance="danger" loading>
+          Button 40
+        </Button>
+        <Button dimension="m" appearance="success" loading>
+          Button 40
+        </Button>
+      </WrapperVertical>
+      <Separator />
+      <WrapperVertical>
+        <T font="Body/Body 1 Long" as="div">
+          Size S
         </T>
-        <Separator />
-        <Button dimension="s" appearance="success">
-          <Spinner dimension="s" inverse={true} />
-          {/*Button 48*/}
+        <Button dimension="s">Button 32</Button>
+        <Button dimension="s" appearance="primary" loading>
+          Button 32
         </Button>
-      </div>
-    </WrapperButton>
+        <Button dimension="s" appearance="secondary" loading>
+          Button 32
+        </Button>
+        <Button dimension="s" appearance="ghost" loading>
+          Button 32
+        </Button>
+        <DarkDiv>
+          <Button dimension="s" appearance="white" loading>
+            Button 32
+          </Button>
+        </DarkDiv>
+        <Button dimension="s" appearance="danger" loading>
+          Button 32
+        </Button>
+        <Button dimension="s" appearance="success" loading>
+          Button 32
+        </Button>
+      </WrapperVertical>
+    </Wrapper>
     <Separator />
     <div>
       <T font="Body/Body 1 Long" as="div">
         Button with loader stretch
       </T>
       <Separator />
-      <Button disabled style={{ width: '100%' }}>
-        <Spinner dimension="m" />
-      </Button>
+      <Button disabled loading style={{ width: '100%' }}></Button>
     </div>
   </>
 );
