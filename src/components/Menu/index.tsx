@@ -22,7 +22,7 @@ export const menuListHeights = css<{ dimension?: MenuDimensions }>`
   }};
 `;
 
-const Wrapper = styled.div<{ dimension?: MenuDimensions; maxLines?: number }>`
+const Wrapper = styled.div<{ dimension?: MenuDimensions }>`
   pointer-events: initial;
   background-color: ${(p) => p.theme.color['Special/Elevated BG']};
   border-radius: 4px;
@@ -46,6 +46,8 @@ const StyledDiv = styled.div`
 export type ItemIdentifier = string | number | null;
 
 export interface MenuProps extends HTMLAttributes<HTMLDivElement> {
+  /** Размер Меню */
+  dimension?: MenuDimensions;
   /** Активная секция Menu */
   active?: ItemIdentifier;
   /** выбранная секция Menu */
@@ -56,7 +58,7 @@ export interface MenuProps extends HTMLAttributes<HTMLDivElement> {
   onActivateItem?: (id: ItemIdentifier) => void;
   /** Обработчик выбора item в меню */
   onSelectItem?: (id: ItemIdentifier) => void;
-
+  /** Модель данных, с рендер-пропсами*/
   model: Array<ItemProps>;
 }
 

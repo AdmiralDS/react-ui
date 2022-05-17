@@ -39,6 +39,7 @@
     "generate-svg-icon-exports": "node ./scripts/generate-svg-icon-exports.js"
   },
   "dependencies": {
+    "@admiral-ds/flags": "^1.0.0",
     "@admiral-ds/fonts": "^1.0.0",
     "@admiral-ds/icons": "^1.0.0",
     "react": ">=16",

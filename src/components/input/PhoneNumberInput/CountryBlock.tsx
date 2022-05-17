@@ -1,36 +1,23 @@
 import * as React from 'react';
-import { HTMLAttributes } from 'react';
-import styled, { css } from 'styled-components';
-import { typography } from '#src/components/Typography';
+import { ElementType } from 'react';
+import styled from 'styled-components';
 import { Flag } from '#src/components/input/PhoneNumberInput/Flag';
-import { Dimension } from '#src/components/input/PhoneNumberInput/utils';
+import { FlagsPack } from '@admiral-ds/flags';
+import type { CountryName } from '@admiral-ds/flags';
+import type { MenuItemProps } from '#src/components/MenuItem';
+import { MenuItem } from '#src/components/MenuItem';
 
-export interface CountryBlockProps extends HTMLAttributes<HTMLLIElement> {
-  active?: boolean;
-  selected?: boolean;
-  disabled?: boolean;
-  dimension?: Dimension;
-  SvgFlag: React.ElementType | null;
-  code: string;
+export interface CountryBlockProps extends MenuItemProps {
+  name: CountryName;
   value: string;
+  code: string;
 }
 
-const activeCountry = css`
-  background-color: ${(p) => p.theme.color['Opacity/Focus']};
-`;
-
-const CountryBlockStyle = styled.li<{ disabled?: boolean; selected?: boolean; active?: boolean; dimension?: string }>`
-  position: relative;
+const StyledCountryBlock = styled(MenuItem)<{ disabled?: boolean }>`
   display: flex;
-  align-items: center;
   justify-content: flex-start;
-  user-select: none;
-  color: ${(p) => (p.disabled ? p.theme.color['Neutral/Neutral 30'] : p.theme.color['Neutral/Neutral 90'])};
+  flex-flow: nowrap;
   cursor: ${(p) => (p.disabled ? 'not-allowed' : 'pointer')};
-  padding: ${(p) => (p.dimension === 'xl' ? '12px 16px' : p.dimension === 'm' ? '8px 16px' : '6px 12px')};
-  ${(p) => (p.dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
-
-  ${(p) => ((p.selected && !p.active && !p.disabled) || (p.active && !p.disabled) ? activeCountry : '')}
 `;
 
 const StyledCountryName = styled.span`
@@ -45,14 +32,16 @@ const CountryCode = styled.span`
   color: ${(p) => p.theme.color['Neutral/Neutral 50']};
 `;
 
-export const CountryBlock = React.forwardRef<HTMLLIElement, CountryBlockProps>((props, ref) => {
-  const { dimension, value, code, SvgFlag, ...otherProps }: CountryBlockProps = props;
+export const CountryBlock = React.forwardRef<HTMLDivElement, CountryBlockProps>((props, ref) => {
+  const { dimension, value, code, name, ...otherProps }: CountryBlockProps = props;
+
+  const SvgFlag = (FlagsPack as { [key: CountryName]: ElementType })[name];
 
   return (
-    <CountryBlockStyle ref={ref} {...otherProps} dimension={dimension}>
+    <StyledCountryBlock dimension={dimension} ref={ref} {...otherProps}>
       {SvgFlag && <Flag dimension={dimension} Component={SvgFlag} />}
       <StyledCountryName>{value}</StyledCountryName>
       <CountryCode>{code}</CountryCode>
-    </CountryBlockStyle>
+    </StyledCountryBlock>
   );
 });
