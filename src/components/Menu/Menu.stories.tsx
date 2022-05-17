@@ -1,7 +1,7 @@
-import React, { Fragment, useState } from 'react';
+import React, { HTMLAttributes, useMemo, useState } from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { Menu } from '#src/components/Menu';
-import { MenuItem } from '#src/components/MenuItem';
+import { MenuItem, RenderOptionProps } from '#src/components/MenuItem';
 import styled from 'styled-components';
 import { typography } from '#src/components/Typography';
 import { ReactComponent as CardSolid } from '@admiral-ds/icons/build/finance/CardSolid.svg';
@@ -50,15 +50,18 @@ export default {
   },
 } as ComponentMeta<typeof Menu>;
 
-const StyledText = styled.div<{ disabled?: boolean }>`
-  ${typography['Body/Body 1 Long']}
-  pointer-events: none;
-`;
-
 const StyledAdditionalText = styled.div`
   ${typography['Body/Body 2 Long']}
   color: ${({ theme }) => theme.color['Neutral/Neutral 50']};
   pointer-events: none;
+`;
+
+const StyledMenuItem = styled(MenuItem)`
+  padding: 6px 8px;
+  margin: 0 8px 0 24px;
+  border-bottom: ${({ theme }) => `1px solid ${theme.color['Neutral/Neutral 20']}`};
+  flex-direction: column;
+  align-items: flex-start;
 `;
 
 const TemplateWithCards: ComponentStory<typeof Menu> = (args) => {
@@ -109,34 +112,49 @@ const TemplateWithCards: ComponentStory<typeof Menu> = (args) => {
     },
   ];
 
-  const [selected, setSelected] = useState<string | number>('');
+  const model = useMemo(() => {
+    return category.reduce((acc: any, item: any) => {
+      acc.push({
+        id: item.id,
+        render: (options: RenderOptionProps) => (
+          <MenuItem key={item.id} disabled={true} {...options}>
+            {item.name}
+          </MenuItem>
+        ),
+        disabled: true,
+      });
+      return acc.concat(
+        item.content.map((subitem: any) => {
+          return {
+            id: subitem.id,
+            render: (options: RenderOptionProps) => (
+              <StyledMenuItem key={subitem.id} {...options}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                  {subitem.label} <CardSolid width={24} height={24} />
+                </div>
+                <StyledAdditionalText>Дополнительный текст</StyledAdditionalText>
+              </StyledMenuItem>
+            ),
+          };
+        }),
+      );
+    }, []);
+  }, []);
+
+  const [selected, setSelected] = useState<string | number | null>('');
+  const [active, setActive] = useState<string | number | null>('');
 
   return (
     <>
       <div style={{ width: 'fit-content' }}>
-        <Menu {...args} selected={selected.toString()} onSelectItem={setSelected}>
-          {category.map((item, index) => {
-            return (
-              <Fragment key={index}>
-                <MenuItem disabled key={item.id} dimension={args.dimension}>
-                  <StyledText>{item.name}</StyledText>
-                </MenuItem>
-                {item.content.map((subCategory) => {
-                  return (
-                    <MenuItem dimension={args.dimension} tabIndex={0} key={subCategory.id} id={subCategory.id}>
-                      <div style={{ width: '100%' }}>
-                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                          {subCategory.label} <CardSolid width={24} height={24} />
-                        </div>
-                        <StyledAdditionalText>Дополнительный текст</StyledAdditionalText>
-                      </div>
-                    </MenuItem>
-                  );
-                })}
-              </Fragment>
-            );
-          })}
-        </Menu>
+        <Menu
+          {...args}
+          model={model}
+          selected={selected}
+          onSelectItem={setSelected}
+          active={active}
+          onActivateItem={setActive}
+        />
       </div>
     </>
   );
@@ -176,19 +194,128 @@ const items = [
   },
 ];
 
-const SimpleTemplate: ComponentStory<typeof Menu> = (args) => {
+const SimpleTemplate: ComponentStory<typeof Menu> = () => {
+  const model = useMemo(() => {
+    return items.map((item) => ({
+      id: item.id,
+      render: (options: RenderOptionProps) => (
+        <MenuItem dimension={'s'} {...options} key={item.id}>
+          {item.label}
+        </MenuItem>
+      ),
+    }));
+  }, []);
+
   return (
     <>
       <div style={{ width: 'fit-content' }}>
-        <Menu {...args}>
-          {items.map((item) => {
-            return (
-              <MenuItem dimension={args.dimension} id={item.id} key={item.id}>
-                {item.label}
-              </MenuItem>
-            );
-          })}
-        </Menu>
+        <Menu model={model} />
+      </div>
+    </>
+  );
+};
+
+interface MyMenuItemProps extends HTMLAttributes<HTMLDivElement>, RenderOptionProps {
+  text: string;
+  success?: boolean;
+}
+
+//<editor-fold desc="MyMenuItem">
+const MyItem = styled.div<{
+  selected?: boolean;
+  hovered?: boolean;
+  width?: number;
+  success?: boolean;
+}>`
+  display: flex;
+  align-items: center;
+  user-select: none;
+  flex-flow: wrap;
+  position: relative;
+  justify-content: space-between;
+  outline: none;
+  white-space: pre;
+  margin: 0;
+  cursor: pointer;
+  padding: 12px 16px;
+
+  ${typography['Body/Body 1 Long']}
+
+  background: ${({ theme, selected }) =>
+    selected ? theme.color['Opacity/Focus'] : theme.color['Special/Elevated BG']};
+
+  &&[data-disabled='true'] {
+    cursor: default;
+    background-color: ${({ theme, selected }) =>
+      selected ? theme.color['Opacity/Focus'] : theme.color['Special/Elevated BG']};
+    color: ${(p) => p.theme.color['Neutral/Neutral 30']};
+  }
+
+  &&[data-hovered='true'] {
+    background-color: ${(p) => p.theme.color['Opacity/Hover']};
+    color: ${({ theme, success }) =>
+      success ? theme.color['Success/Success 70'] : theme.color['Magenta/Magenta 60 Main']};
+  }
+
+  color: ${({ theme, success }) =>
+    success ? theme.color['Success/Success 50 Main'] : theme.color['Purple/Purple 60 Main']};
+`;
+
+const MyMenuItem = ({
+  text,
+  onHover,
+  onClickItem,
+  disabled,
+  hovered,
+  selected = false,
+  success = false,
+  ...props
+}: MyMenuItemProps) => {
+  const handleMouseMove = () => {
+    if (!disabled) onHover?.();
+  };
+
+  const handleClick = () => {
+    if (!disabled) onClickItem?.();
+  };
+
+  return (
+    <MyItem
+      selected={selected}
+      data-disabled={disabled}
+      data-hovered={hovered}
+      success={success}
+      onMouseMove={handleMouseMove}
+      onClick={handleClick}
+      {...props}
+    >
+      {text}
+    </MyItem>
+  );
+};
+//</editor-fold>
+
+const CustomItemTemplate: ComponentStory<typeof Menu> = () => {
+  const model = useMemo(() => {
+    return items.map((item) => ({
+      id: item.id,
+      render: (options: RenderOptionProps) => (
+        <MyMenuItem
+          success={item.id === '3'}
+          {...options}
+          key={item.id}
+          text={item.label}
+          disabled={item.value === 4}
+        />
+      ),
+      disabled: item.value === 4,
+    }));
+  }, []);
+
+  return (
+    <>
+      <div style={{ width: 'fit-content' }}>
+        <Menu model={model} defaultSelected={'4'} />
       </div>
     </>
   );
@@ -196,6 +323,8 @@ const SimpleTemplate: ComponentStory<typeof Menu> = (args) => {
 
 export const Simple = SimpleTemplate.bind({});
 export const Category = TemplateWithCards.bind({});
+export const CustomItems = CustomItemTemplate.bind({});
 
 Simple.storyName = 'Базовый пример';
 Category.storyName = 'Пример с группами';
+CustomItems.storyName = 'Пример с кастомными пунктами меню';
