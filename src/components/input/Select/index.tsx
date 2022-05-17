@@ -396,10 +396,6 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       }
     };
 
-    const onWrapperClick = () => {
-      setIsSearchPanelOpen(true);
-    };
-
     const extendSelectValueToInputValue = () => {
       if (!visibleValueIsString || searchValue || !shouldRenderSelectValue) return;
 
@@ -435,9 +431,9 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
     };
 
     const onBlur = (evt: React.FocusEvent<HTMLDivElement>) => {
-      setIsFocused(false);
-
+      // если фокус переходит не на инпут, содержащийся внутри компонента
       if (!evt.currentTarget.contains(evt.relatedTarget)) {
+        setIsFocused(false);
         onBlurFromProps?.(evt);
         onCloseSelect();
       }
@@ -463,8 +459,6 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
     React.useEffect(() => {
       if (isSearchPanelOpen) {
         modeIsSelect ? selectRef.current?.focus() : inputRef.current?.focus();
-      } else {
-        modeIsSelect ? selectRef.current?.blur() : inputRef.current?.blur();
       }
     }, [isSearchPanelOpen, modeIsSelect]);
 
@@ -488,7 +482,8 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
         data-status={status}
         onKeyUp={handleKeyUp}
         onKeyDown={onWrapperKeyDown}
-        onClick={onWrapperClick}
+        onClick={handleSearchPanelToggle}
+        onMouseDown={preventDefault}
         onBlur={onBlur}
         onFocus={onFocus}
       >
@@ -524,6 +519,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
           multiple={multiple}
           fixHeight={shouldFixHeight}
           isEmpty={isEmpty}
+          onMouseDown={preventDefault}
         >
           {shouldRenderSelectValue && wrappedVisibleValue}
           <Input
@@ -545,6 +541,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
             data-dimension={dimension || TextInput.defaultProps?.dimension}
             // Запретит перенос фокуса с инпута при клике по всему, что внутри Dropdown
             onMouseDown={preventDefault}
+            onClick={stopPropagation}
             ref={dropDownRef}
           >
             <DropDownSelectProvider

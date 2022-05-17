@@ -54,7 +54,16 @@ describe('Tooltip', () => {
     const component = <WrappedComponentWithTooltip renderContent={() => 'tooltipText'} />;
     const { rerender } = render(component);
     act(() => {
-      fireEvent.mouseEnter(screen.getByTestId('wrapped-component'));
+      /**
+       * Стандартный fireEvent.mouseEnter(smth) вызывает только React SyntheticEvent onMouseEnter,
+       * но не вызывает listener, назначенный с помощью addEventListener. В связи с этим пишем свое кастомное событие.
+       * https://github.com/testing-library/react-testing-library/issues/577
+       */
+      const mouseenter = new MouseEvent('mouseenter', {
+        bubbles: true,
+        cancelable: false,
+      });
+      fireEvent(screen.getByTestId('wrapped-component'), mouseenter);
       jest.runAllTimers();
     });
     rerender(component);
@@ -86,7 +95,11 @@ describe('Tooltip', () => {
     const component = <WrappedComponentWithTooltip renderContent={() => 'tooltipText'} withDelay />;
     const { rerender } = render(component);
     act(() => {
-      fireEvent.mouseEnter(screen.getByTestId('wrapped-component'));
+      const mouseenter = new MouseEvent('mouseenter', {
+        bubbles: true,
+        cancelable: false,
+      });
+      fireEvent(screen.getByTestId('wrapped-component'), mouseenter);
       jest.advanceTimersByTime(1500);
       rerender(component);
     });

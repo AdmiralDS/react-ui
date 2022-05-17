@@ -758,3 +758,22 @@ export const rowListMenu: RowData[] = [
     rate: 4,
   },
 ];
+
+export const virtualRowList = [...Array(1000).keys()].map((item, index) => ({
+  id: String(index),
+  transfer_number: index,
+  transfer_date: new Date('2020-08-06').toLocaleDateString(),
+}));
+
+export const virtualColumnList: Column[] = [
+  {
+    name: 'transfer_number',
+    title: 'Номер сделки',
+    width: '40%',
+  },
+  {
+    name: 'transfer_date',
+    title: 'Дата сделки',
+    width: '40%',
+  },
+];

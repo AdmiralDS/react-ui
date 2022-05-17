@@ -22,6 +22,8 @@ import {
   rowListSort,
   columnListExtra,
   rowListMenu,
+  virtualColumnList,
+  virtualRowList,
 } from '#src/components/Table/data';
 import { ReactComponent as AcceptSolid } from '@admiral-ds/icons/build/category/AcceptSolid.svg';
 
@@ -336,6 +338,10 @@ const Template6: ComponentStory<typeof Table> = ({ rowList, ...args }) => {
   );
 };
 
+const Template7: ComponentStory<typeof Table> = (args) => {
+  return <Table {...args} virtualScroll={{ fixedRowHeight: 40 }} style={{ height: '500px' }} />;
+};
+
 export const Playground = Template.bind({});
 Playground.args = {
   rowList,
@@ -577,6 +583,27 @@ RowOverflowMenu.parameters = {
       В качестве результата функция должна возвращать компонент OverflowMenu. Размер OverflowMenu 
       следует задавать согласно правилу:\n\n* Для таблицы с dimension="s" или dimension="m" используется 
       OverflowMenu c dimension="m"\n\n* Для таблицы с dimension="l" или dimension="xl" используется OverflowMenu c dimension="l"`,
+    },
+  },
+};
+
+export const VirtualScroll = Template7.bind({});
+VirtualScroll.args = {
+  rowList: virtualRowList,
+  columnList: virtualColumnList,
+};
+VirtualScroll.storyName = 'Table. Виртуальный скролл.';
+VirtualScroll.parameters = {
+  docs: {
+    description: {
+      story: `В случае если в таблице необходимо отобразить большое количество строк, возможно использовать функцию виртуального скролла.
+      На данный момент функция виртуального скролла реализована только для случая, когда все строки в таблице единой фиксированной высоты. 
+      Например, для размера таблицы m высота строки по умолчанию составляет 40px (если содержимое ячеек занимает одну 
+      строку в высоту и для ячеек не было задано каких-то кастомных стилей), для размеров s - 32px, l - 48px, xl - 56px.\n\nДля того 
+      чтобы активировать виртуальный скролл, необходимо задать параметр virtualScroll. Значением virtualScroll должен являться объект, в котором 
+      в свойстве fixedRowHeight необходимо задать фиксированную высоту строки.\n\nПримечание: таблица обязательно должна иметь четко 
+      заданную высоту (height, minHeight). Это нужно для того, чтобы тело таблицы, которое
+      является flex-элементом, могло растянуться на всю высоту таблицы, в противном случае высота тела таблицы будет равна 0.`,
     },
   },
 };
