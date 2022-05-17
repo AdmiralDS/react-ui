@@ -1,8 +1,9 @@
 import { uid } from '#src/components/common/uid';
-import type { Appearance, Dimension } from './types';
+import type { Appearance, Dimension, StyledButtonProps } from './types';
 import type { ButtonHTMLAttributes } from 'react';
 import * as React from 'react';
 import styled from 'styled-components';
+import { Spinner } from '#src/components/Spinner';
 import { appearanceMixin } from './appearanceMixin';
 import { dimensionMixin } from './dimensionMixin';
 
@@ -18,36 +19,12 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
   /** Отображать кнопку квадратной*/
   displayAsSquare?: boolean;
+
+  /** Состояние загрузки */
+  loading?: boolean;
 }
 
-const StyledButton = styled.button.attrs<ButtonProps, { 'data-dimension'?: Dimension; 'data-appearance'?: string }>(
-  (props) => ({
-    'data-dimension': props.dimension,
-    'data-appearance': [props.appearance, props.displayAsDisabled ? 'disabled' : undefined]
-      .filter((val) => val !== undefined)
-      .join(' '),
-  }),
-)<ButtonProps>`
-  box-sizing: border-box;
-  display: inline-block;
-  border: none;
-  border-radius: 4px;
-  appearance: none;
-  vertical-align: center;
-
-  ${appearanceMixin};
-
-  ${dimensionMixin}
-  &:hover {
-    cursor: pointer;
-  }
-
-  &:disabled {
-    cursor: not-allowed;
-  }
-`;
-
-const ButtonContent = styled.span<{ dimension?: Dimension }>`
+const ButtonContent = styled.span<{ dimension?: Dimension; $loading?: boolean }>`
   vertical-align: top;
 
   display: inline-flex;
@@ -83,10 +60,53 @@ const ButtonContent = styled.span<{ dimension?: Dimension }>`
   }
 `;
 
+const StyledButton = styled.button.attrs<
+  StyledButtonProps,
+  { 'data-dimension'?: Dimension; 'data-appearance'?: string }
+>((props) => ({
+  'data-dimension': props.dimension,
+  'data-appearance': [props.appearance, props.displayAsDisabled ? 'disabled' : undefined]
+    .filter((val) => val !== undefined)
+    .join(' '),
+}))<StyledButtonProps>`
+  position: relative;
+  box-sizing: border-box;
+  display: inline-block;
+  border: none;
+  border-radius: 4px;
+  appearance: none;
+  vertical-align: center;
+
+  ${appearanceMixin};
+
+  ${dimensionMixin}
+
+  ${ButtonContent} {
+    visibility: ${(p) => (p.$loading ? 'hidden' : 'visible')};
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  pointer-events: ${(p) => (p.$loading || p.disabled ? 'none' : 'all')};
+`;
+
+const StyledSpinner = styled(Spinner)<{ dimension?: Dimension }>`
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+`;
+
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ appearance = 'primary', dimension = 'xl', type = 'button', children, ...props }, ref) => {
+  ({ appearance = 'primary', dimension = 'xl', type = 'button', loading = false, children, ...props }, ref) => {
+    const spinnerDimension = dimension === 's' ? 's' : 'm';
+    const spinnerInverse = appearance !== 'secondary' && appearance !== 'ghost';
+
     return (
-      <StyledButton ref={ref} appearance={appearance} dimension={dimension} type={type} {...props}>
+      <StyledButton ref={ref} appearance={appearance} dimension={dimension} type={type} $loading={loading} {...props}>
+        {loading && <StyledSpinner dimension={spinnerDimension} inverse={spinnerInverse} />}
         <ButtonContent>
           {React.Children.toArray(children).map((child) =>
             typeof child === 'string' ? <span key={uid()}>{child}</span> : child,

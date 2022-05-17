@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useMemo, useRef, useState } from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { DropdownContainer } from '#src/components/DropdownContainer';
 import { Button } from '#src/components/Button';
@@ -7,7 +7,8 @@ import { typography } from '#src/components/Typography';
 import { ReactComponent as CardSolid } from '@admiral-ds/icons/build/finance/CardSolid.svg';
 import { withDesign } from 'storybook-addon-designs';
 import { Menu } from '#src/components/Menu';
-import { MenuItem } from '#src/components/MenuItem';
+import { MenuItem, RenderOptionProps } from '#src/components/MenuItem';
+import type { ItemIdentifier } from '#src/components/Menu';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -131,13 +132,30 @@ const TemplateWithMenu: ComponentStory<typeof DropdownContainer> = (args) => {
     },
   ];
 
+  const model = useMemo(() => {
+    return cards.map((item) => {
+      return {
+        id: item.id,
+        render: (options: RenderOptionProps) => (
+          <MenuItem key={item.id} {...options}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+              {item.label} <CardSolid width={24} height={24} />
+            </div>
+            <StyledAdditionalText>Дополнительный текст</StyledAdditionalText>
+          </MenuItem>
+        ),
+      };
+    }, []);
+  }, []);
+
   const [open, setOpen] = useState(false);
-  const [selected, setSelected] = useState<string>('');
+  const [selected, setSelected] = useState<ItemIdentifier>(null);
+  const [active, setActive] = useState<ItemIdentifier>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
 
   const { targetRef, ...other } = args;
 
-  const handleSelectItem = (value: string) => {
+  const handleSelectItem = (value: ItemIdentifier) => {
     setSelected(value);
     setOpen(false);
   };
@@ -155,20 +173,13 @@ const TemplateWithMenu: ComponentStory<typeof DropdownContainer> = (args) => {
             onClickOutside={() => setOpen(!open)}
             {...other}
           >
-            <Menu selected={selected} onSelectItem={handleSelectItem}>
-              {cards.map((item) => {
-                return (
-                  <MenuItem dimension={'m'} tabIndex={0} key={item.id} id={item.id}>
-                    <div style={{ width: '100%' }}>
-                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                        {item.label} <CardSolid width={24} height={24} />
-                      </div>
-                      <StyledAdditionalText>Дополнительный текст</StyledAdditionalText>
-                    </div>
-                  </MenuItem>
-                );
-              })}
-            </Menu>
+            <Menu
+              model={model}
+              selected={selected}
+              active={active}
+              onActivateItem={setActive}
+              onSelectItem={handleSelectItem}
+            />
           </DropdownContainer>
         )}
       </Wrapper>

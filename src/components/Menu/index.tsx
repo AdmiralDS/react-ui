@@ -1,7 +1,8 @@
-import type { HTMLAttributes, ReactNode } from 'react';
+import type { HTMLAttributes } from 'react';
 import * as React from 'react';
-import { ReactElement, UIEvent, useLayoutEffect, useState } from 'react';
+import { useEffect } from 'react';
 import styled, { css } from 'styled-components';
+import { ItemProps } from '#src/components/MenuItem';
 import { keyboardKey } from '#src/components/common/keyboardKey';
 
 export type MenuDimensions = 'l' | 'm' | 's';
@@ -21,7 +22,7 @@ export const menuListHeights = css<{ dimension?: MenuDimensions }>`
   }};
 `;
 
-const Wrapper = styled.div<{ dimension?: MenuDimensions }>`
+const Wrapper = styled.div<{ dimension?: MenuDimensions; maxLines?: number }>`
   pointer-events: initial;
   background-color: ${(p) => p.theme.color['Special/Elevated BG']};
   border-radius: 4px;
@@ -34,7 +35,7 @@ const Wrapper = styled.div<{ dimension?: MenuDimensions }>`
   scroll-behavior: smooth;
 `;
 
-const Fieldset = styled.fieldset`
+const StyledDiv = styled.div`
   margin: 0;
   padding: 8px 0;
   appearance: none;
@@ -42,136 +43,118 @@ const Fieldset = styled.fieldset`
   border: none;
 `;
 
-const StyledInput = styled.input`
-  appearance: none;
-  margin: 0;
-  position: absolute;
-  //top: 0;
-  //left: 0;
-  //transform: translate(-50%, -50%);
-  height: 100%;
-`;
-
-const RadioWrapper = styled.div`
-  position: relative;
-`;
+export type ItemIdentifier = string | number | null;
 
 export interface MenuProps extends HTMLAttributes<HTMLDivElement> {
-  /** Размер Меню */
-  dimension?: MenuDimensions;
-  /** Элементы содержимого */
-  children: ReactNode;
   /** Активная секция Menu */
-  selected?: string;
+  active?: ItemIdentifier;
+  /** выбранная секция Menu */
+  selected?: ItemIdentifier;
+  /** выбранная по умолчаниию секция Menu */
+  defaultSelected?: ItemIdentifier;
+  /** Обработчик выбора item в меню */
+  onActivateItem?: (id: ItemIdentifier) => void;
+  /** Обработчик выбора item в меню */
+  onSelectItem?: (id: ItemIdentifier) => void;
 
-  onSelectItem?: (value: string) => void;
+  model: Array<ItemProps>;
 }
 
 export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
-  ({ children, dimension = 'l', selected = '', onSelectItem, ...props }, ref) => {
-    const [hovered, setHovered] = React.useState<string | undefined>(selected);
-    const [mySelected, setSelected] = useState<string | undefined>(selected);
-    const fieldsetRef = React.useRef<HTMLFieldSetElement | null>(null);
+  ({ model, defaultSelected = null, selected, active, onSelectItem, onActivateItem, ...props }, ref) => {
+    const [selectedState, setSelectedState] = React.useState<ItemIdentifier>(defaultSelected);
+    const [activeState, setActiveState] = React.useState<ItemIdentifier>(null);
 
-    const handleKeyDown = (e: React.KeyboardEvent) => {
-      const activeOption = e.currentTarget.id;
-      const code = keyboardKey.getCode(e);
-      switch (code) {
-        case keyboardKey[' ']:
-        case keyboardKey.Enter: {
-          if (mySelected !== activeOption) {
-            setSelected(activeOption);
-            if (onSelectItem) onSelectItem(activeOption);
+    const selectedId = selected === undefined ? selectedState : selected;
+    const activeId = active === undefined ? activeState : active;
+
+    const menuRef = React.useRef<HTMLDivElement | null>(null);
+
+    const findNextId = () => {
+      const currentIndex = model.findIndex((item) => item.id === activeId);
+      let nextIndex = currentIndex < model.length - 1 ? currentIndex + 1 : 0;
+
+      while (model[nextIndex].disabled && nextIndex !== currentIndex) {
+        nextIndex = nextIndex < model.length - 1 ? nextIndex + 1 : 0;
+      }
+      return model[nextIndex].id;
+    };
+
+    const findPreviousId = () => {
+      const currentIndex = model.findIndex((item) => item.id === activeId);
+      let nextIndex = currentIndex > 0 ? currentIndex - 1 : model.length - 1;
+
+      while (model[nextIndex].disabled && nextIndex !== currentIndex) {
+        nextIndex = nextIndex > 0 ? nextIndex - 1 : model.length - 1;
+      }
+      return model[nextIndex].id;
+    };
+
+    const activateItem = (id: ItemIdentifier) => {
+      if (activeId !== id) setActiveState(id);
+      onActivateItem?.(id);
+    };
+
+    const selectItem = (id: ItemIdentifier) => {
+      if (selectedId !== id) setSelectedState(id);
+      onSelectItem?.(id);
+    };
+
+    useEffect(() => {
+      function handleKeyDown(e: KeyboardEvent) {
+        const code = keyboardKey.getCode(e);
+        switch (code) {
+          case keyboardKey[' ']:
+          case keyboardKey.Enter: {
+            selectItem(activeId);
+            e.preventDefault();
+            break;
           }
-          e.preventDefault();
-          break;
+          case keyboardKey.ArrowDown: {
+            const nextId = findNextId();
+            activateItem(nextId);
+            e.preventDefault();
+            break;
+          }
+          case keyboardKey.ArrowUp: {
+            const previousId = findPreviousId();
+            activateItem(previousId);
+            e.preventDefault();
+            break;
+          }
         }
       }
-    };
 
-    const mouseMoveHandler = (e: React.MouseEvent<HTMLDivElement>) => {
-      const activeOption = e.currentTarget.id;
-      const input = e.currentTarget.querySelector('input[type="radio"]');
-      if (hovered !== activeOption) {
-        setHovered(activeOption);
-        (input as HTMLInputElement)?.focus();
-      }
-    };
-
-    const clickHandler = (e: React.MouseEvent<HTMLDivElement>) => {
-      const activeOption = e.currentTarget.id;
-      if (selected !== activeOption) {
-        setSelected(activeOption);
-        if (onSelectItem) onSelectItem(activeOption);
-      }
-      const input = e.currentTarget.closest('.radio-wrapper')?.querySelector('input[type="radio"]');
-      (input as HTMLInputElement)?.focus();
-    };
-
-    const decorateHandlers = <T extends UIEvent>(handlers: Array<React.EventHandler<T>>) => {
-      return function (e: T) {
-        handlers.filter((item) => item).forEach((item) => item(e));
+      document.addEventListener('keydown', handleKeyDown);
+      return () => {
+        document.removeEventListener('keydown', handleKeyDown);
       };
-    };
+    }, [active, activeState]);
 
-    const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-      const activeOption = e.currentTarget.id;
-      setHovered(activeOption);
-    };
-
-    const getClonedChild = (child: ReactElement) => {
-      const clonedChild = React.cloneElement(child, {
-        hovered: hovered === child.props.id,
-        selected: mySelected === child.props.id,
-        onClick: decorateHandlers([clickHandler, child.props.onClick]),
-        ...child.props,
-      });
-
-      return (
-        <RadioWrapper id={child.props.id} onMouseMove={mouseMoveHandler} className="radio-wrapper">
-          <StyledInput
-            type="radio"
-            name="radio-set"
-            id={child.props.id}
-            onChange={changeHandler}
-            onKeyDown={handleKeyDown}
-            checked={child.props.id === hovered}
-            disabled={child.props.disabled}
-          />
-          <label htmlFor={child.props.id}>{clonedChild}</label>
-        </RadioWrapper>
+    const renderChildren = () => {
+      return model.map((item) =>
+        item.render({
+          hovered: activeId === item.id,
+          selected: selectedId === item.id,
+          onHover: () => activateItem(item.id),
+          onClickItem: () => selectItem(item.id),
+        }),
       );
     };
 
-    const renderChildrenDropDown = () => {
-      return React.Children.map(children, (child: React.ReactNode) => {
-        if (React.isValidElement(child)) {
-          const detectedSubGroup = child.props.children?.some?.((element: ReactElement) => Array.isArray(element));
+    useEffect(() => {
+      const hoveredItem = menuRef.current?.querySelector('[data-hovered="true"]');
 
-          if (detectedSubGroup) {
-            return child.props.children.flat().map((child: ReactElement) => {
-              return getClonedChild(child);
-            });
-          }
-
-          return getClonedChild(child);
-        }
-        return child;
+      hoveredItem?.scrollIntoView({
+        behavior: 'smooth',
+        inline: 'center',
+        block: 'nearest',
       });
-    };
-
-    useLayoutEffect(() => {
-      const selectedItem =
-        fieldsetRef.current?.querySelector('input[type="radio"]:checked') ||
-        fieldsetRef.current?.querySelector('input[type="radio"]:not([disabled])');
-
-      if (!hovered) setHovered((selectedItem as HTMLInputElement)?.id);
-      (selectedItem as HTMLInputElement)?.focus();
-    }, []);
+    }, [active, activeState]);
 
     return (
       <Wrapper ref={ref} {...props}>
-        <Fieldset ref={fieldsetRef}>{renderChildrenDropDown()}</Fieldset>
+        <StyledDiv ref={menuRef}>{renderChildren()}</StyledDiv>
       </Wrapper>
     );
   },
