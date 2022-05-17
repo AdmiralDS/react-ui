@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { HTMLAttributes, useCallback, useEffect } from 'react';
+import { HTMLAttributes, MouseEventHandler, useEffect } from 'react';
 import styled, { css } from 'styled-components';
 import { ErrorBlock } from '#src/components/input/FileUploader/ErrorBlock';
 import { Spinner } from '#src/components/Spinner';
@@ -23,14 +23,13 @@ export type FileProps = {
   showPreview?: boolean;
 };
 
-export interface FilePreviewProps extends Omit<HTMLAttributes<HTMLDivElement>, 'id' | 'onClick'> {
+export interface FilePreviewProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onClick'> {
   file: FileProps;
-  id: number;
   /** Размер инпута */
   dimension?: Dimension;
   /** Размер файлового компонента */
   fileDimension?: Dimension;
-  onClick?: (id: number) => void;
+  onCloseClick?: MouseEventHandler<HTMLDivElement>;
 }
 
 const getIcon = (type: string) => {
@@ -85,6 +84,7 @@ const Container = styled.div<{ dimension?: Dimension }>`
   flex: ${(p) => (p.dimension === 'xl' ? '1 1 36%' : '1 1 auto')};
   margin-top: 16px;
   overflow: hidden;
+
   &:nth-of-type(even) {
     margin-left: ${(p) => (p.dimension === 'xl' ? '16px' : '0')};
   }
@@ -124,6 +124,7 @@ const ImagePreview = styled.div`
   border-radius: 4px;
   margin-right: 8px;
   overflow: hidden;
+
   > img {
     height: 100%;
     width: 100%;
@@ -133,6 +134,7 @@ const ImagePreview = styled.div`
 const IconWrapper = styled.div<{ status?: Status }>`
   margin-right: 8px;
   border-radius: 4px;
+
   & svg {
     width: 40px;
     height: 40px;
@@ -195,7 +197,14 @@ const Close = styled.div`
   }
 `;
 
-export const FileInfo = ({ id, file, dimension, fileDimension, onClick, children, ...props }: FilePreviewProps) => {
+export const FileInfo = ({
+  file,
+  onCloseClick = () => undefined,
+  dimension,
+  fileDimension,
+  children,
+  ...props
+}: FilePreviewProps) => {
   const {
     file: { type, name, size },
     status,
@@ -209,10 +218,6 @@ export const FileInfo = ({ id, file, dimension, fileDimension, onClick, children
   const [imageSrc, setImageSrc] = React.useState('');
   const imageFile = showPreview && type.startsWith('image');
   const fileInfo = `${fileFormat}・${fileSize} Mb`;
-
-  const handleClick = useCallback(() => {
-    onClick?.(id);
-  }, [onClick, id]);
 
   const getImageUrl = (file: FileProps) => {
     const reader = new FileReader();
@@ -264,7 +269,7 @@ export const FileInfo = ({ id, file, dimension, fileDimension, onClick, children
         <FunctionalWrapper>
           {status === 'Loading' && <StyledSpinner />}
           {dataTransferConstructorSupported() && (
-            <Close onClick={handleClick}>
+            <Close onClick={onCloseClick}>
               <CloseOutline />
             </Close>
           )}
