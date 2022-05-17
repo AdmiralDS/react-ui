@@ -38,7 +38,7 @@ export const CountryBlock = React.forwardRef<HTMLDivElement, CountryBlockProps>(
   const SvgFlag = (FlagsPack as { [key: CountryName]: ElementType })[name];
 
   return (
-    <StyledCountryBlock ref={ref} {...otherProps}>
+    <StyledCountryBlock dimension={dimension} ref={ref} {...otherProps}>
       {SvgFlag && <Flag dimension={dimension} Component={SvgFlag} />}
       <StyledCountryName>{value}</StyledCountryName>
       <CountryCode>{code}</CountryCode>

@@ -23,6 +23,18 @@ export interface CountriesListProps extends Omit<MenuProps, 'model'> {
 
 const StyledCountriesList = styled(Menu)<{ dimension: MenuDimensions }>`
   ${(p) => (p.dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
+  max-height: ${({ dimension }) => {
+    switch (dimension) {
+      case 'l':
+        return `${48 * 4 + 16}px`;
+      case 'm':
+        return `${40 * 4 + 16}px`;
+      case 's':
+        return `${32 * 4 + 16}px`;
+      default:
+        return `${48 * 4 + 16}px`;
+    }
+  }};
 `;
 
 export const CountriesList = ({ countries, dimension = 'l', ...props }: CountriesListProps) => {
@@ -36,7 +48,9 @@ export const CountriesList = ({ countries, dimension = 'l', ...props }: Countrie
       };
       return {
         id: country.uid,
-        render: (options: RenderOptionProps) => <CountryBlock key={country.uid} {...countryBlockProps} {...options} />,
+        render: (options: RenderOptionProps) => (
+          <CountryBlock key={country.uid} dimension={dimension} {...countryBlockProps} {...options} />
+        ),
       };
     });
   }, [countries]);
