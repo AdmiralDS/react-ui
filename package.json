@@ -28,12 +28,13 @@
   },
   "types": "./dist",
   "scripts": {
-    "build": "vite build && ttsc --emitDeclarationOnly",
+    "postinstall": "npm run generate-svg-icon-exports",
+    "build": "npm run generate-svg-icon-exports && vite build && ttsc --emitDeclarationOnly",
     "test": "jest",
     "test:update": "jest -u",
     "test:watch": "jest --watch",
     "lint": "eslint './src/**/*.{js,jsx,ts,tsx}' --quiet --fix",
-    "storybook": "npm run generate-svg-icon-exports && start-storybook -p 6006",
+    "storybook": "start-storybook -p 6006",
     "build-storybook": "npm run generate-svg-icon-exports && build-storybook",
     "release": "standard-version",
     "generate-svg-icon-exports": "node ./scripts/generate-svg-icon-exports.js"
@@ -49,6 +50,7 @@
   },
   "peerDependencies": {
     "@admiral-ds/fonts": "^1.0.0",
+    "@admiral-ds/icons": "^1.0.0",
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
     "react": ">=16",
