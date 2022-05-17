@@ -1,22 +1,23 @@
-import type { HTMLAttributes, ReactNode } from 'react';
+import type { HTMLAttributes } from 'react';
 import * as React from 'react';
-import { ReactElement, UIEvent, useEffect } from 'react';
+import { useEffect } from 'react';
 import styled, { css } from 'styled-components';
-import { MenuItem } from '#src/components/MenuItem';
+import { ItemProps } from '#src/components/MenuItem';
+import { keyboardKey } from '#src/components/common/keyboardKey';
 
 export type MenuDimensions = 'l' | 'm' | 's';
 
-export const menuListHeights = css<{ dimension?: MenuDimensions; maxLines?: number }>`
-  max-height: ${({ dimension, maxLines = 6 }) => {
+export const menuListHeights = css<{ dimension?: MenuDimensions }>`
+  max-height: ${({ dimension }) => {
     switch (dimension) {
       case 'l':
-        return `${48 * maxLines}px`;
+        return `${48 * 6}px`;
       case 'm':
-        return `${40 * maxLines}px`;
+        return `${40 * 6}px`;
       case 's':
-        return `${32 * maxLines}px`;
+        return `${32 * 6}px`;
       default:
-        return `${48 * maxLines}px`;
+        return `${48 * 6}px`;
     }
   }};
 `;
@@ -42,121 +43,118 @@ const StyledDiv = styled.div`
   border: none;
 `;
 
+export type ItemIdentifier = string | number | null;
+
 export interface MenuProps extends HTMLAttributes<HTMLDivElement> {
-  /** Размер Меню */
-  dimension?: MenuDimensions;
-  /** Элементы содержимого */
-  children: ReactNode;
   /** Активная секция Menu */
-  active?: string | number | null;
+  active?: ItemIdentifier;
   /** выбранная секция Menu */
-  selected?: string | number | null;
-  /** максимальное количество строк в меню */
-  maxLines?: number;
-  /** Обработчик выбора item в меню **/
-  onActivateItem?: (id: string) => void;
-  /** Обработчик выбора item в меню **/
-  onSelectItem?: (id: string) => void;
+  selected?: ItemIdentifier;
+  /** выбранная по умолчаниию секция Menu */
+  defaultSelected?: ItemIdentifier;
+  /** Обработчик выбора item в меню */
+  onActivateItem?: (id: ItemIdentifier) => void;
+  /** Обработчик выбора item в меню */
+  onSelectItem?: (id: ItemIdentifier) => void;
+
+  model: Array<ItemProps>;
 }
 
 export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
-  (
-    { children, dimension = 'l', selected = null, active = null, maxLines = 6, onSelectItem, onActivateItem, ...props },
-    ref,
-  ) => {
+  ({ model, defaultSelected = null, selected, active, onSelectItem, onActivateItem, ...props }, ref) => {
+    const [selectedState, setSelectedState] = React.useState<ItemIdentifier>(defaultSelected);
+    const [activeState, setActiveState] = React.useState<ItemIdentifier>(null);
+
+    const selectedId = selected === undefined ? selectedState : selected;
+    const activeId = active === undefined ? activeState : active;
+
     const menuRef = React.useRef<HTMLDivElement | null>(null);
 
-    const mouseMoveHandler = (e: React.MouseEvent<HTMLDivElement>) => {
-      const activeOption = e.currentTarget.id;
+    const findNextId = () => {
+      const currentIndex = model.findIndex((item) => item.id === activeId);
+      let nextIndex = currentIndex < model.length - 1 ? currentIndex + 1 : 0;
 
-      const skipMove = e.currentTarget.dataset.disabled;
-      if (skipMove) return;
-
-      e.currentTarget.scrollIntoView({
-        behavior: 'smooth',
-        inline: 'center',
-        block: 'nearest',
-      });
-
-      if (onActivateItem && active !== activeOption) onActivateItem(activeOption);
+      while (model[nextIndex].disabled && nextIndex !== currentIndex) {
+        nextIndex = nextIndex < model.length - 1 ? nextIndex + 1 : 0;
+      }
+      return model[nextIndex].id;
     };
 
-    const clickHandler = (e: React.MouseEvent<HTMLDivElement>) => {
-      const activeOption = e.currentTarget.id;
-      if (e.currentTarget.dataset.disabled) return;
-      if (onSelectItem) onSelectItem(activeOption);
+    const findPreviousId = () => {
+      const currentIndex = model.findIndex((item) => item.id === activeId);
+      let nextIndex = currentIndex > 0 ? currentIndex - 1 : model.length - 1;
+
+      while (model[nextIndex].disabled && nextIndex !== currentIndex) {
+        nextIndex = nextIndex > 0 ? nextIndex - 1 : model.length - 1;
+      }
+      return model[nextIndex].id;
     };
 
-    const decorateHandlers = <T extends UIEvent>(...handlers: Array<React.EventHandler<T> | undefined>) => {
-      return function (e: T) {
-        handlers.forEach((item) => {
-          if (item) item(e);
-        });
-      };
+    const activateItem = (id: ItemIdentifier) => {
+      if (activeId !== id) setActiveState(id);
+      onActivateItem?.(id);
     };
 
-    const getClonedChild = (child: ReactElement) => {
-      const isMenuItem = child.type === MenuItem;
-
-      const clonedChild = React.cloneElement(child, {
-        dimension: child.props.dimension || dimension,
-        hovered: active === child.props.id,
-        selected: selected === child.props.id,
-        onClick: decorateHandlers(clickHandler, child.props.onClick),
-        onMouseMove: decorateHandlers(mouseMoveHandler, child.props.onMouseMove),
-        'aria-selected': (isMenuItem && selected === child.props.id) || undefined,
-        'data-active': (isMenuItem && active === child.props.id) || undefined,
-        ...child.props,
-      });
-
-      return child.type === MenuItem ? (
-        clonedChild
-      ) : (
-        <MenuItem
-          id={child.props.id}
-          dimension={dimension}
-          hovered={active === child.props.id}
-          selected={selected === child.props.id}
-          onClick={clickHandler}
-          onMouseMove={mouseMoveHandler}
-          aria-selected={selected === child.props.id || undefined}
-          data-active={active === child.props.id || undefined}
-        >
-          {clonedChild}
-        </MenuItem>
-      );
-    };
-
-    const renderChildrenDropDown = () => {
-      return React.Children.map(children, (child: React.ReactNode) => {
-        if (React.isValidElement(child)) {
-          const detectedSubGroup = child.props.children?.some?.((element: ReactElement) => Array.isArray(element));
-
-          if (detectedSubGroup) {
-            return child.props.children.flat().map((child: ReactElement) => {
-              return getClonedChild(child);
-            });
-          }
-
-          return getClonedChild(child);
-        }
-        return child;
-      });
+    const selectItem = (id: ItemIdentifier) => {
+      if (selectedId !== id) setSelectedState(id);
+      onSelectItem?.(id);
     };
 
     useEffect(() => {
-      const hoveredItem = menuRef.current?.querySelector('[data-active="true"]');
+      function handleKeyDown(e: KeyboardEvent) {
+        const code = keyboardKey.getCode(e);
+        switch (code) {
+          case keyboardKey[' ']:
+          case keyboardKey.Enter: {
+            selectItem(activeId);
+            e.preventDefault();
+            break;
+          }
+          case keyboardKey.ArrowDown: {
+            const nextId = findNextId();
+            activateItem(nextId);
+            e.preventDefault();
+            break;
+          }
+          case keyboardKey.ArrowUp: {
+            const previousId = findPreviousId();
+            activateItem(previousId);
+            e.preventDefault();
+            break;
+          }
+        }
+      }
+
+      document.addEventListener('keydown', handleKeyDown);
+      return () => {
+        document.removeEventListener('keydown', handleKeyDown);
+      };
+    }, [active, activeState]);
+
+    const renderChildren = () => {
+      return model.map((item) =>
+        item.render({
+          hovered: activeId === item.id,
+          selected: selectedId === item.id,
+          onHover: () => activateItem(item.id),
+          onClickItem: () => selectItem(item.id),
+        }),
+      );
+    };
+
+    useEffect(() => {
+      const hoveredItem = menuRef.current?.querySelector('[data-hovered="true"]');
 
       hoveredItem?.scrollIntoView({
         behavior: 'smooth',
         inline: 'center',
         block: 'nearest',
       });
-    }, [active]);
+    }, [active, activeState]);
 
     return (
-      <Wrapper ref={ref} maxLines={maxLines} {...props}>
-        <StyledDiv ref={menuRef}>{renderChildrenDropDown()}</StyledDiv>
+      <Wrapper ref={ref} {...props}>
+        <StyledDiv ref={menuRef}>{renderChildren()}</StyledDiv>
       </Wrapper>
     );
   },
