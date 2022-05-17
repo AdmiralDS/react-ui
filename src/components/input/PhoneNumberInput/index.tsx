@@ -27,7 +27,7 @@ import { FlagsPack } from '@admiral-ds/flags';
 import type { CountryName } from '@admiral-ds/flags';
 import { ElementType, useMemo } from 'react';
 import { DropdownContainer } from '#src/components/DropdownContainer';
-import { MenuDimensions } from '#src/components/Menu';
+import type { ItemIdentifier, MenuDimensions } from '#src/components/Menu';
 import { keyboardKey } from '#src/components/common/keyboardKey';
 
 const Chevron = styled(ChevronRightOutline)<{ disabled?: boolean }>`
@@ -239,11 +239,6 @@ export const PhoneNumberInput = React.forwardRef<HTMLInputElement, PhoneNumberIn
       setIsOpened(false);
     };
 
-    const handleCloseQuery = () => {
-      setIsOpened(false);
-      setTimeout(() => inputRef?.current?.focus());
-    };
-
     const IconComponent = React.useMemo<JSX.Element | null>(() => {
       if (selectedIndex > -1) {
         const SvgComponent = (FlagsPack as { [key: CountryName]: ElementType })[countryList[selectedIndex].name];
@@ -262,12 +257,12 @@ export const PhoneNumberInput = React.forwardRef<HTMLInputElement, PhoneNumberIn
       }
     }, [selectedIndex]);
 
-    const handleHoverCountry = (id: string) => {
+    const handleHoverCountry = (id: ItemIdentifier) => {
       const index = countryList.findIndex((item) => item.uid === id);
       setActiveIndex(index);
     };
 
-    const handleSelectCountry = (id: string) => {
+    const handleSelectCountry = (id: ItemIdentifier) => {
       const index = countryList.findIndex((item) => item.uid === id);
       selectCountry(index);
     };
@@ -293,7 +288,7 @@ export const PhoneNumberInput = React.forwardRef<HTMLInputElement, PhoneNumberIn
           }}
         >
           {isOpened && !disabled && (
-            <DropdownContainer targetRef={inputRef} onClickOutside={clickOutside} onCloseQuery={handleCloseQuery}>
+            <DropdownContainer targetRef={inputRef} onClickOutside={clickOutside}>
               <CountriesList
                 countries={countryList}
                 selected={selectedIndex > -1 ? countryList[selectedIndex].uid : null}
@@ -301,7 +296,6 @@ export const PhoneNumberInput = React.forwardRef<HTMLInputElement, PhoneNumberIn
                 onActivateItem={handleHoverCountry}
                 onSelectItem={handleSelectCountry}
                 dimension={menuDimension}
-                onKeyDown={handleKeyDown}
               />
             </DropdownContainer>
           )}

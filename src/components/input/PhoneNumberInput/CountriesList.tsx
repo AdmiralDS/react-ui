@@ -1,10 +1,11 @@
 import styled from 'styled-components';
 import { typography } from '#src/components/Typography';
 import { CountryBlock, CountryBlockProps } from '#src/components/input/PhoneNumberInput/CountryBlock';
-import React from 'react';
+import React, { useMemo } from 'react';
 import { CountryIso3Code } from '#src/components/input/PhoneNumberInput/constants';
 import { CustomInputHandler } from '#src/components/common/dom/changeInputData';
 import { Menu, MenuDimensions, MenuProps } from '#src/components/Menu';
+import { ItemProps, RenderOptionProps } from '#src/components/MenuItem';
 
 export type CountryInfo = {
   uid: string;
@@ -15,8 +16,9 @@ export type CountryInfo = {
   handleInput: CustomInputHandler;
 };
 
-export interface CountriesListProps extends Omit<MenuProps, 'children'> {
+export interface CountriesListProps extends Omit<MenuProps, 'model'> {
   countries: Array<CountryInfo>;
+  dimension: MenuDimensions;
 }
 
 const StyledCountriesList = styled(Menu)<{ dimension: MenuDimensions }>`
@@ -24,17 +26,20 @@ const StyledCountriesList = styled(Menu)<{ dimension: MenuDimensions }>`
 `;
 
 export const CountriesList = ({ countries, dimension = 'l', ...props }: CountriesListProps) => {
-  return (
-    <StyledCountriesList dimension={dimension} maxLines={4} {...props}>
-      {countries.map((country) => {
-        const countryBlockProps: CountryBlockProps = {
-          dimension: dimension,
-          value: country.rusName,
-          name: country.name,
-          code: country.code,
-        };
-        return <CountryBlock id={country.uid} key={country.uid} {...countryBlockProps} />;
-      })}
-    </StyledCountriesList>
-  );
+  const listModel = useMemo<Array<ItemProps>>(() => {
+    return countries.map((country) => {
+      const countryBlockProps: CountryBlockProps = {
+        dimension: dimension,
+        name: country.name,
+        value: country.rusName,
+        code: country.code,
+      };
+      return {
+        id: country.uid,
+        render: (options: RenderOptionProps) => <CountryBlock key={country.uid} {...countryBlockProps} {...options} />,
+      };
+    });
+  }, [countries]);
+
+  return <StyledCountriesList dimension={dimension} model={listModel} {...props} />;
 };

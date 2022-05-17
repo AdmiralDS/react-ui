@@ -5,13 +5,15 @@ import { Flag } from '#src/components/input/PhoneNumberInput/Flag';
 import { FlagsPack } from '@admiral-ds/flags';
 import type { CountryName } from '@admiral-ds/flags';
 import type { MenuItemProps } from '#src/components/MenuItem';
+import { MenuItem } from '#src/components/MenuItem';
 
 export interface CountryBlockProps extends MenuItemProps {
   name: CountryName;
+  value: string;
   code: string;
 }
 
-const StyledCountryBlock = styled.div<{ disabled?: boolean }>`
+const StyledCountryBlock = styled(MenuItem)<{ disabled?: boolean }>`
   display: flex;
   justify-content: flex-start;
   flex-flow: nowrap;
