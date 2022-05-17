@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import styled from 'styled-components';
 import { ReactComponent as MinusCircleOutline } from '@admiral-ds/icons/build/service/MinusCircleOutline.svg';
 
 import { OverflowMenu } from '#src/components/OverflowMenu';
-import { MenuItem } from '#src/components/MenuItem';
+import { MenuItem, RenderOptionProps } from '#src/components/MenuItem';
 
 const Separator = styled.div`
   height: 20px;
@@ -81,10 +81,24 @@ const Template1: ComponentStory<typeof OverflowMenu> = (args) => {
   ];
 
   const [selected, setSelected] = React.useState<string | null>(null);
+  const dimension = 'l';
+  const model = useMemo(() => {
+    return items.map((item) => ({
+      id: item.id,
+      render: (options: RenderOptionProps) => (
+        <MenuItem dimension={dimension} {...options} key={item.id} disabled={item.disabled}>
+          {item.display}
+        </MenuItem>
+      ),
+    }));
+  }, []);
+
   return (
     <>
       <OverflowMenu
         {...args}
+        items={model}
+        dimension={dimension}
         selected={selected}
         onChange={(id) => {
           console.log(`onChange('${id}')`);
@@ -93,15 +107,7 @@ const Template1: ComponentStory<typeof OverflowMenu> = (args) => {
         onOpen={() => console.log('open menu')}
         onClose={() => console.log('close menu')}
         aria-label="Overflow Menu component"
-      >
-        {items.map((item) => {
-          return (
-            <MenuItem role="option" key={item.id} id={item.id}>
-              {item.display}
-            </MenuItem>
-          );
-        })}
-      </OverflowMenu>
+      />
     </>
   );
 };
@@ -132,43 +138,43 @@ const Template2: ComponentStory<typeof OverflowMenu> = (args) => {
     },
   ];
 
+  const dimension = 'l';
+  const model = useMemo(() => {
+    return items.map((item) => ({
+      id: item.id,
+      render: (options: RenderOptionProps) => (
+        <MenuItem dimension={dimension} {...options} key={item.id} disabled={item.disabled}>
+          {item.display}
+        </MenuItem>
+      ),
+    }));
+  }, []);
+
   const [selected, setSelected] = React.useState<string | null>(null);
+
   return (
     <DisplayBlock>
       <OverflowMenu
         {...args}
+        items={model}
         selected={selected}
+        dimension={dimension}
         onChange={(id) => setSelected(id)}
         onOpen={() => console.log('open menu')}
         onClose={() => console.log('close menu')}
         aria-label="Overflow Menu component"
-      >
-        {items.map((item) => {
-          return (
-            <MenuItem role="option" key={item.id} id={item.id} disabled={item.disabled}>
-              {item.display}
-            </MenuItem>
-          );
-        })}
-      </OverflowMenu>
+      />
       <Separator />
       <OverflowMenu
         {...args}
+        items={model}
         selected={selected}
         onChange={(id) => setSelected(id)}
         onOpen={() => console.log('open menu')}
         onClose={() => console.log('close menu')}
         aria-label="Overflow Menu component"
         disabled
-      >
-        {items.map((item) => {
-          return (
-            <MenuItem role="option" key={item.id} id={item.id} disabled={item.disabled}>
-              {item.display}
-            </MenuItem>
-          );
-        })}
-      </OverflowMenu>
+      />
     </DisplayBlock>
   );
 };
@@ -199,67 +205,83 @@ const Template3: ComponentStory<typeof OverflowMenu> = (args) => {
     },
   ];
 
+  const dimensionL = 'l';
+  const dimensionM = 'm';
+  const dimensionS = 's';
+  const modelL = useMemo(() => {
+    return items.map((item) => ({
+      id: item.id,
+      render: (options: RenderOptionProps) => (
+        <MenuItem dimension={dimensionL} {...options} key={item.id} disabled={item.disabled}>
+          {item.display}
+        </MenuItem>
+      ),
+    }));
+  }, []);
+  const modelM = useMemo(() => {
+    return items.map((item) => ({
+      id: item.id,
+      render: (options: RenderOptionProps) => (
+        <MenuItem dimension={dimensionL} {...options} key={item.id} disabled={item.disabled}>
+          {item.display}
+        </MenuItem>
+      ),
+    }));
+  }, []);
+  const modelS = useMemo(() => {
+    return items.map((item) => ({
+      id: item.id,
+      render: (options: RenderOptionProps) => (
+        <MenuItem dimension={dimensionL} {...options} key={item.id} disabled={item.disabled}>
+          {item.display}
+        </MenuItem>
+      ),
+    }));
+  }, []);
   const [selected, setSelected] = React.useState<string | null>(null);
+
   return (
     <>
       <DisplayBlock>
         <OverflowMenu
           {...args}
+          items={modelL}
           selected={selected}
+          dimension={dimensionL}
           onChange={(id) => setSelected(id)}
           onOpen={() => console.log('open menu')}
           onClose={() => console.log('close menu')}
           aria-label="Overflow Menu component L"
-        >
-          {items.map((item) => {
-            return (
-              <MenuItem role="option" key={item.id} id={item.id} disabled={item.disabled}>
-                {item.display}
-              </MenuItem>
-            );
-          })}
-        </OverflowMenu>
+        />
         <Separator />
         <OverflowMenu
           {...args}
-          dimension="m"
+          items={modelM}
+          dimension={dimensionM}
           selected={selected}
           onChange={(id) => setSelected(id)}
           onOpen={() => console.log('open menu')}
           onClose={() => console.log('close menu')}
           aria-label="Overflow Menu component M"
-        >
-          {items.map((item) => {
-            return (
-              <MenuItem role="option" key={item.id} id={item.id} disabled={item.disabled}>
-                {item.display}
-              </MenuItem>
-            );
-          })}
-        </OverflowMenu>
+        />
         <Separator />
         <OverflowMenu
           {...args}
-          dimension="s"
+          items={modelS}
+          dimension={dimensionS}
           selected={selected}
           onChange={(id) => setSelected(id)}
           onOpen={() => console.log('open menu')}
           onClose={() => console.log('close menu')}
           aria-label="Overflow Menu component S"
-        >
-          {items.map((item) => {
-            return (
-              <MenuItem role="option" key={item.id} id={item.id} disabled={item.disabled}>
-                {item.display}
-              </MenuItem>
-            );
-          })}
-        </OverflowMenu>
+        />
       </DisplayBlock>
       <Separator />
       <DisplayBlock>
         <OverflowMenu
           {...args}
+          items={modelL}
+          dimension={dimensionL}
           isVertical
           selected={selected}
           onChange={(id) => {
@@ -269,19 +291,12 @@ const Template3: ComponentStory<typeof OverflowMenu> = (args) => {
           onOpen={() => console.log('open menu')}
           onClose={() => console.log('close menu')}
           aria-label="Overflow Menu component vertical L"
-        >
-          {items.map((item) => {
-            return (
-              <MenuItem role="option" key={item.id} id={item.id}>
-                {item.display}
-              </MenuItem>
-            );
-          })}
-        </OverflowMenu>
+        />
         <Separator />
         <OverflowMenu
           {...args}
-          dimension="m"
+          items={modelM}
+          dimension={dimensionM}
           isVertical
           selected={selected}
           onChange={(id) => {
@@ -291,19 +306,12 @@ const Template3: ComponentStory<typeof OverflowMenu> = (args) => {
           onOpen={() => console.log('open menu')}
           onClose={() => console.log('close menu')}
           aria-label="Overflow Menu component vertical M"
-        >
-          {items.map((item) => {
-            return (
-              <MenuItem role="option" key={item.id} id={item.id}>
-                {item.display}
-              </MenuItem>
-            );
-          })}
-        </OverflowMenu>
+        />
         <Separator />
         <OverflowMenu
           {...args}
-          dimension="s"
+          items={modelS}
+          dimension={dimensionS}
           isVertical
           selected={selected}
           onChange={(id) => {
@@ -313,15 +321,7 @@ const Template3: ComponentStory<typeof OverflowMenu> = (args) => {
           onOpen={() => console.log('open menu')}
           onClose={() => console.log('close menu')}
           aria-label="Overflow Menu component vertical S"
-        >
-          {items.map((item) => {
-            return (
-              <MenuItem role="option" key={item.id} id={item.id}>
-                {item.display}
-              </MenuItem>
-            );
-          })}
-        </OverflowMenu>
+        />
       </DisplayBlock>
     </>
   );
