@@ -17,7 +17,7 @@ const FOCUS_BORDER_WIDTH = 2;
 const HOVER_BORDER_WIDTH_M = 8;
 const HOVER_BORDER_WIDTH_S = 7;
 
-export const Span = styled.span<{ dimension: Dimension; disabled?: boolean }>`
+export const Span = styled.span<{ dimension: Dimension; disabled?: boolean; error?: boolean }>`
   display: inline-block;
   position: absolute;
   margin: 0;
@@ -39,7 +39,12 @@ export const Span = styled.span<{ dimension: Dimension; disabled?: boolean }>`
     height: ${DIMENSION_S}px;
   }
   border: ${BORDER_WIDTH_DEFAULT}px solid
-    ${({ theme, disabled }) => (disabled ? theme.color['Neutral/Neutral 30'] : theme.color['Neutral/Neutral 50'])};
+    ${({ disabled, error, theme }) =>
+      disabled
+        ? theme.color['Neutral/Neutral 30']
+        : error
+        ? theme.color['Error/Error 60 Main']
+        : theme.color['Neutral/Neutral 50']};
   fieldset:disabled & {
     border: ${BORDER_WIDTH_DEFAULT}px solid ${({ theme }) => theme.color['Neutral/Neutral 30']};
   }
