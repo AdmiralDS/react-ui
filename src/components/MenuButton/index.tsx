@@ -7,9 +7,11 @@ import { OpenStatusButton } from '#src/components/OpenStatusButton';
 import { Dropdown } from '#src/components/Dropdown';
 import { Button } from '#src/components/Button';
 import { DropDownItem } from '#src/components/DropDownItem';
+import { Spinner } from '#src/components/Spinner';
+import styled from 'styled-components';
 
 type Dimension = 'xl' | 'l' | 'm' | 's';
-type Appearance = 'primary' | 'secondary' | 'ghost';
+type Appearance = 'primary' | 'secondary' | 'ghost' | 'white';
 
 export interface MenuButtonItem extends HTMLAttributes<HTMLLIElement> {
   /** Содержимое опции, предназначенное для отображения */
@@ -44,6 +46,10 @@ export interface MenuButtonProps extends Omit<HTMLAttributes<HTMLButtonElement>,
   /** Выравнивание выпадающего меню относительно компонента https://developer.mozilla.org/en-US/docs/Web/CSS/align-self */
   alignSelf?: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
 }
+
+const StyledDropdown = styled(Dropdown)`
+  padding: 8px 0;
+`;
 
 export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
   (
@@ -137,7 +143,7 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
           <OpenStatusButton $isOpen={menuOpened} aria-hidden appearance={'white'} />
         </Button>
         {menuOpened && !loading && !skeleton && (
-          <Dropdown
+          <StyledDropdown
             role="listbox"
             targetRef={btnRef}
             onClickOutside={clickOutside}
@@ -168,7 +174,7 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
                 {display}
               </DropDownItem>
             ))}
-          </Dropdown>
+          </StyledDropdown>
         )}
       </>
     );
