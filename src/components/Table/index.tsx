@@ -30,9 +30,9 @@ import {
   TitleContent,
   Title,
   ExtraText,
-  OverflowMenuWrapper,
 } from './style';
 import { VirtualBody } from './VirtualBody';
+import { OverflowMenu } from './OverflowMenu';
 
 export const DEFAULT_COLUMN_WIDTH = 100;
 
@@ -511,13 +511,6 @@ export const Table: React.FC<TableProps> = ({
   };
 
   const renderRow = (row: TableRow, index: number) => {
-    const oveflowMenuRef = React.createRef<HTMLDivElement>();
-    const handleMenuOpen = () => {
-      if (oveflowMenuRef.current) oveflowMenuRef.current.dataset.opened = 'true';
-    };
-    const handleMenuClose = () => {
-      if (oveflowMenuRef.current) oveflowMenuRef.current.dataset.opened = 'false';
-    };
     return (
       <Row
         onClick={() => handleRowClick(row.id)}
@@ -566,11 +559,7 @@ export const Table: React.FC<TableProps> = ({
           {cols.map((col) => (col.sticky ? null : renderBodyCell(row, col)))}
           <Filler />
         </SimpleRow>
-        {row.overflowMenuRender && (
-          <OverflowMenuWrapper ref={oveflowMenuRef} data-opened={false} $offset={tableWidth}>
-            {row.overflowMenuRender(row, handleMenuOpen, handleMenuClose)}
-          </OverflowMenuWrapper>
-        )}
+        {row.overflowMenuRender && <OverflowMenu tableWidth={tableWidth} row={row} />}
         {row.expandedRowRender && (
           <ExpandedRow opened={row.expanded} contentMaxHeight="90vh" className="tr-expanded">
             <ExpandedRowContent>{row.expandedRowRender(row)}</ExpandedRowContent>
