@@ -32,6 +32,7 @@ import {
   ExtraText,
   OverflowMenuWrapper,
 } from './style';
+import { VirtualBody } from './VirtualBody';
 
 export const DEFAULT_COLUMN_WIDTH = 100;
 
@@ -183,6 +184,15 @@ export interface TableProps extends React.HTMLAttributes<HTMLDivElement> {
   disableColumnResize?: boolean;
   /** Отображение серой линии подчеркивания для последней строки. По умолчанию линия отображается */
   showLastRowUnderline?: boolean;
+  /** Включение виртуального скролла для тела таблицы.
+   * У таблицы обязательно должна быть задана высота, тогда тело таблицы растянется по высоте и подстроится под высоту таблицы.
+   */
+  virtualScroll?: {
+    /** Фиксированная высота строки, для правильного функционирования виртуального скролла
+     * все строки должны быть одной фиксированной высоты
+     */
+    fixedRowHeight: number;
+  };
 }
 
 export const Table: React.FC<TableProps> = ({
@@ -208,6 +218,7 @@ export const Table: React.FC<TableProps> = ({
   showDividerForLastColumn = false,
   disableColumnResize = false,
   showLastRowUnderline = true,
+  virtualScroll,
   ...props
 }) => {
   const checkboxDimension = dimension === 's' || dimension === 'm' ? 's' : 'm';
@@ -220,6 +231,7 @@ export const Table: React.FC<TableProps> = ({
   const [verticalScroll, setVerticalScroll] = React.useState(false);
   const [resizerState, updateResizerState] = React.useState({} as any);
   const [tableWidth, setTableWidth] = React.useState(0);
+  const [bodyHeight, setBodyHeight] = React.useState(0);
 
   const stickyColumns = [...cols].filter((col) => col.sticky);
 
@@ -283,6 +295,7 @@ export const Table: React.FC<TableProps> = ({
           setVerticalScroll(false);
         }
         setTableWidth(rect.width);
+        setBodyHeight(rect.height);
       });
       observer.observe();
       return () => {
@@ -498,7 +511,7 @@ export const Table: React.FC<TableProps> = ({
   };
 
   const renderRow = (row: TableRow, index: number) => {
-    const oveflowMenuRef = React.useRef<HTMLDivElement>(null);
+    const oveflowMenuRef = React.createRef<HTMLDivElement>();
     const handleMenuOpen = () => {
       if (oveflowMenuRef.current) oveflowMenuRef.current.dataset.opened = 'true';
     };
@@ -599,9 +612,20 @@ export const Table: React.FC<TableProps> = ({
           <Filler />
         </Header>
       </HeaderWrapper>
-      <ScrollTableBody ref={scrollBodyRef} className="tbody">
-        {rowList.map((row, index) => renderRow(row, index))}
-      </ScrollTableBody>
+      {virtualScroll ? (
+        <VirtualBody
+          height={bodyHeight}
+          rowList={rowList}
+          childHeight={virtualScroll.fixedRowHeight}
+          renderRow={renderRow}
+          ref={scrollBodyRef}
+          className="tbody"
+        />
+      ) : (
+        <ScrollTableBody ref={scrollBodyRef} className="tbody">
+          {rowList.map((row, index) => renderRow(row, index))}
+        </ScrollTableBody>
+      )}
     </TableContainer>
   );
 };

@@ -3,30 +3,50 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { backgroundColor, colorTextMixin, ItemDimension, paddings, styleTextMixin } from './mixins';
 
-export interface MenuItemProps extends HTMLAttributes<HTMLDivElement> {
-  /** Отключение секции */
-  disabled?: boolean;
-  /** Размер MenuItems */
-  dimension?: ItemDimension;
+export interface RenderOptionProps {
   /** Активная секция MenuItems */
   selected?: boolean;
   /** Акцентная секция MenuItems */
   hovered?: boolean;
-  /** Значение DropDownItems */
-  value?: string | number | undefined;
+  /** Отключение секции */
+  disabled?: boolean;
+  /** Обработчик клика по item */
+  onClickItem?: () => void;
+  /** Обработчик наведения мыши на item */
+  onHover?: () => void;
+}
+
+export interface ItemProps {
+  id: string | number;
+  render: (options: RenderOptionProps) => React.ReactNode;
+  disabled?: boolean;
+}
+
+export interface MenuItemProps extends HTMLAttributes<HTMLDivElement>, RenderOptionProps {
+  /** Размер MenuItems */
+  dimension?: ItemDimension;
 }
 
 export const MenuItem = React.forwardRef<HTMLDivElement, MenuItemProps>(
-  ({ children, disabled, hovered, dimension = 'l', selected = false, id, ...props }, ref) => {
+  ({ children, onHover, onClickItem, disabled, hovered, dimension = 'l', selected = false, ...props }, ref) => {
+    const handleMouseMove = () => {
+      if (!disabled) onHover?.();
+    };
+
+    const handleClick = () => {
+      if (!disabled) onClickItem?.();
+    };
+
     return (
       <Item
         ref={ref}
         dimension={dimension}
-        tabIndex={!disabled ? props.tabIndex || 0 : undefined}
         selected={selected}
         hovered={hovered}
-        id={id}
+        data-hovered={hovered}
         data-disabled={disabled}
+        onMouseMove={handleMouseMove}
+        onClick={handleClick}
         {...props}
       >
         {children}
@@ -42,7 +62,6 @@ const Item = styled.div<{
   selected?: boolean;
   hovered?: boolean;
   width?: number;
-  id?: string;
 }>`
   display: flex;
   align-items: center;

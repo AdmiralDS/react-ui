@@ -3,7 +3,6 @@ import styled, { css } from 'styled-components';
 import { changeInputData } from '#src/components/common/dom/changeInputData';
 import { refSetter } from '#src/components/common/utils/refSetter';
 import { TextInput, TextInputProps } from '#src/components/input/TextInput';
-import { Dropdown } from '#src/components/Dropdown';
 import { ReactComponent as ChevronRightOutline } from '@admiral-ds/icons/build/system/ChevronRightOutline.svg';
 import {
   COUNTRY_ISO3_CODES,
@@ -20,11 +19,16 @@ import {
 } from '#src/components/input/PhoneNumberInput/defaultPhoneNumberInputHandle';
 import { CountriesList, CountryInfo } from '#src/components/input/PhoneNumberInput/CountriesList';
 import { uid } from '#src/components/common/uid';
-import { getIcon } from '#src/components/input/PhoneNumberInput/iconsPack';
 import getFindCountryFunction, {
   CountryPhoneCode,
   findCountryFunction,
 } from '#src/components/input/PhoneNumberInput/findCoutryWithPriority';
+import { FlagsPack } from '@admiral-ds/flags';
+import type { CountryName } from '@admiral-ds/flags';
+import { ElementType, useMemo } from 'react';
+import { DropdownContainer } from '#src/components/DropdownContainer';
+import type { ItemIdentifier, MenuDimensions } from '#src/components/Menu';
+import { keyboardKey } from '#src/components/common/keyboardKey';
 
 const Chevron = styled(ChevronRightOutline)<{ disabled?: boolean }>`
   transition: all 0.3s;
@@ -111,12 +115,11 @@ export const PhoneNumberInput = React.forwardRef<HTMLInputElement, PhoneNumberIn
           return acc;
         }, [])
         .map((item) => {
-          const { iso3, code } = item,
-            name = CountryNames[iso3];
+          const { iso3, code } = item;
           return {
             ...item,
             rusName: CountryRusNames[iso3],
-            SvgFlag: getIcon(name),
+            name: CountryNames[iso3],
             uid: uid(),
             handleInput: handleInput ? handleInput : clojureHandler(code),
           };
@@ -159,29 +162,55 @@ export const PhoneNumberInput = React.forwardRef<HTMLInputElement, PhoneNumberIn
       const oldCode = hasOldSelected ? countryList[selectedIndex].code.replace(/[^0-9+]/g, '') : '';
       const newCode = countryList[indexNumber].code.replace(/[^0-9+]/g, '');
 
+      const oldCodeLength = oldCode.length;
+      const newCodeLength = newCode.length;
+      const selStart = (inputRef.current?.selectionStart || 0) + (newCodeLength - oldCodeLength);
+      const selEnd = (inputRef.current?.selectionEnd || 0) + (newCodeLength - oldCodeLength);
+
       changeInputData(inputRef.current, {
         value: hasOldSelected
           ? value.replace(/\s+/g, '').replace(oldCode, newCode)
           : newCode + value.replace(/\s+/g, ''),
-        selectionStart: 1,
-        selectionEnd: newCode.length,
+        selectionStart: selStart > 0 ? selStart : 1,
+        selectionEnd: selEnd > 0 ? selEnd : 1,
       });
 
       setSelectedIndex(indexNumber);
       setIsOpened(false);
     };
 
-    const handleKeyUp = (e: React.KeyboardEvent) => {
-      switch (e.key) {
-        case 'Enter':
-          if (isOpened && activeIndex > -1) {
-            selectCountry(activeIndex);
+    const handleKeyDown = (e: React.KeyboardEvent) => {
+      const code = keyboardKey.getCode(e);
+
+      switch (code) {
+        case keyboardKey[' ']:
+        case keyboardKey.Enter: {
+          if (isOpened) {
             e.preventDefault();
+            if (selectedIndex !== activeIndex) {
+              selectCountry(activeIndex);
+            }
           }
           break;
-        case 'ArrowUp':
+        }
+        case keyboardKey.ArrowDown: {
           if (!isOpened) {
             setIsOpened(true);
+            e.preventDefault();
+            break;
+          }
+          if (activeIndex >= countryList.length - 1) {
+            setActiveIndex(0);
+          } else {
+            setActiveIndex(activeIndex + 1);
+          }
+          e.preventDefault();
+          break;
+        }
+        case keyboardKey.ArrowUp: {
+          if (!isOpened) {
+            setIsOpened(true);
+            e.preventDefault();
             break;
           }
 
@@ -190,30 +219,16 @@ export const PhoneNumberInput = React.forwardRef<HTMLInputElement, PhoneNumberIn
           } else {
             setActiveIndex(activeIndex - 1);
           }
+          e.preventDefault();
           break;
-        case 'ArrowDown':
-          if (!isOpened) {
-            setIsOpened(true);
-            break;
-          }
-          if (activeIndex >= countryList.length - 1) {
-            setActiveIndex(0);
-          } else {
-            setActiveIndex(activeIndex + 1);
-          }
-          break;
-        case 'Escape': {
+        }
+        case keyboardKey.Escape: {
           if (isOpened) {
             setIsOpened(false);
+            e.preventDefault();
           }
           break;
         }
-      }
-    };
-
-    const handleKeyDown = (e: React.KeyboardEvent) => {
-      if (isOpened && ['Enter', 'ArrowUp', 'ArrowDown'].includes(e.key)) {
-        e.preventDefault();
       }
     };
 
@@ -226,8 +241,8 @@ export const PhoneNumberInput = React.forwardRef<HTMLInputElement, PhoneNumberIn
 
     const IconComponent = React.useMemo<JSX.Element | null>(() => {
       if (selectedIndex > -1) {
-        const SvgComponent = countryList[selectedIndex].SvgFlag;
-        return SvgComponent ? <Flag dimension={dimension} Component={SvgComponent} /> : null;
+        const SvgComponent = (FlagsPack as { [key: CountryName]: ElementType })[countryList[selectedIndex].name];
+        return SvgComponent ? <Flag dimension={menuDimension} Component={SvgComponent} /> : null;
       }
       return null;
     }, [selectedIndex]);
@@ -242,6 +257,20 @@ export const PhoneNumberInput = React.forwardRef<HTMLInputElement, PhoneNumberIn
       }
     }, [selectedIndex]);
 
+    const handleHoverCountry = (id: ItemIdentifier) => {
+      const index = countryList.findIndex((item) => item.uid === id);
+      setActiveIndex(index);
+    };
+
+    const handleSelectCountry = (id: ItemIdentifier) => {
+      const index = countryList.findIndex((item) => item.uid === id);
+      selectCountry(index);
+    };
+
+    const menuDimension: MenuDimensions = useMemo(() => {
+      return dimension === 'xl' ? 'l' : dimension;
+    }, [dimension]);
+
     return (
       <PhoneContainer ref={containerRef} dimension={dimension} disabled={disabled}>
         <TextInput
@@ -253,25 +282,22 @@ export const PhoneNumberInput = React.forwardRef<HTMLInputElement, PhoneNumberIn
           value={value}
           disabled={disabled}
           dimension={dimension}
-          onKeyUp={(...p) => {
-            props.onKeyUp?.(...p);
-            handleKeyUp(...p);
-          }}
           onKeyDown={(...p) => {
             props.onKeyDown?.(...p);
             handleKeyDown(...p);
           }}
         >
           {isOpened && !disabled && (
-            <Dropdown targetRef={inputRef} onClickOutside={clickOutside}>
+            <DropdownContainer targetRef={inputRef} onClickOutside={clickOutside}>
               <CountriesList
                 countries={countryList}
-                activeIndex={activeIndex}
-                dimension={dimension}
-                onItemClick={selectCountry}
-                onActivateItem={(index: number) => setActiveIndex(index)}
+                selected={selectedIndex > -1 ? countryList[selectedIndex].uid : null}
+                active={activeIndex > -1 ? countryList[activeIndex].uid : null}
+                onActivateItem={handleHoverCountry}
+                onSelectItem={handleSelectCountry}
+                dimension={menuDimension}
               />
-            </Dropdown>
+            </DropdownContainer>
           )}
         </TextInput>
         <CountryContainer dimension={dimension} isOpened={isOpened} disabled={disabled}>
