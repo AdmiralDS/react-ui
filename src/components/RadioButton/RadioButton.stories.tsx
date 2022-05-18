@@ -79,6 +79,9 @@ export default {
     checked: {
       control: { type: 'boolean' },
     },
+    error: {
+      control: { type: 'boolean' },
+    },
     extraText: {
       control: { type: 'text' },
     },
@@ -115,6 +118,10 @@ const Template2: ComponentStory<typeof RadioButton> = () => {
       <RadioButton value={1} checked={false} disabled readOnly>
         Not checked disabled
       </RadioButton>
+      <Separator />
+      <RadioButton value={1} checked={false} error readOnly>
+        Not checked error
+      </RadioButton>
     </>
   );
 };
@@ -123,6 +130,7 @@ const Template3: ComponentStory<typeof RadioButton> = ({
   dimension,
   disabled,
   checked: argChecked,
+  error,
 }: RadioButtonProps) => {
   const [checked, setChecked] = useState(argChecked || false);
   return (
@@ -133,6 +141,7 @@ const Template3: ComponentStory<typeof RadioButton> = ({
         onChange={(event) => setChecked(event.currentTarget.checked)}
         dimension={dimension}
         disabled={disabled}
+        error={error}
       >
         Some text
       </RadioButton>
