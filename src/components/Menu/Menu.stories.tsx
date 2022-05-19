@@ -117,7 +117,7 @@ const TemplateWithCards: ComponentStory<typeof Menu> = (args) => {
       acc.push({
         id: item.id,
         render: (options: RenderOptionProps) => (
-          <MenuItem key={item.id} disabled={true} {...options}>
+          <MenuItem key={item.id} {...options}>
             {item.name}
           </MenuItem>
         ),
@@ -272,7 +272,7 @@ const MyMenuItem = ({
   ...props
 }: MyMenuItemProps) => {
   const handleMouseMove = () => {
-    if (!disabled) onHover?.();
+    onHover?.();
   };
 
   const handleClick = () => {
@@ -300,13 +300,7 @@ const CustomItemTemplate: ComponentStory<typeof Menu> = () => {
     return items.map((item) => ({
       id: item.id,
       render: (options: RenderOptionProps) => (
-        <MyMenuItem
-          success={item.id === '3'}
-          {...options}
-          key={item.id}
-          text={item.label}
-          disabled={item.value === 4}
-        />
+        <MyMenuItem success={item.id === '3'} {...options} key={item.id} text={item.label} />
       ),
       disabled: item.value === 4,
     }));
