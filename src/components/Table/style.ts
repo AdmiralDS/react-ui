@@ -58,7 +58,7 @@ export const Filler = styled.div`
   width: unset;
 `;
 
-export const HeaderWrapper = styled.div<{ scrollbar: number; greyHeader?: boolean }>`
+export const HeaderWrapperContainer = styled.div<{ scrollbar: number; greyHeader?: boolean }>`
   box-sizing: border-box;
   position: relative;
   display: flex;

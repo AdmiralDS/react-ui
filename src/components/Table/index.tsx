@@ -4,7 +4,6 @@ import observeRect from '#src/components/common/observeRect';
 
 import { RowWidthResizer } from './RowWidthResizer';
 import { Filter } from './filter/Filter';
-import { SCROLLBAR } from './scrollbarUtil';
 import {
   Cell,
   CellTextContent,
@@ -15,7 +14,7 @@ import {
   ExpandIcon,
   ExpandIconWrapper,
   Filler,
-  HeaderWrapper,
+  HeaderWrapperContainer,
   Header,
   HeaderCell,
   HeaderCellContent,
@@ -30,9 +29,10 @@ import {
   TitleContent,
   Title,
   ExtraText,
-  OverflowMenuWrapper,
 } from './style';
 import { VirtualBody } from './VirtualBody';
+import { OverflowMenu } from './OverflowMenu';
+import { getScrollbarSize } from '#src/components/common/dom/scrollbarUtil';
 
 export const DEFAULT_COLUMN_WIDTH = 100;
 
@@ -46,6 +46,18 @@ type FilterProps = {
    */
   setFilterActive: (isActive: boolean) => void;
 };
+
+export const HeaderWrapper = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement> & { greyHeader?: boolean }
+>((props, ref) => {
+  const [scrollbar, setScrollbarSize] = React.useState(16);
+  React.useEffect(() => {
+    const size = getScrollbarSize();
+    setScrollbarSize(size);
+  }, []);
+  return <HeaderWrapperContainer ref={ref} {...props} scrollbar={scrollbar} />;
+});
 
 export type Column = {
   /** Уникальное название столбца */
@@ -511,13 +523,6 @@ export const Table: React.FC<TableProps> = ({
   };
 
   const renderRow = (row: TableRow, index: number) => {
-    const oveflowMenuRef = React.createRef<HTMLDivElement>();
-    const handleMenuOpen = () => {
-      if (oveflowMenuRef.current) oveflowMenuRef.current.dataset.opened = 'true';
-    };
-    const handleMenuClose = () => {
-      if (oveflowMenuRef.current) oveflowMenuRef.current.dataset.opened = 'false';
-    };
     return (
       <Row
         onClick={() => handleRowClick(row.id)}
@@ -566,11 +571,7 @@ export const Table: React.FC<TableProps> = ({
           {cols.map((col) => (col.sticky ? null : renderBodyCell(row, col)))}
           <Filler />
         </SimpleRow>
-        {row.overflowMenuRender && (
-          <OverflowMenuWrapper ref={oveflowMenuRef} data-opened={false} $offset={tableWidth}>
-            {row.overflowMenuRender(row, handleMenuOpen, handleMenuClose)}
-          </OverflowMenuWrapper>
-        )}
+        {row.overflowMenuRender && <OverflowMenu tableWidth={tableWidth} row={row} />}
         {row.expandedRowRender && (
           <ExpandedRow opened={row.expanded} contentMaxHeight="90vh" className="tr-expanded">
             <ExpandedRowContent>{row.expandedRowRender(row)}</ExpandedRowContent>
@@ -589,7 +590,7 @@ export const Table: React.FC<TableProps> = ({
       {...props}
       className={`table ${props.className}`}
     >
-      <HeaderWrapper scrollbar={SCROLLBAR} greyHeader={greyHeader} data-greyheader={greyHeader}>
+      <HeaderWrapper greyHeader={greyHeader} data-greyheader={greyHeader}>
         <Header ref={headerRef} className="tr" data-underline={true}>
           {(displayRowSelectionColumn || displayRowExpansionColumn || stickyColumns.length > 0) && (
             <StickyWrapper>
