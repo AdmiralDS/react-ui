@@ -72,8 +72,8 @@ export type Column = {
   cellAlign?: 'left' | 'right';
   /** Является ли столбец сортируемым. По умолчанию false */
   sortable?: boolean;
-  /** Дефолтная сортировка столбца (по возрастанию или по убыванию) */
-  defaultSort?: 'asc' | 'desc';
+  /** Сортировка столбца (по возрастанию или по убыванию) */
+  sort?: 'asc' | 'desc';
   /** Отображение столбца как фиксированного (которые остаются при скролле на месте).
    * Столбец с чекбоксами по умолчанию фиксированный.
    * Фиксированные столбцы располагаются по левому краю таблицы и идут друг за другом
@@ -239,7 +239,6 @@ export const Table: React.FC<TableProps> = ({
   const spacer = spacingBetweenItems || defaultSpacer;
 
   const [cols, setColumns] = React.useState([...columnList]);
-  const [sort, setSort] = React.useState({} as any);
   const [verticalScroll, setVerticalScroll] = React.useState(false);
   const [resizerState, updateResizerState] = React.useState({} as any);
   const [tableWidth, setTableWidth] = React.useState(0);
@@ -250,9 +249,6 @@ export const Table: React.FC<TableProps> = ({
   const tableRef = React.useRef<HTMLDivElement>(null);
   const headerRef = React.useRef<HTMLDivElement>(null);
   const scrollBodyRef = React.useRef<HTMLDivElement>(null);
-
-  // Счетчик смены сортировки для столбца. При третьем нажатии на столбец сортировка должна отменяться
-  const sortedCol = React.useRef<{ name: string; count: number }>({ name: '', count: 0 });
 
   const scrollHeader = (scrollLeft: number) => {
     if (headerRef.current) headerRef.current.scrollLeft = scrollLeft;
@@ -334,18 +330,6 @@ export const Table: React.FC<TableProps> = ({
   );
 
   React.useLayoutEffect(() => {
-    const defaultSort = [...columnList].reduce((sortObj, { name, defaultSort }) => {
-      if (defaultSort) {
-        onSortChange?.({ name, sort: defaultSort });
-        sortedCol.current = { name, count: 1 };
-      }
-      sortObj[name] = defaultSort || 'initial';
-      return sortObj;
-    }, {} as Record<any, any>);
-    setSort(defaultSort);
-  }, [columnList]);
-
-  React.useLayoutEffect(() => {
     const scrollBody = scrollBodyRef.current;
     if (scrollBody) {
       scrollBody.addEventListener('scroll', handleScroll);
@@ -411,30 +395,13 @@ export const Table: React.FC<TableProps> = ({
     setColumns(newColumns);
   }
 
-  const handleSort = (name: string) => {
-    let newSort = sort[name] === 'asc' ? 'desc' : 'asc';
+  const handleSort = (name: string, colSort: 'asc' | 'desc' | 'initial') => {
+    let newSort: 'asc' | 'desc' | 'initial' = 'initial';
+    if (colSort === 'asc') newSort = 'desc';
+    if (colSort === 'desc') newSort = 'initial';
+    if (colSort === 'initial') newSort = 'asc';
 
-    // нажатие на столбец, у которого уже включена сортировка
-    if (sortedCol.current.name === name) {
-      // если уже дважды нажали, отключаем сортировку
-      if (sortedCol.current.count === 2) {
-        newSort = 'initial';
-        sortedCol.current = { name: '', count: 0 };
-      } else {
-        sortedCol.current = { name, count: 2 };
-      }
-    }
-    // нажатие на столбец с выключенной сортировкой
-    else {
-      sortedCol.current = { name, count: 1 };
-    }
-    const toRemove = cols.reduce((sortObj, col) => {
-      sortObj[col.name] = 'initial';
-      return sortObj;
-    }, {} as Record<any, any>);
-    setSort({ ...toRemove, [name]: newSort });
-
-    onSortChange?.({ name, sort: newSort as any });
+    onSortChange?.({ name, sort: newSort });
   };
 
   const renderHeaderCell = (
@@ -446,6 +413,7 @@ export const Table: React.FC<TableProps> = ({
       resizerWidth,
       cellAlign = 'left',
       sortable = false,
+      sort,
       sticky = false,
       renderFilter,
       renderFilterIcon,
@@ -461,13 +429,13 @@ export const Table: React.FC<TableProps> = ({
         key={`head_${name}`}
         style={{ width: width, minWidth: width }}
         data-cellalign={cellAlign}
-        data-sort={String(sort[name] || 'initial')}
+        data-sort={sort || 'initial'}
         data-sticky={sticky}
         className="th"
         ref={cellRef}
       >
         <HeaderCellContent>
-          <HeaderCellTitle onClick={sortable ? () => handleSort(name) : undefined}>
+          <HeaderCellTitle onClick={sortable ? () => handleSort(name, sort || 'initial') : undefined}>
             <TitleContent sortable={sortable}>
               <Title lineClamp={headerLineClamp}>{title}</Title>
               {extraText && <ExtraText lineClamp={headerExtraLineClamp}>{extraText}</ExtraText>}
