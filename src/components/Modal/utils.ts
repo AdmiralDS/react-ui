@@ -1,23 +1,4 @@
-const getScrollbarSize = () => {
-  let scrollBarWidth = 0;
-  const scrollbox = document.createElement('div');
-  scrollbox.innerHTML = `Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diem 
-  nonummy nibh euismod tincidunt ut lacreet dolore magna aliguam erat volutpat. 
-  Ut wisis enim ad minim veniam, quis nostrud exerci tution ullamcorper suscipit 
-  lobortis nisl ut aliquip ex ea commodo consequat.`;
-  scrollbox.style.overflow = 'scroll';
-  scrollbox.style.fontSize = '14px';
-  scrollbox.style.height = '50px';
-  scrollbox.style.maxHeight = '50px';
-  scrollbox.style.width = '100px';
-  scrollbox.style.position = 'absolute';
-  scrollbox.style.top = '-100000px';
-  scrollbox.style.left = '-100000px';
-  document.body.appendChild(scrollbox);
-  scrollBarWidth = scrollbox.offsetWidth - scrollbox.clientWidth;
-  document.body.removeChild(scrollbox);
-  return scrollBarWidth;
-};
+import { getScrollbarSize } from '#src/components/common/dom/scrollbarUtil';
 
 const ownerDocument = (node: Node | null | undefined): Document => {
   return (node && node.ownerDocument) || document;

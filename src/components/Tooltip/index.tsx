@@ -7,6 +7,7 @@ import { getScrollableParents } from '#src/components/common/utils/getScrollable
 import { AnchorWrapper, FakeTarget, Portal, TooltipContainer, TooltipWrapper } from './style';
 import type { TooltipPositionType } from './utils';
 import { getTooltipDirection } from './utils';
+import { getScrollbarSize } from '#src/components/common/dom/scrollbarUtil';
 
 export interface ITooltipProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Функция, которая возвращает реакт-компонент с контентом тултипа. Если этому компоненту нужны props, используйте замыкание */
@@ -50,9 +51,14 @@ export const Tooltip: React.FC<ITooltipProps> = ({
 
   const hideTooltip = () => setVisible(false);
 
-  const manageTooltip = () => {
+  const manageTooltip = (scrollbarSize: number) => {
     if (anchorElementRef.current && tooltipElementRef.current) {
-      const direction = getTooltipDirection(anchorElementRef.current, tooltipElementRef.current, tooltipPosition);
+      const direction = getTooltipDirection(
+        anchorElementRef.current,
+        tooltipElementRef.current,
+        scrollbarSize,
+        tooltipPosition,
+      );
       const tooltip = tooltipElementRef.current;
       switch (direction) {
         case 'topPageCenter':
@@ -110,7 +116,8 @@ export const Tooltip: React.FC<ITooltipProps> = ({
   });
 
   React.useEffect(() => {
-    manageTooltip();
+    const scrollbarSize = getScrollbarSize();
+    manageTooltip(scrollbarSize);
   }, [renderContent(), anchorElementRef, tooltipPosition, container]);
 
   // First container render always happens downward and transparent,
@@ -139,7 +146,7 @@ export const Tooltip: React.FC<ITooltipProps> = ({
     showTooltipTimer = window.setTimeout(
       () => {
         setVisible(true);
-        manageTooltip();
+        manageTooltip(getScrollbarSize());
       },
       withDelay ? TOOLTIP_DELAY : 0,
     );
