@@ -2,7 +2,7 @@ import type { HTMLAttributes } from 'react';
 import * as React from 'react';
 import { useEffect } from 'react';
 import styled, { css } from 'styled-components';
-import { ItemProps } from '#src/components/MenuItem';
+import type { ItemProps } from '#src/components/MenuItem';
 import { keyboardKey } from '#src/components/common/keyboardKey';
 
 export type MenuDimensions = 'l' | 'm' | 's';
@@ -11,13 +11,13 @@ export const menuListHeights = css<{ dimension?: MenuDimensions }>`
   max-height: ${({ dimension }) => {
     switch (dimension) {
       case 'l':
-        return `${48 * 6}px`;
+        return `${48 * 6 + 16}px`;
       case 'm':
-        return `${40 * 6}px`;
+        return `${40 * 6 + 16}px`;
       case 's':
-        return `${32 * 6}px`;
+        return `${32 * 6 + 16}px`;
       default:
-        return `${48 * 6}px`;
+        return `${48 * 6 + 16}px`;
     }
   }};
 `;
@@ -138,8 +138,9 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
         item.render({
           hovered: activeId === item.id,
           selected: selectedId === item.id,
-          onHover: () => activateItem(item.id),
+          onHover: () => activateItem(item.disabled ? null : item.id),
           onClickItem: () => selectItem(item.id),
+          disabled: item.disabled,
         }),
       );
     };

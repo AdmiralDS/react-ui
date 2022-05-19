@@ -15,8 +15,7 @@ const Desc = styled.div`
 
 const Description = () => (
   <Desc>
-    Компонент Dropdown Menu имеет три размера и может быть с иконкой или без. Высота строки : xl - 48px, m - 40px, s -
-    32px
+    Компонент Menu имеет три размера и может быть с иконкой или без. Высота строки : l - 48px, m - 40px, s - 32px
   </Desc>
 );
 export default {
@@ -117,7 +116,7 @@ const TemplateWithCards: ComponentStory<typeof Menu> = (args) => {
       acc.push({
         id: item.id,
         render: (options: RenderOptionProps) => (
-          <MenuItem key={item.id} disabled={true} {...options}>
+          <MenuItem dimension={args.dimension} key={item.id} {...options}>
             {item.name}
           </MenuItem>
         ),
@@ -128,7 +127,7 @@ const TemplateWithCards: ComponentStory<typeof Menu> = (args) => {
           return {
             id: subitem.id,
             render: (options: RenderOptionProps) => (
-              <StyledMenuItem key={subitem.id} {...options}>
+              <StyledMenuItem dimension={args.dimension} key={subitem.id} {...options}>
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                   {subitem.label} <CardSolid width={24} height={24} />
                 </div>
@@ -194,22 +193,22 @@ const items = [
   },
 ];
 
-const SimpleTemplate: ComponentStory<typeof Menu> = () => {
+const SimpleTemplate: ComponentStory<typeof Menu> = (args) => {
   const model = useMemo(() => {
     return items.map((item) => ({
       id: item.id,
       render: (options: RenderOptionProps) => (
-        <MenuItem dimension={'s'} {...options} key={item.id}>
+        <MenuItem dimension={args.dimension || 's'} {...options} key={item.id}>
           {item.label}
         </MenuItem>
       ),
     }));
-  }, []);
+  }, [args.dimension]);
 
   return (
     <>
       <div style={{ width: 'fit-content' }}>
-        <Menu model={model} />
+        <Menu {...args} model={model} />
       </div>
     </>
   );
@@ -272,7 +271,7 @@ const MyMenuItem = ({
   ...props
 }: MyMenuItemProps) => {
   const handleMouseMove = () => {
-    if (!disabled) onHover?.();
+    onHover?.();
   };
 
   const handleClick = () => {
@@ -295,18 +294,12 @@ const MyMenuItem = ({
 };
 //</editor-fold>
 
-const CustomItemTemplate: ComponentStory<typeof Menu> = () => {
+const CustomItemTemplate: ComponentStory<typeof Menu> = (args) => {
   const model = useMemo(() => {
     return items.map((item) => ({
       id: item.id,
       render: (options: RenderOptionProps) => (
-        <MyMenuItem
-          success={item.id === '3'}
-          {...options}
-          key={item.id}
-          text={item.label}
-          disabled={item.value === 4}
-        />
+        <MyMenuItem success={item.id === '3'} {...options} key={item.id} text={item.label} />
       ),
       disabled: item.value === 4,
     }));
@@ -315,7 +308,7 @@ const CustomItemTemplate: ComponentStory<typeof Menu> = () => {
   return (
     <>
       <div style={{ width: 'fit-content' }}>
-        <Menu model={model} defaultSelected={'4'} />
+        <Menu {...args} model={model} defaultSelected={'4'} />
       </div>
     </>
   );
