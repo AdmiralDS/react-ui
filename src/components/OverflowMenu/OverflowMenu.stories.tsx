@@ -81,24 +81,23 @@ const Template1: ComponentStory<typeof OverflowMenu> = (args) => {
   ];
 
   const [selected, setSelected] = React.useState<string | null>(null);
-  const dimension = 'l';
   const model = useMemo(() => {
     return items.map((item) => ({
       id: item.id,
       render: (options: RenderOptionProps) => (
-        <MenuItem dimension={dimension} {...options} key={item.id} disabled={item.disabled}>
+        <MenuItem dimension={args.dimension} {...options} key={item.id}>
           {item.display}
         </MenuItem>
       ),
+      disabled: item.disabled,
     }));
-  }, []);
+  }, [args.dimension]);
 
   return (
     <>
       <OverflowMenu
         {...args}
         items={model}
-        dimension={dimension}
         selected={selected}
         onChange={(id) => {
           console.log(`onChange('${id}')`);
@@ -138,17 +137,17 @@ const Template2: ComponentStory<typeof OverflowMenu> = (args) => {
     },
   ];
 
-  const dimension = 'l';
   const model = useMemo(() => {
     return items.map((item) => ({
       id: item.id,
       render: (options: RenderOptionProps) => (
-        <MenuItem dimension={dimension} {...options} key={item.id} disabled={item.disabled}>
+        <MenuItem dimension={args.dimension} {...options} key={item.id}>
           {item.display}
         </MenuItem>
       ),
+      disabled: item.disabled,
     }));
-  }, []);
+  }, [args.dimension]);
 
   const [selected, setSelected] = React.useState<string | null>(null);
 
@@ -158,7 +157,6 @@ const Template2: ComponentStory<typeof OverflowMenu> = (args) => {
         {...args}
         items={model}
         selected={selected}
-        dimension={dimension}
         onChange={(id) => setSelected(id)}
         onOpen={() => console.log('open menu')}
         onClose={() => console.log('close menu')}
@@ -212,30 +210,33 @@ const Template3: ComponentStory<typeof OverflowMenu> = (args) => {
     return items.map((item) => ({
       id: item.id,
       render: (options: RenderOptionProps) => (
-        <MenuItem dimension={dimensionL} {...options} key={item.id} disabled={item.disabled}>
+        <MenuItem dimension={dimensionL} {...options} key={item.id}>
           {item.display}
         </MenuItem>
       ),
+      disabled: item.disabled,
     }));
   }, []);
   const modelM = useMemo(() => {
     return items.map((item) => ({
       id: item.id,
       render: (options: RenderOptionProps) => (
-        <MenuItem dimension={dimensionL} {...options} key={item.id} disabled={item.disabled}>
+        <MenuItem dimension={dimensionL} {...options} key={item.id}>
           {item.display}
         </MenuItem>
       ),
+      disabled: item.id === '1',
     }));
   }, []);
   const modelS = useMemo(() => {
     return items.map((item) => ({
       id: item.id,
       render: (options: RenderOptionProps) => (
-        <MenuItem dimension={dimensionL} {...options} key={item.id} disabled={item.disabled}>
+        <MenuItem dimension={dimensionL} {...options} key={item.id}>
           {item.display}
         </MenuItem>
       ),
+      disabled: item.disabled,
     }));
   }, []);
   const [selected, setSelected] = React.useState<string | null>(null);
