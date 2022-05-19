@@ -92,7 +92,7 @@ export const OverflowMenu = React.forwardRef<HTMLButtonElement, OverflowMenuProp
         />
         {menuOpened && (
           <DropdownContainer alignSelf={alignSelf} targetRef={btnRef} onClickOutside={clickOutside}>
-            <Menu model={items} selected={selected} onSelectItem={handleClick} />
+            <Menu model={items} selected={selected} onSelectItem={handleClick} dimension={dimension} />
           </DropdownContainer>
         )}
       </>
