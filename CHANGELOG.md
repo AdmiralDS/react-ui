@@ -2,7 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-### [0.9.2](https://github.com/AdmiralDS/react-ui/compare/v0.9.1...v0.9.2) (2022-05-18)
+## [1.1.0](https://github.com/AdmiralDS/react-ui/compare/v1.0.0...v1.1.0) (2022-05-20)
+
+
+### Features
+
+* **Table:** replace column defaultSort with controlled sort parameter ([d6c2228](https://github.com/AdmiralDS/react-ui/commit/d6c2228e090b0356463f47e20fe7e4a968509c59))
+
+
+### Bug Fixes
+
+* **NumberInput:** fix bug with onBlur and precision 0 ([e87e489](https://github.com/AdmiralDS/react-ui/commit/e87e489317cb4e17967326b6614e09bbb769c313))
+* **Table:** fix problem with hook in renderHeaderCell ([707b553](https://github.com/AdmiralDS/react-ui/commit/707b553ad54ece30c63616016a71a546b472b930))
+
+### [1.0.0](https://github.com/AdmiralDS/react-ui/compare/v0.9.1...v1.0.0) (2022-05-18)
 
 
 ### Features

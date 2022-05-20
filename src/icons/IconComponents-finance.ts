@@ -1,5 +1,7 @@
 export { ReactComponent as BrokerOutline } from '@admiral-ds/icons/build/finance/BrokerOutline.svg';
 export { ReactComponent as BrokerSolid } from '@admiral-ds/icons/build/finance/BrokerSolid.svg';
+export { ReactComponent as CVVOutline } from '@admiral-ds/icons/build/finance/CVVOutline.svg';
+export { ReactComponent as CVVSolid } from '@admiral-ds/icons/build/finance/CVVSolid.svg';
 export { ReactComponent as CardOutline } from '@admiral-ds/icons/build/finance/CardOutline.svg';
 export { ReactComponent as CardSolid } from '@admiral-ds/icons/build/finance/CardSolid.svg';
 export { ReactComponent as CardTOutline } from '@admiral-ds/icons/build/finance/CardTOutline.svg';
@@ -8,6 +10,8 @@ export { ReactComponent as CardTPSolid } from '@admiral-ds/icons/build/finance/C
 export { ReactComponent as CardTSolid } from '@admiral-ds/icons/build/finance/CardTSolid.svg';
 export { ReactComponent as CashOutline } from '@admiral-ds/icons/build/finance/CashOutline.svg';
 export { ReactComponent as CashSolid } from '@admiral-ds/icons/build/finance/CashSolid.svg';
+export { ReactComponent as CashboxOutline } from '@admiral-ds/icons/build/finance/CashboxOutline.svg';
+export { ReactComponent as CashboxSolid } from '@admiral-ds/icons/build/finance/CashboxSolid.svg';
 export { ReactComponent as CreditCardOutline } from '@admiral-ds/icons/build/finance/CreditCardOutline.svg';
 export { ReactComponent as CreditCardSolid } from '@admiral-ds/icons/build/finance/CreditCardSolid.svg';
 export { ReactComponent as DebitCardOutline } from '@admiral-ds/icons/build/finance/DebitCardOutline.svg';
@@ -22,6 +26,8 @@ export { ReactComponent as GBPOutline } from '@admiral-ds/icons/build/finance/GB
 export { ReactComponent as GBPSolid } from '@admiral-ds/icons/build/finance/GBPSolid.svg';
 export { ReactComponent as GetCashOutline } from '@admiral-ds/icons/build/finance/GetCashOutline.svg';
 export { ReactComponent as GetCashSolid } from '@admiral-ds/icons/build/finance/GetCashSolid.svg';
+export { ReactComponent as GoldOutline } from '@admiral-ds/icons/build/finance/GoldOutline.svg';
+export { ReactComponent as GoldSolid } from '@admiral-ds/icons/build/finance/GoldSolid.svg';
 export { ReactComponent as IISOutline } from '@admiral-ds/icons/build/finance/IISOutline.svg';
 export { ReactComponent as IISSolid } from '@admiral-ds/icons/build/finance/IISSolid.svg';
 export { ReactComponent as JPYOutline } from '@admiral-ds/icons/build/finance/JPYOutline.svg';
@@ -30,14 +36,20 @@ export { ReactComponent as MoneyOutline } from '@admiral-ds/icons/build/finance/
 export { ReactComponent as MoneySolid } from '@admiral-ds/icons/build/finance/MoneySolid.svg';
 export { ReactComponent as MulticurencyOutline } from '@admiral-ds/icons/build/finance/MulticurencyOutline.svg';
 export { ReactComponent as MulticurencySolid } from '@admiral-ds/icons/build/finance/MulticurencySolid.svg';
+export { ReactComponent as PalladiumOutline } from '@admiral-ds/icons/build/finance/PalladiumOutline.svg';
+export { ReactComponent as PalladiumSolid } from '@admiral-ds/icons/build/finance/PalladiumSolid.svg';
 export { ReactComponent as PayCashOutline } from '@admiral-ds/icons/build/finance/PayCashOutline.svg';
 export { ReactComponent as PayCashSolid } from '@admiral-ds/icons/build/finance/PayCashSolid.svg';
 export { ReactComponent as PayrollCardOutline } from '@admiral-ds/icons/build/finance/PayrollCardOutline.svg';
 export { ReactComponent as PayrollCardSolid } from '@admiral-ds/icons/build/finance/PayrollCardSolid.svg';
 export { ReactComponent as PersonOutline } from '@admiral-ds/icons/build/finance/PersonOutline.svg';
 export { ReactComponent as PersonSolid } from '@admiral-ds/icons/build/finance/PersonSolid.svg';
+export { ReactComponent as PlatinumOutline } from '@admiral-ds/icons/build/finance/PlatinumOutline.svg';
+export { ReactComponent as PlatinumSolid } from '@admiral-ds/icons/build/finance/PlatinumSolid.svg';
 export { ReactComponent as RUBOutline } from '@admiral-ds/icons/build/finance/RUBOutline.svg';
 export { ReactComponent as RUBSolid } from '@admiral-ds/icons/build/finance/RUBSolid.svg';
+export { ReactComponent as SilverOutline } from '@admiral-ds/icons/build/finance/SilverOutline.svg';
+export { ReactComponent as SilverSolid } from '@admiral-ds/icons/build/finance/SilverSolid.svg';
 export { ReactComponent as TreasuryOutline } from '@admiral-ds/icons/build/finance/TreasuryOutline.svg';
 export { ReactComponent as TreasurySolid } from '@admiral-ds/icons/build/finance/TreasurySolid.svg';
 export { ReactComponent as UAHOutline } from '@admiral-ds/icons/build/finance/UAHOutline.svg';

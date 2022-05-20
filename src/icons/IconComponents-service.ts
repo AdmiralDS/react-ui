@@ -40,6 +40,8 @@ export { ReactComponent as PlusOutline } from '@admiral-ds/icons/build/service/P
 export { ReactComponent as PlusSolid } from '@admiral-ds/icons/build/service/PlusSolid.svg';
 export { ReactComponent as ProcessOutline } from '@admiral-ds/icons/build/service/ProcessOutline.svg';
 export { ReactComponent as ProcessSolid } from '@admiral-ds/icons/build/service/ProcessSolid.svg';
+export { ReactComponent as SizeChangerHorizontalOutline } from '@admiral-ds/icons/build/service/SizeChangerHorizontalOutline.svg';
+export { ReactComponent as SizeChangerVerticalOutline } from '@admiral-ds/icons/build/service/SizeChangerVerticalOutline.svg';
 export { ReactComponent as SmallCloseOutline } from '@admiral-ds/icons/build/service/SmallCloseOutline.svg';
 export { ReactComponent as SmallCloseSolid } from '@admiral-ds/icons/build/service/SmallCloseSolid.svg';
 export { ReactComponent as ThumbsDownOutline } from '@admiral-ds/icons/build/service/ThumbsDownOutline.svg';

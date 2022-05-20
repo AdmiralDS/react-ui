@@ -112,6 +112,7 @@ export { ReactComponent as RedoOutline } from '@admiral-ds/icons/build/system/Re
 export { ReactComponent as RedoSolid } from '@admiral-ds/icons/build/system/RedoSolid.svg';
 export { ReactComponent as RefuseOutline } from '@admiral-ds/icons/build/system/RefuseOutline.svg';
 export { ReactComponent as RefuseSolid } from '@admiral-ds/icons/build/system/RefuseSolid.svg';
+export { ReactComponent as RefuseViewOutline } from '@admiral-ds/icons/build/system/RefuseViewOutline.svg';
 export { ReactComponent as ReportOutline } from '@admiral-ds/icons/build/system/ReportOutline.svg';
 export { ReactComponent as ReportSolid } from '@admiral-ds/icons/build/system/ReportSolid.svg';
 export { ReactComponent as SaveOutline } from '@admiral-ds/icons/build/system/SaveOutline.svg';
@@ -140,6 +141,8 @@ export { ReactComponent as SortUpOutline } from '@admiral-ds/icons/build/system/
 export { ReactComponent as SortUpSolid } from '@admiral-ds/icons/build/system/SortUpSolid.svg';
 export { ReactComponent as StarOutline } from '@admiral-ds/icons/build/system/StarOutline.svg';
 export { ReactComponent as StarSolid } from '@admiral-ds/icons/build/system/StarSolid.svg';
+export { ReactComponent as SyncForbidOutline } from '@admiral-ds/icons/build/system/SyncForbidOutline.svg';
+export { ReactComponent as SyncPermitOutline } from '@admiral-ds/icons/build/system/SyncPermitOutline.svg';
 export { ReactComponent as ThirdPersonOutline } from '@admiral-ds/icons/build/system/ThirdPersonOutline.svg';
 export { ReactComponent as ThirdPersonSolid } from '@admiral-ds/icons/build/system/ThirdPersonSolid.svg';
 export { ReactComponent as TimeOutline } from '@admiral-ds/icons/build/system/TimeOutline.svg';
@@ -150,14 +153,20 @@ export { ReactComponent as TuneOutline } from '@admiral-ds/icons/build/system/Tu
 export { ReactComponent as TuneSolid } from '@admiral-ds/icons/build/system/TuneSolid.svg';
 export { ReactComponent as UndoOutline } from '@admiral-ds/icons/build/system/UndoOutline.svg';
 export { ReactComponent as UndoSolid } from '@admiral-ds/icons/build/system/UndoSolid.svg';
+export { ReactComponent as UnlinkOutline } from '@admiral-ds/icons/build/system/UnlinkOutline.svg';
 export { ReactComponent as UpdateOutline } from '@admiral-ds/icons/build/system/UpdateOutline.svg';
 export { ReactComponent as UpdateSolid } from '@admiral-ds/icons/build/system/UpdateSolid.svg';
 export { ReactComponent as UploadOutline } from '@admiral-ds/icons/build/system/UploadOutline.svg';
 export { ReactComponent as UploadSolid } from '@admiral-ds/icons/build/system/UploadSolid.svg';
 export { ReactComponent as UserDeleteOutline } from '@admiral-ds/icons/build/system/UserDeleteOutline.svg';
 export { ReactComponent as UserDeleteSolid } from '@admiral-ds/icons/build/system/UserDeleteSolid.svg';
+export { ReactComponent as UserRoleFromOutline } from '@admiral-ds/icons/build/system/UserRoleFromOutline.svg';
+export { ReactComponent as UserRoleFromSolid } from '@admiral-ds/icons/build/system/UserRoleFromSolid.svg';
 export { ReactComponent as UserRoleOutline } from '@admiral-ds/icons/build/system/UserRoleOutline.svg';
 export { ReactComponent as UserRoleSolid } from '@admiral-ds/icons/build/system/UserRoleSolid.svg';
+export { ReactComponent as UserRoleToOutline } from '@admiral-ds/icons/build/system/UserRoleToOutline.svg';
+export { ReactComponent as UserRoleToSolid } from '@admiral-ds/icons/build/system/UserRoleToSolid.svg';
+export { ReactComponent as ViewHistoryOutline } from '@admiral-ds/icons/build/system/ViewHistoryOutline.svg';
 export { ReactComponent as ZoomInOutline } from '@admiral-ds/icons/build/system/ZoomInOutline.svg';
 export { ReactComponent as ZoomInSolid } from '@admiral-ds/icons/build/system/ZoomInSolid.svg';
 export { ReactComponent as ZoomOutOutline } from '@admiral-ds/icons/build/system/ZoomOutOutline.svg';

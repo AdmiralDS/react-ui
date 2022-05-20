@@ -127,12 +127,14 @@ export function fitToCurrency(
       if (dot === 0) {
         newValue = '0' + newValue;
       }
-    } else if (precision) {
+    } else {
       // если введен только минус, то добавляем к нему ноль
       if (newValue === '-') {
         newValue = newValue + '0';
       }
-      newValue += decimal + repeatStringNumTimes('0', precision);
+      if (precision > 0) {
+        newValue += decimal + repeatStringNumTimes('0', precision);
+      }
     }
   }
 
