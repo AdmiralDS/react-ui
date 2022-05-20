@@ -423,7 +423,7 @@ export const Table: React.FC<TableProps> = ({
     }: ColumnWithResizerWidth,
     index: number,
   ) => {
-    const cellRef = React.useRef(null);
+    const cellRef = React.createRef<HTMLDivElement>();
     return (
       <HeaderCell
         key={`head_${name}`}
