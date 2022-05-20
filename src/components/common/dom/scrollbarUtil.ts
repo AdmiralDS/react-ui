@@ -5,7 +5,6 @@
  * Поэтому, если getScrollbarSize будет возвращать 0, буду вместо 0 брать стандартную для Mac ширину полосы прокрутки (16 пикселей)
  * https://gist.github.com/martynchamberlin/6aaf8a45b36907e9f1e21a28889f6b0a
  */
-/** отступ от правого и нижнего края, чтобы тултип не заходил за полосу прокрутки */
 export const getScrollbarSize = () => {
   let scrollBarWidth = 0;
   const scrollbox = document.createElement('div');
