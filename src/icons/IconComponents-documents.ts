@@ -8,6 +8,8 @@ export { ReactComponent as ArchiveOutline } from '@admiral-ds/icons/build/docume
 export { ReactComponent as ArchiveSolid } from '@admiral-ds/icons/build/documents/ArchiveSolid.svg';
 export { ReactComponent as CatalogOutline } from '@admiral-ds/icons/build/documents/CatalogOutline.svg';
 export { ReactComponent as CatalogSolid } from '@admiral-ds/icons/build/documents/CatalogSolid.svg';
+export { ReactComponent as ComponentTemplateOutline } from '@admiral-ds/icons/build/documents/ComponentTemplateOutline.svg';
+export { ReactComponent as ComponentTemplateSolid } from '@admiral-ds/icons/build/documents/ComponentTemplateSolid.svg';
 export { ReactComponent as CopyOutline } from '@admiral-ds/icons/build/documents/CopyOutline.svg';
 export { ReactComponent as CopySolid } from '@admiral-ds/icons/build/documents/CopySolid.svg';
 export { ReactComponent as DeleteDocsOutline } from '@admiral-ds/icons/build/documents/DeleteDocsOutline.svg';
@@ -64,6 +66,8 @@ export { ReactComponent as RotateLeftOutline } from '@admiral-ds/icons/build/doc
 export { ReactComponent as RotateLeftSolid } from '@admiral-ds/icons/build/documents/RotateLeftSolid.svg';
 export { ReactComponent as RotateRightOutline } from '@admiral-ds/icons/build/documents/RotateRightOutline.svg';
 export { ReactComponent as RotateRightSolid } from '@admiral-ds/icons/build/documents/RotateRightSolid.svg';
+export { ReactComponent as ScanOutline } from '@admiral-ds/icons/build/documents/ScanOutline.svg';
+export { ReactComponent as ScanSolid } from '@admiral-ds/icons/build/documents/ScanSolid.svg';
 export { ReactComponent as SendSignOutline } from '@admiral-ds/icons/build/documents/SendSignOutline.svg';
 export { ReactComponent as SendSignSolid } from '@admiral-ds/icons/build/documents/SendSignSolid.svg';
 export { ReactComponent as SignOutline } from '@admiral-ds/icons/build/documents/SignOutline.svg';

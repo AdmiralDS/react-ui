@@ -16,6 +16,8 @@ export { ReactComponent as BonusRubleSolid } from '@admiral-ds/icons/build/categ
 export { ReactComponent as BonusSolid } from '@admiral-ds/icons/build/category/BonusSolid.svg';
 export { ReactComponent as BookOutline } from '@admiral-ds/icons/build/category/BookOutline.svg';
 export { ReactComponent as BookSolid } from '@admiral-ds/icons/build/category/BookSolid.svg';
+export { ReactComponent as BranchesOutline } from '@admiral-ds/icons/build/category/BranchesOutline.svg';
+export { ReactComponent as BranchesSolid } from '@admiral-ds/icons/build/category/BranchesSolid.svg';
 export { ReactComponent as BurnOutline } from '@admiral-ds/icons/build/category/BurnOutline.svg';
 export { ReactComponent as BurnSolid } from '@admiral-ds/icons/build/category/BurnSolid.svg';
 export { ReactComponent as BusOutline } from '@admiral-ds/icons/build/category/BusOutline.svg';
@@ -34,12 +36,20 @@ export { ReactComponent as ChipOutline } from '@admiral-ds/icons/build/category/
 export { ReactComponent as ChipSolid } from '@admiral-ds/icons/build/category/ChipSolid.svg';
 export { ReactComponent as ClipboardOutline } from '@admiral-ds/icons/build/category/ClipboardOutline.svg';
 export { ReactComponent as ClipboardSolid } from '@admiral-ds/icons/build/category/ClipboardSolid.svg';
+export { ReactComponent as CloneOutline } from '@admiral-ds/icons/build/category/CloneOutline.svg';
+export { ReactComponent as CloneSolid } from '@admiral-ds/icons/build/category/CloneSolid.svg';
 export { ReactComponent as ColorOutline } from '@admiral-ds/icons/build/category/ColorOutline.svg';
 export { ReactComponent as ColorSolid } from '@admiral-ds/icons/build/category/ColorSolid.svg';
 export { ReactComponent as CommentOutline } from '@admiral-ds/icons/build/category/CommentOutline.svg';
 export { ReactComponent as CommentSolid } from '@admiral-ds/icons/build/category/CommentSolid.svg';
+export { ReactComponent as CommitsOutline } from '@admiral-ds/icons/build/category/CommitsOutline.svg';
+export { ReactComponent as CommitsSolid } from '@admiral-ds/icons/build/category/CommitsSolid.svg';
+export { ReactComponent as CompareOutline } from '@admiral-ds/icons/build/category/CompareOutline.svg';
+export { ReactComponent as CompareSolid } from '@admiral-ds/icons/build/category/CompareSolid.svg';
 export { ReactComponent as ComponentOutline } from '@admiral-ds/icons/build/category/ComponentOutline.svg';
 export { ReactComponent as ComponentSolid } from '@admiral-ds/icons/build/category/ComponentSolid.svg';
+export { ReactComponent as CreatePullRequestOutline } from '@admiral-ds/icons/build/category/CreatePullRequestOutline.svg';
+export { ReactComponent as CreatePullRequestSolid } from '@admiral-ds/icons/build/category/CreatePullRequestSolid.svg';
 export { ReactComponent as CreditOutline } from '@admiral-ds/icons/build/category/CreditOutline.svg';
 export { ReactComponent as CreditSolid } from '@admiral-ds/icons/build/category/CreditSolid.svg';
 export { ReactComponent as CubeOutline } from '@admiral-ds/icons/build/category/CubeOutline.svg';
@@ -58,6 +68,8 @@ export { ReactComponent as EnvelopeOutline } from '@admiral-ds/icons/build/categ
 export { ReactComponent as EnvelopeSolid } from '@admiral-ds/icons/build/category/EnvelopeSolid.svg';
 export { ReactComponent as FlagOutline } from '@admiral-ds/icons/build/category/FlagOutline.svg';
 export { ReactComponent as FlagSolid } from '@admiral-ds/icons/build/category/FlagSolid.svg';
+export { ReactComponent as ForksOutline } from '@admiral-ds/icons/build/category/ForksOutline.svg';
+export { ReactComponent as ForksSolid } from '@admiral-ds/icons/build/category/ForksSolid.svg';
 export { ReactComponent as GameOutline } from '@admiral-ds/icons/build/category/GameOutline.svg';
 export { ReactComponent as GameSolid } from '@admiral-ds/icons/build/category/GameSolid.svg';
 export { ReactComponent as GlobeOutline } from '@admiral-ds/icons/build/category/GlobeOutline.svg';
@@ -116,6 +128,8 @@ export { ReactComponent as PostOutline } from '@admiral-ds/icons/build/category/
 export { ReactComponent as PostSolid } from '@admiral-ds/icons/build/category/PostSolid.svg';
 export { ReactComponent as PregnantOutline } from '@admiral-ds/icons/build/category/PregnantOutline.svg';
 export { ReactComponent as PregnantSolid } from '@admiral-ds/icons/build/category/PregnantSolid.svg';
+export { ReactComponent as PullRequestOutline } from '@admiral-ds/icons/build/category/PullRequestOutline.svg';
+export { ReactComponent as PullRequestSolid } from '@admiral-ds/icons/build/category/PullRequestSolid.svg';
 export { ReactComponent as ReceiptOutline } from '@admiral-ds/icons/build/category/ReceiptOutline.svg';
 export { ReactComponent as ReceiptSolid } from '@admiral-ds/icons/build/category/ReceiptSolid.svg';
 export { ReactComponent as ReceiptUpdateOutline } from '@admiral-ds/icons/build/category/ReceiptUpdateOutline.svg';
@@ -128,6 +142,8 @@ export { ReactComponent as ShoppingBagOutline } from '@admiral-ds/icons/build/ca
 export { ReactComponent as ShoppingBagSolid } from '@admiral-ds/icons/build/category/ShoppingBagSolid.svg';
 export { ReactComponent as ShowTableOutline } from '@admiral-ds/icons/build/category/ShowTableOutline.svg';
 export { ReactComponent as ShowTableSolid } from '@admiral-ds/icons/build/category/ShowTableSolid.svg';
+export { ReactComponent as SourceOutline } from '@admiral-ds/icons/build/category/SourceOutline.svg';
+export { ReactComponent as SourceSolid } from '@admiral-ds/icons/build/category/SourceSolid.svg';
 export { ReactComponent as StoreOutline } from '@admiral-ds/icons/build/category/StoreOutline.svg';
 export { ReactComponent as StoreSolid } from '@admiral-ds/icons/build/category/StoreSolid.svg';
 export { ReactComponent as StudyOutline } from '@admiral-ds/icons/build/category/StudyOutline.svg';

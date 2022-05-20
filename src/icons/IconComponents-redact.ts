@@ -3,6 +3,22 @@ export { ReactComponent as AlignLeftOutline } from '@admiral-ds/icons/build/reda
 export { ReactComponent as AlignMiddleOutline } from '@admiral-ds/icons/build/redact/AlignMiddleOutline.svg';
 export { ReactComponent as AlignRightOutline } from '@admiral-ds/icons/build/redact/AlignRightOutline.svg';
 export { ReactComponent as AlignTopOutline } from '@admiral-ds/icons/build/redact/AlignTopOutline.svg';
+export { ReactComponent as BgColorOutline } from '@admiral-ds/icons/build/redact/BgColorOutline.svg';
+export { ReactComponent as BorderBoldBottomOutline } from '@admiral-ds/icons/build/redact/BorderBoldBottomOutline.svg';
+export { ReactComponent as BorderBoldLeftOutline } from '@admiral-ds/icons/build/redact/BorderBoldLeftOutline.svg';
+export { ReactComponent as BorderBoldOutterOutline } from '@admiral-ds/icons/build/redact/BorderBoldOutterOutline.svg';
+export { ReactComponent as BorderBoldRightOutline } from '@admiral-ds/icons/build/redact/BorderBoldRightOutline.svg';
+export { ReactComponent as BorderBoldTopOutline } from '@admiral-ds/icons/build/redact/BorderBoldTopOutline.svg';
+export { ReactComponent as BorderBottomOutline } from '@admiral-ds/icons/build/redact/BorderBottomOutline.svg';
+export { ReactComponent as BorderClearOutline } from '@admiral-ds/icons/build/redact/BorderClearOutline.svg';
+export { ReactComponent as BorderHorizontalOutline } from '@admiral-ds/icons/build/redact/BorderHorizontalOutline.svg';
+export { ReactComponent as BorderInnerOutline } from '@admiral-ds/icons/build/redact/BorderInnerOutline.svg';
+export { ReactComponent as BorderLeftOutline } from '@admiral-ds/icons/build/redact/BorderLeftOutline.svg';
+export { ReactComponent as BorderOuterOutline } from '@admiral-ds/icons/build/redact/BorderOuterOutline.svg';
+export { ReactComponent as BorderRightOutline } from '@admiral-ds/icons/build/redact/BorderRightOutline.svg';
+export { ReactComponent as BorderStyleOutline } from '@admiral-ds/icons/build/redact/BorderStyleOutline.svg';
+export { ReactComponent as BorderTopOutline } from '@admiral-ds/icons/build/redact/BorderTopOutline.svg';
+export { ReactComponent as BorderVerticalOutline } from '@admiral-ds/icons/build/redact/BorderVerticalOutline.svg';
 export { ReactComponent as CellsDisconnectOutline } from '@admiral-ds/icons/build/redact/CellsDisconnectOutline.svg';
 export { ReactComponent as CellsMergeOutline } from '@admiral-ds/icons/build/redact/CellsMergeOutline.svg';
 export { ReactComponent as ChangeFieldOutline } from '@admiral-ds/icons/build/redact/ChangeFieldOutline.svg';
@@ -11,6 +27,7 @@ export { ReactComponent as ChartTrendingOutline } from '@admiral-ds/icons/build/
 export { ReactComponent as ColumnDeleteOutline } from '@admiral-ds/icons/build/redact/ColumnDeleteOutline.svg';
 export { ReactComponent as ColumnInsertAfterOutline } from '@admiral-ds/icons/build/redact/ColumnInsertAfterOutline.svg';
 export { ReactComponent as ColumnInsertBeforeOutline } from '@admiral-ds/icons/build/redact/ColumnInsertBeforeOutline.svg';
+export { ReactComponent as ColumnsOutline } from '@admiral-ds/icons/build/redact/ColumnsOutline.svg';
 export { ReactComponent as DeleteStyleOutline } from '@admiral-ds/icons/build/redact/DeleteStyleOutline.svg';
 export { ReactComponent as DeleteTableOutline } from '@admiral-ds/icons/build/redact/DeleteTableOutline.svg';
 export { ReactComponent as ElementFixedOutline } from '@admiral-ds/icons/build/redact/ElementFixedOutline.svg';
@@ -42,3 +59,4 @@ export { ReactComponent as TableOutline } from '@admiral-ds/icons/build/redact/T
 export { ReactComponent as TextBoldOutline } from '@admiral-ds/icons/build/redact/TextBoldOutline.svg';
 export { ReactComponent as TextItalicOutline } from '@admiral-ds/icons/build/redact/TextItalicOutline.svg';
 export { ReactComponent as TextUnderlineOutline } from '@admiral-ds/icons/build/redact/TextUnderlineOutline.svg';
+export { ReactComponent as TxtColorOutline } from '@admiral-ds/icons/build/redact/TxtColorOutline.svg';

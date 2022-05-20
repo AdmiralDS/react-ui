@@ -124,14 +124,19 @@ const StrToTime = (str: string) => {
   return new Date(res).getTime();
 };
 
-const Template2: ComponentStory<typeof Table> = ({ rowList, ...args }) => {
+const Template2: ComponentStory<typeof Table> = ({ rowList, columnList, ...args }) => {
   const [rows, setRows] = React.useState([...rowList]);
+  const [cols, setCols] = React.useState([...columnList]);
   const handleSort = ({ name, sort }: { name: string; sort: 'asc' | 'desc' | 'initial' }) => {
     if (sort === 'initial') {
+      setCols([...columnList].map((col) => ({ ...col, sort: undefined })));
       setRows([...rowList]);
     } else {
       const newRows = [...rows].sort((a: any, b: any) => {
         if (sort === 'asc') {
+          setCols(
+            [...columnList].map((col) => (col.name === name ? { ...col, sort: 'asc' } : { ...col, sort: undefined })),
+          );
           switch (name) {
             case 'transfer_date':
               return StrToTime(a[name]) - StrToTime(b[name]);
@@ -142,6 +147,9 @@ const Template2: ComponentStory<typeof Table> = ({ rowList, ...args }) => {
               return a[name] - b[name];
           }
         } else {
+          setCols(
+            [...columnList].map((col) => (col.name === name ? { ...col, sort: 'desc' } : { ...col, sort: undefined })),
+          );
           switch (name) {
             case 'transfer_date':
               return StrToTime(b[name]) - StrToTime(a[name]);
@@ -158,7 +166,7 @@ const Template2: ComponentStory<typeof Table> = ({ rowList, ...args }) => {
   };
   return (
     <>
-      <Table {...args} rowList={rows} onSortChange={handleSort} />
+      <Table {...args} columnList={cols} rowList={rows} onSortChange={handleSort} />
     </>
   );
 };
@@ -434,14 +442,17 @@ Sort.parameters = {
   docs: {
     description: {
       story: `Если сортировка выключена, то значок виден только при наведении на область заголовка и окрашивается в серый цвет.
-      Если сортировка включена, то ее значок-стрелка остается видимым при снятии фокуса с заголовка и окрашивается в синий цвет.  
-      При повторном нажатии происходит сортировка в обратном порядке (стрелка меняет направление). 
-      При третьем нажатии сортировка отменяется.\n\nПо умолчанию сортировка столбцов отключена.
-      Чтобы включить сортировку столбца, необходимо задать ему параметр sortable: true. При изменении сортировки столбца будет срабатывать
-      колбек onSortChange, который будет возвращать два аргумента: name - уникальное имя столбца, к которому была применена сортировка, и
-      sort - тип сортировки ('asc' - возрастающая, 'desc' - убывающая и 'initial' - отмена сортировки, возврат к первоначальному состоянию.
-      Отменя сортировки происходит при третьем нажатии на заголовок.)\n\nСортировка массива строк происходит на стороне пользователя
-      при срабатывании колбека onSortChange.\n\nДля столбца можно задать сортировку по умолчанию с помощью параметра defaultSort?: 'asc' | 'desc'.`,
+      Если сортировка включена (первое нажатие - сортировка по возрастанию), то ее значок-стрелка остается видимым при снятии фокуса 
+      с заголовка и окрашивается в синий цвет. При повторном нажатии происходит сортировка в обратном порядке (стрелка меняет направление, 
+      по убыванию). При третьем нажатии сортировка отменяется.\n\nПо умолчанию возможность сортировки столбца отключена.
+      Чтобы сделать столбец сортируемым, необходимо задать ему параметр sortable: true. Сортировка - это контролируемый пользователем параметр. 
+      Чтобы включить для столбца сортировку по возрастанию/убыванию, пользователь должен задать для столбца параметр sort: 'asc' | 'desc'.
+      Если для столбца задан только параметр sortable: true, а параметр sort не задан, это говорит о том, что столбец сортируемый 
+      (при наведении на его заголовок будет видна стрелка сортировки), но в данный момент к нему никакая сортировка не применена.\n\nПри 
+      изменении сортировки столбца будет срабатывать колбек onSortChange, который будет возвращать два аргумента: 
+      name - уникальное имя столбца, к которому была применена сортировка, и sort - тип сортировки ('asc' - возрастающая, 
+      'desc' - убывающая и 'initial' - отмена сортировки, возврат к первоначальному состоянию). Сортировка массива строк 
+      происходит на стороне пользователя при срабатывании колбека onSortChange.`,
     },
   },
 };
