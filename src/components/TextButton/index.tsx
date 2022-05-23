@@ -41,6 +41,8 @@ const StyledButton = styled.button.attrs<StyledButtonProps>((props) => ({
   ${appearanceMixin};
 
   ${dimensionMixin};
+
+  pointer-events: ${(p) => (p.$loading || p.disabled ? 'none' : 'all')};
 `;
 
 export interface TextButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
