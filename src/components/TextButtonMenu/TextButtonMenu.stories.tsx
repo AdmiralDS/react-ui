@@ -3,7 +3,38 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { TextButtonMenu } from '#src/components/TextButtonMenu/index';
 import React from 'react';
 import { MenuButtonItem } from '#src/components/MenuButton';
-import { MenuButtonBase } from '#src/components/MenuButton/MenuButton.stories';
+import styled from 'styled-components';
+import { T } from '#src/components/T';
+
+const StyledText = styled(T)`
+  margin: 10px 0;
+`;
+
+const Wrapper = styled.div`
+  display: flex;
+`;
+
+const WrapperVertical = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 20px;
+`;
+
+const WrapperButton = styled.div`
+  display: flex;
+  flex-direction: row;
+  > * {
+    flex: 1 0 200px;
+    max-width: 300px;
+  }
+`;
+
+const Separator = styled.div`
+  height: 20px;
+  width: 20px;
+`;
 
 export default {
   title: 'Admiral-2.1/TextButtonMenu',
@@ -70,7 +101,7 @@ const items = [
 const TextButtonMenuStory: ComponentStory<typeof TextButtonMenu> = () => {
   const [selected, setSelected] = React.useState<string | null>(null);
   return (
-    <>
+    <Wrapper>
       <TextButtonMenu
         text="Text Button"
         selected={selected}
@@ -81,17 +112,158 @@ const TextButtonMenuStory: ComponentStory<typeof TextButtonMenu> = () => {
         options={items}
         onOpen={() => console.log('open menu')}
         onClose={() => console.log('close menu')}
-      >
-        test
-      </TextButtonMenu>
-    </>
+      />
+    </Wrapper>
   );
 };
 
-export const TextButtonStoryDemo = TextButtonMenuStory.bind({});
-TextButtonStoryDemo.args = {};
-TextButtonStoryDemo.storyName = 'TextButtonMenu';
-MenuButtonBase.parameters = {
+const TextButtonMenuSizes: ComponentStory<typeof TextButtonMenu> = () => {
+  const [selected, setSelected] = React.useState<string | null>(null);
+
+  const handleChange = (id: string) => {
+    console.log(`selected: ${id}`);
+    setSelected(id);
+  };
+  return (
+    <WrapperButton>
+      <div>
+        <StyledText font="Body/Body 1 Long" as="div">
+          Dimension - M
+        </StyledText>
+        <TextButtonMenu
+          options={items}
+          selected={selected}
+          dimension="m"
+          text="Text Button"
+          appearance="primary"
+          onChange={handleChange}
+        />
+        <Separator />
+        <TextButtonMenu
+          options={items}
+          selected={selected}
+          dimension="m"
+          text="Text Button"
+          onChange={handleChange}
+          loading
+        />
+        <Separator />
+        <TextButtonMenu
+          options={items}
+          selected={selected}
+          dimension="m"
+          text="Text Button"
+          disabled
+          onChange={handleChange}
+        />
+        <Separator />
+        <StyledText font="Body/Body 1 Long" as="div">
+          Dimension - S
+        </StyledText>
+        <TextButtonMenu options={items} selected={selected} dimension="s" text="Text Button" onChange={handleChange} />
+        <Separator />
+        <TextButtonMenu
+          options={items}
+          selected={selected}
+          dimension="s"
+          text="Text Button"
+          onChange={handleChange}
+          loading
+        />
+        <Separator />
+        <TextButtonMenu
+          options={items}
+          selected={selected}
+          dimension="s"
+          text="Text Button"
+          onChange={handleChange}
+          disabled
+        />
+      </div>
+      <div>
+        <StyledText font="Body/Body 1 Long" as="div">
+          Dimension - M
+        </StyledText>
+        <TextButtonMenu
+          options={items}
+          selected={selected}
+          dimension="m"
+          text="Text Button"
+          appearance="secondary"
+          onChange={handleChange}
+        />
+        <Separator />
+        <TextButtonMenu
+          options={items}
+          selected={selected}
+          dimension="m"
+          text="Text Button"
+          appearance="secondary"
+          onChange={handleChange}
+          loading
+        />
+        <Separator />
+        <TextButtonMenu
+          options={items}
+          selected={selected}
+          dimension="m"
+          text="Text Button"
+          appearance="secondary"
+          disabled
+          onChange={handleChange}
+        />
+        <Separator />
+        <StyledText font="Body/Body 1 Long" as="div">
+          Dimension - S
+        </StyledText>
+        <TextButtonMenu
+          options={items}
+          selected={selected}
+          dimension="s"
+          text="Text Button"
+          appearance="secondary"
+          onChange={handleChange}
+        />
+        <Separator />
+        <TextButtonMenu
+          options={items}
+          selected={selected}
+          dimension="s"
+          text="Text Button"
+          appearance="secondary"
+          onChange={handleChange}
+          loading
+        />
+        <Separator />
+        <TextButtonMenu
+          options={items}
+          selected={selected}
+          dimension="s"
+          text="Text Button"
+          appearance="secondary"
+          onChange={handleChange}
+          disabled
+        />
+      </div>
+    </WrapperButton>
+  );
+};
+
+export const TextButtonMenuStoryDemo = TextButtonMenuStory.bind({});
+TextButtonMenuStoryDemo.args = {};
+TextButtonMenuStoryDemo.storyName = 'TextButtonMenu';
+TextButtonMenuStoryDemo.parameters = {
+  docs: {
+    source: {
+      type: 'code',
+    },
+  },
+};
+
+export const TextButtonMenuVariants = TextButtonMenuSizes.bind({});
+TextButtonMenuVariants.args = {};
+TextButtonMenuVariants.storyName = 'TextButtonMenu. Размеры и стили.';
+TextButtonMenuVariants.parameters = {
   docs: {
     source: {
       type: 'code',
