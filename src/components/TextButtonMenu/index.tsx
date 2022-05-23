@@ -1,21 +1,13 @@
 import * as React from 'react';
-import { MenuButtonItem } from '#src/components/MenuButton';
-import { HTMLAttributes, KeyboardEvent, MouseEvent } from 'react';
+import type { HTMLAttributes, KeyboardEvent } from 'react';
 import { keyboardKey } from '#src/components/common/keyboardKey';
 import { refSetter } from '#src/components/common/utils/refSetter';
 import { OpenStatusButton } from '#src/components/OpenStatusButton';
-import { DropDownItem } from '#src/components/DropDownItem';
-import styled from 'styled-components';
-import { Dropdown } from '#src/components/Dropdown';
 import { TextButton } from '#src/components/TextButton';
-import { Appearance, Dimension } from '#src/components/TextButton/types';
-import { ItemProps } from '#src/components/MenuItem';
+import type { Appearance, Dimension } from '#src/components/TextButton/types';
+import type { ItemProps } from '#src/components/MenuItem';
 import { DropdownContainer } from '#src/components/DropdownContainer';
 import { ItemIdentifier, Menu } from '#src/components/Menu';
-
-const StyledDropdown = styled(Dropdown)`
-  padding: 8px 0;
-`;
 
 export interface TextButtonMenuProps extends Omit<HTMLAttributes<HTMLButtonElement>, 'onChange'> {
   /** Внешний вид кнопки */
@@ -28,7 +20,6 @@ export interface TextButtonMenuProps extends Omit<HTMLAttributes<HTMLButtonEleme
   loading?: boolean;
   /** Состояние skeleton */
   skeleton?: boolean;
-
   /** Опции выпадающего списка */
   items: Array<ItemProps>;
   /** Выбранная опция */
