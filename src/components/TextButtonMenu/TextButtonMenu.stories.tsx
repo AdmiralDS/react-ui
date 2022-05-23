@@ -1,10 +1,10 @@
 import { withDesign } from 'storybook-addon-designs';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { TextButtonMenu } from '#src/components/TextButtonMenu/index';
-import React from 'react';
-import { MenuButtonItem } from '#src/components/MenuButton';
+import React, { useMemo } from 'react';
 import styled from 'styled-components';
 import { T } from '#src/components/T';
+import { MenuItem, RenderOptionProps } from '../MenuItem';
 
 const StyledText = styled(T)`
   margin: 10px 0;
@@ -12,14 +12,7 @@ const StyledText = styled(T)`
 
 const Wrapper = styled.div`
   display: flex;
-`;
-
-const WrapperVertical = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  gap: 20px;
+  justify-content: center;
 `;
 
 const WrapperButton = styled.div`
@@ -96,10 +89,22 @@ const items = [
     id: '7',
     display: 'Option seven',
   },
-] as MenuButtonItem[];
+];
 
-const TextButtonMenuStory: ComponentStory<typeof TextButtonMenu> = () => {
+const TextButtonMenuStory: ComponentStory<typeof TextButtonMenu> = (args) => {
   const [selected, setSelected] = React.useState<string | null>(null);
+  const model = useMemo(() => {
+    return items.map((item) => ({
+      id: item.id,
+      render: (options: RenderOptionProps) => (
+        <MenuItem dimension={args.dimension} {...options} key={item.id}>
+          {item.display}
+        </MenuItem>
+      ),
+      disabled: item.disabled,
+    }));
+  }, [args.dimension]);
+
   return (
     <Wrapper>
       <TextButtonMenu
@@ -109,7 +114,7 @@ const TextButtonMenuStory: ComponentStory<typeof TextButtonMenu> = () => {
           console.log(`selected: ${id}`);
           setSelected(id);
         }}
-        options={items}
+        items={model}
         onOpen={() => console.log('open menu')}
         onClose={() => console.log('close menu')}
       />
@@ -117,8 +122,19 @@ const TextButtonMenuStory: ComponentStory<typeof TextButtonMenu> = () => {
   );
 };
 
-const TextButtonMenuSizes: ComponentStory<typeof TextButtonMenu> = () => {
+const TextButtonMenuSizes: ComponentStory<typeof TextButtonMenu> = (args) => {
   const [selected, setSelected] = React.useState<string | null>(null);
+  const model = useMemo(() => {
+    return items.map((item) => ({
+      id: item.id,
+      render: (options: RenderOptionProps) => (
+        <MenuItem dimension={args.dimension} {...options} key={item.id}>
+          {item.display}
+        </MenuItem>
+      ),
+      disabled: item.disabled,
+    }));
+  }, [args.dimension]);
 
   const handleChange = (id: string) => {
     console.log(`selected: ${id}`);
@@ -131,7 +147,7 @@ const TextButtonMenuSizes: ComponentStory<typeof TextButtonMenu> = () => {
           Dimension - M
         </StyledText>
         <TextButtonMenu
-          options={items}
+          items={model}
           selected={selected}
           dimension="m"
           text="Text Button"
@@ -140,7 +156,7 @@ const TextButtonMenuSizes: ComponentStory<typeof TextButtonMenu> = () => {
         />
         <Separator />
         <TextButtonMenu
-          options={items}
+          items={model}
           selected={selected}
           dimension="m"
           text="Text Button"
@@ -149,7 +165,7 @@ const TextButtonMenuSizes: ComponentStory<typeof TextButtonMenu> = () => {
         />
         <Separator />
         <TextButtonMenu
-          options={items}
+          items={model}
           selected={selected}
           dimension="m"
           text="Text Button"
@@ -160,10 +176,10 @@ const TextButtonMenuSizes: ComponentStory<typeof TextButtonMenu> = () => {
         <StyledText font="Body/Body 1 Long" as="div">
           Dimension - S
         </StyledText>
-        <TextButtonMenu options={items} selected={selected} dimension="s" text="Text Button" onChange={handleChange} />
+        <TextButtonMenu items={model} selected={selected} dimension="s" text="Text Button" onChange={handleChange} />
         <Separator />
         <TextButtonMenu
-          options={items}
+          items={model}
           selected={selected}
           dimension="s"
           text="Text Button"
@@ -172,7 +188,7 @@ const TextButtonMenuSizes: ComponentStory<typeof TextButtonMenu> = () => {
         />
         <Separator />
         <TextButtonMenu
-          options={items}
+          items={model}
           selected={selected}
           dimension="s"
           text="Text Button"
@@ -185,7 +201,7 @@ const TextButtonMenuSizes: ComponentStory<typeof TextButtonMenu> = () => {
           Dimension - M
         </StyledText>
         <TextButtonMenu
-          options={items}
+          items={model}
           selected={selected}
           dimension="m"
           text="Text Button"
@@ -194,7 +210,7 @@ const TextButtonMenuSizes: ComponentStory<typeof TextButtonMenu> = () => {
         />
         <Separator />
         <TextButtonMenu
-          options={items}
+          items={model}
           selected={selected}
           dimension="m"
           text="Text Button"
@@ -204,7 +220,7 @@ const TextButtonMenuSizes: ComponentStory<typeof TextButtonMenu> = () => {
         />
         <Separator />
         <TextButtonMenu
-          options={items}
+          items={model}
           selected={selected}
           dimension="m"
           text="Text Button"
@@ -217,7 +233,7 @@ const TextButtonMenuSizes: ComponentStory<typeof TextButtonMenu> = () => {
           Dimension - S
         </StyledText>
         <TextButtonMenu
-          options={items}
+          items={model}
           selected={selected}
           dimension="s"
           text="Text Button"
@@ -226,7 +242,7 @@ const TextButtonMenuSizes: ComponentStory<typeof TextButtonMenu> = () => {
         />
         <Separator />
         <TextButtonMenu
-          options={items}
+          items={model}
           selected={selected}
           dimension="s"
           text="Text Button"
@@ -236,7 +252,7 @@ const TextButtonMenuSizes: ComponentStory<typeof TextButtonMenu> = () => {
         />
         <Separator />
         <TextButtonMenu
-          options={items}
+          items={model}
           selected={selected}
           dimension="s"
           text="Text Button"
