@@ -7,6 +7,7 @@ import { Tooltip } from '#src/components/Tooltip';
 import { BreadcrumbProps } from '#src/components/Breadcrumbs/BreadCrumb';
 import { ItemProps, MenuItem, RenderOptionProps } from '#src/components/MenuItem';
 import { useMemo } from 'react';
+import { uid } from '#src/components/common/uid';
 
 const Option = styled.a`
   position: relative;
@@ -25,7 +26,7 @@ const Option = styled.a`
   }
 `;
 
-const Menu = styled(OverflowMenu)<{ items: Array<ItemProps> }>`
+const Menu = styled(OverflowMenu)`
   margin-left: 4px;
 `;
 
@@ -36,25 +37,28 @@ export interface MenuButtonProps {
 
 export const MenuButton: React.FC<MenuButtonProps> = ({ options }) => {
   const model = useMemo(() => {
-    return options.map((item) => ({
-      id: item.text,
-      render: (options: RenderOptionProps) => {
-        const tooltip = item.text.length > 40;
-        const renderText = () =>
-          tooltip ? (
-            <Tooltip style={{ marginTop: '8px' }} renderContent={() => item.text}>
-              {item.text.slice(0, 37) + '...'}
-            </Tooltip>
-          ) : (
-            item.text
+    return options.map((item) => {
+      const id = uid();
+      return {
+        id,
+        render: (options: RenderOptionProps) => {
+          const tooltip = item.text.length > 40;
+          const renderText = () =>
+            tooltip ? (
+              <Tooltip style={{ marginTop: '8px' }} renderContent={() => item.text}>
+                {item.text.slice(0, 37) + '...'}
+              </Tooltip>
+            ) : (
+              item.text
+            );
+          return (
+            <MenuItem dimension="s" {...options} key={id} role="option">
+              <Option href={item.url}>{renderText()}</Option>
+            </MenuItem>
           );
-        return (
-          <MenuItem dimension="s" {...options} key={item.text} role="option">
-            <Option href={item.url}>{renderText()}</Option>
-          </MenuItem>
-        );
-      },
-    }));
+        },
+      };
+    });
   }, []);
 
   return (
