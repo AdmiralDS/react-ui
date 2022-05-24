@@ -5,6 +5,8 @@ import { DropDownItem } from '#src/components/DropDownItem';
 import { OverflowMenu } from '#src/components/OverflowMenu';
 import { Tooltip } from '#src/components/Tooltip';
 import { BreadcrumbProps } from '#src/components/Breadcrumbs/BreadCrumb';
+import { ItemProps, MenuItem, RenderOptionProps } from '#src/components/MenuItem';
+import { useMemo } from 'react';
 
 const Option = styled.a`
   position: relative;
@@ -23,7 +25,7 @@ const Option = styled.a`
   }
 `;
 
-const Menu = styled(OverflowMenu)`
+const Menu = styled(OverflowMenu)<{ items: Array<ItemProps> }>`
   margin-left: 4px;
 `;
 
@@ -33,26 +35,31 @@ export interface MenuButtonProps {
 }
 
 export const MenuButton: React.FC<MenuButtonProps> = ({ options }) => {
+  const model = useMemo(() => {
+    return options.map((item) => ({
+      id: item.text,
+      render: (options: RenderOptionProps) => {
+        const tooltip = item.text.length > 40;
+        const renderText = () =>
+          tooltip ? (
+            <Tooltip style={{ marginTop: '8px' }} renderContent={() => item.text}>
+              {item.text.slice(0, 37) + '...'}
+            </Tooltip>
+          ) : (
+            item.text
+          );
+        return (
+          <MenuItem dimension="s" {...options} key={item.text} role="option">
+            <Option href={item.url}>{renderText()}</Option>
+          </MenuItem>
+        );
+      },
+    }));
+  }, []);
+
   return (
     <>
-      <Menu dimension="s">
-        {options.map(({ text, url }) => {
-          const tooltip = text.length > 40;
-          const renderText = () =>
-            tooltip ? (
-              <Tooltip style={{ marginTop: '8px' }} renderContent={() => text}>
-                {text.slice(0, 37) + '...'}
-              </Tooltip>
-            ) : (
-              text
-            );
-          return (
-            <DropDownItem key="text" role="option" value={text} dimension="s">
-              <Option href={url}>{renderText()}</Option>
-            </DropDownItem>
-          );
-        })}
-      </Menu>
+      <Menu dimension="s" items={model} />
     </>
   );
 };
