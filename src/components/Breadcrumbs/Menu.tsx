@@ -5,7 +5,6 @@ import { OverflowMenu } from '#src/components/OverflowMenu';
 import { Tooltip } from '#src/components/Tooltip';
 import { BreadcrumbProps } from '#src/components/Breadcrumbs/BreadCrumb';
 import { MenuItem, RenderOptionProps } from '#src/components/MenuItem';
-import { useMemo } from 'react';
 import { uid } from '#src/components/common/uid';
 
 const Option = styled.a`
@@ -35,7 +34,7 @@ export interface MenuButtonProps {
 }
 
 export const MenuButton: React.FC<MenuButtonProps> = ({ options }) => {
-  const model = useMemo(() => {
+  const model = React.useMemo(() => {
     return options.map((item) => {
       const id = uid();
       return {
@@ -58,11 +57,7 @@ export const MenuButton: React.FC<MenuButtonProps> = ({ options }) => {
         },
       };
     });
-  }, []);
+  }, [options]);
 
-  return (
-    <>
-      <Menu dimension="s" items={model} />
-    </>
-  );
+  return <Menu dimension="s" items={model} />;
 };

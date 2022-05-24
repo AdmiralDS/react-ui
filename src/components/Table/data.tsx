@@ -2,10 +2,9 @@ import { T } from '#src/components/T';
 import * as React from 'react';
 import styled from 'styled-components';
 import { OverflowMenu } from '#src/components/OverflowMenu';
+import { MenuItem, RenderOptionProps } from '#src/components/MenuItem';
 
 import type { Column } from '../Table';
-import { useMemo } from 'react';
-import { MenuItem, RenderOptionProps } from '#src/components/MenuItem';
 
 const AmountCell = styled.div`
   text-align: end;
@@ -680,7 +679,7 @@ const Menu: React.FC<MenuProps> = ({ row, onMenuOpen, onMenuClose }) => {
       display: 'Вывести дату сделки в локали de-AT',
     },
   ];
-  const model = useMemo(() => {
+  const model = React.useMemo(() => {
     return items.map((item) => ({
       id: item.id,
       render: (options: RenderOptionProps) => (
