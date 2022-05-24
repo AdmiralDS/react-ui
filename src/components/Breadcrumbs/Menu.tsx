@@ -1,11 +1,10 @@
 import * as React from 'react';
 import styled from 'styled-components';
 
-import { DropDownItem } from '#src/components/DropDownItem';
 import { OverflowMenu } from '#src/components/OverflowMenu';
 import { Tooltip } from '#src/components/Tooltip';
 import { BreadcrumbProps } from '#src/components/Breadcrumbs/BreadCrumb';
-import { ItemProps, MenuItem, RenderOptionProps } from '#src/components/MenuItem';
+import { MenuItem, RenderOptionProps } from '#src/components/MenuItem';
 import { useMemo } from 'react';
 import { uid } from '#src/components/common/uid';
 

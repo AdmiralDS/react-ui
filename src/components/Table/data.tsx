@@ -2,7 +2,6 @@ import { T } from '#src/components/T';
 import * as React from 'react';
 import styled from 'styled-components';
 import { OverflowMenu } from '#src/components/OverflowMenu';
-import { DropDownItem } from '#src/components/DropDownItem';
 
 import type { Column } from '../Table';
 import { useMemo } from 'react';
