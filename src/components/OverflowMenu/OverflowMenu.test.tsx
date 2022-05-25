@@ -6,6 +6,7 @@ import { ThemeProvider } from 'styled-components';
 
 import { OverflowMenu } from '#src/components/OverflowMenu';
 import { LIGHT_THEME } from '#src/components/themes';
+import { MenuItem, RenderOptionProps } from '#src/components/MenuItem';
 
 describe('MenuButton', () => {
   jest.useFakeTimers();
@@ -13,16 +14,26 @@ describe('MenuButton', () => {
     jest.clearAllTimers();
   });
 
+  const options = [
+    { id: '1', display: 'one' },
+    { id: '2', display: 'two' },
+    { id: '3', display: 'three' },
+  ];
+
   const requiredProps = {
     selected: '1',
     onChange: (id: string) => {
       /**/
     },
-    options: [
-      { id: '1', display: 'one' },
-      { id: '2', display: 'two' },
-      { id: '3', display: 'three' },
-    ],
+
+    items: options.map((item) => ({
+      id: item.id,
+      render: (options: RenderOptionProps) => (
+        <MenuItem {...options} key={item.id}>
+          {item.display}
+        </MenuItem>
+      ),
+    })),
   };
   const Component = (props: any) => (
     <ThemeProvider theme={LIGHT_THEME}>

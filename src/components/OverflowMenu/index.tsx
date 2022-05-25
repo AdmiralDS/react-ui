@@ -91,7 +91,7 @@ export const OverflowMenu = React.forwardRef<HTMLButtonElement, OverflowMenuProp
           aria-haspopup={menuOpened}
         />
         {menuOpened && (
-          <DropdownContainer alignSelf={alignSelf} targetRef={btnRef} onClickOutside={clickOutside}>
+          <DropdownContainer role="listbox" alignSelf={alignSelf} targetRef={btnRef} onClickOutside={clickOutside}>
             <Menu model={items} selected={selected} onSelectItem={handleClick} dimension={dimension} />
           </DropdownContainer>
         )}
