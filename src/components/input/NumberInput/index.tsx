@@ -7,6 +7,7 @@ import { ReactComponent as PlusOutline } from '@admiral-ds/icons/build/service/P
 import styled, { css } from 'styled-components';
 
 import { clearValue, fitToCurrency, validateThousand } from './utils';
+import { AutoSizeInput } from './AutoSizeInput';
 
 export { fitToCurrency, clearValue } from './utils';
 
@@ -244,24 +245,27 @@ export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
     };
 
     return (
-      <TextInput
-        {...rest}
-        onChange={handleChange}
-        placeholder={placeholder}
-        ref={refSetter(ref, inputRef)}
-        onBlur={handleBlur}
-        handleInput={handleInputChange}
-        type="text"
-        icons={
-          displayPlusMinusIcons
-            ? [
-                rest.icons,
-                <Minus onClick={handleMinus} disabled={rest.disabled || minusDisabled} />,
-                <Plus onClick={handlePlus} disabled={rest.disabled || plusDisabled} />,
-              ]
-            : [rest.icons]
-        }
-      />
+      <>
+        <TextInput
+          {...rest}
+          onChange={handleChange}
+          placeholder={placeholder}
+          ref={refSetter(ref, inputRef)}
+          onBlur={handleBlur}
+          handleInput={handleInputChange}
+          type="text"
+          icons={
+            displayPlusMinusIcons
+              ? [
+                  rest.icons,
+                  <Minus onClick={handleMinus} disabled={rest.disabled || minusDisabled} />,
+                  <Plus onClick={handlePlus} disabled={rest.disabled || plusDisabled} />,
+                ]
+              : [rest.icons]
+          }
+        />
+        <AutoSizeInput defaultValue="12.00" />
+      </>
     );
   },
 );
