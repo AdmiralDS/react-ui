@@ -84,14 +84,16 @@ export const OverflowMenu = React.forwardRef<HTMLButtonElement, OverflowMenuProp
       onKeyDown?.(e);
       switch (code) {
         case keyboardKey.Escape:
-          closeMenu();
+          if (menuOpened) closeMenu();
           break;
         case keyboardKey.Enter:
         case keyboardKey[' ']:
-          if (!menuOpened) e.stopPropagation();
-          setMenuOpened(true);
-          onOpen?.();
-          e.preventDefault();
+          if (!menuOpened) {
+            e.stopPropagation();
+            setMenuOpened(true);
+            onOpen?.();
+            e.preventDefault();
+          }
           break;
         default:
           break;
