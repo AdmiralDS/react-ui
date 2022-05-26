@@ -1,7 +1,5 @@
 import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
-import { act } from 'react-dom/test-utils';
-import userEvent from '@testing-library/user-event';
 import { ThemeProvider } from 'styled-components';
 
 import { OverflowMenu } from '#src/components/OverflowMenu';
@@ -22,7 +20,7 @@ describe('MenuButton', () => {
 
   const requiredProps = {
     selected: '1',
-    onChange: (id: string) => {
+    onChange: () => {
       /**/
     },
 
@@ -65,22 +63,18 @@ describe('MenuButton', () => {
   it('should show menu when user presses Space', async () => {
     render(<Component />);
     const btn = await screen.findByTestId('btn');
-    fireEvent.keyUp(btn, { key: ' ', code: 'Space' });
+    fireEvent.keyDown(btn, { key: ' ', code: 'Space' });
     const menu = await screen.findAllByRole('listbox');
     expect(menu).toHaveLength(1);
   });
 
-  it('should hide menu when user presses Escape', () => {
+  it('should hide menu when user presses Escape', async () => {
     render(<Component />);
-    userEvent.tab();
-    const btn = screen.getByTestId('btn');
-    act(() => {
-      fireEvent.keyPress(btn, { key: 'Enter', code: 'Enter' });
-    });
-    const menu = screen.getAllByRole('listbox')[0];
-    act(() => {
-      fireEvent.keyDown(menu, { key: 'Escape', code: 'Escape' });
-    });
+    const btn = await screen.findByTestId('btn');
+    fireEvent.keyDown(btn, { key: 'Enter', code: 'Enter' });
+    const menu = await screen.findAllByRole('listbox');
+    expect(menu).toHaveLength(1);
+    fireEvent.keyDown(btn, { key: 'Escape', code: 'Escape' });
     expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
   });
 });
