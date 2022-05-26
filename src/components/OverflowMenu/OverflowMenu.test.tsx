@@ -46,42 +46,28 @@ describe('MenuButton', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should show menu when user clicks on button', () => {
+  it('should show menu when user clicks on button', async () => {
     render(<Component />);
-    act(() => {
-      fireEvent.click(screen.getByTestId('btn'));
-    });
-    expect(screen.getAllByRole('listbox')).toHaveLength(1);
+    fireEvent.click(screen.getByTestId('btn'));
+    const menu = await screen.findAllByRole('listbox');
+    expect(menu).toHaveLength(1);
   });
 
-  it('should show menu when user presses Enter', () => {
+  it('should show menu when user presses Enter', async () => {
     render(<Component />);
-    userEvent.tab();
-    const btn = screen.getByTestId('btn');
-    act(() => {
-      fireEvent.keyDown(btn, { key: 'Enter', code: 'Enter' });
-    });
-    expect(screen.getAllByRole('listbox')).toHaveLength(1);
+    const btn = await screen.findByTestId('btn');
+    fireEvent.keyDown(btn, { key: 'Enter', code: 'Enter', charCode: 13 });
+
+    const menu = await screen.findAllByRole('listbox');
+    expect(menu).toHaveLength(1);
   });
 
-  it('should show menu when user presses Space', () => {
+  it('should show menu when user presses Space', async () => {
     render(<Component />);
-    userEvent.tab();
-    const btn = screen.getByTestId('btn');
-    act(() => {
-      fireEvent.keyDown(btn, { key: ' ', code: 'Space' });
-    });
-    expect(screen.getAllByRole('listbox')).toHaveLength(1);
-  });
-
-  it('should show menu when user presses ArrowDown', () => {
-    render(<Component />);
-    userEvent.tab();
-    const btn = screen.getByTestId('btn');
-    act(() => {
-      fireEvent.keyDown(btn, { key: 'ArrowDown', code: 'ArrowDown' });
-    });
-    expect(screen.getAllByRole('listbox')).toHaveLength(1);
+    const btn = await screen.findByTestId('btn');
+    fireEvent.keyUp(btn, { key: ' ', code: 'Space' });
+    const menu = await screen.findAllByRole('listbox');
+    expect(menu).toHaveLength(1);
   });
 
   it('should hide menu when user presses Escape', () => {
@@ -89,7 +75,7 @@ describe('MenuButton', () => {
     userEvent.tab();
     const btn = screen.getByTestId('btn');
     act(() => {
-      fireEvent.keyDown(btn, { key: 'ArrowDown', code: 'ArrowDown' });
+      fireEvent.keyPress(btn, { key: 'Enter', code: 'Enter' });
     });
     const menu = screen.getAllByRole('listbox')[0];
     act(() => {
