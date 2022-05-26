@@ -6,6 +6,7 @@ import { Button } from '#src/components/OverflowMenu/Button';
 import { DropdownContainer } from '../DropdownContainer';
 import { ItemIdentifier, Menu } from '../Menu';
 import type { ItemProps } from '#src/components/MenuItem';
+import { keyboardKey } from '#src/components/common/keyboardKey';
 
 export interface OverflowMenuProps extends Omit<React.HTMLAttributes<HTMLButtonElement>, 'onChange'> {
   /** Выбранная опция */
@@ -40,6 +41,7 @@ export const OverflowMenu = React.forwardRef<HTMLButtonElement, OverflowMenuProp
       selected,
       onChange,
       onClick,
+      onKeyDown,
       items,
       ...props
     },
@@ -77,6 +79,25 @@ export const OverflowMenu = React.forwardRef<HTMLButtonElement, OverflowMenuProp
       closeMenu();
     };
 
+    const handleBtnKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>) => {
+      const code = keyboardKey.getCode(e);
+      onKeyDown?.(e);
+      switch (code) {
+        case keyboardKey.Escape:
+          closeMenu();
+          break;
+        case keyboardKey.Enter:
+        case keyboardKey[' ']:
+          e.stopPropagation();
+          setMenuOpened(true);
+          onOpen?.();
+          e.preventDefault();
+          break;
+        default:
+          break;
+      }
+    };
+
     return (
       <>
         <Button
@@ -89,6 +110,7 @@ export const OverflowMenu = React.forwardRef<HTMLButtonElement, OverflowMenuProp
           onClick={reverseMenu}
           aria-expanded={menuOpened}
           aria-haspopup={menuOpened}
+          onKeyDown={handleBtnKeyDown}
         />
         {menuOpened && (
           <DropdownContainer role="listbox" alignSelf={alignSelf} targetRef={btnRef} onClickOutside={clickOutside}>
