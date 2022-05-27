@@ -45,6 +45,7 @@ describe('MenuButton', () => {
   });
 
   it('should show menu when user clicks on button', async () => {
+    window.HTMLElement.prototype.scrollIntoView = jest.fn();
     render(<Component />);
     fireEvent.click(screen.getByTestId('btn'));
     const menu = await screen.findAllByRole('listbox');
@@ -52,6 +53,7 @@ describe('MenuButton', () => {
   });
 
   it('should show menu when user presses Enter', async () => {
+    window.HTMLElement.prototype.scrollIntoView = jest.fn();
     render(<Component />);
     const btn = await screen.findByTestId('btn');
     fireEvent.keyDown(btn, { key: 'Enter', code: 'Enter', charCode: 13 });
@@ -61,6 +63,7 @@ describe('MenuButton', () => {
   });
 
   it('should show menu when user presses Space', async () => {
+    window.HTMLElement.prototype.scrollIntoView = jest.fn();
     render(<Component />);
     const btn = await screen.findByTestId('btn');
     fireEvent.keyDown(btn, { key: ' ', code: 'Space' });
@@ -69,6 +72,7 @@ describe('MenuButton', () => {
   });
 
   it('should hide menu when user presses Escape', async () => {
+    window.HTMLElement.prototype.scrollIntoView = jest.fn();
     render(<Component />);
     const btn = await screen.findByTestId('btn');
     fireEvent.keyDown(btn, { key: 'Enter', code: 'Enter' });
