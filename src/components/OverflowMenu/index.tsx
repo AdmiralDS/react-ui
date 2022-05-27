@@ -49,6 +49,7 @@ export const OverflowMenu = React.forwardRef<HTMLButtonElement, OverflowMenuProp
   ) => {
     const [menuOpened, setMenuOpened] = React.useState<boolean>(false);
     const btnRef = React.useRef<HTMLButtonElement>(null);
+    const [active, setActive] = React.useState<ItemIdentifier>(null);
 
     const reverseMenu = (e: React.MouseEvent<HTMLButtonElement>) => {
       setMenuOpened((prevOpened) => {
@@ -100,6 +101,12 @@ export const OverflowMenu = React.forwardRef<HTMLButtonElement, OverflowMenuProp
       }
     };
 
+    React.useEffect(() => {
+      if (menuOpened) {
+        setActive(selected || items?.[0]?.id);
+      }
+    }, [menuOpened]);
+
     return (
       <>
         <Button
@@ -116,7 +123,14 @@ export const OverflowMenu = React.forwardRef<HTMLButtonElement, OverflowMenuProp
         />
         {menuOpened && (
           <DropdownContainer role="listbox" alignSelf={alignSelf} targetRef={btnRef} onClickOutside={clickOutside}>
-            <Menu model={items} selected={selected} onSelectItem={handleClick} dimension={dimension} />
+            <Menu
+              model={items}
+              active={active}
+              selected={selected}
+              onActivateItem={setActive}
+              onSelectItem={handleClick}
+              dimension={dimension}
+            />
           </DropdownContainer>
         )}
       </>
