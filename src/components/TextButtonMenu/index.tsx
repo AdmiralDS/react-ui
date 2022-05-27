@@ -18,8 +18,6 @@ export interface TextButtonMenuProps extends Omit<HTMLAttributes<HTMLButtonEleme
   text?: string;
   /** Состояние загрузки */
   loading?: boolean;
-  /** Состояние skeleton */
-  skeleton?: boolean;
   /** Опции выпадающего списка */
   items: Array<ItemProps>;
   /** Выбранная опция */
@@ -43,7 +41,6 @@ export const TextButtonMenu = React.forwardRef<HTMLButtonElement, TextButtonMenu
       appearance = 'primary',
       disabled = false,
       loading = false,
-      skeleton = false,
       alignSelf = 'flex-end',
       onClose,
       onOpen,
@@ -111,14 +108,14 @@ export const TextButtonMenu = React.forwardRef<HTMLButtonElement, TextButtonMenu
           dimension={dimension}
           appearance={appearance}
           displayRight
-          disabled={skeleton ? true : disabled}
+          disabled={disabled}
           loading={loading}
           onKeyDown={handleBtnKeyDown}
           onClick={reverseMenu}
           aria-expanded={menuOpened}
           icon={<OpenStatusButton $isOpen={menuOpened} aria-hidden />}
         />
-        {menuOpened && !loading && !skeleton && (
+        {menuOpened && !loading && (
           <DropdownContainer alignSelf={alignSelf} targetRef={btnRef} onClickOutside={clickOutside}>
             <Menu model={items} selected={selected} onSelectItem={handleClick} dimension={dimension} />
           </DropdownContainer>

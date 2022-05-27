@@ -64,9 +64,6 @@ export default {
     loading: {
       control: { type: 'boolean' },
     },
-    skeleton: {
-      control: { type: 'boolean' },
-    },
   },
 } as ComponentMeta<typeof TextButtonMenu>;
 
@@ -123,7 +120,6 @@ const TextButtonMenuStory: ComponentStory<typeof TextButtonMenu> = (args) => {
         selected={selected}
         dimension={args.dimension}
         loading={args.loading}
-        skeleton={args.skeleton}
         disabled={args.disabled}
         appearance={args.appearance}
         onChange={(id) => {
