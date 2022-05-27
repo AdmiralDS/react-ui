@@ -11,6 +11,13 @@ const defaultAppearanceMixin = css<StyledButtonProps>`
     }
   }
 
+  border-radius: 4px;
+
+  &:focus-visible {
+    outline-offset: 2px;
+    outline: ${(p) => p.theme.color['Primary/Primary 60 Main']} solid 2px;
+  }
+
   &:focus,
   &:hover {
     cursor: pointer;
