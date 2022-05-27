@@ -57,6 +57,17 @@ export default {
       },
     ],
   },
+  argTypes: {
+    disabled: {
+      control: { type: 'boolean' },
+    },
+    loading: {
+      control: { type: 'boolean' },
+    },
+    skeleton: {
+      control: { type: 'boolean' },
+    },
+  },
 } as ComponentMeta<typeof TextButtonMenu>;
 
 const items = [
@@ -110,6 +121,11 @@ const TextButtonMenuStory: ComponentStory<typeof TextButtonMenu> = (args) => {
       <TextButtonMenu
         text="Text Button"
         selected={selected}
+        dimension={args.dimension}
+        loading={args.loading}
+        skeleton={args.skeleton}
+        disabled={args.disabled}
+        appearance={args.appearance}
         onChange={(id) => {
           console.log(`selected: ${id}`);
           setSelected(id);
