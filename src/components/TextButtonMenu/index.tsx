@@ -76,12 +76,23 @@ export const TextButtonMenu = React.forwardRef<HTMLButtonElement, TextButtonMenu
       setMenuOpened(false);
     };
 
-    const handleBtnKeyDown = (e: KeyboardEvent<HTMLButtonElement>) => {
+    const handleBtnKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>) => {
       const code = keyboardKey.getCode(e);
-      if (code === keyboardKey.ArrowDown || code === keyboardKey.Enter || code === keyboardKey[' ']) {
-        setMenuOpened(true);
-        onOpen?.();
-        e.preventDefault();
+      switch (code) {
+        case keyboardKey.Escape:
+          if (menuOpened) closeMenu();
+          break;
+        case keyboardKey.Enter:
+        case keyboardKey[' ']:
+          if (!menuOpened) {
+            e.stopPropagation();
+            setMenuOpened(true);
+            onOpen?.();
+            e.preventDefault();
+          }
+          break;
+        default:
+          break;
       }
     };
 
