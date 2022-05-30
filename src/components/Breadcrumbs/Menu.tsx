@@ -1,10 +1,11 @@
 import * as React from 'react';
 import styled from 'styled-components';
 
-import { DropDownItem } from '#src/components/DropDownItem';
 import { OverflowMenu } from '#src/components/OverflowMenu';
 import { Tooltip } from '#src/components/Tooltip';
 import { BreadcrumbProps } from '#src/components/Breadcrumbs/BreadCrumb';
+import { MenuItem, RenderOptionProps } from '#src/components/MenuItem';
+import { uid } from '#src/components/common/uid';
 
 const Option = styled.a`
   position: relative;
@@ -33,26 +34,30 @@ export interface MenuButtonProps {
 }
 
 export const MenuButton: React.FC<MenuButtonProps> = ({ options }) => {
-  return (
-    <>
-      <Menu dimension="s">
-        {options.map(({ text, url }) => {
-          const tooltip = text.length > 40;
+  const model = React.useMemo(() => {
+    return options.map((item) => {
+      const id = uid();
+      return {
+        id,
+        render: (options: RenderOptionProps) => {
+          const tooltip = item.text.length > 40;
           const renderText = () =>
             tooltip ? (
-              <Tooltip style={{ marginTop: '8px' }} renderContent={() => text}>
-                {text.slice(0, 37) + '...'}
+              <Tooltip style={{ marginTop: '8px' }} renderContent={() => item.text}>
+                {item.text.slice(0, 37) + '...'}
               </Tooltip>
             ) : (
-              text
+              item.text
             );
           return (
-            <DropDownItem key="text" role="option" value={text} dimension="s">
-              <Option href={url}>{renderText()}</Option>
-            </DropDownItem>
+            <MenuItem dimension="s" {...options} key={id} role="option">
+              <Option href={item.url}>{renderText()}</Option>
+            </MenuItem>
           );
-        })}
-      </Menu>
-    </>
-  );
+        },
+      };
+    });
+  }, [options]);
+
+  return <Menu dimension="s" items={model} />;
 };

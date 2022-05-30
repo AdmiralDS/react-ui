@@ -138,7 +138,9 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
         item.render({
           hovered: activeId === item.id,
           selected: selectedId === item.id,
-          onHover: () => activateItem(item.disabled ? null : item.id),
+          onHover: () => {
+            activateItem(item.disabled ? null : item.id);
+          },
           onClickItem: () => selectItem(item.id),
           disabled: item.disabled,
         }),
