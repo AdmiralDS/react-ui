@@ -1,16 +1,12 @@
 import * as React from 'react';
-import { KeyboardEvent } from 'react';
-import styled from 'styled-components';
-import { keyboardKey } from '#src/components/common/keyboardKey';
 import { refSetter } from '#src/components/common/utils/refSetter';
-import { Dropdown } from '#src/components/Dropdown';
 
 import type { Dimension } from '#src/components/OverflowMenu/Button';
 import { Button } from '#src/components/OverflowMenu/Button';
-
-const StyledDropdown = styled(Dropdown)`
-  padding: 8px 0;
-`;
+import { DropdownContainer } from '../DropdownContainer';
+import { ItemIdentifier, Menu } from '../Menu';
+import type { ItemProps } from '#src/components/MenuItem';
+import { keyboardKey } from '#src/components/common/keyboardKey';
 
 export interface OverflowMenuProps extends Omit<React.HTMLAttributes<HTMLButtonElement>, 'onChange'> {
   /** Выбранная опция */
@@ -29,12 +25,13 @@ export interface OverflowMenuProps extends Omit<React.HTMLAttributes<HTMLButtonE
   alignSelf?: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
   /** Ориентация компонента */
   isVertical?: boolean;
+  /** Опции выпадающего списка */
+  items: Array<ItemProps>;
 }
 
 export const OverflowMenu = React.forwardRef<HTMLButtonElement, OverflowMenuProps>(
   (
     {
-      children,
       dimension = 'l',
       disabled = false,
       alignSelf = 'flex-end',
@@ -45,43 +42,14 @@ export const OverflowMenu = React.forwardRef<HTMLButtonElement, OverflowMenuProp
       onChange,
       onClick,
       onKeyDown,
+      items,
       ...props
     },
     ref,
   ) => {
     const [menuOpened, setMenuOpened] = React.useState<boolean>(false);
-    const [hovered, setHovered] = React.useState('');
     const btnRef = React.useRef<HTMLButtonElement>(null);
-    const childrenArray = React.Children.toArray(children);
-    const findOptionValue = (option: (React.ReactChild | React.ReactFragment | React.ReactPortal)[]) => {
-      if (React.isValidElement(option[0]) && 'props' in option[0]) {
-        return option[0].props.id;
-      }
-    };
-
-    const hoverIndex = React.useMemo(
-      () =>
-        childrenArray?.findIndex((child) => {
-          if (React.isValidElement(child) && 'props' in child) {
-            return child.props.id === hovered;
-          }
-          return -1;
-        }),
-      [childrenArray, hovered],
-    );
-
-    const findNextHoverValue = React.useCallback(() => {
-      const nextAbledOptionValue = findOptionValue(childrenArray.slice(hoverIndex + 1));
-      if (nextAbledOptionValue) return nextAbledOptionValue;
-      return findOptionValue(childrenArray);
-    }, [hoverIndex, childrenArray]);
-
-    const findPrevHoverValue = React.useCallback(() => {
-      const sliceInd = hoverIndex === -1 ? undefined : hoverIndex;
-      const prevAbledOptionValue = findOptionValue(childrenArray.slice(0, sliceInd).reverse());
-      if (prevAbledOptionValue) return prevAbledOptionValue;
-      return findOptionValue(childrenArray.slice().reverse());
-    }, [hoverIndex, childrenArray]);
+    const [active, setActive] = React.useState<ItemIdentifier>(null);
 
     const reverseMenu = (e: React.MouseEvent<HTMLButtonElement>) => {
       setMenuOpened((prevOpened) => {
@@ -90,11 +58,13 @@ export const OverflowMenu = React.forwardRef<HTMLButtonElement, OverflowMenuProp
       });
       onClick?.(e);
     };
+
     const closeMenu = () => {
       setMenuOpened(false);
       onClose?.();
       btnRef.current?.focus();
     };
+
     const clickOutside = (e: Event) => {
       if (e.target && btnRef.current?.contains(e.target as Node)) {
         return;
@@ -103,22 +73,40 @@ export const OverflowMenu = React.forwardRef<HTMLButtonElement, OverflowMenuProp
       onClose?.();
     };
 
+    const handleClick = (selected: ItemIdentifier) => {
+      if (selected) {
+        onChange?.(selected.toString());
+      }
+      closeMenu();
+    };
+
     const handleBtnKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>) => {
       const code = keyboardKey.getCode(e);
       onKeyDown?.(e);
-      if (code === keyboardKey.ArrowDown || code === keyboardKey.Enter || code === keyboardKey[' ']) {
-        setMenuOpened(true);
-        onOpen?.();
-        e.preventDefault();
+      switch (code) {
+        case keyboardKey.Escape:
+          if (menuOpened) closeMenu();
+          break;
+        case keyboardKey.Enter:
+        case keyboardKey[' ']:
+          if (!menuOpened) {
+            e.stopPropagation();
+            setMenuOpened(true);
+            onOpen?.();
+            e.preventDefault();
+          }
+          break;
+        default:
+          break;
       }
     };
 
-    const handleMenuKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
-      const code = keyboardKey.getCode(e);
-      if (code === keyboardKey.Escape || code === keyboardKey.Tab) {
-        closeMenu();
+    React.useEffect(() => {
+      if (menuOpened) {
+        setActive(selected || items?.[0]?.id);
       }
-    };
+    }, [menuOpened]);
+
     return (
       <>
         <Button
@@ -128,68 +116,22 @@ export const OverflowMenu = React.forwardRef<HTMLButtonElement, OverflowMenuProp
           disabled={disabled}
           isVertical={isVertical}
           menuOpened={menuOpened}
-          onKeyDown={handleBtnKeyDown}
           onClick={reverseMenu}
           aria-expanded={menuOpened}
           aria-haspopup={menuOpened}
+          onKeyDown={handleBtnKeyDown}
         />
         {menuOpened && (
-          <StyledDropdown
-            role="listbox"
-            targetRef={btnRef}
-            alignSelf={alignSelf}
-            onClickOutside={clickOutside}
-            onKeyDown={handleMenuKeyDown}
-          >
-            {React.Children.map(children, (child: React.ReactNode) => {
-              if (!React.isValidElement(child)) {
-                return null;
-              }
-              const { onClick, onKeyDown, disabled, id, ...props } = child.props;
-              const handleClick = (e: React.MouseEvent<HTMLElement>) => {
-                if (!disabled) {
-                  onChange?.(e.currentTarget.id);
-                  closeMenu();
-                  onClick?.(e);
-                }
-              };
-              const handleKeyDown = (e: React.KeyboardEvent<HTMLElement>) => {
-                const code = keyboardKey.getCode(e);
-                onKeyDown?.(e);
-                switch (code) {
-                  case keyboardKey[' ']:
-                  case keyboardKey.Enter: {
-                    if (!disabled) {
-                      onChange?.(hovered ?? '');
-                      closeMenu();
-                      e.preventDefault();
-                    }
-                    break;
-                  }
-                  case keyboardKey.ArrowUp: {
-                    const prevValue = findPrevHoverValue();
-                    if (!prevValue) break;
-                    setHovered(prevValue);
-                    break;
-                  }
-                  case keyboardKey.ArrowDown: {
-                    const nextValue = findNextHoverValue();
-                    if (!nextValue) break;
-                    setHovered(nextValue);
-                    break;
-                  }
-                }
-              };
-              return React.cloneElement(child, {
-                onClick: handleClick,
-                onKeyDown: handleKeyDown,
-                'aria-selected': selected === id,
-                selected: selected === id,
-                hovered: hovered === id,
-                ...props,
-              });
-            })}
-          </StyledDropdown>
+          <DropdownContainer role="listbox" alignSelf={alignSelf} targetRef={btnRef} onClickOutside={clickOutside}>
+            <Menu
+              model={items}
+              active={active}
+              selected={selected}
+              onActivateItem={setActive}
+              onSelectItem={handleClick}
+              dimension={dimension}
+            />
+          </DropdownContainer>
         )}
       </>
     );
