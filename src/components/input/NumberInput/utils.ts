@@ -153,3 +153,73 @@ export function fitToCurrency(
 export const validateThousand = (thousand: string): boolean => {
   return /[^a-zA-Z]+/.test(thousand);
 };
+
+export function fitToCurrency2(
+  value: string | number,
+  precision: number,
+  decimal: string,
+  thousand: string,
+  fillEmptyDecimals?: boolean,
+): string {
+  if (value === '') {
+    return value;
+  }
+
+  let strDecimal = clearValue(String(value), precision, decimal);
+  if (strDecimal === '') {
+    return '';
+  }
+
+  const decimalIndex = strDecimal.indexOf(decimal);
+  const isDecimal = decimalIndex > -1;
+
+  // обрезаем строку, если после decimal цифр больше, чем в precision
+  if (isDecimal && strDecimal.length - decimalIndex - 1 > precision) {
+    strDecimal = strDecimal.slice(0, decimalIndex + precision + 1);
+  }
+
+  // выделяем левую (целую) и правую (десятичную) части
+  const left_side = isDecimal ? strDecimal.slice(0, decimalIndex) : strDecimal;
+  const right_side = isDecimal ? strDecimal.slice(decimalIndex, strDecimal.length) : '';
+
+  let newValue = '';
+
+  // разбиваем левую (целую) часть на группы по три символа, разделенные thousand
+  const reducer = (previousValue: string, currentValue: string, index: number, arr: Array<string>) => {
+    return index === 0
+      ? (previousValue += reverseString(currentValue))
+      : (previousValue += reverseString(currentValue) + thousand);
+  };
+  newValue =
+    reverseString(left_side)
+      .match(/.{1,3}/g)
+      ?.reduceRight(reducer, '') || '';
+
+  if (right_side) {
+    newValue += right_side;
+  }
+
+  // доставляем нули при блюре
+  if (fillEmptyDecimals) {
+    if (isDecimal) {
+      const dot = newValue.indexOf(decimal);
+      const diff = newValue.length - dot - 1;
+      if (diff < precision) {
+        newValue = newValue + repeatStringNumTimes('0', precision - diff);
+      }
+      if (dot === 0) {
+        newValue = '0' + newValue;
+      }
+    } else {
+      // если введен только минус, то добавляем к нему ноль
+      if (newValue === '-') {
+        newValue = newValue + '0';
+      }
+      if (precision > 0) {
+        newValue += decimal + repeatStringNumTimes('0', precision);
+      }
+    }
+  }
+
+  return newValue;
+}

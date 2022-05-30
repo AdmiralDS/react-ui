@@ -8,6 +8,7 @@ import styled, { css } from 'styled-components';
 
 import { clearValue, fitToCurrency, validateThousand } from './utils';
 import { AutoSizeInput } from './AutoSizeInput';
+import { InputNumberWrapper } from './Wrapper';
 
 export { fitToCurrency, clearValue } from './utils';
 
@@ -264,7 +265,7 @@ export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
               : [rest.icons]
           }
         />
-        <AutoSizeInput defaultValue="12.00" />
+        <InputNumberWrapper prefix="От" defaultValue="10.00" />
       </>
     );
   },
