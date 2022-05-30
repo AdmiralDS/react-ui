@@ -8,6 +8,29 @@ import type { Appearance, Dimension } from '#src/components/TextButton/types';
 import type { ItemProps } from '#src/components/MenuItem';
 import { DropdownContainer } from '#src/components/DropdownContainer';
 import { ItemIdentifier, Menu } from '#src/components/Menu';
+import { IconContainer } from '#src/components/TextButton/commonMixin';
+import styled from 'styled-components';
+
+const StyledTextButton = styled(TextButton)<{ menuOpened?: boolean; appearance?: Appearance }>`
+  &:focus {
+    color: ${({ theme, appearance, menuOpened }) =>
+      menuOpened
+        ? appearance === 'primary'
+          ? theme.color['Primary/Primary 60 Main']
+          : theme.color['Neutral/Neutral 90']
+        : 'inherited'};
+    ${IconContainer} {
+      & *[fill^='#'] {
+        fill: ${({ theme, appearance, menuOpened }) =>
+          menuOpened
+            ? appearance === 'primary'
+              ? theme.color['Primary/Primary 60 Main']
+              : theme.color['Neutral/Neutral 50']
+            : 'inherited'};
+      }
+    }
+  }
+`;
 
 export interface TextButtonMenuProps extends Omit<HTMLAttributes<HTMLButtonElement>, 'onChange'> {
   /** Внешний вид кнопки */
@@ -102,7 +125,7 @@ export const TextButtonMenu = React.forwardRef<HTMLButtonElement, TextButtonMenu
 
     return (
       <>
-        <TextButton
+        <StyledTextButton
           {...props}
           ref={refSetter(ref, btnRef)}
           dimension={dimension}
@@ -113,6 +136,7 @@ export const TextButtonMenu = React.forwardRef<HTMLButtonElement, TextButtonMenu
           onKeyDown={handleBtnKeyDown}
           onClick={reverseMenu}
           aria-expanded={menuOpened}
+          menuOpened={menuOpened}
           icon={<OpenStatusButton $isOpen={menuOpened} aria-hidden />}
         />
         {menuOpened && !loading && (
