@@ -28,9 +28,9 @@ export interface MenuItemProps extends HTMLAttributes<HTMLDivElement>, RenderOpt
 }
 
 export const MenuItem = React.forwardRef<HTMLDivElement, MenuItemProps>(
-  ({ children, onHover, onClickItem, disabled, hovered, dimension = 'l', selected = false, ...props }, ref) => {
+  ({ children, onHover, onClickItem, disabled = false, hovered, dimension = 'l', selected = false, ...props }, ref) => {
     const handleMouseMove = () => {
-      if (!disabled) onHover?.();
+      onHover?.();
     };
 
     const handleClick = () => {

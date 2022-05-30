@@ -2,7 +2,7 @@ import { T } from '#src/components/T';
 import * as React from 'react';
 import styled from 'styled-components';
 import { OverflowMenu } from '#src/components/OverflowMenu';
-import { DropDownItem } from '#src/components/DropDownItem';
+import { MenuItem, RenderOptionProps } from '#src/components/MenuItem';
 
 import type { Column } from '../Table';
 
@@ -679,6 +679,17 @@ const Menu: React.FC<MenuProps> = ({ row, onMenuOpen, onMenuClose }) => {
       display: 'Вывести дату сделки в локали de-AT',
     },
   ];
+  const model = React.useMemo(() => {
+    return items.map((item) => ({
+      id: item.id,
+      render: (options: RenderOptionProps) => (
+        <MenuItem dimension="m" {...options} key={item.id} role="option">
+          {item.display}
+        </MenuItem>
+      ),
+      disabled: item.disabled,
+    }));
+  }, []);
 
   const StrToDate = (str: string) => {
     const res = str.split('.').reverse().join('-');
@@ -698,15 +709,8 @@ const Menu: React.FC<MenuProps> = ({ row, onMenuOpen, onMenuClose }) => {
       aria-label="Overflow Menu component"
       dimension="m"
       isVertical
-    >
-      {items.map((item) => {
-        return (
-          <DropDownItem role="option" key={item.id} id={item.id} disabled={item.disabled}>
-            {item.display}
-          </DropDownItem>
-        );
-      })}
-    </OverflowMenu>
+      items={model}
+    />
   );
 };
 
