@@ -82,7 +82,7 @@ exports[`IconButton should render component 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  height: 20px;
+  height: 24px;
 }
 
 .c1 > * {
@@ -102,8 +102,8 @@ exports[`IconButton should render component 1`] = `
 }
 
 .c1 > svg {
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
 }
 
 <div>
