@@ -58,11 +58,18 @@ export default {
     ],
   },
   argTypes: {
+    dimension: {
+      options: ['m', 's'],
+      control: { type: 'radio' },
+    },
     disabled: {
       control: { type: 'boolean' },
     },
     loading: {
       control: { type: 'boolean' },
+    },
+    text: {
+      type: 'string',
     },
   },
 } as ComponentMeta<typeof TextButtonMenu>;
@@ -116,7 +123,7 @@ const TextButtonMenuStory: ComponentStory<typeof TextButtonMenu> = (args) => {
   return (
     <Wrapper>
       <TextButtonMenu
-        text="Text Button"
+        text={args.text}
         selected={selected}
         dimension={args.dimension}
         loading={args.loading}
@@ -278,7 +285,7 @@ const TextButtonMenuSizes: ComponentStory<typeof TextButtonMenu> = (args) => {
 };
 
 export const TextButtonMenuStoryDemo = TextButtonMenuStory.bind({});
-TextButtonMenuStoryDemo.args = {};
+TextButtonMenuStoryDemo.args = { text: 'Text Button' };
 TextButtonMenuStoryDemo.storyName = 'TextButtonMenu';
 TextButtonMenuStoryDemo.parameters = {
   docs: {
