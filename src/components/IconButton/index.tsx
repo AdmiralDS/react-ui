@@ -118,19 +118,18 @@ export const IconButton: FC<IconButtonProps> = ({
   children,
   ...props
 }) => {
-  const contentSize = dimension === 's' ? '20px' : '24px';
   const disabledOptions = loading || skeleton || disabled;
   const renderContent = () => {
     if (loading) {
       return (
-        <IconButtonContent style={{ height: contentSize }}>
-          <Spinner style={{ height: contentSize, width: contentSize }} />
+        <IconButtonContent>
+          <Spinner />
         </IconButtonContent>
       );
     }
     if (skeleton) {
       return (
-        <IconButtonContent style={{ height: contentSize }}>
+        <IconButtonContent>
           <PseudoIcon dimension={dimension} />
         </IconButtonContent>
       );
