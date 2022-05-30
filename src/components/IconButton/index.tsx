@@ -80,7 +80,7 @@ const IconButtonContent = styled.span<{ dimension?: Dimension }>`
   flex-wrap: nowrap;
   justify-content: center;
   align-items: center;
-  height: ${({ dimension }) => (dimension === 's' ? 16 : 20)}px;
+  height: ${({ dimension }) => (dimension === 's' ? 20 : 24)}px;
 
   > * {
     display: inline-block;
@@ -97,8 +97,8 @@ const IconButtonContent = styled.span<{ dimension?: Dimension }>`
   }
 
   & > svg {
-    width: ${({ dimension }) => (dimension === 's' ? 16 : 20)}px;
-    height: ${({ dimension }) => (dimension === 's' ? 16 : 20)}px;
+    width: ${({ dimension }) => (dimension === 's' ? 20 : 24)}px;
+    height: ${({ dimension }) => (dimension === 's' ? 20 : 24)}px;
   }
 `;
 
