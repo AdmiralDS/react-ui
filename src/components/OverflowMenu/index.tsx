@@ -7,6 +7,14 @@ import { DropdownContainer } from '../DropdownContainer';
 import { ItemIdentifier, Menu } from '../Menu';
 import type { ItemProps } from '#src/components/MenuItem';
 import { keyboardKey } from '#src/components/common/keyboardKey';
+import styled from 'styled-components';
+
+const DROPDOWN_OFFSET_M = '6px';
+const DROPDOWN_OFFSET_S = '4px';
+
+const StyledDropdownContainer = styled(DropdownContainer)<{ dimension: Dimension }>`
+  margin-right: ${({ dimension }) => (dimension === 's' ? DROPDOWN_OFFSET_S : DROPDOWN_OFFSET_M)};
+`;
 
 export interface OverflowMenuProps extends Omit<React.HTMLAttributes<HTMLButtonElement>, 'onChange'> {
   /** Выбранная опция */
@@ -122,7 +130,13 @@ export const OverflowMenu = React.forwardRef<HTMLButtonElement, OverflowMenuProp
           onKeyDown={handleBtnKeyDown}
         />
         {menuOpened && (
-          <DropdownContainer role="listbox" alignSelf={alignSelf} targetRef={btnRef} onClickOutside={clickOutside}>
+          <StyledDropdownContainer
+            role="listbox"
+            alignSelf={alignSelf}
+            targetRef={btnRef}
+            onClickOutside={clickOutside}
+            dimension={dimension}
+          >
             <Menu
               model={items}
               active={active}
@@ -131,7 +145,7 @@ export const OverflowMenu = React.forwardRef<HTMLButtonElement, OverflowMenuProp
               onSelectItem={handleClick}
               dimension={dimension}
             />
-          </DropdownContainer>
+          </StyledDropdownContainer>
         )}
       </>
     );
