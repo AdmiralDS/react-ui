@@ -12,8 +12,8 @@ const StyledSpinner = styled(Spinner)<{ dimension?: Dimension }>`
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: ${(p) => (p.dimension === 'm' ? '20px' : '16px')};
-  height: ${(p) => (p.dimension === 'm' ? '20px' : '16px')};
+  width: ${(p) => (p.dimension === 'm' ? '24px' : '20px')};
+  height: ${(p) => (p.dimension === 'm' ? '24px' : '20px')};
 `;
 
 const StyledButton = styled.button.attrs<StyledButtonProps>((props) => ({
@@ -29,6 +29,7 @@ const StyledButton = styled.button.attrs<StyledButtonProps>((props) => ({
   appearance: none;
   border: none;
   background: transparent;
+  padding: 0px;
 
   ${ButtonContainer} {
     ${(p) => p.skeleton && skeletonMixin};
@@ -41,6 +42,8 @@ const StyledButton = styled.button.attrs<StyledButtonProps>((props) => ({
   ${appearanceMixin};
 
   ${dimensionMixin};
+
+  pointer-events: ${(p) => (p.$loading || p.disabled ? 'none' : 'all')};
 `;
 
 export interface TextButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
