@@ -10,7 +10,7 @@ interface DimensionProps {
 
 const defaultDimensionMixin = css<DimensionProps>`
   ${IconContainer} {
-    margin: ${(p) => (p.displayRight ? '0 0 0 10px' : '0 10px 0 0')};
+    margin: ${(p) => (p.displayRight ? '0 0 0 8px' : '0 8px 0 0')};
   }
 `;
 
@@ -19,16 +19,16 @@ export const dimensionMixin = css<DimensionProps>`
 
   &[data-dimension='m'] {
     ${IconContainer} {
-      width: ${({ skeleton }) => (skeleton ? '24px' : '20px')};
-      height: ${({ skeleton }) => (skeleton ? '24px' : '20px')};
+      width: 24px;
+      height: 24px;
     }
     ${typography['Button/Button 1']};
   }
 
   &[data-dimension='s'] {
     ${IconContainer} {
-      width: ${({ skeleton }) => (skeleton ? '20px' : '16px')};
-      height: ${({ skeleton }) => (skeleton ? '20px' : '16px')};
+      width: 20px;
+      height: 20px;
     }
     ${typography['Button/Button 2']};
   }
