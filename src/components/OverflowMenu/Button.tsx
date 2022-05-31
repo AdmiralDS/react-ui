@@ -95,6 +95,12 @@ export const ButtonContent = styled.span<{ $isVertical?: boolean; dimension: Dim
   }
 `;
 
+const IconContainer = styled.div<{ dimension: Dimension }>`
+  height: ${({ dimension }) => ICON_SIZE[dimension]}px;
+  width: ${({ dimension }) => ICON_SIZE[dimension]}px;
+  margin: auto;
+`;
+
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   /** Элементы содержимого */
   children?: ReactNode;
@@ -111,7 +117,9 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     return (
       <ButtonComponent ref={ref} dimension={dimension} menuOpened={menuOpened} type={type} {...props}>
         <ButtonContent dimension={dimension} $isVertical={isVertical}>
-          <MoreHorizontalOutline aria-hidden />
+          <IconContainer dimension={dimension}>
+            <MoreHorizontalOutline aria-hidden />
+          </IconContainer>
         </ButtonContent>
       </ButtonComponent>
     );
