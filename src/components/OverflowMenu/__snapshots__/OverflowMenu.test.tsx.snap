@@ -29,12 +29,6 @@ Object {
   width: 36px;
 }
 
-.c0 svg {
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
-  flex-shrink: 0;
-}
-
 .c0:hover:not(:disabled) {
   border-radius: 50%;
   background-color: #0000000D;
@@ -78,16 +72,21 @@ Object {
   height: 100%;
 }
 
-.c1 > svg {
-  -webkit-transform: rotate(0deg);
-  -ms-transform: rotate(0deg);
-  transform: rotate(0deg);
+.c2 {
   height: 24px;
   width: 24px;
   margin: auto;
 }
 
-.c1 > svg *[fill^='#'] {
+.c2 > svg {
+  height: 100%;
+  width: 100%;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+}
+
+.c2 > svg *[fill^='#'] {
   fill: #74777F;
 }
 
@@ -104,8 +103,12 @@ Object {
           class="c1"
         >
           <div
-            aria-hidden="true"
-          />
+            class="c2"
+          >
+            <div
+              aria-hidden="true"
+            />
+          </div>
         </span>
       </button>
     </div>
@@ -136,12 +139,6 @@ Object {
   width: 36px;
 }
 
-.c0 svg {
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
-  flex-shrink: 0;
-}
-
 .c0:hover:not(:disabled) {
   border-radius: 50%;
   background-color: #0000000D;
@@ -185,16 +182,21 @@ Object {
   height: 100%;
 }
 
-.c1 > svg {
-  -webkit-transform: rotate(0deg);
-  -ms-transform: rotate(0deg);
-  transform: rotate(0deg);
+.c2 {
   height: 24px;
   width: 24px;
   margin: auto;
 }
 
-.c1 > svg *[fill^='#'] {
+.c2 > svg {
+  height: 100%;
+  width: 100%;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+}
+
+.c2 > svg *[fill^='#'] {
   fill: #74777F;
 }
 
@@ -210,8 +212,12 @@ Object {
         class="c1"
       >
         <div
-          aria-hidden="true"
-        />
+          class="c2"
+        >
+          <div
+            aria-hidden="true"
+          />
+        </div>
       </span>
     </button>
   </div>,
