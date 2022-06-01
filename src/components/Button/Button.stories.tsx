@@ -1,5 +1,5 @@
 import * as React from 'react';
-import styled from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { ReactComponent as StarSolid } from '@admiral-ds/icons/build/system/StarSolid.svg';
 import { Button } from './index';
@@ -8,6 +8,7 @@ import { PseudoIcon } from '#src/components/skeleton/PseudoIcon';
 import { T } from '#src/components/T';
 import { withDesign } from 'storybook-addon-designs';
 import { filterKeysWithUndefinedValues } from '#src/components/common/utils/filterKeysWithUndefinedValues';
+import { Theme } from '#src/components/themes';
 
 const WrapperButton = styled.div`
   display: flex;
@@ -75,6 +76,13 @@ export default {
       control: {
         type: 'radio',
         options: ['button', 'submit', 'reset'],
+      },
+    },
+
+    themeBorderKind: {
+      control: {
+        type: 'radio',
+        options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
       },
     },
   },
@@ -322,8 +330,15 @@ const ButtonSkeleton: ComponentStory<typeof Button> = ({ appearance = 'primary',
 
 const ButtonPlaygroundDemo: ComponentStory<typeof Button> = ({ children, ...args }) => {
   const cleanProps = filterKeysWithUndefinedValues(args);
+
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
+    console.log(`Current border ${theme.shape.borderRadiusKind}`);
+    return theme;
+  }
+
   return (
-    <>
+    <ThemeProvider theme={swapBorder}>
       <ButtonContainer>
         <Button {...cleanProps}>Button 56</Button>
 
@@ -505,7 +520,7 @@ const ButtonPlaygroundDemo: ComponentStory<typeof Button> = ({ children, ...args
           <StarSolid />
         </Button>
       </ButtonContainer>
-    </>
+    </ThemeProvider>
   );
 };
 

@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import { Spinner } from '#src/components/Spinner';
 import { appearanceMixin } from './appearanceMixin';
 import { dimensionMixin } from './dimensionMixin';
+import { Shape } from '#src/components/themes/common';
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   /** Внешний вид кнопки */
@@ -60,6 +61,21 @@ const ButtonContent = styled.span<{ dimension?: Dimension; $loading?: boolean }>
   }
 `;
 
+function buttonBorderRadius(shape: Shape): string {
+  switch (shape.borderRadiusKind) {
+    case 'Border radius 0':
+      return 'none';
+    case 'Border radius 2':
+      return '2px';
+    case 'Border radius 4':
+      return '4px';
+    case 'Border radius 8':
+      return '8px';
+    default:
+      return '4px';
+  }
+}
+
 const StyledButton = styled.button.attrs<
   StyledButtonProps,
   { 'data-dimension'?: Dimension; 'data-appearance'?: string }
@@ -73,7 +89,7 @@ const StyledButton = styled.button.attrs<
   box-sizing: border-box;
   display: inline-block;
   border: none;
-  border-radius: 4px;
+  border-radius: ${(p) => buttonBorderRadius(p.theme.shape)};
   appearance: none;
   vertical-align: center;
 
