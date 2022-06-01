@@ -49,6 +49,7 @@ export const OverflowMenu = React.forwardRef<HTMLButtonElement, OverflowMenuProp
   ) => {
     const [menuOpened, setMenuOpened] = React.useState<boolean>(false);
     const btnRef = React.useRef<HTMLButtonElement>(null);
+    const iconRef = React.useRef<HTMLDivElement>(null);
     const [active, setActive] = React.useState<ItemIdentifier>(null);
 
     const reverseMenu = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -123,7 +124,7 @@ export const OverflowMenu = React.forwardRef<HTMLButtonElement, OverflowMenuProp
           <OverflowMenuIcon ref={iconRef} dimension={dimension} isVertical={isVertical} />
         </Button>
         {menuOpened && (
-          <DropdownContainer role="listbox" alignSelf={alignSelf} targetRef={btnRef} onClickOutside={clickOutside}>
+          <DropdownContainer role="listbox" alignSelf={alignSelf} targetRef={iconRef} onClickOutside={clickOutside}>
             <Menu
               model={items}
               active={active}
