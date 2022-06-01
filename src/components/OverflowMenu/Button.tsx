@@ -99,11 +99,12 @@ const IconContainer = styled.div<{ dimension: Dimension }>`
 
 export const OverflowMenuIcon = React.forwardRef<HTMLDivElement, { dimension: Dimension; isVertical: boolean }>(
   ({ dimension = 'l', isVertical = false, ...props }, ref) => {
-    const icon = isVertical ? <MoreVerticalOutline aria-hidden /> : <MoreHorizontalOutline aria-hidden />;
+  ({ dimension = 'l', isVertical = false }, ref) => {
+    const Icon = isVertical ? MoreVerticalOutline : MoreHorizontalOutline;
 
     return (
       <IconContainer ref={ref} dimension={dimension}>
-        {icon}
+        <Icon aria-hidden />
       </IconContainer>
     );
   },
