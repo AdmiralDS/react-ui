@@ -4,6 +4,7 @@ import styled, { css } from 'styled-components';
 import { ReactComponent as CheckSVG } from './Success.svg';
 import { ReactComponent as IndeterminateSVG } from './Minus.svg';
 import type { CheckboxDimension } from './CheckboxDimension';
+import { Shape } from '#src/components/themes/common';
 
 export interface CheckBoxProps extends InputHTMLAttributes<HTMLInputElement> {
   dimension?: CheckboxDimension;
@@ -67,6 +68,21 @@ const Container = styled.div<{
   ${height};
 `;
 
+function checkboxBorderRadius(shape: Shape): string {
+  switch (shape.borderRadiusKind) {
+    case 'Border radius 0':
+      return 'none';
+    case 'Border radius 2':
+      return '2px';
+    case 'Border radius 4':
+      return '4px';
+    case 'Border radius 8':
+      return '4px';
+    default:
+      return '4px';
+  }
+}
+
 export const Background = styled.div<{ error?: boolean }>`
   pointer-events: none;
   display: inline-block;
@@ -76,7 +92,7 @@ export const Background = styled.div<{ error?: boolean }>`
   left: 0;
   right: 0;
   bottom: 0;
-  border-radius: 4px;
+  border-radius: ${(p) => checkboxBorderRadius(p.theme.shape)};
   outline: 0;
   transition: background 0.1s ease-in;
 
