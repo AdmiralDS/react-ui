@@ -504,6 +504,10 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
           onKeyDown={onSelectKeyDown}
           {...props}
           onChange={onChange}
+          // onClick срабатывает при клике на связанный с селектом label
+          // onClick не срабатывает при клике на сам селект, т.к. у селекта стоит pointer-events: none
+          // stopPropagation останавливает всплытие события и предотвращает открытие дропдауна
+          onClick={stopPropagation}
         >
           <option value="" />
           {constantOptions.map((option) => (

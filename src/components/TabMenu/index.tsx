@@ -116,10 +116,17 @@ export const TabMenu: React.FC<TabMenuProps> = ({
 
   const setUnderline = () => {
     const activeTabRef = tabsWithRef.filter((tab) => tab.id === activeTab)?.[0]?.ref.current;
-    const left = Number(underlineRef.current?.style.left || 0);
-    const underlineWidth = Number(underlineRef.current?.style.width || 0);
-    if (activeTabRef && (activeTabRef.offsetLeft !== left || activeTabRef.clientWidth !== underlineWidth)) {
-      styleUnderline(activeTabRef.offsetLeft, activeTabRef.clientWidth);
+    const left = parseFloat(underlineRef.current?.style.left || '0');
+    const underlineWidth = parseFloat(underlineRef.current?.style.width || '0');
+
+    if (activeTabRef && tablistRef.current) {
+      // используем метод getBoundingClientRect, так как он дает точность до сотых пикселя
+      const activeTabWidth = activeTabRef.getBoundingClientRect().width;
+      const activeTabLeft = activeTabRef.getBoundingClientRect().left - tablistRef.current.getBoundingClientRect().left;
+
+      if (activeTabLeft !== left || activeTabWidth !== underlineWidth) {
+        styleUnderline(activeTabLeft, activeTabWidth);
+      }
     }
     if (!activeTabRef || hiddenTabs.filter((tab) => tab.id === activeTab).length) {
       styleUnderline(0, 0);
