@@ -2,7 +2,7 @@ import * as React from 'react';
 import { refSetter } from '#src/components/common/utils/refSetter';
 
 import type { Dimension } from '#src/components/OverflowMenu/Button';
-import { Button } from '#src/components/OverflowMenu/Button';
+import { Button, OverflowMenuIcon } from '#src/components/OverflowMenu/Button';
 import { DropdownContainer } from '../DropdownContainer';
 import { ItemIdentifier, Menu } from '../Menu';
 import type { ItemProps } from '#src/components/MenuItem';
@@ -114,13 +114,14 @@ export const OverflowMenu = React.forwardRef<HTMLButtonElement, OverflowMenuProp
           ref={refSetter(ref, btnRef)}
           dimension={dimension}
           disabled={disabled}
-          isVertical={isVertical}
           menuOpened={menuOpened}
           onClick={reverseMenu}
           aria-expanded={menuOpened}
           aria-haspopup={menuOpened}
           onKeyDown={handleBtnKeyDown}
-        />
+        >
+          <OverflowMenuIcon ref={iconRef} dimension={dimension} isVertical={isVertical} />
+        </Button>
         {menuOpened && (
           <DropdownContainer role="listbox" alignSelf={alignSelf} targetRef={btnRef} onClickOutside={clickOutside}>
             <Menu
