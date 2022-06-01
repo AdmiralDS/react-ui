@@ -2,6 +2,7 @@ import * as React from 'react';
 import styled, { css } from 'styled-components';
 import { Tooltip } from '#src/components/Tooltip';
 import { typography } from '#src/components/Typography';
+import { Shape } from '#src/components/themes/common';
 
 type Dimension = 'm' | 's';
 
@@ -87,6 +88,21 @@ const wrapperHover = css<{ background: TagKind | string }>`
   }};
 `;
 
+function tagBorderRadius(shape: Shape): string {
+  switch (shape.borderRadiusKind) {
+    case 'Border radius 0':
+      return 'none';
+    case 'Border radius 2':
+      return '2px';
+    case 'Border radius 4':
+      return '4px';
+    case 'Border radius 8':
+      return '4px';
+    default:
+      return '4px';
+  }
+}
+
 const Wrapper = styled.button<{
   dimension?: Dimension;
   width?: number | string;
@@ -108,7 +124,7 @@ const Wrapper = styled.button<{
 
   ${({ width }) => width && `width: ${typeof width === 'number' ? `${width}px` : width};`}
   margin-top: 8px;
-  border-radius: 4px;
+  border-radius: ${(p) => tagBorderRadius(p.theme.shape)};
   ${({ statusViaBackground, theme }) =>
     statusViaBackground ? wrapperBackground : `background: ${theme.color['Neutral/Neutral 10']};`}
   ${({ statusViaBackground, theme }) =>

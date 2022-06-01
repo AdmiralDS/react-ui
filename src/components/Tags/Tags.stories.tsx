@@ -1,10 +1,11 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 
 import { Tag } from '#src/components/Tag';
 import { Tags } from '#src/components/Tags';
+import { Theme } from '#src/components/themes';
 
 const Separator = styled.div`
   height: 20px;
@@ -47,38 +48,50 @@ export default {
   },
   argTypes: {
     kind: {
-      options: ['neutral', 'blue', 'green', 'red', 'orange'],
-      control: { type: 'radio' },
+      control: false,
     },
     width: {
       control: { type: 'text' },
     },
+    themeBorderKind: {
+      control: {
+        type: 'radio',
+        options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
+      },
+    },
   },
 } as ComponentMeta<typeof Tags>;
 
-const Template1: ComponentStory<typeof Tags> = () => {
+const Template1: ComponentStory<typeof Tags> = (args) => {
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
+    return theme;
+  }
+
   return (
     <>
-      <Tags
-        dimension="m"
-        width={50}
-        kind="green"
-        onClick={(event) => console.log(`click tag with id: ${event.currentTarget.id}`)}
-      >
-        <Tag id="1">Neutral</Tag>
-        <Tag id="2" kind="green">
-          Green
-        </Tag>
-        <Tag id="3" kind="blue">
-          Blue
-        </Tag>
-        <Tag id="4" kind="red" width="auto" onClick={() => console.log('click red tag')}>
-          Red
-        </Tag>
-        <Tag id="5" kind="orange">
-          Orange
-        </Tag>
-      </Tags>
+      <ThemeProvider theme={swapBorder}>
+        <Tags
+          dimension={args.dimension}
+          width={50}
+          kind="green"
+          onClick={(event) => console.log(`click tag with id: ${event.currentTarget.id}`)}
+        >
+          <Tag id="1">Neutral</Tag>
+          <Tag id="2" kind="green">
+            Green
+          </Tag>
+          <Tag id="3" kind="blue">
+            Blue
+          </Tag>
+          <Tag id="4" kind="red" width="auto" onClick={() => console.log('click red tag')}>
+            Red
+          </Tag>
+          <Tag id="5" kind="orange">
+            Orange
+          </Tag>
+        </Tags>
+      </ThemeProvider>
     </>
   );
 };

@@ -1,11 +1,12 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import { ReactComponent as CheckOutline } from '@admiral-ds/icons/build/service/CheckOutline.svg';
 
 import { Tag, TagProps } from '#src/components/Tag';
 import { Tags } from '#src/components/Tags';
+import { Theme } from '#src/components/themes';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -57,13 +58,26 @@ export default {
       options: ['div', 'span', 'button'],
       control: { type: 'radio' },
     },
+    themeBorderKind: {
+      control: {
+        type: 'radio',
+        options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
+      },
+    },
   },
 } as ComponentMeta<typeof Tag>;
 
 const Template0: ComponentStory<typeof Tag> = (args: TagProps) => {
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
+    return theme;
+  }
+
   return (
     <>
-      <Tag {...args}>Playground</Tag>
+      <ThemeProvider theme={swapBorder}>
+        <Tag {...args}>Playground</Tag>
+      </ThemeProvider>
     </>
   );
 };
