@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import { PositionInPortal } from '#src/components/PositionInPortal';
 import { typography } from '#src/components/Typography';
+import { Shape } from '#src/components/themes/common';
+import { Theme } from '#src/components/themes';
 
 const TOOLTIP_PADDING = '4px 8px';
 const TOOLTIP_BORDER_RADIUS = '4px';
@@ -16,12 +18,27 @@ export const TooltipWrapper = styled.div`
   pointer-events: initial;
 `;
 
+function tooltipBorderRadius(shape: Shape): string {
+  switch (shape.borderRadiusKind) {
+    case 'Border radius 0':
+      return 'none';
+    case 'Border radius 2':
+      return '2px';
+    case 'Border radius 4':
+      return '4px';
+    case 'Border radius 8':
+      return '4px';
+    default:
+      return '4px';
+  }
+}
+
 export const TooltipContainer = styled.div`
   box-sizing: border-box;
   background-color: ${({ theme }) => theme.color['Neutral/Neutral 80']};
   ${typography['Body/Body 2 Short']}
   color: ${({ theme }) => theme.color['Neutral/Neutral 00']};
-  border-radius: ${TOOLTIP_BORDER_RADIUS};
+  border-radius: ${(p) => tooltipBorderRadius(p.theme.shape)};
   ${(props) => props.theme.shadow['Shadow 04']}
   padding: ${TOOLTIP_PADDING};
   max-width: min(488px, calc(100vw - 16px));
