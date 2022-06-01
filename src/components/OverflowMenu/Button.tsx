@@ -98,7 +98,6 @@ const IconContainer = styled.div<{ dimension: Dimension }>`
 `;
 
 export const OverflowMenuIcon = React.forwardRef<HTMLDivElement, { dimension: Dimension; isVertical: boolean }>(
-  ({ dimension = 'l', isVertical = false, ...props }, ref) => {
   ({ dimension = 'l', isVertical = false }, ref) => {
     const Icon = isVertical ? MoreVerticalOutline : MoreHorizontalOutline;
 
