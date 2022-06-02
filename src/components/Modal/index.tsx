@@ -197,7 +197,13 @@ export interface ModalProps extends React.HTMLAttributes<HTMLDivElement> {
   closeOnEscapeKeyDown?: boolean;
   /** Закрытие на клик извне */
   closeOnOutsideClick?: boolean;
-  /** Обработчик закрытия компонента */
+  /** Отображение иконки крестика в верхнем правом углу */
+  displayCloseIcon?: boolean;
+  /** Обработчик закрытия компонента. Срабатывает:
+   * 1) при клике на крестик в верхнем правому углу
+   * 2) при нажатии Escape и closeOnEscapeKeyDown равным true
+   * 3) при клике извне и closeOnOutsideClick равным true
+   */
   onClose?: () => void;
 
   /**
@@ -220,6 +226,7 @@ export const Modal = React.forwardRef<HTMLDivElement, ModalProps>(
       onClose,
       closeOnEscapeKeyDown,
       closeOnOutsideClick,
+      displayCloseIcon = true,
       children,
       ...props
     },
@@ -305,7 +312,7 @@ export const Modal = React.forwardRef<HTMLDivElement, ModalProps>(
           {...props}
         >
           {children}
-          {onClose && (
+          {displayCloseIcon && (
             <CloseButton aria-label="Закрыть модальное окно" mobile={mobile} onClick={handleCloseBtnClick}>
               <CloseOutline width={24} height={24} aria-hidden />
             </CloseButton>
