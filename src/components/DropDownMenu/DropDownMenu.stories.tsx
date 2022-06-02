@@ -3,10 +3,11 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { DropDownMenu } from '#src/components/DropDownMenu';
 import { DropDownItem } from '#src/components/DropDownItem';
 import { Button } from '#src/components/Button';
-import styled from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 import { typography } from '#src/components/Typography';
 import { ReactComponent as CardSolid } from '@admiral-ds/icons/build/finance/CardSolid.svg';
 import { withDesign } from 'storybook-addon-designs';
+import { Theme } from '#src/components/themes';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -47,6 +48,12 @@ export default {
       options: ['l', 'm', 's'],
       control: { type: 'radio' },
       defaultValue: 'l',
+    },
+    themeBorderKind: {
+      control: {
+        type: 'radio',
+        options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
+      },
     },
   },
 } as ComponentMeta<typeof DropDownMenu>;
@@ -215,30 +222,37 @@ const Temp2: ComponentStory<typeof DropDownMenu> = (args) => {
     setOpen(false);
   };
 
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
+    return theme;
+  }
+
   return (
-    <div style={{ width: 'fit-content' }}>
-      <Button ref={buttonRef} onClick={() => setOpen(!open)} style={{ margin: 'auto' }}>
-        Нажми
-      </Button>
-      {open && (
-        <DropDownMenu {...args} targetRef={buttonRef} alignSelf="flex-start" onClickOutside={() => setOpen(!open)}>
-          {items.map((item) => {
-            return (
-              <DropDownItem
-                dimension={args.dimension}
-                id={item.id}
-                onMouseDown={handleClick}
-                selected={selected === item.id}
-                key={item.id}
-                onKeyDown={handleKeyDown}
-              >
-                {item.label}
-              </DropDownItem>
-            );
-          })}
-        </DropDownMenu>
-      )}
-    </div>
+    <ThemeProvider theme={swapBorder}>
+      <div style={{ width: 'fit-content' }}>
+        <Button ref={buttonRef} onClick={() => setOpen(!open)} style={{ margin: 'auto' }}>
+          Нажми
+        </Button>
+        {open && (
+          <DropDownMenu {...args} targetRef={buttonRef} alignSelf="flex-start" onClickOutside={() => setOpen(!open)}>
+            {items.map((item) => {
+              return (
+                <DropDownItem
+                  dimension={args.dimension}
+                  id={item.id}
+                  onMouseDown={handleClick}
+                  selected={selected === item.id}
+                  key={item.id}
+                  onKeyDown={handleKeyDown}
+                >
+                  {item.label}
+                </DropDownItem>
+              );
+            })}
+          </DropDownMenu>
+        )}
+      </div>
+    </ThemeProvider>
   );
 };
 
