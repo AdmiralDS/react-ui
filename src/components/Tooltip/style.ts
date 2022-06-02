@@ -2,10 +2,8 @@ import styled from 'styled-components';
 import { PositionInPortal } from '#src/components/PositionInPortal';
 import { typography } from '#src/components/Typography';
 import { Shape } from '#src/components/themes/common';
-import { Theme } from '#src/components/themes';
 
 const TOOLTIP_PADDING = '4px 8px';
-const TOOLTIP_BORDER_RADIUS = '4px';
 
 export const TooltipWrapper = styled.div`
   box-sizing: border-box;
