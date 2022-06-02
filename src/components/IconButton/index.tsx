@@ -2,8 +2,24 @@ import type { ButtonHTMLAttributes, FC } from 'react';
 import * as React from 'react';
 import styled from 'styled-components';
 import { Spinner } from '#src/components/Spinner';
+import { Shape } from '#src/components/themes/common';
 
 type Dimension = 'xl' | 'l' | 'm' | 's';
+
+function iconButtonBorderRadius(shape: Shape): string {
+  switch (shape.borderRadiusKind) {
+    case 'Border radius 0':
+      return 'none';
+    case 'Border radius 2':
+      return '2px';
+    case 'Border radius 4':
+      return '4px';
+    case 'Border radius 8':
+      return '8px';
+    default:
+      return '4px';
+  }
+}
 
 export interface IconButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   /** Размер кнопки */
@@ -22,7 +38,7 @@ const StyledButton = styled.button.attrs<IconButtonProps, { 'data-dimension'?: D
   box-sizing: border-box;
   display: inline-block;
   border: none;
-  border-radius: 4px;
+  border-radius: ${(p) => iconButtonBorderRadius(p.theme.shape)};
   background: transparent;
   -webkit-tap-highlight-color: transparent;
   appearance: none;
