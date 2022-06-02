@@ -6,6 +6,22 @@ import * as React from 'react';
 import ReactDOM from 'react-dom';
 import styled, { css, Interpolation } from 'styled-components';
 import ModalManager from './manager';
+import { Shape } from '#src/components/themes/common';
+
+function modalBorderRadius(shape: Shape): string {
+  switch (shape.borderRadiusKind) {
+    case 'Border radius 0':
+      return 'none';
+    case 'Border radius 2':
+      return '4px';
+    case 'Border radius 4':
+      return '8px';
+    case 'Border radius 8':
+      return '16px';
+    default:
+      return '8px';
+  }
+}
 
 type Dimension = 'xl' | 'l' | 'm' | 's';
 
@@ -84,7 +100,7 @@ const ModalComponent = styled.div<{ dimension: Dimension; mobile?: boolean }>`
   max-height: ${({ mobile }) => (mobile ? '84vh' : '90vh')};
   background-color: ${({ theme }) => theme.color['Special/Elevated BG']};
   ${({ theme }) => theme.shadow['Shadow 16']}
-  border-radius: 8px;
+  border-radius: ${(p) => modalBorderRadius(p.theme.shape)};
   ${({ mobile }) => (mobile ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
   color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
   outline: none;

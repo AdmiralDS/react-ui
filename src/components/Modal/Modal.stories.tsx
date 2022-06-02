@@ -6,7 +6,8 @@ import { Modal, ModalButtonPanel, ModalContent, ModalTitle } from '#src/componen
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 import { withDesign } from 'storybook-addon-designs';
-import styled, { css } from 'styled-components';
+import styled, { css, ThemeProvider } from 'styled-components';
+import { Theme } from '#src/components/themes';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -56,6 +57,12 @@ export default {
     },
     closeOnOutsideClick: {
       control: { type: 'boolean' },
+    },
+    themeBorderKind: {
+      control: {
+        type: 'radio',
+        options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
+      },
     },
   },
 } as ComponentMeta<typeof Modal>;
@@ -123,8 +130,13 @@ const ModalForm = ({ onYesClick, onNoClick }: Props) => {
 
 const Template1: ComponentStory<typeof Modal> = (args) => {
   const [opened, setOpened] = React.useState(false);
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
+    return theme;
+  }
+
   return (
-    <>
+    <ThemeProvider theme={swapBorder}>
       <Button onClick={() => setOpened(true)}>Open modal with 2 buttons</Button>
       {opened && (
         <Modal
@@ -144,7 +156,7 @@ const Template1: ComponentStory<typeof Modal> = (args) => {
           />
         </Modal>
       )}
-    </>
+    </ThemeProvider>
   );
 };
 
