@@ -6,14 +6,40 @@ import { Button } from '#src/components/Button';
 import { Dropdown } from '#src/components/Dropdown';
 import { DropDownItem } from '#src/components/DropDownItem';
 import { keyboardKey } from '#src/components/common/keyboardKey';
+import { Shape } from '#src/components/themes/common';
+
+function menuButtonBorderRadius(shape: Shape): string {
+  switch (shape.borderRadiusKind) {
+    case 'Border radius 0':
+      return '0';
+    case 'Border radius 2':
+      return '2px';
+    case 'Border radius 4':
+      return '4px';
+    case 'Border radius 8':
+      return '8px';
+    default:
+      return '4px';
+  }
+}
+
+function mainBorderRadius(shape: Shape): string {
+  const radius = menuButtonBorderRadius(shape);
+  return `${radius} 0 0 ${radius}`;
+}
+
+function menuBorderRadius(shape: Shape): string {
+  const radius = menuButtonBorderRadius(shape);
+  return `0 ${radius} ${radius} 0`;
+}
 
 const MainButton = styled(Button)`
   &[data-appearance~='primary'] {
-    border-radius: 4px 0 0 4px;
+    border-radius: ${(p) => mainBorderRadius(p.theme.shape)};
   }
   &[data-appearance~='secondary'] {
     border-right: none;
-    border-radius: 4px 0 0 4px;
+    border-radius: ${(p) => mainBorderRadius(p.theme.shape)};
   }
   &:focus {
     outline: none;
@@ -22,11 +48,11 @@ const MainButton = styled(Button)`
 
 const MenuButton = styled(Button)`
   &[data-appearance~='primary'] {
-    border-radius: 0 4px 4px 0;
+    border-radius: ${(p) => menuBorderRadius(p.theme.shape)};
   }
   &[data-appearance~='secondary'] {
     border-left: none;
-    border-radius: 0 4px 4px 0;
+    border-radius: ${(p) => menuBorderRadius(p.theme.shape)};
   }
   &:focus {
     outline: none;
