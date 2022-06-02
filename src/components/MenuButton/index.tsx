@@ -7,7 +7,6 @@ import { OpenStatusButton } from '#src/components/OpenStatusButton';
 import { Dropdown } from '#src/components/Dropdown';
 import { Button } from '#src/components/Button';
 import { DropDownItem } from '#src/components/DropDownItem';
-import { Spinner } from '#src/components/Spinner';
 import styled from 'styled-components';
 
 type Dimension = 'xl' | 'l' | 'm' | 's';
