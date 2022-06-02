@@ -1,9 +1,10 @@
 import React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
-import styled from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 
 import { SliderInput } from '.';
+import { Theme } from '#src/components/themes';
 
 const Separator = styled.div`
   height: 20px;
@@ -66,14 +67,25 @@ export default {
     handleInput: {
       control: false,
     },
+    themeBorderKind: {
+      control: {
+        type: 'radio',
+        options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
+      },
+    },
   },
 } as ComponentMeta<typeof SliderInput>;
 
 const Template0: ComponentStory<typeof SliderInput> = (args) => {
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
+    return theme;
+  }
+
   return (
-    <>
+    <ThemeProvider theme={swapBorder}>
       <SliderInput {...args} onChange={(full, short) => console.log({ full, short })} />
-    </>
+    </ThemeProvider>
   );
 };
 

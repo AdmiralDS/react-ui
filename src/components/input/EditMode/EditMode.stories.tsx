@@ -1,10 +1,11 @@
 import React, { ChangeEvent, useState } from 'react';
-import styled, { css } from 'styled-components';
+import styled, { css, ThemeProvider } from 'styled-components';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import { INPUT_DIMENSIONS_VALUES } from '#src/components/input/types';
 
 import { EditMode } from './index';
+import { Theme } from '#src/components/themes';
 
 const Separator = styled.div`
   height: 20px;
@@ -63,6 +64,12 @@ export default {
     onChange: {
       action: 'onChange',
     },
+    themeBorderKind: {
+      control: {
+        type: 'radio',
+        options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
+      },
+    },
   },
 } as ComponentMeta<typeof EditMode>;
 
@@ -72,6 +79,10 @@ const Template1: ComponentStory<typeof EditMode> = (props) => {
 
     return acc;
   }, {} as Record<any, any>);
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    return theme;
+  }
 
   const [localValue, setValue] = useState<string>(String(props.value) ?? '');
 
@@ -81,9 +92,9 @@ const Template1: ComponentStory<typeof EditMode> = (props) => {
     props.onChange?.(e);
   };
   return (
-    <>
+    <ThemeProvider theme={swapBorder}>
       <EditMode {...cleanProps} value={localValue} onChange={handleChange} />
-    </>
+    </ThemeProvider>
   );
 };
 
