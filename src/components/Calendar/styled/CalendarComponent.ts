@@ -1,5 +1,21 @@
 import styled from 'styled-components';
 import { typography } from '#src/components/Typography';
+import { Shape } from '#src/components/themes/common';
+
+function calendarBorderRadius(shape: Shape): string {
+  switch (shape.borderRadiusKind) {
+    case 'Border radius 0':
+      return 'none';
+    case 'Border radius 2':
+      return '2px';
+    case 'Border radius 4':
+      return '4px';
+    case 'Border radius 8':
+      return '8px';
+    default:
+      return '4px';
+  }
+}
 
 const CALENDAR_WIDTH = 284;
 const YEARS_VIEW_PADDING = '20px 12px 16px';
@@ -27,5 +43,7 @@ export const CalendarComponent = styled.div<CalendarComponentProps>`
   width: ${CALENDAR_WIDTH}px;
   background: ${({ theme }) => theme.color['Special/Elevated BG']};
   ${typography['Body/Body 2 Long']}
-  color: ${({ theme }) => theme.color['Neutral/Neutral 90']}
+  color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
+  border-radius: ${(p) => calendarBorderRadius(p.theme.shape)};
+  ${(props) => props.theme.shadow['Shadow 08']}
 `;
