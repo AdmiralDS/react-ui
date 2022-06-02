@@ -1,8 +1,9 @@
 import * as React from 'react';
-import styled from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import { Notification } from '#src/components/Notification';
+import { Theme } from '#src/components/themes';
 
 const Layout = styled.div`
   margin: 20px;
@@ -73,14 +74,25 @@ export default {
     onClose: {
       action: 'clicked',
     },
+    themeBorderKind: {
+      control: {
+        type: 'radio',
+        options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
+      },
+    },
   },
 } as ComponentMeta<typeof Notification>;
 
 const Template1: ComponentStory<typeof Notification> = (args) => {
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
+    return theme;
+  }
+
   return (
-    <>
+    <ThemeProvider theme={swapBorder}>
       <Notification {...args}>{body}</Notification>
-    </>
+    </ThemeProvider>
   );
 };
 

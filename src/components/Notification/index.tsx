@@ -9,6 +9,22 @@ import { ReactComponent as ErrorIcon } from '@admiral-ds/icons/build/service/Clo
 import { LIGHT_THEME as DEFAULT_THEME } from '#src/components/themes';
 import { typography } from '#src/components/Typography';
 import { Link } from '#src/components/Link';
+import { Shape } from '#src/components/themes/common';
+
+function notificationBorderRadius(shape: Shape): string {
+  switch (shape.borderRadiusKind) {
+    case 'Border radius 0':
+      return 'none';
+    case 'Border radius 2':
+      return '2px';
+    case 'Border radius 4':
+      return '4px';
+    case 'Border radius 8':
+      return '8px';
+    default:
+      return '4px';
+  }
+}
 
 type Status = 'info' | 'error' | 'success' | 'warning';
 
@@ -65,7 +81,7 @@ const NotificationWrapper = styled.div<{ status?: Status; displayStatusIcon: boo
   overflow: hidden;
   position: relative;
   box-sizing: border-box;
-  border-radius: 4px;
+  border-radius: ${(p) => notificationBorderRadius(p.theme.shape)};
   padding: 12px 44px 12px 52px;
   ${(p) => (p.displayStatusIcon ? '' : 'padding-left: 16px;')}
   ${(p) => (p.isClosable ? '' : 'padding-right: 16px;')}
