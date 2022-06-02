@@ -1,6 +1,22 @@
 import styled, { css, DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import { typography } from '#src/components/Typography';
 import { PositionInPortal } from '#src/components/PositionInPortal';
+import { Shape } from '#src/components/themes/common';
+
+function hintBorderRadius(shape: Shape): string {
+  switch (shape.borderRadiusKind) {
+    case 'Border radius 0':
+      return 'none';
+    case 'Border radius 2':
+      return '2px';
+    case 'Border radius 4':
+      return '4px';
+    case 'Border radius 8':
+      return '8px';
+    default:
+      return '4px';
+  }
+}
 
 export const AnchorWrapper = styled.div<{ anchorCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>> }>`
   display: inline-block;
@@ -60,7 +76,6 @@ export const CloseButton = styled.button`
 export type Dimension = 's' | 'm' | 'l';
 
 const HINT_PADDING = 16;
-const HINT_BORDER_RADIUS = '4px';
 const HINT_WIDTH_S = '280px';
 const HINT_WIDTH_M = '384px';
 const HINT_WIDTH_L = '488px';
@@ -101,7 +116,7 @@ export const HintDialog = styled.div<{
   ${typography['Body/Body 2 Long']}
   color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
   ${({ theme }) => theme.shadow['Shadow 08']}
-  border-radius: ${HINT_BORDER_RADIUS};
+  border-radius: ${(p) => hintBorderRadius(p.theme.shape)};
   box-sizing: border-box;
 `;
 
