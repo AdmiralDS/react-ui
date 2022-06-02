@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import styled, { css } from 'styled-components';
 import type { ItemProps } from '#src/components/MenuItem';
 import { keyboardKey } from '#src/components/common/keyboardKey';
+import { Shape } from '#src/components/themes/common';
 
 export type MenuDimensions = 'l' | 'm' | 's';
 
@@ -22,10 +23,25 @@ export const menuListHeights = css<{ dimension?: MenuDimensions }>`
   }};
 `;
 
+function menuBorderRadius(shape: Shape): string {
+  switch (shape.borderRadiusKind) {
+    case 'Border radius 0':
+      return 'none';
+    case 'Border radius 2':
+      return '2px';
+    case 'Border radius 4':
+      return '4px';
+    case 'Border radius 8':
+      return '8px';
+    default:
+      return '4px';
+  }
+}
+
 const Wrapper = styled.div<{ dimension?: MenuDimensions }>`
   pointer-events: initial;
   background-color: ${(p) => p.theme.color['Special/Elevated BG']};
-  border-radius: 4px;
+  border-radius: ${(p) => menuBorderRadius(p.theme.shape)};
   ${(p) => p.theme.shadow['Shadow 08']}
   max-width: calc(100vw - 32px);
   border-color: transparent;

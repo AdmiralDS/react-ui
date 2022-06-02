@@ -2,13 +2,15 @@ import React, { useMemo, useRef, useState } from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { DropdownContainer } from '#src/components/DropdownContainer';
 import { Button } from '#src/components/Button';
-import styled from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 import { typography } from '#src/components/Typography';
 import { ReactComponent as CardSolid } from '@admiral-ds/icons/build/finance/CardSolid.svg';
 import { withDesign } from 'storybook-addon-designs';
 import { Menu } from '#src/components/Menu';
 import { MenuItem, RenderOptionProps } from '#src/components/MenuItem';
 import type { ItemIdentifier } from '#src/components/Menu';
+import { Theme } from '#src/components/themes';
+import { Shape } from '#src/components/themes/common';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -44,14 +46,37 @@ export default {
       type: 'code',
     },
   },
+  argTypes: {
+    themeBorderKind: {
+      control: {
+        type: 'radio',
+        options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
+      },
+    },
+  },
 } as ComponentMeta<typeof DropdownContainer>;
+
+function dropdownContainerBorderRadius(shape: Shape): string {
+  switch (shape.borderRadiusKind) {
+    case 'Border radius 0':
+      return 'none';
+    case 'Border radius 2':
+      return '2px';
+    case 'Border radius 4':
+      return '4px';
+    case 'Border radius 8':
+      return '8px';
+    default:
+      return '4px';
+  }
+}
 
 const StyledText = styled.div`
   ${typography['Body/Body 1 Short']}
   color: ${(p) => p.theme.color['Neutral/Neutral 90']};
   padding: 8px;
   background-color: ${(p) => p.theme.color['Special/Elevated BG']};
-  border-radius: 4px;
+  border-radius: ${(p) => dropdownContainerBorderRadius(p.theme.shape)};
   ${(p) => p.theme.shadow['Shadow 08']}
   overflow: auto;
 `;
@@ -72,9 +97,13 @@ const Simple: ComponentStory<typeof DropdownContainer> = (args) => {
   const buttonRef = useRef(null);
 
   const { targetRef, ...other } = args;
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
+    return theme;
+  }
 
   return (
-    <>
+    <ThemeProvider theme={swapBorder}>
       <Wrapper>
         <Button ref={buttonRef} onClick={() => setOpen(!open)}>
           Текст
@@ -92,7 +121,7 @@ const Simple: ComponentStory<typeof DropdownContainer> = (args) => {
           </DropdownContainer>
         )}
       </Wrapper>
-    </>
+    </ThemeProvider>
   );
 };
 
