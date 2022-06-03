@@ -5,6 +5,31 @@ import { TextInputProps } from '#src/components/input/TextInput';
 
 import { NumberInput } from '#src/components/input/NumberInput';
 import { clearValue, fitToCurrency, repeatStringNumTimes } from '#src/components/input/NumberInput/utils';
+import { Shape } from '#src/components/themes/common';
+
+function sliderBorderRadius(shape: Shape): string {
+  let value;
+
+  switch (shape.borderRadiusKind) {
+    case 'Border radius 0':
+      value = '0';
+      break;
+    case 'Border radius 2':
+      value = '2px';
+      break;
+    case 'Border radius 4':
+      value = '4px';
+      break;
+    case 'Border radius 8':
+      value = '8px';
+      break;
+    default:
+      value = '4px';
+      break;
+  }
+
+  return `${value} ${value} 0 0`;
+}
 
 const Wrapper = styled.div<{ dimension: 'xl' | 'm' | 's' }>`
   position: relative;
@@ -25,9 +50,7 @@ const Slider = styled(SliderComponent)`
 `;
 
 const Input = styled(NumberInput)`
-  & > input {
-    border-radius: 4px 4px 0 0;
-  }
+  border-radius: ${(p) => sliderBorderRadius(p.theme.shape)};
 `;
 
 export interface SliderInputProps extends Omit<TextInputProps, 'onChange' | 'value'> {
