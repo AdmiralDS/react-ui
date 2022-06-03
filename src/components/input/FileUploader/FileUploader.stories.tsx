@@ -1,13 +1,14 @@
 import * as React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
-import styled from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 import { FileUploader } from '#src/components/input';
 import { FileInfo, FileProps } from '#src/components/input/FileUploader/FileInfo';
 import { T } from '#src/components/T';
 import { Status } from './utils';
 import { TextButton } from '#src/components/TextButton';
 import { ReactComponent as UploadSVG } from '@admiral-ds/icons/build/system/UploadOutline.svg';
+import { Theme } from '#src/components/themes';
 
 const Separator = styled.div`
   height: 40px;
@@ -73,6 +74,12 @@ export default {
     title: {
       control: false,
     },
+    themeBorderKind: {
+      control: {
+        type: 'radio',
+        options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
+      },
+    },
   },
 } as ComponentMeta<typeof FileUploader>;
 
@@ -85,22 +92,29 @@ const FileUploaderXL: ComponentStory<typeof FileUploader> = (props) => {
 
   const accept = ['image/*', '.pdf', 'application/json'];
 
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    return theme;
+  }
+
   return (
-    <FileUploader
-      {...cleanProps}
-      accept={accept.join(', ')}
-      style={{ maxWidth: '480px' }}
-      dimension="xl"
-      fileDimension="xl"
-      title={`Загрузите не более 3-х файлов типа ${accept.join(', ')} до 5 MB каждый`}
-      onChange={(e) =>
-        console.log(
-          `files change event: ${JSON.stringify(
-            Array.from(e.target.files || []).map(({ name, type, size }) => ({ name, type, size })),
-          )}`,
-        )
-      }
-    />
+    <ThemeProvider theme={swapBorder}>
+      <FileUploader
+        {...cleanProps}
+        accept={accept.join(', ')}
+        style={{ maxWidth: '480px' }}
+        dimension="xl"
+        fileDimension="xl"
+        title={`Загрузите не более 3-х файлов типа ${accept.join(', ')} до 5 MB каждый`}
+        onChange={(e) =>
+          console.log(
+            `files change event: ${JSON.stringify(
+              Array.from(e.target.files || []).map(({ name, type, size }) => ({ name, type, size })),
+            )}`,
+          )
+        }
+      />
+    </ThemeProvider>
   );
 };
 
