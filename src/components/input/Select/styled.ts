@@ -4,6 +4,7 @@ import { Dropdown as DropComponent } from '#src/components/Dropdown';
 import type { ComponentDimension } from '#src/components/input/types';
 import { ReactComponent as CloseOutlineSvg } from '@admiral-ds/icons/build/service/CloseOutline.svg';
 import { CHIP_OFFSET, COUNTER_WIDTH } from './constants';
+import { mediumGroupBorderRadius } from '#src/components/common/utils/borderRadius';
 
 const getSelectValueHeight = (dimension?: ComponentDimension, multiple?: boolean) =>
   dimension === 's' && !multiple ? 20 : 24;
@@ -202,7 +203,7 @@ export const SelectWrapper = styled.div<{
     }
   }};
 
-  border-radius: 4px;
+  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
 
   &:hover {
     border-color: ${({ theme, disabled }) => (disabled ? 'transparent' : theme.color['Primary/Primary 60 Main'])};

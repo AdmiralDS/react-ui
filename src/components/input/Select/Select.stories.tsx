@@ -8,7 +8,9 @@ import { Highlight, Option, OptionGroup, Select } from './index';
 import { IOnCloseProps } from './types';
 import { Button } from '#src/components/Button';
 import { useState } from '@storybook/addons';
-import styled, { css, keyframes } from 'styled-components';
+import styled, { css, keyframes, ThemeProvider } from 'styled-components';
+import { Theme } from '#src/components/themes';
+import { mediumGroupBorderRadius } from '#src/components/common/utils/borderRadius';
 
 export default {
   title: 'Admiral-2.1/Input/Select',
@@ -69,6 +71,13 @@ export default {
     onChange: {
       action: 'onChange',
     },
+
+    themeBorderKind: {
+      control: {
+        type: 'radio',
+        options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
+      },
+    },
   },
 } as ComponentMeta<typeof Select>;
 
@@ -103,7 +112,7 @@ const FormValuesWrapper = styled.div`
   font-size: 16px;
   line-height: 24px;
   border: 1px solid black;
-  border-radius: 8px;
+  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
   min-height: 100px;
   padding: 12px;
 `;
@@ -174,14 +183,19 @@ const SelectSimpleTemplate: ComponentStory<typeof Select> = (props) => {
 
   const onChange = (e: ChangeEvent<HTMLSelectElement>) => setSelectValue(e.target.value);
 
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    return theme;
+  }
+
   return (
-    <>
+    <ThemeProvider theme={swapBorder}>
       <Select {...props} value={selectValue} onChange={onChange} placeholder="Select option">
         <Option value="Анигиляторная пушка">Анигиляторная пушка</Option>
         <Option value="Похо Торо Моронго">Похо Торо Моронго</Option>
         <Option value="Саша Даль">Саша Даль</Option>
       </Select>
-    </>
+    </ThemeProvider>
   );
 };
 
