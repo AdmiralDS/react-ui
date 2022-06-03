@@ -152,13 +152,8 @@ const TimeInputIconAlternative: ComponentStory<typeof TimeInput> = (props) => {
     props.onChange?.(e);
   };
 
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
   return (
-    <ThemeProvider theme={swapBorder}>
+    <>
       <TimeInput
         {...cleanProps}
         style={{ maxWidth: '320px' }}
@@ -167,7 +162,7 @@ const TimeInputIconAlternative: ComponentStory<typeof TimeInput> = (props) => {
         value={localValue}
         onChange={handleChange}
       />
-    </ThemeProvider>
+    </>
   );
 };
 
@@ -190,10 +185,16 @@ const TimeInputSimple: ComponentStory<typeof TimeInput> = (props) => {
     setValue(inputValue);
     props.onChange?.(e);
   };
+
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    return theme;
+  }
+
   return (
-    <>
+    <ThemeProvider theme={swapBorder}>
       <TimeInput {...cleanProps} style={{ maxWidth: '320px' }} value={localValue} onChange={handleChange} />
-    </>
+    </ThemeProvider>
   );
 };
 

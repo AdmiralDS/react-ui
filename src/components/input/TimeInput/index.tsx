@@ -87,7 +87,6 @@ const SlotContainer = styled.ul`
   overflow-x: hidden;
   overflow-y: auto;
   background-color: ${(p) => p.theme.color['Special/Elevated BG']};
-  border-radius: 4px;
   ${(p) => p.theme.shadow['Shadow 08']}
   flex: 0 0 auto;
   ${typography['Body/Body 1 Long']};
