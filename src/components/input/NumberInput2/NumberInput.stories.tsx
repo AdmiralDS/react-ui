@@ -97,8 +97,6 @@ const Template0: ComponentStory<typeof NumberInput> = (args) => {
         onChange={(event) => {
           console.log(event.target.value);
         }}
-        step={0.01}
-        maxValue={0.21}
       />
     </>
   );

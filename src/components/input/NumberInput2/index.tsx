@@ -112,6 +112,7 @@ const Text = styled.div`
   display: flex;
   align-items: center;
   user-select: none;
+  min-width: 0;
 `;
 
 const Prefix = styled.div`
@@ -202,6 +203,7 @@ export const NumberInputRefactor = React.forwardRef<HTMLInputElement, NumberInpu
     const [showPrefixSuffix, setPrefixSuffix] = React.useState(false);
 
     const inputRef = React.useRef<HTMLInputElement>(null);
+    const prefixRef = React.useRef<any>(null);
 
     // thousand, decimal - не более одного символа
     const thousand = validateThousand(userThousand) ? userThousand.slice(0, 1) : ' ';
@@ -311,12 +313,16 @@ export const NumberInputRefactor = React.forwardRef<HTMLInputElement, NumberInpu
           changeInputData(inputRef.current, { value: newValue });
           onChange?.(event);
         }
+        inputRef.current.style.maxWidth = `calc(100% - ${prefixRef.current?.scrollWidth || 0}px)`;
       }
       onBlur?.(event);
     };
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       const newVal = event.currentTarget.value;
+      if (inputRef.current) {
+        inputRef.current.style.maxWidth = `calc(100% - ${prefixRef.current?.scrollWidth || 0}px)`;
+      }
 
       if (typeof minValue === 'number' && newVal) {
         const minusDsb = Number(clearValue(newVal, precision, decimal)) - step < minValue;
@@ -361,8 +367,8 @@ export const NumberInputRefactor = React.forwardRef<HTMLInputElement, NumberInpu
           onMouseDown={preventDefault}
           onClick={handleContentClick}
         >
-          {prefix && showPrefixSuffix && <Prefix>{prefix}&nbsp;</Prefix>}
           <InputWrapper>
+            {prefix && showPrefixSuffix && <Prefix ref={prefixRef}>{prefix}&nbsp;</Prefix>}
             <AutoSizeInput
               ref={refSetter(ref, inputRef)}
               onChange={handleChange}

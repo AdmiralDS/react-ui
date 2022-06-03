@@ -100,7 +100,6 @@ const Input = styled.input<ExtraProps>`
   box-sizing: border-box;
   display: flex;
   flex-shrink: 0;
-  max-width: 100%;
   min-width: 10px;
 
   color: ${(props) => props.theme.color['Neutral/Neutral 90']};
