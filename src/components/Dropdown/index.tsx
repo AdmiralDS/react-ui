@@ -6,28 +6,13 @@ import { useInterval } from '#src/components/common/hooks/useInterval';
 import { keyboardKey } from '#src/components/common/keyboardKey';
 import { moveFocus, nextItem, previousItem } from '#src/components/Dropdown/utils';
 import { refSetter } from '#src/components/common/utils/refSetter';
-import { Shape } from '#src/components/themes/common';
-
-function dropdownBorderRadius(shape: Shape): string {
-  switch (shape.borderRadiusKind) {
-    case 'Border radius 0':
-      return 'none';
-    case 'Border radius 2':
-      return '2px';
-    case 'Border radius 4':
-      return '4px';
-    case 'Border radius 8':
-      return '8px';
-    default:
-      return '4px';
-  }
-}
+import { mediumGroupBorderRadius } from '#src/components/common/utils/borderRadius';
 
 const Container = styled.div<{ alignSelf?: string }>`
   pointer-events: initial;
   margin: 8px 0;
   background-color: ${(p) => p.theme.color['Special/Elevated BG']};
-  border-radius: ${(p) => dropdownBorderRadius(p.theme.shape)};
+  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
   ${(p) => p.theme.shadow['Shadow 08']}
   flex: 0 0 auto;
   ${(p) => (p.alignSelf ? `align-self: ${p.alignSelf};` : '')};

@@ -1,22 +1,7 @@
 import styled, { css, DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import { typography } from '#src/components/Typography';
 import { PositionInPortal } from '#src/components/PositionInPortal';
-import { Shape } from '#src/components/themes/common';
-
-function hintBorderRadius(shape: Shape): string {
-  switch (shape.borderRadiusKind) {
-    case 'Border radius 0':
-      return 'none';
-    case 'Border radius 2':
-      return '2px';
-    case 'Border radius 4':
-      return '4px';
-    case 'Border radius 8':
-      return '8px';
-    default:
-      return '4px';
-  }
-}
+import { mediumGroupBorderRadius } from '#src/components/common/utils/borderRadius';
 
 export const AnchorWrapper = styled.div<{ anchorCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>> }>`
   display: inline-block;
@@ -116,7 +101,7 @@ export const HintDialog = styled.div<{
   ${typography['Body/Body 2 Long']}
   color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
   ${({ theme }) => theme.shadow['Shadow 08']}
-  border-radius: ${(p) => hintBorderRadius(p.theme.shape)};
+  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
   box-sizing: border-box;
 `;
 

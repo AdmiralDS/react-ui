@@ -10,7 +10,7 @@ import { Menu } from '#src/components/Menu';
 import { MenuItem, RenderOptionProps } from '#src/components/MenuItem';
 import type { ItemIdentifier } from '#src/components/Menu';
 import { Theme } from '#src/components/themes';
-import { Shape } from '#src/components/themes/common';
+import { mediumGroupBorderRadius } from '#src/components/common/utils/borderRadius';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -56,27 +56,12 @@ export default {
   },
 } as ComponentMeta<typeof DropdownContainer>;
 
-function dropdownContainerBorderRadius(shape: Shape): string {
-  switch (shape.borderRadiusKind) {
-    case 'Border radius 0':
-      return 'none';
-    case 'Border radius 2':
-      return '2px';
-    case 'Border radius 4':
-      return '4px';
-    case 'Border radius 8':
-      return '8px';
-    default:
-      return '4px';
-  }
-}
-
 const StyledText = styled.div`
   ${typography['Body/Body 1 Short']}
   color: ${(p) => p.theme.color['Neutral/Neutral 90']};
   padding: 8px;
   background-color: ${(p) => p.theme.color['Special/Elevated BG']};
-  border-radius: ${(p) => dropdownContainerBorderRadius(p.theme.shape)};
+  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
   ${(p) => p.theme.shadow['Shadow 08']}
   overflow: auto;
 `;
