@@ -6,6 +6,7 @@ import { Appearance, Dimension, StyledButtonProps } from './types';
 import { appearanceMixin } from './appearanceMixin';
 import { ButtonContainer, IconContainer, skeletonMixin } from '#src/components/TextButton/commonMixin';
 import { dimensionMixin } from '#src/components/TextButton/dimensionMixin';
+import { mediumGroupBorderRadius } from '#src/components/common/utils/borderRadius';
 
 const StyledSpinner = styled(Spinner)<{ dimension?: Dimension }>`
   position: absolute;
@@ -33,7 +34,7 @@ const StyledButton = styled.button.attrs<StyledButtonProps>((props) => ({
 
   ${ButtonContainer} {
     ${(p) => p.skeleton && skeletonMixin};
-    border-radius: ${(p) => (p.skeleton ? '4px' : '')};
+    border-radius: ${(p) => (p.skeleton ? mediumGroupBorderRadius(p.theme.shape) : '')};
     span {
       visibility: ${(p) => (p.skeleton || p.$loading ? 'hidden' : 'visible')};
     }
