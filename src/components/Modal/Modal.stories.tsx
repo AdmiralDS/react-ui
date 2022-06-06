@@ -58,6 +58,8 @@ export default {
     closeOnOutsideClick: {
       control: { type: 'boolean' },
     },
+    displayCloseIcon: {
+      control: { type: 'boolean' },
     themeBorderKind: {
       control: {
         type: 'radio',
