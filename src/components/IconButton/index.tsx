@@ -71,6 +71,11 @@ const StyledButton = styled.button.attrs<IconButtonProps, { 'data-dimension'?: D
       fill: ${({ theme }) => theme.color['Neutral/Neutral 30']};
     }
   }
+
+  &:focus-visible {
+    outline-offset: 2px;
+    outline: ${(p) => p.theme.color['Primary/Primary 60 Main']} solid 2px;
+  }
 `;
 
 const IconButtonContent = styled.span<{ dimension?: Dimension }>`

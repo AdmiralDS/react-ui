@@ -116,7 +116,7 @@ const Input = styled.input<{ indeterminate?: boolean }>`
 
   box-sizing: border-box;
   cursor: pointer;
-  border-radius: 1px;
+  border-radius: ${(p) => smallGroupBorderRadius(p.theme.shape)};
   margin: 0;
   padding: 0;
 
