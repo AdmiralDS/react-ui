@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import { Slider as SliderComponent } from '#src/components/Slider';
 import { TextInputProps } from '#src/components/input/TextInput';
 
-import { NumberInputRefactor as NumberInput } from '#src/components/input/NumberInput2';
-import { clearValue, fitToCurrency, repeatStringNumTimes } from '#src/components/input/NumberInput2/utils';
+import { NumberInput } from '#src/components/input/NumberInput';
+import { clearValue, fitToCurrency, repeatStringNumTimes } from '#src/components/input/NumberInput/utils';
 
 const Wrapper = styled.div<{ dimension: 'xl' | 'm' | 's' }>`
   position: relative;

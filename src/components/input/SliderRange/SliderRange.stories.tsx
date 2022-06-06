@@ -28,7 +28,6 @@ export default {
   component: SliderRange,
   parameters: {
     componentSubtitle: <Description />,
-    layout: 'centered',
     design: [
       {
         type: 'figma',

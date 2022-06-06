@@ -1,14 +1,36 @@
 import * as React from 'react';
-import { TextInput, TextInputProps } from '#src/components/input/TextInput';
-import { changeInputData, InputData } from '#src/components/common/dom/changeInputData';
+import styled, { css } from 'styled-components';
+import type { TextInputProps } from '#src/components/input/TextInput';
+import type { ComponentDimension, ExtraProps } from '#src/components/input/types';
+import { typography } from '#src/components/Typography';
+import { changeInputData } from '#src/components/common/dom/changeInputData';
 import { refSetter } from '#src/components/common/utils/refSetter';
+import { ReactComponent as CloseOutlineSvg } from '@admiral-ds/icons/build/service/CloseOutline.svg';
 import { ReactComponent as MinusOutline } from '@admiral-ds/icons/build/service/MinusOutline.svg';
 import { ReactComponent as PlusOutline } from '@admiral-ds/icons/build/service/PlusOutline.svg';
-import styled, { css } from 'styled-components';
 
+import { Container } from '../Container';
+import { StatusIcon } from '../StatusIcon';
+
+import { AutoSizeInput } from './AutoSizeInput';
 import { clearValue, fitToCurrency, validateThousand } from './utils';
 
 export { fitToCurrency, clearValue } from './utils';
+
+const extraPadding = css<ExtraProps>`
+  padding-right: ${(props) => horizontalPaddingValue(props) + (iconSizeValue(props) + 8) * (props.iconCount ?? 0)}px;
+`;
+
+const horizontalPaddingValue = (props: { dimension?: ComponentDimension }) => {
+  switch (props.dimension) {
+    case 'xl':
+      return 16;
+    case 's':
+      return 12;
+    default:
+      return 16;
+  }
+};
 
 const Icon = css`
   & *[fill^='#'] {
@@ -20,6 +42,11 @@ const Icon = css`
   &:hover *[fill^='#'] {
     fill: ${(props) => props.theme.color['Primary/Primary 70']};
   }
+
+  [data-read-only] & {
+    cursor: default;
+    pointer-events: none;
+  }
 `;
 
 const IconDisabled = css`
@@ -30,16 +57,100 @@ const IconDisabled = css`
   }
 `;
 
-const Minus = styled(MinusOutline)<{ disabled: boolean }>`
+const Minus = styled(MinusOutline)<{ disabled?: boolean }>`
   ${Icon}
   ${({ disabled }) => disabled && IconDisabled}
 `;
-const Plus = styled(PlusOutline)<{ disabled: boolean }>`
+const Plus = styled(PlusOutline)<{ disabled?: boolean }>`
   ${Icon}
   ${({ disabled }) => disabled && IconDisabled}
+`;
+const ClearIcon = styled(CloseOutlineSvg)`
+  ${Icon}
 `;
 
-export interface NumberInputProps extends Omit<TextInputProps, 'onChange'> {
+const iconSizeValue = (props: { dimension?: ComponentDimension }) => {
+  switch (props.dimension) {
+    case 'xl':
+      return 24;
+    case 's':
+      return 20;
+    default:
+      return 24;
+  }
+};
+
+const IconPanel = styled.div<{ disabled?: boolean; dimension?: ComponentDimension }>`
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+
+  display: flex;
+  align-items: center;
+  margin-right: ${horizontalPaddingValue}px;
+  ${({ disabled }) => disabled && IconDisabled}
+
+  & > svg {
+    display: block;
+    width: ${iconSizeValue}px;
+  }
+
+  & > * {
+    margin-left: 8px;
+  }
+`;
+
+const Wrapper = styled(Container)<{
+  disabled?: boolean;
+  dimension?: ComponentDimension;
+  readOnly?: boolean;
+}>`
+  background-color: ${(props) => {
+    if (props.disabled || props.readOnly) return props.theme.color['Neutral/Neutral 10'];
+    return props.theme.color['Neutral/Neutral 00'];
+  }};
+  color: ${(props) =>
+    props.disabled ? props.theme.color['Neutral/Neutral 30'] : props.theme.color['Neutral/Neutral 90']};
+  ${(props) => (props.dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
+  overflow: hidden;
+`;
+
+const Text = styled.div`
+  display: flex;
+  align-items: center;
+  user-select: none;
+  min-width: 0;
+`;
+
+const Prefix = styled.div`
+  display: flex;
+  align-items: center;
+  user-select: none;
+`;
+
+const InputWrapper = styled.div`
+  display: flex;
+  overflow: hidden;
+  max-height: 100%;
+  border-radius: inherit;
+`;
+
+const Content = styled.div`
+  display: flex;
+  box-sizing: border-box;
+  width: 100%;
+  overflow: hidden;
+  padding: 0 ${horizontalPaddingValue}px;
+  ${extraPadding}
+  border-radius: inherit;
+
+  [data-align='right'] & {
+    justify-content: flex-end;
+  }
+`;
+
+export interface NumberInputProps extends TextInputProps {
   /** точность (количество знаков после точки). Если precision равно 0, то точку ввести нельзя, только целые числа */
   precision?: number;
   /** префикс (строка, которая выводится перед числовым значением) */
@@ -50,7 +161,7 @@ export interface NumberInputProps extends Omit<TextInputProps, 'onChange'> {
   thousand?: string;
   /** разделитель между целым и десятичным */
   decimal?: string;
-  /** Шаг инпута */
+  /** Шаг инпута. Если шаг - это дробное число, то количество знаков в десятичной части step должно быть равно precision */
   step?: number;
   /** Минимальное значение слайдера */
   minValue?: number;
@@ -58,42 +169,45 @@ export interface NumberInputProps extends Omit<TextInputProps, 'onChange'> {
   maxValue?: number;
   /** Отображать иконки плюса минуса */
   displayPlusMinusIcons?: boolean;
-  /** Колбек на изменение значения компонента
-   * 1) event - событие ChangeEvent или FocusEvent (колбек onChange может быть вызван не только при изменении значения инпута,
-   * но и при потере фокуса инпутом, если значение в инпуте выходит за границы minValue/maxValue и требует корректировки.
-   * 2) fullStr - строка вместе с префиксом/суффиксом/разделителями;
-   * 3) shortStr - строка только с числом;
-   * Примечание: в качестве value компонента необходимо использовать fullStr (строку вместе с префиксом/суффиксом/разделителями).
-   */
-  onChange?: (
-    event: React.ChangeEvent<HTMLInputElement> | React.FocusEvent<HTMLInputElement>,
-    fullStr?: string,
-    shortStr?: string,
-  ) => void;
+  /** Выравнивание контента. По умолчанию выравнивание происходит по левому краю */
+  align?: 'left' | 'right';
 }
+
+const preventDefault = (e: React.BaseSyntheticEvent) => e.preventDefault();
 
 export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
   (
     {
-      precision = 2,
+      className,
+      style,
+      containerRef,
+      status,
+      icons,
+      displayClearIcon = false,
+      displayStatusIcon = false,
+      displayPlusMinusIcons = true,
       prefix = '',
       suffix = '₽',
+      precision = 2,
       thousand: userThousand = ' ',
       decimal: userDecimal = '.',
-      onBlur,
-      onChange,
-      placeholder = '0 ₽',
       step = 1,
       minValue,
       maxValue,
-      displayPlusMinusIcons = true,
-      ...rest
+      placeholder = '0 ₽',
+      align = 'left',
+      onChange,
+      onBlur,
+      ...props
     },
     ref,
   ) => {
-    const inputRef = React.useRef<HTMLInputElement>(null);
     const [plusDisabled, setPlusDisabled] = React.useState(false);
     const [minusDisabled, setMinusDisabled] = React.useState(false);
+    const [showPrefixSuffix, setPrefixSuffix] = React.useState(false);
+
+    const inputRef = React.useRef<HTMLInputElement>(null);
+    const prefixRef = React.useRef<any>(null);
 
     // thousand, decimal - не более одного символа
     const thousand = validateThousand(userThousand) ? userThousand.slice(0, 1) : ' ';
@@ -101,9 +215,9 @@ export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
 
     React.useEffect(() => {
       // проверка на undefined и пустую строку
-      const valueExist = rest.value !== undefined && !!String(rest.value);
-      const defaultValueExist = rest.defaultValue !== undefined && !!String(rest.defaultValue);
-      const value = valueExist ? String(rest.value) : String(rest.defaultValue);
+      const valueExist = props.value !== undefined && !!String(props.value);
+      const defaultValueExist = props.defaultValue !== undefined && !!String(props.defaultValue);
+      const value = valueExist ? String(props.value) : String(props.defaultValue);
       if (valueExist || defaultValueExist) {
         if (typeof minValue === 'number') {
           const minusDsb = Number(clearValue(value, precision, decimal)) - step < minValue;
@@ -118,82 +232,12 @@ export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
         minusDisabled && setMinusDisabled(false);
         plusDisabled && setPlusDisabled(false);
       }
-    }, [rest.value, rest.defaultValue]);
+    }, [props.value, props.defaultValue]);
 
-    const handleInputChange = (inputData: InputData | null): InputData => {
-      const { value, selectionStart } = inputData || {};
-      const cursor = selectionStart || 0;
-      const init_value = value || '';
-      const newValue = fitToCurrency(init_value, precision, decimal, thousand, prefix, suffix);
-
-      const cursorInPrefix = cursor >= 0 && cursor <= prefix.length + 1 && prefix;
-      const cursorInSuffix = cursor >= init_value.length - suffix.length && cursor <= init_value.length + 1 && suffix;
-
-      if (cursor && (cursorInPrefix || cursorInSuffix)) {
-        // если пытаемся печатать/стирать, находясь в префиксе/суффиксе, то курсор просто встает после всех цифр
-        return {
-          ...inputData,
-          value: newValue,
-          selectionStart: suffix ? newValue.length - suffix.length - 1 : newValue.length,
-          selectionEnd: suffix ? newValue.length - suffix.length - 1 : newValue.length,
-        };
-      } else if (thousand && init_value.charAt(cursor - 1) === thousand && newValue.length === init_value.length) {
-        // если пытаемся стереть разделитель thousand, то курсор перескакивает через него
-        return {
-          ...inputData,
-          value: newValue,
-          selectionStart: cursor - 1,
-          selectionEnd: cursor - 1,
-        };
-      } else {
-        return {
-          ...inputData,
-          value: newValue,
-          selectionStart: newValue.length - init_value.length + cursor,
-          selectionEnd: newValue.length - init_value.length + cursor,
-        };
-      }
-    };
-
-    /**
-     * При потере фокуса:
-     * если precision > 0, количество цифр после разделителя decimal должно быть равно precision.
-     * Если условие выше несоблюдено, должна быть произведена корректировка значения. Например: '70.' => '70.00' при precision={2}
-     */
-    const handleBlur = (event: React.FocusEvent<HTMLInputElement>) => {
-      const newValue = fitToCurrency(event.currentTarget.value, precision, decimal, thousand, prefix, suffix, true);
-      if (inputRef.current) {
-        // если введеное значение меньше minValue
-        if (typeof minValue === 'number' && Number(clearValue(newValue, precision, decimal)) < minValue) {
-          const fullValue = fitToCurrency(String(minValue), precision, decimal, thousand, prefix, suffix, true);
-          const shortValue = clearValue(fullValue, precision, decimal);
-
-          onChange?.(event, fullValue, shortValue);
-          inputRef.current.value = fullValue;
-        }
-        // если введеное значение меньше maxValue
-        else if (typeof maxValue === 'number' && Number(clearValue(newValue, precision, decimal)) > maxValue) {
-          const fullValue = fitToCurrency(String(maxValue), precision, decimal, thousand, prefix, suffix, true);
-          const shortValue = clearValue(fullValue, precision, decimal);
-
-          onChange?.(event, fullValue, shortValue);
-          inputRef.current.value = fullValue;
-        }
-        // если значение в инпуте неполностью отформатировано, например, не все разряды после запятой проставлены
-        else if (newValue !== event.currentTarget.value) {
-          const fullValue = newValue;
-          const shortValue = clearValue(fullValue, precision, decimal);
-
-          onChange?.(event, fullValue, shortValue);
-          inputRef.current.value = fullValue;
-        }
-      }
-      onBlur?.(event);
-    };
     const handleMinus = () => {
       const current = inputRef.current?.value || '';
       const newValue = Number(clearValue(current, precision, decimal)) - step;
-      const newValueStr = fitToCurrency(String(newValue), precision, decimal, thousand, prefix, suffix, true);
+      const newValueStr = fitToCurrency(newValue.toFixed(precision), precision, decimal, thousand, true);
       if (inputRef.current) {
         if (typeof minValue === 'number') {
           if (newValue >= minValue) {
@@ -207,8 +251,7 @@ export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
     const handlePlus = () => {
       const current = inputRef.current?.value || '';
       const newValue = Number(clearValue(current, precision, decimal)) + step;
-      const newValueStr = fitToCurrency(String(newValue), precision, decimal, thousand, prefix, suffix, true);
-
+      const newValueStr = fitToCurrency(newValue.toFixed(precision), precision, decimal, thousand, true);
       if (inputRef.current) {
         if (typeof maxValue === 'number') {
           if (newValue <= maxValue) {
@@ -220,8 +263,67 @@ export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       }
     };
 
+    const iconArray = React.Children.toArray(icons);
+
+    if (displayStatusIcon) {
+      iconArray.push(<StatusIcon key="status-icon" status={status} aria-hidden />);
+    }
+
+    if (displayClearIcon) {
+      iconArray.unshift(
+        <ClearIcon
+          key="clear-icon"
+          onClick={() => {
+            if (inputRef.current) {
+              changeInputData(inputRef.current, { value: '' });
+            }
+          }}
+          aria-hidden
+        />,
+      );
+    }
+
+    if (displayPlusMinusIcons) {
+      iconArray.push(<Minus key="minus-icon" onClick={handleMinus} disabled={props.disabled || minusDisabled} />);
+      iconArray.push(<Plus key="plus-icon" onClick={handlePlus} disabled={props.disabled || plusDisabled} />);
+    }
+
+    const iconCount = iconArray.length;
+
+    /**
+     * При потере фокуса:
+     * если precision > 0, количество цифр после разделителя decimal должно быть равно precision.
+     * Если условие выше несоблюдено, должна быть произведена корректировка значения. Например: '70.' => '70.00' при precision={2}
+     */
+    const handleBlur = (event: React.FocusEvent<HTMLInputElement>) => {
+      const newValue = fitToCurrency(event.currentTarget.value, precision, decimal, thousand, true);
+      if (inputRef.current) {
+        // если введеное значение меньше minValue
+        if (typeof minValue === 'number' && Number(clearValue(newValue, precision, decimal)) < minValue) {
+          const fullValue = fitToCurrency(String(minValue), precision, decimal, thousand, true);
+
+          changeInputData(inputRef.current, { value: fullValue });
+        }
+        // если введеное значение меньше maxValue
+        else if (typeof maxValue === 'number' && Number(clearValue(newValue, precision, decimal)) > maxValue) {
+          const fullValue = fitToCurrency(String(maxValue), precision, decimal, thousand, true);
+
+          changeInputData(inputRef.current, { value: fullValue });
+        }
+        // если значение в инпуте неполностью отформатировано, например, не все разряды после запятой проставлены
+        else if (newValue !== event.currentTarget.value) {
+          changeInputData(inputRef.current, { value: newValue });
+        }
+        inputRef.current.style.maxWidth = `calc(100% - ${prefixRef.current?.scrollWidth || 0}px)`;
+      }
+      onBlur?.(event);
+    };
+
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       const newVal = event.currentTarget.value;
+      if (inputRef.current) {
+        inputRef.current.style.maxWidth = `calc(100% - ${prefixRef.current?.scrollWidth || 0}px)`;
+      }
 
       if (typeof minValue === 'number' && newVal) {
         const minusDsb = Number(clearValue(newVal, precision, decimal)) - step < minValue;
@@ -237,31 +339,54 @@ export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
         plusDisabled && setPlusDisabled(false);
       }
 
-      const fullValue = newVal;
-      const shortValue = clearValue(newVal, precision, decimal);
+      onChange?.(event);
+    };
 
-      onChange?.(event, fullValue, shortValue);
+    const handleContentClick = (e: any) => {
+      if (e.target !== inputRef.current) {
+        inputRef.current?.focus();
+        inputRef.current?.setSelectionRange(inputRef.current?.value.length || 0, inputRef.current?.value.length || 0);
+      }
     };
 
     return (
-      <TextInput
-        {...rest}
-        onChange={handleChange}
-        placeholder={placeholder}
-        ref={refSetter(ref, inputRef)}
-        onBlur={handleBlur}
-        handleInput={handleInputChange}
-        type="text"
-        icons={
-          displayPlusMinusIcons
-            ? [
-                rest.icons,
-                <Minus onClick={handleMinus} disabled={rest.disabled || minusDisabled} />,
-                <Plus onClick={handlePlus} disabled={rest.disabled || plusDisabled} />,
-              ]
-            : [rest.icons]
-        }
-      />
+      <Wrapper
+        ref={containerRef}
+        className={className}
+        style={style}
+        disabled={props.disabled}
+        dimension={props.dimension}
+        readOnly={props.readOnly}
+        data-read-only={props.readOnly ? true : undefined}
+        data-status={status}
+        data-align={align}
+      >
+        <Content
+          dimension={props.dimension}
+          iconCount={iconCount}
+          // Запретит перенос фокуса с инпута при клике по всему, что внутри Content
+          onMouseDown={preventDefault}
+          onClick={handleContentClick}
+        >
+          <InputWrapper>
+            {prefix && showPrefixSuffix && <Prefix ref={prefixRef}>{prefix}&nbsp;</Prefix>}
+            <AutoSizeInput
+              ref={refSetter(ref, inputRef)}
+              onChange={handleChange}
+              placeholder={placeholder}
+              onBlur={handleBlur}
+              setPrefixSuffix={setPrefixSuffix}
+              {...props}
+            />
+            {suffix && showPrefixSuffix && <Text>&nbsp;{suffix}</Text>}
+          </InputWrapper>
+        </Content>
+        {iconCount > 0 && (
+          <IconPanel disabled={props.disabled} dimension={props.dimension}>
+            {iconArray}
+          </IconPanel>
+        )}
+      </Wrapper>
     );
   },
 );
