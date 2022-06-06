@@ -57,6 +57,9 @@ export default {
     closeOnOutsideClick: {
       control: { type: 'boolean' },
     },
+    displayCloseIcon: {
+      control: { type: 'boolean' },
+    },
   },
 } as ComponentMeta<typeof Modal>;
 
