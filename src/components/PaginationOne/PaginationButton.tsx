@@ -1,5 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
+import { mediumGroupBorderRadius } from '#src/components/common/utils/borderRadius';
 
 const Button = styled.button`
   position: relative;
@@ -9,7 +10,7 @@ const Button = styled.button`
   width: 40px;
   height: 40px;
   border: none;
-  border-radius: 4px;
+  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
   appearance: none;
   -webkit-tap-highlight-color: transparent;
   overflow: visible;
@@ -43,7 +44,7 @@ const Button = styled.button`
       bottom: -4px;
       left: -4px;
       right: -4px;
-      border-radius: 4px;
+      border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
     }
     & *[fill^='#'] {
       fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
