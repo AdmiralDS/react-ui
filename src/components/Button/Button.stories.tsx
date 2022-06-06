@@ -98,84 +98,92 @@ const ButtonContainer = styled.div`
   }
 `;
 
-const ButtonWithIconDemo: ComponentStory<typeof Button> = () => (
-  <>
-    <WrapperButton>
-      <div>
-        <T font="Body/Body 1 Long" as="div">
-          {' '}
-          Dimension - xl
-        </T>
-        <Button dimension="xl" appearance="primary">
-          Button 56
-          <StarSolid />
-        </Button>
-      </div>
-      <div>
-        <T font="Body/Body 1 Long" as="div">
-          {' '}
-          Dimension - l
-        </T>
-        <Button dimension="l" appearance="secondary">
-          <StarSolid />
-          Button 48
-        </Button>
-      </div>
-      <div>
-        <T font="Body/Body 1 Long" as="div">
-          {' '}
-          Dimension - m
-        </T>
-        <Button dimension="m" appearance="danger">
-          Button 40
-          <StarSolid />
-        </Button>
-      </div>
-      <div>
-        <T font="Body/Body 1 Long" as="div">
-          {' '}
-          Ghost - xl
-        </T>
-        <Button dimension="xl" appearance="ghost">
-          Button 56
-          <StarSolid />
-        </Button>
-      </div>
-      <>
-        <DarkDiv>
+const ButtonWithIconDemo: ComponentStory<typeof Button> = (args) => {
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
+    console.log(`Current border ${theme.shape.borderRadiusKind}`);
+    return theme;
+  }
+
+  return (
+    <ThemeProvider theme={swapBorder}>
+      <WrapperButton>
+        <div>
           <T font="Body/Body 1 Long" as="div">
             {' '}
-            White - l
+            Dimension - xl
           </T>
-          <Button dimension="l" appearance="white">
-            Button 48
+          <Button dimension="xl" appearance="primary">
+            Button 56
             <StarSolid />
           </Button>
-        </DarkDiv>
-      </>
+        </div>
+        <div>
+          <T font="Body/Body 1 Long" as="div">
+            {' '}
+            Dimension - l
+          </T>
+          <Button dimension="l" appearance="secondary">
+            <StarSolid />
+            Button 48
+          </Button>
+        </div>
+        <div>
+          <T font="Body/Body 1 Long" as="div">
+            {' '}
+            Dimension - m
+          </T>
+          <Button dimension="m" appearance="danger">
+            Button 40
+            <StarSolid />
+          </Button>
+        </div>
+        <div>
+          <T font="Body/Body 1 Long" as="div">
+            {' '}
+            Ghost - xl
+          </T>
+          <Button dimension="xl" appearance="ghost">
+            Button 56
+            <StarSolid />
+          </Button>
+        </div>
+        <>
+          <DarkDiv>
+            <T font="Body/Body 1 Long" as="div">
+              {' '}
+              White - l
+            </T>
+            <Button dimension="l" appearance="white">
+              Button 48
+              <StarSolid />
+            </Button>
+          </DarkDiv>
+        </>
+        <div>
+          <T font="Body/Body 1 Long" as="div">
+            {' '}
+            Dimension - s
+          </T>
+          <Button dimension="s" appearance="success">
+            <StarSolid />
+            Button 32
+          </Button>
+        </div>
+      </WrapperButton>
+      <Separator />
       <div>
         <T font="Body/Body 1 Long" as="div">
-          {' '}
-          Dimension - s
+          Button with icon stretch
         </T>
-        <Button dimension="s" appearance="success">
+        <Button dimension="l" appearance="primary" style={{ width: '100%' }}>
           <StarSolid />
-          Button 32
+          Button
         </Button>
       </div>
-    </WrapperButton>
-    <Separator />
-    <div>
-      <T font="Body/Body 1 Long" as="div">
-        Button with icon stretch
-      </T>
-      <Button dimension="l" appearance="primary" style={{ width: '100%' }}>
-        <StarSolid />
-        Button
-      </Button>
-    </div>
-  </>
-);
+    </ThemeProvider>
+  );
+};
 
 const handleClick = () => {
   console.log('clicked');
