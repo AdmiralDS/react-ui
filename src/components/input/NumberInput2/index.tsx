@@ -17,6 +17,10 @@ import { clearValue, fitToCurrency, validateThousand } from './utils';
 
 export { fitToCurrency, clearValue } from './utils';
 
+const extraPadding = css<ExtraProps>`
+  padding-right: ${(props) => horizontalPaddingValue(props) + (iconSizeValue(props) + 8) * (props.iconCount ?? 0)}px;
+`;
+
 const horizontalPaddingValue = (props: { dimension?: ComponentDimension }) => {
   switch (props.dimension) {
     case 'xl':
@@ -97,7 +101,11 @@ const IconPanel = styled.div<{ disabled?: boolean; dimension?: ComponentDimensio
   }
 `;
 
-const Wrapper = styled(Container)<{ disabled?: boolean; dimension?: ComponentDimension; readOnly?: boolean }>`
+const Wrapper = styled(Container)<{
+  disabled?: boolean;
+  dimension?: ComponentDimension;
+  readOnly?: boolean;
+}>`
   background-color: ${(props) => {
     if (props.disabled || props.readOnly) return props.theme.color['Neutral/Neutral 10'];
     return props.theme.color['Neutral/Neutral 00'];
@@ -126,10 +134,6 @@ const InputWrapper = styled.div`
   overflow: hidden;
   max-height: 100%;
   border-radius: inherit;
-`;
-
-const extraPadding = css<ExtraProps>`
-  padding-right: ${(props) => horizontalPaddingValue(props) + (iconSizeValue(props) + 8) * (props.iconCount ?? 0)}px;
 `;
 
 const Content = styled.div`
@@ -299,19 +303,16 @@ export const NumberInputRefactor = React.forwardRef<HTMLInputElement, NumberInpu
           const fullValue = fitToCurrency(String(minValue), precision, decimal, thousand, true);
 
           changeInputData(inputRef.current, { value: fullValue });
-          onChange?.(event);
         }
         // если введеное значение меньше maxValue
         else if (typeof maxValue === 'number' && Number(clearValue(newValue, precision, decimal)) > maxValue) {
           const fullValue = fitToCurrency(String(maxValue), precision, decimal, thousand, true);
 
           changeInputData(inputRef.current, { value: fullValue });
-          onChange?.(event);
         }
         // если значение в инпуте неполностью отформатировано, например, не все разряды после запятой проставлены
         else if (newValue !== event.currentTarget.value) {
           changeInputData(inputRef.current, { value: newValue });
-          onChange?.(event);
         }
         inputRef.current.style.maxWidth = `calc(100% - ${prefixRef.current?.scrollWidth || 0}px)`;
       }
@@ -342,7 +343,10 @@ export const NumberInputRefactor = React.forwardRef<HTMLInputElement, NumberInpu
     };
 
     const handleContentClick = (e: any) => {
-      inputRef.current?.focus();
+      if (e.target !== inputRef.current) {
+        inputRef.current?.focus();
+        inputRef.current?.setSelectionRange(inputRef.current?.value.length || 0, inputRef.current?.value.length || 0);
+      }
     };
 
     return (
@@ -356,9 +360,6 @@ export const NumberInputRefactor = React.forwardRef<HTMLInputElement, NumberInpu
         data-read-only={props.readOnly ? true : undefined}
         data-status={status}
         data-align={align}
-        {...(props.disableCopying && {
-          onMouseDown: preventDefault,
-        })}
       >
         <Content
           dimension={props.dimension}

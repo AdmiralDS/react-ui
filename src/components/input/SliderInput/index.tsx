@@ -25,9 +25,7 @@ const Slider = styled(SliderComponent)`
 `;
 
 const Input = styled(NumberInput)`
-  & > input {
-    border-radius: 4px 4px 0 0;
-  }
+  border-radius: 4px 4px 0 0;
 `;
 
 export interface SliderInputProps extends Omit<TextInputProps, 'onChange' | 'value'> {
@@ -98,7 +96,7 @@ export const SliderInput = React.forwardRef<HTMLInputElement, SliderInputProps>(
 
       onChange?.(fullValue, shortValue);
     };
-    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement> | React.FocusEvent<HTMLInputElement>) => {
+    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       const full = event.target.value;
       const short = clearValue(full, precision, decimal);
       setInputValue(full);

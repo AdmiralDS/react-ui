@@ -101,6 +101,7 @@ const Input = styled.input<ExtraProps>`
   display: flex;
   flex-shrink: 0;
   min-width: 10px;
+  max-width: 100%;
 
   color: ${(props) => props.theme.color['Neutral/Neutral 90']};
 
@@ -157,6 +158,7 @@ export const AutoSizeInput = React.forwardRef<HTMLInputElement, InputProps>(
 
     const handleInput = (inputData: InputData | null): InputData => {
       const { value, selectionStart } = inputData || {};
+      console.log('handle input', value);
       const cursor = selectionStart || 0;
       const init_value = value || '';
       const newValue = fitToCurrency(init_value, precision, decimal, thousand);

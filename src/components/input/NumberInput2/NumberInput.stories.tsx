@@ -3,7 +3,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import styled from 'styled-components';
 
-import { NumberInputRefactor as NumberInput } from '.';
+import { NumberInputRefactor as NumberInput } from '#src/components/input/NumberInput2';
 import { clearValue } from '#src/components/input/NumberInput2';
 
 const Desc = styled.div`
