@@ -74,6 +74,9 @@ export default {
     title: {
       control: false,
     },
+    disabled: {
+      control: { type: 'boolean' },
+    },
     themeBorderKind: {
       control: {
         type: 'radio',
