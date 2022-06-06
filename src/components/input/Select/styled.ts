@@ -129,7 +129,7 @@ export const Input = styled.input<{ dimension?: ComponentDimension; isMultiple?:
 
   box-sizing: border-box;
   flex: 1 1 auto;
-  width: 100px;
+  width: 1px;
   border: none;
   background: transparent;
   text-overflow: ellipsis;
