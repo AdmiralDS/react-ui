@@ -326,6 +326,11 @@ Object {
   fill: #B1B5BB;
 }
 
+.c0:focus-visible {
+  outline-offset: 2px;
+  outline: #0062FF solid 2px;
+}
+
 .c0[data-dimension='xl'] {
   padding: 0;
   height: 56px;
@@ -712,6 +717,11 @@ Object {
 .c0[data-appearance~='success'][data-appearance~='disabled'] *[fill^='#'],
 .c0[data-appearance~='success']:disabled *[fill^='#'] {
   fill: #B1B5BB;
+}
+
+.c0:focus-visible {
+  outline-offset: 2px;
+  outline: #0062FF solid 2px;
 }
 
 .c0[data-dimension='xl'] {
@@ -1172,6 +1182,11 @@ Object {
   fill: #B1B5BB;
 }
 
+.c0:focus-visible {
+  outline-offset: 2px;
+  outline: #0062FF solid 2px;
+}
+
 .c0[data-dimension='xl'] {
   padding: 0;
   height: 56px;
@@ -1589,6 +1604,11 @@ Object {
 .c0[data-appearance~='success'][data-appearance~='disabled'] *[fill^='#'],
 .c0[data-appearance~='success']:disabled *[fill^='#'] {
   fill: #B1B5BB;
+}
+
+.c0:focus-visible {
+  outline-offset: 2px;
+  outline: #0062FF solid 2px;
 }
 
 .c0[data-dimension='xl'] {
@@ -2050,6 +2070,11 @@ Object {
   fill: #B1B5BB;
 }
 
+.c0:focus-visible {
+  outline-offset: 2px;
+  outline: #0062FF solid 2px;
+}
+
 .c0[data-dimension='xl'] {
   padding: 0;
   height: 56px;
@@ -2437,6 +2462,11 @@ Object {
 .c0[data-appearance~='success'][data-appearance~='disabled'] *[fill^='#'],
 .c0[data-appearance~='success']:disabled *[fill^='#'] {
   fill: #B1B5BB;
+}
+
+.c0:focus-visible {
+  outline-offset: 2px;
+  outline: #0062FF solid 2px;
 }
 
 .c0[data-dimension='xl'] {
