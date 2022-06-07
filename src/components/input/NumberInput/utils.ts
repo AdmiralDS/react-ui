@@ -57,7 +57,7 @@ const reverseString = (str: string) => {
 };
 
 export const validateThousand = (thousand: string): boolean => {
-  return /[^a-zA-Z]+/.test(thousand);
+  return /[^a-zA-Z]*/.test(thousand);
 };
 
 export function fitToCurrency(

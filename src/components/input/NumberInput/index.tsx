@@ -316,7 +316,9 @@ export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       onChange?.(event);
     };
 
-    const handleContentClick = (e: any) => {
+    const handleContentMouseDown = (e: any) => {
+      // Запретит перенос фокуса с инпута при клике по всему, что внутри Content
+      e.preventDefault();
       if (e.target !== inputRef.current) {
         inputRef.current?.focus();
         inputRef.current?.setSelectionRange(inputRef.current?.value.length || 0, inputRef.current?.value.length || 0);
@@ -335,13 +337,7 @@ export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
         data-status={status}
         data-align={align}
       >
-        <Content
-          dimension={props.dimension}
-          iconCount={iconCount}
-          // Запретит перенос фокуса с инпута при клике по всему, что внутри Content
-          onMouseDown={preventDefault}
-          onClick={handleContentClick}
-        >
+        <Content dimension={props.dimension} iconCount={iconCount} onMouseDown={handleContentMouseDown}>
           <AutoSizeInput
             ref={refSetter(ref, inputRef)}
             onChange={handleChange}
@@ -349,6 +345,9 @@ export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
             onBlur={handleBlur}
             suffix={suffix}
             prefix={prefix}
+            thousand={thousand}
+            decimal={decimal}
+            precision={precision}
             {...props}
           />
         </Content>
