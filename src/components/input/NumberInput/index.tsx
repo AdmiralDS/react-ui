@@ -116,26 +116,6 @@ const Wrapper = styled(Container)<{
   overflow: hidden;
 `;
 
-const Text = styled.div`
-  display: flex;
-  align-items: center;
-  user-select: none;
-  min-width: 0;
-`;
-
-const Prefix = styled.div`
-  display: flex;
-  align-items: center;
-  user-select: none;
-`;
-
-const InputWrapper = styled.div`
-  display: flex;
-  overflow: hidden;
-  max-height: 100%;
-  border-radius: inherit;
-`;
-
 const Content = styled.div`
   display: flex;
   box-sizing: border-box;
@@ -204,10 +184,8 @@ export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
   ) => {
     const [plusDisabled, setPlusDisabled] = React.useState(false);
     const [minusDisabled, setMinusDisabled] = React.useState(false);
-    const [showPrefixSuffix, setPrefixSuffix] = React.useState(false);
 
     const inputRef = React.useRef<HTMLInputElement>(null);
-    const prefixRef = React.useRef<any>(null);
 
     // thousand, decimal - не более одного символа
     const thousand = validateThousand(userThousand) ? userThousand.slice(0, 1) : ' ';
@@ -314,16 +292,12 @@ export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
         else if (newValue !== event.currentTarget.value) {
           changeInputData(inputRef.current, { value: newValue });
         }
-        inputRef.current.style.maxWidth = `calc(100% - ${prefixRef.current?.scrollWidth || 0}px)`;
       }
       onBlur?.(event);
     };
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       const newVal = event.currentTarget.value;
-      if (inputRef.current) {
-        inputRef.current.style.maxWidth = `calc(100% - ${prefixRef.current?.scrollWidth || 0}px)`;
-      }
 
       if (typeof minValue === 'number' && newVal) {
         const minusDsb = Number(clearValue(newVal, precision, decimal)) - step < minValue;
@@ -368,18 +342,15 @@ export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
           onMouseDown={preventDefault}
           onClick={handleContentClick}
         >
-          <InputWrapper>
-            {prefix && showPrefixSuffix && <Prefix ref={prefixRef}>{prefix}&nbsp;</Prefix>}
-            <AutoSizeInput
-              ref={refSetter(ref, inputRef)}
-              onChange={handleChange}
-              placeholder={placeholder}
-              onBlur={handleBlur}
-              setPrefixSuffix={setPrefixSuffix}
-              {...props}
-            />
-            {suffix && showPrefixSuffix && <Text>&nbsp;{suffix}</Text>}
-          </InputWrapper>
+          <AutoSizeInput
+            ref={refSetter(ref, inputRef)}
+            onChange={handleChange}
+            placeholder={placeholder}
+            onBlur={handleBlur}
+            suffix={suffix}
+            prefix={prefix}
+            {...props}
+          />
         </Content>
         {iconCount > 0 && (
           <IconPanel disabled={props.disabled} dimension={props.dimension}>

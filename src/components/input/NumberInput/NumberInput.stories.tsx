@@ -15,7 +15,7 @@ const Desc = styled.div`
 const Description = () => <Desc>Поле ввода с возможностью ввода числовых значений через нажатие с заданным шагом</Desc>;
 
 export default {
-  title: 'Admiral-2.1/Input/NumberInputRefactor',
+  title: 'Admiral-2.1/Input/NumberInput',
   decorators: [withDesign],
   component: NumberInput,
   parameters: {
@@ -89,26 +89,16 @@ export default {
 
 const Template0: ComponentStory<typeof NumberInput> = (args) => {
   return (
-    <div style={{ display: 'flex' }}>
+    <>
       <NumberInput
         {...args}
-        style={{ width: '50%' }}
         prefix="From"
         defaultValue="2.00"
         onChange={(event) => {
           console.log(event.target.value);
         }}
       />
-      <NumberInput
-        {...args}
-        style={{ width: '50%' }}
-        prefix="From"
-        defaultValue="2.00"
-        onChange={(event) => {
-          console.log(event.target.value);
-        }}
-      />
-    </div>
+    </>
   );
 };
 

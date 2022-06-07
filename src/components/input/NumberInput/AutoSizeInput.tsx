@@ -8,6 +8,23 @@ import { refSetter } from '#src/components/common/utils/refSetter';
 
 import { fitToCurrency } from './utils';
 
+const Prefix = styled.div`
+  display: flex;
+  align-items: center;
+  user-select: none;
+`;
+
+const Suffix = styled(Prefix)`
+  min-width: 0;
+`;
+
+const Wrapper = styled.div`
+  display: flex;
+  overflow: hidden;
+  max-height: 100%;
+  border-radius: inherit;
+`;
+
 const Sizer = styled.div`
   position: absolute;
   top: 0;
@@ -134,27 +151,27 @@ export interface InputProps extends TextInputProps {
   thousand?: string;
   /** разделитель между целым и десятичным */
   decimal?: string;
-  /** колбек для установки видимости префиксов/суффиксов */
-  setPrefixSuffix?: (show: boolean) => void;
 }
 
 export const AutoSizeInput = React.forwardRef<HTMLInputElement, InputProps>(
-  (
-    {
-      placeholder,
-      type,
-      precision = 2,
-      prefix = '',
-      suffix = '₽',
-      thousand = ' ',
-      decimal = '.',
-      setPrefixSuffix,
-      ...props
-    },
-    ref,
-  ) => {
+  ({ placeholder, type, precision = 2, prefix = '', suffix = '₽', thousand = ' ', decimal = '.', ...props }, ref) => {
+    const [showPrefixSuffix, setPrefixSuffix] = React.useState(false);
+
     const sizerRef = React.useRef<HTMLDivElement>(null);
     const inputRef = React.useRef<HTMLInputElement>(null);
+
+    const updateInputWidth = (newValue: any) => {
+      if (sizerRef.current && inputRef.current) {
+        sizerRef.current.innerHTML = newValue || placeholder || '';
+        // 2px с расчетом на курсор
+        inputRef.current.style.width = `${sizerRef.current.scrollWidth + 2}px`;
+      }
+      if (newValue) {
+        setPrefixSuffix?.(true);
+      } else {
+        setPrefixSuffix?.(false);
+      }
+    };
 
     const handleInput = (inputData: InputData | null): InputData => {
       const { value, selectionStart } = inputData || {};
@@ -162,17 +179,7 @@ export const AutoSizeInput = React.forwardRef<HTMLInputElement, InputProps>(
       const init_value = value || '';
       const newValue = fitToCurrency(init_value, precision, decimal, thousand);
 
-      if (newValue) {
-        setPrefixSuffix?.(true);
-      } else {
-        setPrefixSuffix?.(false);
-      }
-
-      if (sizerRef.current && inputRef.current) {
-        sizerRef.current.innerHTML = newValue || placeholder || '';
-        // 2px с расчетом на курсор
-        inputRef.current.style.width = `${sizerRef.current.scrollWidth + 2}px`;
-      }
+      updateInputWidth(newValue);
 
       if (thousand && init_value.charAt(cursor - 1) === thousand && newValue.length === init_value.length) {
         // если пытаемся стереть разделитель thousand, то курсор перескакивает через него
@@ -228,6 +235,12 @@ export const AutoSizeInput = React.forwardRef<HTMLInputElement, InputProps>(
       }
     }, [inputRef.current, placeholder]);
 
+    React.useLayoutEffect(() => {
+      if (inputRef.current) {
+        updateInputWidth(inputRef.current.value);
+      }
+    }, [props.value, props.defaultValue]);
+
     const handleMouseDown = (e: React.MouseEvent<HTMLInputElement>) => {
       // отменяю всплытие события, чтобы не сработал onClick на Content и фокус не был снова установлен
       e.stopPropagation();
@@ -235,17 +248,21 @@ export const AutoSizeInput = React.forwardRef<HTMLInputElement, InputProps>(
     };
 
     return (
-      <>
-        <Sizer ref={sizerRef} />
-        <Input
-          {...props}
-          ref={refSetter(ref, inputRef)}
-          placeholder={placeholder}
-          type="text"
-          onMouseDown={handleMouseDown}
-        />
-        <BorderedDiv />
-      </>
+      <Wrapper>
+        {prefix && showPrefixSuffix && <Prefix>{prefix}&nbsp;</Prefix>}
+        <Wrapper>
+          <Sizer ref={sizerRef} />
+          <Input
+            {...props}
+            ref={refSetter(ref, inputRef)}
+            placeholder={placeholder}
+            type="text"
+            onMouseDown={handleMouseDown}
+          />
+          <BorderedDiv />
+          {suffix && showPrefixSuffix && <Suffix>&nbsp;{suffix}</Suffix>}
+        </Wrapper>
+      </Wrapper>
     );
   },
 );
