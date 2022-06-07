@@ -32,6 +32,10 @@ const MainButton = styled(Button)`
   }
 `;
 
+const StyledDropdown = styled(Dropdown)`
+  padding: 8px 0;
+`;
+
 const MenuButton = styled(Button)`
   &[data-appearance~='primary'] {
     border-radius: ${(p) => menuButtonBorderRadius(p.theme.shape)};
@@ -192,7 +196,7 @@ export const MultiButton: FC<MultiButtonProps> = ({
         <Icon $menuOpened={menuOpened} />
       </MenuButton>
       {menuOpened && !disabled && (
-        <Dropdown
+        <StyledDropdown
           role="listbox"
           data-dimension={menuDimension}
           targetRef={btnRef}
@@ -235,7 +239,7 @@ export const MultiButton: FC<MultiButtonProps> = ({
               </DropDownItem>
             );
           })}
-        </Dropdown>
+        </StyledDropdown>
       )}
     </Wrapper>
   );
