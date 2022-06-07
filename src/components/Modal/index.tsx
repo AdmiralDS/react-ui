@@ -19,7 +19,6 @@ const Overlay = styled.div<{ overlayStyledCss: Interpolation<any> }>`
   bottom: 0;
   right: 0;
   background-color: ${({ theme }) => theme.color['Opacity/Modal']};
-  backdrop-filter: blur(8px);
   transition: opacity 0.3s ease 0s;
   z-index: ${({ theme }) => theme.zIndex.modal};
   ${(p) => p.overlayStyledCss}
