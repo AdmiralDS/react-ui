@@ -41,7 +41,7 @@ Object {
   bottom: -4px;
   left: -4px;
   right: -4px;
-  border-radius: 6px;
+  border-radius: 4px;
   border: 2px solid #0062FF;
 }
 
@@ -132,7 +132,7 @@ Object {
   bottom: -4px;
   left: -4px;
   right: -4px;
-  border-radius: 6px;
+  border-radius: 4px;
   border: 2px solid #0062FF;
 }
 
@@ -277,7 +277,7 @@ Object {
   bottom: -4px;
   left: -4px;
   right: -4px;
-  border-radius: 6px;
+  border-radius: 4px;
   border: 2px solid #0062FF;
 }
 
@@ -348,7 +348,7 @@ Object {
   bottom: -4px;
   left: -4px;
   right: -4px;
-  border-radius: 6px;
+  border-radius: 4px;
   border: 2px solid #0062FF;
 }
 
