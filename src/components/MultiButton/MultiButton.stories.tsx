@@ -2,7 +2,8 @@ import { MultiButton, MultiButtonItem } from '#src/components/MultiButton';
 import React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
-import styled from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
+import { Theme } from '#src/components/themes';
 
 const Separator = styled.div`
   height: 20px;
@@ -68,6 +69,12 @@ export default {
     disabled: {
       control: { type: 'boolean' },
     },
+    themeBorderKind: {
+      control: {
+        type: 'radio',
+        options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
+      },
+    },
   },
 } as ComponentMeta<typeof MultiButton>;
 
@@ -105,8 +112,14 @@ const Template1: ComponentStory<typeof MultiButton> = (args) => {
 
   const [selected, setSelected] = React.useState<string | null>(null);
   const [selected2, setSelected2] = React.useState<string | null>(null);
+
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
+    return theme;
+  }
+
   return (
-    <>
+    <ThemeProvider theme={swapBorder}>
       <div style={{ display: 'flex', justifyContent: 'space-around' }}>
         <MultiButton
           {...args}
@@ -134,7 +147,7 @@ const Template1: ComponentStory<typeof MultiButton> = (args) => {
           onClose={() => console.log('close menu')}
         />
       </div>
-    </>
+    </ThemeProvider>
   );
 };
 

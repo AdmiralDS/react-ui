@@ -3,6 +3,7 @@ import * as React from 'react';
 import styled, { css } from 'styled-components';
 
 import { ReactComponent as MoreHorizontalOutline } from '@admiral-ds/icons/build/system/MoreHorizontalOutline.svg';
+import { ReactComponent as MoreVerticalOutline } from '@admiral-ds/icons/build/system/MoreVerticalOutline.svg';
 
 export type Dimension = 'l' | 'm' | 's';
 
@@ -39,10 +40,6 @@ const ButtonComponent = styled.button<{ dimension: Dimension; menuOpened: boolea
   height: ${({ dimension }) => SIZE[dimension]}px;
   width: ${({ dimension }) => SIZE[dimension]}px;
 
-  & svg {
-    flex-shrink: 0;
-  }
-
   &:hover:not(:disabled) {
     border-radius: 50%;
     background-color: ${({ theme }) => theme.color['Opacity/Hover']};
@@ -76,24 +73,41 @@ const ButtonComponent = styled.button<{ dimension: Dimension; menuOpened: boolea
   }
 `;
 
-export const ButtonContent = styled.span<{ $isVertical?: boolean; dimension: Dimension }>`
+export const ButtonContent = styled.span`
   position: relative;
   display: inline-flex;
   align-items: center;
   width: 100%;
   height: 100%;
+`;
+
+const IconContainer = styled.div<{ dimension: Dimension }>`
+  height: ${({ dimension }) => ICON_SIZE[dimension]}px;
+  width: ${({ dimension }) => ICON_SIZE[dimension]}px;
+  margin: auto;
 
   & > svg {
-    transform: rotate(${(p) => (p.$isVertical ? 90 : 0)}deg);
-    height: ${({ dimension }) => ICON_SIZE[dimension]}px;
-    width: ${({ dimension }) => ICON_SIZE[dimension]}px;
-    margin: auto;
+    height: 100%;
+    width: 100%;
+    flex-shrink: 0;
 
     & *[fill^='#'] {
       fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
     }
   }
 `;
+
+export const OverflowMenuIcon = React.forwardRef<HTMLDivElement, { dimension: Dimension; isVertical: boolean }>(
+  ({ dimension = 'l', isVertical = false }, ref) => {
+    const Icon = isVertical ? MoreVerticalOutline : MoreHorizontalOutline;
+
+    return (
+      <IconContainer ref={ref} dimension={dimension}>
+        <Icon aria-hidden />
+      </IconContainer>
+    );
+  },
+);
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   /** Элементы содержимого */
@@ -102,17 +116,13 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   dimension?: Dimension;
   /** Состояние меню */
   menuOpened: boolean;
-  /** Ориентация компонента */
-  isVertical?: boolean;
 }
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ dimension = 'l', menuOpened, type = 'button', isVertical = false, ...props }, ref) => {
+  ({ dimension = 'l', menuOpened, type = 'button', children, ...props }, ref) => {
     return (
       <ButtonComponent ref={ref} dimension={dimension} menuOpened={menuOpened} type={type} {...props}>
-        <ButtonContent dimension={dimension} $isVertical={isVertical}>
-          <MoreHorizontalOutline aria-hidden />
-        </ButtonContent>
+        <ButtonContent>{children}</ButtonContent>
       </ButtonComponent>
     );
   },

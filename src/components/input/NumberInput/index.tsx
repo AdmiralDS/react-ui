@@ -153,8 +153,6 @@ export interface NumberInputProps extends TextInputProps {
   align?: 'left' | 'right';
 }
 
-const preventDefault = (e: React.BaseSyntheticEvent) => e.preventDefault();
-
 export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
   (
     {

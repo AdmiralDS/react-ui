@@ -6,6 +6,7 @@ import { typography } from '#src/components/Typography';
 import { DropDownItem } from '#src/components/DropDownItem';
 import { useClickOutside } from '#src/components/common/hooks/useClickOutside';
 import { Dropdown } from '#src/components/Dropdown';
+import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 
 const Button = styled.button<{ $menuOpened?: boolean }>`
   position: relative;
@@ -15,7 +16,7 @@ const Button = styled.button<{ $menuOpened?: boolean }>`
   height: 40px;
   padding: 10px 12px;
   border: 2px solid transparent;
-  border-radius: 4px;
+  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
   appearance: none;
   -webkit-tap-highlight-color: transparent;
   background-color: transparent;

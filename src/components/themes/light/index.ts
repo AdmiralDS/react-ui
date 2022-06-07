@@ -8,4 +8,5 @@ export const LIGHT_THEME = {
   shadow,
   zIndex,
   name: 'light',
+  shape: { borderRadiusKind: 'Border radius 4' },
 } as Theme;

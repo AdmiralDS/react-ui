@@ -1,5 +1,5 @@
 import * as React from 'react';
-import styled from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { ReactComponent as StarSolid } from '@admiral-ds/icons/build/system/StarSolid.svg';
 import { Button } from './index';
@@ -8,6 +8,7 @@ import { PseudoIcon } from '#src/components/skeleton/PseudoIcon';
 import { T } from '#src/components/T';
 import { withDesign } from 'storybook-addon-designs';
 import { filterKeysWithUndefinedValues } from '#src/components/common/utils/filterKeysWithUndefinedValues';
+import { Theme } from '#src/components/themes';
 
 const WrapperButton = styled.div`
   display: flex;
@@ -77,6 +78,13 @@ export default {
         options: ['button', 'submit', 'reset'],
       },
     },
+
+    themeBorderKind: {
+      control: {
+        type: 'radio',
+        options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
+      },
+    },
   },
 } as ComponentMeta<typeof Button>;
 
@@ -90,84 +98,92 @@ const ButtonContainer = styled.div`
   }
 `;
 
-const ButtonWithIconDemo: ComponentStory<typeof Button> = () => (
-  <>
-    <WrapperButton>
-      <div>
-        <T font="Body/Body 1 Long" as="div">
-          {' '}
-          Dimension - xl
-        </T>
-        <Button dimension="xl" appearance="primary">
-          Button 56
-          <StarSolid />
-        </Button>
-      </div>
-      <div>
-        <T font="Body/Body 1 Long" as="div">
-          {' '}
-          Dimension - l
-        </T>
-        <Button dimension="l" appearance="secondary">
-          <StarSolid />
-          Button 48
-        </Button>
-      </div>
-      <div>
-        <T font="Body/Body 1 Long" as="div">
-          {' '}
-          Dimension - m
-        </T>
-        <Button dimension="m" appearance="danger">
-          Button 40
-          <StarSolid />
-        </Button>
-      </div>
-      <div>
-        <T font="Body/Body 1 Long" as="div">
-          {' '}
-          Ghost - xl
-        </T>
-        <Button dimension="xl" appearance="ghost">
-          Button 56
-          <StarSolid />
-        </Button>
-      </div>
-      <>
-        <DarkDiv>
+const ButtonWithIconDemo: ComponentStory<typeof Button> = (args) => {
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
+    console.log(`Current border ${theme.shape.borderRadiusKind}`);
+    return theme;
+  }
+
+  return (
+    <ThemeProvider theme={swapBorder}>
+      <WrapperButton>
+        <div>
           <T font="Body/Body 1 Long" as="div">
             {' '}
-            White - l
+            Dimension - xl
           </T>
-          <Button dimension="l" appearance="white">
-            Button 48
+          <Button dimension="xl" appearance="primary">
+            Button 56
             <StarSolid />
           </Button>
-        </DarkDiv>
-      </>
+        </div>
+        <div>
+          <T font="Body/Body 1 Long" as="div">
+            {' '}
+            Dimension - l
+          </T>
+          <Button dimension="l" appearance="secondary">
+            <StarSolid />
+            Button 48
+          </Button>
+        </div>
+        <div>
+          <T font="Body/Body 1 Long" as="div">
+            {' '}
+            Dimension - m
+          </T>
+          <Button dimension="m" appearance="danger">
+            Button 40
+            <StarSolid />
+          </Button>
+        </div>
+        <div>
+          <T font="Body/Body 1 Long" as="div">
+            {' '}
+            Ghost - xl
+          </T>
+          <Button dimension="xl" appearance="ghost">
+            Button 56
+            <StarSolid />
+          </Button>
+        </div>
+        <>
+          <DarkDiv>
+            <T font="Body/Body 1 Long" as="div">
+              {' '}
+              White - l
+            </T>
+            <Button dimension="l" appearance="white">
+              Button 48
+              <StarSolid />
+            </Button>
+          </DarkDiv>
+        </>
+        <div>
+          <T font="Body/Body 1 Long" as="div">
+            {' '}
+            Dimension - s
+          </T>
+          <Button dimension="s" appearance="success">
+            <StarSolid />
+            Button 32
+          </Button>
+        </div>
+      </WrapperButton>
+      <Separator />
       <div>
         <T font="Body/Body 1 Long" as="div">
-          {' '}
-          Dimension - s
+          Button with icon stretch
         </T>
-        <Button dimension="s" appearance="success">
+        <Button dimension="l" appearance="primary" style={{ width: '100%' }}>
           <StarSolid />
-          Button 32
+          Button
         </Button>
       </div>
-    </WrapperButton>
-    <Separator />
-    <div>
-      <T font="Body/Body 1 Long" as="div">
-        Button with icon stretch
-      </T>
-      <Button dimension="l" appearance="primary" style={{ width: '100%' }}>
-        <StarSolid />
-        Button
-      </Button>
-    </div>
-  </>
-);
+    </ThemeProvider>
+  );
+};
 
 const handleClick = () => {
   console.log('clicked');
@@ -322,8 +338,15 @@ const ButtonSkeleton: ComponentStory<typeof Button> = ({ appearance = 'primary',
 
 const ButtonPlaygroundDemo: ComponentStory<typeof Button> = ({ children, ...args }) => {
   const cleanProps = filterKeysWithUndefinedValues(args);
+
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
+    console.log(`Current border ${theme.shape.borderRadiusKind}`);
+    return theme;
+  }
+
   return (
-    <>
+    <ThemeProvider theme={swapBorder}>
       <ButtonContainer>
         <Button {...cleanProps}>Button 56</Button>
 
@@ -505,7 +528,7 @@ const ButtonPlaygroundDemo: ComponentStory<typeof Button> = ({ children, ...args
           <StarSolid />
         </Button>
       </ButtonContainer>
-    </>
+    </ThemeProvider>
   );
 };
 

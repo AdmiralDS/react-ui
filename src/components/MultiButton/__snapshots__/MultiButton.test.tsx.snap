@@ -305,6 +305,11 @@ Object {
   fill: #B1B5BB;
 }
 
+.c1:focus-visible {
+  outline-offset: 2px;
+  outline: #0062FF solid 2px;
+}
+
 .c1[data-dimension='xl'] {
   padding: 0;
   height: 56px;
@@ -596,6 +601,11 @@ Object {
 .c6[data-appearance~='success'][data-appearance~='disabled'] *[fill^='#'],
 .c6[data-appearance~='success']:disabled *[fill^='#'] {
   fill: #B1B5BB;
+}
+
+.c6:focus-visible {
+  outline-offset: 2px;
+  outline: #0062FF solid 2px;
 }
 
 .c6[data-dimension='xl'] {
@@ -1039,6 +1049,11 @@ Object {
   fill: #B1B5BB;
 }
 
+.c1:focus-visible {
+  outline-offset: 2px;
+  outline: #0062FF solid 2px;
+}
+
 .c1[data-dimension='xl'] {
   padding: 0;
   height: 56px;
@@ -1330,6 +1345,11 @@ Object {
 .c6[data-appearance~='success'][data-appearance~='disabled'] *[fill^='#'],
 .c6[data-appearance~='success']:disabled *[fill^='#'] {
   fill: #B1B5BB;
+}
+
+.c6:focus-visible {
+  outline-offset: 2px;
+  outline: #0062FF solid 2px;
 }
 
 .c6[data-dimension='xl'] {
@@ -1828,6 +1848,11 @@ Object {
   fill: #B1B5BB;
 }
 
+.c1:focus-visible {
+  outline-offset: 2px;
+  outline: #0062FF solid 2px;
+}
+
 .c1[data-dimension='xl'] {
   padding: 0;
   height: 56px;
@@ -2119,6 +2144,11 @@ Object {
 .c6[data-appearance~='success'][data-appearance~='disabled'] *[fill^='#'],
 .c6[data-appearance~='success']:disabled *[fill^='#'] {
   fill: #B1B5BB;
+}
+
+.c6:focus-visible {
+  outline-offset: 2px;
+  outline: #0062FF solid 2px;
 }
 
 .c6[data-dimension='xl'] {
@@ -2559,6 +2589,11 @@ Object {
   fill: #B1B5BB;
 }
 
+.c1:focus-visible {
+  outline-offset: 2px;
+  outline: #0062FF solid 2px;
+}
+
 .c1[data-dimension='xl'] {
   padding: 0;
   height: 56px;
@@ -2850,6 +2885,11 @@ Object {
 .c6[data-appearance~='success'][data-appearance~='disabled'] *[fill^='#'],
 .c6[data-appearance~='success']:disabled *[fill^='#'] {
   fill: #B1B5BB;
+}
+
+.c6:focus-visible {
+  outline-offset: 2px;
+  outline: #0062FF solid 2px;
 }
 
 .c6[data-dimension='xl'] {
@@ -3345,6 +3385,11 @@ Object {
   fill: #B1B5BB;
 }
 
+.c1:focus-visible {
+  outline-offset: 2px;
+  outline: #0062FF solid 2px;
+}
+
 .c1[data-dimension='xl'] {
   padding: 0;
   height: 56px;
@@ -3636,6 +3681,11 @@ Object {
 .c6[data-appearance~='success'][data-appearance~='disabled'] *[fill^='#'],
 .c6[data-appearance~='success']:disabled *[fill^='#'] {
   fill: #B1B5BB;
+}
+
+.c6:focus-visible {
+  outline-offset: 2px;
+  outline: #0062FF solid 2px;
 }
 
 .c6[data-dimension='xl'] {
@@ -4076,6 +4126,11 @@ Object {
   fill: #B1B5BB;
 }
 
+.c1:focus-visible {
+  outline-offset: 2px;
+  outline: #0062FF solid 2px;
+}
+
 .c1[data-dimension='xl'] {
   padding: 0;
   height: 56px;
@@ -4367,6 +4422,11 @@ Object {
 .c6[data-appearance~='success'][data-appearance~='disabled'] *[fill^='#'],
 .c6[data-appearance~='success']:disabled *[fill^='#'] {
   fill: #B1B5BB;
+}
+
+.c6:focus-visible {
+  outline-offset: 2px;
+  outline: #0062FF solid 2px;
 }
 
 .c6[data-dimension='xl'] {

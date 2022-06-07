@@ -2,10 +2,11 @@ import * as React from 'react';
 import { CheckboxField } from '#src/components/form';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
-import styled from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 
 import { RadioButton } from '#src/components/RadioButton';
 import { FieldSet, PropsType as FieldSetPropsType } from '#src/components/form/FieldSet';
+import { Theme } from '#src/components/themes';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -50,6 +51,12 @@ export default {
     required: {
       control: { type: 'boolean' },
     },
+    themeBorderKind: {
+      control: {
+        type: 'radio',
+        options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
+      },
+    },
   },
 } as ComponentMeta<typeof FieldSet>;
 const Container = styled.div`
@@ -58,8 +65,13 @@ const Container = styled.div`
   }
 `;
 const Template1: ComponentStory<typeof FieldSet> = (props: FieldSetPropsType) => {
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    return theme;
+  }
+
   return (
-    <>
+    <ThemeProvider theme={swapBorder}>
       <Container>
         <FieldSet {...props} legend={'Группа чекбоксов:'}>
           <CheckboxField name="check1">Text 1</CheckboxField>
@@ -84,7 +96,7 @@ const Template1: ComponentStory<typeof FieldSet> = (props: FieldSetPropsType) =>
           <CheckboxField name="check3">Text 3</CheckboxField>
         </FieldSet>
       </Container>
-    </>
+    </ThemeProvider>
   );
 };
 

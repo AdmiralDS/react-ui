@@ -1,5 +1,6 @@
 import { ComponentDimension } from '#src/components/input/types';
 import styled, { css } from 'styled-components';
+import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 
 export const containerHeights = css<{ dimension?: ComponentDimension }>`
   height: ${({ dimension }) => {
@@ -19,7 +20,7 @@ export const Container = styled.div<{ disabled?: boolean; dimension?: ComponentD
   display: flex;
   align-items: stretch;
   border: none;
-  border-radius: 4px;
+  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
 
   ${containerHeights}
 `;

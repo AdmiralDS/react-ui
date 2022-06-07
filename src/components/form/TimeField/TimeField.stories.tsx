@@ -4,7 +4,8 @@ import { ChangeEvent, useEffect, useState } from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { TimeField } from '#src/components/form';
 import { withDesign } from 'storybook-addon-designs';
-import styled from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
+import { Theme } from '#src/components/themes';
 
 export default {
   title: 'Admiral-2.1/Form Field/TimeField',
@@ -67,6 +68,12 @@ export default {
     extraText: {
       control: { type: 'text' },
     },
+    themeBorderKind: {
+      control: {
+        type: 'radio',
+        options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
+      },
+    },
   },
 } as ComponentMeta<typeof TimeField>;
 
@@ -95,9 +102,13 @@ const Template: ComponentStory<typeof TimeField> = (props) => {
     setValue(inputValue);
     props.onChange?.(e);
   };
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    return theme;
+  }
 
   return (
-    <>
+    <ThemeProvider theme={swapBorder}>
       <DisplayContainer>
         <TimeField
           {...cleanProps}
@@ -108,7 +119,7 @@ const Template: ComponentStory<typeof TimeField> = (props) => {
           onChange={handleChange}
         />
       </DisplayContainer>
-    </>
+    </ThemeProvider>
   );
 };
 

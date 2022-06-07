@@ -281,6 +281,7 @@ const Template3: ComponentStory<typeof OverflowMenu> = (args) => {
       <DisplayBlock>
         <OverflowMenu
           {...args}
+          alignSelf="flex-start"
           items={modelL}
           dimension={dimensionL}
           isVertical

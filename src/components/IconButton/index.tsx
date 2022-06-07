@@ -2,6 +2,7 @@ import type { ButtonHTMLAttributes, FC } from 'react';
 import * as React from 'react';
 import styled from 'styled-components';
 import { Spinner } from '#src/components/Spinner';
+import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 
 type Dimension = 'xl' | 'l' | 'm' | 's';
 
@@ -22,7 +23,7 @@ const StyledButton = styled.button.attrs<IconButtonProps, { 'data-dimension'?: D
   box-sizing: border-box;
   display: inline-block;
   border: none;
-  border-radius: 4px;
+  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
   background: transparent;
   -webkit-tap-highlight-color: transparent;
   appearance: none;
@@ -69,6 +70,11 @@ const StyledButton = styled.button.attrs<IconButtonProps, { 'data-dimension'?: D
     & *[fill^='#'] {
       fill: ${({ theme }) => theme.color['Neutral/Neutral 30']};
     }
+  }
+
+  &:focus-visible {
+    outline-offset: 2px;
+    outline: ${(p) => p.theme.color['Primary/Primary 60 Main']} solid 2px;
   }
 `;
 

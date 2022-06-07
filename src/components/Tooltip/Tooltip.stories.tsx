@@ -2,10 +2,11 @@ import React, { useRef } from 'react';
 import { ReactComponent as DeleteOutline } from '@admiral-ds/icons/build/system/DeleteOutline.svg';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
-import styled from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 
 import { ITooltipProps, Tooltip } from '#src/components/Tooltip';
 import { Button } from '#src/components/Button';
+import { Theme } from '#src/components/themes';
 
 const Separator = styled.div<{ height?: number }>`
   height: ${({ height }) => (height ? height : 20)}px;
@@ -61,12 +62,23 @@ export default {
       options: ['bottom', 'top', 'left', 'right', 'bottomPageCenter', 'topPageCenter'],
       control: { type: 'radio' },
     },
+    themeBorderKind: {
+      control: {
+        type: 'radio',
+        options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
+      },
+    },
   },
 } as ComponentMeta<typeof Tooltip>;
 
-const Template1: ComponentStory<typeof Tooltip> = ({ withDelay, tooltipPosition }: ITooltipProps) => {
+const Template1: ComponentStory<typeof Tooltip> = (args) => {
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
+    return theme;
+  }
+
   return (
-    <>
+    <ThemeProvider theme={swapBorder}>
       <Tooltip
         renderContent={() =>
           `Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin
@@ -76,8 +88,8 @@ const Template1: ComponentStory<typeof Tooltip> = ({ withDelay, tooltipPosition 
           Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum'`
         }
         style={{ minWidth: '200px', maxWidth: '300px' }}
-        withDelay={withDelay}
-        tooltipPosition={tooltipPosition}
+        withDelay={args.withDelay}
+        tooltipPosition={args.tooltipPosition}
         id="test1"
       >
         <Button
@@ -90,7 +102,7 @@ const Template1: ComponentStory<typeof Tooltip> = ({ withDelay, tooltipPosition 
           <DeleteOutline aria-hidden />
         </Button>
       </Tooltip>
-    </>
+    </ThemeProvider>
   );
 };
 
