@@ -72,6 +72,7 @@ export const TabMenu: React.FC<TabMenuProps> = ({
   const [update, setUpdate] = React.useState({});
   const [visibleTabsAmount, setVisibleTabsAmount] = React.useState(tabsWithRef.length);
   const [menuFocus, setMenuFocus] = React.useState<'firstOption' | 'lastOption' | 'activeOption'>('activeOption');
+  const [openedMenu, setOpenedMenu] = React.useState(false);
 
   const visibleTabs = mobile ? tabsWithRef : tabsWithRef.slice(0, visibleTabsAmount);
   const hiddenTabs = mobile ? [] : tabsWithRef.slice(visibleTabsAmount);
@@ -280,6 +281,24 @@ export const TabMenu: React.FC<TabMenuProps> = ({
     }
   };
 
+  const handleMenuKeyDown = (event: React.KeyboardEvent<HTMLButtonElement>) => {
+    if (!openedMenu) {
+      const code = keyboardKey.getCode(event);
+      switch (code) {
+        case keyboardKey.ArrowLeft:
+          focusLastTab();
+          event.preventDefault();
+          break;
+        case keyboardKey.ArrowRight:
+          focusFirstTab();
+          event.preventDefault();
+          break;
+        default:
+          break;
+      }
+    }
+  };
+
   return (
     <Wrapper role="tablist" ref={tablistRef} underline={underline} mobile={mobile} {...props}>
       <Underline ref={underlineRef} aria-hidden />
@@ -322,6 +341,8 @@ export const TabMenu: React.FC<TabMenuProps> = ({
       {hiddenTabs.length && !mobile ? (
         <TabOverflowMenu
           ref={overflowBtnRef}
+          onOpen={() => setOpenedMenu(true)}
+          onClose={() => setOpenedMenu(false)}
           alignSelf={alignSelf}
           items={model}
           selected={activeTab}
@@ -333,6 +354,7 @@ export const TabMenu: React.FC<TabMenuProps> = ({
             styleUnderline(0, 0);
           }}
           tabIndex={hiddenTabs?.filter((item) => item.id === activeTab).length ? 0 : -1}
+          onKeyDown={handleMenuKeyDown}
         />
       ) : null}
     </Wrapper>
