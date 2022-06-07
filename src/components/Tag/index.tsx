@@ -136,7 +136,7 @@ const Wrapper = styled.button<{
       bottom: -4px;
       left: -4px;
       right: -4px;
-      border-radius: 6px;
+      border-radius: ${(p) => smallGroupBorderRadius(p.theme.shape)};
       border: 2px solid ${({ theme }) => theme.color['Primary/Primary 60 Main']};
     }
   }
