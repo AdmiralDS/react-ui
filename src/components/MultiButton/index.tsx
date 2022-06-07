@@ -7,15 +7,15 @@ import { Dropdown } from '#src/components/Dropdown';
 import { DropDownItem } from '#src/components/DropDownItem';
 import { keyboardKey } from '#src/components/common/keyboardKey';
 import { Shape } from '#src/components/themes/common';
-import { singleMediumGroupBorderRadius } from '#src/components/themes/borderRadius';
+import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 
 function mainButtonBorderRadius(shape: Shape): string {
-  const radius = singleMediumGroupBorderRadius(shape);
+  const radius = mediumGroupBorderRadius(shape);
   return `${radius} 0 0 ${radius}`;
 }
 
 function menuButtonBorderRadius(shape: Shape): string {
-  const radius = singleMediumGroupBorderRadius(shape);
+  const radius = mediumGroupBorderRadius(shape);
   return `0 ${radius} ${radius} 0`;
 }
 

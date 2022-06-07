@@ -6,10 +6,10 @@ import { TextInputProps } from '#src/components/input/TextInput';
 import { NumberInput } from '#src/components/input/NumberInput';
 import { clearValue, fitToCurrency, repeatStringNumTimes } from '#src/components/input/NumberInput/utils';
 import { Shape } from '#src/components/themes/common';
-import { singleMediumGroupBorderRadius } from '#src/components/themes/borderRadius';
+import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 
 function sliderBorderRadius(shape: Shape): string {
-  const value = singleMediumGroupBorderRadius(shape);
+  const value = mediumGroupBorderRadius(shape);
 
   return `${value} ${value} 0 0`;
 }

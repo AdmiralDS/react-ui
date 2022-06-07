@@ -15,7 +15,7 @@ import type { ForwardedRef, InputHTMLAttributes } from 'react';
 import * as React from 'react';
 import styled, { css } from 'styled-components';
 import { StatusIcon } from '../StatusIcon';
-import { singleMediumGroupBorderRadius } from '#src/components/themes/borderRadius';
+import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 
 const EyeCloseIcon = styled(EyeCloseOutlineSvg)`
   & *[fill^='#'] {
@@ -211,7 +211,7 @@ const IconPanel = styled.div<{ disabled?: boolean; dimension?: ComponentDimensio
   padding-right: ${horizontalPaddingValue}px;
 
   & > svg {
-    border-radius: ${(p) => singleMediumGroupBorderRadius(p.theme.shape)};
+    border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
     display: block;
     width: ${iconSizeValue}px;
 

@@ -3,7 +3,7 @@ import { Shape } from '#src/components/themes/common';
 export function smallGroupBorderRadius(shape: Shape): string {
   switch (shape.borderRadiusKind) {
     case 'Border radius 0':
-      return 'none';
+      return '0';
     case 'Border radius 2':
       return '2px';
     case 'Border radius 4':
@@ -17,21 +17,6 @@ export function smallGroupBorderRadius(shape: Shape): string {
 export function mediumGroupBorderRadius(shape: Shape): string {
   switch (shape.borderRadiusKind) {
     case 'Border radius 0':
-      return 'none';
-    case 'Border radius 2':
-      return '2px';
-    case 'Border radius 4':
-      return '4px';
-    case 'Border radius 8':
-      return '8px';
-    default:
-      return '4px';
-  }
-}
-
-export function singleMediumGroupBorderRadius(shape: Shape): string {
-  switch (shape.borderRadiusKind) {
-    case 'Border radius 0':
       return '0';
     case 'Border radius 2':
       return '2px';
@@ -43,10 +28,11 @@ export function singleMediumGroupBorderRadius(shape: Shape): string {
       return '4px';
   }
 }
+
 export function largeGroupBorderRadius(shape: Shape): string {
   switch (shape.borderRadiusKind) {
     case 'Border radius 0':
-      return 'none';
+      return '0';
     case 'Border radius 2':
       return '4px';
     case 'Border radius 4':
