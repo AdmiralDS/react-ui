@@ -3,6 +3,8 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { DateInput } from '#src/components/input/DateInput';
 import { withDesign } from 'storybook-addon-designs';
 import { INPUT_DIMENSIONS_VALUES } from '#src/components/input/types';
+import { Theme } from '#src/components/themes';
+import { ThemeProvider } from 'styled-components';
 
 export default {
   title: 'Admiral-2.1/Input/DateInput',
@@ -58,6 +60,12 @@ export default {
     maxDate: {
       control: false,
     },
+    themeBorderKind: {
+      control: {
+        type: 'radio',
+        options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
+      },
+    },
   },
 } as ComponentMeta<typeof DateInput>;
 
@@ -79,8 +87,13 @@ const Template: ComponentStory<typeof DateInput> = (props) => {
     setValue(inputValue);
     props.onChange?.(e);
   };
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    return theme;
+  }
+
   return (
-    <>
+    <ThemeProvider theme={swapBorder}>
       <DateInput
         {...cleanProps}
         value={localValue}
@@ -88,7 +101,7 @@ const Template: ComponentStory<typeof DateInput> = (props) => {
         style={{ maxWidth: '30%' }}
         placeholder={'Some placeholder'}
       />
-    </>
+    </ThemeProvider>
   );
 };
 

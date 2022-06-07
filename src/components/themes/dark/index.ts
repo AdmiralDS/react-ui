@@ -8,4 +8,5 @@ export const DARK_THEME: Theme = {
   shadow,
   zIndex,
   name: 'dark',
+  shape: { borderRadiusKind: 'Border radius 4' },
 };

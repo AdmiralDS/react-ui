@@ -2,10 +2,11 @@ import React, { HTMLAttributes, useMemo, useState } from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { Menu } from '#src/components/Menu';
 import { MenuItem, RenderOptionProps } from '#src/components/MenuItem';
-import styled from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 import { typography } from '#src/components/Typography';
 import { ReactComponent as CardSolid } from '@admiral-ds/icons/build/finance/CardSolid.svg';
 import { withDesign } from 'storybook-addon-designs';
+import { Theme } from '#src/components/themes';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -45,6 +46,12 @@ export default {
       options: ['l', 'm', 's'],
       control: { type: 'radio' },
       defaultValue: 'l',
+    },
+    themeBorderKind: {
+      control: {
+        type: 'radio',
+        options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
+      },
     },
   },
 } as ComponentMeta<typeof Menu>;
@@ -204,13 +211,17 @@ const SimpleTemplate: ComponentStory<typeof Menu> = (args) => {
       ),
     }));
   }, [args.dimension]);
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
+    return theme;
+  }
 
   return (
-    <>
+    <ThemeProvider theme={swapBorder}>
       <div style={{ width: 'fit-content' }}>
         <Menu {...args} model={model} />
       </div>
-    </>
+    </ThemeProvider>
   );
 };
 

@@ -10,6 +10,7 @@ import { Dropdown } from '#src/components/Dropdown';
 import { Slot, SlotProps } from './Slot';
 import { getTimeInMinutes, parseStringToTime } from './utils';
 import { typography } from '#src/components/Typography';
+import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 
 const slots: SlotProps[] = [
   { value: '00:00', disabled: false },
@@ -87,7 +88,7 @@ const SlotContainer = styled.ul`
   overflow-x: hidden;
   overflow-y: auto;
   background-color: ${(p) => p.theme.color['Special/Elevated BG']};
-  border-radius: 4px;
+  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
   ${(p) => p.theme.shadow['Shadow 08']}
   flex: 0 0 auto;
   ${typography['Body/Body 1 Long']};

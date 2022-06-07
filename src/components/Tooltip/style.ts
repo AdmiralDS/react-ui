@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import { PositionInPortal } from '#src/components/PositionInPortal';
 import { typography } from '#src/components/Typography';
+import { smallGroupBorderRadius } from '#src/components/themes/borderRadius';
 
 const TOOLTIP_PADDING = '4px 8px';
-const TOOLTIP_BORDER_RADIUS = '4px';
 
 export const TooltipWrapper = styled.div`
   box-sizing: border-box;
@@ -21,7 +21,7 @@ export const TooltipContainer = styled.div`
   background-color: ${({ theme }) => theme.color['Neutral/Neutral 80']};
   ${typography['Body/Body 2 Short']}
   color: ${({ theme }) => theme.color['Neutral/Neutral 00']};
-  border-radius: ${TOOLTIP_BORDER_RADIUS};
+  border-radius: ${(p) => smallGroupBorderRadius(p.theme.shape)};
   ${(props) => props.theme.shadow['Shadow 04']}
   padding: ${TOOLTIP_PADDING};
   max-width: min(488px, calc(100vw - 16px));

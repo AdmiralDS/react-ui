@@ -18,10 +18,17 @@ export interface Shadow {
   'Shadow Stroke': string;
 }
 
+export type BorderRadiusType = 'Border radius 0' | 'Border radius 2' | 'Border radius 4' | 'Border radius 8';
+
+export interface Shape {
+  borderRadiusKind: BorderRadiusType;
+}
+
 export interface Theme {
   color: Color;
   shadow: Shadow;
   zIndex: ZIndex;
+  shape: Shape;
   name: 'light' | 'dark';
 }
 

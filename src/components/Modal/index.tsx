@@ -6,6 +6,7 @@ import * as React from 'react';
 import ReactDOM from 'react-dom';
 import styled, { css, Interpolation } from 'styled-components';
 import ModalManager from './manager';
+import { largeGroupBorderRadius } from '#src/components/themes/borderRadius';
 
 type Dimension = 'xl' | 'l' | 'm' | 's';
 
@@ -83,7 +84,7 @@ const ModalComponent = styled.div<{ dimension: Dimension; mobile?: boolean }>`
   max-height: ${({ mobile }) => (mobile ? '84vh' : '90vh')};
   background-color: ${({ theme }) => theme.color['Special/Elevated BG']};
   ${({ theme }) => theme.shadow['Shadow 16']}
-  border-radius: 8px;
+  border-radius: ${(p) => largeGroupBorderRadius(p.theme.shape)};
   ${({ mobile }) => (mobile ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
   color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
   outline: none;

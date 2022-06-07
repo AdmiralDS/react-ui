@@ -4,6 +4,8 @@ import { CheckboxCompositeGroup, CheckboxCompositeGroupProps } from './index';
 import { CheckboxGroup } from '../CheckboxGroup';
 import { withDesign } from 'storybook-addon-designs';
 import { CheckboxField } from '#src/components/form';
+import { ThemeProvider } from 'styled-components';
+import { Theme } from '#src/components/themes';
 
 export default {
   title: 'Admiral-2.1/CheckboxCompositeGroup',
@@ -27,6 +29,12 @@ export default {
     disabled: {
       control: { type: 'boolean' },
     },
+    themeBorderKind: {
+      control: {
+        type: 'radio',
+        options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
+      },
+    },
   },
 } as ComponentMeta<typeof CheckboxCompositeGroup>;
 
@@ -44,6 +52,11 @@ const initialValue: Array<ItemValue> = [
 ];
 
 const CheckboxCompositeGroupDemo: Story = (args: CheckboxCompositeGroupProps) => {
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
+    return theme;
+  }
+
   const [list, setValue] = useState<Array<ItemValue>>(initialValue);
 
   const someItemChecked = () => list.some((item) => item.checked);
@@ -58,7 +71,7 @@ const CheckboxCompositeGroupDemo: Story = (args: CheckboxCompositeGroupProps) =>
   const getIndeterminateStatus = () => !list.every((item) => item.checked) && someItemChecked();
 
   return (
-    <>
+    <ThemeProvider theme={swapBorder}>
       <CheckboxCompositeGroup {...args}>
         <CheckboxField
           indeterminate={getIndeterminateStatus()}
@@ -75,7 +88,7 @@ const CheckboxCompositeGroupDemo: Story = (args: CheckboxCompositeGroupProps) =>
           ))}
         </CheckboxGroup>
       </CheckboxCompositeGroup>
-    </>
+    </ThemeProvider>
   );
 };
 

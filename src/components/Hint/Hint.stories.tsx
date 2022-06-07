@@ -1,10 +1,11 @@
 import { Button } from '#src/components/Button';
 import { Hint, HintProps } from '#src/components/Hint';
 import React, { useRef } from 'react';
-import styled, { css } from 'styled-components';
+import styled, { css, ThemeProvider } from 'styled-components';
 import { ReactComponent as HelpOutline } from '@admiral-ds/icons/build/service/HelpOutline.svg';
 import { ComponentMeta, ComponentStory, Story } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
+import { Theme } from '#src/components/themes';
 
 const Separator = styled.div<{ height?: number }>`
   height: ${({ height }) => (height ? height : 20)}px;
@@ -67,6 +68,12 @@ export default {
     isMobile: {
       control: { type: 'boolean' },
     },
+    themeBorderKind: {
+      control: {
+        type: 'radio',
+        options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
+      },
+    },
   },
 } as ComponentMeta<typeof Hint>;
 
@@ -74,14 +81,19 @@ const text = `At breakpoint boundaries, mini units divide the screen into a fixe
 of mini units map to fluid grid column widths and row heights.`;
 
 const Template1: ComponentStory<typeof Hint> = ({ anchorId, ...args }) => {
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
+    return theme;
+  }
+
   return (
-    <>
+    <ThemeProvider theme={swapBorder}>
       <Hint {...args} anchorId={anchorId}>
         <StyledButton dimension="s" aria-label="Additional information" aria-describedby={anchorId}>
           <HelpOutline height={24} width={24} aria-hidden />
         </StyledButton>
       </Hint>
-    </>
+    </ThemeProvider>
   );
 };
 

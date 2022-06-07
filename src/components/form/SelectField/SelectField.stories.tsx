@@ -3,9 +3,10 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import type { ChangeEvent } from 'react';
 import * as React from 'react';
 import { withDesign } from 'storybook-addon-designs';
-import styled, { css, keyframes } from 'styled-components';
+import styled, { css, keyframes, ThemeProvider } from 'styled-components';
 import { SelectField } from './index';
 import { Highlight, Option, OptionGroup } from '#src/components/input/Select';
+import { Theme } from '#src/components/themes';
 
 export default {
   title: 'Admiral-2.1/Form Field/SelectField',
@@ -69,6 +70,12 @@ export default {
 
     displayInline: {
       control: { type: 'boolean' },
+    },
+    themeBorderKind: {
+      control: {
+        type: 'radio',
+        options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
+      },
     },
   },
 } as ComponentMeta<typeof SelectField>;
@@ -148,9 +155,13 @@ const SimpleTemplate: ComponentStory<typeof SelectField> = (props) => {
     setSelectValue(e.target.value);
     props.onChange?.(e);
   };
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    return theme;
+  }
 
   return (
-    <>
+    <ThemeProvider theme={swapBorder}>
       <SelectField
         mode="searchSelect"
         label="label"
@@ -165,7 +176,7 @@ const SimpleTemplate: ComponentStory<typeof SelectField> = (props) => {
           </Option>
         ))}
       </SelectField>
-    </>
+    </ThemeProvider>
   );
 };
 

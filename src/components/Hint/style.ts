@@ -1,6 +1,7 @@
 import styled, { css, DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import { typography } from '#src/components/Typography';
 import { PositionInPortal } from '#src/components/PositionInPortal';
+import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 
 export const AnchorWrapper = styled.div<{ anchorCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>> }>`
   display: inline-block;
@@ -60,7 +61,6 @@ export const CloseButton = styled.button`
 export type Dimension = 's' | 'm' | 'l';
 
 const HINT_PADDING = 16;
-const HINT_BORDER_RADIUS = '4px';
 const HINT_WIDTH_S = '280px';
 const HINT_WIDTH_M = '384px';
 const HINT_WIDTH_L = '488px';
@@ -101,7 +101,7 @@ export const HintDialog = styled.div<{
   ${typography['Body/Body 2 Long']}
   color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
   ${({ theme }) => theme.shadow['Shadow 08']}
-  border-radius: ${HINT_BORDER_RADIUS};
+  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
   box-sizing: border-box;
 `;
 

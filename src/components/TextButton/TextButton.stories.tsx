@@ -1,10 +1,11 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import { ReactComponent as AttachFileOutline } from '@admiral-ds/icons/build/system/AttachFileOutline.svg';
 import { TextButton } from './index';
 import { T } from '#src/components/T';
+import { Theme } from '#src/components/themes';
 
 const StyledText = styled(T)`
   margin: 10px 0;
@@ -52,11 +53,24 @@ export default {
       },
     ],
   },
+  argTypes: {
+    themeBorderKind: {
+      control: {
+        type: 'radio',
+        options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
+      },
+    },
+  },
 } as ComponentMeta<typeof TextButton>;
 
-const TextButtonStory: ComponentStory<typeof TextButton> = () => {
+const TextButtonStory: ComponentStory<typeof TextButton> = (args) => {
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
+    return theme;
+  }
+
   return (
-    <>
+    <ThemeProvider theme={swapBorder}>
       <WrapperButton>
         <div>
           <StyledText font="Body/Body 1 Long" as="div">
@@ -109,7 +123,7 @@ const TextButtonStory: ComponentStory<typeof TextButton> = () => {
           <TextButton dimension="s" text="Text Button" appearance="secondary" />
         </div>
       </WrapperButton>
-    </>
+    </ThemeProvider>
   );
 };
 

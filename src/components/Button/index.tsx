@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import { Spinner } from '#src/components/Spinner';
 import { appearanceMixin } from './appearanceMixin';
 import { dimensionMixin } from './dimensionMixin';
+import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   /** Внешний вид кнопки */
@@ -73,7 +74,7 @@ const StyledButton = styled.button.attrs<
   box-sizing: border-box;
   display: inline-block;
   border: none;
-  border-radius: 4px;
+  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
   appearance: none;
   vertical-align: center;
 

@@ -9,6 +9,7 @@ import { ReactComponent as ErrorIcon } from '@admiral-ds/icons/build/service/Clo
 import { LIGHT_THEME as DEFAULT_THEME } from '#src/components/themes';
 import { typography } from '#src/components/Typography';
 import { Link } from '#src/components/Link';
+import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 
 type Status = 'info' | 'error' | 'success' | 'warning';
 
@@ -65,7 +66,7 @@ const NotificationWrapper = styled.div<{ status?: Status; displayStatusIcon: boo
   overflow: hidden;
   position: relative;
   box-sizing: border-box;
-  border-radius: 4px;
+  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
   padding: 12px 44px 12px 52px;
   ${(p) => (p.displayStatusIcon ? '' : 'padding-left: 16px;')}
   ${(p) => (p.isClosable ? '' : 'padding-right: 16px;')}

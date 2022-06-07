@@ -3,7 +3,7 @@ import { useRef, useState } from 'react';
 import styled from 'styled-components';
 import { ReactComponent as CalendarSVG } from '@admiral-ds/icons/build/system/CalendarOutline.svg';
 import { TextInput, TextInputProps } from '#src/components/input/TextInput';
-import { Calendar as CalendarBase, CalendarPropType } from '#src/components/Calendar';
+import { Calendar, CalendarPropType } from '#src/components/Calendar';
 import { refSetter } from '#src/components/common/utils/refSetter';
 import { defaultDateInputHandle } from '#src/components/input/DateInput/defaultDateInputHandle';
 import { changeInputData } from '#src/components/common/dom/changeInputData';
@@ -14,10 +14,6 @@ import { defaultDateRangeInputHandle } from '#src/components/input/DateInput/def
 
 const Dropdown = styled(DropdownComponent)<{ alignDropdown?: string }>`
   align-self: ${(p) => (p.alignSelf ? p.alignSelf : 'end')};
-`;
-
-const Calendar = styled(CalendarBase)`
-  border-radius: 4px;
 `;
 
 const Input = styled(TextInput)`

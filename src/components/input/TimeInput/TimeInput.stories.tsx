@@ -5,7 +5,8 @@ import { withDesign } from 'storybook-addon-designs';
 import { INPUT_DIMENSIONS_VALUES } from '#src/components/input/types';
 import { ReactComponent as GPSOutline } from '@admiral-ds/icons/build/location/GPSOutline.svg';
 import { ReactComponent as TimeSVG } from '@admiral-ds/icons/build/system/TimeOutline.svg';
-import styled from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
+import { Theme } from '#src/components/themes';
 
 const Icon = styled(TimeSVG)`
   & *[fill^='#'] {
@@ -122,6 +123,12 @@ export default {
     disabledSlots: {
       control: false,
     },
+    themeBorderKind: {
+      control: {
+        type: 'radio',
+        options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
+      },
+    },
   },
 } as ComponentMeta<typeof TimeInput>;
 
@@ -144,6 +151,7 @@ const TimeInputIconAlternative: ComponentStory<typeof TimeInput> = (props) => {
     setValue(inputValue);
     props.onChange?.(e);
   };
+
   return (
     <>
       <TimeInput
@@ -177,10 +185,16 @@ const TimeInputSimple: ComponentStory<typeof TimeInput> = (props) => {
     setValue(inputValue);
     props.onChange?.(e);
   };
+
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    return theme;
+  }
+
   return (
-    <>
+    <ThemeProvider theme={swapBorder}>
       <TimeInput {...cleanProps} style={{ maxWidth: '320px' }} value={localValue} onChange={handleChange} />
-    </>
+    </ThemeProvider>
   );
 };
 
