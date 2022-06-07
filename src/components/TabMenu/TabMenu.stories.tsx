@@ -3,6 +3,8 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import { ReactComponent as MinusCircleOutline } from '@admiral-ds/icons/build/service/MinusCircleOutline.svg';
 import { TabMenu } from '#src/components/TabMenu';
+import { Theme } from '#src/components/themes';
+import { ThemeProvider } from 'styled-components';
 
 export default {
   title: 'Admiral-2.1/TabMenu',
@@ -31,6 +33,12 @@ export default {
     },
     mobile: {
       control: { type: 'boolean' },
+    },
+    themeBorderKind: {
+      control: {
+        type: 'radio',
+        options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
+      },
     },
   },
 } as ComponentMeta<typeof TabMenu>;
@@ -159,8 +167,13 @@ const overflowTabs = [
 
 const Template1: ComponentStory<typeof TabMenu> = (args) => {
   const [selected, setSelected] = React.useState<string>('3');
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
+    return theme;
+  }
+
   return (
-    <>
+    <ThemeProvider theme={swapBorder}>
       <div style={{ display: 'flex', width: '800px' }}>
         <TabMenu
           {...args}
@@ -171,7 +184,7 @@ const Template1: ComponentStory<typeof TabMenu> = (args) => {
           tabs={tabs}
         />
       </div>
-    </>
+    </ThemeProvider>
   );
 };
 
