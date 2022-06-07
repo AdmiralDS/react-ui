@@ -88,6 +88,8 @@ export const TabMenu: React.FC<TabMenuProps> = ({
     }));
   }, [dimension, hiddenTabs]);
 
+  const isHiddenTabSelected = () => hiddenTabs.findIndex((tab) => tab.id === activeTab) != -1;
+
   const containsActiveTab: boolean = React.useMemo(
     () => model.findIndex((item) => item.id === activeTab) != -1,
     [model, activeTab],
@@ -351,7 +353,9 @@ export const TabMenu: React.FC<TabMenuProps> = ({
           disabled={hiddenTabs.length === hiddenTabs.filter((tab) => tab.disabled).length}
           onChange={(id: string) => {
             onChange(id);
-            styleUnderline(0, 0);
+            if (!isHiddenTabSelected) {
+              styleUnderline(0, 0);
+            }
           }}
           tabIndex={hiddenTabs?.filter((item) => item.id === activeTab).length ? 0 : -1}
           onKeyDown={handleMenuKeyDown}
