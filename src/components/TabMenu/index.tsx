@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { keyboardKey } from '#src/components/common/keyboardKey';
 import observeRect from '#src/components/common/observeRect';
-
 import { Badge } from '#src/components/Badge';
-import { TabOverflowMenu } from '#src/components/TabOverflowMenu';
+import { OverflowMenu } from '#src/components/OverflowMenu';
+import { MenuItem, RenderOptionProps } from '#src/components/MenuItem';
 
 import measureTab from '#src/components/TabMenu/measureTab';
 import { Tab, TabContent, TabContentWrapper, TabsWrapper, Underline, Wrapper } from '#src/components/TabMenu/style';
@@ -68,6 +68,17 @@ export const TabMenu: React.FC<TabMenuProps> = ({
 
   const visibleTabs = mobile ? tabsWithRef : tabsWithRef.slice(0, visibleTabsAmount);
   const hiddenTabs = mobile ? [] : tabsWithRef.slice(visibleTabsAmount);
+  const model = React.useMemo(() => {
+    return hiddenTabs.map(({ ref, ...item }) => ({
+      id: item.id,
+      render: (options: RenderOptionProps) => (
+        <MenuItem dimension={dimension} {...options} key={item.id}>
+          {item.content}
+        </MenuItem>
+      ),
+      disabled: item.disabled,
+    }));
+  }, [dimension, hiddenTabs]);
 
   const getNextFocus = (target: HTMLElement) => {
     let sibling: Element | null | undefined =
@@ -256,6 +267,7 @@ export const TabMenu: React.FC<TabMenuProps> = ({
       }
     }
   };
+
   return (
     <Wrapper role="tablist" ref={tablistRef} underline={underline} mobile={mobile} {...props}>
       <Underline ref={underlineRef} aria-hidden />
@@ -296,10 +308,10 @@ export const TabMenu: React.FC<TabMenuProps> = ({
         })}
       </TabsWrapper>
       {hiddenTabs.length && !mobile ? (
-        <TabOverflowMenu
+        <OverflowMenu
           ref={overflowBtnRef}
           alignSelf={alignSelf}
-          options={hiddenTabs.map(({ ref, ...item }) => item)}
+          items={model}
           selected={activeTab}
           dimension={dimension}
           disabled={hiddenTabs.length === hiddenTabs.filter((tab) => tab.disabled).length}
@@ -308,10 +320,6 @@ export const TabMenu: React.FC<TabMenuProps> = ({
             styleUnderline(0, 0);
           }}
           tabIndex={hiddenTabs?.filter((item) => item.id === activeTab).length ? 0 : -1}
-          onMenuReachTop={focusLastTab}
-          onMenuReachBottom={focusFirstTab}
-          menuFocus={menuFocus}
-          setMenuFocus={setMenuFocus}
         />
       ) : null}
     </Wrapper>
