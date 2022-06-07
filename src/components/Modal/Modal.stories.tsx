@@ -60,6 +60,7 @@ export default {
     },
     displayCloseIcon: {
       control: { type: 'boolean' },
+    },
     themeBorderKind: {
       control: {
         type: 'radio',
