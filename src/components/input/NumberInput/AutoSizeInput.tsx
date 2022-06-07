@@ -239,7 +239,7 @@ export const AutoSizeInput = React.forwardRef<HTMLInputElement, InputProps>(
       if (inputRef.current) {
         updateInputWidth(inputRef.current.value);
       }
-    }, [props.value, props.defaultValue]);
+    }, [props.value, props.defaultValue, props.dimension]);
 
     const handleMouseDown = (e: React.MouseEvent<HTMLInputElement>) => {
       // отменяю всплытие события, чтобы не сработал onMouseDown на Content и фокус не был снова установлен
