@@ -2,11 +2,18 @@ import * as React from 'react';
 import { keyboardKey } from '#src/components/common/keyboardKey';
 import observeRect from '#src/components/common/observeRect';
 import { Badge } from '#src/components/Badge';
-import { OverflowMenu } from '#src/components/OverflowMenu';
 import { MenuItem, RenderOptionProps } from '#src/components/MenuItem';
 
 import measureTab from '#src/components/TabMenu/measureTab';
-import { Tab, TabContent, TabContentWrapper, TabsWrapper, Underline, Wrapper } from '#src/components/TabMenu/style';
+import {
+  Tab,
+  TabContent,
+  TabContentWrapper,
+  TabOverflowMenu,
+  TabsWrapper,
+  Underline,
+  Wrapper,
+} from '#src/components/TabMenu/style';
 import type { Dimension } from '#src/components/TabMenu/constants';
 import { OVERFLOW_MARGIN_LEFT, OVERFLOW_SIZE_L, OVERFLOW_SIZE_M } from '#src/components/TabMenu/constants';
 
@@ -79,6 +86,11 @@ export const TabMenu: React.FC<TabMenuProps> = ({
       disabled: item.disabled,
     }));
   }, [dimension, hiddenTabs]);
+
+  const containsActiveTab: boolean = React.useMemo(
+    () => model.findIndex((item) => item.id === activeTab) != -1,
+    [model, activeTab],
+  );
 
   const getNextFocus = (target: HTMLElement) => {
     let sibling: Element | null | undefined =
@@ -308,12 +320,13 @@ export const TabMenu: React.FC<TabMenuProps> = ({
         })}
       </TabsWrapper>
       {hiddenTabs.length && !mobile ? (
-        <OverflowMenu
+        <TabOverflowMenu
           ref={overflowBtnRef}
           alignSelf={alignSelf}
           items={model}
           selected={activeTab}
           dimension={dimension}
+          isActive={containsActiveTab}
           disabled={hiddenTabs.length === hiddenTabs.filter((tab) => tab.disabled).length}
           onChange={(id: string) => {
             onChange(id);
