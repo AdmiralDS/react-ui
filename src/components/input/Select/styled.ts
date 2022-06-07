@@ -4,7 +4,7 @@ import { Dropdown as DropComponent } from '#src/components/Dropdown';
 import type { ComponentDimension } from '#src/components/input/types';
 import { ReactComponent as CloseOutlineSvg } from '@admiral-ds/icons/build/service/CloseOutline.svg';
 import { CHIP_OFFSET, COUNTER_WIDTH } from './constants';
-import { mediumGroupBorderRadius } from '#src/components/common/utils/borderRadius';
+import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 
 const getSelectValueHeight = (dimension?: ComponentDimension, multiple?: boolean) =>
   dimension === 's' && !multiple ? 20 : 24;

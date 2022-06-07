@@ -6,7 +6,7 @@ import * as React from 'react';
 import { InputHTMLAttributes, ReactNode } from 'react';
 import styled, { css } from 'styled-components';
 import { acceptFile, Dimension } from './utils';
-import { mediumGroupBorderRadius } from '#src/components/common/utils/borderRadius';
+import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 
 export * from './FileInfo';
 

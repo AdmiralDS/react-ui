@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 import { typography } from '#src/components/Typography';
 
 import { ReactComponent as StepSvg } from '#src/components/Stepper/svg/Step.svg';
-import { mediumGroupBorderRadius } from '#src/components/common/utils/borderRadius';
+import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 
 type Orientation = 'horizontal' | 'vertical';
 

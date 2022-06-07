@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { PositionInPortal } from '#src/components/PositionInPortal';
 import { typography } from '#src/components/Typography';
-import { smallGroupBorderRadius } from '#src/components/common/utils/borderRadius';
+import { smallGroupBorderRadius } from '#src/components/themes/borderRadius';
 
 const TOOLTIP_PADDING = '4px 8px';
 

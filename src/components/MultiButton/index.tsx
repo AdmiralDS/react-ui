@@ -7,7 +7,7 @@ import { Dropdown } from '#src/components/Dropdown';
 import { DropDownItem } from '#src/components/DropDownItem';
 import { keyboardKey } from '#src/components/common/keyboardKey';
 import { Shape } from '#src/components/themes/common';
-import { singleMediumGroupBorderRadius } from '#src/components/common/utils/borderRadius';
+import { singleMediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 
 function mainButtonBorderRadius(shape: Shape): string {
   const radius = singleMediumGroupBorderRadius(shape);

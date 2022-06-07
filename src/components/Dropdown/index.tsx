@@ -6,7 +6,7 @@ import { useInterval } from '#src/components/common/hooks/useInterval';
 import { keyboardKey } from '#src/components/common/keyboardKey';
 import { moveFocus, nextItem, previousItem } from '#src/components/Dropdown/utils';
 import { refSetter } from '#src/components/common/utils/refSetter';
-import { mediumGroupBorderRadius } from '#src/components/common/utils/borderRadius';
+import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 
 const Container = styled.div<{ alignSelf?: string }>`
   pointer-events: initial;

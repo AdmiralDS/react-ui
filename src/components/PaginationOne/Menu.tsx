@@ -6,7 +6,7 @@ import { typography } from '#src/components/Typography';
 import { DropDownItem } from '#src/components/DropDownItem';
 import { useClickOutside } from '#src/components/common/hooks/useClickOutside';
 import { Dropdown } from '#src/components/Dropdown';
-import { mediumGroupBorderRadius } from '#src/components/common/utils/borderRadius';
+import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 
 const Button = styled.button<{ $menuOpened?: boolean }>`
   position: relative;

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { uid } from '#src/components/common/uid';
-import { smallGroupBorderRadius } from '#src/components/common/utils/borderRadius';
+import { smallGroupBorderRadius } from '#src/components/themes/borderRadius';
 
 const Wrapper = styled.ul`
   position: relative;

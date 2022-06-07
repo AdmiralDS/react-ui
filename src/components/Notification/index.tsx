@@ -9,7 +9,7 @@ import { ReactComponent as ErrorIcon } from '@admiral-ds/icons/build/service/Clo
 import { LIGHT_THEME as DEFAULT_THEME } from '#src/components/themes';
 import { typography } from '#src/components/Typography';
 import { Link } from '#src/components/Link';
-import { mediumGroupBorderRadius } from '#src/components/common/utils/borderRadius';
+import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 
 type Status = 'info' | 'error' | 'success' | 'warning';
 

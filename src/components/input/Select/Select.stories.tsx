@@ -10,7 +10,7 @@ import { Button } from '#src/components/Button';
 import { useState } from '@storybook/addons';
 import styled, { css, keyframes, ThemeProvider } from 'styled-components';
 import { Theme } from '#src/components/themes';
-import { mediumGroupBorderRadius } from '#src/components/common/utils/borderRadius';
+import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 
 export default {
   title: 'Admiral-2.1/Input/Select',

@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components';
 import { ReactComponent as CheckSVG } from './Success.svg';
 import { ReactComponent as IndeterminateSVG } from './Minus.svg';
 import type { CheckboxDimension } from './CheckboxDimension';
-import { smallGroupBorderRadius } from '#src/components/common/utils/borderRadius';
+import { smallGroupBorderRadius } from '#src/components/themes/borderRadius';
 
 export interface CheckBoxProps extends InputHTMLAttributes<HTMLInputElement> {
   dimension?: CheckboxDimension;

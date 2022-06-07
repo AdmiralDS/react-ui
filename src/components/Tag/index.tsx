@@ -2,7 +2,7 @@ import * as React from 'react';
 import styled, { css } from 'styled-components';
 import { Tooltip } from '#src/components/Tooltip';
 import { typography } from '#src/components/Typography';
-import { smallGroupBorderRadius } from '#src/components/common/utils/borderRadius';
+import { smallGroupBorderRadius } from '#src/components/themes/borderRadius';
 
 type Dimension = 'm' | 's';
 

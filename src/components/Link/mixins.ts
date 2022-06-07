@@ -1,7 +1,7 @@
 import { css } from 'styled-components';
 import type { AppearanceLink, Dimension } from '#src/components/Link/LinkComponent';
 import { TYPOGRAPHY } from '#src/components/Typography';
-import { mediumGroupBorderRadius } from '#src/components/common/utils/borderRadius';
+import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 
 export const styleDisabledMixin = css<{ disabled: boolean }>`
   color: ${({ theme }) => theme.color['Neutral/Neutral 30']};

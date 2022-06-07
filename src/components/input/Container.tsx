@@ -1,6 +1,6 @@
 import { ComponentDimension } from '#src/components/input/types';
 import styled, { css } from 'styled-components';
-import { mediumGroupBorderRadius } from '#src/components/common/utils/borderRadius';
+import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 
 export const containerHeights = css<{ dimension?: ComponentDimension }>`
   height: ${({ dimension }) => {

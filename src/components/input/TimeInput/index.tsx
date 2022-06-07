@@ -10,7 +10,7 @@ import { Dropdown } from '#src/components/Dropdown';
 import { Slot, SlotProps } from './Slot';
 import { getTimeInMinutes, parseStringToTime } from './utils';
 import { typography } from '#src/components/Typography';
-import { mediumGroupBorderRadius } from '#src/components/common/utils/borderRadius';
+import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 
 const slots: SlotProps[] = [
   { value: '00:00', disabled: false },

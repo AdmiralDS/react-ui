@@ -2,7 +2,7 @@ import type { ButtonHTMLAttributes, FC } from 'react';
 import * as React from 'react';
 import styled from 'styled-components';
 import { Spinner } from '#src/components/Spinner';
-import { mediumGroupBorderRadius } from '#src/components/common/utils/borderRadius';
+import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 
 type Dimension = 'xl' | 'l' | 'm' | 's';
 

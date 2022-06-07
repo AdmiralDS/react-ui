@@ -15,7 +15,7 @@ import type { ForwardedRef, InputHTMLAttributes } from 'react';
 import * as React from 'react';
 import styled, { css } from 'styled-components';
 import { StatusIcon } from '../StatusIcon';
-import { singleMediumGroupBorderRadius } from '#src/components/common/utils/borderRadius';
+import { singleMediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 
 const EyeCloseIcon = styled(EyeCloseOutlineSvg)`
   & *[fill^='#'] {

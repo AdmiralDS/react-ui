@@ -1,7 +1,7 @@
 import { css } from 'styled-components';
 import { IconContainer, skeletonMixin } from '#src/components/TextButton/commonMixin';
 import { StyledButtonProps } from '#src/components/TextButton/types';
-import { mediumGroupBorderRadius } from '#src/components/common/utils/borderRadius';
+import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 
 const defaultAppearanceMixin = css<StyledButtonProps>`
   ${IconContainer} {

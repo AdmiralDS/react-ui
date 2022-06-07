@@ -6,7 +6,7 @@ import * as React from 'react';
 import ReactDOM from 'react-dom';
 import styled, { css, Interpolation } from 'styled-components';
 import ModalManager from './manager';
-import { largeGroupBorderRadius } from '#src/components/common/utils/borderRadius';
+import { largeGroupBorderRadius } from '#src/components/themes/borderRadius';
 
 type Dimension = 'xl' | 'l' | 'm' | 's';
 

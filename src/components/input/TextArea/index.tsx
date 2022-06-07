@@ -7,7 +7,7 @@ import type { ForwardedRef, TextareaHTMLAttributes } from 'react';
 import * as React from 'react';
 import styled, { css } from 'styled-components';
 import { StatusIcon } from '../StatusIcon';
-import { mediumGroupBorderRadius } from '#src/components/common/utils/borderRadius';
+import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 
 const ClearIcon = styled(CloseOutlineSvg)`
   & *[fill^='#'] {

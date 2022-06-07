@@ -6,7 +6,7 @@ import { Appearance, Dimension, StyledButtonProps } from './types';
 import { appearanceMixin } from './appearanceMixin';
 import { ButtonContainer, IconContainer, skeletonMixin } from '#src/components/TextButton/commonMixin';
 import { dimensionMixin } from '#src/components/TextButton/dimensionMixin';
-import { mediumGroupBorderRadius } from '#src/components/common/utils/borderRadius';
+import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 
 const StyledSpinner = styled(Spinner)<{ dimension?: Dimension }>`
   position: absolute;
