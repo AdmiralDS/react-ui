@@ -56,26 +56,15 @@ const reverseString = (str: string) => {
   return str.split('').reverse().join('');
 };
 
-/**
- * Возвращает строку отформатированную в денежный формат
- * @param value введенная строка
- * @param precision точность (количество знаков после точки)
- * @param decimal десятичный разделитель
- * @param thousand разделитель между тысячами
- * @param prefix префикс (строка, которая выводится перед числовым значением)
- * @param suffix суффикс (строка, которая выводится после числового значения)
- * @param fillEmptyDecimals если строка должна быть отформатирована как десятичное число (т.е. precision > 0 и в строке есть decimal)
- * и данный флаг fillEmptyDecimals установлен в true, то утилита fitToCurrency проверит, сколько знаков в числе после разделителя decimal
- * и если таких знаков меньше, чем precision, недостающее количество будет заполнено нулями.
- * Например, при precision={3} строка '3.9' превратится '3.900'
- */
+export const validateThousand = (thousand: string): boolean => {
+  return /[^a-zA-Z]*/.test(thousand);
+};
+
 export function fitToCurrency(
   value: string | number,
   precision: number,
   decimal: string,
   thousand: string,
-  prefix?: string,
-  suffix?: string,
   fillEmptyDecimals?: boolean,
 ): string {
   if (value === '') {
@@ -95,6 +84,7 @@ export function fitToCurrency(
     strDecimal = strDecimal.slice(0, decimalIndex + precision + 1);
   }
 
+  const isNegative = strDecimal[0] === '-';
   // выделяем левую (целую) и правую (десятичную) части
   const left_side = isDecimal ? strDecimal.slice(0, decimalIndex) : strDecimal;
   const right_side = isDecimal ? strDecimal.slice(decimalIndex, strDecimal.length) : '';
@@ -108,10 +98,13 @@ export function fitToCurrency(
       : (previousValue += reverseString(currentValue) + thousand);
   };
   newValue =
-    reverseString(left_side)
+    reverseString(isNegative ? left_side.slice(1, left_side.length) : left_side)
       .match(/.{1,3}/g)
       ?.reduceRight(reducer, '') || '';
 
+  if (isNegative) {
+    newValue = '-' + newValue;
+  }
   if (right_side) {
     newValue += right_side;
   }
@@ -138,18 +131,5 @@ export function fitToCurrency(
     }
   }
 
-  // доставляем префикс/суффикс
-  if (prefix) {
-    newValue = `${prefix} ${newValue}`;
-  }
-
-  if (suffix) {
-    newValue = `${newValue} ${suffix}`;
-  }
-
   return newValue;
 }
-
-export const validateThousand = (thousand: string): boolean => {
-  return /[^a-zA-Z]+/.test(thousand);
-};
