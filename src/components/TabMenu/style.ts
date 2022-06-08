@@ -145,6 +145,19 @@ export const Tab = styled.button<{ dimension: Dimension; selected: boolean }>`
 `;
 
 export const TabOverflowMenu = styled(OverflowMenu)<{ isActive: boolean }>`
+  &:focus-visible {
+    &:before {
+      content: '';
+      position: absolute;
+      top: -6px;
+      left: -6px;
+      bottom: -6px;
+      right: -6px;
+      border-radius: 0;
+      border: 2px solid ${({ theme }) => theme.color['Primary/Primary 60 Main']};
+    }
+  }
+
   & svg {
     & *[fill^='#'] {
       fill: ${({ theme, isActive: isActive }) =>
