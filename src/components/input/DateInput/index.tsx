@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useRef, useState } from 'react';
 import styled from 'styled-components';
-import { ReactComponent as CalendarSVG } from '@admiral-ds/icons/build/system/CalendarOutline.svg';
+import { ReactComponent as CalendarOutlineSVG } from '@admiral-ds/icons/build/system/CalendarOutline.svg';
 import { TextInput, TextInputProps } from '#src/components/input/TextInput';
 import { Calendar, CalendarPropType } from '#src/components/Calendar';
 import { refSetter } from '#src/components/common/utils/refSetter';
@@ -22,7 +22,40 @@ const Input = styled(TextInput)`
   }
 `;
 
-const Icon = styled(CalendarSVG)`
+function CalendarIcon({
+  icon,
+  ...props
+}: {
+  icon: React.FunctionComponent<any>;
+  onClick: () => void;
+  tabIndex?: number;
+}) {
+  const Icon = icon;
+  return <Icon {...props} />;
+}
+
+const StyledCalendarIcon = styled(CalendarIcon)`
+  & *[fill^='#'] {
+    fill: ${(props) => props.theme.color['Neutral/Neutral 50']};
+  }
+
+  [disabled] & {
+    pointer-events: none;
+    & *[fill^='#'] {
+      fill: ${(props) => props.theme.color['Neutral/Neutral 30']};
+    }
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:hover *[fill^='#'] {
+    fill: ${(props) => props.theme.color['Primary/Primary 70']};
+  }
+`;
+
+const CalendarOutlineIcon = styled(CalendarOutlineSVG)`
   & *[fill^='#'] {
     fill: ${(props) => props.theme.color['Neutral/Neutral 50']};
   }
@@ -68,6 +101,11 @@ export interface DateInputProps extends TextInputProps, Omit<CalendarPropType, '
   alignDropdown?: string;
   /** Ref для календаря */
   calendarRef?: React.RefObject<HTMLDivElement>;
+
+  /**
+   * Компонент для отображения альтернативной иконки
+   */
+  icon?: React.FunctionComponent;
 }
 
 export const DateInput = React.forwardRef<HTMLInputElement, DateInputProps>(
@@ -93,6 +131,8 @@ export const DateInput = React.forwardRef<HTMLInputElement, DateInputProps>(
       onViewYearSelect,
       selected,
       calendarRef,
+      icon = CalendarOutlineSVG,
+      icons,
       ...props
     },
     ref,
@@ -159,12 +199,15 @@ export const DateInput = React.forwardRef<HTMLInputElement, DateInputProps>(
       setCalendarOpen(!isCalendarOpen);
     };
 
+    const iconArray = React.Children.toArray(icons);
+    iconArray.push(<StyledCalendarIcon icon={icon} onClick={handleButtonClick} tabIndex={0} />);
+
     return (
       <Input
         {...props}
         ref={refSetter(ref, inputRef)}
         handleInput={handleInput}
-        icons={<Icon onClick={handleButtonClick} tabIndex={0} />}
+        icons={iconArray}
         containerRef={inputContainerRef}
       >
         {isCalendarOpen && (

@@ -3,6 +3,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { DateInput } from '#src/components/input/DateInput';
 import { withDesign } from 'storybook-addon-designs';
 import { INPUT_DIMENSIONS_VALUES } from '#src/components/input/types';
+import { ReactComponent as CalendarSolidSVG } from '@admiral-ds/icons/build/system/CalendarSolid.svg';
 import { Theme } from '#src/components/themes';
 import { ThemeProvider } from 'styled-components';
 
@@ -110,3 +111,7 @@ export const DateInputStory = Template.bind({});
 DateInputStory.args = {};
 DateInputStory.argTypes = { defaultIsCalendarOpen: { type: 'boolean' } };
 DateInputStory.storyName = 'DateInput (input type="date")';
+
+export const DateInputStory2 = Template.bind({});
+DateInputStory2.args = { icon: CalendarSolidSVG };
+DateInputStory2.storyName = 'DateInput альтернативная иконка';
