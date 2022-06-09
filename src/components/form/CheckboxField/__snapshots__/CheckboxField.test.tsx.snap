@@ -81,8 +81,8 @@ fieldset[data-dimension='s'] .c2 {
   display: none;
 }
 
-.c5:not(:disabled):hover::after,
-.c5:not(:disabled):focus::after {
+.c5:hover::after,
+.c5:focus + .c5:not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
@@ -259,8 +259,8 @@ fieldset[data-dimension='s'] .c2 {
   display: none;
 }
 
-.c5:not(:disabled):hover::after,
-.c5:not(:disabled):focus::after {
+.c5:hover::after,
+.c5:focus + .c5:not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
@@ -492,8 +492,8 @@ fieldset[data-dimension='s'] .c2 {
   display: none;
 }
 
-.c5:not(:disabled):hover::after,
-.c5:not(:disabled):focus::after {
+.c5:hover::after,
+.c5:focus + .c5:not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
@@ -668,8 +668,8 @@ fieldset[data-dimension='s'] .c2 {
   display: none;
 }
 
-.c5:not(:disabled):hover::after,
-.c5:not(:disabled):focus::after {
+.c5:hover::after,
+.c5:focus + .c5:not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
@@ -899,8 +899,8 @@ fieldset[data-dimension='s'] .c2 {
   display: none;
 }
 
-.c5:not(:disabled):hover::after,
-.c5:not(:disabled):focus::after {
+.c5:hover::after,
+.c5:focus + .c5:not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
@@ -1075,8 +1075,8 @@ fieldset[data-dimension='s'] .c2 {
   display: none;
 }
 
-.c5:not(:disabled):hover::after,
-.c5:not(:disabled):focus::after {
+.c5:hover::after,
+.c5:focus + .c5:not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;

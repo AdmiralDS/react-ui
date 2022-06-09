@@ -21,36 +21,36 @@ const Description = () => (
   </Desc>
 );
 
-export default {
-  title: 'Admiral-2.1/SelectTree',
-  decorators: [withDesign],
-  component: SelectTree,
-  parameters: {
-    componentSubtitle: <Description />,
-    design: [
-      {
-        type: 'figma',
-        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=12178%3A70930',
-      },
-      {
-        type: 'figma',
-        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=12236%3A71124',
-      },
-      {
-        type: 'figma',
-        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A12752',
-      },
-    ],
-  },
-  argTypes: {
-    dimension: {
-      options: ['m', 's'],
-    },
-    expandAll: {
-      control: { type: 'boolean' },
-    },
-  },
-} as ComponentMeta<typeof SelectTree>;
+// export default {
+//   title: 'Admiral-2.1/SelectTree',
+//   decorators: [withDesign],
+//   component: SelectTree,
+//   parameters: {
+//     componentSubtitle: <Description />,
+//     design: [
+//       {
+//         type: 'figma',
+//         url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=12178%3A70930',
+//       },
+//       {
+//         type: 'figma',
+//         url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=12236%3A71124',
+//       },
+//       {
+//         type: 'figma',
+//         url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A12752',
+//       },
+//     ],
+//   },
+//   argTypes: {
+//     dimension: {
+//       options: ['m', 's'],
+//     },
+//     expandAll: {
+//       control: { type: 'boolean' },
+//     },
+//   },
+// } as ComponentMeta<typeof SelectTree>;
 
 const selectTreeListM = [
   {

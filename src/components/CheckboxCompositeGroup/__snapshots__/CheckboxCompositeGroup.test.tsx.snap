@@ -145,8 +145,8 @@ fieldset[data-dimension='s'] .c3 {
   display: block;
 }
 
-.c6:not(:disabled):hover::after,
-.c6:not(:disabled):focus::after {
+.c6:hover::after,
+.c6:focus + .c6:not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
@@ -215,8 +215,8 @@ fieldset[data-dimension='s'] .c3 {
   display: none;
 }
 
-.c12:not(:disabled):hover::after,
-.c12:not(:disabled):focus::after {
+.c12:hover::after,
+.c12:focus + .c12:not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
@@ -566,8 +566,8 @@ fieldset[data-dimension='s'] .c3 {
   display: block;
 }
 
-.c6:not(:disabled):hover::after,
-.c6:not(:disabled):focus::after {
+.c6:hover::after,
+.c6:focus + .c6:not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
@@ -636,8 +636,8 @@ fieldset[data-dimension='s'] .c3 {
   display: none;
 }
 
-.c12:not(:disabled):hover::after,
-.c12:not(:disabled):focus::after {
+.c12:hover::after,
+.c12:focus + .c12:not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
@@ -1042,8 +1042,8 @@ fieldset[data-dimension='s'] .c3 {
   display: block;
 }
 
-.c6:not(:disabled):hover::after,
-.c6:not(:disabled):focus::after {
+.c6:hover::after,
+.c6:focus + .c6:not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
@@ -1112,8 +1112,8 @@ fieldset[data-dimension='s'] .c3 {
   display: none;
 }
 
-.c12:not(:disabled):hover::after,
-.c12:not(:disabled):focus::after {
+.c12:hover::after,
+.c12:focus + .c12:not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
@@ -1451,8 +1451,8 @@ fieldset[data-dimension='s'] .c3 {
   display: block;
 }
 
-.c6:not(:disabled):hover::after,
-.c6:not(:disabled):focus::after {
+.c6:hover::after,
+.c6:focus + .c6:not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
@@ -1521,8 +1521,8 @@ fieldset[data-dimension='s'] .c3 {
   display: none;
 }
 
-.c12:not(:disabled):hover::after,
-.c12:not(:disabled):focus::after {
+.c12:hover::after,
+.c12:focus + .c12:not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
@@ -1915,8 +1915,8 @@ fieldset[data-dimension='s'] .c3 {
   display: block;
 }
 
-.c6:not(:disabled):hover::after,
-.c6:not(:disabled):focus::after {
+.c6:hover::after,
+.c6:focus + .c6:not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
@@ -1985,8 +1985,8 @@ fieldset[data-dimension='s'] .c3 {
   display: none;
 }
 
-.c12:not(:disabled):hover::after,
-.c12:not(:disabled):focus::after {
+.c12:hover::after,
+.c12:focus + .c12:not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
@@ -2324,8 +2324,8 @@ fieldset[data-dimension='s'] .c3 {
   display: block;
 }
 
-.c6:not(:disabled):hover::after,
-.c6:not(:disabled):focus::after {
+.c6:hover::after,
+.c6:focus + .c6:not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
@@ -2394,8 +2394,8 @@ fieldset[data-dimension='s'] .c3 {
   display: none;
 }
 
-.c12:not(:disabled):hover::after,
-.c12:not(:disabled):focus::after {
+.c12:hover::after,
+.c12:focus + .c12:not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
@@ -2788,8 +2788,8 @@ fieldset[data-dimension='s'] .c3 {
   display: block;
 }
 
-.c6:not(:disabled):hover::after,
-.c6:not(:disabled):focus::after {
+.c6:hover::after,
+.c6:focus + .c6:not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
@@ -2858,8 +2858,8 @@ fieldset[data-dimension='s'] .c3 {
   display: none;
 }
 
-.c12:not(:disabled):hover::after,
-.c12:not(:disabled):focus::after {
+.c12:hover::after,
+.c12:focus + .c12:not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
@@ -3197,8 +3197,8 @@ fieldset[data-dimension='s'] .c3 {
   display: block;
 }
 
-.c6:not(:disabled):hover::after,
-.c6:not(:disabled):focus::after {
+.c6:hover::after,
+.c6:focus + .c6:not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
@@ -3267,8 +3267,8 @@ fieldset[data-dimension='s'] .c3 {
   display: none;
 }
 
-.c12:not(:disabled):hover::after,
-.c12:not(:disabled):focus::after {
+.c12:hover::after,
+.c12:focus + .c12:not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
