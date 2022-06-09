@@ -1,22 +1,14 @@
 import type { HTMLAttributes, ReactNode } from 'react';
 import * as React from 'react';
 import { refSetter } from '#src/components/common/utils/refSetter';
-import { Dropdown } from '#src/components/Dropdown';
-import styled from 'styled-components';
-import { ButtonMenu } from '#src/components/ButtonMenu/ButtonMenu';
+
 import { ItemProps } from '#src/components/MenuItem';
+import { ButtonMenu } from '#src/components/ButtonMenu/ButtonMenu';
+import { uid } from '#src/components/common/uid';
+import { Button } from '#src/components/Button';
 
 export type MenuButtonDimension = 'xl' | 'l' | 'm' | 's';
 export type MenuButtonAppearance = 'primary' | 'secondary' | 'ghost' | 'white';
-
-export interface MenuButtonItem extends HTMLAttributes<HTMLLIElement> {
-  /** Содержимое опции, предназначенное для отображения */
-  display: ReactNode;
-  /** Отключение опции */
-  disabled?: boolean;
-  /** Значение опции */
-  value?: string | number | undefined;
-}
 
 export interface MenuButtonProps extends Omit<HTMLAttributes<HTMLButtonElement>, 'onChange'> {
   /** Массив опций */
@@ -42,10 +34,6 @@ export interface MenuButtonProps extends Omit<HTMLAttributes<HTMLButtonElement>,
   /** Выравнивание выпадающего меню относительно компонента https://developer.mozilla.org/en-US/docs/Web/CSS/align-self */
   alignSelf?: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
 }
-
-const StyledDropdown = styled(Dropdown)`
-  padding: 8px 0;
-`;
 
 export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
   (
@@ -76,11 +64,31 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
           items={items}
           onChange={onChange}
           ref={refSetter(ref, btnRef)}
-          dimension={dimension}
+          dimension={dimension === 'xl' ? 'l' : dimension}
           appearance={appearance}
           disabled={skeleton ? true : disabled}
           loading={loading}
           selected={selected}
+          renderContent={({ buttonRef, handleKeyDown, handleClick, statusIcon, menuState }) => {
+            return (
+              <Button
+                {...props}
+                ref={refSetter(ref, btnRef)}
+                dimension={dimension}
+                appearance={appearance}
+                disabled={disabled}
+                loading={loading}
+                onKeyDown={handleKeyDown}
+                onClick={handleClick}
+                aria-expanded={menuState}
+              >
+                {React.Children.toArray(children).map((child) =>
+                  typeof child === 'string' ? <span key={uid()}>{child}</span> : child,
+                )}
+                {statusIcon}
+              </Button>
+            );
+          }}
         >
           {children}
         </ButtonMenu>

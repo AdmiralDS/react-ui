@@ -1,9 +1,32 @@
 import * as React from 'react';
 import type { HTMLAttributes } from 'react';
-import { refSetter } from '#src/components/common/utils/refSetter';
 import type { Appearance, Dimension } from '#src/components/TextButton/types';
 import type { ItemProps } from '#src/components/MenuItem';
+import { TextButton } from '#src/components/TextButton';
+import styled from 'styled-components';
+import { IconContainer } from '#src/components/TextButton/commonMixin';
 import { ButtonMenu } from '#src/components/ButtonMenu/ButtonMenu';
+
+const StyledTextButton = styled(TextButton)<{ menuOpened?: boolean; appearance?: Appearance }>`
+  &:focus {
+    color: ${({ theme, appearance, menuOpened }) =>
+      menuOpened
+        ? appearance === 'primary'
+          ? theme.color['Primary/Primary 60 Main']
+          : theme.color['Neutral/Neutral 90']
+        : 'inherited'};
+    ${IconContainer} {
+      & *[fill^='#'] {
+        fill: ${({ theme, appearance, menuOpened }) =>
+          menuOpened
+            ? appearance === 'primary'
+              ? theme.color['Primary/Primary 60 Main']
+              : theme.color['Neutral/Neutral 50']
+            : 'inherited'};
+      }
+    }
+  }
+`;
 
 export interface TextButtonMenuProps extends Omit<HTMLAttributes<HTMLButtonElement>, 'onChange'> {
   /** Внешний вид кнопки */
@@ -47,21 +70,34 @@ export const TextButtonMenu = React.forwardRef<HTMLButtonElement, TextButtonMenu
     },
     ref,
   ) => {
-    const btnRef = React.useRef<HTMLButtonElement>(null);
-
     return (
       <ButtonMenu
-        useTextButton
         {...props}
-        ref={refSetter(ref, btnRef)}
+        ref={ref}
         dimension={dimension}
-        appearance={appearance}
-        displayRight
         disabled={disabled}
         loading={loading}
         items={items}
         selected={selected}
         onChange={onChange}
+        renderContent={({ buttonRef, handleKeyDown, handleClick, statusIcon, menuState }) => {
+          return (
+            <StyledTextButton
+              {...props}
+              ref={buttonRef}
+              dimension={dimension}
+              appearance={appearance === 'primary' ? 'primary' : 'secondary'}
+              displayRight
+              disabled={disabled}
+              loading={loading}
+              onKeyDown={handleKeyDown}
+              onClick={handleClick}
+              aria-expanded={menuState}
+              menuOpened={menuState}
+              icon={statusIcon}
+            />
+          );
+        }}
       />
     );
   },
