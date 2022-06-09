@@ -1,7 +1,7 @@
 import { withDesign } from 'storybook-addon-designs';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { TextButtonMenu } from '#src/components/TextButtonMenu/index';
-import React, { useMemo } from 'react';
+import React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import { T } from '#src/components/T';
 import { MenuItem, RenderOptionProps } from '../MenuItem';
@@ -115,7 +115,7 @@ const items = [
 
 const TextButtonMenuStory: ComponentStory<typeof TextButtonMenu> = (args) => {
   const [selected, setSelected] = React.useState<string | null>(null);
-  const model = useMemo(() => {
+  const model = React.useMemo(() => {
     return items.map((item) => ({
       id: item.id,
       render: (options: RenderOptionProps) => (
