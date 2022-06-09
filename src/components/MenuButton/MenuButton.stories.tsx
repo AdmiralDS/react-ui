@@ -3,8 +3,9 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import { ReactComponent as MinusCircleOutline } from '@admiral-ds/icons/build/service/MinusCircleOutline.svg';
 import { MenuButton, MenuButtonItem } from '../MenuButton';
-import styled from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 import { T } from '#src/components/T';
+import { Theme } from '#src/components/themes';
 
 const DarkDiv = styled.div`
   background-color: ${({ theme }) => theme.color['Special/Dark Static Neutral 00']};
@@ -128,6 +129,12 @@ export default {
     skeleton: {
       control: { type: 'boolean' },
     },
+    themeBorderKind: {
+      control: {
+        type: 'radio',
+        options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
+      },
+    },
   },
 } as ComponentMeta<typeof MenuButton>;
 
@@ -165,8 +172,13 @@ const items = [
 
 const Template1: ComponentStory<typeof MenuButton> = (args) => {
   const [selected, setSelected] = React.useState<string | null>(null);
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
+    return theme;
+  }
+
   return (
-    <>
+    <ThemeProvider theme={swapBorder}>
       <MenuButton
         {...args}
         selected={selected}
@@ -180,7 +192,7 @@ const Template1: ComponentStory<typeof MenuButton> = (args) => {
       >
         test
       </MenuButton>
-    </>
+    </ThemeProvider>
   );
 };
 

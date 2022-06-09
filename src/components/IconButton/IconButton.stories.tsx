@@ -1,10 +1,11 @@
 import React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
-import styled from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 import { IconButton } from './index';
 import { ReactComponent as StarSolid } from '@admiral-ds/icons/build/system/StarSolid.svg';
 import { T } from '#src/components/T';
+import { Theme } from '#src/components/themes';
 
 const WrapperIconButton = styled.div`
   display: flex;
@@ -56,15 +57,26 @@ export default {
     loading: {
       control: { type: 'boolean' },
     },
+    themeBorderKind: {
+      control: {
+        type: 'radio',
+        options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
+      },
+    },
     // skeleton: {
     //   control: { type: 'boolean' },
     // },
   },
 } as ComponentMeta<typeof IconButton>;
 
-const IconButtonDemo: ComponentStory<typeof IconButton> = () => {
+const IconButtonDemo: ComponentStory<typeof IconButton> = (args) => {
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
+    return theme;
+  }
+
   return (
-    <>
+    <ThemeProvider theme={swapBorder}>
       <WrapperIconButton>
         <div>
           <T font="Body/Body 1 Long" as="div">
@@ -99,7 +111,7 @@ const IconButtonDemo: ComponentStory<typeof IconButton> = () => {
           </IconButton>
         </div>
       </WrapperIconButton>
-    </>
+    </ThemeProvider>
   );
 };
 

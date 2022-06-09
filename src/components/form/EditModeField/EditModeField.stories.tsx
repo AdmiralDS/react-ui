@@ -3,6 +3,8 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { EditModeField } from './index';
 import { withDesign } from 'storybook-addon-designs';
 import { INPUT_DIMENSIONS_VALUES } from '#src/components/input/types';
+import { Theme } from '#src/components/themes';
+import { ThemeProvider } from 'styled-components';
 
 export default {
   title: 'Admiral-2.1/Form Field/EditModeField',
@@ -67,6 +69,12 @@ export default {
     icons: {
       control: false,
     },
+    themeBorderKind: {
+      control: {
+        type: 'radio',
+        options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
+      },
+    },
   },
 } as ComponentMeta<typeof EditModeField>;
 
@@ -79,10 +87,15 @@ const Template1: ComponentStory<typeof EditModeField> = (props) => {
     props.onChange?.(e);
   };
 
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    return theme;
+  }
+
   return (
-    <>
+    <ThemeProvider theme={swapBorder}>
       <EditModeField {...props} value={localValue} onChange={handleChange} label="Label" />
-    </>
+    </ThemeProvider>
   );
 };
 

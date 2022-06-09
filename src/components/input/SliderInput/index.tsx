@@ -5,6 +5,14 @@ import { TextInputProps } from '#src/components/input/TextInput';
 
 import { NumberInput } from '#src/components/input/NumberInput';
 import { clearValue, fitToCurrency, repeatStringNumTimes } from '#src/components/input/NumberInput/utils';
+import { Shape } from '#src/components/themes/common';
+import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
+
+function sliderBorderRadius(shape: Shape): string {
+  const value = mediumGroupBorderRadius(shape);
+
+  return `${value} ${value} 0 0`;
+}
 
 const Wrapper = styled.div<{ dimension: 'xl' | 'm' | 's' }>`
   position: relative;
@@ -25,9 +33,7 @@ const Slider = styled(SliderComponent)`
 `;
 
 const Input = styled(NumberInput)`
-  & > input {
-    border-radius: 4px 4px 0 0;
-  }
+  border-radius: ${(p) => sliderBorderRadius(p.theme.shape)};
 `;
 
 export interface SliderInputProps extends Omit<TextInputProps, 'onChange' | 'value'> {
@@ -85,26 +91,22 @@ export const SliderInput = React.forwardRef<HTMLInputElement, SliderInputProps>(
     const [sliderValue, setSliderValue] = React.useState<number>(minValue);
 
     React.useEffect(() => {
-      setInputValue(fitToCurrency(defaultValue, precision, decimal, thousand, prefix, suffix, true));
+      setInputValue(fitToCurrency(defaultValue, precision, decimal, thousand, true));
       setSliderValue(+clearValue(defaultValue, precision, decimal));
     }, [defaultValue]);
 
     const handleSliderChange = (e: any, value: number) => {
       const shortValue = value.toString() + '.' + repeatStringNumTimes('0', precision);
-      const fullValue = fitToCurrency(shortValue, precision, decimal, thousand, prefix, suffix);
+      const fullValue = fitToCurrency(shortValue, precision, decimal, thousand);
 
       setSliderValue(value);
       setInputValue(fullValue);
 
       onChange?.(fullValue, shortValue);
     };
-    const handleInputChange = (
-      event: React.ChangeEvent<HTMLInputElement> | React.FocusEvent<HTMLInputElement>,
-      fullStr?: string,
-      shortStr?: string,
-    ) => {
-      const full = fullStr || '';
-      const short = shortStr || '';
+    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+      const full = event.target.value;
+      const short = clearValue(full, precision, decimal);
       setInputValue(full);
       setSliderValue(+short);
 

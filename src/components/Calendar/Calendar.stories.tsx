@@ -5,6 +5,8 @@ import { Button } from '#src/components/Button';
 
 import { Calendar, CalendarPropType } from './index';
 import { ViewScreenType } from './interfaces';
+import { ThemeProvider } from 'styled-components';
+import { Theme } from '#src/components/themes';
 
 export default {
   title: 'Admiral-2.1/Calendar',
@@ -57,14 +59,26 @@ export default {
     maxDate: {
       control: false,
     },
+    themeBorderKind: {
+      control: {
+        type: 'radio',
+        options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
+      },
+    },
   },
 } as ComponentMeta<typeof Calendar>;
 
-const Template1: ComponentStory<typeof Calendar> = ({ range, ...args }: CalendarPropType) => {
+const Template1: ComponentStory<typeof Calendar> = (args) => {
   const [selected, setSelected] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
-  return range ? (
-    <>
+  const [opened, setOpened] = React.useState(false);
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
+    return theme;
+  }
+
+  return args.range ? (
+    <ThemeProvider theme={swapBorder}>
       <Calendar
         {...args}
         range
@@ -75,9 +89,9 @@ const Template1: ComponentStory<typeof Calendar> = ({ range, ...args }: Calendar
           setEndDate(value[1]);
         }}
       />
-    </>
+    </ThemeProvider>
   ) : (
-    <>
+    <ThemeProvider theme={swapBorder}>
       <Calendar
         {...args}
         selected={selected}
@@ -85,7 +99,7 @@ const Template1: ComponentStory<typeof Calendar> = ({ range, ...args }: Calendar
           setSelected(value);
         }}
       />
-    </>
+    </ThemeProvider>
   );
 };
 

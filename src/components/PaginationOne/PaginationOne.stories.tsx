@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import styled from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 import { PaginationOne } from '#src/components/PaginationOne';
 import { withDesign } from 'storybook-addon-designs';
 import { Field } from '#src/components/Field';
+import { Theme } from '#src/components/themes';
 
 const Separator = styled.div`
   width: 100%;
@@ -54,6 +55,12 @@ export default {
     forwardText: {
       control: { type: 'string' },
     },
+    themeBorderKind: {
+      control: {
+        type: 'radio',
+        options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
+      },
+    },
   },
 } as ComponentMeta<typeof PaginationOne>;
 
@@ -62,8 +69,13 @@ const Template1: ComponentStory<typeof PaginationOne> = (args) => {
   const [page, setPage] = useState(1);
   const pageSizes = [8, 20, 50, 100, 200];
   const totalElements = 100;
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
+    return theme;
+  }
+
   return (
-    <>
+    <ThemeProvider theme={swapBorder}>
       <PaginationOne
         {...args}
         onChange={({ page, pageSize }) => {
@@ -75,7 +87,7 @@ const Template1: ComponentStory<typeof PaginationOne> = (args) => {
         totalItems={totalElements}
         pageSizes={pageSizes}
       />
-    </>
+    </ThemeProvider>
   );
 };
 

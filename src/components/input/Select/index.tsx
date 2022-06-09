@@ -526,17 +526,20 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
           onMouseDown={preventDefault}
         >
           {shouldRenderSelectValue && wrappedVisibleValue}
-          <Input
-            placeholder={isEmpty ? placeholder : ''}
-            tabIndex={-1}
-            ref={inputRef}
-            disabled={modeIsSelect || disabled}
-            value={searchValue}
-            defaultValue={defaultInputValue}
-            isMultiple={multiple}
-            dimension={dimension}
-            onChange={onLocalInputChange}
-          />
+          {((placeholder && isEmpty) || !modeIsSelect) && (
+            <Input
+              placeholder={isEmpty ? placeholder : ''}
+              tabIndex={-1}
+              ref={inputRef}
+              disabled={disabled}
+              readOnly={modeIsSelect}
+              value={searchValue}
+              defaultValue={defaultInputValue}
+              isMultiple={multiple}
+              dimension={dimension}
+              onChange={onLocalInputChange}
+            />
+          )}
         </ValueWrapper>
         {isSearchPanelOpen && (
           <Dropdown

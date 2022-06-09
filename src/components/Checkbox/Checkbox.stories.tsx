@@ -4,8 +4,9 @@ import { Checkbox } from './index';
 
 import { withDesign } from 'storybook-addon-designs';
 import { ALL_DIMENSIONS_VALUES } from '#src/components/Checkbox/CheckboxDimension';
-import styled from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 import { T } from '#src/components/T';
+import { Theme } from '#src/components/themes';
 
 export default {
   title: 'Admiral-2.1/Atoms/Checkbox',
@@ -41,6 +42,12 @@ export default {
     error: {
       control: { type: 'boolean' },
     },
+    themeBorderKind: {
+      control: {
+        type: 'radio',
+        options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
+      },
+    },
   },
 } as ComponentMeta<typeof Checkbox>;
 const Container = styled.div`
@@ -68,58 +75,65 @@ const CheckboxDemo: ComponentStory<typeof Checkbox> = (props) => {
     return acc;
   }, {} as Record<any, any>);
 
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
+    return theme;
+  }
+
   const [checked, setChecked] = useState<boolean>(args.checked ?? false);
   useEffect(() => {
     setChecked(Boolean(args.checked));
   }, [args.checked]);
   return (
     <>
-      <Container>
-        <T font="Header/H6" as="div">
-          Состояния
-        </T>
-        <Row>
-          <Checkbox
-            {...args}
-            checked={checked}
-            onChange={(e) => {
-              setChecked(e.target.checked);
-            }}
-          />
-          <Checkbox dimension="s" />
-          <T font="Body/Body 1 Long" as="div">
-            Default
+      <ThemeProvider theme={swapBorder}>
+        <Container>
+          <T font="Header/H6" as="div">
+            Состояния
           </T>
-        </Row>
-        <Row>
-          <Checkbox indeterminate />
-          <Checkbox dimension="s" indeterminate />
-          <T font="Body/Body 1 Long" as="div">
-            Частично выбранный
-          </T>
-        </Row>
-        <Row>
-          <Checkbox disabled />
-          <Checkbox dimension="s" disabled />
-          <T font="Body/Body 1 Long" as="div">
-            Disable
-          </T>
-        </Row>
-        <Row>
-          <Checkbox disabled defaultChecked />
-          <Checkbox dimension="s" disabled defaultChecked />
-          <T font="Body/Body 1 Long" as="div">
-            Disable active
-          </T>
-        </Row>
-        <Row>
-          <Checkbox error />
-          <Checkbox dimension="s" error />
-          <T font="Body/Body 1 Long" as="div">
-            Состояние ошибки
-          </T>
-        </Row>
-      </Container>
+          <Row>
+            <Checkbox
+              {...args}
+              checked={checked}
+              onChange={(e) => {
+                setChecked(e.target.checked);
+              }}
+            />
+            <Checkbox dimension="s" />
+            <T font="Body/Body 1 Long" as="div">
+              Default
+            </T>
+          </Row>
+          <Row>
+            <Checkbox indeterminate />
+            <Checkbox dimension="s" indeterminate />
+            <T font="Body/Body 1 Long" as="div">
+              Частично выбранный
+            </T>
+          </Row>
+          <Row>
+            <Checkbox disabled />
+            <Checkbox dimension="s" disabled />
+            <T font="Body/Body 1 Long" as="div">
+              Disable
+            </T>
+          </Row>
+          <Row>
+            <Checkbox disabled defaultChecked />
+            <Checkbox dimension="s" disabled defaultChecked />
+            <T font="Body/Body 1 Long" as="div">
+              Disable active
+            </T>
+          </Row>
+          <Row>
+            <Checkbox error />
+            <Checkbox dimension="s" error />
+            <T font="Body/Body 1 Long" as="div">
+              Состояние ошибки
+            </T>
+          </Row>
+        </Container>
+      </ThemeProvider>
     </>
   );
 };

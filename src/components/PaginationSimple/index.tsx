@@ -1,6 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { uid } from '#src/components/common/uid';
+import { smallGroupBorderRadius } from '#src/components/themes/borderRadius';
 
 const Wrapper = styled.ul`
   position: relative;
@@ -51,7 +52,7 @@ const ItemContent = styled.div`
 const Item = styled.button`
   width: 24px;
   height: 12px;
-  border-radius: 4px;
+  border-radius: ${(p) => smallGroupBorderRadius(p.theme.shape)};
 
   position: relative;
   box-sizing: border-box;

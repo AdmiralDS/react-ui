@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components';
 import { typography } from '#src/components/Typography';
 
 import { ReactComponent as StepSvg } from '#src/components/Stepper/svg/Step.svg';
+import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 
 type Orientation = 'horizontal' | 'vertical';
 
@@ -137,7 +138,7 @@ export const StepWrapper = styled.li<{
       position: absolute;
       content: '';
       border: 2px solid ${({ theme }) => theme.color['Primary/Primary 60 Main']};
-      border-radius: 4px;
+      border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
       top: 0px;
       left: 0px;
       bottom: 0px;

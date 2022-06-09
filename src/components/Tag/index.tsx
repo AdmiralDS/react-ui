@@ -2,6 +2,7 @@ import * as React from 'react';
 import styled, { css } from 'styled-components';
 import { Tooltip } from '#src/components/Tooltip';
 import { typography } from '#src/components/Typography';
+import { smallGroupBorderRadius } from '#src/components/themes/borderRadius';
 
 type Dimension = 'm' | 's';
 
@@ -108,7 +109,7 @@ const Wrapper = styled.button<{
 
   ${({ width }) => width && `width: ${typeof width === 'number' ? `${width}px` : width};`}
   margin-top: 8px;
-  border-radius: 4px;
+  border-radius: ${(p) => smallGroupBorderRadius(p.theme.shape)};
   ${({ statusViaBackground, theme }) =>
     statusViaBackground ? wrapperBackground : `background: ${theme.color['Neutral/Neutral 10']};`}
   ${({ statusViaBackground, theme }) =>
@@ -135,7 +136,7 @@ const Wrapper = styled.button<{
       bottom: -4px;
       left: -4px;
       right: -4px;
-      border-radius: 6px;
+      border-radius: ${(p) => smallGroupBorderRadius(p.theme.shape)};
       border: 2px solid ${({ theme }) => theme.color['Primary/Primary 60 Main']};
     }
   }

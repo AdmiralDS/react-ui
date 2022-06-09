@@ -1,9 +1,10 @@
 import React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
-import styled from 'styled-components';
-
-import { NumberInput } from '.';
+import styled, { ThemeProvider } from 'styled-components';
+import { NumberInput } from '#src/components/input/NumberInput';
+import { clearValue } from '#src/components/input/NumberInput';
+import { Theme } from '#src/components/themes';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -83,20 +84,32 @@ export default {
     handleInput: {
       control: false,
     },
+    themeBorderKind: {
+      control: {
+        type: 'radio',
+        options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
+      },
+    },
   },
 } as ComponentMeta<typeof NumberInput>;
 
 const Template0: ComponentStory<typeof NumberInput> = (args) => {
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
+    return theme;
+  }
+
   return (
-    <>
+    <ThemeProvider theme={swapBorder}>
       <NumberInput
         {...args}
-        defaultValue="2.00 ₽"
-        onChange={(event, fullStr, shortStr) => {
-          console.log({ event, fullStr, shortStr });
+        prefix="От"
+        defaultValue="2.00"
+        onChange={(event) => {
+          console.log(event.target.value);
         }}
       />
-    </>
+    </ThemeProvider>
   );
 };
 
@@ -113,8 +126,8 @@ const Template2: ComponentStory<typeof NumberInput> = (args) => {
     <>
       <NumberInput
         {...args}
-        onChange={(event, fullStr, shortStr) => {
-          console.log({ event, fullStr, shortStr });
+        onChange={(event) => {
+          console.log(event.target.value);
         }}
         minValue={0}
         maxValue={2000}
@@ -128,8 +141,8 @@ const Template3: ComponentStory<typeof NumberInput> = (args) => {
     <>
       <NumberInput
         {...args}
-        onChange={(event, fullStr, shortStr) => {
-          console.log({ event, fullStr, shortStr });
+        onChange={(event) => {
+          console.log(event.target.value);
         }}
         suffix="$"
         thousand=","
@@ -164,9 +177,9 @@ const Template4: ComponentStory<typeof NumberInput> = () => {
     <>
       <NumberInput
         value={value1}
-        onChange={(event, fullStr, shortStr) => {
-          console.log({ event, fullStr, shortStr });
-          setValue1(fullStr);
+        onChange={(event) => {
+          console.log(event.target.value);
+          setValue1(event.target.value);
         }}
         prefix="From"
         suffix="$"
@@ -174,10 +187,10 @@ const Template4: ComponentStory<typeof NumberInput> = () => {
       />
       <NumberInput
         value={value2}
-        onChange={(event, fullStr, shortStr) => {
-          console.log({ event, fullStr, shortStr });
-          setValue2(fullStr);
-          setSuffix(declOfNum(Number(shortStr), ['минута', 'минуты', 'минут']));
+        onChange={(event) => {
+          console.log(event.target.value);
+          setValue2(event.target.value);
+          setSuffix(declOfNum(Number(clearValue(event.target.value, 0)), ['минута', 'минуты', 'минут']));
         }}
         suffix={suffix}
         precision={0}
@@ -250,10 +263,11 @@ Controlled.parameters = {
     },
     description: {
       story: `В случае использования контролируемого инпута в value необходимо передавать уже
-      отформатированную строку с префиксом/суффиксом/разделителем (данная строка возвращается в
-      колбеке onChange в виде параметра fullStr).\n\nБиблиотека предоставляет также утилиту fitToCurrency,
-      котороая возвращает строку отформатированную в денежном формате. В качестве параметров данная утилита принимает value -
-      значение, которое надо отформатировать, а также параметры precision, decimal, thousand, prefix, suffix.`,
+      отформатированную строку с разделителями тысяч (суффикс/префикс в value вносить не нужно).\n\nБиблиотека 
+      предоставляет утилиту fitToCurrency, котороая возвращает строку отформатированную в денежном формате. В качестве параметров 
+      данная утилита принимает value - значение, которое надо отформатировать, а также параметры precision, decimal, thousand. 
+      Также библиотека предоставляет утилиту clearValue, которая возвращает входную строку, из которой удалены все символы кроме 
+      цифр, символа decimal и минуса`,
     },
   },
 };

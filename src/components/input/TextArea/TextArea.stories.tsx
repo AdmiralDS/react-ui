@@ -3,6 +3,8 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { TextArea } from './index';
 import { withDesign } from 'storybook-addon-designs';
 import { INPUT_DIMENSIONS_VALUES } from '#src/components/input/types';
+import { Theme } from '#src/components/themes';
+import { ThemeProvider } from 'styled-components';
 
 export default {
   title: 'Admiral-2.1/Input/TextArea',
@@ -72,6 +74,12 @@ export default {
     autoHeight: {
       control: { type: 'boolean' },
     },
+    themeBorderKind: {
+      control: {
+        type: 'radio',
+        options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
+      },
+    },
   },
 } as ComponentMeta<typeof TextArea>;
 
@@ -89,10 +97,16 @@ const Template: ComponentStory<typeof TextArea> = (props) => {
     setValue(inputValue);
     props.onChange?.(e);
   };
+
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    return theme;
+  }
+
   return (
-    <>
+    <ThemeProvider theme={swapBorder}>
       <TextArea {...cleanProps} value={localValue} onChange={handleChange} />
-    </>
+    </ThemeProvider>
   );
 };
 

@@ -1,10 +1,11 @@
 import * as React from 'react';
-import styled from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import { Button } from '#src/components/Button';
 import { Toast, ToastProps, ToastProvider, useToast } from '#src/components/Toast';
 import { IdentifyToast } from '#src/components/Toast/type';
+import { Theme } from '#src/components/themes';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -87,17 +88,28 @@ export default {
     position: {
       defaultValue: 'top-right',
     },
+    themeBorderKind: {
+      control: {
+        type: 'radio',
+        options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
+      },
+    },
   },
 } as ComponentMeta<typeof Toast>;
 
 const Temp1: ComponentStory<typeof Toast> = (args: ToastProps) => {
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
+    return theme;
+  }
+
   return (
-    <>
+    <ThemeProvider theme={swapBorder}>
       <ToastProvider autoDeleteTime={args.autoDeleteTime}>
         <NotificationEmitter />
         <Toast style={{ top: 128, left: 64 }} />
       </ToastProvider>
-    </>
+    </ThemeProvider>
   );
 };
 

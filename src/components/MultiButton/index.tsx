@@ -6,27 +6,43 @@ import { Button } from '#src/components/Button';
 import { Dropdown } from '#src/components/Dropdown';
 import { DropDownItem } from '#src/components/DropDownItem';
 import { keyboardKey } from '#src/components/common/keyboardKey';
+import { Shape } from '#src/components/themes/common';
+import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
+
+function mainButtonBorderRadius(shape: Shape): string {
+  const radius = mediumGroupBorderRadius(shape);
+  return `${radius} 0 0 ${radius}`;
+}
+
+function menuButtonBorderRadius(shape: Shape): string {
+  const radius = mediumGroupBorderRadius(shape);
+  return `0 ${radius} ${radius} 0`;
+}
 
 const MainButton = styled(Button)`
   &[data-appearance~='primary'] {
-    border-radius: 4px 0 0 4px;
+    border-radius: ${(p) => mainButtonBorderRadius(p.theme.shape)};
   }
   &[data-appearance~='secondary'] {
     border-right: none;
-    border-radius: 4px 0 0 4px;
+    border-radius: ${(p) => mainButtonBorderRadius(p.theme.shape)};
   }
   &:focus {
     outline: none;
   }
 `;
 
+const StyledDropdown = styled(Dropdown)`
+  padding: 8px 0;
+`;
+
 const MenuButton = styled(Button)`
   &[data-appearance~='primary'] {
-    border-radius: 0 4px 4px 0;
+    border-radius: ${(p) => menuButtonBorderRadius(p.theme.shape)};
   }
   &[data-appearance~='secondary'] {
     border-left: none;
-    border-radius: 0 4px 4px 0;
+    border-radius: ${(p) => menuButtonBorderRadius(p.theme.shape)};
   }
   &:focus {
     outline: none;
@@ -180,7 +196,7 @@ export const MultiButton: FC<MultiButtonProps> = ({
         <Icon $menuOpened={menuOpened} />
       </MenuButton>
       {menuOpened && !disabled && (
-        <Dropdown
+        <StyledDropdown
           role="listbox"
           data-dimension={menuDimension}
           targetRef={btnRef}
@@ -223,7 +239,7 @@ export const MultiButton: FC<MultiButtonProps> = ({
               </DropDownItem>
             );
           })}
-        </Dropdown>
+        </StyledDropdown>
       )}
     </Wrapper>
   );

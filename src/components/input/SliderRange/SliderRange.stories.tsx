@@ -2,7 +2,8 @@ import React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import { SliderRange } from './index';
-import styled from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
+import { Theme } from '#src/components/themes';
 
 const Separator = styled.div`
   height: 20px;
@@ -28,7 +29,6 @@ export default {
   component: SliderRange,
   parameters: {
     componentSubtitle: <Description />,
-    layout: 'centered',
     design: [
       {
         type: 'figma',
@@ -51,15 +51,26 @@ export default {
     thousand: {
       control: { type: 'text' },
     },
+    themeBorderKind: {
+      control: {
+        type: 'radio',
+        options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
+      },
+    },
   },
 } as unknown as ComponentMeta<typeof SliderRange>;
 
 const Template1: ComponentStory<typeof SliderRange> = ({ defaultValue, onChange, ...args }) => {
   const handleChange = (value: any) => console.log(value);
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
+    return theme;
+  }
+
   return (
-    <>
+    <ThemeProvider theme={swapBorder}>
       <SliderRange defaultValue={defaultValue || ['От 2 ₽', 'До 6 ₽']} onChange={onChange || handleChange} {...args} />
-    </>
+    </ThemeProvider>
   );
 };
 

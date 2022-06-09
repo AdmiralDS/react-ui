@@ -61,6 +61,11 @@ exports[`IconButton should render component 1`] = `
   fill: #B1B5BB;
 }
 
+.c0:focus-visible {
+  outline-offset: 2px;
+  outline: #0062FF solid 2px;
+}
+
 .c1 {
   vertical-align: top;
   display: -webkit-inline-box;

@@ -5,9 +5,10 @@ import { CheckboxField } from '#src/components/form/CheckboxField';
 import { withDesign } from 'storybook-addon-designs';
 import type { CheckboxDimension } from '#src/components/Checkbox/CheckboxDimension';
 import { ALL_DIMENSIONS_VALUES } from '#src/components/Checkbox/CheckboxDimension';
-import styled from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 import { ReactComponent as InfoSolidSVG } from '@admiral-ds/icons/build/service/InfoSolid.svg';
 import { Hint } from '#src/components/Hint';
+import { Theme } from '#src/components/themes';
 
 export default {
   title: 'Admiral-2.1/Form Field/CheckboxField',
@@ -46,6 +47,12 @@ export default {
     },
     extraText: {
       control: { type: 'text' },
+    },
+    themeBorderKind: {
+      control: {
+        type: 'radio',
+        options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
+      },
     },
   },
 } as ComponentMeta<typeof CheckboxField>;
@@ -90,8 +97,14 @@ const CheckboxFieldDemo: ComponentStory<typeof CheckboxField> = (props) => {
   useEffect(() => {
     setChecked(Boolean(args.checked));
   }, [args.checked]);
+
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    return theme;
+  }
+
   return (
-    <>
+    <ThemeProvider theme={swapBorder}>
       <Container>
         <CheckboxField
           {...args}
@@ -146,7 +159,7 @@ const CheckboxFieldDemo: ComponentStory<typeof CheckboxField> = (props) => {
           </Hint>
         </CheckboxWithInformer>
       </Container>
-    </>
+    </ThemeProvider>
   );
 };
 

@@ -1,6 +1,7 @@
 import { css } from 'styled-components';
 import { IconContainer, skeletonMixin } from '#src/components/TextButton/commonMixin';
 import { StyledButtonProps } from '#src/components/TextButton/types';
+import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 
 const defaultAppearanceMixin = css<StyledButtonProps>`
   ${IconContainer} {
@@ -11,7 +12,7 @@ const defaultAppearanceMixin = css<StyledButtonProps>`
     }
   }
 
-  border-radius: 4px;
+  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
 
   &:focus-visible {
     outline-offset: 2px;

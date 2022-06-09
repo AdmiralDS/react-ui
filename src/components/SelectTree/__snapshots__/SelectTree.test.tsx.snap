@@ -59,7 +59,7 @@ fieldset[data-dimension='s'] .c4 {
   transform: translate(-50%,-50%);
   box-sizing: border-box;
   cursor: pointer;
-  border-radius: 1px;
+  border-radius: 4px;
   margin: 0;
   padding: 0;
 }
@@ -338,7 +338,7 @@ fieldset[data-dimension='s'] .c4 {
   transform: translate(-50%,-50%);
   box-sizing: border-box;
   cursor: pointer;
-  border-radius: 1px;
+  border-radius: 4px;
   margin: 0;
   padding: 0;
 }
@@ -672,7 +672,7 @@ fieldset[data-dimension='s'] .c4 {
   transform: translate(-50%,-50%);
   box-sizing: border-box;
   cursor: pointer;
-  border-radius: 1px;
+  border-radius: 4px;
   margin: 0;
   padding: 0;
 }
@@ -951,7 +951,7 @@ fieldset[data-dimension='s'] .c4 {
   transform: translate(-50%,-50%);
   box-sizing: border-box;
   cursor: pointer;
-  border-radius: 1px;
+  border-radius: 4px;
   margin: 0;
   padding: 0;
 }
@@ -1285,7 +1285,7 @@ fieldset[data-dimension='s'] .c4 {
   transform: translate(-50%,-50%);
   box-sizing: border-box;
   cursor: pointer;
-  border-radius: 1px;
+  border-radius: 4px;
   margin: 0;
   padding: 0;
 }
@@ -1564,7 +1564,7 @@ fieldset[data-dimension='s'] .c4 {
   transform: translate(-50%,-50%);
   box-sizing: border-box;
   cursor: pointer;
-  border-radius: 1px;
+  border-radius: 4px;
   margin: 0;
   padding: 0;
 }

@@ -1,6 +1,7 @@
 import { css } from 'styled-components';
 import type { AppearanceLink, Dimension } from '#src/components/Link/LinkComponent';
 import { TYPOGRAPHY } from '#src/components/Typography';
+import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 
 export const styleDisabledMixin = css<{ disabled: boolean }>`
   color: ${({ theme }) => theme.color['Neutral/Neutral 30']};
@@ -20,6 +21,8 @@ export const styleColorMixin = css<{ appearance: AppearanceLink }>`
 `;
 
 export const styleMixin = css`
+  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
+
   &:hover {
     color: ${({ theme }) => theme.color['Primary/Primary 70']};
     & *[fill^='#'] {
@@ -38,6 +41,11 @@ export const styleMixin = css`
     & *[fill^='#'] {
       fill: ${({ theme }) => theme.color['Primary/Primary 80']};
     }
+  }
+
+  &:focus-visible {
+    outline-offset: 2px;
+    outline: ${(p) => p.theme.color['Primary/Primary 60 Main']} solid 2px;
   }
 `;
 

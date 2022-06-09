@@ -3,7 +3,8 @@ import { INPUT_DIMENSIONS_VALUES } from '#src/components/input/types';
 import * as React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
-import styled from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
+import { Theme } from '#src/components/themes';
 
 export default {
   title: 'Admiral-2.1/Form Field/DateField',
@@ -69,6 +70,12 @@ export default {
     maxDate: {
       control: false,
     },
+    themeBorderKind: {
+      control: {
+        type: 'radio',
+        options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
+      },
+    },
   },
 } as ComponentMeta<typeof DateField>;
 
@@ -103,8 +110,13 @@ const Template: ComponentStory<typeof DateField> = (props) => {
     `);
   };
 
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    return theme;
+  }
+
   return (
-    <>
+    <ThemeProvider theme={swapBorder}>
       <FormContainer id="form 1" onBlur={handleFormBlur} onFocus={handleFormFocus}>
         <DateField {...props} value={localValue} onChange={handleChange} id={'date 1'} placeholder="Это placeholder" />
         <DateField required label="uncontrolled input" id={'date 2'} />
@@ -115,7 +127,7 @@ const Template: ComponentStory<typeof DateField> = (props) => {
           placeholder={'Введите отрезок времени'}
         />
       </FormContainer>
-    </>
+    </ThemeProvider>
   );
 };
 

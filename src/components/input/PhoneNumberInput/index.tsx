@@ -105,6 +105,10 @@ export const PhoneNumberInput = React.forwardRef<HTMLInputElement, PhoneNumberIn
     const containerRef = React.useRef<HTMLDivElement>(null);
     const [isOpened, setIsOpened] = React.useState<boolean>(false);
 
+    const menuDimension: MenuDimensions = useMemo(() => {
+      return dimension === 'xl' ? 'l' : dimension;
+    }, [dimension]);
+
     const countryList = React.useMemo<CountryInfo[]>(() => {
       return onlyCountries
         .reduce((acc: CountryPhoneCode[], iso3) => {
@@ -266,10 +270,6 @@ export const PhoneNumberInput = React.forwardRef<HTMLInputElement, PhoneNumberIn
       const index = countryList.findIndex((item) => item.uid === id);
       selectCountry(index);
     };
-
-    const menuDimension: MenuDimensions = useMemo(() => {
-      return dimension === 'xl' ? 'l' : dimension;
-    }, [dimension]);
 
     return (
       <PhoneContainer ref={containerRef} dimension={dimension} disabled={disabled}>

@@ -4,6 +4,8 @@ import * as React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { SuggestInput } from './index';
 import { withDesign } from 'storybook-addon-designs';
+import { Theme } from '#src/components/themes';
+import { ThemeProvider } from 'styled-components';
 
 export default {
   title: 'Admiral-2.1/Input/SuggestInput',
@@ -54,6 +56,13 @@ export default {
 
     onChange: {
       action: 'onChange',
+    },
+
+    themeBorderKind: {
+      control: {
+        type: 'radio',
+        options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
+      },
     },
   },
 } as ComponentMeta<typeof SuggestInput>;
@@ -108,16 +117,24 @@ const Template: ComponentStory<typeof SuggestInput> = (props) => {
       };
     }
   }, [isLoading]);
+
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    return theme;
+  }
+
   return (
-    <SuggestInput
-      className="suggest"
-      {...cleanProps}
-      value={localValue}
-      onInput={handleChange}
-      options={options}
-      isLoading={isLoading}
-      displayClearIcon
-    />
+    <ThemeProvider theme={swapBorder}>
+      <SuggestInput
+        className="suggest"
+        {...cleanProps}
+        value={localValue}
+        onInput={handleChange}
+        options={options}
+        isLoading={isLoading}
+        displayClearIcon
+      />
+    </ThemeProvider>
   );
 };
 

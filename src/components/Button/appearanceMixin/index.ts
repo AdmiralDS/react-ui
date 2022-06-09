@@ -5,6 +5,7 @@ import { ghostAppearanceMixin } from './ghostAppearanceMixin';
 import { whiteAppearanceMixin } from './whiteAppearanceMixin';
 import { dangerAppearanceMixin } from './dangerAppearanceMixin';
 import { successAppearanceMixin } from './successAppearanceMixin';
+import { focusVisibleStyle } from '#src/components/Button/appearanceMixin/focusVisibleStyle';
 
 export const appearanceMixin = css`
   &[data-appearance~='primary'] {
@@ -25,4 +26,6 @@ export const appearanceMixin = css`
   &[data-appearance~='success'] {
     ${successAppearanceMixin}
   }
+
+  ${focusVisibleStyle}
 `;

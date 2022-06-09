@@ -3,7 +3,8 @@ import { TextInput } from '#src/components/input';
 import React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
-import styled from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
+import { Theme } from '#src/components/themes';
 
 export default {
   title: 'Admiral-2.1/Atoms/Field',
@@ -25,6 +26,12 @@ export default {
     extraText: {
       control: { type: 'text' },
     },
+    themeBorderKind: {
+      control: {
+        type: 'radio',
+        options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
+      },
+    },
   },
 } as ComponentMeta<typeof Field>;
 const Container = styled.div`
@@ -33,8 +40,13 @@ const Container = styled.div`
   }
 `;
 const Template: ComponentStory<typeof Field> = (props) => {
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    return theme;
+  }
+
   return (
-    <>
+    <ThemeProvider theme={swapBorder}>
       <Container>
         <Field {...props}>
           <TextInput id={props.id} />
@@ -43,7 +55,7 @@ const Template: ComponentStory<typeof Field> = (props) => {
           <TextInput id="some_id" />
         </Field>
       </Container>
-    </>
+    </ThemeProvider>
   );
 };
 

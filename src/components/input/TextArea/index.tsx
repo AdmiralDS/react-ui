@@ -7,6 +7,7 @@ import type { ForwardedRef, TextareaHTMLAttributes } from 'react';
 import * as React from 'react';
 import styled, { css } from 'styled-components';
 import { StatusIcon } from '../StatusIcon';
+import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 
 const ClearIcon = styled(CloseOutlineSvg)`
   & *[fill^='#'] {
@@ -160,7 +161,7 @@ const Container = styled.div<{ disabled?: boolean; dimension?: ComponentDimensio
   display: flex;
   align-items: stretch;
   border: none;
-  border-radius: 4px;
+  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
 `;
 
 const IconPanel = styled.div<{ disabled?: boolean; dimension?: ComponentDimension }>`

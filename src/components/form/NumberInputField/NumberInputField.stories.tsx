@@ -3,6 +3,8 @@ import { INPUT_DIMENSIONS_VALUES } from '#src/components/input';
 import * as React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
+import { Theme } from '#src/components/themes';
+import { ThemeProvider } from 'styled-components';
 
 export default {
   title: 'Admiral-2.1/Form Field/NumberInputField',
@@ -89,14 +91,25 @@ export default {
     extraText: {
       control: { type: 'text' },
     },
+    themeBorderKind: {
+      control: {
+        type: 'radio',
+        options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
+      },
+    },
   },
 } as ComponentMeta<typeof NumberInputField>;
 
 const Template: ComponentStory<typeof NumberInputField> = (props) => {
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    return theme;
+  }
+
   return (
-    <>
+    <ThemeProvider theme={swapBorder}>
       <NumberInputField {...props} minValue={1000} maxValue={10000} />
-    </>
+    </ThemeProvider>
   );
 };
 
