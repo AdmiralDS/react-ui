@@ -130,6 +130,7 @@ const Template: ComponentStory<typeof SuggestInput> = (props) => {
         {...cleanProps}
         value={localValue}
         onInput={handleChange}
+        onOptionSelect={setValue}
         options={options}
         isLoading={isLoading}
         displayClearIcon
