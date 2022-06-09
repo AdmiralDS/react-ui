@@ -51,6 +51,7 @@ export * from './components/AvatarGroup';
 export * from './components/Breadcrumbs';
 export * from './components/StatusIndicator';
 export * from './components/TextButton';
+export * from './components/TextButtonMenu';
 export * from './components/skeleton/PseudoIcon';
 export * from './components/skeleton/PseudoText';
 export * from './components/common/dom/changeInputData';
