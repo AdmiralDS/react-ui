@@ -1,41 +1,30 @@
 import * as React from 'react';
 import type { HTMLAttributes } from 'react';
 import { keyboardKey } from '#src/components/common/keyboardKey';
-import { refSetter } from '#src/components/common/utils/refSetter';
 import { OpenStatusButton } from '#src/components/OpenStatusButton';
-import { TextButton, TextButtonProps } from '#src/components/TextButton';
-import type { Appearance as TextButtonAppearance } from '#src/components/TextButton/types';
-import type { MenuButtonAppearance } from '#src/components/MenuButton';
 import type { ItemProps } from '#src/components/MenuItem';
 import { DropdownContainer } from '#src/components/DropdownContainer';
 import { ItemIdentifier, Menu } from '#src/components/Menu';
-import { IconContainer } from '#src/components/TextButton/commonMixin';
-import styled from 'styled-components';
-import { Button, ButtonProps } from '#src/components/Button';
-import { uid } from '#src/components/common/uid';
+import { Dimension } from '#src/components/TextButton/types';
 
-const StyledTextButton = styled(TextButton)<{ menuOpened?: boolean; appearance?: TextButtonAppearance }>`
-  &:focus {
-    color: ${({ theme, appearance, menuOpened }) =>
-      menuOpened
-        ? appearance === 'primary'
-          ? theme.color['Primary/Primary 60 Main']
-          : theme.color['Neutral/Neutral 90']
-        : 'inherited'};
-    ${IconContainer} {
-      & *[fill^='#'] {
-        fill: ${({ theme, appearance, menuOpened }) =>
-          menuOpened
-            ? appearance === 'primary'
-              ? theme.color['Primary/Primary 60 Main']
-              : theme.color['Neutral/Neutral 50']
-            : 'inherited'};
-      }
-    }
-  }
-`;
+export interface RenderContentProps {
+  /** Ref на отрендеренный элемент */
+  buttonRef: React.RefObject<HTMLButtonElement>;
+  /** Обработчик нажатия клавиш */
+  handleKeyDown: (e: React.KeyboardEvent<HTMLButtonElement>) => void;
+  /** Обработчик клика */
+  handleClick: () => void;
+  /** Иконка для отображения статуса меню */
+  statusIcon: React.ReactNode;
+  /** Состояние меню */
+  menuState: boolean;
+}
 
-interface MenuProps extends Omit<HTMLAttributes<HTMLButtonElement>, 'onChange'> {
+export interface ButtonMenuProps extends Omit<HTMLAttributes<HTMLButtonElement>, 'onChange'> {
+  /** Размер компонента */
+  dimension?: Dimension;
+  /** Состояние загрузки */
+  loading?: boolean;
   /** Опции выпадающего списка */
   items: Array<ItemProps>;
   /** Выбранная опция */
@@ -50,26 +39,14 @@ interface MenuProps extends Omit<HTMLAttributes<HTMLButtonElement>, 'onChange'> 
   disabled?: boolean;
   /** Выравнивание выпадающего меню относительно компонента https://developer.mozilla.org/en-US/docs/Web/CSS/align-self */
   alignSelf?: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
+  /** */
+  renderContent: (options: RenderContentProps) => React.ReactNode;
 }
-
-interface TextButtonMenuProps extends Omit<TextButtonProps, 'onChange'>, MenuProps {
-  useTextButton: true;
-}
-
-interface MenuButtonMenuProps extends Omit<ButtonProps, 'onChange'>, MenuProps {
-  useTextButton: false;
-}
-
-export type ButtonMenuProps = { menuOpened?: boolean; appearance?: TextButtonAppearance | MenuButtonAppearance } & (
-  | TextButtonMenuProps
-  | MenuButtonMenuProps
-);
 
 export const ButtonMenu = React.forwardRef<HTMLButtonElement, ButtonMenuProps>(
   (
     {
       dimension = 'm',
-      appearance = 'primary',
       disabled = false,
       loading = false,
       alignSelf = 'flex-end',
@@ -78,8 +55,8 @@ export const ButtonMenu = React.forwardRef<HTMLButtonElement, ButtonMenuProps>(
       items,
       selected,
       onChange,
-      useTextButton,
       children,
+      renderContent,
       ...props
     },
     ref,
@@ -135,47 +112,16 @@ export const ButtonMenu = React.forwardRef<HTMLButtonElement, ButtonMenuProps>(
 
     return (
       <>
-        {useTextButton ? (
-          <StyledTextButton
-            {...props}
-            ref={refSetter(ref, btnRef)}
-            dimension={dimension === 's' ? 's' : 'm'}
-            appearance={appearance === 'primary' ? 'primary' : 'secondary'}
-            displayRight
-            disabled={disabled}
-            loading={loading}
-            onKeyDown={handleBtnKeyDown}
-            onClick={reverseMenu}
-            aria-expanded={menuOpened}
-            menuOpened={menuOpened}
-            icon={<OpenStatusButton $isOpen={menuOpened} aria-hidden />}
-          />
-        ) : (
-          <Button
-            {...props}
-            ref={refSetter(ref, btnRef)}
-            dimension={dimension}
-            appearance={appearance}
-            disabled={disabled}
-            loading={loading}
-            onKeyDown={handleBtnKeyDown}
-            onClick={reverseMenu}
-            aria-expanded={menuOpened}
-          >
-            {React.Children.toArray(children).map((child) =>
-              typeof child === 'string' ? <span key={uid()}>{child}</span> : child,
-            )}
-            <OpenStatusButton $isOpen={menuOpened} aria-hidden appearance={'white'} />
-          </Button>
-        )}
+        {renderContent({
+          buttonRef: btnRef,
+          handleKeyDown: handleBtnKeyDown,
+          handleClick: reverseMenu,
+          statusIcon: <OpenStatusButton $isOpen={menuOpened} aria-hidden />,
+          menuState: menuOpened,
+        })}
         {menuOpened && !loading && (
           <DropdownContainer role="listbox" alignSelf={alignSelf} targetRef={btnRef} onClickOutside={clickOutside}>
-            <Menu
-              model={items}
-              selected={selected}
-              onSelectItem={handleClick}
-              dimension={dimension === 'xl' ? 'l' : dimension}
-            />
+            <Menu model={items} selected={selected} onSelectItem={handleClick} dimension={dimension} />
           </DropdownContainer>
         )}
       </>
