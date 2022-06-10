@@ -184,7 +184,14 @@ export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps
 
     const loadingMessage = isLoading ? <SearchingPanel>Поиск совпадений</SearchingPanel> : 'Нет совпадений';
 
-    const delayBlurEffect = React.useCallback(() => window.setTimeout(() => setIsFocused(false), 200), [setIsFocused]);
+    const [blurTrigger, triggerDelayedBlur] = React.useState<undefined | unknown>();
+
+    React.useEffect(() => {
+      if (blurTrigger) {
+        const timeoutID = setTimeout(() => setIsFocused(false), 200);
+        return () => clearTimeout(timeoutID);
+      }
+    }, [blurTrigger, setIsFocused]);
 
     React.useEffect(() => {
       function onInputChange(this: HTMLInputElement) {
@@ -222,7 +229,7 @@ export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps
         }}
         onBlur={(...p) => {
           props.onBlur?.(...p);
-          delayBlurEffect();
+          triggerDelayedBlur({});
         }}
       >
         {options && isSuggestPanelOpen && (
