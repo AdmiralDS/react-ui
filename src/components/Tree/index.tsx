@@ -7,9 +7,9 @@ export type ItemIdentifier = string | number | null;
 export interface TreeProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> {
   /** Размер компонента */
   dimension?: Dimension;
-  /** Активная секция Menu */
+  /** Активная секция Tree */
   active?: ItemIdentifier;
-  /** выбранная секция Menu */
+  /** выбранная секция Tree */
   selected?: ItemIdentifier;
   /** выбранная по умолчаниию секция Tree */
   defaultSelected?: ItemIdentifier;
