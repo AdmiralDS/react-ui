@@ -532,7 +532,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
               tabIndex={-1}
               ref={inputRef}
               disabled={disabled}
-              readOnly={modeIsSelect}
+              readOnly={props.readOnly || modeIsSelect}
               value={searchValue}
               defaultValue={defaultInputValue}
               isMultiple={multiple}
@@ -573,12 +573,14 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
           {displayClearIcon && <ClearIcon id="searchSelectClearIcon" onClick={handleOnClear} aria-hidden />}
           {icons}
           {displayStatusIcon && <StatusIcon status={status} aria-hidden />}
-          <OpenStatusButton
-            $isOpen={isSearchPanelOpen}
-            data-disabled={disabled ? true : undefined}
-            onClick={handleSearchPanelToggle}
-            aria-hidden
-          />
+          {!props.readOnly && (
+            <OpenStatusButton
+              $isOpen={isSearchPanelOpen}
+              data-disabled={disabled ? true : undefined}
+              onClick={handleSearchPanelToggle}
+              aria-hidden
+            />
+          )}
         </IconPanel>
       </SelectWrapper>
     );

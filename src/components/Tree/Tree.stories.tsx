@@ -21,7 +21,7 @@ const Description = () => (
 );
 
 export default {
-  title: 'Admiral-2.1/SelectTree',
+  title: 'Admiral-2.1/Tree',
   decorators: [withDesign],
   component: Tree,
   parameters: {

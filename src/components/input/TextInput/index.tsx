@@ -306,7 +306,7 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
       iconArray.push(<StatusIcon key="status-icon" status={status} aria-hidden />);
     }
 
-    if (displayClearIcon) {
+    if (!props.readOnly && displayClearIcon) {
       iconArray.unshift(
         <ClearIcon
           key="clear-icon"
