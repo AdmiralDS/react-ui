@@ -4,15 +4,14 @@ import { keyboardKey } from '#src/components/common/keyboardKey';
 import { OpenStatusButton } from '#src/components/OpenStatusButton';
 import type { ItemProps } from '#src/components/MenuItem';
 import { DropdownContainer } from '#src/components/DropdownContainer';
-import { ItemIdentifier, Menu } from '#src/components/Menu';
-import { MenuDimensions as Dimension } from '#src/components/Menu';
+import { ItemIdentifier, Menu, MenuDimensions as Dimension } from '#src/components/Menu';
 
 export interface RenderContentProps {
   /** Ref на отрендеренный элемент */
   buttonRef: React.RefObject<HTMLButtonElement>;
   /** Обработчик нажатия клавиш */
   handleKeyDown: (e: React.KeyboardEvent<HTMLButtonElement>) => void;
-  /** Обработчик клика */
+  /** Обработчик клика мыши */
   handleClick: () => void;
   /** Иконка для отображения статуса меню */
   statusIcon: React.ReactNode;
@@ -20,7 +19,7 @@ export interface RenderContentProps {
   menuState: boolean;
 }
 
-export interface ButtonMenuProps extends Omit<HTMLAttributes<HTMLButtonElement>, 'onChange'> {
+export interface DropMenuProps extends Omit<HTMLAttributes<HTMLButtonElement>, 'onChange'> {
   /** Размер компонента */
   dimension?: Dimension;
   /** Состояние загрузки */
@@ -39,11 +38,11 @@ export interface ButtonMenuProps extends Omit<HTMLAttributes<HTMLButtonElement>,
   disabled?: boolean;
   /** Выравнивание выпадающего меню относительно компонента https://developer.mozilla.org/en-US/docs/Web/CSS/align-self */
   alignSelf?: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
-  /** */
-  renderContent: (options: RenderContentProps) => React.ReactNode;
+  /** Компонент, для которого необходимо Menu */
+  renderContentProp: (options: RenderContentProps) => React.ReactNode;
 }
 
-export const ButtonMenu = React.forwardRef<HTMLButtonElement, ButtonMenuProps>(
+export const DropMenu = React.forwardRef<HTMLButtonElement, DropMenuProps>(
   (
     {
       dimension = 'm',
@@ -56,7 +55,7 @@ export const ButtonMenu = React.forwardRef<HTMLButtonElement, ButtonMenuProps>(
       selected,
       onChange,
       children,
-      renderContent,
+      renderContentProp,
       ...props
     },
     ref,
@@ -112,7 +111,7 @@ export const ButtonMenu = React.forwardRef<HTMLButtonElement, ButtonMenuProps>(
 
     return (
       <>
-        {renderContent({
+        {renderContentProp({
           buttonRef: btnRef,
           handleKeyDown: handleBtnKeyDown,
           handleClick: reverseMenu,
@@ -129,4 +128,4 @@ export const ButtonMenu = React.forwardRef<HTMLButtonElement, ButtonMenuProps>(
   },
 );
 
-ButtonMenu.displayName = 'ButtonMenu';
+DropMenu.displayName = 'DropMenu';

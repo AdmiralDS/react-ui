@@ -3,7 +3,7 @@ import * as React from 'react';
 import { refSetter } from '#src/components/common/utils/refSetter';
 
 import { ItemProps } from '#src/components/MenuItem';
-import { ButtonMenu } from '#src/components/ButtonMenu';
+import { DropMenu } from '#src/components/DropMenu';
 import { uid } from '#src/components/common/uid';
 import { Button } from '#src/components/Button';
 
@@ -57,7 +57,7 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
 
     return (
       <>
-        <ButtonMenu
+        <DropMenu
           {...props}
           items={items}
           onChange={onChange}
@@ -66,7 +66,7 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
           disabled={skeleton ? true : disabled}
           loading={loading}
           selected={selected}
-          renderContent={({ buttonRef, handleKeyDown, handleClick, statusIcon, menuState }) => {
+          renderContentProp={({ buttonRef, handleKeyDown, handleClick, statusIcon, menuState }) => {
             return (
               <Button
                 {...props}
@@ -88,7 +88,7 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
           }}
         >
           {children}
-        </ButtonMenu>
+        </DropMenu>
       </>
     );
   },

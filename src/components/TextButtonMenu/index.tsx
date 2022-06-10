@@ -5,7 +5,7 @@ import type { ItemProps } from '#src/components/MenuItem';
 import { TextButton } from '#src/components/TextButton';
 import styled from 'styled-components';
 import { IconContainer } from '#src/components/TextButton/commonMixin';
-import { ButtonMenu } from '#src/components/ButtonMenu';
+import { DropMenu } from '#src/components/DropMenu';
 
 const StyledTextButton = styled(TextButton)<{ menuOpened?: boolean; appearance?: Appearance }>`
   &:focus {
@@ -71,7 +71,7 @@ export const TextButtonMenu = React.forwardRef<HTMLButtonElement, TextButtonMenu
     ref,
   ) => {
     return (
-      <ButtonMenu
+      <DropMenu
         {...props}
         ref={ref}
         dimension={dimension}
@@ -80,7 +80,7 @@ export const TextButtonMenu = React.forwardRef<HTMLButtonElement, TextButtonMenu
         items={items}
         selected={selected}
         onChange={onChange}
-        renderContent={({ buttonRef, handleKeyDown, handleClick, statusIcon, menuState }) => {
+        renderContentProp={({ buttonRef, handleKeyDown, handleClick, statusIcon, menuState }) => {
           return (
             <StyledTextButton
               {...props}
