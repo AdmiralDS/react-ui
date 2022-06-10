@@ -5,7 +5,7 @@ import { OpenStatusButton } from '#src/components/OpenStatusButton';
 import type { ItemProps } from '#src/components/MenuItem';
 import { DropdownContainer } from '#src/components/DropdownContainer';
 import { ItemIdentifier, Menu } from '#src/components/Menu';
-import { Dimension } from '#src/components/TextButton/types';
+import { MenuDimensions as Dimension } from '#src/components/Menu';
 
 export interface RenderContentProps {
   /** Ref на отрендеренный элемент */
