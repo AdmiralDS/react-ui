@@ -55,6 +55,7 @@ export * from './components/skeleton/PseudoIcon';
 export * from './components/skeleton/PseudoText';
 export * from './components/common/dom/changeInputData';
 export * from './components/SelectTree';
+export * from './components/Tree';
 export * from './components/Table';
 
 export { FontsVTBGroup } from './components/FontsVTBGroup';
