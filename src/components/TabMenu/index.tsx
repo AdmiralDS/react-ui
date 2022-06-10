@@ -148,7 +148,10 @@ export const TabMenu: React.FC<TabMenuProps> = ({
     if (activeTabRef && tablistRef.current) {
       // используем метод getBoundingClientRect, так как он дает точность до сотых пикселя
       const activeTabWidth = activeTabRef.getBoundingClientRect().width;
-      const activeTabLeft = activeTabRef.getBoundingClientRect().left - tablistRef.current.getBoundingClientRect().left;
+      const activeTabLeft =
+        activeTabRef.getBoundingClientRect().left -
+        tablistRef.current.getBoundingClientRect().left +
+        tablistRef.current.scrollLeft;
 
       if (activeTabLeft !== left || activeTabWidth !== underlineWidth) {
         styleUnderline(activeTabLeft, activeTabWidth);
