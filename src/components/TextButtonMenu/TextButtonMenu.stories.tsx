@@ -1,10 +1,11 @@
 import { withDesign } from 'storybook-addon-designs';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { TextButtonMenu } from '#src/components/TextButtonMenu/index';
-import React, { useMemo } from 'react';
-import styled from 'styled-components';
+import React from 'react';
+import styled, { ThemeProvider } from 'styled-components';
 import { T } from '#src/components/T';
 import { MenuItem, RenderOptionProps } from '../MenuItem';
+import { Theme } from '#src/components/themes';
 
 const StyledText = styled(T)`
   margin: 10px 0;
@@ -71,6 +72,12 @@ export default {
     text: {
       type: 'string',
     },
+    themeBorderKind: {
+      control: {
+        type: 'radio',
+        options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
+      },
+    },
   },
 } as ComponentMeta<typeof TextButtonMenu>;
 
@@ -108,7 +115,7 @@ const items = [
 
 const TextButtonMenuStory: ComponentStory<typeof TextButtonMenu> = (args) => {
   const [selected, setSelected] = React.useState<string | null>(null);
-  const model = useMemo(() => {
+  const model = React.useMemo(() => {
     return items.map((item) => ({
       id: item.id,
       render: (options: RenderOptionProps) => (
@@ -119,31 +126,37 @@ const TextButtonMenuStory: ComponentStory<typeof TextButtonMenu> = (args) => {
       disabled: item.disabled,
     }));
   }, [args.dimension]);
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
+    return theme;
+  }
 
   return (
-    <Wrapper>
-      <TextButtonMenu
-        text={args.text}
-        selected={selected}
-        dimension={args.dimension}
-        loading={args.loading}
-        disabled={args.disabled}
-        appearance={args.appearance}
-        onChange={(id) => {
-          console.log(`selected: ${id}`);
-          setSelected(id);
-        }}
-        items={model}
-        onOpen={() => console.log('open menu')}
-        onClose={() => console.log('close menu')}
-      />
-    </Wrapper>
+    <ThemeProvider theme={swapBorder}>
+      <Wrapper>
+        <TextButtonMenu
+          text={args.text}
+          selected={selected}
+          dimension={args.dimension}
+          loading={args.loading}
+          disabled={args.disabled}
+          appearance={args.appearance}
+          onChange={(id) => {
+            console.log(`selected: ${id}`);
+            setSelected(id);
+          }}
+          items={model}
+          onOpen={() => console.log('open menu')}
+          onClose={() => console.log('close menu')}
+        />
+      </Wrapper>
+    </ThemeProvider>
   );
 };
 
 const TextButtonMenuSizes: ComponentStory<typeof TextButtonMenu> = (args) => {
   const [selected, setSelected] = React.useState<string | null>(null);
-  const model = useMemo(() => {
+  const model = React.useMemo(() => {
     return items.map((item) => ({
       id: item.id,
       render: (options: RenderOptionProps) => (

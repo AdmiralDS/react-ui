@@ -13,7 +13,11 @@ Object {
 }
 
 .c3 *[fill^='#'] {
-  fill: #FFFFFF;
+  fill: #74777F;
+}
+
+.c3:hover *[fill^='#'] {
+  fill: #0046E2;
 }
 
 .c3[data-disabled] {
@@ -406,7 +410,11 @@ Object {
 }
 
 .c3 *[fill^='#'] {
-  fill: #FFFFFF;
+  fill: #74777F;
+}
+
+.c3:hover *[fill^='#'] {
+  fill: #0046E2;
 }
 
 .c3[data-disabled] {
@@ -854,7 +862,11 @@ Object {
 }
 
 .c5 *[fill^='#'] {
-  fill: #FFFFFF;
+  fill: #74777F;
+}
+
+.c5:hover *[fill^='#'] {
+  fill: #0046E2;
 }
 
 .c5[data-disabled] {
@@ -1278,7 +1290,11 @@ Object {
 }
 
 .c5 *[fill^='#'] {
-  fill: #FFFFFF;
+  fill: #74777F;
+}
+
+.c5:hover *[fill^='#'] {
+  fill: #0046E2;
 }
 
 .c5[data-disabled] {
@@ -1757,7 +1773,11 @@ Object {
 }
 
 .c3 *[fill^='#'] {
-  fill: #FFFFFF;
+  fill: #74777F;
+}
+
+.c3:hover *[fill^='#'] {
+  fill: #0046E2;
 }
 
 .c3[data-disabled] {
@@ -2151,7 +2171,11 @@ Object {
 }
 
 .c3 *[fill^='#'] {
-  fill: #FFFFFF;
+  fill: #74777F;
+}
+
+.c3:hover *[fill^='#'] {
+  fill: #0046E2;
 }
 
 .c3[data-disabled] {
