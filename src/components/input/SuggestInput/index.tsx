@@ -16,7 +16,12 @@ const Dropdown = styled(DropComponent)`
   padding: 8px 0;
 `;
 
-const SearchIcon = styled(SearchOutlineSVG)`
+function AnyIcon({ icon, ...props }: { icon: React.FunctionComponent<any>; onClick?: () => void; tabIndex?: number }) {
+  const Icon = icon;
+  return <Icon {...props} />;
+}
+
+const SearchIcon = styled(AnyIcon)`
   & *[fill^='#'] {
     fill: ${(props) => props.theme.color['Neutral/Neutral 50']};
   }
@@ -99,10 +104,18 @@ export interface SuggestInputProps extends Omit<TextInputProps, 'value'> {
 
   /** Задает максимальную высоту контейнера с опциями */
   dropMaxHeight?: string | number;
+
+  /**
+   * Компонент для отображения альтернативной иконки
+   */
+  icon?: React.FunctionComponent;
 }
 
 export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps>(
-  ({ isLoading, onOptionSelect, alignDropdown, dropMaxHeight = '300px', ...props }, ref) => {
+  (
+    { isLoading, onOptionSelect, alignDropdown, dropMaxHeight = '300px', icons, icon = SearchOutlineSVG, ...props },
+    ref,
+  ) => {
     const isControlledComponentValue = undefined !== props.value;
     const { options, portalTargetRef } = props;
 
@@ -187,11 +200,14 @@ export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps
       }
     }, [props.onInput]);
 
+    const iconArray = React.Children.toArray(icons);
+    iconArray.push(<SearchIcon icon={icon} />);
+
     return (
       <TextInput
         {...props}
         ref={refSetter(ref, inputRef)}
-        icons={<SearchIcon />}
+        icons={!props.readOnly && iconArray}
         onKeyUp={(...p) => {
           props.onKeyUp?.(...p);
           handleKeyUp(...p);

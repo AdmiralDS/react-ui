@@ -2,6 +2,7 @@ import { INPUT_DIMENSIONS_VALUES } from '#src/components/input';
 import type { ChangeEvent } from 'react';
 import * as React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { ReactComponent as SearchSolidSVG } from '@admiral-ds/icons/build/system/SearchSolid.svg';
 import { SuggestInput } from './index';
 import { withDesign } from 'storybook-addon-designs';
 import { Theme } from '#src/components/themes';
@@ -130,6 +131,7 @@ const Template: ComponentStory<typeof SuggestInput> = (props) => {
         {...cleanProps}
         value={localValue}
         onInput={handleChange}
+        onOptionSelect={setValue}
         options={options}
         isLoading={isLoading}
         displayClearIcon
@@ -143,3 +145,10 @@ SuggestInputStory.args = {
   placeholder: 'Начните набирать text',
 };
 SuggestInputStory.storyName = 'Suggest Input компонент';
+
+export const SuggestInputStory2 = Template.bind({});
+SuggestInputStory2.args = {
+  placeholder: 'Начните набирать text',
+  icon: SearchSolidSVG,
+};
+SuggestInputStory2.storyName = 'Suggest Input альтернативная иконка';
