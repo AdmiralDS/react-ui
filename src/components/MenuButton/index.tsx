@@ -1,9 +1,9 @@
-import type { HTMLAttributes, ReactNode } from 'react';
+import type { HTMLAttributes } from 'react';
 import * as React from 'react';
 import { refSetter } from '#src/components/common/utils/refSetter';
 
 import { ItemProps } from '#src/components/MenuItem';
-import { ButtonMenu } from '#src/components/ButtonMenu/ButtonMenu';
+import { ButtonMenu } from '#src/components/ButtonMenu';
 import { uid } from '#src/components/common/uid';
 import { Button } from '#src/components/Button';
 

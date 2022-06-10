@@ -5,7 +5,7 @@ import type { ItemProps } from '#src/components/MenuItem';
 import { TextButton } from '#src/components/TextButton';
 import styled from 'styled-components';
 import { IconContainer } from '#src/components/TextButton/commonMixin';
-import { ButtonMenu } from '#src/components/ButtonMenu/ButtonMenu';
+import { ButtonMenu } from '#src/components/ButtonMenu';
 
 const StyledTextButton = styled(TextButton)<{ menuOpened?: boolean; appearance?: Appearance }>`
   &:focus {
