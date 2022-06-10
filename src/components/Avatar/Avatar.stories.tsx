@@ -90,7 +90,8 @@ const Template2: ComponentStory<typeof Avatar> = () => (
     </Container>
     <Text>Варианты контента (инициалы, иконка, фото)</Text>
     <Container>
-      <Avatar userName="Letter Avatar" />
+      <Avatar userName="Name" userInitials="Na" />
+      <Avatar userName="Name Surname" />
       <Avatar userName="Icon Avatar" icon={<PersonSolid />} />
       <Avatar userName="Image Avatar" href={imageURL} />
     </Container>

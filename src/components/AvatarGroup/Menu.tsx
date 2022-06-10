@@ -1,14 +1,9 @@
 import * as React from 'react';
 import { refSetter } from '#src/components/common/utils/refSetter';
 import { Dropdown } from '#src/components/Dropdown';
-import styled, { ThemeContext, ThemeProvider } from 'styled-components';
+import styled from 'styled-components';
 import type { AvatarProps } from '#src/components/Avatar';
 import { Avatar } from '#src/components/Avatar';
-import {
-  DARK_THEME as DARK_THEME_ADMIRAL1,
-  LIGHT_THEME as LIGHT_THEME_ADMIRAL1,
-  LIGHT_THEME,
-} from '#src/components/themes';
 
 const StyledDropDown = styled(Dropdown)<{ alignDropdown?: string; dropMaxHeight: string | number }>`
   padding: 8px 0;
@@ -61,7 +56,6 @@ export const Menu = React.forwardRef<HTMLDivElement, SelectProps>(
     },
     ref,
   ) => {
-    const theme = React.useContext(ThemeContext) || LIGHT_THEME;
     const [open, setOpen] = React.useState(false);
     const refWrapper = React.useRef<HTMLInputElement>(null);
 
@@ -136,17 +130,15 @@ export const Menu = React.forwardRef<HTMLDivElement, SelectProps>(
           />
         ) : null}
         {open && (
-          <ThemeProvider theme={theme.name == 'dark' ? DARK_THEME_ADMIRAL1 : LIGHT_THEME_ADMIRAL1}>
-            <StyledDropDown
-              targetRef={portalTargetRef || refWrapper}
-              data-dimension="m"
-              onClickOutside={clickOutside}
-              alignDropdown={alignDropdown}
-              dropMaxHeight={dropMaxHeight}
-            >
-              {renderChildrenDropDown()}
-            </StyledDropDown>
-          </ThemeProvider>
+          <StyledDropDown
+            targetRef={portalTargetRef || refWrapper}
+            data-dimension="m"
+            onClickOutside={clickOutside}
+            alignDropdown={alignDropdown}
+            dropMaxHeight={dropMaxHeight}
+          >
+            {renderChildrenDropDown()}
+          </StyledDropDown>
         )}
       </SelectWrapper>
     );

@@ -106,6 +106,10 @@ type Status = 'success' | 'danger' | 'warn' | 'inactive';
 export interface AvatarProps extends React.HTMLAttributes<HTMLButtonElement> {
   /** Имя пользователя, будет использовано внутри тултипа и для генерации аббревиатуры */
   userName: string;
+  /** Инициалы пользователя. По умолчанию вычисляются на основании userName - берутся первые буквы первых
+   *  двух слов (одного слова для dimension='s'), входящих в userName
+   */
+  userInitials?: string;
   /** URL аватарки пользователя */
   href?: string;
   /** Статус пользователя */
@@ -131,6 +135,7 @@ export interface AvatarInternalProps {
 
 export const Avatar = ({
   userName,
+  userInitials,
   href,
   status,
   dimension = 'xl',
@@ -148,13 +153,13 @@ export const Avatar = ({
   const hasAbbr = (!hasImage && !hasIcon) || isMenuAvatar;
 
   const maxAbbrLength = dimension === 'xs' ? 1 : 2;
-  const abbr = isMenuAvatar
-    ? userName
-    : userName
-        ?.split(' ')
-        .map((word) => word.toUpperCase()[0])
-        .join('')
-        .slice(0, maxAbbrLength);
+  const defaultUserInitials = userName
+    ?.split(' ')
+    .map((word) => word.toUpperCase()[0])
+    .join('')
+    .slice(0, maxAbbrLength);
+  const initials = userInitials ? userInitials : defaultUserInitials;
+  const abbr = isMenuAvatar ? userName : initials;
 
   const getSize = () => {
     switch (dimension) {

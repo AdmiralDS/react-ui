@@ -19,7 +19,13 @@ export default {
   decorators: [withDesign],
   component: AvatarGroup,
   parameters: {
-    componentSubtitle: <Desc>Avatar - компонент отображающий аватарку пользователя и его статус</Desc>,
+    componentSubtitle: (
+      <Desc>
+        Avatar - компонент отображающий аватарку пользователя и его статус. При необходимости компоненты Avatar можно
+        группировать. В этом случае они выстраиваются по горизонтали с отрицательным отступом -2px и внешней обводкой
+        2px в цвет фона страницы. При группировке статусы не отображаются.
+      </Desc>
+    ),
     design: {
       type: 'figma',
       url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=37%3A32367',
@@ -29,16 +35,16 @@ export default {
 
 const Template: ComponentStory<typeof AvatarGroup> = ({ onAvatarSelect, ...args }: AvatarGroupProps) => {
   const items: AvatarGroupProps['items'] = [
-    { userName: 'Lena Ivanova', icon: <PersonSolid />, status: 'warn', id: '1' },
-    { userName: 'Petr Lesov', icon: <PersonSolid />, status: 'warn', id: '2' },
-    { userName: 'Agata Petrova', icon: <PersonSolid />, status: 'warn', id: '3' },
-    { userName: 'Arina Leskova', icon: <PersonSolid />, status: 'warn', id: '4' },
-    { userName: 'Rita', appearance: 'dark', status: 'danger', id: '5' },
-    { userName: 'Drune', icon: <PersonSolid />, href: imageURL, status: 'warn', id: '6' },
-    { userName: 'Lisa Kotova', icon: <PersonSolid />, status: 'warn', id: '7' },
-    { userName: 'Ирина Глушко', icon: <PersonSolid />, status: 'warn', id: '8' },
-    { userName: 'Rosa Farrel', icon: <PersonSolid />, status: 'warn', id: '9' },
-    { userName: 'Tom Hidlton', appearance: 'dark', status: 'danger', id: '10' },
+    { userName: 'Lena Ivanova', icon: <PersonSolid />, id: '1' },
+    { userName: 'Petr Lesov', icon: <PersonSolid />, id: '2' },
+    { userName: 'Agata Petrova', icon: <PersonSolid />, id: '3' },
+    { userName: 'Arina Leskova', appearance: 'grey', id: '4' },
+    { userName: 'Rita', appearance: 'dark', id: '5' },
+    { userName: 'Drune', icon: <PersonSolid />, href: imageURL, id: '6' },
+    { userName: 'Lisa Kotova', icon: <PersonSolid />, id: '7' },
+    { userName: 'Ирина Глушко', icon: <PersonSolid />, id: '8' },
+    { userName: 'Rosa Farrel', icon: <PersonSolid />, id: '9' },
+    { userName: 'Tom Hidlton', appearance: { background: '#3F7DFE', text: '#001157' }, id: '10' },
   ];
   return (
     <>
@@ -53,16 +59,16 @@ const Template: ComponentStory<typeof AvatarGroup> = ({ onAvatarSelect, ...args 
 
 const Template2: ComponentStory<typeof AvatarGroup> = () => {
   const items: AvatarGroupProps['items'] = [
-    { userName: 'Lena Ivanova', icon: <PersonSolid />, status: 'warn', id: '1' },
-    { userName: 'Petr Lesov', icon: <PersonSolid />, status: 'warn', id: '2' },
-    { userName: 'Agata Petrova', icon: <PersonSolid />, status: 'warn', id: '3' },
-    { userName: 'Arina Leskova', icon: <PersonSolid />, status: 'warn', id: '4' },
-    { userName: 'Rita', appearance: 'dark', status: 'danger', id: '5' },
-    { userName: 'Drune', icon: <PersonSolid />, href: imageURL, status: 'warn', id: '6' },
-    { userName: 'Lisa Kotova', icon: <PersonSolid />, status: 'warn', id: '7' },
-    { userName: 'Ирина Глушко', icon: <PersonSolid />, status: 'warn', id: '8' },
-    { userName: 'Rosa Farrel', icon: <PersonSolid />, status: 'warn', id: '9' },
-    { userName: 'Tom Hidlton', appearance: 'dark', status: 'danger', id: '10' },
+    { userName: 'Lena Ivanova', icon: <PersonSolid />, id: '1' },
+    { userName: 'Petr Lesov', icon: <PersonSolid />, id: '2' },
+    { userName: 'Agata Petrova', icon: <PersonSolid />, id: '3' },
+    { userName: 'Arina Leskova', icon: <PersonSolid />, id: '4' },
+    { userName: 'Rita', appearance: 'dark', id: '5' },
+    { userName: 'Drune', icon: <PersonSolid />, href: imageURL, id: '6' },
+    { userName: 'Lisa Kotova', icon: <PersonSolid />, id: '7' },
+    { userName: 'Ирина Глушко', icon: <PersonSolid />, id: '8' },
+    { userName: 'Rosa Farrel', icon: <PersonSolid />, id: '9' },
+    { userName: 'Tom Hidlton', appearance: 'dark', id: '10' },
   ];
   return (
     <>
@@ -93,6 +99,10 @@ Width.parameters = {
   docs: {
     source: {
       type: 'code',
+    },
+    description: {
+      story: `При достижении условного максимума отображаемых аватаров, последним ставится аватар с отображением количества
+      скрытых элементов`,
     },
   },
 };
