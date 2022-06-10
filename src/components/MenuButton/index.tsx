@@ -54,7 +54,6 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
     },
     ref,
   ) => {
-    const btnRef = React.useRef<HTMLButtonElement>(null);
 
     return (
       <>
@@ -62,7 +61,7 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
           {...props}
           items={items}
           onChange={onChange}
-          ref={refSetter(ref, btnRef)}
+          ref={ref}
           dimension={dimension === 'xl' ? 'l' : dimension}
           disabled={skeleton ? true : disabled}
           loading={loading}
@@ -71,7 +70,7 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
             return (
               <Button
                 {...props}
-                ref={refSetter(ref, btnRef)}
+                ref={buttonRef}
                 dimension={dimension}
                 appearance={appearance}
                 disabled={disabled}
