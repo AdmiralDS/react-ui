@@ -60,12 +60,10 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
       <>
         <ButtonMenu
           {...props}
-          useTextButton={false}
           items={items}
           onChange={onChange}
           ref={refSetter(ref, btnRef)}
           dimension={dimension === 'xl' ? 'l' : dimension}
-          appearance={appearance}
           disabled={skeleton ? true : disabled}
           loading={loading}
           selected={selected}
