@@ -46,6 +46,9 @@ export default {
     displayClearIcon: {
       control: { type: 'boolean' },
     },
+    readOnly: {
+      control: { type: 'boolean' },
+    },
     disableCopying: {
       control: { type: 'boolean' },
     },

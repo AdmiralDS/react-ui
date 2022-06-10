@@ -55,27 +55,6 @@ const StyledCalendarIcon = styled(CalendarIcon)`
   }
 `;
 
-const CalendarOutlineIcon = styled(CalendarOutlineSVG)`
-  & *[fill^='#'] {
-    fill: ${(props) => props.theme.color['Neutral/Neutral 50']};
-  }
-
-  [disabled] & {
-    pointer-events: none;
-    & *[fill^='#'] {
-      fill: ${(props) => props.theme.color['Neutral/Neutral 30']};
-    }
-  }
-
-  &:hover {
-    cursor: pointer;
-  }
-
-  &:hover *[fill^='#'] {
-    fill: ${(props) => props.theme.color['Primary/Primary 70']};
-  }
-`;
-
 // IE11 fix toLocaleDateString('ru') extra invisible characters by using .replace(/[^ -~]/g,'')
 function defaultFormatter(isoValues: string[], joinString = ' - '): string {
   return isoValues
@@ -207,7 +186,7 @@ export const DateInput = React.forwardRef<HTMLInputElement, DateInputProps>(
         {...props}
         ref={refSetter(ref, inputRef)}
         handleInput={handleInput}
-        icons={iconArray}
+        icons={!props.readOnly && iconArray}
         containerRef={inputContainerRef}
       >
         {isCalendarOpen && (
