@@ -4,13 +4,13 @@ import { refSetter } from '#src/components/common/utils/refSetter';
 import type { Dimension } from '#src/components/OverflowMenu/Button';
 import { Button, OverflowMenuIcon } from '#src/components/OverflowMenu/Button';
 import { DropdownContainer } from '../DropdownContainer';
-import { ItemIdentifier, Menu } from '../Menu';
+import { Menu } from '../Menu';
 import type { ItemProps } from '#src/components/MenuItem';
 import { keyboardKey } from '#src/components/common/keyboardKey';
 
 export interface OverflowMenuProps extends Omit<React.HTMLAttributes<HTMLButtonElement>, 'onChange'> {
   /** Выбранная опция */
-  selected?: string | null;
+  selected?: string;
   /** Колбек на изменение выбранной опции */
   onChange?: (id: string) => void;
   /** Колбек на открытие меню */
@@ -50,7 +50,7 @@ export const OverflowMenu = React.forwardRef<HTMLButtonElement, OverflowMenuProp
     const [menuOpened, setMenuOpened] = React.useState<boolean>(false);
     const btnRef = React.useRef<HTMLButtonElement>(null);
     const iconRef = React.useRef<HTMLDivElement>(null);
-    const [active, setActive] = React.useState<ItemIdentifier>(null);
+    const [active, setActive] = React.useState<string | undefined>(undefined);
 
     const reverseMenu = (e: React.MouseEvent<HTMLButtonElement>) => {
       setMenuOpened((prevOpened) => {
@@ -74,9 +74,9 @@ export const OverflowMenu = React.forwardRef<HTMLButtonElement, OverflowMenuProp
       onClose?.();
     };
 
-    const handleClick = (selected: ItemIdentifier) => {
+    const handleClick = (selected: string) => {
       if (selected) {
-        onChange?.(selected.toString());
+        onChange?.(selected);
       }
       closeMenu();
     };

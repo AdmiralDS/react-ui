@@ -17,7 +17,7 @@ export interface RenderOptionProps {
 }
 
 export interface ItemProps {
-  id: string | number;
+  id: string;
   render: (options: RenderOptionProps) => React.ReactNode;
   disabled?: boolean;
 }

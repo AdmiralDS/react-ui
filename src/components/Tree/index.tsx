@@ -2,21 +2,19 @@ import React, { forwardRef, HTMLAttributes, useEffect, useMemo, useState } from 
 import { Dimension, TreeItemProps } from './TreeNode';
 import styled from 'styled-components';
 
-export type ItemIdentifier = string | number | null;
-
 export interface TreeProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> {
   /** Размер компонента */
   dimension?: Dimension;
   /** Активная секция Tree */
-  active?: ItemIdentifier;
+  active?: string;
   /** выбранная секция Tree */
-  selected?: ItemIdentifier;
+  selected?: string;
   /** выбранная по умолчаниию секция Tree */
-  defaultSelected?: ItemIdentifier;
-  /** Обработчик выбора item в меню */
-  onActivateItem?: (id: ItemIdentifier) => void;
-  /** Обработчик выбора item в меню */
-  onSelectItem?: (id: ItemIdentifier) => void;
+  defaultSelected?: string;
+  /** Обработчик выбора элемента дерева */
+  onActivateItem?: (id?: string) => void;
+  /** Обработчик выбора элемента дерева */
+  onSelectItem?: (id: string) => void;
   /** Обработчик изменения данных дерева */
   onChange?: (model: Array<TreeItemProps>) => void;
   /** Модель данных, с рендер-пропсами*/
@@ -70,7 +68,7 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps>(
       model,
       withCheckbox = true,
       selected,
-      defaultSelected = null,
+      defaultSelected,
       active,
       onActivateItem,
       onSelectItem,
@@ -80,18 +78,18 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps>(
     ref,
   ) => {
     const [internalModel, setInternalModel] = useState<Array<TreeItemProps>>([...model]);
-    const [selectedState, setSelectedState] = useState<ItemIdentifier>(defaultSelected);
-    const [activeState, setActiveState] = useState<ItemIdentifier>(null);
+    const [selectedState, setSelectedState] = useState<string | undefined>(defaultSelected);
+    const [activeState, setActiveState] = useState<string | undefined>(undefined);
 
     const selectedId = selected === undefined ? selectedState : selected;
     const activeId = active === undefined ? activeState : active;
 
-    const activateItem = (id: ItemIdentifier) => {
+    const activateItem = (id?: string) => {
       if (activeId !== id) setActiveState(id);
       onActivateItem?.(id);
     };
 
-    const selectItem = (id: ItemIdentifier) => {
+    const selectItem = (id: string) => {
       if (withCheckbox) {
         if (id) toggleCheck(id);
       } else {
@@ -167,7 +165,7 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps>(
               hovered: activeId === item.id,
               selected: selectedId === item.id,
               onHover: () => {
-                activateItem(item.disabled ? null : item.id);
+                activateItem(item.disabled ? undefined : item.id);
               },
               onClickItem: () => selectItem(item.id),
               onToggleExpand: () => toggleExpand(item.id),
@@ -179,7 +177,7 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps>(
     };
 
     const handleMouseLeave = () => {
-      setActiveState(null);
+      setActiveState(undefined);
     };
 
     return (
