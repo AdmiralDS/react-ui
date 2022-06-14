@@ -12,7 +12,7 @@ export interface RenderContentProps {
   /** Обработчик нажатия клавиш */
   handleKeyDown: (e: React.KeyboardEvent<HTMLButtonElement>) => void;
   /** Обработчик клика мыши */
-  handleClick: () => void;
+  handleClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
   /** Иконка для отображения статуса меню */
   statusIcon: React.ReactNode;
   /** Состояние меню */
@@ -29,13 +29,15 @@ export interface DropMenuProps extends Omit<HTMLAttributes<HTMLButtonElement>, '
   /** Выбранная опция */
   selected: string | null;
   /** Колбек на изменение выбранной опции */
-  onChange: (id: string) => void;
+  onChange?: (id: string) => void;
   /** Колбек на открытие меню */
   onOpen?: () => void;
   /** Колбек на закрытие меню */
   onClose?: () => void;
   /** Отключение компонента */
   disabled?: boolean;
+  /**  */
+  alignMenuRef?: React.RefObject<HTMLElement>;
   /** Выравнивание выпадающего меню относительно компонента https://developer.mozilla.org/en-US/docs/Web/CSS/align-self */
   alignSelf?: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
   /** Компонент, для которого необходимо Menu */
@@ -54,6 +56,9 @@ export const DropMenu = React.forwardRef<HTMLButtonElement, DropMenuProps>(
       items,
       selected,
       onChange,
+      onClick,
+      onKeyDown,
+      alignMenuRef,
       children,
       renderContentProp,
       ...props
@@ -62,12 +67,14 @@ export const DropMenu = React.forwardRef<HTMLButtonElement, DropMenuProps>(
   ) => {
     const [menuOpened, setMenuOpened] = React.useState<boolean>(false);
     const btnRef = React.useRef<HTMLButtonElement>(null);
+    const [active, setActive] = React.useState<ItemIdentifier>(null);
 
-    const reverseMenu = () => {
+    const reverseMenu = (e: React.MouseEvent<HTMLButtonElement>) => {
       setMenuOpened((prevOpened) => {
         prevOpened ? onClose?.() : onOpen?.();
         return !prevOpened;
       });
+      onClick?.(e);
     };
     const closeMenu = () => {
       setMenuOpened(false);
@@ -80,10 +87,12 @@ export const DropMenu = React.forwardRef<HTMLButtonElement, DropMenuProps>(
         return;
       }
       setMenuOpened(false);
+      onClose?.();
     };
 
     const handleBtnKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>) => {
       const code = keyboardKey.getCode(e);
+      onKeyDown?.(e);
       switch (code) {
         case keyboardKey.Escape:
           if (menuOpened) closeMenu();
@@ -119,8 +128,20 @@ export const DropMenu = React.forwardRef<HTMLButtonElement, DropMenuProps>(
           menuState: menuOpened,
         })}
         {menuOpened && !loading && (
-          <DropdownContainer role="listbox" alignSelf={alignSelf} targetRef={btnRef} onClickOutside={clickOutside}>
-            <Menu model={items} selected={selected} onSelectItem={handleClick} dimension={dimension} />
+          <DropdownContainer
+            role="listbox"
+            alignSelf={alignSelf}
+            targetRef={alignMenuRef || btnRef}
+            onClickOutside={clickOutside}
+          >
+            <Menu
+              model={items}
+              selected={selected}
+              onSelectItem={handleClick}
+              dimension={dimension}
+              active={active}
+              onActivateItem={setActive}
+            />
           </DropdownContainer>
         )}
       </>
