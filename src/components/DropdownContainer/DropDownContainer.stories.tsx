@@ -8,7 +8,6 @@ import { ReactComponent as CardSolid } from '@admiral-ds/icons/build/finance/Car
 import { withDesign } from 'storybook-addon-designs';
 import { Menu } from '#src/components/Menu';
 import { MenuItem, RenderOptionProps } from '#src/components/MenuItem';
-import type { ItemIdentifier } from '#src/components/Menu';
 import { Theme } from '#src/components/themes';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 
@@ -163,13 +162,13 @@ const TemplateWithMenu: ComponentStory<typeof DropdownContainer> = (args) => {
   }, []);
 
   const [open, setOpen] = useState(false);
-  const [selected, setSelected] = useState<ItemIdentifier>(null);
-  const [active, setActive] = useState<ItemIdentifier>(null);
+  const [selected, setSelected] = useState<string | undefined>(undefined);
+  const [active, setActive] = useState<string | undefined>(undefined);
   const buttonRef = useRef<HTMLButtonElement>(null);
 
   const { targetRef, ...other } = args;
 
-  const handleSelectItem = (value: ItemIdentifier) => {
+  const handleSelectItem = (value?: string) => {
     setSelected(value);
     setOpen(false);
   };
