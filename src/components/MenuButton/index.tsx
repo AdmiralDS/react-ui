@@ -54,7 +54,6 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
     },
     ref,
   ) => {
-
     return (
       <>
         <DropMenu
