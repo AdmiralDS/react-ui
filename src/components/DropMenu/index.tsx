@@ -4,7 +4,7 @@ import { keyboardKey } from '#src/components/common/keyboardKey';
 import { OpenStatusButton } from '#src/components/OpenStatusButton';
 import type { ItemProps } from '#src/components/MenuItem';
 import { DropdownContainer } from '#src/components/DropdownContainer';
-import { ItemIdentifier, Menu, MenuDimensions as Dimension } from '#src/components/Menu';
+import { Menu, MenuDimensions as Dimension } from '#src/components/Menu';
 
 export interface RenderContentProps {
   /** Ref на отрендеренный элемент */
@@ -27,7 +27,7 @@ export interface DropMenuProps extends Omit<HTMLAttributes<HTMLButtonElement>, '
   /** Опции выпадающего списка */
   items: Array<ItemProps>;
   /** Выбранная опция */
-  selected: string | null;
+  selected?: string;
   /** Колбек на изменение выбранной опции */
   onChange?: (id: string) => void;
   /** Колбек на открытие меню */
@@ -111,9 +111,9 @@ export const DropMenu = React.forwardRef<HTMLButtonElement, DropMenuProps>(
       }
     };
 
-    const handleClick = (selected: ItemIdentifier) => {
+    const handleClick = (selected?: string) => {
       if (selected) {
-        onChange?.(selected.toString());
+        onChange?.(selected);
       }
       closeMenu();
     };

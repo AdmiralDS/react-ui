@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { ItemIdentifier, Tree } from '#src/components/Tree';
+import { Tree } from '#src/components/Tree';
 import { TreeNode, RenderOptionProps, TreeItemProps } from '#src/components/Tree/TreeNode';
 import { withDesign } from 'storybook-addon-designs';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
@@ -326,7 +326,7 @@ const Demo2: ComponentStory<typeof Tree> = (props) => {
 
     return acc;
   }, {} as Record<any, any>);
-  const [activeItem, setActiveItem] = useState<ItemIdentifier>('1');
+  const [activeItem, setActiveItem] = useState<string | undefined>('1');
 
   return (
     <>

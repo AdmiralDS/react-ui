@@ -7,7 +7,7 @@ import { DropMenu } from '#src/components/DropMenu';
 
 export interface OverflowMenuProps extends Omit<React.HTMLAttributes<HTMLButtonElement>, 'onChange'> {
   /** Выбранная опция */
-  selected?: string | null;
+  selected?: string;
   /** Колбек на изменение выбранной опции */
   onChange?: (id: string) => void;
   /** Колбек на открытие меню */
