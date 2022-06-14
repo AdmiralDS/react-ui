@@ -87,7 +87,7 @@ const Template1: ComponentStory<typeof OverflowMenu> = (args) => {
     },
   ];
 
-  const [selected, setSelected] = React.useState<string | null>(null);
+  const [selected, setSelected] = React.useState<string | undefined>(undefined);
   const model = useMemo(() => {
     return items.map((item) => ({
       id: item.id,
@@ -161,7 +161,7 @@ const Template2: ComponentStory<typeof OverflowMenu> = (args) => {
     }));
   }, [args.dimension]);
 
-  const [selected, setSelected] = React.useState<string | null>(null);
+  const [selected, setSelected] = React.useState<string | undefined>(undefined);
 
   return (
     <DisplayBlock>
@@ -251,7 +251,7 @@ const Template3: ComponentStory<typeof OverflowMenu> = (args) => {
       disabled: item.disabled,
     }));
   }, []);
-  const [selected, setSelected] = React.useState<string | null>(null);
+  const [selected, setSelected] = React.useState<string | undefined>(undefined);
 
   return (
     <>
