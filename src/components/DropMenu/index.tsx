@@ -118,6 +118,12 @@ export const DropMenu = React.forwardRef<HTMLButtonElement, DropMenuProps>(
       closeMenu();
     };
 
+    React.useEffect(() => {
+      if (menuOpened) {
+        setActive(selected || items?.[0]?.id);
+      }
+    }, [menuOpened]);
+
     return (
       <>
         {renderContentProp({
