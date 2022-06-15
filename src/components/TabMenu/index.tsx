@@ -9,7 +9,7 @@ import {
   Tab,
   TabContent,
   TabContentWrapper,
-  TabOverflowMenu,
+  StyledOverflowMenu,
   TabsWrapper,
   Underline,
   Wrapper,
@@ -344,7 +344,7 @@ export const TabMenu: React.FC<TabMenuProps> = ({
         })}
       </TabsWrapper>
       {hiddenTabs.length && !mobile ? (
-        <TabOverflowMenu
+        <StyledOverflowMenu
           ref={overflowBtnRef}
           onOpen={() => setOpenedMenu(true)}
           onClose={() => setOpenedMenu(false)}
