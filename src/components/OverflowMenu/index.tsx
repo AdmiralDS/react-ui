@@ -52,7 +52,6 @@ export const OverflowMenu = React.forwardRef<HTMLButtonElement, OverflowMenuProp
           {...props}
           items={items}
           onChange={onChange}
-          ref={ref}
           dimension={dimension}
           disabled={disabled}
           selected={selected}
@@ -62,7 +61,7 @@ export const OverflowMenu = React.forwardRef<HTMLButtonElement, OverflowMenuProp
             return (
               <Button
                 {...props}
-                ref={buttonRef}
+                ref={ref}
                 dimension={dimension}
                 disabled={disabled}
                 menuOpened={menuState}
