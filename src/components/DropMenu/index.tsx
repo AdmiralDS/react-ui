@@ -36,7 +36,7 @@ export interface DropMenuProps extends Omit<HTMLAttributes<HTMLButtonElement>, '
   onClose?: () => void;
   /** Отключение компонента */
   disabled?: boolean;
-  /**  */
+  /**  Компонент, относительно которого необходимо выравнивать выпадающее меню */
   alignMenuRef?: React.RefObject<HTMLElement>;
   /** Выравнивание выпадающего меню относительно компонента https://developer.mozilla.org/en-US/docs/Web/CSS/align-self */
   alignSelf?: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
