@@ -57,6 +57,7 @@ export const OverflowMenu = React.forwardRef<HTMLButtonElement, OverflowMenuProp
           disabled={disabled}
           selected={selected}
           alignMenuRef={iconRef}
+          onKeyDown={onKeyDown}
           renderContentProp={({ buttonRef, handleKeyDown, handleClick, statusIcon, menuState }) => {
             return (
               <Button
