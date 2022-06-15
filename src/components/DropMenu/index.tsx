@@ -67,7 +67,7 @@ export const DropMenu = React.forwardRef<HTMLButtonElement, DropMenuProps>(
   ) => {
     const [menuOpened, setMenuOpened] = React.useState<boolean>(false);
     const btnRef = React.useRef<HTMLButtonElement>(null);
-    const [active, setActive] = React.useState<ItemIdentifier>(null);
+    const [active, setActive] = React.useState<string | undefined>();
 
     const reverseMenu = (e: React.MouseEvent<HTMLButtonElement>) => {
       setMenuOpened((prevOpened) => {
