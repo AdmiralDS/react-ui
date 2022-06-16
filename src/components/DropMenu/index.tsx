@@ -22,7 +22,7 @@ export interface RenderContentProps {
   disabled?: boolean;
 }
 
-export interface DropMenuProps extends Pick<HTMLAttributes<HTMLButtonElement>, 'onClick' | 'onKeyDown'> {
+export interface DropMenuProps extends Omit<HTMLAttributes<HTMLButtonElement>, 'onChange'> {
   /** Размер компонента */
   dimension?: Dimension;
   /** Состояние загрузки */
