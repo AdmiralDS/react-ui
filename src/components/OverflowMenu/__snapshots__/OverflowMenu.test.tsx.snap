@@ -45,7 +45,7 @@ Object {
   border-radius: 4px;
 }
 
-.c0:active {
+.c0:active:not(:disabled) {
   border-radius: 50%;
   background-color: #00000017;
 }
@@ -155,7 +155,7 @@ Object {
   border-radius: 4px;
 }
 
-.c0:active {
+.c0:active:not(:disabled) {
   border-radius: 50%;
   background-color: #00000017;
 }
