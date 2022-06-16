@@ -35,6 +35,8 @@ export const OverflowMenu = React.forwardRef<HTMLButtonElement, OverflowMenuProp
       isVertical = false,
       selected,
       onChange,
+      onOpen,
+      onClose,
       items,
       ...props
     },
@@ -50,6 +52,8 @@ export const OverflowMenu = React.forwardRef<HTMLButtonElement, OverflowMenuProp
           alignSelf={alignSelf}
           items={items}
           onChange={onChange}
+          onOpen={onOpen}
+          onClose={onClose}
           dimension={dimension}
           disabled={disabled}
           selected={selected}
