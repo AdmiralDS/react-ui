@@ -5,21 +5,24 @@ import { OpenStatusButton } from '#src/components/OpenStatusButton';
 import type { ItemProps } from '#src/components/MenuItem';
 import { DropdownContainer } from '#src/components/DropdownContainer';
 import { Menu, MenuDimensions as Dimension } from '#src/components/Menu';
+import { refSetter } from '#src/components/common/utils/refSetter';
 
 export interface RenderContentProps {
   /** Ref на отрендеренный элемент */
-  buttonRef: React.RefObject<HTMLButtonElement>;
-  /** Обработчик нажатия клавиш */
-  handleKeyDown: (e: React.KeyboardEvent<HTMLButtonElement>) => void;
-  /** Обработчик клика мыши */
-  handleClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
-  /** Иконка для отображения статуса меню */
-  statusIcon: React.ReactNode;
+  buttonRef: React.Ref<HTMLButtonElement>;
   /** Состояние меню */
   menuState: boolean;
+  /** Обработчик нажатия клавиш */
+  handleKeyDown?: (e: React.KeyboardEvent<HTMLButtonElement>) => void;
+  /** Обработчик клика мыши */
+  handleClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  /** Иконка для отображения статуса меню */
+  statusIcon?: React.ReactNode;
+  /** Доступность кнопки */
+  disabled?: boolean;
 }
 
-export interface DropMenuProps extends Omit<HTMLAttributes<HTMLButtonElement>, 'onChange'> {
+export interface DropMenuProps extends Pick<HTMLAttributes<HTMLButtonElement>, 'onClick' | 'onKeyDown'> {
   /** Размер компонента */
   dimension?: Dimension;
   /** Состояние загрузки */
@@ -59,9 +62,7 @@ export const DropMenu = React.forwardRef<HTMLButtonElement, DropMenuProps>(
       onClick,
       onKeyDown,
       alignMenuRef,
-      children,
       renderContentProp,
-      ...props
     },
     ref,
   ) => {
@@ -127,7 +128,8 @@ export const DropMenu = React.forwardRef<HTMLButtonElement, DropMenuProps>(
     return (
       <>
         {renderContentProp({
-          buttonRef: btnRef,
+          disabled,
+          buttonRef: refSetter(ref, btnRef),
           handleKeyDown: handleBtnKeyDown,
           handleClick: reverseMenu,
           statusIcon: <OpenStatusButton $isOpen={menuOpened} aria-hidden />,
