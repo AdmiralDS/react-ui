@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`MenuButton should render component 1`] = `
+exports[`OverflowMenu should render component 1`] = `
 Object {
   "asFragment": [Function],
   "baseElement": .c0 {
