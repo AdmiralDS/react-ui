@@ -350,7 +350,7 @@ export const TabMenu: React.FC<TabMenuProps> = ({
           onClose={() => setOpenedMenu(false)}
           alignSelf={alignSelf}
           items={model}
-          selected={activeTab}
+          selected={containsActiveTab ? activeTab : undefined}
           dimension={dimension}
           isActive={containsActiveTab}
           disabled={hiddenTabs.length === hiddenTabs.filter((tab) => tab.disabled).length}
