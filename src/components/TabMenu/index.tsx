@@ -76,7 +76,7 @@ export const TabMenu: React.FC<TabMenuProps> = ({
   const visibleTabs = mobile ? tabsWithRef : tabsWithRef.slice(0, visibleTabsAmount);
   const hiddenTabs = mobile ? [] : tabsWithRef.slice(visibleTabsAmount);
   const model = React.useMemo(() => {
-    return hiddenTabs.map(({ ref, ...item }) => ({
+    return hiddenTabs.map((item) => ({
       id: item.id,
       render: (options: RenderOptionProps) => (
         <MenuItem dimension={dimension} {...options} key={item.id}>
@@ -299,7 +299,7 @@ export const TabMenu: React.FC<TabMenuProps> = ({
       <Underline ref={underlineRef} aria-hidden />
       <TabsWrapper ref={tabsWrapperRef} onKeyDown={handleTabsWrapperKeyDown}>
         {visibleTabs.map((item: TabWithRefProps) => {
-          const { disabled, content, id, icon, badge, ref, width, ...props } = item;
+          const { disabled, content, id, icon, badge, ref, ...props } = item;
           return (
             <Tab
               ref={ref}
