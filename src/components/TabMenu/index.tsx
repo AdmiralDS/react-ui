@@ -71,7 +71,6 @@ export const TabMenu: React.FC<TabMenuProps> = ({
   const tabsWrapperWidthRef = React.useRef(0);
   const [update, setUpdate] = React.useState({});
   const [visibleTabsAmount, setVisibleTabsAmount] = React.useState(tabsWithRef.length);
-  const [menuFocus, setMenuFocus] = React.useState<'firstOption' | 'lastOption' | 'activeOption'>('activeOption');
   const [openedMenu, setOpenedMenu] = React.useState(false);
 
   const visibleTabs = mobile ? tabsWithRef : tabsWithRef.slice(0, visibleTabsAmount);
@@ -268,21 +267,12 @@ export const TabMenu: React.FC<TabMenuProps> = ({
         newFocusTarget = getNextFocus(target as HTMLElement);
         event.preventDefault();
         break;
-      case keyboardKey.Tab:
-        setMenuFocus('activeOption');
-        break;
       default:
         break;
     }
 
     if (newFocusTarget) {
       (newFocusTarget as HTMLElement).focus();
-      if (code === keyboardKey.ArrowLeft) {
-        setMenuFocus('lastOption');
-      }
-      if (code === keyboardKey.ArrowRight) {
-        setMenuFocus('firstOption');
-      }
     }
   };
 
