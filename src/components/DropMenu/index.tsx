@@ -71,10 +71,9 @@ export const DropMenu = React.forwardRef<HTMLButtonElement, DropMenuProps>(
     const [active, setActive] = React.useState<string | undefined>();
 
     const reverseMenu = (e: React.MouseEvent<HTMLButtonElement>) => {
-      setMenuOpened((prevOpened) => {
-        prevOpened ? onClose?.() : onOpen?.();
-        return !prevOpened;
-      });
+      setMenuOpened((prevOpened) => !prevOpened);
+      if (menuOpened) onOpen?.();
+      else onClose?.();
       onClick?.(e);
     };
     const closeMenu = () => {
