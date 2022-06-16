@@ -180,7 +180,7 @@ export const SelectWrapper = styled.div<{
   position: relative;
   box-sizing: border-box;
   display: flex;
-  align-items: flex-start;
+  align-items: ${(p) => (p.multiple ? 'flex-start' : 'center')};
   cursor: pointer;
 
   background: ${({ theme, disabled, readonly }) =>
