@@ -61,7 +61,7 @@ const ButtonComponent = styled.button<{ dimension: Dimension; menuOpened: boolea
     }
   }
 
-  &:active {
+  &:active:not(:disabled) {
     border-radius: 50%;
     background-color: ${({ theme }) => theme.color['Opacity/Focus']};
   }
