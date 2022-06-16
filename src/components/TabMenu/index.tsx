@@ -162,7 +162,7 @@ export const TabMenu: React.FC<TabMenuProps> = ({
   };
 
   const measureTabs = () => {
-    tabsWithRef.forEach((tab: any, index: number) => {
+    tabsWithRef.forEach((tab: TabWithRefProps, index: number) => {
       measureTab(tab, dimension, (width: number) => {
         tab.width = width;
         if (index === tabs.length - 1) {
