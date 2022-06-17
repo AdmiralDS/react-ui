@@ -20,6 +20,7 @@ export * from './components/Hint';
 export * from './components/Label';
 export * from './components/Field';
 export * from './components/Spinner';
+export * from './components/DropMenu';
 export * from './components/DropDownMenu';
 export * from './components/DropDownItem';
 export * from './components/Tag';
