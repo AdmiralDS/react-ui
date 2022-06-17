@@ -4,7 +4,7 @@ import { keyboardKey } from '#src/components/common/keyboardKey';
 import { OpenStatusButton } from '#src/components/OpenStatusButton';
 import type { ItemProps } from '#src/components/MenuItem';
 import { DropdownContainer } from '#src/components/DropdownContainer';
-import { Menu, MenuDimensions as Dimension } from '#src/components/Menu';
+import { Menu, MenuDimensions as Dimension, MenuProps } from '#src/components/Menu';
 import { refSetter } from '#src/components/common/utils/refSetter';
 
 export interface RenderContentProps {
@@ -22,7 +22,7 @@ export interface RenderContentProps {
   disabled?: boolean;
 }
 
-export interface DropMenuProps extends Omit<HTMLAttributes<HTMLButtonElement>, 'onChange'> {
+export interface DropMenuProps extends Pick<MenuProps, 'active' | 'onActivateItem' | 'onSelectItem'>, Omit<HTMLAttributes<HTMLButtonElement>, 'onChange'> {
   /** Размер компонента */
   dimension?: Dimension;
   /** Состояние загрузки */
