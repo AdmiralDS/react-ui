@@ -4,6 +4,7 @@ import styled, { css } from 'styled-components';
 
 import { ReactComponent as MoreHorizontalOutline } from '@admiral-ds/icons/build/system/MoreHorizontalOutline.svg';
 import { ReactComponent as MoreVerticalOutline } from '@admiral-ds/icons/build/system/MoreVerticalOutline.svg';
+import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 
 export type Dimension = 'l' | 'm' | 's';
 
@@ -56,7 +57,7 @@ const ButtonComponent = styled.button<{ dimension: Dimension; menuOpened: boolea
       bottom: -4px;
       right: -4px;
       border: 2px solid ${({ theme }) => theme.color['Primary/Primary 60 Main']};
-      border-radius: 4px;
+      border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
     }
   }
 

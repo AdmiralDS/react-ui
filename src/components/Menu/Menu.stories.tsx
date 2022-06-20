@@ -147,8 +147,8 @@ const TemplateWithCards: ComponentStory<typeof Menu> = (args) => {
     }, []);
   }, []);
 
-  const [selected, setSelected] = useState<string | number | null>('');
-  const [active, setActive] = useState<string | number | null>('');
+  const [selected, setSelected] = useState<string | undefined>('');
+  const [active, setActive] = useState<string | undefined>('');
 
   return (
     <>

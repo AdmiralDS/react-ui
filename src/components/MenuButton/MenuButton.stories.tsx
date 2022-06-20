@@ -2,10 +2,11 @@ import React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import { ReactComponent as MinusCircleOutline } from '@admiral-ds/icons/build/service/MinusCircleOutline.svg';
-import { MenuButton, MenuButtonItem } from '../MenuButton';
+import { MenuButton } from '../MenuButton';
 import styled, { ThemeProvider } from 'styled-components';
 import { T } from '#src/components/T';
 import { Theme } from '#src/components/themes';
+import { MenuItem, RenderOptionProps } from '#src/components/MenuItem';
 
 const DarkDiv = styled.div`
   background-color: ${({ theme }) => theme.color['Special/Dark Static Neutral 00']};
@@ -168,14 +169,25 @@ const items = [
     id: '7',
     display: 'Option seven',
   },
-] as MenuButtonItem[];
+];
 
 const Template1: ComponentStory<typeof MenuButton> = (args) => {
-  const [selected, setSelected] = React.useState<string | null>(null);
+  const [selected, setSelected] = React.useState<string | undefined>(undefined);
   function swapBorder(theme: Theme): Theme {
     theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
+  const model = React.useMemo(() => {
+    return items.map((item) => ({
+      id: item.id,
+      render: (items: RenderOptionProps) => (
+        <MenuItem dimension={args.dimension === 'xl' ? 'l' : args.dimension} {...items} key={item.id}>
+          {item.display}
+        </MenuItem>
+      ),
+      disabled: item.disabled,
+    }));
+  }, [args.dimension]);
 
   return (
     <ThemeProvider theme={swapBorder}>
@@ -186,7 +198,7 @@ const Template1: ComponentStory<typeof MenuButton> = (args) => {
           console.log(`selected: ${id}`);
           setSelected(id);
         }}
-        options={items}
+        items={model}
         onOpen={() => console.log('open menu')}
         onClose={() => console.log('close menu')}
       >
@@ -197,7 +209,7 @@ const Template1: ComponentStory<typeof MenuButton> = (args) => {
 };
 
 const Template2: ComponentStory<typeof MenuButton> = (args) => {
-  const items: Array<MenuButtonItem> = [
+  const items = [
     {
       id: '1',
       display: 'Option one',
@@ -222,7 +234,19 @@ const Template2: ComponentStory<typeof MenuButton> = (args) => {
     },
   ];
 
-  const [selected, setSelected] = React.useState<string | null>(null);
+  const [selected, setSelected] = React.useState<string | undefined>(undefined);
+  const model = React.useMemo(() => {
+    return items.map((item) => ({
+      id: item.id,
+      render: (items: RenderOptionProps) => (
+        <MenuItem dimension={args.dimension === 'xl' ? 'l' : args.dimension} {...items} key={item.id}>
+          {item.display}
+        </MenuItem>
+      ),
+      disabled: item.disabled,
+    }));
+  }, [args.dimension]);
+
   return (
     <>
       <MenuButton
@@ -232,7 +256,7 @@ const Template2: ComponentStory<typeof MenuButton> = (args) => {
           console.log(`selected: ${id}`);
           setSelected(id);
         }}
-        options={items}
+        items={model}
         onOpen={() => console.log('open menu')}
         onClose={() => console.log('close menu')}
       >
@@ -243,7 +267,7 @@ const Template2: ComponentStory<typeof MenuButton> = (args) => {
 };
 
 const Template3: ComponentStory<typeof MenuButton> = (args) => {
-  const items: Array<MenuButtonItem> = [
+  const items = [
     {
       id: '1',
       display: 'Option one',
@@ -268,7 +292,41 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
     },
   ];
 
-  const [selected, setSelected] = React.useState<string | null>(null);
+  const [selected, setSelected] = React.useState<string | undefined>(undefined);
+  const modelL = React.useMemo(() => {
+    return items.map((item) => ({
+      id: item.id,
+      render: (items: RenderOptionProps) => (
+        <MenuItem dimension="l" {...items} key={item.id}>
+          {item.display}
+        </MenuItem>
+      ),
+      disabled: item.disabled,
+    }));
+  }, []);
+  const modelM = React.useMemo(() => {
+    return items.map((item) => ({
+      id: item.id,
+      render: (items: RenderOptionProps) => (
+        <MenuItem dimension="m" {...items} key={item.id}>
+          {item.display}
+        </MenuItem>
+      ),
+      disabled: item.disabled,
+    }));
+  }, []);
+  const modelS = React.useMemo(() => {
+    return items.map((item) => ({
+      id: item.id,
+      render: (items: RenderOptionProps) => (
+        <MenuItem dimension="s" {...items} key={item.id}>
+          {item.display}
+        </MenuItem>
+      ),
+      disabled: item.disabled,
+    }));
+  }, []);
+
   return (
     <>
       <Wrapper>
@@ -285,7 +343,7 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
               console.log(`selected: ${id}`);
               setSelected(id);
             }}
-            options={items}
+            items={modelL}
             onOpen={() => console.log('open menu')}
             onClose={() => console.log('close menu')}
           >
@@ -301,7 +359,7 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
               console.log(`selected: ${id}`);
               setSelected(id);
             }}
-            options={items}
+            items={modelL}
             onOpen={() => console.log('open menu')}
             onClose={() => console.log('close menu')}
           >
@@ -316,7 +374,7 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
               console.log(`selected: ${id}`);
               setSelected(id);
             }}
-            options={items}
+            items={modelL}
             onOpen={() => console.log('open menu')}
             onClose={() => console.log('close menu')}
           >
@@ -332,7 +390,7 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
               console.log(`selected: ${id}`);
               setSelected(id);
             }}
-            options={items}
+            items={modelL}
             onOpen={() => console.log('open menu')}
             onClose={() => console.log('close menu')}
           >
@@ -347,7 +405,7 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
               console.log(`selected: ${id}`);
               setSelected(id);
             }}
-            options={items}
+            items={modelL}
             onOpen={() => console.log('open menu')}
             onClose={() => console.log('close menu')}
           >
@@ -363,7 +421,7 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
               console.log(`selected: ${id}`);
               setSelected(id);
             }}
-            options={items}
+            items={modelL}
             onOpen={() => console.log('open menu')}
             onClose={() => console.log('close menu')}
           >
@@ -379,7 +437,7 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
                 console.log(`selected: ${id}`);
                 setSelected(id);
               }}
-              options={items}
+              items={modelL}
               onOpen={() => console.log('open menu')}
               onClose={() => console.log('close menu')}
             >
@@ -397,7 +455,7 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
                 console.log(`selected: ${id}`);
                 setSelected(id);
               }}
-              options={items}
+              items={modelL}
               onOpen={() => console.log('open menu')}
               onClose={() => console.log('close menu')}
             >
@@ -419,7 +477,7 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
               console.log(`selected: ${id}`);
               setSelected(id);
             }}
-            options={items}
+            items={modelL}
             onOpen={() => console.log('open menu')}
             onClose={() => console.log('close menu')}
           >
@@ -435,7 +493,7 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
               console.log(`selected: ${id}`);
               setSelected(id);
             }}
-            options={items}
+            items={modelL}
             onOpen={() => console.log('open menu')}
             onClose={() => console.log('close menu')}
           >
@@ -450,7 +508,7 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
               console.log(`selected: ${id}`);
               setSelected(id);
             }}
-            options={items}
+            items={modelL}
             onOpen={() => console.log('open menu')}
             onClose={() => console.log('close menu')}
           >
@@ -466,7 +524,7 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
               console.log(`selected: ${id}`);
               setSelected(id);
             }}
-            options={items}
+            items={modelL}
             onOpen={() => console.log('open menu')}
             onClose={() => console.log('close menu')}
           >
@@ -481,7 +539,7 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
               console.log(`selected: ${id}`);
               setSelected(id);
             }}
-            options={items}
+            items={modelL}
             onOpen={() => console.log('open menu')}
             onClose={() => console.log('close menu')}
           >
@@ -497,7 +555,7 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
               console.log(`selected: ${id}`);
               setSelected(id);
             }}
-            options={items}
+            items={modelL}
             onOpen={() => console.log('open menu')}
             onClose={() => console.log('close menu')}
           >
@@ -513,7 +571,7 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
                 console.log(`selected: ${id}`);
                 setSelected(id);
               }}
-              options={items}
+              items={modelL}
               onOpen={() => console.log('open menu')}
               onClose={() => console.log('close menu')}
             >
@@ -531,7 +589,7 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
                 console.log(`selected: ${id}`);
                 setSelected(id);
               }}
-              options={items}
+              items={modelL}
               onOpen={() => console.log('open menu')}
               onClose={() => console.log('close menu')}
             >
@@ -553,7 +611,7 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
               console.log(`selected: ${id}`);
               setSelected(id);
             }}
-            options={items}
+            items={modelM}
             onOpen={() => console.log('open menu')}
             onClose={() => console.log('close menu')}
           >
@@ -569,7 +627,7 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
               console.log(`selected: ${id}`);
               setSelected(id);
             }}
-            options={items}
+            items={modelM}
             onOpen={() => console.log('open menu')}
             onClose={() => console.log('close menu')}
           >
@@ -584,7 +642,7 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
               console.log(`selected: ${id}`);
               setSelected(id);
             }}
-            options={items}
+            items={modelM}
             onOpen={() => console.log('open menu')}
             onClose={() => console.log('close menu')}
           >
@@ -600,7 +658,7 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
               console.log(`selected: ${id}`);
               setSelected(id);
             }}
-            options={items}
+            items={modelM}
             onOpen={() => console.log('open menu')}
             onClose={() => console.log('close menu')}
           >
@@ -615,7 +673,7 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
               console.log(`selected: ${id}`);
               setSelected(id);
             }}
-            options={items}
+            items={modelM}
             onOpen={() => console.log('open menu')}
             onClose={() => console.log('close menu')}
           >
@@ -631,7 +689,7 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
               console.log(`selected: ${id}`);
               setSelected(id);
             }}
-            options={items}
+            items={modelM}
             onOpen={() => console.log('open menu')}
             onClose={() => console.log('close menu')}
           >
@@ -647,7 +705,7 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
                 console.log(`selected: ${id}`);
                 setSelected(id);
               }}
-              options={items}
+              items={modelM}
               onOpen={() => console.log('open menu')}
               onClose={() => console.log('close menu')}
             >
@@ -665,7 +723,7 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
                 console.log(`selected: ${id}`);
                 setSelected(id);
               }}
-              options={items}
+              items={modelM}
               onOpen={() => console.log('open menu')}
               onClose={() => console.log('close menu')}
             >
@@ -687,7 +745,7 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
               console.log(`selected: ${id}`);
               setSelected(id);
             }}
-            options={items}
+            items={modelS}
             onOpen={() => console.log('open menu')}
             onClose={() => console.log('close menu')}
           >
@@ -703,7 +761,7 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
               console.log(`selected: ${id}`);
               setSelected(id);
             }}
-            options={items}
+            items={modelS}
             onOpen={() => console.log('open menu')}
             onClose={() => console.log('close menu')}
           >
@@ -718,7 +776,7 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
               console.log(`selected: ${id}`);
               setSelected(id);
             }}
-            options={items}
+            items={modelS}
             onOpen={() => console.log('open menu')}
             onClose={() => console.log('close menu')}
           >
@@ -734,7 +792,7 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
               console.log(`selected: ${id}`);
               setSelected(id);
             }}
-            options={items}
+            items={modelS}
             onOpen={() => console.log('open menu')}
             onClose={() => console.log('close menu')}
           >
@@ -749,7 +807,7 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
               console.log(`selected: ${id}`);
               setSelected(id);
             }}
-            options={items}
+            items={modelS}
             onOpen={() => console.log('open menu')}
             onClose={() => console.log('close menu')}
           >
@@ -765,7 +823,7 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
               console.log(`selected: ${id}`);
               setSelected(id);
             }}
-            options={items}
+            items={modelS}
             onOpen={() => console.log('open menu')}
             onClose={() => console.log('close menu')}
           >
@@ -781,7 +839,7 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
                 console.log(`selected: ${id}`);
                 setSelected(id);
               }}
-              options={items}
+              items={modelS}
               onOpen={() => console.log('open menu')}
               onClose={() => console.log('close menu')}
             >
@@ -799,7 +857,7 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
                 console.log(`selected: ${id}`);
                 setSelected(id);
               }}
-              options={items}
+              items={modelS}
               onOpen={() => console.log('open menu')}
               onClose={() => console.log('close menu')}
             >

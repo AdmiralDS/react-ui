@@ -7,7 +7,7 @@ import { keyboardKey } from '#src/components/common/keyboardKey';
 
 export type DropDownDimensions = 'l' | 'm' | 's';
 
-export const menuListHeights = css<{ dimension: DropDownDimensions }>`
+const menuListHeights = css<{ dimension: DropDownDimensions }>`
   max-height: ${({ dimension }) => {
     switch (dimension) {
       case 'l':

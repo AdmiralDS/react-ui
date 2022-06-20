@@ -1,11 +1,12 @@
 import React, { useMemo } from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
-import styled from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 import { ReactComponent as MinusCircleOutline } from '@admiral-ds/icons/build/service/MinusCircleOutline.svg';
 
 import { OverflowMenu } from '#src/components/OverflowMenu';
 import { MenuItem, RenderOptionProps } from '#src/components/MenuItem';
+import { Theme } from '#src/components/themes';
 
 const Separator = styled.div`
   height: 20px;
@@ -45,6 +46,12 @@ export default {
     isVertical: {
       control: { type: 'boolean' },
     },
+    themeBorderKind: {
+      control: {
+        type: 'radio',
+        options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
+      },
+    },
   },
 } as ComponentMeta<typeof OverflowMenu>;
 
@@ -80,7 +87,7 @@ const Template1: ComponentStory<typeof OverflowMenu> = (args) => {
     },
   ];
 
-  const [selected, setSelected] = React.useState<string | null>(null);
+  const [selected, setSelected] = React.useState<string | undefined>(undefined);
   const model = useMemo(() => {
     return items.map((item) => ({
       id: item.id,
@@ -93,8 +100,13 @@ const Template1: ComponentStory<typeof OverflowMenu> = (args) => {
     }));
   }, [args.dimension]);
 
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
+    return theme;
+  }
+
   return (
-    <>
+    <ThemeProvider theme={swapBorder}>
       <OverflowMenu
         {...args}
         items={model}
@@ -107,7 +119,7 @@ const Template1: ComponentStory<typeof OverflowMenu> = (args) => {
         onClose={() => console.log('close menu')}
         aria-label="Overflow Menu component"
       />
-    </>
+    </ThemeProvider>
   );
 };
 
@@ -149,7 +161,7 @@ const Template2: ComponentStory<typeof OverflowMenu> = (args) => {
     }));
   }, [args.dimension]);
 
-  const [selected, setSelected] = React.useState<string | null>(null);
+  const [selected, setSelected] = React.useState<string | undefined>(undefined);
 
   return (
     <DisplayBlock>
@@ -239,7 +251,7 @@ const Template3: ComponentStory<typeof OverflowMenu> = (args) => {
       disabled: item.disabled,
     }));
   }, []);
-  const [selected, setSelected] = React.useState<string | null>(null);
+  const [selected, setSelected] = React.useState<string | undefined>(undefined);
 
   return (
     <>

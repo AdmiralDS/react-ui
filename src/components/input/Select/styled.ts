@@ -57,11 +57,6 @@ export const BorderedDiv = styled.div`
   [data-status='success'] & {
     border: 1px solid ${(props) => props.theme.color['Success/Success 50 Main']};
   }
-
-  [data-read-only],
-  [data-disabled='true'] & {
-    border-color: transparent;
-  }
 `;
 
 export const NativeSelect = styled.select`
@@ -163,6 +158,10 @@ export const Input = styled.input<{ dimension?: ComponentDimension; isMultiple?:
 const disabledStyle = css`
   pointer-events: none;
   cursor: default;
+
+  & ${BorderedDiv} {
+    border-color: transparent;
+  }
 `;
 
 const focusedStyle = css`
@@ -178,19 +177,16 @@ export const SelectWrapper = styled.div<{
   multiple: boolean;
   dimension?: ComponentDimension;
 }>`
+  position: relative;
   box-sizing: border-box;
-
   display: flex;
-  align-items: flex-start;
-
+  align-items: ${(p) => (p.multiple ? 'flex-start' : 'center')};
   cursor: pointer;
 
+  background: ${({ theme, disabled, readonly }) =>
+    disabled || readonly ? theme.color['Neutral/Neutral 10'] : theme.color['Neutral/Neutral 00']};
   ${({ disabled, readonly }) => (readonly || disabled ? disabledStyle : '')};
-  ${({ focused }) => (focused ? focusedStyle : '')};
-
-  background: ${({ theme, disabled }) =>
-    disabled ? theme.color['Neutral/Neutral 10'] : theme.color['Neutral/Neutral 00']};
-  position: relative;
+  ${({ focused, readonly }) => (focused && !readonly ? focusedStyle : '')};
 
   padding: ${({ dimension, multiple }) => {
     switch (dimension) {
@@ -204,10 +200,6 @@ export const SelectWrapper = styled.div<{
   }};
 
   border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
-
-  &:hover {
-    border-color: ${({ theme, disabled }) => (disabled ? 'transparent' : theme.color['Primary/Primary 60 Main'])};
-  }
 `;
 
 export const IconPanel = styled.div<{ multiple?: boolean; dimension?: ComponentDimension }>`

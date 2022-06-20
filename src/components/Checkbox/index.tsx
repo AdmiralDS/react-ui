@@ -10,6 +10,7 @@ export interface CheckBoxProps extends InputHTMLAttributes<HTMLInputElement> {
   dimension?: CheckboxDimension;
   indeterminate?: boolean;
   error?: boolean;
+  hovered?: boolean;
   children?: never;
 }
 
@@ -101,7 +102,23 @@ const indeterminate = css<{ indeterminate?: boolean }>`
   }
 `;
 
-const Input = styled.input<{ indeterminate?: boolean }>`
+const hoveredCss = css`
+  &:not(:disabled) {
+    &::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      width: calc(100% + 16px);
+      height: calc(100% + 16px);
+      background-color: ${({ theme }) => theme.color['Opacity/Hover']};
+    }
+  }
+`;
+
+const Input = styled.input<{ indeterminate?: boolean; hovered?: boolean }>`
   appearance: none;
   ::-ms-check {
     display: none;
@@ -129,22 +146,12 @@ const Input = styled.input<{ indeterminate?: boolean }>`
     border: none;
   }
 
+  ${(props) => props.hovered && hoveredCss}
+
   ${indeterminate}
 
-  &:not(:disabled):hover,
-  &:not(:disabled):focus {
-    &::after {
-      content: '';
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      border-radius: 50%;
-      width: calc(100% + 16px);
-      height: calc(100% + 16px);
-      background-color: ${({ theme }) => theme.color['Opacity/Hover']};
-    }
-  }
+  &:hover,
+  &:focus + ${hoveredCss}
 
   &:disabled + ${Background} {
     border: 1px solid ${({ theme }) => theme.color['Neutral/Neutral 30']};

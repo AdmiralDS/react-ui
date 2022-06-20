@@ -1,12 +1,19 @@
 import * as React from 'react';
 import { keyboardKey } from '#src/components/common/keyboardKey';
 import observeRect from '#src/components/common/observeRect';
-
 import { Badge } from '#src/components/Badge';
-import { TabOverflowMenu } from '#src/components/TabOverflowMenu';
+import { MenuItem, RenderOptionProps } from '#src/components/MenuItem';
 
 import measureTab from '#src/components/TabMenu/measureTab';
-import { Tab, TabContent, TabContentWrapper, TabsWrapper, Underline, Wrapper } from '#src/components/TabMenu/style';
+import {
+  Tab,
+  TabContent,
+  TabContentWrapper,
+  TabOverflowMenu,
+  TabsWrapper,
+  Underline,
+  Wrapper,
+} from '#src/components/TabMenu/style';
 import type { Dimension } from '#src/components/TabMenu/constants';
 import { OVERFLOW_MARGIN_LEFT, OVERFLOW_SIZE_L, OVERFLOW_SIZE_M } from '#src/components/TabMenu/constants';
 
@@ -65,9 +72,28 @@ export const TabMenu: React.FC<TabMenuProps> = ({
   const [update, setUpdate] = React.useState({});
   const [visibleTabsAmount, setVisibleTabsAmount] = React.useState(tabsWithRef.length);
   const [menuFocus, setMenuFocus] = React.useState<'firstOption' | 'lastOption' | 'activeOption'>('activeOption');
+  const [openedMenu, setOpenedMenu] = React.useState(false);
 
   const visibleTabs = mobile ? tabsWithRef : tabsWithRef.slice(0, visibleTabsAmount);
   const hiddenTabs = mobile ? [] : tabsWithRef.slice(visibleTabsAmount);
+  const model = React.useMemo(() => {
+    return hiddenTabs.map(({ ref, ...item }) => ({
+      id: item.id,
+      render: (options: RenderOptionProps) => (
+        <MenuItem dimension={dimension} {...options} key={item.id}>
+          {item.content}
+        </MenuItem>
+      ),
+      disabled: item.disabled,
+    }));
+  }, [dimension, hiddenTabs]);
+
+  const isHiddenTabSelected = () => hiddenTabs.findIndex((tab) => tab.id === activeTab) != -1;
+
+  const containsActiveTab: boolean = React.useMemo(
+    () => model.findIndex((item) => item.id === activeTab) != -1,
+    [model, activeTab],
+  );
 
   const getNextFocus = (target: HTMLElement) => {
     let sibling: Element | null | undefined =
@@ -122,7 +148,10 @@ export const TabMenu: React.FC<TabMenuProps> = ({
     if (activeTabRef && tablistRef.current) {
       // используем метод getBoundingClientRect, так как он дает точность до сотых пикселя
       const activeTabWidth = activeTabRef.getBoundingClientRect().width;
-      const activeTabLeft = activeTabRef.getBoundingClientRect().left - tablistRef.current.getBoundingClientRect().left;
+      const activeTabLeft =
+        activeTabRef.getBoundingClientRect().left -
+        tablistRef.current.getBoundingClientRect().left +
+        tablistRef.current.scrollLeft;
 
       if (activeTabLeft !== left || activeTabWidth !== underlineWidth) {
         styleUnderline(activeTabLeft, activeTabWidth);
@@ -256,6 +285,25 @@ export const TabMenu: React.FC<TabMenuProps> = ({
       }
     }
   };
+
+  const handleMenuKeyDown = (event: React.KeyboardEvent<HTMLButtonElement>) => {
+    if (!openedMenu) {
+      const code = keyboardKey.getCode(event);
+      switch (code) {
+        case keyboardKey.ArrowLeft:
+          focusLastTab();
+          event.preventDefault();
+          break;
+        case keyboardKey.ArrowRight:
+          focusFirstTab();
+          event.preventDefault();
+          break;
+        default:
+          break;
+      }
+    }
+  };
+
   return (
     <Wrapper role="tablist" ref={tablistRef} underline={underline} mobile={mobile} {...props}>
       <Underline ref={underlineRef} aria-hidden />
@@ -298,20 +346,22 @@ export const TabMenu: React.FC<TabMenuProps> = ({
       {hiddenTabs.length && !mobile ? (
         <TabOverflowMenu
           ref={overflowBtnRef}
+          onOpen={() => setOpenedMenu(true)}
+          onClose={() => setOpenedMenu(false)}
           alignSelf={alignSelf}
-          options={hiddenTabs.map(({ ref, ...item }) => item)}
+          items={model}
           selected={activeTab}
           dimension={dimension}
+          isActive={containsActiveTab}
           disabled={hiddenTabs.length === hiddenTabs.filter((tab) => tab.disabled).length}
           onChange={(id: string) => {
             onChange(id);
-            styleUnderline(0, 0);
+            if (!isHiddenTabSelected) {
+              styleUnderline(0, 0);
+            }
           }}
           tabIndex={hiddenTabs?.filter((item) => item.id === activeTab).length ? 0 : -1}
-          onMenuReachTop={focusLastTab}
-          onMenuReachBottom={focusFirstTab}
-          menuFocus={menuFocus}
-          setMenuFocus={setMenuFocus}
+          onKeyDown={handleMenuKeyDown}
         />
       ) : null}
     </Wrapper>

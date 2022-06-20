@@ -2,6 +2,63 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.3.1](https://github.com/AdmiralDS/react-ui/compare/v1.3.0...v1.3.1) (2022-06-20)
+
+
+### Bug Fixes
+
+* **Button:** should rerender only when props changed ([9bddc96](https://github.com/AdmiralDS/react-ui/commit/9bddc9662d4adccd7d5d1f12ca8611343a4ce036))
+
+## [1.3.0](https://github.com/AdmiralDS/react-ui/compare/v1.2.1...v1.3.0) (2022-06-16)
+
+
+### Features
+
+* **Select:** add styles for multiple select in readOnly state ([de37f71](https://github.com/AdmiralDS/react-ui/commit/de37f71adda899fdea8b332375351189cad46376))
+
+
+### Bug Fixes
+
+* **Select:** fix drop button position for custom content in select ([92f1e47](https://github.com/AdmiralDS/react-ui/commit/92f1e47d5827be4c6f44fe09d9441a937e86a1e6))
+* **SuggestInput:** fix event for handling option selection ([36a6489](https://github.com/AdmiralDS/react-ui/commit/36a64897e507e984165ac5fe9c5188708ae59e21))
+
+### [1.2.1](https://github.com/AdmiralDS/react-ui/compare/v1.2.0...v1.2.1) (2022-06-14)
+
+
+### Bug Fixes
+
+* **MenuButton:** fix tests ([a583fd5](https://github.com/AdmiralDS/react-ui/commit/a583fd53093652f113cbc20c5d42292a34af4ab4))
+
+## [1.2.0](https://github.com/AdmiralDS/react-ui/compare/v1.1.0...v1.2.0) (2022-06-10)
+
+
+### Features
+
+* **Breadcrumbs:** update use of OverflowMenu ([e844c3f](https://github.com/AdmiralDS/react-ui/commit/e844c3fe3978edf311fa56f0ef81b031d2e2d0ba))
+* **Modal:** add opportunity to hide CloseIcon ([fb6ef56](https://github.com/AdmiralDS/react-ui/commit/fb6ef56d70040cc418d0de3dead0c8177a446106))
+* **Select:** add styles for readOnly state ([d2098ac](https://github.com/AdmiralDS/react-ui/commit/d2098ac29779685859f7a0e006d850c97116f5ee))
+* **Table:** update use of OverflowMenu ([2d79ec1](https://github.com/AdmiralDS/react-ui/commit/2d79ec145c1bb58570a029a9f552a05adbaabcd2))
+* **TabMenu:** use OverflowMenu component ([f658620](https://github.com/AdmiralDS/react-ui/commit/f658620339ef87221d778e5a9f9249ac03208342))
+* **TextButtonMenu:** add TextButtonMenu ([1437a6e](https://github.com/AdmiralDS/react-ui/commit/1437a6e7e37eb0157a962d6a14a59ce6a5361980))
+
+
+### Bug Fixes
+
+* **DateInput:** add icon prop for alternative icon ([e95f665](https://github.com/AdmiralDS/react-ui/commit/e95f6658c6ccaaac621523400e017a0e77cfca75))
+* **IconButton:** fix icon size ([27553e3](https://github.com/AdmiralDS/react-ui/commit/27553e33e48aa18ba8e0f776da1e514c2fdab5a3))
+* **Modal:** remove overlay blur ([96e5162](https://github.com/AdmiralDS/react-ui/commit/96e51624477ea67f2538fbfcbbddefa858e61418))
+* **OverflowMenu:** fix DropdownContainer position ([c903f3e](https://github.com/AdmiralDS/react-ui/commit/c903f3e2e8c28ad5bd0dc64801c7f4664e4b705e))
+* **OverflowMenu:** use new DropDown ([55a86cd](https://github.com/AdmiralDS/react-ui/commit/55a86cd0dae516ab3a4f3cc664138447c51ee7b9))
+* **Select:**  input aria should be small when not in focus ([18982ad](https://github.com/AdmiralDS/react-ui/commit/18982ad384c5d5de2cc0d2fe6abaafe5569da656))
+* **Select:** fix bug with placeholder color ([48a5b5d](https://github.com/AdmiralDS/react-ui/commit/48a5b5d4275c826c1d3c770cc603d38446b03ba7))
+* **Select:** fix problem with label click and dropdown opening ([3e3be1b](https://github.com/AdmiralDS/react-ui/commit/3e3be1b01f8c5aa95be6fbef47b8f6ff18c0d869))
+* **Select:** in readonly mode should not display drop icon ([83f7f4e](https://github.com/AdmiralDS/react-ui/commit/83f7f4edb7e1be2f76661f0201f8fd8afeaa8ce8))
+* **SuggestInput:** fix timeout blur effect ([6d09233](https://github.com/AdmiralDS/react-ui/commit/6d092339655be4f2d5194f2cc684aa625a9bf04a))
+* **SuggestInput:** in readonly mode should not display icon ([58af65f](https://github.com/AdmiralDS/react-ui/commit/58af65f1394a0315849c0d822e564367095e75fc))
+* **TabMenu:** copy fix underline from Admiral 2.0 ([638480d](https://github.com/AdmiralDS/react-ui/commit/638480dbc43a5fe94bc75748a820954600631808))
+* **TabMenu:** fix underline in mobile view ([52ffc72](https://github.com/AdmiralDS/react-ui/commit/52ffc722cc838dc0e3d827d807b2a991aa1dbc7b))
+* **TextButton:** fix disabled and loading pointer events ([0349b03](https://github.com/AdmiralDS/react-ui/commit/0349b034d55537c0bf689cb7a861aac43a78a19b))
+
 ## [1.1.0](https://github.com/AdmiralDS/react-ui/compare/v1.0.0...v1.1.0) (2022-05-20)
 
 

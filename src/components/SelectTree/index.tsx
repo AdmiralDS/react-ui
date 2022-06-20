@@ -22,6 +22,9 @@ export interface SelectTreeProps extends Omit<HTMLAttributes<HTMLUListElement>, 
   onChange?: (dataList: SelectTreeNodeProps[]) => void;
 }
 
+/**
+ * @deprecated use Tree component instead
+ */
 export const SelectTree: FC<SelectTreeProps> = ({ list, dimension = 'm', expandAll = false, onChange, ...props }) => {
   const [handleGuard, setHandleGuard] = React.useState(false);
 

@@ -118,6 +118,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       icons,
       portalTargetRef,
       disabled,
+      readOnly,
       placeholder,
       defaultValue,
       dimension = 'm',
@@ -258,11 +259,12 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
           options={selectedOptions}
           shouldShowCount={shouldFixMultiSelectHeight}
           disabled={disabled}
+          readOnly={readOnly}
           onChipRemove={handleOptionSelect}
           onChipClick={stopPropagation}
         />
       ),
-      [selectedOptions, shouldFixMultiSelectHeight, disabled, handleOptionSelect, stopPropagation],
+      [selectedOptions, shouldFixMultiSelectHeight, disabled, readOnly, handleOptionSelect, stopPropagation],
     );
 
     const isEmptyValue = multiple ? !localValue?.length : !localValue;
@@ -476,7 +478,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
         multiple={multiple}
         disabled={disabled}
         data-disabled={disabled}
-        readonly={props.readOnly}
+        readonly={readOnly}
         dimension={dimension}
         ref={containerRef}
         data-status={status}
@@ -532,7 +534,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
               tabIndex={-1}
               ref={inputRef}
               disabled={disabled}
-              readOnly={modeIsSelect}
+              readOnly={readOnly || modeIsSelect}
               value={searchValue}
               defaultValue={defaultInputValue}
               isMultiple={multiple}
@@ -570,15 +572,19 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
           </Dropdown>
         )}
         <IconPanel multiple={multiple} dimension={dimension} onClick={stopPropagation} onMouseDown={preventDefault}>
-          {displayClearIcon && <ClearIcon id="searchSelectClearIcon" onClick={handleOnClear} aria-hidden />}
+          {displayClearIcon && !readOnly && (
+            <ClearIcon id="searchSelectClearIcon" onClick={handleOnClear} aria-hidden />
+          )}
           {icons}
           {displayStatusIcon && <StatusIcon status={status} aria-hidden />}
-          <OpenStatusButton
-            $isOpen={isSearchPanelOpen}
-            data-disabled={disabled ? true : undefined}
-            onClick={handleSearchPanelToggle}
-            aria-hidden
-          />
+          {!readOnly && (
+            <OpenStatusButton
+              $isOpen={isSearchPanelOpen}
+              data-disabled={disabled ? true : undefined}
+              onClick={handleSearchPanelToggle}
+              aria-hidden
+            />
+          )}
         </IconPanel>
       </SelectWrapper>
     );
