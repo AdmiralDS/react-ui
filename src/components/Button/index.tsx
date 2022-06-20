@@ -1,4 +1,3 @@
-import { uid } from '#src/components/common/uid';
 import type { Appearance, Dimension, StyledButtonProps } from './types';
 import type { ButtonHTMLAttributes } from 'react';
 import * as React from 'react';
@@ -25,7 +24,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   loading?: boolean;
 }
 
-const ButtonContent = styled.span<{ dimension?: Dimension; $loading?: boolean }>`
+const ButtonContent = styled.div<{ dimension?: Dimension; $loading?: boolean }>`
   vertical-align: top;
 
   display: inline-flex;
@@ -109,8 +108,8 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       <StyledButton ref={ref} appearance={appearance} dimension={dimension} type={type} $loading={loading} {...props}>
         {loading && <StyledSpinner dimension={spinnerDimension} inverse={spinnerInverse} />}
         <ButtonContent>
-          {React.Children.toArray(children).map((child) =>
-            typeof child === 'string' ? <span key={uid()}>{child}</span> : child,
+          {React.Children.toArray(children).map((child, index) =>
+            typeof child === 'string' ? <div key={child + index}>{child}</div> : child,
           )}
         </ButtonContent>
       </StyledButton>
