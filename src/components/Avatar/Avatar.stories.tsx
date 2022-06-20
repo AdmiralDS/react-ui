@@ -78,8 +78,8 @@ const Template2: ComponentStory<typeof Avatar> = () => (
       <Avatar userName="Dimension xl" />
     </Container>
     <Text>
-      Внешний вид компонента (цвет фона и текста). Возможен выбор из четырех вариантов: light, white, grey, dark или
-      самостоятельная настройка цвета фона и текста
+      Внешний вид компонента (цвет фона, текста и иконки). Возможен выбор из четырех вариантов: light, white, grey, dark
+      или самостоятельная настройка цвета фона, текста, иконки
     </Text>
     <Container style={{ background: '#F1F2F4' }}>
       <Avatar userName="Light Appearance" />
@@ -87,6 +87,11 @@ const Template2: ComponentStory<typeof Avatar> = () => (
       <Avatar userName="Grey Appearance" appearance="grey" />
       <Avatar userName="Dark Appearance" appearance="dark" />
       <Avatar userName="Custom Appearance" appearance={{ background: '#3F7DFE', text: '#001157' }} />
+      <Avatar
+        userName="Custom Appearance"
+        icon={<PersonSolid />}
+        appearance={{ background: '#8A3FFC', icon: '#FFFFFF' }}
+      />
     </Container>
     <Text>Варианты контента (инициалы, иконка, фото)</Text>
     <Container>
@@ -101,8 +106,7 @@ const Template2: ComponentStory<typeof Avatar> = () => (
       <Avatar userName="Status Warning" icon={<PersonSolid />} status="warn" />
       <Avatar userName="Status Success" icon={<PersonSolid />} status="success" />
       <Avatar userName="Status Inactive" icon={<PersonSolid />} status="inactive" />
-      <Avatar userName="Example Name" status="success" />
-      <Avatar userName="Example Name" href={imageURL} status="success" />
+      <Avatar userName="Example Name" href={imageURL} status="#3F7DFE" />
     </Container>
   </>
 );

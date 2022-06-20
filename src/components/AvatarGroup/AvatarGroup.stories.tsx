@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import type { AvatarGroupProps } from '#src/components/AvatarGroup';
 import { AvatarGroup } from '#src/components/AvatarGroup';
 import { ReactComponent as PersonSolid } from '@admiral-ds/icons/build/system/PersonSolid.svg';
+import { DefaultFontColorName } from '#src/components/themes';
 
 const imageURL = 'https://github.com/DrUNE.png?size=100';
 
@@ -12,6 +13,14 @@ const Desc = styled.div`
   font-family: 'VTB Group UI';
   font-size: 16px;
   line-height: 24px;
+`;
+
+const Text = styled.div`
+  font-family: 'VTB Group UI';
+  font-size: 16px;
+  line-height: 24px;
+  margin-bottom: 8px;
+  color: ${({ theme }) => theme.color[DefaultFontColorName]};
 `;
 
 export default {
@@ -70,12 +79,38 @@ const Template2: ComponentStory<typeof AvatarGroup> = () => {
     { userName: 'Rosa Farrel', icon: <PersonSolid />, id: '9' },
     { userName: 'Tom Hidlton', appearance: 'dark', id: '10' },
   ];
+  const items2: AvatarGroupProps['items'] = [
+    {
+      userName: 'Lena Ivanova',
+      icon: <PersonSolid />,
+      id: '1',
+      appearance: { background: '#3F7DFE', icon: '#001157' },
+    },
+    { userName: 'Petr Lesov', icon: <PersonSolid />, id: '2' },
+    { userName: 'Agata Petrova', id: '3', appearance: { background: '#D92020', text: '#FFFFFF' } },
+    { userName: 'Arina Leskova', icon: <PersonSolid />, id: '4' },
+    { userName: 'Rita', appearance: 'light', id: '5' },
+    { userName: 'Drune', icon: <PersonSolid />, href: imageURL, id: '6' },
+    { userName: 'Lisa Kotova', icon: <PersonSolid />, id: '7' },
+    { userName: 'Ирина Глушко', icon: <PersonSolid />, id: '8' },
+    { userName: 'Rosa Farrel', icon: <PersonSolid />, id: '9' },
+    { userName: 'Tom Hidlton', appearance: 'light', id: '10' },
+  ];
   return (
     <>
+      <Text>Пример AvatarGroup с единым для всех аватаров внешним видом (appearance)</Text>
       <AvatarGroup
         style={{ width: '300px' }}
         items={items}
         onAvatarSelect={(e) => console.log('Select item with id: ', e.currentTarget.id)}
+      />
+      <div style={{ height: '40px' }} />
+      <Text>Пример AvatarGroup с различными по внешнему виду (appearance) аватарами</Text>
+      <AvatarGroup
+        style={{ width: '300px' }}
+        items={items2}
+        onAvatarSelect={(e) => console.log('Select item with id: ', e.currentTarget.id)}
+        appearance="dark"
       />
     </>
   );
@@ -102,7 +137,11 @@ Width.parameters = {
     },
     description: {
       story: `При достижении условного максимума отображаемых аватаров, последним ставится аватар с отображением количества
-      скрытых элементов`,
+      скрытых элементов. Внешний вид такого аватара (цвет заливки и текста) контролируется с помощью параметра appearance, переданного в 
+      компонент AvatarGroup.\n\nЧтобы задать для всех аватаров, входящих в группу, единый внешний вид, достаточно задать 
+      для компонента AvatarGroup соответствующее значение параметра appearance. Если для каких-то аватаров 
+      нужно задать отличный от остальных внешний вид, необходимо задать параметр appearance непосредственно для компонента Avatar. Параметр
+      appearance, заданный для Avatar, имеет больший приоритет, чем параметр appearance, заданный для AvatarGroup.`,
     },
   },
 };

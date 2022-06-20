@@ -110,7 +110,6 @@ export const Menu = React.forwardRef<HTMLDivElement, SelectProps>(
       setOpen((open) => !open);
     };
 
-    // оборачиваю StyledDropDown в старую тему до тех пор, пока Dropdown не будет переведен на новые цветовые токены
     return (
       <SelectWrapper
         ref={refSetter(ref, refWrapper)}
