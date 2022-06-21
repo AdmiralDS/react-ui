@@ -104,6 +104,8 @@ export interface TableRow extends Record<RowId, React.ReactNode> {
   selected?: boolean;
   /** Строка в состоянии disabled  */
   disabled?: boolean;
+  /** Чекбокс строки в состоянии disabled */
+  checkboxDisabled?: boolean;
   /** Строка в состоянии error */
   error?: boolean;
   /** Строка в состоянии success */
@@ -525,7 +527,7 @@ export const Table: React.FC<TableProps> = ({
               {displayRowSelectionColumn && (
                 <CheckboxCell className="td_checkbox">
                   <Checkbox
-                    disabled={row.disabled}
+                    disabled={row.disabled || row.checkboxDisabled}
                     dimension={checkboxDimension}
                     checked={!!row.selected}
                     onChange={() => handleCheckboxChange(row.id)}

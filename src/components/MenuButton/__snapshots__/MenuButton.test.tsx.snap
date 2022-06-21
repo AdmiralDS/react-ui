@@ -386,7 +386,7 @@ Object {
         data-testid="btn"
         type="button"
       >
-        <span
+        <div
           class="c1 c2"
         >
           <span>
@@ -396,7 +396,7 @@ Object {
             aria-hidden="true"
             class="c3"
           />
-        </span>
+        </div>
       </button>
     </div>
   </body>,
@@ -782,7 +782,7 @@ Object {
       data-testid="btn"
       type="button"
     >
-      <span
+      <div
         class="c1 c2"
       >
         <span>
@@ -792,7 +792,7 @@ Object {
           aria-hidden="true"
           class="c3"
         />
-      </span>
+      </div>
     </button>
   </div>,
   "debug": [Function],
@@ -1266,7 +1266,7 @@ Object {
         >
           <div />
         </div>
-        <span
+        <div
           class="c3 c4"
         >
           <span>
@@ -1276,7 +1276,7 @@ Object {
             aria-hidden="true"
             class="c5"
           />
-        </span>
+        </div>
       </button>
     </div>
   </body>,
@@ -1693,7 +1693,7 @@ Object {
       >
         <div />
       </div>
-      <span
+      <div
         class="c3 c4"
       >
         <span>
@@ -1703,7 +1703,7 @@ Object {
           aria-hidden="true"
           class="c5"
         />
-      </span>
+      </div>
     </button>
   </div>,
   "debug": [Function],
@@ -2147,7 +2147,7 @@ Object {
         disabled=""
         type="button"
       >
-        <span
+        <div
           class="c1 c2"
         >
           <span>
@@ -2157,7 +2157,7 @@ Object {
             aria-hidden="true"
             class="c3"
           />
-        </span>
+        </div>
       </button>
     </div>
   </body>,
@@ -2544,7 +2544,7 @@ Object {
       disabled=""
       type="button"
     >
-      <span
+      <div
         class="c1 c2"
       >
         <span>
@@ -2554,7 +2554,7 @@ Object {
           aria-hidden="true"
           class="c3"
         />
-      </span>
+      </div>
     </button>
   </div>,
   "debug": [Function],
