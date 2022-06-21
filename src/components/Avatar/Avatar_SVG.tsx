@@ -53,7 +53,7 @@ export const AvatarSVG: React.FC<AvatarSVGProps> = ({
   const id = svgMaskId || uid();
   const useId = `url(#${id})`;
 
-  const getBackgroundColor = (appearance: 'light' | 'white' | 'grey' | 'dark') => {
+  const getBackgroundColor = (appearance: AvatarProps['appearance']) => {
     switch (appearance) {
       case 'white':
         return theme.color['Neutral/Neutral 00'];
@@ -62,8 +62,9 @@ export const AvatarSVG: React.FC<AvatarSVGProps> = ({
       case 'dark':
         return theme.color['Neutral/Neutral 80'];
       case 'light':
-      default:
         return theme.color['Neutral/Neutral 10'];
+      default:
+        return appearance?.background || theme.color['Neutral/Neutral 10'];
     }
   };
   const getStatusColor = (status: AvatarProps['status']) => {
@@ -75,8 +76,9 @@ export const AvatarSVG: React.FC<AvatarSVGProps> = ({
       case 'danger':
         return theme.color['Error/Error 60 Main'];
       case 'inactive':
-      default:
         return theme.color['Neutral/Neutral 50'];
+      default:
+        return status || theme.color['Neutral/Neutral 50'];
     }
   };
   const appearance = appearanceProp || 'light';

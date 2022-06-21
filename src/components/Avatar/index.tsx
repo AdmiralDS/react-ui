@@ -22,7 +22,7 @@ const Wrapper = styled.button<{ size: string }>`
   }
 `;
 
-const getTextColor = css<{ appearance: Appearance | { background: string; text: string } }>`
+const getTextColor = css<{ appearance: Appearance | { background?: string; text?: string; icon?: string } }>`
   ${({ theme, appearance }) => {
     switch (appearance) {
       case 'light':
@@ -33,7 +33,7 @@ const getTextColor = css<{ appearance: Appearance | { background: string; text: 
       case 'dark':
         return theme.color['Neutral/Neutral 00'];
       default:
-        return appearance.text;
+        return appearance?.text || theme.color[DefaultFontColorName];
     }
   }}
 `;
@@ -54,7 +54,10 @@ const getTypography = css<{ dimension: Dimension }>`
   }}
 `;
 
-const Text = styled.span<{ appearance: Appearance | { background: string; text: string }; dimension: Dimension }>`
+const Text = styled.span<{
+  appearance: Appearance | { background?: string; text?: string; icon?: string };
+  dimension: Dimension;
+}>`
   position: absolute;
   top: 50%;
   left: 50%;
@@ -82,7 +85,26 @@ const getIconSize = css<{ dimension: Dimension }>`
   }}
 `;
 
-const IconWrapper = styled.div<{ dimension: Dimension }>`
+const getIconColor = css<{ appearance: Appearance | { background?: string; text?: string; icon?: string } }>`
+  ${({ theme, appearance }) => {
+    switch (appearance) {
+      case 'light':
+      case 'white':
+        return theme.color['Neutral/Neutral 50'];
+      case 'grey':
+        return theme.color['Special/Static White'];
+      case 'dark':
+        return theme.color['Neutral/Neutral 00'];
+      default:
+        return appearance?.icon || theme.color['Neutral/Neutral 50'];
+    }
+  }}
+`;
+
+const IconWrapper = styled.div<{
+  dimension: Dimension;
+  appearance: Appearance | { background?: string; text?: string; icon?: string };
+}>`
   position: absolute;
   top: 50%;
   left: 50%;
@@ -92,7 +114,7 @@ const IconWrapper = styled.div<{ dimension: Dimension }>`
 
   & svg {
     & *[fill^='#'] {
-      fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
+      fill: ${getIconColor};
     }
     width: 100%;
     height: 100%;
@@ -104,16 +126,24 @@ type Appearance = 'light' | 'white' | 'grey' | 'dark';
 type Status = 'success' | 'danger' | 'warn' | 'inactive';
 
 export interface AvatarProps extends React.HTMLAttributes<HTMLButtonElement> {
-  /** Имя пользователя, будет использовано внутри тултипа и для генерации аббревиатуры */
+  /** Имя пользователя, будет использовано внутри тултипа и для генерации инициалов (в случае если не задан параметр userInitials) */
   userName: string;
+  /** Инициалы пользователя. По умолчанию вычисляются на основании userName - берутся первые буквы первых
+   *  двух слов (одного слова для dimension='s'), входящих в userName
+   */
+  userInitials?: string;
   /** URL аватарки пользователя */
   href?: string;
   /** Статус пользователя */
-  status?: Status;
+  status?: Status | string;
   /** Иконка для отображения */
   icon?: React.ReactNode;
-  /** Внешний вид компонента (цвет заливки и текста) - можно выбрать один из четырех исходных вариантов, либо задать свою комбинацию цветов */
-  appearance?: Appearance | { background: string; text: string };
+  /** Внешний вид компонента (цвет заливки, текста, иконки) -
+   * можно выбрать один из четырех исходных вариантов, либо задать свою комбинацию цветов.
+   * Параметры background, text и icon являются опциональными, если какие-то из них не заданы,
+   * то по умолчанию будут применены те же цвета, что и при appearance='light'
+   * */
+  appearance?: Appearance | { background?: string; text?: string; icon?: string };
   /** Размер компонента */
   dimension?: Dimension;
   /** Уникальный идентификатор svg маски */
@@ -131,6 +161,7 @@ export interface AvatarInternalProps {
 
 export const Avatar = ({
   userName,
+  userInitials,
   href,
   status,
   dimension = 'xl',
@@ -148,13 +179,13 @@ export const Avatar = ({
   const hasAbbr = (!hasImage && !hasIcon) || isMenuAvatar;
 
   const maxAbbrLength = dimension === 'xs' ? 1 : 2;
-  const abbr = isMenuAvatar
-    ? userName
-    : userName
-        ?.split(' ')
-        .map((word) => word.toUpperCase()[0])
-        .join('')
-        .slice(0, maxAbbrLength);
+  const defaultUserInitials = userName
+    ?.split(' ')
+    .map((word) => word.toUpperCase()[0])
+    .join('')
+    .slice(0, maxAbbrLength);
+  const initials = userInitials ? userInitials : defaultUserInitials;
+  const abbr = isMenuAvatar ? userName : initials;
 
   const getSize = () => {
     switch (dimension) {
@@ -188,7 +219,11 @@ export const Avatar = ({
           {abbr}
         </Text>
       )}
-      {hasIcon && <IconWrapper dimension={dimension}>{Icon}</IconWrapper>}
+      {hasIcon && (
+        <IconWrapper dimension={dimension} appearance={appearance}>
+          {Icon}
+        </IconWrapper>
+      )}
     </>
   );
   return (

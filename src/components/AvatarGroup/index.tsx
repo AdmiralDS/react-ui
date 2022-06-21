@@ -1,15 +1,10 @@
 import * as React from 'react';
-import styled, { ThemeContext, ThemeProvider } from 'styled-components';
+import styled from 'styled-components';
 import observeRect from '#src/components/common/observeRect';
 import { uid } from '#src/components/common/uid';
 import { DropDownItem } from '#src/components/DropDownItem';
 import type { AvatarProps } from '#src/components/Avatar';
 import { Avatar } from '#src/components/Avatar';
-import {
-  DARK_THEME as DARK_THEME_ADMIRAL1,
-  LIGHT_THEME as LIGHT_THEME_ADMIRAL1,
-  LIGHT_THEME,
-} from '#src/components/themes';
 
 import { Menu } from './Menu';
 
@@ -52,7 +47,6 @@ export const AvatarGroup: React.FC<AvatarGroupProps> = ({
   onAvatarSelect,
   ...props
 }) => {
-  const theme = React.useContext(ThemeContext) || LIGHT_THEME;
   const wrapperRef = React.useRef<HTMLDivElement>(null);
   const [visibleItems, setVisibleItems] = React.useState(items.length);
   const [hiddenItems, setHiddenItems] = React.useState(0);
@@ -118,7 +112,7 @@ export const AvatarGroup: React.FC<AvatarGroupProps> = ({
               onClick={handleClick}
               onKeyDown={handleKeyDown}
               dimension={dimension}
-              appearance={appearance}
+              appearance={item.appearance || appearance}
               group={!last}
               status={undefined}
             />
@@ -128,24 +122,25 @@ export const AvatarGroup: React.FC<AvatarGroupProps> = ({
         <Menu alignDropdown="flex-start" appearance={appearance} dimension={dimension} onAvatarSelect={onAvatarSelect}>
           {hidden.map(({ id: idProp, onClick, onKeyDown, ...item }) => {
             const id = idProp || uid();
-            // оборачиваю MenuItem в старую тему до тех пор, пока DropdownItem не будет переведен на новые цветовые токены
             return (
-              <ThemeProvider theme={theme.name == 'dark' ? DARK_THEME_ADMIRAL1 : LIGHT_THEME_ADMIRAL1} key={id}>
-                <MenuItem
-                  role="option"
-                  key={id}
-                  id={id}
-                  value={item.userName}
-                  dimension="m"
-                  onClick={onClick as any}
-                  onKeyDown={onKeyDown as any}
-                >
-                  <ThemeProvider theme={theme} key={id}>
-                    <Avatar {...item} dimension="xs" appearance={appearance} showTooltip={false} status={undefined} />
-                  </ThemeProvider>
-                  {item.userName}
-                </MenuItem>
-              </ThemeProvider>
+              <MenuItem
+                role="option"
+                key={id}
+                id={id}
+                value={item.userName}
+                dimension="m"
+                onClick={onClick as any}
+                onKeyDown={onKeyDown as any}
+              >
+                <Avatar
+                  {...item}
+                  dimension="xs"
+                  appearance={item.appearance || appearance}
+                  showTooltip={false}
+                  status={undefined}
+                />
+                {item.userName}
+              </MenuItem>
             );
           })}
         </Menu>
