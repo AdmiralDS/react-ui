@@ -165,6 +165,10 @@ const overflowTabs = [
   },
 ];
 
+const onChangeTab = (id: string) => {
+  console.log(`selected: ${id}`);
+};
+
 const Template1: ComponentStory<typeof TabMenu> = (args) => {
   const [selected, setSelected] = React.useState<string>('3');
   function swapBorder(theme: Theme): Theme {
@@ -179,6 +183,7 @@ const Template1: ComponentStory<typeof TabMenu> = (args) => {
           {...args}
           activeTab={selected}
           onChange={(id) => {
+            onChangeTab(id);
             setSelected(id);
           }}
           tabs={tabs}

@@ -93,6 +93,9 @@ const items = [
   },
 ];
 
+const onOpenMenu = () => console.log('menu opened');
+const onCloseMenu = () => console.log('menu closed');
+
 const SimpleTemplate: ComponentStory<typeof DropMenu> = (args) => {
   const [selected, setSelected] = React.useState<string | undefined>(undefined);
   const model = React.useMemo(() => {
@@ -120,8 +123,8 @@ const SimpleTemplate: ComponentStory<typeof DropMenu> = (args) => {
             console.log(`selected: ${id}`);
             setSelected(id);
           }}
-          onOpen={() => console.log('menu opened')}
-          onClose={() => console.log('menu closed')}
+          onOpen={onOpenMenu}
+          onClose={onCloseMenu}
           dimension={args.dimension}
           disabled={args.disabled}
           selected={selected}
@@ -242,8 +245,8 @@ const TemplateWithCards: ComponentStory<typeof DropMenu> = (args) => {
             console.log(`selected: ${id}`);
             setSelected(id);
           }}
-          onOpen={() => console.log('menu opened')}
-          onClose={() => console.log('menu closed')}
+          onOpen={onOpenMenu}
+          onClose={onCloseMenu}
           dimension={args.dimension}
           disabled={args.disabled}
           selected={selected}
