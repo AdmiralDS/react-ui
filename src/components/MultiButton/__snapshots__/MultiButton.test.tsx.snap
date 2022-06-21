@@ -714,13 +714,13 @@ Object {
           id="1"
           type="button"
         >
-          <span
+          <div
             class="c3 c4"
           >
-            <span>
+            <div>
               one
-            </span>
-          </span>
+            </div>
+          </div>
         </button>
         <div
           aria-hidden="true"
@@ -736,13 +736,13 @@ Object {
           disabled=""
           type="button"
         >
-          <span
+          <div
             class="c3 c4"
           >
             <div
               class="c8"
             />
-          </span>
+          </div>
         </button>
       </div>
     </div>
@@ -1457,13 +1457,13 @@ Object {
         id="1"
         type="button"
       >
-        <span
+        <div
           class="c3 c4"
         >
-          <span>
+          <div>
             one
-          </span>
-        </span>
+          </div>
+        </div>
       </button>
       <div
         aria-hidden="true"
@@ -1479,13 +1479,13 @@ Object {
         disabled=""
         type="button"
       >
-        <span
+        <div
           class="c3 c4"
         >
           <div
             class="c8"
           />
-        </span>
+        </div>
       </button>
     </div>
   </div>,
@@ -2256,13 +2256,13 @@ Object {
           id="1"
           type="button"
         >
-          <span
+          <div
             class="c3 c4"
           >
-            <span>
+            <div>
               one
-            </span>
-          </span>
+            </div>
+          </div>
         </button>
         <div
           aria-hidden="true"
@@ -2276,13 +2276,13 @@ Object {
           data-dimension="l"
           type="button"
         >
-          <span
+          <div
             class="c3 c4"
           >
             <div
               class="c8"
             />
-          </span>
+          </div>
         </button>
       </div>
     </div>
@@ -2996,13 +2996,13 @@ Object {
         id="1"
         type="button"
       >
-        <span
+        <div
           class="c3 c4"
         >
-          <span>
+          <div>
             one
-          </span>
-        </span>
+          </div>
+        </div>
       </button>
       <div
         aria-hidden="true"
@@ -3016,13 +3016,13 @@ Object {
         data-dimension="l"
         type="button"
       >
-        <span
+        <div
           class="c3 c4"
         >
           <div
             class="c8"
           />
-        </span>
+        </div>
       </button>
     </div>
   </div>,
@@ -3793,13 +3793,13 @@ Object {
           id="1"
           type="button"
         >
-          <span
+          <div
             class="c3 c4"
           >
-            <span>
+            <div>
               one
-            </span>
-          </span>
+            </div>
+          </div>
         </button>
         <div
           aria-hidden="true"
@@ -3813,13 +3813,13 @@ Object {
           data-dimension="l"
           type="button"
         >
-          <span
+          <div
             class="c3 c4"
           >
             <div
               class="c8"
             />
-          </span>
+          </div>
         </button>
       </div>
     </div>
@@ -4533,13 +4533,13 @@ Object {
         id="1"
         type="button"
       >
-        <span
+        <div
           class="c3 c4"
         >
-          <span>
+          <div>
             one
-          </span>
-        </span>
+          </div>
+        </div>
       </button>
       <div
         aria-hidden="true"
@@ -4553,13 +4553,13 @@ Object {
         data-dimension="l"
         type="button"
       >
-        <span
+        <div
           class="c3 c4"
         >
           <div
             class="c8"
           />
-        </span>
+        </div>
       </button>
     </div>
   </div>,
