@@ -1,12 +1,9 @@
 import * as React from 'react';
-import { refSetter } from '#src/components/common/utils/refSetter';
 
 import type { Dimension } from '#src/components/OverflowMenu/Button';
 import { Button, OverflowMenuIcon } from '#src/components/OverflowMenu/Button';
-import { DropdownContainer } from '../DropdownContainer';
-import { Menu } from '../Menu';
 import type { ItemProps } from '#src/components/MenuItem';
-import { keyboardKey } from '#src/components/common/keyboardKey';
+import { DropMenu, RenderContentProps } from '#src/components/DropMenu';
 
 export interface OverflowMenuProps extends Omit<React.HTMLAttributes<HTMLButtonElement>, 'onChange'> {
   /** Выбранная опция */
@@ -36,105 +33,49 @@ export const OverflowMenu = React.forwardRef<HTMLButtonElement, OverflowMenuProp
       disabled = false,
       alignSelf = 'flex-end',
       isVertical = false,
-      onClose,
-      onOpen,
       selected,
       onChange,
-      onClick,
-      onKeyDown,
+      onOpen,
+      onClose,
       items,
       ...props
     },
     ref,
   ) => {
-    const [menuOpened, setMenuOpened] = React.useState<boolean>(false);
-    const btnRef = React.useRef<HTMLButtonElement>(null);
     const iconRef = React.useRef<HTMLDivElement>(null);
-    const [active, setActive] = React.useState<string | undefined>(undefined);
-
-    const reverseMenu = (e: React.MouseEvent<HTMLButtonElement>) => {
-      setMenuOpened((prevOpened) => {
-        prevOpened ? onClose?.() : onOpen?.();
-        return !prevOpened;
-      });
-      onClick?.(e);
-    };
-
-    const closeMenu = () => {
-      setMenuOpened(false);
-      onClose?.();
-      btnRef.current?.focus();
-    };
-
-    const clickOutside = (e: Event) => {
-      if (e.target && btnRef.current?.contains(e.target as Node)) {
-        return;
-      }
-      setMenuOpened(false);
-      onClose?.();
-    };
-
-    const handleClick = (selected: string) => {
-      if (selected) {
-        onChange?.(selected);
-      }
-      closeMenu();
-    };
-
-    const handleBtnKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>) => {
-      const code = keyboardKey.getCode(e);
-      onKeyDown?.(e);
-      switch (code) {
-        case keyboardKey.Escape:
-          if (menuOpened) closeMenu();
-          break;
-        case keyboardKey.Enter:
-        case keyboardKey[' ']:
-          if (!menuOpened) {
-            e.stopPropagation();
-            setMenuOpened(true);
-            onOpen?.();
-            e.preventDefault();
-          }
-          break;
-        default:
-          break;
-      }
-    };
-
-    React.useEffect(() => {
-      if (menuOpened) {
-        setActive(selected || items?.[0]?.id);
-      }
-    }, [menuOpened]);
 
     return (
       <>
-        <Button
+        <DropMenu
           {...props}
-          ref={refSetter(ref, btnRef)}
+          ref={ref}
+          alignSelf={alignSelf}
+          items={items}
+          onChange={onChange}
+          onOpen={onOpen}
+          onClose={onClose}
           dimension={dimension}
           disabled={disabled}
-          menuOpened={menuOpened}
-          onClick={reverseMenu}
-          aria-expanded={menuOpened}
-          aria-haspopup={menuOpened}
-          onKeyDown={handleBtnKeyDown}
-        >
-          <OverflowMenuIcon ref={iconRef} dimension={dimension} isVertical={isVertical} />
-        </Button>
-        {menuOpened && (
-          <DropdownContainer role="listbox" alignSelf={alignSelf} targetRef={iconRef} onClickOutside={clickOutside}>
-            <Menu
-              model={items}
-              active={active}
-              selected={selected}
-              onActivateItem={setActive}
-              onSelectItem={handleClick}
-              dimension={dimension}
-            />
-          </DropdownContainer>
-        )}
+          selected={selected}
+          alignMenuRef={iconRef}
+          renderContentProp={({ buttonRef, handleKeyDown, handleClick, menuState, disabled }: RenderContentProps) => {
+            return (
+              <Button
+                {...props}
+                ref={buttonRef}
+                dimension={dimension}
+                disabled={disabled}
+                menuOpened={menuState}
+                onClick={handleClick}
+                aria-expanded={menuState}
+                aria-haspopup={menuState}
+                onKeyDown={handleKeyDown}
+              >
+                <OverflowMenuIcon ref={iconRef} dimension={dimension} isVertical={isVertical} />
+              </Button>
+            );
+          }}
+        />
       </>
     );
   },

@@ -4,22 +4,25 @@ import { keyboardKey } from '#src/components/common/keyboardKey';
 import { OpenStatusButton } from '#src/components/OpenStatusButton';
 import type { ItemProps } from '#src/components/MenuItem';
 import { DropdownContainer } from '#src/components/DropdownContainer';
-import { Menu, MenuDimensions as Dimension } from '#src/components/Menu';
+import { Menu, MenuDimensions as Dimension, MenuProps } from '#src/components/Menu';
+import { refSetter } from '#src/components/common/utils/refSetter';
 
 export interface RenderContentProps {
   /** Ref на отрендеренный элемент */
-  buttonRef: React.RefObject<HTMLButtonElement>;
-  /** Обработчик нажатия клавиш */
-  handleKeyDown: (e: React.KeyboardEvent<HTMLButtonElement>) => void;
-  /** Обработчик клика мыши */
-  handleClick: () => void;
-  /** Иконка для отображения статуса меню */
-  statusIcon: React.ReactNode;
+  buttonRef: React.Ref<HTMLButtonElement>;
   /** Состояние меню */
   menuState: boolean;
+  /** Обработчик нажатия клавиш */
+  handleKeyDown?: (e: React.KeyboardEvent<HTMLButtonElement>) => void;
+  /** Обработчик клика мыши */
+  handleClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  /** Иконка для отображения статуса меню */
+  statusIcon?: React.ReactNode;
+  /** Доступность кнопки */
+  disabled?: boolean;
 }
 
-export interface DropMenuProps extends Omit<HTMLAttributes<HTMLButtonElement>, 'onChange'> {
+export interface DropMenuProps extends Pick<MenuProps, 'active' | 'onActivateItem' | 'onSelectItem'>, Omit<HTMLAttributes<HTMLButtonElement>, 'onChange'> {
   /** Размер компонента */
   dimension?: Dimension;
   /** Состояние загрузки */
@@ -29,13 +32,15 @@ export interface DropMenuProps extends Omit<HTMLAttributes<HTMLButtonElement>, '
   /** Выбранная опция */
   selected?: string;
   /** Колбек на изменение выбранной опции */
-  onChange: (id: string) => void;
+  onChange?: (id: string) => void;
   /** Колбек на открытие меню */
   onOpen?: () => void;
   /** Колбек на закрытие меню */
   onClose?: () => void;
   /** Отключение компонента */
   disabled?: boolean;
+  /**  Компонент, относительно которого необходимо выравнивать выпадающее меню */
+  alignMenuRef?: React.RefObject<HTMLElement>;
   /** Выравнивание выпадающего меню относительно компонента https://developer.mozilla.org/en-US/docs/Web/CSS/align-self */
   alignSelf?: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
   /** Компонент, для которого необходимо Menu */
@@ -54,20 +59,22 @@ export const DropMenu = React.forwardRef<HTMLButtonElement, DropMenuProps>(
       items,
       selected,
       onChange,
-      children,
+      onClick,
+      onKeyDown,
+      alignMenuRef,
       renderContentProp,
-      ...props
     },
     ref,
   ) => {
     const [menuOpened, setMenuOpened] = React.useState<boolean>(false);
     const btnRef = React.useRef<HTMLButtonElement>(null);
+    const [active, setActive] = React.useState<string | undefined>();
 
-    const reverseMenu = () => {
-      setMenuOpened((prevOpened) => {
-        prevOpened ? onClose?.() : onOpen?.();
-        return !prevOpened;
-      });
+    const reverseMenu = (e: React.MouseEvent<HTMLButtonElement>) => {
+      setMenuOpened((prevOpened) => !prevOpened);
+      if (menuOpened) onClose?.();
+      else onOpen?.();
+      onClick?.(e);
     };
     const closeMenu = () => {
       setMenuOpened(false);
@@ -80,10 +87,12 @@ export const DropMenu = React.forwardRef<HTMLButtonElement, DropMenuProps>(
         return;
       }
       setMenuOpened(false);
+      onClose?.();
     };
 
     const handleBtnKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>) => {
       const code = keyboardKey.getCode(e);
+      onKeyDown?.(e);
       switch (code) {
         case keyboardKey.Escape:
           if (menuOpened) closeMenu();
@@ -109,18 +118,37 @@ export const DropMenu = React.forwardRef<HTMLButtonElement, DropMenuProps>(
       closeMenu();
     };
 
+    React.useEffect(() => {
+      if (menuOpened) {
+        setActive(selected || items?.[0]?.id);
+      }
+    }, [menuOpened]);
+
     return (
       <>
         {renderContentProp({
-          buttonRef: btnRef,
+          disabled,
+          buttonRef: refSetter(ref, btnRef),
           handleKeyDown: handleBtnKeyDown,
           handleClick: reverseMenu,
           statusIcon: <OpenStatusButton $isOpen={menuOpened} aria-hidden />,
           menuState: menuOpened,
         })}
         {menuOpened && !loading && (
-          <DropdownContainer role="listbox" alignSelf={alignSelf} targetRef={btnRef} onClickOutside={clickOutside}>
-            <Menu model={items} selected={selected} onSelectItem={handleClick} dimension={dimension} />
+          <DropdownContainer
+            role="listbox"
+            alignSelf={alignSelf}
+            targetRef={alignMenuRef || btnRef}
+            onClickOutside={clickOutside}
+          >
+            <Menu
+              model={items}
+              selected={selected}
+              onSelectItem={handleClick}
+              dimension={dimension}
+              active={active}
+              onActivateItem={setActive}
+            />
           </DropdownContainer>
         )}
       </>

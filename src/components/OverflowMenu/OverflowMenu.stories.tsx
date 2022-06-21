@@ -233,7 +233,7 @@ const Template3: ComponentStory<typeof OverflowMenu> = (args) => {
     return items.map((item) => ({
       id: item.id,
       render: (options: RenderOptionProps) => (
-        <MenuItem dimension={dimensionL} {...options} key={item.id}>
+        <MenuItem dimension={dimensionM} {...options} key={item.id}>
           {item.display}
         </MenuItem>
       ),
@@ -244,7 +244,7 @@ const Template3: ComponentStory<typeof OverflowMenu> = (args) => {
     return items.map((item) => ({
       id: item.id,
       render: (options: RenderOptionProps) => (
-        <MenuItem dimension={dimensionL} {...options} key={item.id}>
+        <MenuItem dimension={dimensionS} {...options} key={item.id}>
           {item.display}
         </MenuItem>
       ),

@@ -55,7 +55,17 @@ export interface TextButtonMenuProps extends Omit<HTMLAttributes<HTMLButtonEleme
 
 export const TextButtonMenu = React.forwardRef<HTMLButtonElement, TextButtonMenuProps>(
   (
-    { dimension = 'm', appearance = 'primary', disabled = false, loading = false, items, selected, onChange, ...props },
+    {
+      text,
+      dimension = 'm',
+      appearance = 'primary',
+      disabled = false,
+      loading = false,
+      items,
+      selected,
+      onChange,
+      ...props
+    },
     ref,
   ) => {
     return (
@@ -71,7 +81,7 @@ export const TextButtonMenu = React.forwardRef<HTMLButtonElement, TextButtonMenu
         renderContentProp={({ buttonRef, handleKeyDown, handleClick, statusIcon, menuState }) => {
           return (
             <StyledTextButton
-              {...props}
+              text={text}
               ref={buttonRef}
               dimension={dimension}
               appearance={appearance === 'primary' ? 'primary' : 'secondary'}

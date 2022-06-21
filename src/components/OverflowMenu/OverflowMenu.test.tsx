@@ -6,7 +6,7 @@ import { OverflowMenu } from '#src/components/OverflowMenu';
 import { LIGHT_THEME } from '#src/components/themes';
 import { MenuItem, RenderOptionProps } from '#src/components/MenuItem';
 
-describe('MenuButton', () => {
+describe('OverflowMenu', () => {
   jest.useFakeTimers();
   beforeEach(() => {
     jest.clearAllTimers();
