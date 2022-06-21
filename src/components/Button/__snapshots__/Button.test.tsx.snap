@@ -356,7 +356,7 @@ exports[`Button should render component 1`] = `
     data-dimension="xl"
     type="button"
   >
-    <span
+    <div
       class="c1 c2"
     />
   </button>
@@ -719,13 +719,13 @@ exports[`Button should render component with text 1`] = `
     data-dimension="xl"
     type="button"
   >
-    <span
+    <div
       class="c1 c2"
     >
-      <span>
+      <div>
         Button
-      </span>
-    </span>
+      </div>
+    </div>
   </button>
 </div>
 `;
