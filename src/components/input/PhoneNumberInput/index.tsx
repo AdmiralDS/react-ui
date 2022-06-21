@@ -27,7 +27,7 @@ import { FlagsPack } from '@admiral-ds/flags';
 import type { CountryName } from '@admiral-ds/flags';
 import { ElementType, useMemo } from 'react';
 import { DropdownContainer } from '#src/components/DropdownContainer';
-import type { ItemIdentifier, MenuDimensions } from '#src/components/Menu';
+import type { MenuDimensions } from '#src/components/Menu';
 import { keyboardKey } from '#src/components/common/keyboardKey';
 
 const Chevron = styled(ChevronRightOutline)<{ disabled?: boolean }>`
@@ -261,12 +261,12 @@ export const PhoneNumberInput = React.forwardRef<HTMLInputElement, PhoneNumberIn
       }
     }, [selectedIndex]);
 
-    const handleHoverCountry = (id: ItemIdentifier) => {
+    const handleHoverCountry = (id?: string) => {
       const index = countryList.findIndex((item) => item.uid === id);
       setActiveIndex(index);
     };
 
-    const handleSelectCountry = (id: ItemIdentifier) => {
+    const handleSelectCountry = (id?: string) => {
       const index = countryList.findIndex((item) => item.uid === id);
       selectCountry(index);
     };
@@ -291,8 +291,8 @@ export const PhoneNumberInput = React.forwardRef<HTMLInputElement, PhoneNumberIn
             <DropdownContainer targetRef={inputRef} onClickOutside={clickOutside}>
               <CountriesList
                 countries={countryList}
-                selected={selectedIndex > -1 ? countryList[selectedIndex].uid : null}
-                active={activeIndex > -1 ? countryList[activeIndex].uid : null}
+                selected={selectedIndex > -1 ? countryList[selectedIndex].uid : undefined}
+                active={activeIndex > -1 ? countryList[activeIndex].uid : undefined}
                 onActivateItem={handleHoverCountry}
                 onSelectItem={handleSelectCountry}
                 dimension={menuDimension}

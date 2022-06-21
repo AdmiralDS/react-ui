@@ -2,6 +2,33 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.3.1](https://github.com/AdmiralDS/react-ui/compare/v1.3.0...v1.3.1) (2022-06-20)
+
+
+### Bug Fixes
+
+* **Button:** should rerender only when props changed ([9bddc96](https://github.com/AdmiralDS/react-ui/commit/9bddc9662d4adccd7d5d1f12ca8611343a4ce036))
+
+## [1.3.0](https://github.com/AdmiralDS/react-ui/compare/v1.2.1...v1.3.0) (2022-06-16)
+
+
+### Features
+
+* **Select:** add styles for multiple select in readOnly state ([de37f71](https://github.com/AdmiralDS/react-ui/commit/de37f71adda899fdea8b332375351189cad46376))
+
+
+### Bug Fixes
+
+* **Select:** fix drop button position for custom content in select ([92f1e47](https://github.com/AdmiralDS/react-ui/commit/92f1e47d5827be4c6f44fe09d9441a937e86a1e6))
+* **SuggestInput:** fix event for handling option selection ([36a6489](https://github.com/AdmiralDS/react-ui/commit/36a64897e507e984165ac5fe9c5188708ae59e21))
+
+### [1.2.1](https://github.com/AdmiralDS/react-ui/compare/v1.2.0...v1.2.1) (2022-06-14)
+
+
+### Bug Fixes
+
+* **MenuButton:** fix tests ([a583fd5](https://github.com/AdmiralDS/react-ui/commit/a583fd53093652f113cbc20c5d42292a34af4ab4))
+
 ## [1.2.0](https://github.com/AdmiralDS/react-ui/compare/v1.1.0...v1.2.0) (2022-06-10)
 
 

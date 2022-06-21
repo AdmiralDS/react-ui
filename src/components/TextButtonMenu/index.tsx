@@ -40,7 +40,7 @@ export interface TextButtonMenuProps extends Omit<HTMLAttributes<HTMLButtonEleme
   /** Опции выпадающего списка */
   items: Array<ItemProps>;
   /** Выбранная опция */
-  selected: string | null;
+  selected?: string;
   /** Колбек на изменение выбранной опции */
   onChange: (id: string) => void;
   /** Колбек на открытие меню */
@@ -56,13 +56,11 @@ export interface TextButtonMenuProps extends Omit<HTMLAttributes<HTMLButtonEleme
 export const TextButtonMenu = React.forwardRef<HTMLButtonElement, TextButtonMenuProps>(
   (
     {
+      text,
       dimension = 'm',
       appearance = 'primary',
       disabled = false,
       loading = false,
-      alignSelf = 'flex-end',
-      onClose,
-      onOpen,
       items,
       selected,
       onChange,
@@ -83,7 +81,7 @@ export const TextButtonMenu = React.forwardRef<HTMLButtonElement, TextButtonMenu
         renderContentProp={({ buttonRef, handleKeyDown, handleClick, statusIcon, menuState }) => {
           return (
             <StyledTextButton
-              {...props}
+              text={text}
               ref={buttonRef}
               dimension={dimension}
               appearance={appearance === 'primary' ? 'primary' : 'secondary'}

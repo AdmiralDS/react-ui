@@ -114,7 +114,7 @@ const items = [
 ];
 
 const TextButtonMenuStory: ComponentStory<typeof TextButtonMenu> = (args) => {
-  const [selected, setSelected] = React.useState<string | null>(null);
+  const [selected, setSelected] = React.useState<string | undefined>(undefined);
   const model = React.useMemo(() => {
     return items.map((item) => ({
       id: item.id,
@@ -155,7 +155,7 @@ const TextButtonMenuStory: ComponentStory<typeof TextButtonMenu> = (args) => {
 };
 
 const TextButtonMenuSizes: ComponentStory<typeof TextButtonMenu> = (args) => {
-  const [selected, setSelected] = React.useState<string | null>(null);
+  const [selected, setSelected] = React.useState<string | undefined>(undefined);
   const model = React.useMemo(() => {
     return items.map((item) => ({
       id: item.id,

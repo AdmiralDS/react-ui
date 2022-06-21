@@ -53,6 +53,7 @@ const StyledChip = styled(Chips)`
   display: flex;
   ${({ disabled }) => (disabled ? disabledChipStyle : '')};
 
+  min-width: ${COUNTER_WIDTH}px;
   @media (max-width: 768px) {
     max-width: 140px;
   }
@@ -80,6 +81,7 @@ interface IMultipleChipsProps {
   options: IConstantOption[];
   shouldShowCount: boolean;
   disabled?: boolean;
+  readOnly?: boolean;
   onChipRemove: (value: string) => void;
   onChipClick?: (evt: React.MouseEvent) => void;
 }
@@ -112,11 +114,12 @@ interface IChipWrapperProps {
   option: IConstantOption;
   className?: string;
   disabled?: boolean;
+  readOnly?: boolean;
   onChipRemove: (value: string) => void;
   onClick?: (evt: React.MouseEvent) => void;
 }
 
-const Chip = ({ className, option, disabled, onClick, onChipRemove }: IChipWrapperProps) => {
+const Chip = ({ className, option, disabled, readOnly, onClick, onChipRemove }: IChipWrapperProps) => {
   const renderContentTooltip = React.useCallback(
     (children: React.ReactNode) => () => <ContentTooltop>{children}</ContentTooltop>,
     [],
@@ -129,7 +132,7 @@ const Chip = ({ className, option, disabled, onClick, onChipRemove }: IChipWrapp
       dimension="s"
       appearance="filled"
       onClick={onClick}
-      onClose={getChipMeta(option, onChipRemove).onClose}
+      onClose={readOnly ? undefined : getChipMeta(option, onChipRemove).onClose}
       disabled={getChipMeta(option, onChipRemove).disabled || disabled}
       renderContentTooltip={renderContentTooltip(getChipMeta(option, onChipRemove).children)}
     >
@@ -152,13 +155,21 @@ export const MultipleSelectChips = ({
   options,
   shouldShowCount,
   disabled,
+  readOnly,
   onChipClick,
   onChipRemove,
 }: IMultipleChipsProps) => (
   <>
     {options.map((option, optionInd) => (
       <ChipBox key={option.value} onMouseDown={preventDefault}>
-        <Chip className="chip" option={option} disabled={disabled} onClick={onChipClick} onChipRemove={onChipRemove} />
+        <Chip
+          className="chip"
+          option={option}
+          disabled={disabled}
+          readOnly={readOnly}
+          onClick={onChipClick}
+          onChipRemove={onChipRemove}
+        />
         {shouldShowCount && (
           <CounterChip onClick={onChipClick} count={options.length - optionInd - 1} disabled={disabled}>
             {options.slice(optionInd + 1).map((innerOption) => (
@@ -166,6 +177,7 @@ export const MultipleSelectChips = ({
                 key={innerOption.value}
                 option={innerOption}
                 disabled={disabled}
+                readOnly={readOnly}
                 onClick={onChipClick}
                 onChipRemove={onChipRemove}
               />

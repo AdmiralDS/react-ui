@@ -14,7 +14,7 @@ export interface MenuButtonProps extends Omit<HTMLAttributes<HTMLButtonElement>,
   /** Массив опций */
   items: Array<ItemProps>;
   /** Выбранная опция */
-  selected: string | null;
+  selected?: string;
   /** Колбек на изменение выбранной опции */
   onChange: (id: string) => void;
   /** Колбек на открытие меню */
@@ -54,13 +54,14 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
     },
     ref,
   ) => {
-
     return (
       <>
         <DropMenu
           {...props}
           items={items}
           onChange={onChange}
+          onOpen={onOpen}
+          onClose={onClose}
           ref={ref}
           dimension={dimension === 'xl' ? 'l' : dimension}
           disabled={skeleton ? true : disabled}

@@ -34,7 +34,7 @@ export interface RenderOptionProps {
 }
 
 export interface TreeItemProps {
-  id: string | number;
+  id: string;
   render: (options: RenderOptionProps) => React.ReactNode;
   disabled?: boolean;
   checked?: boolean;

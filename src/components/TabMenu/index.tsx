@@ -9,7 +9,7 @@ import {
   Tab,
   TabContent,
   TabContentWrapper,
-  TabOverflowMenu,
+  StyledOverflowMenu,
   TabsWrapper,
   Underline,
   Wrapper,
@@ -71,13 +71,12 @@ export const TabMenu: React.FC<TabMenuProps> = ({
   const tabsWrapperWidthRef = React.useRef(0);
   const [update, setUpdate] = React.useState({});
   const [visibleTabsAmount, setVisibleTabsAmount] = React.useState(tabsWithRef.length);
-  const [menuFocus, setMenuFocus] = React.useState<'firstOption' | 'lastOption' | 'activeOption'>('activeOption');
   const [openedMenu, setOpenedMenu] = React.useState(false);
 
   const visibleTabs = mobile ? tabsWithRef : tabsWithRef.slice(0, visibleTabsAmount);
   const hiddenTabs = mobile ? [] : tabsWithRef.slice(visibleTabsAmount);
   const model = React.useMemo(() => {
-    return hiddenTabs.map(({ ref, ...item }) => ({
+    return hiddenTabs.map((item) => ({
       id: item.id,
       render: (options: RenderOptionProps) => (
         <MenuItem dimension={dimension} {...options} key={item.id}>
@@ -163,7 +162,7 @@ export const TabMenu: React.FC<TabMenuProps> = ({
   };
 
   const measureTabs = () => {
-    tabsWithRef.forEach((tab: any, index: number) => {
+    tabsWithRef.forEach((tab: TabWithRefProps, index: number) => {
       measureTab(tab, dimension, (width: number) => {
         tab.width = width;
         if (index === tabs.length - 1) {
@@ -268,21 +267,12 @@ export const TabMenu: React.FC<TabMenuProps> = ({
         newFocusTarget = getNextFocus(target as HTMLElement);
         event.preventDefault();
         break;
-      case keyboardKey.Tab:
-        setMenuFocus('activeOption');
-        break;
       default:
         break;
     }
 
     if (newFocusTarget) {
       (newFocusTarget as HTMLElement).focus();
-      if (code === keyboardKey.ArrowLeft) {
-        setMenuFocus('lastOption');
-      }
-      if (code === keyboardKey.ArrowRight) {
-        setMenuFocus('firstOption');
-      }
     }
   };
 
@@ -304,6 +294,9 @@ export const TabMenu: React.FC<TabMenuProps> = ({
     }
   };
 
+  /* width отдельно вынесен из props, чтобы он не передавался в Tab.
+  Иначе будет постоянно передаваться в таб, что не верно,
+  т.к. параметр width нужен только для внутренних расчетов */
   return (
     <Wrapper role="tablist" ref={tablistRef} underline={underline} mobile={mobile} {...props}>
       <Underline ref={underlineRef} aria-hidden />
@@ -344,13 +337,13 @@ export const TabMenu: React.FC<TabMenuProps> = ({
         })}
       </TabsWrapper>
       {hiddenTabs.length && !mobile ? (
-        <TabOverflowMenu
+        <StyledOverflowMenu
           ref={overflowBtnRef}
           onOpen={() => setOpenedMenu(true)}
           onClose={() => setOpenedMenu(false)}
           alignSelf={alignSelf}
           items={model}
-          selected={activeTab}
+          selected={containsActiveTab ? activeTab : undefined}
           dimension={dimension}
           isActive={containsActiveTab}
           disabled={hiddenTabs.length === hiddenTabs.filter((tab) => tab.disabled).length}

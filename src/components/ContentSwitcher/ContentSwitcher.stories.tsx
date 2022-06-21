@@ -66,6 +66,30 @@ export default {
   },
 } as ComponentMeta<typeof ContentSwitcher>;
 
+const MobileWrapper = styled.div`
+  width: 320px;
+  height: 100px;
+  padding-top: 16px;
+  box-sizing: border-box;
+  border: ${(p) => `8px solid ${p.theme.color['Neutral/Neutral 50']}`};
+  border-bottom-style: none;
+  background-color: ${(p) => p.theme.color['Neutral/Neutral 00']};
+  border-top-left-radius: 24px;
+  border-top-right-radius: 24px;
+`;
+
+const SwitcherWrapper = styled.div`
+  overflow-x: auto;
+  width: 100%;
+  padding: 0 8px;
+  box-sizing: border-box;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+`;
+
 const ContentSwitcherDemo: ComponentStory<typeof ContentSwitcher> = () => {
   const list = [
     { title: 'Active button', content: '1' },
@@ -125,6 +149,23 @@ const ContentSwitcherDemo: ComponentStory<typeof ContentSwitcher> = () => {
           );
         })}
       </ContentSwitcher>
+      <Separator />
+      <T font="Body/Body 1 Long" as="div">
+        Mobile Adaptive
+      </T>
+      <MobileWrapper>
+        <SwitcherWrapper>
+          <ContentSwitcher dimension={'m'}>
+            {list.map((item, index) => {
+              return (
+                <ContentSwitcherItem key={index} active={index === 0} disabled={item.disabled}>
+                  {item.title}
+                </ContentSwitcherItem>
+              );
+            })}
+          </ContentSwitcher>
+        </SwitcherWrapper>
+      </MobileWrapper>
     </>
   );
 };

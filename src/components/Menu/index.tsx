@@ -8,7 +8,7 @@ import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 
 export type MenuDimensions = 'l' | 'm' | 's';
 
-export const menuListHeights = css<{ dimension?: MenuDimensions }>`
+const menuListHeights = css<{ dimension?: MenuDimensions }>`
   max-height: ${({ dimension }) => {
     switch (dimension) {
       case 'l':
@@ -44,29 +44,27 @@ const StyledDiv = styled.div`
   border: none;
 `;
 
-export type ItemIdentifier = string | number | null;
-
 export interface MenuProps extends HTMLAttributes<HTMLDivElement> {
   /** Размер Меню */
   dimension?: MenuDimensions;
   /** Активная секция Menu */
-  active?: ItemIdentifier;
+  active?: string;
   /** выбранная секция Menu */
-  selected?: ItemIdentifier;
+  selected?: string;
   /** выбранная по умолчаниию секция Menu */
-  defaultSelected?: ItemIdentifier;
+  defaultSelected?: string;
   /** Обработчик выбора item в меню */
-  onActivateItem?: (id: ItemIdentifier) => void;
+  onActivateItem?: (id?: string) => void;
   /** Обработчик выбора item в меню */
-  onSelectItem?: (id: ItemIdentifier) => void;
+  onSelectItem?: (id: string) => void;
   /** Модель данных, с рендер-пропсами*/
   model: Array<ItemProps>;
 }
 
 export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
-  ({ model, defaultSelected = null, selected, active, onSelectItem, onActivateItem, ...props }, ref) => {
-    const [selectedState, setSelectedState] = React.useState<ItemIdentifier>(defaultSelected);
-    const [activeState, setActiveState] = React.useState<ItemIdentifier>(null);
+  ({ model, defaultSelected, selected, active, onSelectItem, onActivateItem, ...props }, ref) => {
+    const [selectedState, setSelectedState] = React.useState<string | undefined>(defaultSelected);
+    const [activeState, setActiveState] = React.useState<string | undefined>();
 
     const selectedId = selected === undefined ? selectedState : selected;
     const activeId = active === undefined ? activeState : active;
@@ -93,12 +91,12 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
       return model[nextIndex].id;
     };
 
-    const activateItem = (id: ItemIdentifier) => {
+    const activateItem = (id?: string) => {
       if (activeId !== id) setActiveState(id);
       onActivateItem?.(id);
     };
 
-    const selectItem = (id: ItemIdentifier) => {
+    const selectItem = (id: string) => {
       if (selectedId !== id) setSelectedState(id);
       onSelectItem?.(id);
     };
@@ -109,7 +107,7 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
         switch (code) {
           case keyboardKey[' ']:
           case keyboardKey.Enter: {
-            selectItem(activeId);
+            if (activeId) selectItem(activeId);
             e.preventDefault();
             break;
           }
@@ -140,7 +138,7 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
           hovered: activeId === item.id,
           selected: selectedId === item.id,
           onHover: () => {
-            activateItem(item.disabled ? null : item.id);
+            activateItem(item.disabled ? undefined : item.id);
           },
           onClickItem: () => selectItem(item.id),
           disabled: item.disabled,
