@@ -22,7 +22,9 @@ export interface RenderContentProps {
   disabled?: boolean;
 }
 
-export interface DropMenuProps extends Pick<MenuProps, 'active' | 'onActivateItem' | 'onSelectItem'>, Omit<HTMLAttributes<HTMLButtonElement>, 'onChange'> {
+export interface DropMenuProps
+  extends Pick<MenuProps, 'active' | 'onActivateItem' | 'onSelectItem'>,
+    Omit<HTMLAttributes<HTMLButtonElement>, 'onChange'> {
   /** Размер компонента */
   dimension?: Dimension;
   /** Состояние загрузки */
