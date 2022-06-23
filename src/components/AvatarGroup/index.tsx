@@ -7,6 +7,8 @@ import type { AvatarProps } from '#src/components/Avatar';
 import { Avatar } from '#src/components/Avatar';
 
 import { Menu } from './Menu';
+import { AvatarMenu } from '#src/components/AvatarGroup/AvatarMenu';
+import { RenderOptionProps } from '#src/components/MenuItem';
 
 export interface AvatarGroupProps extends React.HTMLAttributes<HTMLDivElement> {
   items: Array<AvatarProps>;
@@ -32,7 +34,7 @@ const AvatarsWrapper = styled.div`
   }
 `;
 
-const MenuItem = styled(DropDownItem)`
+const AvatarMenuItem = styled(DropDownItem)`
   flex-flow: nowrap;
   justify-content: flex-start;
   & > button:first-child {
@@ -88,6 +90,37 @@ export const AvatarGroup: React.FC<AvatarGroupProps> = ({
 
   const visible = items.slice(0, visibleItems);
   const hidden = items.slice(visibleItems, visibleItems + hiddenItems);
+  console.log(visibleItems, hiddenItems);
+  console.log(hidden);
+  const model = React.useMemo(() => {
+    return hidden.map(({ id: idProp, onClick, onKeyDown, ...item }) => {
+      const id = idProp || uid();
+      return {
+        id: idProp || uid(),
+        render: (options: RenderOptionProps) => (
+          <AvatarMenuItem
+            role="option"
+            key={id}
+            id={id}
+            dimension="m"
+            onClick={onClick as any}
+            onKeyDown={onKeyDown as any}
+            {...options}
+          >
+            <Avatar
+              {...item}
+              dimension="xs"
+              appearance={item.appearance || appearance}
+              showTooltip={false}
+              status={undefined}
+            />
+            {item.userName}
+          </AvatarMenuItem>
+        ),
+      };
+    });
+  }, [hidden]);
+  console.log(model);
 
   return (
     <AvatarsWrapper ref={wrapperRef} {...props}>
@@ -119,31 +152,13 @@ export const AvatarGroup: React.FC<AvatarGroupProps> = ({
           );
         })}
       {hiddenItems > 0 ? (
-        <Menu alignDropdown="flex-start" appearance={appearance} dimension={dimension} onAvatarSelect={onAvatarSelect}>
-          {hidden.map(({ id: idProp, onClick, onKeyDown, ...item }) => {
-            const id = idProp || uid();
-            return (
-              <MenuItem
-                role="option"
-                key={id}
-                id={id}
-                value={item.userName}
-                dimension="m"
-                onClick={onClick as any}
-                onKeyDown={onKeyDown as any}
-              >
-                <Avatar
-                  {...item}
-                  dimension="xs"
-                  appearance={item.appearance || appearance}
-                  showTooltip={false}
-                  status={undefined}
-                />
-                {item.userName}
-              </MenuItem>
-            );
-          })}
-        </Menu>
+        <AvatarMenu
+          alignDropdown="flex-start"
+          appearance={appearance}
+          dimension={dimension}
+          onAvatarSelect={onAvatarSelect}
+          items={model}
+        />
       ) : null}
     </AvatarsWrapper>
   );

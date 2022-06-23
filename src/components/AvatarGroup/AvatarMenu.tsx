@@ -110,13 +110,14 @@ export const AvatarMenu = React.forwardRef<HTMLButtonElement, SelectProps>(
         {...props}
         ref={ref}
         dimension={menuDimension}
+        alignSelf={alignDropdown}
         items={items}
         onChange={onAvatarSelect}
         renderContentProp={({ buttonRef, handleKeyDown, handleClick }) => {
           return (
             <MenuAvatarButton
               ref={buttonRef}
-              userName={'+' + React.Children.count(children)}
+              userName={'+' + items.length}
               isMenuAvatar
               appearance={appearance}
               dimension={dimension}
