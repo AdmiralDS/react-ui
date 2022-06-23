@@ -159,84 +159,91 @@ export interface AvatarInternalProps {
   isMenuAvatar?: boolean;
 }
 
-export const Avatar = ({
-  userName,
-  userInitials,
-  href,
-  status,
-  dimension = 'xl',
-  icon: Icon,
-  appearance = 'light',
-  group = false,
-  showTooltip = true,
-  isMenuAvatar = false,
-  svgMaskId,
-  ...props
-}: AvatarProps & AvatarInternalProps) => {
-  const loaded = useLoaded(href);
-  const hasImage = Boolean(href && loaded === 'loaded');
-  const hasIcon = Boolean(Icon && !hasImage);
-  const hasAbbr = (!hasImage && !hasIcon) || isMenuAvatar;
+interface AvatarTotalProps extends AvatarProps, AvatarInternalProps {}
 
-  const maxAbbrLength = dimension === 'xs' ? 1 : 2;
-  const defaultUserInitials = userName
-    ?.split(' ')
-    .map((word) => word.toUpperCase()[0])
-    .join('')
-    .slice(0, maxAbbrLength);
-  const initials = userInitials ? userInitials : defaultUserInitials;
-  const abbr = isMenuAvatar ? userName : initials;
+export const Avatar = React.forwardRef<HTMLButtonElement, AvatarTotalProps>(
+  (
+    {
+      userName,
+      userInitials,
+      href,
+      status,
+      dimension = 'xl',
+      icon: Icon,
+      appearance = 'light',
+      group = false,
+      showTooltip = true,
+      isMenuAvatar = false,
+      svgMaskId,
+      ...props
+    }: AvatarTotalProps,
+    ref,
+  ) => {
+    const loaded = useLoaded(href);
+    const hasImage = Boolean(href && loaded === 'loaded');
+    const hasIcon = Boolean(Icon && !hasImage);
+    const hasAbbr = (!hasImage && !hasIcon) || isMenuAvatar;
 
-  const getSize = () => {
-    switch (dimension) {
-      case 'xs':
-        return '24px';
-      case 's':
-        return '32px';
-      case 'm':
-        return '40px';
-      case 'l':
-        return '48px';
-      case 'xl':
-      default:
-        return '56px';
-    }
-  };
-  const renderContent = () => (
-    <>
-      <AvatarSVG
-        dimension={dimension}
-        size={getSize()}
-        hasImage={hasImage}
-        href={href}
-        status={status}
-        appearance={appearance}
-        group={group}
-        svgMaskId={svgMaskId}
-      />
-      {hasAbbr && (
-        <Text dimension={dimension} appearance={appearance}>
-          {abbr}
-        </Text>
-      )}
-      {hasIcon && (
-        <IconWrapper dimension={dimension} appearance={appearance}>
-          {Icon}
-        </IconWrapper>
-      )}
-    </>
-  );
-  return (
-    <Wrapper size={getSize()} {...props}>
-      {showTooltip ? (
-        <Tooltip anchorClassName="avatar-tooltip" renderContent={() => userName}>
-          {renderContent()}
-        </Tooltip>
-      ) : (
-        renderContent()
-      )}
-    </Wrapper>
-  );
-};
+    const maxAbbrLength = dimension === 'xs' ? 1 : 2;
+    const defaultUserInitials = userName
+      ?.split(' ')
+      .map((word) => word.toUpperCase()[0])
+      .join('')
+      .slice(0, maxAbbrLength);
+    const initials = userInitials ? userInitials : defaultUserInitials;
+    const abbr = isMenuAvatar ? userName : initials;
+
+    const getSize = () => {
+      switch (dimension) {
+        case 'xs':
+          return '24px';
+        case 's':
+          return '32px';
+        case 'm':
+          return '40px';
+        case 'l':
+          return '48px';
+        case 'xl':
+        default:
+          return '56px';
+      }
+    };
+    const renderContent = () => (
+      <>
+        <AvatarSVG
+          dimension={dimension}
+          size={getSize()}
+          hasImage={hasImage}
+          href={href}
+          status={status}
+          appearance={appearance}
+          group={group}
+          svgMaskId={svgMaskId}
+        />
+        {hasAbbr && (
+          <Text dimension={dimension} appearance={appearance}>
+            {abbr}
+          </Text>
+        )}
+        {hasIcon && (
+          <IconWrapper dimension={dimension} appearance={appearance}>
+            {Icon}
+          </IconWrapper>
+        )}
+      </>
+    );
+    return (
+      <Wrapper size={getSize()} {...props} ref={ref}>
+        {showTooltip ? (
+          <Tooltip anchorClassName="avatar-tooltip" renderContent={() => userName}>
+            {renderContent()}
+          </Tooltip>
+        ) : (
+          renderContent()
+        )}
+      </Wrapper>
+    );
+  },
+);
 
 Avatar.displayName = 'Avatar';
