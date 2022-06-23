@@ -130,7 +130,7 @@ const SimpleTemplate: ComponentStory<typeof DropMenu> = (args) => {
           selected={selected}
           renderContentProp={({ buttonRef, handleKeyDown, handleClick }) => {
             return (
-              <Button ref={buttonRef} onKeyDown={handleKeyDown} onClick={handleClick}>
+              <Button ref={buttonRef as React.Ref<HTMLButtonElement>} onKeyDown={handleKeyDown} onClick={handleClick}>
                 Нажми
               </Button>
             );
@@ -255,7 +255,7 @@ const TemplateWithCards: ComponentStory<typeof DropMenu> = (args) => {
           onActivateItem={setActive}
           renderContentProp={({ buttonRef, handleKeyDown, handleClick }) => {
             return (
-              <Button ref={buttonRef} onKeyDown={handleKeyDown} onClick={handleClick}>
+              <Button ref={buttonRef as React.Ref<HTMLButtonElement>} onKeyDown={handleKeyDown} onClick={handleClick}>
                 Нажми
               </Button>
             );

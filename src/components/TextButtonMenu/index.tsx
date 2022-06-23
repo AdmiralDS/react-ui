@@ -82,7 +82,7 @@ export const TextButtonMenu = React.forwardRef<HTMLButtonElement, TextButtonMenu
           return (
             <StyledTextButton
               text={text}
-              ref={buttonRef}
+              ref={buttonRef as React.Ref<HTMLButtonElement>}
               dimension={dimension}
               appearance={appearance === 'primary' ? 'primary' : 'secondary'}
               displayRight
