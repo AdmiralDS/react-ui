@@ -2,13 +2,10 @@ import * as React from 'react';
 import styled from 'styled-components';
 import observeRect from '#src/components/common/observeRect';
 import { uid } from '#src/components/common/uid';
-import { DropDownItem } from '#src/components/DropDownItem';
 import type { AvatarProps } from '#src/components/Avatar';
 import { Avatar } from '#src/components/Avatar';
-
-import { Menu } from './Menu';
-import { AvatarMenu } from '#src/components/AvatarGroup/AvatarMenu';
-import { RenderOptionProps } from '#src/components/MenuItem';
+import { MenuItem, RenderOptionProps } from '#src/components/MenuItem';
+import { DropMenu } from '#src/components/DropMenu';
 
 export interface AvatarGroupProps extends React.HTMLAttributes<HTMLDivElement> {
   items: Array<AvatarProps>;
@@ -34,12 +31,16 @@ const AvatarsWrapper = styled.div`
   }
 `;
 
-const AvatarMenuItem = styled(DropDownItem)`
+const AvatarMenuItem = styled(MenuItem)`
   flex-flow: nowrap;
   justify-content: flex-start;
   & > button:first-child {
     margin-right: 8px;
   }
+`;
+
+const MenuAvatar = styled(Avatar)`
+  cursor: pointer;
 `;
 
 export const AvatarGroup: React.FC<AvatarGroupProps> = ({
@@ -103,8 +104,8 @@ export const AvatarGroup: React.FC<AvatarGroupProps> = ({
             key={id}
             id={id}
             dimension="m"
-            onClick={onClick as any}
-            onKeyDown={onKeyDown as any}
+            onClick={onClick as React.MouseEventHandler<HTMLElement>}
+            onKeyDown={onKeyDown as React.KeyboardEventHandler<HTMLElement>}
             {...options}
           >
             <Avatar
@@ -121,6 +122,7 @@ export const AvatarGroup: React.FC<AvatarGroupProps> = ({
     });
   }, [hidden]);
   console.log(model);
+  const menuDimension = dimension === 'xs' ? 's' : dimension === 'xl' ? 'l' : dimension;
 
   return (
     <AvatarsWrapper ref={wrapperRef} {...props}>
@@ -152,12 +154,27 @@ export const AvatarGroup: React.FC<AvatarGroupProps> = ({
           );
         })}
       {hiddenItems > 0 ? (
-        <AvatarMenu
-          alignDropdown="flex-start"
-          appearance={appearance}
-          dimension={dimension}
-          onAvatarSelect={onAvatarSelect}
+        <DropMenu
+          {...props}
+          dimension={menuDimension}
+          alignSelf="flex-start"
           items={model}
+          onChange={onAvatarSelect}
+          disabled={false}
+          renderContentProp={({ buttonRef, handleKeyDown, handleClick }) => {
+            return (
+              <MenuAvatar
+                ref={buttonRef as React.Ref<HTMLButtonElement>}
+                userName={'+' + model.length}
+                isMenuAvatar
+                appearance={appearance}
+                dimension={dimension}
+                showTooltip={false}
+                onClick={handleClick}
+                onKeyDown={handleKeyDown}
+              />
+            );
+          }}
         />
       ) : null}
     </AvatarsWrapper>
