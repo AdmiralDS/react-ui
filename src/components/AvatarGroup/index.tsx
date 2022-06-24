@@ -13,8 +13,8 @@ export interface AvatarGroupProps extends React.HTMLAttributes<HTMLDivElement> {
   dimension?: AvatarProps['dimension'];
   /** Внешний вид компонента (цвет заливки и текста) - можно выбрать один из четырех исходных вариантов, либо задать свою комбинацию цветов */
   appearance?: AvatarProps['appearance'];
-  /** Колбек на выбор аватара (по клику или нажатию клавишы). Возвращает событие, из которого, н-р, можно извлечь id выбранного аватара */
-  onAvatarSelect?: (e: any) => void;
+  /** Колбек на выбор аватара (по клику или нажатию клавиши). Возвращает id выбранного аватара */
+  onAvatarSelect?: (id: string) => void;
 }
 
 const AvatarsWrapper = styled.div`
@@ -53,6 +53,7 @@ export const AvatarGroup: React.FC<AvatarGroupProps> = ({
   const wrapperRef = React.useRef<HTMLDivElement>(null);
   const [visibleItems, setVisibleItems] = React.useState(items.length);
   const [hiddenItems, setHiddenItems] = React.useState(0);
+  const [selected, setSelected] = React.useState<string | undefined>(undefined);
 
   const WIDTH = {
     xs: 24,
@@ -91,23 +92,15 @@ export const AvatarGroup: React.FC<AvatarGroupProps> = ({
 
   const visible = items.slice(0, visibleItems);
   const hidden = items.slice(visibleItems, visibleItems + hiddenItems);
-  console.log(visibleItems, hiddenItems);
-  console.log(hidden);
-  const model = React.useMemo(() => {
-    return hidden.map(({ id: idProp, onClick, onKeyDown, ...item }) => {
+
+  const modelHidden = React.useMemo(() => {
+    return hidden.map(({ id: idProp, ...item }) => {
       const id = idProp || uid();
+
       return {
         id: idProp || uid(),
         render: (options: RenderOptionProps) => (
-          <AvatarMenuItem
-            role="option"
-            key={id}
-            id={id}
-            dimension="m"
-            onClick={onClick as React.MouseEventHandler<HTMLElement>}
-            onKeyDown={onKeyDown as React.KeyboardEventHandler<HTMLElement>}
-            {...options}
-          >
+          <AvatarMenuItem role="option" key={id} id={id} dimension="m" {...options}>
             <Avatar
               {...item}
               dimension="xs"
@@ -121,8 +114,16 @@ export const AvatarGroup: React.FC<AvatarGroupProps> = ({
       };
     });
   }, [hidden]);
-  console.log(model);
+
   const menuDimension = dimension === 'xs' ? 's' : dimension === 'xl' ? 'l' : dimension;
+  const handleSelectAvatar = (id: string) => {
+    onAvatarSelect?.(id);
+    setSelected(id);
+  };
+  const containsActiveAvatar: boolean = React.useMemo(
+    () => modelHidden.findIndex((item) => item.id === selected) != -1,
+    [modelHidden, selected],
+  );
 
   return (
     <AvatarsWrapper ref={wrapperRef} {...props}>
@@ -133,11 +134,11 @@ export const AvatarGroup: React.FC<AvatarGroupProps> = ({
           const last = index === items.length - 1;
           const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
             item.onClick && item.onClick(e);
-            onAvatarSelect?.(e);
+            handleSelectAvatar(e.currentTarget.id);
           };
           const handleKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>) => {
             item.onKeyDown && item.onKeyDown(e);
-            onAvatarSelect?.(e);
+            handleSelectAvatar(e.currentTarget.id);
           };
           return (
             <Avatar
@@ -158,14 +159,15 @@ export const AvatarGroup: React.FC<AvatarGroupProps> = ({
           {...props}
           dimension={menuDimension}
           alignSelf="flex-start"
-          items={model}
-          onChange={onAvatarSelect}
+          items={modelHidden}
+          selected={containsActiveAvatar ? selected : undefined}
+          onChange={handleSelectAvatar}
           disabled={false}
           renderContentProp={({ buttonRef, handleKeyDown, handleClick }) => {
             return (
               <MenuAvatar
                 ref={buttonRef as React.Ref<HTMLButtonElement>}
-                userName={'+' + model.length}
+                userName={'+' + modelHidden.length}
                 isMenuAvatar
                 appearance={appearance}
                 dimension={dimension}
