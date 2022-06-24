@@ -6,6 +6,7 @@ import type { AvatarProps } from '#src/components/Avatar';
 import { Avatar } from '#src/components/Avatar';
 import { MenuItem, RenderOptionProps } from '#src/components/MenuItem';
 import { DropMenu } from '#src/components/DropMenu';
+import { keyboardKey } from '#src/components/common/keyboardKey';
 
 export interface AvatarGroupProps extends React.HTMLAttributes<HTMLDivElement> {
   items: Array<AvatarProps>;
@@ -137,8 +138,11 @@ export const AvatarGroup: React.FC<AvatarGroupProps> = ({
             handleSelectAvatar(e.currentTarget.id);
           };
           const handleKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>) => {
-            item.onKeyDown && item.onKeyDown(e);
-            handleSelectAvatar(e.currentTarget.id);
+            const code = keyboardKey.getCode(e);
+            if (code === keyboardKey.Enter || code === keyboardKey[' ']) {
+              item.onKeyDown && item.onKeyDown(e);
+              handleSelectAvatar(e.currentTarget.id);
+            }
           };
           return (
             <Avatar
