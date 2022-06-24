@@ -63,8 +63,8 @@ const Text = styled.span<{
   left: 50%;
   transform: translate(-50%, -50%);
   user-select: none;
-  ${getTypography}
   color: ${getTextColor};
+  ${getTypography}
 `;
 
 const getIconSize = css<{ dimension: Dimension }>`
@@ -159,9 +159,7 @@ export interface AvatarInternalProps {
   isMenuAvatar?: boolean;
 }
 
-interface AvatarTotalProps extends AvatarProps, AvatarInternalProps {}
-
-export const Avatar = React.forwardRef<HTMLButtonElement, AvatarTotalProps>(
+export const Avatar = React.forwardRef<HTMLButtonElement, AvatarProps & AvatarInternalProps>(
   (
     {
       userName,
@@ -176,7 +174,7 @@ export const Avatar = React.forwardRef<HTMLButtonElement, AvatarTotalProps>(
       isMenuAvatar = false,
       svgMaskId,
       ...props
-    }: AvatarTotalProps,
+    }: AvatarProps & AvatarInternalProps,
     ref,
   ) => {
     const loaded = useLoaded(href);
