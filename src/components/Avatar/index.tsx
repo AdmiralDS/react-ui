@@ -6,6 +6,7 @@ import { DefaultFontColorName } from '#src/components/themes/common';
 
 import { useLoaded } from './useLoaded';
 import { AvatarSVG } from './Avatar_SVG';
+import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 
 const Wrapper = styled.button<{ size: string }>`
   position: relative;
@@ -19,6 +20,12 @@ const Wrapper = styled.button<{ size: string }>`
   -webkit-tap-highlight-color: transparent;
   & .avatar-tooltip {
     display: flex;
+  }
+  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
+
+  &:focus-visible {
+    outline-offset: 2px;
+    outline: ${(p) => p.theme.color['Primary/Primary 60 Main']} solid 2px;
   }
 `;
 
