@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.4.0](https://github.com/AdmiralDS/react-ui/compare/v1.3.1...v1.4.0) (2022-06-27)
+
+
+### Features
+
+* **Avatar:** add opportunity to customize Avatar icon color and status color, add opportunity to use different avatars in AvatarGroup ([c9ebfb5](https://github.com/AdmiralDS/react-ui/commit/c9ebfb516ed3615f9e6df6e01c324581dcdc2a71))
+* **Breadcrumbs:** remove ReactDOM.render method, refactor component ([d3512ec](https://github.com/AdmiralDS/react-ui/commit/d3512ecd70ffdcf8ce2ebe7e4f6415c6434f99a4))
+* **Table:** add opportunity to disable row checkbox ([d91e447](https://github.com/AdmiralDS/react-ui/commit/d91e4476e958dd0f8f9dfca9f3c91d3f37ee072a))
+
+
+### Bug Fixes
+
+* **OverflowMenu:** fix active style ([d4d24aa](https://github.com/AdmiralDS/react-ui/commit/d4d24aa4545d31d9d70916e47ad675cd2da07e73))
+
 ### [1.3.1](https://github.com/AdmiralDS/react-ui/compare/v1.3.0...v1.3.1) (2022-06-20)
 
 
