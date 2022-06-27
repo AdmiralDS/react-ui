@@ -2,11 +2,11 @@ import * as React from 'react';
 import styled from 'styled-components';
 import observeRect from '#src/components/common/observeRect';
 import { uid } from '#src/components/common/uid';
-import { DropDownItem } from '#src/components/DropDownItem';
 import type { AvatarProps } from '#src/components/Avatar';
 import { Avatar } from '#src/components/Avatar';
-
-import { Menu } from './Menu';
+import { MenuItem, RenderOptionProps } from '#src/components/MenuItem';
+import { DropMenu } from '#src/components/DropMenu';
+import { keyboardKey } from '#src/components/common/keyboardKey';
 
 export interface AvatarGroupProps extends React.HTMLAttributes<HTMLDivElement> {
   items: Array<AvatarProps>;
@@ -14,8 +14,8 @@ export interface AvatarGroupProps extends React.HTMLAttributes<HTMLDivElement> {
   dimension?: AvatarProps['dimension'];
   /** Внешний вид компонента (цвет заливки и текста) - можно выбрать один из четырех исходных вариантов, либо задать свою комбинацию цветов */
   appearance?: AvatarProps['appearance'];
-  /** Колбек на выбор аватара (по клику или нажатию клавишы). Возвращает событие, из которого, н-р, можно извлечь id выбранного аватара */
-  onAvatarSelect?: (e: any) => void;
+  /** Колбек на выбор аватара (по клику или нажатию клавиши). Возвращает id выбранного аватара */
+  onAvatarSelect?: (id: string) => void;
 }
 
 const AvatarsWrapper = styled.div`
@@ -32,12 +32,16 @@ const AvatarsWrapper = styled.div`
   }
 `;
 
-const MenuItem = styled(DropDownItem)`
+const AvatarMenuItem = styled(MenuItem)`
   flex-flow: nowrap;
   justify-content: flex-start;
   & > button:first-child {
     margin-right: 8px;
   }
+`;
+
+const MenuAvatar = styled(Avatar)`
+  cursor: pointer;
 `;
 
 export const AvatarGroup: React.FC<AvatarGroupProps> = ({
@@ -50,6 +54,7 @@ export const AvatarGroup: React.FC<AvatarGroupProps> = ({
   const wrapperRef = React.useRef<HTMLDivElement>(null);
   const [visibleItems, setVisibleItems] = React.useState(items.length);
   const [hiddenItems, setHiddenItems] = React.useState(0);
+  const [selected, setSelected] = React.useState<string | undefined>(undefined);
 
   const WIDTH = {
     xs: 24,
@@ -88,6 +93,37 @@ export const AvatarGroup: React.FC<AvatarGroupProps> = ({
 
   const visible = items.slice(0, visibleItems);
   const hidden = items.slice(visibleItems, visibleItems + hiddenItems);
+  // Ставим стандартный размер М для меню и опций списка и XS для аватара
+  const modelHidden = React.useMemo(() => {
+    return hidden.map(({ id: idProp, ...item }) => {
+      const id = idProp || uid();
+
+      return {
+        id: idProp || uid(),
+        render: (options: RenderOptionProps) => (
+          <AvatarMenuItem role="option" key={id} id={id} dimension="m" {...options}>
+            <Avatar
+              {...item}
+              dimension="xs"
+              appearance={item.appearance || appearance}
+              showTooltip={false}
+              status={undefined}
+            />
+            {item.userName}
+          </AvatarMenuItem>
+        ),
+      };
+    });
+  }, [hidden]);
+
+  const handleSelectAvatar = (id: string) => {
+    onAvatarSelect?.(id);
+    setSelected(id);
+  };
+  const containsActiveAvatar: boolean = React.useMemo(
+    () => modelHidden.findIndex((item) => item.id === selected) != -1,
+    [modelHidden, selected],
+  );
 
   return (
     <AvatarsWrapper ref={wrapperRef} {...props}>
@@ -98,11 +134,14 @@ export const AvatarGroup: React.FC<AvatarGroupProps> = ({
           const last = index === items.length - 1;
           const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
             item.onClick && item.onClick(e);
-            onAvatarSelect?.(e);
+            handleSelectAvatar(e.currentTarget.id);
           };
           const handleKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>) => {
-            item.onKeyDown && item.onKeyDown(e);
-            onAvatarSelect?.(e);
+            const code = keyboardKey.getCode(e);
+            if (code === keyboardKey.Enter || code === keyboardKey[' ']) {
+              item.onKeyDown && item.onKeyDown(e);
+              handleSelectAvatar(e.currentTarget.id);
+            }
           };
           return (
             <Avatar
@@ -119,31 +158,29 @@ export const AvatarGroup: React.FC<AvatarGroupProps> = ({
           );
         })}
       {hiddenItems > 0 ? (
-        <Menu alignDropdown="flex-start" appearance={appearance} dimension={dimension} onAvatarSelect={onAvatarSelect}>
-          {hidden.map(({ id: idProp, onClick, onKeyDown, ...item }) => {
-            const id = idProp || uid();
+        <DropMenu
+          {...props}
+          dimension="m"
+          alignSelf="flex-start"
+          items={modelHidden}
+          selected={containsActiveAvatar ? selected : undefined}
+          onChange={handleSelectAvatar}
+          disabled={false}
+          renderContentProp={({ buttonRef, handleKeyDown, handleClick }) => {
             return (
-              <MenuItem
-                role="option"
-                key={id}
-                id={id}
-                value={item.userName}
-                dimension="m"
-                onClick={onClick as any}
-                onKeyDown={onKeyDown as any}
-              >
-                <Avatar
-                  {...item}
-                  dimension="xs"
-                  appearance={item.appearance || appearance}
-                  showTooltip={false}
-                  status={undefined}
-                />
-                {item.userName}
-              </MenuItem>
+              <MenuAvatar
+                ref={buttonRef as React.Ref<HTMLButtonElement>}
+                userName={'+' + modelHidden.length}
+                isMenuAvatar
+                appearance={appearance}
+                dimension={dimension}
+                showTooltip={false}
+                onClick={handleClick}
+                onKeyDown={handleKeyDown}
+              />
             );
-          })}
-        </Menu>
+          }}
+        />
       ) : null}
     </AvatarsWrapper>
   );

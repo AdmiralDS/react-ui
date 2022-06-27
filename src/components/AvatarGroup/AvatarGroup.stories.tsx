@@ -42,6 +42,10 @@ export default {
   },
 } as ComponentMeta<typeof AvatarGroup>;
 
+const onSelectAvatar = (id: string) => {
+  console.log('Select item with id: ', id);
+};
+
 const Template: ComponentStory<typeof AvatarGroup> = ({ onAvatarSelect, ...args }: AvatarGroupProps) => {
   const items: AvatarGroupProps['items'] = [
     { userName: 'Lena Ivanova', icon: <PersonSolid />, id: '1' },
@@ -57,11 +61,7 @@ const Template: ComponentStory<typeof AvatarGroup> = ({ onAvatarSelect, ...args 
   ];
   return (
     <>
-      <AvatarGroup
-        {...args}
-        items={items}
-        onAvatarSelect={onAvatarSelect || ((e) => console.log('Select item with id: ', e.currentTarget.id))}
-      />
+      <AvatarGroup {...args} items={items} onAvatarSelect={onAvatarSelect || onSelectAvatar} />
     </>
   );
 };
@@ -99,19 +99,10 @@ const Template2: ComponentStory<typeof AvatarGroup> = () => {
   return (
     <>
       <Text>Пример AvatarGroup с единым для всех аватаров внешним видом (appearance)</Text>
-      <AvatarGroup
-        style={{ width: '300px' }}
-        items={items}
-        onAvatarSelect={(e) => console.log('Select item with id: ', e.currentTarget.id)}
-      />
+      <AvatarGroup style={{ width: '300px' }} items={items} onAvatarSelect={onSelectAvatar} />
       <div style={{ height: '40px' }} />
       <Text>Пример AvatarGroup с различными по внешнему виду (appearance) аватарами</Text>
-      <AvatarGroup
-        style={{ width: '300px' }}
-        items={items2}
-        onAvatarSelect={(e) => console.log('Select item with id: ', e.currentTarget.id)}
-        appearance="dark"
-      />
+      <AvatarGroup style={{ width: '300px' }} items={items2} onAvatarSelect={onSelectAvatar} appearance="dark" />
     </>
   );
 };

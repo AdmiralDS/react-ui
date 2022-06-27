@@ -6,6 +6,7 @@ import { DefaultFontColorName } from '#src/components/themes/common';
 
 import { useLoaded } from './useLoaded';
 import { AvatarSVG } from './Avatar_SVG';
+import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 
 const Wrapper = styled.button<{ size: string }>`
   position: relative;
@@ -19,6 +20,12 @@ const Wrapper = styled.button<{ size: string }>`
   -webkit-tap-highlight-color: transparent;
   & .avatar-tooltip {
     display: flex;
+  }
+  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
+
+  &:focus-visible {
+    outline-offset: 2px;
+    outline: ${(p) => p.theme.color['Primary/Primary 60 Main']} solid 2px;
   }
 `;
 
@@ -63,8 +70,8 @@ const Text = styled.span<{
   left: 50%;
   transform: translate(-50%, -50%);
   user-select: none;
-  ${getTypography}
   color: ${getTextColor};
+  ${getTypography}
 `;
 
 const getIconSize = css<{ dimension: Dimension }>`
@@ -159,84 +166,89 @@ export interface AvatarInternalProps {
   isMenuAvatar?: boolean;
 }
 
-export const Avatar = ({
-  userName,
-  userInitials,
-  href,
-  status,
-  dimension = 'xl',
-  icon: Icon,
-  appearance = 'light',
-  group = false,
-  showTooltip = true,
-  isMenuAvatar = false,
-  svgMaskId,
-  ...props
-}: AvatarProps & AvatarInternalProps) => {
-  const loaded = useLoaded(href);
-  const hasImage = Boolean(href && loaded === 'loaded');
-  const hasIcon = Boolean(Icon && !hasImage);
-  const hasAbbr = (!hasImage && !hasIcon) || isMenuAvatar;
+export const Avatar = React.forwardRef<HTMLButtonElement, AvatarProps & AvatarInternalProps>(
+  (
+    {
+      userName,
+      userInitials,
+      href,
+      status,
+      dimension = 'xl',
+      icon: Icon,
+      appearance = 'light',
+      group = false,
+      showTooltip = true,
+      isMenuAvatar = false,
+      svgMaskId,
+      ...props
+    }: AvatarProps & AvatarInternalProps,
+    ref,
+  ) => {
+    const loaded = useLoaded(href);
+    const hasImage = Boolean(href && loaded === 'loaded');
+    const hasIcon = Boolean(Icon && !hasImage);
+    const hasAbbr = (!hasImage && !hasIcon) || isMenuAvatar;
 
-  const maxAbbrLength = dimension === 'xs' ? 1 : 2;
-  const defaultUserInitials = userName
-    ?.split(' ')
-    .map((word) => word.toUpperCase()[0])
-    .join('')
-    .slice(0, maxAbbrLength);
-  const initials = userInitials ? userInitials : defaultUserInitials;
-  const abbr = isMenuAvatar ? userName : initials;
+    const maxAbbrLength = dimension === 'xs' ? 1 : 2;
+    const defaultUserInitials = userName
+      ?.split(' ')
+      .map((word) => word.toUpperCase()[0])
+      .join('')
+      .slice(0, maxAbbrLength);
+    const initials = userInitials ? userInitials : defaultUserInitials;
+    const abbr = isMenuAvatar ? userName : initials;
 
-  const getSize = () => {
-    switch (dimension) {
-      case 'xs':
-        return '24px';
-      case 's':
-        return '32px';
-      case 'm':
-        return '40px';
-      case 'l':
-        return '48px';
-      case 'xl':
-      default:
-        return '56px';
-    }
-  };
-  const renderContent = () => (
-    <>
-      <AvatarSVG
-        dimension={dimension}
-        size={getSize()}
-        hasImage={hasImage}
-        href={href}
-        status={status}
-        appearance={appearance}
-        group={group}
-        svgMaskId={svgMaskId}
-      />
-      {hasAbbr && (
-        <Text dimension={dimension} appearance={appearance}>
-          {abbr}
-        </Text>
-      )}
-      {hasIcon && (
-        <IconWrapper dimension={dimension} appearance={appearance}>
-          {Icon}
-        </IconWrapper>
-      )}
-    </>
-  );
-  return (
-    <Wrapper size={getSize()} {...props}>
-      {showTooltip ? (
-        <Tooltip anchorClassName="avatar-tooltip" renderContent={() => userName}>
-          {renderContent()}
-        </Tooltip>
-      ) : (
-        renderContent()
-      )}
-    </Wrapper>
-  );
-};
+    const getSize = () => {
+      switch (dimension) {
+        case 'xs':
+          return '24px';
+        case 's':
+          return '32px';
+        case 'm':
+          return '40px';
+        case 'l':
+          return '48px';
+        case 'xl':
+        default:
+          return '56px';
+      }
+    };
+    const renderContent = () => (
+      <>
+        <AvatarSVG
+          dimension={dimension}
+          size={getSize()}
+          hasImage={hasImage}
+          href={href}
+          status={status}
+          appearance={appearance}
+          group={group}
+          svgMaskId={svgMaskId}
+        />
+        {hasAbbr && (
+          <Text dimension={dimension} appearance={appearance}>
+            {abbr}
+          </Text>
+        )}
+        {hasIcon && (
+          <IconWrapper dimension={dimension} appearance={appearance}>
+            {Icon}
+          </IconWrapper>
+        )}
+      </>
+    );
+    return (
+      <Wrapper size={getSize()} {...props} ref={ref}>
+        {showTooltip ? (
+          <Tooltip anchorClassName="avatar-tooltip" renderContent={() => userName}>
+            {renderContent()}
+          </Tooltip>
+        ) : (
+          renderContent()
+        )}
+      </Wrapper>
+    );
+  },
+);
 
 Avatar.displayName = 'Avatar';

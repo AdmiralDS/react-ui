@@ -9,20 +9,22 @@ import { refSetter } from '#src/components/common/utils/refSetter';
 
 export interface RenderContentProps {
   /** Ref на отрендеренный элемент */
-  buttonRef: React.Ref<HTMLButtonElement>;
+  buttonRef: React.Ref<HTMLElement>;
   /** Состояние меню */
   menuState: boolean;
   /** Обработчик нажатия клавиш */
-  handleKeyDown?: (e: React.KeyboardEvent<HTMLButtonElement>) => void;
+  handleKeyDown?: (e: React.KeyboardEvent<HTMLElement>) => void;
   /** Обработчик клика мыши */
-  handleClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  handleClick?: (e: React.MouseEvent<HTMLElement>) => void;
   /** Иконка для отображения статуса меню */
   statusIcon?: React.ReactNode;
   /** Доступность кнопки */
   disabled?: boolean;
 }
 
-export interface DropMenuProps extends Pick<MenuProps, 'active' | 'onActivateItem' | 'onSelectItem'>, Omit<HTMLAttributes<HTMLButtonElement>, 'onChange'> {
+export interface DropMenuProps
+  extends Pick<MenuProps, 'active' | 'onActivateItem' | 'onSelectItem'>,
+    Omit<HTMLAttributes<HTMLElement>, 'onChange'> {
   /** Размер компонента */
   dimension?: Dimension;
   /** Состояние загрузки */
@@ -47,7 +49,7 @@ export interface DropMenuProps extends Pick<MenuProps, 'active' | 'onActivateIte
   renderContentProp: (options: RenderContentProps) => React.ReactNode;
 }
 
-export const DropMenu = React.forwardRef<HTMLButtonElement, DropMenuProps>(
+export const DropMenu = React.forwardRef<HTMLElement, DropMenuProps>(
   (
     {
       dimension = 'm',
@@ -67,10 +69,10 @@ export const DropMenu = React.forwardRef<HTMLButtonElement, DropMenuProps>(
     ref,
   ) => {
     const [menuOpened, setMenuOpened] = React.useState<boolean>(false);
-    const btnRef = React.useRef<HTMLButtonElement>(null);
+    const btnRef = React.useRef<HTMLElement>(null);
     const [active, setActive] = React.useState<string | undefined>();
 
-    const reverseMenu = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const reverseMenu = (e: React.MouseEvent<HTMLElement>) => {
       setMenuOpened((prevOpened) => !prevOpened);
       if (menuOpened) onClose?.();
       else onOpen?.();
@@ -90,7 +92,7 @@ export const DropMenu = React.forwardRef<HTMLButtonElement, DropMenuProps>(
       onClose?.();
     };
 
-    const handleBtnKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>) => {
+    const handleBtnKeyDown = (e: React.KeyboardEvent<HTMLElement>) => {
       const code = keyboardKey.getCode(e);
       onKeyDown?.(e);
       switch (code) {

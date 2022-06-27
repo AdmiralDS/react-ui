@@ -62,7 +62,7 @@ export const OverflowMenu = React.forwardRef<HTMLButtonElement, OverflowMenuProp
             return (
               <Button
                 {...props}
-                ref={buttonRef}
+                ref={buttonRef as React.Ref<HTMLButtonElement>}
                 dimension={dimension}
                 disabled={disabled}
                 menuOpened={menuState}
