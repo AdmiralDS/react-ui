@@ -226,7 +226,7 @@ const FileUploaderCustomFiles: ComponentStory<typeof FileUploader> = (props) => 
       uploadedFiles={files}
       accept={accept.join(',')}
       style={{ maxWidth: '480px' }}
-      renderFileInfoList={(files) => {
+      renderFileInfoList={({ files, onRemoveFile }) => {
         return files.map((file, index) => {
           return (
             <FileInfo
@@ -234,7 +234,10 @@ const FileUploaderCustomFiles: ComponentStory<typeof FileUploader> = (props) => 
               dimension="xl"
               fileDimension="xl"
               file={file}
-              onCloseClick={() => handleRemove(index)}
+              onCloseClick={() => {
+                onRemoveFile(index);
+                handleRemove(index);
+              }}
             >
               <T
                 font="Body/Body 2 Long"
