@@ -4,13 +4,7 @@ import { changeInputData } from '#src/components/common/dom/changeInputData';
 import { refSetter } from '#src/components/common/utils/refSetter';
 import { TextInput, TextInputProps } from '#src/components/input/TextInput';
 import { ReactComponent as ChevronRightOutline } from '@admiral-ds/icons/build/system/ChevronRightOutline.svg';
-import {
-  COUNTRY_ISO3_CODES,
-  CountryCodes,
-  CountryIso3Code,
-  CountryNames,
-  CountryRusNames,
-} from '#src/components/input/PhoneNumberInput/constants';
+import { CountryCodes } from '#src/components/input/PhoneNumberInput/constants';
 import { Flag } from '#src/components/input/PhoneNumberInput/Flag';
 import { Dimension } from '#src/components/input/PhoneNumberInput/utils';
 import {
@@ -23,8 +17,8 @@ import getFindCountryFunction, {
   CountryPhoneCode,
   findCountryFunction,
 } from '#src/components/input/PhoneNumberInput/findCoutryWithPriority';
-import { FlagsPack } from '@admiral-ds/flags';
-import type { CountryName } from '@admiral-ds/flags';
+import type { ComponentName, CountryAlpha3Code } from '@admiral-ds/flags';
+import { FlagsPack, ComponentsNames, CountriesRusNames } from '@admiral-ds/flags';
 import { ElementType, useMemo } from 'react';
 import { DropdownContainer } from '#src/components/DropdownContainer';
 import type { MenuDimensions } from '#src/components/Menu';
@@ -80,10 +74,12 @@ const CountryContainer = styled.div<{ dimension: Dimension; isOpened?: boolean; 
 export interface PhoneNumberInputProps extends Omit<TextInputProps, 'value'> {
   value?: string;
   /** Код ISO A3 страны для определния префикса номера по умолчанию */
-  defaultCountry?: CountryIso3Code;
+  defaultCountry?: CountryAlpha3Code;
   /** Список стран для выпадающего списка. Отмечается кодом ISO A3 страны */
-  onlyCountries?: Array<CountryIso3Code>;
+  onlyCountries?: Array<CountryAlpha3Code>;
 }
+
+const AVAILABLE_ALPHA3_CODES = Object.keys(ComponentsNames);
 
 export const PhoneNumberInput = React.forwardRef<HTMLInputElement, PhoneNumberInputProps>(
   (
@@ -92,7 +88,7 @@ export const PhoneNumberInput = React.forwardRef<HTMLInputElement, PhoneNumberIn
       disabled = false,
       dimension = 'xl',
       defaultCountry = 'RUS',
-      onlyCountries = COUNTRY_ISO3_CODES,
+      onlyCountries = AVAILABLE_ALPHA3_CODES,
       handleInput,
       ...props
     },
@@ -122,8 +118,8 @@ export const PhoneNumberInput = React.forwardRef<HTMLInputElement, PhoneNumberIn
           const { iso3, code } = item;
           return {
             ...item,
-            rusName: CountryRusNames[iso3],
-            name: CountryNames[iso3],
+            rusName: CountriesRusNames[iso3],
+            name: ComponentsNames[iso3],
             uid: uid(),
             handleInput: handleInput ? handleInput : clojureHandler(code),
           };
@@ -245,7 +241,7 @@ export const PhoneNumberInput = React.forwardRef<HTMLInputElement, PhoneNumberIn
 
     const IconComponent = React.useMemo<JSX.Element | null>(() => {
       if (selectedIndex > -1) {
-        const SvgComponent = (FlagsPack as { [key: CountryName]: ElementType })[countryList[selectedIndex].name];
+        const SvgComponent = (FlagsPack as { [key: ComponentName]: ElementType })[countryList[selectedIndex].name];
         return SvgComponent ? <Flag dimension={menuDimension} Component={SvgComponent} /> : null;
       }
       return null;

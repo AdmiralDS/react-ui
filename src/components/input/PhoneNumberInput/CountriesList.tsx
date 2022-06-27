@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { typography } from '#src/components/Typography';
 import { CountryBlock, CountryBlockProps } from '#src/components/input/PhoneNumberInput/CountryBlock';
 import React, { useMemo } from 'react';
-import { CountryIso3Code } from '#src/components/input/PhoneNumberInput/constants';
+import type { CountryAlpha3Code } from '@admiral-ds/flags';
 import { CustomInputHandler } from '#src/components/common/dom/changeInputData';
 import { Menu, MenuDimensions, MenuProps } from '#src/components/Menu';
 import { ItemProps, RenderOptionProps } from '#src/components/MenuItem';
@@ -10,7 +10,7 @@ import { ItemProps, RenderOptionProps } from '#src/components/MenuItem';
 export type CountryInfo = {
   uid: string;
   code: string;
-  iso3: CountryIso3Code;
+  iso3: CountryAlpha3Code;
   rusName: string;
   name: string;
   handleInput: CustomInputHandler;

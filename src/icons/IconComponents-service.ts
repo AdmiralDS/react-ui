@@ -11,8 +11,12 @@ export { ReactComponent as CloseOutline } from '@admiral-ds/icons/build/service/
 export { ReactComponent as CloseSolid } from '@admiral-ds/icons/build/service/CloseSolid.svg';
 export { ReactComponent as CutOutline } from '@admiral-ds/icons/build/service/CutOutline.svg';
 export { ReactComponent as CutSolid } from '@admiral-ds/icons/build/service/CutSolid.svg';
+export { ReactComponent as DotsMenuOutline } from '@admiral-ds/icons/build/service/DotsMenuOutline.svg';
+export { ReactComponent as DotsMenuSolid } from '@admiral-ds/icons/build/service/DotsMenuSolid.svg';
 export { ReactComponent as DragOutline } from '@admiral-ds/icons/build/service/DragOutline.svg';
 export { ReactComponent as DragSolid } from '@admiral-ds/icons/build/service/DragSolid.svg';
+export { ReactComponent as EquallyOutline } from '@admiral-ds/icons/build/service/EquallyOutline.svg';
+export { ReactComponent as EquallySolid } from '@admiral-ds/icons/build/service/EquallySolid.svg';
 export { ReactComponent as ErrorOutline } from '@admiral-ds/icons/build/service/ErrorOutline.svg';
 export { ReactComponent as ErrorSolid } from '@admiral-ds/icons/build/service/ErrorSolid.svg';
 export { ReactComponent as ErrorTriangleOutline } from '@admiral-ds/icons/build/service/ErrorTriangleOutline.svg';

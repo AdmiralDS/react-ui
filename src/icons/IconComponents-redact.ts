@@ -45,7 +45,7 @@ export { ReactComponent as IndentDecreaseOutline } from '@admiral-ds/icons/build
 export { ReactComponent as IndentIncreaseOutline } from '@admiral-ds/icons/build/redact/IndentIncreaseOutline.svg';
 export { ReactComponent as LeftDoubleOutline } from '@admiral-ds/icons/build/redact/LeftDoubleOutline.svg';
 export { ReactComponent as LineSpacingOutline } from '@admiral-ds/icons/build/redact/LineSpacingOutline.svg';
-export { ReactComponent as LinethroughOutline } from '@admiral-ds/icons/build/redact/LinethroughOutline.svg';
+export { ReactComponent as LineThroughOutline } from '@admiral-ds/icons/build/redact/LineThroughOutline.svg';
 export { ReactComponent as ListBulletedOutline } from '@admiral-ds/icons/build/redact/ListBulletedOutline.svg';
 export { ReactComponent as ListNumberedOutline } from '@admiral-ds/icons/build/redact/ListNumberedOutline.svg';
 export { ReactComponent as ListStyleOutline } from '@admiral-ds/icons/build/redact/ListStyleOutline.svg';
