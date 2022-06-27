@@ -1,15 +1,11 @@
 import * as React from 'react';
-import { uid } from '#src/components/common/uid';
-import observeRect from '#src/components/common/observeRect';
 
-import { measureCrumb } from './utils';
 import { MenuButton } from './Menu';
 import type { BreadcrumbProps } from './BreadCrumb';
 import { Breadcrumb } from './BreadCrumb';
-import { Content, Separator, Wrapper } from './style';
+import { Separator, Wrapper, OverflowContentWrapper, OverflowItem, Compensator, Navigation } from './style';
 
 type Dimension = 'l' | 'm' | 's';
-type CrumbWithRefProps = BreadcrumbProps & { ref: React.RefObject<HTMLLIElement>; width?: number };
 
 export interface BreadcrumbsProps extends React.HTMLAttributes<HTMLOListElement> {
   /** Массив хлебных крошек */
@@ -21,140 +17,124 @@ export interface BreadcrumbsProps extends React.HTMLAttributes<HTMLOListElement>
 }
 
 export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items, dimension = 'l', mobile, ...props }) => {
-  // add refs to items
-  const crumbsWithRef: Array<CrumbWithRefProps> = items.map((item) => ({
-    ...item,
-    ref: React.createRef<HTMLLIElement>(),
-  }));
   const iconSize = dimension === 'l' ? 20 : 16;
+  const visible = items.slice(1, items.length - 1);
   const wrapperRef = React.useRef<HTMLOListElement>(null);
-  const contentRef = React.useRef<HTMLDivElement>(null);
-  const contentWidthRef = React.useRef(0);
-  const [_, update] = React.useState({});
-  const [crumbs, setCrumbs] = React.useState({ visible: crumbsWithRef.length - 2, hidden: 0 });
+  const overflowRef = React.useRef<HTMLDivElement>(null);
+  const [visibilityMap, setVisibilityMap] = React.useState<{ [index: number | string]: boolean }>({ 0: true });
 
-  const visibleItems = mobile
-    ? crumbsWithRef.slice(1, crumbsWithRef.length - 1)
-    : crumbsWithRef.slice(1 + crumbs.hidden, -1);
-  const hiddenItems = mobile ? [] : crumbsWithRef.slice(1, -(1 + crumbs.visible));
-
-  React.useEffect(() => {
-    mobile &&
-      crumbsWithRef[crumbsWithRef.length - 1].ref.current?.scrollIntoView({
+  React.useLayoutEffect(() => {
+    if (mobile) {
+      wrapperRef.current?.lastElementChild?.scrollIntoView({
         behavior: 'smooth',
         inline: 'center',
         block: 'nearest',
       });
-  }, [items, mobile]);
-
-  // measure crumbs width
-  React.useLayoutEffect(() => {
-    if (!mobile) {
-      crumbsWithRef.forEach((item: CrumbWithRefProps, index: number) => {
-        measureCrumb(item.text, dimension, index === crumbsWithRef.length - 1, (width: number) => {
-          item.width = width;
-        });
-      });
     }
-  }, [crumbsWithRef, mobile, _]);
+  }, [items, mobile, wrapperRef]);
 
-  // recalculation on wrapper resize
-  React.useLayoutEffect(() => {
-    if (wrapperRef.current && !mobile) {
-      const observer = observeRect(wrapperRef.current, (rect) => {
-        const wrapperWidth = rect?.width || 0;
+  const handleIntersection = (entries: IntersectionObserverEntry[]) => {
+    const updatedEntries: { [index: number | string]: boolean } = {};
+    entries.forEach((entry: any) => {
+      const target = entry.target;
+      const targetNumber = target.dataset.number;
 
-        // first and last items
-        let contentWidth = (crumbsWithRef[0].width || 0) + (crumbsWithRef[crumbsWithRef.length - 1].width || 0);
-        let visibleCrumbsCounter = 0;
+      if (entry.isIntersecting && entry.intersectionRatio === 1.0) {
+        updatedEntries[targetNumber] = true;
+      } else {
+        updatedEntries[targetNumber] = false;
+      }
+    });
 
-        const restCrumbs = crumbsWithRef.slice(1, crumbsWithRef.length - 1).reverse();
-        restCrumbs.forEach((item: CrumbWithRefProps) => {
-          contentWidth += item.width || 0;
-          if (contentWidth <= wrapperWidth) {
-            visibleCrumbsCounter++;
-          }
-        });
-        const hiddenCrumbsCounter = crumbsWithRef.length - 2 - visibleCrumbsCounter;
-
-        if (visibleCrumbsCounter !== crumbs.visible || hiddenCrumbsCounter !== crumbs.hidden) {
-          setCrumbs({ visible: visibleCrumbsCounter, hidden: hiddenCrumbsCounter });
-        }
-      });
-      observer.observe();
-      return () => {
-        observer.unobserve();
-      };
-    }
-  }, [wrapperRef.current, mobile, _]);
-
-  /**
-   * При срабатывании observer обязательно проверяем, что изменилось интересующее нас свойство (ширина).
-   * Это важно учитывать, так как observer срабатывает при изменении целого ряда свойств
-   * элемента (bottom, height, left, right, top, width), большая часть из которых для нас не важна.
-   */
+    setVisibilityMap((prev: { [index: number | string]: boolean }) => ({
+      ...prev,
+      ...updatedEntries,
+    }));
+  };
 
   React.useLayoutEffect(() => {
-    if (contentRef.current && !mobile) {
-      const observer = observeRect(contentRef.current, (rect) => {
-        const width = rect?.width || 0;
-        if (contentWidthRef.current !== width) {
-          contentWidthRef.current = width;
-          update({});
-        }
-      });
-      observer.observe();
-      return () => {
-        observer.unobserve();
-      };
-    }
-  }, [contentRef.current, mobile]);
+    const observer = new IntersectionObserver(handleIntersection, {
+      root: wrapperRef.current,
+      threshold: [0, 1.0],
+    });
 
-  const renderFirstItem = () => {
-    const item = crumbsWithRef[0];
-    const id = item.id || uid();
-    return (
-      <Breadcrumb key={id} {...item}>
+    if (overflowRef.current && !mobile) {
+      Array.from(overflowRef.current.children).forEach((item) => {
+        observer.observe(item);
+      });
+    }
+    return () => observer.disconnect();
+  }, [overflowRef, wrapperRef, mobile, setVisibilityMap]);
+
+  const renderFirstItem = React.useCallback(() => {
+    const item = items[0];
+    const id = item.id || item.text;
+    return items.length > 1 ? (
+      <Breadcrumb key={id} data-number={0} {...item}>
         <Separator width={iconSize} height={iconSize} aria-hidden />
       </Breadcrumb>
-    );
-  };
+    ) : null;
+  }, [items]);
 
-  const renderLastItem = () => {
-    const item = crumbsWithRef[crumbsWithRef.length - 1];
-    const id = item.id || uid();
-    return <Breadcrumb key={id} aria-current="page" {...item} />;
-  };
+  const renderLastItem = React.useCallback(() => {
+    const item = items[items.length - 1];
+    const id = item.id || item.text;
+    const order = { style: { order: 1 } };
+    return items.length > 0 ? (
+      <Breadcrumb key={id} aria-current="page" data-number={items.length - 1} {...(mobile ? {} : order)} {...item} />
+    ) : null;
+  }, [items, mobile]);
 
-  const renderVisibleItems = () => {
-    return visibleItems.map((item) => {
-      const id = item.id || uid();
+  const renderVisibleItems = React.useCallback(() => {
+    return visible.map((item, index) => {
+      const id = item.id || item.text;
+      const order = { style: { order: items.length - index - 1 } };
       return (
-        <Breadcrumb key={id} {...item}>
+        <Breadcrumb
+          key={id}
+          data-number={index + 1}
+          tabIndex={visibilityMap[index + 1] ? 0 : -1}
+          {...(mobile ? {} : order)}
+          {...item}
+        >
           <Separator width={iconSize} height={iconSize} aria-hidden />
         </Breadcrumb>
       );
     });
-  };
+  }, [visible, mobile, visibilityMap]);
 
-  const renderHiddenItems = () => {
+  const renderHiddenItems = React.useCallback(() => {
+    const hiddenItems = items.filter((_, index) => !visibilityMap[index]);
     return hiddenItems.length ? (
-      <>
+      <OverflowItem>
         <MenuButton options={hiddenItems} aria-label="" />
         <Separator width={iconSize} height={iconSize} aria-hidden />
-      </>
+      </OverflowItem>
     ) : null;
-  };
+  }, [items, visibilityMap]);
 
   return (
-    <Wrapper ref={wrapperRef} data-dimension={dimension} role="list" mobile={mobile} {...props}>
-      <Content ref={contentRef}>
-        {items.length > 1 ? renderFirstItem() : null}
-        {renderHiddenItems()}
-        {renderVisibleItems()}
-        {renderLastItem()}
-      </Content>
-    </Wrapper>
+    <Navigation aria-label="Breadcrumb">
+      <Wrapper ref={wrapperRef} mobile={mobile} role="list" {...props}>
+        {mobile ? (
+          <>
+            {renderFirstItem()}
+            {renderVisibleItems()}
+            {renderLastItem()}
+          </>
+        ) : (
+          <>
+            {renderFirstItem()}
+            {renderHiddenItems()}
+            <OverflowContentWrapper dimension={dimension} ref={overflowRef}>
+              {renderVisibleItems()}
+              {renderLastItem()}
+              <Compensator data-number={items.length} />
+            </OverflowContentWrapper>
+          </>
+        )}
+      </Wrapper>
+    </Navigation>
   );
 };
 
