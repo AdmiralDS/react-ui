@@ -93,7 +93,7 @@ export const AvatarGroup: React.FC<AvatarGroupProps> = ({
 
   const visible = items.slice(0, visibleItems);
   const hidden = items.slice(visibleItems, visibleItems + hiddenItems);
-
+  // Ставим стандартный размер М для меню и опций списка и XS для аватара
   const modelHidden = React.useMemo(() => {
     return hidden.map(({ id: idProp, ...item }) => {
       const id = idProp || uid();
@@ -116,7 +116,6 @@ export const AvatarGroup: React.FC<AvatarGroupProps> = ({
     });
   }, [hidden]);
 
-  const menuDimension = dimension === 'xs' ? 's' : dimension === 'xl' ? 'l' : dimension;
   const handleSelectAvatar = (id: string) => {
     onAvatarSelect?.(id);
     setSelected(id);
@@ -161,7 +160,7 @@ export const AvatarGroup: React.FC<AvatarGroupProps> = ({
       {hiddenItems > 0 ? (
         <DropMenu
           {...props}
-          dimension={menuDimension}
+          dimension="m"
           alignSelf="flex-start"
           items={modelHidden}
           selected={containsActiveAvatar ? selected : undefined}
