@@ -1,10 +1,9 @@
-import type { FC, FocusEvent, KeyboardEvent, MouseEvent, ReactNode } from 'react';
+import type { FocusEvent, KeyboardEvent, MouseEvent, ReactNode } from 'react';
 import React, { HTMLAttributes, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { ReactComponent as ChevronDownOutline } from '@admiral-ds/icons/build/system/ChevronDownOutline.svg';
 import { Button } from '#src/components/Button';
 import { Dropdown } from '#src/components/Dropdown';
-import { DropDownItem } from '#src/components/DropDownItem';
 import { keyboardKey } from '#src/components/common/keyboardKey';
 import { Shape } from '#src/components/themes/common';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
@@ -34,10 +33,6 @@ const MainButton = styled(Button)`
   }
 `;
 
-const StyledDropdown = styled(Dropdown)`
-  padding: 8px 0;
-`;
-
 const MenuButton = styled(Button)`
   &[data-appearance~='primary'] {
     border-radius: ${(p) => menuButtonBorderRadius(p.theme.shape)};
@@ -65,11 +60,6 @@ const Separator = styled.div<SeparatorProps>`
 
 const Wrapper = styled.div`
   display: inline-flex;
-`;
-
-const Icon = styled(ChevronDownOutline)<{ $menuOpened: boolean }>`
-  transition: all 0.3s;
-  ${({ $menuOpened }) => $menuOpened && 'transform: rotate(180deg);'}
 `;
 
 type Dimension = 'xl' | 'l' | 'm' | 's';
@@ -126,9 +116,7 @@ export const MultiButton = React.forwardRef<HTMLButtonElement, MultiButtonProps>
     },
     ref,
   ) => {
-    const [menuOpened, setMenuOpened] = useState<boolean>(false);
     const wrapperRef = useRef<HTMLDivElement>(null);
-    const btnRef = useRef<HTMLButtonElement>(null);
     const menuDimension = dimension === 'xl' ? 'l' : dimension;
     const menuWidth = dimension === 's' ? '240px' : '280px';
     const { display: firstOption, disabled: firstOptionDisabled, ...firstOptionProps } = options[0];
@@ -136,56 +124,23 @@ export const MultiButton = React.forwardRef<HTMLButtonElement, MultiButtonProps>
       return options.slice(1, options.length).map((item) => ({
         id: item.id,
         render: (items: RenderOptionProps) => (
-          <MenuItem dimension={dimension === 'xl' ? 'l' : dimension} {...items} key={item.id}>
+          <MenuItem dimension={menuDimension} {...items} key={item.id}>
             {item.display}
           </MenuItem>
         ),
         disabled: item.disabled,
       }));
-    }, [dimension]);
-    const reverseMenu = () => {
-      setMenuOpened((prevOpened) => {
-        prevOpened ? onClose?.() : onOpen?.();
-        return !prevOpened;
-      });
-    };
-    const closeMenu = () => {
-      setMenuOpened(false);
-      onClose?.();
-      btnRef.current?.focus();
-    };
+    }, [dimension, options]);
 
-    const clickOutside = (e: Event) => {
-      if (e.target && btnRef.current?.contains(e.target as Node)) {
-        return;
-      }
-      setMenuOpened(false);
-    };
-
-    const handleWrapperFocus = (e: FocusEvent<HTMLDivElement>) => {
+    const handleWrapperFocus = () => {
       wrapperRef.current?.setAttribute('data-focused', 'true');
     };
-    const handleWrapperBlur = (e: FocusEvent<HTMLDivElement>) => {
+    const handleWrapperBlur = () => {
       wrapperRef.current?.setAttribute('data-focused', 'false');
     };
 
     const handleMainBtnClick = (e: MouseEvent<HTMLButtonElement>) => {
       onChange(e.currentTarget.id);
-    };
-    const handleMenuBtnKeyDown = (e: KeyboardEvent<HTMLButtonElement>) => {
-      const code = keyboardKey.getCode(e);
-      if (code === keyboardKey.ArrowDown || code === keyboardKey.Enter || code === keyboardKey[' ']) {
-        setMenuOpened(true);
-        onOpen?.();
-        e.preventDefault();
-      }
-    };
-
-    const handleMenuKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
-      const code = keyboardKey.getCode(e);
-      if (code === keyboardKey.Escape || code === keyboardKey.Tab) {
-        closeMenu();
-      }
     };
 
     return (
@@ -196,7 +151,7 @@ export const MultiButton = React.forwardRef<HTMLButtonElement, MultiButtonProps>
         onOpen={onOpen}
         onClose={onClose}
         ref={ref}
-        dimension={dimension === 'xl' ? 'l' : dimension}
+        dimension={menuDimension}
         disabled={disabled}
         selected={selected}
         renderContentProp={({ buttonRef, handleKeyDown, handleClick, statusIcon, menuState }) => {
