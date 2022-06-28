@@ -649,6 +649,31 @@ Object {
   cursor: pointer;
 }
 
+.c8 {
+  -webkit-transition: -webkit-transform 0.3s ease-in-out;
+  -webkit-transition: transform 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out;
+  -webkit-transform: rotate(0deg);
+  -ms-transform: rotate(0deg);
+  transform: rotate(0deg);
+}
+
+.c8 *[fill^='#'] {
+  fill: #74777F;
+}
+
+.c8:hover *[fill^='#'] {
+  fill: #0046E2;
+}
+
+.c8[data-disabled] {
+  pointer-events: none;
+}
+
+.c8[data-disabled] *[fill^='#'] {
+  fill: #B1B5BB;
+}
+
 .c2[data-appearance~='primary'] {
   border-radius: 4px 0 0 4px;
 }
@@ -694,11 +719,6 @@ Object {
   display: inline-flex;
 }
 
-.c8 {
-  -webkit-transition: all 0.3s;
-  transition: all 0.3s;
-}
-
 <body>
     <div>
       <div
@@ -740,6 +760,7 @@ Object {
             class="c3 c4"
           >
             <div
+              aria-hidden="true"
               class="c8"
             />
           </div>
@@ -1393,6 +1414,31 @@ Object {
   cursor: pointer;
 }
 
+.c8 {
+  -webkit-transition: -webkit-transform 0.3s ease-in-out;
+  -webkit-transition: transform 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out;
+  -webkit-transform: rotate(0deg);
+  -ms-transform: rotate(0deg);
+  transform: rotate(0deg);
+}
+
+.c8 *[fill^='#'] {
+  fill: #74777F;
+}
+
+.c8:hover *[fill^='#'] {
+  fill: #0046E2;
+}
+
+.c8[data-disabled] {
+  pointer-events: none;
+}
+
+.c8[data-disabled] *[fill^='#'] {
+  fill: #B1B5BB;
+}
+
 .c2[data-appearance~='primary'] {
   border-radius: 4px 0 0 4px;
 }
@@ -1438,11 +1484,6 @@ Object {
   display: inline-flex;
 }
 
-.c8 {
-  -webkit-transition: all 0.3s;
-  transition: all 0.3s;
-}
-
 <div>
     <div
       class="c0"
@@ -1483,6 +1524,7 @@ Object {
           class="c3 c4"
         >
           <div
+            aria-hidden="true"
             class="c8"
           />
         </div>
@@ -2192,6 +2234,31 @@ Object {
   cursor: pointer;
 }
 
+.c8 {
+  -webkit-transition: -webkit-transform 0.3s ease-in-out;
+  -webkit-transition: transform 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out;
+  -webkit-transform: rotate(0deg);
+  -ms-transform: rotate(0deg);
+  transform: rotate(0deg);
+}
+
+.c8 *[fill^='#'] {
+  fill: #74777F;
+}
+
+.c8:hover *[fill^='#'] {
+  fill: #0046E2;
+}
+
+.c8[data-disabled] {
+  pointer-events: none;
+}
+
+.c8[data-disabled] *[fill^='#'] {
+  fill: #B1B5BB;
+}
+
 .c2[data-appearance~='primary'] {
   border-radius: 4px 0 0 4px;
 }
@@ -2237,11 +2304,6 @@ Object {
   display: inline-flex;
 }
 
-.c8 {
-  -webkit-transition: all 0.3s;
-  transition: all 0.3s;
-}
-
 <body>
     <div>
       <div
@@ -2280,6 +2342,7 @@ Object {
             class="c3 c4"
           >
             <div
+              aria-hidden="true"
               class="c8"
             />
           </div>
@@ -2933,6 +2996,31 @@ Object {
   cursor: pointer;
 }
 
+.c8 {
+  -webkit-transition: -webkit-transform 0.3s ease-in-out;
+  -webkit-transition: transform 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out;
+  -webkit-transform: rotate(0deg);
+  -ms-transform: rotate(0deg);
+  transform: rotate(0deg);
+}
+
+.c8 *[fill^='#'] {
+  fill: #74777F;
+}
+
+.c8:hover *[fill^='#'] {
+  fill: #0046E2;
+}
+
+.c8[data-disabled] {
+  pointer-events: none;
+}
+
+.c8[data-disabled] *[fill^='#'] {
+  fill: #B1B5BB;
+}
+
 .c2[data-appearance~='primary'] {
   border-radius: 4px 0 0 4px;
 }
@@ -2978,11 +3066,6 @@ Object {
   display: inline-flex;
 }
 
-.c8 {
-  -webkit-transition: all 0.3s;
-  transition: all 0.3s;
-}
-
 <div>
     <div
       class="c0"
@@ -3020,6 +3103,7 @@ Object {
           class="c3 c4"
         >
           <div
+            aria-hidden="true"
             class="c8"
           />
         </div>
@@ -3729,6 +3813,31 @@ Object {
   cursor: pointer;
 }
 
+.c8 {
+  -webkit-transition: -webkit-transform 0.3s ease-in-out;
+  -webkit-transition: transform 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out;
+  -webkit-transform: rotate(0deg);
+  -ms-transform: rotate(0deg);
+  transform: rotate(0deg);
+}
+
+.c8 *[fill^='#'] {
+  fill: #74777F;
+}
+
+.c8:hover *[fill^='#'] {
+  fill: #0046E2;
+}
+
+.c8[data-disabled] {
+  pointer-events: none;
+}
+
+.c8[data-disabled] *[fill^='#'] {
+  fill: #B1B5BB;
+}
+
 .c2[data-appearance~='primary'] {
   border-radius: 4px 0 0 4px;
 }
@@ -3774,11 +3883,6 @@ Object {
   display: inline-flex;
 }
 
-.c8 {
-  -webkit-transition: all 0.3s;
-  transition: all 0.3s;
-}
-
 <body>
     <div>
       <div
@@ -3817,6 +3921,7 @@ Object {
             class="c3 c4"
           >
             <div
+              aria-hidden="true"
               class="c8"
             />
           </div>
@@ -4470,6 +4575,31 @@ Object {
   cursor: pointer;
 }
 
+.c8 {
+  -webkit-transition: -webkit-transform 0.3s ease-in-out;
+  -webkit-transition: transform 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out;
+  -webkit-transform: rotate(0deg);
+  -ms-transform: rotate(0deg);
+  transform: rotate(0deg);
+}
+
+.c8 *[fill^='#'] {
+  fill: #74777F;
+}
+
+.c8:hover *[fill^='#'] {
+  fill: #0046E2;
+}
+
+.c8[data-disabled] {
+  pointer-events: none;
+}
+
+.c8[data-disabled] *[fill^='#'] {
+  fill: #B1B5BB;
+}
+
 .c2[data-appearance~='primary'] {
   border-radius: 4px 0 0 4px;
 }
@@ -4515,11 +4645,6 @@ Object {
   display: inline-flex;
 }
 
-.c8 {
-  -webkit-transition: all 0.3s;
-  transition: all 0.3s;
-}
-
 <div>
     <div
       class="c0"
@@ -4557,6 +4682,7 @@ Object {
           class="c3 c4"
         >
           <div
+            aria-hidden="true"
             class="c8"
           />
         </div>
