@@ -29,7 +29,7 @@ export interface FileUploaderProps extends Omit<InputHTMLAttributes<HTMLInputEle
   /** Обработчик удаления файла */
   onRemoveFile?: (index: number) => void;
   /** Функция, возвращающая компонент с кастомным списком файлов */
-  renderFileInfoList?: (files: FileProps[]) => ReactNode;
+  renderFileInfoList?: (renderProps: { files: FileProps[]; onRemoveFile: (index: number) => void }) => ReactNode;
   /** Кастомные элементы содержимого компонента */
   children?: ReactNode;
 }
@@ -214,9 +214,9 @@ export const FileUploader = React.forwardRef<HTMLInputElement, FileUploaderProps
 
     const renderFileInfoList =
       r ??
-      ((files) =>
+      (({ files, onRemoveFile }) =>
         files.map((file, index) => {
-          return <FileInfo {...previewProps} key={index} file={file} onCloseClick={() => handleRemoveFile(index)} />;
+          return <FileInfo {...previewProps} key={index} file={file} onCloseClick={() => onRemoveFile(index)} />;
         }));
 
     return (
@@ -247,7 +247,7 @@ export const FileUploader = React.forwardRef<HTMLInputElement, FileUploaderProps
                 />
               </UploaderWrapperXL>
             )}
-            {files && <FileWrapper>{renderFileInfoList(files)}</FileWrapper>}
+            {files && <FileWrapper>{renderFileInfoList({ files, onRemoveFile: handleRemoveFile })}</FileWrapper>}
           </>
         ) : (
           <>
@@ -278,7 +278,7 @@ export const FileUploader = React.forwardRef<HTMLInputElement, FileUploaderProps
                 </UploaderWrapperM>
               </>
             )}
-            {files && <FileWrapper>{renderFileInfoList(files)}</FileWrapper>}
+            {files && <FileWrapper>{renderFileInfoList({ files, onRemoveFile: handleRemoveFile })}</FileWrapper>}
           </>
         )}
       </Wrapper>
