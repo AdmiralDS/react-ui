@@ -7,7 +7,7 @@ import { Separator, Wrapper, OverflowContentWrapper, OverflowItem, Compensator, 
 
 type Dimension = 'l' | 'm' | 's';
 
-export interface BreadcrumbsProps extends React.HTMLAttributes<HTMLOListElement> {
+export interface BreadcrumbsProps extends React.HTMLAttributes<HTMLElement> {
   /** Массив хлебных крошек */
   items: BreadcrumbProps[];
   /** Размер компонента */
@@ -70,7 +70,7 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items, dimension = 'l'
     const item = items[0];
     const id = item.id || item.text;
     return items.length > 1 ? (
-      <Breadcrumb key={id} data-number={0} {...item}>
+      <Breadcrumb key={id} data-number={0} dimension={dimension} {...item}>
         <Separator width={iconSize} height={iconSize} aria-hidden />
       </Breadcrumb>
     ) : null;
@@ -81,7 +81,14 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items, dimension = 'l'
     const id = item.id || item.text;
     const order = { style: { order: 1 } };
     return items.length > 0 ? (
-      <Breadcrumb key={id} aria-current="page" data-number={items.length - 1} {...(mobile ? {} : order)} {...item} />
+      <Breadcrumb
+        key={id}
+        aria-current="page"
+        data-number={items.length - 1}
+        dimension={dimension}
+        {...(mobile ? {} : order)}
+        {...item}
+      />
     ) : null;
   }, [items, mobile]);
 
@@ -94,6 +101,7 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items, dimension = 'l'
           key={id}
           data-number={index + 1}
           tabIndex={visibilityMap[index + 1] ? 0 : -1}
+          dimension={dimension}
           {...(mobile ? {} : order)}
           {...item}
         >
@@ -114,8 +122,8 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items, dimension = 'l'
   }, [items, visibilityMap]);
 
   return (
-    <Navigation aria-label="Breadcrumb">
-      <Wrapper ref={wrapperRef} mobile={mobile} role="list" {...props}>
+    <Navigation aria-label="Breadcrumb" {...props}>
+      <Wrapper ref={wrapperRef} mobile={mobile} role="list">
         {mobile ? (
           <>
             {renderFirstItem()}

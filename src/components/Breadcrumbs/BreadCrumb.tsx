@@ -1,22 +1,30 @@
 import * as React from 'react';
 import { refSetter } from '#src/components/common/utils/refSetter';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { typography } from '#src/components/Typography';
 import { Tooltip } from '#src/components/Tooltip';
+import type { BreadcrumbsProps } from '#src/components/Breadcrumbs';
 
-export const Crumb = styled.li`
+const getTypography = css<{ dimension: BreadcrumbsProps['dimension'] }>`
+  ${({ dimension }) => {
+    switch (dimension) {
+      case 's':
+        return typography['Caption/Caption 1'];
+      case 'm':
+        return typography['Body/Body 2 Short'];
+      case 'l':
+      default:
+        return typography['Body/Body 1 Short'];
+    }
+  }}
+`;
+
+export const Crumb = styled.li<{ dimension: BreadcrumbsProps['dimension'] }>`
   display: flex;
   flex-shrink: 0;
   align-items: center;
   white-space: nowrap;
-  ${typography['Body/Body 1 Short']}
-
-  [data-dimension='m'] & {
-    ${typography['Body/Body 2 Short']}
-  }
-  [data-dimension='s'] & {
-    ${typography['Caption/Caption 1']}
-  }
+  ${getTypography}
 `;
 
 export const Content = styled.span`
@@ -72,15 +80,17 @@ export interface BreadcrumbProps extends React.HTMLAttributes<HTMLLIElement> {
   linkAs?: React.ElementType;
   /** Дополнительные параметры, которые можно передать во внутренний Anchor */
   linkProps?: { [key: string]: string };
+  /** Размер компонента */
+  dimension?: BreadcrumbsProps['dimension'];
 }
 
 export const Breadcrumb = React.forwardRef<HTMLLIElement, BreadcrumbProps>(
-  ({ text, url = '#', linkAs, linkProps, children, tabIndex, ...props }, ref) => {
+  ({ text, url = '#', linkAs, linkProps, children, tabIndex, dimension = 'l', ...props }, ref) => {
     const tooltip = text.length > 40;
     const crumbRef = React.useRef<HTMLLIElement>(null);
 
     return tooltip ? (
-      <Crumb ref={refSetter(ref, crumbRef)} {...props}>
+      <Crumb ref={refSetter(ref, crumbRef)} dimension={dimension} {...props}>
         <CrumbAnchor href={url} as={linkAs} tabIndex={tabIndex} {...linkProps}>
           <Content tabIndex={-1} role="link">
             <Tooltip renderContent={() => text}>{text.slice(0, 37) + '...'}</Tooltip>
@@ -89,7 +99,7 @@ export const Breadcrumb = React.forwardRef<HTMLLIElement, BreadcrumbProps>(
         </CrumbAnchor>
       </Crumb>
     ) : (
-      <Crumb ref={refSetter(ref, crumbRef)} {...props}>
+      <Crumb ref={refSetter(ref, crumbRef)} dimension={dimension} {...props}>
         <CrumbAnchor href={url} as={linkAs} tabIndex={tabIndex} {...linkProps}>
           <Content tabIndex={-1} role="link">
             {text}

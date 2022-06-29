@@ -49,6 +49,8 @@ export interface SliderInputProps extends Omit<TextInputProps, 'onChange' | 'val
   step?: number;
   /** Массив отметок слайдера */
   tickMarks?: number[];
+  /** Render колбек для отрисовки кастомизированных подписей к отметкам слайдера */
+  renderTickMark?: (mark: string) => React.ReactNode;
   /** точность (количество знаков после точки). Если precision равно 0, то точку ввести нельзя, только целые числа */
   precision?: number;
   /** разделитель между тысячами */
@@ -68,6 +70,7 @@ export const SliderInput = React.forwardRef<HTMLInputElement, SliderInputProps>(
     {
       defaultValue = '',
       onChange,
+      renderTickMark,
       minValue = 0,
       maxValue = 20,
       step = 1,
@@ -137,6 +140,7 @@ export const SliderInput = React.forwardRef<HTMLInputElement, SliderInputProps>(
           aria-hidden
           value={sliderValue}
           onChange={handleSliderChange}
+          renderTickMark={renderTickMark}
           minValue={minValue}
           maxValue={maxValue}
           decimal={decimal}

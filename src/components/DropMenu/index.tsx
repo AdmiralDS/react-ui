@@ -6,6 +6,11 @@ import type { ItemProps } from '#src/components/MenuItem';
 import { DropdownContainer } from '#src/components/DropdownContainer';
 import { Menu, MenuDimensions as Dimension, MenuProps } from '#src/components/Menu';
 import { refSetter } from '#src/components/common/utils/refSetter';
+import styled from 'styled-components';
+
+const StyledMenu = styled(Menu)<{ width?: string }>`
+  width: ${({ width }) => (width ? width : 'auto')};
+`;
 
 export interface RenderContentProps {
   /** Ref на отрендеренный элемент */
@@ -27,6 +32,8 @@ export interface DropMenuProps
     Omit<HTMLAttributes<HTMLElement>, 'onChange'> {
   /** Размер компонента */
   dimension?: Dimension;
+  /**  Ширина меню */
+  menuWidth?: string;
   /** Состояние загрузки */
   loading?: boolean;
   /** Опции выпадающего списка */
@@ -53,6 +60,7 @@ export const DropMenu = React.forwardRef<HTMLElement, DropMenuProps>(
   (
     {
       dimension = 'm',
+      menuWidth,
       disabled = false,
       loading = false,
       alignSelf = 'flex-end',
@@ -65,6 +73,7 @@ export const DropMenu = React.forwardRef<HTMLElement, DropMenuProps>(
       onKeyDown,
       alignMenuRef,
       renderContentProp,
+      ...props
     },
     ref,
   ) => {
@@ -142,8 +151,10 @@ export const DropMenu = React.forwardRef<HTMLElement, DropMenuProps>(
             alignSelf={alignSelf}
             targetRef={alignMenuRef || btnRef}
             onClickOutside={clickOutside}
+            {...props}
           >
-            <Menu
+            <StyledMenu
+              width={menuWidth}
               model={items}
               selected={selected}
               onSelectItem={handleClick}

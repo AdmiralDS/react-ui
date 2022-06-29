@@ -17,6 +17,7 @@ const Desc = styled.div`
 
 const Description = () => (
   <Desc>
+    DEPRECATED используйте DropMenu. <br />
     Компонент Dropdown Menu имеет три размера и может быть с иконкой или без. Высота строки : xl - 48px, m - 40px, s -
     32px
   </Desc>

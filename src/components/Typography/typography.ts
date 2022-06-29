@@ -318,7 +318,7 @@ export const typography = {
   'Subtitle/Subtitle 1': css`
     font-family: ${FONT_FAMILY};
     font-style: normal;
-    font-weight: normal;
+    font-weight: 400;
     font-size: 18px;
     line-height: 24px;
     /* or 133% */
@@ -348,7 +348,7 @@ export const typography = {
   'Body/Body 1 Long': css`
     font-family: ${FONT_FAMILY};
     font-style: normal;
-    font-weight: normal;
+    font-weight: 400;
     font-size: 16px;
     line-height: 24px;
     /* or 150% */
@@ -358,7 +358,7 @@ export const typography = {
   'Body/Body 1 Short': css`
     font-family: ${FONT_FAMILY};
     font-style: normal;
-    font-weight: normal;
+    font-weight: 400;
     font-size: 16px;
     line-height: 20px;
     /* or 125% */
@@ -368,7 +368,7 @@ export const typography = {
   'Body/Body 2 Long': css`
     font-family: ${FONT_FAMILY};
     font-style: normal;
-    font-weight: normal;
+    font-weight: 400;
     font-size: 14px;
     line-height: 20px;
     /* or 133% */
@@ -378,7 +378,7 @@ export const typography = {
   'Body/Body 2 Short': css`
     font-family: ${FONT_FAMILY};
     font-style: normal;
-    font-weight: normal;
+    font-weight: 400;
     font-size: 14px;
     line-height: 16px;
     /* or 114% */
@@ -408,7 +408,7 @@ export const typography = {
   'Caption/Caption 1': css`
     font-family: ${FONT_FAMILY};
     font-style: normal;
-    font-weight: normal;
+    font-weight: 400;
     font-size: 12px;
     line-height: 16px;
     /* identical to box height, or 133% */
