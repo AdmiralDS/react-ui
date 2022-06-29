@@ -86,6 +86,17 @@ export const TabMenu: React.FC<TabMenuProps> = ({
       disabled: item.disabled,
     }));
   }, [dimension, hiddenTabs]);
+  const modelTabs = React.useMemo(() => {
+    return tabsWithRef.map((item) => ({
+      id: item.id,
+      render: (options: RenderOptionProps) => (
+        <MenuItem dimension={dimension} {...options} key={item.id}>
+          {item.content}
+        </MenuItem>
+      ),
+      disabled: item.disabled,
+    }));
+  }, [dimension, tabsWithRef]);
 
   const isHiddenTabSelected = () => hiddenTabs.findIndex((tab) => tab.id === activeTab) != -1;
 
@@ -304,35 +315,56 @@ export const TabMenu: React.FC<TabMenuProps> = ({
         {visibleTabs.map((item: TabWithRefProps) => {
           const { disabled, content, id, icon, badge, ref, width, ...props } = item;
           return (
-            <Tab
-              ref={ref}
-              key={id}
-              id={id}
-              role="tab"
-              type="button"
-              aria-selected={id === activeTab}
-              selected={id === activeTab}
-              tabIndex={id === activeTab ? 0 : -1}
-              dimension={dimension}
-              disabled={disabled}
-              onClick={handleTabClick}
-              onKeyUp={handleTabKeyUp}
-              {...props}
-            >
-              <TabContentWrapper dimension={dimension} tabIndex={-1}>
-                {icon && icon}
-                <TabContent>{content}</TabContent>
-                {typeof badge !== 'undefined' && (
-                  <Badge
-                    data-badge
-                    dimension="s"
-                    appearance={id === activeTab ? 'info' : disabled ? 'lightDisable' : 'lightInactive'}
-                  >
-                    {badge}
-                  </Badge>
-                )}
-              </TabContentWrapper>
-            </Tab>
+            <>
+              <Tab
+                ref={ref}
+                key={id}
+                id={id}
+                role="tab"
+                type="button"
+                aria-selected={id === activeTab}
+                selected={id === activeTab}
+                tabIndex={id === activeTab ? 0 : -1}
+                dimension={dimension}
+                disabled={disabled}
+                onClick={handleTabClick}
+                onKeyUp={handleTabKeyUp}
+                {...props}
+              >
+                <TabContentWrapper dimension={dimension} tabIndex={-1}>
+                  {icon && icon}
+                  <TabContent>{content}</TabContent>
+                  {typeof badge !== 'undefined' && (
+                    <Badge
+                      data-badge
+                      dimension="s"
+                      appearance={id === activeTab ? 'info' : disabled ? 'lightDisable' : 'lightInactive'}
+                    >
+                      {badge}
+                    </Badge>
+                  )}
+                </TabContentWrapper>
+              </Tab>
+              <StyledOverflowMenu
+                ref={overflowBtnRef}
+                onOpen={() => setOpenedMenu(true)}
+                onClose={() => setOpenedMenu(false)}
+                alignSelf={alignSelf}
+                items={modelTabs.slice(tabsWithRef.findIndex((item) => item.id === id) + 1)}
+                selected={containsActiveTab ? activeTab : undefined}
+                dimension={dimension}
+                isActive={containsActiveTab}
+                disabled={hiddenTabs.length === hiddenTabs.filter((tab) => tab.disabled).length}
+                onChange={(id: string) => {
+                  onChange(id);
+                  if (!isHiddenTabSelected) {
+                    styleUnderline(0, 0);
+                  }
+                }}
+                tabIndex={hiddenTabs?.filter((item) => item.id === activeTab).length ? 0 : -1}
+                onKeyDown={handleMenuKeyDown}
+              />
+            </>
           );
         })}
       </TabsWrapper>

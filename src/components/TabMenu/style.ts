@@ -148,6 +148,7 @@ export const Tab = styled.button<{ dimension: Dimension; selected: boolean }>`
 `;
 
 export const StyledOverflowMenu = styled(OverflowMenu)<{ isActive: boolean }>`
+  margin: auto;
   &:focus-visible {
     &:before {
       content: '';
