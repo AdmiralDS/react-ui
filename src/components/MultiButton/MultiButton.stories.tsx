@@ -110,8 +110,8 @@ const Template1: ComponentStory<typeof MultiButton> = (args) => {
     },
   ];
 
-  const [selected, setSelected] = React.useState<string | null>(null);
-  const [selected2, setSelected2] = React.useState<string | null>(null);
+  const [selected, setSelected] = React.useState<string | undefined>(undefined);
+  const [selected2, setSelected2] = React.useState<string | undefined>(undefined);
 
   function swapBorder(theme: Theme): Theme {
     theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
@@ -185,8 +185,9 @@ const items: Array<MultiButtonItem> = [
 ];
 
 const Template2: ComponentStory<typeof MultiButton> = (args) => {
-  const [selected, setSelected] = React.useState<string | null>(null);
-  const [selected2, setSelected2] = React.useState<string | null>(null);
+  const [selected, setSelected] = React.useState<string | undefined>(undefined);
+  const [selected2, setSelected2] = React.useState<string | undefined>(undefined);
+
   return (
     <>
       <div style={{ display: 'flex', justifyContent: 'space-around' }}>
