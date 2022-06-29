@@ -1,6 +1,6 @@
 import type { FocusEvent, KeyboardEvent, MouseEvent, ReactNode } from 'react';
 import React, { HTMLAttributes, useRef, useState } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { ReactComponent as ChevronDownOutline } from '@admiral-ds/icons/build/system/ChevronDownOutline.svg';
 import { Button } from '#src/components/Button';
 import { Dropdown } from '#src/components/Dropdown';
@@ -20,6 +20,18 @@ function menuButtonBorderRadius(shape: Shape): string {
   return `0 ${radius} ${radius} 0`;
 }
 
+const focusStyle = css`
+  &:focus-visible {
+    outline-offset: -4px;
+    &[data-appearance~='primary'] {
+      outline: ${(p) => p.theme.color['Neutral/Neutral 00']} solid 2px;
+    }
+    &[data-appearance~='secondary'] {
+      outline: ${(p) => p.theme.color['Primary/Primary 60 Main']} solid 2px;
+    }
+  }
+`;
+
 const MainButton = styled(Button)`
   &[data-appearance~='primary'] {
     border-radius: ${(p) => mainButtonBorderRadius(p.theme.shape)};
@@ -28,9 +40,7 @@ const MainButton = styled(Button)`
     border-right: none;
     border-radius: ${(p) => mainButtonBorderRadius(p.theme.shape)};
   }
-  &:focus {
-    outline: none;
-  }
+  ${focusStyle}
 `;
 
 const MenuButton = styled(Button)`
@@ -41,9 +51,7 @@ const MenuButton = styled(Button)`
     border-left: none;
     border-radius: ${(p) => menuButtonBorderRadius(p.theme.shape)};
   }
-  &:focus {
-    outline: none;
-  }
+  ${focusStyle}
 `;
 
 const Separator = styled.div<SeparatorProps>`
@@ -152,6 +160,7 @@ export const MultiButton = React.forwardRef<HTMLButtonElement, MultiButtonProps>
         onClose={onClose}
         ref={ref}
         dimension={menuDimension}
+        menuWidth={menuWidth}
         disabled={disabled}
         selected={selected}
         renderContentProp={({ buttonRef, handleKeyDown, handleClick, statusIcon, menuState }) => {
