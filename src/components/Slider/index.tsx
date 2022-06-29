@@ -25,6 +25,8 @@ export interface SliderProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onCha
   thousand?: string;
   /** Массив отметок */
   tickMarks?: number[];
+  /** Render колбек для отрисовки кастомизированных подписей к отметкам слайдера */
+  renderTickMark?: (mark: string) => React.ReactNode;
   /** Отключение компонента */
   disabled?: boolean;
   /** Размер компонента */
@@ -39,6 +41,7 @@ export const Slider = ({
   thousand = ' ',
   value = 0,
   onChange,
+  renderTickMark,
   tickMarks: points,
   disabled = false,
   step = 1,
@@ -245,6 +248,7 @@ export const Slider = ({
                 precision={precision}
                 thousand={thousand}
                 onPointClick={onPointClick}
+                renderTickMark={renderTickMark}
               />
             }
             <Thumb
