@@ -253,10 +253,11 @@ const TemplateWithCards: ComponentStory<typeof DropMenu> = (args) => {
           onSelectItem={setSelected}
           active={active}
           onActivateItem={setActive}
-          renderContentProp={({ buttonRef, handleKeyDown, handleClick }) => {
+          renderContentProp={({ buttonRef, handleKeyDown, handleClick, statusIcon }) => {
             return (
               <Button ref={buttonRef as React.Ref<HTMLButtonElement>} onKeyDown={handleKeyDown} onClick={handleClick}>
                 Нажми
+                {statusIcon}
               </Button>
             );
           }}
