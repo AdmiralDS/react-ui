@@ -151,7 +151,7 @@ export const NEW_FONTS = [
   {
     name: 'Header/HL1',
     style: [
-      { name: 'Вес:', value: '500' },
+      { name: 'Вес:', value: '550' },
       { name: 'Размер:', value: '72px' },
       { name: 'Высота строки:', value: '80px' },
     ],
@@ -160,7 +160,7 @@ export const NEW_FONTS = [
   {
     name: 'Header/HL2',
     style: [
-      { name: 'Вес:', value: '500' },
+      { name: 'Вес:', value: '550' },
       { name: 'Размер:', value: '56px' },
       { name: 'Высота строки:', value: '64px' },
     ],
@@ -169,7 +169,7 @@ export const NEW_FONTS = [
   {
     name: 'Header/HL3',
     style: [
-      { name: 'Вес:', value: '500' },
+      { name: 'Вес:', value: '550' },
       { name: 'Размер:', value: '48px' },
       { name: 'Высота строки:', value: '56px' },
     ],
@@ -178,7 +178,7 @@ export const NEW_FONTS = [
   {
     name: 'Header/H1',
     style: [
-      { name: 'Вес:', value: '500' },
+      { name: 'Вес:', value: '550' },
       { name: 'Размер:', value: '40px' },
       { name: 'Высота строки:', value: '48px' },
     ],
@@ -188,7 +188,7 @@ export const NEW_FONTS = [
   {
     name: 'Header/H2',
     style: [
-      { name: 'Вес:', value: '500' },
+      { name: 'Вес:', value: '550' },
       { name: 'Размер:', value: '34px' },
       { name: 'Высота строки:', value: '40px' },
     ],
@@ -198,7 +198,7 @@ export const NEW_FONTS = [
   {
     name: 'Header/H3',
     style: [
-      { name: 'Вес:', value: '500' },
+      { name: 'Вес:', value: '550' },
       { name: 'Размер:', value: '28px' },
       { name: 'Высота строки:', value: '36px' },
     ],
@@ -208,7 +208,7 @@ export const NEW_FONTS = [
   {
     name: 'Header/H4',
     style: [
-      { name: 'Вес:', value: '500' },
+      { name: 'Вес:', value: '550' },
       { name: 'Размер:', value: '24px' },
       { name: 'Высота строки:', value: '32px' },
     ],
@@ -217,7 +217,7 @@ export const NEW_FONTS = [
   {
     name: 'Header/H5',
     style: [
-      { name: 'Вес:', value: '500' },
+      { name: 'Вес:', value: '550' },
       { name: 'Размер:', value: '20px' },
       { name: 'Высота строки:', value: '28px' },
     ],
@@ -226,7 +226,7 @@ export const NEW_FONTS = [
   {
     name: 'Header/H6',
     style: [
-      { name: 'Вес:', value: '500' },
+      { name: 'Вес:', value: '550' },
       { name: 'Размер:', value: '18px' },
       { name: 'Высота строки:', value: '24px' },
     ],
@@ -244,7 +244,7 @@ export const NEW_FONTS = [
   {
     name: 'Subtitle/Subtitle 2',
     style: [
-      { name: 'Вес:', value: '500' },
+      { name: 'Вес:', value: '550' },
       { name: 'Размер:', value: '16px' },
       { name: 'Высота строки:', value: '24px' },
     ],
@@ -253,7 +253,7 @@ export const NEW_FONTS = [
   {
     name: 'Subtitle/Subtitle 3',
     style: [
-      { name: 'Вес:', value: '500' },
+      { name: 'Вес:', value: '550' },
       { name: 'Размер:', value: '14px' },
       { name: 'Высота строки:', value: '20px' },
     ],

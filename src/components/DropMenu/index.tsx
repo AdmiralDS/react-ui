@@ -73,6 +73,7 @@ export const DropMenu = React.forwardRef<HTMLElement, DropMenuProps>(
       onKeyDown,
       alignMenuRef,
       renderContentProp,
+      ...props
     },
     ref,
   ) => {
@@ -150,6 +151,7 @@ export const DropMenu = React.forwardRef<HTMLElement, DropMenuProps>(
             alignSelf={alignSelf}
             targetRef={alignMenuRef || btnRef}
             onClickOutside={clickOutside}
+            {...props}
           >
             <StyledMenu
               width={menuWidth}
