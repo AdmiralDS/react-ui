@@ -368,27 +368,6 @@ export const TabMenu: React.FC<TabMenuProps> = ({
           );
         })}
       </TabsWrapper>
-      {hiddenTabs.length && !mobile ? (
-        <StyledOverflowMenu
-          ref={overflowBtnRef}
-          onOpen={() => setOpenedMenu(true)}
-          onClose={() => setOpenedMenu(false)}
-          alignSelf={alignSelf}
-          items={model}
-          selected={containsActiveTab ? activeTab : undefined}
-          dimension={dimension}
-          isActive={containsActiveTab}
-          disabled={hiddenTabs.length === hiddenTabs.filter((tab) => tab.disabled).length}
-          onChange={(id: string) => {
-            onChange(id);
-            if (!isHiddenTabSelected) {
-              styleUnderline(0, 0);
-            }
-          }}
-          tabIndex={hiddenTabs?.filter((item) => item.id === activeTab).length ? 0 : -1}
-          onKeyDown={handleMenuKeyDown}
-        />
-      ) : null}
     </Wrapper>
   );
 };
