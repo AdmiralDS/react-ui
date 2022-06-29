@@ -298,7 +298,7 @@ export const TabMenu: React.FC<TabMenuProps> = ({
   Иначе будет постоянно передаваться в таб, что не верно,
   т.к. параметр width нужен только для внутренних расчетов */
   return (
-    <Wrapper role="tablist" ref={tablistRef} underline={underline} mobile={mobile} {...props}>
+    <Wrapper role="tablist" ref={tablistRef} underline={underline} mobile={mobile} dimension={dimension} {...props}>
       <Underline ref={underlineRef} aria-hidden />
       <TabsWrapper ref={tabsWrapperRef} onKeyDown={handleTabsWrapperKeyDown}>
         {visibleTabs.map((item: TabWithRefProps) => {

@@ -16,11 +16,13 @@ import {
   TAB_PADDING_M,
 } from '#src/components/TabMenu/constants';
 
-export const Wrapper = styled.div<{ underline?: boolean; mobile?: boolean }>`
+export const Wrapper = styled.div<{ underline?: boolean; mobile?: boolean; dimension?: Dimension }>`
   position: relative;
   display: flex;
   flex: 1 1 auto;
   flex-wrap: nowrap;
+  height: ${({ dimension }) => (dimension === 'l' ? TAB_HEIGHT_L : TAB_HEIGHT_M)}px;
+  max-height: ${({ dimension }) => (dimension === 'l' ? TAB_HEIGHT_L : TAB_HEIGHT_M)}px;
   align-items: center;
   justify-content: space-between;
   width: 100%;
