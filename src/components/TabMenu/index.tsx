@@ -98,7 +98,7 @@ export const TabMenu: React.FC<TabMenuProps> = ({
     }));
   }, [dimension, tabsWithRef]);
 
-  const isHiddenTabSelected = () => hiddenTabs.findIndex((tab) => tab.id === activeTab) != -1;
+  const isHiddenTabSelected = (items: Array<ItemProps>) => items.findIndex((tab) => tab.id === activeTab) != -1;
 
   const containsActiveTab = (items: Array<ItemProps>) => {
     return items.findIndex((item) => item.id === activeTab) != -1;
@@ -360,7 +360,7 @@ export const TabMenu: React.FC<TabMenuProps> = ({
                 disabled={tabsForMenu.length === tabsForMenu.filter((tab) => tab.disabled).length}
                 onChange={(id: string) => {
                   onChange(id);
-                  if (!isHiddenTabSelected) {
+                  if (!isHiddenTabSelected(tabsForMenu)) {
                     styleUnderline(0, 0);
                   }
                 }}
