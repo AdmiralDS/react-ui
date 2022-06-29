@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.4.2](https://github.com/AdmiralDS/react-ui/compare/v1.4.1...v1.4.2) (2022-06-28)
+
+### [1.4.1](https://github.com/AdmiralDS/react-ui/compare/v1.4.0...v1.4.1) (2022-06-28)
+
+
+### Bug Fixes
+
+* **FileUploader:** fix [#189](https://github.com/AdmiralDS/react-ui/issues/189) ([e9789a8](https://github.com/AdmiralDS/react-ui/commit/e9789a8a53aa7f7d8b1189dc01caf022058f8121))
+
 ## [1.4.0](https://github.com/AdmiralDS/react-ui/compare/v1.3.1...v1.4.0) (2022-06-27)
 
 
