@@ -20,7 +20,8 @@ export const Wrapper = styled.div<{ underline?: boolean; mobile?: boolean; dimen
   position: relative;
   display: flex;
   flex: 1 1 auto;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
+  overflow: hidden;
   height: ${({ dimension }) => (dimension === 'l' ? TAB_HEIGHT_L : TAB_HEIGHT_M)}px;
   max-height: ${({ dimension }) => (dimension === 'l' ? TAB_HEIGHT_L : TAB_HEIGHT_M)}px;
   align-items: center;
