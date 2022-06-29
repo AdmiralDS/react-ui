@@ -154,8 +154,8 @@ const Template3: ComponentStory<typeof NumberInput> = (args) => {
 };
 
 const Template4: ComponentStory<typeof NumberInput> = () => {
-  const [value1, setValue1] = React.useState<string | undefined>('From 50.00 $');
-  const [value2, setValue2] = React.useState<string | undefined>('1 минута');
+  const [value1, setValue1] = React.useState<string | undefined>('50.00');
+  const [value2, setValue2] = React.useState<string | undefined>('1');
   const [suffix, setSuffix] = React.useState('минута');
 
   function declOfNum(n: number, text_forms: Array<string>) {
