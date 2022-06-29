@@ -15,6 +15,7 @@ import {
   TAB_PADDING_L,
   TAB_PADDING_M,
 } from '#src/components/TabMenu/constants';
+import { OVERFLOWMENU_BUTTON_SIZE } from '#src/components/OverflowMenu/Button';
 
 export const Wrapper = styled.div<{ underline?: boolean; mobile?: boolean; dimension?: Dimension }>`
   position: relative;
@@ -78,7 +79,7 @@ export const TabContentWrapper = styled.span<{ dimension: Dimension }>`
   padding: ${({ dimension }) => (dimension === 'l' ? TAB_PADDING_L : TAB_PADDING_M)};
 `;
 
-export const Tab = styled.button<{ dimension: Dimension; selected: boolean }>`
+export const Tab = styled.button<{ dimension: Dimension; selected: boolean; needsMargin?: boolean }>`
   position: relative;
   box-sizing: border-box;
   display: inline-flex;
@@ -88,6 +89,7 @@ export const Tab = styled.button<{ dimension: Dimension; selected: boolean }>`
   background: transparent;
   appearance: none;
   border: none;
+  margin-left: ${({ needsMargin, dimension }) => (needsMargin ? `-${OVERFLOWMENU_BUTTON_SIZE[dimension]}px` : 0)};
   ${({ selected, theme }) => !selected && `color: ${theme.color['Neutral/Neutral 50']};`}
   ${({ dimension }) => (dimension === 'm' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
   user-select: none;
@@ -147,8 +149,9 @@ export const Tab = styled.button<{ dimension: Dimension; selected: boolean }>`
   }
 `;
 
-export const StyledOverflowMenu = styled(OverflowMenu)<{ isActive: boolean }>`
+export const StyledOverflowMenu = styled(OverflowMenu)<{ isActive: boolean; hide?: boolean }>`
   margin: auto;
+  visibility: ${({ hide }) => (hide ? 'hidden' : 'visible')};
   &:focus-visible {
     &:before {
       content: '';

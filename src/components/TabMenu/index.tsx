@@ -316,7 +316,8 @@ export const TabMenu: React.FC<TabMenuProps> = ({
       <TabsWrapper ref={tabsWrapperRef} onKeyDown={handleTabsWrapperKeyDown}>
         {tabsWithRef.map((item: TabWithRefProps) => {
           const { disabled, content, id, icon, badge, ref, width, ...props } = item;
-          const tabsForMenu = modelTabs.slice(getTabIndex(id) + 1);
+          const tabNumber = getTabIndex(id);
+          const tabsForMenu = modelTabs.slice(tabNumber + 1);
           return (
             <>
               <Tab
@@ -332,6 +333,7 @@ export const TabMenu: React.FC<TabMenuProps> = ({
                 disabled={disabled}
                 onClick={handleTabClick}
                 onKeyUp={handleTabKeyUp}
+                needsMargin={tabNumber !== 0}
                 {...props}
               >
                 <TabContentWrapper dimension={dimension} tabIndex={-1}>
@@ -356,6 +358,7 @@ export const TabMenu: React.FC<TabMenuProps> = ({
                 items={tabsForMenu}
                 selected={containsActiveTab(tabsForMenu) ? activeTab : undefined}
                 dimension={dimension}
+                hide={tabNumber !== tabsWithRef.length - 1}
                 isActive={containsActiveTab(tabsForMenu)}
                 disabled={tabsForMenu.length === tabsForMenu.filter((tab) => tab.disabled).length}
                 onChange={(id: string) => {
