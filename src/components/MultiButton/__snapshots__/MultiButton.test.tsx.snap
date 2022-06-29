@@ -683,8 +683,16 @@ Object {
   border-radius: 4px 0 0 4px;
 }
 
-.c2:focus {
-  outline: none;
+.c2:focus-visible {
+  outline-offset: -4px;
+}
+
+.c2:focus-visible[data-appearance~='primary'] {
+  outline: #FFFFFF solid 2px;
+}
+
+.c2:focus-visible[data-appearance~='secondary'] {
+  outline: #0062FF solid 2px;
 }
 
 .c7[data-appearance~='primary'] {
@@ -696,8 +704,16 @@ Object {
   border-radius: 0 4px 4px 0;
 }
 
-.c7:focus {
-  outline: none;
+.c7:focus-visible {
+  outline-offset: -4px;
+}
+
+.c7:focus-visible[data-appearance~='primary'] {
+  outline: #FFFFFF solid 2px;
+}
+
+.c7:focus-visible[data-appearance~='secondary'] {
+  outline: #0062FF solid 2px;
 }
 
 .c5 {
@@ -1448,8 +1464,16 @@ Object {
   border-radius: 4px 0 0 4px;
 }
 
-.c2:focus {
-  outline: none;
+.c2:focus-visible {
+  outline-offset: -4px;
+}
+
+.c2:focus-visible[data-appearance~='primary'] {
+  outline: #FFFFFF solid 2px;
+}
+
+.c2:focus-visible[data-appearance~='secondary'] {
+  outline: #0062FF solid 2px;
 }
 
 .c7[data-appearance~='primary'] {
@@ -1461,8 +1485,16 @@ Object {
   border-radius: 0 4px 4px 0;
 }
 
-.c7:focus {
-  outline: none;
+.c7:focus-visible {
+  outline-offset: -4px;
+}
+
+.c7:focus-visible[data-appearance~='primary'] {
+  outline: #FFFFFF solid 2px;
+}
+
+.c7:focus-visible[data-appearance~='secondary'] {
+  outline: #0062FF solid 2px;
 }
 
 .c5 {
@@ -2268,8 +2300,16 @@ Object {
   border-radius: 4px 0 0 4px;
 }
 
-.c2:focus {
-  outline: none;
+.c2:focus-visible {
+  outline-offset: -4px;
+}
+
+.c2:focus-visible[data-appearance~='primary'] {
+  outline: #FFFFFF solid 2px;
+}
+
+.c2:focus-visible[data-appearance~='secondary'] {
+  outline: #0062FF solid 2px;
 }
 
 .c7[data-appearance~='primary'] {
@@ -2281,8 +2321,16 @@ Object {
   border-radius: 0 4px 4px 0;
 }
 
-.c7:focus {
-  outline: none;
+.c7:focus-visible {
+  outline-offset: -4px;
+}
+
+.c7:focus-visible[data-appearance~='primary'] {
+  outline: #FFFFFF solid 2px;
+}
+
+.c7:focus-visible[data-appearance~='secondary'] {
+  outline: #0062FF solid 2px;
 }
 
 .c5 {
@@ -3030,8 +3078,16 @@ Object {
   border-radius: 4px 0 0 4px;
 }
 
-.c2:focus {
-  outline: none;
+.c2:focus-visible {
+  outline-offset: -4px;
+}
+
+.c2:focus-visible[data-appearance~='primary'] {
+  outline: #FFFFFF solid 2px;
+}
+
+.c2:focus-visible[data-appearance~='secondary'] {
+  outline: #0062FF solid 2px;
 }
 
 .c7[data-appearance~='primary'] {
@@ -3043,8 +3099,16 @@ Object {
   border-radius: 0 4px 4px 0;
 }
 
-.c7:focus {
-  outline: none;
+.c7:focus-visible {
+  outline-offset: -4px;
+}
+
+.c7:focus-visible[data-appearance~='primary'] {
+  outline: #FFFFFF solid 2px;
+}
+
+.c7:focus-visible[data-appearance~='secondary'] {
+  outline: #0062FF solid 2px;
 }
 
 .c5 {
@@ -3847,8 +3911,16 @@ Object {
   border-radius: 4px 0 0 4px;
 }
 
-.c2:focus {
-  outline: none;
+.c2:focus-visible {
+  outline-offset: -4px;
+}
+
+.c2:focus-visible[data-appearance~='primary'] {
+  outline: #FFFFFF solid 2px;
+}
+
+.c2:focus-visible[data-appearance~='secondary'] {
+  outline: #0062FF solid 2px;
 }
 
 .c7[data-appearance~='primary'] {
@@ -3860,8 +3932,16 @@ Object {
   border-radius: 0 4px 4px 0;
 }
 
-.c7:focus {
-  outline: none;
+.c7:focus-visible {
+  outline-offset: -4px;
+}
+
+.c7:focus-visible[data-appearance~='primary'] {
+  outline: #FFFFFF solid 2px;
+}
+
+.c7:focus-visible[data-appearance~='secondary'] {
+  outline: #0062FF solid 2px;
 }
 
 .c5 {
@@ -4609,8 +4689,16 @@ Object {
   border-radius: 4px 0 0 4px;
 }
 
-.c2:focus {
-  outline: none;
+.c2:focus-visible {
+  outline-offset: -4px;
+}
+
+.c2:focus-visible[data-appearance~='primary'] {
+  outline: #FFFFFF solid 2px;
+}
+
+.c2:focus-visible[data-appearance~='secondary'] {
+  outline: #0062FF solid 2px;
 }
 
 .c7[data-appearance~='primary'] {
@@ -4622,8 +4710,16 @@ Object {
   border-radius: 0 4px 4px 0;
 }
 
-.c7:focus {
-  outline: none;
+.c7:focus-visible {
+  outline-offset: -4px;
+}
+
+.c7:focus-visible[data-appearance~='primary'] {
+  outline: #FFFFFF solid 2px;
+}
+
+.c7:focus-visible[data-appearance~='secondary'] {
+  outline: #0062FF solid 2px;
 }
 
 .c5 {
