@@ -304,6 +304,9 @@ export const TabMenu: React.FC<TabMenuProps> = ({
       }
     }
   };
+  const getTabIndex = (id: string) => {
+    return tabsWithRef.findIndex((item) => item.id === id);
+  };
 
   /* width отдельно вынесен из props, чтобы он не передавался в Tab.
   Иначе будет постоянно передаваться в таб, что не верно,
@@ -312,8 +315,9 @@ export const TabMenu: React.FC<TabMenuProps> = ({
     <Wrapper role="tablist" ref={tablistRef} underline={underline} mobile={mobile} dimension={dimension} {...props}>
       <Underline ref={underlineRef} aria-hidden />
       <TabsWrapper ref={tabsWrapperRef} onKeyDown={handleTabsWrapperKeyDown}>
-        {visibleTabs.map((item: TabWithRefProps) => {
+        {tabsWithRef.map((item: TabWithRefProps) => {
           const { disabled, content, id, icon, badge, ref, width, ...props } = item;
+          const tabsForMenu = modelTabs.slice(getTabIndex(id) + 1);
           return (
             <>
               <Tab
@@ -350,18 +354,18 @@ export const TabMenu: React.FC<TabMenuProps> = ({
                 onOpen={() => setOpenedMenu(true)}
                 onClose={() => setOpenedMenu(false)}
                 alignSelf={alignSelf}
-                items={modelTabs.slice(tabsWithRef.findIndex((item) => item.id === id) + 1)}
+                items={tabsForMenu}
                 selected={containsActiveTab ? activeTab : undefined}
                 dimension={dimension}
                 isActive={containsActiveTab}
-                disabled={hiddenTabs.length === hiddenTabs.filter((tab) => tab.disabled).length}
+                disabled={tabsForMenu.length === tabsForMenu.filter((tab) => tab.disabled).length}
                 onChange={(id: string) => {
                   onChange(id);
                   if (!isHiddenTabSelected) {
                     styleUnderline(0, 0);
                   }
                 }}
-                tabIndex={hiddenTabs?.filter((item) => item.id === activeTab).length ? 0 : -1}
+                tabIndex={tabsForMenu?.filter((item) => item.id === activeTab).length ? 0 : -1}
                 onKeyDown={handleMenuKeyDown}
               />
             </>
