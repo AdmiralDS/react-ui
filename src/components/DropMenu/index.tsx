@@ -6,12 +6,16 @@ import type { ItemProps } from '#src/components/MenuItem';
 import { DropdownContainer } from '#src/components/DropdownContainer';
 import { Menu, MenuDimensions as Dimension, MenuProps } from '#src/components/Menu';
 import { refSetter } from '#src/components/common/utils/refSetter';
-import styled from 'styled-components';
+import styled, { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 
 const StyledMenu = styled(Menu)<{ width?: string }>`
   width: ${({ width }) => (width ? width : 'auto')};
 `;
-
+const StyledDropdownContainer = styled(DropdownContainer)<{
+  dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+}>`
+  ${(p) => p.dropContainerCssMixin || ''}
+`;
 export interface RenderContentProps {
   /** Ref на отрендеренный элемент */
   buttonRef: React.Ref<HTMLElement>;
@@ -34,6 +38,8 @@ export interface DropMenuProps
   dimension?: Dimension;
   /**  Ширина меню */
   menuWidth?: string;
+  /** Задает максимальную высоту меню */
+  menuMaxHeight?: string | number;
   /** Состояние загрузки */
   loading?: boolean;
   /** Опции выпадающего списка */
@@ -54,6 +60,8 @@ export interface DropMenuProps
   alignSelf?: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
   /** Компонент, для которого необходимо Menu */
   renderContentProp: (options: RenderContentProps) => React.ReactNode;
+  /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
+  dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
 }
 
 export const DropMenu = React.forwardRef<HTMLElement, DropMenuProps>(
@@ -73,6 +81,7 @@ export const DropMenu = React.forwardRef<HTMLElement, DropMenuProps>(
       onKeyDown,
       alignMenuRef,
       renderContentProp,
+      menuMaxHeight,
       ...props
     },
     ref,
@@ -146,7 +155,7 @@ export const DropMenu = React.forwardRef<HTMLElement, DropMenuProps>(
           menuState: menuOpened,
         })}
         {menuOpened && !loading && (
-          <DropdownContainer
+          <StyledDropdownContainer
             role="listbox"
             alignSelf={alignSelf}
             targetRef={alignMenuRef || btnRef}
@@ -154,6 +163,7 @@ export const DropMenu = React.forwardRef<HTMLElement, DropMenuProps>(
             {...props}
           >
             <StyledMenu
+              maxHeight={menuMaxHeight}
               width={menuWidth}
               model={items}
               selected={selected}
@@ -162,7 +172,7 @@ export const DropMenu = React.forwardRef<HTMLElement, DropMenuProps>(
               active={active}
               onActivateItem={setActive}
             />
-          </DropdownContainer>
+          </StyledDropdownContainer>
         )}
       </>
     );

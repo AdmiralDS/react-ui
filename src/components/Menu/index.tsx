@@ -8,8 +8,9 @@ import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 
 export type MenuDimensions = 'l' | 'm' | 's';
 
-const menuListHeights = css<{ dimension?: MenuDimensions }>`
-  max-height: ${({ dimension }) => {
+const menuListHeights = css<{ dimension?: MenuDimensions; maxHeight?: string | number }>`
+  max-height: ${({ dimension, maxHeight }) => {
+    if (maxHeight) return maxHeight;
     switch (dimension) {
       case 'l':
         return `${48 * 6 + 16}px`;
@@ -59,6 +60,8 @@ export interface MenuProps extends HTMLAttributes<HTMLDivElement> {
   onSelectItem?: (id: string) => void;
   /** Модель данных, с рендер-пропсами*/
   model: Array<ItemProps>;
+  /** Задает максимальную высоту меню */
+  maxHeight?: string | number;
 }
 
 export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
