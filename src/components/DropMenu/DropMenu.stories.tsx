@@ -56,6 +56,12 @@ export default {
         options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
       },
     },
+    loading: {
+      control: { type: 'boolean' },
+    },
+    disabled: {
+      control: { type: 'boolean' },
+    },
   },
 } as ComponentMeta<typeof DropMenu>;
 
@@ -253,10 +259,11 @@ const TemplateWithCards: ComponentStory<typeof DropMenu> = (args) => {
           onSelectItem={setSelected}
           active={active}
           onActivateItem={setActive}
-          renderContentProp={({ buttonRef, handleKeyDown, handleClick }) => {
+          renderContentProp={({ buttonRef, handleKeyDown, handleClick, statusIcon }) => {
             return (
               <Button ref={buttonRef as React.Ref<HTMLButtonElement>} onKeyDown={handleKeyDown} onClick={handleClick}>
                 Нажми
+                {statusIcon}
               </Button>
             );
           }}
