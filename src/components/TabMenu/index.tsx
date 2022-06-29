@@ -2,7 +2,7 @@ import * as React from 'react';
 import { keyboardKey } from '#src/components/common/keyboardKey';
 import observeRect from '#src/components/common/observeRect';
 import { Badge } from '#src/components/Badge';
-import { MenuItem, RenderOptionProps } from '#src/components/MenuItem';
+import { ItemProps, MenuItem, RenderOptionProps } from '#src/components/MenuItem';
 
 import measureTab from '#src/components/TabMenu/measureTab';
 import {
@@ -100,10 +100,9 @@ export const TabMenu: React.FC<TabMenuProps> = ({
 
   const isHiddenTabSelected = () => hiddenTabs.findIndex((tab) => tab.id === activeTab) != -1;
 
-  const containsActiveTab: boolean = React.useMemo(
-    () => model.findIndex((item) => item.id === activeTab) != -1,
-    [model, activeTab],
-  );
+  const containsActiveTab = (items: Array<ItemProps>) => {
+    return items.findIndex((item) => item.id === activeTab) != -1;
+  };
 
   const getNextFocus = (target: HTMLElement) => {
     let sibling: Element | null | undefined =
@@ -355,9 +354,9 @@ export const TabMenu: React.FC<TabMenuProps> = ({
                 onClose={() => setOpenedMenu(false)}
                 alignSelf={alignSelf}
                 items={tabsForMenu}
-                selected={containsActiveTab ? activeTab : undefined}
+                selected={containsActiveTab(tabsForMenu) ? activeTab : undefined}
                 dimension={dimension}
-                isActive={containsActiveTab}
+                isActive={containsActiveTab(tabsForMenu)}
                 disabled={tabsForMenu.length === tabsForMenu.filter((tab) => tab.disabled).length}
                 onChange={(id: string) => {
                   onChange(id);
