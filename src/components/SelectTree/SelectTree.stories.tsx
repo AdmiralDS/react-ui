@@ -23,7 +23,7 @@ const Description = () => (
 );
 
 export default {
-  title: 'Admiral-2.1/Deprecated/SelectTree (Deprecated используйте Tree компонент)',
+  title: 'Deprecated/SelectTree (Deprecated используйте Tree компонент)',
   decorators: [withDesign],
   component: SelectTree,
   parameters: {

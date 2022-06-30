@@ -23,7 +23,7 @@ const Description = () => (
   </Desc>
 );
 export default {
-  title: 'Admiral-2.1/DropDownMenu',
+  title: 'Deprecated/DropDownMenu (DEPRECATED используйте DropMenu)',
   decorators: [withDesign],
   component: DropDownMenu,
   parameters: {

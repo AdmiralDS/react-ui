@@ -30,7 +30,7 @@ Object {
   padding: 12px 16px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
-  font-weight: normal;
+  font-weight: 400;
   font-size: 16px;
   line-height: 24px;
   font-feature-settings: 'tnum' on,'lnum' on;
@@ -50,7 +50,7 @@ ul[data-dimension='s'] .c7.c7 {
 ul[data-dimension='s'] .c6 {
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
-  font-weight: normal;
+  font-weight: 400;
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
@@ -242,7 +242,7 @@ Object {
   padding: 12px 16px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
-  font-weight: normal;
+  font-weight: 400;
   font-size: 16px;
   line-height: 24px;
   font-feature-settings: 'tnum' on,'lnum' on;
@@ -262,7 +262,7 @@ ul[data-dimension='s'] .c7.c7 {
 ul[data-dimension='s'] .c6 {
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
-  font-weight: normal;
+  font-weight: 400;
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
@@ -310,7 +310,7 @@ ul[data-dimension='s'] .c6 {
   padding: 12px 16px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
-  font-weight: normal;
+  font-weight: 400;
   font-size: 16px;
   line-height: 24px;
   font-feature-settings: 'tnum' on,'lnum' on;
@@ -330,7 +330,7 @@ ul[data-dimension='s'] .c8.c8 {
 ul[data-dimension='s'] .c6 {
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
-  font-weight: normal;
+  font-weight: 400;
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
@@ -382,7 +382,7 @@ ul[data-selectedid="2"] .c8.c8 {
   padding: 12px 16px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
-  font-weight: normal;
+  font-weight: 400;
   font-size: 16px;
   line-height: 24px;
   font-feature-settings: 'tnum' on,'lnum' on;
@@ -402,7 +402,7 @@ ul[data-dimension='s'] .c9.c9 {
 ul[data-dimension='s'] .c6 {
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
-  font-weight: normal;
+  font-weight: 400;
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
@@ -454,7 +454,7 @@ ul[data-selectedid="3"] .c9.c9 {
   padding: 12px 16px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
-  font-weight: normal;
+  font-weight: 400;
   font-size: 16px;
   line-height: 24px;
   font-feature-settings: 'tnum' on,'lnum' on;
@@ -474,7 +474,7 @@ ul[data-dimension='s'] .c10.c10 {
 ul[data-dimension='s'] .c6 {
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
-  font-weight: normal;
+  font-weight: 400;
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
@@ -526,7 +526,7 @@ ul[data-selectedid="4"] .c10.c10 {
   padding: 12px 16px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
-  font-weight: normal;
+  font-weight: 400;
   font-size: 16px;
   line-height: 24px;
   font-feature-settings: 'tnum' on,'lnum' on;
@@ -546,7 +546,7 @@ ul[data-dimension='s'] .c11.c11 {
 ul[data-dimension='s'] .c6 {
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
-  font-weight: normal;
+  font-weight: 400;
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
@@ -598,7 +598,7 @@ ul[data-selectedid="5"] .c11.c11 {
   padding: 12px 16px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
-  font-weight: normal;
+  font-weight: 400;
   font-size: 16px;
   line-height: 24px;
   font-feature-settings: 'tnum' on,'lnum' on;
@@ -618,7 +618,7 @@ ul[data-dimension='s'] .c12.c12 {
 ul[data-dimension='s'] .c6 {
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
-  font-weight: normal;
+  font-weight: 400;
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
@@ -670,7 +670,7 @@ ul[data-selectedid="10"] .c12.c12 {
   padding: 12px 16px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
-  font-weight: normal;
+  font-weight: 400;
   font-size: 16px;
   line-height: 24px;
   font-feature-settings: 'tnum' on,'lnum' on;
@@ -690,7 +690,7 @@ ul[data-dimension='s'] .c13.c13 {
 ul[data-dimension='s'] .c6 {
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
-  font-weight: normal;
+  font-weight: 400;
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
@@ -742,7 +742,7 @@ ul[data-selectedid="11"] .c13.c13 {
   padding: 12px 16px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
-  font-weight: normal;
+  font-weight: 400;
   font-size: 16px;
   line-height: 24px;
   font-feature-settings: 'tnum' on,'lnum' on;
@@ -762,7 +762,7 @@ ul[data-dimension='s'] .c14.c14 {
 ul[data-dimension='s'] .c6 {
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
-  font-weight: normal;
+  font-weight: 400;
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
@@ -814,7 +814,7 @@ ul[data-selectedid="12"] .c14.c14 {
   padding: 12px 16px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
-  font-weight: normal;
+  font-weight: 400;
   font-size: 16px;
   line-height: 24px;
   font-feature-settings: 'tnum' on,'lnum' on;
@@ -834,7 +834,7 @@ ul[data-dimension='s'] .c15.c15 {
 ul[data-dimension='s'] .c6 {
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
-  font-weight: normal;
+  font-weight: 400;
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
@@ -1160,7 +1160,7 @@ Object {
   padding: 6px 12px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
-  font-weight: normal;
+  font-weight: 400;
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
@@ -1180,7 +1180,7 @@ ul[data-dimension='s'] .c7.c7 {
 ul[data-dimension='s'] .c6 {
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
-  font-weight: normal;
+  font-weight: 400;
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;

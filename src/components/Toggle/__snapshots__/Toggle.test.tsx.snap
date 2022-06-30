@@ -50,7 +50,7 @@ Object {
   margin-left: 8px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
-  font-weight: normal;
+  font-weight: 400;
   font-size: 16px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
@@ -211,7 +211,7 @@ Object {
   margin-left: 8px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
-  font-weight: normal;
+  font-weight: 400;
   font-size: 16px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
@@ -427,7 +427,7 @@ Object {
   margin-right: 8px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
-  font-weight: normal;
+  font-weight: 400;
   font-size: 16px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
@@ -584,7 +584,7 @@ Object {
   margin-right: 8px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
-  font-weight: normal;
+  font-weight: 400;
   font-size: 16px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
@@ -796,7 +796,7 @@ Object {
   margin-left: 8px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
-  font-weight: normal;
+  font-weight: 400;
   font-size: 16px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
@@ -953,7 +953,7 @@ Object {
   margin-left: 8px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
-  font-weight: normal;
+  font-weight: 400;
   font-size: 16px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
@@ -1165,7 +1165,7 @@ Object {
   margin-left: 8px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
-  font-weight: normal;
+  font-weight: 400;
   font-size: 14px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
@@ -1322,7 +1322,7 @@ Object {
   margin-left: 8px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
-  font-weight: normal;
+  font-weight: 400;
   font-size: 14px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
