@@ -333,7 +333,7 @@ export const TabMenu: React.FC<TabMenuProps> = ({
                 disabled={disabled}
                 onClick={handleTabClick}
                 onKeyUp={handleTabKeyUp}
-                needsMargin={tabNumber !== 0}
+                needsMargin={!mobile && tabNumber !== 0}
                 {...props}
               >
                 <TabContentWrapper dimension={dimension} tabIndex={-1}>
@@ -350,26 +350,28 @@ export const TabMenu: React.FC<TabMenuProps> = ({
                   )}
                 </TabContentWrapper>
               </Tab>
-              <StyledOverflowMenu
-                ref={overflowBtnRef}
-                onOpen={() => setOpenedMenu(true)}
-                onClose={() => setOpenedMenu(false)}
-                alignSelf={alignSelf}
-                items={tabsForMenu}
-                selected={containsActiveTab(tabsForMenu) ? activeTab : undefined}
-                dimension={dimension}
-                hide={tabNumber !== tabsWithRef.length - 1}
-                isActive={containsActiveTab(tabsForMenu)}
-                disabled={tabsForMenu.length === tabsForMenu.filter((tab) => tab.disabled).length}
-                onChange={(id: string) => {
-                  onChange(id);
-                  if (!isHiddenTabSelected(tabsForMenu)) {
-                    styleUnderline(0, 0);
-                  }
-                }}
-                tabIndex={tabsForMenu?.filter((item) => item.id === activeTab).length ? 0 : -1}
-                onKeyDown={handleMenuKeyDown}
-              />
+              {mobile ? null : (
+                <StyledOverflowMenu
+                  ref={overflowBtnRef}
+                  onOpen={() => setOpenedMenu(true)}
+                  onClose={() => setOpenedMenu(false)}
+                  alignSelf={alignSelf}
+                  items={tabsForMenu}
+                  selected={containsActiveTab(tabsForMenu) ? activeTab : undefined}
+                  dimension={dimension}
+                  hide={tabNumber !== tabsWithRef.length - 1}
+                  isActive={containsActiveTab(tabsForMenu)}
+                  disabled={tabsForMenu.length === tabsForMenu.filter((tab) => tab.disabled).length}
+                  onChange={(id: string) => {
+                    onChange(id);
+                    if (!isHiddenTabSelected(tabsForMenu)) {
+                      styleUnderline(0, 0);
+                    }
+                  }}
+                  tabIndex={tabsForMenu?.filter((item) => item.id === activeTab).length ? 0 : -1}
+                  onKeyDown={handleMenuKeyDown}
+                />
+              )}
             </>
           );
         })}
