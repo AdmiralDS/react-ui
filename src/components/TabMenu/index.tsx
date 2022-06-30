@@ -311,9 +311,9 @@ export const TabMenu: React.FC<TabMenuProps> = ({
   Иначе будет постоянно передаваться в таб, что не верно,
   т.к. параметр width нужен только для внутренних расчетов */
   return (
-    <Wrapper role="tablist" ref={tablistRef} underline={underline} mobile={mobile} dimension={dimension} {...props}>
+    <Wrapper role="tablist" ref={tablistRef} underline={underline} mobile={mobile} {...props}>
       <Underline ref={underlineRef} aria-hidden />
-      <TabsWrapper ref={tabsWrapperRef} onKeyDown={handleTabsWrapperKeyDown}>
+      <TabsWrapper ref={tabsWrapperRef} onKeyDown={handleTabsWrapperKeyDown} dimension={dimension}>
         {tabsWithRef.map((item: TabWithRefProps) => {
           const { disabled, content, id, icon, badge, ref, width, ...props } = item;
           const tabNumber = getTabIndex(id);

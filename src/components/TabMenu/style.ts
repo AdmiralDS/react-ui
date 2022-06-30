@@ -17,14 +17,11 @@ import {
 } from '#src/components/TabMenu/constants';
 import { OVERFLOWMENU_BUTTON_SIZE } from '#src/components/OverflowMenu/Button';
 
-export const Wrapper = styled.div<{ underline?: boolean; mobile?: boolean; dimension?: Dimension }>`
+export const Wrapper = styled.div<{ underline?: boolean; mobile?: boolean }>`
   position: relative;
   display: flex;
   flex: 1 1 auto;
-  flex-wrap: wrap;
-  overflow: hidden;
-  height: ${({ dimension }) => (dimension === 'l' ? TAB_HEIGHT_L : TAB_HEIGHT_M)}px;
-  max-height: ${({ dimension }) => (dimension === 'l' ? TAB_HEIGHT_L : TAB_HEIGHT_M)}px;
+  flex-wrap: nowrap;
   align-items: center;
   justify-content: space-between;
   width: 100%;
@@ -48,9 +45,13 @@ export const Wrapper = styled.div<{ underline?: boolean; mobile?: boolean; dimen
  * Это позволяет избежать скачков контента и при этом ширина TabsWrapper будет равна ровно ширине его контента и не более.
  * Это напрямую влияет на работу observer, повешенного на tabsWrapperRef.current в файле index.ts.
  */
-export const TabsWrapper = styled.div`
+export const TabsWrapper = styled.div<{ dimension?: Dimension }>`
   display: flex;
   margin-right: auto;
+  flex-wrap: wrap;
+  overflow: hidden;
+  height: ${({ dimension }) => (dimension === 'l' ? TAB_HEIGHT_L : TAB_HEIGHT_M)}px;
+  max-height: ${({ dimension }) => (dimension === 'l' ? TAB_HEIGHT_L : TAB_HEIGHT_M)}px;
 `;
 
 export const Underline = styled.div`
