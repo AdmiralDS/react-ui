@@ -85,10 +85,6 @@ export const TabMenu: React.FC<TabMenuProps> = ({
   const overflowBtnRef = React.useRef<HTMLButtonElement | null>(null);
   const [openedMenu, setOpenedMenu] = React.useState(false);
 
-  const visibleTabs = React.useMemo(() => {
-    return mobile ? tabsWithRef : tabsWithRef.filter((_, index) => visibilityMap[index]);
-  }, [tabsWithRef, mobile, visibilityMap]);
-
   const isHiddenTabSelected = (items: Array<ItemProps>) => items.findIndex((tab) => tab.id === activeTab) != -1;
 
   const containsActiveTab = (items: Array<ItemProps>) => {
@@ -256,6 +252,9 @@ export const TabMenu: React.FC<TabMenuProps> = ({
 
   const renderTabs = () => {
     return tabsWithRef.map((item: TabWithRefProps) => {
+      /* width отдельно вынесен из props, чтобы он не передавался в Tab.
+      Иначе будет постоянно передаваться в таб, что не верно,
+      т.к. параметр width нужен только для внутренних расчетов */
       const { disabled, content, id, icon, badge, ref, width, ...props } = item;
       const tabNumber = getTabIndex(id);
       const tabsForMenu = modelAllTabs.slice(tabNumber + 1);
@@ -318,9 +317,6 @@ export const TabMenu: React.FC<TabMenuProps> = ({
     });
   };
 
-  /* width отдельно вынесен из props, чтобы он не передавался в Tab.
-  Иначе будет постоянно передаваться в таб, что не верно,
-  т.к. параметр width нужен только для внутренних расчетов */
   return (
     <Wrapper role="tablist" ref={tablistRef} underline={underline} mobile={mobile} dimension={dimension} {...props}>
       <Underline ref={underlineRef} aria-hidden />
