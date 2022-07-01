@@ -259,7 +259,7 @@ export const TabMenu: React.FC<TabMenuProps> = ({
       const tabNumber = getTabIndex(id);
       const tabsForMenu = modelAllTabs.slice(tabNumber + 1);
       return (
-        <>
+        <div key={id}>
           <Tab
             ref={ref}
             key={id}
@@ -291,7 +291,6 @@ export const TabMenu: React.FC<TabMenuProps> = ({
           </Tab>
           {mobile ? null : (
             <StyledOverflowMenu
-              key={uid()}
               ref={overflowBtnRef}
               onOpen={() => setOpenedMenu(true)}
               onClose={() => setOpenedMenu(false)}
@@ -312,7 +311,7 @@ export const TabMenu: React.FC<TabMenuProps> = ({
               onKeyDown={handleMenuKeyDown}
             />
           )}
-        </>
+        </div>
       );
     });
   };
