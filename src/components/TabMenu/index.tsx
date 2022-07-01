@@ -289,7 +289,7 @@ export const TabMenu: React.FC<TabMenuProps> = ({
               )}
             </TabContentWrapper>
           </Tab>
-          {mobile ? null : (
+          {mobile || tabNumber === tabsWithRef.length - 1 ? null : (
             <StyledOverflowMenu
               ref={overflowBtnRef}
               onOpen={() => setOpenedMenu(true)}
@@ -298,7 +298,7 @@ export const TabMenu: React.FC<TabMenuProps> = ({
               items={tabsForMenu}
               selected={containsActiveTab(tabsForMenu) ? activeTab : undefined}
               dimension={dimension}
-              hide={tabNumber !== tabsWithRef.length - 1}
+              hide={!(visibilityMap[tabNumber] && !visibilityMap[tabNumber + 1])}
               isActive={containsActiveTab(tabsForMenu)}
               disabled={tabsForMenu.length === tabsForMenu.filter((tab) => tab.disabled).length}
               onChange={(id: string) => {
