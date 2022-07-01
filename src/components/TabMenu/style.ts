@@ -94,7 +94,7 @@ export const Tab = styled.button<{ dimension: Dimension; selected: boolean }>`
   background: transparent;
   appearance: none;
   border: none;
-  ${({ selected, theme }) => !selected && `color: ${theme.color['Neutral/Neutral 50']};`}
+  color: ${(p) => (p.selected ? p.theme.color['Neutral/Neutral 90'] : p.theme.color['Neutral/Neutral 50'])};
   ${({ dimension }) => (dimension === 'm' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
   user-select: none;
   cursor: pointer;
