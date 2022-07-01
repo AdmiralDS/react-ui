@@ -20,10 +20,7 @@ export const Wrapper = styled.div<{ underline?: boolean; mobile?: boolean; dimen
   position: relative;
   display: flex;
   flex: 1 1 auto;
-  flex-wrap: ${({ mobile }) => (mobile ? 'nowrap' : 'wrap')};
-  overflow: ${({ mobile }) => (mobile ? 'scroll' : 'hidden')};
-  height: ${({ dimension }) => (dimension === 'l' ? TAB_HEIGHT_L : TAB_HEIGHT_M)}px;
-  max-height: ${({ dimension }) => (dimension === 'l' ? TAB_HEIGHT_L : TAB_HEIGHT_M)}px;
+  flex-wrap: nowrap;
   align-items: center;
   justify-content: space-between;
   width: 100%;
@@ -42,14 +39,23 @@ export const Wrapper = styled.div<{ underline?: boolean; mobile?: boolean; dimen
   scrollbar-height: none;
 `;
 
-/**
- * Для исправления бага в IE (скачет контент) вместо flex: 1 1 auto используем margin-right: auto
- * Это позволяет избежать скачков контента и при этом ширина TabsWrapper будет равна ровно ширине его контента и не более.
- * Это напрямую влияет на работу observer, повешенного на tabsWrapperRef.current в файле index.ts.
- */
-export const TabsWrapper = styled.div`
+export const TabsWrapper = styled.div<{ mobile?: boolean; dimension?: Dimension }>`
   display: flex;
-  margin-right: auto;
+  flex-wrap: ${({ mobile }) => (mobile ? 'nowrap' : 'wrap')};
+  overflow: ${({ mobile }) => (mobile ? 'scroll' : 'hidden')};
+  height: ${({ dimension }) => (dimension === 'l' ? TAB_HEIGHT_L : TAB_HEIGHT_M)}px;
+  max-height: ${({ dimension }) => (dimension === 'l' ? TAB_HEIGHT_L : TAB_HEIGHT_M)}px;
+  overflow-x: ${({ mobile }) => (mobile ? 'scroll' : 'visible')};
+
+  &::-webkit-scrollbar {
+    width: 0 !important;
+    height: 0 !important;
+  }
+
+  overflow: -moz-scrollbars-none;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  scrollbar-height: none;
 `;
 
 export const Underline = styled.div`
