@@ -251,7 +251,7 @@ export const TabMenu: React.FC<TabMenuProps> = ({
   };
 
   const renderTabs = () => {
-    return tabsWithRef.map((item: TabWithRefProps) => {
+    return tabsWithRef.map((item: TabWithRefProps, index) => {
       /* width отдельно вынесен из props, чтобы он не передавался в Tab.
       Иначе будет постоянно передаваться в таб, что не верно,
       т.к. параметр width нужен только для внутренних расчетов */
@@ -259,7 +259,7 @@ export const TabMenu: React.FC<TabMenuProps> = ({
       const tabNumber = getTabIndex(id);
       const tabsForMenu = modelAllTabs.slice(tabNumber + 1);
       return (
-        <div key={id}>
+        <div key={id} data-number={index}>
           <Tab
             ref={ref}
             key={id}
