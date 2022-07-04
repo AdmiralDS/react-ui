@@ -27,6 +27,7 @@ export const DateField = React.forwardRef<HTMLInputElement, DateFieldProps>((pro
     status,
     required,
     label,
+    id,
     'data-field-id': id,
     'data-field-name': name,
     displayInline,
