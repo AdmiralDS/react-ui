@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.5.1](https://github.com/AdmiralDS/react-ui/compare/v1.5.0...v1.5.1) (2022-07-04)
+
+
+### Bug Fixes
+
+* chrome 84, inset css rule is not supported ([7d7a21f](https://github.com/AdmiralDS/react-ui/commit/7d7a21fac63213a4250fd23cfd3abd6d753d56cd))
+* **TabMenu:** fix active button tab color ([8e4617b](https://github.com/AdmiralDS/react-ui/commit/8e4617bebcbcb4fe242baae4ec777e7275efbc8b))
+
 ## [1.5.0](https://github.com/AdmiralDS/react-ui/compare/v1.4.2...v1.5.0) (2022-06-29)
 
 
