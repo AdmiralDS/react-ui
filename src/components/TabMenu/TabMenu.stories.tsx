@@ -11,7 +11,6 @@ export default {
   decorators: [withDesign],
   component: TabMenu,
   parameters: {
-    layout: 'centered',
     design: [
       {
         type: 'figma',

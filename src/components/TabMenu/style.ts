@@ -20,32 +20,15 @@ export const Wrapper = styled.div<{ underline?: boolean; mobile?: boolean; dimen
   position: relative;
   display: flex;
   flex: 1 1 auto;
-  flex-wrap: nowrap;
+  flex-wrap: ${({ mobile }) => (mobile ? 'nowrap' : 'wrap')};
   align-items: center;
-  justify-content: space-between;
   width: 100%;
   box-sizing: border-box;
   box-shadow: inset 0 -${LINE_HEIGHT} 0 0 ${({ theme, underline }) => (underline ? theme.color['Neutral/Neutral 20'] : 'transparent')};
-  overflow-x: ${({ mobile }) => (mobile ? 'scroll' : 'visible')};
-
-  &::-webkit-scrollbar {
-    width: 0 !important;
-    height: 0 !important;
-  }
-
-  overflow: -moz-scrollbars-none;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-  scrollbar-height: none;
-`;
-
-export const TabsWrapper = styled.div<{ mobile?: boolean; dimension?: Dimension }>`
-  display: flex;
-  flex-wrap: ${({ mobile }) => (mobile ? 'nowrap' : 'wrap')};
   overflow: ${({ mobile }) => (mobile ? 'scroll' : 'hidden')};
+
   height: ${({ dimension }) => (dimension === 'l' ? TAB_HEIGHT_L : TAB_HEIGHT_M)}px;
   max-height: ${({ dimension }) => (dimension === 'l' ? TAB_HEIGHT_L : TAB_HEIGHT_M)}px;
-  overflow-x: ${({ mobile }) => (mobile ? 'scroll' : 'visible')};
 
   &::-webkit-scrollbar {
     width: 0 !important;

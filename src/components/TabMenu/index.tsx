@@ -2,13 +2,13 @@ import * as React from 'react';
 import { keyboardKey } from '#src/components/common/keyboardKey';
 import { Badge } from '#src/components/Badge';
 import { ItemProps, MenuItem, RenderOptionProps } from '#src/components/MenuItem';
+import observeRect from '#src/components/common/observeRect';
 
 import {
   StyledOverflowMenu,
   Tab,
   TabContent,
   TabContentWrapper,
-  TabsWrapper,
   Underline,
   Wrapper,
 } from '#src/components/TabMenu/style';
@@ -64,14 +64,14 @@ export const TabMenu: React.FC<TabMenuProps> = ({
     return tabs.map(() => React.createRef<HTMLButtonElement>());
   }, [tabs]);
 
-  const tabsWrapperRef = React.useRef<HTMLDivElement | null>(null);
   const tablistRef = React.useRef<HTMLDivElement | null>(null);
   const underlineRef = React.useRef<HTMLDivElement | null>(null);
+  const firstTabRef = React.useRef(0);
   const [visibilityMap, setVisibilityMap] = React.useState<{ [index: number | string]: boolean }>({ 0: true });
-  const activeTabVisible = () => {
+  const activeTabVisible: boolean = React.useMemo(() => {
     const activeTabIndex = tabsWithRef.findIndex((item) => item.id === activeTab);
     return visibilityMap[activeTabIndex];
-  };
+  }, [tabsWithRef, activeTab, visibilityMap]);
 
   const modelAllTabs = React.useMemo(() => {
     return tabsWithRef.map((item) => ({
@@ -96,23 +96,23 @@ export const TabMenu: React.FC<TabMenuProps> = ({
 
   const getNextFocus = (target: HTMLElement) => {
     let sibling: Element | null | undefined =
-      target.nextElementSibling || overflowBtnRef.current || tabsWrapperRef.current?.firstElementChild;
+      target.nextElementSibling || overflowBtnRef.current || tablistRef.current?.firstElementChild;
     while (sibling?.hasAttribute('disabled')) {
-      sibling = sibling.nextElementSibling || overflowBtnRef.current || tabsWrapperRef.current?.firstElementChild;
+      sibling = sibling.nextElementSibling || overflowBtnRef.current || tablistRef.current?.firstElementChild;
     }
     return sibling;
   };
   const getPreviousFocus = (target: HTMLElement) => {
     let sibling: Element | null | undefined =
-      target.previousElementSibling || overflowBtnRef.current || tabsWrapperRef.current?.lastElementChild;
+      target.previousElementSibling || overflowBtnRef.current || tablistRef.current?.lastElementChild;
     while (sibling?.hasAttribute('disabled')) {
-      sibling = sibling.previousElementSibling || overflowBtnRef.current || tabsWrapperRef.current?.lastElementChild;
+      sibling = sibling.previousElementSibling || overflowBtnRef.current || tablistRef.current?.lastElementChild;
     }
     return sibling;
   };
 
   const focusFirstTab = () => {
-    let tab = tabsWrapperRef.current?.firstElementChild;
+    let tab = tablistRef.current?.firstElementChild;
     while (tab?.hasAttribute('disabled')) {
       tab = tab.nextElementSibling;
     }
@@ -120,7 +120,7 @@ export const TabMenu: React.FC<TabMenuProps> = ({
   };
 
   const focusLastTab = () => {
-    let tab = tabsWrapperRef.current?.lastElementChild;
+    let tab = tablistRef.current?.lastElementChild;
     while (tab?.hasAttribute('disabled')) {
       tab = tab.previousElementSibling;
     }
@@ -161,7 +161,25 @@ export const TabMenu: React.FC<TabMenuProps> = ({
     }
   };
 
-  React.useLayoutEffect(() => setUnderline(), [tabsWithRef, activeTab]);
+  React.useLayoutEffect(() => setUnderline(), [tabsWithRef, activeTab, dimension, visibilityMap]);
+
+  // recalculation on resize. For example, it happens after fonts loading
+  React.useLayoutEffect(() => {
+    if (tablistRef.current?.firstElementChild) {
+      const observer = observeRect(tablistRef.current.firstElementChild, (rect) => {
+        const width = rect?.width || 0;
+        if (firstTabRef.current !== width) {
+          firstTabRef.current = width;
+          setUnderline();
+          console.log('bbb');
+        }
+      });
+      observer.observe();
+      return () => {
+        observer.unobserve();
+      };
+    }
+  }, [tablistRef.current]);
 
   const handleIntersection = (entries: IntersectionObserverEntry[]) => {
     const updatedEntries: { [index: number | string]: boolean } = {};
@@ -188,13 +206,13 @@ export const TabMenu: React.FC<TabMenuProps> = ({
       threshold: [0, 1.0],
     });
 
-    if (tabsWrapperRef.current && !mobile) {
-      Array.from(tabsWrapperRef.current.children).forEach((item) => {
+    if (tablistRef.current && !mobile) {
+      Array.from(tablistRef.current.children).forEach((item) => {
         observer.observe(item);
       });
     }
     return () => observer.disconnect();
-  }, [tablistRef, tabsWrapperRef, mobile, setVisibilityMap]);
+  }, [tablistRef, mobile, setVisibilityMap]);
 
   const handleTabClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     mobile && event.currentTarget.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
@@ -320,11 +338,17 @@ export const TabMenu: React.FC<TabMenuProps> = ({
   };
 
   return (
-    <Wrapper role="tablist" ref={tablistRef} underline={underline} mobile={mobile} dimension={dimension} {...props}>
+    <Wrapper
+      role="tablist"
+      ref={tablistRef}
+      underline={underline}
+      mobile={mobile}
+      dimension={dimension}
+      onKeyDown={handleTabsWrapperKeyDown}
+      {...props}
+    >
+      {renderTabs()}
       <Underline ref={underlineRef} aria-hidden />
-      <TabsWrapper ref={tabsWrapperRef} onKeyDown={handleTabsWrapperKeyDown} mobile={mobile} dimension={dimension}>
-        {renderTabs()}
-      </TabsWrapper>
     </Wrapper>
   );
 };
