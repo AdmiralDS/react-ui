@@ -126,6 +126,7 @@ const TextButtonMenuStory: ComponentStory<typeof TextButtonMenu> = (args) => {
       disabled: item.disabled,
     }));
   }, [args.dimension]);
+
   function swapBorder(theme: Theme): Theme {
     theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
     return theme;

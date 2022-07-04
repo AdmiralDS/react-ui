@@ -79,6 +79,7 @@ const Template1: ComponentStory<typeof EditMode> = (props) => {
 
     return acc;
   }, {} as Record<any, any>);
+
   function swapBorder(theme: Theme): Theme {
     theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
     return theme;

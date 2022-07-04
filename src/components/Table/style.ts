@@ -5,14 +5,14 @@ import { OpenStatusButton } from '#src/components/OpenStatusButton';
 import {
   cellStyle,
   disabledRow,
+  extraTextStyle,
   headerStyle,
   multiLineTitle,
+  overflowMenuStyle,
   rowBackground,
   rowStyle,
   singleLineTitle,
   underlineRow,
-  extraTextStyle,
-  overflowMenuStyle,
 } from './mixins';
 
 export const TableContainer = styled.div`
@@ -29,10 +29,10 @@ export const StickyWrapper = styled.div`
   left: 0;
   z-index: 5;
   background: ${({ theme }) => theme.color['Neutral/Neutral 00']};
-  ${rowBackground}
+  ${rowBackground};
   transition: box-shadow 0.3s;
   [data-shadow='true'] & {
-    box-shadow: 4px 0px 12px rgba(138, 150, 168, 0.16);
+    box-shadow: 4px 0 12px rgba(138, 150, 168, 0.16);
   }
 `;
 
@@ -92,7 +92,7 @@ export const Header = styled.div`
   [data-greyheader='true'] & {
     background: ${({ theme }) => theme.color['Neutral/Neutral 10']};
   }
-  ${headerStyle}
+  ${headerStyle};
   transform: translateZ(0);
 
   & > * {

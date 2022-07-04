@@ -81,6 +81,7 @@ const Simple: ComponentStory<typeof DropdownContainer> = (args) => {
   const buttonRef = useRef(null);
 
   const { targetRef, ...other } = args;
+
   function swapBorder(theme: Theme): Theme {
     theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
     return theme;

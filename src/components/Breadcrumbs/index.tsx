@@ -3,7 +3,7 @@ import * as React from 'react';
 import { MenuButton } from './Menu';
 import type { BreadcrumbProps } from './BreadCrumb';
 import { Breadcrumb } from './BreadCrumb';
-import { Separator, Wrapper, OverflowContentWrapper, OverflowItem, Compensator, Navigation } from './style';
+import { Compensator, Navigation, OverflowContentWrapper, OverflowItem, Separator, Wrapper } from './style';
 
 type Dimension = 'l' | 'm' | 's';
 

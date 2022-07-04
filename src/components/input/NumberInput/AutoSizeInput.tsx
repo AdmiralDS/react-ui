@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { changeInputData, isInputDataDifferent, InputData } from '#src/components/common/dom/changeInputData';
+import { changeInputData, InputData, isInputDataDifferent } from '#src/components/common/dom/changeInputData';
 import type { ExtraProps } from '#src/components/input/types';
 import type { TextInputProps } from '#src/components/input/TextInput';
 import { typography } from '#src/components/Typography';
@@ -38,7 +38,10 @@ const Sizer = styled.div`
 
 const BorderedDiv = styled.div`
   position: absolute;
-  inset: 0;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   margin: 0;
   pointer-events: none;
   overflow: hidden;
@@ -201,6 +204,7 @@ export const AutoSizeInput = React.forwardRef<HTMLInputElement, InputProps>(
 
     React.useLayoutEffect(() => {
       const nullHandledValue = handleInput(null);
+
       function oninput(this: HTMLInputElement) {
         const { value, selectionStart, selectionEnd } = this;
         const currentInputData = { value, selectionStart, selectionEnd };

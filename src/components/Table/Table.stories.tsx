@@ -10,6 +10,7 @@ import { Button } from '#src/components/Button';
 import { DateInput } from '#src/components/input/DateInput';
 import {
   columnList,
+  columnListExtra,
   columnListLineClamp,
   columnListOrientation,
   columnListSort,
@@ -18,10 +19,9 @@ import {
   rowList,
   rowListExpanded,
   rowListLineClamp,
+  rowListMenu,
   rowListRowState,
   rowListSort,
-  columnListExtra,
-  rowListMenu,
   virtualColumnList,
   virtualRowList,
 } from '#src/components/Table/data';

@@ -2,8 +2,8 @@ import * as React from 'react';
 import { ElementType } from 'react';
 import styled from 'styled-components';
 import { Flag } from '#src/components/input/PhoneNumberInput/Flag';
-import { FlagsPack } from '@admiral-ds/flags';
 import type { ComponentName } from '@admiral-ds/flags';
+import { FlagsPack } from '@admiral-ds/flags';
 import type { MenuItemProps } from '#src/components/MenuItem';
 import { MenuItem } from '#src/components/MenuItem';
 

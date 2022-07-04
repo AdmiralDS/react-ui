@@ -114,6 +114,7 @@ const SimpleTemplate: ComponentStory<typeof DropMenu> = (args) => {
       ),
     }));
   }, [args.dimension]);
+
   function swapBorder(theme: Theme): Theme {
     theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
