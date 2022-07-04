@@ -1,5 +1,5 @@
-import * as React from 'react';
 import type { HTMLAttributes } from 'react';
+import * as React from 'react';
 import { keyboardKey } from '#src/components/common/keyboardKey';
 import { OpenStatusButton } from '#src/components/OpenStatusButton';
 import type { ItemProps } from '#src/components/MenuItem';
@@ -16,6 +16,7 @@ const StyledDropdownContainer = styled(DropdownContainer)<{
 }>`
   ${(p) => p.dropContainerCssMixin || ''}
 `;
+
 export interface RenderContentProps {
   /** Ref на отрендеренный элемент */
   buttonRef: React.Ref<HTMLElement>;

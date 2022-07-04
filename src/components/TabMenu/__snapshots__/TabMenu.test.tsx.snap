@@ -115,6 +115,7 @@ Object {
   -moz-appearance: none;
   appearance: none;
   border: none;
+  color: #22242A;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -468,6 +469,7 @@ Object {
   -moz-appearance: none;
   appearance: none;
   border: none;
+  color: #22242A;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 400;

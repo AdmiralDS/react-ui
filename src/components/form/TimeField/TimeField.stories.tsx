@@ -102,6 +102,7 @@ const Template: ComponentStory<typeof TimeField> = (props) => {
     setValue(inputValue);
     props.onChange?.(e);
   };
+
   function swapBorder(theme: Theme): Theme {
     theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
     return theme;

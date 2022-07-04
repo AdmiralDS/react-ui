@@ -133,6 +133,7 @@ const ModalForm = ({ onYesClick, onNoClick }: Props) => {
 
 const Template1: ComponentStory<typeof Modal> = (args) => {
   const [opened, setOpened] = React.useState(false);
+
   function swapBorder(theme: Theme): Theme {
     theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
     return theme;

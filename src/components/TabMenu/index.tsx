@@ -4,10 +4,10 @@ import { Badge } from '#src/components/Badge';
 import { ItemProps, MenuItem, RenderOptionProps } from '#src/components/MenuItem';
 
 import {
+  StyledOverflowMenu,
   Tab,
   TabContent,
   TabContentWrapper,
-  StyledOverflowMenu,
   TabsWrapper,
   Underline,
   Wrapper,

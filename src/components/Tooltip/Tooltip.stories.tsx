@@ -4,7 +4,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import styled, { ThemeProvider } from 'styled-components';
 
-import { ITooltipProps, Tooltip } from '#src/components/Tooltip';
+import { Tooltip } from '#src/components/Tooltip';
 import { Button } from '#src/components/Button';
 import { Theme } from '#src/components/themes';
 

@@ -123,6 +123,7 @@ const Template: ComponentStory<typeof SuggestField> = (props) => {
       };
     }
   }, [isLoading]);
+
   function swapBorder(theme: Theme): Theme {
     theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
     return theme;

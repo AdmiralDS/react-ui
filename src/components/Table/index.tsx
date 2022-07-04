@@ -13,22 +13,22 @@ import {
   ExpandedRowContent,
   ExpandIcon,
   ExpandIconWrapper,
+  ExtraText,
   Filler,
-  HeaderWrapperContainer,
   Header,
   HeaderCell,
   HeaderCellContent,
   HeaderCellSpacer,
   HeaderCellTitle,
+  HeaderWrapperContainer,
   Row,
   ScrollTableBody,
   SimpleRow,
   SortIcon,
   StickyWrapper,
   TableContainer,
-  TitleContent,
   Title,
-  ExtraText,
+  TitleContent,
 } from './style';
 import { VirtualBody } from './VirtualBody';
 import { OverflowMenu } from './OverflowMenu';
@@ -355,6 +355,7 @@ export const Table: React.FC<TableProps> = ({
     }, {});
     onRowSelectionChange?.(idsMap);
   }
+
   function handleCheckboxClick(e: React.MouseEvent<HTMLElement>) {
     // клик по чекбоксу не должен вызывать событие клика по строке
     e.stopPropagation();

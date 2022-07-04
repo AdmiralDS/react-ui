@@ -36,15 +36,14 @@ export const Dropdown = styled(DropComponent)`
 
 export const BorderedDiv = styled.div`
   position: absolute;
-  inset: 0;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   margin: 0;
   pointer-events: none;
   overflow: hidden;
   min-width: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
 
   background: none;
   border: 1px solid ${(props) => props.theme.color['Neutral/Neutral 40']};
@@ -78,6 +77,7 @@ const chipsShiftStyle = css`
   > * {
     margin-left: ${`-${COUNTER_WIDTH + CHIP_OFFSET}px`};
   }
+
   padding-left: ${`${COUNTER_WIDTH + CHIP_OFFSET}px`};
 `;
 
@@ -99,8 +99,8 @@ export const ValueWrapper = styled.div<{
 
   ${(props) => (props.dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
   color: ${(props) => props.theme.color['Neutral/Neutral 90']};
-  ${({ fixHeight }) => fixHeight && fixHeightStyle}
 
+  ${({ fixHeight }) => fixHeight && fixHeightStyle}
   [data-disabled='true'] & {
     color: ${(props) => props.theme.color['Neutral/Neutral 30']};
   }
@@ -134,7 +134,6 @@ export const Input = styled.input<{ dimension?: ComponentDimension; isMultiple?:
   color: ${(props) => props.theme.color['Neutral/Neutral 90']};
 
   ${({ dimension }) => (dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
-
   &::placeholder {
     color: ${(props) => props.theme.color['Neutral/Neutral 50']};
   }

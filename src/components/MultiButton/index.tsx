@@ -1,10 +1,7 @@
-import type { FocusEvent, KeyboardEvent, MouseEvent, ReactNode } from 'react';
-import React, { HTMLAttributes, useRef, useState } from 'react';
+import type { MouseEvent, ReactNode, HTMLAttributes } from 'react';
+import * as React from 'react';
 import styled, { css } from 'styled-components';
-import { ReactComponent as ChevronDownOutline } from '@admiral-ds/icons/build/system/ChevronDownOutline.svg';
 import { Button } from '#src/components/Button';
-import { Dropdown } from '#src/components/Dropdown';
-import { keyboardKey } from '#src/components/common/keyboardKey';
 import { Shape } from '#src/components/themes/common';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { MenuItem, RenderOptionProps } from '#src/components/MenuItem';
@@ -124,7 +121,7 @@ export const MultiButton = React.forwardRef<HTMLButtonElement, MultiButtonProps>
     },
     ref,
   ) => {
-    const wrapperRef = useRef<HTMLDivElement>(null);
+    const wrapperRef = React.useRef<HTMLDivElement>(null);
     const menuDimension = dimension === 'xl' ? 'l' : dimension;
     const menuWidth = dimension === 's' ? '240px' : '280px';
     const { display: firstOption, disabled: firstOptionDisabled, ...firstOptionProps } = options[0];

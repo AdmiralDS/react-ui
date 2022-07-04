@@ -2,8 +2,7 @@ import React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import styled, { ThemeProvider } from 'styled-components';
-import { NumberInput } from '#src/components/input/NumberInput';
-import { clearValue } from '#src/components/input/NumberInput';
+import { clearValue, NumberInput } from '#src/components/input/NumberInput';
 import { Theme } from '#src/components/themes';
 
 const Desc = styled.div`
