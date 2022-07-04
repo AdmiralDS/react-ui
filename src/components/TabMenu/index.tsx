@@ -60,6 +60,9 @@ export const TabMenu: React.FC<TabMenuProps> = ({
   const tabsWithRef: Array<TabWithRefProps> = React.useMemo(() => {
     return tabs.map((tab) => ({ ...tab, ref: React.createRef<HTMLButtonElement>() }));
   }, [tabs]);
+  const overflowMenuRefs: Array<React.RefObject<HTMLButtonElement>> = React.useMemo(() => {
+    return tabs.map(() => React.createRef<HTMLButtonElement>());
+  }, [tabs]);
 
   const tabsWrapperRef = React.useRef<HTMLDivElement | null>(null);
   const tablistRef = React.useRef<HTMLDivElement | null>(null);
@@ -291,7 +294,7 @@ export const TabMenu: React.FC<TabMenuProps> = ({
           </Tab>
           {mobile || tabNumber === tabsWithRef.length - 1 ? null : (
             <StyledOverflowMenu
-              ref={overflowBtnRef}
+              ref={overflowMenuRefs[tabNumber]}
               onOpen={() => setOpenedMenu(true)}
               onClose={() => setOpenedMenu(false)}
               alignSelf={alignSelf}
