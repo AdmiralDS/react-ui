@@ -1,10 +1,8 @@
 import * as React from 'react';
 import { keyboardKey } from '#src/components/common/keyboardKey';
-import observeRect from '#src/components/common/observeRect';
 import { Badge } from '#src/components/Badge';
 import { ItemProps, MenuItem, RenderOptionProps } from '#src/components/MenuItem';
 
-import measureTab from '#src/components/TabMenu/measureTab';
 import {
   Tab,
   TabContent,
@@ -15,8 +13,6 @@ import {
   Wrapper,
 } from '#src/components/TabMenu/style';
 import type { Dimension } from '#src/components/TabMenu/constants';
-import { OVERFLOW_MARGIN_LEFT, OVERFLOW_SIZE_L, OVERFLOW_SIZE_M } from '#src/components/TabMenu/constants';
-import { uid } from '#src/components/common/uid';
 
 export interface TabProps extends React.HTMLAttributes<HTMLButtonElement> {
   /** Контент вкладки */
