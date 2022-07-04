@@ -318,9 +318,9 @@ export const TabMenu: React.FC<TabMenuProps> = ({
 
   return (
     <Wrapper role="tablist" ref={tablistRef} underline={underline} mobile={mobile} dimension={dimension} {...props}>
+      <Underline ref={underlineRef} aria-hidden />
       <TabsWrapper ref={tabsWrapperRef} onKeyDown={handleTabsWrapperKeyDown} mobile={mobile} dimension={dimension}>
         {renderTabs()}
-        <Underline ref={underlineRef} aria-hidden />
       </TabsWrapper>
     </Wrapper>
   );
