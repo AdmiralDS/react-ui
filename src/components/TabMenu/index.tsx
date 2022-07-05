@@ -67,7 +67,12 @@ export const TabMenu: React.FC<TabMenuProps> = ({
   const tablistRef = React.useRef<HTMLDivElement | null>(null);
   const underlineRef = React.useRef<HTMLDivElement | null>(null);
   const firstTabRef = React.useRef(0);
-  const [visibilityMap, setVisibilityMap] = React.useState<{ [index: number | string]: boolean }>({ 0: true });
+  const [visibilityMap, setVisibilityMap] = React.useState<{ [index: number | string]: boolean }>(
+    tabs.reduce<{ [index: number | string]: boolean }>((initialMap, _, index) => {
+      initialMap[index] = true;
+      return initialMap;
+    }, {}),
+  );
   const activeTabVisible: boolean = React.useMemo(() => {
     const activeTabIndex = tabsWithRef.findIndex((item) => item.id === activeTab);
     return visibilityMap[activeTabIndex];
@@ -171,7 +176,6 @@ export const TabMenu: React.FC<TabMenuProps> = ({
         if (firstTabRef.current !== width) {
           firstTabRef.current = width;
           setUnderline();
-          console.log('bbb');
         }
       });
       observer.observe();
