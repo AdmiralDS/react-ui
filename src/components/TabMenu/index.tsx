@@ -304,6 +304,7 @@ export const TabMenu: React.FC<TabMenuProps> = ({
 
     return (
       <StyledOverflowMenu
+        id={`Over-${id}`}
         ref={overflowRef}
         onOpen={() => setOpenedMenu(true)}
         onClose={() => setOpenedMenu(false)}
