@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.5.2](https://github.com/AdmiralDS/react-ui/compare/v1.5.1...v1.5.2) (2022-07-06)
+
+
+### Bug Fixes
+
+* **DateField:** id must be populated on label when set on component ([83d4153](https://github.com/AdmiralDS/react-ui/commit/83d41537195d106880bd94baf84c331e1f8a6fdd))
+* **NumberInput:** add recalculation on fonts loading ([eb871e5](https://github.com/AdmiralDS/react-ui/commit/eb871e59622fb1ff8717c597c27b9ae9b0dc8052))
+
 ### [1.5.1](https://github.com/AdmiralDS/react-ui/compare/v1.5.0...v1.5.1) (2022-07-04)
 
 
