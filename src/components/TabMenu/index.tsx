@@ -28,6 +28,10 @@ export interface TabProps extends React.HTMLAttributes<HTMLButtonElement> {
 }
 
 type TabWithRefProps = TabProps & { ref: React.RefObject<HTMLButtonElement>; width?: number };
+type OverflowMenuRefProps = {
+  ref: React.RefObject<HTMLButtonElement>;
+  isVisible: boolean;
+};
 
 export interface TabMenuProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'> {
   /** Список вкладок */
@@ -56,20 +60,6 @@ export const TabMenu: React.FC<TabMenuProps> = ({
   onChange,
   ...props
 }) => {
-  // add refs to tabs
-  const tabsWithRef: Array<TabWithRefProps> = React.useMemo(() => {
-    return tabs.map((tab) => ({ ...tab, ref: React.createRef<HTMLButtonElement>() }));
-  }, [tabs]);
-  // refs to OverflowMenus
-  const overflowMenuRefs: Array<React.RefObject<HTMLButtonElement>> = React.useMemo(() => {
-    return tabs.map(() => React.createRef<HTMLButtonElement>());
-  }, [tabs]);
-
-  const tablistRef = React.useRef<HTMLDivElement | null>(null);
-  const underlineRef = React.useRef<HTMLDivElement | null>(null);
-  const firstTabRef = React.useRef(0);
-  const overflowBtnRef = React.useRef<HTMLButtonElement | null>(null);
-
   const [openedMenu, setOpenedMenu] = React.useState(false);
   // state for visible tabs in !mobile mode
   const [visibilityMap, setVisibilityMap] = React.useState<{ [index: number | string]: boolean }>(
@@ -78,6 +68,31 @@ export const TabMenu: React.FC<TabMenuProps> = ({
       return initialMap;
     }, {}),
   );
+
+  // add refs to tabs
+  const tabsWithRef: Array<TabWithRefProps> = React.useMemo(() => {
+    return tabs.map((tab) => ({ ...tab, ref: React.createRef<HTMLButtonElement>() }));
+  }, [tabs]);
+  // refs to OverflowMenus
+  const overflowMenuRefs: Array<OverflowMenuRefProps> = React.useMemo(() => {
+    return tabs.slice(0, tabs.length - 1).map((_, index) => ({
+      ref: React.createRef<HTMLButtonElement>(),
+      isVisible: visibilityMap[index] && !visibilityMap[index + 1],
+    }));
+  }, [tabs, visibilityMap]);
+  // ref to visible OverflowMenu
+  const currentOverflowMenuRef = React.useMemo(() => {
+    const visibleMenu = overflowMenuRefs.find((item) => item.isVisible === true);
+    if (visibleMenu) {
+      return visibleMenu.ref;
+    }
+    return null;
+  }, [overflowMenuRefs]);
+
+  const tablistRef = React.useRef<HTMLDivElement | null>(null);
+  const underlineRef = React.useRef<HTMLDivElement | null>(null);
+  const firstTabRef = React.useRef(0);
+  const overflowBtnRef = React.useRef<HTMLButtonElement | null>(null);
 
   // defines if activeTab is visible or is in OverflowMenu in !mobile mode
   const activeTabIsVisible: boolean = React.useMemo(() => {
