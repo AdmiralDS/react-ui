@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { ReactComponent as ArrowUpOutline } from '@admiral-ds/icons/build/system/ArrowUpOutline.svg';
 import { OpenStatusButton } from '#src/components/OpenStatusButton';
 
@@ -31,7 +31,7 @@ export const StickyWrapper = styled.div`
   background: ${({ theme }) => theme.color['Neutral/Neutral 00']};
   ${rowBackground};
   transition: box-shadow 0.3s;
-  [data-shadow='true'] & {
+  ${TableContainer}[data-shadow='true'] & {
     box-shadow: 4px 0 12px rgba(138, 150, 168, 0.16);
   }
 `;
@@ -140,27 +140,17 @@ export const ExpandIcon = styled(OpenStatusButton)`
   }
 `;
 
-export const SortIcon = styled(ArrowUpOutline)`
+export const SortIcon = styled(ArrowUpOutline)<{ sort: 'asc' | 'desc' | 'initial' }>`
   display: flex;
   flex-shrink: 0;
   transition: transform 0.3s ease-in-out;
   transform: rotate(0deg);
   margin: 2px 0;
 
-  [data-sort='asc'] && {
-    & *[fill^='#'] {
-      fill: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
-    }
+  & *[fill^='#'] {
+    fill: ${({ theme, sort }) => (sort === 'initial' ? 'transparent' : theme.color['Primary/Primary 60 Main'])};
   }
-  [data-sort='desc'] && {
-    & *[fill^='#'] {
-      fill: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
-    }
-    transform: rotate(180deg);
-  }
-  [data-sort='initial'] && *[fill^='#'] {
-    fill: transparent;
-  }
+  ${({ sort }) => (sort === 'desc' ? 'transform: rotate(180deg);' : '')}
 `;
 
 export const Cell = styled.div`
@@ -232,14 +222,20 @@ export const HeaderCell = styled.div`
   align-items: flex-start;
 `;
 
-export const HeaderCellContent = styled.div`
+export const HeaderCellContent = styled.div<{ cellAlign: 'left' | 'right' }>`
   box-sizing: border-box;
   display: flex;
   align-items: flex-start;
   width: 100%;
-  [data-cellalign='right'] & {
-    flex-direction: row-reverse;
-  }
+  ${({ cellAlign }) =>
+    cellAlign === 'right' &&
+    css`
+      flex-direction: row-reverse;
+      & > ${HeaderCellTitle} {
+        text-align: right;
+        flex-direction: row-reverse;
+      }
+    `}
 `;
 
 export const HeaderCellSpacer = styled.div<{ width?: string }>`
@@ -249,24 +245,15 @@ export const HeaderCellSpacer = styled.div<{ width?: string }>`
   flex-shrink: 0;
 `;
 
-export const HeaderCellTitle = styled.div`
+export const HeaderCellTitle = styled.div<{ sort: 'asc' | 'desc' | 'initial' }>`
   display: inline-flex;
   align-items: flex-start;
   width: 100%;
   overflow: hidden;
-  [data-cellalign='right'] & {
-    text-align: right;
-    flex-direction: row-reverse;
-  }
   &:hover {
-    [data-sort='asc'] && *[fill^='#'] {
-      fill: ${({ theme }) => theme.color['Primary/Primary 70']};
-    }
-    [data-sort='desc'] && *[fill^='#'] {
-      fill: ${({ theme }) => theme.color['Primary/Primary 70']};
-    }
-    [data-sort='initial'] && *[fill^='#'] {
-      fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
+    *[fill^='#'] {
+      fill: ${({ theme, sort }) =>
+        sort === 'initial' ? theme.color['Neutral/Neutral 50'] : theme.color['Primary/Primary 70']};
     }
   }
 `;

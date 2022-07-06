@@ -417,7 +417,6 @@ export const Table: React.FC<TableProps> = ({
       cellAlign = 'left',
       sortable = false,
       sort,
-      sticky = false,
       renderFilter,
       renderFilterIcon,
       onFilterMenuClickOutside,
@@ -428,22 +427,17 @@ export const Table: React.FC<TableProps> = ({
   ) => {
     const cellRef = React.createRef<HTMLDivElement>();
     return (
-      <HeaderCell
-        key={`head_${name}`}
-        style={{ width: width, minWidth: width }}
-        data-cellalign={cellAlign}
-        data-sort={sort || 'initial'}
-        data-sticky={sticky}
-        className="th"
-        ref={cellRef}
-      >
-        <HeaderCellContent>
-          <HeaderCellTitle onClick={sortable ? () => handleSort(name, sort || 'initial') : undefined}>
+      <HeaderCell key={`head_${name}`} style={{ width: width, minWidth: width }} className="th" ref={cellRef}>
+        <HeaderCellContent cellAlign={cellAlign}>
+          <HeaderCellTitle
+            sort={sort || 'initial'}
+            onClick={sortable ? () => handleSort(name, sort || 'initial') : undefined}
+          >
             <TitleContent sortable={sortable}>
               <Title lineClamp={headerLineClamp}>{title}</Title>
               {extraText && <ExtraText lineClamp={headerExtraLineClamp}>{extraText}</ExtraText>}
             </TitleContent>
-            {sortable && <SortIcon width={iconSize} height={iconSize} />}
+            {sortable && <SortIcon sort={sort || 'initial'} width={iconSize} height={iconSize} />}
           </HeaderCellTitle>
           <HeaderCellSpacer width={renderFilter ? spacer : `${parseInt(spacer) - parseInt(defaultSpacer)}px`} />
           {renderFilter && (
@@ -562,7 +556,7 @@ export const Table: React.FC<TableProps> = ({
       className={`table ${props.className}`}
     >
       <HeaderWrapper greyHeader={greyHeader} data-greyheader={greyHeader}>
-        <Header ref={headerRef} className="tr" data-underline={true}>
+        <Header ref={headerRef} className="tr">
           {(displayRowSelectionColumn || displayRowExpansionColumn || stickyColumns.length > 0) && (
             <StickyWrapper>
               {displayRowExpansionColumn && <ExpandCell />}
