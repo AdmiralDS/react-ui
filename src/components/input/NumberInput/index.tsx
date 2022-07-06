@@ -125,7 +125,7 @@ const Content = styled.div`
   ${extraPadding}
   border-radius: inherit;
 
-  [data-align='right'] & {
+  &[data-align='right'] {
     justify-content: flex-end;
   }
 `;
@@ -332,10 +332,13 @@ export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
         dimension={props.dimension}
         readOnly={props.readOnly}
         data-read-only={props.readOnly ? true : undefined}
-        data-status={status}
-        data-align={align}
       >
-        <Content dimension={props.dimension} iconCount={iconCount} onMouseDown={handleContentMouseDown}>
+        <Content
+          data-align={align}
+          dimension={props.dimension}
+          iconCount={iconCount}
+          onMouseDown={handleContentMouseDown}
+        >
           <AutoSizeInput
             ref={refSetter(ref, inputRef)}
             onChange={handleChange}
@@ -346,6 +349,7 @@ export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
             thousand={thousand}
             decimal={decimal}
             precision={precision}
+            status={status}
             {...props}
           />
         </Content>
