@@ -60,6 +60,7 @@ export const TabMenu: React.FC<TabMenuProps> = ({
   const tabsWithRef: Array<TabWithRefProps> = React.useMemo(() => {
     return tabs.map((tab) => ({ ...tab, ref: React.createRef<HTMLButtonElement>() }));
   }, [tabs]);
+  // refs to OverflowMenus
   const overflowMenuRefs: Array<React.RefObject<HTMLButtonElement>> = React.useMemo(() => {
     return tabs.map(() => React.createRef<HTMLButtonElement>());
   }, [tabs]);
@@ -67,17 +68,24 @@ export const TabMenu: React.FC<TabMenuProps> = ({
   const tablistRef = React.useRef<HTMLDivElement | null>(null);
   const underlineRef = React.useRef<HTMLDivElement | null>(null);
   const firstTabRef = React.useRef(0);
+  const overflowBtnRef = React.useRef<HTMLButtonElement | null>(null);
+
+  const [openedMenu, setOpenedMenu] = React.useState(false);
+  // state for visible tabs in !mobile mode
   const [visibilityMap, setVisibilityMap] = React.useState<{ [index: number | string]: boolean }>(
     tabs.reduce<{ [index: number | string]: boolean }>((initialMap, _, index) => {
       initialMap[index] = true;
       return initialMap;
     }, {}),
   );
-  const activeTabVisible: boolean = React.useMemo(() => {
+
+  // defines if activeTab is visible or is in OverflowMenu in !mobile mode
+  const activeTabIsVisible: boolean = React.useMemo(() => {
     const activeTabIndex = tabsWithRef.findIndex((item) => item.id === activeTab);
     return visibilityMap[activeTabIndex];
   }, [tabsWithRef, activeTab, visibilityMap]);
 
+  // model of all tabs for OverflowMenus
   const modelAllTabs = React.useMemo(() => {
     return tabsWithRef.map((item) => ({
       id: item.id,
@@ -88,10 +96,7 @@ export const TabMenu: React.FC<TabMenuProps> = ({
       ),
       disabled: item.disabled,
     }));
-  }, [dimension, tabsWithRef]);
-
-  const overflowBtnRef = React.useRef<HTMLButtonElement | null>(null);
-  const [openedMenu, setOpenedMenu] = React.useState(false);
+  }, [dimension, tabs, tabsWithRef]);
 
   const isHiddenTabSelected = (items: Array<ItemProps>) => items.findIndex((tab) => tab.id === activeTab) != -1;
 
@@ -161,7 +166,7 @@ export const TabMenu: React.FC<TabMenuProps> = ({
         styleUnderline(activeTabLeft, activeTabWidth);
       }
     }
-    if (!activeTabRef || (!mobile && !activeTabVisible)) {
+    if (!activeTabRef || (!mobile && !activeTabIsVisible)) {
       styleUnderline(0, 0);
     }
   };
@@ -283,6 +288,8 @@ export const TabMenu: React.FC<TabMenuProps> = ({
       const { disabled, content, id, icon, badge, ref, width, ...props } = item;
       const tabNumber = getTabIndex(id);
       const tabsForMenu = modelAllTabs.slice(tabNumber + 1);
+      const overflowMenuHidden = !(visibilityMap[tabNumber] && !visibilityMap[tabNumber + 1]);
+      const tabIndex = overflowMenuHidden || !tabsForMenu?.filter((item) => item.id === activeTab).length ? -1 : 0;
       return (
         <div key={id} data-number={index}>
           <Tab
@@ -323,7 +330,7 @@ export const TabMenu: React.FC<TabMenuProps> = ({
               items={tabsForMenu}
               selected={containsActiveTab(tabsForMenu) ? activeTab : undefined}
               dimension={dimension}
-              hide={!(visibilityMap[tabNumber] && !visibilityMap[tabNumber + 1])}
+              isHidden={overflowMenuHidden}
               isActive={containsActiveTab(tabsForMenu)}
               disabled={tabsForMenu.length === tabsForMenu.filter((tab) => tab.disabled).length}
               onChange={(id: string) => {
@@ -332,7 +339,7 @@ export const TabMenu: React.FC<TabMenuProps> = ({
                   styleUnderline(0, 0);
                 }
               }}
-              tabIndex={tabsForMenu?.filter((item) => item.id === activeTab).length ? 0 : -1}
+              tabIndex={tabIndex}
               onKeyDown={handleMenuKeyDown}
             />
           )}

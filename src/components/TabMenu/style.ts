@@ -136,8 +136,8 @@ export const Tab = styled.button<{ dimension: Dimension; selected: boolean }>`
   }
 `;
 
-export const StyledOverflowMenu = styled(OverflowMenu)<{ isActive: boolean; hide?: boolean }>`
-  display: ${({ hide }) => (hide ? 'none' : 'inline')};
+export const StyledOverflowMenu = styled(OverflowMenu)<{ isActive: boolean; isHidden?: boolean }>`
+  display: ${({ isHidden }) => (isHidden ? 'none' : 'inline')};
   &:focus-visible {
     &:before {
       content: '';
