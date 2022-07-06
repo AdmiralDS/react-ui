@@ -87,12 +87,11 @@ export const TabMenu: React.FC<TabMenuProps> = ({
       return visibleMenu.ref;
     }
     return null;
-  }, [overflowMenuRefs]);
+  }, [overflowMenuRefs, visibilityMap]);
 
   const tablistRef = React.useRef<HTMLDivElement | null>(null);
   const underlineRef = React.useRef<HTMLDivElement | null>(null);
   const firstTabRef = React.useRef(0);
-  const overflowBtnRef = React.useRef<HTMLButtonElement | null>(null);
 
   // defines if activeTab is visible or is in OverflowMenu in !mobile mode
   const activeTabIsVisible: boolean = React.useMemo(() => {
@@ -121,17 +120,17 @@ export const TabMenu: React.FC<TabMenuProps> = ({
 
   const getNextFocus = (target: HTMLElement) => {
     let sibling: Element | null | undefined =
-      target.nextElementSibling || overflowBtnRef.current || tablistRef.current?.firstElementChild;
+      target.nextElementSibling || currentOverflowMenuRef?.current || tablistRef.current?.firstElementChild;
     while (sibling?.hasAttribute('disabled')) {
-      sibling = sibling.nextElementSibling || overflowBtnRef.current || tablistRef.current?.firstElementChild;
+      sibling = sibling.nextElementSibling || currentOverflowMenuRef?.current || tablistRef.current?.firstElementChild;
     }
     return sibling;
   };
   const getPreviousFocus = (target: HTMLElement) => {
     let sibling: Element | null | undefined =
-      target.previousElementSibling || overflowBtnRef.current || tablistRef.current?.lastElementChild;
+      target.previousElementSibling || currentOverflowMenuRef?.current || tablistRef.current?.lastElementChild;
     while (sibling?.hasAttribute('disabled')) {
-      sibling = sibling.previousElementSibling || overflowBtnRef.current || tablistRef.current?.lastElementChild;
+      sibling = sibling.previousElementSibling || currentOverflowMenuRef?.current || tablistRef.current?.lastElementChild;
     }
     return sibling;
   };
@@ -141,7 +140,7 @@ export const TabMenu: React.FC<TabMenuProps> = ({
     while (tab?.hasAttribute('disabled')) {
       tab = tab.nextElementSibling;
     }
-    tab ? (tab as HTMLElement).focus() : (overflowBtnRef.current as HTMLElement).focus();
+    tab ? (tab as HTMLElement).focus() : (currentOverflowMenuRef?.current as HTMLElement).focus();
   };
 
   const focusLastTab = () => {
@@ -149,7 +148,7 @@ export const TabMenu: React.FC<TabMenuProps> = ({
     while (tab?.hasAttribute('disabled')) {
       tab = tab.previousElementSibling;
     }
-    tab ? (tab as HTMLElement).focus() : (overflowBtnRef.current as HTMLElement).focus();
+    tab ? (tab as HTMLElement).focus() : (currentOverflowMenuRef?.current as HTMLElement).focus();
   };
 
   const styleUnderline = (left: number, width: number) => {
