@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
 import { ReactComponent as ArrowUpOutline } from '@admiral-ds/icons/build/system/ArrowUpOutline.svg';
 import { OpenStatusButton } from '#src/components/OpenStatusButton';
+import type { TableProps } from '#src/components/Table';
 
 import {
   cellStyle,
@@ -36,7 +37,7 @@ export const StickyWrapper = styled.div<{ greyHeader?: boolean }>`
   }
 `;
 
-export const OverflowMenuWrapper = styled.div<{ $offset: number }>`
+export const OverflowMenuWrapper = styled.div<{ $offset: number; dimension: TableProps['dimension'] }>`
   box-sizing: border-box;
   display: flex;
   align-items: center;
@@ -90,7 +91,7 @@ export const HeaderWrapperContainer = styled.div<{ scrollbar: number; greyHeader
     `}
 `;
 
-export const Header = styled.div`
+export const Header = styled.div<{ dimension: TableProps['dimension'] }>`
   box-sizing: border-box;
   display: flex;
   flex: 0 0 auto;
@@ -156,7 +157,7 @@ export const SortIcon = styled(ArrowUpOutline)<{ sort: 'asc' | 'desc' | 'initial
   ${({ sort }) => (sort === 'desc' ? 'transform: rotate(180deg);' : '')}
 `;
 
-export const Cell = styled.div`
+export const Cell = styled.div<{ dimension: TableProps['dimension'] }>`
   display: flex;
   align-items: flex-start;
   flex: 0 0 auto;
@@ -175,45 +176,44 @@ export const CellTextContent = styled.div<{ cellAlign?: 'left' | 'right' }>`
 `;
 
 // padding-bottom меньше padding-top на 1px, т.к. 1px остается для border-bottom ячейки
-export const CheckboxCell = styled(Cell)`
+export const CheckboxCell = styled(Cell)<{ dimension: TableProps['dimension'] }>`
   width: unset;
   overflow: visible;
-  [data-dimension='s'] && {
-    padding: 8px 2px 7px 14px;
-  }
-  [data-dimension='m'] && {
-    padding: 12px 2px 11px 14px;
-  }
-  [data-dimension='l'] && {
-    padding: 14px 2px 13px 18px;
-  }
-  [data-dimension='xl'] && {
-    padding: 18px 2px 17px 18px;
-  }
+  padding: ${({ dimension }) => {
+    switch (dimension) {
+      case 's':
+        return '8px 2px 7px 14px';
+      case 'l':
+        return '14px 2px 13px 18px';
+      case 'xl':
+        return '18px 2px 17px 18px';
+      case 'm':
+      default:
+        return '12px 2px 11px 14px';
+    }
+  }};
 `;
 
 // padding-bottom меньше padding-top на 1px, т.к. 1px остается для border-bottom ячейки
-export const ExpandCell = styled(Cell)`
+export const ExpandCell = styled(Cell)<{ dimension: TableProps['dimension'] }>`
   overflow: visible;
-  [data-dimension='s'] && {
-    padding: 6px 0px 5px 12px;
-    width: 32px;
-  }
-  [data-dimension='m'] && {
-    padding: 10px 0px 9px 12px;
-    width: 32px;
-  }
-  [data-dimension='l'] && {
-    padding: 12px 0px 11px 16px;
-    width: 40px;
-  }
-  [data-dimension='xl'] && {
-    padding: 16px 0px 15px 16px;
-    width: 40px;
-  }
+  width: ${({ dimension }) => (dimension === 's' || dimension === 'm' ? 32 : 40)}px;
+  padding: ${({ dimension }) => {
+    switch (dimension) {
+      case 's':
+        return '6px 0px 5px 12px';
+      case 'l':
+        return '12px 0px 11px 16px';
+      case 'xl':
+        return '16px 0px 15px 16px';
+      case 'm':
+      default:
+        return '10px 0px 9px 12px';
+    }
+  }};
 `;
 
-export const HeaderCell = styled.div`
+export const HeaderCell = styled.div<{ dimension: TableProps['dimension'] }>`
   position: relative;
   display: inline-flex;
   box-sizing: border-box;
@@ -261,19 +261,13 @@ export const HeaderCellTitle = styled.div<{ sort: 'asc' | 'desc' | 'initial' }>`
   }
 `;
 
-export const TitleContent = styled.div<{ sortable?: boolean }>`
+export const TitleContent = styled.div<{ dimension: TableProps['dimension']; sortable?: boolean }>`
   display: flex;
   flex-direction: column;
 
   // leave 20px/16px for SortIcon
-  max-width: ${({ sortable }) => (sortable ? 'calc(100% - 20px)' : '100%')};
-
-  [data-dimension='s'] && {
-    max-width: ${({ sortable }) => (sortable ? 'calc(100% - 16px)' : '100%')};
-  }
-  [data-dimension='m'] && {
-    max-width: ${({ sortable }) => (sortable ? 'calc(100% - 16px)' : '100%')};
-  }
+  max-width: ${({ sortable, dimension }) =>
+    sortable ? `calc(100% - ${dimension === 's' || dimension === 'm' ? 16 : 20}px)` : '100%'};
 `;
 
 export const Title = styled.div<{ lineClamp: number }>`
@@ -282,7 +276,7 @@ export const Title = styled.div<{ lineClamp: number }>`
   ${({ lineClamp }) => (lineClamp === 1 ? singleLineTitle : multiLineTitle)}
 `;
 
-export const ExtraText = styled.div<{ lineClamp: number }>`
+export const ExtraText = styled.div<{ dimension: TableProps['dimension']; lineClamp: number }>`
   position: relative;
   width: 100%;
   // box-sizing: border-box;
@@ -291,7 +285,7 @@ export const ExtraText = styled.div<{ lineClamp: number }>`
   ${({ lineClamp }) => (lineClamp === 1 ? singleLineTitle : multiLineTitle)}
 `;
 
-export const Row = styled.div<{ disabled: boolean; underline: boolean }>`
+export const Row = styled.div<{ dimension: TableProps['dimension']; disabled: boolean; underline: boolean }>`
   display: flex;
   flex-direction: column;
   min-width: fit-content;

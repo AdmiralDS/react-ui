@@ -427,15 +427,25 @@ export const Table: React.FC<TableProps> = ({
   ) => {
     const cellRef = React.createRef<HTMLDivElement>();
     return (
-      <HeaderCell key={`head_${name}`} style={{ width: width, minWidth: width }} className="th" ref={cellRef}>
+      <HeaderCell
+        key={`head_${name}`}
+        dimension={dimension}
+        style={{ width: width, minWidth: width }}
+        className="th"
+        ref={cellRef}
+      >
         <HeaderCellContent cellAlign={cellAlign}>
           <HeaderCellTitle
             sort={sort || 'initial'}
             onClick={sortable ? () => handleSort(name, sort || 'initial') : undefined}
           >
-            <TitleContent sortable={sortable}>
+            <TitleContent dimension={dimension} sortable={sortable}>
               <Title lineClamp={headerLineClamp}>{title}</Title>
-              {extraText && <ExtraText lineClamp={headerExtraLineClamp}>{extraText}</ExtraText>}
+              {extraText && (
+                <ExtraText dimension={dimension} lineClamp={headerExtraLineClamp}>
+                  {extraText}
+                </ExtraText>
+              )}
             </TitleContent>
             {sortable && <SortIcon sort={sort || 'initial'} width={iconSize} height={iconSize} />}
           </HeaderCellTitle>
@@ -460,6 +470,7 @@ export const Table: React.FC<TableProps> = ({
             onChange={handleResizeChange}
             disabled={disableColumnResize}
             resizerState={resizerState}
+            dimension={dimension}
           />
         )}
         {index === cols.length - 1 && showDividerForLastColumn && (
@@ -469,6 +480,7 @@ export const Table: React.FC<TableProps> = ({
             onChange={handleResizeChange}
             disabled={disableColumnResize}
             resizerState={resizerState}
+            dimension={dimension}
           />
         )}
       </HeaderCell>
@@ -477,7 +489,12 @@ export const Table: React.FC<TableProps> = ({
 
   const renderBodyCell = (row: TableRow, col: Column) => {
     return (
-      <Cell key={`${row.id}_${col.name}`} style={{ width: col.width || DEFAULT_COLUMN_WIDTH }} className="td">
+      <Cell
+        key={`${row.id}_${col.name}`}
+        dimension={dimension}
+        style={{ width: col.width || DEFAULT_COLUMN_WIDTH }}
+        className="td"
+      >
         {renderCell ? (
           renderCell(row, col.name)
         ) : (
@@ -495,6 +512,7 @@ export const Table: React.FC<TableProps> = ({
         key={`row_${row.id}`}
         underline={(index === rowList.length - 1 && showLastRowUnderline) || index < rowList.length - 1}
         disabled={!!row.disabled}
+        dimension={dimension}
         className={`tr ${row.className}`}
       >
         <SimpleRow
@@ -507,7 +525,7 @@ export const Table: React.FC<TableProps> = ({
           {(displayRowSelectionColumn || displayRowExpansionColumn || stickyColumns.length > 0) && (
             <StickyWrapper>
               {displayRowExpansionColumn && (
-                <ExpandCell>
+                <ExpandCell dimension={dimension}>
                   {row.expandedRowRender && (
                     <ExpandIconWrapper>
                       <ExpandIcon
@@ -521,7 +539,7 @@ export const Table: React.FC<TableProps> = ({
                 </ExpandCell>
               )}
               {displayRowSelectionColumn && (
-                <CheckboxCell className="td_checkbox">
+                <CheckboxCell dimension={dimension} className="td_checkbox">
                   <Checkbox
                     disabled={row.disabled || row.checkboxDisabled}
                     dimension={checkboxDimension}
@@ -537,7 +555,7 @@ export const Table: React.FC<TableProps> = ({
           {cols.map((col) => (col.sticky ? null : renderBodyCell(row, col)))}
           <Filler />
         </SimpleRow>
-        {row.overflowMenuRender && <OverflowMenu tableWidth={tableWidth} row={row} />}
+        {row.overflowMenuRender && <OverflowMenu dimension={dimension} tableWidth={tableWidth} row={row} />}
         {row.expandedRowRender && (
           <ExpandedRow opened={row.expanded} contentMaxHeight="90vh" className="tr-expanded">
             <ExpandedRowContent>{row.expandedRowRender(row)}</ExpandedRowContent>
@@ -548,20 +566,14 @@ export const Table: React.FC<TableProps> = ({
   };
 
   return (
-    <TableContainer
-      ref={tableRef}
-      data-dimension={dimension}
-      data-shadow={false}
-      {...props}
-      className={`table ${props.className}`}
-    >
+    <TableContainer ref={tableRef} data-shadow={false} {...props} className={`table ${props.className}`}>
       <HeaderWrapper greyHeader={greyHeader} data-verticalscroll={verticalScroll}>
-        <Header ref={headerRef} className="tr">
+        <Header dimension={dimension} ref={headerRef} className="tr">
           {(displayRowSelectionColumn || displayRowExpansionColumn || stickyColumns.length > 0) && (
             <StickyWrapper greyHeader={greyHeader}>
-              {displayRowExpansionColumn && <ExpandCell />}
+              {displayRowExpansionColumn && <ExpandCell dimension={dimension} />}
               {displayRowSelectionColumn && (
-                <CheckboxCell className="th_checkbox">
+                <CheckboxCell dimension={dimension} className="th_checkbox">
                   <Checkbox
                     dimension={checkboxDimension}
                     checked={allRowsChecked || someRowsChecked || headerCheckboxChecked}
