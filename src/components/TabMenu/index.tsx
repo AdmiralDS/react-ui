@@ -327,6 +327,45 @@ export const TabMenu: React.FC<TabMenuProps> = ({
     );
   };
 
+  const renderTab = (item: TabWithRefProps, index: number) => {
+    /* width отдельно вынесен из props, чтобы он не передавался в Tab.
+      Иначе будет постоянно передаваться в таб, что не верно,
+      т.к. параметр width нужен только для внутренних расчетов */
+    const { disabled, content, id, icon, badge, ref, width, ...props } = item;
+
+    return (
+      <Tab
+        ref={ref}
+        key={id}
+        id={id}
+        role="tab"
+        type="button"
+        aria-selected={id === activeTab}
+        selected={id === activeTab}
+        tabIndex={id === activeTab ? 0 : -1}
+        dimension={dimension}
+        disabled={disabled}
+        onClick={handleTabClick}
+        onKeyUp={handleTabKeyUp}
+        {...props}
+      >
+        <TabContentWrapper dimension={dimension} tabIndex={-1}>
+          {icon && icon}
+          <TabContent>{content}</TabContent>
+          {typeof badge !== 'undefined' && (
+            <Badge
+              data-badge
+              dimension="s"
+              appearance={id === activeTab ? 'info' : disabled ? 'lightDisable' : 'lightInactive'}
+            >
+              {badge}
+            </Badge>
+          )}
+        </TabContentWrapper>
+      </Tab>
+    );
+  };
+
   const renderTabs = () => {
     return tabsWithRef.map((item: TabWithRefProps, index) => {
       /* width отдельно вынесен из props, чтобы он не передавался в Tab.
@@ -336,35 +375,7 @@ export const TabMenu: React.FC<TabMenuProps> = ({
       const tabNumber = getTabIndex(id);
       return (
         <div key={id} data-number={index}>
-          <Tab
-            ref={ref}
-            key={id}
-            id={id}
-            role="tab"
-            type="button"
-            aria-selected={id === activeTab}
-            selected={id === activeTab}
-            tabIndex={id === activeTab ? 0 : -1}
-            dimension={dimension}
-            disabled={disabled}
-            onClick={handleTabClick}
-            onKeyUp={handleTabKeyUp}
-            {...props}
-          >
-            <TabContentWrapper dimension={dimension} tabIndex={-1}>
-              {icon && icon}
-              <TabContent>{content}</TabContent>
-              {typeof badge !== 'undefined' && (
-                <Badge
-                  data-badge
-                  dimension="s"
-                  appearance={id === activeTab ? 'info' : disabled ? 'lightDisable' : 'lightInactive'}
-                >
-                  {badge}
-                </Badge>
-              )}
-            </TabContentWrapper>
-          </Tab>
+          {renderTab(item, index)}
           {mobile || tabNumber === tabsWithRef.length - 1 ? null : renderOverflowMenu(id)}
         </div>
       );
