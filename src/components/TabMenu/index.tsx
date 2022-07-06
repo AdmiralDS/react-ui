@@ -295,6 +295,38 @@ export const TabMenu: React.FC<TabMenuProps> = ({
     return tabsWithRef.findIndex((item) => item.id === id);
   };
 
+  const renderOverflowMenu = (id: string) => {
+    const tabNumber = getTabIndex(id);
+    const tabsForMenu = modelAllTabs.slice(tabNumber + 1);
+    const overflowMenuHidden =
+      tabNumber === tabsWithRef.length - 1 || !(visibilityMap[tabNumber] && !visibilityMap[tabNumber + 1]);
+    const tabIndex = overflowMenuHidden || !tabsForMenu?.filter((item) => item.id === activeTab).length ? -1 : 0;
+    const overflowRef = overflowMenuRefs[tabNumber] ? overflowMenuRefs[tabNumber].ref : null;
+
+    return (
+      <StyledOverflowMenu
+        ref={overflowRef}
+        onOpen={() => setOpenedMenu(true)}
+        onClose={() => setOpenedMenu(false)}
+        alignSelf={alignSelf}
+        items={tabsForMenu}
+        selected={containsActiveTab(tabsForMenu) ? activeTab : undefined}
+        dimension={dimension}
+        isHidden={overflowMenuHidden}
+        isActive={containsActiveTab(tabsForMenu)}
+        disabled={tabsForMenu.length === tabsForMenu.filter((tab) => tab.disabled).length}
+        onChange={(id: string) => {
+          onChange(id);
+          if (!isHiddenTabSelected(tabsForMenu)) {
+            styleUnderline(0, 0);
+          }
+        }}
+        tabIndex={tabIndex}
+        onKeyDown={handleMenuKeyDown}
+      />
+    );
+  };
+
   const renderTabs = () => {
     return tabsWithRef.map((item: TabWithRefProps, index) => {
       /* width отдельно вынесен из props, чтобы он не передавался в Tab.
@@ -302,10 +334,6 @@ export const TabMenu: React.FC<TabMenuProps> = ({
       т.к. параметр width нужен только для внутренних расчетов */
       const { disabled, content, id, icon, badge, ref, width, ...props } = item;
       const tabNumber = getTabIndex(id);
-      const tabsForMenu = modelAllTabs.slice(tabNumber + 1);
-      const overflowMenuHidden =
-        tabNumber === tabsWithRef.length - 1 || !(visibilityMap[tabNumber] && !visibilityMap[tabNumber + 1]);
-      const tabIndex = overflowMenuHidden || !tabsForMenu?.filter((item) => item.id === activeTab).length ? -1 : 0;
       return (
         <div key={id} data-number={index}>
           <Tab
@@ -337,28 +365,7 @@ export const TabMenu: React.FC<TabMenuProps> = ({
               )}
             </TabContentWrapper>
           </Tab>
-          {mobile || tabNumber === tabsWithRef.length - 1 ? null : (
-            <StyledOverflowMenu
-              ref={overflowMenuRefs[tabNumber]}
-              onOpen={() => setOpenedMenu(true)}
-              onClose={() => setOpenedMenu(false)}
-              alignSelf={alignSelf}
-              items={tabsForMenu}
-              selected={containsActiveTab(tabsForMenu) ? activeTab : undefined}
-              dimension={dimension}
-              isHidden={overflowMenuHidden}
-              isActive={containsActiveTab(tabsForMenu)}
-              disabled={tabsForMenu.length === tabsForMenu.filter((tab) => tab.disabled).length}
-              onChange={(id: string) => {
-                onChange(id);
-                if (!isHiddenTabSelected(tabsForMenu)) {
-                  styleUnderline(0, 0);
-                }
-              }}
-              tabIndex={tabIndex}
-              onKeyDown={handleMenuKeyDown}
-            />
-          )}
+          {mobile || tabNumber === tabsWithRef.length - 1 ? null : renderOverflowMenu(id)}
         </div>
       );
     });
