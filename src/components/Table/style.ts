@@ -23,12 +23,13 @@ export const TableContainer = styled.div`
   background: ${({ theme }) => theme.color['Neutral/Neutral 00']};
 `;
 
-export const StickyWrapper = styled.div`
+export const StickyWrapper = styled.div<{ greyHeader?: boolean }>`
   display: flex;
   position: sticky;
   left: 0;
   z-index: 5;
-  background: ${({ theme }) => theme.color['Neutral/Neutral 00']};
+  background: ${({ theme, greyHeader }) =>
+    greyHeader ? theme.color['Neutral/Neutral 10'] : theme.color['Neutral/Neutral 00']};
   ${rowBackground};
   transition: box-shadow 0.3s;
   ${TableContainer}[data-shadow='true'] & {
@@ -65,7 +66,7 @@ export const HeaderWrapperContainer = styled.div<{ scrollbar: number; greyHeader
   flex: 0 0 auto;
   flex-direction: column;
 
-  [data-verticalscroll='true'] && {
+  &[data-verticalscroll='true'] {
     &:after {
       position: absolute;
       content: '';
@@ -78,7 +79,18 @@ export const HeaderWrapperContainer = styled.div<{ scrollbar: number; greyHeader
       width: ${({ scrollbar }) => scrollbar}px;
       border-bottom: 1px solid ${({ theme }) => theme.color['Neutral/Neutral 20']};
     }
+    & > div.tr {
+      overflow-y: scroll;
+    }
   }
+
+  ${({ greyHeader }) =>
+    greyHeader &&
+    css`
+      & > div.tr {
+        background: ${({ theme }) => theme.color['Neutral/Neutral 10']};
+      }
+    `}
 `;
 
 export const Header = styled.div`
@@ -86,12 +98,6 @@ export const Header = styled.div`
   display: flex;
   flex: 0 0 auto;
   overflow-x: hidden;
-  [data-verticalscroll='true'] & {
-    overflow-y: scroll;
-  }
-  [data-greyheader='true'] & {
-    background: ${({ theme }) => theme.color['Neutral/Neutral 10']};
-  }
   ${headerStyle};
   transform: translateZ(0);
 

@@ -494,7 +494,6 @@ export const Table: React.FC<TableProps> = ({
         onDoubleClick={() => handleRowDoubleClick(row.id)}
         key={`row_${row.id}`}
         underline={(index === rowList.length - 1 && showLastRowUnderline) || index < rowList.length - 1}
-        data-expanded={row.expanded}
         data-selected={!!row.selected}
         data-disabled={!!row.disabled}
         disabled={!!row.disabled}
@@ -551,14 +550,13 @@ export const Table: React.FC<TableProps> = ({
       ref={tableRef}
       data-dimension={dimension}
       data-shadow={false}
-      data-verticalscroll={verticalScroll}
       {...props}
       className={`table ${props.className}`}
     >
-      <HeaderWrapper greyHeader={greyHeader} data-greyheader={greyHeader}>
+      <HeaderWrapper greyHeader={greyHeader} data-verticalscroll={verticalScroll}>
         <Header ref={headerRef} className="tr">
           {(displayRowSelectionColumn || displayRowExpansionColumn || stickyColumns.length > 0) && (
-            <StickyWrapper>
+            <StickyWrapper greyHeader={greyHeader}>
               {displayRowExpansionColumn && <ExpandCell />}
               {displayRowSelectionColumn && (
                 <CheckboxCell className="th_checkbox">
