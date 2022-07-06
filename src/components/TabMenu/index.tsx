@@ -288,7 +288,8 @@ export const TabMenu: React.FC<TabMenuProps> = ({
       const { disabled, content, id, icon, badge, ref, width, ...props } = item;
       const tabNumber = getTabIndex(id);
       const tabsForMenu = modelAllTabs.slice(tabNumber + 1);
-      const overflowMenuHidden = !(visibilityMap[tabNumber] && !visibilityMap[tabNumber + 1]);
+      const overflowMenuHidden =
+        tabNumber === tabsWithRef.length - 1 && !(visibilityMap[tabNumber] && !visibilityMap[tabNumber + 1]);
       const tabIndex = overflowMenuHidden || !tabsForMenu?.filter((item) => item.id === activeTab).length ? -1 : 0;
       return (
         <div key={id} data-number={index}>
