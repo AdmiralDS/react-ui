@@ -494,14 +494,16 @@ export const Table: React.FC<TableProps> = ({
         onDoubleClick={() => handleRowDoubleClick(row.id)}
         key={`row_${row.id}`}
         underline={(index === rowList.length - 1 && showLastRowUnderline) || index < rowList.length - 1}
-        data-selected={!!row.selected}
-        data-disabled={!!row.disabled}
         disabled={!!row.disabled}
-        data-error={!!row.error}
-        data-success={!!row.success}
         className={`tr ${row.className}`}
       >
-        <SimpleRow className="tr-simple">
+        <SimpleRow
+          className="tr-simple"
+          selected={!!row.selected}
+          disabled={!!row.disabled}
+          error={!!row.error}
+          success={!!row.success}
+        >
           {(displayRowSelectionColumn || displayRowExpansionColumn || stickyColumns.length > 0) && (
             <StickyWrapper>
               {displayRowExpansionColumn && (

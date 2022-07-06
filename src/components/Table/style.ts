@@ -30,7 +30,6 @@ export const StickyWrapper = styled.div<{ greyHeader?: boolean }>`
   z-index: 5;
   background: ${({ theme, greyHeader }) =>
     greyHeader ? theme.color['Neutral/Neutral 10'] : theme.color['Neutral/Neutral 00']};
-  ${rowBackground};
   transition: box-shadow 0.3s;
   ${TableContainer}[data-shadow='true'] & {
     box-shadow: 4px 0 12px rgba(138, 150, 168, 0.16);
@@ -43,8 +42,6 @@ export const OverflowMenuWrapper = styled.div<{ $offset: number }>`
   align-items: center;
   position: absolute;
   z-index: 5;
-  background: ${({ theme }) => theme.color['Neutral/Neutral 00']};
-  ${rowBackground}
   ${overflowMenuStyle}
   visibility: hidden;
 
@@ -304,11 +301,15 @@ export const Row = styled.div<{ disabled: boolean; underline: boolean }>`
   ${({ underline }) => underline && underlineRow}
 `;
 
-export const SimpleRow = styled.div`
+export const SimpleRow = styled.div<{ selected?: boolean; disabled?: boolean; error?: boolean; success?: boolean }>`
   display: inline-flex;
   min-width: max-content;
-  background: ${({ theme }) => theme.color['Neutral/Neutral 00']};
-  ${rowBackground}
+
+  & > *,
+  & + ${OverflowMenuWrapper} {
+    background: ${rowBackground};
+  };
+  }
 
   &:hover {
     & + ${OverflowMenuWrapper} {
