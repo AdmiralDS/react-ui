@@ -5,6 +5,7 @@ import type { TextInputProps } from '#src/components/input/TextInput';
 import { typography } from '#src/components/Typography';
 import styled, { css } from 'styled-components';
 import { refSetter } from '#src/components/common/utils/refSetter';
+import observeRect from '#src/components/common/observeRect';
 
 import { fitToCurrency } from './utils';
 
@@ -31,9 +32,9 @@ const Sizer = styled.div`
   left: 0;
   height: 0;
   visibility: hidden;
-  overflow: scroll;
   white-space: pre;
   pointer-events: none;
+  box-sizing: border-box;
 `;
 
 const BorderedDiv = styled.div<{ status?: TextInputProps['status'] }>`
@@ -161,13 +162,14 @@ export const AutoSizeInput = React.forwardRef<HTMLInputElement, InputProps>(
     const [showPrefixSuffix, setPrefixSuffix] = React.useState(false);
 
     const sizerRef = React.useRef<HTMLDivElement>(null);
+    const sizerWidth = React.useRef(0);
     const inputRef = React.useRef<HTMLInputElement>(null);
 
     const updateInputWidth = (newValue: any) => {
       if (sizerRef.current && inputRef.current) {
         sizerRef.current.innerHTML = newValue || placeholder || '';
         // 2px с расчетом на курсор
-        inputRef.current.style.width = `${sizerRef.current.scrollWidth + 2}px`;
+        inputRef.current.style.width = `${sizerRef.current.getBoundingClientRect().width + 2}px`;
       }
       if (newValue) {
         setPrefixSuffix?.(true);
@@ -244,6 +246,25 @@ export const AutoSizeInput = React.forwardRef<HTMLInputElement, InputProps>(
         updateInputWidth(inputRef.current.value);
       }
     }, [props.value, props.defaultValue, props.dimension]);
+
+    // recalculation on resize. For example, it happens after fonts loading
+    React.useLayoutEffect(() => {
+      if (sizerRef.current) {
+        const observer = observeRect(sizerRef.current, (rect) => {
+          const width = rect?.width || 0;
+          if (sizerWidth.current !== width) {
+            sizerWidth.current = width;
+            if (inputRef.current) {
+              updateInputWidth(inputRef.current.value);
+            }
+          }
+        });
+        observer.observe();
+        return () => {
+          observer.unobserve();
+        };
+      }
+    }, [sizerRef.current]);
 
     const handleMouseDown = (e: React.MouseEvent<HTMLInputElement>) => {
       // отменяю всплытие события, чтобы не сработал onMouseDown на Content и фокус не был снова установлен
