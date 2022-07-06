@@ -22,6 +22,7 @@ export * from './components/Field';
 export * from './components/Spinner';
 export * from './components/DropMenu';
 export * from './components/DropDownMenu';
+export * from './components/DropdownContainer';
 export * from './components/DropDownItem';
 export * from './components/Tag';
 export * from './components/Tags';

@@ -32,7 +32,7 @@ const Portal = styled(PositionInPortal)<{ reverse: boolean }>`
   flex-wrap: nowrap;
 `;
 
-export interface DropdownProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface DropdownContainerProps extends React.HTMLAttributes<HTMLDivElement> {
   targetRef: React.RefObject<HTMLElement>;
 
   /**
@@ -47,7 +47,7 @@ export interface DropdownProps extends React.HTMLAttributes<HTMLDivElement> {
   alignSelf?: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
 }
 
-export const DropdownContainer = React.forwardRef<HTMLDivElement, React.PropsWithChildren<DropdownProps>>(
+export const DropdownContainer = React.forwardRef<HTMLDivElement, React.PropsWithChildren<DropdownContainerProps>>(
   ({ targetRef, onClickOutside = () => null, className = '', ...props }, ref) => {
     const containerRef = React.useRef<HTMLDivElement | null>(null);
     const [displayUpward, setDisplayUpward] = React.useState(false);
