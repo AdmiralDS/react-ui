@@ -118,11 +118,27 @@ export const TabMenu: React.FC<TabMenuProps> = ({
     return items.findIndex((item) => item.id === activeTab) != -1;
   };
 
+  const isOverflowMenuVisible = (id: string) => {
+    return overflowMenuRefs.find((item) => item.ref.current?.id === id)?.isVisible;
+  };
+
   const getNextFocus = (target: HTMLElement) => {
-    let sibling: Element | null | undefined =
-      target.nextElementSibling || currentOverflowMenuRef?.current || tablistRef.current?.firstElementChild;
-    while (sibling?.hasAttribute('disabled')) {
-      sibling = sibling.nextElementSibling || currentOverflowMenuRef?.current || tablistRef.current?.firstElementChild;
+    let sibling: Element | null | undefined;
+    if (target.id === currentOverflowMenuRef?.current?.id) {
+      sibling = tablistRef.current?.firstElementChild?.firstElementChild;
+    } else {
+      sibling = target.nextElementSibling;
+    }
+    while (
+      (sibling?.getAttribute('tabIndex') === '-2' && !isOverflowMenuVisible(sibling.id)) ||
+      sibling?.hasAttribute('disabled')
+    ) {
+      if (sibling?.getAttribute('tabIndex') === '-2' && !isOverflowMenuVisible(sibling.id)) {
+        sibling = sibling?.parentElement?.nextElementSibling?.firstElementChild;
+      }
+      if (sibling?.hasAttribute('disabled')) {
+        sibling = sibling.nextElementSibling;
+      }
     }
     return sibling;
   };
@@ -130,7 +146,8 @@ export const TabMenu: React.FC<TabMenuProps> = ({
     let sibling: Element | null | undefined =
       target.previousElementSibling || currentOverflowMenuRef?.current || tablistRef.current?.lastElementChild;
     while (sibling?.hasAttribute('disabled')) {
-      sibling = sibling.previousElementSibling || currentOverflowMenuRef?.current || tablistRef.current?.lastElementChild;
+      sibling =
+        sibling.previousElementSibling || currentOverflowMenuRef?.current || tablistRef.current?.lastElementChild;
     }
     return sibling;
   };
@@ -299,7 +316,7 @@ export const TabMenu: React.FC<TabMenuProps> = ({
     const tabsForMenu = modelAllTabs.slice(tabNumber + 1);
     const overflowMenuHidden =
       tabNumber === tabsWithRef.length - 1 || !(visibilityMap[tabNumber] && !visibilityMap[tabNumber + 1]);
-    const tabIndex = overflowMenuHidden || !tabsForMenu?.filter((item) => item.id === activeTab).length ? -1 : 0;
+    const tabIndex = overflowMenuHidden || !tabsForMenu?.filter((item) => item.id === activeTab).length ? -2 : 0;
     const overflowRef = overflowMenuRefs[tabNumber] ? overflowMenuRefs[tabNumber].ref : null;
 
     return (
