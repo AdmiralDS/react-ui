@@ -194,7 +194,7 @@ export interface TagProps extends React.HTMLAttributes<HTMLButtonElement> {
   /** Ширина тэга */
   width?: number | string;
   /** Обработчик клика */
-  onClick?: (event: React.MouseEvent<HTMLButtonElement> | React.KeyboardEvent<HTMLButtonElement>) => void;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 
   /**
    * Позволяет рендерить компонент, используя другой тег HTML (https://styled-components.com/docs/api#as-polymorphic-prop).
@@ -203,55 +203,51 @@ export interface TagProps extends React.HTMLAttributes<HTMLButtonElement> {
   as?: React.ElementType;
 }
 
-export const Tag: React.FC<React.PropsWithChildren<TagProps>> = ({
-  children,
-  kind = 'neutral',
-  dimension = 'm',
-  width,
-  statusViaBackground = false,
-  icon,
-  onClick,
-  ...props
-}) => {
-  const textRef = React.useRef<HTMLElement>(null);
-  const [overflow, setOverflow] = React.useState(false);
-  const background: TagKind | string =
-    typeof kind === 'object' ? (kind.background ? kind.background : 'neutral') : (kind as TagKind);
-  const border: TagKind | string =
-    typeof kind === 'object' ? (!!kind.background && !!kind.border ? kind.border : 'neutral') : (kind as TagKind);
+export const Tag = React.forwardRef<HTMLElement, TagProps>(
+  (
+    { children, kind = 'neutral', dimension = 'm', width, statusViaBackground = false, icon, onClick, ...props },
+    ref,
+  ) => {
+    const textRef = React.useRef<HTMLElement>(null);
+    const [overflow, setOverflow] = React.useState(false);
+    const background: TagKind | string =
+      typeof kind === 'object' ? (kind.background ? kind.background : 'neutral') : (kind as TagKind);
+    const border: TagKind | string =
+      typeof kind === 'object' ? (!!kind.background && !!kind.border ? kind.border : 'neutral') : (kind as TagKind);
 
-  const detectOverflow = (element: HTMLElement) => element.offsetWidth < element.scrollWidth;
+    const detectOverflow = (element: HTMLElement) => element.offsetWidth < element.scrollWidth;
 
-  React.useLayoutEffect(() => {
-    const element = textRef.current;
-    if (element && detectOverflow(element) !== overflow) {
-      setOverflow(detectOverflow(element));
-    }
-  }, [children, width]);
+    React.useLayoutEffect(() => {
+      const element = textRef.current;
+      if (element && detectOverflow(element) !== overflow) {
+        setOverflow(detectOverflow(element));
+      }
+    }, [children, width]);
 
-  const renderTag = () => (
-    <Wrapper
-      width={width}
-      onClick={onClick}
-      clickable={!!onClick}
-      statusViaBackground={statusViaBackground}
-      border={border}
-      background={background}
-      dimension={dimension}
-      {...props}
-    >
-      {background !== 'neutral' && !statusViaBackground && <Circle background={background} />}
-      {statusViaBackground && icon && <Icon>{icon}</Icon>}
-      {children && <Text ref={textRef}>{children}</Text>}
-    </Wrapper>
-  );
+    const renderTag = () => (
+      <Wrapper
+        width={width}
+        onClick={onClick}
+        clickable={!!onClick}
+        statusViaBackground={statusViaBackground}
+        border={border}
+        background={background}
+        dimension={dimension}
+        {...props}
+      >
+        {background !== 'neutral' && !statusViaBackground && <Circle background={background} />}
+        {statusViaBackground && icon && <Icon>{icon}</Icon>}
+        {children && <Text ref={textRef}>{children}</Text>}
+      </Wrapper>
+    );
 
-  return overflow ? (
-    // не связываю тултип и тег через aria-describedby и id, чтобы содержимое тега не зачитывалось дважды
-    <Tooltip renderContent={() => children}>{renderTag()}</Tooltip>
-  ) : (
-    renderTag()
-  );
-};
+    return overflow ? (
+      // не связываю тултип и тег через aria-describedby и id, чтобы содержимое тега не зачитывалось дважды
+      <Tooltip renderContent={() => children}>{renderTag()}</Tooltip>
+    ) : (
+      renderTag()
+    );
+  },
+);
 
 Tag.displayName = 'Tag';
