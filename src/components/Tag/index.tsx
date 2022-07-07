@@ -4,7 +4,7 @@ import { Tooltip } from '#src/components/Tooltip';
 import { typography } from '#src/components/Typography';
 import { smallGroupBorderRadius } from '#src/components/themes/borderRadius';
 
-type Dimension = 'm' | 's';
+export type TagDimension = 'm' | 's';
 
 const TAG_HEIGHT_S = 20;
 const TAG_HEIGHT_M = 24;
@@ -89,7 +89,7 @@ const wrapperHover = css<{ background: TagKind | string }>`
 `;
 
 const Wrapper = styled.button<{
-  dimension?: Dimension;
+  dimension?: TagDimension;
   width?: number | string;
   clickable: boolean;
   as?: React.ElementType;
@@ -178,7 +178,7 @@ export type TagKind = 'neutral' | 'green' | 'blue' | 'red' | 'orange';
 
 export interface TagProps extends React.HTMLAttributes<HTMLButtonElement> {
   /** Высота тэга */
-  dimension?: Dimension;
+  dimension?: TagDimension;
   /** Тип тэга. Можно выбрать из предложенных вариантов, либо задать свои цвета для тэга.
    * В случае когда статус задается через статусную метку (кружок), свойство background отвечает за цвет статусной метки.
    * В случае когда статус задается через цвет фона и обводки, свойство background отвечает за цвет фона,
