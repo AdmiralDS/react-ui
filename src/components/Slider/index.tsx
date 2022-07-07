@@ -234,8 +234,8 @@ export const Slider = ({
   };
 
   return (
-    <Wrapper data-dimension={dimension} data-disabled={disabled} {...props}>
-      <TrackWrapper onTouchStart={onTrackClick} onMouseDown={onTrackClick}>
+    <Wrapper data-disabled={disabled} {...props}>
+      <TrackWrapper dimension={dimension} onTouchStart={onTrackClick} onMouseDown={onTrackClick}>
         <Track>
           <FilledTrack ref={filledRef} animation={animation} />
           <DefaultTrack ref={trackRef}>
@@ -254,6 +254,7 @@ export const Slider = ({
             <Thumb
               ref={sliderRef}
               animation={animation}
+              dimension={dimension}
               role="slider"
               tabIndex={disabled ? -1 : 0}
               aria-valuenow={sliderValue}
@@ -261,7 +262,7 @@ export const Slider = ({
               aria-valuemax={maxValue}
               onKeyDown={handleKeyDown}
             >
-              <ThumbCircle onTouchStart={onSliderClick} onMouseDown={onSliderClick} />
+              <ThumbCircle dimension={dimension} onTouchStart={onSliderClick} onMouseDown={onSliderClick} />
             </Thumb>
           </DefaultTrack>
         </Track>

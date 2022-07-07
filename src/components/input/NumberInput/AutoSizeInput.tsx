@@ -37,7 +37,7 @@ const Sizer = styled.div`
   box-sizing: border-box;
 `;
 
-const BorderedDiv = styled.div`
+const BorderedDiv = styled.div<{ status?: TextInputProps['status'] }>`
   position: absolute;
   top: 0;
   bottom: 0;
@@ -49,16 +49,13 @@ const BorderedDiv = styled.div`
   min-width: 0;
 
   background: none;
-  border: 1px solid ${(props) => props.theme.color['Neutral/Neutral 40']};
+  border: 1px solid
+    ${({ theme, status }) => {
+      if (status === 'error') return theme.color['Error/Error 60 Main'];
+      if (status === 'success') return theme.color['Success/Success 50 Main'];
+      return theme.color['Neutral/Neutral 40'];
+    }};
   border-radius: inherit;
-
-  [data-status='error'] & {
-    border: 1px solid ${(props) => props.theme.color['Error/Error 60 Main']};
-  }
-
-  [data-status='success'] & {
-    border: 1px solid ${(props) => props.theme.color['Success/Success 50 Main']};
-  }
 
   [data-read-only] & {
     border-color: transparent;
@@ -84,11 +81,11 @@ const colorsBorderAndBackground = css<{ disabled?: boolean }>`
     border: 1px solid ${(props) => props.theme.color['Error/Error 60 Main']};
   }
 
-  [data-status='error'] &:hover + ${BorderedDiv}, [data-status='error'] &:focus + ${BorderedDiv} {
+  &[data-status='error']:hover + ${BorderedDiv}, &[data-status='error']:focus + ${BorderedDiv} {
     border: 1px solid ${(props) => props.theme.color['Error/Error 60 Main']};
   }
 
-  [data-status='success'] &:hover + ${BorderedDiv}, [data-status='success'] &:focus + ${BorderedDiv} {
+  &[data-status='success']:hover + ${BorderedDiv}, &[data-status='success']:focus + ${BorderedDiv} {
     border: 1px solid ${(props) => props.theme.color['Success/Success 50 Main']};
   }
 
@@ -158,7 +155,10 @@ export interface InputProps extends TextInputProps {
 }
 
 export const AutoSizeInput = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ placeholder, type, precision = 2, prefix = '', suffix = '₽', thousand = ' ', decimal = '.', ...props }, ref) => {
+  (
+    { placeholder, type, precision = 2, prefix = '', suffix = '₽', thousand = ' ', decimal = '.', status, ...props },
+    ref,
+  ) => {
     const [showPrefixSuffix, setPrefixSuffix] = React.useState(false);
 
     const sizerRef = React.useRef<HTMLDivElement>(null);
@@ -283,8 +283,9 @@ export const AutoSizeInput = React.forwardRef<HTMLInputElement, InputProps>(
             placeholder={placeholder}
             type="text"
             onMouseDown={handleMouseDown}
+            data-status={status}
           />
-          <BorderedDiv />
+          <BorderedDiv status={status} />
           {suffix && showPrefixSuffix && <Suffix>&nbsp;{suffix}</Suffix>}
         </Wrapper>
       </Wrapper>

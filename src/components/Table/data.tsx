@@ -11,7 +11,7 @@ const AmountCell = styled.div`
   text-overflow: ellipsis;
   overflow: hidden;
 
-  [data-disabled='true'] & {
+  &[data-disabled='true'] {
     & > * {
       color: ${({ theme }) => theme.color['Neutral/Neutral 30']};
     }
@@ -482,7 +482,7 @@ export const rowListRowState: RowData[] = [
     transfer_type: 'МНО',
     transfer_date: new Date('2020-08-06').toLocaleDateString(),
     transfer_amount: (
-      <AmountCell>
+      <AmountCell data-disabled>
         <T font="Body/Body 2 Short">{numberFormatter.format(32_500_000_000)}</T>
       </AmountCell>
     ),
