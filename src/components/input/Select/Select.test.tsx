@@ -126,7 +126,7 @@ describe('SearchSelect', () => {
 
       userEvent.keyboard('{enter}');
       const inputELem = screen.getByRole('textbox') as HTMLInputElement;
-      const dropDownContainer = document.getElementById('selectDropdownContainer') as HTMLElement;
+      const dropDownContainer = document.getElementsByClassName('dropdown-container')[0] as HTMLElement;
       expect(dropDownContainer).toBeInTheDocument();
       expect(inputELem).toHaveFocus();
     });
@@ -137,7 +137,7 @@ describe('SearchSelect', () => {
       userEvent.click(selectWrapper);
 
       const inputELem = screen.getByRole('textbox') as HTMLInputElement;
-      const dropDownContainer = document.getElementById('selectDropdownContainer') as HTMLElement;
+      const dropDownContainer = document.getElementsByClassName('dropdown-container')[0] as HTMLElement;
       expect(dropDownContainer).toBeInTheDocument();
       expect(inputELem).toHaveFocus();
 
@@ -153,7 +153,7 @@ describe('SearchSelect', () => {
       const parent = document.getElementById('parent') as HTMLElement;
 
       const inputELem = screen.getByRole('textbox') as HTMLInputElement;
-      const dropDownContainer = document.getElementById('selectDropdownContainer') as HTMLElement;
+      const dropDownContainer = document.getElementsByClassName('dropdown-container')[0] as HTMLElement;
       expect(dropDownContainer).toBeInTheDocument();
       expect(inputELem).toHaveFocus();
 
@@ -182,7 +182,7 @@ describe('SearchSelect', () => {
       render(<SelectComponent multiple initialValue={['one', 'two']} />);
 
       userEvent.click(document.querySelector('.chip') as HTMLElement);
-      expect(document.getElementById('selectDropdownContainer') as HTMLElement).not.toBeInTheDocument();
+      expect(document.getElementsByClassName('dropdown-container').length).toEqual(0);
     });
     test('should close select when it loses focus', () => {
       render(
@@ -197,7 +197,7 @@ describe('SearchSelect', () => {
       userEvent.keyboard('on');
       userEvent.tab();
 
-      expect(document.getElementById('selectDropdownContainer') as HTMLElement).not.toBeInTheDocument();
+      expect(document.getElementsByClassName('dropdown-container').length).toEqual(0);
     });
   });
 
@@ -252,7 +252,7 @@ describe('SearchSelect', () => {
       userEvent.tab();
       userEvent.keyboard('{enter}');
 
-      const dropDownContainer = document.getElementById('selectDropdownContainer') as HTMLElement;
+      const dropDownContainer = document.getElementsByClassName('dropdown-container')[0] as HTMLElement;
       const optionElements = within(dropDownContainer).getAllByTestId('option');
 
       userEvent.click(optionElements[1]);
@@ -273,7 +273,7 @@ describe('SearchSelect', () => {
       userEvent.keyboard('{enter}');
 
       const inputELem = screen.getByRole('textbox') as HTMLInputElement;
-      const dropDownContainer = document.getElementById('selectDropdownContainer') as HTMLElement;
+      const dropDownContainer = document.getElementsByClassName('dropdown-container')[0] as HTMLElement;
       const dropDownOptions = within(dropDownContainer).getAllByTestId('option');
 
       dropDownOptions.forEach((optionElem) => {
@@ -324,7 +324,7 @@ describe('SearchSelect', () => {
       userEvent.keyboard('{enter}');
 
       const inputELem = screen.getByRole('textbox') as HTMLInputElement;
-      const dropDownContainer = document.getElementById('selectDropdownContainer') as HTMLElement;
+      const dropDownContainer = document.getElementsByClassName('dropdown-container')[0] as HTMLElement;
       const dropDownOptions = within(dropDownContainer).getAllByTestId('option');
 
       dropDownOptions.forEach((optionElem) => {
@@ -508,7 +508,7 @@ describe('SearchSelect', () => {
       userEvent.tab();
       userEvent.keyboard('{enter}');
 
-      const dropDownContainer = document.getElementById('selectDropdownContainer') as HTMLElement;
+      const dropDownContainer = document.getElementsByClassName('dropdown-container')[0] as HTMLElement;
 
       const dropDownOptions = within(dropDownContainer).getAllByTestId('option');
 
@@ -531,7 +531,7 @@ describe('SearchSelect', () => {
       userEvent.tab();
       userEvent.keyboard('{enter}');
 
-      const dropDownContainer = document.getElementById('selectDropdownContainer') as HTMLElement;
+      const dropDownContainer = document.getElementsByClassName('dropdown-container')[0] as HTMLElement;
 
       const dropDownOptions = within(dropDownContainer).getAllByTestId('option');
 
@@ -547,7 +547,7 @@ describe('SearchSelect', () => {
       userEvent.tab();
       userEvent.keyboard('{enter}');
 
-      const dropDownContainer = document.getElementById('selectDropdownContainer') as HTMLElement;
+      const dropDownContainer = document.getElementsByClassName('dropdown-container')[0] as HTMLElement;
 
       const dropDownOptions = within(dropDownContainer).getAllByTestId('option');
 
@@ -581,7 +581,7 @@ describe('SearchSelect', () => {
       userEvent.tab();
       userEvent.keyboard('{enter}');
 
-      const dropDownContainer = document.getElementById('selectDropdownContainer') as HTMLElement;
+      const dropDownContainer = document.getElementsByClassName('dropdown-container')[0] as HTMLElement;
 
       const dropDownOptions = within(dropDownContainer).getAllByTestId('option');
 
@@ -616,7 +616,7 @@ describe('SearchSelect', () => {
       userEvent.tab();
       userEvent.keyboard('{enter}');
 
-      const dropDownContainer = document.getElementById('selectDropdownContainer') as HTMLElement;
+      const dropDownContainer = document.getElementsByClassName('dropdown-container')[0] as HTMLElement;
       const dropDownOptions = within(dropDownContainer).getAllByTestId('option');
 
       userEvent.keyboard('{arrowup}');
@@ -646,7 +646,7 @@ describe('SearchSelect', () => {
       userEvent.tab();
       userEvent.keyboard('{enter}');
 
-      const dropDownContainer = document.getElementById('selectDropdownContainer') as HTMLElement;
+      const dropDownContainer = document.getElementsByClassName('dropdown-container')[0] as HTMLElement;
 
       const dropDownOptions = within(dropDownContainer).getAllByTestId('option');
 
@@ -671,7 +671,7 @@ describe('SearchSelect', () => {
       userEvent.tab();
       userEvent.keyboard('{enter}');
 
-      const dropDownContainer = document.getElementById('selectDropdownContainer') as HTMLElement;
+      const dropDownContainer = document.getElementsByClassName('dropdown-container')[0] as HTMLElement;
 
       const dropDownOptions = within(dropDownContainer).getAllByTestId('option');
 
@@ -699,7 +699,7 @@ describe('SearchSelect', () => {
     userEvent.keyboard('{enter}');
     userEvent.keyboard('on');
 
-    const dropDownContainer = document.getElementById('selectDropdownContainer') as HTMLElement;
+    const dropDownContainer = document.getElementsByClassName('dropdown-container')[0] as HTMLElement;
 
     const spanInDropdown = within(dropDownContainer).getByText('on', { selector: 'span' });
     expect(spanInDropdown).toBeVisible();

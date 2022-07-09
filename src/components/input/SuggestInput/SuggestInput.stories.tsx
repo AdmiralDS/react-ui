@@ -134,6 +134,9 @@ const Template: ComponentStory<typeof SuggestInput> = (props) => {
         onOptionSelect={setValue}
         options={options}
         isLoading={isLoading}
+        onSearchButtonClick={() => {
+          console.log('search button click');
+        }}
         displayClearIcon
       />
     </ThemeProvider>

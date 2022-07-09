@@ -87,7 +87,6 @@ ul[data-dimension='s'] .c6 {
   -webkit-flex: 0 0 auto;
   -ms-flex: 0 0 auto;
   flex: 0 0 auto;
-  max-width: calc(100vw - 32px);
   opacity: 0;
   -webkit-transition-delay: 200ms;
   transition-delay: 200ms;
@@ -875,7 +874,6 @@ ul[data-selectedid="13"] .c15.c15 {
   -webkit-flex: 0 0 auto;
   -ms-flex: 0 0 auto;
   flex: 0 0 auto;
-  max-width: calc(100vw - 32px);
   opacity: 0;
   -webkit-transition-delay: 200ms;
   transition-delay: 200ms;
@@ -1217,7 +1215,6 @@ ul[data-dimension='s'] .c6 {
   -webkit-flex: 0 0 auto;
   -ms-flex: 0 0 auto;
   flex: 0 0 auto;
-  max-width: calc(100vw - 32px);
   opacity: 0;
   -webkit-transition-delay: 200ms;
   transition-delay: 200ms;

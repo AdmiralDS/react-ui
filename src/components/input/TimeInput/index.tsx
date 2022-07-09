@@ -122,6 +122,12 @@ export interface TimeInputProps extends Omit<TextInputProps, 'value'> {
   icon?: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
 
   parser?: (time?: string) => string;
+
+  /**
+   * Позволяет выравнивать позицию дропдаун контейнера относительно селекта.
+   * Принимает стандартные значения css свойства align-self (auto | flex-start | flex-end | center | baseline | stretch)
+   */
+  alignDropdown?: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
 }
 
 export const TimeInput = React.forwardRef<HTMLInputElement, TimeInputProps>(
@@ -136,6 +142,7 @@ export const TimeInput = React.forwardRef<HTMLInputElement, TimeInputProps>(
       parser = parseStringToTime,
       icon,
       icons,
+      alignDropdown = 'flex-end',
       ...props
     },
     ref,
@@ -273,7 +280,7 @@ export const TimeInput = React.forwardRef<HTMLInputElement, TimeInputProps>(
         }}
       >
         {availableSlots && isOpened && !disabled && (
-          <Dropdown targetRef={inputRef} alignSelf="flex-end" onClickOutside={clickOutside}>
+          <Dropdown targetRef={inputRef} alignSelf={alignDropdown} onClickOutside={clickOutside}>
             <SlotContainer data-dimension={dimension}>
               {availableSlots.map((slot, index) => (
                 <Slot

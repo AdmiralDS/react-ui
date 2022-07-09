@@ -16,6 +16,7 @@ import * as React from 'react';
 import styled, { css } from 'styled-components';
 import { StatusIcon } from '../StatusIcon';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
+import { InputIconButton } from '#src/components/InputIconButton';
 
 const EyeCloseIcon = styled(EyeCloseOutlineSvg)`
   & *[fill^='#'] {
@@ -311,7 +312,8 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
 
     if (!props.readOnly && displayClearIcon) {
       iconArray.unshift(
-        <ClearIcon
+        <InputIconButton
+          icon={CloseOutlineSvg}
           key="clear-icon"
           onClick={() => {
             if (inputRef.current) {
