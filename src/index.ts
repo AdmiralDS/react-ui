@@ -62,5 +62,6 @@ export * from './components/common/dom/changeInputData';
 export * from './components/SelectTree';
 export * from './components/Tree';
 export * from './components/Table';
+export * from './components/InputIconButton'
 
 export { FontsVTBGroup } from './components/FontsVTBGroup';

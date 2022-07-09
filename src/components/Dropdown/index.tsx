@@ -15,8 +15,7 @@ const Container = styled.div<{ alignSelf?: string }>`
   border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
   ${(p) => p.theme.shadow['Shadow 08']}
   flex: 0 0 auto;
-  ${(p) => (p.alignSelf ? `align-self: ${p.alignSelf};` : '')};
-  max-width: calc(100vw - 32px);
+  ${(p) => (p.alignSelf ? `align-self: ${p.alignSelf}` : '')};
   opacity: 0;
   transition-delay: 200ms;
   transition-property: opacity;
@@ -53,6 +52,8 @@ export interface DropdownProps extends Omit<React.HTMLAttributes<HTMLDivElement>
    */
   alignSelf?: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
 
+  /** Отключает автовыравнивание относительно компонента и границ вьюпорта*/
+  disableAutoAlign?: boolean;
   onMenuReachTop?: () => void;
   onMenuReachBottom?: () => void;
 
@@ -175,21 +176,23 @@ export const Dropdown = React.forwardRef<HTMLDivElement, React.PropsWithChildren
           setDisplayUpward(false);
         }
 
-        const rectWidth = rect.right - rect.left;
+        if (!props.disableAutoAlign) {
+          const rectWidth = rect.right - rect.left;
 
-        if (targetRect.right < rectWidth && viewportWidth - targetRect.left < rectWidth) {
-          node.style.alignSelf = 'center';
-        } else if (targetRect.right - 16 >= rectWidth && viewportWidth - targetRect.left >= rectWidth) {
-          node.style.alignSelf = '';
-        } else if (targetRect.right - 16 < rectWidth) {
-          node.style.alignSelf = 'flex-start';
-        } else if (viewportWidth - targetRect.left < rectWidth) {
-          node.style.alignSelf = 'flex-end';
+          if (targetRect.right < rectWidth && viewportWidth - targetRect.left < rectWidth) {
+            node.style.alignSelf = 'center';
+          } else if (targetRect.right - 16 >= rectWidth && viewportWidth - targetRect.left >= rectWidth) {
+            node.style.alignSelf = '';
+          } else if (targetRect.right - 16 < rectWidth) {
+            node.style.alignSelf = 'flex-start';
+          } else if (viewportWidth - targetRect.left < rectWidth) {
+            node.style.alignSelf = 'flex-end';
+          }
         }
       }
     };
 
-    useInterval(checkDropdownPosition, 100);
+    useInterval(checkDropdownPosition, 1000);
 
     // First container render always happens downward and transparent,
     // after size and position settled transparency returns to normal
