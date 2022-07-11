@@ -105,6 +105,9 @@ export interface SelectProps extends Omit<React.InputHTMLAttributes<HTMLSelectEl
   onFocus?: (evt: React.FocusEvent<HTMLDivElement>) => void;
 
   onBlur?: (evt: React.FocusEvent<HTMLDivElement>) => void;
+
+  /** Принудительно выравнивает контейнер с опциями относительно компонента, значение по умолчанию 'stretch' */
+  alignDropdown?: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
 }
 
 export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
@@ -139,6 +142,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       onFocus: onFocusFromProps,
       onBlur: onBlurFromProps,
       children,
+      alignDropdown = 'stretch',
       ...props
     },
     ref,
@@ -545,13 +549,14 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
         </ValueWrapper>
         {isSearchPanelOpen && (
           <Dropdown
-            id="selectDropdownContainer"
             targetRef={portalTargetRef || containerRef}
             data-dimension={dimension || TextInput.defaultProps?.dimension}
             // Запретит перенос фокуса с инпута при клике по всему, что внутри Dropdown
             onMouseDown={preventDefault}
             onClick={stopPropagation}
             ref={dropDownRef}
+            alignSelf={alignDropdown}
+            disableAutoAlign
           >
             <DropDownSelectProvider
               onOptionClick={handleOptionSelect}
