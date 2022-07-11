@@ -302,7 +302,6 @@ export const SimpleRow = styled.div<{ selected?: boolean; disabled?: boolean; er
   & > *,
   & + ${OverflowMenuWrapper} {
     background: ${rowBackground};
-  };
   }
 
   &:hover {
