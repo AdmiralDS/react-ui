@@ -83,7 +83,7 @@ const Template0: ComponentStory<typeof Stepper> = ({ lineClamp, activeStep, orie
         {steps.map(({ content, ...step }) => {
           return (
             <Step {...step} onClick={(step: any) => console.log(step.index)}>
-              <StepContent tooltipProps={{ style: { maxWidth: '300px', textAlign: 'center' } }}>{content}</StepContent>
+              <StepContent tooltipProps={{ style: { maxWidth: '300px' } }}>{content}</StepContent>
             </Step>
           );
         })}
@@ -134,9 +134,7 @@ const Template2: ComponentStory<typeof Stepper> = (args) => {
           {steps.map(({ content, ...step }) => {
             return (
               <Step {...step}>
-                <StepContent tooltipProps={{ style: { maxWidth: '300px', textAlign: 'center' } }}>
-                  {content}
-                </StepContent>
+                <StepContent tooltipProps={{ style: { maxWidth: '300px' } }}>{content}</StepContent>
               </Step>
             );
           })}
@@ -169,7 +167,7 @@ const Template3: ComponentStory<typeof Stepper> = (args) => {
         {steps.map(({ content, ...step }) => {
           return (
             <Step {...step}>
-              <StepContent tooltipProps={{ style: { maxWidth: '300px', textAlign: 'center' } }}>{content}</StepContent>
+              <StepContent tooltipProps={{ style: { maxWidth: '300px' } }}>{content}</StepContent>
             </Step>
           );
         })}
@@ -179,7 +177,7 @@ const Template3: ComponentStory<typeof Stepper> = (args) => {
         {steps.map(({ content, ...step }) => {
           return (
             <Step {...step}>
-              <StepContent tooltipProps={{ style: { maxWidth: '300px', textAlign: 'center' } }}>{content}</StepContent>
+              <StepContent tooltipProps={{ style: { maxWidth: '300px' } }}>{content}</StepContent>
             </Step>
           );
         })}
@@ -205,7 +203,7 @@ const Template4: ComponentStory<typeof Stepper> = (args) => {
         {steps.map(({ content, ...step }) => {
           return (
             <Step {...step} onClick={(step: any) => console.log(step.index)}>
-              <StepContent tooltipProps={{ style: { maxWidth: '300px', textAlign: 'center' } }}>{content}</StepContent>
+              <StepContent tooltipProps={{ style: { maxWidth: '300px' } }}>{content}</StepContent>
             </Step>
           );
         })}
@@ -215,7 +213,7 @@ const Template4: ComponentStory<typeof Stepper> = (args) => {
         {steps.map(({ content, ...step }) => {
           return (
             <Step {...step} onClick={(step: any) => console.log(step.index)}>
-              <StepContent tooltipProps={{ style: { maxWidth: '300px', textAlign: 'center' } }}>{content}</StepContent>
+              <StepContent tooltipProps={{ style: { maxWidth: '300px' } }}>{content}</StepContent>
             </Step>
           );
         })}
@@ -251,9 +249,7 @@ const Template5: ComponentStory<typeof Stepper> = (args) => {
           {steps.map(({ content, ...step }) => {
             return (
               <Step {...step} onClick={handleStepClick}>
-                <StepContent tooltipProps={{ style: { maxWidth: '300px', textAlign: 'center' } }}>
-                  {content}
-                </StepContent>
+                <StepContent tooltipProps={{ style: { maxWidth: '300px' } }}>{content}</StepContent>
               </Step>
             );
           })}
@@ -309,9 +305,7 @@ const Template6: ComponentStory<typeof Stepper> = (args) => {
           {steps.map(({ content, ...step }) => {
             return (
               <Step {...step}>
-                <StepContent tooltipProps={{ style: { maxWidth: '300px', textAlign: 'center' } }}>
-                  {content}
-                </StepContent>
+                <StepContent tooltipProps={{ style: { maxWidth: '300px' } }}>{content}</StepContent>
               </Step>
             );
           })}
