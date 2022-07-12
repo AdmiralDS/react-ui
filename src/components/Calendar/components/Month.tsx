@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 
-import { addWeeks, startOfMonth, startOfWeek, weekInMonth } from '../date-utils';
+import { addWeeks, startOfMonth, startOfWeek } from '../date-utils';
 import { Week } from './Week';
 import type { IMonthCalendarProps } from '../interfaces';
 import { DEFAULT_LOCALE_NAME } from '#src/components/Calendar/constants';
@@ -22,7 +22,6 @@ export const Month: FC<IMonthCalendarProps> = ({
   onClick,
 }) => {
   const weeks: Array<Date> = [];
-  const fixCount = false; // to make days matrix size fixed
   const handleMouseEnter = (day: Date, event: any) => onMouseEnter && onMouseEnter(day, event);
   const handleMouseLeave = () => onMouseLeave && onMouseLeave();
   const handleDayClick = (day: Date, event: any) => onClick && onClick(day, event);
@@ -33,7 +32,7 @@ export const Month: FC<IMonthCalendarProps> = ({
     weekIndex++;
     weeks.push(weekStart);
     weekStart = addWeeks(weekStart, 1);
-  } while ((!fixCount && weekInMonth(weekStart, day)) || (fixCount && weekIndex < FIXED_WEEK_COUNT));
+  } while (weekIndex < FIXED_WEEK_COUNT);
 
   return (
     <div onMouseLeave={handleMouseLeave}>
