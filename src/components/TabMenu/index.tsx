@@ -391,7 +391,7 @@ export const TabMenu: React.FC<TabMenuProps> = ({
       const { disabled, content, id, icon, badge, ref, width, ...props } = item;
       const tabNumber = getTabIndex(id);
       return (
-        <div key={id} data-number={index}>
+        <div key={id} data-number={index} style={{ display: 'flex' }}>
           {renderTab(item, index)}
           {mobile || tabNumber === tabsWithRef.length - 1 ? null : renderOverflowMenu(id)}
         </div>
