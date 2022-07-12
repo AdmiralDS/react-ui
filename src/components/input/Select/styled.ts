@@ -262,7 +262,3 @@ export const OptionWrapper = styled.div<{ dimension?: ComponentDimension }>`
     }
   }}
 `;
-
-export const DropDownText = styled(OptionWrapper)`
-  color: ${({ theme }) => theme.color['Neutral/Neutral 50']};
-`;
