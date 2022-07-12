@@ -130,29 +130,14 @@ export const TabMenu: React.FC<TabMenuProps> = ({
     return items.findIndex((item) => item.id === activeTab) != -1;
   };
 
-  const isOverflowMenuVisible = (id: string) => {
-    return overflowMenuRefs.find((item) => item.ref.current?.id === id)?.isVisible;
-  };
-
   const getNextFocus = (target: HTMLElement) => {
-    let sibling: Element | null | undefined;
-    if (target.id === currentOverflowMenuRef?.current?.id) {
-      sibling = tablistRef.current?.firstElementChild?.firstElementChild;
+    let ii = visibleRefsMap.findIndex((item) => target === item.current);
+    if (ii < visibleRefsMap.length - 1) {
+      ii++;
     } else {
-      sibling = target.nextElementSibling;
+      ii = 0;
     }
-    while (
-      (sibling?.getAttribute('tabIndex') === '-2' && !isOverflowMenuVisible(sibling.id)) ||
-      sibling?.hasAttribute('disabled')
-    ) {
-      if (sibling?.getAttribute('tabIndex') === '-2' && !isOverflowMenuVisible(sibling.id)) {
-        sibling = sibling?.parentElement?.nextElementSibling?.firstElementChild;
-      }
-      if (sibling?.hasAttribute('disabled')) {
-        sibling = sibling.nextElementSibling;
-      }
-    }
-    return sibling;
+    return visibleRefsMap[ii].current;
   };
   const getPreviousFocus = (target: HTMLElement) => {
     let sibling: Element | null | undefined =
