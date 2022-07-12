@@ -1,4 +1,5 @@
 import * as React from 'react';
+import styled from 'styled-components';
 import { OpenStatusButton } from '#src/components/OpenStatusButton';
 import { keyboardKey } from '#src/components/common/keyboardKey';
 import { refSetter } from '#src/components/common/utils/refSetter';
@@ -11,11 +12,11 @@ import {
   BorderedDiv,
   ClearIcon,
   Dropdown,
-  DropDownText,
   Hidden,
   IconPanel,
   Input,
   NativeSelect,
+  OptionWrapper,
   SelectWrapper,
   StringValueWrapper,
   ValueWrapper,
@@ -35,7 +36,9 @@ import { useClickOutside } from '#src/components/common/hooks/useClickOutside';
  * Разбить тесты по пропсам и функционалу. Например, тесты проверящие placeholder И т.д.
  */
 
-const DEFAULT_LOADING_TEXT = 'Поиск совпадений';
+export const DropDownText = styled(OptionWrapper)`
+  color: ${({ theme }) => theme.color['Neutral/Neutral 50']};
+`;
 
 type PartialOption = { value: string; disabled: boolean } & Record<string, any>;
 const findAbledOptionValue = (options: PartialOption[]) => options.find(({ disabled }) => !disabled)?.value;
@@ -45,14 +48,17 @@ const stopPropagation = (evt: React.BaseSyntheticEvent) => evt.stopPropagation()
 export interface SelectProps extends Omit<React.InputHTMLAttributes<HTMLSelectElement>, 'onFocus' | 'onBlur'> {
   value?: string | string[];
 
-  /** Отображать статус загрузки данных */
-  isLoading?: boolean;
-
   /** Позволяет использовать Select как select */
   mode?: 'select' | 'searchSelect';
 
+  /** Отображать статус загрузки данных */
+  isLoading?: boolean;
+
   /** Сообщение, отображаемое при наличии флага isLoading */
   loadingMessage?: React.ReactNode;
+
+  /** Сообщение, отображаемое при пустом наборе опций */
+  emptyMessage?: React.ReactNode;
 
   /** Добавить селекту возможность множественного выбора */
   multiple?: boolean;
@@ -134,7 +140,8 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       displayStatusIcon = false,
       displayClearIcon = false,
       onClearIconClick,
-      loadingMessage = DEFAULT_LOADING_TEXT,
+      loadingMessage = <DropDownText>Поиск совпадений</DropDownText>,
+      emptyMessage = <DropDownText>Нет совпадений</DropDownText>,
       onInputChange,
       inputValue,
       defaultInputValue,
@@ -177,10 +184,10 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
     );
 
     const dropDownChildren = React.useMemo(() => {
-      if (isLoading) return <DropDownText>{loadingMessage}</DropDownText>;
+      if (isLoading) return loadingMessage;
       return (
         <>
-          {!dropDownOptions.length && <DropDownText>Нет совпадений</DropDownText>}
+          {!dropDownOptions.length && emptyMessage}
           {children}
         </>
       );

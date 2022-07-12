@@ -17,25 +17,6 @@ const Dropdown = styled(DropComponent)`
   padding: 8px 0;
 `;
 
-function AnyIcon({ icon, ...props }: { icon: React.FunctionComponent<any>; onClick?: () => void; tabIndex?: number }) {
-  const Icon = icon;
-  return <Icon {...props} />;
-}
-
-const SearchIcon = styled(AnyIcon)`
-  & *[fill^='#'] {
-    fill: ${(props) => props.theme.color['Neutral/Neutral 50']};
-  }
-
-  &:hover {
-    cursor: pointer;
-  }
-
-  &:hover *[fill^='#'] {
-    fill: ${(props) => props.theme.color['Primary/Primary 70']};
-  }
-`;
-
 const SearchingPanelContainer = styled.div`
   display: flex;
   align-items: center;
