@@ -9,6 +9,7 @@ import {
   Tab,
   TabContent,
   TabContentWrapper,
+  TabWrapper,
   Underline,
   Wrapper,
 } from '#src/components/TabMenu/style';
@@ -111,8 +112,6 @@ export const TabMenu: React.FC<TabMenuProps> = ({
       disabled: item.disabled,
     }));
   }, [dimension, tabs, tabsWithRef]);
-
-  const isHiddenTabSelected = (items: Array<ItemProps>) => items.findIndex((tab) => tab.id === activeTab) != -1;
 
   const containsActiveTab = (items: Array<ItemProps>) => {
     return items.findIndex((item) => item.id === activeTab) != -1;
@@ -334,9 +333,7 @@ export const TabMenu: React.FC<TabMenuProps> = ({
         disabled={tabsForMenu.length === tabsForMenu.filter((tab) => tab.disabled).length}
         onChange={(id: string) => {
           onChange(id);
-          if (!isHiddenTabSelected(tabsForMenu)) {
-            styleUnderline(0, 0);
-          }
+          styleUnderline(0, 0);
         }}
         tabIndex={tabIndex}
         onKeyDown={handleMenuKeyDown}
@@ -391,10 +388,10 @@ export const TabMenu: React.FC<TabMenuProps> = ({
       const { disabled, content, id, icon, badge, ref, width, ...props } = item;
       const tabNumber = getTabIndex(id);
       return (
-        <div key={id} data-number={index} style={{ display: 'flex' }}>
+        <TabWrapper key={id} data-number={index}>
           {renderTab(item, index)}
           {mobile || tabNumber === tabsWithRef.length - 1 ? null : renderOverflowMenu(id)}
-        </div>
+        </TabWrapper>
       );
     });
   };

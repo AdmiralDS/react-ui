@@ -136,8 +136,13 @@ export const Tab = styled.button<{ dimension: Dimension; selected: boolean }>`
   }
 `;
 
+export const TabWrapper = styled.div`
+  display: flex;
+`;
+
 export const StyledOverflowMenu = styled(OverflowMenu)<{ isActive: boolean; isHidden?: boolean }>`
-  display: ${({ isHidden }) => (isHidden ? 'none' : 'inline')};
+  display: ${({ isHidden }) => (isHidden ? 'none' : 'block')};
+  margin: auto;
   &:focus-visible {
     &:before {
       content: '';
