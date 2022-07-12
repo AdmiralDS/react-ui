@@ -83,12 +83,25 @@ export const TabMenu: React.FC<TabMenuProps> = ({
   }, [tabs, visibilityMap]);
   // ref to visible OverflowMenu
   const currentOverflowMenuRef = React.useMemo(() => {
-    const visibleMenu = overflowMenuRefs.find((item) => item.isVisible === true);
+    const visibleMenu = overflowMenuRefs.find((item) => item.isVisible);
     if (visibleMenu) {
       return visibleMenu.ref;
     }
     return null;
   }, [overflowMenuRefs, visibilityMap]);
+  // collection of visible elements for handleKeyDown
+  const visibleRefsMap = React.useMemo(() => {
+    const refsMap: Array<React.RefObject<HTMLButtonElement>> = [];
+    tabsWithRef.forEach((item, index) => {
+      if (visibilityMap[index]) {
+        refsMap.push(item.ref);
+      }
+    });
+    if (!mobile && currentOverflowMenuRef !== null) {
+      refsMap.push(currentOverflowMenuRef);
+    }
+    return refsMap;
+  }, [visibilityMap, tabsWithRef, currentOverflowMenuRef, overflowMenuRefs]);
 
   const tablistRef = React.useRef<HTMLDivElement | null>(null);
   const underlineRef = React.useRef<HTMLDivElement | null>(null);
