@@ -256,10 +256,6 @@ const Template4: ComponentStory<typeof Table> = (args) => {
   );
 
   const onFilterMenuClickOutside = ({ closeMenu }: any, event: Event) => {
-    // если кликнули по календарю, то фильтр должен оставаться открытым
-    if (event.target && calendarRef.current?.contains(event.target as Node)) {
-      return;
-    }
     closeMenu();
   };
 

@@ -65,3 +65,4 @@ export * from './components/Table';
 export * from './components/InputIconButton';
 
 export { FontsVTBGroup } from './components/FontsVTBGroup';
+export { DropdownProvider } from './components/DropdownProvider';

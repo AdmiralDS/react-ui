@@ -4,6 +4,7 @@ import { useClickOutside } from '#src/components/common/hooks/useClickOutside';
 import { PositionInPortal } from '#src/components/PositionInPortal';
 import { useInterval } from '#src/components/common/hooks/useInterval';
 import { refSetter } from '#src/components/common/utils/refSetter';
+import { useDropdown } from '#src/components/DropdownProvider';
 
 const Container = styled.div<{ alignSelf?: string }>`
   pointer-events: initial;
@@ -51,7 +52,8 @@ export const DropdownContainer = React.forwardRef<HTMLDivElement, React.PropsWit
   ({ targetRef, onClickOutside = () => null, className = '', ...props }, ref) => {
     const containerRef = React.useRef<HTMLDivElement | null>(null);
     const [displayUpward, setDisplayUpward] = React.useState(false);
-    useClickOutside([containerRef], onClickOutside);
+    const { addDropdown, removeDropdown, dropdowns } = useDropdown(containerRef);
+    useClickOutside([containerRef, ...dropdowns], onClickOutside);
 
     React.useLayoutEffect(() => {
       if (containerRef.current !== document.activeElement) {
@@ -99,6 +101,13 @@ export const DropdownContainer = React.forwardRef<HTMLDivElement, React.PropsWit
         containerRef.current.style.opacity = '1';
       }
     }, [containerRef.current]);
+
+    React.useLayoutEffect(() => {
+      addDropdown?.(containerRef);
+      return () => {
+        removeDropdown?.(containerRef);
+      };
+    }, []);
 
     return (
       <>

@@ -7,6 +7,7 @@ import { keyboardKey } from '#src/components/common/keyboardKey';
 import { moveFocus, nextItem, previousItem } from '#src/components/Dropdown/utils';
 import { refSetter } from '#src/components/common/utils/refSetter';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
+import { useDropdown } from '#src/components/DropdownProvider';
 
 const Container = styled.div<{ alignSelf?: string }>`
   pointer-events: initial;
@@ -79,7 +80,8 @@ export const Dropdown = React.forwardRef<HTMLDivElement, React.PropsWithChildren
   ) => {
     const containerRef = React.useRef<HTMLDivElement | null>(null);
     const [displayUpward, setDisplayUpward] = React.useState(false);
-    useClickOutside([containerRef], onClickOutside);
+    const { addDropdown, removeDropdown, dropdowns } = useDropdown(containerRef);
+    useClickOutside([containerRef, ...dropdowns], onClickOutside);
 
     const handleKeyDown = React.useCallback(
       (e) => {
@@ -201,6 +203,13 @@ export const Dropdown = React.forwardRef<HTMLDivElement, React.PropsWithChildren
         containerRef.current.style.opacity = '1';
       }
     }, [containerRef.current]);
+
+    React.useLayoutEffect(() => {
+      addDropdown?.(containerRef);
+      return () => {
+        removeDropdown?.(containerRef);
+      };
+    }, []);
 
     return (
       <Portal targetRef={targetRef} reverse={displayUpward}>
