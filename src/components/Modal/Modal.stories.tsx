@@ -14,6 +14,9 @@ const Desc = styled.div`
   font-size: 16px;
   line-height: 24px;
 `;
+const Separator = styled.div`
+  height: 20px;
+`;
 
 const Description = () => (
   <Desc>
@@ -96,21 +99,21 @@ const ModalForm = ({ onYesClick, onNoClick }: Props) => {
       <ModalContent>
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. At cupiditate ducimus nisi nulla numquam obcaecati
         quam quasi quod ut veritatis?
-        <>
-          <SelectField
-            label="label"
-            className="Search"
-            value={selected}
-            onChange={handleSelectChange}
-            placeholder="Placeholder"
-          >
-            {OPTIONS_SIMPLE.map((option, ind) => (
-              <Option key={option} value={option} disabled={ind === 4}>
-                {option}
-              </Option>
-            ))}
-          </SelectField>
-        </>
+        <Separator />
+        <SelectField
+          label="label"
+          className="Search"
+          value={selected}
+          onChange={handleSelectChange}
+          placeholder="Placeholder"
+        >
+          {OPTIONS_SIMPLE.map((option, ind) => (
+            <Option key={option} value={option} disabled={ind === 4}>
+              {option}
+            </Option>
+          ))}
+        </SelectField>
+        <Separator />
         <InputField
           label="введите значение"
           value={inputValue}
