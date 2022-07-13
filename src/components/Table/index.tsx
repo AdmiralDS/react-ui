@@ -29,6 +29,7 @@ import {
   TableContainer,
   Title,
   TitleContent,
+  EmptyMessage,
 } from './style';
 import { VirtualBody } from './VirtualBody';
 import { OverflowMenu } from './OverflowMenu';
@@ -207,6 +208,8 @@ export interface TableProps extends React.HTMLAttributes<HTMLDivElement> {
      */
     fixedRowHeight: number;
   };
+  /** Сообщение, отображаемое при отсутствии совпадений в строках после применения фильтра */
+  emptyMessage?: React.ReactNode;
 }
 
 export const Table: React.FC<TableProps> = ({
@@ -233,6 +236,7 @@ export const Table: React.FC<TableProps> = ({
   disableColumnResize = false,
   showLastRowUnderline = true,
   virtualScroll,
+  emptyMessage = 'Нет совпадений',
   ...props
 }) => {
   const checkboxDimension = dimension === 's' || dimension === 'm' ? 's' : 'm';
@@ -565,6 +569,32 @@ export const Table: React.FC<TableProps> = ({
     );
   };
 
+  const renderBody = () => {
+    if (rowList.length === 0) {
+      return (
+        <ScrollTableBody ref={scrollBodyRef} className="tbody">
+          <Row underline={showLastRowUnderline} dimension={dimension} className="tr">
+            <EmptyMessage dimension={dimension}>{emptyMessage}</EmptyMessage>
+          </Row>
+        </ScrollTableBody>
+      );
+    }
+    return virtualScroll ? (
+      <VirtualBody
+        height={bodyHeight}
+        rowList={rowList}
+        childHeight={virtualScroll.fixedRowHeight}
+        renderRow={renderRow}
+        ref={scrollBodyRef}
+        className="tbody"
+      />
+    ) : (
+      <ScrollTableBody ref={scrollBodyRef} className="tbody">
+        {rowList.map((row, index) => renderRow(row, index))}
+      </ScrollTableBody>
+    );
+  };
+
   return (
     <TableContainer ref={tableRef} data-shadow={false} {...props} className={`table ${props.className}`}>
       <HeaderWrapper greyHeader={greyHeader} data-verticalscroll={verticalScroll}>
@@ -590,20 +620,7 @@ export const Table: React.FC<TableProps> = ({
           <Filler />
         </Header>
       </HeaderWrapper>
-      {virtualScroll ? (
-        <VirtualBody
-          height={bodyHeight}
-          rowList={rowList}
-          childHeight={virtualScroll.fixedRowHeight}
-          renderRow={renderRow}
-          ref={scrollBodyRef}
-          className="tbody"
-        />
-      ) : (
-        <ScrollTableBody ref={scrollBodyRef} className="tbody">
-          {rowList.map((row, index) => renderRow(row, index))}
-        </ScrollTableBody>
-      )}
+      {renderBody()}
     </TableContainer>
   );
 };
