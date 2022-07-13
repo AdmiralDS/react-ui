@@ -138,19 +138,28 @@ export const Tab = styled.button<{ dimension: Dimension; selected: boolean }>`
 
 export const TabWrapper = styled.div`
   display: flex;
+  align-items: center;
 `;
 
-export const StyledOverflowMenu = styled(OverflowMenu)<{ isActive: boolean; isHidden?: boolean }>`
+const FOCUS_BORDER_OFFSET_M = '-4px';
+const FOCUS_BORDER_OFFSET_L = '-6px';
+
+export const StyledOverflowMenu = styled(OverflowMenu)<{
+  isActive: boolean;
+  isHidden?: boolean;
+  dimension?: Dimension;
+}>`
   display: ${({ isHidden }) => (isHidden ? 'none' : 'block')};
-  margin: auto;
   &:focus-visible {
     &:before {
       content: '';
       position: absolute;
-      top: -6px;
-      left: -6px;
-      bottom: -6px;
-      right: -6px;
+      ${({ dimension }) => `
+        top: ${dimension === 'l' ? FOCUS_BORDER_OFFSET_L : FOCUS_BORDER_OFFSET_M};
+        left: ${dimension === 'l' ? FOCUS_BORDER_OFFSET_L : FOCUS_BORDER_OFFSET_M};
+        right: ${dimension === 'l' ? FOCUS_BORDER_OFFSET_L : FOCUS_BORDER_OFFSET_M};
+        bottom: ${dimension === 'l' ? FOCUS_BORDER_OFFSET_L : FOCUS_BORDER_OFFSET_M};
+      `}
       border-radius: 0;
       border: 2px solid ${({ theme }) => theme.color['Primary/Primary 60 Main']};
     }
