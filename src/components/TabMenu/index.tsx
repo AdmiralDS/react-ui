@@ -130,7 +130,7 @@ export const TabMenu: React.FC<TabMenuProps> = ({
     return items.findIndex((item) => item.id === activeTab) != -1;
   };
 
-  const getNextFocus = (target: HTMLElement) => {
+  const getNextElement = (target: HTMLElement) => {
     let currentIndex = visibleRefsMap.findIndex((item) => target === item.current);
     if (currentIndex < visibleRefsMap.length - 1) {
       currentIndex++;
@@ -140,7 +140,15 @@ export const TabMenu: React.FC<TabMenuProps> = ({
     return visibleRefsMap[currentIndex].current;
   };
 
-  const getPreviousFocus = (target: HTMLElement) => {
+  const getNextFocus = (target: HTMLElement) => {
+    let nextElement = getNextElement(target);
+    while (nextElement?.disabled) {
+      nextElement = getNextElement(nextElement);
+    }
+    return nextElement;
+  };
+
+  const getPreviousElement = (target: HTMLElement) => {
     let currentIndex = visibleRefsMap.findIndex((item) => target === item.current);
     if (currentIndex === 0) {
       currentIndex = visibleRefsMap.length - 1;
@@ -148,6 +156,14 @@ export const TabMenu: React.FC<TabMenuProps> = ({
       currentIndex--;
     }
     return visibleRefsMap[currentIndex].current;
+  };
+
+  const getPreviousFocus = (target: HTMLElement) => {
+    let previousElement = getPreviousElement(target);
+    while (previousElement?.disabled) {
+      previousElement = getPreviousElement(previousElement);
+    }
+    return previousElement;
   };
 
   const styleUnderline = (left: number, width: number) => {
