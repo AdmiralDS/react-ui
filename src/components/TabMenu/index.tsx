@@ -275,6 +275,12 @@ export const TabMenu: React.FC<TabMenuProps> = ({
 
     const code = keyboardKey.getCode(event);
     switch (code) {
+      case keyboardKey.Tab:
+        if (!activeTabIsVisible) {
+          newFocusTarget = currentOverflowMenuRef;
+          event.preventDefault();
+        }
+        break;
       case keyboardKey.ArrowLeft:
         newFocusTarget = getPreviousFocus(target as HTMLElement);
         event.preventDefault();
@@ -326,7 +332,7 @@ export const TabMenu: React.FC<TabMenuProps> = ({
     );
   };
 
-  const renderTab = (item: TabWithRefProps, index: number) => {
+  const renderTab = (item: TabWithRefProps) => {
     /* width отдельно вынесен из props, чтобы он не передавался в Tab.
       Иначе будет постоянно передаваться в таб, что не верно,
       т.к. параметр width нужен только для внутренних расчетов */
@@ -370,11 +376,11 @@ export const TabMenu: React.FC<TabMenuProps> = ({
       /* width отдельно вынесен из props, чтобы он не передавался в Tab.
       Иначе будет постоянно передаваться в таб, что не верно,
       т.к. параметр width нужен только для внутренних расчетов */
-      const { disabled, content, id, icon, badge, ref, width, ...props } = item;
+      const { id } = item;
       const tabNumber = getTabIndex(id);
       return (
         <TabWrapper key={id} data-number={index}>
-          {renderTab(item, index)}
+          {renderTab(item)}
           {mobile || tabNumber === tabsWithRef.length - 1 ? null : renderOverflowMenu(id)}
         </TabWrapper>
       );
