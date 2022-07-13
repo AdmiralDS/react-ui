@@ -35,6 +35,8 @@ import { VirtualBody } from './VirtualBody';
 import { OverflowMenu } from './OverflowMenu';
 import { getScrollbarSize } from '#src/components/common/dom/scrollbarUtil';
 
+export { RowSingleAction } from './RowSingleAction';
+
 export const DEFAULT_COLUMN_WIDTH = 100;
 
 export type Dimension = 'xl' | 'l' | 'm' | 's';
@@ -126,6 +128,8 @@ export interface TableRow extends Record<RowId, React.ReactNode> {
    * Для таблицы с dimension='l' или dimension='xl' используется OverflowMenu c dimension='l'.
    */
   overflowMenuRender?: (row: any, onMenuOpen: () => void, onMenuClose: () => void) => React.ReactNode;
+  /** */
+  singleActionRedner?: (row: any) => React.ReactNode;
 }
 
 export interface TableProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -559,7 +563,9 @@ export const Table: React.FC<TableProps> = ({
           {cols.map((col) => (col.sticky ? null : renderBodyCell(row, col)))}
           <Filler />
         </SimpleRow>
-        {row.overflowMenuRender && <OverflowMenu dimension={dimension} tableWidth={tableWidth} row={row} />}
+        {(row.overflowMenuRender || row.singleActionRedner) && (
+          <OverflowMenu dimension={dimension} tableWidth={tableWidth} row={row} />
+        )}
         {row.expandedRowRender && (
           <ExpandedRow opened={row.expanded} contentMaxHeight="90vh" className="tr-expanded">
             <ExpandedRowContent>{row.expandedRowRender(row)}</ExpandedRowContent>

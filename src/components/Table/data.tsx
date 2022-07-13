@@ -3,6 +3,8 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { OverflowMenu } from '#src/components/OverflowMenu';
 import { MenuItem, RenderOptionProps } from '#src/components/MenuItem';
+import { ReactComponent as DeleteOutline } from '@admiral-ds/icons/build/system/DeleteOutline.svg';
+import { RowSingleAction } from '#src/components/Table';
 
 import type { Column } from '../Table';
 
@@ -28,6 +30,7 @@ export type RowData = {
   expanded?: boolean;
   expandedRowRender?: (row: RowData) => React.ReactNode;
   overflowMenuRender?: (row: RowData, onMenuOpen: () => void, onMenuClose: () => void) => React.ReactNode;
+  singleActionRedner?: (row: any) => React.ReactNode;
   transfer_type: string;
   transfer_date: string;
   transfer_amount: React.ReactNode;
@@ -743,6 +746,11 @@ export const rowListMenu: RowData[] = [
     transfer_amount: numberFormatter.format(189_000_000),
     currency: 'RUB',
     rate: 6,
+    singleActionRedner: () => (
+      <RowSingleAction onClick={() => console.log('clickkk')}>
+        <DeleteOutline width={20} height={20} />
+      </RowSingleAction>
+    ),
   },
   {
     id: '0004',
