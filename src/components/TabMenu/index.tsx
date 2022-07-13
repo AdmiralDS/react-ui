@@ -131,38 +131,23 @@ export const TabMenu: React.FC<TabMenuProps> = ({
   };
 
   const getNextFocus = (target: HTMLElement) => {
-    let ii = visibleRefsMap.findIndex((item) => target === item.current);
-    if (ii < visibleRefsMap.length - 1) {
-      ii++;
+    let currentIndex = visibleRefsMap.findIndex((item) => target === item.current);
+    if (currentIndex < visibleRefsMap.length - 1) {
+      currentIndex++;
     } else {
-      ii = 0;
+      currentIndex = 0;
     }
-    return visibleRefsMap[ii].current;
+    return visibleRefsMap[currentIndex].current;
   };
+
   const getPreviousFocus = (target: HTMLElement) => {
-    let sibling: Element | null | undefined =
-      target.previousElementSibling || currentOverflowMenuRef?.current || tablistRef.current?.lastElementChild;
-    while (sibling?.hasAttribute('disabled')) {
-      sibling =
-        sibling.previousElementSibling || currentOverflowMenuRef?.current || tablistRef.current?.lastElementChild;
+    let currentIndex = visibleRefsMap.findIndex((item) => target === item.current);
+    if (currentIndex === 0) {
+      currentIndex = visibleRefsMap.length - 1;
+    } else {
+      currentIndex--;
     }
-    return sibling;
-  };
-
-  const focusFirstTab = () => {
-    let tab = tablistRef.current?.firstElementChild;
-    while (tab?.hasAttribute('disabled')) {
-      tab = tab.nextElementSibling;
-    }
-    tab ? (tab as HTMLElement).focus() : (currentOverflowMenuRef?.current as HTMLElement).focus();
-  };
-
-  const focusLastTab = () => {
-    let tab = tablistRef.current?.lastElementChild;
-    while (tab?.hasAttribute('disabled')) {
-      tab = tab.previousElementSibling;
-    }
-    tab ? (tab as HTMLElement).focus() : (currentOverflowMenuRef?.current as HTMLElement).focus();
+    return visibleRefsMap[currentIndex].current;
   };
 
   const styleUnderline = (left: number, width: number) => {
@@ -287,23 +272,6 @@ export const TabMenu: React.FC<TabMenuProps> = ({
     }
   };
 
-  const handleMenuKeyDown = (event: React.KeyboardEvent<HTMLButtonElement>) => {
-    if (!openedMenu) {
-      const code = keyboardKey.getCode(event);
-      switch (code) {
-        case keyboardKey.ArrowLeft:
-          focusLastTab();
-          event.preventDefault();
-          break;
-        case keyboardKey.ArrowRight:
-          focusFirstTab();
-          event.preventDefault();
-          break;
-        default:
-          break;
-      }
-    }
-  };
   const getTabIndex = (id: string) => {
     return tabsWithRef.findIndex((item) => item.id === id);
   };
@@ -334,7 +302,6 @@ export const TabMenu: React.FC<TabMenuProps> = ({
           styleUnderline(0, 0);
         }}
         tabIndex={tabIndex}
-        onKeyDown={handleMenuKeyDown}
       />
     );
   };
