@@ -6,6 +6,7 @@ import { ReactComponent as HelpOutline } from '@admiral-ds/icons/build/service/H
 import { ComponentMeta, ComponentStory, Story } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import { Theme } from '#src/components/themes';
+import { TextButton } from '#src/components/TextButton';
 
 const Separator = styled.div<{ height?: number }>`
   height: ${({ height }) => (height ? height : 20)}px;
@@ -90,7 +91,7 @@ const Template1: ComponentStory<typeof Hint> = ({ anchorId, ...args }) => {
     <ThemeProvider theme={swapBorder}>
       <Hint {...args} anchorId={anchorId}>
         <StyledButton dimension="s" aria-label="Additional information" aria-describedby={anchorId}>
-          <HelpOutline height={24} width={24} aria-hidden />
+          <HelpOutline aria-hidden />
         </StyledButton>
       </Hint>
     </ThemeProvider>
@@ -103,12 +104,12 @@ const Template2: Story<HintProps & { anchorId1: string; anchorId2: string }> = (
       <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
         <Hint {...args} renderContent={() => text} anchorId={anchorId1}>
           <StyledButton dimension="s" aria-label="Additional information" aria-describedby={anchorId1}>
-            <HelpOutline height={24} width={24} aria-hidden />
+            <HelpOutline aria-hidden />
           </StyledButton>
         </Hint>
         <Hint {...args} renderContent={() => text} id={anchorId2}>
           <StyledButton dimension="s" aria-label="Additional information" aria-describedby={anchorId2}>
-            <HelpOutline height={24} width={24} aria-hidden />
+            <HelpOutline aria-hidden />
           </StyledButton>
         </Hint>
       </div>
@@ -118,13 +119,16 @@ const Template2: Story<HintProps & { anchorId1: string; anchorId2: string }> = (
 
 const Template3: ComponentStory<typeof Hint> = ({ anchorId, ...args }) => {
   const btnRef = useRef<HTMLButtonElement>(null);
+  const anchorCss = css`
+    height: 100%;
+  `;
 
   return (
     <>
       <StyledButton dimension="s" ref={btnRef}>
         Press&nbsp;&nbsp;&nbsp;
-        <Hint {...args} renderContent={() => text} target={btnRef} anchorId={anchorId}>
-          <HelpOutline tabIndex={0} height={24} width={24} aria-label="Help Icon" aria-describedby={anchorId} />
+        <Hint {...args} renderContent={() => text} target={btnRef} anchorId={anchorId} anchorCssMixin={anchorCss}>
+          <HelpOutline tabIndex={0} height={20} width={20} aria-label="Help Icon" aria-describedby={anchorId} />
         </Hint>
       </StyledButton>
     </>
@@ -141,13 +145,13 @@ const Template4: ComponentStory<typeof Hint> = ({ anchorId, ...args }) => {
           <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
             {text}
             <Separator height={8} />
-            <a href="#">Link</a>
+            <TextButton appearance="primary" dimension="s" text="Link" />
           </div>
         )}
         anchorId={anchorId}
       >
         <StyledButton dimension="s" aria-label="Additional information" aria-describedby={anchorId}>
-          <HelpOutline height={24} width={24} />
+          <HelpOutline />
         </StyledButton>
       </Hint>
     </>
@@ -164,7 +168,7 @@ const Template5: ComponentStory<typeof Hint> = ({ anchorId, ...args }) => {
     <>
       <Hint {...args} renderContent={() => text} anchorId={anchorId} anchorCssMixin={anchorCss}>
         <StyledButton dimension="s" aria-label="Additional information" aria-describedby={anchorId}>
-          <HelpOutline height={24} width={24} aria-hidden />
+          <HelpOutline aria-hidden />
         </StyledButton>
       </Hint>
     </>
