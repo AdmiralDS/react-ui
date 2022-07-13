@@ -7,7 +7,6 @@ import { MenuItem, RenderOptionProps } from '#src/components/MenuItem';
 import type { Column } from '../Table';
 
 const AmountCell = styled.div`
-  text-align: end;
   text-overflow: ellipsis;
   overflow: hidden;
 
