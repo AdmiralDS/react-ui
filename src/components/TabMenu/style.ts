@@ -150,6 +150,8 @@ export const StyledOverflowMenu = styled(OverflowMenu)<{
   dimension?: Dimension;
 }>`
   display: ${({ isHidden }) => (isHidden ? 'none' : 'block')};
+  margin: 0 5px;
+
   &:focus-visible {
     &:before {
       ${({ dimension }) => `
