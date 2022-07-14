@@ -159,7 +159,7 @@ export interface TableProps extends React.HTMLAttributes<HTMLDivElement> {
    * idSelectionStatusMap - это объект, ключами которого являются id строк, чье состояние checked было изменено,
    * а значениями ключей - значение checked
    */
-  onRowSelectionChange?: (idSelectionStatusMap: IdSelectionStatusMap) => void;
+  onRowSelectionChange?: (idSelectionStatusMap: IdSelectionStatusMap, id?: RowId) => void;
   /** Колбек на раскрытие/свертывание строки (на нажатие по стрелке слева).
    * idSelectionStatusMap - это объект, ключами которого являются id строк, чье состояние expanded было изменено,
    * а значениями ключей - значение expanded
@@ -367,7 +367,7 @@ export const Table: React.FC<TableProps> = ({
       ids[row.id] = value;
       return ids;
     }, {});
-    onRowSelectionChange?.(idsMap);
+    onRowSelectionChange?.(idsMap, id);
   }
 
   function handleCheckboxClick(e: React.MouseEvent<HTMLElement>) {
