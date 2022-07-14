@@ -307,7 +307,7 @@ export const TabMenu: React.FC<TabMenuProps> = ({
     const tabsForMenu = modelAllTabs.slice(tabNumber + 1);
     const overflowMenuHidden =
       tabNumber === tabsWithRef.length - 1 || !(visibilityMap[tabNumber] && !visibilityMap[tabNumber + 1]);
-    const tabIndex = overflowMenuHidden || !tabsForMenu?.filter((item) => item.id === activeTab).length ? -2 : 0;
+    const tabIndex = overflowMenuHidden || !tabsForMenu?.filter((item) => item.id === activeTab).length ? -1 : 0;
     const overflowRef = overflowMenuRefs[tabNumber] ? overflowMenuRefs[tabNumber].ref : null;
 
     return (

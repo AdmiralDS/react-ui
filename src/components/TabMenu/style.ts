@@ -152,8 +152,6 @@ export const StyledOverflowMenu = styled(OverflowMenu)<{
   display: ${({ isHidden }) => (isHidden ? 'none' : 'block')};
   &:focus-visible {
     &:before {
-      content: '';
-      position: absolute;
       ${({ dimension }) => `
         top: ${dimension === 'l' ? FOCUS_BORDER_OFFSET_L : FOCUS_BORDER_OFFSET_M};
         left: ${dimension === 'l' ? FOCUS_BORDER_OFFSET_L : FOCUS_BORDER_OFFSET_M};
@@ -161,7 +159,6 @@ export const StyledOverflowMenu = styled(OverflowMenu)<{
         bottom: ${dimension === 'l' ? FOCUS_BORDER_OFFSET_L : FOCUS_BORDER_OFFSET_M};
       `}
       border-radius: 0;
-      border: 2px solid ${({ theme }) => theme.color['Primary/Primary 60 Main']};
     }
   }
 
