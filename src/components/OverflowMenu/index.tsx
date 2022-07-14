@@ -47,7 +47,6 @@ export const OverflowMenu = React.forwardRef<HTMLButtonElement, OverflowMenuProp
     return (
       <>
         <DropMenu
-          {...props}
           ref={ref}
           alignSelf={alignSelf}
           items={items}
