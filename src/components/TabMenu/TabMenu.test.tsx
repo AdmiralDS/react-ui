@@ -31,6 +31,22 @@ const originalScrollIntoView =
 
 // устанавливаем заглушки
 beforeAll(() => {
+  /*const intersectionObserverMock = () => ({
+    observe: () => null,
+  });
+  window.IntersectionObserver = jest.fn().mockImplementation(intersectionObserverMock);*/
+  class IntersectionObserver {
+    observe = jest.fn();
+    disconnect = jest.fn();
+    unobserve = jest.fn();
+  }
+
+  Object.defineProperty(window, 'IntersectionObserver', {
+    writable: true,
+    configurable: true,
+    value: IntersectionObserver,
+  });
+
   Object.defineProperties(window.HTMLElement.prototype, {
     clientWidth: {
       get: function () {
