@@ -35,7 +35,7 @@ import { VirtualBody } from './VirtualBody';
 import { OverflowMenu } from './OverflowMenu';
 import { getScrollbarSize } from '#src/components/common/dom/scrollbarUtil';
 
-export { RowSingleAction } from './RowSingleAction';
+export * from './RowAction';
 
 export const DEFAULT_COLUMN_WIDTH = 100;
 
@@ -128,8 +128,14 @@ export interface TableRow extends Record<RowId, React.ReactNode> {
    * Для таблицы с dimension='l' или dimension='xl' используется OverflowMenu c dimension='l'.
    */
   overflowMenuRender?: (row: any, onMenuOpen: () => void, onMenuClose: () => void) => React.ReactNode;
-  /** */
-  singleActionRedner?: (row: any) => React.ReactNode;
+  /** Функция рендера одиночного действия над строкой.
+   * Одиночное действие отображается в виде иконки при ховере на строку
+   * и располагается по правому краю строки в видимой области таблицы.
+   *
+   * В качестве результата функция должна возвращать компонент RowAction,
+   * внутрь которого нужно передать произвольную иконку для отображения действия.
+   */
+  actionRender?: (row: any) => React.ReactNode;
 }
 
 export interface TableProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -563,7 +569,7 @@ export const Table: React.FC<TableProps> = ({
           {cols.map((col) => (col.sticky ? null : renderBodyCell(row, col)))}
           <Filler />
         </SimpleRow>
-        {(row.overflowMenuRender || row.singleActionRedner) && (
+        {(row.overflowMenuRender || row.actionRender) && (
           <OverflowMenu dimension={dimension} tableWidth={tableWidth} row={row} />
         )}
         {row.expandedRowRender && (

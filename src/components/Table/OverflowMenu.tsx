@@ -20,9 +20,7 @@ export const OverflowMenu: React.FC<OverflowMenuProps> = ({ tableWidth, row, dim
 
   return (
     <OverflowMenuWrapper ref={oveflowMenuRef} data-opened={false} $offset={tableWidth} dimension={dimension}>
-      {row.singleActionRedner
-        ? row.singleActionRedner(row)
-        : row.overflowMenuRender?.(row, handleMenuOpen, handleMenuClose)}
+      {row.actionRender ? row.actionRender(row) : row.overflowMenuRender?.(row, handleMenuOpen, handleMenuClose)}
     </OverflowMenuWrapper>
   );
 };

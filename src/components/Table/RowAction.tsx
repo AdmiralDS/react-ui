@@ -5,10 +5,12 @@ type Dimension = 'xl' | 'l' | 'm' | 's';
 
 const Action = styled.div<{ dimension: Dimension }>`
   display: flex;
+  box-sizing: border-box;
   align-items: center;
   justify-content: center;
   width: ${({ dimension }) => (dimension === 's' || dimension === 'm' ? 32 : 36)}px;
   height: ${({ dimension }) => (dimension === 's' || dimension === 'm' ? 32 : 36)}px;
+  padding: 6px;
   cursor: pointer;
   &:hover {
     border-radius: 50%;
@@ -21,11 +23,11 @@ const Action = styled.div<{ dimension: Dimension }>`
   }
 `;
 
-export interface RowSingleActionProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface RowActionProps extends React.HTMLAttributes<HTMLDivElement> {
   dimension?: Dimension;
 }
 
-export const RowSingleAction: React.FC<RowSingleActionProps> = ({ dimension = 'm', ...props }) => {
+export const RowAction: React.FC<RowActionProps> = ({ dimension = 'm', ...props }) => {
   return (
     <Action dimension={dimension} {...props}>
       {props.children}

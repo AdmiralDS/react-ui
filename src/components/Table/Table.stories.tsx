@@ -593,7 +593,11 @@ RowOverflowMenu.parameters = {
       при открытии/закрытии меню для того, чтобы таблица могла управлять видимостью OverflowMenu.
       В качестве результата функция должна возвращать компонент OverflowMenu. Размер OverflowMenu 
       следует задавать согласно правилу:\n\n* Для таблицы с dimension="s" или dimension="m" используется 
-      OverflowMenu c dimension="m"\n\n* Для таблицы с dimension="l" или dimension="xl" используется OverflowMenu c dimension="l"`,
+      OverflowMenu c dimension="m"\n\n* Для таблицы с dimension="l" или dimension="xl" используется OverflowMenu
+      c dimension="l"\n\nЕсли подразумевается только одно действие над строкой, то вместо overflowMenuRender следует
+      использовать функцию actionRender (в примере используется для 3-4 строк). 
+      На вход функция получает саму строку, а возвращает компонент RowAction (экспортируется из библиотеки),
+      внутрь которого необходимо передать иконку для обозначения действия над строкой.`,
     },
   },
 };
