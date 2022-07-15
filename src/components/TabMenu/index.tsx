@@ -28,7 +28,7 @@ export interface TabProps extends React.HTMLAttributes<HTMLButtonElement> {
   disabled?: boolean;
 }
 
-type TabWithRefProps = TabProps & { ref: React.RefObject<HTMLButtonElement>; width?: number };
+type TabWithRefProps = TabProps & { ref: React.RefObject<HTMLButtonElement> };
 type OverflowMenuRefProps = {
   ref: React.RefObject<HTMLButtonElement>;
   isVisible: boolean;
@@ -74,21 +74,21 @@ export const TabMenu: React.FC<TabMenuProps> = ({
   const tabsWithRef: Array<TabWithRefProps> = React.useMemo(() => {
     return tabs.map((tab) => ({ ...tab, ref: React.createRef<HTMLButtonElement>() }));
   }, [tabs]);
-  // refs to OverflowMenus
+
+  // add refs to OverflowMenus
   const overflowMenuRefs: Array<OverflowMenuRefProps> = React.useMemo(() => {
     return tabs.slice(0, tabs.length - 1).map((_, index) => ({
       ref: React.createRef<HTMLButtonElement>(),
       isVisible: visibilityMap[index] && !visibilityMap[index + 1],
     }));
   }, [tabs, visibilityMap]);
+
   // ref to visible OverflowMenu
   const currentOverflowMenuRef = React.useMemo(() => {
     const visibleMenu = overflowMenuRefs.find((item) => item.isVisible);
-    if (visibleMenu) {
-      return visibleMenu.ref;
-    }
-    return null;
+    return visibleMenu ? visibleMenu.ref : null;
   }, [overflowMenuRefs, visibilityMap]);
+
   // collection of visible elements for handleKeyDown
   const visibleRefsMap = React.useMemo(() => {
     let refsMap: Array<React.RefObject<HTMLButtonElement>> = [];
@@ -312,7 +312,6 @@ export const TabMenu: React.FC<TabMenuProps> = ({
 
     return (
       <StyledOverflowMenu
-        id={`Over-${id}`}
         ref={overflowRef}
         onOpen={() => setOpenedMenu(true)}
         onClose={() => setOpenedMenu(false)}
@@ -322,7 +321,7 @@ export const TabMenu: React.FC<TabMenuProps> = ({
         dimension={dimension}
         isHidden={overflowMenuHidden}
         isActive={containsActiveTab(tabsForMenu)}
-        disabled={tabsForMenu.length === tabsForMenu.filter((tab) => tab.disabled).length}
+        disabled={tabsForMenu.every((tab) => tab.disabled)}
         onChange={(id: string) => {
           onChange(id);
           styleUnderline(0, 0);
@@ -333,10 +332,7 @@ export const TabMenu: React.FC<TabMenuProps> = ({
   };
 
   const renderTab = (item: TabWithRefProps) => {
-    /* width отдельно вынесен из props, чтобы он не передавался в Tab.
-      Иначе будет постоянно передаваться в таб, что не верно,
-      т.к. параметр width нужен только для внутренних расчетов */
-    const { disabled, content, id, icon, badge, ref, width, ...props } = item;
+    const { disabled, content, id, icon, badge, ref, ...props } = item;
 
     return (
       <Tab
@@ -373,9 +369,6 @@ export const TabMenu: React.FC<TabMenuProps> = ({
 
   const renderTabs = () => {
     return tabsWithRef.map((item: TabWithRefProps, index) => {
-      /* width отдельно вынесен из props, чтобы он не передавался в Tab.
-      Иначе будет постоянно передаваться в таб, что не верно,
-      т.к. параметр width нужен только для внутренних расчетов */
       const { id } = item;
       const tabNumber = getTabIndex(id);
       return (

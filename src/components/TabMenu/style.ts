@@ -14,6 +14,10 @@ import {
   TAB_HEIGHT_M,
   TAB_PADDING_L,
   TAB_PADDING_M,
+  OVERFLOW_MENU_MARGIN_L,
+  OVERFLOW_MENU_MARGIN_M,
+  FOCUS_BORDER_OFFSET_L,
+  FOCUS_BORDER_OFFSET_M,
 } from '#src/components/TabMenu/constants';
 
 export const Wrapper = styled.div<{ underline?: boolean; mobile?: boolean; dimension?: Dimension }>`
@@ -141,18 +145,13 @@ export const TabWrapper = styled.div`
   align-items: center;
 `;
 
-const OVERFLOW_MENU_MARGIN_M = '4px';
-const OVERFLOW_MENU_MARGIN_L = '6px';
-const FOCUS_BORDER_OFFSET_M = '-4px';
-const FOCUS_BORDER_OFFSET_L = '-6px';
-
 export const StyledOverflowMenu = styled(OverflowMenu)<{
   isActive: boolean;
   isHidden?: boolean;
   dimension?: Dimension;
 }>`
   display: ${({ isHidden }) => (isHidden ? 'none' : 'block')};
-  margin: 0 ${({ dimension }) => (dimension === 'l' ? OVERFLOW_MENU_MARGIN_L : OVERFLOW_MENU_MARGIN_M)};
+  margin-left: ${({ dimension }) => (dimension === 'l' ? OVERFLOW_MENU_MARGIN_L : OVERFLOW_MENU_MARGIN_M)};
 
   &:focus-visible {
     &:before {
