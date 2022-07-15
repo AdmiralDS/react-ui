@@ -371,7 +371,7 @@ Object {
 
 .c7 {
   display: none;
-  margin: 0 6px;
+  margin-left: 6px;
 }
 
 .c7:focus-visible:before {
@@ -421,7 +421,6 @@ Object {
             aria-expanded="false"
             aria-haspopup="false"
             class="c6 c7"
-            id="Over-1"
             tabindex="-1"
             type="button"
           >
@@ -465,7 +464,6 @@ Object {
             aria-expanded="false"
             aria-haspopup="false"
             class="c6 c7"
-            id="Over-2"
             tabindex="-1"
             type="button"
           >
@@ -881,7 +879,7 @@ Object {
 
 .c7 {
   display: none;
-  margin: 0 6px;
+  margin-left: 6px;
 }
 
 .c7:focus-visible:before {
@@ -930,7 +928,6 @@ Object {
           aria-expanded="false"
           aria-haspopup="false"
           class="c6 c7"
-          id="Over-1"
           tabindex="-1"
           type="button"
         >
@@ -974,7 +971,6 @@ Object {
           aria-expanded="false"
           aria-haspopup="false"
           class="c6 c7"
-          id="Over-2"
           tabindex="-1"
           type="button"
         >
