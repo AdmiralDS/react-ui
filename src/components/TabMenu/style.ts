@@ -141,6 +141,8 @@ export const TabWrapper = styled.div`
   align-items: center;
 `;
 
+const OVERFLOW_MENU_MARGIN_M = '4px';
+const OVERFLOW_MENU_MARGIN_L = '6px';
 const FOCUS_BORDER_OFFSET_M = '-4px';
 const FOCUS_BORDER_OFFSET_L = '-6px';
 
@@ -150,6 +152,8 @@ export const StyledOverflowMenu = styled(OverflowMenu)<{
   dimension?: Dimension;
 }>`
   display: ${({ isHidden }) => (isHidden ? 'none' : 'block')};
+  margin: 0 ${({ dimension }) => (dimension === 'l' ? OVERFLOW_MENU_MARGIN_L : OVERFLOW_MENU_MARGIN_M)};
+
   &:focus-visible {
     &:before {
       ${({ dimension }) => `
