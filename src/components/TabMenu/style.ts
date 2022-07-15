@@ -20,6 +20,26 @@ import {
   FOCUS_BORDER_OFFSET_M,
 } from '#src/components/TabMenu/constants';
 
+export const IconWrapper = styled.div<{ dimension: Dimension }>`
+  ${({ dimension }) => `
+    width: ${dimension === 'l' ? ICON_SIZE_L : ICON_SIZE_M}px;
+    height: ${dimension === 'l' ? ICON_SIZE_L : ICON_SIZE_M}px;`}
+  margin-right: 8px;
+`;
+
+export const BadgeWrapper = styled.div`
+  margin-left: 8px;
+  display: flex;
+  align-items: center;
+`;
+
+export const MenuItemWrapper = styled.div`
+  display: flex;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  align-items: center;
+`;
+
 export const Wrapper = styled.div<{ underline?: boolean; mobile?: boolean; dimension?: Dimension }>`
   position: relative;
   display: flex;

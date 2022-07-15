@@ -5,6 +5,9 @@ import { ItemProps, MenuItem, RenderOptionProps } from '#src/components/MenuItem
 import observeRect from '#src/components/common/observeRect';
 
 import {
+  BadgeWrapper,
+  IconWrapper,
+  MenuItemWrapper,
   StyledOverflowMenu,
   Tab,
   TabContent,
@@ -119,15 +122,31 @@ export const TabMenu: React.FC<TabMenuProps> = ({
 
   // model of all tabs for OverflowMenus
   const modelAllTabs = React.useMemo(() => {
-    return tabsWithRef.map((item) => ({
-      id: item.id,
-      render: (options: RenderOptionProps) => (
-        <MenuItem dimension={dimension} {...options} key={item.id}>
-          {item.content}
-        </MenuItem>
-      ),
-      disabled: item.disabled,
-    }));
+    return tabsWithRef.map((item) => {
+      return {
+        id: item.id,
+        render: (options: RenderOptionProps) => (
+          <MenuItem dimension={dimension} {...options} key={item.id}>
+            <MenuItemWrapper>
+              {item.icon && <IconWrapper dimension={dimension}>{item.icon}</IconWrapper>}
+              {item.content}
+              {typeof item.badge !== 'undefined' && (
+                <BadgeWrapper>
+                  <Badge
+                    data-badge
+                    dimension="s"
+                    appearance={item.id === activeTab ? 'info' : item.disabled ? 'lightDisable' : 'lightInactive'}
+                  >
+                    {item.badge}
+                  </Badge>
+                </BadgeWrapper>
+              )}
+            </MenuItemWrapper>
+          </MenuItem>
+        ),
+        disabled: item.disabled,
+      };
+    });
   }, [dimension, tabs, tabsWithRef]);
 
   const containsActiveTab = (items: Array<ItemProps>) => {
@@ -229,11 +248,7 @@ export const TabMenu: React.FC<TabMenuProps> = ({
       const target = entry.target;
       const targetNumber = target.dataset.number;
 
-      if (entry.isIntersecting && entry.intersectionRatio === 1.0) {
-        updatedEntries[targetNumber] = true;
-      } else {
-        updatedEntries[targetNumber] = false;
-      }
+      updatedEntries[targetNumber] = entry.isIntersecting && entry.intersectionRatio === 1.0;
     });
 
     setVisibilityMap((prev: { [index: number | string]: boolean }) => ({
