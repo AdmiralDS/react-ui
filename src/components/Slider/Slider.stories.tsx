@@ -96,23 +96,26 @@ const Template1: ComponentStory<typeof Slider> = () => {
           console.log({ event: e.type, value });
           setRangeValue(value);
         }}
+        minValue={10}
+        maxValue={100}
       />
     </>
   );
 };
 
 const Template2: ComponentStory<typeof Slider> = () => {
-  const [rangesValue, setRangesValue] = React.useState(50);
+  const [rangeValue, setRangeValue] = React.useState(50);
   return (
     <>
       <Slider
         tickMarks={[25, 50, 75]}
-        value={rangesValue}
+        value={rangeValue}
         maxValue={100}
         onChange={(e: any, value: number) => {
           console.log({ event: e.type, value });
-          setRangesValue(value);
+          setRangeValue(value);
         }}
+        renderTickMark={(mark: string) => mark + ' ₽'}
       />
     </>
   );
@@ -124,8 +127,8 @@ Playground.storyName = 'Slider. Playground.';
 
 export const SliderSimple = Template1.bind({});
 SliderSimple.args = {};
-SliderSimple.storyName = 'Slider с двумя значениями.';
+SliderSimple.storyName = 'Slider с настройками minValue, maxValue.';
 
 export const SliderRange = Template2.bind({});
 SliderRange.args = {};
-SliderRange.storyName = 'Slider с отметками.';
+SliderRange.storyName = 'Slider с отметками и кастомизированными подписями к ним.';

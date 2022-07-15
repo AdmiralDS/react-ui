@@ -14,6 +14,7 @@ type FilterProps = {
    */
   setFilterActive: (isActive: boolean) => void;
 };
+
 export interface FilterCompProps extends Omit<React.HTMLAttributes<HTMLButtonElement>, 'onChange'> {
   /** Размер компонента */
   dimension?: Dimension;

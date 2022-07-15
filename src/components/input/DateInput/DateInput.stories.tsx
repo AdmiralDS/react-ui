@@ -91,6 +91,7 @@ const Template: ComponentStory<typeof DateInput> = (props) => {
     setValue(inputValue);
     props.onChange?.(e);
   };
+
   function swapBorder(theme: Theme): Theme {
     theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
@@ -98,13 +99,7 @@ const Template: ComponentStory<typeof DateInput> = (props) => {
 
   return (
     <ThemeProvider theme={swapBorder}>
-      <DateInput
-        {...cleanProps}
-        value={localValue}
-        onChange={handleChange}
-        style={{ maxWidth: '30%' }}
-        placeholder={'Some placeholder'}
-      />
+      <DateInput {...cleanProps} value={localValue} onChange={handleChange} placeholder={'Some placeholder'} />
     </ThemeProvider>
   );
 };

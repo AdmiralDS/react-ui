@@ -11,28 +11,10 @@ import { Dropdown as DropComponent } from '#src/components/Dropdown';
 import { MessagePanel } from './MessagePanel';
 import { SuggestPanel } from './SuggestPanel';
 import { Spinner } from '#src/components/Spinner';
+import { InputIconButton } from '#src/components/InputIconButton';
 
 const Dropdown = styled(DropComponent)`
   padding: 8px 0;
-`;
-
-function AnyIcon({ icon, ...props }: { icon: React.FunctionComponent<any>; onClick?: () => void; tabIndex?: number }) {
-  const Icon = icon;
-  return <Icon {...props} />;
-}
-
-const SearchIcon = styled(AnyIcon)`
-  & *[fill^='#'] {
-    fill: ${(props) => props.theme.color['Neutral/Neutral 50']};
-  }
-
-  &:hover {
-    cursor: pointer;
-  }
-
-  &:hover *[fill^='#'] {
-    fill: ${(props) => props.theme.color['Primary/Primary 70']};
-  }
 `;
 
 const SearchingPanelContainer = styled.div`
@@ -59,11 +41,10 @@ const SearchTextContainer = styled.div`
   margin-left: 8px;
 `;
 
-const StyledDropDown = styled(Dropdown)<{ alignDropdown?: string; dropMaxHeight: string | number }>`
+const StyledDropDown = styled(Dropdown)<{ dropMaxHeight: string | number }>`
   padding: 8px 0;
   overflow-x: hidden;
   overflow-y: auto;
-  ${(p) => (p.alignDropdown ? `align-self: ${p.alignDropdown}` : '')};
   max-height: ${(p) => p.dropMaxHeight};
   min-width: 100%;
 `;
@@ -87,6 +68,12 @@ export interface SuggestInputProps extends Omit<TextInputProps, 'value'> {
   /** Отображать статус загрузки данных */
   isLoading?: boolean;
 
+  /** Текст сообщения при загрузке вариантов для подстановки */
+  isLoadingMessage?: string;
+
+  /** Текст сообщения при отсутствии вариантов для подстановки */
+  isEmptyMessage?: string;
+
   /** Обработчик выбора опции (дефолтный обработчик подставляет значение опции в поле ввода) */
   onOptionSelect?: (value: string) => void;
 
@@ -95,6 +82,8 @@ export interface SuggestInputProps extends Omit<TextInputProps, 'value'> {
 
   /** Референс на контейнер для правильного позиционирования выпадающего списка */
   portalTargetRef?: React.RefObject<HTMLElement>;
+
+  onSearchButtonClick?: React.MouseEventHandler<SVGSVGElement>;
 
   /**
    * Позволяет выравнивать позицию дропдаун контейнера относительно селекта.
@@ -108,12 +97,23 @@ export interface SuggestInputProps extends Omit<TextInputProps, 'value'> {
   /**
    * Компонент для отображения альтернативной иконки
    */
-  icon?: React.FunctionComponent;
+  icon?: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
 }
 
 export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps>(
   (
-    { isLoading, onOptionSelect, alignDropdown, dropMaxHeight = '300px', icons, icon = SearchOutlineSVG, ...props },
+    {
+      isLoading,
+      onOptionSelect,
+      alignDropdown = 'stretch',
+      dropMaxHeight = '300px',
+      onSearchButtonClick = () => undefined,
+      icons,
+      icon = SearchOutlineSVG,
+      isLoadingMessage = 'Поиск совпадений',
+      isEmptyMessage = 'Нет совпадений',
+      ...props
+    },
     ref,
   ) => {
     const isControlledComponentValue = undefined !== props.value;
@@ -182,8 +182,7 @@ export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps
       }
     };
 
-    const loadingMessage = isLoading ? <SearchingPanel>Поиск совпадений</SearchingPanel> : 'Нет совпадений';
-
+    const loadingMessage = isLoading ? <SearchingPanel>{isLoadingMessage}</SearchingPanel> : isEmptyMessage;
     const [blurTrigger, triggerDelayedBlur] = React.useState<undefined | unknown>();
 
     React.useEffect(() => {
@@ -208,13 +207,13 @@ export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps
     }, [props.onInput]);
 
     const iconArray = React.Children.toArray(icons);
-    iconArray.push(<SearchIcon icon={icon} />);
+    iconArray.push(<InputIconButton icon={icon} onClick={onSearchButtonClick} aria-hidden />);
 
     return (
       <TextInput
         {...props}
         ref={refSetter(ref, inputRef)}
-        icons={!props.readOnly && iconArray}
+        icons={!props.readOnly ? iconArray : undefined}
         onKeyUp={(...p) => {
           props.onKeyUp?.(...p);
           handleKeyUp(...p);
@@ -235,7 +234,7 @@ export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps
         {options && isSuggestPanelOpen && (
           <StyledDropDown
             targetRef={portalTargetRef || inputRef}
-            alignDropdown={alignDropdown}
+            alignSelf={alignDropdown}
             dropMaxHeight={dropMaxHeight}
             data-dimension={props.dimension || TextInput.defaultProps?.dimension}
           >

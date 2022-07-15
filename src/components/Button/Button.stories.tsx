@@ -85,6 +85,10 @@ export default {
         options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
       },
     },
+
+    disabled: {
+      control: { type: 'boolean' },
+    },
   },
 } as ComponentMeta<typeof Button>;
 
@@ -110,7 +114,6 @@ const ButtonWithIconDemo: ComponentStory<typeof Button> = (args) => {
       <WrapperButton>
         <div>
           <T font="Body/Body 1 Long" as="div">
-            {' '}
             Dimension - xl
           </T>
           <Button dimension="xl" appearance="primary">
@@ -120,7 +123,6 @@ const ButtonWithIconDemo: ComponentStory<typeof Button> = (args) => {
         </div>
         <div>
           <T font="Body/Body 1 Long" as="div">
-            {' '}
             Dimension - l
           </T>
           <Button dimension="l" appearance="secondary">
@@ -130,7 +132,6 @@ const ButtonWithIconDemo: ComponentStory<typeof Button> = (args) => {
         </div>
         <div>
           <T font="Body/Body 1 Long" as="div">
-            {' '}
             Dimension - m
           </T>
           <Button dimension="m" appearance="danger">
@@ -140,7 +141,6 @@ const ButtonWithIconDemo: ComponentStory<typeof Button> = (args) => {
         </div>
         <div>
           <T font="Body/Body 1 Long" as="div">
-            {' '}
             Ghost - xl
           </T>
           <Button dimension="xl" appearance="ghost">
@@ -151,7 +151,6 @@ const ButtonWithIconDemo: ComponentStory<typeof Button> = (args) => {
         <>
           <DarkDiv>
             <T font="Body/Body 1 Long" as="div">
-              {' '}
               White - l
             </T>
             <Button dimension="l" appearance="white">
@@ -162,7 +161,6 @@ const ButtonWithIconDemo: ComponentStory<typeof Button> = (args) => {
         </>
         <div>
           <T font="Body/Body 1 Long" as="div">
-            {' '}
             Dimension - s
           </T>
           <Button dimension="s" appearance="success">
@@ -532,11 +530,10 @@ const ButtonPlaygroundDemo: ComponentStory<typeof Button> = ({ children, ...args
   );
 };
 
-export const ButtonWithIcon = ButtonWithIconDemo.bind({});
-export const ButtonLoader = ButtonLoaderDemo.bind({});
-// export const Skeleton = ButtonSkeleton.bind({});
-
 export const Playground = ButtonPlaygroundDemo.bind({});
 Playground.args = {
   children: 'Нажми меня',
 };
+export const ButtonWithIcon = ButtonWithIconDemo.bind({});
+export const ButtonLoader = ButtonLoaderDemo.bind({});
+// export const Skeleton = ButtonSkeleton.bind({});

@@ -41,12 +41,12 @@ export const clearValue = (str: string, precision: number, decimal = '.') => {
       .join('');
   }
   // если число начинается с нуля, то после него можно вводить только десятичный разделитель (decimal, по умолчанию точка)
-  // если вторым символом введено нечто отличное от decimal, то оно заменяет собой ноль. Например 05 -> 5
+  // если после нуля введено нечто отличное от decimal, то оно заменяет собой ноль. Например 05 -> 5, -0122 ->  -122
   if (newStr[0] === '0' && newStr[1] !== decimal && newStr.length >= 2) {
-    newStr = newStr[1];
+    newStr = newStr.slice(1, newStr.length);
   }
-  if (newStr.slice(0, 2) === '-0' && newStr[2] !== decimal) {
-    newStr = '-0';
+  if (newStr.slice(0, 2) === '-0' && newStr[2] !== decimal && newStr.length >= 3) {
+    newStr = '-' + newStr.slice(2, newStr.length);
   }
   return newStr;
 };

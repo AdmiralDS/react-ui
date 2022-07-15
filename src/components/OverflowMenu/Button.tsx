@@ -52,10 +52,10 @@ const ButtonComponent = styled.button<{ dimension: Dimension; menuOpened: boolea
     &:before {
       content: '';
       position: absolute;
-      top: -4px;
-      left: -4px;
-      bottom: -4px;
-      right: -4px;
+      top: ${({ dimension }) => (dimension === 's' ? 0 : 2)}px;
+      bottom: ${({ dimension }) => (dimension === 's' ? 0 : 2)}px;
+      left: ${({ dimension }) => (dimension === 's' ? 0 : 2)}px;
+      right: ${({ dimension }) => (dimension === 's' ? 0 : 2)}px;
       border: 2px solid ${({ theme }) => theme.color['Primary/Primary 60 Main']};
       border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
     }

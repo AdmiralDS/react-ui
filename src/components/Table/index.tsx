@@ -13,26 +13,29 @@ import {
   ExpandedRowContent,
   ExpandIcon,
   ExpandIconWrapper,
+  ExtraText,
   Filler,
-  HeaderWrapperContainer,
   Header,
   HeaderCell,
   HeaderCellContent,
   HeaderCellSpacer,
   HeaderCellTitle,
+  HeaderWrapperContainer,
   Row,
   ScrollTableBody,
   SimpleRow,
   SortIcon,
   StickyWrapper,
   TableContainer,
-  TitleContent,
   Title,
-  ExtraText,
+  TitleContent,
+  EmptyMessage,
 } from './style';
 import { VirtualBody } from './VirtualBody';
 import { OverflowMenu } from './OverflowMenu';
 import { getScrollbarSize } from '#src/components/common/dom/scrollbarUtil';
+
+export * from './RowAction';
 
 export const DEFAULT_COLUMN_WIDTH = 100;
 
@@ -125,6 +128,14 @@ export interface TableRow extends Record<RowId, React.ReactNode> {
    * Для таблицы с dimension='l' или dimension='xl' используется OverflowMenu c dimension='l'.
    */
   overflowMenuRender?: (row: any, onMenuOpen: () => void, onMenuClose: () => void) => React.ReactNode;
+  /** Функция рендера одиночного действия над строкой.
+   * Одиночное действие отображается в виде иконки при ховере на строку
+   * и располагается по правому краю строки в видимой области таблицы.
+   *
+   * В качестве результата функция должна возвращать компонент RowAction,
+   * внутрь которого нужно передать произвольную иконку для отображения действия.
+   */
+  actionRender?: (row: any) => React.ReactNode;
 }
 
 export interface TableProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -148,7 +159,7 @@ export interface TableProps extends React.HTMLAttributes<HTMLDivElement> {
    * idSelectionStatusMap - это объект, ключами которого являются id строк, чье состояние checked было изменено,
    * а значениями ключей - значение checked
    */
-  onRowSelectionChange?: (idSelectionStatusMap: IdSelectionStatusMap) => void;
+  onRowSelectionChange?: (idSelectionStatusMap: IdSelectionStatusMap, id?: RowId) => void;
   /** Колбек на раскрытие/свертывание строки (на нажатие по стрелке слева).
    * idSelectionStatusMap - это объект, ключами которого являются id строк, чье состояние expanded было изменено,
    * а значениями ключей - значение expanded
@@ -207,6 +218,8 @@ export interface TableProps extends React.HTMLAttributes<HTMLDivElement> {
      */
     fixedRowHeight: number;
   };
+  /** Сообщение, отображаемое при отсутствии совпадений в строках после применения фильтра */
+  emptyMessage?: React.ReactNode;
 }
 
 export const Table: React.FC<TableProps> = ({
@@ -233,6 +246,7 @@ export const Table: React.FC<TableProps> = ({
   disableColumnResize = false,
   showLastRowUnderline = true,
   virtualScroll,
+  emptyMessage = 'Нет совпадений',
   ...props
 }) => {
   const checkboxDimension = dimension === 's' || dimension === 'm' ? 's' : 'm';
@@ -353,8 +367,9 @@ export const Table: React.FC<TableProps> = ({
       ids[row.id] = value;
       return ids;
     }, {});
-    onRowSelectionChange?.(idsMap);
+    onRowSelectionChange?.(idsMap, id);
   }
+
   function handleCheckboxClick(e: React.MouseEvent<HTMLElement>) {
     // клик по чекбоксу не должен вызывать событие клика по строке
     e.stopPropagation();
@@ -416,7 +431,6 @@ export const Table: React.FC<TableProps> = ({
       cellAlign = 'left',
       sortable = false,
       sort,
-      sticky = false,
       renderFilter,
       renderFilterIcon,
       onFilterMenuClickOutside,
@@ -429,20 +443,25 @@ export const Table: React.FC<TableProps> = ({
     return (
       <HeaderCell
         key={`head_${name}`}
+        dimension={dimension}
         style={{ width: width, minWidth: width }}
-        data-cellalign={cellAlign}
-        data-sort={sort || 'initial'}
-        data-sticky={sticky}
         className="th"
         ref={cellRef}
       >
-        <HeaderCellContent>
-          <HeaderCellTitle onClick={sortable ? () => handleSort(name, sort || 'initial') : undefined}>
-            <TitleContent sortable={sortable}>
+        <HeaderCellContent cellAlign={cellAlign}>
+          <HeaderCellTitle
+            sort={sort || 'initial'}
+            onClick={sortable ? () => handleSort(name, sort || 'initial') : undefined}
+          >
+            <TitleContent dimension={dimension} sortable={sortable}>
               <Title lineClamp={headerLineClamp}>{title}</Title>
-              {extraText && <ExtraText lineClamp={headerExtraLineClamp}>{extraText}</ExtraText>}
+              {extraText && (
+                <ExtraText dimension={dimension} lineClamp={headerExtraLineClamp}>
+                  {extraText}
+                </ExtraText>
+              )}
             </TitleContent>
-            {sortable && <SortIcon width={iconSize} height={iconSize} />}
+            {sortable && <SortIcon sort={sort || 'initial'} width={iconSize} height={iconSize} />}
           </HeaderCellTitle>
           <HeaderCellSpacer width={renderFilter ? spacer : `${parseInt(spacer) - parseInt(defaultSpacer)}px`} />
           {renderFilter && (
@@ -465,6 +484,7 @@ export const Table: React.FC<TableProps> = ({
             onChange={handleResizeChange}
             disabled={disableColumnResize}
             resizerState={resizerState}
+            dimension={dimension}
           />
         )}
         {index === cols.length - 1 && showDividerForLastColumn && (
@@ -474,6 +494,7 @@ export const Table: React.FC<TableProps> = ({
             onChange={handleResizeChange}
             disabled={disableColumnResize}
             resizerState={resizerState}
+            dimension={dimension}
           />
         )}
       </HeaderCell>
@@ -482,7 +503,12 @@ export const Table: React.FC<TableProps> = ({
 
   const renderBodyCell = (row: TableRow, col: Column) => {
     return (
-      <Cell key={`${row.id}_${col.name}`} style={{ width: col.width || DEFAULT_COLUMN_WIDTH }} className="td">
+      <Cell
+        key={`${row.id}_${col.name}`}
+        dimension={dimension}
+        style={{ width: col.width || DEFAULT_COLUMN_WIDTH }}
+        className="td"
+      >
         {renderCell ? (
           renderCell(row, col.name)
         ) : (
@@ -499,19 +525,21 @@ export const Table: React.FC<TableProps> = ({
         onDoubleClick={() => handleRowDoubleClick(row.id)}
         key={`row_${row.id}`}
         underline={(index === rowList.length - 1 && showLastRowUnderline) || index < rowList.length - 1}
-        data-expanded={row.expanded}
-        data-selected={!!row.selected}
-        data-disabled={!!row.disabled}
         disabled={!!row.disabled}
-        data-error={!!row.error}
-        data-success={!!row.success}
+        dimension={dimension}
         className={`tr ${row.className}`}
       >
-        <SimpleRow className="tr-simple">
+        <SimpleRow
+          className="tr-simple"
+          selected={!!row.selected}
+          disabled={!!row.disabled}
+          error={!!row.error}
+          success={!!row.success}
+        >
           {(displayRowSelectionColumn || displayRowExpansionColumn || stickyColumns.length > 0) && (
             <StickyWrapper>
               {displayRowExpansionColumn && (
-                <ExpandCell>
+                <ExpandCell dimension={dimension}>
                   {row.expandedRowRender && (
                     <ExpandIconWrapper>
                       <ExpandIcon
@@ -525,7 +553,7 @@ export const Table: React.FC<TableProps> = ({
                 </ExpandCell>
               )}
               {displayRowSelectionColumn && (
-                <CheckboxCell className="td_checkbox">
+                <CheckboxCell dimension={dimension} className="td_checkbox">
                   <Checkbox
                     disabled={row.disabled || row.checkboxDisabled}
                     dimension={checkboxDimension}
@@ -541,7 +569,9 @@ export const Table: React.FC<TableProps> = ({
           {cols.map((col) => (col.sticky ? null : renderBodyCell(row, col)))}
           <Filler />
         </SimpleRow>
-        {row.overflowMenuRender && <OverflowMenu tableWidth={tableWidth} row={row} />}
+        {(row.overflowMenuRender || row.actionRender) && (
+          <OverflowMenu dimension={dimension} tableWidth={tableWidth} row={row} />
+        )}
         {row.expandedRowRender && (
           <ExpandedRow opened={row.expanded} contentMaxHeight="90vh" className="tr-expanded">
             <ExpandedRowContent>{row.expandedRowRender(row)}</ExpandedRowContent>
@@ -551,22 +581,41 @@ export const Table: React.FC<TableProps> = ({
     );
   };
 
+  const renderBody = () => {
+    if (rowList.length === 0) {
+      return (
+        <ScrollTableBody ref={scrollBodyRef} className="tbody">
+          <Row underline={showLastRowUnderline} dimension={dimension} className="tr">
+            <EmptyMessage dimension={dimension}>{emptyMessage}</EmptyMessage>
+          </Row>
+        </ScrollTableBody>
+      );
+    }
+    return virtualScroll ? (
+      <VirtualBody
+        height={bodyHeight}
+        rowList={rowList}
+        childHeight={virtualScroll.fixedRowHeight}
+        renderRow={renderRow}
+        ref={scrollBodyRef}
+        className="tbody"
+      />
+    ) : (
+      <ScrollTableBody ref={scrollBodyRef} className="tbody">
+        {rowList.map((row, index) => renderRow(row, index))}
+      </ScrollTableBody>
+    );
+  };
+
   return (
-    <TableContainer
-      ref={tableRef}
-      data-dimension={dimension}
-      data-shadow={false}
-      data-verticalscroll={verticalScroll}
-      {...props}
-      className={`table ${props.className}`}
-    >
-      <HeaderWrapper greyHeader={greyHeader} data-greyheader={greyHeader}>
-        <Header ref={headerRef} className="tr" data-underline={true}>
+    <TableContainer ref={tableRef} data-shadow={false} {...props} className={`table ${props.className}`}>
+      <HeaderWrapper greyHeader={greyHeader} data-verticalscroll={verticalScroll}>
+        <Header dimension={dimension} ref={headerRef} className="tr">
           {(displayRowSelectionColumn || displayRowExpansionColumn || stickyColumns.length > 0) && (
-            <StickyWrapper>
-              {displayRowExpansionColumn && <ExpandCell />}
+            <StickyWrapper greyHeader={greyHeader}>
+              {displayRowExpansionColumn && <ExpandCell dimension={dimension} />}
               {displayRowSelectionColumn && (
-                <CheckboxCell className="th_checkbox">
+                <CheckboxCell dimension={dimension} className="th_checkbox">
                   <Checkbox
                     dimension={checkboxDimension}
                     checked={allRowsChecked || someRowsChecked || headerCheckboxChecked}
@@ -583,20 +632,7 @@ export const Table: React.FC<TableProps> = ({
           <Filler />
         </Header>
       </HeaderWrapper>
-      {virtualScroll ? (
-        <VirtualBody
-          height={bodyHeight}
-          rowList={rowList}
-          childHeight={virtualScroll.fixedRowHeight}
-          renderRow={renderRow}
-          ref={scrollBodyRef}
-          className="tbody"
-        />
-      ) : (
-        <ScrollTableBody ref={scrollBodyRef} className="tbody">
-          {rowList.map((row, index) => renderRow(row, index))}
-        </ScrollTableBody>
-      )}
+      {renderBody()}
     </TableContainer>
   );
 };

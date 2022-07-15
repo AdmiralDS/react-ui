@@ -2,8 +2,7 @@ import React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import styled, { ThemeProvider } from 'styled-components';
-import { NumberInput } from '#src/components/input/NumberInput';
-import { clearValue } from '#src/components/input/NumberInput';
+import { clearValue, NumberInput } from '#src/components/input/NumberInput';
 import { Theme } from '#src/components/themes';
 
 const Desc = styled.div`
@@ -154,8 +153,8 @@ const Template3: ComponentStory<typeof NumberInput> = (args) => {
 };
 
 const Template4: ComponentStory<typeof NumberInput> = () => {
-  const [value1, setValue1] = React.useState<string | undefined>('From 50.00 $');
-  const [value2, setValue2] = React.useState<string | undefined>('1 минута');
+  const [value1, setValue1] = React.useState<string | undefined>('50.00');
+  const [value2, setValue2] = React.useState<string | undefined>('1');
   const [suffix, setSuffix] = React.useState('минута');
 
   function declOfNum(n: number, text_forms: Array<string>) {

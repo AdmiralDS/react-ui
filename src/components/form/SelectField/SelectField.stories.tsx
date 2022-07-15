@@ -155,6 +155,7 @@ const SimpleTemplate: ComponentStory<typeof SelectField> = (props) => {
     setSelectValue(e.target.value);
     props.onChange?.(e);
   };
+
   function swapBorder(theme: Theme): Theme {
     theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
     return theme;

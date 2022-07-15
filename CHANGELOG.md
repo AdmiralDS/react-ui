@@ -2,6 +2,55 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.6.0](https://github.com/AdmiralDS/react-ui/compare/v1.5.2...v1.6.0) (2022-07-12)
+
+
+### Features
+
+* **Calendar:** calendar has fixed height ([41a3d43](https://github.com/AdmiralDS/react-ui/commit/41a3d43dcfdbba902fd6cffad5ba537ae197b627))
+* **DropdownProvider:** add DropdownProvider component to handle with multiple dropdowns clickoutside ([df69f80](https://github.com/AdmiralDS/react-ui/commit/df69f80f3ac8aeb1c2a322d139ff53ee45ffb08d))
+
+
+### Bug Fixes
+
+* **Select:** add props for custom messages on loading and empty ([4b27139](https://github.com/AdmiralDS/react-ui/commit/4b27139094420038c37a2e7df766148cd2f22e66))
+* **Select:** when select component is out of visible aria drop option container must settle with its position ([93d663e](https://github.com/AdmiralDS/react-ui/commit/93d663e09a99ad147fd28565815b9a2066046022))
+* **Table:** reduce some unneccesary data attributes ([b3c9245](https://github.com/AdmiralDS/react-ui/commit/b3c9245eb4765594673980e5a680d6e80200d421))
+
+### [1.5.2](https://github.com/AdmiralDS/react-ui/compare/v1.5.1...v1.5.2) (2022-07-06)
+
+
+### Bug Fixes
+
+* **DateField:** id must be populated on label when set on component ([83d4153](https://github.com/AdmiralDS/react-ui/commit/83d41537195d106880bd94baf84c331e1f8a6fdd))
+* **NumberInput:** add recalculation on fonts loading ([eb871e5](https://github.com/AdmiralDS/react-ui/commit/eb871e59622fb1ff8717c597c27b9ae9b0dc8052))
+
+### [1.5.1](https://github.com/AdmiralDS/react-ui/compare/v1.5.0...v1.5.1) (2022-07-04)
+
+
+### Bug Fixes
+
+* chrome 84, inset css rule is not supported ([7d7a21f](https://github.com/AdmiralDS/react-ui/commit/7d7a21fac63213a4250fd23cfd3abd6d753d56cd))
+* **TabMenu:** fix active button tab color ([8e4617b](https://github.com/AdmiralDS/react-ui/commit/8e4617bebcbcb4fe242baae4ec777e7275efbc8b))
+
+## [1.5.0](https://github.com/AdmiralDS/react-ui/compare/v1.4.2...v1.5.0) (2022-06-29)
+
+
+### Features
+
+* **DropMenu:** add width prop ([6a3571f](https://github.com/AdmiralDS/react-ui/commit/6a3571fb4244845237d4f96ee95fcf531049fc1d))
+* **MultiButton:** use new DropMenu instead of Dropdown ([94e9784](https://github.com/AdmiralDS/react-ui/commit/94e9784d93ae676f3ef20093347847bc46277b4f))
+* **SliderInput:** add opportunity to customize labels for slider marks ([9c726ee](https://github.com/AdmiralDS/react-ui/commit/9c726eeb1c619b18d5ae9d1390535b5a03eae67a))
+
+
+### Bug Fixes
+
+* **Breadcrumbs:** fix bug with dimension ([e19e12b](https://github.com/AdmiralDS/react-ui/commit/e19e12b630ba67751727b4a7f5dc645487dc26f3))
+* **MenuButton:** add menuWidth and menuMaxHeight ([34646db](https://github.com/AdmiralDS/react-ui/commit/34646dbe1773c0cddf0946a482f6274006917ec6))
+* **NumberInput:** fix bug with copied value and precision 0 ([1c78d10](https://github.com/AdmiralDS/react-ui/commit/1c78d1034aca6268eaf3c51297f2062b4a344d70))
+
+### [1.4.2](https://github.com/AdmiralDS/react-ui/compare/v1.4.1...v1.4.2) (2022-06-28)
+
 ### [1.4.1](https://github.com/AdmiralDS/react-ui/compare/v1.4.0...v1.4.1) (2022-06-28)
 
 

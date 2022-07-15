@@ -1,9 +1,9 @@
-import type { FC, HTMLAttributes } from 'react';
-import React, { ChangeEvent, KeyboardEvent, MouseEvent } from 'react';
+import type { FC, HTMLAttributes, ChangeEvent, KeyboardEvent, MouseEvent } from 'react';
+import * as React from 'react';
 import styled from 'styled-components';
-import { SelectTreeNode, SelectTreeNodeProps, Dimension } from '#src/components/SelectTree/SelectTreeNode';
+import { Dimension, SelectTreeNode, SelectTreeNodeProps } from '#src/components/SelectTree/SelectTreeNode';
 import { keyboardKey } from '#src/components/common/keyboardKey';
-import { updateNodeStatus, checkParent, setNodeStatus } from '#src/components/SelectTree/utils';
+import { checkParent, setNodeStatus, updateNodeStatus } from '#src/components/SelectTree/utils';
 
 const TreeItem = styled.ul`
   list-style: none;

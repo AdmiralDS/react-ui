@@ -248,19 +248,21 @@ export const Range = ({
   );
 
   return (
-    <Wrapper data-dimension={dimension} data-disabled={disabled} {...props}>
-      <TrackWrapper onTouchStart={onTrackClick} onMouseDown={onTrackClick}>
+    <Wrapper data-disabled={disabled} {...props}>
+      <TrackWrapper dimension={dimension} onTouchStart={onTrackClick} onMouseDown={onTrackClick}>
         <Track>
           <FilledTrack ref={filledRef} animation={animation} />
           <DefaultTrack ref={trackRef}>
-            <Thumb ref={sliderRef} animation={animation}>
+            <Thumb ref={sliderRef} animation={animation} dimension={dimension}>
               <ThumbCircle
+                dimension={dimension}
                 onTouchStart={(e) => onSliderClick(e, 'first')}
                 onMouseDown={(e) => onSliderClick(e, 'first')}
               />
             </Thumb>
-            <Thumb ref={slider2Ref} animation={animation}>
+            <Thumb ref={slider2Ref} animation={animation} dimension={dimension}>
               <ThumbCircle
+                dimension={dimension}
                 onTouchStart={(e) => onSliderClick(e, 'second')}
                 onMouseDown={(e) => onSliderClick(e, 'second')}
               />

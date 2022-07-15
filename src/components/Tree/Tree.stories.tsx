@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Tree } from '#src/components/Tree';
-import { TreeNode, RenderOptionProps, TreeItemProps } from '#src/components/Tree/TreeNode';
+import { RenderOptionProps, TreeItemProps, TreeNode } from '#src/components/Tree/TreeNode';
 import { withDesign } from 'storybook-addon-designs';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { T } from '#src/components/T';

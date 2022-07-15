@@ -1,7 +1,5 @@
 import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
-import { act } from 'react-dom/test-utils';
-import userEvent from '@testing-library/user-event';
 import { ThemeProvider } from 'styled-components';
 
 import { MenuButton } from '../MenuButton';

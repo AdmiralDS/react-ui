@@ -25,6 +25,8 @@ export interface SliderProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onCha
   thousand?: string;
   /** Массив отметок */
   tickMarks?: number[];
+  /** Render колбек для отрисовки кастомизированных подписей к отметкам слайдера */
+  renderTickMark?: (mark: string) => React.ReactNode;
   /** Отключение компонента */
   disabled?: boolean;
   /** Размер компонента */
@@ -39,6 +41,7 @@ export const Slider = ({
   thousand = ' ',
   value = 0,
   onChange,
+  renderTickMark,
   tickMarks: points,
   disabled = false,
   step = 1,
@@ -231,8 +234,8 @@ export const Slider = ({
   };
 
   return (
-    <Wrapper data-dimension={dimension} data-disabled={disabled} {...props}>
-      <TrackWrapper onTouchStart={onTrackClick} onMouseDown={onTrackClick}>
+    <Wrapper data-disabled={disabled} {...props}>
+      <TrackWrapper dimension={dimension} onTouchStart={onTrackClick} onMouseDown={onTrackClick}>
         <Track>
           <FilledTrack ref={filledRef} animation={animation} />
           <DefaultTrack ref={trackRef}>
@@ -245,11 +248,13 @@ export const Slider = ({
                 precision={precision}
                 thousand={thousand}
                 onPointClick={onPointClick}
+                renderTickMark={renderTickMark}
               />
             }
             <Thumb
               ref={sliderRef}
               animation={animation}
+              dimension={dimension}
               role="slider"
               tabIndex={disabled ? -1 : 0}
               aria-valuenow={sliderValue}
@@ -257,7 +262,7 @@ export const Slider = ({
               aria-valuemax={maxValue}
               onKeyDown={handleKeyDown}
             >
-              <ThumbCircle onTouchStart={onSliderClick} onMouseDown={onSliderClick} />
+              <ThumbCircle dimension={dimension} onTouchStart={onSliderClick} onMouseDown={onSliderClick} />
             </Thumb>
           </DefaultTrack>
         </Track>

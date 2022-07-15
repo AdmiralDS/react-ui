@@ -56,6 +56,12 @@ export default {
         options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
       },
     },
+    loading: {
+      control: { type: 'boolean' },
+    },
+    disabled: {
+      control: { type: 'boolean' },
+    },
   },
 } as ComponentMeta<typeof DropMenu>;
 
@@ -108,6 +114,7 @@ const SimpleTemplate: ComponentStory<typeof DropMenu> = (args) => {
       ),
     }));
   }, [args.dimension]);
+
   function swapBorder(theme: Theme): Theme {
     theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
@@ -155,54 +162,58 @@ const StyledMenuItem = styled(MenuItem)`
   align-items: flex-start;
 `;
 
-const TemplateWithCards: ComponentStory<typeof DropMenu> = (args) => {
-  const category = [
-    {
-      name: 'Категория 1',
-      id: '1',
-      content: [
-        {
-          id: '2',
-          label: 'Номер Карты /****45',
-          value: 1,
-        },
-        {
-          id: '3',
-          label: 'Номер Карты /****75',
-          value: 2,
-        },
-        { id: '4', label: 'Номер Карты /****22', value: 3 },
-        {
-          id: '5',
-          label: 'Номер Карты /****33',
-          value: 4,
-        },
-      ],
-    },
-    {
-      name: 'Категория 2',
-      id: '9',
-      content: [
-        {
-          id: '10',
-          label: 'Номер Карты /****21',
-          value: 5,
-        },
-        {
-          id: '11',
-          label: 'Номер Карты /****35',
-          value: 6,
-        },
-        { id: '12', label: 'Номер Карты /****39', value: 7 },
-        {
-          id: '13',
-          label: 'Номер Карты /****41',
-          value: 8,
-        },
-      ],
-    },
-  ];
+const StyledDropMenu = styled(DropMenu)`
+  min-width: 400px;
+`;
 
+const category = [
+  {
+    name: 'Категория 1',
+    id: '1',
+    content: [
+      {
+        id: '2',
+        label: 'Номер Карты /****45',
+        value: 1,
+      },
+      {
+        id: '3',
+        label: 'Номер Карты /****75',
+        value: 2,
+      },
+      { id: '4', label: 'Номер Карты /****22', value: 3 },
+      {
+        id: '5',
+        label: 'Номер Карты /****33',
+        value: 4,
+      },
+    ],
+  },
+  {
+    name: 'Категория 2',
+    id: '9',
+    content: [
+      {
+        id: '10',
+        label: 'Номер Карты /****21',
+        value: 5,
+      },
+      {
+        id: '11',
+        label: 'Номер Карты /****35',
+        value: 6,
+      },
+      { id: '12', label: 'Номер Карты /****39', value: 7 },
+      {
+        id: '13',
+        label: 'Номер Карты /****41',
+        value: 8,
+      },
+    ],
+  },
+];
+
+const TemplateWithCards: ComponentStory<typeof DropMenu> = (args) => {
   const model = React.useMemo(() => {
     return category.reduce((acc: any, item: any) => {
       acc.push({
@@ -238,7 +249,7 @@ const TemplateWithCards: ComponentStory<typeof DropMenu> = (args) => {
   return (
     <>
       <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <DropMenu
+        <StyledDropMenu
           {...args}
           items={model}
           onChange={(id) => {
@@ -253,10 +264,11 @@ const TemplateWithCards: ComponentStory<typeof DropMenu> = (args) => {
           onSelectItem={setSelected}
           active={active}
           onActivateItem={setActive}
-          renderContentProp={({ buttonRef, handleKeyDown, handleClick }) => {
+          renderContentProp={({ buttonRef, handleKeyDown, handleClick, statusIcon }) => {
             return (
               <Button ref={buttonRef as React.Ref<HTMLButtonElement>} onKeyDown={handleKeyDown} onClick={handleClick}>
                 Нажми
+                {statusIcon}
               </Button>
             );
           }}

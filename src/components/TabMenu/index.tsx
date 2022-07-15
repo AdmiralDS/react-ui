@@ -6,10 +6,10 @@ import { MenuItem, RenderOptionProps } from '#src/components/MenuItem';
 
 import measureTab from '#src/components/TabMenu/measureTab';
 import {
+  StyledOverflowMenu,
   Tab,
   TabContent,
   TabContentWrapper,
-  StyledOverflowMenu,
   TabsWrapper,
   Underline,
   Wrapper,

@@ -22,6 +22,7 @@ export * from './components/Field';
 export * from './components/Spinner';
 export * from './components/DropMenu';
 export * from './components/DropDownMenu';
+export * from './components/DropdownContainer';
 export * from './components/DropDownItem';
 export * from './components/Tag';
 export * from './components/Tags';
@@ -61,5 +62,7 @@ export * from './components/common/dom/changeInputData';
 export * from './components/SelectTree';
 export * from './components/Tree';
 export * from './components/Table';
+export * from './components/InputIconButton';
 
 export { FontsVTBGroup } from './components/FontsVTBGroup';
+export { DropdownProvider } from './components/DropdownProvider';

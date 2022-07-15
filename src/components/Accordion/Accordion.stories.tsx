@@ -5,6 +5,7 @@ import { FieldSet } from '#src/components/form';
 import { RadioButton } from '#src/components/RadioButton';
 import { SelectField as Select } from '#src/components/form/SelectField';
 import { Option } from '#src/components/input/Select';
+import { T } from '#src/components/T';
 
 import { Accordion, AccordionItem } from '.';
 
@@ -147,7 +148,9 @@ const Template1: ComponentStory<typeof Accordion> = (args) => {
 const Template2: ComponentStory<typeof Accordion> = () => {
   return (
     <>
-      <Desc style={{ textDecoration: 'underline' }}>Размер l</Desc>
+      <T font="Body/Body 1 Long" as="div">
+        Размер l
+      </T>
       <Separator />
       <Accordion>
         <AccordionItem title="Первый пункт">Контент первого пункта</AccordionItem>
@@ -163,7 +166,9 @@ const Template2: ComponentStory<typeof Accordion> = () => {
         </AccordionItem>
       </Accordion>
       <Separator />
-      <Desc style={{ textDecoration: 'underline' }}>Размер m</Desc>
+      <T font="Body/Body 1 Long" as="div">
+        Размер m
+      </T>
       <Separator />
       <Accordion dimension="m">
         <AccordionItem title="Первый пункт">Контент первого пункта</AccordionItem>
