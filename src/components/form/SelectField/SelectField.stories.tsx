@@ -60,10 +60,6 @@ export default {
       control: { type: 'boolean' },
     },
 
-    displayStatusIcon: {
-      control: { type: 'boolean' },
-    },
-
     displayClearIcon: {
       control: { type: 'boolean' },
     },

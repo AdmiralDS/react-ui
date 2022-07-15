@@ -21,7 +21,6 @@ import {
   StringValueWrapper,
   ValueWrapper,
 } from './styled';
-import { StatusIcon } from '../StatusIcon';
 import { preventDefault, scrollToNotVisibleELem } from './utils';
 import { changeInputData } from '#src/components/common/dom/changeInputData';
 import { useClickOutside } from '#src/components/common/hooks/useClickOutside';
@@ -72,8 +71,6 @@ export interface SelectProps extends Omit<React.InputHTMLAttributes<HTMLSelectEl
 
   /** Значение по умолчанию для некотролируемого селекта */
   defaultValue?: string | string[];
-
-  displayStatusIcon?: boolean;
 
   displayClearIcon?: boolean;
 
@@ -137,7 +134,6 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       multiple = false,
       defaultHighlighted = true,
       showCheckbox = true,
-      displayStatusIcon = false,
       displayClearIcon = false,
       onClearIconClick,
       loadingMessage = <DropDownText>Поиск совпадений</DropDownText>,
@@ -588,7 +584,6 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
             <ClearIcon id="searchSelectClearIcon" onClick={handleOnClear} aria-hidden />
           )}
           {icons}
-          {displayStatusIcon && <StatusIcon status={status} aria-hidden />}
           {!readOnly && (
             <OpenStatusButton
               $isOpen={isSearchPanelOpen}
