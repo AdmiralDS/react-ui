@@ -37,10 +37,10 @@ Object {
 .c0:focus-visible:before {
   content: '';
   position: absolute;
-  top: -4px;
-  left: -4px;
-  bottom: -4px;
-  right: -4px;
+  top: 2px;
+  bottom: 2px;
+  left: 2px;
+  right: 2px;
   border: 2px solid #0062FF;
   border-radius: 4px;
 }
@@ -147,10 +147,10 @@ Object {
 .c0:focus-visible:before {
   content: '';
   position: absolute;
-  top: -4px;
-  left: -4px;
-  bottom: -4px;
-  right: -4px;
+  top: 2px;
+  bottom: 2px;
+  left: 2px;
+  right: 2px;
   border: 2px solid #0062FF;
   border-radius: 4px;
 }

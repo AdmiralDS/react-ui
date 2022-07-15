@@ -115,7 +115,7 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items, dimension = 'l'
     const hiddenItems = items.filter((_, index) => !visibilityMap[index]);
     return hiddenItems.length ? (
       <OverflowItem>
-        <MenuButton options={hiddenItems} aria-label="" />
+        <MenuButton options={hiddenItems} dimension={dimension === 'l' ? 'm' : 's'} aria-label="" />
         <Separator width={iconSize} height={iconSize} aria-hidden />
       </OverflowItem>
     ) : null;
