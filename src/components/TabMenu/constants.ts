@@ -1,8 +1,5 @@
 export type Dimension = 'l' | 'm';
 
-export const OVERFLOW_SIZE_L = 48;
-export const OVERFLOW_SIZE_M = 40;
-export const OVERFLOW_MARGIN_LEFT = 4;
 export const TAB_HEIGHT_L = 48;
 export const TAB_HEIGHT_M = 40;
 export const LINE_HEIGHT = '2px';
