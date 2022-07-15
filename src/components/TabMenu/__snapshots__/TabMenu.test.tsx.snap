@@ -129,7 +129,7 @@ Object {
   height: 0 !important;
 }
 
-.c11 {
+.c12 {
   position: absolute;
   bottom: 0;
   display: -webkit-box;
@@ -266,7 +266,7 @@ Object {
   fill: #B1B5BB;
 }
 
-.c10 {
+.c11 {
   position: relative;
   box-sizing: border-box;
   display: -webkit-inline-box;
@@ -299,7 +299,7 @@ Object {
   -webkit-tap-highlight-color: transparent;
 }
 
-.c10:focus:not(:active):before {
+.c11:focus:not(:active):before {
   position: absolute;
   content: '';
   border: 2px solid #0062FF;
@@ -309,12 +309,12 @@ Object {
   right: 0;
 }
 
-.c10:focus,
-.c10 > .c3 {
+.c11:focus,
+.c11 > .c3 {
   outline: none;
 }
 
-.c10 svg {
+.c11 svg {
   display: inline-block;
   -webkit-flex: 1 0 auto;
   -ms-flex: 1 0 auto;
@@ -324,37 +324,37 @@ Object {
   margin-right: 8px;
 }
 
-.c10 svg *[fill^='#'] {
+.c11 svg *[fill^='#'] {
   fill: #74777F;
 }
 
-.c10 [data-badge] {
+.c11 [data-badge] {
   margin-left: 8px;
 }
 
-.c10:hover:not(:disabled) {
+.c11:hover:not(:disabled) {
   background: #0000000D;
 }
 
-.c10:active:not(:disabled) {
+.c11:active:not(:disabled) {
   color: #0062FF;
 }
 
-.c10:active:not(:disabled) *[fill^='#'] {
+.c11:active:not(:disabled) *[fill^='#'] {
   fill: #0062FF;
 }
 
-.c10:active:not(:disabled) [data-badge] {
+.c11:active:not(:disabled) [data-badge] {
   background: #0062FF;
   color: #FFFFFF;
 }
 
-.c10:disabled {
+.c11:disabled {
   color: #B1B5BB;
   cursor: default;
 }
 
-.c10:disabled *[fill^='#'] {
+.c11:disabled *[fill^='#'] {
   fill: #B1B5BB;
 }
 
@@ -367,10 +367,23 @@ Object {
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  margin-left: 0px;
+}
+
+.c10 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-left: -42px;
 }
 
 .c7 {
-  display: none;
+  visibility: hidden;
   margin-left: 6px;
 }
 
@@ -438,12 +451,12 @@ Object {
           </button>
         </div>
         <div
-          class="c1"
+          class="c10"
           data-number="1"
         >
           <button
             aria-selected="false"
-            class="c10 tag"
+            class="c11 tag"
             id="2"
             role="tab"
             tabindex="-1"
@@ -481,12 +494,12 @@ Object {
           </button>
         </div>
         <div
-          class="c1"
+          class="c10"
           data-number="2"
         >
           <button
             aria-selected="false"
-            class="c10 tag"
+            class="c11 tag"
             id="3"
             role="tab"
             tabindex="-1"
@@ -506,7 +519,7 @@ Object {
         </div>
         <div
           aria-hidden="true"
-          class="c11"
+          class="c12"
         />
       </div>
     </div>
@@ -637,7 +650,7 @@ Object {
   height: 0 !important;
 }
 
-.c11 {
+.c12 {
   position: absolute;
   bottom: 0;
   display: -webkit-box;
@@ -774,7 +787,7 @@ Object {
   fill: #B1B5BB;
 }
 
-.c10 {
+.c11 {
   position: relative;
   box-sizing: border-box;
   display: -webkit-inline-box;
@@ -807,7 +820,7 @@ Object {
   -webkit-tap-highlight-color: transparent;
 }
 
-.c10:focus:not(:active):before {
+.c11:focus:not(:active):before {
   position: absolute;
   content: '';
   border: 2px solid #0062FF;
@@ -817,12 +830,12 @@ Object {
   right: 0;
 }
 
-.c10:focus,
-.c10 > .c3 {
+.c11:focus,
+.c11 > .c3 {
   outline: none;
 }
 
-.c10 svg {
+.c11 svg {
   display: inline-block;
   -webkit-flex: 1 0 auto;
   -ms-flex: 1 0 auto;
@@ -832,37 +845,37 @@ Object {
   margin-right: 8px;
 }
 
-.c10 svg *[fill^='#'] {
+.c11 svg *[fill^='#'] {
   fill: #74777F;
 }
 
-.c10 [data-badge] {
+.c11 [data-badge] {
   margin-left: 8px;
 }
 
-.c10:hover:not(:disabled) {
+.c11:hover:not(:disabled) {
   background: #0000000D;
 }
 
-.c10:active:not(:disabled) {
+.c11:active:not(:disabled) {
   color: #0062FF;
 }
 
-.c10:active:not(:disabled) *[fill^='#'] {
+.c11:active:not(:disabled) *[fill^='#'] {
   fill: #0062FF;
 }
 
-.c10:active:not(:disabled) [data-badge] {
+.c11:active:not(:disabled) [data-badge] {
   background: #0062FF;
   color: #FFFFFF;
 }
 
-.c10:disabled {
+.c11:disabled {
   color: #B1B5BB;
   cursor: default;
 }
 
-.c10:disabled *[fill^='#'] {
+.c11:disabled *[fill^='#'] {
   fill: #B1B5BB;
 }
 
@@ -875,10 +888,23 @@ Object {
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  margin-left: 0px;
+}
+
+.c10 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-left: -42px;
 }
 
 .c7 {
-  display: none;
+  visibility: hidden;
   margin-left: 6px;
 }
 
@@ -945,12 +971,12 @@ Object {
         </button>
       </div>
       <div
-        class="c1"
+        class="c10"
         data-number="1"
       >
         <button
           aria-selected="false"
-          class="c10 tag"
+          class="c11 tag"
           id="2"
           role="tab"
           tabindex="-1"
@@ -988,12 +1014,12 @@ Object {
         </button>
       </div>
       <div
-        class="c1"
+        class="c10"
         data-number="2"
       >
         <button
           aria-selected="false"
-          class="c10 tag"
+          class="c11 tag"
           id="3"
           role="tab"
           tabindex="-1"
@@ -1013,7 +1039,7 @@ Object {
       </div>
       <div
         aria-hidden="true"
-        class="c11"
+        class="c12"
       />
     </div>
   </div>,
