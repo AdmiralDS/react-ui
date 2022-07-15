@@ -29,10 +29,13 @@ import {
   TableContainer,
   Title,
   TitleContent,
+  EmptyMessage,
 } from './style';
 import { VirtualBody } from './VirtualBody';
 import { OverflowMenu } from './OverflowMenu';
 import { getScrollbarSize } from '#src/components/common/dom/scrollbarUtil';
+
+export * from './RowAction';
 
 export const DEFAULT_COLUMN_WIDTH = 100;
 
@@ -125,6 +128,14 @@ export interface TableRow extends Record<RowId, React.ReactNode> {
    * Для таблицы с dimension='l' или dimension='xl' используется OverflowMenu c dimension='l'.
    */
   overflowMenuRender?: (row: any, onMenuOpen: () => void, onMenuClose: () => void) => React.ReactNode;
+  /** Функция рендера одиночного действия над строкой.
+   * Одиночное действие отображается в виде иконки при ховере на строку
+   * и располагается по правому краю строки в видимой области таблицы.
+   *
+   * В качестве результата функция должна возвращать компонент RowAction,
+   * внутрь которого нужно передать произвольную иконку для отображения действия.
+   */
+  actionRender?: (row: any) => React.ReactNode;
 }
 
 export interface TableProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -148,7 +159,7 @@ export interface TableProps extends React.HTMLAttributes<HTMLDivElement> {
    * idSelectionStatusMap - это объект, ключами которого являются id строк, чье состояние checked было изменено,
    * а значениями ключей - значение checked
    */
-  onRowSelectionChange?: (idSelectionStatusMap: IdSelectionStatusMap) => void;
+  onRowSelectionChange?: (idSelectionStatusMap: IdSelectionStatusMap, id?: RowId) => void;
   /** Колбек на раскрытие/свертывание строки (на нажатие по стрелке слева).
    * idSelectionStatusMap - это объект, ключами которого являются id строк, чье состояние expanded было изменено,
    * а значениями ключей - значение expanded
@@ -207,6 +218,8 @@ export interface TableProps extends React.HTMLAttributes<HTMLDivElement> {
      */
     fixedRowHeight: number;
   };
+  /** Сообщение, отображаемое при отсутствии совпадений в строках после применения фильтра */
+  emptyMessage?: React.ReactNode;
 }
 
 export const Table: React.FC<TableProps> = ({
@@ -233,6 +246,7 @@ export const Table: React.FC<TableProps> = ({
   disableColumnResize = false,
   showLastRowUnderline = true,
   virtualScroll,
+  emptyMessage = 'Нет совпадений',
   ...props
 }) => {
   const checkboxDimension = dimension === 's' || dimension === 'm' ? 's' : 'm';
@@ -353,7 +367,7 @@ export const Table: React.FC<TableProps> = ({
       ids[row.id] = value;
       return ids;
     }, {});
-    onRowSelectionChange?.(idsMap);
+    onRowSelectionChange?.(idsMap, id);
   }
 
   function handleCheckboxClick(e: React.MouseEvent<HTMLElement>) {
@@ -555,13 +569,41 @@ export const Table: React.FC<TableProps> = ({
           {cols.map((col) => (col.sticky ? null : renderBodyCell(row, col)))}
           <Filler />
         </SimpleRow>
-        {row.overflowMenuRender && <OverflowMenu dimension={dimension} tableWidth={tableWidth} row={row} />}
+        {(row.overflowMenuRender || row.actionRender) && (
+          <OverflowMenu dimension={dimension} tableWidth={tableWidth} row={row} />
+        )}
         {row.expandedRowRender && (
           <ExpandedRow opened={row.expanded} contentMaxHeight="90vh" className="tr-expanded">
             <ExpandedRowContent>{row.expandedRowRender(row)}</ExpandedRowContent>
           </ExpandedRow>
         )}
       </Row>
+    );
+  };
+
+  const renderBody = () => {
+    if (rowList.length === 0) {
+      return (
+        <ScrollTableBody ref={scrollBodyRef} className="tbody">
+          <Row underline={showLastRowUnderline} dimension={dimension} className="tr">
+            <EmptyMessage dimension={dimension}>{emptyMessage}</EmptyMessage>
+          </Row>
+        </ScrollTableBody>
+      );
+    }
+    return virtualScroll ? (
+      <VirtualBody
+        height={bodyHeight}
+        rowList={rowList}
+        childHeight={virtualScroll.fixedRowHeight}
+        renderRow={renderRow}
+        ref={scrollBodyRef}
+        className="tbody"
+      />
+    ) : (
+      <ScrollTableBody ref={scrollBodyRef} className="tbody">
+        {rowList.map((row, index) => renderRow(row, index))}
+      </ScrollTableBody>
     );
   };
 
@@ -590,20 +632,7 @@ export const Table: React.FC<TableProps> = ({
           <Filler />
         </Header>
       </HeaderWrapper>
-      {virtualScroll ? (
-        <VirtualBody
-          height={bodyHeight}
-          rowList={rowList}
-          childHeight={virtualScroll.fixedRowHeight}
-          renderRow={renderRow}
-          ref={scrollBodyRef}
-          className="tbody"
-        />
-      ) : (
-        <ScrollTableBody ref={scrollBodyRef} className="tbody">
-          {rowList.map((row, index) => renderRow(row, index))}
-        </ScrollTableBody>
-      )}
+      {renderBody()}
     </TableContainer>
   );
 };
