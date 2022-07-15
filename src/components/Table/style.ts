@@ -279,13 +279,12 @@ export const Title = styled.div<{ lineClamp: number }>`
 export const ExtraText = styled.div<{ dimension: TableProps['dimension']; lineClamp: number }>`
   position: relative;
   width: 100%;
-  // box-sizing: border-box;
   margin: 2px 0;
   ${extraTextStyle}
   ${({ lineClamp }) => (lineClamp === 1 ? singleLineTitle : multiLineTitle)}
 `;
 
-export const Row = styled.div<{ dimension: TableProps['dimension']; disabled: boolean; underline: boolean }>`
+export const Row = styled.div<{ dimension: TableProps['dimension']; underline: boolean; disabled?: boolean }>`
   display: flex;
   flex-direction: column;
   min-width: fit-content;
@@ -325,4 +324,14 @@ export const ExpandedRowContent = styled.div`
   display: flex;
   flex: 1 1 auto;
   padding: 0 12px 11px 12px;
+`;
+
+export const EmptyMessage = styled.div`
+  display: flex;
+  flex: 1 0 auto;
+  ${cellStyle};
+  justify-content: center;
+  margin: 2px 0;
+  overflow: hidden;
+  color: ${({ theme }) => theme.color['Neutral/Neutral 50']};
 `;
