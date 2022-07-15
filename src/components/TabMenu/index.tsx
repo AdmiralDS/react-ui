@@ -293,7 +293,7 @@ export const TabMenu: React.FC<TabMenuProps> = ({
         break;
     }
 
-    if (newFocusTarget) {
+    if (!openedMenu && newFocusTarget) {
       (newFocusTarget as HTMLElement).focus();
     }
   };
