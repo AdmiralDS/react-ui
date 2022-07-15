@@ -13,3 +13,5 @@ export const OVERFLOW_MENU_MARGIN_M = '4px';
 export const OVERFLOW_MENU_MARGIN_L = '6px';
 export const FOCUS_BORDER_OFFSET_M = '-4px';
 export const FOCUS_BORDER_OFFSET_L = '-6px';
+export const TAB_LEFT_OFFSET_L = -42;
+export const TAB_LEFT_OFFSET_M = -36;

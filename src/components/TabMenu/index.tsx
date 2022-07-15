@@ -386,8 +386,10 @@ export const TabMenu: React.FC<TabMenuProps> = ({
     return tabsWithRef.map((item: TabWithRefProps, index) => {
       const { id } = item;
       const tabNumber = getTabIndex(id);
+      const needsOffset = !mobile && tabNumber !== 0 && visibilityMap[tabNumber - 1];
+
       return (
-        <TabWrapper key={id} data-number={index}>
+        <TabWrapper key={id} data-number={index} $needsOffset={needsOffset} dimension={dimension}>
           {renderTab(item)}
           {mobile || tabNumber === tabsWithRef.length - 1 ? null : renderOverflowMenu(id)}
         </TabWrapper>

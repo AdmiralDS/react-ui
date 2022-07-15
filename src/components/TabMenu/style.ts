@@ -18,6 +18,8 @@ import {
   OVERFLOW_MENU_MARGIN_M,
   FOCUS_BORDER_OFFSET_L,
   FOCUS_BORDER_OFFSET_M,
+  TAB_LEFT_OFFSET_M,
+  TAB_LEFT_OFFSET_L,
 } from '#src/components/TabMenu/constants';
 
 export const IconWrapper = styled.div<{ dimension: Dimension }>`
@@ -160,9 +162,15 @@ export const Tab = styled.button<{ dimension: Dimension; selected: boolean }>`
   }
 `;
 
-export const TabWrapper = styled.div`
+const getOffset = (dimension: Dimension) => {
+  return dimension === 'l' ? TAB_LEFT_OFFSET_L : TAB_LEFT_OFFSET_M;
+};
+
+export const TabWrapper = styled.div<{ $needsOffset: boolean; dimension: Dimension }>`
   display: flex;
   align-items: center;
+
+  margin-left: ${({ $needsOffset, dimension }) => ($needsOffset ? getOffset(dimension) : 0)}px;
 `;
 
 export const StyledOverflowMenu = styled(OverflowMenu)<{
@@ -170,7 +178,7 @@ export const StyledOverflowMenu = styled(OverflowMenu)<{
   isHidden?: boolean;
   dimension?: Dimension;
 }>`
-  display: ${({ isHidden }) => (isHidden ? 'none' : 'block')};
+  visibility: ${({ isHidden }) => (isHidden ? 'hidden' : 'visible')};
   margin-left: ${({ dimension }) => (dimension === 'l' ? OVERFLOW_MENU_MARGIN_L : OVERFLOW_MENU_MARGIN_M)};
 
   &:focus-visible {
