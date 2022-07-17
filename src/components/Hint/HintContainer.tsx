@@ -49,7 +49,7 @@ export const HintContainer = React.forwardRef<RefType, PropsType & React.HTMLAtt
 
     const { addDropdown, removeDropdown, dropdowns } = useDropdown(hintRef);
     const handleClickOutside = (e: any) => {
-      useDropdownsClickOutside(e, dropdowns) && hideHint();
+      if (useDropdownsClickOutside(e, dropdowns)) hideHint();
     };
     if (visibilityTrigger === 'click') {
       useClickOutside([hintRef, anchorElementRef], handleClickOutside);

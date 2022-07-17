@@ -83,7 +83,7 @@ export const Dropdown = React.forwardRef<HTMLDivElement, React.PropsWithChildren
 
     const { addDropdown, removeDropdown, dropdowns } = useDropdown(containerRef);
     const handleClickOutside = (e: Event) => {
-      useDropdownsClickOutside(e, dropdowns) && onClickOutside(e);
+      if (useDropdownsClickOutside(e, dropdowns)) onClickOutside(e);
     };
     useClickOutside([containerRef], handleClickOutside);
 
