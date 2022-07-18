@@ -41,3 +41,10 @@ export function useDropdown(dropdownRef: React.RefObject<HTMLElement>): IContext
 
   return { addDropdown, removeDropdown, dropdowns: childrenDropdowns };
 }
+
+/** Функция возращает true, если клик не произошёл ни в одном из дропдаунов и был вне их; иначе возвращает false */
+export const useDropdownsClickOutside = (e: Event, dropdowns: React.RefObject<HTMLElement>[]): boolean => {
+  return !dropdowns.some((element) => {
+    return element.current && element.current.contains(e.target as Element);
+  });
+};
