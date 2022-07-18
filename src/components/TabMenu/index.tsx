@@ -331,7 +331,7 @@ export const TabMenu: React.FC<TabMenuProps> = ({
         onOpen={() => setOpenedMenu(true)}
         onClose={() => setOpenedMenu(false)}
         alignSelf={alignSelf}
-        items={tabsForMenu}
+        items={overflowMenuHidden ? [] : tabsForMenu}
         selected={containsActiveTab(tabsForMenu) ? activeTab : undefined}
         dimension={dimension}
         isHidden={overflowMenuHidden}
