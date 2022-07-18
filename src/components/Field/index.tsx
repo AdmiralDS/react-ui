@@ -38,7 +38,7 @@ export const ExtraTextContainer = styled.div`
 
   text-align: left;
 
-  ${typography['Body/Body 2 Long']}
+  ${typography['Body/Body 2 Short']}
 
   color: ${(props) => props.theme.color['Neutral/Neutral 50']};
 
