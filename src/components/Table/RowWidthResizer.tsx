@@ -1,9 +1,10 @@
 import * as React from 'react';
 import styled from 'styled-components';
+import type { TableProps } from '#src/components/Table';
 
 const RESIZER_WIDTH = '17px';
 
-export const ResizerWrapper = styled.div<{ disabled: boolean }>`
+export const ResizerWrapper = styled.div<{ disabled: boolean; dimension: TableProps['dimension'] }>`
   position: absolute;
   right: -8px;
   z-index: 1;
@@ -16,16 +17,19 @@ export const ResizerWrapper = styled.div<{ disabled: boolean }>`
   box-sizing: border-box;
   cursor: ${({ disabled }) => (disabled ? 'pointer' : 'col-resize')};
 
-  padding: 12px 0 11px 0;
-  [data-dimension='s'] & {
-    padding: 8px 0 7px 0;
-  }
-  [data-dimension='l'] & {
-    padding: 14px 0 13px 0;
-  }
-  [data-dimension='xl'] & {
-    padding: 18px 0 17px 0;
-  }
+  padding: ${({ dimension }) => {
+    switch (dimension) {
+      case 's':
+        return '8px 0 7px 0';
+      case 'l':
+        return '14px 0 13px 0';
+      case 'xl':
+        return '18px 0 17px 0';
+      case 'm':
+      default:
+        return '12px 0 11px 0';
+    }
+  }};
 `;
 
 export const Resizer = styled.div`
@@ -40,9 +44,10 @@ export function RowWidthResizer(props: {
   width: number;
   disabled: boolean;
   resizerState: any;
+  dimension: TableProps['dimension'];
   onChange: (evt: { name: string; width: number; mouseUp: boolean }) => void;
 }) {
-  const { width: startWidth, name, disabled, resizerState, onChange } = props;
+  const { width: startWidth, name, disabled, resizerState, dimension, onChange } = props;
   const node = React.useRef(null);
   const [width, setWidth] = React.useState(startWidth);
   const [isTaken, setTaken] = React.useState(false);
@@ -99,7 +104,7 @@ export function RowWidthResizer(props: {
   };
 
   return (
-    <ResizerWrapper ref={node} disabled={disabled}>
+    <ResizerWrapper ref={node} disabled={disabled} dimension={dimension}>
       <Resizer />
     </ResizerWrapper>
   );

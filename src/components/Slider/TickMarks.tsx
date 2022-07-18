@@ -41,6 +41,7 @@ interface TickMarksProps {
   thousand?: string;
   tickMarks: number[];
   onPointClick: (e: any, value: number) => void;
+  renderTickMark?: (mark: string) => React.ReactNode;
 }
 
 export const TickMarks = ({
@@ -51,6 +52,7 @@ export const TickMarks = ({
   thousand = ' ',
   tickMarks,
   onPointClick,
+  renderTickMark,
 }: TickMarksProps) => {
   // filter items that fall into the range between minValue and maxValue
   const items = tickMarks.filter((d) => d >= minValue && d <= maxValue);
@@ -71,7 +73,11 @@ export const TickMarks = ({
               onPointClick(e, value);
             }}
           >
-            <Content style={style}>{fitToCurrency(value, precision, decimal, thousand)}</Content>
+            <Content style={style}>
+              {renderTickMark
+                ? renderTickMark(fitToCurrency(value, precision, decimal, thousand))
+                : fitToCurrency(value, precision, decimal, thousand)}
+            </Content>
           </Wrapper>
         );
       })}

@@ -1,11 +1,11 @@
 import type { HTMLAttributes } from 'react';
 import * as React from 'react';
-import { refSetter } from '#src/components/common/utils/refSetter';
 
 import { ItemProps } from '#src/components/MenuItem';
 import { DropMenu } from '#src/components/DropMenu';
 import { uid } from '#src/components/common/uid';
 import { Button } from '#src/components/Button';
+import { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 
 export type MenuButtonDimension = 'xl' | 'l' | 'm' | 's';
 export type MenuButtonAppearance = 'primary' | 'secondary' | 'ghost' | 'white';
@@ -33,6 +33,12 @@ export interface MenuButtonProps extends Omit<HTMLAttributes<HTMLButtonElement>,
   skeleton?: boolean;
   /** Выравнивание выпадающего меню относительно компонента https://developer.mozilla.org/en-US/docs/Web/CSS/align-self */
   alignSelf?: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
+  /**  Ширина меню */
+  menuWidth?: string;
+  /** Задает максимальную высоту меню */
+  menuMaxHeight?: string | number;
+  /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
+  dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
 }
 
 export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
@@ -50,6 +56,9 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
       items,
       selected,
       onChange,
+      menuWidth,
+      menuMaxHeight,
+      dropContainerCssMixin,
       ...props
     },
     ref,
@@ -57,7 +66,6 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
     return (
       <>
         <DropMenu
-          {...props}
           items={items}
           onChange={onChange}
           onOpen={onOpen}
@@ -67,6 +75,9 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
           disabled={skeleton ? true : disabled}
           loading={loading}
           selected={selected}
+          menuMaxHeight={menuMaxHeight}
+          menuWidth={menuWidth}
+          dropContainerCssMixin={dropContainerCssMixin}
           renderContentProp={({ buttonRef, handleKeyDown, handleClick, statusIcon, menuState }) => {
             return (
               <Button

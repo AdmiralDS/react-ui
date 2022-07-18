@@ -50,6 +50,7 @@ export const ButtonContent = styled.span<{ isFilterActive?: boolean; iconSize: s
 `;
 
 type Dimension = 'xl' | 'l' | 'm' | 's';
+
 interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   dimension?: Dimension;
   renderFilterIcon?: () => React.ReactNode;

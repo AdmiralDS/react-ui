@@ -62,6 +62,7 @@ export default {
 
 const Template1: ComponentStory<typeof SliderRange> = ({ defaultValue, onChange, ...args }) => {
   const handleChange = (value: any) => console.log(value);
+
   function swapBorder(theme: Theme): Theme {
     theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
     return theme;

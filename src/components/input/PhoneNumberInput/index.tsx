@@ -18,8 +18,7 @@ import getFindCountryFunction, {
   findCountryFunction,
 } from '#src/components/input/PhoneNumberInput/findCoutryWithPriority';
 import type { ComponentName, CountryAlpha3Code } from '@admiral-ds/flags';
-import { FlagsPack, ComponentsNames, CountriesRusNames } from '@admiral-ds/flags';
-import { ElementType, useMemo } from 'react';
+import { ComponentsNames, CountriesRusNames, FlagsPack } from '@admiral-ds/flags';
 import { DropdownContainer } from '#src/components/DropdownContainer';
 import type { MenuDimensions } from '#src/components/Menu';
 import { keyboardKey } from '#src/components/common/keyboardKey';
@@ -101,7 +100,7 @@ export const PhoneNumberInput = React.forwardRef<HTMLInputElement, PhoneNumberIn
     const containerRef = React.useRef<HTMLDivElement>(null);
     const [isOpened, setIsOpened] = React.useState<boolean>(false);
 
-    const menuDimension: MenuDimensions = useMemo(() => {
+    const menuDimension: MenuDimensions = React.useMemo(() => {
       return dimension === 'xl' ? 'l' : dimension;
     }, [dimension]);
 
@@ -241,7 +240,9 @@ export const PhoneNumberInput = React.forwardRef<HTMLInputElement, PhoneNumberIn
 
     const IconComponent = React.useMemo<JSX.Element | null>(() => {
       if (selectedIndex > -1) {
-        const SvgComponent = (FlagsPack as { [key: ComponentName]: ElementType })[countryList[selectedIndex].name];
+        const SvgComponent = (FlagsPack as { [key: ComponentName]: React.ElementType })[
+          countryList[selectedIndex].name
+        ];
         return SvgComponent ? <Flag dimension={menuDimension} Component={SvgComponent} /> : null;
       }
       return null;

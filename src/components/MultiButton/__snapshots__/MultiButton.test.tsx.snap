@@ -649,6 +649,31 @@ Object {
   cursor: pointer;
 }
 
+.c8 {
+  -webkit-transition: -webkit-transform 0.3s ease-in-out;
+  -webkit-transition: transform 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out;
+  -webkit-transform: rotate(0deg);
+  -ms-transform: rotate(0deg);
+  transform: rotate(0deg);
+}
+
+.c8 *[fill^='#'] {
+  fill: #74777F;
+}
+
+.c8:hover *[fill^='#'] {
+  fill: #0046E2;
+}
+
+.c8[data-disabled] {
+  pointer-events: none;
+}
+
+.c8[data-disabled] *[fill^='#'] {
+  fill: #B1B5BB;
+}
+
 .c2[data-appearance~='primary'] {
   border-radius: 4px 0 0 4px;
 }
@@ -658,8 +683,16 @@ Object {
   border-radius: 4px 0 0 4px;
 }
 
-.c2:focus {
-  outline: none;
+.c2:focus-visible {
+  outline-offset: -4px;
+}
+
+.c2:focus-visible[data-appearance~='primary'] {
+  outline: #FFFFFF solid 2px;
+}
+
+.c2:focus-visible[data-appearance~='secondary'] {
+  outline: #0062FF solid 2px;
 }
 
 .c7[data-appearance~='primary'] {
@@ -671,8 +704,16 @@ Object {
   border-radius: 0 4px 4px 0;
 }
 
-.c7:focus {
-  outline: none;
+.c7:focus-visible {
+  outline-offset: -4px;
+}
+
+.c7:focus-visible[data-appearance~='primary'] {
+  outline: #FFFFFF solid 2px;
+}
+
+.c7:focus-visible[data-appearance~='secondary'] {
+  outline: #0062FF solid 2px;
 }
 
 .c5 {
@@ -692,11 +733,6 @@ Object {
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
   display: inline-flex;
-}
-
-.c8 {
-  -webkit-transition: all 0.3s;
-  transition: all 0.3s;
 }
 
 <body>
@@ -740,6 +776,7 @@ Object {
             class="c3 c4"
           >
             <div
+              aria-hidden="true"
               class="c8"
             />
           </div>
@@ -1393,6 +1430,31 @@ Object {
   cursor: pointer;
 }
 
+.c8 {
+  -webkit-transition: -webkit-transform 0.3s ease-in-out;
+  -webkit-transition: transform 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out;
+  -webkit-transform: rotate(0deg);
+  -ms-transform: rotate(0deg);
+  transform: rotate(0deg);
+}
+
+.c8 *[fill^='#'] {
+  fill: #74777F;
+}
+
+.c8:hover *[fill^='#'] {
+  fill: #0046E2;
+}
+
+.c8[data-disabled] {
+  pointer-events: none;
+}
+
+.c8[data-disabled] *[fill^='#'] {
+  fill: #B1B5BB;
+}
+
 .c2[data-appearance~='primary'] {
   border-radius: 4px 0 0 4px;
 }
@@ -1402,8 +1464,16 @@ Object {
   border-radius: 4px 0 0 4px;
 }
 
-.c2:focus {
-  outline: none;
+.c2:focus-visible {
+  outline-offset: -4px;
+}
+
+.c2:focus-visible[data-appearance~='primary'] {
+  outline: #FFFFFF solid 2px;
+}
+
+.c2:focus-visible[data-appearance~='secondary'] {
+  outline: #0062FF solid 2px;
 }
 
 .c7[data-appearance~='primary'] {
@@ -1415,8 +1485,16 @@ Object {
   border-radius: 0 4px 4px 0;
 }
 
-.c7:focus {
-  outline: none;
+.c7:focus-visible {
+  outline-offset: -4px;
+}
+
+.c7:focus-visible[data-appearance~='primary'] {
+  outline: #FFFFFF solid 2px;
+}
+
+.c7:focus-visible[data-appearance~='secondary'] {
+  outline: #0062FF solid 2px;
 }
 
 .c5 {
@@ -1436,11 +1514,6 @@ Object {
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
   display: inline-flex;
-}
-
-.c8 {
-  -webkit-transition: all 0.3s;
-  transition: all 0.3s;
 }
 
 <div>
@@ -1483,6 +1556,7 @@ Object {
           class="c3 c4"
         >
           <div
+            aria-hidden="true"
             class="c8"
           />
         </div>
@@ -2192,6 +2266,31 @@ Object {
   cursor: pointer;
 }
 
+.c8 {
+  -webkit-transition: -webkit-transform 0.3s ease-in-out;
+  -webkit-transition: transform 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out;
+  -webkit-transform: rotate(0deg);
+  -ms-transform: rotate(0deg);
+  transform: rotate(0deg);
+}
+
+.c8 *[fill^='#'] {
+  fill: #74777F;
+}
+
+.c8:hover *[fill^='#'] {
+  fill: #0046E2;
+}
+
+.c8[data-disabled] {
+  pointer-events: none;
+}
+
+.c8[data-disabled] *[fill^='#'] {
+  fill: #B1B5BB;
+}
+
 .c2[data-appearance~='primary'] {
   border-radius: 4px 0 0 4px;
 }
@@ -2201,8 +2300,16 @@ Object {
   border-radius: 4px 0 0 4px;
 }
 
-.c2:focus {
-  outline: none;
+.c2:focus-visible {
+  outline-offset: -4px;
+}
+
+.c2:focus-visible[data-appearance~='primary'] {
+  outline: #FFFFFF solid 2px;
+}
+
+.c2:focus-visible[data-appearance~='secondary'] {
+  outline: #0062FF solid 2px;
 }
 
 .c7[data-appearance~='primary'] {
@@ -2214,8 +2321,16 @@ Object {
   border-radius: 0 4px 4px 0;
 }
 
-.c7:focus {
-  outline: none;
+.c7:focus-visible {
+  outline-offset: -4px;
+}
+
+.c7:focus-visible[data-appearance~='primary'] {
+  outline: #FFFFFF solid 2px;
+}
+
+.c7:focus-visible[data-appearance~='secondary'] {
+  outline: #0062FF solid 2px;
 }
 
 .c5 {
@@ -2235,11 +2350,6 @@ Object {
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
   display: inline-flex;
-}
-
-.c8 {
-  -webkit-transition: all 0.3s;
-  transition: all 0.3s;
 }
 
 <body>
@@ -2280,6 +2390,7 @@ Object {
             class="c3 c4"
           >
             <div
+              aria-hidden="true"
               class="c8"
             />
           </div>
@@ -2933,6 +3044,31 @@ Object {
   cursor: pointer;
 }
 
+.c8 {
+  -webkit-transition: -webkit-transform 0.3s ease-in-out;
+  -webkit-transition: transform 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out;
+  -webkit-transform: rotate(0deg);
+  -ms-transform: rotate(0deg);
+  transform: rotate(0deg);
+}
+
+.c8 *[fill^='#'] {
+  fill: #74777F;
+}
+
+.c8:hover *[fill^='#'] {
+  fill: #0046E2;
+}
+
+.c8[data-disabled] {
+  pointer-events: none;
+}
+
+.c8[data-disabled] *[fill^='#'] {
+  fill: #B1B5BB;
+}
+
 .c2[data-appearance~='primary'] {
   border-radius: 4px 0 0 4px;
 }
@@ -2942,8 +3078,16 @@ Object {
   border-radius: 4px 0 0 4px;
 }
 
-.c2:focus {
-  outline: none;
+.c2:focus-visible {
+  outline-offset: -4px;
+}
+
+.c2:focus-visible[data-appearance~='primary'] {
+  outline: #FFFFFF solid 2px;
+}
+
+.c2:focus-visible[data-appearance~='secondary'] {
+  outline: #0062FF solid 2px;
 }
 
 .c7[data-appearance~='primary'] {
@@ -2955,8 +3099,16 @@ Object {
   border-radius: 0 4px 4px 0;
 }
 
-.c7:focus {
-  outline: none;
+.c7:focus-visible {
+  outline-offset: -4px;
+}
+
+.c7:focus-visible[data-appearance~='primary'] {
+  outline: #FFFFFF solid 2px;
+}
+
+.c7:focus-visible[data-appearance~='secondary'] {
+  outline: #0062FF solid 2px;
 }
 
 .c5 {
@@ -2976,11 +3128,6 @@ Object {
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
   display: inline-flex;
-}
-
-.c8 {
-  -webkit-transition: all 0.3s;
-  transition: all 0.3s;
 }
 
 <div>
@@ -3020,6 +3167,7 @@ Object {
           class="c3 c4"
         >
           <div
+            aria-hidden="true"
             class="c8"
           />
         </div>
@@ -3729,6 +3877,31 @@ Object {
   cursor: pointer;
 }
 
+.c8 {
+  -webkit-transition: -webkit-transform 0.3s ease-in-out;
+  -webkit-transition: transform 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out;
+  -webkit-transform: rotate(0deg);
+  -ms-transform: rotate(0deg);
+  transform: rotate(0deg);
+}
+
+.c8 *[fill^='#'] {
+  fill: #74777F;
+}
+
+.c8:hover *[fill^='#'] {
+  fill: #0046E2;
+}
+
+.c8[data-disabled] {
+  pointer-events: none;
+}
+
+.c8[data-disabled] *[fill^='#'] {
+  fill: #B1B5BB;
+}
+
 .c2[data-appearance~='primary'] {
   border-radius: 4px 0 0 4px;
 }
@@ -3738,8 +3911,16 @@ Object {
   border-radius: 4px 0 0 4px;
 }
 
-.c2:focus {
-  outline: none;
+.c2:focus-visible {
+  outline-offset: -4px;
+}
+
+.c2:focus-visible[data-appearance~='primary'] {
+  outline: #FFFFFF solid 2px;
+}
+
+.c2:focus-visible[data-appearance~='secondary'] {
+  outline: #0062FF solid 2px;
 }
 
 .c7[data-appearance~='primary'] {
@@ -3751,8 +3932,16 @@ Object {
   border-radius: 0 4px 4px 0;
 }
 
-.c7:focus {
-  outline: none;
+.c7:focus-visible {
+  outline-offset: -4px;
+}
+
+.c7:focus-visible[data-appearance~='primary'] {
+  outline: #FFFFFF solid 2px;
+}
+
+.c7:focus-visible[data-appearance~='secondary'] {
+  outline: #0062FF solid 2px;
 }
 
 .c5 {
@@ -3772,11 +3961,6 @@ Object {
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
   display: inline-flex;
-}
-
-.c8 {
-  -webkit-transition: all 0.3s;
-  transition: all 0.3s;
 }
 
 <body>
@@ -3817,6 +4001,7 @@ Object {
             class="c3 c4"
           >
             <div
+              aria-hidden="true"
               class="c8"
             />
           </div>
@@ -4470,6 +4655,31 @@ Object {
   cursor: pointer;
 }
 
+.c8 {
+  -webkit-transition: -webkit-transform 0.3s ease-in-out;
+  -webkit-transition: transform 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out;
+  -webkit-transform: rotate(0deg);
+  -ms-transform: rotate(0deg);
+  transform: rotate(0deg);
+}
+
+.c8 *[fill^='#'] {
+  fill: #74777F;
+}
+
+.c8:hover *[fill^='#'] {
+  fill: #0046E2;
+}
+
+.c8[data-disabled] {
+  pointer-events: none;
+}
+
+.c8[data-disabled] *[fill^='#'] {
+  fill: #B1B5BB;
+}
+
 .c2[data-appearance~='primary'] {
   border-radius: 4px 0 0 4px;
 }
@@ -4479,8 +4689,16 @@ Object {
   border-radius: 4px 0 0 4px;
 }
 
-.c2:focus {
-  outline: none;
+.c2:focus-visible {
+  outline-offset: -4px;
+}
+
+.c2:focus-visible[data-appearance~='primary'] {
+  outline: #FFFFFF solid 2px;
+}
+
+.c2:focus-visible[data-appearance~='secondary'] {
+  outline: #0062FF solid 2px;
 }
 
 .c7[data-appearance~='primary'] {
@@ -4492,8 +4710,16 @@ Object {
   border-radius: 0 4px 4px 0;
 }
 
-.c7:focus {
-  outline: none;
+.c7:focus-visible {
+  outline-offset: -4px;
+}
+
+.c7:focus-visible[data-appearance~='primary'] {
+  outline: #FFFFFF solid 2px;
+}
+
+.c7:focus-visible[data-appearance~='secondary'] {
+  outline: #0062FF solid 2px;
 }
 
 .c5 {
@@ -4513,11 +4739,6 @@ Object {
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
   display: inline-flex;
-}
-
-.c8 {
-  -webkit-transition: all 0.3s;
-  transition: all 0.3s;
 }
 
 <div>
@@ -4557,6 +4778,7 @@ Object {
           class="c3 c4"
         >
           <div
+            aria-hidden="true"
             class="c8"
           />
         </div>

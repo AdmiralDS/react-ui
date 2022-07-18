@@ -69,6 +69,7 @@ const Template1: ComponentStory<typeof PaginationOne> = (args) => {
   const [page, setPage] = useState(1);
   const pageSizes = [8, 20, 50, 100, 200];
   const totalElements = 100;
+
   function swapBorder(theme: Theme): Theme {
     theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
     return theme;

@@ -1,6 +1,6 @@
 {
   "name": "@admiral-ds/react-ui",
-  "version": "1.4.0",
+  "version": "1.6.0",
   "description": "React component library for Admiral design system 2.1",
   "keywords": [],
   "author": "",
@@ -41,16 +41,16 @@
   },
   "dependencies": {
     "@admiral-ds/flags": "^2.0.0",
-    "@admiral-ds/fonts": "^1.0.0",
+    "@admiral-ds/fonts": "^2.0.0",
     "@admiral-ds/icons": "^2.0.0",
     "react": ">=16",
     "react-dom": ">=16",
     "styled-components": "^5.1.0"
   },
   "peerDependencies": {
-    "@admiral-ds/flags": "^1.0.0",
-    "@admiral-ds/fonts": "^1.0.0",
-    "@admiral-ds/icons": "^1.0.0",
+    "@admiral-ds/flags": "^2.0.0",
+    "@admiral-ds/fonts": "^2.0.0",
+    "@admiral-ds/icons": "^2.0.0",
     "react": ">=16",
     "react-dom": ">=16",
     "styled-components": "^5.1.0"
@@ -83,7 +83,7 @@
     "chromatic": "^6.5.4",
     "eslint": "^8.2.0",
     "eslint-config-prettier": "^8.3.0",
-    "eslint-import-resolver-typescript": "^2.4.0",
+    "eslint-import-resolver-typescript": "^3.2.0",
     "eslint-plugin-import": "^2.25.3",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.27.0",

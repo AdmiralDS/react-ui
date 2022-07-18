@@ -1,10 +1,11 @@
 import * as React from 'react';
-import { changeInputData, isInputDataDifferent, InputData } from '#src/components/common/dom/changeInputData';
+import { changeInputData, InputData, isInputDataDifferent } from '#src/components/common/dom/changeInputData';
 import type { ExtraProps } from '#src/components/input/types';
 import type { TextInputProps } from '#src/components/input/TextInput';
 import { typography } from '#src/components/Typography';
 import styled, { css } from 'styled-components';
 import { refSetter } from '#src/components/common/utils/refSetter';
+import observeRect from '#src/components/common/observeRect';
 
 import { fitToCurrency } from './utils';
 
@@ -31,30 +32,30 @@ const Sizer = styled.div`
   left: 0;
   height: 0;
   visibility: hidden;
-  overflow: scroll;
   white-space: pre;
   pointer-events: none;
+  box-sizing: border-box;
 `;
 
-const BorderedDiv = styled.div`
+const BorderedDiv = styled.div<{ status?: TextInputProps['status'] }>`
   position: absolute;
-  inset: 0;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   margin: 0;
   pointer-events: none;
   overflow: hidden;
   min-width: 0;
 
   background: none;
-  border: 1px solid ${(props) => props.theme.color['Neutral/Neutral 40']};
+  border: 1px solid
+    ${({ theme, status }) => {
+      if (status === 'error') return theme.color['Error/Error 60 Main'];
+      if (status === 'success') return theme.color['Success/Success 50 Main'];
+      return theme.color['Neutral/Neutral 40'];
+    }};
   border-radius: inherit;
-
-  [data-status='error'] & {
-    border: 1px solid ${(props) => props.theme.color['Error/Error 60 Main']};
-  }
-
-  [data-status='success'] & {
-    border: 1px solid ${(props) => props.theme.color['Success/Success 50 Main']};
-  }
 
   [data-read-only] & {
     border-color: transparent;
@@ -80,11 +81,11 @@ const colorsBorderAndBackground = css<{ disabled?: boolean }>`
     border: 1px solid ${(props) => props.theme.color['Error/Error 60 Main']};
   }
 
-  [data-status='error'] &:hover + ${BorderedDiv}, [data-status='error'] &:focus + ${BorderedDiv} {
+  &[data-status='error']:hover + ${BorderedDiv}, &[data-status='error']:focus + ${BorderedDiv} {
     border: 1px solid ${(props) => props.theme.color['Error/Error 60 Main']};
   }
 
-  [data-status='success'] &:hover + ${BorderedDiv}, [data-status='success'] &:focus + ${BorderedDiv} {
+  &[data-status='success']:hover + ${BorderedDiv}, &[data-status='success']:focus + ${BorderedDiv} {
     border: 1px solid ${(props) => props.theme.color['Success/Success 50 Main']};
   }
 
@@ -154,17 +155,21 @@ export interface InputProps extends TextInputProps {
 }
 
 export const AutoSizeInput = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ placeholder, type, precision = 2, prefix = '', suffix = '₽', thousand = ' ', decimal = '.', ...props }, ref) => {
+  (
+    { placeholder, type, precision = 2, prefix = '', suffix = '₽', thousand = ' ', decimal = '.', status, ...props },
+    ref,
+  ) => {
     const [showPrefixSuffix, setPrefixSuffix] = React.useState(false);
 
     const sizerRef = React.useRef<HTMLDivElement>(null);
+    const sizerWidth = React.useRef(0);
     const inputRef = React.useRef<HTMLInputElement>(null);
 
     const updateInputWidth = (newValue: any) => {
       if (sizerRef.current && inputRef.current) {
         sizerRef.current.innerHTML = newValue || placeholder || '';
         // 2px с расчетом на курсор
-        inputRef.current.style.width = `${sizerRef.current.scrollWidth + 2}px`;
+        inputRef.current.style.width = `${sizerRef.current.getBoundingClientRect().width + 2}px`;
       }
       if (newValue) {
         setPrefixSuffix?.(true);
@@ -201,6 +206,7 @@ export const AutoSizeInput = React.forwardRef<HTMLInputElement, InputProps>(
 
     React.useLayoutEffect(() => {
       const nullHandledValue = handleInput(null);
+
       function oninput(this: HTMLInputElement) {
         const { value, selectionStart, selectionEnd } = this;
         const currentInputData = { value, selectionStart, selectionEnd };
@@ -241,6 +247,25 @@ export const AutoSizeInput = React.forwardRef<HTMLInputElement, InputProps>(
       }
     }, [props.value, props.defaultValue, props.dimension]);
 
+    // recalculation on resize. For example, it happens after fonts loading
+    React.useLayoutEffect(() => {
+      if (sizerRef.current) {
+        const observer = observeRect(sizerRef.current, (rect) => {
+          const width = rect?.width || 0;
+          if (sizerWidth.current !== width) {
+            sizerWidth.current = width;
+            if (inputRef.current) {
+              updateInputWidth(inputRef.current.value);
+            }
+          }
+        });
+        observer.observe();
+        return () => {
+          observer.unobserve();
+        };
+      }
+    }, [sizerRef.current]);
+
     const handleMouseDown = (e: React.MouseEvent<HTMLInputElement>) => {
       // отменяю всплытие события, чтобы не сработал onMouseDown на Content и фокус не был снова установлен
       e.stopPropagation();
@@ -258,8 +283,9 @@ export const AutoSizeInput = React.forwardRef<HTMLInputElement, InputProps>(
             placeholder={placeholder}
             type="text"
             onMouseDown={handleMouseDown}
+            data-status={status}
           />
-          <BorderedDiv />
+          <BorderedDiv status={status} />
           {suffix && showPrefixSuffix && <Suffix>&nbsp;{suffix}</Suffix>}
         </Wrapper>
       </Wrapper>

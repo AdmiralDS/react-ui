@@ -1,13 +1,11 @@
-import type { FC, FocusEvent, KeyboardEvent, MouseEvent, ReactNode } from 'react';
-import React, { HTMLAttributes, useRef, useState } from 'react';
-import styled from 'styled-components';
-import { ReactComponent as ChevronDownOutline } from '@admiral-ds/icons/build/system/ChevronDownOutline.svg';
+import type { MouseEvent, ReactNode, HTMLAttributes } from 'react';
+import * as React from 'react';
+import styled, { css } from 'styled-components';
 import { Button } from '#src/components/Button';
-import { Dropdown } from '#src/components/Dropdown';
-import { DropDownItem } from '#src/components/DropDownItem';
-import { keyboardKey } from '#src/components/common/keyboardKey';
 import { Shape } from '#src/components/themes/common';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
+import { MenuItem, RenderOptionProps } from '#src/components/MenuItem';
+import { DropMenu } from '#src/components/DropMenu';
 
 function mainButtonBorderRadius(shape: Shape): string {
   const radius = mediumGroupBorderRadius(shape);
@@ -19,6 +17,18 @@ function menuButtonBorderRadius(shape: Shape): string {
   return `0 ${radius} ${radius} 0`;
 }
 
+const focusStyle = css`
+  &:focus-visible {
+    outline-offset: -4px;
+    &[data-appearance~='primary'] {
+      outline: ${(p) => p.theme.color['Neutral/Neutral 00']} solid 2px;
+    }
+    &[data-appearance~='secondary'] {
+      outline: ${(p) => p.theme.color['Primary/Primary 60 Main']} solid 2px;
+    }
+  }
+`;
+
 const MainButton = styled(Button)`
   &[data-appearance~='primary'] {
     border-radius: ${(p) => mainButtonBorderRadius(p.theme.shape)};
@@ -27,13 +37,7 @@ const MainButton = styled(Button)`
     border-right: none;
     border-radius: ${(p) => mainButtonBorderRadius(p.theme.shape)};
   }
-  &:focus {
-    outline: none;
-  }
-`;
-
-const StyledDropdown = styled(Dropdown)`
-  padding: 8px 0;
+  ${focusStyle}
 `;
 
 const MenuButton = styled(Button)`
@@ -44,9 +48,7 @@ const MenuButton = styled(Button)`
     border-left: none;
     border-radius: ${(p) => menuButtonBorderRadius(p.theme.shape)};
   }
-  &:focus {
-    outline: none;
-  }
+  ${focusStyle}
 `;
 
 const Separator = styled.div<SeparatorProps>`
@@ -63,11 +65,6 @@ const Separator = styled.div<SeparatorProps>`
 
 const Wrapper = styled.div`
   display: inline-flex;
-`;
-
-const Icon = styled(ChevronDownOutline)<{ $menuOpened: boolean }>`
-  transition: all 0.3s;
-  ${({ $menuOpened }) => $menuOpened && 'transform: rotate(180deg);'}
 `;
 
 type Dimension = 'xl' | 'l' | 'm' | 's';
@@ -89,8 +86,8 @@ export interface MultiButtonItem extends HTMLAttributes<HTMLElement> {
 export interface MultiButtonProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> {
   /** Массив опций */
   options: Array<MultiButtonItem>;
-  /** Выбранная опция */
-  selected: string | null;
+  /** Массив опций */
+  selected?: string;
   /** Колбек на изменение выбранной опции */
   onChange: (id: string) => void;
   /** Колбек на открытие меню */
@@ -107,72 +104,99 @@ export interface MultiButtonProps extends Omit<HTMLAttributes<HTMLDivElement>, '
   alignSelf?: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
 }
 
-export const MultiButton: FC<MultiButtonProps> = ({
-  dimension = 'l',
-  appearance = 'primary',
-  disabled,
-  options,
-  selected,
-  alignSelf = 'flex-end',
-  onChange,
-  onClose,
-  onOpen,
-  ...props
-}) => {
-  const [menuOpened, setMenuOpened] = useState<boolean>(false);
-  const wrapperRef = useRef<HTMLDivElement>(null);
-  const btnRef = useRef<HTMLButtonElement>(null);
-  const menuDimension = dimension === 'xl' ? 'l' : dimension;
-  const menuWidth = dimension === 's' ? '240px' : '280px';
-  const { display: firstOption, disabled: firstOptionDisabled, ...firstOptionProps } = options[0];
+export const MultiButton = React.forwardRef<HTMLButtonElement, MultiButtonProps>(
+  (
+    {
+      dimension = 'l',
+      appearance = 'primary',
+      disabled,
+      options,
+      selected,
+      alignSelf = 'flex-end',
+      onChange,
+      onClose,
+      onOpen,
+      children,
+      ...props
+    },
+    ref,
+  ) => {
+    const wrapperRef = React.useRef<HTMLDivElement>(null);
+    const menuDimension = dimension === 'xl' ? 'l' : dimension;
+    const menuWidth = dimension === 's' ? '240px' : '280px';
+    const { display: firstOption, disabled: firstOptionDisabled, ...firstOptionProps } = options[0];
+    const model = React.useMemo(() => {
+      return options.slice(1, options.length).map((item) => ({
+        id: item.id,
+        render: (items: RenderOptionProps) => (
+          <MenuItem dimension={menuDimension} {...items} key={item.id}>
+            {item.display}
+          </MenuItem>
+        ),
+        disabled: item.disabled,
+      }));
+    }, [dimension, options]);
 
-  const reverseMenu = () => {
-    setMenuOpened((prevOpened) => {
-      prevOpened ? onClose?.() : onOpen?.();
-      return !prevOpened;
-    });
-  };
-  const closeMenu = () => {
-    setMenuOpened(false);
-    onClose?.();
-    btnRef.current?.focus();
-  };
+    const handleWrapperFocus = () => {
+      wrapperRef.current?.setAttribute('data-focused', 'true');
+    };
+    const handleWrapperBlur = () => {
+      wrapperRef.current?.setAttribute('data-focused', 'false');
+    };
 
-  const clickOutside = (e: Event) => {
-    if (e.target && btnRef.current?.contains(e.target as Node)) {
-      return;
-    }
-    setMenuOpened(false);
-  };
+    const handleMainBtnClick = (e: MouseEvent<HTMLButtonElement>) => {
+      onChange(e.currentTarget.id);
+    };
 
-  const handleWrapperFocus = (e: FocusEvent<HTMLDivElement>) => {
-    wrapperRef.current?.setAttribute('data-focused', 'true');
-  };
-  const handleWrapperBlur = (e: FocusEvent<HTMLDivElement>) => {
-    wrapperRef.current?.setAttribute('data-focused', 'false');
-  };
+    return (
+      <DropMenu
+        {...props}
+        items={model}
+        onChange={onChange}
+        onOpen={onOpen}
+        onClose={onClose}
+        ref={ref}
+        dimension={menuDimension}
+        menuWidth={menuWidth}
+        disabled={disabled}
+        selected={selected}
+        renderContentProp={({ buttonRef, handleKeyDown, handleClick, statusIcon, menuState }) => {
+          return (
+            <Wrapper
+              ref={wrapperRef}
+              data-focused="false"
+              onFocus={handleWrapperFocus}
+              onBlur={handleWrapperBlur}
+              {...props}
+            >
+              <MainButton
+                {...firstOptionProps}
+                dimension={dimension}
+                appearance={appearance}
+                disabled={disabled || firstOptionDisabled}
+                onClick={handleMainBtnClick}
+              >
+                {firstOption}
+              </MainButton>
+              <Separator disabled={disabled} data-appearance={appearance} aria-hidden />
+              <MenuButton
+                ref={buttonRef as React.Ref<HTMLButtonElement>}
+                dimension={dimension}
+                appearance={appearance}
+                disabled={disabled}
+                displayAsSquare
+                onKeyDown={handleKeyDown}
+                onClick={handleClick}
+                aria-expanded={menuState}
+              >
+                {statusIcon}
+              </MenuButton>
+            </Wrapper>
+          );
+        }}
+      />
 
-  const handleMainBtnClick = (e: MouseEvent<HTMLButtonElement>) => {
-    onChange(e.currentTarget.id);
-  };
-  const handleMenuBtnKeyDown = (e: KeyboardEvent<HTMLButtonElement>) => {
-    const code = keyboardKey.getCode(e);
-    if (code === keyboardKey.ArrowDown || code === keyboardKey.Enter || code === keyboardKey[' ']) {
-      setMenuOpened(true);
-      onOpen?.();
-      e.preventDefault();
-    }
-  };
-
-  const handleMenuKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
-    const code = keyboardKey.getCode(e);
-    if (code === keyboardKey.Escape || code === keyboardKey.Tab) {
-      closeMenu();
-    }
-  };
-
-  return (
-    <Wrapper ref={wrapperRef} data-focused="false" onFocus={handleWrapperFocus} onBlur={handleWrapperBlur} {...props}>
+      /*<Wrapper ref={wrapperRef} data-focused="false" onFocus={handleWrapperFocus} onBlur={handleWrapperBlur} {...props}>
       <MainButton
         {...firstOptionProps}
         dimension={dimension}
@@ -241,8 +265,9 @@ export const MultiButton: FC<MultiButtonProps> = ({
           })}
         </StyledDropdown>
       )}
-    </Wrapper>
-  );
-};
+    </Wrapper>*/
+    );
+  },
+);
 
 MultiButton.displayName = 'MultiButton';

@@ -17,12 +17,13 @@ const Desc = styled.div`
 
 const Description = () => (
   <Desc>
+    DEPRECATED используйте DropMenu. <br />
     Компонент Dropdown Menu имеет три размера и может быть с иконкой или без. Высота строки : xl - 48px, m - 40px, s -
     32px
   </Desc>
 );
 export default {
-  title: 'Admiral-2.1/DropDownMenu',
+  title: 'Deprecated/DropDownMenu (DEPRECATED используйте DropMenu)',
   decorators: [withDesign],
   component: DropDownMenu,
   parameters: {

@@ -118,6 +118,21 @@ const Template2: ComponentStory<typeof SliderInput> = (args) => {
   );
 };
 
+const Template3: ComponentStory<typeof SliderInput> = (args) => {
+  return (
+    <>
+      <SliderInput
+        {...args}
+        defaultValue="15000 ₽"
+        onChange={(full, short) => console.log({ full, short })}
+        renderTickMark={(mark: string) => mark + ' ₽'}
+        tickMarks={[5000, 10000, 15000]}
+        maxValue={20000}
+      />
+    </>
+  );
+};
+
 export const Playground = Template0.bind({});
 Playground.args = {};
 Playground.storyName = 'SliderInput. Playground.';
@@ -144,6 +159,17 @@ export const Customised = Template2.bind({});
 Customised.args = {};
 Customised.storyName = 'SliderInput. Пример изменения настроек (suffix, precision, thousand).';
 Customised.parameters = {
+  docs: {
+    source: {
+      type: 'code',
+    },
+  },
+};
+
+export const CustomisedMark = Template3.bind({});
+CustomisedMark.args = {};
+CustomisedMark.storyName = 'SliderInput. Пример кастомизирования текстовых подписей к отметкам слайдера.';
+CustomisedMark.parameters = {
   docs: {
     source: {
       type: 'code',

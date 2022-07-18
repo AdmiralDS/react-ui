@@ -209,7 +209,7 @@ export interface ModalProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Возможность изменять стили для подложки модального окна.
    * Например цвет фона в зависимости от темы:
-   *  const overlayStyles = css\`background-color: ${({ theme }) => hexToRgba(theme.color['Neutral/Neutral 05'], 0.6)};\`
+   *  const overlayStyles = css\`background-color: ${({ theme }) => hexToRgba(theme.color["Neutral/Neutral 05"], 0.6)};\`
    * */
   overlayStyledCss?: Interpolation<any>;
 }

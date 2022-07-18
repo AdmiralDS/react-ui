@@ -55,7 +55,10 @@ const disabledColors = css`
 
 const BorderedDiv = styled.div`
   position: absolute;
-  inset: 0;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   margin: 0;
   pointer-events: none;
   overflow: hidden;

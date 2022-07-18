@@ -129,7 +129,7 @@ fieldset[data-dimension='s'] .c2 {
   padding-left: 32px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
-  font-weight: normal;
+  font-weight: 400;
   font-size: 16px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
@@ -141,7 +141,7 @@ fieldset[data-dimension='s'] .c0 {
   padding-left: 28px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
-  font-weight: normal;
+  font-weight: 400;
   font-size: 14px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
@@ -307,7 +307,7 @@ fieldset[data-dimension='s'] .c2 {
   padding-left: 32px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
-  font-weight: normal;
+  font-weight: 400;
   font-size: 16px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
@@ -319,7 +319,7 @@ fieldset[data-dimension='s'] .c0 {
   padding-left: 28px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
-  font-weight: normal;
+  font-weight: 400;
   font-size: 14px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
@@ -540,7 +540,7 @@ fieldset[data-dimension='s'] .c2 {
   padding-left: 32px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
-  font-weight: normal;
+  font-weight: 400;
   font-size: 16px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
@@ -552,7 +552,7 @@ fieldset[data-dimension='s'] .c0 {
   padding-left: 28px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
-  font-weight: normal;
+  font-weight: 400;
   font-size: 14px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
@@ -716,7 +716,7 @@ fieldset[data-dimension='s'] .c2 {
   padding-left: 32px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
-  font-weight: normal;
+  font-weight: 400;
   font-size: 16px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
@@ -728,7 +728,7 @@ fieldset[data-dimension='s'] .c0 {
   padding-left: 28px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
-  font-weight: normal;
+  font-weight: 400;
   font-size: 14px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
@@ -947,7 +947,7 @@ fieldset[data-dimension='s'] .c2 {
   padding-left: 28px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
-  font-weight: normal;
+  font-weight: 400;
   font-size: 14px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
@@ -959,7 +959,7 @@ fieldset[data-dimension='s'] .c0 {
   padding-left: 28px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
-  font-weight: normal;
+  font-weight: 400;
   font-size: 14px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
@@ -1123,7 +1123,7 @@ fieldset[data-dimension='s'] .c2 {
   padding-left: 28px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
-  font-weight: normal;
+  font-weight: 400;
   font-size: 14px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
@@ -1135,7 +1135,7 @@ fieldset[data-dimension='s'] .c0 {
   padding-left: 28px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
-  font-weight: normal;
+  font-weight: 400;
   font-size: 14px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;

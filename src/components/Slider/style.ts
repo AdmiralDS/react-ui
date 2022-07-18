@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import type { SliderProps } from '#src/components/Slider';
 
 const TRANSITION_ANIMATION = 'all  ease-in 0.3s';
 
@@ -7,18 +8,15 @@ export const Wrapper = styled.div`
   -webkit-tap-highlight-color: transparent;
 `;
 
-export const TrackWrapper = styled.div`
+export const TrackWrapper = styled.div<{ dimension: SliderProps['dimension'] }>`
   position: relative;
   box-sizing: border-box;
   width: 100%;
   cursor: pointer;
   display: flex;
   align-items: center;
-  height: 40px;
+  height: ${({ dimension }) => (dimension === 'm' ? 36 : 40)}px;
   padding-bottom: 20px;
-  [data-dimension='m'] & {
-    height: 36px;
-  }
   [data-disabled='true'] && {
     pointer-events: none;
     cursor: auto;
@@ -51,14 +49,10 @@ export const FilledTrack = styled.div<{ animation?: boolean }>`
   transition: ${({ animation }) => (animation ? TRANSITION_ANIMATION : 'none')};
 `;
 
-export const Thumb = styled.div<{ animation?: boolean }>`
+export const Thumb = styled.div<{ dimension: SliderProps['dimension']; animation?: boolean }>`
   position: absolute;
-  width: 20px;
-  height: 20px;
-  [data-dimension='m'] && {
-    height: 16px;
-    width: 16px;
-  }
+  width: ${({ dimension }) => (dimension === 'm' ? 16 : 20)}px;
+  height: ${({ dimension }) => (dimension === 'm' ? 16 : 20)}px;
   align-items: center;
   justify-content: center;
   transform: translateX(-50%) translateY(-50%);
@@ -67,35 +61,23 @@ export const Thumb = styled.div<{ animation?: boolean }>`
   transition: ${({ animation }) => (animation ? TRANSITION_ANIMATION : 'none')};
 `;
 
-export const ThumbCircle = styled.div`
+export const ThumbCircle = styled.div<{ dimension: SliderProps['dimension'] }>`
   position: relative;
-  height: 20px;
-  width: 20px;
+  height: ${({ dimension }) => (dimension === 'm' ? 16 : 20)}px;
+  width: ${({ dimension }) => (dimension === 'm' ? 16 : 20)}px;
   background: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
   border-radius: 50%;
   &:before {
     position: absolute;
     content: '';
-    height: 8px;
-    width: 8px;
+    height: ${({ dimension }) => (dimension === 'm' ? 6 : 8)}px;
+    width: ${({ dimension }) => (dimension === 'm' ? 6 : 8)}px;
     background: ${({ theme }) => theme.color['Special/Static White']};
-    top: 6px;
-    bottom: 6px;
-    left: 6px;
-    right: 6px;
+    top: ${({ dimension }) => (dimension === 'm' ? 5 : 6)}px;
+    bottom: ${({ dimension }) => (dimension === 'm' ? 5 : 6)}px;
+    left: ${({ dimension }) => (dimension === 'm' ? 5 : 6)}px;
+    right: ${({ dimension }) => (dimension === 'm' ? 5 : 6)}px;
     border-radius: 50%;
-  }
-  [data-dimension='m'] && {
-    height: 16px;
-    width: 16px;
-    &:before {
-      height: 6px;
-      width: 6px;
-      top: 5px;
-      bottom: 5px;
-      left: 5px;
-      right: 5px;
-    }
   }
   &:hover {
     background: ${({ theme }) => theme.color['Primary/Primary 70']};

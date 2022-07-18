@@ -14,6 +14,7 @@ export function smallGroupBorderRadius(shape: Shape): string {
       return '4px';
   }
 }
+
 export function mediumGroupBorderRadius(shape: Shape): string {
   switch (shape.borderRadiusKind) {
     case 'Border radius 0':

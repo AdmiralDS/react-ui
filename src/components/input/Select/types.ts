@@ -7,7 +7,9 @@ export interface IOnCloseProps {
   value: string;
   disabled?: boolean;
 }
+
 export type TRenderChip = () => React.ReactNode | IChipProps;
+
 export interface IChipProps {
   children: React.ReactNode;
   disabled?: boolean;

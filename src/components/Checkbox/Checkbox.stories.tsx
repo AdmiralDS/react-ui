@@ -66,6 +66,9 @@ const Row = styled.div`
   > *:not(:last-child) {
     margin-right: 66px;
   }
+  > * {
+    flex: 0 0 auto;
+  }
 `;
 
 const CheckboxDemo: ComponentStory<typeof Checkbox> = (props) => {

@@ -29,11 +29,13 @@ const Menu = styled(OverflowMenu)`
 `;
 
 export interface MenuButtonProps {
+  /** Размер меню */
+  dimension: 'm' | 's';
   /** Массив опций */
   options: Array<BreadcrumbProps>;
 }
 
-export const MenuButton: React.FC<MenuButtonProps> = ({ options }) => {
+export const MenuButton: React.FC<MenuButtonProps> = ({ dimension, options }) => {
   const model = React.useMemo(() => {
     return options.map((item) => {
       const id = uid();
@@ -59,5 +61,5 @@ export const MenuButton: React.FC<MenuButtonProps> = ({ options }) => {
     });
   }, [options]);
 
-  return <Menu dimension="s" items={model} />;
+  return <Menu dimension={dimension} items={model} />;
 };

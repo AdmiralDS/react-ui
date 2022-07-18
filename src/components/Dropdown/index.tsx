@@ -7,6 +7,7 @@ import { keyboardKey } from '#src/components/common/keyboardKey';
 import { moveFocus, nextItem, previousItem } from '#src/components/Dropdown/utils';
 import { refSetter } from '#src/components/common/utils/refSetter';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
+import { useDropdown } from '#src/components/DropdownProvider';
 
 const Container = styled.div<{ alignSelf?: string }>`
   pointer-events: initial;
@@ -15,8 +16,7 @@ const Container = styled.div<{ alignSelf?: string }>`
   border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
   ${(p) => p.theme.shadow['Shadow 08']}
   flex: 0 0 auto;
-  ${(p) => (p.alignSelf ? `align-self: ${p.alignSelf};` : '')};
-  max-width: calc(100vw - 32px);
+  ${(p) => (p.alignSelf ? `align-self: ${p.alignSelf}` : '')};
   opacity: 0;
   transition-delay: 200ms;
   transition-property: opacity;
@@ -53,6 +53,8 @@ export interface DropdownProps extends Omit<React.HTMLAttributes<HTMLDivElement>
    */
   alignSelf?: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
 
+  /** Отключает автовыравнивание относительно компонента и границ вьюпорта*/
+  disableAutoAlign?: boolean;
   onMenuReachTop?: () => void;
   onMenuReachBottom?: () => void;
 
@@ -78,7 +80,8 @@ export const Dropdown = React.forwardRef<HTMLDivElement, React.PropsWithChildren
   ) => {
     const containerRef = React.useRef<HTMLDivElement | null>(null);
     const [displayUpward, setDisplayUpward] = React.useState(false);
-    useClickOutside([containerRef], onClickOutside);
+    const { addDropdown, removeDropdown, dropdowns } = useDropdown(containerRef);
+    useClickOutside([containerRef, ...dropdowns], onClickOutside);
 
     const handleKeyDown = React.useCallback(
       (e) => {
@@ -175,21 +178,23 @@ export const Dropdown = React.forwardRef<HTMLDivElement, React.PropsWithChildren
           setDisplayUpward(false);
         }
 
-        const rectWidth = rect.right - rect.left;
+        if (!props.disableAutoAlign) {
+          const rectWidth = rect.right - rect.left;
 
-        if (targetRect.right < rectWidth && viewportWidth - targetRect.left < rectWidth) {
-          node.style.alignSelf = 'center';
-        } else if (targetRect.right - 16 >= rectWidth && viewportWidth - targetRect.left >= rectWidth) {
-          node.style.alignSelf = '';
-        } else if (targetRect.right - 16 < rectWidth) {
-          node.style.alignSelf = 'flex-start';
-        } else if (viewportWidth - targetRect.left < rectWidth) {
-          node.style.alignSelf = 'flex-end';
+          if (targetRect.right < rectWidth && viewportWidth - targetRect.left < rectWidth) {
+            node.style.alignSelf = 'center';
+          } else if (targetRect.right - 16 >= rectWidth && viewportWidth - targetRect.left >= rectWidth) {
+            node.style.alignSelf = '';
+          } else if (targetRect.right - 16 < rectWidth) {
+            node.style.alignSelf = 'flex-start';
+          } else if (viewportWidth - targetRect.left < rectWidth) {
+            node.style.alignSelf = 'flex-end';
+          }
         }
       }
     };
 
-    useInterval(checkDropdownPosition, 100);
+    useInterval(checkDropdownPosition, 1000);
 
     // First container render always happens downward and transparent,
     // after size and position settled transparency returns to normal
@@ -198,6 +203,13 @@ export const Dropdown = React.forwardRef<HTMLDivElement, React.PropsWithChildren
         containerRef.current.style.opacity = '1';
       }
     }, [containerRef.current]);
+
+    React.useLayoutEffect(() => {
+      addDropdown?.(containerRef);
+      return () => {
+        removeDropdown?.(containerRef);
+      };
+    }, []);
 
     return (
       <Portal targetRef={targetRef} reverse={displayUpward}>

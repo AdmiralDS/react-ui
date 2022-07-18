@@ -28,6 +28,14 @@ import {
 import { Button } from './Button';
 
 interface IPanelProps {
+  viewDate: Date;
+  yearsView: boolean;
+  monthsView: boolean;
+  localeName: LocaleType;
+  minDate?: Date;
+  maxDate?: Date;
+  tooltipContainer?: Element | null;
+
   onYearsViewShow(event: MouseEvent<HTMLDivElement>): void;
 
   onYearsViewHide(event: MouseEvent<HTMLDivElement>): void;
@@ -39,14 +47,6 @@ interface IPanelProps {
   onNext(event: MouseEvent<HTMLDivElement>): void;
 
   onPrevious(event: MouseEvent<HTMLDivElement>): void;
-
-  viewDate: Date;
-  yearsView: boolean;
-  monthsView: boolean;
-  localeName: LocaleType;
-  minDate?: Date;
-  maxDate?: Date;
-  tooltipContainer?: Element | null;
 }
 
 export const Panel: FC<IPanelProps> = ({

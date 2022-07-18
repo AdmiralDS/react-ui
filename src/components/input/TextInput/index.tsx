@@ -16,6 +16,7 @@ import * as React from 'react';
 import styled, { css } from 'styled-components';
 import { StatusIcon } from '../StatusIcon';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
+import { InputIconButton } from '#src/components/InputIconButton';
 
 const EyeCloseIcon = styled(EyeCloseOutlineSvg)`
   & *[fill^='#'] {
@@ -94,7 +95,10 @@ const disabledColors = css`
 
 const BorderedDiv = styled.div`
   position: absolute;
-  inset: 0;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   margin: 0;
   pointer-events: none;
   overflow: hidden;
@@ -308,7 +312,8 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
 
     if (!props.readOnly && displayClearIcon) {
       iconArray.unshift(
-        <ClearIcon
+        <InputIconButton
+          icon={CloseOutlineSvg}
           key="clear-icon"
           onClick={() => {
             if (inputRef.current) {
@@ -326,6 +331,7 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
 
     React.useLayoutEffect(() => {
       const nullHandledValue = handleInput(null);
+
       function oninput(this: HTMLInputElement) {
         const { value, selectionStart, selectionEnd } = this;
         const currentInputData = { value, selectionStart, selectionEnd };

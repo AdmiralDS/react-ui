@@ -173,10 +173,12 @@ const items = [
 
 const Template1: ComponentStory<typeof MenuButton> = (args) => {
   const [selected, setSelected] = React.useState<string | undefined>(undefined);
+
   function swapBorder(theme: Theme): Theme {
     theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
+
   const model = React.useMemo(() => {
     return items.map((item) => ({
       id: item.id,

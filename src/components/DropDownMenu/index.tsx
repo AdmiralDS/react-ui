@@ -42,6 +42,9 @@ export interface DropDownMenuProps extends DropdownProps {
   dimension?: DropDownDimensions;
 }
 
+/**
+ * @deprecated Используйте DropMenu
+ */
 export const DropDownMenu = React.forwardRef<HTMLDivElement, DropDownMenuProps>(
   ({ children, targetRef, dimension = 'l', alignSelf, onClickOutside, ...props }, ref) => {
     const [hovered, setHovered] = React.useState<string | undefined>('');

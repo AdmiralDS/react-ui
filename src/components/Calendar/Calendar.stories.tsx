@@ -72,6 +72,7 @@ const Template1: ComponentStory<typeof Calendar> = (args) => {
   const [selected, setSelected] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
   const [opened, setOpened] = React.useState(false);
+
   function swapBorder(theme: Theme): Theme {
     theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
