@@ -1,21 +1,22 @@
 import * as React from 'react';
 import { keyboardKey } from '#src/components/common/keyboardKey';
-import observeRect from '#src/components/common/observeRect';
 import { Badge } from '#src/components/Badge';
-import { MenuItem, RenderOptionProps } from '#src/components/MenuItem';
+import { ItemProps, MenuItem, RenderOptionProps } from '#src/components/MenuItem';
+import observeRect from '#src/components/common/observeRect';
 
-import measureTab from '#src/components/TabMenu/measureTab';
 import {
+  BadgeWrapper,
+  IconWrapper,
+  MenuItemWrapper,
   StyledOverflowMenu,
   Tab,
   TabContent,
   TabContentWrapper,
-  TabsWrapper,
+  TabWrapper,
   Underline,
   Wrapper,
 } from '#src/components/TabMenu/style';
 import type { Dimension } from '#src/components/TabMenu/constants';
-import { OVERFLOW_MARGIN_LEFT, OVERFLOW_SIZE_L, OVERFLOW_SIZE_M } from '#src/components/TabMenu/constants';
 
 export interface TabProps extends React.HTMLAttributes<HTMLButtonElement> {
   /** Контент вкладки */
@@ -30,7 +31,11 @@ export interface TabProps extends React.HTMLAttributes<HTMLButtonElement> {
   disabled?: boolean;
 }
 
-type TabWithRefProps = TabProps & { ref: React.RefObject<HTMLButtonElement>; width?: number };
+type TabWithRefProps = TabProps & { ref: React.RefObject<HTMLButtonElement> };
+type OverflowMenuRefProps = {
+  ref: React.RefObject<HTMLButtonElement>;
+  isVisible: boolean;
+};
 
 export interface TabMenuProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'> {
   /** Список вкладок */
@@ -59,72 +64,129 @@ export const TabMenu: React.FC<TabMenuProps> = ({
   onChange,
   ...props
 }) => {
+  const [openedMenu, setOpenedMenu] = React.useState(false);
+  // state for visible tabs in !mobile mode
+  const [visibilityMap, setVisibilityMap] = React.useState<{ [index: number | string]: boolean }>(
+    tabs.reduce<{ [index: number | string]: boolean }>((initialMap, _, index) => {
+      initialMap[index] = true;
+      return initialMap;
+    }, {}),
+  );
+
   // add refs to tabs
   const tabsWithRef: Array<TabWithRefProps> = React.useMemo(() => {
     return tabs.map((tab) => ({ ...tab, ref: React.createRef<HTMLButtonElement>() }));
   }, [tabs]);
 
-  const tabsWrapperRef = React.useRef<HTMLDivElement | null>(null);
-  const tablistRef = React.useRef<HTMLDivElement | null>(null);
-  const overflowBtnRef = React.useRef<HTMLButtonElement | null>(null);
-  const underlineRef = React.useRef<HTMLDivElement | null>(null);
-  const tabsWrapperWidthRef = React.useRef(0);
-  const [update, setUpdate] = React.useState({});
-  const [visibleTabsAmount, setVisibleTabsAmount] = React.useState(tabsWithRef.length);
-  const [openedMenu, setOpenedMenu] = React.useState(false);
-
-  const visibleTabs = mobile ? tabsWithRef : tabsWithRef.slice(0, visibleTabsAmount);
-  const hiddenTabs = mobile ? [] : tabsWithRef.slice(visibleTabsAmount);
-  const model = React.useMemo(() => {
-    return hiddenTabs.map((item) => ({
-      id: item.id,
-      render: (options: RenderOptionProps) => (
-        <MenuItem dimension={dimension} {...options} key={item.id}>
-          {item.content}
-        </MenuItem>
-      ),
-      disabled: item.disabled,
+  // add refs to OverflowMenus
+  const overflowMenuRefs: Array<OverflowMenuRefProps> = React.useMemo(() => {
+    return tabs.slice(0, tabs.length - 1).map((_, index) => ({
+      ref: React.createRef<HTMLButtonElement>(),
+      isVisible: visibilityMap[index] && !visibilityMap[index + 1],
     }));
-  }, [dimension, hiddenTabs]);
+  }, [tabs, visibilityMap]);
 
-  const isHiddenTabSelected = () => hiddenTabs.findIndex((tab) => tab.id === activeTab) != -1;
+  // ref to visible OverflowMenu
+  const currentOverflowMenuRef = React.useMemo(() => {
+    const visibleMenu = overflowMenuRefs.find((item) => item.isVisible);
+    return visibleMenu ? visibleMenu.ref : null;
+  }, [overflowMenuRefs, visibilityMap]);
 
-  const containsActiveTab: boolean = React.useMemo(
-    () => model.findIndex((item) => item.id === activeTab) != -1,
-    [model, activeTab],
-  );
+  // collection of visible elements for handleKeyDown
+  const visibleRefsMap = React.useMemo(() => {
+    let refsMap: Array<React.RefObject<HTMLButtonElement>> = [];
+    if (!mobile) {
+      tabsWithRef.forEach((item, index) => {
+        if (visibilityMap[index]) {
+          refsMap.push(item.ref);
+        }
+      });
+      if (currentOverflowMenuRef !== null) {
+        refsMap.push(currentOverflowMenuRef);
+      }
+    } else {
+      refsMap = tabsWithRef.map((item) => item.ref);
+    }
+    return refsMap;
+  }, [visibilityMap, tabsWithRef, currentOverflowMenuRef, overflowMenuRefs, mobile]);
+
+  const tablistRef = React.useRef<HTMLDivElement | null>(null);
+  const underlineRef = React.useRef<HTMLDivElement | null>(null);
+  const firstTabRef = React.useRef(0);
+
+  // defines if activeTab is visible or is in OverflowMenu in !mobile mode
+  const activeTabIsVisible: boolean = React.useMemo(() => {
+    const activeTabIndex = tabsWithRef.findIndex((item) => item.id === activeTab);
+    return visibilityMap[activeTabIndex];
+  }, [tabsWithRef, activeTab, visibilityMap]);
+
+  // model of all tabs for OverflowMenus
+  const modelAllTabs = React.useMemo(() => {
+    return tabsWithRef.map((item) => {
+      return {
+        id: item.id,
+        render: (options: RenderOptionProps) => (
+          <MenuItem dimension={dimension} {...options} key={item.id}>
+            <MenuItemWrapper>
+              {item.icon && <IconWrapper dimension={dimension}>{item.icon}</IconWrapper>}
+              {item.content}
+              {typeof item.badge !== 'undefined' && (
+                <BadgeWrapper>
+                  <Badge
+                    data-badge
+                    dimension="s"
+                    appearance={item.id === activeTab ? 'info' : item.disabled ? 'lightDisable' : 'lightInactive'}
+                  >
+                    {item.badge}
+                  </Badge>
+                </BadgeWrapper>
+              )}
+            </MenuItemWrapper>
+          </MenuItem>
+        ),
+        disabled: item.disabled,
+      };
+    });
+  }, [dimension, tabs, tabsWithRef]);
+
+  const containsActiveTab = (items: Array<ItemProps>) => {
+    return items.findIndex((item) => item.id === activeTab) != -1;
+  };
+
+  const getNextElement = (target: HTMLElement) => {
+    let currentIndex = visibleRefsMap.findIndex((item) => target === item.current);
+    if (currentIndex < visibleRefsMap.length - 1) {
+      currentIndex++;
+    } else {
+      currentIndex = 0;
+    }
+    return visibleRefsMap[currentIndex].current;
+  };
 
   const getNextFocus = (target: HTMLElement) => {
-    let sibling: Element | null | undefined =
-      target.nextElementSibling || overflowBtnRef.current || tabsWrapperRef.current?.firstElementChild;
-    while (sibling?.hasAttribute('disabled')) {
-      sibling = sibling.nextElementSibling || overflowBtnRef.current || tabsWrapperRef.current?.firstElementChild;
+    let nextElement = getNextElement(target);
+    while (nextElement?.disabled) {
+      nextElement = getNextElement(nextElement);
     }
-    return sibling;
+    return nextElement;
   };
+
+  const getPreviousElement = (target: HTMLElement) => {
+    let currentIndex = visibleRefsMap.findIndex((item) => target === item.current);
+    if (currentIndex === 0) {
+      currentIndex = visibleRefsMap.length - 1;
+    } else {
+      currentIndex--;
+    }
+    return visibleRefsMap[currentIndex].current;
+  };
+
   const getPreviousFocus = (target: HTMLElement) => {
-    let sibling: Element | null | undefined =
-      target.previousElementSibling || overflowBtnRef.current || tabsWrapperRef.current?.lastElementChild;
-    while (sibling?.hasAttribute('disabled')) {
-      sibling = sibling.previousElementSibling || overflowBtnRef.current || tabsWrapperRef.current?.lastElementChild;
+    let previousElement = getPreviousElement(target);
+    while (previousElement?.disabled) {
+      previousElement = getPreviousElement(previousElement);
     }
-    return sibling;
-  };
-
-  const focusFirstTab = () => {
-    let tab = tabsWrapperRef.current?.firstElementChild;
-    while (tab?.hasAttribute('disabled')) {
-      tab = tab.nextElementSibling;
-    }
-    tab ? (tab as HTMLElement).focus() : (overflowBtnRef.current as HTMLElement).focus();
-  };
-
-  const focusLastTab = () => {
-    let tab = tabsWrapperRef.current?.lastElementChild;
-    while (tab?.hasAttribute('disabled')) {
-      tab = tab.previousElementSibling;
-    }
-    tab ? (tab as HTMLElement).focus() : (overflowBtnRef.current as HTMLElement).focus();
+    return previousElement;
   };
 
   const styleUnderline = (left: number, width: number) => {
@@ -156,89 +218,58 @@ export const TabMenu: React.FC<TabMenuProps> = ({
         styleUnderline(activeTabLeft, activeTabWidth);
       }
     }
-    if (!activeTabRef || hiddenTabs.filter((tab) => tab.id === activeTab).length) {
+    if (!activeTabRef || (!mobile && !activeTabIsVisible)) {
       styleUnderline(0, 0);
     }
   };
 
-  const measureTabs = () => {
-    tabsWithRef.forEach((tab: TabWithRefProps, index: number) => {
-      measureTab(tab, dimension, (width: number) => {
-        tab.width = width;
-        if (index === tabs.length - 1) {
-          /**
-           * В measureTab используется асинхронная функция ReactDOM.render.
-           * Поэтому после того, как будут вычислены размеры всех табов,
-           * необходимо обновить компонент, чтобы выполнился перерасчет видимых и скрытых в меню табов.
-           */
-          setUpdate({});
+  React.useLayoutEffect(() => setUnderline(), [tabsWithRef, activeTab, dimension, visibilityMap]);
+
+  // recalculation on resize. For example, it happens after fonts loading
+  React.useLayoutEffect(() => {
+    if (tablistRef.current?.firstElementChild) {
+      const observer = observeRect(tablistRef.current.firstElementChild, (rect) => {
+        const width = rect?.width || 0;
+        if (firstTabRef.current !== width) {
+          firstTabRef.current = width;
+          setUnderline();
         }
       });
+      observer.observe();
+      return () => {
+        observer.unobserve();
+      };
+    }
+  }, [tablistRef.current]);
+
+  const handleIntersection = (entries: IntersectionObserverEntry[]) => {
+    const updatedEntries: { [index: number | string]: boolean } = {};
+    entries.forEach((entry: any) => {
+      const target = entry.target;
+      const targetNumber = target.dataset.number;
+
+      updatedEntries[targetNumber] = entry.isIntersecting && entry.intersectionRatio === 1.0;
     });
+
+    setVisibilityMap((prev: { [index: number | string]: boolean }) => ({
+      ...prev,
+      ...updatedEntries,
+    }));
   };
 
-  // measure tabs sizes
   React.useLayoutEffect(() => {
-    measureTabs();
-  }, [tabsWithRef, dimension]);
+    const observer = new IntersectionObserver(handleIntersection, {
+      root: tablistRef.current,
+      threshold: [0, 1.0],
+    });
 
-  React.useLayoutEffect(() => setUnderline(), [tabsWithRef, activeTab, visibleTabsAmount, update]);
-
-  // recalculation on Tabmenu resize
-  React.useLayoutEffect(() => {
-    if (tablistRef.current) {
-      const observer = observeRect(tablistRef.current, (rect) => {
-        const tablistWidth = rect?.width || 0;
-
-        const tabsTotalWidth = tabsWithRef.reduce((sum, item) => {
-          return sum + (item.width || 0);
-        }, 0);
-        // если все табы не помещаются в одну строку и нужно часть из них вынести в меню
-        if (tabsTotalWidth > tablistWidth) {
-          let visibleTabsCounter = 0;
-          let contentWidth =
-            dimension === 'l' ? OVERFLOW_SIZE_L + OVERFLOW_MARGIN_LEFT : OVERFLOW_SIZE_M + OVERFLOW_MARGIN_LEFT;
-          tabsWithRef.forEach((item: TabWithRefProps) => {
-            contentWidth += item.width || 0;
-            if (contentWidth <= tablistWidth) {
-              visibleTabsCounter++;
-            }
-            setVisibleTabsAmount(visibleTabsCounter);
-          });
-        } else {
-          setVisibleTabsAmount(tabs.length);
-        }
+    if (tablistRef.current && !mobile) {
+      Array.from(tablistRef.current.children).forEach((item) => {
+        observer.observe(item);
       });
-      observer.observe();
-      return () => {
-        observer.unobserve();
-      };
     }
-  }, [tablistRef.current, update]);
-
-  /**
-   * При срабатывании observer обязательно проверяем, что изменилось интересующее нас свойство (ширина).
-   * Это важно учитывать, так как observer срабатывает при изменении целого ряда свойств
-   * элемента (bottom, height, left, right, top, width), большая часть из которых для нас не важна.
-   */
-
-  // recalculation on Tabs Wrapper resize. For example, it happens after fonts loading
-  React.useLayoutEffect(() => {
-    if (tabsWrapperRef.current) {
-      const observer = observeRect(tabsWrapperRef.current, (rect) => {
-        const width = rect?.width || 0;
-        if (tabsWrapperWidthRef.current !== width) {
-          tabsWrapperWidthRef.current = width;
-          setUnderline();
-          measureTabs();
-        }
-      });
-      observer.observe();
-      return () => {
-        observer.unobserve();
-      };
-    }
-  }, [tabsWrapperRef.current, dimension]);
+    return () => observer.disconnect();
+  }, [tablistRef, mobile, setVisibilityMap]);
 
   const handleTabClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     mobile && event.currentTarget.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
@@ -259,6 +290,12 @@ export const TabMenu: React.FC<TabMenuProps> = ({
 
     const code = keyboardKey.getCode(event);
     switch (code) {
+      case keyboardKey.Tab:
+        if (!activeTabIsVisible) {
+          newFocusTarget = currentOverflowMenuRef;
+          event.preventDefault();
+        }
+        break;
       case keyboardKey.ArrowLeft:
         newFocusTarget = getPreviousFocus(target as HTMLElement);
         event.preventDefault();
@@ -271,92 +308,107 @@ export const TabMenu: React.FC<TabMenuProps> = ({
         break;
     }
 
-    if (newFocusTarget) {
+    if (!openedMenu && newFocusTarget) {
       (newFocusTarget as HTMLElement).focus();
     }
   };
 
-  const handleMenuKeyDown = (event: React.KeyboardEvent<HTMLButtonElement>) => {
-    if (!openedMenu) {
-      const code = keyboardKey.getCode(event);
-      switch (code) {
-        case keyboardKey.ArrowLeft:
-          focusLastTab();
-          event.preventDefault();
-          break;
-        case keyboardKey.ArrowRight:
-          focusFirstTab();
-          event.preventDefault();
-          break;
-        default:
-          break;
-      }
-    }
+  const getTabIndex = (id: string) => {
+    return tabsWithRef.findIndex((item) => item.id === id);
   };
 
-  /* width отдельно вынесен из props, чтобы он не передавался в Tab.
-  Иначе будет постоянно передаваться в таб, что не верно,
-  т.к. параметр width нужен только для внутренних расчетов */
-  return (
-    <Wrapper role="tablist" ref={tablistRef} underline={underline} mobile={mobile} {...props}>
-      <Underline ref={underlineRef} aria-hidden />
-      <TabsWrapper ref={tabsWrapperRef} onKeyDown={handleTabsWrapperKeyDown}>
-        {visibleTabs.map((item: TabWithRefProps) => {
-          const { disabled, content, id, icon, badge, ref, width, ...props } = item;
-          return (
-            <Tab
-              ref={ref}
-              key={id}
-              id={id}
-              role="tab"
-              type="button"
-              aria-selected={id === activeTab}
-              selected={id === activeTab}
-              tabIndex={id === activeTab ? 0 : -1}
-              dimension={dimension}
-              disabled={disabled}
-              onClick={handleTabClick}
-              onKeyUp={handleTabKeyUp}
-              {...props}
+  const renderOverflowMenu = (id: string) => {
+    const tabNumber = getTabIndex(id);
+    const tabsForMenu = modelAllTabs.slice(tabNumber + 1);
+    const overflowMenuHidden =
+      tabNumber === tabsWithRef.length - 1 || !(visibilityMap[tabNumber] && !visibilityMap[tabNumber + 1]);
+    const tabIndex = overflowMenuHidden || !tabsForMenu?.filter((item) => item.id === activeTab).length ? -1 : 0;
+    const overflowRef = overflowMenuRefs[tabNumber] ? overflowMenuRefs[tabNumber].ref : null;
+
+    return (
+      <StyledOverflowMenu
+        ref={overflowRef}
+        onOpen={() => setOpenedMenu(true)}
+        onClose={() => setOpenedMenu(false)}
+        alignSelf={alignSelf}
+        items={overflowMenuHidden ? [] : tabsForMenu}
+        selected={containsActiveTab(tabsForMenu) ? activeTab : undefined}
+        dimension={dimension}
+        isHidden={overflowMenuHidden}
+        isActive={containsActiveTab(tabsForMenu)}
+        disabled={tabsForMenu.every((tab) => tab.disabled)}
+        onChange={(id: string) => {
+          onChange(id);
+          styleUnderline(0, 0);
+        }}
+        tabIndex={tabIndex}
+      />
+    );
+  };
+
+  const renderTab = (item: TabWithRefProps) => {
+    const { disabled, content, id, icon, badge, ref, ...props } = item;
+
+    return (
+      <Tab
+        ref={ref}
+        key={id}
+        id={id}
+        role="tab"
+        type="button"
+        aria-selected={id === activeTab}
+        selected={id === activeTab}
+        tabIndex={id === activeTab ? 0 : -1}
+        dimension={dimension}
+        disabled={disabled}
+        onClick={handleTabClick}
+        onKeyUp={handleTabKeyUp}
+        {...props}
+      >
+        <TabContentWrapper dimension={dimension} tabIndex={-1}>
+          {icon && icon}
+          <TabContent>{content}</TabContent>
+          {typeof badge !== 'undefined' && (
+            <Badge
+              data-badge
+              dimension="s"
+              appearance={id === activeTab ? 'info' : disabled ? 'lightDisable' : 'lightInactive'}
             >
-              <TabContentWrapper dimension={dimension} tabIndex={-1}>
-                {icon && icon}
-                <TabContent>{content}</TabContent>
-                {typeof badge !== 'undefined' && (
-                  <Badge
-                    data-badge
-                    dimension="s"
-                    appearance={id === activeTab ? 'info' : disabled ? 'lightDisable' : 'lightInactive'}
-                  >
-                    {badge}
-                  </Badge>
-                )}
-              </TabContentWrapper>
-            </Tab>
-          );
-        })}
-      </TabsWrapper>
-      {hiddenTabs.length && !mobile ? (
-        <StyledOverflowMenu
-          ref={overflowBtnRef}
-          onOpen={() => setOpenedMenu(true)}
-          onClose={() => setOpenedMenu(false)}
-          alignSelf={alignSelf}
-          items={model}
-          selected={containsActiveTab ? activeTab : undefined}
-          dimension={dimension}
-          isActive={containsActiveTab}
-          disabled={hiddenTabs.length === hiddenTabs.filter((tab) => tab.disabled).length}
-          onChange={(id: string) => {
-            onChange(id);
-            if (!isHiddenTabSelected) {
-              styleUnderline(0, 0);
-            }
-          }}
-          tabIndex={hiddenTabs?.filter((item) => item.id === activeTab).length ? 0 : -1}
-          onKeyDown={handleMenuKeyDown}
-        />
-      ) : null}
+              {badge}
+            </Badge>
+          )}
+        </TabContentWrapper>
+      </Tab>
+    );
+  };
+
+  const renderTabs = () => {
+    return tabsWithRef.map((item: TabWithRefProps, index) => {
+      const { id } = item;
+      const tabNumber = getTabIndex(id);
+      const needsOffset = !mobile && tabNumber !== 0 && visibilityMap[tabNumber - 1];
+
+      return (
+        <TabWrapper key={id} data-number={index} $needsOffset={needsOffset} dimension={dimension}>
+          {renderTab(item)}
+          {mobile || tabNumber === tabsWithRef.length - 1 ? null : renderOverflowMenu(id)}
+        </TabWrapper>
+      );
+    });
+  };
+
+  return (
+    <Wrapper
+      role="tablist"
+      ref={tablistRef}
+      underline={underline}
+      mobile={mobile}
+      dimension={dimension}
+      onKeyDown={handleTabsWrapperKeyDown}
+      {...props}
+    >
+      {renderTabs()}
+      <Underline ref={underlineRef} aria-hidden />
     </Wrapper>
   );
 };

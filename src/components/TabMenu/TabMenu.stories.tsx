@@ -11,7 +11,6 @@ export default {
   decorators: [withDesign],
   component: TabMenu,
   parameters: {
-    layout: 'centered',
     design: [
       {
         type: 'figma',
@@ -179,17 +178,15 @@ const Template1: ComponentStory<typeof TabMenu> = (args) => {
 
   return (
     <ThemeProvider theme={swapBorder}>
-      <div style={{ display: 'flex', width: '800px' }}>
-        <TabMenu
-          {...args}
-          activeTab={selected}
-          onChange={(id) => {
-            onChangeTab(id);
-            setSelected(id);
-          }}
-          tabs={tabs}
-        />
-      </div>
+      <TabMenu
+        {...args}
+        activeTab={selected}
+        onChange={(id) => {
+          onChangeTab(id);
+          setSelected(id);
+        }}
+        tabs={tabs}
+      />
     </ThemeProvider>
   );
 };
@@ -198,17 +195,15 @@ const Template2: ComponentStory<typeof TabMenu> = (args) => {
   const [selected, setSelected] = React.useState<string>('3');
   return (
     <>
-      <div style={{ display: 'flex', width: '800px' }}>
-        <TabMenu
-          {...args}
-          activeTab={selected}
-          onChange={(id) => {
-            setSelected(id);
-          }}
-          tabs={tabs}
-          underline
-        />
-      </div>
+      <TabMenu
+        {...args}
+        activeTab={selected}
+        onChange={(id) => {
+          setSelected(id);
+        }}
+        tabs={tabs}
+        underline
+      />
     </>
   );
 };
@@ -217,16 +212,14 @@ const Template3: ComponentStory<typeof TabMenu> = (args) => {
   const [selected, setSelected] = React.useState<string>('2');
   return (
     <>
-      <div style={{ display: 'flex', width: '800px' }}>
-        <TabMenu
-          {...args}
-          activeTab={selected}
-          onChange={(id) => {
-            setSelected(id);
-          }}
-          tabs={disabledTabs}
-        />
-      </div>
+      <TabMenu
+        {...args}
+        activeTab={selected}
+        onChange={(id) => {
+          setSelected(id);
+        }}
+        tabs={disabledTabs}
+      />
     </>
   );
 };
