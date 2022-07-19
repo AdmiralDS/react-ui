@@ -21,7 +21,7 @@ const Description = () => (
   <Desc>Опциональная надстройка над таблицей. Размерность : xl - 56px, l - 48px, m - 40px, s - 32px</Desc>
 );
 export default {
-  title: 'Admiral-2.1/GroupActionsPane',
+  title: 'Admiral-2.1/Data Table/GroupActionsPane',
   decorators: [withDesign],
   component: GroupActionsPane,
   parameters: {
@@ -58,8 +58,6 @@ const SettingsMenu = styled.div`
   width: 320px;
   height: 200px;
   ${typography['Body/Body 2 Long']}
-  color: ${({ theme }) => theme.color['Neutral/Neutral 50']};
-  background-color: ${({ theme }) => theme.color['Special/Elevated BG']};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -75,37 +73,7 @@ const columns = [
 ];
 
 const Simple: ComponentStory<typeof GroupActionsPane> = (args) => {
-  const actions = [
-    {
-      id: '1',
-      render: ({ dimension }: ActionRenderProps) => (
-        <TextButton text={'Action1'} dimension={dimension} icon={<GovernmentOutline />} key={1} />
-      ),
-    },
-    {
-      id: '2',
-      render: ({ dimension }: ActionRenderProps) => (
-        <TextButton text={'Telegram'} dimension={dimension} icon={<TelegramOutline />} key={2} />
-      ),
-    },
-    {
-      id: '3',
-      render: ({ dimension }: ActionRenderProps) => (
-        <TextButton text={'Alert'} dimension={dimension} icon={<AlertOutline />} key={3} />
-      ),
-    },
-    {
-      id: '5',
-      render: ({ dimension }: ActionRenderProps) => <PaneSeparator dimension={dimension} key={5} />,
-    },
-    {
-      id: '4',
-      render: ({ dimension }: ActionRenderProps) => (
-        <TextButton text={'Bank card'} dimension={dimension} icon={<CardSolid />} key={4} />
-      ),
-    },
-  ];
-
+  const dimension = ['s', 'm'].includes(args.dimension || 'm') ? 's' : 'm';
   const [columnsVisibility, setColumnsVisibility] = useState(columns);
   const [searchValue, setSearchValue] = useState<string>('');
 
@@ -133,13 +101,18 @@ const Simple: ComponentStory<typeof GroupActionsPane> = (args) => {
           {...args}
           searchValue={searchValue}
           onChangeSearchValue={handleChangeSearchValue}
-          actions={actions}
           columns={columnsVisibility}
           onColumnsChange={setColumnsVisibility}
           onSearchEnter={handleSearchEnter}
           onSearchLeave={handleSearchLeave}
           settingsMenu={<SettingsMenu>Здесь может быть меню настройки</SettingsMenu>}
-        />
+        >
+          <TextButton text={'Action 1'} dimension={dimension} icon={<GovernmentOutline />} />
+          <TextButton text={'Action 2'} dimension={dimension} icon={<TelegramOutline />} />
+          <TextButton text={'Action 3'} dimension={dimension} icon={<AlertOutline />} disabled />
+          <PaneSeparator dimension={dimension} />
+          <TextButton text={'Action 4'} dimension={dimension} icon={<CardSolid />} />
+        </GroupActionsPane>
       </Wrapper>
     </ThemeProvider>
   );

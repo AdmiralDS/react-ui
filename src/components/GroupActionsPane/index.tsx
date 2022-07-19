@@ -1,4 +1,4 @@
-import React, { ButtonHTMLAttributes, forwardRef, useState } from 'react';
+import React, { ButtonHTMLAttributes, useState } from 'react';
 import styled from 'styled-components';
 import { Dimension as ButtonDimension } from '#src/components/TextButton/types';
 import { ColumnsButton, MenuDimension } from '#src/components/GroupActionsPane/ColumnsButton';
@@ -44,17 +44,9 @@ export interface ActionRenderProps extends ButtonHTMLAttributes<HTMLButtonElemen
   dimension: ButtonDimension;
 }
 
-export interface GroupAction {
-  id: string;
-  render: (options: ActionRenderProps) => React.ReactNode;
-}
-
 export interface GroupActionsPaneProps extends Omit<HTMLDivElement, 'children'> {
   /** Размер панели */
   dimension?: PaneDimension;
-
-  /** Массив групповых действий */
-  actions: Array<GroupAction>;
 
   /** Массив объектов с видимостью колонок */
   columns: Array<{ name: string; visible: boolean }>;
@@ -78,66 +70,56 @@ export interface GroupActionsPaneProps extends Omit<HTMLDivElement, 'children'> 
   settingsMenu?: React.ReactNode;
 }
 
-export const GroupActionsPane = forwardRef<HTMLDivElement, GroupActionsPaneProps>(
-  (
-    {
-      actions,
-      searchValue,
-      dimension = 'xl',
-      columns,
-      settingsMenu,
-      onColumnsChange,
-      onSearchEnter,
-      onSearchLeave,
-      onChangeSearchValue,
-    }: GroupActionsPaneProps,
-    ref,
-  ) => {
-    const [searchOpened, setSearchOpened] = useState<boolean>(false);
+export const GroupActionsPane = ({
+  children,
+  searchValue,
+  dimension = 'xl',
+  columns,
+  settingsMenu,
+  onColumnsChange,
+  onSearchEnter,
+  onSearchLeave,
+  onChangeSearchValue,
+}: React.PropsWithChildren<GroupActionsPaneProps>) => {
+  const [searchOpened, setSearchOpened] = useState<boolean>(false);
 
-    const renderActions = () => {
-      const buttonDimension: ButtonDimension = ['s', 'm'].includes(dimension) ? 's' : 'm';
-      return actions.map((action) => action.render({ dimension: buttonDimension }));
-    };
+  const iconButtonDimension: 's' | 'l' = ['s', 'm'].includes(dimension) ? 's' : 'l';
 
-    const iconButtonDimension: 's' | 'l' = ['s', 'm'].includes(dimension) ? 's' : 'l';
+  const menuDimension: MenuDimension = dimension === 'xl' ? 'l' : dimension;
 
-    const menuDimension: MenuDimension = dimension === 'xl' ? 'l' : dimension;
+  const handleOpenSearch = () => {
+    setSearchOpened(true);
+    onSearchEnter?.();
+  };
 
-    const handleOpenSearch = () => {
-      setSearchOpened(true);
-      onSearchEnter?.();
-    };
+  const handleCloseSearch = () => {
+    setSearchOpened(false);
+    onSearchLeave?.();
+  };
 
-    const handleCloseSearch = () => {
-      setSearchOpened(false);
-      onSearchLeave?.();
-    };
-
-    return (
-      <Pane ref={ref} dimension={dimension}>
-        {!searchOpened && <Actions>{renderActions()}</Actions>}
-        <IconsBlock>
-          <SearchBlock
-            searchValue={searchValue}
-            onChangeSearchValue={onChangeSearchValue}
-            dimension={iconButtonDimension}
-            opened={searchOpened}
-            onOpenSearch={handleOpenSearch}
-            onCloseSearch={handleCloseSearch}
-          />
-          <ColumnsButton
-            columns={columns}
-            menuDimension={menuDimension}
-            buttonDimension={iconButtonDimension}
-            onColumnsChange={onColumnsChange}
-          />
-          {settingsMenu && <SettingsButton menu={settingsMenu} buttonDimension={iconButtonDimension} />}
-        </IconsBlock>
-      </Pane>
-    );
-  },
-);
+  return (
+    <Pane dimension={dimension}>
+      {!searchOpened && <Actions>{children}</Actions>}
+      <IconsBlock>
+        <SearchBlock
+          searchValue={searchValue}
+          onChangeSearchValue={onChangeSearchValue}
+          dimension={iconButtonDimension}
+          opened={searchOpened}
+          onOpenSearch={handleOpenSearch}
+          onCloseSearch={handleCloseSearch}
+        />
+        <ColumnsButton
+          columns={columns}
+          menuDimension={menuDimension}
+          buttonDimension={iconButtonDimension}
+          onColumnsChange={onColumnsChange}
+        />
+        {settingsMenu && <SettingsButton menu={settingsMenu} buttonDimension={iconButtonDimension} />}
+      </IconsBlock>
+    </Pane>
+  );
+};
 
 GroupActionsPane.displayName = 'GroupActionsPane';
 

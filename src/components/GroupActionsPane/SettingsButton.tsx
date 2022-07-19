@@ -5,6 +5,15 @@ import { IconButton } from '#src/components/IconButton';
 import { DropdownContainer } from '#src/components/DropdownContainer';
 import { ReactComponent as SettingsOutline } from '@admiral-ds/icons/build/system/SettingsOutline.svg';
 import { refSetter } from '#src/components/common/utils/refSetter';
+import styled from 'styled-components';
+import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
+
+const StyledDrop = styled(DropdownContainer)`
+  color: ${({ theme }) => theme.color['Neutral/Neutral 50']};
+  background-color: ${({ theme }) => theme.color['Special/Elevated BG']};
+  ${(props) => props.theme.shadow['Shadow 08']};
+  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
+`;
 
 export interface ColumnsButtonProps extends HTMLAttributes<HTMLButtonElement> {
   menu: React.ReactNode;
@@ -39,9 +48,9 @@ export const SettingsButton = React.forwardRef<HTMLButtonElement, ColumnsButtonP
           <SettingsOutline />
         </IconButton>
         {opened && (
-          <DropdownContainer targetRef={buttonRef} alignSelf={'flex-end'} onClickOutside={handleClickOutside}>
+          <StyledDrop targetRef={buttonRef} alignSelf={'flex-end'} onClickOutside={handleClickOutside}>
             {menu}
-          </DropdownContainer>
+          </StyledDrop>
         )}
       </>
     );

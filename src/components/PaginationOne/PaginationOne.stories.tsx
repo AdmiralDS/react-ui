@@ -12,7 +12,7 @@ const Separator = styled.div`
 `;
 
 export default {
-  title: 'Admiral-2.1/PaginationOne',
+  title: 'Admiral-2.1/Data Table/PaginationOne',
   decorators: [withDesign],
   component: PaginationOne,
   parameters: {
