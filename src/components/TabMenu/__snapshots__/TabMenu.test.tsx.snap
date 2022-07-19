@@ -3,7 +3,94 @@
 exports[`TabMenu should render default component 1`] = `
 Object {
   "asFragment": [Function],
-  "baseElement": .c0 {
+  "baseElement": .c6 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  box-sizing: border-box;
+  position: relative;
+  cursor: pointer;
+  border: 0;
+  outline: none;
+  padding: 0;
+  background: transparent;
+  -webkit-tap-highlight-color: transparent;
+  overflow: visible;
+  height: 36px;
+  width: 36px;
+}
+
+.c6:hover:not(:disabled) {
+  border-radius: 50%;
+  background-color: #0000000D;
+}
+
+.c6:focus-visible:before {
+  content: '';
+  position: absolute;
+  top: 2px;
+  bottom: 2px;
+  left: 2px;
+  right: 2px;
+  border: 2px solid #0062FF;
+  border-radius: 4px;
+}
+
+.c6:active:not(:disabled) {
+  border-radius: 50%;
+  background-color: #00000017;
+}
+
+.c6:disabled {
+  cursor: default;
+}
+
+.c6:disabled *[fill^='#'] {
+  fill: #B1B5BB;
+}
+
+.c8 {
+  position: relative;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.c9 {
+  height: 24px;
+  width: 24px;
+  margin: auto;
+}
+
+.c9 > svg {
+  height: 100%;
+  width: 100%;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+}
+
+.c9 > svg *[fill^='#'] {
+  fill: #74777F;
+}
+
+.c0 {
   position: relative;
   display: -webkit-box;
   display: -webkit-flex;
@@ -12,21 +99,19 @@ Object {
   -webkit-flex: 1 1 auto;
   -ms-flex: 1 1 auto;
   flex: 1 1 auto;
-  -webkit-flex-wrap: nowrap;
-  -ms-flex-wrap: nowrap;
-  flex-wrap: nowrap;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
   width: 100%;
   box-sizing: border-box;
   box-shadow: inset 0 -2px 0 0 transparent;
-  overflow-x: visible;
+  overflow: hidden;
+  height: 48px;
+  max-height: 48px;
   overflow: -moz-scrollbars-none;
   -ms-overflow-style: none;
   -webkit-scrollbar-width: none;
@@ -44,15 +129,7 @@ Object {
   height: 0 !important;
 }
 
-.c2 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  margin-right: auto;
-}
-
-.c1 {
+.c12 {
   position: absolute;
   bottom: 0;
   display: -webkit-box;
@@ -65,7 +142,7 @@ Object {
   transition: all 0.2s ease-out;
 }
 
-.c6 {
+.c5 {
   height: 100%;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
@@ -82,7 +159,7 @@ Object {
   white-space: nowrap;
 }
 
-.c5 {
+.c4 {
   position: relative;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
@@ -97,7 +174,7 @@ Object {
   padding: 0 16px;
 }
 
-.c3 {
+.c2 {
   position: relative;
   box-sizing: border-box;
   display: -webkit-inline-box;
@@ -130,7 +207,7 @@ Object {
   -webkit-tap-highlight-color: transparent;
 }
 
-.c3:focus:not(:active):before {
+.c2:focus:not(:active):before {
   position: absolute;
   content: '';
   border: 2px solid #0062FF;
@@ -140,12 +217,12 @@ Object {
   right: 0;
 }
 
-.c3:focus,
-.c3 > .c4 {
+.c2:focus,
+.c2 > .c3 {
   outline: none;
 }
 
-.c3 svg {
+.c2 svg {
   display: inline-block;
   -webkit-flex: 1 0 auto;
   -ms-flex: 1 0 auto;
@@ -155,41 +232,41 @@ Object {
   margin-right: 8px;
 }
 
-.c3 svg *[fill^='#'] {
+.c2 svg *[fill^='#'] {
   fill: #74777F;
 }
 
-.c3 [data-badge] {
+.c2 [data-badge] {
   margin-left: 8px;
 }
 
-.c3:hover:not(:disabled) {
+.c2:hover:not(:disabled) {
   background: #0000000D;
 }
 
-.c3:active:not(:disabled) {
+.c2:active:not(:disabled) {
   color: #0062FF;
 }
 
-.c3:active:not(:disabled) *[fill^='#'] {
+.c2:active:not(:disabled) *[fill^='#'] {
   fill: #0062FF;
 }
 
-.c3:active:not(:disabled) [data-badge] {
+.c2:active:not(:disabled) [data-badge] {
   background: #0062FF;
   color: #FFFFFF;
 }
 
-.c3:disabled {
+.c2:disabled {
   color: #B1B5BB;
   cursor: default;
 }
 
-.c3:disabled *[fill^='#'] {
+.c2:disabled *[fill^='#'] {
   fill: #B1B5BB;
 }
 
-.c7 {
+.c11 {
   position: relative;
   box-sizing: border-box;
   display: -webkit-inline-box;
@@ -222,7 +299,7 @@ Object {
   -webkit-tap-highlight-color: transparent;
 }
 
-.c7:focus:not(:active):before {
+.c11:focus:not(:active):before {
   position: absolute;
   content: '';
   border: 2px solid #0062FF;
@@ -232,12 +309,12 @@ Object {
   right: 0;
 }
 
-.c7:focus,
-.c7 > .c4 {
+.c11:focus,
+.c11 > .c3 {
   outline: none;
 }
 
-.c7 svg {
+.c11 svg {
   display: inline-block;
   -webkit-flex: 1 0 auto;
   -ms-flex: 1 0 auto;
@@ -247,38 +324,79 @@ Object {
   margin-right: 8px;
 }
 
-.c7 svg *[fill^='#'] {
+.c11 svg *[fill^='#'] {
   fill: #74777F;
 }
 
-.c7 [data-badge] {
+.c11 [data-badge] {
   margin-left: 8px;
 }
 
-.c7:hover:not(:disabled) {
+.c11:hover:not(:disabled) {
   background: #0000000D;
 }
 
-.c7:active:not(:disabled) {
+.c11:active:not(:disabled) {
   color: #0062FF;
 }
 
-.c7:active:not(:disabled) *[fill^='#'] {
+.c11:active:not(:disabled) *[fill^='#'] {
   fill: #0062FF;
 }
 
-.c7:active:not(:disabled) [data-badge] {
+.c11:active:not(:disabled) [data-badge] {
   background: #0062FF;
   color: #FFFFFF;
 }
 
-.c7:disabled {
+.c11:disabled {
   color: #B1B5BB;
   cursor: default;
 }
 
-.c7:disabled *[fill^='#'] {
+.c11:disabled *[fill^='#'] {
   fill: #B1B5BB;
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-left: 0px;
+}
+
+.c10 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-left: -42px;
+}
+
+.c7 {
+  visibility: hidden;
+  margin-left: 6px;
+}
+
+.c7:focus-visible:before {
+  top: -6px;
+  left: -6px;
+  right: -6px;
+  bottom: -6px;
+  border-radius: 0;
+}
+
+.c7 svg *[fill^='#'] {
+  fill: #74777F;
 }
 
 <body>
@@ -289,15 +407,12 @@ Object {
         role="tablist"
       >
         <div
-          aria-hidden="true"
           class="c1"
-        />
-        <div
-          class="c2"
+          data-number="0"
         >
           <button
             aria-selected="true"
-            class="c3 tag"
+            class="c2 tag"
             data-testid="1"
             id="1"
             role="tab"
@@ -305,59 +420,198 @@ Object {
             type="button"
           >
             <span
-              class="c4 c5"
+              class="c3 c4"
               tabindex="-1"
             >
               <div
-                class="c6"
+                class="c5"
               >
                 Option 1
               </div>
             </span>
           </button>
           <button
+            aria-expanded="false"
+            aria-haspopup="false"
+            class="c6 c7"
+            tabindex="-1"
+            type="button"
+          >
+            <span
+              class="c8"
+            >
+              <div
+                class="c9"
+              >
+                <div
+                  aria-hidden="true"
+                />
+              </div>
+            </span>
+          </button>
+        </div>
+        <div
+          class="c10"
+          data-number="1"
+        >
+          <button
             aria-selected="false"
-            class="c7 tag"
+            class="c11 tag"
             id="2"
             role="tab"
             tabindex="-1"
             type="button"
           >
             <span
-              class="c4 c5"
+              class="c3 c4"
               tabindex="-1"
             >
               <div
-                class="c6"
+                class="c5"
               >
                 Option 22
               </div>
             </span>
           </button>
           <button
+            aria-expanded="false"
+            aria-haspopup="false"
+            class="c6 c7"
+            tabindex="-1"
+            type="button"
+          >
+            <span
+              class="c8"
+            >
+              <div
+                class="c9"
+              >
+                <div
+                  aria-hidden="true"
+                />
+              </div>
+            </span>
+          </button>
+        </div>
+        <div
+          class="c10"
+          data-number="2"
+        >
+          <button
             aria-selected="false"
-            class="c7 tag"
+            class="c11 tag"
             id="3"
             role="tab"
             tabindex="-1"
             type="button"
           >
             <span
-              class="c4 c5"
+              class="c3 c4"
               tabindex="-1"
             >
               <div
-                class="c6"
+                class="c5"
               >
                 Option 333
               </div>
             </span>
           </button>
         </div>
+        <div
+          aria-hidden="true"
+          class="c12"
+        />
       </div>
     </div>
   </body>,
-  "container": .c0 {
+  "container": .c6 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  box-sizing: border-box;
+  position: relative;
+  cursor: pointer;
+  border: 0;
+  outline: none;
+  padding: 0;
+  background: transparent;
+  -webkit-tap-highlight-color: transparent;
+  overflow: visible;
+  height: 36px;
+  width: 36px;
+}
+
+.c6:hover:not(:disabled) {
+  border-radius: 50%;
+  background-color: #0000000D;
+}
+
+.c6:focus-visible:before {
+  content: '';
+  position: absolute;
+  top: 2px;
+  bottom: 2px;
+  left: 2px;
+  right: 2px;
+  border: 2px solid #0062FF;
+  border-radius: 4px;
+}
+
+.c6:active:not(:disabled) {
+  border-radius: 50%;
+  background-color: #00000017;
+}
+
+.c6:disabled {
+  cursor: default;
+}
+
+.c6:disabled *[fill^='#'] {
+  fill: #B1B5BB;
+}
+
+.c8 {
+  position: relative;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.c9 {
+  height: 24px;
+  width: 24px;
+  margin: auto;
+}
+
+.c9 > svg {
+  height: 100%;
+  width: 100%;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+}
+
+.c9 > svg *[fill^='#'] {
+  fill: #74777F;
+}
+
+.c0 {
   position: relative;
   display: -webkit-box;
   display: -webkit-flex;
@@ -366,21 +620,19 @@ Object {
   -webkit-flex: 1 1 auto;
   -ms-flex: 1 1 auto;
   flex: 1 1 auto;
-  -webkit-flex-wrap: nowrap;
-  -ms-flex-wrap: nowrap;
-  flex-wrap: nowrap;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
   width: 100%;
   box-sizing: border-box;
   box-shadow: inset 0 -2px 0 0 transparent;
-  overflow-x: visible;
+  overflow: hidden;
+  height: 48px;
+  max-height: 48px;
   overflow: -moz-scrollbars-none;
   -ms-overflow-style: none;
   -webkit-scrollbar-width: none;
@@ -398,15 +650,7 @@ Object {
   height: 0 !important;
 }
 
-.c2 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  margin-right: auto;
-}
-
-.c1 {
+.c12 {
   position: absolute;
   bottom: 0;
   display: -webkit-box;
@@ -419,7 +663,7 @@ Object {
   transition: all 0.2s ease-out;
 }
 
-.c6 {
+.c5 {
   height: 100%;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
@@ -436,7 +680,7 @@ Object {
   white-space: nowrap;
 }
 
-.c5 {
+.c4 {
   position: relative;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
@@ -451,7 +695,7 @@ Object {
   padding: 0 16px;
 }
 
-.c3 {
+.c2 {
   position: relative;
   box-sizing: border-box;
   display: -webkit-inline-box;
@@ -484,7 +728,7 @@ Object {
   -webkit-tap-highlight-color: transparent;
 }
 
-.c3:focus:not(:active):before {
+.c2:focus:not(:active):before {
   position: absolute;
   content: '';
   border: 2px solid #0062FF;
@@ -494,12 +738,12 @@ Object {
   right: 0;
 }
 
-.c3:focus,
-.c3 > .c4 {
+.c2:focus,
+.c2 > .c3 {
   outline: none;
 }
 
-.c3 svg {
+.c2 svg {
   display: inline-block;
   -webkit-flex: 1 0 auto;
   -ms-flex: 1 0 auto;
@@ -509,41 +753,41 @@ Object {
   margin-right: 8px;
 }
 
-.c3 svg *[fill^='#'] {
+.c2 svg *[fill^='#'] {
   fill: #74777F;
 }
 
-.c3 [data-badge] {
+.c2 [data-badge] {
   margin-left: 8px;
 }
 
-.c3:hover:not(:disabled) {
+.c2:hover:not(:disabled) {
   background: #0000000D;
 }
 
-.c3:active:not(:disabled) {
+.c2:active:not(:disabled) {
   color: #0062FF;
 }
 
-.c3:active:not(:disabled) *[fill^='#'] {
+.c2:active:not(:disabled) *[fill^='#'] {
   fill: #0062FF;
 }
 
-.c3:active:not(:disabled) [data-badge] {
+.c2:active:not(:disabled) [data-badge] {
   background: #0062FF;
   color: #FFFFFF;
 }
 
-.c3:disabled {
+.c2:disabled {
   color: #B1B5BB;
   cursor: default;
 }
 
-.c3:disabled *[fill^='#'] {
+.c2:disabled *[fill^='#'] {
   fill: #B1B5BB;
 }
 
-.c7 {
+.c11 {
   position: relative;
   box-sizing: border-box;
   display: -webkit-inline-box;
@@ -576,7 +820,7 @@ Object {
   -webkit-tap-highlight-color: transparent;
 }
 
-.c7:focus:not(:active):before {
+.c11:focus:not(:active):before {
   position: absolute;
   content: '';
   border: 2px solid #0062FF;
@@ -586,12 +830,12 @@ Object {
   right: 0;
 }
 
-.c7:focus,
-.c7 > .c4 {
+.c11:focus,
+.c11 > .c3 {
   outline: none;
 }
 
-.c7 svg {
+.c11 svg {
   display: inline-block;
   -webkit-flex: 1 0 auto;
   -ms-flex: 1 0 auto;
@@ -601,38 +845,79 @@ Object {
   margin-right: 8px;
 }
 
-.c7 svg *[fill^='#'] {
+.c11 svg *[fill^='#'] {
   fill: #74777F;
 }
 
-.c7 [data-badge] {
+.c11 [data-badge] {
   margin-left: 8px;
 }
 
-.c7:hover:not(:disabled) {
+.c11:hover:not(:disabled) {
   background: #0000000D;
 }
 
-.c7:active:not(:disabled) {
+.c11:active:not(:disabled) {
   color: #0062FF;
 }
 
-.c7:active:not(:disabled) *[fill^='#'] {
+.c11:active:not(:disabled) *[fill^='#'] {
   fill: #0062FF;
 }
 
-.c7:active:not(:disabled) [data-badge] {
+.c11:active:not(:disabled) [data-badge] {
   background: #0062FF;
   color: #FFFFFF;
 }
 
-.c7:disabled {
+.c11:disabled {
   color: #B1B5BB;
   cursor: default;
 }
 
-.c7:disabled *[fill^='#'] {
+.c11:disabled *[fill^='#'] {
   fill: #B1B5BB;
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-left: 0px;
+}
+
+.c10 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-left: -42px;
+}
+
+.c7 {
+  visibility: hidden;
+  margin-left: 6px;
+}
+
+.c7:focus-visible:before {
+  top: -6px;
+  left: -6px;
+  right: -6px;
+  bottom: -6px;
+  border-radius: 0;
+}
+
+.c7 svg *[fill^='#'] {
+  fill: #74777F;
 }
 
 <div>
@@ -642,15 +927,12 @@ Object {
       role="tablist"
     >
       <div
-        aria-hidden="true"
         class="c1"
-      />
-      <div
-        class="c2"
+        data-number="0"
       >
         <button
           aria-selected="true"
-          class="c3 tag"
+          class="c2 tag"
           data-testid="1"
           id="1"
           role="tab"
@@ -658,55 +940,107 @@ Object {
           type="button"
         >
           <span
-            class="c4 c5"
+            class="c3 c4"
             tabindex="-1"
           >
             <div
-              class="c6"
+              class="c5"
             >
               Option 1
             </div>
           </span>
         </button>
         <button
+          aria-expanded="false"
+          aria-haspopup="false"
+          class="c6 c7"
+          tabindex="-1"
+          type="button"
+        >
+          <span
+            class="c8"
+          >
+            <div
+              class="c9"
+            >
+              <div
+                aria-hidden="true"
+              />
+            </div>
+          </span>
+        </button>
+      </div>
+      <div
+        class="c10"
+        data-number="1"
+      >
+        <button
           aria-selected="false"
-          class="c7 tag"
+          class="c11 tag"
           id="2"
           role="tab"
           tabindex="-1"
           type="button"
         >
           <span
-            class="c4 c5"
+            class="c3 c4"
             tabindex="-1"
           >
             <div
-              class="c6"
+              class="c5"
             >
               Option 22
             </div>
           </span>
         </button>
         <button
+          aria-expanded="false"
+          aria-haspopup="false"
+          class="c6 c7"
+          tabindex="-1"
+          type="button"
+        >
+          <span
+            class="c8"
+          >
+            <div
+              class="c9"
+            >
+              <div
+                aria-hidden="true"
+              />
+            </div>
+          </span>
+        </button>
+      </div>
+      <div
+        class="c10"
+        data-number="2"
+      >
+        <button
           aria-selected="false"
-          class="c7 tag"
+          class="c11 tag"
           id="3"
           role="tab"
           tabindex="-1"
           type="button"
         >
           <span
-            class="c4 c5"
+            class="c3 c4"
             tabindex="-1"
           >
             <div
-              class="c6"
+              class="c5"
             >
               Option 333
             </div>
           </span>
         </button>
       </div>
+      <div
+        aria-hidden="true"
+        class="c12"
+      />
     </div>
   </div>,
   "debug": [Function],

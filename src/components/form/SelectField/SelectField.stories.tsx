@@ -160,8 +160,9 @@ const SimpleTemplate: ComponentStory<typeof SelectField> = (props) => {
   return (
     <ThemeProvider theme={swapBorder}>
       <SelectField
+        {...props}
         mode="searchSelect"
-        label="label"
+        label="Label"
         className="Search"
         value={selectValue}
         onChange={onChange}
