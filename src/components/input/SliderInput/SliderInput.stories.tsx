@@ -49,9 +49,6 @@ export default {
     thousand: {
       type: 'string',
     },
-    displayStatusIcon: {
-      control: { type: 'boolean' },
-    },
     displayClearIcon: {
       control: { type: 'boolean' },
     },
