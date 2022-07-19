@@ -14,6 +14,8 @@ export interface SearchInputProps extends InputHTMLAttributes<HTMLInputElement> 
 
 const collapsedMixin = css<{ dimension?: InputDimension; collapsed?: boolean }>`
   max-width: ${({ dimension }) => (dimension === 's' ? '100px' : '164px')};
+  overflow: hidden;
+  white-space: nowrap;
   &::after {
     background-color: ${(props) => props.theme.color['Neutral/Neutral 20']};
   }
@@ -48,6 +50,7 @@ const StyledInput = styled.input<{ dimension?: InputDimension }>`
   color: ${(props) => props.theme.color['Neutral/Neutral 90']};
   box-sizing: border-box;
   width: 100%;
+  text-overflow: ellipsis;
   ${(props) => (props.dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])};
 
   &::placeholder {
