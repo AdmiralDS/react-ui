@@ -15,6 +15,10 @@ const StyledDrop = styled(DropdownContainer)`
   border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
 `;
 
+const StyledIconButton = styled(IconButton)`
+  margin-left: 4px;
+`;
+
 export interface ColumnsButtonProps extends HTMLAttributes<HTMLButtonElement> {
   menu: React.ReactNode;
   buttonDimension?: 's' | 'l';
@@ -38,7 +42,7 @@ export const SettingsButton = React.forwardRef<HTMLButtonElement, ColumnsButtonP
 
     return (
       <>
-        <IconButton
+        <StyledIconButton
           ref={refSetter(ref, buttonRef)}
           dimension={buttonDimension}
           // onKeyDown={handleKeyDown}
@@ -46,7 +50,7 @@ export const SettingsButton = React.forwardRef<HTMLButtonElement, ColumnsButtonP
           {...props}
         >
           <SettingsOutline />
-        </IconButton>
+        </StyledIconButton>
         {opened && (
           <StyledDrop targetRef={buttonRef} alignSelf={'flex-end'} onClickOutside={handleClickOutside}>
             {menu}
