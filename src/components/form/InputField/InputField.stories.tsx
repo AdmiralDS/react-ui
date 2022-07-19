@@ -38,9 +38,6 @@ export default {
     extraText: {
       type: 'string',
     },
-    displayStatusIcon: {
-      control: { type: 'boolean' },
-    },
     displayClearIcon: {
       control: { type: 'boolean' },
     },
@@ -102,12 +99,7 @@ const Template: ComponentStory<typeof InputField> = (props) => {
           label="Поле с ошибкой"
           extraText="Поле не прошло валидацию, необходимо ввести корректное значение"
         />
-        <InputField
-          status="success"
-          displayStatusIcon
-          label="Поле с индикацией успеха"
-          extraText="Поле успешно прошло валидацию"
-        />
+        <InputField status="success" label="Поле с индикацией успеха" extraText="Поле успешно прошло валидацию" />
         <InputField
           displayClearIcon
           placeholder="идет поиск ..."

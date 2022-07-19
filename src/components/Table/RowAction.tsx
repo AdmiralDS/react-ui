@@ -12,6 +12,10 @@ const Action = styled.div<{ dimension: Dimension }>`
   height: ${({ dimension }) => (dimension === 's' || dimension === 'm' ? 32 : 36)}px;
   padding: 6px;
   cursor: pointer;
+
+  & *[fill^='#'] {
+    fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
+  }
   &:hover {
     border-radius: 50%;
     background-color: ${({ theme }) => theme.color['Opacity/Hover']};
