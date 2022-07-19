@@ -31,6 +31,7 @@ const Pane = styled.div<{ dimension?: PaneDimension }>`
 const Actions = styled.div`
   display: flex;
   column-gap: 16px;
+  margin-right: 16px;
 `;
 
 const IconsBlock = styled.div<{ dimension?: PaneDimension }>`

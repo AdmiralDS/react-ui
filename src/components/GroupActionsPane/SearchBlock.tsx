@@ -17,6 +17,7 @@ export interface ColumnsButtonProps extends HTMLAttributes<HTMLButtonElement> {
 }
 
 const StyledIconButton = styled(IconButton)`
+  flex-shrink: 0;
   &:focus-visible {
     z-index: 1;
   }
@@ -54,24 +55,21 @@ export const SearchBlock = React.forwardRef<HTMLButtonElement, ColumnsButtonProp
       }
     };
 
-    const visibleInput = opened || !!searchValue;
     const collapsedInput = !opened && !!searchValue;
 
     return (
-      <>
-        {visibleInput && (
-          <SearchInput
-            ref={inputRef}
-            dimension={dimension}
-            autoFocus
-            tabIndex={0}
-            collapsed={collapsedInput}
-            value={searchValue}
-            onChange={onChangeSearchValue}
-            onBlur={handleInputBlur}
-            onFocus={handleInputFocus}
-          />
-        )}
+      <SearchInput
+        ref={inputRef}
+        dimension={dimension}
+        autoFocus
+        tabIndex={0}
+        opened={opened}
+        collapsed={collapsedInput}
+        value={searchValue}
+        onChange={onChangeSearchValue}
+        onBlur={handleInputBlur}
+        onFocus={handleInputFocus}
+      >
         <StyledIconButton
           ref={refSetter(ref, buttonRef)}
           dimension={dimension}
@@ -81,7 +79,7 @@ export const SearchBlock = React.forwardRef<HTMLButtonElement, ColumnsButtonProp
         >
           <SearchOutline />
         </StyledIconButton>
-      </>
+      </SearchInput>
     );
   },
 );

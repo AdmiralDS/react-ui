@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { InputHTMLAttributes, useEffect, useRef } from 'react';
+import { InputHTMLAttributes, useEffect, useRef, useState } from 'react';
 import * as React from 'react';
 import { typography } from '#src/components/Typography';
 import { refSetter } from '#src/components/common/utils/refSetter';
@@ -10,38 +10,44 @@ export interface SearchInputProps extends InputHTMLAttributes<HTMLInputElement> 
   /** Делает высоту компонента больше или меньше обычной */
   dimension?: InputDimension;
   collapsed?: boolean;
+  opened?: boolean;
 }
 
 const collapsedMixin = css<{ dimension?: InputDimension; collapsed?: boolean }>`
-  max-width: ${({ dimension }) => (dimension === 's' ? '100px' : '164px')};
+  max-width: ${({ dimension }) => (dimension === 's' ? '240px' : '276px')};
   overflow: hidden;
   white-space: nowrap;
+  z-index: 1;
   &::after {
     background-color: ${(props) => props.theme.color['Neutral/Neutral 20']};
   }
 `;
 
-const InputWrapper = styled.div<{ dimension?: InputDimension; collapsed?: boolean }>`
+const InputWrapper = styled.div<{ dimension?: InputDimension; collapsed?: boolean; visibleInput?: boolean }>`
   display: flex;
   flex: 1 0 auto;
+  flex: ${({ visibleInput }) => (visibleInput ? '1 0 auto' : '0 0 auto')};
   height: 100%;
   position: relative;
   background-color: transparent;
+  align-items: center;
+  padding-right: 4px;
   &::after {
     content: '';
     position: absolute;
     bottom: 0;
     left: 0;
-    width: ${({ dimension }) => (dimension === 's' ? 'calc(100% + 32px)' : 'calc(100% + 48px)')};
+    width: calc(100% - 4px);
     height: 2px;
-    background-color: ${(props) => props.theme.color['Primary/Primary 60 Main']};
+    background-color: ${({ theme, visibleInput }) => (visibleInput ? theme.color['Primary/Primary 60 Main'] : 'none')};
   }
 
   ${({ collapsed }) => collapsed && collapsedMixin}
 `;
 
-const StyledInput = styled.input<{ dimension?: InputDimension }>`
+const StyledInput = styled.input<{ dimension?: InputDimension; visible?: boolean }>`
   flex-grow: 1;
+  display: ${({ visible }) => (visible ? 'block' : 'none')};
   outline: none;
   appearance: none;
   border: none;
@@ -59,15 +65,31 @@ const StyledInput = styled.input<{ dimension?: InputDimension }>`
 `;
 
 export const SearchInput = React.forwardRef<HTMLInputElement, SearchInputProps>(
-  ({ dimension = 'l', collapsed = false, ...props }, ref) => {
+  ({ dimension = 'l', opened, children, value, ...props }, ref) => {
     const inputRef = useRef<HTMLInputElement>(null);
+    const [collapsed, setCollapsed] = useState<boolean>(false);
+
     useEffect(() => {
-      if (!collapsed) inputRef?.current?.focus();
-    }, [collapsed]);
+      setCollapsed(!opened && !!value);
+    }, [opened, value]);
+
+    useEffect(() => {
+      if (opened) inputRef?.current?.focus();
+    }, [opened]);
+
+    const visible = opened || !!value;
 
     return (
-      <InputWrapper collapsed={collapsed} dimension={dimension}>
-        <StyledInput ref={refSetter(ref, inputRef)} {...props} dimension={dimension} placeholder={'Искать в таблице'} />
+      <InputWrapper collapsed={collapsed} visibleInput={visible} dimension={dimension}>
+        <StyledInput
+          ref={refSetter(ref, inputRef)}
+          {...props}
+          visible={visible}
+          value={value}
+          dimension={dimension}
+          placeholder={'Искать в таблице'}
+        />
+        {children}
       </InputWrapper>
     );
   },
