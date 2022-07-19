@@ -1,13 +1,9 @@
-import React, { ButtonHTMLAttributes, forwardRef, useMemo, useRef, useState } from 'react';
+import React, { ButtonHTMLAttributes, forwardRef, useState } from 'react';
 import styled from 'styled-components';
 import { Dimension as ButtonDimension } from '#src/components/TextButton/types';
-import { ItemProps, MenuItem, RenderOptionProps } from '#src/components/MenuItem';
-import { Checkbox } from '#src/components/Checkbox';
-import { Label } from '#src/components/Checkbox/Label';
-import { Menu } from '#src/components/Menu';
 import { ColumnsButton, MenuDimension } from '#src/components/GroupActionsPane/ColumnsButton';
 import { SettingsButton } from '#src/components/GroupActionsPane/SettingsButton';
-import { SearchButton } from '#src/components/GroupActionsPane/SearchButton';
+import { SearchBlock } from '#src/components/GroupActionsPane/SearchBlock';
 
 export type PaneDimension = 's' | 'm' | 'l' | 'xl';
 
@@ -44,33 +40,6 @@ const IconsBlock = styled.div<{ dimension?: PaneDimension }>`
   justify-content: flex-end;
 `;
 
-// const IconButton = styled.button<{ dimension?: PaneDimension }>`
-//   height: ${({ dimension }) => (dimension === 's' || dimension === 'm' ? 32 : 48)}px;
-//   width: ${({ dimension }) => (dimension === 's' || dimension === 'm' ? 32 : 48)}px;
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-//   cursor: pointer;
-//
-//   svg {
-//     height: ${({ dimension }) => (dimension === 's' || dimension === 'm' ? 20 : 24)}px;
-//     width: ${({ dimension }) => (dimension === 's' || dimension === 'm' ? 20 : 24)}px;
-//   }
-// `;
-
-const ColumnsMenu = styled(Menu)`
-  width: 320px;
-`;
-
-const ColumnsMenuItem = styled(MenuItem)`
-  display: flex;
-  justify-content: flex-start;
-`;
-
-const ColumnLabel = styled(Label)`
-  margin-left: 10px;
-`;
-
 export interface ActionRenderProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   dimension: ButtonDimension;
 }
@@ -81,22 +50,50 @@ export interface GroupAction {
 }
 
 export interface GroupActionsPaneProps extends Omit<HTMLDivElement, 'children'> {
+  /** Размер панели */
   dimension?: PaneDimension;
+
+  /** Массив групповых действий */
   actions: Array<GroupAction>;
+
+  /** Массив объектов с видимостью колонок */
   columns: Array<{ name: string; visible: boolean }>;
+
+  /** Значение строки поиска */
+  searchValue: string;
+
+  /** Обработчик изменения видимости колонок */
   onColumnsChange?: (columns: Array<{ name: string; visible: boolean }>) => void;
-  onSearch?: (value: string) => void;
+
+  /** Обработчик открытия строки поиска */
+  onSearchEnter?: () => void;
+
+  /** Обработчик смены фокусировки со строки поиска */
+  onSearchLeave?: () => void;
+
+  /** Обработчик изменения строки поиска */
+  onChangeSearchValue: (e: React.ChangeEvent<HTMLInputElement>) => void;
+
+  /** Объект, отображаемый в качестве меню настройки */
   settingsMenu?: React.ReactNode;
-  // onColumnsListChange?: ({ name: string, visible: boolean }) => void;
 }
 
 export const GroupActionsPane = forwardRef<HTMLDivElement, GroupActionsPaneProps>(
-  ({ actions, dimension = 'xl', columns, settingsMenu, onColumnsChange }: GroupActionsPaneProps, ref) => {
+  (
+    {
+      actions,
+      searchValue,
+      dimension = 'xl',
+      columns,
+      settingsMenu,
+      onColumnsChange,
+      onSearchEnter,
+      onSearchLeave,
+      onChangeSearchValue,
+    }: GroupActionsPaneProps,
+    ref,
+  ) => {
     const [searchOpened, setSearchOpened] = useState<boolean>(false);
-    const [columnsListOpened, setColumnsListOpened] = useState<boolean>(false);
-    // const [settingsOpened, setSettingsOpened] = useState<boolean>(false);
-    const plusButtonRef = useRef<HTMLButtonElement | null>(null);
-    const settingsButtonRef = useRef<HTMLButtonElement | null>(null);
 
     const renderActions = () => {
       const buttonDimension: ButtonDimension = ['s', 'm'].includes(dimension) ? 's' : 'm';
@@ -104,38 +101,31 @@ export const GroupActionsPane = forwardRef<HTMLDivElement, GroupActionsPaneProps
     };
 
     const iconButtonDimension: 's' | 'l' = ['s', 'm'].includes(dimension) ? 's' : 'l';
-    const renderColumns = useMemo<Array<ItemProps>>(() => {
-      return columns.map(
-        (column, index): ItemProps => ({
-          id: index.toString(),
-          render: (options: RenderOptionProps) => (
-            <ColumnsMenuItem {...options}>
-              <Checkbox checked={column.visible} />
-              <ColumnLabel dimension={'s'}>{column.name}</ColumnLabel>
-            </ColumnsMenuItem>
-          ),
-        }),
-      );
-    }, [columns]);
-
-    const handlePlusClick = () => {
-      setColumnsListOpened((prevOpened) => !prevOpened);
-    };
-
-    const handleClickOutside = (e: Event) => {
-      if (e.target && plusButtonRef.current?.contains(e.target as Node)) {
-        return;
-      }
-      setColumnsListOpened(false);
-    };
 
     const menuDimension: MenuDimension = dimension === 'xl' ? 'l' : dimension;
 
+    const handleOpenSearch = () => {
+      setSearchOpened(true);
+      onSearchEnter?.();
+    };
+
+    const handleCloseSearch = () => {
+      setSearchOpened(false);
+      onSearchLeave?.();
+    };
+
     return (
-      <Pane ref={ref}>
+      <Pane ref={ref} dimension={dimension}>
         {!searchOpened && <Actions>{renderActions()}</Actions>}
         <IconsBlock>
-          <SearchButton buttonDimension={iconButtonDimension} onOpenSearch={setSearchOpened} />
+          <SearchBlock
+            searchValue={searchValue}
+            onChangeSearchValue={onChangeSearchValue}
+            dimension={iconButtonDimension}
+            opened={searchOpened}
+            onOpenSearch={handleOpenSearch}
+            onCloseSearch={handleCloseSearch}
+          />
           <ColumnsButton
             columns={columns}
             menuDimension={menuDimension}
@@ -148,3 +138,12 @@ export const GroupActionsPane = forwardRef<HTMLDivElement, GroupActionsPaneProps
     );
   },
 );
+
+GroupActionsPane.displayName = 'GroupActionsPane';
+
+export const PaneSeparator = styled.div<{ dimension?: 's' | 'm' }>`
+  width: 1px;
+  height: ${({ dimension }) => (dimension === 's' ? '16px' : '20px')};
+  background-color: ${({ theme }) => theme.color['Neutral/Neutral 20']};
+  align-self: center;
+`;

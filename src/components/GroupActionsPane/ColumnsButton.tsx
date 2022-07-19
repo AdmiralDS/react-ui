@@ -82,6 +82,7 @@ export const ColumnsButton = React.forwardRef<HTMLButtonElement, ColumnsButtonPr
               onClickItem={() => {
                 handleChangeColumn({ name: column.name, visible: !column.visible });
               }}
+              key={index}
             >
               <StyledCheckbox
                 checked={column.visible}

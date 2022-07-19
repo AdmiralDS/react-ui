@@ -1,7 +1,6 @@
-import React, { useMemo, useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import { ActionRenderProps, GroupActionsPane } from '#src/components/GroupActionsPane';
-import { Button } from '#src/components/Button';
+import { ActionRenderProps, GroupActionsPane, PaneSeparator } from '#src/components/GroupActionsPane';
 import styled, { ThemeProvider } from 'styled-components';
 import { typography } from '#src/components/Typography';
 import { ReactComponent as GovernmentOutline } from '@admiral-ds/icons/build/category/GovernmentOutline.svg';
@@ -9,11 +8,8 @@ import { ReactComponent as TelegramOutline } from '@admiral-ds/icons/build/commu
 import { ReactComponent as AlertOutline } from '@admiral-ds/icons/build/category/AlertOutline.svg';
 import { ReactComponent as CardSolid } from '@admiral-ds/icons/build/finance/CardSolid.svg';
 import { withDesign } from 'storybook-addon-designs';
-// import { Menu } from '#src/components/Menu';
-// import { MenuItem, RenderOptionProps } from '#src/components/MenuItem';
 import { Theme } from '#src/components/themes';
 import { TextButton } from '#src/components/TextButton';
-// import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -22,10 +18,7 @@ const Desc = styled.div`
 `;
 
 const Description = () => (
-  <Desc>
-    Компонент Dropdown Menu имеет три размера и может быть с иконкой или без. Высота строки : xl - 48px, m - 40px, s -
-    32px
-  </Desc>
+  <Desc>Опциональная надстройка над таблицей. Размерность : xl - 56px, l - 48px, m - 40px, s - 32px</Desc>
 );
 export default {
   title: 'Admiral-2.1/GroupActionsPane',
@@ -45,21 +38,16 @@ export default {
       type: 'code',
     },
   },
-  // argTypes: {
-  //   themeBorderKind: {
-  //     control: {
-  //       type: 'radio',
-  //       options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
-  //     },
-  //   },
-  // },
+  argTypes: {
+    dimension: {
+      control: {
+        type: 'radio',
+        options: ['xl', 'l', 'm', 's'],
+        defaultValue: 'xl',
+      },
+    },
+  },
 } as ComponentMeta<typeof GroupActionsPane>;
-
-const StyledAdditionalText = styled.div`
-  ${typography['Body/Body 2 Long']}
-  color: ${({ theme }) => theme.color['Neutral/Neutral 50']};
-  pointer-events: none;
-`;
 
 const Wrapper = styled.div`
   display: flex;
@@ -91,44 +79,65 @@ const Simple: ComponentStory<typeof GroupActionsPane> = (args) => {
     {
       id: '1',
       render: ({ dimension }: ActionRenderProps) => (
-        <TextButton text={'Action1'} dimension={dimension} icon={<GovernmentOutline />} />
+        <TextButton text={'Action1'} dimension={dimension} icon={<GovernmentOutline />} key={1} />
       ),
     },
     {
       id: '2',
       render: ({ dimension }: ActionRenderProps) => (
-        <TextButton text={'Telegram'} dimension={dimension} icon={<TelegramOutline />} />
+        <TextButton text={'Telegram'} dimension={dimension} icon={<TelegramOutline />} key={2} />
       ),
     },
     {
       id: '3',
       render: ({ dimension }: ActionRenderProps) => (
-        <TextButton text={'Alert'} dimension={dimension} icon={<AlertOutline />} />
+        <TextButton text={'Alert'} dimension={dimension} icon={<AlertOutline />} key={3} />
       ),
+    },
+    {
+      id: '5',
+      render: ({ dimension }: ActionRenderProps) => <PaneSeparator dimension={dimension} key={5} />,
     },
     {
       id: '4',
       render: ({ dimension }: ActionRenderProps) => (
-        <TextButton text={'Bank card'} dimension={dimension} icon={<CardSolid />} />
+        <TextButton text={'Bank card'} dimension={dimension} icon={<CardSolid />} key={4} />
       ),
     },
   ];
 
   const [columnsVisibility, setColumnsVisibility] = useState(columns);
+  const [searchValue, setSearchValue] = useState<string>('');
 
   function swapBorder(theme: Theme): Theme {
     theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 
+  const handleChangeSearchValue = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchValue(e.target.value);
+  };
+
+  const handleSearchEnter = () => {
+    console.log('Search input opened');
+  };
+
+  const handleSearchLeave = () => {
+    console.log('Search input left');
+  };
+
   return (
     <ThemeProvider theme={swapBorder}>
       <Wrapper>
         <GroupActionsPane
           {...args}
+          searchValue={searchValue}
+          onChangeSearchValue={handleChangeSearchValue}
           actions={actions}
           columns={columnsVisibility}
           onColumnsChange={setColumnsVisibility}
+          onSearchEnter={handleSearchEnter}
+          onSearchLeave={handleSearchLeave}
           settingsMenu={<SettingsMenu>Здесь может быть меню настройки</SettingsMenu>}
         />
       </Wrapper>
@@ -136,59 +145,6 @@ const Simple: ComponentStory<typeof GroupActionsPane> = (args) => {
   );
 };
 
-const TemplateWithMenu: ComponentStory<typeof GroupActionsPane> = (args) => {
-  const actions = [
-    {
-      id: '1',
-      render: ({ dimension }: ActionRenderProps) => (
-        <TextButton text={'Action1'} dimension={dimension} icon={GovernmentOutline} />
-      ),
-    },
-    {
-      id: '2',
-      render: ({ dimension }: ActionRenderProps) => (
-        <TextButton text={'Telegram'} dimension={dimension} icon={TelegramOutline} />
-      ),
-    },
-    {
-      id: '3',
-      render: ({ dimension }: ActionRenderProps) => (
-        <TextButton text={'Alert'} dimension={dimension} icon={AlertOutline} />
-      ),
-    },
-    {
-      id: '4',
-      render: ({ dimension }: ActionRenderProps) => (
-        <TextButton text={'Bank card'} dimension={dimension} icon={CardSolid} />
-      ),
-    },
-  ];
-
-  const columns = [
-    { name: 'Тип сделки', visible: true },
-    { name: 'Дата сделки', visible: true },
-    { name: 'Сумма', visible: true },
-    { name: 'Валюта', visible: true },
-    { name: 'Ставка', visible: true },
-    { name: 'Статус', visible: true },
-  ];
-
-  return (
-    <>
-      <Wrapper>
-        <GroupActionsPane
-          {...args}
-          actions={actions}
-          columns={columns}
-          settingsMenu={<SettingsMenu>Здесь может быть меню настройки</SettingsMenu>}
-        />
-      </Wrapper>
-    </>
-  );
-};
-
 export const SimpleContainer = Simple.bind({});
-export const MenuContainer = TemplateWithMenu.bind({});
 
 SimpleContainer.storyName = 'Простой пример';
-MenuContainer.storyName = 'Контейнер с меню';
