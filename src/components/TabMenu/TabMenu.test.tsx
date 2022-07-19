@@ -6,11 +6,10 @@ import { LIGHT_THEME } from '#src/components/themes';
 import { TabMenu, TabMenuProps } from '#src/components/TabMenu';
 
 /**
- * В компоненте TabMenu для вычисления ширины всего компонента используется метод getBoundingClientRect().width,
- * для вычисления размеров отдельных табов - метод node.clientWidth.
+ * В компоненте TabMenu для вычисления ширины всего компонента используется метод getBoundingClientRect().width.
  * В случае, если пропс mobile равен true, также используется метод scrollIntoView.
  * Для всех этих методов необходимо писать заглушки (mocks), в противном случае scrollIntoView не сработает,
- * а getBoundingClientRect и clientWidth будут возвращать нулевые значения.
+ * а getBoundingClientRect будет возвращать нулевые значения.
  *
  * Вот ссылки с описанием подобных проблем:
  * https://stackoverflow.com/questions/38656541/change-element-size-using-jest
@@ -22,8 +21,6 @@ import { TabMenu, TabMenuProps } from '#src/components/TabMenu';
  */
 
 // начальные значения свойств
-const originalClientWidth: PropertyDescriptor =
-  Object.getOwnPropertyDescriptor(HTMLElement.prototype, 'clientWidth') || {};
 const originalGetBoundingClientRect =
   Object.getOwnPropertyDescriptor(HTMLElement.prototype, 'getBoundingClientRect') || {};
 const originalScrollIntoView =
@@ -31,13 +28,19 @@ const originalScrollIntoView =
 
 // устанавливаем заглушки
 beforeAll(() => {
+  class IntersectionObserver {
+    observe = jest.fn();
+    disconnect = jest.fn();
+    unobserve = jest.fn();
+  }
+
+  Object.defineProperty(window, 'IntersectionObserver', {
+    writable: true,
+    configurable: true,
+    value: IntersectionObserver,
+  });
+
   Object.defineProperties(window.HTMLElement.prototype, {
-    clientWidth: {
-      get: function () {
-        // устаналиваю clientWidth в 150 только для табов (tagName и id прописаны в measureTab.ts).
-        return this.tagName === 'DIV' && this.id === 'tab-wrapper' ? 150 : 0;
-      },
-    },
     getBoundingClientRect: {
       // если установить в true, то можно будет перезадавать это свойство в отдельных тестах
       configurable: true,
@@ -79,7 +82,6 @@ beforeAll(() => {
 
 // возвращаем начальные значения
 afterAll(() => {
-  Object.defineProperty(HTMLElement.prototype, 'clientWidth', originalClientWidth);
   Object.defineProperty(HTMLElement.prototype, 'getBoundingClientRect', originalGetBoundingClientRect);
   Object.defineProperty(HTMLElement.prototype, 'scrollIntoView', originalScrollIntoView);
 });
@@ -122,7 +124,7 @@ describe('TabMenu', () => {
   it('should render mobile component', () => {
     /**
      * Все табы будут выведены в одну строку без меню. Если размеры компонента в тесте не важны,
-     * то заглушки для  getBoundingClientRect и clientWidth прописывать необязательно, обработчик onChange все равно будет вызван
+     * то заглушку для clientWidth прописывать необязательно, обработчик onChange все равно будет вызван
      */
     const mobileOnChange = jest.fn();
     const wrapper = render(<Component activeTab="1" onChange={mobileOnChange} tabs={tabs} mobile />);
