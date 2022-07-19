@@ -31,7 +31,7 @@ const Description = () => (
 );
 
 export default {
-  title: 'Admiral-2.1/PaginationTwo',
+  title: 'Admiral-2.1/Data Table/PaginationTwo',
   decorators: [withDesign],
   component: PaginationTwo,
   parameters: {

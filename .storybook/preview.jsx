@@ -27,7 +27,7 @@ export const parameters = {
     storySort: {
       includeName: true,
       locales: 'en-US',
-      order: ['Admiral-2.1', ['Atoms', 'Input', 'Form Field']],
+      order: ['Admiral-2.1', ['Atoms', 'Input', 'Form Field', 'Data Table']],
     },
   },
 };

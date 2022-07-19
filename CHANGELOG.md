@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.7.0](https://github.com/AdmiralDS/react-ui/compare/v1.6.0...v1.7.0) (2022-07-19)
+
+
+### Features
+
+* **Table:** add emptyMessage prop to show that there are no matches after filtration ([9664b5f](https://github.com/AdmiralDS/react-ui/commit/9664b5f84a75e7ad013e04172741c368457f918e))
+* **Table:** add id prop in onRowSelectionChange callback ([d847f47](https://github.com/AdmiralDS/react-ui/commit/d847f475743e11c73b923d172e04a3a5dd593ffc))
+* **Table:** add single row action as alternative to overflowMenu ([ecd90e9](https://github.com/AdmiralDS/react-ui/commit/ecd90e95d3dd5e582e305a7655764070dece6992))
+
+
+### Bug Fixes
+
+* **GroupActionPane:** change usage api ([fa24a2b](https://github.com/AdmiralDS/react-ui/commit/fa24a2b4fbb87480af3b5bcb64b4b0384ef7472e))
+* **OverflowMenu:** fix focus style and fix OverflowMenu dimension in Breadcrumbs component ([ae4ceaa](https://github.com/AdmiralDS/react-ui/commit/ae4ceaaeeeca11b8b634c8403f163a0650bd83cb))
+* **Select:** adjust height and label font ([5c2d75b](https://github.com/AdmiralDS/react-ui/commit/5c2d75b4d4cf1c949bfd99f1be02998c646e51d1))
+
 ## [1.6.0](https://github.com/AdmiralDS/react-ui/compare/v1.5.2...v1.6.0) (2022-07-12)
 
 

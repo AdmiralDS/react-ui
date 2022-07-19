@@ -26,11 +26,12 @@ const StyledButton = styled.button.attrs<StyledButtonProps>((props) => ({
   display: inline-flex;
   flex-direction: ${(p) => (p.displayRight ? 'row-reverse' : 'row')};
   align-items: center;
-  vertical-align: center;
+  vertical-align: middle;
   appearance: none;
   border: none;
   background: transparent;
   padding: 0;
+  white-space: nowrap;
 
   ${ButtonContainer} {
     ${(p) => p.skeleton && skeletonMixin};
