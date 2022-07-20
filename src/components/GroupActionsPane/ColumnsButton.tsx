@@ -95,7 +95,7 @@ export const ColumnsButton = React.forwardRef<HTMLButtonElement, ColumnsButtonPr
           ),
         }),
       );
-    }, [columns]);
+    }, [columns, menuDimension]);
 
     const handleClickOutside = (e: Event) => {
       if (e.target && buttonRef.current?.contains(e.target as Node)) {
@@ -106,13 +106,7 @@ export const ColumnsButton = React.forwardRef<HTMLButtonElement, ColumnsButtonPr
 
     return (
       <>
-        <IconButton
-          ref={refSetter(ref, buttonRef)}
-          dimension={buttonDimension}
-          // onKeyDown={handleKeyDown}
-          onClick={handleBtnClick}
-          {...props}
-        >
+        <IconButton ref={refSetter(ref, buttonRef)} dimension={buttonDimension} onClick={handleBtnClick} {...props}>
           <PlusOutline />
         </IconButton>
         {opened && (
