@@ -97,11 +97,11 @@ const colorsBorderAndBackground = css<{ disabled?: boolean }>`
     border: 1px solid ${(props) => props.theme.color['Error/Error 60 Main']};
   }
 
-  [data-status='error'] &:hover + ${BorderedDiv}, [data-status='error'] &:focus + ${BorderedDiv} {
+  [data-status='error'] &:hover:not(:disabled) + ${BorderedDiv}, [data-status='error'] &:focus + ${BorderedDiv} {
     border: 1px solid ${(props) => props.theme.color['Error/Error 60 Main']};
   }
 
-  [data-status='success'] &:hover + ${BorderedDiv}, [data-status='success'] &:focus + ${BorderedDiv} {
+  [data-status='success'] &:hover:not(:disabled) + ${BorderedDiv}, [data-status='success'] &:focus + ${BorderedDiv} {
     border: 1px solid ${(props) => props.theme.color['Success/Success 50 Main']};
   }
 

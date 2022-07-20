@@ -31,6 +31,7 @@ const Chevron = styled(ChevronRightOutline)<{ disabled?: boolean }>`
   & path {
     fill: ${(p) => (p.disabled ? p.theme.color['Neutral/Neutral 30'] : p.theme.color['Neutral/Neutral 50'])};
   }
+  ${(p) => p.disabled && 'pointer-events: none;'}
 `;
 
 const disabledStyles = css`
@@ -299,7 +300,7 @@ export const PhoneNumberInput = React.forwardRef<HTMLInputElement, PhoneNumberIn
         </TextInput>
         <CountryContainer dimension={dimension} isOpened={isOpened} disabled={disabled}>
           {IconComponent}
-          <Chevron onClick={handleButtonClick} disabled={disabled} />
+          <Chevron onClick={handleButtonClick} disabled={disabled || props.readOnly} />
         </CountryContainer>
       </PhoneContainer>
     );
