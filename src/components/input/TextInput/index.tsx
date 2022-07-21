@@ -245,7 +245,7 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
     const iconArray = React.Children.toArray(icons);
 
     const [isPasswordVisible, setPasswordVisible] = React.useState(false);
-    if (type === 'password') {
+    if (!props.readOnly && type === 'password') {
       const Icon = isPasswordVisible ? EyeOutlineSvg : EyeCloseOutlineSvg;
       iconArray.push(
         <InputIconButton

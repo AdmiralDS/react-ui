@@ -40,7 +40,7 @@ const disabledStyles = css`
   }
 `;
 
-const PhoneContainer = styled.div<{ dimension: Dimension; disabled?: boolean }>`
+const PhoneContainer = styled.div<{ dimension: Dimension; disabled?: boolean; readOnly?: boolean }>`
   position: relative;
 
   & ${Chevron} {
@@ -49,7 +49,7 @@ const PhoneContainer = styled.div<{ dimension: Dimension; disabled?: boolean }>`
   }
 
   & input {
-    padding-left: ${(p) => (p.dimension === 's' ? '64px' : '76px')};
+    padding-left: ${(p) => (p.dimension === 's' ? (p.readOnly ? '40px' : '64px') : p.readOnly ? '48px' : '76px')};
   }
 `;
 
@@ -270,7 +270,7 @@ export const PhoneNumberInput = React.forwardRef<HTMLInputElement, PhoneNumberIn
     };
 
     return (
-      <PhoneContainer ref={containerRef} dimension={dimension} disabled={disabled}>
+      <PhoneContainer ref={containerRef} dimension={dimension} disabled={disabled} readOnly={props.readOnly}>
         <TextInput
           {...props}
           type="tel"
@@ -300,7 +300,7 @@ export const PhoneNumberInput = React.forwardRef<HTMLInputElement, PhoneNumberIn
         </TextInput>
         <CountryContainer dimension={dimension} isOpened={isOpened} disabled={disabled}>
           {IconComponent}
-          <Chevron onClick={handleButtonClick} disabled={disabled || props.readOnly} />
+          {!props.readOnly && <Chevron onClick={handleButtonClick} disabled={disabled || props.readOnly} />}
         </CountryContainer>
       </PhoneContainer>
     );

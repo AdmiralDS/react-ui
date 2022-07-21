@@ -144,7 +144,9 @@ export const TimeInput = React.forwardRef<HTMLInputElement, TimeInputProps>(
     };
 
     const iconArray = React.Children.toArray(icons);
-    iconArray.push(<InputIconButton icon={icon} onClick={handleButtonClick} tabIndex={0} />);
+    if (!props.readOnly) {
+      iconArray.push(<InputIconButton icon={icon} onClick={handleButtonClick} tabIndex={0} />);
+    }
 
     const disableSlots = (defaultArray: SlotProps[], disabledArr: string[]) => {
       if (disabledArr.length === 1) {

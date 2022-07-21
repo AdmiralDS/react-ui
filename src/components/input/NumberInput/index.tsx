@@ -33,9 +33,6 @@ const horizontalPaddingValue = (props: { dimension?: ComponentDimension }) => {
 };
 
 const PlusMinusIcon = styled(InputIconButton)<{ disabled?: boolean }>`
-  [data-read-only] & {
-    pointer-events: none;
-  }
   ${({ disabled, theme }) =>
     disabled
       ? css`
@@ -232,7 +229,7 @@ export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       );
     }
 
-    if (displayPlusMinusIcons) {
+    if (!props.readOnly && displayPlusMinusIcons) {
       iconArray.push(
         <PlusMinusIcon
           icon={MinusOutline}

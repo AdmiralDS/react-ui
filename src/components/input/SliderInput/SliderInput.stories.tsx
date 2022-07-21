@@ -55,6 +55,12 @@ export default {
     disableCopying: {
       control: { type: 'boolean' },
     },
+    disabled: {
+      control: { type: 'boolean' },
+    },
+    readOnly: {
+      control: { type: 'boolean' },
+    },
     icons: {
       control: false,
     },
