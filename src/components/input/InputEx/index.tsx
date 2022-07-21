@@ -31,10 +31,7 @@ const horizontalPaddingValue = (props: { dimension?: ComponentDimension }) => {
 };
 
 const extraPadding = css<ExtraProps>`
-  padding-right: ${(props) =>
-    horizontalPaddingValue(props) +
-    (iconSizeValue(props) + 8) * (props.iconCount ?? 0) -
-    8 * (props.iconCount ? 1 : 0)}px;
+  padding-right: ${(props) => (iconSizeValue(props) + 8) * (props.iconCount ?? 0) - 8 * (props.iconCount ? 1 : 0)}px;
 `;
 
 const BorderedDiv = styled.div`
@@ -150,6 +147,16 @@ const PrefixContainer = styled.div<{ disabled?: boolean; dimension?: ComponentDi
     props.disabled ? props.theme.color['Neutral/Neutral 30'] : props.theme.color['Neutral/Neutral 50']};
 `;
 
+const SuffixContainer = styled.div<{ disabled?: boolean; dimension?: ComponentDimension }>`
+  align-self: center;
+  border-left: solid 1px ${(props) => props.theme.color['Neutral/Neutral 20']};
+  padding-left: 8px;
+  margin-left: 8px;
+  ${(props) => (props.dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])};
+  color: ${(props) =>
+    props.disabled ? props.theme.color['Neutral/Neutral 30'] : props.theme.color['Neutral/Neutral 50']};
+`;
+
 const IconPanel = styled.div<{ disabled?: boolean; dimension?: ComponentDimension }>`
   position: absolute;
   top: 0;
@@ -218,11 +225,26 @@ export interface InputExProps extends Omit<InputHTMLAttributes<HTMLInputElement>
   disableCopying?: boolean;
 
   prefix?: React.ReactNode;
+
+  suffix?: React.ReactNode;
 }
 
 export const InputEx = React.forwardRef<HTMLInputElement, InputExProps>(
   (
-    { type, displayClearIcon, status, containerRef, icons, children, className, style, placeholder, prefix, ...props },
+    {
+      type,
+      displayClearIcon,
+      status,
+      containerRef,
+      icons,
+      children,
+      className,
+      style,
+      placeholder,
+      prefix,
+      suffix,
+      ...props
+    },
     ref,
   ) => {
     const inputRef = React.useRef<HTMLInputElement>(null);
@@ -255,13 +277,12 @@ export const InputEx = React.forwardRef<HTMLInputElement, InputExProps>(
         ref={containerRef}
         data-read-only={props.readOnly ? true : undefined}
         data-status={status}
-        {...(props.disableCopying && {
-          onMouseDown: preventDefault,
-        })}
+        onMouseDown={props.readOnly ? preventDefault : undefined}
       >
         {!!prefix && <PrefixContainer dimension={props.dimension}>{prefix}</PrefixContainer>}
         <Input ref={refSetter(ref, inputRef)} {...props} placeholder={placeholder} iconCount={iconCount} />
         <BorderedDiv />
+        {!!suffix && <SuffixContainer dimension={props.dimension}>{suffix}</SuffixContainer>}
         {iconCount > 0 && (
           <IconPanel disabled={props.disabled} dimension={props.dimension}>
             {iconArray}

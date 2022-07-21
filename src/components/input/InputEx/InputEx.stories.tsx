@@ -53,6 +53,9 @@ export default {
     prefix: {
       type: 'string',
     },
+    suffix: {
+      type: 'string',
+    },
     onChange: {
       action: 'onChange',
     },
