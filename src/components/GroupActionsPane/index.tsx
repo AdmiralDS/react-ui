@@ -1,4 +1,4 @@
-import React, { ButtonHTMLAttributes, useState } from 'react';
+import React, { ButtonHTMLAttributes, HTMLAttributes, useState } from 'react';
 import styled from 'styled-components';
 import { Dimension as ButtonDimension } from '#src/components/TextButton/types';
 import { ColumnsButton, MenuDimension } from '#src/components/GroupActionsPane/ColumnsButton';
@@ -45,7 +45,7 @@ export interface ActionRenderProps extends ButtonHTMLAttributes<HTMLButtonElemen
   dimension: ButtonDimension;
 }
 
-export interface GroupActionsPaneProps extends Omit<HTMLDivElement, 'children'> {
+export interface GroupActionsPaneProps extends HTMLAttributes<HTMLDivElement> {
   /** Размер панели */
   dimension?: PaneDimension;
 
@@ -81,6 +81,7 @@ export const GroupActionsPane = ({
   onSearchEnter,
   onSearchLeave,
   onChangeSearchValue,
+  ...props
 }: React.PropsWithChildren<GroupActionsPaneProps>) => {
   const [searchOpened, setSearchOpened] = useState<boolean>(false);
 
@@ -99,7 +100,7 @@ export const GroupActionsPane = ({
   };
 
   return (
-    <Pane dimension={dimension}>
+    <Pane dimension={dimension} {...props}>
       {!searchOpened && <Actions>{children}</Actions>}
       <IconsBlock>
         <SearchBlock
