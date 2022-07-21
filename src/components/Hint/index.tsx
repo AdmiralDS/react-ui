@@ -10,11 +10,13 @@ import type { Dimension } from './style';
 import { AnchorWrapper, FakeTarget, Portal } from './style';
 import { getHintDirection } from './utils';
 import { HintContainer } from './HintContainer';
-import { initialState, reducer } from './reducer';
 
 type Trigger = 'click' | 'hover';
 
 export interface HintProps extends React.HTMLAttributes<HTMLDivElement> {
+  opened?: boolean;
+  onOpen?: () => void;
+  onClose?: () => void;
   /** Функция, которая возвращает реакт-компонент с контентом тултипа. Если этому компоненту нужны props, используйте замыкание */
   renderContent: () => React.ReactNode;
   /** Контейнер, в котором будет отрисован тултип через React.createPortal. По умолчанию тултип отрисовывается в document.body */
@@ -36,6 +38,9 @@ export interface HintProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 export const Hint: React.FC<HintProps> = ({
+  opened,
+  onOpen,
+  onClose,
   renderContent,
   container: userContainer,
   target,
@@ -57,13 +62,13 @@ export const Hint: React.FC<HintProps> = ({
   const targetRef: any = target || anchorElementRef;
   const targetElement: any = target?.current || anchorElementRef.current;
 
-  const [state, dispatch] = React.useReducer(reducer, initialState);
+  const [recalculation, startRecalculation] = React.useState<any>(null);
   const [portalFlexDirection, setPortalFlexDirection] = React.useState('');
   const [portalFullWidth, setPortalFullWidth] = React.useState(false);
   const [isMobile, setMobile] = React.useState(window.innerWidth < 640);
   const [trapFocus, setTrapFocus] = React.useState(false);
 
-  const hideHint = () => dispatch({ type: 'setInvisible' });
+  const hideHint = () => onClose?.();
 
   // если ширина экрана меньше 640 пикселей, хинт переходит в состояние mobile (адаптируется по ширине к экрану)
   React.useLayoutEffect(() => {
@@ -84,7 +89,7 @@ export const Hint: React.FC<HintProps> = ({
   React.useLayoutEffect(() => {
     const hint = hintElementRef.current;
 
-    if (state.visible && targetElement && hint) {
+    if (opened && targetElement && hint) {
       const anchorElementRect = targetElement.getBoundingClientRect();
       const hintElementRect = hint.getBoundingClientRect();
       if (isMobile) {
@@ -142,8 +147,8 @@ export const Hint: React.FC<HintProps> = ({
     target?.current,
     anchorElementRef.current,
     hintElementRef.current,
-    state.visible,
-    state.recalculation,
+    opened,
+    recalculation,
     dimension,
     content,
     isMobile,
@@ -155,14 +160,14 @@ export const Hint: React.FC<HintProps> = ({
     [anchorElementRef.current],
   );
   const handleMouseEnter = () => {
-    dispatch({ type: 'setVisible' });
+    onOpen?.();
   };
 
   const handleKeyDown = (event: any) => {
     const code = keyboardKey.getCode(event);
     if (code === keyboardKey.Enter || code === keyboardKey[' ']) {
       event.preventDefault();
-      dispatch({ type: 'setVisible' });
+      onOpen?.();
     }
   };
 
@@ -173,7 +178,7 @@ export const Hint: React.FC<HintProps> = ({
       hintElementRef.current.style.opacity = '1';
       setTrapFocus(true);
     }
-  }, [hintElementRef.current, state.visible]);
+  }, [hintElementRef.current, opened]);
 
   return (
     <AnchorWrapper
@@ -189,7 +194,7 @@ export const Hint: React.FC<HintProps> = ({
       anchorCssMixin={anchorCssMixin}
     >
       {children}
-      {state.visible && (
+      {opened && (
         <Portal
           targetRef={targetRef}
           container={container}
@@ -204,10 +209,11 @@ export const Hint: React.FC<HintProps> = ({
             content={content}
             visibilityTrigger={visibilityTrigger}
             scrollableParents={scrollableParents}
-            dispatch={dispatch}
+            startRecalculation={startRecalculation}
             anchorElementRef={anchorElementRef}
             anchorId={anchorId}
             trapFocus={trapFocus}
+            onClose={onClose}
             {...props}
           />
         </Portal>

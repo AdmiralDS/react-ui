@@ -86,10 +86,13 @@ const Template1: ComponentStory<typeof Hint> = ({ anchorId, ...args }) => {
     theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
+  const [opened, setOpened] = React.useState(false);
+  const handleOpen = () => setOpened(true);
+  const handleClose = () => setOpened(false);
 
   return (
     <ThemeProvider theme={swapBorder}>
-      <Hint {...args} anchorId={anchorId}>
+      <Hint {...args} anchorId={anchorId} opened={opened} onOpen={handleOpen} onClose={handleClose}>
         <StyledButton dimension="s" aria-label="Additional information" aria-describedby={anchorId}>
           <HelpOutline aria-hidden />
         </StyledButton>
@@ -99,15 +102,35 @@ const Template1: ComponentStory<typeof Hint> = ({ anchorId, ...args }) => {
 };
 
 const Template2: Story<HintProps & { anchorId1: string; anchorId2: string }> = ({ anchorId1, anchorId2, ...args }) => {
+  const [opened1, setOpened1] = React.useState(false);
+  const [opened2, setOpened2] = React.useState(false);
+  const handleOpen1 = () => setOpened1(true);
+  const handleClose1 = () => setOpened1(false);
+  const handleOpen2 = () => setOpened2(true);
+  const handleClose2 = () => setOpened2(false);
   return (
     <>
       <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
-        <Hint {...args} renderContent={() => text} anchorId={anchorId1}>
+        <Hint
+          {...args}
+          opened={opened1}
+          onOpen={handleOpen1}
+          onClose={handleClose1}
+          renderContent={() => text}
+          anchorId={anchorId1}
+        >
           <StyledButton dimension="s" aria-label="Additional information" aria-describedby={anchorId1}>
             <HelpOutline aria-hidden />
           </StyledButton>
         </Hint>
-        <Hint {...args} renderContent={() => text} id={anchorId2}>
+        <Hint
+          {...args}
+          opened={opened2}
+          onOpen={handleOpen2}
+          onClose={handleClose2}
+          renderContent={() => text}
+          id={anchorId2}
+        >
           <StyledButton dimension="s" aria-label="Additional information" aria-describedby={anchorId2}>
             <HelpOutline aria-hidden />
           </StyledButton>
@@ -123,11 +146,24 @@ const Template3: ComponentStory<typeof Hint> = ({ anchorId, ...args }) => {
     height: 100%;
   `;
 
+  const [opened, setOpened] = React.useState(false);
+  const handleOpen = () => setOpened(true);
+  const handleClose = () => setOpened(false);
+
   return (
     <>
       <StyledButton dimension="s" ref={btnRef}>
         Press&nbsp;&nbsp;&nbsp;
-        <Hint {...args} renderContent={() => text} target={btnRef} anchorId={anchorId} anchorCssMixin={anchorCss}>
+        <Hint
+          {...args}
+          opened={opened}
+          onOpen={handleOpen}
+          onClose={handleClose}
+          renderContent={() => text}
+          target={btnRef}
+          anchorId={anchorId}
+          anchorCssMixin={anchorCss}
+        >
           <HelpOutline tabIndex={0} height={20} width={20} aria-label="Help Icon" aria-describedby={anchorId} />
         </Hint>
       </StyledButton>
@@ -136,10 +172,16 @@ const Template3: ComponentStory<typeof Hint> = ({ anchorId, ...args }) => {
 };
 
 const Template4: ComponentStory<typeof Hint> = ({ anchorId, ...args }) => {
+  const [opened, setOpened] = React.useState(false);
+  const handleOpen = () => setOpened(true);
+  const handleClose = () => setOpened(false);
   return (
     <>
       <Hint
         {...args}
+        opened={opened}
+        onOpen={handleOpen}
+        onClose={handleClose}
         visibilityTrigger="click"
         renderContent={() => (
           <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
@@ -164,9 +206,21 @@ const Template5: ComponentStory<typeof Hint> = ({ anchorId, ...args }) => {
     padding: 10px;
     border: 2px dotted red;
   `;
+
+  const [opened, setOpened] = React.useState(false);
+  const handleOpen = () => setOpened(true);
+  const handleClose = () => setOpened(false);
   return (
     <>
-      <Hint {...args} renderContent={() => text} anchorId={anchorId} anchorCssMixin={anchorCss}>
+      <Hint
+        {...args}
+        opened={opened}
+        onOpen={handleOpen}
+        onClose={handleClose}
+        renderContent={() => text}
+        anchorId={anchorId}
+        anchorCssMixin={anchorCss}
+      >
         <StyledButton dimension="s" aria-label="Additional information" aria-describedby={anchorId}>
           <HelpOutline aria-hidden />
         </StyledButton>
