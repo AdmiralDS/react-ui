@@ -17,13 +17,26 @@ describe('Hint', () => {
     jest.clearAllTimers();
   });
 
-  const WrappedComponentWithTooltip = ({ renderContent, visibilityTrigger }: HintProps) => (
-    <ThemeProvider theme={LIGHT_THEME}>
-      <Hint anchorId="static-test-id" renderContent={renderContent} visibilityTrigger={visibilityTrigger}>
-        <div data-testid="wrapped-component">Wrapped component</div>
-      </Hint>
-    </ThemeProvider>
-  );
+  const WrappedComponentWithTooltip = ({
+    renderContent,
+    visibilityTrigger,
+  }: Omit<HintProps, 'visible' | 'onVisibilityChange'>) => {
+    const [visible, setVisible] = React.useState(false);
+    const handleChange = (visible: boolean) => setVisible(visible);
+    return (
+      <ThemeProvider theme={LIGHT_THEME}>
+        <Hint
+          visible={visible}
+          onVisibilityChange={handleChange}
+          anchorId="static-test-id"
+          renderContent={renderContent}
+          visibilityTrigger={visibilityTrigger}
+        >
+          <div data-testid="wrapped-component">Wrapped component</div>
+        </Hint>
+      </ThemeProvider>
+    );
+  };
 
   it('should render component', () => {
     const wrapper = render(<WrappedComponentWithTooltip renderContent={() => ''} />);
