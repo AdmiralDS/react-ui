@@ -17,7 +17,7 @@ type PropsType = {
   anchorElementRef: any;
   anchorId: string;
   trapFocus: boolean;
-  onClose?: () => void;
+  hideHint: () => void;
   startRecalculation: React.Dispatch<React.SetStateAction<any>>;
 };
 
@@ -34,13 +34,12 @@ export const HintContainer = React.forwardRef<RefType, PropsType & React.HTMLAtt
       anchorElementRef,
       anchorId,
       trapFocus,
-      onClose,
+      hideHint,
       startRecalculation,
       ...props
     },
     ref,
   ) => {
-    const hideHint = () => onClose?.();
     const hideOnScrollResize = visibilityTrigger === 'hover';
 
     const hintRef: any = React.useRef(null);
