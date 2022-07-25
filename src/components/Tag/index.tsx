@@ -241,6 +241,7 @@ export const Tag = React.forwardRef<HTMLElement, TagProps & TagInternalProps>(
 
     const renderTag = () => (
       <Wrapper
+        ref={ref}
         width={width}
         onClick={onClick}
         clickable={!!onClick}
