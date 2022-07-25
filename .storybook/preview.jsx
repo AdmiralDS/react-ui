@@ -7,6 +7,7 @@ import { DARK_THEME, LIGHT_THEME } from '#src/components/themes';
 import { FontsVTBGroup } from '#src/components/FontsVTBGroup';
 import { useDarkMode } from 'storybook-dark-mode';
 import styled from 'styled-components';
+import { DropdownProvider } from '#src/components/DropdownProvider';
 
 import LogoSvg from './Logo.svg';
 
@@ -26,7 +27,7 @@ export const parameters = {
     storySort: {
       includeName: true,
       locales: 'en-US',
-      order: ['Admiral-2.1', ['Atoms', 'Input', 'Form Field']],
+      order: ['Admiral-2.1', ['Atoms', 'Input', 'Form Field', 'Data Table']],
     },
   },
 };
@@ -45,7 +46,9 @@ const StoryContainer = styled.div`
 export const decorators = [
   (renderStory) => (
     <ThemeWrapper>
-      <StoryContainer>{renderStory()}</StoryContainer>
+      <DropdownProvider>
+        <StoryContainer>{renderStory()}</StoryContainer>
+      </DropdownProvider>
     </ThemeWrapper>
   ),
   (Story) => (

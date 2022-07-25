@@ -46,7 +46,7 @@ const Description = () => (
 );
 
 export default {
-  title: 'Admiral-2.1/Table',
+  title: 'Admiral-2.1/Data Table/Table',
   decorators: [withDesign],
   component: Table,
   parameters: {
@@ -111,6 +111,9 @@ export default {
     },
     showLastRowUnderline: {
       control: { type: 'boolean' },
+    },
+    emptyMessage: {
+      control: { type: 'text' },
     },
   },
 } as ComponentMeta<typeof Table>;
@@ -256,10 +259,6 @@ const Template4: ComponentStory<typeof Table> = (args) => {
   );
 
   const onFilterMenuClickOutside = ({ closeMenu }: any, event: Event) => {
-    // если кликнули по календарю, то фильтр должен оставаться открытым
-    if (event.target && calendarRef.current?.contains(event.target as Node)) {
-      return;
-    }
     closeMenu();
   };
 
@@ -594,7 +593,11 @@ RowOverflowMenu.parameters = {
       при открытии/закрытии меню для того, чтобы таблица могла управлять видимостью OverflowMenu.
       В качестве результата функция должна возвращать компонент OverflowMenu. Размер OverflowMenu 
       следует задавать согласно правилу:\n\n* Для таблицы с dimension="s" или dimension="m" используется 
-      OverflowMenu c dimension="m"\n\n* Для таблицы с dimension="l" или dimension="xl" используется OverflowMenu c dimension="l"`,
+      OverflowMenu c dimension="m"\n\n* Для таблицы с dimension="l" или dimension="xl" используется OverflowMenu
+      c dimension="l"\n\nЕсли подразумевается только одно действие над строкой, то вместо overflowMenuRender следует
+      использовать функцию actionRender (в примере используется для 3-4 строк). 
+      На вход функция получает саму строку, а возвращает компонент RowAction (экспортируется из библиотеки),
+      внутрь которого необходимо передать иконку для обозначения действия над строкой.`,
     },
   },
 };

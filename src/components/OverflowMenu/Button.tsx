@@ -8,7 +8,7 @@ import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 
 export type Dimension = 'l' | 'm' | 's';
 
-export const SIZE = {
+export const OVERFLOWMENU_BUTTON_SIZE = {
   l: 36,
   m: 32,
   s: 24,
@@ -38,8 +38,8 @@ const ButtonComponent = styled.button<{ dimension: Dimension; menuOpened: boolea
   background: transparent;
   -webkit-tap-highlight-color: transparent;
   overflow: visible;
-  height: ${({ dimension }) => SIZE[dimension]}px;
-  width: ${({ dimension }) => SIZE[dimension]}px;
+  height: ${({ dimension }) => OVERFLOWMENU_BUTTON_SIZE[dimension]}px;
+  width: ${({ dimension }) => OVERFLOWMENU_BUTTON_SIZE[dimension]}px;
 
   &:hover:not(:disabled) {
     border-radius: 50%;
@@ -52,10 +52,10 @@ const ButtonComponent = styled.button<{ dimension: Dimension; menuOpened: boolea
     &:before {
       content: '';
       position: absolute;
-      top: -4px;
-      left: -4px;
-      bottom: -4px;
-      right: -4px;
+      top: ${({ dimension }) => (dimension === 's' ? 0 : 2)}px;
+      bottom: ${({ dimension }) => (dimension === 's' ? 0 : 2)}px;
+      left: ${({ dimension }) => (dimension === 's' ? 0 : 2)}px;
+      right: ${({ dimension }) => (dimension === 's' ? 0 : 2)}px;
       border: 2px solid ${({ theme }) => theme.color['Primary/Primary 60 Main']};
       border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
     }

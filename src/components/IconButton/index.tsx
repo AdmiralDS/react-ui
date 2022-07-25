@@ -3,6 +3,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { Spinner } from '#src/components/Spinner';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
+import { forwardRef } from 'react';
 
 type Dimension = 'xl' | 'l' | 'm' | 's';
 
@@ -115,39 +116,44 @@ const PseudoIcon = styled.div<{ dimension?: Dimension }>`
   background: ${({ theme }) => theme.color['Neutral/Neutral 50']};
 `;
 
-export const IconButton: FC<IconButtonProps> = ({
-  dimension = 'xl',
-  type = 'button',
-  loading = false,
-  skeleton = false,
-  disabled = false,
-  children,
-  ...props
-}) => {
-  const disabledOptions = loading || skeleton || disabled;
-  const renderContent = () => {
-    if (loading) {
-      return (
-        <IconButtonContent>
-          <Spinner />
-        </IconButtonContent>
-      );
-    }
-    if (skeleton) {
-      return (
-        <IconButtonContent>
-          <PseudoIcon dimension={dimension} />
-        </IconButtonContent>
-      );
-    }
-    return <IconButtonContent dimension={dimension}>{children}</IconButtonContent>;
-  };
+export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
+  (
+    {
+      dimension = 'xl',
+      type = 'button',
+      loading = false,
+      skeleton = false,
+      disabled = false,
+      children,
+      ...props
+    }: IconButtonProps,
+    ref,
+  ) => {
+    const disabledOptions = loading || skeleton || disabled;
+    const renderContent = () => {
+      if (loading) {
+        return (
+          <IconButtonContent>
+            <Spinner />
+          </IconButtonContent>
+        );
+      }
+      if (skeleton) {
+        return (
+          <IconButtonContent>
+            <PseudoIcon dimension={dimension} />
+          </IconButtonContent>
+        );
+      }
+      return <IconButtonContent dimension={dimension}>{children}</IconButtonContent>;
+    };
 
-  return (
-    <StyledButton dimension={dimension} disabled={disabledOptions} type={type} {...props}>
-      {renderContent()}
-    </StyledButton>
-  );
-};
+    return (
+      <StyledButton ref={ref} dimension={dimension} disabled={disabledOptions} type={type} {...props}>
+        {renderContent()}
+      </StyledButton>
+    );
+  },
+);
 
 IconButton.displayName = 'IconButton';

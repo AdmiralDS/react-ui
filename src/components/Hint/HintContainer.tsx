@@ -4,6 +4,7 @@ import { keyboardKey } from '#src/components/common/keyboardKey';
 import { useClickOutside } from '#src/components/common/hooks/useClickOutside';
 import { getKeyboardFocusableElements } from '#src/components/common/utils/getKeyboardFocusableElements';
 import { throttle } from '#src/components/common/utils/throttle';
+import { useDropdown, useDropdownsClickOutside } from '#src/components/DropdownProvider';
 
 import { CloseButton, HintContent, HintDialog, HintWrapper } from './style';
 import type { ActionsType } from './reducer';
@@ -46,12 +47,20 @@ export const HintContainer = React.forwardRef<RefType, PropsType & React.HTMLAtt
     const [firstFocusableChild, setFirstFocusableChild] = React.useState<any>();
     const [lastFocusableChild, setLastFocusableChild] = React.useState<any>();
 
+    const { addDropdown, removeDropdown, dropdowns } = useDropdown(hintRef);
+    const handleClickOutside = (e: any) => {
+      if (useDropdownsClickOutside(e, dropdowns)) hideHint();
+    };
     if (visibilityTrigger === 'click') {
-      useClickOutside([hintRef, anchorElementRef], hideHint);
+      useClickOutside([hintRef, anchorElementRef], handleClickOutside);
     }
 
-    React.useEffect(() => {
+    React.useLayoutEffect(() => {
+      addDropdown?.(hintRef);
       previousFocusedElement.current = document.activeElement;
+      return () => {
+        removeDropdown?.(hintRef);
+      };
     }, []);
 
     React.useLayoutEffect(() => {

@@ -190,11 +190,11 @@ export const SelectWrapper = styled.div<{
   padding: ${({ dimension, multiple }) => {
     switch (dimension) {
       case 'xl':
-        return '15px 16px';
+        return '16px 16px';
       case 's':
-        return multiple ? '3px 12px' : '5px 12px';
+        return multiple ? '4px 12px' : '6px 12px';
       default:
-        return '7px 16px';
+        return '8px 16px';
     }
   }};
 
@@ -261,8 +261,4 @@ export const OptionWrapper = styled.div<{ dimension?: ComponentDimension }>`
         return typography['Additional/M'];
     }
   }}
-`;
-
-export const DropDownText = styled(OptionWrapper)`
-  color: ${({ theme }) => theme.color['Neutral/Neutral 50']};
 `;

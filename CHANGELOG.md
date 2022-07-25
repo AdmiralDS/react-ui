@@ -2,6 +2,37 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.7.0](https://github.com/AdmiralDS/react-ui/compare/v1.6.0...v1.7.0) (2022-07-19)
+
+
+### Features
+
+* **Table:** add emptyMessage prop to show that there are no matches after filtration ([9664b5f](https://github.com/AdmiralDS/react-ui/commit/9664b5f84a75e7ad013e04172741c368457f918e))
+* **Table:** add id prop in onRowSelectionChange callback ([d847f47](https://github.com/AdmiralDS/react-ui/commit/d847f475743e11c73b923d172e04a3a5dd593ffc))
+* **Table:** add single row action as alternative to overflowMenu ([ecd90e9](https://github.com/AdmiralDS/react-ui/commit/ecd90e95d3dd5e582e305a7655764070dece6992))
+
+
+### Bug Fixes
+
+* **GroupActionPane:** change usage api ([fa24a2b](https://github.com/AdmiralDS/react-ui/commit/fa24a2b4fbb87480af3b5bcb64b4b0384ef7472e))
+* **OverflowMenu:** fix focus style and fix OverflowMenu dimension in Breadcrumbs component ([ae4ceaa](https://github.com/AdmiralDS/react-ui/commit/ae4ceaaeeeca11b8b634c8403f163a0650bd83cb))
+* **Select:** adjust height and label font ([5c2d75b](https://github.com/AdmiralDS/react-ui/commit/5c2d75b4d4cf1c949bfd99f1be02998c646e51d1))
+
+## [1.6.0](https://github.com/AdmiralDS/react-ui/compare/v1.5.2...v1.6.0) (2022-07-12)
+
+
+### Features
+
+* **Calendar:** calendar has fixed height ([41a3d43](https://github.com/AdmiralDS/react-ui/commit/41a3d43dcfdbba902fd6cffad5ba537ae197b627))
+* **DropdownProvider:** add DropdownProvider component to handle with multiple dropdowns clickoutside ([df69f80](https://github.com/AdmiralDS/react-ui/commit/df69f80f3ac8aeb1c2a322d139ff53ee45ffb08d))
+
+
+### Bug Fixes
+
+* **Select:** add props for custom messages on loading and empty ([4b27139](https://github.com/AdmiralDS/react-ui/commit/4b27139094420038c37a2e7df766148cd2f22e66))
+* **Select:** when select component is out of visible aria drop option container must settle with its position ([93d663e](https://github.com/AdmiralDS/react-ui/commit/93d663e09a99ad147fd28565815b9a2066046022))
+* **Table:** reduce some unneccesary data attributes ([b3c9245](https://github.com/AdmiralDS/react-ui/commit/b3c9245eb4765594673980e5a680d6e80200d421))
+
 ### [1.5.2](https://github.com/AdmiralDS/react-ui/compare/v1.5.1...v1.5.2) (2022-07-06)
 
 

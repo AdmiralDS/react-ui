@@ -28,9 +28,10 @@ npm i -D @types/styled-components
 
 ## Подключение
 
-Для правильной работы @admiral-ds/react-ui требуется использовать `<ThemeProvider>` и `<FontsVTBGroup />`, их **рекомендуется** подключать в корне проекта:
+Для правильной работы @admiral-ds/react-ui требуется использовать `<ThemeProvider>`, `<FontsVTBGroup />` и `<DropdownProvider>`, их **рекомендуется** подключать в корне проекта:
 
 index.tsx
+
 ```tsx
 import React from 'react';
 import ReactDOM from 'react-dom/client';
@@ -42,17 +43,17 @@ import App from './App';
 
 import reportWebVitals from './reportWebVitals';
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 
 root.render(
   <React.StrictMode>
     <ThemeProvider theme={DARK_THEME}>
-      <FontsVTBGroup />
-      <App />
+      <DropdownProvider>
+        <FontsVTBGroup />
+        <App />
+      </DropdownProvider>
     </ThemeProvider>
-  </React.StrictMode>
+  </React.StrictMode>,
 );
 
 // If you want to start measuring performance in your app, pass a function
@@ -60,7 +61,8 @@ root.render(
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
 ```
-Если ваш проект не использует *create-react-app* для правильной работы шрифтов вам потребуется настройка webpack file-loader,
+
+Если ваш проект не использует _create-react-app_ для правильной работы шрифтов вам потребуется настройка webpack file-loader,
 а для импорта svg иконок в виде React компонентов [SVGR](https://github.com/gregberge/svgr/tree/main/packages/webpack).
 
 ```sh
@@ -113,7 +115,7 @@ module: {
                   and: [/\.(ts|tsx|js|jsx|md|mdx)$/]
                 }
               }
-        
+
         ]
     }
 ```

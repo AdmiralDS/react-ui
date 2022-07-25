@@ -7,52 +7,18 @@ import { Calendar, CalendarPropType } from '#src/components/Calendar';
 import { refSetter } from '#src/components/common/utils/refSetter';
 import { defaultDateInputHandle } from '#src/components/input/DateInput/defaultDateInputHandle';
 import { changeInputData } from '#src/components/common/dom/changeInputData';
-import { Dropdown as DropdownComponent } from '#src/components/Dropdown';
+import { Dropdown } from '#src/components/Dropdown';
 import { isValidDate } from './isValidDate';
 import { defaultParser } from './defaultParser';
 import { defaultDateRangeInputHandle } from '#src/components/input/DateInput/defaultDateRangeInputHandle';
-
-const Dropdown = styled(DropdownComponent)<{ alignDropdown?: string }>`
-  align-self: ${(p) => (p.alignSelf ? p.alignSelf : 'end')};
-`;
+import { InputIconButton } from '#src/components/InputIconButton';
 
 const Input = styled(TextInput)`
-  input {
-    letter-spacing: 1px;
-  }
+  min-width: 150px;
 `;
 
-function CalendarIcon({
-  icon,
-  ...props
-}: {
-  icon: React.FunctionComponent<any>;
-  onClick: () => void;
-  tabIndex?: number;
-}) {
-  const Icon = icon;
-  return <Icon {...props} />;
-}
-
-const StyledCalendarIcon = styled(CalendarIcon)`
-  & *[fill^='#'] {
-    fill: ${(props) => props.theme.color['Neutral/Neutral 50']};
-  }
-
-  [disabled] & {
-    pointer-events: none;
-    & *[fill^='#'] {
-      fill: ${(props) => props.theme.color['Neutral/Neutral 30']};
-    }
-  }
-
-  &:hover {
-    cursor: pointer;
-  }
-
-  &:hover *[fill^='#'] {
-    fill: ${(props) => props.theme.color['Primary/Primary 70']};
-  }
+const StyledCalendar = styled(Calendar)`
+  box-shadow: none;
 `;
 
 // IE11 fix toLocaleDateString('ru') extra invisible characters by using .replace(/[^ -~]/g,'')
@@ -73,18 +39,16 @@ export interface DateInputProps extends TextInputProps, Omit<CalendarPropType, '
   formatter?: (isoValues: string[], joinString?: string) => string;
   parser?: (stringValue?: string, isDateRangeValue?: boolean) => Date[];
 
-  /**
-   * Позволяет выравнивать позицию календаря относительно инпута.
-   * Принимает стандартные значения css свойства align-self (start, end, center)
-   */
-  alignDropdown?: string;
+  /** Принудительно выравнивает контейнер календаря относительно компонента, значение по умолчанию 'flex-end' */
+  alignDropdown?: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
+
   /** Ref для календаря */
   calendarRef?: React.RefObject<HTMLDivElement>;
 
   /**
    * Компонент для отображения альтернативной иконки
    */
-  icon?: React.FunctionComponent;
+  icon?: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
 }
 
 export const DateInput = React.forwardRef<HTMLInputElement, DateInputProps>(
@@ -99,7 +63,7 @@ export const DateInput = React.forwardRef<HTMLInputElement, DateInputProps>(
       validator,
       filterDate,
       localeName,
-      alignDropdown = 'end',
+      alignDropdown = 'flex-end',
       currentActiveView,
       currentActiveViewImportant,
       onMonthSelect,
@@ -179,19 +143,19 @@ export const DateInput = React.forwardRef<HTMLInputElement, DateInputProps>(
     };
 
     const iconArray = React.Children.toArray(icons);
-    iconArray.push(<StyledCalendarIcon icon={icon} onClick={handleButtonClick} tabIndex={0} />);
+    iconArray.push(<InputIconButton icon={icon} onClick={handleButtonClick} tabIndex={0} />);
 
     return (
       <Input
         {...props}
         ref={refSetter(ref, inputRef)}
         handleInput={handleInput}
-        icons={!props.readOnly && iconArray}
+        icons={!props.readOnly ? iconArray : undefined}
         containerRef={inputContainerRef}
       >
         {isCalendarOpen && (
-          <Dropdown targetRef={inputRef} onClickOutside={handleBlurCalendarContainer}>
-            <Calendar
+          <Dropdown targetRef={inputRef} alignSelf={alignDropdown} onClickOutside={handleBlurCalendarContainer}>
+            <StyledCalendar
               {...calendarProps}
               ref={calendarRef}
               selected={selectedCalendarValue}
