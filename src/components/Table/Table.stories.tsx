@@ -46,7 +46,7 @@ const Description = () => (
 );
 
 export default {
-  title: 'Admiral-2.1/Table',
+  title: 'Admiral-2.1/Data Table/Table',
   decorators: [withDesign],
   component: Table,
   parameters: {

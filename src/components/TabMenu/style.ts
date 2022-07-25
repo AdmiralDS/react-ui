@@ -14,19 +14,47 @@ import {
   TAB_HEIGHT_M,
   TAB_PADDING_L,
   TAB_PADDING_M,
+  OVERFLOW_MENU_MARGIN_L,
+  OVERFLOW_MENU_MARGIN_M,
+  FOCUS_BORDER_OFFSET_L,
+  FOCUS_BORDER_OFFSET_M,
+  TAB_LEFT_OFFSET_M,
+  TAB_LEFT_OFFSET_L,
 } from '#src/components/TabMenu/constants';
 
-export const Wrapper = styled.div<{ underline?: boolean; mobile?: boolean }>`
+export const IconWrapper = styled.div<{ dimension: Dimension }>`
+  ${({ dimension }) => `
+    width: ${dimension === 'l' ? ICON_SIZE_L : ICON_SIZE_M}px;
+    height: ${dimension === 'l' ? ICON_SIZE_L : ICON_SIZE_M}px;`}
+  margin-right: 8px;
+`;
+
+export const BadgeWrapper = styled.div`
+  margin-left: 8px;
+  display: flex;
+  align-items: center;
+`;
+
+export const MenuItemWrapper = styled.div`
+  display: flex;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  align-items: center;
+`;
+
+export const Wrapper = styled.div<{ underline?: boolean; mobile?: boolean; dimension?: Dimension }>`
   position: relative;
   display: flex;
   flex: 1 1 auto;
-  flex-wrap: nowrap;
+  flex-wrap: ${({ mobile }) => (mobile ? 'nowrap' : 'wrap')};
   align-items: center;
-  justify-content: space-between;
   width: 100%;
   box-sizing: border-box;
   box-shadow: inset 0 -${LINE_HEIGHT} 0 0 ${({ theme, underline }) => (underline ? theme.color['Neutral/Neutral 20'] : 'transparent')};
-  overflow-x: ${({ mobile }) => (mobile ? 'scroll' : 'visible')};
+  overflow: ${({ mobile }) => (mobile ? 'scroll' : 'hidden')};
+
+  height: ${({ dimension }) => (dimension === 'l' ? TAB_HEIGHT_L : TAB_HEIGHT_M)}px;
+  max-height: ${({ dimension }) => (dimension === 'l' ? TAB_HEIGHT_L : TAB_HEIGHT_M)}px;
 
   &::-webkit-scrollbar {
     width: 0 !important;
@@ -37,16 +65,6 @@ export const Wrapper = styled.div<{ underline?: boolean; mobile?: boolean }>`
   -ms-overflow-style: none;
   scrollbar-width: none;
   scrollbar-height: none;
-`;
-
-/**
- * Для исправления бага в IE (скачет контент) вместо flex: 1 1 auto используем margin-right: auto
- * Это позволяет избежать скачков контента и при этом ширина TabsWrapper будет равна ровно ширине его контента и не более.
- * Это напрямую влияет на работу observer, повешенного на tabsWrapperRef.current в файле index.ts.
- */
-export const TabsWrapper = styled.div`
-  display: flex;
-  margin-right: auto;
 `;
 
 export const Underline = styled.div`
@@ -144,17 +162,34 @@ export const Tab = styled.button<{ dimension: Dimension; selected: boolean }>`
   }
 `;
 
-export const StyledOverflowMenu = styled(OverflowMenu)<{ isActive: boolean }>`
+const getOffset = (dimension: Dimension) => {
+  return dimension === 'l' ? TAB_LEFT_OFFSET_L : TAB_LEFT_OFFSET_M;
+};
+
+export const TabWrapper = styled.div<{ $needsOffset: boolean; dimension: Dimension }>`
+  display: flex;
+  align-items: center;
+
+  margin-left: ${({ $needsOffset, dimension }) => ($needsOffset ? getOffset(dimension) : 0)}px;
+`;
+
+export const StyledOverflowMenu = styled(OverflowMenu)<{
+  isActive: boolean;
+  isHidden?: boolean;
+  dimension?: Dimension;
+}>`
+  visibility: ${({ isHidden }) => (isHidden ? 'hidden' : 'visible')};
+  margin-left: ${({ dimension }) => (dimension === 'l' ? OVERFLOW_MENU_MARGIN_L : OVERFLOW_MENU_MARGIN_M)};
+
   &:focus-visible {
     &:before {
-      content: '';
-      position: absolute;
-      top: -6px;
-      left: -6px;
-      bottom: -6px;
-      right: -6px;
+      ${({ dimension }) => `
+        top: ${dimension === 'l' ? FOCUS_BORDER_OFFSET_L : FOCUS_BORDER_OFFSET_M};
+        left: ${dimension === 'l' ? FOCUS_BORDER_OFFSET_L : FOCUS_BORDER_OFFSET_M};
+        right: ${dimension === 'l' ? FOCUS_BORDER_OFFSET_L : FOCUS_BORDER_OFFSET_M};
+        bottom: ${dimension === 'l' ? FOCUS_BORDER_OFFSET_L : FOCUS_BORDER_OFFSET_M};
+      `}
       border-radius: 0;
-      border: 2px solid ${({ theme }) => theme.color['Primary/Primary 60 Main']};
     }
   }
 

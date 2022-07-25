@@ -5,7 +5,7 @@ export const useClickOutside = (elements: React.RefObject<HTMLElement>[], handle
     (e: MouseEvent | TouchEvent) => {
       if (
         elements.every((element) => {
-          return (element.current && !element.current.contains(e.target as Element)) || !element.current;
+          return element.current && !element.current.contains(e.target as Element);
         })
       ) {
         handler(e);
