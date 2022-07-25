@@ -40,7 +40,7 @@ export const TagMenu = React.forwardRef<HTMLButtonElement, TagMenuProps>(
       <DropMenu
         {...props}
         ref={ref}
-        dimension={dimension}
+        dimension="m"
         items={items}
         selected={selected}
         onChange={onChange}
