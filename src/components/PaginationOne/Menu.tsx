@@ -1,12 +1,11 @@
 import * as React from 'react';
-import { ReactComponent as ChevronDownOutline } from '@admiral-ds/icons/build/system/ChevronDownOutline.svg';
 import styled, { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import { typography } from '#src/components/Typography';
-import { Dropdown } from '#src/components/Dropdown';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
-import { uid } from '#src/components/common/uid';
 import { DropMenu } from '#src/components/DropMenu';
 import { MenuItem, RenderOptionProps } from '#src/components/MenuItem';
+
+const MENU_WIDTH = '68px';
 
 const Button = styled.button<{ $menuOpened?: boolean }>`
   position: relative;
@@ -55,25 +54,9 @@ const Button = styled.button<{ $menuOpened?: boolean }>`
   }
 `;
 
-const Icon = styled(ChevronDownOutline)<{ $menuOpened: boolean }>`
-  transition: all 0.3s;
-  ${({ $menuOpened }) => $menuOpened && 'transform: rotate(180deg);'}
-`;
-
-const IconArrow = styled.div`
+const Icon = styled.div`
   width: 20px;
   height: 20px;
-`;
-
-const StyledDropDown = styled(Dropdown)<{
-  dropMaxHeight: string | number;
-  cssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
-}>`
-  padding: 8px 0;
-  overflow-x: hidden;
-  overflow-y: auto;
-  max-height: ${(p) => p.dropMaxHeight};
-  min-width: 100%;
 `;
 
 export interface MenuButtonProps extends Omit<React.HTMLAttributes<HTMLButtonElement>, 'onChange'> {
@@ -135,7 +118,8 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
         onClose={onClose}
         ref={ref}
         dimension="s"
-        menuWidth="68px"
+        menuWidth={MENU_WIDTH}
+        menuMaxHeight={dropMaxHeight}
         disabled={disabled}
         selected={selected}
         renderContentProp={({ buttonRef, handleKeyDown, handleClick, statusIcon, menuState }) => {
@@ -151,7 +135,7 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
               type="button"
             >
               <span>{children}</span>
-              <IconArrow>{statusIcon}</IconArrow>
+              <Icon>{statusIcon}</Icon>
             </Button>
           );
         }}
