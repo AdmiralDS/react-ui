@@ -47,13 +47,19 @@ export default {
       control: { type: 'boolean' },
     },
     itemsPerPageText: {
-      control: { type: 'string' },
+      control: { type: 'text' },
     },
     backwardText: {
-      control: { type: 'string' },
+      control: { type: 'text' },
     },
     forwardText: {
-      control: { type: 'string' },
+      control: { type: 'text' },
+    },
+    menuWidth: {
+      control: { type: 'text' },
+    },
+    dropMaxHeight: {
+      control: { type: 'text' },
     },
     themeBorderKind: {
       control: {
