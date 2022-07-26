@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 import { typography } from '#src/components/Typography';
 
 type Dimension = 'm' | 's';
-type Appearance =
+export type BadgeAppearance =
   | 'light'
   | 'info'
   | 'warning'
@@ -18,7 +18,7 @@ type Appearance =
   | 'whiteDisable'
   | 'whiteBlue';
 
-const background = css<{ appearance: Appearance }>`
+const background = css<{ appearance: BadgeAppearance }>`
   background: ${({ appearance, theme }) => {
     switch (appearance) {
       case 'info':
@@ -48,7 +48,7 @@ const background = css<{ appearance: Appearance }>`
   }};
 `;
 
-const color = css<{ appearance: Appearance }>`
+const color = css<{ appearance: BadgeAppearance }>`
   color: ${({ appearance, theme }) => {
     switch (appearance) {
       case 'info':
@@ -75,7 +75,7 @@ const color = css<{ appearance: Appearance }>`
   }};
 `;
 
-export const BadgeComponent = styled.div<{ dimension: Dimension; appearance: Appearance }>`
+export const BadgeComponent = styled.div<{ dimension: Dimension; appearance: BadgeAppearance }>`
   position: relative;
   box-sizing: border-box;
   display: inline-flex;
@@ -94,7 +94,7 @@ export interface BadgeProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Размер компонента */
   dimension?: Dimension;
   /** Внешний вид компонента */
-  appearance?: Appearance;
+  appearance?: BadgeAppearance;
 }
 
 export const Badge: React.FC<BadgeProps> = ({ children, dimension = 'm', appearance = 'light', ...props }) => {
