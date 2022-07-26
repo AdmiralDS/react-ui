@@ -112,8 +112,8 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
     ref,
   ) => {
     const model = React.useMemo(() => {
-      return options.slice(1, options.length).map((item) => {
-        const id = uid();
+      return options.map((item) => {
+        const id = item.toString();
 
         return {
           id: id,
