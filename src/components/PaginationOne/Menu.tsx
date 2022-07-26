@@ -41,7 +41,7 @@ const Button = styled.button<{ $menuOpened?: boolean }>`
     }
   }
 
-  &:focus {
+  &:focus-visible {
     outline: none;
     border-color: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
   }
