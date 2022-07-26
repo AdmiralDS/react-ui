@@ -76,6 +76,7 @@ export interface MenuButtonProps extends Omit<React.HTMLAttributes<HTMLButtonEle
   dropMaxHeight: string | number;
   /** Позволяет добавлять миксин на дроп контейнер созданный с помощью styled css  */
   dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+  menuWidth?: string;
 }
 
 export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
@@ -90,6 +91,7 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
       onChange,
       dropMaxHeight,
       dropContainerCssMixin,
+      menuWidth,
       ...props
     },
     ref,
@@ -118,8 +120,10 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
         onClose={onClose}
         ref={ref}
         dimension="s"
-        menuWidth={MENU_WIDTH}
+        menuWidth={menuWidth}
+        alignSelf={menuWidth ? 'flex-end' : 'stretch'}
         menuMaxHeight={dropMaxHeight}
+        dropContainerCssMixin={dropContainerCssMixin}
         disabled={disabled}
         selected={selected}
         renderContentProp={({ buttonRef, handleKeyDown, handleClick, statusIcon, menuState }) => {

@@ -90,6 +90,7 @@ export interface PaginationOneProps extends Omit<React.HTMLAttributes<HTMLDivEle
   dropMaxHeight?: string | number;
   /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
   dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+  menuWidth?: string;
 }
 
 export const PaginationOne: React.FC<PaginationOneProps> = ({
@@ -108,6 +109,7 @@ export const PaginationOne: React.FC<PaginationOneProps> = ({
   backwardText = 'Предыдущая страница, выбрать',
   forwardText = 'Следующая страница, выбрать',
   simple = false,
+  menuWidth,
   dropMaxHeight = '300px',
   dropContainerCssMixin,
   ...props
@@ -148,6 +150,7 @@ export const PaginationOne: React.FC<PaginationOneProps> = ({
             aria-label={pageSizeSelectLabel(pageSize, totalItems)}
             dropMaxHeight={dropMaxHeight}
             dropContainerCssMixin={dropContainerCssMixin}
+            menuWidth={menuWidth}
           >
             {pageSize}
           </MenuButton>
@@ -170,6 +173,7 @@ export const PaginationOne: React.FC<PaginationOneProps> = ({
             aria-label={pageSelectLabel(page, totalPages)}
             dropMaxHeight={dropMaxHeight}
             dropContainerCssMixin={dropContainerCssMixin}
+            menuWidth={menuWidth}
           >
             {page}
           </MenuButton>
