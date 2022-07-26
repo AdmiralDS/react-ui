@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components';
 import { ReactComponent as CloseOutline } from '@admiral-ds/icons/build/service/CloseOutline.svg';
 import { TYPOGRAPHY } from '#src/components/Typography';
 import type { ChipAppearance, ChipDimension } from '#src/components/Chips';
+import { Badge } from '#src/components/Badge';
 
 const heights = css<{ dimension: ChipDimension }>`
   height: ${({ dimension }) => {
@@ -286,4 +287,8 @@ export const IconWrapperStyled = styled.div<{
     border-radius: 50%;
     background-color: ${({ theme }) => theme.color['Opacity/Press']};
   }
+`;
+
+export const StyledBadge = styled(Badge)<{ dimension: ChipDimension }>`
+  margin-left: ${({ dimension }) => (dimension === 's' ? '6px' : '8px')};
 `;

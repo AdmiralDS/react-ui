@@ -11,7 +11,9 @@ import {
   IconAfterWrapperStyled,
   IconBeforeWrapperStyled,
   IconWrapperStyled,
+  StyledBadge,
 } from './style';
+import { Badge, BadgeAppearance } from '#src/components/Badge';
 
 export type ChipDimension = 's' | 'm';
 export type ChipAppearance = 'filled' | 'outlined';
@@ -40,6 +42,8 @@ export interface ChipsProps extends HTMLAttributes<HTMLDivElement> {
   iconBefore?: ReactNode;
   /** Иконка после текста Chips'a. Отображается, если не прокинут метод onClose, иначе отображется иконка закрытия (крест) **/
   iconAfter?: ReactNode;
+  /** Число, которое будет отображено в компоненте Badge справа от content */
+  badge?: number;
 }
 
 export const Chips: FC<ChipsProps> = ({
@@ -52,11 +56,21 @@ export const Chips: FC<ChipsProps> = ({
   renderContentTooltip = defaultRenderContent,
   iconBefore,
   iconAfter,
+  badge,
   ...props
 }) => {
   const defaultChip = selected !== undefined;
   const [withTooltip, setTooltip] = React.useState(false);
   const withCloseIcon = !!onClose;
+  const badgeAppearance: BadgeAppearance = React.useMemo(() => {
+    if (selected && !disabled) return 'whiteBlue';
+    if (disabled) {
+      if (selected || appearance === 'filled') return 'whiteDisable';
+      return 'lightDisable';
+    }
+    if (appearance === 'filled') return 'white';
+    return 'info';
+  }, [appearance, selected, disabled]);
 
   const refItems = React.useRef<HTMLDivElement | null>(null);
 
@@ -110,6 +124,11 @@ export const Chips: FC<ChipsProps> = ({
               {iconAfter}
             </IconWrapperStyled>
           </IconAfterWrapperStyled>
+        )}
+        {badge && (
+          <StyledBadge data-badge dimension={dimension} appearance={badgeAppearance}>
+            {badge}
+          </StyledBadge>
         )}
         {onClose && (
           <IconAfterWrapperStyled withCloseIcon={withCloseIcon}>

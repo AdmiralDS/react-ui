@@ -233,15 +233,39 @@ const ChipsTagsCloseTooltipDemo: ComponentStory<typeof Chips> = (props) => {
   );
 };
 
+const ChipsBadgesDemo: ComponentStory<typeof Chips> = (props) => {
+  return (
+    <>
+      <WrapperChip dimension="m">
+        {listData.map((item) => (
+          <Chips {...props} key={item.id} badge={3} dimension="m">
+            {item.label}
+          </Chips>
+        ))}
+      </WrapperChip>
+      <Separator />
+      <WrapperChip dimension="s">
+        {listData.map((item) => (
+          <Chips {...props} key={item.id} badge={3} dimension="s">
+            {item.label}
+          </Chips>
+        ))}
+      </WrapperChip>
+    </>
+  );
+};
+
 export const ChipsTags = ChipsTagsDemo.bind({});
 export const ChipsTagsClose = ChipsTagsCloseDemo.bind({});
 export const ChipsIcon = ChipsIconDemo.bind({});
 export const ChipsSelect = ChipsSelectDemo.bind({});
 export const ChipsMultiSelectIcon = ChipsMultiSelectIconDemo.bind({});
 export const ChipsTooltip = ChipsTagsCloseTooltipDemo.bind({});
+export const ChipsBadges = ChipsBadgesDemo.bind({});
 
 ChipsTags.storyName = 'Chips базовый пример';
 ChipsTagsClose.storyName = 'Chips с текстом и иконкой закрыть';
 ChipsIcon.storyName = 'Chips с иконкой';
 ChipsSelect.storyName = 'Chips с текстом и выбором';
 ChipsMultiSelectIcon.storyName = 'Chips для множественного выбора';
+ChipsBadges.storyName = 'Chips базовый пример';
