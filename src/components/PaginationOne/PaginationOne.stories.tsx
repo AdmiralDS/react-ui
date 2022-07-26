@@ -68,7 +68,7 @@ const Template1: ComponentStory<typeof PaginationOne> = (args) => {
   const [pageSize, setPageSize] = useState(8);
   const [page, setPage] = useState(1);
   const pageSizes = [8, 20, 50, 100, 200];
-  const totalElements = 100;
+  const totalElements = args.totalItems;
 
   function swapBorder(theme: Theme): Theme {
     theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
@@ -161,7 +161,7 @@ const Template2: ComponentStory<typeof PaginationOne> = () => {
 };
 
 export const Playground = Template1.bind({});
-Playground.args = {};
+Playground.args = { totalItems: 100 };
 
 export const PaginationTypes = Template2.bind({});
 PaginationTypes.args = {};
