@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { ReactComponent as ChevronDownOutline } from '@admiral-ds/icons/build/system/ChevronDownOutline.svg';
 import styled, { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
-import { refSetter } from '#src/components/common/utils/refSetter';
 import { typography } from '#src/components/Typography';
-import { DropDownItem } from '#src/components/DropDownItem';
-import { useClickOutside } from '#src/components/common/hooks/useClickOutside';
 import { Dropdown } from '#src/components/Dropdown';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
+import { uid } from '#src/components/common/uid';
+import { DropMenu } from '#src/components/DropMenu';
+import { MenuItem, RenderOptionProps } from '#src/components/MenuItem';
 
 const Button = styled.button<{ $menuOpened?: boolean }>`
   position: relative;
@@ -44,19 +44,7 @@ const Button = styled.button<{ $menuOpened?: boolean }>`
   &:focus {
     outline: none;
     border-color: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
-    & *[fill^='#'] {
-      fill: ${({ theme }) => theme.color['Primary/Primary 70']};
-    }
   }
-
-  ${({ $menuOpened, theme }) =>
-    $menuOpened &&
-    `
-    border-color: ${theme.color['Primary/Primary 60 Main']};
-      & *[fill^='#'] {
-        fill: ${theme.color['Primary/Primary 70']};
-      }
-    `}
 
   &:disabled {
     cursor: not-allowed;
@@ -70,6 +58,11 @@ const Button = styled.button<{ $menuOpened?: boolean }>`
 const Icon = styled(ChevronDownOutline)<{ $menuOpened: boolean }>`
   transition: all 0.3s;
   ${({ $menuOpened }) => $menuOpened && 'transform: rotate(180deg);'}
+`;
+
+const IconArrow = styled.div`
+  width: 20px;
+  height: 20px;
 `;
 
 const StyledDropDown = styled(Dropdown)<{
@@ -87,9 +80,9 @@ export interface MenuButtonProps extends Omit<React.HTMLAttributes<HTMLButtonEle
   /** Массив опций */
   options: Array<number>;
   /** Выбранная опция */
-  selected: number | null;
+  selected?: string;
   /** Колбек на изменение выбранной опции */
-  onChange: (value: number) => void;
+  onChange: (id: string) => void;
   /** Колбек на открытие меню */
   onOpen?: () => void;
   /** Колбек на закрытие меню */
@@ -118,92 +111,50 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
     },
     ref,
   ) => {
-    const [menuOpened, setMenuOpened] = React.useState<boolean>(false);
-    const btnRef = React.useRef<HTMLButtonElement>(null);
-    const menuRef = React.useRef<HTMLDivElement>(null);
+    const model = React.useMemo(() => {
+      return options.slice(1, options.length).map((item) => {
+        const id = uid();
 
-    const reverseMenu = () => {
-      setMenuOpened((prevOpened) => {
-        prevOpened ? onClose?.() : onOpen?.();
-        return !prevOpened;
+        return {
+          id: id,
+          render: (items: RenderOptionProps) => (
+            <MenuItem dimension="s" {...items} key={id}>
+              {item}
+            </MenuItem>
+          ),
+        };
       });
-    };
-    const closeMenu = () => {
-      setMenuOpened(false);
-      onClose?.();
-      btnRef.current?.focus();
-    };
-
-    useClickOutside([menuRef, btnRef], closeMenu);
-
-    const handleBtnKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>) => {
-      if (e.key === 'ArrowDown' || e.key === 'Enter' || e.key === ' ') {
-        setMenuOpened(true);
-        onOpen?.();
-        e.preventDefault();
-      }
-    };
-
-    const handleClick = (e: React.MouseEvent<HTMLLIElement>) => {
-      onChange(e.currentTarget.value);
-      closeMenu();
-    };
-
-    const handleKeyDown = (e: React.KeyboardEvent<HTMLLIElement>) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        onChange(e.currentTarget.value);
-        closeMenu();
-        e.preventDefault();
-      }
-    };
-
-    const clickOutside = (e: Event) => {
-      if (e.target && btnRef.current?.contains(e.target as Node)) {
-        return;
-      }
-      setMenuOpened(false);
-    };
+    }, [options]);
 
     return (
-      <>
-        <Button
-          {...props}
-          ref={refSetter(ref, btnRef)}
-          disabled={disabled}
-          $menuOpened={menuOpened}
-          onKeyDown={handleBtnKeyDown}
-          onClick={reverseMenu}
-          aria-expanded={menuOpened}
-          type="button"
-        >
-          <span>{children}</span>
-          <Icon $menuOpened={menuOpened} width={20} height={20} aria-hidden />
-        </Button>
-        {menuOpened && (
-          <StyledDropDown
-            ref={menuRef}
-            targetRef={btnRef}
-            onClickOutside={clickOutside}
-            dropMaxHeight={dropMaxHeight}
-            cssMixin={dropContainerCssMixin}
-          >
-            {options.map((option) => (
-              <DropDownItem
-                key={option}
-                value={option}
-                dimension="s"
-                selected={selected === option}
-                aria-selected={selected === option}
-                role="option"
-                onClick={handleClick}
-                onKeyDown={handleKeyDown}
-              >
-                {option}
-              </DropDownItem>
-            ))}
-          </StyledDropDown>
-        )}
-      </>
+      <DropMenu
+        {...props}
+        items={model}
+        onChange={onChange}
+        onOpen={onOpen}
+        onClose={onClose}
+        ref={ref}
+        dimension="s"
+        disabled={disabled}
+        selected={selected}
+        renderContentProp={({ buttonRef, handleKeyDown, handleClick, statusIcon, menuState }) => {
+          return (
+            <Button
+              {...props}
+              ref={buttonRef as React.Ref<HTMLButtonElement>}
+              disabled={disabled}
+              $menuOpened={menuState}
+              onKeyDown={handleKeyDown}
+              onClick={handleClick}
+              aria-expanded={menuState}
+              type="button"
+            >
+              <span>{children}</span>
+              <IconArrow>{statusIcon}</IconArrow>
+            </Button>
+          );
+        }}
+      />
     );
   },
 );
