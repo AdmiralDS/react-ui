@@ -117,11 +117,13 @@ export const PaginationOne: React.FC<PaginationOneProps> = ({
   const backButtonDisabled = page === 1;
   const forwardButtonDisabled = page === totalPages;
 
-  const handleSizeChange = (pageSize: number) => {
-    onChange({ page: 1, pageSize });
+  const handleSizeChange = (pageSizeSelected: string) => {
+    const pageSize = parseInt(pageSizeSelected);
+    onChange({ page: 1, pageSize: pageSize });
   };
 
-  const handlePageInputChange = (page: number) => {
+  const handlePageInputChange = (pageSelected: string) => {
+    const page = parseInt(pageSelected);
     if (page > 0 && page <= totalPages) {
       onChange({
         page,
@@ -140,7 +142,7 @@ export const PaginationOne: React.FC<PaginationOneProps> = ({
           {itemsPerPageText}
           <MenuButton
             options={pageSizes}
-            selected={pageSize}
+            selected={pageSize.toString()}
             onChange={handleSizeChange}
             disabled={pageSizeSelectDisabled}
             aria-label={pageSizeSelectLabel(pageSize, totalItems)}
@@ -162,7 +164,7 @@ export const PaginationOne: React.FC<PaginationOneProps> = ({
           <Divider />
           <MenuButton
             options={pages}
-            selected={page}
+            selected={page.toString()}
             onChange={handlePageInputChange}
             disabled={pageSelectDisabled}
             aria-label={pageSelectLabel(page, totalPages)}
