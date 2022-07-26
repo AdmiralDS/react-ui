@@ -135,6 +135,7 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
         onClose={onClose}
         ref={ref}
         dimension="s"
+        menuWidth="68px"
         disabled={disabled}
         selected={selected}
         renderContentProp={({ buttonRef, handleKeyDown, handleClick, statusIcon, menuState }) => {
