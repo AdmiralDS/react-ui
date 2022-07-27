@@ -18,6 +18,11 @@ export interface TagMenuProps extends Omit<HTMLAttributes<HTMLButtonElement>, 'o
   disabled?: boolean;
   /** Выравнивание выпадающего меню относительно компонента https://developer.mozilla.org/en-US/docs/Web/CSS/align-self */
   alignSelf?: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
+  /**
+   * Позволяет рендерить компонент, используя другой тег HTML (https://styled-components.com/docs/api#as-polymorphic-prop).
+   * В storybook в качестве примера приведены несколько возможных вариантов этого параметра (кроме них можно использовать любой другой HTML тег).
+   */
+  as?: React.ElementType;
 }
 
 export const TagMenu = React.forwardRef<HTMLButtonElement, TagMenuProps>(
@@ -56,6 +61,7 @@ export const TagMenu = React.forwardRef<HTMLButtonElement, TagMenuProps>(
               onClick={handleClick}
               aria-expanded={menuState}
               statusIcon={statusIcon}
+              as={as}
             >
               {children}
             </Tag>
