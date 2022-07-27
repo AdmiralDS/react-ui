@@ -122,7 +122,7 @@ const Template0: ComponentStory<typeof Tag> = (args: TagProps) => {
         <TagMenu
           items={model}
           selected={selected}
-          onChange={(id) => {
+          onSelectOption={(id) => {
             console.log(`selected: ${id}`);
             setSelected(id);
           }}

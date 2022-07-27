@@ -3,13 +3,13 @@ import { Tag, TagProps } from '#src/components/Tag';
 import { DropMenu } from '#src/components/DropMenu';
 import { ItemProps } from '#src/components/MenuItem';
 
-export interface TagMenuProps extends Omit<HTMLAttributes<HTMLButtonElement>, 'onChange'>, Omit<TagProps, 'onChange'> {
+export interface TagMenuProps extends HTMLAttributes<HTMLButtonElement>, TagProps {
   /** Опции выпадающего списка */
   items: Array<ItemProps>;
   /** Выбранная опция */
   selected?: string;
   /** Колбек на изменение выбранной опции */
-  onChange: (id: string) => void;
+  onSelectOption: (id: string) => void;
   /** Колбек на открытие меню */
   onOpen?: () => void;
   /** Колбек на закрытие меню */
@@ -34,9 +34,10 @@ export const TagMenu = React.forwardRef<HTMLButtonElement, TagMenuProps>(
       width,
       statusViaBackground = false,
       icon,
-      onChange,
+      onSelectOption,
       items,
       selected,
+      as,
       ...props
     },
     ref,
@@ -48,7 +49,7 @@ export const TagMenu = React.forwardRef<HTMLButtonElement, TagMenuProps>(
         dimension="m"
         items={items}
         selected={selected}
-        onChange={onChange}
+        onChange={onSelectOption}
         renderContentProp={({ buttonRef, handleKeyDown, handleClick, statusIcon, menuState }) => {
           return (
             <Tag
