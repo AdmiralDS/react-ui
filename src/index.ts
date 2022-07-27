@@ -64,6 +64,7 @@ export * from './components/Tree';
 export * from './components/Table';
 export * from './components/InputIconButton';
 export * from './components/GroupActionsPane';
+export * from './components/skeleton/animation';
 
 export { FontsVTBGroup } from './components/FontsVTBGroup';
 export { DropdownProvider } from './components/DropdownProvider';
