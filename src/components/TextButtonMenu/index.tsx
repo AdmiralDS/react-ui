@@ -51,6 +51,8 @@ export interface TextButtonMenuProps extends Omit<HTMLAttributes<HTMLButtonEleme
   disabled?: boolean;
   /** Выравнивание выпадающего меню относительно компонента https://developer.mozilla.org/en-US/docs/Web/CSS/align-self */
   alignSelf?: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
+  /** Состояние skeleton */
+  skeleton?: boolean;
 }
 
 export const TextButtonMenu = React.forwardRef<HTMLButtonElement, TextButtonMenuProps>(
@@ -64,6 +66,7 @@ export const TextButtonMenu = React.forwardRef<HTMLButtonElement, TextButtonMenu
       items,
       selected,
       onChange,
+      skeleton = false,
       ...props
     },
     ref,
@@ -82,6 +85,7 @@ export const TextButtonMenu = React.forwardRef<HTMLButtonElement, TextButtonMenu
           return (
             <StyledTextButton
               text={text}
+              skeleton={skeleton}
               ref={buttonRef as React.Ref<HTMLButtonElement>}
               dimension={dimension}
               appearance={appearance === 'primary' ? 'primary' : 'secondary'}

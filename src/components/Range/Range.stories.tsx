@@ -56,6 +56,9 @@ export default {
     maxValue: {
       control: { type: 'number' },
     },
+    skeleton: {
+      control: { type: 'boolean' },
+    },
   },
 } as ComponentMeta<typeof Range>;
 

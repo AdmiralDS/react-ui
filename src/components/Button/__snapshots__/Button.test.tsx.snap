@@ -61,6 +61,7 @@ exports[`Button should render component 1`] = `
   -moz-appearance: none;
   appearance: none;
   vertical-align: center;
+  pointer-events: all;
   padding: 0;
   height: 56px;
   padding: 0 30px;
@@ -70,7 +71,6 @@ exports[`Button should render component 1`] = `
   font-size: 16px;
   line-height: 24px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  pointer-events: all;
 }
 
 .c0[data-appearance~='primary'] {
@@ -424,6 +424,7 @@ exports[`Button should render component with text 1`] = `
   -moz-appearance: none;
   appearance: none;
   vertical-align: center;
+  pointer-events: all;
   padding: 0;
   height: 56px;
   padding: 0 30px;
@@ -433,7 +434,6 @@ exports[`Button should render component with text 1`] = `
   font-size: 16px;
   line-height: 24px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  pointer-events: all;
 }
 
 .c0[data-appearance~='primary'] {

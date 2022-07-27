@@ -19,6 +19,7 @@ export const InputField = React.forwardRef<HTMLInputElement, InputFieldProps>((p
     id = uid(),
     disabled,
     displayCharacterCounter,
+    skeleton,
     ...restProps
   } = props;
   const fieldContainerProps = {
@@ -33,6 +34,7 @@ export const InputField = React.forwardRef<HTMLInputElement, InputFieldProps>((p
     maxLength,
     inputRef,
     displayCharacterCounter,
+    skeleton,
     'data-field-id': id,
     'data-field-name': restProps.name,
   } as Record<string, any>;
@@ -50,6 +52,7 @@ export const InputField = React.forwardRef<HTMLInputElement, InputFieldProps>((p
     status,
     disabled,
     maxLength,
+    skeleton,
     ...restProps,
   };
 

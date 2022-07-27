@@ -143,6 +143,7 @@ export const TimeInput = React.forwardRef<HTMLInputElement, TimeInputProps>(
       icon,
       icons,
       alignDropdown = 'flex-end',
+      skeleton = false,
       ...props
     },
     ref,
@@ -270,6 +271,7 @@ export const TimeInput = React.forwardRef<HTMLInputElement, TimeInputProps>(
         value={value}
         disabled={disabled}
         dimension={dimension}
+        skeleton={skeleton}
         onKeyUp={(...p) => {
           props.onKeyUp?.(...p);
           handleKeyUp(...p);
@@ -279,7 +281,7 @@ export const TimeInput = React.forwardRef<HTMLInputElement, TimeInputProps>(
           handleKeyDown(...p);
         }}
       >
-        {availableSlots && isOpened && !disabled && (
+        {availableSlots && isOpened && !disabled && !skeleton && (
           <Dropdown targetRef={inputRef} alignSelf={alignDropdown} onClickOutside={clickOutside}>
             <SlotContainer data-dimension={dimension}>
               {availableSlots.map((slot, index) => (

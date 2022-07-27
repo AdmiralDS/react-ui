@@ -5,6 +5,7 @@ import type { ComponentDimension } from '#src/components/input/types';
 import { ReactComponent as CloseOutlineSvg } from '@admiral-ds/icons/build/service/CloseOutline.svg';
 import { CHIP_OFFSET, COUNTER_WIDTH } from './constants';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
+import { skeletonMixin } from '../Container';
 
 const getSelectValueHeight = (dimension?: ComponentDimension, multiple?: boolean) =>
   dimension === 's' && !multiple ? 20 : 24;
@@ -169,12 +170,35 @@ const focusedStyle = css`
   }
 `;
 
+export const IconPanel = styled.div<{ multiple?: boolean; dimension?: ComponentDimension }>`
+  flex: 0 0 auto;
+
+  display: flex;
+  align-items: center;
+
+  padding: ${({ dimension, multiple }) => (dimension === 's' && multiple ? '2px 0' : '0')};
+
+  & > * {
+    margin-left: 8px;
+    display: block;
+    width: ${({ dimension }) => (dimension === 's' ? 20 : 24)}px;
+    height: ${({ dimension }) => (dimension === 's' ? 20 : 24)}px;
+  }
+
+  [data-disabled='true'] & {
+    & *[fill^='#'] {
+      fill: ${(props) => props.theme.color['Neutral/Neutral 30']};
+    }
+  }
+`;
+
 export const SelectWrapper = styled.div<{
   disabled?: boolean;
   readonly?: boolean;
   focused: boolean;
   multiple: boolean;
   dimension?: ComponentDimension;
+  skeleton?: boolean;
 }>`
   position: relative;
   box-sizing: border-box;
@@ -198,29 +222,10 @@ export const SelectWrapper = styled.div<{
     }
   }};
 
-  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
-`;
+  border-radius: ${(p) => (p.skeleton ? 0 : mediumGroupBorderRadius(p.theme.shape))};
 
-export const IconPanel = styled.div<{ multiple?: boolean; dimension?: ComponentDimension }>`
-  flex: 0 0 auto;
-
-  display: flex;
-  align-items: center;
-
-  padding: ${({ dimension, multiple }) => (dimension === 's' && multiple ? '2px 0' : '0')};
-
-  & > * {
-    margin-left: 8px;
-    display: block;
-    width: ${({ dimension }) => (dimension === 's' ? 20 : 24)}px;
-    height: ${({ dimension }) => (dimension === 's' ? 20 : 24)}px;
-  }
-
-  [data-disabled='true'] & {
-    & *[fill^='#'] {
-      fill: ${(props) => props.theme.color['Neutral/Neutral 30']};
-    }
-  }
+  pointer-events: ${(p) => (p.skeleton ? 'none' : 'all')};
+  ${({ skeleton }) => skeleton && skeletonMixin}};
 `;
 
 export const Hidden = styled.div`

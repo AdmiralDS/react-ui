@@ -9,7 +9,7 @@ import { ReactComponent as CloseOutlineSvg } from '@admiral-ds/icons/build/servi
 import { ReactComponent as MinusOutline } from '@admiral-ds/icons/build/service/MinusOutline.svg';
 import { ReactComponent as PlusOutline } from '@admiral-ds/icons/build/service/PlusOutline.svg';
 
-import { Container } from '../Container';
+import { HeightLimitedContainer } from '../Container';
 import { StatusIcon } from '../StatusIcon';
 
 import { AutoSizeInput } from './AutoSizeInput';
@@ -101,10 +101,25 @@ const IconPanel = styled.div<{ disabled?: boolean; dimension?: ComponentDimensio
   }
 `;
 
-const Wrapper = styled(Container)<{
+const Content = styled.div`
+  display: flex;
+  box-sizing: border-box;
+  width: 100%;
+  overflow: hidden;
+  padding: 0 ${horizontalPaddingValue}px;
+  ${extraPadding};
+  border-radius: inherit;
+
+  &[data-align='right'] {
+    justify-content: flex-end;
+  }
+`;
+
+const Wrapper = styled(HeightLimitedContainer)<{
   disabled?: boolean;
   dimension?: ComponentDimension;
   readOnly?: boolean;
+  skeleton?: boolean;
 }>`
   background-color: ${(props) => {
     if (props.disabled || props.readOnly) return props.theme.color['Neutral/Neutral 10'];
@@ -114,20 +129,6 @@ const Wrapper = styled(Container)<{
     props.disabled ? props.theme.color['Neutral/Neutral 30'] : props.theme.color['Neutral/Neutral 90']};
   ${(props) => (props.dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
   overflow: hidden;
-`;
-
-const Content = styled.div`
-  display: flex;
-  box-sizing: border-box;
-  width: 100%;
-  overflow: hidden;
-  padding: 0 ${horizontalPaddingValue}px;
-  ${extraPadding}
-  border-radius: inherit;
-
-  &[data-align='right'] {
-    justify-content: flex-end;
-  }
 `;
 
 export interface NumberInputProps extends TextInputProps {
@@ -174,6 +175,7 @@ export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       maxValue,
       placeholder = '0 ₽',
       align = 'left',
+      skeleton = false,
       onChange,
       onBlur,
       ...props
@@ -332,6 +334,7 @@ export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
         dimension={props.dimension}
         readOnly={props.readOnly}
         data-read-only={props.readOnly ? true : undefined}
+        skeleton={skeleton}
       >
         <Content
           data-align={align}

@@ -1,6 +1,7 @@
 import { ComponentDimension } from '#src/components/input/types';
 import styled, { css } from 'styled-components';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
+import { skeletonAnimationMixin } from '#src/components/skeleton/animation';
 
 export const containerHeights = css<{ dimension?: ComponentDimension }>`
   height: ${({ dimension }) => {
@@ -15,12 +16,24 @@ export const containerHeights = css<{ dimension?: ComponentDimension }>`
   }};
 `;
 
-export const Container = styled.div<{ disabled?: boolean; dimension?: ComponentDimension }>`
+export const skeletonMixin = css`
+  ${skeletonAnimationMixin}
+  & > * {
+    visibility: hidden;
+  }
+`;
+
+export const Container = styled.div<{ skeleton?: boolean }>`
   position: relative;
   display: flex;
   align-items: stretch;
   border: none;
-  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
+  border-radius: ${(p) => (p.skeleton ? 0 : mediumGroupBorderRadius(p.theme.shape))};
 
-  ${containerHeights}
+  pointer-events: ${(p) => (p.skeleton ? 'none' : 'all')};
+  ${({ skeleton }) => skeleton && skeletonMixin}};
+`;
+
+export const HeightLimitedContainer = styled(Container)<{ dimension?: ComponentDimension }>`
+  ${containerHeights};
 `;

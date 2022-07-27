@@ -112,6 +112,7 @@ export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps
       icon = SearchOutlineSVG,
       isLoadingMessage = 'Поиск совпадений',
       isEmptyMessage = 'Нет совпадений',
+      skeleton = false,
       ...props
     },
     ref,
@@ -214,6 +215,7 @@ export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps
         {...props}
         ref={refSetter(ref, inputRef)}
         icons={!props.readOnly ? iconArray : undefined}
+        skeleton={skeleton}
         onKeyUp={(...p) => {
           props.onKeyUp?.(...p);
           handleKeyUp(...p);
@@ -231,7 +233,7 @@ export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps
           triggerDelayedBlur({});
         }}
       >
-        {options && isSuggestPanelOpen && (
+        {options && isSuggestPanelOpen && !skeleton && (
           <StyledDropDown
             targetRef={portalTargetRef || inputRef}
             alignSelf={alignDropdown}

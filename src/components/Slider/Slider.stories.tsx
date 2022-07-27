@@ -64,6 +64,9 @@ export default {
     tickMarks: {
       control: { type: 'array' },
     },
+    skeleton: {
+      control: { type: 'boolean' },
+    },
   },
 } as ComponentMeta<typeof Slider>;
 

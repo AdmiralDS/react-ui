@@ -76,6 +76,7 @@ export const DateInput = React.forwardRef<HTMLInputElement, DateInputProps>(
       calendarRef,
       icon = CalendarOutlineSVG,
       icons,
+      skeleton = false,
       ...props
     },
     ref,
@@ -152,8 +153,9 @@ export const DateInput = React.forwardRef<HTMLInputElement, DateInputProps>(
         handleInput={handleInput}
         icons={!props.readOnly ? iconArray : undefined}
         containerRef={inputContainerRef}
+        skeleton={skeleton}
       >
-        {isCalendarOpen && (
+        {isCalendarOpen && !skeleton && (
           <Dropdown targetRef={inputRef} alignSelf={alignDropdown} onClickOutside={handleBlurCalendarContainer}>
             <StyledCalendar
               {...calendarProps}
