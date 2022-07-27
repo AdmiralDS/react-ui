@@ -62,6 +62,7 @@ export const Chips: FC<ChipsProps> = ({
   const defaultChip = selected !== undefined;
   const [withTooltip, setTooltip] = React.useState(false);
   const withCloseIcon = !!onClose;
+  const withBadge = !!badge;
   const badgeAppearance: BadgeAppearance = React.useMemo(() => {
     if (selected && !disabled) return 'whiteBlue';
     if (disabled) {
@@ -100,6 +101,7 @@ export const Chips: FC<ChipsProps> = ({
       selected={selected}
       defaultChip={defaultChip}
       withCloseIcon={withCloseIcon}
+      withBadge={withBadge}
       {...props}
       tabIndex={props.tabIndex ?? 0}
     >
@@ -125,7 +127,7 @@ export const Chips: FC<ChipsProps> = ({
             </IconWrapperStyled>
           </IconAfterWrapperStyled>
         )}
-        {badge && (
+        {!onClose && badge && (
           <StyledBadge data-badge dimension={dimension} appearance={badgeAppearance}>
             {badge}
           </StyledBadge>

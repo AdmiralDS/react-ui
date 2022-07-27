@@ -177,6 +177,7 @@ export const ChipComponentStyled = styled.div<{
   selected?: boolean;
   defaultChip?: boolean;
   withCloseIcon?: boolean;
+  withBadge?: boolean;
 }>`
   display: inline-flex;
   align-items: center;
@@ -193,6 +194,11 @@ export const ChipComponentStyled = styled.div<{
   ${colorsBorderAndBackground}
   ${heights}
   ${(p) => (p.withCloseIcon ? `padding-left: ${p.dimension === 's' ? 8 : 12}px;` : paddings)}
+  ${(p) =>
+    p.withBadge
+      ? `padding-right: ${p.dimension === 's' ? 4 : 6}px;
+         padding-left: ${p.dimension === 's' ? 8 : 12}px;`
+      : ''}
   ${typography}
 `;
 export const CloseIconWrapperStyled = styled(CloseOutline)<{
