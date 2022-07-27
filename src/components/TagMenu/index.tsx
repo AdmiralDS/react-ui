@@ -55,7 +55,7 @@ export const TagMenu = React.forwardRef<HTMLButtonElement, TagMenuProps>(
               onKeyDown={handleKeyDown}
               onClick={handleClick}
               aria-expanded={menuState}
-              iconArrow={statusIcon}
+              statusIcon={statusIcon}
             >
               {children}
             </Tag>

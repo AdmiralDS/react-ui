@@ -202,7 +202,7 @@ export interface TagProps extends React.HTMLAttributes<HTMLButtonElement> {
 
 export interface TagInternalProps {
   /** Для внутреннего использования! Отображение иконки отрытия выпадающего меню */
-  iconArrow?: React.ReactNode;
+  statusIcon?: React.ReactNode;
 }
 
 export const Tag = React.forwardRef<HTMLElement, TagProps & TagInternalProps>(
@@ -214,7 +214,7 @@ export const Tag = React.forwardRef<HTMLElement, TagProps & TagInternalProps>(
       width,
       statusViaBackground = false,
       icon,
-      iconArrow,
+      statusIcon,
       onClick,
       ...props
     },
@@ -251,7 +251,7 @@ export const Tag = React.forwardRef<HTMLElement, TagProps & TagInternalProps>(
         {background !== 'neutral' && !statusViaBackground && <Circle background={background} />}
         {statusViaBackground && icon && <Icon>{icon}</Icon>}
         {children && <Text ref={textRef}>{children}</Text>}
-        {iconArrow && <Icon>{iconArrow}</Icon>}
+        {statusIcon && <Icon>{statusIcon}</Icon>}
       </Wrapper>
     );
 
