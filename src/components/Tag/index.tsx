@@ -193,9 +193,6 @@ export interface TagProps extends React.HTMLAttributes<HTMLButtonElement> {
   icon?: React.ReactNode;
   /** Ширина тэга */
   width?: number | string;
-  /** Обработчик клика */
-  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
-
   /**
    * Позволяет рендерить компонент, используя другой тег HTML (https://styled-components.com/docs/api#as-polymorphic-prop).
    * В storybook в качестве примера приведены несколько возможных вариантов этого параметра (кроме них можно использовать любой другой HTML тег).
