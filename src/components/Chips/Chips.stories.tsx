@@ -142,12 +142,26 @@ const ChipsTagsDemo: ComponentStory<typeof Chips> = (props) => {
 };
 
 const ChipsTagsCloseDemo: ComponentStory<typeof Chips> = (props) => {
-  const [dataList, setData] = useState(listData);
+  const [dataListM, setDataM] = useState(listData);
+  const [dataListS, setDataS] = useState(listData);
   return (
     <>
       <WrapperChip dimension={props.dimension}>
-        {dataList.map((item) => (
-          <Chips key={item.id} {...props} onClose={() => setData((prev) => prev.filter((d) => d.id !== item.id))}>
+        {dataListM.map((item) => (
+          <Chips key={item.id} {...props} onClose={() => setDataM((prev) => prev.filter((d) => d.id !== item.id))}>
+            {item.label}
+          </Chips>
+        ))}
+      </WrapperChip>
+      <Separator />
+      <WrapperChip dimension="s">
+        {dataListS.map((item) => (
+          <Chips
+            key={item.id}
+            {...props}
+            dimension="s"
+            onClose={() => setDataS((prev) => prev.filter((d) => d.id !== item.id))}
+          >
             {item.label}
           </Chips>
         ))}
@@ -172,11 +186,28 @@ const ChipsIconDemo: ComponentStory<typeof Chips> = (props) => (
         </Chips>
       ))}
     </WrapperChip>
+    <Separator />
+    <WrapperChip dimension="s">
+      {listDataIcon.map((d) => (
+        <Chips
+          {...props}
+          dimension="s"
+          key={d.id}
+          iconBefore={d?.iconBefore}
+          iconAfter={d?.iconAfter}
+          // Если onClose указан, вместо iconAfter отобразится closeIcon
+          onClose={d?.onClose}
+        >
+          {d.label}
+        </Chips>
+      ))}
+    </WrapperChip>
   </>
 );
 
 const ChipsSelectDemo: ComponentStory<typeof Chips> = (props) => {
-  const [selected, setSelected] = useState('');
+  const [selectedM, setSelectedM] = useState('');
+  const [selectedS, setSelectedS] = useState('');
   return (
     <>
       <WrapperChip dimension={props.dimension}>
@@ -184,8 +215,22 @@ const ChipsSelectDemo: ComponentStory<typeof Chips> = (props) => {
           <Chips
             {...props}
             key={item.id}
-            selected={selected === item.id}
-            onClick={() => (props.disabled ? null : setSelected(item.id))}
+            selected={selectedM === item.id}
+            onClick={() => (props.disabled ? null : setSelectedM(item.id))}
+          >
+            {item.label}
+          </Chips>
+        ))}
+      </WrapperChip>
+      <Separator />
+      <WrapperChip dimension="s">
+        {listData.map((item) => (
+          <Chips
+            {...props}
+            dimension="s"
+            key={item.id}
+            selected={selectedS === item.id}
+            onClick={() => (props.disabled ? null : setSelectedS(item.id))}
           >
             {item.label}
           </Chips>
@@ -196,19 +241,37 @@ const ChipsSelectDemo: ComponentStory<typeof Chips> = (props) => {
 };
 
 const ChipsMultiSelectIconDemo: ComponentStory<typeof Chips> = (props) => {
-  const [list, setList] = useState(listDataIcon);
-  const handleKey = (id: string) => {
-    setList((prev) => prev.map((item) => (item.id === id ? { ...item, selected: !item.selected } : { ...item })));
+  const [listM, setListM] = useState(listDataIcon);
+  const handleKeyM = (id: string) => {
+    setListM((prev) => prev.map((item) => (item.id === id ? { ...item, selected: !item.selected } : { ...item })));
+  };
+  const [listS, setListS] = useState(listDataIcon);
+  const handleKeyS = (id: string) => {
+    setListS((prev) => prev.map((item) => (item.id === id ? { ...item, selected: !item.selected } : { ...item })));
   };
 
   return (
     <>
       <WrapperChip dimension={props.dimension}>
-        {list.map((item) => (
+        {listM.map((item) => (
           <Chips
             {...props}
             key={item.id}
-            onClick={props.disabled ? void 0 : handleKey.bind(null, item.id)}
+            onClick={props.disabled ? void 0 : handleKeyM.bind(null, item.id)}
+            selected={item.selected}
+          >
+            <WrapperContent>{item.label}</WrapperContent>
+          </Chips>
+        ))}
+      </WrapperChip>
+      <Separator />
+      <WrapperChip dimension="s">
+        {listS.map((item) => (
+          <Chips
+            {...props}
+            dimension="s"
+            key={item.id}
+            onClick={props.disabled ? void 0 : handleKeyS.bind(null, item.id)}
             selected={item.selected}
           >
             <WrapperContent>{item.label}</WrapperContent>
@@ -234,11 +297,21 @@ const ChipsTagsCloseTooltipDemo: ComponentStory<typeof Chips> = (props) => {
 };
 
 const ChipsBadgesDemo: ComponentStory<typeof Chips> = (props) => {
+  const [selectedM, setSelectedM] = useState('');
+  const [selectedS, setSelectedS] = useState('');
+
   return (
     <>
       <WrapperChip dimension="m">
         {listData.map((item) => (
-          <Chips {...props} key={item.id} badge={3} dimension="m">
+          <Chips
+            {...props}
+            key={item.id}
+            badge={3}
+            dimension="m"
+            selected={selectedM === item.id}
+            onClick={() => (props.disabled ? null : setSelectedM(item.id))}
+          >
             {item.label}
           </Chips>
         ))}
@@ -246,7 +319,15 @@ const ChipsBadgesDemo: ComponentStory<typeof Chips> = (props) => {
       <Separator />
       <WrapperChip dimension="s">
         {listData.map((item) => (
-          <Chips {...props} key={item.id} badge={3} dimension="s">
+          <Chips
+            {...props}
+            key={item.id}
+            badge={3}
+            dimension="s"
+            appearance="filled"
+            selected={selectedS === item.id}
+            onClick={() => (props.disabled ? null : setSelectedS(item.id))}
+          >
             {item.label}
           </Chips>
         ))}
@@ -268,4 +349,5 @@ ChipsTagsClose.storyName = 'Chips с текстом и иконкой закры
 ChipsIcon.storyName = 'Chips с иконкой';
 ChipsSelect.storyName = 'Chips с текстом и выбором';
 ChipsMultiSelectIcon.storyName = 'Chips для множественного выбора';
+ChipsTooltip.storyName = 'Chips с Tooltip';
 ChipsBadges.storyName = 'Chips базовый пример';
