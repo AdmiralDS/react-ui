@@ -124,6 +124,9 @@ export default {
     iconAfter: {
       control: false,
     },
+    badge: {
+      control: { type: 'number' },
+    },
   },
 } as ComponentMeta<typeof Chips>;
 
