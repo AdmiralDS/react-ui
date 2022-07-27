@@ -112,7 +112,7 @@ export const Chips: FC<ChipsProps> = ({
         selected={selected}
         withCloseIcon={withCloseIcon}
       >
-        {!badge && iconBefore && (
+        {iconBefore && (
           <IconBeforeWrapperStyled>
             <IconWrapperStyled dimension={dimension} withCloseIcon={withCloseIcon}>
               {iconBefore}
@@ -120,7 +120,7 @@ export const Chips: FC<ChipsProps> = ({
           </IconBeforeWrapperStyled>
         )}
         <ChipChildrenWrapperStyled ref={refItems}>{children}</ChipChildrenWrapperStyled>
-        {!onClose && !badge && iconAfter && (
+        {!onClose && iconAfter && (
           <IconAfterWrapperStyled>
             <IconWrapperStyled dimension={dimension} withCloseIcon={withCloseIcon}>
               {iconAfter}
