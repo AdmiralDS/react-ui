@@ -192,7 +192,7 @@ export const ChipComponentStyled = styled.div<{
   cursor: ${({ defaultChip, disabled }) => (defaultChip && !disabled ? 'pointer' : 'default')};
   ${colorsBorderAndBackground}
   ${heights}
-  ${(p) => (p.withCloseIcon ? 'padding-left: 12px;' : paddings)}
+  ${(p) => (p.withCloseIcon ? `padding-left: ${p.dimension === 's' ? 8 : 12}px;` : paddings)}
   ${typography}
 `;
 export const CloseIconWrapperStyled = styled(CloseOutline)<{
