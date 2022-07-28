@@ -1,10 +1,11 @@
 import { withDesign } from 'storybook-addon-designs';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
-import { TagMenu } from '#src/components/TagMenu/index';
+import { TagMenu, TagOptionProps } from '#src/components/TagMenu/index';
 import styled, { ThemeProvider } from 'styled-components';
 import { Tag, TagProps } from '#src/components/Tag';
 import { Theme } from '#src/components/themes';
+import { ReactComponent as CheckOutline } from '@admiral-ds/icons/build/service/CheckOutline.svg';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -65,27 +66,33 @@ export default {
   },
 } as ComponentMeta<typeof TagMenu>;
 
-const items = [
+const items: Array<TagOptionProps> = [
   {
     id: '1',
     display: 'Option one',
+    statusViaBackground: true,
+    icon: <CheckOutline />,
   },
   {
     id: '2',
     display: 'Option two',
+    kind: 'blue',
   },
   {
     id: '3',
     display: 'Option three',
+    statusViaBackground: true,
+    kind: 'green',
   },
   {
     id: '4',
     display: 'Option four',
+    statusViaBackground: true,
+    icon: <CheckOutline />,
   },
   {
     id: '5',
     display: 'Option five',
-    disabled: true,
   },
   {
     id: '6',
@@ -98,7 +105,7 @@ const items = [
 ];
 
 const Template0: ComponentStory<typeof Tag> = (args: TagProps) => {
-  const [selected, setSelected] = React.useState<string | undefined>(items[0].display);
+  const [selected, setSelected] = React.useState<TagOptionProps | undefined>(items[0]);
   function swapBorder(theme: Theme): Theme {
     theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
@@ -112,7 +119,7 @@ const Template0: ComponentStory<typeof Tag> = (args: TagProps) => {
           selected={selected}
           onSelectOption={(id) => {
             console.log(`selected: ${id}`);
-            setSelected(id);
+            setSelected(items.find((item) => item.id === id));
           }}
           {...args}
         >

@@ -3,7 +3,7 @@ import { Tag, TagProps } from '#src/components/Tag';
 import { DropMenu } from '#src/components/DropMenu';
 import { MenuItem, RenderOptionProps } from '#src/components/MenuItem';
 
-export interface TagOptionProps extends Omit<TagProps, 'dimension'> {
+export interface TagOptionProps extends Omit<TagProps, 'dimension' | 'as'> {
   id: string;
   display: string;
 }
@@ -12,15 +12,13 @@ export interface TagMenuProps extends HTMLAttributes<HTMLButtonElement>, TagProp
   /** Опции выпадающего списка */
   options: Array<TagOptionProps>;
   /** Выбранная опция */
-  selected?: string;
+  selected?: TagOptionProps;
   /** Колбек на изменение выбранной опции */
   onSelectOption: (id: string) => void;
   /** Колбек на открытие меню */
   onOpen?: () => void;
   /** Колбек на закрытие меню */
   onClose?: () => void;
-  /** Отключение компонента */
-  disabled?: boolean;
   /** Выравнивание выпадающего меню относительно компонента https://developer.mozilla.org/en-US/docs/Web/CSS/align-self */
   alignSelf?: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
   /**
@@ -31,25 +29,10 @@ export interface TagMenuProps extends HTMLAttributes<HTMLButtonElement>, TagProp
 }
 
 export const TagMenu = React.forwardRef<HTMLButtonElement, TagMenuProps>(
-  (
-    {
-      children,
-      kind = 'neutral',
-      dimension = 'm',
-      width,
-      statusViaBackground = false,
-      icon,
-      onSelectOption,
-      options,
-      selected,
-      as,
-      ...props
-    },
-    ref,
-  ) => {
+  ({ dimension = 'm', width, onSelectOption, options, selected, as, ...props }, ref) => {
     const model = React.useMemo(() => {
       return options.map((item) => ({
-        id: item.display,
+        id: item.id,
         render: (options: RenderOptionProps) => (
           <MenuItem dimension={dimension} {...options} key={item.id}>
             {item.display}
@@ -64,24 +47,24 @@ export const TagMenu = React.forwardRef<HTMLButtonElement, TagMenuProps>(
         ref={ref}
         dimension="m"
         items={model}
-        selected={selected}
+        selected={selected?.display}
         onChange={onSelectOption}
         renderContentProp={({ buttonRef, handleKeyDown, handleClick, statusIcon, menuState }) => {
           return (
             <Tag
               ref={buttonRef as React.Ref<HTMLButtonElement>}
-              kind={kind}
-              icon={icon}
+              kind={selected?.kind}
+              icon={selected?.icon}
               dimension={dimension}
               width={width}
-              statusViaBackground={statusViaBackground}
+              statusViaBackground={selected?.statusViaBackground}
               onKeyDown={handleKeyDown}
               onClick={handleClick}
               aria-expanded={menuState}
               statusIcon={statusIcon}
               as={as}
             >
-              {selected}
+              {selected?.display}
             </Tag>
           );
         }}
