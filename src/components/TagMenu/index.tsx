@@ -55,6 +55,7 @@ export const TagMenu = React.forwardRef<HTMLButtonElement, TagMenuProps>(
             <Tag
               ref={buttonRef as React.Ref<HTMLButtonElement>}
               kind={kind}
+              icon={icon}
               dimension={dimension}
               width={width}
               statusViaBackground={statusViaBackground}
