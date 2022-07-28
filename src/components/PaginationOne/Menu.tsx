@@ -18,6 +18,7 @@ const Button = styled.button<{ $menuOpened?: boolean }>`
   -webkit-tap-highlight-color: transparent;
   background-color: transparent;
   ${typography['Body/Body 2 Long']}
+  color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
   & *[fill^='#'] {
     fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
   }
