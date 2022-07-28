@@ -39,19 +39,12 @@ export default {
     ],
   },
   argTypes: {
-    kind: {
-      options: ['neutral', 'blue', 'green', 'red', 'orange'],
-      control: { type: 'radio' },
-    },
     dimension: {
       options: ['m', 's'],
       control: { type: 'radio' },
     },
     width: {
       control: { type: 'text' },
-    },
-    statusViaBackground: {
-      control: { type: 'boolean' },
     },
     as: {
       options: ['div', 'span', 'button'],
@@ -72,6 +65,7 @@ const items: Array<TagOptionProps> = [
     display: 'Option one',
     statusViaBackground: true,
     icon: <CheckOutline />,
+    kind: 'red',
   },
   {
     id: '2',

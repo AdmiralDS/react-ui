@@ -8,7 +8,9 @@ export interface TagOptionProps extends Omit<TagProps, 'dimension' | 'as'> {
   display: string;
 }
 
-export interface TagMenuProps extends HTMLAttributes<HTMLButtonElement>, TagProps {
+export interface TagMenuProps
+  extends HTMLAttributes<HTMLButtonElement>,
+    Omit<TagProps, 'kind' | 'statusViaBackground' | 'icon'> {
   /** Опции выпадающего списка */
   options: Array<TagOptionProps>;
   /** Выбранная опция */
@@ -21,11 +23,6 @@ export interface TagMenuProps extends HTMLAttributes<HTMLButtonElement>, TagProp
   onClose?: () => void;
   /** Выравнивание выпадающего меню относительно компонента https://developer.mozilla.org/en-US/docs/Web/CSS/align-self */
   alignSelf?: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
-  /**
-   * Позволяет рендерить компонент, используя другой тег HTML (https://styled-components.com/docs/api#as-polymorphic-prop).
-   * В storybook в качестве примера приведены несколько возможных вариантов этого параметра (кроме них можно использовать любой другой HTML тег).
-   */
-  as?: React.ElementType;
 }
 
 export const TagMenu = React.forwardRef<HTMLButtonElement, TagMenuProps>(
@@ -34,7 +31,7 @@ export const TagMenu = React.forwardRef<HTMLButtonElement, TagMenuProps>(
       return options.map((item) => ({
         id: item.id,
         render: (options: RenderOptionProps) => (
-          <MenuItem dimension={dimension} {...options} key={item.id}>
+          <MenuItem dimension="m" {...options} key={item.id}>
             {item.display}
           </MenuItem>
         ),
