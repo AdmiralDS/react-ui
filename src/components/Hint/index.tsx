@@ -10,11 +10,23 @@ import type { Dimension } from './style';
 import { AnchorWrapper, FakeTarget, Portal } from './style';
 import { getHintDirection } from './utils';
 import { HintContainer } from './HintContainer';
-import { initialState, reducer } from './reducer';
 
 type Trigger = 'click' | 'hover';
 
 export interface HintProps extends React.HTMLAttributes<HTMLDivElement> {
+  /** Видимость компонента */
+  visible: boolean;
+  /** Колбек на изменение видимости хинта
+   *
+   * Если visibilityTrigger = 'hover', при ховере/фокусе на target элементе колбек вызовется со значением visible=true,
+   * при потере ховера/фокуса на target элементе колбек вызовется со значением visible=false.
+   *
+   * Если visibilityTrigger = 'click', при клике на target элемент или нажатии клавиш Space/Enter на
+   * target элементе колбек вызовется со значением visible=true,
+   * при клике на крестик внутри хинта/клике вне хинта и target элемента/нажатии клавиши Escape
+   * колбек вызовется со значением visible=false.
+   */
+  onVisibilityChange?: (visible: boolean) => void;
   /** Функция, которая возвращает реакт-компонент с контентом тултипа. Если этому компоненту нужны props, используйте замыкание */
   renderContent: () => React.ReactNode;
   /** Контейнер, в котором будет отрисован тултип через React.createPortal. По умолчанию тултип отрисовывается в document.body */
@@ -36,6 +48,8 @@ export interface HintProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 export const Hint: React.FC<HintProps> = ({
+  visible,
+  onVisibilityChange,
   renderContent,
   container: userContainer,
   target,
@@ -57,13 +71,14 @@ export const Hint: React.FC<HintProps> = ({
   const targetRef: any = target || anchorElementRef;
   const targetElement: any = target?.current || anchorElementRef.current;
 
-  const [state, dispatch] = React.useReducer(reducer, initialState);
+  const [recalculation, startRecalculation] = React.useState<any>(null);
   const [portalFlexDirection, setPortalFlexDirection] = React.useState('');
   const [portalFullWidth, setPortalFullWidth] = React.useState(false);
   const [isMobile, setMobile] = React.useState(window.innerWidth < 640);
   const [trapFocus, setTrapFocus] = React.useState(false);
 
-  const hideHint = () => dispatch({ type: 'setInvisible' });
+  const showHint = () => onVisibilityChange?.(true);
+  const hideHint = () => onVisibilityChange?.(false);
 
   // если ширина экрана меньше 640 пикселей, хинт переходит в состояние mobile (адаптируется по ширине к экрану)
   React.useLayoutEffect(() => {
@@ -84,7 +99,7 @@ export const Hint: React.FC<HintProps> = ({
   React.useLayoutEffect(() => {
     const hint = hintElementRef.current;
 
-    if (state.visible && targetElement && hint) {
+    if (visible && targetElement && hint) {
       const anchorElementRect = targetElement.getBoundingClientRect();
       const hintElementRect = hint.getBoundingClientRect();
       if (isMobile) {
@@ -142,8 +157,8 @@ export const Hint: React.FC<HintProps> = ({
     target?.current,
     anchorElementRef.current,
     hintElementRef.current,
-    state.visible,
-    state.recalculation,
+    visible,
+    recalculation,
     dimension,
     content,
     isMobile,
@@ -154,15 +169,12 @@ export const Hint: React.FC<HintProps> = ({
     () => getScrollableParents(anchorElementRef.current) ?? [],
     [anchorElementRef.current],
   );
-  const handleMouseEnter = () => {
-    dispatch({ type: 'setVisible' });
-  };
 
   const handleKeyDown = (event: any) => {
     const code = keyboardKey.getCode(event);
     if (code === keyboardKey.Enter || code === keyboardKey[' ']) {
       event.preventDefault();
-      dispatch({ type: 'setVisible' });
+      showHint();
     }
   };
 
@@ -173,15 +185,15 @@ export const Hint: React.FC<HintProps> = ({
       hintElementRef.current.style.opacity = '1';
       setTrapFocus(true);
     }
-  }, [hintElementRef.current, state.visible]);
+  }, [hintElementRef.current, visible]);
 
   return (
     <AnchorWrapper
-      onMouseEnter={visibilityTrigger === 'click' ? undefined : handleMouseEnter}
+      onMouseEnter={visibilityTrigger === 'click' ? undefined : showHint}
       onMouseLeave={visibilityTrigger === 'click' ? undefined : hideHint}
-      onFocus={visibilityTrigger === 'click' ? undefined : handleMouseEnter}
+      onFocus={visibilityTrigger === 'click' ? undefined : showHint}
       onBlur={visibilityTrigger === 'click' ? undefined : hideHint}
-      onClick={visibilityTrigger === 'click' ? handleMouseEnter : undefined}
+      onClick={visibilityTrigger === 'click' ? showHint : undefined}
       onKeyDown={visibilityTrigger === 'click' ? handleKeyDown : undefined}
       ref={anchorElementRef}
       className={anchorClassName}
@@ -189,7 +201,7 @@ export const Hint: React.FC<HintProps> = ({
       anchorCssMixin={anchorCssMixin}
     >
       {children}
-      {state.visible && (
+      {visible && (
         <Portal
           targetRef={targetRef}
           container={container}
@@ -204,10 +216,11 @@ export const Hint: React.FC<HintProps> = ({
             content={content}
             visibilityTrigger={visibilityTrigger}
             scrollableParents={scrollableParents}
-            dispatch={dispatch}
+            startRecalculation={startRecalculation}
             anchorElementRef={anchorElementRef}
             anchorId={anchorId}
             trapFocus={trapFocus}
+            hideHint={hideHint}
             {...props}
           />
         </Portal>
