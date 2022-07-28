@@ -5,7 +5,6 @@ import { TagMenu } from '#src/components/TagMenu/index';
 import styled, { ThemeProvider } from 'styled-components';
 import { Tag, TagProps } from '#src/components/Tag';
 import { Theme } from '#src/components/themes';
-import { MenuItem, RenderOptionProps } from '#src/components/MenuItem';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -99,18 +98,7 @@ const items = [
 ];
 
 const Template0: ComponentStory<typeof Tag> = (args: TagProps) => {
-  const [selected, setSelected] = React.useState<string | undefined>(undefined);
-  const model = React.useMemo(() => {
-    return items.map((item) => ({
-      id: item.id,
-      render: (options: RenderOptionProps) => (
-        <MenuItem dimension={args.dimension} {...options} key={item.id}>
-          {item.display}
-        </MenuItem>
-      ),
-      disabled: item.disabled,
-    }));
-  }, [args.dimension]);
+  const [selected, setSelected] = React.useState<string | undefined>(items[0].display);
   function swapBorder(theme: Theme): Theme {
     theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
@@ -120,7 +108,7 @@ const Template0: ComponentStory<typeof Tag> = (args: TagProps) => {
     <>
       <ThemeProvider theme={swapBorder}>
         <TagMenu
-          items={model}
+          options={items}
           selected={selected}
           onSelectOption={(id) => {
             console.log(`selected: ${id}`);
