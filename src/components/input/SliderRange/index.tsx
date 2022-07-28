@@ -50,11 +50,13 @@ export interface SliderRangeProps
   /** плейсхолдеры инпутов */
   placeholder?: [string, string];
   /** Опции, которые можно передать в первый инпут */
-  input1?: Omit<TextInputProps, 'onChange'>;
+  input1?: Omit<TextInputProps, 'onChange' | 'readOnly'>;
   /** Опции, которые можно передать во второй инпут */
-  input2?: Omit<TextInputProps, 'onChange'>;
+  input2?: Omit<TextInputProps, 'onChange' | 'readOnly'>;
   /** Отключение компонента */
   disabled?: boolean;
+  /** Режим readOnly компонента */
+  readOnly?: boolean;
 }
 
 export const SliderRange: React.FC<SliderRangeProps> = ({
@@ -75,6 +77,7 @@ export const SliderRange: React.FC<SliderRangeProps> = ({
   input1: input1Props,
   input2: input2Props,
   disabled,
+  readOnly,
   ...props
 }) => {
   const rangeDimension = dimension === 's' ? dimension : 'm';
@@ -254,6 +257,7 @@ export const SliderRange: React.FC<SliderRangeProps> = ({
     thousand,
     suffix,
     disabled,
+    readOnly,
     displayPlusMinusIcons: false,
     step,
     minValue,
@@ -291,7 +295,7 @@ export const SliderRange: React.FC<SliderRangeProps> = ({
         maxValue={maxValue}
         step={step}
         dimension={rangeDimension}
-        disabled={disabled}
+        disabled={disabled || readOnly}
       />
     </Wrapper>
   );

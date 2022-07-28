@@ -52,10 +52,10 @@ export default {
     disabled: {
       control: { type: 'boolean' },
     },
-    disableCopying: {
+    readOnly: {
       control: { type: 'boolean' },
     },
-    displayStatusIcon: {
+    disableCopying: {
       control: { type: 'boolean' },
     },
     displayClearIcon: {

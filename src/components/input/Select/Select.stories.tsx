@@ -1,4 +1,4 @@
-import { INPUT_DIMENSIONS_VALUES } from '#src/components/input';
+import { INPUT_DIMENSIONS_VALUES, INPUT_STATUS_VALUES } from '#src/components/input';
 import { Modal, ModalButtonPanel, ModalContent, ModalTitle } from '#src/components/Modal';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import type { ChangeEvent } from 'react';
@@ -56,8 +56,9 @@ export default {
       control: { type: 'boolean' },
     },
 
-    displayStatusIcon: {
-      control: { type: 'boolean' },
+    status: {
+      control: { type: 'radio' },
+      options: INPUT_STATUS_VALUES,
     },
 
     displayClearIcon: {
