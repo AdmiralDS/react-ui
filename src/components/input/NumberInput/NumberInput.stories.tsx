@@ -65,10 +65,13 @@ export default {
     displayPlusMinusIcons: {
       control: { type: 'boolean' },
     },
-    displayStatusIcon: {
+    displayClearIcon: {
       control: { type: 'boolean' },
     },
-    displayClearIcon: {
+    disabled: {
+      control: { type: 'boolean' },
+    },
+    readOnly: {
       control: { type: 'boolean' },
     },
     disableCopying: {

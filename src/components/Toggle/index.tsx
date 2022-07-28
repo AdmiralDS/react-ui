@@ -73,7 +73,8 @@ const Input = styled.input<{ dimension: Dimension; checked?: boolean }>`
   }
 
   &:disabled + div > span {
-    background: ${({ theme }) => theme.color['Neutral/Neutral 30']};
+    background: ${({ theme, checked }) =>
+      checked ? theme.color['Primary/Primary 30'] : theme.color['Neutral/Neutral 30']};
   }
 `;
 const Label = styled.div<{

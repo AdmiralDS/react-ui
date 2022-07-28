@@ -94,6 +94,12 @@ const CheckboxFieldDemo: ComponentStory<typeof CheckboxField> = (props) => {
   }, {} as Record<any, any>);
 
   const [checked, setChecked] = useState<boolean>(args.checked ?? false);
+
+  const [visible1, setVisible1] = useState(false);
+  const [visible2, setVisible2] = useState(false);
+  const handleHintChange1 = (visible: boolean) => setVisible1(visible);
+  const handleHintChange2 = (visible: boolean) => setVisible2(visible);
+
   useEffect(() => {
     setChecked(Boolean(args.checked));
   }, [args.checked]);
@@ -138,6 +144,8 @@ const CheckboxFieldDemo: ComponentStory<typeof CheckboxField> = (props) => {
           </CheckboxField>
           <Hint
             {...args}
+            visible={visible1}
+            onVisibilityChange={handleHintChange1}
             renderContent={() =>
               'At breakpoint boundaries, mini units divide the screen into a fixed master grid, and multiples of mini units map to fluid grid column widths and row heights.'
             }
@@ -151,6 +159,8 @@ const CheckboxFieldDemo: ComponentStory<typeof CheckboxField> = (props) => {
           </CheckboxField>
           <Hint
             {...args}
+            visible={visible2}
+            onVisibilityChange={handleHintChange2}
             renderContent={() =>
               'At breakpoint boundaries, mini units divide the screen into a fixed master grid, and multiples of mini units map to fluid grid column widths and row heights.'
             }

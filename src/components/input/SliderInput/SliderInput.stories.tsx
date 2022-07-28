@@ -49,13 +49,16 @@ export default {
     thousand: {
       type: 'string',
     },
-    displayStatusIcon: {
-      control: { type: 'boolean' },
-    },
     displayClearIcon: {
       control: { type: 'boolean' },
     },
     disableCopying: {
+      control: { type: 'boolean' },
+    },
+    disabled: {
+      control: { type: 'boolean' },
+    },
+    readOnly: {
       control: { type: 'boolean' },
     },
     icons: {

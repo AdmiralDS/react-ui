@@ -14,51 +14,8 @@ import { ReactComponent as EyeOutlineSvg } from '@admiral-ds/icons/build/service
 import type { ForwardedRef, InputHTMLAttributes } from 'react';
 import * as React from 'react';
 import styled, { css } from 'styled-components';
-import { StatusIcon } from '../StatusIcon';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { InputIconButton } from '#src/components/InputIconButton';
-
-const EyeCloseIcon = styled(EyeCloseOutlineSvg)`
-  & *[fill^='#'] {
-    fill: ${(props) => props.theme.color['Neutral/Neutral 50']};
-  }
-
-  &:hover {
-    cursor: pointer;
-  }
-
-  &:hover *[fill^='#'] {
-    fill: ${(props) => props.theme.color['Primary/Primary 70']};
-  }
-`;
-
-const EyeIcon = styled(EyeOutlineSvg)`
-  & *[fill^='#'] {
-    fill: ${(props) => props.theme.color['Neutral/Neutral 50']};
-  }
-
-  &:hover {
-    cursor: pointer;
-  }
-
-  &:hover *[fill^='#'] {
-    fill: ${(props) => props.theme.color['Primary/Primary 70']};
-  }
-`;
-
-const ClearIcon = styled(CloseOutlineSvg)`
-  & *[fill^='#'] {
-    fill: ${(props) => props.theme.color['Neutral/Neutral 50']};
-  }
-
-  &:hover {
-    cursor: pointer;
-  }
-
-  &:hover *[fill^='#'] {
-    fill: ${(props) => props.theme.color['Primary/Primary 70']};
-  }
-`;
 
 const iconSizeValue = (props: { dimension?: ComponentDimension }) => {
   switch (props.dimension) {
@@ -140,11 +97,11 @@ const colorsBorderAndBackground = css<{ disabled?: boolean }>`
     border: 1px solid ${(props) => props.theme.color['Error/Error 60 Main']};
   }
 
-  [data-status='error'] &:hover + ${BorderedDiv}, [data-status='error'] &:focus + ${BorderedDiv} {
+  [data-status='error'] &:hover:not(:disabled) + ${BorderedDiv}, [data-status='error'] &:focus + ${BorderedDiv} {
     border: 1px solid ${(props) => props.theme.color['Error/Error 60 Main']};
   }
 
-  [data-status='success'] &:hover + ${BorderedDiv}, [data-status='success'] &:focus + ${BorderedDiv} {
+  [data-status='success'] &:hover:not(:disabled) + ${BorderedDiv}, [data-status='success'] &:focus + ${BorderedDiv} {
     border: 1px solid ${(props) => props.theme.color['Success/Success 50 Main']};
   }
 
@@ -247,9 +204,6 @@ export interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
   /** Иконки для отображения в правом углу поля */
   icons?: React.ReactNode;
 
-  /** Отображать иконку статуса */
-  displayStatusIcon?: boolean;
-
   /** Отображать иконку очистки поля */
   displayClearIcon?: boolean;
 
@@ -273,8 +227,6 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
   (
     {
       type,
-
-      displayStatusIcon,
       displayClearIcon,
       status,
       handleInput = defaultHandleInput,
@@ -293,21 +245,18 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
     const iconArray = React.Children.toArray(icons);
 
     const [isPasswordVisible, setPasswordVisible] = React.useState(false);
-    if (type === 'password') {
-      const Icon = isPasswordVisible ? EyeIcon : EyeCloseIcon;
+    if (!props.readOnly && type === 'password') {
+      const Icon = isPasswordVisible ? EyeOutlineSvg : EyeCloseOutlineSvg;
       iconArray.push(
-        <Icon
+        <InputIconButton
+          icon={Icon}
           key="eye-icon"
-          aria-hidden
           onClick={() => {
             setPasswordVisible(!isPasswordVisible);
           }}
+          aria-hidden
         />,
       );
-    }
-
-    if (displayStatusIcon) {
-      iconArray.push(<StatusIcon key="status-icon" status={status} aria-hidden />);
     }
 
     if (!props.readOnly && displayClearIcon) {

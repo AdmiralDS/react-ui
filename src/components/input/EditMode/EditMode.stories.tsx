@@ -52,9 +52,6 @@ export default {
     disableCopying: {
       control: { type: 'boolean' },
     },
-    displayStatusIcon: {
-      control: { type: 'boolean' },
-    },
     displayClearIcon: {
       control: { type: 'boolean' },
     },

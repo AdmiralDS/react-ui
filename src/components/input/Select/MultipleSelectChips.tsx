@@ -94,14 +94,22 @@ interface ICounterChipsProps {
 
 const CounterChip = ({ children, count, disabled, onClick }: React.PropsWithChildren<ICounterChipsProps>) => {
   const ref = React.useRef<HTMLDivElement>(null);
+  const [visibleHint, setVisibleHint] = React.useState(false);
 
+  const handleHintVisibilityChange = (visible: boolean) => setVisibleHint(visible);
   const renderContent = React.useCallback(() => <ChipsHintWrap>{children}</ChipsHintWrap>, [children]);
 
   if (!count) return <ShadowCounterChip />;
 
   return (
     <CounterChipWrap onClick={onClick} ref={ref}>
-      <Hint renderContent={renderContent} target={ref} dimension="s">
+      <Hint
+        visible={visibleHint}
+        onVisibilityChange={handleHintVisibilityChange}
+        renderContent={renderContent}
+        target={ref}
+        dimension="s"
+      >
         <StyledCounterChip tabIndex={-1} dimension="s" appearance="filled" disabled={disabled}>
           +{count}
         </StyledCounterChip>
