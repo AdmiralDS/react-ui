@@ -174,6 +174,24 @@ const Icon = styled.div`
   }
 `;
 
+const StatusIcon = styled.div`
+  display: flex;
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  margin-left: 4px;
+
+  & *[fill^='#'] {
+    fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
+  }
+
+  &:hover {
+    & *[fill^='#'] {
+      fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
+    }
+  }
+`;
+
 export type TagKind = 'neutral' | 'green' | 'blue' | 'red' | 'orange';
 
 export interface TagProps extends React.HTMLAttributes<HTMLButtonElement> {
@@ -251,7 +269,7 @@ export const Tag = React.forwardRef<HTMLElement, TagProps & TagInternalProps>(
         {background !== 'neutral' && !statusViaBackground && <Circle background={background} />}
         {statusViaBackground && icon && <Icon>{icon}</Icon>}
         {children && <Text ref={textRef}>{children}</Text>}
-        {statusIcon && <Icon>{statusIcon}</Icon>}
+        {statusIcon && <StatusIcon>{statusIcon}</StatusIcon>}
       </Wrapper>
     );
 
