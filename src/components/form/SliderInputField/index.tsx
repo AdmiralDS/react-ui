@@ -18,6 +18,7 @@ export const SliderInputField = React.forwardRef<HTMLInputElement, SliderInputFi
     label,
     id = uid(),
     disabled,
+    skeleton,
     ...restProps
   } = props;
   const fieldContainerProps = {
@@ -31,6 +32,7 @@ export const SliderInputField = React.forwardRef<HTMLInputElement, SliderInputFi
     disabled,
     maxLength,
     inputRef,
+    skeleton,
     'data-field-id': id,
     'data-field-name': restProps.name,
   } as Record<string, any>;
@@ -47,6 +49,7 @@ export const SliderInputField = React.forwardRef<HTMLInputElement, SliderInputFi
     status,
     disabled,
     maxLength,
+    skeleton,
     ...restProps,
   };
 

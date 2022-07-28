@@ -71,10 +71,14 @@ export default {
         options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
       },
     },
+    skeleton: {
+      control: { type: 'boolean' },
+    },
   },
 } as ComponentMeta<typeof TimeField>;
 
 const DisplayContainer = styled.div`
+  max-width: 320px;
   > * {
     margin-bottom: 24px;
   }
@@ -110,7 +114,7 @@ const Template: ComponentStory<typeof TimeField> = (props) => {
       <DisplayContainer>
         <TimeField
           {...cleanProps}
-          style={{ maxWidth: '320px' }}
+          // style={{ maxWidth: '320px' }}
           startTime="09:00"
           endTime="18:00"
           value={localValue}

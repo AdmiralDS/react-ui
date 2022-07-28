@@ -17,7 +17,18 @@ export interface SearchSelectFieldProps
 
 export const SelectField = React.forwardRef<HTMLSelectElement, SearchSelectFieldProps>((props, ref) => {
   const fieldRef = React.useRef(null);
-  const { className, displayInline, status, required, extraText, label, id = uid(), disabled, ...restProps } = props;
+  const {
+    className,
+    displayInline,
+    status,
+    required,
+    extraText,
+    label,
+    id = uid(),
+    disabled,
+    skeleton,
+    ...restProps
+  } = props;
   const fieldContainerProps = {
     className,
     extraText,
@@ -28,6 +39,7 @@ export const SelectField = React.forwardRef<HTMLSelectElement, SearchSelectField
     displayInline,
     disabled,
     ref: fieldRef,
+    skeleton,
     'data-field-id': id,
     'data-field-name': restProps.name,
   } as Record<string, any>;
@@ -44,6 +56,7 @@ export const SelectField = React.forwardRef<HTMLSelectElement, SearchSelectField
     'aria-required': required,
     status,
     disabled,
+    skeleton,
     ...restProps,
     portalTargetRef: fieldRef,
   };

@@ -88,6 +88,7 @@ Object {
   -moz-appearance: none;
   appearance: none;
   vertical-align: center;
+  pointer-events: all;
   padding: 0;
   height: 56px;
   padding: 0 30px;
@@ -97,7 +98,6 @@ Object {
   font-size: 16px;
   line-height: 24px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  pointer-events: all;
 }
 
 .c0[data-appearance~='primary'] {
@@ -485,6 +485,7 @@ Object {
   -moz-appearance: none;
   appearance: none;
   vertical-align: center;
+  pointer-events: all;
   padding: 0;
   height: 56px;
   padding: 0 30px;
@@ -494,7 +495,6 @@ Object {
   font-size: 16px;
   line-height: 24px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  pointer-events: all;
 }
 
 .c0[data-appearance~='primary'] {
@@ -942,6 +942,15 @@ Object {
   height: 20px;
 }
 
+.c2 {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+}
+
 .c0 {
   position: relative;
   box-sizing: border-box;
@@ -952,6 +961,7 @@ Object {
   -moz-appearance: none;
   appearance: none;
   vertical-align: center;
+  pointer-events: none;
   padding: 0;
   height: 56px;
   padding: 0 30px;
@@ -961,7 +971,6 @@ Object {
   font-size: 16px;
   line-height: 24px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  pointer-events: none;
 }
 
 .c0[data-appearance~='primary'] {
@@ -1238,15 +1247,6 @@ Object {
 
 .c0:hover {
   cursor: pointer;
-}
-
-.c2 {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  -webkit-transform: translate(-50%,-50%);
-  -ms-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
 }
 
 <body>
@@ -1370,6 +1370,15 @@ Object {
   height: 20px;
 }
 
+.c2 {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+}
+
 .c0 {
   position: relative;
   box-sizing: border-box;
@@ -1380,6 +1389,7 @@ Object {
   -moz-appearance: none;
   appearance: none;
   vertical-align: center;
+  pointer-events: none;
   padding: 0;
   height: 56px;
   padding: 0 30px;
@@ -1389,7 +1399,6 @@ Object {
   font-size: 16px;
   line-height: 24px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  pointer-events: none;
 }
 
 .c0[data-appearance~='primary'] {
@@ -1666,15 +1675,6 @@ Object {
 
 .c0:hover {
   cursor: pointer;
-}
-
-.c2 {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  -webkit-transform: translate(-50%,-50%);
-  -ms-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
 }
 
 <div>
@@ -1843,11 +1843,12 @@ Object {
   box-sizing: border-box;
   display: inline-block;
   border: none;
-  border-radius: 4px;
+  border-radius: 0;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
   vertical-align: center;
+  pointer-events: none;
   padding: 0;
   height: 56px;
   padding: 0 30px;
@@ -1857,7 +1858,8 @@ Object {
   font-size: 16px;
   line-height: 24px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  pointer-events: none;
+  -webkit-animation: jWqMos 2s ease infinite;
+  animation: jWqMos 2s ease infinite;
 }
 
 .c0[data-appearance~='primary'] {
@@ -2129,7 +2131,7 @@ Object {
 }
 
 .c0 .c1 {
-  visibility: visible;
+  visibility: hidden;
 }
 
 .c0:hover {
@@ -2241,11 +2243,12 @@ Object {
   box-sizing: border-box;
   display: inline-block;
   border: none;
-  border-radius: 4px;
+  border-radius: 0;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
   vertical-align: center;
+  pointer-events: none;
   padding: 0;
   height: 56px;
   padding: 0 30px;
@@ -2255,7 +2258,8 @@ Object {
   font-size: 16px;
   line-height: 24px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  pointer-events: none;
+  -webkit-animation: jWqMos 2s ease infinite;
+  animation: jWqMos 2s ease infinite;
 }
 
 .c0[data-appearance~='primary'] {
@@ -2527,7 +2531,7 @@ Object {
 }
 
 .c0 .c1 {
-  visibility: visible;
+  visibility: hidden;
 }
 
 .c0:hover {

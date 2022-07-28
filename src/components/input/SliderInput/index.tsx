@@ -33,7 +33,7 @@ const Slider = styled(SliderComponent)`
 `;
 
 const Input = styled(NumberInput)`
-  border-radius: ${(p) => sliderBorderRadius(p.theme.shape)};
+  border-radius: ${(p) => (p.skeleton ? 0 : sliderBorderRadius(p.theme.shape))};
 `;
 
 export interface SliderInputProps extends Omit<TextInputProps, 'onChange' | 'value'> {
@@ -83,6 +83,7 @@ export const SliderInput = React.forwardRef<HTMLInputElement, SliderInputProps>(
       placeholder = '0 ₽',
       disabled,
       wrapperProps,
+      skeleton = false,
       ...props
     },
     ref,
@@ -135,22 +136,25 @@ export const SliderInput = React.forwardRef<HTMLInputElement, SliderInputProps>(
           displayPlusMinusIcons={false}
           minValue={minValue}
           maxValue={maxValue}
+          skeleton={skeleton}
         />
-        <Slider
-          aria-hidden
-          value={sliderValue}
-          onChange={handleSliderChange}
-          renderTickMark={renderTickMark}
-          minValue={minValue}
-          maxValue={maxValue}
-          decimal={decimal}
-          precision={precision}
-          thousand={thousand}
-          tickMarks={tickMarks}
-          step={step}
-          disabled={disabled || props.readOnly}
-          dimension={sliderDimension}
-        />
+        {!skeleton && (
+          <Slider
+            aria-hidden
+            value={sliderValue}
+            onChange={handleSliderChange}
+            renderTickMark={renderTickMark}
+            minValue={minValue}
+            maxValue={maxValue}
+            decimal={decimal}
+            precision={precision}
+            thousand={thousand}
+            tickMarks={tickMarks}
+            step={step}
+            disabled={disabled || props.readOnly}
+            dimension={sliderDimension}
+          />
+        )}
       </Wrapper>
     );
   },

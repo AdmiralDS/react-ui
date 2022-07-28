@@ -1,9 +1,10 @@
-import type { ButtonHTMLAttributes, FC } from 'react';
+import type { ButtonHTMLAttributes } from 'react';
 import * as React from 'react';
 import styled from 'styled-components';
 import { Spinner } from '#src/components/Spinner';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { forwardRef } from 'react';
+import { skeletonAnimationMixin } from '#src/components/skeleton/animation';
 
 type Dimension = 'xl' | 'l' | 'm' | 's';
 
@@ -24,12 +25,14 @@ const StyledButton = styled.button.attrs<IconButtonProps, { 'data-dimension'?: D
   box-sizing: border-box;
   display: inline-block;
   border: none;
-  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
-  background: transparent;
+  border-radius: ${(p) => (p.skeleton ? 0 : mediumGroupBorderRadius(p.theme.shape))};
+  background: ${({ skeleton }) => (skeleton ? 'red' : 'transparent')};
   -webkit-tap-highlight-color: transparent;
   appearance: none;
   vertical-align: center;
 
+  pointer-events: ${(p) => (p.disabled || p.skeleton ? 'none' : 'all')};
+  
   &[data-dimension='xl'] {
     padding: 0;
     height: 56px;
@@ -77,6 +80,8 @@ const StyledButton = styled.button.attrs<IconButtonProps, { 'data-dimension'?: D
     outline-offset: 2px;
     outline: ${(p) => p.theme.color['Primary/Primary 60 Main']} solid 2px;
   }
+
+  ${({ skeleton }) => skeleton && skeletonAnimationMixin}};
 `;
 
 const IconButtonContent = styled.span<{ dimension?: Dimension }>`
@@ -129,7 +134,7 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
     }: IconButtonProps,
     ref,
   ) => {
-    const disabledOptions = loading || skeleton || disabled;
+    const disabledOptions = loading || disabled;
     const renderContent = () => {
       if (loading) {
         return (
@@ -139,17 +144,20 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
         );
       }
       if (skeleton) {
-        return (
-          <IconButtonContent>
-            <PseudoIcon dimension={dimension} />
-          </IconButtonContent>
-        );
+        return <IconButtonContent />;
       }
       return <IconButtonContent dimension={dimension}>{children}</IconButtonContent>;
     };
 
     return (
-      <StyledButton ref={ref} dimension={dimension} disabled={disabledOptions} type={type} {...props}>
+      <StyledButton
+        ref={ref}
+        dimension={dimension}
+        disabled={disabledOptions}
+        type={type}
+        skeleton={skeleton}
+        {...props}
+      >
         {renderContent()}
       </StyledButton>
     );

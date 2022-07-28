@@ -12,6 +12,7 @@ exports[`IconButton should render component 1`] = `
   -moz-appearance: none;
   appearance: none;
   vertical-align: center;
+  pointer-events: all;
 }
 
 .c0[data-dimension='xl'] {

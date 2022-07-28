@@ -8,6 +8,7 @@ import * as React from 'react';
 import styled, { css } from 'styled-components';
 import { InputIconButton } from '#src/components/InputIconButton';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
+import { Container } from '../Container';
 
 const iconSizeValue = (props: { dimension?: ComponentDimension }) => {
   switch (props.dimension) {
@@ -145,14 +146,6 @@ const Text = styled.textarea<ExtraProps>`
   ${ieFixes}
 `;
 
-const Container = styled.div<{ disabled?: boolean; dimension?: ComponentDimension }>`
-  position: relative;
-  display: flex;
-  align-items: stretch;
-  border: none;
-  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
-`;
-
 const IconPanel = styled.div<{ disabled?: boolean; dimension?: ComponentDimension }>`
   position: absolute;
   top: 8px;
@@ -210,6 +203,9 @@ export interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElemen
 
   /**  Включает автоматическое изменение высоты компонента в зависимости от количества текста */
   autoHeight?: boolean;
+
+  /** Состояние skeleton */
+  skeleton?: boolean;
 }
 
 export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
@@ -225,6 +221,7 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
       children,
       className,
       autoHeight,
+      skeleton = false,
       ...props
     },
     ref,
@@ -299,11 +296,10 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
     return (
       <Container
         className={className}
-        disabled={props.disabled}
-        dimension={props.dimension}
         ref={containerRef}
         data-read-only={props.readOnly ? true : undefined}
         data-status={status}
+        skeleton={skeleton}
         {...(props.disableCopying && {
           onMouseDown: stopEvent,
         })}

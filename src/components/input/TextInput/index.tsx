@@ -5,7 +5,7 @@ import {
   isInputDataDifferent,
 } from '#src/components/common/dom/changeInputData';
 import { refSetter } from '#src/components/common/utils/refSetter';
-import { Container } from '../Container';
+import { HeightLimitedContainer as Container } from '../Container';
 import type { ComponentDimension, ExtraProps, InputStatus } from '#src/components/input/types';
 import { typography } from '#src/components/Typography';
 import { ReactComponent as CloseOutlineSvg } from '@admiral-ds/icons/build/service/CloseOutline.svg';
@@ -221,6 +221,9 @@ export interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
 
   /**  Наличие этого атрибута отключает возможность выделения и копирования значения поля */
   disableCopying?: boolean;
+
+  /** Состояние skeleton */
+  skeleton?: boolean;
 }
 
 export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
@@ -236,6 +239,7 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
       className,
       style,
       placeholder,
+      skeleton = false,
       ...props
     },
     ref,
@@ -318,11 +322,11 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
       <Container
         className={className}
         style={style}
-        disabled={props.disabled}
         dimension={props.dimension}
         ref={containerRef}
         data-read-only={props.readOnly ? true : undefined}
         data-status={status}
+        skeleton={skeleton}
         {...(props.disableCopying && {
           onMouseDown: stopEvent,
         })}

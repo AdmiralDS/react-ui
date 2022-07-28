@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.8.0](https://github.com/AdmiralDS/react-ui/compare/v1.7.0...v1.8.0) (2022-07-28)
+
+
+### Features
+
+* **Chips:** add badge ([f62619f](https://github.com/AdmiralDS/react-ui/commit/f62619f28a0260f96c714ca368979bc0d58b4750))
+* **EditMode:** remove displayStatusIcon prop ([571d8e3](https://github.com/AdmiralDS/react-ui/commit/571d8e3b385089b4d8f8a37f1f341fb14e6e5459))
+* **Hint:** add props visible and onVisibilityChange to use component as controlled ([f112f15](https://github.com/AdmiralDS/react-ui/commit/f112f15622c77ac7c7fb77ba8b63fcfbad407e9b))
+* **NumberInput:** refactor icons and remove displayClearIcon prop ([13addbe](https://github.com/AdmiralDS/react-ui/commit/13addbe75d23cf13e18bd64ac1ea2d9c9192afbe))
+* **PaginationOne:** use DropMenu instead of DropDown ([6d582ee](https://github.com/AdmiralDS/react-ui/commit/6d582ee6f3526e3f283f82797860450f23be182e))
+* **PhoneNumberInput:** remove displayStatusIcon prop, fix readOnly style ([228aa6a](https://github.com/AdmiralDS/react-ui/commit/228aa6a6a724a59576c1be53ea4ba70269fd8e4d))
+* **Select:** remove displayStatusIcon prop ([5ee25ba](https://github.com/AdmiralDS/react-ui/commit/5ee25ba696b20f8e08cc496e66f2b8c3963e7d06))
+* **SliderRange:** add readOnly prop to component, fix readOnly state in input components ([af8fb22](https://github.com/AdmiralDS/react-ui/commit/af8fb224cd28fe54ef2033fc7c6575dd106f28e0))
+* **SuggestInput, TextArea, TimeInput:** remove displayStatusIcon prop, refactor icons with InputIconButton component ([c95e40b](https://github.com/AdmiralDS/react-ui/commit/c95e40b68d034fa40bf276be828f5b466257696b))
+* **TextInput:** refactor icons and remove displayStatusIcon prop ([127b7cc](https://github.com/AdmiralDS/react-ui/commit/127b7cc5fac3ad2652374afa4aeae081e2e83a24))
+* **Toggle:** set new color in active disabled state ([850cf27](https://github.com/AdmiralDS/react-ui/commit/850cf2790c6a1b0853e191da9745f494c05f54a6))
+
+
+### Bug Fixes
+
+* **PaginationOne:** fix button text color ([95cb30a](https://github.com/AdmiralDS/react-ui/commit/95cb30a5f6f6cb058d4dbe7a47e4cbffadc62680))
+
 ## [1.7.0](https://github.com/AdmiralDS/react-ui/compare/v1.6.0...v1.7.0) (2022-07-19)
 
 

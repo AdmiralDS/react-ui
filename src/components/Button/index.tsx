@@ -6,6 +6,7 @@ import { Spinner } from '#src/components/Spinner';
 import { appearanceMixin } from './appearanceMixin';
 import { dimensionMixin } from './dimensionMixin';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
+import { skeletonAnimationMixin } from '#src/components/skeleton/animation';
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   /** Внешний вид кнопки */
@@ -22,6 +23,9 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
   /** Состояние загрузки */
   loading?: boolean;
+
+  /** Состояние скелетона */
+  skeleton?: boolean;
 }
 
 const ButtonContent = styled.div<{ dimension?: Dimension; $loading?: boolean }>`
@@ -60,6 +64,50 @@ const ButtonContent = styled.div<{ dimension?: Dimension; $loading?: boolean }>`
   }
 `;
 
+const StyledSpinner = styled(Spinner)<{ dimension?: Dimension }>`
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+`;
+
+export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  (
+    {
+      appearance = 'primary',
+      dimension = 'xl',
+      type = 'button',
+      loading = false,
+      skeleton = false,
+      children,
+      ...props
+    },
+    ref,
+  ) => {
+    const spinnerDimension = dimension === 's' ? 's' : 'm';
+    const spinnerInverse = appearance !== 'secondary' && appearance !== 'ghost';
+
+    return (
+      <StyledButton
+        ref={ref}
+        appearance={appearance}
+        dimension={dimension}
+        type={type}
+        $loading={loading}
+        skeleton={skeleton}
+        {...props}
+      >
+        {loading && <StyledSpinner dimension={spinnerDimension} inverse={spinnerInverse} />}
+        <ButtonContent>
+          {React.Children.toArray(children).map((child, index) =>
+            typeof child === 'string' ? <div key={child + index}>{child}</div> : child,
+          )}
+        </ButtonContent>
+      </StyledButton>
+    );
+  },
+);
+
 const StyledButton = styled.button.attrs<
   StyledButtonProps,
   { 'data-dimension'?: Dimension; 'data-appearance'?: string }
@@ -73,48 +121,22 @@ const StyledButton = styled.button.attrs<
   box-sizing: border-box;
   display: inline-block;
   border: none;
-  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
+  border-radius: ${(p) => (p.skeleton ? 0 : mediumGroupBorderRadius(p.theme.shape))};
   appearance: none;
   vertical-align: center;
+  pointer-events: ${(p) => (p.$loading || p.disabled || p.skeleton ? 'none' : 'all')};
 
-  ${appearanceMixin};
-
+  ${appearanceMixin}
   ${dimensionMixin}
+  ${({ skeleton }) => skeleton && skeletonAnimationMixin}};
 
   ${ButtonContent} {
-    visibility: ${(p) => (p.$loading ? 'hidden' : 'visible')};
+    visibility: ${(p) => (p.$loading || p.skeleton ? 'hidden' : 'visible')};
   }
 
   &:hover {
     cursor: pointer;
   }
-
-  pointer-events: ${(p) => (p.$loading || p.disabled ? 'none' : 'all')};
 `;
-
-const StyledSpinner = styled(Spinner)<{ dimension?: Dimension }>`
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-`;
-
-export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ appearance = 'primary', dimension = 'xl', type = 'button', loading = false, children, ...props }, ref) => {
-    const spinnerDimension = dimension === 's' ? 's' : 'm';
-    const spinnerInverse = appearance !== 'secondary' && appearance !== 'ghost';
-
-    return (
-      <StyledButton ref={ref} appearance={appearance} dimension={dimension} type={type} $loading={loading} {...props}>
-        {loading && <StyledSpinner dimension={spinnerDimension} inverse={spinnerInverse} />}
-        <ButtonContent>
-          {React.Children.toArray(children).map((child, index) =>
-            typeof child === 'string' ? <div key={child + index}>{child}</div> : child,
-          )}
-        </ButtonContent>
-      </StyledButton>
-    );
-  },
-);
 
 Button.displayName = 'Button';

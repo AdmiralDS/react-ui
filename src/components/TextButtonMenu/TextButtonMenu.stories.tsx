@@ -78,6 +78,9 @@ export default {
         options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
       },
     },
+    skeleton: {
+      control: { type: 'boolean' },
+    },
   },
 } as ComponentMeta<typeof TextButtonMenu>;
 
@@ -136,6 +139,7 @@ const TextButtonMenuStory: ComponentStory<typeof TextButtonMenu> = (args) => {
     <ThemeProvider theme={swapBorder}>
       <Wrapper>
         <TextButtonMenu
+          {...args}
           text={args.text}
           selected={selected}
           dimension={args.dimension}

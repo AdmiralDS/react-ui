@@ -1,5 +1,6 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import type { SliderProps } from '#src/components/Slider';
+import { skeletonAnimationMixin } from '#src/components/skeleton/animation';
 
 const TRANSITION_ANIMATION = 'all  ease-in 0.3s';
 
@@ -8,7 +9,15 @@ export const Wrapper = styled.div`
   -webkit-tap-highlight-color: transparent;
 `;
 
-export const TrackWrapper = styled.div<{ dimension: SliderProps['dimension'] }>`
+const skeletonMixin = css`
+  ${skeletonAnimationMixin};
+  pointer-events: none;
+  & > * {
+    visibility: hidden;
+  }
+`;
+
+export const TrackWrapper = styled.div<{ dimension: SliderProps['dimension']; skeleton?: boolean }>`
   position: relative;
   box-sizing: border-box;
   width: 100%;
@@ -21,6 +30,8 @@ export const TrackWrapper = styled.div<{ dimension: SliderProps['dimension'] }>`
     pointer-events: none;
     cursor: auto;
   }
+
+  ${({ skeleton }) => skeleton && skeletonMixin}};
 `;
 
 export const Track = styled.div`

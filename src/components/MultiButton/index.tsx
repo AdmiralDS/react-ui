@@ -6,6 +6,7 @@ import { Shape } from '#src/components/themes/common';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { MenuItem, RenderOptionProps } from '#src/components/MenuItem';
 import { DropMenu } from '#src/components/DropMenu';
+import { skeletonAnimationMixin } from '#src/components/skeleton/animation';
 
 function mainButtonBorderRadius(shape: Shape): string {
   const radius = mediumGroupBorderRadius(shape);
@@ -31,22 +32,22 @@ const focusStyle = css`
 
 const MainButton = styled(Button)`
   &[data-appearance~='primary'] {
-    border-radius: ${(p) => mainButtonBorderRadius(p.theme.shape)};
+    border-radius: ${(p) => (p.skeleton ? 0 : mainButtonBorderRadius(p.theme.shape))};
   }
   &[data-appearance~='secondary'] {
     border-right: none;
-    border-radius: ${(p) => mainButtonBorderRadius(p.theme.shape)};
+    border-radius: ${(p) => (p.skeleton ? 0 : mainButtonBorderRadius(p.theme.shape))};
   }
   ${focusStyle}
 `;
 
 const MenuButton = styled(Button)`
   &[data-appearance~='primary'] {
-    border-radius: ${(p) => menuButtonBorderRadius(p.theme.shape)};
+    border-radius: ${(p) => (p.skeleton ? 0 : menuButtonBorderRadius(p.theme.shape))};
   }
   &[data-appearance~='secondary'] {
     border-left: none;
-    border-radius: ${(p) => menuButtonBorderRadius(p.theme.shape)};
+    border-radius: ${(p) => (p.skeleton ? 0 : menuButtonBorderRadius(p.theme.shape))};
   }
   ${focusStyle}
 `;
@@ -61,6 +62,8 @@ const Separator = styled.div<SeparatorProps>`
     background-color: ${({ theme, disabled }) =>
       disabled ? theme.color['Neutral/Neutral 30'] : theme.color['Primary/Primary 60 Main']};
   }
+
+  ${({ skeleton }) => skeleton && skeletonAnimationMixin}};
 `;
 
 const Wrapper = styled.div`
@@ -72,6 +75,7 @@ type Appearance = 'primary' | 'secondary';
 
 interface SeparatorProps {
   disabled?: boolean;
+  skeleton?: boolean;
 }
 
 export interface MultiButtonItem extends HTMLAttributes<HTMLElement> {
@@ -102,6 +106,8 @@ export interface MultiButtonProps extends Omit<HTMLAttributes<HTMLDivElement>, '
   disabled?: boolean;
   /** Выравнивание выпадающего меню относительно компонента https://developer.mozilla.org/en-US/docs/Web/CSS/align-self */
   alignSelf?: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
+  /** Состояние skeleton */
+  skeleton?: boolean;
 }
 
 export const MultiButton = React.forwardRef<HTMLButtonElement, MultiButtonProps>(
@@ -112,11 +118,10 @@ export const MultiButton = React.forwardRef<HTMLButtonElement, MultiButtonProps>
       disabled,
       options,
       selected,
-      alignSelf = 'flex-end',
       onChange,
       onClose,
       onOpen,
-      children,
+      skeleton = false,
       ...props
     },
     ref,
@@ -171,6 +176,7 @@ export const MultiButton = React.forwardRef<HTMLButtonElement, MultiButtonProps>
             >
               <MainButton
                 {...firstOptionProps}
+                skeleton={skeleton}
                 dimension={dimension}
                 appearance={appearance}
                 disabled={disabled || firstOptionDisabled}
@@ -178,9 +184,10 @@ export const MultiButton = React.forwardRef<HTMLButtonElement, MultiButtonProps>
               >
                 {firstOption}
               </MainButton>
-              <Separator disabled={disabled} data-appearance={appearance} aria-hidden />
+              <Separator disabled={disabled} skeleton={skeleton} data-appearance={appearance} aria-hidden />
               <MenuButton
                 ref={buttonRef as React.Ref<HTMLButtonElement>}
+                skeleton={skeleton}
                 dimension={dimension}
                 appearance={appearance}
                 disabled={disabled}
