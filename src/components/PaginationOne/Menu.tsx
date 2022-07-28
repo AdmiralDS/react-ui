@@ -5,8 +5,6 @@ import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { DropMenu } from '#src/components/DropMenu';
 import { MenuItem, RenderOptionProps } from '#src/components/MenuItem';
 
-const MENU_WIDTH = '68px';
-
 const Button = styled.button<{ $menuOpened?: boolean }>`
   position: relative;
   display: flex;
