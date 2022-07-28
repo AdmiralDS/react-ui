@@ -83,6 +83,7 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
               <Button
                 {...props}
                 ref={buttonRef as React.Ref<HTMLButtonElement>}
+                skeleton={skeleton}
                 dimension={dimension}
                 appearance={appearance}
                 disabled={skeleton ? true : disabled}

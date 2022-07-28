@@ -4,9 +4,9 @@ import styled from 'styled-components';
 import { Spinner } from '#src/components/Spinner';
 import { Appearance, Dimension, StyledButtonProps } from './types';
 import { appearanceMixin } from './appearanceMixin';
-import { ButtonContainer, IconContainer, skeletonMixin } from '#src/components/TextButton/commonMixin';
+import { ButtonContainer, IconContainer } from '#src/components/TextButton/commonMixin';
 import { dimensionMixin } from '#src/components/TextButton/dimensionMixin';
-import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
+import { skeletonAnimationMixin } from '#src/components/skeleton/animation';
 
 const StyledSpinner = styled(Spinner)<{ dimension?: Dimension }>`
   position: absolute;
@@ -32,20 +32,21 @@ const StyledButton = styled.button.attrs<StyledButtonProps>((props) => ({
   background: transparent;
   padding: 0;
   white-space: nowrap;
+  ${(p) => p.skeleton && skeletonAnimationMixin};
 
   ${ButtonContainer} {
-    ${(p) => p.skeleton && skeletonMixin};
-    border-radius: ${(p) => (p.skeleton ? mediumGroupBorderRadius(p.theme.shape) : '')};
-    span {
-      visibility: ${(p) => (p.skeleton || p.$loading ? 'hidden' : 'visible')};
-    }
+    visibility: ${(p) => (p.skeleton || p.$loading ? 'hidden' : 'visible')};
+  }
+
+  ${IconContainer} {
+    visibility: ${(p) => (p.skeleton || p.$loading ? 'hidden' : 'visible')};
   }
 
   ${appearanceMixin};
 
   ${dimensionMixin};
 
-  pointer-events: ${(p) => (p.$loading || p.disabled ? 'none' : 'all')};
+  pointer-events: ${(p) => (p.$loading || p.skeleton || p.disabled ? 'none' : 'all')};
 `;
 
 export interface TextButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {

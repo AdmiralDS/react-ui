@@ -18,6 +18,7 @@ export const DateField = React.forwardRef<HTMLInputElement, DateFieldProps>((pro
     id = uid(),
     name,
     disabled,
+    skeleton,
     ...restProps
   } = props;
 
@@ -28,6 +29,7 @@ export const DateField = React.forwardRef<HTMLInputElement, DateFieldProps>((pro
     required,
     label,
     id,
+    skeleton,
     'data-field-id': id,
     'data-field-name': name,
     displayInline,
@@ -40,7 +42,7 @@ export const DateField = React.forwardRef<HTMLInputElement, DateFieldProps>((pro
     }
   });
 
-  const inputProps = { ref, id, name, 'aria-required': required, status, disabled, ...restProps };
+  const inputProps = { ref, id, name, 'aria-required': required, status, disabled, skeleton, ...restProps };
   return (
     <Field {...fieldContainerProps}>
       <DateInput {...inputProps} />

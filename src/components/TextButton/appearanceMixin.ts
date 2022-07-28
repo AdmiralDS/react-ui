@@ -12,7 +12,7 @@ const defaultAppearanceMixin = css<StyledButtonProps>`
     }
   }
 
-  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
+  border-radius: ${(p) => (p.skeleton ? 0 : mediumGroupBorderRadius(p.theme.shape))};
 
   &:focus-visible {
     outline-offset: 2px;

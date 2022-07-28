@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled, { css } from 'styled-components';
 import { refSetter } from '#src/components/common/utils/refSetter';
-import { InputStatus } from '#src/components/input';
+import { InputStatus, skeletonMixin } from '#src/components/input';
 import { CharacterCounter } from '#src/components/input/TextArea/CharacterCounter';
 import { Label } from '#src/components/Label';
 import { uid } from '#src/components/common/uid';
@@ -26,9 +26,37 @@ const Container = styled.div<{ displayInline?: boolean }>`
   ${(props) => (props.displayInline ? inlineMixin : 'flex-direction: column;')}
 `;
 
-export const ExtrasContainer = styled.div`
+const SkeletonLabel = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 50%;
+
+  ${skeletonMixin}
+`;
+
+const LabelContainer = styled.div`
+  position: relative;
+  margin-bottom: 8px;
+`;
+
+const textSkeletonMixin = css`
+  color: transparent;
+`;
+
+const StyledLabel = styled(Label)<{ skeleton?: boolean }>`
+  ${(p) => p.skeleton && textSkeletonMixin};
+`;
+
+const containerSkeletonMixin = css`
+  visibility: hidden;
+`;
+
+export const ExtrasContainer = styled.div<{ skeleton?: boolean }>`
   display: flex;
   justify-content: space-between;
+  ${(p) => p.skeleton && containerSkeletonMixin};
 `;
 
 export const ExtraTextContainer = styled.div`
@@ -83,6 +111,9 @@ export interface FieldOwnProps {
    * Позволяет отключать появление счетчика символов при задании maxLength
    */
   displayCharacterCounter?: boolean;
+
+  /** Состояние skeleton */
+  skeleton?: boolean;
 }
 
 const PositionedCharacterCounter = styled(CharacterCounter)`
@@ -107,6 +138,7 @@ export const Field = React.forwardRef<HTMLDivElement, FieldProps>(
       required,
       disabled,
       id = uid(),
+      skeleton = false,
       ...restFieldProps
     } = props;
 
@@ -144,10 +176,15 @@ export const Field = React.forwardRef<HTMLDivElement, FieldProps>(
         data-disabled={disabled ? '' : undefined}
         ref={refSetter(containerRef, ref)}
       >
-        {labelProps.children && <Label {...labelProps} />}
+        {labelProps.children && (
+          <LabelContainer>
+            {skeleton && <SkeletonLabel />}
+            <StyledLabel skeleton={skeleton} {...labelProps} />
+          </LabelContainer>
+        )}
         <div>
           {children}
-          <ExtrasContainer>
+          <ExtrasContainer skeleton={skeleton}>
             {extraText && <ExtraTextContainer>{extraText}</ExtraTextContainer>}
 
             {displayCharacterCounter && inputRef && maxLength !== undefined && (

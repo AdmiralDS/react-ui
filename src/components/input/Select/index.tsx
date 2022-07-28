@@ -112,6 +112,9 @@ export interface SelectProps extends Omit<React.InputHTMLAttributes<HTMLSelectEl
 
   /** Принудительно выравнивает контейнер с опциями относительно компонента, значение по умолчанию 'stretch' */
   alignDropdown?: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
+
+  /** Состояние skeleton */
+  skeleton?: boolean;
 }
 
 export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
@@ -147,6 +150,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       onBlur: onBlurFromProps,
       children,
       alignDropdown = 'stretch',
+      skeleton = false,
       ...props
     },
     ref,
@@ -496,6 +500,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
         onMouseDown={preventDefault}
         onBlur={onBlur}
         onFocus={onFocus}
+        skeleton={skeleton}
       >
         <Hidden>
           <ConstantSelectProvider
@@ -551,7 +556,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
             />
           )}
         </ValueWrapper>
-        {isSearchPanelOpen && (
+        {isSearchPanelOpen && !skeleton && (
           <Dropdown
             targetRef={portalTargetRef || containerRef}
             data-dimension={dimension || TextInput.defaultProps?.dimension}
