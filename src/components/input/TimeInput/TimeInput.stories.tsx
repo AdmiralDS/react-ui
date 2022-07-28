@@ -4,45 +4,10 @@ import { TimeInput } from '../TimeInput';
 import { withDesign } from 'storybook-addon-designs';
 import { INPUT_DIMENSIONS_VALUES } from '#src/components/input/types';
 import { ReactComponent as GPSOutline } from '@admiral-ds/icons/build/location/GPSOutline.svg';
-import { ReactComponent as TimeSVG } from '@admiral-ds/icons/build/system/TimeOutline.svg';
+import { ReactComponent as TimeSolid } from '@admiral-ds/icons/build/system/TimeSolid.svg';
 import styled, { ThemeProvider } from 'styled-components';
 import { Theme } from '#src/components/themes';
-
-const Icon = styled(TimeSVG)`
-  & *[fill^='#'] {
-    fill: ${(p) => p.theme.color['Neutral/Neutral 50']};
-  }
-
-  [disabled] & {
-    pointer-events: none;
-  }
-
-  &:hover {
-    cursor: pointer;
-  }
-
-  &:hover *[fill^='#'] {
-    fill: ${(p) => p.theme.color['Primary/Primary 70']};
-  }
-`;
-
-const GPSIcon = styled(GPSOutline)`
-  & *[fill^='#'] {
-    fill: ${(p) => p.theme.color['Neutral/Neutral 50']};
-  }
-
-  [disabled] & {
-    pointer-events: none;
-  }
-
-  &:hover {
-    cursor: pointer;
-  }
-
-  &:hover *[fill^='#'] {
-    fill: ${(p) => p.theme.color['Primary/Primary 70']};
-  }
-`;
+import { InputIconButton } from '#src/components/InputIconButton';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -96,7 +61,7 @@ export default {
     disabled: {
       control: { type: 'boolean' },
     },
-    displayStatusIcon: {
+    readOnly: {
       control: { type: 'boolean' },
     },
     displayClearIcon: {
@@ -160,10 +125,11 @@ const TimeInputIconAlternative: ComponentStory<typeof TimeInput> = (props) => {
       <TimeInput
         {...cleanProps}
         style={{ maxWidth: '320px' }}
-        icons={<GPSIcon onClick={() => setValue('12:00')} />}
-        icon={Icon}
+        icons={<InputIconButton icon={GPSOutline} onClick={() => setValue('12:00')} />}
+        icon={TimeSolid}
         value={localValue}
         onChange={handleChange}
+        readOnly
       />
     </>
   );

@@ -37,9 +37,6 @@ export default {
     displayPlusMinusIcons: {
       control: { type: 'boolean' },
     },
-    displayStatusIcon: {
-      control: { type: 'boolean' },
-    },
     displayClearIcon: {
       control: { type: 'boolean' },
     },

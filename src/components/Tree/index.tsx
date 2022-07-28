@@ -128,9 +128,17 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps>(
 
     const toggleCheck = (id: string | number) => {
       const hasChildren = !!map[id].node.children;
+
+      const indeterminate =
+        map[id].dependencies?.some((depId: number | string) => map[depId].node.checked) &&
+        map[id].dependencies?.some((depId: number | string) => !map[depId].node.checked);
+
       const checked = hasChildren
-        ? map[id].dependencies?.every((depId: number | string) => map[depId].node.checked)
+        ? indeterminate
+          ? true
+          : map[id].dependencies?.every((depId: number | string) => map[depId].node.checked)
         : map[id].node.checked;
+
       setChecked(id, !checked);
 
       if (onChange) {

@@ -90,6 +90,7 @@ export interface PaginationOneProps extends Omit<React.HTMLAttributes<HTMLDivEle
   dropMaxHeight?: string | number;
   /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
   dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+  menuWidth?: string;
 }
 
 export const PaginationOne: React.FC<PaginationOneProps> = ({
@@ -108,6 +109,7 @@ export const PaginationOne: React.FC<PaginationOneProps> = ({
   backwardText = 'Предыдущая страница, выбрать',
   forwardText = 'Следующая страница, выбрать',
   simple = false,
+  menuWidth,
   dropMaxHeight = '300px',
   dropContainerCssMixin,
   ...props
@@ -117,11 +119,13 @@ export const PaginationOne: React.FC<PaginationOneProps> = ({
   const backButtonDisabled = page === 1;
   const forwardButtonDisabled = page === totalPages;
 
-  const handleSizeChange = (pageSize: number) => {
-    onChange({ page: 1, pageSize });
+  const handleSizeChange = (pageSizeSelected: string) => {
+    const pageSize = parseInt(pageSizeSelected);
+    onChange({ page: 1, pageSize: pageSize });
   };
 
-  const handlePageInputChange = (page: number) => {
+  const handlePageInputChange = (pageSelected: string) => {
+    const page = parseInt(pageSelected);
     if (page > 0 && page <= totalPages) {
       onChange({
         page,
@@ -140,12 +144,13 @@ export const PaginationOne: React.FC<PaginationOneProps> = ({
           {itemsPerPageText}
           <MenuButton
             options={pageSizes}
-            selected={pageSize}
+            selected={pageSize.toString()}
             onChange={handleSizeChange}
             disabled={pageSizeSelectDisabled}
             aria-label={pageSizeSelectLabel(pageSize, totalItems)}
             dropMaxHeight={dropMaxHeight}
             dropContainerCssMixin={dropContainerCssMixin}
+            menuWidth={menuWidth}
           >
             {pageSize}
           </MenuButton>
@@ -162,12 +167,13 @@ export const PaginationOne: React.FC<PaginationOneProps> = ({
           <Divider />
           <MenuButton
             options={pages}
-            selected={page}
+            selected={page.toString()}
             onChange={handlePageInputChange}
             disabled={pageSelectDisabled}
             aria-label={pageSelectLabel(page, totalPages)}
             dropMaxHeight={dropMaxHeight}
             dropContainerCssMixin={dropContainerCssMixin}
+            menuWidth={menuWidth}
           >
             {page}
           </MenuButton>

@@ -151,7 +151,7 @@ export const SliderInput = React.forwardRef<HTMLInputElement, SliderInputProps>(
             thousand={thousand}
             tickMarks={tickMarks}
             step={step}
-            disabled={disabled}
+            disabled={disabled || props.readOnly}
             dimension={sliderDimension}
           />
         )}

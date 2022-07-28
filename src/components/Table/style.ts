@@ -41,6 +41,7 @@ export const OverflowMenuWrapper = styled.div<{ $offset: number; dimension: Tabl
   box-sizing: border-box;
   display: flex;
   align-items: center;
+  justify-content: center;
   position: absolute;
   z-index: 5;
   ${overflowMenuStyle}

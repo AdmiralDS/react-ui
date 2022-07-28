@@ -44,10 +44,6 @@ export default {
       type: 'string',
     },
 
-    displayStatusIcon: {
-      control: { type: 'boolean' },
-    },
-
     displayClearIcon: {
       control: { type: 'boolean' },
     },

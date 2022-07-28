@@ -208,13 +208,15 @@ export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps
     }, [props.onInput]);
 
     const iconArray = React.Children.toArray(icons);
-    iconArray.push(<InputIconButton icon={icon} onClick={onSearchButtonClick} aria-hidden />);
+    if (!props.readOnly) {
+      iconArray.push(<InputIconButton icon={icon} onClick={onSearchButtonClick} aria-hidden />);
+    }
 
     return (
       <TextInput
         {...props}
         ref={refSetter(ref, inputRef)}
-        icons={!props.readOnly ? iconArray : undefined}
+        icons={iconArray}
         skeleton={skeleton}
         onKeyUp={(...p) => {
           props.onKeyUp?.(...p);

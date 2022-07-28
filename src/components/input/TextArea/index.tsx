@@ -6,23 +6,9 @@ import { ReactComponent as CloseOutlineSvg } from '@admiral-ds/icons/build/servi
 import type { ForwardedRef, TextareaHTMLAttributes } from 'react';
 import * as React from 'react';
 import styled, { css } from 'styled-components';
-import { StatusIcon } from '../StatusIcon';
+import { InputIconButton } from '#src/components/InputIconButton';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { Container } from '../Container';
-
-const ClearIcon = styled(CloseOutlineSvg)`
-  & *[fill^='#'] {
-    fill: ${(props) => props.theme.color['Neutral/Neutral 50']};
-  }
-
-  &:hover {
-    cursor: pointer;
-  }
-
-  &:hover *[fill^='#'] {
-    fill: ${(props) => props.theme.color['Primary/Primary 70']};
-  }
-`;
 
 const iconSizeValue = (props: { dimension?: ComponentDimension }) => {
   switch (props.dimension) {
@@ -197,9 +183,6 @@ export interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElemen
   /** Иконки для отображения в правом углу поля */
   icons?: React.ReactNode;
 
-  /** Отображать иконку статуса */
-  displayStatusIcon?: boolean;
-
   /** Отображать иконку очистки поля */
   displayClearIcon?: boolean;
 
@@ -230,7 +213,6 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
     {
       rows = 3,
       value,
-      displayStatusIcon,
       displayClearIcon,
       status,
       handleInput = defaultHandleInput,
@@ -249,13 +231,10 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
 
     const iconArray = React.Children.toArray(icons);
 
-    if (displayStatusIcon) {
-      iconArray.push(<StatusIcon key="status-icon" status={status} aria-hidden />);
-    }
-
-    if (displayClearIcon) {
+    if (!props.readOnly && displayClearIcon) {
       iconArray.unshift(
-        <ClearIcon
+        <InputIconButton
+          icon={CloseOutlineSvg}
           key="clear-icon"
           onClick={() => {
             if (inputRef.current) {

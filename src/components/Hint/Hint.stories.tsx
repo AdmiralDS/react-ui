@@ -86,10 +86,12 @@ const Template1: ComponentStory<typeof Hint> = ({ anchorId, ...args }) => {
     theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
+  const [visible, setVisible] = React.useState(false);
+  const handleVisibilityChange = (visible: boolean) => setVisible(visible);
 
   return (
     <ThemeProvider theme={swapBorder}>
-      <Hint {...args} anchorId={anchorId}>
+      <Hint {...args} anchorId={anchorId} visible={visible} onVisibilityChange={handleVisibilityChange}>
         <StyledButton dimension="s" aria-label="Additional information" aria-describedby={anchorId}>
           <HelpOutline aria-hidden />
         </StyledButton>
@@ -99,15 +101,31 @@ const Template1: ComponentStory<typeof Hint> = ({ anchorId, ...args }) => {
 };
 
 const Template2: Story<HintProps & { anchorId1: string; anchorId2: string }> = ({ anchorId1, anchorId2, ...args }) => {
+  const [visible1, setVisible1] = React.useState(false);
+  const [visible2, setVisible2] = React.useState(false);
+  const handleVisibilityChange1 = (visible: boolean) => setVisible1(visible);
+  const handleVisibilityChange2 = (visible: boolean) => setVisible2(visible);
   return (
     <>
       <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
-        <Hint {...args} renderContent={() => text} anchorId={anchorId1}>
+        <Hint
+          {...args}
+          visible={visible1}
+          onVisibilityChange={handleVisibilityChange1}
+          renderContent={() => text}
+          anchorId={anchorId1}
+        >
           <StyledButton dimension="s" aria-label="Additional information" aria-describedby={anchorId1}>
             <HelpOutline aria-hidden />
           </StyledButton>
         </Hint>
-        <Hint {...args} renderContent={() => text} id={anchorId2}>
+        <Hint
+          {...args}
+          visible={visible2}
+          onVisibilityChange={handleVisibilityChange2}
+          renderContent={() => text}
+          id={anchorId2}
+        >
           <StyledButton dimension="s" aria-label="Additional information" aria-describedby={anchorId2}>
             <HelpOutline aria-hidden />
           </StyledButton>
@@ -123,11 +141,22 @@ const Template3: ComponentStory<typeof Hint> = ({ anchorId, ...args }) => {
     height: 100%;
   `;
 
+  const [visible, setVisible] = React.useState(false);
+  const handleVisibilityChange = (visible: boolean) => setVisible(visible);
+
   return (
     <>
       <StyledButton dimension="s" ref={btnRef}>
         Press&nbsp;&nbsp;&nbsp;
-        <Hint {...args} renderContent={() => text} target={btnRef} anchorId={anchorId} anchorCssMixin={anchorCss}>
+        <Hint
+          {...args}
+          visible={visible}
+          onVisibilityChange={handleVisibilityChange}
+          renderContent={() => text}
+          target={btnRef}
+          anchorId={anchorId}
+          anchorCssMixin={anchorCss}
+        >
           <HelpOutline tabIndex={0} height={20} width={20} aria-label="Help Icon" aria-describedby={anchorId} />
         </Hint>
       </StyledButton>
@@ -136,10 +165,15 @@ const Template3: ComponentStory<typeof Hint> = ({ anchorId, ...args }) => {
 };
 
 const Template4: ComponentStory<typeof Hint> = ({ anchorId, ...args }) => {
+  const [visible, setVisible] = React.useState(false);
+  const handleVisibilityChange = (visible: boolean) => setVisible(visible);
+
   return (
     <>
       <Hint
         {...args}
+        visible={visible}
+        onVisibilityChange={handleVisibilityChange}
         visibilityTrigger="click"
         renderContent={() => (
           <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
@@ -164,9 +198,20 @@ const Template5: ComponentStory<typeof Hint> = ({ anchorId, ...args }) => {
     padding: 10px;
     border: 2px dotted red;
   `;
+
+  const [visible, setVisible] = React.useState(false);
+  const handleVisibilityChange = (visible: boolean) => setVisible(visible);
+
   return (
     <>
-      <Hint {...args} renderContent={() => text} anchorId={anchorId} anchorCssMixin={anchorCss}>
+      <Hint
+        {...args}
+        visible={visible}
+        onVisibilityChange={handleVisibilityChange}
+        renderContent={() => text}
+        anchorId={anchorId}
+        anchorCssMixin={anchorCss}
+      >
         <StyledButton dimension="s" aria-label="Additional information" aria-describedby={anchorId}>
           <HelpOutline aria-hidden />
         </StyledButton>

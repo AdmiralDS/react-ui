@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import { OpenStatusButton } from '#src/components/OpenStatusButton';
 import { keyboardKey } from '#src/components/common/keyboardKey';
 import { refSetter } from '#src/components/common/utils/refSetter';
+import { InputIconButton } from '#src/components/InputIconButton';
+import { ReactComponent as CloseOutlineSvg } from '@admiral-ds/icons/build/service/CloseOutline.svg';
 import { TextInput } from '../TextInput';
 import type { ComponentDimension, InputStatus } from '#src/components/input/types';
 import { ConstantSelectProvider, DropDownSelectProvider } from './useSelectContext';
@@ -10,7 +12,6 @@ import type { HighlightFormat, IConstantOption, IDropdownOption } from './types'
 import { MultipleSelectChips } from './MultipleSelectChips';
 import {
   BorderedDiv,
-  ClearIcon,
   Dropdown,
   Hidden,
   IconPanel,
@@ -21,7 +22,6 @@ import {
   StringValueWrapper,
   ValueWrapper,
 } from './styled';
-import { StatusIcon } from '../StatusIcon';
 import { preventDefault, scrollToNotVisibleELem } from './utils';
 import { changeInputData } from '#src/components/common/dom/changeInputData';
 import { useClickOutside } from '#src/components/common/hooks/useClickOutside';
@@ -72,8 +72,6 @@ export interface SelectProps extends Omit<React.InputHTMLAttributes<HTMLSelectEl
 
   /** Значение по умолчанию для некотролируемого селекта */
   defaultValue?: string | string[];
-
-  displayStatusIcon?: boolean;
 
   displayClearIcon?: boolean;
 
@@ -140,7 +138,6 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       multiple = false,
       defaultHighlighted = true,
       showCheckbox = true,
-      displayStatusIcon = false,
       displayClearIcon = false,
       onClearIconClick,
       loadingMessage = <DropDownText>Поиск совпадений</DropDownText>,
@@ -590,10 +587,9 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
         )}
         <IconPanel multiple={multiple} dimension={dimension} onClick={stopPropagation} onMouseDown={preventDefault}>
           {displayClearIcon && !readOnly && (
-            <ClearIcon id="searchSelectClearIcon" onClick={handleOnClear} aria-hidden />
+            <InputIconButton icon={CloseOutlineSvg} id="searchSelectClearIcon" onClick={handleOnClear} aria-hidden />
           )}
           {icons}
-          {displayStatusIcon && <StatusIcon status={status} aria-hidden />}
           {!readOnly && (
             <OpenStatusButton
               $isOpen={isSearchPanelOpen}

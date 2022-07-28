@@ -11,6 +11,7 @@ import { Slot, SlotProps } from './Slot';
 import { getTimeInMinutes, parseStringToTime } from './utils';
 import { typography } from '#src/components/Typography';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
+import { InputIconButton } from '#src/components/InputIconButton';
 
 const slots: SlotProps[] = [
   { value: '00:00', disabled: false },
@@ -62,24 +63,6 @@ const slots: SlotProps[] = [
   { value: '23:00', disabled: false },
   { value: '23:30', disabled: false },
 ];
-
-const Icon = styled(TimeSVG)`
-  & *[fill^='#'] {
-    fill: ${(p) => p.theme.color['Neutral/Neutral 50']};
-  }
-
-  [disabled] & {
-    pointer-events: none;
-  }
-
-  &:hover {
-    cursor: pointer;
-  }
-
-  &:hover *[fill^='#'] {
-    fill: ${(p) => p.theme.color['Primary/Primary 70']};
-  }
-`;
 
 const SlotContainer = styled.ul`
   pointer-events: initial;
@@ -140,7 +123,7 @@ export const TimeInput = React.forwardRef<HTMLInputElement, TimeInputProps>(
       disabled = false,
       disabledSlots = [],
       parser = parseStringToTime,
-      icon,
+      icon = TimeSVG,
       icons,
       alignDropdown = 'flex-end',
       skeleton = false,
@@ -162,8 +145,9 @@ export const TimeInput = React.forwardRef<HTMLInputElement, TimeInputProps>(
     };
 
     const iconArray = React.Children.toArray(icons);
-    const TimeIcon = icon || Icon;
-    iconArray.push(<TimeIcon onClick={handleButtonClick} tabIndex={0} />);
+    if (!props.readOnly) {
+      iconArray.push(<InputIconButton icon={icon} onClick={handleButtonClick} tabIndex={0} />);
+    }
 
     const disableSlots = (defaultArray: SlotProps[], disabledArr: string[]) => {
       if (disabledArr.length === 1) {
