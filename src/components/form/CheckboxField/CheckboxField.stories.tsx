@@ -122,6 +122,11 @@ const CheckboxFieldDemo: ComponentStory<typeof CheckboxField> = (props) => {
           Управляемый чекбокс
         </CheckboxField>
         <CheckboxField dimension="s">Не управляемый маленький чекбокс</CheckboxField>
+        <CheckboxField dimension="m">
+          Двойная
+          <br />
+          строка
+        </CheckboxField>
         <CheckboxField disabled defaultChecked extraText="Дополнительный текст. Additional text">
           Disabled не управляемый чекбокс
         </CheckboxField>
