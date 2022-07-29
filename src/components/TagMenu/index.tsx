@@ -1,16 +1,14 @@
 import React, { HTMLAttributes } from 'react';
-import { Tag, TagProps } from '#src/components/Tag';
+import { TagVisualProps, TagSizeProps, Tag } from '#src/components/Tag';
 import { DropMenu } from '#src/components/DropMenu';
 import { MenuItem, RenderOptionProps } from '#src/components/MenuItem';
 
-export interface TagOptionProps extends Omit<TagProps, 'dimension' | 'as'> {
+export interface TagOptionProps extends HTMLAttributes<HTMLButtonElement>, TagVisualProps {
   id: string;
   tagText: string;
 }
 
-export interface TagMenuProps
-  extends HTMLAttributes<HTMLButtonElement>,
-    Omit<TagProps, 'kind' | 'statusViaBackground' | 'icon'> {
+export interface TagMenuProps extends Omit<HTMLAttributes<HTMLButtonElement>, 'children'>, TagSizeProps {
   /** Опции выпадающего списка */
   options: Array<TagOptionProps>;
   /** Выбранная опция */

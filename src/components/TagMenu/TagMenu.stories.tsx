@@ -116,9 +116,7 @@ const Template0: ComponentStory<typeof Tag> = (args: TagProps) => {
             setSelected(items.find((item) => item.id === id));
           }}
           {...args}
-        >
-          Playground
-        </TagMenu>
+        />
       </ThemeProvider>
     </>
   );

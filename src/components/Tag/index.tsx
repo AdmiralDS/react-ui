@@ -194,9 +194,7 @@ const StatusIcon = styled.div`
 
 export type TagKind = 'neutral' | 'green' | 'blue' | 'red' | 'orange';
 
-export interface TagProps extends React.HTMLAttributes<HTMLButtonElement> {
-  /** Высота тэга */
-  dimension?: TagDimension;
+export interface TagVisualProps {
   /** Тип тэга. Можно выбрать из предложенных вариантов, либо задать свои цвета для тэга.
    * В случае когда статус задается через статусную метку (кружок), свойство background отвечает за цвет статусной метки.
    * В случае когда статус задается через цвет фона и обводки, свойство background отвечает за цвет фона,
@@ -209,6 +207,11 @@ export interface TagProps extends React.HTMLAttributes<HTMLButtonElement> {
   statusViaBackground?: boolean;
   /** Отображение иконки. Иконка отображается только по левому краю и при условии, что статус отображается через цвет обводки и фона */
   icon?: React.ReactNode;
+}
+
+export interface TagSizeProps {
+  /** Высота тэга */
+  dimension?: TagDimension;
   /** Ширина тэга */
   width?: number | string;
   /**
@@ -217,6 +220,8 @@ export interface TagProps extends React.HTMLAttributes<HTMLButtonElement> {
    */
   as?: React.ElementType;
 }
+
+export interface TagProps extends React.HTMLAttributes<HTMLButtonElement>, TagVisualProps, TagSizeProps {}
 
 export interface TagInternalProps {
   /** Для внутреннего использования! Отображение иконки отрытия выпадающего меню */
