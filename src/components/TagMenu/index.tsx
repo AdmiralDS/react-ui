@@ -5,7 +5,7 @@ import { MenuItem, RenderOptionProps } from '#src/components/MenuItem';
 
 export interface TagOptionProps extends Omit<TagProps, 'dimension' | 'as'> {
   id: string;
-  display: string;
+  tagText: string;
 }
 
 export interface TagMenuProps
@@ -32,7 +32,7 @@ export const TagMenu = React.forwardRef<HTMLButtonElement, TagMenuProps>(
         id: item.id,
         render: (options: RenderOptionProps) => (
           <MenuItem dimension="m" {...options} key={item.id}>
-            {item.display}
+            {item.tagText}
           </MenuItem>
         ),
       }));
@@ -44,7 +44,7 @@ export const TagMenu = React.forwardRef<HTMLButtonElement, TagMenuProps>(
         ref={ref}
         dimension="m"
         items={model}
-        selected={selected?.display}
+        selected={selected?.tagText}
         onChange={onSelectOption}
         renderContentProp={({ buttonRef, handleKeyDown, handleClick, statusIcon, menuState }) => {
           return (
@@ -61,7 +61,7 @@ export const TagMenu = React.forwardRef<HTMLButtonElement, TagMenuProps>(
               statusIcon={statusIcon}
               as={as}
             >
-              {selected?.display}
+              {selected?.tagText}
             </Tag>
           );
         }}

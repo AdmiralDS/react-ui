@@ -62,39 +62,39 @@ export default {
 const items: Array<TagOptionProps> = [
   {
     id: '1',
-    display: 'Option one',
+    tagText: 'Option one',
     statusViaBackground: true,
     icon: <CheckOutline />,
     kind: 'red',
   },
   {
     id: '2',
-    display: 'Option two',
+    tagText: 'Option two',
     kind: 'blue',
   },
   {
     id: '3',
-    display: 'Option three',
+    tagText: 'Option three',
     statusViaBackground: true,
     kind: 'green',
   },
   {
     id: '4',
-    display: 'Option four',
+    tagText: 'Option four',
     statusViaBackground: true,
     icon: <CheckOutline />,
   },
   {
     id: '5',
-    display: 'Option five',
+    tagText: 'Option five',
   },
   {
     id: '6',
-    display: 'Option six',
+    tagText: 'Option six',
   },
   {
     id: '7',
-    display: 'Option seven',
+    tagText: 'Option seven',
   },
 ];
 
