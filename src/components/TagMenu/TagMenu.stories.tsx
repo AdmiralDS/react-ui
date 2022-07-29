@@ -13,10 +13,15 @@ const Desc = styled.div`
   line-height: 24px;
 `;
 
+const Separator = styled.div`
+  width: 4px;
+`;
+
 const Description = () => (
   <Desc>
     Тег — это метка, размечающая и каталогизирующая информацию для облегчения процесса поиска. При нажатии на тэг
-    загружаются все элементы имеющие эту метку. Selectable - вариант тэгов, который нужен для принудительного выбора статуса из выпадающего меню. Работает с Outlined Tags.
+    загружаются все элементы имеющие эту метку. Selectable - вариант тэгов, который нужен для принудительного выбора
+    статуса из выпадающего меню.
   </Desc>
 );
 
@@ -122,6 +127,43 @@ const Template0: ComponentStory<typeof Tag> = (args: TagProps) => {
   );
 };
 
+const Template1: ComponentStory<typeof Tag> = (args: TagProps) => {
+  const [selectedM, setSelectedM] = React.useState<TagOptionProps | undefined>(items[0]);
+  const [selectedS, setSelectedS] = React.useState<TagOptionProps | undefined>(items[0]);
+
+  return (
+    <>
+      <TagMenu
+        dimension="m"
+        options={items}
+        selected={selectedM}
+        as="div"
+        onSelectOption={(id) => {
+          console.log(`selected: ${id}`);
+          setSelectedM(items.find((item) => item.id === id));
+        }}
+        {...args}
+      />
+      <Separator />
+      <TagMenu
+        dimension="s"
+        options={items}
+        selected={selectedS}
+        as="span"
+        onSelectOption={(id) => {
+          console.log(`selected: ${id}`);
+          setSelectedS(items.find((item) => item.id === id));
+        }}
+        {...args}
+      />
+    </>
+  );
+};
+
 export const Playground = Template0.bind({});
 Playground.args = {};
 Playground.storyName = 'TagMenu. Playground.';
+
+export const Sizes = Template1.bind({});
+Sizes.args = {};
+Sizes.storyName = 'TagMenu. Размеры.';
