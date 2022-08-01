@@ -7,6 +7,8 @@ import { typography } from '#src/components/Typography';
 import { ReactComponent as CardSolid } from '@admiral-ds/icons/build/finance/CardSolid.svg';
 import { withDesign } from 'storybook-addon-designs';
 import { Theme } from '#src/components/themes';
+import { CheckboxField, FieldSet } from '#src/components/form';
+import { RadioButton } from '#src/components/RadioButton';
 import { Tooltip } from '#src/components/Tooltip';
 
 const Desc = styled.div`
@@ -327,6 +329,59 @@ const CustomItemTemplate: ComponentStory<typeof Menu> = (args) => {
   );
 };
 
+const MenuCheckboxTemplate: ComponentStory<typeof Menu> = (args) => {
+  const model = useMemo(() => {
+    return items.map((item) => ({
+      id: item.id,
+      render: (options: RenderOptionProps) => (
+        <MenuItem dimension={args.dimension || 's'} {...options} key={item.id}>
+          <CheckboxField>{item.label}</CheckboxField>
+        </MenuItem>
+      ),
+    }));
+  }, [args.dimension]);
+
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
+    return theme;
+  }
+
+  return (
+    <ThemeProvider theme={swapBorder}>
+      <div style={{ width: 'fit-content' }}>
+        <Menu {...args} model={model} />
+      </div>
+    </ThemeProvider>
+  );
+};
+
+const MenuRadiobuttonTemplate: ComponentStory<typeof Menu> = (args) => {
+  const model = useMemo(() => {
+    return items.map((item) => ({
+      id: item.id,
+      render: (options: RenderOptionProps) => (
+        <MenuItem dimension={args.dimension || 's'} {...options} key={item.id}>
+          <RadioButton>{item.label}</RadioButton>
+        </MenuItem>
+      ),
+    }));
+  }, [args.dimension]);
+
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
+    return theme;
+  }
+
+  return (
+    <ThemeProvider theme={swapBorder}>
+      <div style={{ width: 'fit-content' }}>
+        <FieldSet>
+          <Menu {...args} model={model} />
+        </FieldSet>
+      </div>
+    </ThemeProvider>
+  );
+};
 
 const itemsLongText = [
   {
@@ -403,12 +458,17 @@ const MenuTooltipTemplate: ComponentStory<typeof Menu> = (args) => {
     </ThemeProvider>
   );
 };
+
 export const Simple = SimpleTemplate.bind({});
 export const Category = TemplateWithCards.bind({});
 export const CustomItems = CustomItemTemplate.bind({});
+export const MenuCheckbox = MenuCheckboxTemplate.bind({});
+export const MenuRadiobutton = MenuRadiobuttonTemplate.bind({});
 export const MenuTooltip = MenuTooltipTemplate.bind({});
 
 Simple.storyName = 'Базовый пример';
 Category.storyName = 'Пример с группами';
 CustomItems.storyName = 'Пример с кастомными пунктами меню';
+MenuCheckbox.storyName = 'Пример с Checkbox';
+MenuRadiobutton.storyName = 'Пример с Radiobutton';
 MenuTooltip.storyName = 'Пример с Tooltip';
