@@ -17,8 +17,8 @@ const Legend = styled.legend<{ dimension?: FieldSetDimension }>`
     cursor: default;
   }
 
-  [aria-required] &:before {
-    content: '* ';
+  [aria-required] &:after {
+    content: ' *';
     color: ${(props) => props.theme.color['Error/Error 60 Main']};
   }
 `;
