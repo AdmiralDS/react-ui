@@ -85,7 +85,7 @@ const Template1: ComponentStory<typeof FieldSet> = (props: FieldSetPropsType) =>
           </CheckboxField>
           <CheckboxField name="check3">Text 3</CheckboxField>
         </FieldSet>
-        <FieldSet dimension="s" legend={'Группа маленьких чекбоксов:'}>
+        <FieldSet dimension="s" legend={'Группа маленьких чекбоксов:'} required>
           <CheckboxField name="check1">Text 1</CheckboxField>
           <CheckboxField name="check2">Text 2</CheckboxField>
           <CheckboxField name="check3">Text 3</CheckboxField>
