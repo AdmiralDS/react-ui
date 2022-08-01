@@ -8,6 +8,7 @@ import { Theme } from '#src/components/themes';
 import { Button } from '#src/components/Button';
 import { typography } from '#src/components/Typography';
 import { ReactComponent as CardSolid } from '@admiral-ds/icons/build/finance/CardSolid.svg';
+import { Tooltip } from '#src/components/Tooltip';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -135,10 +136,11 @@ const SimpleTemplate: ComponentStory<typeof DropMenu> = (args) => {
           dimension={args.dimension}
           disabled={args.disabled}
           selected={selected}
-          renderContentProp={({ buttonRef, handleKeyDown, handleClick }) => {
+          renderContentProp={({ buttonRef, handleKeyDown, handleClick, statusIcon }) => {
             return (
               <Button ref={buttonRef as React.Ref<HTMLButtonElement>} onKeyDown={handleKeyDown} onClick={handleClick}>
                 Нажми
+                {statusIcon}
               </Button>
             );
           }}
@@ -278,8 +280,100 @@ const TemplateWithCards: ComponentStory<typeof DropMenu> = (args) => {
   );
 };
 
+const itemsLongText = [
+  {
+    id: '1',
+    label: 'Option one',
+    value: 1,
+  },
+  {
+    id: '2',
+    label: 'Option two',
+    value: 2,
+  },
+  {
+    id: '3',
+    label: 'Привет, пупсик! Хотел тебе сказать, что ты андроид.',
+    value: 3,
+  },
+  {
+    id: '4',
+    label: 'Option four',
+    value: 4,
+  },
+  {
+    id: '5',
+    label: 'Option five',
+    value: 5,
+  },
+  {
+    id: '6',
+    label: 'Option six',
+    value: 7,
+  },
+  {
+    id: '7',
+    label: 'Option seven',
+    value: 6,
+  },
+];
+
+const DropMenuTooltipTemplate: ComponentStory<typeof DropMenu> = (args) => {
+  const [selected, setSelected] = React.useState<string | undefined>(undefined);
+  const model = React.useMemo(() => {
+    return itemsLongText.map((item) => {
+      const tooltip = item.label.length > 20;
+      const renderText = () =>
+        tooltip ? (
+          <Tooltip style={{ marginTop: '8px' }} renderContent={() => item.label}>
+            {item.label.slice(0, 17) + '...'}
+          </Tooltip>
+        ) : (
+          item.label
+        );
+
+      return {
+        id: item.id,
+        render: (options: RenderOptionProps) => (
+          <MenuItem dimension={args.dimension || 's'} {...options} key={item.id}>
+            {renderText()}
+          </MenuItem>
+        ),
+      };
+    });
+  }, [args.dimension]);
+
+  return (
+    <div style={{ display: 'flex', justifyContent: 'center' }}>
+      <DropMenu
+        {...args}
+        items={model}
+        onChange={(id) => {
+          console.log(`selected: ${id}`);
+          setSelected(id);
+        }}
+        onOpen={onOpenMenu}
+        onClose={onCloseMenu}
+        dimension={args.dimension}
+        disabled={args.disabled}
+        selected={selected}
+        renderContentProp={({ buttonRef, handleKeyDown, handleClick, statusIcon }) => {
+          return (
+            <Button ref={buttonRef as React.Ref<HTMLButtonElement>} onKeyDown={handleKeyDown} onClick={handleClick}>
+              Нажми
+              {statusIcon}
+            </Button>
+          );
+        }}
+      />
+    </div>
+  );
+};
+
 export const Simple = SimpleTemplate.bind({});
 export const Category = TemplateWithCards.bind({});
+export const DropMenuTooltip = DropMenuTooltipTemplate.bind({});
 
 Simple.storyName = 'Базовый пример';
 Category.storyName = 'Пример с группами';
+DropMenuTooltip.storyName = 'Пример с Tooltip';
