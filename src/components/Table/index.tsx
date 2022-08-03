@@ -30,6 +30,8 @@ import {
   Title,
   TitleContent,
   EmptyMessage,
+  SortOrder,
+  SortIconWrapper,
 } from './style';
 import { VirtualBody } from './VirtualBody';
 import { OverflowMenu } from './OverflowMenu';
@@ -77,6 +79,8 @@ export type Column = {
   sortable?: boolean;
   /** Сортировка столбца (по возрастанию или по убыванию) */
   sort?: 'asc' | 'desc';
+  /** Порядковый номер в многоуровневой сортировке */
+  sortOrder?: number;
   /** Отображение столбца как фиксированного (которые остаются при скролле на месте).
    * Столбец с чекбоксами по умолчанию фиксированный.
    * Фиксированные столбцы располагаются по левому краю таблицы и идут друг за другом
@@ -421,6 +425,10 @@ export const Table: React.FC<TableProps> = ({
     onSortChange?.({ name, sort: newSort });
   };
 
+  const multipleSort = React.useMemo<boolean>(() => {
+    return columnList.filter((col) => !!col.sort).length > 1;
+  }, [columnList]);
+
   const renderHeaderCell = (
     {
       name,
@@ -431,6 +439,7 @@ export const Table: React.FC<TableProps> = ({
       cellAlign = 'left',
       sortable = false,
       sort,
+      sortOrder,
       renderFilter,
       renderFilterIcon,
       onFilterMenuClickOutside,
@@ -461,7 +470,12 @@ export const Table: React.FC<TableProps> = ({
                 </ExtraText>
               )}
             </TitleContent>
-            {sortable && <SortIcon sort={sort || 'initial'} width={iconSize} height={iconSize} />}
+            {sortable && (
+              <SortIconWrapper>
+                <SortIcon sort={sort || 'initial'} width={iconSize} height={iconSize} />
+                {multipleSort && sort && sortOrder && <SortOrder>{sortOrder}</SortOrder>}
+              </SortIconWrapper>
+            )}
           </HeaderCellTitle>
           <HeaderCellSpacer width={renderFilter ? spacer : `${parseInt(spacer) - parseInt(defaultSpacer)}px`} />
           {renderFilter && (
