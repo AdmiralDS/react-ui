@@ -21,6 +21,10 @@ const Legend = styled.legend<{ dimension?: FieldSetDimension }>`
     content: ' *';
     color: ${(props) => props.theme.color['Error/Error 60 Main']};
   }
+
+  [data-status='error'] & {
+    color: ${(props) => props.theme.color['Error/Error 60 Main']};
+  }
 `;
 
 const FieldSetExtrasContainer = styled.div`
