@@ -50,7 +50,7 @@ const disabledColors = css`
   border-color: transparent;
 `;
 
-const BorderedDiv = styled.div`
+const BorderedDiv = styled.div<{ status?: InputStatus }>`
   position: absolute;
   top: 0;
   bottom: 0;
@@ -62,23 +62,29 @@ const BorderedDiv = styled.div`
   min-width: 0;
 
   background: none;
-  border: 1px solid ${(props) => props.theme.color['Neutral/Neutral 40']};
+  border: 1px solid
+    ${(p) =>
+      p.status === 'error'
+        ? p.theme.color['Error/Error 60 Main']
+        : p.status === 'success'
+        ? p.theme.color['Success/Success 50 Main']
+        : p.theme.color['Neutral/Neutral 40']};
   border-radius: inherit;
-
-  [data-status='error'] & {
-    border: 1px solid ${(props) => props.theme.color['Error/Error 60 Main']};
-  }
-
-  [data-status='success'] & {
-    border: 1px solid ${(props) => props.theme.color['Success/Success 50 Main']};
-  }
 
   [data-read-only] & {
     border-color: transparent;
   }
 `;
 
-const colorsBorderAndBackground = css<{ disabled?: boolean }>`
+const readOnlyMixin = css`
+  ${disabledColors};
+
+  &:hover + ${BorderedDiv}, &:focus + ${BorderedDiv} {
+    border-color: transparent;
+  }
+`;
+
+const colorsBorderAndBackground = css<{ disabled?: boolean; readOnly?: boolean }>`
   background-color: ${(props) => props.theme.color['Neutral/Neutral 00']};
 
   &:focus + ${BorderedDiv} {
@@ -105,18 +111,12 @@ const colorsBorderAndBackground = css<{ disabled?: boolean }>`
     border: 1px solid ${(props) => props.theme.color['Success/Success 50 Main']};
   }
 
-  [data-read-only] &,
   &:disabled {
-    ${disabledColors}
-  }
-
-  &:disabled {
+    ${disabledColors};
     color: ${(props) => props.theme.color['Neutral/Neutral 30']};
   }
 
-  [data-read-only] &:hover + ${BorderedDiv}, [data-read-only] &:focus + ${BorderedDiv} {
-    border-color: transparent;
-  }
+  ${(p) => p.readOnly && readOnlyMixin};
 `;
 
 const ieFixes = css`
@@ -336,9 +336,10 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
           {...props}
           placeholder={placeholder}
           iconCount={iconCount}
+          data-status={status}
           type={type === 'password' && isPasswordVisible ? 'text' : type}
         />
-        <BorderedDiv />
+        <BorderedDiv status={status} />
         {iconCount > 0 && (
           <IconPanel disabled={props.disabled} dimension={props.dimension}>
             {iconArray}
