@@ -531,13 +531,14 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
             </option>
           ))}
         </NativeSelect>
-        <BorderedDiv />
+        <BorderedDiv status={status} />
         <ValueWrapper
           id="selectValueWrapper"
           dimension={dimension}
           multiple={multiple}
           fixHeight={shouldFixHeight}
           isEmpty={isEmpty}
+          disabled={disabled}
           onMouseDown={preventDefault}
         >
           {shouldRenderSelectValue && wrappedVisibleValue}
@@ -585,7 +586,13 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
             </DropDownSelectProvider>
           </Dropdown>
         )}
-        <IconPanel multiple={multiple} dimension={dimension} onClick={stopPropagation} onMouseDown={preventDefault}>
+        <IconPanel
+          multiple={multiple}
+          dimension={dimension}
+          onClick={stopPropagation}
+          onMouseDown={preventDefault}
+          disabled={disabled}
+        >
           {displayClearIcon && !readOnly && (
             <InputIconButton icon={CloseOutlineSvg} id="searchSelectClearIcon" onClick={handleOnClear} aria-hidden />
           )}

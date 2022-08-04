@@ -5,6 +5,7 @@ import type { ComponentDimension } from '#src/components/input/types';
 import { CHIP_OFFSET, COUNTER_WIDTH } from './constants';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { skeletonMixin } from '../Container';
+import { InputStatus } from '#src/components/input/types';
 
 const getSelectValueHeight = (dimension?: ComponentDimension, multiple?: boolean) =>
   dimension === 's' && !multiple ? 20 : 24;
@@ -20,7 +21,7 @@ export const Dropdown = styled(DropComponent)`
   }
 `;
 
-export const BorderedDiv = styled.div`
+export const BorderedDiv = styled.div<{ status?: InputStatus }>`
   position: absolute;
   top: 0;
   bottom: 0;
@@ -32,16 +33,14 @@ export const BorderedDiv = styled.div`
   min-width: 0;
 
   background: none;
-  border: 1px solid ${(props) => props.theme.color['Neutral/Neutral 40']};
+  border: 1px solid
+    ${(p) =>
+      p.status === 'error'
+        ? p.theme.color['Error/Error 60 Main']
+        : p.status === 'success'
+        ? p.theme.color['Success/Success 50 Main']
+        : p.theme.color['Neutral/Neutral 40']};
   border-radius: inherit;
-
-  [data-status='error'] & {
-    border: 1px solid ${(props) => props.theme.color['Error/Error 60 Main']};
-  }
-
-  [data-status='success'] & {
-    border: 1px solid ${(props) => props.theme.color['Success/Success 50 Main']};
-  }
 `;
 
 export const NativeSelect = styled.select`
@@ -72,6 +71,7 @@ export const ValueWrapper = styled.div<{
   multiple?: boolean;
   fixHeight?: boolean;
   isEmpty?: boolean;
+  disabled?: boolean;
 }>`
   flex: 1 1 auto;
   display: flex;
@@ -84,12 +84,9 @@ export const ValueWrapper = styled.div<{
   align-items: center;
 
   ${(props) => (props.dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
-  color: ${(props) => props.theme.color['Neutral/Neutral 90']};
+  color: ${(p) => (p.disabled ? p.theme.color['Neutral/Neutral 30'] : p.theme.color['Neutral/Neutral 90'])};
 
   ${({ fixHeight }) => fixHeight && fixHeightStyle}
-  [data-disabled='true'] & {
-    color: ${(props) => props.theme.color['Neutral/Neutral 30']};
-  }
 `;
 
 export const StringValueWrapper = styled.div`
@@ -105,7 +102,7 @@ const ieFixes = css`
   }
 `;
 
-export const Input = styled.input<{ dimension?: ComponentDimension; isMultiple?: boolean }>`
+export const Input = styled.input<{ dimension?: ComponentDimension; isMultiple?: boolean; readOnly?: boolean }>`
   outline: none;
   appearance: none;
 
@@ -130,10 +127,11 @@ export const Input = styled.input<{ dimension?: ComponentDimension; isMultiple?:
     color: ${(props) => props.theme.color['Neutral/Neutral 30']};
   }
 
-  [data-read-only] & {
-    user-select: none;
-    pointer-events: none;
-  }
+  ${(p) =>
+    p.readOnly
+      ? `user-select: none;
+         pointer-events: none;`
+      : ''}
 
   height: ${({ dimension, isMultiple }) => `${getSelectValueHeight(dimension, isMultiple)}px`};
 
@@ -155,7 +153,7 @@ const focusedStyle = css`
   }
 `;
 
-export const IconPanel = styled.div<{ multiple?: boolean; dimension?: ComponentDimension }>`
+export const IconPanel = styled.div<{ multiple?: boolean; dimension?: ComponentDimension; disabled?: boolean }>`
   flex: 0 0 auto;
 
   display: flex;
@@ -170,10 +168,8 @@ export const IconPanel = styled.div<{ multiple?: boolean; dimension?: ComponentD
     height: ${({ dimension }) => (dimension === 's' ? 20 : 24)}px;
   }
 
-  [data-disabled='true'] & {
-    & *[fill^='#'] {
-      fill: ${(props) => props.theme.color['Neutral/Neutral 30']};
-    }
+  & *[fill^='#'] {
+    ${(props) => (props.disabled ? `fill: ${props.theme.color['Neutral/Neutral 30']};` : ``)}
   }
 `;
 
