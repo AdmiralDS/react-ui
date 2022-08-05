@@ -66,7 +66,7 @@ const BorderedDiv = styled.div<{ status?: InputStatus }>`
   }
 `;
 
-const colorsBorderAndBackground = css<{ disabled?: boolean }>`
+const colorsBorderAndBackground = css<{ disabled?: boolean; status?: InputStatus }>`
   background-color: ${(props) => props.theme.color['Neutral/Neutral 00']};
 
   &:focus + ${BorderedDiv} {
@@ -85,12 +85,13 @@ const colorsBorderAndBackground = css<{ disabled?: boolean }>`
     border: 1px solid ${(props) => props.theme.color['Error/Error 60 Main']};
   }
 
-  [data-status='error'] &:hover + ${BorderedDiv}, [data-status='error'] &:focus + ${BorderedDiv} {
-    border: 1px solid ${(props) => props.theme.color['Error/Error 60 Main']};
-  }
-
-  [data-status='success'] &:hover + ${BorderedDiv}, [data-status='success'] &:focus + ${BorderedDiv} {
-    border: 1px solid ${(props) => props.theme.color['Success/Success 50 Main']};
+  &:hover + ${BorderedDiv}, &:focus + ${BorderedDiv} {
+    ${(p) =>
+      p.status === 'error'
+        ? `border: 1px solid ${p.theme.color['Error/Error 60 Main']};`
+        : p.status === 'success'
+        ? `border: 1px solid ${p.theme.color['Success/Success 50 Main']};`
+        : ``}
   }
 
   [data-read-only] &,
