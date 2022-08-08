@@ -353,4 +353,4 @@ ChipsIcon.storyName = 'Chips с иконкой';
 ChipsSelect.storyName = 'Chips с текстом и выбором';
 ChipsMultiSelectIcon.storyName = 'Chips для множественного выбора';
 ChipsTooltip.storyName = 'Chips с Tooltip';
-ChipsBadges.storyName = 'Chips базовый пример';
+ChipsBadges.storyName = 'Chips с Badge';
