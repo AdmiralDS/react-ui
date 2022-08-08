@@ -15,7 +15,7 @@ export const InputIconButton = styled(AnyIcon)`
     fill: ${(props) => props.theme.color['Neutral/Neutral 50']};
   }
 
-  [disabled] & {
+  [disabled] &&& {
     pointer-events: none;
     & *[fill^='#'] {
       fill: ${(props) => props.theme.color['Neutral/Neutral 30']};
