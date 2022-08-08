@@ -127,7 +127,7 @@ export const Chips: FC<ChipsProps> = ({
             </IconWrapperStyled>
           </IconAfterWrapperStyled>
         )}
-        {!onClose && badge && (
+        {!onClose && typeof badge !== 'undefined' && (
           <StyledBadge data-badge dimension={dimension} appearance={badgeAppearance}>
             {badge}
           </StyledBadge>

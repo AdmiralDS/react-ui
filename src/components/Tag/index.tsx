@@ -4,7 +4,7 @@ import { Tooltip } from '#src/components/Tooltip';
 import { typography } from '#src/components/Typography';
 import { smallGroupBorderRadius } from '#src/components/themes/borderRadius';
 
-type Dimension = 'm' | 's';
+export type TagDimension = 'm' | 's';
 
 const TAG_HEIGHT_S = 20;
 const TAG_HEIGHT_M = 24;
@@ -89,7 +89,7 @@ const wrapperHover = css<{ background: TagKind | string }>`
 `;
 
 const Wrapper = styled.button<{
-  dimension?: Dimension;
+  dimension?: TagDimension;
   width?: number | string;
   clickable: boolean;
   as?: React.ElementType;
@@ -174,11 +174,27 @@ const Icon = styled.div`
   }
 `;
 
+const StatusIcon = styled.div`
+  display: flex;
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  margin-left: 4px;
+
+  & *[fill^='#'] {
+    fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
+  }
+
+  &:hover {
+    & *[fill^='#'] {
+      fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
+    }
+  }
+`;
+
 export type TagKind = 'neutral' | 'green' | 'blue' | 'red' | 'orange';
 
-export interface TagProps extends React.HTMLAttributes<HTMLButtonElement> {
-  /** Высота тэга */
-  dimension?: Dimension;
+export interface TagVisualProps {
   /** Тип тэга. Можно выбрать из предложенных вариантов, либо задать свои цвета для тэга.
    * В случае когда статус задается через статусную метку (кружок), свойство background отвечает за цвет статусной метки.
    * В случае когда статус задается через цвет фона и обводки, свойство background отвечает за цвет фона,
@@ -191,11 +207,13 @@ export interface TagProps extends React.HTMLAttributes<HTMLButtonElement> {
   statusViaBackground?: boolean;
   /** Отображение иконки. Иконка отображается только по левому краю и при условии, что статус отображается через цвет обводки и фона */
   icon?: React.ReactNode;
+}
+
+export interface TagSizeProps {
+  /** Высота тэга */
+  dimension?: TagDimension;
   /** Ширина тэга */
   width?: number | string;
-  /** Обработчик клика */
-  onClick?: (event: React.MouseEvent<HTMLButtonElement> | React.KeyboardEvent<HTMLButtonElement>) => void;
-
   /**
    * Позволяет рендерить компонент, используя другой тег HTML (https://styled-components.com/docs/api#as-polymorphic-prop).
    * В storybook в качестве примера приведены несколько возможных вариантов этого параметра (кроме них можно использовать любой другой HTML тег).
@@ -203,55 +221,70 @@ export interface TagProps extends React.HTMLAttributes<HTMLButtonElement> {
   as?: React.ElementType;
 }
 
-export const Tag: React.FC<React.PropsWithChildren<TagProps>> = ({
-  children,
-  kind = 'neutral',
-  dimension = 'm',
-  width,
-  statusViaBackground = false,
-  icon,
-  onClick,
-  ...props
-}) => {
-  const textRef = React.useRef<HTMLElement>(null);
-  const [overflow, setOverflow] = React.useState(false);
-  const background: TagKind | string =
-    typeof kind === 'object' ? (kind.background ? kind.background : 'neutral') : (kind as TagKind);
-  const border: TagKind | string =
-    typeof kind === 'object' ? (!!kind.background && !!kind.border ? kind.border : 'neutral') : (kind as TagKind);
+export interface TagProps extends React.HTMLAttributes<HTMLButtonElement>, TagVisualProps, TagSizeProps {}
 
-  const detectOverflow = (element: HTMLElement) => element.offsetWidth < element.scrollWidth;
+export interface TagInternalProps {
+  /** Для внутреннего использования! Отображение иконки отрытия выпадающего меню */
+  statusIcon?: React.ReactNode;
+}
 
-  React.useLayoutEffect(() => {
-    const element = textRef.current;
-    if (element && detectOverflow(element) !== overflow) {
-      setOverflow(detectOverflow(element));
-    }
-  }, [children, width]);
+export const Tag = React.forwardRef<HTMLElement, TagProps & TagInternalProps>(
+  (
+    {
+      children,
+      kind = 'neutral',
+      dimension = 'm',
+      width,
+      statusViaBackground = false,
+      icon,
+      statusIcon,
+      onClick,
+      ...props
+    },
+    ref,
+  ) => {
+    const textRef = React.useRef<HTMLElement>(null);
+    const [overflow, setOverflow] = React.useState(false);
+    const background: TagKind | string =
+      typeof kind === 'object' ? (kind.background ? kind.background : 'neutral') : (kind as TagKind);
+    const border: TagKind | string =
+      typeof kind === 'object' ? (!!kind.background && !!kind.border ? kind.border : 'neutral') : (kind as TagKind);
 
-  const renderTag = () => (
-    <Wrapper
-      width={width}
-      onClick={onClick}
-      clickable={!!onClick}
-      statusViaBackground={statusViaBackground}
-      border={border}
-      background={background}
-      dimension={dimension}
-      {...props}
-    >
-      {background !== 'neutral' && !statusViaBackground && <Circle background={background} />}
-      {statusViaBackground && icon && <Icon>{icon}</Icon>}
-      {children && <Text ref={textRef}>{children}</Text>}
-    </Wrapper>
-  );
+    const detectOverflow = (element: HTMLElement) => element.offsetWidth < element.scrollWidth;
 
-  return overflow ? (
-    // не связываю тултип и тег через aria-describedby и id, чтобы содержимое тега не зачитывалось дважды
-    <Tooltip renderContent={() => children}>{renderTag()}</Tooltip>
-  ) : (
-    renderTag()
-  );
-};
+    React.useLayoutEffect(() => {
+      const element = textRef.current;
+      if (element && detectOverflow(element) !== overflow) {
+        setOverflow(detectOverflow(element));
+      }
+    }, [children, width]);
+
+    const renderTag = () => (
+      <Wrapper
+        ref={ref}
+        width={width}
+        onClick={onClick}
+        clickable={!!onClick}
+        statusViaBackground={statusViaBackground}
+        border={border}
+        background={background}
+        dimension={dimension}
+        {...props}
+      >
+        {background !== 'neutral' && !statusViaBackground && <Circle background={background} />}
+        {statusViaBackground && icon && <Icon>{icon}</Icon>}
+        {children && <Text ref={textRef}>{children}</Text>}
+        {statusIcon && <StatusIcon>{statusIcon}</StatusIcon>}
+      </Wrapper>
+    );
+
+    return overflow ? (
+      // не связываю тултип и тег через aria-describedby и id, чтобы содержимое тега не зачитывалось дважды
+      <Tooltip renderContent={() => children}>{renderTag()}</Tooltip>
+    ) : (
+      renderTag()
+    );
+  },
+);
 
 Tag.displayName = 'Tag';

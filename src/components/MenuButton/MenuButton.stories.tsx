@@ -7,6 +7,7 @@ import styled, { ThemeProvider } from 'styled-components';
 import { T } from '#src/components/T';
 import { Theme } from '#src/components/themes';
 import { MenuItem, RenderOptionProps } from '#src/components/MenuItem';
+import { ReactComponent as StarSolid } from '@admiral-ds/icons/build/system/StarSolid.svg';
 
 const DarkDiv = styled.div`
   background-color: ${({ theme }) => theme.color['Special/Dark Static Neutral 00']};
@@ -872,6 +873,362 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
   );
 };
 
+const Template4: ComponentStory<typeof MenuButton> = (args) => {
+  const items = [
+    {
+      id: '1',
+      display: 'Option one',
+    },
+    {
+      id: '2',
+      display: (
+        <div style={{ display: 'flex', width: '115px', justifyContent: 'space-between', alignItems: 'center' }}>
+          <MinusCircleOutline width={20} height={20} />
+          Option two
+        </div>
+      ),
+      disabled: true,
+    },
+    {
+      id: '3',
+      display: 'Option three',
+    },
+    {
+      id: '4',
+      display: 'Option four',
+    },
+  ];
+
+  const [selected, setSelected] = React.useState<string | undefined>(undefined);
+  const modelL = React.useMemo(() => {
+    return items.map((item) => ({
+      id: item.id,
+      render: (items: RenderOptionProps) => (
+        <MenuItem dimension="l" {...items} key={item.id}>
+          {item.display}
+        </MenuItem>
+      ),
+      disabled: item.disabled,
+    }));
+  }, []);
+  const modelM = React.useMemo(() => {
+    return items.map((item) => ({
+      id: item.id,
+      render: (items: RenderOptionProps) => (
+        <MenuItem dimension="m" {...items} key={item.id}>
+          {item.display}
+        </MenuItem>
+      ),
+      disabled: item.disabled,
+    }));
+  }, []);
+  const modelS = React.useMemo(() => {
+    return items.map((item) => ({
+      id: item.id,
+      render: (items: RenderOptionProps) => (
+        <MenuItem dimension="s" {...items} key={item.id}>
+          {item.display}
+        </MenuItem>
+      ),
+      disabled: item.disabled,
+    }));
+  }, []);
+
+  return (
+    <>
+      <Wrapper>
+        <WrapperVertical>
+          <T font="Body/Body 1 Long" as="div">
+            Size XL
+          </T>
+          <MenuButton
+            {...args}
+            appearance="primary"
+            dimension="xl"
+            selected={selected}
+            onChange={(id) => {
+              console.log(`selected: ${id}`);
+              setSelected(id);
+            }}
+            items={modelL}
+            onOpen={() => console.log('open menu')}
+            onClose={() => console.log('close menu')}
+          >
+            <StarSolid />
+            Button 56
+          </MenuButton>
+          <MenuButton
+            {...args}
+            appearance="secondary"
+            dimension="xl"
+            selected={selected}
+            onChange={(id) => {
+              console.log(`selected: ${id}`);
+              setSelected(id);
+            }}
+            items={modelL}
+            onOpen={() => console.log('open menu')}
+            onClose={() => console.log('close menu')}
+          >
+            <StarSolid />
+            Button 56
+          </MenuButton>
+          <MenuButton
+            {...args}
+            appearance="ghost"
+            dimension="xl"
+            selected={selected}
+            onChange={(id) => {
+              console.log(`selected: ${id}`);
+              setSelected(id);
+            }}
+            items={modelL}
+            onOpen={() => console.log('open menu')}
+            onClose={() => console.log('close menu')}
+          >
+            <StarSolid />
+            Button 56
+          </MenuButton>
+          <DarkDiv>
+            <MenuButton
+              {...args}
+              appearance="white"
+              dimension="xl"
+              selected={selected}
+              onChange={(id) => {
+                console.log(`selected: ${id}`);
+                setSelected(id);
+              }}
+              items={modelL}
+              onOpen={() => console.log('open menu')}
+              onClose={() => console.log('close menu')}
+            >
+              <StarSolid />
+              Button 56
+            </MenuButton>
+          </DarkDiv>
+        </WrapperVertical>
+        <Separator />
+        <WrapperVertical>
+          <T font="Body/Body 1 Long" as="div">
+            Size L
+          </T>
+          <MenuButton
+            {...args}
+            appearance="primary"
+            dimension="l"
+            selected={selected}
+            onChange={(id) => {
+              console.log(`selected: ${id}`);
+              setSelected(id);
+            }}
+            items={modelL}
+            onOpen={() => console.log('open menu')}
+            onClose={() => console.log('close menu')}
+          >
+            <StarSolid />
+            Button 56
+          </MenuButton>
+          <MenuButton
+            {...args}
+            appearance="secondary"
+            dimension="l"
+            selected={selected}
+            onChange={(id) => {
+              console.log(`selected: ${id}`);
+              setSelected(id);
+            }}
+            items={modelL}
+            onOpen={() => console.log('open menu')}
+            onClose={() => console.log('close menu')}
+          >
+            <StarSolid />
+            Button 56
+          </MenuButton>
+          <MenuButton
+            {...args}
+            appearance="ghost"
+            dimension="l"
+            selected={selected}
+            onChange={(id) => {
+              console.log(`selected: ${id}`);
+              setSelected(id);
+            }}
+            items={modelL}
+            onOpen={() => console.log('open menu')}
+            onClose={() => console.log('close menu')}
+          >
+            <StarSolid />
+            Button 56
+          </MenuButton>
+          <DarkDiv>
+            <MenuButton
+              {...args}
+              appearance="white"
+              dimension="l"
+              selected={selected}
+              onChange={(id) => {
+                console.log(`selected: ${id}`);
+                setSelected(id);
+              }}
+              items={modelL}
+              onOpen={() => console.log('open menu')}
+              onClose={() => console.log('close menu')}
+            >
+              <StarSolid />
+              Button 56
+            </MenuButton>
+          </DarkDiv>
+        </WrapperVertical>
+        <Separator />
+        <WrapperVertical>
+          <T font="Body/Body 1 Long" as="div">
+            Size M
+          </T>
+          <MenuButton
+            {...args}
+            appearance="primary"
+            dimension="m"
+            selected={selected}
+            onChange={(id) => {
+              console.log(`selected: ${id}`);
+              setSelected(id);
+            }}
+            items={modelM}
+            onOpen={() => console.log('open menu')}
+            onClose={() => console.log('close menu')}
+          >
+            <StarSolid />
+            Button 56
+          </MenuButton>
+          <MenuButton
+            {...args}
+            appearance="secondary"
+            dimension="m"
+            selected={selected}
+            onChange={(id) => {
+              console.log(`selected: ${id}`);
+              setSelected(id);
+            }}
+            items={modelM}
+            onOpen={() => console.log('open menu')}
+            onClose={() => console.log('close menu')}
+          >
+            <StarSolid />
+            Button 56
+          </MenuButton>
+          <MenuButton
+            {...args}
+            appearance="ghost"
+            dimension="m"
+            selected={selected}
+            onChange={(id) => {
+              console.log(`selected: ${id}`);
+              setSelected(id);
+            }}
+            items={modelM}
+            onOpen={() => console.log('open menu')}
+            onClose={() => console.log('close menu')}
+          >
+            <StarSolid />
+            Button 56
+          </MenuButton>
+          <DarkDiv>
+            <MenuButton
+              {...args}
+              appearance="white"
+              dimension="m"
+              selected={selected}
+              onChange={(id) => {
+                console.log(`selected: ${id}`);
+                setSelected(id);
+              }}
+              items={modelM}
+              onOpen={() => console.log('open menu')}
+              onClose={() => console.log('close menu')}
+            >
+              <StarSolid />
+              Button 56
+            </MenuButton>
+          </DarkDiv>
+        </WrapperVertical>
+        <Separator />
+        <WrapperVertical>
+          <T font="Body/Body 1 Long" as="div">
+            Size S
+          </T>
+          <MenuButton
+            {...args}
+            appearance="primary"
+            dimension="s"
+            selected={selected}
+            onChange={(id) => {
+              console.log(`selected: ${id}`);
+              setSelected(id);
+            }}
+            items={modelS}
+            onOpen={() => console.log('open menu')}
+            onClose={() => console.log('close menu')}
+          >
+            <StarSolid />
+            Button 56
+          </MenuButton>
+          <MenuButton
+            {...args}
+            appearance="secondary"
+            dimension="s"
+            selected={selected}
+            onChange={(id) => {
+              console.log(`selected: ${id}`);
+              setSelected(id);
+            }}
+            items={modelS}
+            onOpen={() => console.log('open menu')}
+            onClose={() => console.log('close menu')}
+          >
+            <StarSolid />
+            Button 56
+          </MenuButton>
+          <MenuButton
+            {...args}
+            appearance="ghost"
+            dimension="s"
+            selected={selected}
+            onChange={(id) => {
+              console.log(`selected: ${id}`);
+              setSelected(id);
+            }}
+            items={modelS}
+            onOpen={() => console.log('open menu')}
+            onClose={() => console.log('close menu')}
+          >
+            <StarSolid />
+            Button 56
+          </MenuButton>
+          <DarkDiv>
+            <MenuButton
+              {...args}
+              appearance="white"
+              dimension="s"
+              selected={selected}
+              onChange={(id) => {
+                console.log(`selected: ${id}`);
+                setSelected(id);
+              }}
+              items={modelS}
+              onOpen={() => console.log('open menu')}
+              onClose={() => console.log('close menu')}
+            >
+              <StarSolid />
+              Button 56
+            </MenuButton>
+          </DarkDiv>
+        </WrapperVertical>
+      </Wrapper>
+    </>
+  );
+};
+
 export const MenuButtonBase = Template1.bind({});
 MenuButtonBase.args = {};
 MenuButtonBase.storyName = 'MenuButton. Базовый пример.';
@@ -898,6 +1255,17 @@ export const MenuButtonVariants = Template3.bind({});
 MenuButtonVariants.args = {};
 MenuButtonVariants.storyName = 'MenuButton. Размеры и стили.';
 MenuButtonVariants.parameters = {
+  docs: {
+    source: {
+      type: 'code',
+    },
+  },
+};
+
+export const MenuButtonIcon = Template4.bind({});
+MenuButtonIcon.args = {};
+MenuButtonIcon.storyName = 'MenuButton с иконкой';
+MenuButtonIcon.parameters = {
   docs: {
     source: {
       type: 'code',
