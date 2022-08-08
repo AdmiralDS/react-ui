@@ -40,7 +40,7 @@ const disabledColors = css`
   border-color: transparent;
 `;
 
-const BorderedDiv = styled.div<{ status?: InputStatus }>`
+const BorderedDiv = styled.div`
   position: absolute;
   top: 0;
   bottom: 0;
@@ -52,14 +52,16 @@ const BorderedDiv = styled.div<{ status?: InputStatus }>`
   min-width: 0;
 
   background: none;
-  border: 1px solid
-    ${(p) =>
-      p.status === 'error'
-        ? p.theme.color['Error/Error 60 Main']
-        : p.status === 'success'
-        ? p.theme.color['Success/Success 50 Main']
-        : p.theme.color['Neutral/Neutral 40']};
+  border: 1px solid ${(props) => props.theme.color['Neutral/Neutral 40']};
   border-radius: inherit;
+
+  [data-status='error'] & {
+    border: 1px solid ${(props) => props.theme.color['Error/Error 60 Main']};
+  }
+
+  [data-status='success'] & {
+    border: 1px solid ${(props) => props.theme.color['Success/Success 50 Main']};
+  }
 
   [data-read-only] & {
     border-color: transparent;
@@ -310,7 +312,7 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
           rows={textRows}
           onChange={onChange}
         />
-        <BorderedDiv status={status} />
+        <BorderedDiv />
         {iconCount > 0 && (
           <IconPanel disabled={props.disabled} dimension={props.dimension}>
             {iconArray}
