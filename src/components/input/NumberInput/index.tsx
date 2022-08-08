@@ -34,15 +34,15 @@ const horizontalPaddingValue = (props: { dimension?: ComponentDimension }) => {
 
 const PlusMinusIcon = styled(InputIconButton)<{ disabled?: boolean }>`
   ${({ disabled, theme }) =>
-          disabled
-                  ? css`
-                    pointer-events: none;
+    disabled
+      ? css`
+          pointer-events: none;
 
-                    & *[fill^='#'] {
-                      fill: ${theme.color['Neutral/Neutral 30']};
-                    }
-                  `
-                  : ''}
+          & *[fill^='#'] {
+            fill: ${theme.color['Neutral/Neutral 30']};
+          }
+        `
+      : ''}
 `;
 
 const iconSizeValue = (props: { dimension?: ComponentDimension }) => {
@@ -101,7 +101,7 @@ const Wrapper = styled(HeightLimitedContainer)<{
     return props.theme.color['Neutral/Neutral 00'];
   }};
   color: ${(props) =>
-          props.disabled ? props.theme.color['Neutral/Neutral 30'] : props.theme.color['Neutral/Neutral 90']};
+    props.disabled ? props.theme.color['Neutral/Neutral 30'] : props.theme.color['Neutral/Neutral 90']};
   ${(props) => (props.dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
   overflow: hidden;
 `;
@@ -154,7 +154,7 @@ export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       onBlur,
       ...props
     },
-    ref
+    ref,
   ) => {
     const [plusDisabled, setPlusDisabled] = React.useState(false);
     const [minusDisabled, setMinusDisabled] = React.useState(false);
@@ -228,7 +228,7 @@ export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
             }
           }}
           aria-hidden
-        />
+        />,
       );
     }
 
@@ -247,7 +247,7 @@ export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
           onClick={handlePlus}
           disabled={props.disabled || plusDisabled}
           aria-hidden
-        />
+        />,
       );
     }
 
@@ -348,7 +348,7 @@ export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
         )}
       </Wrapper>
     );
-  }
+  },
 );
 
 NumberInput.displayName = 'NumberInput';
