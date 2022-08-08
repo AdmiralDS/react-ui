@@ -87,12 +87,19 @@ const colorsBorderAndBackground = css<{ disabled?: boolean }>`
     border: 1px solid ${(props) => props.theme.color['Error/Error 60 Main']};
   }
 
-  [data-status='error'] &:hover + ${BorderedDiv}, [data-status='error'] &:focus + ${BorderedDiv} {
-    border: 1px solid ${(props) => props.theme.color['Error/Error 60 Main']};
+  [data-status='error'] &:hover + ${BorderedDiv} {
+    border: 1px solid ${(props) => props.theme.color['Error/Error 70']};
+
+  [data-status='success'] &:hover + ${BorderedDiv} {
+    border: 1px solid ${(props) => props.theme.color['Success/Success 60']};
   }
 
-  [data-status='success'] &:hover + ${BorderedDiv}, [data-status='success'] &:focus + ${BorderedDiv} {
-    border: 1px solid ${(props) => props.theme.color['Success/Success 50 Main']};
+  [data-status='error'] &:focus + ${BorderedDiv} {
+    border: 2px solid ${(props) => props.theme.color['Error/Error 60 Main']};
+  }
+
+  [data-status='success'] &:focus + ${BorderedDiv} {
+    border: 2px solid ${(props) => props.theme.color['Success/Success 50 Main']};
   }
 
   [data-read-only] &,
