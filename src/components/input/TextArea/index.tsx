@@ -35,7 +35,12 @@ const extraPadding = css<ExtraProps>`
   padding-right: ${(props) => (props.iconCount ? iconSizeValue(props) + 8 : horizontalPaddingValue(props))}px;
 `;
 
-const BorderedDiv = styled.div<{ status?: InputStatus; readOnly?: boolean; disabled?: boolean }>`
+const disabledColors = css`
+  background-color: ${(props) => props.theme.color['Neutral/Neutral 10']};
+  border-color: transparent;
+`;
+
+const BorderedDiv = styled.div<{ status?: InputStatus }>`
   position: absolute;
   top: 0;
   bottom: 0;
@@ -55,12 +60,26 @@ const BorderedDiv = styled.div<{ status?: InputStatus; readOnly?: boolean; disab
         ? p.theme.color['Success/Success 50 Main']
         : p.theme.color['Neutral/Neutral 40']};
   border-radius: inherit;
-  ${(p) => (p.disabled || p.readOnly ? `border-color: transparent;` : ``)}
+
+  [data-read-only] & {
+    border-color: transparent;
+  }
 `;
 
-const colorsBorderAndBackground = css<{ disabled?: boolean; status?: InputStatus; readOnly?: boolean }>`
-  background-color: ${(p) =>
-    p.disabled || p.readOnly ? p.theme.color['Neutral/Neutral 10'] : p.theme.color['Neutral/Neutral 00']};
+const colorsBorderAndBackground = css<{ disabled?: boolean; status?: InputStatus }>`
+  background-color: ${(props) => props.theme.color['Neutral/Neutral 00']};
+
+  &:focus + ${BorderedDiv} {
+    border: 2px solid ${(props) => props.theme.color['Primary/Primary 60 Main']};
+  }
+
+  &:disabled + ${BorderedDiv}, [data-read-only] & + ${BorderedDiv} {
+    border-color: transparent;
+  }
+
+  &:hover:not(:focus) + ${BorderedDiv} {
+    border-color: ${(props) => (props.disabled ? 'transparent' : props.theme.color['Neutral/Neutral 60'])};
+  }
 
   &:invalid + ${BorderedDiv}, &:invalid:hover + ${BorderedDiv} {
     border: 1px solid ${(props) => props.theme.color['Error/Error 60 Main']};
@@ -73,11 +92,15 @@ const colorsBorderAndBackground = css<{ disabled?: boolean; status?: InputStatus
         : p.status === 'success'
         ? `border: 1px solid ${p.theme.color['Success/Success 50 Main']};`
         : ``}
-    ${(p) => (!(p.disabled || p.readOnly) ? `border-color: ${p.theme.color['Neutral/Neutral 60']};` : ``)}
   }
 
-  &:focus + ${BorderedDiv} {
-    ${(p) => (!(p.disabled || p.readOnly) ? `border: 2px solid ${p.theme.color['Primary/Primary 60 Main']};` : ``)}
+  [data-read-only] &,
+  &:disabled {
+    ${disabledColors}
+  }
+
+  [data-read-only] &:hover + ${BorderedDiv}, [data-read-only] &:focus + ${BorderedDiv} {
+    border-color: transparent;
   }
 `;
 
@@ -288,7 +311,7 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
           rows={textRows}
           onChange={onChange}
         />
-        <BorderedDiv status={status} disabled={props.disabled} readOnly={props.readOnly} />
+        <BorderedDiv status={status} />
         {iconCount > 0 && (
           <IconPanel disabled={props.disabled} dimension={props.dimension}>
             {iconArray}
