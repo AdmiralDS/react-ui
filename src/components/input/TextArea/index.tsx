@@ -139,7 +139,8 @@ const Text = styled.textarea<ExtraProps>`
     color: ${(props) => props.theme.color['Neutral/Neutral 50']};
   }
 
-  &:disabled::placeholder {
+  &:disabled::placeholder,
+  &:disabled {
     color: ${(props) => props.theme.color['Neutral/Neutral 30']};
   }
 
