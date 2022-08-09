@@ -13,7 +13,6 @@ import {
   ExpandedRowContent,
   ExpandIcon,
   ExpandIconWrapper,
-  ExtraText,
   Filler,
   Header,
   HeaderCell,
@@ -27,12 +26,12 @@ import {
   SortIcon,
   StickyWrapper,
   TableContainer,
-  Title,
   TitleContent,
   EmptyMessage,
   SortOrder,
   SortIconWrapper,
 } from './style';
+import { TitleText } from './TitleText';
 import { VirtualBody } from './VirtualBody';
 import { OverflowMenu } from './OverflowMenu';
 import { getScrollbarSize } from '#src/components/common/dom/scrollbarUtil';
@@ -463,11 +462,13 @@ export const Table: React.FC<TableProps> = ({
             onClick={sortable ? () => handleSort(name, sort || 'initial') : undefined}
           >
             <TitleContent dimension={dimension} sortable={sortable}>
-              <Title lineClamp={headerLineClamp}>{title}</Title>
+              <TitleText width={width} dimension={dimension} lineClamp={headerLineClamp}>
+                {title}
+              </TitleText>
               {extraText && (
-                <ExtraText dimension={dimension} lineClamp={headerExtraLineClamp}>
+                <TitleText extraText width={width} dimension={dimension} lineClamp={headerExtraLineClamp}>
                   {extraText}
-                </ExtraText>
+                </TitleText>
               )}
             </TitleContent>
             {sortable && (
