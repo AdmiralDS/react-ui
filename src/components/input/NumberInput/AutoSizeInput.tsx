@@ -89,8 +89,8 @@ const colorsBorderAndBackground = css<{ disabled?: boolean }>`
     border: 1px solid ${(props) => props.theme.color['Success/Success 50 Main']};
   }
 
-  [data-read-only] &,
-  &:disabled {
+  [data-read-only] &&&,
+  &&&:disabled {
     background-color: ${(props) => props.theme.color['Neutral/Neutral 10']};
   }
 
