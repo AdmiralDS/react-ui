@@ -2,6 +2,30 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.9.0](https://github.com/AdmiralDS/react-ui/compare/v1.8.0...v1.9.0) (2022-08-09)
+
+
+### Features
+
+* **FieldSet:** add example with required mark for Checkboxes ([cb3a63f](https://github.com/AdmiralDS/react-ui/commit/cb3a63f934240e0f7078d5b8cd4766bb8955aba9))
+* **MenuButton:** add example with icons ([c900e70](https://github.com/AdmiralDS/react-ui/commit/c900e7079870ed2ed0df2a9701679127afd777b5))
+* **Table:** add multi level sort ([4b622f4](https://github.com/AdmiralDS/react-ui/commit/4b622f4a2e53a9b0df9af9b8ed8e630bb76206eb))
+* **TagMenu:** add TagMenu component ([5c11698](https://github.com/AdmiralDS/react-ui/commit/5c116984f1218a9fad73db535ab0b27c27508eed))
+* **themes:** add new color Special/Dark Static Neutral 70 ([ab64a2d](https://github.com/AdmiralDS/react-ui/commit/ab64a2d0ea51d97477ae1d9df5d818ec9b0abb89))
+* **themes:** change Modal opacity level to 60% in Dark theme ([7d432ac](https://github.com/AdmiralDS/react-ui/commit/7d432ac6b1ef4baeed293727b1def2cb19beb904))
+
+
+### Bug Fixes
+
+* **Badge:** display badge with value 0 ([9603b77](https://github.com/AdmiralDS/react-ui/commit/9603b77157d999db349f33bbdb65a75ae5f3b01b))
+* **Checkbox:** add stories examples ([c762835](https://github.com/AdmiralDS/react-ui/commit/c762835d5a8ae6683a6e7d36bd9047352553b3e9))
+* **Field:** label text-align ([4130b77](https://github.com/AdmiralDS/react-ui/commit/4130b7791692c429b142b914b32e120bfc2436f0))
+* **FieldSet:** place '*' after legend when required ([5a69ca4](https://github.com/AdmiralDS/react-ui/commit/5a69ca41be39bd1d998eb65fb9ef455aacc208a9))
+* **FieldSet:** set legend font color with error status ([19f788f](https://github.com/AdmiralDS/react-ui/commit/19f788f7bc98def6ed662fbaacb64323cd05a30d))
+* **NumberInput:** fix bug with input size and placeholder ([2820458](https://github.com/AdmiralDS/react-ui/commit/2820458fcc9bb336a5be00a31b81b34f433ee279))
+* **Select:** enable pointer events on disabled control ([b61b3a2](https://github.com/AdmiralDS/react-ui/commit/b61b3a22a9162b32c84b00caff217187d9a016bd))
+* **Table:** add tooltip for column title if text is overflow ([d0fa896](https://github.com/AdmiralDS/react-ui/commit/d0fa896ed7cdc687411d6c9a03ec521220f591f8))
+
 ## [1.8.0](https://github.com/AdmiralDS/react-ui/compare/v1.7.0...v1.8.0) (2022-07-28)
 
 
