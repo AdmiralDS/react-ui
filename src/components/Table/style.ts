@@ -44,7 +44,7 @@ export const OverflowMenuWrapper = styled.div<{ $offset: number; dimension: Tabl
   justify-content: center;
   position: absolute;
   z-index: 5;
-  ${overflowMenuStyle}
+  ${overflowMenuStyle};
   visibility: hidden;
 
   &:hover {
@@ -145,6 +145,10 @@ export const ExpandIcon = styled(OpenStatusButton)`
   }
 `;
 
+export const SortIconWrapper = styled.div`
+  position: relative;
+`;
+
 export const SortIcon = styled(ArrowUpOutline)<{ sort: 'asc' | 'desc' | 'initial' }>`
   display: flex;
   flex-shrink: 0;
@@ -156,6 +160,19 @@ export const SortIcon = styled(ArrowUpOutline)<{ sort: 'asc' | 'desc' | 'initial
     fill: ${({ theme, sort }) => (sort === 'initial' ? 'transparent' : theme.color['Primary/Primary 60 Main'])};
   }
   ${({ sort }) => (sort === 'desc' ? 'transform: rotate(180deg);' : '')}
+`;
+
+export const SortOrder = styled.div`
+  position: absolute;
+  top: 1px;
+  right: 0;
+  font-family: 'VTB Group UI', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 8px;
+  line-height: 9px;
+  font-feature-settings: 'tnum' on, 'lnum' on;
+  color: ${(p) => p.theme.color['Primary/Primary 60 Main']};
 `;
 
 export const Cell = styled.div<{ dimension: TableProps['dimension'] }>`
@@ -258,6 +275,12 @@ export const HeaderCellTitle = styled.div<{ sort: 'asc' | 'desc' | 'initial' }>`
     *[fill^='#'] {
       fill: ${({ theme, sort }) =>
         sort === 'initial' ? theme.color['Neutral/Neutral 50'] : theme.color['Primary/Primary 70']};
+    }
+    
+    ${SortOrder} {
+      color: ${({ theme, sort }) =>
+        sort === 'initial' ? theme.color['Neutral/Neutral 50'] : theme.color['Primary/Primary 70']};
+    };
     }
   }
 `;

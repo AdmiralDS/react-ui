@@ -334,6 +334,22 @@ export const rowListSort: RowData[] = [
     currency: 'RUB',
     rate: 4,
   },
+  {
+    id: '0006',
+    transfer_type: 'МНО',
+    transfer_date: new Date('2021-04-05').toLocaleDateString(),
+    transfer_amount: numberFormatter.format(700_000),
+    currency: 'RUB',
+    rate: 1,
+  },
+  {
+    id: '0007',
+    transfer_type: 'МНО',
+    transfer_date: new Date('2019-12-01').toLocaleDateString(),
+    transfer_amount: numberFormatter.format(500_000),
+    currency: 'RUB',
+    rate: 4,
+  },
 ];
 
 export const columnListLineClamp: Column[] = [

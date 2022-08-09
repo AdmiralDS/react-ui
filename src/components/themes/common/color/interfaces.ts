@@ -33,6 +33,7 @@ export type Color = {
   'Special/Dark Static Neutral 20': string;
   'Special/Dark Static Neutral 30': string;
   'Special/Dark Static Neutral 50': string;
+  'Special/Dark Static Neutral 70': string;
   'Special/Dark Static Neutral 80': string;
   'Special/Dark Static Neutral 90': string;
   'Special/Dark Static Primary 60': string;

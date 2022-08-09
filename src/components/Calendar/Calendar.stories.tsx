@@ -7,6 +7,7 @@ import { Calendar, CalendarPropType } from './index';
 import { ViewScreenType } from './interfaces';
 import { ThemeProvider } from 'styled-components';
 import { Theme } from '#src/components/themes';
+import { T } from '#src/components/T';
 
 export default {
   title: 'Admiral-2.1/Calendar',
@@ -71,7 +72,6 @@ export default {
 const Template1: ComponentStory<typeof Calendar> = (args) => {
   const [selected, setSelected] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
-  const [opened, setOpened] = React.useState(false);
 
   function swapBorder(theme: Theme): Theme {
     theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
@@ -196,9 +196,15 @@ const Template5: ComponentStory<typeof Calendar> = ({ range, ...args }: Calendar
 
   return (
     <>
-      <h3>Коллбеки (смотри в консоль)</h3>
-      <p>Открытие экранов выбора года и месяца `(onViewEnter, onViewLeave)`</p>
-      <p>Изменение даты после выбора года или месяца по стрелкам `(onIncreaseDecreaseDate)`</p>
+      <T font="Body/Body 1 Long" as="div" style={{ marginBottom: '25px' }}>
+        Коллбеки (смотри в консоль)
+      </T>
+      <T font="Body/Body 2 Long" as="div">
+        Открытие экранов выбора года и месяца `(onViewEnter, onViewLeave)`
+      </T>
+      <T font="Body/Body 2 Long" as="div" style={{ marginBottom: '25px' }}>
+        Изменение даты после выбора года или месяца по стрелкам `(onIncreaseDecreaseDate)`
+      </T>
 
       <Calendar
         {...args}
@@ -226,7 +232,9 @@ const Template6: ComponentStory<typeof Calendar> = ({ range, ...args }: Calendar
 
   return (
     <>
-      <h3>Переключение экранов выбора дат - месяц/год/день</h3>
+      <T font="Body/Body 1 Long" as="div" style={{ marginBottom: '25px' }}>
+        Переключение экранов выбора дат - месяц/год/день
+      </T>
       <div style={{ display: 'flex' }}>
         <Button dimension="s" onClick={() => setCurrentActiveView('MONTH')}>
           Month
@@ -278,7 +286,9 @@ const Template7: ComponentStory<typeof Calendar> = ({ range, ...args }: Calendar
 
   return (
     <>
-      <h3>Открытие экрана выбора месяца после выбора года</h3>
+      <T font="Body/Body 1 Long" as="div" style={{ marginBottom: '25px' }}>
+        Открытие экрана выбора месяца после выбора года
+      </T>
       <Calendar
         {...args}
         selected={selected}
@@ -305,8 +315,12 @@ const Template8: ComponentStory<typeof Calendar> = ({ range, ...args }: Calendar
 
   return (
     <>
-      <h3>Показываем только экраны выбора месяца и года</h3>
-      <p>Если выставлен currentActiveViewImportant, то необходимо самому управлять открытием экранов</p>
+      <T font="Body/Body 1 Long" as="div" style={{ marginBottom: '25px' }}>
+        Показываем только экраны выбора месяца и года
+      </T>
+      <T font="Body/Body 2 Long" as="div" style={{ marginBottom: '25px' }}>
+        Если выставлен currentActiveViewImportant, то необходимо самому управлять открытием экранов
+      </T>
       <div>
         <Button onClick={() => setSelected(new Date())}>set Date now</Button>
       </div>

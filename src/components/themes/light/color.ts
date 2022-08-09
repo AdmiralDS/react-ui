@@ -35,6 +35,7 @@ export const COLOR: Color = {
   'Special/Dark Static Neutral 20': '#3A3C41',
   'Special/Dark Static Neutral 30': '#4E5158',
   'Special/Dark Static Neutral 50': '#7B8088',
+  'Special/Dark Static Neutral 70': '#A7ABB3',
   'Special/Dark Static Neutral 80': '#CDD0D6',
   'Special/Dark Static Neutral 90': '#EBEDF0',
   'Special/Dark Static Primary 60': '#3481FF',
