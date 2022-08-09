@@ -35,11 +35,11 @@ export const BorderedDiv = styled.div`
   border: 1px solid ${(props) => props.theme.color['Neutral/Neutral 40']};
   border-radius: inherit;
 
-  [data-status='error'] & {
+  [data-status='error'] &&& {
     border: 1px solid ${(props) => props.theme.color['Error/Error 60 Main']};
   }
 
-  [data-status='success'] & {
+  [data-status='success'] &&& {
     border: 1px solid ${(props) => props.theme.color['Success/Success 50 Main']};
   }
 `;
@@ -160,7 +160,14 @@ const disabledStyle = css`
 const focusedStyle = css`
   ${BorderedDiv} {
     border: 2px solid ${(props) => props.theme.color['Primary/Primary 60 Main']};
-  }
+
+    [data-status='error'] &&& {
+      border: 2px solid ${(props) => props.theme.color['Error/Error 60 Main']};
+    }
+
+    [data-status='success'] &&& {
+      border: 2px solid ${(props) => props.theme.color['Success/Success 50 Main']};
+    }
 `;
 
 export const IconPanel = styled.div<{ multiple?: boolean; dimension?: ComponentDimension }>`
@@ -203,6 +210,19 @@ export const SelectWrapper = styled.div<{
     disabled || readonly ? theme.color['Neutral/Neutral 10'] : theme.color['Neutral/Neutral 00']};
   ${({ disabled, readonly }) => (readonly || disabled ? disabledStyle : '')};
   ${({ focused, readonly }) => (focused && !readonly ? focusedStyle : '')};
+
+  &:hover ${BorderedDiv} {
+    border-color: ${(props) => (props.disabled ? 'transparent' : props.theme.color['Neutral/Neutral 60'])};
+  }
+
+  [data-status='error'] &&&:hover:not(:disabled) ${BorderedDiv} {
+    border: 1px solid ${(props) => props.theme.color['Error/Error 70']};
+  }
+
+  [data-status='success'] &&&:hover:not(:disabled) ${BorderedDiv} {
+    border: 1px solid ${(props) => props.theme.color['Success/Success 60']};
+  }
+  }
 
   padding: ${({ dimension, multiple }) => {
     switch (dimension) {
