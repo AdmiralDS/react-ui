@@ -124,6 +124,10 @@ export const Input = styled.input<{ dimension?: ComponentDimension; isMultiple?:
     color: ${(props) => props.theme.color['Neutral/Neutral 50']};
   }
 
+  &:read-only {
+    cursor: inherit;
+  }
+
   &:disabled,
   &:disabled::placeholder {
     cursor: inherit;
@@ -140,9 +144,13 @@ export const Input = styled.input<{ dimension?: ComponentDimension; isMultiple?:
   ${ieFixes};
 `;
 
-const disabledStyle = css`
+const disableEventMixin = css`
   pointer-events: none;
   cursor: default;
+`;
+
+const disabledStyle = css`
+  ${disableEventMixin}
 
   & ${BorderedDiv} {
     border-color: transparent;
@@ -209,8 +217,8 @@ export const SelectWrapper = styled.div<{
 
   border-radius: ${(p) => (p.skeleton ? 0 : mediumGroupBorderRadius(p.theme.shape))};
 
-  pointer-events: ${(p) => (p.skeleton ? 'none' : 'all')};
-  ${({ skeleton }) => skeleton && skeletonMixin}};
+  ${({ skeleton }) => skeleton && skeletonMixin};
+  ${({ skeleton }) => skeleton && disableEventMixin};
 `;
 
 export const Hidden = styled.div`
