@@ -453,9 +453,11 @@ export const Table: React.FC<TableProps> = ({
             onClick={sortable ? () => handleSort(name, sort || 'initial') : undefined}
           >
             <TitleContent dimension={dimension} sortable={sortable}>
-              <TitleText lineClamp={headerLineClamp}>{title}</TitleText>
+              <TitleText width={width} dimension={dimension} lineClamp={headerLineClamp}>
+                {title}
+              </TitleText>
               {extraText && (
-                <TitleText extraText dimension={dimension} lineClamp={headerExtraLineClamp}>
+                <TitleText extraText width={width} dimension={dimension} lineClamp={headerExtraLineClamp}>
                   {extraText}
                 </TitleText>
               )}

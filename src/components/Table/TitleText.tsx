@@ -1,15 +1,17 @@
 import * as React from 'react';
 import { Tooltip } from '#src/components/Tooltip';
+
 import { Title, ExtraText } from './style';
 
 type TitleTextProps = {
+  width: string | number;
   lineClamp: number;
   children: React.ReactNode;
   dimension?: 'xl' | 'l' | 'm' | 's';
   extraText?: boolean;
 };
 
-export const TitleText: React.FC<TitleTextProps> = ({ lineClamp, extraText, dimension, children }) => {
+export const TitleText: React.FC<TitleTextProps> = ({ lineClamp, dimension, width, extraText, children }) => {
   const textRef = React.useRef<HTMLDivElement>(null);
   const [overflow, setOverflow] = React.useState(false);
 
@@ -21,7 +23,7 @@ export const TitleText: React.FC<TitleTextProps> = ({ lineClamp, extraText, dime
     if (element && detectOverflow(element) !== overflow) {
       setOverflow(detectOverflow(element));
     }
-  });
+  }, [children, lineClamp, dimension, width, extraText]);
 
   const renderTitle = () =>
     extraText ? (
