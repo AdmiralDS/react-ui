@@ -245,7 +245,7 @@ export const AutoSizeInput = React.forwardRef<HTMLInputElement, InputProps>(
       if (inputRef.current) {
         updateInputWidth(inputRef.current.value);
       }
-    }, [props.value, props.defaultValue, props.dimension]);
+    }, [props.value, props.defaultValue, props.dimension, placeholder]);
 
     // recalculation on resize. For example, it happens after fonts loading
     React.useLayoutEffect(() => {
@@ -264,7 +264,7 @@ export const AutoSizeInput = React.forwardRef<HTMLInputElement, InputProps>(
           observer.unobserve();
         };
       }
-    }, [sizerRef.current]);
+    }, [sizerRef.current, placeholder]);
 
     const handleMouseDown = (e: React.MouseEvent<HTMLInputElement>) => {
       // отменяю всплытие события, чтобы не сработал onMouseDown на Content и фокус не был снова установлен
