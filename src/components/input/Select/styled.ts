@@ -171,7 +171,7 @@ export const IconPanel = styled.div<{ multiple?: boolean; dimension?: ComponentD
     height: ${({ dimension }) => (dimension === 's' ? 20 : 24)}px;
   }
 
-  [data-disabled='true'] & {
+  [data-disabled='true'] &&& {
     & *[fill^='#'] {
       fill: ${(props) => props.theme.color['Neutral/Neutral 30']};
     }
