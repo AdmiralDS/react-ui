@@ -73,15 +73,12 @@ const colorsBorderAndBackground = css<{ disabled?: boolean }>`
     border-color: transparent;
   }
 
-  &[data-status='error']:focus + ${BorderedDiv} {
+  &[data-status='error']:focus + ${BorderedDiv}, &:invalid:focus + ${BorderedDiv} {
     border: 2px solid ${(props) => props.theme.color['Error/Error 60 Main']};
   }
 
   &:invalid + ${BorderedDiv} {
     border: 1px solid ${(props) => props.theme.color['Error/Error 60 Main']};
-  }
-  &:invalid:focus + ${BorderedDiv} {
-    border: 2px solid ${(props) => props.theme.color['Error/Error 60 Main']};
   }
 
   &[data-status='success']:focus + ${BorderedDiv} {

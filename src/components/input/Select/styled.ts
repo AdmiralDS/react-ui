@@ -241,7 +241,8 @@ export const SelectWrapper = styled.div<{
     `}
   }
 
-  &[data-status='error'] {
+  &[data-status='error'],
+  &:invalid {
     ${(props) =>
       !props.disabled &&
       !props.readonly &&
