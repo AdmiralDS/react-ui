@@ -138,6 +138,7 @@ export const Chips: FC<ChipsProps> = ({
               <CloseIconWrapperStyled
                 appearance={appearance}
                 disabled={disabled}
+                selected={selected}
                 onClick={disabled ? void 0 : handleClickCloseIcon}
               />
             </IconWrapperStyled>

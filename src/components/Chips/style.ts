@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import { ReactComponent as CloseOutline } from '@admiral-ds/icons/build/service/CloseOutline.svg';
-import { TYPOGRAPHY } from '#src/components/Typography';
+import { typography } from '#src/components/Typography';
 import type { ChipAppearance, ChipDimension } from '#src/components/Chips';
 import { Badge } from '#src/components/Badge';
 
@@ -82,18 +82,13 @@ const paddings = css<{ dimension: ChipDimension }>`
   }};
 `;
 
-const typography = css<{
+const chipTypography = css<{
   dimension: ChipDimension;
   disabled?: boolean;
   selected?: boolean;
   appearance?: ChipAppearance;
 }>`
-  font-family: ${TYPOGRAPHY.fontFamily};
-  font-style: normal;
-  font-weight: normal;
-  font-size: ${({ dimension }) => (dimension === 's' ? '12px' : '14px')};
-  line-height: ${({ dimension }) => (dimension === 's' ? '16px' : '20px')};
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  ${({ dimension }) => (dimension === 's' ? typography['Caption/Caption 1'] : typography['Body/Body 2 Long'])}
   color: ${({ theme, appearance, disabled, selected }) => {
     if (disabled && !selected) return theme.color['Neutral/Neutral 30'];
 
@@ -186,10 +181,6 @@ export const ChipComponentStyled = styled.div<{
   max-width: 190px;
   user-select: none;
   pointer-events: ${({ disabled }) => (disabled ? 'none' : 'auto')};
-  & *[fill^='#'] {
-    fill: ${({ theme, appearance, disabled }) =>
-      appearance === 'filled' || disabled ? theme.color['Neutral/Neutral 50'] : theme.color['Primary/Primary 60 Main']};
-  }
   cursor: ${({ defaultChip, disabled }) => (defaultChip && !disabled ? 'pointer' : 'default')};
   ${colorsBorderAndBackground}
   ${heights}
@@ -199,10 +190,11 @@ export const ChipComponentStyled = styled.div<{
       ? `padding-right: ${p.dimension === 's' ? 4 : 6}px;
          padding-left: ${p.dimension === 's' ? 8 : 12}px;`
       : ''}
-  ${typography}
+  ${chipTypography}
 `;
 export const CloseIconWrapperStyled = styled(CloseOutline)<{
   disabled?: boolean;
+  selected?: boolean;
   appearance?: ChipAppearance;
 }>`
   cursor: ${({ disabled }) => (disabled ? 'default' : 'pointer')};
@@ -211,8 +203,10 @@ export const CloseIconWrapperStyled = styled(CloseOutline)<{
     outline: none;
     cursor: pointer;
     & *[fill^='#'] {
-      fill: ${({ theme, appearance }) =>
-        appearance === 'filled' ? theme.color['Neutral/Neutral 50'] : theme.color['Primary/Primary 60 Main']};
+      fill: ${({ theme, appearance, selected }) => {
+        if (selected) return theme.color['Special/Static White'];
+        return appearance === 'filled' ? theme.color['Neutral/Neutral 50'] : theme.color['Primary/Primary 60 Main'];
+      }};
     }
   }
 
@@ -220,7 +214,10 @@ export const CloseIconWrapperStyled = styled(CloseOutline)<{
     outline: none;
     border: none;
     & *[fill^='#'] {
-      fill: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
+      fill: ${({ theme, appearance, selected }) => {
+        if (selected) return theme.color['Special/Static White'];
+        return appearance === 'filled' ? theme.color['Neutral/Neutral 50'] : theme.color['Primary/Primary 60 Main'];
+      }};
     }
   }
 `;
@@ -253,8 +250,10 @@ export const ChipContentWrapperStyled = styled.div<{
         if (selected) {
           return theme.color['Special/Static White'];
         }
-        return appearance === 'filled' || disabled
+        return disabled
           ? theme.color['Neutral/Neutral 30']
+          : appearance === 'filled'
+          ? theme.color['Neutral/Neutral 50']
           : theme.color['Primary/Primary 60 Main'];
       }};
     }
