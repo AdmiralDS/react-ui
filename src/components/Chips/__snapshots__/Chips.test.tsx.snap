@@ -28,15 +28,11 @@ Object {
   padding: 6px 12px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
-  font-weight: normal;
+  font-weight: 400;
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
   color: #22242A;
-}
-
-.c0 *[fill^='#'] {
-  fill: #74777F;
 }
 
 .c0:hover {
@@ -86,7 +82,7 @@ Object {
 }
 
 .c1 svg *[fill^='#'] {
-  fill: #B1B5BB;
+  fill: #74777F;
 }
 
 .c2 {
@@ -139,15 +135,11 @@ Object {
   padding: 6px 12px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
-  font-weight: normal;
+  font-weight: 400;
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
   color: #22242A;
-}
-
-.c0 *[fill^='#'] {
-  fill: #74777F;
 }
 
 .c0:hover {
@@ -197,7 +189,7 @@ Object {
 }
 
 .c1 svg *[fill^='#'] {
-  fill: #B1B5BB;
+  fill: #74777F;
 }
 
 .c2 {
@@ -305,15 +297,11 @@ Object {
   padding: 6px 12px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
-  font-weight: normal;
+  font-weight: 400;
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
   color: #FFFFFF;
-}
-
-.c0 *[fill^='#'] {
-  fill: #0062FF;
 }
 
 .c0:hover {
@@ -416,15 +404,11 @@ Object {
   padding: 6px 12px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
-  font-weight: normal;
+  font-weight: 400;
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
   color: #FFFFFF;
-}
-
-.c0 *[fill^='#'] {
-  fill: #0062FF;
 }
 
 .c0:hover {
@@ -582,15 +566,11 @@ Object {
   padding: 6px 12px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
-  font-weight: normal;
+  font-weight: 400;
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
   color: #0062FF;
-}
-
-.c0 *[fill^='#'] {
-  fill: #0062FF;
 }
 
 .c0:hover {
@@ -693,15 +673,11 @@ Object {
   padding: 6px 12px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
-  font-weight: normal;
+  font-weight: 400;
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
   color: #0062FF;
-}
-
-.c0 *[fill^='#'] {
-  fill: #0062FF;
 }
 
 .c0:hover {
