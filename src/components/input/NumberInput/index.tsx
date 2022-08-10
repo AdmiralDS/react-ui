@@ -12,7 +12,7 @@ import { InputIconButton } from '#src/components/InputIconButton';
 
 import { HeightLimitedContainer } from '../Container';
 
-import { AutoSizeInput } from './AutoSizeInput';
+import { AutoSizeInput, BorderedDiv } from './AutoSizeInput';
 import { clearValue, fitToCurrency, validateThousand } from './utils';
 
 export { fitToCurrency, clearValue } from './utils';
@@ -95,6 +95,7 @@ const Wrapper = styled(HeightLimitedContainer)<{
   dimension?: ComponentDimension;
   readOnly?: boolean;
   skeleton?: boolean;
+  status?: TextInputProps['status'];
 }>`
   background-color: ${(props) => {
     if (props.disabled || props.readOnly) return props.theme.color['Neutral/Neutral 10'];
@@ -104,6 +105,19 @@ const Wrapper = styled(HeightLimitedContainer)<{
     props.disabled ? props.theme.color['Neutral/Neutral 30'] : props.theme.color['Neutral/Neutral 90']};
   ${(props) => (props.dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
   overflow: hidden;
+
+  &:hover:not(:focus-within) ${BorderedDiv} {
+    border: 1px solid
+      ${(props) => {
+        if (props.disabled || props.readOnly) return 'transparent';
+        if (props.status === 'error') return props.theme.color['Error/Error 70'];
+        if (props.status === 'success') return props.theme.color['Success/Success 60'];
+        return props.theme.color['Neutral/Neutral 60'];
+      }};
+  }
+  &:hover:not(:focus-within) input:invalid + ${BorderedDiv} {
+    border: 1px solid ${(props) => props.theme.color['Error/Error 70']};
+  }
 `;
 
 export interface NumberInputProps extends TextInputProps {
@@ -320,6 +334,7 @@ export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
         readOnly={props.readOnly}
         data-read-only={props.readOnly ? true : undefined}
         skeleton={skeleton}
+        status={status}
       >
         <Content
           data-align={align}
