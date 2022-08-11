@@ -389,7 +389,13 @@ const TemplateWithCheckbox: ComponentStory<typeof DropMenu> = (args) => {
       id: item.id,
       render: (options: RenderOptionProps) => (
         <MenuItem dimension={args.dimension || 's'} {...options} key={item.id}>
-          <CheckboxField disabled={item.disabled} readOnly={true} key={item.id} checked={checkedState[index].checked}>
+          <CheckboxField
+            dimension={args.dimension !== 's' ? 'm' : args.dimension}
+            disabled={item.disabled}
+            readOnly={true}
+            key={item.id}
+            checked={checkedState[index].checked}
+          >
             {item.label}
           </CheckboxField>
         </MenuItem>
@@ -441,7 +447,13 @@ const TemplateWithRadiobutton: ComponentStory<typeof DropMenu> = (args) => {
       id: item.id,
       render: (options: RenderOptionProps) => (
         <MenuItem dimension={args.dimension || 's'} {...options} key={item.id}>
-          <RadioButton disabled={item.disabled} key={item.id} readOnly={true} checked={checkedState[index].checked}>
+          <RadioButton
+            dimension={args.dimension !== 's' ? 'm' : args.dimension}
+            disabled={item.disabled}
+            key={item.id}
+            readOnly={true}
+            checked={checkedState[index].checked}
+          >
             {item.label}
           </RadioButton>
         </MenuItem>

@@ -335,7 +335,7 @@ const MenuCheckboxTemplate: ComponentStory<typeof Menu> = (args) => {
       id: item.id,
       render: (options: RenderOptionProps) => (
         <MenuItem dimension={args.dimension || 's'} {...options} key={item.id}>
-          <CheckboxField>{item.label}</CheckboxField>
+          <CheckboxField dimension={args.dimension !== 's' ? 'm' : args.dimension}>{item.label}</CheckboxField>
         </MenuItem>
       ),
     }));
@@ -361,7 +361,7 @@ const MenuRadiobuttonTemplate: ComponentStory<typeof Menu> = (args) => {
       id: item.id,
       render: (options: RenderOptionProps) => (
         <MenuItem dimension={args.dimension || 's'} {...options} key={item.id}>
-          <RadioButton name="menuListOption" key={item.id}>
+          <RadioButton dimension={args.dimension !== 's' ? 'm' : args.dimension} name="menuListOption" key={item.id}>
             {item.label}
           </RadioButton>
         </MenuItem>
