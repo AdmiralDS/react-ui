@@ -150,8 +150,8 @@ const Input = styled.input<{ indeterminate?: boolean; hovered?: boolean }>`
 
   ${indeterminate}
 
-  &:hover,
-  &:focus + ${hoveredCss}
+  &:hover:not(:disabled),
+  &:focus:not(:disabled) + ${hoveredCss}
 
   &:disabled + ${Background} {
     border: 1px solid ${({ theme }) => theme.color['Neutral/Neutral 30']};
