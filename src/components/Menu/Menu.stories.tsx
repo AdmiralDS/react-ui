@@ -361,7 +361,9 @@ const MenuRadiobuttonTemplate: ComponentStory<typeof Menu> = (args) => {
       id: item.id,
       render: (options: RenderOptionProps) => (
         <MenuItem dimension={args.dimension || 's'} {...options} key={item.id}>
-          <RadioButton>{item.label}</RadioButton>
+          <RadioButton name="menuListOption" key={item.id}>
+            {item.label}
+          </RadioButton>
         </MenuItem>
       ),
     }));
