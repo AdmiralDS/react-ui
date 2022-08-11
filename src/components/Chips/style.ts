@@ -117,7 +117,7 @@ const colorsBorderAndBackground = css<{
       return theme.color['Primary/Primary 60 Main'];
     }
     if (selected && disabled) return theme.color['Neutral/Neutral 30'];
-    return appearance === 'filled' ? theme.color['Neutral/Neutral 10'] : theme.color['Special/Static White'];
+    return appearance === 'filled' ? theme.color['Neutral/Neutral 10'] : 'transparent';
   }};
 
   border: 1px solid
