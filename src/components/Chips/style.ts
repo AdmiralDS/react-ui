@@ -272,6 +272,18 @@ export const IconBeforeWrapperStyled = styled.div`
 export const IconAfterWrapperStyled = styled.div<{ withCloseIcon?: boolean }>`
   display: inline-block;
   margin-left: ${(p) => (p.withCloseIcon ? '2px' : '8px')};
+  ${(p) =>
+    p.withCloseIcon &&
+    `
+    &:hover {
+      border-radius: 50%;
+      background-color: ${p.theme.color['Opacity/Hover']};
+    }
+    &:focus {
+      border-radius: 50%;
+      background-color: ${p.theme.color['Opacity/Press']};
+    }
+  `}
 `;
 export const IconWrapperStyled = styled.div<{
   dimension: ChipDimension;
@@ -283,14 +295,6 @@ export const IconWrapperStyled = styled.div<{
   & > svg {
     ${heightIcons}
     ${widthIcons}
-  }
-  &:hover {
-    border-radius: 50%;
-    background-color: ${({ theme }) => theme.color['Opacity/Hover']};
-  }
-  &:focus {
-    border-radius: 50%;
-    background-color: ${({ theme }) => theme.color['Opacity/Press']};
   }
 `;
 
