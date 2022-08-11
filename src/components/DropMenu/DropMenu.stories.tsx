@@ -379,11 +379,7 @@ const DropMenuTooltipTemplate: ComponentStory<typeof DropMenu> = (args) => {
 
 const TemplateWithCheckbox: ComponentStory<typeof DropMenu> = (args) => {
   const [selected, setSelected] = React.useState<string | undefined>(undefined);
-  const [checkedState, setCheckedState] = React.useState(
-    items.map((item) => {
-      return { id: item.id, checked: false };
-    }),
-  );
+  const [checkedState, setCheckedState] = React.useState(items.map((item) => ({ id: item.id, checked: false })));
   const model = React.useMemo(() => {
     return items.map((item, index) => ({
       id: item.id,
@@ -411,13 +407,10 @@ const TemplateWithCheckbox: ComponentStory<typeof DropMenu> = (args) => {
         items={model}
         onChange={(id) => {
           console.log(`selected: ${id}`);
-          const newCheckedState = checkedState.map((item) => {
-            const newItem = { id: item.id, checked: item.checked };
-            if (newItem.id === id) {
-              newItem.checked = !newItem.checked;
-            }
-            return newItem;
-          });
+          const newCheckedState = checkedState.map((item) => ({
+            ...item,
+            checked: item.id === id ? !item.checked : item.checked,
+          }));
           setCheckedState(newCheckedState);
           setSelected(id);
         }}
