@@ -135,6 +135,11 @@ const colorsBorderAndBackground = css<{
       if (appearance === 'filled') return theme.color['Neutral/Neutral 20'];
       else if (!withCloseIcon) return theme.color['Opacity/Hover'];
     }};
+    ${(p) =>
+      p.selected &&
+      `
+      border-color: ${p.theme.color['Primary/Primary 70']};
+    `}
   }
 
   &:active {
