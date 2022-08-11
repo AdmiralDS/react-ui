@@ -35,12 +35,10 @@ export default {
       control: { type: 'boolean' },
     },
     checked: {
-      options: [false, true],
-      control: { type: 'radio' },
+      control: { type: 'boolean' },
     },
     disabled: {
-      options: [undefined, true],
-      control: { type: 'radio' },
+      control: { type: 'boolean' },
     },
     error: {
       control: { type: 'boolean' },
