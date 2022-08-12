@@ -70,7 +70,7 @@ const CountryContainer = styled.div<{
       stroke: none;
     }
 
-    transform: ${(p) => (p.isOpened || p.disabled ? 'rotate(270deg)' : 'rotate(90deg)')};
+    transform: ${(p) => (p.isOpened && !p.disabled ? 'rotate(270deg)' : 'rotate(90deg)')};
   }
 
   ${(p) => p.disabled && disabledStyles};
