@@ -151,6 +151,11 @@ const colorsBorderAndBackground = css<{
       }
       return appearance === 'filled' ? theme.color['Neutral/Neutral 20'] : theme.color['Opacity/Hover'];
     }};
+    ${(p) =>
+      p.selected &&
+      `
+      border-color: ${p.theme.color['Primary/Primary 60 Main']};
+    `}
   }
 
   &:focus-visible {
