@@ -196,7 +196,7 @@ export const ChipComponentStyled = styled.div<{
   ${heights}
   ${(p) => (p.withCloseIcon ? `padding-left: ${p.dimension === 's' ? 8 : 12}px;` : paddings)}
   ${(p) =>
-    p.withBadge
+    p.withBadge && !p.withCloseIcon
       ? `padding-right: ${p.dimension === 's' ? 4 : 6}px;
          padding-left: ${p.dimension === 's' ? 8 : 12}px;`
       : ''}
