@@ -306,11 +306,13 @@ Object {
 
 .c0:hover {
   background-color: #0046E2;
+  border-color: #0046E2;
 }
 
 .c0:active {
   color: #FFFFFF;
   background-color: #0062FF;
+  border-color: #0062FF;
 }
 
 .c0:focus-visible {
@@ -413,11 +415,13 @@ Object {
 
 .c0:hover {
   background-color: #0046E2;
+  border-color: #0046E2;
 }
 
 .c0:active {
   color: #FFFFFF;
   background-color: #0062FF;
+  border-color: #0062FF;
 }
 
 .c0:focus-visible {
@@ -559,7 +563,7 @@ Object {
   user-select: none;
   pointer-events: auto;
   cursor: default;
-  background-color: #FFFFFF;
+  background-color: transparent;
   border: 1px solid #0062FF;
   border-radius: 16px;
   height: 32px;
@@ -666,7 +670,7 @@ Object {
   user-select: none;
   pointer-events: auto;
   cursor: default;
-  background-color: #FFFFFF;
+  background-color: transparent;
   border: 1px solid #0062FF;
   border-radius: 16px;
   height: 32px;
