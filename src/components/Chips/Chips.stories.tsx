@@ -173,40 +173,48 @@ const ChipsTagsCloseDemo: ComponentStory<typeof Chips> = (props) => {
   );
 };
 
-const ChipsIconDemo: ComponentStory<typeof Chips> = (props) => (
-  <>
-    <WrapperChip dimension={props.dimension}>
-      {listDataIcon.map((d) => (
-        <Chips
-          {...props}
-          key={d.id}
-          iconBefore={d?.iconBefore}
-          iconAfter={d?.iconAfter}
-          // Если onClose указан, вместо iconAfter отобразится closeIcon
-          onClose={d?.onClose}
-        >
-          {d.label}
-        </Chips>
-      ))}
-    </WrapperChip>
-    <Separator />
-    <WrapperChip dimension="s">
-      {listDataIcon.map((d) => (
-        <Chips
-          {...props}
-          dimension="s"
-          key={d.id}
-          iconBefore={d?.iconBefore}
-          iconAfter={d?.iconAfter}
-          // Если onClose указан, вместо iconAfter отобразится closeIcon
-          onClose={d?.onClose}
-        >
-          {d.label}
-        </Chips>
-      ))}
-    </WrapperChip>
-  </>
-);
+const ChipsIconDemo: ComponentStory<typeof Chips> = (props) => {
+  const [selectedM, setSelectedM] = useState('');
+  const [selectedS, setSelectedS] = useState('');
+  return (
+    <>
+      <WrapperChip dimension={props.dimension}>
+        {listDataIcon.map((d) => (
+          <Chips
+            {...props}
+            key={d.id}
+            selected={selectedM === d.id}
+            onClick={() => (props.disabled ? null : setSelectedM(d.id))}
+            iconBefore={d?.iconBefore}
+            iconAfter={d?.iconAfter}
+            // Если onClose указан, вместо iconAfter отобразится closeIcon
+            onClose={d?.onClose}
+          >
+            {d.label}
+          </Chips>
+        ))}
+      </WrapperChip>
+      <Separator />
+      <WrapperChip dimension="s">
+        {listDataIcon.map((d) => (
+          <Chips
+            {...props}
+            dimension="s"
+            key={d.id}
+            selected={selectedS === d.id}
+            onClick={() => (props.disabled ? null : setSelectedS(d.id))}
+            iconBefore={d?.iconBefore}
+            iconAfter={d?.iconAfter}
+            // Если onClose указан, вместо iconAfter отобразится closeIcon
+            onClose={d?.onClose}
+          >
+            {d.label}
+          </Chips>
+        ))}
+      </WrapperChip>
+    </>
+  );
+};
 
 const ChipsSelectDemo: ComponentStory<typeof Chips> = (props) => {
   const [selectedM, setSelectedM] = useState('');
@@ -306,7 +314,7 @@ const ChipsBadgesDemo: ComponentStory<typeof Chips> = (props) => {
   return (
     <>
       <WrapperChip dimension="m">
-        {listData.map((item) => (
+        {listDataIcon.map((item) => (
           <Chips
             {...props}
             key={item.id}
@@ -314,6 +322,10 @@ const ChipsBadgesDemo: ComponentStory<typeof Chips> = (props) => {
             dimension="m"
             selected={selectedM === item.id}
             onClick={() => (props.disabled ? null : setSelectedM(item.id))}
+            iconBefore={item?.iconBefore}
+            iconAfter={item?.iconAfter}
+            // Если onClose указан, вместо iconAfter отобразится closeIcon
+            onClose={item?.onClose}
           >
             {item.label}
           </Chips>
@@ -321,7 +333,7 @@ const ChipsBadgesDemo: ComponentStory<typeof Chips> = (props) => {
       </WrapperChip>
       <Separator />
       <WrapperChip dimension="s">
-        {listData.map((item) => (
+        {listDataIcon.map((item) => (
           <Chips
             {...props}
             key={item.id}
@@ -330,6 +342,10 @@ const ChipsBadgesDemo: ComponentStory<typeof Chips> = (props) => {
             appearance="filled"
             selected={selectedS === item.id}
             onClick={() => (props.disabled ? null : setSelectedS(item.id))}
+            iconBefore={item?.iconBefore}
+            iconAfter={item?.iconAfter}
+            // Если onClose указан, вместо iconAfter отобразится closeIcon
+            onClose={item?.onClose}
           >
             {item.label}
           </Chips>
