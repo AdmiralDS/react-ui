@@ -133,7 +133,6 @@ const Input = styled.input<ExtraProps>`
   }
 
   ${colorsBorderAndBackground}
-  ${extraPadding}
   ${ieFixes}
 `;
 
@@ -158,15 +157,9 @@ const SuffixContainer = styled.div<{ disabled?: boolean; dimension?: ComponentDi
 `;
 
 const IconPanel = styled.div<{ disabled?: boolean; dimension?: ComponentDimension }>`
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 0;
-
+  position: relative;
   display: flex;
   align-items: center;
-
-  padding-right: ${horizontalPaddingValue}px;
 
   & > svg {
     border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
@@ -281,13 +274,14 @@ export const InputEx = React.forwardRef<HTMLInputElement, InputExProps>(
       >
         {!!prefix && <PrefixContainer dimension={props.dimension}>{prefix}</PrefixContainer>}
         <Input ref={refSetter(ref, inputRef)} {...props} placeholder={placeholder} iconCount={iconCount} />
-        <BorderedDiv />
-        {!!suffix && <SuffixContainer dimension={props.dimension}>{suffix}</SuffixContainer>}
         {iconCount > 0 && (
           <IconPanel disabled={props.disabled} dimension={props.dimension}>
             {iconArray}
           </IconPanel>
         )}
+        <BorderedDiv />
+        {!!suffix && <SuffixContainer dimension={props.dimension}>{suffix}</SuffixContainer>}
+
         {children}
       </Container>
     );
