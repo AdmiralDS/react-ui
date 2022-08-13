@@ -5,6 +5,10 @@ import { withDesign } from 'storybook-addon-designs';
 import { ContentSwitcher } from '#src/components/ContentSwitcher';
 import { ContentSwitcherItem } from '#src/components/ContentSwitcher/ContentSwitcherItem';
 import { ReactComponent as StarSolid } from '@admiral-ds/icons/build/system/StarSolid.svg';
+import { ReactComponent as DeleteOutline } from '@admiral-ds/icons/build/system/DeleteOutline.svg';
+import { ReactComponent as EmailOutline } from '@admiral-ds/icons/build/system/EmailOutline.svg';
+import { ReactComponent as HomeOutline } from '@admiral-ds/icons/build/system/HomeOutline.svg';
+import { ReactComponent as PrintOutline } from '@admiral-ds/icons/build/system/PrintOutline.svg';
 import { T } from '#src/components/T';
 import { Badge } from '#src/components/Badge';
 
@@ -90,6 +94,11 @@ const SwitcherWrapper = styled.div`
   }
 `;
 
+const Wrapper = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
 const ContentSwitcherDemo: ComponentStory<typeof ContentSwitcher> = () => {
   const list = [
     { title: 'Active button', content: '1' },
@@ -170,29 +179,123 @@ const ContentSwitcherDemo: ComponentStory<typeof ContentSwitcher> = () => {
   );
 };
 
-const ContentSwitcherWithIconDemo = () => (
-  <>
-    <ContentSwitcher dimension={'l'}>
-      <ContentSwitcherItem active>
-        <StarSolid width={20} />
-        <Divider />
-        Active button
-      </ContentSwitcherItem>
-      <ContentSwitcherItem>
-        <StarSolid width={20} />
-        <Divider />
-        Default button
-      </ContentSwitcherItem>
-      <ContentSwitcherItem disabled>
-        Disabled button
-        <Divider />
-        <StarSolid width={17} />
-      </ContentSwitcherItem>
-    </ContentSwitcher>
-  </>
-);
+const ContentSwitcherWithIconDemo: ComponentStory<typeof ContentSwitcher> = () => {
+  return (
+    <>
+      <ContentSwitcher dimension={'l'}>
+        <ContentSwitcherItem active>
+          <StarSolid width={20} />
+          <Divider />
+          Active button
+        </ContentSwitcherItem>
+        <ContentSwitcherItem>
+          <StarSolid width={20} />
+          <Divider />
+          Default button
+        </ContentSwitcherItem>
+        <ContentSwitcherItem disabled>
+          Disabled button
+          <Divider />
+          <StarSolid width={17} />
+        </ContentSwitcherItem>
+      </ContentSwitcher>
+    </>
+  );
+};
 
-const ContentSwitcherWithBadgeDemo = () => {
+const ContentSwitcherIconOnlyDemo: ComponentStory<typeof ContentSwitcher> = () => {
+  const [activeLPrimary, setActiveLPrimary] = useState(0);
+  const [activeMPrimary, setActiveMPrimary] = useState(0);
+  const [activeSPrimary, setActiveSPrimary] = useState(0);
+  const [activeLSecondary, setActiveLSecondary] = useState(0);
+  const [activeMSecondary, setActiveMSecondary] = useState(0);
+  const [activeSSecondary, setActiveSSecondary] = useState(0);
+
+  const list = [
+    {
+      title: <DeleteOutline width={20} />,
+    },
+    {
+      title: <EmailOutline width={20} />,
+    },
+    {
+      title: <HomeOutline width={20} />,
+    },
+    {
+      title: <PrintOutline width={20} />,
+    },
+  ];
+
+  return (
+    <>
+      <Wrapper>
+        <ContentSwitcher dimension={'l'} appearance="primary">
+          {list.map((item, index) => (
+            <ContentSwitcherItem key={index} active={index === activeLPrimary} onClick={() => setActiveLPrimary(index)}>
+              {item.title}
+            </ContentSwitcherItem>
+          ))}
+        </ContentSwitcher>
+        <Divider />
+        <ContentSwitcher dimension={'m'} appearance="primary">
+          {list.map((item, index) => (
+            <ContentSwitcherItem key={index} active={index === activeMPrimary} onClick={() => setActiveMPrimary(index)}>
+              {item.title}
+            </ContentSwitcherItem>
+          ))}
+        </ContentSwitcher>
+        <Divider />
+        <ContentSwitcher dimension={'s'} appearance="primary">
+          {list.map((item, index) => (
+            <ContentSwitcherItem key={index} active={index === activeSPrimary} onClick={() => setActiveSPrimary(index)}>
+              {item.title}
+            </ContentSwitcherItem>
+          ))}
+        </ContentSwitcher>
+      </Wrapper>
+      <Separator />
+      <Wrapper>
+        <ContentSwitcher dimension={'l'} appearance="secondary">
+          {list.map((item, index) => (
+            <ContentSwitcherItem
+              key={index}
+              active={index === activeLSecondary}
+              onClick={() => setActiveLSecondary(index)}
+            >
+              {item.title}
+            </ContentSwitcherItem>
+          ))}
+        </ContentSwitcher>
+        <Divider />
+        <ContentSwitcher dimension={'m'} appearance="secondary">
+          {list.map((item, index) => (
+            <ContentSwitcherItem
+              key={index}
+              active={index === activeMSecondary}
+              onClick={() => setActiveMSecondary(index)}
+            >
+              {item.title}
+            </ContentSwitcherItem>
+          ))}
+        </ContentSwitcher>
+        <Divider />
+        <ContentSwitcher dimension={'s'} appearance="secondary">
+          {list.map((item, index) => (
+            <ContentSwitcherItem
+              key={index}
+              active={index === activeSSecondary}
+              onClick={() => setActiveSSecondary(index)}
+            >
+              {item.title}
+            </ContentSwitcherItem>
+          ))}
+        </ContentSwitcher>
+      </Wrapper>
+    </>
+  );
+};
+
+const ContentSwitcherWithBadgeDemo: ComponentStory<typeof ContentSwitcher> = () => {
   const [active, setActive] = useState(0);
 
   const list = [
@@ -280,8 +383,13 @@ const Template: ComponentStory<typeof ContentSwitcher> = ({ dimension, className
 };
 
 export const Example = ContentSwitcherDemo.bind({});
-
 export const ContentSwitcherWithIcon = ContentSwitcherWithIconDemo.bind({});
+export const ContentSwitcherIconOnly = ContentSwitcherIconOnlyDemo.bind({});
 export const ContentSwitcherWithBadge = ContentSwitcherWithBadgeDemo.bind({});
 export const Playground = Template.bind({});
+Example.storyName = 'Базовый пример';
+ContentSwitcherWithIcon.storyName = 'ContentSwitcher с иконками';
+ContentSwitcherIconOnly.storyName = 'ContentSwitcher только с иконками';
+ContentSwitcherWithBadge.storyName = 'ContentSwitcher с Badge';
+Playground.storyName = 'ContentSwitcher. Playground';
 Playground.args = {};
