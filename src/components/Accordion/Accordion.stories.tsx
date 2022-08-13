@@ -60,6 +60,16 @@ export default {
       options: ['l', 'm'],
       control: { type: 'radio' },
     },
+    iconPosition: {
+      options: ['right', 'left'],
+      control: { type: 'radio' },
+    },
+    hideTopDivider: {
+      control: { type: 'boolean' },
+    },
+    hideBottomDivider: {
+      control: { type: 'boolean' },
+    },
   },
 } as ComponentMeta<typeof Accordion>;
 const OPTIONS_SIMPLE = [
