@@ -64,6 +64,9 @@ export default {
         options: ['xl', 'l', 'm', 's'],
       },
     },
+    skeleton: {
+      control: 'boolean',
+    },
     appearance: {
       control: {
         type: 'select',

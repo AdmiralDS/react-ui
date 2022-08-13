@@ -7,18 +7,18 @@ import { throttle } from '#src/components/common/utils/throttle';
 import { useDropdown, useDropdownsClickOutside } from '#src/components/DropdownProvider';
 
 import { CloseButton, HintContent, HintDialog, HintWrapper } from './style';
-import type { ActionsType } from './reducer';
 
 type PropsType = {
   visibilityTrigger: 'click' | 'hover';
   isMobile: boolean;
   dimension: 's' | 'm' | 'l';
   content: React.ReactNode;
-  dispatch: React.Dispatch<ActionsType>;
   scrollableParents: Array<Element>;
   anchorElementRef: any;
   anchorId: string;
   trapFocus: boolean;
+  hideHint: () => void;
+  startRecalculation: React.Dispatch<React.SetStateAction<any>>;
 };
 
 type RefType = HTMLDivElement | null;
@@ -33,13 +33,13 @@ export const HintContainer = React.forwardRef<RefType, PropsType & React.HTMLAtt
       scrollableParents,
       anchorElementRef,
       anchorId,
-      dispatch,
       trapFocus,
+      hideHint,
+      startRecalculation,
       ...props
     },
     ref,
   ) => {
-    const hideHint = () => dispatch({ type: 'setInvisible' });
     const hideOnScrollResize = visibilityTrigger === 'hover';
 
     const hintRef: any = React.useRef(null);
@@ -78,7 +78,7 @@ export const HintContainer = React.forwardRef<RefType, PropsType & React.HTMLAtt
       const [listener, freeResources] = hideOnScrollResize
         ? [hideHint, () => undefined]
         : throttle(() => {
-            dispatch({ type: 'triggerRecalculation' });
+            startRecalculation({});
           }, 150);
       window.addEventListener('resize', listener);
       window.addEventListener('scroll', listener);

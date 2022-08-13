@@ -6,22 +6,8 @@ import { ReactComponent as CloseOutlineSvg } from '@admiral-ds/icons/build/servi
 import type { ForwardedRef, TextareaHTMLAttributes } from 'react';
 import * as React from 'react';
 import styled, { css } from 'styled-components';
-import { StatusIcon } from '../StatusIcon';
-import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
-
-const ClearIcon = styled(CloseOutlineSvg)`
-  & *[fill^='#'] {
-    fill: ${(props) => props.theme.color['Neutral/Neutral 50']};
-  }
-
-  &:hover {
-    cursor: pointer;
-  }
-
-  &:hover *[fill^='#'] {
-    fill: ${(props) => props.theme.color['Primary/Primary 70']};
-  }
-`;
+import { InputIconButton } from '#src/components/InputIconButton';
+import { Container } from '../Container';
 
 const iconSizeValue = (props: { dimension?: ComponentDimension }) => {
   switch (props.dimension) {
@@ -68,15 +54,15 @@ const BorderedDiv = styled.div`
   border: 1px solid ${(props) => props.theme.color['Neutral/Neutral 40']};
   border-radius: inherit;
 
-  [data-status='error'] & {
+  [data-status='error'] &&& {
     border: 1px solid ${(props) => props.theme.color['Error/Error 60 Main']};
   }
 
-  [data-status='success'] & {
+  [data-status='success'] &&& {
     border: 1px solid ${(props) => props.theme.color['Success/Success 50 Main']};
   }
 
-  [data-read-only] & {
+  [data-read-only] &&& {
     border-color: transparent;
   }
 `;
@@ -88,7 +74,7 @@ const colorsBorderAndBackground = css<{ disabled?: boolean }>`
     border: 2px solid ${(props) => props.theme.color['Primary/Primary 60 Main']};
   }
 
-  &:disabled + ${BorderedDiv}, [data-read-only] & + ${BorderedDiv} {
+  &&&:disabled + ${BorderedDiv}, [data-read-only] &&& + ${BorderedDiv} {
     border-color: transparent;
   }
 
@@ -100,20 +86,28 @@ const colorsBorderAndBackground = css<{ disabled?: boolean }>`
     border: 1px solid ${(props) => props.theme.color['Error/Error 60 Main']};
   }
 
-  [data-status='error'] &:hover + ${BorderedDiv}, [data-status='error'] &:focus + ${BorderedDiv} {
-    border: 1px solid ${(props) => props.theme.color['Error/Error 60 Main']};
+  [data-status='error'] &&&:hover:not(:disabled) + ${BorderedDiv}, &:invalid:hover:not(:disabled) + ${BorderedDiv} {
+    border: 1px solid ${(props) => props.theme.color['Error/Error 70']};
   }
 
-  [data-status='success'] &:hover + ${BorderedDiv}, [data-status='success'] &:focus + ${BorderedDiv} {
-    border: 1px solid ${(props) => props.theme.color['Success/Success 50 Main']};
+  [data-status='success'] &&&:hover:not(:disabled) + ${BorderedDiv} {
+    border: 1px solid ${(props) => props.theme.color['Success/Success 60']};
   }
 
-  [data-read-only] &,
-  &:disabled {
+  [data-status='error'] &&&:focus:not(:disabled) + ${BorderedDiv}, &:invalid:focus:not(:disabled) + ${BorderedDiv} {
+    border: 2px solid ${(props) => props.theme.color['Error/Error 60 Main']};
+  }
+
+  [data-status='success'] &&&:focus:not(:disabled) + ${BorderedDiv} {
+    border: 2px solid ${(props) => props.theme.color['Success/Success 50 Main']};
+  }
+
+  [data-read-only] &&&,
+  &&&:disabled {
     ${disabledColors}
   }
 
-  [data-read-only] &:hover + ${BorderedDiv}, [data-read-only] &:focus + ${BorderedDiv} {
+  [data-read-only] &&&:hover + ${BorderedDiv}, [data-read-only] &&&:focus + ${BorderedDiv} {
     border-color: transparent;
   }
 `;
@@ -145,7 +139,8 @@ const Text = styled.textarea<ExtraProps>`
     color: ${(props) => props.theme.color['Neutral/Neutral 50']};
   }
 
-  &:disabled::placeholder {
+  &:disabled::placeholder,
+  &:disabled {
     color: ${(props) => props.theme.color['Neutral/Neutral 30']};
   }
 
@@ -157,14 +152,6 @@ const Text = styled.textarea<ExtraProps>`
   ${colorsBorderAndBackground}
   ${extraPadding}
   ${ieFixes}
-`;
-
-const Container = styled.div<{ disabled?: boolean; dimension?: ComponentDimension }>`
-  position: relative;
-  display: flex;
-  align-items: stretch;
-  border: none;
-  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
 `;
 
 const IconPanel = styled.div<{ disabled?: boolean; dimension?: ComponentDimension }>`
@@ -204,9 +191,6 @@ export interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElemen
   /** Иконки для отображения в правом углу поля */
   icons?: React.ReactNode;
 
-  /** Отображать иконку статуса */
-  displayStatusIcon?: boolean;
-
   /** Отображать иконку очистки поля */
   displayClearIcon?: boolean;
 
@@ -227,6 +211,9 @@ export interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElemen
 
   /**  Включает автоматическое изменение высоты компонента в зависимости от количества текста */
   autoHeight?: boolean;
+
+  /** Состояние skeleton */
+  skeleton?: boolean;
 }
 
 export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
@@ -234,7 +221,6 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
     {
       rows = 3,
       value,
-      displayStatusIcon,
       displayClearIcon,
       status,
       handleInput = defaultHandleInput,
@@ -243,6 +229,7 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
       children,
       className,
       autoHeight,
+      skeleton = false,
       ...props
     },
     ref,
@@ -252,13 +239,10 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
 
     const iconArray = React.Children.toArray(icons);
 
-    if (displayStatusIcon) {
-      iconArray.push(<StatusIcon key="status-icon" status={status} aria-hidden />);
-    }
-
-    if (displayClearIcon) {
+    if (!props.readOnly && displayClearIcon) {
       iconArray.unshift(
-        <ClearIcon
+        <InputIconButton
+          icon={CloseOutlineSvg}
           key="clear-icon"
           onClick={() => {
             if (inputRef.current) {
@@ -320,11 +304,10 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
     return (
       <Container
         className={className}
-        disabled={props.disabled}
-        dimension={props.dimension}
         ref={containerRef}
         data-read-only={props.readOnly ? true : undefined}
         data-status={status}
+        skeleton={skeleton}
         {...(props.disableCopying && {
           onMouseDown: stopEvent,
         })}

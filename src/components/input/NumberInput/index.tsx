@@ -8,11 +8,11 @@ import { refSetter } from '#src/components/common/utils/refSetter';
 import { ReactComponent as CloseOutlineSvg } from '@admiral-ds/icons/build/service/CloseOutline.svg';
 import { ReactComponent as MinusOutline } from '@admiral-ds/icons/build/service/MinusOutline.svg';
 import { ReactComponent as PlusOutline } from '@admiral-ds/icons/build/service/PlusOutline.svg';
+import { InputIconButton } from '#src/components/InputIconButton';
 
-import { Container } from '../Container';
-import { StatusIcon } from '../StatusIcon';
+import { HeightLimitedContainer } from '../Container';
 
-import { AutoSizeInput } from './AutoSizeInput';
+import { AutoSizeInput, BorderedDiv } from './AutoSizeInput';
 import { clearValue, fitToCurrency, validateThousand } from './utils';
 
 export { fitToCurrency, clearValue } from './utils';
@@ -32,41 +32,17 @@ const horizontalPaddingValue = (props: { dimension?: ComponentDimension }) => {
   }
 };
 
-const Icon = css`
-  & *[fill^='#'] {
-    fill: ${(props) => props.theme.color['Neutral/Neutral 50']};
-  }
-  &:hover {
-    cursor: pointer;
-  }
-  &:hover *[fill^='#'] {
-    fill: ${(props) => props.theme.color['Primary/Primary 70']};
-  }
+const PlusMinusIcon = styled(InputIconButton)<{ disabled?: boolean }>`
+  ${({ disabled, theme }) =>
+    disabled
+      ? css`
+          pointer-events: none;
 
-  [data-read-only] & {
-    cursor: default;
-    pointer-events: none;
-  }
-`;
-
-const IconDisabled = css`
-  cursor: default;
-  pointer-events: none;
-  & *[fill^='#'] {
-    fill: ${(props) => props.theme.color['Neutral/Neutral 30']};
-  }
-`;
-
-const Minus = styled(MinusOutline)<{ disabled?: boolean }>`
-  ${Icon}
-  ${({ disabled }) => disabled && IconDisabled}
-`;
-const Plus = styled(PlusOutline)<{ disabled?: boolean }>`
-  ${Icon}
-  ${({ disabled }) => disabled && IconDisabled}
-`;
-const ClearIcon = styled(CloseOutlineSvg)`
-  ${Icon}
+          & *[fill^='#'] {
+            fill: ${theme.color['Neutral/Neutral 30']};
+          }
+        `
+      : ''}
 `;
 
 const iconSizeValue = (props: { dimension?: ComponentDimension }) => {
@@ -89,7 +65,6 @@ const IconPanel = styled.div<{ disabled?: boolean; dimension?: ComponentDimensio
   display: flex;
   align-items: center;
   margin-right: ${horizontalPaddingValue}px;
-  ${({ disabled }) => disabled && IconDisabled}
 
   & > svg {
     display: block;
@@ -101,10 +76,26 @@ const IconPanel = styled.div<{ disabled?: boolean; dimension?: ComponentDimensio
   }
 `;
 
-const Wrapper = styled(Container)<{
+const Content = styled.div`
+  display: flex;
+  box-sizing: border-box;
+  width: 100%;
+  overflow: hidden;
+  padding: 0 ${horizontalPaddingValue}px;
+  ${extraPadding};
+  border-radius: inherit;
+
+  &[data-align='right'] {
+    justify-content: flex-end;
+  }
+`;
+
+const Wrapper = styled(HeightLimitedContainer)<{
   disabled?: boolean;
   dimension?: ComponentDimension;
   readOnly?: boolean;
+  skeleton?: boolean;
+  status?: TextInputProps['status'];
 }>`
   background-color: ${(props) => {
     if (props.disabled || props.readOnly) return props.theme.color['Neutral/Neutral 10'];
@@ -114,19 +105,18 @@ const Wrapper = styled(Container)<{
     props.disabled ? props.theme.color['Neutral/Neutral 30'] : props.theme.color['Neutral/Neutral 90']};
   ${(props) => (props.dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
   overflow: hidden;
-`;
 
-const Content = styled.div`
-  display: flex;
-  box-sizing: border-box;
-  width: 100%;
-  overflow: hidden;
-  padding: 0 ${horizontalPaddingValue}px;
-  ${extraPadding}
-  border-radius: inherit;
-
-  &[data-align='right'] {
-    justify-content: flex-end;
+  &:hover:not(:focus-within) ${BorderedDiv} {
+    border: 1px solid
+      ${(props) => {
+        if (props.disabled || props.readOnly) return 'transparent';
+        if (props.status === 'error') return props.theme.color['Error/Error 70'];
+        if (props.status === 'success') return props.theme.color['Success/Success 60'];
+        return props.theme.color['Neutral/Neutral 60'];
+      }};
+  }
+  &:hover:not(:focus-within) input:invalid + ${BorderedDiv} {
+    border: 1px solid ${(props) => props.theme.color['Error/Error 70']};
   }
 `;
 
@@ -162,7 +152,6 @@ export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       status,
       icons,
       displayClearIcon = false,
-      displayStatusIcon = false,
       displayPlusMinusIcons = true,
       prefix = '',
       suffix = '₽',
@@ -174,6 +163,7 @@ export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       maxValue,
       placeholder = '0 ₽',
       align = 'left',
+      skeleton = false,
       onChange,
       onBlur,
       ...props
@@ -241,13 +231,10 @@ export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
 
     const iconArray = React.Children.toArray(icons);
 
-    if (displayStatusIcon) {
-      iconArray.push(<StatusIcon key="status-icon" status={status} aria-hidden />);
-    }
-
-    if (displayClearIcon) {
+    if (!props.readOnly && displayClearIcon) {
       iconArray.unshift(
-        <ClearIcon
+        <InputIconButton
+          icon={CloseOutlineSvg}
           key="clear-icon"
           onClick={() => {
             if (inputRef.current) {
@@ -259,9 +246,23 @@ export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       );
     }
 
-    if (displayPlusMinusIcons) {
-      iconArray.push(<Minus key="minus-icon" onClick={handleMinus} disabled={props.disabled || minusDisabled} />);
-      iconArray.push(<Plus key="plus-icon" onClick={handlePlus} disabled={props.disabled || plusDisabled} />);
+    if (!props.readOnly && displayPlusMinusIcons) {
+      iconArray.push(
+        <PlusMinusIcon
+          icon={MinusOutline}
+          key="minus-icon"
+          onClick={handleMinus}
+          disabled={props.disabled || minusDisabled}
+          aria-hidden
+        />,
+        <PlusMinusIcon
+          icon={PlusOutline}
+          key="plus-icon"
+          onClick={handlePlus}
+          disabled={props.disabled || plusDisabled}
+          aria-hidden
+        />,
+      );
     }
 
     const iconCount = iconArray.length;
@@ -332,6 +333,8 @@ export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
         dimension={props.dimension}
         readOnly={props.readOnly}
         data-read-only={props.readOnly ? true : undefined}
+        skeleton={skeleton}
+        status={status}
       >
         <Content
           data-align={align}

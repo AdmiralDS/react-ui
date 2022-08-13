@@ -17,6 +17,7 @@ export const TimeField = React.forwardRef<HTMLInputElement, TimeFieldProps>((pro
     id = uid(),
     disabled,
     displayCharacterCounter,
+    skeleton,
     ...restProps
   } = props;
   const fieldContainerProps = {
@@ -30,6 +31,7 @@ export const TimeField = React.forwardRef<HTMLInputElement, TimeFieldProps>((pro
     disabled,
     displayCharacterCounter,
     ref: fieldRef,
+    skeleton,
     'data-field-id': id,
     'data-field-name': restProps.name,
   } as Record<string, any>;
@@ -46,6 +48,7 @@ export const TimeField = React.forwardRef<HTMLInputElement, TimeFieldProps>((pro
     'aria-required': required,
     status,
     disabled,
+    skeleton,
     ...restProps,
     portalTargetRef: fieldRef,
   };

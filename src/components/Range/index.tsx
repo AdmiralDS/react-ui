@@ -20,6 +20,8 @@ export interface RangeProps extends Omit<React.HTMLAttributes<HTMLDivElement>, '
   disabled?: boolean;
   /** Размер компонента */
   dimension?: 'm' | 's';
+  /** Состояние skeleton */
+  skeleton?: boolean;
 }
 
 export const Range = ({
@@ -30,6 +32,7 @@ export const Range = ({
   disabled = false,
   step = 1,
   dimension = 'm',
+  skeleton = false,
   ...props
 }: RangeProps) => {
   const SLIDER_WIDTH = dimension === 'm' ? 20 : 16;
@@ -249,7 +252,7 @@ export const Range = ({
 
   return (
     <Wrapper data-disabled={disabled} {...props}>
-      <TrackWrapper dimension={dimension} onTouchStart={onTrackClick} onMouseDown={onTrackClick}>
+      <TrackWrapper dimension={dimension} skeleton={skeleton} onTouchStart={onTrackClick} onMouseDown={onTrackClick}>
         <Track>
           <FilledTrack ref={filledRef} animation={animation} />
           <DefaultTrack ref={trackRef}>

@@ -13,7 +13,6 @@ import {
   ExpandedRowContent,
   ExpandIcon,
   ExpandIconWrapper,
-  ExtraText,
   Filler,
   Header,
   HeaderCell,
@@ -27,10 +26,12 @@ import {
   SortIcon,
   StickyWrapper,
   TableContainer,
-  Title,
   TitleContent,
   EmptyMessage,
+  SortOrder,
+  SortIconWrapper,
 } from './style';
+import { TitleText } from './TitleText';
 import { VirtualBody } from './VirtualBody';
 import { OverflowMenu } from './OverflowMenu';
 import { getScrollbarSize } from '#src/components/common/dom/scrollbarUtil';
@@ -77,6 +78,8 @@ export type Column = {
   sortable?: boolean;
   /** Сортировка столбца (по возрастанию или по убыванию) */
   sort?: 'asc' | 'desc';
+  /** Порядковый номер в многоуровневой сортировке */
+  sortOrder?: number;
   /** Отображение столбца как фиксированного (которые остаются при скролле на месте).
    * Столбец с чекбоксами по умолчанию фиксированный.
    * Фиксированные столбцы располагаются по левому краю таблицы и идут друг за другом
@@ -421,6 +424,10 @@ export const Table: React.FC<TableProps> = ({
     onSortChange?.({ name, sort: newSort });
   };
 
+  const multipleSort = React.useMemo<boolean>(() => {
+    return columnList.filter((col) => !!col.sort).length > 1;
+  }, [columnList]);
+
   const renderHeaderCell = (
     {
       name,
@@ -431,6 +438,7 @@ export const Table: React.FC<TableProps> = ({
       cellAlign = 'left',
       sortable = false,
       sort,
+      sortOrder,
       renderFilter,
       renderFilterIcon,
       onFilterMenuClickOutside,
@@ -454,14 +462,21 @@ export const Table: React.FC<TableProps> = ({
             onClick={sortable ? () => handleSort(name, sort || 'initial') : undefined}
           >
             <TitleContent dimension={dimension} sortable={sortable}>
-              <Title lineClamp={headerLineClamp}>{title}</Title>
+              <TitleText width={width} dimension={dimension} lineClamp={headerLineClamp}>
+                {title}
+              </TitleText>
               {extraText && (
-                <ExtraText dimension={dimension} lineClamp={headerExtraLineClamp}>
+                <TitleText extraText width={width} dimension={dimension} lineClamp={headerExtraLineClamp}>
                   {extraText}
-                </ExtraText>
+                </TitleText>
               )}
             </TitleContent>
-            {sortable && <SortIcon sort={sort || 'initial'} width={iconSize} height={iconSize} />}
+            {sortable && (
+              <SortIconWrapper>
+                <SortIcon sort={sort || 'initial'} width={iconSize} height={iconSize} />
+                {multipleSort && sort && sortOrder && <SortOrder>{sortOrder}</SortOrder>}
+              </SortIconWrapper>
+            )}
           </HeaderCellTitle>
           <HeaderCellSpacer width={renderFilter ? spacer : `${parseInt(spacer) - parseInt(defaultSpacer)}px`} />
           {renderFilter && (

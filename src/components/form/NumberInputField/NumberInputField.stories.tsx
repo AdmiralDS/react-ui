@@ -37,9 +37,6 @@ export default {
     displayPlusMinusIcons: {
       control: { type: 'boolean' },
     },
-    displayStatusIcon: {
-      control: { type: 'boolean' },
-    },
     displayClearIcon: {
       control: { type: 'boolean' },
     },
@@ -96,6 +93,9 @@ export default {
         type: 'radio',
         options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
       },
+    },
+    skeleton: {
+      control: { type: 'boolean' },
     },
   },
 } as ComponentMeta<typeof NumberInputField>;

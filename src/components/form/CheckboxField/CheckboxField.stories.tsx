@@ -35,12 +35,10 @@ export default {
       control: { type: 'boolean' },
     },
     checked: {
-      options: [false, true],
-      control: { type: 'radio' },
+      control: { type: 'boolean' },
     },
     disabled: {
-      options: [undefined, true],
-      control: { type: 'radio' },
+      control: { type: 'boolean' },
     },
     error: {
       control: { type: 'boolean' },
@@ -94,6 +92,12 @@ const CheckboxFieldDemo: ComponentStory<typeof CheckboxField> = (props) => {
   }, {} as Record<any, any>);
 
   const [checked, setChecked] = useState<boolean>(args.checked ?? false);
+
+  const [visible1, setVisible1] = useState(false);
+  const [visible2, setVisible2] = useState(false);
+  const handleHintChange1 = (visible: boolean) => setVisible1(visible);
+  const handleHintChange2 = (visible: boolean) => setVisible2(visible);
+
   useEffect(() => {
     setChecked(Boolean(args.checked));
   }, [args.checked]);
@@ -116,6 +120,11 @@ const CheckboxFieldDemo: ComponentStory<typeof CheckboxField> = (props) => {
           Управляемый чекбокс
         </CheckboxField>
         <CheckboxField dimension="s">Не управляемый маленький чекбокс</CheckboxField>
+        <CheckboxField dimension="m">
+          Двойная
+          <br />
+          строка
+        </CheckboxField>
         <CheckboxField disabled defaultChecked extraText="Дополнительный текст. Additional text">
           Disabled не управляемый чекбокс
         </CheckboxField>
@@ -138,6 +147,8 @@ const CheckboxFieldDemo: ComponentStory<typeof CheckboxField> = (props) => {
           </CheckboxField>
           <Hint
             {...args}
+            visible={visible1}
+            onVisibilityChange={handleHintChange1}
             renderContent={() =>
               'At breakpoint boundaries, mini units divide the screen into a fixed master grid, and multiples of mini units map to fluid grid column widths and row heights.'
             }
@@ -151,6 +162,8 @@ const CheckboxFieldDemo: ComponentStory<typeof CheckboxField> = (props) => {
           </CheckboxField>
           <Hint
             {...args}
+            visible={visible2}
+            onVisibilityChange={handleHintChange2}
             renderContent={() =>
               'At breakpoint boundaries, mini units divide the screen into a fixed master grid, and multiples of mini units map to fluid grid column widths and row heights.'
             }

@@ -99,7 +99,7 @@ export const AvatarGroup: React.FC<AvatarGroupProps> = ({
       const id = idProp || uid();
 
       return {
-        id: idProp || uid(),
+        id: id,
         render: (options: RenderOptionProps) => (
           <AvatarMenuItem role="option" key={id} id={id} dimension="m" {...options}>
             <Avatar

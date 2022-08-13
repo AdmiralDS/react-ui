@@ -38,6 +38,11 @@ export default {
       url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=9%3A24',
     },
   },
+  argTypes: {
+    skeleton: {
+      control: { type: 'boolean' },
+    },
+  },
 } as ComponentMeta<typeof T>;
 
 const BlueText = styled(T)`
@@ -117,7 +122,7 @@ const CopyButton = ({ text }: { text: string }) => {
   );
 };
 
-const Template1: ComponentStory<typeof T> = () => {
+const Template1: ComponentStory<typeof T> = (args) => {
   return (
     <>
       <BlueText font={'Body/Body 1 Short'} as={'a'} href={'https://'}>
@@ -129,6 +134,12 @@ const Template1: ComponentStory<typeof T> = () => {
       </T>
       <T font="Body/Body 2 Long" as="h3" color="Purple/Purple 60 Main">
         Это заголовок третьего уровня и стилем Body/Body 2 Long цвета Purple/Purple 60 Main.
+      </T>
+      <T font="Body/Body 2 Long" as="h2" skeleton={args.skeleton}>
+        Это заголовок второго уровня. Для активации состояния skeleton необходимо сменить состяние.
+      </T>
+      <T font="Body/Body 2 Long" as="h2" skeleton={args.skeleton}>
+        Для отображения в состоянии skeleton должен быть указан текст.
       </T>
       <CustomParagraph font="Header/H5" as="p">
         Это параграф со стилем Header/H5 и цветом шрифта Tertiary.

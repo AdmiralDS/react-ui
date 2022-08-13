@@ -52,10 +52,10 @@ export default {
     disabled: {
       control: { type: 'boolean' },
     },
-    disableCopying: {
+    readOnly: {
       control: { type: 'boolean' },
     },
-    displayStatusIcon: {
+    disableCopying: {
       control: { type: 'boolean' },
     },
     displayClearIcon: {
@@ -75,6 +75,9 @@ export default {
         type: 'radio',
         options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
       },
+    },
+    skeleton: {
+      control: { type: 'boolean' },
     },
   },
 } as ComponentMeta<typeof PhoneNumberInput>;

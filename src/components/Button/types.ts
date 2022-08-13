@@ -6,4 +6,5 @@ export interface StyledButtonProps {
   dimension?: Dimension;
   displayAsDisabled?: boolean;
   $loading?: boolean;
+  skeleton?: boolean;
 }

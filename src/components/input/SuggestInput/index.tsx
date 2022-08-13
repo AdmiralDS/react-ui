@@ -12,6 +12,7 @@ import { MessagePanel } from './MessagePanel';
 import { SuggestPanel } from './SuggestPanel';
 import { Spinner } from '#src/components/Spinner';
 import { InputIconButton } from '#src/components/InputIconButton';
+import type { InputStatus } from '#src/components/input/types';
 
 const Dropdown = styled(DropComponent)`
   padding: 8px 0;
@@ -98,6 +99,9 @@ export interface SuggestInputProps extends Omit<TextInputProps, 'value'> {
    * Компонент для отображения альтернативной иконки
    */
   icon?: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
+
+  /** Статус поля */
+  status?: InputStatus;
 }
 
 export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps>(
@@ -112,6 +116,8 @@ export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps
       icon = SearchOutlineSVG,
       isLoadingMessage = 'Поиск совпадений',
       isEmptyMessage = 'Нет совпадений',
+      skeleton = false,
+      status,
       ...props
     },
     ref,
@@ -207,13 +213,17 @@ export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps
     }, [props.onInput]);
 
     const iconArray = React.Children.toArray(icons);
-    iconArray.push(<InputIconButton icon={icon} onClick={onSearchButtonClick} aria-hidden />);
+    if (!props.readOnly) {
+      iconArray.push(<InputIconButton icon={icon} onClick={onSearchButtonClick} aria-hidden />);
+    }
 
     return (
       <TextInput
         {...props}
         ref={refSetter(ref, inputRef)}
-        icons={!props.readOnly ? iconArray : undefined}
+        icons={iconArray}
+        status={status}
+        skeleton={skeleton}
         onKeyUp={(...p) => {
           props.onKeyUp?.(...p);
           handleKeyUp(...p);
@@ -231,7 +241,7 @@ export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps
           triggerDelayedBlur({});
         }}
       >
-        {options && isSuggestPanelOpen && (
+        {options && isSuggestPanelOpen && !skeleton && (
           <StyledDropDown
             targetRef={portalTargetRef || inputRef}
             alignSelf={alignDropdown}

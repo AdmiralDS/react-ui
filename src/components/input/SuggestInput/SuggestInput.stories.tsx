@@ -1,4 +1,4 @@
-import { INPUT_DIMENSIONS_VALUES } from '#src/components/input';
+import { INPUT_DIMENSIONS_VALUES, INPUT_STATUS_VALUES } from '#src/components/input';
 import type { ChangeEvent } from 'react';
 import * as React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
@@ -34,6 +34,11 @@ export default {
       control: { type: 'radio' },
     },
 
+    status: {
+      control: { type: 'radio' },
+      options: INPUT_STATUS_VALUES,
+    },
+
     disabled: {
       control: { type: 'boolean' },
     },
@@ -64,6 +69,9 @@ export default {
         type: 'radio',
         options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
       },
+    },
+    skeleton: {
+      control: { type: 'boolean' },
     },
   },
 } as ComponentMeta<typeof SuggestInput>;

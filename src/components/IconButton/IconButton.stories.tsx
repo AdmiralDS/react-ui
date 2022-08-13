@@ -63,9 +63,9 @@ export default {
         options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
       },
     },
-    // skeleton: {
-    //   control: { type: 'boolean' },
-    // },
+    skeleton: {
+      control: { type: 'boolean' },
+    },
   },
 } as ComponentMeta<typeof IconButton>;
 
@@ -82,7 +82,7 @@ const IconButtonDemo: ComponentStory<typeof IconButton> = (args) => {
           <T font="Body/Body 1 Long" as="div">
             Dimension - xl
           </T>
-          <IconButton dimension="xl">
+          <IconButton {...args} dimension="xl">
             <StarSolid />
           </IconButton>
         </div>
@@ -90,7 +90,7 @@ const IconButtonDemo: ComponentStory<typeof IconButton> = (args) => {
           <T font="Body/Body 1 Long" as="div">
             Dimension - l
           </T>
-          <IconButton dimension="l">
+          <IconButton {...args} dimension="l">
             <StarSolid />
           </IconButton>
         </div>
@@ -98,7 +98,7 @@ const IconButtonDemo: ComponentStory<typeof IconButton> = (args) => {
           <T font="Body/Body 1 Long" as="div">
             Dimension - m
           </T>
-          <IconButton dimension="m">
+          <IconButton {...args} dimension="m">
             <StarSolid />
           </IconButton>
         </div>
@@ -106,7 +106,7 @@ const IconButtonDemo: ComponentStory<typeof IconButton> = (args) => {
           <T font="Body/Body 1 Long" as="div">
             Dimension - s
           </T>
-          <IconButton dimension="s">
+          <IconButton {...args} dimension="s">
             <StarSolid />
           </IconButton>
         </div>

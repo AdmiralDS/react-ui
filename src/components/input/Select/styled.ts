@@ -2,26 +2,12 @@ import styled, { css } from 'styled-components';
 import { typography } from '#src/components/Typography';
 import { Dropdown as DropComponent } from '#src/components/Dropdown';
 import type { ComponentDimension } from '#src/components/input/types';
-import { ReactComponent as CloseOutlineSvg } from '@admiral-ds/icons/build/service/CloseOutline.svg';
 import { CHIP_OFFSET, COUNTER_WIDTH } from './constants';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
+import { skeletonMixin } from '../Container';
 
 const getSelectValueHeight = (dimension?: ComponentDimension, multiple?: boolean) =>
   dimension === 's' && !multiple ? 20 : 24;
-
-export const ClearIcon = styled(CloseOutlineSvg)`
-  & *[fill^='#'] {
-    fill: ${(props) => props.theme.color['Neutral/Neutral 50']};
-  }
-
-  &:hover {
-    cursor: pointer;
-  }
-
-  &:hover *[fill^='#'] {
-    fill: ${(props) => props.theme.color['Primary/Primary 70']};
-  }
-`;
 
 export const Dropdown = styled(DropComponent)`
   padding: 8px 0;
@@ -46,16 +32,9 @@ export const BorderedDiv = styled.div`
   min-width: 0;
 
   background: none;
-  border: 1px solid ${(props) => props.theme.color['Neutral/Neutral 40']};
+  border-width: 1px;
+  border-style: solid;
   border-radius: inherit;
-
-  [data-status='error'] & {
-    border: 1px solid ${(props) => props.theme.color['Error/Error 60 Main']};
-  }
-
-  [data-status='success'] & {
-    border: 1px solid ${(props) => props.theme.color['Success/Success 50 Main']};
-  }
 `;
 
 export const NativeSelect = styled.select`
@@ -101,7 +80,7 @@ export const ValueWrapper = styled.div<{
   color: ${(props) => props.theme.color['Neutral/Neutral 90']};
 
   ${({ fixHeight }) => fixHeight && fixHeightStyle}
-  [data-disabled='true'] & {
+  [data-disabled='true'] &&& {
     color: ${(props) => props.theme.color['Neutral/Neutral 30']};
   }
 `;
@@ -138,6 +117,10 @@ export const Input = styled.input<{ dimension?: ComponentDimension; isMultiple?:
     color: ${(props) => props.theme.color['Neutral/Neutral 50']};
   }
 
+  &:read-only {
+    cursor: inherit;
+  }
+
   &:disabled,
   &:disabled::placeholder {
     cursor: inherit;
@@ -154,9 +137,13 @@ export const Input = styled.input<{ dimension?: ComponentDimension; isMultiple?:
   ${ieFixes};
 `;
 
-const disabledStyle = css`
+const disableEventMixin = css`
   pointer-events: none;
   cursor: default;
+`;
+
+const disabledStyle = css`
+  ${disableEventMixin}
 
   & ${BorderedDiv} {
     border-color: transparent;
@@ -165,40 +152,8 @@ const disabledStyle = css`
 
 const focusedStyle = css`
   ${BorderedDiv} {
-    border: 2px solid ${(props) => props.theme.color['Primary/Primary 60 Main']};
+    border-width: 2px;
   }
-`;
-
-export const SelectWrapper = styled.div<{
-  disabled?: boolean;
-  readonly?: boolean;
-  focused: boolean;
-  multiple: boolean;
-  dimension?: ComponentDimension;
-}>`
-  position: relative;
-  box-sizing: border-box;
-  display: flex;
-  align-items: ${(p) => (p.multiple ? 'flex-start' : 'center')};
-  cursor: pointer;
-
-  background: ${({ theme, disabled, readonly }) =>
-    disabled || readonly ? theme.color['Neutral/Neutral 10'] : theme.color['Neutral/Neutral 00']};
-  ${({ disabled, readonly }) => (readonly || disabled ? disabledStyle : '')};
-  ${({ focused, readonly }) => (focused && !readonly ? focusedStyle : '')};
-
-  padding: ${({ dimension, multiple }) => {
-    switch (dimension) {
-      case 'xl':
-        return '16px 16px';
-      case 's':
-        return multiple ? '4px 12px' : '6px 12px';
-      default:
-        return '8px 16px';
-    }
-  }};
-
-  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
 `;
 
 export const IconPanel = styled.div<{ multiple?: boolean; dimension?: ComponentDimension }>`
@@ -216,11 +171,96 @@ export const IconPanel = styled.div<{ multiple?: boolean; dimension?: ComponentD
     height: ${({ dimension }) => (dimension === 's' ? 20 : 24)}px;
   }
 
-  [data-disabled='true'] & {
+  [data-disabled='true'] &&& {
     & *[fill^='#'] {
       fill: ${(props) => props.theme.color['Neutral/Neutral 30']};
     }
   }
+`;
+
+export const SelectWrapper = styled.div<{
+  disabled?: boolean;
+  readonly?: boolean;
+  focused: boolean;
+  multiple: boolean;
+  dimension?: ComponentDimension;
+  skeleton?: boolean;
+}>`
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  align-items: ${(p) => (p.multiple ? 'flex-start' : 'center')};
+  cursor: pointer;
+
+  padding: ${({ dimension, multiple }) => {
+    switch (dimension) {
+      case 'xl':
+        return '16px 16px';
+      case 's':
+        return multiple ? '4px 12px' : '6px 12px';
+      default:
+        return '8px 16px';
+    }
+  }};
+
+  background: ${({ theme, disabled, readonly }) =>
+    disabled || readonly ? theme.color['Neutral/Neutral 10'] : theme.color['Neutral/Neutral 00']};
+
+  ${({ disabled, readonly }) => (readonly || disabled ? disabledStyle : '')};
+  ${({ focused, readonly }) => (focused && !readonly ? focusedStyle : '')};
+
+  & ${BorderedDiv} {
+    border-color: ${(props) =>
+      props.disabled || props.readonly
+        ? 'transparent'
+        : props.focused
+        ? props.theme.color['Primary/Primary 60 Main']
+        : props.theme.color['Neutral/Neutral 40']};
+  }
+
+  &:hover ${BorderedDiv} {
+    ${(props) =>
+      !props.disabled &&
+      !props.focused &&
+      `
+      border-color: ${props.theme.color['Neutral/Neutral 60']}
+    `};
+  }
+
+  &[data-status='success'] {
+    ${(props) =>
+      !props.disabled &&
+      !props.readonly &&
+      `
+      ${BorderedDiv} {
+      border-color: ${props.theme.color['Success/Success 50 Main']};
+      }
+      &:hover ${BorderedDiv} {
+        border-color: ${props.theme.color['Success/Success 60']};
+      }
+    `}
+  }
+
+  &[data-status='error'],
+  &:invalid {
+    ${(props) =>
+      !props.disabled &&
+      !props.readonly &&
+      `
+      ${BorderedDiv} {
+        border-color: ${props.theme.color['Error/Error 60 Main']};
+      }
+  
+      &:hover ${BorderedDiv} {
+        border-color: ${props.theme.color['Error/Error 70']};
+      }
+    `}
+  }
+
+  border-radius: ${(p) => (p.skeleton ? 0 : mediumGroupBorderRadius(p.theme.shape))};
+
+  ${({ skeleton }) => skeleton && skeletonMixin};
+  ${({ skeleton }) => skeleton && disableEventMixin};
 `;
 
 export const Hidden = styled.div`

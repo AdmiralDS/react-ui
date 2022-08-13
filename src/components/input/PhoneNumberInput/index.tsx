@@ -24,13 +24,14 @@ import type { MenuDimensions } from '#src/components/Menu';
 import { keyboardKey } from '#src/components/common/keyboardKey';
 
 const Chevron = styled(ChevronRightOutline)<{ disabled?: boolean }>`
-  transition: all 0.3s;
+  transition: transform 0.3s;
   flex-shrink: 0;
   margin-left: 5px;
 
   & path {
     fill: ${(p) => (p.disabled ? p.theme.color['Neutral/Neutral 30'] : p.theme.color['Neutral/Neutral 50'])};
   }
+  ${(p) => p.disabled && 'pointer-events: none;'}
 `;
 
 const disabledStyles = css`
@@ -39,7 +40,7 @@ const disabledStyles = css`
   }
 `;
 
-const PhoneContainer = styled.div<{ dimension: Dimension; disabled?: boolean }>`
+const PhoneContainer = styled.div<{ dimension: Dimension; disabled?: boolean; readOnly?: boolean }>`
   position: relative;
 
   & ${Chevron} {
@@ -48,11 +49,16 @@ const PhoneContainer = styled.div<{ dimension: Dimension; disabled?: boolean }>`
   }
 
   & input {
-    padding-left: ${(p) => (p.dimension === 's' ? '64px' : '76px')};
+    padding-left: ${(p) => (p.dimension === 's' ? (p.readOnly ? '40px' : '64px') : p.readOnly ? '48px' : '76px')};
   }
 `;
 
-const CountryContainer = styled.div<{ dimension: Dimension; isOpened?: boolean; disabled?: boolean }>`
+const CountryContainer = styled.div<{
+  dimension: Dimension;
+  isOpened?: boolean;
+  disabled?: boolean;
+  skeleton?: boolean;
+}>`
   position: absolute;
   top: 50%;
   left: 16px;
@@ -64,10 +70,11 @@ const CountryContainer = styled.div<{ dimension: Dimension; isOpened?: boolean; 
       stroke: none;
     }
 
-    transform: ${(p) => (p.isOpened || p.disabled ? 'rotate(270deg)' : 'rotate(90deg)')};
+    transform: ${(p) => (p.isOpened && !p.disabled ? 'rotate(270deg)' : 'rotate(90deg)')};
   }
 
   ${(p) => p.disabled && disabledStyles};
+  visibility: ${(p) => (p.skeleton ? 'hidden' : 'visible')};
 `;
 
 export interface PhoneNumberInputProps extends Omit<TextInputProps, 'value'> {
@@ -89,6 +96,7 @@ export const PhoneNumberInput = React.forwardRef<HTMLInputElement, PhoneNumberIn
       defaultCountry = 'RUS',
       onlyCountries = AVAILABLE_ALPHA3_CODES,
       handleInput,
+      skeleton = false,
       ...props
     },
     ref,
@@ -269,7 +277,7 @@ export const PhoneNumberInput = React.forwardRef<HTMLInputElement, PhoneNumberIn
     };
 
     return (
-      <PhoneContainer ref={containerRef} dimension={dimension} disabled={disabled}>
+      <PhoneContainer ref={containerRef} dimension={dimension} disabled={disabled} readOnly={props.readOnly}>
         <TextInput
           {...props}
           type="tel"
@@ -279,12 +287,13 @@ export const PhoneNumberInput = React.forwardRef<HTMLInputElement, PhoneNumberIn
           value={value}
           disabled={disabled}
           dimension={dimension}
+          skeleton={skeleton}
           onKeyDown={(...p) => {
             props.onKeyDown?.(...p);
             handleKeyDown(...p);
           }}
         >
-          {isOpened && !disabled && (
+          {isOpened && !disabled && !skeleton && (
             <DropdownContainer targetRef={inputRef} onClickOutside={clickOutside}>
               <CountriesList
                 countries={countryList}
@@ -297,9 +306,9 @@ export const PhoneNumberInput = React.forwardRef<HTMLInputElement, PhoneNumberIn
             </DropdownContainer>
           )}
         </TextInput>
-        <CountryContainer dimension={dimension} isOpened={isOpened} disabled={disabled}>
+        <CountryContainer skeleton={skeleton} dimension={dimension} isOpened={isOpened} disabled={disabled}>
           {IconComponent}
-          <Chevron onClick={handleButtonClick} disabled={disabled} />
+          {!props.readOnly && <Chevron onClick={handleButtonClick} disabled={disabled || props.readOnly} />}
         </CountryContainer>
       </PhoneContainer>
     );

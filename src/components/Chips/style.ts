@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components';
 import { ReactComponent as CloseOutline } from '@admiral-ds/icons/build/service/CloseOutline.svg';
 import { TYPOGRAPHY } from '#src/components/Typography';
 import type { ChipAppearance, ChipDimension } from '#src/components/Chips';
+import { Badge } from '#src/components/Badge';
 
 const heights = css<{ dimension: ChipDimension }>`
   height: ${({ dimension }) => {
@@ -176,6 +177,7 @@ export const ChipComponentStyled = styled.div<{
   selected?: boolean;
   defaultChip?: boolean;
   withCloseIcon?: boolean;
+  withBadge?: boolean;
 }>`
   display: inline-flex;
   align-items: center;
@@ -191,7 +193,12 @@ export const ChipComponentStyled = styled.div<{
   cursor: ${({ defaultChip, disabled }) => (defaultChip && !disabled ? 'pointer' : 'default')};
   ${colorsBorderAndBackground}
   ${heights}
-  ${(p) => (p.withCloseIcon ? 'padding-left: 12px;' : paddings)}
+  ${(p) => (p.withCloseIcon ? `padding-left: ${p.dimension === 's' ? 8 : 12}px;` : paddings)}
+  ${(p) =>
+    p.withBadge
+      ? `padding-right: ${p.dimension === 's' ? 4 : 6}px;
+         padding-left: ${p.dimension === 's' ? 8 : 12}px;`
+      : ''}
   ${typography}
 `;
 export const CloseIconWrapperStyled = styled(CloseOutline)<{
@@ -286,4 +293,8 @@ export const IconWrapperStyled = styled.div<{
     border-radius: 50%;
     background-color: ${({ theme }) => theme.color['Opacity/Press']};
   }
+`;
+
+export const StyledBadge = styled(Badge)<{ dimension: ChipDimension }>`
+  margin-left: ${({ dimension }) => (dimension === 's' ? '6px' : '8px')};
 `;

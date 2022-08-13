@@ -176,6 +176,10 @@ Playground.parameters = {
 };
 
 const Template5: ComponentStory<typeof RadioButton> = () => {
+  const [visible1, setVisible1] = useState(false);
+  const [visible2, setVisible2] = useState(false);
+  const handleHintChange1 = (visible: boolean) => setVisible1(visible);
+  const handleHintChange2 = (visible: boolean) => setVisible2(visible);
   return (
     <>
       <RadioWithInformer>
@@ -183,6 +187,8 @@ const Template5: ComponentStory<typeof RadioButton> = () => {
           Dimension - m
         </RadioButton>
         <Hint
+          visible={visible1}
+          onVisibilityChange={handleHintChange1}
           renderContent={() =>
             'At breakpoint boundaries, mini units divide the screen into a fixed master grid, and multiples of mini units map to fluid grid column widths and row heights.'
           }
@@ -196,6 +202,8 @@ const Template5: ComponentStory<typeof RadioButton> = () => {
           Dimension - s
         </RadioButton>
         <Hint
+          visible={visible2}
+          onVisibilityChange={handleHintChange2}
           renderContent={() =>
             'At breakpoint boundaries, mini units divide the screen into a fixed master grid, and multiples of mini units map to fluid grid column widths and row heights.'
           }

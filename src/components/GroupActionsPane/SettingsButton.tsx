@@ -45,7 +45,6 @@ export const SettingsButton = React.forwardRef<HTMLButtonElement, ColumnsButtonP
         <StyledIconButton
           ref={refSetter(ref, buttonRef)}
           dimension={buttonDimension}
-          // onKeyDown={handleKeyDown}
           onClick={handleBtnClick}
           {...props}
         >

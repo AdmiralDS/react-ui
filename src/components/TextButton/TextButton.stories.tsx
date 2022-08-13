@@ -60,6 +60,9 @@ export default {
         options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
       },
     },
+    skeleton: {
+      control: { type: 'boolean' },
+    },
   },
 } as ComponentMeta<typeof TextButton>;
 
@@ -76,7 +79,7 @@ const TextButtonStory: ComponentStory<typeof TextButton> = (args) => {
           <StyledText font="Body/Body 1 Long" as="div">
             Dimension - M
           </StyledText>
-          <TextButton dimension="m" text="Text Button" icon={<AttachFileOutline />} appearance="primary" />
+          <TextButton {...args} dimension="m" text="Text Button" icon={<AttachFileOutline />} appearance="primary" />
           <Separator />
           <TextButton dimension="m" text="Text Button" icon={<AttachFileOutline />} displayRight />
           <Separator />

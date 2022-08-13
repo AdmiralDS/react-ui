@@ -1,4 +1,4 @@
-import { INPUT_DIMENSIONS_VALUES } from '#src/components/input';
+import { INPUT_DIMENSIONS_VALUES, INPUT_STATUS_VALUES } from '#src/components/input';
 import { Modal, ModalButtonPanel, ModalContent, ModalTitle } from '#src/components/Modal';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import type { ChangeEvent } from 'react';
@@ -56,8 +56,9 @@ export default {
       control: { type: 'boolean' },
     },
 
-    displayStatusIcon: {
-      control: { type: 'boolean' },
+    status: {
+      control: { type: 'radio' },
+      options: INPUT_STATUS_VALUES,
     },
 
     displayClearIcon: {
@@ -77,6 +78,9 @@ export default {
         type: 'radio',
         options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
       },
+    },
+    skeleton: {
+      control: { type: 'boolean' },
     },
   },
 } as ComponentMeta<typeof Select>;
@@ -190,7 +194,7 @@ const SelectSimpleTemplate: ComponentStory<typeof Select> = (props) => {
 
   return (
     <ThemeProvider theme={swapBorder}>
-      <Select {...props} value={selectValue} onChange={onChange} placeholder="Select option" style={{ minWidth: 700 }}>
+      <Select {...props} value={selectValue} onChange={onChange} placeholder="Select option">
         <Option value="Анигиляторная пушка">Анигиляторная пушка</Option>
         <Option value="Похо Торо Моронго">Похо Торо Моронго</Option>
         <Option value="Саша Даль">Саша Даль</Option>

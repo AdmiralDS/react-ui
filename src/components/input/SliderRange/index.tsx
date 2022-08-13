@@ -4,9 +4,14 @@ import { NumberInput } from '#src/components/input/NumberInput';
 import { Range } from '#src/components/Range';
 import { clearValue, fitToCurrency } from '#src/components/input/NumberInput/utils';
 import type { TextInputProps } from '#src/components/input/TextInput';
+import { skeletonMixin } from '#src/components/input/Container';
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<{ skeleton?: boolean }>`
   position: relative;
+  
+
+  pointer-events: ${(p) => (p.skeleton ? 'none' : 'all')};
+  ${({ skeleton }) => skeleton && skeletonMixin}};
 `;
 
 const InputsWrapper = styled.div`
@@ -50,11 +55,15 @@ export interface SliderRangeProps
   /** плейсхолдеры инпутов */
   placeholder?: [string, string];
   /** Опции, которые можно передать в первый инпут */
-  input1?: Omit<TextInputProps, 'onChange'>;
+  input1?: Omit<TextInputProps, 'onChange' | 'readOnly'>;
   /** Опции, которые можно передать во второй инпут */
-  input2?: Omit<TextInputProps, 'onChange'>;
+  input2?: Omit<TextInputProps, 'onChange' | 'readOnly'>;
   /** Отключение компонента */
   disabled?: boolean;
+  /** Состояние skeleton */
+  skeleton?: boolean;
+  /** Режим readOnly компонента */
+  readOnly?: boolean;
 }
 
 export const SliderRange: React.FC<SliderRangeProps> = ({
@@ -75,6 +84,8 @@ export const SliderRange: React.FC<SliderRangeProps> = ({
   input1: input1Props,
   input2: input2Props,
   disabled,
+  skeleton = false,
+  readOnly,
   ...props
 }) => {
   const rangeDimension = dimension === 's' ? dimension : 'm';
@@ -254,6 +265,7 @@ export const SliderRange: React.FC<SliderRangeProps> = ({
     thousand,
     suffix,
     disabled,
+    readOnly,
     displayPlusMinusIcons: false,
     step,
     minValue,
@@ -268,6 +280,7 @@ export const SliderRange: React.FC<SliderRangeProps> = ({
           value={input1}
           prefix={prefix[0]}
           placeholder={placeholder[0]}
+          skeleton={skeleton}
           onChange={handleInput1Change}
           onBlur={handleInput1Blur}
           {...input1Props}
@@ -278,6 +291,7 @@ export const SliderRange: React.FC<SliderRangeProps> = ({
           value={input2}
           prefix={prefix[1]}
           placeholder={placeholder[1]}
+          skeleton={skeleton}
           onChange={handleInput2Change}
           onBlur={handleInput2Blur}
           {...input2Props}
@@ -286,12 +300,13 @@ export const SliderRange: React.FC<SliderRangeProps> = ({
       </InputsWrapper>
       <Range
         value={[slider1, slider2]}
+        skeleton={skeleton}
         onChange={handleRangeChange}
         minValue={minValue}
         maxValue={maxValue}
         step={step}
         dimension={rangeDimension}
-        disabled={disabled}
+        disabled={disabled || readOnly}
       />
     </Wrapper>
   );

@@ -85,7 +85,7 @@ const Template1: ComponentStory<typeof FieldSet> = (props: FieldSetPropsType) =>
           </CheckboxField>
           <CheckboxField name="check3">Text 3</CheckboxField>
         </FieldSet>
-        <FieldSet dimension="s" legend={'Группа маленьких чекбоксов:'}>
+        <FieldSet dimension="s" legend={'Группа маленьких чекбоксов:'} required>
           <CheckboxField name="check1">Text 1</CheckboxField>
           <CheckboxField name="check2">Text 2</CheckboxField>
           <CheckboxField name="check3">Text 3</CheckboxField>
@@ -100,13 +100,14 @@ const Template1: ComponentStory<typeof FieldSet> = (props: FieldSetPropsType) =>
   );
 };
 
-const Template2: ComponentStory<typeof FieldSet> = ({ disabled, dimension }: FieldSetPropsType) => {
+const Template2: ComponentStory<typeof FieldSet> = ({ disabled, dimension, ...props }: FieldSetPropsType) => {
   const values = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15'];
   const [selected, setSelected] = React.useState('');
   return (
     <>
       <Container>
         <FieldSet
+          {...props}
           onChange={(e) => {
             setSelected((e.target as HTMLInputElement).value);
           }}

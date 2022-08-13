@@ -31,6 +31,8 @@ export interface SliderProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onCha
   disabled?: boolean;
   /** Размер компонента */
   dimension?: 'xl' | 'm';
+  /** Состояние skeleton */
+  skeleton?: boolean;
 }
 
 export const Slider = ({
@@ -46,6 +48,7 @@ export const Slider = ({
   disabled = false,
   step = 1,
   dimension = 'xl',
+  skeleton = false,
   ...props
 }: SliderProps) => {
   const tickMarks = Array.isArray(points) ? points : undefined;
@@ -235,7 +238,7 @@ export const Slider = ({
 
   return (
     <Wrapper data-disabled={disabled} {...props}>
-      <TrackWrapper dimension={dimension} onTouchStart={onTrackClick} onMouseDown={onTrackClick}>
+      <TrackWrapper dimension={dimension} skeleton={skeleton} onTouchStart={onTrackClick} onMouseDown={onTrackClick}>
         <Track>
           <FilledTrack ref={filledRef} animation={animation} />
           <DefaultTrack ref={trackRef}>

@@ -5,7 +5,7 @@ import {
   isInputDataDifferent,
 } from '#src/components/common/dom/changeInputData';
 import { refSetter } from '#src/components/common/utils/refSetter';
-import { Container } from '../Container';
+import { HeightLimitedContainer as Container } from '../Container';
 import type { ComponentDimension, ExtraProps, InputStatus } from '#src/components/input/types';
 import { typography } from '#src/components/Typography';
 import { ReactComponent as CloseOutlineSvg } from '@admiral-ds/icons/build/service/CloseOutline.svg';
@@ -14,37 +14,8 @@ import { ReactComponent as EyeOutlineSvg } from '@admiral-ds/icons/build/service
 import type { ForwardedRef, InputHTMLAttributes } from 'react';
 import * as React from 'react';
 import styled, { css } from 'styled-components';
-import { StatusIcon } from '../StatusIcon';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { InputIconButton } from '#src/components/InputIconButton';
-
-const EyeCloseIcon = styled(EyeCloseOutlineSvg)`
-  & *[fill^='#'] {
-    fill: ${(props) => props.theme.color['Neutral/Neutral 50']};
-  }
-
-  &:hover {
-    cursor: pointer;
-  }
-
-  &:hover *[fill^='#'] {
-    fill: ${(props) => props.theme.color['Primary/Primary 70']};
-  }
-`;
-
-const EyeIcon = styled(EyeOutlineSvg)`
-  & *[fill^='#'] {
-    fill: ${(props) => props.theme.color['Neutral/Neutral 50']};
-  }
-
-  &:hover {
-    cursor: pointer;
-  }
-
-  &:hover *[fill^='#'] {
-    fill: ${(props) => props.theme.color['Primary/Primary 70']};
-  }
-`;
 
 const iconSizeValue = (props: { dimension?: ComponentDimension }) => {
   switch (props.dimension) {
@@ -94,15 +65,15 @@ const BorderedDiv = styled.div`
   border: 1px solid ${(props) => props.theme.color['Neutral/Neutral 40']};
   border-radius: inherit;
 
-  [data-status='error'] & {
+  [data-status='error'] &&& {
     border: 1px solid ${(props) => props.theme.color['Error/Error 60 Main']};
   }
 
-  [data-status='success'] & {
+  [data-status='success'] &&& {
     border: 1px solid ${(props) => props.theme.color['Success/Success 50 Main']};
   }
 
-  [data-read-only] & {
+  [data-read-only] &&& {
     border-color: transparent;
   }
 `;
@@ -114,7 +85,7 @@ const colorsBorderAndBackground = css<{ disabled?: boolean }>`
     border: 2px solid ${(props) => props.theme.color['Primary/Primary 60 Main']};
   }
 
-  &:disabled + ${BorderedDiv} {
+  &&&:disabled + ${BorderedDiv}, [data-read-only] &&& + ${BorderedDiv} {
     border-color: transparent;
   }
 
@@ -122,28 +93,36 @@ const colorsBorderAndBackground = css<{ disabled?: boolean }>`
     border-color: ${(props) => (props.disabled ? 'transparent' : props.theme.color['Neutral/Neutral 60'])};
   }
 
-  &:invalid + ${BorderedDiv}, &:invalid:hover + ${BorderedDiv} {
+  &:invalid + ${BorderedDiv} {
     border: 1px solid ${(props) => props.theme.color['Error/Error 60 Main']};
   }
 
-  [data-status='error'] &:hover + ${BorderedDiv}, [data-status='error'] &:focus + ${BorderedDiv} {
+  [data-status='error'] &&&:hover:not(:disabled) + ${BorderedDiv}, &:invalid:hover:not(:disabled) + ${BorderedDiv} {
+    border: 1px solid ${(props) => props.theme.color['Error/Error 70']};
+  }
+
+  [data-status='success'] &&&:hover:not(:disabled) + ${BorderedDiv} {
+    border: 1px solid ${(props) => props.theme.color['Success/Success 60']};
+  }
+
+  [data-status='error'] &&&:focus:not(:disabled) + ${BorderedDiv}, &:invalid:focus:not(:disabled) + ${BorderedDiv} {
     border: 2px solid ${(props) => props.theme.color['Error/Error 60 Main']};
   }
 
-  [data-status='success'] &:hover + ${BorderedDiv}, [data-status='success'] &:focus + ${BorderedDiv} {
+  [data-status='success'] &&&:focus:not(:disabled) + ${BorderedDiv} {
     border: 2px solid ${(props) => props.theme.color['Success/Success 50 Main']};
   }
 
-  [data-read-only] &,
-  &:disabled {
+  [data-read-only] &&&,
+  &&&:disabled {
     ${disabledColors}
   }
 
-  &:disabled {
+  &&&:disabled {
     color: ${(props) => props.theme.color['Neutral/Neutral 30']};
   }
 
-  [data-read-only] &:hover + ${BorderedDiv}, [data-read-only] &:focus + ${BorderedDiv} {
+  [data-read-only] &&&:hover + ${BorderedDiv}, [data-read-only] &&&:focus + ${BorderedDiv} {
     border-color: transparent;
   }
 `;
@@ -233,9 +212,6 @@ export interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
   /** Иконки для отображения в правом углу поля */
   icons?: React.ReactNode;
 
-  /** Отображать иконку статуса */
-  displayStatusIcon?: boolean;
-
   /** Отображать иконку очистки поля */
   displayClearIcon?: boolean;
 
@@ -253,14 +229,15 @@ export interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
 
   /**  Наличие этого атрибута отключает возможность выделения и копирования значения поля */
   disableCopying?: boolean;
+
+  /** Состояние skeleton */
+  skeleton?: boolean;
 }
 
 export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
   (
     {
       type,
-
-      displayStatusIcon,
       displayClearIcon,
       status,
       handleInput = defaultHandleInput,
@@ -270,6 +247,7 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
       className,
       style,
       placeholder,
+      skeleton = false,
       ...props
     },
     ref,
@@ -279,21 +257,18 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
     const iconArray = React.Children.toArray(icons);
 
     const [isPasswordVisible, setPasswordVisible] = React.useState(false);
-    if (type === 'password') {
-      const Icon = isPasswordVisible ? EyeIcon : EyeCloseIcon;
+    if (!props.readOnly && type === 'password') {
+      const Icon = isPasswordVisible ? EyeOutlineSvg : EyeCloseOutlineSvg;
       iconArray.push(
-        <Icon
+        <InputIconButton
+          icon={Icon}
           key="eye-icon"
-          aria-hidden
           onClick={() => {
             setPasswordVisible(!isPasswordVisible);
           }}
+          aria-hidden
         />,
       );
-    }
-
-    if (displayStatusIcon) {
-      iconArray.push(<StatusIcon key="status-icon" status={status} aria-hidden />);
     }
 
     if (!props.readOnly && displayClearIcon) {
@@ -355,11 +330,11 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
       <Container
         className={className}
         style={style}
-        disabled={props.disabled}
         dimension={props.dimension}
         ref={containerRef}
         data-read-only={props.readOnly ? true : undefined}
         data-status={status}
+        skeleton={skeleton}
         {...(props.disableCopying && {
           onMouseDown: stopEvent,
         })}

@@ -2,6 +2,52 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.9.0](https://github.com/AdmiralDS/react-ui/compare/v1.8.0...v1.9.0) (2022-08-09)
+
+
+### Features
+
+* **FieldSet:** add example with required mark for Checkboxes ([cb3a63f](https://github.com/AdmiralDS/react-ui/commit/cb3a63f934240e0f7078d5b8cd4766bb8955aba9))
+* **MenuButton:** add example with icons ([c900e70](https://github.com/AdmiralDS/react-ui/commit/c900e7079870ed2ed0df2a9701679127afd777b5))
+* **Table:** add multi level sort ([4b622f4](https://github.com/AdmiralDS/react-ui/commit/4b622f4a2e53a9b0df9af9b8ed8e630bb76206eb))
+* **TagMenu:** add TagMenu component ([5c11698](https://github.com/AdmiralDS/react-ui/commit/5c116984f1218a9fad73db535ab0b27c27508eed))
+* **themes:** add new color Special/Dark Static Neutral 70 ([ab64a2d](https://github.com/AdmiralDS/react-ui/commit/ab64a2d0ea51d97477ae1d9df5d818ec9b0abb89))
+* **themes:** change Modal opacity level to 60% in Dark theme ([7d432ac](https://github.com/AdmiralDS/react-ui/commit/7d432ac6b1ef4baeed293727b1def2cb19beb904))
+
+
+### Bug Fixes
+
+* **Badge:** display badge with value 0 ([9603b77](https://github.com/AdmiralDS/react-ui/commit/9603b77157d999db349f33bbdb65a75ae5f3b01b))
+* **Checkbox:** add stories examples ([c762835](https://github.com/AdmiralDS/react-ui/commit/c762835d5a8ae6683a6e7d36bd9047352553b3e9))
+* **Field:** label text-align ([4130b77](https://github.com/AdmiralDS/react-ui/commit/4130b7791692c429b142b914b32e120bfc2436f0))
+* **FieldSet:** place '*' after legend when required ([5a69ca4](https://github.com/AdmiralDS/react-ui/commit/5a69ca41be39bd1d998eb65fb9ef455aacc208a9))
+* **FieldSet:** set legend font color with error status ([19f788f](https://github.com/AdmiralDS/react-ui/commit/19f788f7bc98def6ed662fbaacb64323cd05a30d))
+* **NumberInput:** fix bug with input size and placeholder ([2820458](https://github.com/AdmiralDS/react-ui/commit/2820458fcc9bb336a5be00a31b81b34f433ee279))
+* **Select:** enable pointer events on disabled control ([b61b3a2](https://github.com/AdmiralDS/react-ui/commit/b61b3a22a9162b32c84b00caff217187d9a016bd))
+* **Table:** add tooltip for column title if text is overflow ([d0fa896](https://github.com/AdmiralDS/react-ui/commit/d0fa896ed7cdc687411d6c9a03ec521220f591f8))
+
+## [1.8.0](https://github.com/AdmiralDS/react-ui/compare/v1.7.0...v1.8.0) (2022-07-28)
+
+
+### Features
+
+* **Chips:** add badge ([f62619f](https://github.com/AdmiralDS/react-ui/commit/f62619f28a0260f96c714ca368979bc0d58b4750))
+* **EditMode:** remove displayStatusIcon prop ([571d8e3](https://github.com/AdmiralDS/react-ui/commit/571d8e3b385089b4d8f8a37f1f341fb14e6e5459))
+* **Hint:** add props visible and onVisibilityChange to use component as controlled ([f112f15](https://github.com/AdmiralDS/react-ui/commit/f112f15622c77ac7c7fb77ba8b63fcfbad407e9b))
+* **NumberInput:** refactor icons and remove displayClearIcon prop ([13addbe](https://github.com/AdmiralDS/react-ui/commit/13addbe75d23cf13e18bd64ac1ea2d9c9192afbe))
+* **PaginationOne:** use DropMenu instead of DropDown ([6d582ee](https://github.com/AdmiralDS/react-ui/commit/6d582ee6f3526e3f283f82797860450f23be182e))
+* **PhoneNumberInput:** remove displayStatusIcon prop, fix readOnly style ([228aa6a](https://github.com/AdmiralDS/react-ui/commit/228aa6a6a724a59576c1be53ea4ba70269fd8e4d))
+* **Select:** remove displayStatusIcon prop ([5ee25ba](https://github.com/AdmiralDS/react-ui/commit/5ee25ba696b20f8e08cc496e66f2b8c3963e7d06))
+* **SliderRange:** add readOnly prop to component, fix readOnly state in input components ([af8fb22](https://github.com/AdmiralDS/react-ui/commit/af8fb224cd28fe54ef2033fc7c6575dd106f28e0))
+* **SuggestInput, TextArea, TimeInput:** remove displayStatusIcon prop, refactor icons with InputIconButton component ([c95e40b](https://github.com/AdmiralDS/react-ui/commit/c95e40b68d034fa40bf276be828f5b466257696b))
+* **TextInput:** refactor icons and remove displayStatusIcon prop ([127b7cc](https://github.com/AdmiralDS/react-ui/commit/127b7cc5fac3ad2652374afa4aeae081e2e83a24))
+* **Toggle:** set new color in active disabled state ([850cf27](https://github.com/AdmiralDS/react-ui/commit/850cf2790c6a1b0853e191da9745f494c05f54a6))
+
+
+### Bug Fixes
+
+* **PaginationOne:** fix button text color ([95cb30a](https://github.com/AdmiralDS/react-ui/commit/95cb30a5f6f6cb058d4dbe7a47e4cbffadc62680))
+
 ## [1.7.0](https://github.com/AdmiralDS/react-ui/compare/v1.6.0...v1.7.0) (2022-07-19)
 
 

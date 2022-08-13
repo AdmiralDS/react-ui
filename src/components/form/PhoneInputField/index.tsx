@@ -17,6 +17,7 @@ export const PhoneInputField = React.forwardRef<HTMLInputElement, PhoneInputFiel
     id = uid(),
     disabled,
     displayCharacterCounter,
+    skeleton,
     ...restProps
   } = props;
   const fieldContainerProps = {
@@ -30,6 +31,7 @@ export const PhoneInputField = React.forwardRef<HTMLInputElement, PhoneInputFiel
     disabled,
     displayCharacterCounter,
     ref: inputRef,
+    skeleton,
     'data-field-id': id,
     'data-field-name': restProps.name,
   } as Record<string, any>;
@@ -45,6 +47,7 @@ export const PhoneInputField = React.forwardRef<HTMLInputElement, PhoneInputFiel
     'aria-required': required,
     status,
     disabled,
+    skeleton,
     ...restProps,
     portalTargetRef: inputRef,
   };
