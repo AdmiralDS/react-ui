@@ -81,8 +81,8 @@ fieldset[data-dimension='s'] .c4 {
   display: none;
 }
 
-.c7:hover::after,
-.c7:focus + .c7:not(:disabled)::after {
+.c7:hover:not(:disabled)::after,
+.c7:focus:not(:disabled) + .c7:not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
@@ -360,8 +360,8 @@ fieldset[data-dimension='s'] .c4 {
   display: none;
 }
 
-.c7:hover::after,
-.c7:focus + .c7:not(:disabled)::after {
+.c7:hover:not(:disabled)::after,
+.c7:focus:not(:disabled) + .c7:not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
@@ -694,8 +694,8 @@ fieldset[data-dimension='s'] .c4 {
   display: none;
 }
 
-.c7:hover::after,
-.c7:focus + .c7:not(:disabled)::after {
+.c7:hover:not(:disabled)::after,
+.c7:focus:not(:disabled) + .c7:not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
@@ -973,8 +973,8 @@ fieldset[data-dimension='s'] .c4 {
   display: none;
 }
 
-.c7:hover::after,
-.c7:focus + .c7:not(:disabled)::after {
+.c7:hover:not(:disabled)::after,
+.c7:focus:not(:disabled) + .c7:not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
@@ -1307,8 +1307,8 @@ fieldset[data-dimension='s'] .c4 {
   display: none;
 }
 
-.c7:hover::after,
-.c7:focus + .c7:not(:disabled)::after {
+.c7:hover:not(:disabled)::after,
+.c7:focus:not(:disabled) + .c7:not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
@@ -1586,8 +1586,8 @@ fieldset[data-dimension='s'] .c4 {
   display: none;
 }
 
-.c7:hover::after,
-.c7:focus + .c7:not(:disabled)::after {
+.c7:hover:not(:disabled)::after,
+.c7:focus:not(:disabled) + .c7:not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
