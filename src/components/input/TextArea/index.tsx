@@ -7,7 +7,6 @@ import type { ForwardedRef, TextareaHTMLAttributes } from 'react';
 import * as React from 'react';
 import styled, { css } from 'styled-components';
 import { InputIconButton } from '#src/components/InputIconButton';
-import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { Container } from '../Container';
 
 const iconSizeValue = (props: { dimension?: ComponentDimension }) => {
@@ -55,15 +54,15 @@ const BorderedDiv = styled.div`
   border: 1px solid ${(props) => props.theme.color['Neutral/Neutral 40']};
   border-radius: inherit;
 
-  [data-status='error'] & {
+  [data-status='error'] &&& {
     border: 1px solid ${(props) => props.theme.color['Error/Error 60 Main']};
   }
 
-  [data-status='success'] & {
+  [data-status='success'] &&& {
     border: 1px solid ${(props) => props.theme.color['Success/Success 50 Main']};
   }
 
-  [data-read-only] & {
+  [data-read-only] &&& {
     border-color: transparent;
   }
 `;
@@ -75,7 +74,7 @@ const colorsBorderAndBackground = css<{ disabled?: boolean }>`
     border: 2px solid ${(props) => props.theme.color['Primary/Primary 60 Main']};
   }
 
-  &:disabled + ${BorderedDiv}, [data-read-only] & + ${BorderedDiv} {
+  &&&:disabled + ${BorderedDiv}, [data-read-only] &&& + ${BorderedDiv} {
     border-color: transparent;
   }
 
@@ -87,20 +86,28 @@ const colorsBorderAndBackground = css<{ disabled?: boolean }>`
     border: 1px solid ${(props) => props.theme.color['Error/Error 60 Main']};
   }
 
-  [data-status='error'] &:hover + ${BorderedDiv}, [data-status='error'] &:focus + ${BorderedDiv} {
-    border: 1px solid ${(props) => props.theme.color['Error/Error 60 Main']};
+  [data-status='error'] &&&:hover:not(:disabled) + ${BorderedDiv}, &:invalid:hover:not(:disabled) + ${BorderedDiv} {
+    border: 1px solid ${(props) => props.theme.color['Error/Error 70']};
   }
 
-  [data-status='success'] &:hover + ${BorderedDiv}, [data-status='success'] &:focus + ${BorderedDiv} {
-    border: 1px solid ${(props) => props.theme.color['Success/Success 50 Main']};
+  [data-status='success'] &&&:hover:not(:disabled) + ${BorderedDiv} {
+    border: 1px solid ${(props) => props.theme.color['Success/Success 60']};
   }
 
-  [data-read-only] &,
-  &:disabled {
+  [data-status='error'] &&&:focus:not(:disabled) + ${BorderedDiv}, &:invalid:focus:not(:disabled) + ${BorderedDiv} {
+    border: 2px solid ${(props) => props.theme.color['Error/Error 60 Main']};
+  }
+
+  [data-status='success'] &&&:focus:not(:disabled) + ${BorderedDiv} {
+    border: 2px solid ${(props) => props.theme.color['Success/Success 50 Main']};
+  }
+
+  [data-read-only] &&&,
+  &&&:disabled {
     ${disabledColors}
   }
 
-  [data-read-only] &:hover + ${BorderedDiv}, [data-read-only] &:focus + ${BorderedDiv} {
+  [data-read-only] &&&:hover + ${BorderedDiv}, [data-read-only] &&&:focus + ${BorderedDiv} {
     border-color: transparent;
   }
 `;
@@ -132,7 +139,8 @@ const Text = styled.textarea<ExtraProps>`
     color: ${(props) => props.theme.color['Neutral/Neutral 50']};
   }
 
-  &:disabled::placeholder {
+  &:disabled::placeholder,
+  &:disabled {
     color: ${(props) => props.theme.color['Neutral/Neutral 30']};
   }
 

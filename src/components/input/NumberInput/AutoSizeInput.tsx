@@ -37,7 +37,7 @@ const Sizer = styled.div`
   box-sizing: border-box;
 `;
 
-const BorderedDiv = styled.div<{ status?: TextInputProps['status'] }>`
+export const BorderedDiv = styled.div<{ status?: TextInputProps['status'] }>`
   position: absolute;
   top: 0;
   bottom: 0;
@@ -73,24 +73,20 @@ const colorsBorderAndBackground = css<{ disabled?: boolean }>`
     border-color: transparent;
   }
 
-  &:hover:not(:focus) + ${BorderedDiv} {
-    border-color: ${(props) => (props.disabled ? 'transparent' : props.theme.color['Neutral/Neutral 60'])};
+  &[data-status='error']:focus + ${BorderedDiv}, &:invalid:focus + ${BorderedDiv} {
+    border: 2px solid ${(props) => props.theme.color['Error/Error 60 Main']};
   }
 
-  &:invalid + ${BorderedDiv}, &:invalid:hover + ${BorderedDiv} {
+  &:invalid + ${BorderedDiv} {
     border: 1px solid ${(props) => props.theme.color['Error/Error 60 Main']};
   }
 
-  &[data-status='error']:hover + ${BorderedDiv}, &[data-status='error']:focus + ${BorderedDiv} {
-    border: 1px solid ${(props) => props.theme.color['Error/Error 60 Main']};
+  &[data-status='success']:focus + ${BorderedDiv} {
+    border: 2px solid ${(props) => props.theme.color['Success/Success 50 Main']};
   }
 
-  &[data-status='success']:hover + ${BorderedDiv}, &[data-status='success']:focus + ${BorderedDiv} {
-    border: 1px solid ${(props) => props.theme.color['Success/Success 50 Main']};
-  }
-
-  [data-read-only] &,
-  &:disabled {
+  [data-read-only] &&&,
+  &&&:disabled {
     background-color: ${(props) => props.theme.color['Neutral/Neutral 10']};
   }
 
@@ -98,7 +94,7 @@ const colorsBorderAndBackground = css<{ disabled?: boolean }>`
     color: ${(props) => props.theme.color['Neutral/Neutral 30']};
   }
 
-  [data-read-only] &:hover + ${BorderedDiv}, [data-read-only] &:focus + ${BorderedDiv} {
+  [data-read-only] &:focus + ${BorderedDiv} {
     border-color: transparent;
   }
 `;
