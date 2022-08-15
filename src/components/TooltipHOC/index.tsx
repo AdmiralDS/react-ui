@@ -1,34 +1,53 @@
 import * as React from 'react';
+import type { RefCallback, RefObject } from '#src/components/common/utils/handleRef';
 import { handleRef } from '#src/components/common/utils/handleRef';
 import { getScrollableParents } from '#src/components/common/utils/getScrollableParents';
 import { getScrollbarSize } from '#src/components/common/dom/scrollbarUtil';
 import { refSetter } from '#src/components/common/utils/refSetter';
 
+import type { TooltipPositionType } from './utils';
 import { getTooltipDirection } from './utils';
 import { FakeTarget, Portal, TooltipContainer, TooltipWrapper } from './style';
 
 const TOOLTIP_DELAY = 1500;
 
-export function TooltipHOC<P extends object>(
-  Component: React.ComponentType<P>,
-  renderContent: () => React.ReactNode,
-  tooltipPosition?: any,
-  withDelay?: any,
-  tooltipRef?: any,
-) {
-  const WrappedComponent = ({ innerRef, ...props }: any) => {
+export interface TooltipHocProps {
+  visible: boolean;
+  onVisibilityChange: (visible: boolean) => void;
+  renderContent: () => React.ReactNode;
+  container?: Element | null;
+  withDelay?: boolean;
+  tooltipRef?: RefCallback<HTMLDivElement> | RefObject<HTMLDivElement> | null;
+  tooltipPosition?: TooltipPositionType;
+}
+
+export type WrappedComponentProps = {
+  innerRef?: any;
+};
+
+export function TooltipHOC<P extends React.ComponentPropsWithRef<any>>(Component: React.ComponentType<P>) {
+  const WrappedComponent = (props: P & TooltipHocProps & WrappedComponentProps) => {
+    const {
+      innerRef,
+      visible,
+      onVisibilityChange,
+      renderContent,
+      container: userContainer,
+      withDelay,
+      tooltipRef,
+      tooltipPosition,
+      ...wrappedOnlyProps
+    } = props;
     const anchorElementRef = React.useRef<any>(null);
     const tooltipElementRef = React.useRef<HTMLDivElement | null>(null);
-    // const container: Element = userContainer || document.body;
-    const container: Element = document.body;
+    const container: Element = userContainer || document.body;
     let scrollableParents: Array<Element> | undefined = undefined;
     let showTooltipTimer: any;
 
-    const [visible, setVisible] = React.useState<boolean>(false);
     const [portalFlexDirection, setPortalFlexDirection] = React.useState('');
     const [portalFullWidth, setPortalFullWidth] = React.useState(false);
 
-    const hideTooltip = () => setVisible(false);
+    const hideTooltip = () => onVisibilityChange(false);
 
     const manageTooltip = (scrollbarSize: number) => {
       if (anchorElementRef.current && tooltipElementRef.current) {
@@ -124,7 +143,7 @@ export function TooltipHOC<P extends object>(
     const handleMouseEnter = () => {
       showTooltipTimer = window.setTimeout(
         () => {
-          setVisible(true);
+          onVisibilityChange(true);
           manageTooltip(getScrollbarSize());
         },
         withDelay ? TOOLTIP_DELAY : 0,
@@ -139,7 +158,7 @@ export function TooltipHOC<P extends object>(
     return (
       <>
         <Component
-          {...(props as P)}
+          {...(wrappedOnlyProps as any)}
           innerRef={refSetter(innerRef, anchorElementRef)}
           onFocus={(e: FocusEvent) => {
             handleMouseEnter();
@@ -170,7 +189,7 @@ export function TooltipHOC<P extends object>(
   };
 
   // использую forwardRef на тот случай, если ref захотят прокинуть на результат вызова TooltipHoc
-  return React.forwardRef((props, ref) => {
+  return React.forwardRef<any, P & TooltipHocProps>((props: P & TooltipHocProps, ref) => {
     return <WrappedComponent innerRef={ref} {...props} />;
   });
 }

@@ -4,9 +4,8 @@ import { withDesign } from 'storybook-addon-designs';
 import styled, { ThemeProvider } from 'styled-components';
 import { refSetter } from '#src/components/common/utils/refSetter';
 
-import { Tooltip } from '#src/components/Tooltip';
-import { TooltipHOC } from '.';
-import { TextInput } from '#src/components/input/TextInput';
+import { TooltipHOC, WrappedComponentProps } from '.';
+import { TextInput, TextInputProps } from '#src/components/input/TextInput';
 import { Theme } from '#src/components/themes';
 
 const Separator = styled.div<{ height?: number }>`
@@ -57,55 +56,67 @@ export default {
   },
 } as any;
 
-const Template1: ComponentStory<typeof Tooltip> = (args) => {
+const Template1: ComponentStory<any> = (args) => {
   function swapBorder(theme: Theme): Theme {
     theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
+  const [visible, setVisible] = React.useState(false);
 
-  const Input = ({ innerRef, ...props }: any) => {
+  const Input = ({ innerRef, ...props }: TextInputProps & WrappedComponentProps) => {
     return <TextInput ref={innerRef} {...props} />;
   };
 
-  const TooltipedInput: any = TooltipHOC(Input, () => 'use FC component in TooltipHoc');
+  const TooltipedInput = TooltipHOC(Input);
+
   return (
     <ThemeProvider theme={swapBorder}>
-      <TooltipedInput />
+      <TooltipedInput
+        renderContent={() => 'use FC component in TooltipHoc'}
+        visible={visible}
+        onVisibilityChange={(visible: boolean) => setVisible(visible)}
+      />
     </ThemeProvider>
   );
 };
 
-const Template2: ComponentStory<typeof Tooltip> = (args) => {
+const Template2: ComponentStory<any> = (args) => {
   function swapBorder(theme: Theme): Theme {
     theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
+  const [visible, setVisible] = React.useState(false);
 
-  class Input extends React.Component<any> {
+  class Input extends React.Component<TextInputProps & WrappedComponentProps> {
     render() {
       return <TextInput ref={this.props.innerRef} {...this.props} />;
     }
   }
 
-  const TooltipedInput: any = TooltipHOC(Input, () => 'use class component in TooltipHoc');
+  const TooltipedInput = TooltipHOC(Input);
   return (
     <ThemeProvider theme={swapBorder}>
-      <TooltipedInput />
+      <TooltipedInput
+        renderContent={() => 'use class component in TooltipHoc'}
+        visible={visible}
+        onVisibilityChange={(visible: boolean) => setVisible(visible)}
+      />
     </ThemeProvider>
   );
 };
 
-const Template3: ComponentStory<typeof Tooltip> = (args) => {
+const Template3: ComponentStory<any> = (args) => {
   function swapBorder(theme: Theme): Theme {
     theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
+  const [visible, setVisible] = React.useState(false);
 
-  const Input = ({ innerRef, ...props }: any) => {
+  const Input = ({ innerRef, ...props }: TextInputProps & WrappedComponentProps) => {
     return <TextInput ref={innerRef} {...props} />;
   };
 
-  const TooltipedInput: any = TooltipHOC(Input, () => 'set ref on TooltipHoc result');
+  const TooltipedInput = TooltipHOC(Input);
   const inputRef = React.useRef<HTMLInputElement | null>(null);
   React.useEffect(() => {
     inputRef.current?.focus();
@@ -113,18 +124,23 @@ const Template3: ComponentStory<typeof Tooltip> = (args) => {
 
   return (
     <ThemeProvider theme={swapBorder}>
-      <TooltipedInput ref={inputRef} />
+      <TooltipedInput
+        ref={inputRef}
+        renderContent={() => 'set ref on TooltipHoc result'}
+        visible={visible}
+        onVisibilityChange={(visible: boolean) => setVisible(visible)}
+      />
     </ThemeProvider>
   );
 };
 
-const Template4: ComponentStory<typeof Tooltip> = (args) => {
+const Template4: ComponentStory<any> = (args) => {
   function swapBorder(theme: Theme): Theme {
     theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 
-  const Input = ({ innerRef, ...props }: any) => {
+  const Input = ({ innerRef, ...props }: TextInputProps & WrappedComponentProps) => {
     const inputRef = React.useRef<HTMLInputElement | null>(null);
     React.useEffect(() => {
       if (inputRef.current) {
@@ -135,14 +151,13 @@ const Template4: ComponentStory<typeof Tooltip> = (args) => {
     return <TextInput ref={refSetter(innerRef, inputRef)} {...props} />;
   };
 
-  class Input2 extends React.Component<any> {
+  class Input2 extends React.Component<TextInputProps & WrappedComponentProps> {
     private inputField: React.RefObject<HTMLInputElement>;
     constructor(props: any) {
       super(props);
       this.inputField = React.createRef();
     }
     componentDidMount() {
-      this.inputField.current?.focus();
       if (this.inputField.current) {
         this.inputField.current.style.border = '4px solid blue';
       }
@@ -152,13 +167,22 @@ const Template4: ComponentStory<typeof Tooltip> = (args) => {
       return <TextInput ref={refSetter(this.props.innerRef, this.inputField)} {...this.props} />;
     }
   }
-
-  const TooltipedInput: any = TooltipHOC(Input, () => 'merge refs in FC component');
-  const TooltipedInput2: any = TooltipHOC(Input2, () => 'merge refs in class component');
+  const [visible1, setVisible1] = React.useState(false);
+  const [visible2, setVisible2] = React.useState(false);
+  const TooltipedInput = TooltipHOC(Input);
+  const TooltipedInput2 = TooltipHOC(Input2);
   return (
     <ThemeProvider theme={swapBorder}>
-      <TooltipedInput />
-      <TooltipedInput2 />
+      <TooltipedInput
+        renderContent={() => 'merge refs in FC component'}
+        visible={visible1}
+        onVisibilityChange={(visible: boolean) => setVisible1(visible)}
+      />
+      <TooltipedInput2
+        renderContent={() => 'merge refs in class component'}
+        visible={visible2}
+        onVisibilityChange={(visible: boolean) => setVisible2(visible)}
+      />
     </ThemeProvider>
   );
 };
@@ -178,3 +202,20 @@ TooltipRef.storyName = 'TooltipHoc. Прокидывание ref на резул
 export const TooltipRefSetter = Template4.bind({});
 TooltipRefSetter.args = {};
 TooltipRefSetter.storyName = 'TooltipHoc. Merge inputRef с ref6 созданным внутри компонента.';
+
+const Counter = React.forwardRef((props, ref: any) => {
+  class Counter extends React.Component {
+    render() {
+      return (
+        <div>
+          <button ref={ref}>button</button>
+        </div>
+      );
+    }
+  }
+  return <Counter />;
+});
+
+const Button = React.forwardRef((props, ref: any) => {
+  return <button ref={ref}>{props.children}</button>;
+});
