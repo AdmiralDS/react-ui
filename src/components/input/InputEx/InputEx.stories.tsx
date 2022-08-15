@@ -5,6 +5,7 @@ import { withDesign } from 'storybook-addon-designs';
 import { INPUT_DIMENSIONS_VALUES } from '#src/components/input/types';
 import { Theme } from '#src/components/themes';
 import { ThemeProvider } from 'styled-components';
+import { SuffixSelect } from '#src/components/input/InputEx/SuffixSelect';
 
 export default {
   title: 'Admiral-2.1/Input/InputEx',
@@ -104,9 +105,49 @@ const Template: ComponentStory<typeof InputEx> = (props) => {
   );
 };
 
+const Template2: ComponentStory<typeof InputEx> = (props) => {
+  const cleanProps = (Object.keys(props) as Array<keyof typeof props>).reduce((acc, key) => {
+    if (props[key] !== undefined) acc[key] = props[key];
+
+    return acc;
+  }, {} as Record<any, any>);
+
+  const [localValue, setValue] = useState<string>(String(props.value) ?? '');
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const inputValue = e.currentTarget.value;
+    setValue(inputValue);
+    props.onChange?.(e);
+  };
+
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    return theme;
+  }
+
+  const [suffixValue, setSuffixValue] = React.useState('Suffix');
+  return (
+    <ThemeProvider theme={swapBorder}>
+      <InputEx
+        {...cleanProps}
+        value={localValue}
+        onChange={handleChange}
+        suffix={<SuffixSelect value={suffixValue} onChange={(value) => setSuffixValue(value)} options={[]} />}
+      />
+    </ThemeProvider>
+  );
+};
+
 export const InputExStory = Template.bind({});
 InputExStory.args = {
   value: 'Привет!',
   placeholder: 'Placeholder',
 };
 InputExStory.storyName = 'Базовый input компонент';
+
+export const InputExStory2 = Template2.bind({});
+InputExStory2.args = {
+  value: 'Привет!',
+  placeholder: 'Placeholder',
+};
+InputExStory2.storyName = 'input компонент с выбором суффикса';
