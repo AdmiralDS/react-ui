@@ -13,7 +13,7 @@ const TOOLTIP_DELAY = 1500;
 
 export interface TooltipHocProps {
   visible: boolean;
-  onVisibilityChange: (visible: boolean) => void;
+  handleVisibilityChange: (visible: boolean) => void;
   renderContent: () => React.ReactNode;
   container?: Element | null;
   withDelay?: boolean;
@@ -30,7 +30,7 @@ export function TooltipHOC<P extends React.ComponentPropsWithRef<any>>(Component
     const {
       innerRef,
       visible,
-      onVisibilityChange,
+      handleVisibilityChange,
       renderContent,
       container: userContainer,
       withDelay,
@@ -47,7 +47,7 @@ export function TooltipHOC<P extends React.ComponentPropsWithRef<any>>(Component
     const [portalFlexDirection, setPortalFlexDirection] = React.useState('');
     const [portalFullWidth, setPortalFullWidth] = React.useState(false);
 
-    const hideTooltip = () => onVisibilityChange(false);
+    const hideTooltip = () => handleVisibilityChange(false);
 
     const manageTooltip = (scrollbarSize: number) => {
       if (anchorElementRef.current && tooltipElementRef.current) {
@@ -143,7 +143,7 @@ export function TooltipHOC<P extends React.ComponentPropsWithRef<any>>(Component
     const handleMouseEnter = () => {
       showTooltipTimer = window.setTimeout(
         () => {
-          onVisibilityChange(true);
+          (handleVisibilityChange as any)(true);
           manageTooltip(getScrollbarSize());
         },
         withDelay ? TOOLTIP_DELAY : 0,

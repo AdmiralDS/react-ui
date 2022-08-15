@@ -74,7 +74,7 @@ const Template1: ComponentStory<any> = (args) => {
       <TooltipedInput
         renderContent={() => 'use FC component in TooltipHoc'}
         visible={visible}
-        onVisibilityChange={(visible: boolean) => setVisible(visible)}
+        handleVisibilityChange={(visible: boolean) => setVisible(visible)}
       />
     </ThemeProvider>
   );
@@ -99,7 +99,7 @@ const Template2: ComponentStory<any> = (args) => {
       <TooltipedInput
         renderContent={() => 'use class component in TooltipHoc'}
         visible={visible}
-        onVisibilityChange={(visible: boolean) => setVisible(visible)}
+        handleVisibilityChange={(visible: boolean) => setVisible(visible)}
       />
     </ThemeProvider>
   );
@@ -119,7 +119,7 @@ const Template3: ComponentStory<any> = (args) => {
   const TooltipedInput = TooltipHOC(Input);
   const inputRef = React.useRef<HTMLInputElement | null>(null);
   React.useEffect(() => {
-    inputRef.current?.focus();
+    console.log(inputRef.current);
   }, []);
 
   return (
@@ -128,7 +128,7 @@ const Template3: ComponentStory<any> = (args) => {
         ref={inputRef}
         renderContent={() => 'set ref on TooltipHoc result'}
         visible={visible}
-        onVisibilityChange={(visible: boolean) => setVisible(visible)}
+        handleVisibilityChange={(visible: boolean) => setVisible(visible)}
       />
     </ThemeProvider>
   );
@@ -176,12 +176,12 @@ const Template4: ComponentStory<any> = (args) => {
       <TooltipedInput
         renderContent={() => 'merge refs in FC component'}
         visible={visible1}
-        onVisibilityChange={(visible: boolean) => setVisible1(visible)}
+        handleVisibilityChange={(visible: boolean) => setVisible1(visible)}
       />
       <TooltipedInput2
         renderContent={() => 'merge refs in class component'}
         visible={visible2}
-        onVisibilityChange={(visible: boolean) => setVisible2(visible)}
+        handleVisibilityChange={(visible: boolean) => setVisible2(visible)}
       />
     </ThemeProvider>
   );
