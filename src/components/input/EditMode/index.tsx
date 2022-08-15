@@ -189,7 +189,8 @@ export const EditMode = React.forwardRef<HTMLInputElement, EditModeProps>(
         cssMixin={containerCssMixin}
       >
         {edit ? (
-          !disabled && (
+          !disabled &&
+          !props.readOnly && (
             <>
               <EditInput
                 ref={refSetter(ref, inputRef)}
@@ -215,8 +216,8 @@ export const EditMode = React.forwardRef<HTMLInputElement, EditModeProps>(
           )
         ) : (
           <>
-            <Text onClick={enableEdit}>{value}</Text>
-            <EditIcon height={iconSize} width={iconSize} onClick={enableEdit} />
+            <Text onClick={!props.readOnly ? enableEdit : undefined}>{value}</Text>
+            {!props.readOnly && <EditIcon height={iconSize} width={iconSize} onClick={enableEdit} />}
           </>
         )}
       </Wrapper>
