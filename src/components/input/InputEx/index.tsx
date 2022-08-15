@@ -30,10 +30,6 @@ const horizontalPaddingValue = (props: { dimension?: ComponentDimension }) => {
   }
 };
 
-const extraPadding = css<ExtraProps>`
-  padding-right: ${(props) => (iconSizeValue(props) + 8) * (props.iconCount ?? 0) - 8 * (props.iconCount ? 1 : 0)}px;
-`;
-
 const BorderedDiv = styled.div`
   position: absolute;
   top: 0;
@@ -272,7 +268,11 @@ export const InputEx = React.forwardRef<HTMLInputElement, InputExProps>(
         data-status={status}
         onMouseDown={props.readOnly ? preventDefault : undefined}
       >
-        {!!prefix && <PrefixContainer dimension={props.dimension}>{prefix}</PrefixContainer>}
+        {!!prefix && (
+          <PrefixContainer dimension={props.dimension} disabled={props.disabled}>
+            {prefix}
+          </PrefixContainer>
+        )}
         <Input ref={refSetter(ref, inputRef)} {...props} placeholder={placeholder} iconCount={iconCount} />
         {iconCount > 0 && (
           <IconPanel disabled={props.disabled} dimension={props.dimension}>
@@ -280,7 +280,11 @@ export const InputEx = React.forwardRef<HTMLInputElement, InputExProps>(
           </IconPanel>
         )}
         <BorderedDiv />
-        {!!suffix && <SuffixContainer dimension={props.dimension}>{suffix}</SuffixContainer>}
+        {!!suffix && (
+          <SuffixContainer dimension={props.dimension} disabled={props.disabled}>
+            {suffix}
+          </SuffixContainer>
+        )}
 
         {children}
       </Container>
