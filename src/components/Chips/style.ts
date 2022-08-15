@@ -279,19 +279,30 @@ export const IconBeforeWrapperStyled = styled.div`
   display: inline-block;
   margin-right: 8px;
 `;
-export const IconAfterWrapperStyled = styled.div<{ withCloseIcon?: boolean }>`
+export const IconAfterWrapperStyled = styled.div<{ dimension: ChipDimension; withCloseIcon?: boolean }>`
   display: inline-block;
   margin-left: ${(p) => (p.withCloseIcon ? '2px' : '8px')};
   ${(p) =>
     p.withCloseIcon &&
     `
-    &:hover {
+    &:after {
+      position: absolute;
+      content: '';
+      top: -1px;
+      right: -1px;
+      bottom: -1px;
+      width: ${p.dimension === 'm' ? 33 : 25}px;
       border-radius: 50%;
-      background-color: ${p.theme.color['Opacity/Hover']};
     }
-    &:focus {
-      border-radius: 50%;
-      background-color: ${p.theme.color['Opacity/Press']};
+    &:hover {
+      &:after {
+        background-color: ${p.theme.color['Opacity/Hover']};
+      }
+    }
+    &:active {
+      &:after {
+        background-color: ${p.theme.color['Opacity/Press']};
+      }
     }
   `}
 `;
