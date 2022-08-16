@@ -8,6 +8,9 @@ import { Theme } from '#src/components/themes';
 import { Button } from '#src/components/Button';
 import { typography } from '#src/components/Typography';
 import { ReactComponent as CardSolid } from '@admiral-ds/icons/build/finance/CardSolid.svg';
+import { Tooltip } from '#src/components/Tooltip';
+import { CheckboxField } from '#src/components/form';
+import { RadioButton } from '#src/components/RadioButton';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -85,17 +88,22 @@ const items = [
     id: '4',
     label: 'Option four',
     value: 4,
+    disabled: true,
   },
   {
     id: '5',
     label: 'Option five',
     value: 5,
   },
-  { id: '6', label: 'Option six', value: 7 },
+  {
+    id: '6',
+    label: 'Option six',
+    value: 6,
+  },
   {
     id: '7',
     label: 'Option seven',
-    value: 6,
+    value: 7,
   },
 ];
 
@@ -135,10 +143,11 @@ const SimpleTemplate: ComponentStory<typeof DropMenu> = (args) => {
           dimension={args.dimension}
           disabled={args.disabled}
           selected={selected}
-          renderContentProp={({ buttonRef, handleKeyDown, handleClick }) => {
+          renderContentProp={({ buttonRef, handleKeyDown, handleClick, statusIcon }) => {
             return (
               <Button ref={buttonRef as React.Ref<HTMLButtonElement>} onKeyDown={handleKeyDown} onClick={handleClick}>
                 Нажми
+                {statusIcon}
               </Button>
             );
           }}
@@ -278,8 +287,214 @@ const TemplateWithCards: ComponentStory<typeof DropMenu> = (args) => {
   );
 };
 
+const itemsLongText = [
+  {
+    id: '1',
+    label: 'Option one',
+    value: 1,
+  },
+  {
+    id: '2',
+    label: 'Option two',
+    value: 2,
+  },
+  {
+    id: '3',
+    label: 'Привет, пупсик! Хотел тебе сказать, что ты андроид.',
+    value: 3,
+  },
+  {
+    id: '4',
+    label: 'Option four',
+    value: 4,
+  },
+  {
+    id: '5',
+    label: 'Option five',
+    value: 5,
+  },
+  {
+    id: '6',
+    label: 'Option six',
+    value: 7,
+  },
+  {
+    id: '7',
+    label: 'Option seven',
+    value: 6,
+  },
+];
+
+const DropMenuTooltipTemplate: ComponentStory<typeof DropMenu> = (args) => {
+  const [selected, setSelected] = React.useState<string | undefined>(undefined);
+  const model = React.useMemo(() => {
+    return itemsLongText.map((item) => {
+      const tooltip = item.label.length > 20;
+      const renderText = () =>
+        tooltip ? (
+          <Tooltip style={{ marginTop: '8px' }} renderContent={() => item.label}>
+            {item.label.slice(0, 17) + '...'}
+          </Tooltip>
+        ) : (
+          item.label
+        );
+
+      return {
+        id: item.id,
+        render: (options: RenderOptionProps) => (
+          <MenuItem dimension={args.dimension || 's'} {...options} key={item.id}>
+            {renderText()}
+          </MenuItem>
+        ),
+      };
+    });
+  }, [args.dimension]);
+
+  return (
+    <div style={{ display: 'flex', justifyContent: 'center' }}>
+      <DropMenu
+        {...args}
+        items={model}
+        onChange={(id) => {
+          console.log(`selected: ${id}`);
+          setSelected(id);
+        }}
+        onOpen={onOpenMenu}
+        onClose={onCloseMenu}
+        dimension={args.dimension}
+        disabled={args.disabled}
+        selected={selected}
+        renderContentProp={({ buttonRef, handleKeyDown, handleClick, statusIcon }) => {
+          return (
+            <Button ref={buttonRef as React.Ref<HTMLButtonElement>} onKeyDown={handleKeyDown} onClick={handleClick}>
+              Нажми
+              {statusIcon}
+            </Button>
+          );
+        }}
+      />
+    </div>
+  );
+};
+
+const TemplateWithCheckbox: ComponentStory<typeof DropMenu> = (args) => {
+  const [selected, setSelected] = React.useState<string | undefined>(undefined);
+  const [checkedState, setCheckedState] = React.useState(items.map((item) => ({ id: item.id, checked: false })));
+  const model = React.useMemo(() => {
+    return items.map((item, index) => ({
+      id: item.id,
+      render: (options: RenderOptionProps) => (
+        <MenuItem dimension={args.dimension || 's'} {...options} key={item.id}>
+          <CheckboxField
+            dimension={args.dimension !== 's' ? 'm' : args.dimension}
+            disabled={item.disabled}
+            readOnly={true}
+            key={item.id}
+            checked={checkedState[index].checked}
+          >
+            {item.label}
+          </CheckboxField>
+        </MenuItem>
+      ),
+      disabled: item.disabled,
+    }));
+  }, [args.dimension, checkedState]);
+
+  return (
+    <div style={{ display: 'flex', justifyContent: 'center' }}>
+      <DropMenu
+        {...args}
+        items={model}
+        onChange={(id) => {
+          console.log(`selected: ${id}`);
+          const newCheckedState = checkedState.map((item) => ({
+            ...item,
+            checked: item.id === id ? !item.checked : item.checked,
+          }));
+          setCheckedState(newCheckedState);
+          setSelected(id);
+        }}
+        onOpen={onOpenMenu}
+        onClose={onCloseMenu}
+        dimension={args.dimension}
+        disabled={args.disabled}
+        selected={selected}
+        renderContentProp={({ buttonRef, handleKeyDown, handleClick, statusIcon }) => {
+          return (
+            <Button ref={buttonRef as React.Ref<HTMLButtonElement>} onKeyDown={handleKeyDown} onClick={handleClick}>
+              Нажми
+              {statusIcon}
+            </Button>
+          );
+        }}
+      />
+    </div>
+  );
+};
+
+const TemplateWithRadiobutton: ComponentStory<typeof DropMenu> = (args) => {
+  const [selected, setSelected] = React.useState<string | undefined>(undefined);
+  const [checkedState, setCheckedState] = React.useState(items.map((item) => ({ id: item.id, checked: false })));
+  const model = React.useMemo(() => {
+    return items.map((item, index) => ({
+      id: item.id,
+      render: (options: RenderOptionProps) => (
+        <MenuItem dimension={args.dimension || 's'} {...options} key={item.id}>
+          <RadioButton
+            dimension={args.dimension !== 's' ? 'm' : args.dimension}
+            disabled={item.disabled}
+            key={item.id}
+            readOnly={true}
+            checked={checkedState[index].checked}
+          >
+            {item.label}
+          </RadioButton>
+        </MenuItem>
+      ),
+      disabled: item.disabled,
+    }));
+  }, [args.dimension, checkedState]);
+
+  return (
+    <div style={{ display: 'flex', justifyContent: 'center' }}>
+      <DropMenu
+        {...args}
+        items={model}
+        onChange={(id) => {
+          console.log(`selected: ${id}`);
+          const newCheckedState = checkedState.map((item) => ({
+            ...item,
+            checked: item.id === id || item.id === selected ? !item.checked : item.checked,
+          }));
+          setCheckedState(newCheckedState);
+          setSelected(id);
+        }}
+        onOpen={onOpenMenu}
+        onClose={onCloseMenu}
+        dimension={args.dimension}
+        disabled={args.disabled}
+        selected={selected}
+        renderContentProp={({ buttonRef, handleKeyDown, handleClick, statusIcon }) => {
+          return (
+            <Button ref={buttonRef as React.Ref<HTMLButtonElement>} onKeyDown={handleKeyDown} onClick={handleClick}>
+              Нажми
+              {statusIcon}
+            </Button>
+          );
+        }}
+      />
+    </div>
+  );
+};
+
 export const Simple = SimpleTemplate.bind({});
 export const Category = TemplateWithCards.bind({});
+export const DropMenuTooltip = DropMenuTooltipTemplate.bind({});
+export const DropMenuCheckbox = TemplateWithCheckbox.bind({});
+export const DropMenuRadiobutton = TemplateWithRadiobutton.bind({});
 
 Simple.storyName = 'Базовый пример';
 Category.storyName = 'Пример с группами';
+DropMenuTooltip.storyName = 'Пример с Tooltip';
+DropMenuCheckbox.storyName = 'Пример с Checkbox';
+DropMenuRadiobutton.storyName = 'Пример с Radiobutton';

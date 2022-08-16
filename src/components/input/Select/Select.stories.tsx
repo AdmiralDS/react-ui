@@ -194,7 +194,7 @@ const SelectSimpleTemplate: ComponentStory<typeof Select> = (props) => {
 
   return (
     <ThemeProvider theme={swapBorder}>
-      <Select {...props} value={selectValue} onChange={onChange} placeholder="Select option" style={{ minWidth: 700 }}>
+      <Select {...props} value={selectValue} onChange={onChange} placeholder="Select option">
         <Option value="Анигиляторная пушка">Анигиляторная пушка</Option>
         <Option value="Похо Торо Моронго">Похо Торо Моронго</Option>
         <Option value="Саша Даль">Саша Даль</Option>
