@@ -28,15 +28,11 @@ Object {
   padding: 6px 12px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
-  font-weight: normal;
+  font-weight: 400;
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
   color: #22242A;
-}
-
-.c0 *[fill^='#'] {
-  fill: #74777F;
 }
 
 .c0:hover {
@@ -86,7 +82,7 @@ Object {
 }
 
 .c1 svg *[fill^='#'] {
-  fill: #B1B5BB;
+  fill: #74777F;
 }
 
 .c2 {
@@ -139,15 +135,11 @@ Object {
   padding: 6px 12px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
-  font-weight: normal;
+  font-weight: 400;
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
   color: #22242A;
-}
-
-.c0 *[fill^='#'] {
-  fill: #74777F;
 }
 
 .c0:hover {
@@ -197,7 +189,7 @@ Object {
 }
 
 .c1 svg *[fill^='#'] {
-  fill: #B1B5BB;
+  fill: #74777F;
 }
 
 .c2 {
@@ -305,24 +297,22 @@ Object {
   padding: 6px 12px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
-  font-weight: normal;
+  font-weight: 400;
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
   color: #FFFFFF;
 }
 
-.c0 *[fill^='#'] {
-  fill: #0062FF;
-}
-
 .c0:hover {
   background-color: #0046E2;
+  border-color: #0046E2;
 }
 
 .c0:active {
   color: #FFFFFF;
   background-color: #0062FF;
+  border-color: #0062FF;
 }
 
 .c0:focus-visible {
@@ -416,24 +406,22 @@ Object {
   padding: 6px 12px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
-  font-weight: normal;
+  font-weight: 400;
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
   color: #FFFFFF;
 }
 
-.c0 *[fill^='#'] {
-  fill: #0062FF;
-}
-
 .c0:hover {
   background-color: #0046E2;
+  border-color: #0046E2;
 }
 
 .c0:active {
   color: #FFFFFF;
   background-color: #0062FF;
+  border-color: #0062FF;
 }
 
 .c0:focus-visible {
@@ -575,22 +563,18 @@ Object {
   user-select: none;
   pointer-events: auto;
   cursor: default;
-  background-color: #FFFFFF;
+  background-color: transparent;
   border: 1px solid #0062FF;
   border-radius: 16px;
   height: 32px;
   padding: 6px 12px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
-  font-weight: normal;
+  font-weight: 400;
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
   color: #0062FF;
-}
-
-.c0 *[fill^='#'] {
-  fill: #0062FF;
 }
 
 .c0:hover {
@@ -686,22 +670,18 @@ Object {
   user-select: none;
   pointer-events: auto;
   cursor: default;
-  background-color: #FFFFFF;
+  background-color: transparent;
   border: 1px solid #0062FF;
   border-radius: 16px;
   height: 32px;
   padding: 6px 12px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
-  font-weight: normal;
+  font-weight: 400;
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
   color: #0062FF;
-}
-
-.c0 *[fill^='#'] {
-  fill: #0062FF;
 }
 
 .c0:hover {

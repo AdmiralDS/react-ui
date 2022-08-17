@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import { ReactComponent as CloseOutline } from '@admiral-ds/icons/build/service/CloseOutline.svg';
-import { TYPOGRAPHY } from '#src/components/Typography';
+import { typography } from '#src/components/Typography';
 import type { ChipAppearance, ChipDimension } from '#src/components/Chips';
 import { Badge } from '#src/components/Badge';
 
@@ -82,18 +82,13 @@ const paddings = css<{ dimension: ChipDimension }>`
   }};
 `;
 
-const typography = css<{
+const chipTypography = css<{
   dimension: ChipDimension;
   disabled?: boolean;
   selected?: boolean;
   appearance?: ChipAppearance;
 }>`
-  font-family: ${TYPOGRAPHY.fontFamily};
-  font-style: normal;
-  font-weight: normal;
-  font-size: ${({ dimension }) => (dimension === 's' ? '12px' : '14px')};
-  line-height: ${({ dimension }) => (dimension === 's' ? '16px' : '20px')};
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  ${({ dimension }) => (dimension === 's' ? typography['Caption/Caption 1'] : typography['Body/Body 2 Long'])}
   color: ${({ theme, appearance, disabled, selected }) => {
     if (disabled && !selected) return theme.color['Neutral/Neutral 30'];
 
@@ -122,7 +117,7 @@ const colorsBorderAndBackground = css<{
       return theme.color['Primary/Primary 60 Main'];
     }
     if (selected && disabled) return theme.color['Neutral/Neutral 30'];
-    return appearance === 'filled' ? theme.color['Neutral/Neutral 10'] : theme.color['Special/Static White'];
+    return appearance === 'filled' ? theme.color['Neutral/Neutral 10'] : 'transparent';
   }};
 
   border: 1px solid
@@ -140,6 +135,11 @@ const colorsBorderAndBackground = css<{
       if (appearance === 'filled') return theme.color['Neutral/Neutral 20'];
       else if (!withCloseIcon) return theme.color['Opacity/Hover'];
     }};
+    ${(p) =>
+      p.selected &&
+      `
+      border-color: ${p.theme.color['Primary/Primary 70']};
+    `}
   }
 
   &:active {
@@ -151,6 +151,11 @@ const colorsBorderAndBackground = css<{
       }
       return appearance === 'filled' ? theme.color['Neutral/Neutral 20'] : theme.color['Opacity/Hover'];
     }};
+    ${(p) =>
+      p.selected &&
+      `
+      border-color: ${p.theme.color['Primary/Primary 60 Main']};
+    `}
   }
 
   &:focus-visible {
@@ -186,23 +191,20 @@ export const ChipComponentStyled = styled.div<{
   max-width: 190px;
   user-select: none;
   pointer-events: ${({ disabled }) => (disabled ? 'none' : 'auto')};
-  & *[fill^='#'] {
-    fill: ${({ theme, appearance, disabled }) =>
-      appearance === 'filled' || disabled ? theme.color['Neutral/Neutral 50'] : theme.color['Primary/Primary 60 Main']};
-  }
   cursor: ${({ defaultChip, disabled }) => (defaultChip && !disabled ? 'pointer' : 'default')};
   ${colorsBorderAndBackground}
   ${heights}
   ${(p) => (p.withCloseIcon ? `padding-left: ${p.dimension === 's' ? 8 : 12}px;` : paddings)}
   ${(p) =>
-    p.withBadge
+    p.withBadge && !p.withCloseIcon
       ? `padding-right: ${p.dimension === 's' ? 4 : 6}px;
          padding-left: ${p.dimension === 's' ? 8 : 12}px;`
       : ''}
-  ${typography}
+  ${chipTypography}
 `;
 export const CloseIconWrapperStyled = styled(CloseOutline)<{
   disabled?: boolean;
+  selected?: boolean;
   appearance?: ChipAppearance;
 }>`
   cursor: ${({ disabled }) => (disabled ? 'default' : 'pointer')};
@@ -211,8 +213,10 @@ export const CloseIconWrapperStyled = styled(CloseOutline)<{
     outline: none;
     cursor: pointer;
     & *[fill^='#'] {
-      fill: ${({ theme, appearance }) =>
-        appearance === 'filled' ? theme.color['Neutral/Neutral 50'] : theme.color['Primary/Primary 60 Main']};
+      fill: ${({ theme, appearance, selected }) => {
+        if (selected) return theme.color['Special/Static White'];
+        return appearance === 'filled' ? theme.color['Neutral/Neutral 50'] : theme.color['Primary/Primary 60 Main'];
+      }};
     }
   }
 
@@ -220,7 +224,10 @@ export const CloseIconWrapperStyled = styled(CloseOutline)<{
     outline: none;
     border: none;
     & *[fill^='#'] {
-      fill: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
+      fill: ${({ theme, appearance, selected }) => {
+        if (selected) return theme.color['Special/Static White'];
+        return appearance === 'filled' ? theme.color['Neutral/Neutral 50'] : theme.color['Primary/Primary 60 Main'];
+      }};
     }
   }
 `;
@@ -253,8 +260,10 @@ export const ChipContentWrapperStyled = styled.div<{
         if (selected) {
           return theme.color['Special/Static White'];
         }
-        return appearance === 'filled' || disabled
+        return disabled
           ? theme.color['Neutral/Neutral 30']
+          : appearance === 'filled'
+          ? theme.color['Neutral/Neutral 50']
           : theme.color['Primary/Primary 60 Main'];
       }};
     }
@@ -270,9 +279,32 @@ export const IconBeforeWrapperStyled = styled.div`
   display: inline-block;
   margin-right: 8px;
 `;
-export const IconAfterWrapperStyled = styled.div<{ withCloseIcon?: boolean }>`
+export const IconAfterWrapperStyled = styled.div<{ dimension: ChipDimension; withCloseIcon?: boolean }>`
   display: inline-block;
   margin-left: ${(p) => (p.withCloseIcon ? '2px' : '8px')};
+  ${(p) =>
+    p.withCloseIcon &&
+    `
+    &:after {
+      position: absolute;
+      content: '';
+      top: -1px;
+      right: -1px;
+      bottom: -1px;
+      width: ${p.dimension === 'm' ? 33 : 25}px;
+      border-radius: 50%;
+    }
+    &:hover {
+      &:after {
+        background-color: ${p.theme.color['Opacity/Hover']};
+      }
+    }
+    &:active {
+      &:after {
+        background-color: ${p.theme.color['Opacity/Press']};
+      }
+    }
+  `}
 `;
 export const IconWrapperStyled = styled.div<{
   dimension: ChipDimension;
@@ -284,14 +316,6 @@ export const IconWrapperStyled = styled.div<{
   & > svg {
     ${heightIcons}
     ${widthIcons}
-  }
-  &:hover {
-    border-radius: 50%;
-    background-color: ${({ theme }) => theme.color['Opacity/Hover']};
-  }
-  &:focus {
-    border-radius: 50%;
-    background-color: ${({ theme }) => theme.color['Opacity/Press']};
   }
 `;
 
