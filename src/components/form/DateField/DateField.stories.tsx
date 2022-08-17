@@ -118,9 +118,17 @@ const Template: ComponentStory<typeof DateField> = (props) => {
   return (
     <ThemeProvider theme={swapBorder}>
       <FormContainer id="form 1" onBlur={handleFormBlur} onFocus={handleFormFocus}>
-        <DateField {...props} value={localValue} onChange={handleChange} id={'date 1'} placeholder="Это placeholder" />
-        <DateField required label="uncontrolled input" id={'date 2'} />
         <DateField
+          data-container-id="dateFieldIdOne"
+          {...props}
+          value={localValue}
+          onChange={handleChange}
+          id={'date 1'}
+          placeholder="Это placeholder"
+        />
+        <DateField data-container-id="dateFieldIdTwo" required label="uncontrolled input" id={'date 2'} />
+        <DateField
+          data-container-id="dateFieldIdThree"
           type="date-range"
           id="date range 1"
           label="uncontrolled date range"
