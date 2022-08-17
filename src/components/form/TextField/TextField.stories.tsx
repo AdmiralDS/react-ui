@@ -108,9 +108,9 @@ const Template: ComponentStory<typeof TextField> = (props) => {
   return (
     <ThemeProvider theme={swapBorder}>
       <DisplayContainer>
-        <TextField {...props} value={localValue} onChange={handleChange} />
-        <TextField required label="Поле необходимо заполнить" />
-        <TextField ref={fieldRef} label="Напишите сочинение на заданную тему" />
+        <TextField data-container-id="textFieldIdOne" {...props} value={localValue} onChange={handleChange} />
+        <TextField data-container-id="textFieldIdTwo" required label="Поле необходимо заполнить" />
+        <TextField data-container-id="textFieldIdThree" ref={fieldRef} label="Напишите сочинение на заданную тему" />
       </DisplayContainer>
     </ThemeProvider>
   );
