@@ -2,6 +2,7 @@ import * as React from 'react';
 import { TimeInput, TimeInputProps } from '#src/components/input';
 import { Field, FieldOwnProps } from '#src/components/Field';
 import { uid } from '#src/components/common/uid';
+import { splitDataAttributes } from '#src/components/common/utils/splitDataAttributes';
 
 export interface TimeFieldProps extends TimeInputProps, Omit<FieldOwnProps, 'inputRef'> {}
 
@@ -36,11 +37,7 @@ export const TimeField = React.forwardRef<HTMLInputElement, TimeFieldProps>((pro
     'data-field-name': restProps.name,
   } as Record<string, any>;
 
-  (Object.keys(restProps) as Array<keyof typeof restProps>).forEach((key) => {
-    if (key.startsWith('data-field')) {
-      fieldContainerProps[key] = restProps[key];
-    }
-  });
+  splitDataAttributes(restProps, fieldContainerProps);
 
   const TimeProps = {
     ref,

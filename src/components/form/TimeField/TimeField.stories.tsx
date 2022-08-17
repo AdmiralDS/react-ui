@@ -113,6 +113,7 @@ const Template: ComponentStory<typeof TimeField> = (props) => {
     <ThemeProvider theme={swapBorder}>
       <DisplayContainer>
         <TimeField
+          data-container-id="timeFieldIdOne"
           {...cleanProps}
           // style={{ maxWidth: '320px' }}
           startTime="09:00"
