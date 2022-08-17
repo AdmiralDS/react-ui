@@ -10,6 +10,13 @@ import { getTooltipDirection } from './utils';
 import { getScrollbarSize } from '#src/components/common/dom/scrollbarUtil';
 
 export interface ITooltipProps extends React.HTMLAttributes<HTMLDivElement> {
+  /** Видимость компонента */
+  visible: boolean;
+  /** Колбек на изменение видимости тултипа
+   * При ховере/фокусе на target элементе колбек вызовется со значением visible=true,
+   * при потере ховера/фокуса на target элементе колбек вызовется со значением visible=false.
+   */
+  onVisibilityChange: (visible: boolean) => void;
   /** Функция, которая возвращает реакт-компонент с контентом тултипа. Если этому компоненту нужны props, используйте замыкание */
   renderContent: () => React.ReactNode;
   /** Ref на элемент, относительно которого позиционируется тултип */
@@ -27,6 +34,8 @@ export interface ITooltipProps extends React.HTMLAttributes<HTMLDivElement> {
 const TOOLTIP_DELAY = 1500;
 
 export const Tooltip: React.FC<ITooltipProps> = ({
+  visible,
+  onVisibilityChange,
   renderContent,
   targetRef,
   container: userContainer,
@@ -40,11 +49,10 @@ export const Tooltip: React.FC<ITooltipProps> = ({
   let scrollableParents: Array<Element> | undefined = undefined;
   let showTooltipTimer: any;
 
-  const [visible, setVisible] = React.useState<boolean>(false);
   const [portalFlexDirection, setPortalFlexDirection] = React.useState('');
   const [portalFullWidth, setPortalFullWidth] = React.useState(false);
 
-  const hideTooltip = () => setVisible(false);
+  const hideTooltip = () => onVisibilityChange(false);
 
   const manageTooltip = (scrollbarSize: number) => {
     if (targetRef.current && tooltipElementRef.current) {
@@ -139,7 +147,7 @@ export const Tooltip: React.FC<ITooltipProps> = ({
   const handleMouseEnter = () => {
     showTooltipTimer = window.setTimeout(
       () => {
-        setVisible(true);
+        onVisibilityChange(true);
         manageTooltip(getScrollbarSize());
       },
       withDelay ? TOOLTIP_DELAY : 0,

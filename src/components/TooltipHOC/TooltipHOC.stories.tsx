@@ -4,7 +4,7 @@ import { withDesign } from 'storybook-addon-designs';
 import styled, { ThemeProvider } from 'styled-components';
 import { refSetter } from '#src/components/common/utils/refSetter';
 
-import { TooltipHOC, WrappedComponentProps } from '.';
+import { TooltipHoc } from '.';
 import { TextInput, TextInputProps } from '#src/components/input/TextInput';
 import { Theme } from '#src/components/themes';
 
@@ -31,30 +31,37 @@ const Description = () => (
   </Desc>
 );
 
-// export default {
-//   title: 'Admiral-2.1/TooltipHOC',
-//   decorators: [withDesign],
-//   component: TooltipHOC as unknown,
-//   parameters: {
-//     design: [
-//       {
-//         type: 'figma',
-//         url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=37%3A31354',
-//       },
-//       {
-//         type: 'figma',
-//         url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=37%3A31490',
-//       },
-//     ],
-//     componentSubtitle: <Description />,
-//     layout: 'centered',
-//     docs: {
-//       source: {
-//         type: 'code',
-//       },
-//     },
-//   },
-// } as any;
+export default {
+  title: 'Admiral-2.1/TooltipHoc',
+  decorators: [withDesign],
+  component: TooltipHoc as unknown,
+  parameters: {
+    design: [
+      {
+        type: 'figma',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=37%3A31354',
+      },
+      {
+        type: 'figma',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=37%3A31490',
+      },
+    ],
+    componentSubtitle: <Description />,
+    layout: 'centered',
+    docs: {
+      source: {
+        type: 'code',
+      },
+    },
+  },
+} as any;
+
+const Input = React.forwardRef<HTMLInputElement, TextInputProps>((props, ref) => {
+  React.useEffect(() => {
+    console.log('input rerender');
+  });
+  return <TextInput ref={ref} {...props} />;
+});
 
 const Template1: ComponentStory<any> = (args) => {
   function swapBorder(theme: Theme): Theme {
@@ -62,73 +69,79 @@ const Template1: ComponentStory<any> = (args) => {
     return theme;
   }
 
-  const Input = React.forwardRef<HTMLInputElement, TextInputProps>((props, ref) => {
-    return <TextInput ref={ref} {...props} />;
-  });
+  const TooltipedInput = TooltipHoc(Input);
 
-  const TooltipedInput = TooltipHOC(Input);
+  const Example = () => {
+    const [visible, setVisible] = React.useState(false);
+    // const TooltipedInput = TooltipHOC(Input);
+    return (
+      <TooltipedInput
+        visible={visible}
+        handleVisibilityChange={(visible: boolean) => {
+          setVisible(visible);
+        }}
+        renderContent={() => 'use FC component in TooltipHoc'}
+      />
+    );
+  };
 
   return (
     <ThemeProvider theme={swapBorder}>
-      <TooltipedInput renderContent={() => 'use FC component in TooltipHoc'} />
+      <Example />
     </ThemeProvider>
   );
 };
 
-const Template3: ComponentStory<any> = (args) => {
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
+// const Template3: ComponentStory<any> = (args) => {
+//   function swapBorder(theme: Theme): Theme {
+//     theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
+//     return theme;
+//   }
 
-  const Input = React.forwardRef<HTMLInputElement, TextInputProps>((props, ref) => {
-    return <TextInput ref={ref} {...props} />;
-  });
+//   const Input = React.forwardRef<HTMLInputElement, TextInputProps>((props, ref) => {
+//     return <TextInput ref={ref} {...props} />;
+//   });
 
-  const TooltipedInput = TooltipHOC(Input);
-  const inputRef = React.useRef<HTMLInputElement | null>(null);
-  React.useEffect(() => {
-    console.log(inputRef.current);
-  }, []);
+//   const TooltipedInput = TooltipHOC(Input);
+//   const inputRef = React.useRef<HTMLInputElement | null>(null);
+//   React.useEffect(() => {
+//     console.log(inputRef.current);
+//   }, []);
 
-  return (
-    <ThemeProvider theme={swapBorder}>
-      <TooltipedInput ref={inputRef} renderContent={() => 'set ref on TooltipHoc result'} />
-    </ThemeProvider>
-  );
-};
+//   return (
+//     <ThemeProvider theme={swapBorder}>
+//       <TooltipedInput ref={inputRef} renderContent={() => 'set ref on TooltipHoc result'} />
+//     </ThemeProvider>
+//   );
+// };
 
-const Template4: ComponentStory<any> = (args) => {
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
+// const Template4: ComponentStory<any> = (args) => {
+//   function swapBorder(theme: Theme): Theme {
+//     theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
+//     return theme;
+//   }
 
-  const Input = React.forwardRef<HTMLInputElement, TextInputProps>((props, ref) => {
-    const inputRef = React.useRef<HTMLInputElement | null>(null);
-    React.useEffect(() => {
-      if (inputRef.current) {
-        inputRef.current.style.border = '4px solid red';
-      }
-    }, []);
-    return <TextInput ref={refSetter(ref, inputRef)} {...props} />;
-  });
+//   const Input = React.forwardRef<HTMLInputElement, TextInputProps>((props, ref) => {
+//     const inputRef = React.useRef<HTMLInputElement | null>(null);
+//     React.useEffect(() => {
+//       if (inputRef.current) {
+//         inputRef.current.style.border = '4px solid red';
+//       }
+//     }, []);
+//     return <TextInput ref={refSetter(ref, inputRef)} {...props} />;
+//   });
 
-  const TooltipedInput = TooltipHOC(Input);
-  return (
-    <ThemeProvider theme={swapBorder}>
-      <TooltipedInput renderContent={() => 'merge refs in FC component'} />
-    </ThemeProvider>
-  );
-};
+//   const TooltipedInput = TooltipHOC(Input);
+//   return (
+//     <ThemeProvider theme={swapBorder}>
+//       <TooltipedInput renderContent={() => 'merge refs in FC component'} />
+//     </ThemeProvider>
+//   );
+// };
 
-// export const TooltipFC = Template1.bind({});
-// TooltipFC.args = {};
-// TooltipFC.storyName = 'TooltipHoc. Вызов с функциональным компонентом.';
-
-// export const TooltipClass = Template2.bind({});
-// TooltipClass.args = {};
-// TooltipClass.storyName = 'TooltipHoc. Вызов с классовым компонентом.';
+export const TooltipFC = Template1.bind({});
+TooltipFC.args = {};
+TooltipFC.storyName = 'TooltipHoc. Вызов с функциональным компонентом.';
 
 // export const TooltipRef = Template3.bind({});
 // TooltipRef.args = {};

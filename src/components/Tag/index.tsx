@@ -247,12 +247,15 @@ export const Tag = React.forwardRef<HTMLElement, TagProps & TagInternalProps>(
     const wrapperRef = React.useRef<HTMLDivElement>(null);
     const textRef = React.useRef<HTMLElement>(null);
     const [overflow, setOverflow] = React.useState(false);
+    const [tooltipVisible, setTooltipVisible] = React.useState(false);
     const background: TagKind | string =
       typeof kind === 'object' ? (kind.background ? kind.background : 'neutral') : (kind as TagKind);
     const border: TagKind | string =
       typeof kind === 'object' ? (!!kind.background && !!kind.border ? kind.border : 'neutral') : (kind as TagKind);
 
     const detectOverflow = (element: HTMLElement) => element.offsetWidth < element.scrollWidth;
+
+    const handleTooltipChange = (visible: boolean) => setTooltipVisible(visible);
 
     React.useLayoutEffect(() => {
       const element = textRef.current;
@@ -279,7 +282,14 @@ export const Tag = React.forwardRef<HTMLElement, TagProps & TagInternalProps>(
           {children && <Text ref={textRef}>{children}</Text>}
           {statusIcon && <StatusIcon>{statusIcon}</StatusIcon>}
         </Wrapper>
-        {overflow && <Tooltip targetRef={wrapperRef} renderContent={() => children} />}
+        {overflow && (
+          <Tooltip
+            targetRef={wrapperRef}
+            visible={tooltipVisible}
+            onVisibilityChange={handleTooltipChange}
+            renderContent={() => children}
+          />
+        )}
       </>
     );
   },
