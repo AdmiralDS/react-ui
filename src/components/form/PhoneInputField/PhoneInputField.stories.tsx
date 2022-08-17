@@ -87,7 +87,14 @@ const Template: ComponentStory<typeof PhoneInputField> = (props) => {
 
   return (
     <ThemeProvider theme={swapBorder}>
-      <PhoneInputField {...cleanProps} value={localValue} defaultCountry="RUS" dimension="xl" onChange={handleChange} />
+      <PhoneInputField
+        data-container-id="phoneInputFieldIdOne"
+        {...cleanProps}
+        value={localValue}
+        defaultCountry="RUS"
+        dimension="xl"
+        onChange={handleChange}
+      />
     </ThemeProvider>
   );
 };
