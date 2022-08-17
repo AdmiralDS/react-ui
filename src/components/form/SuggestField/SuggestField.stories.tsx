@@ -133,6 +133,7 @@ const Template: ComponentStory<typeof SuggestField> = (props) => {
     <ThemeProvider theme={swapBorder}>
       <DisplayContainer>
         <SuggestField
+          data-container-id="suggestFieldIdOne"
           {...cleanProps}
           defaultValue="text"
           onChange={handleChange}
