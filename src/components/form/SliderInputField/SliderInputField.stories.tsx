@@ -87,7 +87,7 @@ const Template: ComponentStory<typeof SliderInputField> = (props) => {
 
   return (
     <ThemeProvider theme={swapBorder}>
-      <SliderInputField {...props} minValue={1000} maxValue={10000} />
+      <SliderInputField data-container-id="sliderInputFieldIdOne" {...props} minValue={1000} maxValue={10000} />
     </ThemeProvider>
   );
 };
