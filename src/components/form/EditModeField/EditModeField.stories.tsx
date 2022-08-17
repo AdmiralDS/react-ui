@@ -91,7 +91,13 @@ const Template1: ComponentStory<typeof EditModeField> = (props) => {
 
   return (
     <ThemeProvider theme={swapBorder}>
-      <EditModeField {...props} value={localValue} onChange={handleChange} label="Label" />
+      <EditModeField
+        data-container-id="editModeFieldIdOne"
+        {...props}
+        value={localValue}
+        onChange={handleChange}
+        label="Label"
+      />
     </ThemeProvider>
   );
 };
