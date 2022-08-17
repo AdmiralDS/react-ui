@@ -1,6 +1,7 @@
 import * as React from 'react';
 import styled, { css } from 'styled-components';
-import { Tooltip } from '#src/components/Tooltip';
+import { refSetter } from '../common/utils/refSetter';
+import { Tooltip } from '#src/components/TooltipRefactor';
 import { typography } from '#src/components/Typography';
 import { smallGroupBorderRadius } from '#src/components/themes/borderRadius';
 
@@ -99,6 +100,7 @@ const Wrapper = styled.button<{
 }>`
   position: relative;
   box-sizing: border-box;
+  max-width: 100%;
 
   ${({ dimension }) => `
     height: ${dimension === 's' ? TAG_HEIGHT_S : TAG_HEIGHT_M}px;
@@ -119,7 +121,6 @@ const Wrapper = styled.button<{
   align-items: center;
   cursor: ${({ clickable }) => (clickable ? 'pointer' : 'default')};
 
-  ${({ clickable }) => !clickable && 'pointer-events: none;'}
   &:hover,
   &:active {
     ${({ statusViaBackground, theme }) =>
@@ -243,6 +244,7 @@ export const Tag = React.forwardRef<HTMLElement, TagProps & TagInternalProps>(
     },
     ref,
   ) => {
+    const wrapperRef = React.useRef<HTMLDivElement>(null);
     const textRef = React.useRef<HTMLElement>(null);
     const [overflow, setOverflow] = React.useState(false);
     const background: TagKind | string =
@@ -259,30 +261,26 @@ export const Tag = React.forwardRef<HTMLElement, TagProps & TagInternalProps>(
       }
     }, [children, width]);
 
-    const renderTag = () => (
-      <Wrapper
-        ref={ref}
-        width={width}
-        onClick={onClick}
-        clickable={!!onClick}
-        statusViaBackground={statusViaBackground}
-        border={border}
-        background={background}
-        dimension={dimension}
-        {...props}
-      >
-        {background !== 'neutral' && !statusViaBackground && <Circle background={background} />}
-        {statusViaBackground && icon && <Icon>{icon}</Icon>}
-        {children && <Text ref={textRef}>{children}</Text>}
-        {statusIcon && <StatusIcon>{statusIcon}</StatusIcon>}
-      </Wrapper>
-    );
-
-    return overflow ? (
-      // не связываю тултип и тег через aria-describedby и id, чтобы содержимое тега не зачитывалось дважды
-      <Tooltip renderContent={() => children}>{renderTag()}</Tooltip>
-    ) : (
-      renderTag()
+    return (
+      <>
+        <Wrapper
+          ref={refSetter(ref, wrapperRef)}
+          width={width}
+          onClick={onClick}
+          clickable={!!onClick || overflow}
+          statusViaBackground={statusViaBackground}
+          border={border}
+          background={background}
+          dimension={dimension}
+          {...props}
+        >
+          {background !== 'neutral' && !statusViaBackground && <Circle background={background} />}
+          {statusViaBackground && icon && <Icon>{icon}</Icon>}
+          {children && <Text ref={textRef}>{children}</Text>}
+          {statusIcon && <StatusIcon>{statusIcon}</StatusIcon>}
+        </Wrapper>
+        {overflow && <Tooltip targetRef={wrapperRef} renderContent={() => children} />}
+      </>
     );
   },
 );

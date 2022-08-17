@@ -2,6 +2,34 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.10.0](https://github.com/AdmiralDS/react-ui/compare/v1.9.0...v1.10.0) (2022-08-17)
+
+
+### Features
+
+* **ContentSwitcher:** add OnlyIcon example ([5c729db](https://github.com/AdmiralDS/react-ui/commit/5c729db6927680fa0eca776955c8b5b52a05bad4))
+* **Menu, DropMenu:** add example with Checkboxes and Radiobuttons ([7ab46b9](https://github.com/AdmiralDS/react-ui/commit/7ab46b9195b58b844c57441f712753b3cc29d97e))
+* **Menu, DropMenu:** add example with Tooltip ([7873739](https://github.com/AdmiralDS/react-ui/commit/7873739e9c327d176b2782ca7c3c8886299d4c2c))
+* **TextArea:** update hover and focus styles with success/error status ([de2337a](https://github.com/AdmiralDS/react-ui/commit/de2337ad409e9a151b78cc56835959158fc6f009))
+* **TextInput:** update hover and focus styles with success/error status ([48c82db](https://github.com/AdmiralDS/react-ui/commit/48c82db58ad663ceb785f7c40d750fd051314781))
+
+
+### Bug Fixes
+
+* **Checkbox:** hide hover in disabled state ([e9b37f8](https://github.com/AdmiralDS/react-ui/commit/e9b37f896da3cd1dc0989056928836fed56f1053))
+* **Checkbox:** hide hover in disabled state ([eb0e325](https://github.com/AdmiralDS/react-ui/commit/eb0e32566d6d869481fb23e3087bcaf5a4191a49))
+* **Chips:** fix background color in outlined appearance ([875369b](https://github.com/AdmiralDS/react-ui/commit/875369bfeeb9df2939bc77d51abb8bb3fcfb307d))
+* **Chips:** fix closeIcon color ([d3ce00d](https://github.com/AdmiralDS/react-ui/commit/d3ce00decdb2dc981973f247699d9e08b5c47b37))
+* **Chips:** fix style ([80de973](https://github.com/AdmiralDS/react-ui/commit/80de973f42ce172f6888f07075e51d35b52de882))
+* **EditMode:** fix read only state ([0bbeb21](https://github.com/AdmiralDS/react-ui/commit/0bbeb21b034742e36dadc91238c35774487b92e1))
+* **NumberInput:** fix readOnly background color ([66f72af](https://github.com/AdmiralDS/react-ui/commit/66f72afd2828028ef49ee7264b484b7d16e35603))
+* **PhoneNumberInput:** fix Chevron transform in disabled state ([56182a4](https://github.com/AdmiralDS/react-ui/commit/56182a440abf485ccb29ab62862209c4b5b8e356))
+* **SuggestInput:** add status prop ([ab49fef](https://github.com/AdmiralDS/react-ui/commit/ab49fefafb3c205455b8f7f0d09a45682a39b6ab))
+* **Tag:** remove Tooltip Wrapper from Tag and fix some styles so that Tag can be correctly embeded in other components ([a4de402](https://github.com/AdmiralDS/react-ui/commit/a4de402f9393fdbb79774b2332ec0bd61d7d2302))
+* **TextArea:** fix changing colors after switching theme ([efe3a52](https://github.com/AdmiralDS/react-ui/commit/efe3a524b169a4ea2956465fbbc93ea071b8fcfb))
+* **TextArea:** fix text color in disabled state ([c5a6a8a](https://github.com/AdmiralDS/react-ui/commit/c5a6a8acfcfd96740249a524a83eccd41bb4f216))
+* **TextInput:** fix changing colors after switching theme ([7da4e06](https://github.com/AdmiralDS/react-ui/commit/7da4e0647372ca61e4445a458f7d8ce244964c77))
+
 ## [1.9.0](https://github.com/AdmiralDS/react-ui/compare/v1.8.0...v1.9.0) (2022-08-09)
 
 
