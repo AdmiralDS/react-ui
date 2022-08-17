@@ -88,28 +88,46 @@ const Template: ComponentStory<typeof InputField> = (props) => {
   return (
     <ThemeProvider theme={swapBorder}>
       <DisplayContainer>
-        <InputField {...props} value={localValue} onChange={handleChange} />
-        <InputField required label="Поле необходимо заполнить" />
+        <InputField data-container-id="inputFieldIdOne" {...props} value={localValue} onChange={handleChange} />
+        <InputField data-container-id="inputFieldIdTwo" required label="Поле необходимо заполнить" />
         <InputField
+          data-container-id="inputFieldIdThree"
           readOnly
           aria-readonly
           label="Поле с атрибутом readOnly"
           defaultValue="Этот текст не редактируемый"
         />
-        <InputField disabled aria-disabled label="Поле с атрибутом disabled" placeholder="Placeholder" />
         <InputField
+          data-container-id="inputFieldIdFour"
+          disabled
+          aria-disabled
+          label="Поле с атрибутом disabled"
+          placeholder="Placeholder"
+        />
+        <InputField
+          data-container-id="inputFieldIdFive"
           status="error"
           label="Поле с ошибкой"
           extraText="Поле не прошло валидацию, необходимо ввести корректное значение"
         />
-        <InputField status="success" label="Поле с индикацией успеха" extraText="Поле успешно прошло валидацию" />
         <InputField
+          data-container-id="inputFieldIdWSix"
+          status="success"
+          label="Поле с индикацией успеха"
+          extraText="Поле успешно прошло валидацию"
+        />
+        <InputField
+          data-container-id="inputFieldIdSeven"
           displayClearIcon
           placeholder="идет поиск ..."
           label="Поле с иконкой загрузки"
           icons={<Spinner dimension="s" />}
         />
-        <InputField label="Поле для ввода пароля (type='password')" type="password" />
+        <InputField
+          data-container-id="inputFieldIdEight"
+          label="Поле для ввода пароля (type='password')"
+          type="password"
+        />
       </DisplayContainer>
     </ThemeProvider>
   );
