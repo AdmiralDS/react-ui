@@ -108,7 +108,7 @@ const Template: ComponentStory<typeof NumberInputField> = (props) => {
 
   return (
     <ThemeProvider theme={swapBorder}>
-      <NumberInputField {...props} minValue={1000} maxValue={10000} />
+      <NumberInputField data-container-id="numberInputFieldIdOne" {...props} minValue={1000} maxValue={10000} />
     </ThemeProvider>
   );
 };
