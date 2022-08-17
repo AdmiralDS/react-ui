@@ -6,6 +6,7 @@ import { INPUT_DIMENSIONS_VALUES } from '#src/components/input/types';
 import { Theme } from '#src/components/themes';
 import { ThemeProvider } from 'styled-components';
 import { SuffixSelect } from '#src/components/input/InputEx/SuffixSelect';
+import { TextButtonMenu } from '#src/components/TextButtonMenu';
 
 export default {
   title: 'Admiral-2.1/Input/InputEx',

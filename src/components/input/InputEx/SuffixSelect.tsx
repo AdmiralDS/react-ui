@@ -22,16 +22,31 @@ const Container = styled.div<{ iconSizeValue?: string }>`
 const ValueContainer = styled.div`
   margin-right: 4px;
 `;
+export type RenderPropsType<T> = {
+  value: T;
+};
 export type ValueType = string | number | object;
 export type SuffixSelectProps<T> = {
-  alignContainerRef?: React.RefObject<HTMLElement>;
+  /** ref элемента относительно которого будет выравниваться дроп контейнер */
+  alignRef?: React.RefObject<HTMLElement>;
+
+  /** выбранное на данный момент значение */
   value: T;
-  isOpen?: boolean;
-  onOpenChange?: (isOpen: boolean) => void;
-  renderValue?: (value: T) => React.ReactNode;
-  renderOption?: (value: string | number) => React.ReactNode;
-  onChange: (value: T) => void;
+
+  /** список значений для выбора */
   options: T[];
+
+  /** обработчик события на выбор элемента */
+  onChange: (value: T) => void;
+
+  /** состояние видимости контейнера с опциями */
+  isOpen?: boolean;
+
+  /** обработчик события на изменение видимости контейнера с опциями */
+  onOpenChange?: (isOpen: boolean) => void;
+
+  renderValue?: (props: RenderPropsType<T>) => React.ReactNode;
+  renderOption?: (props: RenderPropsType<T>) => React.ReactNode;
 };
 
 export const SuffixSelect = <T extends ValueType>(props: React.PropsWithChildren<SuffixSelectProps<T>>) => {
@@ -39,7 +54,7 @@ export const SuffixSelect = <T extends ValueType>(props: React.PropsWithChildren
   const isOpen = props.isOpen === undefined ? isOpenState : props.isOpen;
 
   const containerRef = React.useRef(null);
-  const alignContainerRef = props.alignContainerRef === undefined ? containerRef : props.alignContainerRef;
+  const alignContainerRef = props.alignRef === undefined ? containerRef : props.alignRef;
 
   const handleContainerClick = () => {
     const newOpenStatus = !isOpen;
