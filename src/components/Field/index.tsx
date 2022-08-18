@@ -23,6 +23,7 @@ const inlineMixin = css`
 
 const Container = styled.div<{ displayInline?: boolean }>`
   display: flex;
+  overflow: hidden;
   ${(props) => (props.displayInline ? inlineMixin : 'flex-direction: column;')}
 `;
 
