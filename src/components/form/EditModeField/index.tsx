@@ -3,7 +3,7 @@ import { refSetter } from '#src/components/common/utils/refSetter';
 import { Field, FieldOwnProps } from '#src/components/Field';
 import { EditMode, EditModeProps } from '#src/components/input';
 import * as React from 'react';
-import { splitDataAttributes } from '#src/components/common/utils/splitDataAttributes';
+import { splitFormFieldDataAttributes } from '#src/components/common/utils/splitDataAttributes';
 
 export interface EditModeFieldProps extends EditModeProps, Omit<FieldOwnProps, 'inputRef'> {}
 
@@ -38,7 +38,7 @@ export const EditModeField = React.forwardRef<HTMLInputElement, EditModeFieldPro
     'data-field-name': restProps.name,
   } as Record<string, any>;
 
-  splitDataAttributes(restProps, fieldContainerProps);
+  splitFormFieldDataAttributes(restProps, fieldContainerProps);
 
   const inputProps = {
     ref: refSetter(ref, inputRef),

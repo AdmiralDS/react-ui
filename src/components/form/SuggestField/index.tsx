@@ -2,7 +2,7 @@ import * as React from 'react';
 import { SuggestInput as Suggest, SuggestInputProps } from '#src/components/input';
 import { Field, FieldOwnProps } from '#src/components/Field';
 import { uid } from '#src/components/common/uid';
-import { splitDataAttributes } from '#src/components/common/utils/splitDataAttributes';
+import { splitFormFieldDataAttributes } from '#src/components/common/utils/splitDataAttributes';
 
 export interface SuggestFieldProps extends SuggestInputProps, Omit<FieldOwnProps, 'inputRef'> {}
 
@@ -37,7 +37,7 @@ export const SuggestField = React.forwardRef<HTMLInputElement, SuggestFieldProps
     'data-field-name': restProps.name,
   } as Record<string, any>;
 
-  splitDataAttributes(restProps, fieldContainerProps);
+  splitFormFieldDataAttributes(restProps, fieldContainerProps);
 
   const suggestProps = {
     ref,

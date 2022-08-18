@@ -3,7 +3,7 @@ import * as React from 'react';
 import { TextArea as Input, TextAreaProps } from '#src/components/input';
 import { Field, FieldOwnProps } from '#src/components/Field';
 import { uid } from '#src/components/common/uid';
-import { splitDataAttributes } from '#src/components/common/utils/splitDataAttributes';
+import { splitFormFieldDataAttributes } from '#src/components/common/utils/splitDataAttributes';
 
 export interface TextFieldProps extends TextAreaProps, Omit<FieldOwnProps, 'inputRef'> {}
 
@@ -40,7 +40,7 @@ export const TextField = React.forwardRef<HTMLTextAreaElement, TextFieldProps>((
     'data-field-name': restProps.name,
   } as Record<string, any>;
 
-  splitDataAttributes(restProps, fieldContainerProps);
+  splitFormFieldDataAttributes(restProps, fieldContainerProps);
 
   const inputProps = {
     ref: refSetter(ref, inputRef),
