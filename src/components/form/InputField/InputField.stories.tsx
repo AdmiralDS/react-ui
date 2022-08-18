@@ -6,12 +6,14 @@ import { InputField } from '#src/components/form/InputField';
 import { withDesign } from 'storybook-addon-designs';
 import styled, { ThemeProvider } from 'styled-components';
 import { Theme } from '#src/components/themes';
+import { DataAttributesDescription } from '#src/components/form/common';
 
 export default {
   title: 'Admiral-2.1/Form Field/InputField',
   component: InputField,
   decorators: [withDesign],
   parameters: {
+    componentSubtitle: <DataAttributesDescription />,
     design: [
       {
         type: 'figma',

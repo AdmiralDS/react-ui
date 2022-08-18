@@ -5,12 +5,14 @@ import { withDesign } from 'storybook-addon-designs';
 import { INPUT_DIMENSIONS_VALUES } from '#src/components/input/types';
 import { Theme } from '#src/components/themes';
 import { ThemeProvider } from 'styled-components';
+import { DataAttributesDescription } from '#src/components/form/common';
 
 export default {
   title: 'Admiral-2.1/Form Field/EditModeField',
   component: EditModeField,
   decorators: [withDesign],
   parameters: {
+    componentSubtitle: <DataAttributesDescription />,
     design: [
       {
         type: 'figma',
