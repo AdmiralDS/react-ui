@@ -94,7 +94,6 @@ const Template: ComponentStory<typeof PhoneInputField> = (props) => {
         {...cleanProps}
         value={localValue}
         defaultCountry="RUS"
-        dimension="xl"
         onChange={handleChange}
       />
     </ThemeProvider>
