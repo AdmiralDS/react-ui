@@ -1,4 +1,4 @@
-const FORM_FIELD_DATA_ATTRIBUTE = 'data-container';
+export const FORM_FIELD_DATA_ATTRIBUTE = 'data-container';
 
 export function splitDataAttributes(initialProps: any, containerProps: any) {
   (Object.keys(initialProps) as Array<keyof typeof initialProps>).forEach((key) => {

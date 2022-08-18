@@ -81,7 +81,7 @@ const Template: ComponentStory<typeof SliderRangeField> = (props) => {
 
   return (
     <ThemeProvider theme={swapBorder}>
-      <SliderRangeField {...props} />
+      <SliderRangeField data-container-id="sliderRangeFieldIdOne" {...props} />
     </ThemeProvider>
   );
 };
