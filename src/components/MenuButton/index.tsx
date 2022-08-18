@@ -6,6 +6,7 @@ import { DropMenu } from '#src/components/DropMenu';
 import { uid } from '#src/components/common/uid';
 import { Button } from '#src/components/Button';
 import { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
+import { splitDropdownDataAttributes } from '#src/components/common/utils/splitDataAttributes';
 
 export type MenuButtonDimension = 'xl' | 'l' | 'm' | 's';
 export type MenuButtonAppearance = 'primary' | 'secondary' | 'ghost' | 'white';
@@ -63,6 +64,9 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
     },
     ref,
   ) => {
+    const dropContainerProps = {} as Record<string, any>;
+    splitDropdownDataAttributes(props, dropContainerProps);
+
     return (
       <>
         <DropMenu
@@ -99,6 +103,7 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
               </Button>
             );
           }}
+          {...dropContainerProps}
         >
           {children}
         </DropMenu>
