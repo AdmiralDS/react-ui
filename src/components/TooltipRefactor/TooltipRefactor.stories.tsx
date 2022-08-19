@@ -211,6 +211,34 @@ const Template5: ComponentStory<typeof Tooltip> = () => {
 };
 
 const Template6: ComponentStory<typeof Tooltip> = () => {
+  class Car extends React.Component<any> {
+    render() {
+      const { innerRef, ...props } = this.props;
+      return (
+        <h2 ref={innerRef} {...props}>
+          Hi, I am a Car!
+        </h2>
+      );
+    }
+  }
+  const CarForwardingRef = React.forwardRef((props, ref) => <Car innerRef={ref} {...props} />);
+  const TooltipedInput = TooltipHoc(CarForwardingRef);
+
+  const Example = (props: any) => {
+    const [visible, setVisible] = React.useState(false);
+    return (
+      <TooltipedInput
+        visible={visible}
+        handleVisibilityChange={(visible: boolean) => setVisible(visible)}
+        renderContent={() => `Contrary to popular belief, Lorem Ipsum is not simply random text.`}
+        {...props}
+      />
+    );
+  };
+  return <Example label={'use FC component in TooltipHoc'} />;
+};
+
+const Template7: ComponentStory<typeof Tooltip> = () => {
   const Input = React.forwardRef<HTMLInputElement, InputFieldProps>((props, ref) => {
     const inputRef = React.useRef<HTMLInputElement | null>(null);
     const handleBtnClick = () => {
@@ -241,6 +269,33 @@ const Template6: ComponentStory<typeof Tooltip> = () => {
   return <Example label={'use refSetter'} />;
 };
 
+const Template8: ComponentStory<typeof Tooltip> = () => {
+  const TooltipedInput = TooltipHoc(InputField);
+
+  const Example = (props: InputFieldProps) => {
+    const [visible, setVisible] = React.useState(false);
+    const inputRef = React.useRef<HTMLInputElement | null>(null);
+    const handleBtnClick = () => {
+      if (inputRef.current) {
+        inputRef.current.focus();
+      }
+    };
+    return (
+      <>
+        <TooltipedInput
+          visible={visible}
+          handleVisibilityChange={(visible: boolean) => setVisible(visible)}
+          renderContent={() => `Contrary to popular belief, Lorem Ipsum is not simply random text.`}
+          ref={inputRef}
+          {...props}
+        />
+        <Button onClick={handleBtnClick}>Focus Input</Button>
+      </>
+    );
+  };
+  return <Example label={'use FC component in TooltipHoc'} />;
+};
+
 export const TooltipBase = Template1.bind({});
 TooltipBase.args = {};
 TooltipBase.storyName = 'Tooltip. Базовый пример.';
@@ -262,3 +317,15 @@ TooltipWithClassName.storyName = 'Tooltip. ClassName.';
 export const TooltipHocBase = Template5.bind({});
 TooltipHocBase.args = {};
 TooltipHocBase.storyName = 'TooltipHoc. Базовый пример.';
+
+export const TooltipHocClass = Template6.bind({});
+TooltipHocClass.args = {};
+TooltipHocClass.storyName = 'TooltipHoc. Class.';
+
+export const TooltipHocRefSetter = Template7.bind({});
+TooltipHocRefSetter.args = {};
+TooltipHocRefSetter.storyName = 'TooltipHoc. RefSetter.';
+
+export const TooltipHocRef = Template8.bind({});
+TooltipHocRef.args = {};
+TooltipHocRef.storyName = 'TooltipHoc. Ref.';
