@@ -65,7 +65,7 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
     ref,
   ) => {
     const dropContainerProps = {} as Record<string, any>;
-    splitDropdownDataAttributes(props, dropContainerProps);
+    splitDropdownDataAttributes(props, dropContainerProps, props);
 
     return (
       <>

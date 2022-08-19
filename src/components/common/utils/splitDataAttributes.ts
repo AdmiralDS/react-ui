@@ -15,11 +15,15 @@ export function splitFormFieldDataAttributes(initialProps: any, containerProps: 
   });
 }
 
-export function splitDropdownDataAttributes(initialProps: any, dropMenuProps: any) {
+export function splitDropdownDataAttributes(initialProps: any, dropMenuProps: any, containerProps: any) {
   (Object.keys(initialProps) as Array<keyof typeof initialProps>).forEach((key) => {
     if (typeof key === 'string' && key.startsWith(DROPDOWN_DATA_ATTRIBUTE)) {
       const dropMenuKey = 'data-dropdown' + key.slice(DROPDOWN_DATA_ATTRIBUTE.length);
       dropMenuProps[dropMenuKey] = initialProps[key];
+      if (initialProps !== containerProps) {
+        containerProps[key] = initialProps[key];
+        delete initialProps[key];
+      }
     }
   });
 }
