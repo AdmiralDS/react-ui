@@ -293,6 +293,7 @@ export const IconAfterWrapperStyled = styled.div<{ dimension: ChipDimension; wit
       bottom: -1px;
       width: ${p.dimension === 'm' ? 33 : 25}px;
       border-radius: 50%;
+      pointer-events: none;
     }
     &:hover {
       &:after {
