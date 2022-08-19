@@ -7,6 +7,9 @@ import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { MenuItem, RenderOptionProps } from '#src/components/MenuItem';
 import { DropMenu } from '#src/components/DropMenu';
 import { skeletonAnimationMixin } from '#src/components/skeleton/animation';
+import {
+  splitDropdownDataAttributes
+} from '#src/components/common/utils/splitDataAttributes';
 
 function mainButtonBorderRadius(shape: Shape): string {
   const radius = mediumGroupBorderRadius(shape);
@@ -153,6 +156,10 @@ export const MultiButton = React.forwardRef<HTMLButtonElement, MultiButtonProps>
       onChange(e.currentTarget.id);
     };
 
+    const dropMenuProps = {} as Record<string, any>;
+    const containerProps = {} as Record<string, any>;
+    splitDropdownDataAttributes(props, dropMenuProps, containerProps);
+
     return (
       <DropMenu
         {...props}
@@ -165,6 +172,7 @@ export const MultiButton = React.forwardRef<HTMLButtonElement, MultiButtonProps>
         menuWidth={menuWidth}
         disabled={disabled}
         selected={selected}
+        {...dropMenuProps}
         renderContentProp={({ buttonRef, handleKeyDown, handleClick, statusIcon, menuState }) => {
           return (
             <Wrapper
@@ -195,6 +203,7 @@ export const MultiButton = React.forwardRef<HTMLButtonElement, MultiButtonProps>
                 onKeyDown={handleKeyDown}
                 onClick={handleClick}
                 aria-expanded={menuState}
+                {...containerProps}
               >
                 {statusIcon}
               </MenuButton>
