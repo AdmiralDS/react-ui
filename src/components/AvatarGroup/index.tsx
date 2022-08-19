@@ -7,6 +7,7 @@ import { Avatar } from '#src/components/Avatar';
 import { MenuItem, RenderOptionProps } from '#src/components/MenuItem';
 import { DropMenu } from '#src/components/DropMenu';
 import { keyboardKey } from '#src/components/common/keyboardKey';
+import { splitDropdownDataAttributes } from '#src/components/common/utils/splitDataAttributes';
 
 export interface AvatarGroupProps extends React.HTMLAttributes<HTMLDivElement> {
   items: Array<AvatarProps>;
@@ -51,6 +52,10 @@ export const AvatarGroup: React.FC<AvatarGroupProps> = ({
   onAvatarSelect,
   ...props
 }) => {
+  const dropMenuProps = {} as Record<string, any>;
+  const containerProps = {} as Record<string, any>;
+  splitDropdownDataAttributes(props, dropMenuProps, containerProps);
+
   const wrapperRef = React.useRef<HTMLDivElement>(null);
   const [visibleItems, setVisibleItems] = React.useState(items.length);
   const [hiddenItems, setHiddenItems] = React.useState(0);
@@ -177,9 +182,11 @@ export const AvatarGroup: React.FC<AvatarGroupProps> = ({
                 showTooltip={false}
                 onClick={handleClick}
                 onKeyDown={handleKeyDown}
+                {...containerProps}
               />
             );
           }}
+          {...dropMenuProps}
         />
       ) : null}
     </AvatarsWrapper>
