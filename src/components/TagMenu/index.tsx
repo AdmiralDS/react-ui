@@ -2,9 +2,7 @@ import React, { HTMLAttributes } from 'react';
 import { TagVisualProps, TagSizeProps, Tag } from '#src/components/Tag';
 import { DropMenu } from '#src/components/DropMenu';
 import { MenuItem, RenderOptionProps } from '#src/components/MenuItem';
-import {
-  splitDropdownDataAttributes
-} from '#src/components/common/utils/splitDataAttributes';
+import { splitDropdownDataAttributes } from '#src/components/common/utils/splitDataAttributes';
 
 export interface TagOptionProps extends HTMLAttributes<HTMLButtonElement>, TagVisualProps {
   id: string;

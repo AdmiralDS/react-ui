@@ -6,9 +6,7 @@ import { TextButton } from '#src/components/TextButton';
 import styled from 'styled-components';
 import { IconContainer } from '#src/components/TextButton/commonMixin';
 import { DropMenu } from '#src/components/DropMenu';
-import {
-  splitDropdownDataAttributes
-} from '#src/components/common/utils/splitDataAttributes';
+import { splitDropdownDataAttributes } from '#src/components/common/utils/splitDataAttributes';
 
 const StyledTextButton = styled(TextButton)<{ menuOpened?: boolean; appearance?: Appearance }>`
   &:focus {

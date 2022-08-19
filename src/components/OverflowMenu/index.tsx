@@ -4,9 +4,7 @@ import type { Dimension } from '#src/components/OverflowMenu/Button';
 import { Button, OverflowMenuIcon } from '#src/components/OverflowMenu/Button';
 import type { ItemProps } from '#src/components/MenuItem';
 import { DropMenu, RenderContentProps } from '#src/components/DropMenu';
-import {
-  splitDropdownDataAttributes
-} from '#src/components/common/utils/splitDataAttributes';
+import { splitDropdownDataAttributes } from '#src/components/common/utils/splitDataAttributes';
 
 export interface OverflowMenuProps extends Omit<React.HTMLAttributes<HTMLButtonElement>, 'onChange'> {
   /** Выбранная опция */
