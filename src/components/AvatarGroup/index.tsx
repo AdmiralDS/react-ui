@@ -52,9 +52,7 @@ export const AvatarGroup: React.FC<AvatarGroupProps> = ({
   onAvatarSelect,
   ...props
 }) => {
-  const dropMenuProps = {} as Record<string, any>;
-  const containerProps = {} as Record<string, any>;
-  splitDropdownDataAttributes(props, dropMenuProps, containerProps);
+  const [dropMenuProps, containerProps] = splitDropdownDataAttributes(props);
 
   const wrapperRef = React.useRef<HTMLDivElement>(null);
   const [visibleItems, setVisibleItems] = React.useState(items.length);

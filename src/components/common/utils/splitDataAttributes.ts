@@ -15,7 +15,9 @@ export function splitFormFieldDataAttributes(initialProps: any, containerProps: 
   });
 }
 
-export function splitDropdownDataAttributes(initialProps: any, dropMenuProps: any, containerProps: any) {
+export function splitDropdownDataAttributes(initialProps: any): [Record<string, any>, Record<string, any>] {
+  const dropMenuProps = {} as Record<string, any>;
+  const containerProps = {} as Record<string, any>;
   (Object.keys(initialProps) as Array<keyof typeof initialProps>).forEach((key) => {
     if (typeof key === 'string' && key.startsWith(DROPDOWN_DATA_ATTRIBUTE)) {
       const dropMenuKey = 'data-dropdown' + key.slice(DROPDOWN_DATA_ATTRIBUTE.length);
@@ -26,4 +28,5 @@ export function splitDropdownDataAttributes(initialProps: any, dropMenuProps: an
       }
     }
   });
+  return [dropMenuProps, containerProps];
 }

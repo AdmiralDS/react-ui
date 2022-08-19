@@ -156,9 +156,7 @@ export const MultiButton = React.forwardRef<HTMLButtonElement, MultiButtonProps>
       onChange(e.currentTarget.id);
     };
 
-    const dropMenuProps = {} as Record<string, any>;
-    const containerProps = {} as Record<string, any>;
-    splitDropdownDataAttributes(props, dropMenuProps, containerProps);
+    const [dropMenuProps, containerProps] = splitDropdownDataAttributes(props);
 
     return (
       <DropMenu

@@ -64,8 +64,7 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
     },
     ref,
   ) => {
-    const dropContainerProps = {} as Record<string, any>;
-    splitDropdownDataAttributes(props, dropContainerProps, props);
+    const [dropMenuProps, containerProps] = splitDropdownDataAttributes(props);
 
     return (
       <>
@@ -82,6 +81,7 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
           menuMaxHeight={menuMaxHeight}
           menuWidth={menuWidth}
           dropContainerCssMixin={dropContainerCssMixin}
+          {...dropMenuProps}
           renderContentProp={({ buttonRef, handleKeyDown, handleClick, statusIcon, menuState }) => {
             return (
               <Button
@@ -95,6 +95,7 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
                 onKeyDown={handleKeyDown}
                 onClick={handleClick}
                 aria-expanded={menuState}
+                {...containerProps}
               >
                 {React.Children.toArray(children).map((child) =>
                   typeof child === 'string' ? <span key={uid()}>{child}</span> : child,
@@ -103,7 +104,6 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
               </Button>
             );
           }}
-          {...dropContainerProps}
         >
           {children}
         </DropMenu>

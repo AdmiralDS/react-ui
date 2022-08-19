@@ -47,9 +47,7 @@ export const OverflowMenu = React.forwardRef<HTMLButtonElement, OverflowMenuProp
   ) => {
     const iconRef = React.useRef<HTMLDivElement>(null);
 
-    const dropMenuProps = {} as Record<string, any>;
-    const containerProps = {} as Record<string, any>;
-    splitDropdownDataAttributes(props, dropMenuProps, containerProps);
+    const [dropMenuProps, containerProps] = splitDropdownDataAttributes(props);
 
     return (
       <>
