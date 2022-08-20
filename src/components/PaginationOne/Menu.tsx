@@ -4,6 +4,7 @@ import { typography } from '#src/components/Typography';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { DropMenu } from '#src/components/DropMenu';
 import { MenuItem, RenderOptionProps } from '#src/components/MenuItem';
+import { splitDropdownDataAttributes } from '#src/components/common/utils/splitDataAttributes';
 
 const Button = styled.button<{ $menuOpened?: boolean }>`
   position: relative;
@@ -75,7 +76,12 @@ export interface MenuButtonProps extends Omit<React.HTMLAttributes<HTMLButtonEle
   dropMaxHeight: string | number;
   /** Позволяет добавлять миксин на дроп контейнер созданный с помощью styled css  */
   dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+  /** Ширина выпадающего меню */
   menuWidth?: string;
+  /** Data-attributes для кнопки */
+  buttonDataAttributes?: Record<string, any>;
+  /** Data-attributes для DropMenu */
+  dropMenuDataAttributes?: Record<string, any>;
 }
 
 export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
@@ -91,6 +97,8 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
       dropMaxHeight,
       dropContainerCssMixin,
       menuWidth,
+      buttonDataAttributes,
+      dropMenuDataAttributes,
       ...props
     },
     ref,
@@ -125,6 +133,7 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
         dropContainerCssMixin={dropContainerCssMixin}
         disabled={disabled}
         selected={selected}
+        {...dropMenuDataAttributes}
         renderContentProp={({ buttonRef, handleKeyDown, handleClick, statusIcon, menuState }) => {
           return (
             <Button
@@ -136,6 +145,7 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
               onClick={handleClick}
               aria-expanded={menuState}
               type="button"
+              {...buttonDataAttributes}
             >
               <span>{children}</span>
               <Icon>{statusIcon}</Icon>

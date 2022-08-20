@@ -6,6 +6,7 @@ import { ReactComponent as ChevronRight } from '@admiral-ds/icons/build/system/C
 
 import { PaginationButton } from '#src/components/PaginationOne/PaginationButton';
 import { MenuButton } from '#src/components/PaginationOne/Menu';
+import { splitDropdownDataAttributes } from '#src/components/common/utils/splitDataAttributes';
 
 const ComplexWrapper = styled.div`
   display: flex;
@@ -137,6 +138,8 @@ export const PaginationOne: React.FC<PaginationOneProps> = ({
   const pageIncrement = () => onChange({ page: page + 1, pageSize });
   const pageDecrement = () => onChange({ page: page - 1, pageSize });
 
+  const [pageDropMenuProps, pageContainerProps] = splitDropdownDataAttributes(props);
+
   const renderComplex = () => {
     return (
       <ComplexWrapper data-simple={simple} {...props}>
@@ -151,6 +154,8 @@ export const PaginationOne: React.FC<PaginationOneProps> = ({
             dropMaxHeight={dropMaxHeight}
             dropContainerCssMixin={dropContainerCssMixin}
             menuWidth={menuWidth}
+            buttonDataAttributes={pageContainerProps}
+            dropMenuDataAttributes={pageDropMenuProps}
           >
             {pageSize}
           </MenuButton>
@@ -174,6 +179,8 @@ export const PaginationOne: React.FC<PaginationOneProps> = ({
             dropMaxHeight={dropMaxHeight}
             dropContainerCssMixin={dropContainerCssMixin}
             menuWidth={menuWidth}
+            buttonDataAttributes={pageContainerProps}
+            dropMenuDataAttributes={pageDropMenuProps}
           >
             {page}
           </MenuButton>
