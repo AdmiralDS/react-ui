@@ -22,6 +22,8 @@ export interface TooltipHocProps {
   tooltipRef?: RefCallback<HTMLDivElement> | RefObject<HTMLDivElement> | null;
   /** Расположение тултипа */
   tooltipPosition?: ITooltipProps['tooltipPosition'];
+  /** Стандартные html-атрибуты, которые можно повесить на тултип */
+  tooltipProps?: React.HTMLAttributes<HTMLDivElement>;
 }
 
 type WrappedComponentProps = {
@@ -39,13 +41,18 @@ export function TooltipHoc<P extends React.ComponentPropsWithRef<any>>(Component
       withDelay,
       tooltipRef,
       tooltipPosition,
+      tooltipProps,
       ...wrappedOnlyProps
     } = props;
     const anchorElementRef = React.useRef<any>(null);
 
     return (
       <>
-        <Component {...(wrappedOnlyProps as any)} ref={refSetter(forwardedRef, anchorElementRef)} />
+        <Component
+          {...(wrappedOnlyProps as any)}
+          ref={refSetter(forwardedRef, anchorElementRef)}
+          style={{ ...((wrappedOnlyProps as any).style ?? {}), ...{ cursor: 'pointer' } }}
+        />
         <Tooltip
           visible={visible}
           onVisibilityChange={handleVisibilityChange}
@@ -55,6 +62,7 @@ export function TooltipHoc<P extends React.ComponentPropsWithRef<any>>(Component
           withDelay={withDelay}
           tooltipPosition={tooltipPosition}
           tooltipRef={tooltipRef}
+          {...tooltipProps}
         />
       </>
     );

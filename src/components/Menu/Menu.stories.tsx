@@ -9,7 +9,7 @@ import { withDesign } from 'storybook-addon-designs';
 import { Theme } from '#src/components/themes';
 import { CheckboxField, FieldSet } from '#src/components/form';
 import { RadioButton } from '#src/components/RadioButton';
-import { Tooltip } from '#src/components/Tooltip';
+import { Tooltip } from '#src/components/TooltipRefactor';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -427,22 +427,26 @@ const MenuTooltipTemplate: ComponentStory<typeof Menu> = (args) => {
   const model = useMemo(() => {
     return itemsLongText.map((item) => {
       const tooltip = item.label.length > 20;
-      const renderText = () =>
-        tooltip ? (
-          <Tooltip style={{ marginTop: '8px' }} renderContent={() => item.label}>
-            {item.label.slice(0, 17) + '...'}
-          </Tooltip>
-        ) : (
-          item.label
-        );
 
       return {
         id: item.id,
-        render: (options: RenderOptionProps) => (
-          <MenuItem dimension={args.dimension || 's'} {...options} key={item.id}>
-            {renderText()}
-          </MenuItem>
-        ),
+        render: (options: RenderOptionProps) => {
+          const itemRef = React.useRef(null);
+          const [tooltipVisible, setTooltipVisible] = React.useState(false);
+          return (
+            <MenuItem ref={itemRef} dimension={args.dimension || 's'} {...options} key={item.id}>
+              {tooltip ? item.label.slice(0, 17) + '...' : item.label}
+              {tooltip && (
+                <Tooltip
+                  targetRef={itemRef}
+                  visible={tooltipVisible}
+                  onVisibilityChange={(visible: boolean) => setTooltipVisible(visible)}
+                  renderContent={() => item.label}
+                />
+              )}
+            </MenuItem>
+          );
+        },
       };
     });
   }, [args.dimension]);

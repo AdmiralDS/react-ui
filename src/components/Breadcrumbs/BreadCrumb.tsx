@@ -2,7 +2,7 @@ import * as React from 'react';
 import { refSetter } from '#src/components/common/utils/refSetter';
 import styled, { css } from 'styled-components';
 import { typography } from '#src/components/Typography';
-import { Tooltip } from '#src/components/Tooltip';
+import { Tooltip } from '#src/components/TooltipRefactor';
 import type { BreadcrumbsProps } from '#src/components/Breadcrumbs';
 
 const getTypography = css<{ dimension: BreadcrumbsProps['dimension'] }>`
@@ -33,6 +33,12 @@ export const Content = styled.span`
   padding: 4px;
   display: flex;
   align-items: center;
+`;
+
+const TextWrapper = styled.div`
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
 `;
 
 export const CrumbAnchor = styled.a`
@@ -88,21 +94,24 @@ export const Breadcrumb = React.forwardRef<HTMLLIElement, BreadcrumbProps>(
   ({ text, url = '#', linkAs, linkProps, children, tabIndex, dimension = 'l', ...props }, ref) => {
     const tooltip = text.length > 40;
     const crumbRef = React.useRef<HTMLLIElement>(null);
+    const textRef = React.useRef<HTMLDivElement | null>(null);
 
-    return tooltip ? (
+    const [tooltipVisible, setTooltipVisible] = React.useState(false);
+    const handleTooltipVisibilityChange = (visible: boolean) => setTooltipVisible(visible);
+
+    return (
       <Crumb ref={refSetter(ref, crumbRef)} dimension={dimension} {...props}>
         <CrumbAnchor href={url} as={linkAs} tabIndex={tabIndex} {...linkProps}>
           <Content tabIndex={-1} role="link">
-            <Tooltip renderContent={() => text}>{text.slice(0, 37) + '...'}</Tooltip>
-            {children}
-          </Content>
-        </CrumbAnchor>
-      </Crumb>
-    ) : (
-      <Crumb ref={refSetter(ref, crumbRef)} dimension={dimension} {...props}>
-        <CrumbAnchor href={url} as={linkAs} tabIndex={tabIndex} {...linkProps}>
-          <Content tabIndex={-1} role="link">
-            {text}
+            {tooltip ? <TextWrapper ref={textRef}>{text.slice(0, 37) + '...'}</TextWrapper> : text}
+            {tooltip && (
+              <Tooltip
+                targetRef={textRef}
+                visible={tooltipVisible}
+                onVisibilityChange={handleTooltipVisibilityChange}
+                renderContent={() => text}
+              />
+            )}
             {children}
           </Content>
         </CrumbAnchor>

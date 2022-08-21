@@ -1,7 +1,7 @@
 import type { FC, HTMLAttributes, MouseEvent, ReactNode } from 'react';
 import * as React from 'react';
 
-import { Tooltip } from '#src/components/Tooltip';
+import { Tooltip } from '#src/components/TooltipRefactor';
 
 import {
   ChipChildrenWrapperStyled,
@@ -61,6 +61,7 @@ export const Chips: FC<ChipsProps> = ({
 }) => {
   const defaultChip = selected !== undefined;
   const [withTooltip, setTooltip] = React.useState(false);
+  const [tooltipVisible, setTooltipVisible] = React.useState(false);
   const withCloseIcon = !!onClose;
   const withBadge = !!badge;
   const badgeAppearance: BadgeAppearance = React.useMemo(() => {
@@ -73,6 +74,7 @@ export const Chips: FC<ChipsProps> = ({
     return 'info';
   }, [appearance, selected, disabled]);
 
+  const chipRef = React.useRef<HTMLDivElement | null>(null);
   const refItems = React.useRef<HTMLDivElement | null>(null);
 
   React.useEffect(() => {
@@ -92,63 +94,74 @@ export const Chips: FC<ChipsProps> = ({
     },
     [onClose],
   );
+  const handleTooltipVisibilityChange = (visible: boolean) => setTooltipVisible(visible);
 
-  const Chip = (
-    <ChipComponentStyled
-      dimension={dimension}
-      disabled={disabled}
-      appearance={appearance}
-      selected={selected}
-      defaultChip={defaultChip}
-      withCloseIcon={withCloseIcon}
-      withBadge={withBadge}
-      {...props}
-      tabIndex={props.tabIndex ?? 0}
-    >
-      <ChipContentWrapperStyled
+  return (
+    <>
+      <ChipComponentStyled
+        ref={chipRef}
         dimension={dimension}
         disabled={disabled}
         appearance={appearance}
         selected={selected}
+        defaultChip={defaultChip}
         withCloseIcon={withCloseIcon}
+        withTooltip={withTooltip}
+        withBadge={withBadge}
+        {...props}
+        tabIndex={props.tabIndex ?? 0}
       >
-        {iconBefore && (
-          <IconBeforeWrapperStyled>
-            <IconWrapperStyled dimension={dimension} withCloseIcon={withCloseIcon}>
-              {iconBefore}
-            </IconWrapperStyled>
-          </IconBeforeWrapperStyled>
-        )}
-        <ChipChildrenWrapperStyled ref={refItems}>{children}</ChipChildrenWrapperStyled>
-        {!onClose && iconAfter && (
-          <IconAfterWrapperStyled dimension={dimension}>
-            <IconWrapperStyled dimension={dimension} withCloseIcon={withCloseIcon}>
-              {iconAfter}
-            </IconWrapperStyled>
-          </IconAfterWrapperStyled>
-        )}
-        {!onClose && typeof badge !== 'undefined' && (
-          <StyledBadge data-badge dimension={dimension} appearance={badgeAppearance}>
-            {badge}
-          </StyledBadge>
-        )}
-        {onClose && (
-          <IconAfterWrapperStyled dimension={dimension} withCloseIcon={withCloseIcon}>
-            <IconWrapperStyled dimension={dimension} withCloseIcon={withCloseIcon}>
-              <CloseIconWrapperStyled
-                appearance={appearance}
-                disabled={disabled}
-                selected={selected}
-                onClick={disabled ? void 0 : handleClickCloseIcon}
-              />
-            </IconWrapperStyled>
-          </IconAfterWrapperStyled>
-        )}
-      </ChipContentWrapperStyled>
-    </ChipComponentStyled>
+        <ChipContentWrapperStyled
+          dimension={dimension}
+          disabled={disabled}
+          appearance={appearance}
+          selected={selected}
+          withCloseIcon={withCloseIcon}
+        >
+          {iconBefore && (
+            <IconBeforeWrapperStyled>
+              <IconWrapperStyled dimension={dimension} withCloseIcon={withCloseIcon}>
+                {iconBefore}
+              </IconWrapperStyled>
+            </IconBeforeWrapperStyled>
+          )}
+          <ChipChildrenWrapperStyled ref={refItems}>{children}</ChipChildrenWrapperStyled>
+          {!onClose && iconAfter && (
+            <IconAfterWrapperStyled dimension={dimension}>
+              <IconWrapperStyled dimension={dimension} withCloseIcon={withCloseIcon}>
+                {iconAfter}
+              </IconWrapperStyled>
+            </IconAfterWrapperStyled>
+          )}
+          {!onClose && typeof badge !== 'undefined' && (
+            <StyledBadge data-badge dimension={dimension} appearance={badgeAppearance}>
+              {badge}
+            </StyledBadge>
+          )}
+          {onClose && (
+            <IconAfterWrapperStyled dimension={dimension} withCloseIcon={withCloseIcon}>
+              <IconWrapperStyled dimension={dimension} withCloseIcon={withCloseIcon}>
+                <CloseIconWrapperStyled
+                  appearance={appearance}
+                  disabled={disabled}
+                  selected={selected}
+                  onClick={disabled ? void 0 : handleClickCloseIcon}
+                />
+              </IconWrapperStyled>
+            </IconAfterWrapperStyled>
+          )}
+        </ChipContentWrapperStyled>
+      </ChipComponentStyled>
+      {withTooltip && (
+        <Tooltip
+          targetRef={chipRef}
+          visible={tooltipVisible}
+          onVisibilityChange={handleTooltipVisibilityChange}
+          renderContent={renderContentTooltip}
+        />
+      )}
+    </>
   );
-
-  return withTooltip ? <Tooltip renderContent={renderContentTooltip}>{Chip}</Tooltip> : Chip;
 };
 
 Chips.displayName = 'Chips';

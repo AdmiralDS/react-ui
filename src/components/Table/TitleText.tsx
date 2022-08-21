@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Tooltip } from '#src/components/Tooltip';
+import { Tooltip } from '#src/components/TooltipRefactor';
 
 import { Title, ExtraText } from './style';
 
@@ -14,6 +14,7 @@ type TitleTextProps = {
 export const TitleText: React.FC<TitleTextProps> = ({ lineClamp, dimension, width, extraText, children }) => {
   const textRef = React.useRef<HTMLDivElement>(null);
   const [overflow, setOverflow] = React.useState(false);
+  const [tooltipVisible, setTooltipVisible] = React.useState(false);
 
   const detectOverflow = (element: HTMLElement) =>
     element.offsetWidth < element.scrollWidth || element.offsetHeight < element.scrollHeight;
@@ -36,11 +37,19 @@ export const TitleText: React.FC<TitleTextProps> = ({ lineClamp, dimension, widt
       </Title>
     );
 
-  return overflow ? (
-    <Tooltip renderContent={() => children} anchorClassName="table-title-tooltip">
+  const handleTooltipVisibilityChange = (visible: boolean) => setTooltipVisible(visible);
+
+  return (
+    <>
       {renderTitle()}
-    </Tooltip>
-  ) : (
-    renderTitle()
+      {overflow && (
+        <Tooltip
+          targetRef={textRef}
+          visible={tooltipVisible}
+          onVisibilityChange={handleTooltipVisibilityChange}
+          renderContent={() => children}
+        />
+      )}
+    </>
   );
 };
