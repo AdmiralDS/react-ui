@@ -4,7 +4,7 @@ import { typography } from '#src/components/Typography';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { DropMenu } from '#src/components/DropMenu';
 import { MenuItem, RenderOptionProps } from '#src/components/MenuItem';
-import { splitDropdownDataAttributes } from '#src/components/common/utils/splitDataAttributes';
+import { passDropdownDataAttributes } from '#src/components/common/utils/splitDataAttributes';
 
 const Button = styled.button<{ $menuOpened?: boolean }>`
   position: relative;

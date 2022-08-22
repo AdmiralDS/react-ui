@@ -6,7 +6,7 @@ import { ReactComponent as ChevronRight } from '@admiral-ds/icons/build/system/C
 
 import { PaginationButton } from '#src/components/PaginationOne/PaginationButton';
 import { MenuButton } from '#src/components/PaginationOne/Menu';
-import { splitDropdownDataAttributes } from '#src/components/common/utils/splitDataAttributes';
+import { passDropdownDataAttributes } from '#src/components/common/utils/splitDataAttributes';
 
 const ComplexWrapper = styled.div`
   display: flex;
@@ -138,7 +138,7 @@ export const PaginationOne: React.FC<PaginationOneProps> = ({
   const pageIncrement = () => onChange({ page: page + 1, pageSize });
   const pageDecrement = () => onChange({ page: page - 1, pageSize });
 
-  const [pageDropMenuProps, pageContainerProps] = splitDropdownDataAttributes(props);
+  const [pageDropMenuProps, pageContainerProps] = passDropdownDataAttributes(props);
   const pageSizeDropMenuProps = {} as Record<string, any>;
   const pageSizeContainerProps = {} as Record<string, any>;
   (Object.keys(pageDropMenuProps) as Array<keyof typeof pageDropMenuProps>).forEach((key) => {

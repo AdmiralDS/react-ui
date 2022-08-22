@@ -7,7 +7,7 @@ import { Avatar } from '#src/components/Avatar';
 import { MenuItem, RenderOptionProps } from '#src/components/MenuItem';
 import { DropMenu } from '#src/components/DropMenu';
 import { keyboardKey } from '#src/components/common/keyboardKey';
-import { splitDropdownDataAttributes } from '#src/components/common/utils/splitDataAttributes';
+import { passDropdownDataAttributes } from '#src/components/common/utils/splitDataAttributes';
 
 export interface AvatarGroupProps extends React.HTMLAttributes<HTMLDivElement> {
   items: Array<AvatarProps>;
@@ -52,7 +52,7 @@ export const AvatarGroup: React.FC<AvatarGroupProps> = ({
   onAvatarSelect,
   ...props
 }) => {
-  const [dropMenuProps, containerProps] = splitDropdownDataAttributes(props);
+  const [dropMenuProps, containerProps] = passDropdownDataAttributes(props);
 
   const wrapperRef = React.useRef<HTMLDivElement>(null);
   const [visibleItems, setVisibleItems] = React.useState(items.length);

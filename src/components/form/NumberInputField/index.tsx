@@ -3,7 +3,7 @@ import { refSetter } from '#src/components/common/utils/refSetter';
 import { Field, FieldOwnProps } from '#src/components/Field';
 import { NumberInput, NumberInputProps } from '#src/components/input/NumberInput';
 import * as React from 'react';
-import { splitFormFieldDataAttributes } from '#src/components/common/utils/splitDataAttributes';
+import { passFormFieldContainerDataAttributes } from '#src/components/common/utils/splitDataAttributes';
 
 export interface NumberInputFieldProps extends NumberInputProps, Omit<FieldOwnProps, 'inputRef'> {}
 
@@ -40,7 +40,7 @@ export const NumberInputField = React.forwardRef<HTMLInputElement, NumberInputFi
     'data-field-name': restProps.name,
   } as Record<string, any>;
 
-  splitFormFieldDataAttributes(restProps, fieldContainerProps);
+  passFormFieldContainerDataAttributes(restProps, fieldContainerProps);
 
   const inputProps = {
     ref: refSetter(ref, inputRef),

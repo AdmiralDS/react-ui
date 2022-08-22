@@ -2,7 +2,7 @@ import { uid } from '#src/components/common/uid';
 import { Field, FieldOwnProps } from '#src/components/Field';
 import { SliderRange, SliderRangeProps } from '#src/components/input/SliderRange';
 import * as React from 'react';
-import { FORM_FIELD_DATA_ATTRIBUTE, splitFormFieldDataAttributes } from '#src/components/common/utils/splitDataAttributes';
+import { FORM_FIELD_DATA_ATTRIBUTE, passFormFieldContainerDataAttributes } from '#src/components/common/utils/splitDataAttributes';
 
 export interface SliderRangeFieldProps extends SliderRangeProps, Omit<FieldOwnProps, 'inputRef'> {
   name?: string;
@@ -48,7 +48,7 @@ export const SliderRangeField: React.FC<SliderRangeFieldProps> = (props) => {
       input2Props[internalKey2] = restProps[key];
     }
   });
-  splitFormFieldDataAttributes(restProps, fieldContainerProps);
+  passFormFieldContainerDataAttributes(restProps, fieldContainerProps);
 
   const componentProps = {
     id,

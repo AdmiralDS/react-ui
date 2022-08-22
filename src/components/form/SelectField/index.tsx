@@ -4,7 +4,7 @@ import * as React from 'react';
 import { Field, FieldOwnProps } from '#src/components/Field';
 import styled from 'styled-components';
 import { uid } from '#src/components/common/uid';
-import { splitFormFieldDataAttributes } from '#src/components/common/utils/splitDataAttributes';
+import { passFormFieldContainerDataAttributes } from '#src/components/common/utils/splitDataAttributes';
 
 const Select = styled(BaseSelect)`
   [data-status='error'] & {
@@ -45,7 +45,7 @@ export const SelectField = React.forwardRef<HTMLSelectElement, SearchSelectField
     'data-field-name': restProps.name,
   } as Record<string, any>;
 
-  splitFormFieldDataAttributes(restProps, fieldContainerProps);
+  passFormFieldContainerDataAttributes(restProps, fieldContainerProps);
 
   const selectProps = {
     ref,

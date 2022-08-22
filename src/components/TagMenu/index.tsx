@@ -2,7 +2,7 @@ import React, { HTMLAttributes } from 'react';
 import { TagVisualProps, TagSizeProps, Tag } from '#src/components/Tag';
 import { DropMenu } from '#src/components/DropMenu';
 import { MenuItem, RenderOptionProps } from '#src/components/MenuItem';
-import { splitDropdownDataAttributes } from '#src/components/common/utils/splitDataAttributes';
+import { passDropdownDataAttributes } from '#src/components/common/utils/splitDataAttributes';
 
 export interface TagOptionProps extends HTMLAttributes<HTMLButtonElement>, TagVisualProps {
   id: string;
@@ -37,7 +37,7 @@ export const TagMenu = React.forwardRef<HTMLButtonElement, TagMenuProps>(
       }));
     }, [options, dimension]);
 
-    const [dropMenuProps, containerProps] = splitDropdownDataAttributes(props);
+    const [dropMenuProps, containerProps] = passDropdownDataAttributes(props);
 
     return (
       <DropMenu

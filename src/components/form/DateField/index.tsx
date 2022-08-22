@@ -4,7 +4,7 @@ import type { DateInputProps } from '#src/components/input/DateInput';
 import { DateInput } from '#src/components/input/DateInput';
 import * as React from 'react';
 import { uid } from '#src/components/common/uid';
-import { splitFormFieldDataAttributes } from '#src/components/common/utils/splitDataAttributes';
+import { passFormFieldContainerDataAttributes } from '#src/components/common/utils/splitDataAttributes';
 
 export interface DateFieldProps extends DateInputProps, Omit<FieldOwnProps, 'inputRef'> {}
 
@@ -37,7 +37,7 @@ export const DateField = React.forwardRef<HTMLInputElement, DateFieldProps>((pro
     disabled,
   } as Record<string, any>;
 
-  splitFormFieldDataAttributes(restProps, fieldContainerProps);
+  passFormFieldContainerDataAttributes(restProps, fieldContainerProps);
 
   const inputProps = { ref, id, name, 'aria-required': required, status, disabled, skeleton, ...restProps };
   return (
