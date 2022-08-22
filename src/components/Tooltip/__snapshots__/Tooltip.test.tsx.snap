@@ -3,40 +3,20 @@
 exports[`Tooltip should render component 1`] = `
 Object {
   "asFragment": [Function],
-  "baseElement": .c0 {
-  display: inline-block;
-  position: relative;
-  cursor: pointer;
-}
-
-<body>
+  "baseElement": <body>
     <div>
-      <div
-        class="c0"
-      >
-        <div
-          data-testid="wrapped-component"
-        >
-          Wrapped component
-        </div>
-      </div>
-    </div>
-  </body>,
-  "container": .c0 {
-  display: inline-block;
-  position: relative;
-  cursor: pointer;
-}
-
-<div>
-    <div
-      class="c0"
-    >
       <div
         data-testid="wrapped-component"
       >
         Wrapped component
       </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      data-testid="wrapped-component"
+    >
+      Wrapped component
     </div>
   </div>,
   "debug": [Function],

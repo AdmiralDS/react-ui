@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled, { css } from 'styled-components';
 import { typography } from '#src/components/Typography';
-import { Tooltip } from '#src/components/TooltipRefactor';
+import { Tooltip } from '#src/components/Tooltip';
 import { DefaultFontColorName } from '#src/components/themes/common';
 import { refSetter } from '#src/components/common/utils/refSetter';
 

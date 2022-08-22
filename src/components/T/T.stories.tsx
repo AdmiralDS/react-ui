@@ -5,7 +5,7 @@ import { withDesign } from 'storybook-addon-designs';
 import { FONTS, NEW_FONTS } from './storyDescriptions';
 import { TYPOGRAPHY, typography } from '#src/components/Typography';
 import { ReactComponent as CopyOutline } from '@admiral-ds/icons/build/documents/CopyOutline.svg';
-import { Tooltip } from '#src/components/TooltipRefactor';
+import { Tooltip } from '#src/components/Tooltip';
 import { DefaultFontColorName, LIGHT_THEME, MainPrimaryColorName } from '#src/components/themes';
 import { T } from './index';
 

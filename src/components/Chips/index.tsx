@@ -1,7 +1,7 @@
 import type { FC, HTMLAttributes, MouseEvent, ReactNode } from 'react';
 import * as React from 'react';
 
-import { Tooltip } from '#src/components/TooltipRefactor';
+import { Tooltip } from '#src/components/Tooltip';
 
 import {
   ChipChildrenWrapperStyled,

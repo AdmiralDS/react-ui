@@ -28,6 +28,7 @@ export * from './components/Tag';
 export * from './components/Tags';
 export * from './components/Toggle';
 export * from './components/Tooltip';
+export * from './components/TooltipHOC';
 export * from './components/Menu';
 export * from './components/MenuButton';
 export * from './components/MenuItem';

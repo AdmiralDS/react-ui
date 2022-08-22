@@ -9,7 +9,7 @@ import { withDesign } from 'storybook-addon-designs';
 import { Theme } from '#src/components/themes';
 import { CheckboxField, FieldSet } from '#src/components/form';
 import { RadioButton } from '#src/components/RadioButton';
-import { Tooltip } from '#src/components/TooltipRefactor';
+import { Tooltip } from '#src/components/Tooltip';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';

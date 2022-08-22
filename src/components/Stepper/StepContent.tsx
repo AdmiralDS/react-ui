@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import React from 'react';
-import type { ITooltipProps } from '#src/components/TooltipRefactor';
-import { Tooltip } from '#src/components/TooltipRefactor';
+import type { ITooltipProps } from '#src/components/Tooltip';
+import { Tooltip } from '#src/components/Tooltip';
 
 import { Content, ContentWrapper } from '#src/components/Stepper/style';
 import StepperContext from '#src/components/Stepper/StepperContext';

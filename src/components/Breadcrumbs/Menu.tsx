@@ -2,7 +2,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 
 import { OverflowMenu } from '#src/components/OverflowMenu';
-import { Tooltip } from '#src/components/TooltipRefactor';
+import { Tooltip } from '#src/components/Tooltip';
 import { BreadcrumbProps } from '#src/components/Breadcrumbs/BreadCrumb';
 import { MenuItem, RenderOptionProps } from '#src/components/MenuItem';
 import { uid } from '#src/components/common/uid';

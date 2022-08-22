@@ -2,7 +2,7 @@ import * as React from 'react';
 import { refSetter } from '#src/components/common/utils/refSetter';
 import styled, { css } from 'styled-components';
 import { typography } from '#src/components/Typography';
-import { Tooltip } from '#src/components/TooltipRefactor';
+import { Tooltip } from '#src/components/Tooltip';
 import type { BreadcrumbsProps } from '#src/components/Breadcrumbs';
 
 const getTypography = css<{ dimension: BreadcrumbsProps['dimension'] }>`
