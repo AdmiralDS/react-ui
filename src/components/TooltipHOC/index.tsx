@@ -49,7 +49,7 @@ export function TooltipHoc<P extends React.ComponentPropsWithRef<any>>(Component
     return (
       <>
         <Component
-          {...(wrappedOnlyProps as any)}
+          {...(wrappedOnlyProps as P & object)}
           ref={refSetter(forwardedRef, anchorElementRef)}
           style={{ ...((wrappedOnlyProps as any).style ?? {}), ...{ cursor: 'pointer' } }}
         />
