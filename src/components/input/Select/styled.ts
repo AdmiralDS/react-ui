@@ -302,3 +302,7 @@ export const OptionWrapper = styled.div<{ dimension?: ComponentDimension }>`
     }
   }}
 `;
+
+export const SpinnerMixin = css`
+  padding: 3px;
+`;
