@@ -28,6 +28,7 @@ export * from './components/Tag';
 export * from './components/Tags';
 export * from './components/Toggle';
 export * from './components/Tooltip';
+export * from './components/TooltipHOC';
 export * from './components/Menu';
 export * from './components/MenuButton';
 export * from './components/MenuItem';
@@ -65,6 +66,7 @@ export * from './components/Table';
 export * from './components/InputIconButton';
 export * from './components/GroupActionsPane';
 export * from './components/skeleton/animation';
+export * from './components/common/utils/refSetter';
 
 export { FontsVTBGroup } from './components/FontsVTBGroup';
 export { DropdownProvider } from './components/DropdownProvider';
