@@ -139,33 +139,7 @@ export const PaginationOne: React.FC<PaginationOneProps> = ({
   const pageIncrement = () => onChange({ page: page + 1, pageSize });
   const pageDecrement = () => onChange({ page: page - 1, pageSize });
 
-  const [pageDropMenuProps, pageContainerProps] = passDropdownDataAttributes(props);
-  const pageSizeDropMenuProps = {} as Record<string, any>;
-  const pageSizeContainerProps = {} as Record<string, any>;
-  (Object.keys(pageDropMenuProps) as Array<keyof typeof pageDropMenuProps>).forEach((key) => {
-    if (key.startsWith('data')) {
-      const internalKey = 'data-page-drop' + key.slice(4);
-      const newKey = 'data-page-size-drop' + key.slice(4);
-      const descriptor = Object.getOwnPropertyDescriptor(pageDropMenuProps, key);
-      pageSizeDropMenuProps[newKey] = pageDropMenuProps[key];
-      if (typeof descriptor !== 'undefined') {
-        Object.defineProperty(pageDropMenuProps, internalKey, descriptor);
-      }
-      delete pageDropMenuProps[key];
-    }
-  });
-  (Object.keys(pageContainerProps) as Array<keyof typeof pageContainerProps>).forEach((key) => {
-    if (key.startsWith('data')) {
-      const internalKey = 'data-page-drop' + key.slice(4);
-      const newKey = 'data-page-size-drop' + key.slice(4);
-      const descriptor = Object.getOwnPropertyDescriptor(pageContainerProps, key);
-      pageSizeContainerProps[newKey] = pageContainerProps[key];
-      if (typeof descriptor !== 'undefined') {
-        Object.defineProperty(pageContainerProps, internalKey, descriptor);
-      }
-      delete pageContainerProps[key];
-    }
-  });
+  const dropMenuProps = passDropdownDataAttributes(props);
 
   const renderComplex = () => {
     return (
@@ -181,8 +155,7 @@ export const PaginationOne: React.FC<PaginationOneProps> = ({
             dropMaxHeight={dropMaxHeight}
             dropContainerCssMixin={dropContainerCssMixin}
             menuWidth={menuWidth}
-            buttonDataAttributes={pageSizeContainerProps}
-            dropMenuDataAttributes={pageSizeDropMenuProps}
+            dropMenuDataAttributes={dropMenuProps}
             className={className + ' records-per-page-with-dropdown'}
           >
             {pageSize}
@@ -207,8 +180,7 @@ export const PaginationOne: React.FC<PaginationOneProps> = ({
             dropMaxHeight={dropMaxHeight}
             dropContainerCssMixin={dropContainerCssMixin}
             menuWidth={menuWidth}
-            buttonDataAttributes={pageContainerProps}
-            dropMenuDataAttributes={pageDropMenuProps}
+            dropMenuDataAttributes={dropMenuProps}
             className={className + ' current-page-number-with-dropdown'}
           >
             {page}

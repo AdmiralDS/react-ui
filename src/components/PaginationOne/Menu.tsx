@@ -4,7 +4,6 @@ import { typography } from '#src/components/Typography';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { DropMenu } from '#src/components/DropMenu';
 import { MenuItem, RenderOptionProps } from '#src/components/MenuItem';
-import { passDropdownDataAttributes } from '#src/components/common/utils/splitDataAttributes';
 
 const Button = styled.button<{ $menuOpened?: boolean }>`
   position: relative;
@@ -78,8 +77,6 @@ export interface MenuButtonProps extends Omit<React.HTMLAttributes<HTMLButtonEle
   dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
   /** Ширина выпадающего меню */
   menuWidth?: string;
-  /** Data-attributes для кнопки */
-  buttonDataAttributes?: Record<string, any>;
   /** Data-attributes для DropMenu */
   dropMenuDataAttributes?: Record<string, any>;
 }
@@ -97,7 +94,6 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
       dropMaxHeight,
       dropContainerCssMixin,
       menuWidth,
-      buttonDataAttributes,
       dropMenuDataAttributes,
       className = '',
       ...props
@@ -146,7 +142,6 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
               onClick={handleClick}
               aria-expanded={menuState}
               type="button"
-              {...buttonDataAttributes}
               className={className}
             >
               <span>{children}</span>
