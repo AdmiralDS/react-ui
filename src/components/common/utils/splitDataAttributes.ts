@@ -1,8 +1,8 @@
-export const FORM_FIELD_DATA_ATTRIBUTE = 'data-container';
+export const FORM_FIELD_DATA_CONTAINER_ATTRIBUTE = 'data-container';
 export const DROPDOWN_DATA_ATTRIBUTE = 'data-dropdown-container';
 
 export function passFormFieldContainerDataAttributes(initialProps: any, containerProps: any) {
-  passDataAttributes(initialProps, containerProps, FORM_FIELD_DATA_ATTRIBUTE);
+  passDataAttributes(initialProps, containerProps, FORM_FIELD_DATA_CONTAINER_ATTRIBUTE);
 }
 
 export function passDropdownDataAttributes(initialProps: any): Record<string, any> {
