@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0](https://github.com/AdmiralDS/react-ui/compare/v1.10.0...v2.0.0) (2022-08-23)
+
+
+### ⚠ BREAKING CHANGES
+
+* **TooltipHoc:** refactor Tooltip, change api
+
+### Features
+
+* **FormFields, Components with DropMenu:** pass data-attributes to field container and dropdown container ([7adb55b](https://github.com/AdmiralDS/react-ui/commit/7adb55bf1d92bdbf6a7a52969048a3a41a60c826))
+* **Select, Input:** add loading indicator to Select & Input, remove property loadingMessage ([6244198](https://github.com/AdmiralDS/react-ui/commit/624419840535aaa7da97bf18bf4f42b8eec85c8b))
+* **themes:** update color tokens ([d444635](https://github.com/AdmiralDS/react-ui/commit/d4446351bf7c34ac2db2114db8fda0474ebaaa1e))
+* **TooltipHoc:** add component TooltipHoc ([9acb570](https://github.com/AdmiralDS/react-ui/commit/9acb5701290474f8a3247749304a6aed48931db4))
+
+
+### Bug Fixes
+
+* **Chips:** fix non clickable closeIcon ([5f14da4](https://github.com/AdmiralDS/react-ui/commit/5f14da43f6f4170f70e82ed77a9460e6e201bd20))
+* **Field:** flex layout must not overflow ([49c276e](https://github.com/AdmiralDS/react-ui/commit/49c276e37b74e3079e2224103911ff1e8dc4c0ed))
+* **PhoneInputField:** add click on flag icon to open flag list container ([7f7c9ee](https://github.com/AdmiralDS/react-ui/commit/7f7c9ee7500be18363f60104e9c39694dfae6068))
+
 ## [1.10.0](https://github.com/AdmiralDS/react-ui/compare/v1.9.0...v1.10.0) (2022-08-17)
 
 
