@@ -38,6 +38,12 @@ export const EditModeField = React.forwardRef<HTMLInputElement, EditModeFieldPro
     'data-field-name': restProps.name,
   } as Record<string, any>;
 
+  (Object.keys(restProps) as Array<keyof typeof restProps>).forEach((key) => {
+    if (key.startsWith('data-field')) {
+      fieldContainerProps[key] = restProps[key];
+    }
+  });
+
   passFormFieldContainerDataAttributes(restProps, fieldContainerProps);
 
   const inputProps = {

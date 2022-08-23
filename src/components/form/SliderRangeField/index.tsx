@@ -38,6 +38,12 @@ export const SliderRangeField: React.FC<SliderRangeFieldProps> = (props) => {
     'data-field-name': restProps.name,
   } as Record<string, any>;
 
+  (Object.keys(restProps) as Array<keyof typeof restProps>).forEach((key) => {
+    if (key.startsWith('data-field')) {
+      fieldContainerProps[key] = restProps[key];
+    }
+  });
+
   const input1Props = {} as Record<string, any>;
   const input2Props = {} as Record<string, any>;
   (Object.keys(restProps) as Array<keyof typeof restProps>).forEach((key) => {
