@@ -60,6 +60,7 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
       menuWidth,
       menuMaxHeight,
       dropContainerCssMixin,
+      className = '',
       ...props
     },
     ref,
@@ -95,6 +96,7 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
                 onKeyDown={handleKeyDown}
                 onClick={handleClick}
                 aria-expanded={menuState}
+                className={className + ' menu-button-with-dropdown'}
               >
                 {React.Children.toArray(children).map((child) =>
                   typeof child === 'string' ? <span key={uid()}>{child}</span> : child,

@@ -25,7 +25,7 @@ export interface TagMenuProps extends Omit<HTMLAttributes<HTMLButtonElement>, 'c
 }
 
 export const TagMenu = React.forwardRef<HTMLButtonElement, TagMenuProps>(
-  ({ dimension = 'm', width, onSelectOption, options, selected, as, ...props }, ref) => {
+  ({ dimension = 'm', width, onSelectOption, options, selected, as, className = '', ...props }, ref) => {
     const model = React.useMemo(() => {
       return options.map((item) => ({
         id: item.id,
@@ -62,6 +62,7 @@ export const TagMenu = React.forwardRef<HTMLButtonElement, TagMenuProps>(
               aria-expanded={menuState}
               statusIcon={statusIcon}
               as={as}
+              className={className + ' tag-menu-with-dropdown'}
             >
               {selected?.tagText}
             </Tag>

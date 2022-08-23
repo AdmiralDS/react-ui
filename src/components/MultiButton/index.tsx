@@ -123,6 +123,7 @@ export const MultiButton = React.forwardRef<HTMLButtonElement, MultiButtonProps>
       onClose,
       onOpen,
       skeleton = false,
+      className = '',
       ...props
     },
     ref,
@@ -199,6 +200,7 @@ export const MultiButton = React.forwardRef<HTMLButtonElement, MultiButtonProps>
                 onKeyDown={handleKeyDown}
                 onClick={handleClick}
                 aria-expanded={menuState}
+                className={className + ' multi-button-menu-button-with-dropdown'}
               >
                 {statusIcon}
               </MenuButton>

@@ -68,6 +68,7 @@ export const TextButtonMenu = React.forwardRef<HTMLButtonElement, TextButtonMenu
       selected,
       onChange,
       skeleton = false,
+      className = '',
       ...props
     },
     ref,
@@ -101,6 +102,7 @@ export const TextButtonMenu = React.forwardRef<HTMLButtonElement, TextButtonMenu
               aria-expanded={menuState}
               menuOpened={menuState}
               icon={statusIcon}
+              className={className + ' text-button-with-dropdown'}
             />
           );
         }}

@@ -99,6 +99,7 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
       menuWidth,
       buttonDataAttributes,
       dropMenuDataAttributes,
+      className = '',
       ...props
     },
     ref,
@@ -146,6 +147,7 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
               aria-expanded={menuState}
               type="button"
               {...buttonDataAttributes}
+              className={className}
             >
               <span>{children}</span>
               <Icon>{statusIcon}</Icon>

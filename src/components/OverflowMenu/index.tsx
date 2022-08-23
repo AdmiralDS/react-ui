@@ -39,6 +39,7 @@ export const OverflowMenu = React.forwardRef<HTMLButtonElement, OverflowMenuProp
       onOpen,
       onClose,
       items,
+      className = '',
       ...props
     },
     ref,
@@ -73,6 +74,7 @@ export const OverflowMenu = React.forwardRef<HTMLButtonElement, OverflowMenuProp
                 aria-expanded={menuState}
                 aria-haspopup={menuState}
                 onKeyDown={handleKeyDown}
+                className={className + ' overflow-menu-button-with-dropdown'}
               >
                 <OverflowMenuIcon ref={iconRef} dimension={dimension} isVertical={isVertical} />
               </Button>
