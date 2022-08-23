@@ -10,10 +10,10 @@ export function passFormFieldDataAttributes(initialProps: any, containerProps: a
   passDataAttributes(initialProps, containerProps, FORM_FIELD_DATA_ATTRIBUTE, false);
 }
 
-export function passDropdownDataAttributes(initialProps: any): Record<string, any> {
+export function passDropdownDataAttributes(initialProps: any) {
   const dropMenuProps = {} as Record<string, any>;
   passDataAttributes(initialProps, dropMenuProps, DROPDOWN_DATA_ATTRIBUTE, true);
-  return [dropMenuProps];
+  return dropMenuProps;
 }
 
 function passDataAttributes(sourceProps: any, destinationProps: any, dataAttributesStart: string, deleteProp: boolean) {

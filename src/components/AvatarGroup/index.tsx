@@ -169,6 +169,7 @@ export const AvatarGroup: React.FC<AvatarGroupProps> = ({
           selected={containsActiveAvatar ? selected : undefined}
           onChange={handleSelectAvatar}
           disabled={false}
+          {...dropMenuProps}
           renderContentProp={({ buttonRef, handleKeyDown, handleClick }) => {
             return (
               <MenuAvatar
@@ -183,7 +184,6 @@ export const AvatarGroup: React.FC<AvatarGroupProps> = ({
               />
             );
           }}
-          {...dropMenuProps}
         />
       ) : null}
     </AvatarsWrapper>
