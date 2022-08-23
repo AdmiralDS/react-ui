@@ -73,24 +73,24 @@ const Template1: ComponentStory<typeof FieldSet> = (props: FieldSetPropsType) =>
   return (
     <ThemeProvider theme={swapBorder}>
       <Container>
-        <FieldSet data-container-id="inputFieldIdOne" {...props} legend={'Группа чекбоксов:'}>
+        <FieldSet data-container-id="fieldSetIdOne" {...props} legend={'Группа чекбоксов:'}>
           <CheckboxField name="check1">Text 1</CheckboxField>
           <CheckboxField name="check2">Text 2</CheckboxField>
           <CheckboxField name="check3">Text 3</CheckboxField>
         </FieldSet>
-        <FieldSet disabled legend={'Disabled группа чекбоксов:'}>
+        <FieldSet data-container-id="fieldSetIdTwo" disabled legend={'Disabled группа чекбоксов:'}>
           <CheckboxField name="check1">Text 1</CheckboxField>
           <CheckboxField name="check2" defaultChecked>
             Text 2
           </CheckboxField>
           <CheckboxField name="check3">Text 3</CheckboxField>
         </FieldSet>
-        <FieldSet dimension="s" legend={'Группа маленьких чекбоксов:'} required>
+        <FieldSet data-container-id="fieldSetIdThree" dimension="s" legend={'Группа маленьких чекбоксов:'} required>
           <CheckboxField name="check1">Text 1</CheckboxField>
           <CheckboxField name="check2">Text 2</CheckboxField>
           <CheckboxField name="check3">Text 3</CheckboxField>
         </FieldSet>
-        <FieldSet legend={'Горизонтальная группа чекбоксов:'} flexDirection="row">
+        <FieldSet data-container-id="fieldSetIdFour" legend={'Горизонтальная группа чекбоксов:'} flexDirection="row">
           <CheckboxField name="check1">Text 1</CheckboxField>
           <CheckboxField name="check2">Text 2</CheckboxField>
           <CheckboxField name="check3">Text 3</CheckboxField>
