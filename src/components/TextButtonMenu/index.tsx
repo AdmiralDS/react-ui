@@ -6,6 +6,7 @@ import { TextButton } from '#src/components/TextButton';
 import styled from 'styled-components';
 import { IconContainer } from '#src/components/TextButton/commonMixin';
 import { DropMenu } from '#src/components/DropMenu';
+import { passDropdownDataAttributes } from '#src/components/common/utils/splitDataAttributes';
 
 const StyledTextButton = styled(TextButton)<{ menuOpened?: boolean; appearance?: Appearance }>`
   &:focus {
@@ -67,10 +68,13 @@ export const TextButtonMenu = React.forwardRef<HTMLButtonElement, TextButtonMenu
       selected,
       onChange,
       skeleton = false,
+      className = '',
       ...props
     },
     ref,
   ) => {
+    const dropMenuProps = passDropdownDataAttributes(props);
+
     return (
       <DropMenu
         {...props}
@@ -81,6 +85,7 @@ export const TextButtonMenu = React.forwardRef<HTMLButtonElement, TextButtonMenu
         items={items}
         selected={selected}
         onChange={onChange}
+        {...dropMenuProps}
         renderContentProp={({ buttonRef, handleKeyDown, handleClick, statusIcon, menuState }) => {
           return (
             <StyledTextButton
@@ -97,6 +102,7 @@ export const TextButtonMenu = React.forwardRef<HTMLButtonElement, TextButtonMenu
               aria-expanded={menuState}
               menuOpened={menuState}
               icon={statusIcon}
+              className={className + ' text-button-with-dropdown'}
             />
           );
         }}

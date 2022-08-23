@@ -3,6 +3,10 @@ import { refSetter } from '#src/components/common/utils/refSetter';
 import { Field, FieldOwnProps } from '#src/components/Field';
 import { EditMode, EditModeProps } from '#src/components/input';
 import * as React from 'react';
+import {
+  passFormFieldContainerDataAttributes,
+  passFormFieldDataAttributes,
+} from '#src/components/common/utils/splitDataAttributes';
 
 export interface EditModeFieldProps extends EditModeProps, Omit<FieldOwnProps, 'inputRef'> {}
 
@@ -36,6 +40,10 @@ export const EditModeField = React.forwardRef<HTMLInputElement, EditModeFieldPro
     'data-field-id': id,
     'data-field-name': restProps.name,
   } as Record<string, any>;
+
+  passFormFieldDataAttributes(restProps, fieldContainerProps);
+  passFormFieldContainerDataAttributes(restProps, fieldContainerProps);
+
   const inputProps = {
     ref: refSetter(ref, inputRef),
     id,
@@ -45,11 +53,7 @@ export const EditModeField = React.forwardRef<HTMLInputElement, EditModeFieldPro
     maxLength,
     ...restProps,
   };
-  (Object.keys(restProps) as Array<keyof typeof restProps>).forEach((key) => {
-    if (key.startsWith('data-field')) {
-      fieldContainerProps[key] = restProps[key];
-    }
-  });
+
   return (
     <Field {...fieldContainerProps}>
       <EditMode {...inputProps} />

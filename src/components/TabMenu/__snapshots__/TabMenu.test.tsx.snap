@@ -433,7 +433,7 @@ Object {
           <button
             aria-expanded="false"
             aria-haspopup="false"
-            class="c6 c7"
+            class="c6 c7 overflow-menu-button-with-dropdown"
             tabindex="-1"
             type="button"
           >
@@ -476,7 +476,7 @@ Object {
           <button
             aria-expanded="false"
             aria-haspopup="false"
-            class="c6 c7"
+            class="c6 c7 overflow-menu-button-with-dropdown"
             tabindex="-1"
             type="button"
           >
@@ -953,7 +953,7 @@ Object {
         <button
           aria-expanded="false"
           aria-haspopup="false"
-          class="c6 c7"
+          class="c6 c7 overflow-menu-button-with-dropdown"
           tabindex="-1"
           type="button"
         >
@@ -996,7 +996,7 @@ Object {
         <button
           aria-expanded="false"
           aria-haspopup="false"
-          class="c6 c7"
+          class="c6 c7 overflow-menu-button-with-dropdown"
           tabindex="-1"
           type="button"
         >

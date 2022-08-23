@@ -61,7 +61,12 @@ const Template: ComponentStory<typeof AvatarGroup> = ({ onAvatarSelect, ...args 
   ];
   return (
     <>
-      <AvatarGroup {...args} items={items} onAvatarSelect={onAvatarSelect || onSelectAvatar} />
+      <AvatarGroup
+        {...args}
+        items={items}
+        onAvatarSelect={onAvatarSelect || onSelectAvatar}
+        data-dropdown-container-id="AvatarGroupWithDropDown"
+      />
     </>
   );
 };

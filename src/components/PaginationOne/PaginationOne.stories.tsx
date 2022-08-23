@@ -93,6 +93,8 @@ const Template1: ComponentStory<typeof PaginationOne> = (args) => {
         pageSize={pageSize}
         totalItems={totalElements}
         pageSizes={pageSizes}
+        data-dropdown-container-id="paginationWithDropDown"
+        data-dropdown-container-test-id="paginationTestIdWithDropDown"
       />
     </ThemeProvider>
   );

@@ -4,6 +4,7 @@ import { typography } from '#src/components/Typography';
 import type { CheckBoxProps } from '#src/components/Checkbox';
 import { Checkbox } from '#src/components/Checkbox';
 import type { CheckboxDimension } from '#src/components/Checkbox/CheckboxDimension';
+import { passFormFieldContainerDataAttributes } from '#src/components/common/utils/splitDataAttributes';
 
 export interface CheckboxFieldProps extends Omit<CheckBoxProps, 'children'> {
   /** Текст будет виден ниже компонента */
@@ -99,8 +100,11 @@ const ExtrasContainer = styled.div<{
 
 export const CheckboxField = React.forwardRef<HTMLInputElement, CheckboxFieldProps>(
   ({ extraText, className, children, dimension = 'm', ...props }, ref) => {
+    const fieldContainerProps = {} as Record<string, any>;
+    passFormFieldContainerDataAttributes(props, fieldContainerProps);
+
     return (
-      <Label className={className} dimension={dimension} disabled={props.disabled}>
+      <Label className={className} dimension={dimension} disabled={props.disabled} {...fieldContainerProps}>
         <PositionedCheckbox dimension={dimension} ref={ref} {...props} />
         {children}
         {extraText && <ExtrasContainer dimension={dimension} children={extraText} />}

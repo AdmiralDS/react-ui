@@ -6,12 +6,14 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import { Theme } from '#src/components/themes';
 import { ThemeProvider } from 'styled-components';
+import { DataAttributesDescription } from '#src/components/form/common';
 
 export default {
   title: 'Admiral-2.1/Form Field/PhoneInputField',
   component: PhoneInputField,
   decorators: [withDesign],
   parameters: {
+    componentSubtitle: <DataAttributesDescription />,
     design: [
       {
         type: 'figma',
@@ -87,7 +89,13 @@ const Template: ComponentStory<typeof PhoneInputField> = (props) => {
 
   return (
     <ThemeProvider theme={swapBorder}>
-      <PhoneInputField {...cleanProps} value={localValue} defaultCountry="RUS" onChange={handleChange} />
+      <PhoneInputField
+        data-container-id="phoneInputFieldIdOne"
+        {...cleanProps}
+        value={localValue}
+        defaultCountry="RUS"
+        onChange={handleChange}
+      />
     </ThemeProvider>
   );
 };
