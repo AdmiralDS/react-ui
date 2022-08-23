@@ -2,6 +2,7 @@ import React, { HTMLAttributes } from 'react';
 import { TagVisualProps, TagSizeProps, Tag } from '#src/components/Tag';
 import { DropMenu } from '#src/components/DropMenu';
 import { MenuItem, RenderOptionProps } from '#src/components/MenuItem';
+import { passDropdownDataAttributes } from '#src/components/common/utils/splitDataAttributes';
 
 export interface TagOptionProps extends HTMLAttributes<HTMLButtonElement>, TagVisualProps {
   id: string;
@@ -24,7 +25,7 @@ export interface TagMenuProps extends Omit<HTMLAttributes<HTMLButtonElement>, 'c
 }
 
 export const TagMenu = React.forwardRef<HTMLButtonElement, TagMenuProps>(
-  ({ dimension = 'm', width, onSelectOption, options, selected, as, ...props }, ref) => {
+  ({ dimension = 'm', width, onSelectOption, options, selected, as, className = '', ...props }, ref) => {
     const model = React.useMemo(() => {
       return options.map((item) => ({
         id: item.id,
@@ -36,6 +37,8 @@ export const TagMenu = React.forwardRef<HTMLButtonElement, TagMenuProps>(
       }));
     }, [options, dimension]);
 
+    const dropMenuProps = passDropdownDataAttributes(props);
+
     return (
       <DropMenu
         {...props}
@@ -44,6 +47,7 @@ export const TagMenu = React.forwardRef<HTMLButtonElement, TagMenuProps>(
         items={model}
         selected={selected?.tagText}
         onChange={onSelectOption}
+        {...dropMenuProps}
         renderContentProp={({ buttonRef, handleKeyDown, handleClick, statusIcon, menuState }) => {
           return (
             <Tag
@@ -58,6 +62,7 @@ export const TagMenu = React.forwardRef<HTMLButtonElement, TagMenuProps>(
               aria-expanded={menuState}
               statusIcon={statusIcon}
               as={as}
+              className={className + ' tag-menu-with-dropdown'}
             >
               {selected?.tagText}
             </Tag>

@@ -5,12 +5,14 @@ import { TextField } from '#src/components/form/TextField';
 import { withDesign } from 'storybook-addon-designs';
 import styled, { ThemeProvider } from 'styled-components';
 import { Theme } from '#src/components/themes';
+import { DataAttributesDescription } from '#src/components/form/common';
 
 export default {
   title: 'Admiral-2.1/Form Field/TextField',
   component: TextField,
   decorators: [withDesign],
   parameters: {
+    componentSubtitle: <DataAttributesDescription />,
     design: [
       {
         type: 'figma',
@@ -108,9 +110,9 @@ const Template: ComponentStory<typeof TextField> = (props) => {
   return (
     <ThemeProvider theme={swapBorder}>
       <DisplayContainer>
-        <TextField {...props} value={localValue} onChange={handleChange} />
-        <TextField required label="Поле необходимо заполнить" />
-        <TextField ref={fieldRef} label="Напишите сочинение на заданную тему" />
+        <TextField data-container-id="textFieldIdOne" {...props} value={localValue} onChange={handleChange} />
+        <TextField data-container-id="textFieldIdTwo" required label="Поле необходимо заполнить" />
+        <TextField data-container-id="textFieldIdThree" ref={fieldRef} label="Напишите сочинение на заданную тему" />
       </DisplayContainer>
     </ThemeProvider>
   );

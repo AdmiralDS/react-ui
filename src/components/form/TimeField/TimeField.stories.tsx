@@ -6,12 +6,14 @@ import { TimeField } from '#src/components/form';
 import { withDesign } from 'storybook-addon-designs';
 import styled, { ThemeProvider } from 'styled-components';
 import { Theme } from '#src/components/themes';
+import { DataAttributesDescription } from '#src/components/form/common';
 
 export default {
   title: 'Admiral-2.1/Form Field/TimeField',
   component: TimeField,
   decorators: [withDesign],
   parameters: {
+    componentSubtitle: <DataAttributesDescription />,
     design: [
       {
         type: 'figma',
@@ -113,6 +115,7 @@ const Template: ComponentStory<typeof TimeField> = (props) => {
     <ThemeProvider theme={swapBorder}>
       <DisplayContainer>
         <TimeField
+          data-container-id="timeFieldIdOne"
           {...cleanProps}
           // style={{ maxWidth: '320px' }}
           startTime="09:00"

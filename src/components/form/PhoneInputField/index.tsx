@@ -2,6 +2,10 @@ import { uid } from '#src/components/common/uid';
 import { Field, FieldOwnProps } from '#src/components/Field';
 import { PhoneNumberInput, PhoneNumberInputProps } from '#src/components/input/PhoneNumberInput';
 import * as React from 'react';
+import {
+  passFormFieldContainerDataAttributes,
+  passFormFieldDataAttributes,
+} from '#src/components/common/utils/splitDataAttributes';
 
 export interface PhoneInputFieldProps extends PhoneNumberInputProps, Omit<FieldOwnProps, 'inputRef'> {}
 
@@ -36,11 +40,9 @@ export const PhoneInputField = React.forwardRef<HTMLInputElement, PhoneInputFiel
     'data-field-name': restProps.name,
   } as Record<string, any>;
 
-  (Object.keys(restProps) as Array<keyof typeof restProps>).forEach((key) => {
-    if (key.startsWith('data-field')) {
-      fieldContainerProps[key] = restProps[key];
-    }
-  });
+  passFormFieldDataAttributes(restProps, fieldContainerProps);
+  passFormFieldContainerDataAttributes(restProps, fieldContainerProps);
+
   const inputProps = {
     ref,
     id,

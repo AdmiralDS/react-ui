@@ -56,6 +56,7 @@ export const Panel: FC<IPanelProps> = ({
   yearsView,
   monthsView,
   localeName,
+  tooltipContainer,
   onYearsViewShow,
   onYearsViewHide,
   onMonthsViewShow,
@@ -70,6 +71,21 @@ export const Panel: FC<IPanelProps> = ({
   const previousDisabled = yearsView ? previousYearDisabled : previousMonthDisabled;
   const nextDisabled = yearsView ? nextYearDisabled : nextMonthDisabled;
 
+  const previousBtnRef = React.useRef<HTMLDivElement | null>(null);
+  const nextBtnRef = React.useRef<HTMLDivElement | null>(null);
+  const monthRef = React.useRef(null);
+  const yearRef = React.useRef(null);
+
+  const [previousBtnTipVisible, setPreviousBtnTipVisible] = React.useState(false);
+  const [nextBtnTipVisible, setNextBtnTipVisible] = React.useState(false);
+  const [monthTipVisible, setMonthTipVisible] = React.useState(false);
+  const [yearTipVisible, setYearTipVisible] = React.useState(false);
+
+  const handlePreviousBtnTipChange = (visible: boolean) => setPreviousBtnTipVisible(visible);
+  const handleNextBtnTipChange = (visible: boolean) => setNextBtnTipVisible(visible);
+  const handleMonthTipChange = (visible: boolean) => setMonthTipVisible(visible);
+  const handleYearTipChange = (visible: boolean) => setYearTipVisible(visible);
+
   const monthMouseDownHandle = (event: any) => {
     event.preventDefault();
     monthsView ? onMonthsViewHide(event) : onMonthsViewShow(event);
@@ -81,26 +97,50 @@ export const Panel: FC<IPanelProps> = ({
   return (
     <PanelComponent yearsView={yearsView} monthsView={monthsView} className="ui-kit-calendar-panel-component">
       {!monthsView && (
-        <Tooltip renderContent={() => (yearsView ? BACK : PREVIOUS_MONTH)}>
-          <Button onMouseDown={onPrevious} disabled={previousDisabled} type="left" />
-        </Tooltip>
+        <>
+          <Button innerRef={previousBtnRef} onMouseDown={onPrevious} disabled={previousDisabled} type="left" />
+          <Tooltip
+            targetRef={previousBtnRef}
+            visible={previousBtnTipVisible}
+            onVisibilityChange={handlePreviousBtnTipChange}
+            renderContent={() => (yearsView ? BACK : PREVIOUS_MONTH)}
+            container={tooltipContainer}
+          />
+        </>
       )}
       <PanelDate>
-        <Tooltip renderContent={() => (monthsView ? RETURN : SELECT_MONTH)}>
-          <Month view={monthsView} onMouseDown={monthMouseDownHandle}>
-            {capitalizeFirstLetter(getFormattedValue(viewDate, { month: 'long' }, localeName))}
-          </Month>
-        </Tooltip>
-        <Tooltip renderContent={() => (yearsView ? RETURN : SELECT_YEAR)}>
-          <Year view={yearsView} onMouseDown={yearMouseDownHandle}>
-            {viewDate.getFullYear()}
-          </Year>
-        </Tooltip>
+        <Month ref={monthRef} view={monthsView} onMouseDown={monthMouseDownHandle}>
+          {capitalizeFirstLetter(getFormattedValue(viewDate, { month: 'long' }, localeName))}
+        </Month>
+        <Tooltip
+          targetRef={monthRef}
+          visible={monthTipVisible}
+          onVisibilityChange={handleMonthTipChange}
+          renderContent={() => (monthsView ? RETURN : SELECT_MONTH)}
+          container={tooltipContainer}
+        />
+        <Year ref={yearRef} view={yearsView} onMouseDown={yearMouseDownHandle}>
+          {viewDate.getFullYear()}
+        </Year>
+        <Tooltip
+          targetRef={yearRef}
+          visible={yearTipVisible}
+          onVisibilityChange={handleYearTipChange}
+          renderContent={() => (yearsView ? RETURN : SELECT_YEAR)}
+          container={tooltipContainer}
+        />
       </PanelDate>
       {!monthsView && (
-        <Tooltip renderContent={() => (yearsView ? FORWARD : NEXT_MONTH)}>
-          <Button onMouseDown={onNext} disabled={nextDisabled} type="right" />
-        </Tooltip>
+        <>
+          <Button innerRef={nextBtnRef} onMouseDown={onNext} disabled={nextDisabled} type="right" />
+          <Tooltip
+            targetRef={nextBtnRef}
+            visible={nextBtnTipVisible}
+            onVisibilityChange={handleNextBtnTipChange}
+            renderContent={() => (yearsView ? FORWARD : NEXT_MONTH)}
+            container={tooltipContainer}
+          />
+        </>
       )}
     </PanelComponent>
   );

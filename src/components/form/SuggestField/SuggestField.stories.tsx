@@ -6,12 +6,14 @@ import { SuggestField } from '#src/components/form/SuggestField';
 import { withDesign } from 'storybook-addon-designs';
 import styled, { ThemeProvider } from 'styled-components';
 import { Theme } from '#src/components/themes';
+import { DataAttributesDescription } from '#src/components/form/common';
 
 export default {
   title: 'Admiral-2.1/Form Field/SuggestField',
   component: SuggestField,
   decorators: [withDesign],
   parameters: {
+    componentSubtitle: <DataAttributesDescription />,
     design: [
       {
         type: 'figma',
@@ -133,6 +135,7 @@ const Template: ComponentStory<typeof SuggestField> = (props) => {
     <ThemeProvider theme={swapBorder}>
       <DisplayContainer>
         <SuggestField
+          data-container-id="suggestFieldIdOne"
           {...cleanProps}
           defaultValue="text"
           onChange={handleChange}

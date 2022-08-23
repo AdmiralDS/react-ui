@@ -121,6 +121,7 @@ const Template0: ComponentStory<typeof Tag> = (args: TagProps) => {
             setSelected(items.find((item) => item.id === id));
           }}
           {...args}
+          data-dropdown-container-id="tagMenuWithDropDown"
         />
       </ThemeProvider>
     </>

@@ -151,9 +151,10 @@ export const StepWrapper = styled.li<{
   }
 `;
 
-export const ContentWrapper = styled.div`
+export const ContentWrapper = styled.div<{ withTooltip: boolean }>`
   display: flex;
   width: 100%;
+  ${({ withTooltip }) => withTooltip && 'cursor: pointer;'}
   [data-orientation='vertical'] & {
     margin: 0 0 20px 0;
   }

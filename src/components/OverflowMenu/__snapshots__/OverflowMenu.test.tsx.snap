@@ -95,7 +95,7 @@ Object {
       <button
         aria-expanded="false"
         aria-haspopup="false"
-        class="c0"
+        class="c0  overflow-menu-button-with-dropdown"
         data-testid="btn"
         type="button"
       >
@@ -204,7 +204,7 @@ Object {
     <button
       aria-expanded="false"
       aria-haspopup="false"
-      class="c0"
+      class="c0  overflow-menu-button-with-dropdown"
       data-testid="btn"
       type="button"
     >

@@ -7,12 +7,14 @@ import styled, { css, keyframes, ThemeProvider } from 'styled-components';
 import { SelectField } from './index';
 import { Highlight, Option, OptionGroup } from '#src/components/input/Select';
 import { Theme } from '#src/components/themes';
+import { DataAttributesDescription } from '#src/components/form/common';
 
 export default {
   title: 'Admiral-2.1/Form Field/SelectField',
   component: SelectField,
   decorators: [withDesign],
   parameters: {
+    componentSubtitle: <DataAttributesDescription />,
     design: {
       type: 'figma',
       url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A72429',
@@ -163,6 +165,7 @@ const SimpleTemplate: ComponentStory<typeof SelectField> = (props) => {
   return (
     <ThemeProvider theme={swapBorder}>
       <SelectField
+        data-container-id="selectFieldIdOne"
         {...props}
         mode="searchSelect"
         label="Label"
