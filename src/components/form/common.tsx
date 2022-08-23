@@ -10,9 +10,9 @@ const Desc = styled.div`
 
 export const DataAttributesDescription = () => (
   <Desc>
-    Компоненту можно прокидывать дата аттрибуты вида [{FORM_FIELD_DATA_CONTAINER_ATTRIBUTE}-...]. Этот аттрибут попадет на
-    контейнер самого компонента в неизменном виде, а на контейнер input в виде [data-...].
-    <br /> Например: data-container-id="fieldIdOne" Контейнер компонента получит аттрибут
-    data-container-id="fieldIdOne", input получит аттрибут [data-id="fieldIdOne"].
+    Компоненту можно прокидывать дата аттрибуты вида [{FORM_FIELD_DATA_CONTAINER_ATTRIBUTE}-...]. Этот аттрибут попадет
+    только на контейнер самого компонента.
+    <br /> Например: data-container-id="fieldIdOne" - контейнер компонента получит аттрибут
+    data-container-id="fieldIdOne", на нативный input этот аттрибут прокинут не будет.
   </Desc>
 );
