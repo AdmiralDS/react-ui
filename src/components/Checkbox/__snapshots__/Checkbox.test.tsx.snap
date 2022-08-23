@@ -38,7 +38,7 @@ fieldset[data-dimension='s'] .c0 {
   transition: background 0.1s ease-in;
   line-height: initial;
   background-color: #FFFFFF;
-  border: 1px solid #74777F;
+  border: 1px solid #717681;
 }
 
 .c4 *[fill^='#'] {
@@ -96,7 +96,7 @@ fieldset[data-dimension='s'] .c0 {
 }
 
 .c2:disabled + .c3 {
-  border: 1px solid #B1B5BB;
+  border: 1px solid #B0B5BD;
   background-color: #E5E7EB;
 }
 
@@ -172,7 +172,7 @@ fieldset[data-dimension='s'] .c0 {
   transition: background 0.1s ease-in;
   line-height: initial;
   background-color: #FFFFFF;
-  border: 1px solid #74777F;
+  border: 1px solid #717681;
 }
 
 .c4 *[fill^='#'] {
@@ -230,7 +230,7 @@ fieldset[data-dimension='s'] .c0 {
 }
 
 .c2:disabled + .c3 {
-  border: 1px solid #B1B5BB;
+  border: 1px solid #B0B5BD;
   background-color: #E5E7EB;
 }
 
@@ -361,7 +361,7 @@ fieldset[data-dimension='s'] .c0 {
   transition: background 0.1s ease-in;
   line-height: initial;
   background-color: #FFFFFF;
-  border: 1px solid #74777F;
+  border: 1px solid #717681;
 }
 
 .c4 *[fill^='#'] {
@@ -419,7 +419,7 @@ fieldset[data-dimension='s'] .c0 {
 }
 
 .c2:disabled + .c3 {
-  border: 1px solid #B1B5BB;
+  border: 1px solid #B0B5BD;
   background-color: #E5E7EB;
 }
 
@@ -494,7 +494,7 @@ fieldset[data-dimension='s'] .c0 {
   transition: background 0.1s ease-in;
   line-height: initial;
   background-color: #FFFFFF;
-  border: 1px solid #74777F;
+  border: 1px solid #717681;
 }
 
 .c4 *[fill^='#'] {
@@ -552,7 +552,7 @@ fieldset[data-dimension='s'] .c0 {
 }
 
 .c2:disabled + .c3 {
-  border: 1px solid #B1B5BB;
+  border: 1px solid #B0B5BD;
   background-color: #E5E7EB;
 }
 
@@ -682,7 +682,7 @@ fieldset[data-dimension='s'] .c0 {
   transition: background 0.1s ease-in;
   line-height: initial;
   background-color: #FFFFFF;
-  border: 1px solid #74777F;
+  border: 1px solid #717681;
 }
 
 .c4 *[fill^='#'] {
@@ -740,7 +740,7 @@ fieldset[data-dimension='s'] .c0 {
 }
 
 .c2:disabled + .c3 {
-  border: 1px solid #B1B5BB;
+  border: 1px solid #B0B5BD;
   background-color: #E5E7EB;
 }
 
@@ -815,7 +815,7 @@ fieldset[data-dimension='s'] .c0 {
   transition: background 0.1s ease-in;
   line-height: initial;
   background-color: #FFFFFF;
-  border: 1px solid #74777F;
+  border: 1px solid #717681;
 }
 
 .c4 *[fill^='#'] {
@@ -873,7 +873,7 @@ fieldset[data-dimension='s'] .c0 {
 }
 
 .c2:disabled + .c3 {
-  border: 1px solid #B1B5BB;
+  border: 1px solid #B0B5BD;
   background-color: #E5E7EB;
 }
 

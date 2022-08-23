@@ -17,7 +17,7 @@ Object {
   background-color: #FFFFFF;
   width: 20px;
   height: 20px;
-  border: 1px solid #B1B5BB;
+  border: 1px solid #B0B5BD;
   border-radius: 50%;
   -webkit-transition: all 0.25s ease-in-out;
   transition: all 0.25s ease-in-out;
@@ -29,7 +29,7 @@ fieldset[data-dimension='s'] .c5 {
 }
 
 fieldset:disabled .c5 {
-  border: 1px solid #B1B5BB;
+  border: 1px solid #B0B5BD;
 }
 
 .c3 {
@@ -119,7 +119,7 @@ fieldset[data-dimension='s'] .c2 {
   font-size: 16px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #B1B5BB;
+  color: #B0B5BD;
 }
 
 fieldset[data-dimension='s'] .c1.c1 {
@@ -129,11 +129,11 @@ fieldset[data-dimension='s'] .c1.c1 {
   font-size: 14px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #B1B5BB;
+  color: #B0B5BD;
 }
 
 fieldset:disabled .c1.c1 {
-  color: #B1B5BB;
+  color: #B0B5BD;
 }
 
 fieldset:disabled .c0 {
@@ -179,7 +179,7 @@ fieldset:disabled .c0 {
   background-color: #FFFFFF;
   width: 20px;
   height: 20px;
-  border: 1px solid #B1B5BB;
+  border: 1px solid #B0B5BD;
   border-radius: 50%;
   -webkit-transition: all 0.25s ease-in-out;
   transition: all 0.25s ease-in-out;
@@ -191,7 +191,7 @@ fieldset[data-dimension='s'] .c5 {
 }
 
 fieldset:disabled .c5 {
-  border: 1px solid #B1B5BB;
+  border: 1px solid #B0B5BD;
 }
 
 .c3 {
@@ -281,7 +281,7 @@ fieldset[data-dimension='s'] .c2 {
   font-size: 16px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #B1B5BB;
+  color: #B0B5BD;
 }
 
 fieldset[data-dimension='s'] .c1.c1 {
@@ -291,11 +291,11 @@ fieldset[data-dimension='s'] .c1.c1 {
   font-size: 14px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #B1B5BB;
+  color: #B0B5BD;
 }
 
 fieldset:disabled .c1.c1 {
-  color: #B1B5BB;
+  color: #B0B5BD;
 }
 
 fieldset:disabled .c0 {
@@ -396,7 +396,7 @@ Object {
   background-color: #FFFFFF;
   width: 20px;
   height: 20px;
-  border: 1px solid #74777F;
+  border: 1px solid #717681;
   border-radius: 50%;
   -webkit-transition: all 0.25s ease-in-out;
   transition: all 0.25s ease-in-out;
@@ -408,7 +408,7 @@ fieldset[data-dimension='s'] .c5 {
 }
 
 fieldset:disabled .c5 {
-  border: 1px solid #B1B5BB;
+  border: 1px solid #B0B5BD;
 }
 
 .c3 {
@@ -498,7 +498,7 @@ fieldset[data-dimension='s'] .c2 {
   font-size: 16px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #22242A;
+  color: #23262D;
 }
 
 fieldset[data-dimension='s'] .c1.c1 {
@@ -508,11 +508,11 @@ fieldset[data-dimension='s'] .c1.c1 {
   font-size: 14px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #22242A;
+  color: #23262D;
 }
 
 fieldset:disabled .c1.c1 {
-  color: #B1B5BB;
+  color: #B0B5BD;
 }
 
 fieldset:disabled .c0 {
@@ -555,7 +555,7 @@ fieldset:disabled .c0 {
   background-color: #FFFFFF;
   width: 20px;
   height: 20px;
-  border: 1px solid #74777F;
+  border: 1px solid #717681;
   border-radius: 50%;
   -webkit-transition: all 0.25s ease-in-out;
   transition: all 0.25s ease-in-out;
@@ -567,7 +567,7 @@ fieldset[data-dimension='s'] .c5 {
 }
 
 fieldset:disabled .c5 {
-  border: 1px solid #B1B5BB;
+  border: 1px solid #B0B5BD;
 }
 
 .c3 {
@@ -657,7 +657,7 @@ fieldset[data-dimension='s'] .c2 {
   font-size: 16px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #22242A;
+  color: #23262D;
 }
 
 fieldset[data-dimension='s'] .c1.c1 {
@@ -667,11 +667,11 @@ fieldset[data-dimension='s'] .c1.c1 {
   font-size: 14px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #22242A;
+  color: #23262D;
 }
 
 fieldset:disabled .c1.c1 {
-  color: #B1B5BB;
+  color: #B0B5BD;
 }
 
 fieldset:disabled .c0 {
@@ -769,7 +769,7 @@ Object {
   background-color: #FFFFFF;
   width: 18px;
   height: 18px;
-  border: 1px solid #74777F;
+  border: 1px solid #717681;
   border-radius: 50%;
   -webkit-transition: all 0.25s ease-in-out;
   transition: all 0.25s ease-in-out;
@@ -781,7 +781,7 @@ fieldset[data-dimension='s'] .c5 {
 }
 
 fieldset:disabled .c5 {
-  border: 1px solid #B1B5BB;
+  border: 1px solid #B0B5BD;
 }
 
 .c3 {
@@ -871,7 +871,7 @@ fieldset[data-dimension='s'] .c2 {
   font-size: 14px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #22242A;
+  color: #23262D;
 }
 
 fieldset[data-dimension='s'] .c1.c1 {
@@ -881,11 +881,11 @@ fieldset[data-dimension='s'] .c1.c1 {
   font-size: 14px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #22242A;
+  color: #23262D;
 }
 
 fieldset:disabled .c1.c1 {
-  color: #B1B5BB;
+  color: #B0B5BD;
 }
 
 fieldset:disabled .c0 {
@@ -928,7 +928,7 @@ fieldset:disabled .c0 {
   background-color: #FFFFFF;
   width: 18px;
   height: 18px;
-  border: 1px solid #74777F;
+  border: 1px solid #717681;
   border-radius: 50%;
   -webkit-transition: all 0.25s ease-in-out;
   transition: all 0.25s ease-in-out;
@@ -940,7 +940,7 @@ fieldset[data-dimension='s'] .c5 {
 }
 
 fieldset:disabled .c5 {
-  border: 1px solid #B1B5BB;
+  border: 1px solid #B0B5BD;
 }
 
 .c3 {
@@ -1030,7 +1030,7 @@ fieldset[data-dimension='s'] .c2 {
   font-size: 14px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #22242A;
+  color: #23262D;
 }
 
 fieldset[data-dimension='s'] .c1.c1 {
@@ -1040,11 +1040,11 @@ fieldset[data-dimension='s'] .c1.c1 {
   font-size: 14px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #22242A;
+  color: #23262D;
 }
 
 fieldset:disabled .c1.c1 {
-  color: #B1B5BB;
+  color: #B0B5BD;
 }
 
 fieldset:disabled .c0 {

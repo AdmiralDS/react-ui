@@ -45,7 +45,7 @@ Object {
 
 .c1:hover,
 .c1:active {
-  background: #D6D8DD;
+  background: #D5D8DE;
 }
 
 .c1:focus-visible {
@@ -87,7 +87,7 @@ Object {
 
 .c4:hover,
 .c4:active {
-  background: #D6D8DD;
+  background: #D5D8DE;
 }
 
 .c4:focus-visible {
@@ -106,7 +106,7 @@ Object {
 }
 
 .c3 {
-  color: #22242A;
+  color: #23262D;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -244,7 +244,7 @@ Object {
 
 .c1:hover,
 .c1:active {
-  background: #D6D8DD;
+  background: #D5D8DE;
 }
 
 .c1:focus-visible {
@@ -286,7 +286,7 @@ Object {
 
 .c4:hover,
 .c4:active {
-  background: #D6D8DD;
+  background: #D5D8DE;
 }
 
 .c4:focus-visible {
@@ -305,7 +305,7 @@ Object {
 }
 
 .c3 {
-  color: #22242A;
+  color: #23262D;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
