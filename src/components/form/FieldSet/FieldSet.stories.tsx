@@ -73,7 +73,7 @@ const Template1: ComponentStory<typeof FieldSet> = (props: FieldSetPropsType) =>
   return (
     <ThemeProvider theme={swapBorder}>
       <Container>
-        <FieldSet {...props} legend={'Группа чекбоксов:'}>
+        <FieldSet data-container-id="inputFieldIdOne" {...props} legend={'Группа чекбоксов:'}>
           <CheckboxField name="check1">Text 1</CheckboxField>
           <CheckboxField name="check2">Text 2</CheckboxField>
           <CheckboxField name="check3">Text 3</CheckboxField>
