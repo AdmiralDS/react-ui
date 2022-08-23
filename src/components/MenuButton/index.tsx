@@ -64,7 +64,7 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
     },
     ref,
   ) => {
-    const [dropMenuProps, containerProps] = passDropdownDataAttributes(props);
+    const dropMenuProps = passDropdownDataAttributes(props);
 
     return (
       <>
@@ -95,7 +95,6 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
                 onKeyDown={handleKeyDown}
                 onClick={handleClick}
                 aria-expanded={menuState}
-                {...containerProps}
               >
                 {React.Children.toArray(children).map((child) =>
                   typeof child === 'string' ? <span key={uid()}>{child}</span> : child,

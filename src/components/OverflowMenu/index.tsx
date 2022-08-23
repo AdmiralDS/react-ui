@@ -45,7 +45,7 @@ export const OverflowMenu = React.forwardRef<HTMLButtonElement, OverflowMenuProp
   ) => {
     const iconRef = React.useRef<HTMLDivElement>(null);
 
-    const [dropMenuProps, containerProps] = passDropdownDataAttributes(props);
+    const dropMenuProps = passDropdownDataAttributes(props);
 
     return (
       <>
@@ -73,7 +73,6 @@ export const OverflowMenu = React.forwardRef<HTMLButtonElement, OverflowMenuProp
                 aria-expanded={menuState}
                 aria-haspopup={menuState}
                 onKeyDown={handleKeyDown}
-                {...containerProps}
               >
                 <OverflowMenuIcon ref={iconRef} dimension={dimension} isVertical={isVertical} />
               </Button>

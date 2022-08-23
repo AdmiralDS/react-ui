@@ -52,7 +52,7 @@ export const AvatarGroup: React.FC<AvatarGroupProps> = ({
   onAvatarSelect,
   ...props
 }) => {
-  const [dropMenuProps, containerProps] = passDropdownDataAttributes(props);
+  const dropMenuProps = passDropdownDataAttributes(props);
 
   const wrapperRef = React.useRef<HTMLDivElement>(null);
   const [visibleItems, setVisibleItems] = React.useState(items.length);
@@ -180,7 +180,6 @@ export const AvatarGroup: React.FC<AvatarGroupProps> = ({
                 showTooltip={false}
                 onClick={handleClick}
                 onKeyDown={handleKeyDown}
-                {...containerProps}
               />
             );
           }}

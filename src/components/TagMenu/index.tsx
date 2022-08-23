@@ -37,7 +37,7 @@ export const TagMenu = React.forwardRef<HTMLButtonElement, TagMenuProps>(
       }));
     }, [options, dimension]);
 
-    const [dropMenuProps, containerProps] = passDropdownDataAttributes(props);
+    const dropMenuProps = passDropdownDataAttributes(props);
 
     return (
       <DropMenu
@@ -62,7 +62,6 @@ export const TagMenu = React.forwardRef<HTMLButtonElement, TagMenuProps>(
               aria-expanded={menuState}
               statusIcon={statusIcon}
               as={as}
-              {...containerProps}
             >
               {selected?.tagText}
             </Tag>

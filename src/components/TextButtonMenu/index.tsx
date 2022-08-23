@@ -72,7 +72,7 @@ export const TextButtonMenu = React.forwardRef<HTMLButtonElement, TextButtonMenu
     },
     ref,
   ) => {
-    const [dropMenuProps, containerProps] = passDropdownDataAttributes(props);
+    const dropMenuProps = passDropdownDataAttributes(props);
 
     return (
       <DropMenu
@@ -101,7 +101,6 @@ export const TextButtonMenu = React.forwardRef<HTMLButtonElement, TextButtonMenu
               aria-expanded={menuState}
               menuOpened={menuState}
               icon={statusIcon}
-              {...containerProps}
             />
           );
         }}

@@ -154,7 +154,7 @@ export const MultiButton = React.forwardRef<HTMLButtonElement, MultiButtonProps>
       onChange(e.currentTarget.id);
     };
 
-    const [dropMenuProps, containerProps] = passDropdownDataAttributes(props);
+    const dropMenuProps = passDropdownDataAttributes(props);
 
     return (
       <DropMenu
@@ -199,7 +199,6 @@ export const MultiButton = React.forwardRef<HTMLButtonElement, MultiButtonProps>
                 onKeyDown={handleKeyDown}
                 onClick={handleClick}
                 aria-expanded={menuState}
-                {...containerProps}
               >
                 {statusIcon}
               </MenuButton>
