@@ -43,25 +43,12 @@ export const SliderRangeField: React.FC<SliderRangeFieldProps> = (props) => {
   } as Record<string, any>;
 
   passFormFieldDataAttributes(restProps, fieldContainerProps);
-
-  const input1Props = {} as Record<string, any>;
-  const input2Props = {} as Record<string, any>;
-  (Object.keys(restProps) as Array<keyof typeof restProps>).forEach((key) => {
-    if (key.startsWith(FORM_FIELD_DATA_CONTAINER_ATTRIBUTE)) {
-      const internalKey1 = 'data-input1' + key.slice(FORM_FIELD_DATA_CONTAINER_ATTRIBUTE.length);
-      const internalKey2 = 'data-input2' + key.slice(FORM_FIELD_DATA_CONTAINER_ATTRIBUTE.length);
-      input1Props[internalKey1] = restProps[key];
-      input2Props[internalKey2] = restProps[key];
-    }
-  });
   passFormFieldContainerDataAttributes(restProps, fieldContainerProps);
 
   const componentProps = {
     id,
     disabled,
     skeleton,
-    input1: input1Props,
-    input2: input2Props,
     ...restProps,
   };
 
