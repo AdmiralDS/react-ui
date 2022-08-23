@@ -82,6 +82,7 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
           menuMaxHeight={menuMaxHeight}
           menuWidth={menuWidth}
           dropContainerCssMixin={dropContainerCssMixin}
+          alignSelf={alignSelf}
           {...dropMenuProps}
           renderContentProp={({ buttonRef, handleKeyDown, handleClick, statusIcon, menuState }) => {
             return (
