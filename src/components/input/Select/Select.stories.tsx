@@ -4,7 +4,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import type { ChangeEvent } from 'react';
 import * as React from 'react';
 import { withDesign } from 'storybook-addon-designs';
-import { Highlight, Option, OptionGroup, Select } from './index';
+import { Highlight, Option, OptionGroup, Select } from '#src/components/input/Select';
 import { IOnCloseProps } from './types';
 import { Button } from '#src/components/Button';
 import { useState } from '@storybook/addons';
