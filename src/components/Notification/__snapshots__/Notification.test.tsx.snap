@@ -92,7 +92,7 @@ Object {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #22242A;
+  color: #23262D;
   margin-bottom: 4px;
 }
 
@@ -103,7 +103,7 @@ Object {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #22242A;
+  color: #23262D;
 }
 
 .c7 {
@@ -133,11 +133,11 @@ Object {
 }
 
 .c7 svg *[fill^='#'] {
-  fill: #74777F;
+  fill: #717681;
 }
 
 .c7 svg:hover *[fill^='#'] {
-  fill: #74777F;
+  fill: #717681;
 }
 
 .c1 {
@@ -297,7 +297,7 @@ Object {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #22242A;
+  color: #23262D;
   margin-bottom: 4px;
 }
 
@@ -308,7 +308,7 @@ Object {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #22242A;
+  color: #23262D;
 }
 
 .c7 {
@@ -338,11 +338,11 @@ Object {
 }
 
 .c7 svg *[fill^='#'] {
-  fill: #74777F;
+  fill: #717681;
 }
 
 .c7 svg:hover *[fill^='#'] {
-  fill: #74777F;
+  fill: #717681;
 }
 
 .c1 {

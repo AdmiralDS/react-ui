@@ -38,7 +38,7 @@ fieldset[data-dimension='s'] .c2 {
   transition: background 0.1s ease-in;
   line-height: initial;
   background-color: #FFFFFF;
-  border: 1px solid #74777F;
+  border: 1px solid #717681;
 }
 
 .c7 *[fill^='#'] {
@@ -81,8 +81,7 @@ fieldset[data-dimension='s'] .c2 {
   display: none;
 }
 
-.c5:hover:not(:disabled)::after,
-.c5:focus:not(:disabled) + .c5:not(:disabled)::after {
+.c5:hover:not(:disabled)::after,.c5:focus:not(:disabled) + .c5:not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
@@ -97,7 +96,7 @@ fieldset[data-dimension='s'] .c2 {
 }
 
 .c5:disabled + .c6 {
-  border: 1px solid #B1B5BB;
+  border: 1px solid #B0B5BD;
   background-color: #E5E7EB;
 }
 
@@ -133,7 +132,7 @@ fieldset[data-dimension='s'] .c2 {
   font-size: 16px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #B1B5BB;
+  color: #B0B5BD;
   cursor: default;
 }
 
@@ -148,7 +147,7 @@ fieldset[data-dimension='s'] .c0 {
 }
 
 fieldset:disabled .c0 {
-  color: #B1B5BB;
+  color: #B0B5BD;
   cursor: default;
 }
 
@@ -216,7 +215,7 @@ fieldset[data-dimension='s'] .c2 {
   transition: background 0.1s ease-in;
   line-height: initial;
   background-color: #FFFFFF;
-  border: 1px solid #74777F;
+  border: 1px solid #717681;
 }
 
 .c7 *[fill^='#'] {
@@ -259,8 +258,7 @@ fieldset[data-dimension='s'] .c2 {
   display: none;
 }
 
-.c5:hover:not(:disabled)::after,
-.c5:focus:not(:disabled) + .c5:not(:disabled)::after {
+.c5:hover:not(:disabled)::after,.c5:focus:not(:disabled) + .c5:not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
@@ -275,7 +273,7 @@ fieldset[data-dimension='s'] .c2 {
 }
 
 .c5:disabled + .c6 {
-  border: 1px solid #B1B5BB;
+  border: 1px solid #B0B5BD;
   background-color: #E5E7EB;
 }
 
@@ -311,7 +309,7 @@ fieldset[data-dimension='s'] .c2 {
   font-size: 16px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #B1B5BB;
+  color: #B0B5BD;
   cursor: default;
 }
 
@@ -326,7 +324,7 @@ fieldset[data-dimension='s'] .c0 {
 }
 
 fieldset:disabled .c0 {
-  color: #B1B5BB;
+  color: #B0B5BD;
   cursor: default;
 }
 
@@ -449,7 +447,7 @@ fieldset[data-dimension='s'] .c2 {
   transition: background 0.1s ease-in;
   line-height: initial;
   background-color: #FFFFFF;
-  border: 1px solid #74777F;
+  border: 1px solid #717681;
 }
 
 .c7 *[fill^='#'] {
@@ -492,8 +490,7 @@ fieldset[data-dimension='s'] .c2 {
   display: none;
 }
 
-.c5:hover:not(:disabled)::after,
-.c5:focus:not(:disabled) + .c5:not(:disabled)::after {
+.c5:hover:not(:disabled)::after,.c5:focus:not(:disabled) + .c5:not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
@@ -508,7 +505,7 @@ fieldset[data-dimension='s'] .c2 {
 }
 
 .c5:disabled + .c6 {
-  border: 1px solid #B1B5BB;
+  border: 1px solid #B0B5BD;
   background-color: #E5E7EB;
 }
 
@@ -544,7 +541,7 @@ fieldset[data-dimension='s'] .c2 {
   font-size: 16px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #22242A;
+  color: #23262D;
   cursor: pointer;
 }
 
@@ -559,7 +556,7 @@ fieldset[data-dimension='s'] .c0 {
 }
 
 fieldset:disabled .c0 {
-  color: #B1B5BB;
+  color: #B0B5BD;
   cursor: default;
 }
 
@@ -625,7 +622,7 @@ fieldset[data-dimension='s'] .c2 {
   transition: background 0.1s ease-in;
   line-height: initial;
   background-color: #FFFFFF;
-  border: 1px solid #74777F;
+  border: 1px solid #717681;
 }
 
 .c7 *[fill^='#'] {
@@ -668,8 +665,7 @@ fieldset[data-dimension='s'] .c2 {
   display: none;
 }
 
-.c5:hover:not(:disabled)::after,
-.c5:focus:not(:disabled) + .c5:not(:disabled)::after {
+.c5:hover:not(:disabled)::after,.c5:focus:not(:disabled) + .c5:not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
@@ -684,7 +680,7 @@ fieldset[data-dimension='s'] .c2 {
 }
 
 .c5:disabled + .c6 {
-  border: 1px solid #B1B5BB;
+  border: 1px solid #B0B5BD;
   background-color: #E5E7EB;
 }
 
@@ -720,7 +716,7 @@ fieldset[data-dimension='s'] .c2 {
   font-size: 16px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #22242A;
+  color: #23262D;
   cursor: pointer;
 }
 
@@ -735,7 +731,7 @@ fieldset[data-dimension='s'] .c0 {
 }
 
 fieldset:disabled .c0 {
-  color: #B1B5BB;
+  color: #B0B5BD;
   cursor: default;
 }
 
@@ -856,7 +852,7 @@ fieldset[data-dimension='s'] .c2 {
   transition: background 0.1s ease-in;
   line-height: initial;
   background-color: #FFFFFF;
-  border: 1px solid #74777F;
+  border: 1px solid #717681;
 }
 
 .c7 *[fill^='#'] {
@@ -899,8 +895,7 @@ fieldset[data-dimension='s'] .c2 {
   display: none;
 }
 
-.c5:hover:not(:disabled)::after,
-.c5:focus:not(:disabled) + .c5:not(:disabled)::after {
+.c5:hover:not(:disabled)::after,.c5:focus:not(:disabled) + .c5:not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
@@ -915,7 +910,7 @@ fieldset[data-dimension='s'] .c2 {
 }
 
 .c5:disabled + .c6 {
-  border: 1px solid #B1B5BB;
+  border: 1px solid #B0B5BD;
   background-color: #E5E7EB;
 }
 
@@ -951,7 +946,7 @@ fieldset[data-dimension='s'] .c2 {
   font-size: 14px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #22242A;
+  color: #23262D;
   cursor: pointer;
 }
 
@@ -966,7 +961,7 @@ fieldset[data-dimension='s'] .c0 {
 }
 
 fieldset:disabled .c0 {
-  color: #B1B5BB;
+  color: #B0B5BD;
   cursor: default;
 }
 
@@ -1032,7 +1027,7 @@ fieldset[data-dimension='s'] .c2 {
   transition: background 0.1s ease-in;
   line-height: initial;
   background-color: #FFFFFF;
-  border: 1px solid #74777F;
+  border: 1px solid #717681;
 }
 
 .c7 *[fill^='#'] {
@@ -1075,8 +1070,7 @@ fieldset[data-dimension='s'] .c2 {
   display: none;
 }
 
-.c5:hover:not(:disabled)::after,
-.c5:focus:not(:disabled) + .c5:not(:disabled)::after {
+.c5:hover:not(:disabled)::after,.c5:focus:not(:disabled) + .c5:not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
@@ -1091,7 +1085,7 @@ fieldset[data-dimension='s'] .c2 {
 }
 
 .c5:disabled + .c6 {
-  border: 1px solid #B1B5BB;
+  border: 1px solid #B0B5BD;
   background-color: #E5E7EB;
 }
 
@@ -1127,7 +1121,7 @@ fieldset[data-dimension='s'] .c2 {
   font-size: 14px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #22242A;
+  color: #23262D;
   cursor: pointer;
 }
 
@@ -1142,7 +1136,7 @@ fieldset[data-dimension='s'] .c0 {
 }
 
 fieldset:disabled .c0 {
-  color: #B1B5BB;
+  color: #B0B5BD;
   cursor: default;
 }
 

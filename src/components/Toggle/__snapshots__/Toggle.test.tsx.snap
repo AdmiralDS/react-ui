@@ -36,7 +36,7 @@ Object {
 }
 
 .c1:disabled + div > span {
-  background: #B1B5BB;
+  background: #B0B5BD;
 }
 
 .c5 {
@@ -54,7 +54,7 @@ Object {
   font-size: 16px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #B1B5BB;
+  color: #B0B5BD;
 }
 
 .c4 {
@@ -65,7 +65,7 @@ Object {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
-  background: #74777F;
+  background: #717681;
 }
 
 .c4:before {
@@ -197,7 +197,7 @@ Object {
 }
 
 .c1:disabled + div > span {
-  background: #B1B5BB;
+  background: #B0B5BD;
 }
 
 .c5 {
@@ -215,7 +215,7 @@ Object {
   font-size: 16px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #B1B5BB;
+  color: #B0B5BD;
 }
 
 .c4 {
@@ -226,7 +226,7 @@ Object {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
-  background: #74777F;
+  background: #717681;
 }
 
 .c4:before {
@@ -413,7 +413,7 @@ Object {
 }
 
 .c1:disabled + div > span {
-  background: #B1B5BB;
+  background: #B0B5BD;
 }
 
 .c5 {
@@ -431,7 +431,7 @@ Object {
   font-size: 16px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #22242A;
+  color: #23262D;
 }
 
 .c4 {
@@ -442,7 +442,7 @@ Object {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
-  background: #74777F;
+  background: #717681;
 }
 
 .c4:before {
@@ -570,7 +570,7 @@ Object {
 }
 
 .c1:disabled + div > span {
-  background: #B1B5BB;
+  background: #B0B5BD;
 }
 
 .c5 {
@@ -588,7 +588,7 @@ Object {
   font-size: 16px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #22242A;
+  color: #23262D;
 }
 
 .c4 {
@@ -599,7 +599,7 @@ Object {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
-  background: #74777F;
+  background: #717681;
 }
 
 .c4:before {
@@ -782,7 +782,7 @@ Object {
 }
 
 .c1:disabled + div > span {
-  background: #B1B5BB;
+  background: #B0B5BD;
 }
 
 .c5 {
@@ -800,7 +800,7 @@ Object {
   font-size: 16px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #22242A;
+  color: #23262D;
 }
 
 .c4 {
@@ -811,7 +811,7 @@ Object {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
-  background: #74777F;
+  background: #717681;
 }
 
 .c4:before {
@@ -939,7 +939,7 @@ Object {
 }
 
 .c1:disabled + div > span {
-  background: #B1B5BB;
+  background: #B0B5BD;
 }
 
 .c5 {
@@ -957,7 +957,7 @@ Object {
   font-size: 16px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #22242A;
+  color: #23262D;
 }
 
 .c4 {
@@ -968,7 +968,7 @@ Object {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
-  background: #74777F;
+  background: #717681;
 }
 
 .c4:before {
@@ -1151,7 +1151,7 @@ Object {
 }
 
 .c1:disabled + div > span {
-  background: #B1B5BB;
+  background: #B0B5BD;
 }
 
 .c5 {
@@ -1169,7 +1169,7 @@ Object {
   font-size: 14px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #22242A;
+  color: #23262D;
 }
 
 .c4 {
@@ -1180,7 +1180,7 @@ Object {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
-  background: #74777F;
+  background: #717681;
 }
 
 .c4:before {
@@ -1308,7 +1308,7 @@ Object {
 }
 
 .c1:disabled + div > span {
-  background: #B1B5BB;
+  background: #B0B5BD;
 }
 
 .c5 {
@@ -1326,7 +1326,7 @@ Object {
   font-size: 14px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #22242A;
+  color: #23262D;
 }
 
 .c4 {
@@ -1337,7 +1337,7 @@ Object {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
-  background: #74777F;
+  background: #717681;
 }
 
 .c4:before {

@@ -38,7 +38,7 @@ fieldset[data-dimension='s'] .c4 {
   transition: background 0.1s ease-in;
   line-height: initial;
   background-color: #FFFFFF;
-  border: 1px solid #74777F;
+  border: 1px solid #717681;
 }
 
 .c9 *[fill^='#'] {
@@ -81,8 +81,7 @@ fieldset[data-dimension='s'] .c4 {
   display: none;
 }
 
-.c7:hover:not(:disabled)::after,
-.c7:focus:not(:disabled) + .c7:not(:disabled)::after {
+.c7:hover:not(:disabled)::after,.c7:focus:not(:disabled) + .c7:not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
@@ -97,7 +96,7 @@ fieldset[data-dimension='s'] .c4 {
 }
 
 .c7:disabled + .c8 {
-  border: 1px solid #B1B5BB;
+  border: 1px solid #B0B5BD;
   background-color: #E5E7EB;
 }
 
@@ -126,7 +125,7 @@ fieldset[data-dimension='s'] .c4 {
 }
 
 .c3 path {
-  fill: #74777F;
+  fill: #717681;
 }
 
 .c2 {
@@ -156,7 +155,7 @@ fieldset[data-dimension='s'] .c4 {
 }
 
 .c1 {
-  color: #22242A;
+  color: #23262D;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -317,7 +316,7 @@ fieldset[data-dimension='s'] .c4 {
   transition: background 0.1s ease-in;
   line-height: initial;
   background-color: #FFFFFF;
-  border: 1px solid #74777F;
+  border: 1px solid #717681;
 }
 
 .c9 *[fill^='#'] {
@@ -360,8 +359,7 @@ fieldset[data-dimension='s'] .c4 {
   display: none;
 }
 
-.c7:hover:not(:disabled)::after,
-.c7:focus:not(:disabled) + .c7:not(:disabled)::after {
+.c7:hover:not(:disabled)::after,.c7:focus:not(:disabled) + .c7:not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
@@ -376,7 +374,7 @@ fieldset[data-dimension='s'] .c4 {
 }
 
 .c7:disabled + .c8 {
-  border: 1px solid #B1B5BB;
+  border: 1px solid #B0B5BD;
   background-color: #E5E7EB;
 }
 
@@ -405,7 +403,7 @@ fieldset[data-dimension='s'] .c4 {
 }
 
 .c3 path {
-  fill: #74777F;
+  fill: #717681;
 }
 
 .c2 {
@@ -435,7 +433,7 @@ fieldset[data-dimension='s'] .c4 {
 }
 
 .c1 {
-  color: #22242A;
+  color: #23262D;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -651,7 +649,7 @@ fieldset[data-dimension='s'] .c4 {
   transition: background 0.1s ease-in;
   line-height: initial;
   background-color: #FFFFFF;
-  border: 1px solid #74777F;
+  border: 1px solid #717681;
 }
 
 .c9 *[fill^='#'] {
@@ -694,8 +692,7 @@ fieldset[data-dimension='s'] .c4 {
   display: none;
 }
 
-.c7:hover:not(:disabled)::after,
-.c7:focus:not(:disabled) + .c7:not(:disabled)::after {
+.c7:hover:not(:disabled)::after,.c7:focus:not(:disabled) + .c7:not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
@@ -710,7 +707,7 @@ fieldset[data-dimension='s'] .c4 {
 }
 
 .c7:disabled + .c8 {
-  border: 1px solid #B1B5BB;
+  border: 1px solid #B0B5BD;
   background-color: #E5E7EB;
 }
 
@@ -739,7 +736,7 @@ fieldset[data-dimension='s'] .c4 {
 }
 
 .c3 path {
-  fill: #74777F;
+  fill: #717681;
 }
 
 .c2 {
@@ -769,7 +766,7 @@ fieldset[data-dimension='s'] .c4 {
 }
 
 .c1 {
-  color: #22242A;
+  color: #23262D;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -930,7 +927,7 @@ fieldset[data-dimension='s'] .c4 {
   transition: background 0.1s ease-in;
   line-height: initial;
   background-color: #FFFFFF;
-  border: 1px solid #74777F;
+  border: 1px solid #717681;
 }
 
 .c9 *[fill^='#'] {
@@ -973,8 +970,7 @@ fieldset[data-dimension='s'] .c4 {
   display: none;
 }
 
-.c7:hover:not(:disabled)::after,
-.c7:focus:not(:disabled) + .c7:not(:disabled)::after {
+.c7:hover:not(:disabled)::after,.c7:focus:not(:disabled) + .c7:not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
@@ -989,7 +985,7 @@ fieldset[data-dimension='s'] .c4 {
 }
 
 .c7:disabled + .c8 {
-  border: 1px solid #B1B5BB;
+  border: 1px solid #B0B5BD;
   background-color: #E5E7EB;
 }
 
@@ -1018,7 +1014,7 @@ fieldset[data-dimension='s'] .c4 {
 }
 
 .c3 path {
-  fill: #74777F;
+  fill: #717681;
 }
 
 .c2 {
@@ -1048,7 +1044,7 @@ fieldset[data-dimension='s'] .c4 {
 }
 
 .c1 {
-  color: #22242A;
+  color: #23262D;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -1264,7 +1260,7 @@ fieldset[data-dimension='s'] .c4 {
   transition: background 0.1s ease-in;
   line-height: initial;
   background-color: #FFFFFF;
-  border: 1px solid #74777F;
+  border: 1px solid #717681;
 }
 
 .c9 *[fill^='#'] {
@@ -1307,8 +1303,7 @@ fieldset[data-dimension='s'] .c4 {
   display: none;
 }
 
-.c7:hover:not(:disabled)::after,
-.c7:focus:not(:disabled) + .c7:not(:disabled)::after {
+.c7:hover:not(:disabled)::after,.c7:focus:not(:disabled) + .c7:not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
@@ -1323,7 +1318,7 @@ fieldset[data-dimension='s'] .c4 {
 }
 
 .c7:disabled + .c8 {
-  border: 1px solid #B1B5BB;
+  border: 1px solid #B0B5BD;
   background-color: #E5E7EB;
 }
 
@@ -1352,7 +1347,7 @@ fieldset[data-dimension='s'] .c4 {
 }
 
 .c3 path {
-  fill: #74777F;
+  fill: #717681;
 }
 
 .c2 {
@@ -1382,7 +1377,7 @@ fieldset[data-dimension='s'] .c4 {
 }
 
 .c1 {
-  color: #22242A;
+  color: #23262D;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -1543,7 +1538,7 @@ fieldset[data-dimension='s'] .c4 {
   transition: background 0.1s ease-in;
   line-height: initial;
   background-color: #FFFFFF;
-  border: 1px solid #74777F;
+  border: 1px solid #717681;
 }
 
 .c9 *[fill^='#'] {
@@ -1586,8 +1581,7 @@ fieldset[data-dimension='s'] .c4 {
   display: none;
 }
 
-.c7:hover:not(:disabled)::after,
-.c7:focus:not(:disabled) + .c7:not(:disabled)::after {
+.c7:hover:not(:disabled)::after,.c7:focus:not(:disabled) + .c7:not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
@@ -1602,7 +1596,7 @@ fieldset[data-dimension='s'] .c4 {
 }
 
 .c7:disabled + .c8 {
-  border: 1px solid #B1B5BB;
+  border: 1px solid #B0B5BD;
   background-color: #E5E7EB;
 }
 
@@ -1631,7 +1625,7 @@ fieldset[data-dimension='s'] .c4 {
 }
 
 .c3 path {
-  fill: #74777F;
+  fill: #717681;
 }
 
 .c2 {
@@ -1661,7 +1655,7 @@ fieldset[data-dimension='s'] .c4 {
 }
 
 .c1 {
-  color: #22242A;
+  color: #23262D;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 400;
