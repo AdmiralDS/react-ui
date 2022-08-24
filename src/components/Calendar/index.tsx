@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { DEFAULT_LOCALE_NAME, DEFAULT_YEAR_COUNT } from './constants';
+import { DEFAULT_YEAR_COUNT } from './constants';
 import { getDefaultDateValidator } from './validator';
 import { DayNames, Month, Months, Panel, Years } from './components';
 import {
@@ -32,7 +32,6 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarPropType>(
       selected,
       range,
       tooltipContainer,
-      localeName = DEFAULT_LOCALE_NAME,
       filterDate,
       currentActiveView,
       currentActiveViewImportant,
@@ -218,7 +217,7 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarPropType>(
         maxDate={maxDate}
         yearsView={yearsView}
         monthsView={monthsView}
-        localeName={localeName}
+        // localeName={localeName}
         onYearsViewShow={handleYearsViewShow}
         onYearsViewHide={handleYearsViewHide}
         onMonthsViewShow={handleMonthsViewShow}
@@ -231,7 +230,10 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarPropType>(
 
     const renderMonth = () => (
       <>
-        <DayNames date={viewDate} localeName={localeName} />
+        <DayNames
+          date={viewDate}
+          // localeName={localeName}
+        />
         <Month
           day={viewDate}
           startDate={startDate}
@@ -239,7 +241,7 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarPropType>(
           selected={selected}
           activeDate={activeDate}
           range={range}
-          localeName={localeName}
+          // localeName={localeName}
           validator={getValidator()}
           filterDate={filterDate}
           onMouseEnter={handleDayMouseEnter}
@@ -255,7 +257,7 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarPropType>(
         startDate={startDate}
         endDate={endDate}
         selected={selected}
-        localeName={localeName}
+        // localeName={localeName}
         range={range}
         validator={getValidator()}
         onClick={handleMonthClick}
@@ -268,7 +270,7 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarPropType>(
         startDate={startDate}
         endDate={endDate}
         selected={selected}
-        localeName={localeName}
+        // localeName={localeName}
         range={range}
         validator={getValidator()}
         onClick={handleYearClick}
@@ -284,9 +286,5 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarPropType>(
     );
   },
 );
-
-Calendar.defaultProps = {
-  localeName: DEFAULT_LOCALE_NAME,
-};
 
 Calendar.displayName = 'Calendar';

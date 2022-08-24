@@ -1,9 +1,10 @@
 import React, { FC } from 'react';
+import { ThemeContext } from 'styled-components';
+import { LIGHT_THEME } from '#src/components/themes';
 
 import { after, dayInRange, endOfWeek, equal, sameDay, startOfWeek } from '../date-utils';
 import { DayComponent } from '../styled/DayComponent';
 import type { Corners } from '../constants';
-import { DEFAULT_LOCALE_NAME } from '../constants';
 import type { IDayCalendarProps } from '../interfaces';
 
 export const Day: FC<IDayCalendarProps> = ({
@@ -14,12 +15,12 @@ export const Day: FC<IDayCalendarProps> = ({
   selected,
   activeDate,
   range,
-  localeName = DEFAULT_LOCALE_NAME,
   validator,
   filterDate,
   onMouseEnter,
   onClick,
 }) => {
+  const theme = React.useContext(ThemeContext) || LIGHT_THEME;
   const disabled = !!validator?.invalidValue(day) || (filterDate && !filterDate(day));
   const outsideMonth = month !== undefined && month !== day.getMonth();
   const inSelectingRange =
@@ -38,8 +39,10 @@ export const Day: FC<IDayCalendarProps> = ({
 
   const corners: Corners = {};
   if (startDate) {
-    const weekStart = sameDay(day, startOfWeek(day, localeName));
-    const weekEnd = sameDay(day, endOfWeek(day, localeName));
+    // const weekStart = sameDay(day, startOfWeek(day, localeName));
+    const weekStart = sameDay(day, startOfWeek(day, theme.locales[theme.currentLocale].weekStartsOn ?? 1));
+    // const weekEnd = sameDay(day, endOfWeek(day, localeName));
+    const weekEnd = sameDay(day, endOfWeek(day, theme.locales[theme.currentLocale].weekStartsOn ?? 1));
     const start = rangeStart || rangeSelectingStart;
     const end = rangeEnd || rangeSelectingEnd;
     // если endDate не определена, то активную дату мы не выделяем серым фоном

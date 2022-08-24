@@ -1,6 +1,8 @@
 import type { FC, MouseEvent } from 'react';
 import React from 'react';
 import { Tooltip } from '#src/components/Tooltip';
+import { ThemeContext } from 'styled-components';
+import { LIGHT_THEME } from '#src/components/themes';
 
 import {
   addMonths,
@@ -13,17 +15,7 @@ import {
 } from '../date-utils';
 import { PanelComponent } from '../styled/PanelComponent';
 import { Month, PanelDate, Year } from '../styled/PanelDate';
-import type { LocaleType } from '../constants';
-import {
-  BACK,
-  capitalizeFirstLetter,
-  FORWARD,
-  NEXT_MONTH,
-  PREVIOUS_MONTH,
-  RETURN,
-  SELECT_MONTH,
-  SELECT_YEAR,
-} from '../constants';
+import { capitalizeFirstLetter } from '../constants';
 
 import { Button } from './Button';
 
@@ -31,7 +23,6 @@ interface IPanelProps {
   viewDate: Date;
   yearsView: boolean;
   monthsView: boolean;
-  localeName: LocaleType;
   minDate?: Date;
   maxDate?: Date;
   tooltipContainer?: Element | null;
@@ -55,7 +46,6 @@ export const Panel: FC<IPanelProps> = ({
   maxDate,
   yearsView,
   monthsView,
-  localeName,
   tooltipContainer,
   onYearsViewShow,
   onYearsViewHide,
@@ -64,6 +54,7 @@ export const Panel: FC<IPanelProps> = ({
   onNext,
   onPrevious,
 }) => {
+  const theme = React.useContext(ThemeContext) || LIGHT_THEME;
   const previousMonthDisabled = !!minDate && differenceMonths(minDate, subMonths(viewDate, 1)) > 0;
   const nextMonthDisabled = !!maxDate && differenceMonths(addMonths(viewDate, 1), maxDate) > 0;
   const previousYearDisabled = !!minDate && differenceYears(minDate, subYears(viewDate, 1)) > 0;
@@ -103,20 +94,29 @@ export const Panel: FC<IPanelProps> = ({
             targetRef={previousBtnRef}
             visible={previousBtnTipVisible}
             onVisibilityChange={handlePreviousBtnTipChange}
-            renderContent={() => (yearsView ? BACK : PREVIOUS_MONTH)}
+            renderContent={() =>
+              yearsView
+                ? theme.locales[theme.currentLocale].calendar_back
+                : theme.locales[theme.currentLocale].calendar_previous_month
+            }
             container={tooltipContainer}
           />
         </>
       )}
       <PanelDate>
         <Month ref={monthRef} view={monthsView} onMouseDown={monthMouseDownHandle}>
-          {capitalizeFirstLetter(getFormattedValue(viewDate, { month: 'long' }, localeName))}
+          {/* {capitalizeFirstLetter(getFormattedValue(viewDate, { month: 'long' }, localeName))} */}
+          {capitalizeFirstLetter(getFormattedValue(viewDate, { month: 'long' }, theme.currentLocale || 'ru'))}
         </Month>
         <Tooltip
           targetRef={monthRef}
           visible={monthTipVisible}
           onVisibilityChange={handleMonthTipChange}
-          renderContent={() => (monthsView ? RETURN : SELECT_MONTH)}
+          renderContent={() =>
+            monthsView
+              ? theme.locales[theme.currentLocale].calendar_return
+              : theme.locales[theme.currentLocale].calendar_select_month
+          }
           container={tooltipContainer}
         />
         <Year ref={yearRef} view={yearsView} onMouseDown={yearMouseDownHandle}>
@@ -126,7 +126,11 @@ export const Panel: FC<IPanelProps> = ({
           targetRef={yearRef}
           visible={yearTipVisible}
           onVisibilityChange={handleYearTipChange}
-          renderContent={() => (yearsView ? RETURN : SELECT_YEAR)}
+          renderContent={() =>
+            yearsView
+              ? theme.locales[theme.currentLocale].calendar_return
+              : theme.locales[theme.currentLocale].calendar_select_year
+          }
           container={tooltipContainer}
         />
       </PanelDate>
@@ -137,7 +141,11 @@ export const Panel: FC<IPanelProps> = ({
             targetRef={nextBtnRef}
             visible={nextBtnTipVisible}
             onVisibilityChange={handleNextBtnTipChange}
-            renderContent={() => (yearsView ? FORWARD : NEXT_MONTH)}
+            renderContent={() =>
+              yearsView
+                ? theme.locales[theme.currentLocale].calendar_forward
+                : theme.locales[theme.currentLocale].calendar_next_month
+            }
             container={tooltipContainer}
           />
         </>

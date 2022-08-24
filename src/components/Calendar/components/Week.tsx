@@ -1,13 +1,14 @@
 import React, { FC } from 'react';
+import { ThemeContext } from 'styled-components';
+import { LIGHT_THEME } from '#src/components/themes';
 
-import { DAY_NUMBERS, DEFAULT_LOCALE_NAME } from '../constants';
+import { DAY_NUMBERS } from '../constants';
 import { addDays, startOfWeek } from '../date-utils';
 import { Day } from './Day';
 import { WeekComponent } from '../styled/WeekComponent';
 import type { IWeekCalendarProps } from '../interfaces';
 
 export const Week: FC<IWeekCalendarProps> = ({
-  localeName = DEFAULT_LOCALE_NAME,
   day,
   month,
   startDate,
@@ -20,9 +21,11 @@ export const Week: FC<IWeekCalendarProps> = ({
   onMouseEnter,
   onClick,
 }) => {
+  const theme = React.useContext(ThemeContext) || LIGHT_THEME;
   const handleMouseEnter = (day: Date, e: any) => onMouseEnter && onMouseEnter(day, e);
   const handleDayClick = (day: Date, e: any) => onClick && onClick(day, e);
-  const weekStart = startOfWeek(day, localeName);
+  // const weekStart = startOfWeek(day, localeName);
+  const weekStart = startOfWeek(day, theme.locales[theme.currentLocale].weekStartsOn ?? 1);
   return (
     <WeekComponent>
       {DAY_NUMBERS.map((offset) => {
@@ -37,7 +40,7 @@ export const Week: FC<IWeekCalendarProps> = ({
             selected={selected}
             activeDate={activeDate}
             range={range}
-            localeName={localeName}
+            // localeName={localeName}
             validator={validator}
             filterDate={filterDate}
             onMouseEnter={(_, e) => handleMouseEnter(nextDay, e)}

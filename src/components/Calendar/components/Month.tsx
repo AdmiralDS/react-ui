@@ -1,14 +1,14 @@
 import React, { FC } from 'react';
+import { ThemeContext } from 'styled-components';
+import { LIGHT_THEME } from '#src/components/themes';
 
 import { addWeeks, startOfMonth, startOfWeek } from '../date-utils';
 import { Week } from './Week';
 import type { IMonthCalendarProps } from '../interfaces';
-import { DEFAULT_LOCALE_NAME } from '#src/components/Calendar/constants';
 
 const FIXED_WEEK_COUNT = 6;
 
 export const Month: FC<IMonthCalendarProps> = ({
-  localeName = DEFAULT_LOCALE_NAME,
   day,
   startDate,
   endDate,
@@ -21,13 +21,15 @@ export const Month: FC<IMonthCalendarProps> = ({
   onMouseLeave,
   onClick,
 }) => {
+  const theme = React.useContext(ThemeContext) || LIGHT_THEME;
   const weeks: Array<Date> = [];
   const handleMouseEnter = (day: Date, event: any) => onMouseEnter && onMouseEnter(day, event);
   const handleMouseLeave = () => onMouseLeave && onMouseLeave();
   const handleDayClick = (day: Date, event: any) => onClick && onClick(day, event);
 
   let weekIndex = 0;
-  let weekStart = startOfWeek(startOfMonth(day), localeName);
+  // let weekStart = startOfWeek(startOfMonth(day), localeName);
+  let weekStart = startOfWeek(startOfMonth(day), theme.locales[theme.currentLocale].weekStartsOn ?? 1);
   do {
     weekIndex++;
     weeks.push(weekStart);
@@ -46,7 +48,7 @@ export const Month: FC<IMonthCalendarProps> = ({
           selected={selected}
           activeDate={activeDate}
           range={range}
-          localeName={localeName}
+          // localeName={localeName}
           validator={validator}
           filterDate={filterDate}
           onMouseEnter={handleMouseEnter}
