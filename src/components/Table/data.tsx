@@ -8,6 +8,8 @@ import { RowAction } from '#src/components/Table';
 
 import type { Column } from '../Table';
 import { Tooltip } from '#src/components/Tooltip';
+import { TooltipHoc } from '#src/components/TooltipHOC';
+import { Dimension } from '#src/components/Tree/TreeNode';
 
 const AmountCell = styled.div`
   text-overflow: ellipsis;
@@ -747,6 +749,26 @@ const Menu: React.FC<MenuProps> = ({ row, onMenuOpen, onMenuClose, showTooltip =
   );
 };
 
+const ICON_SIZE_M = 20;
+const ICON_SIZE_S = 16;
+
+const IconWrapper = styled.div<{ dimension?: Dimension }>`
+  ${({ dimension }) => `
+    width: ${dimension === 's' ? ICON_SIZE_S : ICON_SIZE_M}px;
+    height: ${dimension === 's' ? ICON_SIZE_S : ICON_SIZE_M}px;`}
+  > svg {
+    fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
+  }
+`;
+const TooltipedDeleteOutline = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLElement>>((props, ref) => {
+  return (
+    <IconWrapper ref={ref} {...props}>
+      <DeleteOutline />
+    </IconWrapper>
+  );
+});
+const TooltipedIcon = TooltipHoc(TooltipedDeleteOutline);
+
 export const rowListMenu: RowData[] = [
   {
     id: '0001',
@@ -777,11 +799,19 @@ export const rowListMenu: RowData[] = [
     transfer_amount: numberFormatter.format(189_000_000),
     currency: 'RUB',
     rate: 6,
-    actionRender: () => (
-      <RowAction onClick={() => console.log('row action happens')}>
-        <DeleteOutline />
-      </RowAction>
-    ),
+    actionRender: () => {
+      const [visible, setVisible] = React.useState(false);
+
+      return (
+        <RowAction onClick={() => console.log('row action happens')}>
+          <TooltipedIcon
+            visible={visible}
+            handleVisibilityChange={(visible: boolean) => setVisible(visible)}
+            renderContent={() => `Delete`}
+          />
+        </RowAction>
+      );
+    },
   },
   {
     id: '0004',
