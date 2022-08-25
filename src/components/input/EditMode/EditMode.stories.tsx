@@ -3,6 +3,7 @@ import styled, { css, ThemeProvider } from 'styled-components';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import { INPUT_DIMENSIONS_VALUES } from '#src/components/input/types';
+import { T } from '#src/components/T';
 
 import { EditMode } from './index';
 import { Theme } from '#src/components/themes';
@@ -37,7 +38,7 @@ export default {
   },
   argTypes: {
     dimension: {
-      options: INPUT_DIMENSIONS_VALUES,
+      options: ['xxl', 'xl', 'm', 's'],
       control: { type: 'radio' },
     },
     bold: {
@@ -112,15 +113,35 @@ const Template2: ComponentStory<typeof EditMode> = (props) => {
   };
   return (
     <>
+      <T font="Body/Body 1 Long" as="div">
+        Dimension - s
+      </T>
       <EditMode {...cleanProps} value={localValue} onChange={handleChange} dimension="s" />
       <Separator />
+      <T font="Body/Body 1 Long" as="div">
+        Dimension - s bold
+      </T>
       <EditMode {...cleanProps} value={localValue} onChange={handleChange} dimension="s" bold />
       <Separator />
+      <T font="Body/Body 1 Long" as="div">
+        Dimension - m
+      </T>
       <EditMode {...cleanProps} value={localValue} onChange={handleChange} />
       <Separator />
+      <T font="Body/Body 1 Long" as="div">
+        Dimension - m bold
+      </T>
       <EditMode {...cleanProps} value={localValue} onChange={handleChange} bold />
       <Separator />
+      <T font="Body/Body 1 Long" as="div">
+        Dimension - xl
+      </T>
       <EditMode {...cleanProps} value={localValue} onChange={handleChange} dimension="xl" />
+      <Separator />
+      <T font="Body/Body 1 Long" as="div">
+        Dimension - xxl
+      </T>
+      <EditMode {...cleanProps} value={localValue} onChange={handleChange} dimension="xxl" />
     </>
   );
 };
