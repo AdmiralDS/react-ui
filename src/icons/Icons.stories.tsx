@@ -82,7 +82,15 @@ const IconName = styled.div`
   gap: 8px;
 `;
 
+const CopyOutlineWrapper = styled.div`
+  display: inline-flex;
+  cursor: pointer;
+`;
+
 const CopyButton = ({ text }: { text: string }) => {
+  const copyRef = React.useRef<HTMLDivElement | null>(null);
+  const [tooltipVisible, setTooltipVisible] = React.useState(false);
+
   const copyToClipboard = () => {
     const el = document.createElement('textarea');
     el.value = text;
@@ -95,9 +103,17 @@ const CopyButton = ({ text }: { text: string }) => {
     document.body.removeChild(el);
   };
   return (
-    <Tooltip renderContent={() => 'Копировать импорт'}>
-      <CopyOutline width={16} height={16} onClick={copyToClipboard} />
-    </Tooltip>
+    <>
+      <CopyOutlineWrapper ref={copyRef}>
+        <CopyOutline width={16} height={16} onClick={copyToClipboard} />
+      </CopyOutlineWrapper>
+      <Tooltip
+        targetRef={copyRef}
+        visible={tooltipVisible}
+        onVisibilityChange={(visible: boolean) => setTooltipVisible(visible)}
+        renderContent={() => 'Копировать пример использования'}
+      />
+    </>
   );
 };
 

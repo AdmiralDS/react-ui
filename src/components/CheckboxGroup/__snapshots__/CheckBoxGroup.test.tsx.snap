@@ -16,7 +16,7 @@ Object {
   line-height: 20px;
   font-weight: normal;
   font-family: 'VTB Group UI',sans-serif;
-  color: #B1B5BB;
+  color: #B0B5BD;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -62,7 +62,7 @@ fieldset[data-dimension='s'] .c3 {
   transition: background 0.1s ease-in;
   line-height: initial;
   background-color: #FFFFFF;
-  border: 1px solid #74777F;
+  border: 1px solid #717681;
 }
 
 .c8 *[fill^='#'] {
@@ -120,7 +120,7 @@ fieldset[data-dimension='s'] .c3 {
 }
 
 .c6:disabled + .c7 {
-  border: 1px solid #B1B5BB;
+  border: 1px solid #B0B5BD;
   background-color: #E5E7EB;
 }
 
@@ -156,7 +156,7 @@ fieldset[data-dimension='s'] .c3 {
   font-size: 16px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #B1B5BB;
+  color: #B0B5BD;
   cursor: default;
 }
 
@@ -171,7 +171,7 @@ fieldset[data-dimension='s'] .c1 {
 }
 
 fieldset:disabled .c1 {
-  color: #B1B5BB;
+  color: #B0B5BD;
   cursor: default;
 }
 
@@ -269,7 +269,7 @@ fieldset:disabled .c1 {
   line-height: 20px;
   font-weight: normal;
   font-family: 'VTB Group UI',sans-serif;
-  color: #B1B5BB;
+  color: #B0B5BD;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -315,7 +315,7 @@ fieldset[data-dimension='s'] .c3 {
   transition: background 0.1s ease-in;
   line-height: initial;
   background-color: #FFFFFF;
-  border: 1px solid #74777F;
+  border: 1px solid #717681;
 }
 
 .c8 *[fill^='#'] {
@@ -373,7 +373,7 @@ fieldset[data-dimension='s'] .c3 {
 }
 
 .c6:disabled + .c7 {
-  border: 1px solid #B1B5BB;
+  border: 1px solid #B0B5BD;
   background-color: #E5E7EB;
 }
 
@@ -409,7 +409,7 @@ fieldset[data-dimension='s'] .c3 {
   font-size: 16px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #B1B5BB;
+  color: #B0B5BD;
   cursor: default;
 }
 
@@ -424,7 +424,7 @@ fieldset[data-dimension='s'] .c1 {
 }
 
 fieldset:disabled .c1 {
-  color: #B1B5BB;
+  color: #B0B5BD;
   cursor: default;
 }
 
@@ -577,7 +577,7 @@ Object {
   line-height: 20px;
   font-weight: normal;
   font-family: 'VTB Group UI',sans-serif;
-  color: #22242A;
+  color: #23262D;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -623,7 +623,7 @@ fieldset[data-dimension='s'] .c3 {
   transition: background 0.1s ease-in;
   line-height: initial;
   background-color: #FFFFFF;
-  border: 1px solid #74777F;
+  border: 1px solid #717681;
 }
 
 .c8 *[fill^='#'] {
@@ -681,7 +681,7 @@ fieldset[data-dimension='s'] .c3 {
 }
 
 .c6:disabled + .c7 {
-  border: 1px solid #B1B5BB;
+  border: 1px solid #B0B5BD;
   background-color: #E5E7EB;
 }
 
@@ -717,7 +717,7 @@ fieldset[data-dimension='s'] .c3 {
   font-size: 16px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #22242A;
+  color: #23262D;
   cursor: pointer;
 }
 
@@ -732,7 +732,7 @@ fieldset[data-dimension='s'] .c1 {
 }
 
 fieldset:disabled .c1 {
-  color: #B1B5BB;
+  color: #B0B5BD;
   cursor: default;
 }
 
@@ -824,7 +824,7 @@ fieldset:disabled .c1 {
   line-height: 20px;
   font-weight: normal;
   font-family: 'VTB Group UI',sans-serif;
-  color: #22242A;
+  color: #23262D;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -870,7 +870,7 @@ fieldset[data-dimension='s'] .c3 {
   transition: background 0.1s ease-in;
   line-height: initial;
   background-color: #FFFFFF;
-  border: 1px solid #74777F;
+  border: 1px solid #717681;
 }
 
 .c8 *[fill^='#'] {
@@ -928,7 +928,7 @@ fieldset[data-dimension='s'] .c3 {
 }
 
 .c6:disabled + .c7 {
-  border: 1px solid #B1B5BB;
+  border: 1px solid #B0B5BD;
   background-color: #E5E7EB;
 }
 
@@ -964,7 +964,7 @@ fieldset[data-dimension='s'] .c3 {
   font-size: 16px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #22242A;
+  color: #23262D;
   cursor: pointer;
 }
 
@@ -979,7 +979,7 @@ fieldset[data-dimension='s'] .c1 {
 }
 
 fieldset:disabled .c1 {
-  color: #B1B5BB;
+  color: #B0B5BD;
   cursor: default;
 }
 
@@ -1126,7 +1126,7 @@ Object {
   line-height: 16px;
   font-weight: normal;
   font-family: 'VTB Group UI',sans-serif;
-  color: #22242A;
+  color: #23262D;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -1172,7 +1172,7 @@ fieldset[data-dimension='s'] .c3 {
   transition: background 0.1s ease-in;
   line-height: initial;
   background-color: #FFFFFF;
-  border: 1px solid #74777F;
+  border: 1px solid #717681;
 }
 
 .c8 *[fill^='#'] {
@@ -1230,7 +1230,7 @@ fieldset[data-dimension='s'] .c3 {
 }
 
 .c6:disabled + .c7 {
-  border: 1px solid #B1B5BB;
+  border: 1px solid #B0B5BD;
   background-color: #E5E7EB;
 }
 
@@ -1266,7 +1266,7 @@ fieldset[data-dimension='s'] .c3 {
   font-size: 14px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #22242A;
+  color: #23262D;
   cursor: pointer;
 }
 
@@ -1281,7 +1281,7 @@ fieldset[data-dimension='s'] .c1 {
 }
 
 fieldset:disabled .c1 {
-  color: #B1B5BB;
+  color: #B0B5BD;
   cursor: default;
 }
 
@@ -1372,7 +1372,7 @@ fieldset:disabled .c1 {
   line-height: 16px;
   font-weight: normal;
   font-family: 'VTB Group UI',sans-serif;
-  color: #22242A;
+  color: #23262D;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -1418,7 +1418,7 @@ fieldset[data-dimension='s'] .c3 {
   transition: background 0.1s ease-in;
   line-height: initial;
   background-color: #FFFFFF;
-  border: 1px solid #74777F;
+  border: 1px solid #717681;
 }
 
 .c8 *[fill^='#'] {
@@ -1476,7 +1476,7 @@ fieldset[data-dimension='s'] .c3 {
 }
 
 .c6:disabled + .c7 {
-  border: 1px solid #B1B5BB;
+  border: 1px solid #B0B5BD;
   background-color: #E5E7EB;
 }
 
@@ -1512,7 +1512,7 @@ fieldset[data-dimension='s'] .c3 {
   font-size: 14px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #22242A;
+  color: #23262D;
   cursor: pointer;
 }
 
@@ -1527,7 +1527,7 @@ fieldset[data-dimension='s'] .c1 {
 }
 
 fieldset:disabled .c1 {
-  color: #B1B5BB;
+  color: #B0B5BD;
   cursor: default;
 }
 
@@ -1673,7 +1673,7 @@ Object {
   line-height: 20px;
   font-weight: normal;
   font-family: 'VTB Group UI',sans-serif;
-  color: #22242A;
+  color: #23262D;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -1719,7 +1719,7 @@ fieldset[data-dimension='s'] .c3 {
   transition: background 0.1s ease-in;
   line-height: initial;
   background-color: #FFFFFF;
-  border: 1px solid #74777F;
+  border: 1px solid #717681;
 }
 
 .c8 *[fill^='#'] {
@@ -1777,7 +1777,7 @@ fieldset[data-dimension='s'] .c3 {
 }
 
 .c6:disabled + .c7 {
-  border: 1px solid #B1B5BB;
+  border: 1px solid #B0B5BD;
   background-color: #E5E7EB;
 }
 
@@ -1813,7 +1813,7 @@ fieldset[data-dimension='s'] .c3 {
   font-size: 16px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #22242A;
+  color: #23262D;
   cursor: pointer;
 }
 
@@ -1828,7 +1828,7 @@ fieldset[data-dimension='s'] .c1 {
 }
 
 fieldset:disabled .c1 {
-  color: #B1B5BB;
+  color: #B0B5BD;
   cursor: default;
 }
 
@@ -1919,7 +1919,7 @@ fieldset:disabled .c1 {
   line-height: 20px;
   font-weight: normal;
   font-family: 'VTB Group UI',sans-serif;
-  color: #22242A;
+  color: #23262D;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -1965,7 +1965,7 @@ fieldset[data-dimension='s'] .c3 {
   transition: background 0.1s ease-in;
   line-height: initial;
   background-color: #FFFFFF;
-  border: 1px solid #74777F;
+  border: 1px solid #717681;
 }
 
 .c8 *[fill^='#'] {
@@ -2023,7 +2023,7 @@ fieldset[data-dimension='s'] .c3 {
 }
 
 .c6:disabled + .c7 {
-  border: 1px solid #B1B5BB;
+  border: 1px solid #B0B5BD;
   background-color: #E5E7EB;
 }
 
@@ -2059,7 +2059,7 @@ fieldset[data-dimension='s'] .c3 {
   font-size: 16px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #22242A;
+  color: #23262D;
   cursor: pointer;
 }
 
@@ -2074,7 +2074,7 @@ fieldset[data-dimension='s'] .c1 {
 }
 
 fieldset:disabled .c1 {
-  color: #B1B5BB;
+  color: #B0B5BD;
   cursor: default;
 }
 

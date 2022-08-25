@@ -1,31 +1,54 @@
 import * as React from 'react';
 import type { RefCallback, RefObject } from '#src/components/common/utils/handleRef';
 import { refSetter } from '#src/components/common/utils/refSetter';
-import { Tooltip } from '../TooltipRefactor';
-
-type TooltipPositionType = 'bottom' | 'top' | 'left' | 'right' | 'bottomPageCenter' | 'topPageCenter';
+import { Tooltip } from '#src/components/Tooltip';
+import type { ITooltipProps } from '#src/components/Tooltip';
 
 export interface TooltipHocProps {
+  /** Видимость тултипа */
+  visible: boolean;
+  /** Колбек на изменение видимости тултипа
+   * При ховере/фокусе на target элементе колбек вызовется со значением visible=true,
+   * при потере ховера/фокуса на target элементе колбек вызовется со значением visible=false.
+   */
+  handleVisibilityChange: (visible: boolean) => void;
+  /** Функция, которая возвращает реакт-компонент с контентом тултипа. Если этому компоненту нужны props, используйте замыкание */
   renderContent: () => React.ReactNode;
+  /** Контейнер, в котором будет отрисован тултип через React.createPortal. По умолчанию тултип отрисовывается в document.body */
   container?: Element | null;
+  /** Отобразить тултип с задержкой в 1.5 секунды */
   withDelay?: boolean;
+  /** Ссылка на тултип */
   tooltipRef?: RefCallback<HTMLDivElement> | RefObject<HTMLDivElement> | null;
-  tooltipPosition?: TooltipPositionType;
+  /** Расположение тултипа */
+  tooltipPosition?: ITooltipProps['tooltipPosition'];
 }
 
-export type WrappedComponentProps = {
-  innerRef?: any;
+type WrappedComponentProps = {
+  forwardedRef?: any;
 };
 
-export function TooltipHOC<P extends React.ComponentPropsWithRef<any>>(Component: React.ComponentType<P>) {
+export function TooltipHoc<P extends React.ComponentPropsWithRef<any>>(Component: React.ComponentType<P>) {
   const WrappedComponent = (props: P & TooltipHocProps & WrappedComponentProps) => {
-    const { innerRef, renderContent, container, withDelay, tooltipRef, tooltipPosition, ...wrappedOnlyProps } = props;
+    const {
+      forwardedRef,
+      visible,
+      handleVisibilityChange,
+      renderContent,
+      container,
+      withDelay,
+      tooltipRef,
+      tooltipPosition,
+      ...wrappedCompProps
+    } = props;
     const anchorElementRef = React.useRef<any>(null);
 
     return (
       <>
-        <Component {...(wrappedOnlyProps as any)} ref={refSetter(innerRef, anchorElementRef)} />
+        <Component {...(wrappedCompProps as P & object)} ref={refSetter(forwardedRef, anchorElementRef)} />
         <Tooltip
+          visible={visible}
+          onVisibilityChange={handleVisibilityChange}
           targetRef={anchorElementRef}
           renderContent={renderContent}
           container={container}
@@ -37,8 +60,7 @@ export function TooltipHOC<P extends React.ComponentPropsWithRef<any>>(Component
     );
   };
 
-  // использую forwardRef на тот случай, если ref захотят прокинуть на результат вызова TooltipHoc
   return React.forwardRef<any, P & TooltipHocProps>((props: P & TooltipHocProps, ref) => {
-    return <WrappedComponent innerRef={ref} {...props} />;
+    return <WrappedComponent forwardedRef={ref} {...props} />;
   });
 }

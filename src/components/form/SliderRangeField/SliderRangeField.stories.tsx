@@ -5,12 +5,14 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import { Theme } from '#src/components/themes';
 import { ThemeProvider } from 'styled-components';
+import { DataAttributesDescription } from '#src/components/form/common';
 
 export default {
   title: 'Admiral-2.1/Form Field/SliderRangeField',
   component: SliderRangeField,
   decorators: [withDesign],
   parameters: {
+    componentSubtitle: <DataAttributesDescription />,
     design: [
       {
         type: 'figma',
@@ -81,7 +83,7 @@ const Template: ComponentStory<typeof SliderRangeField> = (props) => {
 
   return (
     <ThemeProvider theme={swapBorder}>
-      <SliderRangeField {...props} />
+      <SliderRangeField data-container-id="sliderRangeFieldIdOne" {...props} />
     </ThemeProvider>
   );
 };

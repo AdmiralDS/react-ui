@@ -1,11 +1,16 @@
-import React, { useRef } from 'react';
+import * as React from 'react';
 import { ReactComponent as DeleteOutline } from '@admiral-ds/icons/build/system/DeleteOutline.svg';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import styled, { ThemeProvider } from 'styled-components';
 
 import { Tooltip } from '#src/components/Tooltip';
+import { TooltipHoc } from '#src/components/TooltipHOC';
+import { TooltipHocStory } from '#src/components/TooltipHOC/story';
+import { refSetter } from '#src/components/common/utils/refSetter';
 import { Button } from '#src/components/Button';
+import { InputField } from '#src/components/form';
+import type { InputFieldProps } from '#src/components/form';
 import { Theme } from '#src/components/themes';
 
 const Separator = styled.div<{ height?: number }>`
@@ -28,13 +33,32 @@ const Description = () => (
     <Separator />
     Приоритетным является расположение тултипа снизу объекта. Далее по приоритетности идут расположения сверху, слева и
     справа.
+    <Separator />
+    Задать для компонента тултип можно двумя способами:
+    <Separator />
+    1) Использовать компонент Tooltip. Данный компонент является контролируемым, поэтому для него обязательно нужно
+    задавать параметры visible и onVisibilityChange. Кроме того компоненту Tooltip требуются обязательные параметры:
+    targetRef - для указания элемента, относительно которого тултип будет позиционироваться, renderContent -
+    рендер-функция для рендеринга содержимого тултипа.
+    <Separator />
+    2) Использовать компонент высшего порядка TooltipHoc. Компонент TooltipHoc в качестве агрумента принимает
+    функциональный или классовый компонент и возвращает его вместе с позиционируемым относительно него тултипом.
+    Компонент TooltipHoc передает в оборачиваемый компонент атрибут ref, поэтому компонент, который будет передан в
+    TooltipHoc должен уметь резолвить ref и назначать его на свой корневой элемент (как правило это достигается с
+    помощью React.forwardRef).
+    <Separator />
+    Далее приведены таблицы с описанием пропсов как для Tooltip, так и для TooltipHoc, а также примеры использования
+    данных компонентов.
   </Desc>
 );
 
 export default {
-  title: 'Admiral-2.1/Tooltip',
+  title: 'Admiral-2.1/TooltipRefactor',
   decorators: [withDesign],
   component: Tooltip,
+  subcomponents: {
+    TooltipHoc: TooltipHocStory,
+  },
   parameters: {
     design: [
       {
@@ -77,9 +101,18 @@ const Template1: ComponentStory<typeof Tooltip> = (args) => {
     return theme;
   }
 
+  const btnRef = React.useRef<HTMLButtonElement | null>(null);
+  const [visible, setVisible] = React.useState(false);
+
   return (
     <ThemeProvider theme={swapBorder}>
+      <Button ref={btnRef} dimension="m" displayAsSquare aria-label="Delete" aria-describedby="test1">
+        <DeleteOutline aria-hidden />
+      </Button>
       <Tooltip
+        targetRef={btnRef}
+        visible={visible}
+        onVisibilityChange={(visible: boolean) => setVisible(visible)}
         renderContent={() =>
           `Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin
           literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney
@@ -91,57 +124,153 @@ const Template1: ComponentStory<typeof Tooltip> = (args) => {
         withDelay={args.withDelay}
         tooltipPosition={args.tooltipPosition}
         id="test1"
-      >
-        <Button
-          dimension="m"
-          displayAsSquare
-          aria-label="Delete"
-          aria-describedby="test1"
-          title={'Это title на кнопке'}
-        >
-          <DeleteOutline aria-hidden />
-        </Button>
-      </Tooltip>
+      />
     </ThemeProvider>
   );
 };
 
 const Template2: ComponentStory<typeof Tooltip> = () => {
+  const btnRef = React.useRef<HTMLButtonElement | null>(null);
+  const [visible, setVisible] = React.useState(false);
   return (
     <>
-      <Tooltip renderContent={() => 'Delete file'} withDelay id="test2">
-        <Button dimension="m" displayAsSquare aria-label="Delete" aria-describedby="test2">
-          <DeleteOutline height={24} width={24} />
-        </Button>
-      </Tooltip>
+      <Button ref={btnRef} dimension="m" displayAsSquare aria-label="Delete" aria-describedby="test2">
+        <DeleteOutline height={24} width={24} />
+      </Button>
+      <Tooltip
+        targetRef={btnRef}
+        visible={visible}
+        onVisibilityChange={(visible: boolean) => setVisible(visible)}
+        renderContent={() => 'Delete file'}
+        withDelay
+        id="test2"
+      />
     </>
   );
 };
 
 const Template3: ComponentStory<typeof Tooltip> = () => {
-  const tooltipRef = useRef(null);
+  const tooltipRef = React.useRef(null);
+  const btnRef = React.useRef<HTMLButtonElement | null>(null);
+  const [visible, setVisible] = React.useState(false);
   return (
     <>
-      <Tooltip renderContent={() => 'Delete file'} tooltipRef={tooltipRef} id="test3">
-        <Button dimension="m" displayAsSquare aria-label="Delete" aria-describedby="test3">
-          <DeleteOutline height={24} width={24} />
-        </Button>
-      </Tooltip>
+      <Button ref={btnRef} dimension="m" displayAsSquare aria-label="Delete" aria-describedby="test3">
+        <DeleteOutline height={24} width={24} />
+      </Button>
+      <Tooltip
+        targetRef={btnRef}
+        visible={visible}
+        onVisibilityChange={(visible: boolean) => setVisible(visible)}
+        renderContent={() => 'Delete file'}
+        tooltipRef={tooltipRef}
+        id="test3"
+      />
     </>
   );
 };
 
-const Template4: ComponentStory<typeof Tooltip> = ({ className }) => {
+const TooltipedInput = TooltipHoc(InputField);
+const Template4: ComponentStory<typeof Tooltip> = () => {
+  const [visible, setVisible] = React.useState(false);
+  return (
+    <TooltipedInput
+      visible={visible}
+      handleVisibilityChange={(visible: boolean) => setVisible(visible)}
+      renderContent={() => `Contrary to popular belief, Lorem Ipsum is not simply random text.`}
+      label={'TooltipHoc. Базовый пример.'}
+    />
+  );
+};
+
+type TestType = {
+  innerRef: React.ForwardedRef<HTMLHeadingElement>;
+  label: string;
+};
+class Test extends React.Component<TestType> {
+  render() {
+    const { innerRef, label } = this.props;
+    return <h2 ref={innerRef}>{label}</h2>;
+  }
+}
+const TestForwardingRef = React.forwardRef<HTMLHeadingElement, Omit<TestType, 'innerRef'>>((props, ref) => (
+  <Test innerRef={ref} {...props} />
+));
+const TooltipedTest = TooltipHoc(TestForwardingRef);
+const Template5: ComponentStory<typeof Tooltip> = () => {
+  const [visible, setVisible] = React.useState(false);
+  return (
+    <TooltipedTest
+      visible={visible}
+      handleVisibilityChange={(visible: boolean) => setVisible(visible)}
+      renderContent={() => `Пример использования TooltipHoc с классовым компонентом.`}
+      label={'Наведи на меня мышью и увидишь тултип'}
+    />
+  );
+};
+
+const H2 = React.forwardRef<HTMLHeadingElement, React.HTMLAttributes<HTMLElement>>((props, ref) => {
+  return (
+    <h2 ref={ref} {...props}>
+      Наведи на меня мышью и увидишь тултип
+    </h2>
+  );
+});
+const TooltipedHeading = TooltipHoc(H2);
+const Template6: ComponentStory<typeof Tooltip> = () => {
+  const [visible, setVisible] = React.useState(false);
+  return (
+    <TooltipedHeading
+      visible={visible}
+      handleVisibilityChange={(visible: boolean) => setVisible(visible)}
+      renderContent={() => `Пример использования TooltipHoc с функциональным компонентом.`}
+    />
+  );
+};
+
+const Component = React.forwardRef<HTMLInputElement, InputFieldProps>((props, ref) => {
+  const inputRef = React.useRef<HTMLInputElement | null>(null);
+  const handleBtnClick = () => {
+    inputRef.current?.focus();
+  };
   return (
     <>
-      <Tooltip
+      <InputField ref={refSetter(ref, inputRef)} {...props} />
+      <Separator />
+      <Button onClick={handleBtnClick}>Click me and focus input</Button>
+    </>
+  );
+});
+const TooltipedComponent = TooltipHoc(Component);
+const Template7: ComponentStory<typeof Tooltip> = () => {
+  const [visible, setVisible] = React.useState(false);
+  return (
+    <TooltipedComponent
+      visible={visible}
+      handleVisibilityChange={(visible: boolean) => setVisible(visible)}
+      renderContent={() => `Contrary to popular belief, Lorem Ipsum is not simply random text.`}
+      label={'Использование утилиты refSetter'}
+    />
+  );
+};
+
+const Template8: ComponentStory<typeof Tooltip> = () => {
+  const [visible, setVisible] = React.useState(false);
+  const inputRef = React.useRef<HTMLInputElement | null>(null);
+  const handleBtnClick = () => {
+    inputRef.current?.focus();
+  };
+  return (
+    <>
+      <TooltipedInput
+        visible={visible}
+        handleVisibilityChange={(visible: boolean) => setVisible(visible)}
         renderContent={() => `Contrary to popular belief, Lorem Ipsum is not simply random text.`}
-        className={className}
-      >
-        <Button dimension="m" displayAsSquare aria-label="Delete" title={'Это title на кнопке'}>
-          <DeleteOutline aria-hidden />
-        </Button>
-      </Tooltip>
+        ref={inputRef}
+        label={'Прокидывание ref на результат вызова TooltipHoc'}
+      />
+      <Separator />
+      <Button onClick={handleBtnClick}>Click me and focus input</Button>
     </>
   );
 };
@@ -158,8 +287,30 @@ export const TooltipRef = Template3.bind({});
 TooltipRef.args = {};
 TooltipRef.storyName = 'Tooltip. Пример с получением ref тултипа.';
 
-export const TooltipWithClassName = Template4.bind({});
-TooltipWithClassName.args = {
-  className: 'custom-tooltip-class',
+export const TooltipHocBase = Template4.bind({});
+TooltipHocBase.args = {};
+TooltipHocBase.storyName = 'TooltipHoc. Базовый пример.';
+
+export const TooltipHocClass = Template5.bind({});
+TooltipHocClass.args = {};
+TooltipHocClass.storyName = 'TooltipHoc. Пример использования с классовым компонентом.';
+
+export const TooltipHocFC = Template6.bind({});
+TooltipHocFC.args = {};
+TooltipHocFC.storyName = 'TooltipHoc. Пример использования с функциональным компонентом.';
+
+export const TooltipHocRefSetter = Template7.bind({});
+TooltipHocRefSetter.args = {};
+TooltipHocRefSetter.storyName = 'TooltipHoc. Утилита refSetter для мерджа рефов.';
+TooltipHocRefSetter.parameters = {
+  docs: {
+    description: {
+      story: `Если в ваш компонент извне передан параметр ref и у вас есть внутренний 
+      ref в компоненте, для синхронной работы данных рефов и их мерджа вы можете воспользоваться утилитой refSetter.`,
+    },
+  },
 };
-TooltipWithClassName.storyName = 'Tooltip. ClassName.';
+
+export const TooltipHocRef = Template8.bind({});
+TooltipHocRef.args = {};
+TooltipHocRef.storyName = 'TooltipHoc. Прокидывание ref на результат вызова TooltipHoc.';

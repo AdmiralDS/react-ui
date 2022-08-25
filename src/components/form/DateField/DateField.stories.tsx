@@ -5,12 +5,14 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import styled, { ThemeProvider } from 'styled-components';
 import { Theme } from '#src/components/themes';
+import { DataAttributesDescription } from '#src/components/form/common';
 
 export default {
   title: 'Admiral-2.1/Form Field/DateField',
   component: DateField,
   decorators: [withDesign],
   parameters: {
+    componentSubtitle: <DataAttributesDescription />,
     design: [
       {
         type: 'figma',
@@ -118,9 +120,17 @@ const Template: ComponentStory<typeof DateField> = (props) => {
   return (
     <ThemeProvider theme={swapBorder}>
       <FormContainer id="form 1" onBlur={handleFormBlur} onFocus={handleFormFocus}>
-        <DateField {...props} value={localValue} onChange={handleChange} id={'date 1'} placeholder="Это placeholder" />
-        <DateField required label="uncontrolled input" id={'date 2'} />
         <DateField
+          data-container-id="dateFieldIdOne"
+          {...props}
+          value={localValue}
+          onChange={handleChange}
+          id={'date 1'}
+          placeholder="Это placeholder"
+        />
+        <DateField data-container-id="dateFieldIdTwo" required label="uncontrolled input" id={'date 2'} />
+        <DateField
+          data-container-id="dateFieldIdThree"
           type="date-range"
           id="date range 1"
           label="uncontrolled date range"

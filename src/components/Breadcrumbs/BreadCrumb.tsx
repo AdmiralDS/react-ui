@@ -35,6 +35,12 @@ export const Content = styled.span`
   align-items: center;
 `;
 
+const TextWrapper = styled.div`
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+`;
+
 export const CrumbAnchor = styled.a`
   display: flex;
   align-items: center;
@@ -88,21 +94,24 @@ export const Breadcrumb = React.forwardRef<HTMLLIElement, BreadcrumbProps>(
   ({ text, url = '#', linkAs, linkProps, children, tabIndex, dimension = 'l', ...props }, ref) => {
     const tooltip = text.length > 40;
     const crumbRef = React.useRef<HTMLLIElement>(null);
+    const textRef = React.useRef<HTMLDivElement | null>(null);
 
-    return tooltip ? (
+    const [tooltipVisible, setTooltipVisible] = React.useState(false);
+    const handleTooltipVisibilityChange = (visible: boolean) => setTooltipVisible(visible);
+
+    return (
       <Crumb ref={refSetter(ref, crumbRef)} dimension={dimension} {...props}>
         <CrumbAnchor href={url} as={linkAs} tabIndex={tabIndex} {...linkProps}>
           <Content tabIndex={-1} role="link">
-            <Tooltip renderContent={() => text}>{text.slice(0, 37) + '...'}</Tooltip>
-            {children}
-          </Content>
-        </CrumbAnchor>
-      </Crumb>
-    ) : (
-      <Crumb ref={refSetter(ref, crumbRef)} dimension={dimension} {...props}>
-        <CrumbAnchor href={url} as={linkAs} tabIndex={tabIndex} {...linkProps}>
-          <Content tabIndex={-1} role="link">
-            {text}
+            {tooltip ? <TextWrapper ref={textRef}>{text.slice(0, 37) + '...'}</TextWrapper> : text}
+            {tooltip && (
+              <Tooltip
+                targetRef={textRef}
+                visible={tooltipVisible}
+                onVisibilityChange={handleTooltipVisibilityChange}
+                renderContent={() => text}
+              />
+            )}
             {children}
           </Content>
         </CrumbAnchor>

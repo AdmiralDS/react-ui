@@ -22,7 +22,7 @@ Object {
   overflow: hidden;
   height: 4px;
   border-radius: 2px;
-  background-color: #D6D8DD;
+  background-color: #D5D8DE;
 }
 
 .c5 {
@@ -52,7 +52,7 @@ Object {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #22242A;
+  color: #23262D;
 }
 
 .c3 {
@@ -60,7 +60,7 @@ Object {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
-  color: #74777F;
+  color: #717681;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -75,7 +75,7 @@ Object {
   -ms-flex-line-packalign-text: left;
   align-text: left;
   margin-top: 8px;
-  color: #74777F;
+  color: #717681;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -149,7 +149,7 @@ Object {
   overflow: hidden;
   height: 4px;
   border-radius: 2px;
-  background-color: #D6D8DD;
+  background-color: #D5D8DE;
 }
 
 .c5 {
@@ -179,7 +179,7 @@ Object {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #22242A;
+  color: #23262D;
 }
 
 .c3 {
@@ -187,7 +187,7 @@ Object {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
-  color: #74777F;
+  color: #717681;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -202,7 +202,7 @@ Object {
   -ms-flex-line-packalign-text: left;
   align-text: left;
   margin-top: 8px;
-  color: #74777F;
+  color: #717681;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -331,7 +331,7 @@ Object {
   overflow: hidden;
   height: 4px;
   border-radius: 2px;
-  background-color: #D6D8DD;
+  background-color: #D5D8DE;
 }
 
 .c5 {
@@ -361,7 +361,7 @@ Object {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #22242A;
+  color: #23262D;
 }
 
 .c3 {
@@ -369,7 +369,7 @@ Object {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
-  color: #74777F;
+  color: #717681;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -384,7 +384,7 @@ Object {
   -ms-flex-line-packalign-text: left;
   align-text: left;
   margin-top: 8px;
-  color: #74777F;
+  color: #717681;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -458,7 +458,7 @@ Object {
   overflow: hidden;
   height: 4px;
   border-radius: 2px;
-  background-color: #D6D8DD;
+  background-color: #D5D8DE;
 }
 
 .c5 {
@@ -488,7 +488,7 @@ Object {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #22242A;
+  color: #23262D;
 }
 
 .c3 {
@@ -496,7 +496,7 @@ Object {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
-  color: #74777F;
+  color: #717681;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -511,7 +511,7 @@ Object {
   -ms-flex-line-packalign-text: left;
   align-text: left;
   margin-top: 8px;
-  color: #74777F;
+  color: #717681;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -640,7 +640,7 @@ Object {
   overflow: hidden;
   height: 4px;
   border-radius: 2px;
-  background-color: #D6D8DD;
+  background-color: #D5D8DE;
 }
 
 .c5 {
@@ -666,7 +666,7 @@ Object {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #22242A;
+  color: #23262D;
 }
 
 .c3 {
@@ -674,7 +674,7 @@ Object {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
-  color: #74777F;
+  color: #717681;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -742,7 +742,7 @@ Object {
   overflow: hidden;
   height: 4px;
   border-radius: 2px;
-  background-color: #D6D8DD;
+  background-color: #D5D8DE;
 }
 
 .c5 {
@@ -768,7 +768,7 @@ Object {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #22242A;
+  color: #23262D;
 }
 
 .c3 {
@@ -776,7 +776,7 @@ Object {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
-  color: #74777F;
+  color: #717681;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -899,7 +899,7 @@ Object {
   overflow: hidden;
   height: 4px;
   border-radius: 2px;
-  background-color: #D6D8DD;
+  background-color: #D5D8DE;
 }
 
 .c5 {
@@ -929,7 +929,7 @@ Object {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #22242A;
+  color: #23262D;
 }
 
 .c3 {
@@ -937,7 +937,7 @@ Object {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
-  color: #74777F;
+  color: #717681;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -952,7 +952,7 @@ Object {
   -ms-flex-line-packalign-text: left;
   align-text: left;
   margin-top: 8px;
-  color: #74777F;
+  color: #717681;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -1026,7 +1026,7 @@ Object {
   overflow: hidden;
   height: 4px;
   border-radius: 2px;
-  background-color: #D6D8DD;
+  background-color: #D5D8DE;
 }
 
 .c5 {
@@ -1056,7 +1056,7 @@ Object {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #22242A;
+  color: #23262D;
 }
 
 .c3 {
@@ -1064,7 +1064,7 @@ Object {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
-  color: #74777F;
+  color: #717681;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -1079,7 +1079,7 @@ Object {
   -ms-flex-line-packalign-text: left;
   align-text: left;
   margin-top: 8px;
-  color: #74777F;
+  color: #717681;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -1208,7 +1208,7 @@ Object {
   overflow: hidden;
   height: 4px;
   border-radius: 2px;
-  background-color: #D6D8DD;
+  background-color: #D5D8DE;
 }
 
 .c5 {
@@ -1234,7 +1234,7 @@ Object {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #22242A;
+  color: #23262D;
 }
 
 .c3 {
@@ -1242,7 +1242,7 @@ Object {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
-  color: #74777F;
+  color: #717681;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -1257,7 +1257,7 @@ Object {
   -ms-flex-line-packalign-text: left;
   align-text: left;
   margin-top: 8px;
-  color: #74777F;
+  color: #717681;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -1331,7 +1331,7 @@ Object {
   overflow: hidden;
   height: 4px;
   border-radius: 2px;
-  background-color: #D6D8DD;
+  background-color: #D5D8DE;
 }
 
 .c5 {
@@ -1357,7 +1357,7 @@ Object {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #22242A;
+  color: #23262D;
 }
 
 .c3 {
@@ -1365,7 +1365,7 @@ Object {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
-  color: #74777F;
+  color: #717681;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -1380,7 +1380,7 @@ Object {
   -ms-flex-line-packalign-text: left;
   align-text: left;
   margin-top: 8px;
-  color: #74777F;
+  color: #717681;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 400;

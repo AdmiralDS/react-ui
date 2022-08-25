@@ -38,6 +38,9 @@ export default {
     readOnly: {
       control: { type: 'boolean' },
     },
+    isLoading: {
+      control: { type: 'boolean' },
+    },
     disableCopying: {
       control: { type: 'boolean' },
     },

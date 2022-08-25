@@ -20,11 +20,13 @@ import {
   OptionWrapper,
   SelectWrapper,
   StringValueWrapper,
+  SpinnerMixin,
   ValueWrapper,
 } from './styled';
 import { preventDefault, scrollToNotVisibleELem } from './utils';
 import { changeInputData } from '#src/components/common/dom/changeInputData';
 import { useClickOutside } from '#src/components/common/hooks/useClickOutside';
+import { Spinner } from '#src/components/Spinner';
 
 /**
  * Осталось сделать:
@@ -53,9 +55,6 @@ export interface SelectProps extends Omit<React.InputHTMLAttributes<HTMLSelectEl
 
   /** Отображать статус загрузки данных */
   isLoading?: boolean;
-
-  /** Сообщение, отображаемое при наличии флага isLoading */
-  loadingMessage?: React.ReactNode;
 
   /** Сообщение, отображаемое при пустом наборе опций */
   emptyMessage?: React.ReactNode;
@@ -140,7 +139,6 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       showCheckbox = true,
       displayClearIcon = false,
       onClearIconClick,
-      loadingMessage = <DropDownText>Поиск совпадений</DropDownText>,
       emptyMessage = <DropDownText>Нет совпадений</DropDownText>,
       onInputChange,
       inputValue,
@@ -185,14 +183,13 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
     );
 
     const dropDownChildren = React.useMemo(() => {
-      if (isLoading) return loadingMessage;
       return (
         <>
           {!dropDownOptions.length && emptyMessage}
           {children}
         </>
       );
-    }, [isLoading, loadingMessage, children, dropDownOptions]);
+    }, [isLoading, children, dropDownOptions]);
 
     const inputRef = React.useRef<HTMLInputElement | null>(null);
     const selectRef = React.useRef<HTMLSelectElement | null>(null);
@@ -586,6 +583,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
           </Dropdown>
         )}
         <IconPanel multiple={multiple} dimension={dimension} onClick={stopPropagation} onMouseDown={preventDefault}>
+          {isLoading && <Spinner svgMixin={SpinnerMixin} dimension={dimension === 's' ? 's' : 'm'} />}
           {displayClearIcon && !readOnly && (
             <InputIconButton icon={CloseOutlineSvg} id="searchSelectClearIcon" onClick={handleOnClear} aria-hidden />
           )}

@@ -39,9 +39,3 @@ export const Portal = styled(PositionInPortal)<{ flexDirection?: any }>`
   flex-wrap: nowrap;
   ${({ flexDirection }) => (flexDirection ? `flex-direction: ${flexDirection};` : '')}
 `;
-
-export const AnchorWrapper = styled.div`
-  display: inline-block;
-  position: relative;
-  cursor: pointer;
-`;

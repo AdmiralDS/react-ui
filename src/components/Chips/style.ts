@@ -183,6 +183,7 @@ export const ChipComponentStyled = styled.div<{
   defaultChip?: boolean;
   withCloseIcon?: boolean;
   withBadge?: boolean;
+  withTooltip?: boolean;
 }>`
   display: inline-flex;
   align-items: center;
@@ -191,7 +192,8 @@ export const ChipComponentStyled = styled.div<{
   max-width: 190px;
   user-select: none;
   pointer-events: ${({ disabled }) => (disabled ? 'none' : 'auto')};
-  cursor: ${({ defaultChip, disabled }) => (defaultChip && !disabled ? 'pointer' : 'default')};
+  cursor: ${({ defaultChip, disabled, withTooltip }) =>
+    (defaultChip || withTooltip) && !disabled ? 'pointer' : 'default'};
   ${colorsBorderAndBackground}
   ${heights}
   ${(p) => (p.withCloseIcon ? `padding-left: ${p.dimension === 's' ? 8 : 12}px;` : paddings)}
@@ -293,6 +295,7 @@ export const IconAfterWrapperStyled = styled.div<{ dimension: ChipDimension; wit
       bottom: -1px;
       width: ${p.dimension === 'm' ? 33 : 25}px;
       border-radius: 50%;
+      pointer-events: none;
     }
     &:hover {
       &:after {

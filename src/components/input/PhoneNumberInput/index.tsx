@@ -59,6 +59,7 @@ const CountryContainer = styled.div<{
   disabled?: boolean;
   skeleton?: boolean;
 }>`
+  cursor: pointer;
   position: absolute;
   top: 50%;
   left: 16px;
@@ -306,9 +307,15 @@ export const PhoneNumberInput = React.forwardRef<HTMLInputElement, PhoneNumberIn
             </DropdownContainer>
           )}
         </TextInput>
-        <CountryContainer skeleton={skeleton} dimension={dimension} isOpened={isOpened} disabled={disabled}>
+        <CountryContainer
+          skeleton={skeleton}
+          dimension={dimension}
+          isOpened={isOpened}
+          disabled={disabled}
+          onClick={handleButtonClick}
+        >
           {IconComponent}
-          {!props.readOnly && <Chevron onClick={handleButtonClick} disabled={disabled || props.readOnly} />}
+          {!props.readOnly && <Chevron disabled={disabled || props.readOnly} />}
         </CountryContainer>
       </PhoneContainer>
     );

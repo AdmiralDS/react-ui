@@ -27,11 +27,11 @@ Object {
 }
 
 .c9 *[fill^='#'] {
-  fill: #74777F;
+  fill: #717681;
 }
 
 [data-disabled='true'] .c8 *[fill^='#'] {
-  fill: #B1B5BB;
+  fill: #B0B5BD;
 }
 
 [data-dimension='m'] .c8 {
@@ -99,7 +99,7 @@ Object {
   padding: 0;
   cursor: pointer;
   overflow: visible;
-  color: #22242A;
+  color: #23262D;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 550;
@@ -138,7 +138,7 @@ Object {
 }
 
 .c2 {
-  border-bottom: 1px solid #D6D8DD;
+  border-bottom: 1px solid #D5D8DE;
 }
 
 .c2 > .c3 .c8 {
@@ -148,7 +148,7 @@ Object {
 }
 
 .c12 {
-  color: #22242A;
+  color: #23262D;
   overflow-y: auto;
   max-height: 100vh;
   padding: 4px 16px 16px 16px;
@@ -175,7 +175,7 @@ Object {
 }
 
 .c0 > .c1:first-child {
-  border-top: 1px solid #D6D8DD;
+  border-top: 1px solid #D5D8DE;
 }
 
 .c0 > .c1:first-child .c5 {
@@ -183,7 +183,7 @@ Object {
 }
 
 .c0 > .c1:last-child {
-  border-bottom: 1px solid #D6D8DD;
+  border-bottom: 1px solid #D5D8DE;
 }
 
 <body>
@@ -334,11 +334,11 @@ Object {
 }
 
 .c9 *[fill^='#'] {
-  fill: #74777F;
+  fill: #717681;
 }
 
 [data-disabled='true'] .c8 *[fill^='#'] {
-  fill: #B1B5BB;
+  fill: #B0B5BD;
 }
 
 [data-dimension='m'] .c8 {
@@ -406,7 +406,7 @@ Object {
   padding: 0;
   cursor: pointer;
   overflow: visible;
-  color: #22242A;
+  color: #23262D;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 550;
@@ -445,7 +445,7 @@ Object {
 }
 
 .c2 {
-  border-bottom: 1px solid #D6D8DD;
+  border-bottom: 1px solid #D5D8DE;
 }
 
 .c2 > .c3 .c8 {
@@ -455,7 +455,7 @@ Object {
 }
 
 .c12 {
-  color: #22242A;
+  color: #23262D;
   overflow-y: auto;
   max-height: 100vh;
   padding: 4px 16px 16px 16px;
@@ -482,7 +482,7 @@ Object {
 }
 
 .c0 > .c1:first-child {
-  border-top: 1px solid #D6D8DD;
+  border-top: 1px solid #D5D8DE;
 }
 
 .c0 > .c1:first-child .c5 {
@@ -490,7 +490,7 @@ Object {
 }
 
 .c0 > .c1:last-child {
-  border-bottom: 1px solid #D6D8DD;
+  border-bottom: 1px solid #D5D8DE;
 }
 
 <div>
@@ -696,11 +696,11 @@ Object {
 }
 
 .c9 *[fill^='#'] {
-  fill: #74777F;
+  fill: #717681;
 }
 
 [data-disabled='true'] .c8 *[fill^='#'] {
-  fill: #B1B5BB;
+  fill: #B0B5BD;
 }
 
 [data-dimension='m'] .c8 {
@@ -768,7 +768,7 @@ Object {
   padding: 0;
   cursor: pointer;
   overflow: visible;
-  color: #22242A;
+  color: #23262D;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 550;
@@ -807,7 +807,7 @@ Object {
 }
 
 .c2 {
-  border-bottom: 1px solid #D6D8DD;
+  border-bottom: 1px solid #D5D8DE;
 }
 
 .c2 > .c3 .c8 {
@@ -817,7 +817,7 @@ Object {
 }
 
 .c12 {
-  color: #22242A;
+  color: #23262D;
   overflow-y: auto;
   max-height: 100vh;
   padding: 4px 16px 16px 16px;
@@ -844,7 +844,7 @@ Object {
 }
 
 .c0 > .c1:first-child {
-  border-top: 1px solid #D6D8DD;
+  border-top: 1px solid #D5D8DE;
 }
 
 .c0 > .c1:first-child .c5 {
@@ -852,7 +852,7 @@ Object {
 }
 
 .c0 > .c1:last-child {
-  border-bottom: 1px solid #D6D8DD;
+  border-bottom: 1px solid #D5D8DE;
 }
 
 <body>
@@ -1003,11 +1003,11 @@ Object {
 }
 
 .c9 *[fill^='#'] {
-  fill: #74777F;
+  fill: #717681;
 }
 
 [data-disabled='true'] .c8 *[fill^='#'] {
-  fill: #B1B5BB;
+  fill: #B0B5BD;
 }
 
 [data-dimension='m'] .c8 {
@@ -1075,7 +1075,7 @@ Object {
   padding: 0;
   cursor: pointer;
   overflow: visible;
-  color: #22242A;
+  color: #23262D;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 550;
@@ -1114,7 +1114,7 @@ Object {
 }
 
 .c2 {
-  border-bottom: 1px solid #D6D8DD;
+  border-bottom: 1px solid #D5D8DE;
 }
 
 .c2 > .c3 .c8 {
@@ -1124,7 +1124,7 @@ Object {
 }
 
 .c12 {
-  color: #22242A;
+  color: #23262D;
   overflow-y: auto;
   max-height: 100vh;
   padding: 4px 16px 16px 16px;
@@ -1151,7 +1151,7 @@ Object {
 }
 
 .c0 > .c1:first-child {
-  border-top: 1px solid #D6D8DD;
+  border-top: 1px solid #D5D8DE;
 }
 
 .c0 > .c1:first-child .c5 {
@@ -1159,7 +1159,7 @@ Object {
 }
 
 .c0 > .c1:last-child {
-  border-bottom: 1px solid #D6D8DD;
+  border-bottom: 1px solid #D5D8DE;
 }
 
 <div>

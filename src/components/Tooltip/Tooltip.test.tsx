@@ -3,8 +3,8 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import { act } from 'react-dom/test-utils';
 import { ThemeProvider } from 'styled-components';
 
-import type { ITooltipProps } from '../Tooltip';
-import { Tooltip } from '../Tooltip';
+import type { ITooltipProps } from '.';
+import { Tooltip } from '.';
 import { LIGHT_THEME } from '#src/components/themes';
 
 describe('Tooltip', () => {
@@ -21,13 +21,27 @@ describe('Tooltip', () => {
   const wrapperWidth = 100;
   const tooltipWidth = 120;
 
-  const WrappedComponentWithTooltip = ({ renderContent, withDelay }: ITooltipProps) => (
-    <ThemeProvider theme={LIGHT_THEME}>
-      <Tooltip renderContent={renderContent} withDelay={withDelay}>
-        <div data-testid="wrapped-component">Wrapped component</div>
-      </Tooltip>
-    </ThemeProvider>
-  );
+  const WrappedComponentWithTooltip = ({
+    renderContent,
+    withDelay,
+  }: Omit<ITooltipProps, 'visible' | 'targetRef' | 'onVisibilityChange'>) => {
+    const divRef = React.useRef(null);
+    const [visible, setVisible] = React.useState(false);
+    return (
+      <ThemeProvider theme={LIGHT_THEME}>
+        <Tooltip
+          targetRef={divRef}
+          visible={visible}
+          onVisibilityChange={(visible: boolean) => setVisible(visible)}
+          renderContent={renderContent}
+          withDelay={withDelay}
+        />
+        <div ref={divRef} data-testid="wrapped-component">
+          Wrapped component
+        </div>
+      </ThemeProvider>
+    );
+  };
 
   it('should render component', () => {
     const wrapper = render(<WrappedComponentWithTooltip renderContent={() => ''} />);

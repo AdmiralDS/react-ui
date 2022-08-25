@@ -23,7 +23,7 @@ exports[`ContentSwitcher should render component with Button 1`] = `
   line-height: 24px;
   font-feature-settings: 'tnum' on,'lnum' on;
   white-space: nowrap;
-  color: #74777F;
+  color: #717681;
 }
 
 [data-appearance~='primary'] .c2.c2 {
@@ -35,7 +35,7 @@ exports[`ContentSwitcher should render component with Button 1`] = `
 }
 
 .c2 *[fill^='#'] {
-  fill: #74777F;
+  fill: #717681;
 }
 
 [data-appearance~='primary'] .c2.c2 *[fill^='#'] {
@@ -117,7 +117,7 @@ exports[`ContentSwitcher should render component with Buttons 1`] = `
   line-height: 24px;
   font-feature-settings: 'tnum' on,'lnum' on;
   white-space: nowrap;
-  color: #74777F;
+  color: #717681;
 }
 
 [data-appearance~='primary'] .c2.c2 {
@@ -129,7 +129,7 @@ exports[`ContentSwitcher should render component with Buttons 1`] = `
 }
 
 .c2 *[fill^='#'] {
-  fill: #74777F;
+  fill: #717681;
 }
 
 [data-appearance~='primary'] .c2.c2 *[fill^='#'] {

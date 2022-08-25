@@ -55,7 +55,7 @@ Object {
 }
 
 .c6:disabled *[fill^='#'] {
-  fill: #B1B5BB;
+  fill: #B0B5BD;
 }
 
 .c8 {
@@ -87,7 +87,7 @@ Object {
 }
 
 .c9 > svg *[fill^='#'] {
-  fill: #74777F;
+  fill: #717681;
 }
 
 .c0 {
@@ -192,7 +192,7 @@ Object {
   -moz-appearance: none;
   appearance: none;
   border: none;
-  color: #22242A;
+  color: #23262D;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -233,7 +233,7 @@ Object {
 }
 
 .c2 svg *[fill^='#'] {
-  fill: #74777F;
+  fill: #717681;
 }
 
 .c2 [data-badge] {
@@ -258,12 +258,12 @@ Object {
 }
 
 .c2:disabled {
-  color: #B1B5BB;
+  color: #B0B5BD;
   cursor: default;
 }
 
 .c2:disabled *[fill^='#'] {
-  fill: #B1B5BB;
+  fill: #B0B5BD;
 }
 
 .c11 {
@@ -284,7 +284,7 @@ Object {
   -moz-appearance: none;
   appearance: none;
   border: none;
-  color: #74777F;
+  color: #717681;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -325,7 +325,7 @@ Object {
 }
 
 .c11 svg *[fill^='#'] {
-  fill: #74777F;
+  fill: #717681;
 }
 
 .c11 [data-badge] {
@@ -350,12 +350,12 @@ Object {
 }
 
 .c11:disabled {
-  color: #B1B5BB;
+  color: #B0B5BD;
   cursor: default;
 }
 
 .c11:disabled *[fill^='#'] {
-  fill: #B1B5BB;
+  fill: #B0B5BD;
 }
 
 .c1 {
@@ -396,7 +396,7 @@ Object {
 }
 
 .c7 svg *[fill^='#'] {
-  fill: #74777F;
+  fill: #717681;
 }
 
 <body>
@@ -433,7 +433,7 @@ Object {
           <button
             aria-expanded="false"
             aria-haspopup="false"
-            class="c6 c7"
+            class="c6 c7 overflow-menu-button-with-dropdown"
             tabindex="-1"
             type="button"
           >
@@ -476,7 +476,7 @@ Object {
           <button
             aria-expanded="false"
             aria-haspopup="false"
-            class="c6 c7"
+            class="c6 c7 overflow-menu-button-with-dropdown"
             tabindex="-1"
             type="button"
           >
@@ -576,7 +576,7 @@ Object {
 }
 
 .c6:disabled *[fill^='#'] {
-  fill: #B1B5BB;
+  fill: #B0B5BD;
 }
 
 .c8 {
@@ -608,7 +608,7 @@ Object {
 }
 
 .c9 > svg *[fill^='#'] {
-  fill: #74777F;
+  fill: #717681;
 }
 
 .c0 {
@@ -713,7 +713,7 @@ Object {
   -moz-appearance: none;
   appearance: none;
   border: none;
-  color: #22242A;
+  color: #23262D;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -754,7 +754,7 @@ Object {
 }
 
 .c2 svg *[fill^='#'] {
-  fill: #74777F;
+  fill: #717681;
 }
 
 .c2 [data-badge] {
@@ -779,12 +779,12 @@ Object {
 }
 
 .c2:disabled {
-  color: #B1B5BB;
+  color: #B0B5BD;
   cursor: default;
 }
 
 .c2:disabled *[fill^='#'] {
-  fill: #B1B5BB;
+  fill: #B0B5BD;
 }
 
 .c11 {
@@ -805,7 +805,7 @@ Object {
   -moz-appearance: none;
   appearance: none;
   border: none;
-  color: #74777F;
+  color: #717681;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -846,7 +846,7 @@ Object {
 }
 
 .c11 svg *[fill^='#'] {
-  fill: #74777F;
+  fill: #717681;
 }
 
 .c11 [data-badge] {
@@ -871,12 +871,12 @@ Object {
 }
 
 .c11:disabled {
-  color: #B1B5BB;
+  color: #B0B5BD;
   cursor: default;
 }
 
 .c11:disabled *[fill^='#'] {
-  fill: #B1B5BB;
+  fill: #B0B5BD;
 }
 
 .c1 {
@@ -917,7 +917,7 @@ Object {
 }
 
 .c7 svg *[fill^='#'] {
-  fill: #74777F;
+  fill: #717681;
 }
 
 <div>
@@ -953,7 +953,7 @@ Object {
         <button
           aria-expanded="false"
           aria-haspopup="false"
-          class="c6 c7"
+          class="c6 c7 overflow-menu-button-with-dropdown"
           tabindex="-1"
           type="button"
         >
@@ -996,7 +996,7 @@ Object {
         <button
           aria-expanded="false"
           aria-haspopup="false"
-          class="c6 c7"
+          class="c6 c7 overflow-menu-button-with-dropdown"
           tabindex="-1"
           type="button"
         >
