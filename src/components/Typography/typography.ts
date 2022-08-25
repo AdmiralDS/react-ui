@@ -414,4 +414,14 @@ export const typography = {
     /* identical to box height, or 133% */
     font-feature-settings: 'tnum' on, 'lnum' on;
   `,
+
+  'Caption/Caption 2': css`
+    font-family: ${FONT_FAMILY};
+    font-style: normal;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 12px;
+    /* or 120% */
+    font-feature-settings: 'tnum' on, 'lnum' on;
+  `,
 } as const;
