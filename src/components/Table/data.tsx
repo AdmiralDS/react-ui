@@ -734,13 +734,10 @@ const Menu: React.FC<MenuProps> = ({ row, onMenuOpen, onMenuClose }) => {
   );
 };
 
-const ICON_SIZE_M = 20;
-const ICON_SIZE_S = 16;
+const IconWrapper = styled.div`
+  width: 20px;
+  height: 20px;
 
-const IconWrapper = styled.div<{ dimension?: Dimension }>`
-  ${({ dimension }) => `
-    width: ${dimension === 's' ? ICON_SIZE_S : ICON_SIZE_M}px;
-    height: ${dimension === 's' ? ICON_SIZE_S : ICON_SIZE_M}px;`}
   > svg {
     fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
   }
