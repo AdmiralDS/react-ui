@@ -10,6 +10,7 @@ import type { Column } from '../Table';
 import { Tooltip } from '#src/components/Tooltip';
 import { TooltipHoc } from '#src/components/TooltipHOC';
 import { Dimension } from '#src/components/Tree/TreeNode';
+import { refSetter } from '#src/components/common/utils/refSetter';
 
 const AmountCell = styled.div`
   text-overflow: ellipsis;
@@ -760,14 +761,31 @@ const IconWrapper = styled.div<{ dimension?: Dimension }>`
     fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
   }
 `;
-const TooltipedDeleteOutline = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLElement>>((props, ref) => {
+const IconDeleteOutline = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLElement>>((props, ref) => {
   return (
     <IconWrapper ref={ref} {...props}>
       <DeleteOutline />
     </IconWrapper>
   );
 });
-const TooltipedIcon = TooltipHoc(TooltipedDeleteOutline);
+const TooltipedIconDeleteOutline = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLElement>>((props, ref) => {
+  const iconRef = React.useRef<HTMLDivElement | null>(null);
+  const [visible, setVisible] = React.useState(false);
+  return (
+    <>
+      <IconWrapper ref={iconRef} {...props}>
+        <DeleteOutline />
+      </IconWrapper>
+      <Tooltip
+        visible={visible}
+        onVisibilityChange={(visible: boolean) => setVisible(visible)}
+        renderContent={() => `Delete row`}
+        targetRef={iconRef}
+      />
+    </>
+  );
+});
+const TooltipedIcon = TooltipHoc(IconDeleteOutline);
 
 export const rowListMenu: RowData[] = [
   {
@@ -822,7 +840,7 @@ export const rowListMenu: RowData[] = [
     rate: 1,
     actionRender: () => (
       <RowAction onClick={() => console.log('row action happens')}>
-        <DeleteOutline />
+        <TooltipedIconDeleteOutline />
       </RowAction>
     ),
   },
