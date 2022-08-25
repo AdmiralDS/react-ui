@@ -1,5 +1,6 @@
 import * as React from 'react';
-import styled from 'styled-components';
+import styled, { ThemeContext } from 'styled-components';
+import { LIGHT_THEME } from '#src/components/themes';
 import { Slider as SliderComponent } from '#src/components/Slider';
 import { TextInputProps } from '#src/components/input/TextInput';
 
@@ -79,8 +80,8 @@ export const SliderInput = React.forwardRef<HTMLInputElement, SliderInputProps>(
       precision = 0,
       thousand = ' ',
       prefix = '',
-      suffix = '₽',
-      placeholder = '0 ₽',
+      suffix: userSuffix,
+      placeholder: userPlaceholder,
       disabled,
       wrapperProps,
       skeleton = false,
@@ -88,6 +89,9 @@ export const SliderInput = React.forwardRef<HTMLInputElement, SliderInputProps>(
     },
     ref,
   ) => {
+    const theme = React.useContext(ThemeContext) || LIGHT_THEME;
+    const suffix = userSuffix || theme.locales[theme.currentLocale].numberInput_suffix;
+    const placeholder = userPlaceholder || `0 ${theme.locales[theme.currentLocale].numberInput_suffix}`;
     const sliderDimension = dimension === 'xl' ? dimension : 'm';
     // десятичный разделитель
     const decimal = '.';

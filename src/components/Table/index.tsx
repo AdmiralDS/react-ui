@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { Checkbox } from '#src/components/Checkbox';
 import observeRect from '#src/components/common/observeRect';
+import { ThemeContext } from 'styled-components';
+import { LIGHT_THEME } from '#src/components/themes';
 
 import { RowWidthResizer } from './RowWidthResizer';
 import { Filter } from './filter/Filter';
@@ -249,9 +251,10 @@ export const Table: React.FC<TableProps> = ({
   disableColumnResize = false,
   showLastRowUnderline = true,
   virtualScroll,
-  emptyMessage = 'Нет совпадений',
+  emptyMessage,
   ...props
 }) => {
+  const theme = React.useContext(ThemeContext) || LIGHT_THEME;
   const checkboxDimension = dimension === 's' || dimension === 'm' ? 's' : 'm';
   const iconSize = dimension === 's' || dimension === 'm' ? 16 : 20;
   const defaultSpacer = dimension === 'l' || dimension === 'xl' ? '16px' : '12px';
@@ -601,7 +604,9 @@ export const Table: React.FC<TableProps> = ({
       return (
         <ScrollTableBody ref={scrollBodyRef} className="tbody">
           <Row underline={showLastRowUnderline} dimension={dimension} className="tr">
-            <EmptyMessage dimension={dimension}>{emptyMessage}</EmptyMessage>
+            <EmptyMessage dimension={dimension}>
+              {emptyMessage || theme.locales[theme.currentLocale].table_emptyMessage}
+            </EmptyMessage>
           </Row>
         </ScrollTableBody>
       );

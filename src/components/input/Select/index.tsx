@@ -1,5 +1,6 @@
 import * as React from 'react';
-import styled from 'styled-components';
+import styled, { ThemeContext } from 'styled-components';
+import { LIGHT_THEME } from '#src/components/themes';
 import { OpenStatusButton } from '#src/components/OpenStatusButton';
 import { keyboardKey } from '#src/components/common/keyboardKey';
 import { refSetter } from '#src/components/common/utils/refSetter';
@@ -139,7 +140,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       showCheckbox = true,
       displayClearIcon = false,
       onClearIconClick,
-      emptyMessage = <DropDownText>Нет совпадений</DropDownText>,
+      emptyMessage: userEmptyMessage,
       onInputChange,
       inputValue,
       defaultInputValue,
@@ -153,6 +154,10 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
     },
     ref,
   ) => {
+    const theme = React.useContext(ThemeContext) || LIGHT_THEME;
+    const emptyMessage = userEmptyMessage || (
+      <DropDownText>{theme.locales[theme.currentLocale].select_emptyMessage}</DropDownText>
+    );
     const [localValue, setLocalValue] = React.useState(value ?? defaultValue);
     const [internalSearchValue, setSearchValue] = React.useState('');
     const searchValue = inputValue === undefined ? internalSearchValue : inputValue;

@@ -1,5 +1,6 @@
 import * as React from 'react';
-import styled from 'styled-components';
+import styled, { ThemeContext } from 'styled-components';
+import { LIGHT_THEME } from '#src/components/themes';
 import { typography } from '#src/components/Typography';
 import { uid } from '#src/components/common/uid';
 import { TextInput } from '#src/components/input/TextInput';
@@ -82,11 +83,13 @@ export const PaginationTwo: React.FC<PaginationTwoProps> = ({
   showNextBtnMobile = true,
   showInput = true,
   onChange,
-  itemRangeText = (min: number, max: number, total: number) => `${min}–${max} записей из ${total}`,
+  itemRangeText: userItemRangeText,
   pageSize,
   totalItems,
   ...props
 }) => {
+  const theme = React.useContext(ThemeContext) || LIGHT_THEME;
+  const itemRangeText = userItemRangeText || theme.locales[theme.currentLocale].paginationTwo_itemRangeText;
   const hideNextButton = mobile || false;
   const hidePrevButton = mobile || false;
   const isInputVisible = showInput && count > 21 && !mobile;
@@ -198,7 +201,7 @@ export const PaginationTwo: React.FC<PaginationTwoProps> = ({
       {isInputVisible && (
         <Input
           pattern="[0-9]+"
-          placeholder="№ страницы"
+          placeholder={theme.locales[theme.currentLocale].paginationTwo_placeholder}
           value={inputValue}
           onChange={handleInputChange}
           onKeyDown={handleInputKeyDown}

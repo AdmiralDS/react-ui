@@ -3,13 +3,14 @@ import { changeInputData } from '#src/components/common/dom/changeInputData';
 import { keyboardKey } from '#src/components/common/keyboardKey';
 import { refSetter } from '#src/components/common/utils/refSetter';
 import { ReactComponent as SearchOutlineSVG } from '@admiral-ds/icons/build/system/SearchOutline.svg';
-import styled from 'styled-components';
+import styled, { ThemeContext } from 'styled-components';
 import { TextInput, TextInputProps } from '../TextInput';
 import { Dropdown as DropComponent } from '#src/components/Dropdown';
 import { MessagePanel } from './MessagePanel';
 import { SuggestPanel } from './SuggestPanel';
 import { InputIconButton } from '#src/components/InputIconButton';
 import type { InputStatus } from '#src/components/input/types';
+import { LIGHT_THEME } from '#src/components/themes';
 
 const Dropdown = styled(DropComponent)`
   padding: 8px 0;
@@ -72,13 +73,15 @@ export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps
       onSearchButtonClick = () => undefined,
       icons,
       icon = SearchOutlineSVG,
-      isEmptyMessage = 'Нет совпадений',
+      // isEmptyMessage = 'Нет совпадений',
+      isEmptyMessage,
       skeleton = false,
       status,
       ...props
     },
     ref,
   ) => {
+    const theme = React.useContext(ThemeContext) || LIGHT_THEME;
     const isControlledComponentValue = undefined !== props.value;
     const { options, portalTargetRef } = props;
 
@@ -209,7 +212,9 @@ export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps
             data-dimension={props.dimension || TextInput.defaultProps?.dimension}
           >
             {options.length === 0 && !isLoading ? (
-              <MessagePanel>{isEmptyMessage}</MessagePanel>
+              <MessagePanel>
+                {isEmptyMessage || theme.locales[theme.currentLocale].suggestInput_emptyMessage}
+              </MessagePanel>
             ) : (
               options.map((text, index) => (
                 <SuggestPanel

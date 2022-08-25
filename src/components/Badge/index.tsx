@@ -1,5 +1,6 @@
 import * as React from 'react';
-import styled, { css } from 'styled-components';
+import styled, { css, ThemeContext } from 'styled-components';
+import { LIGHT_THEME } from '#src/components/themes';
 import { typography } from '#src/components/Typography';
 
 type Dimension = 'm' | 's';
@@ -98,7 +99,8 @@ export interface BadgeProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 export const Badge: React.FC<BadgeProps> = ({ children, dimension = 'm', appearance = 'light', ...props }) => {
-  const ariaLabel = `Количество ${children}`;
+  const theme = React.useContext(ThemeContext) || LIGHT_THEME;
+  const ariaLabel = `${theme.locales[theme.currentLocale].badge_ariaLabel} ${children}`;
   return (
     <BadgeComponent dimension={dimension} appearance={appearance} aria-label={ariaLabel} {...props}>
       {children}

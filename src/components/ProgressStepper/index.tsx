@@ -1,15 +1,10 @@
 import type { FC } from 'react';
 import React, { HTMLAttributes } from 'react';
-import styled from 'styled-components';
+import styled, { ThemeContext } from 'styled-components';
+import { LIGHT_THEME } from '#src/components/themes';
 import { typography } from '#src/components/Typography';
 
-import {
-  convertNumberToIntegerPercent,
-  fitLimit,
-  getPlural,
-  setFirstLetterToLowerCase,
-  setFirstLetterToUpperCase,
-} from './utils';
+import { convertNumberToIntegerPercent, fitLimit, setFirstLetterToLowerCase, setFirstLetterToUpperCase } from './utils';
 
 const Wrapper = styled.div`
   display: flex;
@@ -62,7 +57,7 @@ export interface ProgressStepperProps extends HTMLAttributes<HTMLDivElement> {
   steps: string[];
   /** Номер активного шага, соответствует индексу шага в массиве */
   activeStep?: number;
-  /** Название шага: массив слов во множественном числе для чисел (1, 4, 5), например, ['яблоко', 'яблока', 'яблок'] */
+  /** Название шага: массив слов во множественном числе для чисел (1,5), например, ['яблоко', 'яблок'] */
   stepName?: string[];
   /** Функция, которая формирует подпись о следующем шаге, на основе nextStepName */
   renderNextStepName?: (nextStepName: string) => void;
@@ -75,28 +70,35 @@ export interface ProgressStepperProps extends HTMLAttributes<HTMLDivElement> {
 export const ProgressStepper: FC<ProgressStepperProps> = ({
   steps,
   activeStep: activeStepProp = -1,
-  stepName = ['шаг', 'шага', 'шагов'],
+  stepName: userStepName,
   renderNextStepName,
   displayNextStepName = true,
   mobile = false,
   ...props
 }) => {
+  const theme = React.useContext(ThemeContext) || LIGHT_THEME;
+  const stepName = userStepName || theme.locales[theme.currentLocale].progressStepper_stepName;
   const stepsAmount = steps.length;
   const activeStep = fitLimit(0, stepsAmount, activeStepProp) ? activeStepProp : -1;
   const activeStepNumber = activeStep + 1;
   const nextStep = activeStep + 1;
   const nextStepContent =
-    renderNextStepName?.(steps[nextStep]) || 'Далее - ' + setFirstLetterToLowerCase(steps[nextStep]);
+    renderNextStepName?.(steps[nextStep]) ||
+    `${theme.locales[theme.currentLocale].progressStepper_then} - ` + setFirstLetterToLowerCase(steps[nextStep]);
 
-  const fixedStepName = getPlural(stepName)(1);
-  const fixedStepNamePlural = getPlural(stepName)(5);
+  const fixedStepName = stepName[0];
+  const fixedStepNamePlural = stepName[stepName.length - 1];
 
   return (
     <Wrapper {...props}>
       <Header mobile={mobile} aria-hidden>
         <ActiveStep>{setFirstLetterToUpperCase(steps[activeStep])}</ActiveStep>
         <ProgressText>
-          {activeStepNumber} из {stepsAmount} {fixedStepNamePlural?.toLowerCase()}
+          {theme.locales[theme.currentLocale].progressStepper_progressText(
+            activeStepNumber,
+            stepsAmount,
+            fixedStepNamePlural?.toLowerCase(),
+          )}
         </ProgressText>
       </Header>
       <ProgressWrapper>

@@ -1,5 +1,6 @@
 import * as React from 'react';
-import styled from 'styled-components';
+import styled, { ThemeContext } from 'styled-components';
+import { LIGHT_THEME } from '#src/components/themes';
 import { NumberInput } from '#src/components/input/NumberInput';
 import { Range } from '#src/components/Range';
 import { clearValue, fitToCurrency } from '#src/components/input/NumberInput/utils';
@@ -74,11 +75,8 @@ export const SliderRange: React.FC<SliderRangeProps> = ({
   precision = 0,
   thousand = ' ',
   prefix = ['От', 'До'],
-  suffix = '₽',
-  placeholder = [
-    prefix[0] + ' ' + fitToCurrency(String(minValue), precision, '.', thousand) + ' ' + suffix,
-    prefix[1] + ' ' + fitToCurrency(String(maxValue), precision, '.', thousand) + ' ' + suffix,
-  ],
+  suffix: userSuffix,
+  placeholder: userPlaceholder,
   defaultValue,
   onChange,
   input1: input1Props,
@@ -88,6 +86,12 @@ export const SliderRange: React.FC<SliderRangeProps> = ({
   readOnly,
   ...props
 }) => {
+  const theme = React.useContext(ThemeContext) || LIGHT_THEME;
+  const suffix = userSuffix || theme.locales[theme.currentLocale].numberInput_suffix;
+  const placeholder = userPlaceholder || [
+    prefix[0] + ' ' + fitToCurrency(String(minValue), precision, '.', thousand) + ' ' + suffix,
+    prefix[1] + ' ' + fitToCurrency(String(maxValue), precision, '.', thousand) + ' ' + suffix,
+  ];
   const rangeDimension = dimension === 's' ? dimension : 'm';
 
   const input1Ref = React.useRef<HTMLInputElement>(null);

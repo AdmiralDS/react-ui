@@ -5,6 +5,8 @@ import { useClickOutside } from '#src/components/common/hooks/useClickOutside';
 import { getKeyboardFocusableElements } from '#src/components/common/utils/getKeyboardFocusableElements';
 import { throttle } from '#src/components/common/utils/throttle';
 import { useDropdown, useDropdownsClickOutside } from '#src/components/DropdownProvider';
+import { ThemeContext } from 'styled-components';
+import { LIGHT_THEME } from '#src/components/themes';
 
 import { CloseButton, HintContent, HintDialog, HintWrapper } from './style';
 
@@ -40,6 +42,7 @@ export const HintContainer = React.forwardRef<RefType, PropsType & React.HTMLAtt
     },
     ref,
   ) => {
+    const theme = React.useContext(ThemeContext) || LIGHT_THEME;
     const hideOnScrollResize = visibilityTrigger === 'hover';
 
     const hintRef: any = React.useRef(null);
@@ -130,7 +133,7 @@ export const HintContainer = React.forwardRef<RefType, PropsType & React.HTMLAtt
           <HintContent>{content}</HintContent>
           {visibilityTrigger === 'click' && (
             <CloseButton
-              aria-label="Закрыть подсказку"
+              aria-label={theme.locales[theme.currentLocale].hint_ariaLabel}
               onClick={(event?: React.MouseEvent<HTMLButtonElement>) => {
                 event?.stopPropagation();
                 previousFocusedElement.current.focus();

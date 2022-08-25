@@ -1,5 +1,6 @@
 import * as React from 'react';
-import styled, { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
+import styled, { DefaultTheme, FlattenInterpolation, ThemeProps, ThemeContext } from 'styled-components';
+import { LIGHT_THEME } from '#src/components/themes';
 import { typography } from '#src/components/Typography';
 import { ReactComponent as ChevronLeft } from '@admiral-ds/icons/build/system/ChevronLeftOutline.svg';
 import { ReactComponent as ChevronRight } from '@admiral-ds/icons/build/system/ChevronRightOutline.svg';
@@ -72,15 +73,15 @@ export interface PaginationOneProps extends Omit<React.HTMLAttributes<HTMLDivEle
   /** Блокировка выбора количества записей на странице */
   pageSizeSelectDisabled?: boolean;
   /** Функция, возвращающая текст, описывающий селект с выбором номера страницы */
-  pageSelectLabel?: (props: any) => string;
+  pageSelectLabel?: (...props: any) => string;
   /** Функция, возвращающая текст, описывающий селект с выбором размера страницы */
-  pageSizeSelectLabel?: (props: any) => string;
+  pageSizeSelectLabel?: (...props: any) => string;
   /** Текст, описывающий сколько записей размещено на одной странице */
   itemsPerPageText?: string;
   /** Функция, возвращающая текст, поясняющий, какой диапазон записей сейчас отображается */
-  itemRangeText?: (props: any) => string;
+  itemRangeText?: (...props: any) => string;
   /** Функция, возвращающая текст, поясняющий, из какого количества страниц выбрана текущая */
-  pageRangeText?: (props: any) => string;
+  pageRangeText?: (...props: any) => string;
   /** Текст, описывающий кнопку переключения назад */
   backwardText?: string;
   /** Текст, описывающий кнопку переключения вперед */
@@ -101,14 +102,14 @@ export const PaginationOne: React.FC<PaginationOneProps> = ({
   totalItems,
   pageSelectDisabled = false,
   pageSizeSelectDisabled = false,
-  itemsPerPageText = 'Записей на странице:',
+  itemsPerPageText: userItemsPerPageText,
   onChange,
-  itemRangeText = (min: number, max: number, total: number) => `${min}–${max} записей из ${total}`,
-  pageRangeText = (total: number) => `из ${total} ${total === 1 ? 'страницы' : 'страниц'}`,
-  pageSelectLabel = (page: number, totalPages: number) => `Страница ${page} из ${totalPages}`,
-  pageSizeSelectLabel = (pageSize: number, total: number) => `Записей ${pageSize} из ${total}`,
-  backwardText = 'Предыдущая страница, выбрать',
-  forwardText = 'Следующая страница, выбрать',
+  itemRangeText: userItemRangeText,
+  pageRangeText: userPageRangeText,
+  pageSelectLabel: userPageSelectLabel,
+  pageSizeSelectLabel: userPageSizeSelectLabel,
+  backwardText: userBackwardText,
+  forwardText: userForwardText,
   simple = false,
   menuWidth,
   dropMaxHeight = '300px',
@@ -116,6 +117,16 @@ export const PaginationOne: React.FC<PaginationOneProps> = ({
   className = '',
   ...props
 }) => {
+  const theme = React.useContext(ThemeContext) || LIGHT_THEME;
+  const itemsPerPageText = userItemsPerPageText || theme.locales[theme.currentLocale].paginationOne_itemsPerPageText;
+  const itemRangeText = userItemRangeText || theme.locales[theme.currentLocale].paginationOne_itemRangeText;
+  const pageRangeText = userPageRangeText || theme.locales[theme.currentLocale].paginationOne_pageRangeText;
+  const pageSelectLabel = userPageSelectLabel || theme.locales[theme.currentLocale].paginationOne_pageSelectLabel;
+  const pageSizeSelectLabel =
+    userPageSizeSelectLabel || theme.locales[theme.currentLocale].paginationOne_pageSizeSelectLabel;
+  const backwardText = userBackwardText || theme.locales[theme.currentLocale].paginationOne_backwardText;
+  const forwardText = userForwardText || theme.locales[theme.currentLocale].paginationOne_forwardText;
+
   const totalPages = Math.max(Math.ceil(totalItems / pageSize), 1);
   const pages = Array.from({ length: totalPages }, (v, k) => k + 1);
   const backButtonDisabled = page === 1;

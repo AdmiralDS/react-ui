@@ -1,5 +1,6 @@
 import * as React from 'react';
-import styled, { css } from 'styled-components';
+import styled, { css, ThemeContext } from 'styled-components';
+import { LIGHT_THEME } from '#src/components/themes';
 import type { TextInputProps } from '#src/components/input/TextInput';
 import type { ComponentDimension, ExtraProps } from '#src/components/input/types';
 import { typography } from '#src/components/Typography';
@@ -154,14 +155,14 @@ export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       displayClearIcon = false,
       displayPlusMinusIcons = true,
       prefix = '',
-      suffix = '₽',
+      suffix: userSuffix,
       precision = 2,
       thousand: userThousand = ' ',
       decimal: userDecimal = '.',
       step = 1,
       minValue,
       maxValue,
-      placeholder = '0 ₽',
+      placeholder: userPlaceholder,
       align = 'left',
       skeleton = false,
       onChange,
@@ -170,6 +171,10 @@ export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
     },
     ref,
   ) => {
+    const theme = React.useContext(ThemeContext) || LIGHT_THEME;
+    const suffix = userSuffix || theme.locales[theme.currentLocale].numberInput_suffix;
+    const placeholder = userPlaceholder || `0 ${theme.locales[theme.currentLocale].numberInput_suffix}`;
+
     const [plusDisabled, setPlusDisabled] = React.useState(false);
     const [minusDisabled, setMinusDisabled] = React.useState(false);
 

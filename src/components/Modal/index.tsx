@@ -4,7 +4,8 @@ import { typography } from '#src/components/Typography';
 import { ReactComponent as CloseOutline } from '@admiral-ds/icons/build/service/CloseOutline.svg';
 import * as React from 'react';
 import ReactDOM from 'react-dom';
-import styled, { css, Interpolation } from 'styled-components';
+import styled, { css, Interpolation, ThemeContext } from 'styled-components';
+import { LIGHT_THEME } from '#src/components/themes';
 import ModalManager from './manager';
 import { largeGroupBorderRadius } from '#src/components/themes/borderRadius';
 
@@ -232,6 +233,7 @@ export const Modal = React.forwardRef<HTMLDivElement, ModalProps>(
     },
     ref,
   ) => {
+    const theme = React.useContext(ThemeContext) || LIGHT_THEME;
     const modal = React.useRef<any>({});
     const modalRef: any = React.useRef<HTMLDivElement>(null);
     const overlayRef = React.useRef<HTMLDivElement>(null);
@@ -313,7 +315,11 @@ export const Modal = React.forwardRef<HTMLDivElement, ModalProps>(
         >
           {children}
           {displayCloseIcon && (
-            <CloseButton aria-label="Закрыть модальное окно" mobile={mobile} onClick={handleCloseBtnClick}>
+            <CloseButton
+              aria-label={theme.locales[theme.currentLocale].modal_ariaLabel}
+              mobile={mobile}
+              onClick={handleCloseBtnClick}
+            >
               <CloseOutline width={24} height={24} aria-hidden />
             </CloseButton>
           )}
