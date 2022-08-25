@@ -26,7 +26,7 @@ export default {
   },
   argTypes: {
     dimension: {
-      options: INPUT_DIMENSIONS_VALUES,
+      options: ['xxl', 'xl', 'm', 's'],
       control: { type: 'radio' },
     },
     bold: {

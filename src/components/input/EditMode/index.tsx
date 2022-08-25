@@ -28,6 +28,9 @@ const EditInput = styled(TextInput)`
     [data-dimension='xl'] & {
       ${typography['Header/H5']}
     }
+    [data-dimension='xxl'] & {
+      ${typography['Header/H4']}
+    }
   }
 `;
 
@@ -114,6 +117,11 @@ const Text = styled.div`
     height: 56px;
     line-height: 56px;
   }
+  [data-dimension='xxl'] & {
+    ${typography['Header/H4']}
+    height: 56px;
+    line-height: 56px;
+  }
 
   [data-disabled='true'] & {
     cursor: default;
@@ -128,7 +136,7 @@ const Text = styled.div`
   }
 `;
 
-type Dimension = 's' | 'm' | 'xl';
+type Dimension = 's' | 'm' | 'xl' | 'xxl';
 
 export interface EditModeProps extends Omit<TextInputProps, 'dimension'> {
   /** Значение компонента */
@@ -137,7 +145,7 @@ export interface EditModeProps extends Omit<TextInputProps, 'dimension'> {
   onChange: React.ChangeEventHandler<HTMLInputElement>;
   /** Размер компонента */
   dimension?: Dimension;
-  /** Жирное начертание текста. В размере xl оно всегда такое */
+  /** Жирное начертание текста. В размере xl/xxl оно всегда такое */
   bold?: boolean;
   /** Позволяет добавлять миксин на контейнер компонента, созданный с помощью styled css. */
   containerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
@@ -182,9 +190,10 @@ export const EditMode = React.forwardRef<HTMLInputElement, EditModeProps>(
         onClear?.();
       }
     };
+    const editDimension = dimension === 'xxl' ? 'xl' : dimension;
     return (
       <Wrapper
-        data-dimension={`${dimension}${bold && dimension !== 'xl' ? '-bold' : ''}`}
+        data-dimension={`${dimension}${bold && editDimension !== 'xl' ? '-bold' : ''}`}
         data-disabled={disabled}
         cssMixin={containerCssMixin}
       >
@@ -196,20 +205,20 @@ export const EditMode = React.forwardRef<HTMLInputElement, EditModeProps>(
                 ref={refSetter(ref, inputRef)}
                 autoFocus
                 disabled={disabled}
-                dimension={dimension}
+                dimension={editDimension}
                 value={value}
                 {...props}
               />
               <EditButton
                 appearance="secondary"
-                dimension={dimension}
+                dimension={editDimension}
                 displayAsSquare
                 disabled={props.status === 'error'}
                 onClick={disabledEdit}
               >
                 <CheckIcon height={iconSize} width={iconSize} />
               </EditButton>
-              <EditButton appearance="secondary" dimension={dimension} displayAsSquare onClick={handleClear}>
+              <EditButton appearance="secondary" dimension={editDimension} displayAsSquare onClick={handleClear}>
                 <ClearIcon height={iconSize} width={iconSize} />
               </EditButton>
             </>
