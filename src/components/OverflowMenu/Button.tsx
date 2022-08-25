@@ -8,12 +8,6 @@ import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 
 export type Dimension = 'l' | 'm' | 's';
 
-export const OVERFLOWMENU_BUTTON_SIZE = {
-  l: 36,
-  m: 32,
-  s: 24,
-};
-
 const ICON_SIZE = {
   l: 24,
   m: 20,
@@ -21,8 +15,19 @@ const ICON_SIZE = {
 };
 
 const focusStyle = css`
-  border-radius: 50%;
-  background-color: ${({ theme }) => theme.color['Opacity/Focus']};
+  &:not(:disabled) {
+    &::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      width: calc(100% + 12px);
+      height: calc(100% + 12px);
+      background-color: ${({ theme }) => theme.color['Opacity/Hover']};
+    }
+  }
 `;
 
 const ButtonComponent = styled.button<{ dimension: Dimension; menuOpened: boolean }>`
@@ -38,12 +43,11 @@ const ButtonComponent = styled.button<{ dimension: Dimension; menuOpened: boolea
   background: transparent;
   -webkit-tap-highlight-color: transparent;
   overflow: visible;
-  height: ${({ dimension }) => OVERFLOWMENU_BUTTON_SIZE[dimension]}px;
-  width: ${({ dimension }) => OVERFLOWMENU_BUTTON_SIZE[dimension]}px;
+  height: ${({ dimension }) => ICON_SIZE[dimension]}px;
+  width: ${({ dimension }) => ICON_SIZE[dimension]}px;
 
   &:hover:not(:disabled) {
-    border-radius: 50%;
-    background-color: ${({ theme }) => theme.color['Opacity/Hover']};
+    ${focusStyle}
   }
 
   ${({ menuOpened }) => menuOpened && focusStyle}
@@ -52,18 +56,22 @@ const ButtonComponent = styled.button<{ dimension: Dimension; menuOpened: boolea
     &:before {
       content: '';
       position: absolute;
-      top: ${({ dimension }) => (dimension === 's' ? 0 : 2)}px;
-      bottom: ${({ dimension }) => (dimension === 's' ? 0 : 2)}px;
-      left: ${({ dimension }) => (dimension === 's' ? 0 : 2)}px;
-      right: ${({ dimension }) => (dimension === 's' ? 0 : 2)}px;
+      top: -4px;
+      bottom: -4px;
+      left: -4px;
+      right: -4px;
       border: 2px solid ${({ theme }) => theme.color['Primary/Primary 60 Main']};
       border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
     }
   }
 
   &:active:not(:disabled) {
-    border-radius: 50%;
-    background-color: ${({ theme }) => theme.color['Opacity/Focus']};
+    ${focusStyle};
+    &:not(:disabled) {
+      &::after {
+        background-color: ${({ theme }) => theme.color['Opacity/Focus']};
+      }
+    }
   }
 
   &:disabled {
