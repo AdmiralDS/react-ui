@@ -1,6 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import { OpenStatusButton } from '#src/components/OpenStatusButton';
+import { DropdownContainer } from '#src/components/DropdownContainer';
+import { Menu } from './Menu';
+
+const StyledMenu = styled(Menu)<{ width?: string }>`
+  width: ${({ width }) => (width ? width : 'auto')};
+`;
 
 const Container = styled.div<{ iconSizeValue?: string }>`
   display: flex;
@@ -26,9 +32,16 @@ export type RenderPropsType<T> = {
   value: T;
 };
 export type ValueType = string | number | object;
+
 export type SuffixSelectProps<T> = {
   /** ref элемента относительно которого будет выравниваться дроп контейнер */
   alignRef?: React.RefObject<HTMLElement>;
+
+  /** задает выравнивание дроп контейнера относительно компонента */
+  dropAlign?: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
+
+  /** Задает максимальную высоту дроп контейнера */
+  dropMaxHeight?: string | number;
 
   /** выбранное на данный момент значение */
   value: T;
@@ -37,7 +50,7 @@ export type SuffixSelectProps<T> = {
   options: T[];
 
   /** обработчик события на выбор элемента */
-  onChange: (value: T) => void;
+  onChange: (value: ValueType) => void;
 
   /** состояние видимости контейнера с опциями */
   isOpen?: boolean;
@@ -49,7 +62,14 @@ export type SuffixSelectProps<T> = {
   renderOption?: (props: RenderPropsType<T>) => React.ReactNode;
 };
 
-export const SuffixSelect = <T extends ValueType>(props: React.PropsWithChildren<SuffixSelectProps<T>>) => {
+export const SuffixSelect = <T extends ValueType>({
+  dropAlign,
+  dropMaxHeight,
+  onChange,
+  options,
+  value,
+  ...props
+}: React.PropsWithChildren<SuffixSelectProps<T>>) => {
   const [isOpenState, setIsOpenState] = React.useState<boolean>(false);
   const isOpen = props.isOpen === undefined ? isOpenState : props.isOpen;
 
@@ -62,10 +82,26 @@ export const SuffixSelect = <T extends ValueType>(props: React.PropsWithChildren
     setIsOpenState(newOpenStatus);
   };
 
+  const clickOutside = () => {
+    setIsOpenState(false);
+  };
+
   return (
-    <Container ref={containerRef} onClick={handleContainerClick}>
-      <ValueContainer>{props.value}</ValueContainer>
-      <OpenStatusButton $isOpen={isOpen} aria-hidden />
-    </Container>
+    <>
+      <Container ref={containerRef} onClick={handleContainerClick}>
+        <ValueContainer>{value}</ValueContainer>
+        <OpenStatusButton $isOpen={isOpen} aria-hidden />
+      </Container>
+      {isOpen && (
+        <DropdownContainer
+          role="listbox"
+          alignSelf={dropAlign}
+          targetRef={alignContainerRef}
+          onClickOutside={clickOutside}
+        >
+          <StyledMenu maxHeight={dropMaxHeight} options={options} selected={value} onSelect={onChange} />
+        </DropdownContainer>
+      )}
+    </>
   );
 };

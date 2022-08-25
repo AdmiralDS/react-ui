@@ -5,8 +5,7 @@ import { withDesign } from 'storybook-addon-designs';
 import { INPUT_DIMENSIONS_VALUES } from '#src/components/input/types';
 import { Theme } from '#src/components/themes';
 import { ThemeProvider } from 'styled-components';
-import { SuffixSelect } from '#src/components/input/InputEx/SuffixSelect';
-import { TextButtonMenu } from '#src/components/TextButtonMenu';
+import { SuffixSelect, ValueType } from '#src/components/input/InputEx/SuffixSelect';
 
 export default {
   title: 'Admiral-2.1/Input/InputEx',
@@ -126,14 +125,20 @@ const Template2: ComponentStory<typeof InputEx> = (props) => {
     return theme;
   }
 
-  const [suffixValue, setSuffixValue] = React.useState('Suffix');
+  const [suffixValue, setSuffixValue] = React.useState<ValueType>('One');
   return (
     <ThemeProvider theme={swapBorder}>
       <InputEx
         {...cleanProps}
         value={localValue}
         onChange={handleChange}
-        suffix={<SuffixSelect value={suffixValue} onChange={(value) => setSuffixValue(value)} options={[]} />}
+        suffix={
+          <SuffixSelect
+            value={suffixValue}
+            onChange={(value) => setSuffixValue(value)}
+            options={['One', 'Two', 'Three']}
+          />
+        }
       />
     </ThemeProvider>
   );
