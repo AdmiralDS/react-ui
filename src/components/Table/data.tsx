@@ -9,8 +9,6 @@ import { RowAction } from '#src/components/Table';
 import type { Column } from '../Table';
 import { Tooltip } from '#src/components/Tooltip';
 import { TooltipHoc } from '#src/components/TooltipHOC';
-import { Dimension } from '#src/components/Tree/TreeNode';
-import { refSetter } from '#src/components/common/utils/refSetter';
 
 const AmountCell = styled.div`
   text-overflow: ellipsis;
@@ -684,10 +682,9 @@ interface MenuProps {
   row: RowData;
   onMenuOpen: () => void;
   onMenuClose: () => void;
-  showTooltip?: boolean;
 }
 
-const Menu: React.FC<MenuProps> = ({ row, onMenuOpen, onMenuClose, showTooltip = false }) => {
+const Menu: React.FC<MenuProps> = ({ row, onMenuOpen, onMenuClose }) => {
   const items: Array<any> = [
     {
       id: '1',
@@ -713,8 +710,6 @@ const Menu: React.FC<MenuProps> = ({ row, onMenuOpen, onMenuClose, showTooltip =
       disabled: item.disabled,
     }));
   }, []);
-  const overflowMenuRef = React.useRef<HTMLButtonElement | null>(null);
-  const [visible, setVisible] = React.useState(false);
 
   const StrToDate = (str: string) => {
     const res = str.split('.').reverse().join('-');
@@ -722,31 +717,20 @@ const Menu: React.FC<MenuProps> = ({ row, onMenuOpen, onMenuClose, showTooltip =
   };
 
   return (
-    <>
-      <OverflowMenu
-        onChange={(id) => {
-          const options: any = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-          if (id === '1') alert(StrToDate(row['transfer_date']).toLocaleString('ru', options));
-          if (id === '2') alert(StrToDate(row['transfer_date']).toLocaleString('en-US', options));
-          if (id === '3') alert(StrToDate(row['transfer_date']).toLocaleString('de-AT', options));
-        }}
-        onOpen={onMenuOpen}
-        onClose={onMenuClose}
-        aria-label="Overflow Menu component"
-        dimension="m"
-        isVertical
-        items={model}
-        ref={overflowMenuRef}
-      />
-      {showTooltip && (
-        <Tooltip
-          visible={visible}
-          onVisibilityChange={(visible: boolean) => setVisible(visible)}
-          renderContent={() => `Actions`}
-          targetRef={overflowMenuRef}
-        />
-      )}
-    </>
+    <OverflowMenu
+      onChange={(id) => {
+        const options: any = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        if (id === '1') alert(StrToDate(row['transfer_date']).toLocaleString('ru', options));
+        if (id === '2') alert(StrToDate(row['transfer_date']).toLocaleString('en-US', options));
+        if (id === '3') alert(StrToDate(row['transfer_date']).toLocaleString('de-AT', options));
+      }}
+      onOpen={onMenuOpen}
+      onClose={onMenuClose}
+      aria-label="Overflow Menu component"
+      dimension="m"
+      isVertical
+      items={model}
+    />
   );
 };
 
@@ -796,7 +780,7 @@ export const rowListMenu: RowData[] = [
     currency: 'RUB',
     rate: 2.5,
     overflowMenuRender: (row: RowData, onMenuOpen: () => void, onMenuClose: () => void) => (
-      <Menu row={row} onMenuOpen={onMenuOpen} onMenuClose={onMenuClose} showTooltip={true} />
+      <Menu row={row} onMenuOpen={onMenuOpen} onMenuClose={onMenuClose} />
     ),
   },
   {
