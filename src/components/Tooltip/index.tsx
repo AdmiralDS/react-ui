@@ -159,6 +159,8 @@ export const Tooltip: React.FC<ITooltipProps> = ({
     hideTooltip();
   };
 
+  React.useEffect(() => hideTooltip, []);
+
   return visible ? (
     <Portal
       targetRef={targetRef}
