@@ -27,7 +27,6 @@ import { preventDefault, scrollToNotVisibleELem } from './utils';
 import { changeInputData } from '#src/components/common/dom/changeInputData';
 import { useClickOutside } from '#src/components/common/hooks/useClickOutside';
 import { Spinner } from '#src/components/Spinner';
-import { Tooltip } from '#src/components/Tooltip';
 
 /**
  * Осталось сделать:
@@ -199,7 +198,6 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
     const mutableState = React.useRef<{ shouldExtendInputValue: boolean }>({
       shouldExtendInputValue: false,
     });
-    const valueRef = React.useRef<HTMLDivElement | null>(null);
 
     const onConstantOptionMount = React.useCallback(
       (option: IConstantOption) => setConstantOptions((prev) => [...prev, option]),
@@ -292,35 +290,8 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
     const shouldFixSingleSelectHeight = idleHeight === 'fixed' && visibleValueIsString;
     const shouldFixHeight = multiple ? shouldFixMultiSelectHeight : shouldFixSingleSelectHeight;
 
-    const [overflowActive, setOverflowActive] = React.useState<boolean>(false);
-    const [tooltipVisible, setTooltipVisible] = React.useState<boolean>(false);
-    const checkOverflow = (textContainer: HTMLDivElement | null): boolean => {
-      if (textContainer)
-        return (
-          textContainer.offsetHeight < textContainer.scrollHeight ||
-          textContainer.offsetWidth < textContainer.scrollWidth
-        );
-      return false;
-    };
-    React.useEffect(() => {
-      if (checkOverflow(valueRef.current)) {
-        setOverflowActive(true);
-        return;
-      }
-      setOverflowActive(false);
-    }, [visibleValue]);
     const wrappedVisibleValue = visibleValueIsString ? (
-      <>
-        <StringValueWrapper ref={valueRef}>{visibleValue}</StringValueWrapper>
-        {overflowActive && !isSearchPanelOpen && (
-          <Tooltip
-            visible={tooltipVisible}
-            onVisibilityChange={setTooltipVisible}
-            renderContent={() => visibleValue}
-            targetRef={valueRef}
-          />
-        )}
-      </>
+      <StringValueWrapper>{visibleValue}</StringValueWrapper>
     ) : (
       visibleValue
     );
@@ -568,20 +539,18 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
         >
           {shouldRenderSelectValue && wrappedVisibleValue}
           {((placeholder && isEmpty) || !modeIsSelect) && (
-            <>
-              <Input
-                placeholder={isEmpty ? placeholder : ''}
-                tabIndex={-1}
-                ref={inputRef}
-                disabled={disabled}
-                readOnly={readOnly || modeIsSelect}
-                value={searchValue}
-                defaultValue={defaultInputValue}
-                isMultiple={multiple}
-                dimension={dimension}
-                onChange={onLocalInputChange}
-              />
-            </>
+            <Input
+              placeholder={isEmpty ? placeholder : ''}
+              tabIndex={-1}
+              ref={inputRef}
+              disabled={disabled}
+              readOnly={readOnly || modeIsSelect}
+              value={searchValue}
+              defaultValue={defaultInputValue}
+              isMultiple={multiple}
+              dimension={dimension}
+              onChange={onLocalInputChange}
+            />
           )}
         </ValueWrapper>
         {isSearchPanelOpen && !skeleton && (
