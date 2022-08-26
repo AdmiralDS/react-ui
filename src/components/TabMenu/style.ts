@@ -21,7 +21,7 @@ import {
   TAB_LEFT_OFFSET_M,
   TAB_LEFT_OFFSET_L,
   OVERFLOW_MENU_CONTAINER_SIZE_M,
-  OVERFLOW_MENU_CONTAINER_SIZE_L
+  OVERFLOW_MENU_CONTAINER_SIZE_L,
 } from '#src/components/TabMenu/constants';
 
 export const IconWrapper = styled.div<{ dimension: Dimension }>`

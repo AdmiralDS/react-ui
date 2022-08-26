@@ -14,7 +14,7 @@ const ICON_SIZE = {
   s: 16,
 };
 
-const focusStyle = css`
+const focusStyle = css<{ dimension: Dimension }>`
   &:not(:disabled) {
     &::after {
       content: '';
@@ -23,6 +23,7 @@ const focusStyle = css`
       top: 50%;
       transform: translate(-50%, -50%);
       border-radius: 50%;
+      width: calc(100% + ${({ dimension }) => (dimension === 's' ? 8 : 12)}px);
       width: calc(100% + 12px);
       height: calc(100% + 12px);
       background-color: ${({ theme }) => theme.color['Opacity/Hover']};
