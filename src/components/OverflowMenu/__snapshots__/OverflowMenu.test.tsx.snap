@@ -55,7 +55,7 @@ Object {
 }
 
 .c0:disabled *[fill^='#'] {
-  fill: #B1B5BB;
+  fill: #B0B5BD;
 }
 
 .c1 {
@@ -87,7 +87,7 @@ Object {
 }
 
 .c2 > svg *[fill^='#'] {
-  fill: #74777F;
+  fill: #717681;
 }
 
 <body>
@@ -95,7 +95,7 @@ Object {
       <button
         aria-expanded="false"
         aria-haspopup="false"
-        class="c0"
+        class="c0  overflow-menu-button-with-dropdown"
         data-testid="btn"
         type="button"
       >
@@ -165,7 +165,7 @@ Object {
 }
 
 .c0:disabled *[fill^='#'] {
-  fill: #B1B5BB;
+  fill: #B0B5BD;
 }
 
 .c1 {
@@ -197,14 +197,14 @@ Object {
 }
 
 .c2 > svg *[fill^='#'] {
-  fill: #74777F;
+  fill: #717681;
 }
 
 <div>
     <button
       aria-expanded="false"
       aria-haspopup="false"
-      class="c0"
+      class="c0  overflow-menu-button-with-dropdown"
       data-testid="btn"
       type="button"
     >

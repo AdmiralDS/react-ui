@@ -6,6 +6,7 @@ import { DropMenu } from '#src/components/DropMenu';
 import { uid } from '#src/components/common/uid';
 import { Button } from '#src/components/Button';
 import { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
+import { passDropdownDataAttributes } from '#src/components/common/utils/splitDataAttributes';
 
 export type MenuButtonDimension = 'xl' | 'l' | 'm' | 's';
 export type MenuButtonAppearance = 'primary' | 'secondary' | 'ghost' | 'white';
@@ -59,10 +60,13 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
       menuWidth,
       menuMaxHeight,
       dropContainerCssMixin,
+      className = '',
       ...props
     },
     ref,
   ) => {
+    const dropMenuProps = passDropdownDataAttributes(props);
+
     return (
       <>
         <DropMenu
@@ -78,6 +82,8 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
           menuMaxHeight={menuMaxHeight}
           menuWidth={menuWidth}
           dropContainerCssMixin={dropContainerCssMixin}
+          alignSelf={alignSelf}
+          {...dropMenuProps}
           renderContentProp={({ buttonRef, handleKeyDown, handleClick, statusIcon, menuState }) => {
             return (
               <Button
@@ -91,6 +97,7 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
                 onKeyDown={handleKeyDown}
                 onClick={handleClick}
                 aria-expanded={menuState}
+                className={className + ' menu-button-with-dropdown'}
               >
                 {React.Children.toArray(children).map((child) =>
                   typeof child === 'string' ? <span key={uid()}>{child}</span> : child,

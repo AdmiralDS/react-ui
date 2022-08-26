@@ -32,7 +32,6 @@ export default {
   component: T,
   parameters: {
     componentSubtitle: <Description />,
-    layout: 'centered',
     design: {
       type: 'figma',
       url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=9%3A24',
@@ -100,8 +99,17 @@ const FontDesc = styled.table`
   }
 `;
 
+const CopyOutlineWrapper = styled.div`
+  display: inline-flex;
+  cursor: pointer;
+`;
+
 const CopyButton = ({ text }: { text: string }) => {
   const theme = useContext(ThemeContext) || LIGHT_THEME;
+  const copyRef = React.useRef<HTMLDivElement | null>(null);
+
+  const [tooltipVisible, setTooltipVisible] = React.useState(false);
+
   const copyToClipboard = () => {
     const el = document.createElement('textarea');
     el.value = text;
@@ -115,9 +123,15 @@ const CopyButton = ({ text }: { text: string }) => {
   };
   return (
     <>
-      <Tooltip renderContent={() => 'Копировать пример использования'} style={{ display: 'flex' }}>
+      <CopyOutlineWrapper ref={copyRef}>
         <CopyOutline width={16} height={16} onClick={copyToClipboard} fill={theme.color['Neutral/Neutral 90']} />
-      </Tooltip>
+      </CopyOutlineWrapper>
+      <Tooltip
+        targetRef={copyRef}
+        visible={tooltipVisible}
+        onVisibilityChange={(visible: boolean) => setTooltipVisible(visible)}
+        renderContent={() => 'Копировать пример использования'}
+      />
     </>
   );
 };

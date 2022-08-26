@@ -11,10 +11,13 @@ export const StepContent: FC<{ children: string; tooltipProps?: Partial<ITooltip
   tooltipProps,
 }) => {
   const { orientation, lineClamp, stepWidth } = React.useContext(StepperContext);
+  const wrapperRef = React.useRef<HTMLDivElement | null>(null);
   const contentRef = React.useRef<HTMLDivElement | null>(null);
   const [overflow, setOverflow] = React.useState(false);
+  const [tooltipVisible, setTooltipVisible] = React.useState(false);
 
   const detectOverflow = (e: any) => e.clientHeight < e.scrollHeight;
+  const handleTooltipVisibilityChange = (visible: boolean) => setTooltipVisible(visible);
 
   React.useLayoutEffect(() => {
     if (contentRef.current && detectOverflow(contentRef.current) !== overflow) {
@@ -22,19 +25,22 @@ export const StepContent: FC<{ children: string; tooltipProps?: Partial<ITooltip
     }
   }, [children, orientation, stepWidth, lineClamp]);
 
-  return overflow ? (
-    <Tooltip renderContent={() => children} {...tooltipProps}>
-      <ContentWrapper>
+  return (
+    <>
+      <ContentWrapper ref={wrapperRef} withTooltip={overflow}>
         <Content ref={contentRef} lineClamp={lineClamp}>
           {children}
         </Content>
       </ContentWrapper>
-    </Tooltip>
-  ) : (
-    <ContentWrapper>
-      <Content ref={contentRef} lineClamp={lineClamp}>
-        {children}
-      </Content>
-    </ContentWrapper>
+      {overflow ? (
+        <Tooltip
+          targetRef={wrapperRef}
+          visible={tooltipVisible}
+          onVisibilityChange={handleTooltipVisibilityChange}
+          renderContent={() => children}
+          {...tooltipProps}
+        />
+      ) : null}
+    </>
   );
 };

@@ -32,16 +32,16 @@ Object {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #22242A;
+  color: #23262D;
 }
 
 .c0:hover {
-  background-color: #D6D8DD;
+  background-color: #D5D8DE;
 }
 
 .c0:active {
   color: #0062FF;
-  background-color: #D6D8DD;
+  background-color: #D5D8DE;
 }
 
 .c0:focus-visible {
@@ -62,7 +62,7 @@ Object {
 }
 
 .c0:hover {
-  color: #22242A;
+  color: #23262D;
 }
 
 .c1 {
@@ -82,7 +82,7 @@ Object {
 }
 
 .c1 svg *[fill^='#'] {
-  fill: #74777F;
+  fill: #717681;
 }
 
 .c2 {
@@ -139,16 +139,16 @@ Object {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-  color: #22242A;
+  color: #23262D;
 }
 
 .c0:hover {
-  background-color: #D6D8DD;
+  background-color: #D5D8DE;
 }
 
 .c0:active {
   color: #0062FF;
-  background-color: #D6D8DD;
+  background-color: #D5D8DE;
 }
 
 .c0:focus-visible {
@@ -169,7 +169,7 @@ Object {
 }
 
 .c0:hover {
-  color: #22242A;
+  color: #23262D;
 }
 
 .c1 {
@@ -189,7 +189,7 @@ Object {
 }
 
 .c1 svg *[fill^='#'] {
-  fill: #74777F;
+  fill: #717681;
 }
 
 .c2 {

@@ -4,6 +4,7 @@ import type { Dimension } from '#src/components/OverflowMenu/Button';
 import { Button, OverflowMenuIcon } from '#src/components/OverflowMenu/Button';
 import type { ItemProps } from '#src/components/MenuItem';
 import { DropMenu, RenderContentProps } from '#src/components/DropMenu';
+import { passDropdownDataAttributes } from '#src/components/common/utils/splitDataAttributes';
 
 export interface OverflowMenuProps extends Omit<React.HTMLAttributes<HTMLButtonElement>, 'onChange'> {
   /** Выбранная опция */
@@ -38,11 +39,14 @@ export const OverflowMenu = React.forwardRef<HTMLButtonElement, OverflowMenuProp
       onOpen,
       onClose,
       items,
+      className = '',
       ...props
     },
     ref,
   ) => {
     const iconRef = React.useRef<HTMLDivElement>(null);
+
+    const dropMenuProps = passDropdownDataAttributes(props);
 
     return (
       <>
@@ -57,6 +61,7 @@ export const OverflowMenu = React.forwardRef<HTMLButtonElement, OverflowMenuProp
           disabled={disabled}
           selected={selected}
           alignMenuRef={iconRef}
+          {...dropMenuProps}
           renderContentProp={({ buttonRef, handleKeyDown, handleClick, menuState, disabled }: RenderContentProps) => {
             return (
               <Button
@@ -69,6 +74,7 @@ export const OverflowMenu = React.forwardRef<HTMLButtonElement, OverflowMenuProp
                 aria-expanded={menuState}
                 aria-haspopup={menuState}
                 onKeyDown={handleKeyDown}
+                className={className + ' overflow-menu-button-with-dropdown'}
               >
                 <OverflowMenuIcon ref={iconRef} dimension={dimension} isVertical={isVertical} />
               </Button>

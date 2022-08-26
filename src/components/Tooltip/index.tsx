@@ -4,14 +4,23 @@ import type { RefCallback, RefObject } from '#src/components/common/utils/handle
 import { handleRef } from '#src/components/common/utils/handleRef';
 import { getScrollableParents } from '#src/components/common/utils/getScrollableParents';
 
-import { AnchorWrapper, FakeTarget, Portal, TooltipContainer, TooltipWrapper } from './style';
+import { FakeTarget, Portal, TooltipContainer, TooltipWrapper } from './style';
 import type { TooltipPositionType } from './utils';
 import { getTooltipDirection } from './utils';
 import { getScrollbarSize } from '#src/components/common/dom/scrollbarUtil';
 
 export interface ITooltipProps extends React.HTMLAttributes<HTMLDivElement> {
+  /** Видимость компонента */
+  visible: boolean;
+  /** Колбек на изменение видимости тултипа
+   * При ховере/фокусе на target элементе колбек вызовется со значением visible=true,
+   * при потере ховера/фокуса на target элементе колбек вызовется со значением visible=false.
+   */
+  onVisibilityChange: (visible: boolean) => void;
   /** Функция, которая возвращает реакт-компонент с контентом тултипа. Если этому компоненту нужны props, используйте замыкание */
   renderContent: () => React.ReactNode;
+  /** Ref на элемент, относительно которого позиционируется тултип */
+  targetRef: React.RefObject<HTMLElement>;
   /** Контейнер, в котором будет отрисован тултип через React.createPortal. По умолчанию тултип отрисовывается в document.body */
   container?: Element | null;
   /** Отобразить тултип с задержкой в 1.5 секунды */
@@ -20,41 +29,35 @@ export interface ITooltipProps extends React.HTMLAttributes<HTMLDivElement> {
   tooltipRef?: RefCallback<HTMLDivElement> | RefObject<HTMLDivElement> | null;
   /** Расположение тултипа */
   tooltipPosition?: TooltipPositionType;
-  /** ClassName для внешнего контейнера (AnchorWrapper) */
-  anchorClassName?: string;
-  /** Id для внешнего контейнера (AnchorWrapper) */
-  anchorId?: string;
 }
 
 const TOOLTIP_DELAY = 1500;
 
 export const Tooltip: React.FC<ITooltipProps> = ({
+  visible,
+  onVisibilityChange,
   renderContent,
+  targetRef,
   container: userContainer,
   withDelay,
   tooltipRef,
   tooltipPosition,
-  children,
-  anchorClassName,
-  anchorId,
   ...props
 }) => {
-  const anchorElementRef = React.useRef<HTMLDivElement | null>(null);
   const tooltipElementRef = React.useRef<HTMLDivElement | null>(null);
   const container: Element = userContainer || document.body;
   let scrollableParents: Array<Element> | undefined = undefined;
   let showTooltipTimer: any;
 
-  const [visible, setVisible] = React.useState<boolean>(false);
   const [portalFlexDirection, setPortalFlexDirection] = React.useState('');
   const [portalFullWidth, setPortalFullWidth] = React.useState(false);
 
-  const hideTooltip = () => setVisible(false);
+  const hideTooltip = () => onVisibilityChange(false);
 
   const manageTooltip = (scrollbarSize: number) => {
-    if (anchorElementRef.current && tooltipElementRef.current) {
+    if (targetRef.current && tooltipElementRef.current) {
       const direction = getTooltipDirection(
-        anchorElementRef.current,
+        targetRef.current,
         tooltipElementRef.current,
         scrollbarSize,
         tooltipPosition,
@@ -101,10 +104,10 @@ export const Tooltip: React.FC<ITooltipProps> = ({
     window.addEventListener('resize', hideTooltip);
     window.addEventListener('scroll', hideTooltip);
 
-    /**  если у anchorElement есть родительский элемент, который имеет собственный скролл,
+    /**  если у targetRef.current есть родительский элемент, который имеет собственный скролл,
      * необходимо повесить на этого родителя обработчик скролла */
-    if (!scrollableParents && anchorElementRef.current) {
-      scrollableParents = getScrollableParents(anchorElementRef.current);
+    if (!scrollableParents && targetRef.current) {
+      scrollableParents = getScrollableParents(targetRef.current);
       scrollableParents?.forEach((el) => el.addEventListener('scroll', hideTooltip));
     }
     return () => {
@@ -118,7 +121,7 @@ export const Tooltip: React.FC<ITooltipProps> = ({
   React.useEffect(() => {
     const scrollbarSize = getScrollbarSize();
     manageTooltip(scrollbarSize);
-  }, [renderContent(), anchorElementRef, tooltipPosition, container]);
+  }, [renderContent(), targetRef, tooltipPosition, container]);
 
   // First container render always happens downward and transparent,
   // after size and position settled transparency returns to normal
@@ -128,24 +131,23 @@ export const Tooltip: React.FC<ITooltipProps> = ({
     }
   }, [tooltipElementRef.current, visible]);
 
-  /** Вешаю обработчик на mouseenter через addEventListener,
-   * React SyntheticEvent onMouseEnter отрабатывает некорректно в случае,
-   * если мышь была наведена на задизейбленный элемент, а потом была передвинута на AnchorWrapper
-   * https://github.com/facebook/react/issues/19419#:~:text=mouseenter%20does%20not%20fire%20because,element%20of%20the%20opposing%20event.
-   */
   React.useEffect(() => {
-    anchorElementRef.current?.addEventListener('mouseenter', handleMouseEnter);
-    anchorElementRef.current?.addEventListener('mouseleave', handleMouseLeave);
+    targetRef.current?.addEventListener('mouseenter', handleMouseEnter);
+    targetRef.current?.addEventListener('focus', handleMouseEnter);
+    targetRef.current?.addEventListener('mouseleave', handleMouseLeave);
+    targetRef.current?.addEventListener('blur', handleMouseLeave);
     return () => {
-      anchorElementRef.current?.removeEventListener('mouseenter', handleMouseEnter);
-      anchorElementRef.current?.removeEventListener('mouseleave', handleMouseLeave);
+      targetRef.current?.removeEventListener('mouseenter', handleMouseEnter);
+      targetRef.current?.removeEventListener('focus', handleMouseEnter);
+      targetRef.current?.removeEventListener('mouseleave', handleMouseLeave);
+      targetRef.current?.removeEventListener('blur', handleMouseLeave);
     };
-  }, [anchorElementRef.current]);
+  }, [targetRef.current]);
 
   const handleMouseEnter = () => {
     showTooltipTimer = window.setTimeout(
       () => {
-        setVisible(true);
+        onVisibilityChange(true);
         manageTooltip(getScrollbarSize());
       },
       withDelay ? TOOLTIP_DELAY : 0,
@@ -157,32 +159,21 @@ export const Tooltip: React.FC<ITooltipProps> = ({
     hideTooltip();
   };
 
-  return (
-    <AnchorWrapper
-      onFocus={handleMouseEnter}
-      onBlur={handleMouseLeave}
-      ref={anchorElementRef}
-      className={anchorClassName}
-      id={anchorId}
+  return visible ? (
+    <Portal
+      targetRef={targetRef}
+      container={container}
+      flexDirection={portalFlexDirection}
+      fullContainerWidth={portalFullWidth}
     >
-      {children}
-      {visible && (
-        <Portal
-          targetRef={anchorElementRef}
-          container={container}
-          flexDirection={portalFlexDirection}
-          fullContainerWidth={portalFullWidth}
-        >
-          <FakeTarget />
-          <TooltipWrapper ref={attachRef}>
-            <TooltipContainer role="tooltip" {...props}>
-              {renderContent()}
-            </TooltipContainer>
-          </TooltipWrapper>
-        </Portal>
-      )}
-    </AnchorWrapper>
-  );
+      <FakeTarget />
+      <TooltipWrapper ref={attachRef}>
+        <TooltipContainer role="tooltip" {...props}>
+          {renderContent()}
+        </TooltipContainer>
+      </TooltipWrapper>
+    </Portal>
+  ) : null;
 };
 
 Tooltip.displayName = 'Tooltip';

@@ -3,6 +3,10 @@ import { refSetter } from '#src/components/common/utils/refSetter';
 import { Field, FieldOwnProps } from '#src/components/Field';
 import { SliderInput, SliderInputProps } from '#src/components/input/SliderInput';
 import * as React from 'react';
+import {
+  passFormFieldContainerDataAttributes,
+  passFormFieldDataAttributes,
+} from '#src/components/common/utils/splitDataAttributes';
 
 export interface SliderInputFieldProps extends SliderInputProps, Omit<FieldOwnProps, 'inputRef'> {}
 
@@ -37,11 +41,9 @@ export const SliderInputField = React.forwardRef<HTMLInputElement, SliderInputFi
     'data-field-name': restProps.name,
   } as Record<string, any>;
 
-  (Object.keys(restProps) as Array<keyof typeof restProps>).forEach((key) => {
-    if (key.startsWith('data-field')) {
-      fieldContainerProps[key] = restProps[key];
-    }
-  });
+  passFormFieldDataAttributes(restProps, fieldContainerProps);
+  passFormFieldContainerDataAttributes(restProps, fieldContainerProps);
+
   const inputProps = {
     ref: refSetter(ref, inputRef),
     id,

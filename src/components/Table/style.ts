@@ -297,10 +297,6 @@ export const TitleContent = styled.div<{ dimension: TableProps['dimension']; sor
   display: flex;
   flex-direction: column;
 
-  & .table-title-tooltip {
-    display: flex;
-  }
-
   // leave 20px/16px for SortIcon
   max-width: ${({ sortable, dimension }) =>
     sortable ? `calc(100% - ${dimension === 's' || dimension === 'm' ? 16 : 20}px)` : '100%'};

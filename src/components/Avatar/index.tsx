@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 import { typography } from '#src/components/Typography';
 import { Tooltip } from '#src/components/Tooltip';
 import { DefaultFontColorName } from '#src/components/themes/common';
+import { refSetter } from '#src/components/common/utils/refSetter';
 
 import { useLoaded } from './useLoaded';
 import { AvatarSVG } from './Avatar_SVG';
@@ -18,9 +19,7 @@ const Wrapper = styled.button<{ size: string }>`
   appearance: none;
   background: transparent;
   -webkit-tap-highlight-color: transparent;
-  & .avatar-tooltip {
-    display: flex;
-  }
+  cursor: pointer;
   border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
 
   &:focus-visible {
@@ -184,6 +183,9 @@ export const Avatar = React.forwardRef<HTMLButtonElement, AvatarProps & AvatarIn
     }: AvatarProps & AvatarInternalProps,
     ref,
   ) => {
+    const wrapperRef = React.useRef<HTMLButtonElement | null>(null);
+    const [tooltipVisible, setTooltipVisible] = React.useState(false);
+
     const loaded = useLoaded(href);
     const hasImage = Boolean(href && loaded === 'loaded');
     const hasIcon = Boolean(Icon && !hasImage);
@@ -213,8 +215,9 @@ export const Avatar = React.forwardRef<HTMLButtonElement, AvatarProps & AvatarIn
           return '56px';
       }
     };
-    const renderContent = () => (
-      <>
+    const handleTooltipVisibilityChange = (visible: boolean) => setTooltipVisible(visible);
+    return (
+      <Wrapper size={getSize()} {...props} ref={refSetter(ref, wrapperRef)}>
         <AvatarSVG
           dimension={dimension}
           size={getSize()}
@@ -235,16 +238,13 @@ export const Avatar = React.forwardRef<HTMLButtonElement, AvatarProps & AvatarIn
             {Icon}
           </IconWrapper>
         )}
-      </>
-    );
-    return (
-      <Wrapper size={getSize()} {...props} ref={ref}>
-        {showTooltip ? (
-          <Tooltip anchorClassName="avatar-tooltip" renderContent={() => userName}>
-            {renderContent()}
-          </Tooltip>
-        ) : (
-          renderContent()
+        {showTooltip && (
+          <Tooltip
+            targetRef={wrapperRef}
+            visible={tooltipVisible}
+            onVisibilityChange={handleTooltipVisibilityChange}
+            renderContent={() => userName}
+          />
         )}
       </Wrapper>
     );

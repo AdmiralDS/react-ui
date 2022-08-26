@@ -1,45 +1,18 @@
 import * as React from 'react';
-import { HTMLAttributes } from 'react';
 import { changeInputData } from '#src/components/common/dom/changeInputData';
 import { keyboardKey } from '#src/components/common/keyboardKey';
 import { refSetter } from '#src/components/common/utils/refSetter';
-import { typography } from '#src/components/Typography';
 import { ReactComponent as SearchOutlineSVG } from '@admiral-ds/icons/build/system/SearchOutline.svg';
 import styled from 'styled-components';
 import { TextInput, TextInputProps } from '../TextInput';
 import { Dropdown as DropComponent } from '#src/components/Dropdown';
 import { MessagePanel } from './MessagePanel';
 import { SuggestPanel } from './SuggestPanel';
-import { Spinner } from '#src/components/Spinner';
 import { InputIconButton } from '#src/components/InputIconButton';
 import type { InputStatus } from '#src/components/input/types';
 
 const Dropdown = styled(DropComponent)`
   padding: 8px 0;
-`;
-
-const SearchingPanelContainer = styled.div`
-  display: flex;
-  align-items: center;
-  height: 40px;
-  ${typography['Body/Body 1 Long']};
-
-  [data-dimension='xl'] & {
-    height: 48px;
-    line-height: 48px;
-  }
-
-  [data-dimension='s'] & {
-    height: 32px;
-    ${typography['Body/Body 2 Long']}
-    line-height: 32px;
-  }
-
-  color: ${(p) => p.theme.color['Neutral/Neutral 50']};
-`;
-
-const SearchTextContainer = styled.div`
-  margin-left: 8px;
 `;
 
 const StyledDropDown = styled(Dropdown)<{ dropMaxHeight: string | number }>`
@@ -50,27 +23,12 @@ const StyledDropDown = styled(Dropdown)<{ dropMaxHeight: string | number }>`
   min-width: 100%;
 `;
 
-export const SearchingPanel: React.FC<HTMLAttributes<HTMLDivElement>> = ({ children, ...props }) => {
-  return (
-    <SearchingPanelContainer {...props}>
-      <Spinner dimension="m" />
-      <SearchTextContainer>{children}</SearchTextContainer>
-    </SearchingPanelContainer>
-  );
-};
-
 export interface SuggestItem {
   searchText: string;
 }
 
 export interface SuggestInputProps extends Omit<TextInputProps, 'value'> {
   value?: string;
-
-  /** Отображать статус загрузки данных */
-  isLoading?: boolean;
-
-  /** Текст сообщения при загрузке вариантов для подстановки */
-  isLoadingMessage?: string;
 
   /** Текст сообщения при отсутствии вариантов для подстановки */
   isEmptyMessage?: string;
@@ -114,7 +72,6 @@ export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps
       onSearchButtonClick = () => undefined,
       icons,
       icon = SearchOutlineSVG,
-      isLoadingMessage = 'Поиск совпадений',
       isEmptyMessage = 'Нет совпадений',
       skeleton = false,
       status,
@@ -188,7 +145,6 @@ export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps
       }
     };
 
-    const loadingMessage = isLoading ? <SearchingPanel>{isLoadingMessage}</SearchingPanel> : isEmptyMessage;
     const [blurTrigger, triggerDelayedBlur] = React.useState<undefined | unknown>();
 
     React.useEffect(() => {
@@ -213,9 +169,12 @@ export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps
     }, [props.onInput]);
 
     const iconArray = React.Children.toArray(icons);
+
     if (!props.readOnly) {
       iconArray.push(<InputIconButton icon={icon} onClick={onSearchButtonClick} aria-hidden />);
     }
+
+    const emptyAtLoading: boolean = (options || []).length === 0 && !!isLoading;
 
     return (
       <TextInput
@@ -224,6 +183,7 @@ export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps
         icons={iconArray}
         status={status}
         skeleton={skeleton}
+        isLoading={isLoading}
         onKeyUp={(...p) => {
           props.onKeyUp?.(...p);
           handleKeyUp(...p);
@@ -241,15 +201,15 @@ export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps
           triggerDelayedBlur({});
         }}
       >
-        {options && isSuggestPanelOpen && !skeleton && (
+        {options && isSuggestPanelOpen && !skeleton && !emptyAtLoading && (
           <StyledDropDown
             targetRef={portalTargetRef || inputRef}
             alignSelf={alignDropdown}
             dropMaxHeight={dropMaxHeight}
             data-dimension={props.dimension || TextInput.defaultProps?.dimension}
           >
-            {options.length === 0 ? (
-              <MessagePanel>{loadingMessage}</MessagePanel>
+            {options.length === 0 && !isLoading ? (
+              <MessagePanel>{isEmptyMessage}</MessagePanel>
             ) : (
               options.map((text, index) => (
                 <SuggestPanel

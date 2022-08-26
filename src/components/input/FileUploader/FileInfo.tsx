@@ -220,6 +220,9 @@ export const FileInfo = ({
   const imageFile = showPreview && type.startsWith('image');
   const fileInfo = `${fileFormat}・${fileSize} Mb`;
 
+  const titleRef = React.useRef<HTMLDivElement | null>(null);
+  const [titleTipVisible, setTitleTipVisible] = React.useState(false);
+
   const getImageUrl = (file: FileProps) => {
     const reader = new FileReader();
     reader.onloadend = function () {
@@ -240,6 +243,8 @@ export const FileInfo = ({
     }
   }, [file]);
 
+  const handleTooltipVisibilityChange = (visible: boolean) => setTitleTipVisible(visible);
+
   return (
     <Container dimension={dimension}>
       <PreviewWrapper {...props} dimension={dimension} fileDimension={fileDimension} status={status}>
@@ -258,9 +263,13 @@ export const FileInfo = ({
                 </IconWrapper>
               ))}
             <Content fileDimension={fileDimension}>
-              <Tooltip renderContent={() => `${fileName}`}>
-                <Title>{fileName}</Title>
-              </Tooltip>
+              <Title ref={titleRef}>{fileName}</Title>
+              <Tooltip
+                targetRef={titleRef}
+                visible={titleTipVisible}
+                onVisibilityChange={handleTooltipVisibilityChange}
+                renderContent={() => `${fileName}`}
+              />
               <Size fileDimension={fileDimension} status={status}>
                 {fileInfo}
               </Size>

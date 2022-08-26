@@ -6,6 +6,7 @@ import { ReactComponent as ChevronRight } from '@admiral-ds/icons/build/system/C
 
 import { PaginationButton } from '#src/components/PaginationOne/PaginationButton';
 import { MenuButton } from '#src/components/PaginationOne/Menu';
+import { passDropdownDataAttributes } from '#src/components/common/utils/splitDataAttributes';
 
 const ComplexWrapper = styled.div`
   display: flex;
@@ -112,6 +113,7 @@ export const PaginationOne: React.FC<PaginationOneProps> = ({
   menuWidth,
   dropMaxHeight = '300px',
   dropContainerCssMixin,
+  className = '',
   ...props
 }) => {
   const totalPages = Math.max(Math.ceil(totalItems / pageSize), 1);
@@ -137,6 +139,8 @@ export const PaginationOne: React.FC<PaginationOneProps> = ({
   const pageIncrement = () => onChange({ page: page + 1, pageSize });
   const pageDecrement = () => onChange({ page: page - 1, pageSize });
 
+  const dropMenuProps = passDropdownDataAttributes(props);
+
   const renderComplex = () => {
     return (
       <ComplexWrapper data-simple={simple} {...props}>
@@ -151,6 +155,8 @@ export const PaginationOne: React.FC<PaginationOneProps> = ({
             dropMaxHeight={dropMaxHeight}
             dropContainerCssMixin={dropContainerCssMixin}
             menuWidth={menuWidth}
+            dropMenuDataAttributes={dropMenuProps}
+            className={className + ' records-per-page-with-dropdown'}
           >
             {pageSize}
           </MenuButton>
@@ -174,6 +180,8 @@ export const PaginationOne: React.FC<PaginationOneProps> = ({
             dropMaxHeight={dropMaxHeight}
             dropContainerCssMixin={dropContainerCssMixin}
             menuWidth={menuWidth}
+            dropMenuDataAttributes={dropMenuProps}
+            className={className + ' current-page-number-with-dropdown'}
           >
             {page}
           </MenuButton>

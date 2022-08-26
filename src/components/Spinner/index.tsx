@@ -13,7 +13,7 @@ export interface SpinnerProps extends HTMLAttributes<HTMLDivElement> {
   dimension?: Dimension;
   /** Белый цвет компонента */
   inverse?: boolean;
-  /** Внутренние отступы svg иконки */
+  /** Миксин svg иконки */
   svgMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
 }
 

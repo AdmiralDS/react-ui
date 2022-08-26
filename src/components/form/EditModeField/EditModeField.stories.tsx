@@ -5,12 +5,14 @@ import { withDesign } from 'storybook-addon-designs';
 import { INPUT_DIMENSIONS_VALUES } from '#src/components/input/types';
 import { Theme } from '#src/components/themes';
 import { ThemeProvider } from 'styled-components';
+import { DataAttributesDescription } from '#src/components/form/common';
 
 export default {
   title: 'Admiral-2.1/Form Field/EditModeField',
   component: EditModeField,
   decorators: [withDesign],
   parameters: {
+    componentSubtitle: <DataAttributesDescription />,
     design: [
       {
         type: 'figma',
@@ -24,7 +26,7 @@ export default {
   },
   argTypes: {
     dimension: {
-      options: INPUT_DIMENSIONS_VALUES,
+      options: ['xxl', 'xl', 'm', 's'],
       control: { type: 'radio' },
     },
     bold: {
@@ -91,7 +93,13 @@ const Template1: ComponentStory<typeof EditModeField> = (props) => {
 
   return (
     <ThemeProvider theme={swapBorder}>
-      <EditModeField {...props} value={localValue} onChange={handleChange} label="Label" />
+      <EditModeField
+        data-container-id="editModeFieldIdOne"
+        {...props}
+        value={localValue}
+        onChange={handleChange}
+        label="Label"
+      />
     </ThemeProvider>
   );
 };

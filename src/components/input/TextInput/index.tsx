@@ -16,6 +16,7 @@ import * as React from 'react';
 import styled, { css } from 'styled-components';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { InputIconButton } from '#src/components/InputIconButton';
+import { Spinner } from '#src/components/Spinner';
 
 const iconSizeValue = (props: { dimension?: ComponentDimension }) => {
   switch (props.dimension) {
@@ -199,6 +200,15 @@ const IconPanel = styled.div<{ disabled?: boolean; dimension?: ComponentDimensio
   }
 `;
 
+const StyledSpinner = styled(Spinner)`
+  width: ${(p) => (p.dimension === 's' ? '20px' : '24px')};
+  height: ${(p) => (p.dimension === 's' ? '20px' : '24px')};
+`;
+
+export const SpinnerMixin = css`
+  padding: 3px;
+`;
+
 function defaultHandleInput(newInputData: InputData | null): InputData {
   return newInputData || {};
 }
@@ -217,6 +227,9 @@ export interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
 
   /** Статус поля */
   status?: InputStatus;
+
+  /** Отображать статус загрузки данных */
+  isLoading?: boolean;
 
   /** Ref контейнера компонента */
   containerRef?: ForwardedRef<HTMLDivElement>;
@@ -239,6 +252,7 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
     {
       type,
       displayClearIcon,
+      isLoading,
       status,
       handleInput = defaultHandleInput,
       containerRef,
@@ -284,6 +298,10 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
           aria-hidden
         />,
       );
+    }
+
+    if (isLoading) {
+      iconArray.unshift(<StyledSpinner svgMixin={SpinnerMixin} dimension={props.dimension === 's' ? 's' : 'm'} />);
     }
 
     const iconCount = iconArray.length;

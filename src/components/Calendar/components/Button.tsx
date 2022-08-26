@@ -8,12 +8,14 @@ type ButtonProps = {
   onMouseDown: (event: React.MouseEvent<HTMLDivElement>) => void;
   disabled: boolean;
   type: 'left' | 'right';
+  innerRef?: React.RefObject<HTMLDivElement>;
 };
 
 const ICON_SIZE = 24;
 
-const ButtonComponent: React.FC<ButtonProps> = ({ onMouseDown, disabled, type }) => (
+const ButtonComponent: React.FC<ButtonProps> = ({ onMouseDown, disabled, type, innerRef }) => (
   <PanelButton
+    ref={innerRef}
     onMouseDown={(event) => {
       event?.preventDefault();
       onMouseDown(event);
