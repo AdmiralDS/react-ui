@@ -17,6 +17,7 @@ import styled, { css } from 'styled-components';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { InputIconButton } from '#src/components/InputIconButton';
 import { Spinner } from '#src/components/Spinner';
+import { Tooltip } from '#src/components/Tooltip';
 
 const iconSizeValue = (props: { dimension?: ComponentDimension }) => {
   switch (props.dimension) {
@@ -270,6 +271,24 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
 
     const iconArray = React.Children.toArray(icons);
 
+    const [overflowActive, setOverflowActive] = React.useState<boolean>(false);
+    const [tooltipVisible, setTooltipVisible] = React.useState<boolean>(false);
+    const checkOverflow = (textContainer: HTMLInputElement | null): boolean => {
+      if (textContainer)
+        return (
+          textContainer.offsetHeight < textContainer.scrollHeight ||
+          textContainer.offsetWidth < textContainer.scrollWidth
+        );
+      return false;
+    };
+    React.useLayoutEffect(() => {
+      if (checkOverflow(inputRef.current)) {
+        setOverflowActive(true);
+        return;
+      }
+      setOverflowActive(false);
+    }, [props.value]);
+
     const [isPasswordVisible, setPasswordVisible] = React.useState(false);
     if (!props.readOnly && type === 'password') {
       const Icon = isPasswordVisible ? EyeOutlineSvg : EyeCloseOutlineSvg;
@@ -301,7 +320,9 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
     }
 
     if (isLoading) {
-      iconArray.unshift(<StyledSpinner svgMixin={SpinnerMixin} dimension={props.dimension === 's' ? 's' : 'm'} />);
+      iconArray.unshift(
+        <StyledSpinner key="loading-icon" svgMixin={SpinnerMixin} dimension={props.dimension === 's' ? 's' : 'm'} />,
+      );
     }
 
     const iconCount = iconArray.length;
@@ -364,6 +385,14 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
           iconCount={iconCount}
           type={type === 'password' && isPasswordVisible ? 'text' : type}
         />
+        {overflowActive && (
+          <Tooltip
+            visible={tooltipVisible}
+            onVisibilityChange={setTooltipVisible}
+            renderContent={() => inputRef?.current?.value}
+            targetRef={inputRef}
+          />
+        )}
         <BorderedDiv />
         {iconCount > 0 && (
           <IconPanel disabled={props.disabled} dimension={props.dimension}>
