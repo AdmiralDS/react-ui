@@ -1,5 +1,5 @@
 import React, { HTMLAttributes } from 'react';
-import styled, { css, keyframes } from 'styled-components';
+import styled, { css, DefaultTheme, FlattenInterpolation, keyframes, ThemeProps } from 'styled-components';
 
 import { ReactComponent as SpinnerXL } from './svgs/Subtract_xl.svg';
 import { ReactComponent as SpinnerL } from './svgs/Subtract_l.svg';
@@ -13,6 +13,8 @@ export interface SpinnerProps extends HTMLAttributes<HTMLDivElement> {
   dimension?: Dimension;
   /** Белый цвет компонента */
   inverse?: boolean;
+  /** Внутренние отступы svg иконки */
+  svgMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
 }
 
 const getIcon = (dimension: Dimension) => {
@@ -70,12 +72,14 @@ const spin = keyframes`
 const SpinnerWrapper = styled.div<{
   inverse: boolean;
   dimension: Dimension;
+  svgMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
 }>`
   position: relative;
 
   ${sizes};
 
   & svg {
+    ${(p) => p.svgMixin || ''}
     animation: ${spin} 1s linear infinite;
     path {
       fill: ${({ inverse, theme }) =>

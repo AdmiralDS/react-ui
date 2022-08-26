@@ -26,6 +26,12 @@ export const rowStyle = css<{ dimension: TableProps['dimension'] }>`
     dimension === 'l' || dimension === 'xl' ? typography['Body/Body 1 Short'] : typography['Body/Body 2 Short']}
 `;
 
+export const groupRowStyle = css<{ dimension: TableProps['dimension'] }>`
+  color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
+  ${({ dimension }) =>
+    dimension === 'l' || dimension === 'xl' ? typography['Subtitle/Subtitle 2'] : typography['Subtitle/Subtitle 3']}
+`;
+
 export const headerStyle = css<{ dimension: TableProps['dimension'] }>`
   color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
   ${({ dimension }) =>

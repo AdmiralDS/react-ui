@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useMemo } from 'react';
 import { Checkbox } from '#src/components/Checkbox';
 import observeRect from '#src/components/common/observeRect';
 
@@ -8,11 +9,8 @@ import {
   Cell,
   CellTextContent,
   CheckboxCell,
+  EmptyMessage,
   ExpandCell,
-  ExpandedRow,
-  ExpandedRowContent,
-  ExpandIcon,
-  ExpandIconWrapper,
   Filler,
   Header,
   HeaderCell,
@@ -22,19 +20,18 @@ import {
   HeaderWrapperContainer,
   Row,
   ScrollTableBody,
-  SimpleRow,
   SortIcon,
+  SortIconWrapper,
+  SortOrder,
   StickyWrapper,
   TableContainer,
   TitleContent,
-  EmptyMessage,
-  SortOrder,
-  SortIconWrapper,
 } from './style';
 import { TitleText } from './TitleText';
 import { VirtualBody } from './VirtualBody';
-import { OverflowMenu } from './OverflowMenu';
 import { getScrollbarSize } from '#src/components/common/dom/scrollbarUtil';
+import { GroupRow } from '#src/components/Table/GroupRow';
+import { RegularRow } from '#src/components/Table/RerularRow';
 
 export * from './RowAction';
 
@@ -100,7 +97,7 @@ export type Column = {
 
 type ColumnWithResizerWidth = Column & { resizerWidth: number };
 
-type RowId = string | number;
+export type RowId = string | number;
 type IdSelectionStatusMap = Record<RowId, boolean>;
 
 export interface TableRow extends Record<RowId, React.ReactNode> {
@@ -118,6 +115,10 @@ export interface TableRow extends Record<RowId, React.ReactNode> {
   success?: boolean;
   /** Строка в раскрытом состоянии */
   expanded?: boolean;
+  /** Название группы */
+  groupTitle?: string;
+  /** Строки таблицы, находящиеся в группе */
+  groupRows?: Array<string>;
   /** Функция рендера содержимого раскрытой части строки (детализации строки) */
   expandedRowRender?: (row: any) => React.ReactNode;
   /** Функция рендера OverflowMenu для строки.
@@ -139,6 +140,7 @@ export interface TableRow extends Record<RowId, React.ReactNode> {
    * внутрь которого нужно передать произвольную иконку для отображения действия.
    */
   actionRender?: (row: any) => React.ReactNode;
+  hidden?: string;
 }
 
 export interface TableProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -225,6 +227,19 @@ export interface TableProps extends React.HTMLAttributes<HTMLDivElement> {
   emptyMessage?: React.ReactNode;
 }
 
+type GroupInfo = {
+  rows: Array<string>;
+  expanded: boolean;
+};
+
+type RowInfo = {
+  groupId: string;
+  checked: boolean;
+};
+
+type Group = Record<string, GroupInfo>;
+type GroupRows = Record<string, RowInfo>;
+
 export const Table: React.FC<TableProps> = ({
   columnList,
   rowList,
@@ -268,6 +283,48 @@ export const Table: React.FC<TableProps> = ({
   const tableRef = React.useRef<HTMLDivElement>(null);
   const headerRef = React.useRef<HTMLDivElement>(null);
   const scrollBodyRef = React.useRef<HTMLDivElement>(null);
+
+  const groupToRowsMap = rowList.reduce<Group>((acc: Group, row) => {
+    if (row.groupRows?.length) {
+      acc[row.id] = {
+        rows: [...row.groupRows],
+        expanded: !!row.expanded,
+      };
+    }
+    return acc;
+  }, {});
+
+  const rowToGroupMap = Object.entries(groupToRowsMap).reduce<GroupRows>((acc, [groupId, info]) => {
+    info.rows.forEach((id) => {
+      const row = rowList.find((item) => item.id.toString() === id);
+      if (row && !groupToRowsMap[id]) {
+        acc[id] = { groupId, checked: !!row.selected };
+      }
+    });
+    return acc;
+  }, {});
+
+  const reorderRowsToGroup = () => {
+    const tableRows: Array<TableRow> = [];
+    rowList.forEach((row) => {
+      const isGroupRow = !!groupToRowsMap[row.id];
+      const rowInGroup = !!rowToGroupMap[row.id];
+      if (!rowInGroup) {
+        tableRows.push(row);
+      }
+
+      if (isGroupRow) {
+        groupToRowsMap[row.id].rows.forEach((rowId) => {
+          const row = rowList.find((item) => item.id.toString() === rowId);
+          if (row) tableRows.push(row);
+        });
+      }
+    });
+
+    return tableRows;
+  };
+
+  const tableRows = useMemo(() => reorderRowsToGroup(), [rowList]);
 
   const scrollHeader = (scrollLeft: number) => {
     if (headerRef.current) headerRef.current.scrollLeft = scrollLeft;
@@ -366,16 +423,27 @@ export const Table: React.FC<TableProps> = ({
 
   function handleCheckboxChange(id: RowId) {
     const idsMap = rowList.reduce((ids: IdSelectionStatusMap, row) => {
-      const value = row.id === id ? !row.selected : !!row.selected;
-      ids[row.id] = value;
+      const groupInfo = groupToRowsMap[id];
+
+      if (groupInfo) {
+        const rowInGroup = groupInfo.rows.includes(row.id.toString());
+        const indeterminate =
+          groupInfo.rows.some((rowId) => rowToGroupMap[rowId].checked) &&
+          groupInfo.rows.some((rowId) => !rowToGroupMap[rowId].checked);
+        const checked = groupInfo.rows.every((rowId) => rowToGroupMap[rowId].checked);
+        const newValue = !(indeterminate || checked);
+
+        if (row.id === id || rowInGroup) {
+          ids[row.id] = newValue;
+        } else {
+          ids[row.id] = row.id === id ? !row.selected : !!row.selected;
+        }
+      } else {
+        ids[row.id] = row.id === id ? !row.selected : !!row.selected;
+      }
       return ids;
     }, {});
     onRowSelectionChange?.(idsMap, id);
-  }
-
-  function handleCheckboxClick(e: React.MouseEvent<HTMLElement>) {
-    // клик по чекбоксу не должен вызывать событие клика по строке
-    e.stopPropagation();
   }
 
   function handleExpansionChange(id: RowId) {
@@ -533,71 +601,137 @@ export const Table: React.FC<TableProps> = ({
     );
   };
 
-  const renderRow = (row: TableRow, index: number) => {
+  const renderGroupRow = (row: TableRow, index: number) => {
+    const indeterminate =
+      row.groupRows?.some((rowId) => rowToGroupMap[rowId].checked) &&
+      row.groupRows?.some((rowId) => !rowToGroupMap[rowId].checked);
+    const checked = row.groupRows?.every((rowId) => rowToGroupMap[rowId].checked);
+    const isLastRow = !row.expanded && row.groupRows && index >= tableRows.length - (row.groupRows.length + 1);
+
     return (
-      <Row
-        onClick={() => handleRowClick(row.id)}
-        onDoubleClick={() => handleRowDoubleClick(row.id)}
-        key={`row_${row.id}`}
-        underline={(index === rowList.length - 1 && showLastRowUnderline) || index < rowList.length - 1}
-        disabled={!!row.disabled}
+      <GroupRow
         dimension={dimension}
-        className={`tr ${row.className}`}
-      >
-        <SimpleRow
-          className="tr-simple"
-          selected={!!row.selected}
-          disabled={!!row.disabled}
-          error={!!row.error}
-          success={!!row.success}
-        >
-          {(displayRowSelectionColumn || displayRowExpansionColumn || stickyColumns.length > 0) && (
-            <StickyWrapper>
-              {displayRowExpansionColumn && (
-                <ExpandCell dimension={dimension}>
-                  {row.expandedRowRender && (
-                    <ExpandIconWrapper>
-                      <ExpandIcon
-                        $isOpen={row.expanded}
-                        data-disabled={row.disabled ? true : undefined}
-                        onClick={() => handleExpansionChange(row.id)}
-                        aria-hidden
-                      />
-                    </ExpandIconWrapper>
-                  )}
-                </ExpandCell>
-              )}
-              {displayRowSelectionColumn && (
-                <CheckboxCell dimension={dimension} className="td_checkbox">
-                  <Checkbox
-                    disabled={row.disabled || row.checkboxDisabled}
-                    dimension={checkboxDimension}
-                    checked={!!row.selected}
-                    onChange={() => handleCheckboxChange(row.id)}
-                    onClick={handleCheckboxClick}
-                  />
-                </CheckboxCell>
-              )}
-              {stickyColumns.length > 0 && stickyColumns.map((col) => renderBodyCell(row, col))}
-            </StickyWrapper>
-          )}
-          {cols.map((col) => (col.sticky ? null : renderBodyCell(row, col)))}
-          <Filler />
-        </SimpleRow>
-        {(row.overflowMenuRender || row.actionRender) && (
-          <OverflowMenu dimension={dimension} tableWidth={tableWidth} row={row} />
-        )}
-        {row.expandedRowRender && (
-          <ExpandedRow opened={row.expanded} contentMaxHeight="90vh" className="tr-expanded">
-            <ExpandedRowContent>{row.expandedRowRender(row)}</ExpandedRowContent>
-          </ExpandedRow>
-        )}
-      </Row>
+        checkboxDimension={checkboxDimension}
+        displayRowExpansionColumn={displayRowExpansionColumn}
+        displayRowSelectionColumn={displayRowSelectionColumn}
+        renderBodyCell={renderBodyCell}
+        tableWidth={tableWidth}
+        row={row}
+        underline={(isLastRow && showLastRowUnderline) || !isLastRow}
+        onRowClick={handleRowClick}
+        onRowDoubleClick={handleRowDoubleClick}
+        onRowExpansionChange={handleExpansionChange}
+        onRowSelectionChange={handleCheckboxChange}
+        renderCell={renderCell}
+        indeterminate={indeterminate}
+        checked={checked}
+      />
     );
   };
 
+  const renderRow = (row: TableRow, index: number) => {
+    const isGroupRow = !!groupToRowsMap[row.id];
+    const rowInGroup = !!rowToGroupMap[row.id];
+    const visible = rowInGroup ? groupToRowsMap[rowToGroupMap[row.id].groupId].expanded : true;
+
+    return isGroupRow
+      ? renderGroupRow(row, index)
+      : visible && (
+          <RegularRow
+            dimension={dimension}
+            checkboxDimension={checkboxDimension}
+            columns={cols}
+            stickyColumns={stickyColumns}
+            displayRowExpansionColumn={displayRowExpansionColumn}
+            displayRowSelectionColumn={displayRowSelectionColumn}
+            renderBodyCell={renderBodyCell}
+            tableWidth={tableWidth}
+            row={row}
+            underline={(index === rowList.length - 1 && showLastRowUnderline) || index < rowList.length - 1}
+            onRowClick={handleRowClick}
+            onRowDoubleClick={handleRowDoubleClick}
+            onRowExpansionChange={handleExpansionChange}
+            onRowSelectionChange={handleCheckboxChange}
+          />
+        );
+
+    // return (
+    //   <Row
+    //     onClick={() => handleRowClick(row.id)}
+    //     onDoubleClick={() => handleRowDoubleClick(row.id)}
+    //     key={`row_${row.id}`}
+    //     underline={(index === rowList.length - 1 && showLastRowUnderline) || index < rowList.length - 1}
+    //     disabled={!!row.disabled}
+    //     dimension={dimension}
+    //     className={`tr ${row.className}`}
+    //   >
+    //     <SimpleRow
+    //       className="tr-simple"
+    //       selected={!!row.selected}
+    //       disabled={!!row.disabled}
+    //       error={!!row.error}
+    //       success={!!row.success}
+    //     >
+    //       {row.group?.length || 0 > 0 ? (
+    //         <GroupRow
+    //           row={row}
+    //           dimension={dimension}
+    //           renderCell={renderCell}
+    //           checkboxDimension={checkboxDimension}
+    //           displayRowSelectionColumn={displayRowSelectionColumn}
+    //           onRowExpansionChange={handleExpansionChange}
+    //         />
+    //       ) : (
+    //         <>
+    //           {(displayRowSelectionColumn || displayRowExpansionColumn || stickyColumns.length > 0) && (
+    //             <StickyWrapper>
+    //               {displayRowExpansionColumn && (
+    //                 <ExpandCell dimension={dimension}>
+    //                   {row.expandedRowRender && (
+    //                     <ExpandIconWrapper>
+    //                       <ExpandIcon
+    //                         $isOpen={row.expanded}
+    //                         data-disabled={row.disabled ? true : undefined}
+    //                         onClick={() => handleExpansionChange(row.id)}
+    //                         aria-hidden
+    //                       />
+    //                     </ExpandIconWrapper>
+    //                   )}
+    //                 </ExpandCell>
+    //               )}
+    //               {displayRowSelectionColumn && (
+    //                 <CheckboxCell dimension={dimension} className="td_checkbox">
+    //                   <Checkbox
+    //                     disabled={row.disabled || row.checkboxDisabled}
+    //                     dimension={checkboxDimension}
+    //                     checked={!!row.selected}
+    //                     onChange={() => handleCheckboxChange(row.id)}
+    //                     onClick={handleCheckboxClick}
+    //                   />
+    //                 </CheckboxCell>
+    //               )}
+    //               {stickyColumns.length > 0 && stickyColumns.map((col) => renderBodyCell(row, col))}
+    //             </StickyWrapper>
+    //           )}
+    //           {cols.map((col) => (col.sticky ? null : renderBodyCell(row, col)))}
+    //           <Filler />
+    //         </>
+    //       )}
+    //     </SimpleRow>
+    //     {(row.overflowMenuRender || row.actionRender) && (
+    //       <OverflowMenu dimension={dimension} tableWidth={tableWidth} row={row} />
+    //     )}
+    //     {row.expandedRowRender && (
+    //       <ExpandedRow opened={row.expanded} contentMaxHeight="90vh" className="tr-expanded">
+    //         <ExpandedRowContent>{row.expandedRowRender(row)}</ExpandedRowContent>
+    //       </ExpandedRow>
+    //     )}
+    //   </Row>
+    // );
+  };
+
   const renderBody = () => {
-    if (rowList.length === 0) {
+    if (tableRows.length === 0) {
       return (
         <ScrollTableBody ref={scrollBodyRef} className="tbody">
           <Row underline={showLastRowUnderline} dimension={dimension} className="tr">
@@ -609,7 +743,7 @@ export const Table: React.FC<TableProps> = ({
     return virtualScroll ? (
       <VirtualBody
         height={bodyHeight}
-        rowList={rowList}
+        rowList={tableRows}
         childHeight={virtualScroll.fixedRowHeight}
         renderRow={renderRow}
         ref={scrollBodyRef}
@@ -617,7 +751,7 @@ export const Table: React.FC<TableProps> = ({
       />
     ) : (
       <ScrollTableBody ref={scrollBodyRef} className="tbody">
-        {rowList.map((row, index) => renderRow(row, index))}
+        {tableRows.map((row, index) => renderRow(row, index))}
       </ScrollTableBody>
     );
   };
