@@ -24,6 +24,7 @@ const focusStyle = css<{ dimension: Dimension }>`
       transform: translate(-50%, -50%);
       border-radius: 50%;
       width: calc(100% + ${({ dimension }) => (dimension === 's' ? 8 : 12)}px);
+      height: calc(100% + ${({ dimension }) => (dimension === 's' ? 8 : 12)}px);
       background-color: ${({ theme }) => theme.color['Opacity/Hover']};
     }
   }
