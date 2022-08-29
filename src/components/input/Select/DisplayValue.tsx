@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Tooltip } from '#src/components/Tooltip';
 import { StringValueWrapper } from './styled';
 
-export const Value: React.FC<any> = ({ visibleValue, isSearchPanelOpen }) => {
+export const DisplayValue: React.FC<any> = ({ visibleValue, isSearchPanelOpen }) => {
   const valueRef = React.useRef(null);
   const [overflowActive, setOverflowActive] = React.useState<boolean>(false);
   const [tooltipVisible, setTooltipVisible] = React.useState<boolean>(false);
