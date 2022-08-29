@@ -1,6 +1,10 @@
 import React from 'react';
 
-/** Подробное описание текстовых констант можно найти в locale*/
+/** Объект локали включает в себя все константы, используемые в компонентах и зависящие от изменения локали.
+ * Также каждый компонент, использующий локализацию, имеет параметр locale.
+ * Данный параметр включает в себя те же константы, что и в теме, и необходим в тех случаях,
+ * если пользователь хочет перезадать значения констант точечно для отдельного компонента.
+ * Подробное описание текстовых констант можно найти в параметре locale для каждого компонента. */
 export interface Locale {
   /** Число от 0 до 6, где 0 - это воскресенье */
   firstDayOfWeek: number;
@@ -54,161 +58,114 @@ export interface Locale {
   };
 }
 
+const ruLocale: Locale = {
+  firstDayOfWeek: 1,
+  badge: {
+    amountAriaLabel: 'Количество',
+  },
+  calendar: {
+    backwardText: 'Назад',
+    forwardText: 'Вперед',
+    nextMonthText: 'Следующий месяц',
+    previousMonthText: 'Предыдущий месяц',
+    returnText: 'Вернуться',
+    selectYearText: 'Выбор года',
+    selectMonthText: 'Выбор месяца',
+  },
+  groupActionsPane: {
+    inputPlaceholder: 'Искать в таблице',
+  },
+  hint: {
+    closeButtonAriaLabel: 'Закрыть подсказку',
+  },
+  modal: {
+    closeButtonAriaLabel: 'Закрыть модальное окно',
+  },
+  paginationOne: {
+    itemsPerPageText: 'Записей на странице:',
+    pageSelectLabel: (page: number, totalPages: number) => `Страница ${page} из ${totalPages}`,
+    pageSizeSelectLabel: (pageSize: number, total: number) => `Записей ${pageSize} из ${total}`,
+    itemRangeText: (min: number, max: number, total: number) => `${min}–${max} записей из ${total}`,
+    pageRangeText: (total: number) => `из ${total} ${total === 1 ? 'страницы' : 'страниц'}`,
+    backwardText: 'Предыдущая страница, выбрать',
+    forwardText: 'Следующая страница, выбрать',
+  },
+  paginationTwo: {
+    inputPlaceholder: '№ страницы',
+    itemRangeText: (min: number, max: number, total: number) => `${min}–${max} записей из ${total}`,
+  },
+  progressStepper: {
+    renderNextStepName: (stepName: string) => `Далее - ${stepName}`,
+    stepName: ['шаг', 'шагов'],
+    progressText: (activeStepNumber: number, stepsAmount: number, stepNamePlural: string) =>
+      `${activeStepNumber} из ${stepsAmount} ${stepNamePlural}`,
+  },
+  select: {
+    emptyMessage: 'Нет совпадений',
+  },
+  suggestInput: {
+    emptyMessage: 'Нет совпадений',
+  },
+  table: {
+    emptyMessage: 'Нет совпадений',
+  },
+};
+
+const enLocale: Locale = {
+  firstDayOfWeek: 1,
+  badge: {
+    amountAriaLabel: 'Amount',
+  },
+  calendar: {
+    backwardText: 'Back',
+    forwardText: 'Forward',
+    nextMonthText: 'Next month',
+    previousMonthText: 'Previous month',
+    returnText: 'Return',
+    selectYearText: 'Select year',
+    selectMonthText: 'Select month',
+  },
+  groupActionsPane: {
+    inputPlaceholder: 'Search in table',
+  },
+  hint: {
+    closeButtonAriaLabel: 'Close the hint',
+  },
+  modal: {
+    closeButtonAriaLabel: 'Close the modal window',
+  },
+  paginationOne: {
+    itemsPerPageText: 'Entries on the page:',
+    pageSelectLabel: (page: number, totalPages: number) => `Page ${page} of ${totalPages}`,
+    pageSizeSelectLabel: (pageSize: number, total: number) => `Entries ${pageSize} out of ${total}`,
+    itemRangeText: (min: number, max: number, total: number) => `${min}–${max}  entries out of ${total}`,
+    pageRangeText: (total: number) => `from ${total} ${total === 1 ? 'page' : 'pages'}`,
+    backwardText: 'Previous page, select',
+    forwardText: 'Next page, select',
+  },
+  paginationTwo: {
+    inputPlaceholder: 'Page number',
+    itemRangeText: (min: number, max: number, total: number) => `${min}–${max} entries out of ${total}`,
+  },
+  progressStepper: {
+    renderNextStepName: (stepName: string) => `Next - ${stepName}`,
+    stepName: ['step', 'steps'],
+    progressText: (activeStepNumber: number, stepsAmount: number, stepNamePlural: string) =>
+      `${activeStepNumber} from ${stepsAmount} ${stepNamePlural}`,
+  },
+  select: {
+    emptyMessage: 'No matches',
+  },
+  suggestInput: {
+    emptyMessage: 'No matches',
+  },
+  table: {
+    emptyMessage: 'No matches',
+  },
+};
+
 export const locales: { [localeCode: string]: Locale } = {
-  ru: {
-    firstDayOfWeek: 1,
-    badge: {
-      amountAriaLabel: 'Количество',
-    },
-    calendar: {
-      backwardText: 'Назад',
-      forwardText: 'Вперед',
-      nextMonthText: 'Следующий месяц',
-      previousMonthText: 'Предыдущий месяц',
-      returnText: 'Вернуться',
-      selectYearText: 'Выбор года',
-      selectMonthText: 'Выбор месяца',
-    },
-    groupActionsPane: {
-      inputPlaceholder: 'Искать в таблице',
-    },
-    hint: {
-      closeButtonAriaLabel: 'Закрыть подсказку',
-    },
-    modal: {
-      closeButtonAriaLabel: 'Закрыть модальное окно',
-    },
-    paginationOne: {
-      itemsPerPageText: 'Записей на странице:',
-      pageSelectLabel: (page: number, totalPages: number) => `Страница ${page} из ${totalPages}`,
-      pageSizeSelectLabel: (pageSize: number, total: number) => `Записей ${pageSize} из ${total}`,
-      itemRangeText: (min: number, max: number, total: number) => `${min}–${max} записей из ${total}`,
-      pageRangeText: (total: number) => `из ${total} ${total === 1 ? 'страницы' : 'страниц'}`,
-      backwardText: 'Предыдущая страница, выбрать',
-      forwardText: 'Следующая страница, выбрать',
-    },
-    paginationTwo: {
-      inputPlaceholder: '№ страницы',
-      itemRangeText: (min: number, max: number, total: number) => `${min}–${max} записей из ${total}`,
-    },
-    progressStepper: {
-      renderNextStepName: (stepName: string) => `Далее - ${stepName}`,
-      stepName: ['шаг', 'шагов'],
-      progressText: (activeStepNumber: number, stepsAmount: number, stepNamePlural: string) =>
-        `${activeStepNumber} из ${stepsAmount} ${stepNamePlural}`,
-    },
-    select: {
-      emptyMessage: 'Нет совпадений',
-    },
-    suggestInput: {
-      emptyMessage: 'Нет совпадений',
-    },
-    table: {
-      emptyMessage: 'Нет совпадений',
-    },
-  },
-  en: {
-    firstDayOfWeek: 1,
-    badge: {
-      amountAriaLabel: 'Amount',
-    },
-    calendar: {
-      backwardText: 'Back',
-      forwardText: 'Forward',
-      nextMonthText: 'Next month',
-      previousMonthText: 'Previous month',
-      returnText: 'Return',
-      selectYearText: 'Select year',
-      selectMonthText: 'Select month',
-    },
-    groupActionsPane: {
-      inputPlaceholder: 'Search in table',
-    },
-    hint: {
-      closeButtonAriaLabel: 'Close the hint',
-    },
-    modal: {
-      closeButtonAriaLabel: 'Close the modal window',
-    },
-    paginationOne: {
-      itemsPerPageText: 'Entries on the page:',
-      pageSelectLabel: (page: number, totalPages: number) => `Page ${page} of ${totalPages}`,
-      pageSizeSelectLabel: (pageSize: number, total: number) => `Entries ${pageSize} out of ${total}`,
-      itemRangeText: (min: number, max: number, total: number) => `${min}–${max}  entries out of ${total}`,
-      pageRangeText: (total: number) => `from ${total} ${total === 1 ? 'page' : 'pages'}`,
-      backwardText: 'Previous page, select',
-      forwardText: 'Next page, select',
-    },
-    paginationTwo: {
-      inputPlaceholder: 'Page number',
-      itemRangeText: (min: number, max: number, total: number) => `${min}–${max} entries out of ${total}`,
-    },
-    progressStepper: {
-      renderNextStepName: (stepName: string) => `Next - ${stepName}`,
-      stepName: ['step', 'steps'],
-      progressText: (activeStepNumber: number, stepsAmount: number, stepNamePlural: string) =>
-        `${activeStepNumber} from ${stepsAmount} ${stepNamePlural}`,
-    },
-    select: {
-      emptyMessage: 'No matches',
-    },
-    suggestInput: {
-      emptyMessage: 'No matches',
-    },
-    table: {
-      emptyMessage: 'No matches',
-    },
-  },
-  'en-US': {
-    firstDayOfWeek: 0,
-    badge: {
-      amountAriaLabel: 'Amount',
-    },
-    calendar: {
-      backwardText: 'Back',
-      forwardText: 'Forward',
-      nextMonthText: 'Next month',
-      previousMonthText: 'Previous month',
-      returnText: 'Return',
-      selectYearText: 'Select year',
-      selectMonthText: 'Select month',
-    },
-    groupActionsPane: {
-      inputPlaceholder: 'Search in table',
-    },
-    hint: {
-      closeButtonAriaLabel: 'Close the hint',
-    },
-    modal: {
-      closeButtonAriaLabel: 'Close the modal window',
-    },
-    paginationOne: {
-      itemsPerPageText: 'Entries on the page:',
-      pageSelectLabel: (page: number, totalPages: number) => `Page ${page} of ${totalPages}`,
-      pageSizeSelectLabel: (pageSize: number, total: number) => `Entries ${pageSize} out of ${total}`,
-      itemRangeText: (min: number, max: number, total: number) => `${min}–${max}  entries out of ${total}`,
-      pageRangeText: (total: number) => `from ${total} ${total === 1 ? 'page' : 'pages'}`,
-      backwardText: 'Previous page, select',
-      forwardText: 'Next page, select',
-    },
-    paginationTwo: {
-      inputPlaceholder: 'Page number',
-      itemRangeText: (min: number, max: number, total: number) => `${min}–${max} entries out of ${total}`,
-    },
-    progressStepper: {
-      renderNextStepName: (stepName: string) => `Next - ${stepName}`,
-      stepName: ['step', 'steps'],
-      progressText: (activeStepNumber: number, stepsAmount: number, stepNamePlural: string) =>
-        `${activeStepNumber} from ${stepsAmount} ${stepNamePlural}`,
-    },
-    select: {
-      emptyMessage: 'No matches',
-    },
-    suggestInput: {
-      emptyMessage: 'No matches',
-    },
-    table: {
-      emptyMessage: 'No matches',
-    },
-  },
+  ru: ruLocale,
+  en: enLocale,
+  'en-US': { ...enLocale, firstDayOfWeek: 0 },
 };

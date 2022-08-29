@@ -4,6 +4,7 @@ import { Locale } from '#src/components/themes/common/locales';
 import baseStyled, { ThemedStyledInterface } from 'styled-components';
 
 export * from './color';
+export * from './locales';
 
 export type ColorName = keyof Color;
 
