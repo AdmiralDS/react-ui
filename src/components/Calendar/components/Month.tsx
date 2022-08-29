@@ -28,8 +28,7 @@ export const Month: FC<IMonthCalendarProps> = ({
   const handleDayClick = (day: Date, event: any) => onClick && onClick(day, event);
 
   let weekIndex = 0;
-  // let weekStart = startOfWeek(startOfMonth(day), localeName);
-  let weekStart = startOfWeek(startOfMonth(day), theme.locales[theme.currentLocale].weekStartsOn ?? 1);
+  let weekStart = startOfWeek(startOfMonth(day), theme.locales[theme.currentLocale].firstDayOfWeek ?? 1);
   do {
     weekIndex++;
     weeks.push(weekStart);
@@ -48,7 +47,6 @@ export const Month: FC<IMonthCalendarProps> = ({
           selected={selected}
           activeDate={activeDate}
           range={range}
-          // localeName={localeName}
           validator={validator}
           filterDate={filterDate}
           onMouseEnter={handleMouseEnter}

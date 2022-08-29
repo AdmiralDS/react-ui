@@ -24,8 +24,7 @@ export const Week: FC<IWeekCalendarProps> = ({
   const theme = React.useContext(ThemeContext) || LIGHT_THEME;
   const handleMouseEnter = (day: Date, e: any) => onMouseEnter && onMouseEnter(day, e);
   const handleDayClick = (day: Date, e: any) => onClick && onClick(day, e);
-  // const weekStart = startOfWeek(day, localeName);
-  const weekStart = startOfWeek(day, theme.locales[theme.currentLocale].weekStartsOn ?? 1);
+  const weekStart = startOfWeek(day, theme.locales[theme.currentLocale].firstDayOfWeek ?? 1);
   return (
     <WeekComponent>
       {DAY_NUMBERS.map((offset) => {
@@ -40,7 +39,6 @@ export const Week: FC<IWeekCalendarProps> = ({
             selected={selected}
             activeDate={activeDate}
             range={range}
-            // localeName={localeName}
             validator={validator}
             filterDate={filterDate}
             onMouseEnter={(_, e) => handleMouseEnter(nextDay, e)}

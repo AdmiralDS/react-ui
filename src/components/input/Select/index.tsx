@@ -57,7 +57,7 @@ export interface SelectProps extends Omit<React.InputHTMLAttributes<HTMLSelectEl
   /** Отображать статус загрузки данных */
   isLoading?: boolean;
 
-  /** Сообщение, отображаемое при пустом наборе опций */
+  /** @deprecated Используйте locale.emptyMessage */
   emptyMessage?: React.ReactNode;
 
   /** Добавить селекту возможность множественного выбора */
@@ -115,6 +115,14 @@ export interface SelectProps extends Omit<React.InputHTMLAttributes<HTMLSelectEl
 
   /** Состояние skeleton */
   skeleton?: boolean;
+
+  /** Объект локализации - позволяет перезадать текстовые константы используемые в компоненте,
+   * по умолчанию значения констант берутся из темы в соответствии с параметром currentLocale, заданном в теме
+   **/
+  locale?: {
+    /** Сообщение, отображаемое при пустом наборе опций */
+    emptyMessage?: React.ReactNode;
+  };
 }
 
 export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
@@ -150,13 +158,14 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       children,
       alignDropdown = 'stretch',
       skeleton = false,
+      locale,
       ...props
     },
     ref,
   ) => {
     const theme = React.useContext(ThemeContext) || LIGHT_THEME;
-    const emptyMessage = userEmptyMessage || (
-      <DropDownText>{theme.locales[theme.currentLocale].select_emptyMessage}</DropDownText>
+    const emptyMessage = userEmptyMessage || locale?.emptyMessage || (
+      <DropDownText>{theme.locales[theme.currentLocale].select.emptyMessage}</DropDownText>
     );
     const [localValue, setLocalValue] = React.useState(value ?? defaultValue);
     const [internalSearchValue, setSearchValue] = React.useState('');

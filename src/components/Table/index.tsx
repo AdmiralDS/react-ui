@@ -223,8 +223,15 @@ export interface TableProps extends React.HTMLAttributes<HTMLDivElement> {
      */
     fixedRowHeight: number;
   };
-  /** Сообщение, отображаемое при отсутствии совпадений в строках после применения фильтра */
+  /** @deprecated Используйте locale.emptyMessage */
   emptyMessage?: React.ReactNode;
+  /** Объект локализации - позволяет перезадать текстовые константы используемые в компоненте,
+   * по умолчанию значения констант берутся из темы в соответствии с параметром currentLocale, заданном в теме
+   **/
+  locale?: {
+    /** Сообщение, отображаемое при отсутствии совпадений в строках после применения фильтра */
+    emptyMessage?: React.ReactNode;
+  };
 }
 
 export const Table: React.FC<TableProps> = ({
@@ -251,7 +258,8 @@ export const Table: React.FC<TableProps> = ({
   disableColumnResize = false,
   showLastRowUnderline = true,
   virtualScroll,
-  emptyMessage,
+  emptyMessage: userEmptyMessage,
+  locale,
   ...props
 }) => {
   const theme = React.useContext(ThemeContext) || LIGHT_THEME;
@@ -600,13 +608,13 @@ export const Table: React.FC<TableProps> = ({
   };
 
   const renderBody = () => {
+    const emptyMessage =
+      userEmptyMessage || locale?.emptyMessage || theme.locales[theme.currentLocale].table.emptyMessage;
     if (rowList.length === 0) {
       return (
         <ScrollTableBody ref={scrollBodyRef} className="tbody">
           <Row underline={showLastRowUnderline} dimension={dimension} className="tr">
-            <EmptyMessage dimension={dimension}>
-              {emptyMessage || theme.locales[theme.currentLocale].table_emptyMessage}
-            </EmptyMessage>
+            <EmptyMessage dimension={dimension}>{emptyMessage}</EmptyMessage>
           </Row>
         </ScrollTableBody>
       );

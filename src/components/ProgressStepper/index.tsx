@@ -57,34 +57,50 @@ export interface ProgressStepperProps extends HTMLAttributes<HTMLDivElement> {
   steps: string[];
   /** Номер активного шага, соответствует индексу шага в массиве */
   activeStep?: number;
-  /** Название шага: массив слов во множественном числе для чисел (1,5), например, ['яблоко', 'яблок'] */
+  /** @deprecated Используйте locale.stepName */
   stepName?: string[];
-  /** Функция, которая формирует подпись о следующем шаге, на основе nextStepName */
-  renderNextStepName?: (nextStepName: string) => void;
+  /** @deprecated Используйте locale.stepName */
+  renderNextStepName?: (nextStepName: string) => React.ReactNode;
   /** Отображение/скрытие подписи о следующем шаге */
   displayNextStepName?: boolean;
   /** Мобильная версия компонента */
   mobile?: boolean;
+  /** Объект локализации - позволяет перезадать текстовые константы используемые в компоненте,
+   * по умолчанию значения констант берутся из темы в соответствии с параметром currentLocale, заданном в теме
+   **/
+  locale?: {
+    /** Название шага: массив слов во множественном числе для чисел (1,5), например, ['яблоко', 'яблок'] */
+    stepName?: [string, string];
+    /** Функция, возвращающая текст, поясняющий, на каком шаге из скольки шагов находится пользователь */
+    progressText?: (activeStepNumber: number, stepsAmount: number, stepNamePlural: string) => string;
+    /** Функция, которая формирует подпись о следующем шаге, на основе nextStepName */
+    renderNextStepName?: (nextStepName: string) => React.ReactNode;
+  };
 }
 
 export const ProgressStepper: FC<ProgressStepperProps> = ({
   steps,
   activeStep: activeStepProp = -1,
   stepName: userStepName,
-  renderNextStepName,
+  renderNextStepName: userRenderNextStepName,
   displayNextStepName = true,
   mobile = false,
+  locale,
   ...props
 }) => {
   const theme = React.useContext(ThemeContext) || LIGHT_THEME;
-  const stepName = userStepName || theme.locales[theme.currentLocale].progressStepper_stepName;
+  const stepName = userStepName || locale?.stepName || theme.locales[theme.currentLocale].progressStepper.stepName;
+  const progressText = locale?.progressText || theme.locales[theme.currentLocale].progressStepper.progressText;
+  const renderNextStepName =
+    userRenderNextStepName ||
+    locale?.renderNextStepName ||
+    theme.locales[theme.currentLocale].progressStepper.renderNextStepName;
+
   const stepsAmount = steps.length;
   const activeStep = fitLimit(0, stepsAmount, activeStepProp) ? activeStepProp : -1;
   const activeStepNumber = activeStep + 1;
   const nextStep = activeStep + 1;
-  const nextStepContent =
-    renderNextStepName?.(steps[nextStep]) ||
-    `${theme.locales[theme.currentLocale].progressStepper_then} - ` + setFirstLetterToLowerCase(steps[nextStep]);
+  const nextStepContent = renderNextStepName(setFirstLetterToLowerCase(steps[nextStep]));
 
   const fixedStepName = stepName[0];
   const fixedStepNamePlural = stepName[stepName.length - 1];
@@ -93,13 +109,7 @@ export const ProgressStepper: FC<ProgressStepperProps> = ({
     <Wrapper {...props}>
       <Header mobile={mobile} aria-hidden>
         <ActiveStep>{setFirstLetterToUpperCase(steps[activeStep])}</ActiveStep>
-        <ProgressText>
-          {theme.locales[theme.currentLocale].progressStepper_progressText(
-            activeStepNumber,
-            stepsAmount,
-            fixedStepNamePlural?.toLowerCase(),
-          )}
-        </ProgressText>
+        <ProgressText>{progressText(activeStepNumber, stepsAmount, fixedStepNamePlural?.toLowerCase())}</ProgressText>
       </Header>
       <ProgressWrapper>
         <Progress

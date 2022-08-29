@@ -11,14 +11,12 @@ interface IDayNamesProps {
 }
 
 export const DayNames: FC<IDayNamesProps> = ({ date }) => {
-  // const weekStart = startOfWeek(date, localeName);
   const theme = React.useContext(ThemeContext) || LIGHT_THEME;
-  const weekStart = startOfWeek(date, theme.locales[theme.currentLocale].weekStartsOn ?? 1);
+  const weekStart = startOfWeek(date, theme.locales[theme.currentLocale].firstDayOfWeek ?? 1);
   return (
     <div>
       {DAY_NUMBERS.map((offset) => {
         const day = addDays(weekStart, offset);
-        // const weekDayName = capitalizeFirstLetter(getFormattedValue(day, { weekday: 'short' }, localeName).slice(0, 2));
         const weekDayName = capitalizeFirstLetter(
           getFormattedValue(day, { weekday: 'short' }, theme.currentLocale || 'ru').slice(0, 2),
         );

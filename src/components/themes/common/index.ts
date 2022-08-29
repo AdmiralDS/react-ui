@@ -31,6 +31,7 @@ export interface Theme {
   zIndex: ZIndex;
   shape: Shape;
   name: 'light' | 'dark';
+  /** Код локали, поддерживаемый Intl */
   currentLocale: string;
   locales: { [localeCode: string]: Locale };
 }

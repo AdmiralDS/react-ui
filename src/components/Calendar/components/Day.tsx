@@ -39,10 +39,8 @@ export const Day: FC<IDayCalendarProps> = ({
 
   const corners: Corners = {};
   if (startDate) {
-    // const weekStart = sameDay(day, startOfWeek(day, localeName));
-    const weekStart = sameDay(day, startOfWeek(day, theme.locales[theme.currentLocale].weekStartsOn ?? 1));
-    // const weekEnd = sameDay(day, endOfWeek(day, localeName));
-    const weekEnd = sameDay(day, endOfWeek(day, theme.locales[theme.currentLocale].weekStartsOn ?? 1));
+    const weekStart = sameDay(day, startOfWeek(day, theme.locales[theme.currentLocale].firstDayOfWeek ?? 1));
+    const weekEnd = sameDay(day, endOfWeek(day, theme.locales[theme.currentLocale].firstDayOfWeek ?? 1));
     const start = rangeStart || rangeSelectingStart;
     const end = rangeEnd || rangeSelectingEnd;
     // если endDate не определена, то активную дату мы не выделяем серым фоном

@@ -21,6 +21,9 @@ type PropsType = {
   trapFocus: boolean;
   hideHint: () => void;
   startRecalculation: React.Dispatch<React.SetStateAction<any>>;
+  locale?: {
+    closeButtonAriaLabel?: string;
+  };
 };
 
 type RefType = HTMLDivElement | null;
@@ -38,11 +41,14 @@ export const HintContainer = React.forwardRef<RefType, PropsType & React.HTMLAtt
       trapFocus,
       hideHint,
       startRecalculation,
+      locale,
       ...props
     },
     ref,
   ) => {
     const theme = React.useContext(ThemeContext) || LIGHT_THEME;
+    const closeBtnAriaLabel =
+      locale?.closeButtonAriaLabel || theme.locales[theme.currentLocale].hint.closeButtonAriaLabel;
     const hideOnScrollResize = visibilityTrigger === 'hover';
 
     const hintRef: any = React.useRef(null);
@@ -133,7 +139,7 @@ export const HintContainer = React.forwardRef<RefType, PropsType & React.HTMLAtt
           <HintContent>{content}</HintContent>
           {visibilityTrigger === 'click' && (
             <CloseButton
-              aria-label={theme.locales[theme.currentLocale].hint_ariaLabel}
+              aria-label={closeBtnAriaLabel}
               onClick={(event?: React.MouseEvent<HTMLButtonElement>) => {
                 event?.stopPropagation();
                 previousFocusedElement.current.focus();

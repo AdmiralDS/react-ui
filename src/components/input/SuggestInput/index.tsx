@@ -31,7 +31,7 @@ export interface SuggestItem {
 export interface SuggestInputProps extends Omit<TextInputProps, 'value'> {
   value?: string;
 
-  /** Текст сообщения при отсутствии вариантов для подстановки */
+  /** @deprecated Используйте locale.emptyMessage */
   isEmptyMessage?: string;
 
   /** Обработчик выбора опции (дефолтный обработчик подставляет значение опции в поле ввода) */
@@ -61,6 +61,14 @@ export interface SuggestInputProps extends Omit<TextInputProps, 'value'> {
 
   /** Статус поля */
   status?: InputStatus;
+
+  /** Объект локализации - позволяет перезадать текстовые константы используемые в компоненте,
+   * по умолчанию значения констант берутся из темы в соответствии с параметром currentLocale, заданном в теме
+   **/
+  locale?: {
+    /** Текст сообщения при отсутствии вариантов для подстановки */
+    emptyMessage?: React.ReactNode;
+  };
 }
 
 export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps>(
@@ -73,10 +81,10 @@ export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps
       onSearchButtonClick = () => undefined,
       icons,
       icon = SearchOutlineSVG,
-      // isEmptyMessage = 'Нет совпадений',
-      isEmptyMessage,
+      isEmptyMessage: userEmptyMessage,
       skeleton = false,
       status,
+      locale,
       ...props
     },
     ref,
@@ -213,7 +221,9 @@ export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps
           >
             {options.length === 0 && !isLoading ? (
               <MessagePanel>
-                {isEmptyMessage || theme.locales[theme.currentLocale].suggestInput_emptyMessage}
+                {userEmptyMessage ||
+                  locale?.emptyMessage ||
+                  theme.locales[theme.currentLocale].suggestInput.emptyMessage}
               </MessagePanel>
             ) : (
               options.map((text, index) => (

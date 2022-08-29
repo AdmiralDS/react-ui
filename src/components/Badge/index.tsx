@@ -96,13 +96,20 @@ export interface BadgeProps extends React.HTMLAttributes<HTMLDivElement> {
   dimension?: Dimension;
   /** Внешний вид компонента */
   appearance?: BadgeAppearance;
+  /** Объект локализации - позволяет перезадать текстовые константы используемые в компоненте,
+   * по умолчанию значения констант берутся из темы в соответствии с параметром currentLocale, заданном в теме
+   **/
+  locale?: {
+    /** Атрибут aria-label, описывающий количественное значение, отображаемое компонентом Badge */
+    amountAriaLabel?: string;
+  };
 }
 
-export const Badge: React.FC<BadgeProps> = ({ children, dimension = 'm', appearance = 'light', ...props }) => {
+export const Badge: React.FC<BadgeProps> = ({ children, dimension = 'm', appearance = 'light', locale, ...props }) => {
   const theme = React.useContext(ThemeContext) || LIGHT_THEME;
-  const ariaLabel = `${theme.locales[theme.currentLocale].badge_ariaLabel} ${children}`;
+  const amountText = locale?.amountAriaLabel || theme.locales[theme.currentLocale].badge.amountAriaLabel;
   return (
-    <BadgeComponent dimension={dimension} appearance={appearance} aria-label={ariaLabel} {...props}>
+    <BadgeComponent dimension={dimension} appearance={appearance} aria-label={`${amountText} ${children}`} {...props}>
       {children}
     </BadgeComponent>
   );

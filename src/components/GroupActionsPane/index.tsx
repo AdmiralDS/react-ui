@@ -69,6 +69,14 @@ export interface GroupActionsPaneProps extends HTMLAttributes<HTMLDivElement> {
 
   /** Объект, отображаемый в качестве меню настройки */
   settingsMenu?: React.ReactNode;
+
+  /** Объект локализации - позволяет перезадать текстовые константы используемые в компоненте,
+   * по умолчанию значения констант берутся из темы в соответствии с параметром currentLocale, заданном в теме
+   **/
+  locale?: {
+    /** Placeholder инпута */
+    inputPlaceholder?: string;
+  };
 }
 
 export const GroupActionsPane = ({
@@ -81,6 +89,7 @@ export const GroupActionsPane = ({
   onSearchEnter,
   onSearchLeave,
   onChangeSearchValue,
+  locale,
   ...props
 }: React.PropsWithChildren<GroupActionsPaneProps>) => {
   const [searchOpened, setSearchOpened] = useState<boolean>(false);
@@ -110,6 +119,7 @@ export const GroupActionsPane = ({
           opened={searchOpened}
           onOpenSearch={handleOpenSearch}
           onCloseSearch={handleCloseSearch}
+          locale={locale}
         />
         <ColumnsButton
           columns={columns}

@@ -199,19 +199,6 @@ const differenceYears = (dateLeft: Date, dateRight: Date): number => {
   return dateLeft.getFullYear() - dateRight.getFullYear();
 };
 
-// const endOfWeek = (current: Date, localeName: LocaleType): Date => {
-//   const locale = locales[localeName];
-//   const weekStartsOn = locale && locale.options && locale.options.weekStartsOn;
-
-//   const date = new Date(current.getTime());
-//   const day = date.getDay();
-//   const diff = (day < weekStartsOn ? -7 : 0) + 6 - (day - weekStartsOn);
-
-//   date.setDate(date.getDate() + diff);
-//   date.setHours(23, 59, 59, 999);
-//   return date;
-// };
-
 const endOfWeek = (current: Date, weekStartsOn: number): Date => {
   const date = new Date(current.getTime());
   const day = date.getDay();
@@ -230,12 +217,8 @@ const equal = (date1?: Date | null, date2?: Date | null) => {
   }
 };
 
-// const getFormattedValue = (date: Date | null, options: any, localeName: LocaleType) => {
-//   return new Intl.DateTimeFormat(locales[localeName].code, options).format(date || new Date());
-// };
-
-const getFormattedValue = (date: Date | null, options: any, localeCode: string) => {
-  return new Intl.DateTimeFormat(localeCode, options).format(date || new Date());
+const getFormattedValue = (date: Date | null, options: any, localeName: string) => {
+  return new Intl.DateTimeFormat(localeName, options).format(date || new Date());
 };
 
 const lastDayOfMonth = (date: Date) => {
@@ -312,18 +295,6 @@ const yearsRange = (date: Date, yearCount: number) => {
   const start = end - (yearCount - 1);
   return { start, end };
 };
-
-// const startOfWeek = (current: Date, localeName: LocaleType): Date => {
-//   const locale = locales[localeName];
-//   const weekStartsOn = locale && locale.options && locale.options.weekStartsOn;
-
-//   const date = new Date(current.getTime());
-//   const day = date.getDay();
-//   const diff = (day < weekStartsOn ? 7 : 0) + day - weekStartsOn;
-//   date.setDate(date.getDate() - diff);
-//   date.setHours(0, 0, 0, 0);
-//   return date;
-// };
 
 const startOfWeek = (current: Date, weekStartsOn: number): Date => {
   const date = new Date(current.getTime());

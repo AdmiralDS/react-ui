@@ -35,6 +35,7 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarPropType>(
       filterDate,
       currentActiveView,
       currentActiveViewImportant,
+      locale,
       onChange,
       onDateIncreaseDecrease,
       onMonthSelect,
@@ -217,7 +218,7 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarPropType>(
         maxDate={maxDate}
         yearsView={yearsView}
         monthsView={monthsView}
-        // localeName={localeName}
+        locale={locale}
         onYearsViewShow={handleYearsViewShow}
         onYearsViewHide={handleYearsViewHide}
         onMonthsViewShow={handleMonthsViewShow}
@@ -230,10 +231,7 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarPropType>(
 
     const renderMonth = () => (
       <>
-        <DayNames
-          date={viewDate}
-          // localeName={localeName}
-        />
+        <DayNames date={viewDate} />
         <Month
           day={viewDate}
           startDate={startDate}
@@ -241,7 +239,6 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarPropType>(
           selected={selected}
           activeDate={activeDate}
           range={range}
-          // localeName={localeName}
           validator={getValidator()}
           filterDate={filterDate}
           onMouseEnter={handleDayMouseEnter}
@@ -257,7 +254,6 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarPropType>(
         startDate={startDate}
         endDate={endDate}
         selected={selected}
-        // localeName={localeName}
         range={range}
         validator={getValidator()}
         onClick={handleMonthClick}
@@ -270,7 +266,6 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarPropType>(
         startDate={startDate}
         endDate={endDate}
         selected={selected}
-        // localeName={localeName}
         range={range}
         validator={getValidator()}
         onClick={handleYearClick}

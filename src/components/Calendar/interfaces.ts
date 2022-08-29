@@ -1,5 +1,6 @@
 import type { MouseEvent, SyntheticEvent } from 'react';
 
+import type { LocaleType } from './constants';
 import type { DateValidator } from './validator';
 
 export interface IDateBaseProps {
@@ -11,6 +12,10 @@ export interface IDateBaseProps {
   endDate?: Date | null;
   /** Режим выбора диапазона дат */
   range?: boolean;
+  /** Локаль отображения дат
+   * @deprecated Используйте currentLocale в theme,
+   */
+  localeName?: LocaleType;
   /** Предоставляет функции проверки корректности даты, возможности её выбора в календаре.
    *  Если возвращаемое значение не 'null', то дата считается некорректной, а возвращаемое
    *  функцией значение является текстом ошибки и выводится в InputField
@@ -64,6 +69,26 @@ export interface CalendarPropType extends IDateSelectionProps {
 
   /** Коллбэк выбора даты, срабатывает при клике на дне (в режиме диапазона date - это массив из двух дат) */
   onChange(date: Date | Array<Date | null> | null, event?: SyntheticEvent<any>): void;
+
+  /** Объект локализации - позволяет перезадать текстовые константы используемые в компоненте,
+   * по умолчанию значения констант берутся из темы в соответствии с параметром currentLocale, заданном в теме
+   **/
+  locale?: {
+    /** Надпись (тултип) для кнопки со стрелкой, ведущей вперед */
+    backwardText?: string;
+    /** Надпись (тултип) для кнопки со стрелкой, ведущей назад */
+    forwardText?: string;
+    /** Надпись (тултип) для кнопки со стрелкой, ведущей к следующему месяцу */
+    nextMonthText?: string;
+    /** Надпись (тултип) для кнопки со стрелкой ведущей, к предыдущему месяцу */
+    previousMonthText?: string;
+    /** Надпись (тултип) для кнопки возврата  */
+    returnText?: string;
+    /** Надпись (тултип) для кнопки, открывающей панель выбора года */
+    selectYearText?: string;
+    /** Надпись (тултип) для кнопки, открывающей панель выбора месяца */
+    selectMonthText?: string;
+  };
 }
 
 export interface IDateCalendarBaseProps extends IDateBaseProps {

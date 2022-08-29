@@ -72,19 +72,19 @@ export interface PaginationOneProps extends Omit<React.HTMLAttributes<HTMLDivEle
   pageSelectDisabled?: boolean;
   /** Блокировка выбора количества записей на странице */
   pageSizeSelectDisabled?: boolean;
-  /** Функция, возвращающая текст, описывающий селект с выбором номера страницы */
+  /** @deprecated Используйте locale.pageSelectLabel */
   pageSelectLabel?: (...props: any) => string;
-  /** Функция, возвращающая текст, описывающий селект с выбором размера страницы */
+  /** @deprecated Используйте locale.pageSizeSelectLabel */
   pageSizeSelectLabel?: (...props: any) => string;
-  /** Текст, описывающий сколько записей размещено на одной странице */
+  /** @deprecated Используйте locale.itemsPerPageText */
   itemsPerPageText?: string;
-  /** Функция, возвращающая текст, поясняющий, какой диапазон записей сейчас отображается */
+  /** @deprecated Используйте locale.itemRangeText */
   itemRangeText?: (...props: any) => string;
-  /** Функция, возвращающая текст, поясняющий, из какого количества страниц выбрана текущая */
+  /** @deprecated Используйте locale.pageRangeText */
   pageRangeText?: (...props: any) => string;
-  /** Текст, описывающий кнопку переключения назад */
+  /** @deprecated Используйте locale.backwardText */
   backwardText?: string;
-  /** Текст, описывающий кнопку переключения вперед */
+  /** @deprecated Используйте locale.forwardText */
   forwardText?: string;
   /** Отображение компонента в упрощенном варианте, применяется в мобильных версиях */
   simple?: boolean;
@@ -93,6 +93,25 @@ export interface PaginationOneProps extends Omit<React.HTMLAttributes<HTMLDivEle
   /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
   dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
   menuWidth?: string;
+  /** Объект локализации - позволяет перезадать текстовые константы используемые в компоненте,
+   * по умолчанию значения констант берутся из темы в соответствии с параметром currentLocale, заданном в теме
+   **/
+  locale?: {
+    /** Текст, описывающий сколько записей размещено на одной странице */
+    itemsPerPageText?: string;
+    /** Функция, возвращающая текст, описывающий селект с выбором номера страницы */
+    pageSelectLabel?: (...props: any) => string;
+    /** Функция, возвращающая текст, описывающий селект с выбором размера страницы */
+    pageSizeSelectLabel?: (...props: any) => string;
+    /** Функция, возвращающая текст, поясняющий, какой диапазон записей сейчас отображается */
+    itemRangeText?: (...props: any) => string;
+    /** Функция, возвращающая текст, поясняющий, из какого количества страниц выбрана текущая */
+    pageRangeText?: (...props: any) => string;
+    /** Текст, описывающий кнопку переключения назад (атрибут aria-label) */
+    backwardText?: string;
+    /** Текст, описывающий кнопку переключения вперед (атрибут aria-label) */
+    forwardText?: string;
+  };
 }
 
 export const PaginationOne: React.FC<PaginationOneProps> = ({
@@ -102,8 +121,8 @@ export const PaginationOne: React.FC<PaginationOneProps> = ({
   totalItems,
   pageSelectDisabled = false,
   pageSizeSelectDisabled = false,
-  itemsPerPageText: userItemsPerPageText,
   onChange,
+  itemsPerPageText: userItemsPerPageText,
   itemRangeText: userItemRangeText,
   pageRangeText: userPageRangeText,
   pageSelectLabel: userPageSelectLabel,
@@ -115,17 +134,27 @@ export const PaginationOne: React.FC<PaginationOneProps> = ({
   dropMaxHeight = '300px',
   dropContainerCssMixin,
   className = '',
+  locale,
   ...props
 }) => {
   const theme = React.useContext(ThemeContext) || LIGHT_THEME;
-  const itemsPerPageText = userItemsPerPageText || theme.locales[theme.currentLocale].paginationOne_itemsPerPageText;
-  const itemRangeText = userItemRangeText || theme.locales[theme.currentLocale].paginationOne_itemRangeText;
-  const pageRangeText = userPageRangeText || theme.locales[theme.currentLocale].paginationOne_pageRangeText;
-  const pageSelectLabel = userPageSelectLabel || theme.locales[theme.currentLocale].paginationOne_pageSelectLabel;
-  const pageSizeSelectLabel =
-    userPageSizeSelectLabel || theme.locales[theme.currentLocale].paginationOne_pageSizeSelectLabel;
-  const backwardText = userBackwardText || theme.locales[theme.currentLocale].paginationOne_backwardText;
-  const forwardText = userForwardText || theme.locales[theme.currentLocale].paginationOne_forwardText;
+  const {
+    itemsPerPageText: theme_itemsPerPageText,
+    itemRangeText: theme_itemRangeText,
+    pageRangeText: theme_pageRangeText,
+    pageSelectLabel: theme_pageSelectLabel,
+    pageSizeSelectLabel: theme_pageSizeSelectLabel,
+    backwardText: theme_backwardText,
+    forwardText: theme_forwardText,
+  } = theme.locales[theme.currentLocale].paginationOne;
+
+  const itemsPerPageText = userItemsPerPageText || locale?.itemsPerPageText || theme_itemsPerPageText;
+  const itemRangeText = userItemRangeText || locale?.itemRangeText || theme_itemRangeText;
+  const pageRangeText = userPageRangeText || locale?.pageRangeText || theme_pageRangeText;
+  const pageSelectLabel = userPageSelectLabel || locale?.pageSelectLabel || theme_pageSelectLabel;
+  const pageSizeSelectLabel = userPageSizeSelectLabel || locale?.pageSizeSelectLabel || theme_pageSizeSelectLabel;
+  const backwardText = userBackwardText || locale?.backwardText || theme_backwardText;
+  const forwardText = userForwardText || locale?.forwardText || theme_forwardText;
 
   const totalPages = Math.max(Math.ceil(totalItems / pageSize), 1);
   const pages = Array.from({ length: totalPages }, (v, k) => k + 1);
