@@ -18,6 +18,7 @@ import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { InputIconButton } from '#src/components/InputIconButton';
 import { Spinner } from '#src/components/Spinner';
 import { Tooltip } from '#src/components/Tooltip';
+import { checkOverflow } from '#src/components/common/utils/checkOverflow';
 
 const iconSizeValue = (props: { dimension?: ComponentDimension }) => {
   switch (props.dimension) {
@@ -273,14 +274,6 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
 
     const [overflowActive, setOverflowActive] = React.useState<boolean>(false);
     const [tooltipVisible, setTooltipVisible] = React.useState<boolean>(false);
-    const checkOverflow = (textContainer: HTMLInputElement | null): boolean => {
-      if (textContainer)
-        return (
-          textContainer.offsetHeight < textContainer.scrollHeight ||
-          textContainer.offsetWidth < textContainer.scrollWidth
-        );
-      return false;
-    };
     React.useLayoutEffect(() => {
       if (checkOverflow(inputRef.current)) {
         setOverflowActive(true);

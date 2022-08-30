@@ -10,6 +10,7 @@ import { ReactComponent as EditSolid } from '@admiral-ds/icons/build/system/Edit
 import { ReactComponent as CheckClearOutline } from '@admiral-ds/icons/build/service/CheckClearOutline.svg';
 import { ReactComponent as CloseOutline } from '@admiral-ds/icons/build/service/CloseOutline.svg';
 import { Tooltip } from '#src/components/Tooltip';
+import { checkOverflow } from '#src/components/common/utils/checkOverflow';
 
 const EditInput = styled(TextInput)`
   flex: 1 1 auto;
@@ -171,14 +172,6 @@ export const EditMode = React.forwardRef<HTMLInputElement, EditModeProps>(
     const [overflowActive, setOverflowActive] = React.useState<boolean>(false);
     const [tooltipVisible, setTooltipVisible] = React.useState<boolean>(false);
     const textRef = React.useRef<HTMLDivElement>(null);
-    const checkOverflow = (textContainer: HTMLDivElement | null): boolean => {
-      if (textContainer)
-        return (
-          textContainer.offsetHeight < textContainer.scrollHeight ||
-          textContainer.offsetWidth < textContainer.scrollWidth
-        );
-      return false;
-    };
     React.useLayoutEffect(() => {
       if (checkOverflow(inputRef.current)) {
         setOverflowActive(true);

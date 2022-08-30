@@ -1,19 +1,13 @@
 import * as React from 'react';
 import { Tooltip } from '#src/components/Tooltip';
 import { StringValueWrapper } from './styled';
+import { checkOverflow } from '#src/components/common/utils/checkOverflow';
 
 export const DisplayValue: React.FC<any> = ({ visibleValue, isSearchPanelOpen }) => {
   const valueRef = React.useRef(null);
   const [overflowActive, setOverflowActive] = React.useState<boolean>(false);
   const [tooltipVisible, setTooltipVisible] = React.useState<boolean>(false);
 
-  const checkOverflow = (textContainer: HTMLDivElement | null): boolean => {
-    if (textContainer)
-      return (
-        textContainer.offsetHeight < textContainer.scrollHeight || textContainer.offsetWidth < textContainer.scrollWidth
-      );
-    return false;
-  };
   React.useEffect(() => {
     if (checkOverflow(valueRef.current)) {
       setOverflowActive(true);
