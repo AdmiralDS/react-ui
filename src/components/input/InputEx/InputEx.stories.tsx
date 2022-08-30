@@ -125,15 +125,30 @@ const Template2: ComponentStory<typeof InputEx> = (props) => {
     return theme;
   }
 
+  const [prefixValue, setPrefixValue] = React.useState<ValueType>('prefix One');
   const [suffixValue, setSuffixValue] = React.useState<ValueType>('One');
+
+  const inputRef = React.useRef<HTMLInputElement>(null);
   return (
     <ThemeProvider theme={swapBorder}>
       <InputEx
         {...cleanProps}
+        containerRef={inputRef}
         value={localValue}
         onChange={handleChange}
+        prefix={
+          <SuffixSelect
+            dropAlign="flex-start"
+            alignRef={inputRef}
+            value={prefixValue}
+            onChange={(value) => setPrefixValue(value)}
+            options={['prefix One', 'prefix Two', 'prefix Three']}
+          />
+        }
         suffix={
           <SuffixSelect
+            dropAlign="flex-end"
+            alignRef={inputRef}
             value={suffixValue}
             onChange={(value) => setSuffixValue(value)}
             options={['One', 'Two', 'Three']}

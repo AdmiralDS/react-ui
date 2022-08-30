@@ -114,8 +114,9 @@ export const Menu = React.forwardRef<HTMLDivElement, MenuProps<ValueType>>(
     }, [activeOption]);
 
     const renderChildren = () =>
-      options.map((option) =>
+      options.map((option, index) =>
         renderOption({
+          key: index,
           value: option,
           hovered: option === activeOption,
           selected: option === selected,

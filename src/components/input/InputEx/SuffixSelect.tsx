@@ -10,6 +10,7 @@ const StyledMenu = styled(Menu)<{ width?: string }>`
 
 const Container = styled.div<{ iconSizeValue?: string }>`
   display: flex;
+  align-items: center;
   cursor: pointer;
   
   & > svg {

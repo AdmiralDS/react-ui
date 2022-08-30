@@ -1,5 +1,5 @@
-export function filterKeysWithUndefinedValues<T>(record: T): T {
-  return (Object.keys(record) as Array<keyof typeof record>).reduce((acc, key) => {
+export function filterKeysWithUndefinedValues<T extends object>(record: T): T {
+  return (Object.keys(record) as Array<keyof T>).reduce((acc, key) => {
     if (record[key] !== undefined) {
       acc[key] = record[key];
     }
