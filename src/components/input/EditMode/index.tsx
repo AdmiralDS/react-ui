@@ -9,6 +9,7 @@ import { changeInputData } from '#src/components/common/dom/changeInputData';
 import { ReactComponent as EditSolid } from '@admiral-ds/icons/build/system/EditSolid.svg';
 import { ReactComponent as CheckClearOutline } from '@admiral-ds/icons/build/service/CheckClearOutline.svg';
 import { ReactComponent as CloseOutline } from '@admiral-ds/icons/build/service/CloseOutline.svg';
+import { Tooltip } from '#src/components/Tooltip';
 
 const EditInput = styled(TextInput)`
   flex: 1 1 auto;
@@ -167,6 +168,25 @@ export const EditMode = React.forwardRef<HTMLInputElement, EditModeProps>(
     const iconSize = dimension === 's' ? 20 : 24;
     const inputRef = React.useRef<HTMLInputElement>(null);
 
+    const [overflowActive, setOverflowActive] = React.useState<boolean>(false);
+    const [tooltipVisible, setTooltipVisible] = React.useState<boolean>(false);
+    const textRef = React.useRef<HTMLDivElement>(null);
+    const checkOverflow = (textContainer: HTMLDivElement | null): boolean => {
+      if (textContainer)
+        return (
+          textContainer.offsetHeight < textContainer.scrollHeight ||
+          textContainer.offsetWidth < textContainer.scrollWidth
+        );
+      return false;
+    };
+    React.useLayoutEffect(() => {
+      if (checkOverflow(inputRef.current)) {
+        setOverflowActive(true);
+        return;
+      }
+      setOverflowActive(false);
+    }, [value]);
+
     React.useEffect(() => {
       if (!localVal && value) {
         setLocalVal(value);
@@ -225,7 +245,15 @@ export const EditMode = React.forwardRef<HTMLInputElement, EditModeProps>(
           )
         ) : (
           <>
-            <Text onClick={!props.readOnly ? enableEdit : undefined}>{value}</Text>
+            <Text ref={textRef} onClick={!props.readOnly ? enableEdit : undefined}>{value}</Text>
+            {overflowActive && (
+              <Tooltip
+                visible={tooltipVisible}
+                onVisibilityChange={setTooltipVisible}
+                renderContent={() => value}
+                targetRef={textRef}
+              />
+            )}
             {!props.readOnly && <EditIcon height={iconSize} width={iconSize} onClick={enableEdit} />}
           </>
         )}
