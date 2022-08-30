@@ -247,6 +247,9 @@ export interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
 
   /** Состояние skeleton */
   skeleton?: boolean;
+
+  /** Отображение тултипа */
+  showTooltip?: boolean;
 }
 
 export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
@@ -264,6 +267,7 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
       style,
       placeholder,
       skeleton = false,
+      showTooltip = true,
       ...props
     },
     ref,
@@ -378,7 +382,7 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
           iconCount={iconCount}
           type={type === 'password' && isPasswordVisible ? 'text' : type}
         />
-        {overflowActive && (
+        {showTooltip && overflowActive && (
           <Tooltip
             visible={tooltipVisible}
             onVisibilityChange={setTooltipVisible}
