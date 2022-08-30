@@ -1,5 +1,6 @@
 import * as React from 'react';
-import styled, { css } from 'styled-components';
+import styled, { css, ThemeContext } from 'styled-components';
+import { LIGHT_THEME } from '#src/components/themes';
 import { typography } from '#src/components/Typography';
 
 type Dimension = 'm' | 's';
@@ -95,12 +96,20 @@ export interface BadgeProps extends React.HTMLAttributes<HTMLDivElement> {
   dimension?: Dimension;
   /** Внешний вид компонента */
   appearance?: BadgeAppearance;
+  /** Объект локализации - позволяет перезадать текстовые константы используемые в компоненте,
+   * по умолчанию значения констант берутся из темы в соответствии с параметром currentLocale, заданном в теме
+   **/
+  locale?: {
+    /** Атрибут aria-label, описывающий количественное значение, отображаемое компонентом Badge */
+    amountAriaLabel?: string;
+  };
 }
 
-export const Badge: React.FC<BadgeProps> = ({ children, dimension = 'm', appearance = 'light', ...props }) => {
-  const ariaLabel = `Количество ${children}`;
+export const Badge: React.FC<BadgeProps> = ({ children, dimension = 'm', appearance = 'light', locale, ...props }) => {
+  const theme = React.useContext(ThemeContext) || LIGHT_THEME;
+  const amountText = locale?.amountAriaLabel || theme.locales[theme.currentLocale].badge.amountAriaLabel;
   return (
-    <BadgeComponent dimension={dimension} appearance={appearance} aria-label={ariaLabel} {...props}>
+    <BadgeComponent dimension={dimension} appearance={appearance} aria-label={`${amountText} ${children}`} {...props}>
       {children}
     </BadgeComponent>
   );

@@ -20,6 +20,8 @@ import {
   FOCUS_BORDER_OFFSET_M,
   TAB_LEFT_OFFSET_M,
   TAB_LEFT_OFFSET_L,
+  OVERFLOW_MENU_CONTAINER_SIZE_M,
+  OVERFLOW_MENU_CONTAINER_SIZE_L,
 } from '#src/components/TabMenu/constants';
 
 export const IconWrapper = styled.div<{ dimension: Dimension }>`
@@ -173,14 +175,19 @@ export const TabWrapper = styled.div<{ $needsOffset: boolean; dimension: Dimensi
   margin-left: ${({ $needsOffset, dimension }) => ($needsOffset ? getOffset(dimension) : 0)}px;
 `;
 
+export const OverflowMenuContainer = styled.div<{ isHidden?: boolean; dimension?: Dimension }>`
+  visibility: ${({ isHidden }) => (isHidden ? 'hidden' : 'visible')};
+  ${({ dimension }) => `
+    width: ${dimension === 'l' ? OVERFLOW_MENU_CONTAINER_SIZE_L : OVERFLOW_MENU_CONTAINER_SIZE_M};
+    height: ${dimension === 'l' ? OVERFLOW_MENU_CONTAINER_SIZE_L : OVERFLOW_MENU_CONTAINER_SIZE_M};
+  `}
+`;
 export const StyledOverflowMenu = styled(OverflowMenu)<{
   isActive: boolean;
   isHidden?: boolean;
   dimension?: Dimension;
 }>`
-  visibility: ${({ isHidden }) => (isHidden ? 'hidden' : 'visible')};
-  margin-left: ${({ dimension }) => (dimension === 'l' ? OVERFLOW_MENU_MARGIN_L : OVERFLOW_MENU_MARGIN_M)};
-
+  margin: ${({ dimension }) => `${dimension === 'l' ? 12 : 10}px`};
   &:focus-visible {
     &:before {
       ${({ dimension }) => `

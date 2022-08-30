@@ -1,5 +1,6 @@
 import * as React from 'react';
-import styled, { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
+import styled, { DefaultTheme, FlattenInterpolation, ThemeProps, ThemeContext } from 'styled-components';
+import { LIGHT_THEME } from '#src/components/themes';
 import { typography } from '#src/components/Typography';
 import { ReactComponent as ChevronLeft } from '@admiral-ds/icons/build/system/ChevronLeftOutline.svg';
 import { ReactComponent as ChevronRight } from '@admiral-ds/icons/build/system/ChevronRightOutline.svg';
@@ -71,19 +72,19 @@ export interface PaginationOneProps extends Omit<React.HTMLAttributes<HTMLDivEle
   pageSelectDisabled?: boolean;
   /** Блокировка выбора количества записей на странице */
   pageSizeSelectDisabled?: boolean;
-  /** Функция, возвращающая текст, описывающий селект с выбором номера страницы */
-  pageSelectLabel?: (props: any) => string;
-  /** Функция, возвращающая текст, описывающий селект с выбором размера страницы */
-  pageSizeSelectLabel?: (props: any) => string;
-  /** Текст, описывающий сколько записей размещено на одной странице */
+  /** @deprecated Используйте locale.pageSelectLabel */
+  pageSelectLabel?: (...props: any) => string;
+  /** @deprecated Используйте locale.pageSizeSelectLabel */
+  pageSizeSelectLabel?: (...props: any) => string;
+  /** @deprecated Используйте locale.itemsPerPageText */
   itemsPerPageText?: string;
-  /** Функция, возвращающая текст, поясняющий, какой диапазон записей сейчас отображается */
-  itemRangeText?: (props: any) => string;
-  /** Функция, возвращающая текст, поясняющий, из какого количества страниц выбрана текущая */
-  pageRangeText?: (props: any) => string;
-  /** Текст, описывающий кнопку переключения назад */
+  /** @deprecated Используйте locale.itemRangeText */
+  itemRangeText?: (...props: any) => string;
+  /** @deprecated Используйте locale.pageRangeText */
+  pageRangeText?: (...props: any) => string;
+  /** @deprecated Используйте locale.backwardText */
   backwardText?: string;
-  /** Текст, описывающий кнопку переключения вперед */
+  /** @deprecated Используйте locale.forwardText */
   forwardText?: string;
   /** Отображение компонента в упрощенном варианте, применяется в мобильных версиях */
   simple?: boolean;
@@ -92,6 +93,25 @@ export interface PaginationOneProps extends Omit<React.HTMLAttributes<HTMLDivEle
   /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
   dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
   menuWidth?: string;
+  /** Объект локализации - позволяет перезадать текстовые константы используемые в компоненте,
+   * по умолчанию значения констант берутся из темы в соответствии с параметром currentLocale, заданном в теме
+   **/
+  locale?: {
+    /** Текст, описывающий сколько записей размещено на одной странице */
+    itemsPerPageText?: string;
+    /** Функция, возвращающая текст, описывающий селект с выбором номера страницы */
+    pageSelectLabel?: (...props: any) => string;
+    /** Функция, возвращающая текст, описывающий селект с выбором размера страницы */
+    pageSizeSelectLabel?: (...props: any) => string;
+    /** Функция, возвращающая текст, поясняющий, какой диапазон записей сейчас отображается */
+    itemRangeText?: (...props: any) => string;
+    /** Функция, возвращающая текст, поясняющий, из какого количества страниц выбрана текущая */
+    pageRangeText?: (...props: any) => string;
+    /** Текст, описывающий кнопку переключения назад (атрибут aria-label) */
+    backwardText?: string;
+    /** Текст, описывающий кнопку переключения вперед (атрибут aria-label) */
+    forwardText?: string;
+  };
 }
 
 export const PaginationOne: React.FC<PaginationOneProps> = ({
@@ -101,21 +121,41 @@ export const PaginationOne: React.FC<PaginationOneProps> = ({
   totalItems,
   pageSelectDisabled = false,
   pageSizeSelectDisabled = false,
-  itemsPerPageText = 'Записей на странице:',
   onChange,
-  itemRangeText = (min: number, max: number, total: number) => `${min}–${max} записей из ${total}`,
-  pageRangeText = (total: number) => `из ${total} ${total === 1 ? 'страницы' : 'страниц'}`,
-  pageSelectLabel = (page: number, totalPages: number) => `Страница ${page} из ${totalPages}`,
-  pageSizeSelectLabel = (pageSize: number, total: number) => `Записей ${pageSize} из ${total}`,
-  backwardText = 'Предыдущая страница, выбрать',
-  forwardText = 'Следующая страница, выбрать',
+  itemsPerPageText: userItemsPerPageText,
+  itemRangeText: userItemRangeText,
+  pageRangeText: userPageRangeText,
+  pageSelectLabel: userPageSelectLabel,
+  pageSizeSelectLabel: userPageSizeSelectLabel,
+  backwardText: userBackwardText,
+  forwardText: userForwardText,
   simple = false,
   menuWidth,
   dropMaxHeight = '300px',
   dropContainerCssMixin,
   className = '',
+  locale,
   ...props
 }) => {
+  const theme = React.useContext(ThemeContext) || LIGHT_THEME;
+  const {
+    itemsPerPageText: theme_itemsPerPageText,
+    itemRangeText: theme_itemRangeText,
+    pageRangeText: theme_pageRangeText,
+    pageSelectLabel: theme_pageSelectLabel,
+    pageSizeSelectLabel: theme_pageSizeSelectLabel,
+    backwardText: theme_backwardText,
+    forwardText: theme_forwardText,
+  } = theme.locales[theme.currentLocale].paginationOne;
+
+  const itemsPerPageText = userItemsPerPageText || locale?.itemsPerPageText || theme_itemsPerPageText;
+  const itemRangeText = userItemRangeText || locale?.itemRangeText || theme_itemRangeText;
+  const pageRangeText = userPageRangeText || locale?.pageRangeText || theme_pageRangeText;
+  const pageSelectLabel = userPageSelectLabel || locale?.pageSelectLabel || theme_pageSelectLabel;
+  const pageSizeSelectLabel = userPageSizeSelectLabel || locale?.pageSizeSelectLabel || theme_pageSizeSelectLabel;
+  const backwardText = userBackwardText || locale?.backwardText || theme_backwardText;
+  const forwardText = userForwardText || locale?.forwardText || theme_forwardText;
+
   const totalPages = Math.max(Math.ceil(totalItems / pageSize), 1);
   const pages = Array.from({ length: totalPages }, (v, k) => k + 1);
   const backButtonDisabled = page === 1;

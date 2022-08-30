@@ -1,26 +1,3 @@
-/**
- * Функция возвращает существительное во множественном числе
- * param  number - Число на основе которого нужно сформировать окончание
- * param  words - Массив слов во множественном числе для чисел (1, 4, 5),
- * например ['яблоко', 'яблока', 'яблок']
- * return String
- */
-export const getPlural = (words: string[]) => (number: number) => {
-  let value = Math.abs(number);
-  value %= 100;
-  if (value >= 5 && value <= 20) {
-    return words[2];
-  }
-  value %= 10;
-  if (value === 1) {
-    return words[0];
-  }
-  if (value >= 2 && value <= 4) {
-    return words[1];
-  }
-  return words[2];
-};
-
 /** Функция проверяет входит ли число в интервал чисел */
 export const fitLimit = (min: number, max: number, num: number) => num >= min && num < max;
 

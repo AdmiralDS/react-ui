@@ -1,8 +1,10 @@
 import { Color } from '#src/components/themes/common/color';
 import { ZIndex } from '#src/components/themes/common/zIndex';
+import { Locale } from '#src/components/themes/common/locales';
 import baseStyled, { ThemedStyledInterface } from 'styled-components';
 
 export * from './color';
+export * from './locales';
 
 export type ColorName = keyof Color;
 
@@ -30,6 +32,9 @@ export interface Theme {
   zIndex: ZIndex;
   shape: Shape;
   name: 'light' | 'dark';
+  /** Код локали, поддерживаемый Intl */
+  currentLocale: string;
+  locales: { [localeCode: string]: Locale };
 }
 
 export const styled = baseStyled as ThemedStyledInterface<Theme>;

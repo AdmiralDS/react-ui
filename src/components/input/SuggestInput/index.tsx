@@ -3,13 +3,14 @@ import { changeInputData } from '#src/components/common/dom/changeInputData';
 import { keyboardKey } from '#src/components/common/keyboardKey';
 import { refSetter } from '#src/components/common/utils/refSetter';
 import { ReactComponent as SearchOutlineSVG } from '@admiral-ds/icons/build/system/SearchOutline.svg';
-import styled from 'styled-components';
+import styled, { ThemeContext } from 'styled-components';
 import { TextInput, TextInputProps } from '../TextInput';
 import { Dropdown as DropComponent } from '#src/components/Dropdown';
 import { MessagePanel } from './MessagePanel';
 import { SuggestPanel } from './SuggestPanel';
 import { InputIconButton } from '#src/components/InputIconButton';
 import type { InputStatus } from '#src/components/input/types';
+import { LIGHT_THEME } from '#src/components/themes';
 
 const Dropdown = styled(DropComponent)`
   padding: 8px 0;
@@ -30,7 +31,7 @@ export interface SuggestItem {
 export interface SuggestInputProps extends Omit<TextInputProps, 'value'> {
   value?: string;
 
-  /** Текст сообщения при отсутствии вариантов для подстановки */
+  /** @deprecated Используйте locale.emptyMessage */
   isEmptyMessage?: string;
 
   /** Обработчик выбора опции (дефолтный обработчик подставляет значение опции в поле ввода) */
@@ -60,6 +61,14 @@ export interface SuggestInputProps extends Omit<TextInputProps, 'value'> {
 
   /** Статус поля */
   status?: InputStatus;
+
+  /** Объект локализации - позволяет перезадать текстовые константы используемые в компоненте,
+   * по умолчанию значения констант берутся из темы в соответствии с параметром currentLocale, заданном в теме
+   **/
+  locale?: {
+    /** Текст сообщения при отсутствии вариантов для подстановки */
+    emptyMessage?: React.ReactNode;
+  };
 }
 
 export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps>(
@@ -72,13 +81,15 @@ export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps
       onSearchButtonClick = () => undefined,
       icons,
       icon = SearchOutlineSVG,
-      isEmptyMessage = 'Нет совпадений',
+      isEmptyMessage: userEmptyMessage,
       skeleton = false,
       status,
+      locale,
       ...props
     },
     ref,
   ) => {
+    const theme = React.useContext(ThemeContext) || LIGHT_THEME;
     const isControlledComponentValue = undefined !== props.value;
     const { options, portalTargetRef } = props;
 
@@ -209,7 +220,11 @@ export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps
             data-dimension={props.dimension || TextInput.defaultProps?.dimension}
           >
             {options.length === 0 && !isLoading ? (
-              <MessagePanel>{isEmptyMessage}</MessagePanel>
+              <MessagePanel>
+                {userEmptyMessage ||
+                  locale?.emptyMessage ||
+                  theme.locales[theme.currentLocale].suggestInput.emptyMessage}
+              </MessagePanel>
             ) : (
               options.map((text, index) => (
                 <SuggestPanel
