@@ -1,5 +1,5 @@
 import * as React from 'react';
-import styled from 'styled-components';
+import styled, { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import { useClickOutside } from '#src/components/common/hooks/useClickOutside';
 import { PositionInPortal } from '#src/components/PositionInPortal';
 import { useInterval } from '#src/components/common/hooks/useInterval';
@@ -9,7 +9,10 @@ import { refSetter } from '#src/components/common/utils/refSetter';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { useDropdown, useDropdownsClickOutside } from '#src/components/DropdownProvider';
 
-const Container = styled.div<{ alignSelf?: string }>`
+const Container = styled.div<{
+  alignSelf?: string;
+  dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+}>`
   pointer-events: initial;
   margin: 8px 0;
   background-color: ${(p) => p.theme.color['Special/Elevated BG']};
@@ -20,6 +23,7 @@ const Container = styled.div<{ alignSelf?: string }>`
   opacity: 0;
   transition-delay: 200ms;
   transition-property: opacity;
+  ${(p) => p.dropContainerCssMixin}
 `;
 
 const FakeTarget = styled.div`
@@ -61,6 +65,9 @@ export interface DropdownProps extends Omit<React.HTMLAttributes<HTMLDivElement>
   menuFocus?: 'firstOption' | 'lastOption' | 'activeOption';
 
   setMenuFocus?: React.Dispatch<React.SetStateAction<'firstOption' | 'lastOption' | 'activeOption'>>;
+
+  /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
+  dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
 }
 
 export const Dropdown = React.forwardRef<HTMLDivElement, React.PropsWithChildren<DropdownProps>>(
