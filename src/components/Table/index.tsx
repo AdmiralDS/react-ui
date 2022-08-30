@@ -30,8 +30,9 @@ import {
 import { TitleText } from './TitleText';
 import { VirtualBody } from './VirtualBody';
 import { getScrollbarSize } from '#src/components/common/dom/scrollbarUtil';
-import { GroupRow } from '#src/components/Table/GroupRow';
-import { RegularRow } from '#src/components/Table/RerularRow';
+import { GroupRow } from '#src/components/Table/Row/GroupRow';
+import { RegularRow } from '#src/components/Table/Row/RerularRow';
+import { RowWrapper } from '#src/components/Table/Row/RowWrapper';
 
 export * from './RowAction';
 
@@ -413,33 +414,47 @@ export const Table: React.FC<TableProps> = ({
     }
   }, [scrollBodyRef.current]);
 
-  function handleRowClick(rowId: RowId) {
-    onRowClick?.(rowId);
-  }
+  const calcGroupCheckStatus = (groupInfo: GroupInfo) => {
+    const indeterminate =
+      groupInfo.rows.some((rowId) => rowToGroupMap[rowId].checked) &&
+      groupInfo.rows.some((rowId) => !rowToGroupMap[rowId].checked);
+    const checked = groupInfo.rows.every((rowId) => rowToGroupMap[rowId].checked);
+    return { checked, indeterminate };
+  };
 
-  function handleRowDoubleClick(rowId: RowId) {
-    onRowDoubleClick?.(rowId);
-  }
+  const parentGroupWillBeChecked = (changedDepId: RowId) => {
+    const groupId = rowToGroupMap[changedDepId]?.groupId;
+    const groupInfo = groupId ? groupToRowsMap[groupId] : undefined;
+
+    if (!groupInfo) return;
+
+    const value = groupInfo?.rows.some((rowId) =>
+      rowId === changedDepId.toString() ? !rowToGroupMap[rowId].checked : rowToGroupMap[rowId].checked,
+    );
+    return { groupId, value };
+  };
 
   function handleCheckboxChange(id: RowId) {
+    const groupInfo = groupToRowsMap[id];
+    const rowHasGroup = rowToGroupMap[id];
+
+    const groupCheckStatus = groupInfo && calcGroupCheckStatus(groupInfo);
+    const parentGroupNewValue = rowHasGroup && parentGroupWillBeChecked(id);
+
     const idsMap = rowList.reduce((ids: IdSelectionStatusMap, row) => {
-      const groupInfo = groupToRowsMap[id];
-
       if (groupInfo) {
-        const rowInGroup = groupInfo.rows.includes(row.id.toString());
-        const indeterminate =
-          groupInfo.rows.some((rowId) => rowToGroupMap[rowId].checked) &&
-          groupInfo.rows.some((rowId) => !rowToGroupMap[rowId].checked);
-        const checked = groupInfo.rows.every((rowId) => rowToGroupMap[rowId].checked);
-        const newValue = !(indeterminate || checked);
+        const rowInCurrentGroup = groupInfo.rows.includes(row.id.toString());
 
-        if (row.id === id || rowInGroup) {
-          ids[row.id] = newValue;
+        if (row.id === id || rowInCurrentGroup) {
+          ids[row.id] = !(groupCheckStatus?.indeterminate || groupCheckStatus?.checked);
         } else {
           ids[row.id] = row.id === id ? !row.selected : !!row.selected;
         }
       } else {
         ids[row.id] = row.id === id ? !row.selected : !!row.selected;
+        if (rowHasGroup && row.id === parentGroupNewValue?.groupId) {
+          ids[row.id] = parentGroupNewValue?.value;
+        }
       }
       return ids;
     }, {});
@@ -601,25 +616,20 @@ export const Table: React.FC<TableProps> = ({
     );
   };
 
-  const renderGroupRow = (row: TableRow, index: number) => {
+  const renderGroupRow = (row: TableRow) => {
     const indeterminate =
       row.groupRows?.some((rowId) => rowToGroupMap[rowId].checked) &&
       row.groupRows?.some((rowId) => !rowToGroupMap[rowId].checked);
     const checked = row.groupRows?.every((rowId) => rowToGroupMap[rowId].checked);
-    const isLastRow = !row.expanded && row.groupRows && index >= tableRows.length - (row.groupRows.length + 1);
 
     return (
       <GroupRow
+        row={row}
         dimension={dimension}
         checkboxDimension={checkboxDimension}
         displayRowExpansionColumn={displayRowExpansionColumn}
         displayRowSelectionColumn={displayRowSelectionColumn}
         renderBodyCell={renderBodyCell}
-        tableWidth={tableWidth}
-        row={row}
-        underline={(isLastRow && showLastRowUnderline) || !isLastRow}
-        onRowClick={handleRowClick}
-        onRowDoubleClick={handleRowDoubleClick}
         onRowExpansionChange={handleExpansionChange}
         onRowSelectionChange={handleCheckboxChange}
         renderCell={renderCell}
@@ -629,105 +639,58 @@ export const Table: React.FC<TableProps> = ({
     );
   };
 
+  const isLastVisibleRow = ({
+    row,
+    isGroupRow,
+    index,
+    tableRows,
+  }: {
+    row: TableRow;
+    isGroupRow: boolean;
+    index: number;
+    tableRows: Array<TableRow>;
+  }) => {
+    return isGroupRow
+      ? !row.expanded && row.groupRows && index >= tableRows.length - (row.groupRows.length + 1)
+      : index === tableRows.length - 1;
+  };
+
   const renderRow = (row: TableRow, index: number) => {
     const isGroupRow = !!groupToRowsMap[row.id];
     const rowInGroup = !!rowToGroupMap[row.id];
     const visible = rowInGroup ? groupToRowsMap[rowToGroupMap[row.id].groupId].expanded : true;
+    const isLastRow = isLastVisibleRow({ row, isGroupRow, tableRows, index });
 
-    return isGroupRow
-      ? renderGroupRow(row, index)
-      : visible && (
-          <RegularRow
-            dimension={dimension}
-            checkboxDimension={checkboxDimension}
-            columns={cols}
-            stickyColumns={stickyColumns}
-            displayRowExpansionColumn={displayRowExpansionColumn}
-            displayRowSelectionColumn={displayRowSelectionColumn}
-            renderBodyCell={renderBodyCell}
-            tableWidth={tableWidth}
-            row={row}
-            underline={(index === rowList.length - 1 && showLastRowUnderline) || index < rowList.length - 1}
-            onRowClick={handleRowClick}
-            onRowDoubleClick={handleRowDoubleClick}
-            onRowExpansionChange={handleExpansionChange}
-            onRowSelectionChange={handleCheckboxChange}
-          />
-        );
-
-    // return (
-    //   <Row
-    //     onClick={() => handleRowClick(row.id)}
-    //     onDoubleClick={() => handleRowDoubleClick(row.id)}
-    //     key={`row_${row.id}`}
-    //     underline={(index === rowList.length - 1 && showLastRowUnderline) || index < rowList.length - 1}
-    //     disabled={!!row.disabled}
-    //     dimension={dimension}
-    //     className={`tr ${row.className}`}
-    //   >
-    //     <SimpleRow
-    //       className="tr-simple"
-    //       selected={!!row.selected}
-    //       disabled={!!row.disabled}
-    //       error={!!row.error}
-    //       success={!!row.success}
-    //     >
-    //       {row.group?.length || 0 > 0 ? (
-    //         <GroupRow
-    //           row={row}
-    //           dimension={dimension}
-    //           renderCell={renderCell}
-    //           checkboxDimension={checkboxDimension}
-    //           displayRowSelectionColumn={displayRowSelectionColumn}
-    //           onRowExpansionChange={handleExpansionChange}
-    //         />
-    //       ) : (
-    //         <>
-    //           {(displayRowSelectionColumn || displayRowExpansionColumn || stickyColumns.length > 0) && (
-    //             <StickyWrapper>
-    //               {displayRowExpansionColumn && (
-    //                 <ExpandCell dimension={dimension}>
-    //                   {row.expandedRowRender && (
-    //                     <ExpandIconWrapper>
-    //                       <ExpandIcon
-    //                         $isOpen={row.expanded}
-    //                         data-disabled={row.disabled ? true : undefined}
-    //                         onClick={() => handleExpansionChange(row.id)}
-    //                         aria-hidden
-    //                       />
-    //                     </ExpandIconWrapper>
-    //                   )}
-    //                 </ExpandCell>
-    //               )}
-    //               {displayRowSelectionColumn && (
-    //                 <CheckboxCell dimension={dimension} className="td_checkbox">
-    //                   <Checkbox
-    //                     disabled={row.disabled || row.checkboxDisabled}
-    //                     dimension={checkboxDimension}
-    //                     checked={!!row.selected}
-    //                     onChange={() => handleCheckboxChange(row.id)}
-    //                     onClick={handleCheckboxClick}
-    //                   />
-    //                 </CheckboxCell>
-    //               )}
-    //               {stickyColumns.length > 0 && stickyColumns.map((col) => renderBodyCell(row, col))}
-    //             </StickyWrapper>
-    //           )}
-    //           {cols.map((col) => (col.sticky ? null : renderBodyCell(row, col)))}
-    //           <Filler />
-    //         </>
-    //       )}
-    //     </SimpleRow>
-    //     {(row.overflowMenuRender || row.actionRender) && (
-    //       <OverflowMenu dimension={dimension} tableWidth={tableWidth} row={row} />
-    //     )}
-    //     {row.expandedRowRender && (
-    //       <ExpandedRow opened={row.expanded} contentMaxHeight="90vh" className="tr-expanded">
-    //         <ExpandedRowContent>{row.expandedRowRender(row)}</ExpandedRowContent>
-    //       </ExpandedRow>
-    //     )}
-    //   </Row>
-    // );
+    return (
+      (isGroupRow || visible) && (
+        <RowWrapper
+          dimension={dimension}
+          row={row}
+          underline={(isLastRow && showLastRowUnderline) || !isLastRow}
+          tableWidth={tableWidth}
+          isGroup={isGroupRow}
+          onRowClick={onRowClick}
+          onRowDoubleClick={onRowDoubleClick}
+        >
+          {isGroupRow ? (
+            renderGroupRow(row)
+          ) : (
+            <RegularRow
+              row={row}
+              dimension={dimension}
+              checkboxDimension={checkboxDimension}
+              columns={cols}
+              stickyColumns={stickyColumns}
+              displayRowExpansionColumn={displayRowExpansionColumn}
+              displayRowSelectionColumn={displayRowSelectionColumn}
+              renderBodyCell={renderBodyCell}
+              onRowExpansionChange={handleExpansionChange}
+              onRowSelectionChange={handleCheckboxChange}
+            />
+          )}
+        </RowWrapper>
+      )
+    );
   };
 
   const renderBody = () => {
