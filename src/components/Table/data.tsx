@@ -7,6 +7,8 @@ import { ReactComponent as DeleteOutline } from '@admiral-ds/icons/build/system/
 import { RowAction } from '#src/components/Table';
 
 import type { Column } from '../Table';
+import { Tooltip } from '#src/components/Tooltip';
+import { TooltipHoc } from '#src/components/TooltipHOC';
 
 const AmountCell = styled.div`
   text-overflow: ellipsis;
@@ -841,6 +843,40 @@ const Menu: React.FC<MenuProps> = ({ row, onMenuOpen, onMenuClose }) => {
   );
 };
 
+const IconWrapper = styled.div`
+  width: 20px;
+  height: 20px;
+
+  > svg {
+    fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
+  }
+`;
+const IconDeleteOutline = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLElement>>((props, ref) => {
+  return (
+    <IconWrapper ref={ref} {...props}>
+      <DeleteOutline />
+    </IconWrapper>
+  );
+});
+const TooltipedIconDeleteOutline = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLElement>>((props, ref) => {
+  const iconRef = React.useRef<HTMLDivElement | null>(null);
+  const [visible, setVisible] = React.useState(false);
+  return (
+    <>
+      <IconWrapper ref={iconRef} {...props}>
+        <DeleteOutline />
+      </IconWrapper>
+      <Tooltip
+        visible={visible}
+        onVisibilityChange={(visible: boolean) => setVisible(visible)}
+        renderContent={() => `Delete row`}
+        targetRef={iconRef}
+      />
+    </>
+  );
+});
+const TooltipedIcon = TooltipHoc(IconDeleteOutline);
+
 export const rowListMenu: RowData[] = [
   {
     id: '0001',
@@ -871,11 +907,19 @@ export const rowListMenu: RowData[] = [
     transfer_amount: numberFormatter.format(189_000_000),
     currency: 'RUB',
     rate: 6,
-    actionRender: () => (
-      <RowAction onClick={() => console.log('row action happens')}>
-        <DeleteOutline />
-      </RowAction>
-    ),
+    actionRender: () => {
+      const [visible, setVisible] = React.useState(false);
+
+      return (
+        <RowAction onClick={() => console.log('row action happens')}>
+          <TooltipedIcon
+            visible={visible}
+            handleVisibilityChange={(visible: boolean) => setVisible(visible)}
+            renderContent={() => `Delete`}
+          />
+        </RowAction>
+      );
+    },
   },
   {
     id: '0004',
@@ -886,7 +930,7 @@ export const rowListMenu: RowData[] = [
     rate: 1,
     actionRender: () => (
       <RowAction onClick={() => console.log('row action happens')}>
-        <DeleteOutline />
+        <TooltipedIconDeleteOutline />
       </RowAction>
     ),
   },

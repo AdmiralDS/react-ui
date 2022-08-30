@@ -53,7 +53,7 @@ const Description = () => (
 );
 
 export default {
-  title: 'Admiral-2.1/TooltipRefactor',
+  title: 'Admiral-2.1/Tooltip',
   decorators: [withDesign],
   component: Tooltip,
   subcomponents: {

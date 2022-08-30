@@ -2,6 +2,8 @@ import * as React from 'react';
 import { useMemo } from 'react';
 import { Checkbox } from '#src/components/Checkbox';
 import observeRect from '#src/components/common/observeRect';
+import { ThemeContext } from 'styled-components';
+import { LIGHT_THEME } from '#src/components/themes';
 
 import { RowWidthResizer } from './RowWidthResizer';
 import { Filter } from './filter/Filter';
@@ -141,7 +143,6 @@ export interface TableRow extends Record<RowId, React.ReactNode> {
    * внутрь которого нужно передать произвольную иконку для отображения действия.
    */
   actionRender?: (row: any) => React.ReactNode;
-  hidden?: string;
 }
 
 export interface TableProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -224,8 +225,15 @@ export interface TableProps extends React.HTMLAttributes<HTMLDivElement> {
      */
     fixedRowHeight: number;
   };
-  /** Сообщение, отображаемое при отсутствии совпадений в строках после применения фильтра */
+  /** @deprecated Используйте locale.emptyMessage */
   emptyMessage?: React.ReactNode;
+  /** Объект локализации - позволяет перезадать текстовые константы используемые в компоненте,
+   * по умолчанию значения констант берутся из темы в соответствии с параметром currentLocale, заданном в теме
+   **/
+  locale?: {
+    /** Сообщение, отображаемое при отсутствии совпадений в строках после применения фильтра */
+    emptyMessage?: React.ReactNode;
+  };
 }
 
 type GroupInfo = {
@@ -265,9 +273,11 @@ export const Table: React.FC<TableProps> = ({
   disableColumnResize = false,
   showLastRowUnderline = true,
   virtualScroll,
-  emptyMessage = 'Нет совпадений',
+  emptyMessage: userEmptyMessage,
+  locale,
   ...props
 }) => {
+  const theme = React.useContext(ThemeContext) || LIGHT_THEME;
   const checkboxDimension = dimension === 's' || dimension === 'm' ? 's' : 'm';
   const iconSize = dimension === 's' || dimension === 'm' ? 16 : 20;
   const defaultSpacer = dimension === 'l' || dimension === 'xl' ? '16px' : '12px';
@@ -694,6 +704,8 @@ export const Table: React.FC<TableProps> = ({
   };
 
   const renderBody = () => {
+    const emptyMessage =
+      userEmptyMessage || locale?.emptyMessage || theme.locales[theme.currentLocale].table.emptyMessage;
     if (tableRows.length === 0) {
       return (
         <ScrollTableBody ref={scrollBodyRef} className="tbody">

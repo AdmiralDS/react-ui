@@ -3,7 +3,7 @@
 exports[`TabMenu should render default component 1`] = `
 Object {
   "asFragment": [Function],
-  "baseElement": .c6 {
+  "baseElement": .c7 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -25,40 +25,62 @@ Object {
   background: transparent;
   -webkit-tap-highlight-color: transparent;
   overflow: visible;
-  height: 36px;
-  width: 36px;
+  height: 24px;
+  width: 24px;
 }
 
-.c6:hover:not(:disabled) {
+.c7:hover:not(:disabled):not(:disabled)::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
   border-radius: 50%;
+  width: calc(100% + 12px);
+  height: calc(100% + 12px);
   background-color: #0000000D;
 }
 
-.c6:focus-visible:before {
+.c7:focus-visible:before {
   content: '';
   position: absolute;
-  top: 2px;
-  bottom: 2px;
-  left: 2px;
-  right: 2px;
+  top: -4px;
+  bottom: -4px;
+  left: -4px;
+  right: -4px;
   border: 2px solid #0062FF;
   border-radius: 4px;
 }
 
-.c6:active:not(:disabled) {
+.c7:active:not(:disabled):not(:disabled)::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
   border-radius: 50%;
+  width: calc(100% + 12px);
+  height: calc(100% + 12px);
+  background-color: #0000000D;
+}
+
+.c7:active:not(:disabled):not(:disabled)::after {
   background-color: #00000017;
 }
 
-.c6:disabled {
+.c7:disabled {
   cursor: default;
 }
 
-.c6:disabled *[fill^='#'] {
+.c7:disabled *[fill^='#'] {
   fill: #B0B5BD;
 }
 
-.c8 {
+.c9 {
   position: relative;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
@@ -72,13 +94,13 @@ Object {
   height: 100%;
 }
 
-.c9 {
+.c10 {
   height: 24px;
   width: 24px;
   margin: auto;
 }
 
-.c9 > svg {
+.c10 > svg {
   height: 100%;
   width: 100%;
   -webkit-flex-shrink: 0;
@@ -86,7 +108,7 @@ Object {
   flex-shrink: 0;
 }
 
-.c9 > svg *[fill^='#'] {
+.c10 > svg *[fill^='#'] {
   fill: #717681;
 }
 
@@ -129,7 +151,7 @@ Object {
   height: 0 !important;
 }
 
-.c12 {
+.c13 {
   position: absolute;
   bottom: 0;
   display: -webkit-box;
@@ -266,7 +288,7 @@ Object {
   fill: #B0B5BD;
 }
 
-.c11 {
+.c12 {
   position: relative;
   box-sizing: border-box;
   display: -webkit-inline-box;
@@ -299,7 +321,7 @@ Object {
   -webkit-tap-highlight-color: transparent;
 }
 
-.c11:focus:not(:active):before {
+.c12:focus:not(:active):before {
   position: absolute;
   content: '';
   border: 2px solid #0062FF;
@@ -309,12 +331,12 @@ Object {
   right: 0;
 }
 
-.c11:focus,
-.c11 > .c3 {
+.c12:focus,
+.c12 > .c3 {
   outline: none;
 }
 
-.c11 svg {
+.c12 svg {
   display: inline-block;
   -webkit-flex: 1 0 auto;
   -ms-flex: 1 0 auto;
@@ -324,37 +346,37 @@ Object {
   margin-right: 8px;
 }
 
-.c11 svg *[fill^='#'] {
+.c12 svg *[fill^='#'] {
   fill: #717681;
 }
 
-.c11 [data-badge] {
+.c12 [data-badge] {
   margin-left: 8px;
 }
 
-.c11:hover:not(:disabled) {
+.c12:hover:not(:disabled) {
   background: #0000000D;
 }
 
-.c11:active:not(:disabled) {
+.c12:active:not(:disabled) {
   color: #0062FF;
 }
 
-.c11:active:not(:disabled) *[fill^='#'] {
+.c12:active:not(:disabled) *[fill^='#'] {
   fill: #0062FF;
 }
 
-.c11:active:not(:disabled) [data-badge] {
+.c12:active:not(:disabled) [data-badge] {
   background: #0062FF;
   color: #FFFFFF;
 }
 
-.c11:disabled {
+.c12:disabled {
   color: #B0B5BD;
   cursor: default;
 }
 
-.c11:disabled *[fill^='#'] {
+.c12:disabled *[fill^='#'] {
   fill: #B0B5BD;
 }
 
@@ -370,7 +392,7 @@ Object {
   margin-left: 0px;
 }
 
-.c10 {
+.c11 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -379,23 +401,28 @@ Object {
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  margin-left: -42px;
+  margin-left: -48px;
 }
 
-.c7 {
+.c6 {
   visibility: hidden;
-  margin-left: 6px;
+  width: 48px;
+  height: 48px;
 }
 
-.c7:focus-visible:before {
-  top: -6px;
-  left: -6px;
-  right: -6px;
-  bottom: -6px;
+.c8 {
+  margin: 12px;
+}
+
+.c8:focus-visible:before {
+  top: -12px;
+  left: -12px;
+  right: -12px;
+  bottom: -12px;
   border-radius: 0;
 }
 
-.c7 svg *[fill^='#'] {
+.c8 svg *[fill^='#'] {
   fill: #717681;
 }
 
@@ -430,33 +457,37 @@ Object {
               </div>
             </span>
           </button>
-          <button
-            aria-expanded="false"
-            aria-haspopup="false"
-            class="c6 c7 overflow-menu-button-with-dropdown"
-            tabindex="-1"
-            type="button"
+          <div
+            class="c6"
           >
-            <span
-              class="c8"
+            <button
+              aria-expanded="false"
+              aria-haspopup="false"
+              class="c7 c8 overflow-menu-button-with-dropdown"
+              tabindex="-1"
+              type="button"
             >
-              <div
+              <span
                 class="c9"
               >
                 <div
-                  aria-hidden="true"
-                />
-              </div>
-            </span>
-          </button>
+                  class="c10"
+                >
+                  <div
+                    aria-hidden="true"
+                  />
+                </div>
+              </span>
+            </button>
+          </div>
         </div>
         <div
-          class="c10"
+          class="c11"
           data-number="1"
         >
           <button
             aria-selected="false"
-            class="c11 tag"
+            class="c12 tag"
             id="2"
             role="tab"
             tabindex="-1"
@@ -473,33 +504,37 @@ Object {
               </div>
             </span>
           </button>
-          <button
-            aria-expanded="false"
-            aria-haspopup="false"
-            class="c6 c7 overflow-menu-button-with-dropdown"
-            tabindex="-1"
-            type="button"
+          <div
+            class="c6"
           >
-            <span
-              class="c8"
+            <button
+              aria-expanded="false"
+              aria-haspopup="false"
+              class="c7 c8 overflow-menu-button-with-dropdown"
+              tabindex="-1"
+              type="button"
             >
-              <div
+              <span
                 class="c9"
               >
                 <div
-                  aria-hidden="true"
-                />
-              </div>
-            </span>
-          </button>
+                  class="c10"
+                >
+                  <div
+                    aria-hidden="true"
+                  />
+                </div>
+              </span>
+            </button>
+          </div>
         </div>
         <div
-          class="c10"
+          class="c11"
           data-number="2"
         >
           <button
             aria-selected="false"
-            class="c11 tag"
+            class="c12 tag"
             id="3"
             role="tab"
             tabindex="-1"
@@ -519,12 +554,12 @@ Object {
         </div>
         <div
           aria-hidden="true"
-          class="c12"
+          class="c13"
         />
       </div>
     </div>
   </body>,
-  "container": .c6 {
+  "container": .c7 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -546,40 +581,62 @@ Object {
   background: transparent;
   -webkit-tap-highlight-color: transparent;
   overflow: visible;
-  height: 36px;
-  width: 36px;
+  height: 24px;
+  width: 24px;
 }
 
-.c6:hover:not(:disabled) {
+.c7:hover:not(:disabled):not(:disabled)::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
   border-radius: 50%;
+  width: calc(100% + 12px);
+  height: calc(100% + 12px);
   background-color: #0000000D;
 }
 
-.c6:focus-visible:before {
+.c7:focus-visible:before {
   content: '';
   position: absolute;
-  top: 2px;
-  bottom: 2px;
-  left: 2px;
-  right: 2px;
+  top: -4px;
+  bottom: -4px;
+  left: -4px;
+  right: -4px;
   border: 2px solid #0062FF;
   border-radius: 4px;
 }
 
-.c6:active:not(:disabled) {
+.c7:active:not(:disabled):not(:disabled)::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
   border-radius: 50%;
+  width: calc(100% + 12px);
+  height: calc(100% + 12px);
+  background-color: #0000000D;
+}
+
+.c7:active:not(:disabled):not(:disabled)::after {
   background-color: #00000017;
 }
 
-.c6:disabled {
+.c7:disabled {
   cursor: default;
 }
 
-.c6:disabled *[fill^='#'] {
+.c7:disabled *[fill^='#'] {
   fill: #B0B5BD;
 }
 
-.c8 {
+.c9 {
   position: relative;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
@@ -593,13 +650,13 @@ Object {
   height: 100%;
 }
 
-.c9 {
+.c10 {
   height: 24px;
   width: 24px;
   margin: auto;
 }
 
-.c9 > svg {
+.c10 > svg {
   height: 100%;
   width: 100%;
   -webkit-flex-shrink: 0;
@@ -607,7 +664,7 @@ Object {
   flex-shrink: 0;
 }
 
-.c9 > svg *[fill^='#'] {
+.c10 > svg *[fill^='#'] {
   fill: #717681;
 }
 
@@ -650,7 +707,7 @@ Object {
   height: 0 !important;
 }
 
-.c12 {
+.c13 {
   position: absolute;
   bottom: 0;
   display: -webkit-box;
@@ -787,7 +844,7 @@ Object {
   fill: #B0B5BD;
 }
 
-.c11 {
+.c12 {
   position: relative;
   box-sizing: border-box;
   display: -webkit-inline-box;
@@ -820,7 +877,7 @@ Object {
   -webkit-tap-highlight-color: transparent;
 }
 
-.c11:focus:not(:active):before {
+.c12:focus:not(:active):before {
   position: absolute;
   content: '';
   border: 2px solid #0062FF;
@@ -830,12 +887,12 @@ Object {
   right: 0;
 }
 
-.c11:focus,
-.c11 > .c3 {
+.c12:focus,
+.c12 > .c3 {
   outline: none;
 }
 
-.c11 svg {
+.c12 svg {
   display: inline-block;
   -webkit-flex: 1 0 auto;
   -ms-flex: 1 0 auto;
@@ -845,37 +902,37 @@ Object {
   margin-right: 8px;
 }
 
-.c11 svg *[fill^='#'] {
+.c12 svg *[fill^='#'] {
   fill: #717681;
 }
 
-.c11 [data-badge] {
+.c12 [data-badge] {
   margin-left: 8px;
 }
 
-.c11:hover:not(:disabled) {
+.c12:hover:not(:disabled) {
   background: #0000000D;
 }
 
-.c11:active:not(:disabled) {
+.c12:active:not(:disabled) {
   color: #0062FF;
 }
 
-.c11:active:not(:disabled) *[fill^='#'] {
+.c12:active:not(:disabled) *[fill^='#'] {
   fill: #0062FF;
 }
 
-.c11:active:not(:disabled) [data-badge] {
+.c12:active:not(:disabled) [data-badge] {
   background: #0062FF;
   color: #FFFFFF;
 }
 
-.c11:disabled {
+.c12:disabled {
   color: #B0B5BD;
   cursor: default;
 }
 
-.c11:disabled *[fill^='#'] {
+.c12:disabled *[fill^='#'] {
   fill: #B0B5BD;
 }
 
@@ -891,7 +948,7 @@ Object {
   margin-left: 0px;
 }
 
-.c10 {
+.c11 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -900,23 +957,28 @@ Object {
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  margin-left: -42px;
+  margin-left: -48px;
 }
 
-.c7 {
+.c6 {
   visibility: hidden;
-  margin-left: 6px;
+  width: 48px;
+  height: 48px;
 }
 
-.c7:focus-visible:before {
-  top: -6px;
-  left: -6px;
-  right: -6px;
-  bottom: -6px;
+.c8 {
+  margin: 12px;
+}
+
+.c8:focus-visible:before {
+  top: -12px;
+  left: -12px;
+  right: -12px;
+  bottom: -12px;
   border-radius: 0;
 }
 
-.c7 svg *[fill^='#'] {
+.c8 svg *[fill^='#'] {
   fill: #717681;
 }
 
@@ -950,33 +1012,37 @@ Object {
             </div>
           </span>
         </button>
-        <button
-          aria-expanded="false"
-          aria-haspopup="false"
-          class="c6 c7 overflow-menu-button-with-dropdown"
-          tabindex="-1"
-          type="button"
+        <div
+          class="c6"
         >
-          <span
-            class="c8"
+          <button
+            aria-expanded="false"
+            aria-haspopup="false"
+            class="c7 c8 overflow-menu-button-with-dropdown"
+            tabindex="-1"
+            type="button"
           >
-            <div
+            <span
               class="c9"
             >
               <div
-                aria-hidden="true"
-              />
-            </div>
-          </span>
-        </button>
+                class="c10"
+              >
+                <div
+                  aria-hidden="true"
+                />
+              </div>
+            </span>
+          </button>
+        </div>
       </div>
       <div
-        class="c10"
+        class="c11"
         data-number="1"
       >
         <button
           aria-selected="false"
-          class="c11 tag"
+          class="c12 tag"
           id="2"
           role="tab"
           tabindex="-1"
@@ -993,33 +1059,37 @@ Object {
             </div>
           </span>
         </button>
-        <button
-          aria-expanded="false"
-          aria-haspopup="false"
-          class="c6 c7 overflow-menu-button-with-dropdown"
-          tabindex="-1"
-          type="button"
+        <div
+          class="c6"
         >
-          <span
-            class="c8"
+          <button
+            aria-expanded="false"
+            aria-haspopup="false"
+            class="c7 c8 overflow-menu-button-with-dropdown"
+            tabindex="-1"
+            type="button"
           >
-            <div
+            <span
               class="c9"
             >
               <div
-                aria-hidden="true"
-              />
-            </div>
-          </span>
-        </button>
+                class="c10"
+              >
+                <div
+                  aria-hidden="true"
+                />
+              </div>
+            </span>
+          </button>
+        </div>
       </div>
       <div
-        class="c10"
+        class="c11"
         data-number="2"
       >
         <button
           aria-selected="false"
-          class="c11 tag"
+          class="c12 tag"
           id="3"
           role="tab"
           tabindex="-1"
@@ -1039,7 +1109,7 @@ Object {
       </div>
       <div
         aria-hidden="true"
-        class="c12"
+        class="c13"
       />
     </div>
   </div>,

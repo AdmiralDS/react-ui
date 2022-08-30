@@ -25,10 +25,6 @@ export default {
     },
   },
   argTypes: {
-    localeName: {
-      options: ['ru', 'enUS', 'de'],
-      control: { type: 'radio' },
-    },
     range: {
       control: { type: 'boolean' },
     },

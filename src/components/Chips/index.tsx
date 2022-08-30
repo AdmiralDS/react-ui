@@ -13,7 +13,7 @@ import {
   IconWrapperStyled,
   StyledBadge,
 } from './style';
-import { Badge, BadgeAppearance } from '#src/components/Badge';
+import { BadgeAppearance } from '#src/components/Badge';
 
 export type ChipDimension = 's' | 'm';
 export type ChipAppearance = 'filled' | 'outlined';

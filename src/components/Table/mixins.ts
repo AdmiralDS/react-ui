@@ -84,21 +84,18 @@ export const overflowMenuStyle = css<{ $offset: number; dimension: TableProps['d
         return css`
           width: 31px;
           height: 31px;
-          padding: 0;
           left: ${$offset - 32}px;
         `;
       case 'l':
         return css`
           width: 47px;
           height: 47px;
-          padding: 6px 6px 5px 5px;
           left: ${$offset - 47}px;
         `;
       case 'xl':
         return css`
           width: 55px;
           height: 55px;
-          padding: 10px 10px 9px 9px;
           left: ${$offset - 55}px;
         `;
       case 'm':
@@ -106,7 +103,6 @@ export const overflowMenuStyle = css<{ $offset: number; dimension: TableProps['d
         return css`
           width: 39px;
           height: 39px;
-          padding: 4px 4px 3px 3px;
           left: ${$offset - 39}px;
         `;
     }

@@ -151,10 +151,7 @@ export interface InputProps extends TextInputProps {
 }
 
 export const AutoSizeInput = React.forwardRef<HTMLInputElement, InputProps>(
-  (
-    { placeholder, type, precision = 2, prefix = '', suffix = '₽', thousand = ' ', decimal = '.', status, ...props },
-    ref,
-  ) => {
+  ({ placeholder, type, precision = 2, prefix = '', suffix, thousand = ' ', decimal = '.', status, ...props }, ref) => {
     const [showPrefixSuffix, setPrefixSuffix] = React.useState(false);
 
     const sizerRef = React.useRef<HTMLDivElement>(null);

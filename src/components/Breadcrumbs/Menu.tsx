@@ -24,10 +24,6 @@ const Option = styled.a`
   }
 `;
 
-const Menu = styled(OverflowMenu)`
-  margin-left: 4px;
-`;
-
 export interface MenuButtonProps {
   /** Размер меню */
   dimension: 'm' | 's';
@@ -63,5 +59,5 @@ export const MenuButton: React.FC<MenuButtonProps> = ({ dimension, options }) =>
     });
   }, [options]);
 
-  return <Menu dimension={dimension} items={model} />;
+  return <OverflowMenu dimension={dimension} items={model} />;
 };
