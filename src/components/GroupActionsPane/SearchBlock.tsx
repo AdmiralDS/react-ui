@@ -14,6 +14,9 @@ export interface ColumnsButtonProps extends HTMLAttributes<HTMLButtonElement> {
   onChangeSearchValue: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onOpenSearch: () => void;
   onCloseSearch: () => void;
+  locale?: {
+    inputPlaceholder?: string;
+  };
 }
 
 const StyledIconButton = styled(IconButton)`
@@ -25,7 +28,16 @@ const StyledIconButton = styled(IconButton)`
 
 export const SearchBlock = React.forwardRef<HTMLButtonElement, ColumnsButtonProps>(
   (
-    { dimension = 'l', opened = true, searchValue = '', onOpenSearch, onCloseSearch, onChangeSearchValue, ...props },
+    {
+      dimension = 'l',
+      opened = true,
+      searchValue = '',
+      locale,
+      onOpenSearch,
+      onCloseSearch,
+      onChangeSearchValue,
+      ...props
+    },
     ref,
   ) => {
     const buttonRef = useRef<HTMLButtonElement | null>(null);
@@ -69,6 +81,7 @@ export const SearchBlock = React.forwardRef<HTMLButtonElement, ColumnsButtonProp
         onChange={onChangeSearchValue}
         onBlur={handleInputBlur}
         onFocus={handleInputFocus}
+        locale={locale}
       >
         <StyledIconButton
           ref={refSetter(ref, buttonRef)}

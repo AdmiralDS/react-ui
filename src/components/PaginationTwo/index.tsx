@@ -1,5 +1,6 @@
 import * as React from 'react';
-import styled from 'styled-components';
+import styled, { ThemeContext } from 'styled-components';
+import { LIGHT_THEME } from '#src/components/themes';
 import { typography } from '#src/components/Typography';
 import { uid } from '#src/components/common/uid';
 import { TextInput } from '#src/components/input/TextInput';
@@ -66,12 +67,21 @@ export interface PaginationTwoProps extends Omit<React.HTMLAttributes<HTMLDivEle
   showNextBtnMobile?: boolean;
   /** Отображение инпута, если страниц больше 21й  */
   showInput?: boolean;
-  /** Функция, возвращающая текст, поясняющий, какой диапазон записей сейчас отображается */
+  /** @deprecated Используйте locale.itemRangeText */
   itemRangeText?: (min: number, max: number, total: number) => string;
   /** Размер страницы (сколько максимально умещается записей в одной странице) */
   pageSize?: number;
   /** Общее количество записей */
   totalItems?: number;
+  /** Объект локализации - позволяет перезадать текстовые константы используемые в компоненте,
+   * по умолчанию значения констант берутся из темы в соответствии с параметром currentLocale, заданном в теме
+   **/
+  locale?: {
+    /** Placeholder инпута */
+    inputPlaceholder?: string;
+    /** Функция, возвращающая текст, поясняющий, какой диапазон записей сейчас отображается */
+    itemRangeText?: (min: number, max: number, total: number) => string;
+  };
 }
 
 export const PaginationTwo: React.FC<PaginationTwoProps> = ({
@@ -82,11 +92,17 @@ export const PaginationTwo: React.FC<PaginationTwoProps> = ({
   showNextBtnMobile = true,
   showInput = true,
   onChange,
-  itemRangeText = (min: number, max: number, total: number) => `${min}–${max} записей из ${total}`,
+  itemRangeText: userItemRangeText,
   pageSize,
   totalItems,
+  locale,
   ...props
 }) => {
+  const theme = React.useContext(ThemeContext) || LIGHT_THEME;
+  const itemRangeText =
+    userItemRangeText || locale?.itemRangeText || theme.locales[theme.currentLocale].paginationTwo.itemRangeText;
+  const placeholder = locale?.inputPlaceholder || theme.locales[theme.currentLocale].paginationTwo.inputPlaceholder;
+
   const hideNextButton = mobile || false;
   const hidePrevButton = mobile || false;
   const isInputVisible = showInput && count > 21 && !mobile;
@@ -198,7 +214,7 @@ export const PaginationTwo: React.FC<PaginationTwoProps> = ({
       {isInputVisible && (
         <Input
           pattern="[0-9]+"
-          placeholder="№ страницы"
+          placeholder={placeholder}
           value={inputValue}
           onChange={handleInputChange}
           onKeyDown={handleInputKeyDown}

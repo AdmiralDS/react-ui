@@ -4,7 +4,8 @@ import { typography } from '#src/components/Typography';
 import { ReactComponent as CloseOutline } from '@admiral-ds/icons/build/service/CloseOutline.svg';
 import * as React from 'react';
 import ReactDOM from 'react-dom';
-import styled, { css, Interpolation } from 'styled-components';
+import styled, { css, Interpolation, ThemeContext } from 'styled-components';
+import { LIGHT_THEME } from '#src/components/themes';
 import ModalManager from './manager';
 import { largeGroupBorderRadius } from '#src/components/themes/borderRadius';
 
@@ -212,6 +213,13 @@ export interface ModalProps extends React.HTMLAttributes<HTMLDivElement> {
    *  const overlayStyles = css\`background-color: ${({ theme }) => hexToRgba(theme.color["Neutral/Neutral 05"], 0.6)};\`
    * */
   overlayStyledCss?: Interpolation<any>;
+  /** Объект локализации - позволяет перезадать текстовые константы используемые в компоненте,
+   * по умолчанию значения констант берутся из темы в соответствии с параметром currentLocale, заданном в теме
+   **/
+  locale?: {
+    /** Атрибут aria-label, описывающий назначение кнопки с крестиком, закрывающей модальное окно */
+    closeButtonAriaLabel?: string;
+  };
 }
 
 const manager = new ModalManager();
@@ -228,10 +236,14 @@ export const Modal = React.forwardRef<HTMLDivElement, ModalProps>(
       closeOnOutsideClick,
       displayCloseIcon = true,
       children,
+      locale,
       ...props
     },
     ref,
   ) => {
+    const theme = React.useContext(ThemeContext) || LIGHT_THEME;
+    const closeBtnAriaLabel =
+      locale?.closeButtonAriaLabel || theme.locales[theme.currentLocale].modal.closeButtonAriaLabel;
     const modal = React.useRef<any>({});
     const modalRef: any = React.useRef<HTMLDivElement>(null);
     const overlayRef = React.useRef<HTMLDivElement>(null);
@@ -313,7 +325,7 @@ export const Modal = React.forwardRef<HTMLDivElement, ModalProps>(
         >
           {children}
           {displayCloseIcon && (
-            <CloseButton aria-label="Закрыть модальное окно" mobile={mobile} onClick={handleCloseBtnClick}>
+            <CloseButton aria-label={closeBtnAriaLabel} mobile={mobile} onClick={handleCloseBtnClick}>
               <CloseOutline width={24} height={24} aria-hidden />
             </CloseButton>
           )}
