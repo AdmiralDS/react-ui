@@ -8,6 +8,7 @@ import {
   BadgeWrapper,
   IconWrapper,
   MenuItemWrapper,
+  OverflowMenuContainer,
   StyledOverflowMenu,
   Tab,
   TabContent,
@@ -326,23 +327,24 @@ export const TabMenu: React.FC<TabMenuProps> = ({
     const overflowRef = overflowMenuRefs[tabNumber] ? overflowMenuRefs[tabNumber].ref : null;
 
     return (
-      <StyledOverflowMenu
-        ref={overflowRef}
-        onOpen={() => setOpenedMenu(true)}
-        onClose={() => setOpenedMenu(false)}
-        alignSelf={alignSelf}
-        items={overflowMenuHidden ? [] : tabsForMenu}
-        selected={containsActiveTab(tabsForMenu) ? activeTab : undefined}
-        dimension={dimension}
-        isHidden={overflowMenuHidden}
-        isActive={containsActiveTab(tabsForMenu)}
-        disabled={tabsForMenu.every((tab) => tab.disabled)}
-        onChange={(id: string) => {
-          onChange(id);
-          styleUnderline(0, 0);
-        }}
-        tabIndex={tabIndex}
-      />
+      <OverflowMenuContainer dimension={dimension} isHidden={overflowMenuHidden}>
+        <StyledOverflowMenu
+          ref={overflowRef}
+          onOpen={() => setOpenedMenu(true)}
+          onClose={() => setOpenedMenu(false)}
+          alignSelf={alignSelf}
+          items={overflowMenuHidden ? [] : tabsForMenu}
+          selected={containsActiveTab(tabsForMenu) ? activeTab : undefined}
+          dimension={dimension}
+          isActive={containsActiveTab(tabsForMenu)}
+          disabled={tabsForMenu.every((tab) => tab.disabled)}
+          onChange={(id: string) => {
+            onChange(id);
+            styleUnderline(0, 0);
+          }}
+          tabIndex={tabIndex}
+        />
+      </OverflowMenuContainer>
     );
   };
 

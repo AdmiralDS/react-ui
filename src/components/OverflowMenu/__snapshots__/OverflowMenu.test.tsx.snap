@@ -25,28 +25,50 @@ Object {
   background: transparent;
   -webkit-tap-highlight-color: transparent;
   overflow: visible;
-  height: 36px;
-  width: 36px;
+  height: 24px;
+  width: 24px;
 }
 
-.c0:hover:not(:disabled) {
+.c0:hover:not(:disabled):not(:disabled)::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
   border-radius: 50%;
+  width: calc(100% + 12px);
+  height: calc(100% + 12px);
   background-color: #0000000D;
 }
 
 .c0:focus-visible:before {
   content: '';
   position: absolute;
-  top: 2px;
-  bottom: 2px;
-  left: 2px;
-  right: 2px;
+  top: -4px;
+  bottom: -4px;
+  left: -4px;
+  right: -4px;
   border: 2px solid #0062FF;
   border-radius: 4px;
 }
 
-.c0:active:not(:disabled) {
+.c0:active:not(:disabled):not(:disabled)::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
   border-radius: 50%;
+  width: calc(100% + 12px);
+  height: calc(100% + 12px);
+  background-color: #0000000D;
+}
+
+.c0:active:not(:disabled):not(:disabled)::after {
   background-color: #00000017;
 }
 
@@ -135,28 +157,50 @@ Object {
   background: transparent;
   -webkit-tap-highlight-color: transparent;
   overflow: visible;
-  height: 36px;
-  width: 36px;
+  height: 24px;
+  width: 24px;
 }
 
-.c0:hover:not(:disabled) {
+.c0:hover:not(:disabled):not(:disabled)::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
   border-radius: 50%;
+  width: calc(100% + 12px);
+  height: calc(100% + 12px);
   background-color: #0000000D;
 }
 
 .c0:focus-visible:before {
   content: '';
   position: absolute;
-  top: 2px;
-  bottom: 2px;
-  left: 2px;
-  right: 2px;
+  top: -4px;
+  bottom: -4px;
+  left: -4px;
+  right: -4px;
   border: 2px solid #0062FF;
   border-radius: 4px;
 }
 
-.c0:active:not(:disabled) {
+.c0:active:not(:disabled):not(:disabled)::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
   border-radius: 50%;
+  width: calc(100% + 12px);
+  height: calc(100% + 12px);
+  background-color: #0000000D;
+}
+
+.c0:active:not(:disabled):not(:disabled)::after {
   background-color: #00000017;
 }
 
