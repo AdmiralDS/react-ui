@@ -1,6 +1,8 @@
 import type { FC, MouseEvent } from 'react';
 import React from 'react';
 import { Tooltip } from '#src/components/Tooltip';
+import { ThemeContext } from 'styled-components';
+import { LIGHT_THEME } from '#src/components/themes';
 
 import {
   addMonths,
@@ -13,17 +15,7 @@ import {
 } from '../date-utils';
 import { PanelComponent } from '../styled/PanelComponent';
 import { Month, PanelDate, Year } from '../styled/PanelDate';
-import type { LocaleType } from '../constants';
-import {
-  BACK,
-  capitalizeFirstLetter,
-  FORWARD,
-  NEXT_MONTH,
-  PREVIOUS_MONTH,
-  RETURN,
-  SELECT_MONTH,
-  SELECT_YEAR,
-} from '../constants';
+import { capitalizeFirstLetter } from '../constants';
 
 import { Button } from './Button';
 
@@ -31,10 +23,18 @@ interface IPanelProps {
   viewDate: Date;
   yearsView: boolean;
   monthsView: boolean;
-  localeName: LocaleType;
   minDate?: Date;
   maxDate?: Date;
   tooltipContainer?: Element | null;
+  locale?: {
+    backwardText?: string;
+    forwardText?: string;
+    nextMonthText?: string;
+    previousMonthText?: string;
+    returnText?: string;
+    selectYearText?: string;
+    selectMonthText?: string;
+  };
 
   onYearsViewShow(event: MouseEvent<HTMLDivElement>): void;
 
@@ -55,8 +55,8 @@ export const Panel: FC<IPanelProps> = ({
   maxDate,
   yearsView,
   monthsView,
-  localeName,
   tooltipContainer,
+  locale,
   onYearsViewShow,
   onYearsViewHide,
   onMonthsViewShow,
@@ -64,6 +64,7 @@ export const Panel: FC<IPanelProps> = ({
   onNext,
   onPrevious,
 }) => {
+  const theme = React.useContext(ThemeContext) || LIGHT_THEME;
   const previousMonthDisabled = !!minDate && differenceMonths(minDate, subMonths(viewDate, 1)) > 0;
   const nextMonthDisabled = !!maxDate && differenceMonths(addMonths(viewDate, 1), maxDate) > 0;
   const previousYearDisabled = !!minDate && differenceYears(minDate, subYears(viewDate, 1)) > 0;
@@ -103,20 +104,28 @@ export const Panel: FC<IPanelProps> = ({
             targetRef={previousBtnRef}
             visible={previousBtnTipVisible}
             onVisibilityChange={handlePreviousBtnTipChange}
-            renderContent={() => (yearsView ? BACK : PREVIOUS_MONTH)}
+            renderContent={() =>
+              yearsView
+                ? locale?.backwardText || theme.locales[theme.currentLocale].calendar.backwardText
+                : locale?.previousMonthText || theme.locales[theme.currentLocale].calendar.previousMonthText
+            }
             container={tooltipContainer}
           />
         </>
       )}
       <PanelDate>
         <Month ref={monthRef} view={monthsView} onMouseDown={monthMouseDownHandle}>
-          {capitalizeFirstLetter(getFormattedValue(viewDate, { month: 'long' }, localeName))}
+          {capitalizeFirstLetter(getFormattedValue(viewDate, { month: 'long' }, theme.currentLocale || 'ru'))}
         </Month>
         <Tooltip
           targetRef={monthRef}
           visible={monthTipVisible}
           onVisibilityChange={handleMonthTipChange}
-          renderContent={() => (monthsView ? RETURN : SELECT_MONTH)}
+          renderContent={() =>
+            monthsView
+              ? locale?.returnText || theme.locales[theme.currentLocale].calendar.returnText
+              : locale?.selectMonthText || theme.locales[theme.currentLocale].calendar.selectMonthText
+          }
           container={tooltipContainer}
         />
         <Year ref={yearRef} view={yearsView} onMouseDown={yearMouseDownHandle}>
@@ -126,7 +135,11 @@ export const Panel: FC<IPanelProps> = ({
           targetRef={yearRef}
           visible={yearTipVisible}
           onVisibilityChange={handleYearTipChange}
-          renderContent={() => (yearsView ? RETURN : SELECT_YEAR)}
+          renderContent={() =>
+            yearsView
+              ? locale?.returnText || theme.locales[theme.currentLocale].calendar.returnText
+              : locale?.selectYearText || theme.locales[theme.currentLocale].calendar.selectYearText
+          }
           container={tooltipContainer}
         />
       </PanelDate>
@@ -137,7 +150,11 @@ export const Panel: FC<IPanelProps> = ({
             targetRef={nextBtnRef}
             visible={nextBtnTipVisible}
             onVisibilityChange={handleNextBtnTipChange}
-            renderContent={() => (yearsView ? FORWARD : NEXT_MONTH)}
+            renderContent={() =>
+              yearsView
+                ? locale?.forwardText || theme.locales[theme.currentLocale].calendar.forwardText
+                : locale?.nextMonthText || theme.locales[theme.currentLocale].calendar.nextMonthText
+            }
             container={tooltipContainer}
           />
         </>

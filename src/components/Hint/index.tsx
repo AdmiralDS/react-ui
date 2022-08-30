@@ -45,6 +45,13 @@ export interface HintProps extends React.HTMLAttributes<HTMLDivElement> {
   anchorId?: string;
   /** Позволяет добавлять миксин созданный с помощью styled css для внешнего контейнера (AnchorWrapper) */
   anchorCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+  /** Объект локализации - позволяет перезадать текстовые константы используемые в компоненте,
+   * по умолчанию значения констант берутся из темы в соответствии с параметром currentLocale, заданном в теме
+   **/
+  locale?: {
+    /** Атрибут aria-label, описывающий назначение кнопки с крестиком, закрывающей хинт */
+    closeButtonAriaLabel?: string;
+  };
 }
 
 export const Hint: React.FC<HintProps> = ({
@@ -60,6 +67,7 @@ export const Hint: React.FC<HintProps> = ({
   anchorClassName,
   anchorId: anchorIdProp,
   anchorCssMixin,
+  locale,
   ...props
 }) => {
   const anchorElementRef = React.useRef<HTMLDivElement | null>(null);
@@ -221,6 +229,7 @@ export const Hint: React.FC<HintProps> = ({
             anchorId={anchorId}
             trapFocus={trapFocus}
             hideHint={hideHint}
+            locale={locale}
             {...props}
           />
         </Portal>

@@ -3,6 +3,8 @@ import { InputHTMLAttributes, useEffect, useRef, useState } from 'react';
 import * as React from 'react';
 import { typography } from '#src/components/Typography';
 import { refSetter } from '#src/components/common/utils/refSetter';
+import { ThemeContext } from 'styled-components';
+import { LIGHT_THEME } from '#src/components/themes';
 
 type InputDimension = 's' | 'l';
 
@@ -11,6 +13,9 @@ export interface SearchInputProps extends InputHTMLAttributes<HTMLInputElement> 
   dimension?: InputDimension;
   collapsed?: boolean;
   opened?: boolean;
+  locale?: {
+    inputPlaceholder?: string;
+  };
 }
 
 const collapsedMixin = css<{ dimension?: InputDimension; collapsed?: boolean }>`
@@ -65,7 +70,11 @@ const StyledInput = styled.input<{ dimension?: InputDimension; visible?: boolean
 `;
 
 export const SearchInput = React.forwardRef<HTMLInputElement, SearchInputProps>(
-  ({ dimension = 'l', opened, children, value, ...props }, ref) => {
+  ({ dimension = 'l', opened, children, value, locale, ...props }, ref) => {
+    const theme = React.useContext(ThemeContext) || LIGHT_THEME;
+    const placeholder =
+      locale?.inputPlaceholder || theme.locales[theme.currentLocale].groupActionsPane.inputPlaceholder;
+
     const inputRef = useRef<HTMLInputElement>(null);
     const [collapsed, setCollapsed] = useState<boolean>(false);
 
@@ -87,7 +96,7 @@ export const SearchInput = React.forwardRef<HTMLInputElement, SearchInputProps>(
           visible={visible}
           value={value}
           dimension={dimension}
-          placeholder={'Искать в таблице'}
+          placeholder={placeholder}
         />
         {children}
       </InputWrapper>
