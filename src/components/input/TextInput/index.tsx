@@ -250,6 +250,9 @@ export interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
 
   /** Отображение тултипа */
   showTooltip?: boolean;
+
+  /** Ref на элемент, относительно которого позиционируется тултип */
+  tooltipTargetRef?: React.RefObject<HTMLElement>;
 }
 
 export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
@@ -268,6 +271,7 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
       placeholder,
       skeleton = false,
       showTooltip = true,
+      tooltipTargetRef,
       ...props
     },
     ref,
@@ -397,7 +401,7 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
             visible={tooltipVisible}
             onVisibilityChange={setTooltipVisible}
             renderContent={() => inputRef?.current?.value}
-            targetRef={wrapperRef}
+            targetRef={tooltipTargetRef || wrapperRef}
           />
         )}
       </>

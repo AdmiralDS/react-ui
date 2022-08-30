@@ -168,6 +168,7 @@ export const EditMode = React.forwardRef<HTMLInputElement, EditModeProps>(
     const [localVal, setLocalVal] = React.useState(value);
     const iconSize = dimension === 's' ? 20 : 24;
     const inputRef = React.useRef<HTMLInputElement>(null);
+    const wrapperRef = React.useRef<HTMLDivElement>(null);
 
     const [overflowActive, setOverflowActive] = React.useState<boolean>(false);
     const [tooltipVisible, setTooltipVisible] = React.useState<boolean>(false);
@@ -209,6 +210,7 @@ export const EditMode = React.forwardRef<HTMLInputElement, EditModeProps>(
         data-dimension={`${dimension}${bold && editDimension !== 'xl' ? '-bold' : ''}`}
         data-disabled={disabled}
         cssMixin={containerCssMixin}
+        ref={wrapperRef}
       >
         {edit ? (
           !disabled &&
@@ -220,6 +222,7 @@ export const EditMode = React.forwardRef<HTMLInputElement, EditModeProps>(
                 disabled={disabled}
                 dimension={editDimension}
                 value={value}
+                tooltipTargetRef={wrapperRef}
                 {...props}
               />
               <EditButton
@@ -244,7 +247,7 @@ export const EditMode = React.forwardRef<HTMLInputElement, EditModeProps>(
                 visible={tooltipVisible}
                 onVisibilityChange={setTooltipVisible}
                 renderContent={() => value}
-                targetRef={textRef}
+                targetRef={wrapperRef}
               />
             )}
             {!props.readOnly && <EditIcon height={iconSize} width={iconSize} onClick={enableEdit} />}
