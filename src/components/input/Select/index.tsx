@@ -306,7 +306,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
     const shouldFixHeight = multiple ? shouldFixMultiSelectHeight : shouldFixSingleSelectHeight;
 
     const wrappedVisibleValue = visibleValueIsString ? (
-      <DisplayValue visibleValue={visibleValue} isSearchPanelOpen={isSearchPanelOpen} />
+      <DisplayValue visibleValue={visibleValue} isSearchPanelOpen={isSearchPanelOpen} targetRef={containerRef} />
     ) : (
       visibleValue
     );

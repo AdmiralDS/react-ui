@@ -273,6 +273,7 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
     ref,
   ) => {
     const inputRef = React.useRef<HTMLInputElement>(null);
+    const wrapperRef = React.useRef<HTMLDivElement>(null);
 
     const iconArray = React.Children.toArray(icons);
 
@@ -363,41 +364,43 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
       }
     }, [inputRef.current, handleInput, placeholder]);
     return (
-      <Container
-        className={className}
-        style={style}
-        dimension={props.dimension}
-        ref={containerRef}
-        data-read-only={props.readOnly ? true : undefined}
-        data-status={status}
-        skeleton={skeleton}
-        {...(props.disableCopying && {
-          onMouseDown: stopEvent,
-        })}
-      >
-        <Input
-          ref={refSetter(ref, inputRef)}
-          {...props}
-          placeholder={placeholder}
-          iconCount={iconCount}
-          type={type === 'password' && isPasswordVisible ? 'text' : type}
-        />
+      <>
+        <Container
+          className={className}
+          style={style}
+          dimension={props.dimension}
+          ref={containerRef || wrapperRef}
+          data-read-only={props.readOnly ? true : undefined}
+          data-status={status}
+          skeleton={skeleton}
+          {...(props.disableCopying && {
+            onMouseDown: stopEvent,
+          })}
+        >
+          <Input
+            ref={refSetter(ref, inputRef)}
+            {...props}
+            placeholder={placeholder}
+            iconCount={iconCount}
+            type={type === 'password' && isPasswordVisible ? 'text' : type}
+          />
+          <BorderedDiv />
+          {iconCount > 0 && (
+            <IconPanel disabled={props.disabled} dimension={props.dimension}>
+              {iconArray}
+            </IconPanel>
+          )}
+          {children}
+        </Container>
         {showTooltip && overflowActive && (
           <Tooltip
             visible={tooltipVisible}
             onVisibilityChange={setTooltipVisible}
             renderContent={() => inputRef?.current?.value}
-            targetRef={inputRef}
+            targetRef={wrapperRef}
           />
         )}
-        <BorderedDiv />
-        {iconCount > 0 && (
-          <IconPanel disabled={props.disabled} dimension={props.dimension}>
-            {iconArray}
-          </IconPanel>
-        )}
-        {children}
-      </Container>
+      </>
     );
   },
 );

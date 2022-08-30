@@ -3,7 +3,13 @@ import { Tooltip } from '#src/components/Tooltip';
 import { StringValueWrapper } from './styled';
 import { checkOverflow } from '#src/components/common/utils/checkOverflow';
 
-export const DisplayValue: React.FC<any> = ({ visibleValue, isSearchPanelOpen }) => {
+export interface DisplayValueProps {
+  visibleValue: string;
+  isSearchPanelOpen: boolean;
+  targetRef: React.RefObject<HTMLElement>;
+}
+
+export const DisplayValue: React.FC<DisplayValueProps> = ({ visibleValue, isSearchPanelOpen, targetRef }) => {
   const valueRef = React.useRef(null);
   const [overflowActive, setOverflowActive] = React.useState<boolean>(false);
   const [tooltipVisible, setTooltipVisible] = React.useState<boolean>(false);
@@ -24,7 +30,7 @@ export const DisplayValue: React.FC<any> = ({ visibleValue, isSearchPanelOpen })
           visible={tooltipVisible}
           onVisibilityChange={setTooltipVisible}
           renderContent={() => visibleValue}
-          targetRef={valueRef}
+          targetRef={targetRef}
         />
       )}
     </>
