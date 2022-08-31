@@ -157,11 +157,24 @@ export interface EditModeProps extends Omit<TextInputProps, 'dimension'> {
   onConfirm?: (value: string) => void;
   /** Колбек на нажатие кнопки очистки инпута */
   onClear?: () => void;
+  /** Отображение тултипа, по умолчанию true */
+  showTooltip?: boolean;
 }
 
 export const EditMode = React.forwardRef<HTMLInputElement, EditModeProps>(
   (
-    { dimension = 'm', bold = false, containerCssMixin, disabled = false, onEdit, onConfirm, onClear, value, ...props },
+    {
+      dimension = 'm',
+      bold = false,
+      containerCssMixin,
+      disabled = false,
+      onEdit,
+      onConfirm,
+      onClear,
+      value,
+      showTooltip = true,
+      ...props
+    },
     ref,
   ) => {
     const [edit, setEdit] = React.useState(false);
@@ -222,7 +235,7 @@ export const EditMode = React.forwardRef<HTMLInputElement, EditModeProps>(
                 disabled={disabled}
                 dimension={editDimension}
                 value={value}
-                tooltipTargetRef={wrapperRef}
+                containerRef={wrapperRef}
                 {...props}
               />
               <EditButton
@@ -241,10 +254,12 @@ export const EditMode = React.forwardRef<HTMLInputElement, EditModeProps>(
           )
         ) : (
           <>
-            <Text ref={textRef} onClick={!props.readOnly ? enableEdit : undefined}>{value}</Text>
-            {overflowActive && (
+            <Text ref={textRef} onClick={!props.readOnly ? enableEdit : undefined}>
+              {value}
+            </Text>
+            {showTooltip && (
               <Tooltip
-                visible={tooltipVisible}
+                visible={tooltipVisible && overflowActive}
                 onVisibilityChange={setTooltipVisible}
                 renderContent={() => value}
                 targetRef={wrapperRef}
