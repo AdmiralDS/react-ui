@@ -133,7 +133,6 @@ export const PaginationOne: React.FC<PaginationOneProps> = ({
   menuWidth,
   dropMaxHeight = '300px',
   dropContainerCssMixin,
-  className = '',
   locale,
   ...props
 }) => {
@@ -196,7 +195,7 @@ export const PaginationOne: React.FC<PaginationOneProps> = ({
             dropContainerCssMixin={dropContainerCssMixin}
             menuWidth={menuWidth}
             dropMenuDataAttributes={dropMenuProps}
-            className={className + ' records-per-page-with-dropdown'}
+            className={'records-per-page-with-dropdown'}
           >
             {pageSize}
           </MenuButton>
@@ -221,7 +220,7 @@ export const PaginationOne: React.FC<PaginationOneProps> = ({
             dropContainerCssMixin={dropContainerCssMixin}
             menuWidth={menuWidth}
             dropMenuDataAttributes={dropMenuProps}
-            className={className + ' current-page-number-with-dropdown'}
+            className={'current-page-number-with-dropdown'}
           >
             {page}
           </MenuButton>
