@@ -289,7 +289,7 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
         return;
       }
       setOverflowActive(false);
-    }, [props.value]);
+    }, [inputRef.current?.value]);
 
     const [isPasswordVisible, setPasswordVisible] = React.useState(false);
     if (!props.readOnly && type === 'password') {
