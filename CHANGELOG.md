@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.1.0](https://github.com/AdmiralDS/react-ui/compare/v2.0.0...v2.1.0) (2022-08-31)
+
+
+### Features
+
+* **EditMode:** add dimension XXL ([e5c390c](https://github.com/AdmiralDS/react-ui/commit/e5c390c1f5486f5ec3387aff29765cc5ca385734))
+* **Stepper:** add mobile prop, make step width adaptive ([ae32953](https://github.com/AdmiralDS/react-ui/commit/ae32953375cd53bd58f1175975f93fcdb1b0f97f))
+* **Table:** add row group ([5595afe](https://github.com/AdmiralDS/react-ui/commit/5595afe147eedf82233b09a5e64c61e750e85bca))
+* **Table:** add Tooltip example for icons ([e67765e](https://github.com/AdmiralDS/react-ui/commit/e67765efa0da4dd48727f234698cceef7a649c13))
+* **Table:** add Tooltip example for icons ([57ea7c8](https://github.com/AdmiralDS/react-ui/commit/57ea7c8d79d690c98ed9aacc0593ec4533b00501))
+* **Table:** add TooltipHoc example for icons ([a86f248](https://github.com/AdmiralDS/react-ui/commit/a86f2483298ea2da4faa5ef98d146d50f78d5dac))
+* **Theme:** add localization params to theme, define ru, en, en-US locales, move all text constants from components to theme locale ([5284ab5](https://github.com/AdmiralDS/react-ui/commit/5284ab50421dcb6c2d30f109ce7d956f1b1b1dc8))
+* **Typography:** add new text style 'Caption/Caption 2' ([cae23e2](https://github.com/AdmiralDS/react-ui/commit/cae23e262960c301e3a4a87334ff7e1215712bad))
+
+
+### Bug Fixes
+
+* [#348](https://github.com/AdmiralDS/react-ui/issues/348) [#346](https://github.com/AdmiralDS/react-ui/issues/346) ([0449bc5](https://github.com/AdmiralDS/react-ui/commit/0449bc56b10135d41ea70c3ed5a60ce55ba4be08))
+* **OverflowMenu:** fix component size ([c0ba3cb](https://github.com/AdmiralDS/react-ui/commit/c0ba3cb701270e509460366ada000fbf6f7155d2))
+* **PaginationOne:** fix setting className to container ([0ad2bf8](https://github.com/AdmiralDS/react-ui/commit/0ad2bf8dbc9b510c9aa205936869231eea4c0ad7))
+* **Storybook:** update icon components ([d05bd10](https://github.com/AdmiralDS/react-ui/commit/d05bd10b998d15e8a76d107864c876ac0b3c2bef))
+
 ## [2.0.0](https://github.com/AdmiralDS/react-ui/compare/v1.10.0...v2.0.0) (2022-08-23)
 
 
