@@ -19,6 +19,7 @@ export interface RowWrapperProps extends HTMLAttributes<HTMLDivElement> {
   underline: boolean;
   /** Признак является ли сторока групповой */
   isGroup: boolean;
+  rowWidth?: number;
 }
 
 export const RowWrapper = ({
@@ -30,6 +31,7 @@ export const RowWrapper = ({
   children,
   tableWidth,
   isGroup,
+  rowWidth,
   ...props
 }: RowWrapperProps) => {
   const handleRowClick = (rowId: RowId) => {
@@ -45,12 +47,12 @@ export const RowWrapper = ({
       {...props}
       onClick={() => handleRowClick(row.id)}
       onDoubleClick={() => handleRowDoubleClick(row.id)}
-      key={`row_${row.id}`}
       underline={underline}
       disabled={!!row.disabled}
       dimension={dimension}
-      className={`tr ${row.className}`}
+      className={row.className && `tr ${row.className}`}
       isGroup={isGroup}
+      rowWidth={rowWidth}
     >
       <SimpleRow
         className="tr-simple"
