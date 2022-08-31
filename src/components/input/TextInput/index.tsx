@@ -392,9 +392,9 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
           )}
           {children}
         </Container>
-        {showTooltip && overflowActive && (
+        {showTooltip && (
           <Tooltip
-            visible={tooltipVisible}
+            visible={tooltipVisible && overflowActive}
             onVisibilityChange={setTooltipVisible}
             renderContent={() => inputRef?.current?.value}
             targetRef={wrapperRef}
