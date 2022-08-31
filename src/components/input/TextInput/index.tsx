@@ -279,13 +279,17 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
 
     const [overflowActive, setOverflowActive] = React.useState<boolean>(false);
     const [tooltipVisible, setTooltipVisible] = React.useState<boolean>(false);
+
+    // единственная загвоздка, сейчас useEffect срабатывает вообще всегда, а надо чтобы только при изменении значения инпута
+    // но значение может меняться при смене props.value, props.defaultValue,
+    // его могут изменить программного через inputRef.current.value, оно меняется при срабатывании события oninput
+    // не знаю пока как обработать все возможные случаи, при которых меняется значение инпута
     React.useEffect(() => {
-      if (checkOverflow(inputRef.current)) {
-        setOverflowActive(true);
-        return;
+      const element = inputRef.current;
+      if (element && checkOverflow(element) !== overflowActive) {
+        setOverflowActive(checkOverflow(element));
       }
-      setOverflowActive(false);
-    }, [tooltipVisible]);
+    });
 
     const [isPasswordVisible, setPasswordVisible] = React.useState(false);
     if (!props.readOnly && type === 'password') {
@@ -392,9 +396,9 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
           )}
           {children}
         </Container>
-        {showTooltip && (
+        {showTooltip && overflowActive && (
           <Tooltip
-            visible={tooltipVisible && overflowActive}
+            visible={tooltipVisible}
             onVisibilityChange={setTooltipVisible}
             renderContent={() => inputRef?.current?.value}
             targetRef={wrapperRef}
