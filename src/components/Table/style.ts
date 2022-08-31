@@ -316,11 +316,16 @@ export const ExtraText = styled.div<{ dimension: TableProps['dimension']; lineCl
   ${({ lineClamp }) => (lineClamp === 1 ? singleLineTitle : multiLineTitle)}
 `;
 
+const rowWidthStyle = css<{ rowWidth?: number }>`
+  width: ${(p) => `${p.rowWidth}px`};
+`;
+
 export const Row = styled.div<{
   dimension: TableProps['dimension'];
   underline: boolean;
   disabled?: boolean;
   isGroup?: boolean;
+  rowWidth?: number;
 }>`
   display: flex;
   flex-direction: column;
@@ -329,6 +334,7 @@ export const Row = styled.div<{
   ${(p) => (p.isGroup ? groupRowStyle : rowStyle)}
   ${({ disabled }) => disabled && disabledRow}
   ${({ underline }) => underline && underlineRow}
+  ${(p) => (p.isGroup && p.rowWidth ? rowWidthStyle : '')}
 `;
 
 export const SimpleRow = styled.div<{ selected?: boolean; disabled?: boolean; error?: boolean; success?: boolean }>`

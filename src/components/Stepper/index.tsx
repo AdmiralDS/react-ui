@@ -18,10 +18,20 @@ export interface StepperProps extends HTMLAttributes<HTMLUListElement> {
   activeStep: number;
   /** Количество строк в шаге, все шаги по высоте вмещают одинаковое количество строк */
   lineClamp?: 1 | 2 | 3;
-  /** Ширина шага */
+  /** Ширина шага
+   * Если данный параметр не задан, то ширина шага будет адаптивной:
+   * - при горизонтальной ориентации все шаги будут в равной степени делить между собой свободное пространство (ширину степпера);
+   * - при вертикальной ориентации каждый шаг займет 100% ширины степпера.
+   * То есть шаги будут пропорционально увеличиваться/уменьшаться при изменении ширины степпера.
+   */
   stepWidth?: number | string;
   /** В последнем шаге опционально можно выключать статусную полосу */
   hideLastStepLine?: boolean;
+  /** Мобильное отображение компонента
+   * В мобильной версии компонента применяется только горизонтальный вариант компонента, ширина шагов фиксирована,
+   * по мере прохождения шагов происходит автоматический скролл по горизонтали
+   */
+  mobile?: boolean;
 }
 
 export const Stepper: FC<StepperProps> = ({
@@ -30,6 +40,7 @@ export const Stepper: FC<StepperProps> = ({
   lineClamp = 3,
   stepWidth,
   hideLastStepLine = false,
+  mobile,
   children,
   ...props
 }) => {
@@ -53,13 +64,21 @@ export const Stepper: FC<StepperProps> = ({
           ...step.props,
         });
   });
+  const stepsAmount = steps.length;
   const contextValue = React.useMemo(
-    () => ({ activeStep, orientation, lineClamp, stepWidth }),
-    [activeStep, orientation, lineClamp, stepWidth],
+    () => ({
+      activeStep,
+      orientation,
+      lineClamp,
+      stepsAmount,
+      stepWidth,
+      mobile,
+    }),
+    [activeStep, orientation, lineClamp, stepWidth, stepsAmount, mobile],
   );
 
   React.useEffect(() => {
-    if (listRef.current && orientation === 'horizontal') {
+    if (listRef.current && mobile && orientation === 'horizontal') {
       const activeNode = listRef.current.childNodes[activeStep] || listRef.current.firstChild;
       listRef.current.scrollLeft = activeStep === 0 ? activeNode.offsetLeft : activeNode.offsetLeft - 16;
     }

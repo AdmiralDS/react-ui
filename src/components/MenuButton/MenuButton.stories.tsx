@@ -204,7 +204,7 @@ const Template1: ComponentStory<typeof MenuButton> = (args) => {
         items={model}
         onOpen={() => console.log('open menu')}
         onClose={() => console.log('close menu')}
-        data-dropdown-container-id="menuButtonWithDropDown"
+        data-dropdown-container-id="menu-button-with-dropdown"
       >
         test
       </MenuButton>

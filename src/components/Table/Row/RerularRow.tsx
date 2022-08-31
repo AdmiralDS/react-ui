@@ -2,13 +2,9 @@ import * as React from 'react';
 import {
   CheckboxCell,
   ExpandCell,
-  // ExpandedRow,
-  // ExpandedRowContent,
   ExpandIcon,
   ExpandIconWrapper,
   Filler,
-  // Row,
-  // SimpleRow,
   StickyWrapper,
 } from '#src/components/Table/style';
 import { Checkbox } from '#src/components/Checkbox';

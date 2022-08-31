@@ -17,8 +17,8 @@ export const Label = styled.label<{ disabled?: boolean }>`
   [data-focus-within] & {
     color: ${(props) => (props.disabled ? '' : props.theme.color['Neutral/Neutral 50'])};
   }
-  [data-required-within] &:before {
-    content: '* ';
+  [data-required-within] &:after {
+    content: ' *';
     color: ${(props) => props.theme.color['Error/Error 60 Main']};
   }
   margin-bottom: 8px;

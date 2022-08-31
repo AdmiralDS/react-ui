@@ -135,7 +135,7 @@ const Template1: ComponentStory<typeof MultiButton> = (args) => {
           options={items}
           onOpen={() => console.log('open menu')}
           onClose={() => console.log('close menu')}
-          data-dropdown-container-id="firstMultiButtonWithDropDown"
+          data-dropdown-container-id="first-multi-button-with-dropdown"
         />
         <Separator />
         <MultiButton
@@ -149,7 +149,7 @@ const Template1: ComponentStory<typeof MultiButton> = (args) => {
           options={items}
           onOpen={() => console.log('open menu')}
           onClose={() => console.log('close menu')}
-          data-dropdown-container-id="secondMultiButtonWithDropDown"
+          data-dropdown-container-id="second-multi-button-with-dropdown"
         />
       </div>
     </ThemeProvider>

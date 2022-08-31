@@ -33,7 +33,7 @@ export const Step: FC<StepProps> = ({
   children,
   ...props
 }) => {
-  const { activeStep, orientation, stepWidth } = React.useContext(StepperContext);
+  const { activeStep, orientation, stepWidth, stepsAmount, mobile } = React.useContext(StepperContext);
   const clickable = !propDisabled && (!!onClick || !!link) && !!propCompleted;
   const active = propActive !== undefined ? propActive : activeStep === index;
   const completed = !!propCompleted && !propDisabled;
@@ -66,6 +66,8 @@ export const Step: FC<StepProps> = ({
       active={active}
       data-disabled={propDisabled}
       stepWidth={stepWidth}
+      stepsAmount={stepsAmount}
+      mobile={mobile}
       onClick={handleClick}
       {...extraProps}
       {...props}
