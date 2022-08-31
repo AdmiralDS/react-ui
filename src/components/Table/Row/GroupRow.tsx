@@ -5,6 +5,7 @@ import {
   ExpandIconWrapper,
   CheckboxCell,
   GroupTextContent,
+  StickyWrapper,
 } from '#src/components/Table/style';
 import * as React from 'react';
 import type { TableRow } from '#src/components/Table';
@@ -46,29 +47,31 @@ export const GroupRow = ({
 
   return (
     <>
-      <ExpandCell dimension={dimension}>
-        <ExpandIconWrapper>
-          <ExpandIcon
-            $isOpen={row.expanded}
-            data-disabled={row.disabled ? true : undefined}
-            onClick={handleExpandClick}
-            aria-hidden
-          />
-        </ExpandIconWrapper>
-      </ExpandCell>
-      {displayRowSelectionColumn && (
-        <CheckboxCell dimension={dimension} className="td_checkbox">
-          <Checkbox
-            disabled={row.disabled || row.checkboxDisabled}
-            dimension={checkboxDimension}
-            checked={!!checked}
-            indeterminate={indeterminate}
-            onChange={handleCheckboxChange}
-            onClick={handleCheckboxClick}
-          />
-        </CheckboxCell>
-      )}
-      <Cell key={`${row.id}`} dimension={dimension} style={{ width: '100%' }} className="td">
+      <StickyWrapper>
+        <ExpandCell dimension={dimension}>
+          <ExpandIconWrapper>
+            <ExpandIcon
+              $isOpen={row.expanded}
+              data-disabled={row.disabled ? true : undefined}
+              onClick={handleExpandClick}
+              aria-hidden
+            />
+          </ExpandIconWrapper>
+        </ExpandCell>
+        {displayRowSelectionColumn && (
+          <CheckboxCell dimension={dimension} className="td_checkbox">
+            <Checkbox
+              disabled={row.disabled || row.checkboxDisabled}
+              dimension={checkboxDimension}
+              checked={!!checked}
+              indeterminate={indeterminate}
+              onChange={handleCheckboxChange}
+              onClick={handleCheckboxClick}
+            />
+          </CheckboxCell>
+        )}
+      </StickyWrapper>
+      <Cell key={`${row.id}`} dimension={dimension} className="td">
         {renderCell ? renderCell(row, 'group') : <GroupTextContent>{row.groupTitle || ''}</GroupTextContent>}
       </Cell>
     </>

@@ -681,6 +681,8 @@ export const Table: React.FC<TableProps> = ({
           isGroup={isGroupRow}
           onRowClick={onRowClick}
           onRowDoubleClick={onRowDoubleClick}
+          rowWidth={headerRef.current?.scrollWidth}
+          key={`row_${row.id}`}
         >
           {isGroupRow ? (
             renderGroupRow(row)
