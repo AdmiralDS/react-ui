@@ -234,7 +234,7 @@ export interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
   isLoading?: boolean;
 
   /** Ref контейнера компонента */
-  containerRef?: ForwardedRef<HTMLDivElement>;
+  containerRef?: React.RefObject<HTMLDivElement>;
 
   /**
    * Дает возможность изменить значение поля ввода и позицию курсора до момента отображения при следующем цикле рендеринга.
@@ -248,11 +248,8 @@ export interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
   /** Состояние skeleton */
   skeleton?: boolean;
 
-  /** Отображение тултипа */
+  /** Отображение тултипа, по умолчанию true */
   showTooltip?: boolean;
-
-  /** Ref на элемент, относительно которого позиционируется тултип */
-  tooltipTargetRef?: React.RefObject<HTMLElement>;
 }
 
 export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
@@ -271,25 +268,24 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
       placeholder,
       skeleton = false,
       showTooltip = true,
-      tooltipTargetRef,
       ...props
     },
     ref,
   ) => {
     const inputRef = React.useRef<HTMLInputElement>(null);
-    const wrapperRef = React.useRef<HTMLDivElement>(null);
+    const wrapperRef = containerRef || React.useRef<HTMLDivElement>(null);
 
     const iconArray = React.Children.toArray(icons);
 
     const [overflowActive, setOverflowActive] = React.useState<boolean>(false);
     const [tooltipVisible, setTooltipVisible] = React.useState<boolean>(false);
-    React.useLayoutEffect(() => {
+    React.useEffect(() => {
       if (checkOverflow(inputRef.current)) {
         setOverflowActive(true);
         return;
       }
       setOverflowActive(false);
-    }, [inputRef.current?.value]);
+    }, [tooltipVisible]);
 
     const [isPasswordVisible, setPasswordVisible] = React.useState(false);
     if (!props.readOnly && type === 'password') {
@@ -373,7 +369,7 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
           className={className}
           style={style}
           dimension={props.dimension}
-          ref={containerRef || wrapperRef}
+          ref={wrapperRef}
           data-read-only={props.readOnly ? true : undefined}
           data-status={status}
           skeleton={skeleton}
@@ -401,7 +397,7 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
             visible={tooltipVisible}
             onVisibilityChange={setTooltipVisible}
             renderContent={() => inputRef?.current?.value}
-            targetRef={tooltipTargetRef || wrapperRef}
+            targetRef={wrapperRef}
           />
         )}
       </>
