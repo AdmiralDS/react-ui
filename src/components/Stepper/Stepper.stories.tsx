@@ -173,7 +173,7 @@ const Template3: ComponentStory<typeof Stepper> = (args) => {
         })}
       </Stepper>
       <Separator />
-      <Stepper activeStep={2} orientation="vertical">
+      <Stepper activeStep={2} orientation="vertical" style={{ width: '25%' }}>
         {steps.map(({ content, ...step }) => {
           return (
             <Step {...step}>
@@ -209,7 +209,7 @@ const Template4: ComponentStory<typeof Stepper> = (args) => {
         })}
       </Stepper>
       <Separator />
-      <Stepper activeStep={2} orientation="vertical">
+      <Stepper activeStep={2} orientation="vertical" style={{ width: '225px' }}>
         {steps.map(({ content, ...step }) => {
           return (
             <Step {...step} onClick={(step: any) => console.log(step.index)}>
@@ -301,7 +301,7 @@ const Template6: ComponentStory<typeof Stepper> = (args) => {
             Шаг вперёд
           </Button>
         </div>
-        <Stepper activeStep={activeStep}>
+        <Stepper activeStep={activeStep} mobile>
           {steps.map(({ content, ...step }) => {
             return (
               <Step {...step}>
@@ -330,6 +330,21 @@ StepKinds.parameters = {
       (пройденные) шаги, для соответствующих шагов необходимо задать параметр completed. Также компонент Step имеет параметры disabled, 
       error, warning.\n\nПройденные шаги могут быть кликабельными, для этого у них 
       должен быть задан колбек onClick или параметр link.`,
+    },
+  },
+};
+
+export const StepAdaptive = Template3.bind({});
+StepAdaptive.args = {};
+StepAdaptive.storyName = 'Stepper. Адаптив.';
+StepAdaptive.parameters = {
+  docs: {
+    description: {
+      story: `С помощью параметра stepWidth можно задать ширину шага. Если данный параметр не задан, 
+      то ширина шага будет рассчитываться следующим образом:\n\n- при горизонтальной ориентации все 
+      шаги будут в равной степени делить между собой свободное пространство;\n\n- при вертикальной 
+      ориентации каждый шаг займет 100% ширины степпера.\n\nТаким образом шаги будут пропорционально 
+      увеличиваться/уменьшаться при изменении ширины степпера.`,
     },
   },
 };
@@ -368,7 +383,7 @@ Mobile.parameters = {
       с автоматическим скроллом по горизонтали по мере прохождения шагов.\n\nКомпонент можно скроллить пальцем,
       если нужно посмотреть пройденные или будущие шаги.\n\nПри переходе на следующий шаг, который становится
       текущим, он выравнивается относительно левого края на расстоянии 16px (боковой падинг). Шаг перед текущим
-      уходит за границы экрана.`,
+      уходит за границы экрана.\n\nДля перевода компонента в мобильный вид используйте параметр mobile.`,
     },
   },
 };
