@@ -1,6 +1,6 @@
 import type { MouseEvent, ReactNode, HTMLAttributes } from 'react';
 import * as React from 'react';
-import styled, { css } from 'styled-components';
+import styled, { css, DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import { Button } from '#src/components/Button';
 import { Shape } from '#src/components/themes/common';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
@@ -107,6 +107,10 @@ export interface MultiButtonProps extends Omit<HTMLAttributes<HTMLDivElement>, '
   disabled?: boolean;
   /** Выравнивание выпадающего меню относительно компонента https://developer.mozilla.org/en-US/docs/Web/CSS/align-self */
   alignSelf?: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
+  /** Задает максимальную высоту меню */
+  menuMaxHeight?: string | number;
+  /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
+  dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
   /** Состояние skeleton */
   skeleton?: boolean;
 }
@@ -123,6 +127,9 @@ export const MultiButton = React.forwardRef<HTMLButtonElement, MultiButtonProps>
       onClose,
       onOpen,
       skeleton = false,
+      alignSelf = 'flex-end',
+      menuMaxHeight,
+      dropContainerCssMixin,
       ...props
     },
     ref,
@@ -158,16 +165,18 @@ export const MultiButton = React.forwardRef<HTMLButtonElement, MultiButtonProps>
 
     return (
       <DropMenu
-        {...props}
+        dimension={menuDimension}
+        menuWidth={menuWidth}
+        menuMaxHeight={menuMaxHeight}
         items={model}
+        selected={selected}
         onChange={onChange}
         onOpen={onOpen}
         onClose={onClose}
-        ref={ref}
-        dimension={menuDimension}
-        menuWidth={menuWidth}
         disabled={disabled}
-        selected={selected}
+        alignSelf={alignSelf}
+        dropContainerCssMixin={dropContainerCssMixin}
+        ref={ref}
         {...dropMenuProps}
         renderContentProp={({ buttonRef, handleKeyDown, handleClick, statusIcon, menuState }) => {
           return (
