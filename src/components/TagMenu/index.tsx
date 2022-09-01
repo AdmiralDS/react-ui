@@ -3,6 +3,7 @@ import { TagVisualProps, TagSizeProps, Tag } from '#src/components/Tag';
 import { DropMenu } from '#src/components/DropMenu';
 import { MenuItem, RenderOptionProps } from '#src/components/MenuItem';
 import { passDropdownDataAttributes } from '#src/components/common/utils/splitDataAttributes';
+import { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 
 export interface TagOptionProps extends HTMLAttributes<HTMLButtonElement>, TagVisualProps {
   id: string;
@@ -22,10 +23,34 @@ export interface TagMenuProps extends Omit<HTMLAttributes<HTMLButtonElement>, 'c
   onClose?: () => void;
   /** Выравнивание выпадающего меню относительно компонента https://developer.mozilla.org/en-US/docs/Web/CSS/align-self */
   alignSelf?: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
+  /**  Ширина меню */
+  menuWidth?: string;
+  /** Задает максимальную высоту меню */
+  menuMaxHeight?: string | number;
+  /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
+  dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
 }
 
 export const TagMenu = React.forwardRef<HTMLButtonElement, TagMenuProps>(
-  ({ dimension = 'm', width, onSelectOption, options, selected, as, className = '', ...props }, ref) => {
+  (
+    {
+      dimension = 'm',
+      width,
+      onSelectOption,
+      onOpen,
+      onClose,
+      options,
+      selected,
+      as,
+      className = '',
+      alignSelf = 'flex-end',
+      menuWidth,
+      menuMaxHeight,
+      dropContainerCssMixin,
+      ...props
+    },
+    ref,
+  ) => {
     const model = React.useMemo(() => {
       return options.map((item) => ({
         id: item.id,
@@ -41,16 +66,22 @@ export const TagMenu = React.forwardRef<HTMLButtonElement, TagMenuProps>(
 
     return (
       <DropMenu
-        {...props}
         ref={ref}
         dimension="m"
+        menuWidth={menuWidth}
+        menuMaxHeight={menuMaxHeight}
         items={model}
         selected={selected?.tagText}
         onChange={onSelectOption}
+        onOpen={onOpen}
+        onClose={onClose}
+        alignSelf={alignSelf}
+        dropContainerCssMixin={dropContainerCssMixin}
         {...dropMenuProps}
         renderContentProp={({ buttonRef, handleKeyDown, handleClick, statusIcon, menuState }) => {
           return (
             <Tag
+              {...props}
               ref={buttonRef as React.Ref<HTMLButtonElement>}
               kind={selected?.kind}
               icon={selected?.icon}
