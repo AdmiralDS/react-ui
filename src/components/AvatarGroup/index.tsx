@@ -50,7 +50,6 @@ export const AvatarGroup: React.FC<AvatarGroupProps> = ({
   dimension = 'xl',
   appearance = 'light',
   onAvatarSelect,
-  className = '',
   ...props
 }) => {
   const dropMenuProps = passDropdownDataAttributes(props);
@@ -182,7 +181,7 @@ export const AvatarGroup: React.FC<AvatarGroupProps> = ({
                 showTooltip={false}
                 onClick={handleClick}
                 onKeyDown={handleKeyDown}
-                className={className + ' avatar-menu-with-dropdown'}
+                className="avatar-menu-with-dropdown"
               />
             );
           }}
