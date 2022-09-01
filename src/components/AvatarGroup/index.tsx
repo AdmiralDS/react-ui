@@ -1,5 +1,5 @@
 import * as React from 'react';
-import styled from 'styled-components';
+import styled, { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import observeRect from '#src/components/common/observeRect';
 import { uid } from '#src/components/common/uid';
 import type { AvatarProps } from '#src/components/Avatar';
@@ -17,6 +17,12 @@ export interface AvatarGroupProps extends React.HTMLAttributes<HTMLDivElement> {
   appearance?: AvatarProps['appearance'];
   /** Колбек на выбор аватара (по клику или нажатию клавиши). Возвращает id выбранного аватара */
   onAvatarSelect?: (id: string) => void;
+  /**  Ширина меню */
+  menuWidth?: string;
+  /** Задает максимальную высоту меню */
+  menuMaxHeight?: string | number;
+  /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
+  dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
 }
 
 const AvatarsWrapper = styled.div`
@@ -50,6 +56,9 @@ export const AvatarGroup: React.FC<AvatarGroupProps> = ({
   dimension = 'xl',
   appearance = 'light',
   onAvatarSelect,
+  menuWidth,
+  menuMaxHeight,
+  dropContainerCssMixin,
   ...props
 }) => {
   const dropMenuProps = passDropdownDataAttributes(props);
@@ -162,13 +171,15 @@ export const AvatarGroup: React.FC<AvatarGroupProps> = ({
         })}
       {hiddenItems > 0 ? (
         <DropMenu
-          {...props}
           dimension="m"
-          alignSelf="flex-start"
+          menuWidth={menuWidth}
+          menuMaxHeight={menuMaxHeight}
           items={modelHidden}
           selected={containsActiveAvatar ? selected : undefined}
           onChange={handleSelectAvatar}
           disabled={false}
+          alignSelf="flex-start"
+          dropContainerCssMixin={dropContainerCssMixin}
           {...dropMenuProps}
           renderContentProp={({ buttonRef, handleKeyDown, handleClick }) => {
             return (
