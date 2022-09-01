@@ -113,15 +113,18 @@ export const StepWrapper = styled.li<{
   warning?: boolean;
   active?: boolean;
   stepWidth?: number | string;
+  stepsAmount: number;
+  mobile?: boolean;
 }>`
   display: flex;
   position: relative;
   box-sizing: border-box;
-  width: ${({ orientation, stepWidth }) => {
+  width: ${({ orientation, stepWidth, stepsAmount, mobile }) => {
     if (stepWidth) return `${typeof stepWidth === 'number' ? `${stepWidth}px` : stepWidth}`;
-    return orientation === 'horizontal' ? '188px' : '224px';
+    if (mobile) return orientation === 'horizontal' ? '188px' : '224px';
+    return orientation === 'horizontal' ? `${100 / stepsAmount}%` : '100%';
   }};
-  flex-shrink: 0;
+  ${({ mobile }) => mobile && 'flex-shrink: 0;'}
   background: none;
   padding: 0;
   margin: 0;

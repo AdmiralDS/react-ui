@@ -7,6 +7,7 @@ import {
   cellStyle,
   disabledRow,
   extraTextStyle,
+  groupRowStyle,
   headerStyle,
   multiLineTitle,
   overflowMenuStyle,
@@ -193,6 +194,13 @@ export const CellTextContent = styled.div<{ cellAlign?: 'left' | 'right' }>`
   overflow: hidden;
 `;
 
+export const GroupTextContent = styled.div`
+  display: block;
+  align-items: center;
+  width: 100%;
+  overflow: hidden;
+`;
+
 // padding-bottom меньше padding-top на 1px, т.к. 1px остается для border-bottom ячейки
 export const CheckboxCell = styled(Cell)<{ dimension: TableProps['dimension'] }>`
   width: unset;
@@ -308,14 +316,25 @@ export const ExtraText = styled.div<{ dimension: TableProps['dimension']; lineCl
   ${({ lineClamp }) => (lineClamp === 1 ? singleLineTitle : multiLineTitle)}
 `;
 
-export const Row = styled.div<{ dimension: TableProps['dimension']; underline: boolean; disabled?: boolean }>`
+const rowWidthStyle = css<{ rowWidth?: number }>`
+  width: ${(p) => `${p.rowWidth}px`};
+`;
+
+export const Row = styled.div<{
+  dimension: TableProps['dimension'];
+  underline: boolean;
+  disabled?: boolean;
+  isGroup?: boolean;
+  rowWidth?: number;
+}>`
   display: flex;
   flex-direction: column;
   min-width: fit-content;
   background: ${({ theme }) => theme.color['Neutral/Neutral 00']};
-  ${rowStyle}
+  ${(p) => (p.isGroup ? groupRowStyle : rowStyle)}
   ${({ disabled }) => disabled && disabledRow}
   ${({ underline }) => underline && underlineRow}
+  ${(p) => (p.isGroup && p.rowWidth ? rowWidthStyle : '')}
 `;
 
 export const SimpleRow = styled.div<{ selected?: boolean; disabled?: boolean; error?: boolean; success?: boolean }>`

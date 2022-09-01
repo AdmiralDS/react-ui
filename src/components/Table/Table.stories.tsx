@@ -22,6 +22,7 @@ import {
   rowListMenu,
   rowListRowState,
   rowListSort,
+  rowListWithGroup,
   virtualColumnList,
   virtualRowList,
 } from '#src/components/Table/data';
@@ -446,6 +447,31 @@ const Template7: ComponentStory<typeof Table> = (args) => {
   return <Table {...args} virtualScroll={{ fixedRowHeight: 40 }} style={{ height: '500px' }} />;
 };
 
+const Template8: ComponentStory<typeof Table> = ({ rowList, ...args }) => {
+  const [rows, setRows] = React.useState([...rowList]);
+
+  const handleExpansionChange = (ids: Record<string | number, boolean>): void => {
+    const updRows = rows.map((row) => ({ ...row, expanded: ids[row.id] }));
+    setRows(updRows);
+  };
+
+  const handleSelectionChange = (ids: Record<string | number, boolean>): void => {
+    const updRows = rows.map((row) => ({ ...row, selected: ids[row.id] }));
+    setRows(updRows);
+  };
+
+  return (
+    <>
+      <Table
+        {...args}
+        rowList={rows}
+        onRowExpansionChange={handleExpansionChange}
+        onRowSelectionChange={handleSelectionChange}
+      />
+    </>
+  );
+};
+
 export const Playground = Template.bind({});
 Playground.args = {
   rowList,
@@ -716,6 +742,21 @@ VirtualScroll.parameters = {
       в свойстве fixedRowHeight необходимо задать фиксированную высоту строки.\n\nПримечание: таблица обязательно должна иметь четко 
       заданную высоту (height, minHeight). Это нужно для того, чтобы тело таблицы, которое
       является flex-элементом, могло растянуться на всю высоту таблицы, в противном случае высота тела таблицы будет равна 0.`,
+    },
+  },
+};
+
+export const Group = Template8.bind({});
+Group.args = {
+  rowList: rowListWithGroup,
+  columnList,
+  displayRowExpansionColumn: true,
+};
+Group.storyName = 'Table. Пример c группировкой строк.';
+Group.parameters = {
+  docs: {
+    description: {
+      story: ``,
     },
   },
 };

@@ -205,7 +205,7 @@ export const Dropdown = React.forwardRef<HTMLDivElement, React.PropsWithChildren
       }
     };
 
-    useInterval(checkDropdownPosition, 1000);
+    useInterval(checkDropdownPosition, 100);
 
     // First container render always happens downward and transparent,
     // after size and position settled transparency returns to normal
