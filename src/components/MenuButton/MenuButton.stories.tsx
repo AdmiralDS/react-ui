@@ -205,6 +205,7 @@ const Template1: ComponentStory<typeof MenuButton> = (args) => {
         onOpen={() => console.log('open menu')}
         onClose={() => console.log('close menu')}
         data-dropdown-container-id="menu-button-with-dropdown"
+        className="menu-button-class"
       >
         test
       </MenuButton>
