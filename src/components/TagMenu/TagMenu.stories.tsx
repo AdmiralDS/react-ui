@@ -122,6 +122,7 @@ const Template0: ComponentStory<typeof Tag> = (args: TagProps) => {
           }}
           {...args}
           data-dropdown-container-id="tag-menu-with-dropdown"
+          className="tag-menu-class"
         />
       </ThemeProvider>
     </>
