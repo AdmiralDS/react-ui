@@ -20,14 +20,14 @@ export const DisplayValue: React.FC<DisplayValueProps> = ({ visibleValue, isSear
       return;
     }
     setOverflowActive(false);
-  }, [visibleValue]);
+  }, [tooltipVisible]);
 
   return (
     <>
       <StringValueWrapper ref={valueRef}>{visibleValue}</StringValueWrapper>
-      {overflowActive && !isSearchPanelOpen && (
+      {!isSearchPanelOpen && (
         <Tooltip
-          visible={tooltipVisible}
+          visible={tooltipVisible && overflowActive}
           onVisibilityChange={setTooltipVisible}
           renderContent={() => visibleValue}
           targetRef={targetRef}

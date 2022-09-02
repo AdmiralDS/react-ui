@@ -440,7 +440,7 @@ const MenuTooltipTemplate: ComponentStory<typeof Menu> = (args) => {
                 <Tooltip
                   targetRef={itemRef}
                   visible={tooltipVisible}
-                  onVisibilityChange={(visible: boolean) => setTooltipVisible(visible)}
+                  onVisibilityChange={setTooltipVisible}
                   renderContent={() => item.label}
                 />
               )}

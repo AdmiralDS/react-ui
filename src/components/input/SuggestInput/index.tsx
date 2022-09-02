@@ -211,6 +211,7 @@ export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps
           props.onBlur?.(...p);
           triggerDelayedBlur({});
         }}
+        showTooltip={!isSuggestPanelOpen}
       >
         {options && isSuggestPanelOpen && !skeleton && !emptyAtLoading && (
           <StyledDropDown

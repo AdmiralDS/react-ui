@@ -868,7 +868,7 @@ const TooltipedIconDeleteOutline = React.forwardRef<HTMLDivElement, React.HTMLAt
       </IconWrapper>
       <Tooltip
         visible={visible}
-        onVisibilityChange={(visible: boolean) => setVisible(visible)}
+        onVisibilityChange={setVisible}
         renderContent={() => `Delete row`}
         targetRef={iconRef}
       />

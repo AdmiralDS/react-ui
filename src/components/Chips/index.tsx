@@ -82,7 +82,7 @@ export const Chips: FC<ChipsProps> = ({
       const difference = refItems.current.scrollWidth - refItems.current.offsetWidth;
       setTooltip(difference >= MIN_MEASURABLE_DIFFERENCE);
     }
-  }, [setTooltip, refItems?.current]);
+  }, [tooltipVisible]);
 
   const handleClickCloseIcon = React.useCallback(
     (e: MouseEvent) => {
@@ -94,7 +94,6 @@ export const Chips: FC<ChipsProps> = ({
     },
     [onClose],
   );
-  const handleTooltipVisibilityChange = (visible: boolean) => setTooltipVisible(visible);
 
   return (
     <>
@@ -152,14 +151,12 @@ export const Chips: FC<ChipsProps> = ({
           )}
         </ChipContentWrapperStyled>
       </ChipComponentStyled>
-      {withTooltip && (
-        <Tooltip
-          targetRef={chipRef}
-          visible={tooltipVisible}
-          onVisibilityChange={handleTooltipVisibilityChange}
-          renderContent={renderContentTooltip}
-        />
-      )}
+      <Tooltip
+        targetRef={chipRef}
+        visible={tooltipVisible && withTooltip}
+        onVisibilityChange={setTooltipVisible}
+        renderContent={renderContentTooltip}
+      />
     </>
   );
 };
