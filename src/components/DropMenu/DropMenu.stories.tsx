@@ -343,7 +343,7 @@ const DropMenuTooltipTemplate: ComponentStory<typeof DropMenu> = (args) => {
                 <Tooltip
                   targetRef={itemRef}
                   visible={tooltipVisible}
-                  onVisibilityChange={(visible: boolean) => setTooltipVisible(visible)}
+                  onVisibilityChange={setTooltipVisible}
                   renderContent={() => item.label}
                 />
               )}

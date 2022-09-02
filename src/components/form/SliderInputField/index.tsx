@@ -1,12 +1,17 @@
 import { uid } from '#src/components/common/uid';
 import { refSetter } from '#src/components/common/utils/refSetter';
-import { Field, FieldOwnProps } from '#src/components/Field';
+import { Field as FieldComponent, FieldOwnProps } from '#src/components/Field';
 import { SliderInput, SliderInputProps } from '#src/components/input/SliderInput';
 import * as React from 'react';
+import styled from 'styled-components';
 import {
   passFormFieldContainerDataAttributes,
   passFormFieldDataAttributes,
 } from '#src/components/common/utils/splitDataAttributes';
+
+const Field = styled(FieldComponent)`
+  overflow: visible;
+`;
 
 export interface SliderInputFieldProps extends SliderInputProps, Omit<FieldOwnProps, 'inputRef'> {}
 

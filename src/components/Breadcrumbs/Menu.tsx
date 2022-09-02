@@ -48,7 +48,7 @@ export const MenuButton: React.FC<MenuButtonProps> = ({ dimension, options }) =>
                 <Tooltip
                   targetRef={itemRef}
                   visible={tooltipVisible}
-                  onVisibilityChange={(visible: boolean) => setTooltipVisible(visible)}
+                  onVisibilityChange={setTooltipVisible}
                   renderContent={() => item.text}
                 />
               )}

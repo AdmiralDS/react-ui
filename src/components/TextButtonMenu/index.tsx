@@ -3,7 +3,7 @@ import * as React from 'react';
 import type { Appearance, Dimension } from '#src/components/TextButton/types';
 import type { ItemProps } from '#src/components/MenuItem';
 import { TextButton } from '#src/components/TextButton';
-import styled from 'styled-components';
+import styled, { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import { IconContainer } from '#src/components/TextButton/commonMixin';
 import { DropMenu } from '#src/components/DropMenu';
 import { passDropdownDataAttributes } from '#src/components/common/utils/splitDataAttributes';
@@ -52,6 +52,12 @@ export interface TextButtonMenuProps extends Omit<HTMLAttributes<HTMLButtonEleme
   disabled?: boolean;
   /** Выравнивание выпадающего меню относительно компонента https://developer.mozilla.org/en-US/docs/Web/CSS/align-self */
   alignSelf?: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
+  /**  Ширина меню */
+  menuWidth?: string;
+  /** Задает максимальную высоту меню */
+  menuMaxHeight?: string | number;
+  /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
+  dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
   /** Состояние skeleton */
   skeleton?: boolean;
 }
@@ -67,8 +73,14 @@ export const TextButtonMenu = React.forwardRef<HTMLButtonElement, TextButtonMenu
       items,
       selected,
       onChange,
+      onOpen,
+      onClose,
       skeleton = false,
       className = '',
+      menuWidth,
+      menuMaxHeight,
+      alignSelf,
+      dropContainerCssMixin,
       ...props
     },
     ref,
@@ -77,18 +89,24 @@ export const TextButtonMenu = React.forwardRef<HTMLButtonElement, TextButtonMenu
 
     return (
       <DropMenu
-        {...props}
         ref={ref}
         dimension={dimension}
-        disabled={disabled}
+        menuWidth={menuWidth}
+        menuMaxHeight={menuMaxHeight}
         loading={loading}
         items={items}
         selected={selected}
         onChange={onChange}
+        onOpen={onOpen}
+        onClose={onClose}
+        disabled={disabled}
+        alignSelf={alignSelf}
+        dropContainerCssMixin={dropContainerCssMixin}
         {...dropMenuProps}
         renderContentProp={({ buttonRef, handleKeyDown, handleClick, statusIcon, menuState }) => {
           return (
             <StyledTextButton
+              {...props}
               text={text}
               skeleton={skeleton}
               ref={buttonRef as React.Ref<HTMLButtonElement>}
