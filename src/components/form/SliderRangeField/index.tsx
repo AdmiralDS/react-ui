@@ -1,12 +1,16 @@
 import { uid } from '#src/components/common/uid';
-import { Field, FieldOwnProps } from '#src/components/Field';
+import { Field as FieldComponent, FieldOwnProps } from '#src/components/Field';
 import { SliderRange, SliderRangeProps } from '#src/components/input/SliderRange';
 import * as React from 'react';
+import styled from 'styled-components';
 import {
-  FORM_FIELD_DATA_CONTAINER_ATTRIBUTE,
   passFormFieldContainerDataAttributes,
   passFormFieldDataAttributes,
 } from '#src/components/common/utils/splitDataAttributes';
+
+const Field = styled(FieldComponent)`
+  overflow: visible;
+`;
 
 export interface SliderRangeFieldProps extends SliderRangeProps, Omit<FieldOwnProps, 'inputRef'> {
   name?: string;
