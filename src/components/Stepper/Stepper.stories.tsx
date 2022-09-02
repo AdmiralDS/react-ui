@@ -35,7 +35,6 @@ export default {
   component: Stepper,
   parameters: {
     componentSubtitle: <Description />,
-    layout: 'centered',
     design: [
       {
         type: 'figma',

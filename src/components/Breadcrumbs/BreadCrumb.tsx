@@ -97,7 +97,6 @@ export const Breadcrumb = React.forwardRef<HTMLLIElement, BreadcrumbProps>(
     const textRef = React.useRef<HTMLDivElement | null>(null);
 
     const [tooltipVisible, setTooltipVisible] = React.useState(false);
-    const handleTooltipVisibilityChange = (visible: boolean) => setTooltipVisible(visible);
 
     return (
       <Crumb ref={refSetter(ref, crumbRef)} dimension={dimension} {...props}>
@@ -108,7 +107,7 @@ export const Breadcrumb = React.forwardRef<HTMLLIElement, BreadcrumbProps>(
               <Tooltip
                 targetRef={textRef}
                 visible={tooltipVisible}
-                onVisibilityChange={handleTooltipVisibilityChange}
+                onVisibilityChange={setTooltipVisible}
                 renderContent={() => text}
               />
             )}

@@ -255,14 +255,12 @@ export const Tag = React.forwardRef<HTMLElement, TagProps & TagInternalProps>(
 
     const detectOverflow = (element: HTMLElement) => element.offsetWidth < element.scrollWidth;
 
-    const handleTooltipChange = (visible: boolean) => setTooltipVisible(visible);
-
     React.useLayoutEffect(() => {
       const element = textRef.current;
       if (element && detectOverflow(element) !== overflow) {
         setOverflow(detectOverflow(element));
       }
-    }, [children, width]);
+    }, [tooltipVisible]);
 
     return (
       <>
@@ -282,14 +280,12 @@ export const Tag = React.forwardRef<HTMLElement, TagProps & TagInternalProps>(
           {children && <Text ref={textRef}>{children}</Text>}
           {statusIcon && <StatusIcon>{statusIcon}</StatusIcon>}
         </Wrapper>
-        {overflow && (
-          <Tooltip
-            targetRef={wrapperRef}
-            visible={tooltipVisible}
-            onVisibilityChange={handleTooltipChange}
-            renderContent={() => children}
-          />
-        )}
+        <Tooltip
+          targetRef={wrapperRef}
+          visible={tooltipVisible && overflow}
+          onVisibilityChange={setTooltipVisible}
+          renderContent={() => children}
+        />
       </>
     );
   },

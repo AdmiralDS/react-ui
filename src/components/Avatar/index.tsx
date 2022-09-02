@@ -215,7 +215,6 @@ export const Avatar = React.forwardRef<HTMLButtonElement, AvatarProps & AvatarIn
           return '56px';
       }
     };
-    const handleTooltipVisibilityChange = (visible: boolean) => setTooltipVisible(visible);
     return (
       <Wrapper size={getSize()} {...props} ref={refSetter(ref, wrapperRef)}>
         <AvatarSVG
@@ -242,7 +241,7 @@ export const Avatar = React.forwardRef<HTMLButtonElement, AvatarProps & AvatarIn
           <Tooltip
             targetRef={wrapperRef}
             visible={tooltipVisible}
-            onVisibilityChange={handleTooltipVisibilityChange}
+            onVisibilityChange={setTooltipVisible}
             renderContent={() => userName}
           />
         )}

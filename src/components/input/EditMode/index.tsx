@@ -9,6 +9,8 @@ import { changeInputData } from '#src/components/common/dom/changeInputData';
 import { ReactComponent as EditSolid } from '@admiral-ds/icons/build/system/EditSolid.svg';
 import { ReactComponent as CheckClearOutline } from '@admiral-ds/icons/build/service/CheckClearOutline.svg';
 import { ReactComponent as CloseOutline } from '@admiral-ds/icons/build/service/CloseOutline.svg';
+import { Tooltip } from '#src/components/Tooltip';
+import { checkOverflow } from '#src/components/common/utils/checkOverflow';
 
 const EditInput = styled(TextInput)`
   flex: 1 1 auto;
@@ -155,17 +157,42 @@ export interface EditModeProps extends Omit<TextInputProps, 'dimension'> {
   onConfirm?: (value: string) => void;
   /** Колбек на нажатие кнопки очистки инпута */
   onClear?: () => void;
+  /** Отображение тултипа, по умолчанию true */
+  showTooltip?: boolean;
 }
 
 export const EditMode = React.forwardRef<HTMLInputElement, EditModeProps>(
   (
-    { dimension = 'm', bold = false, containerCssMixin, disabled = false, onEdit, onConfirm, onClear, value, ...props },
+    {
+      dimension = 'm',
+      bold = false,
+      containerCssMixin,
+      disabled = false,
+      onEdit,
+      onConfirm,
+      onClear,
+      value,
+      showTooltip = true,
+      ...props
+    },
     ref,
   ) => {
     const [edit, setEdit] = React.useState(false);
     const [localVal, setLocalVal] = React.useState(value);
     const iconSize = dimension === 's' ? 20 : 24;
     const inputRef = React.useRef<HTMLInputElement>(null);
+    const wrapperRef = React.useRef<HTMLDivElement>(null);
+
+    const [overflowActive, setOverflowActive] = React.useState<boolean>(false);
+    const [tooltipVisible, setTooltipVisible] = React.useState<boolean>(false);
+    const textRef = React.useRef<HTMLDivElement>(null);
+    React.useLayoutEffect(() => {
+      if (checkOverflow(textRef.current)) {
+        setOverflowActive(true);
+        return;
+      }
+      setOverflowActive(false);
+    }, [tooltipVisible]);
 
     React.useEffect(() => {
       if (!localVal && value) {
@@ -196,6 +223,7 @@ export const EditMode = React.forwardRef<HTMLInputElement, EditModeProps>(
         data-dimension={`${dimension}${bold && editDimension !== 'xl' ? '-bold' : ''}`}
         data-disabled={disabled}
         cssMixin={containerCssMixin}
+        ref={wrapperRef}
       >
         {edit ? (
           !disabled &&
@@ -207,6 +235,7 @@ export const EditMode = React.forwardRef<HTMLInputElement, EditModeProps>(
                 disabled={disabled}
                 dimension={editDimension}
                 value={value}
+                containerRef={wrapperRef}
                 {...props}
               />
               <EditButton
@@ -225,7 +254,17 @@ export const EditMode = React.forwardRef<HTMLInputElement, EditModeProps>(
           )
         ) : (
           <>
-            <Text onClick={!props.readOnly ? enableEdit : undefined}>{value}</Text>
+            <Text ref={textRef} onClick={!props.readOnly ? enableEdit : undefined}>
+              {value}
+            </Text>
+            {showTooltip && (
+              <Tooltip
+                visible={tooltipVisible && overflowActive}
+                onVisibilityChange={setTooltipVisible}
+                renderContent={() => value}
+                targetRef={textRef}
+              />
+            )}
             {!props.readOnly && <EditIcon height={iconSize} width={iconSize} onClick={enableEdit} />}
           </>
         )}
