@@ -6,12 +6,12 @@ import { TextInput, TextInputProps } from '../TextInput';
 import { refSetter } from '#src/components/common/utils/refSetter';
 import { defaultTimeInputHandle } from '#src/components/input/TimeInput/defaultTimeInputHandle';
 import { changeInputData } from '#src/components/common/dom/changeInputData';
-import { Dropdown } from '#src/components/Dropdown';
 import { Slot, SlotProps } from './Slot';
 import { getTimeInMinutes, parseStringToTime } from './utils';
 import { typography } from '#src/components/Typography';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { InputIconButton } from '#src/components/InputIconButton';
+import { DropdownContainer } from '#src/components/DropdownContainer';
 
 const slots: SlotProps[] = [
   { value: '00:00', disabled: false },
@@ -266,7 +266,7 @@ export const TimeInput = React.forwardRef<HTMLInputElement, TimeInputProps>(
         }}
       >
         {availableSlots && isOpened && !disabled && !skeleton && (
-          <Dropdown targetRef={inputRef} alignSelf={alignDropdown} onClickOutside={clickOutside}>
+          <DropdownContainer targetRef={inputRef} alignSelf={alignDropdown} onClickOutside={clickOutside}>
             <SlotContainer data-dimension={dimension}>
               {availableSlots.map((slot, index) => (
                 <Slot
@@ -285,7 +285,7 @@ export const TimeInput = React.forwardRef<HTMLInputElement, TimeInputProps>(
                 </Slot>
               ))}
             </SlotContainer>
-          </Dropdown>
+          </DropdownContainer>
         )}
       </TextInput>
     );
