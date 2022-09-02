@@ -187,12 +187,12 @@ export const EditMode = React.forwardRef<HTMLInputElement, EditModeProps>(
     const [tooltipVisible, setTooltipVisible] = React.useState<boolean>(false);
     const textRef = React.useRef<HTMLDivElement>(null);
     React.useLayoutEffect(() => {
-      if (checkOverflow(inputRef.current)) {
+      if (checkOverflow(textRef.current)) {
         setOverflowActive(true);
         return;
       }
       setOverflowActive(false);
-    }, [value]);
+    }, [tooltipVisible]);
 
     React.useEffect(() => {
       if (!localVal && value) {
@@ -262,7 +262,7 @@ export const EditMode = React.forwardRef<HTMLInputElement, EditModeProps>(
                 visible={tooltipVisible && overflowActive}
                 onVisibilityChange={setTooltipVisible}
                 renderContent={() => value}
-                targetRef={wrapperRef}
+                targetRef={textRef}
               />
             )}
             {!props.readOnly && <EditIcon height={iconSize} width={iconSize} onClick={enableEdit} />}
