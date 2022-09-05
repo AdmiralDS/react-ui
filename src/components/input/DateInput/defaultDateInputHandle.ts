@@ -40,9 +40,21 @@ export function defaultDateInputHandle(inputData: InputData | null): InputData {
     return { ...inputData, value: inputValue };
   }
 
-  const clearValue = inputValue.replace(/\D/g, '');
-  inputValue = formatDate(clearValue);
+  let addCount = 0;
 
+  if (inputValue.charAt(selectionStart - 1) === '.') {
+    addCount = -1;
+  }
+  if (inputValue.charAt(selectionStart) === '.') {
+    if (/\d/.test(inputValue.charAt(selectionStart - 1))) {
+      addCount = 1;
+    } else {
+      addCount = -1;
+    }
+  }
+
+  const clearValue = splice(inputValue, selectionStart + addCount, lengthDifference, '').replace(/\D/g, '');
+  inputValue = formatDate(clearValue);
   const cursorPos = calcCursorPosition(inputValue, selectionStart);
 
   return {
