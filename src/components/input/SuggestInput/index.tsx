@@ -12,9 +12,10 @@ import type { InputStatus } from '#src/components/input/types';
 import { LIGHT_THEME } from '#src/components/themes';
 import { DropdownContainer } from '#src/components/DropdownContainer';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
+import { RenderOptionProps } from '#src/components/MenuItem';
+import { Menu } from '#src/components/Menu';
 
 const StyledDropdownContainer = styled(DropdownContainer)<{ dropMaxHeight: string | number }>`
-  padding: 8px 0;
   overflow-x: hidden;
   overflow-y: auto;
   max-height: ${(p) => p.dropMaxHeight};
@@ -186,6 +187,28 @@ export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps
 
     const emptyAtLoading: boolean = (options || []).length === 0 && !!isLoading;
 
+    const model = React.useMemo(() => {
+      if (options) {
+        return options.map((text, index) => ({
+          id: text,
+          render: (options: RenderOptionProps) => (
+            <SuggestPanel
+              key={index}
+              text={text}
+              active={index === activeIndex}
+              searchText={props.value || inputRef.current?.value || ''}
+              onMouseEnter={() => setActiveIndex(index)}
+              onMouseDown={handleOptionClick}
+              onKeyUp={handleKeyUp}
+              {...options}
+            />
+          ),
+        }));
+      } else {
+        return [];
+      }
+    }, [options, props.dimension, props.value, inputRef.current?.value]);
+
     return (
       <TextInput
         {...props}
@@ -225,17 +248,7 @@ export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps
                   theme.locales[theme.currentLocale].suggestInput.emptyMessage}
               </MessagePanel>
             ) : (
-              options.map((text, index) => (
-                <SuggestPanel
-                  key={index}
-                  text={text}
-                  active={index === activeIndex}
-                  searchText={props.value || inputRef.current?.value || ''}
-                  onMouseEnter={() => setActiveIndex(index)}
-                  onMouseDown={handleOptionClick}
-                  onKeyUp={handleKeyUp}
-                />
-              ))
+              <Menu model={model} />
             )}
           </StyledDropdownContainer>
         )}
