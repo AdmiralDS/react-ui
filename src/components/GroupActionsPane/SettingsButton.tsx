@@ -22,6 +22,7 @@ const StyledIconButton = styled(IconButton)`
 export interface ColumnsButtonProps extends HTMLAttributes<HTMLButtonElement> {
   menu: React.ReactNode;
   buttonDimension?: 's' | 'l';
+  disabled?: boolean;
 }
 
 export const SettingsButton = React.forwardRef<HTMLButtonElement, ColumnsButtonProps>(
