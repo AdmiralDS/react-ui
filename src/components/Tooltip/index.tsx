@@ -118,10 +118,15 @@ export const Tooltip: React.FC<ITooltipProps> = ({
     };
   });
 
+  // hide on unmount
+  React.useEffect(() => {
+    return () => hideTooltip();
+  }, []);
+
   React.useEffect(() => {
     const scrollbarSize = getScrollbarSize();
     manageTooltip(scrollbarSize);
-  }, [renderContent(), targetRef, tooltipPosition, container]);
+  }, [renderContent(), targetRef, tooltipPosition, container, visible]);
 
   // First container render always happens downward and transparent,
   // after size and position settled transparency returns to normal
@@ -135,11 +140,13 @@ export const Tooltip: React.FC<ITooltipProps> = ({
     targetRef.current?.addEventListener('mouseenter', handleMouseEnter);
     targetRef.current?.addEventListener('focus', handleMouseEnter);
     targetRef.current?.addEventListener('mouseleave', handleMouseLeave);
+    targetRef.current?.addEventListener('mousedown', handleMouseLeave);
     targetRef.current?.addEventListener('blur', handleMouseLeave);
     return () => {
       targetRef.current?.removeEventListener('mouseenter', handleMouseEnter);
       targetRef.current?.removeEventListener('focus', handleMouseEnter);
       targetRef.current?.removeEventListener('mouseleave', handleMouseLeave);
+      targetRef.current?.removeEventListener('mousedown', handleMouseLeave);
       targetRef.current?.removeEventListener('blur', handleMouseLeave);
     };
   }, [targetRef.current]);

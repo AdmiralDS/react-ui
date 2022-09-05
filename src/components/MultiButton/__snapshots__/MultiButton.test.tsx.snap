@@ -766,7 +766,7 @@ Object {
         />
         <button
           aria-expanded="false"
-          class="c6 c7  multi-button-menu-button-with-dropdown"
+          class="c6 c7 multi-button-menu-button-with-dropdown"
           data-appearance="primary"
           data-dimension="l"
           disabled=""
@@ -1546,7 +1546,7 @@ Object {
       />
       <button
         aria-expanded="false"
-        class="c6 c7  multi-button-menu-button-with-dropdown"
+        class="c6 c7 multi-button-menu-button-with-dropdown"
         data-appearance="primary"
         data-dimension="l"
         disabled=""
@@ -2381,7 +2381,7 @@ Object {
         />
         <button
           aria-expanded="false"
-          class="c6 c7  multi-button-menu-button-with-dropdown"
+          class="c6 c7 multi-button-menu-button-with-dropdown"
           data-appearance="primary"
           data-dimension="l"
           type="button"
@@ -3158,7 +3158,7 @@ Object {
       />
       <button
         aria-expanded="false"
-        class="c6 c7  multi-button-menu-button-with-dropdown"
+        class="c6 c7 multi-button-menu-button-with-dropdown"
         data-appearance="primary"
         data-dimension="l"
         type="button"
@@ -3992,7 +3992,7 @@ Object {
         />
         <button
           aria-expanded="false"
-          class="c6 c7  multi-button-menu-button-with-dropdown"
+          class="c6 c7 multi-button-menu-button-with-dropdown"
           data-appearance="secondary"
           data-dimension="l"
           type="button"
@@ -4769,7 +4769,7 @@ Object {
       />
       <button
         aria-expanded="false"
-        class="c6 c7  multi-button-menu-button-with-dropdown"
+        class="c6 c7 multi-button-menu-button-with-dropdown"
         data-appearance="secondary"
         data-dimension="l"
         type="button"

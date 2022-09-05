@@ -5,6 +5,7 @@ import { Button, OverflowMenuIcon } from '#src/components/OverflowMenu/Button';
 import type { ItemProps } from '#src/components/MenuItem';
 import { DropMenu, RenderContentProps } from '#src/components/DropMenu';
 import { passDropdownDataAttributes } from '#src/components/common/utils/splitDataAttributes';
+import { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 
 export interface OverflowMenuProps extends Omit<React.HTMLAttributes<HTMLButtonElement>, 'onChange'> {
   /** Выбранная опция */
@@ -21,6 +22,12 @@ export interface OverflowMenuProps extends Omit<React.HTMLAttributes<HTMLButtonE
   disabled?: boolean;
   /** Выравнивание выпадающего меню относительно компонента https://developer.mozilla.org/en-US/docs/Web/CSS/align-self */
   alignSelf?: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
+  /**  Ширина меню */
+  menuWidth?: string;
+  /** Задает максимальную высоту меню */
+  menuMaxHeight?: string | number;
+  /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
+  dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
   /** Ориентация компонента */
   isVertical?: boolean;
   /** Опции выпадающего списка */
@@ -40,6 +47,9 @@ export const OverflowMenu = React.forwardRef<HTMLButtonElement, OverflowMenuProp
       onClose,
       items,
       className = '',
+      menuWidth,
+      menuMaxHeight,
+      dropContainerCssMixin,
       ...props
     },
     ref,
@@ -51,16 +61,19 @@ export const OverflowMenu = React.forwardRef<HTMLButtonElement, OverflowMenuProp
     return (
       <>
         <DropMenu
-          ref={ref}
-          alignSelf={alignSelf}
+          dimension={dimension}
+          menuWidth={menuWidth}
+          menuMaxHeight={menuMaxHeight}
           items={items}
+          selected={selected}
           onChange={onChange}
           onOpen={onOpen}
           onClose={onClose}
-          dimension={dimension}
           disabled={disabled}
-          selected={selected}
           alignMenuRef={iconRef}
+          alignSelf={alignSelf}
+          dropContainerCssMixin={dropContainerCssMixin}
+          ref={ref}
           {...dropMenuProps}
           renderContentProp={({ buttonRef, handleKeyDown, handleClick, menuState, disabled }: RenderContentProps) => {
             return (

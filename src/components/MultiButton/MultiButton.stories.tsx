@@ -136,6 +136,7 @@ const Template1: ComponentStory<typeof MultiButton> = (args) => {
           onOpen={() => console.log('open menu')}
           onClose={() => console.log('close menu')}
           data-dropdown-container-id="first-multi-button-with-dropdown"
+          className="multi-button-class"
         />
         <Separator />
         <MultiButton

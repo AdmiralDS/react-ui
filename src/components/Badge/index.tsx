@@ -105,14 +105,22 @@ export interface BadgeProps extends React.HTMLAttributes<HTMLDivElement> {
   };
 }
 
-export const Badge: React.FC<BadgeProps> = ({ children, dimension = 'm', appearance = 'light', locale, ...props }) => {
-  const theme = React.useContext(ThemeContext) || LIGHT_THEME;
-  const amountText = locale?.amountAriaLabel || theme.locales[theme.currentLocale].badge.amountAriaLabel;
-  return (
-    <BadgeComponent dimension={dimension} appearance={appearance} aria-label={`${amountText} ${children}`} {...props}>
-      {children}
-    </BadgeComponent>
-  );
-};
+export const Badge = React.forwardRef<HTMLDivElement, BadgeProps>(
+  ({ children, dimension = 'm', appearance = 'light', locale, ...props }, ref) => {
+    const theme = React.useContext(ThemeContext) || LIGHT_THEME;
+    const amountText = locale?.amountAriaLabel || theme.locales[theme.currentLocale].badge.amountAriaLabel;
+    return (
+      <BadgeComponent
+        ref={ref}
+        dimension={dimension}
+        appearance={appearance}
+        aria-label={`${amountText} ${children}`}
+        {...props}
+      >
+        {children}
+      </BadgeComponent>
+    );
+  },
+);
 
 Badge.displayName = 'Badge';

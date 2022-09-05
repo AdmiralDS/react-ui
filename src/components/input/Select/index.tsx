@@ -28,6 +28,7 @@ import { preventDefault, scrollToNotVisibleELem } from './utils';
 import { changeInputData } from '#src/components/common/dom/changeInputData';
 import { useClickOutside } from '#src/components/common/hooks/useClickOutside';
 import { Spinner } from '#src/components/Spinner';
+import { DisplayValue } from './DisplayValue';
 
 /**
  * Осталось сделать:
@@ -305,7 +306,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
     const shouldFixHeight = multiple ? shouldFixMultiSelectHeight : shouldFixSingleSelectHeight;
 
     const wrappedVisibleValue = visibleValueIsString ? (
-      <StringValueWrapper>{visibleValue}</StringValueWrapper>
+      <DisplayValue visibleValue={visibleValue} isSearchPanelOpen={isSearchPanelOpen} targetRef={containerRef} />
     ) : (
       visibleValue
     );

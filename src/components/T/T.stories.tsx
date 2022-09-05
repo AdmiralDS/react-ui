@@ -129,7 +129,7 @@ const CopyButton = ({ text }: { text: string }) => {
       <Tooltip
         targetRef={copyRef}
         visible={tooltipVisible}
-        onVisibilityChange={(visible: boolean) => setTooltipVisible(visible)}
+        onVisibilityChange={setTooltipVisible}
         renderContent={() => 'Копировать пример использования'}
       />
     </>
