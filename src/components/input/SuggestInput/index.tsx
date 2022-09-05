@@ -5,23 +5,22 @@ import { refSetter } from '#src/components/common/utils/refSetter';
 import { ReactComponent as SearchOutlineSVG } from '@admiral-ds/icons/build/system/SearchOutline.svg';
 import styled, { ThemeContext } from 'styled-components';
 import { TextInput, TextInputProps } from '../TextInput';
-import { Dropdown as DropComponent } from '#src/components/Dropdown';
 import { MessagePanel } from './MessagePanel';
 import { SuggestPanel } from './SuggestPanel';
 import { InputIconButton } from '#src/components/InputIconButton';
 import type { InputStatus } from '#src/components/input/types';
 import { LIGHT_THEME } from '#src/components/themes';
+import { DropdownContainer } from '#src/components/DropdownContainer';
+import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 
-const Dropdown = styled(DropComponent)`
-  padding: 8px 0;
-`;
-
-const StyledDropDown = styled(Dropdown)<{ dropMaxHeight: string | number }>`
+const StyledDropdownContainer = styled(DropdownContainer)<{ dropMaxHeight: string | number }>`
   padding: 8px 0;
   overflow-x: hidden;
   overflow-y: auto;
   max-height: ${(p) => p.dropMaxHeight};
   min-width: 100%;
+  ${(p) => p.theme.shadow['Shadow 08']}
+  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
 `;
 
 export interface SuggestItem {
@@ -213,7 +212,7 @@ export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps
         }}
       >
         {options && isSuggestPanelOpen && !skeleton && !emptyAtLoading && (
-          <StyledDropDown
+          <StyledDropdownContainer
             targetRef={portalTargetRef || inputRef}
             alignSelf={alignDropdown}
             dropMaxHeight={dropMaxHeight}
@@ -238,7 +237,7 @@ export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps
                 />
               ))
             )}
-          </StyledDropDown>
+          </StyledDropdownContainer>
         )}
       </TextInput>
     );
