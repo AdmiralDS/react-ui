@@ -66,8 +66,15 @@ export interface SuggestPanelProps extends SuggestItem, HTMLAttributes<HTMLDivEl
 }
 
 export const SuggestPanel = ({ searchText = '', text = '', onHover, onClickItem, ...props }: SuggestPanelProps) => {
+  const handleMouseMove = () => {
+    onHover?.();
+  };
+
+  const handleClick = () => {
+    onClickItem?.();
+  };
   return (
-    <Panel {...props} title={text}>
+    <Panel {...props} title={text} onMouseMove={handleMouseMove} onClick={handleClick}>
       {getHighlightedText(text, searchText)}
     </Panel>
   );
