@@ -1,8 +1,5 @@
 import { InputData } from '#src/components/common/dom/changeInputData';
-
-function splice(oldString: string, start: number, delCount: number, newSubStr: string): string {
-  return oldString.slice(0, start) + newSubStr + oldString.slice(start + Math.abs(delCount));
-}
+import { splice } from '#src/components/common/utils/splice';
 
 function isValidDigit(string: string, number: number) {
   const onlyDigitString = string.replace(/\D+/g, '').slice(0, 1);
