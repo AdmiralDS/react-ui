@@ -207,7 +207,7 @@ export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps
       } else {
         return [];
       }
-    }, [options, props.dimension, props.value, inputRef.current?.value]);
+    }, [options, props.dimension, props.value, inputRef.current?.value, activeIndex]);
 
     return (
       <TextInput

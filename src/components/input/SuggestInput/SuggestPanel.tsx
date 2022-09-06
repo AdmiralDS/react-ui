@@ -3,6 +3,7 @@ import { HTMLAttributes } from 'react';
 import styled, { css } from 'styled-components';
 import { typography } from '#src/components/Typography';
 import type { SuggestItem } from './';
+import { RenderOptionProps } from '#src/components/MenuItem';
 
 const Highlight = styled.span`
   color: ${(p) => p.theme.color['Primary/Primary 60 Main']};
@@ -59,12 +60,12 @@ export const Panel = styled.div<{ active?: boolean }>`
   ${(p) => (p.active ? activePanel : '')}
 `;
 
-export interface SuggestPanelProps extends SuggestItem, HTMLAttributes<HTMLDivElement> {
+export interface SuggestPanelProps extends SuggestItem, HTMLAttributes<HTMLDivElement>, RenderOptionProps {
   text?: string;
   active?: boolean;
 }
 
-export const SuggestPanel = ({ searchText = '', text = '', ...props }: SuggestPanelProps) => {
+export const SuggestPanel = ({ searchText = '', text = '', onHover, onClickItem, ...props }: SuggestPanelProps) => {
   return (
     <Panel {...props} title={text}>
       {getHighlightedText(text, searchText)}
