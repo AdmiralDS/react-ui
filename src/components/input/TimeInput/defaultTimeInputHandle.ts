@@ -18,10 +18,6 @@ function isValidDigit(string: string, number: number) {
   }
 }
 
-function replaceChar(string: string, index: number, replacement: string) {
-  return string.substring(0, index) + replacement + string.substring(index + 1);
-}
-
 export const MASK_VALUE = '__:__';
 
 export function defaultTimeInputHandle(inputData: InputData | null): InputData {
@@ -33,25 +29,39 @@ export function defaultTimeInputHandle(inputData: InputData | null): InputData {
   let moveCursor = 0;
   const lengthDifference = inputValue.length - MASK_VALUE.length;
 
+  // если пользователь ввел новый символ
   if (inputValue.length > 5) {
     const newChar = inputValue.charAt(selectionStart - 1);
 
     if (/^([0-9])?$/.test(newChar) && inputValue.charAt(selectionStart) === '_') {
-      inputValue = replaceChar(inputValue, selectionStart, '').slice(0, 5);
+      // если newChar - это цифра, после которой следует символ _, то заменяем _ на newChar
+      inputValue = splice(inputValue, selectionStart, 1, '').slice(0, 5);
     } else if (
       /^([0-9])?$/.test(newChar) &&
       inputValue.charAt(selectionStart) === ':' &&
       inputValue.charAt(selectionStart + 1) === '_'
     ) {
-      inputValue = replaceChar(inputValue, selectionStart + 1, newChar);
-      inputValue = replaceChar(inputValue, selectionStart - 1, '').slice(0, 5);
+      // если newChar - это цифра, после которой следуют символы :_, то заменяем _ на newChar, а двоеточие перепрыгиваем
+      inputValue = splice(inputValue, selectionStart + 1, 1, newChar);
+      inputValue = splice(inputValue, selectionStart - 1, 1, '').slice(0, 5);
       moveCursor = moveCursor + 1;
+    } else if (/^([0-9])?$/.test(newChar) && /^([0-9]|:)?$/.test(inputValue.charAt(selectionStart))) {
+      // если newChar - это цифра, после которой следует другая цифра или двоеточие,
+      // то записываем newChar и сдвигаем все символы после неё на одну позицию
+
+      if (inputValue.charAt(selectionStart) === ':') {
+        moveCursor = moveCursor + 1;
+      }
+      const spliced = inputValue.replace(/:/g, '');
+      inputValue = `${spliced.substring(0, 2).replace(/\D/g, '_')}:${spliced.substring(2, 4).replace(/\D/g, '_')}`;
     } else {
-      inputValue = replaceChar(inputValue, selectionStart - 1, '').slice(0, 5);
+      // в остальных случаях ввод символа блокируется (н-р, нельзя ввести букву)
+      inputValue = splice(inputValue, selectionStart - 1, 1, '').slice(0, 5);
       moveCursor = moveCursor - 1;
     }
   }
 
+  // если пользователь удалил часть значения
   if (lengthDifference < 0) {
     inputValue = splice(
       inputValue,
@@ -61,24 +71,30 @@ export function defaultTimeInputHandle(inputData: InputData | null): InputData {
     );
   }
 
+  const cursorSymbolBeforeFormat = inputValue.charAt(selectionStart);
   const spliced = inputValue.replace(/:/g, '');
   inputValue = `${spliced.substring(0, 2).replace(/\D/g, '_')}:${spliced.substring(2, 4).replace(/\D/g, '_')}`;
 
+  if (cursorSymbolBeforeFormat !== inputValue.charAt(selectionStart)) {
+    // после форматирования и добавления двоеточия, курсор должен стоят у одного и того же символа
+    moveCursor = moveCursor + 1;
+  }
+
   if (inputValue.replace(/\D+/g, '').length > 0) {
     if (!isValidDigit(inputValue[0], 0)) {
-      inputValue = replaceChar(inputValue, 0, '_');
+      inputValue = splice(inputValue, 0, 1, '_');
       moveCursor = moveCursor - 1;
     }
     if (!isValidDigit(inputValue[1], 1)) {
-      inputValue = replaceChar(inputValue, 1, '_');
+      inputValue = splice(inputValue, 1, 1, '_');
       moveCursor = moveCursor - 1;
     }
     if (!isValidDigit(inputValue[3], 2)) {
-      inputValue = replaceChar(inputValue, 3, '_');
+      inputValue = splice(inputValue, 3, 1, '_');
       moveCursor = moveCursor - 1;
     }
     if (!isValidDigit(inputValue[4], 3)) {
-      inputValue = replaceChar(inputValue, 4, '_');
+      inputValue = splice(inputValue, 4, 1, '_');
       moveCursor = moveCursor - 1;
     }
   }
