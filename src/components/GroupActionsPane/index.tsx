@@ -70,6 +70,9 @@ export interface GroupActionsPaneProps extends HTMLAttributes<HTMLDivElement> {
   /** Объект, отображаемый в качестве меню настройки */
   settingsMenu?: React.ReactNode;
 
+  /** Признак блокировки кнопок настройки таблицы */
+  settingsButtonsDisabled?: boolean;
+
   /** Объект локализации - позволяет перезадать текстовые константы используемые в компоненте,
    * по умолчанию значения констант берутся из темы в соответствии с параметром currentLocale, заданном в теме
    **/
@@ -89,6 +92,7 @@ export const GroupActionsPane = ({
   onSearchEnter,
   onSearchLeave,
   onChangeSearchValue,
+  settingsButtonsDisabled = false,
   locale,
   ...props
 }: React.PropsWithChildren<GroupActionsPaneProps>) => {
@@ -126,8 +130,15 @@ export const GroupActionsPane = ({
           menuDimension={menuDimension}
           buttonDimension={iconButtonDimension}
           onColumnsChange={onColumnsChange}
+          disabled={settingsButtonsDisabled}
         />
-        {settingsMenu && <SettingsButton menu={settingsMenu} buttonDimension={iconButtonDimension} />}
+        {settingsMenu && (
+          <SettingsButton
+            menu={settingsMenu}
+            buttonDimension={iconButtonDimension}
+            disabled={settingsButtonsDisabled}
+          />
+        )}
       </IconsBlock>
     </Pane>
   );

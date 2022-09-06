@@ -142,8 +142,6 @@ export { ReactComponent as PregnantOutline } from '@admiral-ds/icons/build/categ
 export { ReactComponent as PregnantSolid } from '@admiral-ds/icons/build/category/PregnantSolid.svg';
 export { ReactComponent as PullRequestOutline } from '@admiral-ds/icons/build/category/PullRequestOutline.svg';
 export { ReactComponent as PullRequestSolid } from '@admiral-ds/icons/build/category/PullRequestSolid.svg';
-export { ReactComponent as RIPOutline } from '@admiral-ds/icons/build/category/RIPOutline.svg';
-export { ReactComponent as RIPSolid } from '@admiral-ds/icons/build/category/RIPSolid.svg';
 export { ReactComponent as ReceiptOutline } from '@admiral-ds/icons/build/category/ReceiptOutline.svg';
 export { ReactComponent as ReceiptSolid } from '@admiral-ds/icons/build/category/ReceiptSolid.svg';
 export { ReactComponent as ReceiptUpdateOutline } from '@admiral-ds/icons/build/category/ReceiptUpdateOutline.svg';
