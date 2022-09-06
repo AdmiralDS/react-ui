@@ -95,13 +95,14 @@ export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps
 
     const inputRef = React.useRef<HTMLInputElement | null>(null);
     const [activeIndex, setActiveIndex] = React.useState(0);
+    const [activeText, setActiveText] = React.useState<string | undefined>('');
     const [isSuggestPanelOpen, setIsSuggestPanelOpen] = React.useState<boolean>(false);
     const [isFocused, setIsFocused] = React.useState<boolean>(false);
 
     const [, forceUpdate] = React.useReducer((x) => x + 1, 0);
 
     const handleOptionSelect = () => {
-      const value = options?.[activeIndex] || '';
+      const value = activeText || '';
 
       onOptionSelect?.(value);
 
@@ -195,12 +196,7 @@ export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps
             <SuggestPanel
               key={index}
               text={text}
-              active={index === activeIndex}
               searchText={props.value || inputRef.current?.value || ''}
-              onMouseEnter={() => setActiveIndex(index)}
-              onMouseDown={handleOptionClick}
-              onKeyUp={handleKeyUp}
-              onHover={() => setActiveIndex(index)}
               {...options}
             />
           ),
@@ -249,7 +245,11 @@ export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps
                   theme.locales[theme.currentLocale].suggestInput.emptyMessage}
               </MessagePanel>
             ) : (
-              <Menu model={model} />
+              <Menu
+                model={model}
+                onActivateItem={(text) => setActiveText(text)}
+                onSelectItem={handleOptionSelect}
+              />
             )}
           </StyledDropdownContainer>
         )}
