@@ -200,6 +200,7 @@ export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps
               onMouseEnter={() => setActiveIndex(index)}
               onMouseDown={handleOptionClick}
               onKeyUp={handleKeyUp}
+              onHover={() => setActiveIndex(index)}
               {...options}
             />
           ),

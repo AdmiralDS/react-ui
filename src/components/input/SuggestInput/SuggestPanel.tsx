@@ -29,12 +29,7 @@ function getHighlightedText(text = '', highlight = '') {
   );
 }
 
-const activePanel = css`
-  background-color: ${(p) => p.theme.color['Neutral/Neutral 05']};
-  cursor: pointer;
-`;
-
-export const Panel = styled.div<{ active?: boolean }>`
+export const Panel = styled.div`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -57,7 +52,10 @@ export const Panel = styled.div<{ active?: boolean }>`
 
   color: ${(p) => p.theme.color['Neutral/Neutral 90']};
 
-  ${(p) => (p.active ? activePanel : '')}
+  &&[data-hovered='true'] {
+    background-color: ${(p) => p.theme.color['Opacity/Hover']};
+    cursor: pointer;
+  }
 `;
 
 export interface SuggestPanelProps extends SuggestItem, HTMLAttributes<HTMLDivElement>, RenderOptionProps {
@@ -65,7 +63,14 @@ export interface SuggestPanelProps extends SuggestItem, HTMLAttributes<HTMLDivEl
   active?: boolean;
 }
 
-export const SuggestPanel = ({ searchText = '', text = '', onHover, onClickItem, ...props }: SuggestPanelProps) => {
+export const SuggestPanel = ({
+  searchText = '',
+  text = '',
+  hovered,
+  onHover,
+  onClickItem,
+  ...props
+}: SuggestPanelProps) => {
   const handleMouseMove = () => {
     onHover?.();
   };
@@ -74,7 +79,13 @@ export const SuggestPanel = ({ searchText = '', text = '', onHover, onClickItem,
     onClickItem?.();
   };
   return (
-    <Panel {...props} title={text} onMouseMove={handleMouseMove} onClick={handleClick}>
+    <Panel
+      {...props}
+      title={text}
+      data-hovered={hovered}
+      onMouseMove={handleMouseMove}
+      onClick={handleClick}
+    >
       {getHighlightedText(text, searchText)}
     </Panel>
   );
