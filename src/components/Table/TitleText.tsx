@@ -37,8 +37,6 @@ export const TitleText: React.FC<TitleTextProps> = ({ lineClamp, dimension, widt
       </Title>
     );
 
-  const handleTooltipVisibilityChange = (visible: boolean) => setTooltipVisible(visible);
-
   return (
     <>
       {renderTitle()}
@@ -46,7 +44,7 @@ export const TitleText: React.FC<TitleTextProps> = ({ lineClamp, dimension, widt
         <Tooltip
           targetRef={textRef}
           visible={tooltipVisible}
-          onVisibilityChange={handleTooltipVisibilityChange}
+          onVisibilityChange={setTooltipVisible}
           renderContent={() => children}
         />
       )}

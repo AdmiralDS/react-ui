@@ -119,6 +119,7 @@ const Template1: ComponentStory<typeof OverflowMenu> = (args) => {
         onClose={() => console.log('close menu')}
         aria-label="Overflow Menu component"
         data-dropdown-container-id="overflow-menu-with-dropdown"
+        className="overflow-menu-class"
       />
     </ThemeProvider>
   );

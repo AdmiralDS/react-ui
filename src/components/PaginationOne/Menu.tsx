@@ -117,7 +117,6 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
 
     return (
       <DropMenu
-        {...props}
         items={model}
         onChange={onChange}
         onOpen={onOpen}

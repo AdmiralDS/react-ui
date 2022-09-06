@@ -243,8 +243,6 @@ export const FileInfo = ({
     }
   }, [file]);
 
-  const handleTooltipVisibilityChange = (visible: boolean) => setTitleTipVisible(visible);
-
   return (
     <Container dimension={dimension}>
       <PreviewWrapper {...props} dimension={dimension} fileDimension={fileDimension} status={status}>
@@ -267,7 +265,7 @@ export const FileInfo = ({
               <Tooltip
                 targetRef={titleRef}
                 visible={titleTipVisible}
-                onVisibilityChange={handleTooltipVisibilityChange}
+                onVisibilityChange={setTitleTipVisible}
                 renderContent={() => `${fileName}`}
               />
               <Size fileDimension={fileDimension} status={status}>

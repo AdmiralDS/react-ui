@@ -154,6 +154,7 @@ const TextButtonMenuStory: ComponentStory<typeof TextButtonMenu> = (args) => {
           onOpen={() => console.log('open menu')}
           onClose={() => console.log('close menu')}
           data-dropdown-container-id="text-button-menu-with-dropdown"
+          className="text-button-menu-class"
         />
       </Wrapper>
     </ThemeProvider>

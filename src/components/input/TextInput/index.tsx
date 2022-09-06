@@ -17,6 +17,8 @@ import styled, { css } from 'styled-components';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { InputIconButton } from '#src/components/InputIconButton';
 import { Spinner } from '#src/components/Spinner';
+import { Tooltip } from '#src/components/Tooltip';
+import { checkOverflow } from '#src/components/common/utils/checkOverflow';
 
 const iconSizeValue = (props: { dimension?: ComponentDimension }) => {
   switch (props.dimension) {
@@ -232,7 +234,7 @@ export interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
   isLoading?: boolean;
 
   /** Ref контейнера компонента */
-  containerRef?: ForwardedRef<HTMLDivElement>;
+  containerRef?: React.RefObject<HTMLDivElement>;
 
   /**
    * Дает возможность изменить значение поля ввода и позицию курсора до момента отображения при следующем цикле рендеринга.
@@ -245,6 +247,9 @@ export interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
 
   /** Состояние skeleton */
   skeleton?: boolean;
+
+  /** Отображение тултипа, по умолчанию true */
+  showTooltip?: boolean;
 }
 
 export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
@@ -262,13 +267,26 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
       style,
       placeholder,
       skeleton = false,
+      showTooltip = true,
       ...props
     },
     ref,
   ) => {
     const inputRef = React.useRef<HTMLInputElement>(null);
+    const wrapperRef = containerRef || React.useRef<HTMLDivElement>(null);
 
     const iconArray = React.Children.toArray(icons);
+
+    const [overflowActive, setOverflowActive] = React.useState<boolean>(false);
+    const [tooltipVisible, setTooltipVisible] = React.useState<boolean>(false);
+
+    React.useEffect(() => {
+      if (checkOverflow(inputRef.current)) {
+        setOverflowActive(true);
+        return;
+      }
+      setOverflowActive(false);
+    }, [tooltipVisible]);
 
     const [isPasswordVisible, setPasswordVisible] = React.useState(false);
     if (!props.readOnly && type === 'password') {
@@ -301,7 +319,9 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
     }
 
     if (isLoading) {
-      iconArray.unshift(<StyledSpinner svgMixin={SpinnerMixin} dimension={props.dimension === 's' ? 's' : 'm'} />);
+      iconArray.unshift(
+        <StyledSpinner key="loading-icon" svgMixin={SpinnerMixin} dimension={props.dimension === 's' ? 's' : 'm'} />,
+      );
     }
 
     const iconCount = iconArray.length;
@@ -345,33 +365,43 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
       }
     }, [inputRef.current, handleInput, placeholder]);
     return (
-      <Container
-        className={className}
-        style={style}
-        dimension={props.dimension}
-        ref={containerRef}
-        data-read-only={props.readOnly ? true : undefined}
-        data-status={status}
-        skeleton={skeleton}
-        {...(props.disableCopying && {
-          onMouseDown: stopEvent,
-        })}
-      >
-        <Input
-          ref={refSetter(ref, inputRef)}
-          {...props}
-          placeholder={placeholder}
-          iconCount={iconCount}
-          type={type === 'password' && isPasswordVisible ? 'text' : type}
-        />
-        <BorderedDiv />
-        {iconCount > 0 && (
-          <IconPanel disabled={props.disabled} dimension={props.dimension}>
-            {iconArray}
-          </IconPanel>
+      <>
+        <Container
+          className={className}
+          style={style}
+          dimension={props.dimension}
+          ref={wrapperRef}
+          data-read-only={props.readOnly ? true : undefined}
+          data-status={status}
+          skeleton={skeleton}
+          {...(props.disableCopying && {
+            onMouseDown: stopEvent,
+          })}
+        >
+          <Input
+            ref={refSetter(ref, inputRef)}
+            {...props}
+            placeholder={placeholder}
+            iconCount={iconCount}
+            type={type === 'password' && isPasswordVisible ? 'text' : type}
+          />
+          <BorderedDiv />
+          {iconCount > 0 && (
+            <IconPanel disabled={props.disabled} dimension={props.dimension}>
+              {iconArray}
+            </IconPanel>
+          )}
+          {children}
+        </Container>
+        {showTooltip && (
+          <Tooltip
+            visible={tooltipVisible && overflowActive}
+            onVisibilityChange={setTooltipVisible}
+            renderContent={() => inputRef?.current?.value}
+            targetRef={wrapperRef}
+          />
         )}
-        {children}
-      </Container>
+      </>
     );
   },
 );

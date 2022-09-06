@@ -82,11 +82,6 @@ export const Panel: FC<IPanelProps> = ({
   const [monthTipVisible, setMonthTipVisible] = React.useState(false);
   const [yearTipVisible, setYearTipVisible] = React.useState(false);
 
-  const handlePreviousBtnTipChange = (visible: boolean) => setPreviousBtnTipVisible(visible);
-  const handleNextBtnTipChange = (visible: boolean) => setNextBtnTipVisible(visible);
-  const handleMonthTipChange = (visible: boolean) => setMonthTipVisible(visible);
-  const handleYearTipChange = (visible: boolean) => setYearTipVisible(visible);
-
   const monthMouseDownHandle = (event: any) => {
     event.preventDefault();
     monthsView ? onMonthsViewHide(event) : onMonthsViewShow(event);
@@ -103,7 +98,7 @@ export const Panel: FC<IPanelProps> = ({
           <Tooltip
             targetRef={previousBtnRef}
             visible={previousBtnTipVisible}
-            onVisibilityChange={handlePreviousBtnTipChange}
+            onVisibilityChange={setPreviousBtnTipVisible}
             renderContent={() =>
               yearsView
                 ? locale?.backwardText || theme.locales[theme.currentLocale].calendar.backwardText
@@ -120,7 +115,7 @@ export const Panel: FC<IPanelProps> = ({
         <Tooltip
           targetRef={monthRef}
           visible={monthTipVisible}
-          onVisibilityChange={handleMonthTipChange}
+          onVisibilityChange={setMonthTipVisible}
           renderContent={() =>
             monthsView
               ? locale?.returnText || theme.locales[theme.currentLocale].calendar.returnText
@@ -134,7 +129,7 @@ export const Panel: FC<IPanelProps> = ({
         <Tooltip
           targetRef={yearRef}
           visible={yearTipVisible}
-          onVisibilityChange={handleYearTipChange}
+          onVisibilityChange={setYearTipVisible}
           renderContent={() =>
             yearsView
               ? locale?.returnText || theme.locales[theme.currentLocale].calendar.returnText
@@ -149,7 +144,7 @@ export const Panel: FC<IPanelProps> = ({
           <Tooltip
             targetRef={nextBtnRef}
             visible={nextBtnTipVisible}
-            onVisibilityChange={handleNextBtnTipChange}
+            onVisibilityChange={setNextBtnTipVisible}
             renderContent={() =>
               yearsView
                 ? locale?.forwardText || theme.locales[theme.currentLocale].calendar.forwardText
