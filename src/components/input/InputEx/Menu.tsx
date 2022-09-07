@@ -75,12 +75,12 @@ export const Menu = React.forwardRef<HTMLDivElement, MenuProps<ValueType>>(
     const menuRef = React.useRef<HTMLDivElement | null>(null);
 
     const findNext = () => {
-      const currentIndex = selected ? options.indexOf(selected) : 0;
+      const currentIndex = selected ? options.indexOf(activeOption || selected) : 0;
       return currentIndex + 1 > options.length ? options[0] : options[currentIndex + 1];
     };
 
     const findPrevious = () => {
-      const currentIndex = selected ? options.indexOf(selected) : 0;
+      const currentIndex = selected ? options.indexOf(activeOption || selected) : 0;
       return currentIndex - 1 < 0 ? options[options.length - 1] : options[currentIndex - 1];
     };
 
