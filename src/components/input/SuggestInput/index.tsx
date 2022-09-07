@@ -43,6 +43,7 @@ export interface SuggestInputProps extends Omit<TextInputProps, 'value'> {
   /** Референс на контейнер для правильного позиционирования выпадающего списка */
   portalTargetRef?: React.RefObject<HTMLElement>;
 
+  /** Обработчик клика по кнопке поиска */
   onSearchButtonClick?: React.MouseEventHandler<SVGSVGElement>;
 
   /**
@@ -54,9 +55,7 @@ export interface SuggestInputProps extends Omit<TextInputProps, 'value'> {
   /** Задает максимальную высоту контейнера с опциями */
   dropMaxHeight?: string | number;
 
-  /**
-   * Компонент для отображения альтернативной иконки
-   */
+  /** Компонент для отображения альтернативной иконки */
   icon?: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
 
   /** Статус поля */

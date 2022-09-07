@@ -54,7 +54,7 @@ export interface MenuProps extends HTMLAttributes<HTMLDivElement> {
   selected?: string;
   /** выбранная по умолчаниию секция Menu */
   defaultSelected?: string;
-  /** Обработчик выбора item в меню */
+  /** Обработчик активации (hover) item в меню */
   onActivateItem?: (id?: string) => void;
   /** Обработчик выбора item в меню */
   onSelectItem?: (id: string) => void;
