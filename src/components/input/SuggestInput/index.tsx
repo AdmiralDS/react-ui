@@ -95,6 +95,7 @@ export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps
     const inputRef = React.useRef<HTMLInputElement | null>(null);
     const [isSuggestPanelOpen, setIsSuggestPanelOpen] = React.useState<boolean>(false);
     const [isFocused, setIsFocused] = React.useState<boolean>(false);
+    const [activeOption, setActiveOption] = React.useState<string | undefined>('');
 
     const [, forceUpdate] = React.useReducer((x) => x + 1, 0);
 
@@ -177,6 +178,12 @@ export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps
       }
     }, [options, props.dimension, props.value, inputRef.current?.value]);
 
+    React.useEffect(() => {
+      if (isSuggestPanelOpen) {
+        setActiveOption(options ? options[0] : '');
+      }
+    }, [options]);
+
     return (
       <TextInput
         {...props}
@@ -215,7 +222,12 @@ export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps
                   theme.locales[theme.currentLocale].suggestInput.emptyMessage}
               </MessagePanel>
             ) : (
-              <Menu model={model} onSelectItem={handleOptionSelect} />
+              <Menu
+                model={model}
+                active={activeOption}
+                onActivateItem={setActiveOption}
+                onSelectItem={handleOptionSelect}
+              />
             )}
           </StyledDropdownContainer>
         )}
