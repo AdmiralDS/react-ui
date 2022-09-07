@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { HTMLAttributes } from 'react';
 import styled, { css } from 'styled-components';
+import { RenderOptionProps } from '#src/components/MenuItem';
 
-export interface SlotProps extends HTMLAttributes<HTMLLIElement> {
+export interface SlotProps extends HTMLAttributes<HTMLDivElement>, RenderOptionProps {
   selected?: boolean;
   value: string;
   disabled: boolean;
@@ -13,7 +14,7 @@ const activeSlot = css`
   background-color: ${(p) => p.theme.color['Opacity/Focus']};
 `;
 
-const SlotStyle = styled.li<{ disabled?: boolean; selected?: boolean; active?: boolean }>`
+const SlotStyle = styled.div<{ disabled?: boolean; selected?: boolean; active?: boolean }>`
   position: relative;
   display: flex;
   justify-content: center;
@@ -36,6 +37,17 @@ const SlotStyle = styled.li<{ disabled?: boolean; selected?: boolean; active?: b
   ${(p) => ((p.selected && !p.active && !p.disabled) || (p.active && !p.disabled) ? activeSlot : '')}
 `;
 
-export const Slot = ({ value, ...props }: SlotProps) => {
-  return <SlotStyle {...props}>{value}</SlotStyle>;
+export const Slot = ({ value, onHover, onClickItem, ...props }: SlotProps) => {
+  const handleMouseMove = () => {
+    onHover?.();
+  };
+
+  const handleClick = () => {
+    onClickItem?.();
+  };
+  return (
+    <SlotStyle {...props} onMouseMove={handleMouseMove} onClick={handleClick}>
+      {value}
+    </SlotStyle>
+  );
 };

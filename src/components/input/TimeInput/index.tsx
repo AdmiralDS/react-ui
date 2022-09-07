@@ -9,9 +9,10 @@ import { changeInputData } from '#src/components/common/dom/changeInputData';
 import { Slot, SlotProps } from './Slot';
 import { getTimeInMinutes, parseStringToTime } from './utils';
 import { typography } from '#src/components/Typography';
-import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { InputIconButton } from '#src/components/InputIconButton';
 import { DropdownContainer } from '#src/components/DropdownContainer';
+import { RenderOptionProps } from '#src/components/MenuItem';
+import { Menu } from '#src/components/Menu';
 
 const slots: SlotProps[] = [
   { value: '00:00', disabled: false },
@@ -64,22 +65,14 @@ const slots: SlotProps[] = [
   { value: '23:30', disabled: false },
 ];
 
-const SlotContainer = styled.ul`
-  pointer-events: initial;
-  padding: 8px 0;
-  margin: 0;
-  overflow-x: hidden;
-  overflow-y: auto;
-  background-color: ${(p) => p.theme.color['Special/Elevated BG']};
-  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
-  ${(p) => p.theme.shadow['Shadow 08']}
-  flex: 0 0 auto;
-  ${typography['Body/Body 1 Long']};
+const StyledMenu = styled(Menu)`
   &[data-dimension='xl'] {
+    ${typography['Body/Body 1 Long']};
     width: 84px;
     height: 288px;
   }
   &[data-dimension='m'] {
+    ${typography['Body/Body 1 Long']};
     width: 84px;
     height: 240px;
   }
@@ -133,7 +126,6 @@ export const TimeInput = React.forwardRef<HTMLInputElement, TimeInputProps>(
   ) => {
     const handleInput = props.handleInput || defaultTimeInputHandle;
     const [timeValue, setTimeValue] = useState<string | null>(null);
-    const [activeIndex, setActiveIndex] = React.useState(0);
     const inputContainerRef = useRef<HTMLDivElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
     const [isOpened, setIsOpened] = useState<boolean>(false);
@@ -186,52 +178,19 @@ export const TimeInput = React.forwardRef<HTMLInputElement, TimeInputProps>(
         ? disableSlots(slots, disabledSlots)?.filter((slot) => filterTime(slot.value, startTime, endTime))
         : slots;
 
-    const handleClick = () => {
+    const handleClick = (option: string) => {
       if (inputRef.current) {
-        if (availableSlots && !availableSlots[activeIndex].disabled && isOpened) {
-          const slotValue = availableSlots[activeIndex].value;
-          setTimeValue(slotValue);
-          if (!slotValue) {
+        if (isOpened) {
+          setTimeValue(option);
+          if (!option) {
             changeInputData(inputRef.current, { value: '' });
             return;
           }
-          changeInputData(inputRef.current, { value: slotValue });
+          changeInputData(inputRef.current, { value: option });
           setIsOpened(false);
         } else {
           changeInputData(inputRef.current, { value });
         }
-      }
-    };
-
-    const handleKeyUp = (e: React.KeyboardEvent) => {
-      if (!availableSlots) return;
-      const activeOption = document.querySelector('[aria-selected="true"]');
-      switch (e.key) {
-        case 'Enter':
-          handleClick();
-          break;
-        case 'ArrowUp':
-          if (!isOpened) {
-            setIsOpened(true);
-          }
-          activeOption?.scrollIntoView(false);
-          if (activeIndex <= 0) {
-            setActiveIndex(availableSlots.length - 1);
-          } else {
-            setActiveIndex(activeIndex - 1);
-          }
-          break;
-        case 'ArrowDown':
-          if (!isOpened) {
-            setIsOpened(true);
-          }
-          activeOption?.scrollIntoView(true);
-          if (activeIndex >= availableSlots.length - 1) {
-            setActiveIndex(0);
-          } else {
-            setActiveIndex(activeIndex + 1);
-          }
-          break;
       }
     };
 
@@ -244,6 +203,22 @@ export const TimeInput = React.forwardRef<HTMLInputElement, TimeInputProps>(
     const clickOutside = () => {
       setIsOpened(false);
     };
+
+    const model = React.useMemo(() => {
+      if (availableSlots) {
+        return availableSlots.map((slot, index) => ({
+          id: slot.value,
+          render: (options: RenderOptionProps) => (
+            <Slot key={index} value={slot.value} data-dimension={dimension} disabled={slot.disabled} {...options}>
+              {slot.value}
+            </Slot>
+          ),
+          disabled: slot.disabled,
+        }));
+      } else {
+        return [];
+      }
+    }, [availableSlots, dimension, timeValue]);
 
     return (
       <TextInput
@@ -258,7 +233,6 @@ export const TimeInput = React.forwardRef<HTMLInputElement, TimeInputProps>(
         skeleton={skeleton}
         onKeyUp={(...p) => {
           props.onKeyUp?.(...p);
-          handleKeyUp(...p);
         }}
         onKeyDown={(...p) => {
           props.onKeyDown?.(...p);
@@ -267,24 +241,7 @@ export const TimeInput = React.forwardRef<HTMLInputElement, TimeInputProps>(
       >
         {availableSlots && isOpened && !disabled && !skeleton && (
           <DropdownContainer targetRef={inputRef} alignSelf={alignDropdown} onClickOutside={clickOutside}>
-            <SlotContainer data-dimension={dimension}>
-              {availableSlots.map((slot, index) => (
-                <Slot
-                  key={index}
-                  active={index === activeIndex}
-                  value={slot.value}
-                  data-dimension={dimension}
-                  selected={timeValue === slot.value}
-                  aria-selected={index === activeIndex}
-                  disabled={slot.disabled}
-                  onMouseEnter={() => setActiveIndex(index)}
-                  onClick={handleClick}
-                  onKeyUp={handleKeyUp}
-                >
-                  {slot.value}
-                </Slot>
-              ))}
-            </SlotContainer>
+            <StyledMenu model={model} data-dimension={dimension} onSelectItem={handleClick} />
           </DropdownContainer>
         )}
       </TextInput>
