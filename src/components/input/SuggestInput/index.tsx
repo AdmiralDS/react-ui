@@ -94,29 +94,24 @@ export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps
     const { options, portalTargetRef } = props;
 
     const inputRef = React.useRef<HTMLInputElement | null>(null);
-    const [activeIndex, setActiveIndex] = React.useState(0);
-    const [activeText, setActiveText] = React.useState<string | undefined>('');
     const [isSuggestPanelOpen, setIsSuggestPanelOpen] = React.useState<boolean>(false);
     const [isFocused, setIsFocused] = React.useState<boolean>(false);
 
     const [, forceUpdate] = React.useReducer((x) => x + 1, 0);
 
-    const handleOptionSelect = () => {
-      const value = activeText || '';
-
-      onOptionSelect?.(value);
+    const handleOptionSelect = (option: string) => {
+      onOptionSelect?.(option);
 
       if (!isControlledComponentValue && inputRef.current) {
-        const cursorPosition = value.length;
-        changeInputData(inputRef.current, { value, selectionStart: cursorPosition, selectionEnd: cursorPosition });
+        const cursorPosition = option.length;
+        changeInputData(inputRef.current, {
+          value: option,
+          selectionStart: cursorPosition,
+          selectionEnd: cursorPosition,
+        });
       }
 
       setIsSuggestPanelOpen(false);
-    };
-
-    const handleOptionClick = (e: React.MouseEvent) => {
-      e.preventDefault();
-      handleOptionSelect();
     };
 
     React.useEffect(() => {
@@ -124,29 +119,6 @@ export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps
         setIsSuggestPanelOpen(isFocused);
       }
     }, [isFocused, options]);
-
-    const handleKeyUp = (e: React.KeyboardEvent) => {
-      if (!options) return;
-      switch (e.key) {
-        case 'Enter':
-          handleOptionSelect();
-          break;
-        case 'ArrowUp':
-          if (activeIndex <= 0) {
-            setActiveIndex(options.length - 1);
-          } else {
-            setActiveIndex(activeIndex - 1);
-          }
-          break;
-        case 'ArrowDown':
-          if (activeIndex >= options.length - 1) {
-            setActiveIndex(0);
-          } else {
-            setActiveIndex(activeIndex + 1);
-          }
-          break;
-      }
-    };
 
     const handleKeyDown = (e: React.KeyboardEvent) => {
       const code = keyboardKey.getCode(e);
@@ -204,7 +176,7 @@ export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps
       } else {
         return [];
       }
-    }, [options, props.dimension, props.value, inputRef.current?.value, activeIndex]);
+    }, [options, props.dimension, props.value, inputRef.current?.value]);
 
     return (
       <TextInput
@@ -216,7 +188,6 @@ export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps
         isLoading={isLoading}
         onKeyUp={(...p) => {
           props.onKeyUp?.(...p);
-          handleKeyUp(...p);
         }}
         onKeyDown={(...p) => {
           props.onKeyDown?.(...p);
@@ -245,11 +216,7 @@ export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps
                   theme.locales[theme.currentLocale].suggestInput.emptyMessage}
               </MessagePanel>
             ) : (
-              <Menu
-                model={model}
-                onActivateItem={(text) => setActiveText(text)}
-                onSelectItem={handleOptionSelect}
-              />
+              <Menu model={model} onSelectItem={handleOptionSelect} />
             )}
           </StyledDropdownContainer>
         )}
