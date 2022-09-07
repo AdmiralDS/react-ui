@@ -77,10 +77,16 @@ export const SuffixSelect = <T extends ValueType>({
   const containerRef = React.useRef(null);
   const alignContainerRef = props.alignRef === undefined ? containerRef : props.alignRef;
 
-  const handleContainerClick = () => {
+  const handleContainerClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.preventDefault(); // prevent focus stealing from input
     const newOpenStatus = !isOpen;
     props.onOpenChange?.(newOpenStatus);
     setIsOpenState(newOpenStatus);
+  };
+
+  const handleOnSelect = (value: ValueType) => {
+    onChange(value);
+    setIsOpenState(false);
   };
 
   const clickOutside = () => {
@@ -89,7 +95,7 @@ export const SuffixSelect = <T extends ValueType>({
 
   return (
     <>
-      <Container ref={containerRef} onClick={handleContainerClick}>
+      <Container ref={containerRef} onMouseDown={handleContainerClick}>
         <ValueContainer>{value}</ValueContainer>
         <OpenStatusButton $isOpen={isOpen} aria-hidden />
       </Container>
@@ -100,7 +106,7 @@ export const SuffixSelect = <T extends ValueType>({
           targetRef={alignContainerRef}
           onClickOutside={clickOutside}
         >
-          <StyledMenu maxHeight={dropMaxHeight} options={options} selected={value} onSelect={onChange} />
+          <StyledMenu maxHeight={dropMaxHeight} options={options} selected={value} onSelect={handleOnSelect} />
         </DropdownContainer>
       )}
     </>
