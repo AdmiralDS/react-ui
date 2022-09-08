@@ -125,7 +125,7 @@ export const TimeInput = React.forwardRef<HTMLInputElement, TimeInputProps>(
     ref,
   ) => {
     const handleInput = props.handleInput || defaultTimeInputHandle;
-    const [timeValue, setTimeValue] = useState<string | null>(null);
+    const [timeValue, setTimeValue] = useState<string>('');
     const inputContainerRef = useRef<HTMLDivElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
     const [isOpened, setIsOpened] = useState<boolean>(false);
