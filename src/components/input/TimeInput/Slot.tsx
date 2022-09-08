@@ -4,17 +4,18 @@ import styled, { css } from 'styled-components';
 import { RenderOptionProps } from '#src/components/MenuItem';
 
 export interface SlotProps extends HTMLAttributes<HTMLDivElement>, RenderOptionProps {
-  selected?: boolean;
   value: string;
-  disabled: boolean;
-  active?: boolean;
 }
 
-const activeSlot = css`
+const hoveredSlot = css`
+  background-color: ${(p) => p.theme.color['Opacity/Hover']};
+`;
+
+const selectedSlot = css`
   background-color: ${(p) => p.theme.color['Opacity/Focus']};
 `;
 
-const SlotStyle = styled.div<{ disabled?: boolean; selected?: boolean; active?: boolean }>`
+const SlotStyle = styled.div<{ disabled?: boolean; selected?: boolean; hovered?: boolean }>`
   position: relative;
   display: flex;
   justify-content: center;
@@ -30,11 +31,7 @@ const SlotStyle = styled.div<{ disabled?: boolean; selected?: boolean; active?: 
     padding: 6px 12px;
   }
 
-  &:hover {
-    background: ${(p) => (p.disabled ? '' : p.theme.color['Opacity/Hover'])};
-  }
-
-  ${(p) => ((p.selected && !p.active && !p.disabled) || (p.active && !p.disabled) ? activeSlot : '')}
+  ${(p) => (p.selected && !p.hovered && !p.disabled ? selectedSlot : p.hovered && !p.disabled ? hoveredSlot : '')}
 `;
 
 export const Slot = ({ value, onHover, onClickItem, ...props }: SlotProps) => {
