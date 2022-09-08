@@ -218,7 +218,7 @@ export const TimeInput = React.forwardRef<HTMLInputElement, TimeInputProps>(
       } else {
         return [];
       }
-    }, [availableSlots, dimension, timeValue]);
+    }, [availableSlots, dimension]);
 
     return (
       <TextInput
@@ -241,7 +241,7 @@ export const TimeInput = React.forwardRef<HTMLInputElement, TimeInputProps>(
       >
         {availableSlots && isOpened && !disabled && !skeleton && (
           <DropdownContainer targetRef={inputRef} alignSelf={alignDropdown} onClickOutside={clickOutside}>
-            <StyledMenu model={model} data-dimension={dimension} onSelectItem={handleClick} />
+            <StyledMenu selected={timeValue} model={model} data-dimension={dimension} onSelectItem={handleClick} />
           </DropdownContainer>
         )}
       </TextInput>
