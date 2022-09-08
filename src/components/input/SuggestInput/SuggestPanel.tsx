@@ -60,7 +60,6 @@ export const Panel = styled.div`
 
 export interface SuggestPanelProps extends SuggestItem, HTMLAttributes<HTMLDivElement>, RenderOptionProps {
   text?: string;
-  active?: boolean;
 }
 
 export const SuggestPanel = ({
@@ -79,13 +78,7 @@ export const SuggestPanel = ({
     onClickItem?.();
   };
   return (
-    <Panel
-      {...props}
-      title={text}
-      data-hovered={hovered}
-      onMouseMove={handleMouseMove}
-      onClick={handleClick}
-    >
+    <Panel {...props} title={text} data-hovered={hovered} onMouseMove={handleMouseMove} onClick={handleClick}>
       {getHighlightedText(text, searchText)}
     </Panel>
   );
