@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { OverflowMenu } from '#src/components/OverflowMenu';
 import { MenuItem, RenderOptionProps } from '#src/components/MenuItem';
 import { ReactComponent as DeleteOutline } from '@admiral-ds/icons/build/system/DeleteOutline.svg';
-import { RowAction } from '#src/components/Table';
+import { RowAction, RowActionProps } from '#src/components/Table';
 
 import type { Column } from '../Table';
 import { Tooltip } from '#src/components/Tooltip';
@@ -851,31 +851,14 @@ const IconWrapper = styled.div`
     fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
   }
 `;
-const IconDeleteOutline = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLElement>>((props, ref) => {
+const RowActionComponent = React.forwardRef<HTMLDivElement, RowActionProps>((props, ref) => {
   return (
-    <IconWrapper ref={ref} {...props}>
+    <RowAction ref={ref} onClick={() => console.log('row action happens')} {...props}>
       <DeleteOutline />
-    </IconWrapper>
+    </RowAction>
   );
 });
-const TooltipedIconDeleteOutline = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLElement>>((props, ref) => {
-  const iconRef = React.useRef<HTMLDivElement | null>(null);
-  const [visible, setVisible] = React.useState(false);
-  return (
-    <>
-      <IconWrapper ref={iconRef} {...props}>
-        <DeleteOutline />
-      </IconWrapper>
-      <Tooltip
-        visible={visible}
-        onVisibilityChange={setVisible}
-        renderContent={() => `Delete row`}
-        targetRef={iconRef}
-      />
-    </>
-  );
-});
-const TooltipedIcon = TooltipHoc(IconDeleteOutline);
+const TooltipedRowAction = TooltipHoc(RowActionComponent);
 
 export const rowListMenu: RowData[] = [
   {
@@ -911,13 +894,11 @@ export const rowListMenu: RowData[] = [
       const [visible, setVisible] = React.useState(false);
 
       return (
-        <RowAction onClick={() => console.log('row action happens')}>
-          <TooltipedIcon
-            visible={visible}
-            handleVisibilityChange={(visible: boolean) => setVisible(visible)}
-            renderContent={() => `Delete`}
-          />
-        </RowAction>
+        <TooltipedRowAction
+          visible={visible}
+          handleVisibilityChange={(visible: boolean) => setVisible(visible)}
+          renderContent={() => `Delete`}
+        />
       );
     },
   },
@@ -928,11 +909,21 @@ export const rowListMenu: RowData[] = [
     transfer_amount: numberFormatter.format(350_000_000),
     currency: 'RUB',
     rate: 1,
-    actionRender: () => (
-      <RowAction onClick={() => console.log('row action happens')}>
-        <TooltipedIconDeleteOutline />
-      </RowAction>
-    ),
+    actionRender: () => {
+      const actionRef = React.useRef(null);
+      const [visible, setVisible] = React.useState(false);
+      return (
+        <>
+          <RowActionComponent ref={actionRef} />
+          <Tooltip
+            targetRef={actionRef}
+            visible={visible}
+            onVisibilityChange={(visible: boolean) => setVisible(visible)}
+            renderContent={() => `Delete`}
+          />
+        </>
+      );
+    },
   },
   {
     id: '0005',
