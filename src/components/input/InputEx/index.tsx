@@ -142,6 +142,7 @@ const PrefixContainer = styled.div<{ disabled?: boolean; dimension?: ComponentDi
   ${(props) => (props.dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])};
   color: ${(props) =>
     props.disabled ? props.theme.color['Neutral/Neutral 30'] : props.theme.color['Neutral/Neutral 50']};
+  white-space: nowrap;
 `;
 
 const SuffixContainer = styled.div<{ disabled?: boolean; dimension?: ComponentDimension }>`
@@ -152,6 +153,7 @@ const SuffixContainer = styled.div<{ disabled?: boolean; dimension?: ComponentDi
   ${(props) => (props.dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])};
   color: ${(props) =>
     props.disabled ? props.theme.color['Neutral/Neutral 30'] : props.theme.color['Neutral/Neutral 50']};
+  white-space: nowrap;
 `;
 
 const IconPanel = styled.div<{ disabled?: boolean; dimension?: ComponentDimension }>`
