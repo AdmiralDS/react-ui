@@ -229,13 +229,26 @@ export interface InputExProps extends Omit<InputHTMLAttributes<HTMLInputElement>
   /** Срабатывает при выборе нового значения префикса*/
   onPrefixValueChange?: (value: ValueType) => void;
 
-  /** Специальный метод для рендера компонента по значению */
+  /** Специальный метод для рендера компонента по значению префикса */
   renderPrefixValue?: (value?: ValueType) => React.ReactNode;
 
   /** Специальный метод для рендера опции списка префикса по значению */
   renderPrefixOption?: (value?: ValueType) => React.ReactNode;
 
-  suffix?: React.ReactNode;
+  /** Значение суффикса */
+  suffixValue?: ValueType;
+
+  /** Список значений суффикса */
+  suffixValueList?: ValueType[];
+
+  /** Срабатывает при выборе нового значения суффикса */
+  onSuffixValueChange?: (value: ValueType) => void;
+
+  /** Специальный метод для рендера компонента по значению суффикса*/
+  renderSuffixValue?: (value?: ValueType) => React.ReactNode;
+
+  /** Специальный метод для рендера опции списка суффикса по значению */
+  renderSuffixOption?: (value?: ValueType) => React.ReactNode;
 }
 
 export const InputEx = React.forwardRef<HTMLInputElement, InputExProps>(
@@ -256,10 +269,14 @@ export const InputEx = React.forwardRef<HTMLInputElement, InputExProps>(
       renderPrefixValue = (value?: ValueType) => value,
       prefixValueList,
       onPrefixValueChange,
-
       renderPrefixOption = (value?: ValueType) => value,
 
-      suffix,
+      suffixValue,
+      renderSuffixValue = (value?: ValueType) => value,
+      suffixValueList,
+      onSuffixValueChange,
+      renderSuffixOption = (value?: ValueType) => value,
+
       ...props
     },
     ref,
@@ -279,6 +296,20 @@ export const InputEx = React.forwardRef<HTMLInputElement, InputExProps>(
       : renderPrefixValue;
 
     const prefix = renderPrefix(prefixValue);
+
+    const renderSuffix = suffixValueList
+      ? (value?: ValueType) => (
+          <SuffixSelect
+            dropAlign="flex-end"
+            alignRef={alignRef}
+            value={value || ''}
+            onChange={(value) => onSuffixValueChange?.(value)}
+            options={suffixValueList}
+          />
+        )
+      : renderPrefixValue;
+
+    const suffix = renderSuffix(suffixValue);
 
     const inputRef = React.useRef<HTMLInputElement>(null);
 

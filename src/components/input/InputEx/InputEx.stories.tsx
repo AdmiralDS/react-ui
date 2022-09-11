@@ -55,7 +55,7 @@ export default {
     prefixValue: {
       type: 'string',
     },
-    suffix: {
+    suffixValue: {
       type: 'string',
     },
     onChange: {
@@ -107,6 +107,8 @@ const Template: ComponentStory<typeof InputEx> = (props) => {
 };
 
 const PREFIX_OPTIONS = ['prefix One', 'prefix Two', 'prefix Three'];
+const SUFFIX_OPTIONS = ['One', 'Two', 'Three'];
+
 const Template2: ComponentStory<typeof InputEx> = (props) => {
   const cleanProps = (Object.keys(props) as Array<keyof typeof props>).reduce((acc, key) => {
     if (props[key] !== undefined) acc[key] = props[key];
@@ -141,15 +143,9 @@ const Template2: ComponentStory<typeof InputEx> = (props) => {
         prefixValue={prefixValue}
         prefixValueList={PREFIX_OPTIONS}
         onPrefixValueChange={setPrefixValue}
-        suffix={
-          <SuffixSelect
-            dropAlign="flex-end"
-            alignRef={inputRef}
-            value={suffixValue}
-            onChange={(value) => setSuffixValue(value)}
-            options={['One', 'Two', 'Three']}
-          />
-        }
+        suffixValue={suffixValue}
+        suffixValueList={SUFFIX_OPTIONS}
+        onSuffixValueChange={setSuffixValue}
       />
     </ThemeProvider>
   );
