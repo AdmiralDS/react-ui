@@ -5,7 +5,8 @@ import { withDesign } from 'storybook-addon-designs';
 import { INPUT_DIMENSIONS_VALUES } from '#src/components/input/types';
 import { Theme } from '#src/components/themes';
 import { ThemeProvider } from 'styled-components';
-import { SuffixSelect, ValueType } from '#src/components/input/InputEx/SuffixSelect';
+import { SuffixSelect } from '#src/components/input/InputEx/SuffixSelect';
+import type { ValueType } from './ValueType';
 
 export default {
   title: 'Admiral-2.1/Input/InputEx',
@@ -51,7 +52,7 @@ export default {
     placeholder: {
       type: 'string',
     },
-    prefix: {
+    prefixValue: {
       type: 'string',
     },
     suffix: {
@@ -105,6 +106,7 @@ const Template: ComponentStory<typeof InputEx> = (props) => {
   );
 };
 
+const PREFIX_OPTIONS = ['prefix One', 'prefix Two', 'prefix Three'];
 const Template2: ComponentStory<typeof InputEx> = (props) => {
   const cleanProps = (Object.keys(props) as Array<keyof typeof props>).reduce((acc, key) => {
     if (props[key] !== undefined) acc[key] = props[key];
@@ -136,15 +138,9 @@ const Template2: ComponentStory<typeof InputEx> = (props) => {
         containerRef={inputRef}
         value={localValue}
         onChange={handleChange}
-        prefix={
-          <SuffixSelect
-            dropAlign="flex-start"
-            alignRef={inputRef}
-            value={prefixValue}
-            onChange={(value) => setPrefixValue(value)}
-            options={['prefix One', 'prefix Two', 'prefix Three']}
-          />
-        }
+        prefixValue={prefixValue}
+        prefixValueList={PREFIX_OPTIONS}
+        onPrefixValueChange={setPrefixValue}
         suffix={
           <SuffixSelect
             dropAlign="flex-end"

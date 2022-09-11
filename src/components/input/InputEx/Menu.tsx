@@ -3,8 +3,9 @@ import * as React from 'react';
 import styled, { css } from 'styled-components';
 import { keyboardKey } from '#src/components/common/keyboardKey';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
-import type { RenderPropsType, ValueType } from '#src/components/input/InputEx/SuffixSelect';
+import type { RenderPropsType } from '#src/components/input/InputEx/SuffixSelect';
 import { MenuItem, MenuItemProps } from '#src/components/MenuItem';
+import { ValueType } from './ValueType';
 
 export type MenuDimensions = 'l' | 'm' | 's';
 

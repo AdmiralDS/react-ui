@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { OpenStatusButton } from '#src/components/OpenStatusButton';
 import { DropdownContainer } from '#src/components/DropdownContainer';
 import { Menu } from './Menu';
+import { ValueType } from './ValueType';
 
 const StyledMenu = styled(Menu)<{ width?: string }>`
   width: ${({ width }) => (width ? width : 'auto')};
@@ -32,7 +33,6 @@ const ValueContainer = styled.div`
 export type RenderPropsType<T> = {
   value: T;
 };
-export type ValueType = string | number | object;
 
 export type SuffixSelectProps<T> = {
   /** ref элемента относительно которого будет выравниваться дроп контейнер */

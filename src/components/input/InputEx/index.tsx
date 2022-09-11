@@ -8,6 +8,8 @@ import { changeInputData } from '#src/components/common/dom/changeInputData';
 import { InputIconButton } from '#src/components/InputIconButton';
 import { refSetter } from '#src/components/common/utils/refSetter';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
+import { ValueType } from './ValueType';
+import { SuffixSelect } from '#src/components/input/InputEx/SuffixSelect';
 
 const iconSizeValue = (props: { dimension?: ComponentDimension }) => {
   switch (props.dimension) {
@@ -210,10 +212,28 @@ export interface InputExProps extends Omit<InputHTMLAttributes<HTMLInputElement>
   /** Ref контейнера компонента */
   containerRef?: ForwardedRef<HTMLDivElement>;
 
+  /** Ref контейнера относительно которого нужно выравнивать дроп контейнеры,
+   * если не указан выравнивание произойдет относительно контейнера компонента
+   */
+  alignDropRef?: React.RefObject<HTMLElement>;
+
   /**  Наличие этого атрибута отключает возможность выделения и копирования значения поля */
   disableCopying?: boolean;
 
-  prefix?: React.ReactNode;
+  /** Значение префикса */
+  prefixValue?: ValueType;
+
+  /** Список значений префикса */
+  prefixValueList?: ValueType[];
+
+  /** Срабатывает при выборе нового значения префикса*/
+  onPrefixValueChange?: (value: ValueType) => void;
+
+  /** Специальный метод для рендера компонента по значению */
+  renderPrefixValue?: (value?: ValueType) => React.ReactNode;
+
+  /** Специальный метод для рендера опции списка префикса по значению */
+  renderPrefixOption?: (value?: ValueType) => React.ReactNode;
 
   suffix?: React.ReactNode;
 }
@@ -224,18 +244,42 @@ export const InputEx = React.forwardRef<HTMLInputElement, InputExProps>(
       type,
       displayClearIcon,
       status,
-      containerRef,
+      containerRef = () => null,
+      alignDropRef,
       icons,
       children,
       className,
       style,
       placeholder,
-      prefix,
+
+      prefixValue,
+      renderPrefixValue = (value?: ValueType) => value,
+      prefixValueList,
+      onPrefixValueChange,
+
+      renderPrefixOption = (value?: ValueType) => value,
+
       suffix,
       ...props
     },
     ref,
   ) => {
+    const innerContainerRef = React.useRef<HTMLDivElement | null>(null);
+    const alignRef = alignDropRef || innerContainerRef;
+    const renderPrefix = prefixValueList
+      ? (value?: ValueType) => (
+          <SuffixSelect
+            dropAlign="flex-start"
+            alignRef={alignRef}
+            value={value || ''}
+            onChange={(value) => onPrefixValueChange?.(value)}
+            options={prefixValueList}
+          />
+        )
+      : renderPrefixValue;
+
+    const prefix = renderPrefix(prefixValue);
+
     const inputRef = React.useRef<HTMLInputElement>(null);
 
     const iconArray = React.Children.toArray(icons);
@@ -263,7 +307,7 @@ export const InputEx = React.forwardRef<HTMLInputElement, InputExProps>(
         style={style}
         data-disabled={props.disabled ? true : undefined}
         dimension={props.dimension}
-        ref={containerRef}
+        ref={refSetter(innerContainerRef, containerRef)}
         data-read-only={props.readOnly ? true : undefined}
         data-status={status}
         onMouseDown={props.readOnly ? preventDefault : undefined}
@@ -294,7 +338,6 @@ export const InputEx = React.forwardRef<HTMLInputElement, InputExProps>(
 
 InputEx.defaultProps = {
   dimension: 'm',
-  prefix: 'Prefix',
 } as const;
 
 InputEx.displayName = 'InputEx';
