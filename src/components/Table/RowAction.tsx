@@ -12,17 +12,16 @@ const Action = styled.div<{ dimension: Dimension }>`
   height: ${({ dimension }) => (dimension === 's' || dimension === 'm' ? 32 : 36)}px;
   padding: 6px;
   cursor: pointer;
+  border-radius: 50%;
 
   & *[fill^='#'] {
     fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
   }
   &:hover {
-    border-radius: 50%;
     background-color: ${({ theme }) => theme.color['Opacity/Hover']};
   }
 
   &:active {
-    border-radius: 50%;
     background-color: ${({ theme }) => theme.color['Opacity/Press']};
   }
 `;
@@ -31,10 +30,10 @@ export interface RowActionProps extends React.HTMLAttributes<HTMLDivElement> {
   dimension?: Dimension;
 }
 
-export const RowAction: React.FC<RowActionProps> = ({ dimension = 'm', ...props }) => {
+export const RowAction = React.forwardRef<HTMLDivElement, RowActionProps>(({ dimension = 'm', ...props }, ref) => {
   return (
-    <Action dimension={dimension} {...props}>
+    <Action ref={ref} dimension={dimension} {...props}>
       {props.children}
     </Action>
   );
-};
+});
