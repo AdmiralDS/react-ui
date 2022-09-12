@@ -2,6 +2,30 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.2.0](https://github.com/AdmiralDS/react-ui/compare/v2.1.0...v2.2.0) (2022-09-12)
+
+
+### Features
+
+* **Table:** add forwardRef for RowAction ([2c45788](https://github.com/AdmiralDS/react-ui/commit/2c457883961efe0fdfd056497fafeac4dd8a0dca))
+* **TimeInput:** add uncontrolled mode ([577b009](https://github.com/AdmiralDS/react-ui/commit/577b009e460fb8badd25588a583df0b436914542))
+
+
+### Bug Fixes
+
+* **AvatarGroup:** set className to wrapper ([531f977](https://github.com/AdmiralDS/react-ui/commit/531f9775c763061f0494b71a877cfa2d3d682a40))
+* **Badge:** add ref passing ([dc0c860](https://github.com/AdmiralDS/react-ui/commit/dc0c8607dbe332b704820c8274d28e01a07b4731))
+* **DateInput:** change default input handler ([8136839](https://github.com/AdmiralDS/react-ui/commit/8136839a7505ac071501ed538b25718d67b2bd7b))
+* **GroupActionsPane:** add property for disable table settings buttons ([b04ef8f](https://github.com/AdmiralDS/react-ui/commit/b04ef8f2f90b413b6011850373309e7460afcb85))
+* **InputEx:** fix close option on select, fix focus stealing on open click ([d2897a4](https://github.com/AdmiralDS/react-ui/commit/d2897a475e92b5fae097a7d49cc76104a1b92ab4))
+* **InputEx:** fix suffix option highlight ([ec09d39](https://github.com/AdmiralDS/react-ui/commit/ec09d392caa750e89ac4c51f480e12a7c56463ab))
+* **InputEx:** text wrap on resize ([dca4127](https://github.com/AdmiralDS/react-ui/commit/dca4127711f765d4e71160dd80c2dcf29ff0e95e))
+* **MultiButton:** set className to wrapper ([3345bf3](https://github.com/AdmiralDS/react-ui/commit/3345bf32e07678bbc219b069539c8a33f0734a41))
+* **SliderInputField, SliderRangeField:** fix problem with field overflow ([88857d7](https://github.com/AdmiralDS/react-ui/commit/88857d7bfe7bc17bcfa6d1167c891ddf2dbab308))
+* **Table:** update column percent width on table resize ([2045712](https://github.com/AdmiralDS/react-ui/commit/2045712393301d4f1b21888bb54eec7029292cd7))
+* **TimeInput:** fix problem with invalid numbers enter ([3d268aa](https://github.com/AdmiralDS/react-ui/commit/3d268aa5179ab2d8df6ad0817b388992b259e522))
+* **Tree:** add TreeNode to export ([be3101e](https://github.com/AdmiralDS/react-ui/commit/be3101ed1ea6cec38fd3112a5bee668caef81409))
+
 ## [2.1.0](https://github.com/AdmiralDS/react-ui/compare/v2.0.0...v2.1.0) (2022-08-31)
 
 
