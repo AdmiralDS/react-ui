@@ -7,6 +7,7 @@ import { withDesign } from 'storybook-addon-designs';
 import styled, { ThemeProvider } from 'styled-components';
 import { Theme } from '#src/components/themes';
 import { DataAttributesDescription } from '#src/components/form/common';
+import { ValueType } from '#src/components/input/InputEx/ValueType';
 
 export default {
   title: 'Admiral-2.1/Form Field/InputExField',
@@ -78,7 +79,7 @@ const DisplayContainer = styled.div`
     margin-bottom: 24px;
   }
 `;
-
+const PREFIX_OPTIONS = ['prefix One', 'prefix Two', 'prefix Three'];
 const Template: ComponentStory<typeof InputExField> = (props) => {
   const [localValue, setValue] = React.useState<string>(String(props.value) ?? '');
 
@@ -93,11 +94,19 @@ const Template: ComponentStory<typeof InputExField> = (props) => {
     return theme;
   }
 
+  const [prefixValue, setPrefixValue] = React.useState<ValueType>('prefix One');
   return (
     <ThemeProvider theme={swapBorder}>
       <DisplayContainer>
         <InputExField data-container-id="InputExFieldIdOne" {...props} value={localValue} onChange={handleChange} />
-        <InputExField data-container-id="InputExFieldIdTwo" required label="Поле необходимо заполнить" />
+        <InputExField
+          data-container-id="InputExFieldIdTwo"
+          required
+          label="Поле необходимо заполнить"
+          prefixValue={prefixValue}
+          prefixValueList={PREFIX_OPTIONS}
+          onPrefixValueChange={setPrefixValue}
+        />
         <InputExField
           data-container-id="InputExFieldIdThree"
           readOnly
@@ -129,6 +138,7 @@ const Template: ComponentStory<typeof InputExField> = (props) => {
           displayClearIcon
           placeholder="идет поиск ..."
           label="Поле с иконкой загрузки"
+          suffixValue={'suffix'}
           icons={<Spinner dimension="s" />}
         />
         <InputExField
