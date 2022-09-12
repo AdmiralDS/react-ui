@@ -1,15 +1,16 @@
 import * as React from 'react';
 import { ForwardedRef, InputHTMLAttributes } from 'react';
 import { ReactComponent as CloseOutlineSvg } from '@admiral-ds/icons/build/service/CloseOutline.svg';
-import { ComponentDimension, containerHeights, ExtraProps, InputStatus } from '#src/components/input';
+import type { ComponentDimension, ExtraProps, InputStatus } from '#src/components/input/types';
 import styled, { css } from 'styled-components';
 import { typography } from '#src/components/Typography';
 import { changeInputData } from '#src/components/common/dom/changeInputData';
 import { InputIconButton } from '#src/components/InputIconButton';
 import { refSetter } from '#src/components/common/utils/refSetter';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
-import { ValueType } from './ValueType';
+import type { ValueType } from './ValueType';
 import { SuffixSelect } from '#src/components/input/InputEx/SuffixSelect';
+import { containerHeights } from '#src/components/input/Container';
 
 const iconSizeValue = (props: { dimension?: ComponentDimension }) => {
   switch (props.dimension) {
@@ -191,10 +192,12 @@ const Container = styled.div<{ disabled?: boolean; dimension?: ComponentDimensio
   border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
   padding: 0 ${horizontalPaddingValue}px;
   background-color: ${(props) => props.theme.color['Neutral/Neutral 00']};
+
   &[data-read-only],
   &[data-disabled] {
     background-color: ${(props) => props.theme.color['Neutral/Neutral 10']};
   }
+
   ${containerHeights}
 `;
 
