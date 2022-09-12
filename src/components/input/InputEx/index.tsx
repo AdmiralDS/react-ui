@@ -2,6 +2,7 @@ import * as React from 'react';
 import { ForwardedRef, InputHTMLAttributes } from 'react';
 import { ReactComponent as CloseOutlineSvg } from '@admiral-ds/icons/build/service/CloseOutline.svg';
 import type { ComponentDimension, ExtraProps, InputStatus } from '#src/components/input/types';
+import { containerHeights, skeletonMixin } from '../Container';
 import styled, { css } from 'styled-components';
 import { typography } from '#src/components/Typography';
 import { changeInputData } from '#src/components/common/dom/changeInputData';
@@ -10,7 +11,6 @@ import { refSetter } from '#src/components/common/utils/refSetter';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 import type { ValueType } from './ValueType';
 import { SuffixSelect } from '#src/components/input/InputEx/SuffixSelect';
-import { containerHeights } from '#src/components/input/Container';
 
 const iconSizeValue = (props: { dimension?: ComponentDimension }) => {
   switch (props.dimension) {
@@ -184,12 +184,12 @@ const IconPanel = styled.div<{ disabled?: boolean; dimension?: ComponentDimensio
 
 const preventDefault = (e: React.MouseEvent) => e.preventDefault();
 
-const Container = styled.div<{ disabled?: boolean; dimension?: ComponentDimension }>`
+const Container = styled.div<{ disabled?: boolean; dimension?: ComponentDimension; skeleton?: boolean }>`
   position: relative;
   display: flex;
   align-items: stretch;
   border: none;
-  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
+  border-radius: ${(p) => (p.skeleton ? 0 : mediumGroupBorderRadius(p.theme.shape))};
   padding: 0 ${horizontalPaddingValue}px;
   background-color: ${(props) => props.theme.color['Neutral/Neutral 00']};
 
@@ -199,6 +199,7 @@ const Container = styled.div<{ disabled?: boolean; dimension?: ComponentDimensio
   }
 
   ${containerHeights}
+  ${({ skeleton }) => skeleton && skeletonMixin}};
 `;
 
 export interface InputExProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'prefix'> {
@@ -254,6 +255,9 @@ export interface InputExProps extends Omit<InputHTMLAttributes<HTMLInputElement>
 
   /** Специальный метод для рендера опции списка суффикса по значению */
   renderSuffixOption?: (value?: ValueType) => React.ReactNode;
+
+  /** Состояние skeleton */
+  skeleton?: boolean;
 }
 
 export const InputEx = React.forwardRef<HTMLInputElement, InputExProps>(
@@ -282,6 +286,7 @@ export const InputEx = React.forwardRef<HTMLInputElement, InputExProps>(
       onSuffixValueChange,
       renderSuffixOption = (value?: ValueType) => value,
 
+      skeleton = false,
       ...props
     },
     ref,
@@ -347,6 +352,7 @@ export const InputEx = React.forwardRef<HTMLInputElement, InputExProps>(
         data-read-only={props.readOnly ? true : undefined}
         data-status={status}
         onMouseDown={props.readOnly ? preventDefault : undefined}
+        skeleton={skeleton}
       >
         {!!prefix && (
           <PrefixContainer dimension={props.dimension} disabled={props.disabled}>
