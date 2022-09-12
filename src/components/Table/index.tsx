@@ -291,6 +291,7 @@ export const Table: React.FC<TableProps> = ({
 
   const stickyColumns = [...cols].filter((col) => col.sticky);
 
+  const tableContainerWidth = React.useRef(0);
   const tableRef = React.useRef<HTMLDivElement>(null);
   const headerRef = React.useRef<HTMLDivElement>(null);
   const scrollBodyRef = React.useRef<HTMLDivElement>(null);
@@ -365,19 +366,39 @@ export const Table: React.FC<TableProps> = ({
     }
   };
 
+  const updateColumnsWidths = () => {
+    const newCols = [...columnList].map((col) => {
+      return {
+        ...col,
+        width: replaceWidthToNumber(col.width),
+        resizerWidth: replaceWidthToNumber(col.width),
+      };
+    });
+    setColumns(newCols);
+    updateResizerState({});
+  };
+
   React.useLayoutEffect(() => {
     if (tableRef.current) {
-      const newCols = [...columnList].map((col) => {
-        return {
-          ...col,
-          width: replaceWidthToNumber(col.width),
-          resizerWidth: replaceWidthToNumber(col.width),
-        };
-      });
-      setColumns(newCols);
-      updateResizerState({});
+      updateColumnsWidths();
     }
   }, [tableRef.current, columnList]);
+
+  React.useLayoutEffect(() => {
+    const tableContainer = tableRef.current;
+    if (tableContainer) {
+      const observer = observeRect(tableContainer, (rect: DOMRect | undefined) => {
+        if (tableContainerWidth.current !== rect?.width || 0) {
+          tableContainerWidth.current = rect?.width || 0;
+          updateColumnsWidths();
+        }
+      });
+      observer.observe();
+      return () => {
+        observer.unobserve();
+      };
+    }
+  }, [tableRef.current]);
 
   React.useLayoutEffect(() => {
     const body = scrollBodyRef.current;

@@ -843,14 +843,6 @@ const Menu: React.FC<MenuProps> = ({ row, onMenuOpen, onMenuClose }) => {
   );
 };
 
-const IconWrapper = styled.div`
-  width: 20px;
-  height: 20px;
-
-  > svg {
-    fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
-  }
-`;
 const RowActionComponent = React.forwardRef<HTMLDivElement, RowActionProps>((props, ref) => {
   return (
     <RowAction ref={ref} onClick={() => console.log('row action happens')} {...props}>

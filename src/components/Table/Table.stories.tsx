@@ -703,7 +703,7 @@ RowOverflowMenu.args = {
   rowList: rowListMenu,
   columnList,
 };
-RowOverflowMenu.storyName = 'Table. Пример строк с OverflowMenu.';
+RowOverflowMenu.storyName = 'Table. Пример строк с OverflowMenu и иконками для одиночного действия.';
 RowOverflowMenu.parameters = {
   docs: {
     description: {
