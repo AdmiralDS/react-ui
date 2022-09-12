@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { backgroundColor, colorTextMixin, ItemDimension, paddings, styleTextMixin } from './mixins';
 
 export interface RenderOptionProps {
+  key?: string | number;
   /** Активная секция MenuItems */
   selected?: boolean;
   /** Акцентная секция MenuItems */

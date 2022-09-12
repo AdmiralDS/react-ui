@@ -1,12 +1,15 @@
 import * as React from 'react';
-import styled from 'styled-components';
+import styled, { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import { useClickOutside } from '#src/components/common/hooks/useClickOutside';
 import { PositionInPortal } from '#src/components/PositionInPortal';
 import { useInterval } from '#src/components/common/hooks/useInterval';
 import { refSetter } from '#src/components/common/utils/refSetter';
 import { useDropdown, useDropdownsClickOutside } from '#src/components/DropdownProvider';
 
-const Container = styled.div<{ alignSelf?: string }>`
+const Container = styled.div<{
+  alignSelf?: string;
+  dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+}>`
   pointer-events: initial;
   margin: 8px 0;
   flex: 0 0 auto;
@@ -19,6 +22,8 @@ const Container = styled.div<{ alignSelf?: string }>`
   &:focus-visible {
     border: 2px solid blue;
   }
+
+  ${(p) => p.dropContainerCssMixin}
 `;
 
 const FakeTarget = styled.div`
@@ -46,6 +51,9 @@ export interface DropdownContainerProps extends React.HTMLAttributes<HTMLDivElem
    *  https://developer.mozilla.org/en-US/docs/Web/CSS/align-self
    */
   alignSelf?: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
+
+  /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
+  dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
 }
 
 export const DropdownContainer = React.forwardRef<HTMLDivElement, React.PropsWithChildren<DropdownContainerProps>>(
