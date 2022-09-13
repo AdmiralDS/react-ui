@@ -1,7 +1,11 @@
 import type { HTMLAttributes } from 'react';
 import * as React from 'react';
 import { useEffect } from 'react';
-import styled, { css } from 'styled-components';
+import styled, {
+  css, DefaultTheme,
+  FlattenInterpolation,
+  ThemeProps
+} from 'styled-components';
 import type { ItemProps } from '#src/components/MenuItem';
 import { keyboardKey } from '#src/components/common/keyboardKey';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
@@ -49,7 +53,10 @@ const StyledDiv = styled.div`
 `;
 
 export interface RenderProps {
+  /** Размер компонента */
   dimension: MenuDimensions;
+  /** Позволяет добавлять миксин для панели, созданный с помощью styled css  */
+  menuActionsPanelCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
 }
 
 export interface MenuProps extends HTMLAttributes<HTMLDivElement> {
