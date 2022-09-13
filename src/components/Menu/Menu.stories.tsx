@@ -2,7 +2,7 @@ import React, { HTMLAttributes, useMemo, useState } from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { Menu } from '#src/components/Menu';
 import { MenuItem, RenderOptionProps } from '#src/components/MenuItem';
-import styled, { ThemeProvider } from 'styled-components';
+import styled, { css, ThemeProvider } from 'styled-components';
 import { typography } from '#src/components/Typography';
 import { ReactComponent as CardSolid } from '@admiral-ds/icons/build/finance/CardSolid.svg';
 import { withDesign } from 'storybook-addon-designs';
@@ -10,6 +10,11 @@ import { Theme } from '#src/components/themes';
 import { CheckboxField, FieldSet } from '#src/components/form';
 import { RadioButton } from '#src/components/RadioButton';
 import { Tooltip } from '#src/components/Tooltip';
+import { TextInput } from '#src/components/input';
+import { TextButton } from '#src/components/TextButton';
+import { MenuActionsPanel } from '#src/components/Menu/MenuActionsPanel';
+import { Button } from '#src/components/Button';
+import { ReactComponent as PlusOutline } from '@admiral-ds/icons/build/service/PlusOutline.svg';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -195,7 +200,11 @@ const items = [
     label: 'Option five',
     value: 5,
   },
-  { id: '6', label: 'Option six', value: 7 },
+  {
+    id: '6',
+    label: 'Option six',
+    value: 7,
+  },
   {
     id: '7',
     label: 'Option seven',
@@ -465,12 +474,95 @@ const MenuTooltipTemplate: ComponentStory<typeof Menu> = (args) => {
   );
 };
 
+const Wrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 20px;
+`;
+
+const ActionPanelFlex = css`
+  display: flex;
+  gap: 8px;
+`;
+
+const MenuActionsTemplate: ComponentStory<typeof Menu> = (args) => {
+  const modelBottom = useMemo(() => {
+    return items.map((item) => ({
+      id: item.id,
+      render: (options: RenderOptionProps) => (
+        <MenuItem dimension={args.dimension || 's'} {...options} key={item.id}>
+          {item.label}
+        </MenuItem>
+      ),
+    }));
+  }, [args.dimension]);
+  const modelTopBottom = useMemo(() => {
+    return items.map((item) => ({
+      id: item.id,
+      render: (options: RenderOptionProps) => (
+        <MenuItem dimension={args.dimension || 's'} {...options} key={item.id}>
+          {item.label}
+        </MenuItem>
+      ),
+    }));
+  }, [args.dimension]);
+
+  const menuPanelContentDimension = args.dimension === 'l' ? 'm' : args.dimension;
+
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
+    return theme;
+  }
+
+  return (
+    <ThemeProvider theme={swapBorder}>
+      <div style={{ width: 'fit-content' }}>
+        <Wrapper>
+          <Menu
+            {...args}
+            model={modelBottom}
+            renderBottomPanel={({ dimension, menuActionsPanelCssMixin = ActionPanelFlex }) => {
+              return (
+                <MenuActionsPanel dimension={dimension} menuActionsPanelCssMixin={menuActionsPanelCssMixin}>
+                  <Button dimension={menuPanelContentDimension}>Action 1</Button>
+                  <Button dimension={menuPanelContentDimension} appearance="secondary">
+                    Action 2
+                  </Button>
+                </MenuActionsPanel>
+              );
+            }}
+          />
+          <Menu
+            {...args}
+            model={modelTopBottom}
+            renderTopPanel={({ dimension }) => {
+              return (
+                <MenuActionsPanel dimension={dimension}>
+                  <TextInput dimension={menuPanelContentDimension} />
+                </MenuActionsPanel>
+              );
+            }}
+            renderBottomPanel={({ dimension }) => {
+              return (
+                <MenuActionsPanel dimension={dimension}>
+                  <TextButton text="Action" icon={<PlusOutline />} dimension={menuPanelContentDimension} />
+                </MenuActionsPanel>
+              );
+            }}
+          />
+        </Wrapper>
+      </div>
+    </ThemeProvider>
+  );
+};
+
 export const Simple = SimpleTemplate.bind({});
 export const Category = TemplateWithCards.bind({});
 export const CustomItems = CustomItemTemplate.bind({});
 export const MenuCheckbox = MenuCheckboxTemplate.bind({});
 export const MenuRadiobutton = MenuRadiobuttonTemplate.bind({});
 export const MenuTooltip = MenuTooltipTemplate.bind({});
+export const MenuActions = MenuActionsTemplate.bind({});
 
 Simple.storyName = 'Базовый пример';
 Category.storyName = 'Пример с группами';
@@ -478,3 +570,4 @@ CustomItems.storyName = 'Пример с кастомными пунктами �
 MenuCheckbox.storyName = 'Пример с Checkbox';
 MenuRadiobutton.storyName = 'Пример с Radiobutton';
 MenuTooltip.storyName = 'Пример с Tooltip';
+MenuActions.storyName = 'Пример с Actions';
