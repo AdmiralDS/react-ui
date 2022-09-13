@@ -182,7 +182,7 @@ export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps
       if (isSuggestPanelOpen) {
         setActiveOption(options ? options[0] : '');
       }
-    }, [options]);
+    }, [options, isSuggestPanelOpen]);
 
     return (
       <TextInput
