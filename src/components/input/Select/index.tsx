@@ -1,5 +1,5 @@
 import * as React from 'react';
-import styled, { ThemeContext } from 'styled-components';
+import styled, { DefaultTheme, FlattenInterpolation, ThemeContext, ThemeProps } from 'styled-components';
 import { LIGHT_THEME } from '#src/components/themes';
 import { OpenStatusButton } from '#src/components/OpenStatusButton';
 import { keyboardKey } from '#src/components/common/keyboardKey';
@@ -113,6 +113,9 @@ export interface SelectProps extends Omit<React.InputHTMLAttributes<HTMLSelectEl
   /** Принудительно выравнивает контейнер с опциями относительно компонента, значение по умолчанию 'stretch' */
   alignDropdown?: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
 
+  /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
+  dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+
   /** Состояние skeleton */
   skeleton?: boolean;
 
@@ -159,6 +162,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       alignDropdown = 'stretch',
       skeleton = false,
       locale,
+      dropContainerCssMixin,
       ...props
     },
     ref,
@@ -577,6 +581,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
             ref={dropDownRef}
             alignSelf={alignDropdown}
             disableAutoAlign
+            dropContainerCssMixin={dropContainerCssMixin}
           >
             <DropDownSelectProvider
               onOptionClick={handleOptionSelect}

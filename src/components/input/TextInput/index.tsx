@@ -1,3 +1,4 @@
+import * as React from 'react';
 import {
   changeInputData,
   CustomInputHandler,
@@ -11,8 +12,6 @@ import { typography } from '#src/components/Typography';
 import { ReactComponent as CloseOutlineSvg } from '@admiral-ds/icons/build/service/CloseOutline.svg';
 import { ReactComponent as EyeCloseOutlineSvg } from '@admiral-ds/icons/build/service/EyeCloseOutline.svg';
 import { ReactComponent as EyeOutlineSvg } from '@admiral-ds/icons/build/service/EyeOutline.svg';
-import type { ForwardedRef, InputHTMLAttributes } from 'react';
-import * as React from 'react';
 import styled, { css } from 'styled-components';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { InputIconButton } from '#src/components/InputIconButton';
@@ -217,7 +216,7 @@ function defaultHandleInput(newInputData: InputData | null): InputData {
 
 const stopEvent = (e: React.MouseEvent) => e.preventDefault();
 
-export interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
+export interface TextInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   /** Делает высоту компонента больше или меньше обычной */
   dimension?: ComponentDimension;
 

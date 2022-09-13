@@ -111,7 +111,6 @@ export const TimeInput = React.forwardRef<HTMLInputElement, TimeInputProps>(
     {
       startTime,
       endTime,
-      value = '',
       dimension = 'm',
       disabled = false,
       disabledSlots = [],
@@ -189,7 +188,7 @@ export const TimeInput = React.forwardRef<HTMLInputElement, TimeInputProps>(
           changeInputData(inputRef.current, { value: option });
           setIsOpened(false);
         } else {
-          changeInputData(inputRef.current, { value });
+          changeInputData(inputRef.current, { value: inputRef.current.value });
         }
       }
     };
@@ -227,7 +226,6 @@ export const TimeInput = React.forwardRef<HTMLInputElement, TimeInputProps>(
         handleInput={handleInput}
         icons={iconArray}
         containerRef={inputContainerRef}
-        value={value}
         disabled={disabled}
         dimension={dimension}
         skeleton={skeleton}
