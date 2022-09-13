@@ -5,7 +5,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { ReactComponent as SearchSolidSVG } from '@admiral-ds/icons/build/system/SearchSolid.svg';
 import { SuggestInput } from './index';
 import { withDesign } from 'storybook-addon-designs';
-import { Theme } from '#src/components/themes';
+import { LIGHT_THEME, Theme } from '#src/components/themes';
 import { ThemeProvider } from 'styled-components';
 
 export default {
@@ -155,6 +155,15 @@ const Template: ComponentStory<typeof SuggestInput> = (props) => {
   );
 };
 
+const options = ['one', 'two', 'three'];
+const TemplateUncontrolled: ComponentStory<typeof SuggestInput> = (props) => {
+  return (
+    <ThemeProvider theme={LIGHT_THEME}>
+      <SuggestInput options={options} placeholder="numbers" />
+    </ThemeProvider>
+  );
+};
+
 export const SuggestInputStory = Template.bind({});
 SuggestInputStory.args = {
   placeholder: 'Начните набирать text',
@@ -167,3 +176,6 @@ SuggestInputStory2.args = {
   icon: SearchSolidSVG,
 };
 SuggestInputStory2.storyName = 'Suggest Input альтернативная иконка';
+
+export const SuggestInputUncontrolled = TemplateUncontrolled.bind({});
+SuggestInputUncontrolled.storyName = 'Suggest Input неконтроллируемый';
