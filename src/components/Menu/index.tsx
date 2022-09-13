@@ -25,6 +25,10 @@ const menuListHeights = css<{ dimension?: MenuDimensions; maxHeight?: string | n
 `;
 
 const Wrapper = styled.div<{ dimension?: MenuDimensions }>`
+  display: flex;
+  overflow: hidden;
+  flex-direction: column;
+  align-items: stretch;
   pointer-events: initial;
   background-color: ${(p) => p.theme.color['Special/Elevated BG']};
   border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
@@ -32,18 +36,21 @@ const Wrapper = styled.div<{ dimension?: MenuDimensions }>`
   max-width: calc(100vw - 32px);
   border-color: transparent;
   ${menuListHeights};
-  overflow-x: hidden;
-  overflow-y: auto;
-  scroll-behavior: smooth;
 `;
 
 const StyledDiv = styled.div`
   margin: 0;
   padding: 8px 0;
   appearance: none;
-  flex: 0 0 auto;
+  flex: 1 1 auto;
   border: none;
+  overflow-y: auto;
+  scroll-behavior: smooth;
 `;
+
+export interface RenderProps {
+  dimension: MenuDimensions;
+}
 
 export interface MenuProps extends HTMLAttributes<HTMLDivElement> {
   /** Размер Меню */
@@ -62,10 +69,28 @@ export interface MenuProps extends HTMLAttributes<HTMLDivElement> {
   model: Array<ItemProps>;
   /** Задает максимальную высоту меню */
   maxHeight?: string | number;
+  /** Позволяет добавить панель сверху над выпадающим списком */
+  renderTopPanel?: (props: RenderProps) => React.ReactNode;
+  /** Позволяет добавить панель внизу под выпадающим списком */
+  renderBottomPanel?: (props: RenderProps) => React.ReactNode;
 }
 
 export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
-  ({ model, defaultSelected, selected, active, onSelectItem, onActivateItem, ...props }, ref) => {
+  (
+    {
+      model,
+      defaultSelected,
+      selected,
+      active,
+      onSelectItem,
+      onActivateItem,
+      renderTopPanel = () => null,
+      renderBottomPanel = () => null,
+      dimension = 'l',
+      ...props
+    },
+    ref,
+  ) => {
     const [selectedState, setSelectedState] = React.useState<string | undefined>(defaultSelected);
     const [activeState, setActiveState] = React.useState<string | undefined>();
 
@@ -160,8 +185,10 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
     }, [active, activeState]);
 
     return (
-      <Wrapper ref={ref} {...props}>
+      <Wrapper ref={ref} dimension={dimension} {...props}>
+        {renderTopPanel({ dimension })}
         <StyledDiv ref={menuRef}>{renderChildren()}</StyledDiv>
+        {renderBottomPanel({ dimension })}
       </Wrapper>
     );
   },
