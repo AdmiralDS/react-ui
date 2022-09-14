@@ -29,6 +29,7 @@ const menuListHeights = css<{ dimension?: MenuDimensions; maxHeight?: string | n
 `;
 
 const Wrapper = styled.div<{ dimension?: MenuDimensions }>`
+  padding: 8px 0;
   display: flex;
   overflow: hidden;
   flex-direction: column;
@@ -44,7 +45,6 @@ const Wrapper = styled.div<{ dimension?: MenuDimensions }>`
 
 const StyledDiv = styled.div`
   margin: 0;
-  padding: 8px 0;
   appearance: none;
   flex: 1 1 auto;
   border: none;
