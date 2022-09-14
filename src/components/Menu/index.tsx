@@ -52,7 +52,7 @@ const StyledDiv = styled.div`
   scroll-behavior: smooth;
 `;
 
-export interface RenderProps {
+export interface RenderPanelProps {
   /** Размер компонента */
   dimension: MenuDimensions;
   /** Позволяет добавлять миксин для панели, созданный с помощью styled css  */
@@ -77,9 +77,9 @@ export interface MenuProps extends HTMLAttributes<HTMLDivElement> {
   /** Задает максимальную высоту меню */
   maxHeight?: string | number;
   /** Позволяет добавить панель сверху над выпадающим списком */
-  renderTopPanel?: (props: RenderProps) => React.ReactNode;
+  renderTopPanel?: (props: RenderPanelProps) => React.ReactNode;
   /** Позволяет добавить панель внизу под выпадающим списком */
-  renderBottomPanel?: (props: RenderProps) => React.ReactNode;
+  renderBottomPanel?: (props: RenderPanelProps) => React.ReactNode;
 }
 
 export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(

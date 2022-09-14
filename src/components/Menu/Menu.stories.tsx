@@ -1,10 +1,4 @@
-import React, {
-  ChangeEvent,
-  HTMLAttributes,
-  useEffect,
-  useMemo,
-  useState
-} from 'react';
+import React, { ChangeEvent, HTMLAttributes, useEffect, useMemo, useState } from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { Menu } from '#src/components/Menu';
 import { MenuItem, RenderOptionProps } from '#src/components/Menu/MenuItem';
