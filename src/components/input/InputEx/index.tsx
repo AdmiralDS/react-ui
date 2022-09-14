@@ -188,6 +188,7 @@ const Container = styled.div<{ disabled?: boolean; dimension?: ComponentDimensio
   position: relative;
   display: flex;
   align-items: stretch;
+  overflow: hidden;
   border: none;
   border-radius: ${(p) => (p.skeleton ? 0 : mediumGroupBorderRadius(p.theme.shape))};
   padding: 0 ${horizontalPaddingValue}px;
