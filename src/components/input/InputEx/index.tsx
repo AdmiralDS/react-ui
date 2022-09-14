@@ -188,6 +188,7 @@ const Container = styled.div<{ disabled?: boolean; dimension?: ComponentDimensio
   position: relative;
   display: flex;
   align-items: stretch;
+  overflow: hidden;
   border: none;
   border-radius: ${(p) => (p.skeleton ? 0 : mediumGroupBorderRadius(p.theme.shape))};
   padding: 0 ${horizontalPaddingValue}px;
@@ -202,6 +203,11 @@ const Container = styled.div<{ disabled?: boolean; dimension?: ComponentDimensio
   ${({ skeleton }) => skeleton && skeletonMixin}};
 `;
 
+export interface RenderProps {
+  value?: ValueType;
+  disabled?: boolean;
+  readOnly?: boolean;
+}
 export interface InputExProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'prefix'> {
   /** Делает высоту компонента больше или меньше обычной */
   dimension?: ComponentDimension;
@@ -236,10 +242,10 @@ export interface InputExProps extends Omit<InputHTMLAttributes<HTMLInputElement>
   onPrefixValueChange?: (value: ValueType) => void;
 
   /** Специальный метод для рендера компонента по значению префикса */
-  renderPrefixValue?: (value?: ValueType) => React.ReactNode;
+  renderPrefixValue?: (props: RenderProps) => React.ReactNode;
 
   /** Специальный метод для рендера опции списка префикса по значению */
-  renderPrefixOption?: (value?: ValueType) => React.ReactNode;
+  renderPrefixOption?: (props: RenderProps) => React.ReactNode;
 
   /** Значение суффикса */
   suffixValue?: ValueType;
@@ -294,32 +300,36 @@ export const InputEx = React.forwardRef<HTMLInputElement, InputExProps>(
     const innerContainerRef = React.useRef<HTMLDivElement | null>(null);
     const alignRef = alignDropRef || innerContainerRef;
     const renderPrefix = prefixValueList
-      ? (value?: ValueType) => (
+      ? (props: RenderProps) => (
           <SuffixSelect
             dropAlign="flex-start"
             alignRef={alignRef}
-            value={value || ''}
+            value={props.value || ''}
             onChange={(value) => onPrefixValueChange?.(value)}
             options={prefixValueList}
+            disabled={props.disabled}
+            readOnly={props.readOnly}
           />
         )
       : renderPrefixValue;
 
-    const prefix = renderPrefix(prefixValue);
+    const prefix = renderPrefix({ value: prefixValue, disabled: props.disabled, readOnly: props.readOnly });
 
     const renderSuffix = suffixValueList
-      ? (value?: ValueType) => (
+      ? (props: RenderProps) => (
           <SuffixSelect
             dropAlign="flex-end"
             alignRef={alignRef}
-            value={value || ''}
+            value={props.value || ''}
             onChange={(value) => onSuffixValueChange?.(value)}
             options={suffixValueList}
+            disabled={props.disabled}
+            readOnly={props.readOnly}
           />
         )
       : renderPrefixValue;
 
-    const suffix = renderSuffix(suffixValue);
+    const suffix = renderSuffix({ value: suffixValue, disabled: props.disabled, readOnly: props.readOnly });
 
     const inputRef = React.useRef<HTMLInputElement>(null);
 
