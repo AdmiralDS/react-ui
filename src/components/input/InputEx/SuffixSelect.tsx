@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { OpenStatusButton } from '#src/components/OpenStatusButton';
 import { DropdownContainer } from '#src/components/DropdownContainer';
 import { Menu } from './Menu';
@@ -9,11 +9,20 @@ const StyledMenu = styled(Menu)<{ width?: string }>`
   width: ${({ width }) => (width ? width : 'auto')};
 `;
 
-const Container = styled.div<{ iconSizeValue?: string }>`
+const disableEventMixin = css`
+  pointer-events: none;
+  cursor: default;
+`;
+const preventDefault = (e: React.MouseEvent) => e.preventDefault();
+const Container = styled.div<{ iconSizeValue?: string; disabled?: boolean }>`
   display: flex;
   align-items: center;
   cursor: pointer;
-  
+
+  [data-read-only] {
+    cursor: default;
+  }
+
   & > svg {
     display: block;
     width: ${(p) => p.iconSizeValue || '24px'};
@@ -26,6 +35,9 @@ const Container = styled.div<{ iconSizeValue?: string }>`
       outline-offset: 2px;
       outline: ${(p) => p.theme.color['Primary/Primary 60 Main']} solid 2px;
     }
+  }
+
+  ${(p) => (p.disabled ? disableEventMixin : '')}
 `;
 const ValueContainer = styled.div`
   margin-right: 4px;
@@ -61,6 +73,10 @@ export type SuffixSelectProps<T> = {
 
   renderValue?: (props: RenderPropsType<T>) => React.ReactNode;
   renderOption?: (props: RenderPropsType<T>) => React.ReactNode;
+
+  disabled?: boolean;
+
+  readOnly?: boolean;
 };
 
 export const SuffixSelect = <T extends ValueType>({
@@ -69,6 +85,7 @@ export const SuffixSelect = <T extends ValueType>({
   onChange,
   options,
   value,
+  disabled,
   ...props
 }: React.PropsWithChildren<SuffixSelectProps<T>>) => {
   const [isOpenState, setIsOpenState] = React.useState<boolean>(false);
@@ -95,9 +112,14 @@ export const SuffixSelect = <T extends ValueType>({
 
   return (
     <>
-      <Container ref={containerRef} onMouseDown={handleContainerClick}>
+      <Container
+        ref={containerRef}
+        disabled={disabled}
+        data-read-only={props.readOnly ? true : undefined}
+        onMouseDown={props.readOnly || disabled ? preventDefault : handleContainerClick}
+      >
         <ValueContainer>{value}</ValueContainer>
-        <OpenStatusButton $isOpen={isOpen} aria-hidden />
+        {!props.readOnly && <OpenStatusButton $isOpen={isOpen} aria-hidden data-disabled={disabled} />}
       </Container>
       {isOpen && (
         <DropdownContainer
