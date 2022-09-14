@@ -1,4 +1,4 @@
-import React, { HTMLAttributes, useMemo, useState } from 'react';
+import React, { ChangeEvent, HTMLAttributes, useMemo, useState } from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { Menu } from '#src/components/Menu';
 import { MenuItem, RenderOptionProps } from '#src/components/Menu/MenuItem';
@@ -474,96 +474,106 @@ const MenuTooltipTemplate: ComponentStory<typeof Menu> = (args) => {
   );
 };
 
-const Wrapper = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 20px;
-`;
-
 const ActionPanelFlex = css`
   display: flex;
   gap: 8px;
 `;
 
-const MenuActionsTemplate: ComponentStory<typeof Menu> = (args) => {
+const MenuActionsTwoButtonsTemplate: ComponentStory<typeof Menu> = (props) => {
   const modelBottom = useMemo(() => {
     return items.map((item) => ({
       id: item.id,
       render: (options: RenderOptionProps) => (
-        <MenuItem dimension={args.dimension || 's'} {...options} key={item.id}>
+        <MenuItem dimension={props.dimension || 's'} {...options} key={item.id}>
           {item.label}
         </MenuItem>
       ),
     }));
-  }, [args.dimension]);
-  const modelTopBottom = useMemo(() => {
-    return items.map((item) => ({
-      id: item.id,
-      render: (options: RenderOptionProps) => (
-        <MenuItem dimension={args.dimension || 's'} {...options} key={item.id}>
-          {item.label}
-        </MenuItem>
-      ),
-    }));
-  }, [args.dimension]);
+  }, [props.dimension, items]);
 
-  const menuPanelContentDimension = args.dimension === 'l' ? 'm' : args.dimension;
+  const menuPanelContentDimension = props.dimension === 'l' ? 'm' : props.dimension;
 
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 
   return (
     <ThemeProvider theme={swapBorder}>
       <div style={{ width: 'fit-content' }}>
-        <Wrapper>
-          <Menu
-            {...args}
-            model={modelBottom}
-            renderBottomPanel={({ dimension, menuActionsPanelCssMixin = ActionPanelFlex }) => {
-              return (
-                <MenuActionsPanel dimension={dimension} menuActionsPanelCssMixin={menuActionsPanelCssMixin}>
-                  <Button
-                    dimension={menuPanelContentDimension}
-                    onClick={() => {
-                      console.log('Button 1 clicked');
-                    }}
-                  >
-                    Action 1
-                  </Button>
-                  <Button
-                    dimension={menuPanelContentDimension}
-                    appearance="secondary"
-                    onClick={() => {
-                      console.log('Button 2 clicked');
-                    }}
-                  >
-                    Action 2
-                  </Button>
-                </MenuActionsPanel>
-              );
-            }}
-          />
-          <Menu
-            {...args}
-            model={modelTopBottom}
-            renderTopPanel={({ dimension }) => {
-              return (
-                <MenuActionsPanel dimension={dimension}>
-                  <TextInput dimension={menuPanelContentDimension} />
-                </MenuActionsPanel>
-              );
-            }}
-            renderBottomPanel={({ dimension }) => {
-              return (
-                <MenuActionsPanel dimension={dimension}>
-                  <TextButton text="Action" icon={<PlusOutline />} dimension={menuPanelContentDimension} />
-                </MenuActionsPanel>
-              );
-            }}
-          />
-        </Wrapper>
+        <Menu
+          {...props}
+          model={modelBottom}
+          renderBottomPanel={({ dimension, menuActionsPanelCssMixin = ActionPanelFlex }) => {
+            return (
+              <MenuActionsPanel dimension={dimension} menuActionsPanelCssMixin={menuActionsPanelCssMixin}>
+                <Button
+                  dimension={menuPanelContentDimension}
+                  onClick={() => {
+                    console.log('Button 1 clicked');
+                  }}
+                >
+                  Action 1
+                </Button>
+                <Button
+                  dimension={menuPanelContentDimension}
+                  appearance="secondary"
+                  onClick={() => {
+                    console.log('Button 2 clicked');
+                  }}
+                >
+                  Action 2
+                </Button>
+              </MenuActionsPanel>
+            );
+          }}
+        />
+      </div>
+    </ThemeProvider>
+  );
+};
+
+const MenuActionsAddUserValueTemplate: ComponentStory<typeof Menu> = (props) => {
+  const options = [...items];
+  const modelTopBottom = useMemo(() => {
+    return options.map((item) => ({
+      id: item.id,
+      render: (options: RenderOptionProps) => (
+        <MenuItem dimension={props.dimension || 's'} {...options} key={item.id}>
+          {item.label}
+        </MenuItem>
+      ),
+    }));
+  }, [props.dimension, options]);
+
+  const menuPanelContentDimension = args.dimension === 'l' ? 'm' : args.dimension;
+
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    return theme;
+  }
+
+  return (
+    <ThemeProvider theme={swapBorder}>
+      <div style={{ width: 'fit-content' }}>
+        <Menu
+          {...props}
+          model={modelTopBottom}
+          renderTopPanel={({ dimension = menuPanelContentDimension }) => {
+            return (
+              <MenuActionsPanel dimension={dimension}>
+                <TextInput dimension={menuPanelContentDimension} value={localValue} onChange={handleChange} />
+              </MenuActionsPanel>
+            );
+          }}
+          renderBottomPanel={({ dimension = menuPanelContentDimension }) => {
+            return (
+              <MenuActionsPanel dimension={dimension}>
+                <TextButton text="Action" icon={<PlusOutline />} dimension={menuPanelContentDimension} />
+              </MenuActionsPanel>
+            );
+          }}
+        />
       </div>
     </ThemeProvider>
   );
@@ -575,7 +585,8 @@ export const CustomItems = CustomItemTemplate.bind({});
 export const MenuCheckbox = MenuCheckboxTemplate.bind({});
 export const MenuRadiobutton = MenuRadiobuttonTemplate.bind({});
 export const MenuTooltip = MenuTooltipTemplate.bind({});
-export const MenuActions = MenuActionsTemplate.bind({});
+export const MenuActionsTwoButtons = MenuActionsTwoButtonsTemplate.bind({});
+export const MenuActionsAddUserValue = MenuActionsAddUserValueTemplate.bind({});
 
 Simple.storyName = 'Базовый пример';
 Category.storyName = 'Пример с группами';
@@ -583,4 +594,5 @@ CustomItems.storyName = 'Пример с кастомными пунктами �
 MenuCheckbox.storyName = 'Пример с Checkbox';
 MenuRadiobutton.storyName = 'Пример с Radiobutton';
 MenuTooltip.storyName = 'Пример с Tooltip';
-MenuActions.storyName = 'Пример с Actions';
+MenuActionsTwoButtons.storyName = 'Пример с Actions с двумя кнопками';
+MenuActionsAddUserValue.storyName = 'Пример с Actions и Search';
