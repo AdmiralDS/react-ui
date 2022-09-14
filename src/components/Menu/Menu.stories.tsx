@@ -1,4 +1,10 @@
-import React, { ChangeEvent, HTMLAttributes, useMemo, useState } from 'react';
+import React, {
+  ChangeEvent,
+  HTMLAttributes,
+  useEffect,
+  useMemo,
+  useState
+} from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { Menu } from '#src/components/Menu';
 import { MenuItem, RenderOptionProps } from '#src/components/Menu/MenuItem';
@@ -534,6 +540,7 @@ const MenuActionsTwoButtonsTemplate: ComponentStory<typeof Menu> = (props) => {
 };
 
 const MenuActionsAddUserValueTemplate: ComponentStory<typeof Menu> = (props) => {
+  const initialButtonText = 'Добавить';
   const options = [...items];
   const modelTopBottom = useMemo(() => {
     return options.map((item) => ({
@@ -546,7 +553,26 @@ const MenuActionsAddUserValueTemplate: ComponentStory<typeof Menu> = (props) => 
     }));
   }, [props.dimension, options]);
 
-  const menuPanelContentDimension = args.dimension === 'l' ? 'm' : args.dimension;
+  const [localValue, setValue] = useState<string>('');
+  const [buttonText, setButtonText] = useState<string>(initialButtonText);
+  const [buttonDisabled, setButtonDisabled] = useState<boolean>(true);
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const inputValue = e.target.value;
+    setValue(inputValue);
+  };
+
+  useEffect(() => {
+    if (localValue === '') {
+      setButtonText(initialButtonText);
+      setButtonDisabled(true);
+    } else {
+      setButtonText(`${initialButtonText} «${localValue}»`);
+      setButtonDisabled(false);
+    }
+  }, [localValue]);
+
+  const menuPanelContentDimension = props.dimension === undefined || props.dimension === 'l' ? 'm' : props.dimension;
 
   function swapBorder(theme: Theme): Theme {
     theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
@@ -569,7 +595,12 @@ const MenuActionsAddUserValueTemplate: ComponentStory<typeof Menu> = (props) => 
           renderBottomPanel={({ dimension = menuPanelContentDimension }) => {
             return (
               <MenuActionsPanel dimension={dimension}>
-                <TextButton text="Action" icon={<PlusOutline />} dimension={menuPanelContentDimension} />
+                <TextButton
+                  text={buttonText}
+                  disabled={buttonDisabled}
+                  icon={<PlusOutline />}
+                  dimension={menuPanelContentDimension}
+                />
               </MenuActionsPanel>
             );
           }}
