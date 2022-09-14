@@ -8,7 +8,7 @@ const Highlight = styled.span`
   color: ${(p) => p.theme.color['Primary/Primary 60 Main']};
 `;
 
-function getHighlightedText(text = '', highlight = '') {
+export function getHighlightedText(text = '', highlight = '') {
   const chunks = highlight
     .split(/[ ]+/)
     .filter((chunk) => Boolean(chunk))

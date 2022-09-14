@@ -16,6 +16,7 @@ import { MenuActionsPanel } from '#src/components/Menu/MenuActionsPanel';
 import { Button } from '#src/components/Button';
 import { ReactComponent as PlusOutline } from '@admiral-ds/icons/build/service/PlusOutline.svg';
 import { uid } from '#src/components/common/uid';
+import { getHighlightedText } from '#src/components/input/SuggestInput/SuggestPanel';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -536,22 +537,25 @@ const MenuActionsTwoButtonsTemplate: ComponentStory<typeof Menu> = (props) => {
 
 const MenuActionsAddUserValueTemplate: ComponentStory<typeof Menu> = (props) => {
   const initialButtonText = 'Добавить';
-  const [options, setOptions] = useState([...items]);
-  const model = useMemo(() => {
-    return options.map((item) => ({
-      id: item.id,
-      render: (options: RenderOptionProps) => (
-        <MenuItem dimension={props.dimension || 's'} {...options} key={item.id}>
-          {item.label}
-        </MenuItem>
-      ),
-    }));
-  }, [props.dimension, options]);
 
+  const [options, setOptions] = useState([...items]);
   const [inputValue, setInputValue] = useState<string>('');
   const [buttonText, setButtonText] = useState<string>(initialButtonText);
   const [buttonDisabled, setButtonDisabled] = useState<boolean>(true);
   const [active, setActive] = useState<string | undefined>(options[0].id);
+
+  const model = useMemo(() => {
+    return options.map((item) => ({
+      id: item.id,
+      render: (options: RenderOptionProps) => {
+        return (
+          <MenuItem dimension={props.dimension || 's'} {...options} key={item.id}>
+            {getHighlightedText(item.label, inputValue)}
+          </MenuItem>
+        );
+      },
+    }));
+  }, [props.dimension, options, inputValue]);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
