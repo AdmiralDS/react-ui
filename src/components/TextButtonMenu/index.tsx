@@ -1,7 +1,7 @@
 import type { HTMLAttributes } from 'react';
 import * as React from 'react';
 import type { Appearance, Dimension } from '#src/components/TextButton/types';
-import type { ItemProps } from '#src/components/MenuItem';
+import type { ItemProps } from '#src/components/Menu/MenuItem';
 import { TextButton } from '#src/components/TextButton';
 import styled, { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import { IconContainer } from '#src/components/TextButton/commonMixin';

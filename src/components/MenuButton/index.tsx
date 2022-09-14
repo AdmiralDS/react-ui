@@ -1,7 +1,7 @@
 import type { HTMLAttributes } from 'react';
 import * as React from 'react';
 
-import { ItemProps } from '#src/components/MenuItem';
+import { ItemProps } from '#src/components/Menu/MenuItem';
 import { DropMenu } from '#src/components/DropMenu';
 import { uid } from '#src/components/common/uid';
 import { Button } from '#src/components/Button';

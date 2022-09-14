@@ -7,7 +7,7 @@ import { IconButton } from '#src/components/IconButton';
 import { DropdownContainer } from '#src/components/DropdownContainer';
 import { ReactComponent as PlusOutline } from '@admiral-ds/icons/build/service/PlusOutline.svg';
 import { Menu } from '#src/components/Menu';
-import { MenuItem } from '#src/components/MenuItem';
+import { MenuItem } from '#src/components/Menu/MenuItem';
 import { refSetter } from '#src/components/common/utils/refSetter';
 
 export type MenuDimension = 's' | 'm' | 'l';

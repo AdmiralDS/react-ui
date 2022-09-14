@@ -6,7 +6,7 @@ import styled, {
   FlattenInterpolation,
   ThemeProps
 } from 'styled-components';
-import type { ItemProps } from '#src/components/MenuItem';
+import type { ItemProps } from '#src/components/Menu/MenuItem';
 import { keyboardKey } from '#src/components/common/keyboardKey';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 

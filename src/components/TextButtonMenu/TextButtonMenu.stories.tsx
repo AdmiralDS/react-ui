@@ -4,7 +4,7 @@ import { TextButtonMenu } from '#src/components/TextButtonMenu/index';
 import React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import { T } from '#src/components/T';
-import { MenuItem, RenderOptionProps } from '../MenuItem';
+import { MenuItem, RenderOptionProps } from '#src/components/Menu/MenuItem';
 import { Theme } from '#src/components/themes';
 
 const StyledText = styled(T)`

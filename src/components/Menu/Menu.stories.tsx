@@ -1,7 +1,7 @@
 import React, { HTMLAttributes, useMemo, useState } from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { Menu } from '#src/components/Menu';
-import { MenuItem, RenderOptionProps } from '#src/components/MenuItem';
+import { MenuItem, RenderOptionProps } from '#src/components/Menu/MenuItem';
 import styled, { css, ThemeProvider } from 'styled-components';
 import { typography } from '#src/components/Typography';
 import { ReactComponent as CardSolid } from '@admiral-ds/icons/build/finance/CardSolid.svg';

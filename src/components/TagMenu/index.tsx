@@ -1,7 +1,7 @@
 import React, { HTMLAttributes } from 'react';
 import { TagVisualProps, TagSizeProps, Tag } from '#src/components/Tag';
 import { DropMenu } from '#src/components/DropMenu';
-import { MenuItem, RenderOptionProps } from '#src/components/MenuItem';
+import { MenuItem, RenderOptionProps } from '#src/components/Menu/MenuItem';
 import { passDropdownDataAttributes } from '#src/components/common/utils/splitDataAttributes';
 import { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 

@@ -3,7 +3,7 @@ import styled, { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-c
 import { typography } from '#src/components/Typography';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { DropMenu } from '#src/components/DropMenu';
-import { MenuItem, RenderOptionProps } from '#src/components/MenuItem';
+import { MenuItem, RenderOptionProps } from '#src/components/Menu/MenuItem';
 
 const Button = styled.button<{ $menuOpened?: boolean }>`
   position: relative;
