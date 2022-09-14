@@ -15,6 +15,7 @@ import { TextButton } from '#src/components/TextButton';
 import { MenuActionsPanel } from '#src/components/Menu/MenuActionsPanel';
 import { Button } from '#src/components/Button';
 import { ReactComponent as PlusOutline } from '@admiral-ds/icons/build/service/PlusOutline.svg';
+import { uid } from '#src/components/common/uid';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -535,7 +536,7 @@ const MenuActionsTwoButtonsTemplate: ComponentStory<typeof Menu> = (props) => {
 
 const MenuActionsAddUserValueTemplate: ComponentStory<typeof Menu> = (props) => {
   const initialButtonText = 'Добавить';
-  const options = [...items];
+  const [options, setOptions] = useState([...items]);
   const modelTopBottom = useMemo(() => {
     return options.map((item) => ({
       id: item.id,
@@ -550,10 +551,20 @@ const MenuActionsAddUserValueTemplate: ComponentStory<typeof Menu> = (props) => 
   const [localValue, setValue] = useState<string>('');
   const [buttonText, setButtonText] = useState<string>(initialButtonText);
   const [buttonDisabled, setButtonDisabled] = useState<boolean>(true);
+  const [active, setActive] = useState<string | undefined>(options[0].id);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
     setValue(inputValue);
+  };
+
+  const handleTextButtonClick = () => {
+    const newId = uid();
+    const newValue = Math.floor(Math.random());
+    const newOption = { id: newId, label: localValue, value: newValue };
+    const newOptions = [newOption, ...options];
+    setOptions(newOptions);
+    setActive(newId);
   };
 
   useEffect(() => {
@@ -579,6 +590,9 @@ const MenuActionsAddUserValueTemplate: ComponentStory<typeof Menu> = (props) => 
         <Menu
           {...props}
           model={modelTopBottom}
+          active={active}
+          onActivateItem={setActive}
+          onSelectItem={(id) => console.log(`Selected id: ${id}`)}
           renderTopPanel={({ dimension = menuPanelContentDimension }) => {
             return (
               <MenuActionsPanel dimension={dimension}>
@@ -594,6 +608,7 @@ const MenuActionsAddUserValueTemplate: ComponentStory<typeof Menu> = (props) => 
                   disabled={buttonDisabled}
                   icon={<PlusOutline />}
                   dimension={menuPanelContentDimension}
+                  onClick={handleTextButtonClick}
                 />
               </MenuActionsPanel>
             );
