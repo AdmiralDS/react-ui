@@ -481,7 +481,7 @@ const ActionPanelFlex = css`
 `;
 
 const MenuActionsTwoButtonsTemplate: ComponentStory<typeof Menu> = (props) => {
-  const modelBottom = useMemo(() => {
+  const model = useMemo(() => {
     return items.map((item) => ({
       id: item.id,
       render: (options: RenderOptionProps) => (
@@ -504,7 +504,7 @@ const MenuActionsTwoButtonsTemplate: ComponentStory<typeof Menu> = (props) => {
       <div style={{ width: 'fit-content' }}>
         <Menu
           {...props}
-          model={modelBottom}
+          model={model}
           renderBottomPanel={({ dimension, menuActionsPanelCssMixin = ActionPanelFlex }) => {
             return (
               <MenuActionsPanel dimension={dimension} menuActionsPanelCssMixin={menuActionsPanelCssMixin}>
@@ -537,7 +537,7 @@ const MenuActionsTwoButtonsTemplate: ComponentStory<typeof Menu> = (props) => {
 const MenuActionsAddUserValueTemplate: ComponentStory<typeof Menu> = (props) => {
   const initialButtonText = 'Добавить';
   const [options, setOptions] = useState([...items]);
-  const modelTopBottom = useMemo(() => {
+  const model = useMemo(() => {
     return options.map((item) => ({
       id: item.id,
       render: (options: RenderOptionProps) => (
@@ -548,34 +548,34 @@ const MenuActionsAddUserValueTemplate: ComponentStory<typeof Menu> = (props) => 
     }));
   }, [props.dimension, options]);
 
-  const [localValue, setValue] = useState<string>('');
+  const [inputValue, setInputValue] = useState<string>('');
   const [buttonText, setButtonText] = useState<string>(initialButtonText);
   const [buttonDisabled, setButtonDisabled] = useState<boolean>(true);
   const [active, setActive] = useState<string | undefined>(options[0].id);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
-    setValue(inputValue);
+    setInputValue(inputValue);
   };
 
   const handleTextButtonClick = () => {
     const newId = uid();
     const newValue = Math.floor(Math.random());
-    const newOption = { id: newId, label: localValue, value: newValue };
+    const newOption = { id: newId, label: inputValue, value: newValue };
     const newOptions = [newOption, ...options];
     setOptions(newOptions);
     setActive(newId);
   };
 
   useEffect(() => {
-    if (localValue === '') {
+    if (inputValue === '') {
       setButtonText(initialButtonText);
       setButtonDisabled(true);
     } else {
-      setButtonText(`${initialButtonText} «${localValue}»`);
+      setButtonText(`${initialButtonText} «${inputValue}»`);
       setButtonDisabled(false);
     }
-  }, [localValue]);
+  }, [inputValue]);
 
   const menuPanelContentDimension = props.dimension === undefined || props.dimension === 'l' ? 'm' : props.dimension;
 
@@ -589,14 +589,14 @@ const MenuActionsAddUserValueTemplate: ComponentStory<typeof Menu> = (props) => 
       <div style={{ width: 'fit-content' }}>
         <Menu
           {...props}
-          model={modelTopBottom}
+          model={model}
           active={active}
           onActivateItem={setActive}
           onSelectItem={(id) => console.log(`Selected id: ${id}`)}
           renderTopPanel={({ dimension = menuPanelContentDimension }) => {
             return (
               <MenuActionsPanel dimension={dimension}>
-                <TextInput dimension={menuPanelContentDimension} value={localValue} onChange={handleChange} />
+                <TextInput dimension={menuPanelContentDimension} value={inputValue} onChange={handleChange} />
               </MenuActionsPanel>
             );
           }}
