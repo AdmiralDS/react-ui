@@ -524,8 +524,21 @@ const MenuActionsTemplate: ComponentStory<typeof Menu> = (args) => {
             renderBottomPanel={({ dimension, menuActionsPanelCssMixin = ActionPanelFlex }) => {
               return (
                 <MenuActionsPanel dimension={dimension} menuActionsPanelCssMixin={menuActionsPanelCssMixin}>
-                  <Button dimension={menuPanelContentDimension}>Action 1</Button>
-                  <Button dimension={menuPanelContentDimension} appearance="secondary">
+                  <Button
+                    dimension={menuPanelContentDimension}
+                    onClick={() => {
+                      console.log('Button 1 clicked');
+                    }}
+                  >
+                    Action 1
+                  </Button>
+                  <Button
+                    dimension={menuPanelContentDimension}
+                    appearance="secondary"
+                    onClick={() => {
+                      console.log('Button 2 clicked');
+                    }}
+                  >
                     Action 2
                   </Button>
                 </MenuActionsPanel>
