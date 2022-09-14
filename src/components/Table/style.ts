@@ -334,7 +334,7 @@ export const Row = styled.div<{
   ${(p) => (p.isGroup ? groupRowStyle : rowStyle)}
   ${({ disabled }) => disabled && disabledRow}
   ${({ underline }) => underline && underlineRow}
-  ${(p) => (p.isGroup && p.rowWidth ? rowWidthStyle : '')}
+  ${({ rowWidth }) => rowWidth && rowWidthStyle}
 `;
 
 export const SimpleRow = styled.div<{ selected?: boolean; disabled?: boolean; error?: boolean; success?: boolean }>`
@@ -369,12 +369,7 @@ export const ExpandedRowContent = styled.div`
   padding: 0 12px 11px 12px;
 `;
 
-export const EmptyMessage = styled.div`
-  display: flex;
-  flex: 1 0 auto;
-  ${cellStyle};
-  justify-content: center;
+export const EmptyMessage = styled(Cell)`
   margin: 2px 0;
-  overflow: hidden;
   color: ${({ theme }) => theme.color['Neutral/Neutral 50']};
 `;

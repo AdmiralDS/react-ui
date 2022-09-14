@@ -702,7 +702,7 @@ export const Table: React.FC<TableProps> = ({
           isGroup={isGroupRow}
           onRowClick={onRowClick}
           onRowDoubleClick={onRowDoubleClick}
-          rowWidth={headerRef.current?.scrollWidth}
+          rowWidth={isGroupRow ? headerRef.current?.scrollWidth : undefined}
           key={`row_${row.id}`}
         >
           {isGroupRow ? (
@@ -732,7 +732,12 @@ export const Table: React.FC<TableProps> = ({
     if (tableRows.length === 0) {
       return (
         <ScrollTableBody ref={scrollBodyRef} className="tbody">
-          <Row underline={showLastRowUnderline} dimension={dimension} className="tr">
+          <Row
+            underline={showLastRowUnderline}
+            dimension={dimension}
+            className="tr"
+            rowWidth={headerRef.current?.scrollWidth}
+          >
             <EmptyMessage dimension={dimension}>{emptyMessage}</EmptyMessage>
           </Row>
         </ScrollTableBody>
