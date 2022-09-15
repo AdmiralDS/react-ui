@@ -197,6 +197,7 @@ export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps
         status={status}
         skeleton={skeleton}
         isLoading={isLoading}
+        showTooltip={!isSuggestPanelOpen && !skeleton}
         onKeyDown={(...p) => {
           props.onKeyDown?.(...p);
           handleKeyDown(...p);
