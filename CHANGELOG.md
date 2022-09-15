@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.2.2](https://github.com/AdmiralDS/react-ui/compare/v2.2.1...v2.2.2) (2022-09-15)
+
+
+### Bug Fixes
+
+* **InputEx:** wrong typing cause storybook error ([686d63a](https://github.com/AdmiralDS/react-ui/commit/686d63ae650093906a477149a25993fa636824db))
+
 ### [2.2.1](https://github.com/AdmiralDS/react-ui/compare/v2.2.0...v2.2.1) (2022-09-15)
 
 
