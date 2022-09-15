@@ -158,6 +158,10 @@ export interface TableProps extends React.HTMLAttributes<HTMLDivElement> {
    * По умолчанию состояние checked вычисляется на основе анализа параметра selected у строк таблицы
    */
   headerCheckboxIndeterminate?: boolean;
+  /** Установка чекбокса в шапке таблицы в состояние disabled.
+   * По умолчанию состояние disabled устанавливается при отсутствии строк в таблице
+   */
+  headerCheckboxDisabled?: boolean;
   /** Колбек на изменение состояния чекбокса, находящегося в хедере
    * Возвращает параметр selectAll (если true - выбраны все строки в таблице, false - выбор снят со всех строк таблицы)
    */
@@ -256,6 +260,7 @@ export const Table: React.FC<TableProps> = ({
   displayRowExpansionColumn = false,
   headerCheckboxChecked = false,
   headerCheckboxIndeterminate = false,
+  headerCheckboxDisabled = false,
   onHeaderSelectionChange,
   onRowSelectionChange,
   onRowExpansionChange,
@@ -502,7 +507,8 @@ export const Table: React.FC<TableProps> = ({
   }
 
   const isSelected = (row: { selected?: boolean }) => row.selected;
-  const allRowsChecked = rowList.every(isSelected);
+  // When invoked on an empty array, every() always returns true. So we need to check rowList.length.
+  const allRowsChecked = rowList.length > 0 && rowList.every(isSelected);
   const someRowsChecked = rowList.some(isSelected);
 
   function handleHeaderCheckboxChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -772,6 +778,7 @@ export const Table: React.FC<TableProps> = ({
                     dimension={checkboxDimension}
                     checked={allRowsChecked || someRowsChecked || headerCheckboxChecked}
                     indeterminate={(someRowsChecked && !allRowsChecked) || headerCheckboxIndeterminate}
+                    disabled={tableRows.length === 0 || headerCheckboxDisabled}
                     onChange={handleHeaderCheckboxChange}
                   />
                 </CheckboxCell>
