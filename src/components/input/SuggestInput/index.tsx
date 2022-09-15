@@ -127,6 +127,11 @@ export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps
       if (code === keyboardKey.Enter && isSuggestPanelOpen) {
         e.preventDefault();
       }
+
+      // prevent selecting option on Space press when Menu is opened
+      if (code === keyboardKey[' '] && isSuggestPanelOpen) {
+        e.stopPropagation();
+      }
     };
 
     const [blurTrigger, triggerDelayedBlur] = React.useState<undefined | unknown>();
@@ -192,9 +197,6 @@ export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps
         status={status}
         skeleton={skeleton}
         isLoading={isLoading}
-        onKeyUp={(...p) => {
-          props.onKeyUp?.(...p);
-        }}
         onKeyDown={(...p) => {
           props.onKeyDown?.(...p);
           handleKeyDown(...p);
