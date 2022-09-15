@@ -43,7 +43,9 @@ export const MenuButton: React.FC<MenuButtonProps> = ({ dimension, options }) =>
           const [tooltipVisible, setTooltipVisible] = React.useState(false);
           return (
             <MenuItem ref={itemRef} dimension="s" {...options} key={id} role="option">
-              <Option href={item.url}>{tooltip ? item.text.slice(0, 37) + '...' : item.text}</Option>
+              <Option href={item.url} as={item.linkAs} {...item.linkProps}>
+                {tooltip ? item.text.slice(0, 37) + '...' : item.text}
+              </Option>
               {tooltip && (
                 <Tooltip
                   targetRef={itemRef}
