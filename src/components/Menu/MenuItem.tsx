@@ -1,6 +1,6 @@
 import type { HTMLAttributes } from 'react';
 import * as React from 'react';
-import styled, { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
+import styled from 'styled-components';
 import { backgroundColor, colorTextMixin, ItemDimension, paddings, styleTextMixin } from './menuItemMixins';
 
 export interface RenderOptionProps {
@@ -26,25 +26,10 @@ export interface ItemProps {
 export interface MenuItemProps extends HTMLAttributes<HTMLDivElement>, RenderOptionProps {
   /** Размер MenuItems */
   dimension?: ItemDimension;
-  /** Позволяет добавлять миксин, созданный с помощью styled css  */
-  menuItemCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
 }
 
 export const MenuItem = React.forwardRef<HTMLDivElement, MenuItemProps>(
-  (
-    {
-      children,
-      onHover,
-      onClickItem,
-      disabled = false,
-      hovered,
-      dimension = 'l',
-      selected = false,
-      menuItemCssMixin,
-      ...props
-    },
-    ref,
-  ) => {
+  ({ children, onHover, onClickItem, disabled = false, hovered, dimension = 'l', selected = false, ...props }, ref) => {
     const handleMouseMove = () => {
       onHover?.();
     };
@@ -57,7 +42,6 @@ export const MenuItem = React.forwardRef<HTMLDivElement, MenuItemProps>(
       <Item
         ref={ref}
         dimension={dimension}
-        itemCssMixin={menuItemCssMixin}
         selected={selected}
         hovered={hovered}
         data-hovered={hovered}
@@ -79,7 +63,6 @@ const Item = styled.div<{
   selected?: boolean;
   hovered?: boolean;
   width?: number;
-  itemCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
 }>`
   display: flex;
   align-items: center;
@@ -104,6 +87,4 @@ const Item = styled.div<{
       fill: ${(p) => p.theme.color['Neutral/Neutral 30']};
     }
   }
-
-  ${(p) => p.itemCssMixin}
 `;

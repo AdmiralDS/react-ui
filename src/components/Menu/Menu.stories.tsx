@@ -535,10 +535,6 @@ const MenuActionsTwoButtonsTemplate: ComponentStory<typeof Menu> = (props) => {
   );
 };
 
-const ActionPanelMixin = css`
-  justify-content: flex-start;
-`;
-
 const MenuActionsAddUserValueTemplate: ComponentStory<typeof Menu> = (props) => {
   const initialButtonText = 'Добавить';
 
@@ -553,7 +549,7 @@ const MenuActionsAddUserValueTemplate: ComponentStory<typeof Menu> = (props) => 
       id: item.id,
       render: (options: RenderOptionProps) => {
         return (
-          <MenuItem dimension={props.dimension || 's'} menuItemCssMixin={ActionPanelMixin} {...options} key={item.id}>
+          <MenuItem dimension={props.dimension || 's'} {...options} key={item.id}>
             {getHighlightedText(item.label, inputValue)}
           </MenuItem>
         );
