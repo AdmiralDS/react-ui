@@ -1,9 +1,8 @@
 import * as React from 'react';
 import { HTMLAttributes } from 'react';
-import styled, { css } from 'styled-components';
-import { typography } from '#src/components/Typography';
+import styled from 'styled-components';
 import type { SuggestItem } from './';
-import { RenderOptionProps } from '#src/components/MenuItem';
+import { MenuItem, RenderOptionProps } from '#src/components/MenuItem';
 
 const Highlight = styled.span`
   color: ${(p) => p.theme.color['Primary/Primary 60 Main']};
@@ -29,57 +28,20 @@ function getHighlightedText(text = '', highlight = '') {
   );
 }
 
-export const Panel = styled.div`
+const TextWrapper = styled.div`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-
-  height: 40px;
-  ${typography['Body/Body 1 Long']}
-  line-height: 40px;
-  padding: 0 16px;
-
-  [data-dimension='xl'] & {
-    height: 48px;
-    line-height: 48px;
-  }
-  [data-dimension='s'] & {
-    height: 32px;
-    ${typography['Body/Body 2 Long']}
-    line-height: 32px;
-    padding: 0 12px;
-  }
-
-  color: ${(p) => p.theme.color['Neutral/Neutral 90']};
-
-  &&[data-hovered='true'] {
-    background-color: ${(p) => p.theme.color['Opacity/Hover']};
-    cursor: pointer;
-  }
 `;
 
 export interface SuggestPanelProps extends SuggestItem, HTMLAttributes<HTMLDivElement>, RenderOptionProps {
   text?: string;
 }
 
-export const SuggestPanel = ({
-  searchText = '',
-  text = '',
-  hovered,
-  onHover,
-  onClickItem,
-  ...props
-}: SuggestPanelProps) => {
-  const handleMouseMove = () => {
-    onHover?.();
-  };
-
-  const handleClick = () => {
-    onClickItem?.();
-  };
+export const SuggestPanel = ({ searchText = '', text = '', ...props }: SuggestPanelProps) => {
   return (
-    <Panel {...props} title={text} data-hovered={hovered} onMouseMove={handleMouseMove} onClick={handleClick}>
-      {getHighlightedText(text, searchText)}
-    </Panel>
+    <MenuItem title={text} {...props}>
+      <TextWrapper>{getHighlightedText(text, searchText)}</TextWrapper>
+    </MenuItem>
   );
 };
