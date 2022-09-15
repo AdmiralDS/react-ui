@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.2.1](https://github.com/AdmiralDS/react-ui/compare/v2.2.0...v2.2.1) (2022-09-15)
+
+
+### Bug Fixes
+
+* **Breadcrumbs:** fix bug with hidden menu breadcrumbs and router link ([19789da](https://github.com/AdmiralDS/react-ui/commit/19789dafc6d51cf601d7614c48b6c199a603b4f7))
+* readonly and disabled component behavior ([64e33f3](https://github.com/AdmiralDS/react-ui/commit/64e33f3be0d7ac2a66ef9140d384e23f30a4899e))
+* **Table:** fix horizontal scroll when emptyMessage displays ([ff266e3](https://github.com/AdmiralDS/react-ui/commit/ff266e344dce251a8c6e0fb69f8c844676826787))
+
 ## [2.2.0](https://github.com/AdmiralDS/react-ui/compare/v2.1.0...v2.2.0) (2022-09-12)
 
 
