@@ -177,19 +177,15 @@ export const TimeInput = React.forwardRef<HTMLInputElement, TimeInputProps>(
         ? disableSlots(slots, disabledSlots)?.filter((slot) => filterTime(slot.value, startTime, endTime))
         : slots;
 
-    const handleClick = (option: string) => {
+    const handleSelectOption = (option: string) => {
       if (inputRef.current) {
-        if (isOpened) {
-          setTimeValue(option);
-          if (!option) {
-            changeInputData(inputRef.current, { value: '' });
-            return;
-          }
-          changeInputData(inputRef.current, { value: option });
-          setIsOpened(false);
-        } else {
-          changeInputData(inputRef.current, { value: inputRef.current.value });
+        setTimeValue(option);
+        if (!option) {
+          changeInputData(inputRef.current, { value: '' });
+          return;
         }
+        changeInputData(inputRef.current, { value: option });
+        setIsOpened(false);
       }
     };
 
@@ -229,9 +225,6 @@ export const TimeInput = React.forwardRef<HTMLInputElement, TimeInputProps>(
         disabled={disabled}
         dimension={dimension}
         skeleton={skeleton}
-        onKeyUp={(...p) => {
-          props.onKeyUp?.(...p);
-        }}
         onKeyDown={(...p) => {
           props.onKeyDown?.(...p);
           handleKeyDown(...p);
@@ -239,7 +232,7 @@ export const TimeInput = React.forwardRef<HTMLInputElement, TimeInputProps>(
       >
         {availableSlots && isOpened && !disabled && !skeleton && (
           <DropdownContainer targetRef={inputRef} alignSelf={alignDropdown} onClickOutside={clickOutside}>
-            <StyledMenu selected={timeValue} model={model} data-dimension={dimension} onSelectItem={handleClick} />
+            <StyledMenu selected={timeValue} model={model} data-dimension={dimension} onSelectItem={handleSelectOption} />
           </DropdownContainer>
         )}
       </TextInput>
