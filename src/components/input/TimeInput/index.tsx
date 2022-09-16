@@ -131,9 +131,19 @@ export const TimeInput = React.forwardRef<HTMLInputElement, TimeInputProps>(
     const [isOpened, setIsOpened] = useState<boolean>(false);
 
     const handleButtonClick = () => {
-      const timeValue = parser(inputRef.current?.value);
-      setTimeValue(timeValue);
-      setActiveOption(timeValue);
+      if (!isOpened) {
+        const inputTimeValue = parser(inputRef.current?.value);
+        setTimeValue(inputTimeValue);
+        if (availableSlots) {
+          if (availableSlots.find((slot) => slot.value === inputTimeValue)) {
+            setActiveOption(inputTimeValue);
+          } else {
+            setActiveOption(availableSlots[0].value);
+          }
+        } else {
+          setActiveOption('');
+        }
+      }
       setIsOpened(!isOpened);
     };
 
