@@ -125,6 +125,7 @@ export const TimeInput = React.forwardRef<HTMLInputElement, TimeInputProps>(
   ) => {
     const handleInput = props.handleInput || defaultTimeInputHandle;
     const [timeValue, setTimeValue] = useState<string>('');
+    const [activeOption, setActiveOption] = React.useState<string | undefined>('');
     const inputContainerRef = useRef<HTMLDivElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
     const [isOpened, setIsOpened] = useState<boolean>(false);
@@ -132,6 +133,7 @@ export const TimeInput = React.forwardRef<HTMLInputElement, TimeInputProps>(
     const handleButtonClick = () => {
       const timeValue = parser(inputRef.current?.value);
       setTimeValue(timeValue);
+      setActiveOption(timeValue);
       setIsOpened(!isOpened);
     };
 
@@ -232,7 +234,14 @@ export const TimeInput = React.forwardRef<HTMLInputElement, TimeInputProps>(
       >
         {availableSlots && isOpened && !disabled && !skeleton && (
           <DropdownContainer targetRef={inputRef} alignSelf={alignDropdown} onClickOutside={clickOutside}>
-            <StyledMenu selected={timeValue} model={model} data-dimension={dimension} onSelectItem={handleSelectOption} />
+            <StyledMenu
+              selected={timeValue}
+              active={activeOption}
+              model={model}
+              data-dimension={dimension}
+              onSelectItem={handleSelectOption}
+              onActivateItem={setActiveOption}
+            />
           </DropdownContainer>
         )}
       </TextInput>
