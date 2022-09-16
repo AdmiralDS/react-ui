@@ -191,12 +191,6 @@ export const TimeInput = React.forwardRef<HTMLInputElement, TimeInputProps>(
       }
     };
 
-    const handleKeyDown = (e: React.KeyboardEvent) => {
-      if (e.key === 'Enter' && isOpened) {
-        e.preventDefault();
-      }
-    };
-
     const clickOutside = () => {
       setIsOpened(false);
     };
@@ -227,10 +221,6 @@ export const TimeInput = React.forwardRef<HTMLInputElement, TimeInputProps>(
         disabled={disabled}
         dimension={dimension}
         skeleton={skeleton}
-        onKeyDown={(...p) => {
-          props.onKeyDown?.(...p);
-          handleKeyDown(...p);
-        }}
       >
         {availableSlots && isOpened && !disabled && !skeleton && (
           <DropdownContainer targetRef={inputRef} alignSelf={alignDropdown} onClickOutside={clickOutside}>
