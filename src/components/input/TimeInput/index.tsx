@@ -103,9 +103,8 @@ export interface TimeInputProps extends Omit<TextInputProps, 'value'> {
   disabledSlots?: string[];
   /** Альтернативная иконка компонента */
   icon?: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
-
+  /** Позволяет обрабатывать введенные значения */
   parser?: (time?: string) => string;
-
   /**
    * Позволяет выравнивать позицию дропдаун контейнера относительно селекта.
    * Принимает стандартные значения css свойства align-self (auto | flex-start | flex-end | center | baseline | stretch)
