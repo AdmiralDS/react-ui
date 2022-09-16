@@ -198,10 +198,6 @@ export const TimeInput = React.forwardRef<HTMLInputElement, TimeInputProps>(
     const handleSelectOption = (option: string) => {
       if (inputRef.current) {
         setTimeValue(option);
-        if (!option) {
-          changeInputData(inputRef.current, { value: '' });
-          return;
-        }
         changeInputData(inputRef.current, { value: option });
         setIsOpened(false);
       }
