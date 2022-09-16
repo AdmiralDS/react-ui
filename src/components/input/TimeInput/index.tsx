@@ -1,18 +1,21 @@
 import * as React from 'react';
-import { useRef, useState } from 'react';
+import { HTMLAttributes, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { ReactComponent as TimeSVG } from '@admiral-ds/icons/build/system/TimeOutline.svg';
 import { TextInput, TextInputProps } from '../TextInput';
 import { refSetter } from '#src/components/common/utils/refSetter';
 import { defaultTimeInputHandle } from '#src/components/input/TimeInput/defaultTimeInputHandle';
 import { changeInputData } from '#src/components/common/dom/changeInputData';
-import { Slot, SlotProps } from './Slot';
 import { getTimeInMinutes, parseStringToTime } from './utils';
 import { typography } from '#src/components/Typography';
 import { InputIconButton } from '#src/components/InputIconButton';
 import { DropdownContainer } from '#src/components/DropdownContainer';
-import { RenderOptionProps } from '#src/components/MenuItem';
+import { MenuItem, RenderOptionProps } from '#src/components/MenuItem';
 import { Menu } from '#src/components/Menu';
+
+export interface SlotProps extends HTMLAttributes<HTMLDivElement>, RenderOptionProps {
+  value: string;
+}
 
 const slots: SlotProps[] = [
   { value: '00:00', disabled: false },
@@ -81,6 +84,10 @@ const StyledMenu = styled(Menu)`
     width: 68px;
     height: 192px;
   }
+`;
+
+const StyledMenuItem = styled(MenuItem)`
+  justify-content: center;
 `;
 
 export interface TimeInputProps extends Omit<TextInputProps, 'value'> {
@@ -210,9 +217,9 @@ export const TimeInput = React.forwardRef<HTMLInputElement, TimeInputProps>(
         return availableSlots.map((slot, index) => ({
           id: slot.value,
           render: (options: RenderOptionProps) => (
-            <Slot key={index} value={slot.value} data-dimension={dimension} disabled={slot.disabled} {...options}>
+            <StyledMenuItem key={index} data-dimension={dimension} disabled={slot.disabled} {...options}>
               {slot.value}
-            </Slot>
+            </StyledMenuItem>
           ),
           disabled: slot.disabled,
         }));
