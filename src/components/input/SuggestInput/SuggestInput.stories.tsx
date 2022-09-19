@@ -55,12 +55,20 @@ export default {
       control: { type: 'boolean' },
     },
 
+    displayClearIcon: {
+      control: { type: 'boolean' },
+    },
+
     alignDropdown: {
       options: ['auto', 'flex-start', 'flex-end', 'center', 'baseline', 'stretch'],
       control: { type: 'radio' },
     },
 
     placeholder: {
+      type: 'string',
+    },
+
+    isEmptyMessage: {
       type: 'string',
     },
 
