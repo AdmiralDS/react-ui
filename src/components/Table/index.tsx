@@ -86,6 +86,8 @@ export type Column = {
    * (в columnList фиксированные столбцы должны быть в начале массива и идти друг за другом).
    */
   sticky?: boolean;
+  /** Отключение возможности ресайза колонки */
+  disableResize?: boolean;
   /** Функция отрисовки содержимого фильтра (выпадающего меню фильтра). Если её не передать, значок фильтра отображаться не будет */
   renderFilter?: (obj: FilterProps) => React.ReactNode;
   /** Функция отрисовки иконки фильтра. По умолчанию в качестве иконки фильтра применяется OverflowIcon (троеточие) */
@@ -559,6 +561,7 @@ export const Table: React.FC<TableProps> = ({
       sortable = false,
       sort,
       sortOrder,
+      disableResize = false,
       renderFilter,
       renderFilterIcon,
       onFilterMenuClickOutside,
@@ -617,7 +620,7 @@ export const Table: React.FC<TableProps> = ({
             name={name}
             width={width ? resizerWidth : DEFAULT_COLUMN_WIDTH}
             onChange={handleResizeChange}
-            disabled={disableColumnResize}
+            disabled={disableResize || disableColumnResize}
             resizerState={resizerState}
             dimension={dimension}
           />
@@ -627,7 +630,7 @@ export const Table: React.FC<TableProps> = ({
             name={name}
             width={width ? resizerWidth : DEFAULT_COLUMN_WIDTH}
             onChange={handleResizeChange}
-            disabled={disableColumnResize}
+            disabled={disableResize || disableColumnResize}
             resizerState={resizerState}
             dimension={dimension}
           />
