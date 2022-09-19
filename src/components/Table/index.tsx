@@ -712,6 +712,7 @@ export const Table: React.FC<TableProps> = ({
           onRowClick={onRowClick}
           onRowDoubleClick={onRowDoubleClick}
           rowWidth={isGroupRow ? headerRef.current?.scrollWidth : undefined}
+          verticalScroll={verticalScroll}
           key={`row_${row.id}`}
         >
           {isGroupRow ? (

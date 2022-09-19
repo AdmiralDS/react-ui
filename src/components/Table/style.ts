@@ -44,6 +44,7 @@ export const OverflowMenuWrapper = styled.div<{ $offset: number; dimension: Tabl
   align-items: center;
   justify-content: center;
   position: absolute;
+  top: 0;
   z-index: 5;
   ${overflowMenuStyle};
   visibility: hidden;
@@ -327,6 +328,7 @@ export const Row = styled.div<{
   isGroup?: boolean;
   rowWidth?: number;
 }>`
+  position: relative;
   display: flex;
   flex-direction: column;
   min-width: fit-content;
