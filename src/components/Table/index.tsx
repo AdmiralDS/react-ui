@@ -403,7 +403,7 @@ export const Table: React.FC<TableProps> = ({
         observer.unobserve();
       };
     }
-  }, [tableRef.current]);
+  }, [tableRef.current, columnList]);
 
   React.useLayoutEffect(() => {
     const body = scrollBodyRef.current;
