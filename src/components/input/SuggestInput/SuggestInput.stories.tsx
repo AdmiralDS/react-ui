@@ -164,7 +164,7 @@ const options = ['one', 'two', 'three'];
 const TemplateUncontrolled: ComponentStory<typeof SuggestInput> = (props) => {
   return (
     <ThemeProvider theme={LIGHT_THEME}>
-      <SuggestInput options={options} placeholder="numbers" />
+      <SuggestInput options={options} placeholder="numbers" dimension={props.dimension} />
     </ThemeProvider>
   );
 };
