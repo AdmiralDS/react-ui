@@ -257,10 +257,10 @@ export interface InputExProps extends Omit<InputHTMLAttributes<HTMLInputElement>
   onSuffixValueChange?: (value: ValueType) => void;
 
   /** Специальный метод для рендера компонента по значению суффикса*/
-  renderSuffixValue?: (value?: ValueType) => React.ReactNode;
+  renderSuffixValue?: (props: RenderProps) => React.ReactNode;
 
   /** Специальный метод для рендера опции списка суффикса по значению */
-  renderSuffixOption?: (value?: ValueType) => React.ReactNode;
+  renderSuffixOption?: (props: RenderProps) => React.ReactNode;
 
   /** Состояние skeleton */
   skeleton?: boolean;
@@ -281,16 +281,16 @@ export const InputEx = React.forwardRef<HTMLInputElement, InputExProps>(
       placeholder,
 
       prefixValue,
-      renderPrefixValue = (value?: ValueType) => value,
+      renderPrefixValue = ({ value }) => value,
       prefixValueList,
       onPrefixValueChange,
-      renderPrefixOption = (value?: ValueType) => value,
+      renderPrefixOption = ({ value }) => value,
 
       suffixValue,
-      renderSuffixValue = (value?: ValueType) => value,
+      renderSuffixValue = ({ value }) => value,
       suffixValueList,
       onSuffixValueChange,
-      renderSuffixOption = (value?: ValueType) => value,
+      renderSuffixOption = ({ value }) => value,
 
       skeleton = false,
       ...props
