@@ -106,6 +106,11 @@ const Template: ComponentStory<typeof SuggestInput> = (props) => {
   const [isLoading, setIsLoading] = React.useState(false);
   const [options, setOptions] = React.useState<string[] | undefined>();
 
+  const handleSelectOption = (option: string) => {
+    setValue(option);
+    console.log(`Selected option - ${option}`);
+  };
+
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.currentTarget.value;
 
@@ -143,7 +148,7 @@ const Template: ComponentStory<typeof SuggestInput> = (props) => {
         {...cleanProps}
         value={localValue}
         onInput={handleChange}
-        onOptionSelect={setValue}
+        onOptionSelect={handleSelectOption}
         options={options}
         isLoading={isLoading}
         onSearchButtonClick={() => {
