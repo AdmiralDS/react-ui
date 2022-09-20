@@ -32,15 +32,19 @@ export function getHighlightedFilteredOptions(
   options: HighlightedFilteredOptionProps[],
   searchValue = '',
   dimension?: ItemDimension,
+  highlightFunction = getTextHighlightMeta,
 ) {
   const model: ItemProps[] = [];
 
   options.forEach((option) => {
-    const { shouldHighlight, parts, chunks } = getTextHighlightMeta(option.label, searchValue);
-    const highlightedText = parts.map((part, i) =>
-      chunks.includes(part.toLowerCase()) ? <HighlightText key={i}>{part}</HighlightText> : part,
-    );
-    const itemValue = shouldHighlight ? highlightedText : !searchValue ? option.label : null;
+    const { shouldHighlight, parts, chunks } = highlightFunction(option.label, searchValue);
+    const itemValue = shouldHighlight
+      ? parts.map((part, i) =>
+          chunks.includes(part.toLowerCase()) ? <HighlightText key={i}>{part}</HighlightText> : part,
+        )
+      : !searchValue
+      ? option.label
+      : null;
     if (itemValue) {
       model.push({
         id: option.id,
