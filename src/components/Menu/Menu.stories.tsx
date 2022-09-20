@@ -1,12 +1,12 @@
-import React, { ChangeEvent, HTMLAttributes, useEffect, useMemo, useState } from 'react';
+import React, { ChangeEvent, HTMLAttributes, useContext, useEffect, useMemo, useState } from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { Menu } from '#src/components/Menu';
 import { MenuItem, RenderOptionProps } from '#src/components/Menu/MenuItem';
-import styled, { css, ThemeProvider } from 'styled-components';
+import styled, { css, ThemeContext, ThemeProvider } from 'styled-components';
 import { typography } from '#src/components/Typography';
 import { ReactComponent as CardSolid } from '@admiral-ds/icons/build/finance/CardSolid.svg';
 import { withDesign } from 'storybook-addon-designs';
-import { Theme } from '#src/components/themes';
+import { LIGHT_THEME, Theme } from '#src/components/themes';
 import { CheckboxField, FieldSet } from '#src/components/form';
 import { RadioButton } from '#src/components/RadioButton';
 import { Tooltip } from '#src/components/Tooltip';
@@ -16,7 +16,6 @@ import { getHighlightedFilteredOptions, MenuActionsPanel } from '#src/components
 import { Button } from '#src/components/Button';
 import { ReactComponent as PlusOutline } from '@admiral-ds/icons/build/service/PlusOutline.svg';
 import { uid } from '#src/components/common/uid';
-import { getTextHighlightMeta } from '#src/components/input/Select/utils';
 import { keyboardKey } from '#src/components/common/keyboardKey';
 
 const Desc = styled.div`
@@ -538,6 +537,7 @@ const MenuActionsTwoButtonsTemplate: ComponentStory<typeof Menu> = (props) => {
 
 const MenuActionsAddUserValueTemplate: ComponentStory<typeof Menu> = (props) => {
   const initialButtonText = 'Добавить';
+  const theme = useContext(ThemeContext) || LIGHT_THEME;
 
   const [options, setOptions] = useState([...items]);
   const [inputValue, setInputValue] = useState<string>('');
@@ -546,7 +546,12 @@ const MenuActionsAddUserValueTemplate: ComponentStory<typeof Menu> = (props) => 
   const [active, setActive] = useState<string | undefined>(options[0].id);
 
   const model = useMemo(() => {
-    return getHighlightedFilteredOptions(options, inputValue, props.dimension);
+    return getHighlightedFilteredOptions(
+      options,
+      inputValue,
+      theme.locales[theme.currentLocale].suggestInput.emptyMessage,
+      props.dimension,
+    );
   }, [props.dimension, options, inputValue]);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {

@@ -4,6 +4,7 @@ import { getTextHighlightMeta } from '#src/components/input/Select/utils';
 import { ItemProps, MenuItem, RenderOptionProps } from '#src/components/Menu/MenuItem';
 import React from 'react';
 import { ItemDimension } from '#src/components/Menu/menuItemMixins';
+import { uid } from '#src/components/common/uid';
 
 export const MenuActionsPanel = styled.div<{
   dimension: MenuDimensions;
@@ -22,6 +23,18 @@ const TextWrapper = styled.div`
   text-overflow: ellipsis;
   white-space: nowrap;
 `;
+const StyledMenuItem = styled(MenuItem)`
+  color: ${(p) => p.theme.color['Neutral/Neutral 50']};
+  pointer-events: none;
+
+  &&[data-disabled='true'] {
+    background-color: ${(p) => p.theme.color['Special/Elevated BG']};
+    color: ${(p) => p.theme.color['Neutral/Neutral 50']};
+    && *[fill^='#'] {
+      fill: ${(p) => p.theme.color['Neutral/Neutral 50']};
+    }
+  }
+`;
 
 export interface HighlightedFilteredOptionProps {
   id: string;
@@ -31,6 +44,7 @@ export interface HighlightedFilteredOptionProps {
 export function getHighlightedFilteredOptions(
   options: HighlightedFilteredOptionProps[],
   searchValue = '',
+  emptyMessage: React.ReactNode,
   dimension?: ItemDimension,
   highlightFunction = getTextHighlightMeta,
 ) {
@@ -58,6 +72,21 @@ export function getHighlightedFilteredOptions(
       });
     }
   });
+
+  if (model.length === 0) {
+    const id = uid();
+    model.push({
+      id: id,
+      render: (options: RenderOptionProps) => {
+        return (
+          <StyledMenuItem dimension={dimension || 's'} {...options} key={id}>
+            {emptyMessage}
+          </StyledMenuItem>
+        );
+      },
+      disabled: true,
+    });
+  }
 
   return model;
 }
