@@ -12,7 +12,7 @@ import type { InputStatus } from '#src/components/input/types';
 import { LIGHT_THEME } from '#src/components/themes';
 import { DropdownContainer } from '#src/components/DropdownContainer';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
-import { RenderOptionProps } from '#src/components/MenuItem';
+import { RenderOptionProps } from '#src/components/Menu/MenuItem';
 import { Menu } from '#src/components/Menu';
 
 const StyledDropdownContainer = styled(DropdownContainer)<{ dropMaxHeight: string | number }>`

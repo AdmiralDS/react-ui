@@ -2,7 +2,7 @@ import * as React from 'react';
 import { HTMLAttributes } from 'react';
 import styled from 'styled-components';
 import type { SuggestItem } from './';
-import { MenuItem, RenderOptionProps } from '#src/components/MenuItem';
+import { MenuItem, RenderOptionProps } from '#src/components/Menu/MenuItem';
 
 const Highlight = styled.span`
   color: ${(p) => p.theme.color['Primary/Primary 60 Main']};
