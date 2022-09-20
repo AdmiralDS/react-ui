@@ -16,7 +16,7 @@ import { MenuActionsPanel } from '#src/components/Menu/MenuActionsPanel';
 import { Button } from '#src/components/Button';
 import { ReactComponent as PlusOutline } from '@admiral-ds/icons/build/service/PlusOutline.svg';
 import { uid } from '#src/components/common/uid';
-import { getHighlightedText } from '#src/components/input/SuggestInput/SuggestPanel';
+import { getTextHighlightMeta } from '#src/components/input/Select/utils';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -535,8 +535,13 @@ const MenuActionsTwoButtonsTemplate: ComponentStory<typeof Menu> = (props) => {
   );
 };
 
-const StyledMenuActionsItem = styled(MenuItem)`
-  justify-content: flex-start;
+const HighlightText = styled.span`
+  color: ${(p) => p.theme.color['Primary/Primary 60 Main']};
+`;
+const TextWrapper = styled.div`
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;
 
 const MenuActionsAddUserValueTemplate: ComponentStory<typeof Menu> = (props) => {
@@ -549,16 +554,33 @@ const MenuActionsAddUserValueTemplate: ComponentStory<typeof Menu> = (props) => 
   const [active, setActive] = useState<string | undefined>(options[0].id);
 
   const model = useMemo(() => {
-    return options.map((item) => ({
-      id: item.id,
-      render: (options: RenderOptionProps) => {
-        return (
-          <StyledMenuActionsItem dimension={props.dimension || 's'} {...options} key={item.id}>
-            {getHighlightedText(item.label, inputValue)}
-          </StyledMenuActionsItem>
-        );
-      },
-    }));
+    return options
+      .filter((item) => {
+        if (inputValue) {
+          const { shouldHiglight } = getTextHighlightMeta(item.label, inputValue);
+          return shouldHiglight;
+        } else {
+          return true;
+        }
+      })
+      .map((item) => {
+        const { parts, chunks } = getTextHighlightMeta(item.label, inputValue);
+
+        return {
+          id: item.id,
+          render: (options: RenderOptionProps) => {
+            return (
+              <MenuItem dimension={props.dimension || 's'} {...options} key={item.id}>
+                <TextWrapper>
+                  {parts.map((part, i) =>
+                    chunks.includes(part.toLowerCase()) ? <HighlightText key={i}>{part}</HighlightText> : part,
+                  )}
+                </TextWrapper>
+              </MenuItem>
+            );
+          },
+        };
+      });
   }, [props.dimension, options, inputValue]);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
