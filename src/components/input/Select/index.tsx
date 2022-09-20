@@ -20,7 +20,6 @@ import {
   NativeSelect,
   OptionWrapper,
   SelectWrapper,
-  StringValueWrapper,
   SpinnerMixin,
   ValueWrapper,
 } from './styled';

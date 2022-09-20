@@ -41,10 +41,7 @@ const horizontalPaddingValue = (props: { dimension?: ComponentDimension }) => {
 };
 
 const extraPadding = css<ExtraProps>`
-  padding-right: ${(props) =>
-    horizontalPaddingValue(props) +
-    (iconSizeValue(props) + 8) * (props.iconCount ?? 0) -
-    8 * (props.iconCount ? 1 : 0)}px;
+  padding-right: ${(props) => horizontalPaddingValue(props) + (iconSizeValue(props) + 8) * (props.iconCount ?? 0)}px;
 `;
 
 const disabledColors = css`

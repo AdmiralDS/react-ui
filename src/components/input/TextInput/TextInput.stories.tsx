@@ -84,7 +84,7 @@ const Template: ComponentStory<typeof TextInput> = (props) => {
   const [localValue, setValue] = useState<string>(String(props.value) ?? '');
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const inputValue = e.currentTarget.value;
+    const inputValue = e.target.value;
     setValue(inputValue);
     props.onChange?.(e);
   };
