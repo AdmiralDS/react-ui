@@ -588,6 +588,15 @@ const MenuActionsAddUserValueTemplate: ComponentStory<typeof Menu> = (props) => 
     setInputValue(inputValue);
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    const code = keyboardKey.getCode(e);
+
+    // prevent selecting option on Space press
+    if (code === keyboardKey[' ']) {
+      e.stopPropagation();
+    }
+  };
+
   const handleTextButtonClick = () => {
     const newId = uid();
     const newValue = Math.floor(Math.random());
@@ -626,7 +635,15 @@ const MenuActionsAddUserValueTemplate: ComponentStory<typeof Menu> = (props) => 
           renderTopPanel={({ dimension = menuPanelContentDimension }) => {
             return (
               <MenuActionsPanel dimension={dimension}>
-                <TextInput dimension={menuPanelContentDimension} value={inputValue} onChange={handleChange} />
+                <TextInput
+                  dimension={menuPanelContentDimension}
+                  value={inputValue}
+                  onChange={handleChange}
+                  onKeyDown={(...p) => {
+                    props.onKeyDown?.(...p);
+                    handleKeyDown(...p);
+                  }}
+                />
               </MenuActionsPanel>
             );
           }}
