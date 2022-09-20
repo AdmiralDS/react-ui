@@ -199,7 +199,7 @@ const DropDownOptionWrapper = (props: IProps) => {
   const highlighted = textsToHighlight?.some(
     (text) =>
       getTextHighlightMeta(text, dropDownSelectContext?.searchValue, dropDownSelectContext?.highlightFormat)
-        .shouldHiglight,
+        .shouldHighlight,
   );
 
   const onAddTextToHighlight = React.useCallback(
