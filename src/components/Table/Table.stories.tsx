@@ -93,6 +93,9 @@ export default {
     displayRowSelectionColumn: {
       control: { type: 'boolean' },
     },
+    displayRowExpansionColumn: {
+      control: { type: 'boolean' },
+    },
     greyHeader: {
       control: { type: 'boolean' },
     },
