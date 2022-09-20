@@ -19,6 +19,9 @@ export interface RowWrapperProps extends HTMLAttributes<HTMLDivElement> {
   underline: boolean;
   /** Признак является ли сторока групповой */
   isGroup: boolean;
+  /** Наличие вертикального скролла в таблице */
+  verticalScroll: boolean;
+  /** Ширина строки */
   rowWidth?: number;
 }
 
@@ -32,6 +35,7 @@ export const RowWrapper = ({
   tableWidth,
   isGroup,
   rowWidth,
+  verticalScroll,
   ...props
 }: RowWrapperProps) => {
   const handleRowClick = (rowId: RowId) => {
@@ -64,7 +68,7 @@ export const RowWrapper = ({
         {children}
       </SimpleRow>
       {(row.overflowMenuRender || row.actionRender) && (
-        <OverflowMenu dimension={dimension} tableWidth={tableWidth} row={row} />
+        <OverflowMenu dimension={dimension} tableWidth={tableWidth} row={row} verticalScroll={verticalScroll} />
       )}
       {row.expandedRowRender && (
         <ExpandedRow opened={row.expanded} contentMaxHeight="90vh" className="tr-expanded">
