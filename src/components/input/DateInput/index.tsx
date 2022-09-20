@@ -7,18 +7,20 @@ import { Calendar, CalendarPropType } from '#src/components/Calendar';
 import { refSetter } from '#src/components/common/utils/refSetter';
 import { defaultDateInputHandle } from '#src/components/input/DateInput/defaultDateInputHandle';
 import { changeInputData } from '#src/components/common/dom/changeInputData';
-import { Dropdown } from '#src/components/Dropdown';
 import { isValidDate } from './isValidDate';
 import { defaultParser } from './defaultParser';
 import { defaultDateRangeInputHandle } from '#src/components/input/DateInput/defaultDateRangeInputHandle';
 import { InputIconButton } from '#src/components/InputIconButton';
+import { DropdownContainer } from '#src/components/DropdownContainer';
+import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 
 const Input = styled(TextInput)`
   min-width: 150px;
 `;
 
 const StyledCalendar = styled(Calendar)`
-  box-shadow: none;
+  ${(p) => p.theme.shadow['Shadow 08']}
+  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
 `;
 
 // IE11 fix toLocaleDateString('ru') extra invisible characters by using .replace(/[^ -~]/g,'')
@@ -156,7 +158,11 @@ export const DateInput = React.forwardRef<HTMLInputElement, DateInputProps>(
         skeleton={skeleton}
       >
         {isCalendarOpen && !skeleton && (
-          <Dropdown targetRef={inputRef} alignSelf={alignDropdown} onClickOutside={handleBlurCalendarContainer}>
+          <DropdownContainer
+            targetRef={inputRef}
+            alignSelf={alignDropdown}
+            onClickOutside={handleBlurCalendarContainer}
+          >
             <StyledCalendar
               {...calendarProps}
               ref={calendarRef}
@@ -166,7 +172,7 @@ export const DateInput = React.forwardRef<HTMLInputElement, DateInputProps>(
               onChange={handleCalendarChange}
               range={isDateRange}
             />
-          </Dropdown>
+          </DropdownContainer>
         )}
       </Input>
     );

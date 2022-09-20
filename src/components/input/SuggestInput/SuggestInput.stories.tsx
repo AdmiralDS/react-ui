@@ -5,7 +5,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { ReactComponent as SearchSolidSVG } from '@admiral-ds/icons/build/system/SearchSolid.svg';
 import { SuggestInput } from './index';
 import { withDesign } from 'storybook-addon-designs';
-import { Theme } from '#src/components/themes';
+import { LIGHT_THEME, Theme } from '#src/components/themes';
 import { ThemeProvider } from 'styled-components';
 
 export default {
@@ -55,12 +55,20 @@ export default {
       control: { type: 'boolean' },
     },
 
+    displayClearIcon: {
+      control: { type: 'boolean' },
+    },
+
     alignDropdown: {
       options: ['auto', 'flex-start', 'flex-end', 'center', 'baseline', 'stretch'],
       control: { type: 'radio' },
     },
 
     placeholder: {
+      type: 'string',
+    },
+
+    isEmptyMessage: {
       type: 'string',
     },
 
@@ -106,6 +114,11 @@ const Template: ComponentStory<typeof SuggestInput> = (props) => {
   const [isLoading, setIsLoading] = React.useState(false);
   const [options, setOptions] = React.useState<string[] | undefined>();
 
+  const handleSelectOption = (option: string) => {
+    setValue(option);
+    console.log(`Selected option - ${option}`);
+  };
+
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.currentTarget.value;
 
@@ -143,7 +156,7 @@ const Template: ComponentStory<typeof SuggestInput> = (props) => {
         {...cleanProps}
         value={localValue}
         onInput={handleChange}
-        onOptionSelect={setValue}
+        onOptionSelect={handleSelectOption}
         options={options}
         isLoading={isLoading}
         onSearchButtonClick={() => {
@@ -151,6 +164,15 @@ const Template: ComponentStory<typeof SuggestInput> = (props) => {
         }}
         displayClearIcon
       />
+    </ThemeProvider>
+  );
+};
+
+const options = ['one', 'two', 'three'];
+const TemplateUncontrolled: ComponentStory<typeof SuggestInput> = (props) => {
+  return (
+    <ThemeProvider theme={LIGHT_THEME}>
+      <SuggestInput options={options} placeholder="numbers" dimension={props.dimension} />
     </ThemeProvider>
   );
 };
@@ -167,3 +189,6 @@ SuggestInputStory2.args = {
   icon: SearchSolidSVG,
 };
 SuggestInputStory2.storyName = 'Suggest Input альтернативная иконка';
+
+export const SuggestInputUncontrolled = TemplateUncontrolled.bind({});
+SuggestInputUncontrolled.storyName = 'Suggest Input неконтроллируемый';

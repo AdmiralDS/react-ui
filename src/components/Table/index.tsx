@@ -86,6 +86,8 @@ export type Column = {
    * (в columnList фиксированные столбцы должны быть в начале массива и идти друг за другом).
    */
   sticky?: boolean;
+  /** Отключение возможности ресайза колонки */
+  disableResize?: boolean;
   /** Функция отрисовки содержимого фильтра (выпадающего меню фильтра). Если её не передать, значок фильтра отображаться не будет */
   renderFilter?: (obj: FilterProps) => React.ReactNode;
   /** Функция отрисовки иконки фильтра. По умолчанию в качестве иконки фильтра применяется OverflowIcon (троеточие) */
@@ -158,6 +160,10 @@ export interface TableProps extends React.HTMLAttributes<HTMLDivElement> {
    * По умолчанию состояние checked вычисляется на основе анализа параметра selected у строк таблицы
    */
   headerCheckboxIndeterminate?: boolean;
+  /** Установка чекбокса в шапке таблицы в состояние disabled.
+   * По умолчанию состояние disabled устанавливается при отсутствии строк в таблице
+   */
+  headerCheckboxDisabled?: boolean;
   /** Колбек на изменение состояния чекбокса, находящегося в хедере
    * Возвращает параметр selectAll (если true - выбраны все строки в таблице, false - выбор снят со всех строк таблицы)
    */
@@ -256,6 +262,7 @@ export const Table: React.FC<TableProps> = ({
   displayRowExpansionColumn = false,
   headerCheckboxChecked = false,
   headerCheckboxIndeterminate = false,
+  headerCheckboxDisabled = false,
   onHeaderSelectionChange,
   onRowSelectionChange,
   onRowExpansionChange,
@@ -398,7 +405,7 @@ export const Table: React.FC<TableProps> = ({
         observer.unobserve();
       };
     }
-  }, [tableRef.current]);
+  }, [tableRef.current, columnList]);
 
   React.useLayoutEffect(() => {
     const body = scrollBodyRef.current;
@@ -502,7 +509,8 @@ export const Table: React.FC<TableProps> = ({
   }
 
   const isSelected = (row: { selected?: boolean }) => row.selected;
-  const allRowsChecked = rowList.every(isSelected);
+  // When invoked on an empty array, every() always returns true. So we need to check rowList.length.
+  const allRowsChecked = rowList.length > 0 && rowList.every(isSelected);
   const someRowsChecked = rowList.some(isSelected);
 
   function handleHeaderCheckboxChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -553,6 +561,7 @@ export const Table: React.FC<TableProps> = ({
       sortable = false,
       sort,
       sortOrder,
+      disableResize = false,
       renderFilter,
       renderFilterIcon,
       onFilterMenuClickOutside,
@@ -611,7 +620,7 @@ export const Table: React.FC<TableProps> = ({
             name={name}
             width={width ? resizerWidth : DEFAULT_COLUMN_WIDTH}
             onChange={handleResizeChange}
-            disabled={disableColumnResize}
+            disabled={disableResize || disableColumnResize}
             resizerState={resizerState}
             dimension={dimension}
           />
@@ -621,7 +630,7 @@ export const Table: React.FC<TableProps> = ({
             name={name}
             width={width ? resizerWidth : DEFAULT_COLUMN_WIDTH}
             onChange={handleResizeChange}
-            disabled={disableColumnResize}
+            disabled={disableResize || disableColumnResize}
             resizerState={resizerState}
             dimension={dimension}
           />
@@ -703,6 +712,7 @@ export const Table: React.FC<TableProps> = ({
           onRowClick={onRowClick}
           onRowDoubleClick={onRowDoubleClick}
           rowWidth={isGroupRow ? headerRef.current?.scrollWidth : undefined}
+          verticalScroll={verticalScroll}
           key={`row_${row.id}`}
         >
           {isGroupRow ? (
@@ -772,6 +782,7 @@ export const Table: React.FC<TableProps> = ({
                     dimension={checkboxDimension}
                     checked={allRowsChecked || someRowsChecked || headerCheckboxChecked}
                     indeterminate={(someRowsChecked && !allRowsChecked) || headerCheckboxIndeterminate}
+                    disabled={tableRows.length === 0 || headerCheckboxDisabled}
                     onChange={handleHeaderCheckboxChange}
                   />
                 </CheckboxCell>
