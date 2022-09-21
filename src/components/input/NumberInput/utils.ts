@@ -9,11 +9,14 @@ export const repeatStringNumTimes = (str: string, n: number) => {
 };
 
 // возвращает входную строку str, из которой удалены все символы кроме цифр, символа decimal (по умолчанию точки) и минуса
-export const clearValue = (str: string, precision: number, decimal = '.') => {
-  const validChars =
+export const clearValue = (str: string, precision: number, decimal = '.', minValue?: number) => {
+  let validChars =
     precision > 0
       ? [decimal, '-', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
       : ['-', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+  if (typeof minValue === 'number' && minValue >= 0) {
+    validChars = validChars.filter((char) => char !== '-');
+  }
   let newStr = str
     .split('')
     .filter((char) => validChars.indexOf(char) > -1)
@@ -66,12 +69,13 @@ export function fitToCurrency(
   decimal: string,
   thousand: string,
   fillEmptyDecimals?: boolean,
+  minValue?: number,
 ): string {
   if (value === '') {
     return value;
   }
 
-  let strDecimal = clearValue(String(value), precision, decimal);
+  let strDecimal = clearValue(String(value), precision, decimal, minValue);
   if (strDecimal === '') {
     return '';
   }

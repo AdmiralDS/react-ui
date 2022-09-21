@@ -302,6 +302,8 @@ export const Table: React.FC<TableProps> = ({
   const tableRef = React.useRef<HTMLDivElement>(null);
   const headerRef = React.useRef<HTMLDivElement>(null);
   const scrollBodyRef = React.useRef<HTMLDivElement>(null);
+  const expandCellRef = React.useRef<HTMLDivElement>(null);
+  const checkboxCellRef = React.useRef<HTMLDivElement>(null);
 
   const groupToRowsMap = rowList.reduce<Group>((acc: Group, row) => {
     if (row.groupRows?.length) {
@@ -386,14 +388,9 @@ export const Table: React.FC<TableProps> = ({
   };
 
   React.useLayoutEffect(() => {
-    if (tableRef.current) {
-      updateColumnsWidths();
-    }
-  }, [tableRef.current, columnList]);
-
-  React.useLayoutEffect(() => {
     const tableContainer = tableRef.current;
     if (tableContainer) {
+      updateColumnsWidths();
       const observer = observeRect(tableContainer, (rect: DOMRect | undefined) => {
         if (tableContainerWidth.current !== rect?.width || 0) {
           tableContainerWidth.current = rect?.width || 0;
@@ -405,7 +402,7 @@ export const Table: React.FC<TableProps> = ({
         observer.unobserve();
       };
     }
-  }, [tableRef.current, columnList]);
+  }, [tableRef.current, columnList, displayRowSelectionColumn, displayRowExpansionColumn]);
 
   React.useLayoutEffect(() => {
     const body = scrollBodyRef.current;
@@ -434,7 +431,9 @@ export const Table: React.FC<TableProps> = ({
       const hasPixelWidth = typeof width === 'string' && width.includes('px');
 
       if (hasPercentWidth && tableRef?.current) {
-        const maxWidth = tableRef?.current?.clientWidth;
+        const checkboxCellWidth = checkboxCellRef?.current?.clientWidth || 0;
+        const expandCellWidth = expandCellRef?.current?.clientWidth || 0;
+        const maxWidth = tableRef.current.clientWidth - checkboxCellWidth - expandCellWidth;
         return Math.round((parseInt(width) * (maxWidth || 1)) / 100);
       }
       if (hasNumberWidth) return width;
@@ -775,9 +774,9 @@ export const Table: React.FC<TableProps> = ({
         <Header dimension={dimension} ref={headerRef} className="tr">
           {(displayRowSelectionColumn || displayRowExpansionColumn || stickyColumns.length > 0) && (
             <StickyWrapper greyHeader={greyHeader}>
-              {displayRowExpansionColumn && <ExpandCell dimension={dimension} />}
+              {displayRowExpansionColumn && <ExpandCell ref={expandCellRef} dimension={dimension} />}
               {displayRowSelectionColumn && (
-                <CheckboxCell dimension={dimension} className="th_checkbox">
+                <CheckboxCell ref={checkboxCellRef} dimension={dimension} className="th_checkbox">
                   <Checkbox
                     dimension={checkboxDimension}
                     checked={allRowsChecked || someRowsChecked || headerCheckboxChecked}
