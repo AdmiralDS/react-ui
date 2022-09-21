@@ -1,6 +1,7 @@
 {
   "name": "@admiral-ds/react-ui",
-  "version": "2.2.2",
+  "version": "2.2.2-pre",
+  "type": "module",
   "description": "React component library for Admiral design system 2.1",
   "keywords": [],
   "author": "",
@@ -13,14 +14,14 @@
     "src",
     "tsconfig.json"
   ],
-  "main": "./dist/react-ui.cjs.js",
-  "module": "./dist/react-ui.es.js",
+  "main": "./dist/react-ui.cjs",
+  "module": "./dist/react-ui.js",
   "exports": {
     "./package.json": "./package.json",
     ".": {
       "types": "./dist/index.d.ts",
-      "require": "./dist/react-ui.cjs.js",
-      "import": "./dist/react-ui.es.js"
+      "require": "./dist/react-ui.cjs",
+      "import": "./dist/react-ui.js"
     }
   },
   "imports": {
@@ -36,7 +37,7 @@
     "storybook": "npm run generate-svg-icon-exports && start-storybook -p 6006",
     "build-storybook": "npm run generate-svg-icon-exports && build-storybook",
     "release": "standard-version",
-    "generate-svg-icon-exports": "node ./scripts/generate-svg-icon-exports.js",
+    "generate-svg-icon-exports": "node ./scripts/generate-svg-icon-exports.cjs",
     "prepublishOnly": "npm run build",
     "deploy-storybook": "storybook-to-ghpages"
   },
@@ -58,7 +59,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.16.0",
-    "@rollup/plugin-commonjs": "^21.0.1",
+    "@rollup/plugin-commonjs": "^22.0.2",
     "@storybook/addon-docs": "^6.4.12",
     "@storybook/addon-essentials": "^6.4.12",
     "@storybook/addon-links": "^6.4.12",
@@ -67,8 +68,8 @@
     "@storybook/react": "^6.4.12",
     "@storybook/storybook-deployer": "^2.8.11",
     "@storybook/theming": "^6.4.12",
-    "@svgr/rollup": "^5.5.0",
-    "@svgr/webpack": "^5.4.0",
+    "@svgr/rollup": "^6.3.1",
+    "@svgr/webpack": "^6.3.1",
     "@testing-library/jest-dom": "^5.15.0",
     "@testing-library/react": "^12.0.0",
     "@testing-library/user-event": "^13.5.0",
@@ -102,7 +103,7 @@
     "ttypescript": "^1.5.12",
     "typescript": "^4.4.4",
     "typescript-transform-paths": "^3.0.0",
-    "vite": "^2.7.12"
+    "vite": "^3.1.3"
   },
   "repository": "AdmiralDS/react-ui",
   "bugs": {
