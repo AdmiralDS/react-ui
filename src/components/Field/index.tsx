@@ -191,7 +191,7 @@ export const Field = React.forwardRef<HTMLDivElement, FieldProps>(
 
             {displayCharacterCounter && inputRef && maxLength !== undefined && (
               <>
-                {/* div необходим чтобы сдвигать счетчик вправо при отсутствии текста */}
+                {/* div необходим для сдвига счетчика вправо при отсутствии текста */}
                 <div></div>
                 <PositionedCharacterCounter maxLength={maxLength} inputRef={inputRef} />
               </>
