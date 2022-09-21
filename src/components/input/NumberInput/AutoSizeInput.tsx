@@ -148,10 +148,26 @@ export interface InputProps extends TextInputProps {
   thousand?: string;
   /** разделитель между целым и десятичным */
   decimal?: string;
+  /** Минимальное значение */
+  minValue?: number;
 }
 
 export const AutoSizeInput = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ placeholder, type, precision = 2, prefix = '', suffix, thousand = ' ', decimal = '.', status, ...props }, ref) => {
+  (
+    {
+      placeholder,
+      type,
+      precision = 2,
+      prefix = '',
+      suffix,
+      thousand = ' ',
+      decimal = '.',
+      status,
+      minValue,
+      ...props
+    },
+    ref,
+  ) => {
     const [showPrefixSuffix, setPrefixSuffix] = React.useState(false);
 
     const sizerRef = React.useRef<HTMLDivElement>(null);
@@ -175,7 +191,7 @@ export const AutoSizeInput = React.forwardRef<HTMLInputElement, InputProps>(
       const { value, selectionStart } = inputData || {};
       const cursor = selectionStart || 0;
       const init_value = value || '';
-      const newValue = fitToCurrency(init_value, precision, decimal, thousand);
+      const newValue = fitToCurrency(init_value, precision, decimal, thousand, undefined, minValue);
 
       updateInputWidth(newValue);
 
