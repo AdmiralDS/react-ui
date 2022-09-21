@@ -1,6 +1,5 @@
 import * as React from 'react';
 import styled, { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
-import observeRect from '#src/components/common/observeRect';
 import { uid } from '#src/components/common/uid';
 import type { AvatarProps } from '#src/components/Avatar';
 import { Avatar } from '#src/components/Avatar';
@@ -76,29 +75,58 @@ export const AvatarGroup: React.FC<AvatarGroupProps> = ({
     xl: 56,
   };
 
+  // React.useLayoutEffect(() => {
+  //   if (wrapperRef.current) {
+  //     const observer = observeRect(wrapperRef.current, (rect) => {
+  //       const wrapperWidth = rect?.width || 0;
+  //       let validContent = 2,
+  //         visibleItems = 0,
+  //         hiddenItems = 0;
+
+  //       while (validContent + WIDTH[dimension] < wrapperWidth) {
+  //         validContent = validContent + WIDTH[dimension];
+  //         visibleItems++;
+  //       }
+  //       visibleItems = visibleItems > items.length ? items.length : visibleItems;
+  //       // оставляем место на меню, вычитая 1
+  //       visibleItems = visibleItems === items.length ? visibleItems : visibleItems - 1;
+  //       hiddenItems = items.length - visibleItems;
+
+  //       setVisibleItems(visibleItems);
+  //       setHiddenItems(hiddenItems);
+  //     });
+  //     observer.observe();
+  //     return () => {
+  //       observer.unobserve();
+  //     };
+  //   }
+  // }, [wrapperRef.current]);
+
   React.useLayoutEffect(() => {
     if (wrapperRef.current) {
-      const observer = observeRect(wrapperRef.current, (rect) => {
-        const wrapperWidth = rect?.width || 0;
-        let validContent = 2,
-          visibleItems = 0,
-          hiddenItems = 0;
+      const ro = new ResizeObserver((entries) => {
+        for (let entry of entries) {
+          const wrapperWidth = entry.contentRect.width;
+          let validContent = 2,
+            visibleItems = 0,
+            hiddenItems = 0;
 
-        while (validContent + WIDTH[dimension] < wrapperWidth) {
-          validContent = validContent + WIDTH[dimension];
-          visibleItems++;
+          while (validContent + WIDTH[dimension] < wrapperWidth) {
+            validContent = validContent + WIDTH[dimension];
+            visibleItems++;
+          }
+          visibleItems = visibleItems > items.length ? items.length : visibleItems;
+          // оставляем место на меню, вычитая 1
+          visibleItems = visibleItems === items.length ? visibleItems : visibleItems - 1;
+          hiddenItems = items.length - visibleItems;
+
+          setVisibleItems(visibleItems);
+          setHiddenItems(hiddenItems);
         }
-        visibleItems = visibleItems > items.length ? items.length : visibleItems;
-        // оставляем место на меню, вычитая 1
-        visibleItems = visibleItems === items.length ? visibleItems : visibleItems - 1;
-        hiddenItems = items.length - visibleItems;
-
-        setVisibleItems(visibleItems);
-        setHiddenItems(hiddenItems);
       });
-      observer.observe();
+      ro.observe(wrapperRef.current);
       return () => {
-        observer.unobserve();
+        if (wrapperRef.current) ro.unobserve(wrapperRef.current);
       };
     }
   }, [wrapperRef.current]);
