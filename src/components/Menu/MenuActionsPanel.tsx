@@ -51,7 +51,7 @@ export function getHighlightedFilteredOptions(
   const model: ItemProps[] = [];
 
   options.forEach((option) => {
-    const { shouldHighlight, parts, chunks } = highlightFunction(option.label, searchValue);
+    const { shouldHighlight, parts, chunks } = highlightFunction(option.label, searchValue, 'wholly');
     const itemValue = shouldHighlight
       ? parts.map((part, i) =>
           chunks.includes(part.toLowerCase()) ? <HighlightText key={i}>{part}</HighlightText> : part,
