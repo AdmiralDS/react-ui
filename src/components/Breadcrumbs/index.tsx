@@ -68,7 +68,7 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items, dimension = 'l'
 
   const renderFirstItem = React.useCallback(() => {
     const item = items[0];
-    const id = item.id || item.text;
+    const id = item?.id || item?.text;
     return items.length > 1 ? (
       <Breadcrumb key={id} data-number={0} dimension={dimension} {...item}>
         <Separator width={iconSize} height={iconSize} aria-hidden />
@@ -78,7 +78,7 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items, dimension = 'l'
 
   const renderLastItem = React.useCallback(() => {
     const item = items[items.length - 1];
-    const id = item.id || item.text;
+    const id = item?.id || item?.text;
     const order = { style: { order: 1 } };
     return items.length > 0 ? (
       <Breadcrumb
