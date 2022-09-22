@@ -18,7 +18,7 @@ export const getTextHighlightMeta = (text = '', highlight = '', highlightFormat:
   const splittedHighlight = highlightFormat === 'word' ? highlight.split(' ') : [highlight];
   const chunks = splittedHighlight.filter(Boolean).map((chunk) => chunk.toLowerCase());
 
-  const specialCharacters = ['[', ']', '\\', '^', '$', '.', '|', '?', '*', '+', '(', ')'];
+  const specialCharacters = ['.', '?', '*', '+', '-', '^', '$', '[', ']', '\\', '(', ')', '{', '}', '|'];
 
   const pattern = chunks
     .map((chunk) => {
