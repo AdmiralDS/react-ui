@@ -26,12 +26,13 @@ const TextWrapper = styled.div`
 
 export interface SuggestPanelProps extends SuggestItem, HTMLAttributes<HTMLDivElement>, RenderOptionProps {
   text?: string;
+  highlightFormat?: HighlightFormat;
 }
 
-export const SuggestPanel = ({ searchText = '', text = '', ...props }: SuggestPanelProps) => {
+export const SuggestPanel = ({ searchText = '', text = '', highlightFormat, ...props }: SuggestPanelProps) => {
   return (
     <MenuItem title={text} {...props}>
-      <TextWrapper>{getHighlightedText(text, searchText)}</TextWrapper>
+      <TextWrapper>{getHighlightedText(text, searchText, highlightFormat)}</TextWrapper>
     </MenuItem>
   );
 };
