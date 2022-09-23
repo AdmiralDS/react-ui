@@ -1,15 +1,22 @@
-import React, { HTMLAttributes, useMemo, useState } from 'react';
+import React, { ChangeEvent, HTMLAttributes, useContext, useEffect, useMemo, useState } from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { Menu } from '#src/components/Menu';
-import { MenuItem, RenderOptionProps } from '#src/components/MenuItem';
-import styled, { ThemeProvider } from 'styled-components';
+import { MenuItem, RenderOptionProps } from '#src/components/Menu/MenuItem';
+import styled, { css, ThemeContext, ThemeProvider } from 'styled-components';
 import { typography } from '#src/components/Typography';
 import { ReactComponent as CardSolid } from '@admiral-ds/icons/build/finance/CardSolid.svg';
 import { withDesign } from 'storybook-addon-designs';
-import { Theme } from '#src/components/themes';
+import { LIGHT_THEME, Theme } from '#src/components/themes';
 import { CheckboxField, FieldSet } from '#src/components/form';
 import { RadioButton } from '#src/components/RadioButton';
 import { Tooltip } from '#src/components/Tooltip';
+import { TextInput } from '#src/components/input';
+import { TextButton } from '#src/components/TextButton';
+import { getHighlightedFilteredOptions, MenuActionsPanel } from '#src/components/Menu/MenuActionsPanel';
+import { Button } from '#src/components/Button';
+import { ReactComponent as PlusOutline } from '@admiral-ds/icons/build/service/PlusOutline.svg';
+import { uid } from '#src/components/common/uid';
+import { keyboardKey } from '#src/components/common/keyboardKey';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -195,7 +202,11 @@ const items = [
     label: 'Option five',
     value: 5,
   },
-  { id: '6', label: 'Option six', value: 7 },
+  {
+    id: '6',
+    label: 'Option six',
+    value: 7,
+  },
   {
     id: '7',
     label: 'Option seven',
@@ -465,12 +476,175 @@ const MenuTooltipTemplate: ComponentStory<typeof Menu> = (args) => {
   );
 };
 
+const ActionPanelFlex = css`
+  display: flex;
+  gap: 8px;
+`;
+
+const MenuActionsTwoButtonsTemplate: ComponentStory<typeof Menu> = (props) => {
+  const model = useMemo(() => {
+    return items.map((item) => ({
+      id: item.id,
+      render: (options: RenderOptionProps) => (
+        <MenuItem dimension={props.dimension || 's'} {...options} key={item.id}>
+          {item.label}
+        </MenuItem>
+      ),
+    }));
+  }, [props.dimension, items]);
+
+  const menuPanelContentDimension = props.dimension === 'l' ? 'm' : props.dimension;
+
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    return theme;
+  }
+
+  return (
+    <ThemeProvider theme={swapBorder}>
+      <div style={{ width: 'fit-content' }}>
+        <Menu
+          {...props}
+          model={model}
+          renderBottomPanel={({ dimension, menuActionsPanelCssMixin = ActionPanelFlex }) => {
+            return (
+              <MenuActionsPanel dimension={dimension} menuActionsPanelCssMixin={menuActionsPanelCssMixin}>
+                <Button
+                  dimension={menuPanelContentDimension}
+                  onClick={() => {
+                    console.log('Button 1 clicked');
+                  }}
+                >
+                  Action 1
+                </Button>
+                <Button
+                  dimension={menuPanelContentDimension}
+                  appearance="secondary"
+                  onClick={() => {
+                    console.log('Button 2 clicked');
+                  }}
+                >
+                  Action 2
+                </Button>
+              </MenuActionsPanel>
+            );
+          }}
+        />
+      </div>
+    </ThemeProvider>
+  );
+};
+
+const MenuActionsAddUserValueTemplate: ComponentStory<typeof Menu> = (props) => {
+  const initialButtonText = 'Добавить';
+  const theme = useContext(ThemeContext) || LIGHT_THEME;
+
+  const [options, setOptions] = useState([...items]);
+  const [inputValue, setInputValue] = useState<string>('');
+  const [buttonText, setButtonText] = useState<string>(initialButtonText);
+  const [buttonDisabled, setButtonDisabled] = useState<boolean>(true);
+  const [active, setActive] = useState<string | undefined>(options[0].id);
+
+  const model = useMemo(() => {
+    return getHighlightedFilteredOptions(
+      options,
+      inputValue,
+      theme.locales[theme.currentLocale].suggestInput.emptyMessage,
+      props.dimension,
+    );
+  }, [props.dimension, options, inputValue]);
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const inputValue = e.target.value;
+    setInputValue(inputValue);
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    const code = keyboardKey.getCode(e);
+
+    // prevent selecting option on Space press
+    if (code === keyboardKey[' ']) {
+      e.stopPropagation();
+    }
+  };
+
+  const handleTextButtonClick = () => {
+    const newId = uid();
+    const newValue = Math.floor(Math.random());
+    const newOption = { id: newId, label: inputValue, value: newValue };
+    const newOptions = [newOption, ...options];
+    setOptions(newOptions);
+    setActive(newId);
+  };
+
+  useEffect(() => {
+    if (inputValue === '') {
+      setButtonText(initialButtonText);
+      setButtonDisabled(true);
+    } else {
+      setButtonText(`${initialButtonText} «${inputValue}»`);
+      setButtonDisabled(false);
+    }
+  }, [inputValue]);
+
+  const menuPanelContentDimension = props.dimension === undefined || props.dimension === 'l' ? 'm' : props.dimension;
+
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    return theme;
+  }
+
+  return (
+    <ThemeProvider theme={swapBorder}>
+      <div style={{ width: 'fit-content' }}>
+        <Menu
+          {...props}
+          model={model}
+          active={active}
+          onActivateItem={setActive}
+          onSelectItem={(id) => console.log(`Selected id: ${id}`)}
+          renderTopPanel={({ dimension = menuPanelContentDimension }) => {
+            return (
+              <MenuActionsPanel dimension={dimension}>
+                <TextInput
+                  dimension={menuPanelContentDimension}
+                  value={inputValue}
+                  onChange={handleChange}
+                  onKeyDown={(...p) => {
+                    props.onKeyDown?.(...p);
+                    handleKeyDown(...p);
+                  }}
+                />
+              </MenuActionsPanel>
+            );
+          }}
+          renderBottomPanel={({ dimension = menuPanelContentDimension }) => {
+            return (
+              <MenuActionsPanel dimension={dimension}>
+                <TextButton
+                  text={buttonText}
+                  disabled={buttonDisabled}
+                  icon={<PlusOutline />}
+                  dimension={menuPanelContentDimension}
+                  onClick={handleTextButtonClick}
+                />
+              </MenuActionsPanel>
+            );
+          }}
+        />
+      </div>
+    </ThemeProvider>
+  );
+};
+
 export const Simple = SimpleTemplate.bind({});
 export const Category = TemplateWithCards.bind({});
 export const CustomItems = CustomItemTemplate.bind({});
 export const MenuCheckbox = MenuCheckboxTemplate.bind({});
 export const MenuRadiobutton = MenuRadiobuttonTemplate.bind({});
 export const MenuTooltip = MenuTooltipTemplate.bind({});
+export const MenuActionsTwoButtons = MenuActionsTwoButtonsTemplate.bind({});
+export const MenuActionsAddUserValue = MenuActionsAddUserValueTemplate.bind({});
 
 Simple.storyName = 'Базовый пример';
 Category.storyName = 'Пример с группами';
@@ -478,3 +652,5 @@ CustomItems.storyName = 'Пример с кастомными пунктами �
 MenuCheckbox.storyName = 'Пример с Checkbox';
 MenuRadiobutton.storyName = 'Пример с Radiobutton';
 MenuTooltip.storyName = 'Пример с Tooltip';
+MenuActionsTwoButtons.storyName = 'Пример с Actions с двумя кнопками';
+MenuActionsAddUserValue.storyName = 'Пример с Actions и Search';

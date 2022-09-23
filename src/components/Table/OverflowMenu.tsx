@@ -30,6 +30,7 @@ export const OverflowMenu: React.FC<OverflowMenuProps> = ({ tableWidth, row, dim
   return (
     <OverflowMenuWrapper
       ref={oveflowMenuRef}
+      data-overflowmenu
       data-opened={false}
       $offset={tableWidth - (verticalScroll ? scrollbar : 0)}
       dimension={dimension}

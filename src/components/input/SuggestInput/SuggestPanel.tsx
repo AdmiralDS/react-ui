@@ -2,7 +2,7 @@ import * as React from 'react';
 import { HTMLAttributes } from 'react';
 import styled from 'styled-components';
 import type { SuggestItem } from './';
-import { MenuItem, RenderOptionProps } from '#src/components/MenuItem';
+import { MenuItem, RenderOptionProps } from '#src/components/Menu/MenuItem';
 import { getTextHighlightMeta } from '#src/components/input/Select/utils';
 import { HighlightFormat } from '#src/components/input/Select/types';
 

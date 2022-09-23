@@ -6,7 +6,7 @@ import { MenuButton } from '../MenuButton';
 import styled, { ThemeProvider } from 'styled-components';
 import { T } from '#src/components/T';
 import { Theme } from '#src/components/themes';
-import { MenuItem, RenderOptionProps } from '#src/components/MenuItem';
+import { MenuItem, RenderOptionProps } from '#src/components/Menu/MenuItem';
 import { ReactComponent as StarSolid } from '@admiral-ds/icons/build/system/StarSolid.svg';
 
 const DarkDiv = styled.div`
