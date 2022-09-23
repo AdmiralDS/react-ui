@@ -637,6 +637,67 @@ const MenuActionsAddUserValueTemplate: ComponentStory<typeof Menu> = (props) => 
   );
 };
 
+const itemsMultiLevel = [
+  {
+    id: '1-1',
+    label: 'Option 1-1',
+    value: 1,
+  },
+  {
+    id: '1-2',
+    label: 'Option 1-2',
+    value: 2,
+  },
+  {
+    id: '1-3',
+    label: 'Option 1-3',
+    value: 3,
+    submenu: [
+      {
+        id: '1-3-1',
+        label: 'Sub Option 1-3-1',
+        value: 1,
+      },
+      {
+        id: '1-3-2',
+        label: 'Sub Option 1-3-2',
+        value: 2,
+      },
+    ],
+  },
+  {
+    id: '1-4',
+    label: 'Option 1-4',
+    value: 4,
+  },
+];
+
+const MenuMultiLevelTemplate: ComponentStory<typeof Menu> = (args) => {
+  const model = useMemo(() => {
+    return itemsMultiLevel.map((item) => ({
+      id: item.id,
+      render: (options: RenderOptionProps) => (
+        <MenuItem dimension={args.dimension || 's'} hasSubMenu={!!item.submenu} {...options} key={item.id}>
+          {item.label}
+        </MenuItem>
+      ),
+    }));
+  }, [args.dimension]);
+
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
+    return theme;
+  }
+
+  return (
+    <ThemeProvider theme={swapBorder}>
+      <div style={{ width: 'fit-content' }}>
+        <Menu {...args} model={model} />
+      </div>
+    </ThemeProvider>
+  );
+};
+
 export const Simple = SimpleTemplate.bind({});
 export const Category = TemplateWithCards.bind({});
 export const CustomItems = CustomItemTemplate.bind({});
@@ -645,6 +706,7 @@ export const MenuRadiobutton = MenuRadiobuttonTemplate.bind({});
 export const MenuTooltip = MenuTooltipTemplate.bind({});
 export const MenuActionsTwoButtons = MenuActionsTwoButtonsTemplate.bind({});
 export const MenuActionsAddUserValue = MenuActionsAddUserValueTemplate.bind({});
+export const MenuMultiLevel = MenuMultiLevelTemplate.bind({});
 
 Simple.storyName = 'Базовый пример';
 Category.storyName = 'Пример с группами';
@@ -654,3 +716,4 @@ MenuRadiobutton.storyName = 'Пример с Radiobutton';
 MenuTooltip.storyName = 'Пример с Tooltip';
 MenuActionsTwoButtons.storyName = 'Пример с Actions с двумя кнопками';
 MenuActionsAddUserValue.storyName = 'Пример с Actions и Search';
+MenuMultiLevel.storyName = 'Пример с MultiLevel Menu';
