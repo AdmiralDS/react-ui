@@ -362,10 +362,20 @@ export const Table: React.FC<TableProps> = ({
     }
   };
 
+  const moveOverflowMenu = (scrollLeft: number) => {
+    if (scrollBodyRef.current) {
+      const menus = scrollBodyRef.current.querySelectorAll<HTMLElement>('[data-overflowmenu]');
+      menus.forEach((menu) => {
+        menu.style.marginLeft = `${scrollLeft}px`;
+      });
+    }
+  };
+
   const handleScroll = (e: any) => {
     if (e.target === scrollBodyRef.current) {
       requestAnimationFrame(function () {
         scrollHeader(e.target.scrollLeft);
+        moveOverflowMenu(e.target.scrollLeft);
       });
     }
     if (stickyColumns.length > 0 || displayRowSelectionColumn || displayRowExpansionColumn) {
@@ -769,7 +779,7 @@ export const Table: React.FC<TableProps> = ({
   };
 
   return (
-    <TableContainer ref={tableRef} data-shadow={false} {...props} className={`table ${props.className}`}>
+    <TableContainer ref={tableRef} data-shadow={false} {...props} className={`table ${props.className || ''}`}>
       <HeaderWrapper greyHeader={greyHeader} data-verticalscroll={verticalScroll}>
         <Header dimension={dimension} ref={headerRef} className="tr">
           {(displayRowSelectionColumn || displayRowExpansionColumn || stickyColumns.length > 0) && (
