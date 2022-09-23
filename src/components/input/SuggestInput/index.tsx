@@ -1,19 +1,19 @@
 import * as React from 'react';
-import { changeInputData } from '#src/components/common/dom/changeInputData';
-import { keyboardKey } from '#src/components/common/keyboardKey';
-import { refSetter } from '#src/components/common/utils/refSetter';
-import { ReactComponent as SearchOutlineSVG } from '@admiral-ds/icons/build/system/SearchOutline.svg';
 import styled, { ThemeContext } from 'styled-components';
-import { TextInput, TextInputProps } from '../TextInput';
-import { MessagePanel } from './MessagePanel';
-import { SuggestPanel } from './SuggestPanel';
-import { InputIconButton } from '#src/components/InputIconButton';
-import type { InputStatus } from '#src/components/input/types';
+import { ReactComponent as SearchOutlineSVG } from '@admiral-ds/icons/build/system/SearchOutline.svg';
 import { LIGHT_THEME } from '#src/components/themes';
-import { DropdownContainer } from '#src/components/DropdownContainer';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
-import { RenderOptionProps } from '#src/components/MenuItem';
+import { keyboardKey } from '#src/components/common/keyboardKey';
+import { changeInputData } from '#src/components/common/dom/changeInputData';
+import { refSetter } from '#src/components/common/utils/refSetter';
+import { InputIconButton } from '#src/components/InputIconButton';
+import { DropdownContainer } from '#src/components/DropdownContainer';
+import { RenderOptionProps } from '#src/components/Menu/MenuItem';
 import { Menu } from '#src/components/Menu';
+import type { InputStatus } from '#src/components/input/types';
+import { TextInput, TextInputProps } from '#src/components/input/TextInput';
+import { MessagePanel } from '#src/components/input/SuggestInput/MessagePanel';
+import { SuggestPanel } from '#src/components/input/SuggestInput/SuggestPanel';
 
 const StyledDropdownContainer = styled(DropdownContainer)<{ dropMaxHeight: string | number }>`
   overflow-x: hidden;
