@@ -2,6 +2,7 @@ import type { HTMLAttributes } from 'react';
 import * as React from 'react';
 import styled from 'styled-components';
 import { backgroundColor, colorTextMixin, ItemDimension, paddings, styleTextMixin } from './menuItemMixins';
+import { ReactComponent as ChevronRightOutline } from '@admiral-ds/icons/build/system/ChevronRightOutline.svg';
 
 export interface RenderOptionProps {
   key?: string | number;
@@ -26,10 +27,25 @@ export interface ItemProps {
 export interface MenuItemProps extends HTMLAttributes<HTMLDivElement>, RenderOptionProps {
   /** Размер MenuItems */
   dimension?: ItemDimension;
+  /** Вызывает следующий уровень меню */
+  hasSubMenu?: boolean;
 }
 
 export const MenuItem = React.forwardRef<HTMLDivElement, MenuItemProps>(
-  ({ children, onHover, onClickItem, disabled = false, hovered, dimension = 'l', selected = false, ...props }, ref) => {
+  (
+    {
+      children,
+      onHover,
+      onClickItem,
+      disabled = false,
+      hovered,
+      dimension = 'l',
+      hasSubMenu = false,
+      selected = false,
+      ...props
+    },
+    ref,
+  ) => {
     const handleMouseMove = () => {
       onHover?.();
     };
@@ -51,6 +67,7 @@ export const MenuItem = React.forwardRef<HTMLDivElement, MenuItemProps>(
         {...props}
       >
         {children}
+        {hasSubMenu && <ChevronIcon dimension={dimension} />}
       </Item>
     );
   },
@@ -86,5 +103,15 @@ const Item = styled.div<{
     && *[fill^='#'] {
       fill: ${(p) => p.theme.color['Neutral/Neutral 30']};
     }
+  }
+`;
+
+const ChevronIcon = styled(ChevronRightOutline)<{ dimension: ItemDimension }>`
+  width: ${(p) => (p.dimension === 's' ? 20 : 24)}px;
+  height: ${(p) => (p.dimension === 's' ? 20 : 24)}px;
+  margin-left: 8px;
+
+  & *[fill^='#'] {
+    fill: ${(p) => p.theme.color['Neutral/Neutral 50']};
   }
 `;
