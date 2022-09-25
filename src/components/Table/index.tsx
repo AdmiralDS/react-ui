@@ -67,9 +67,9 @@ export type Column = {
   /** Уникальное название столбца */
   name: string;
   /** Заголовок столбца */
-  title: React.ReactNode | React.ReactText;
+  title: React.ReactNode;
   /** Дополнительный текст заголовка столбца */
-  extraText?: string;
+  extraText?: React.ReactNode;
   /** Ширина столбца. По умолчанию 100px */
   width?: number | string;
   /** Выравнивание контента ячеек столбца по левому или правому краю. По умолчанию left */
