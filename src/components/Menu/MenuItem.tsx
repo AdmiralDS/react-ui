@@ -3,6 +3,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { backgroundColor, colorTextMixin, ItemDimension, paddings, styleTextMixin } from './menuItemMixins';
 import { ReactComponent as ChevronRightOutline } from '@admiral-ds/icons/build/system/ChevronRightOutline.svg';
+import { useRef } from 'react';
 
 export interface RenderOptionProps {
   key?: string | number;
@@ -22,6 +23,7 @@ export interface ItemProps {
   id: string;
   render: (options: RenderOptionProps) => React.ReactNode;
   disabled?: boolean;
+  subMenu?: Array<ItemProps>;
 }
 
 export interface MenuItemProps extends HTMLAttributes<HTMLDivElement>, RenderOptionProps {
@@ -29,6 +31,7 @@ export interface MenuItemProps extends HTMLAttributes<HTMLDivElement>, RenderOpt
   dimension?: ItemDimension;
   /** Вызывает следующий уровень меню */
   hasSubMenu?: boolean;
+  subMenu?: Array<ItemProps>;
 }
 
 export const MenuItem = React.forwardRef<HTMLDivElement, MenuItemProps>(
@@ -41,11 +44,13 @@ export const MenuItem = React.forwardRef<HTMLDivElement, MenuItemProps>(
       hovered,
       dimension = 'l',
       hasSubMenu = false,
+      subMenu,
       selected = false,
       ...props
     },
     ref,
   ) => {
+    const itemRef = useRef(null);
     const handleMouseMove = () => {
       onHover?.();
     };
@@ -55,20 +60,22 @@ export const MenuItem = React.forwardRef<HTMLDivElement, MenuItemProps>(
     };
 
     return (
-      <Item
-        ref={ref}
-        dimension={dimension}
-        selected={selected}
-        hovered={hovered}
-        data-hovered={hovered}
-        data-disabled={disabled}
-        onMouseMove={handleMouseMove}
-        onClick={handleClick}
-        {...props}
-      >
-        {children}
-        {hasSubMenu && <ChevronIcon dimension={dimension} />}
-      </Item>
+      <React.Fragment key={props.id}>
+        <Item
+          ref={itemRef}
+          dimension={dimension}
+          selected={selected}
+          hovered={hovered}
+          data-hovered={hovered}
+          data-disabled={disabled}
+          onMouseMove={handleMouseMove}
+          onClick={handleClick}
+          {...props}
+        >
+          {children}
+          {hasSubMenu && <ChevronIcon dimension={dimension} />}
+        </Item>
+      </React.Fragment>
     );
   },
 );
