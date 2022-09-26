@@ -75,38 +75,11 @@ export const AvatarGroup: React.FC<AvatarGroupProps> = ({
     xl: 56,
   };
 
-  // React.useLayoutEffect(() => {
-  //   if (wrapperRef.current) {
-  //     const observer = observeRect(wrapperRef.current, (rect) => {
-  //       const wrapperWidth = rect?.width || 0;
-  //       let validContent = 2,
-  //         visibleItems = 0,
-  //         hiddenItems = 0;
-
-  //       while (validContent + WIDTH[dimension] < wrapperWidth) {
-  //         validContent = validContent + WIDTH[dimension];
-  //         visibleItems++;
-  //       }
-  //       visibleItems = visibleItems > items.length ? items.length : visibleItems;
-  //       // оставляем место на меню, вычитая 1
-  //       visibleItems = visibleItems === items.length ? visibleItems : visibleItems - 1;
-  //       hiddenItems = items.length - visibleItems;
-
-  //       setVisibleItems(visibleItems);
-  //       setHiddenItems(hiddenItems);
-  //     });
-  //     observer.observe();
-  //     return () => {
-  //       observer.unobserve();
-  //     };
-  //   }
-  // }, [wrapperRef.current]);
-
   React.useLayoutEffect(() => {
     if (wrapperRef.current) {
-      const ro = new ResizeObserver((entries) => {
-        for (let entry of entries) {
-          const wrapperWidth = entry.contentRect.width;
+      const resizeObserver = new ResizeObserver((entries) => {
+        entries.forEach((entry) => {
+          const wrapperWidth = entry.contentRect.width || 0;
           let validContent = 2,
             visibleItems = 0,
             hiddenItems = 0;
@@ -122,11 +95,11 @@ export const AvatarGroup: React.FC<AvatarGroupProps> = ({
 
           setVisibleItems(visibleItems);
           setHiddenItems(hiddenItems);
-        }
+        });
       });
-      ro.observe(wrapperRef.current);
+      resizeObserver.observe(wrapperRef.current);
       return () => {
-        if (wrapperRef.current) ro.unobserve(wrapperRef.current);
+        resizeObserver.disconnect();
       };
     }
   }, [wrapperRef.current]);
