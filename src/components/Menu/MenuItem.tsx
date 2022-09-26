@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { backgroundColor, colorTextMixin, ItemDimension, paddings, styleTextMixin } from './menuItemMixins';
 import { ReactComponent as ChevronRightOutline } from '@admiral-ds/icons/build/system/ChevronRightOutline.svg';
 import { useRef } from 'react';
+import { refSetter } from '#src/components/common/utils/refSetter';
 
 export interface RenderOptionProps {
   key?: string | number;
@@ -62,7 +63,7 @@ export const MenuItem = React.forwardRef<HTMLDivElement, MenuItemProps>(
     return (
       <React.Fragment key={props.id}>
         <Item
-          ref={itemRef}
+          ref={refSetter(ref, itemRef)}
           dimension={dimension}
           selected={selected}
           hovered={hovered}
