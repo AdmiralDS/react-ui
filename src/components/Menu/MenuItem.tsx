@@ -3,7 +3,9 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { backgroundColor, colorTextMixin, ItemDimension, paddings, styleTextMixin } from './menuItemMixins';
 import { ReactComponent as ChevronRightOutline } from '@admiral-ds/icons/build/system/ChevronRightOutline.svg';
-import { useRef } from 'react';
+import { DropdownContainer } from '#src/components/DropdownContainer';
+import { Menu } from '#src/components/Menu/index';
+import { useRef, useState } from 'react';
 import { refSetter } from '#src/components/common/utils/refSetter';
 
 export interface RenderOptionProps {
@@ -52,8 +54,17 @@ export const MenuItem = React.forwardRef<HTMLDivElement, MenuItemProps>(
     ref,
   ) => {
     const itemRef = useRef(null);
+
+    const [menuOpened, setMenuOpened] = useState(false);
+
     const handleMouseMove = () => {
       onHover?.();
+      if (hasSubMenu) {
+        setMenuOpened(true);
+      }
+    };
+    const handleMouseLeave = () => {
+      setMenuOpened(false);
     };
 
     const handleClick = () => {
@@ -70,12 +81,18 @@ export const MenuItem = React.forwardRef<HTMLDivElement, MenuItemProps>(
           data-hovered={hovered}
           data-disabled={disabled}
           onMouseMove={handleMouseMove}
+          onMouseLeave={handleMouseLeave}
           onClick={handleClick}
           {...props}
         >
           {children}
           {hasSubMenu && <ChevronIcon dimension={dimension} />}
         </Item>
+        {menuOpened && subMenu && (
+          <DropdownContainer targetRef={itemRef} alignSelf="baseline">
+            <Menu model={subMenu} />
+          </DropdownContainer>
+        )}
       </React.Fragment>
     );
   },
