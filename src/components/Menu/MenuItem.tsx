@@ -26,7 +26,6 @@ export interface ItemProps {
   id: string;
   render: (options: RenderOptionProps) => React.ReactNode;
   disabled?: boolean;
-  subMenu?: Array<ItemProps>;
 }
 
 export interface MenuItemProps extends HTMLAttributes<HTMLDivElement>, RenderOptionProps {
