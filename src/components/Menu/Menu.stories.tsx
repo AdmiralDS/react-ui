@@ -674,8 +674,6 @@ const itemsMultiLevel = [
 ];
 
 const makeItem = (srcItem: any, dimension: ItemDimension = 'l'): ItemProps => {
-  console.log(`make item ${srcItem.id}`);
-  console.log(srcItem);
   const subMenuItems: ItemProps[] | undefined = srcItem.submenu
     ? srcItem.submenu.map((item: any) => makeItem(item, dimension))
     : undefined;
@@ -698,7 +696,6 @@ const makeItem = (srcItem: any, dimension: ItemDimension = 'l'): ItemProps => {
 
 const MenuMultiLevelTemplate: ComponentStory<typeof Menu> = (args) => {
   const model = useMemo(() => {
-    console.log('create model');
     return itemsMultiLevel.map((item) => makeItem(item, args.dimension));
   }, [args.dimension]);
 
