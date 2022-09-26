@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { keyboardKey } from '#src/components/common/keyboardKey';
 import { Badge } from '#src/components/Badge';
-import { ItemProps, MenuItem, RenderOptionProps } from '#src/components/MenuItem';
+import { ItemProps, MenuItem, RenderOptionProps } from '#src/components/Menu/MenuItem';
 import observeRect from '#src/components/common/observeRect';
 
 import {

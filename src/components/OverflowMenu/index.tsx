@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import type { Dimension } from '#src/components/OverflowMenu/Button';
 import { Button, OverflowMenuIcon } from '#src/components/OverflowMenu/Button';
-import type { ItemProps } from '#src/components/MenuItem';
+import type { ItemProps } from '#src/components/Menu/MenuItem';
 import { DropMenu, RenderContentProps } from '#src/components/DropMenu';
 import { passDropdownDataAttributes } from '#src/components/common/utils/splitDataAttributes';
 import { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
