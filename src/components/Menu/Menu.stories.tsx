@@ -681,7 +681,7 @@ const makeItem = (srcItem: any, dimension: ItemDimension = 'l'): ItemProps => {
     id: srcItem.id,
     render: (options: RenderOptionProps) => (
       <MenuItem
-        dimension={dimension || 's'}
+        dimension={dimension}
         hasSubMenu={!!srcItem.submenu}
         subMenu={subMenuItems}
         {...options}
