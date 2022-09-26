@@ -1,7 +1,7 @@
 import React, { ChangeEvent, HTMLAttributes, useContext, useEffect, useMemo, useState } from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { Menu } from '#src/components/Menu';
-import { MenuItem, RenderOptionProps } from '#src/components/Menu/MenuItem';
+import { ItemProps, MenuItem, RenderOptionProps } from '#src/components/Menu/MenuItem';
 import styled, { css, ThemeContext, ThemeProvider } from 'styled-components';
 import { typography } from '#src/components/Typography';
 import { ReactComponent as CardSolid } from '@admiral-ds/icons/build/finance/CardSolid.svg';
@@ -17,6 +17,7 @@ import { Button } from '#src/components/Button';
 import { ReactComponent as PlusOutline } from '@admiral-ds/icons/build/service/PlusOutline.svg';
 import { uid } from '#src/components/common/uid';
 import { keyboardKey } from '#src/components/common/keyboardKey';
+import { ItemDimension } from '#src/components/Menu/menuItemMixins';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -672,16 +673,33 @@ const itemsMultiLevel = [
   },
 ];
 
+const makeItem = (srcItem: any, dimension: ItemDimension = 'l'): ItemProps => {
+  console.log(`make item ${srcItem.id}`);
+  console.log(srcItem);
+  const subMenuItems: ItemProps[] | undefined = srcItem.submenu
+    ? srcItem.submenu.map((item: any) => makeItem(item, dimension))
+    : undefined;
+  return {
+    id: srcItem.id,
+    subMenu: subMenuItems,
+    render: (options: RenderOptionProps) => (
+      <MenuItem
+        dimension={dimension || 's'}
+        hasSubMenu={!!srcItem.submenu}
+        subMenu={subMenuItems}
+        {...options}
+        key={srcItem.id}
+      >
+        {srcItem.label}
+      </MenuItem>
+    ),
+  };
+};
+
 const MenuMultiLevelTemplate: ComponentStory<typeof Menu> = (args) => {
   const model = useMemo(() => {
-    return itemsMultiLevel.map((item) => ({
-      id: item.id,
-      render: (options: RenderOptionProps) => (
-        <MenuItem dimension={args.dimension || 's'} hasSubMenu={!!item.submenu} {...options} key={item.id}>
-          {item.label}
-        </MenuItem>
-      ),
-    }));
+    console.log('create model');
+    return itemsMultiLevel.map((item) => makeItem(item, args.dimension));
   }, [args.dimension]);
 
   function swapBorder(theme: Theme): Theme {
