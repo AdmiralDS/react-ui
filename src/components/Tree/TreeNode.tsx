@@ -111,6 +111,7 @@ const RowWrapper = styled.div<{
   level?: number;
   selected?: boolean;
   hovered?: boolean;
+  disabled?: boolean;
 }>`
   color: ${(p) => p.theme.color['Neutral/Neutral 90']};
   ${(p) => (p.dimension === 'm' ? typography['Body/Body 1 Short'] : typography['Body/Body 2 Short'])};
@@ -119,7 +120,7 @@ const RowWrapper = styled.div<{
   box-sizing: border-box;
   min-height: ${({ dimension }) => (dimension === 'm' ? '40px' : '32px')};
   ${backgroundColor};
-  cursor: pointer;
+  cursor: ${(p) => (p.disabled ? 'default' : 'pointer')};
   padding: ${(p) =>
     p.dimension === 'm' ? `8px 16px 8px ${16 + (p.level || 0) * 40}px` : `6px 16px 6px ${16 + (p.level || 0) * 36}px`};
 `;
@@ -201,6 +202,7 @@ export const TreeNode = ({
       onClick={handleClick}
       selected={selected}
       hovered={hovered}
+      disabled={disabled}
     >
       <ChevronWrapper
         ref={chevronRef}
