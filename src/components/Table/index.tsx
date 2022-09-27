@@ -67,9 +67,9 @@ export type Column = {
   /** Уникальное название столбца */
   name: string;
   /** Заголовок столбца */
-  title: string;
+  title: React.ReactNode;
   /** Дополнительный текст заголовка столбца */
-  extraText?: string;
+  extraText?: React.ReactNode;
   /** Ширина столбца. По умолчанию 100px */
   width?: number | string;
   /** Выравнивание контента ячеек столбца по левому или правому краю. По умолчанию left */
@@ -298,7 +298,6 @@ export const Table: React.FC<TableProps> = ({
 
   const stickyColumns = [...cols].filter((col) => col.sticky);
 
-  const tableContainerWidth = React.useRef(0);
   const tableRef = React.useRef<HTMLDivElement>(null);
   const headerRef = React.useRef<HTMLDivElement>(null);
   const scrollBodyRef = React.useRef<HTMLDivElement>(null);
@@ -398,18 +397,16 @@ export const Table: React.FC<TableProps> = ({
   };
 
   React.useLayoutEffect(() => {
-    const tableContainer = tableRef.current;
-    if (tableContainer) {
+    if (tableRef.current) {
       updateColumnsWidths();
-      const observer = observeRect(tableContainer, (rect: DOMRect | undefined) => {
-        if (tableContainerWidth.current !== rect?.width || 0) {
-          tableContainerWidth.current = rect?.width || 0;
+      const resizeObserver = new ResizeObserver((entries) => {
+        entries.forEach(() => {
           updateColumnsWidths();
-        }
+        });
       });
-      observer.observe();
+      resizeObserver.observe(tableRef.current);
       return () => {
-        observer.unobserve();
+        resizeObserver.disconnect();
       };
     }
   }, [tableRef.current, columnList, displayRowSelectionColumn, displayRowExpansionColumn]);
@@ -418,7 +415,6 @@ export const Table: React.FC<TableProps> = ({
     const body = scrollBodyRef.current;
     if (body) {
       const observer = observeRect(body, (rect: any) => {
-        // есть вертикальный скролл
         if (body.scrollHeight > body.offsetHeight) {
           setVerticalScroll(true);
         } else {

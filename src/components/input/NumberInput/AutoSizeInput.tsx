@@ -5,7 +5,6 @@ import type { TextInputProps } from '#src/components/input/TextInput';
 import { typography } from '#src/components/Typography';
 import styled, { css } from 'styled-components';
 import { refSetter } from '#src/components/common/utils/refSetter';
-import observeRect from '#src/components/common/observeRect';
 
 import { fitToCurrency } from './utils';
 
@@ -171,7 +170,6 @@ export const AutoSizeInput = React.forwardRef<HTMLInputElement, InputProps>(
     const [showPrefixSuffix, setPrefixSuffix] = React.useState(false);
 
     const sizerRef = React.useRef<HTMLDivElement>(null);
-    const sizerWidth = React.useRef(0);
     const inputRef = React.useRef<HTMLInputElement>(null);
 
     const updateInputWidth = (newValue: any) => {
@@ -259,18 +257,16 @@ export const AutoSizeInput = React.forwardRef<HTMLInputElement, InputProps>(
     // recalculation on resize. For example, it happens after fonts loading
     React.useLayoutEffect(() => {
       if (sizerRef.current) {
-        const observer = observeRect(sizerRef.current, (rect) => {
-          const width = rect?.width || 0;
-          if (sizerWidth.current !== width) {
-            sizerWidth.current = width;
+        const resizeObserver = new ResizeObserver((entries) => {
+          entries.forEach(() => {
             if (inputRef.current) {
               updateInputWidth(inputRef.current.value);
             }
-          }
+          });
         });
-        observer.observe();
+        resizeObserver.observe(sizerRef.current);
         return () => {
-          observer.unobserve();
+          resizeObserver.disconnect();
         };
       }
     }, [sizerRef.current, placeholder]);
