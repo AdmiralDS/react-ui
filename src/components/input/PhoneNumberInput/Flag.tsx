@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { HTMLAttributes } from 'react';
-import { ItemDimension } from '#src/components/MenuItem/mixins';
+import { ItemDimension } from '#src/components/Menu/menuItemMixins';
 
 export interface FlagProps extends HTMLAttributes<HTMLDivElement> {
   Component: React.ElementType;

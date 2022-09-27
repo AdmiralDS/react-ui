@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { keyboardKey } from '#src/components/common/keyboardKey';
 import { Badge } from '#src/components/Badge';
-import { ItemProps, MenuItem, RenderOptionProps } from '#src/components/MenuItem';
-import observeRect from '#src/components/common/observeRect';
+import { ItemProps, MenuItem, RenderOptionProps } from '#src/components/Menu/MenuItem';
 
 import {
   BadgeWrapper,
@@ -113,7 +112,6 @@ export const TabMenu: React.FC<TabMenuProps> = ({
 
   const tablistRef = React.useRef<HTMLDivElement | null>(null);
   const underlineRef = React.useRef<HTMLDivElement | null>(null);
-  const firstTabRef = React.useRef(0);
 
   // defines if activeTab is visible or is in OverflowMenu in !mobile mode
   const activeTabIsVisible: boolean = React.useMemo(() => {
@@ -229,16 +227,14 @@ export const TabMenu: React.FC<TabMenuProps> = ({
   // recalculation on resize. For example, it happens after fonts loading
   React.useLayoutEffect(() => {
     if (tablistRef.current?.firstElementChild) {
-      const observer = observeRect(tablistRef.current.firstElementChild, (rect) => {
-        const width = rect?.width || 0;
-        if (firstTabRef.current !== width) {
-          firstTabRef.current = width;
+      const resizeObserver = new ResizeObserver((entries) => {
+        entries.forEach(() => {
           setUnderline();
-        }
+        });
       });
-      observer.observe();
+      resizeObserver.observe(tablistRef.current?.firstElementChild);
       return () => {
-        observer.unobserve();
+        resizeObserver.disconnect();
       };
     }
   }, [tablistRef.current]);
