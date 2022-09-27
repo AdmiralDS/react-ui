@@ -64,7 +64,7 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items, dimension = 'l'
       });
     }
     return () => observer.disconnect();
-  }, [overflowRef, wrapperRef, mobile, setVisibilityMap]);
+  }, [overflowRef, wrapperRef, mobile, setVisibilityMap, items]);
 
   const renderFirstItem = React.useCallback(() => {
     const item = items[0];
