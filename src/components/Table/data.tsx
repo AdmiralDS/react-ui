@@ -9,6 +9,7 @@ import { RowAction, RowActionProps } from '#src/components/Table';
 import type { Column } from '../Table';
 import { Tooltip } from '#src/components/Tooltip';
 import { TooltipHoc } from '#src/components/TooltipHOC';
+import { Badge } from '../Badge';
 
 const AmountCell = styled.div`
   text-overflow: ellipsis;
@@ -943,5 +944,36 @@ export const virtualColumnList: Column[] = [
     name: 'transfer_date',
     title: 'Дата сделки',
     width: '40%',
+  },
+];
+
+export const columnListWithCustomTitle: Column[] = [
+  {
+    name: 'transfer_type',
+    title: (
+      <>
+        Тип сделки <Badge>5</Badge>
+      </>
+    ),
+    width: '20%',
+  },
+  {
+    name: 'transfer_date',
+    title: <b>Дата сделки</b>,
+    width: '250px',
+  },
+  {
+    name: 'transfer_amount',
+    title: <span style={{ color: 'red', fontWeight: 'bold' }}>Сумма</span>,
+    width: 200,
+  },
+  {
+    name: 'currency',
+    title: <i>Валюта</i>,
+    extraText: <b>доллары</b>,
+  },
+  {
+    name: 'rate',
+    title: 'Ставка',
   },
 ];
