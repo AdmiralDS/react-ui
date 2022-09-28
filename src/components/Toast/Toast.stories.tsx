@@ -125,6 +125,17 @@ const Temp2: ComponentStory<typeof Toast> = (args: ToastProps) => {
   );
 };
 
+const Temp3: ComponentStory<typeof Toast> = (args: ToastProps) => {
+  return (
+    <>
+      <ToastProvider autoDeleteTime={args.autoDeleteTime}>
+        <NotificationEmitter />
+        <Toast style={{ top: 160, left: 64, width: 'initial' }} />
+      </ToastProvider>
+    </>
+  );
+};
+
 const NotificationEmitter = () => {
   const { addToast } = useToast();
   const customItem = random(0, 3);
@@ -136,3 +147,6 @@ ToastNotification.storyName = 'Нотификация настройка мес�
 
 export const ToastNotificationBase = Temp2.bind({});
 ToastNotificationBase.storyName = 'Всплывающая нотификация. Базовый пример.';
+
+export const ToastLineNotification = Temp3.bind({});
+ToastLineNotification.storyName = 'Всплывающая нотификация. Line Notification.';
