@@ -130,16 +130,43 @@ const Temp3: ComponentStory<typeof Toast> = (args: ToastProps) => {
     <>
       <ToastProvider autoDeleteTime={args.autoDeleteTime}>
         <NotificationEmitter />
-        <Toast style={{ top: 160, left: 64, width: 'initial' }} />
+        <Toast style={{ top: 128, left: 64, width: 'initial' }} />
       </ToastProvider>
     </>
   );
 };
 
 const NotificationEmitter = () => {
-  const { addToast } = useToast();
-  const customItem = random(0, 3);
-  return <Button onClick={() => addToast(items[customItem])}>Добавить сообщение</Button>;
+  const [openToasts, setOpenToasts] = React.useState<Record<string, any>>({});
+  const [toastIdStack, setToastIdStack] = React.useState<Array<string>>([]);
+
+  const { addToast, removeById } = useToast();
+
+  const onClickHandlerAdd = () => {
+    const customItem = random(0, 3);
+    const toast = items[customItem];
+    const toastId = addToast(toast);
+    setOpenToasts((prev) => ({ ...prev, [toastId]: toast }));
+    setToastIdStack((prev) => [...prev, toastId]);
+  };
+  const onClickHandlerRemove = () => {
+    const newToastIdStack = [...toastIdStack];
+    const toastId = newToastIdStack.shift();
+    setToastIdStack(newToastIdStack);
+    if (toastId) {
+      removeById(toastId);
+    }
+  };
+
+  return (
+    <div style={{ display: 'flex', alignItems: 'flex-start' }}>
+      <Button onClick={onClickHandlerAdd}>Добавить сообщение</Button>
+      <div style={{ width: 20 }} />
+      <Button disabled={toastIdStack.length === 0} onClick={onClickHandlerRemove}>
+        Удалить первое сообщение
+      </Button>
+    </div>
+  );
 };
 
 export const ToastNotification = Temp1.bind({});
