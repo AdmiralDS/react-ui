@@ -84,6 +84,7 @@ export default {
   argTypes: {
     autoDeleteTime: {
       defaultValue: 3000,
+      type: 'number',
     },
     position: {
       defaultValue: 'top-right',
