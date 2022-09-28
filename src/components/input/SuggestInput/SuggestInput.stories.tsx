@@ -7,6 +7,7 @@ import { SuggestInput } from './index';
 import { withDesign } from 'storybook-addon-designs';
 import { LIGHT_THEME, Theme } from '#src/components/themes';
 import { ThemeProvider } from 'styled-components';
+import { getTextHighlightMeta } from '#src/components/input/Select/utils';
 
 export default {
   title: 'Admiral-2.1/Input/SuggestInput',
@@ -186,6 +187,53 @@ const TemplateNoMatch: ComponentStory<typeof SuggestInput> = (props) => {
   );
 };
 
+const TemplateFilter: ComponentStory<typeof SuggestInput> = (props) => {
+  const cleanProps = (Object.keys(props) as Array<keyof typeof props>).reduce((acc, key) => {
+    if (props[key] !== undefined) acc[key] = props[key];
+
+    return acc;
+  }, {} as Record<any, any>);
+
+  const [localValue, setValue] = React.useState<string>(props.value ? String(props.value) : '');
+  const [options, setOptions] = React.useState<string[] | undefined>([...OPTIONS]);
+
+  const handleSelectOption = (option: string) => {
+    setValue(option);
+    console.log(`Selected option - ${option}`);
+  };
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const inputValue = e.currentTarget.value;
+
+    setValue(inputValue);
+    props.onChange?.(e);
+  };
+
+  React.useEffect(() => {
+    const filteredOptions: string[] = OPTIONS.filter(
+      (option) => getTextHighlightMeta(option, localValue, 'wholly').shouldHighlight,
+    );
+    setOptions(filteredOptions);
+  }, [localValue]);
+
+  return (
+    <ThemeProvider theme={LIGHT_THEME}>
+      <SuggestInput
+        className="suggest"
+        {...cleanProps}
+        value={localValue}
+        onInput={handleChange}
+        onOptionSelect={handleSelectOption}
+        options={options}
+        onSearchButtonClick={() => {
+          console.log('search button click');
+        }}
+        displayClearIcon
+      />
+    </ThemeProvider>
+  );
+};
+
 export const SuggestInputStory = Template.bind({});
 SuggestInputStory.args = {
   placeholder: 'Начните набирать text',
@@ -204,3 +252,6 @@ SuggestInputUncontrolled.storyName = 'Suggest Input неконтроллируе
 
 export const SuggestInputNoMatch = TemplateNoMatch.bind({});
 SuggestInputNoMatch.storyName = 'Suggest Input "Нет совпадений"';
+
+export const SuggestInputFilter = TemplateFilter.bind({});
+SuggestInputFilter.storyName = 'Suggest Input с фильтрацией';
