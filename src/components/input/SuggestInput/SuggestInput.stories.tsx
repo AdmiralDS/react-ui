@@ -177,6 +177,15 @@ const TemplateUncontrolled: ComponentStory<typeof SuggestInput> = (props) => {
   );
 };
 
+const optionsNoMatch: string[] = [];
+const TemplateNoMatch: ComponentStory<typeof SuggestInput> = (props) => {
+  return (
+    <ThemeProvider theme={LIGHT_THEME}>
+      <SuggestInput options={optionsNoMatch} placeholder="numbers" dimension={props.dimension} />
+    </ThemeProvider>
+  );
+};
+
 export const SuggestInputStory = Template.bind({});
 SuggestInputStory.args = {
   placeholder: 'Начните набирать text',
@@ -192,3 +201,6 @@ SuggestInputStory2.storyName = 'Suggest Input альтернативная ик�
 
 export const SuggestInputUncontrolled = TemplateUncontrolled.bind({});
 SuggestInputUncontrolled.storyName = 'Suggest Input неконтроллируемый';
+
+export const SuggestInputNoMatch = TemplateNoMatch.bind({});
+SuggestInputNoMatch.storyName = 'Suggest Input "Нет совпадений"';
