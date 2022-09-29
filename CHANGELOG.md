@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.4.0](https://github.com/AdmiralDS/react-ui/compare/v2.3.0...v2.4.0) (2022-09-29)
+
+
+### Features
+
+* **SuggestInput:** add storybook example with filtering results ([5d5c643](https://github.com/AdmiralDS/react-ui/commit/5d5c643f561505ae4c84d258b895605cf1f38d1d))
+* **SuggestInput:** add storybook example with no matches ([2d3cf54](https://github.com/AdmiralDS/react-ui/commit/2d3cf543f56a61c7271d656a7edbb8d4a4916a44))
+* **Toast:** add return id to addToast method, add removeById method ([0c17ede](https://github.com/AdmiralDS/react-ui/commit/0c17ede86289469ab9852d98efeeb6f52debb3b4))
+
+
+### Bug Fixes
+
+* **Breadcrumbs:** fix bug with items update and incorrect menu ([cac4305](https://github.com/AdmiralDS/react-ui/commit/cac43055d425b333287eae5f8aac02a8f09b0da6))
+* **Table:** fix column.title interface ([eb70d79](https://github.com/AdmiralDS/react-ui/commit/eb70d7997caa8c1a78b7a6005c9cf295ef168ae6))
+* **Toast:** fix default width ([ecdf664](https://github.com/AdmiralDS/react-ui/commit/ecdf66445cf8958240b2d504efb4f07e106a466d))
+* **Tree:** leave line selected after toggle expand and checkbox ([e383421](https://github.com/AdmiralDS/react-ui/commit/e3834213612e308b2459c1432500c903d6fc5ca2))
+* **Tree:** set cursor to default when TreeNode is disabled ([4caad24](https://github.com/AdmiralDS/react-ui/commit/4caad241e2149f191aa06a7c437391069bb262a9))
+
 ## [2.3.0](https://github.com/AdmiralDS/react-ui/compare/v2.2.2...v2.3.0) (2022-09-23)
 
 
