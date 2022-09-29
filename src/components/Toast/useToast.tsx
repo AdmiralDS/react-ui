@@ -8,6 +8,7 @@ export function useToast(): IContextProps {
   return {
     addToast: context?.addToast,
     removeToast: context?.removeToast,
+    removeById: context?.removeById,
     toasts: context?.toasts,
     autoDeleteTime: context?.autoDeleteTime,
   };
