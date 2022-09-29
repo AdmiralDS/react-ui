@@ -10,7 +10,7 @@ import { getTimeInMinutes, parseStringToTime } from './utils';
 import { typography } from '#src/components/Typography';
 import { InputIconButton } from '#src/components/InputIconButton';
 import { DropdownContainer } from '#src/components/DropdownContainer';
-import { MenuItem, RenderOptionProps } from '#src/components/MenuItem';
+import { MenuItem, RenderOptionProps } from '#src/components/Menu/MenuItem';
 import { Menu } from '#src/components/Menu';
 
 export interface SlotProps extends HTMLAttributes<HTMLDivElement>, RenderOptionProps {

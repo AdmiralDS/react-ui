@@ -5,7 +5,7 @@ import styled, { ThemeProvider } from 'styled-components';
 import { ReactComponent as MinusCircleOutline } from '@admiral-ds/icons/build/service/MinusCircleOutline.svg';
 
 import { OverflowMenu } from '#src/components/OverflowMenu';
-import { MenuItem, RenderOptionProps } from '#src/components/MenuItem';
+import { MenuItem, RenderOptionProps } from '#src/components/Menu/MenuItem';
 import { Theme } from '#src/components/themes';
 
 const Separator = styled.div`

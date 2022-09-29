@@ -1,10 +1,9 @@
 import * as React from 'react';
 import styled, { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
-import observeRect from '#src/components/common/observeRect';
 import { uid } from '#src/components/common/uid';
 import type { AvatarProps } from '#src/components/Avatar';
 import { Avatar } from '#src/components/Avatar';
-import { MenuItem, RenderOptionProps } from '#src/components/MenuItem';
+import { MenuItem, RenderOptionProps } from '#src/components/Menu/MenuItem';
 import { DropMenu } from '#src/components/DropMenu';
 import { keyboardKey } from '#src/components/common/keyboardKey';
 import { passDropdownDataAttributes } from '#src/components/common/utils/splitDataAttributes';
@@ -78,27 +77,29 @@ export const AvatarGroup: React.FC<AvatarGroupProps> = ({
 
   React.useLayoutEffect(() => {
     if (wrapperRef.current) {
-      const observer = observeRect(wrapperRef.current, (rect) => {
-        const wrapperWidth = rect?.width || 0;
-        let validContent = 2,
-          visibleItems = 0,
-          hiddenItems = 0;
+      const resizeObserver = new ResizeObserver((entries) => {
+        entries.forEach((entry) => {
+          const wrapperWidth = entry.contentRect.width || 0;
+          let validContent = 2,
+            visibleItems = 0,
+            hiddenItems = 0;
 
-        while (validContent + WIDTH[dimension] < wrapperWidth) {
-          validContent = validContent + WIDTH[dimension];
-          visibleItems++;
-        }
-        visibleItems = visibleItems > items.length ? items.length : visibleItems;
-        // оставляем место на меню, вычитая 1
-        visibleItems = visibleItems === items.length ? visibleItems : visibleItems - 1;
-        hiddenItems = items.length - visibleItems;
+          while (validContent + WIDTH[dimension] < wrapperWidth) {
+            validContent = validContent + WIDTH[dimension];
+            visibleItems++;
+          }
+          visibleItems = visibleItems > items.length ? items.length : visibleItems;
+          // оставляем место на меню, вычитая 1
+          visibleItems = visibleItems === items.length ? visibleItems : visibleItems - 1;
+          hiddenItems = items.length - visibleItems;
 
-        setVisibleItems(visibleItems);
-        setHiddenItems(hiddenItems);
+          setVisibleItems(visibleItems);
+          setHiddenItems(hiddenItems);
+        });
       });
-      observer.observe();
+      resizeObserver.observe(wrapperRef.current);
       return () => {
-        observer.unobserve();
+        resizeObserver.disconnect();
       };
     }
   }, [wrapperRef.current]);

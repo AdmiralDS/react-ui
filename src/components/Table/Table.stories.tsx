@@ -15,6 +15,7 @@ import {
   columnListOrientation,
   columnListSort,
   columnListSticky,
+  columnListWithCustomTitle,
   columnListWithWidth,
   rowList,
   rowListExpanded,
@@ -763,3 +764,10 @@ Group.parameters = {
     },
   },
 };
+
+export const CustomTitle = Template.bind({});
+CustomTitle.args = {
+  rowList,
+  columnList: columnListWithCustomTitle,
+};
+CustomTitle.storyName = 'Table. Пример кастомизации заголовков столбцов.';

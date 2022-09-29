@@ -3,7 +3,7 @@ import styled, { ThemeProvider } from 'styled-components';
 import { withDesign } from 'storybook-addon-designs';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { DropMenu } from '#src/components/DropMenu';
-import { MenuItem, RenderOptionProps } from '#src/components/MenuItem';
+import { MenuItem, RenderOptionProps } from '#src/components/Menu/MenuItem';
 import { Theme } from '#src/components/themes';
 import { Button } from '#src/components/Button';
 import { typography } from '#src/components/Typography';

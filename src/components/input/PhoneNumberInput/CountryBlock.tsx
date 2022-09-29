@@ -4,8 +4,8 @@ import styled from 'styled-components';
 import { Flag } from '#src/components/input/PhoneNumberInput/Flag';
 import type { ComponentName } from '@admiral-ds/flags';
 import { FlagsPack } from '@admiral-ds/flags';
-import type { MenuItemProps } from '#src/components/MenuItem';
-import { MenuItem } from '#src/components/MenuItem';
+import type { MenuItemProps } from '#src/components/Menu/MenuItem';
+import { MenuItem } from '#src/components/Menu/MenuItem';
 
 export interface CountryBlockProps extends MenuItemProps {
   name: ComponentName;

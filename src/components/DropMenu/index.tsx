@@ -2,7 +2,7 @@ import type { HTMLAttributes } from 'react';
 import * as React from 'react';
 import { keyboardKey } from '#src/components/common/keyboardKey';
 import { OpenStatusButton } from '#src/components/OpenStatusButton';
-import type { ItemProps } from '#src/components/MenuItem';
+import type { ItemProps } from '#src/components/Menu/MenuItem';
 import { DropdownContainer } from '#src/components/DropdownContainer';
 import { Menu, MenuDimensions as Dimension, MenuProps } from '#src/components/Menu';
 import { refSetter } from '#src/components/common/utils/refSetter';

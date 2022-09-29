@@ -92,9 +92,8 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps>(
     const selectItem = (id: string) => {
       if (withCheckbox) {
         if (id) toggleCheck(id);
-      } else {
-        if (selectedId !== id) setSelectedState(id);
       }
+      if (selectedId !== id) setSelectedState(id);
 
       onSelectItem?.(id);
     };
@@ -107,7 +106,7 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps>(
       return treeToMap(model);
     }, [model]);
 
-    const toggleExpand = (id: string | number) => {
+    const toggleExpand = (id: string) => {
       map[id].node.expanded = !map[id].node.expanded;
 
       if (onChange) {
@@ -115,6 +114,7 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps>(
       } else {
         setInternalModel([...internalModel]);
       }
+      if (selectedId !== id) setSelectedState(id);
     };
 
     const setChecked = (id: number | string, value: boolean) => {

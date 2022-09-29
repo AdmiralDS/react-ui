@@ -5,7 +5,7 @@ import React, { useMemo } from 'react';
 import type { CountryAlpha3Code } from '@admiral-ds/flags';
 import { CustomInputHandler } from '#src/components/common/dom/changeInputData';
 import { Menu, MenuDimensions, MenuProps } from '#src/components/Menu';
-import { ItemProps, RenderOptionProps } from '#src/components/MenuItem';
+import { ItemProps, RenderOptionProps } from '#src/components/Menu/MenuItem';
 
 export type CountryInfo = {
   uid: string;

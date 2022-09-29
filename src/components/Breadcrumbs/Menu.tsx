@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { OverflowMenu } from '#src/components/OverflowMenu';
 import { Tooltip } from '#src/components/Tooltip';
 import { BreadcrumbProps } from '#src/components/Breadcrumbs/BreadCrumb';
-import { MenuItem, RenderOptionProps } from '#src/components/MenuItem';
+import { MenuItem, RenderOptionProps } from '#src/components/Menu/MenuItem';
 import { uid } from '#src/components/common/uid';
 
 const Option = styled.a`
@@ -24,6 +24,23 @@ const Option = styled.a`
   }
 `;
 
+type TipProps = {
+  targetRef: React.RefObject<HTMLElement>;
+  renderContent: () => React.ReactNode;
+};
+
+const Tip = ({ targetRef, renderContent }: TipProps) => {
+  const [tooltipVisible, setTooltipVisible] = React.useState(false);
+  return (
+    <Tooltip
+      targetRef={targetRef}
+      visible={tooltipVisible}
+      onVisibilityChange={setTooltipVisible}
+      renderContent={renderContent}
+    />
+  );
+};
+
 export interface MenuButtonProps {
   /** Размер меню */
   dimension: 'm' | 's';
@@ -39,21 +56,13 @@ export const MenuButton: React.FC<MenuButtonProps> = ({ dimension, options }) =>
         id,
         render: (options: RenderOptionProps) => {
           const tooltip = item.text.length > 40;
-          const itemRef = React.useRef(null);
-          const [tooltipVisible, setTooltipVisible] = React.useState(false);
+          const itemRef = React.createRef<HTMLDivElement>();
           return (
             <MenuItem ref={itemRef} dimension="s" {...options} key={id} role="option">
               <Option href={item.url} as={item.linkAs} {...item.linkProps}>
                 {tooltip ? item.text.slice(0, 37) + '...' : item.text}
               </Option>
-              {tooltip && (
-                <Tooltip
-                  targetRef={itemRef}
-                  visible={tooltipVisible}
-                  onVisibilityChange={setTooltipVisible}
-                  renderContent={() => item.text}
-                />
-              )}
+              {tooltip && <Tip targetRef={itemRef} renderContent={() => item.text} />}
             </MenuItem>
           );
         },
