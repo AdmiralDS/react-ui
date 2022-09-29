@@ -17,8 +17,9 @@ export interface ToastProps {
 }
 
 export interface IContextProps extends ToastProps {
-  addToast: (newToast: IdentifyToast) => void;
+  addToast: (newToast: IdentifyToast) => string;
   removeToast: (removeToast: IdentifyToast) => void;
+  removeById: (toastId: string) => void;
   toasts: IdentifyToast[];
 }
 
@@ -31,6 +32,10 @@ export const ToastProvider = ({ autoDeleteTime, ...props }: ToastProps) => {
     setToast((prevToasts) => prevToasts.filter(({ id }) => id !== removeToast.id));
   }, []);
 
+  const removeById = React.useCallback((toastId: string) => {
+    setToast((prevToasts) => prevToasts.filter(({ id }) => id !== toastId));
+  }, []);
+
   const addToast = React.useCallback((toast: IdentifyToast) => {
     const idToast = uid();
     const newToast = { ...toast, id: idToast };
@@ -41,6 +46,7 @@ export const ToastProvider = ({ autoDeleteTime, ...props }: ToastProps) => {
       }
       return prevToasts;
     });
+    return idToast;
   }, []);
 
   React.useEffect(() => {
@@ -53,7 +59,10 @@ export const ToastProvider = ({ autoDeleteTime, ...props }: ToastProps) => {
     return () => clearInterval(interval);
   }, [toasts]);
 
-  const providerValue = React.useMemo(() => ({ addToast, removeToast, toasts }), [addToast, removeToast, toasts]);
+  const providerValue = React.useMemo(
+    () => ({ addToast, removeToast, removeById, toasts }),
+    [addToast, removeToast, removeById, toasts],
+  );
 
   return <ToastContext.Provider value={providerValue} children={props.children} />;
 };

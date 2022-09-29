@@ -84,6 +84,7 @@ export default {
   argTypes: {
     autoDeleteTime: {
       defaultValue: 3000,
+      type: 'number',
     },
     position: {
       defaultValue: 'top-right',
@@ -124,10 +125,48 @@ const Temp2: ComponentStory<typeof Toast> = (args: ToastProps) => {
   );
 };
 
+const Temp3: ComponentStory<typeof Toast> = (args: ToastProps) => {
+  return (
+    <>
+      <ToastProvider autoDeleteTime={args.autoDeleteTime}>
+        <NotificationEmitter />
+        <Toast style={{ top: 128, left: 64, width: 'initial' }} />
+      </ToastProvider>
+    </>
+  );
+};
+
 const NotificationEmitter = () => {
-  const { addToast } = useToast();
-  const customItem = random(0, 3);
-  return <Button onClick={() => addToast(items[customItem])}>Добавить сообщение</Button>;
+  const [openToasts, setOpenToasts] = React.useState<Record<string, any>>({});
+  const [toastIdStack, setToastIdStack] = React.useState<Array<string>>([]);
+
+  const { addToast, removeById } = useToast();
+
+  const onClickHandlerAdd = () => {
+    const customItem = random(0, 3);
+    const toast = items[customItem];
+    const toastId = addToast(toast);
+    setOpenToasts((prev) => ({ ...prev, [toastId]: toast }));
+    setToastIdStack((prev) => [...prev, toastId]);
+  };
+  const onClickHandlerRemove = () => {
+    const newToastIdStack = [...toastIdStack];
+    const toastId = newToastIdStack.shift();
+    setToastIdStack(newToastIdStack);
+    if (toastId) {
+      removeById(toastId);
+    }
+  };
+
+  return (
+    <div style={{ display: 'flex', alignItems: 'flex-start' }}>
+      <Button onClick={onClickHandlerAdd}>Добавить сообщение</Button>
+      <div style={{ width: 20 }} />
+      <Button disabled={toastIdStack.length === 0} onClick={onClickHandlerRemove}>
+        Удалить первое сообщение
+      </Button>
+    </div>
+  );
 };
 
 export const ToastNotification = Temp1.bind({});
@@ -135,3 +174,6 @@ ToastNotification.storyName = 'Нотификация настройка мес�
 
 export const ToastNotificationBase = Temp2.bind({});
 ToastNotificationBase.storyName = 'Всплывающая нотификация. Базовый пример.';
+
+export const ToastLineNotification = Temp3.bind({});
+ToastLineNotification.storyName = 'Всплывающая нотификация. Line Notification.';
