@@ -16,10 +16,9 @@ import { TextInput, TextInputProps } from '#src/components/input/TextInput';
 import { MessagePanel } from '#src/components/input/SuggestInput/MessagePanel';
 import { SuggestPanel } from '#src/components/input/SuggestInput/SuggestPanel';
 
-const StyledDropdownContainer = styled(DropdownContainer)<{ dropMaxHeight: string | number }>`
+const StyledDropdownContainer = styled(DropdownContainer)`
   overflow-x: hidden;
   overflow-y: auto;
-  max-height: ${(p) => p.dropMaxHeight};
   min-width: 100%;
   ${(p) => p.theme.shadow['Shadow 08']}
   border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
@@ -80,7 +79,7 @@ export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps
       isLoading,
       onOptionSelect,
       alignDropdown = 'stretch',
-      dropMaxHeight = '300px',
+      dropMaxHeight,
       onSearchButtonClick = () => undefined,
       icons,
       icon = SearchOutlineSVG,
@@ -221,7 +220,6 @@ export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps
           <StyledDropdownContainer
             targetRef={portalTargetRef || inputRef}
             alignSelf={alignDropdown}
-            dropMaxHeight={dropMaxHeight}
             data-dimension={props.dimension || TextInput.defaultProps?.dimension}
           >
             {options.length === 0 && !isLoading ? (
@@ -233,6 +231,7 @@ export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps
             ) : (
               <Menu
                 model={model}
+                maxHeight={dropMaxHeight}
                 active={activeOption}
                 onActivateItem={setActiveOption}
                 onSelectItem={handleOptionSelect}
