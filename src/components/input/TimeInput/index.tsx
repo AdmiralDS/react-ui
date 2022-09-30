@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { HTMLAttributes, useRef, useState } from 'react';
-import styled from 'styled-components';
+import styled, { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import { ReactComponent as TimeSVG } from '@admiral-ds/icons/build/system/TimeOutline.svg';
 import { TextInput, TextInputProps } from '../TextInput';
 import { refSetter } from '#src/components/common/utils/refSetter';
@@ -117,6 +117,8 @@ export interface TimeInputProps extends Omit<TextInputProps, 'value'> {
    * Принимает стандартные значения css свойства align-self (auto | flex-start | flex-end | center | baseline | stretch)
    */
   alignDropdown?: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
+  /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
+  dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
 }
 
 export const TimeInput = React.forwardRef<HTMLInputElement, TimeInputProps>(
@@ -132,6 +134,7 @@ export const TimeInput = React.forwardRef<HTMLInputElement, TimeInputProps>(
       icons,
       alignDropdown = 'flex-end',
       skeleton = false,
+      dropContainerCssMixin,
       ...props
     },
     ref,
@@ -242,7 +245,12 @@ export const TimeInput = React.forwardRef<HTMLInputElement, TimeInputProps>(
         skeleton={skeleton}
       >
         {availableSlots && isOpened && !disabled && !skeleton && (
-          <StyledDropdownContainer targetRef={inputRef} alignSelf={alignDropdown} onClickOutside={clickOutside}>
+          <StyledDropdownContainer
+            targetRef={inputRef}
+            alignSelf={alignDropdown}
+            onClickOutside={clickOutside}
+            dropContainerCssMixin={dropContainerCssMixin}
+          >
             <StyledMenu
               selected={timeValue}
               active={activeOption}

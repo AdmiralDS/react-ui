@@ -87,6 +87,7 @@ export const DropMenu = React.forwardRef<HTMLElement, DropMenuProps>(
       alignMenuRef,
       renderContentProp,
       menuMaxHeight,
+      dropContainerCssMixin,
       ...props
     },
     ref,
@@ -165,6 +166,7 @@ export const DropMenu = React.forwardRef<HTMLElement, DropMenuProps>(
             alignSelf={alignSelf}
             targetRef={alignMenuRef || btnRef}
             onClickOutside={clickOutside}
+            dropContainerCssMixin={dropContainerCssMixin}
             {...props}
           >
             <StyledMenu

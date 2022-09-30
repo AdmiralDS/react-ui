@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useRef, useState } from 'react';
-import styled from 'styled-components';
+import styled, { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import { ReactComponent as CalendarOutlineSVG } from '@admiral-ds/icons/build/system/CalendarOutline.svg';
 import { TextInput, TextInputProps } from '#src/components/input/TextInput';
 import { Calendar, CalendarPropType } from '#src/components/Calendar';
@@ -52,6 +52,9 @@ export interface DateInputProps extends TextInputProps, Omit<CalendarPropType, '
    * Компонент для отображения альтернативной иконки
    */
   icon?: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
+
+  /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
+  dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
 }
 
 export const DateInput = React.forwardRef<HTMLInputElement, DateInputProps>(
@@ -79,6 +82,7 @@ export const DateInput = React.forwardRef<HTMLInputElement, DateInputProps>(
       icon = CalendarOutlineSVG,
       icons,
       skeleton = false,
+      dropContainerCssMixin,
       ...props
     },
     ref,

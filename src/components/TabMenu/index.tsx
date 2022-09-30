@@ -17,6 +17,7 @@ import {
   Wrapper,
 } from '#src/components/TabMenu/style';
 import type { Dimension } from '#src/components/TabMenu/constants';
+import { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 
 export interface TabProps extends React.HTMLAttributes<HTMLButtonElement> {
   /** Контент вкладки */
@@ -52,6 +53,8 @@ export interface TabMenuProps extends Omit<React.HTMLAttributes<HTMLDivElement>,
   mobile?: boolean;
   /** Выравнивание выпадающего меню относительно компонента https://developer.mozilla.org/en-US/docs/Web/CSS/align-self */
   alignSelf?: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
+  /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
+  dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
 }
 
 export const TabMenu: React.FC<TabMenuProps> = ({
@@ -62,6 +65,7 @@ export const TabMenu: React.FC<TabMenuProps> = ({
   alignSelf = 'flex-end',
   activeTab,
   onChange,
+  dropContainerCssMixin,
   ...props
 }) => {
   const [openedMenu, setOpenedMenu] = React.useState(false);
@@ -339,6 +343,7 @@ export const TabMenu: React.FC<TabMenuProps> = ({
             styleUnderline(0, 0);
           }}
           tabIndex={tabIndex}
+          dropContainerCssMixin={dropContainerCssMixin}
         />
       </OverflowMenuContainer>
     );

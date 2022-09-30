@@ -1,5 +1,5 @@
 import * as React from 'react';
-import styled, { ThemeContext } from 'styled-components';
+import styled, { DefaultTheme, FlattenInterpolation, ThemeContext, ThemeProps } from 'styled-components';
 import { ReactComponent as SearchOutlineSVG } from '@admiral-ds/icons/build/system/SearchOutline.svg';
 import { LIGHT_THEME } from '#src/components/themes';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
@@ -71,6 +71,9 @@ export interface SuggestInputProps extends Omit<TextInputProps, 'value'> {
     /** Текст сообщения при отсутствии вариантов для подстановки */
     emptyMessage?: React.ReactNode;
   };
+
+  /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
+  dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
 }
 
 export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps>(
@@ -80,6 +83,7 @@ export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps
       onOptionSelect,
       alignDropdown = 'stretch',
       dropMaxHeight,
+      dropContainerCssMixin,
       onSearchButtonClick = () => undefined,
       icons,
       icon = SearchOutlineSVG,
@@ -221,6 +225,7 @@ export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps
             targetRef={portalTargetRef || inputRef}
             alignSelf={alignDropdown}
             data-dimension={props.dimension || TextInput.defaultProps?.dimension}
+            dropContainerCssMixin={dropContainerCssMixin}
           >
             {options.length === 0 && !isLoading ? (
               <MessagePanel>
