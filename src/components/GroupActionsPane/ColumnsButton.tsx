@@ -9,6 +9,7 @@ import { ReactComponent as PlusOutline } from '@admiral-ds/icons/build/service/P
 import { Menu } from '#src/components/Menu';
 import { MenuItem } from '#src/components/Menu/MenuItem';
 import { refSetter } from '#src/components/common/utils/refSetter';
+import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 
 export type MenuDimension = 's' | 'm' | 'l';
 
@@ -51,6 +52,12 @@ const ColumnsMenuItem = styled(MenuItem)`
 
 const StyledCheckbox = styled(Checkbox)`
   margin-right: 10px;
+`;
+
+const StyledDropdownContainer = styled(DropdownContainer)`
+  ${(p) => p.theme.shadow['Shadow 08']}
+  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
+  overflow: hidden;
 `;
 
 export const ColumnsButton = React.forwardRef<HTMLButtonElement, ColumnsButtonProps>(
@@ -110,9 +117,9 @@ export const ColumnsButton = React.forwardRef<HTMLButtonElement, ColumnsButtonPr
           <PlusOutline />
         </IconButton>
         {opened && (
-          <DropdownContainer targetRef={buttonRef} alignSelf={'flex-end'} onClickOutside={handleClickOutside}>
+          <StyledDropdownContainer targetRef={buttonRef} alignSelf={'flex-end'} onClickOutside={handleClickOutside}>
             <ColumnsMenu model={renderColumns} selected={''} />
-          </DropdownContainer>
+          </StyledDropdownContainer>
         )}
       </>
     );

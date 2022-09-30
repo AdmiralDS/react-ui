@@ -18,9 +18,10 @@ const Input = styled(TextInput)`
   min-width: 150px;
 `;
 
-const StyledCalendar = styled(Calendar)`
+const StyledDropdownContainer = styled(DropdownContainer)`
   ${(p) => p.theme.shadow['Shadow 08']}
   border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
+  overflow: hidden;
 `;
 
 // IE11 fix toLocaleDateString('ru') extra invisible characters by using .replace(/[^ -~]/g,'')
@@ -158,12 +159,13 @@ export const DateInput = React.forwardRef<HTMLInputElement, DateInputProps>(
         skeleton={skeleton}
       >
         {isCalendarOpen && !skeleton && (
-          <DropdownContainer
+          <StyledDropdownContainer
             targetRef={inputRef}
             alignSelf={alignDropdown}
             onClickOutside={handleBlurCalendarContainer}
+            dropContainerCssMixin={dropContainerCssMixin}
           >
-            <StyledCalendar
+            <Calendar
               {...calendarProps}
               ref={calendarRef}
               selected={selectedCalendarValue}
@@ -172,7 +174,7 @@ export const DateInput = React.forwardRef<HTMLInputElement, DateInputProps>(
               onChange={handleCalendarChange}
               range={isDateRange}
             />
-          </DropdownContainer>
+          </StyledDropdownContainer>
         )}
       </Input>
     );

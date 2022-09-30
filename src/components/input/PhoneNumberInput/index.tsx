@@ -22,6 +22,13 @@ import { ComponentsNames, CountriesRusNames, FlagsPack } from '@admiral-ds/flags
 import { DropdownContainer } from '#src/components/DropdownContainer';
 import type { MenuDimensions } from '#src/components/Menu';
 import { keyboardKey } from '#src/components/common/keyboardKey';
+import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
+
+const StyledDropdownContainer = styled(DropdownContainer)`
+  ${(p) => p.theme.shadow['Shadow 08']}
+  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
+  overflow: hidden;
+`;
 
 const Chevron = styled(ChevronRightOutline)<{ disabled?: boolean }>`
   transition: transform 0.3s;
@@ -295,7 +302,7 @@ export const PhoneNumberInput = React.forwardRef<HTMLInputElement, PhoneNumberIn
           }}
         >
           {isOpened && !disabled && !skeleton && (
-            <DropdownContainer targetRef={inputRef} onClickOutside={clickOutside}>
+            <StyledDropdownContainer targetRef={inputRef} onClickOutside={clickOutside}>
               <CountriesList
                 countries={countryList}
                 selected={selectedIndex > -1 ? countryList[selectedIndex].uid : undefined}
@@ -304,7 +311,7 @@ export const PhoneNumberInput = React.forwardRef<HTMLInputElement, PhoneNumberIn
                 onSelectItem={handleSelectCountry}
                 dimension={menuDimension}
               />
-            </DropdownContainer>
+            </StyledDropdownContainer>
           )}
         </TextInput>
         <CountryContainer

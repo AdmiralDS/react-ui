@@ -4,7 +4,6 @@ import { useEffect } from 'react';
 import styled, { css, DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import type { ItemProps } from '#src/components/Menu/MenuItem';
 import { keyboardKey } from '#src/components/common/keyboardKey';
-import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 
 export type MenuDimensions = 'l' | 'm' | 's';
 
@@ -32,8 +31,6 @@ const Wrapper = styled.div<{ dimension?: MenuDimensions }>`
   align-items: stretch;
   pointer-events: initial;
   background-color: ${(p) => p.theme.color['Special/Elevated BG']};
-  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
-  ${(p) => p.theme.shadow['Shadow 08']}
   max-width: calc(100vw - 32px);
   border-color: transparent;
   ${menuListHeights};

@@ -2,11 +2,18 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import { OpenStatusButton } from '#src/components/OpenStatusButton';
 import { DropdownContainer } from '#src/components/DropdownContainer';
-import { Menu } from './Menu';
-import { ValueType } from './ValueType';
+import { Menu } from '#src/components/input/InputEx/Menu';
+import { ValueType } from '#src/components/input/InputEx/ValueType';
+import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 
 const StyledMenu = styled(Menu)<{ width?: string }>`
   width: ${({ width }) => (width ? width : 'auto')};
+`;
+
+const StyledDropdownContainer = styled(DropdownContainer)`
+  ${(p) => p.theme.shadow['Shadow 08']}
+  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
+  overflow: hidden;
 `;
 
 const disableEventMixin = css`
@@ -122,14 +129,14 @@ export const SuffixSelect = <T extends ValueType>({
         {!props.readOnly && <OpenStatusButton $isOpen={isOpen} aria-hidden data-disabled={disabled} />}
       </Container>
       {isOpen && (
-        <DropdownContainer
+        <StyledDropdownContainer
           role="listbox"
           alignSelf={dropAlign}
           targetRef={alignContainerRef}
           onClickOutside={clickOutside}
         >
           <StyledMenu maxHeight={dropMaxHeight} options={options} selected={value} onSelect={handleOnSelect} />
-        </DropdownContainer>
+        </StyledDropdownContainer>
       )}
     </>
   );

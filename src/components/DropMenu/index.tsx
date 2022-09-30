@@ -7,6 +7,7 @@ import { DropdownContainer } from '#src/components/DropdownContainer';
 import { Menu, MenuDimensions as Dimension, MenuProps } from '#src/components/Menu';
 import { refSetter } from '#src/components/common/utils/refSetter';
 import styled, { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
+import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 
 const StyledMenu = styled(Menu)<{ width?: string }>`
   width: ${({ width }) => (width ? width : 'auto')};
@@ -15,6 +16,9 @@ const StyledDropdownContainer = styled(DropdownContainer)<{
   dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
 }>`
   ${(p) => p.dropContainerCssMixin || ''}
+  ${(p) => p.theme.shadow['Shadow 08']}
+  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
+  overflow: hidden;
 `;
 
 export interface RenderContentProps {
