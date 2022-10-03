@@ -131,7 +131,7 @@ export const PaginationOne: React.FC<PaginationOneProps> = ({
   forwardText: userForwardText,
   simple = false,
   menuWidth,
-  dropMaxHeight = '300px',
+  dropMaxHeight = '',
   dropContainerCssMixin,
   locale,
   ...props
