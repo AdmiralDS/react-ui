@@ -1,9 +1,9 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled, { css, DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import { OpenStatusButton } from '#src/components/OpenStatusButton';
-import { DropdownContainer } from '#src/components/DropdownContainer';
-import { Menu } from './Menu';
-import { ValueType } from './ValueType';
+import { StyledDropdownContainer } from '#src/components/DropdownContainer';
+import { Menu } from '#src/components/input/InputEx/Menu';
+import { ValueType } from '#src/components/input/InputEx/ValueType';
 
 const StyledMenu = styled(Menu)<{ width?: string }>`
   width: ${({ width }) => (width ? width : 'auto')};
@@ -77,6 +77,9 @@ export type SuffixSelectProps<T> = {
   disabled?: boolean;
 
   readOnly?: boolean;
+
+  /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
+  dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
 };
 
 export const SuffixSelect = <T extends ValueType>({
@@ -86,6 +89,7 @@ export const SuffixSelect = <T extends ValueType>({
   options,
   value,
   disabled,
+  dropContainerCssMixin,
   ...props
 }: React.PropsWithChildren<SuffixSelectProps<T>>) => {
   const [isOpenState, setIsOpenState] = React.useState<boolean>(false);
@@ -122,14 +126,15 @@ export const SuffixSelect = <T extends ValueType>({
         {!props.readOnly && <OpenStatusButton $isOpen={isOpen} aria-hidden data-disabled={disabled} />}
       </Container>
       {isOpen && (
-        <DropdownContainer
+        <StyledDropdownContainer
           role="listbox"
           alignSelf={dropAlign}
           targetRef={alignContainerRef}
           onClickOutside={clickOutside}
+          dropContainerCssMixin={dropContainerCssMixin}
         >
           <StyledMenu maxHeight={dropMaxHeight} options={options} selected={value} onSelect={handleOnSelect} />
-        </DropdownContainer>
+        </StyledDropdownContainer>
       )}
     </>
   );

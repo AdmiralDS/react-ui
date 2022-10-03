@@ -5,6 +5,7 @@ import { PositionInPortal } from '#src/components/PositionInPortal';
 import { useInterval } from '#src/components/common/hooks/useInterval';
 import { refSetter } from '#src/components/common/utils/refSetter';
 import { useDropdown, useDropdownsClickOutside } from '#src/components/DropdownProvider';
+import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 
 const Container = styled.div<{
   alignSelf?: string;
@@ -133,3 +134,11 @@ export const DropdownContainer = React.forwardRef<HTMLDivElement, React.PropsWit
 );
 
 DropdownContainer.displayName = 'DropdownContainer';
+
+export const StyledDropdownContainer = styled(DropdownContainer)`
+  ${(p) => p.theme.shadow['Shadow 08']}
+  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
+  overflow: hidden;
+`;
+
+StyledDropdownContainer.displayName = 'StyledDropdownContainer';
