@@ -18,7 +18,7 @@ export interface ITooltipProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Ссылка на тултип */
   tooltipRef?: RefCallback<HTMLDivElement> | RefObject<HTMLDivElement> | null;
   /** Расположение тултипа */
-  tooltipPosition?: TooltipPositionType;
+  tooltipPosition?: 'top' | 'bottom' | 'left' | 'right';
 }
 
 export const TOOLTIP_DELAY = 1500;
@@ -47,36 +47,44 @@ export const Tooltip: React.FC<ITooltipProps> = ({
       );
       const tooltip = tooltipElementRef.current;
       switch (direction) {
-        case 'topPageCenter':
-          setPortalFlexDirection('column-reverse');
-          setPortalFullWidth(true);
-          tooltip.style.margin = '0 0 8px 0';
-          break;
-        case 'bottomPageCenter':
-          setPortalFlexDirection('column');
-          setPortalFullWidth(true);
-          tooltip.style.margin = '8px 0 0 0';
-          break;
+        case 'leftBottom':
+        case 'leftTop':
         case 'left':
           setPortalFlexDirection('row-reverse');
           setPortalFullWidth(false);
           tooltip.style.margin = '0 8px 0 0';
+          tooltip.style.alignSelf =
+            direction === 'leftBottom' ? 'flex-start' : direction === 'leftTop' ? 'flex-end' : 'center';
           break;
+        case 'rightBottom':
+        case 'rightTop':
         case 'right':
           setPortalFlexDirection('row');
           setPortalFullWidth(false);
           tooltip.style.margin = '0 0 0 8px';
+          tooltip.style.alignSelf =
+            direction === 'rightBottom' ? 'flex-start' : direction === 'rightTop' ? 'flex-end' : 'center';
           break;
+        case 'topPageCenter':
+        case 'topLeft':
+        case 'topRight':
         case 'top':
           setPortalFlexDirection('column-reverse');
-          setPortalFullWidth(false);
+          setPortalFullWidth(direction === 'topPageCenter' ? true : false);
           tooltip.style.margin = '0 0 8px 0';
+          tooltip.style.alignSelf =
+            direction === 'topLeft' ? 'flex-end' : direction === 'topRight' ? 'flex-start' : 'center';
           break;
+        case 'bottomPageCenter':
+        case 'bottomLeft':
+        case 'bottomRight':
         case 'bottom':
         default:
           setPortalFlexDirection('column');
-          setPortalFullWidth(false);
+          setPortalFullWidth(direction === 'bottomPageCenter' ? true : false);
           tooltip.style.margin = '8px 0 0 0';
+          tooltip.style.alignSelf =
+            direction === 'bottomLeft' ? 'flex-end' : direction === 'bottomRight' ? 'flex-start' : 'center';
       }
     }
   };

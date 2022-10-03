@@ -83,7 +83,7 @@ export default {
       control: { type: 'boolean' },
     },
     tooltipPosition: {
-      options: ['bottom', 'top', 'left', 'right', 'bottomPageCenter', 'topPageCenter'],
+      options: ['bottom', 'top', 'left', 'right'],
       control: { type: 'radio' },
     },
     themeBorderKind: {
@@ -109,18 +109,21 @@ const Template1: ComponentStory<typeof Tooltip> = (args) => {
 
   // обязательно использовать addEventListener
   React.useEffect(() => {
-    btnRef.current?.addEventListener('mouseenter', show);
-    btnRef.current?.addEventListener('focus', show);
-    btnRef.current?.addEventListener('mouseleave', hide);
-    btnRef.current?.addEventListener('mousedown', hide);
-    btnRef.current?.addEventListener('blur', hide);
-    return () => {
-      btnRef.current?.removeEventListener('mouseenter', show);
-      btnRef.current?.removeEventListener('focus', show);
-      btnRef.current?.removeEventListener('mouseleave', hide);
-      btnRef.current?.removeEventListener('mousedown', hide);
-      btnRef.current?.removeEventListener('blur', hide);
-    };
+    const button = btnRef.current;
+    if (button) {
+      button.addEventListener('mouseenter', show);
+      button.addEventListener('focus', show);
+      button.addEventListener('mouseleave', hide);
+      button.addEventListener('mousedown', hide);
+      button.addEventListener('blur', hide);
+      return () => {
+        button.removeEventListener('mouseenter', show);
+        button.removeEventListener('focus', show);
+        button.removeEventListener('mouseleave', hide);
+        button.removeEventListener('mousedown', hide);
+        button.removeEventListener('blur', hide);
+      };
+    }
   }, [btnRef.current]);
 
   return (
@@ -160,20 +163,22 @@ const Template2: ComponentStory<typeof Tooltip> = () => {
     setVisible(false);
   };
 
-  // обязательно использовать addEventListener
   React.useEffect(() => {
-    btnRef.current?.addEventListener('mouseenter', show);
-    btnRef.current?.addEventListener('focus', show);
-    btnRef.current?.addEventListener('mouseleave', hide);
-    btnRef.current?.addEventListener('mousedown', hide);
-    btnRef.current?.addEventListener('blur', hide);
-    return () => {
-      btnRef.current?.removeEventListener('mouseenter', show);
-      btnRef.current?.removeEventListener('focus', show);
-      btnRef.current?.removeEventListener('mouseleave', hide);
-      btnRef.current?.removeEventListener('mousedown', hide);
-      btnRef.current?.removeEventListener('blur', hide);
-    };
+    const button = btnRef.current;
+    if (button) {
+      button.addEventListener('mouseenter', show);
+      button.addEventListener('focus', show);
+      button.addEventListener('mouseleave', hide);
+      button.addEventListener('mousedown', hide);
+      button.addEventListener('blur', hide);
+      return () => {
+        button.removeEventListener('mouseenter', show);
+        button.removeEventListener('focus', show);
+        button.removeEventListener('mouseleave', hide);
+        button.removeEventListener('mousedown', hide);
+        button.removeEventListener('blur', hide);
+      };
+    }
   }, [btnRef.current]);
 
   return (

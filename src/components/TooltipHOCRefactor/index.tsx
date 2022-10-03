@@ -37,20 +37,22 @@ export function TooltipHoc<P extends React.ComponentPropsWithRef<any>>(Component
       setVisible(false);
     };
 
-    // обязательно использовать addEventListener
     React.useEffect(() => {
-      anchorElementRef.current?.addEventListener('mouseenter', show);
-      anchorElementRef.current?.addEventListener('focus', show);
-      anchorElementRef.current?.addEventListener('mouseleave', hide);
-      anchorElementRef.current?.addEventListener('mousedown', hide);
-      anchorElementRef.current?.addEventListener('blur', hide);
-      return () => {
-        anchorElementRef.current?.removeEventListener('mouseenter', show);
-        anchorElementRef.current?.removeEventListener('focus', show);
-        anchorElementRef.current?.removeEventListener('mouseleave', hide);
-        anchorElementRef.current?.removeEventListener('mousedown', hide);
-        anchorElementRef.current?.removeEventListener('blur', hide);
-      };
+      const anchor = anchorElementRef.current;
+      if (anchor) {
+        anchor.addEventListener('mouseenter', show);
+        anchor.addEventListener('focus', show);
+        anchor.addEventListener('mouseleave', hide);
+        anchor.addEventListener('mousedown', hide);
+        anchor.addEventListener('blur', hide);
+        return () => {
+          anchor.removeEventListener('mouseenter', show);
+          anchor.removeEventListener('focus', show);
+          anchor.removeEventListener('mouseleave', hide);
+          anchor.removeEventListener('mousedown', hide);
+          anchor.removeEventListener('blur', hide);
+        };
+      }
     }, [anchorElementRef.current]);
 
     return (
