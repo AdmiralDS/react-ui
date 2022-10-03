@@ -60,7 +60,7 @@ export const MenuButton: React.FC<MenuButtonProps> = ({ dimension, options, drop
           const tooltip = item.text.length > 40;
           const itemRef = React.createRef<HTMLDivElement>();
           return (
-            <MenuItem ref={itemRef} dimension="s" {...options} key={id} role="option">
+            <MenuItem ref={itemRef} dimension={dimension} {...options} key={id} role="option">
               <Option href={item.url} as={item.linkAs} {...item.linkProps}>
                 {tooltip ? item.text.slice(0, 37) + '...' : item.text}
               </Option>
