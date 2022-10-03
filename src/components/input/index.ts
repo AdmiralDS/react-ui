@@ -14,3 +14,4 @@ export * from './StatusIcon';
 export * from './EditMode';
 export * from './PhoneNumberInput';
 export * from './InputEx';
+export * from './FileInput';
