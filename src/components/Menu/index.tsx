@@ -25,6 +25,7 @@ const menuListHeights = css<{ dimension?: MenuDimensions; maxHeight?: string | n
 
 const Wrapper = styled.div<{ dimension?: MenuDimensions }>`
   padding: 8px 0;
+  box-sizing: border-box;
   display: flex;
   overflow: hidden;
   flex-direction: column;
