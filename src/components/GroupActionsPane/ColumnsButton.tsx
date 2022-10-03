@@ -4,12 +4,11 @@ import styled, { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-c
 import { useMemo, useRef, useState } from 'react';
 import { Checkbox } from '#src/components/Checkbox';
 import { IconButton } from '#src/components/IconButton';
-import { DropdownContainer } from '#src/components/DropdownContainer';
+import { StyledDropdownContainer } from '#src/components/DropdownContainer';
 import { ReactComponent as PlusOutline } from '@admiral-ds/icons/build/service/PlusOutline.svg';
 import { Menu } from '#src/components/Menu';
 import { MenuItem } from '#src/components/Menu/MenuItem';
 import { refSetter } from '#src/components/common/utils/refSetter';
-import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 
 export type MenuDimension = 's' | 'm' | 'l';
 
@@ -54,12 +53,6 @@ const ColumnsMenuItem = styled(MenuItem)`
 
 const StyledCheckbox = styled(Checkbox)`
   margin-right: 10px;
-`;
-
-const StyledDropdownContainer = styled(DropdownContainer)`
-  ${(p) => p.theme.shadow['Shadow 08']}
-  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
-  overflow: hidden;
 `;
 
 export const ColumnsButton = React.forwardRef<HTMLButtonElement, ColumnsButtonProps>(

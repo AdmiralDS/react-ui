@@ -9,10 +9,9 @@ import { changeInputData } from '#src/components/common/dom/changeInputData';
 import { getTimeInMinutes, parseStringToTime } from './utils';
 import { typography } from '#src/components/Typography';
 import { InputIconButton } from '#src/components/InputIconButton';
-import { DropdownContainer } from '#src/components/DropdownContainer';
+import { StyledDropdownContainer } from '#src/components/DropdownContainer';
 import { MenuItem, RenderOptionProps } from '#src/components/Menu/MenuItem';
 import { Menu } from '#src/components/Menu';
-import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 
 export interface SlotProps extends HTMLAttributes<HTMLDivElement>, RenderOptionProps {
   value: string;
@@ -85,12 +84,6 @@ const StyledMenu = styled(Menu)`
     width: 68px;
     height: 192px;
   }
-`;
-
-const StyledDropdownContainer = styled(DropdownContainer)`
-  ${(p) => p.theme.shadow['Shadow 08']}
-  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
-  overflow: hidden;
 `;
 
 const StyledMenuItem = styled(MenuItem)`

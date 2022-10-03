@@ -19,16 +19,9 @@ import getFindCountryFunction, {
 } from '#src/components/input/PhoneNumberInput/findCoutryWithPriority';
 import type { ComponentName, CountryAlpha3Code } from '@admiral-ds/flags';
 import { ComponentsNames, CountriesRusNames, FlagsPack } from '@admiral-ds/flags';
-import { DropdownContainer } from '#src/components/DropdownContainer';
+import { StyledDropdownContainer } from '#src/components/DropdownContainer';
 import type { MenuDimensions } from '#src/components/Menu';
 import { keyboardKey } from '#src/components/common/keyboardKey';
-import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
-
-const StyledDropdownContainer = styled(DropdownContainer)`
-  ${(p) => p.theme.shadow['Shadow 08']}
-  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
-  overflow: hidden;
-`;
 
 const Chevron = styled(ChevronRightOutline)<{ disabled?: boolean }>`
   transition: transform 0.3s;

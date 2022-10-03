@@ -2,14 +2,11 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { keyboardKey } from '#src/components/common/keyboardKey';
 import { refSetter } from '#src/components/common/utils/refSetter';
-import { DropdownContainer } from '#src/components/DropdownContainer';
-import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
+import { StyledDropdownContainer } from '#src/components/DropdownContainer';
 import { Button } from './Button';
 
-const StyledDropdownContainer = styled(DropdownContainer)`
+const FilterDropdownContainer = styled(StyledDropdownContainer)`
   background-color: ${(p) => p.theme.color['Special/Elevated BG']};
-  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
-  ${(p) => p.theme.shadow['Shadow 08']}
 `;
 
 type Dimension = 'xl' | 'l' | 'm' | 's';
@@ -105,7 +102,7 @@ export const Filter = React.forwardRef<HTMLButtonElement, FilterCompProps>(
           {...props}
         />
         {menuOpened && (
-          <StyledDropdownContainer
+          <FilterDropdownContainer
             role="listbox"
             targetRef={targetRef}
             alignSelf={cellAlign === 'left' ? 'flex-end' : 'flex-start'}
@@ -113,7 +110,7 @@ export const Filter = React.forwardRef<HTMLButtonElement, FilterCompProps>(
             onKeyDown={handleMenuKeyDown}
           >
             {renderFilter({ closeMenu, setFilterActive })}
-          </StyledDropdownContainer>
+          </FilterDropdownContainer>
         )}
       </>
     );

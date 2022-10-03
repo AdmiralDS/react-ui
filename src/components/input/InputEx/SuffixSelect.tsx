@@ -1,19 +1,12 @@
 import React from 'react';
 import styled, { css, DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import { OpenStatusButton } from '#src/components/OpenStatusButton';
-import { DropdownContainer } from '#src/components/DropdownContainer';
+import { StyledDropdownContainer } from '#src/components/DropdownContainer';
 import { Menu } from '#src/components/input/InputEx/Menu';
 import { ValueType } from '#src/components/input/InputEx/ValueType';
-import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 
 const StyledMenu = styled(Menu)<{ width?: string }>`
   width: ${({ width }) => (width ? width : 'auto')};
-`;
-
-const StyledDropdownContainer = styled(DropdownContainer)`
-  ${(p) => p.theme.shadow['Shadow 08']}
-  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
-  overflow: hidden;
 `;
 
 const disableEventMixin = css`

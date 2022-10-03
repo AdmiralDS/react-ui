@@ -2,12 +2,11 @@ import * as React from 'react';
 import styled, { DefaultTheme, FlattenInterpolation, ThemeContext, ThemeProps } from 'styled-components';
 import { ReactComponent as SearchOutlineSVG } from '@admiral-ds/icons/build/system/SearchOutline.svg';
 import { LIGHT_THEME } from '#src/components/themes';
-import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { keyboardKey } from '#src/components/common/keyboardKey';
 import { changeInputData } from '#src/components/common/dom/changeInputData';
 import { refSetter } from '#src/components/common/utils/refSetter';
 import { InputIconButton } from '#src/components/InputIconButton';
-import { DropdownContainer } from '#src/components/DropdownContainer';
+import { StyledDropdownContainer } from '#src/components/DropdownContainer';
 import { RenderOptionProps } from '#src/components/Menu/MenuItem';
 import { Menu } from '#src/components/Menu';
 import { HighlightFormat } from '#src/components/input/Select/types';
@@ -16,12 +15,10 @@ import { TextInput, TextInputProps } from '#src/components/input/TextInput';
 import { MessagePanel } from '#src/components/input/SuggestInput/MessagePanel';
 import { SuggestPanel } from '#src/components/input/SuggestInput/SuggestPanel';
 
-const StyledDropdownContainer = styled(DropdownContainer)`
+const SuggestDropdownContainer = styled(StyledDropdownContainer)`
   overflow-x: hidden;
   overflow-y: auto;
   min-width: 100%;
-  ${(p) => p.theme.shadow['Shadow 08']}
-  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
 `;
 
 export interface SuggestItem {
@@ -221,7 +218,7 @@ export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps
         }}
       >
         {options && isSuggestPanelOpen && !skeleton && !emptyAtLoading && (
-          <StyledDropdownContainer
+          <SuggestDropdownContainer
             targetRef={portalTargetRef || inputRef}
             alignSelf={alignDropdown}
             data-dimension={props.dimension || TextInput.defaultProps?.dimension}
@@ -242,7 +239,7 @@ export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps
                 onSelectItem={handleOptionSelect}
               />
             )}
-          </StyledDropdownContainer>
+          </SuggestDropdownContainer>
         )}
       </TextInput>
     );
