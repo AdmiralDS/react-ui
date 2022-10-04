@@ -10,6 +10,7 @@ export const TooltipWrapper = styled.div`
   opacity: 0;
   transition-delay: 200ms;
   transition-property: opacity;
+  align-self: center;
   width: max-content;
   min-width: max-content;
   pointer-events: initial;

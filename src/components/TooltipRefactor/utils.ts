@@ -31,15 +31,21 @@ export function getTooltipDirection(
   const tooltipRect: DOMRect = tooltipElement.getBoundingClientRect();
   const positions = Object.entries(getPositionMapper(scrollbarSize)) as [TooltipPositionType, CalculationResult][];
 
+  /** Если задан параметр tooltipPosition, то тултип обязательно должен отрендериться в указанном направлении
+   * (с возможностью сдвига по горизонтальной оси при tooltipPosition === 'top' | 'bottom',
+   * и по вертикальной оси при tooltipPosition = 'right' | 'left').
+   * Н-р, если tooltipPosition === 'top', то происходит проверка позиций top|topRight|topLeft|topPageCenter
+   */
   const compatiblePositions = tooltipPosition
     ? positions.filter((kv) => {
-        return kv[0] === tooltipPosition;
+        return kv[0].includes(tooltipPosition) && kv[1].check(anchorElementRect, tooltipRect);
       })
     : positions.filter((kv) => {
         return kv[1].check(anchorElementRect, tooltipRect);
       });
 
-  return compatiblePositions.length ? compatiblePositions[0][0] : 'bottom';
+  const defaultPosition = tooltipPosition || 'bottom';
+  return compatiblePositions.length ? compatiblePositions[0][0] : defaultPosition;
 }
 
 function getPositionMapper(scrollbarSize: number): Record<TooltipPositionType, CalculationResult> {
