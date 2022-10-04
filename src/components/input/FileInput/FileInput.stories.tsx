@@ -4,8 +4,11 @@ import * as React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import { FileInput } from '#src/components/input';
 import { Theme } from '#src/components/themes';
-import { useEffect, useRef, useState } from 'react';
-import { acceptFile } from '#src/components/input/FileUploader/utils';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import { acceptFile } from '#src/components/input/FileInput/utils';
+import { FileItem, FileItemProps, RenderFileListItemProps } from '#src/components/input/FileInput/FileItem';
+import { FileList } from '#src/components/input/FileInput/FileList';
+import { uid } from '#src/components/common/uid';
 
 const Separator = styled.div`
   height: 40px;
@@ -83,33 +86,90 @@ export default {
   },
 } as ComponentMeta<typeof FileInput>;
 
+const file1 = new File(['foo'], 'example1.jpeg', {
+  type: 'image/jpeg',
+});
+const file2 = new File(['foo'], 'example2.pdf', {
+  type: 'application/pdf',
+});
+const file3 = new File(['foo'], 'example3.doc', {
+  type: 'application/msword',
+});
+const file4 = new File(['foo'], 'example4.xls', {
+  type: 'application/vnd.ms-excel',
+});
+
+const filesInitial: FileItemProps[] = [
+  {
+    file: file1,
+    status: 'Uploaded',
+  },
+  {
+    file: file2,
+    status: 'Loading',
+  },
+  {
+    file: file3,
+    status: 'Error',
+    errorMessage: 'Что-то явно пошло не так...',
+  },
+  {
+    file: file4,
+    status: 'Queue',
+  },
+];
+
 const FileInputBaseTemplate: ComponentStory<typeof FileInput> = (props) => {
   function swapBorder(theme: Theme): Theme {
     theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
   const inputRef = useRef<HTMLInputElement>(null);
-  const [files, setFiles] = useState<File[]>([]);
+  const [files, setFiles] = useState<FileItemProps[]>(filesInitial);
 
-  React.useEffect(() => {
+  const accept = 'image/*, .pdf, application/json';
+
+  useEffect(() => {
     function onChangeEventHandler(this: HTMLInputElement) {
-      const filesToAdd = Array.from(this.files || [])
-        .filter((file) => !props.accept || acceptFile(file, props.accept))
-        .map((file) => file);
+      const filesToAdd: FileItemProps[] = Array.from(this.files || [])
+        .filter((file) => !accept || acceptFile(file, accept))
+        .map((file) => ({ file }));
 
       const dt = new DataTransfer();
-      filesToAdd.forEach((file) => dt.items.add(file));
+      filesToAdd.forEach(({ file }) => dt.items.add(file));
       this.files = dt.files;
-      setFiles(filesToAdd);
+      setFiles([...files, ...filesToAdd]);
     }
-
     const input = inputRef.current;
 
     if (input) {
       input.addEventListener('change', onChangeEventHandler, true);
       return () => input.removeEventListener('change', onChangeEventHandler, true);
     }
-  }, [inputRef.current, files, props.accept]);
+  }, [inputRef.current, files, accept]);
+
+  const model = useMemo(() => {
+    if (files.length) {
+      return files.map((item) => {
+        const itemId = uid();
+        return {
+          id: itemId,
+          render: (options: RenderFileListItemProps) => (
+            <FileItem
+              file={item.file}
+              dimension={props.dimension}
+              status={item.status}
+              errorMessage={item.errorMessage}
+              {...options}
+              key={itemId}
+            >
+              {item.file.name}
+            </FileItem>
+          ),
+        };
+      });
+    }
+  }, [files, props.dimension]);
 
   useEffect(() => console.log(files), [files]);
 
@@ -117,14 +177,17 @@ const FileInputBaseTemplate: ComponentStory<typeof FileInput> = (props) => {
     <ThemeProvider theme={swapBorder}>
       <FileInput
         dimension={props.dimension}
+        disabled={props.disabled}
         width="480px"
-        title={`Загрузите не более 3-х файлов типа JPEG до 5 MB каждый`}
+        title={`Загрузите не более 3-х файлов типа ${accept} до 5 MB каждый`}
         description="Добавьте файлы"
         ref={inputRef}
       />
+      {model && model.length && <FileList model={model} dimension={props.dimension} width="480px" />}
     </ThemeProvider>
   );
 };
 
 export const FileInputBase = FileInputBaseTemplate.bind({});
 FileInputBase.storyName = 'File Input. Базовый пример';
+FileInputBase.args = { dimension: 'xl' };
