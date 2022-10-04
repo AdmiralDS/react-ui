@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.5.0](https://github.com/AdmiralDS/react-ui/compare/v2.4.0...v2.5.0) (2022-10-04)
+
+
+### Features
+
+* **Components:** add dropContainerCssMixin prop for components with drop down ([4de4e05](https://github.com/AdmiralDS/react-ui/commit/4de4e05e02f7d46c752638f1d8d070470302fc19))
+
+
+### Bug Fixes
+
+* **Menu:** fix styles ([3518783](https://github.com/AdmiralDS/react-ui/commit/35187835ff15833673f9aa8a288d2d46a4784d4c))
+* **SuggestInput:** fix double scroll ([d004158](https://github.com/AdmiralDS/react-ui/commit/d0041584e8b88020d10b844e25eedc0854853454))
+* wrong entry name mappings and CRA5 workaround ([335f496](https://github.com/AdmiralDS/react-ui/commit/335f496f03b95f8f60b436b37345c05b2873eded))
+
 ## [2.4.0](https://github.com/AdmiralDS/react-ui/compare/v2.3.0...v2.4.0) (2022-09-29)
 
 
