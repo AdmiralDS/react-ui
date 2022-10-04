@@ -67,11 +67,13 @@ const InputWrapper = styled.div<{ disabled?: boolean; dimension: FileInputDimens
   pointer-events: all;
   ${(p) => (p.disabled ? disabledStyles : hoverStyles)};
   ${(p) => (p.dimension === 'm' ? dimensionMStyles : dimensionXLStyles)};
+  box-sizing: border-box;
 `;
 
 const Wrapper = styled.div<{ dimension: FileInputDimension; width?: string | number }>`
   min-width: ${(p) => (p.dimension === 'm' ? MIN_WIDTH_M : MIN_WIDTH_XL)};
   ${(p) => (p.width ? `width: ${p.width};` : '')}
+  box-sizing: border-box;
 `;
 
 export interface FileInputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'title'> {
