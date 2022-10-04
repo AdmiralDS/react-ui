@@ -1,21 +1,19 @@
 import React, { InputHTMLAttributes } from 'react';
 import styled from 'styled-components';
 import { ReactComponent as AttachFileOutline } from '@admiral-ds/icons/build/system/AttachFileOutline.svg';
+import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
+import { typography } from '#src/components/Typography';
 import {
   ICON_MARGIN,
   ICON_SIZE_M,
   ICON_SIZE_XL,
   MIN_WIDTH_M,
   MIN_WIDTH_XL,
-} from '#src/components/input/FileInput/style';
-import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
-import {
   dimensionMStyles,
   dimensionXLStyles,
   disabledStyles,
   hoverStyles,
 } from '#src/components/input/FileInput/style';
-import { typography } from '#src/components/Typography';
 
 export type FileInputDimension = 'xl' | 'm';
 
@@ -71,13 +69,16 @@ const InputWrapper = styled.div<{ disabled?: boolean; dimension: FileInputDimens
   ${(p) => (p.dimension === 'm' ? dimensionMStyles : dimensionXLStyles)};
 `;
 
-const Wrapper = styled.div<{ dimension: FileInputDimension }>`
+const Wrapper = styled.div<{ dimension: FileInputDimension; width?: string | number }>`
   min-width: ${(p) => (p.dimension === 'm' ? MIN_WIDTH_M : MIN_WIDTH_XL)};
+  ${(p) => (p.width ? `width: ${p.width};` : '')}
 `;
 
 export interface FileInputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'title'> {
   /** Размер компонента */
   dimension: FileInputDimension;
+  /** Задает ширину */
+  width?: string | number;
   /** Текст для лейбла компонента */
   title?: React.ReactNode;
   /** Текст для кнопки при dimension M */
@@ -85,12 +86,12 @@ export interface FileInputProps extends Omit<InputHTMLAttributes<HTMLInputElemen
 }
 
 export const FileInput = React.forwardRef<HTMLInputElement, FileInputProps>(
-  ({ dimension = 'xl', title, description, disabled, multiple = true, ...props }, ref) => {
+  ({ dimension = 'xl', width, title, description, disabled, multiple = true, ...props }, ref) => {
     const renderTitleText = () => <TitleText dimension={dimension} disabled={disabled} children={title} />;
     const renderDescription = () => <Description disabled={disabled}>{description}</Description>;
 
     return (
-      <Wrapper dimension={dimension}>
+      <Wrapper dimension={dimension} width={width}>
         {title && dimension === 'm' && renderTitleText()}
         <InputWrapper dimension={dimension} disabled={disabled}>
           <Icon dimension={dimension} />

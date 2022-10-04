@@ -90,11 +90,6 @@ const FileInputBaseTemplate: ComponentStory<typeof FileInput> = (props) => {
   }
   const inputRef = useRef<HTMLInputElement>(null);
   const [files, setFiles] = useState<File[]>([]);
-  /*const handleChange = () => {
-    if (inputRef.current) {
-      setFiles([...files, inputRef.current]);
-    }
-  };*/
 
   React.useEffect(() => {
     function onChangeEventHandler(this: HTMLInputElement) {
@@ -122,6 +117,7 @@ const FileInputBaseTemplate: ComponentStory<typeof FileInput> = (props) => {
     <ThemeProvider theme={swapBorder}>
       <FileInput
         dimension={props.dimension}
+        width="480px"
         title={`Загрузите не более 3-х файлов типа JPEG до 5 MB каждый`}
         description="Добавьте файлы"
         ref={inputRef}
