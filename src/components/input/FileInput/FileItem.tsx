@@ -95,20 +95,34 @@ const StyledSpinner = styled(Spinner)<{ dimension?: FileInputDimension }>`
   ${functionalItemSizeMixin}
 `;
 
+const hoveredCss = css`
+  &:not(:disabled) {
+    &::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      width: calc(100% + 8px);
+      height: calc(100% + 8px);
+      background-color: ${({ theme }) => theme.color['Opacity/Hover']};
+    }
+  }
+`;
+
 const Close = styled.div<{ dimension?: FileInputDimension }>`
+  position: relative;
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
   ${functionalItemSizeMixin}
-  &:hover {
-    border-radius: 50%;
-    background-color: ${(p) => p.theme.color['Opacity/Hover']};
-  }
+  &:hover:not(:disabled),
+  &:focus:not(:disabled) + ${hoveredCss}
   & svg {
-    width: 24px;
-    height: 24px;
     fill: ${(p) => p.theme.color['Neutral/Neutral 50']};
+    ${functionalItemSizeMixin}
   }
 `;
 
