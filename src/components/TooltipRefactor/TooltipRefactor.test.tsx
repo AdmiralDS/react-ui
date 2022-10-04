@@ -4,7 +4,7 @@ import { act } from 'react-dom/test-utils';
 import { ThemeProvider } from 'styled-components';
 
 import type { ITooltipProps } from '.';
-import { Tooltip } from '.';
+import { Tooltip, TOOLTIP_DELAY } from '.';
 import { LIGHT_THEME } from '#src/components/themes';
 
 describe('Tooltip', () => {
@@ -13,29 +13,43 @@ describe('Tooltip', () => {
     jest.clearAllTimers();
   });
 
-  // jsdom defines innerWidth and innerHeight as 1024 x 768
-  const viewPortHeight = window.innerHeight;
-  const wrapperHeight = 20;
-  const wrapperLeft = 30;
-  const wrapperTop = 30;
-  const wrapperWidth = 100;
-  const tooltipWidth = 120;
-
   const WrappedComponentWithTooltip = ({
     renderContent,
     withDelay,
-  }: Omit<ITooltipProps, 'visible' | 'targetRef' | 'onVisibilityChange'>) => {
-    const divRef = React.useRef(null);
+  }: Omit<ITooltipProps, 'targetRef'> & { withDelay?: boolean }) => {
+    const divRef = React.useRef<HTMLDivElement>(null);
     const [visible, setVisible] = React.useState(false);
+    let showTooltipTimer: any;
+
+    const show = () => {
+      showTooltipTimer = window.setTimeout(() => setVisible(true), withDelay ? TOOLTIP_DELAY : 0);
+    };
+    const hide = () => {
+      clearTimeout(showTooltipTimer);
+      setVisible(false);
+    };
+
+    React.useEffect(() => {
+      const button = divRef.current;
+      if (button) {
+        button.addEventListener('mouseenter', show);
+        button.addEventListener('focus', show);
+        button.addEventListener('mouseleave', hide);
+        button.addEventListener('mousedown', hide);
+        button.addEventListener('blur', hide);
+        return () => {
+          button.removeEventListener('mouseenter', show);
+          button.removeEventListener('focus', show);
+          button.removeEventListener('mouseleave', hide);
+          button.removeEventListener('mousedown', hide);
+          button.removeEventListener('blur', hide);
+        };
+      }
+    }, [divRef.current]);
+
     return (
       <ThemeProvider theme={LIGHT_THEME}>
-        <Tooltip
-          targetRef={divRef}
-          visible={visible}
-          onVisibilityChange={(visible: boolean) => setVisible(visible)}
-          renderContent={renderContent}
-          withDelay={withDelay}
-        />
+        {visible && <Tooltip targetRef={divRef} renderContent={renderContent} />}
         <div ref={divRef} data-testid="wrapped-component">
           Wrapped component
         </div>
@@ -51,17 +65,6 @@ describe('Tooltip', () => {
   it('should render wrapped component', () => {
     const wrapper = render(<WrappedComponentWithTooltip renderContent={() => ''} />);
     expect(wrapper.getByTestId('wrapped-component')).toHaveTextContent('Wrapped component');
-  });
-
-  it('should pass all props to wrapped component', () => {
-    const props = {
-      className: 'wrappedClassName',
-      'data-testId': 'wrappedTestId',
-    };
-    const wrapper = render(<WrappedComponentWithTooltip {...props} renderContent={() => ''} />);
-    const wrappedComponent = wrapper.getByTestId('wrapped-component');
-    expect(wrappedComponent.classList.contains('wrappedClassName'));
-    expect(wrappedComponent.dataset.testId === 'wrappedTestId');
   });
 
   it('should render tooltip with provided text when mouse enters component', () => {

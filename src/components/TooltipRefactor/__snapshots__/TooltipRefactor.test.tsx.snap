@@ -1,5 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Tooltip should pass all props to wrapped component 1`] = `
+<div
+  data-testid="wrapped-component"
+>
+  Wrapped component
+</div>
+`;
+
 exports[`Tooltip should render component 1`] = `
 Object {
   "asFragment": [Function],
