@@ -1,5 +1,5 @@
 import * as React from 'react';
-import styled, { css } from 'styled-components';
+import styled, { css, DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import { changeInputData } from '#src/components/common/dom/changeInputData';
 import { refSetter } from '#src/components/common/utils/refSetter';
 import { TextInput, TextInputProps } from '#src/components/input/TextInput';
@@ -19,7 +19,7 @@ import getFindCountryFunction, {
 } from '#src/components/input/PhoneNumberInput/findCoutryWithPriority';
 import type { ComponentName, CountryAlpha3Code } from '@admiral-ds/flags';
 import { ComponentsNames, CountriesRusNames, FlagsPack } from '@admiral-ds/flags';
-import { DropdownContainer } from '#src/components/DropdownContainer';
+import { StyledDropdownContainer } from '#src/components/DropdownContainer';
 import type { MenuDimensions } from '#src/components/Menu';
 import { keyboardKey } from '#src/components/common/keyboardKey';
 
@@ -84,6 +84,8 @@ export interface PhoneNumberInputProps extends Omit<TextInputProps, 'value'> {
   defaultCountry?: CountryAlpha3Code;
   /** Список стран для выпадающего списка. Отмечается кодом ISO A3 страны */
   onlyCountries?: Array<CountryAlpha3Code>;
+  /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
+  dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
 }
 
 const AVAILABLE_ALPHA3_CODES = Object.keys(ComponentsNames);
@@ -98,6 +100,7 @@ export const PhoneNumberInput = React.forwardRef<HTMLInputElement, PhoneNumberIn
       onlyCountries = AVAILABLE_ALPHA3_CODES,
       handleInput,
       skeleton = false,
+      dropContainerCssMixin,
       ...props
     },
     ref,
@@ -295,7 +298,11 @@ export const PhoneNumberInput = React.forwardRef<HTMLInputElement, PhoneNumberIn
           }}
         >
           {isOpened && !disabled && !skeleton && (
-            <DropdownContainer targetRef={inputRef} onClickOutside={clickOutside}>
+            <StyledDropdownContainer
+              targetRef={inputRef}
+              onClickOutside={clickOutside}
+              dropContainerCssMixin={dropContainerCssMixin}
+            >
               <CountriesList
                 countries={countryList}
                 selected={selectedIndex > -1 ? countryList[selectedIndex].uid : undefined}
@@ -304,7 +311,7 @@ export const PhoneNumberInput = React.forwardRef<HTMLInputElement, PhoneNumberIn
                 onSelectItem={handleSelectCountry}
                 dimension={menuDimension}
               />
-            </DropdownContainer>
+            </StyledDropdownContainer>
           )}
         </TextInput>
         <CountryContainer

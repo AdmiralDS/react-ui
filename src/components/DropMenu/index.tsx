@@ -3,7 +3,7 @@ import * as React from 'react';
 import { keyboardKey } from '#src/components/common/keyboardKey';
 import { OpenStatusButton } from '#src/components/OpenStatusButton';
 import type { ItemProps } from '#src/components/Menu/MenuItem';
-import { DropdownContainer } from '#src/components/DropdownContainer';
+import { StyledDropdownContainer } from '#src/components/DropdownContainer';
 import { Menu, MenuDimensions as Dimension, MenuProps } from '#src/components/Menu';
 import { refSetter } from '#src/components/common/utils/refSetter';
 import styled, { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
@@ -11,7 +11,7 @@ import styled, { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-c
 const StyledMenu = styled(Menu)<{ width?: string }>`
   width: ${({ width }) => (width ? width : 'auto')};
 `;
-const StyledDropdownContainer = styled(DropdownContainer)<{
+const DropMenuContainer = styled(StyledDropdownContainer)<{
   dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
 }>`
   ${(p) => p.dropContainerCssMixin || ''}
@@ -83,6 +83,7 @@ export const DropMenu = React.forwardRef<HTMLElement, DropMenuProps>(
       alignMenuRef,
       renderContentProp,
       menuMaxHeight,
+      dropContainerCssMixin,
       ...props
     },
     ref,
@@ -156,11 +157,12 @@ export const DropMenu = React.forwardRef<HTMLElement, DropMenuProps>(
           menuState: menuOpened,
         })}
         {menuOpened && !loading && (
-          <StyledDropdownContainer
+          <DropMenuContainer
             role="listbox"
             alignSelf={alignSelf}
             targetRef={alignMenuRef || btnRef}
             onClickOutside={clickOutside}
+            dropContainerCssMixin={dropContainerCssMixin}
             {...props}
           >
             <StyledMenu
@@ -173,7 +175,7 @@ export const DropMenu = React.forwardRef<HTMLElement, DropMenuProps>(
               active={active}
               onActivateItem={setActive}
             />
-          </StyledDropdownContainer>
+          </DropMenuContainer>
         )}
       </>
     );

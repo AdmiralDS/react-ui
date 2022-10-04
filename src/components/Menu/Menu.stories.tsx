@@ -17,6 +17,7 @@ import { Button } from '#src/components/Button';
 import { ReactComponent as PlusOutline } from '@admiral-ds/icons/build/service/PlusOutline.svg';
 import { uid } from '#src/components/common/uid';
 import { keyboardKey } from '#src/components/common/keyboardKey';
+import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -78,6 +79,13 @@ const StyledMenuItem = styled(MenuItem)`
   border-bottom: ${({ theme }) => `1px solid ${theme.color['Neutral/Neutral 20']}`};
   flex-direction: column;
   align-items: flex-start;
+`;
+
+const Wrapper = styled.div`
+  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
+  overflow: hidden;
+  border-color: transparent;
+  ${(p) => p.theme.shadow['Shadow 08']}
 `;
 
 const TemplateWithCards: ComponentStory<typeof Menu> = (args) => {
@@ -162,7 +170,7 @@ const TemplateWithCards: ComponentStory<typeof Menu> = (args) => {
 
   return (
     <>
-      <div style={{ width: 'fit-content' }}>
+      <Wrapper style={{ width: 'fit-content' }}>
         <Menu
           {...args}
           model={model}
@@ -171,7 +179,7 @@ const TemplateWithCards: ComponentStory<typeof Menu> = (args) => {
           active={active}
           onActivateItem={setActive}
         />
-      </div>
+      </Wrapper>
     </>
   );
 };
@@ -233,9 +241,9 @@ const SimpleTemplate: ComponentStory<typeof Menu> = (args) => {
 
   return (
     <ThemeProvider theme={swapBorder}>
-      <div style={{ width: 'fit-content' }}>
+      <Wrapper style={{ width: 'fit-content' }}>
         <Menu {...args} model={model} />
-      </div>
+      </Wrapper>
     </ThemeProvider>
   );
 };
@@ -333,9 +341,9 @@ const CustomItemTemplate: ComponentStory<typeof Menu> = (args) => {
 
   return (
     <>
-      <div style={{ width: 'fit-content' }}>
+      <Wrapper style={{ width: 'fit-content' }}>
         <Menu {...args} model={model} defaultSelected={'4'} />
-      </div>
+      </Wrapper>
     </>
   );
 };
@@ -359,9 +367,9 @@ const MenuCheckboxTemplate: ComponentStory<typeof Menu> = (args) => {
 
   return (
     <ThemeProvider theme={swapBorder}>
-      <div style={{ width: 'fit-content' }}>
+      <Wrapper style={{ width: 'fit-content' }}>
         <Menu {...args} model={model} />
-      </div>
+      </Wrapper>
     </ThemeProvider>
   );
 };
@@ -387,11 +395,11 @@ const MenuRadiobuttonTemplate: ComponentStory<typeof Menu> = (args) => {
 
   return (
     <ThemeProvider theme={swapBorder}>
-      <div style={{ width: 'fit-content' }}>
+      <Wrapper style={{ width: 'fit-content' }}>
         <FieldSet>
           <Menu {...args} model={model} />
         </FieldSet>
-      </div>
+      </Wrapper>
     </ThemeProvider>
   );
 };
@@ -469,9 +477,9 @@ const MenuTooltipTemplate: ComponentStory<typeof Menu> = (args) => {
 
   return (
     <ThemeProvider theme={swapBorder}>
-      <div style={{ width: 'fit-content' }}>
+      <Wrapper style={{ width: 'fit-content' }}>
         <Menu {...args} model={model} />
-      </div>
+      </Wrapper>
     </ThemeProvider>
   );
 };
@@ -502,7 +510,7 @@ const MenuActionsTwoButtonsTemplate: ComponentStory<typeof Menu> = (props) => {
 
   return (
     <ThemeProvider theme={swapBorder}>
-      <div style={{ width: 'fit-content' }}>
+      <Wrapper style={{ width: 'fit-content' }}>
         <Menu
           {...props}
           model={model}
@@ -530,7 +538,7 @@ const MenuActionsTwoButtonsTemplate: ComponentStory<typeof Menu> = (props) => {
             );
           }}
         />
-      </div>
+      </Wrapper>
     </ThemeProvider>
   );
 };
@@ -596,7 +604,7 @@ const MenuActionsAddUserValueTemplate: ComponentStory<typeof Menu> = (props) => 
 
   return (
     <ThemeProvider theme={swapBorder}>
-      <div style={{ width: 'fit-content' }}>
+      <Wrapper style={{ width: 'fit-content' }}>
         <Menu
           {...props}
           model={model}
@@ -632,7 +640,7 @@ const MenuActionsAddUserValueTemplate: ComponentStory<typeof Menu> = (props) => 
             );
           }}
         />
-      </div>
+      </Wrapper>
     </ThemeProvider>
   );
 };

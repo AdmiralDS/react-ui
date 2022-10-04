@@ -1,5 +1,5 @@
 import React, { ButtonHTMLAttributes, HTMLAttributes, useState } from 'react';
-import styled from 'styled-components';
+import styled, { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import { Dimension as ButtonDimension } from '#src/components/TextButton/types';
 import { ColumnsButton, MenuDimension } from '#src/components/GroupActionsPane/ColumnsButton';
 import { SettingsButton } from '#src/components/GroupActionsPane/SettingsButton';
@@ -80,6 +80,9 @@ export interface GroupActionsPaneProps extends HTMLAttributes<HTMLDivElement> {
     /** Placeholder инпута */
     inputPlaceholder?: string;
   };
+
+  /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
+  dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
 }
 
 export const GroupActionsPane = ({
@@ -94,6 +97,7 @@ export const GroupActionsPane = ({
   onChangeSearchValue,
   settingsButtonsDisabled = false,
   locale,
+  dropContainerCssMixin,
   ...props
 }: React.PropsWithChildren<GroupActionsPaneProps>) => {
   const [searchOpened, setSearchOpened] = useState<boolean>(false);
@@ -131,6 +135,7 @@ export const GroupActionsPane = ({
           buttonDimension={iconButtonDimension}
           onColumnsChange={onColumnsChange}
           disabled={settingsButtonsDisabled}
+          dropContainerCssMixin={dropContainerCssMixin}
         />
         {settingsMenu && (
           <SettingsButton

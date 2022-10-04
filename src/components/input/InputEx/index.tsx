@@ -3,7 +3,7 @@ import { ForwardedRef, InputHTMLAttributes } from 'react';
 import { ReactComponent as CloseOutlineSvg } from '@admiral-ds/icons/build/service/CloseOutline.svg';
 import type { ComponentDimension, ExtraProps, InputStatus } from '#src/components/input/types';
 import { containerHeights, skeletonMixin } from '../Container';
-import styled, { css } from 'styled-components';
+import styled, { css, DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import { typography } from '#src/components/Typography';
 import { changeInputData } from '#src/components/common/dom/changeInputData';
 import { InputIconButton } from '#src/components/InputIconButton';
@@ -264,6 +264,9 @@ export interface InputExProps extends Omit<InputHTMLAttributes<HTMLInputElement>
 
   /** Состояние skeleton */
   skeleton?: boolean;
+
+  /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
+  dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
 }
 
 export const InputEx = React.forwardRef<HTMLInputElement, InputExProps>(
@@ -293,6 +296,7 @@ export const InputEx = React.forwardRef<HTMLInputElement, InputExProps>(
       renderSuffixOption = ({ value }) => value,
 
       skeleton = false,
+      dropContainerCssMixin,
       ...props
     },
     ref,
@@ -309,6 +313,7 @@ export const InputEx = React.forwardRef<HTMLInputElement, InputExProps>(
             options={prefixValueList}
             disabled={props.disabled}
             readOnly={props.readOnly}
+            dropContainerCssMixin={dropContainerCssMixin}
           />
         )
       : renderPrefixValue;
@@ -325,6 +330,7 @@ export const InputEx = React.forwardRef<HTMLInputElement, InputExProps>(
             options={suffixValueList}
             disabled={props.disabled}
             readOnly={props.readOnly}
+            dropContainerCssMixin={dropContainerCssMixin}
           />
         )
       : renderPrefixValue;

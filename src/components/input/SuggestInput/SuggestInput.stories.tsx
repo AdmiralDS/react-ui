@@ -96,6 +96,12 @@ const OPTIONS = [
   'text 4',
   'text 5',
   'text 6',
+  'text 7',
+  'text 8 text text 2 text text 2 text text 2 text text 2 text text 2 text text 2 text ',
+  'text 9',
+  'text 10',
+  'text 11',
+  'text 12',
 ];
 
 async function wait(ms: number) {
