@@ -1,12 +1,12 @@
 import { css } from 'styled-components';
 
-export const ICON_SIZE_XL = '40px';
-export const ICON_SIZE_M = '24px';
-export const ICON_MARGIN = '14px';
-export const MIN_WIDTH_M = '288px';
-export const MIN_WIDTH_XL = '320px';
-const WRAPPER_PADDING_XL = '24px';
-const WRAPPER_PADDING_M = '8px 20px';
+export const FILE_INPUT_ICON_SIZE_XL = '40px';
+export const FILE_INPUT_ICON_SIZE_M = '24px';
+export const FILE_INPUT_ICON_MARGIN = '14px';
+export const FILE_INPUT_MIN_WIDTH_M = '288px';
+export const FILE_INPUT_MIN_WIDTH_XL = '320px';
+const FILE_INPUT_WRAPPER_PADDING_XL = '24px';
+const FILE_INPUT_WRAPPER_PADDING_M = '8px 20px';
 
 export const disabledStyles = css`
   border: ${(p) => `1px dashed ${p.theme.color['Neutral/Neutral 30']}`};
@@ -33,11 +33,11 @@ export const hoverStyles = css`
 
 export const dimensionMStyles = css`
   flex-direction: row;
-  padding: ${WRAPPER_PADDING_M};
+  padding: ${FILE_INPUT_WRAPPER_PADDING_M};
   justify-content: center;
 `;
 
 export const dimensionXLStyles = css`
   flex-direction: column;
-  padding: ${WRAPPER_PADDING_XL};
+  padding: ${FILE_INPUT_WRAPPER_PADDING_XL};
 `;

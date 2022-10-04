@@ -1,14 +1,14 @@
-import React, { InputHTMLAttributes } from 'react';
+import React, { forwardRef, InputHTMLAttributes } from 'react';
 import styled from 'styled-components';
 import { ReactComponent as AttachFileOutline } from '@admiral-ds/icons/build/system/AttachFileOutline.svg';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { typography } from '#src/components/Typography';
 import {
-  ICON_MARGIN,
-  ICON_SIZE_M,
-  ICON_SIZE_XL,
-  MIN_WIDTH_M,
-  MIN_WIDTH_XL,
+  FILE_INPUT_ICON_MARGIN,
+  FILE_INPUT_ICON_SIZE_M,
+  FILE_INPUT_ICON_SIZE_XL,
+  FILE_INPUT_MIN_WIDTH_M,
+  FILE_INPUT_MIN_WIDTH_XL,
   dimensionMStyles,
   dimensionXLStyles,
   disabledStyles,
@@ -18,10 +18,10 @@ import {
 export type FileInputDimension = 'xl' | 'm';
 
 const Icon = styled(AttachFileOutline)<{ dimension?: FileInputDimension }>`
-  height: ${(p) => (p.dimension === 'xl' ? ICON_SIZE_XL : ICON_SIZE_M)};
-  width: ${(p) => (p.dimension === 'xl' ? ICON_SIZE_XL : ICON_SIZE_M)};
-  margin-right: ${(p) => (p.dimension === 'm' ? ICON_MARGIN : '')};
-  margin-bottom: ${(p) => (p.dimension === 'xl' ? ICON_MARGIN : '')};
+  height: ${(p) => (p.dimension === 'xl' ? FILE_INPUT_ICON_SIZE_XL : FILE_INPUT_ICON_SIZE_M)};
+  width: ${(p) => (p.dimension === 'xl' ? FILE_INPUT_ICON_SIZE_XL : FILE_INPUT_ICON_SIZE_M)};
+  margin-right: ${(p) => (p.dimension === 'm' ? FILE_INPUT_ICON_MARGIN : '')};
+  margin-bottom: ${(p) => (p.dimension === 'xl' ? FILE_INPUT_ICON_MARGIN : '')};
 
   > * {
     fill: ${(p) => p.theme.color['Primary/Primary 60 Main']};
@@ -71,7 +71,7 @@ const InputWrapper = styled.div<{ disabled?: boolean; dimension: FileInputDimens
 `;
 
 const Wrapper = styled.div<{ dimension: FileInputDimension; width?: string | number }>`
-  min-width: ${(p) => (p.dimension === 'm' ? MIN_WIDTH_M : MIN_WIDTH_XL)};
+  min-width: ${(p) => (p.dimension === 'm' ? FILE_INPUT_MIN_WIDTH_M : FILE_INPUT_MIN_WIDTH_XL)};
   ${(p) => (p.width ? `width: ${p.width};` : '')}
   box-sizing: border-box;
 `;
@@ -87,7 +87,7 @@ export interface FileInputProps extends Omit<InputHTMLAttributes<HTMLInputElemen
   description?: React.ReactNode;
 }
 
-export const FileInput = React.forwardRef<HTMLInputElement, FileInputProps>(
+export const FileInput = forwardRef<HTMLInputElement, FileInputProps>(
   ({ dimension = 'xl', width, title, description, disabled, multiple = true, ...props }, ref) => {
     const renderTitleText = () => <TitleText dimension={dimension} disabled={disabled} children={title} />;
     const renderDescription = () => <Description disabled={disabled}>{description}</Description>;
