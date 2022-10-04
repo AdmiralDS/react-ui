@@ -2,7 +2,7 @@ import { withDesign } from 'storybook-addon-designs';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import * as React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
-import { FileInput } from '#src/components/input';
+import { FileInput } from '#src/components/input/FileInput';
 import { Theme } from '#src/components/themes';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { acceptFile } from '#src/components/input/FileInput/utils';

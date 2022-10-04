@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { forwardRef, HTMLAttributes } from 'react';
-import { FileInputDimension } from '#src/components/input';
+import { FileInputDimension } from '#src/components/input/FileInput';
 import styled, { css } from 'styled-components';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { typography } from '#src/components/Typography';

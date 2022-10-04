@@ -15,3 +15,5 @@ export * from './EditMode';
 export * from './PhoneNumberInput';
 export * from './InputEx';
 export * from './FileInput';
+export * from './FileInput/FileItem';
+export * from './FileInput/FileList';

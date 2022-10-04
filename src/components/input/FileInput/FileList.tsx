@@ -2,7 +2,7 @@ import { forwardRef } from 'react';
 import styled from 'styled-components';
 import * as React from 'react';
 import { FileListItemProps } from '#src/components/input/FileInput/FileItem';
-import { FileInputDimension } from '#src/components/input';
+import { FileInputDimension } from '#src/components/input/FileInput';
 
 const FileWrapper = styled.div<{ width?: string | number }>`
   ${(p) => (p.width ? `width: ${p.width};` : '')}
