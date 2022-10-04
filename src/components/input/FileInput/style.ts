@@ -44,3 +44,11 @@ export const dimensionXLStyles = css`
   flex-direction: column;
   padding: ${FILE_INPUT_WRAPPER_PADDING_XL};
 `;
+
+export const fullWidthPositionMixin = css`
+  flex: 1 1 100%;
+`;
+
+export const halfWidthPositionMixin = css`
+  flex: 1 1 36%;
+`;

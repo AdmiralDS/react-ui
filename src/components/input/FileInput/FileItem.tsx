@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { forwardRef, HTMLAttributes } from 'react';
 import { FileInputDimension } from '#src/components/input/FileInput';
-import styled, { css } from 'styled-components';
+import styled, { css, DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { typography } from '#src/components/Typography';
 import { formatBytes, getFormat } from '#src/components/input/FileInput/utils';
@@ -18,12 +18,15 @@ const ERROR_BLOCK_HEIGHT_M = '20px';
 
 export type Status = 'Uploaded' | 'Loading' | 'Error' | 'Queue';
 
-const Container = styled.div<{ dimension?: FileInputDimension }>`
+const Container = styled.div<{
+  dimension?: FileInputDimension;
+  filesLayoutCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+}>`
   display: flex;
   flex-direction: column;
-  flex: ${(p) => (p.dimension === 'xl' ? '1 1 36%' : '1 1 auto')};
   margin-top: 16px;
   overflow: hidden;
+  ${(p) => p.filesLayoutCssMixin}
 
   &:nth-of-type(even) {
     margin-left: ${(p) => (p.dimension === 'xl' ? '16px' : '0')};
@@ -159,10 +162,12 @@ export interface FileItemProps extends HTMLAttributes<HTMLDivElement>, RenderFil
   errorMessage?: string;
   /** Отображение превью изображений  */
   showPreview?: boolean;
+  /** Позволяет добавлять миксин для компоновки загруженных файлов, созданный с помощью styled css  */
+  filesLayoutCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
 }
 
 export const FileItem = forwardRef<HTMLDivElement, FileItemProps>(
-  ({ children, file, dimension, status, errorMessage, showPreview, ...props }, ref) => {
+  ({ children, file, dimension, status, errorMessage, showPreview, filesLayoutCssMixin, ...props }, ref) => {
     const fileFormat = getFormat(file.type);
     const fileSize = formatBytes(file.size);
     const fileInfo = `${fileFormat}・${fileSize} Mb`;
@@ -171,7 +176,7 @@ export const FileItem = forwardRef<HTMLDivElement, FileItemProps>(
     const titleRef = React.useRef<HTMLDivElement | null>(null);
 
     return (
-      <Container ref={ref} dimension={dimension}>
+      <Container ref={ref} dimension={dimension} filesLayoutCssMixin={filesLayoutCssMixin}>
         <PreviewWrapper status={status}>
           <Content dimension={dimension}>
             <FileName ref={titleRef}>{fileName}</FileName>

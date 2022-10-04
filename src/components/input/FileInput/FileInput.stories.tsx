@@ -9,6 +9,7 @@ import { acceptFile } from '#src/components/input/FileInput/utils';
 import { FileItem, FileItemProps, RenderFileListItemProps } from '#src/components/input/FileInput/FileItem';
 import { FileList } from '#src/components/input/FileInput/FileList';
 import { uid } from '#src/components/common/uid';
+import { fullWidthPositionMixin, halfWidthPositionMixin } from '#src/components/input/FileInput/style';
 
 const Separator = styled.div`
   height: 40px;
@@ -160,6 +161,7 @@ const FileInputBaseTemplate: ComponentStory<typeof FileInput> = (props) => {
               dimension={props.dimension}
               status={item.status}
               errorMessage={item.errorMessage}
+              filesLayoutCssMixin={props.dimension === 'xl' ? halfWidthPositionMixin : fullWidthPositionMixin}
               {...options}
               key={itemId}
             >
