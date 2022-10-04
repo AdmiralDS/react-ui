@@ -86,10 +86,16 @@ export { ReactComponent as InboxOutline } from '@admiral-ds/icons/build/system/I
 export { ReactComponent as InboxSolid } from '@admiral-ds/icons/build/system/InboxSolid.svg';
 export { ReactComponent as KeyboardOutline } from '@admiral-ds/icons/build/system/KeyboardOutline.svg';
 export { ReactComponent as KeyboardSolid } from '@admiral-ds/icons/build/system/KeyboardSolid.svg';
+export { ReactComponent as LightModeOutline } from '@admiral-ds/icons/build/system/LightModeOutline.svg';
+export { ReactComponent as LightModeSolid } from '@admiral-ds/icons/build/system/LightModeSolid.svg';
 export { ReactComponent as LinkOutline } from '@admiral-ds/icons/build/system/LinkOutline.svg';
 export { ReactComponent as LinkSolid } from '@admiral-ds/icons/build/system/LinkSolid.svg';
 export { ReactComponent as LoaderOutline } from '@admiral-ds/icons/build/system/LoaderOutline.svg';
 export { ReactComponent as LoaderSolid } from '@admiral-ds/icons/build/system/LoaderSolid.svg';
+export { ReactComponent as MicrophoneOffOutline } from '@admiral-ds/icons/build/system/MicrophoneOffOutline.svg';
+export { ReactComponent as MicrophoneOffSolid } from '@admiral-ds/icons/build/system/MicrophoneOffSolid.svg';
+export { ReactComponent as MicrophoneOutline } from '@admiral-ds/icons/build/system/MicrophoneOutline.svg';
+export { ReactComponent as MicrophoneSolid } from '@admiral-ds/icons/build/system/MicrophoneSolid.svg';
 export { ReactComponent as MoreHorizontalOutline } from '@admiral-ds/icons/build/system/MoreHorizontalOutline.svg';
 export { ReactComponent as MoreHorizontalSolid } from '@admiral-ds/icons/build/system/MoreHorizontalSolid.svg';
 export { ReactComponent as MoreVerticalOutline } from '@admiral-ds/icons/build/system/MoreVerticalOutline.svg';
@@ -123,6 +129,8 @@ export { ReactComponent as QRCodeSolid } from '@admiral-ds/icons/build/system/QR
 export { ReactComponent as RedoOutline } from '@admiral-ds/icons/build/system/RedoOutline.svg';
 export { ReactComponent as RedoSolid } from '@admiral-ds/icons/build/system/RedoSolid.svg';
 export { ReactComponent as RefuseOutline } from '@admiral-ds/icons/build/system/RefuseOutline.svg';
+export { ReactComponent as RefuseSmallOutline } from '@admiral-ds/icons/build/system/RefuseSmallOutline.svg';
+export { ReactComponent as RefuseSmallSolid } from '@admiral-ds/icons/build/system/RefuseSmallSolid.svg';
 export { ReactComponent as RefuseSolid } from '@admiral-ds/icons/build/system/RefuseSolid.svg';
 export { ReactComponent as RefuseViewOutline } from '@admiral-ds/icons/build/system/RefuseViewOutline.svg';
 export { ReactComponent as ReportOutline } from '@admiral-ds/icons/build/system/ReportOutline.svg';
