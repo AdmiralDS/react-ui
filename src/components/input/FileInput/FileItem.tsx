@@ -12,6 +12,7 @@ import { ReactComponent as FileWordSolid } from '@admiral-ds/icons/build/documen
 import { ReactComponent as XLSSolid } from '@admiral-ds/icons/build/documents/XLSSolid.svg';
 import { ReactComponent as DocsSolid } from '@admiral-ds/icons/build/documents/DocsSolid.svg';
 import { ReactComponent as JpgSolid } from '@admiral-ds/icons/build/documents/JpgSolid.svg';
+import { ReactComponent as EyeOutline } from '@admiral-ds/icons/build/service/EyeOutline.svg';
 import { ReactComponent as CloseOutline } from '@admiral-ds/icons/build/service/CloseOutline.svg';
 import {
   ERROR_BLOCK_HEIGHT_M,
@@ -72,7 +73,7 @@ const sizeMixin = css`
 
 const hoveredFileTypeIconCss = css`
   &:not(:disabled) {
-    &::after {
+    &::before {
       content: '';
       position: absolute;
       border-radius: 4px;
@@ -81,7 +82,8 @@ const hoveredFileTypeIconCss = css`
       transform: translate(-50%, -50%);
       width: 100%;
       height: 100%;
-      background-color: ${({ theme }) => theme.color['Opacity/Modal']};
+      opacity: 0.6;
+      background-color: ${({ theme }) => theme.color['Special/Dark Static Neutral 00']};
     }
   }
 `;
@@ -93,15 +95,34 @@ const IconWrapper = styled.div<{ status?: Status }>`
   width: ${FILE_ITEM_PREVIEW_ICON_SIZE_XL};
   height: ${FILE_ITEM_PREVIEW_ICON_SIZE_XL};
 
-  & svg {
+  & *[fill^='#'] {
     fill: ${(p) => {
       if (p.status === 'Queue') return p.theme.color['Neutral/Neutral 30'];
       return p.theme.color['Neutral/Neutral 50'];
     }};
   }
-  
+
   &:hover:not(:disabled),
-  &:focus:not(:disabled) + ${hoveredFileTypeIconCss}
+  &:focus:not(:disabled) {
+    ${hoveredFileTypeIconCss}
+    & svg {
+      visibility: visible;
+    }
+  }
+`;
+
+const StyledEyeOutline = styled(EyeOutline)`
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: ${FILE_ITEM_FUNCTIONAL_ICON_SIZE_XL};
+  height: ${FILE_ITEM_FUNCTIONAL_ICON_SIZE_XL};
+  visibility: hidden;
+
+  & *[fill^='#'] {
+    fill: ${(p) => p.theme.color['Special/Static White']};
+  }
 `;
 
 const Content = styled.div<{ dimension?: FileInputDimension }>`
@@ -262,6 +283,7 @@ export const FileItem = forwardRef<HTMLDivElement, FileItemProps>(
             {dimension === 'xl' && (
               <IconWrapper status={status}>
                 <PreviewIcon />
+                <StyledEyeOutline />
               </IconWrapper>
             )}
             <Content dimension={dimension}>
