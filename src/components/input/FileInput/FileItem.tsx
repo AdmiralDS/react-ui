@@ -168,34 +168,43 @@ const StyledSpinner = styled(Spinner)<{ dimension?: FileInputDimension }>`
 `;
 
 const hoveredCloseIconCss = css`
-  &:not(:disabled) {
-    &::after {
-      content: '';
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      border-radius: 50%;
-      width: calc(100% + 8px);
-      height: calc(100% + 8px);
-      background-color: ${({ theme }) => theme.color['Opacity/Hover']};
+  &:hover {
+    &:not(:disabled) {
+      &::after {
+        content: '';
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 50%;
+        width: calc(100% + 8px);
+        height: calc(100% + 8px);
+        background-color: ${({ theme }) => theme.color['Opacity/Hover']};
+      }
     }
   }
 `;
 
-const Close = styled.div<{ dimension?: FileInputDimension }>`
+const disabledStyles = css`
+  pointer-events: none;
+
+  & *[fill^='#'] {
+    fill: ${(p) => p.theme.color['Neutral/Neutral 30']};
+  }
+`;
+
+const Close = styled.div<{ status?: Status; dimension?: FileInputDimension }>`
   position: relative;
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
   ${functionalItemSizeMixin}
-  &:hover:not(:disabled),
-  &:focus:not(:disabled) + ${hoveredCloseIconCss}
-  & svg {
+
+  & *[fill^='#'] {
     fill: ${(p) => p.theme.color['Neutral/Neutral 50']};
-    ${functionalItemSizeMixin}
   }
+  ${(p) => (p.status === 'Queue' ? disabledStyles : hoveredCloseIconCss)};
 `;
 
 export const ErrorBlock = styled.div<{ status?: Status; dimension?: FileInputDimension }>`
@@ -296,7 +305,7 @@ export const FileItem = forwardRef<HTMLDivElement, FileItemProps>(
           <FunctionalWrapper>
             {status === 'Loading' && <StyledSpinner dimension={dimension} />}
             {dataTransferConstructorSupported() && (
-              <Close dimension={dimension} onClick={() => null}>
+              <Close dimension={dimension} status={status} onClick={() => null}>
                 <CloseOutline />
               </Close>
             )}
