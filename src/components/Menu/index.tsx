@@ -4,7 +4,6 @@ import { useEffect } from 'react';
 import styled, { css, DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import type { ItemProps } from '#src/components/Menu/MenuItem';
 import { keyboardKey } from '#src/components/common/keyboardKey';
-import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 
 export type MenuDimensions = 'l' | 'm' | 's';
 
@@ -24,22 +23,25 @@ const menuListHeights = css<{ dimension?: MenuDimensions; maxHeight?: string | n
   }};
 `;
 
-const Wrapper = styled.div<{ dimension?: MenuDimensions }>`
-  padding: 8px 0;
+const Wrapper = styled.div<{ dimension?: MenuDimensions; hasTopPanel: boolean; hasBottomPanel: boolean }>`
+  padding: 0;
+  ${(p) => (p.hasTopPanel ? 'padding-top: 8px' : '')};
+  ${(p) => (p.hasBottomPanel ? 'padding-bottom: 8px' : '')};
+  box-sizing: border-box;
   display: flex;
   overflow: hidden;
   flex-direction: column;
   align-items: stretch;
   pointer-events: initial;
   background-color: ${(p) => p.theme.color['Special/Elevated BG']};
-  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
-  ${(p) => p.theme.shadow['Shadow 08']}
   max-width: calc(100vw - 32px);
   border-color: transparent;
   ${menuListHeights};
 `;
 
-const StyledDiv = styled.div`
+const StyledDiv = styled.div<{ hasTopPanel: boolean; hasBottomPanel: boolean }>`
+  ${(p) => (!p.hasTopPanel ? 'padding-top: 8px' : '')};
+  ${(p) => (!p.hasBottomPanel ? 'padding-bottom: 8px' : '')};
   margin: 0;
   appearance: none;
   flex: 1 1 auto;
@@ -87,8 +89,8 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
       active,
       onSelectItem,
       onActivateItem,
-      renderTopPanel = () => null,
-      renderBottomPanel = () => null,
+      renderTopPanel,
+      renderBottomPanel,
       dimension = 'l',
       ...props
     },
@@ -101,6 +103,9 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
     const activeId = active === undefined ? activeState : active;
 
     const menuRef = React.useRef<HTMLDivElement | null>(null);
+
+    const hasTopPanel = !!renderTopPanel;
+    const hasBottomPanel = !!renderBottomPanel;
 
     const findNextId = () => {
       const currentIndex = model.findIndex((item) => item.id === activeId);
@@ -188,10 +193,12 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
     }, [active, activeState]);
 
     return (
-      <Wrapper ref={ref} dimension={dimension} {...props}>
-        {renderTopPanel({ dimension })}
-        <StyledDiv ref={menuRef}>{renderChildren()}</StyledDiv>
-        {renderBottomPanel({ dimension })}
+      <Wrapper ref={ref} dimension={dimension} hasTopPanel={hasTopPanel} hasBottomPanel={hasBottomPanel} {...props}>
+        {hasTopPanel && renderTopPanel({ dimension })}
+        <StyledDiv ref={menuRef} hasTopPanel={hasTopPanel} hasBottomPanel={hasBottomPanel}>
+          {renderChildren()}
+        </StyledDiv>
+        {hasBottomPanel && renderBottomPanel({ dimension })}
       </Wrapper>
     );
   },

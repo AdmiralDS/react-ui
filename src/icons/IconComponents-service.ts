@@ -44,10 +44,14 @@ export { ReactComponent as PlusOutline } from '@admiral-ds/icons/build/service/P
 export { ReactComponent as PlusSolid } from '@admiral-ds/icons/build/service/PlusSolid.svg';
 export { ReactComponent as ProcessOutline } from '@admiral-ds/icons/build/service/ProcessOutline.svg';
 export { ReactComponent as ProcessSolid } from '@admiral-ds/icons/build/service/ProcessSolid.svg';
+export { ReactComponent as ShareOutline } from '@admiral-ds/icons/build/service/ShareOutline.svg';
+export { ReactComponent as ShareSolid } from '@admiral-ds/icons/build/service/ShareSolid.svg';
 export { ReactComponent as SizeChangerHorizontalOutline } from '@admiral-ds/icons/build/service/SizeChangerHorizontalOutline.svg';
 export { ReactComponent as SizeChangerVerticalOutline } from '@admiral-ds/icons/build/service/SizeChangerVerticalOutline.svg';
 export { ReactComponent as SmallCloseOutline } from '@admiral-ds/icons/build/service/SmallCloseOutline.svg';
 export { ReactComponent as SmallCloseSolid } from '@admiral-ds/icons/build/service/SmallCloseSolid.svg';
+export { ReactComponent as StructureOutline } from '@admiral-ds/icons/build/service/StructureOutline.svg';
+export { ReactComponent as StructureSolid } from '@admiral-ds/icons/build/service/StructureSolid.svg';
 export { ReactComponent as ThumbsDownOutline } from '@admiral-ds/icons/build/service/ThumbsDownOutline.svg';
 export { ReactComponent as ThumbsDownSolid } from '@admiral-ds/icons/build/service/ThumbsDownSolid.svg';
 export { ReactComponent as ThumbsUpOutline } from '@admiral-ds/icons/build/service/ThumbsUpOutline.svg';
