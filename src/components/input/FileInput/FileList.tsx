@@ -18,19 +18,29 @@ export interface FileListProps {
   dimension: FileInputDimension;
   /** Задает ширину */
   width?: string | number;
+  /** Обработчик удаления файла */
+  onRemoveFile?: (id: string) => void;
 }
 
-export const FileList = forwardRef<HTMLDivElement, FileListProps>(({ model, dimension, width, ...props }, ref) => {
-  const renderChildren = () => {
-    return model.map((item) =>
-      item.render({
-        disabled: item.disabled,
-      }),
+export const FileList = forwardRef<HTMLDivElement, FileListProps>(
+  ({ model, dimension, width, onRemoveFile, ...props }, ref) => {
+    const handleRemoveFile = (id: string) => {
+      onRemoveFile?.(id);
+    };
+
+    const renderChildren = () => {
+      return model.map((item) =>
+        item.render({
+          disabled: item.disabled,
+          onCloseIconClick: () => handleRemoveFile(item.id),
+        }),
+      );
+    };
+
+    return (
+      <FileWrapper ref={ref} width={width}>
+        {renderChildren()}
+      </FileWrapper>
     );
-  };
-  return (
-    <FileWrapper ref={ref} width={width}>
-      {renderChildren()}
-    </FileWrapper>
-  );
-});
+  },
+);

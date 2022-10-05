@@ -100,21 +100,28 @@ const file4 = new File(['foo'], 'example4.xls', {
   type: 'application/vnd.ms-excel',
 });
 
-const filesInitial: FileItemProps[] = [
+interface filesProps extends FileItemProps {
+  id: string;
+}
+const filesInitial: filesProps[] = [
   {
+    id: '1',
     file: file1,
     status: 'Uploaded',
   },
   {
+    id: '2',
     file: file2,
     status: 'Loading',
   },
   {
+    id: '3',
     file: file3,
     status: 'Error',
     errorMessage: 'Что-то явно пошло не так...',
   },
   {
+    id: '4',
     file: file4,
     status: 'Queue',
   },
@@ -126,15 +133,20 @@ const FileInputBaseTemplate: ComponentStory<typeof FileInput> = (props) => {
     return theme;
   }
   const inputRef = useRef<HTMLInputElement>(null);
-  const [files, setFiles] = useState<FileItemProps[]>(filesInitial);
+  const [files, setFiles] = useState<filesProps[]>(filesInitial);
 
   const accept = 'image/*, .pdf, application/json';
 
   useEffect(() => {
     function onChangeEventHandler(this: HTMLInputElement) {
-      const filesToAdd: FileItemProps[] = Array.from(this.files || [])
+      const filesToAdd: filesProps[] = Array.from(this.files || [])
         .filter((file) => !accept || acceptFile(file, accept))
-        .map((file) => ({ file }));
+        .map((file) => {
+          return {
+            file: file,
+            id: uid(),
+          };
+        });
 
       const dt = new DataTransfer();
       filesToAdd.forEach(({ file }) => dt.items.add(file));
@@ -149,21 +161,26 @@ const FileInputBaseTemplate: ComponentStory<typeof FileInput> = (props) => {
     }
   }, [inputRef.current, files, accept]);
 
+  const handleRemoveFile = (id: string) => {
+    console.log(`File ${id} deleted`);
+    const updatedFiles = files.filter((file) => file.id !== id);
+    setFiles(updatedFiles);
+  };
+
   const model = useMemo(() => {
     if (files.length) {
       return files.map((item) => {
-        const itemId = uid();
         return {
-          id: itemId,
+          id: item.id,
           render: (options: RenderFileListItemProps) => (
             <FileItem
               file={item.file}
               dimension={props.dimension}
               status={item.status}
               errorMessage={item.errorMessage}
-              filesLayoutCssMixin={props.dimension === 'xl' ? halfWidthPositionMixin : fullWidthPositionMixin}
+              filesLayoutCssMixin={props.dimension === 'm' ? halfWidthPositionMixin : fullWidthPositionMixin}
               {...options}
-              key={itemId}
+              key={item.id}
             >
               {item.file.name}
             </FileItem>
@@ -185,7 +202,9 @@ const FileInputBaseTemplate: ComponentStory<typeof FileInput> = (props) => {
         description="Добавьте файлы"
         ref={inputRef}
       />
-      {model && model.length && <FileList model={model} dimension={props.dimension} width="480px" />}
+      {model && model.length && (
+        <FileList model={model} dimension={props.dimension} width="480px" onRemoveFile={handleRemoveFile} />
+      )}
     </ThemeProvider>
   );
 };

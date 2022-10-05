@@ -247,9 +247,7 @@ export interface RenderFileListItemProps {
   /** Отключение секции */
   disabled?: boolean;
   /** Обработчик клика по item */
-  onClickItem?: () => void;
-  /** Обработчик наведения мыши на item */
-  onHover?: () => void;
+  onCloseIconClick?: () => void;
 }
 
 export interface FileListItemProps {
@@ -273,7 +271,10 @@ export interface FileItemProps extends HTMLAttributes<HTMLDivElement>, RenderFil
 }
 
 export const FileItem = forwardRef<HTMLDivElement, FileItemProps>(
-  ({ children, file, dimension, status, errorMessage, showPreview, filesLayoutCssMixin, ...props }, ref) => {
+  (
+    { children, file, dimension, status, errorMessage, showPreview, filesLayoutCssMixin, onCloseIconClick, ...props },
+    ref,
+  ) => {
     const PreviewIcon = getIcon(file.type);
     const fileFormat = getFormat(file.type);
     const imageTypes = ['JPEG', 'PNG', 'TIFF', 'SVG', 'GIF'];
@@ -284,6 +285,9 @@ export const FileItem = forwardRef<HTMLDivElement, FileItemProps>(
 
     const titleRef = React.useRef<HTMLDivElement | null>(null);
 
+    const handleCloseIconClick = () => {
+      onCloseIconClick?.();
+    };
     return (
       <Container ref={ref} dimension={dimension} filesLayoutCssMixin={filesLayoutCssMixin}>
         <PreviewWrapper status={status} dimension={dimension}>
@@ -303,11 +307,9 @@ export const FileItem = forwardRef<HTMLDivElement, FileItemProps>(
           </FileInfoBlock>
           <FunctionalWrapper>
             {status === 'Loading' && <StyledSpinner dimension={dimension} />}
-            {dataTransferConstructorSupported() && (
-              <Close dimension={dimension} status={status} onClick={() => null}>
-                <CloseOutline />
-              </Close>
-            )}
+            <Close dimension={dimension} status={status} onClick={handleCloseIconClick}>
+              <CloseOutline />
+            </Close>
           </FunctionalWrapper>
         </PreviewWrapper>
         {errorMessage && status === 'Error' && <ErrorBlock status={status}>{errorMessage}</ErrorBlock>}
