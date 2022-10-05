@@ -27,10 +27,6 @@ const Container = styled.div<{
   margin-top: 16px;
   overflow: hidden;
   ${(p) => p.filesLayoutCssMixin}
-
-  &:nth-of-type(even) {
-    margin-left: ${(p) => (p.dimension === 'xl' ? '16px' : '0')};
-  }
 `;
 
 const statusMixin = css<{ status?: Status }>`
@@ -154,7 +150,7 @@ export interface FileListItemProps {
 
 export interface FileItemProps extends HTMLAttributes<HTMLDivElement>, RenderFileListItemProps {
   file: File;
-  /** Размер FileInput */
+  /** Размер FileItem */
   dimension?: FileInputDimension;
   /** Статус компонента, имеет четыре состояния: Uploaded, Loading, Error, Queue */
   status?: Status;
