@@ -97,6 +97,11 @@ const hoveredFileTypeIconCss = css`
   }
 `;
 
+const getColor = (status?: Status) => {
+  if (status === 'Queue') return 'Neutral/Neutral 30';
+  return 'Neutral/Neutral 50';
+};
+
 const IconWrapper = styled.div<{ status?: Status; isImage: boolean }>`
   position: relative;
   margin-right: 8px;
@@ -105,10 +110,7 @@ const IconWrapper = styled.div<{ status?: Status; isImage: boolean }>`
   height: ${FILE_ITEM_PREVIEW_ICON_SIZE_XL};
 
   & *[fill^='#'] {
-    fill: ${(p) => {
-      if (p.status === 'Queue') return p.theme.color['Neutral/Neutral 30'];
-      return p.theme.color['Neutral/Neutral 50'];
-    }};
+    fill: ${(p) => p.theme.color[getColor(p.status)]};
   }
 
   ${(p) => (p.status === 'Queue' || !p.isImage ? disabledStyles : hoveredFileTypeIconCss)};
@@ -149,7 +151,7 @@ const FileName = styled.div`
 `;
 
 const FileInfo = styled.span<{ dimension?: FileInputDimension; status?: Status }>`
-  color: ${(p) => (p.status === 'Queue' ? p.theme.color['Neutral/Neutral 30'] : p.theme.color['Neutral/Neutral 50'])};
+  color: ${(p) => p.theme.color[getColor(p.status)]};
   margin-left: ${(p) => (p.dimension === 'xl' ? '0' : '4px')};
   white-space: nowrap;
 `;
@@ -197,10 +199,7 @@ const Close = styled.div<{ status?: Status; dimension?: FileInputDimension }>`
   ${functionalItemSizeMixin}
 
   & *[fill^='#'] {
-    fill: ${(p) => {
-      if (p.status === 'Queue') return p.theme.color['Neutral/Neutral 30'];
-      return p.theme.color['Neutral/Neutral 50'];
-    }};
+    fill: ${(p) => p.theme.color[getColor(p.status)]};
   }
   ${(p) => (p.status === 'Queue' ? disabledStyles : hoveredCloseIconCss)};
 `;
