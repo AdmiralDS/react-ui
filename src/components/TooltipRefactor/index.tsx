@@ -4,7 +4,7 @@ import type { RefCallback, RefObject } from '#src/components/common/utils/handle
 import { handleRef } from '#src/components/common/utils/handleRef';
 
 import { FakeTarget, Portal, TooltipContainer, TooltipWrapper } from './style';
-import type { TooltipPositionType } from './utils';
+import type { TooltipPositionType, InternalTooltipPositionType } from './utils';
 import { getTooltipDirection } from './utils';
 import { getScrollbarSize } from '#src/components/common/dom/scrollbarUtil';
 
@@ -18,7 +18,7 @@ export interface ITooltipProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Ссылка на тултип */
   tooltipRef?: RefCallback<HTMLDivElement> | RefObject<HTMLDivElement> | null;
   /** Расположение тултипа */
-  tooltipPosition?: 'top' | 'bottom' | 'left' | 'right';
+  tooltipPosition?: TooltipPositionType;
 }
 
 export const TOOLTIP_DELAY = 1500;
@@ -39,7 +39,7 @@ export const Tooltip: React.FC<ITooltipProps> = ({
 
   const manageTooltip = (scrollbarSize: number) => {
     if (targetRef.current && tooltipElementRef.current) {
-      const direction = getTooltipDirection(
+      const direction: InternalTooltipPositionType = getTooltipDirection(
         targetRef.current,
         tooltipElementRef.current,
         scrollbarSize,

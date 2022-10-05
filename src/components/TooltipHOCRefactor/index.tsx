@@ -2,7 +2,7 @@ import * as React from 'react';
 import type { RefCallback, RefObject } from '#src/components/common/utils/handleRef';
 import { refSetter } from '#src/components/common/utils/refSetter';
 import { Tooltip, TOOLTIP_DELAY } from '#src/components/TooltipRefactor';
-import type { ITooltipProps } from '#src/components/Tooltip';
+import type { ITooltipProps } from '#src/components/TooltipRefactor';
 
 export interface TooltipHocProps {
   /** Функция, которая возвращает реакт-компонент с контентом тултипа. Если этому компоненту нужны props, используйте замыкание */
@@ -27,6 +27,7 @@ export function TooltipHoc<P extends React.ComponentPropsWithRef<any>>(Component
       props;
     const anchorElementRef = React.useRef<any>(null);
     const [visible, setVisible] = React.useState(false);
+    const [node, setNode] = React.useState<any>(null);
     let showTooltipTimer: any;
 
     const show = () => {
@@ -37,27 +38,51 @@ export function TooltipHoc<P extends React.ComponentPropsWithRef<any>>(Component
       setVisible(false);
     };
 
+    const setRef = React.useCallback((node: HTMLElement | null) => {
+      if (node) {
+        setNode(node);
+      }
+    }, []);
+
     React.useEffect(() => {
-      const anchor = anchorElementRef.current;
-      if (anchor) {
-        anchor.addEventListener('mouseenter', show);
-        anchor.addEventListener('focus', show);
-        anchor.addEventListener('mouseleave', hide);
-        anchor.addEventListener('mousedown', hide);
-        anchor.addEventListener('blur', hide);
+      if (node) {
+        node.addEventListener('mouseenter', show);
+        node.addEventListener('focus', show);
+        node.addEventListener('mouseleave', hide);
+        node.addEventListener('mousedown', hide);
+        node.addEventListener('blur', hide);
         return () => {
-          anchor.removeEventListener('mouseenter', show);
-          anchor.removeEventListener('focus', show);
-          anchor.removeEventListener('mouseleave', hide);
-          anchor.removeEventListener('mousedown', hide);
-          anchor.removeEventListener('blur', hide);
+          node.removeEventListener('mouseenter', show);
+          node.removeEventListener('focus', show);
+          node.removeEventListener('mouseleave', hide);
+          node.removeEventListener('mousedown', hide);
+          node.removeEventListener('blur', hide);
         };
       }
-    }, [anchorElementRef.current]);
+    }, [node]);
+
+    // React.useEffect(() => {
+    //   const anchor = anchorElementRef.current;
+    //   if (anchor) {
+    //     anchor.addEventListener('mouseenter', show);
+    //     anchor.addEventListener('focus', show);
+    //     anchor.addEventListener('mouseleave', hide);
+    //     anchor.addEventListener('mousedown', hide);
+    //     anchor.addEventListener('blur', hide);
+    //     return () => {
+    //       anchor.removeEventListener('mouseenter', show);
+    //       anchor.removeEventListener('focus', show);
+    //       anchor.removeEventListener('mouseleave', hide);
+    //       anchor.removeEventListener('mousedown', hide);
+    //       anchor.removeEventListener('blur', hide);
+    //     };
+    //   }
+    // }, [anchorElementRef.current]);
 
     return (
       <>
-        <Component {...(wrappedCompProps as P & object)} ref={refSetter(forwardedRef, anchorElementRef)} />
+        {/* <Component {...(wrappedCompProps as P & object)} ref={refSetter(forwardedRef, anchorElementRef)} /> */}
+        <Component {...(wrappedCompProps as P & object)} ref={refSetter(forwardedRef, anchorElementRef, setRef)} />
         {visible && (
           <Tooltip
             targetRef={anchorElementRef}

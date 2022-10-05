@@ -1,11 +1,9 @@
 /** отступ от вызвавшего элемента (anchorElement) */
 const GAP = 8;
 
-export type TooltipPositionType =
-  | 'bottom'
-  | 'top'
-  | 'left'
-  | 'right'
+export type TooltipPositionType = 'bottom' | 'top' | 'left' | 'right';
+export type InternalTooltipPositionType =
+  | TooltipPositionType
   | 'bottomRight'
   | 'bottomLeft'
   | 'topRight'
@@ -25,11 +23,14 @@ export function getTooltipDirection(
   anchorElement: HTMLElement,
   tooltipElement: HTMLElement,
   scrollbarSize: number,
-  tooltipPosition?: 'top' | 'bottom' | 'left' | 'right',
+  tooltipPosition?: TooltipPositionType,
 ): any {
   const anchorElementRect: DOMRect = anchorElement.getBoundingClientRect();
   const tooltipRect: DOMRect = tooltipElement.getBoundingClientRect();
-  const positions = Object.entries(getPositionMapper(scrollbarSize)) as [TooltipPositionType, CalculationResult][];
+  const positions = Object.entries(getPositionMapper(scrollbarSize)) as [
+    InternalTooltipPositionType,
+    CalculationResult,
+  ][];
 
   /** Если задан параметр tooltipPosition, то тултип обязательно должен отрендериться в указанном направлении
    * (с возможностью сдвига по горизонтальной оси при tooltipPosition === 'top' | 'bottom',
@@ -48,7 +49,7 @@ export function getTooltipDirection(
   return compatiblePositions.length ? compatiblePositions[0][0] : defaultPosition;
 }
 
-function getPositionMapper(scrollbarSize: number): Record<TooltipPositionType, CalculationResult> {
+function getPositionMapper(scrollbarSize: number): Record<InternalTooltipPositionType, CalculationResult> {
   return {
     bottom: {
       /** проверяем, что тултипу хватит места снизу и по ширине (если ширина тултипа больше

@@ -5,7 +5,7 @@ import { withDesign } from 'storybook-addon-designs';
 import { FONTS, NEW_FONTS } from './storyDescriptions';
 import { TYPOGRAPHY, typography } from '#src/components/Typography';
 import { ReactComponent as CopyOutline } from '@admiral-ds/icons/build/documents/CopyOutline.svg';
-import { Tooltip } from '#src/components/Tooltip';
+import { TooltipHoc } from '#src/components/TooltipHOCRefactor';
 import { DefaultFontColorName, LIGHT_THEME, MainPrimaryColorName } from '#src/components/themes';
 import { T } from './index';
 
@@ -104,12 +104,8 @@ const CopyOutlineWrapper = styled.div`
   cursor: pointer;
 `;
 
-const CopyButton = ({ text }: { text: string }) => {
+const CopyIcon = React.forwardRef<HTMLDivElement, { text: string }>(({ text }, ref) => {
   const theme = useContext(ThemeContext) || LIGHT_THEME;
-  const copyRef = React.useRef<HTMLDivElement | null>(null);
-
-  const [tooltipVisible, setTooltipVisible] = React.useState(false);
-
   const copyToClipboard = () => {
     const el = document.createElement('textarea');
     el.value = text;
@@ -122,19 +118,12 @@ const CopyButton = ({ text }: { text: string }) => {
     document.body.removeChild(el);
   };
   return (
-    <>
-      <CopyOutlineWrapper ref={copyRef}>
-        <CopyOutline width={16} height={16} onClick={copyToClipboard} fill={theme.color['Neutral/Neutral 90']} />
-      </CopyOutlineWrapper>
-      <Tooltip
-        targetRef={copyRef}
-        visible={tooltipVisible}
-        onVisibilityChange={setTooltipVisible}
-        renderContent={() => 'Копировать пример использования'}
-      />
-    </>
+    <CopyOutlineWrapper ref={ref}>
+      <CopyOutline width={16} height={16} onClick={copyToClipboard} fill={theme.color['Neutral/Neutral 90']} />
+    </CopyOutlineWrapper>
   );
-};
+});
+const CopyButton = TooltipHoc(CopyIcon);
 
 const Template1: ComponentStory<typeof T> = (args) => {
   return (
@@ -203,7 +192,7 @@ const Template: ComponentStory<typeof T> = () => {
                   <T font={item.name} as="div">
                     {item.name}
                   </T>
-                  <CopyButton text={text} />
+                  <CopyButton text={text} renderContent={() => 'Копировать пример использования'} />
                 </td>
                 <td data-label="Props">
                   <FontDesc>
@@ -265,7 +254,7 @@ const Template: ComponentStory<typeof T> = () => {
                   <T font={item.name} as="div">
                     {item.name}
                   </T>
-                  <CopyButton text={text} />
+                  <CopyButton text={text} renderContent={() => 'Копировать пример использования'} />
                 </td>
                 <td data-label="Props">
                   <FontDesc>
