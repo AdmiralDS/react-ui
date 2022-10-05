@@ -4,17 +4,26 @@ import { FileInputDimension } from '#src/components/input/FileInput';
 import styled, { css, DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { typography } from '#src/components/Typography';
-import { formatBytes, getFormat } from '#src/components/input/FileInput/utils';
-import { dataTransferConstructorSupported } from '#src/components/input/FileUploader/utils';
+import { formatBytes, getFormat, dataTransferConstructorSupported } from '#src/components/input/FileInput/utils';
 import { Spinner } from '#src/components/Spinner';
+import { ReactComponent as PDFSolid } from '@admiral-ds/icons/build/documents/PDFSolid.svg';
+import { ReactComponent as PPTSolid } from '@admiral-ds/icons/build/documents/PPTSolid.svg';
+import { ReactComponent as FileWordSolid } from '@admiral-ds/icons/build/documents/FileWordSolid.svg';
+import { ReactComponent as XLSSolid } from '@admiral-ds/icons/build/documents/XLSSolid.svg';
+import { ReactComponent as DocsSolid } from '@admiral-ds/icons/build/documents/DocsSolid.svg';
+import { ReactComponent as JpgSolid } from '@admiral-ds/icons/build/documents/JpgSolid.svg';
 import { ReactComponent as CloseOutline } from '@admiral-ds/icons/build/service/CloseOutline.svg';
 import {
+  ERROR_BLOCK_HEIGHT_M,
+  ERROR_BLOCK_HEIGHT_XL,
   FILE_ITEM_FUNCTIONAL_ICON_SIZE_M,
   FILE_ITEM_FUNCTIONAL_ICON_SIZE_XL,
+  FILE_ITEM_PREVIEW_ICON_SIZE_XL,
+  FILE_ITEM_WRAPPER_HEIGHT_M,
+  FILE_ITEM_WRAPPER_HEIGHT_XL,
+  FILE_ITEM_WRAPPER_PADDING_M,
+  FILE_ITEM_WRAPPER_PADDING_XL,
 } from '#src/components/input/FileInput/style';
-
-const ERROR_BLOCK_HEIGHT_XL = '16px';
-const ERROR_BLOCK_HEIGHT_M = '20px';
 
 export type Status = 'Uploaded' | 'Loading' | 'Error' | 'Queue';
 
@@ -42,6 +51,7 @@ const PreviewWrapper = styled.div<{
   dimension?: FileInputDimension;
   status?: Status;
 }>`
+  box-sizing: border-box;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -49,7 +59,8 @@ const PreviewWrapper = styled.div<{
   border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
   border-width: 1px;
   border-style: solid;
-  padding: ${(p) => (p.dimension === 'xl' ? '7px 3px 7px 8px' : '7px 15px')};
+  padding: ${(p) => (p.dimension === 'xl' ? FILE_ITEM_WRAPPER_PADDING_XL : FILE_ITEM_WRAPPER_PADDING_M)};
+  height: ${(p) => (p.dimension === 'xl' ? FILE_ITEM_WRAPPER_HEIGHT_XL : FILE_ITEM_WRAPPER_HEIGHT_M)};
   ${typography['Body/Body 2 Long']};
   ${statusMixin};
 `;
@@ -59,11 +70,52 @@ const sizeMixin = css`
   justify-content: space-between;
 `;
 
+const hoveredFileTypeIconCss = css`
+  &:not(:disabled) {
+    &::after {
+      content: '';
+      position: absolute;
+      border-radius: 4px;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      height: 100%;
+      background-color: ${({ theme }) => theme.color['Opacity/Modal']};
+    }
+  }
+`;
+
+const IconWrapper = styled.div<{ status?: Status }>`
+  position: relative;
+  margin-right: 8px;
+  border-radius: 4px;
+  width: ${FILE_ITEM_PREVIEW_ICON_SIZE_XL};
+  height: ${FILE_ITEM_PREVIEW_ICON_SIZE_XL};
+
+  & svg {
+    fill: ${(p) => {
+      if (p.status === 'Queue') return p.theme.color['Neutral/Neutral 30'];
+      return p.theme.color['Neutral/Neutral 50'];
+    }};
+  }
+  
+  &:hover:not(:disabled),
+  &:focus:not(:disabled) + ${hoveredFileTypeIconCss}
+`;
+
 const Content = styled.div<{ dimension?: FileInputDimension }>`
   ${(p) => p.dimension === 'm' && sizeMixin};
   display: flex;
   flex-direction: ${(p) => (p.dimension === 'm' ? 'row' : 'column')};
   min-width: 0;
+`;
+
+const FileInfoBlock = styled.div<{ dimension?: FileInputDimension }>`
+  display: ${(p) => (p.dimension === 'm' ? 'block' : 'flex')};
+  align-items: center;
+  overflow: hidden;
+  height: ${(p) => (p.dimension === 'xl' ? '40px' : '20px')};
 `;
 
 const FileName = styled.div`
@@ -94,7 +146,7 @@ const StyledSpinner = styled(Spinner)<{ dimension?: FileInputDimension }>`
   ${functionalItemSizeMixin}
 `;
 
-const hoveredCss = css`
+const hoveredCloseIconCss = css`
   &:not(:disabled) {
     &::after {
       content: '';
@@ -118,7 +170,7 @@ const Close = styled.div<{ dimension?: FileInputDimension }>`
   align-items: center;
   ${functionalItemSizeMixin}
   &:hover:not(:disabled),
-  &:focus:not(:disabled) + ${hoveredCss}
+  &:focus:not(:disabled) + ${hoveredCloseIconCss}
   & svg {
     fill: ${(p) => p.theme.color['Neutral/Neutral 50']};
     ${functionalItemSizeMixin}
@@ -131,6 +183,37 @@ export const ErrorBlock = styled.div<{ status?: Status; dimension?: FileInputDim
   ${typography['Body/Body 2 Short']};
   height: ${(p) => (p.dimension === 'xl' ? ERROR_BLOCK_HEIGHT_XL : ERROR_BLOCK_HEIGHT_M)};
 `;
+
+/**
+ * https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types#important_mime_types_for_web_developers
+ * @param type {string}
+ */
+const getIcon = (type: string) => {
+  switch (type) {
+    case 'image/jpeg':
+    case 'image/png':
+    case 'image/tiff':
+    case 'image/svg+xml':
+    case 'image/apng':
+    case 'image/avif':
+    case 'image/gif':
+    case 'image/webp':
+      return JpgSolid;
+    case 'application/pdf':
+      return PDFSolid;
+    case 'application/vnd.ms-powerpoint':
+    case 'application/vnd.openxmlformats-officedocument.presentationml.presentation':
+      return PPTSolid;
+    case 'application/vnd.ms-excel':
+    case 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
+      return XLSSolid;
+    case 'application/msword':
+    case 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
+      return FileWordSolid;
+    default:
+      return DocsSolid;
+  }
+};
 
 export interface RenderFileListItemProps {
   key?: string | number;
@@ -164,6 +247,7 @@ export interface FileItemProps extends HTMLAttributes<HTMLDivElement>, RenderFil
 
 export const FileItem = forwardRef<HTMLDivElement, FileItemProps>(
   ({ children, file, dimension, status, errorMessage, showPreview, filesLayoutCssMixin, ...props }, ref) => {
+    const PreviewIcon = getIcon(file.type);
     const fileFormat = getFormat(file.type);
     const fileSize = formatBytes(file.size);
     const fileInfo = `${fileFormat}・${fileSize} Mb`;
@@ -173,13 +257,20 @@ export const FileItem = forwardRef<HTMLDivElement, FileItemProps>(
 
     return (
       <Container ref={ref} dimension={dimension} filesLayoutCssMixin={filesLayoutCssMixin}>
-        <PreviewWrapper status={status}>
-          <Content dimension={dimension}>
-            <FileName ref={titleRef}>{fileName}</FileName>
-            <FileInfo dimension={dimension} status={status}>
-              {fileInfo}
-            </FileInfo>
-          </Content>
+        <PreviewWrapper status={status} dimension={dimension}>
+          <FileInfoBlock dimension={dimension}>
+            {dimension === 'xl' && (
+              <IconWrapper status={status}>
+                <PreviewIcon />
+              </IconWrapper>
+            )}
+            <Content dimension={dimension}>
+              <FileName ref={titleRef}>{fileName}</FileName>
+              <FileInfo dimension={dimension} status={status}>
+                {fileInfo}
+              </FileInfo>
+            </Content>
+          </FileInfoBlock>
           <FunctionalWrapper>
             {status === 'Loading' && <StyledSpinner dimension={dimension} />}
             {dataTransferConstructorSupported() && (

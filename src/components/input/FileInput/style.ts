@@ -8,8 +8,17 @@ export const FILE_INPUT_MIN_WIDTH_XL = '320px';
 const FILE_INPUT_WRAPPER_PADDING_XL = '24px';
 const FILE_INPUT_WRAPPER_PADDING_M = '8px 20px';
 
+export const FILE_ITEM_WRAPPER_HEIGHT_XL = '56px';
+export const FILE_ITEM_WRAPPER_HEIGHT_M = '40px';
+export const FILE_ITEM_WRAPPER_PADDING_XL = '8px';
+export const FILE_ITEM_WRAPPER_PADDING_M = '10px 16px';
+
 export const FILE_ITEM_FUNCTIONAL_ICON_SIZE_XL = '24px';
 export const FILE_ITEM_FUNCTIONAL_ICON_SIZE_M = '20px';
+export const FILE_ITEM_PREVIEW_ICON_SIZE_XL = '40px';
+
+export const ERROR_BLOCK_HEIGHT_XL = '16px';
+export const ERROR_BLOCK_HEIGHT_M = '20px';
 
 export const disabledStyles = css`
   border: ${(p) => `1px dashed ${p.theme.color['Neutral/Neutral 30']}`};
