@@ -28,6 +28,10 @@ import {
 
 export type Status = 'Uploaded' | 'Loading' | 'Error' | 'Queue';
 
+const disabledStyles = css`
+  pointer-events: none;
+`;
+
 const Container = styled.div<{
   dimension?: FileInputDimension;
   filesLayoutCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
@@ -72,23 +76,28 @@ const sizeMixin = css`
 `;
 
 const hoveredFileTypeIconCss = css`
-  &:not(:disabled) {
-    &::before {
-      content: '';
-      position: absolute;
-      border-radius: 4px;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      width: 100%;
-      height: 100%;
-      opacity: 0.6;
-      background-color: ${({ theme }) => theme.color['Special/Dark Static Neutral 00']};
+  &:hover {
+    &:not(:disabled) {
+      &::before {
+        content: '';
+        position: absolute;
+        border-radius: 4px;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 100%;
+        height: 100%;
+        opacity: 0.6;
+        background-color: ${({ theme }) => theme.color['Special/Dark Static Neutral 00']};
+      }
+      & svg {
+        visibility: visible;
+      }
     }
   }
 `;
 
-const IconWrapper = styled.div<{ status?: Status }>`
+const IconWrapper = styled.div<{ status?: Status; isImage: boolean }>`
   position: relative;
   margin-right: 8px;
   border-radius: 4px;
@@ -102,13 +111,7 @@ const IconWrapper = styled.div<{ status?: Status }>`
     }};
   }
 
-  &:hover:not(:disabled),
-  &:focus:not(:disabled) {
-    ${hoveredFileTypeIconCss}
-    & svg {
-      visibility: visible;
-    }
-  }
+  ${(p) => (p.status === 'Queue' || !p.isImage ? disabledStyles : hoveredFileTypeIconCss)};
 `;
 
 const StyledEyeOutline = styled(EyeOutline)`
@@ -185,14 +188,6 @@ const hoveredCloseIconCss = css`
   }
 `;
 
-const disabledStyles = css`
-  pointer-events: none;
-
-  & *[fill^='#'] {
-    fill: ${(p) => p.theme.color['Neutral/Neutral 30']};
-  }
-`;
-
 const Close = styled.div<{ status?: Status; dimension?: FileInputDimension }>`
   position: relative;
   cursor: pointer;
@@ -202,7 +197,10 @@ const Close = styled.div<{ status?: Status; dimension?: FileInputDimension }>`
   ${functionalItemSizeMixin}
 
   & *[fill^='#'] {
-    fill: ${(p) => p.theme.color['Neutral/Neutral 50']};
+    fill: ${(p) => {
+      if (p.status === 'Queue') return p.theme.color['Neutral/Neutral 30'];
+      return p.theme.color['Neutral/Neutral 50'];
+    }};
   }
   ${(p) => (p.status === 'Queue' ? disabledStyles : hoveredCloseIconCss)};
 `;
@@ -279,6 +277,8 @@ export const FileItem = forwardRef<HTMLDivElement, FileItemProps>(
   ({ children, file, dimension, status, errorMessage, showPreview, filesLayoutCssMixin, ...props }, ref) => {
     const PreviewIcon = getIcon(file.type);
     const fileFormat = getFormat(file.type);
+    const imageTypes = ['JPEG', 'PNG', 'TIFF', 'SVG', 'GIF'];
+    const isImage = imageTypes.includes(fileFormat);
     const fileSize = formatBytes(file.size);
     const fileInfo = `${fileFormat}・${fileSize} Mb`;
     const fileName = file.name.substring(0, file.name.lastIndexOf('.'));
@@ -290,7 +290,7 @@ export const FileItem = forwardRef<HTMLDivElement, FileItemProps>(
         <PreviewWrapper status={status} dimension={dimension}>
           <FileInfoBlock dimension={dimension}>
             {dimension === 'xl' && (
-              <IconWrapper status={status}>
+              <IconWrapper status={status} isImage={isImage}>
                 <PreviewIcon />
                 <StyledEyeOutline />
               </IconWrapper>
