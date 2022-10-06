@@ -174,7 +174,7 @@ const FileInfo = styled.span<{ dimension?: FileInputDimension; status?: Status }
   white-space: nowrap;
 `;
 
-const FunctionalWrapper = styled.div`
+const FunctionalBlock = styled.div`
   display: flex;
   flex: 0 0 auto;
   margin-left: 8px;
@@ -208,7 +208,7 @@ const hoveredCloseIconCss = css`
   }
 `;
 
-const Close = styled.div<{ status?: Status; dimension?: FileInputDimension }>`
+const CloseIcon = styled.div<{ status?: Status; dimension?: FileInputDimension }>`
   position: relative;
   cursor: pointer;
   display: flex;
@@ -304,13 +304,13 @@ export const FileItem = forwardRef<HTMLDivElement, FileItemProps>(
     ref,
   ) => {
     const PreviewIcon = getIcon(file.type);
-    const fileFormat = getFormat(file.type);
     const isImage = file.type.startsWith('image');
+    const fileName = file.name.substring(0, file.name.lastIndexOf('.'));
+    const fileFormat = getFormat(file.type);
     const fileSize = formatBytes(file.size);
     const fileInfo = `${fileFormat}・${fileSize} Mb`;
-    const fileName = file.name.substring(0, file.name.lastIndexOf('.'));
 
-    const containerRef = useRef<HTMLDivElement | null>(null);
+    const previewWrapperRef = useRef<HTMLDivElement | null>(null);
     const titleRef = useRef<HTMLDivElement | null>(null);
 
     const [imageSrc, setImageSrc] = React.useState('');
@@ -348,13 +348,14 @@ export const FileItem = forwardRef<HTMLDivElement, FileItemProps>(
     const handleCloseIconClick = () => {
       onCloseIconClick?.();
     };
+
     return (
-      <Container ref={refSetter(ref, containerRef)} dimension={dimension} filesLayoutCssMixin={filesLayoutCssMixin}>
-        <PreviewWrapper {...props} status={status} dimension={dimension}>
+      <Container ref={ref} dimension={dimension} filesLayoutCssMixin={filesLayoutCssMixin}>
+        <PreviewWrapper {...props} ref={previewWrapperRef} status={status} dimension={dimension}>
           <FileInfoBlock dimension={dimension}>
             {dimension === 'xl' && (
               <IconWrapper status={status} isImage={isImage}>
-                {isImage && showPreview ? (
+                {isImage && showPreview && !!imageSrc ? (
                   <ImagePreview>
                     <img src={imageSrc} alt={''} />
                   </ImagePreview>
@@ -367,7 +368,7 @@ export const FileItem = forwardRef<HTMLDivElement, FileItemProps>(
             <Content dimension={dimension}>
               <FileName ref={titleRef}>{fileName}</FileName>
               <Tooltip
-                targetRef={containerRef}
+                targetRef={previewWrapperRef}
                 visible={tooltipVisible && overflowActive}
                 onVisibilityChange={setTooltipVisible}
                 renderContent={() => `${fileName}`}
@@ -377,12 +378,12 @@ export const FileItem = forwardRef<HTMLDivElement, FileItemProps>(
               </FileInfo>
             </Content>
           </FileInfoBlock>
-          <FunctionalWrapper>
+          <FunctionalBlock>
             {status === 'Loading' && <StyledSpinner dimension={dimension} />}
-            <Close dimension={dimension} status={status} onClick={handleCloseIconClick}>
+            <CloseIcon dimension={dimension} status={status} onClick={handleCloseIconClick}>
               <CloseOutline />
-            </Close>
-          </FunctionalWrapper>
+            </CloseIcon>
+          </FunctionalBlock>
         </PreviewWrapper>
         {errorMessage && status === 'Error' && <ErrorBlock status={status}>{errorMessage}</ErrorBlock>}
       </Container>
