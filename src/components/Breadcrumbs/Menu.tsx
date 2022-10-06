@@ -2,7 +2,7 @@ import * as React from 'react';
 import styled, { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 
 import { OverflowMenu } from '#src/components/OverflowMenu';
-import { Tooltip } from '#src/components/Tooltip';
+import { TooltipHoc } from '#src/components/TooltipHOCRefactor';
 import { BreadcrumbProps } from '#src/components/Breadcrumbs/BreadCrumb';
 import { MenuItem, RenderOptionProps } from '#src/components/Menu/MenuItem';
 import { uid } from '#src/components/common/uid';
@@ -24,22 +24,7 @@ const Option = styled.a`
   }
 `;
 
-type TipProps = {
-  targetRef: React.RefObject<HTMLElement>;
-  renderContent: () => React.ReactNode;
-};
-
-const Tip = ({ targetRef, renderContent }: TipProps) => {
-  const [tooltipVisible, setTooltipVisible] = React.useState(false);
-  return (
-    <Tooltip
-      targetRef={targetRef}
-      visible={tooltipVisible}
-      onVisibilityChange={setTooltipVisible}
-      renderContent={renderContent}
-    />
-  );
-};
+const MenuItemWithTooltip = TooltipHoc(MenuItem);
 
 export interface MenuButtonProps {
   /** Размер меню */
@@ -58,13 +43,23 @@ export const MenuButton: React.FC<MenuButtonProps> = ({ dimension, options, drop
         id,
         render: (options: RenderOptionProps) => {
           const tooltip = item.text.length > 40;
-          const itemRef = React.createRef<HTMLDivElement>();
-          return (
-            <MenuItem ref={itemRef} dimension={dimension} {...options} key={id} role="option">
+          return tooltip ? (
+            <MenuItemWithTooltip
+              renderContent={() => item.text}
+              dimension={dimension}
+              {...options}
+              key={id}
+              role="option"
+            >
               <Option href={item.url} as={item.linkAs} {...item.linkProps}>
-                {tooltip ? item.text.slice(0, 37) + '...' : item.text}
+                {item.text.slice(0, 37) + '...'}
               </Option>
-              {tooltip && <Tip targetRef={itemRef} renderContent={() => item.text} />}
+            </MenuItemWithTooltip>
+          ) : (
+            <MenuItem dimension={dimension} {...options} key={id} role="option">
+              <Option href={item.url} as={item.linkAs} {...item.linkProps}>
+                {item.text}
+              </Option>
             </MenuItem>
           );
         },

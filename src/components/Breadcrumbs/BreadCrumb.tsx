@@ -1,8 +1,7 @@
 import * as React from 'react';
-import { refSetter } from '#src/components/common/utils/refSetter';
 import styled, { css } from 'styled-components';
 import { typography } from '#src/components/Typography';
-import { Tooltip } from '#src/components/Tooltip';
+import { TooltipHoc } from '#src/components/TooltipHOCRefactor';
 import type { BreadcrumbsProps } from '#src/components/Breadcrumbs';
 
 const getTypography = css<{ dimension: BreadcrumbsProps['dimension'] }>`
@@ -40,6 +39,8 @@ const TextWrapper = styled.div`
   display: inline-block;
   cursor: pointer;
 `;
+
+const TextWithTooltip = TooltipHoc(TextWrapper);
 
 export const CrumbAnchor = styled.a`
   display: flex;
@@ -93,24 +94,12 @@ export interface BreadcrumbProps extends React.HTMLAttributes<HTMLLIElement> {
 export const Breadcrumb = React.forwardRef<HTMLLIElement, BreadcrumbProps>(
   ({ text, url = '#', linkAs, linkProps, children, tabIndex, dimension = 'l', ...props }, ref) => {
     const tooltip = text.length > 40;
-    const crumbRef = React.useRef<HTMLLIElement>(null);
-    const textRef = React.useRef<HTMLDivElement | null>(null);
-
-    const [tooltipVisible, setTooltipVisible] = React.useState(false);
 
     return (
-      <Crumb ref={refSetter(ref, crumbRef)} dimension={dimension} {...props}>
+      <Crumb ref={ref} dimension={dimension} {...props}>
         <CrumbAnchor href={url} as={linkAs} tabIndex={tabIndex} {...linkProps}>
           <Content tabIndex={-1} role="link">
-            {tooltip ? <TextWrapper ref={textRef}>{text.slice(0, 37) + '...'}</TextWrapper> : text}
-            {tooltip && (
-              <Tooltip
-                targetRef={textRef}
-                visible={tooltipVisible}
-                onVisibilityChange={setTooltipVisible}
-                renderContent={() => text}
-              />
-            )}
+            {tooltip ? <TextWithTooltip renderContent={() => text}>{text.slice(0, 37) + '...'}</TextWithTooltip> : text}
             {children}
           </Content>
         </CrumbAnchor>
