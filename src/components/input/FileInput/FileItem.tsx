@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { forwardRef, HTMLAttributes } from 'react';
+import { forwardRef, HTMLAttributes, useEffect, useRef, useState } from 'react';
 import { FileInputDimension } from '#src/components/input/FileInput';
 import styled, { css, DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { typography } from '#src/components/Typography';
-import { formatBytes, getFormat, dataTransferConstructorSupported } from '#src/components/input/FileInput/utils';
+import { formatBytes, getFormat } from '#src/components/input/FileInput/utils';
 import { Spinner } from '#src/components/Spinner';
 import { ReactComponent as PDFSolid } from '@admiral-ds/icons/build/documents/PDFSolid.svg';
 import { ReactComponent as PPTSolid } from '@admiral-ds/icons/build/documents/PPTSolid.svg';
@@ -25,6 +25,9 @@ import {
   FILE_ITEM_WRAPPER_PADDING_M,
   FILE_ITEM_WRAPPER_PADDING_XL,
 } from '#src/components/input/FileInput/style';
+import { Tooltip } from '#src/components/Tooltip';
+import { checkOverflow } from '#src/components/common/utils/checkOverflow';
+import { refSetter } from '#src/components/common/utils/refSetter';
 
 export type Status = 'Uploaded' | 'Loading' | 'Error' | 'Queue';
 
@@ -283,13 +286,24 @@ export const FileItem = forwardRef<HTMLDivElement, FileItemProps>(
     const fileInfo = `${fileFormat}・${fileSize} Mb`;
     const fileName = file.name.substring(0, file.name.lastIndexOf('.'));
 
-    const titleRef = React.useRef<HTMLDivElement | null>(null);
+    const containerRef = useRef<HTMLDivElement | null>(null);
+    const titleRef = useRef<HTMLDivElement | null>(null);
+    const [overflowActive, setOverflowActive] = useState<boolean>(false);
+    const [tooltipVisible, setTooltipVisible] = useState(false);
+
+    useEffect(() => {
+      if (checkOverflow(titleRef.current)) {
+        setOverflowActive(true);
+        return;
+      }
+      setOverflowActive(false);
+    }, [tooltipVisible]);
 
     const handleCloseIconClick = () => {
       onCloseIconClick?.();
     };
     return (
-      <Container ref={ref} dimension={dimension} filesLayoutCssMixin={filesLayoutCssMixin}>
+      <Container ref={refSetter(ref, containerRef)} dimension={dimension} filesLayoutCssMixin={filesLayoutCssMixin}>
         <PreviewWrapper status={status} dimension={dimension}>
           <FileInfoBlock dimension={dimension}>
             {dimension === 'xl' && (
@@ -300,6 +314,12 @@ export const FileItem = forwardRef<HTMLDivElement, FileItemProps>(
             )}
             <Content dimension={dimension}>
               <FileName ref={titleRef}>{fileName}</FileName>
+              <Tooltip
+                targetRef={containerRef}
+                visible={tooltipVisible && overflowActive}
+                onVisibilityChange={setTooltipVisible}
+                renderContent={() => `${fileName}`}
+              />
               <FileInfo dimension={dimension} status={status}>
                 {fileInfo}
               </FileInfo>

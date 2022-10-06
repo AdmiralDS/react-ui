@@ -90,7 +90,7 @@ export default {
 const file1 = new File(['foo'], 'example1.jpeg', {
   type: 'image/jpeg',
 });
-const file2 = new File(['foo'], 'example2.pdf', {
+const file2 = new File(['foo'], 'veryveryveryveryveryveryverylongfilenameexample2.pdf', {
   type: 'application/pdf',
 });
 const file3 = new File(['foo'], 'example3.doc', {
