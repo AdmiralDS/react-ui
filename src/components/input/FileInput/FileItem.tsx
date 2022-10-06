@@ -105,6 +105,21 @@ const getColor = (status?: Status) => {
   return 'Neutral/Neutral 50';
 };
 
+const ImagePreview = styled.div`
+  min-width: 40px;
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+  margin-right: 8px;
+  overflow: hidden;
+
+  > img {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+  }
+`;
+
 const IconWrapper = styled.div<{ status?: Status; isImage: boolean }>`
   position: relative;
   margin-right: 8px;
@@ -275,21 +290,52 @@ export interface FileItemProps extends HTMLAttributes<HTMLDivElement>, RenderFil
 
 export const FileItem = forwardRef<HTMLDivElement, FileItemProps>(
   (
-    { children, file, dimension, status, errorMessage, showPreview, filesLayoutCssMixin, onCloseIconClick, ...props },
+    {
+      children,
+      file,
+      dimension,
+      status,
+      errorMessage,
+      showPreview = true,
+      filesLayoutCssMixin,
+      onCloseIconClick,
+      ...props
+    },
     ref,
   ) => {
     const PreviewIcon = getIcon(file.type);
     const fileFormat = getFormat(file.type);
-    const imageTypes = ['JPEG', 'PNG', 'TIFF', 'SVG', 'GIF'];
-    const isImage = imageTypes.includes(fileFormat);
+    const isImage = file.type.startsWith('image');
     const fileSize = formatBytes(file.size);
     const fileInfo = `${fileFormat}・${fileSize} Mb`;
     const fileName = file.name.substring(0, file.name.lastIndexOf('.'));
 
     const containerRef = useRef<HTMLDivElement | null>(null);
     const titleRef = useRef<HTMLDivElement | null>(null);
+
+    const [imageSrc, setImageSrc] = React.useState('');
     const [overflowActive, setOverflowActive] = useState<boolean>(false);
     const [tooltipVisible, setTooltipVisible] = useState(false);
+
+    const getImageUrl = (file: File) => {
+      const reader = new FileReader();
+      reader.onloadend = function () {
+        if (typeof reader.result === 'string') {
+          setImageSrc(reader.result);
+        }
+      };
+      if (file) {
+        reader.readAsDataURL(file);
+      } else {
+        setImageSrc('');
+      }
+    };
+
+    useEffect(() => {
+      if (file && isImage && showPreview) {
+        getImageUrl(file);
+      }
+    }, [file]);
 
     useEffect(() => {
       if (checkOverflow(titleRef.current)) {
@@ -304,11 +350,17 @@ export const FileItem = forwardRef<HTMLDivElement, FileItemProps>(
     };
     return (
       <Container ref={refSetter(ref, containerRef)} dimension={dimension} filesLayoutCssMixin={filesLayoutCssMixin}>
-        <PreviewWrapper status={status} dimension={dimension}>
+        <PreviewWrapper {...props} status={status} dimension={dimension}>
           <FileInfoBlock dimension={dimension}>
             {dimension === 'xl' && (
               <IconWrapper status={status} isImage={isImage}>
-                <PreviewIcon />
+                {isImage && showPreview ? (
+                  <ImagePreview>
+                    <img src={imageSrc} alt={''} />
+                  </ImagePreview>
+                ) : (
+                  <PreviewIcon />
+                )}
                 <StyledEyeOutline />
               </IconWrapper>
             )}

@@ -108,6 +108,7 @@ const filesInitial: filesProps[] = [
     id: '1',
     file: file1,
     status: 'Uploaded',
+    showPreview: false,
   },
   {
     id: '2',
@@ -178,6 +179,7 @@ const FileInputBaseTemplate: ComponentStory<typeof FileInput> = (props) => {
               dimension={props.dimension}
               status={item.status}
               errorMessage={item.errorMessage}
+              showPreview={item.showPreview}
               filesLayoutCssMixin={props.dimension === 'm' ? halfWidthPositionMixin : fullWidthPositionMixin}
               {...options}
               key={item.id}
@@ -198,7 +200,7 @@ const FileInputBaseTemplate: ComponentStory<typeof FileInput> = (props) => {
         dimension={props.dimension}
         disabled={props.disabled}
         width="480px"
-        title={`Загрузите не более 3-х файлов типа ${accept} до 5 MB каждый`}
+        title={`Загрузите не более 10-ти файлов типа ${accept} до 5 MB каждый`}
         description="Добавьте файлы"
         ref={inputRef}
       />
