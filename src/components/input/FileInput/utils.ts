@@ -2,17 +2,6 @@ export const formatBytes = (bytes: number, decimals = 2): number => {
   return Number((bytes / (1024 * 1024)).toFixed(decimals));
 };
 
-export const dataTransferConstructorSupported = (): boolean => {
-  let dataTransferConstructorSupported;
-  try {
-    new DataTransfer();
-    dataTransferConstructorSupported = true;
-  } catch {
-    dataTransferConstructorSupported = false;
-  }
-  return dataTransferConstructorSupported;
-};
-
 /**
  * https://github.com/react-dropzone/attr-accept/blob/master/src/index.js
  *
@@ -25,7 +14,6 @@ export const dataTransferConstructorSupported = (): boolean => {
  * @param acceptedFiles {string}
  * @returns {boolean}
  */
-
 export function acceptFile(file: File, acceptedFiles: string): boolean {
   if (file && acceptedFiles) {
     const acceptedFilesArray = Array.isArray(acceptedFiles) ? acceptedFiles : acceptedFiles.split(',');

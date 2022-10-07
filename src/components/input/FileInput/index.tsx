@@ -88,7 +88,7 @@ export interface FileInputProps extends Omit<InputHTMLAttributes<HTMLInputElemen
 }
 
 export const FileInput = forwardRef<HTMLInputElement, FileInputProps>(
-  ({ dimension = 'xl', width, title, description, disabled, multiple = true, ...props }, ref) => {
+  ({ dimension = 'xl', width, title, description, disabled, multiple = true, children, ...props }, ref) => {
     const renderTitleText = () => <TitleText dimension={dimension} disabled={disabled} children={title} />;
     const renderDescription = () => <Description disabled={disabled}>{description}</Description>;
 
@@ -101,6 +101,7 @@ export const FileInput = forwardRef<HTMLInputElement, FileInputProps>(
           {description && dimension === 'm' && renderDescription()}
           <StyledInput {...props} ref={ref} type="file" disabled={disabled} multiple={multiple} />
         </InputWrapper>
+        {children}
       </Wrapper>
     );
   },

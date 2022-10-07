@@ -27,7 +27,6 @@ import {
 } from '#src/components/input/FileInput/style';
 import { Tooltip } from '#src/components/Tooltip';
 import { checkOverflow } from '#src/components/common/utils/checkOverflow';
-import { refSetter } from '#src/components/common/utils/refSetter';
 
 export type Status = 'Uploaded' | 'Loading' | 'Error' | 'Queue';
 
@@ -260,47 +259,29 @@ const getIcon = (type: string) => {
   }
 };
 
-export interface RenderFileListItemProps {
-  key?: string | number;
-  /** Отключение секции */
-  disabled?: boolean;
-  /** Обработчик клика по item */
-  onCloseIconClick?: () => void;
-}
-
-export interface FileListItemProps {
-  id: string;
-  render: (options: RenderFileListItemProps) => React.ReactNode;
-  disabled?: boolean;
-}
-
-export interface FileItemProps extends HTMLAttributes<HTMLDivElement>, RenderFileListItemProps {
-  file: File;
-  /** Размер FileItem */
-  dimension?: FileInputDimension;
+export interface FileAttributeProps {
   /** Статус компонента, имеет четыре состояния: Uploaded, Loading, Error, Queue */
   status?: Status;
   /** Текст ошибки при загрузке файла */
   errorMessage?: string;
   /** Отображение превью изображений  */
   showPreview?: boolean;
+  /** Обработчик клика по CloseIcon */
+  onCloseIconClick?: () => void;
+}
+
+export interface FileItemProps extends HTMLAttributes<HTMLDivElement>, FileAttributeProps {
+  file: File;
+  /** Размер FileItem */
+  dimension?: FileInputDimension;
   /** Позволяет добавлять миксин для компоновки загруженных файлов, созданный с помощью styled css  */
   filesLayoutCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+  children?: never;
 }
 
 export const FileItem = forwardRef<HTMLDivElement, FileItemProps>(
   (
-    {
-      children,
-      file,
-      dimension,
-      status,
-      errorMessage,
-      showPreview = true,
-      filesLayoutCssMixin,
-      onCloseIconClick,
-      ...props
-    },
+    { file, dimension, status, errorMessage, showPreview = true, filesLayoutCssMixin, onCloseIconClick, ...props },
     ref,
   ) => {
     const PreviewIcon = getIcon(file.type);

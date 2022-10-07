@@ -4,11 +4,8 @@ import * as React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import { FileInput } from '#src/components/input/FileInput';
 import { Theme } from '#src/components/themes';
-import { useEffect, useMemo, useRef, useState } from 'react';
-import { acceptFile } from '#src/components/input/FileInput/utils';
-import { FileItem, FileItemProps, RenderFileListItemProps } from '#src/components/input/FileInput/FileItem';
-import { FileList } from '#src/components/input/FileInput/FileList';
-import { uid } from '#src/components/common/uid';
+import { ChangeEvent, useRef, useState } from 'react';
+import { FileAttributeProps, FileItem } from '#src/components/input/FileInput/FileItem';
 import { fullWidthPositionMixin, halfWidthPositionMixin } from '#src/components/input/FileInput/style';
 
 const Separator = styled.div`
@@ -100,33 +97,28 @@ const file4 = new File(['foo'], 'example4.xls', {
   type: 'application/vnd.ms-excel',
 });
 
-interface filesProps extends FileItemProps {
-  id: string;
-}
-const filesInitial: filesProps[] = [
+const filesInitial = [file1, file2, file3, file4];
+const filesAttributesInitial: FileAttributeProps[] = [
   {
-    id: '1',
-    file: file1,
     status: 'Uploaded',
     showPreview: false,
   },
   {
-    id: '2',
-    file: file3,
-    status: 'Loading',
-  },
-  {
-    id: '3',
-    file: file2,
     status: 'Error',
     errorMessage: 'Что-то явно пошло не так...',
   },
   {
-    id: '4',
-    file: file4,
+    status: 'Loading',
+  },
+  {
     status: 'Queue',
   },
 ];
+const filesMapInitial = () => {
+  const initialMap = new Map<File, FileAttributeProps>();
+  filesInitial.forEach((file, index) => initialMap.set(file, filesAttributesInitial[index]));
+  return initialMap;
+};
 
 const FileInputBaseTemplate: ComponentStory<typeof FileInput> = (props) => {
   function swapBorder(theme: Theme): Theme {
@@ -134,65 +126,60 @@ const FileInputBaseTemplate: ComponentStory<typeof FileInput> = (props) => {
     return theme;
   }
   const inputRef = useRef<HTMLInputElement>(null);
-  const [files, setFiles] = useState<filesProps[]>(filesInitial);
+  const [fileList, setFileList] = useState<File[]>([...filesInitial]);
+  const [fileAttributesMap, setFileAttributesMap] = useState(filesMapInitial());
 
-  const accept = 'image/*, .pdf, application/json';
+  const filesAreEqual = (file1: File, file2: File) =>
+    file1.name === file2.name &&
+    file1.size === file2.size &&
+    file1.type === file2.type &&
+    file1.lastModified === file2.lastModified;
 
-  useEffect(() => {
-    function onChangeEventHandler(this: HTMLInputElement) {
-      const filesToAdd: filesProps[] = Array.from(this.files || [])
-        .filter((file) => !accept || acceptFile(file, accept))
-        .map((file) => {
-          return {
-            file: file,
-            id: uid(),
-          };
-        });
-
-      const dt = new DataTransfer();
-      filesToAdd.forEach(({ file }) => dt.items.add(file));
-      this.files = dt.files;
-      setFiles([...files, ...filesToAdd]);
-    }
-    const input = inputRef.current;
-
-    if (input) {
-      input.addEventListener('change', onChangeEventHandler, true);
-      return () => input.removeEventListener('change', onChangeEventHandler, true);
-    }
-  }, [inputRef.current, files, accept]);
-
-  const handleRemoveFile = (id: string) => {
-    console.log(`File ${id} deleted`);
-    const updatedFiles = files.filter((file) => file.id !== id);
-    setFiles(updatedFiles);
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const userSelectedFileList = Array.from(e.target.files || []);
+    const updatedFileAttributesMap = new Map<File, FileAttributeProps>(fileAttributesMap);
+    const updatedFileList = fileList.reduce((acc: File[], file) => {
+      if (userSelectedFileList.findIndex((userFile) => filesAreEqual(userFile, file)) === -1) {
+        acc.push(file);
+      } else {
+        updatedFileAttributesMap.delete(file);
+      }
+      return acc;
+    }, []);
+    userSelectedFileList.forEach((file) =>
+      updatedFileAttributesMap.set(file, { status: 'Uploaded', errorMessage: 'Что-то явно пошло не так...' }),
+    );
+    setFileList([...updatedFileList, ...userSelectedFileList]);
+    setFileAttributesMap(updatedFileAttributesMap);
   };
 
-  const model = useMemo(() => {
-    if (files.length) {
-      return files.map((item) => {
-        return {
-          id: item.id,
-          render: (options: RenderFileListItemProps) => (
-            <FileItem
-              file={item.file}
-              dimension={props.dimension}
-              status={item.status}
-              errorMessage={item.errorMessage}
-              showPreview={item.showPreview}
-              filesLayoutCssMixin={props.dimension === 'm' ? halfWidthPositionMixin : fullWidthPositionMixin}
-              {...options}
-              key={item.id}
-            >
-              {item.file.name}
-            </FileItem>
-          ),
-        };
-      });
-    }
-  }, [files, props.dimension]);
+  const handleRemoveFile = (fileToRemove: File) => {
+    const updatedFileList = fileList.filter((file) => !filesAreEqual(file, fileToRemove));
+    const updatedFileAttributesMap = new Map<File, FileAttributeProps>(fileAttributesMap);
+    updatedFileAttributesMap.delete(fileToRemove);
+    setFileList(updatedFileList);
+    setFileAttributesMap(updatedFileAttributesMap);
+  };
 
-  useEffect(() => console.log(files), [files]);
+  const renderFileList = () => {
+    return fileList.map((file) => {
+      const attributes = fileAttributesMap.get(file);
+      if (attributes) {
+        return (
+          <FileItem
+            key={file.name}
+            file={file}
+            dimension={props.dimension}
+            filesLayoutCssMixin={props.dimension === 'm' ? halfWidthPositionMixin : fullWidthPositionMixin}
+            status={attributes.status}
+            showPreview={attributes.showPreview}
+            errorMessage={attributes.errorMessage}
+            onCloseIconClick={() => handleRemoveFile(file)}
+          />
+        );
+      }
+    });
+  };
 
   return (
     <ThemeProvider theme={swapBorder}>
@@ -200,13 +187,13 @@ const FileInputBaseTemplate: ComponentStory<typeof FileInput> = (props) => {
         dimension={props.dimension}
         disabled={props.disabled}
         width="480px"
-        title={`Загрузите не более 10-ти файлов типа ${accept} до 5 MB каждый`}
+        title={`Загрузите не более 10-ти файлов до 5 MB каждый`}
         description="Добавьте файлы"
         ref={inputRef}
-      />
-      {model && model.length && (
-        <FileList model={model} dimension={props.dimension} width="480px" onRemoveFile={handleRemoveFile} />
-      )}
+        onInput={handleChange}
+      >
+        {renderFileList()}
+      </FileInput>
     </ThemeProvider>
   );
 };
