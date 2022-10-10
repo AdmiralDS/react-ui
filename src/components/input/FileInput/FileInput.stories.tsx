@@ -101,7 +101,6 @@ const filesInitial = [file1, file2, file3, file4];
 const filesAttributesInitial: FileAttributeProps[] = [
   {
     status: 'Uploaded',
-    showPreview: false,
   },
   {
     status: 'Error',
@@ -135,6 +134,10 @@ const FileInputBaseTemplate: ComponentStory<typeof FileInput> = (props) => {
     file1.type === file2.type &&
     file1.lastModified === file2.lastModified;
 
+  const handlePreviewIconClick = (file: File) => {
+    console.log(`Preview icon on file "${file.name}" was clicked`);
+  };
+
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const userSelectedFileList = Array.from(e.target.files || []);
     const updatedFileAttributesMap = new Map<File, FileAttributeProps>(fileAttributesMap);
@@ -146,9 +149,16 @@ const FileInputBaseTemplate: ComponentStory<typeof FileInput> = (props) => {
       }
       return acc;
     }, []);
-    userSelectedFileList.forEach((file) =>
-      updatedFileAttributesMap.set(file, { status: 'Uploaded', errorMessage: 'Что-то явно пошло не так...' }),
-    );
+    userSelectedFileList.forEach((file) => {
+      const imageURL = file.type.startsWith('image') ? URL.createObjectURL(file) : undefined;
+      const onPreviewIconClick = file.type.startsWith('image') ? () => handlePreviewIconClick(file) : undefined;
+      updatedFileAttributesMap.set(file, {
+        status: 'Uploaded',
+        errorMessage: 'Что-то явно пошло не так...',
+        previewImageURL: imageURL,
+        onPreviewIconClick: onPreviewIconClick,
+      });
+    });
     setFileList([...updatedFileList, ...userSelectedFileList]);
     setFileAttributesMap(updatedFileAttributesMap);
   };
@@ -156,6 +166,10 @@ const FileInputBaseTemplate: ComponentStory<typeof FileInput> = (props) => {
   const handleRemoveFile = (fileToRemove: File) => {
     const updatedFileList = fileList.filter((file) => !filesAreEqual(file, fileToRemove));
     const updatedFileAttributesMap = new Map<File, FileAttributeProps>(fileAttributesMap);
+    const attributes = fileAttributesMap.get(fileToRemove);
+    if (attributes && attributes.previewImageURL) {
+      URL.revokeObjectURL(attributes.previewImageURL);
+    }
     updatedFileAttributesMap.delete(fileToRemove);
     setFileList(updatedFileList);
     setFileAttributesMap(updatedFileAttributesMap);
@@ -171,10 +185,11 @@ const FileInputBaseTemplate: ComponentStory<typeof FileInput> = (props) => {
             file={file}
             dimension={props.dimension}
             filesLayoutCssMixin={props.dimension === 'm' ? halfWidthPositionMixin : fullWidthPositionMixin}
+            previewImageURL={attributes.previewImageURL}
             status={attributes.status}
-            showPreview={attributes.showPreview}
             errorMessage={attributes.errorMessage}
             onCloseIconClick={() => handleRemoveFile(file)}
+            onPreviewIconClick={attributes.onPreviewIconClick}
           />
         );
       }

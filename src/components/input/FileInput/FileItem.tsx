@@ -83,7 +83,7 @@ const hoveredFileTypeIconCss = css`
       &::before {
         content: '';
         position: absolute;
-        border-radius: 4px;
+        border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
@@ -108,7 +108,7 @@ const ImagePreview = styled.div`
   min-width: 40px;
   width: 40px;
   height: 40px;
-  border-radius: 4px;
+  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
   margin-right: 8px;
   overflow: hidden;
 
@@ -119,10 +119,10 @@ const ImagePreview = styled.div`
   }
 `;
 
-const IconWrapper = styled.div<{ status?: Status; isImage: boolean }>`
+const IconWrapper = styled.div<{ status?: Status; showHover: boolean }>`
   position: relative;
   margin-right: 8px;
-  border-radius: 4px;
+  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
   width: ${FILE_ITEM_PREVIEW_ICON_SIZE_XL};
   height: ${FILE_ITEM_PREVIEW_ICON_SIZE_XL};
 
@@ -130,7 +130,7 @@ const IconWrapper = styled.div<{ status?: Status; isImage: boolean }>`
     fill: ${(p) => p.theme.color[getColor(p.status)]};
   }
 
-  ${(p) => (p.status === 'Queue' || !p.isImage ? disabledStyles : hoveredFileTypeIconCss)};
+  ${(p) => (p.status === 'Queue' || !p.showHover ? disabledStyles : hoveredFileTypeIconCss)};
 `;
 
 const StyledEyeOutline = styled(EyeOutline)`
@@ -264,10 +264,12 @@ export interface FileAttributeProps {
   status?: Status;
   /** Текст ошибки при загрузке файла */
   errorMessage?: string;
-  /** Отображение превью изображений  */
-  showPreview?: boolean;
+  /** URL для отображения миниатюры картинки вместо иконки типа документа в формате XL */
+  previewImageURL?: string;
   /** Обработчик клика по CloseIcon */
   onCloseIconClick?: () => void;
+  /** Обработчик клика по иконке документа */
+  onPreviewIconClick?: () => void;
 }
 
 export interface FileItemProps extends HTMLAttributes<HTMLDivElement>, FileAttributeProps {
@@ -281,11 +283,20 @@ export interface FileItemProps extends HTMLAttributes<HTMLDivElement>, FileAttri
 
 export const FileItem = forwardRef<HTMLDivElement, FileItemProps>(
   (
-    { file, dimension, status, errorMessage, showPreview = true, filesLayoutCssMixin, onCloseIconClick, ...props },
+    {
+      file,
+      dimension,
+      status,
+      errorMessage,
+      previewImageURL,
+      onPreviewIconClick,
+      filesLayoutCssMixin,
+      onCloseIconClick,
+      ...props
+    },
     ref,
   ) => {
     const PreviewIcon = getIcon(file.type);
-    const isImage = file.type.startsWith('image');
     const fileName = file.name.substring(0, file.name.lastIndexOf('.'));
     const fileFormat = getFormat(file.type);
     const fileSize = formatBytes(file.size);
@@ -294,29 +305,8 @@ export const FileItem = forwardRef<HTMLDivElement, FileItemProps>(
     const previewWrapperRef = useRef<HTMLDivElement | null>(null);
     const titleRef = useRef<HTMLDivElement | null>(null);
 
-    const [imageSrc, setImageSrc] = React.useState('');
     const [overflowActive, setOverflowActive] = useState<boolean>(false);
     const [tooltipVisible, setTooltipVisible] = useState(false);
-
-    const getImageUrl = (file: File) => {
-      const reader = new FileReader();
-      reader.onloadend = function () {
-        if (typeof reader.result === 'string') {
-          setImageSrc(reader.result);
-        }
-      };
-      if (file) {
-        reader.readAsDataURL(file);
-      } else {
-        setImageSrc('');
-      }
-    };
-
-    useEffect(() => {
-      if (file && isImage && showPreview) {
-        getImageUrl(file);
-      }
-    }, [file]);
 
     useEffect(() => {
       if (checkOverflow(titleRef.current)) {
@@ -335,10 +325,10 @@ export const FileItem = forwardRef<HTMLDivElement, FileItemProps>(
         <PreviewWrapper {...props} ref={previewWrapperRef} status={status} dimension={dimension}>
           <FileInfoBlock dimension={dimension}>
             {dimension === 'xl' && (
-              <IconWrapper status={status} isImage={isImage}>
-                {isImage && showPreview && !!imageSrc ? (
+              <IconWrapper status={status} showHover={!!onPreviewIconClick} onClick={onPreviewIconClick}>
+                {previewImageURL ? (
                   <ImagePreview>
-                    <img src={imageSrc} alt={''} />
+                    <img src={previewImageURL} alt={''} />
                   </ImagePreview>
                 ) : (
                   <PreviewIcon />
