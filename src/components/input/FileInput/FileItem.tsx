@@ -260,6 +260,7 @@ const getIcon = (type: string) => {
 };
 
 export interface FileAttributeProps {
+  fileId: string;
   /** Имя файла без расширения */
   fileName: string;
   /** Тип файла */
@@ -273,9 +274,9 @@ export interface FileAttributeProps {
   /** URL для отображения миниатюры картинки вместо иконки типа документа в формате XL */
   previewImageURL?: string;
   /** Обработчик клика по CloseIcon */
-  onCloseIconClick?: () => void;
+  onCloseIconClick?: (fileId: string) => void;
   /** Обработчик клика по иконке документа */
-  onPreviewIconClick?: () => void;
+  onPreviewIconClick?: (fileId: string) => void;
 }
 
 export interface FileItemProps extends HTMLAttributes<HTMLDivElement>, FileAttributeProps {
@@ -289,6 +290,7 @@ export interface FileItemProps extends HTMLAttributes<HTMLDivElement>, FileAttri
 export const FileItem = forwardRef<HTMLDivElement, FileItemProps>(
   (
     {
+      fileId,
       fileName,
       fileType,
       fileSize,
@@ -323,7 +325,10 @@ export const FileItem = forwardRef<HTMLDivElement, FileItemProps>(
     }, [tooltipVisible]);
 
     const handleCloseIconClick = () => {
-      onCloseIconClick?.();
+      onCloseIconClick?.(fileId);
+    };
+    const handlePreviewIconClick = () => {
+      onPreviewIconClick?.(fileId);
     };
 
     return (
@@ -331,7 +336,7 @@ export const FileItem = forwardRef<HTMLDivElement, FileItemProps>(
         <PreviewWrapper {...props} ref={previewWrapperRef} status={status} dimension={dimension}>
           <FileInfoBlock dimension={dimension}>
             {dimension === 'xl' && (
-              <IconWrapper status={status} showHover={!!onPreviewIconClick} onClick={onPreviewIconClick}>
+              <IconWrapper status={status} showHover={!!onPreviewIconClick} onClick={handlePreviewIconClick}>
                 {previewImageURL ? (
                   <ImagePreview>
                     <img src={previewImageURL} alt={''} />

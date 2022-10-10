@@ -2,11 +2,13 @@ import { withDesign } from 'storybook-addon-designs';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import * as React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
-import { FileInput } from '#src/components/input/FileInput';
+import { FileInput, RenderFileInputProps } from '#src/components/input/FileInput';
 import { Theme } from '#src/components/themes';
 import { ChangeEvent, useRef, useState } from 'react';
 import { FileAttributeProps, FileItem } from '#src/components/input/FileInput/FileItem';
 import { fullWidthPositionMixin, halfWidthPositionMixin } from '#src/components/input/FileInput/style';
+import { Button } from '#src/components/Button';
+import { uid } from '#src/components/common/uid';
 
 const Separator = styled.div`
   height: 40px;
@@ -100,25 +102,29 @@ const file4 = new File(['foo'], 'example4.xls', {
 const filesInitial = [file1, file2, file3, file4];
 const filesAttributesInitial: FileAttributeProps[] = [
   {
+    fileId: '1',
     fileName: 'example1',
     fileType: file1.type,
     fileSize: file1.size,
     status: 'Uploaded',
   },
   {
-    fileName: 'example2',
+    fileId: '2',
+    fileName: 'veryveryveryveryveryveryveryveryverylongfilenameexample2',
     fileType: file2.type,
     fileSize: file2.size,
     status: 'Error',
     errorMessage: 'Что-то явно пошло не так...',
   },
   {
+    fileId: '3',
     fileName: 'example3',
     fileType: file3.type,
     fileSize: file3.size,
     status: 'Loading',
   },
   {
+    fileId: '4',
     fileName: 'example4',
     fileType: file4.type,
     fileSize: file4.size,
@@ -165,6 +171,7 @@ const FileInputBaseTemplate: ComponentStory<typeof FileInput> = (props) => {
       const imageURL = file.type.startsWith('image') ? URL.createObjectURL(file) : undefined;
       const onPreviewIconClick = file.type.startsWith('image') ? () => handlePreviewIconClick(file) : undefined;
       updatedFileAttributesMap.set(file, {
+        fileId: uid(),
         fileName: file.name.substring(0, file.name.lastIndexOf('.')),
         fileType: file.type,
         fileSize: file.size,
@@ -196,7 +203,8 @@ const FileInputBaseTemplate: ComponentStory<typeof FileInput> = (props) => {
       if (attributes) {
         return (
           <FileItem
-            key={file.name}
+            fileId={attributes.fileId}
+            key={attributes.fileId}
             fileName={attributes.fileName}
             fileType={attributes.fileType}
             fileSize={attributes.fileSize}

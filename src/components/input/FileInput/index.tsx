@@ -1,8 +1,9 @@
-import React, { forwardRef, InputHTMLAttributes } from 'react';
+import React, { forwardRef, InputHTMLAttributes, useRef } from 'react';
 import styled from 'styled-components';
 import { ReactComponent as AttachFileOutline } from '@admiral-ds/icons/build/system/AttachFileOutline.svg';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { typography } from '#src/components/Typography';
+import { refSetter } from '#src/components/common/utils/refSetter';
 import {
   FILE_INPUT_ICON_MARGIN,
   FILE_INPUT_ICON_SIZE_M,
@@ -58,6 +59,14 @@ const StyledInput = styled.input`
   }
 `;
 
+const CustomInput = styled.input`
+  display: block;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  tabindex: '-1';
+`;
+
 const InputWrapper = styled.div<{ disabled?: boolean; dimension: FileInputDimension }>`
   position: relative;
   display: flex;
@@ -74,7 +83,16 @@ const Wrapper = styled.div<{ dimension: FileInputDimension; width?: string | num
   min-width: ${(p) => (p.dimension === 'm' ? FILE_INPUT_MIN_WIDTH_M : FILE_INPUT_MIN_WIDTH_XL)};
   ${(p) => (p.width ? `width: ${p.width};` : '')}
   box-sizing: border-box;
+  ${typography['Body/Body 2 Long']};
 `;
+
+const CustomWrapper = styled.div`
+  position: relative;
+`;
+
+export interface RenderFileInputProps {
+  onQueryUpload: () => void;
+}
 
 export interface FileInputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'title'> {
   /** Размер компонента */
@@ -85,22 +103,57 @@ export interface FileInputProps extends Omit<InputHTMLAttributes<HTMLInputElemen
   title?: React.ReactNode;
   /** Текст для кнопки при dimension M */
   description?: React.ReactNode;
+  renderCustomFileInput?: (option: RenderFileInputProps) => React.ReactNode;
 }
 
 export const FileInput = forwardRef<HTMLInputElement, FileInputProps>(
-  ({ dimension = 'xl', width, title, description, disabled, multiple = true, children, ...props }, ref) => {
+  (
+    {
+      dimension = 'xl',
+      width,
+      title,
+      description,
+      renderCustomFileInput,
+      disabled,
+      multiple = true,
+      children,
+      ...props
+    },
+    ref,
+  ) => {
+    const customInputRef = useRef<HTMLInputElement>(null);
+
     const renderTitleText = () => <TitleText dimension={dimension} disabled={disabled} children={title} />;
     const renderDescription = () => <Description disabled={disabled}>{description}</Description>;
 
+    const handleQueryUpload = () => {
+      customInputRef.current?.click();
+    };
+
     return (
       <Wrapper dimension={dimension} width={width}>
-        {title && dimension === 'm' && renderTitleText()}
-        <InputWrapper dimension={dimension} disabled={disabled}>
-          <Icon dimension={dimension} />
-          {title && dimension === 'xl' && renderTitleText()}
-          {description && dimension === 'm' && renderDescription()}
-          <StyledInput {...props} ref={ref} type="file" disabled={disabled} multiple={multiple} />
-        </InputWrapper>
+        {renderCustomFileInput ? (
+          <CustomWrapper>
+            {renderCustomFileInput({ onQueryUpload: handleQueryUpload })}
+            <CustomInput
+              {...props}
+              ref={refSetter(ref, customInputRef)}
+              type="file"
+              multiple={multiple}
+              disabled={disabled}
+            />
+          </CustomWrapper>
+        ) : (
+          <>
+            {title && dimension === 'm' && renderTitleText()}
+            <InputWrapper dimension={dimension} disabled={disabled}>
+              <Icon dimension={dimension} />
+              {title && dimension === 'xl' && renderTitleText()}
+              {description && dimension === 'm' && renderDescription()}
+              <StyledInput {...props} ref={ref} type="file" disabled={disabled} multiple={multiple} />
+            </InputWrapper>
+          </>
+        )}
         {children}
       </Wrapper>
     );
