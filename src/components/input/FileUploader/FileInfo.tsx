@@ -3,7 +3,7 @@ import { HTMLAttributes, MouseEventHandler, useEffect } from 'react';
 import styled, { css } from 'styled-components';
 import { ErrorBlock } from '#src/components/input/FileUploader/ErrorBlock';
 import { Spinner } from '#src/components/Spinner';
-import { Tooltip } from '#src/components/Tooltip';
+import { Tooltip } from '#src/components/TooltipRefactor';
 import { dataTransferConstructorSupported, Dimension, formatBytes, Status } from './utils';
 import { ReactComponent as FilePDFSolid } from '@admiral-ds/icons/build/documents/FilePDFSolid.svg';
 import { ReactComponent as FilePPTSolid } from '@admiral-ds/icons/build/documents/FilePPTSolid.svg';
@@ -13,6 +13,7 @@ import { ReactComponent as DocsSolid } from '@admiral-ds/icons/build/documents/D
 import { ReactComponent as JpgSolid } from '@admiral-ds/icons/build/documents/JpgSolid.svg';
 import { ReactComponent as CloseOutline } from '@admiral-ds/icons/build/service/CloseOutline.svg';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
+import { checkOverflow } from '#src/components/common/utils/checkOverflow';
 
 export type FileProps = {
   file: File;
@@ -222,6 +223,7 @@ export const FileInfo = ({
 
   const titleRef = React.useRef<HTMLDivElement | null>(null);
   const [titleTipVisible, setTitleTipVisible] = React.useState(false);
+  const [titleOverflow, setTitleOverflow] = React.useState(false);
 
   const getImageUrl = (file: FileProps) => {
     const reader = new FileReader();
@@ -236,6 +238,31 @@ export const FileInfo = ({
       setImageSrc('');
     }
   };
+
+  useEffect(() => {
+    const element = titleRef.current;
+    if (element && checkOverflow(element) !== titleOverflow) {
+      setTitleOverflow(checkOverflow(element));
+    }
+  }, [titleTipVisible, titleRef.current]);
+
+  useEffect(() => {
+    function show() {
+      setTitleTipVisible(true);
+    }
+    function hide() {
+      setTitleTipVisible(false);
+    }
+    const title = titleRef.current;
+    if (title) {
+      title.addEventListener('mouseenter', show);
+      title.addEventListener('mouseleave', hide);
+      return () => {
+        title.removeEventListener('mouseenter', show);
+        title.removeEventListener('mouseleave', hide);
+      };
+    }
+  }, [setTitleTipVisible, titleRef.current]);
 
   useEffect(() => {
     if (file && imageFile && !children) {
@@ -262,12 +289,7 @@ export const FileInfo = ({
               ))}
             <Content fileDimension={fileDimension}>
               <Title ref={titleRef}>{fileName}</Title>
-              <Tooltip
-                targetRef={titleRef}
-                visible={titleTipVisible}
-                onVisibilityChange={setTitleTipVisible}
-                renderContent={() => `${fileName}`}
-              />
+              {titleTipVisible && titleOverflow && <Tooltip targetRef={titleRef} renderContent={() => `${fileName}`} />}
               <Size fileDimension={fileDimension} status={status}>
                 {fileInfo}
               </Size>

@@ -1,6 +1,6 @@
 import type { FC, MouseEvent } from 'react';
 import React from 'react';
-import { Tooltip } from '#src/components/Tooltip';
+import { TooltipHoc } from '#src/components/TooltipHOCRefactor';
 import { ThemeContext } from 'styled-components';
 import { LIGHT_THEME } from '#src/components/themes';
 
@@ -18,6 +18,10 @@ import { Month, PanelDate, Year } from '../styled/PanelDate';
 import { capitalizeFirstLetter } from '../constants';
 
 import { Button } from './Button';
+
+const MonthWithTooltip = TooltipHoc(Month);
+const YearWithTooltip = TooltipHoc(Year);
+const ButtonWithTooltip = TooltipHoc(Button);
 
 interface IPanelProps {
   viewDate: Date;
@@ -72,16 +76,6 @@ export const Panel: FC<IPanelProps> = ({
   const previousDisabled = yearsView ? previousYearDisabled : previousMonthDisabled;
   const nextDisabled = yearsView ? nextYearDisabled : nextMonthDisabled;
 
-  const previousBtnRef = React.useRef<HTMLDivElement | null>(null);
-  const nextBtnRef = React.useRef<HTMLDivElement | null>(null);
-  const monthRef = React.useRef(null);
-  const yearRef = React.useRef(null);
-
-  const [previousBtnTipVisible, setPreviousBtnTipVisible] = React.useState(false);
-  const [nextBtnTipVisible, setNextBtnTipVisible] = React.useState(false);
-  const [monthTipVisible, setMonthTipVisible] = React.useState(false);
-  const [yearTipVisible, setYearTipVisible] = React.useState(false);
-
   const monthMouseDownHandle = (event: any) => {
     event.preventDefault();
     monthsView ? onMonthsViewHide(event) : onMonthsViewShow(event);
@@ -93,66 +87,56 @@ export const Panel: FC<IPanelProps> = ({
   return (
     <PanelComponent yearsView={yearsView} monthsView={monthsView} className="ui-kit-calendar-panel-component">
       {!monthsView && (
-        <>
-          <Button innerRef={previousBtnRef} onMouseDown={onPrevious} disabled={previousDisabled} type="left" />
-          <Tooltip
-            targetRef={previousBtnRef}
-            visible={previousBtnTipVisible}
-            onVisibilityChange={setPreviousBtnTipVisible}
-            renderContent={() =>
-              yearsView
-                ? locale?.backwardText || theme.locales[theme.currentLocale].calendar.backwardText
-                : locale?.previousMonthText || theme.locales[theme.currentLocale].calendar.previousMonthText
-            }
-            container={tooltipContainer}
-          />
-        </>
+        <ButtonWithTooltip
+          renderContent={() =>
+            yearsView
+              ? locale?.backwardText || theme.locales[theme.currentLocale].calendar.backwardText
+              : locale?.previousMonthText || theme.locales[theme.currentLocale].calendar.previousMonthText
+          }
+          container={tooltipContainer}
+          onMouseDown={onPrevious}
+          disabled={previousDisabled}
+          type="left"
+        />
       )}
       <PanelDate>
-        <Month ref={monthRef} view={monthsView} onMouseDown={monthMouseDownHandle}>
-          {capitalizeFirstLetter(getFormattedValue(viewDate, { month: 'long' }, theme.currentLocale || 'ru'))}
-        </Month>
-        <Tooltip
-          targetRef={monthRef}
-          visible={monthTipVisible}
-          onVisibilityChange={setMonthTipVisible}
+        <MonthWithTooltip
           renderContent={() =>
             monthsView
               ? locale?.returnText || theme.locales[theme.currentLocale].calendar.returnText
               : locale?.selectMonthText || theme.locales[theme.currentLocale].calendar.selectMonthText
           }
           container={tooltipContainer}
-        />
-        <Year ref={yearRef} view={yearsView} onMouseDown={yearMouseDownHandle}>
-          {viewDate.getFullYear()}
-        </Year>
-        <Tooltip
-          targetRef={yearRef}
-          visible={yearTipVisible}
-          onVisibilityChange={setYearTipVisible}
+          view={monthsView}
+          onMouseDown={monthMouseDownHandle}
+        >
+          {capitalizeFirstLetter(getFormattedValue(viewDate, { month: 'long' }, theme.currentLocale || 'ru'))}
+        </MonthWithTooltip>
+        <YearWithTooltip
           renderContent={() =>
             yearsView
               ? locale?.returnText || theme.locales[theme.currentLocale].calendar.returnText
               : locale?.selectYearText || theme.locales[theme.currentLocale].calendar.selectYearText
           }
           container={tooltipContainer}
-        />
+          view={yearsView}
+          onMouseDown={yearMouseDownHandle}
+        >
+          {viewDate.getFullYear()}
+        </YearWithTooltip>
       </PanelDate>
       {!monthsView && (
-        <>
-          <Button innerRef={nextBtnRef} onMouseDown={onNext} disabled={nextDisabled} type="right" />
-          <Tooltip
-            targetRef={nextBtnRef}
-            visible={nextBtnTipVisible}
-            onVisibilityChange={setNextBtnTipVisible}
-            renderContent={() =>
-              yearsView
-                ? locale?.forwardText || theme.locales[theme.currentLocale].calendar.forwardText
-                : locale?.nextMonthText || theme.locales[theme.currentLocale].calendar.nextMonthText
-            }
-            container={tooltipContainer}
-          />
-        </>
+        <ButtonWithTooltip
+          renderContent={() =>
+            yearsView
+              ? locale?.forwardText || theme.locales[theme.currentLocale].calendar.forwardText
+              : locale?.nextMonthText || theme.locales[theme.currentLocale].calendar.nextMonthText
+          }
+          container={tooltipContainer}
+          onMouseDown={onNext}
+          disabled={nextDisabled}
+          type="right"
+        />
       )}
     </PanelComponent>
   );

@@ -96,50 +96,34 @@ export default {
 } as ComponentMeta<typeof Tooltip>;
 
 const Template1: ComponentStory<typeof Tooltip> = (args) => {
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
-  const [element, setElement] = React.useState<any>(null);
   const btnRef = React.useRef<any>(null);
   const [visible, setVisible] = React.useState(false);
 
-  const show = () => setVisible(true);
-  const hide = () => setVisible(false);
-
-  const setRef = (node: any) => {
-    if (node) setElement(node);
-  };
-
-  // обязательно использовать addEventListener
   React.useEffect(() => {
-    const button = element;
+    function show() {
+      setVisible(true);
+    }
+    function hide() {
+      setVisible(false);
+    }
+    const button = btnRef.current;
     if (button) {
       button.addEventListener('mouseenter', show);
       button.addEventListener('focus', show);
       button.addEventListener('mouseleave', hide);
-      button.addEventListener('mousedown', hide);
       button.addEventListener('blur', hide);
       return () => {
         button.removeEventListener('mouseenter', show);
         button.removeEventListener('focus', show);
         button.removeEventListener('mouseleave', hide);
-        button.removeEventListener('mousedown', hide);
         button.removeEventListener('blur', hide);
       };
     }
-  }, [element]);
+  }, [btnRef.current, setVisible]);
 
   return (
-    <ThemeProvider theme={swapBorder}>
-      <Button
-        ref={refSetter(btnRef, setRef)}
-        dimension="m"
-        displayAsSquare
-        aria-label="Delete"
-        aria-describedby="test1"
-      >
+    <>
+      <Button ref={btnRef} dimension="m" displayAsSquare aria-label="Delete" aria-describedby="test1">
         <DeleteOutline aria-hidden />
       </Button>
       {visible && (
@@ -157,40 +141,37 @@ const Template1: ComponentStory<typeof Tooltip> = (args) => {
           id="test1"
         />
       )}
-    </ThemeProvider>
+    </>
   );
 };
 
 const Template2: ComponentStory<typeof Tooltip> = () => {
   const btnRef = React.useRef<HTMLButtonElement | null>(null);
   const [visible, setVisible] = React.useState(false);
-  let showTooltipTimer: any;
-
-  const show = () => {
-    showTooltipTimer = window.setTimeout(() => setVisible(true), TOOLTIP_DELAY);
-  };
-  const hide = () => {
-    clearTimeout(showTooltipTimer);
-    setVisible(false);
-  };
+  const [timer, setTimer] = React.useState<number>();
 
   React.useEffect(() => {
+    function show() {
+      setTimer(window.setTimeout(() => setVisible(true), TOOLTIP_DELAY));
+    }
+    function hide() {
+      clearTimeout(timer);
+      setVisible(false);
+    }
     const button = btnRef.current;
     if (button) {
       button.addEventListener('mouseenter', show);
       button.addEventListener('focus', show);
       button.addEventListener('mouseleave', hide);
-      button.addEventListener('mousedown', hide);
       button.addEventListener('blur', hide);
       return () => {
         button.removeEventListener('mouseenter', show);
         button.removeEventListener('focus', show);
         button.removeEventListener('mouseleave', hide);
-        button.removeEventListener('mousedown', hide);
         button.removeEventListener('blur', hide);
       };
     }
-  }, [btnRef.current]);
+  }, [btnRef.current, setTimer, setVisible, timer]);
 
   return (
     <>

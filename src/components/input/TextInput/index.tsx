@@ -16,7 +16,7 @@ import styled, { css } from 'styled-components';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { InputIconButton } from '#src/components/InputIconButton';
 import { Spinner } from '#src/components/Spinner';
-import { Tooltip } from '#src/components/Tooltip';
+import { Tooltip } from '#src/components/TooltipRefactor';
 import { checkOverflow } from '#src/components/common/utils/checkOverflow';
 
 const iconSizeValue = (props: { dimension?: ComponentDimension }) => {
@@ -284,6 +284,26 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
       setOverflowActive(false);
     }, [tooltipVisible]);
 
+    React.useLayoutEffect(() => {
+      function show() {
+        if (document.activeElement !== inputRef.current) setTooltipVisible(true);
+      }
+      function hide() {
+        setTooltipVisible(false);
+      }
+      const wrapper = wrapperRef.current;
+      if (wrapper) {
+        wrapper.addEventListener('mouseenter', show);
+        wrapper.addEventListener('mouseleave', hide);
+        wrapper.addEventListener('mousedown', hide);
+        return () => {
+          wrapper.removeEventListener('mouseenter', show);
+          wrapper.removeEventListener('mouseleave', hide);
+          wrapper.removeEventListener('mousedown', hide);
+        };
+      }
+    }, [setTooltipVisible, wrapperRef.current, inputRef.current]);
+
     const [isPasswordVisible, setPasswordVisible] = React.useState(false);
     if (!props.readOnly && type === 'password') {
       const Icon = isPasswordVisible ? EyeOutlineSvg : EyeCloseOutlineSvg;
@@ -389,13 +409,8 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
           )}
           {children}
         </Container>
-        {showTooltip && (
-          <Tooltip
-            visible={tooltipVisible && overflowActive}
-            onVisibilityChange={setTooltipVisible}
-            renderContent={() => inputRef?.current?.value}
-            targetRef={wrapperRef}
-          />
+        {showTooltip && tooltipVisible && overflowActive && (
+          <Tooltip renderContent={() => inputRef?.current?.value} targetRef={wrapperRef} />
         )}
       </>
     );

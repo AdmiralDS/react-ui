@@ -9,7 +9,7 @@ import { changeInputData } from '#src/components/common/dom/changeInputData';
 import { ReactComponent as EditSolid } from '@admiral-ds/icons/build/system/EditSolid.svg';
 import { ReactComponent as CheckClearOutline } from '@admiral-ds/icons/build/service/CheckClearOutline.svg';
 import { ReactComponent as CloseOutline } from '@admiral-ds/icons/build/service/CloseOutline.svg';
-import { Tooltip } from '#src/components/Tooltip';
+import { Tooltip } from '#src/components/TooltipRefactor';
 import { checkOverflow } from '#src/components/common/utils/checkOverflow';
 
 const EditInput = styled(TextInput)`
@@ -185,8 +185,28 @@ export const EditMode = React.forwardRef<HTMLInputElement, EditModeProps>(
 
     const [overflowActive, setOverflowActive] = React.useState<boolean>(false);
     const [tooltipVisible, setTooltipVisible] = React.useState<boolean>(false);
+    const [node, setNode] = React.useState<HTMLElement | null>(null);
     const textRef = React.useRef<HTMLDivElement>(null);
+
     React.useLayoutEffect(() => {
+      function show() {
+        setTooltipVisible(true);
+      }
+      function hide() {
+        setTooltipVisible(false);
+      }
+      if (node) {
+        node.addEventListener('mouseenter', show);
+        node.addEventListener('mouseleave', hide);
+        return () => {
+          node.removeEventListener('mouseenter', show);
+          node.removeEventListener('mouseleave', hide);
+        };
+      }
+    }, [setTooltipVisible, node]);
+
+    React.useLayoutEffect(() => {
+      console.log(tooltipVisible);
       if (checkOverflow(textRef.current)) {
         setOverflowActive(true);
         return;
@@ -199,6 +219,7 @@ export const EditMode = React.forwardRef<HTMLInputElement, EditModeProps>(
         setLocalVal(value);
       }
     }, [value, localVal]);
+
     const enableEdit = () => {
       setEdit(true);
       onEdit?.();
@@ -254,16 +275,11 @@ export const EditMode = React.forwardRef<HTMLInputElement, EditModeProps>(
           )
         ) : (
           <>
-            <Text ref={textRef} onClick={!props.readOnly ? enableEdit : undefined}>
+            <Text ref={refSetter(textRef, setNode)} onClick={!props.readOnly ? enableEdit : undefined}>
               {value}
             </Text>
-            {showTooltip && (
-              <Tooltip
-                visible={tooltipVisible && overflowActive}
-                onVisibilityChange={setTooltipVisible}
-                renderContent={() => value}
-                targetRef={textRef}
-              />
+            {showTooltip && tooltipVisible && overflowActive && (
+              <Tooltip renderContent={() => value} targetRef={textRef} />
             )}
             {!props.readOnly && <EditIcon height={iconSize} width={iconSize} onClick={enableEdit} />}
           </>

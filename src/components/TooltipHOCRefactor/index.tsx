@@ -28,7 +28,7 @@ export function TooltipHoc<P extends React.ComponentPropsWithRef<any>>(Component
     const anchorElementRef = React.useRef<any>(null);
     const [visible, setVisible] = React.useState(false);
     const [node, setNode] = React.useState<HTMLElement | null>(null);
-    const [timer, setTimer] = React.useState<any>();
+    const [timer, setTimer] = React.useState<number>();
 
     React.useEffect(() => {
       function show() {
