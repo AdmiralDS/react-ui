@@ -260,6 +260,12 @@ const getIcon = (type: string) => {
 };
 
 export interface FileAttributeProps {
+  /** Имя файла без расширения */
+  fileName: string;
+  /** Тип файла */
+  fileType: string;
+  /** Размер файла */
+  fileSize: number;
   /** Статус компонента, имеет четыре состояния: Uploaded, Loading, Error, Queue */
   status?: Status;
   /** Текст ошибки при загрузке файла */
@@ -273,7 +279,6 @@ export interface FileAttributeProps {
 }
 
 export interface FileItemProps extends HTMLAttributes<HTMLDivElement>, FileAttributeProps {
-  file: File;
   /** Размер FileItem */
   dimension?: FileInputDimension;
   /** Позволяет добавлять миксин для компоновки загруженных файлов, созданный с помощью styled css  */
@@ -284,23 +289,24 @@ export interface FileItemProps extends HTMLAttributes<HTMLDivElement>, FileAttri
 export const FileItem = forwardRef<HTMLDivElement, FileItemProps>(
   (
     {
-      file,
-      dimension,
+      fileName,
+      fileType,
+      fileSize,
       status,
       errorMessage,
       previewImageURL,
-      onPreviewIconClick,
-      filesLayoutCssMixin,
       onCloseIconClick,
+      onPreviewIconClick,
+      dimension,
+      filesLayoutCssMixin,
       ...props
     },
     ref,
   ) => {
-    const PreviewIcon = getIcon(file.type);
-    const fileName = file.name.substring(0, file.name.lastIndexOf('.'));
-    const fileFormat = getFormat(file.type);
-    const fileSize = formatBytes(file.size);
-    const fileInfo = `${fileFormat}・${fileSize} Mb`;
+    const PreviewIcon = getIcon(fileType);
+    const fileFormatInfo = getFormat(fileType);
+    const fileSizeInfo = formatBytes(fileSize);
+    const fileInfo = `${fileFormatInfo}・${fileSizeInfo} Mb`;
 
     const previewWrapperRef = useRef<HTMLDivElement | null>(null);
     const titleRef = useRef<HTMLDivElement | null>(null);

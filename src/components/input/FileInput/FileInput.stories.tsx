@@ -100,16 +100,28 @@ const file4 = new File(['foo'], 'example4.xls', {
 const filesInitial = [file1, file2, file3, file4];
 const filesAttributesInitial: FileAttributeProps[] = [
   {
+    fileName: 'example1',
+    fileType: file1.type,
+    fileSize: file1.size,
     status: 'Uploaded',
   },
   {
+    fileName: 'example2',
+    fileType: file2.type,
+    fileSize: file2.size,
     status: 'Error',
     errorMessage: 'Что-то явно пошло не так...',
   },
   {
+    fileName: 'example3',
+    fileType: file3.type,
+    fileSize: file3.size,
     status: 'Loading',
   },
   {
+    fileName: 'example4',
+    fileType: file4.type,
+    fileSize: file4.size,
     status: 'Queue',
   },
 ];
@@ -153,6 +165,9 @@ const FileInputBaseTemplate: ComponentStory<typeof FileInput> = (props) => {
       const imageURL = file.type.startsWith('image') ? URL.createObjectURL(file) : undefined;
       const onPreviewIconClick = file.type.startsWith('image') ? () => handlePreviewIconClick(file) : undefined;
       updatedFileAttributesMap.set(file, {
+        fileName: file.name.substring(0, file.name.lastIndexOf('.')),
+        fileType: file.type,
+        fileSize: file.size,
         status: 'Uploaded',
         errorMessage: 'Что-то явно пошло не так...',
         previewImageURL: imageURL,
@@ -182,14 +197,16 @@ const FileInputBaseTemplate: ComponentStory<typeof FileInput> = (props) => {
         return (
           <FileItem
             key={file.name}
-            file={file}
-            dimension={props.dimension}
-            filesLayoutCssMixin={props.dimension === 'm' ? halfWidthPositionMixin : fullWidthPositionMixin}
-            previewImageURL={attributes.previewImageURL}
+            fileName={attributes.fileName}
+            fileType={attributes.fileType}
+            fileSize={attributes.fileSize}
             status={attributes.status}
             errorMessage={attributes.errorMessage}
+            previewImageURL={attributes.previewImageURL}
             onCloseIconClick={() => handleRemoveFile(file)}
             onPreviewIconClick={attributes.onPreviewIconClick}
+            dimension={props.dimension}
+            filesLayoutCssMixin={props.dimension === 'm' ? halfWidthPositionMixin : fullWidthPositionMixin}
           />
         );
       }
