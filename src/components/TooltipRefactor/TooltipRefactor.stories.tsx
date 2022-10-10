@@ -36,16 +36,20 @@ const Description = () => (
     <Separator />
     Задать для компонента тултип можно двумя способами:
     <Separator />
-    1) Использовать компонент Tooltip. Данный компонент является контролируемым, поэтому для него обязательно нужно
-    задавать параметры visible и onVisibilityChange. Кроме того компоненту Tooltip требуются обязательные параметры:
-    targetRef - для указания элемента, относительно которого тултип будет позиционироваться, renderContent -
-    рендер-функция для рендеринга содержимого тултипа.
+    1) Использовать компонент Tooltip. Данный компонент является полностью контролируемым пользователем, то есть
+    пользователь определяет в какой момент и при каких событиях отображать тултип, отображать его с задержкой в
+    появлении или нет. Кроме того компоненту Tooltip требуются обязательные параметры: targetRef - для указания
+    элемента, относительно которого тултип будет позиционироваться, renderContent - рендер-функция для рендеринга
+    содержимого тултипа.
     <Separator />
     2) Использовать компонент высшего порядка TooltipHoc. Компонент TooltipHoc в качестве агрумента принимает
     функциональный или классовый компонент и возвращает его вместе с позиционируемым относительно него тултипом.
-    Компонент TooltipHoc передает в оборачиваемый компонент атрибут ref, поэтому компонент, который будет передан в
-    TooltipHoc должен уметь резолвить ref и назначать его на свой корневой элемент (как правило это достигается с
-    помощью React.forwardRef).
+    TooltipHoc реализует функционал появления тултипа (тултип отображается при mouseenter/focus событии на target
+    элементе, скрывается - при moseleave/blur событии на target элементе). Как следствие TooltipHoc стоит использовать в
+    том случае, если пользователю нужен неконтролируемый тултип (тултип с внутренним state и механизмом
+    отображения/скрытия). Компонент TooltipHoc передает в оборачиваемый компонент атрибут ref, поэтому компонент,
+    который будет передан в TooltipHoc должен уметь резолвить ref и назначать его на свой корневой элемент (как правило
+    это достигается с помощью React.forwardRef).
     <Separator />
     Далее приведены таблицы с описанием пропсов как для Tooltip, так и для TooltipHoc, а также примеры использования
     данных компонентов.
@@ -108,6 +112,10 @@ const Template1: ComponentStory<typeof Tooltip> = (args) => {
     }
     const button = btnRef.current;
     if (button) {
+      /** Рекомендуется использовать именно addEventListener, так как React SyntheticEvent onMouseEnter
+       * отрабатывает некорректно в случае, если мышь была наведена на задизейбленный элемент,
+       * а затем была наведена на target элемент
+       * https://github.com/facebook/react/issues/19419 */
       button.addEventListener('mouseenter', show);
       button.addEventListener('focus', show);
       button.addEventListener('mouseleave', hide);
@@ -160,11 +168,16 @@ const Template2: ComponentStory<typeof Tooltip> = () => {
     }
     const button = btnRef.current;
     if (button) {
+      /** Рекомендуется использовать именно addEventListener, так как React SyntheticEvent onMouseEnter
+       * отрабатывает некорректно в случае, если мышь была наведена на задизейбленный элемент,
+       * а затем была наведена на target элемент
+       * https://github.com/facebook/react/issues/19419 */
       button.addEventListener('mouseenter', show);
       button.addEventListener('focus', show);
       button.addEventListener('mouseleave', hide);
       button.addEventListener('blur', hide);
       return () => {
+        if (timer) clearTimeout(timer);
         button.removeEventListener('mouseenter', show);
         button.removeEventListener('focus', show);
         button.removeEventListener('mouseleave', hide);
@@ -196,47 +209,46 @@ const Template2: ComponentStory<typeof Tooltip> = () => {
   );
 };
 
-const Test = React.forwardRef<HTMLHeadingElement, React.HTMLAttributes<HTMLElement>>((props, ref) => {
-  const [a, setA] = React.useState(true);
-  setTimeout(() => {
-    setA(false);
-  }, 10000);
+const Template3: ComponentStory<typeof Tooltip> = () => {
+  const tooltipRef = React.useRef(null);
+  const btnRef = React.useRef<any>(null);
+  const [visible, setVisible] = React.useState(false);
 
-  return a ? (
-    <h2 ref={ref} {...props}>
-      Наведи на меня мышью и увидишь тултип
-    </h2>
-  ) : (
-    <div ref={ref} {...props} style={{ width: '400px', height: '45px', background: 'red' }}>
-      <button>HHHHHHHH</button>
-    </div>
+  React.useEffect(() => {
+    function show() {
+      setVisible(true);
+    }
+    function hide() {
+      setVisible(false);
+    }
+    const button = btnRef.current;
+    if (button) {
+      /** Рекомендуется использовать именно addEventListener, так как React SyntheticEvent onMouseEnter
+       * отрабатывает некорректно в случае, если мышь была наведена на задизейбленный элемент,
+       * а затем была наведена на target элемент
+       * https://github.com/facebook/react/issues/19419 */
+      button.addEventListener('mouseenter', show);
+      button.addEventListener('focus', show);
+      button.addEventListener('mouseleave', hide);
+      button.addEventListener('blur', hide);
+      return () => {
+        button.removeEventListener('mouseenter', show);
+        button.removeEventListener('focus', show);
+        button.removeEventListener('mouseleave', hide);
+        button.removeEventListener('blur', hide);
+      };
+    }
+  }, [btnRef.current, setVisible]);
+
+  return (
+    <>
+      <Button ref={btnRef} dimension="m" displayAsSquare aria-label="Delete" aria-describedby="test3">
+        <DeleteOutline height={24} width={24} />
+      </Button>
+      {visible && <Tooltip targetRef={btnRef} renderContent={() => 'Delete file'} ref={tooltipRef} id="test3" />}
+    </>
   );
-});
-const TooltipedHeading = TooltipHoc(Test);
-const Template6: ComponentStory<typeof Tooltip> = () => (
-  <TooltipedHeading renderContent={() => `Пример использования TooltipHoc с функциональным компонентом.`} />
-);
-
-// const Template3: ComponentStory<typeof Tooltip> = () => {
-//   const tooltipRef = React.useRef(null);
-//   const btnRef = React.useRef<HTMLButtonElement | null>(null);
-//   const [visible, setVisible] = React.useState(false);
-//   return (
-//     <>
-//       <Button ref={btnRef} dimension="m" displayAsSquare aria-label="Delete" aria-describedby="test3">
-//         <DeleteOutline height={24} width={24} />
-//       </Button>
-//       <Tooltip
-//         targetRef={btnRef}
-//         visible={visible}
-//         onVisibilityChange={(visible: boolean) => setVisible(visible)}
-//         renderContent={() => 'Delete file'}
-//         tooltipRef={tooltipRef}
-//         id="test3"
-//       />
-//     </>
-//   );
-// };
+};
 
 const TooltipedInput = TooltipHoc(InputField);
 const Template4: ComponentStory<typeof Tooltip> = () => {
@@ -248,78 +260,81 @@ const Template4: ComponentStory<typeof Tooltip> = () => {
   );
 };
 
-// type TestType = {
-//   innerRef: React.ForwardedRef<HTMLHeadingElement>;
-//   label: string;
-// };
-// class Test extends React.Component<TestType> {
-//   render() {
-//     const { innerRef, label } = this.props;
-//     return <h2 ref={innerRef}>{label}</h2>;
-//   }
-// }
-// const TestForwardingRef = React.forwardRef<HTMLHeadingElement, Omit<TestType, 'innerRef'>>((props, ref) => (
-//   <Test innerRef={ref} {...props} />
-// ));
-// const TooltipedTest = TooltipHoc(TestForwardingRef);
-// const Template5: ComponentStory<typeof Tooltip> = () => {
-//   const [visible, setVisible] = React.useState(false);
-//   return (
-//     <TooltipedTest
-//       visible={visible}
-//       handleVisibilityChange={(visible: boolean) => setVisible(visible)}
-//       renderContent={() => `Пример использования TooltipHoc с классовым компонентом.`}
-//       label={'Наведи на меня мышью и увидишь тултип'}
-//     />
-//   );
-// };
+type TestType = {
+  innerRef: React.ForwardedRef<HTMLHeadingElement>;
+  label: string;
+};
+class Test extends React.Component<TestType> {
+  render() {
+    const { innerRef, label } = this.props;
+    return <h2 ref={innerRef}>{label}</h2>;
+  }
+}
+const TestForwardingRef = React.forwardRef<HTMLHeadingElement, Omit<TestType, 'innerRef'>>((props, ref) => (
+  <Test innerRef={ref} {...props} />
+));
+const TooltipedTest = TooltipHoc(TestForwardingRef);
+const Template5: ComponentStory<typeof Tooltip> = () => {
+  return (
+    <TooltipedTest
+      renderContent={() => `Пример использования TooltipHoc с классовым компонентом.`}
+      label={'Наведи на меня мышью и увидишь тултип'}
+    />
+  );
+};
 
-// const Component = React.forwardRef<HTMLInputElement, InputFieldProps>((props, ref) => {
-//   const inputRef = React.useRef<HTMLInputElement | null>(null);
-//   const handleBtnClick = () => {
-//     inputRef.current?.focus();
-//   };
-//   return (
-//     <>
-//       <InputField ref={refSetter(ref, inputRef)} {...props} />
-//       <Separator />
-//       <Button onClick={handleBtnClick}>Click me and focus input</Button>
-//     </>
-//   );
-// });
-// const TooltipedComponent = TooltipHoc(Component);
-// const Template7: ComponentStory<typeof Tooltip> = () => {
-//   const [visible, setVisible] = React.useState(false);
-//   return (
-//     <TooltipedComponent
-//       visible={visible}
-//       handleVisibilityChange={(visible: boolean) => setVisible(visible)}
-//       renderContent={() => `Contrary to popular belief, Lorem Ipsum is not simply random text.`}
-//       label={'Использование утилиты refSetter'}
-//     />
-//   );
-// };
+const H2 = React.forwardRef<HTMLHeadingElement, React.HTMLAttributes<HTMLElement>>((props, ref) => {
+  return (
+    <h2 ref={ref} {...props}>
+      Наведи на меня мышью и увидишь тултип
+    </h2>
+  );
+});
+const TooltipedHeading = TooltipHoc(H2);
+const Template6: ComponentStory<typeof Tooltip> = () => {
+  return <TooltipedHeading renderContent={() => `Пример использования TooltipHoc с функциональным компонентом.`} />;
+};
 
-// const Template8: ComponentStory<typeof Tooltip> = () => {
-//   const [visible, setVisible] = React.useState(false);
-//   const inputRef = React.useRef<HTMLInputElement | null>(null);
-//   const handleBtnClick = () => {
-//     inputRef.current?.focus();
-//   };
-//   return (
-//     <>
-//       <TooltipedInput
-//         visible={visible}
-//         handleVisibilityChange={(visible: boolean) => setVisible(visible)}
-//         renderContent={() => `Contrary to popular belief, Lorem Ipsum is not simply random text.`}
-//         ref={inputRef}
-//         label={'Прокидывание ref на результат вызова TooltipHoc'}
-//       />
-//       <Separator />
-//       <Button onClick={handleBtnClick}>Click me and focus input</Button>
-//     </>
-//   );
-// };
+const Component = React.forwardRef<HTMLInputElement, InputFieldProps>((props, ref) => {
+  const inputRef = React.useRef<HTMLInputElement | null>(null);
+  const handleBtnClick = () => {
+    inputRef.current?.focus();
+  };
+  return (
+    <>
+      <InputField ref={refSetter(ref, inputRef)} {...props} />
+      <Separator />
+      <Button onClick={handleBtnClick}>Click me and focus input</Button>
+    </>
+  );
+});
+const TooltipedComponent = TooltipHoc(Component);
+const Template7: ComponentStory<typeof Tooltip> = () => {
+  return (
+    <TooltipedComponent
+      renderContent={() => `Contrary to popular belief, Lorem Ipsum is not simply random text.`}
+      label={'Использование утилиты refSetter'}
+    />
+  );
+};
+
+const Template8: ComponentStory<typeof Tooltip> = () => {
+  const inputRef = React.useRef<HTMLInputElement | null>(null);
+  const handleBtnClick = () => {
+    inputRef.current?.focus();
+  };
+  return (
+    <>
+      <TooltipedInput
+        renderContent={() => `Contrary to popular belief, Lorem Ipsum is not simply random text.`}
+        ref={inputRef}
+        label={'Прокидывание ref на результат вызова TooltipHoc'}
+      />
+      <Separator />
+      <Button onClick={handleBtnClick}>Click me and focus input</Button>
+    </>
+  );
+};
 
 export const TooltipBase = Template1.bind({});
 TooltipBase.args = {};
@@ -329,34 +344,34 @@ export const TooltipDelay = Template2.bind({});
 TooltipDelay.args = {};
 TooltipDelay.storyName = 'Tooltip. Пример с задержкой в появлении.';
 
-// export const TooltipRef = Template3.bind({});
-// TooltipRef.args = {};
-// TooltipRef.storyName = 'Tooltip. Пример с получением ref тултипа.';
+export const TooltipRef = Template3.bind({});
+TooltipRef.args = {};
+TooltipRef.storyName = 'Tooltip. Пример с получением ref тултипа.';
 
 export const TooltipHocBase = Template4.bind({});
 TooltipHocBase.args = {};
 TooltipHocBase.storyName = 'TooltipHoc. Базовый пример.';
 
-// export const TooltipHocClass = Template5.bind({});
-// TooltipHocClass.args = {};
-// TooltipHocClass.storyName = 'TooltipHoc. Пример использования с классовым компонентом.';
+export const TooltipHocClass = Template5.bind({});
+TooltipHocClass.args = {};
+TooltipHocClass.storyName = 'TooltipHoc. Пример использования с классовым компонентом.';
 
 export const TooltipHocFC = Template6.bind({});
 TooltipHocFC.args = {};
 TooltipHocFC.storyName = 'TooltipHoc. Пример использования с функциональным компонентом.';
 
-// export const TooltipHocRefSetter = Template7.bind({});
-// TooltipHocRefSetter.args = {};
-// TooltipHocRefSetter.storyName = 'TooltipHoc. Утилита refSetter для мерджа рефов.';
-// TooltipHocRefSetter.parameters = {
-//   docs: {
-//     description: {
-//       story: `Если в ваш компонент извне передан параметр ref и у вас есть внутренний
-//       ref в компоненте, для синхронной работы данных рефов и их мерджа вы можете воспользоваться утилитой refSetter.`,
-//     },
-//   },
-// };
+export const TooltipHocRefSetter = Template7.bind({});
+TooltipHocRefSetter.args = {};
+TooltipHocRefSetter.storyName = 'TooltipHoc. Утилита refSetter для мерджа рефов.';
+TooltipHocRefSetter.parameters = {
+  docs: {
+    description: {
+      story: `Если в ваш компонент извне передан параметр ref и у вас есть внутренний
+      ref в компоненте, для синхронной работы данных рефов и их мерджа вы можете воспользоваться утилитой refSetter.`,
+    },
+  },
+};
 
-// export const TooltipHocRef = Template8.bind({});
-// TooltipHocRef.args = {};
-// TooltipHocRef.storyName = 'TooltipHoc. Прокидывание ref на результат вызова TooltipHoc.';
+export const TooltipHocRef = Template8.bind({});
+TooltipHocRef.args = {};
+TooltipHocRef.storyName = 'TooltipHoc. Прокидывание ref на результат вызова TooltipHoc.';

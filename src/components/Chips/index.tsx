@@ -1,7 +1,8 @@
 import type { FC, HTMLAttributes, MouseEvent, ReactNode } from 'react';
 import * as React from 'react';
 
-import { Tooltip } from '#src/components/Tooltip';
+import { Tooltip } from '#src/components/TooltipRefactor';
+import { checkOverflow } from '#src/components/common/utils/checkOverflow';
 
 import {
   ChipChildrenWrapperStyled,
@@ -18,11 +19,6 @@ import { BadgeAppearance } from '#src/components/Badge';
 export type ChipDimension = 's' | 'm';
 export type ChipAppearance = 'filled' | 'outlined';
 
-/*
-  MIN_MEASURABLE_DIFFERENCE - ie опять не может спокойно делать свою работу
-  https://stackoverflow.com/questions/30900154/workaround-for-issue-with-ie-scrollwidth
- */
-const MIN_MEASURABLE_DIFFERENCE = 2;
 const defaultRenderContent = () => '';
 
 export interface ChipsProps extends HTMLAttributes<HTMLDivElement> {
@@ -78,11 +74,28 @@ export const Chips: FC<ChipsProps> = ({
   const refItems = React.useRef<HTMLDivElement | null>(null);
 
   React.useEffect(() => {
-    if (refItems?.current && refItems.current?.offsetWidth <= refItems.current?.scrollWidth) {
-      const difference = refItems.current.scrollWidth - refItems.current.offsetWidth;
-      setTooltip(difference >= MIN_MEASURABLE_DIFFERENCE);
+    if (refItems.current && checkOverflow(refItems.current) !== withTooltip) {
+      setTooltip(checkOverflow(refItems.current));
     }
-  }, [tooltipVisible]);
+  }, [refItems.current, tooltipVisible, setTooltip]);
+
+  React.useLayoutEffect(() => {
+    function show() {
+      setTooltipVisible(true);
+    }
+    function hide() {
+      setTooltipVisible(false);
+    }
+    const chip = chipRef.current;
+    if (chip) {
+      chip.addEventListener('mouseenter', show);
+      chip.addEventListener('mouseleave', hide);
+      return () => {
+        chip.removeEventListener('mouseenter', show);
+        chip.removeEventListener('mouseleave', hide);
+      };
+    }
+  }, [setTooltipVisible, chipRef.current]);
 
   const handleClickCloseIcon = React.useCallback(
     (e: MouseEvent) => {
@@ -151,12 +164,7 @@ export const Chips: FC<ChipsProps> = ({
           )}
         </ChipContentWrapperStyled>
       </ChipComponentStyled>
-      <Tooltip
-        targetRef={chipRef}
-        visible={tooltipVisible && withTooltip}
-        onVisibilityChange={setTooltipVisible}
-        renderContent={renderContentTooltip}
-      />
+      {tooltipVisible && withTooltip && <Tooltip targetRef={chipRef} renderContent={renderContentTooltip} />}
     </>
   );
 };

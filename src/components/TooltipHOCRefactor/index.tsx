@@ -1,5 +1,4 @@
 import * as React from 'react';
-import type { RefCallback, RefObject } from '#src/components/common/utils/handleRef';
 import { refSetter } from '#src/components/common/utils/refSetter';
 import { Tooltip, TOOLTIP_DELAY } from '#src/components/TooltipRefactor';
 import type { ITooltipProps } from '#src/components/TooltipRefactor';
@@ -12,7 +11,7 @@ export interface TooltipHocProps {
   /** Отобразить тултип с задержкой в 1.5 секунды */
   withDelay?: boolean;
   /** Ссылка на тултип */
-  tooltipRef?: RefCallback<HTMLDivElement> | RefObject<HTMLDivElement> | null;
+  tooltipRef?: React.Ref<HTMLDivElement>;
   /** Расположение тултипа */
   tooltipPosition?: ITooltipProps['tooltipPosition'];
 }
@@ -44,6 +43,7 @@ export function TooltipHoc<P extends React.ComponentPropsWithRef<any>>(Component
         node.addEventListener('mouseleave', hide);
         node.addEventListener('blur', hide);
         return () => {
+          if (timer) clearTimeout(timer);
           node.removeEventListener('mouseenter', show);
           node.removeEventListener('focus', show);
           node.removeEventListener('mouseleave', hide);
@@ -61,7 +61,7 @@ export function TooltipHoc<P extends React.ComponentPropsWithRef<any>>(Component
             renderContent={renderContent}
             container={container}
             tooltipPosition={tooltipPosition}
-            tooltipRef={tooltipRef}
+            ref={tooltipRef}
           />
         )}
       </>
