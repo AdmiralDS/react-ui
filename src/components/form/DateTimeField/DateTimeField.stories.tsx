@@ -1,4 +1,4 @@
-import { DateInput, INPUT_DIMENSIONS_VALUES, TimeInput } from '#src/components/input';
+import { DateTimeDateInput, DateTimeTimeInput, INPUT_DIMENSIONS_VALUES } from '#src/components/input';
 import * as React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { Field } from '#src/components/Field';
@@ -69,33 +69,58 @@ const DisplayContainer = styled.div`
   }
 `;
 
-const Join = styled.div`
+const FlexDiv = styled.div`
   display: flex;
-  & > :not(:first-child) {
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-    flex: 0 1 auto;
-  }
-  & > :not(:last-child) {
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-    flex: 1 1 100%;
-  }
+  min-width: 288px;
 `;
 
-const Template: ComponentStory<typeof Field> = (props) => {
+const Template1: ComponentStory<typeof Field> = (props) => {
   return (
     <DisplayContainer>
       <Field label="Введите дату">
-        <Join>
-          <DateInput />
-          <TimeInput />
-        </Join>
+        <FlexDiv>
+          <DateTimeDateInput />
+          <DateTimeTimeInput />
+        </FlexDiv>
       </Field>
     </DisplayContainer>
   );
 };
 
-export const DateTimeField = Template.bind({});
+const Template2: ComponentStory<typeof Field> = (props) => {
+  return (
+    <DisplayContainer>
+      <Field label="Disabled control" disabled>
+        <FlexDiv>
+          <DateTimeDateInput disabled />
+          <DateTimeTimeInput disabled />
+        </FlexDiv>
+      </Field>
+    </DisplayContainer>
+  );
+};
 
-DateTimeField.storyName = 'DateTimeField example';
+const Template3: ComponentStory<typeof Field> = (props) => {
+  return (
+    <DisplayContainer>
+      <Field label="read only control" readOnly>
+        <FlexDiv>
+          <DateTimeDateInput defaultValue="12.10.2022" readOnly />
+          <DateTimeTimeInput defaultValue="12:10" readOnly />
+        </FlexDiv>
+      </Field>
+    </DisplayContainer>
+  );
+};
+
+export const DateTimeField1 = Template1.bind({});
+
+DateTimeField1.storyName = 'DateTimeField example';
+
+export const DateTimeField2 = Template2.bind({});
+
+DateTimeField2.storyName = 'DateTimeField disabled example';
+
+export const DateTimeField3 = Template3.bind({});
+
+DateTimeField3.storyName = 'DateTimeField read only example';
