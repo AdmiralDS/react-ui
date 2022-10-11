@@ -49,7 +49,7 @@ const disabledColors = css`
   border-color: transparent;
 `;
 
-const BorderedDiv = styled.div`
+export const InputBorderedDiv = styled.div`
   position: absolute;
   top: 0;
   bottom: 0;
@@ -80,35 +80,43 @@ const BorderedDiv = styled.div`
 const colorsBorderAndBackground = css<{ disabled?: boolean }>`
   background-color: ${(props) => props.theme.color['Neutral/Neutral 00']};
 
-  &:focus + ${BorderedDiv} {
+  &:focus + ${InputBorderedDiv} {
     border: 2px solid ${(props) => props.theme.color['Primary/Primary 60 Main']};
   }
 
-  &&&:disabled + ${BorderedDiv}, [data-read-only] &&& + ${BorderedDiv} {
+  &&&:disabled + ${InputBorderedDiv}, [data-read-only] &&& + ${InputBorderedDiv} {
     border-color: transparent;
   }
 
-  &:hover:not(:focus) + ${BorderedDiv} {
+  &:hover:not(:focus) + ${InputBorderedDiv} {
     border-color: ${(props) => (props.disabled ? 'transparent' : props.theme.color['Neutral/Neutral 60'])};
   }
 
-  &:invalid + ${BorderedDiv} {
+  &:invalid + ${InputBorderedDiv} {
     border: 1px solid ${(props) => props.theme.color['Error/Error 60 Main']};
   }
 
-  [data-status='error'] &&&:hover:not(:disabled) + ${BorderedDiv}, &:invalid:hover:not(:disabled) + ${BorderedDiv} {
+  [data-status='error']
+    &&&:hover:not(:disabled)
+    + ${InputBorderedDiv},
+    &:invalid:hover:not(:disabled)
+    + ${InputBorderedDiv} {
     border: 1px solid ${(props) => props.theme.color['Error/Error 70']};
   }
 
-  [data-status='success'] &&&:hover:not(:disabled) + ${BorderedDiv} {
+  [data-status='success'] &&&:hover:not(:disabled) + ${InputBorderedDiv} {
     border: 1px solid ${(props) => props.theme.color['Success/Success 60']};
   }
 
-  [data-status='error'] &&&:focus:not(:disabled) + ${BorderedDiv}, &:invalid:focus:not(:disabled) + ${BorderedDiv} {
+  [data-status='error']
+    &&&:focus:not(:disabled)
+    + ${InputBorderedDiv},
+    &:invalid:focus:not(:disabled)
+    + ${InputBorderedDiv} {
     border: 2px solid ${(props) => props.theme.color['Error/Error 60 Main']};
   }
 
-  [data-status='success'] &&&:focus:not(:disabled) + ${BorderedDiv} {
+  [data-status='success'] &&&:focus:not(:disabled) + ${InputBorderedDiv} {
     border: 2px solid ${(props) => props.theme.color['Success/Success 50 Main']};
   }
 
@@ -121,7 +129,7 @@ const colorsBorderAndBackground = css<{ disabled?: boolean }>`
     color: ${(props) => props.theme.color['Neutral/Neutral 30']};
   }
 
-  [data-read-only] &&&:hover + ${BorderedDiv}, [data-read-only] &&&:focus + ${BorderedDiv} {
+  [data-read-only] &&&:hover + ${InputBorderedDiv}, [data-read-only] &&&:focus + ${InputBorderedDiv} {
     border-color: transparent;
   }
 `;
@@ -401,7 +409,7 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
             iconCount={iconCount}
             type={type === 'password' && isPasswordVisible ? 'text' : type}
           />
-          <BorderedDiv />
+          <InputBorderedDiv />
           {iconCount > 0 && (
             <IconPanel disabled={props.disabled} dimension={props.dimension}>
               {iconArray}

@@ -98,6 +98,8 @@ export interface FieldOwnProps {
   /** Установка статуса disabled */
   disabled?: boolean;
 
+  readOnly?: boolean;
+
   /**  Имя поля формы */
   label?: React.ReactNode;
 
@@ -176,6 +178,7 @@ export const Field = React.forwardRef<HTMLDivElement, FieldProps>(
         data-focus-within={hasFocus ? '' : undefined}
         data-required-within={required ? '' : undefined}
         data-disabled={disabled ? '' : undefined}
+        data-read-only={props.readOnly ? true : undefined}
         ref={refSetter(containerRef, ref)}
       >
         {labelProps.children && (
@@ -191,7 +194,7 @@ export const Field = React.forwardRef<HTMLDivElement, FieldProps>(
 
             {displayCharacterCounter && inputRef && maxLength !== undefined && (
               <>
-                {/* div необходим чтобы сдвигать счетчик вправо при отсутствии текста */}
+                {/* div необходим для сдвига счетчика вправо при отсутствии текста */}
                 <div></div>
                 <PositionedCharacterCounter maxLength={maxLength} inputRef={inputRef} />
               </>

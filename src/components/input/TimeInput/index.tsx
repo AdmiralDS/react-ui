@@ -89,7 +89,9 @@ const StyledMenu = styled(Menu)`
 const StyledMenuItem = styled(MenuItem)`
   justify-content: center;
 `;
-
+const StyledTextInput = styled(TextInput)`
+  min-width: 136px;
+`;
 export interface TimeInputProps extends Omit<TextInputProps, 'value'> {
   /** Выбранное значение времени */
   value?: string;
@@ -227,7 +229,7 @@ export const TimeInput = React.forwardRef<HTMLInputElement, TimeInputProps>(
     }, [availableSlots, dimension]);
 
     return (
-      <TextInput
+      <StyledTextInput
         {...props}
         ref={refSetter(ref, inputRef)}
         handleInput={handleInput}
@@ -254,7 +256,7 @@ export const TimeInput = React.forwardRef<HTMLInputElement, TimeInputProps>(
             />
           </StyledDropdownContainer>
         )}
-      </TextInput>
+      </StyledTextInput>
     );
   },
 );
