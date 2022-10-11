@@ -68,9 +68,21 @@ const DisplayContainer = styled.div`
     margin-bottom: 24px;
   }
 `;
+
 const Join = styled.div`
   display: flex;
+  & > :not(:first-child) {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    flex: 0 1 auto;
+  }
+  & > :not(:last-child) {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    flex: 1 1 100%;
+  }
 `;
+
 const Template: ComponentStory<typeof Field> = (props) => {
   return (
     <DisplayContainer>
