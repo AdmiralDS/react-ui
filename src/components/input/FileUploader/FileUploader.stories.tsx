@@ -36,7 +36,7 @@ const Description = () => (
 );
 
 export default {
-  title: 'Admiral-2.1/Input/FileUploader',
+  title: 'Deprecated/FileUploader (DEPRECATED используйте FileInput, FileList, FileItem)',
   decorators: [withDesign],
   component: FileUploader,
   parameters: {

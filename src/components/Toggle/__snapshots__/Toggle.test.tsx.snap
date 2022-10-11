@@ -59,12 +59,12 @@ Object {
 
 .c4 {
   position: absolute;
-  width: 36px;
-  height: 20px;
   border-radius: 10px;
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
+  width: 36px;
+  height: 20px;
   background: #717681;
 }
 
@@ -73,12 +73,12 @@ Object {
   position: absolute;
   top: 2px;
   left: 2px;
-  width: 16px;
-  height: 16px;
-  border-radius: 16px;
   background: #FFFFFF;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
+  width: 16px;
+  height: 16px;
+  border-radius: 16px;
 }
 
 .c3 {
@@ -87,19 +87,19 @@ Object {
   position: absolute;
   top: -8px;
   left: -8px;
+  background: #0000000D;
   width: 36px;
   height: 36px;
   border-radius: 36px;
-  background: #0000000D;
 }
 
 .c2 {
   position: relative;
-  width: 36px;
-  height: 20px;
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
+  width: 36px;
+  height: 20px;
 }
 
 .c0 {
@@ -220,12 +220,12 @@ Object {
 
 .c4 {
   position: absolute;
-  width: 36px;
-  height: 20px;
   border-radius: 10px;
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
+  width: 36px;
+  height: 20px;
   background: #717681;
 }
 
@@ -234,12 +234,12 @@ Object {
   position: absolute;
   top: 2px;
   left: 2px;
-  width: 16px;
-  height: 16px;
-  border-radius: 16px;
   background: #FFFFFF;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
+  width: 16px;
+  height: 16px;
+  border-radius: 16px;
 }
 
 .c3 {
@@ -248,19 +248,19 @@ Object {
   position: absolute;
   top: -8px;
   left: -8px;
+  background: #0000000D;
   width: 36px;
   height: 36px;
   border-radius: 36px;
-  background: #0000000D;
 }
 
 .c2 {
   position: relative;
-  width: 36px;
-  height: 20px;
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
+  width: 36px;
+  height: 20px;
 }
 
 .c0 {
@@ -436,12 +436,12 @@ Object {
 
 .c4 {
   position: absolute;
-  width: 36px;
-  height: 20px;
   border-radius: 10px;
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
+  width: 36px;
+  height: 20px;
   background: #717681;
 }
 
@@ -450,12 +450,12 @@ Object {
   position: absolute;
   top: 2px;
   left: 2px;
-  width: 16px;
-  height: 16px;
-  border-radius: 16px;
   background: #FFFFFF;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
+  width: 16px;
+  height: 16px;
+  border-radius: 16px;
 }
 
 .c3 {
@@ -464,19 +464,19 @@ Object {
   position: absolute;
   top: -8px;
   left: -8px;
+  background: #0000000D;
   width: 36px;
   height: 36px;
   border-radius: 36px;
-  background: #0000000D;
 }
 
 .c2 {
   position: relative;
-  width: 36px;
-  height: 20px;
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
+  width: 36px;
+  height: 20px;
 }
 
 .c0 {
@@ -593,12 +593,12 @@ Object {
 
 .c4 {
   position: absolute;
-  width: 36px;
-  height: 20px;
   border-radius: 10px;
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
+  width: 36px;
+  height: 20px;
   background: #717681;
 }
 
@@ -607,12 +607,12 @@ Object {
   position: absolute;
   top: 2px;
   left: 2px;
-  width: 16px;
-  height: 16px;
-  border-radius: 16px;
   background: #FFFFFF;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
+  width: 16px;
+  height: 16px;
+  border-radius: 16px;
 }
 
 .c3 {
@@ -621,19 +621,19 @@ Object {
   position: absolute;
   top: -8px;
   left: -8px;
+  background: #0000000D;
   width: 36px;
   height: 36px;
   border-radius: 36px;
-  background: #0000000D;
 }
 
 .c2 {
   position: relative;
-  width: 36px;
-  height: 20px;
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
+  width: 36px;
+  height: 20px;
 }
 
 .c0 {
@@ -805,12 +805,12 @@ Object {
 
 .c4 {
   position: absolute;
-  width: 36px;
-  height: 20px;
   border-radius: 10px;
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
+  width: 36px;
+  height: 20px;
   background: #717681;
 }
 
@@ -819,12 +819,12 @@ Object {
   position: absolute;
   top: 2px;
   left: 2px;
-  width: 16px;
-  height: 16px;
-  border-radius: 16px;
   background: #FFFFFF;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
+  width: 16px;
+  height: 16px;
+  border-radius: 16px;
 }
 
 .c3 {
@@ -833,19 +833,19 @@ Object {
   position: absolute;
   top: -8px;
   left: -8px;
+  background: #0000000D;
   width: 36px;
   height: 36px;
   border-radius: 36px;
-  background: #0000000D;
 }
 
 .c2 {
   position: relative;
-  width: 36px;
-  height: 20px;
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
+  width: 36px;
+  height: 20px;
 }
 
 .c0 {
@@ -962,12 +962,12 @@ Object {
 
 .c4 {
   position: absolute;
-  width: 36px;
-  height: 20px;
   border-radius: 10px;
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
+  width: 36px;
+  height: 20px;
   background: #717681;
 }
 
@@ -976,12 +976,12 @@ Object {
   position: absolute;
   top: 2px;
   left: 2px;
-  width: 16px;
-  height: 16px;
-  border-radius: 16px;
   background: #FFFFFF;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
+  width: 16px;
+  height: 16px;
+  border-radius: 16px;
 }
 
 .c3 {
@@ -990,19 +990,19 @@ Object {
   position: absolute;
   top: -8px;
   left: -8px;
+  background: #0000000D;
   width: 36px;
   height: 36px;
   border-radius: 36px;
-  background: #0000000D;
 }
 
 .c2 {
   position: relative;
-  width: 36px;
-  height: 20px;
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
+  width: 36px;
+  height: 20px;
 }
 
 .c0 {
@@ -1174,12 +1174,12 @@ Object {
 
 .c4 {
   position: absolute;
-  width: 28px;
-  height: 16px;
   border-radius: 10px;
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
+  width: 28px;
+  height: 16px;
   background: #717681;
 }
 
@@ -1188,12 +1188,12 @@ Object {
   position: absolute;
   top: 2px;
   left: 2px;
-  width: 12px;
-  height: 12px;
-  border-radius: 12px;
   background: #FFFFFF;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
+  width: 12px;
+  height: 12px;
+  border-radius: 12px;
 }
 
 .c3 {
@@ -1202,19 +1202,19 @@ Object {
   position: absolute;
   top: -8px;
   left: -8px;
+  background: #0000000D;
   width: 32px;
   height: 32px;
   border-radius: 32px;
-  background: #0000000D;
 }
 
 .c2 {
   position: relative;
-  width: 28px;
-  height: 16px;
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
+  width: 28px;
+  height: 16px;
 }
 
 .c0 {
@@ -1331,12 +1331,12 @@ Object {
 
 .c4 {
   position: absolute;
-  width: 28px;
-  height: 16px;
   border-radius: 10px;
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
+  width: 28px;
+  height: 16px;
   background: #717681;
 }
 
@@ -1345,12 +1345,12 @@ Object {
   position: absolute;
   top: 2px;
   left: 2px;
-  width: 12px;
-  height: 12px;
-  border-radius: 12px;
   background: #FFFFFF;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
+  width: 12px;
+  height: 12px;
+  border-radius: 12px;
 }
 
 .c3 {
@@ -1359,19 +1359,19 @@ Object {
   position: absolute;
   top: -8px;
   left: -8px;
+  background: #0000000D;
   width: 32px;
   height: 32px;
   border-radius: 32px;
-  background: #0000000D;
 }
 
 .c2 {
   position: relative;
-  width: 28px;
-  height: 16px;
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
+  width: 28px;
+  height: 16px;
 }
 
 .c0 {

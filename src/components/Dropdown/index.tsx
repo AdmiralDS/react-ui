@@ -70,6 +70,9 @@ export interface DropdownProps extends Omit<React.HTMLAttributes<HTMLDivElement>
   dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
 }
 
+/**
+ * @deprecated Используйте DropDownContainer
+ */
 export const Dropdown = React.forwardRef<HTMLDivElement, React.PropsWithChildren<DropdownProps>>(
   (
     {

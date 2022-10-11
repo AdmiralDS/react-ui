@@ -138,6 +138,9 @@ const FileWrapper = styled.div`
   flex-wrap: wrap;
 `;
 
+/**
+ * @deprecated Используйте FileInput, FileList, FileItem
+ */
 export const FileUploader = React.forwardRef<HTMLInputElement, FileUploaderProps>(
   (
     {

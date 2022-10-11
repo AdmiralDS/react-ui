@@ -104,18 +104,18 @@ const Slider = styled.span<{
   checked?: boolean;
 }>`
   position: absolute;
-  ${sizes}
   border-radius: ${BORDER_RADIUS};
   flex-shrink: 0;
+  ${sizes}
 
   &:before {
     content: '';
     position: absolute;
     top: ${SLIDER_INDENT}px;
     left: ${SLIDER_INDENT}px;
-    ${sliderSizes}
     background: ${({ theme }) => theme.color['Special/Static White']};
     transition: all 0.3s;
+    ${sliderSizes}
   }
 
   background: ${({ theme }) => theme.color['Neutral/Neutral 50']};
@@ -127,14 +127,14 @@ const Hover = styled.div<{ dimension: Dimension }>`
   position: absolute;
   top: ${HOVER_INDENT};
   left: ${HOVER_INDENT};
-  ${hoverSizes}
   background: ${({ theme }) => theme.color['Opacity/Hover']};
+  ${hoverSizes}
 `;
 
 const SliderWrapper = styled.div<{ dimension: Dimension }>`
   position: relative;
-  ${sizes}
   flex-shrink: 0;
+  ${sizes}
 `;
 
 const Wrapper = styled.label<{ width?: number | string; disabled: boolean; labelPosition: LabelPosition }>`
