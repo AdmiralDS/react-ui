@@ -19,33 +19,31 @@ describe('Tooltip', () => {
   }: Omit<ITooltipProps, 'targetRef'> & { withDelay?: boolean }) => {
     const divRef = React.useRef<HTMLDivElement>(null);
     const [visible, setVisible] = React.useState(false);
-    let showTooltipTimer: any;
-
-    const show = () => {
-      showTooltipTimer = window.setTimeout(() => setVisible(true), withDelay ? TOOLTIP_DELAY : 0);
-    };
-    const hide = () => {
-      clearTimeout(showTooltipTimer);
-      setVisible(false);
-    };
+    const [timer, setTimer] = React.useState<number>();
 
     React.useEffect(() => {
-      const button = divRef.current;
-      if (button) {
-        button.addEventListener('mouseenter', show);
-        button.addEventListener('focus', show);
-        button.addEventListener('mouseleave', hide);
-        button.addEventListener('mousedown', hide);
-        button.addEventListener('blur', hide);
+      function show() {
+        setTimer(window.setTimeout(() => setVisible(true), withDelay ? TOOLTIP_DELAY : 0));
+      }
+      function hide() {
+        clearTimeout(timer);
+        setVisible(false);
+      }
+      const div = divRef.current;
+      if (div) {
+        div.addEventListener('mouseenter', show);
+        div.addEventListener('focus', show);
+        div.addEventListener('mouseleave', hide);
+        div.addEventListener('blur', hide);
         return () => {
-          button.removeEventListener('mouseenter', show);
-          button.removeEventListener('focus', show);
-          button.removeEventListener('mouseleave', hide);
-          button.removeEventListener('mousedown', hide);
-          button.removeEventListener('blur', hide);
+          if (timer) clearTimeout(timer);
+          div.removeEventListener('mouseenter', show);
+          div.removeEventListener('focus', show);
+          div.removeEventListener('mouseleave', hide);
+          div.removeEventListener('blur', hide);
         };
       }
-    }, [divRef.current]);
+    }, [divRef.current, setTimer, setVisible, timer]);
 
     return (
       <ThemeProvider theme={LIGHT_THEME}>
