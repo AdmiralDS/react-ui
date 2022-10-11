@@ -9,7 +9,7 @@ import { withDesign } from 'storybook-addon-designs';
 import { LIGHT_THEME, Theme } from '#src/components/themes';
 import { CheckboxField, FieldSet } from '#src/components/form';
 import { RadioButton } from '#src/components/RadioButton';
-import { TooltipHoc } from '#src/components/TooltipHOCRefactor';
+import { TooltipHoc } from '#src/components/TooltipHOC';
 import { TextInput } from '#src/components/input';
 import { TextButton } from '#src/components/TextButton';
 import { getHighlightedFilteredOptions, MenuActionsPanel } from '#src/components/Menu/MenuActionsPanel';

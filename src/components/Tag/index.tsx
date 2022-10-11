@@ -2,7 +2,7 @@ import * as React from 'react';
 import styled, { css } from 'styled-components';
 import { refSetter } from '../common/utils/refSetter';
 import { checkOverflow } from '../common/utils/checkOverflow';
-import { Tooltip } from '#src/components/TooltipRefactor';
+import { Tooltip } from '#src/components/Tooltip';
 import { typography } from '#src/components/Typography';
 import { smallGroupBorderRadius } from '#src/components/themes/borderRadius';
 
@@ -259,7 +259,7 @@ export const Tag = React.forwardRef<HTMLElement, TagProps & TagInternalProps>(
       if (element && checkOverflow(element) !== overflow) {
         setOverflow(checkOverflow(element));
       }
-    }, [tooltipVisible, textRef.current]);
+    }, [tooltipVisible, textRef.current, setOverflow]);
 
     React.useLayoutEffect(() => {
       function show() {
@@ -272,9 +272,13 @@ export const Tag = React.forwardRef<HTMLElement, TagProps & TagInternalProps>(
       if (wrapper) {
         wrapper.addEventListener('mouseenter', show);
         wrapper.addEventListener('mouseleave', hide);
+        wrapper.addEventListener('focus', show);
+        wrapper.addEventListener('blur', hide);
         return () => {
           wrapper.removeEventListener('mouseenter', show);
           wrapper.removeEventListener('mouseleave', hide);
+          wrapper.removeEventListener('focus', show);
+          wrapper.removeEventListener('blur', hide);
         };
       }
     }, [setTooltipVisible, wrapperRef.current]);

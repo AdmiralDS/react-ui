@@ -1,186 +1,114 @@
 import * as React from 'react';
 
-import type { RefCallback, RefObject } from '#src/components/common/utils/handleRef';
-import { handleRef } from '#src/components/common/utils/handleRef';
-import { getScrollableParents } from '#src/components/common/utils/getScrollableParents';
-
-import { FakeTarget, Portal, TooltipContainer, TooltipWrapper } from './style';
-import type { TooltipPositionType } from './utils';
-import { getTooltipDirection } from './utils';
+import { refSetter } from '#src/components/common/utils/refSetter';
 import { getScrollbarSize } from '#src/components/common/dom/scrollbarUtil';
 
+import { FakeTarget, Portal, TooltipContainer, TooltipWrapper } from './style';
+import type { TooltipPositionType, InternalTooltipPositionType } from './utils';
+import { getTooltipDirection } from './utils';
+
 export interface ITooltipProps extends React.HTMLAttributes<HTMLDivElement> {
-  /** Видимость компонента */
-  visible: boolean;
-  /** Колбек на изменение видимости тултипа
-   * При ховере/фокусе на target элементе колбек вызовется со значением visible=true,
-   * при потере ховера/фокуса на target элементе колбек вызовется со значением visible=false.
-   */
-  onVisibilityChange: (visible: boolean) => void;
   /** Функция, которая возвращает реакт-компонент с контентом тултипа. Если этому компоненту нужны props, используйте замыкание */
   renderContent: () => React.ReactNode;
   /** Ref на элемент, относительно которого позиционируется тултип */
   targetRef: React.RefObject<HTMLElement>;
   /** Контейнер, в котором будет отрисован тултип через React.createPortal. По умолчанию тултип отрисовывается в document.body */
   container?: Element | null;
-  /** Отобразить тултип с задержкой в 1.5 секунды */
-  withDelay?: boolean;
-  /** Ссылка на тултип */
-  tooltipRef?: RefCallback<HTMLDivElement> | RefObject<HTMLDivElement> | null;
   /** Расположение тултипа */
   tooltipPosition?: TooltipPositionType;
 }
 
-const TOOLTIP_DELAY = 1500;
+export const TOOLTIP_DELAY = 1500;
 
-export const Tooltip: React.FC<ITooltipProps> = ({
-  visible,
-  onVisibilityChange,
-  renderContent,
-  targetRef,
-  container: userContainer,
-  withDelay,
-  tooltipRef,
-  tooltipPosition,
-  ...props
-}) => {
-  const tooltipElementRef = React.useRef<HTMLDivElement | null>(null);
-  const container: Element = userContainer || document.body;
-  let scrollableParents: Array<Element> | undefined = undefined;
-  let showTooltipTimer: any;
+export const Tooltip = React.forwardRef<HTMLDivElement, ITooltipProps>(
+  ({ renderContent, targetRef, container: userContainer, tooltipPosition, ...props }, ref) => {
+    const tooltipElementRef = React.useRef<HTMLDivElement | null>(null);
+    const container: Element = userContainer || document.body;
 
-  const [portalFlexDirection, setPortalFlexDirection] = React.useState('');
-  const [portalFullWidth, setPortalFullWidth] = React.useState(false);
+    const [portalFlexDirection, setPortalFlexDirection] = React.useState('');
+    const [portalFullWidth, setPortalFullWidth] = React.useState(false);
 
-  const hideTooltip = () => onVisibilityChange(false);
-
-  const manageTooltip = (scrollbarSize: number) => {
-    if (targetRef.current && tooltipElementRef.current) {
-      const direction = getTooltipDirection(
-        targetRef.current,
-        tooltipElementRef.current,
-        scrollbarSize,
-        tooltipPosition,
-      );
-      const tooltip = tooltipElementRef.current;
-      switch (direction) {
-        case 'topPageCenter':
-          setPortalFlexDirection('column-reverse');
-          setPortalFullWidth(true);
-          tooltip.style.margin = '0 0 8px 0';
-          break;
-        case 'bottomPageCenter':
-          setPortalFlexDirection('column');
-          setPortalFullWidth(true);
-          tooltip.style.margin = '8px 0 0 0';
-          break;
-        case 'left':
-          setPortalFlexDirection('row-reverse');
-          setPortalFullWidth(false);
-          tooltip.style.margin = '0 8px 0 0';
-          break;
-        case 'right':
-          setPortalFlexDirection('row');
-          setPortalFullWidth(false);
-          tooltip.style.margin = '0 0 0 8px';
-          break;
-        case 'top':
-          setPortalFlexDirection('column-reverse');
-          setPortalFullWidth(false);
-          tooltip.style.margin = '0 0 8px 0';
-          break;
-        case 'bottom':
-        default:
-          setPortalFlexDirection('column');
-          setPortalFullWidth(false);
-          tooltip.style.margin = '8px 0 0 0';
+    const manageTooltip = (scrollbarSize: number) => {
+      if (targetRef.current && tooltipElementRef.current) {
+        const direction: InternalTooltipPositionType = getTooltipDirection(
+          targetRef.current,
+          tooltipElementRef.current,
+          scrollbarSize,
+          tooltipPosition,
+        );
+        const tooltip = tooltipElementRef.current;
+        switch (direction) {
+          case 'leftBottom':
+          case 'leftTop':
+          case 'left':
+            setPortalFlexDirection('row-reverse');
+            setPortalFullWidth(false);
+            tooltip.style.margin = '0 8px 0 0';
+            tooltip.style.alignSelf =
+              direction === 'leftBottom' ? 'flex-start' : direction === 'leftTop' ? 'flex-end' : 'center';
+            break;
+          case 'rightBottom':
+          case 'rightTop':
+          case 'right':
+            setPortalFlexDirection('row');
+            setPortalFullWidth(false);
+            tooltip.style.margin = '0 0 0 8px';
+            tooltip.style.alignSelf =
+              direction === 'rightBottom' ? 'flex-start' : direction === 'rightTop' ? 'flex-end' : 'center';
+            break;
+          case 'topPageCenter':
+          case 'topLeft':
+          case 'topRight':
+          case 'top':
+            setPortalFlexDirection('column-reverse');
+            setPortalFullWidth(direction === 'topPageCenter' ? true : false);
+            tooltip.style.margin = '0 0 8px 0';
+            tooltip.style.alignSelf =
+              direction === 'topLeft' ? 'flex-end' : direction === 'topRight' ? 'flex-start' : 'center';
+            break;
+          case 'bottomPageCenter':
+          case 'bottomLeft':
+          case 'bottomRight':
+          case 'bottom':
+          default:
+            setPortalFlexDirection('column');
+            setPortalFullWidth(direction === 'bottomPageCenter' ? true : false);
+            tooltip.style.margin = '8px 0 0 0';
+            tooltip.style.alignSelf =
+              direction === 'bottomLeft' ? 'flex-end' : direction === 'bottomRight' ? 'flex-start' : 'center';
+        }
       }
-    }
-  };
-
-  const attachRef = (node: HTMLDivElement) => handleRef(node, tooltipRef, tooltipElementRef);
-
-  React.useEffect(() => {
-    window.addEventListener('resize', hideTooltip);
-    window.addEventListener('scroll', hideTooltip);
-
-    /**  если у targetRef.current есть родительский элемент, который имеет собственный скролл,
-     * необходимо повесить на этого родителя обработчик скролла */
-    if (!scrollableParents && targetRef.current) {
-      scrollableParents = getScrollableParents(targetRef.current);
-      scrollableParents?.forEach((el) => el.addEventListener('scroll', hideTooltip));
-    }
-    return () => {
-      clearTimeout(showTooltipTimer);
-      window.removeEventListener('resize', hideTooltip);
-      window.removeEventListener('scroll', hideTooltip);
-      scrollableParents?.forEach((el) => el.removeEventListener('scroll', hideTooltip));
     };
-  });
 
-  // hide on unmount
-  React.useEffect(() => {
-    return () => hideTooltip();
-  }, []);
+    React.useEffect(() => {
+      const scrollbarSize = getScrollbarSize();
+      manageTooltip(scrollbarSize);
+    }, [renderContent(), targetRef, tooltipPosition, container]);
 
-  React.useEffect(() => {
-    const scrollbarSize = getScrollbarSize();
-    manageTooltip(scrollbarSize);
-  }, [renderContent(), targetRef, tooltipPosition, container, visible]);
+    // First container render always happens downward and transparent,
+    // after size and position settled transparency returns to normal
+    React.useEffect(() => {
+      if (tooltipElementRef.current) {
+        tooltipElementRef.current.style.opacity = '1';
+      }
+    }, [tooltipElementRef.current]);
 
-  // First container render always happens downward and transparent,
-  // after size and position settled transparency returns to normal
-  React.useEffect(() => {
-    if (tooltipElementRef.current) {
-      tooltipElementRef.current.style.opacity = '1';
-    }
-  }, [tooltipElementRef.current, visible]);
-
-  React.useEffect(() => {
-    targetRef.current?.addEventListener('mouseenter', handleMouseEnter);
-    targetRef.current?.addEventListener('focus', handleMouseEnter);
-    targetRef.current?.addEventListener('mouseleave', handleMouseLeave);
-    targetRef.current?.addEventListener('mousedown', handleMouseLeave);
-    targetRef.current?.addEventListener('blur', handleMouseLeave);
-    return () => {
-      targetRef.current?.removeEventListener('mouseenter', handleMouseEnter);
-      targetRef.current?.removeEventListener('focus', handleMouseEnter);
-      targetRef.current?.removeEventListener('mouseleave', handleMouseLeave);
-      targetRef.current?.removeEventListener('mousedown', handleMouseLeave);
-      targetRef.current?.removeEventListener('blur', handleMouseLeave);
-    };
-  }, [targetRef.current]);
-
-  const handleMouseEnter = () => {
-    showTooltipTimer = window.setTimeout(
-      () => {
-        onVisibilityChange(true);
-        manageTooltip(getScrollbarSize());
-      },
-      withDelay ? TOOLTIP_DELAY : 0,
+    return (
+      <Portal
+        targetRef={targetRef}
+        container={container}
+        flexDirection={portalFlexDirection}
+        fullContainerWidth={portalFullWidth}
+      >
+        <FakeTarget />
+        <TooltipWrapper ref={refSetter(ref, tooltipElementRef)}>
+          <TooltipContainer role="tooltip" {...props}>
+            {renderContent()}
+          </TooltipContainer>
+        </TooltipWrapper>
+      </Portal>
     );
-  };
-
-  const handleMouseLeave = () => {
-    clearTimeout(showTooltipTimer);
-    hideTooltip();
-  };
-
-  return visible ? (
-    <Portal
-      targetRef={targetRef}
-      container={container}
-      flexDirection={portalFlexDirection}
-      fullContainerWidth={portalFullWidth}
-    >
-      <FakeTarget />
-      <TooltipWrapper ref={attachRef}>
-        <TooltipContainer role="tooltip" {...props}>
-          {renderContent()}
-        </TooltipContainer>
-      </TooltipWrapper>
-    </Portal>
-  ) : null;
-};
+  },
+);
 
 Tooltip.displayName = 'Tooltip';

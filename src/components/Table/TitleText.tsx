@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Tooltip } from '#src/components/TooltipRefactor';
+import { Tooltip } from '#src/components/Tooltip';
 import { checkOverflow } from '#src/components/common/utils/checkOverflow';
 
 import { Title, ExtraText } from './style';

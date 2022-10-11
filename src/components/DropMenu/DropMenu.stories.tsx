@@ -8,7 +8,7 @@ import { Theme } from '#src/components/themes';
 import { Button } from '#src/components/Button';
 import { typography } from '#src/components/Typography';
 import { ReactComponent as CardSolid } from '@admiral-ds/icons/build/finance/CardSolid.svg';
-import { TooltipHoc } from '#src/components/TooltipHOCRefactor';
+import { TooltipHoc } from '#src/components/TooltipHOC';
 import { CheckboxField } from '#src/components/form';
 import { RadioButton } from '#src/components/RadioButton';
 

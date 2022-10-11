@@ -9,7 +9,7 @@ import { changeInputData } from '#src/components/common/dom/changeInputData';
 import { ReactComponent as EditSolid } from '@admiral-ds/icons/build/system/EditSolid.svg';
 import { ReactComponent as CheckClearOutline } from '@admiral-ds/icons/build/service/CheckClearOutline.svg';
 import { ReactComponent as CloseOutline } from '@admiral-ds/icons/build/service/CloseOutline.svg';
-import { Tooltip } from '#src/components/TooltipRefactor';
+import { Tooltip } from '#src/components/Tooltip';
 import { checkOverflow } from '#src/components/common/utils/checkOverflow';
 
 const EditInput = styled(TextInput)`
@@ -206,13 +206,10 @@ export const EditMode = React.forwardRef<HTMLInputElement, EditModeProps>(
     }, [setTooltipVisible, node]);
 
     React.useLayoutEffect(() => {
-      console.log(tooltipVisible);
-      if (checkOverflow(textRef.current)) {
-        setOverflowActive(true);
-        return;
+      if (textRef.current && checkOverflow(textRef.current) !== overflowActive) {
+        setOverflowActive(checkOverflow(textRef.current));
       }
-      setOverflowActive(false);
-    }, [tooltipVisible]);
+    }, [tooltipVisible, textRef.current, setOverflowActive]);
 
     React.useEffect(() => {
       if (!localVal && value) {

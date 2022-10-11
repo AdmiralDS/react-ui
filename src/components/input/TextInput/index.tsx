@@ -16,7 +16,7 @@ import styled, { css } from 'styled-components';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { InputIconButton } from '#src/components/InputIconButton';
 import { Spinner } from '#src/components/Spinner';
-import { Tooltip } from '#src/components/TooltipRefactor';
+import { Tooltip } from '#src/components/Tooltip';
 import { checkOverflow } from '#src/components/common/utils/checkOverflow';
 
 const iconSizeValue = (props: { dimension?: ComponentDimension }) => {
@@ -282,7 +282,7 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
         return;
       }
       setOverflowActive(false);
-    }, [tooltipVisible]);
+    }, [tooltipVisible, inputRef.current, setOverflowActive]);
 
     React.useLayoutEffect(() => {
       function show() {
@@ -410,7 +410,7 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
           {children}
         </Container>
         {showTooltip && tooltipVisible && overflowActive && (
-          <Tooltip renderContent={() => inputRef?.current?.value} targetRef={wrapperRef} />
+          <Tooltip renderContent={() => inputRef?.current?.value || ''} targetRef={wrapperRef} />
         )}
       </>
     );

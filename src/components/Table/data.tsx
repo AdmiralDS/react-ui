@@ -7,7 +7,7 @@ import { ReactComponent as DeleteOutline } from '@admiral-ds/icons/build/system/
 import { RowAction } from '#src/components/Table';
 
 import type { Column } from '../Table';
-import { TooltipHoc } from '#src/components/TooltipHOCRefactor';
+import { TooltipHoc } from '#src/components/TooltipHOC';
 import { Badge } from '../Badge';
 
 const AmountCell = styled.div`

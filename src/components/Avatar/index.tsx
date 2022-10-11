@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled, { css } from 'styled-components';
 import { typography } from '#src/components/Typography';
-import { TooltipHoc } from '#src/components/TooltipHOCRefactor';
+import { TooltipHoc } from '#src/components/TooltipHOC';
 import { DefaultFontColorName } from '#src/components/themes/common';
 
 import { useLoaded } from './useLoaded';

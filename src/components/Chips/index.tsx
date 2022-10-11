@@ -1,7 +1,7 @@
 import type { FC, HTMLAttributes, MouseEvent, ReactNode } from 'react';
 import * as React from 'react';
 
-import { Tooltip } from '#src/components/TooltipRefactor';
+import { Tooltip } from '#src/components/Tooltip';
 import { checkOverflow } from '#src/components/common/utils/checkOverflow';
 
 import {
@@ -56,7 +56,7 @@ export const Chips: FC<ChipsProps> = ({
   ...props
 }) => {
   const defaultChip = selected !== undefined;
-  const [withTooltip, setTooltip] = React.useState(false);
+  const [overflow, setOverflow] = React.useState(false);
   const [tooltipVisible, setTooltipVisible] = React.useState(false);
   const withCloseIcon = !!onClose;
   const withBadge = !!badge;
@@ -74,10 +74,10 @@ export const Chips: FC<ChipsProps> = ({
   const refItems = React.useRef<HTMLDivElement | null>(null);
 
   React.useEffect(() => {
-    if (refItems.current && checkOverflow(refItems.current) !== withTooltip) {
-      setTooltip(checkOverflow(refItems.current));
+    if (refItems.current && checkOverflow(refItems.current) !== overflow) {
+      setOverflow(checkOverflow(refItems.current));
     }
-  }, [refItems.current, tooltipVisible, setTooltip]);
+  }, [refItems.current, tooltipVisible, setOverflow]);
 
   React.useLayoutEffect(() => {
     function show() {
@@ -90,9 +90,13 @@ export const Chips: FC<ChipsProps> = ({
     if (chip) {
       chip.addEventListener('mouseenter', show);
       chip.addEventListener('mouseleave', hide);
+      chip.addEventListener('focus', show);
+      chip.addEventListener('blur', hide);
       return () => {
         chip.removeEventListener('mouseenter', show);
         chip.removeEventListener('mouseleave', hide);
+        chip.removeEventListener('focus', show);
+        chip.removeEventListener('blur', hide);
       };
     }
   }, [setTooltipVisible, chipRef.current]);
@@ -118,7 +122,7 @@ export const Chips: FC<ChipsProps> = ({
         selected={selected}
         defaultChip={defaultChip}
         withCloseIcon={withCloseIcon}
-        withTooltip={withTooltip}
+        withTooltip={overflow}
         withBadge={withBadge}
         {...props}
         tabIndex={props.tabIndex ?? 0}
@@ -164,7 +168,7 @@ export const Chips: FC<ChipsProps> = ({
           )}
         </ChipContentWrapperStyled>
       </ChipComponentStyled>
-      {tooltipVisible && withTooltip && <Tooltip targetRef={chipRef} renderContent={renderContentTooltip} />}
+      {tooltipVisible && overflow && <Tooltip targetRef={chipRef} renderContent={renderContentTooltip} />}
     </>
   );
 };

@@ -3,7 +3,7 @@ import { HTMLAttributes, MouseEventHandler, useEffect } from 'react';
 import styled, { css } from 'styled-components';
 import { ErrorBlock } from '#src/components/input/FileUploader/ErrorBlock';
 import { Spinner } from '#src/components/Spinner';
-import { Tooltip } from '#src/components/TooltipRefactor';
+import { Tooltip } from '#src/components/Tooltip';
 import { dataTransferConstructorSupported, Dimension, formatBytes, Status } from './utils';
 import { ReactComponent as FilePDFSolid } from '@admiral-ds/icons/build/documents/FilePDFSolid.svg';
 import { ReactComponent as FilePPTSolid } from '@admiral-ds/icons/build/documents/FilePPTSolid.svg';
@@ -222,7 +222,7 @@ export const FileInfo = ({
   const fileInfo = `${fileFormat}・${fileSize} Mb`;
 
   const titleRef = React.useRef<HTMLDivElement | null>(null);
-  const [titleTipVisible, setTitleTipVisible] = React.useState(false);
+  const [tooltipVisible, setTooltipVisible] = React.useState(false);
   const [titleOverflow, setTitleOverflow] = React.useState(false);
 
   const getImageUrl = (file: FileProps) => {
@@ -244,14 +244,14 @@ export const FileInfo = ({
     if (element && checkOverflow(element) !== titleOverflow) {
       setTitleOverflow(checkOverflow(element));
     }
-  }, [titleTipVisible, titleRef.current]);
+  }, [tooltipVisible, titleRef.current, setTitleOverflow]);
 
   useEffect(() => {
     function show() {
-      setTitleTipVisible(true);
+      setTooltipVisible(true);
     }
     function hide() {
-      setTitleTipVisible(false);
+      setTooltipVisible(false);
     }
     const title = titleRef.current;
     if (title) {
@@ -262,7 +262,7 @@ export const FileInfo = ({
         title.removeEventListener('mouseleave', hide);
       };
     }
-  }, [setTitleTipVisible, titleRef.current]);
+  }, [setTooltipVisible, titleRef.current]);
 
   useEffect(() => {
     if (file && imageFile && !children) {
@@ -289,7 +289,7 @@ export const FileInfo = ({
               ))}
             <Content fileDimension={fileDimension}>
               <Title ref={titleRef}>{fileName}</Title>
-              {titleTipVisible && titleOverflow && <Tooltip targetRef={titleRef} renderContent={() => `${fileName}`} />}
+              {tooltipVisible && titleOverflow && <Tooltip targetRef={titleRef} renderContent={() => `${fileName}`} />}
               <Size fileDimension={fileDimension} status={status}>
                 {fileInfo}
               </Size>

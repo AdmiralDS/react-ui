@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled, { css } from 'styled-components';
 import { typography } from '#src/components/Typography';
-import { TooltipHoc } from '#src/components/TooltipHOCRefactor';
+import { TooltipHoc } from '#src/components/TooltipHOC';
 import type { BreadcrumbsProps } from '#src/components/Breadcrumbs';
 
 const getTypography = css<{ dimension: BreadcrumbsProps['dimension'] }>`

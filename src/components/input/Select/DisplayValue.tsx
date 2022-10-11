@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Tooltip } from '#src/components/TooltipRefactor';
+import { Tooltip } from '#src/components/Tooltip';
 import { StringValueWrapper } from './styled';
 import { checkOverflow } from '#src/components/common/utils/checkOverflow';
 
@@ -15,12 +15,10 @@ export const DisplayValue: React.FC<DisplayValueProps> = ({ visibleValue, isSear
   const [tooltipVisible, setTooltipVisible] = React.useState<boolean>(false);
 
   React.useEffect(() => {
-    if (checkOverflow(valueRef.current)) {
-      setOverflowActive(true);
-      return;
+    if (valueRef.current && checkOverflow(valueRef.current) !== overflowActive) {
+      setOverflowActive(checkOverflow(valueRef.current));
     }
-    setOverflowActive(false);
-  }, [tooltipVisible, valueRef.current]);
+  }, [tooltipVisible, valueRef.current, setOverflowActive]);
 
   React.useEffect(() => {
     function show() {
