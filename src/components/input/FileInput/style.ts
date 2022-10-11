@@ -61,7 +61,7 @@ export const fullWidthPositionMixin = css`
 export const halfWidthPositionMixin = css`
   flex: 1 1 36%;
 
-  &:nth-of-type(even) {
+  &:nth-of-type(odd) {
     margin-left: 16px;
   }
 `;

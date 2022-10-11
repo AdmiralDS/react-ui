@@ -95,6 +95,7 @@ const hoveredFileTypeIconCss = css`
       & svg {
         visibility: visible;
       }
+      cursor: pointer;
     }
   }
 `;

@@ -53,10 +53,7 @@ const StyledInput = styled.input`
   right: 0;
   bottom: 0;
   opacity: 0;
-
-  &:focus {
-    outline: none;
-  }
+  cursor: pointer;
 `;
 
 const CustomInput = styled.input`
@@ -64,7 +61,6 @@ const CustomInput = styled.input`
   width: 0;
   height: 0;
   opacity: 0;
-  tabindex: '-1';
 `;
 
 const InputWrapper = styled.div<{ disabled?: boolean; dimension: FileInputDimension }>`
@@ -84,10 +80,14 @@ const Wrapper = styled.div<{ dimension: FileInputDimension; width?: string | num
   ${(p) => (p.width ? `width: ${p.width};` : '')}
   box-sizing: border-box;
   ${typography['Body/Body 2 Long']};
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 `;
 
-const CustomWrapper = styled.div`
+const FileInputWrapper = styled.div`
   position: relative;
+  width: 100%;
 `;
 
 export interface RenderFileInputProps {
@@ -132,28 +132,31 @@ export const FileInput = forwardRef<HTMLInputElement, FileInputProps>(
 
     return (
       <Wrapper dimension={dimension} width={width}>
-        {renderCustomFileInput ? (
-          <CustomWrapper>
-            {renderCustomFileInput({ onQueryUpload: handleQueryUpload })}
-            <CustomInput
-              {...props}
-              ref={refSetter(ref, customInputRef)}
-              type="file"
-              multiple={multiple}
-              disabled={disabled}
-            />
-          </CustomWrapper>
-        ) : (
-          <>
-            {title && dimension === 'm' && renderTitleText()}
-            <InputWrapper dimension={dimension} disabled={disabled}>
-              <Icon dimension={dimension} />
-              {title && dimension === 'xl' && renderTitleText()}
-              {description && dimension === 'm' && renderDescription()}
-              <StyledInput {...props} ref={ref} type="file" disabled={disabled} multiple={multiple} />
-            </InputWrapper>
-          </>
-        )}
+        <FileInputWrapper>
+          {renderCustomFileInput ? (
+            <>
+              {renderCustomFileInput({ onQueryUpload: handleQueryUpload })}
+              <CustomInput
+                {...props}
+                ref={refSetter(ref, customInputRef)}
+                type="file"
+                multiple={multiple}
+                disabled={disabled}
+                tabIndex={-1}
+              />
+            </>
+          ) : (
+            <>
+              {title && dimension === 'm' && renderTitleText()}
+              <InputWrapper dimension={dimension} disabled={disabled}>
+                <Icon dimension={dimension} />
+                {title && dimension === 'xl' && renderTitleText()}
+                {description && dimension === 'm' && renderDescription()}
+                <StyledInput {...props} ref={ref} type="file" disabled={disabled} multiple={multiple} />
+              </InputWrapper>
+            </>
+          )}
+        </FileInputWrapper>
         {children}
       </Wrapper>
     );
