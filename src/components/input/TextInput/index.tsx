@@ -282,7 +282,27 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
         return;
       }
       setOverflowActive(false);
-    }, [tooltipVisible]);
+    }, [tooltipVisible, inputRef.current, setOverflowActive]);
+
+    React.useLayoutEffect(() => {
+      function show() {
+        if (document.activeElement !== inputRef.current) setTooltipVisible(true);
+      }
+      function hide() {
+        setTooltipVisible(false);
+      }
+      const wrapper = wrapperRef.current;
+      if (wrapper) {
+        wrapper.addEventListener('mouseenter', show);
+        wrapper.addEventListener('mouseleave', hide);
+        wrapper.addEventListener('mousedown', hide);
+        return () => {
+          wrapper.removeEventListener('mouseenter', show);
+          wrapper.removeEventListener('mouseleave', hide);
+          wrapper.removeEventListener('mousedown', hide);
+        };
+      }
+    }, [setTooltipVisible, wrapperRef.current, inputRef.current]);
 
     const [isPasswordVisible, setPasswordVisible] = React.useState(false);
     if (!props.readOnly && type === 'password') {
@@ -389,13 +409,8 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
           )}
           {children}
         </Container>
-        {showTooltip && (
-          <Tooltip
-            visible={tooltipVisible && overflowActive}
-            onVisibilityChange={setTooltipVisible}
-            renderContent={() => inputRef?.current?.value}
-            targetRef={wrapperRef}
-          />
+        {showTooltip && tooltipVisible && overflowActive && (
+          <Tooltip renderContent={() => inputRef?.current?.value || ''} targetRef={wrapperRef} />
         )}
       </>
     );

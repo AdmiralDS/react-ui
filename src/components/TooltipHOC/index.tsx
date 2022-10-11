@@ -1,17 +1,9 @@
 import * as React from 'react';
-import type { RefCallback, RefObject } from '#src/components/common/utils/handleRef';
 import { refSetter } from '#src/components/common/utils/refSetter';
-import { Tooltip } from '#src/components/Tooltip';
+import { Tooltip, TOOLTIP_DELAY } from '#src/components/Tooltip';
 import type { ITooltipProps } from '#src/components/Tooltip';
 
 export interface TooltipHocProps {
-  /** Видимость тултипа */
-  visible: boolean;
-  /** Колбек на изменение видимости тултипа
-   * При ховере/фокусе на target элементе колбек вызовется со значением visible=true,
-   * при потере ховера/фокуса на target элементе колбек вызовется со значением visible=false.
-   */
-  handleVisibilityChange: (visible: boolean) => void;
   /** Функция, которая возвращает реакт-компонент с контентом тултипа. Если этому компоненту нужны props, используйте замыкание */
   renderContent: () => React.ReactNode;
   /** Контейнер, в котором будет отрисован тултип через React.createPortal. По умолчанию тултип отрисовывается в document.body */
@@ -19,7 +11,7 @@ export interface TooltipHocProps {
   /** Отобразить тултип с задержкой в 1.5 секунды */
   withDelay?: boolean;
   /** Ссылка на тултип */
-  tooltipRef?: RefCallback<HTMLDivElement> | RefObject<HTMLDivElement> | null;
+  tooltipRef?: React.Ref<HTMLDivElement>;
   /** Расположение тултипа */
   tooltipPosition?: ITooltipProps['tooltipPosition'];
 }
@@ -30,32 +22,48 @@ type WrappedComponentProps = {
 
 export function TooltipHoc<P extends React.ComponentPropsWithRef<any>>(Component: React.ComponentType<P>) {
   const WrappedComponent = (props: P & TooltipHocProps & WrappedComponentProps) => {
-    const {
-      forwardedRef,
-      visible,
-      handleVisibilityChange,
-      renderContent,
-      container,
-      withDelay,
-      tooltipRef,
-      tooltipPosition,
-      ...wrappedCompProps
-    } = props;
+    const { forwardedRef, renderContent, container, withDelay, tooltipRef, tooltipPosition, ...wrappedCompProps } =
+      props;
     const anchorElementRef = React.useRef<any>(null);
+    const [visible, setVisible] = React.useState(false);
+    const [node, setNode] = React.useState<HTMLElement | null>(null);
+    const [timer, setTimer] = React.useState<number>();
+
+    React.useEffect(() => {
+      function show() {
+        setTimer(window.setTimeout(() => setVisible(true), withDelay ? TOOLTIP_DELAY : 0));
+      }
+      function hide() {
+        clearTimeout(timer);
+        setVisible(false);
+      }
+      if (node) {
+        node.addEventListener('mouseenter', show);
+        node.addEventListener('focus', show);
+        node.addEventListener('mouseleave', hide);
+        node.addEventListener('blur', hide);
+        return () => {
+          if (timer) clearTimeout(timer);
+          node.removeEventListener('mouseenter', show);
+          node.removeEventListener('focus', show);
+          node.removeEventListener('mouseleave', hide);
+          node.removeEventListener('blur', hide);
+        };
+      }
+    }, [node, setTimer, setVisible, timer]);
 
     return (
       <>
-        <Component {...(wrappedCompProps as P & object)} ref={refSetter(forwardedRef, anchorElementRef)} />
-        <Tooltip
-          visible={visible}
-          onVisibilityChange={handleVisibilityChange}
-          targetRef={anchorElementRef}
-          renderContent={renderContent}
-          container={container}
-          withDelay={withDelay}
-          tooltipPosition={tooltipPosition}
-          tooltipRef={tooltipRef}
-        />
+        <Component {...(wrappedCompProps as P & object)} ref={refSetter(forwardedRef, anchorElementRef, setNode)} />
+        {visible && (
+          <Tooltip
+            targetRef={anchorElementRef}
+            renderContent={renderContent}
+            container={container}
+            tooltipPosition={tooltipPosition}
+            ref={tooltipRef}
+          />
+        )}
       </>
     );
   };

@@ -2,6 +2,7 @@ import type { FC } from 'react';
 import React from 'react';
 import type { ITooltipProps } from '#src/components/Tooltip';
 import { Tooltip } from '#src/components/Tooltip';
+import { checkOverflow } from '#src/components/common/utils/checkOverflow';
 
 import { Content, ContentWrapper } from '#src/components/Stepper/style';
 import StepperContext from '#src/components/Stepper/StepperContext';
@@ -16,13 +17,29 @@ export const StepContent: FC<{ children: string; tooltipProps?: Partial<ITooltip
   const [overflow, setOverflow] = React.useState(false);
   const [tooltipVisible, setTooltipVisible] = React.useState(false);
 
-  const detectOverflow = (e: any) => e.clientHeight < e.scrollHeight;
+  React.useLayoutEffect(() => {
+    if (contentRef.current && checkOverflow(contentRef.current) !== overflow) {
+      setOverflow(checkOverflow(contentRef.current));
+    }
+  }, [tooltipVisible, contentRef.current, setOverflow]);
 
   React.useLayoutEffect(() => {
-    if (contentRef.current && detectOverflow(contentRef.current) !== overflow) {
-      setOverflow(detectOverflow(contentRef.current));
+    function show() {
+      setTooltipVisible(true);
     }
-  }, [tooltipVisible]);
+    function hide() {
+      setTooltipVisible(false);
+    }
+    const wrapper = wrapperRef.current;
+    if (wrapper) {
+      wrapper.addEventListener('mouseenter', show);
+      wrapper.addEventListener('mouseleave', hide);
+      return () => {
+        wrapper.removeEventListener('mouseenter', show);
+        wrapper.removeEventListener('mouseleave', hide);
+      };
+    }
+  }, [setTooltipVisible, wrapperRef.current]);
 
   return (
     <>
@@ -31,13 +48,9 @@ export const StepContent: FC<{ children: string; tooltipProps?: Partial<ITooltip
           {children}
         </Content>
       </ContentWrapper>
-      <Tooltip
-        targetRef={wrapperRef}
-        visible={tooltipVisible && overflow}
-        onVisibilityChange={setTooltipVisible}
-        renderContent={() => children}
-        {...tooltipProps}
-      />
+      {tooltipVisible && overflow && (
+        <Tooltip targetRef={wrapperRef} renderContent={() => children} {...tooltipProps} />
+      )}
     </>
   );
 };
