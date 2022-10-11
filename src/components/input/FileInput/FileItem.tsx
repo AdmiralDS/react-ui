@@ -314,16 +314,33 @@ export const FileItem = forwardRef<HTMLDivElement, FileItemProps>(
     const previewWrapperRef = useRef<HTMLDivElement | null>(null);
     const titleRef = useRef<HTMLDivElement | null>(null);
 
-    const [overflowActive, setOverflowActive] = useState<boolean>(false);
     const [tooltipVisible, setTooltipVisible] = useState(false);
+    const [fileNameOverflow, setFileNameOverflow] = React.useState(false);
 
     useEffect(() => {
-      if (checkOverflow(titleRef.current)) {
-        setOverflowActive(true);
-        return;
+      const element = titleRef.current;
+      if (element && checkOverflow(element) !== fileNameOverflow) {
+        setFileNameOverflow(checkOverflow(element));
       }
-      setOverflowActive(false);
-    }, [tooltipVisible]);
+    }, [tooltipVisible, titleRef.current, setFileNameOverflow]);
+
+    useEffect(() => {
+      function show() {
+        setTooltipVisible(true);
+      }
+      function hide() {
+        setTooltipVisible(false);
+      }
+      const title = titleRef.current;
+      if (title) {
+        title.addEventListener('mouseenter', show);
+        title.addEventListener('mouseleave', hide);
+        return () => {
+          title.removeEventListener('mouseenter', show);
+          title.removeEventListener('mouseleave', hide);
+        };
+      }
+    }, [setTooltipVisible, titleRef.current]);
 
     const handleCloseIconClick = () => {
       onCloseIconClick?.(fileId);
@@ -350,12 +367,9 @@ export const FileItem = forwardRef<HTMLDivElement, FileItemProps>(
             )}
             <Content dimension={dimension}>
               <FileName ref={titleRef}>{fileName}</FileName>
-              <Tooltip
-                targetRef={previewWrapperRef}
-                visible={tooltipVisible && overflowActive}
-                onVisibilityChange={setTooltipVisible}
-                renderContent={() => `${fileName}`}
-              />
+              {tooltipVisible && fileNameOverflow && (
+                <Tooltip targetRef={previewWrapperRef} renderContent={() => `${fileName}`} />
+              )}
               <FileInfo dimension={dimension} status={status}>
                 {fileInfo}
               </FileInfo>

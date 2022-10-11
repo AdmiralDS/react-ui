@@ -71,7 +71,7 @@ export default {
   argTypes: {
     dimension: {
       options: ['xl', 'm'],
-      control: false,
+      control: { type: 'radio' },
     },
     title: {
       control: false,
@@ -233,7 +233,7 @@ const FileInputDemoTemplate: ComponentStory<typeof FileInput> = (props) => {
       <FileInput
         dimension={props.dimension}
         disabled={props.disabled}
-        width="480px"
+        width={props.width}
         title={`Загрузите не более 3-х файлов типа ${accept.join(', ')} до 5 MB каждый`}
         description="Добавьте файлы"
         ref={inputRef}
@@ -330,7 +330,7 @@ const FileInputWithStatus: ComponentStory<typeof FileInput> = (props) => {
     <FileInput
       dimension={props.dimension}
       disabled={props.disabled}
-      width="480px"
+      width={props.dimension === 'xl' ? '480px' : '288px'}
       description="Добавьте файлы"
       title={`Загрузите не более 3-х файлов до 5 MB каждый`}
       ref={inputRef}
@@ -465,7 +465,7 @@ const FileInputCustomTemplate: ComponentStory<typeof FileInput> = (props) => {
 
 export const FileInputDemoXL = FileInputDemoTemplate.bind({});
 FileInputDemoXL.storyName = 'File Input XL';
-FileInputDemoXL.args = { dimension: 'xl' };
+FileInputDemoXL.args = { dimension: 'xl', width: '480px' };
 FileInputDemoXL.parameters = {
   docs: {
     description: {
@@ -478,7 +478,7 @@ FileInputDemoXL.parameters = {
 
 export const FileInputDemoM = FileInputDemoTemplate.bind({});
 FileInputDemoM.storyName = 'File Input M';
-FileInputDemoM.args = { dimension: 'm' };
+FileInputDemoM.args = { dimension: 'm', width: '288px' };
 FileInputDemoM.parameters = {
   docs: {
     description: {
