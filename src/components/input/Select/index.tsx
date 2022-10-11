@@ -57,9 +57,6 @@ export interface SelectProps extends Omit<React.InputHTMLAttributes<HTMLSelectEl
   /** Отображать статус загрузки данных */
   isLoading?: boolean;
 
-  /** @deprecated Используйте locale.emptyMessage */
-  emptyMessage?: React.ReactNode;
-
   /** Добавить селекту возможность множественного выбора */
   multiple?: boolean;
 
@@ -151,7 +148,6 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       showCheckbox = true,
       displayClearIcon = false,
       onClearIconClick,
-      emptyMessage: userEmptyMessage,
       onInputChange,
       inputValue,
       defaultInputValue,
@@ -168,7 +164,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
     ref,
   ) => {
     const theme = React.useContext(ThemeContext) || LIGHT_THEME;
-    const emptyMessage = userEmptyMessage || locale?.emptyMessage || (
+    const emptyMessage = locale?.emptyMessage || (
       <DropDownText>{theme.locales[theme.currentLocale].select.emptyMessage}</DropDownText>
     );
     const [localValue, setLocalValue] = React.useState(value ?? defaultValue);

@@ -8,6 +8,7 @@ import styled, { css, Interpolation, ThemeContext } from 'styled-components';
 import { LIGHT_THEME } from '#src/components/themes';
 import ModalManager from './manager';
 import { largeGroupBorderRadius } from '#src/components/themes/borderRadius';
+import { checkOverflow } from '#src/components/common/utils/checkOverflow';
 
 type Dimension = 'xl' | 'l' | 'm' | 's';
 
@@ -166,13 +167,9 @@ export const ModalContent: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ c
   const contentRef = React.useRef<HTMLDivElement | null>(null);
   const [overflow, setOverflow] = React.useState(false);
 
-  const detectOverflow = (e: any) => {
-    return e.clientHeight < e.scrollHeight;
-  };
-
   React.useLayoutEffect(() => {
-    if (contentRef.current && detectOverflow(contentRef.current) !== overflow) {
-      setOverflow(detectOverflow(contentRef.current));
+    if (contentRef.current && checkOverflow(contentRef.current) !== overflow) {
+      setOverflow(checkOverflow(contentRef.current));
     }
   }, [children]);
 

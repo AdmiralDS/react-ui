@@ -8,14 +8,13 @@ type ButtonProps = {
   onMouseDown: (event: React.MouseEvent<HTMLDivElement>) => void;
   disabled: boolean;
   type: 'left' | 'right';
-  innerRef?: React.RefObject<HTMLDivElement>;
 };
 
 const ICON_SIZE = 24;
 
-const ButtonComponent: React.FC<ButtonProps> = ({ onMouseDown, disabled, type, innerRef }) => (
+export const Button = React.forwardRef<HTMLDivElement, ButtonProps>(({ onMouseDown, disabled, type }, ref) => (
   <PanelButton
-    ref={innerRef}
+    ref={ref}
     onMouseDown={(event) => {
       event?.preventDefault();
       onMouseDown(event);
@@ -25,6 +24,4 @@ const ButtonComponent: React.FC<ButtonProps> = ({ onMouseDown, disabled, type, i
     {type === 'left' && <ChevronLeftOutline width={ICON_SIZE} height={ICON_SIZE} />}
     {type === 'right' && <ChevronRightOutline width={ICON_SIZE} height={ICON_SIZE} />}
   </PanelButton>
-);
-
-export const Button = React.memo<ButtonProps>(ButtonComponent);
+));

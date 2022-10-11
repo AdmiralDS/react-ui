@@ -1,6 +1,5 @@
 import type { MouseEvent, SyntheticEvent } from 'react';
 
-import type { LocaleType } from './constants';
 import type { DateValidator } from './validator';
 
 export interface IDateBaseProps {
@@ -12,10 +11,6 @@ export interface IDateBaseProps {
   endDate?: Date | null;
   /** Режим выбора диапазона дат */
   range?: boolean;
-  /** Локаль отображения дат
-   * @deprecated Используйте currentLocale в theme,
-   */
-  localeName?: LocaleType;
   /** Предоставляет функции проверки корректности даты, возможности её выбора в календаре.
    *  Если возвращаемое значение не 'null', то дата считается некорректной, а возвращаемое
    *  функцией значение является текстом ошибки и выводится в InputField

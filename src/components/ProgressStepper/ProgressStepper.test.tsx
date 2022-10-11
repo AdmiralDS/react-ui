@@ -46,13 +46,17 @@ describe('Spinner', () => {
 
   it('should render component with custom nextStepName', () => {
     const wrapper = render(
-      <Comp steps={steps} activeStep={2} renderNextStepName={(nextStepName) => `Далее следует шаг: ${nextStepName}`} />,
+      <Comp
+        steps={steps}
+        activeStep={2}
+        locale={{ renderNextStepName: (nextStepName) => `Далее следует шаг: ${nextStepName}` }}
+      />,
     );
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should render component with custom stepName', () => {
-    const wrapper = render(<Comp steps={steps2} activeStep={2} stepName={['этап', 'этапа', 'этапов']} />);
+    const wrapper = render(<Comp steps={steps2} activeStep={2} locale={{ stepName: ['этап', 'этапов'] }} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

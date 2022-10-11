@@ -72,20 +72,6 @@ export interface PaginationOneProps extends Omit<React.HTMLAttributes<HTMLDivEle
   pageSelectDisabled?: boolean;
   /** Блокировка выбора количества записей на странице */
   pageSizeSelectDisabled?: boolean;
-  /** @deprecated Используйте locale.pageSelectLabel */
-  pageSelectLabel?: (...props: any) => string;
-  /** @deprecated Используйте locale.pageSizeSelectLabel */
-  pageSizeSelectLabel?: (...props: any) => string;
-  /** @deprecated Используйте locale.itemsPerPageText */
-  itemsPerPageText?: string;
-  /** @deprecated Используйте locale.itemRangeText */
-  itemRangeText?: (...props: any) => string;
-  /** @deprecated Используйте locale.pageRangeText */
-  pageRangeText?: (...props: any) => string;
-  /** @deprecated Используйте locale.backwardText */
-  backwardText?: string;
-  /** @deprecated Используйте locale.forwardText */
-  forwardText?: string;
   /** Отображение компонента в упрощенном варианте, применяется в мобильных версиях */
   simple?: boolean;
   /** Задает максимальную высоту выпадающих меню */
@@ -122,13 +108,6 @@ export const PaginationOne: React.FC<PaginationOneProps> = ({
   pageSelectDisabled = false,
   pageSizeSelectDisabled = false,
   onChange,
-  itemsPerPageText: userItemsPerPageText,
-  itemRangeText: userItemRangeText,
-  pageRangeText: userPageRangeText,
-  pageSelectLabel: userPageSelectLabel,
-  pageSizeSelectLabel: userPageSizeSelectLabel,
-  backwardText: userBackwardText,
-  forwardText: userForwardText,
   simple = false,
   menuWidth,
   dropMaxHeight = '',
@@ -147,13 +126,13 @@ export const PaginationOne: React.FC<PaginationOneProps> = ({
     forwardText: theme_forwardText,
   } = theme.locales[theme.currentLocale].paginationOne;
 
-  const itemsPerPageText = userItemsPerPageText || locale?.itemsPerPageText || theme_itemsPerPageText;
-  const itemRangeText = userItemRangeText || locale?.itemRangeText || theme_itemRangeText;
-  const pageRangeText = userPageRangeText || locale?.pageRangeText || theme_pageRangeText;
-  const pageSelectLabel = userPageSelectLabel || locale?.pageSelectLabel || theme_pageSelectLabel;
-  const pageSizeSelectLabel = userPageSizeSelectLabel || locale?.pageSizeSelectLabel || theme_pageSizeSelectLabel;
-  const backwardText = userBackwardText || locale?.backwardText || theme_backwardText;
-  const forwardText = userForwardText || locale?.forwardText || theme_forwardText;
+  const itemsPerPageText = locale?.itemsPerPageText || theme_itemsPerPageText;
+  const itemRangeText = locale?.itemRangeText || theme_itemRangeText;
+  const pageRangeText = locale?.pageRangeText || theme_pageRangeText;
+  const pageSelectLabel = locale?.pageSelectLabel || theme_pageSelectLabel;
+  const pageSizeSelectLabel = locale?.pageSizeSelectLabel || theme_pageSizeSelectLabel;
+  const backwardText = locale?.backwardText || theme_backwardText;
+  const forwardText = locale?.forwardText || theme_forwardText;
 
   const totalPages = Math.max(Math.ceil(totalItems / pageSize), 1);
   const pages = Array.from({ length: totalPages }, (v, k) => k + 1);
