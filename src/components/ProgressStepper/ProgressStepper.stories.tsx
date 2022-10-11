@@ -132,14 +132,14 @@ const Template1: ComponentStory<typeof ProgressStepper> = (args) => {
           {...args}
           steps={steps}
           activeStep={2}
-          renderNextStepName={(nextStepName) => `Далее следует шаг: ${nextStepName}`}
+          locale={{ renderNextStepName: (nextStepName) => `Далее следует шаг: ${nextStepName}` }}
         />
       </Section>
       <Section title="Отключение подписи о следующем шаге">
         <ProgressStepper {...args} steps={steps} activeStep={2} displayNextStepName={false} mobile />
       </Section>
       <Section title="Пример настройки названия шага">
-        <ProgressStepper {...args} steps={steps2} activeStep={2} stepName={['этап', 'этапа', 'этапов']} />
+        <ProgressStepper {...args} steps={steps2} activeStep={2} locale={{ stepName: ['этап', 'этапов'] }} />
       </Section>
     </>
   );

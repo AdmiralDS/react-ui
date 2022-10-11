@@ -57,10 +57,6 @@ export interface ProgressStepperProps extends HTMLAttributes<HTMLDivElement> {
   steps: string[];
   /** Номер активного шага, соответствует индексу шага в массиве */
   activeStep?: number;
-  /** @deprecated Используйте locale.stepName */
-  stepName?: string[];
-  /** @deprecated Используйте locale.stepName */
-  renderNextStepName?: (nextStepName: string) => React.ReactNode;
   /** Отображение/скрытие подписи о следующем шаге */
   displayNextStepName?: boolean;
   /** Мобильная версия компонента */
@@ -81,20 +77,16 @@ export interface ProgressStepperProps extends HTMLAttributes<HTMLDivElement> {
 export const ProgressStepper: FC<ProgressStepperProps> = ({
   steps,
   activeStep: activeStepProp = -1,
-  stepName: userStepName,
-  renderNextStepName: userRenderNextStepName,
   displayNextStepName = true,
   mobile = false,
   locale,
   ...props
 }) => {
   const theme = React.useContext(ThemeContext) || LIGHT_THEME;
-  const stepName = userStepName || locale?.stepName || theme.locales[theme.currentLocale].progressStepper.stepName;
+  const stepName = locale?.stepName || theme.locales[theme.currentLocale].progressStepper.stepName;
   const progressText = locale?.progressText || theme.locales[theme.currentLocale].progressStepper.progressText;
   const renderNextStepName =
-    userRenderNextStepName ||
-    locale?.renderNextStepName ||
-    theme.locales[theme.currentLocale].progressStepper.renderNextStepName;
+    locale?.renderNextStepName || theme.locales[theme.currentLocale].progressStepper.renderNextStepName;
 
   const stepsAmount = steps.length;
   const activeStep = fitLimit(0, stepsAmount, activeStepProp) ? activeStepProp : -1;

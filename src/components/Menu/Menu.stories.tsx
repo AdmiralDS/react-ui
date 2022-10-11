@@ -9,7 +9,7 @@ import { withDesign } from 'storybook-addon-designs';
 import { LIGHT_THEME, Theme } from '#src/components/themes';
 import { CheckboxField, FieldSet } from '#src/components/form';
 import { RadioButton } from '#src/components/RadioButton';
-import { Tooltip } from '#src/components/Tooltip';
+import { TooltipHoc } from '#src/components/TooltipHOC';
 import { TextInput } from '#src/components/input';
 import { TextButton } from '#src/components/TextButton';
 import { getHighlightedFilteredOptions, MenuActionsPanel } from '#src/components/Menu/MenuActionsPanel';
@@ -441,6 +441,7 @@ const itemsLongText = [
     value: 6,
   },
 ];
+const MenuItemWithTooltip = TooltipHoc(MenuItem);
 
 const MenuTooltipTemplate: ComponentStory<typeof Menu> = (args) => {
   const model = useMemo(() => {
@@ -449,23 +450,21 @@ const MenuTooltipTemplate: ComponentStory<typeof Menu> = (args) => {
 
       return {
         id: item.id,
-        render: (options: RenderOptionProps) => {
-          const itemRef = React.useRef(null);
-          const [tooltipVisible, setTooltipVisible] = React.useState(false);
-          return (
-            <MenuItem ref={itemRef} dimension={args.dimension || 's'} {...options} key={item.id}>
-              {tooltip ? item.label.slice(0, 17) + '...' : item.label}
-              {tooltip && (
-                <Tooltip
-                  targetRef={itemRef}
-                  visible={tooltipVisible}
-                  onVisibilityChange={setTooltipVisible}
-                  renderContent={() => item.label}
-                />
-              )}
+        render: (options: RenderOptionProps) =>
+          tooltip ? (
+            <MenuItemWithTooltip
+              renderContent={() => item.label}
+              dimension={args.dimension || 's'}
+              {...options}
+              key={item.id}
+            >
+              {item.label.slice(0, 17) + '...'}
+            </MenuItemWithTooltip>
+          ) : (
+            <MenuItem dimension={args.dimension || 's'} {...options} key={item.id}>
+              {item.label}
             </MenuItem>
-          );
-        },
+          ),
       };
     });
   }, [args.dimension]);

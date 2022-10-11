@@ -8,7 +8,7 @@ import { Theme } from '#src/components/themes';
 import { Button } from '#src/components/Button';
 import { typography } from '#src/components/Typography';
 import { ReactComponent as CardSolid } from '@admiral-ds/icons/build/finance/CardSolid.svg';
-import { Tooltip } from '#src/components/Tooltip';
+import { TooltipHoc } from '#src/components/TooltipHOC';
 import { CheckboxField } from '#src/components/form';
 import { RadioButton } from '#src/components/RadioButton';
 
@@ -324,6 +324,7 @@ const itemsLongText = [
     value: 6,
   },
 ];
+const MenuItemWithTooltip = TooltipHoc(MenuItem);
 
 const DropMenuTooltipTemplate: ComponentStory<typeof DropMenu> = (args) => {
   const [selected, setSelected] = React.useState<string | undefined>(undefined);
@@ -333,23 +334,21 @@ const DropMenuTooltipTemplate: ComponentStory<typeof DropMenu> = (args) => {
 
       return {
         id: item.id,
-        render: (options: RenderOptionProps) => {
-          const itemRef = React.useRef(null);
-          const [tooltipVisible, setTooltipVisible] = React.useState(false);
-          return (
-            <MenuItem ref={itemRef} dimension={args.dimension || 's'} {...options} key={item.id}>
-              {tooltip ? item.label.slice(0, 17) + '...' : item.label}
-              {tooltip && (
-                <Tooltip
-                  targetRef={itemRef}
-                  visible={tooltipVisible}
-                  onVisibilityChange={setTooltipVisible}
-                  renderContent={() => item.label}
-                />
-              )}
+        render: (options: RenderOptionProps) =>
+          tooltip ? (
+            <MenuItemWithTooltip
+              renderContent={() => item.label}
+              dimension={args.dimension || 's'}
+              {...options}
+              key={item.id}
+            >
+              {item.label.slice(0, 17) + '...'}
+            </MenuItemWithTooltip>
+          ) : (
+            <MenuItem dimension={args.dimension || 's'} {...options} key={item.id}>
+              {item.label}
             </MenuItem>
-          );
-        },
+          ),
       };
     });
   }, [args.dimension]);

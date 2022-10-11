@@ -118,9 +118,6 @@ export default {
     showLastRowUnderline: {
       control: { type: 'boolean' },
     },
-    emptyMessage: {
-      control: { type: 'text' },
-    },
   },
 } as ComponentMeta<typeof Table>;
 

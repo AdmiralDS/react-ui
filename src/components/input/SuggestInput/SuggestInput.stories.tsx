@@ -69,10 +69,6 @@ export default {
       type: 'string',
     },
 
-    isEmptyMessage: {
-      type: 'string',
-    },
-
     onChange: {
       action: 'onChange',
     },
