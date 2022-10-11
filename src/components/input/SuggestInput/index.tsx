@@ -28,9 +28,6 @@ export interface SuggestItem {
 export interface SuggestInputProps extends Omit<TextInputProps, 'value'> {
   value?: string;
 
-  /** @deprecated Используйте locale.emptyMessage */
-  isEmptyMessage?: string;
-
   /** Обработчик выбора опции (дефолтный обработчик подставляет значение опции в поле ввода) */
   onOptionSelect?: (value: string) => void;
 
@@ -84,7 +81,6 @@ export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps
       onSearchButtonClick = () => undefined,
       icons,
       icon = SearchOutlineSVG,
-      isEmptyMessage: userEmptyMessage,
       skeleton = false,
       status,
       highlightFormat,
@@ -226,9 +222,7 @@ export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps
           >
             {options.length === 0 && !isLoading ? (
               <MessagePanel>
-                {userEmptyMessage ||
-                  locale?.emptyMessage ||
-                  theme.locales[theme.currentLocale].suggestInput.emptyMessage}
+                {locale?.emptyMessage || theme.locales[theme.currentLocale].suggestInput.emptyMessage}
               </MessagePanel>
             ) : (
               <Menu

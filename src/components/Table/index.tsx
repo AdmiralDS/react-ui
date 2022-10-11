@@ -231,8 +231,6 @@ export interface TableProps extends React.HTMLAttributes<HTMLDivElement> {
      */
     fixedRowHeight: number;
   };
-  /** @deprecated Используйте locale.emptyMessage */
-  emptyMessage?: React.ReactNode;
   /** Объект локализации - позволяет перезадать текстовые константы используемые в компоненте,
    * по умолчанию значения констант берутся из темы в соответствии с параметром currentLocale, заданном в теме
    **/
@@ -280,7 +278,6 @@ export const Table: React.FC<TableProps> = ({
   disableColumnResize = false,
   showLastRowUnderline = true,
   virtualScroll,
-  emptyMessage: userEmptyMessage,
   locale,
   ...props
 }) => {
@@ -742,8 +739,7 @@ export const Table: React.FC<TableProps> = ({
   };
 
   const renderBody = () => {
-    const emptyMessage =
-      userEmptyMessage || locale?.emptyMessage || theme.locales[theme.currentLocale].table.emptyMessage;
+    const emptyMessage = locale?.emptyMessage || theme.locales[theme.currentLocale].table.emptyMessage;
     if (tableRows.length === 0) {
       return (
         <ScrollTableBody ref={scrollBodyRef} className="tbody">

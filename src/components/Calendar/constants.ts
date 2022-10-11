@@ -1,5 +1,3 @@
-export type LocaleType = 'ru' | 'enUS' | 'de';
-
 export type CornerKeys = 'top-left' | 'bottom-left' | 'top-right' | 'bottom-right';
 export type Corners = {
   [key in CornerKeys]?: boolean;
