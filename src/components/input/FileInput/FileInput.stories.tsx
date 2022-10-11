@@ -501,7 +501,7 @@ FileInputWithStatusDemo.parameters = {
 };
 
 export const FileInputCustom = FileInputCustomTemplate.bind({});
-FileInputCustom.storyName = 'File Input. Action загрузки';
+FileInputCustom.storyName = 'File Input. Кастомизация';
 FileInputCustom.args = { dimension: 'm' };
 FileInputDemoM.parameters = {
   docs: {
