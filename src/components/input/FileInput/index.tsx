@@ -103,6 +103,7 @@ export interface FileInputProps extends Omit<InputHTMLAttributes<HTMLInputElemen
   title?: React.ReactNode;
   /** Текст для кнопки при dimension M */
   description?: React.ReactNode;
+  /** Функция, возвращающая компонент, на который нужно "повесить" файловый инпут */
   renderCustomFileInput?: (option: RenderFileInputProps) => React.ReactNode;
 }
 
