@@ -54,7 +54,14 @@ export const Slider = ({
   const tickMarks = Array.isArray(points) ? points : undefined;
   const SLIDER_WIDTH = dimension === 'xl' ? 20 : 16;
 
+  /**
+   * ThumbCircle mousedown/touchstart, Track mousedown/touchstart - setDrag(true)
+   * handleSliderMouseUp - mouseup/touchend/touchcancel - setDrag(false)
+   */
   const [isDraging, setDrag] = useState(false);
+  /**
+   * animation передается в FilledTrack (change width), Thumb (change left)
+   */
   const [animation, setAnimation] = useState(false);
   const [sliderValue, setSliderValue] = useState(value);
 
@@ -67,8 +74,16 @@ export const Slider = ({
   }, [value]);
 
   useEffect(() => {
-    correctSliderPosition(sliderValue);
-  }, [sliderValue, minValue, maxValue]);
+    const rangeLeft = trackRef.current?.getBoundingClientRect().left || 0;
+    const sliderPosition =
+      rangeLeft && sliderRef.current
+        ? Math.round(sliderRef.current.getBoundingClientRect().left - rangeLeft + SLIDER_WIDTH / 2)
+        : 0;
+    const calcValue = calcValueByPos(getRangeWidth(), sliderPosition, minValue, maxValue, step);
+
+    // нужно проверить текущее значение пропущенное через calcValue и value, если они равны корректировки быть не должно
+    if (value !== calcValue) correctSliderPosition(value);
+  }, [value, minValue, maxValue, step]);
 
   const [moveListener, freeResources] = throttle((e: any) => {
     updateSlider(e);
@@ -95,14 +110,16 @@ export const Slider = ({
   const slideValue = useCallback(
     (trackWidth: number, sliderPosition: number, e: any) => {
       const calcValue = calcValueByPos(trackWidth, sliderPosition, minValue, maxValue, step);
+      console.log({ calcValue, value });
       calcValue !== value && onChange(e, calcValue);
-      setSliderValue(calcValue);
+      // setSliderValue(calcValue);
     },
     [maxValue, minValue, onChange, step],
   );
 
   const updateSlider = useCallback(
     (e: any) => {
+      console.log('updateSlider moveListener mousemove');
       setAnimation(false);
       const rangeWidth = getRangeWidth();
       const rangeLeft = trackRef.current?.getBoundingClientRect().left || 0;
@@ -128,7 +145,7 @@ export const Slider = ({
       }
       slideValue(rangeWidth, sliderPosition, e);
     },
-    [slideValue, isDraging],
+    [slideValue, isDraging, setAnimation, sliderRef.current, filledRef.current],
   );
 
   const correctSliderPosition = useCallback(
@@ -146,29 +163,64 @@ export const Slider = ({
         sliderRef.current.style.left = `${sliderCoords}%`;
         filledRef.current.style.width = `${sliderCoords}%`;
       }
-      return setSliderValue(value);
+      // return setSliderValue(value);
     },
     [maxValue, minValue],
   );
 
+  // const onSliderClick = useCallback(
+  //   (e: any) => {
+  //     console.log('slider click');
+  //     if (e.type === 'mousedown') e.preventDefault();
+  //     e.stopPropagation();
+  //     setDrag(true);
+  //     setAnimation(true);
+  //   },
+  //   [updateSlider, setDrag],
+  // );
+
   const onSliderClick = useCallback(
     (e: any) => {
+      console.log('slider click');
       if (e.type === 'mousedown') e.preventDefault();
       e.stopPropagation();
       setDrag(true);
       setAnimation(true);
     },
-    [updateSlider, setDrag],
+    [setAnimation, setDrag],
   );
+
+  // const handleSliderMouseUp = useCallback(
+  //   (e: any) => {
+  //     console.log('handle slider mouseup');
+  //     if (e.type === 'mouseup') e.preventDefault();
+  //     e.stopPropagation();
+  //     setAnimation(true);
+  //     setDrag(false);
+
+  //     const numValue = sliderValue || minValue;
+  //     if (tickMarks) {
+  //       const newValue = correctValueWithRanges(tickMarks, numValue, minValue, maxValue);
+  //       correctSliderPosition(newValue);
+  //       newValue !== value && onChange(e, newValue);
+  //     } else {
+  //       numValue !== value && onChange(e, numValue);
+  //     }
+  //   },
+  //   [onChange, maxValue, minValue, sliderValue, tickMarks],
+  // );
 
   const handleSliderMouseUp = useCallback(
     (e: any) => {
+      console.log('handle slider mouseup');
       if (e.type === 'mouseup') e.preventDefault();
       e.stopPropagation();
       setAnimation(true);
       setDrag(false);
 
-      const numValue = sliderValue || minValue;
+      // const numValue = sliderValue || minValue;
+      const numValue = value || minValue;
+      console.log({ numValue, value });
       if (tickMarks) {
         const newValue = correctValueWithRanges(tickMarks, numValue, minValue, maxValue);
         correctSliderPosition(newValue);
@@ -177,7 +229,7 @@ export const Slider = ({
         numValue !== value && onChange(e, numValue);
       }
     },
-    [onChange, maxValue, minValue, sliderValue, tickMarks],
+    [onChange, maxValue, minValue, value, tickMarks],
   );
 
   const onPointClick = (e: any, newValue: number) => {

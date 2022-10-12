@@ -55,7 +55,8 @@ export const FilledTrack = styled.div<{ animation?: boolean }>`
   }
   position: absolute;
   height: 2px;
-  width: 100%;
+  // width: 100%;
+  width: 0%;
   background-color: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
   transition: ${({ animation }) => (animation ? TRANSITION_ANIMATION : 'none')};
 `;

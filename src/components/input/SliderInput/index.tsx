@@ -100,7 +100,7 @@ export const SliderInput = React.forwardRef<HTMLInputElement, SliderInputProps>(
     }, [defaultValue]);
 
     const handleSliderChange = (e: any, value: number) => {
-      const shortValue = value.toString() + '.' + repeatStringNumTimes('0', precision);
+      const shortValue = fitToCurrency(value.toString(), precision, decimal, '', true);
       const fullValue = fitToCurrency(shortValue, precision, decimal, thousand);
 
       setSliderValue(value);
