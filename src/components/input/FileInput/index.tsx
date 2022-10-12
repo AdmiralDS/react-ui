@@ -15,6 +15,8 @@ import {
   disabledStyles,
   hoverStyles,
 } from '#src/components/input/FileInput/style';
+import { InputStatus } from '#src/components/input/types';
+import { ExtraTextContainer } from '#src/components/Field';
 
 /** TODO:
  * переключение по файлам списка (клик на иконку документа, удаление документа из списка)
@@ -111,6 +113,10 @@ export interface FileInputProps extends Omit<InputHTMLAttributes<HTMLInputElemen
   renderCustomFileInput?: (option: RenderFileInputProps) => React.ReactNode;
   /** Список файлов для синхронизации с нативным инпутом */
   files?: Array<File>;
+  /** Текст будет виден ниже компонента */
+  extraText?: React.ReactNode;
+  /** Установка статуса поля */
+  status?: InputStatus;
 }
 
 export const FileInput = forwardRef<HTMLInputElement, FileInputProps>(
@@ -125,6 +131,8 @@ export const FileInput = forwardRef<HTMLInputElement, FileInputProps>(
       multiple = true,
       children,
       files,
+      extraText,
+      status,
       ...props
     },
     ref,
@@ -148,7 +156,7 @@ export const FileInput = forwardRef<HTMLInputElement, FileInputProps>(
     }, [files]);
 
     return (
-      <Wrapper dimension={dimension} width={width}>
+      <Wrapper dimension={dimension} width={width} data-status={status}>
         <FileInputWrapper>
           {renderCustomFileInput ? (
             <>
@@ -181,6 +189,7 @@ export const FileInput = forwardRef<HTMLInputElement, FileInputProps>(
           )}
         </FileInputWrapper>
         {children}
+        {extraText && status === 'error' && <ExtraTextContainer>{extraText}</ExtraTextContainer>}
       </Wrapper>
     );
   },
