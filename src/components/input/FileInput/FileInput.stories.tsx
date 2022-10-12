@@ -2,10 +2,10 @@ import { withDesign } from 'storybook-addon-designs';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import * as React from 'react';
 import styled, { DefaultTheme, FlattenInterpolation, ThemeProps, ThemeProvider } from 'styled-components';
-import { FileInput, FileInputDimension, RenderFileInputProps } from '#src/components/input/FileInput';
+import { FileInput, RenderFileInputProps } from '#src/components/input/FileInput';
 import { Theme } from '#src/components/themes';
 import { ChangeEvent, HTMLAttributes, useRef, useState } from 'react';
-import { FileAttributeProps, FileItem, Status } from '#src/components/input/FileInput/FileItem';
+import { FileAttributeProps, FileItem } from '#src/components/input/FileInput/FileItem';
 import { fullWidthPositionMixin, halfWidthPositionMixin } from '#src/components/input/FileInput/style';
 import { ReactComponent as AttachFileOutline } from '@admiral-ds/icons/build/system/AttachFileOutline.svg';
 import { ReactComponent as CloseOutline } from '@admiral-ds/icons/build/service/CloseOutline.svg';
@@ -25,15 +25,13 @@ const Desc = styled.div`
 const Description = () => (
   <Desc>
     Компонент позволяет выбирать локальные файлы пользователя для последующей загрузки их на сервер. Выбирать файлы
-    можно как через нажатие на компонент, так и через Drag and Drop (в XL-размере) на компонент. Компонент имеет две
-    разновидности отображения — размер XL с превью изображения или иконкой формата файла и размер M без превью,
-    передается параметром fileDimension.
+    можно как через нажатие на компонент, так и через Drag and Drop на компонент. Компонент имеет две разновидности
+    отображения — размер XL с превью изображения или иконкой формата файла и размер M без превью, передается параметром
+    fileDimension.
     <Separator />
-    Выбранные пользователем файлы передаются списком через параметр uploadedFiles, где каждый файл это объект с
-    обязательным ключом file и двумя необязательными ключами status и error.
-    <Separator />
-    Примечание: в IE11 нет функционала перетаскивания и удаления файлов по причине отсутствия поддержки Drag and Drop и
-    конструктора DataTransfer в данном браузере.
+    Для отображения компонента в другом варианте можно использовать параметр renderCustomFileInput.
+    <Separator />В компоненте есть возможность синхронизировать внешний стейт списка файлов с внутренним стейтом
+    нативного инпута через параметр files.
   </Desc>
 );
 
@@ -239,6 +237,7 @@ const FileInputDemoTemplate: ComponentStory<typeof FileInput> = (props) => {
         ref={inputRef}
         onInput={handleChange}
         accept={accept.join(', ')}
+        files={fileList}
       >
         {renderFileList()}
       </FileInput>
@@ -336,6 +335,7 @@ const FileInputWithStatus: ComponentStory<typeof FileInput> = (props) => {
       ref={inputRef}
       onInput={handleChange}
       accept="image/*"
+      files={fileList}
     >
       {renderFileList()}
     </FileInput>
@@ -457,6 +457,7 @@ const FileInputCustomTemplate: ComponentStory<typeof FileInput> = (props) => {
       ref={inputRef}
       onInput={handleChange}
       renderCustomFileInput={renderCustomInput}
+      files={fileList}
     >
       {renderFileList()}
     </FileInput>

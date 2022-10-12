@@ -1,4 +1,4 @@
-import React, { forwardRef, InputHTMLAttributes, useRef } from 'react';
+import React, { forwardRef, InputHTMLAttributes, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { ReactComponent as AttachFileOutline } from '@admiral-ds/icons/build/system/AttachFileOutline.svg';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
@@ -15,6 +15,10 @@ import {
   disabledStyles,
   hoverStyles,
 } from '#src/components/input/FileInput/style';
+
+/** TODO:
+ * переключение по файлам списка (клик на иконку документа, удаление документа из списка)
+ * */
 
 export type FileInputDimension = 'xl' | 'm';
 
@@ -105,6 +109,8 @@ export interface FileInputProps extends Omit<InputHTMLAttributes<HTMLInputElemen
   description?: React.ReactNode;
   /** Функция, возвращающая компонент, на который нужно "повесить" файловый инпут */
   renderCustomFileInput?: (option: RenderFileInputProps) => React.ReactNode;
+  /** Список файлов для синхронизации с нативным инпутом */
+  files?: Array<File>;
 }
 
 export const FileInput = forwardRef<HTMLInputElement, FileInputProps>(
@@ -118,18 +124,28 @@ export const FileInput = forwardRef<HTMLInputElement, FileInputProps>(
       disabled,
       multiple = true,
       children,
+      files,
       ...props
     },
     ref,
   ) => {
-    const customInputRef = useRef<HTMLInputElement>(null);
+    const inputRef = useRef<HTMLInputElement>(null);
 
     const renderTitleText = () => <TitleText dimension={dimension} disabled={disabled} children={title} />;
     const renderDescription = () => <Description disabled={disabled}>{description}</Description>;
 
     const handleQueryUpload = () => {
-      customInputRef.current?.click();
+      inputRef.current?.click();
     };
+
+    useEffect(() => {
+      const inputNode = inputRef.current;
+      if (inputNode && files) {
+        const dt = new DataTransfer();
+        files.forEach((file) => dt.items.add(file));
+        inputNode.files = dt.files;
+      }
+    }, [files]);
 
     return (
       <Wrapper dimension={dimension} width={width}>
@@ -139,7 +155,7 @@ export const FileInput = forwardRef<HTMLInputElement, FileInputProps>(
               {renderCustomFileInput({ onQueryUpload: handleQueryUpload })}
               <CustomInput
                 {...props}
-                ref={refSetter(ref, customInputRef)}
+                ref={refSetter(ref, inputRef)}
                 type="file"
                 multiple={multiple}
                 disabled={disabled}
@@ -153,7 +169,13 @@ export const FileInput = forwardRef<HTMLInputElement, FileInputProps>(
                 <Icon dimension={dimension} />
                 {title && dimension === 'xl' && renderTitleText()}
                 {description && dimension === 'm' && renderDescription()}
-                <StyledInput {...props} ref={ref} type="file" disabled={disabled} multiple={multiple} />
+                <StyledInput
+                  {...props}
+                  ref={refSetter(ref, inputRef)}
+                  type="file"
+                  disabled={disabled}
+                  multiple={multiple}
+                />
               </InputWrapper>
             </>
           )}
