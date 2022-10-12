@@ -266,27 +266,52 @@ export const Slider = ({
     [correctSliderPosition, disabled, onSliderClick, maxValue, minValue, tickMarks, step],
   );
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    const code = keyboardKey.getCode(e);
-    switch (code) {
-      case keyboardKey.ArrowLeft:
-        if (sliderValue - step >= minValue) {
-          correctSliderPosition(sliderValue - step);
-          sliderValue - step !== value && onChange(e, sliderValue - step);
-        }
-        e.preventDefault();
-        break;
-      case keyboardKey.ArrowRight:
-        if (sliderValue + step <= maxValue) {
-          correctSliderPosition(sliderValue + step);
-          sliderValue + step !== value && onChange(e, sliderValue + step);
-        }
-        e.preventDefault();
-        break;
-      default:
-        break;
-    }
-  };
+  // const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+  //   const code = keyboardKey.getCode(e);
+  //   switch (code) {
+  //     case keyboardKey.ArrowLeft:
+  //       if (sliderValue - step >= minValue) {
+  //         correctSliderPosition(sliderValue - step);
+  //         sliderValue - step !== value && onChange(e, sliderValue - step);
+  //       }
+  //       e.preventDefault();
+  //       break;
+  //     case keyboardKey.ArrowRight:
+  //       if (sliderValue + step <= maxValue) {
+  //         correctSliderPosition(sliderValue + step);
+  //         sliderValue + step !== value && onChange(e, sliderValue + step);
+  //       }
+  //       e.preventDefault();
+  //       break;
+  //     default:
+  //       break;
+  //   }
+  // };
+
+  const handleKeyDown = React.useCallback(
+    (e: React.KeyboardEvent<HTMLDivElement>) => {
+      const code = keyboardKey.getCode(e);
+      switch (code) {
+        case keyboardKey.ArrowLeft:
+          if (value - step >= minValue) {
+            correctSliderPosition(value - step);
+            value - step !== value && onChange(e, value - step);
+          }
+          e.preventDefault();
+          break;
+        case keyboardKey.ArrowRight:
+          if (value + step <= maxValue) {
+            correctSliderPosition(value + step);
+            value + step !== value && onChange(e, value + step);
+          }
+          e.preventDefault();
+          break;
+        default:
+          break;
+      }
+    },
+    [value, minValue, maxValue, onChange],
+  );
 
   return (
     <Wrapper data-disabled={disabled} {...props}>
