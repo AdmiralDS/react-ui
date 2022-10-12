@@ -96,8 +96,9 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
     },
     ref,
   ) => {
+    const uncontrolledActiveValue = model.length > 0 ? model[0].id : undefined;
     const [selectedState, setSelectedState] = React.useState<string | undefined>(defaultSelected);
-    const [activeState, setActiveState] = React.useState<string | undefined>();
+    const [activeState, setActiveState] = React.useState<string | undefined>(uncontrolledActiveValue);
 
     const selectedId = selected === undefined ? selectedState : selected;
     const activeId = active === undefined ? activeState : active;

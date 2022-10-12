@@ -7,7 +7,7 @@ import { typography } from '#src/components/Typography';
 import { ReactComponent as CardSolid } from '@admiral-ds/icons/build/finance/CardSolid.svg';
 import { withDesign } from 'storybook-addon-designs';
 import { LIGHT_THEME, Theme } from '#src/components/themes';
-import { CheckboxField, FieldSet } from '#src/components/form';
+import { CheckboxField } from '#src/components/form';
 import { RadioButton } from '#src/components/RadioButton';
 import { TooltipHoc } from '#src/components/TooltipHOC';
 import { TextInput } from '#src/components/input';
@@ -396,9 +396,7 @@ const MenuRadiobuttonTemplate: ComponentStory<typeof Menu> = (args) => {
   return (
     <ThemeProvider theme={swapBorder}>
       <Wrapper style={{ width: 'fit-content' }}>
-        <FieldSet>
-          <Menu {...args} model={model} />
-        </FieldSet>
+        <Menu {...args} model={model} />
       </Wrapper>
     </ThemeProvider>
   );
@@ -477,6 +475,38 @@ const MenuTooltipTemplate: ComponentStory<typeof Menu> = (args) => {
   return (
     <ThemeProvider theme={swapBorder}>
       <Wrapper style={{ width: 'fit-content' }}>
+        <Menu {...args} model={model} />
+      </Wrapper>
+    </ThemeProvider>
+  );
+};
+
+const MultiLineMenuItem = styled(MenuItem)`
+  white-space: pre-wrap;
+`;
+
+const MultiLineMenuTemplate: ComponentStory<typeof Menu> = (args) => {
+  const model = useMemo(() => {
+    return itemsLongText.map((item) => {
+      return {
+        id: item.id,
+        render: (options: RenderOptionProps) => (
+          <MultiLineMenuItem dimension={args.dimension || 's'} {...options} key={item.id}>
+            {item.label}
+          </MultiLineMenuItem>
+        ),
+      };
+    });
+  }, [args.dimension]);
+
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
+    return theme;
+  }
+
+  return (
+    <ThemeProvider theme={swapBorder}>
+      <Wrapper style={{ maxWidth: '200px' }}>
         <Menu {...args} model={model} />
       </Wrapper>
     </ThemeProvider>
@@ -650,6 +680,7 @@ export const CustomItems = CustomItemTemplate.bind({});
 export const MenuCheckbox = MenuCheckboxTemplate.bind({});
 export const MenuRadiobutton = MenuRadiobuttonTemplate.bind({});
 export const MenuTooltip = MenuTooltipTemplate.bind({});
+export const MultiLineMenu = MultiLineMenuTemplate.bind({});
 export const MenuActionsTwoButtons = MenuActionsTwoButtonsTemplate.bind({});
 export const MenuActionsAddUserValue = MenuActionsAddUserValueTemplate.bind({});
 
@@ -659,5 +690,6 @@ CustomItems.storyName = 'Пример с кастомными пунктами �
 MenuCheckbox.storyName = 'Пример с Checkbox';
 MenuRadiobutton.storyName = 'Пример с Radiobutton';
 MenuTooltip.storyName = 'Пример с Tooltip';
+MultiLineMenu.storyName = 'Пример с нмогострочными пунктами';
 MenuActionsTwoButtons.storyName = 'Пример с Actions с двумя кнопками';
 MenuActionsAddUserValue.storyName = 'Пример с Actions и Search';
