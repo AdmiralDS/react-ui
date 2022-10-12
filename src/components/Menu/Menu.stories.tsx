@@ -690,6 +690,6 @@ CustomItems.storyName = 'Пример с кастомными пунктами �
 MenuCheckbox.storyName = 'Пример с Checkbox';
 MenuRadiobutton.storyName = 'Пример с Radiobutton';
 MenuTooltip.storyName = 'Пример с Tooltip';
-MultiLineMenu.storyName = 'Пример с нмогострочными пунктами';
+MultiLineMenu.storyName = 'Пример с многострочными пунктами';
 MenuActionsTwoButtons.storyName = 'Пример с Actions с двумя кнопками';
 MenuActionsAddUserValue.storyName = 'Пример с Actions и Search';
