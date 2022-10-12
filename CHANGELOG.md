@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.0.0](https://github.com/AdmiralDS/react-ui/compare/v2.5.0...v3.0.0) (2022-10-12)
+
+
+### ⚠ BREAKING CHANGES
+
+* **Tooltip, TooltipHoc:** change api for Tooltip and TooltipHoc
+
+### Features
+
+* **FileInput:** add FileInput instead of FileUploader ([d927c41](https://github.com/AdmiralDS/react-ui/commit/d927c416b3e878f6eb470dd4c30c441afaa5cbb0))
+* **FileInput:** add status and extraText props ([f1a1079](https://github.com/AdmiralDS/react-ui/commit/f1a107940cdb4e399ef613b30fdda7034b6641ff))
+* **Menu:** update initial hover position ([df34fd5](https://github.com/AdmiralDS/react-ui/commit/df34fd592b97e6f0b3ef7bbe53c70d50c8fe51ef))
+
+
+### Bug Fixes
+
+* **FileInput:** add synchronization with native input file list ([91626a9](https://github.com/AdmiralDS/react-ui/commit/91626a9ab96e9dea212bb0091055b3c16932d6b0))
+* **FileInput:** fix outline focus ([f325893](https://github.com/AdmiralDS/react-ui/commit/f325893d8a77312469b88a052aff89f73894acde))
+* **Locale:** remove deprecated props instead which locale prop should be used ([3e603a1](https://github.com/AdmiralDS/react-ui/commit/3e603a18b5c058cfb7763f9ad5278a597272444b))
+
+
+* **Tooltip, TooltipHoc:** change api, add opportunity to use controlled and uncontrolled components ([e216a6d](https://github.com/AdmiralDS/react-ui/commit/e216a6d473421aeb7812f1fe4eabfcb4260786f2))
+
 ## [2.5.0](https://github.com/AdmiralDS/react-ui/compare/v2.4.0...v2.5.0) (2022-10-04)
 
 
