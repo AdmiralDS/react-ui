@@ -49,6 +49,17 @@ const TitleText = styled.div<{ dimension?: FileInputDimension; disabled?: boolea
   ${typography['Body/Body 2 Long']};
 `;
 
+const FocusBorder = styled.div`
+  position: absolute;
+  top: -3px;
+  bottom: -3px;
+  left: -3px;
+  right: -3px;
+  pointer-events: none;
+  overflow: visible;
+  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
+`;
+
 const StyledInput = styled.input`
   display: block;
   width: 100%;
@@ -60,6 +71,9 @@ const StyledInput = styled.input`
   bottom: 0;
   opacity: 0;
   cursor: pointer;
+  &:focus:focus-visible ~ ${FocusBorder} {
+    outline: ${(p) => `2px solid ${p.theme.color['Primary/Primary 60 Main']}`};
+  }
 `;
 
 const CustomInput = styled.input`
@@ -79,6 +93,7 @@ const InputWrapper = styled.div<{ disabled?: boolean; dimension: FileInputDimens
   ${(p) => (p.disabled ? disabledStyles : hoverStyles)};
   ${(p) => (p.dimension === 'm' ? dimensionMStyles : dimensionXLStyles)};
   box-sizing: border-box;
+  overflow: visible;
 `;
 
 const Wrapper = styled.div<{ dimension: FileInputDimension; width?: string | number }>`
@@ -94,6 +109,7 @@ const Wrapper = styled.div<{ dimension: FileInputDimension; width?: string | num
 const FileInputWrapper = styled.div`
   position: relative;
   width: 100%;
+  overflow: visible;
 `;
 
 export interface RenderFileInputProps {
@@ -169,6 +185,7 @@ export const FileInput = forwardRef<HTMLInputElement, FileInputProps>(
                 disabled={disabled}
                 tabIndex={-1}
               />
+              <FocusBorder className="focus-block" />
             </>
           ) : (
             <>
@@ -184,6 +201,7 @@ export const FileInput = forwardRef<HTMLInputElement, FileInputProps>(
                   disabled={disabled}
                   multiple={multiple}
                 />
+                <FocusBorder className="focus-block" />
               </InputWrapper>
             </>
           )}
