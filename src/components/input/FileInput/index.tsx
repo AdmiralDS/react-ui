@@ -1,4 +1,4 @@
-import React, { forwardRef, InputHTMLAttributes, useEffect, useRef } from 'react';
+import * as React from 'react';
 import styled from 'styled-components';
 import { ReactComponent as AttachFileOutline } from '@admiral-ds/icons/build/system/AttachFileOutline.svg';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
@@ -116,7 +116,7 @@ export interface RenderFileInputProps {
   onQueryUpload: () => void;
 }
 
-export interface FileInputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'title'> {
+export interface FileInputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'title'> {
   /** Размер компонента */
   dimension: FileInputDimension;
   /** Задает ширину */
@@ -135,7 +135,7 @@ export interface FileInputProps extends Omit<InputHTMLAttributes<HTMLInputElemen
   status?: InputStatus;
 }
 
-export const FileInput = forwardRef<HTMLInputElement, FileInputProps>(
+export const FileInput = React.forwardRef<HTMLInputElement, FileInputProps>(
   (
     {
       dimension = 'xl',
@@ -153,7 +153,7 @@ export const FileInput = forwardRef<HTMLInputElement, FileInputProps>(
     },
     ref,
   ) => {
-    const inputRef = useRef<HTMLInputElement>(null);
+    const inputRef = React.useRef<HTMLInputElement>(null);
 
     const renderTitleText = () => <TitleText dimension={dimension} disabled={disabled} children={title} />;
     const renderDescription = () => <Description disabled={disabled}>{description}</Description>;
@@ -162,7 +162,7 @@ export const FileInput = forwardRef<HTMLInputElement, FileInputProps>(
       inputRef.current?.click();
     };
 
-    useEffect(() => {
+    React.useEffect(() => {
       const inputNode = inputRef.current;
       if (inputNode && files) {
         const dt = new DataTransfer();

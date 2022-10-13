@@ -27,5 +27,5 @@
     ]
   },
   "include": ["./src"],
-  "exclude": ["./scripts"]
+  "exclude": ["./scripts","./src/**/*.stories.tsx"]
 }
