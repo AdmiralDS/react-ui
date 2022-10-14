@@ -70,6 +70,7 @@ export const Thumb = styled.div<{ dimension: SliderProps['dimension']; animation
   transform: translateX(-50%) translateY(-50%);
   border-radius: 50%;
   top: 2px;
+  left: 0;
   transition: ${({ animation }) => (animation ? TRANSITION_ANIMATION : 'none')};
 `;
 

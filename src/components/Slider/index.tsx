@@ -232,15 +232,28 @@ export const Slider = ({
     [onChange, maxValue, minValue, value, tickMarks],
   );
 
-  const onPointClick = (e: any, newValue: number) => {
-    e.preventDefault();
-    e.stopPropagation();
-    if (!disabled) {
-      setAnimation(true);
-      correctSliderPosition(newValue);
-      newValue !== value && onChange(e, newValue);
-    }
-  };
+  // const onPointClick = (e: any, newValue: number) => {
+  //   e.preventDefault();
+  //   e.stopPropagation();
+  //   if (!disabled) {
+  //     setAnimation(true);
+  //     correctSliderPosition(newValue);
+  //     newValue !== value && onChange(e, newValue);
+  //   }
+  // };
+
+  const onPointClick = React.useCallback(
+    (e: any, newValue: number) => {
+      e.preventDefault();
+      e.stopPropagation();
+      if (!disabled) {
+        setAnimation(true);
+        correctSliderPosition(newValue);
+        newValue !== value && onChange(e, newValue);
+      }
+    },
+    [disabled, setAnimation, value],
+  );
 
   const onTrackClick = useCallback(
     (e: any) => {
