@@ -54,14 +54,7 @@ export const Slider = ({
   const tickMarks = Array.isArray(points) ? points : undefined;
   const SLIDER_WIDTH = dimension === 'xl' ? 20 : 16;
 
-  /**
-   * ThumbCircle mousedown/touchstart, Track mousedown/touchstart - setDrag(true)
-   * handleSliderMouseUp - mouseup/touchend/touchcancel - setDrag(false)
-   */
   const [isDraging, setDrag] = useState(false);
-  /**
-   * animation передается в FilledTrack (change width), Thumb (change left)
-   */
   const [animation, setAnimation] = useState(false);
   const [sliderValue, setSliderValue] = useState(value);
 
@@ -74,16 +67,8 @@ export const Slider = ({
   }, [value]);
 
   useEffect(() => {
-    const rangeLeft = trackRef.current?.getBoundingClientRect().left || 0;
-    const sliderPosition =
-      rangeLeft && sliderRef.current
-        ? Math.round(sliderRef.current.getBoundingClientRect().left - rangeLeft + SLIDER_WIDTH / 2)
-        : 0;
-    const calcValue = calcValueByPos(getRangeWidth(), sliderPosition, minValue, maxValue, step);
-
-    // нужно проверить текущее значение пропущенное через calcValue и value, если они равны корректировки быть не должно
-    if (value !== calcValue) correctSliderPosition(value);
-  }, [value, minValue, maxValue, step]);
+    correctSliderPosition(sliderValue);
+  }, [sliderValue, minValue, maxValue]);
 
   const [moveListener, freeResources] = throttle((e: any) => {
     updateSlider(e);
@@ -110,16 +95,14 @@ export const Slider = ({
   const slideValue = useCallback(
     (trackWidth: number, sliderPosition: number, e: any) => {
       const calcValue = calcValueByPos(trackWidth, sliderPosition, minValue, maxValue, step);
-      console.log({ calcValue, value });
       calcValue !== value && onChange(e, calcValue);
-      // setSliderValue(calcValue);
+      setSliderValue(calcValue);
     },
     [maxValue, minValue, onChange, step],
   );
 
   const updateSlider = useCallback(
     (e: any) => {
-      console.log('updateSlider moveListener mousemove');
       setAnimation(false);
       const rangeWidth = getRangeWidth();
       const rangeLeft = trackRef.current?.getBoundingClientRect().left || 0;
@@ -145,7 +128,7 @@ export const Slider = ({
       }
       slideValue(rangeWidth, sliderPosition, e);
     },
-    [slideValue, isDraging, setAnimation, sliderRef.current, filledRef.current],
+    [slideValue, isDraging],
   );
 
   const correctSliderPosition = useCallback(
@@ -163,64 +146,29 @@ export const Slider = ({
         sliderRef.current.style.left = `${sliderCoords}%`;
         filledRef.current.style.width = `${sliderCoords}%`;
       }
-      // return setSliderValue(value);
+      return setSliderValue(value);
     },
     [maxValue, minValue],
   );
 
-  // const onSliderClick = useCallback(
-  //   (e: any) => {
-  //     console.log('slider click');
-  //     if (e.type === 'mousedown') e.preventDefault();
-  //     e.stopPropagation();
-  //     setDrag(true);
-  //     setAnimation(true);
-  //   },
-  //   [updateSlider, setDrag],
-  // );
-
   const onSliderClick = useCallback(
     (e: any) => {
-      console.log('slider click');
       if (e.type === 'mousedown') e.preventDefault();
       e.stopPropagation();
       setDrag(true);
       setAnimation(true);
     },
-    [setAnimation, setDrag],
+    [updateSlider, setDrag],
   );
-
-  // const handleSliderMouseUp = useCallback(
-  //   (e: any) => {
-  //     console.log('handle slider mouseup');
-  //     if (e.type === 'mouseup') e.preventDefault();
-  //     e.stopPropagation();
-  //     setAnimation(true);
-  //     setDrag(false);
-
-  //     const numValue = sliderValue || minValue;
-  //     if (tickMarks) {
-  //       const newValue = correctValueWithRanges(tickMarks, numValue, minValue, maxValue);
-  //       correctSliderPosition(newValue);
-  //       newValue !== value && onChange(e, newValue);
-  //     } else {
-  //       numValue !== value && onChange(e, numValue);
-  //     }
-  //   },
-  //   [onChange, maxValue, minValue, sliderValue, tickMarks],
-  // );
 
   const handleSliderMouseUp = useCallback(
     (e: any) => {
-      console.log('handle slider mouseup');
       if (e.type === 'mouseup') e.preventDefault();
       e.stopPropagation();
       setAnimation(true);
       setDrag(false);
 
-      // const numValue = sliderValue || minValue;
-      const numValue = value || minValue;
-      console.log({ numValue, value });
+      const numValue = sliderValue || minValue;
       if (tickMarks) {
         const newValue = correctValueWithRanges(tickMarks, numValue, minValue, maxValue);
         correctSliderPosition(newValue);
@@ -229,31 +177,18 @@ export const Slider = ({
         numValue !== value && onChange(e, numValue);
       }
     },
-    [onChange, maxValue, minValue, value, tickMarks],
+    [onChange, maxValue, minValue, sliderValue, tickMarks],
   );
 
-  // const onPointClick = (e: any, newValue: number) => {
-  //   e.preventDefault();
-  //   e.stopPropagation();
-  //   if (!disabled) {
-  //     setAnimation(true);
-  //     correctSliderPosition(newValue);
-  //     newValue !== value && onChange(e, newValue);
-  //   }
-  // };
-
-  const onPointClick = React.useCallback(
-    (e: any, newValue: number) => {
-      e.preventDefault();
-      e.stopPropagation();
-      if (!disabled) {
-        setAnimation(true);
-        correctSliderPosition(newValue);
-        newValue !== value && onChange(e, newValue);
-      }
-    },
-    [disabled, setAnimation, value],
-  );
+  const onPointClick = (e: any, newValue: number) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (!disabled) {
+      setAnimation(true);
+      correctSliderPosition(newValue);
+      newValue !== value && onChange(e, newValue);
+    }
+  };
 
   const onTrackClick = useCallback(
     (e: any) => {
@@ -279,52 +214,27 @@ export const Slider = ({
     [correctSliderPosition, disabled, onSliderClick, maxValue, minValue, tickMarks, step],
   );
 
-  // const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
-  //   const code = keyboardKey.getCode(e);
-  //   switch (code) {
-  //     case keyboardKey.ArrowLeft:
-  //       if (sliderValue - step >= minValue) {
-  //         correctSliderPosition(sliderValue - step);
-  //         sliderValue - step !== value && onChange(e, sliderValue - step);
-  //       }
-  //       e.preventDefault();
-  //       break;
-  //     case keyboardKey.ArrowRight:
-  //       if (sliderValue + step <= maxValue) {
-  //         correctSliderPosition(sliderValue + step);
-  //         sliderValue + step !== value && onChange(e, sliderValue + step);
-  //       }
-  //       e.preventDefault();
-  //       break;
-  //     default:
-  //       break;
-  //   }
-  // };
-
-  const handleKeyDown = React.useCallback(
-    (e: React.KeyboardEvent<HTMLDivElement>) => {
-      const code = keyboardKey.getCode(e);
-      switch (code) {
-        case keyboardKey.ArrowLeft:
-          if (value - step >= minValue) {
-            correctSliderPosition(value - step);
-            value - step !== value && onChange(e, value - step);
-          }
-          e.preventDefault();
-          break;
-        case keyboardKey.ArrowRight:
-          if (value + step <= maxValue) {
-            correctSliderPosition(value + step);
-            value + step !== value && onChange(e, value + step);
-          }
-          e.preventDefault();
-          break;
-        default:
-          break;
-      }
-    },
-    [value, minValue, maxValue, onChange],
-  );
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    const code = keyboardKey.getCode(e);
+    switch (code) {
+      case keyboardKey.ArrowLeft:
+        if (sliderValue - step >= minValue) {
+          correctSliderPosition(sliderValue - step);
+          sliderValue - step !== value && onChange(e, sliderValue - step);
+        }
+        e.preventDefault();
+        break;
+      case keyboardKey.ArrowRight:
+        if (sliderValue + step <= maxValue) {
+          correctSliderPosition(sliderValue + step);
+          sliderValue + step !== value && onChange(e, sliderValue + step);
+        }
+        e.preventDefault();
+        break;
+      default:
+        break;
+    }
+  };
 
   return (
     <Wrapper data-disabled={disabled} {...props}>

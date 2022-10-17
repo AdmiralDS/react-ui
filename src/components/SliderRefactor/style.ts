@@ -30,6 +30,7 @@ export const TrackWrapper = styled.div<{ dimension: SliderProps['dimension']; sk
     pointer-events: none;
     cursor: auto;
   }
+
   ${({ skeleton }) => skeleton && skeletonMixin}};
 `;
 
@@ -54,7 +55,7 @@ export const FilledTrack = styled.div<{ animation?: boolean }>`
   }
   position: absolute;
   height: 2px;
-  width: 100%;
+  width: 0%;
   background-color: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
   transition: ${({ animation }) => (animation ? TRANSITION_ANIMATION : 'none')};
 `;
@@ -68,6 +69,7 @@ export const Thumb = styled.div<{ dimension: SliderProps['dimension']; animation
   transform: translateX(-50%) translateY(-50%);
   border-radius: 50%;
   top: 2px;
+  left: 0;
   transition: ${({ animation }) => (animation ? TRANSITION_ANIMATION : 'none')};
 `;
 
@@ -95,6 +97,7 @@ export const ThumbCircle = styled.div<{ dimension: SliderProps['dimension'] }>`
   &:active {
     background: ${({ theme }) => theme.color['Primary/Primary 70']};
   }
+
   [data-disabled='true'] && {
     background: ${({ theme }) => theme.color['Neutral/Neutral 30']};
     pointer-events: none;
