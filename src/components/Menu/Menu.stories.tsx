@@ -756,13 +756,13 @@ type CheckboxNodesMapItem = {
   node: CheckboxGroupItemProps;
 };
 
-const treeToMap = (
+const checkboxTreeToMap = (
   source: Array<CheckboxGroupItemProps>,
   level = 0,
   dependencies?: Array<Array<string>>,
 ): Map<string, CheckboxNodesMapItem> => {
   return source.reduce((acc: Map<string, CheckboxNodesMapItem>, item) => {
-    const key = item.id.toString();
+    const key = item.id;
     const currentNode: CheckboxNodesMapItem = { level, node: item };
     acc.set(key, currentNode);
 
@@ -775,7 +775,7 @@ const treeToMap = (
       currentNode.dependencies = itemDependencies;
       acc.set(key, currentNode);
       allDependencies.push(itemDependencies);
-      const map = treeToMap(item.children, level + 1, allDependencies);
+      const map = checkboxTreeToMap(item.children, level + 1, allDependencies);
       return new Map([...acc, ...map]);
     }
 
@@ -786,7 +786,7 @@ const MenuCheckboxGroupTemplate: ComponentStory<typeof Menu> = (args) => {
   const [internalModel, setInternalModel] = useState<Array<CheckboxGroupItemProps>>([...itemsCheckboxGroup]);
 
   const map = useMemo(() => {
-    return treeToMap(internalModel);
+    return checkboxTreeToMap(internalModel);
   }, [internalModel]);
 
   const setChecked = (id: string, value: boolean) => {
@@ -821,7 +821,7 @@ const MenuCheckboxGroupTemplate: ComponentStory<typeof Menu> = (args) => {
   };
 
   const model = useMemo(() => {
-    const model: ItemProps[] = [];
+    const menuModel: ItemProps[] = [];
     map.forEach((item) => {
       const node = item.node;
       const hasChildren = !!node.children;
@@ -831,7 +831,7 @@ const MenuCheckboxGroupTemplate: ComponentStory<typeof Menu> = (args) => {
       const checked = hasChildren
         ? item.dependencies?.every((depId: string) => map.get(depId)?.node.checked)
         : node.checked;
-      model.push({
+      menuModel.push({
         id: node.id,
         render: (options: RenderOptionProps) => (
           <CheckboxGroupMenuItem dimension={args.dimension || 's'} {...options} level={item.level} key={node.id}>
@@ -849,7 +849,7 @@ const MenuCheckboxGroupTemplate: ComponentStory<typeof Menu> = (args) => {
       });
     });
 
-    return model;
+    return menuModel;
   }, [args.dimension, map]);
 
   function swapBorder(theme: Theme): Theme {
