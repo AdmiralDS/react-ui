@@ -1,4 +1,4 @@
-import React, { ChangeEvent, forwardRef, HTMLAttributes, useContext, useEffect, useMemo, useState } from 'react';
+import React, { ChangeEvent, HTMLAttributes, useContext, useEffect, useMemo, useState } from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { Menu } from '#src/components/Menu';
 import { ItemProps, MenuItem, RenderOptionProps } from '#src/components/Menu/MenuItem';
@@ -369,7 +369,7 @@ const MenuCheckboxTemplate: ComponentStory<typeof Menu> = (args) => {
   return (
     <ThemeProvider theme={swapBorder}>
       <Wrapper style={{ width: 'fit-content' }}>
-        <Menu {...args} model={model} />
+        <Menu {...args} model={model} onSelectItem={(id) => console.log(`Option ${id} selected`)} />
       </Wrapper>
     </ThemeProvider>
   );
@@ -839,7 +839,8 @@ const MenuCheckboxGroupTemplate: ComponentStory<typeof Menu> = (args) => {
               dimension={args.dimension !== 's' ? 'm' : args.dimension}
               checked={checked}
               indeterminate={indeterminate}
-              onChange={() => toggleCheck(node.id)}
+              onChange={(e) => console.log(e.target.value)}
+              onClick={(e) => e.preventDefault()}
             >
               {node.label}
             </CheckboxField>
@@ -852,6 +853,11 @@ const MenuCheckboxGroupTemplate: ComponentStory<typeof Menu> = (args) => {
     return menuModel;
   }, [args.dimension, map]);
 
+  const handleSelectItem = (id: string) => {
+    console.log(`Option ${id} selected`);
+    toggleCheck(id);
+  };
+
   function swapBorder(theme: Theme): Theme {
     theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
@@ -860,7 +866,7 @@ const MenuCheckboxGroupTemplate: ComponentStory<typeof Menu> = (args) => {
   return (
     <ThemeProvider theme={swapBorder}>
       <Wrapper style={{ width: 'fit-content' }}>
-        <Menu {...args} model={model} />
+        <Menu {...args} model={model} onSelectItem={handleSelectItem} />
       </Wrapper>
     </ThemeProvider>
   );
