@@ -69,6 +69,7 @@ export * from './components/GroupActionsPane';
 export * from './components/skeleton/animation';
 export * from './components/common/utils/refSetter';
 export * from './components/TagMenu';
+export * from './components/Range';
 
 export { FontsVTBGroup } from './components/FontsVTBGroup';
 export { DropdownProvider } from './components/DropdownProvider';
