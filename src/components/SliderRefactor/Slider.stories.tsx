@@ -71,11 +71,11 @@ export default {
 } as ComponentMeta<typeof Slider>;
 
 const Template0: ComponentStory<typeof Slider> = (args) => {
-  const [rangeValue, setRangeValue] = React.useState(args.value);
+  const [rangeValue, setRangeValue] = React.useState(6.5);
   const [value, setValue] = React.useState('0');
-  React.useEffect(() => {
-    setRangeValue(args.value);
-  }, [args.value]);
+  // React.useEffect(() => {
+  //   setRangeValue(args.value);
+  // }, [args.value]);
   return (
     <>
       <Slider
@@ -135,6 +135,7 @@ const Template2: ComponentStory<typeof Slider> = () => {
           setRangeValue(value);
         }}
         renderTickMark={(mark: string) => mark + ' ₽'}
+        step="any"
       />
     </>
   );

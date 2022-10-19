@@ -20,7 +20,7 @@ const calcValueByPos = (
   /** Максимальное значение диапазона */
   maxValue: number,
   /** Шаг */
-  step: number,
+  step: number | 'any',
 ) => {
   const onePixelVal = trackWidth ? (maxValue - minValue) / trackWidth : 0;
 
@@ -31,7 +31,7 @@ const calcValueByPos = (
   }
   let calcValue = minValue + sliderValue;
 
-  if (step) {
+  if (step && typeof step === 'number') {
     calcValue = Math.round(calcValue / step) * step;
     if (step.toString().includes('.')) {
       const decimal = step.toString().match(/\.(\d+)/)?.[1].length;
@@ -52,7 +52,7 @@ export const calcValue = (
   trackRef: React.RefObject<HTMLDivElement>,
   minValue: number,
   maxValue: number,
-  step: number,
+  step: number | 'any',
   tickMarks?: number[],
 ) => {
   const trackLeft = trackRef.current?.getBoundingClientRect().left || 0;

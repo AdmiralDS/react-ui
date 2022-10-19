@@ -15,8 +15,10 @@ export interface SliderProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 
   minValue?: number;
   /** Максимальное значение */
   maxValue?: number;
-  /** Шаг слайдера */
-  step?: number;
+  /** Шаг слайдера. Это либо строка any, либо положительное число, по умолчанию 1.
+   * Если этот параметр не установлен в any, компонент принимает только кратные step значения, превышающие minValue
+   */
+  step?: number | 'any';
   /** разделитель между целым и десятичным */
   decimal?: string;
   /** точность (количество знаков после точки). Если precision равно 0, то точку ввести нельзя, только целые числа */
@@ -46,13 +48,13 @@ export const Slider = ({
   renderTickMark,
   tickMarks: points,
   disabled = false,
-  step = 1,
+  step: userStep = 1,
   dimension = 'xl',
   skeleton = false,
   ...props
 }: SliderProps) => {
   const tickMarks = Array.isArray(points) ? points : undefined;
-  const SLIDER_WIDTH = dimension === 'xl' ? 20 : 16;
+  const step = userStep > 0 ? userStep : 1;
 
   const [isDraging, setDrag] = React.useState(false);
   const [animation, setAnimation] = React.useState(false);
@@ -77,7 +79,17 @@ export const Slider = ({
       }
     }
 
-    correctSliderPosition(value);
+    let newValue = value;
+    if (step && step !== 'any') {
+      newValue = Math.round(newValue / step) * step;
+      if (step.toString().includes('.')) {
+        const decimal = step.toString().match(/\.(\d+)/)?.[1].length;
+        newValue = +newValue.toFixed(decimal);
+      }
+    }
+    // correctSliderPosition(value);
+    console.log({ value, newValue });
+    correctSliderPosition(newValue);
   }, [value, minValue, maxValue, rangeWidth, sliderRef.current, filledRef.current]);
 
   React.useLayoutEffect(() => {
@@ -177,14 +189,14 @@ export const Slider = ({
       switch (code) {
         case keyboardKey.ArrowLeft:
           setAnimation(true);
-          if (value - step >= minValue) {
+          if (step !== 'any' && value - step >= minValue) {
             value - step !== value && onChange(e, value - step);
           }
           e.preventDefault();
           break;
         case keyboardKey.ArrowRight:
           setAnimation(true);
-          if (value + step <= maxValue) {
+          if (step !== 'any' && value + step <= maxValue) {
             value + step !== value && onChange(e, value + step);
           }
           e.preventDefault();
