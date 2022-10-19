@@ -143,9 +143,15 @@ const SimpleTemplate: ComponentStory<typeof DropMenu> = (args) => {
           dimension={args.dimension}
           disabled={args.disabled}
           selected={selected}
-          renderContentProp={({ buttonRef, handleKeyDown, handleClick, statusIcon }) => {
+          renderContentProp={({ buttonRef, handleKeyDown, handleClick, statusIcon, disabled }) => {
             return (
-              <Button ref={buttonRef as React.Ref<HTMLButtonElement>} onKeyDown={handleKeyDown} onClick={handleClick}>
+              <Button
+                ref={buttonRef as React.Ref<HTMLButtonElement>}
+                loading={args.loading}
+                disabled={disabled}
+                onKeyDown={handleKeyDown}
+                onClick={handleClick}
+              >
                 Нажми
                 {statusIcon}
               </Button>
@@ -273,9 +279,15 @@ const TemplateWithCards: ComponentStory<typeof DropMenu> = (args) => {
           onSelectItem={setSelected}
           active={active}
           onActivateItem={setActive}
-          renderContentProp={({ buttonRef, handleKeyDown, handleClick, statusIcon }) => {
+          renderContentProp={({ buttonRef, handleKeyDown, handleClick, statusIcon, disabled }) => {
             return (
-              <Button ref={buttonRef as React.Ref<HTMLButtonElement>} onKeyDown={handleKeyDown} onClick={handleClick}>
+              <Button
+                ref={buttonRef as React.Ref<HTMLButtonElement>}
+                loading={args.loading}
+                disabled={disabled}
+                onKeyDown={handleKeyDown}
+                onClick={handleClick}
+              >
                 Нажми
                 {statusIcon}
               </Button>
@@ -367,9 +379,15 @@ const DropMenuTooltipTemplate: ComponentStory<typeof DropMenu> = (args) => {
         dimension={args.dimension}
         disabled={args.disabled}
         selected={selected}
-        renderContentProp={({ buttonRef, handleKeyDown, handleClick, statusIcon }) => {
+        renderContentProp={({ buttonRef, handleKeyDown, handleClick, statusIcon, disabled }) => {
           return (
-            <Button ref={buttonRef as React.Ref<HTMLButtonElement>} onKeyDown={handleKeyDown} onClick={handleClick}>
+            <Button
+              ref={buttonRef as React.Ref<HTMLButtonElement>}
+              loading={args.loading}
+              disabled={disabled}
+              onKeyDown={handleKeyDown}
+              onClick={handleClick}
+            >
               Нажми
               {statusIcon}
             </Button>
@@ -422,9 +440,15 @@ const TemplateWithCheckbox: ComponentStory<typeof DropMenu> = (args) => {
         dimension={args.dimension}
         disabled={args.disabled}
         selected={selected}
-        renderContentProp={({ buttonRef, handleKeyDown, handleClick, statusIcon }) => {
+        renderContentProp={({ buttonRef, handleKeyDown, handleClick, statusIcon, disabled }) => {
           return (
-            <Button ref={buttonRef as React.Ref<HTMLButtonElement>} onKeyDown={handleKeyDown} onClick={handleClick}>
+            <Button
+              ref={buttonRef as React.Ref<HTMLButtonElement>}
+              loading={args.loading}
+              disabled={disabled}
+              onKeyDown={handleKeyDown}
+              onClick={handleClick}
+            >
               Нажми
               {statusIcon}
             </Button>
@@ -477,9 +501,15 @@ const TemplateWithRadiobutton: ComponentStory<typeof DropMenu> = (args) => {
         dimension={args.dimension}
         disabled={args.disabled}
         selected={selected}
-        renderContentProp={({ buttonRef, handleKeyDown, handleClick, statusIcon }) => {
+        renderContentProp={({ buttonRef, handleKeyDown, handleClick, statusIcon, disabled }) => {
           return (
-            <Button ref={buttonRef as React.Ref<HTMLButtonElement>} onKeyDown={handleKeyDown} onClick={handleClick}>
+            <Button
+              ref={buttonRef as React.Ref<HTMLButtonElement>}
+              loading={args.loading}
+              disabled={disabled}
+              onKeyDown={handleKeyDown}
+              onClick={handleClick}
+            >
               Нажми
               {statusIcon}
             </Button>
