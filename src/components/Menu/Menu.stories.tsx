@@ -18,7 +18,12 @@ import { ReactComponent as PlusOutline } from '@admiral-ds/icons/build/service/P
 import { uid } from '#src/components/common/uid';
 import { keyboardKey } from '#src/components/common/keyboardKey';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
-import { ItemDimension } from '#src/components/Menu/menuItemMixins';
+import {
+  CheckboxGroupItemProps,
+  CheckboxNodesMapItem,
+  checkboxTreeToMap,
+  MenuItemWithCheckbox,
+} from '#src/components/Menu/MenuItemWithCheckbox';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -675,22 +680,6 @@ const MenuActionsAddUserValueTemplate: ComponentStory<typeof Menu> = (props) => 
   );
 };
 
-const paddingLeft = css<{ level?: number; dimension?: ItemDimension }>`
-  padding-left: ${({ dimension, level }) => {
-    switch (dimension) {
-      case 's':
-        return 12 + 28 * (level ? level : 0);
-      case 'm':
-      case 'l':
-      default:
-        return 16 + 32 * (level ? level : 0);
-    }
-  }}px;
-`;
-const CheckboxGroupMenuItem = styled(MenuItem)<{ level?: number; dimension?: ItemDimension }>`
-  ${paddingLeft}
-`;
-
 const itemsCheckboxGroup: Array<CheckboxGroupItemProps> = [
   {
     id: '1',
@@ -742,48 +731,10 @@ const itemsCheckboxGroup: Array<CheckboxGroupItemProps> = [
     checked: false,
   },
 ];
-interface CheckboxGroupItemProps {
-  id: string;
-  label: React.ReactNode;
-  checked: boolean;
-  disabled?: boolean;
-  children?: Array<CheckboxGroupItemProps>;
-}
 
-type CheckboxNodesMapItem = {
-  dependencies?: Array<string>;
-  level: number;
-  node: CheckboxGroupItemProps;
-};
-
-const checkboxTreeToMap = (
-  source: Array<CheckboxGroupItemProps>,
-  level = 0,
-  dependencies?: Array<Array<string>>,
-): Map<string, CheckboxNodesMapItem> => {
-  return source.reduce((acc: Map<string, CheckboxNodesMapItem>, item) => {
-    const key = item.id;
-    const currentNode: CheckboxNodesMapItem = { level, node: item };
-    acc.set(key, currentNode);
-
-    if (dependencies) {
-      dependencies.forEach((dependency) => dependency.push(key));
-    }
-    if (item.children) {
-      const allDependencies = dependencies ? [...dependencies] : [];
-      const itemDependencies: Array<string> = [];
-      currentNode.dependencies = itemDependencies;
-      acc.set(key, currentNode);
-      allDependencies.push(itemDependencies);
-      const map = checkboxTreeToMap(item.children, level + 1, allDependencies);
-      return new Map([...acc, ...map]);
-    }
-
-    return acc;
-  }, new Map<string, CheckboxNodesMapItem>());
-};
 const MenuCheckboxGroupTemplate: ComponentStory<typeof Menu> = (args) => {
   const [internalModel, setInternalModel] = useState<Array<CheckboxGroupItemProps>>([...itemsCheckboxGroup]);
+  const [activeOption, setActiveOption] = useState<string | undefined>();
 
   const map = useMemo(() => {
     return checkboxTreeToMap(internalModel);
@@ -834,28 +785,35 @@ const MenuCheckboxGroupTemplate: ComponentStory<typeof Menu> = (args) => {
       menuModel.push({
         id: node.id,
         render: (options: RenderOptionProps) => (
-          <CheckboxGroupMenuItem dimension={args.dimension || 's'} {...options} level={item.level} key={node.id}>
-            <CheckboxField
-              dimension={args.dimension !== 's' ? 'm' : args.dimension}
-              checked={checked}
-              indeterminate={indeterminate}
-              onChange={(e) => console.log(e.target.value)}
-              onClick={(e) => e.preventDefault()}
-            >
-              {node.label}
-            </CheckboxField>
-          </CheckboxGroupMenuItem>
+          <MenuItemWithCheckbox
+            key={node.id}
+            id={node.id}
+            dimension={args.dimension}
+            disabled={node.disabled}
+            checked={checked}
+            indeterminate={indeterminate}
+            checkboxIsHovered={node.id === activeOption}
+            level={item.level}
+            {...options}
+          >
+            {node.label}
+          </MenuItemWithCheckbox>
         ),
         disabled: node.disabled,
       });
     });
 
     return menuModel;
-  }, [args.dimension, map]);
+  }, [args.dimension, map, activeOption]);
 
   const handleSelectItem = (id: string) => {
     console.log(`Option ${id} selected`);
     toggleCheck(id);
+  };
+
+  const handleActivateItem = (id: string | undefined) => {
+    console.log(`hovered option ${id}`);
+    setActiveOption(id);
   };
 
   function swapBorder(theme: Theme): Theme {
@@ -866,7 +824,13 @@ const MenuCheckboxGroupTemplate: ComponentStory<typeof Menu> = (args) => {
   return (
     <ThemeProvider theme={swapBorder}>
       <Wrapper style={{ width: 'fit-content' }}>
-        <Menu {...args} model={model} onSelectItem={handleSelectItem} />
+        <Menu
+          {...args}
+          model={model}
+          onSelectItem={handleSelectItem}
+          active={activeOption}
+          onActivateItem={handleActivateItem}
+        />
       </Wrapper>
     </ThemeProvider>
   );
