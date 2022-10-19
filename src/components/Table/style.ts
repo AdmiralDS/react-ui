@@ -206,37 +206,35 @@ export const GroupTextContent = styled.div`
 // padding-bottom меньше padding-top на 1px, т.к. 1px остается для border-bottom ячейки
 export const CheckboxCell = styled(Cell)<{ dimension: TableProps['dimension'] }>`
   width: unset;
-  overflow: visible;
   padding: ${({ dimension }) => {
     switch (dimension) {
       case 's':
-        return '8px 2px 7px 14px';
+        return '8px 14px 7px 14px';
       case 'l':
-        return '14px 2px 13px 18px';
+        return '14px 18px 13px 18px';
       case 'xl':
-        return '18px 2px 17px 18px';
+        return '18px 18px 17px 18px';
       case 'm':
       default:
-        return '12px 2px 11px 14px';
+        return '12px 14px 11px 14px';
     }
   }};
 `;
 
 // padding-bottom меньше padding-top на 1px, т.к. 1px остается для border-bottom ячейки
 export const ExpandCell = styled(Cell)<{ dimension: TableProps['dimension'] }>`
-  overflow: visible;
-  width: ${({ dimension }) => (dimension === 's' || dimension === 'm' ? 32 : 40)}px;
+  width: ${({ dimension }) => (dimension === 's' || dimension === 'm' ? 44 : 56)}px;
   padding: ${({ dimension }) => {
     switch (dimension) {
       case 's':
-        return '6px 0px 5px 12px';
+        return '6px 12px 5px 12px';
       case 'l':
-        return '12px 0px 11px 16px';
+        return '12px 16px 11px 16px';
       case 'xl':
-        return '16px 0px 15px 16px';
+        return '16px 16px 15px 16px';
       case 'm':
       default:
-        return '10px 0px 9px 12px';
+        return '10px 12px 9px 12px';
     }
   }};
 `;
