@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { Slider as SliderComponent } from '#src/components/SliderRefactor';
+import { Slider as SliderComponent } from '#src/components/Slider';
 import { TextInputProps } from '#src/components/input/TextInput';
 
 import { NumberInput } from '#src/components/input/NumberInput';
