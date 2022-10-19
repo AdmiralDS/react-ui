@@ -20,7 +20,6 @@ import { keyboardKey } from '#src/components/common/keyboardKey';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 import {
   CheckboxGroupItemProps,
-  CheckboxNodesMapItem,
   checkboxTreeToMap,
   MenuItemWithCheckbox,
 } from '#src/components/Menu/MenuItemWithCheckbox';
@@ -812,7 +811,6 @@ const MenuCheckboxGroupTemplate: ComponentStory<typeof Menu> = (args) => {
   };
 
   const handleActivateItem = (id: string | undefined) => {
-    console.log(`hovered option ${id}`);
     setActiveOption(id);
   };
 
