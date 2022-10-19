@@ -33,6 +33,10 @@ const calcValueByPos = (
 
   if (step) {
     calcValue = Math.round(calcValue / step) * step;
+    if (step.toString().includes('.')) {
+      const decimal = step.toString().match(/\.(\d+)/)?.[1].length;
+      calcValue = +calcValue.toFixed(decimal);
+    }
   }
   if (minValue + sliderValue === minValue && calcValue !== minValue) {
     return minValue;
@@ -50,7 +54,6 @@ export const calcValue = (
   maxValue: number,
   step: number,
   tickMarks?: number[],
-  sliderWidth: number = 0,
 ) => {
   const trackLeft = trackRef.current?.getBoundingClientRect().left || 0;
   const trackWidth = trackRef.current?.getBoundingClientRect().width || 0;
@@ -63,8 +66,7 @@ export const calcValue = (
     cursorPosition = trackLeft + trackWidth;
   }
 
-  // Math.round ??
-  const sliderPosition = cursorPosition - trackLeft + sliderWidth;
+  const sliderPosition = Math.round(cursorPosition - trackLeft);
 
   let newValue = calcValueByPos(trackWidth, sliderPosition, minValue, maxValue, step);
   if (tickMarks) {

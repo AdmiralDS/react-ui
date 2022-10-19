@@ -85,8 +85,8 @@ const Template0: ComponentStory<typeof Slider> = (args) => {
           console.log({ event: e.type, value });
           setRangeValue(value);
         }}
-        // step={1}
       />
+      <div style={{ display: 'flex', width: '100%', height: '60px' }} />
       <input
         style={{ width: '100%' }}
         type="range"
@@ -99,7 +99,7 @@ const Template0: ComponentStory<typeof Slider> = (args) => {
           console.log(e.currentTarget.value);
           setValue(e.currentTarget.value);
         }}
-        // step={0.1}
+        step={1}
       />
     </>
   );

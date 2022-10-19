@@ -46,7 +46,7 @@ export const Slider = ({
   renderTickMark,
   tickMarks: points,
   disabled = false,
-  step = 0.1,
+  step = 1,
   dimension = 'xl',
   skeleton = false,
   ...props
@@ -64,7 +64,6 @@ export const Slider = ({
 
   React.useLayoutEffect(() => {
     function correctSliderPosition(value: number) {
-      console.log(animation);
       const onePxValue = rangeWidth ? rangeWidth / (maxValue - minValue) : 0;
       const correctValue = value >= 0 ? value - minValue : -minValue + value;
       let calcPercents: number = ((onePxValue * correctValue) / rangeWidth) * 100;
@@ -96,12 +95,12 @@ export const Slider = ({
   const updateSlider = React.useCallback(
     (e: any) => {
       setAnimation(false);
-      const newValue = calcValue(e, trackRef, minValue, maxValue, step, undefined, SLIDER_WIDTH / 2);
+      const newValue = calcValue(e, trackRef, minValue, maxValue, step, undefined);
       if (newValue !== value) {
         onChange(e, newValue);
       }
     },
-    [setAnimation, value, trackRef.current, minValue, maxValue, step, dimension],
+    [setAnimation, value, trackRef.current, minValue, maxValue, step, points, dimension],
   );
 
   const [moveListener, freeResources] = throttle(updateSlider, 50);
@@ -109,18 +108,18 @@ export const Slider = ({
   React.useEffect(() => {
     if (isDraging && !disabled) {
       document.addEventListener('mousemove', moveListener);
-      document.addEventListener('mouseup', handleSliderMouseUp);
+      document.addEventListener('mouseup', handleMouseUp);
       document.addEventListener('touchmove', moveListener);
-      document.addEventListener('touchend', handleSliderMouseUp);
-      document.addEventListener('touchcancel', handleSliderMouseUp);
+      document.addEventListener('touchend', handleMouseUp);
+      document.addEventListener('touchcancel', handleMouseUp);
     }
     return () => {
       freeResources();
       document.removeEventListener('mousemove', moveListener);
-      document.removeEventListener('mouseup', handleSliderMouseUp);
+      document.removeEventListener('mouseup', handleMouseUp);
       document.removeEventListener('touchmove', moveListener);
-      document.removeEventListener('touchend', handleSliderMouseUp);
-      document.removeEventListener('touchcancel', handleSliderMouseUp);
+      document.removeEventListener('touchend', handleMouseUp);
+      document.removeEventListener('touchcancel', handleMouseUp);
     };
   });
 
@@ -134,44 +133,42 @@ export const Slider = ({
     [setAnimation, setDrag],
   );
 
-  const handleSliderMouseUp = React.useCallback(
-    (e: any) => {
-      if (e.type === 'mouseup') e.preventDefault();
-      e.stopPropagation();
-      setAnimation(true);
-      setDrag(false);
-
-      const newValue = calcValue(e, trackRef, minValue, maxValue, step, tickMarks, SLIDER_WIDTH / 2);
-      if (newValue !== value) {
-        onChange(e, newValue);
-      }
-    },
-    [setAnimation, setDrag, trackRef.current, minValue, maxValue, step, points, dimension, value, onChange],
-  );
-
   const onPointClick = React.useCallback(
     (e: any, newValue: number) => {
       e.preventDefault();
       e.stopPropagation();
-      if (!disabled) {
-        setAnimation(true);
-        newValue !== value && onChange(e, newValue);
+      setAnimation(true);
+      if (newValue !== value) {
+        onChange(e, newValue);
       }
     },
-    [disabled, setAnimation, value],
+    [setAnimation, value],
   );
 
   const onTrackClick = React.useCallback(
     (e: any) => {
-      if (!disabled) {
-        if (e.type === 'mousedown') e.preventDefault();
-        setAnimation(true);
-
-        const newValue = calcValue(e, trackRef, minValue, maxValue, step, tickMarks);
-        if (newValue !== value) onChange(e, newValue);
+      if (e.type === 'mousedown') e.preventDefault();
+      setAnimation(true);
+      const newValue = calcValue(e, trackRef, minValue, maxValue, step, tickMarks);
+      if (newValue !== value) {
+        onChange(e, newValue);
       }
     },
-    [disabled, onSliderClick, maxValue, minValue, tickMarks, step],
+    [setAnimation, value, trackRef.current, minValue, maxValue, step, points, dimension],
+  );
+
+  const handleMouseUp = React.useCallback(
+    (e: any) => {
+      if (e.type === 'mouseup') e.preventDefault();
+      e.stopPropagation();
+      setDrag(false);
+      setAnimation(true);
+      const newValue = calcValue(e, trackRef, minValue, maxValue, step, tickMarks);
+      if (newValue !== value) {
+        onChange(e, newValue);
+      }
+    },
+    [setAnimation, setDrag, value, trackRef.current, minValue, maxValue, step, points, dimension],
   );
 
   const handleKeyDown = React.useCallback(
