@@ -16,14 +16,14 @@ export interface SliderProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 
   /** Максимальное значение */
   maxValue?: number;
   /** Шаг слайдера. Это либо строка any, либо положительное число, по умолчанию 1.
-   * Если этот параметр не установлен в any, компонент принимает только кратные step значения, превышающие minValue
+   * Если этот параметр не установлен в any, компонент принимает только кратные step значения, , в диапазоне minValue - maxValue
    */
   step?: number | 'any';
-  /** разделитель между целым и десятичным */
+  /** Символ разделителя между целым и десятичным числом, используется при форматировании надписей к отметкам слайдера */
   decimal?: string;
-  /** точность (количество знаков после точки). Если precision равно 0, то точку ввести нельзя, только целые числа */
+  /** Точность (количество знаков в десятичной части числа), используется при форматировании надписей к отметкам слайдера */
   precision?: number;
-  /** разделитель между тысячами */
+  /** Символ разделителя между тысячами, используется при форматировании надписей к отметкам слайдера */
   thousand?: string;
   /** Массив отметок */
   tickMarks?: number[];
@@ -80,6 +80,15 @@ export const Slider = ({
     }
 
     let newValue = value;
+    // value должно быть больше или равно minValue
+    if (newValue < minValue) {
+      newValue = minValue;
+    }
+    // value должно быть меньше или равно maxValue
+    if (newValue > maxValue) {
+      newValue = maxValue;
+    }
+    // value должно быть кратно step
     if (step && step !== 'any') {
       newValue = Math.round(newValue / step) * step;
       if (step.toString().includes('.')) {
@@ -87,10 +96,9 @@ export const Slider = ({
         newValue = +newValue.toFixed(decimal);
       }
     }
-    // correctSliderPosition(value);
-    console.log({ value, newValue });
+
     correctSliderPosition(newValue);
-  }, [value, minValue, maxValue, rangeWidth, sliderRef.current, filledRef.current]);
+  }, [value, minValue, maxValue, step, rangeWidth, sliderRef.current, filledRef.current]);
 
   React.useLayoutEffect(() => {
     if (trackRef.current) {
@@ -112,24 +120,24 @@ export const Slider = ({
         onChange(e, newValue);
       }
     },
-    [setAnimation, value, trackRef.current, minValue, maxValue, step, points, dimension],
+    [setAnimation, value, trackRef.current, minValue, maxValue, step],
   );
 
-  const [moveListener, freeResources] = throttle(updateSlider, 50);
+  const [handleMouseMove, freeResources] = throttle(updateSlider, 50);
 
   React.useEffect(() => {
     if (isDraging && !disabled) {
-      document.addEventListener('mousemove', moveListener);
+      document.addEventListener('mousemove', handleMouseMove);
       document.addEventListener('mouseup', handleMouseUp);
-      document.addEventListener('touchmove', moveListener);
+      document.addEventListener('touchmove', handleMouseMove);
       document.addEventListener('touchend', handleMouseUp);
       document.addEventListener('touchcancel', handleMouseUp);
     }
     return () => {
       freeResources();
-      document.removeEventListener('mousemove', moveListener);
+      document.removeEventListener('mousemove', handleMouseMove);
       document.removeEventListener('mouseup', handleMouseUp);
-      document.removeEventListener('touchmove', moveListener);
+      document.removeEventListener('touchmove', handleMouseMove);
       document.removeEventListener('touchend', handleMouseUp);
       document.removeEventListener('touchcancel', handleMouseUp);
     };
@@ -161,12 +169,13 @@ export const Slider = ({
     (e: any) => {
       if (e.type === 'mousedown') e.preventDefault();
       setAnimation(true);
+      if (!tickMarks) setDrag(true);
       const newValue = calcValue(e, trackRef, minValue, maxValue, step, tickMarks);
       if (newValue !== value) {
         onChange(e, newValue);
       }
     },
-    [setAnimation, value, trackRef.current, minValue, maxValue, step, points, dimension],
+    [setAnimation, setDrag, value, trackRef.current, minValue, maxValue, step, points],
   );
 
   const handleMouseUp = React.useCallback(
@@ -180,7 +189,7 @@ export const Slider = ({
         onChange(e, newValue);
       }
     },
-    [setAnimation, setDrag, value, trackRef.current, minValue, maxValue, step, points, dimension],
+    [setAnimation, setDrag, value, trackRef.current, minValue, maxValue, step, points],
   );
 
   const handleKeyDown = React.useCallback(
@@ -205,7 +214,7 @@ export const Slider = ({
           break;
       }
     },
-    [value, step, minValue, maxValue, onChange],
+    [setAnimation, value, step, minValue, maxValue],
   );
 
   return (
