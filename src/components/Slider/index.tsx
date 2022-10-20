@@ -1,12 +1,12 @@
-import React, { HTMLAttributes, MutableRefObject, useCallback, useEffect, useRef, useState } from 'react';
+import * as React from 'react';
 import { keyboardKey } from '#src/components/common/keyboardKey';
 import { throttle } from '#src/components/common/utils/throttle';
 
-import { calcValueByPos, correctValueWithRanges } from './utils';
+import { calcValue } from './utils';
 import { DefaultTrack, FilledTrack, Thumb, ThumbCircle, Track, TrackWrapper, Wrapper } from './style';
 import { TickMarks } from './TickMarks';
 
-export interface SliderProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> {
+export interface SliderProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'> {
   /** Значение компонента */
   value: number;
   /** Коллбек на изменение состояния */
@@ -15,13 +15,15 @@ export interface SliderProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onCha
   minValue?: number;
   /** Максимальное значение */
   maxValue?: number;
-  /** Шаг слайдера */
-  step?: number;
-  /** разделитель между целым и десятичным */
+  /** Шаг слайдера. Это либо строка any, либо положительное число, по умолчанию 1.
+   * Если этот параметр не установлен в any, компонент принимает только кратные step значения, , в диапазоне minValue - maxValue
+   */
+  step?: number | 'any';
+  /** Символ разделителя между целым и десятичным числом, используется при форматировании надписей к отметкам слайдера */
   decimal?: string;
-  /** точность (количество знаков после точки). Если precision равно 0, то точку ввести нельзя, только целые числа */
+  /** Точность (количество знаков в десятичной части числа), используется при форматировании надписей к отметкам слайдера */
   precision?: number;
-  /** разделитель между тысячами */
+  /** Символ разделителя между тысячами, используется при форматировании надписей к отметкам слайдера */
   thousand?: string;
   /** Массив отметок */
   tickMarks?: number[];
@@ -46,95 +48,24 @@ export const Slider = ({
   renderTickMark,
   tickMarks: points,
   disabled = false,
-  step = 1,
+  step: userStep = 1,
   dimension = 'xl',
   skeleton = false,
   ...props
 }: SliderProps) => {
   const tickMarks = Array.isArray(points) ? points : undefined;
-  const SLIDER_WIDTH = dimension === 'xl' ? 20 : 16;
+  const step = userStep > 0 ? userStep : 1;
 
-  const [isDraging, setDrag] = useState(false);
-  const [animation, setAnimation] = useState(false);
-  const [sliderValue, setSliderValue] = useState(value);
+  const [isDraging, setDrag] = React.useState(false);
+  const [animation, setAnimation] = React.useState(false);
+  const [rangeWidth, setRangeWidth] = React.useState(0);
 
-  const filledRef: MutableRefObject<HTMLDivElement | null> = useRef(null);
-  const trackRef: MutableRefObject<HTMLDivElement | null> = useRef(null);
-  const sliderRef: MutableRefObject<HTMLDivElement | null> = useRef(null);
+  const filledRef = React.useRef<HTMLDivElement | null>(null);
+  const trackRef = React.useRef<HTMLDivElement | null>(null);
+  const sliderRef = React.useRef<HTMLDivElement | null>(null);
 
-  useEffect(() => {
-    setSliderValue(value);
-  }, [value]);
-
-  useEffect(() => {
-    correctSliderPosition(sliderValue);
-  }, [sliderValue, minValue, maxValue]);
-
-  const [moveListener, freeResources] = throttle((e: any) => {
-    updateSlider(e);
-  }, 50);
-
-  useEffect(() => {
-    if (isDraging && !disabled) {
-      document.addEventListener('mousemove', moveListener);
-      document.addEventListener('mouseup', handleSliderMouseUp);
-      document.addEventListener('touchmove', moveListener);
-      document.addEventListener('touchend', handleSliderMouseUp);
-      document.addEventListener('touchcancel', handleSliderMouseUp);
-    }
-    return () => {
-      freeResources();
-      document.removeEventListener('mousemove', moveListener);
-      document.removeEventListener('mouseup', handleSliderMouseUp);
-      document.removeEventListener('touchmove', moveListener);
-      document.removeEventListener('touchend', handleSliderMouseUp);
-      document.removeEventListener('touchcancel', handleSliderMouseUp);
-    };
-  });
-  const getRangeWidth = () => trackRef.current?.offsetWidth || 0;
-  const slideValue = useCallback(
-    (trackWidth: number, sliderPosition: number, e: any) => {
-      const calcValue = calcValueByPos(trackWidth, sliderPosition, minValue, maxValue, step);
-      calcValue !== value && onChange(e, calcValue);
-      setSliderValue(calcValue);
-    },
-    [maxValue, minValue, onChange, step],
-  );
-
-  const updateSlider = useCallback(
-    (e: any) => {
-      setAnimation(false);
-      const rangeWidth = getRangeWidth();
-      const rangeLeft = trackRef.current?.getBoundingClientRect().left || 0;
-      const sliderPosition =
-        rangeLeft && sliderRef.current
-          ? Math.round(sliderRef.current.getBoundingClientRect().left - rangeLeft + SLIDER_WIDTH / 2)
-          : 0;
-      if (isDraging && rangeLeft) {
-        let cursorPosition = e.changedTouches ? e.changedTouches[0].pageX : e.pageX;
-        if (cursorPosition <= rangeLeft) {
-          cursorPosition = rangeLeft;
-        }
-        if (cursorPosition >= rangeLeft + rangeWidth) {
-          cursorPosition = rangeLeft + rangeWidth;
-        }
-
-        const getStyle = (cursorPosition: number, rangeLeft: number, rangeWidth: number) =>
-          `${((cursorPosition - rangeLeft) / rangeWidth) * 100}%`;
-        if (sliderRef.current && filledRef.current) {
-          sliderRef.current.style.left = getStyle(cursorPosition, rangeLeft, rangeWidth);
-          filledRef.current.style.width = getStyle(cursorPosition, rangeLeft, rangeWidth);
-        }
-      }
-      slideValue(rangeWidth, sliderPosition, e);
-    },
-    [slideValue, isDraging],
-  );
-
-  const correctSliderPosition = useCallback(
-    (value: number) => {
-      const rangeWidth = getRangeWidth();
-
+  React.useLayoutEffect(() => {
+    function correctSliderPosition(value: number) {
       const onePxValue = rangeWidth ? rangeWidth / (maxValue - minValue) : 0;
       const correctValue = value >= 0 ? value - minValue : -minValue + value;
       let calcPercents: number = ((onePxValue * correctValue) / rangeWidth) * 100;
@@ -146,95 +77,145 @@ export const Slider = ({
         sliderRef.current.style.left = `${sliderCoords}%`;
         filledRef.current.style.width = `${sliderCoords}%`;
       }
-      return setSliderValue(value);
+    }
+
+    let newValue = value;
+    // value должно быть больше или равно minValue
+    if (newValue < minValue) {
+      newValue = minValue;
+    }
+    // value должно быть меньше или равно maxValue
+    if (newValue > maxValue) {
+      newValue = maxValue;
+    }
+    // value должно быть кратно step
+    if (step && step !== 'any') {
+      newValue = Math.round(newValue / step) * step;
+      if (step.toString().includes('.')) {
+        const decimal = step.toString().match(/\.(\d+)/)?.[1].length;
+        newValue = +newValue.toFixed(decimal);
+      }
+    }
+
+    correctSliderPosition(newValue);
+  }, [value, minValue, maxValue, step, rangeWidth, sliderRef.current, filledRef.current]);
+
+  React.useLayoutEffect(() => {
+    if (trackRef.current) {
+      const resizeObserver = new ResizeObserver((entries) => {
+        entries.forEach((entry) => setRangeWidth(entry.contentRect.width || 0));
+      });
+      resizeObserver.observe(trackRef.current);
+      return () => {
+        resizeObserver.disconnect();
+      };
+    }
+  }, [trackRef.current, setRangeWidth]);
+
+  const updateSlider = React.useCallback(
+    (e: any) => {
+      setAnimation(false);
+      const newValue = calcValue(e, trackRef, minValue, maxValue, step, undefined);
+      if (newValue !== value) {
+        onChange(e, newValue);
+      }
     },
-    [maxValue, minValue],
+    [setAnimation, value, trackRef.current, minValue, maxValue, step],
   );
 
-  const onSliderClick = useCallback(
+  const [handleMouseMove, freeResources] = throttle(updateSlider, 50);
+
+  React.useEffect(() => {
+    if (isDraging && !disabled) {
+      document.addEventListener('mousemove', handleMouseMove);
+      document.addEventListener('mouseup', handleMouseUp);
+      document.addEventListener('touchmove', handleMouseMove);
+      document.addEventListener('touchend', handleMouseUp);
+      document.addEventListener('touchcancel', handleMouseUp);
+    }
+    return () => {
+      freeResources();
+      document.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseup', handleMouseUp);
+      document.removeEventListener('touchmove', handleMouseMove);
+      document.removeEventListener('touchend', handleMouseUp);
+      document.removeEventListener('touchcancel', handleMouseUp);
+    };
+  });
+
+  const onSliderClick = React.useCallback(
     (e: any) => {
       if (e.type === 'mousedown') e.preventDefault();
       e.stopPropagation();
       setDrag(true);
       setAnimation(true);
     },
-    [updateSlider, setDrag],
+    [setAnimation, setDrag],
   );
 
-  const handleSliderMouseUp = useCallback(
+  const onPointClick = React.useCallback(
+    (e: any, newValue: number) => {
+      e.preventDefault();
+      e.stopPropagation();
+      setAnimation(true);
+      if (newValue !== value) {
+        onChange(e, newValue);
+      }
+    },
+    [setAnimation, value],
+  );
+
+  const onTrackClick = React.useCallback(
+    (e: any) => {
+      if (e.type === 'mousedown') e.preventDefault();
+      setAnimation(true);
+      if (!tickMarks) setDrag(true);
+      const newValue = calcValue(e, trackRef, minValue, maxValue, step, tickMarks);
+      if (newValue !== value) {
+        onChange(e, newValue);
+      }
+    },
+    [setAnimation, setDrag, value, trackRef.current, minValue, maxValue, step, points],
+  );
+
+  const handleMouseUp = React.useCallback(
     (e: any) => {
       if (e.type === 'mouseup') e.preventDefault();
       e.stopPropagation();
-      setAnimation(true);
       setDrag(false);
-
-      const numValue = sliderValue || minValue;
-      if (tickMarks) {
-        const newValue = correctValueWithRanges(tickMarks, numValue, minValue, maxValue);
-        correctSliderPosition(newValue);
-        newValue !== value && onChange(e, newValue);
-      } else {
-        numValue !== value && onChange(e, numValue);
-      }
-    },
-    [onChange, maxValue, minValue, sliderValue, tickMarks],
-  );
-
-  const onPointClick = (e: any, newValue: number) => {
-    e.preventDefault();
-    e.stopPropagation();
-    if (!disabled) {
       setAnimation(true);
-      correctSliderPosition(newValue);
-      newValue !== value && onChange(e, newValue);
-    }
-  };
-
-  const onTrackClick = useCallback(
-    (e: any) => {
-      if (!disabled) {
-        setAnimation(true);
-
-        const rangeWidth = getRangeWidth();
-        const correctLeft = trackRef.current?.getBoundingClientRect().left || 0;
-        const cursorPosition = e.changedTouches ? e.changedTouches[0].pageX : e.pageX;
-        const sliderPosition = cursorPosition - correctLeft;
-        const calcValue = calcValueByPos(rangeWidth, sliderPosition, minValue, maxValue, step);
-        if (tickMarks) {
-          const numVal = calcValue.toString() ? calcValue : minValue;
-          const newValue = correctValueWithRanges(tickMarks, numVal, minValue, maxValue);
-          correctSliderPosition(newValue);
-          newValue !== value && onChange(e, newValue);
-        } else {
-          correctSliderPosition(calcValue);
-          onSliderClick(e);
-        }
+      const newValue = calcValue(e, trackRef, minValue, maxValue, step, tickMarks);
+      if (newValue !== value) {
+        onChange(e, newValue);
       }
     },
-    [correctSliderPosition, disabled, onSliderClick, maxValue, minValue, tickMarks, step],
+    [setAnimation, setDrag, value, trackRef.current, minValue, maxValue, step, points],
   );
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    const code = keyboardKey.getCode(e);
-    switch (code) {
-      case keyboardKey.ArrowLeft:
-        if (sliderValue - step >= minValue) {
-          correctSliderPosition(sliderValue - step);
-          sliderValue - step !== value && onChange(e, sliderValue - step);
-        }
-        e.preventDefault();
-        break;
-      case keyboardKey.ArrowRight:
-        if (sliderValue + step <= maxValue) {
-          correctSliderPosition(sliderValue + step);
-          sliderValue + step !== value && onChange(e, sliderValue + step);
-        }
-        e.preventDefault();
-        break;
-      default:
-        break;
-    }
-  };
+  const handleKeyDown = React.useCallback(
+    (e: React.KeyboardEvent<HTMLDivElement>) => {
+      const code = keyboardKey.getCode(e);
+      switch (code) {
+        case keyboardKey.ArrowLeft:
+          setAnimation(true);
+          if (step !== 'any' && value - step >= minValue) {
+            value - step !== value && onChange(e, value - step);
+          }
+          e.preventDefault();
+          break;
+        case keyboardKey.ArrowRight:
+          setAnimation(true);
+          if (step !== 'any' && value + step <= maxValue) {
+            value + step !== value && onChange(e, value + step);
+          }
+          e.preventDefault();
+          break;
+        default:
+          break;
+      }
+    },
+    [setAnimation, value, step, minValue, maxValue],
+  );
 
   return (
     <Wrapper data-disabled={disabled} {...props}>
@@ -260,7 +241,7 @@ export const Slider = ({
               dimension={dimension}
               role="slider"
               tabIndex={disabled ? -1 : 0}
-              aria-valuenow={sliderValue}
+              aria-valuenow={value}
               aria-valuemin={minValue}
               aria-valuemax={maxValue}
               onKeyDown={handleKeyDown}
