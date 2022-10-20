@@ -78,7 +78,7 @@ export interface MenuProps extends HTMLAttributes<HTMLDivElement> {
   renderTopPanel?: (props: RenderPanelProps) => React.ReactNode;
   /** Позволяет добавить панель внизу под выпадающим списком */
   renderBottomPanel?: (props: RenderPanelProps) => React.ReactNode;
-  /** Возможность множественного выбора */
+  /** Возможность множественного выбора (опции с Checkbox) */
   multiSelection?: boolean;
 }
 
