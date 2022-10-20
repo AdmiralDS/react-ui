@@ -2,8 +2,7 @@ import React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import styled from 'styled-components';
-
-import { Slider } from './';
+import { Slider } from '#src/components/Slider';
 
 const Separator = styled.div`
   height: 20px;
