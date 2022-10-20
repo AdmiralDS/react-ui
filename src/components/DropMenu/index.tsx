@@ -63,6 +63,8 @@ export interface DropMenuProps
   renderContentProp: (options: RenderContentProps) => React.ReactNode;
   /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
   dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+  /** Возможность множественного выбора */
+  multiSelection?: boolean;
 }
 
 export const DropMenu = React.forwardRef<HTMLElement, DropMenuProps>(
@@ -84,6 +86,7 @@ export const DropMenu = React.forwardRef<HTMLElement, DropMenuProps>(
       renderContentProp,
       menuMaxHeight,
       dropContainerCssMixin,
+      multiSelection = false,
       ...props
     },
     ref,
@@ -137,7 +140,9 @@ export const DropMenu = React.forwardRef<HTMLElement, DropMenuProps>(
       if (selected) {
         onChange?.(selected);
       }
-      closeMenu();
+      if (!multiSelection) {
+        closeMenu();
+      }
     };
 
     React.useEffect(() => {
@@ -174,6 +179,7 @@ export const DropMenu = React.forwardRef<HTMLElement, DropMenuProps>(
               dimension={dimension}
               active={active}
               onActivateItem={setActive}
+              multiSelection={multiSelection}
             />
           </DropMenuContainer>
         )}

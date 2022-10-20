@@ -1,7 +1,7 @@
 import React, { ChangeEvent, HTMLAttributes, useContext, useEffect, useMemo, useState } from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { Menu } from '#src/components/Menu';
-import { MenuItem, RenderOptionProps } from '#src/components/Menu/MenuItem';
+import { ItemProps, MenuItem, RenderOptionProps } from '#src/components/Menu/MenuItem';
 import styled, { css, ThemeContext, ThemeProvider } from 'styled-components';
 import { typography } from '#src/components/Typography';
 import { ReactComponent as CardSolid } from '@admiral-ds/icons/build/finance/CardSolid.svg';
@@ -18,6 +18,11 @@ import { ReactComponent as PlusOutline } from '@admiral-ds/icons/build/service/P
 import { uid } from '#src/components/common/uid';
 import { keyboardKey } from '#src/components/common/keyboardKey';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
+import {
+  CheckboxGroupItemProps,
+  checkboxTreeToMap,
+  MenuItemWithCheckbox,
+} from '#src/components/Menu/MenuItemWithCheckbox';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -348,27 +353,97 @@ const CustomItemTemplate: ComponentStory<typeof Menu> = (args) => {
   );
 };
 
+interface ItemWithCheckbox {
+  id: string;
+  label: string;
+  checked?: boolean;
+}
+const itemsWithCheckbox: Array<ItemWithCheckbox> = [
+  {
+    id: '1',
+    label: 'Option one',
+  },
+  {
+    id: '2',
+    label: 'Option two',
+  },
+  {
+    id: '3',
+    label: 'Option three',
+  },
+  {
+    id: '4',
+    label: 'Option four',
+  },
+  {
+    id: '5',
+    label: 'Option five',
+  },
+  {
+    id: '6',
+    label: 'Option six',
+  },
+  {
+    id: '7',
+    label: 'Option seven',
+  },
+];
+
 const MenuCheckboxTemplate: ComponentStory<typeof Menu> = (args) => {
+  const [innerState, setInnerState] = useState<Array<ItemWithCheckbox>>(itemsWithCheckbox.map((item) => item));
+  const [activeOption, setActiveOption] = useState<string | undefined>(innerState[0].id);
+  const [selectedOption, setSelectedOption] = useState<string | undefined>();
+
   const model = useMemo(() => {
-    return items.map((item) => ({
+    return innerState.map((item) => ({
       id: item.id,
       render: (options: RenderOptionProps) => (
-        <MenuItem dimension={args.dimension || 's'} {...options} key={item.id}>
-          <CheckboxField dimension={args.dimension !== 's' ? 'm' : args.dimension}>{item.label}</CheckboxField>
-        </MenuItem>
+        <MenuItemWithCheckbox
+          key={item.id}
+          id={item.id}
+          dimension={args.dimension || 's'}
+          checked={!!item.checked}
+          checkboxIsHovered={item.id === activeOption}
+          {...options}
+        >
+          {item.label}
+        </MenuItemWithCheckbox>
       ),
     }));
-  }, [args.dimension]);
+  }, [innerState, activeOption, args.dimension]);
 
   function swapBorder(theme: Theme): Theme {
     theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 
+  const handleActivateItem = (id: string | undefined) => {
+    setActiveOption(id);
+  };
+
+  const handleSelectItem = (id: string) => {
+    console.log(`Option ${id} clicked`);
+    const updatedInnerState = [...innerState];
+    const itemToUpdate = updatedInnerState.find((item) => item.id === id);
+    if (itemToUpdate) {
+      itemToUpdate.checked = !itemToUpdate.checked;
+    }
+    setInnerState(updatedInnerState);
+    setSelectedOption(undefined);
+  };
+
   return (
     <ThemeProvider theme={swapBorder}>
       <Wrapper style={{ width: 'fit-content' }}>
-        <Menu {...args} model={model} />
+        <Menu
+          {...args}
+          model={model}
+          active={activeOption}
+          onActivateItem={handleActivateItem}
+          selected={selectedOption}
+          onSelectItem={handleSelectItem}
+          multiSelection={true}
+        />
       </Wrapper>
     </ThemeProvider>
   );
@@ -674,6 +749,162 @@ const MenuActionsAddUserValueTemplate: ComponentStory<typeof Menu> = (props) => 
   );
 };
 
+const itemsCheckboxGroup: Array<CheckboxGroupItemProps> = [
+  {
+    id: '1',
+    label: 'Опция 1',
+    checked: false,
+    children: [
+      {
+        id: '1.1',
+        label: 'Опция 1.1',
+        checked: false,
+      },
+      {
+        id: '1.2',
+        label: 'Опция 1.2',
+        checked: false,
+        children: [
+          {
+            id: '1.2.1',
+            label: 'Опция 1.2.1',
+            checked: false,
+          },
+          {
+            id: '1.2.2',
+            label: 'Опция 1.2.2',
+            checked: false,
+          },
+          {
+            id: '1.2.3',
+            label: 'Опция 1.2.3',
+            checked: false,
+          },
+        ],
+      },
+      {
+        id: '1.3',
+        label: 'Опция 1.3',
+        checked: false,
+      },
+    ],
+  },
+  {
+    id: '2',
+    label: 'Опция 2',
+    checked: false,
+  },
+  {
+    id: '3',
+    label: 'Опция 3',
+    checked: false,
+  },
+];
+
+const MenuCheckboxGroupTemplate: ComponentStory<typeof Menu> = (args) => {
+  const [internalModel, setInternalModel] = useState<Array<CheckboxGroupItemProps>>([...itemsCheckboxGroup]);
+  const [activeOption, setActiveOption] = useState<string | undefined>();
+
+  const map = useMemo(() => {
+    return checkboxTreeToMap(internalModel);
+  }, [internalModel]);
+
+  const setChecked = (id: string, value: boolean) => {
+    const mapItem = map.get(id);
+    if (mapItem?.node.disabled) return;
+    if (mapItem) {
+      mapItem.node.checked = value;
+    }
+
+    if (mapItem?.dependencies?.length) {
+      mapItem?.dependencies?.forEach((depId: string) => setChecked(depId, value));
+    }
+  };
+
+  const toggleCheck = (id: string) => {
+    const item = map.get(id);
+    const hasChildren = !!item?.node.children;
+
+    const indeterminate =
+      item?.dependencies?.some((depId: string) => map.get(depId)?.node.checked) &&
+      item?.dependencies?.some((depId: string) => !map.get(depId)?.node.checked);
+
+    const checked = hasChildren
+      ? indeterminate
+        ? true
+        : item?.dependencies?.every((depId: string) => map.get(depId)?.node.checked)
+      : item?.node.checked;
+
+    setChecked(id, !checked);
+
+    setInternalModel([...internalModel]);
+  };
+
+  const model = useMemo(() => {
+    const menuModel: ItemProps[] = [];
+    map.forEach((item) => {
+      const node = item.node;
+      const hasChildren = !!node.children;
+      const indeterminate =
+        item.dependencies?.some((depId: string) => map.get(depId)?.node.checked) &&
+        item.dependencies?.some((depId: string) => !map.get(depId)?.node.checked);
+      const checked = hasChildren
+        ? item.dependencies?.every((depId: string) => map.get(depId)?.node.checked)
+        : node.checked;
+      menuModel.push({
+        id: node.id,
+        render: (options: RenderOptionProps) => (
+          <MenuItemWithCheckbox
+            key={node.id}
+            id={node.id}
+            dimension={args.dimension}
+            disabled={node.disabled}
+            checked={checked}
+            indeterminate={indeterminate}
+            checkboxIsHovered={node.id === activeOption}
+            level={item.level}
+            {...options}
+          >
+            {node.label}
+          </MenuItemWithCheckbox>
+        ),
+        disabled: node.disabled,
+      });
+    });
+
+    return menuModel;
+  }, [args.dimension, map, activeOption]);
+
+  const handleSelectItem = (id: string) => {
+    console.log(`Option ${id} selected`);
+    toggleCheck(id);
+  };
+
+  const handleActivateItem = (id: string | undefined) => {
+    setActiveOption(id);
+  };
+
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
+    return theme;
+  }
+
+  return (
+    <ThemeProvider theme={swapBorder}>
+      <Wrapper style={{ width: 'fit-content' }}>
+        <Menu
+          {...args}
+          model={model}
+          onSelectItem={handleSelectItem}
+          active={activeOption}
+          onActivateItem={handleActivateItem}
+          multiSelection={true}
+        />
+      </Wrapper>
+    </ThemeProvider>
+  );
+};
+
 export const Simple = SimpleTemplate.bind({});
 export const Category = TemplateWithCards.bind({});
 export const CustomItems = CustomItemTemplate.bind({});
@@ -683,6 +914,7 @@ export const MenuTooltip = MenuTooltipTemplate.bind({});
 export const MultiLineMenu = MultiLineMenuTemplate.bind({});
 export const MenuActionsTwoButtons = MenuActionsTwoButtonsTemplate.bind({});
 export const MenuActionsAddUserValue = MenuActionsAddUserValueTemplate.bind({});
+export const MenuCheckboxGroup = MenuCheckboxGroupTemplate.bind({});
 
 Simple.storyName = 'Базовый пример';
 Category.storyName = 'Пример с группами';
@@ -693,3 +925,4 @@ MenuTooltip.storyName = 'Пример с Tooltip';
 MultiLineMenu.storyName = 'Пример с многострочными пунктами';
 MenuActionsTwoButtons.storyName = 'Пример с Actions с двумя кнопками';
 MenuActionsAddUserValue.storyName = 'Пример с Actions и Search';
+MenuCheckboxGroup.storyName = 'Пример с CheckboxGroup';

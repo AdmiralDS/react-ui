@@ -78,6 +78,8 @@ export interface MenuProps extends HTMLAttributes<HTMLDivElement> {
   renderTopPanel?: (props: RenderPanelProps) => React.ReactNode;
   /** Позволяет добавить панель внизу под выпадающим списком */
   renderBottomPanel?: (props: RenderPanelProps) => React.ReactNode;
+  /** Возможность множественного выбора (опции с Checkbox) */
+  multiSelection?: boolean;
 }
 
 export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
@@ -92,6 +94,7 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
       renderTopPanel,
       renderBottomPanel,
       dimension = 'l',
+      multiSelection = false,
       ...props
     },
     ref,
@@ -100,7 +103,7 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
     const [selectedState, setSelectedState] = React.useState<string | undefined>(defaultSelected);
     const [activeState, setActiveState] = React.useState<string | undefined>(uncontrolledActiveValue);
 
-    const selectedId = selected === undefined ? selectedState : selected;
+    const selectedId = multiSelection ? undefined : selected === undefined ? selectedState : selected;
     const activeId = active === undefined ? activeState : active;
 
     const menuRef = React.useRef<HTMLDivElement | null>(null);
@@ -134,7 +137,7 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
     };
 
     const selectItem = (id: string) => {
-      if (selectedId !== id) setSelectedState(id);
+      if (selectedId !== id && !multiSelection) setSelectedState(id);
       onSelectItem?.(id);
     };
 
