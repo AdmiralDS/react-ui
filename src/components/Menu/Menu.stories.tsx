@@ -391,7 +391,7 @@ const itemsWithCheckbox: Array<ItemWithCheckbox> = [
 
 const MenuCheckboxTemplate: ComponentStory<typeof Menu> = (args) => {
   const [innerState, setInnerState] = useState<Array<ItemWithCheckbox>>(itemsWithCheckbox.map((item) => item));
-  const [activeOption, setActiveOption] = useState<string | undefined>();
+  const [activeOption, setActiveOption] = useState<string | undefined>(innerState[0].id);
   const [selectedOption, setSelectedOption] = useState<string | undefined>();
 
   const model = useMemo(() => {
