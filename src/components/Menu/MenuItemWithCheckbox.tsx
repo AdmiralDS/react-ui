@@ -1,8 +1,7 @@
-import { MenuItem, MenuItemProps } from '#src/components/Menu/MenuItem';
 import React from 'react';
 import styled, { css } from 'styled-components';
 import { ItemDimension } from '#src/components/Menu/menuItemMixins';
-import { MenuDimension } from '#src/components/GroupActionsPane/ColumnsButton';
+import { MenuItem, MenuItemProps } from '#src/components/Menu/MenuItem';
 import { Checkbox } from '#src/components/Checkbox';
 
 export interface CheckboxGroupItemProps {
@@ -19,11 +18,11 @@ export type CheckboxNodesMapItem = {
 };
 
 export const checkboxTreeToMap = (
-  source: Array<CheckboxGroupItemProps>,
+  checkboxTree: Array<CheckboxGroupItemProps>,
   level = 0,
   dependencies?: Array<Array<string>>,
 ): Map<string, CheckboxNodesMapItem> => {
-  return source.reduce((acc: Map<string, CheckboxNodesMapItem>, item) => {
+  return checkboxTree.reduce((acc: Map<string, CheckboxNodesMapItem>, item) => {
     const key = item.id;
     const currentNode: CheckboxNodesMapItem = { level, node: item };
     acc.set(key, currentNode);
@@ -46,26 +45,22 @@ export const checkboxTreeToMap = (
 };
 
 const paddingLeft = css<{ level?: number; dimension?: ItemDimension }>`
-  padding-left: ${({ dimension, level }) => {
+  padding-left: ${({ dimension, level = 0 }) => {
     switch (dimension) {
       case 's':
-        return 12 + 28 * (level ? level : 0);
+        return 12 + 28 * level;
       case 'm':
       case 'l':
       default:
-        return 16 + 32 * (level ? level : 0);
+        return 16 + 32 * level;
     }
   }}px;
 `;
 const CheckboxGroupMenuItem = styled(MenuItem)<{ level?: number; dimension?: ItemDimension }>`
   ${paddingLeft}
 `;
-const OptionContent = styled.div<{
-  dimension?: MenuDimension;
-}>`
+const OptionContent = styled.div<{ dimension?: ItemDimension }>`
   position: relative;
-  display: flex;
-
   padding: 0 0 0 ${(props) => (props.dimension === 's' ? 28 : 32)}px;
 `;
 const PositionedCheckbox = styled(Checkbox)`
@@ -84,9 +79,9 @@ export interface MenuItemWithCheckboxProps extends MenuItemProps {
   checkboxIsHovered?: boolean;
   /** Ref на Checkbox */
   checkboxRef?: React.RefObject<HTMLInputElement>;
-  /** Сдвиг внутри MenuItem при наличии нескольких уровней (например при использовании составной группы чекбоксов внутри Menu */
+  /** Сдвиг внутри MenuItem при наличии нескольких уровней (например при использовании составной группы чекбоксов внутри Menu) */
   level?: number;
-  /** Подпись для Checkbox */
+  /** Текст для Checkbox */
   children?: React.ReactNode;
 }
 
@@ -117,7 +112,7 @@ export const MenuItemWithCheckbox = React.forwardRef<HTMLDivElement, MenuItemWit
       >
         <OptionContent dimension={dimension || 'l'}>
           <PositionedCheckbox
-            dimension={dimension !== 's' ? 'm' : dimension}
+            dimension={dimension === 's' ? 's' : 'm'}
             checked={checked}
             indeterminate={indeterminate}
             hovered={checkboxIsHovered}
