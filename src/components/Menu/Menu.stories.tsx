@@ -353,27 +353,97 @@ const CustomItemTemplate: ComponentStory<typeof Menu> = (args) => {
   );
 };
 
+interface ItemWithCheckbox {
+  id: string;
+  label: string;
+  checked?: boolean;
+}
+const itemsWithCheckbox: Array<ItemWithCheckbox> = [
+  {
+    id: '1',
+    label: 'Option one',
+  },
+  {
+    id: '2',
+    label: 'Option two',
+  },
+  {
+    id: '3',
+    label: 'Option three',
+  },
+  {
+    id: '4',
+    label: 'Option four',
+  },
+  {
+    id: '5',
+    label: 'Option five',
+  },
+  {
+    id: '6',
+    label: 'Option six',
+  },
+  {
+    id: '7',
+    label: 'Option seven',
+  },
+];
+
 const MenuCheckboxTemplate: ComponentStory<typeof Menu> = (args) => {
+  const [innerState, setInnerState] = useState<Array<ItemWithCheckbox>>(itemsWithCheckbox.map((item) => item));
+  const [activeOption, setActiveOption] = useState<string | undefined>();
+  const [selectedOption, setSelectedOption] = useState<string | undefined>();
+
   const model = useMemo(() => {
-    return items.map((item) => ({
+    return innerState.map((item) => ({
       id: item.id,
       render: (options: RenderOptionProps) => (
-        <MenuItem dimension={args.dimension || 's'} {...options} key={item.id}>
-          <CheckboxField dimension={args.dimension !== 's' ? 'm' : args.dimension}>{item.label}</CheckboxField>
-        </MenuItem>
+        <MenuItemWithCheckbox
+          key={item.id}
+          id={item.id}
+          dimension={args.dimension || 's'}
+          checked={!!item.checked}
+          checkboxIsHovered={item.id === activeOption}
+          {...options}
+        >
+          {item.label}
+        </MenuItemWithCheckbox>
       ),
     }));
-  }, [args.dimension]);
+  }, [innerState, activeOption, args.dimension]);
 
   function swapBorder(theme: Theme): Theme {
     theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 
+  const handleActivateItem = (id: string | undefined) => {
+    setActiveOption(id);
+  };
+
+  const handleSelectItem = (id: string) => {
+    console.log(`Option ${id} clicked`);
+    const updatedInnerState = [...innerState];
+    const itemToUpdate = updatedInnerState.find((item) => item.id === id);
+    if (itemToUpdate) {
+      itemToUpdate.checked = !itemToUpdate.checked;
+    }
+    setInnerState(updatedInnerState);
+    setSelectedOption(undefined);
+  };
+
   return (
     <ThemeProvider theme={swapBorder}>
       <Wrapper style={{ width: 'fit-content' }}>
-        <Menu {...args} model={model} onSelectItem={(id) => console.log(`Option ${id} selected`)} />
+        <Menu
+          {...args}
+          model={model}
+          active={activeOption}
+          onActivateItem={handleActivateItem}
+          selected={selectedOption}
+          onSelectItem={handleSelectItem}
+          multiSelection={true}
+        />
       </Wrapper>
     </ThemeProvider>
   );
@@ -828,6 +898,7 @@ const MenuCheckboxGroupTemplate: ComponentStory<typeof Menu> = (args) => {
           onSelectItem={handleSelectItem}
           active={activeOption}
           onActivateItem={handleActivateItem}
+          multiSelection={true}
         />
       </Wrapper>
     </ThemeProvider>
