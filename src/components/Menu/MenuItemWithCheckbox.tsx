@@ -60,15 +60,13 @@ const paddingLeft = css<{ level?: number; dimension?: ItemDimension }>`
 const CheckboxGroupMenuItem = styled(MenuItem)<{ level?: number; dimension?: ItemDimension }>`
   ${paddingLeft}
 `;
-const OptionWithCheckbox = styled.div<{
+const OptionContent = styled.div<{
   dimension?: MenuDimension;
-  disabled?: boolean;
 }>`
   position: relative;
-  padding: 0;
   display: flex;
 
-  padding-left: ${(props) => (props.dimension === 's' ? 28 : 32)}px;
+  padding: 0 0 0 ${(props) => (props.dimension === 's' ? 28 : 32)}px;
 `;
 const PositionedCheckbox = styled(Checkbox)`
   position: absolute;
@@ -117,7 +115,7 @@ export const MenuItemWithCheckbox = React.forwardRef<HTMLDivElement, MenuItemWit
         ref={ref}
         {...props}
       >
-        <OptionWithCheckbox dimension={dimension || 'l'}>
+        <OptionContent dimension={dimension || 'l'}>
           <PositionedCheckbox
             dimension={dimension !== 's' ? 'm' : dimension}
             checked={checked}
@@ -127,7 +125,7 @@ export const MenuItemWithCheckbox = React.forwardRef<HTMLDivElement, MenuItemWit
             onChange={(e) => (e.target.checked = !checked)}
           />
           {children}
-        </OptionWithCheckbox>
+        </OptionContent>
       </CheckboxGroupMenuItem>
     );
   },
