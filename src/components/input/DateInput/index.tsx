@@ -141,6 +141,9 @@ export const DateInput = React.forwardRef<HTMLInputElement, DateInputProps>(
     const handleButtonClick = () => {
       const calValue = parser(inputRef.current?.value, isDateRange);
       setCalendarValue(calValue);
+      if (!isCalendarOpen) {
+        inputRef.current?.focus();
+      }
       setCalendarOpen(!isCalendarOpen);
     };
 
