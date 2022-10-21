@@ -95,7 +95,7 @@ export const SuffixSelect = <T extends ValueType>({
   const [isOpenState, setIsOpenState] = React.useState<boolean>(false);
   const isOpen = props.isOpen === undefined ? isOpenState : props.isOpen;
 
-  const containerRef = React.useRef(null);
+  const containerRef = React.useRef<HTMLDivElement>(null);
   const alignContainerRef = props.alignRef === undefined ? containerRef : props.alignRef;
 
   const handleContainerClick = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -110,7 +110,10 @@ export const SuffixSelect = <T extends ValueType>({
     setIsOpenState(false);
   };
 
-  const clickOutside = () => {
+  const clickOutside = (e: Event) => {
+    if (e.target && containerRef.current?.contains(e.target as Node)) {
+      return;
+    }
     setIsOpenState(false);
   };
 
