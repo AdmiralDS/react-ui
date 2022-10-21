@@ -157,7 +157,7 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps>(
           node.dependencies?.some((depId: number | string) => !map[depId].node.checked);
         const checked = hasChildren
           ? node.dependencies?.every((depId: number | string) => map[depId].node.checked)
-          : item.checked;
+          : !!item.checked;
 
         return (
           <React.Fragment key={item.id}>

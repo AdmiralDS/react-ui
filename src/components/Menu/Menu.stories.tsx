@@ -850,7 +850,7 @@ const MenuCheckboxGroupTemplate: ComponentStory<typeof Menu> = (args) => {
         item.dependencies?.some((depId: string) => !map.get(depId)?.node.checked);
       const checked = hasChildren
         ? item.dependencies?.every((depId: string) => map.get(depId)?.node.checked)
-        : node.checked;
+        : !!node.checked;
       menuModel.push({
         id: node.id,
         render: (options: RenderOptionProps) => (
