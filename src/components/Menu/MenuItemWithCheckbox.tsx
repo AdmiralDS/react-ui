@@ -27,7 +27,7 @@ export const checkboxTreeToMap = (
     const currentNode: CheckboxNodesMapItem = { level, node: item };
     acc.set(key, currentNode);
 
-    if (dependencies) {
+    if (dependencies && !item.children) {
       dependencies.forEach((dependency) => dependency.push(key));
     }
     if (item.children) {
