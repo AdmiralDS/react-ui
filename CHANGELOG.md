@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.1.0](https://github.com/AdmiralDS/react-ui/compare/v3.0.1...v3.1.0) (2022-10-21)
+
+
+### Features
+
+* **Menu,DropMenu:** add multiSelection prop ([321aeed](https://github.com/AdmiralDS/react-ui/commit/321aeed61df158e7d77cb1659714122387cc3e43))
+* **Menu:** add example with CheckboxGroup ([1793930](https://github.com/AdmiralDS/react-ui/commit/1793930562c757e45ab292604411a8f777da97d0))
+* **MenuItemWithCheckbox:** add component ([acde02a](https://github.com/AdmiralDS/react-ui/commit/acde02a5d9c6ebdfbe89b8c9ce9e38d7fbc4fbb1))
+
+
+### Bug Fixes
+
+*  fix TagMenu  export ([9f06f8c](https://github.com/AdmiralDS/react-ui/commit/9f06f8cffe7ee86e206241493603e9de9d6d04f3))
+* **DateInput, InputExtended, TimeInput:** fix reopening drop container on icon click ([44aaba9](https://github.com/AdmiralDS/react-ui/commit/44aaba9c7ee5fa1c59be3941e3420c1fa93aa337))
+* **DateInput:** set focus to input when calendar is open ([b627722](https://github.com/AdmiralDS/react-ui/commit/b627722a8db9755f3b841067125c2a81c3faf139))
+* fix Range export ([1917e53](https://github.com/AdmiralDS/react-ui/commit/1917e53c91e20712f7155d03295b5a40a8bdbca4))
+* fix tsconfig (need npm upgrade after merge to local brunch) ([40df47d](https://github.com/AdmiralDS/react-ui/commit/40df47df164b44451fee4539ffa17b335494186c))
+* **Slider:** fix problems with animation, add type 'any' for step prop ([9e7cf2c](https://github.com/AdmiralDS/react-ui/commit/9e7cf2c52e6de172e01b55495435f4c70c1a6281))
+* **Storybook:** pass loading and disabled in DropMenu stories examples ([3ffe082](https://github.com/AdmiralDS/react-ui/commit/3ffe0824dc6f75acba542f2a222cb81db30052de))
+* **Table:** update CheckboxCell and ExpandCell dimensions ([3edccec](https://github.com/AdmiralDS/react-ui/commit/3edccecaaac4ee7b2da4abcd4307bc56714140c2))
+* **TagMenu:** pass id to Menu's selected prop ([d5f277e](https://github.com/AdmiralDS/react-ui/commit/d5f277e74d2e40cc52aa3dda615ffcf6d058e611))
+* **Tree,MenuItemWithCheckbox:** fix parent checkbox status ([729d870](https://github.com/AdmiralDS/react-ui/commit/729d87069fd22dba1e01c3131827559947453f3e))
+
 ### [3.0.1](https://github.com/AdmiralDS/react-ui/compare/v3.0.0...v3.0.1) (2022-10-13)
 
 ## [3.0.0](https://github.com/AdmiralDS/react-ui/compare/v2.5.0...v3.0.0) (2022-10-12)
