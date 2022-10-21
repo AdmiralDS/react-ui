@@ -131,13 +131,19 @@ export const DateInput = React.forwardRef<HTMLInputElement, DateInputProps>(
       }
     };
 
-    const handleBlurCalendarContainer = () => {
+    const handleBlurCalendarContainer = (e: Event) => {
+      if (e.target && inputContainerRef.current?.contains(e.target as Node)) {
+        return;
+      }
       setCalendarOpen(false);
     };
 
     const handleButtonClick = () => {
       const calValue = parser(inputRef.current?.value, isDateRange);
       setCalendarValue(calValue);
+      if (!isCalendarOpen) {
+        inputRef.current?.focus();
+      }
       setCalendarOpen(!isCalendarOpen);
     };
 
