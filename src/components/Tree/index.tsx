@@ -44,7 +44,7 @@ const treeToMap = (tree: Array<TreeItemProps>, level = 0, dependencies?: Array<A
     const key = item.id.toString();
     acc[key] = { level, node: item };
 
-    if (dependencies) {
+    if (dependencies && !item.children) {
       dependencies.forEach((dependency) => dependency.push(key));
     }
     if (item.children) {
