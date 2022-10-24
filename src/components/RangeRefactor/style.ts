@@ -26,6 +26,7 @@ export const TrackWrapper = styled.div<{ dimension: RangeProps['dimension']; ske
   height: ${({ dimension }) => (dimension === 's' ? 20 : 24)}px;
   [data-disabled='true'] && {
     cursor: auto;
+    pointer-events: none;
   }
 
   ${({ skeleton }) => skeleton && skeletonMixin}};

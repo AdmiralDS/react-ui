@@ -40,7 +40,6 @@ export const Range = ({
   const [isDraging, setDrag] = React.useState(false);
   const [isDraging2, setDrag2] = React.useState(false);
   const [animation, setAnimation] = React.useState(true);
-  const [rangeWidth, setRangeWidth] = React.useState(0);
   const filledRef: React.MutableRefObject<HTMLDivElement | null> = React.useRef(null);
   const trackRef: React.MutableRefObject<HTMLDivElement | null> = React.useRef(null);
   const sliderRef: React.MutableRefObject<HTMLDivElement | null> = React.useRef(null);
@@ -70,18 +69,6 @@ export const Range = ({
     correctSliderPosition(sliderValue, 'both');
   }, [sliderValue, minValue, maxValue]);
 
-  React.useLayoutEffect(() => {
-    if (trackRef.current) {
-      const resizeObserver = new ResizeObserver((entries) => {
-        entries.forEach((entry) => setRangeWidth(entry.contentRect.width || 0));
-      });
-      resizeObserver.observe(trackRef.current);
-      return () => {
-        resizeObserver.disconnect();
-      };
-    }
-  }, [trackRef.current, setRangeWidth]);
-
   const [moveListener, freeResources] = throttle((e: any) => {
     updateSlider(e);
   }, 50);
@@ -103,7 +90,7 @@ export const Range = ({
       document.removeEventListener('touchcancel', handleSliderMouseUp);
     };
   });
-
+  const getRangeWidth = () => trackRef.current?.offsetWidth || 0;
   const getSliderPosition = (type: 'first' | 'second') => {
     const rangeLeft = trackRef.current?.getBoundingClientRect().left || 0;
     const sliderPosition =
@@ -146,6 +133,7 @@ export const Range = ({
   const updateSlider = React.useCallback(
     (e: any) => {
       setAnimation(false);
+      const rangeWidth = getRangeWidth();
       const rangeLeft = trackRef.current?.getBoundingClientRect().left || 0;
 
       if ((isDraging || isDraging2) && rangeLeft) {
@@ -175,6 +163,8 @@ export const Range = ({
 
   const correctSliderPosition = React.useCallback(
     (value: [number, number], slider: 'first' | 'second' | 'both') => {
+      const rangeWidth = getRangeWidth();
+
       const onePxValue = rangeWidth ? rangeWidth / (maxValue - minValue) : 0;
 
       if (slider === 'first' || slider === 'both') {
@@ -238,6 +228,7 @@ export const Range = ({
       if (!disabled) {
         setAnimation(true);
 
+        const rangeWidth = getRangeWidth();
         const correctLeft = trackRef.current?.getBoundingClientRect().left || 0;
         const cursorPosition = e.changedTouches ? e.changedTouches[0].pageX : e.pageX;
         const sliderPosition = cursorPosition - correctLeft;

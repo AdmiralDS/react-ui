@@ -70,7 +70,9 @@ const Template0: ComponentStory<typeof Range> = (args) => {
         {...args}
         value={rangeValue}
         onChange={(e: any, value: [number, number]) => {
-          if (e.type !== 'mousemove') setRangeValue(value);
+          // if (e.type !== 'mousemove')
+          console.log(value);
+          setRangeValue(value);
         }}
       />
     </>
