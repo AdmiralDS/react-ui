@@ -14,8 +14,10 @@ export interface RangeProps extends Omit<React.HTMLAttributes<HTMLDivElement>, '
   minValue?: number;
   /** Максимальное значение */
   maxValue?: number;
-  /** Шаг слайдера */
-  step?: number;
+  /** Шаг слайдера. Это либо строка any, либо положительное число, по умолчанию 1.
+   * Если этот параметр не установлен в any, компонент принимает только кратные step значения, в диапазоне minValue - maxValue
+   */
+  step?: number | 'any';
   /** Отключение компонента */
   disabled?: boolean;
   /** Размер компонента */
@@ -41,16 +43,30 @@ export const Range = ({
   const [isDraging2, setDrag2] = React.useState(false);
   const [animation, setAnimation] = React.useState(true);
   const [rangeWidth, setRangeWidth] = React.useState(0);
-  const filledRef: React.MutableRefObject<HTMLDivElement | null> = React.useRef(null);
-  const trackRef: React.MutableRefObject<HTMLDivElement | null> = React.useRef(null);
-  const sliderRef: React.MutableRefObject<HTMLDivElement | null> = React.useRef(null);
-  const slider2Ref: React.MutableRefObject<HTMLDivElement | null> = React.useRef(null);
+  const filledRef = React.useRef<HTMLDivElement | null>(null);
+  const trackRef = React.useRef<HTMLDivElement | null>(null);
+  const sliderRef = React.useRef<HTMLDivElement | null>(null);
+  const slider2Ref = React.useRef<HTMLDivElement | null>(null);
 
   const test = (): NumberRange => {
     if (sliderRef.current && slider2Ref.current) {
-      if (sliderRef.current.offsetLeft <= slider2Ref.current.offsetLeft) {
+      if (sliderRef.current.offsetLeft < slider2Ref.current.offsetLeft) {
+        console.log('a');
         return value;
-      } else {
+      } else if (sliderRef.current.offsetLeft > slider2Ref.current.offsetLeft) {
+        console.log('b');
+        return [value[1], value[0]];
+      } else if (sliderRef.current.offsetLeft === slider2Ref.current.offsetLeft && (isDraging || isDraging2)) {
+        if (isDraging) {
+          console.log('1');
+          const sliderValue = calcValueByPos(rangeWidth, getSliderPosition('first'), minValue, maxValue, step);
+          return sliderValue === value[0] ? [value[0], value[1]] : [value[1], value[0]];
+        }
+        if (isDraging2) {
+          console.log('2');
+          const sliderValue = calcValueByPos(rangeWidth, getSliderPosition('second'), minValue, maxValue, step);
+          return sliderValue === value[1] ? [value[0], value[1]] : [value[1], value[0]];
+        }
         return [value[1], value[0]];
       }
     }
@@ -59,7 +75,7 @@ export const Range = ({
 
   React.useLayoutEffect(() => {
     correctSliderPosition(test(), 'both');
-  }, [value, rangeWidth, minValue, maxValue, sliderRef.current, slider2Ref.current]);
+  }, [value, rangeWidth, minValue, maxValue, step, sliderRef.current, slider2Ref.current, isDraging, isDraging2]);
 
   React.useLayoutEffect(() => {
     if (trackRef.current) {
@@ -224,6 +240,7 @@ export const Range = ({
                 dimension={dimension}
                 onTouchStart={(e) => onSliderClick(e, 'first')}
                 onMouseDown={(e) => onSliderClick(e, 'first')}
+                style={{ background: 'red' }}
               />
             </Thumb>
             <Thumb ref={slider2Ref} animation={animation} dimension={dimension}>

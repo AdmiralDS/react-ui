@@ -61,7 +61,7 @@ export const calcValue = (
   return newValue;
 };
 
-export const sortNum = (arr: NumberRange): NumberRange => (arr[0] > arr[1] ? [arr[1], arr[0]] : arr);
+export const sortNum = (arr: NumberRange): NumberRange => (arr[0] > arr[1] ? [arr[1], arr[0]] : [arr[0], arr[1]]);
 
 export function arraysEqual(arr1: NumberRange, arr2: NumberRange) {
   return arr1.length === arr2.length && arr1.every((value, index) => value === arr2[index]);

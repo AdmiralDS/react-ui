@@ -12,10 +12,7 @@ const Desc = styled.div`
 `;
 
 const Description = () => (
-  <Desc>
-    Поле ввода с двойным слайдером позволяет выбирать диапазон внутри обозначенного диапазона значений. Так же возможен
-    ввод вручную.
-  </Desc>
+  <Desc>Двойной слайдер позволяет выбирать диапазон внутри обозначенного диапазона значений.</Desc>
 );
 
 export default {
@@ -70,8 +67,7 @@ const Template0: ComponentStory<typeof Range> = (args) => {
         {...args}
         value={rangeValue}
         onChange={(e: any, value: [number, number]) => {
-          // if (e.type !== 'mousemove')
-          console.log(value);
+          console.log({ e, value });
           setRangeValue(value);
         }}
       />
