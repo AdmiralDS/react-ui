@@ -50,7 +50,8 @@ export interface DropMenuProps
   items: Array<ItemProps>;
   /** Выбранная опция */
   selected?: string;
-  /** Колбек на изменение выбранной опции */
+  /** @deprecated use onSelectItem instead
+   * Колбек на изменение выбранной опции */
   onChange?: (id: string) => void;
   /** @deprecated use isVisible and onVisibilityChange instead
    * Колбек на открытие меню */
@@ -82,18 +83,21 @@ export const DropMenu = React.forwardRef<HTMLElement, DropMenuProps>(
       disabled = false,
       loading = false,
       alignSelf = 'flex-end',
-      onClose,
-      onOpen,
+      onClose, // TODO: убрать после удаления в DropMenuProps
+      onOpen, // TODO: убрать после удаления в DropMenuProps
       items,
       selected,
-      onChange,
+      active,
+      onSelectItem,
+      onActivateItem,
+      onChange, // TODO: убрать после удаления в DropMenuProps
       onClick,
       onKeyDown,
       alignMenuRef,
       renderContentProp,
       menuMaxHeight,
       dropContainerCssMixin,
-      multiSelection = false,
+      multiSelection = false, // TODO: убрать после удаления в Menu
       disableSelectedOptionHighlight = false,
       isVisible,
       onVisibilityChange = (isVisible: boolean) => undefined,
@@ -103,7 +107,6 @@ export const DropMenu = React.forwardRef<HTMLElement, DropMenuProps>(
   ) => {
     const [isMenuOpenState, setIsMenuOpenState] = React.useState<boolean>(false);
     const btnRef = React.useRef<HTMLElement>(null);
-    const [active, setActive] = React.useState<string | undefined>();
 
     const isMenuOpen = isVisible || isMenuOpenState;
     const setIsMenuOpen = (newMenuOpenState: boolean) => {
@@ -113,13 +116,13 @@ export const DropMenu = React.forwardRef<HTMLElement, DropMenuProps>(
 
     const reverseMenu = (e: React.MouseEvent<HTMLElement>) => {
       setIsMenuOpen(!isMenuOpen);
-      if (isMenuOpen) onClose?.();
-      else onOpen?.();
+      if (isMenuOpen) onClose?.(); // TODO: убрать после удаления onClose в DropMenuProps
+      else onOpen?.(); // TODO: убрать после удаления onOpen в DropMenuProps
       onClick?.(e);
     };
     const closeMenu = () => {
       setIsMenuOpen(false);
-      onClose?.();
+      onClose?.(); // TODO: убрать после удаления onClose в DropMenuProps
       btnRef.current?.focus();
     };
 
@@ -128,7 +131,7 @@ export const DropMenu = React.forwardRef<HTMLElement, DropMenuProps>(
         return;
       }
       setIsMenuOpen(false);
-      onClose?.();
+      onClose?.(); // TODO: убрать после удаления onClose в DropMenuProps
     };
 
     const handleBtnKeyDown = (e: React.KeyboardEvent<HTMLElement>) => {
@@ -143,7 +146,7 @@ export const DropMenu = React.forwardRef<HTMLElement, DropMenuProps>(
           if (!isMenuOpen) {
             e.stopPropagation();
             setIsMenuOpen(true);
-            onOpen?.();
+            onOpen?.(); // TODO: убрать после удаления onOpen в DropMenuProps
             e.preventDefault();
           }
           break;
@@ -152,20 +155,14 @@ export const DropMenu = React.forwardRef<HTMLElement, DropMenuProps>(
       }
     };
 
-    const handleClick = (selected?: string) => {
-      if (selected) {
-        onChange?.(selected);
-      }
-      if (!multiSelection && !disableSelectedOptionHighlight) {
+    const handleSelectItem = (id: string) => {
+      onChange?.(id); // TODO: убрать onChange после удаления
+      onSelectItem?.(id);
+      // TODO: убрать multiSelection после удаления
+      if (isVisible === undefined && !multiSelection && !disableSelectedOptionHighlight) {
         closeMenu();
       }
     };
-
-    React.useEffect(() => {
-      if (isMenuOpen) {
-        setActive(selected || items?.[0]?.id);
-      }
-    }, [isMenuOpen]);
 
     return (
       <>
@@ -191,10 +188,10 @@ export const DropMenu = React.forwardRef<HTMLElement, DropMenuProps>(
               width={menuWidth}
               model={items}
               selected={selected}
-              onSelectItem={handleClick}
+              onSelectItem={handleSelectItem}
               dimension={dimension}
               active={active}
-              onActivateItem={setActive}
+              onActivateItem={onActivateItem}
               multiSelection={multiSelection}
               disableSelectedOptionHighlight={disableSelectedOptionHighlight}
             />

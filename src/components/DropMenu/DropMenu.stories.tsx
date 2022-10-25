@@ -134,7 +134,7 @@ const SimpleTemplate: ComponentStory<typeof DropMenu> = (args) => {
         <DropMenu
           {...args}
           items={model}
-          onChange={(id) => {
+          onSelectItem={(id) => {
             console.log(`selected: ${id}`);
             setSelected(id);
           }}
@@ -267,7 +267,7 @@ const TemplateWithCards: ComponentStory<typeof DropMenu> = (args) => {
         <StyledDropMenu
           {...args}
           items={model}
-          onChange={(id) => {
+          onSelectItem={(id) => {
             console.log(`selected: ${id}`);
             setSelected(id);
           }}
@@ -276,7 +276,6 @@ const TemplateWithCards: ComponentStory<typeof DropMenu> = (args) => {
           dimension={args.dimension}
           disabled={args.disabled}
           selected={selected}
-          onSelectItem={setSelected}
           active={active}
           onActivateItem={setActive}
           renderContentProp={({ buttonRef, handleKeyDown, handleClick, statusIcon, disabled }) => {
@@ -370,7 +369,7 @@ const DropMenuTooltipTemplate: ComponentStory<typeof DropMenu> = (args) => {
       <DropMenu
         {...args}
         items={model}
-        onChange={(id) => {
+        onSelectItem={(id) => {
           console.log(`selected: ${id}`);
           setSelected(id);
         }}
@@ -426,7 +425,7 @@ const TemplateWithCheckbox: ComponentStory<typeof DropMenu> = (args) => {
       <DropMenu
         {...args}
         items={model}
-        onChange={(id) => {
+        onSelectItem={(id) => {
           console.log(`selected: ${id}`);
           const newCheckedState = checkedState.map((item) => ({
             ...item,
@@ -437,6 +436,7 @@ const TemplateWithCheckbox: ComponentStory<typeof DropMenu> = (args) => {
         }}
         onOpen={onOpenMenu}
         onClose={onCloseMenu}
+        disableSelectedOptionHighlight={true}
         dimension={args.dimension}
         disabled={args.disabled}
         selected={selected}
@@ -487,7 +487,7 @@ const TemplateWithRadiobutton: ComponentStory<typeof DropMenu> = (args) => {
       <DropMenu
         {...args}
         items={model}
-        onChange={(id) => {
+        onSelectItem={(id) => {
           console.log(`selected: ${id}`);
           const newCheckedState = checkedState.map((item) => ({
             ...item,
