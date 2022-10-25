@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo, useState } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import { withDesign } from 'storybook-addon-designs';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
@@ -11,6 +11,7 @@ import { ReactComponent as CardSolid } from '@admiral-ds/icons/build/finance/Car
 import { TooltipHoc } from '#src/components/TooltipHOC';
 import { CheckboxField } from '#src/components/form';
 import { RadioButton } from '#src/components/RadioButton';
+import { ItemWithCheckbox, MenuItemWithCheckbox } from '#src/components/Menu/MenuItemWithCheckbox';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -398,48 +399,88 @@ const DropMenuTooltipTemplate: ComponentStory<typeof DropMenu> = (args) => {
   );
 };
 
+const itemsWithCheckbox: Array<ItemWithCheckbox> = [
+  {
+    id: '1',
+    label: 'Option one',
+  },
+  {
+    id: '2',
+    label: 'Option two',
+  },
+  {
+    id: '3',
+    label: 'Option three',
+  },
+  {
+    id: '4',
+    label: 'Option four',
+  },
+  {
+    id: '5',
+    label: 'Option five',
+  },
+  {
+    id: '6',
+    label: 'Option six',
+  },
+  {
+    id: '7',
+    label: 'Option seven',
+  },
+];
+
 const TemplateWithCheckbox: ComponentStory<typeof DropMenu> = (args) => {
-  const [selected, setSelected] = React.useState<string | undefined>(undefined);
-  const [checkedState, setCheckedState] = React.useState(items.map((item) => ({ id: item.id, checked: false })));
-  const model = React.useMemo(() => {
-    return items.map((item, index) => ({
+  const [innerState, setInnerState] = useState<Array<ItemWithCheckbox>>(itemsWithCheckbox.map((item) => item));
+  const [activeOption, setActiveOption] = useState<string | undefined>(innerState[0].id);
+  const [selectedOption, setSelectedOption] = useState<string | undefined>();
+
+  const model = useMemo(() => {
+    return innerState.map((item) => ({
       id: item.id,
       render: (options: RenderOptionProps) => (
-        <MenuItem dimension={args.dimension || 's'} {...options} key={item.id}>
-          <CheckboxField
-            dimension={args.dimension !== 's' ? 'm' : args.dimension}
-            disabled={item.disabled}
-            readOnly={true}
-            key={item.id}
-            checked={checkedState[index].checked}
-          >
-            {item.label}
-          </CheckboxField>
-        </MenuItem>
+        <MenuItemWithCheckbox
+          key={item.id}
+          id={item.id}
+          dimension={args.dimension || 's'}
+          checked={!!item.checked}
+          checkboxIsHovered={item.id === activeOption}
+          {...options}
+        >
+          {item.label}
+        </MenuItemWithCheckbox>
       ),
-      disabled: item.disabled,
     }));
-  }, [args.dimension, checkedState]);
+  }, [innerState, activeOption, args.dimension]);
+
+  const handleActivateItem = (id: string | undefined) => {
+    setActiveOption(id);
+  };
+
+  const handleSelectItem = (id: string) => {
+    console.log(`Option ${id} clicked`);
+    const updatedInnerState = [...innerState];
+    const itemToUpdate = updatedInnerState.find((item) => item.id === id);
+    if (itemToUpdate) {
+      itemToUpdate.checked = !itemToUpdate.checked;
+    }
+    setInnerState(updatedInnerState);
+    setSelectedOption(undefined);
+  };
 
   return (
     <div style={{ display: 'flex', justifyContent: 'center' }}>
       <DropMenu
         {...args}
         items={model}
-        onSelectItem={(id) => {
-          console.log(`selected: ${id}`);
-          const newCheckedState = checkedState.map((item) => ({
-            ...item,
-            checked: item.id === id ? !item.checked : item.checked,
-          }));
-          setCheckedState(newCheckedState);
-          setSelected(id);
-        }}
+        active={activeOption}
+        onActivateItem={handleActivateItem}
+        selected={selectedOption}
+        onSelectItem={handleSelectItem}
         onVisibilityChange={handleVisibilityChange}
         disableSelectedOptionHighlight={true}
         dimension={args.dimension}
         disabled={args.disabled}
-        selected={selected}
         renderContentProp={({ buttonRef, handleKeyDown, handleClick, statusIcon, disabled }) => {
           return (
             <Button
