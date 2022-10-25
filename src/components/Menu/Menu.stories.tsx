@@ -441,7 +441,7 @@ const MenuCheckboxTemplate: ComponentStory<typeof Menu> = (args) => {
           onActivateItem={handleActivateItem}
           selected={selectedOption}
           onSelectItem={handleSelectItem}
-          multiSelection={true}
+          disableSelectedOptionHighlight={true}
         />
       </Wrapper>
     </ThemeProvider>
@@ -897,7 +897,7 @@ const MenuCheckboxGroupTemplate: ComponentStory<typeof Menu> = (args) => {
           onSelectItem={handleSelectItem}
           active={activeOption}
           onActivateItem={handleActivateItem}
-          multiSelection={true}
+          disableSelectedOptionHighlight={true}
         />
       </Wrapper>
     </ThemeProvider>

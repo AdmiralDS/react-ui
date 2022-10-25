@@ -33,7 +33,10 @@ export interface RenderContentProps {
 }
 
 export interface DropMenuProps
-  extends Pick<MenuProps, 'active' | 'onActivateItem' | 'onSelectItem'>,
+  extends Pick<
+      MenuProps,
+      'active' | 'onActivateItem' | 'onSelectItem' | 'multiSelection' | 'disableSelectedOptionHighlight'
+    >,
     Omit<HTMLAttributes<HTMLElement>, 'onChange'> {
   /** Размер компонента */
   dimension?: Dimension;
@@ -63,8 +66,6 @@ export interface DropMenuProps
   renderContentProp: (options: RenderContentProps) => React.ReactNode;
   /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
   dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
-  /** Возможность множественного выбора */
-  multiSelection?: boolean;
 }
 
 export const DropMenu = React.forwardRef<HTMLElement, DropMenuProps>(
@@ -87,6 +88,7 @@ export const DropMenu = React.forwardRef<HTMLElement, DropMenuProps>(
       menuMaxHeight,
       dropContainerCssMixin,
       multiSelection = false,
+      disableSelectedOptionHighlight = false,
       ...props
     },
     ref,
@@ -140,7 +142,7 @@ export const DropMenu = React.forwardRef<HTMLElement, DropMenuProps>(
       if (selected) {
         onChange?.(selected);
       }
-      if (!multiSelection) {
+      if (!multiSelection && !disableSelectedOptionHighlight) {
         closeMenu();
       }
     };
@@ -180,6 +182,7 @@ export const DropMenu = React.forwardRef<HTMLElement, DropMenuProps>(
               active={active}
               onActivateItem={setActive}
               multiSelection={multiSelection}
+              disableSelectedOptionHighlight={disableSelectedOptionHighlight}
             />
           </DropMenuContainer>
         )}
