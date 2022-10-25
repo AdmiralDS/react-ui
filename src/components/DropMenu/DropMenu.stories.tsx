@@ -106,9 +106,13 @@ const items = [
     value: 7,
   },
 ];
-
-const onOpenMenu = () => console.log('menu opened');
-const onCloseMenu = () => console.log('menu closed');
+const handleVisibilityChange = (isVisible: boolean) => {
+  if (isVisible) {
+    console.log('Menu opened');
+  } else {
+    console.log('Menu closed');
+  }
+};
 
 const SimpleTemplate: ComponentStory<typeof DropMenu> = (args) => {
   const [selected, setSelected] = React.useState<string | undefined>(undefined);
@@ -138,8 +142,7 @@ const SimpleTemplate: ComponentStory<typeof DropMenu> = (args) => {
             console.log(`selected: ${id}`);
             setSelected(id);
           }}
-          onOpen={onOpenMenu}
-          onClose={onCloseMenu}
+          onVisibilityChange={handleVisibilityChange}
           dimension={args.dimension}
           disabled={args.disabled}
           selected={selected}
@@ -271,8 +274,7 @@ const TemplateWithCards: ComponentStory<typeof DropMenu> = (args) => {
             console.log(`selected: ${id}`);
             setSelected(id);
           }}
-          onOpen={onOpenMenu}
-          onClose={onCloseMenu}
+          onVisibilityChange={handleVisibilityChange}
           dimension={args.dimension}
           disabled={args.disabled}
           selected={selected}
@@ -373,8 +375,7 @@ const DropMenuTooltipTemplate: ComponentStory<typeof DropMenu> = (args) => {
           console.log(`selected: ${id}`);
           setSelected(id);
         }}
-        onOpen={onOpenMenu}
-        onClose={onCloseMenu}
+        onVisibilityChange={handleVisibilityChange}
         dimension={args.dimension}
         disabled={args.disabled}
         selected={selected}
@@ -434,8 +435,7 @@ const TemplateWithCheckbox: ComponentStory<typeof DropMenu> = (args) => {
           setCheckedState(newCheckedState);
           setSelected(id);
         }}
-        onOpen={onOpenMenu}
-        onClose={onCloseMenu}
+        onVisibilityChange={handleVisibilityChange}
         disableSelectedOptionHighlight={true}
         dimension={args.dimension}
         disabled={args.disabled}
@@ -496,8 +496,7 @@ const TemplateWithRadiobutton: ComponentStory<typeof DropMenu> = (args) => {
           setCheckedState(newCheckedState);
           setSelected(id);
         }}
-        onOpen={onOpenMenu}
-        onClose={onCloseMenu}
+        onVisibilityChange={handleVisibilityChange}
         dimension={args.dimension}
         disabled={args.disabled}
         selected={selected}
