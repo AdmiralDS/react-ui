@@ -52,9 +52,11 @@ export interface DropMenuProps
   selected?: string;
   /** Колбек на изменение выбранной опции */
   onChange?: (id: string) => void;
-  /** Колбек на открытие меню */
+  /** @deprecated use isVisible and onVisibilityChange instead
+   * Колбек на открытие меню */
   onOpen?: () => void;
-  /** Колбек на закрытие меню */
+  /** @deprecated use isVisible and onVisibilityChange instead
+   * Колбек на закрытие меню */
   onClose?: () => void;
   /** Отключение компонента */
   disabled?: boolean;
@@ -66,6 +68,10 @@ export interface DropMenuProps
   renderContentProp: (options: RenderContentProps) => React.ReactNode;
   /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
   dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+  /** Видимость выпадающего меню */
+  isVisible?: boolean;
+  /** Колбек на изменение видимости меню */
+  onVisibilityChange?: (isVisible: boolean) => void;
 }
 
 export const DropMenu = React.forwardRef<HTMLElement, DropMenuProps>(
@@ -89,22 +95,30 @@ export const DropMenu = React.forwardRef<HTMLElement, DropMenuProps>(
       dropContainerCssMixin,
       multiSelection = false,
       disableSelectedOptionHighlight = false,
+      isVisible,
+      onVisibilityChange = (isVisible: boolean) => undefined,
       ...props
     },
     ref,
   ) => {
-    const [menuOpened, setMenuOpened] = React.useState<boolean>(false);
+    const [isMenuOpenState, setIsMenuOpenState] = React.useState<boolean>(false);
     const btnRef = React.useRef<HTMLElement>(null);
     const [active, setActive] = React.useState<string | undefined>();
 
+    const isMenuOpen = isVisible || isMenuOpenState;
+    const setIsMenuOpen = (newMenuOpenState: boolean) => {
+      setIsMenuOpenState(newMenuOpenState);
+      onVisibilityChange(newMenuOpenState);
+    };
+
     const reverseMenu = (e: React.MouseEvent<HTMLElement>) => {
-      setMenuOpened((prevOpened) => !prevOpened);
-      if (menuOpened) onClose?.();
+      setIsMenuOpen(!isMenuOpen);
+      if (isMenuOpen) onClose?.();
       else onOpen?.();
       onClick?.(e);
     };
     const closeMenu = () => {
-      setMenuOpened(false);
+      setIsMenuOpen(false);
       onClose?.();
       btnRef.current?.focus();
     };
@@ -113,7 +127,7 @@ export const DropMenu = React.forwardRef<HTMLElement, DropMenuProps>(
       if (e.target && btnRef.current?.contains(e.target as Node)) {
         return;
       }
-      setMenuOpened(false);
+      setIsMenuOpen(false);
       onClose?.();
     };
 
@@ -122,13 +136,13 @@ export const DropMenu = React.forwardRef<HTMLElement, DropMenuProps>(
       onKeyDown?.(e);
       switch (code) {
         case keyboardKey.Escape:
-          if (menuOpened) closeMenu();
+          if (isMenuOpen) closeMenu();
           break;
         case keyboardKey.Enter:
         case keyboardKey[' ']:
-          if (!menuOpened) {
+          if (!isMenuOpen) {
             e.stopPropagation();
-            setMenuOpened(true);
+            setIsMenuOpen(true);
             onOpen?.();
             e.preventDefault();
           }
@@ -148,10 +162,10 @@ export const DropMenu = React.forwardRef<HTMLElement, DropMenuProps>(
     };
 
     React.useEffect(() => {
-      if (menuOpened) {
+      if (isMenuOpen) {
         setActive(selected || items?.[0]?.id);
       }
-    }, [menuOpened]);
+    }, [isMenuOpen]);
 
     return (
       <>
@@ -160,10 +174,10 @@ export const DropMenu = React.forwardRef<HTMLElement, DropMenuProps>(
           buttonRef: refSetter(ref, btnRef),
           handleKeyDown: handleBtnKeyDown,
           handleClick: reverseMenu,
-          statusIcon: <OpenStatusButton $isOpen={menuOpened} aria-hidden />,
-          menuState: menuOpened,
+          statusIcon: <OpenStatusButton $isOpen={isMenuOpen} aria-hidden />,
+          menuState: isMenuOpen,
         })}
-        {menuOpened && !loading && (
+        {isMenuOpen && !loading && (
           <DropMenuContainer
             role="listbox"
             alignSelf={alignSelf}
