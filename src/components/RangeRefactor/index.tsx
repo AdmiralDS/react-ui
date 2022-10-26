@@ -79,7 +79,10 @@ export const Range = ({
         slider2Ref.current.style.left = `${sliderCoords2}%`;
       }
       // }
-      setFilled();
+      if (slider2Ref.current && sliderRef.current && filledRef.current) {
+        filledRef.current.style.left = sliderRef.current.style.left;
+        filledRef.current.style.right = `${100 - parseInt(slider2Ref.current.style.left)}%`;
+      }
     }
     correctSliderPosition(value);
   }, [value, rangeWidth, minValue, maxValue, step, sliderRef.current, slider2Ref.current, isDraging, isDraging2]);
@@ -118,69 +121,36 @@ export const Range = ({
     };
   });
 
-  const getSliderPosition = (type: 'first' | 'second') => {
-    const rangeLeft = trackRef.current?.getBoundingClientRect().left || 0;
-    const sliderPosition =
-      rangeLeft && sliderRef.current
-        ? Math.round(sliderRef.current.getBoundingClientRect().left - rangeLeft + SLIDER_WIDTH / 2)
-        : 0;
-    const slider2Position =
-      rangeLeft && slider2Ref.current
-        ? Math.round(slider2Ref.current.getBoundingClientRect().left - rangeLeft + SLIDER_WIDTH / 2)
-        : 0;
-    return type === 'first' ? sliderPosition : slider2Position;
-  };
-
-  const setFilled = () => {
-    if (slider2Ref.current && sliderRef.current && filledRef.current) {
-      if (sliderRef.current.offsetLeft <= slider2Ref.current.offsetLeft) {
-        filledRef.current.style.left = sliderRef.current.style.left;
-        filledRef.current.style.right = `${100 - parseInt(slider2Ref.current.style.left)}%`;
-      } else {
-        filledRef.current.style.left = slider2Ref.current.style.left;
-        filledRef.current.style.right = `${100 - parseInt(sliderRef.current.style.left)}%`;
-      }
-    }
-  };
-
   const updateSlider = React.useCallback(
     (e: any) => {
       setAnimation(false);
 
       if (isDraging || isDraging2) {
         const calcVal = calcValue(e, trackRef, minValue, maxValue, step);
+
         if (isDraging && calcVal > value[1]) {
-          const newValue: NumberRange = [value[0], calcVal];
-          if (!arraysEqual(sortNum(newValue), value)) {
-            console.log('1', { newValue, value });
-            onChange?.(e, sortNum(newValue));
-          }
+          const newValue: NumberRange = [value[1], calcVal];
           setDrag(false);
           setDrag2(true);
-        }
-        if (isDraging2 && calcVal < value[0]) {
-          const newValue: NumberRange = [calcVal, value[1]];
           if (!arraysEqual(sortNum(newValue), value)) {
-            console.log(2);
             onChange?.(e, sortNum(newValue));
           }
+        } else if (isDraging2 && calcVal < value[0]) {
+          const newValue: NumberRange = [calcVal, value[0]];
           setDrag(true);
           setDrag2(false);
+          if (!arraysEqual(sortNum(newValue), value)) {
+            onChange?.(e, sortNum(newValue));
+          }
         } else {
           const newValue: NumberRange = isDraging ? [calcVal, value[1]] : [value[0], calcVal];
           if (!arraysEqual(sortNum(newValue), value)) {
-            console.log('3', { newValue, value });
             onChange?.(e, sortNum(newValue));
           }
         }
-        // const newValue: NumberRange = isDraging ? [calcVal, value[1]] : [value[0], calcVal];
-        // if (!arraysEqual(sortNum(newValue), value)) {
-        //   console.log({ calcVal, newValue: sortNum(newValue) });
-        //   onChange?.(e, sortNum(newValue));
-        // }
       }
     },
-    [setAnimation, isDraging, isDraging2, value, trackRef.current, minValue, maxValue, step, setDrag, setDrag2],
+    [setAnimation, setDrag, setDrag2, isDraging, isDraging2, value, trackRef.current, minValue, maxValue, step],
   );
 
   const onSliderClick = React.useCallback(
@@ -200,22 +170,19 @@ export const Range = ({
       const calcVal = calcValue(e, trackRef, minValue, maxValue, step);
 
       if (isDraging && calcVal > value[1]) {
-        const newValue: NumberRange = [value[0], calcVal];
+        const newValue: NumberRange = [value[1], calcVal];
         if (!arraysEqual(sortNum(newValue), value)) {
-          console.log(4);
           onChange?.(e, sortNum(newValue));
         }
       }
       if (isDraging2 && calcVal < value[0]) {
-        const newValue: NumberRange = [calcVal, value[1]];
+        const newValue: NumberRange = [calcVal, value[0]];
         if (!arraysEqual(sortNum(newValue), value)) {
-          console.log(5);
           onChange?.(e, sortNum(newValue));
         }
       } else {
         const newValue: NumberRange = isDraging ? [calcVal, value[1]] : [value[0], calcVal];
         if (!arraysEqual(sortNum(newValue), value)) {
-          console.log(6);
           onChange?.(e, sortNum(newValue));
         }
       }
@@ -232,24 +199,19 @@ export const Range = ({
       const calcVal = calcValue(e, trackRef, minValue, maxValue, step);
 
       // calc nearest slider
-      const first = calcValueByPos(rangeWidth, getSliderPosition('first'), minValue, maxValue, step);
-      const second = calcValueByPos(rangeWidth, getSliderPosition('second'), minValue, maxValue, step);
-
-      if (Math.abs(second - calcVal) <= Math.abs(calcVal - first)) {
-        if (!arraysEqual(sortNum([first, calcVal]), value)) {
-          console.log(7);
-          onChange?.(e, sortNum([first, calcVal]));
+      if (Math.abs(value[1] - calcVal) <= Math.abs(calcVal - value[0])) {
+        if (!arraysEqual(sortNum([value[0], calcVal]), value)) {
+          onChange?.(e, sortNum([value[0], calcVal]));
         }
         onSliderClick(e, 'second');
       } else {
-        if (!arraysEqual(sortNum([calcVal, second]), value)) {
-          console.log(8);
-          onChange?.(e, sortNum([calcVal, second]));
+        if (!arraysEqual(sortNum([calcVal, value[1]]), value)) {
+          onChange?.(e, sortNum([calcVal, value[1]]));
         }
         onSliderClick(e, 'first');
       }
     },
-    [value, trackRef.current, rangeWidth, maxValue, minValue, step],
+    [value, trackRef.current, maxValue, minValue, step],
   );
 
   return (
@@ -263,7 +225,7 @@ export const Range = ({
                 dimension={dimension}
                 onTouchStart={(e) => onSliderClick(e, 'first')}
                 onMouseDown={(e) => onSliderClick(e, 'first')}
-                // style={{ background: 'red' }}
+                active={isDraging}
               />
             </Thumb>
             <Thumb ref={slider2Ref} animation={animation} dimension={dimension}>
@@ -271,6 +233,7 @@ export const Range = ({
                 dimension={dimension}
                 onTouchStart={(e) => onSliderClick(e, 'second')}
                 onMouseDown={(e) => onSliderClick(e, 'second')}
+                active={isDraging2}
               />
             </Thumb>
           </DefaultTrack>
