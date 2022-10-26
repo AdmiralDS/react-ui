@@ -115,9 +115,9 @@ export const DropMenu = React.forwardRef<HTMLElement, DropMenuProps>(
     };
 
     const reverseMenu = (e: React.MouseEvent<HTMLElement>) => {
-      setIsMenuOpen(!isMenuOpen);
       if (isMenuOpen) onClose?.(); // TODO: убрать после удаления onClose в DropMenuProps
       else onOpen?.(); // TODO: убрать после удаления onOpen в DropMenuProps
+      setIsMenuOpen(!isMenuOpen);
       onClick?.(e);
     };
     const closeMenu = () => {
