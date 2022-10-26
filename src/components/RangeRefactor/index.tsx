@@ -48,33 +48,40 @@ export const Range = ({
   const sliderRef = React.useRef<HTMLDivElement | null>(null);
   const slider2Ref = React.useRef<HTMLDivElement | null>(null);
 
-  const test = (): NumberRange => {
-    if (sliderRef.current && slider2Ref.current) {
-      if (sliderRef.current.offsetLeft < slider2Ref.current.offsetLeft) {
-        console.log('a');
-        return value;
-      } else if (sliderRef.current.offsetLeft > slider2Ref.current.offsetLeft) {
-        console.log('b');
-        return [value[1], value[0]];
-      } else if (sliderRef.current.offsetLeft === slider2Ref.current.offsetLeft && (isDraging || isDraging2)) {
-        if (isDraging) {
-          console.log('1');
-          const sliderValue = calcValueByPos(rangeWidth, getSliderPosition('first'), minValue, maxValue, step);
-          return sliderValue === value[0] ? [value[0], value[1]] : [value[1], value[0]];
-        }
-        if (isDraging2) {
-          console.log('2');
-          const sliderValue = calcValueByPos(rangeWidth, getSliderPosition('second'), minValue, maxValue, step);
-          return sliderValue === value[1] ? [value[0], value[1]] : [value[1], value[0]];
-        }
-        return [value[1], value[0]];
-      }
-    }
-    return value;
-  };
-
   React.useLayoutEffect(() => {
-    correctSliderPosition(test(), 'both');
+    function correctSliderPosition(value: NumberRange) {
+      const onePxValue = rangeWidth ? rangeWidth / (maxValue - minValue) : 0;
+
+      // if (slider === 'first' || slider === 'both') {
+      const correctValue1 = value[0] >= 0 ? value[0] - minValue : -minValue + value[0];
+
+      let calcPercents1: number = ((onePxValue * correctValue1) / rangeWidth) * 100;
+      calcPercents1 = calcPercents1 > 100 ? 100 : calcPercents1;
+      calcPercents1 = calcPercents1 < 0 ? 0 : calcPercents1;
+
+      const sliderCoords1 = String(value) ? calcPercents1 : 0;
+
+      if (sliderRef.current && filledRef.current) {
+        sliderRef.current.style.left = `${sliderCoords1}%`;
+      }
+      // }
+
+      // if (slider === 'second' || slider === 'both') {
+      const correctValue2 = value[1] >= 0 ? value[1] - minValue : -minValue + value[1];
+
+      let calcPercents2: number = ((onePxValue * correctValue2) / rangeWidth) * 100;
+      calcPercents2 = calcPercents2 > 100 ? 100 : calcPercents2;
+      calcPercents2 = calcPercents2 < 0 ? 0 : calcPercents2;
+
+      const sliderCoords2 = String(value) ? calcPercents2 : 0;
+
+      if (slider2Ref.current && filledRef.current) {
+        slider2Ref.current.style.left = `${sliderCoords2}%`;
+      }
+      // }
+      setFilled();
+    }
+    correctSliderPosition(value);
   }, [value, rangeWidth, minValue, maxValue, step, sliderRef.current, slider2Ref.current, isDraging, isDraging2]);
 
   React.useLayoutEffect(() => {
@@ -142,47 +149,38 @@ export const Range = ({
 
       if (isDraging || isDraging2) {
         const calcVal = calcValue(e, trackRef, minValue, maxValue, step);
-        const newValue: NumberRange = isDraging ? [calcVal, value[1]] : [value[0], calcVal];
-        !arraysEqual(sortNum(newValue), value) && onChange?.(e, sortNum(newValue));
+        if (isDraging && calcVal > value[1]) {
+          const newValue: NumberRange = [value[0], calcVal];
+          if (!arraysEqual(sortNum(newValue), value)) {
+            console.log('1', { newValue, value });
+            onChange?.(e, sortNum(newValue));
+          }
+          setDrag(false);
+          setDrag2(true);
+        }
+        if (isDraging2 && calcVal < value[0]) {
+          const newValue: NumberRange = [calcVal, value[1]];
+          if (!arraysEqual(sortNum(newValue), value)) {
+            console.log(2);
+            onChange?.(e, sortNum(newValue));
+          }
+          setDrag(true);
+          setDrag2(false);
+        } else {
+          const newValue: NumberRange = isDraging ? [calcVal, value[1]] : [value[0], calcVal];
+          if (!arraysEqual(sortNum(newValue), value)) {
+            console.log('3', { newValue, value });
+            onChange?.(e, sortNum(newValue));
+          }
+        }
+        // const newValue: NumberRange = isDraging ? [calcVal, value[1]] : [value[0], calcVal];
+        // if (!arraysEqual(sortNum(newValue), value)) {
+        //   console.log({ calcVal, newValue: sortNum(newValue) });
+        //   onChange?.(e, sortNum(newValue));
+        // }
       }
     },
-    [setAnimation, isDraging, isDraging2, value, trackRef.current, minValue, maxValue, step],
-  );
-
-  const correctSliderPosition = React.useCallback(
-    (value: [number, number], slider: 'first' | 'second' | 'both') => {
-      const onePxValue = rangeWidth ? rangeWidth / (maxValue - minValue) : 0;
-
-      if (slider === 'first' || slider === 'both') {
-        const correctValue1 = value[0] >= 0 ? value[0] - minValue : -minValue + value[0];
-
-        let calcPercents1: number = ((onePxValue * correctValue1) / rangeWidth) * 100;
-        calcPercents1 = calcPercents1 > 100 ? 100 : calcPercents1;
-        calcPercents1 = calcPercents1 < 0 ? 0 : calcPercents1;
-
-        const sliderCoords1 = String(value) ? calcPercents1 : 0;
-
-        if (sliderRef.current && filledRef.current) {
-          sliderRef.current.style.left = `${sliderCoords1}%`;
-        }
-      }
-
-      if (slider === 'second' || slider === 'both') {
-        const correctValue2 = value[1] >= 0 ? value[1] - minValue : -minValue + value[1];
-
-        let calcPercents2: number = ((onePxValue * correctValue2) / rangeWidth) * 100;
-        calcPercents2 = calcPercents2 > 100 ? 100 : calcPercents2;
-        calcPercents2 = calcPercents2 < 0 ? 0 : calcPercents2;
-
-        const sliderCoords2 = String(value) ? calcPercents2 : 0;
-
-        if (slider2Ref.current && filledRef.current) {
-          slider2Ref.current.style.left = `${sliderCoords2}%`;
-        }
-      }
-      setFilled();
-    },
-    [maxValue, minValue, rangeWidth],
+    [setAnimation, isDraging, isDraging2, value, trackRef.current, minValue, maxValue, step, setDrag, setDrag2],
   );
 
   const onSliderClick = React.useCallback(
@@ -200,8 +198,27 @@ export const Range = ({
       if (e.type === 'mouseup') e.preventDefault();
       e.stopPropagation();
       const calcVal = calcValue(e, trackRef, minValue, maxValue, step);
-      const newValue: NumberRange = isDraging ? [calcVal, value[1]] : [value[0], calcVal];
-      !arraysEqual(sortNum(newValue), value) && onChange?.(e, sortNum(newValue));
+
+      if (isDraging && calcVal > value[1]) {
+        const newValue: NumberRange = [value[0], calcVal];
+        if (!arraysEqual(sortNum(newValue), value)) {
+          console.log(4);
+          onChange?.(e, sortNum(newValue));
+        }
+      }
+      if (isDraging2 && calcVal < value[0]) {
+        const newValue: NumberRange = [calcVal, value[1]];
+        if (!arraysEqual(sortNum(newValue), value)) {
+          console.log(5);
+          onChange?.(e, sortNum(newValue));
+        }
+      } else {
+        const newValue: NumberRange = isDraging ? [calcVal, value[1]] : [value[0], calcVal];
+        if (!arraysEqual(sortNum(newValue), value)) {
+          console.log(6);
+          onChange?.(e, sortNum(newValue));
+        }
+      }
 
       setAnimation(true);
       setDrag(false);
@@ -219,10 +236,16 @@ export const Range = ({
       const second = calcValueByPos(rangeWidth, getSliderPosition('second'), minValue, maxValue, step);
 
       if (Math.abs(second - calcVal) <= Math.abs(calcVal - first)) {
-        !arraysEqual(sortNum([first, calcVal]), value) && onChange?.(e, sortNum([first, calcVal]));
+        if (!arraysEqual(sortNum([first, calcVal]), value)) {
+          console.log(7);
+          onChange?.(e, sortNum([first, calcVal]));
+        }
         onSliderClick(e, 'second');
       } else {
-        !arraysEqual(sortNum([calcVal, second]), value) && onChange?.(e, sortNum([calcVal, second]));
+        if (!arraysEqual(sortNum([calcVal, second]), value)) {
+          console.log(8);
+          onChange?.(e, sortNum([calcVal, second]));
+        }
         onSliderClick(e, 'first');
       }
     },
@@ -240,7 +263,7 @@ export const Range = ({
                 dimension={dimension}
                 onTouchStart={(e) => onSliderClick(e, 'first')}
                 onMouseDown={(e) => onSliderClick(e, 'first')}
-                style={{ background: 'red' }}
+                // style={{ background: 'red' }}
               />
             </Thumb>
             <Thumb ref={slider2Ref} animation={animation} dimension={dimension}>

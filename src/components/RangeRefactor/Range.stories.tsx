@@ -60,14 +60,18 @@ export default {
 } as ComponentMeta<typeof Range>;
 
 const Template0: ComponentStory<typeof Range> = (args) => {
-  const [rangeValue, setRangeValue] = React.useState<[number, number]>([0, 5]);
+  const [rangeValue, setRangeValue] = React.useState<[number, number]>([4, 5]);
+  // setTimeout(() => {
+  //   setRangeValue([0, 1]);
+  // }, 5000);
   return (
     <>
       <Range
         {...args}
         value={rangeValue}
         onChange={(e: any, value: [number, number]) => {
-          console.log({ e, value });
+          // console.log({ e, value });
+          console.log(value);
           setRangeValue(value);
         }}
       />
