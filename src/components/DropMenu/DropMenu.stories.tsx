@@ -113,16 +113,16 @@ const items = [
     value: 7,
   },
 ];
-const handleVisibilityChangeFromStories = (isVisible: boolean) => {
-  console.log('onVisibilityChange from stories');
+const handleVisibilityChangeControlledState = (isVisible: boolean) => {
+  console.log('onVisibilityChange with controlled state');
   if (isVisible) {
     console.log('Menu opened');
   } else {
     console.log('Menu closed');
   }
 };
-const handleVisibilityChangeFromDropMenu = (isVisible: boolean) => {
-  console.log('onVisibilityChange from DropMenu');
+const handleVisibilityChangeUnControlledState = (isVisible: boolean) => {
+  console.log('onVisibilityChange with uncontrolled state');
   if (isVisible) {
     console.log('Menu opened');
   } else {
@@ -168,7 +168,7 @@ const SimpleTemplate: ComponentStory<typeof DropMenu> = (args) => {
             console.log(`selected: ${id}`);
             setSelected(id);
           }}
-          onVisibilityChange={handleVisibilityChangeFromDropMenu}
+          onVisibilityChange={handleVisibilityChangeUnControlledState}
           dimension={args.dimension}
           disabled={args.disabled}
           selected={selected}
@@ -309,7 +309,7 @@ const TemplateWithCards: ComponentStory<typeof DropMenu> = (args) => {
             console.log(`selected: ${id}`);
             setSelected(id);
           }}
-          onVisibilityChange={handleVisibilityChangeFromDropMenu}
+          onVisibilityChange={handleVisibilityChangeUnControlledState}
           dimension={args.dimension}
           disabled={args.disabled}
           selected={selected}
@@ -403,17 +403,25 @@ const DropMenuTooltipTemplate: ComponentStory<typeof DropMenu> = (args) => {
     });
   }, [args.dimension]);
 
+  const handleVisibilityChange = (isVisible: boolean) => {
+    handleVisibilityChangeControlledState(isVisible);
+    setIsVisible(isVisible);
+  };
+
   const handleButtonClick = (e: React.MouseEvent<HTMLElement>) => {
-    handleVisibilityChangeFromStories(!isVisible);
-    setIsVisible(!isVisible);
+    handleVisibilityChange(!isVisible);
     args.onClick?.(e);
   };
 
   const handleSelectItem = (id: string) => {
     console.log(`Option ${id} clicked`);
     setSelected(id);
-    handleVisibilityChangeFromStories(!isVisible);
-    setIsVisible(false);
+    handleVisibilityChange(false);
+  };
+
+  const handleClickOutside = (e: Event) => {
+    console.log('handleClickOutside from stories');
+    handleVisibilityChange(false);
   };
 
   return (
@@ -423,13 +431,16 @@ const DropMenuTooltipTemplate: ComponentStory<typeof DropMenu> = (args) => {
         <br />
         - используется кастомный обработчик клика по кнопке (handleButtonClick) для открытия/закрытия выпадающего
         списка;
-        <br />- после выбора опции из выпадающего списка (handleSelectItem) происходит закрытие меню.
+        <br />- после выбора опции из выпадающего списка (handleSelectItem) происходит закрытие меню;
+        <br />- используется кастомный обработчик при клике вне области выпадающего списка (handleClickOutside).
       </Desc>
       <DropMenu
         {...args}
         items={model}
         isVisible={isVisible}
+        onVisibilityChange={handleVisibilityChange}
         onSelectItem={handleSelectItem}
+        onClickOutside={handleClickOutside}
         dimension={args.dimension}
         disabled={args.disabled}
         selected={selected}
@@ -511,6 +522,11 @@ const TemplateWithCheckbox: ComponentStory<typeof DropMenu> = (args) => {
     setActiveOption(id);
   };
 
+  const handleVisibilityChange = (isVisible: boolean) => {
+    handleVisibilityChangeControlledState(isVisible);
+    setIsVisible(isVisible);
+  };
+
   const handleSelectItem = (id: string) => {
     console.log(`Option ${id} clicked`);
     const updatedInnerState = [...innerState];
@@ -523,9 +539,13 @@ const TemplateWithCheckbox: ComponentStory<typeof DropMenu> = (args) => {
   };
 
   const handleButtonClick = (e: React.MouseEvent<HTMLElement>) => {
-    handleVisibilityChangeFromStories(!isVisible);
-    setIsVisible(!isVisible);
+    handleVisibilityChange(!isVisible);
     args.onClick?.(e);
+  };
+
+  const handleClickOutside = (e: Event) => {
+    console.log('handleClickOutside from stories');
+    handleVisibilityChange(false);
   };
 
   return (
@@ -535,7 +555,8 @@ const TemplateWithCheckbox: ComponentStory<typeof DropMenu> = (args) => {
         <br />
         - используется кастомный обработчик клика по кнопке (handleButtonClick) для открытия/закрытия выпадающего
         списка;
-        <br />- после выбора опции из выпадающего списка (handleSelectItem) закрытие меню не происходит.
+        <br />- после выбора опции из выпадающего списка (handleSelectItem) происходит закрытие меню;
+        <br />- используется кастомный обработчик при клике вне области выпадающего списка (handleClickOutside).
       </Desc>
       <DropMenu
         {...args}
@@ -545,6 +566,8 @@ const TemplateWithCheckbox: ComponentStory<typeof DropMenu> = (args) => {
         selected={selectedOption}
         onSelectItem={handleSelectItem}
         isVisible={isVisible}
+        onVisibilityChange={handleVisibilityChange}
+        onClickOutside={handleClickOutside}
         disableSelectedOptionHighlight={true}
         dimension={args.dimension}
         disabled={args.disabled}
@@ -613,7 +636,7 @@ const TemplateWithRadiobutton: ComponentStory<typeof DropMenu> = (args) => {
           setCheckedState(newCheckedState);
           setSelected(id);
         }}
-        onVisibilityChange={handleVisibilityChangeFromDropMenu}
+        onVisibilityChange={handleVisibilityChangeUnControlledState}
         dimension={args.dimension}
         disabled={args.disabled}
         selected={selected}
