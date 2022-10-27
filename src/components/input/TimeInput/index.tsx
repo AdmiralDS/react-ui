@@ -208,7 +208,10 @@ export const TimeInput = React.forwardRef<HTMLInputElement, TimeInputProps>(
       }
     };
 
-    const clickOutside = () => {
+    const clickOutside = (e: Event) => {
+      if (e.target && inputContainerRef.current?.contains(e.target as Node)) {
+        return;
+      }
       setIsOpened(false);
     };
 

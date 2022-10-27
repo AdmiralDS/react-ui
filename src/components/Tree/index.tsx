@@ -44,7 +44,7 @@ const treeToMap = (tree: Array<TreeItemProps>, level = 0, dependencies?: Array<A
     const key = item.id.toString();
     acc[key] = { level, node: item };
 
-    if (dependencies) {
+    if (dependencies && !item.children) {
       dependencies.forEach((dependency) => dependency.push(key));
     }
     if (item.children) {
@@ -157,7 +157,7 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps>(
           node.dependencies?.some((depId: number | string) => !map[depId].node.checked);
         const checked = hasChildren
           ? node.dependencies?.every((depId: number | string) => map[depId].node.checked)
-          : item.checked;
+          : !!item.checked;
 
         return (
           <React.Fragment key={item.id}>

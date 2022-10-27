@@ -190,10 +190,6 @@ export const TreeNode = ({
     onChange?.(e.target.checked);
   };
 
-  const handleCheckboxClick = (e: React.MouseEvent<HTMLInputElement>) => {
-    console.log(e);
-  };
-
   return (
     <RowWrapper
       dimension={dimension}
@@ -222,7 +218,6 @@ export const TreeNode = ({
           disabled={disabled}
           checked={checked}
           indeterminate={indeterminate}
-          onClick={handleCheckboxClick}
           onChange={handleCheckboxChange}
         />
       )}

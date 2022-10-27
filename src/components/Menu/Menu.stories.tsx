@@ -7,7 +7,6 @@ import { typography } from '#src/components/Typography';
 import { ReactComponent as CardSolid } from '@admiral-ds/icons/build/finance/CardSolid.svg';
 import { withDesign } from 'storybook-addon-designs';
 import { LIGHT_THEME, Theme } from '#src/components/themes';
-import { CheckboxField } from '#src/components/form';
 import { RadioButton } from '#src/components/RadioButton';
 import { TooltipHoc } from '#src/components/TooltipHOC';
 import { TextInput } from '#src/components/input';
@@ -850,7 +849,7 @@ const MenuCheckboxGroupTemplate: ComponentStory<typeof Menu> = (args) => {
         item.dependencies?.some((depId: string) => !map.get(depId)?.node.checked);
       const checked = hasChildren
         ? item.dependencies?.every((depId: string) => map.get(depId)?.node.checked)
-        : node.checked;
+        : !!node.checked;
       menuModel.push({
         id: node.id,
         render: (options: RenderOptionProps) => (
