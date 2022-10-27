@@ -3,7 +3,7 @@ import * as React from 'react';
 import { keyboardKey } from '#src/components/common/keyboardKey';
 import { OpenStatusButton } from '#src/components/OpenStatusButton';
 import type { ItemProps } from '#src/components/Menu/MenuItem';
-import { StyledDropdownContainer } from '#src/components/DropdownContainer';
+import { DropdownContainerProps, StyledDropdownContainer } from '#src/components/DropdownContainer';
 import { Menu, MenuDimensions as Dimension, MenuProps } from '#src/components/Menu';
 import { refSetter } from '#src/components/common/utils/refSetter';
 import styled, { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
@@ -37,6 +37,7 @@ export interface DropMenuProps
       MenuProps,
       'active' | 'onActivateItem' | 'onSelectItem' | 'multiSelection' | 'disableSelectedOptionHighlight'
     >,
+    Pick<DropdownContainerProps, 'onClickOutside'>,
     Omit<HTMLAttributes<HTMLElement>, 'onChange'> {
   /** Размер компонента */
   dimension?: Dimension;
@@ -101,6 +102,7 @@ export const DropMenu = React.forwardRef<HTMLElement, DropMenuProps>(
       disableSelectedOptionHighlight = false,
       isVisible,
       onVisibilityChange = (isVisible: boolean) => undefined,
+      onClickOutside,
       ...props
     },
     ref,
@@ -130,8 +132,12 @@ export const DropMenu = React.forwardRef<HTMLElement, DropMenuProps>(
       if (e.target && btnRef.current?.contains(e.target as Node)) {
         return;
       }
-      setIsMenuOpen(false);
-      onClose?.(); // TODO: убрать после удаления onClose в DropMenuProps
+      if (onClickOutside) {
+        onClickOutside(e);
+      } else {
+        setIsMenuOpen(false);
+        onClose?.(); // TODO: убрать после удаления onClose в DropMenuProps
+      }
     };
 
     const handleBtnKeyDown = (e: React.KeyboardEvent<HTMLElement>) => {
