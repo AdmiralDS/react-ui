@@ -2,14 +2,14 @@ import * as React from 'react';
 import { throttle } from '#src/components/common/utils/throttle';
 
 import type { NumberRange } from './utils';
-import { calcValueByPos, sortNum, calcValue, arraysEqual } from './utils';
+import { sortNum, calcValue, calcSliderCoords, arraysEqual } from './utils';
 import { DefaultTrack, FilledTrack, Thumb, ThumbCircle, Track, TrackWrapper, Wrapper } from './style';
 
 export interface RangeProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'> {
   /** Значение компонента */
   value: NumberRange;
   /** Коллбек на изменение состояния */
-  onChange?: (event: any, value: NumberRange) => void;
+  onChange: (event: any, value: NumberRange) => void;
   /** Минимальное значение */
   minValue?: number;
   /** Максимальное значение */
@@ -29,7 +29,7 @@ export interface RangeProps extends Omit<React.HTMLAttributes<HTMLDivElement>, '
 export const Range = ({
   minValue = 0,
   maxValue = 20,
-  value = [minValue, maxValue],
+  value: userValue,
   onChange,
   disabled = false,
   step = 1,
@@ -37,7 +37,13 @@ export const Range = ({
   skeleton = false,
   ...props
 }: RangeProps) => {
-  const SLIDER_WIDTH = dimension === 'm' ? 20 : 16;
+  const value: NumberRange =
+    Array.isArray(userValue) &&
+    userValue.length === 2 &&
+    typeof userValue[0] === 'number' &&
+    typeof userValue[1] === 'number'
+      ? sortNum(userValue)
+      : [minValue, maxValue];
 
   const [isDraging, setDrag] = React.useState(false);
   const [isDraging2, setDrag2] = React.useState(false);
@@ -50,42 +56,32 @@ export const Range = ({
 
   React.useLayoutEffect(() => {
     function correctSliderPosition(value: NumberRange) {
-      const onePxValue = rangeWidth ? rangeWidth / (maxValue - minValue) : 0;
+      const slider1Coords = calcSliderCoords(value[0], minValue, maxValue, rangeWidth);
+      const slider2Coords = calcSliderCoords(value[1], minValue, maxValue, rangeWidth);
 
-      // if (slider === 'first' || slider === 'both') {
-      const correctValue1 = value[0] >= 0 ? value[0] - minValue : -minValue + value[0];
-
-      let calcPercents1: number = ((onePxValue * correctValue1) / rangeWidth) * 100;
-      calcPercents1 = calcPercents1 > 100 ? 100 : calcPercents1;
-      calcPercents1 = calcPercents1 < 0 ? 0 : calcPercents1;
-
-      const sliderCoords1 = String(value) ? calcPercents1 : 0;
-
-      if (sliderRef.current && filledRef.current) {
-        sliderRef.current.style.left = `${sliderCoords1}%`;
-      }
-      // }
-
-      // if (slider === 'second' || slider === 'both') {
-      const correctValue2 = value[1] >= 0 ? value[1] - minValue : -minValue + value[1];
-
-      let calcPercents2: number = ((onePxValue * correctValue2) / rangeWidth) * 100;
-      calcPercents2 = calcPercents2 > 100 ? 100 : calcPercents2;
-      calcPercents2 = calcPercents2 < 0 ? 0 : calcPercents2;
-
-      const sliderCoords2 = String(value) ? calcPercents2 : 0;
-
-      if (slider2Ref.current && filledRef.current) {
-        slider2Ref.current.style.left = `${sliderCoords2}%`;
-      }
-      // }
-      if (slider2Ref.current && sliderRef.current && filledRef.current) {
-        filledRef.current.style.left = sliderRef.current.style.left;
-        filledRef.current.style.right = `${100 - parseInt(slider2Ref.current.style.left)}%`;
+      if (sliderRef.current && slider2Ref.current && filledRef.current) {
+        sliderRef.current.style.left = `${slider1Coords}%`;
+        slider2Ref.current.style.left = `${slider2Coords}%`;
+        filledRef.current.style.left = `${slider1Coords}%`;
+        filledRef.current.style.right = `${100 - slider2Coords}%`;
       }
     }
+
+    let newValue = value;
+
+    // value должно быть кратно step
+    if (step && step !== 'any') {
+      const val1 = Math.round(newValue[0] / step) * step;
+      const val2 = Math.round(newValue[1] / step) * step;
+      newValue = [val1, val2];
+      if (step.toString().includes('.')) {
+        const decimal = step.toString().match(/\.(\d+)/)?.[1].length;
+        newValue = [+newValue[0].toFixed(decimal), +newValue[1].toFixed(decimal)];
+      }
+    }
+
     correctSliderPosition(value);
-  }, [value, rangeWidth, minValue, maxValue, step, sliderRef.current, slider2Ref.current, isDraging, isDraging2]);
+  }, [value, rangeWidth, minValue, maxValue, step, sliderRef.current, slider2Ref.current, filledRef.current]);
 
   React.useLayoutEffect(() => {
     if (trackRef.current) {
@@ -133,19 +129,19 @@ export const Range = ({
           setDrag(false);
           setDrag2(true);
           if (!arraysEqual(sortNum(newValue), value)) {
-            onChange?.(e, sortNum(newValue));
+            onChange(e, sortNum(newValue));
           }
         } else if (isDraging2 && calcVal < value[0]) {
           const newValue: NumberRange = [calcVal, value[0]];
           setDrag(true);
           setDrag2(false);
           if (!arraysEqual(sortNum(newValue), value)) {
-            onChange?.(e, sortNum(newValue));
+            onChange(e, sortNum(newValue));
           }
         } else {
           const newValue: NumberRange = isDraging ? [calcVal, value[1]] : [value[0], calcVal];
           if (!arraysEqual(sortNum(newValue), value)) {
-            onChange?.(e, sortNum(newValue));
+            onChange(e, sortNum(newValue));
           }
         }
       }
@@ -172,18 +168,18 @@ export const Range = ({
       if (isDraging && calcVal > value[1]) {
         const newValue: NumberRange = [value[1], calcVal];
         if (!arraysEqual(sortNum(newValue), value)) {
-          onChange?.(e, sortNum(newValue));
+          onChange(e, sortNum(newValue));
         }
       }
       if (isDraging2 && calcVal < value[0]) {
         const newValue: NumberRange = [calcVal, value[0]];
         if (!arraysEqual(sortNum(newValue), value)) {
-          onChange?.(e, sortNum(newValue));
+          onChange(e, sortNum(newValue));
         }
       } else {
         const newValue: NumberRange = isDraging ? [calcVal, value[1]] : [value[0], calcVal];
         if (!arraysEqual(sortNum(newValue), value)) {
-          onChange?.(e, sortNum(newValue));
+          onChange(e, sortNum(newValue));
         }
       }
 
@@ -191,7 +187,7 @@ export const Range = ({
       setDrag(false);
       setDrag2(false);
     },
-    [value, trackRef.current, maxValue, minValue, step, isDraging, setAnimation, setDrag, setDrag2],
+    [value, trackRef.current, maxValue, minValue, step, isDraging, isDraging2, setAnimation, setDrag, setDrag2],
   );
 
   const onTrackClick = React.useCallback(
@@ -201,12 +197,12 @@ export const Range = ({
       // calc nearest slider
       if (Math.abs(value[1] - calcVal) <= Math.abs(calcVal - value[0])) {
         if (!arraysEqual(sortNum([value[0], calcVal]), value)) {
-          onChange?.(e, sortNum([value[0], calcVal]));
+          onChange(e, sortNum([value[0], calcVal]));
         }
         onSliderClick(e, 'second');
       } else {
         if (!arraysEqual(sortNum([calcVal, value[1]]), value)) {
-          onChange?.(e, sortNum([calcVal, value[1]]));
+          onChange(e, sortNum([calcVal, value[1]]));
         }
         onSliderClick(e, 'first');
       }

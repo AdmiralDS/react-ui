@@ -1,6 +1,6 @@
 export type NumberRange = [number, number];
 
-export const calcValueByPos = (
+const calcValueByPos = (
   /** Ширина всего компонента (количество пикселей) */
   trackWidth: number,
   /** На каком расстояниии от начала trackа находится слайдер (количество пикселей) */
@@ -57,12 +57,24 @@ export const calcValue = (
 
   const sliderPosition = Math.round(cursorPosition - trackLeft);
 
-  let newValue = calcValueByPos(trackWidth, sliderPosition, minValue, maxValue, step);
+  const newValue = calcValueByPos(trackWidth, sliderPosition, minValue, maxValue, step);
   return newValue;
 };
 
 export const sortNum = (arr: NumberRange): NumberRange => (arr[0] > arr[1] ? [arr[1], arr[0]] : [arr[0], arr[1]]);
 
-export function arraysEqual(arr1: NumberRange, arr2: NumberRange) {
+export const arraysEqual = (arr1: NumberRange, arr2: NumberRange) => {
   return arr1.length === arr2.length && arr1.every((value, index) => value === arr2[index]);
-}
+};
+
+export const calcSliderCoords = (value: number, minValue: number, maxValue: number, rangeWidth: number) => {
+  const onePxValue = rangeWidth ? rangeWidth / (maxValue - minValue) : 0;
+
+  const correctValue = value >= 0 ? value - minValue : -minValue + value;
+
+  let percents: number = ((onePxValue * correctValue) / rangeWidth) * 100;
+  percents = percents > 100 ? 100 : percents;
+  percents = percents < 0 ? 0 : percents;
+
+  return percents;
+};

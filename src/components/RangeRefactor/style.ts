@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import type { RangeProps } from '#src/components/Range';
+import type { RangeProps } from '#src/components/RangeRefactor';
 import { skeletonAnimationMixin } from '#src/components/skeleton/animation';
 
 const TRANSITION_ANIMATION = 'ease-in 0.3s';
