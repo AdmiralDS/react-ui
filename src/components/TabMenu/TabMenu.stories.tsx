@@ -242,18 +242,18 @@ const Template4: ComponentStory<typeof TabMenu> = (args) => {
   );
 };
 
-export const OverflowMenuBase = Template1.bind({});
-OverflowMenuBase.args = {};
-OverflowMenuBase.storyName = 'TabMenu. Базовый пример.';
+export const TabMenuBase = Template1.bind({});
+TabMenuBase.args = {};
+TabMenuBase.storyName = 'TabMenu. Базовый пример.';
 
-export const OverflowMenuUnderline = Template2.bind({});
-OverflowMenuUnderline.args = {};
-OverflowMenuUnderline.storyName = 'TabMenu. Пример с нижней серой полосой.';
+export const TabMenuUnderline = Template2.bind({});
+TabMenuUnderline.args = {};
+TabMenuUnderline.storyName = 'TabMenu. Пример с нижней серой полосой.';
 
-export const OverflowMenuDisabled = Template3.bind({});
-OverflowMenuDisabled.args = {};
-OverflowMenuDisabled.storyName = 'TabMenu. Пример с задизейбленными табами.';
+export const TabMenuDisabled = Template3.bind({});
+TabMenuDisabled.args = {};
+TabMenuDisabled.storyName = 'TabMenu. Пример с задизейбленными табами.';
 
-export const OverflowMenuTooltip = Template4.bind({});
-OverflowMenuTooltip.args = {};
-OverflowMenuTooltip.storyName = 'TabMenu. Пример с OverflowMenu.';
+export const TabMenuTooltip = Template4.bind({});
+TabMenuTooltip.args = {};
+TabMenuTooltip.storyName = 'TabMenu. Пример с OverflowMenu.';
