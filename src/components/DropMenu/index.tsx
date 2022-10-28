@@ -32,6 +32,18 @@ export interface RenderContentProps {
   disabled?: boolean;
 }
 
+export interface DropMenuComponentProps
+  extends Pick<
+      DropMenuProps,
+      | 'isVisible'
+      | 'onVisibilityChange'
+      | 'active'
+      | 'onActivateItem'
+      | 'onSelectItem'
+      | 'disableSelectedOptionHighlight'
+    >,
+    Pick<DropdownContainerProps, 'onClickOutside'> {}
+
 export interface DropMenuProps
   extends Pick<
       MenuProps,
