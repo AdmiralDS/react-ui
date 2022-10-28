@@ -15,6 +15,7 @@ export const TitleText: React.FC<TitleTextProps> = ({ lineClamp, dimension, extr
   const textRef = React.useRef<HTMLDivElement>(null);
   const [overflow, setOverflow] = React.useState(false);
   const [tooltipVisible, setTooltipVisible] = React.useState(false);
+  const titleNotCustom = typeof children === 'string' || typeof children === 'number';
 
   React.useLayoutEffect(() => {
     const element = textRef.current;
@@ -52,7 +53,7 @@ export const TitleText: React.FC<TitleTextProps> = ({ lineClamp, dimension, extr
           {children}
         </Title>
       )}
-      {overflow && tooltipVisible && <Tooltip targetRef={textRef} renderContent={() => children} />}
+      {overflow && tooltipVisible && titleNotCustom && <Tooltip targetRef={textRef} renderContent={() => children} />}
     </>
   );
 };
