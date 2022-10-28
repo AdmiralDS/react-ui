@@ -3,18 +3,23 @@ import * as React from 'react';
 import type { Dimension } from '#src/components/OverflowMenu/Button';
 import { Button, OverflowMenuIcon } from '#src/components/OverflowMenu/Button';
 import type { ItemProps } from '#src/components/Menu/MenuItem';
-import { DropMenu, RenderContentProps } from '#src/components/DropMenu';
+import { DropMenu, DropMenuComponentProps, RenderContentProps } from '#src/components/DropMenu';
 import { passDropdownDataAttributes } from '#src/components/common/utils/splitDataAttributes';
 import { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 
-export interface OverflowMenuProps extends Omit<React.HTMLAttributes<HTMLButtonElement>, 'onChange'> {
+export interface OverflowMenuProps
+  extends Omit<React.HTMLAttributes<HTMLButtonElement>, 'onChange'>,
+    DropMenuComponentProps {
   /** Выбранная опция */
   selected?: string;
-  /** Колбек на изменение выбранной опции */
+  /** @deprecated use onSelectItem instead
+   * Колбек на изменение выбранной опции */
   onChange?: (id: string) => void;
-  /** Колбек на открытие меню */
+  /** @deprecated use isVisible and onVisibilityChange instead
+   * Колбек на открытие меню */
   onOpen?: () => void;
-  /** Колбек на закрытие меню */
+  /** @deprecated use isVisible and onVisibilityChange instead
+   * Колбек на закрытие меню */
   onClose?: () => void;
   /** Размер компонента */
   dimension?: Dimension;
@@ -41,7 +46,14 @@ export const OverflowMenu = React.forwardRef<HTMLButtonElement, OverflowMenuProp
       disabled = false,
       alignSelf = 'flex-end',
       isVertical = false,
+      disableSelectedOptionHighlight,
       selected,
+      onSelectItem,
+      active,
+      onActivateItem,
+      isVisible,
+      onVisibilityChange,
+      onClickOutside,
       onChange,
       onOpen,
       onClose,
@@ -65,7 +77,14 @@ export const OverflowMenu = React.forwardRef<HTMLButtonElement, OverflowMenuProp
           menuWidth={menuWidth}
           menuMaxHeight={menuMaxHeight}
           items={items}
+          disableSelectedOptionHighlight={disableSelectedOptionHighlight}
           selected={selected}
+          onSelectItem={onSelectItem}
+          active={active}
+          onActivateItem={onActivateItem}
+          isVisible={isVisible}
+          onVisibilityChange={onVisibilityChange}
+          onClickOutside={onClickOutside}
           onChange={onChange}
           onOpen={onOpen}
           onClose={onClose}
