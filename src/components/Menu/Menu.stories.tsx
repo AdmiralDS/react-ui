@@ -19,8 +19,8 @@ import { keyboardKey } from '#src/components/common/keyboardKey';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 import {
   CheckboxGroupItemProps,
-  checkboxTreeToMap,
-  MenuItemWithCheckbox,
+  checkboxTreeToMap, ItemWithCheckbox,
+  MenuItemWithCheckbox
 } from '#src/components/Menu/MenuItemWithCheckbox';
 
 const Desc = styled.div`
@@ -352,11 +352,6 @@ const CustomItemTemplate: ComponentStory<typeof Menu> = (args) => {
   );
 };
 
-interface ItemWithCheckbox {
-  id: string;
-  label: string;
-  checked?: boolean;
-}
 const itemsWithCheckbox: Array<ItemWithCheckbox> = [
   {
     id: '1',
@@ -441,7 +436,7 @@ const MenuCheckboxTemplate: ComponentStory<typeof Menu> = (args) => {
           onActivateItem={handleActivateItem}
           selected={selectedOption}
           onSelectItem={handleSelectItem}
-          multiSelection={true}
+          disableSelectedOptionHighlight={true}
         />
       </Wrapper>
     </ThemeProvider>
@@ -897,7 +892,7 @@ const MenuCheckboxGroupTemplate: ComponentStory<typeof Menu> = (args) => {
           onSelectItem={handleSelectItem}
           active={activeOption}
           onActivateItem={handleActivateItem}
-          multiSelection={true}
+          disableSelectedOptionHighlight={true}
         />
       </Wrapper>
     </ThemeProvider>

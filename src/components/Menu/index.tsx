@@ -78,8 +78,12 @@ export interface MenuProps extends HTMLAttributes<HTMLDivElement> {
   renderTopPanel?: (props: RenderPanelProps) => React.ReactNode;
   /** Позволяет добавить панель внизу под выпадающим списком */
   renderBottomPanel?: (props: RenderPanelProps) => React.ReactNode;
-  /** Возможность множественного выбора (опции с Checkbox) */
+  /** @deprecated use disableSelectedOptionHighlight instead
+   * Возможность множественного выбора (опции с Checkbox) */
   multiSelection?: boolean;
+  /** Возможность отключить подсветку выбранной опции
+   * (например, при множественном выборе, когда у каждой опции есть Checkbox */
+  disableSelectedOptionHighlight?: boolean;
 }
 
 export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
@@ -95,6 +99,7 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
       renderBottomPanel,
       dimension = 'l',
       multiSelection = false,
+      disableSelectedOptionHighlight = false,
       ...props
     },
     ref,
@@ -103,7 +108,8 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
     const [selectedState, setSelectedState] = React.useState<string | undefined>(defaultSelected);
     const [activeState, setActiveState] = React.useState<string | undefined>(uncontrolledActiveValue);
 
-    const selectedId = multiSelection ? undefined : selected === undefined ? selectedState : selected;
+    const selectedId =
+      multiSelection || disableSelectedOptionHighlight ? undefined : selected === undefined ? selectedState : selected;
     const activeId = active === undefined ? activeState : active;
 
     const menuRef = React.useRef<HTMLDivElement | null>(null);
@@ -137,7 +143,7 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
     };
 
     const selectItem = (id: string) => {
-      if (selectedId !== id && !multiSelection) setSelectedState(id);
+      if (selectedId !== id && !multiSelection && !disableSelectedOptionHighlight) setSelectedState(id);
       onSelectItem?.(id);
     };
 
