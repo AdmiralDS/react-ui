@@ -5,7 +5,7 @@ import { Button } from '#src/components/Button';
 import { Shape } from '#src/components/themes/common';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { MenuItem, RenderOptionProps } from '#src/components/Menu/MenuItem';
-import { DropMenu } from '#src/components/DropMenu';
+import { DropMenu, DropMenuComponentProps } from '#src/components/DropMenu';
 import { skeletonAnimationMixin } from '#src/components/skeleton/animation';
 import { passDropdownDataAttributes } from '#src/components/common/utils/splitDataAttributes';
 
@@ -88,17 +88,21 @@ export interface MultiButtonItem extends HTMLAttributes<HTMLElement> {
   disabled?: boolean;
 }
 
-export interface MultiButtonProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> {
+export interface MultiButtonProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'>, DropMenuComponentProps {
   /** Массив опций */
   options: Array<MultiButtonItem>;
   /** Массив опций */
   selected?: string;
   /** Колбек на нажатие основной кнопки */
   onMainButtonClick?: (e: MouseEvent<HTMLButtonElement>) => void;
+  /** @deprecated use onSelectItem instead
+   * Колбек на изменение выбранной опции */
   onChange: (id: string) => void;
-  /** Колбек на открытие меню */
+  /** @deprecated use isVisible and onVisibilityChange instead
+   * Колбек на открытие меню */
   onOpen?: () => void;
-  /** Колбек на закрытие меню */
+  /** @deprecated use isVisible and onVisibilityChange instead
+   * Колбек на закрытие меню */
   onClose?: () => void;
   /** Размер компонента */
   dimension?: Dimension;
@@ -124,7 +128,14 @@ export const MultiButton = React.forwardRef<HTMLButtonElement, MultiButtonProps>
       disabled,
       options,
       onMainButtonClick,
+      disableSelectedOptionHighlight,
       selected,
+      onSelectItem,
+      active,
+      onActivateItem,
+      isVisible,
+      onVisibilityChange,
+      onClickOutside,
       onChange,
       onClose,
       onOpen,
@@ -167,10 +178,17 @@ export const MultiButton = React.forwardRef<HTMLButtonElement, MultiButtonProps>
         menuWidth={menuWidth}
         menuMaxHeight={menuMaxHeight}
         items={model}
+        disableSelectedOptionHighlight={disableSelectedOptionHighlight}
         selected={selected}
+        onSelectItem={onSelectItem}
+        active={active}
+        onActivateItem={onActivateItem}
         onChange={onChange}
         onOpen={onOpen}
         onClose={onClose}
+        isVisible={isVisible}
+        onVisibilityChange={onVisibilityChange}
+        onClickOutside={onClickOutside}
         disabled={disabled}
         alignSelf={alignSelf}
         dropContainerCssMixin={dropContainerCssMixin}
