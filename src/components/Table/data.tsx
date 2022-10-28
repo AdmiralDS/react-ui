@@ -789,11 +789,14 @@ export const columnListExtra: Column[] = [
 
 interface MenuProps {
   row: RowData;
-  onMenuOpen: () => void;
-  onMenuClose: () => void;
+  /** @deprecated use onVisibilityChange instead */
+  onMenuOpen?: () => void;
+  /** @deprecated use onVisibilityChange instead */
+  onMenuClose?: () => void;
+  onVisibilityChange?: (isVisible: boolean) => void;
 }
 
-const Menu: React.FC<MenuProps> = ({ row, onMenuOpen, onMenuClose }) => {
+const Menu: React.FC<MenuProps> = ({ row, onMenuOpen, onMenuClose, onVisibilityChange }) => {
   const items: Array<any> = [
     {
       id: '1',
@@ -827,7 +830,7 @@ const Menu: React.FC<MenuProps> = ({ row, onMenuOpen, onMenuClose }) => {
 
   return (
     <OverflowMenu
-      onChange={(id) => {
+      onSelectItem={(id) => {
         const options: any = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
         if (id === '1') alert(StrToDate(row['transfer_date']).toLocaleString('ru', options));
         if (id === '2') alert(StrToDate(row['transfer_date']).toLocaleString('en-US', options));
@@ -835,6 +838,7 @@ const Menu: React.FC<MenuProps> = ({ row, onMenuOpen, onMenuClose }) => {
       }}
       onOpen={onMenuOpen}
       onClose={onMenuClose}
+      onVisibilityChange={onVisibilityChange}
       aria-label="Overflow Menu component"
       dimension="m"
       isVertical
