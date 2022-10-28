@@ -4,6 +4,12 @@ import { ItemDimension } from '#src/components/Menu/menuItemMixins';
 import { MenuItem, MenuItemProps } from '#src/components/Menu/MenuItem';
 import { Checkbox } from '#src/components/Checkbox';
 
+export interface ItemWithCheckbox {
+  id: string;
+  label: string;
+  checked?: boolean;
+}
+
 export interface CheckboxGroupItemProps {
   id: string;
   label: React.ReactNode;
