@@ -93,7 +93,8 @@ export interface MultiButtonProps extends Omit<HTMLAttributes<HTMLDivElement>, '
   options: Array<MultiButtonItem>;
   /** Массив опций */
   selected?: string;
-  /** Колбек на изменение выбранной опции */
+  /** Колбек на нажатие основной кнопки */
+  onMainButtonClick?: (e: MouseEvent<HTMLButtonElement>) => void;
   onChange: (id: string) => void;
   /** Колбек на открытие меню */
   onOpen?: () => void;
@@ -122,6 +123,7 @@ export const MultiButton = React.forwardRef<HTMLButtonElement, MultiButtonProps>
       appearance = 'primary',
       disabled,
       options,
+      onMainButtonClick,
       selected,
       onChange,
       onClose,
@@ -157,10 +159,6 @@ export const MultiButton = React.forwardRef<HTMLButtonElement, MultiButtonProps>
       wrapperRef.current?.setAttribute('data-focused', 'false');
     };
 
-    const handleMainBtnClick = (e: MouseEvent<HTMLButtonElement>) => {
-      onChange(e.currentTarget.id);
-    };
-
     const dropMenuProps = passDropdownDataAttributes(props);
 
     return (
@@ -193,7 +191,7 @@ export const MultiButton = React.forwardRef<HTMLButtonElement, MultiButtonProps>
                 dimension={dimension}
                 appearance={appearance}
                 disabled={disabled || firstOptionDisabled}
-                onClick={handleMainBtnClick}
+                onClick={onMainButtonClick}
               >
                 {firstOption}
               </MainButton>
