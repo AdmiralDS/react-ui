@@ -31,7 +31,14 @@ export type RowData = {
   success?: boolean;
   expanded?: boolean;
   expandedRowRender?: (row: RowData) => React.ReactNode;
-  overflowMenuRender?: (row: RowData, onMenuOpen: () => void, onMenuClose: () => void) => React.ReactNode;
+  overflowMenuRender?: (
+    row: RowData,
+    /** @deprecated use onVisibilityChange instead */
+    onMenuOpen?: () => void,
+    /** @deprecated use onVisibilityChange instead */
+    onMenuClose?: () => void,
+    onVisibilityChange?: (isVisible: boolean) => void,
+  ) => React.ReactNode;
   actionRender?: (row: any) => React.ReactNode;
   transfer_type: string;
   transfer_date: string;
@@ -789,11 +796,14 @@ export const columnListExtra: Column[] = [
 
 interface MenuProps {
   row: RowData;
-  onMenuOpen: () => void;
-  onMenuClose: () => void;
+  /** @deprecated use onVisibilityChange instead */
+  onMenuOpen?: () => void;
+  /** @deprecated use onVisibilityChange instead */
+  onMenuClose?: () => void;
+  onVisibilityChange?: (isVisible: boolean) => void;
 }
 
-const Menu: React.FC<MenuProps> = ({ row, onMenuOpen, onMenuClose }) => {
+const Menu: React.FC<MenuProps> = ({ row, onMenuOpen, onMenuClose, onVisibilityChange }) => {
   const items: Array<any> = [
     {
       id: '1',
@@ -827,14 +837,13 @@ const Menu: React.FC<MenuProps> = ({ row, onMenuOpen, onMenuClose }) => {
 
   return (
     <OverflowMenu
-      onChange={(id) => {
+      onSelectItem={(id) => {
         const options: any = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
         if (id === '1') alert(StrToDate(row['transfer_date']).toLocaleString('ru', options));
         if (id === '2') alert(StrToDate(row['transfer_date']).toLocaleString('en-US', options));
         if (id === '3') alert(StrToDate(row['transfer_date']).toLocaleString('de-AT', options));
       }}
-      onOpen={onMenuOpen}
-      onClose={onMenuClose}
+      onVisibilityChange={onVisibilityChange}
       aria-label="Overflow Menu component"
       dimension="m"
       isVertical
@@ -853,9 +862,12 @@ export const rowListMenu: RowData[] = [
     transfer_amount: numberFormatter.format(500_000),
     currency: 'RUB',
     rate: 2.5,
-    overflowMenuRender: (row: RowData, onMenuOpen: () => void, onMenuClose: () => void) => (
-      <Menu row={row} onMenuOpen={onMenuOpen} onMenuClose={onMenuClose} />
-    ),
+    overflowMenuRender: (
+      row: RowData,
+      onMenuOpen?: () => void,
+      onMenuClose?: () => void,
+      onVisibilityChange?: (isVisible: boolean) => void,
+    ) => <Menu row={row} onMenuOpen={onMenuOpen} onMenuClose={onMenuClose} onVisibilityChange={onVisibilityChange} />,
   },
   {
     id: '0002',
@@ -864,9 +876,12 @@ export const rowListMenu: RowData[] = [
     transfer_amount: numberFormatter.format(32_500_000_000),
     currency: 'RUB',
     rate: 5.5,
-    overflowMenuRender: (row: RowData, onMenuOpen: () => void, onMenuClose: () => void) => (
-      <Menu row={row} onMenuOpen={onMenuOpen} onMenuClose={onMenuClose} />
-    ),
+    overflowMenuRender: (
+      row: RowData,
+      onMenuOpen?: () => void,
+      onMenuClose?: () => void,
+      onVisibilityChange?: (isVisible: boolean) => void,
+    ) => <Menu row={row} onMenuOpen={onMenuOpen} onMenuClose={onMenuClose} onVisibilityChange={onVisibilityChange} />,
   },
   {
     id: '0003',

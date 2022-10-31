@@ -1,5 +1,5 @@
 import { MultiButton, MultiButtonItem } from '#src/components/MultiButton';
-import React from 'react';
+import React, { MouseEvent } from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import styled, { ThemeProvider } from 'styled-components';
@@ -81,6 +81,20 @@ export default {
   },
 } as ComponentMeta<typeof MultiButton>;
 
+const handleVisibilityChange = (isVisible: boolean) => {
+  if (isVisible) {
+    console.log('Menu opened');
+  } else {
+    console.log('Menu closed');
+  }
+};
+const logSelectedId = (id: string) => {
+  console.log(`selected: ${id}`);
+};
+const handleMainButtonClick = (e: MouseEvent<HTMLButtonElement>) => {
+  console.log('Main button clicked');
+};
+
 const Template1: ComponentStory<typeof MultiButton> = (args) => {
   const items: Array<MultiButtonItem> = [
     {
@@ -128,29 +142,29 @@ const Template1: ComponentStory<typeof MultiButton> = (args) => {
           {...args}
           appearance="primary"
           selected={selected}
-          onChange={(id) => {
-            console.log('select item with id: ', id);
+          onSelectItem={(id) => {
+            logSelectedId(id);
             setSelected(id);
           }}
           options={items}
-          onOpen={() => console.log('open menu')}
-          onClose={() => console.log('close menu')}
+          onVisibilityChange={handleVisibilityChange}
           data-dropdown-container-id="first-multi-button-with-dropdown"
           className="multi-button-class"
+          onMainButtonClick={handleMainButtonClick}
         />
         <Separator />
         <MultiButton
           {...args}
           appearance="secondary"
           selected={selected2}
-          onChange={(id) => {
-            console.log('select item with id: ', id);
+          onSelectItem={(id) => {
+            logSelectedId(id);
             setSelected2(id);
           }}
           options={items}
-          onOpen={() => console.log('open menu')}
-          onClose={() => console.log('close menu')}
+          onVisibilityChange={handleVisibilityChange}
           data-dropdown-container-id="second-multi-button-with-dropdown"
+          onMainButtonClick={handleMainButtonClick}
         />
       </div>
     </ThemeProvider>
@@ -201,26 +215,26 @@ const Template2: ComponentStory<typeof MultiButton> = (args) => {
           {...args}
           appearance="primary"
           selected={selected}
-          onChange={(id) => {
-            console.log('select item with id: ', id);
+          onSelectItem={(id) => {
+            logSelectedId(id);
             setSelected(id);
           }}
           options={items}
-          onOpen={() => console.log('open menu')}
-          onClose={() => console.log('close menu')}
+          onVisibilityChange={handleVisibilityChange}
+          onMainButtonClick={handleMainButtonClick}
         />
         <Separator />
         <MultiButton
           {...args}
           selected={selected2}
           disabled
-          onChange={(id) => {
-            console.log('select item with id: ', id);
+          onSelectItem={(id) => {
+            logSelectedId(id);
             setSelected2(id);
           }}
           options={items}
-          onOpen={() => console.log('open menu')}
-          onClose={() => console.log('close menu')}
+          onVisibilityChange={handleVisibilityChange}
+          onMainButtonClick={handleMainButtonClick}
         />
       </div>
     </>

@@ -64,6 +64,17 @@ export default {
   },
 } as ComponentMeta<typeof TagMenu>;
 
+const handleVisibilityChange = (isVisible: boolean) => {
+  if (isVisible) {
+    console.log('Menu opened');
+  } else {
+    console.log('Menu closed');
+  }
+};
+const logSelectedId = (id: string) => {
+  console.log(`selected: ${id}`);
+};
+
 const items: Array<TagOptionProps> = [
   {
     id: '1',
@@ -117,9 +128,10 @@ const Template0: ComponentStory<typeof Tag> = (args: TagProps) => {
           options={items}
           selected={selected}
           onSelectOption={(id) => {
-            console.log(`selected: ${id}`);
+            logSelectedId(id);
             setSelected(items.find((item) => item.id === id));
           }}
+          onVisibilityChange={handleVisibilityChange}
           {...args}
           data-dropdown-container-id="tag-menu-with-dropdown"
           className="tag-menu-class"
@@ -141,9 +153,10 @@ const Template1: ComponentStory<typeof Tag> = (args: TagProps) => {
         selected={selectedM}
         as="div"
         onSelectOption={(id) => {
-          console.log(`selected: ${id}`);
+          logSelectedId(id);
           setSelectedM(items.find((item) => item.id === id));
         }}
+        onVisibilityChange={handleVisibilityChange}
         {...args}
       />
       <Separator />
@@ -153,9 +166,10 @@ const Template1: ComponentStory<typeof Tag> = (args: TagProps) => {
         selected={selectedS}
         as="span"
         onSelectOption={(id) => {
-          console.log(`selected: ${id}`);
+          logSelectedId(id);
           setSelectedS(items.find((item) => item.id === id));
         }}
+        onVisibilityChange={handleVisibilityChange}
         {...args}
       />
     </>
