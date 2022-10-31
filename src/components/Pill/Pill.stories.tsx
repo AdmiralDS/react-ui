@@ -3,7 +3,7 @@ import { withDesign } from 'storybook-addon-designs';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import styled, { css, ThemeProvider } from 'styled-components';
 import { Theme } from '#src/components/themes';
-import { Color } from '#src/components/themes/common';
+import { Color, Shape } from '#src/components/themes/common';
 import { DropMenu } from '#src/components/DropMenu';
 import { MenuItem, RenderOptionProps } from '#src/components/Menu/MenuItem';
 import { Pill, Pills } from '#src/components/Pill/index';
@@ -11,6 +11,7 @@ import { ReactComponent as HeartOutline } from '@admiral-ds/icons/build/category
 import { ReactComponent as AlertOutline } from '@admiral-ds/icons/build/category/AlertOutline.svg';
 import { ReactComponent as BonusOutline } from '@admiral-ds/icons/build/category/BonusOutline.svg';
 import { ReactComponent as BurnSolid } from '@admiral-ds/icons/build/category/BurnSolid.svg';
+import { mediumGroupBorderRadius, smallGroupBorderRadius } from '#src/components/themes/borderRadius';
 
 export default {
   title: 'Admiral-2.1/Pills',
@@ -220,6 +221,61 @@ const TemplatePillMenu: ComponentStory<typeof Pill> = (args) => {
   );
 };
 
+function firstNestedPillBorderRadius(shape: Shape): string {
+  const radius = smallGroupBorderRadius(shape);
+  return `${radius} 0 0 ${radius}`;
+}
+
+function lastNestedPillBorderRadius(shape: Shape): string {
+  const radius = smallGroupBorderRadius(shape);
+  return `0 ${radius} ${radius} 0`;
+}
+
+const NestedPill = styled.div`
+  display: flex;
+
+  > ${StatusPill}:first-of-type {
+    border-radius: ${(p) => firstNestedPillBorderRadius(p.theme.shape)};
+  }
+  > ${StatusPill}:last-of-type {
+    border-radius: ${(p) => lastNestedPillBorderRadius(p.theme.shape)};
+  }
+`;
+
+const leftPillClicked = () => console.log('Left nested pill clicked');
+const rightPillClicked = () => console.log('Right nested pill clicked');
+
+const TemplateNestedPills: ComponentStory<typeof Pill> = (args) => {
+  return (
+    <>
+      <Pills>
+        <NestedPill>
+          <StatusPill status="Special" onClick={leftPillClicked}>
+            LeftNested
+          </StatusPill>
+          <StatusPill status="Warning" onClick={rightPillClicked}>
+            RightNested
+          </StatusPill>
+        </NestedPill>
+        <NestedPill>
+          <StatusPill status="Special" onClick={leftPillClicked}>
+            <StyledPillIcon status="Special">
+              <HeartOutline />
+            </StyledPillIcon>
+            LeftNested
+          </StatusPill>
+          <StatusPill status="Warning" onClick={rightPillClicked}>
+            <StyledPillIcon status="Warning">
+              <BurnSolid />
+            </StyledPillIcon>
+            RightNested
+          </StatusPill>
+        </NestedPill>
+      </Pills>
+    </>
+  );
+};
+
 export const SimplePills = TemplateSimplePills.bind({});
 SimplePills.args = {};
 SimplePills.storyName = 'Pills. Базовый пример.';
@@ -227,3 +283,7 @@ SimplePills.storyName = 'Pills. Базовый пример.';
 export const PillsMenu = TemplatePillMenu.bind({});
 PillsMenu.args = {};
 PillsMenu.storyName = 'PillMenu. Pill с выпадающим списком.';
+
+export const NestedPills = TemplateNestedPills.bind({});
+NestedPills.args = {};
+NestedPills.storyName = 'NestedPills.';
