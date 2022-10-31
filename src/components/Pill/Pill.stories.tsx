@@ -1,12 +1,16 @@
+import React from 'react';
 import { withDesign } from 'storybook-addon-designs';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import React from 'react';
-import { Pill, Pills } from '#src/components/Pill/index';
-import { Theme } from '#src/components/themes';
 import styled, { css, ThemeProvider } from 'styled-components';
+import { Theme } from '#src/components/themes';
 import { Color } from '#src/components/themes/common';
+import { DropMenu } from '#src/components/DropMenu';
+import { MenuItem, RenderOptionProps } from '#src/components/Menu/MenuItem';
+import { Pill, Pills } from '#src/components/Pill/index';
 import { ReactComponent as HeartOutline } from '@admiral-ds/icons/build/category/HeartOutline.svg';
-import { T } from '#src/components/T';
+import { ReactComponent as AlertOutline } from '@admiral-ds/icons/build/category/AlertOutline.svg';
+import { ReactComponent as BonusOutline } from '@admiral-ds/icons/build/category/BonusOutline.svg';
+import { ReactComponent as BurnSolid } from '@admiral-ds/icons/build/category/BurnSolid.svg';
 
 export default {
   title: 'Admiral-2.1/Pills',
@@ -73,7 +77,6 @@ const HeartOutlinePillIcon = styled(HeartOutline)`
   display: inline;
   width: 16px;
   height: 16px;
-  margin-right: 4px;
 `;
 
 const stylesByStatusCssMixin = css<{ status?: Status }>`
@@ -91,7 +94,7 @@ const StatusPill = styled(Pill).attrs<{ status?: Status }>((p) => ({
   }
 `;
 
-const Template0: ComponentStory<typeof Pill> = (args) => {
+const TemplateSimplePills: ComponentStory<typeof Pill> = (args) => {
   function swapBorder(theme: Theme): Theme {
     theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
@@ -116,7 +119,111 @@ const Template0: ComponentStory<typeof Pill> = (args) => {
     </>
   );
 };
+const StyledPillIcon = styled.div<{ status?: Status }>`
+  display: inline;
+  width: 16px;
+  height: 16px;
 
-export const Playground = Template0.bind({});
-Playground.args = {};
-Playground.storyName = 'Pill. Playground.';
+  *[fill^='#'] {
+    fill: ${(p) => p.theme.color[getFontColorByStatus(p.status)]};
+  }
+
+  &:hover {
+    & *[fill^='#'] {
+      fill: ${(p) => p.theme.color[getFontColorByStatus(p.status)]};
+    }
+  }
+`;
+
+type PillOptionProps = {
+  id: string;
+  label: string;
+  status?: Status;
+  icon?: React.ReactNode;
+};
+const items: Array<PillOptionProps> = [
+  {
+    id: '1',
+    label: 'Option one',
+    status: 'Success',
+    icon: <BonusOutline />,
+  },
+  {
+    id: '2',
+    label: 'Option two',
+    status: 'Error',
+    icon: <AlertOutline />,
+  },
+  {
+    id: '3',
+    label: 'Option three',
+    status: 'Warning',
+    icon: <BurnSolid />,
+  },
+  {
+    id: '4',
+    label: 'Option four',
+    status: 'Special',
+    icon: <HeartOutline />,
+  },
+  {
+    id: '5',
+    label: 'Option five',
+  },
+];
+
+const TemplatePillMenu: ComponentStory<typeof Pill> = (args) => {
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
+    return theme;
+  }
+
+  const [selectedPill, setSelectedPill] = React.useState<PillOptionProps | undefined>(items[0]);
+
+  const model = React.useMemo(() => {
+    return items.map((item) => ({
+      id: item.id,
+      render: (options: RenderOptionProps) => (
+        <MenuItem dimension="s" {...options} key={item.id}>
+          {item.label}
+        </MenuItem>
+      ),
+    }));
+  }, [items]);
+
+  return (
+    <>
+      <ThemeProvider theme={swapBorder}>
+        <DropMenu
+          items={model}
+          selected={selectedPill?.id}
+          onSelectItem={(id) => setSelectedPill(items.find((item) => item.id === id))}
+          renderContentProp={({ buttonRef, handleKeyDown, handleClick, statusIcon }) => {
+            return (
+              <StatusPill
+                ref={buttonRef as React.Ref<HTMLDivElement>}
+                status={selectedPill?.status}
+                onKeyDown={handleKeyDown}
+                onClick={handleClick}
+              >
+                {selectedPill?.icon && (
+                  <StyledPillIcon status={selectedPill?.status}>{selectedPill?.icon}</StyledPillIcon>
+                )}
+                {selectedPill?.label}
+                <StyledPillIcon status={selectedPill?.status}>{statusIcon}</StyledPillIcon>
+              </StatusPill>
+            );
+          }}
+        />
+      </ThemeProvider>
+    </>
+  );
+};
+
+export const SimplePills = TemplateSimplePills.bind({});
+SimplePills.args = {};
+SimplePills.storyName = 'Pill. Playground.';
+
+export const PillsMenu = TemplatePillMenu.bind({});
+PillsMenu.args = {};
+PillsMenu.storyName = 'Pill. Playground.';
