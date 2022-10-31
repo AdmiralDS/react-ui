@@ -9,6 +9,8 @@ export const Pill = styled.div`
   ${typography['Caption/Caption 1']}
   padding: 0 4px;
   height: 16px;
+  gap: 4px;
+  cursor: pointer;
 `;
 
 Pill.displayName = 'Pill';
