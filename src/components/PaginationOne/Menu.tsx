@@ -83,14 +83,8 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
       children,
       disabled = false,
       options,
-      disableSelectedOptionHighlight,
       selected,
       onSelectItem = (id: string) => undefined,
-      active,
-      onActivateItem,
-      isVisible,
-      onVisibilityChange,
-      onClickOutside,
       dropMaxHeight,
       dropContainerCssMixin,
       menuWidth,
@@ -118,9 +112,6 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
     return (
       <DropMenu
         items={model}
-        isVisible={isVisible}
-        onVisibilityChange={onVisibilityChange}
-        onClickOutside={onClickOutside}
         ref={ref}
         dimension="s"
         menuWidth={menuWidth}
@@ -128,11 +119,8 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
         menuMaxHeight={dropMaxHeight}
         dropContainerCssMixin={dropContainerCssMixin}
         disabled={disabled}
-        disableSelectedOptionHighlight={disableSelectedOptionHighlight}
         selected={selected}
         onSelectItem={onSelectItem}
-        active={active}
-        onActivateItem={onActivateItem}
         {...dropMenuDataAttributes}
         renderContentProp={({ buttonRef, handleKeyDown, handleClick, statusIcon, menuState }) => {
           return (
