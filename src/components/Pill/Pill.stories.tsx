@@ -222,8 +222,8 @@ const TemplatePillMenu: ComponentStory<typeof Pill> = (args) => {
 
 export const SimplePills = TemplateSimplePills.bind({});
 SimplePills.args = {};
-SimplePills.storyName = 'Pill. Playground.';
+SimplePills.storyName = 'Pills. Базовый пример.';
 
 export const PillsMenu = TemplatePillMenu.bind({});
 PillsMenu.args = {};
-PillsMenu.storyName = 'Pill. Playground.';
+PillsMenu.storyName = 'PillMenu. Pill с выпадающим списком.';
