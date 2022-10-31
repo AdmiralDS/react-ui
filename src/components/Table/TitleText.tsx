@@ -6,15 +6,16 @@ import { Title, ExtraText } from './style';
 
 type TitleTextProps = {
   lineClamp: number;
-  children: React.ReactNode;
+  title: React.ReactNode;
   dimension?: 'xl' | 'l' | 'm' | 's';
   extraText?: boolean;
 };
 
-export const TitleText: React.FC<TitleTextProps> = ({ lineClamp, dimension, extraText, children }) => {
+export const TitleText: React.FC<TitleTextProps> = ({ lineClamp, dimension, extraText, title }) => {
   const textRef = React.useRef<HTMLDivElement>(null);
   const [overflow, setOverflow] = React.useState(false);
   const [tooltipVisible, setTooltipVisible] = React.useState(false);
+  const titleNotCustom = typeof title === 'string' || typeof title === 'number';
 
   React.useLayoutEffect(() => {
     const element = textRef.current;
@@ -45,14 +46,14 @@ export const TitleText: React.FC<TitleTextProps> = ({ lineClamp, dimension, extr
     <>
       {extraText ? (
         <ExtraText ref={textRef} dimension={dimension} lineClamp={lineClamp}>
-          {children}
+          {title}
         </ExtraText>
       ) : (
         <Title ref={textRef} lineClamp={lineClamp}>
-          {children}
+          {title}
         </Title>
       )}
-      {overflow && tooltipVisible && <Tooltip targetRef={textRef} renderContent={() => children} />}
+      {overflow && tooltipVisible && titleNotCustom && <Tooltip targetRef={textRef} renderContent={() => title} />}
     </>
   );
 };
