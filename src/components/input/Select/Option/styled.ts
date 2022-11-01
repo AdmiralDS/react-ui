@@ -1,4 +1,4 @@
-import { ComponentDimension } from '#src/components/input';
+import type { ComponentDimension } from '#src/components/input';
 import styled from 'styled-components';
 import { Checkbox } from '#src/components/Checkbox';
 import { OptionWrapper } from '#src/components/input/Select/styled';

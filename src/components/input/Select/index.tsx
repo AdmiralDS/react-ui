@@ -22,6 +22,8 @@ import {
   SelectWrapper,
   SpinnerMixin,
   ValueWrapper,
+  MenuWrapper,
+  StyledMenu,
   EmptyMessageWrapper,
 } from './styled';
 import { preventDefault, scrollToNotVisibleELem } from './utils';
@@ -30,11 +32,11 @@ import { useClickOutside } from '#src/components/common/hooks/useClickOutside';
 import { Spinner } from '#src/components/Spinner';
 import { DisplayValue } from './DisplayValue';
 import { DropdownContainer } from '#src/components/DropdownContainer';
-import { Menu } from '#src/components/Menu';
+import { Menu, RenderPanelProps } from '#src/components/Menu';
 import { NativeControl } from '#src/components/input/Select/NativeControl';
 import { SelectDropdown } from '#src/components/input/Select/Dropdown';
 import { DropDownProvider } from '#src/components/input/Select/Dropdown/Context';
-import { ItemProps } from '#src/components/MenuItem';
+import type { ItemProps } from '#src/components/Menu/MenuItem';
 import { HighlightWrapper } from '#src/components/input/Select/Highlight/HighlightWrapper';
 
 /**
@@ -131,6 +133,9 @@ export interface SelectProps extends Omit<React.InputHTMLAttributes<HTMLSelectEl
     /** Сообщение, отображаемое при пустом наборе опций */
     emptyMessage?: React.ReactNode;
   };
+
+  /** Позволяет добавить панель внизу под выпадающим списком */
+  renderOptionsBottomPanel?: (props: RenderPanelProps) => React.ReactNode;
 }
 
 export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
@@ -167,6 +172,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       skeleton = false,
       locale,
       dropContainerCssMixin,
+      renderOptionsBottomPanel,
       ...props
     },
     ref,
@@ -187,7 +193,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
     const [dropDownOptions, setDropDownOptions] = React.useState<IDropdownOption[]>([]);
     const [dropDownItems, setDropItems] = React.useState<Array<ItemProps>>([]);
 
-    const [isSearchPanelOpen, setIsSearchPanelOpen] = React.useState(true);
+    const [isSearchPanelOpen, setIsSearchPanelOpen] = React.useState(false);
     const [isFocused, setIsFocused] = React.useState(false);
 
     const selectIsUncontrolled = value === undefined;
@@ -566,14 +572,14 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
           {children}
         </ConstantSelectProvider>
         <DropDownProvider
-          // onOptionClick={handleOptionSelect}
-          // onActivateItem={setActiveItem}
+          onOptionClick={handleOptionSelect}
+          onActivateItem={setActiveItem}
           onDropDownOptionMount={handleDropDownOptionMount}
           onDropDownOptionUnMount={handleDropDownOptionUnMount}
           highlightFormat={highlightFormat}
-          // selectValue={localValue}
+          selectValue={localValue}
           searchValue={searchValue}
-          // activeItem={activeItem}
+          activeItem={activeItem}
           dimension={dimension}
           multiple={multiple}
           defaultHighlighted={defaultHighlighted}
@@ -625,12 +631,13 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
           >
             {dropDownItems.length ? (
               <HighlightWrapper searchValue={searchValue} highlightFormat={highlightFormat}>
-                <Menu
+                <StyledMenu
                   active={activeItem}
                   selected={localValue}
                   onActivateItem={setActiveItem}
                   onSelectItem={handleOptionSelect}
                   model={dropDownItems}
+                  renderBottomPanel={renderOptionsBottomPanel}
                 />
               </HighlightWrapper>
             ) : (

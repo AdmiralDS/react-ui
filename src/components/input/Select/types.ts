@@ -1,6 +1,6 @@
 import * as React from 'react';
 import type { ComponentDimension } from '#src/components/input/types';
-import { ItemProps } from '#src/components/MenuItem';
+import type { ItemProps } from '#src/components/Menu/MenuItem';
 
 export type HighlightFormat = 'word' | 'wholly';
 

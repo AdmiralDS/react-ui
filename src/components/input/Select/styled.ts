@@ -6,6 +6,8 @@ import { CHIP_OFFSET, COUNTER_WIDTH } from './constants';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { skeletonMixin } from '../Container';
 import { Checkbox } from '#src/components/Checkbox';
+import { Menu } from '#src/components/Menu';
+import { MenuItem } from '#src/components/Menu/MenuItem';
 
 const getSelectValueHeight = (dimension?: ComponentDimension, multiple?: boolean) =>
   dimension === 's' && !multiple ? 20 : 24;
@@ -308,12 +310,25 @@ export const SpinnerMixin = css`
   padding: 3px;
 `;
 
-export const EmptyMessageWrapper = styled.div`
+const ShadowContainerMixin = css`
   ${typography['Body/Body 1 Short']}
   color: ${(p) => p.theme.color['Neutral/Neutral 90']};
-  padding: 8px;
   background-color: ${(p) => p.theme.color['Special/Elevated BG']};
   border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
   ${(p) => p.theme.shadow['Shadow 08']}
   overflow: auto;
+`;
+
+export const StyledMenu = styled(Menu)`
+  ${ShadowContainerMixin}
+`;
+
+export const EmptyMessageWrapper = styled.div`
+  padding: 8px 0;
+  user-select: none;
+  ${ShadowContainerMixin}
+`;
+
+export const StyledMenuItem = styled(MenuItem)`
+  justify-content: flex-start;
 `;

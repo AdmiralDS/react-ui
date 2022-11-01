@@ -13,6 +13,9 @@ import { Theme } from '#src/components/themes';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { typography } from '#src/components/Typography';
 import { getTextHighlightMeta } from '#src/components/input/Select/utils';
+import { MenuActionsPanel } from '#src/components/Menu/MenuActionsPanel';
+import { TextButton } from '#src/components/TextButton';
+import { PlusOutline } from '#src/icons/IconComponents-service';
 
 export default {
   title: 'Admiral-2.1/Input/Select',
@@ -647,6 +650,61 @@ const TemplateMultiSelectCustomChip: ComponentStory<typeof Select> = (props) => 
   );
 };
 
+const SearchSelectWithBottomPaneTemplate: ComponentStory<typeof Select> = (props) => {
+  const [selectValue, setSelectValue] = React.useState('');
+  const [searchValue, setSearchValue] = React.useState('');
+
+  const onChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    setSelectValue(e.target.value);
+    props.onChange?.(e);
+  };
+
+  const renderOptions = () => {
+    return OPTIONS_SIMPLE.map(
+      (option, ind) =>
+        shouldRender(option, searchValue) && (
+          <Option key={option} value={option} disabled={ind === 4}>
+            {option}
+          </Option>
+        ),
+    ).filter((item) => !!item);
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchValue(e.target.value);
+  };
+
+  const menuPanelContentDimension = props.dimension === undefined || props.dimension === 'xl' ? 'l' : props.dimension;
+
+  return (
+    <>
+      <Select
+        {...props}
+        onInputChange={handleInputChange}
+        placeholder="Placeholder"
+        mode="searchSelect"
+        value={selectValue}
+        onChange={onChange}
+        renderOptionsBottomPanel={({ dimension = menuPanelContentDimension }) => {
+          return (
+            <MenuActionsPanel dimension={dimension}>
+              <TextButton
+                text={'Добавить'}
+                disabled={false}
+                icon={<PlusOutline />}
+                // dimension={menuPanelContentDimension}
+                onClick={() => console.log('add click')}
+              />
+            </MenuActionsPanel>
+          );
+        }}
+      >
+        {renderOptions()}
+      </Select>
+    </>
+  );
+};
+
 export const SimpleSelectStory = SelectSimpleTemplate.bind({});
 SimpleSelectStory.args = {
   placeholder: 'Начните ввод для поиска',
@@ -691,3 +749,6 @@ CustomOptionMultiSearchSelectStory.storyName = 'MultiSearchSelect с касто�
 
 export const CustomChipMultiSearchSelectStory = TemplateMultiSelectCustomChip.bind({});
 CustomChipMultiSearchSelectStory.storyName = 'MultiSearchSelect с кастомным обработчиком удаления чипса';
+
+export const SearchSelectWithBottomPaneStory = SearchSelectWithBottomPaneTemplate.bind({});
+SearchSelectWithBottomPaneStory.storyName = 'С нижней панелью';

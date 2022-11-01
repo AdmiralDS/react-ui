@@ -3,10 +3,11 @@ import { useOptionGroupContext } from '#src/components/input/Select/useSelectCon
 import { ComponentDimension, Highlight } from '#src/components/input';
 import type { OptionProps } from '#src/components/input/Select/Option/types';
 import { CustomOption, StyledCheckbox } from './styled';
-import { ItemProps, MenuItem, MenuItemProps, RenderOptionProps } from '#src/components/MenuItem';
+import { ItemProps, MenuItem, RenderOptionProps } from '#src/components/Menu/MenuItem';
 import { useDropDownContext } from '#src/components/input/Select/Dropdown/Context';
-import type { ItemDimension } from '#src/components/MenuItem/mixins';
-import { ReactNode, ReactPortal, useMemo } from 'react';
+import type { ItemDimension } from '#src/components/Menu/menuItemMixins';
+import { useMemo } from 'react';
+import { StyledMenuItem } from '#src/components/input/Select/styled';
 
 const convertDimension = (selectDimension?: ComponentDimension): ItemDimension | undefined => {
   return selectDimension === 'xl' ? 'l' : selectDimension;
@@ -66,13 +67,22 @@ export const DropDownOption = ({ id, disabled = false, value, children, renderOp
       id: itemId,
       render: (options: RenderOptionProps) => {
         if (renderOption) {
-          return renderOption({ disabled: optionIsDisabled, searchValue, isHovered });
+          return (
+            <CustomOption
+              onMouseMove={() => handleHover(itemId)}
+              onClick={handleClick}
+              active={isHovered}
+              selected={selectValue === itemId}
+            >
+              {renderOption({ disabled: optionIsDisabled, searchValue, isHovered })}
+            </CustomOption>
+          );
         }
 
         return (
-          <MenuItem {...options} dimension={convertDimension(dropDownContext?.dimension)} key={itemId}>
+          <StyledMenuItem {...options} dimension={convertDimension(dropDownContext?.dimension)} key={itemId}>
             {defaultOptionRender}
-          </MenuItem>
+          </StyledMenuItem>
         );
       },
       disabled: optionIsDisabled,
