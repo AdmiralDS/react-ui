@@ -176,16 +176,15 @@ const items: Array<PillOptionProps> = [
   },
 ];
 
-const TemplatePillMenu: ComponentStory<typeof Pill> = (args) => {
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
+interface PillMenuProps {
+  options: Array<PillOptionProps>;
+}
 
-  const [selectedPill, setSelectedPill] = React.useState<PillOptionProps | undefined>(items[0]);
+const PillMenu = React.forwardRef<HTMLElement, PillMenuProps>(({ options, ...props }, ref) => {
+  const [selectedPill, setSelectedPill] = React.useState<PillOptionProps | undefined>(options[0]);
 
   const model = React.useMemo(() => {
-    return items.map((item) => ({
+    return options.map((item) => ({
       id: item.id,
       render: (options: RenderOptionProps) => (
         <MenuItem dimension="s" {...options} key={item.id}>
@@ -193,32 +192,41 @@ const TemplatePillMenu: ComponentStory<typeof Pill> = (args) => {
         </MenuItem>
       ),
     }));
-  }, [items]);
+  }, [options]);
+
+  return (
+    <DropMenu
+      items={model}
+      selected={selectedPill?.id}
+      onSelectItem={(id) => setSelectedPill(options.find((item) => item.id === id))}
+      renderContentProp={({ buttonRef, handleKeyDown, handleClick, statusIcon }) => {
+        return (
+          <StatusPill
+            ref={buttonRef as React.Ref<HTMLDivElement>}
+            status={selectedPill?.status}
+            onKeyDown={handleKeyDown}
+            onClick={handleClick}
+          >
+            {selectedPill?.icon && <StyledPillIcon status={selectedPill?.status}>{selectedPill?.icon}</StyledPillIcon>}
+            {selectedPill?.label}
+            <StyledPillIcon status={selectedPill?.status}>{statusIcon}</StyledPillIcon>
+          </StatusPill>
+        );
+      }}
+    />
+  );
+});
+
+const TemplatePillMenu: ComponentStory<typeof Pill> = (args) => {
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
+    return theme;
+  }
 
   return (
     <>
       <ThemeProvider theme={swapBorder}>
-        <DropMenu
-          items={model}
-          selected={selectedPill?.id}
-          onSelectItem={(id) => setSelectedPill(items.find((item) => item.id === id))}
-          renderContentProp={({ buttonRef, handleKeyDown, handleClick, statusIcon }) => {
-            return (
-              <StatusPill
-                ref={buttonRef as React.Ref<HTMLDivElement>}
-                status={selectedPill?.status}
-                onKeyDown={handleKeyDown}
-                onClick={handleClick}
-              >
-                {selectedPill?.icon && (
-                  <StyledPillIcon status={selectedPill?.status}>{selectedPill?.icon}</StyledPillIcon>
-                )}
-                {selectedPill?.label}
-                <StyledPillIcon status={selectedPill?.status}>{statusIcon}</StyledPillIcon>
-              </StatusPill>
-            );
-          }}
-        />
+        <PillMenu options={items} />
       </ThemeProvider>
     </>
   );
@@ -247,6 +255,58 @@ const NestedPill = styled.div`
 
 const leftPillClicked = () => console.log('Left nested pill clicked');
 const rightPillClicked = () => console.log('Right nested pill clicked');
+const itemsLeft: Array<PillOptionProps> = [
+  {
+    id: '1',
+    label: 'Option one',
+    status: 'Special',
+  },
+  {
+    id: '2',
+    label: 'Option two',
+    status: 'Success',
+  },
+  {
+    id: '3',
+    label: 'Option three',
+    status: 'Error',
+  },
+  {
+    id: '4',
+    label: 'Option four',
+    status: 'Warning',
+  },
+  {
+    id: '5',
+    label: 'Option five',
+  },
+];
+const itemsRight: Array<PillOptionProps> = [
+  {
+    id: '1',
+    label: 'Option one',
+    status: 'Warning',
+  },
+  {
+    id: '2',
+    label: 'Option two',
+    status: 'Success',
+  },
+  {
+    id: '3',
+    label: 'Option three',
+    status: 'Error',
+  },
+  {
+    id: '4',
+    label: 'Option four',
+    status: 'Special',
+  },
+  {
+    id: '5',
+    label: 'Option five',
+  },
+];
 
 const TemplateNestedPills: ComponentStory<typeof Pill> = (args) => {
   return (
@@ -273,6 +333,16 @@ const TemplateNestedPills: ComponentStory<typeof Pill> = (args) => {
             </StyledPillIcon>
             RightNested
           </StatusPill>
+        </NestedPill>
+        <NestedPill>
+          <PillMenu options={itemsLeft} />
+          <PillMenu options={itemsRight} />
+        </NestedPill>
+        <NestedPill>
+          <StatusPill status="Special" onClick={leftPillClicked}>
+            LeftNested
+          </StatusPill>
+          <PillMenu options={itemsRight} />
         </NestedPill>
       </Pills>
     </>
