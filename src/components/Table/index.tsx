@@ -683,24 +683,20 @@ export const Table: React.FC<TableProps> = ({
     );
   };
 
-  const renderRegularRow = (row: TableRow, index: number) => {
-    const node = (
-      <RegularRow
-        row={row}
-        dimension={dimension}
-        checkboxDimension={checkboxDimension}
-        columns={cols}
-        stickyColumns={stickyColumns}
-        displayRowExpansionColumn={displayRowExpansionColumn}
-        displayRowSelectionColumn={displayRowSelectionColumn}
-        renderBodyCell={renderBodyCell}
-        onRowExpansionChange={handleExpansionChange}
-        onRowSelectionChange={handleCheckboxChange}
-      />
-    );
-
-    return renderRowWrapper?.(row, index, node) ?? node;
-  };
+  const renderRegularRow = (row: TableRow) => (
+    <RegularRow
+      row={row}
+      dimension={dimension}
+      checkboxDimension={checkboxDimension}
+      columns={cols}
+      stickyColumns={stickyColumns}
+      displayRowExpansionColumn={displayRowExpansionColumn}
+      displayRowSelectionColumn={displayRowSelectionColumn}
+      renderBodyCell={renderBodyCell}
+      onRowExpansionChange={handleExpansionChange}
+      onRowSelectionChange={handleCheckboxChange}
+    />
+  );
 
   const isLastVisibleRow = ({
     row,
@@ -724,7 +720,7 @@ export const Table: React.FC<TableProps> = ({
     const visible = rowInGroup ? groupToRowsMap[rowToGroupMap[row.id].groupId].expanded : true;
     const isLastRow = isLastVisibleRow({ row, isGroupRow, tableRows, index });
 
-    return (
+    const node = (
       (isGroupRow || visible) && (
         <RowWrapper
           dimension={dimension}
@@ -742,6 +738,8 @@ export const Table: React.FC<TableProps> = ({
         </RowWrapper>
       )
     );
+
+    return renderRowWrapper?.(row, index, node) ?? node;
   };
 
   const renderBody = () => {
