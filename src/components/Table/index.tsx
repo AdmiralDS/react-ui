@@ -734,7 +734,7 @@ export const Table: React.FC<TableProps> = ({
           verticalScroll={verticalScroll}
           key={`row_${row.id}`}
         >
-          {isGroupRow ? renderGroupRow(row) : renderRegularRow(row, index)}
+          {isGroupRow ? renderGroupRow(row) : renderRegularRow(row)}
         </RowWrapper>
       )
     );
