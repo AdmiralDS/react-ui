@@ -6,7 +6,7 @@ import { ScrollTableBody } from './style';
 
 const Spacer = styled.div`
   display: flex;
-  flex: 1 1 auto;
+  flex: 0 0 auto;
 `;
 
 interface VirtualBodyProps extends React.HTMLAttributes<HTMLDivElement> {

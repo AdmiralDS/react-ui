@@ -1,11 +1,11 @@
 import type { HTMLAttributes } from 'react';
 import * as React from 'react';
 import type { Appearance, Dimension } from '#src/components/TextButton/types';
-import type { ItemProps } from '#src/components/MenuItem';
+import type { ItemProps } from '#src/components/Menu/MenuItem';
 import { TextButton } from '#src/components/TextButton';
 import styled, { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import { IconContainer } from '#src/components/TextButton/commonMixin';
-import { DropMenu } from '#src/components/DropMenu';
+import { DropMenu, DropMenuComponentProps } from '#src/components/DropMenu';
 import { passDropdownDataAttributes } from '#src/components/common/utils/splitDataAttributes';
 
 const StyledTextButton = styled(TextButton)<{ menuOpened?: boolean; appearance?: Appearance }>`
@@ -29,7 +29,9 @@ const StyledTextButton = styled(TextButton)<{ menuOpened?: boolean; appearance?:
   }
 `;
 
-export interface TextButtonMenuProps extends Omit<HTMLAttributes<HTMLButtonElement>, 'onChange'> {
+export interface TextButtonMenuProps
+  extends Omit<HTMLAttributes<HTMLButtonElement>, 'onChange'>,
+    DropMenuComponentProps {
   /** Внешний вид кнопки */
   appearance?: Appearance;
   /** Размер кнопки */
@@ -42,11 +44,14 @@ export interface TextButtonMenuProps extends Omit<HTMLAttributes<HTMLButtonEleme
   items: Array<ItemProps>;
   /** Выбранная опция */
   selected?: string;
-  /** Колбек на изменение выбранной опции */
-  onChange: (id: string) => void;
-  /** Колбек на открытие меню */
+  /** @deprecated use onSelectItem instead
+   * Колбек на изменение выбранной опции */
+  onChange?: (id: string) => void;
+  /** @deprecated use isVisible and onVisibilityChange instead
+   * Колбек на открытие меню */
   onOpen?: () => void;
-  /** Колбек на закрытие меню */
+  /** @deprecated use isVisible and onVisibilityChange instead
+   * Колбек на закрытие меню */
   onClose?: () => void;
   /** Отключение компонента */
   disabled?: boolean;
@@ -71,7 +76,14 @@ export const TextButtonMenu = React.forwardRef<HTMLButtonElement, TextButtonMenu
       disabled = false,
       loading = false,
       items,
+      disableSelectedOptionHighlight,
       selected,
+      onSelectItem,
+      active,
+      onActivateItem,
+      isVisible,
+      onVisibilityChange,
+      onClickOutside,
       onChange,
       onOpen,
       onClose,
@@ -95,10 +107,17 @@ export const TextButtonMenu = React.forwardRef<HTMLButtonElement, TextButtonMenu
         menuMaxHeight={menuMaxHeight}
         loading={loading}
         items={items}
+        disableSelectedOptionHighlight={disableSelectedOptionHighlight}
         selected={selected}
+        onSelectItem={onSelectItem}
+        active={active}
+        onActivateItem={onActivateItem}
         onChange={onChange}
         onOpen={onOpen}
         onClose={onClose}
+        isVisible={isVisible}
+        onVisibilityChange={onVisibilityChange}
+        onClickOutside={onClickOutside}
         disabled={disabled}
         alignSelf={alignSelf}
         dropContainerCssMixin={dropContainerCssMixin}

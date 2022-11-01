@@ -1,5 +1,5 @@
 import * as React from 'react';
-import styled, { ThemeContext } from 'styled-components';
+import styled, { DefaultTheme, FlattenInterpolation, ThemeContext, ThemeProps } from 'styled-components';
 import { LIGHT_THEME } from '#src/components/themes';
 import { OpenStatusButton } from '#src/components/OpenStatusButton';
 import { keyboardKey } from '#src/components/common/keyboardKey';
@@ -20,7 +20,6 @@ import {
   NativeSelect,
   OptionWrapper,
   SelectWrapper,
-  StringValueWrapper,
   SpinnerMixin,
   ValueWrapper,
   EmptyMessageWrapper,
@@ -65,9 +64,6 @@ export interface SelectProps extends Omit<React.InputHTMLAttributes<HTMLSelectEl
 
   /** Отображать статус загрузки данных */
   isLoading?: boolean;
-
-  /** @deprecated Используйте locale.emptyMessage */
-  emptyMessage?: React.ReactNode;
 
   /** Добавить селекту возможность множественного выбора */
   multiple?: boolean;
@@ -122,6 +118,9 @@ export interface SelectProps extends Omit<React.InputHTMLAttributes<HTMLSelectEl
   /** Принудительно выравнивает контейнер с опциями относительно компонента, значение по умолчанию 'stretch' */
   alignDropdown?: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
 
+  /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
+  dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+
   /** Состояние skeleton */
   skeleton?: boolean;
 
@@ -157,7 +156,6 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       showCheckbox = true,
       displayClearIcon = false,
       onClearIconClick,
-      emptyMessage: userEmptyMessage,
       onInputChange,
       inputValue,
       defaultInputValue,
@@ -168,12 +166,13 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       alignDropdown = 'stretch',
       skeleton = false,
       locale,
+      dropContainerCssMixin,
       ...props
     },
     ref,
   ) => {
     const theme = React.useContext(ThemeContext) || LIGHT_THEME;
-    const emptyMessage = userEmptyMessage || locale?.emptyMessage || (
+    const emptyMessage = locale?.emptyMessage || (
       <DropDownText>{theme.locales[theme.currentLocale].select.emptyMessage}</DropDownText>
     );
     const [localValue, setLocalValue] = React.useState(value ?? defaultValue);
@@ -226,11 +225,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
     });
 
     const onConstantOptionMount = React.useCallback(
-      (option: IConstantOption) =>
-        setConstantOptions((prev) => {
-          // console.log('MOUNT', prev, option);
-          return [...prev, option];
-        }),
+      (option: IConstantOption) => setConstantOptions((prev) => [...prev, option]),
       [],
     );
 
@@ -471,11 +466,11 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
     const onWrapperKeyDown = (evt: React.KeyboardEvent) => {
       const code = keyboardKey.getCode(evt);
 
-      // if (code === keyboardKey.ArrowUp || code === keyboardKey.ArrowDown) evt.preventDefault();
+      if (code === keyboardKey.ArrowUp || code === keyboardKey.ArrowDown) evt.preventDefault();
       if (evt.key.length === 1) extendSelectValueToInputValue();
       if (code === keyboardKey.Backspace && !evt.repeat) deleteOrHideSelectValueOnBackspace();
       if (code === keyboardKey.Backspace) narrowSelectValueToInputValue(evt);
-      // if (code === keyboardKey.Enter && isSearchPanelOpen) evt.preventDefault();
+      if (code === keyboardKey.Enter && isSearchPanelOpen) evt.preventDefault();
     };
 
     const onFocus = (evt: React.FocusEvent<HTMLDivElement>) => {
@@ -626,6 +621,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
             data-dimension={dimension}
             onClickOutside={handleClickOutside}
             alignSelf={alignDropdown}
+            dropContainerCssMixin={dropContainerCssMixin}
           >
             {dropDownItems.length ? (
               <HighlightWrapper searchValue={searchValue} highlightFormat={highlightFormat}>
@@ -691,7 +687,6 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
   },
 );
 
-// eslint-disable-next-line import/no-cycle
 export { Option } from './Option';
 export { Highlight } from './Highlight';
 export { OptionGroup } from './OptionGroup';

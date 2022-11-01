@@ -4,7 +4,7 @@ import { Slider as SliderComponent } from '#src/components/Slider';
 import { TextInputProps } from '#src/components/input/TextInput';
 
 import { NumberInput } from '#src/components/input/NumberInput';
-import { clearValue, fitToCurrency, repeatStringNumTimes } from '#src/components/input/NumberInput/utils';
+import { clearValue, fitToCurrency } from '#src/components/input/NumberInput/utils';
 import { Shape } from '#src/components/themes/common';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 
@@ -45,7 +45,9 @@ export interface SliderInputProps extends Omit<TextInputProps, 'onChange' | 'val
   minValue?: number;
   /** Максимальное значение слайдера */
   maxValue?: number;
-  /** Шаг слайдера */
+  /** Шаг слайдера. Это положительное число, по умолчанию 1.
+   * Компонент принимает только кратные step значения, в диапазоне minValue - maxValue
+   */
   step?: number;
   /** Массив отметок слайдера */
   tickMarks?: number[];
@@ -100,7 +102,7 @@ export const SliderInput = React.forwardRef<HTMLInputElement, SliderInputProps>(
     }, [defaultValue]);
 
     const handleSliderChange = (e: any, value: number) => {
-      const shortValue = value.toString() + '.' + repeatStringNumTimes('0', precision);
+      const shortValue = fitToCurrency(value.toString(), precision, decimal, thousand, true);
       const fullValue = fitToCurrency(shortValue, precision, decimal, thousand);
 
       setSliderValue(value);

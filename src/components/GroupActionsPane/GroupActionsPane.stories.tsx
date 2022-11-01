@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import { ActionRenderProps, GroupActionsPane, PaneSeparator } from '#src/components/GroupActionsPane';
+import { GroupActionsPane, PaneSeparator } from '#src/components/GroupActionsPane';
 import styled, { ThemeProvider } from 'styled-components';
 import { typography } from '#src/components/Typography';
 import { ReactComponent as GovernmentOutline } from '@admiral-ds/icons/build/category/GovernmentOutline.svg';
@@ -45,6 +45,9 @@ export default {
         options: ['xl', 'l', 'm', 's'],
         defaultValue: 'xl',
       },
+    },
+    settingsButtonsDisabled: {
+      control: 'boolean',
     },
   },
 } as ComponentMeta<typeof GroupActionsPane>;

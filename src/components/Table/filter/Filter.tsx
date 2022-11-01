@@ -1,9 +1,13 @@
 import * as React from 'react';
+import styled from 'styled-components';
 import { keyboardKey } from '#src/components/common/keyboardKey';
 import { refSetter } from '#src/components/common/utils/refSetter';
-import { Dropdown } from '#src/components/Dropdown';
-
+import { StyledDropdownContainer } from '#src/components/DropdownContainer';
 import { Button } from './Button';
+
+const FilterDropdownContainer = styled(StyledDropdownContainer)`
+  background-color: ${(p) => p.theme.color['Special/Elevated BG']};
+`;
 
 type Dimension = 'xl' | 'l' | 'm' | 's';
 type FilterProps = {
@@ -98,7 +102,7 @@ export const Filter = React.forwardRef<HTMLButtonElement, FilterCompProps>(
           {...props}
         />
         {menuOpened && (
-          <Dropdown
+          <FilterDropdownContainer
             role="listbox"
             targetRef={targetRef}
             alignSelf={cellAlign === 'left' ? 'flex-end' : 'flex-start'}
@@ -106,7 +110,7 @@ export const Filter = React.forwardRef<HTMLButtonElement, FilterCompProps>(
             onKeyDown={handleMenuKeyDown}
           >
             {renderFilter({ closeMenu, setFilterActive })}
-          </Dropdown>
+          </FilterDropdownContainer>
         )}
       </>
     );

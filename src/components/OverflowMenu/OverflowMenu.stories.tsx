@@ -5,7 +5,7 @@ import styled, { ThemeProvider } from 'styled-components';
 import { ReactComponent as MinusCircleOutline } from '@admiral-ds/icons/build/service/MinusCircleOutline.svg';
 
 import { OverflowMenu } from '#src/components/OverflowMenu';
-import { MenuItem, RenderOptionProps } from '#src/components/MenuItem';
+import { MenuItem, RenderOptionProps } from '#src/components/Menu/MenuItem';
 import { Theme } from '#src/components/themes';
 
 const Separator = styled.div`
@@ -54,6 +54,17 @@ export default {
     },
   },
 } as ComponentMeta<typeof OverflowMenu>;
+
+const handleVisibilityChange = (isVisible: boolean) => {
+  if (isVisible) {
+    console.log('Menu opened');
+  } else {
+    console.log('Menu closed');
+  }
+};
+const logSelectedId = (id: string) => {
+  console.log(`selected: ${id}`);
+};
 
 const Template1: ComponentStory<typeof OverflowMenu> = (args) => {
   const items: Array<any> = [
@@ -111,12 +122,11 @@ const Template1: ComponentStory<typeof OverflowMenu> = (args) => {
         {...args}
         items={model}
         selected={selected}
-        onChange={(id) => {
-          console.log(`onChange('${id}')`);
+        onSelectItem={(id) => {
+          logSelectedId(id);
           setSelected(id);
         }}
-        onOpen={() => console.log('open menu')}
-        onClose={() => console.log('close menu')}
+        onVisibilityChange={handleVisibilityChange}
         aria-label="Overflow Menu component"
         data-dropdown-container-id="overflow-menu-with-dropdown"
         className="overflow-menu-class"
@@ -171,9 +181,11 @@ const Template2: ComponentStory<typeof OverflowMenu> = (args) => {
         {...args}
         items={model}
         selected={selected}
-        onChange={(id) => setSelected(id)}
-        onOpen={() => console.log('open menu')}
-        onClose={() => console.log('close menu')}
+        onSelectItem={(id) => {
+          logSelectedId(id);
+          setSelected(id);
+        }}
+        onVisibilityChange={handleVisibilityChange}
         aria-label="Overflow Menu component"
       />
       <Separator />
@@ -181,9 +193,11 @@ const Template2: ComponentStory<typeof OverflowMenu> = (args) => {
         {...args}
         items={model}
         selected={selected}
-        onChange={(id) => setSelected(id)}
-        onOpen={() => console.log('open menu')}
-        onClose={() => console.log('close menu')}
+        onSelectItem={(id) => {
+          logSelectedId(id);
+          setSelected(id);
+        }}
+        onVisibilityChange={handleVisibilityChange}
         aria-label="Overflow Menu component"
         disabled
       />
@@ -263,9 +277,11 @@ const Template3: ComponentStory<typeof OverflowMenu> = (args) => {
           items={modelL}
           selected={selected}
           dimension={dimensionL}
-          onChange={(id) => setSelected(id)}
-          onOpen={() => console.log('open menu')}
-          onClose={() => console.log('close menu')}
+          onSelectItem={(id) => {
+            logSelectedId(id);
+            setSelected(id);
+          }}
+          onVisibilityChange={handleVisibilityChange}
           aria-label="Overflow Menu component L"
         />
         <Separator />
@@ -274,9 +290,11 @@ const Template3: ComponentStory<typeof OverflowMenu> = (args) => {
           items={modelM}
           dimension={dimensionM}
           selected={selected}
-          onChange={(id) => setSelected(id)}
-          onOpen={() => console.log('open menu')}
-          onClose={() => console.log('close menu')}
+          onSelectItem={(id) => {
+            logSelectedId(id);
+            setSelected(id);
+          }}
+          onVisibilityChange={handleVisibilityChange}
           aria-label="Overflow Menu component M"
         />
         <Separator />
@@ -285,9 +303,11 @@ const Template3: ComponentStory<typeof OverflowMenu> = (args) => {
           items={modelS}
           dimension={dimensionS}
           selected={selected}
-          onChange={(id) => setSelected(id)}
-          onOpen={() => console.log('open menu')}
-          onClose={() => console.log('close menu')}
+          onSelectItem={(id) => {
+            logSelectedId(id);
+            setSelected(id);
+          }}
+          onVisibilityChange={handleVisibilityChange}
           aria-label="Overflow Menu component S"
         />
       </DisplayBlock>
@@ -300,12 +320,11 @@ const Template3: ComponentStory<typeof OverflowMenu> = (args) => {
           dimension={dimensionL}
           isVertical
           selected={selected}
-          onChange={(id) => {
-            console.log(`onChange('${id}')`);
+          onSelectItem={(id) => {
+            logSelectedId(id);
             setSelected(id);
           }}
-          onOpen={() => console.log('open menu')}
-          onClose={() => console.log('close menu')}
+          onVisibilityChange={handleVisibilityChange}
           aria-label="Overflow Menu component vertical L"
         />
         <Separator />
@@ -315,12 +334,11 @@ const Template3: ComponentStory<typeof OverflowMenu> = (args) => {
           dimension={dimensionM}
           isVertical
           selected={selected}
-          onChange={(id) => {
-            console.log(`onChange('${id}')`);
+          onSelectItem={(id) => {
+            logSelectedId(id);
             setSelected(id);
           }}
-          onOpen={() => console.log('open menu')}
-          onClose={() => console.log('close menu')}
+          onVisibilityChange={handleVisibilityChange}
           aria-label="Overflow Menu component vertical M"
         />
         <Separator />
@@ -330,12 +348,11 @@ const Template3: ComponentStory<typeof OverflowMenu> = (args) => {
           dimension={dimensionS}
           isVertical
           selected={selected}
-          onChange={(id) => {
-            console.log(`onChange('${id}')`);
+          onSelectItem={(id) => {
+            logSelectedId(id);
             setSelected(id);
           }}
-          onOpen={() => console.log('open menu')}
-          onClose={() => console.log('close menu')}
+          onVisibilityChange={handleVisibilityChange}
           aria-label="Overflow Menu component vertical S"
         />
       </DisplayBlock>

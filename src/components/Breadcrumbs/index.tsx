@@ -4,6 +4,7 @@ import { MenuButton } from './Menu';
 import type { BreadcrumbProps } from './BreadCrumb';
 import { Breadcrumb } from './BreadCrumb';
 import { Compensator, Navigation, OverflowContentWrapper, OverflowItem, Separator, Wrapper } from './style';
+import { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 
 type Dimension = 'l' | 'm' | 's';
 
@@ -14,9 +15,17 @@ export interface BreadcrumbsProps extends React.HTMLAttributes<HTMLElement> {
   dimension?: Dimension;
   /** Мобильное отображение компонента */
   mobile?: boolean;
+  /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
+  dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
 }
 
-export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items, dimension = 'l', mobile, ...props }) => {
+export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
+  items,
+  dimension = 'l',
+  mobile,
+  dropContainerCssMixin,
+  ...props
+}) => {
   const iconSize = dimension === 'l' ? 20 : 16;
   const visible = items.slice(1, items.length - 1);
   const wrapperRef = React.useRef<HTMLOListElement>(null);
@@ -64,11 +73,11 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items, dimension = 'l'
       });
     }
     return () => observer.disconnect();
-  }, [overflowRef, wrapperRef, mobile, setVisibilityMap]);
+  }, [overflowRef, wrapperRef, mobile, setVisibilityMap, items]);
 
   const renderFirstItem = React.useCallback(() => {
     const item = items[0];
-    const id = item.id || item.text;
+    const id = item?.id || item?.text;
     return items.length > 1 ? (
       <Breadcrumb key={id} data-number={0} dimension={dimension} {...item}>
         <Separator width={iconSize} height={iconSize} aria-hidden />
@@ -78,7 +87,7 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items, dimension = 'l'
 
   const renderLastItem = React.useCallback(() => {
     const item = items[items.length - 1];
-    const id = item.id || item.text;
+    const id = item?.id || item?.text;
     const order = { style: { order: 1 } };
     return items.length > 0 ? (
       <Breadcrumb
@@ -115,7 +124,7 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items, dimension = 'l'
     const hiddenItems = items.filter((_, index) => !visibilityMap[index]);
     return hiddenItems.length ? (
       <OverflowItem>
-        <MenuButton options={hiddenItems} dimension={dimension === 'l' ? 'm' : 's'} aria-label="" />
+        <MenuButton options={hiddenItems} dimension="s" dropContainerCssMixin={dropContainerCssMixin} aria-label="" />
         <Separator width={iconSize} height={iconSize} aria-hidden />
       </OverflowItem>
     ) : null;

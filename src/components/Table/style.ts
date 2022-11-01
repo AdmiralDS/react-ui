@@ -44,6 +44,8 @@ export const OverflowMenuWrapper = styled.div<{ $offset: number; dimension: Tabl
   align-items: center;
   justify-content: center;
   position: absolute;
+  top: 0;
+  will-change: margin-left;
   z-index: 5;
   ${overflowMenuStyle};
   visibility: hidden;
@@ -204,37 +206,35 @@ export const GroupTextContent = styled.div`
 // padding-bottom меньше padding-top на 1px, т.к. 1px остается для border-bottom ячейки
 export const CheckboxCell = styled(Cell)<{ dimension: TableProps['dimension'] }>`
   width: unset;
-  overflow: visible;
   padding: ${({ dimension }) => {
     switch (dimension) {
       case 's':
-        return '8px 2px 7px 14px';
+        return '8px 14px 7px 14px';
       case 'l':
-        return '14px 2px 13px 18px';
+        return '14px 18px 13px 18px';
       case 'xl':
-        return '18px 2px 17px 18px';
+        return '18px 18px 17px 18px';
       case 'm':
       default:
-        return '12px 2px 11px 14px';
+        return '12px 14px 11px 14px';
     }
   }};
 `;
 
 // padding-bottom меньше padding-top на 1px, т.к. 1px остается для border-bottom ячейки
 export const ExpandCell = styled(Cell)<{ dimension: TableProps['dimension'] }>`
-  overflow: visible;
-  width: ${({ dimension }) => (dimension === 's' || dimension === 'm' ? 32 : 40)}px;
+  width: ${({ dimension }) => (dimension === 's' || dimension === 'm' ? 44 : 56)}px;
   padding: ${({ dimension }) => {
     switch (dimension) {
       case 's':
-        return '6px 0px 5px 12px';
+        return '6px 12px 5px 12px';
       case 'l':
-        return '12px 0px 11px 16px';
+        return '12px 16px 11px 16px';
       case 'xl':
-        return '16px 0px 15px 16px';
+        return '16px 16px 15px 16px';
       case 'm':
       default:
-        return '10px 0px 9px 12px';
+        return '10px 12px 9px 12px';
     }
   }};
 `;
@@ -327,6 +327,7 @@ export const Row = styled.div<{
   isGroup?: boolean;
   rowWidth?: number;
 }>`
+  position: relative;
   display: flex;
   flex-direction: column;
   min-width: fit-content;
@@ -334,7 +335,7 @@ export const Row = styled.div<{
   ${(p) => (p.isGroup ? groupRowStyle : rowStyle)}
   ${({ disabled }) => disabled && disabledRow}
   ${({ underline }) => underline && underlineRow}
-  ${(p) => (p.isGroup && p.rowWidth ? rowWidthStyle : '')}
+  ${({ rowWidth }) => rowWidth && rowWidthStyle}
 `;
 
 export const SimpleRow = styled.div<{ selected?: boolean; disabled?: boolean; error?: boolean; success?: boolean }>`
@@ -369,12 +370,7 @@ export const ExpandedRowContent = styled.div`
   padding: 0 12px 11px 12px;
 `;
 
-export const EmptyMessage = styled.div`
-  display: flex;
-  flex: 1 0 auto;
-  ${cellStyle};
-  justify-content: center;
+export const EmptyMessage = styled(Cell)`
   margin: 2px 0;
-  overflow: hidden;
   color: ${({ theme }) => theme.color['Neutral/Neutral 50']};
 `;

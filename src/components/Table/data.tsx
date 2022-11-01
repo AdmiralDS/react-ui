@@ -2,13 +2,13 @@ import { T } from '#src/components/T';
 import * as React from 'react';
 import styled from 'styled-components';
 import { OverflowMenu } from '#src/components/OverflowMenu';
-import { MenuItem, RenderOptionProps } from '#src/components/MenuItem';
+import { MenuItem, RenderOptionProps } from '#src/components/Menu/MenuItem';
 import { ReactComponent as DeleteOutline } from '@admiral-ds/icons/build/system/DeleteOutline.svg';
 import { RowAction } from '#src/components/Table';
 
 import type { Column } from '../Table';
-import { Tooltip } from '#src/components/Tooltip';
 import { TooltipHoc } from '#src/components/TooltipHOC';
+import { Badge } from '../Badge';
 
 const AmountCell = styled.div`
   text-overflow: ellipsis;
@@ -31,7 +31,14 @@ export type RowData = {
   success?: boolean;
   expanded?: boolean;
   expandedRowRender?: (row: RowData) => React.ReactNode;
-  overflowMenuRender?: (row: RowData, onMenuOpen: () => void, onMenuClose: () => void) => React.ReactNode;
+  overflowMenuRender?: (
+    row: RowData,
+    /** @deprecated use onVisibilityChange instead */
+    onMenuOpen?: () => void,
+    /** @deprecated use onVisibilityChange instead */
+    onMenuClose?: () => void,
+    onVisibilityChange?: (isVisible: boolean) => void,
+  ) => React.ReactNode;
   actionRender?: (row: any) => React.ReactNode;
   transfer_type: string;
   transfer_date: string;
@@ -789,11 +796,14 @@ export const columnListExtra: Column[] = [
 
 interface MenuProps {
   row: RowData;
-  onMenuOpen: () => void;
-  onMenuClose: () => void;
+  /** @deprecated use onVisibilityChange instead */
+  onMenuOpen?: () => void;
+  /** @deprecated use onVisibilityChange instead */
+  onMenuClose?: () => void;
+  onVisibilityChange?: (isVisible: boolean) => void;
 }
 
-const Menu: React.FC<MenuProps> = ({ row, onMenuOpen, onMenuClose }) => {
+const Menu: React.FC<MenuProps> = ({ row, onMenuOpen, onMenuClose, onVisibilityChange }) => {
   const items: Array<any> = [
     {
       id: '1',
@@ -827,14 +837,13 @@ const Menu: React.FC<MenuProps> = ({ row, onMenuOpen, onMenuClose }) => {
 
   return (
     <OverflowMenu
-      onChange={(id) => {
+      onSelectItem={(id) => {
         const options: any = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
         if (id === '1') alert(StrToDate(row['transfer_date']).toLocaleString('ru', options));
         if (id === '2') alert(StrToDate(row['transfer_date']).toLocaleString('en-US', options));
         if (id === '3') alert(StrToDate(row['transfer_date']).toLocaleString('de-AT', options));
       }}
-      onOpen={onMenuOpen}
-      onClose={onMenuClose}
+      onVisibilityChange={onVisibilityChange}
       aria-label="Overflow Menu component"
       dimension="m"
       isVertical
@@ -843,39 +852,7 @@ const Menu: React.FC<MenuProps> = ({ row, onMenuOpen, onMenuClose }) => {
   );
 };
 
-const IconWrapper = styled.div`
-  width: 20px;
-  height: 20px;
-
-  > svg {
-    fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
-  }
-`;
-const IconDeleteOutline = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLElement>>((props, ref) => {
-  return (
-    <IconWrapper ref={ref} {...props}>
-      <DeleteOutline />
-    </IconWrapper>
-  );
-});
-const TooltipedIconDeleteOutline = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLElement>>((props, ref) => {
-  const iconRef = React.useRef<HTMLDivElement | null>(null);
-  const [visible, setVisible] = React.useState(false);
-  return (
-    <>
-      <IconWrapper ref={iconRef} {...props}>
-        <DeleteOutline />
-      </IconWrapper>
-      <Tooltip
-        visible={visible}
-        onVisibilityChange={setVisible}
-        renderContent={() => `Delete row`}
-        targetRef={iconRef}
-      />
-    </>
-  );
-});
-const TooltipedIcon = TooltipHoc(IconDeleteOutline);
+const TooltipedRowAction = TooltipHoc(RowAction);
 
 export const rowListMenu: RowData[] = [
   {
@@ -885,9 +862,12 @@ export const rowListMenu: RowData[] = [
     transfer_amount: numberFormatter.format(500_000),
     currency: 'RUB',
     rate: 2.5,
-    overflowMenuRender: (row: RowData, onMenuOpen: () => void, onMenuClose: () => void) => (
-      <Menu row={row} onMenuOpen={onMenuOpen} onMenuClose={onMenuClose} />
-    ),
+    overflowMenuRender: (
+      row: RowData,
+      onMenuOpen?: () => void,
+      onMenuClose?: () => void,
+      onVisibilityChange?: (isVisible: boolean) => void,
+    ) => <Menu row={row} onMenuOpen={onMenuOpen} onMenuClose={onMenuClose} onVisibilityChange={onVisibilityChange} />,
   },
   {
     id: '0002',
@@ -896,9 +876,12 @@ export const rowListMenu: RowData[] = [
     transfer_amount: numberFormatter.format(32_500_000_000),
     currency: 'RUB',
     rate: 5.5,
-    overflowMenuRender: (row: RowData, onMenuOpen: () => void, onMenuClose: () => void) => (
-      <Menu row={row} onMenuOpen={onMenuOpen} onMenuClose={onMenuClose} />
-    ),
+    overflowMenuRender: (
+      row: RowData,
+      onMenuOpen?: () => void,
+      onMenuClose?: () => void,
+      onVisibilityChange?: (isVisible: boolean) => void,
+    ) => <Menu row={row} onMenuOpen={onMenuOpen} onMenuClose={onMenuClose} onVisibilityChange={onVisibilityChange} />,
   },
   {
     id: '0003',
@@ -907,19 +890,11 @@ export const rowListMenu: RowData[] = [
     transfer_amount: numberFormatter.format(189_000_000),
     currency: 'RUB',
     rate: 6,
-    actionRender: () => {
-      const [visible, setVisible] = React.useState(false);
-
-      return (
-        <RowAction onClick={() => console.log('row action happens')}>
-          <TooltipedIcon
-            visible={visible}
-            handleVisibilityChange={(visible: boolean) => setVisible(visible)}
-            renderContent={() => `Delete`}
-          />
-        </RowAction>
-      );
-    },
+    actionRender: () => (
+      <TooltipedRowAction renderContent={() => `Delete`} onClick={() => console.log('row action happens')}>
+        <DeleteOutline />
+      </TooltipedRowAction>
+    ),
   },
   {
     id: '0004',
@@ -929,9 +904,9 @@ export const rowListMenu: RowData[] = [
     currency: 'RUB',
     rate: 1,
     actionRender: () => (
-      <RowAction onClick={() => console.log('row action happens')}>
-        <TooltipedIconDeleteOutline />
-      </RowAction>
+      <TooltipedRowAction renderContent={() => `Delete`} onClick={() => console.log('row action happens')}>
+        <DeleteOutline />
+      </TooltipedRowAction>
     ),
   },
   {
@@ -960,5 +935,36 @@ export const virtualColumnList: Column[] = [
     name: 'transfer_date',
     title: 'Дата сделки',
     width: '40%',
+  },
+];
+
+export const columnListWithCustomTitle: Column[] = [
+  {
+    name: 'transfer_type',
+    title: (
+      <>
+        Тип сделки <Badge>5</Badge>
+      </>
+    ),
+    width: '20%',
+  },
+  {
+    name: 'transfer_date',
+    title: <b>Дата сделки</b>,
+    width: '250px',
+  },
+  {
+    name: 'transfer_amount',
+    title: <span style={{ color: 'red', fontWeight: 'bold' }}>Сумма</span>,
+    width: 200,
+  },
+  {
+    name: 'currency',
+    title: <i>Валюта</i>,
+    extraText: <b>доллары</b>,
+  },
+  {
+    name: 'rate',
+    title: 'Ставка',
   },
 ];

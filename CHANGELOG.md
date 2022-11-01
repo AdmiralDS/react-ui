@@ -2,6 +2,153 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.1.0](https://github.com/AdmiralDS/react-ui/compare/v3.0.1...v3.1.0) (2022-10-21)
+
+
+### Features
+
+* **Menu,DropMenu:** add multiSelection prop ([321aeed](https://github.com/AdmiralDS/react-ui/commit/321aeed61df158e7d77cb1659714122387cc3e43))
+* **Menu:** add example with CheckboxGroup ([1793930](https://github.com/AdmiralDS/react-ui/commit/1793930562c757e45ab292604411a8f777da97d0))
+* **MenuItemWithCheckbox:** add component ([acde02a](https://github.com/AdmiralDS/react-ui/commit/acde02a5d9c6ebdfbe89b8c9ce9e38d7fbc4fbb1))
+
+
+### Bug Fixes
+
+*  fix TagMenu  export ([9f06f8c](https://github.com/AdmiralDS/react-ui/commit/9f06f8cffe7ee86e206241493603e9de9d6d04f3))
+* **DateInput, InputExtended, TimeInput:** fix reopening drop container on icon click ([44aaba9](https://github.com/AdmiralDS/react-ui/commit/44aaba9c7ee5fa1c59be3941e3420c1fa93aa337))
+* **DateInput:** set focus to input when calendar is open ([b627722](https://github.com/AdmiralDS/react-ui/commit/b627722a8db9755f3b841067125c2a81c3faf139))
+* fix Range export ([1917e53](https://github.com/AdmiralDS/react-ui/commit/1917e53c91e20712f7155d03295b5a40a8bdbca4))
+* fix tsconfig (need npm upgrade after merge to local brunch) ([40df47d](https://github.com/AdmiralDS/react-ui/commit/40df47df164b44451fee4539ffa17b335494186c))
+* **Slider:** fix problems with animation, add type 'any' for step prop ([9e7cf2c](https://github.com/AdmiralDS/react-ui/commit/9e7cf2c52e6de172e01b55495435f4c70c1a6281))
+* **Storybook:** pass loading and disabled in DropMenu stories examples ([3ffe082](https://github.com/AdmiralDS/react-ui/commit/3ffe0824dc6f75acba542f2a222cb81db30052de))
+* **Table:** update CheckboxCell and ExpandCell dimensions ([3edccec](https://github.com/AdmiralDS/react-ui/commit/3edccecaaac4ee7b2da4abcd4307bc56714140c2))
+* **TagMenu:** pass id to Menu's selected prop ([d5f277e](https://github.com/AdmiralDS/react-ui/commit/d5f277e74d2e40cc52aa3dda615ffcf6d058e611))
+* **Tree,MenuItemWithCheckbox:** fix parent checkbox status ([729d870](https://github.com/AdmiralDS/react-ui/commit/729d87069fd22dba1e01c3131827559947453f3e))
+
+### [3.0.1](https://github.com/AdmiralDS/react-ui/compare/v3.0.0...v3.0.1) (2022-10-13)
+
+## [3.0.0](https://github.com/AdmiralDS/react-ui/compare/v2.5.0...v3.0.0) (2022-10-12)
+
+
+### ⚠ BREAKING CHANGES
+
+* **Tooltip, TooltipHoc:** change api for Tooltip and TooltipHoc
+
+### Features
+
+* **FileInput:** add FileInput instead of FileUploader ([d927c41](https://github.com/AdmiralDS/react-ui/commit/d927c416b3e878f6eb470dd4c30c441afaa5cbb0))
+* **FileInput:** add status and extraText props ([f1a1079](https://github.com/AdmiralDS/react-ui/commit/f1a107940cdb4e399ef613b30fdda7034b6641ff))
+* **Menu:** update initial hover position ([df34fd5](https://github.com/AdmiralDS/react-ui/commit/df34fd592b97e6f0b3ef7bbe53c70d50c8fe51ef))
+
+
+### Bug Fixes
+
+* **FileInput:** add synchronization with native input file list ([91626a9](https://github.com/AdmiralDS/react-ui/commit/91626a9ab96e9dea212bb0091055b3c16932d6b0))
+* **FileInput:** fix outline focus ([f325893](https://github.com/AdmiralDS/react-ui/commit/f325893d8a77312469b88a052aff89f73894acde))
+* **Locale:** remove deprecated props instead which locale prop should be used ([3e603a1](https://github.com/AdmiralDS/react-ui/commit/3e603a18b5c058cfb7763f9ad5278a597272444b))
+
+
+* **Tooltip, TooltipHoc:** change api, add opportunity to use controlled and uncontrolled components ([e216a6d](https://github.com/AdmiralDS/react-ui/commit/e216a6d473421aeb7812f1fe4eabfcb4260786f2))
+
+## [2.5.0](https://github.com/AdmiralDS/react-ui/compare/v2.4.0...v2.5.0) (2022-10-04)
+
+
+### Features
+
+* **Components:** add dropContainerCssMixin prop for components with drop down ([4de4e05](https://github.com/AdmiralDS/react-ui/commit/4de4e05e02f7d46c752638f1d8d070470302fc19))
+
+
+### Bug Fixes
+
+* **Menu:** fix styles ([3518783](https://github.com/AdmiralDS/react-ui/commit/35187835ff15833673f9aa8a288d2d46a4784d4c))
+* **SuggestInput:** fix double scroll ([d004158](https://github.com/AdmiralDS/react-ui/commit/d0041584e8b88020d10b844e25eedc0854853454))
+* wrong entry name mappings and CRA5 workaround ([335f496](https://github.com/AdmiralDS/react-ui/commit/335f496f03b95f8f60b436b37345c05b2873eded))
+
+## [2.4.0](https://github.com/AdmiralDS/react-ui/compare/v2.3.0...v2.4.0) (2022-09-29)
+
+
+### Features
+
+* **SuggestInput:** add storybook example with filtering results ([5d5c643](https://github.com/AdmiralDS/react-ui/commit/5d5c643f561505ae4c84d258b895605cf1f38d1d))
+* **SuggestInput:** add storybook example with no matches ([2d3cf54](https://github.com/AdmiralDS/react-ui/commit/2d3cf543f56a61c7271d656a7edbb8d4a4916a44))
+* **Toast:** add return id to addToast method, add removeById method ([0c17ede](https://github.com/AdmiralDS/react-ui/commit/0c17ede86289469ab9852d98efeeb6f52debb3b4))
+
+
+### Bug Fixes
+
+* **Breadcrumbs:** fix bug with items update and incorrect menu ([cac4305](https://github.com/AdmiralDS/react-ui/commit/cac43055d425b333287eae5f8aac02a8f09b0da6))
+* **Table:** fix column.title interface ([eb70d79](https://github.com/AdmiralDS/react-ui/commit/eb70d7997caa8c1a78b7a6005c9cf295ef168ae6))
+* **Toast:** fix default width ([ecdf664](https://github.com/AdmiralDS/react-ui/commit/ecdf66445cf8958240b2d504efb4f07e106a466d))
+* **Tree:** leave line selected after toggle expand and checkbox ([e383421](https://github.com/AdmiralDS/react-ui/commit/e3834213612e308b2459c1432500c903d6fc5ca2))
+* **Tree:** set cursor to default when TreeNode is disabled ([4caad24](https://github.com/AdmiralDS/react-ui/commit/4caad241e2149f191aa06a7c437391069bb262a9))
+
+## [2.3.0](https://github.com/AdmiralDS/react-ui/compare/v2.2.2...v2.3.0) (2022-09-23)
+
+
+### Features
+
+* **DateInput:** use DropdownContainer instead of deprecated Dropdown ([e9da26d](https://github.com/AdmiralDS/react-ui/commit/e9da26da202d0837c1879341de31e03bd360b8e8))
+* **Menu:** add renderTopPanel and renderBottomPanel props ([e6352e7](https://github.com/AdmiralDS/react-ui/commit/e6352e7d02a690d19714141e8554ef5f12f1a92e))
+* **NumberInput, SliderInput, SliderRange:** disable opportunity to enter minus char if minValue >= 0 ([4474f43](https://github.com/AdmiralDS/react-ui/commit/4474f4378aa3033c254f1f3734f8abdb400f129f))
+* **SuggestInput:** add highlightFormat prop ([6ce4c63](https://github.com/AdmiralDS/react-ui/commit/6ce4c63259318032df914a3b6a5c222588e5792c))
+* **SuggestInput:** use Menu instead of deprecated DropDown ([346820f](https://github.com/AdmiralDS/react-ui/commit/346820fbdf6ad5fff400aaea8f4f51d337bb330a))
+* **Table:** add prop disableResize for column ([d3a741d](https://github.com/AdmiralDS/react-ui/commit/d3a741d10fd2407a2178df0777e4f926c49da306))
+* **Table:** use DropdownContainer instead of deprecated DropDown in Filter ([3fcd4f4](https://github.com/AdmiralDS/react-ui/commit/3fcd4f4012e79f0bd1906754cc16b8e1e2bde9fc))
+* **TimeInput:** use Menu instead of deprecated DropDown ([22e7783](https://github.com/AdmiralDS/react-ui/commit/22e778378d9982d9442a83355dbdf0a740499a95))
+
+
+### Bug Fixes
+
+* **Hint:** add utils to position hint according to page scroll ([08dc1f1](https://github.com/AdmiralDS/react-ui/commit/08dc1f1fde7e768b7879b183bedfb3d6e2e51cf5))
+* **SuggestInput:** MessagePanel styles ([e50c7b5](https://github.com/AdmiralDS/react-ui/commit/e50c7b5a3901af4c9ebc2e9df9c7331e62eae86d))
+* **Table:** disable header checkbox when rowList is empty ([efd9cbb](https://github.com/AdmiralDS/react-ui/commit/efd9cbbf8192300145901643fe1c2b1b398269fc))
+* **Table:** fix action and overflowMenu position on horizontal scroll ([1637dc7](https://github.com/AdmiralDS/react-ui/commit/1637dc76063afd10243f07bdf5875e61a67c471e))
+* **Table:** fix bug with columnList and resize ([90ac571](https://github.com/AdmiralDS/react-ui/commit/90ac5714e4e89093fdb1e1782cef16985d935045))
+* **Table:** fix bug with row action, row overflowMenu and scroll ([eb74ab6](https://github.com/AdmiralDS/react-ui/commit/eb74ab628fd7a3932e398dab9babd6fd6900c414))
+* **Table:** fix bug with virtual scroll and small number of rows ([3b99f57](https://github.com/AdmiralDS/react-ui/commit/3b99f57c2aae6bc201f73b9aabd8c6b37e0149cb))
+* **Table:** fix problem with checkboxes and columns widths ([cc2b5e4](https://github.com/AdmiralDS/react-ui/commit/cc2b5e4262dc56cb3c1c07a98204fb582fa55591))
+* **TextInput:** fix icon padding ([238a177](https://github.com/AdmiralDS/react-ui/commit/238a177b9bd3b4e7c64d5d20557da935d77ecbdf))
+
+### [2.2.2](https://github.com/AdmiralDS/react-ui/compare/v2.2.1...v2.2.2) (2022-09-15)
+
+
+### Bug Fixes
+
+* **InputEx:** wrong typing cause storybook error ([686d63a](https://github.com/AdmiralDS/react-ui/commit/686d63ae650093906a477149a25993fa636824db))
+
+### [2.2.1](https://github.com/AdmiralDS/react-ui/compare/v2.2.0...v2.2.1) (2022-09-15)
+
+
+### Bug Fixes
+
+* **Breadcrumbs:** fix bug with hidden menu breadcrumbs and router link ([19789da](https://github.com/AdmiralDS/react-ui/commit/19789dafc6d51cf601d7614c48b6c199a603b4f7))
+* readonly and disabled component behavior ([64e33f3](https://github.com/AdmiralDS/react-ui/commit/64e33f3be0d7ac2a66ef9140d384e23f30a4899e))
+* **Table:** fix horizontal scroll when emptyMessage displays ([ff266e3](https://github.com/AdmiralDS/react-ui/commit/ff266e344dce251a8c6e0fb69f8c844676826787))
+
+## [2.2.0](https://github.com/AdmiralDS/react-ui/compare/v2.1.0...v2.2.0) (2022-09-12)
+
+
+### Features
+
+* **Table:** add forwardRef for RowAction ([2c45788](https://github.com/AdmiralDS/react-ui/commit/2c457883961efe0fdfd056497fafeac4dd8a0dca))
+* **TimeInput:** add uncontrolled mode ([577b009](https://github.com/AdmiralDS/react-ui/commit/577b009e460fb8badd25588a583df0b436914542))
+
+
+### Bug Fixes
+
+* **AvatarGroup:** set className to wrapper ([531f977](https://github.com/AdmiralDS/react-ui/commit/531f9775c763061f0494b71a877cfa2d3d682a40))
+* **Badge:** add ref passing ([dc0c860](https://github.com/AdmiralDS/react-ui/commit/dc0c8607dbe332b704820c8274d28e01a07b4731))
+* **DateInput:** change default input handler ([8136839](https://github.com/AdmiralDS/react-ui/commit/8136839a7505ac071501ed538b25718d67b2bd7b))
+* **GroupActionsPane:** add property for disable table settings buttons ([b04ef8f](https://github.com/AdmiralDS/react-ui/commit/b04ef8f2f90b413b6011850373309e7460afcb85))
+* **InputEx:** fix close option on select, fix focus stealing on open click ([d2897a4](https://github.com/AdmiralDS/react-ui/commit/d2897a475e92b5fae097a7d49cc76104a1b92ab4))
+* **InputEx:** fix suffix option highlight ([ec09d39](https://github.com/AdmiralDS/react-ui/commit/ec09d392caa750e89ac4c51f480e12a7c56463ab))
+* **InputEx:** text wrap on resize ([dca4127](https://github.com/AdmiralDS/react-ui/commit/dca4127711f765d4e71160dd80c2dcf29ff0e95e))
+* **MultiButton:** set className to wrapper ([3345bf3](https://github.com/AdmiralDS/react-ui/commit/3345bf32e07678bbc219b069539c8a33f0734a41))
+* **SliderInputField, SliderRangeField:** fix problem with field overflow ([88857d7](https://github.com/AdmiralDS/react-ui/commit/88857d7bfe7bc17bcfa6d1167c891ddf2dbab308))
+* **Table:** update column percent width on table resize ([2045712](https://github.com/AdmiralDS/react-ui/commit/2045712393301d4f1b21888bb54eec7029292cd7))
+* **TimeInput:** fix problem with invalid numbers enter ([3d268aa](https://github.com/AdmiralDS/react-ui/commit/3d268aa5179ab2d8df6ad0817b388992b259e522))
+* **Tree:** add TreeNode to export ([be3101e](https://github.com/AdmiralDS/react-ui/commit/be3101ed1ea6cec38fd3112a5bee668caef81409))
+
 ## [2.1.0](https://github.com/AdmiralDS/react-ui/compare/v2.0.0...v2.1.0) (2022-08-31)
 
 

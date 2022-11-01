@@ -185,20 +185,38 @@ export const EditMode = React.forwardRef<HTMLInputElement, EditModeProps>(
 
     const [overflowActive, setOverflowActive] = React.useState<boolean>(false);
     const [tooltipVisible, setTooltipVisible] = React.useState<boolean>(false);
+    const [node, setNode] = React.useState<HTMLElement | null>(null);
     const textRef = React.useRef<HTMLDivElement>(null);
+
     React.useLayoutEffect(() => {
-      if (checkOverflow(textRef.current)) {
-        setOverflowActive(true);
-        return;
+      function show() {
+        setTooltipVisible(true);
       }
-      setOverflowActive(false);
-    }, [tooltipVisible]);
+      function hide() {
+        setTooltipVisible(false);
+      }
+      if (node) {
+        node.addEventListener('mouseenter', show);
+        node.addEventListener('mouseleave', hide);
+        return () => {
+          node.removeEventListener('mouseenter', show);
+          node.removeEventListener('mouseleave', hide);
+        };
+      }
+    }, [setTooltipVisible, node]);
+
+    React.useLayoutEffect(() => {
+      if (textRef.current && checkOverflow(textRef.current) !== overflowActive) {
+        setOverflowActive(checkOverflow(textRef.current));
+      }
+    }, [tooltipVisible, textRef.current, setOverflowActive]);
 
     React.useEffect(() => {
       if (!localVal && value) {
         setLocalVal(value);
       }
     }, [value, localVal]);
+
     const enableEdit = () => {
       setEdit(true);
       onEdit?.();
@@ -254,16 +272,11 @@ export const EditMode = React.forwardRef<HTMLInputElement, EditModeProps>(
           )
         ) : (
           <>
-            <Text ref={textRef} onClick={!props.readOnly ? enableEdit : undefined}>
+            <Text ref={refSetter(textRef, setNode)} onClick={!props.readOnly ? enableEdit : undefined}>
               {value}
             </Text>
-            {showTooltip && (
-              <Tooltip
-                visible={tooltipVisible && overflowActive}
-                onVisibilityChange={setTooltipVisible}
-                renderContent={() => value}
-                targetRef={textRef}
-              />
+            {showTooltip && tooltipVisible && overflowActive && (
+              <Tooltip renderContent={() => value} targetRef={textRef} />
             )}
             {!props.readOnly && <EditIcon height={iconSize} width={iconSize} onClick={enableEdit} />}
           </>

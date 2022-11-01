@@ -2,12 +2,12 @@ import React, { useMemo, useRef, useState } from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { DropdownContainer } from '#src/components/DropdownContainer';
 import { Button } from '#src/components/Button';
-import styled, { ThemeProvider } from 'styled-components';
+import styled, { css, ThemeProvider } from 'styled-components';
 import { typography } from '#src/components/Typography';
 import { ReactComponent as CardSolid } from '@admiral-ds/icons/build/finance/CardSolid.svg';
 import { withDesign } from 'storybook-addon-designs';
 import { Menu } from '#src/components/Menu';
-import { MenuItem, RenderOptionProps } from '#src/components/MenuItem';
+import { MenuItem, RenderOptionProps } from '#src/components/Menu/MenuItem';
 import { Theme } from '#src/components/themes';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 
@@ -110,42 +110,46 @@ const Simple: ComponentStory<typeof DropdownContainer> = (args) => {
   );
 };
 
-const TemplateWithMenu: ComponentStory<typeof DropdownContainer> = (args) => {
-  const cards = [
-    {
-      id: '1',
-      label: 'Номер Карты /****45',
-      value: 1,
-    },
-    {
-      id: '2',
-      label: 'Номер Карты /****75',
-      value: 2,
-    },
-    { id: '3', label: 'Номер Карты /****22', value: 3 },
-    {
-      id: '4',
-      label: 'Номер Карты /****33',
-      value: 4,
-    },
-    {
-      id: '5',
-      label: 'Номер Карты /****21',
-      value: 5,
-    },
-    {
-      id: '6',
-      label: 'Номер Карты /****35',
-      value: 6,
-    },
-    { id: '7', label: 'Номер Карты /****39', value: 7 },
-    {
-      id: '8',
-      label: 'Номер Карты /****41',
-      value: 8,
-    },
-  ];
+const cards = [
+  {
+    id: '1',
+    label: 'Номер Карты /****45',
+    value: 1,
+  },
+  {
+    id: '2',
+    label: 'Номер Карты /****75',
+    value: 2,
+  },
+  { id: '3', label: 'Номер Карты /****22', value: 3 },
+  {
+    id: '4',
+    label: 'Номер Карты /****33',
+    value: 4,
+  },
+  {
+    id: '5',
+    label: 'Номер Карты /****21',
+    value: 5,
+  },
+  {
+    id: '6',
+    label: 'Номер Карты /****35',
+    value: 6,
+  },
+  { id: '7', label: 'Номер Карты /****39', value: 7 },
+  {
+    id: '8',
+    label: 'Номер Карты /****41',
+    value: 8,
+  },
+];
 
+const containerContrastBorder = css`
+  border: dashed 2px ${(p) => p.theme.color['Neutral/Neutral 90']};
+`;
+
+const TemplateWithMenu: ComponentStory<typeof DropdownContainer> = (args) => {
   const model = useMemo(() => {
     return cards.map((item) => {
       return {
@@ -186,6 +190,7 @@ const TemplateWithMenu: ComponentStory<typeof DropdownContainer> = (args) => {
             targetRef={targetRef || buttonRef}
             onClickOutside={() => setOpen(!open)}
             {...other}
+            dropContainerCssMixin={containerContrastBorder}
           >
             <Menu
               model={model}

@@ -3,7 +3,7 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import { ThemeProvider } from 'styled-components';
 
 import { MenuButton } from '../MenuButton';
-import { MenuItem, RenderOptionProps } from '#src/components/MenuItem';
+import { MenuItem, RenderOptionProps } from '#src/components/Menu/MenuItem';
 import { LIGHT_THEME } from '../themes';
 
 describe('MenuButton', () => {

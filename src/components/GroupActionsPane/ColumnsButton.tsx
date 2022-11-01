@@ -1,13 +1,13 @@
 import type { HTMLAttributes } from 'react';
 import * as React from 'react';
-import styled from 'styled-components';
+import styled, { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import { useMemo, useRef, useState } from 'react';
 import { Checkbox } from '#src/components/Checkbox';
 import { IconButton } from '#src/components/IconButton';
-import { DropdownContainer } from '#src/components/DropdownContainer';
+import { StyledDropdownContainer } from '#src/components/DropdownContainer';
 import { ReactComponent as PlusOutline } from '@admiral-ds/icons/build/service/PlusOutline.svg';
 import { Menu } from '#src/components/Menu';
-import { MenuItem } from '#src/components/MenuItem';
+import { MenuItem } from '#src/components/Menu/MenuItem';
 import { refSetter } from '#src/components/common/utils/refSetter';
 
 export type MenuDimension = 's' | 'm' | 'l';
@@ -38,6 +38,8 @@ export interface ColumnsButtonProps extends HTMLAttributes<HTMLButtonElement>, R
   onColumnsChange?: (columns: Array<ItemValue>) => void;
   buttonDimension?: 's' | 'l';
   menuDimension?: MenuDimension;
+  /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
+  dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
 }
 
 const ColumnsMenu = styled(Menu)`
@@ -54,7 +56,7 @@ const StyledCheckbox = styled(Checkbox)`
 `;
 
 export const ColumnsButton = React.forwardRef<HTMLButtonElement, ColumnsButtonProps>(
-  ({ columns, menuDimension = 'l', buttonDimension = 'l', onColumnsChange, ...props }, ref) => {
+  ({ columns, menuDimension = 'l', buttonDimension = 'l', onColumnsChange, dropContainerCssMixin, ...props }, ref) => {
     const [opened, setOpened] = useState<boolean>(false);
     const buttonRef = useRef<HTMLButtonElement | null>(null);
 
@@ -110,9 +112,14 @@ export const ColumnsButton = React.forwardRef<HTMLButtonElement, ColumnsButtonPr
           <PlusOutline />
         </IconButton>
         {opened && (
-          <DropdownContainer targetRef={buttonRef} alignSelf={'flex-end'} onClickOutside={handleClickOutside}>
+          <StyledDropdownContainer
+            targetRef={buttonRef}
+            alignSelf={'flex-end'}
+            onClickOutside={handleClickOutside}
+            dropContainerCssMixin={dropContainerCssMixin}
+          >
             <ColumnsMenu model={renderColumns} selected={''} />
-          </DropdownContainer>
+          </StyledDropdownContainer>
         )}
       </>
     );

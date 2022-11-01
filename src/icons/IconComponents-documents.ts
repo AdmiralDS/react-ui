@@ -44,6 +44,8 @@ export { ReactComponent as DocsOutline } from '@admiral-ds/icons/build/documents
 export { ReactComponent as DocsSolid } from '@admiral-ds/icons/build/documents/DocsSolid.svg';
 export { ReactComponent as DocumentAddOutline } from '@admiral-ds/icons/build/documents/DocumentAddOutline.svg';
 export { ReactComponent as DocumentAddSolid } from '@admiral-ds/icons/build/documents/DocumentAddSolid.svg';
+export { ReactComponent as DuplicateOutline } from '@admiral-ds/icons/build/documents/DuplicateOutline.svg';
+export { ReactComponent as DuplicateSolid } from '@admiral-ds/icons/build/documents/DuplicateSolid.svg';
 export { ReactComponent as FileCurrencyOutline } from '@admiral-ds/icons/build/documents/FileCurrencyOutline.svg';
 export { ReactComponent as FileCurrencySolid } from '@admiral-ds/icons/build/documents/FileCurrencySolid.svg';
 export { ReactComponent as FileDOCOutline } from '@admiral-ds/icons/build/documents/FileDOCOutline.svg';

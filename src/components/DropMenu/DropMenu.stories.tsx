@@ -3,14 +3,14 @@ import styled, { ThemeProvider } from 'styled-components';
 import { withDesign } from 'storybook-addon-designs';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { DropMenu } from '#src/components/DropMenu';
-import { MenuItem, RenderOptionProps } from '#src/components/MenuItem';
+import { MenuItem, RenderOptionProps } from '#src/components/Menu/MenuItem';
 import { Theme } from '#src/components/themes';
 import { Button } from '#src/components/Button';
 import { typography } from '#src/components/Typography';
 import { ReactComponent as CardSolid } from '@admiral-ds/icons/build/finance/CardSolid.svg';
-import { Tooltip } from '#src/components/Tooltip';
-import { CheckboxField } from '#src/components/form';
+import { TooltipHoc } from '#src/components/TooltipHOC';
 import { RadioButton } from '#src/components/RadioButton';
+import { ItemWithCheckbox, MenuItemWithCheckbox } from '#src/components/Menu/MenuItemWithCheckbox';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -24,6 +24,13 @@ const Description = () => (
     32px
   </Desc>
 );
+const WrapperVertical = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 20px;
+`;
 
 export default {
   title: 'Admiral-2.1/DropMenu',
@@ -106,12 +113,26 @@ const items = [
     value: 7,
   },
 ];
-
-const onOpenMenu = () => console.log('menu opened');
-const onCloseMenu = () => console.log('menu closed');
+const handleVisibilityChangeControlledState = (isVisible: boolean) => {
+  console.log('onVisibilityChange with controlled state');
+  if (isVisible) {
+    console.log('Menu opened');
+  } else {
+    console.log('Menu closed');
+  }
+};
+const handleVisibilityChangeUnControlledState = (isVisible: boolean) => {
+  console.log('onVisibilityChange with uncontrolled state');
+  if (isVisible) {
+    console.log('Menu opened');
+  } else {
+    console.log('Menu closed');
+  }
+};
 
 const SimpleTemplate: ComponentStory<typeof DropMenu> = (args) => {
   const [selected, setSelected] = React.useState<string | undefined>(undefined);
+
   const model = React.useMemo(() => {
     return items.map((item) => ({
       id: item.id,
@@ -130,29 +151,43 @@ const SimpleTemplate: ComponentStory<typeof DropMenu> = (args) => {
 
   return (
     <ThemeProvider theme={swapBorder}>
-      <div style={{ display: 'flex', justifyContent: 'center' }}>
+      <WrapperVertical>
+        <Desc>
+          Неконтроллируемое состояние видимости меню:
+          <br />
+          - isVisible не передается в DropMenu, <br />- обработчик onVisibilityChange выполняется из DropMenu
+          <br />- для открытия/закрытия меню при клике на кнопке используется обработчик handleClick из DropMenu
+          <br />
+          По умолчанию DropMenu открывает/закрывает выпадающий список при нажатии на переданный компонент, а также
+          закрывает выпадающий список при выборе опции
+        </Desc>
         <DropMenu
           {...args}
           items={model}
-          onChange={(id) => {
+          onSelectItem={(id) => {
             console.log(`selected: ${id}`);
             setSelected(id);
           }}
-          onOpen={onOpenMenu}
-          onClose={onCloseMenu}
+          onVisibilityChange={handleVisibilityChangeUnControlledState}
           dimension={args.dimension}
           disabled={args.disabled}
           selected={selected}
-          renderContentProp={({ buttonRef, handleKeyDown, handleClick, statusIcon }) => {
+          renderContentProp={({ buttonRef, handleKeyDown, handleClick, statusIcon, disabled }) => {
             return (
-              <Button ref={buttonRef as React.Ref<HTMLButtonElement>} onKeyDown={handleKeyDown} onClick={handleClick}>
+              <Button
+                ref={buttonRef as React.Ref<HTMLButtonElement>}
+                loading={args.loading}
+                disabled={disabled}
+                onKeyDown={handleKeyDown}
+                onClick={handleClick}
+              >
                 Нажми
                 {statusIcon}
               </Button>
             );
           }}
         />
-      </div>
+      </WrapperVertical>
     </ThemeProvider>
   );
 };
@@ -257,32 +292,45 @@ const TemplateWithCards: ComponentStory<typeof DropMenu> = (args) => {
 
   return (
     <>
-      <div style={{ display: 'flex', justifyContent: 'center' }}>
+      <WrapperVertical>
+        <Desc>
+          Неконтроллируемое состояние видимости меню:
+          <br />
+          - isVisible не передается в DropMenu; <br />- обработчик onVisibilityChange выполняется из DropMenu;
+          <br />- для открытия/закрытия меню при клике на кнопке используется обработчик handleClick из DropMenu.
+          <br />
+          По умолчанию DropMenu открывает/закрывает выпадающий список при нажатии на переданный компонент, а также
+          закрывает выпадающий список при выборе опции.
+        </Desc>
         <StyledDropMenu
           {...args}
           items={model}
-          onChange={(id) => {
+          onSelectItem={(id) => {
             console.log(`selected: ${id}`);
             setSelected(id);
           }}
-          onOpen={onOpenMenu}
-          onClose={onCloseMenu}
+          onVisibilityChange={handleVisibilityChangeUnControlledState}
           dimension={args.dimension}
           disabled={args.disabled}
           selected={selected}
-          onSelectItem={setSelected}
           active={active}
           onActivateItem={setActive}
-          renderContentProp={({ buttonRef, handleKeyDown, handleClick, statusIcon }) => {
+          renderContentProp={({ buttonRef, handleKeyDown, handleClick, statusIcon, disabled }) => {
             return (
-              <Button ref={buttonRef as React.Ref<HTMLButtonElement>} onKeyDown={handleKeyDown} onClick={handleClick}>
+              <Button
+                ref={buttonRef as React.Ref<HTMLButtonElement>}
+                loading={args.loading}
+                disabled={disabled}
+                onKeyDown={handleKeyDown}
+                onClick={handleClick}
+              >
                 Нажми
                 {statusIcon}
               </Button>
             );
           }}
         />
-      </div>
+      </WrapperVertical>
     </>
   );
 };
@@ -324,115 +372,221 @@ const itemsLongText = [
     value: 6,
   },
 ];
+const MenuItemWithTooltip = TooltipHoc(MenuItem);
 
 const DropMenuTooltipTemplate: ComponentStory<typeof DropMenu> = (args) => {
   const [selected, setSelected] = React.useState<string | undefined>(undefined);
+  const [isVisible, setIsVisible] = React.useState<boolean>(false);
+
   const model = React.useMemo(() => {
     return itemsLongText.map((item) => {
       const tooltip = item.label.length > 20;
 
       return {
         id: item.id,
-        render: (options: RenderOptionProps) => {
-          const itemRef = React.useRef(null);
-          const [tooltipVisible, setTooltipVisible] = React.useState(false);
-          return (
-            <MenuItem ref={itemRef} dimension={args.dimension || 's'} {...options} key={item.id}>
-              {tooltip ? item.label.slice(0, 17) + '...' : item.label}
-              {tooltip && (
-                <Tooltip
-                  targetRef={itemRef}
-                  visible={tooltipVisible}
-                  onVisibilityChange={setTooltipVisible}
-                  renderContent={() => item.label}
-                />
-              )}
+        render: (options: RenderOptionProps) =>
+          tooltip ? (
+            <MenuItemWithTooltip
+              renderContent={() => item.label}
+              dimension={args.dimension || 's'}
+              {...options}
+              key={item.id}
+            >
+              {item.label.slice(0, 17) + '...'}
+            </MenuItemWithTooltip>
+          ) : (
+            <MenuItem dimension={args.dimension || 's'} {...options} key={item.id}>
+              {item.label}
             </MenuItem>
-          );
-        },
+          ),
       };
     });
   }, [args.dimension]);
 
+  const handleVisibilityChange = (isVisible: boolean) => {
+    handleVisibilityChangeControlledState(isVisible);
+    setIsVisible(isVisible);
+  };
+
+  const handleButtonClick = (e: React.MouseEvent<HTMLElement>) => {
+    handleVisibilityChange(!isVisible);
+    args.onClick?.(e);
+  };
+
+  const handleSelectItem = (id: string) => {
+    console.log(`Option ${id} clicked`);
+    setSelected(id);
+    handleVisibilityChange(false);
+  };
+
+  const handleClickOutside = (e: Event) => {
+    console.log('handleClickOutside from stories');
+    handleVisibilityChange(false);
+  };
+
   return (
-    <div style={{ display: 'flex', justifyContent: 'center' }}>
+    <WrapperVertical>
+      <Desc>
+        Состояние видимости меню полностью контроллируется вне DropMenu:
+        <br />
+        - используется кастомный обработчик клика по кнопке (handleButtonClick) для открытия/закрытия выпадающего
+        списка;
+        <br />- после выбора опции из выпадающего списка (handleSelectItem) происходит закрытие меню;
+        <br />- используется кастомный обработчик при клике вне области выпадающего списка (handleClickOutside).
+      </Desc>
       <DropMenu
         {...args}
         items={model}
-        onChange={(id) => {
-          console.log(`selected: ${id}`);
-          setSelected(id);
-        }}
-        onOpen={onOpenMenu}
-        onClose={onCloseMenu}
+        isVisible={isVisible}
+        onVisibilityChange={handleVisibilityChange}
+        onSelectItem={handleSelectItem}
+        onClickOutside={handleClickOutside}
         dimension={args.dimension}
         disabled={args.disabled}
         selected={selected}
-        renderContentProp={({ buttonRef, handleKeyDown, handleClick, statusIcon }) => {
+        renderContentProp={({ buttonRef, handleKeyDown, statusIcon, disabled }) => {
           return (
-            <Button ref={buttonRef as React.Ref<HTMLButtonElement>} onKeyDown={handleKeyDown} onClick={handleClick}>
+            <Button
+              ref={buttonRef as React.Ref<HTMLButtonElement>}
+              loading={args.loading}
+              disabled={disabled}
+              onKeyDown={handleKeyDown}
+              onClick={handleButtonClick}
+            >
               Нажми
               {statusIcon}
             </Button>
           );
         }}
       />
-    </div>
+    </WrapperVertical>
   );
 };
 
+const itemsWithCheckbox: Array<ItemWithCheckbox> = [
+  {
+    id: '1',
+    label: 'Option one',
+  },
+  {
+    id: '2',
+    label: 'Option two',
+  },
+  {
+    id: '3',
+    label: 'Option three',
+  },
+  {
+    id: '4',
+    label: 'Option four',
+  },
+  {
+    id: '5',
+    label: 'Option five',
+  },
+  {
+    id: '6',
+    label: 'Option six',
+  },
+  {
+    id: '7',
+    label: 'Option seven',
+  },
+];
+
 const TemplateWithCheckbox: ComponentStory<typeof DropMenu> = (args) => {
-  const [selected, setSelected] = React.useState<string | undefined>(undefined);
-  const [checkedState, setCheckedState] = React.useState(items.map((item) => ({ id: item.id, checked: false })));
+  const [innerState, setInnerState] = React.useState<Array<ItemWithCheckbox>>(itemsWithCheckbox.map((item) => item));
+  const [activeOption, setActiveOption] = React.useState<string | undefined>(innerState[0].id);
+  const [selectedOption, setSelectedOption] = React.useState<string | undefined>();
+  const [isVisible, setIsVisible] = React.useState<boolean>(false);
+
   const model = React.useMemo(() => {
-    return items.map((item, index) => ({
+    return innerState.map((item) => ({
       id: item.id,
       render: (options: RenderOptionProps) => (
-        <MenuItem dimension={args.dimension || 's'} {...options} key={item.id}>
-          <CheckboxField
-            dimension={args.dimension !== 's' ? 'm' : args.dimension}
-            disabled={item.disabled}
-            readOnly={true}
-            key={item.id}
-            checked={checkedState[index].checked}
-          >
-            {item.label}
-          </CheckboxField>
-        </MenuItem>
+        <MenuItemWithCheckbox
+          key={item.id}
+          id={item.id}
+          dimension={args.dimension || 's'}
+          checked={!!item.checked}
+          checkboxIsHovered={item.id === activeOption}
+          {...options}
+        >
+          {item.label}
+        </MenuItemWithCheckbox>
       ),
-      disabled: item.disabled,
     }));
-  }, [args.dimension, checkedState]);
+  }, [innerState, activeOption, args.dimension]);
+
+  const handleActivateItem = (id: string | undefined) => {
+    setActiveOption(id);
+  };
+
+  const handleVisibilityChange = (isVisible: boolean) => {
+    handleVisibilityChangeControlledState(isVisible);
+    setIsVisible(isVisible);
+  };
+
+  const handleSelectItem = (id: string) => {
+    console.log(`Option ${id} clicked`);
+    const updatedInnerState = [...innerState];
+    const itemToUpdate = updatedInnerState.find((item) => item.id === id);
+    if (itemToUpdate) {
+      itemToUpdate.checked = !itemToUpdate.checked;
+    }
+    setInnerState(updatedInnerState);
+    setSelectedOption(undefined);
+  };
+
+  const handleButtonClick = (e: React.MouseEvent<HTMLElement>) => {
+    handleVisibilityChange(!isVisible);
+    args.onClick?.(e);
+  };
+
+  const handleClickOutside = (e: Event) => {
+    console.log('handleClickOutside from stories');
+    handleVisibilityChange(false);
+  };
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center' }}>
+    <WrapperVertical>
+      <Desc>
+        Состояние видимости меню полностью контроллируется вне DropMenu:
+        <br />
+        - используется кастомный обработчик клика по кнопке (handleButtonClick) для открытия/закрытия выпадающего
+        списка;
+        <br />- после выбора опции из выпадающего списка (handleSelectItem) происходит закрытие меню;
+        <br />- используется кастомный обработчик при клике вне области выпадающего списка (handleClickOutside).
+      </Desc>
       <DropMenu
         {...args}
         items={model}
-        onChange={(id) => {
-          console.log(`selected: ${id}`);
-          const newCheckedState = checkedState.map((item) => ({
-            ...item,
-            checked: item.id === id ? !item.checked : item.checked,
-          }));
-          setCheckedState(newCheckedState);
-          setSelected(id);
-        }}
-        onOpen={onOpenMenu}
-        onClose={onCloseMenu}
+        active={activeOption}
+        onActivateItem={handleActivateItem}
+        selected={selectedOption}
+        onSelectItem={handleSelectItem}
+        isVisible={isVisible}
+        onVisibilityChange={handleVisibilityChange}
+        onClickOutside={handleClickOutside}
+        disableSelectedOptionHighlight={true}
         dimension={args.dimension}
         disabled={args.disabled}
-        selected={selected}
-        renderContentProp={({ buttonRef, handleKeyDown, handleClick, statusIcon }) => {
+        renderContentProp={({ buttonRef, handleKeyDown, statusIcon, disabled }) => {
           return (
-            <Button ref={buttonRef as React.Ref<HTMLButtonElement>} onKeyDown={handleKeyDown} onClick={handleClick}>
+            <Button
+              ref={buttonRef as React.Ref<HTMLButtonElement>}
+              loading={args.loading}
+              disabled={disabled}
+              onKeyDown={handleKeyDown}
+              onClick={handleButtonClick}
+            >
               Нажми
               {statusIcon}
             </Button>
           );
         }}
       />
-    </div>
+    </WrapperVertical>
   );
 };
 
@@ -460,11 +614,20 @@ const TemplateWithRadiobutton: ComponentStory<typeof DropMenu> = (args) => {
   }, [args.dimension, checkedState]);
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center' }}>
+    <WrapperVertical>
+      <Desc>
+        Неконтроллируемое состояние видимости меню:
+        <br />
+        - isVisible не передается в DropMenu; <br />- обработчик onVisibilityChange выполняется из DropMenu;
+        <br />- для открытия/закрытия меню при клике на кнопке используется обработчик handleClick из DropMenu.
+        <br />
+        По умолчанию DropMenu открывает/закрывает выпадающий список при нажатии на переданный компонент, а также
+        закрывает выпадающий список при выборе опции.
+      </Desc>
       <DropMenu
         {...args}
         items={model}
-        onChange={(id) => {
+        onSelectItem={(id) => {
           console.log(`selected: ${id}`);
           const newCheckedState = checkedState.map((item) => ({
             ...item,
@@ -473,21 +636,26 @@ const TemplateWithRadiobutton: ComponentStory<typeof DropMenu> = (args) => {
           setCheckedState(newCheckedState);
           setSelected(id);
         }}
-        onOpen={onOpenMenu}
-        onClose={onCloseMenu}
+        onVisibilityChange={handleVisibilityChangeUnControlledState}
         dimension={args.dimension}
         disabled={args.disabled}
         selected={selected}
-        renderContentProp={({ buttonRef, handleKeyDown, handleClick, statusIcon }) => {
+        renderContentProp={({ buttonRef, handleKeyDown, handleClick, statusIcon, disabled }) => {
           return (
-            <Button ref={buttonRef as React.Ref<HTMLButtonElement>} onKeyDown={handleKeyDown} onClick={handleClick}>
+            <Button
+              ref={buttonRef as React.Ref<HTMLButtonElement>}
+              loading={args.loading}
+              disabled={disabled}
+              onKeyDown={handleKeyDown}
+              onClick={handleClick}
+            >
               Нажми
               {statusIcon}
             </Button>
           );
         }}
       />
-    </div>
+    </WrapperVertical>
   );
 };
 

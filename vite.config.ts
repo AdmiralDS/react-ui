@@ -21,6 +21,7 @@ export default defineConfig({
     lib: {
       entry: resolve(__dirname, 'src/index.ts'),
       formats: ['es', 'cjs'],
+      fileName: (format) => `react-ui.${format}.js`,
     },
     rollupOptions: {
       plugins: [commonjs(), peerDepsExternal()],

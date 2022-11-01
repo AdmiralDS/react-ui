@@ -1,10 +1,9 @@
 import type { HTMLAttributes } from 'react';
 import * as React from 'react';
 import { useEffect } from 'react';
-import styled, { css } from 'styled-components';
-import type { ItemProps } from '#src/components/MenuItem';
+import styled, { css, DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
+import type { ItemProps } from '#src/components/Menu/MenuItem';
 import { keyboardKey } from '#src/components/common/keyboardKey';
-import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 
 export type MenuDimensions = 'l' | 'm' | 's';
 
@@ -24,26 +23,39 @@ const menuListHeights = css<{ dimension?: MenuDimensions; maxHeight?: string | n
   }};
 `;
 
-const Wrapper = styled.div<{ dimension?: MenuDimensions }>`
+const Wrapper = styled.div<{ dimension?: MenuDimensions; hasTopPanel: boolean; hasBottomPanel: boolean }>`
+  padding: 0;
+  ${(p) => (p.hasTopPanel ? 'padding-top: 8px' : '')};
+  ${(p) => (p.hasBottomPanel ? 'padding-bottom: 8px' : '')};
+  box-sizing: border-box;
+  display: flex;
+  overflow: hidden;
+  flex-direction: column;
+  align-items: stretch;
   pointer-events: initial;
   background-color: ${(p) => p.theme.color['Special/Elevated BG']};
-  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
-  ${(p) => p.theme.shadow['Shadow 08']}
   max-width: calc(100vw - 32px);
   border-color: transparent;
   ${menuListHeights};
-  overflow-x: hidden;
+`;
+
+const StyledDiv = styled.div<{ hasTopPanel: boolean; hasBottomPanel: boolean }>`
+  ${(p) => (!p.hasTopPanel ? 'padding-top: 8px' : '')};
+  ${(p) => (!p.hasBottomPanel ? 'padding-bottom: 8px' : '')};
+  margin: 0;
+  appearance: none;
+  flex: 1 1 auto;
+  border: none;
   overflow-y: auto;
   scroll-behavior: smooth;
 `;
 
-const StyledDiv = styled.div`
-  margin: 0;
-  padding: 8px 0;
-  appearance: none;
-  flex: 0 0 auto;
-  border: none;
-`;
+export interface RenderPanelProps {
+  /** Размер компонента */
+  dimension: MenuDimensions;
+  /** Позволяет добавлять миксин для панели, созданный с помощью styled css  */
+  menuActionsPanelCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+}
 
 export interface MenuProps extends HTMLAttributes<HTMLDivElement> {
   /** Размер Меню */
@@ -54,7 +66,7 @@ export interface MenuProps extends HTMLAttributes<HTMLDivElement> {
   selected?: string;
   /** выбранная по умолчаниию секция Menu */
   defaultSelected?: string;
-  /** Обработчик выбора item в меню */
+  /** Обработчик активации (hover) item в меню */
   onActivateItem?: (id?: string) => void;
   /** Обработчик выбора item в меню */
   onSelectItem?: (id: string) => void;
@@ -62,17 +74,48 @@ export interface MenuProps extends HTMLAttributes<HTMLDivElement> {
   model: Array<ItemProps>;
   /** Задает максимальную высоту меню */
   maxHeight?: string | number;
+  /** Позволяет добавить панель сверху над выпадающим списком */
+  renderTopPanel?: (props: RenderPanelProps) => React.ReactNode;
+  /** Позволяет добавить панель внизу под выпадающим списком */
+  renderBottomPanel?: (props: RenderPanelProps) => React.ReactNode;
+  /** @deprecated use disableSelectedOptionHighlight instead
+   * Возможность множественного выбора (опции с Checkbox) */
+  multiSelection?: boolean;
+  /** Возможность отключить подсветку выбранной опции
+   * (например, при множественном выборе, когда у каждой опции есть Checkbox */
+  disableSelectedOptionHighlight?: boolean;
 }
 
 export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
-  ({ model, defaultSelected, selected, active, onSelectItem, onActivateItem, ...props }, ref) => {
+  (
+    {
+      model,
+      defaultSelected,
+      selected,
+      active,
+      onSelectItem,
+      onActivateItem,
+      renderTopPanel,
+      renderBottomPanel,
+      dimension = 'l',
+      multiSelection = false,
+      disableSelectedOptionHighlight = false,
+      ...props
+    },
+    ref,
+  ) => {
+    const uncontrolledActiveValue = model.length > 0 ? model[0].id : undefined;
     const [selectedState, setSelectedState] = React.useState<string | undefined>(defaultSelected);
-    const [activeState, setActiveState] = React.useState<string | undefined>();
+    const [activeState, setActiveState] = React.useState<string | undefined>(uncontrolledActiveValue);
 
-    const selectedId = selected === undefined ? selectedState : selected;
+    const selectedId =
+      multiSelection || disableSelectedOptionHighlight ? undefined : selected === undefined ? selectedState : selected;
     const activeId = active === undefined ? activeState : active;
 
     const menuRef = React.useRef<HTMLDivElement | null>(null);
+
+    const hasTopPanel = !!renderTopPanel;
+    const hasBottomPanel = !!renderBottomPanel;
 
     const findNextId = () => {
       const currentIndex = model.findIndex((item) => item.id === activeId);
@@ -100,7 +143,7 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
     };
 
     const selectItem = (id: string) => {
-      if (selectedId !== id) setSelectedState(id);
+      if (selectedId !== id && !multiSelection && !disableSelectedOptionHighlight) setSelectedState(id);
       onSelectItem?.(id);
     };
 
@@ -160,8 +203,12 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
     }, [active, activeState]);
 
     return (
-      <Wrapper ref={ref} {...props}>
-        <StyledDiv ref={menuRef}>{renderChildren()}</StyledDiv>
+      <Wrapper ref={ref} dimension={dimension} hasTopPanel={hasTopPanel} hasBottomPanel={hasBottomPanel} {...props}>
+        {hasTopPanel && renderTopPanel({ dimension })}
+        <StyledDiv ref={menuRef} hasTopPanel={hasTopPanel} hasBottomPanel={hasBottomPanel}>
+          {renderChildren()}
+        </StyledDiv>
+        {hasBottomPanel && renderBottomPanel({ dimension })}
       </Wrapper>
     );
   },

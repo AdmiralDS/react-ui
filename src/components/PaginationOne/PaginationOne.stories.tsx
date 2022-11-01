@@ -46,15 +46,6 @@ export default {
     pageSizeSelectDisabled: {
       control: { type: 'boolean' },
     },
-    itemsPerPageText: {
-      control: { type: 'text' },
-    },
-    backwardText: {
-      control: { type: 'text' },
-    },
-    forwardText: {
-      control: { type: 'text' },
-    },
     menuWidth: {
       control: { type: 'text' },
     },

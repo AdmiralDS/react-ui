@@ -1,6 +1,5 @@
 import type { HighlightFormat } from './types';
 import type { BaseSyntheticEvent } from 'react';
-import * as React from 'react';
 
 export const scrollToNotVisibleELem = (elem: HTMLElement, scrollElem: HTMLElement) => {
   const offsetFromScrollWrap = elem.offsetTop - scrollElem.offsetTop;
@@ -19,7 +18,7 @@ export const getTextHighlightMeta = (text = '', highlight = '', highlightFormat:
   const splittedHighlight = highlightFormat === 'word' ? highlight.split(' ') : [highlight];
   const chunks = splittedHighlight.filter(Boolean).map((chunk) => chunk.toLowerCase());
 
-  const specialCharacters = ['[', ']', '\\', '^', '$', '.', '|', '?', '*', '+', '(', ')'];
+  const specialCharacters = ['.', '?', '*', '+', '-', '^', '$', '[', ']', '\\', '(', ')', '{', '}', '|'];
 
   const pattern = chunks
     .map((chunk) => {
@@ -39,5 +38,3 @@ export const getTextHighlightMeta = (text = '', highlight = '', highlightFormat:
 };
 
 export const preventDefault = (e: BaseSyntheticEvent) => e.preventDefault();
-
-export const stopPropagation = (evt: React.BaseSyntheticEvent) => evt.stopPropagation();

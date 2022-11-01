@@ -1,24 +1,20 @@
 import * as React from 'react';
 import { useRef, useState } from 'react';
-import styled from 'styled-components';
+import styled, { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import { ReactComponent as CalendarOutlineSVG } from '@admiral-ds/icons/build/system/CalendarOutline.svg';
 import { TextInput, TextInputProps } from '#src/components/input/TextInput';
 import { Calendar, CalendarPropType } from '#src/components/Calendar';
 import { refSetter } from '#src/components/common/utils/refSetter';
 import { defaultDateInputHandle } from '#src/components/input/DateInput/defaultDateInputHandle';
 import { changeInputData } from '#src/components/common/dom/changeInputData';
-import { Dropdown } from '#src/components/Dropdown';
 import { isValidDate } from './isValidDate';
 import { defaultParser } from './defaultParser';
 import { defaultDateRangeInputHandle } from '#src/components/input/DateInput/defaultDateRangeInputHandle';
 import { InputIconButton } from '#src/components/InputIconButton';
+import { StyledDropdownContainer } from '#src/components/DropdownContainer';
 
 const Input = styled(TextInput)`
   min-width: 150px;
-`;
-
-const StyledCalendar = styled(Calendar)`
-  box-shadow: none;
 `;
 
 // IE11 fix toLocaleDateString('ru') extra invisible characters by using .replace(/[^ -~]/g,'')
@@ -49,6 +45,9 @@ export interface DateInputProps extends TextInputProps, Omit<CalendarPropType, '
    * Компонент для отображения альтернативной иконки
    */
   icon?: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
+
+  /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
+  dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
 }
 
 export const DateInput = React.forwardRef<HTMLInputElement, DateInputProps>(
@@ -76,6 +75,7 @@ export const DateInput = React.forwardRef<HTMLInputElement, DateInputProps>(
       icon = CalendarOutlineSVG,
       icons,
       skeleton = false,
+      dropContainerCssMixin,
       ...props
     },
     ref,
@@ -131,13 +131,19 @@ export const DateInput = React.forwardRef<HTMLInputElement, DateInputProps>(
       }
     };
 
-    const handleBlurCalendarContainer = () => {
+    const handleBlurCalendarContainer = (e: Event) => {
+      if (e.target && inputContainerRef.current?.contains(e.target as Node)) {
+        return;
+      }
       setCalendarOpen(false);
     };
 
     const handleButtonClick = () => {
       const calValue = parser(inputRef.current?.value, isDateRange);
       setCalendarValue(calValue);
+      if (!isCalendarOpen) {
+        inputRef.current?.focus();
+      }
       setCalendarOpen(!isCalendarOpen);
     };
 
@@ -156,8 +162,13 @@ export const DateInput = React.forwardRef<HTMLInputElement, DateInputProps>(
         skeleton={skeleton}
       >
         {isCalendarOpen && !skeleton && (
-          <Dropdown targetRef={inputRef} alignSelf={alignDropdown} onClickOutside={handleBlurCalendarContainer}>
-            <StyledCalendar
+          <StyledDropdownContainer
+            targetRef={inputRef}
+            alignSelf={alignDropdown}
+            onClickOutside={handleBlurCalendarContainer}
+            dropContainerCssMixin={dropContainerCssMixin}
+          >
+            <Calendar
               {...calendarProps}
               ref={calendarRef}
               selected={selectedCalendarValue}
@@ -166,7 +177,7 @@ export const DateInput = React.forwardRef<HTMLInputElement, DateInputProps>(
               onChange={handleCalendarChange}
               range={isDateRange}
             />
-          </Dropdown>
+          </StyledDropdownContainer>
         )}
       </Input>
     );

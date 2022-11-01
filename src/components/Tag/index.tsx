@@ -1,6 +1,7 @@
 import * as React from 'react';
 import styled, { css } from 'styled-components';
 import { refSetter } from '../common/utils/refSetter';
+import { checkOverflow } from '../common/utils/checkOverflow';
 import { Tooltip } from '#src/components/Tooltip';
 import { typography } from '#src/components/Typography';
 import { smallGroupBorderRadius } from '#src/components/themes/borderRadius';
@@ -253,14 +254,34 @@ export const Tag = React.forwardRef<HTMLElement, TagProps & TagInternalProps>(
     const border: TagKind | string =
       typeof kind === 'object' ? (!!kind.background && !!kind.border ? kind.border : 'neutral') : (kind as TagKind);
 
-    const detectOverflow = (element: HTMLElement) => element.offsetWidth < element.scrollWidth;
-
     React.useLayoutEffect(() => {
       const element = textRef.current;
-      if (element && detectOverflow(element) !== overflow) {
-        setOverflow(detectOverflow(element));
+      if (element && checkOverflow(element) !== overflow) {
+        setOverflow(checkOverflow(element));
       }
-    }, [tooltipVisible]);
+    }, [tooltipVisible, textRef.current, setOverflow]);
+
+    React.useLayoutEffect(() => {
+      function show() {
+        setTooltipVisible(true);
+      }
+      function hide() {
+        setTooltipVisible(false);
+      }
+      const wrapper = wrapperRef.current;
+      if (wrapper) {
+        wrapper.addEventListener('mouseenter', show);
+        wrapper.addEventListener('mouseleave', hide);
+        wrapper.addEventListener('focus', show);
+        wrapper.addEventListener('blur', hide);
+        return () => {
+          wrapper.removeEventListener('mouseenter', show);
+          wrapper.removeEventListener('mouseleave', hide);
+          wrapper.removeEventListener('focus', show);
+          wrapper.removeEventListener('blur', hide);
+        };
+      }
+    }, [setTooltipVisible, wrapperRef.current]);
 
     return (
       <>
@@ -280,12 +301,7 @@ export const Tag = React.forwardRef<HTMLElement, TagProps & TagInternalProps>(
           {children && <Text ref={textRef}>{children}</Text>}
           {statusIcon && <StatusIcon>{statusIcon}</StatusIcon>}
         </Wrapper>
-        <Tooltip
-          targetRef={wrapperRef}
-          visible={tooltipVisible && overflow}
-          onVisibilityChange={setTooltipVisible}
-          renderContent={() => children}
-        />
+        {tooltipVisible && overflow && <Tooltip targetRef={wrapperRef} renderContent={() => children} />}
       </>
     );
   },

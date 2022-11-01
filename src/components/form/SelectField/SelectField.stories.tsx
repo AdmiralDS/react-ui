@@ -353,6 +353,10 @@ const TemplateSimpleMultiSelect: ComponentStory<typeof SelectField> = (props) =>
   );
 };
 
+const containerContrastBorder = css`
+  border: dashed 2px ${(p) => p.theme.color['Neutral/Neutral 90']};
+`;
+
 const TemplateNotFixedMultiSelect: ComponentStory<typeof SelectField> = (props) => {
   const [selectValue, setSelectValue] = React.useState<string[]>(
     Array.from({ length: 20 }).map((_, ind) => String(ind)),
@@ -373,6 +377,7 @@ const TemplateNotFixedMultiSelect: ComponentStory<typeof SelectField> = (props) 
         multiple={true}
         onChange={onChange}
         idleHeight="full"
+        dropContainerCssMixin={containerContrastBorder}
       >
         {Array.from({ length: 20 }).map((_option, ind) => (
           <Option key={ind} value={String(ind)}>

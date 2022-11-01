@@ -133,9 +133,9 @@ export interface NumberInputProps extends TextInputProps {
   decimal?: string;
   /** Шаг инпута. Если шаг - это дробное число, то количество знаков в десятичной части step должно быть равно precision */
   step?: number;
-  /** Минимальное значение слайдера */
+  /** Минимальное значение. При minValue >= 0, ввод знака минус блокируется */
   minValue?: number;
-  /** Максимальное значение слайдера */
+  /** Максимальное значение */
   maxValue?: number;
   /** Отображать иконки плюса минуса */
   displayPlusMinusIcons?: boolean;
@@ -353,6 +353,7 @@ export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
             decimal={decimal}
             precision={precision}
             status={status}
+            minValue={minValue}
             {...props}
           />
         </Content>

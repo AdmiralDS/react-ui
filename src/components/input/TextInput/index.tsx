@@ -1,3 +1,4 @@
+import * as React from 'react';
 import {
   changeInputData,
   CustomInputHandler,
@@ -11,8 +12,6 @@ import { typography } from '#src/components/Typography';
 import { ReactComponent as CloseOutlineSvg } from '@admiral-ds/icons/build/service/CloseOutline.svg';
 import { ReactComponent as EyeCloseOutlineSvg } from '@admiral-ds/icons/build/service/EyeCloseOutline.svg';
 import { ReactComponent as EyeOutlineSvg } from '@admiral-ds/icons/build/service/EyeOutline.svg';
-import type { ForwardedRef, InputHTMLAttributes } from 'react';
-import * as React from 'react';
 import styled, { css } from 'styled-components';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { InputIconButton } from '#src/components/InputIconButton';
@@ -42,10 +41,7 @@ const horizontalPaddingValue = (props: { dimension?: ComponentDimension }) => {
 };
 
 const extraPadding = css<ExtraProps>`
-  padding-right: ${(props) =>
-    horizontalPaddingValue(props) +
-    (iconSizeValue(props) + 8) * (props.iconCount ?? 0) -
-    8 * (props.iconCount ? 1 : 0)}px;
+  padding-right: ${(props) => horizontalPaddingValue(props) + (iconSizeValue(props) + 8) * (props.iconCount ?? 0)}px;
 `;
 
 const disabledColors = css`
@@ -53,7 +49,7 @@ const disabledColors = css`
   border-color: transparent;
 `;
 
-const BorderedDiv = styled.div`
+export const InputBorderedDiv = styled.div`
   position: absolute;
   top: 0;
   bottom: 0;
@@ -84,35 +80,43 @@ const BorderedDiv = styled.div`
 const colorsBorderAndBackground = css<{ disabled?: boolean }>`
   background-color: ${(props) => props.theme.color['Neutral/Neutral 00']};
 
-  &:focus + ${BorderedDiv} {
+  &:focus + ${InputBorderedDiv} {
     border: 2px solid ${(props) => props.theme.color['Primary/Primary 60 Main']};
   }
 
-  &&&:disabled + ${BorderedDiv}, [data-read-only] &&& + ${BorderedDiv} {
+  &&&:disabled + ${InputBorderedDiv}, [data-read-only] &&& + ${InputBorderedDiv} {
     border-color: transparent;
   }
 
-  &:hover:not(:focus) + ${BorderedDiv} {
+  &:hover:not(:focus) + ${InputBorderedDiv} {
     border-color: ${(props) => (props.disabled ? 'transparent' : props.theme.color['Neutral/Neutral 60'])};
   }
 
-  &:invalid + ${BorderedDiv} {
+  &:invalid + ${InputBorderedDiv} {
     border: 1px solid ${(props) => props.theme.color['Error/Error 60 Main']};
   }
 
-  [data-status='error'] &&&:hover:not(:disabled) + ${BorderedDiv}, &:invalid:hover:not(:disabled) + ${BorderedDiv} {
+  [data-status='error']
+    &&&:hover:not(:disabled)
+    + ${InputBorderedDiv},
+    &:invalid:hover:not(:disabled)
+    + ${InputBorderedDiv} {
     border: 1px solid ${(props) => props.theme.color['Error/Error 70']};
   }
 
-  [data-status='success'] &&&:hover:not(:disabled) + ${BorderedDiv} {
+  [data-status='success'] &&&:hover:not(:disabled) + ${InputBorderedDiv} {
     border: 1px solid ${(props) => props.theme.color['Success/Success 60']};
   }
 
-  [data-status='error'] &&&:focus:not(:disabled) + ${BorderedDiv}, &:invalid:focus:not(:disabled) + ${BorderedDiv} {
+  [data-status='error']
+    &&&:focus:not(:disabled)
+    + ${InputBorderedDiv},
+    &:invalid:focus:not(:disabled)
+    + ${InputBorderedDiv} {
     border: 2px solid ${(props) => props.theme.color['Error/Error 60 Main']};
   }
 
-  [data-status='success'] &&&:focus:not(:disabled) + ${BorderedDiv} {
+  [data-status='success'] &&&:focus:not(:disabled) + ${InputBorderedDiv} {
     border: 2px solid ${(props) => props.theme.color['Success/Success 50 Main']};
   }
 
@@ -125,7 +129,7 @@ const colorsBorderAndBackground = css<{ disabled?: boolean }>`
     color: ${(props) => props.theme.color['Neutral/Neutral 30']};
   }
 
-  [data-read-only] &&&:hover + ${BorderedDiv}, [data-read-only] &&&:focus + ${BorderedDiv} {
+  [data-read-only] &&&:hover + ${InputBorderedDiv}, [data-read-only] &&&:focus + ${InputBorderedDiv} {
     border-color: transparent;
   }
 `;
@@ -217,7 +221,7 @@ function defaultHandleInput(newInputData: InputData | null): InputData {
 
 const stopEvent = (e: React.MouseEvent) => e.preventDefault();
 
-export interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
+export interface TextInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   /** Делает высоту компонента больше или меньше обычной */
   dimension?: ComponentDimension;
 
@@ -286,7 +290,27 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
         return;
       }
       setOverflowActive(false);
-    }, [tooltipVisible]);
+    }, [tooltipVisible, inputRef.current, setOverflowActive]);
+
+    React.useLayoutEffect(() => {
+      function show() {
+        if (document.activeElement !== inputRef.current) setTooltipVisible(true);
+      }
+      function hide() {
+        setTooltipVisible(false);
+      }
+      const wrapper = wrapperRef.current;
+      if (wrapper) {
+        wrapper.addEventListener('mouseenter', show);
+        wrapper.addEventListener('mouseleave', hide);
+        wrapper.addEventListener('mousedown', hide);
+        return () => {
+          wrapper.removeEventListener('mouseenter', show);
+          wrapper.removeEventListener('mouseleave', hide);
+          wrapper.removeEventListener('mousedown', hide);
+        };
+      }
+    }, [setTooltipVisible, wrapperRef.current, inputRef.current]);
 
     const [isPasswordVisible, setPasswordVisible] = React.useState(false);
     if (!props.readOnly && type === 'password') {
@@ -385,7 +409,7 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
             iconCount={iconCount}
             type={type === 'password' && isPasswordVisible ? 'text' : type}
           />
-          <BorderedDiv />
+          <InputBorderedDiv />
           {iconCount > 0 && (
             <IconPanel disabled={props.disabled} dimension={props.dimension}>
               {iconArray}
@@ -393,13 +417,8 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
           )}
           {children}
         </Container>
-        {showTooltip && (
-          <Tooltip
-            visible={tooltipVisible && overflowActive}
-            onVisibilityChange={setTooltipVisible}
-            renderContent={() => inputRef?.current?.value}
-            targetRef={wrapperRef}
-          />
+        {showTooltip && tooltipVisible && overflowActive && (
+          <Tooltip renderContent={() => inputRef?.current?.value || ''} targetRef={wrapperRef} />
         )}
       </>
     );

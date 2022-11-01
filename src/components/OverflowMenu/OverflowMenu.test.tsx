@@ -4,7 +4,7 @@ import { ThemeProvider } from 'styled-components';
 
 import { OverflowMenu } from '#src/components/OverflowMenu';
 import { LIGHT_THEME } from '#src/components/themes';
-import { MenuItem, RenderOptionProps } from '#src/components/MenuItem';
+import { MenuItem, RenderOptionProps } from '#src/components/Menu/MenuItem';
 
 describe('OverflowMenu', () => {
   jest.useFakeTimers();

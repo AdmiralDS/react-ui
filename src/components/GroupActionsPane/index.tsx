@@ -1,5 +1,5 @@
 import React, { ButtonHTMLAttributes, HTMLAttributes, useState } from 'react';
-import styled from 'styled-components';
+import styled, { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import { Dimension as ButtonDimension } from '#src/components/TextButton/types';
 import { ColumnsButton, MenuDimension } from '#src/components/GroupActionsPane/ColumnsButton';
 import { SettingsButton } from '#src/components/GroupActionsPane/SettingsButton';
@@ -70,6 +70,9 @@ export interface GroupActionsPaneProps extends HTMLAttributes<HTMLDivElement> {
   /** Объект, отображаемый в качестве меню настройки */
   settingsMenu?: React.ReactNode;
 
+  /** Признак блокировки кнопок настройки таблицы */
+  settingsButtonsDisabled?: boolean;
+
   /** Объект локализации - позволяет перезадать текстовые константы используемые в компоненте,
    * по умолчанию значения констант берутся из темы в соответствии с параметром currentLocale, заданном в теме
    **/
@@ -77,6 +80,9 @@ export interface GroupActionsPaneProps extends HTMLAttributes<HTMLDivElement> {
     /** Placeholder инпута */
     inputPlaceholder?: string;
   };
+
+  /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
+  dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
 }
 
 export const GroupActionsPane = ({
@@ -89,7 +95,9 @@ export const GroupActionsPane = ({
   onSearchEnter,
   onSearchLeave,
   onChangeSearchValue,
+  settingsButtonsDisabled = false,
   locale,
+  dropContainerCssMixin,
   ...props
 }: React.PropsWithChildren<GroupActionsPaneProps>) => {
   const [searchOpened, setSearchOpened] = useState<boolean>(false);
@@ -126,8 +134,16 @@ export const GroupActionsPane = ({
           menuDimension={menuDimension}
           buttonDimension={iconButtonDimension}
           onColumnsChange={onColumnsChange}
+          disabled={settingsButtonsDisabled}
+          dropContainerCssMixin={dropContainerCssMixin}
         />
-        {settingsMenu && <SettingsButton menu={settingsMenu} buttonDimension={iconButtonDimension} />}
+        {settingsMenu && (
+          <SettingsButton
+            menu={settingsMenu}
+            buttonDimension={iconButtonDimension}
+            disabled={settingsButtonsDisabled}
+          />
+        )}
       </IconsBlock>
     </Pane>
   );

@@ -67,9 +67,9 @@ export type Column = {
   /** Уникальное название столбца */
   name: string;
   /** Заголовок столбца */
-  title: string;
+  title: React.ReactNode;
   /** Дополнительный текст заголовка столбца */
-  extraText?: string;
+  extraText?: React.ReactNode;
   /** Ширина столбца. По умолчанию 100px */
   width?: number | string;
   /** Выравнивание контента ячеек столбца по левому или правому краю. По умолчанию left */
@@ -86,6 +86,8 @@ export type Column = {
    * (в columnList фиксированные столбцы должны быть в начале массива и идти друг за другом).
    */
   sticky?: boolean;
+  /** Отключение возможности ресайза колонки */
+  disableResize?: boolean;
   /** Функция отрисовки содержимого фильтра (выпадающего меню фильтра). Если её не передать, значок фильтра отображаться не будет */
   renderFilter?: (obj: FilterProps) => React.ReactNode;
   /** Функция отрисовки иконки фильтра. По умолчанию в качестве иконки фильтра применяется OverflowIcon (троеточие) */
@@ -125,8 +127,9 @@ export interface TableRow extends Record<RowId, React.ReactNode> {
   /** Функция рендера содержимого раскрытой части строки (детализации строки) */
   expandedRowRender?: (row: any) => React.ReactNode;
   /** Функция рендера OverflowMenu для строки.
-   * Входные параметры: сама строка, колбеки onMenuOpen и onMenuClose.
-   * Колбеки необходимо вызывать при открытии/закрытии меню для того, чтобы таблица могла управлять видимостью OverflowMenu.
+   * Входные параметры: сама строка, колбеки onMenuOpen/onMenuClose (устаревшее api, впоследствии будет удалено) и onVisibilityChange (актуальное api).
+   * Рекомендуется использовать колбек onVisibilityChange вместо onMenuOpen/onMenuClose.
+   * Колбек необходимо вызывать при открытии/закрытии меню для того, чтобы таблица могла управлять видимостью OverflowMenu.
    * OverflowMenu отображается при ховере на строку или при открытом меню
    * и располагается по правому краю строки в видимой области таблицы.
    *
@@ -134,7 +137,14 @@ export interface TableRow extends Record<RowId, React.ReactNode> {
    * Для таблицы с dimension='s' или dimension='m' используется OverflowMenu c dimension='m'.
    * Для таблицы с dimension='l' или dimension='xl' используется OverflowMenu c dimension='l'.
    */
-  overflowMenuRender?: (row: any, onMenuOpen: () => void, onMenuClose: () => void) => React.ReactNode;
+  overflowMenuRender?: (
+    row: any,
+    /** @deprecated use onVisibilityChange instead */
+    onMenuOpen?: () => void,
+    /** @deprecated use onVisibilityChange instead */
+    onMenuClose?: () => void,
+    onVisibilityChange?: (isVisible: boolean) => void,
+  ) => React.ReactNode;
   /** Функция рендера одиночного действия над строкой.
    * Одиночное действие отображается в виде иконки при ховере на строку
    * и располагается по правому краю строки в видимой области таблицы.
@@ -158,6 +168,10 @@ export interface TableProps extends React.HTMLAttributes<HTMLDivElement> {
    * По умолчанию состояние checked вычисляется на основе анализа параметра selected у строк таблицы
    */
   headerCheckboxIndeterminate?: boolean;
+  /** Установка чекбокса в шапке таблицы в состояние disabled.
+   * По умолчанию состояние disabled устанавливается при отсутствии строк в таблице
+   */
+  headerCheckboxDisabled?: boolean;
   /** Колбек на изменение состояния чекбокса, находящегося в хедере
    * Возвращает параметр selectAll (если true - выбраны все строки в таблице, false - выбор снят со всех строк таблицы)
    */
@@ -225,8 +239,6 @@ export interface TableProps extends React.HTMLAttributes<HTMLDivElement> {
      */
     fixedRowHeight: number;
   };
-  /** @deprecated Используйте locale.emptyMessage */
-  emptyMessage?: React.ReactNode;
   /** Объект локализации - позволяет перезадать текстовые константы используемые в компоненте,
    * по умолчанию значения констант берутся из темы в соответствии с параметром currentLocale, заданном в теме
    **/
@@ -256,6 +268,7 @@ export const Table: React.FC<TableProps> = ({
   displayRowExpansionColumn = false,
   headerCheckboxChecked = false,
   headerCheckboxIndeterminate = false,
+  headerCheckboxDisabled = false,
   onHeaderSelectionChange,
   onRowSelectionChange,
   onRowExpansionChange,
@@ -273,7 +286,6 @@ export const Table: React.FC<TableProps> = ({
   disableColumnResize = false,
   showLastRowUnderline = true,
   virtualScroll,
-  emptyMessage: userEmptyMessage,
   locale,
   ...props
 }) => {
@@ -294,6 +306,8 @@ export const Table: React.FC<TableProps> = ({
   const tableRef = React.useRef<HTMLDivElement>(null);
   const headerRef = React.useRef<HTMLDivElement>(null);
   const scrollBodyRef = React.useRef<HTMLDivElement>(null);
+  const expandCellRef = React.useRef<HTMLDivElement>(null);
+  const checkboxCellRef = React.useRef<HTMLDivElement>(null);
 
   const groupToRowsMap = rowList.reduce<Group>((acc: Group, row) => {
     if (row.groupRows?.length) {
@@ -352,10 +366,20 @@ export const Table: React.FC<TableProps> = ({
     }
   };
 
+  const moveOverflowMenu = (scrollLeft: number) => {
+    if (scrollBodyRef.current) {
+      const menus = scrollBodyRef.current.querySelectorAll<HTMLElement>('[data-overflowmenu]');
+      menus.forEach((menu) => {
+        menu.style.marginLeft = `${scrollLeft}px`;
+      });
+    }
+  };
+
   const handleScroll = (e: any) => {
     if (e.target === scrollBodyRef.current) {
       requestAnimationFrame(function () {
         scrollHeader(e.target.scrollLeft);
+        moveOverflowMenu(e.target.scrollLeft);
       });
     }
     if (stickyColumns.length > 0 || displayRowSelectionColumn || displayRowExpansionColumn) {
@@ -365,25 +389,37 @@ export const Table: React.FC<TableProps> = ({
     }
   };
 
+  const updateColumnsWidths = () => {
+    const newCols = [...columnList].map((col) => {
+      return {
+        ...col,
+        width: replaceWidthToNumber(col.width),
+        resizerWidth: replaceWidthToNumber(col.width),
+      };
+    });
+    setColumns(newCols);
+    updateResizerState({});
+  };
+
   React.useLayoutEffect(() => {
     if (tableRef.current) {
-      const newCols = [...columnList].map((col) => {
-        return {
-          ...col,
-          width: replaceWidthToNumber(col.width),
-          resizerWidth: replaceWidthToNumber(col.width),
-        };
+      updateColumnsWidths();
+      const resizeObserver = new ResizeObserver((entries) => {
+        entries.forEach(() => {
+          updateColumnsWidths();
+        });
       });
-      setColumns(newCols);
-      updateResizerState({});
+      resizeObserver.observe(tableRef.current);
+      return () => {
+        resizeObserver.disconnect();
+      };
     }
-  }, [tableRef.current, columnList]);
+  }, [tableRef.current, columnList, displayRowSelectionColumn, displayRowExpansionColumn]);
 
   React.useLayoutEffect(() => {
     const body = scrollBodyRef.current;
     if (body) {
       const observer = observeRect(body, (rect: any) => {
-        // есть вертикальный скролл
         if (body.scrollHeight > body.offsetHeight) {
           setVerticalScroll(true);
         } else {
@@ -406,7 +442,9 @@ export const Table: React.FC<TableProps> = ({
       const hasPixelWidth = typeof width === 'string' && width.includes('px');
 
       if (hasPercentWidth && tableRef?.current) {
-        const maxWidth = tableRef?.current?.clientWidth;
+        const checkboxCellWidth = checkboxCellRef?.current?.clientWidth || 0;
+        const expandCellWidth = expandCellRef?.current?.clientWidth || 0;
+        const maxWidth = tableRef.current.clientWidth - checkboxCellWidth - expandCellWidth;
         return Math.round((parseInt(width) * (maxWidth || 1)) / 100);
       }
       if (hasNumberWidth) return width;
@@ -481,7 +519,8 @@ export const Table: React.FC<TableProps> = ({
   }
 
   const isSelected = (row: { selected?: boolean }) => row.selected;
-  const allRowsChecked = rowList.every(isSelected);
+  // When invoked on an empty array, every() always returns true. So we need to check rowList.length.
+  const allRowsChecked = rowList.length > 0 && rowList.every(isSelected);
   const someRowsChecked = rowList.some(isSelected);
 
   function handleHeaderCheckboxChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -532,6 +571,7 @@ export const Table: React.FC<TableProps> = ({
       sortable = false,
       sort,
       sortOrder,
+      disableResize = false,
       renderFilter,
       renderFilterIcon,
       onFilterMenuClickOutside,
@@ -555,13 +595,9 @@ export const Table: React.FC<TableProps> = ({
             onClick={sortable ? () => handleSort(name, sort || 'initial') : undefined}
           >
             <TitleContent dimension={dimension} sortable={sortable}>
-              <TitleText width={width} dimension={dimension} lineClamp={headerLineClamp}>
-                {title}
-              </TitleText>
+              <TitleText dimension={dimension} lineClamp={headerLineClamp} title={title} />
               {extraText && (
-                <TitleText extraText width={width} dimension={dimension} lineClamp={headerExtraLineClamp}>
-                  {extraText}
-                </TitleText>
+                <TitleText extraText dimension={dimension} lineClamp={headerExtraLineClamp} title={extraText} />
               )}
             </TitleContent>
             {sortable && (
@@ -590,7 +626,7 @@ export const Table: React.FC<TableProps> = ({
             name={name}
             width={width ? resizerWidth : DEFAULT_COLUMN_WIDTH}
             onChange={handleResizeChange}
-            disabled={disableColumnResize}
+            disabled={disableResize || disableColumnResize}
             resizerState={resizerState}
             dimension={dimension}
           />
@@ -600,7 +636,7 @@ export const Table: React.FC<TableProps> = ({
             name={name}
             width={width ? resizerWidth : DEFAULT_COLUMN_WIDTH}
             onChange={handleResizeChange}
-            disabled={disableColumnResize}
+            disabled={disableResize || disableColumnResize}
             resizerState={resizerState}
             dimension={dimension}
           />
@@ -681,7 +717,8 @@ export const Table: React.FC<TableProps> = ({
           isGroup={isGroupRow}
           onRowClick={onRowClick}
           onRowDoubleClick={onRowDoubleClick}
-          rowWidth={headerRef.current?.scrollWidth}
+          rowWidth={isGroupRow ? headerRef.current?.scrollWidth : undefined}
+          verticalScroll={verticalScroll}
           key={`row_${row.id}`}
         >
           {isGroupRow ? (
@@ -706,12 +743,16 @@ export const Table: React.FC<TableProps> = ({
   };
 
   const renderBody = () => {
-    const emptyMessage =
-      userEmptyMessage || locale?.emptyMessage || theme.locales[theme.currentLocale].table.emptyMessage;
+    const emptyMessage = locale?.emptyMessage || theme.locales[theme.currentLocale].table.emptyMessage;
     if (tableRows.length === 0) {
       return (
         <ScrollTableBody ref={scrollBodyRef} className="tbody">
-          <Row underline={showLastRowUnderline} dimension={dimension} className="tr">
+          <Row
+            underline={showLastRowUnderline}
+            dimension={dimension}
+            className="tr"
+            rowWidth={headerRef.current?.scrollWidth}
+          >
             <EmptyMessage dimension={dimension}>{emptyMessage}</EmptyMessage>
           </Row>
         </ScrollTableBody>
@@ -734,18 +775,19 @@ export const Table: React.FC<TableProps> = ({
   };
 
   return (
-    <TableContainer ref={tableRef} data-shadow={false} {...props} className={`table ${props.className}`}>
+    <TableContainer ref={tableRef} data-shadow={false} {...props} className={`table ${props.className || ''}`}>
       <HeaderWrapper greyHeader={greyHeader} data-verticalscroll={verticalScroll}>
         <Header dimension={dimension} ref={headerRef} className="tr">
           {(displayRowSelectionColumn || displayRowExpansionColumn || stickyColumns.length > 0) && (
             <StickyWrapper greyHeader={greyHeader}>
-              {displayRowExpansionColumn && <ExpandCell dimension={dimension} />}
+              {displayRowExpansionColumn && <ExpandCell ref={expandCellRef} dimension={dimension} />}
               {displayRowSelectionColumn && (
-                <CheckboxCell dimension={dimension} className="th_checkbox">
+                <CheckboxCell ref={checkboxCellRef} dimension={dimension} className="th_checkbox">
                   <Checkbox
                     dimension={checkboxDimension}
                     checked={allRowsChecked || someRowsChecked || headerCheckboxChecked}
                     indeterminate={(someRowsChecked && !allRowsChecked) || headerCheckboxIndeterminate}
+                    disabled={tableRows.length === 0 || headerCheckboxDisabled}
                     onChange={handleHeaderCheckboxChange}
                   />
                 </CheckboxCell>

@@ -1,4 +1,4 @@
-import { Tooltip } from '#src/components/Tooltip';
+import { TooltipHoc } from '#src/components/TooltipHOC';
 import { typography } from '#src/components/Typography';
 import { withDesign } from 'storybook-addon-designs';
 import React from 'react';
@@ -87,10 +87,7 @@ const CopyOutlineWrapper = styled.div`
   cursor: pointer;
 `;
 
-const CopyButton = ({ text }: { text: string }) => {
-  const copyRef = React.useRef<HTMLDivElement | null>(null);
-  const [tooltipVisible, setTooltipVisible] = React.useState(false);
-
+const CopyIcon = React.forwardRef<HTMLDivElement, { text: string }>(({ text }, ref) => {
   const copyToClipboard = () => {
     const el = document.createElement('textarea');
     el.value = text;
@@ -103,19 +100,12 @@ const CopyButton = ({ text }: { text: string }) => {
     document.body.removeChild(el);
   };
   return (
-    <>
-      <CopyOutlineWrapper ref={copyRef}>
-        <CopyOutline width={16} height={16} onClick={copyToClipboard} />
-      </CopyOutlineWrapper>
-      <Tooltip
-        targetRef={copyRef}
-        visible={tooltipVisible}
-        onVisibilityChange={(visible: boolean) => setTooltipVisible(visible)}
-        renderContent={() => 'Копировать пример использования'}
-      />
-    </>
+    <CopyOutlineWrapper ref={ref}>
+      <CopyOutline width={16} height={16} onClick={copyToClipboard} />
+    </CopyOutlineWrapper>
   );
-};
+});
+const CopyButton = TooltipHoc(CopyIcon);
 
 const Category = ({ label, children }: { label: string; children: React.ReactNode }) => {
   return (
@@ -173,7 +163,11 @@ const Template: Story = () => (
             <IconCard key={name + index}>
               <Component width={24} height={24} />
               <IconName>
-                {name} <CopyButton text={`import { ReactComponent as ${name} } from '@admiral-ds/icons/${path}';`} />
+                {name}{' '}
+                <CopyButton
+                  renderContent={() => 'Копировать пример использования'}
+                  text={`import { ReactComponent as ${name} } from '@admiral-ds/icons/${path}';`}
+                />
               </IconName>
             </IconCard>
           ),

@@ -1,17 +1,21 @@
 import * as React from 'react';
-import { useRef, useState } from 'react';
-import styled from 'styled-components';
+import { HTMLAttributes, useRef, useState } from 'react';
+import styled, { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import { ReactComponent as TimeSVG } from '@admiral-ds/icons/build/system/TimeOutline.svg';
 import { TextInput, TextInputProps } from '../TextInput';
 import { refSetter } from '#src/components/common/utils/refSetter';
 import { defaultTimeInputHandle } from '#src/components/input/TimeInput/defaultTimeInputHandle';
 import { changeInputData } from '#src/components/common/dom/changeInputData';
-import { Dropdown } from '#src/components/Dropdown';
-import { Slot, SlotProps } from './Slot';
 import { getTimeInMinutes, parseStringToTime } from './utils';
 import { typography } from '#src/components/Typography';
-import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { InputIconButton } from '#src/components/InputIconButton';
+import { StyledDropdownContainer } from '#src/components/DropdownContainer';
+import { MenuItem, RenderOptionProps } from '#src/components/Menu/MenuItem';
+import { Menu } from '#src/components/Menu';
+
+export interface SlotProps extends HTMLAttributes<HTMLDivElement>, RenderOptionProps {
+  value: string;
+}
 
 const slots: SlotProps[] = [
   { value: '00:00', disabled: false },
@@ -64,22 +68,14 @@ const slots: SlotProps[] = [
   { value: '23:30', disabled: false },
 ];
 
-const SlotContainer = styled.ul`
-  pointer-events: initial;
-  padding: 8px 0;
-  margin: 0;
-  overflow-x: hidden;
-  overflow-y: auto;
-  background-color: ${(p) => p.theme.color['Special/Elevated BG']};
-  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
-  ${(p) => p.theme.shadow['Shadow 08']}
-  flex: 0 0 auto;
-  ${typography['Body/Body 1 Long']};
+const StyledMenu = styled(Menu)`
   &[data-dimension='xl'] {
+    ${typography['Body/Body 1 Long']};
     width: 84px;
     height: 288px;
   }
   &[data-dimension='m'] {
+    ${typography['Body/Body 1 Long']};
     width: 84px;
     height: 240px;
   }
@@ -90,6 +86,12 @@ const SlotContainer = styled.ul`
   }
 `;
 
+const StyledMenuItem = styled(MenuItem)`
+  justify-content: center;
+`;
+const StyledTextInput = styled(TextInput)`
+  min-width: 136px;
+`;
 export interface TimeInputProps extends Omit<TextInputProps, 'value'> {
   /** Выбранное значение времени */
   value?: string;
@@ -103,14 +105,15 @@ export interface TimeInputProps extends Omit<TextInputProps, 'value'> {
   disabledSlots?: string[];
   /** Альтернативная иконка компонента */
   icon?: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
-
+  /** Позволяет обрабатывать введенные значения */
   parser?: (time?: string) => string;
-
   /**
    * Позволяет выравнивать позицию дропдаун контейнера относительно селекта.
    * Принимает стандартные значения css свойства align-self (auto | flex-start | flex-end | center | baseline | stretch)
    */
   alignDropdown?: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
+  /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
+  dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
 }
 
 export const TimeInput = React.forwardRef<HTMLInputElement, TimeInputProps>(
@@ -118,7 +121,6 @@ export const TimeInput = React.forwardRef<HTMLInputElement, TimeInputProps>(
     {
       startTime,
       endTime,
-      value = '',
       dimension = 'm',
       disabled = false,
       disabledSlots = [],
@@ -127,20 +129,32 @@ export const TimeInput = React.forwardRef<HTMLInputElement, TimeInputProps>(
       icons,
       alignDropdown = 'flex-end',
       skeleton = false,
+      dropContainerCssMixin,
       ...props
     },
     ref,
   ) => {
     const handleInput = props.handleInput || defaultTimeInputHandle;
-    const [timeValue, setTimeValue] = useState<string | null>(null);
-    const [activeIndex, setActiveIndex] = React.useState(0);
+    const [timeValue, setTimeValue] = useState<string>('');
+    const [activeOption, setActiveOption] = React.useState<string | undefined>('');
     const inputContainerRef = useRef<HTMLDivElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
     const [isOpened, setIsOpened] = useState<boolean>(false);
 
     const handleButtonClick = () => {
-      const timeValue = parser(inputRef.current?.value);
-      setTimeValue(timeValue);
+      if (!isOpened) {
+        const inputTimeValue = parser(inputRef.current?.value);
+        setTimeValue(inputTimeValue);
+        if (availableSlots) {
+          if (availableSlots.find((slot) => slot.value === inputTimeValue)) {
+            setActiveOption(inputTimeValue);
+          } else {
+            setActiveOption(availableSlots[0].value);
+          }
+        } else {
+          setActiveOption('');
+        }
+      }
       setIsOpened(!isOpened);
     };
 
@@ -186,108 +200,66 @@ export const TimeInput = React.forwardRef<HTMLInputElement, TimeInputProps>(
         ? disableSlots(slots, disabledSlots)?.filter((slot) => filterTime(slot.value, startTime, endTime))
         : slots;
 
-    const handleClick = () => {
+    const handleSelectOption = (option: string) => {
       if (inputRef.current) {
-        if (availableSlots && !availableSlots[activeIndex].disabled && isOpened) {
-          const slotValue = availableSlots[activeIndex].value;
-          setTimeValue(slotValue);
-          if (!slotValue) {
-            changeInputData(inputRef.current, { value: '' });
-            return;
-          }
-          changeInputData(inputRef.current, { value: slotValue });
-          setIsOpened(false);
-        } else {
-          changeInputData(inputRef.current, { value });
-        }
+        setTimeValue(option);
+        changeInputData(inputRef.current, { value: option });
+        setIsOpened(false);
       }
     };
 
-    const handleKeyUp = (e: React.KeyboardEvent) => {
-      if (!availableSlots) return;
-      const activeOption = document.querySelector('[aria-selected="true"]');
-      switch (e.key) {
-        case 'Enter':
-          handleClick();
-          break;
-        case 'ArrowUp':
-          if (!isOpened) {
-            setIsOpened(true);
-          }
-          activeOption?.scrollIntoView(false);
-          if (activeIndex <= 0) {
-            setActiveIndex(availableSlots.length - 1);
-          } else {
-            setActiveIndex(activeIndex - 1);
-          }
-          break;
-        case 'ArrowDown':
-          if (!isOpened) {
-            setIsOpened(true);
-          }
-          activeOption?.scrollIntoView(true);
-          if (activeIndex >= availableSlots.length - 1) {
-            setActiveIndex(0);
-          } else {
-            setActiveIndex(activeIndex + 1);
-          }
-          break;
+    const clickOutside = (e: Event) => {
+      if (e.target && inputContainerRef.current?.contains(e.target as Node)) {
+        return;
       }
-    };
-
-    const handleKeyDown = (e: React.KeyboardEvent) => {
-      if (e.key === 'Enter' && isOpened) {
-        e.preventDefault();
-      }
-    };
-
-    const clickOutside = () => {
       setIsOpened(false);
     };
 
+    const model = React.useMemo(() => {
+      if (availableSlots) {
+        return availableSlots.map((slot, index) => ({
+          id: slot.value,
+          render: (options: RenderOptionProps) => (
+            <StyledMenuItem key={index} data-dimension={dimension} disabled={slot.disabled} {...options}>
+              {slot.value}
+            </StyledMenuItem>
+          ),
+          disabled: slot.disabled,
+        }));
+      } else {
+        return [];
+      }
+    }, [availableSlots, dimension]);
+
     return (
-      <TextInput
+      <StyledTextInput
         {...props}
         ref={refSetter(ref, inputRef)}
         handleInput={handleInput}
         icons={iconArray}
         containerRef={inputContainerRef}
-        value={value}
         disabled={disabled}
         dimension={dimension}
         skeleton={skeleton}
-        onKeyUp={(...p) => {
-          props.onKeyUp?.(...p);
-          handleKeyUp(...p);
-        }}
-        onKeyDown={(...p) => {
-          props.onKeyDown?.(...p);
-          handleKeyDown(...p);
-        }}
       >
         {availableSlots && isOpened && !disabled && !skeleton && (
-          <Dropdown targetRef={inputRef} alignSelf={alignDropdown} onClickOutside={clickOutside}>
-            <SlotContainer data-dimension={dimension}>
-              {availableSlots.map((slot, index) => (
-                <Slot
-                  key={index}
-                  active={index === activeIndex}
-                  value={slot.value}
-                  data-dimension={dimension}
-                  selected={timeValue === slot.value}
-                  aria-selected={index === activeIndex}
-                  disabled={slot.disabled}
-                  onMouseEnter={() => setActiveIndex(index)}
-                  onClick={handleClick}
-                  onKeyUp={handleKeyUp}
-                >
-                  {slot.value}
-                </Slot>
-              ))}
-            </SlotContainer>
-          </Dropdown>
+          <StyledDropdownContainer
+            targetRef={inputRef}
+            alignSelf={alignDropdown}
+            onClickOutside={clickOutside}
+            dropContainerCssMixin={dropContainerCssMixin}
+          >
+            <StyledMenu
+              selected={timeValue}
+              active={activeOption}
+              model={model}
+              data-dimension={dimension}
+              onSelectItem={handleSelectOption}
+              onActivateItem={setActiveOption}
+            />
+          </StyledDropdownContainer>
         )}
-      </TextInput>
+      </StyledTextInput>
     );
   },
 );

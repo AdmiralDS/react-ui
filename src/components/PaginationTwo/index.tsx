@@ -67,8 +67,6 @@ export interface PaginationTwoProps extends Omit<React.HTMLAttributes<HTMLDivEle
   showNextBtnMobile?: boolean;
   /** Отображение инпута, если страниц больше 21й  */
   showInput?: boolean;
-  /** @deprecated Используйте locale.itemRangeText */
-  itemRangeText?: (min: number, max: number, total: number) => string;
   /** Размер страницы (сколько максимально умещается записей в одной странице) */
   pageSize?: number;
   /** Общее количество записей */
@@ -92,15 +90,13 @@ export const PaginationTwo: React.FC<PaginationTwoProps> = ({
   showNextBtnMobile = true,
   showInput = true,
   onChange,
-  itemRangeText: userItemRangeText,
   pageSize,
   totalItems,
   locale,
   ...props
 }) => {
   const theme = React.useContext(ThemeContext) || LIGHT_THEME;
-  const itemRangeText =
-    userItemRangeText || locale?.itemRangeText || theme.locales[theme.currentLocale].paginationTwo.itemRangeText;
+  const itemRangeText = locale?.itemRangeText || theme.locales[theme.currentLocale].paginationTwo.itemRangeText;
   const placeholder = locale?.inputPlaceholder || theme.locales[theme.currentLocale].paginationTwo.inputPlaceholder;
 
   const hideNextButton = mobile || false;

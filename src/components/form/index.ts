@@ -11,3 +11,4 @@ export * from './TimeField';
 export * from './NumberInputField';
 export * from './EditModeField';
 export * from './PhoneInputField';
+export * from './InputExField';

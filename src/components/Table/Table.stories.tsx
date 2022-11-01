@@ -15,6 +15,7 @@ import {
   columnListOrientation,
   columnListSort,
   columnListSticky,
+  columnListWithCustomTitle,
   columnListWithWidth,
   rowList,
   rowListExpanded,
@@ -93,6 +94,9 @@ export default {
     displayRowSelectionColumn: {
       control: { type: 'boolean' },
     },
+    displayRowExpansionColumn: {
+      control: { type: 'boolean' },
+    },
     greyHeader: {
       control: { type: 'boolean' },
     },
@@ -113,9 +117,6 @@ export default {
     },
     showLastRowUnderline: {
       control: { type: 'boolean' },
-    },
-    emptyMessage: {
-      control: { type: 'text' },
     },
   },
 } as ComponentMeta<typeof Table>;
@@ -703,7 +704,7 @@ RowOverflowMenu.args = {
   rowList: rowListMenu,
   columnList,
 };
-RowOverflowMenu.storyName = 'Table. Пример строк с OverflowMenu.';
+RowOverflowMenu.storyName = 'Table. Пример строк с OverflowMenu и иконками для одиночного действия.';
 RowOverflowMenu.parameters = {
   docs: {
     description: {
@@ -712,7 +713,8 @@ RowOverflowMenu.parameters = {
       под иконкой меню добавляется квадратная подложка белого цвета. В примере ниже Overflow Menu 
       задано для первых двух строк.\n\nДля того чтобы задать для строки OverflowMenu необходимо 
       для строки прописать функцию overflowMenuRender. Входные параметры функции: сама 
-      строка, колбеки onMenuOpen и onMenuClose. Колбеки необходимо вызывать 
+      строка, колбеки onMenuOpen/onMenuClose (устаревшее api, впоследствии будет удалено) и onVisibilityChange (актуальное api).
+      Рекомендуется использовать колбек onVisibilityChange вместо onMenuOpen/onMenuClose. Колбек необходимо вызывать 
       при открытии/закрытии меню для того, чтобы таблица могла управлять видимостью OverflowMenu.
       В качестве результата функция должна возвращать компонент OverflowMenu. Размер OverflowMenu 
       следует задавать согласно правилу:\n\n* Для таблицы с dimension="s" или dimension="m" используется 
@@ -760,3 +762,10 @@ Group.parameters = {
     },
   },
 };
+
+export const CustomTitle = Template.bind({});
+CustomTitle.args = {
+  rowList,
+  columnList: columnListWithCustomTitle,
+};
+CustomTitle.storyName = 'Table. Пример кастомизации заголовков столбцов.';

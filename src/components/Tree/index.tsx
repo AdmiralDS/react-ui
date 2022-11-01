@@ -44,7 +44,7 @@ const treeToMap = (tree: Array<TreeItemProps>, level = 0, dependencies?: Array<A
     const key = item.id.toString();
     acc[key] = { level, node: item };
 
-    if (dependencies) {
+    if (dependencies && !item.children) {
       dependencies.forEach((dependency) => dependency.push(key));
     }
     if (item.children) {
@@ -92,9 +92,8 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps>(
     const selectItem = (id: string) => {
       if (withCheckbox) {
         if (id) toggleCheck(id);
-      } else {
-        if (selectedId !== id) setSelectedState(id);
       }
+      if (selectedId !== id) setSelectedState(id);
 
       onSelectItem?.(id);
     };
@@ -107,7 +106,7 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps>(
       return treeToMap(model);
     }, [model]);
 
-    const toggleExpand = (id: string | number) => {
+    const toggleExpand = (id: string) => {
       map[id].node.expanded = !map[id].node.expanded;
 
       if (onChange) {
@@ -115,6 +114,7 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps>(
       } else {
         setInternalModel([...internalModel]);
       }
+      if (selectedId !== id) setSelectedState(id);
     };
 
     const setChecked = (id: number | string, value: boolean) => {
@@ -157,7 +157,7 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps>(
           node.dependencies?.some((depId: number | string) => !map[depId].node.checked);
         const checked = hasChildren
           ? node.dependencies?.every((depId: number | string) => map[depId].node.checked)
-          : item.checked;
+          : !!item.checked;
 
         return (
           <React.Fragment key={item.id}>
@@ -195,3 +195,5 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps>(
     );
   },
 );
+
+export { TreeNode } from './TreeNode';

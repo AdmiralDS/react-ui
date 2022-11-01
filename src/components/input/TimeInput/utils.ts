@@ -5,10 +5,8 @@ const isValidTime = (time: string) => {
   return timeReg.test(time);
 };
 
-const parseStringToTime = (t = ''): string | null => {
-  const [hhStr, mmStr] = t.split(':');
-  const time = `${!isNaN(+hhStr)}:${!isNaN(+mmStr)}`;
-  return isValidTime(time) ? time : null;
+const parseStringToTime = (time = ''): string => {
+  return isValidTime(time) ? time : '';
 };
 
 const getTimeInMinutes = (str: string) => {

@@ -2,8 +2,8 @@ import type { HTMLAttributes } from 'react';
 import * as React from 'react';
 import { keyboardKey } from '#src/components/common/keyboardKey';
 import { OpenStatusButton } from '#src/components/OpenStatusButton';
-import type { ItemProps } from '#src/components/MenuItem';
-import { DropdownContainer } from '#src/components/DropdownContainer';
+import type { ItemProps } from '#src/components/Menu/MenuItem';
+import { DropdownContainerProps, StyledDropdownContainer } from '#src/components/DropdownContainer';
 import { Menu, MenuDimensions as Dimension, MenuProps } from '#src/components/Menu';
 import { refSetter } from '#src/components/common/utils/refSetter';
 import styled, { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
@@ -11,7 +11,7 @@ import styled, { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-c
 const StyledMenu = styled(Menu)<{ width?: string }>`
   width: ${({ width }) => (width ? width : 'auto')};
 `;
-const StyledDropdownContainer = styled(DropdownContainer)<{
+const DropMenuContainer = styled(StyledDropdownContainer)<{
   dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
 }>`
   ${(p) => p.dropContainerCssMixin || ''}
@@ -32,8 +32,24 @@ export interface RenderContentProps {
   disabled?: boolean;
 }
 
+export interface DropMenuComponentProps
+  extends Pick<
+      DropMenuProps,
+      | 'isVisible'
+      | 'onVisibilityChange'
+      | 'active'
+      | 'onActivateItem'
+      | 'onSelectItem'
+      | 'disableSelectedOptionHighlight'
+    >,
+    Pick<DropdownContainerProps, 'onClickOutside'> {}
+
 export interface DropMenuProps
-  extends Pick<MenuProps, 'active' | 'onActivateItem' | 'onSelectItem'>,
+  extends Pick<
+      MenuProps,
+      'active' | 'onActivateItem' | 'onSelectItem' | 'multiSelection' | 'disableSelectedOptionHighlight'
+    >,
+    Pick<DropdownContainerProps, 'onClickOutside'>,
     Omit<HTMLAttributes<HTMLElement>, 'onChange'> {
   /** Размер компонента */
   dimension?: Dimension;
@@ -47,11 +63,14 @@ export interface DropMenuProps
   items: Array<ItemProps>;
   /** Выбранная опция */
   selected?: string;
-  /** Колбек на изменение выбранной опции */
+  /** @deprecated use onSelectItem instead
+   * Колбек на изменение выбранной опции */
   onChange?: (id: string) => void;
-  /** Колбек на открытие меню */
+  /** @deprecated use isVisible and onVisibilityChange instead
+   * Колбек на открытие меню */
   onOpen?: () => void;
-  /** Колбек на закрытие меню */
+  /** @deprecated use isVisible and onVisibilityChange instead
+   * Колбек на закрытие меню */
   onClose?: () => void;
   /** Отключение компонента */
   disabled?: boolean;
@@ -63,6 +82,10 @@ export interface DropMenuProps
   renderContentProp: (options: RenderContentProps) => React.ReactNode;
   /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
   dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+  /** Видимость выпадающего меню */
+  isVisible?: boolean;
+  /** Колбек на изменение видимости меню */
+  onVisibilityChange?: (isVisible: boolean) => void;
 }
 
 export const DropMenu = React.forwardRef<HTMLElement, DropMenuProps>(
@@ -73,33 +96,47 @@ export const DropMenu = React.forwardRef<HTMLElement, DropMenuProps>(
       disabled = false,
       loading = false,
       alignSelf = 'flex-end',
-      onClose,
-      onOpen,
+      onClose, // TODO: убрать после удаления в DropMenuProps
+      onOpen, // TODO: убрать после удаления в DropMenuProps
       items,
       selected,
-      onChange,
+      active,
+      onSelectItem,
+      onActivateItem,
+      onChange, // TODO: убрать после удаления в DropMenuProps
       onClick,
       onKeyDown,
       alignMenuRef,
       renderContentProp,
       menuMaxHeight,
+      dropContainerCssMixin,
+      multiSelection = false, // TODO: убрать после удаления в Menu
+      disableSelectedOptionHighlight = false,
+      isVisible,
+      onVisibilityChange = (isVisible: boolean) => undefined,
+      onClickOutside,
       ...props
     },
     ref,
   ) => {
-    const [menuOpened, setMenuOpened] = React.useState<boolean>(false);
+    const [isMenuOpenState, setIsMenuOpenState] = React.useState<boolean>(false);
     const btnRef = React.useRef<HTMLElement>(null);
-    const [active, setActive] = React.useState<string | undefined>();
+
+    const isMenuOpen = isVisible || isMenuOpenState;
+    const setIsMenuOpen = (newMenuOpenState: boolean) => {
+      setIsMenuOpenState(newMenuOpenState);
+      onVisibilityChange(newMenuOpenState);
+    };
 
     const reverseMenu = (e: React.MouseEvent<HTMLElement>) => {
-      setMenuOpened((prevOpened) => !prevOpened);
-      if (menuOpened) onClose?.();
-      else onOpen?.();
+      if (isMenuOpen) onClose?.(); // TODO: убрать после удаления onClose в DropMenuProps
+      else onOpen?.(); // TODO: убрать после удаления onOpen в DropMenuProps
+      setIsMenuOpen(!isMenuOpen);
       onClick?.(e);
     };
     const closeMenu = () => {
-      setMenuOpened(false);
-      onClose?.();
+      setIsMenuOpen(false);
+      onClose?.(); // TODO: убрать после удаления onClose в DropMenuProps
       btnRef.current?.focus();
     };
 
@@ -107,8 +144,12 @@ export const DropMenu = React.forwardRef<HTMLElement, DropMenuProps>(
       if (e.target && btnRef.current?.contains(e.target as Node)) {
         return;
       }
-      setMenuOpened(false);
-      onClose?.();
+      if (onClickOutside) {
+        onClickOutside(e);
+      } else {
+        setIsMenuOpen(false);
+        onClose?.(); // TODO: убрать после удаления onClose в DropMenuProps
+      }
     };
 
     const handleBtnKeyDown = (e: React.KeyboardEvent<HTMLElement>) => {
@@ -116,14 +157,14 @@ export const DropMenu = React.forwardRef<HTMLElement, DropMenuProps>(
       onKeyDown?.(e);
       switch (code) {
         case keyboardKey.Escape:
-          if (menuOpened) closeMenu();
+          if (isMenuOpen) closeMenu();
           break;
         case keyboardKey.Enter:
         case keyboardKey[' ']:
-          if (!menuOpened) {
+          if (!isMenuOpen) {
             e.stopPropagation();
-            setMenuOpened(true);
-            onOpen?.();
+            setIsMenuOpen(true);
+            onOpen?.(); // TODO: убрать после удаления onOpen в DropMenuProps
             e.preventDefault();
           }
           break;
@@ -132,18 +173,14 @@ export const DropMenu = React.forwardRef<HTMLElement, DropMenuProps>(
       }
     };
 
-    const handleClick = (selected?: string) => {
-      if (selected) {
-        onChange?.(selected);
+    const handleSelectItem = (id: string) => {
+      onChange?.(id); // TODO: убрать onChange после удаления
+      onSelectItem?.(id);
+      // TODO: убрать multiSelection после удаления
+      if (isVisible === undefined && !multiSelection && !disableSelectedOptionHighlight) {
+        closeMenu();
       }
-      closeMenu();
     };
-
-    React.useEffect(() => {
-      if (menuOpened) {
-        setActive(selected || items?.[0]?.id);
-      }
-    }, [menuOpened]);
 
     return (
       <>
@@ -152,15 +189,16 @@ export const DropMenu = React.forwardRef<HTMLElement, DropMenuProps>(
           buttonRef: refSetter(ref, btnRef),
           handleKeyDown: handleBtnKeyDown,
           handleClick: reverseMenu,
-          statusIcon: <OpenStatusButton $isOpen={menuOpened} aria-hidden />,
-          menuState: menuOpened,
+          statusIcon: <OpenStatusButton $isOpen={isMenuOpen} aria-hidden />,
+          menuState: isMenuOpen,
         })}
-        {menuOpened && !loading && (
-          <StyledDropdownContainer
+        {isMenuOpen && !loading && (
+          <DropMenuContainer
             role="listbox"
             alignSelf={alignSelf}
             targetRef={alignMenuRef || btnRef}
             onClickOutside={clickOutside}
+            dropContainerCssMixin={dropContainerCssMixin}
             {...props}
           >
             <StyledMenu
@@ -168,12 +206,14 @@ export const DropMenu = React.forwardRef<HTMLElement, DropMenuProps>(
               width={menuWidth}
               model={items}
               selected={selected}
-              onSelectItem={handleClick}
+              onSelectItem={handleSelectItem}
               dimension={dimension}
               active={active}
-              onActivateItem={setActive}
+              onActivateItem={onActivateItem}
+              multiSelection={multiSelection}
+              disableSelectedOptionHighlight={disableSelectedOptionHighlight}
             />
-          </StyledDropdownContainer>
+          </DropMenuContainer>
         )}
       </>
     );

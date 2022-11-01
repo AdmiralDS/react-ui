@@ -1,9 +1,10 @@
 import type { HTMLAttributes } from 'react';
 import * as React from 'react';
 import styled from 'styled-components';
-import { backgroundColor, colorTextMixin, ItemDimension, paddings, styleTextMixin } from './mixins';
+import { backgroundColor, colorTextMixin, ItemDimension, paddings, styleTextMixin } from './menuItemMixins';
 
 export interface RenderOptionProps {
+  key?: string | number;
   /** Активная секция MenuItems */
   selected?: boolean;
   /** Акцентная секция MenuItems */

@@ -4,7 +4,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import styled, { ThemeProvider } from 'styled-components';
 
-import { Tooltip } from '#src/components/Tooltip';
+import { Tooltip, TOOLTIP_DELAY } from '#src/components/Tooltip';
 import { TooltipHoc } from '#src/components/TooltipHOC';
 import { TooltipHocStory } from '#src/components/TooltipHOC/story';
 import { refSetter } from '#src/components/common/utils/refSetter';
@@ -36,16 +36,20 @@ const Description = () => (
     <Separator />
     Задать для компонента тултип можно двумя способами:
     <Separator />
-    1) Использовать компонент Tooltip. Данный компонент является контролируемым, поэтому для него обязательно нужно
-    задавать параметры visible и onVisibilityChange. Кроме того компоненту Tooltip требуются обязательные параметры:
-    targetRef - для указания элемента, относительно которого тултип будет позиционироваться, renderContent -
-    рендер-функция для рендеринга содержимого тултипа.
+    1) Использовать компонент Tooltip. Данный компонент является полностью контролируемым пользователем, то есть
+    пользователь определяет в какой момент и при каких событиях отображать тултип, отображать его с задержкой в
+    появлении или нет. Кроме того компоненту Tooltip требуются обязательные параметры: targetRef - для указания
+    элемента, относительно которого тултип будет позиционироваться, renderContent - рендер-функция для рендеринга
+    содержимого тултипа.
     <Separator />
     2) Использовать компонент высшего порядка TooltipHoc. Компонент TooltipHoc в качестве агрумента принимает
     функциональный или классовый компонент и возвращает его вместе с позиционируемым относительно него тултипом.
-    Компонент TooltipHoc передает в оборачиваемый компонент атрибут ref, поэтому компонент, который будет передан в
-    TooltipHoc должен уметь резолвить ref и назначать его на свой корневой элемент (как правило это достигается с
-    помощью React.forwardRef).
+    TooltipHoc реализует функционал появления тултипа (тултип отображается при mouseenter/focus событии на target
+    элементе, скрывается - при moseleave/blur событии на target элементе). Как следствие TooltipHoc стоит использовать в
+    том случае, если пользователю нужен неконтролируемый тултип (тултип с внутренним state и механизмом
+    отображения/скрытия). Компонент TooltipHoc передает в оборачиваемый компонент атрибут ref, поэтому компонент,
+    который будет передан в TooltipHoc должен уметь резолвить ref и назначать его на свой корневой элемент (как правило
+    это достигается с помощью React.forwardRef).
     <Separator />
     Далее приведены таблицы с описанием пропсов как для Tooltip, так и для TooltipHoc, а также примеры использования
     данных компонентов.
@@ -83,7 +87,7 @@ export default {
       control: { type: 'boolean' },
     },
     tooltipPosition: {
-      options: ['bottom', 'top', 'left', 'right', 'bottomPageCenter', 'topPageCenter'],
+      options: ['bottom', 'top', 'left', 'right'],
       control: { type: 'radio' },
     },
     themeBorderKind: {
@@ -101,30 +105,55 @@ const Template1: ComponentStory<typeof Tooltip> = (args) => {
     return theme;
   }
 
-  const btnRef = React.useRef<HTMLButtonElement | null>(null);
+  const btnRef = React.useRef<any>(null);
   const [visible, setVisible] = React.useState(false);
+
+  React.useEffect(() => {
+    function show() {
+      setVisible(true);
+    }
+    function hide() {
+      setVisible(false);
+    }
+    const button = btnRef.current;
+    if (button) {
+      /** Рекомендуется использовать именно addEventListener, так как React SyntheticEvent onMouseEnter
+       * отрабатывает некорректно в случае, если мышь была наведена на задизейбленный элемент,
+       * а затем была наведена на target элемент
+       * https://github.com/facebook/react/issues/19419 */
+      button.addEventListener('mouseenter', show);
+      button.addEventListener('focus', show);
+      button.addEventListener('mouseleave', hide);
+      button.addEventListener('blur', hide);
+      return () => {
+        button.removeEventListener('mouseenter', show);
+        button.removeEventListener('focus', show);
+        button.removeEventListener('mouseleave', hide);
+        button.removeEventListener('blur', hide);
+      };
+    }
+  }, [btnRef.current, setVisible]);
 
   return (
     <ThemeProvider theme={swapBorder}>
       <Button ref={btnRef} dimension="m" displayAsSquare aria-label="Delete" aria-describedby="test1">
         <DeleteOutline aria-hidden />
       </Button>
-      <Tooltip
-        targetRef={btnRef}
-        visible={visible}
-        onVisibilityChange={(visible: boolean) => setVisible(visible)}
-        renderContent={() =>
-          `Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin
+      {visible && (
+        <Tooltip
+          targetRef={btnRef}
+          renderContent={() =>
+            `Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin
           literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney
           College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage,
           and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem
           Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum'`
-        }
-        style={{ minWidth: '200px', maxWidth: '300px' }}
-        withDelay={args.withDelay}
-        tooltipPosition={args.tooltipPosition}
-        id="test1"
-      />
+          }
+          style={{ minWidth: '200px', maxWidth: '300px' }}
+          tooltipPosition={args.tooltipPosition}
+          id="test1"
+        />
+      )}
     </ThemeProvider>
   );
 };
@@ -132,51 +161,104 @@ const Template1: ComponentStory<typeof Tooltip> = (args) => {
 const Template2: ComponentStory<typeof Tooltip> = () => {
   const btnRef = React.useRef<HTMLButtonElement | null>(null);
   const [visible, setVisible] = React.useState(false);
+  const [timer, setTimer] = React.useState<number>();
+
+  React.useEffect(() => {
+    function show() {
+      setTimer(window.setTimeout(() => setVisible(true), TOOLTIP_DELAY));
+    }
+    function hide() {
+      clearTimeout(timer);
+      setVisible(false);
+    }
+    const button = btnRef.current;
+    if (button) {
+      /** Рекомендуется использовать именно addEventListener, так как React SyntheticEvent onMouseEnter
+       * отрабатывает некорректно в случае, если мышь была наведена на задизейбленный элемент,
+       * а затем была наведена на target элемент
+       * https://github.com/facebook/react/issues/19419 */
+      button.addEventListener('mouseenter', show);
+      button.addEventListener('focus', show);
+      button.addEventListener('mouseleave', hide);
+      button.addEventListener('blur', hide);
+      return () => {
+        if (timer) clearTimeout(timer);
+        button.removeEventListener('mouseenter', show);
+        button.removeEventListener('focus', show);
+        button.removeEventListener('mouseleave', hide);
+        button.removeEventListener('blur', hide);
+      };
+    }
+  }, [btnRef.current, setTimer, setVisible, timer]);
+
   return (
     <>
-      <Button ref={btnRef} dimension="m" displayAsSquare aria-label="Delete" aria-describedby="test2">
-        <DeleteOutline height={24} width={24} />
+      <Button ref={btnRef} dimension="m" displayAsSquare aria-label="Delete" aria-describedby="test1">
+        <DeleteOutline aria-hidden />
       </Button>
-      <Tooltip
-        targetRef={btnRef}
-        visible={visible}
-        onVisibilityChange={(visible: boolean) => setVisible(visible)}
-        renderContent={() => 'Delete file'}
-        withDelay
-        id="test2"
-      />
+      {visible && (
+        <Tooltip
+          targetRef={btnRef}
+          renderContent={() =>
+            `Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin
+          literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney
+          College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage,
+          and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem
+          Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum'`
+          }
+          style={{ minWidth: '200px', maxWidth: '300px' }}
+          id="test1"
+        />
+      )}
     </>
   );
 };
 
 const Template3: ComponentStory<typeof Tooltip> = () => {
   const tooltipRef = React.useRef(null);
-  const btnRef = React.useRef<HTMLButtonElement | null>(null);
+  const btnRef = React.useRef<any>(null);
   const [visible, setVisible] = React.useState(false);
+
+  React.useEffect(() => {
+    function show() {
+      setVisible(true);
+    }
+    function hide() {
+      setVisible(false);
+    }
+    const button = btnRef.current;
+    if (button) {
+      /** Рекомендуется использовать именно addEventListener, так как React SyntheticEvent onMouseEnter
+       * отрабатывает некорректно в случае, если мышь была наведена на задизейбленный элемент,
+       * а затем была наведена на target элемент
+       * https://github.com/facebook/react/issues/19419 */
+      button.addEventListener('mouseenter', show);
+      button.addEventListener('focus', show);
+      button.addEventListener('mouseleave', hide);
+      button.addEventListener('blur', hide);
+      return () => {
+        button.removeEventListener('mouseenter', show);
+        button.removeEventListener('focus', show);
+        button.removeEventListener('mouseleave', hide);
+        button.removeEventListener('blur', hide);
+      };
+    }
+  }, [btnRef.current, setVisible]);
+
   return (
     <>
       <Button ref={btnRef} dimension="m" displayAsSquare aria-label="Delete" aria-describedby="test3">
         <DeleteOutline height={24} width={24} />
       </Button>
-      <Tooltip
-        targetRef={btnRef}
-        visible={visible}
-        onVisibilityChange={(visible: boolean) => setVisible(visible)}
-        renderContent={() => 'Delete file'}
-        tooltipRef={tooltipRef}
-        id="test3"
-      />
+      {visible && <Tooltip targetRef={btnRef} renderContent={() => 'Delete file'} ref={tooltipRef} id="test3" />}
     </>
   );
 };
 
 const TooltipedInput = TooltipHoc(InputField);
 const Template4: ComponentStory<typeof Tooltip> = () => {
-  const [visible, setVisible] = React.useState(false);
   return (
     <TooltipedInput
-      visible={visible}
-      handleVisibilityChange={(visible: boolean) => setVisible(visible)}
       renderContent={() => `Contrary to popular belief, Lorem Ipsum is not simply random text.`}
       label={'TooltipHoc. Базовый пример.'}
     />
@@ -198,11 +280,8 @@ const TestForwardingRef = React.forwardRef<HTMLHeadingElement, Omit<TestType, 'i
 ));
 const TooltipedTest = TooltipHoc(TestForwardingRef);
 const Template5: ComponentStory<typeof Tooltip> = () => {
-  const [visible, setVisible] = React.useState(false);
   return (
     <TooltipedTest
-      visible={visible}
-      handleVisibilityChange={(visible: boolean) => setVisible(visible)}
       renderContent={() => `Пример использования TooltipHoc с классовым компонентом.`}
       label={'Наведи на меня мышью и увидишь тултип'}
     />
@@ -218,14 +297,7 @@ const H2 = React.forwardRef<HTMLHeadingElement, React.HTMLAttributes<HTMLElement
 });
 const TooltipedHeading = TooltipHoc(H2);
 const Template6: ComponentStory<typeof Tooltip> = () => {
-  const [visible, setVisible] = React.useState(false);
-  return (
-    <TooltipedHeading
-      visible={visible}
-      handleVisibilityChange={(visible: boolean) => setVisible(visible)}
-      renderContent={() => `Пример использования TooltipHoc с функциональным компонентом.`}
-    />
-  );
+  return <TooltipedHeading renderContent={() => `Пример использования TooltipHoc с функциональным компонентом.`} />;
 };
 
 const Component = React.forwardRef<HTMLInputElement, InputFieldProps>((props, ref) => {
@@ -243,11 +315,8 @@ const Component = React.forwardRef<HTMLInputElement, InputFieldProps>((props, re
 });
 const TooltipedComponent = TooltipHoc(Component);
 const Template7: ComponentStory<typeof Tooltip> = () => {
-  const [visible, setVisible] = React.useState(false);
   return (
     <TooltipedComponent
-      visible={visible}
-      handleVisibilityChange={(visible: boolean) => setVisible(visible)}
       renderContent={() => `Contrary to popular belief, Lorem Ipsum is not simply random text.`}
       label={'Использование утилиты refSetter'}
     />
@@ -255,7 +324,6 @@ const Template7: ComponentStory<typeof Tooltip> = () => {
 };
 
 const Template8: ComponentStory<typeof Tooltip> = () => {
-  const [visible, setVisible] = React.useState(false);
   const inputRef = React.useRef<HTMLInputElement | null>(null);
   const handleBtnClick = () => {
     inputRef.current?.focus();
@@ -263,8 +331,6 @@ const Template8: ComponentStory<typeof Tooltip> = () => {
   return (
     <>
       <TooltipedInput
-        visible={visible}
-        handleVisibilityChange={(visible: boolean) => setVisible(visible)}
         renderContent={() => `Contrary to popular belief, Lorem Ipsum is not simply random text.`}
         ref={inputRef}
         label={'Прокидывание ref на результат вызова TooltipHoc'}
@@ -305,7 +371,7 @@ TooltipHocRefSetter.storyName = 'TooltipHoc. Утилита refSetter для м�
 TooltipHocRefSetter.parameters = {
   docs: {
     description: {
-      story: `Если в ваш компонент извне передан параметр ref и у вас есть внутренний 
+      story: `Если в ваш компонент извне передан параметр ref и у вас есть внутренний
       ref в компоненте, для синхронной работы данных рефов и их мерджа вы можете воспользоваться утилитой refSetter.`,
     },
   },

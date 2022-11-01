@@ -9,7 +9,7 @@ const Container = styled.div<{ position: PositionToasts }>`
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  width: 488px;
+  width: 384px;
   z-index: ${({ theme }) => theme.zIndex.notification};
   ${(p) => p.position === 'top-right' && 'top: 16px'};
   ${(p) => (p.position === 'bottom-right' || p.position === 'bottom-left') && 'bottom: 16px'};

@@ -5,8 +5,9 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { ReactComponent as SearchSolidSVG } from '@admiral-ds/icons/build/system/SearchSolid.svg';
 import { SuggestInput } from './index';
 import { withDesign } from 'storybook-addon-designs';
-import { Theme } from '#src/components/themes';
+import { LIGHT_THEME, Theme } from '#src/components/themes';
 import { ThemeProvider } from 'styled-components';
+import { getTextHighlightMeta } from '#src/components/input/Select/utils';
 
 export default {
   title: 'Admiral-2.1/Input/SuggestInput',
@@ -55,6 +56,10 @@ export default {
       control: { type: 'boolean' },
     },
 
+    displayClearIcon: {
+      control: { type: 'boolean' },
+    },
+
     alignDropdown: {
       options: ['auto', 'flex-start', 'flex-end', 'center', 'baseline', 'stretch'],
       control: { type: 'radio' },
@@ -87,6 +92,12 @@ const OPTIONS = [
   'text 4',
   'text 5',
   'text 6',
+  'text 7',
+  'text 8 text text 2 text text 2 text text 2 text text 2 text text 2 text text 2 text ',
+  'text 9',
+  'text 10',
+  'text 11',
+  'text 12',
 ];
 
 async function wait(ms: number) {
@@ -105,6 +116,11 @@ const Template: ComponentStory<typeof SuggestInput> = (props) => {
   const [localValue, setValue] = React.useState<string>(props.value ? String(props.value) : '');
   const [isLoading, setIsLoading] = React.useState(false);
   const [options, setOptions] = React.useState<string[] | undefined>();
+
+  const handleSelectOption = (option: string) => {
+    setValue(option);
+    console.log(`Selected option - ${option}`);
+  };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.currentTarget.value;
@@ -143,9 +159,74 @@ const Template: ComponentStory<typeof SuggestInput> = (props) => {
         {...cleanProps}
         value={localValue}
         onInput={handleChange}
-        onOptionSelect={setValue}
+        onOptionSelect={handleSelectOption}
         options={options}
         isLoading={isLoading}
+        onSearchButtonClick={() => {
+          console.log('search button click');
+        }}
+        displayClearIcon
+      />
+    </ThemeProvider>
+  );
+};
+
+const options = ['one', 'two', 'three'];
+const TemplateUncontrolled: ComponentStory<typeof SuggestInput> = (props) => {
+  return (
+    <ThemeProvider theme={LIGHT_THEME}>
+      <SuggestInput options={options} placeholder="numbers" dimension={props.dimension} />
+    </ThemeProvider>
+  );
+};
+
+const optionsNoMatch: string[] = [];
+const TemplateNoMatch: ComponentStory<typeof SuggestInput> = (props) => {
+  return (
+    <ThemeProvider theme={LIGHT_THEME}>
+      <SuggestInput options={optionsNoMatch} placeholder="numbers" dimension={props.dimension} />
+    </ThemeProvider>
+  );
+};
+
+const TemplateFilter: ComponentStory<typeof SuggestInput> = (props) => {
+  const cleanProps = (Object.keys(props) as Array<keyof typeof props>).reduce((acc, key) => {
+    if (props[key] !== undefined) acc[key] = props[key];
+
+    return acc;
+  }, {} as Record<any, any>);
+
+  const [localValue, setValue] = React.useState<string>(props.value ? String(props.value) : '');
+  const [options, setOptions] = React.useState<string[] | undefined>([...OPTIONS]);
+
+  const handleSelectOption = (option: string) => {
+    setValue(option);
+    console.log(`Selected option - ${option}`);
+  };
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const inputValue = e.currentTarget.value;
+
+    setValue(inputValue);
+    props.onChange?.(e);
+  };
+
+  React.useEffect(() => {
+    const filteredOptions: string[] = OPTIONS.filter(
+      (option) => getTextHighlightMeta(option, localValue, 'wholly').shouldHighlight,
+    );
+    setOptions(filteredOptions);
+  }, [localValue]);
+
+  return (
+    <ThemeProvider theme={LIGHT_THEME}>
+      <SuggestInput
+        className="suggest"
+        {...cleanProps}
+        value={localValue}
+        onInput={handleChange}
+        onOptionSelect={handleSelectOption}
+        options={options}
         onSearchButtonClick={() => {
           console.log('search button click');
         }}
@@ -167,3 +248,12 @@ SuggestInputStory2.args = {
   icon: SearchSolidSVG,
 };
 SuggestInputStory2.storyName = 'Suggest Input альтернативная иконка';
+
+export const SuggestInputUncontrolled = TemplateUncontrolled.bind({});
+SuggestInputUncontrolled.storyName = 'Suggest Input неконтроллируемый';
+
+export const SuggestInputNoMatch = TemplateNoMatch.bind({});
+SuggestInputNoMatch.storyName = 'Suggest Input "Нет совпадений"';
+
+export const SuggestInputFilter = TemplateFilter.bind({});
+SuggestInputFilter.storyName = 'Suggest Input с фильтрацией';

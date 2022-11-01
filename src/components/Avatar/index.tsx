@@ -1,9 +1,8 @@
 import * as React from 'react';
 import styled, { css } from 'styled-components';
 import { typography } from '#src/components/Typography';
-import { Tooltip } from '#src/components/Tooltip';
+import { TooltipHoc } from '#src/components/TooltipHOC';
 import { DefaultFontColorName } from '#src/components/themes/common';
-import { refSetter } from '#src/components/common/utils/refSetter';
 
 import { useLoaded } from './useLoaded';
 import { AvatarSVG } from './Avatar_SVG';
@@ -27,6 +26,8 @@ const Wrapper = styled.button<{ size: string }>`
     outline: ${(p) => p.theme.color['Primary/Primary 60 Main']} solid 2px;
   }
 `;
+
+const WrapperWithTooltip = TooltipHoc(Wrapper);
 
 const getTextColor = css<{ appearance: Appearance | { background?: string; text?: string; icon?: string } }>`
   ${({ theme, appearance }) => {
@@ -183,9 +184,6 @@ export const Avatar = React.forwardRef<HTMLButtonElement, AvatarProps & AvatarIn
     }: AvatarProps & AvatarInternalProps,
     ref,
   ) => {
-    const wrapperRef = React.useRef<HTMLButtonElement | null>(null);
-    const [tooltipVisible, setTooltipVisible] = React.useState(false);
-
     const loaded = useLoaded(href);
     const hasImage = Boolean(href && loaded === 'loaded');
     const hasIcon = Boolean(Icon && !hasImage);
@@ -215,8 +213,8 @@ export const Avatar = React.forwardRef<HTMLButtonElement, AvatarProps & AvatarIn
           return '56px';
       }
     };
-    return (
-      <Wrapper size={getSize()} {...props} ref={refSetter(ref, wrapperRef)}>
+    const renderAvatarContent = () => (
+      <>
         <AvatarSVG
           dimension={dimension}
           size={getSize()}
@@ -237,14 +235,15 @@ export const Avatar = React.forwardRef<HTMLButtonElement, AvatarProps & AvatarIn
             {Icon}
           </IconWrapper>
         )}
-        {showTooltip && (
-          <Tooltip
-            targetRef={wrapperRef}
-            visible={tooltipVisible}
-            onVisibilityChange={setTooltipVisible}
-            renderContent={() => userName}
-          />
-        )}
+      </>
+    );
+    return showTooltip ? (
+      <WrapperWithTooltip ref={ref} size={getSize()} renderContent={() => userName} {...props}>
+        {renderAvatarContent()}
+      </WrapperWithTooltip>
+    ) : (
+      <Wrapper ref={ref} size={getSize()} {...props}>
+        {renderAvatarContent()}
       </Wrapper>
     );
   },

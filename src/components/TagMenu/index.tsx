@@ -1,7 +1,7 @@
 import React, { HTMLAttributes } from 'react';
 import { TagVisualProps, TagSizeProps, Tag } from '#src/components/Tag';
-import { DropMenu } from '#src/components/DropMenu';
-import { MenuItem, RenderOptionProps } from '#src/components/MenuItem';
+import { DropMenu, DropMenuComponentProps } from '#src/components/DropMenu';
+import { MenuItem, RenderOptionProps } from '#src/components/Menu/MenuItem';
 import { passDropdownDataAttributes } from '#src/components/common/utils/splitDataAttributes';
 import { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 
@@ -10,16 +10,22 @@ export interface TagOptionProps extends HTMLAttributes<HTMLButtonElement>, TagVi
   tagText: string;
 }
 
-export interface TagMenuProps extends Omit<HTMLAttributes<HTMLButtonElement>, 'children'>, TagSizeProps {
+export interface TagMenuProps
+  extends Omit<HTMLAttributes<HTMLButtonElement>, 'children'>,
+    TagSizeProps,
+    DropMenuComponentProps {
   /** Опции выпадающего списка */
   options: Array<TagOptionProps>;
   /** Выбранная опция */
   selected?: TagOptionProps;
-  /** Колбек на изменение выбранной опции */
-  onSelectOption: (id: string) => void;
-  /** Колбек на открытие меню */
+  /** @deprecated use onSelectItem instead
+   * Колбек на изменение выбранной опции */
+  onSelectOption?: (id: string) => void;
+  /** @deprecated use isVisible and onVisibilityChange instead
+   * Колбек на открытие меню */
   onOpen?: () => void;
-  /** Колбек на закрытие меню */
+  /** @deprecated use isVisible and onVisibilityChange instead
+   * Колбек на закрытие меню */
   onClose?: () => void;
   /** Выравнивание выпадающего меню относительно компонента https://developer.mozilla.org/en-US/docs/Web/CSS/align-self */
   alignSelf?: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
@@ -40,7 +46,14 @@ export const TagMenu = React.forwardRef<HTMLButtonElement, TagMenuProps>(
       onOpen,
       onClose,
       options,
+      disableSelectedOptionHighlight,
       selected,
+      onSelectItem = (id: string) => undefined,
+      active,
+      onActivateItem,
+      isVisible,
+      onVisibilityChange,
+      onClickOutside,
       as,
       className = '',
       alignSelf = 'flex-end',
@@ -71,10 +84,16 @@ export const TagMenu = React.forwardRef<HTMLButtonElement, TagMenuProps>(
         menuWidth={menuWidth}
         menuMaxHeight={menuMaxHeight}
         items={model}
-        selected={selected?.tagText}
-        onChange={onSelectOption}
+        selected={selected?.id}
+        onSelectItem={onSelectOption || onSelectItem}
+        active={active}
+        onActivateItem={onActivateItem}
+        disableSelectedOptionHighlight={disableSelectedOptionHighlight}
         onOpen={onOpen}
         onClose={onClose}
+        isVisible={isVisible}
+        onVisibilityChange={onVisibilityChange}
+        onClickOutside={onClickOutside}
         alignSelf={alignSelf}
         dropContainerCssMixin={dropContainerCssMixin}
         {...dropMenuProps}

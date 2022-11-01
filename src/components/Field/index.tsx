@@ -1,7 +1,8 @@
 import * as React from 'react';
 import styled, { css } from 'styled-components';
 import { refSetter } from '#src/components/common/utils/refSetter';
-import { InputStatus, skeletonMixin } from '#src/components/input';
+import { InputStatus } from '#src/components/input/types';
+import { skeletonMixin } from '#src/components/input/Container';
 import { CharacterCounter } from '#src/components/input/TextArea/CharacterCounter';
 import { Label } from '#src/components/Label';
 import { uid } from '#src/components/common/uid';
@@ -98,6 +99,8 @@ export interface FieldOwnProps {
   /** Установка статуса disabled */
   disabled?: boolean;
 
+  readOnly?: boolean;
+
   /**  Имя поля формы */
   label?: React.ReactNode;
 
@@ -176,6 +179,7 @@ export const Field = React.forwardRef<HTMLDivElement, FieldProps>(
         data-focus-within={hasFocus ? '' : undefined}
         data-required-within={required ? '' : undefined}
         data-disabled={disabled ? '' : undefined}
+        data-read-only={props.readOnly ? true : undefined}
         ref={refSetter(containerRef, ref)}
       >
         {labelProps.children && (
@@ -191,7 +195,7 @@ export const Field = React.forwardRef<HTMLDivElement, FieldProps>(
 
             {displayCharacterCounter && inputRef && maxLength !== undefined && (
               <>
-                {/* div необходим чтобы сдвигать счетчик вправо при отсутствии текста */}
+                {/* div необходим для сдвига счетчика вправо при отсутствии текста */}
                 <div></div>
                 <PositionedCharacterCounter maxLength={maxLength} inputRef={inputRef} />
               </>

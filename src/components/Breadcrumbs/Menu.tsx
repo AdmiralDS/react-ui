@@ -1,10 +1,10 @@
 import * as React from 'react';
-import styled from 'styled-components';
+import styled, { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 
 import { OverflowMenu } from '#src/components/OverflowMenu';
-import { Tooltip } from '#src/components/Tooltip';
+import { TooltipHoc } from '#src/components/TooltipHOC';
 import { BreadcrumbProps } from '#src/components/Breadcrumbs/BreadCrumb';
-import { MenuItem, RenderOptionProps } from '#src/components/MenuItem';
+import { MenuItem, RenderOptionProps } from '#src/components/Menu/MenuItem';
 import { uid } from '#src/components/common/uid';
 
 const Option = styled.a`
@@ -24,14 +24,18 @@ const Option = styled.a`
   }
 `;
 
+const MenuItemWithTooltip = TooltipHoc(MenuItem);
+
 export interface MenuButtonProps {
   /** Размер меню */
   dimension: 'm' | 's';
   /** Массив опций */
   options: Array<BreadcrumbProps>;
+  /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
+  dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
 }
 
-export const MenuButton: React.FC<MenuButtonProps> = ({ dimension, options }) => {
+export const MenuButton: React.FC<MenuButtonProps> = ({ dimension, options, dropContainerCssMixin }) => {
   const model = React.useMemo(() => {
     return options.map((item) => {
       const id = uid();
@@ -39,19 +43,23 @@ export const MenuButton: React.FC<MenuButtonProps> = ({ dimension, options }) =>
         id,
         render: (options: RenderOptionProps) => {
           const tooltip = item.text.length > 40;
-          const itemRef = React.useRef(null);
-          const [tooltipVisible, setTooltipVisible] = React.useState(false);
-          return (
-            <MenuItem ref={itemRef} dimension="s" {...options} key={id} role="option">
-              <Option href={item.url}>{tooltip ? item.text.slice(0, 37) + '...' : item.text}</Option>
-              {tooltip && (
-                <Tooltip
-                  targetRef={itemRef}
-                  visible={tooltipVisible}
-                  onVisibilityChange={setTooltipVisible}
-                  renderContent={() => item.text}
-                />
-              )}
+          return tooltip ? (
+            <MenuItemWithTooltip
+              renderContent={() => item.text}
+              dimension={dimension}
+              {...options}
+              key={id}
+              role="option"
+            >
+              <Option href={item.url} as={item.linkAs} {...item.linkProps}>
+                {item.text.slice(0, 37) + '...'}
+              </Option>
+            </MenuItemWithTooltip>
+          ) : (
+            <MenuItem dimension={dimension} {...options} key={id} role="option">
+              <Option href={item.url} as={item.linkAs} {...item.linkProps}>
+                {item.text}
+              </Option>
             </MenuItem>
           );
         },
@@ -59,5 +67,5 @@ export const MenuButton: React.FC<MenuButtonProps> = ({ dimension, options }) =>
     });
   }, [options]);
 
-  return <OverflowMenu dimension={dimension} items={model} />;
+  return <OverflowMenu dimension={dimension} items={model} dropContainerCssMixin={dropContainerCssMixin} />;
 };
