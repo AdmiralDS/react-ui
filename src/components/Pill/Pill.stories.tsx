@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { withDesign } from 'storybook-addon-designs';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import styled, { css, ThemeProvider } from 'styled-components';
@@ -12,6 +12,9 @@ import { ReactComponent as AlertOutline } from '@admiral-ds/icons/build/category
 import { ReactComponent as BonusOutline } from '@admiral-ds/icons/build/category/BonusOutline.svg';
 import { ReactComponent as BurnSolid } from '@admiral-ds/icons/build/category/BurnSolid.svg';
 import { mediumGroupBorderRadius, smallGroupBorderRadius } from '#src/components/themes/borderRadius';
+import { TooltipHoc } from '#src/components/TooltipHOC';
+import { Tooltip } from '#src/components/Tooltip';
+import { checkOverflow } from '#src/components/common/utils/checkOverflow';
 
 export default {
   title: 'Admiral-2.1/Pills',
@@ -276,6 +279,78 @@ const TemplateNestedPills: ComponentStory<typeof Pill> = (args) => {
   );
 };
 
+const WrapperVertical = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 20px;
+`;
+
+const StyledPill = styled(Pill)`
+  background-color: ${(p) => p.theme.color['Primary/Primary 60 Main']};
+  color: ${(p) => p.theme.color['Special/Static White']};
+`;
+
+const StyledPillWithTooltipHoc = TooltipHoc(StyledPill);
+
+const LabelWrapper = styled.div`
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+`;
+
+const TemplatePillWithTooltip: ComponentStory<typeof Pill> = (args) => {
+  const pillLabel = 'Я три дня гналась за вами, чтобы сказать, как вы мне безразличны';
+
+  const wrapperRef = React.useRef<HTMLDivElement>(null);
+  const textRef = React.useRef<HTMLDivElement>(null);
+
+  const [overflow, setOverflow] = React.useState(false);
+  const [tooltipVisible, setTooltipVisible] = React.useState(false);
+
+  React.useLayoutEffect(() => {
+    const element = textRef.current;
+    if (element && checkOverflow(element) !== overflow) {
+      setOverflow(checkOverflow(element));
+    }
+  }, [tooltipVisible, textRef.current, setOverflow]);
+
+  React.useLayoutEffect(() => {
+    function show() {
+      setTooltipVisible(true);
+    }
+    function hide() {
+      setTooltipVisible(false);
+    }
+    const wrapper = wrapperRef.current;
+    if (wrapper) {
+      wrapper.addEventListener('mouseenter', show);
+      wrapper.addEventListener('mouseleave', hide);
+      wrapper.addEventListener('focus', show);
+      wrapper.addEventListener('blur', hide);
+      return () => {
+        wrapper.removeEventListener('mouseenter', show);
+        wrapper.removeEventListener('mouseleave', hide);
+        wrapper.removeEventListener('focus', show);
+        wrapper.removeEventListener('blur', hide);
+      };
+    }
+  }, [setTooltipVisible, wrapperRef.current]);
+
+  return (
+    <WrapperVertical>
+      <StyledPillWithTooltipHoc renderContent={() => pillLabel}>
+        {pillLabel.slice(0, 40) + '...'}
+      </StyledPillWithTooltipHoc>
+      <StyledPill ref={wrapperRef} style={{ width: '253px' }}>
+        <LabelWrapper ref={textRef}>{pillLabel}</LabelWrapper>
+      </StyledPill>
+      {tooltipVisible && overflow && <Tooltip targetRef={wrapperRef} renderContent={() => pillLabel} />}
+    </WrapperVertical>
+  );
+};
+
 export const SimplePills = TemplateSimplePills.bind({});
 SimplePills.args = {};
 SimplePills.storyName = 'Pills. Базовый пример.';
@@ -287,3 +362,7 @@ PillsMenu.storyName = 'PillMenu. Pill с выпадающим списком.';
 export const NestedPills = TemplateNestedPills.bind({});
 NestedPills.args = {};
 NestedPills.storyName = 'NestedPills.';
+
+export const PillWithTooltip = TemplatePillWithTooltip.bind({});
+PillWithTooltip.args = {};
+PillWithTooltip.storyName = 'Pill с Tooltip.';
