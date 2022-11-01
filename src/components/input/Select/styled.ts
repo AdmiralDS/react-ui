@@ -5,6 +5,7 @@ import type { ComponentDimension } from '#src/components/input/types';
 import { CHIP_OFFSET, COUNTER_WIDTH } from './constants';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { skeletonMixin } from '../Container';
+import { Checkbox } from '#src/components/Checkbox';
 
 const getSelectValueHeight = (dimension?: ComponentDimension, multiple?: boolean) =>
   dimension === 's' && !multiple ? 20 : 24;
@@ -305,4 +306,14 @@ export const OptionWrapper = styled.div<{ dimension?: ComponentDimension }>`
 
 export const SpinnerMixin = css`
   padding: 3px;
+`;
+
+export const EmptyMessageWrapper = styled.div`
+  ${typography['Body/Body 1 Short']}
+  color: ${(p) => p.theme.color['Neutral/Neutral 90']};
+  padding: 8px;
+  background-color: ${(p) => p.theme.color['Special/Elevated BG']};
+  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
+  ${(p) => p.theme.shadow['Shadow 08']}
+  overflow: auto;
 `;

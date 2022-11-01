@@ -5,12 +5,14 @@ import type { ChangeEvent } from 'react';
 import * as React from 'react';
 import { withDesign } from 'storybook-addon-designs';
 import { Highlight, Option, OptionGroup, Select } from '#src/components/input/Select';
-import { IOnCloseProps } from './types';
+import { HighlightFormat, IOnCloseProps } from './types';
 import { Button } from '#src/components/Button';
 import { useState } from '@storybook/addons';
 import styled, { css, keyframes, ThemeProvider } from 'styled-components';
 import { Theme } from '#src/components/themes';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
+import { typography } from '#src/components/Typography';
+import { getTextHighlightMeta } from '#src/components/input/Select/utils';
 
 export default {
   title: 'Admiral-2.1/Input/Select',
@@ -72,11 +74,16 @@ export default {
     onChange: {
       action: 'onChange',
     },
-
     themeBorderKind: {
       control: {
         type: 'radio',
         options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
+      },
+    },
+    highlightFormat: {
+      control: {
+        type: 'radio',
+        options: ['word', 'wholly'],
       },
     },
     skeleton: {
@@ -203,22 +210,62 @@ const SelectSimpleTemplate: ComponentStory<typeof Select> = (props) => {
   );
 };
 
+const shouldRender = (text = '', searchValue = '', highlightFormat: HighlightFormat = 'word') => {
+  const splittedHighlight = highlightFormat === 'word' ? searchValue.split(' ') : [searchValue];
+  const chunks = splittedHighlight.filter(Boolean).map((chunk) => chunk.toLowerCase());
+
+  const specialCharacters = ['[', ']', '\\', '^', '$', '.', '|', '?', '*', '+', '(', ')'];
+
+  const pattern = chunks
+    .map((chunk) => {
+      const chunkForRegExp = chunk
+        .split('')
+        .map((letter) => (specialCharacters.includes(letter) ? `\\${letter}` : letter))
+        .join('');
+      return `(${chunkForRegExp})?`;
+    })
+    .join('');
+
+  const parts = text.split(new RegExp(pattern, 'gi')).filter(Boolean);
+
+  return !searchValue ? true : parts.some((part) => chunks.includes(part.toLowerCase()));
+};
+
 const SearchSelectSimpleTemplate: ComponentStory<typeof Select> = (props) => {
   const [selectValue, setSelectValue] = React.useState('');
+  const [searchValue, setSearchValue] = React.useState('');
 
   const onChange = (e: ChangeEvent<HTMLSelectElement>) => {
     setSelectValue(e.target.value);
     props.onChange?.(e);
   };
 
-  return (
-    <>
-      <Select {...props} placeholder="Placeholder" mode="searchSelect" value={selectValue} onChange={onChange}>
-        {OPTIONS_SIMPLE.map((option, ind) => (
+  const renderOptions = () => {
+    return OPTIONS_SIMPLE.map(
+      (option, ind) =>
+        shouldRender(option, searchValue) && (
           <Option key={option} value={option} disabled={ind === 4}>
             {option}
           </Option>
-        ))}
+        ),
+    ).filter((item) => !!item);
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchValue(e.target.value);
+  };
+
+  return (
+    <>
+      <Select
+        {...props}
+        onInputChange={handleInputChange}
+        placeholder="Placeholder"
+        mode="searchSelect"
+        value={selectValue}
+        onChange={onChange}
+      >
+        {renderOptions()}
       </Select>
     </>
   );
@@ -290,6 +337,11 @@ const RenderPropsTemplate: ComponentStory<typeof Select> = (props) => {
   );
 };
 
+const StyledGroup = styled(OptionGroup)`
+  color: ${(p) => p.theme.color['Purple/Purple 60 Main']};
+  ${typography['Main/S']}
+`;
+
 const OptionGroupTemplate: ComponentStory<typeof Select> = (props) => {
   const [selectValue, setSelectValue] = React.useState('Похо Торо Моронго');
 
@@ -298,10 +350,10 @@ const OptionGroupTemplate: ComponentStory<typeof Select> = (props) => {
   return (
     <>
       <Select {...props} value={selectValue} mode="searchSelect" onChange={onChange} dimension="xl">
-        <OptionGroup label="Сегодня выступают">
+        <StyledGroup label="Сегодня выступают">
           <Option value="Анигиляторная пушка">Анигиляторная пушка</Option>
           <Option value="Похо Торо Моронго">Похо Торо Моронго</Option>
-        </OptionGroup>
+        </StyledGroup>
         <OptionGroup label="Группа фрукты" disabled>
           <Option value="Саша Даль">Саша Даль</Option>
           <Option value="Алексей Елесин">Алексей Елесин</Option>

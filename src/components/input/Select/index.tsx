@@ -23,12 +23,20 @@ import {
   StringValueWrapper,
   SpinnerMixin,
   ValueWrapper,
+  EmptyMessageWrapper,
 } from './styled';
 import { preventDefault, scrollToNotVisibleELem } from './utils';
 import { changeInputData } from '#src/components/common/dom/changeInputData';
 import { useClickOutside } from '#src/components/common/hooks/useClickOutside';
 import { Spinner } from '#src/components/Spinner';
 import { DisplayValue } from './DisplayValue';
+import { DropdownContainer } from '#src/components/DropdownContainer';
+import { Menu } from '#src/components/Menu';
+import { NativeControl } from '#src/components/input/Select/NativeControl';
+import { SelectDropdown } from '#src/components/input/Select/Dropdown';
+import { DropDownProvider } from '#src/components/input/Select/Dropdown/Context';
+import { ItemProps } from '#src/components/MenuItem';
+import { HighlightWrapper } from '#src/components/input/Select/Highlight/HighlightWrapper';
 
 /**
  * Осталось сделать:
@@ -174,10 +182,13 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
     const [hoverValue, setHoverValue] = React.useState('');
     const [shouldRenderSelectValue, setShouldRenderSelectValue] = React.useState(false);
 
+    const [activeItem, setActiveItem] = React.useState<string>();
+
     const [constantOptions, setConstantOptions] = React.useState<IConstantOption[]>([]);
     const [dropDownOptions, setDropDownOptions] = React.useState<IDropdownOption[]>([]);
+    const [dropDownItems, setDropItems] = React.useState<Array<ItemProps>>([]);
 
-    const [isSearchPanelOpen, setIsSearchPanelOpen] = React.useState(false);
+    const [isSearchPanelOpen, setIsSearchPanelOpen] = React.useState(true);
     const [isFocused, setIsFocused] = React.useState(false);
 
     const selectIsUncontrolled = value === undefined;
@@ -215,7 +226,11 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
     });
 
     const onConstantOptionMount = React.useCallback(
-      (option: IConstantOption) => setConstantOptions((prev) => [...prev, option]),
+      (option: IConstantOption) =>
+        setConstantOptions((prev) => {
+          // console.log('MOUNT', prev, option);
+          return [...prev, option];
+        }),
       [],
     );
 
@@ -225,14 +240,38 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       [],
     );
 
-    const onDropDownOptionMount = React.useCallback(
-      (option: IDropdownOption) => setDropDownOptions((prev) => [...prev, option]),
+    // const onDropDownOptionMount = React.useCallback(
+    //   (option: IDropdownOption) =>
+    //     setDropDownOptions((prev) => {
+    //       return [...prev, option];
+    //     }),
+    //   [],
+    // );
+    //
+    // const onDropDownOptionUnMount = React.useCallback(
+    //   (option: IDropdownOption) =>
+    //     setDropDownOptions((prev) => {
+    //       console.log('UNMOUNT', prev, option);
+    //       return prev.filter((prevOption) => prevOption.value !== option.value);
+    //     }),
+    //   [],
+    // );
+
+    const handleDropDownOptionMount = React.useCallback(
+      (option: ItemProps) =>
+        setDropItems((prev) => {
+          // console.log('MOUNT NEW', prev, option);
+          return [...prev, option];
+        }),
       [],
     );
 
-    const onDropDownOptionUnMount = React.useCallback(
-      (option: IDropdownOption) =>
-        setDropDownOptions((prev) => prev.filter((prevOption) => prevOption.value !== option.value)),
+    const handleDropDownOptionUnMount = React.useCallback(
+      (option: ItemProps) =>
+        setDropItems((prev) => {
+          // console.log('UNMOUNT', prev, option);
+          return prev.filter((prevOption) => prevOption.id !== option.id);
+        }),
       [],
     );
 
@@ -410,18 +449,6 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       }
     };
 
-    const onSelectKeyDown = (e: React.KeyboardEvent) => {
-      const code = keyboardKey.getCode(e);
-
-      if (!code) return;
-
-      const preventKeys = [keyboardKey.Enter, keyboardKey[' '], keyboardKey.ArrowDown, keyboardKey.ArrowUp];
-      if (preventKeys.includes(code)) {
-        // Prevent native select events
-        e.preventDefault();
-      }
-    };
-
     const extendSelectValueToInputValue = () => {
       if (!visibleValueIsString || searchValue || !shouldRenderSelectValue) return;
 
@@ -444,11 +471,11 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
     const onWrapperKeyDown = (evt: React.KeyboardEvent) => {
       const code = keyboardKey.getCode(evt);
 
-      if (code === keyboardKey.ArrowUp || code === keyboardKey.ArrowDown) evt.preventDefault();
+      // if (code === keyboardKey.ArrowUp || code === keyboardKey.ArrowDown) evt.preventDefault();
       if (evt.key.length === 1) extendSelectValueToInputValue();
       if (code === keyboardKey.Backspace && !evt.repeat) deleteOrHideSelectValueOnBackspace();
       if (code === keyboardKey.Backspace) narrowSelectValueToInputValue(evt);
-      if (code === keyboardKey.Enter && isSearchPanelOpen) evt.preventDefault();
+      // if (code === keyboardKey.Enter && isSearchPanelOpen) evt.preventDefault();
     };
 
     const onFocus = (evt: React.FocusEvent<HTMLDivElement>) => {
@@ -465,7 +492,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       }
     };
 
-    const onChange = (evt: React.ChangeEvent<HTMLSelectElement>) => {
+    const handleNativeControlChange = (evt: React.ChangeEvent<HTMLSelectElement>) => {
       if (selectIsUncontrolled) {
         setLocalValue(
           multiple ? Array.from(evt.target.selectedOptions).map((option) => option.value) : evt.target.value,
@@ -494,6 +521,28 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
 
     useClickOutside([containerRef, dropDownRef], onCloseSelect);
 
+    const nativeOptions = selectRef.current ? Array.from(selectRef.current.options) : [];
+
+    const handleSelectOption = () => {
+      selectRef.current?.dispatchEvent(new Event('change', { bubbles: true }));
+    };
+
+    const handleQueryOpenDropDown = () => {
+      if (!isSearchPanelOpen) setIsSearchPanelOpen(true);
+    };
+
+    const handleWrapperClick = () => {
+      const passClick = !modeIsSelect && isSearchPanelOpen;
+      if (!passClick) handleSearchPanelToggle();
+    };
+
+    const handleClickOutside = (e: Event) => {
+      if (e.target && containerRef.current?.contains(e.target as Node)) {
+        return;
+      }
+      onCloseSelect();
+    };
+
     return (
       <SelectWrapper
         className={className}
@@ -506,43 +555,46 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
         dimension={dimension}
         ref={containerRef}
         data-status={status}
-        onKeyUp={handleKeyUp}
+        // onKeyUp={handleKeyUp}
         onKeyDown={onWrapperKeyDown}
-        onClick={handleSearchPanelToggle}
-        onMouseDown={preventDefault}
-        onBlur={onBlur}
+        onClick={handleWrapperClick}
+        // onMouseDown={preventDefault}
+        // onBlur={onBlur}
         onFocus={onFocus}
         skeleton={skeleton}
       >
-        <Hidden>
-          <ConstantSelectProvider
-            onConstantOptionMount={onConstantOptionMount}
-            onConstantOptionUnMount={onConstantOptionUnMount}
-            searchValue={searchValue}
-          >
-            {children}
-          </ConstantSelectProvider>
-        </Hidden>
-        <NativeSelect
+        <ConstantSelectProvider
+          onConstantOptionMount={onConstantOptionMount}
+          onConstantOptionUnMount={onConstantOptionUnMount}
+          searchValue={searchValue}
+        >
+          {children}
+        </ConstantSelectProvider>
+        <DropDownProvider
+          // onOptionClick={handleOptionSelect}
+          // onActivateItem={setActiveItem}
+          onDropDownOptionMount={handleDropDownOptionMount}
+          onDropDownOptionUnMount={handleDropDownOptionUnMount}
+          highlightFormat={highlightFormat}
+          // selectValue={localValue}
+          searchValue={searchValue}
+          // activeItem={activeItem}
+          dimension={dimension}
+          multiple={multiple}
+          defaultHighlighted={defaultHighlighted}
+          showCheckbox={showCheckbox}
+        >
+          {children}
+        </DropDownProvider>
+        <NativeControl
           ref={refSetter(ref, selectRef)}
           value={localValue}
           multiple={multiple}
           disabled={disabled}
-          onKeyDown={onSelectKeyDown}
-          {...props}
-          onChange={onChange}
-          // onClick срабатывает при клике на связанный с селектом label
-          // onClick не срабатывает при клике на сам селект, т.к. у селекта стоит pointer-events: none
-          // stopPropagation останавливает всплытие события и предотвращает открытие дропдауна
-          onClick={stopPropagation}
-        >
-          <option value="" />
-          {constantOptions.map((option) => (
-            <option key={option.value} value={option.value}>
-              {option.value}
-            </option>
-          ))}
-        </NativeSelect>
+          options={constantOptions}
+          onQueryOpenDropDown={handleQueryOpenDropDown}
+          onChange={handleNativeControlChange}
+        />
         <BorderedDiv />
         <ValueWrapper
           id="selectValueWrapper"
@@ -550,7 +602,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
           multiple={multiple}
           fixHeight={shouldFixHeight}
           isEmpty={isEmpty}
-          onMouseDown={preventDefault}
+          // onMouseDown={preventDefault}
         >
           {shouldRenderSelectValue && wrappedVisibleValue}
           {((placeholder && isEmpty) || !modeIsSelect) && (
@@ -569,33 +621,55 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
           )}
         </ValueWrapper>
         {isSearchPanelOpen && !skeleton && (
-          <Dropdown
+          <DropdownContainer
             targetRef={portalTargetRef || containerRef}
-            data-dimension={dimension || TextInput.defaultProps?.dimension}
-            // Запретит перенос фокуса с инпута при клике по всему, что внутри Dropdown
-            onMouseDown={preventDefault}
-            onClick={stopPropagation}
-            ref={dropDownRef}
+            data-dimension={dimension}
+            onClickOutside={handleClickOutside}
             alignSelf={alignDropdown}
-            disableAutoAlign
           >
-            <DropDownSelectProvider
-              onOptionClick={handleOptionSelect}
-              onMouseEnter={setHoverValue}
-              onDropDownOptionMount={onDropDownOptionMount}
-              onDropDownOptionUnMount={onDropDownOptionUnMount}
-              highlightFormat={highlightFormat}
-              selectValue={localValue}
-              searchValue={searchValue}
-              hoverValue={hoverValue}
-              dimension={dimension}
-              multiple={multiple}
-              defaultHighlighted={defaultHighlighted}
-              showCheckbox={showCheckbox}
-            >
-              {dropDownChildren}
-            </DropDownSelectProvider>
-          </Dropdown>
+            {dropDownItems.length ? (
+              <HighlightWrapper searchValue={searchValue} highlightFormat={highlightFormat}>
+                <Menu
+                  active={activeItem}
+                  selected={localValue}
+                  onActivateItem={setActiveItem}
+                  onSelectItem={handleOptionSelect}
+                  model={dropDownItems}
+                />
+              </HighlightWrapper>
+            ) : (
+              <EmptyMessageWrapper>{emptyMessage}</EmptyMessageWrapper>
+            )}
+          </DropdownContainer>
+
+          // <DropdownContainer
+          //   targetRef={portalTargetRef || containerRef}
+          //   data-dimension={dimension || TextInput.defaultProps?.dimension}
+          //   // Запретит перенос фокуса с инпута при клике по всему, что внутри Dropdown
+          //   onMouseDown={preventDefault}
+          //   onClick={stopPropagation}
+          //   ref={dropDownRef}
+          //   alignSelf={alignDropdown}
+          //   // disableAutoAlign
+          // >
+          //   <DropDownSelectProvider
+          //     onOptionClick={handleOptionSelect}
+          //     onMouseEnter={setHoverValue}
+          //     onDropDownOptionMount={onDropDownOptionMount}
+          //     onDropDownOptionUnMount={onDropDownOptionUnMount}
+          //     highlightFormat={highlightFormat}
+          //     selectValue={localValue}
+          //     searchValue={searchValue}
+          //     hoverValue={hoverValue}
+          //     dimension={dimension}
+          //     multiple={multiple}
+          //     defaultHighlighted={defaultHighlighted}
+          //     showCheckbox={showCheckbox}
+          //   >
+          //     {dropDownChildren}
+          //     {/*<Menu model={[]} />*/}
+          //   </DropDownSelectProvider>
+          // </DropdownContainer>
         )}
         <IconPanel multiple={multiple} dimension={dimension} onClick={stopPropagation} onMouseDown={preventDefault}>
           {isLoading && <Spinner svgMixin={SpinnerMixin} dimension={dimension === 's' ? 's' : 'm'} />}
@@ -617,6 +691,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
   },
 );
 
+// eslint-disable-next-line import/no-cycle
 export { Option } from './Option';
 export { Highlight } from './Highlight';
 export { OptionGroup } from './OptionGroup';

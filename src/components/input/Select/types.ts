@@ -1,5 +1,6 @@
 import * as React from 'react';
 import type { ComponentDimension } from '#src/components/input/types';
+import { ItemProps } from '#src/components/MenuItem';
 
 export type HighlightFormat = 'word' | 'wholly';
 
@@ -50,11 +51,28 @@ export interface IDropDownSelectContext {
   showCheckbox: boolean;
 }
 
-export interface IOptionContext {
-  onAddTextToHighlight: (text: string) => void;
+export interface DropDownContextProps {
+  onDropDownOptionMount: (option: ItemProps) => void;
+  onDropDownOptionUnMount: (option: ItemProps) => void;
+  onOptionClick?: (value: string) => void;
+  onActivateItem?: (id: string) => void;
+  selectValue?: string | string[];
+  activeItem?: string;
+  searchValue: string;
+  dimension: ComponentDimension;
+  highlightFormat: HighlightFormat;
+  multiple: boolean;
+  defaultHighlighted: boolean;
+  showCheckbox: boolean;
+}
+
+export interface HighlightContextProps {
+  onAddTextToHighlight?: (text: string) => void;
+  searchValue?: string;
+  highlightFormat?: HighlightFormat;
 }
 
 export interface IOptionGroupContext {
   disabled?: boolean;
-  label: string;
+  // label: string;
 }
