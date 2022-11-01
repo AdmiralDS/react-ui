@@ -140,6 +140,16 @@ export default {
   },
 } as ComponentMeta<typeof MenuButton>;
 
+const handleVisibilityChange = (isVisible: boolean) => {
+  if (isVisible) {
+    console.log('Menu opened');
+  } else {
+    console.log('Menu closed');
+  }
+};
+const logSelectedId = (id: string) => {
+  console.log(`selected: ${id}`);
+};
 const items = [
   {
     id: '1',
@@ -197,13 +207,12 @@ const Template1: ComponentStory<typeof MenuButton> = (args) => {
       <MenuButton
         {...args}
         selected={selected}
-        onChange={(id) => {
-          console.log(`selected: ${id}`);
+        onSelectItem={(id) => {
+          logSelectedId(id);
           setSelected(id);
         }}
         items={model}
-        onOpen={() => console.log('open menu')}
-        onClose={() => console.log('close menu')}
+        onVisibilityChange={handleVisibilityChange}
         data-dropdown-container-id="menu-button-with-dropdown"
         className="menu-button-class"
       >
@@ -257,13 +266,12 @@ const Template2: ComponentStory<typeof MenuButton> = (args) => {
       <MenuButton
         {...args}
         selected={selected}
-        onChange={(id) => {
-          console.log(`selected: ${id}`);
+        onSelectItem={(id) => {
+          logSelectedId(id);
           setSelected(id);
         }}
         items={model}
-        onOpen={() => console.log('open menu')}
-        onClose={() => console.log('close menu')}
+        onVisibilityChange={handleVisibilityChange}
       >
         test
       </MenuButton>
@@ -344,13 +352,12 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
             appearance="primary"
             dimension="xl"
             selected={selected}
-            onChange={(id) => {
-              console.log(`selected: ${id}`);
+            onSelectItem={(id) => {
+              logSelectedId(id);
               setSelected(id);
             }}
             items={modelL}
-            onOpen={() => console.log('open menu')}
-            onClose={() => console.log('close menu')}
+            onVisibilityChange={handleVisibilityChange}
           >
             Button 56
           </MenuButton>
@@ -360,13 +367,12 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
             dimension="xl"
             loading
             selected={selected}
-            onChange={(id) => {
-              console.log(`selected: ${id}`);
+            onSelectItem={(id) => {
+              logSelectedId(id);
               setSelected(id);
             }}
             items={modelL}
-            onOpen={() => console.log('open menu')}
-            onClose={() => console.log('close menu')}
+            onVisibilityChange={handleVisibilityChange}
           >
             Button 56
           </MenuButton>
@@ -375,13 +381,12 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
             appearance="secondary"
             dimension="xl"
             selected={selected}
-            onChange={(id) => {
-              console.log(`selected: ${id}`);
+            onSelectItem={(id) => {
+              logSelectedId(id);
               setSelected(id);
             }}
             items={modelL}
-            onOpen={() => console.log('open menu')}
-            onClose={() => console.log('close menu')}
+            onVisibilityChange={handleVisibilityChange}
           >
             Button 56
           </MenuButton>
@@ -391,13 +396,12 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
             dimension="xl"
             loading
             selected={selected}
-            onChange={(id) => {
-              console.log(`selected: ${id}`);
+            onSelectItem={(id) => {
+              logSelectedId(id);
               setSelected(id);
             }}
             items={modelL}
-            onOpen={() => console.log('open menu')}
-            onClose={() => console.log('close menu')}
+            onVisibilityChange={handleVisibilityChange}
           >
             Button 56
           </MenuButton>
@@ -406,13 +410,12 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
             appearance="ghost"
             dimension="xl"
             selected={selected}
-            onChange={(id) => {
-              console.log(`selected: ${id}`);
+            onSelectItem={(id) => {
+              logSelectedId(id);
               setSelected(id);
             }}
             items={modelL}
-            onOpen={() => console.log('open menu')}
-            onClose={() => console.log('close menu')}
+            onVisibilityChange={handleVisibilityChange}
           >
             Button 56
           </MenuButton>
@@ -422,13 +425,12 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
             dimension="xl"
             loading
             selected={selected}
-            onChange={(id) => {
-              console.log(`selected: ${id}`);
+            onSelectItem={(id) => {
+              logSelectedId(id);
               setSelected(id);
             }}
             items={modelL}
-            onOpen={() => console.log('open menu')}
-            onClose={() => console.log('close menu')}
+            onVisibilityChange={handleVisibilityChange}
           >
             Button 56
           </MenuButton>
@@ -438,13 +440,12 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
               appearance="white"
               dimension="xl"
               selected={selected}
-              onChange={(id) => {
-                console.log(`selected: ${id}`);
+              onSelectItem={(id) => {
+                logSelectedId(id);
                 setSelected(id);
               }}
               items={modelL}
-              onOpen={() => console.log('open menu')}
-              onClose={() => console.log('close menu')}
+              onVisibilityChange={handleVisibilityChange}
             >
               Button 56
             </MenuButton>
@@ -456,13 +457,12 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
               dimension="xl"
               loading
               selected={selected}
-              onChange={(id) => {
-                console.log(`selected: ${id}`);
+              onSelectItem={(id) => {
+                logSelectedId(id);
                 setSelected(id);
               }}
               items={modelL}
-              onOpen={() => console.log('open menu')}
-              onClose={() => console.log('close menu')}
+              onVisibilityChange={handleVisibilityChange}
             >
               Button 56
             </MenuButton>
@@ -478,13 +478,12 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
             appearance="primary"
             dimension="l"
             selected={selected}
-            onChange={(id) => {
-              console.log(`selected: ${id}`);
+            onSelectItem={(id) => {
+              logSelectedId(id);
               setSelected(id);
             }}
             items={modelL}
-            onOpen={() => console.log('open menu')}
-            onClose={() => console.log('close menu')}
+            onVisibilityChange={handleVisibilityChange}
           >
             Button 56
           </MenuButton>
@@ -494,13 +493,12 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
             dimension="l"
             loading
             selected={selected}
-            onChange={(id) => {
-              console.log(`selected: ${id}`);
+            onSelectItem={(id) => {
+              logSelectedId(id);
               setSelected(id);
             }}
             items={modelL}
-            onOpen={() => console.log('open menu')}
-            onClose={() => console.log('close menu')}
+            onVisibilityChange={handleVisibilityChange}
           >
             Button 56
           </MenuButton>
@@ -509,13 +507,12 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
             appearance="secondary"
             dimension="l"
             selected={selected}
-            onChange={(id) => {
-              console.log(`selected: ${id}`);
+            onSelectItem={(id) => {
+              logSelectedId(id);
               setSelected(id);
             }}
             items={modelL}
-            onOpen={() => console.log('open menu')}
-            onClose={() => console.log('close menu')}
+            onVisibilityChange={handleVisibilityChange}
           >
             Button 56
           </MenuButton>
@@ -525,13 +522,12 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
             dimension="l"
             loading
             selected={selected}
-            onChange={(id) => {
-              console.log(`selected: ${id}`);
+            onSelectItem={(id) => {
+              logSelectedId(id);
               setSelected(id);
             }}
             items={modelL}
-            onOpen={() => console.log('open menu')}
-            onClose={() => console.log('close menu')}
+            onVisibilityChange={handleVisibilityChange}
           >
             Button 56
           </MenuButton>
@@ -540,13 +536,12 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
             appearance="ghost"
             dimension="l"
             selected={selected}
-            onChange={(id) => {
-              console.log(`selected: ${id}`);
+            onSelectItem={(id) => {
+              logSelectedId(id);
               setSelected(id);
             }}
             items={modelL}
-            onOpen={() => console.log('open menu')}
-            onClose={() => console.log('close menu')}
+            onVisibilityChange={handleVisibilityChange}
           >
             Button 56
           </MenuButton>
@@ -556,13 +551,12 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
             dimension="l"
             loading
             selected={selected}
-            onChange={(id) => {
-              console.log(`selected: ${id}`);
+            onSelectItem={(id) => {
+              logSelectedId(id);
               setSelected(id);
             }}
             items={modelL}
-            onOpen={() => console.log('open menu')}
-            onClose={() => console.log('close menu')}
+            onVisibilityChange={handleVisibilityChange}
           >
             Button 56
           </MenuButton>
@@ -572,13 +566,12 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
               appearance="white"
               dimension="l"
               selected={selected}
-              onChange={(id) => {
-                console.log(`selected: ${id}`);
+              onSelectItem={(id) => {
+                logSelectedId(id);
                 setSelected(id);
               }}
               items={modelL}
-              onOpen={() => console.log('open menu')}
-              onClose={() => console.log('close menu')}
+              onVisibilityChange={handleVisibilityChange}
             >
               Button 56
             </MenuButton>
@@ -590,13 +583,12 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
               dimension="l"
               loading
               selected={selected}
-              onChange={(id) => {
-                console.log(`selected: ${id}`);
+              onSelectItem={(id) => {
+                logSelectedId(id);
                 setSelected(id);
               }}
               items={modelL}
-              onOpen={() => console.log('open menu')}
-              onClose={() => console.log('close menu')}
+              onVisibilityChange={handleVisibilityChange}
             >
               Button 56
             </MenuButton>
@@ -612,13 +604,12 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
             appearance="primary"
             dimension="m"
             selected={selected}
-            onChange={(id) => {
-              console.log(`selected: ${id}`);
+            onSelectItem={(id) => {
+              logSelectedId(id);
               setSelected(id);
             }}
             items={modelM}
-            onOpen={() => console.log('open menu')}
-            onClose={() => console.log('close menu')}
+            onVisibilityChange={handleVisibilityChange}
           >
             Button 56
           </MenuButton>
@@ -628,13 +619,12 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
             dimension="m"
             loading
             selected={selected}
-            onChange={(id) => {
-              console.log(`selected: ${id}`);
+            onSelectItem={(id) => {
+              logSelectedId(id);
               setSelected(id);
             }}
             items={modelM}
-            onOpen={() => console.log('open menu')}
-            onClose={() => console.log('close menu')}
+            onVisibilityChange={handleVisibilityChange}
           >
             Button 56
           </MenuButton>
@@ -643,13 +633,12 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
             appearance="secondary"
             dimension="m"
             selected={selected}
-            onChange={(id) => {
-              console.log(`selected: ${id}`);
+            onSelectItem={(id) => {
+              logSelectedId(id);
               setSelected(id);
             }}
             items={modelM}
-            onOpen={() => console.log('open menu')}
-            onClose={() => console.log('close menu')}
+            onVisibilityChange={handleVisibilityChange}
           >
             Button 56
           </MenuButton>
@@ -659,13 +648,12 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
             dimension="m"
             loading
             selected={selected}
-            onChange={(id) => {
-              console.log(`selected: ${id}`);
+            onSelectItem={(id) => {
+              logSelectedId(id);
               setSelected(id);
             }}
             items={modelM}
-            onOpen={() => console.log('open menu')}
-            onClose={() => console.log('close menu')}
+            onVisibilityChange={handleVisibilityChange}
           >
             Button 56
           </MenuButton>
@@ -674,13 +662,12 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
             appearance="ghost"
             dimension="m"
             selected={selected}
-            onChange={(id) => {
-              console.log(`selected: ${id}`);
+            onSelectItem={(id) => {
+              logSelectedId(id);
               setSelected(id);
             }}
             items={modelM}
-            onOpen={() => console.log('open menu')}
-            onClose={() => console.log('close menu')}
+            onVisibilityChange={handleVisibilityChange}
           >
             Button 56
           </MenuButton>
@@ -690,13 +677,12 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
             dimension="m"
             loading
             selected={selected}
-            onChange={(id) => {
-              console.log(`selected: ${id}`);
+            onSelectItem={(id) => {
+              logSelectedId(id);
               setSelected(id);
             }}
             items={modelM}
-            onOpen={() => console.log('open menu')}
-            onClose={() => console.log('close menu')}
+            onVisibilityChange={handleVisibilityChange}
           >
             Button 56
           </MenuButton>
@@ -706,13 +692,12 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
               appearance="white"
               dimension="m"
               selected={selected}
-              onChange={(id) => {
-                console.log(`selected: ${id}`);
+              onSelectItem={(id) => {
+                logSelectedId(id);
                 setSelected(id);
               }}
               items={modelM}
-              onOpen={() => console.log('open menu')}
-              onClose={() => console.log('close menu')}
+              onVisibilityChange={handleVisibilityChange}
             >
               Button 56
             </MenuButton>
@@ -724,13 +709,12 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
               dimension="m"
               loading
               selected={selected}
-              onChange={(id) => {
-                console.log(`selected: ${id}`);
+              onSelectItem={(id) => {
+                logSelectedId(id);
                 setSelected(id);
               }}
               items={modelM}
-              onOpen={() => console.log('open menu')}
-              onClose={() => console.log('close menu')}
+              onVisibilityChange={handleVisibilityChange}
             >
               Button 56
             </MenuButton>
@@ -746,13 +730,12 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
             appearance="primary"
             dimension="s"
             selected={selected}
-            onChange={(id) => {
-              console.log(`selected: ${id}`);
+            onSelectItem={(id) => {
+              logSelectedId(id);
               setSelected(id);
             }}
             items={modelS}
-            onOpen={() => console.log('open menu')}
-            onClose={() => console.log('close menu')}
+            onVisibilityChange={handleVisibilityChange}
           >
             Button 56
           </MenuButton>
@@ -762,13 +745,12 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
             dimension="s"
             loading
             selected={selected}
-            onChange={(id) => {
-              console.log(`selected: ${id}`);
+            onSelectItem={(id) => {
+              logSelectedId(id);
               setSelected(id);
             }}
             items={modelS}
-            onOpen={() => console.log('open menu')}
-            onClose={() => console.log('close menu')}
+            onVisibilityChange={handleVisibilityChange}
           >
             Button 56
           </MenuButton>
@@ -777,13 +759,12 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
             appearance="secondary"
             dimension="s"
             selected={selected}
-            onChange={(id) => {
-              console.log(`selected: ${id}`);
+            onSelectItem={(id) => {
+              logSelectedId(id);
               setSelected(id);
             }}
             items={modelS}
-            onOpen={() => console.log('open menu')}
-            onClose={() => console.log('close menu')}
+            onVisibilityChange={handleVisibilityChange}
           >
             Button 56
           </MenuButton>
@@ -793,13 +774,12 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
             dimension="s"
             loading
             selected={selected}
-            onChange={(id) => {
-              console.log(`selected: ${id}`);
+            onSelectItem={(id) => {
+              logSelectedId(id);
               setSelected(id);
             }}
             items={modelS}
-            onOpen={() => console.log('open menu')}
-            onClose={() => console.log('close menu')}
+            onVisibilityChange={handleVisibilityChange}
           >
             Button 56
           </MenuButton>
@@ -808,13 +788,12 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
             appearance="ghost"
             dimension="s"
             selected={selected}
-            onChange={(id) => {
-              console.log(`selected: ${id}`);
+            onSelectItem={(id) => {
+              logSelectedId(id);
               setSelected(id);
             }}
             items={modelS}
-            onOpen={() => console.log('open menu')}
-            onClose={() => console.log('close menu')}
+            onVisibilityChange={handleVisibilityChange}
           >
             Button 56
           </MenuButton>
@@ -824,13 +803,12 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
             dimension="s"
             loading
             selected={selected}
-            onChange={(id) => {
-              console.log(`selected: ${id}`);
+            onSelectItem={(id) => {
+              logSelectedId(id);
               setSelected(id);
             }}
             items={modelS}
-            onOpen={() => console.log('open menu')}
-            onClose={() => console.log('close menu')}
+            onVisibilityChange={handleVisibilityChange}
           >
             Button 56
           </MenuButton>
@@ -840,13 +818,12 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
               appearance="white"
               dimension="s"
               selected={selected}
-              onChange={(id) => {
-                console.log(`selected: ${id}`);
+              onSelectItem={(id) => {
+                logSelectedId(id);
                 setSelected(id);
               }}
               items={modelS}
-              onOpen={() => console.log('open menu')}
-              onClose={() => console.log('close menu')}
+              onVisibilityChange={handleVisibilityChange}
             >
               Button 56
             </MenuButton>
@@ -858,13 +835,12 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
               dimension="s"
               loading
               selected={selected}
-              onChange={(id) => {
-                console.log(`selected: ${id}`);
+              onSelectItem={(id) => {
+                logSelectedId(id);
                 setSelected(id);
               }}
               items={modelS}
-              onOpen={() => console.log('open menu')}
-              onClose={() => console.log('close menu')}
+              onVisibilityChange={handleVisibilityChange}
             >
               Button 56
             </MenuButton>
@@ -948,13 +924,12 @@ const Template4: ComponentStory<typeof MenuButton> = (args) => {
             appearance="primary"
             dimension="xl"
             selected={selected}
-            onChange={(id) => {
-              console.log(`selected: ${id}`);
+            onSelectItem={(id) => {
+              logSelectedId(id);
               setSelected(id);
             }}
             items={modelL}
-            onOpen={() => console.log('open menu')}
-            onClose={() => console.log('close menu')}
+            onVisibilityChange={handleVisibilityChange}
           >
             <StarSolid />
             Button 56
@@ -964,13 +939,12 @@ const Template4: ComponentStory<typeof MenuButton> = (args) => {
             appearance="secondary"
             dimension="xl"
             selected={selected}
-            onChange={(id) => {
-              console.log(`selected: ${id}`);
+            onSelectItem={(id) => {
+              logSelectedId(id);
               setSelected(id);
             }}
             items={modelL}
-            onOpen={() => console.log('open menu')}
-            onClose={() => console.log('close menu')}
+            onVisibilityChange={handleVisibilityChange}
           >
             <StarSolid />
             Button 56
@@ -980,13 +954,12 @@ const Template4: ComponentStory<typeof MenuButton> = (args) => {
             appearance="ghost"
             dimension="xl"
             selected={selected}
-            onChange={(id) => {
-              console.log(`selected: ${id}`);
+            onSelectItem={(id) => {
+              logSelectedId(id);
               setSelected(id);
             }}
             items={modelL}
-            onOpen={() => console.log('open menu')}
-            onClose={() => console.log('close menu')}
+            onVisibilityChange={handleVisibilityChange}
           >
             <StarSolid />
             Button 56
@@ -997,13 +970,12 @@ const Template4: ComponentStory<typeof MenuButton> = (args) => {
               appearance="white"
               dimension="xl"
               selected={selected}
-              onChange={(id) => {
-                console.log(`selected: ${id}`);
+              onSelectItem={(id) => {
+                logSelectedId(id);
                 setSelected(id);
               }}
               items={modelL}
-              onOpen={() => console.log('open menu')}
-              onClose={() => console.log('close menu')}
+              onVisibilityChange={handleVisibilityChange}
             >
               <StarSolid />
               Button 56
@@ -1020,13 +992,12 @@ const Template4: ComponentStory<typeof MenuButton> = (args) => {
             appearance="primary"
             dimension="l"
             selected={selected}
-            onChange={(id) => {
-              console.log(`selected: ${id}`);
+            onSelectItem={(id) => {
+              logSelectedId(id);
               setSelected(id);
             }}
             items={modelL}
-            onOpen={() => console.log('open menu')}
-            onClose={() => console.log('close menu')}
+            onVisibilityChange={handleVisibilityChange}
           >
             <StarSolid />
             Button 56
@@ -1036,13 +1007,12 @@ const Template4: ComponentStory<typeof MenuButton> = (args) => {
             appearance="secondary"
             dimension="l"
             selected={selected}
-            onChange={(id) => {
-              console.log(`selected: ${id}`);
+            onSelectItem={(id) => {
+              logSelectedId(id);
               setSelected(id);
             }}
             items={modelL}
-            onOpen={() => console.log('open menu')}
-            onClose={() => console.log('close menu')}
+            onVisibilityChange={handleVisibilityChange}
           >
             <StarSolid />
             Button 56
@@ -1052,13 +1022,12 @@ const Template4: ComponentStory<typeof MenuButton> = (args) => {
             appearance="ghost"
             dimension="l"
             selected={selected}
-            onChange={(id) => {
-              console.log(`selected: ${id}`);
+            onSelectItem={(id) => {
+              logSelectedId(id);
               setSelected(id);
             }}
             items={modelL}
-            onOpen={() => console.log('open menu')}
-            onClose={() => console.log('close menu')}
+            onVisibilityChange={handleVisibilityChange}
           >
             <StarSolid />
             Button 56
@@ -1069,13 +1038,12 @@ const Template4: ComponentStory<typeof MenuButton> = (args) => {
               appearance="white"
               dimension="l"
               selected={selected}
-              onChange={(id) => {
-                console.log(`selected: ${id}`);
+              onSelectItem={(id) => {
+                logSelectedId(id);
                 setSelected(id);
               }}
               items={modelL}
-              onOpen={() => console.log('open menu')}
-              onClose={() => console.log('close menu')}
+              onVisibilityChange={handleVisibilityChange}
             >
               <StarSolid />
               Button 56
@@ -1092,13 +1060,12 @@ const Template4: ComponentStory<typeof MenuButton> = (args) => {
             appearance="primary"
             dimension="m"
             selected={selected}
-            onChange={(id) => {
-              console.log(`selected: ${id}`);
+            onSelectItem={(id) => {
+              logSelectedId(id);
               setSelected(id);
             }}
             items={modelM}
-            onOpen={() => console.log('open menu')}
-            onClose={() => console.log('close menu')}
+            onVisibilityChange={handleVisibilityChange}
           >
             <StarSolid />
             Button 56
@@ -1108,13 +1075,12 @@ const Template4: ComponentStory<typeof MenuButton> = (args) => {
             appearance="secondary"
             dimension="m"
             selected={selected}
-            onChange={(id) => {
-              console.log(`selected: ${id}`);
+            onSelectItem={(id) => {
+              logSelectedId(id);
               setSelected(id);
             }}
             items={modelM}
-            onOpen={() => console.log('open menu')}
-            onClose={() => console.log('close menu')}
+            onVisibilityChange={handleVisibilityChange}
           >
             <StarSolid />
             Button 56
@@ -1124,13 +1090,12 @@ const Template4: ComponentStory<typeof MenuButton> = (args) => {
             appearance="ghost"
             dimension="m"
             selected={selected}
-            onChange={(id) => {
-              console.log(`selected: ${id}`);
+            onSelectItem={(id) => {
+              logSelectedId(id);
               setSelected(id);
             }}
             items={modelM}
-            onOpen={() => console.log('open menu')}
-            onClose={() => console.log('close menu')}
+            onVisibilityChange={handleVisibilityChange}
           >
             <StarSolid />
             Button 56
@@ -1141,13 +1106,12 @@ const Template4: ComponentStory<typeof MenuButton> = (args) => {
               appearance="white"
               dimension="m"
               selected={selected}
-              onChange={(id) => {
-                console.log(`selected: ${id}`);
+              onSelectItem={(id) => {
+                logSelectedId(id);
                 setSelected(id);
               }}
               items={modelM}
-              onOpen={() => console.log('open menu')}
-              onClose={() => console.log('close menu')}
+              onVisibilityChange={handleVisibilityChange}
             >
               <StarSolid />
               Button 56
@@ -1164,13 +1128,12 @@ const Template4: ComponentStory<typeof MenuButton> = (args) => {
             appearance="primary"
             dimension="s"
             selected={selected}
-            onChange={(id) => {
-              console.log(`selected: ${id}`);
+            onSelectItem={(id) => {
+              logSelectedId(id);
               setSelected(id);
             }}
             items={modelS}
-            onOpen={() => console.log('open menu')}
-            onClose={() => console.log('close menu')}
+            onVisibilityChange={handleVisibilityChange}
           >
             <StarSolid />
             Button 56
@@ -1180,13 +1143,12 @@ const Template4: ComponentStory<typeof MenuButton> = (args) => {
             appearance="secondary"
             dimension="s"
             selected={selected}
-            onChange={(id) => {
-              console.log(`selected: ${id}`);
+            onSelectItem={(id) => {
+              logSelectedId(id);
               setSelected(id);
             }}
             items={modelS}
-            onOpen={() => console.log('open menu')}
-            onClose={() => console.log('close menu')}
+            onVisibilityChange={handleVisibilityChange}
           >
             <StarSolid />
             Button 56
@@ -1196,13 +1158,12 @@ const Template4: ComponentStory<typeof MenuButton> = (args) => {
             appearance="ghost"
             dimension="s"
             selected={selected}
-            onChange={(id) => {
-              console.log(`selected: ${id}`);
+            onSelectItem={(id) => {
+              logSelectedId(id);
               setSelected(id);
             }}
             items={modelS}
-            onOpen={() => console.log('open menu')}
-            onClose={() => console.log('close menu')}
+            onVisibilityChange={handleVisibilityChange}
           >
             <StarSolid />
             Button 56
@@ -1213,13 +1174,12 @@ const Template4: ComponentStory<typeof MenuButton> = (args) => {
               appearance="white"
               dimension="s"
               selected={selected}
-              onChange={(id) => {
-                console.log(`selected: ${id}`);
+              onSelectItem={(id) => {
+                logSelectedId(id);
                 setSelected(id);
               }}
               items={modelS}
-              onOpen={() => console.log('open menu')}
-              onClose={() => console.log('close menu')}
+              onVisibilityChange={handleVisibilityChange}
             >
               <StarSolid />
               Button 56

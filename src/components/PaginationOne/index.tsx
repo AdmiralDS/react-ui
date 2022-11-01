@@ -167,7 +167,7 @@ export const PaginationOne: React.FC<PaginationOneProps> = ({
           <MenuButton
             options={pageSizes}
             selected={pageSize.toString()}
-            onChange={handleSizeChange}
+            onSelectItem={handleSizeChange}
             disabled={pageSizeSelectDisabled}
             aria-label={pageSizeSelectLabel(pageSize, totalItems)}
             dropMaxHeight={dropMaxHeight}
@@ -192,7 +192,7 @@ export const PaginationOne: React.FC<PaginationOneProps> = ({
           <MenuButton
             options={pages}
             selected={page.toString()}
-            onChange={handlePageInputChange}
+            onSelectItem={handlePageInputChange}
             disabled={pageSelectDisabled}
             aria-label={pageSelectLabel(page, totalPages)}
             dropMaxHeight={dropMaxHeight}

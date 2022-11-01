@@ -127,8 +127,9 @@ export interface TableRow extends Record<RowId, React.ReactNode> {
   /** Функция рендера содержимого раскрытой части строки (детализации строки) */
   expandedRowRender?: (row: any) => React.ReactNode;
   /** Функция рендера OverflowMenu для строки.
-   * Входные параметры: сама строка, колбеки onMenuOpen и onMenuClose.
-   * Колбеки необходимо вызывать при открытии/закрытии меню для того, чтобы таблица могла управлять видимостью OverflowMenu.
+   * Входные параметры: сама строка, колбеки onMenuOpen/onMenuClose (устаревшее api, впоследствии будет удалено) и onVisibilityChange (актуальное api).
+   * Рекомендуется использовать колбек onVisibilityChange вместо onMenuOpen/onMenuClose.
+   * Колбек необходимо вызывать при открытии/закрытии меню для того, чтобы таблица могла управлять видимостью OverflowMenu.
    * OverflowMenu отображается при ховере на строку или при открытом меню
    * и располагается по правому краю строки в видимой области таблицы.
    *
@@ -136,7 +137,14 @@ export interface TableRow extends Record<RowId, React.ReactNode> {
    * Для таблицы с dimension='s' или dimension='m' используется OverflowMenu c dimension='m'.
    * Для таблицы с dimension='l' или dimension='xl' используется OverflowMenu c dimension='l'.
    */
-  overflowMenuRender?: (row: any, onMenuOpen: () => void, onMenuClose: () => void) => React.ReactNode;
+  overflowMenuRender?: (
+    row: any,
+    /** @deprecated use onVisibilityChange instead */
+    onMenuOpen?: () => void,
+    /** @deprecated use onVisibilityChange instead */
+    onMenuClose?: () => void,
+    onVisibilityChange?: (isVisible: boolean) => void,
+  ) => React.ReactNode;
   /** Функция рендера одиночного действия над строкой.
    * Одиночное действие отображается в виде иконки при ховере на строку
    * и располагается по правому краю строки в видимой области таблицы.
@@ -587,13 +595,9 @@ export const Table: React.FC<TableProps> = ({
             onClick={sortable ? () => handleSort(name, sort || 'initial') : undefined}
           >
             <TitleContent dimension={dimension} sortable={sortable}>
-              <TitleText dimension={dimension} lineClamp={headerLineClamp}>
-                {title}
-              </TitleText>
+              <TitleText dimension={dimension} lineClamp={headerLineClamp} title={title} />
               {extraText && (
-                <TitleText extraText dimension={dimension} lineClamp={headerExtraLineClamp}>
-                  {extraText}
-                </TitleText>
+                <TitleText extraText dimension={dimension} lineClamp={headerExtraLineClamp} title={extraText} />
               )}
             </TitleContent>
             {sortable && (

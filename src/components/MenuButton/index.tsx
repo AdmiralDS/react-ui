@@ -2,7 +2,7 @@ import type { HTMLAttributes } from 'react';
 import * as React from 'react';
 
 import { ItemProps } from '#src/components/Menu/MenuItem';
-import { DropMenu } from '#src/components/DropMenu';
+import { DropMenu, DropMenuComponentProps } from '#src/components/DropMenu';
 import { uid } from '#src/components/common/uid';
 import { Button } from '#src/components/Button';
 import { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
@@ -11,16 +11,19 @@ import { passDropdownDataAttributes } from '#src/components/common/utils/splitDa
 export type MenuButtonDimension = 'xl' | 'l' | 'm' | 's';
 export type MenuButtonAppearance = 'primary' | 'secondary' | 'ghost' | 'white';
 
-export interface MenuButtonProps extends Omit<HTMLAttributes<HTMLButtonElement>, 'onChange'> {
+export interface MenuButtonProps extends Omit<HTMLAttributes<HTMLButtonElement>, 'onChange'>, DropMenuComponentProps {
   /** Массив опций */
   items: Array<ItemProps>;
   /** Выбранная опция */
   selected?: string;
-  /** Колбек на изменение выбранной опции */
+  /** @deprecated use onSelectItem instead
+   * Колбек на изменение выбранной опции */
   onChange: (id: string) => void;
-  /** Колбек на открытие меню */
+  /** @deprecated use isVisible and onVisibilityChange instead
+   * Колбек на открытие меню */
   onOpen?: () => void;
-  /** Колбек на закрытие меню */
+  /** @deprecated use isVisible and onVisibilityChange instead
+   * Колбек на закрытие меню */
   onClose?: () => void;
   /** Размер компонента */
   dimension?: MenuButtonDimension;
@@ -55,7 +58,14 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
       onClose,
       onOpen,
       items,
+      disableSelectedOptionHighlight,
       selected,
+      onSelectItem,
+      active,
+      onActivateItem,
+      isVisible,
+      onVisibilityChange,
+      onClickOutside,
       onChange,
       menuWidth,
       menuMaxHeight,
@@ -74,11 +84,18 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
           onChange={onChange}
           onOpen={onOpen}
           onClose={onClose}
+          isVisible={isVisible}
+          onVisibilityChange={onVisibilityChange}
+          onClickOutside={onClickOutside}
           ref={ref}
           dimension={dimension === 'xl' ? 'l' : dimension}
           disabled={skeleton ? true : disabled}
           loading={loading}
+          disableSelectedOptionHighlight={disableSelectedOptionHighlight}
           selected={selected}
+          onSelectItem={onSelectItem}
+          active={active}
+          onActivateItem={onActivateItem}
           menuMaxHeight={menuMaxHeight}
           menuWidth={menuWidth}
           dropContainerCssMixin={dropContainerCssMixin}

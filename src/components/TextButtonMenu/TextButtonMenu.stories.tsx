@@ -84,6 +84,17 @@ export default {
   },
 } as ComponentMeta<typeof TextButtonMenu>;
 
+const handleVisibilityChange = (isVisible: boolean) => {
+  if (isVisible) {
+    console.log('Menu opened');
+  } else {
+    console.log('Menu closed');
+  }
+};
+const logSelectedId = (id: string) => {
+  console.log(`selected: ${id}`);
+};
+
 const items = [
   {
     id: '1',
@@ -146,13 +157,12 @@ const TextButtonMenuStory: ComponentStory<typeof TextButtonMenu> = (args) => {
           loading={args.loading}
           disabled={args.disabled}
           appearance={args.appearance}
-          onChange={(id) => {
-            console.log(`selected: ${id}`);
+          onSelectItem={(id) => {
+            logSelectedId(id);
             setSelected(id);
           }}
           items={model}
-          onOpen={() => console.log('open menu')}
-          onClose={() => console.log('close menu')}
+          onVisibilityChange={handleVisibilityChange}
           data-dropdown-container-id="text-button-menu-with-dropdown"
           className="text-button-menu-class"
         />
@@ -175,8 +185,8 @@ const TextButtonMenuSizes: ComponentStory<typeof TextButtonMenu> = (args) => {
     }));
   }, [args.dimension]);
 
-  const handleChange = (id: string) => {
-    console.log(`selected: ${id}`);
+  const handleSelectItem = (id: string) => {
+    logSelectedId(id);
     setSelected(id);
   };
   return (
@@ -191,7 +201,7 @@ const TextButtonMenuSizes: ComponentStory<typeof TextButtonMenu> = (args) => {
           dimension="m"
           text="Text Button"
           appearance="primary"
-          onChange={handleChange}
+          onSelectItem={handleSelectItem}
         />
         <Separator />
         <TextButtonMenu
@@ -199,7 +209,7 @@ const TextButtonMenuSizes: ComponentStory<typeof TextButtonMenu> = (args) => {
           selected={selected}
           dimension="m"
           text="Text Button"
-          onChange={handleChange}
+          onSelectItem={handleSelectItem}
           loading
         />
         <Separator />
@@ -209,20 +219,26 @@ const TextButtonMenuSizes: ComponentStory<typeof TextButtonMenu> = (args) => {
           dimension="m"
           text="Text Button"
           disabled
-          onChange={handleChange}
+          onSelectItem={handleSelectItem}
         />
         <Separator />
         <StyledText font="Body/Body 1 Long" as="div">
           Dimension - S
         </StyledText>
-        <TextButtonMenu items={model} selected={selected} dimension="s" text="Text Button" onChange={handleChange} />
+        <TextButtonMenu
+          items={model}
+          selected={selected}
+          dimension="s"
+          text="Text Button"
+          onSelectItem={handleSelectItem}
+        />
         <Separator />
         <TextButtonMenu
           items={model}
           selected={selected}
           dimension="s"
           text="Text Button"
-          onChange={handleChange}
+          onSelectItem={handleSelectItem}
           loading
         />
         <Separator />
@@ -231,7 +247,7 @@ const TextButtonMenuSizes: ComponentStory<typeof TextButtonMenu> = (args) => {
           selected={selected}
           dimension="s"
           text="Text Button"
-          onChange={handleChange}
+          onSelectItem={handleSelectItem}
           disabled
         />
       </div>
@@ -245,7 +261,7 @@ const TextButtonMenuSizes: ComponentStory<typeof TextButtonMenu> = (args) => {
           dimension="m"
           text="Text Button"
           appearance="secondary"
-          onChange={handleChange}
+          onSelectItem={handleSelectItem}
         />
         <Separator />
         <TextButtonMenu
@@ -254,7 +270,7 @@ const TextButtonMenuSizes: ComponentStory<typeof TextButtonMenu> = (args) => {
           dimension="m"
           text="Text Button"
           appearance="secondary"
-          onChange={handleChange}
+          onSelectItem={handleSelectItem}
           loading
         />
         <Separator />
@@ -265,7 +281,7 @@ const TextButtonMenuSizes: ComponentStory<typeof TextButtonMenu> = (args) => {
           text="Text Button"
           appearance="secondary"
           disabled
-          onChange={handleChange}
+          onSelectItem={handleSelectItem}
         />
         <Separator />
         <StyledText font="Body/Body 1 Long" as="div">
@@ -277,7 +293,7 @@ const TextButtonMenuSizes: ComponentStory<typeof TextButtonMenu> = (args) => {
           dimension="s"
           text="Text Button"
           appearance="secondary"
-          onChange={handleChange}
+          onSelectItem={handleSelectItem}
         />
         <Separator />
         <TextButtonMenu
@@ -286,7 +302,7 @@ const TextButtonMenuSizes: ComponentStory<typeof TextButtonMenu> = (args) => {
           dimension="s"
           text="Text Button"
           appearance="secondary"
-          onChange={handleChange}
+          onSelectItem={handleSelectItem}
           loading
         />
         <Separator />
@@ -296,7 +312,7 @@ const TextButtonMenuSizes: ComponentStory<typeof TextButtonMenu> = (args) => {
           dimension="s"
           text="Text Button"
           appearance="secondary"
-          onChange={handleChange}
+          onSelectItem={handleSelectItem}
           disabled
         />
       </div>
