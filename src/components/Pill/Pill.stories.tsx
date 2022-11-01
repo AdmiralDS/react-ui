@@ -1,20 +1,20 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { withDesign } from 'storybook-addon-designs';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import styled, { css, ThemeProvider } from 'styled-components';
 import { Theme } from '#src/components/themes';
 import { Color, Shape } from '#src/components/themes/common';
+import { smallGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { DropMenu } from '#src/components/DropMenu';
 import { MenuItem, RenderOptionProps } from '#src/components/Menu/MenuItem';
+import { TooltipHoc } from '#src/components/TooltipHOC';
+import { Tooltip } from '#src/components/Tooltip';
+import { checkOverflow } from '#src/components/common/utils/checkOverflow';
 import { Pill, Pills } from '#src/components/Pill/index';
 import { ReactComponent as HeartOutline } from '@admiral-ds/icons/build/category/HeartOutline.svg';
 import { ReactComponent as AlertOutline } from '@admiral-ds/icons/build/category/AlertOutline.svg';
 import { ReactComponent as BonusOutline } from '@admiral-ds/icons/build/category/BonusOutline.svg';
 import { ReactComponent as BurnSolid } from '@admiral-ds/icons/build/category/BurnSolid.svg';
-import { mediumGroupBorderRadius, smallGroupBorderRadius } from '#src/components/themes/borderRadius';
-import { TooltipHoc } from '#src/components/TooltipHOC';
-import { Tooltip } from '#src/components/Tooltip';
-import { checkOverflow } from '#src/components/common/utils/checkOverflow';
 
 export default {
   title: 'Admiral-2.1/Pills',
@@ -43,6 +43,12 @@ export default {
     },
   },
 } as ComponentMeta<typeof Pill>;
+
+const Desc = styled.div`
+  font-family: 'VTB Group UI';
+  font-size: 16px;
+  line-height: 24px;
+`;
 
 type Status = 'Error' | 'Success' | 'Special' | 'Warning' | 'Attention';
 
@@ -107,18 +113,30 @@ const TemplateSimplePills: ComponentStory<typeof Pill> = (args) => {
   return (
     <>
       <ThemeProvider theme={swapBorder}>
-        <></>
-        <Pills>
-          <StatusPill status="Success">
-            <HeartOutlinePillIcon />
-            <span>Playground</span>
-          </StatusPill>
-          <StatusPill status="Error">Playground</StatusPill>
-          <StatusPill status="Warning">Playground</StatusPill>
-          <StatusPill status="Special">Playground</StatusPill>
-          <StatusPill status="Attention">Playground</StatusPill>
-          <StatusPill>Playground</StatusPill>
-        </Pills>
+        <WrapperVertical>
+          <Desc>
+            Компонент Pills - визуальный индикатор для обозначения статуса какого-либо элемента для быстрой
+            идентификации. Компонент предназначен для максимальной гибкости в дизайне, для остальных случаев используйте
+            компонент Tag.
+          </Desc>
+          <Desc>
+            Компонент может быть с иконкой или без. Фон компонента и текст с иконками можно окрашивать в произвольные
+            цвета из палитры. Следите за читаемостью текста, не все комбинации цвета обеспечивают достаточный контраст
+            между текстом и фоном. Отдавайте предпочтения контрастным Main-цветам. Всегда думайте как различные цветовые
+            сочетания будут выглядеть в темной теме, назначайте статичные цвета, где это необходимо.
+          </Desc>
+          <Pills>
+            <StatusPill status="Success">
+              <HeartOutlinePillIcon />
+              <span>Playground</span>
+            </StatusPill>
+            <StatusPill status="Error">Playground</StatusPill>
+            <StatusPill status="Warning">Playground</StatusPill>
+            <StatusPill status="Special">Playground</StatusPill>
+            <StatusPill status="Attention">Playground</StatusPill>
+            <StatusPill>Playground</StatusPill>
+          </Pills>
+        </WrapperVertical>
       </ThemeProvider>
     </>
   );
@@ -226,7 +244,10 @@ const TemplatePillMenu: ComponentStory<typeof Pill> = (args) => {
   return (
     <>
       <ThemeProvider theme={swapBorder}>
-        <PillMenu options={items} />
+        <WrapperVertical>
+          <Desc>Компонент может быть с выпадающим меню. Позволяет выбирать различные статусы (цвета) индикатора.</Desc>
+          <PillMenu options={items} />
+        </WrapperVertical>
       </ThemeProvider>
     </>
   );
@@ -310,7 +331,12 @@ const itemsRight: Array<PillOptionProps> = [
 
 const TemplateNestedPills: ComponentStory<typeof Pill> = (args) => {
   return (
-    <>
+    <WrapperVertical>
+      <Desc>
+        Компонент позволяет объединять два элемента в один, у каждого из которых есть все функции одиночного компонента.
+        Используя иконки, следите, что бы иконки были во всех компонентах группы. Фукцию выпадающего меню, напротив,
+        можно назначать избирательно.
+      </Desc>
       <Pills>
         <NestedPill>
           <StatusPill status="Special" onClick={leftPillClicked}>
@@ -345,7 +371,7 @@ const TemplateNestedPills: ComponentStory<typeof Pill> = (args) => {
           <PillMenu options={itemsRight} />
         </NestedPill>
       </Pills>
-    </>
+    </WrapperVertical>
   );
 };
 
@@ -410,13 +436,19 @@ const TemplatePillWithTooltip: ComponentStory<typeof Pill> = (args) => {
 
   return (
     <WrapperVertical>
-      <StyledPillWithTooltipHoc renderContent={() => pillLabel}>
-        {pillLabel.slice(0, 40) + '...'}
-      </StyledPillWithTooltipHoc>
+      <Desc>
+        В случаях ограниченного пространства задавайте максимальную ширину компонента, подсвечивая полный текст при
+        наведении.
+      </Desc>
+      <Desc>Вариант Pill ограниченной ширины с использованием Tooltip при переполнении:</Desc>
       <StyledPill ref={wrapperRef} style={{ width: '253px' }}>
         <LabelWrapper ref={textRef}>{pillLabel}</LabelWrapper>
       </StyledPill>
       {tooltipVisible && overflow && <Tooltip targetRef={wrapperRef} renderContent={() => pillLabel} />}
+      <Desc>Вариант Pill с ограничением по количеству символов и с использованием TooltipHoc:</Desc>
+      <StyledPillWithTooltipHoc renderContent={() => pillLabel}>
+        {pillLabel.slice(0, 40) + '...'}
+      </StyledPillWithTooltipHoc>
     </WrapperVertical>
   );
 };
