@@ -16,6 +16,11 @@ export default {
   decorators: [withDesign],
   component: PaginationOne,
   parameters: {
+    docs: {
+      source: {
+        code: null,
+      },
+    },
     design: [
       {
         type: 'figma',

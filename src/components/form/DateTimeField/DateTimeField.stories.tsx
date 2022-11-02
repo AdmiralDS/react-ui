@@ -11,6 +11,11 @@ export default {
   component: Field,
   decorators: [withDesign],
   parameters: {
+    docs: {
+      source: {
+        code: null,
+      },
+    },
     componentSubtitle: <DataAttributesDescription />,
     design: [
       {

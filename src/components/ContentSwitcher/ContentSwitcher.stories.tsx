@@ -25,6 +25,11 @@ export default {
   decorators: [withDesign],
   component: ContentSwitcher,
   parameters: {
+    docs: {
+      source: {
+        code: null,
+      },
+    },
     design: [
       {
         type: 'figma',

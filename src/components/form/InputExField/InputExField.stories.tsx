@@ -14,6 +14,11 @@ export default {
   component: InputExField,
   decorators: [withDesign],
   parameters: {
+    docs: {
+      source: {
+        code: null,
+      },
+    },
     componentSubtitle: <DataAttributesDescription />,
     design: [
       {

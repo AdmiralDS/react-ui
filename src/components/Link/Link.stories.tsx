@@ -13,6 +13,11 @@ export default {
   decorators: [withDesign],
   component: Link,
   parameters: {
+    docs: {
+      source: {
+        code: null,
+      },
+    },
     design: [
       {
         type: 'figma',

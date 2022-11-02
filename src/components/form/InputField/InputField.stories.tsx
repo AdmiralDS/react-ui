@@ -13,6 +13,11 @@ export default {
   component: InputField,
   decorators: [withDesign],
   parameters: {
+    docs: {
+      source: {
+        code: null,
+      },
+    },
     componentSubtitle: <DataAttributesDescription />,
     design: [
       {

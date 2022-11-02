@@ -26,6 +26,11 @@ export default {
   decorators: [withDesign],
   component: Tag,
   parameters: {
+    docs: {
+      source: {
+        code: null,
+      },
+    },
     componentSubtitle: <Description />,
     layout: 'centered',
     design: [

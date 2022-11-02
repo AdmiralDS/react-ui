@@ -25,6 +25,11 @@ export default {
   decorators: [withDesign],
   component: Tree,
   parameters: {
+    docs: {
+      source: {
+        code: null,
+      },
+    },
     componentSubtitle: <Description />,
     design: [
       {

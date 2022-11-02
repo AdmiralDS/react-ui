@@ -30,6 +30,11 @@ export default {
   decorators: [withDesign],
   component: TagMenu,
   parameters: {
+    docs: {
+      source: {
+        code: null,
+      },
+    },
     componentSubtitle: <Description />,
     layout: 'centered',
     design: [

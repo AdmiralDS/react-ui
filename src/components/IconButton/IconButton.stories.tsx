@@ -22,6 +22,11 @@ export default {
   decorators: [withDesign],
   component: IconButton,
   parameters: {
+    docs: {
+      source: {
+        code: null,
+      },
+    },
     layout: 'centered',
     design: [
       {

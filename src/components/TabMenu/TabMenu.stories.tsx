@@ -11,6 +11,11 @@ export default {
   decorators: [withDesign],
   component: TabMenu,
   parameters: {
+    docs: {
+      source: {
+        code: null,
+      },
+    },
     design: [
       {
         type: 'figma',

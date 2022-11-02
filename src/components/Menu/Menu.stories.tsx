@@ -39,6 +39,11 @@ export default {
   decorators: [withDesign],
   component: Menu,
   parameters: {
+    docs: {
+      source: {
+        code: null,
+      },
+    },
     componentSubtitle: <Description />,
     design: [
       {

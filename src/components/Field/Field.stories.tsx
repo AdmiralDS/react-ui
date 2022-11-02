@@ -9,6 +9,13 @@ import { Theme } from '#src/components/themes';
 export default {
   title: 'Admiral-2.1/Atoms/Field',
   component: Field,
+  parameters: {
+    docs: {
+      source: {
+        code: null,
+      },
+    },
+  },
   decorators: [withDesign],
   argTypes: {
     required: {

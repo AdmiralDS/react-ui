@@ -14,6 +14,11 @@ export default {
   component: SelectField,
   decorators: [withDesign],
   parameters: {
+    docs: {
+      source: {
+        code: null,
+      },
+    },
     componentSubtitle: <DataAttributesDescription />,
     design: {
       type: 'figma',

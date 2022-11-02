@@ -79,6 +79,11 @@ export default {
   component: Chips,
   decorators: [withDesign],
   parameters: {
+    docs: {
+      source: {
+        code: null,
+      },
+    },
     design: [
       {
         type: 'figma',
@@ -95,11 +100,6 @@ export default {
     ],
     componentSubtitle: <Description />,
     layout: 'centered',
-    docs: {
-      source: {
-        type: 'code',
-      },
-    },
   },
   argTypes: {
     dimension: {

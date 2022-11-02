@@ -35,6 +35,11 @@ export default {
   decorators: [withDesign],
   component: TextButtonMenu,
   parameters: {
+    docs: {
+      source: {
+        code: null,
+      },
+    },
     design: [
       {
         type: 'figma',

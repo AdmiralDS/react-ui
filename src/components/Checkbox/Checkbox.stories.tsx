@@ -13,6 +13,11 @@ export default {
   decorators: [withDesign],
   component: Checkbox,
   parameters: {
+    docs: {
+      source: {
+        code: null,
+      },
+    },
     design: [
       {
         type: 'figma',

@@ -18,6 +18,11 @@ export default {
   decorators: [withDesign],
   component: NumberInput,
   parameters: {
+    docs: {
+      source: {
+        code: null,
+      },
+    },
     componentSubtitle: <Description />,
     design: [
       {

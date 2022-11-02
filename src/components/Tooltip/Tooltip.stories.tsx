@@ -64,6 +64,11 @@ export default {
     TooltipHoc: TooltipHocStory,
   },
   parameters: {
+    docs: {
+      source: {
+        code: null,
+      },
+    },
     design: [
       {
         type: 'figma',
@@ -76,11 +81,6 @@ export default {
     ],
     componentSubtitle: <Description />,
     layout: 'centered',
-    docs: {
-      source: {
-        type: 'code',
-      },
-    },
   },
   argTypes: {
     withDelay: {

@@ -40,6 +40,11 @@ export default {
   decorators: [withDesign],
   component: Hint,
   parameters: {
+    docs: {
+      source: {
+        code: null,
+      },
+    },
     componentSubtitle: <Description />,
     design: [
       {

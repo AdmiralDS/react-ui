@@ -28,6 +28,11 @@ export default {
   decorators: [withDesign],
   component: DropdownContainer,
   parameters: {
+    docs: {
+      source: {
+        code: null,
+      },
+    },
     componentSubtitle: <Description />,
     design: [
       {

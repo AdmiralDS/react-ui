@@ -23,6 +23,11 @@ export default {
   decorators: [withDesign],
   component: OverflowMenu,
   parameters: {
+    docs: {
+      source: {
+        code: null,
+      },
+    },
     layout: 'centered',
     design: [
       {

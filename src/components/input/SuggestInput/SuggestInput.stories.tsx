@@ -14,6 +14,11 @@ export default {
   component: SuggestInput,
   decorators: [withDesign],
   parameters: {
+    docs: {
+      source: {
+        code: null,
+      },
+    },
     design: [
       {
         type: 'figma',

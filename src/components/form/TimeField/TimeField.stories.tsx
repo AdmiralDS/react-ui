@@ -13,6 +13,11 @@ export default {
   component: TimeField,
   decorators: [withDesign],
   parameters: {
+    docs: {
+      source: {
+        code: null,
+      },
+    },
     componentSubtitle: <DataAttributesDescription />,
     design: [
       {

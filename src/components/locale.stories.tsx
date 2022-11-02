@@ -43,6 +43,11 @@ export default {
   title: 'Locales',
   decorators: [withDesign],
   parameters: {
+    docs: {
+      source: {
+        code: null,
+      },
+    },
     componentSubtitle: <Description />,
   },
 } as ComponentMeta<any>;

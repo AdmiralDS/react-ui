@@ -12,6 +12,11 @@ export default {
   component: SliderRangeField,
   decorators: [withDesign],
   parameters: {
+    docs: {
+      source: {
+        code: null,
+      },
+    },
     componentSubtitle: <DataAttributesDescription />,
     design: [
       {

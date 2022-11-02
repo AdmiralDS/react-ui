@@ -54,6 +54,11 @@ export default {
   decorators: [withDesign],
   component: ProgressStepper,
   parameters: {
+    docs: {
+      source: {
+        code: null,
+      },
+    },
     componentSubtitle: <Description />,
     layout: 'centered',
     design: {

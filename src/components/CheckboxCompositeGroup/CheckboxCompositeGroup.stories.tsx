@@ -12,6 +12,11 @@ export default {
   decorators: [withDesign],
   component: CheckboxCompositeGroup,
   parameters: {
+    docs: {
+      source: {
+        code: null,
+      },
+    },
     design: [
       {
         type: 'figma',

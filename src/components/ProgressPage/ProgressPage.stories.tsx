@@ -27,7 +27,7 @@ export default {
   parameters: {
     docs: {
       source: {
-        type: 'code',
+        code: null,
       },
     },
     componentSubtitle: <Description />,

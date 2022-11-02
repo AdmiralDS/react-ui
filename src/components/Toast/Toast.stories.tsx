@@ -69,6 +69,11 @@ export default {
   decorators: [withDesign],
   component: Toast,
   parameters: {
+    docs: {
+      source: {
+        code: null,
+      },
+    },
     componentSubtitle: <Description />,
     design: [
       {

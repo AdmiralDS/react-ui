@@ -28,6 +28,11 @@ export default {
   decorators: [withDesign],
   component: SliderRange,
   parameters: {
+    docs: {
+      source: {
+        code: null,
+      },
+    },
     componentSubtitle: <Description />,
     design: [
       {

@@ -37,6 +37,11 @@ export default {
   decorators: [withDesign],
   component: DropMenu,
   parameters: {
+    docs: {
+      source: {
+        code: null,
+      },
+    },
     componentSubtitle: <Description />,
     design: [
       {

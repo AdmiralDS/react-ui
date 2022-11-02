@@ -27,6 +27,11 @@ export default {
   decorators: [withDesign],
   component: DropDownMenu,
   parameters: {
+    docs: {
+      source: {
+        code: null,
+      },
+    },
     componentSubtitle: <Description />,
     design: [
       {

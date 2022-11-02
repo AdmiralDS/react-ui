@@ -48,6 +48,11 @@ export default {
   decorators: [withDesign],
   component: Spinner,
   parameters: {
+    docs: {
+      source: {
+        code: null,
+      },
+    },
     componentSubtitle: <Description />,
     design: {
       type: 'figma',

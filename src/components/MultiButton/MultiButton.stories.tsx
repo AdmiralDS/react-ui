@@ -14,6 +14,11 @@ export default {
   decorators: [withDesign],
   component: MultiButton,
   parameters: {
+    docs: {
+      source: {
+        code: null,
+      },
+    },
     design: [
       {
         type: 'figma',

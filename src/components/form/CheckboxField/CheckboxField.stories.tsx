@@ -15,6 +15,11 @@ export default {
   decorators: [withDesign],
   component: CheckboxField,
   parameters: {
+    docs: {
+      source: {
+        code: null,
+      },
+    },
     design: [
       {
         type: 'figma',

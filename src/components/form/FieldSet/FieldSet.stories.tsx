@@ -25,6 +25,11 @@ export default {
   decorators: [withDesign],
   component: FieldSet,
   parameters: {
+    docs: {
+      source: {
+        code: null,
+      },
+    },
     componentSubtitle: <Description />,
     actions: {
       argTypesRegex: 'onChange',

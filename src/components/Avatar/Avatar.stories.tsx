@@ -37,6 +37,11 @@ export default {
   decorators: [withDesign],
   component: Avatar,
   parameters: {
+    docs: {
+      source: {
+        code: null,
+      },
+    },
     componentSubtitle: (
       <Desc>Компонент используется для отображения фотографии пользователя, его инициалов или иконки.</Desc>
     ),

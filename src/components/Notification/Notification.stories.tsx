@@ -31,6 +31,11 @@ export default {
   decorators: [withDesign],
   component: Notification,
   parameters: {
+    docs: {
+      source: {
+        code: null,
+      },
+    },
     componentSubtitle: <Description />,
     design: [
       {

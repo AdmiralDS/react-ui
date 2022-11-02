@@ -56,6 +56,11 @@ export default {
   decorators: [withDesign],
   component: Badge,
   parameters: {
+    docs: {
+      source: {
+        code: null,
+      },
+    },
     componentSubtitle: <Description />,
     design: [
       {

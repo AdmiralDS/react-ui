@@ -33,6 +33,11 @@ export default {
   decorators: [withDesign],
   component: MenuButton,
   parameters: {
+    docs: {
+      source: {
+        code: null,
+      },
+    },
     layout: 'centered',
     design: [
       {
