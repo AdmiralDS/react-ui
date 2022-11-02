@@ -125,6 +125,10 @@ const TemplateSimplePills: ComponentStory<typeof Pill> = (args) => {
             между текстом и фоном. Отдавайте предпочтения контрастным Main-цветам. Всегда думайте как различные цветовые
             сочетания будут выглядеть в темной теме, назначайте статичные цвета, где это необходимо.
           </Desc>
+          <Desc>
+            В данном примере заданы варианты статусов с определенными цветами фона и текста (StatusPill). В даьнейшем
+            они использованы для создания Pill с дропдауном и Nested Pills.
+          </Desc>
           <Pills>
             <StatusPill status="Success">
               <HeartOutlinePillIcon />
@@ -214,12 +218,14 @@ const PillMenu = React.forwardRef<HTMLElement, PillMenuProps>(({ options, ...pro
 
   return (
     <DropMenu
+      ref={ref}
       items={model}
       selected={selectedPill?.id}
       onSelectItem={(id) => setSelectedPill(options.find((item) => item.id === id))}
       renderContentProp={({ buttonRef, handleKeyDown, handleClick, statusIcon }) => {
         return (
           <StatusPill
+            {...props}
             ref={buttonRef as React.Ref<HTMLDivElement>}
             status={selectedPill?.status}
             onKeyDown={handleKeyDown}
@@ -246,6 +252,7 @@ const TemplatePillMenu: ComponentStory<typeof Pill> = (args) => {
       <ThemeProvider theme={swapBorder}>
         <WrapperVertical>
           <Desc>Компонент может быть с выпадающим меню. Позволяет выбирать различные статусы (цвета) индикатора.</Desc>
+          <Desc>Для добавления выпадающего меню к кастомному StatusPill используется компонент DropMenu.</Desc>
           <PillMenu options={items} />
         </WrapperVertical>
       </ThemeProvider>
@@ -336,6 +343,10 @@ const TemplateNestedPills: ComponentStory<typeof Pill> = (args) => {
         Компонент позволяет объединять два элемента в один, у каждого из которых есть все функции одиночного компонента.
         Используя иконки, следите, что бы иконки были во всех компонентах группы. Фукцию выпадающего меню, напротив,
         можно назначать избирательно.
+      </Desc>
+      <Desc>
+        Для объединения двух StatusPill используется NestedPill, который стилизует правый и левый края StatusPill так,
+        чтобы они "слились" в единую форму.
       </Desc>
       <Pills>
         <NestedPill>
