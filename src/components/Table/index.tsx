@@ -208,6 +208,9 @@ export interface TableProps extends React.HTMLAttributes<HTMLDivElement> {
   onColumnResize?: (colObj: { name: string; width: string }) => void;
   /** Рендер функция для отрисовки контента ячейки. Входные параметры - объект строки и название столбца */
   renderCell?: (row: TableRow, columnName: string) => React.ReactNode;
+  /** Рендер функция для отрисовки обертки вокруг строки. 
+   * Входные параметры - объект строки, её порядковый номер и элемент который должен быть отрисован внутри создаваемой обертки 
+   * */
   renderRowWrapper?: (row: TableRow, index: number, rowNode: React.ReactNode) => React.ReactNode;
   /** Параметр, определяющий максимальное количество строк, которое может занимать заголовок столбца таблицы.
    * По умолчанию заголовок занимает не более одной строки
