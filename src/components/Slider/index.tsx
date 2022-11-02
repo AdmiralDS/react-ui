@@ -57,7 +57,7 @@ export const Slider = ({
   const step = userStep > 0 ? userStep : 1;
 
   const [isDraging, setDrag] = React.useState(false);
-  const [animation, setAnimation] = React.useState(false);
+  const [animation, setAnimation] = React.useState(true);
   const [rangeWidth, setRangeWidth] = React.useState(0);
 
   const filledRef = React.useRef<HTMLDivElement | null>(null);
@@ -114,10 +114,10 @@ export const Slider = ({
 
   const updateSlider = React.useCallback(
     (e: any) => {
-      setAnimation(false);
       const newValue = calcValue(e, trackRef, minValue, maxValue, step, undefined);
       if (newValue !== value) {
         onChange(e, newValue);
+        setAnimation(false);
       }
     },
     [setAnimation, value, trackRef.current, minValue, maxValue, step],
