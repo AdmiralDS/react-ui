@@ -127,7 +127,7 @@ const Template0: ComponentStory<typeof Tag> = (args: TagProps) => {
         <TagMenu
           options={items}
           selected={selected}
-          onSelectOption={(id) => {
+          onSelectItem={(id) => {
             logSelectedId(id);
             setSelected(items.find((item) => item.id === id));
           }}
@@ -152,7 +152,7 @@ const Template1: ComponentStory<typeof Tag> = (args: TagProps) => {
         options={items}
         selected={selectedM}
         as="div"
-        onSelectOption={(id) => {
+        onSelectItem={(id) => {
           logSelectedId(id);
           setSelectedM(items.find((item) => item.id === id));
         }}
@@ -165,7 +165,7 @@ const Template1: ComponentStory<typeof Tag> = (args: TagProps) => {
         options={items}
         selected={selectedS}
         as="span"
-        onSelectOption={(id) => {
+        onSelectItem={(id) => {
           logSelectedId(id);
           setSelectedS(items.find((item) => item.id === id));
         }}
