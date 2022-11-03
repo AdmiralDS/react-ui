@@ -90,10 +90,18 @@ const Template0: ComponentStory<typeof SliderInput> = (args) => {
     theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
+  const [slider1, setSlider1] = React.useState(String(args.value) ?? '');
 
   return (
     <ThemeProvider theme={swapBorder}>
-      <SliderInput {...args} onChange={(full, short) => console.log({ full, short })} />
+      <SliderInput
+        {...args}
+        value={slider1}
+        onChange={(full, short) => {
+          console.log({ full, short });
+          setSlider1(short);
+        }}
+      />
     </ThemeProvider>
   );
 };
@@ -103,7 +111,7 @@ const Template1: ComponentStory<typeof SliderInput> = (args) => {
     <>
       <SliderInput
         {...args}
-        defaultValue="15 ₽"
+        defaultValue="15"
         onChange={(full, short) => console.log({ full, short })}
         tickMarks={[5, 10, 15]}
       />
@@ -116,7 +124,7 @@ const Template2: ComponentStory<typeof SliderInput> = (args) => {
     <>
       <SliderInput
         {...args}
-        defaultValue="5.000 $"
+        defaultValue="5.000"
         onChange={(full, short) => console.log({ full, short })}
         suffix="$"
         thousand=","
@@ -132,7 +140,7 @@ const Template3: ComponentStory<typeof SliderInput> = (args) => {
     <>
       <SliderInput
         {...args}
-        defaultValue="15000 ₽"
+        defaultValue="15000"
         onChange={(full, short) => console.log({ full, short })}
         renderTickMark={(mark: string) => mark + ' ₽'}
         tickMarks={[5000, 10000, 15000]}
@@ -144,7 +152,7 @@ const Template3: ComponentStory<typeof SliderInput> = (args) => {
 
 export const Playground = Template0.bind({});
 Playground.args = {};
-Playground.storyName = 'SliderInput. Playground.';
+Playground.storyName = 'SliderInput. Пример контролируемого инпута.';
 Playground.parameters = {
   docs: {
     source: {
