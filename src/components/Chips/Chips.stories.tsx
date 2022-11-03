@@ -108,8 +108,8 @@ export default {
       defaultValue: 'm',
     },
     appearance: {
-      control: { type: 'radio' },
       options: ['outlined', 'filled'],
+      control: { type: 'radio' },
       defaultValue: 'outlined',
     },
     disabled: {

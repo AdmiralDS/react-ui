@@ -26,19 +26,15 @@ export default {
   },
   argTypes: {
     dimension: {
-      control: {
-        type: 'radio',
-        options: ['m', 's'],
-      },
+      options: ['m', 's'],
+      control: { type: 'radio' },
     },
     disabled: {
       control: { type: 'boolean' },
     },
     themeBorderKind: {
-      control: {
-        type: 'radio',
-        options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
-      },
+      options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
+      control: { type: 'radio' },
     },
   },
 } as ComponentMeta<typeof CheckboxCompositeGroup>;
@@ -97,4 +93,4 @@ const CheckboxCompositeGroupDemo: Story = (args: CheckboxCompositeGroupProps) =>
   );
 };
 
-export const Example = CheckboxCompositeGroupDemo.bind({});
+export const CheckboxCompositeGroupExample = CheckboxCompositeGroupDemo.bind({});

@@ -67,10 +67,8 @@ export default {
   },
   argTypes: {
     dimension: {
-      control: {
-        type: 'radio',
-        options: ['l', 'm', 's'],
-      },
+      options: ['l', 'm', 's'],
+      control: { type: 'radio' },
     },
   },
 } as ComponentMeta<typeof ContentSwitcher>;

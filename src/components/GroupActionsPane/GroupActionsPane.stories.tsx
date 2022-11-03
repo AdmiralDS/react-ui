@@ -45,9 +45,9 @@ export default {
   },
   argTypes: {
     dimension: {
+      options: ['xl', 'l', 'm', 's'],
       control: {
         type: 'radio',
-        options: ['xl', 'l', 'm', 's'],
         defaultValue: 'xl',
       },
     },
