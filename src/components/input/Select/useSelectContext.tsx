@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { IConstantSelectContext, IDropDownSelectContext, IOptionContext, IOptionGroupContext } from './types';
+import { IConstantSelectContext, IDropDownSelectContext, HighlightContextProps, IOptionGroupContext } from './types';
 
 const ConstantSelectContext = React.createContext<IConstantSelectContext | null>(null);
 
@@ -17,11 +17,11 @@ export const DropDownSelectProvider = ({ children, ...restProps }: React.PropsWi
   <DropDownSelectContext.Provider value={restProps}>{children}</DropDownSelectContext.Provider>
 );
 
-const OptionContext = React.createContext<IOptionContext | null>(null);
+const OptionContext = React.createContext<HighlightContextProps | null>(null);
 
 export const useOptionContext = () => React.useContext(OptionContext);
 
-export const OptionProvider = ({ children, ...restProps }: React.PropsWithChildren<IOptionContext>) => (
+export const OptionProvider = ({ children, ...restProps }: React.PropsWithChildren<HighlightContextProps>) => (
   <OptionContext.Provider value={restProps}>{children}</OptionContext.Provider>
 );
 

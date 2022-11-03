@@ -121,7 +121,7 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
       const currentIndex = model.findIndex((item) => item.id === activeId);
       let nextIndex = currentIndex < model.length - 1 ? currentIndex + 1 : 0;
 
-      while (model[nextIndex].disabled && nextIndex !== currentIndex) {
+      while ((model[nextIndex].disabled || model[nextIndex].readOnly) && nextIndex !== currentIndex) {
         nextIndex = nextIndex < model.length - 1 ? nextIndex + 1 : 0;
       }
       return model[nextIndex].id;
@@ -129,12 +129,12 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
 
     const findPreviousId = () => {
       const currentIndex = model.findIndex((item) => item.id === activeId);
-      let nextIndex = currentIndex > 0 ? currentIndex - 1 : model.length - 1;
+      let prevIndex = currentIndex > 0 ? currentIndex - 1 : model.length - 1;
 
-      while (model[nextIndex].disabled && nextIndex !== currentIndex) {
-        nextIndex = nextIndex > 0 ? nextIndex - 1 : model.length - 1;
+      while ((model[prevIndex].disabled || model[prevIndex].readOnly) && prevIndex !== currentIndex) {
+        prevIndex = prevIndex > 0 ? prevIndex - 1 : model.length - 1;
       }
-      return model[nextIndex].id;
+      return model[prevIndex].id;
     };
 
     const activateItem = (id?: string) => {

@@ -2,8 +2,10 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { OptionGroupProvider, useDropDownSelectContext } from './useSelectContext';
 import { OptionWrapper } from './styled';
+import { HTMLAttributes } from 'react';
+import { Option } from './Option';
 
-interface IProps {
+interface OptionGroupProps extends HTMLAttributes<HTMLDivElement> {
   disabled?: boolean;
   label: string;
 }
@@ -11,14 +13,24 @@ interface IProps {
 const Category = styled(OptionWrapper)`
   font-weight: 500;
   color: ${(props) => props.theme.color['Neutral/Neutral 90']};
+  user-select: none;
 `;
 
-export const OptionGroup = ({ label, disabled = false, children }: React.PropsWithChildren<IProps>) => {
+export const OptionGroup = ({ label, disabled, children, ...props }: React.PropsWithChildren<OptionGroupProps>) => {
   const selectContext = useDropDownSelectContext();
 
   return (
-    <OptionGroupProvider label={label} disabled={disabled}>
-      <Category dimension={selectContext?.dimension}>{label}</Category>
+    <OptionGroupProvider disabled={disabled}>
+      <Option
+        key={label}
+        value={label}
+        readOnly={true}
+        renderOption={() => (
+          <Category {...props} dimension={selectContext?.dimension} key={label}>
+            {label}
+          </Category>
+        )}
+      />
       {children}
     </OptionGroupProvider>
   );

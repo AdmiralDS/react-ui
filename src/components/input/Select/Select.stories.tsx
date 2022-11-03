@@ -5,12 +5,19 @@ import type { ChangeEvent } from 'react';
 import * as React from 'react';
 import { withDesign } from 'storybook-addon-designs';
 import { Highlight, Option, OptionGroup, Select } from '#src/components/input/Select';
-import { IOnCloseProps } from './types';
+import { HighlightFormat, IOnCloseProps } from './types';
 import { Button } from '#src/components/Button';
 import { useState } from '@storybook/addons';
 import styled, { css, keyframes, ThemeProvider } from 'styled-components';
 import { Theme } from '#src/components/themes';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
+import { typography } from '#src/components/Typography';
+import { getTextHighlightMeta } from '#src/components/input/Select/utils';
+import { MenuActionsPanel } from '#src/components/Menu/MenuActionsPanel';
+import { TextButton } from '#src/components/TextButton';
+import { PlusOutline } from '#src/icons/IconComponents-service';
+import { CustomOptionWrapper } from './styled';
+import { RenderOptionProps } from '#src/components/Menu/MenuItem';
 
 export default {
   title: 'Admiral-2.1/Input/Select',
@@ -72,11 +79,16 @@ export default {
     onChange: {
       action: 'onChange',
     },
-
     themeBorderKind: {
       control: {
         type: 'radio',
         options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
+      },
+    },
+    highlightFormat: {
+      control: {
+        type: 'radio',
+        options: ['word', 'wholly'],
       },
     },
     skeleton: {
@@ -203,22 +215,62 @@ const SelectSimpleTemplate: ComponentStory<typeof Select> = (props) => {
   );
 };
 
+const shouldRender = (text = '', searchValue = '', highlightFormat: HighlightFormat = 'word') => {
+  const splittedHighlight = highlightFormat === 'word' ? searchValue.split(' ') : [searchValue];
+  const chunks = splittedHighlight.filter(Boolean).map((chunk) => chunk.toLowerCase());
+
+  const specialCharacters = ['[', ']', '\\', '^', '$', '.', '|', '?', '*', '+', '(', ')'];
+
+  const pattern = chunks
+    .map((chunk) => {
+      const chunkForRegExp = chunk
+        .split('')
+        .map((letter) => (specialCharacters.includes(letter) ? `\\${letter}` : letter))
+        .join('');
+      return `(${chunkForRegExp})?`;
+    })
+    .join('');
+
+  const parts = text.split(new RegExp(pattern, 'gi')).filter(Boolean);
+
+  return !searchValue ? true : parts.some((part) => chunks.includes(part.toLowerCase()));
+};
+
 const SearchSelectSimpleTemplate: ComponentStory<typeof Select> = (props) => {
   const [selectValue, setSelectValue] = React.useState('');
+  const [searchValue, setSearchValue] = React.useState('');
 
   const onChange = (e: ChangeEvent<HTMLSelectElement>) => {
     setSelectValue(e.target.value);
     props.onChange?.(e);
   };
 
-  return (
-    <>
-      <Select {...props} placeholder="Placeholder" mode="searchSelect" value={selectValue} onChange={onChange}>
-        {OPTIONS_SIMPLE.map((option, ind) => (
+  const renderOptions = () => {
+    return OPTIONS_SIMPLE.map(
+      (option, ind) =>
+        shouldRender(option, searchValue) && (
           <Option key={option} value={option} disabled={ind === 4}>
             {option}
           </Option>
-        ))}
+        ),
+    ).filter((item) => !!item);
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchValue(e.target.value);
+  };
+
+  return (
+    <>
+      <Select
+        {...props}
+        onInputChange={handleInputChange}
+        placeholder="Placeholder"
+        mode="searchSelect"
+        value={selectValue}
+        onChange={onChange}
+      >
+        {renderOptions()}
       </Select>
     </>
   );
@@ -251,18 +303,18 @@ const CustomOptionTemplate: ComponentStory<typeof Select> = (props) => {
   );
 };
 
-interface IMyIncredibleOptionProps {
+interface MyIncredibleOptionProps extends RenderOptionProps {
   shouldAnimate?: boolean;
   text: string;
 }
 
-const MyIncredibleOption = ({ text, shouldAnimate }: IMyIncredibleOptionProps) => (
-  <>
+const MyIncredibleOption = ({ text, shouldAnimate, ...props }: MyIncredibleOptionProps) => (
+  <CustomOptionWrapper {...props}>
     <Icon shouldAnimate={shouldAnimate} />
     <TextWrapper>
       <Highlight>{text}</Highlight>
     </TextWrapper>
-  </>
+  </CustomOptionWrapper>
 );
 
 const RenderPropsTemplate: ComponentStory<typeof Select> = (props) => {
@@ -280,8 +332,8 @@ const RenderPropsTemplate: ComponentStory<typeof Select> = (props) => {
           <Option
             key={value}
             value={value}
-            renderOption={({ isHovered }) => (
-              <MyIncredibleOption text={text} shouldAnimate={isHovered && value !== selectValue} />
+            renderOption={(options) => (
+              <MyIncredibleOption text={text} shouldAnimate={options.hovered && value !== selectValue} {...options} />
             )}
           />
         ))}
@@ -289,6 +341,11 @@ const RenderPropsTemplate: ComponentStory<typeof Select> = (props) => {
     </>
   );
 };
+
+const StyledGroup = styled(OptionGroup)`
+  color: ${(p) => p.theme.color['Purple/Purple 60 Main']};
+  ${typography['Main/S']}
+`;
 
 const OptionGroupTemplate: ComponentStory<typeof Select> = (props) => {
   const [selectValue, setSelectValue] = React.useState('Похо Торо Моронго');
@@ -298,10 +355,10 @@ const OptionGroupTemplate: ComponentStory<typeof Select> = (props) => {
   return (
     <>
       <Select {...props} value={selectValue} mode="searchSelect" onChange={onChange} dimension="xl">
-        <OptionGroup label="Сегодня выступают">
+        <StyledGroup label="Сегодня выступают">
           <Option value="Анигиляторная пушка">Анигиляторная пушка</Option>
           <Option value="Похо Торо Моронго">Похо Торо Моронго</Option>
-        </OptionGroup>
+        </StyledGroup>
         <OptionGroup label="Группа фрукты" disabled>
           <Option value="Саша Даль">Саша Даль</Option>
           <Option value="Алексей Елесин">Алексей Елесин</Option>
@@ -595,6 +652,64 @@ const TemplateMultiSelectCustomChip: ComponentStory<typeof Select> = (props) => 
   );
 };
 
+const SearchSelectWithBottomPaneTemplate: ComponentStory<typeof Select> = (props) => {
+  const [selectValue, setSelectValue] = React.useState('');
+  const [searchValue, setSearchValue] = React.useState('');
+  const [options, setOptions] = React.useState(OPTIONS_SIMPLE);
+
+  const onChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    setSelectValue(e.target.value);
+    props.onChange?.(e);
+  };
+
+  const renderOptions = () => {
+    return options
+      .map(
+        (option, ind) =>
+          shouldRender(option, searchValue) && (
+            <Option key={option} value={option} disabled={ind === 4}>
+              {option}
+            </Option>
+          ),
+      )
+      .filter((item) => !!item);
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchValue(e.target.value);
+  };
+
+  const handleAddButtonClick = () => {
+    if (searchValue && !options.includes(searchValue)) {
+      setOptions([...options, searchValue]);
+    }
+  };
+
+  const menuPanelContentDimension = props.dimension === undefined || props.dimension === 'xl' ? 'l' : props.dimension;
+
+  return (
+    <>
+      <Select
+        {...props}
+        onInputChange={handleInputChange}
+        placeholder="Placeholder"
+        mode="searchSelect"
+        value={selectValue}
+        onChange={onChange}
+        renderDropDownBottomPanel={({ dimension = menuPanelContentDimension }) => {
+          return (
+            <MenuActionsPanel dimension={dimension}>
+              <TextButton text={'Добавить'} disabled={false} icon={<PlusOutline />} onClick={handleAddButtonClick} />
+            </MenuActionsPanel>
+          );
+        }}
+      >
+        {renderOptions()}
+      </Select>
+    </>
+  );
+};
+
 export const SimpleSelectStory = SelectSimpleTemplate.bind({});
 SimpleSelectStory.args = {
   placeholder: 'Начните ввод для поиска',
@@ -639,3 +754,6 @@ CustomOptionMultiSearchSelectStory.storyName = 'MultiSearchSelect с касто�
 
 export const CustomChipMultiSearchSelectStory = TemplateMultiSelectCustomChip.bind({});
 CustomChipMultiSearchSelectStory.storyName = 'MultiSearchSelect с кастомным обработчиком удаления чипса';
+
+export const SearchSelectWithBottomPaneStory = SearchSelectWithBottomPaneTemplate.bind({});
+SearchSelectWithBottomPaneStory.storyName = 'С нижней панелью';
