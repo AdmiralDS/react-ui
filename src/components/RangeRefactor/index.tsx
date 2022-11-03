@@ -42,7 +42,7 @@ export const Range = ({
     userValue.length === 2 &&
     typeof userValue[0] === 'number' &&
     typeof userValue[1] === 'number'
-      ? sortNum(userValue)
+      ? sortNum(userValue, minValue, maxValue)
       : [minValue, maxValue];
 
   const [isDraging, setDrag] = React.useState(false);
@@ -128,20 +128,20 @@ export const Range = ({
           const newValue: NumberRange = [value[1], calcVal];
           setDrag(false);
           setDrag2(true);
-          if (!arraysEqual(sortNum(newValue), value)) {
-            onChange(e, sortNum(newValue));
+          if (!arraysEqual(sortNum(newValue, minValue, maxValue), value)) {
+            onChange(e, sortNum(newValue, minValue, maxValue));
           }
         } else if (isDraging2 && calcVal < value[0]) {
           const newValue: NumberRange = [calcVal, value[0]];
           setDrag(true);
           setDrag2(false);
-          if (!arraysEqual(sortNum(newValue), value)) {
-            onChange(e, sortNum(newValue));
+          if (!arraysEqual(sortNum(newValue, minValue, maxValue), value)) {
+            onChange(e, sortNum(newValue, minValue, maxValue));
           }
         } else {
           const newValue: NumberRange = isDraging ? [calcVal, value[1]] : [value[0], calcVal];
-          if (!arraysEqual(sortNum(newValue), value)) {
-            onChange(e, sortNum(newValue));
+          if (!arraysEqual(sortNum(newValue, minValue, maxValue), value)) {
+            onChange(e, sortNum(newValue, minValue, maxValue));
           }
         }
       }
@@ -167,19 +167,19 @@ export const Range = ({
 
       if (isDraging && calcVal > value[1]) {
         const newValue: NumberRange = [value[1], calcVal];
-        if (!arraysEqual(sortNum(newValue), value)) {
-          onChange(e, sortNum(newValue));
+        if (!arraysEqual(sortNum(newValue, minValue, maxValue), value)) {
+          onChange(e, sortNum(newValue, minValue, maxValue));
         }
       }
       if (isDraging2 && calcVal < value[0]) {
         const newValue: NumberRange = [calcVal, value[0]];
-        if (!arraysEqual(sortNum(newValue), value)) {
-          onChange(e, sortNum(newValue));
+        if (!arraysEqual(sortNum(newValue, minValue, maxValue), value)) {
+          onChange(e, sortNum(newValue, minValue, maxValue));
         }
       } else {
         const newValue: NumberRange = isDraging ? [calcVal, value[1]] : [value[0], calcVal];
-        if (!arraysEqual(sortNum(newValue), value)) {
-          onChange(e, sortNum(newValue));
+        if (!arraysEqual(sortNum(newValue, minValue, maxValue), value)) {
+          onChange(e, sortNum(newValue, minValue, maxValue));
         }
       }
 
@@ -196,13 +196,13 @@ export const Range = ({
 
       // calc nearest slider
       if (Math.abs(value[1] - calcVal) <= Math.abs(calcVal - value[0])) {
-        if (!arraysEqual(sortNum([value[0], calcVal]), value)) {
-          onChange(e, sortNum([value[0], calcVal]));
+        if (!arraysEqual(sortNum([value[0], calcVal], minValue, maxValue), value)) {
+          onChange(e, sortNum([value[0], calcVal], minValue, maxValue));
         }
         onSliderClick(e, 'second');
       } else {
-        if (!arraysEqual(sortNum([calcVal, value[1]]), value)) {
-          onChange(e, sortNum([calcVal, value[1]]));
+        if (!arraysEqual(sortNum([calcVal, value[1]], minValue, maxValue), value)) {
+          onChange(e, sortNum([calcVal, value[1]], minValue, maxValue));
         }
         onSliderClick(e, 'first');
       }

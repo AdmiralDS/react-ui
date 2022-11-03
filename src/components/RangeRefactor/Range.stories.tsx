@@ -15,49 +15,49 @@ const Description = () => (
   <Desc>Двойной слайдер позволяет выбирать диапазон внутри обозначенного диапазона значений.</Desc>
 );
 
-// export default {
-//   title: 'Admiral-2.1/RangeRefactor',
-//   decorators: [withDesign],
-//   component: Range,
-//   parameters: {
-//     componentSubtitle: <Description />,
-//     design: [
-//       {
-//         type: 'figma',
-//         url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A61377',
-//       },
-//       {
-//         type: 'figma',
-//         url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A61446',
-//       },
-//       {
-//         type: 'figma',
-//         url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A61513',
-//       },
-//     ],
-//   },
-//   argTypes: {
-//     dimension: {
-//       options: ['m', 's'],
-//       control: { type: 'radio' },
-//     },
-//     disabled: {
-//       control: { type: 'boolean' },
-//     },
-//     step: {
-//       control: { type: 'number' },
-//     },
-//     minValue: {
-//       control: { type: 'number' },
-//     },
-//     maxValue: {
-//       control: { type: 'number' },
-//     },
-//     skeleton: {
-//       control: { type: 'boolean' },
-//     },
-//   },
-// } as ComponentMeta<typeof Range>;
+export default {
+  title: 'Admiral-2.1/RangeRefactor',
+  decorators: [withDesign],
+  component: Range,
+  parameters: {
+    componentSubtitle: <Description />,
+    design: [
+      {
+        type: 'figma',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A61377',
+      },
+      {
+        type: 'figma',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A61446',
+      },
+      {
+        type: 'figma',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A61513',
+      },
+    ],
+  },
+  argTypes: {
+    dimension: {
+      options: ['m', 's'],
+      control: { type: 'radio' },
+    },
+    disabled: {
+      control: { type: 'boolean' },
+    },
+    step: {
+      control: { type: 'number' },
+    },
+    minValue: {
+      control: { type: 'number' },
+    },
+    maxValue: {
+      control: { type: 'number' },
+    },
+    skeleton: {
+      control: { type: 'boolean' },
+    },
+  },
+} as ComponentMeta<typeof Range>;
 
 const Template0: ComponentStory<typeof Range> = (args) => {
   const [rangeValue, setRangeValue] = React.useState<[number, number]>([4, 5]);
@@ -76,6 +76,6 @@ const Template0: ComponentStory<typeof Range> = (args) => {
   );
 };
 
-// export const Playground = Template0.bind({});
-// Playground.args = {};
-// Playground.storyName = 'Playground.';
+export const Playground = Template0.bind({});
+Playground.args = {};
+Playground.storyName = 'Playground.';

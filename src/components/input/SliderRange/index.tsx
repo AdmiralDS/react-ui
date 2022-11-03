@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { NumberInput } from '#src/components/input/NumberInput';
-import { Range } from '#src/components/Range';
+import { Range } from '#src/components/RangeRefactor';
 import { clearValue, fitToCurrency } from '#src/components/input/NumberInput/utils';
 import type { TextInputProps } from '#src/components/input/TextInput';
 import { skeletonMixin } from '#src/components/input/Container';
@@ -161,49 +161,14 @@ export const SliderRange: React.FC<SliderRangeProps> = ({
     const slider1Changed = newSlider1 !== slider1;
     const slider2Changed = newSlider2 !== slider2;
 
-    const diff = newSlider2 - newSlider1;
-
-    if (event.type !== 'mousemove' && event.type !== 'touchmove') {
-      if (diff < step) {
-        const delta = step - diff;
-        if (newSlider1 - delta > minValue) {
-          setInput1(getFull(newSlider1 - delta));
-          setSlider1(newSlider1 - delta);
-          slider2Changed && setInput2(newInput2);
-          slider2Changed && setSlider2(newSlider2);
-
-          onChange?.([
-            { str: getFull(newSlider1 - delta), num: newSlider1 - delta },
-            { str: slider2Changed ? newInput2 : input2Value, num: slider2Changed ? newSlider2 : slider2 },
-          ]);
-        } else {
-          setInput2(getFull(newSlider2 + delta));
-          setSlider2(newSlider2 + delta);
-          slider1Changed && setInput1(newInput1);
-          slider1Changed && setSlider1(newSlider1);
-
-          onChange?.([
-            { str: slider1Changed ? newInput1 : input1Value, num: slider1Changed ? newSlider1 : slider1 },
-            { str: getFull(newSlider2 + delta), num: newSlider2 + delta },
-          ]);
-        }
-      } else {
-        slider1Changed && setInput1(newInput1);
-        slider2Changed && setInput2(newInput2);
-        slider1Changed && setSlider1(newSlider1);
-        slider2Changed && setSlider2(newSlider2);
-
-        onChange?.([
-          { str: slider1Changed ? newInput1 : input1Value, num: slider1Changed ? newSlider1 : slider1 },
-          { str: slider2Changed ? newInput2 : input2Value, num: slider2Changed ? newSlider2 : slider2 },
-        ]);
-      }
-    } else {
-      slider1Changed && setInput1(newInput1);
-      slider2Changed && setInput2(newInput2);
-      slider1Changed && setSlider1(newSlider1);
-      slider2Changed && setSlider2(newSlider2);
-    }
+    slider1Changed && setInput1(newInput1);
+    slider2Changed && setInput2(newInput2);
+    slider1Changed && setSlider1(newSlider1);
+    slider2Changed && setSlider2(newSlider2);
+    onChange?.([
+      { str: slider1Changed ? newInput1 : input1Value, num: slider1Changed ? newSlider1 : slider1 },
+      { str: slider2Changed ? newInput2 : input2Value, num: slider2Changed ? newSlider2 : slider2 },
+    ]);
   };
 
   const handleInput1Blur = () => {
@@ -256,8 +221,16 @@ export const SliderRange: React.FC<SliderRangeProps> = ({
       ]);
     }
   };
-  const handleInput1Change = (event: React.ChangeEvent<HTMLInputElement>) => setInput1(event.target.value);
-  const handleInput2Change = (event: React.ChangeEvent<HTMLInputElement>) => setInput2(event.target.value);
+  const handleInput1Change = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setInput1(event.target.value);
+    const slider = Number(clearValue(event.target.value, precision) || minValue);
+    setSlider1(slider);
+  };
+  const handleInput2Change = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setInput2(event.target.value);
+    const slider = Number(clearValue(event.target.value, precision) || minValue);
+    setSlider2(slider);
+  };
 
   const inputProps = {
     dimension,
@@ -272,6 +245,7 @@ export const SliderRange: React.FC<SliderRangeProps> = ({
     maxValue,
   };
 
+  // возможный bug - input не теряет фокус при клике на слайдер
   return (
     <Wrapper data-dimension={dimension} {...props}>
       <InputsWrapper>
