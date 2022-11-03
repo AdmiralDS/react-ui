@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useOptionGroupContext } from '#src/components/input/Select/useSelectContext';
-import { ComponentDimension, Highlight } from '#src/components/input';
+import { Highlight } from '../Highlight';
+import type { ComponentDimension } from '#src/components/input/types';
 import type { OptionProps } from '#src/components/input/Select/Option/types';
 import { StyledCheckbox } from './styled';
 import type { ItemProps, RenderOptionProps } from '#src/components/Menu/MenuItem';

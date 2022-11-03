@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { OptionGroupProvider, useDropDownSelectContext } from './useSelectContext';
 import { OptionWrapper } from './styled';
 import { HTMLAttributes } from 'react';
-import { Option } from '#src/components/input';
+import { Option } from './Option';
 
 interface OptionGroupProps extends HTMLAttributes<HTMLDivElement> {
   disabled?: boolean;
