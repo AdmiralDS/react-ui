@@ -22,7 +22,6 @@ import {
   SelectWrapper,
   SpinnerMixin,
   ValueWrapper,
-  MenuWrapper,
   StyledMenu,
   EmptyMessageWrapper,
 } from './styled';
@@ -32,10 +31,9 @@ import { useClickOutside } from '#src/components/common/hooks/useClickOutside';
 import { Spinner } from '#src/components/Spinner';
 import { DisplayValue } from './DisplayValue';
 import { DropdownContainer } from '#src/components/DropdownContainer';
-import { Menu, RenderPanelProps } from '#src/components/Menu';
+import type { RenderPanelProps } from '#src/components/Menu';
 import { NativeControl } from '#src/components/input/Select/NativeControl';
-import { SelectDropdown } from '#src/components/input/Select/Dropdown';
-import { DropDownProvider } from '#src/components/input/Select/Dropdown/Context';
+import { DropDownProvider } from '#src/components/input/Select/DropDownContext';
 import type { ItemProps } from '#src/components/Menu/MenuItem';
 import { HighlightWrapper } from '#src/components/input/Select/Highlight/HighlightWrapper';
 
@@ -135,7 +133,10 @@ export interface SelectProps extends Omit<React.InputHTMLAttributes<HTMLSelectEl
   };
 
   /** Позволяет добавить панель внизу под выпадающим списком */
-  renderOptionsBottomPanel?: (props: RenderPanelProps) => React.ReactNode;
+  renderDropDownBottomPanel?: (props: RenderPanelProps) => React.ReactNode;
+
+  /** Позволяет добавить панель сверху над выпадающим списком */
+  renderDropDownTopPanel?: (props: RenderPanelProps) => React.ReactNode;
 }
 
 export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
@@ -172,7 +173,8 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       skeleton = false,
       locale,
       dropContainerCssMixin,
-      renderOptionsBottomPanel,
+      renderDropDownTopPanel,
+      renderDropDownBottomPanel,
       ...props
     },
     ref,
@@ -181,16 +183,14 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
     const emptyMessage = locale?.emptyMessage || (
       <DropDownText>{theme.locales[theme.currentLocale].select.emptyMessage}</DropDownText>
     );
-    const [localValue, setLocalValue] = React.useState(value ?? defaultValue);
+    const [selectedValue, setSelectedValue] = React.useState(value ?? defaultValue);
     const [internalSearchValue, setSearchValue] = React.useState('');
     const searchValue = inputValue === undefined ? internalSearchValue : inputValue;
-    const [hoverValue, setHoverValue] = React.useState('');
     const [shouldRenderSelectValue, setShouldRenderSelectValue] = React.useState(false);
 
     const [activeItem, setActiveItem] = React.useState<string>();
 
     const [constantOptions, setConstantOptions] = React.useState<IConstantOption[]>([]);
-    const [dropDownOptions, setDropDownOptions] = React.useState<IDropdownOption[]>([]);
     const [dropDownItems, setDropItems] = React.useState<Array<ItemProps>>([]);
 
     const [isSearchPanelOpen, setIsSearchPanelOpen] = React.useState(false);
@@ -200,27 +200,25 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
     const modeIsSelect = mode === 'select';
 
     const selectedOption = React.useMemo(
-      () => (multiple ? null : constantOptions.find((option) => option.value === localValue)),
-      [multiple, constantOptions, localValue],
+      () => (multiple ? null : constantOptions.find((option) => option.value === selectedValue)),
+      [multiple, constantOptions, selectedValue],
     );
     const selectedOptions = React.useMemo(
-      () => (multiple ? constantOptions.filter((option) => localValue?.includes(option.value)) : []),
-      [constantOptions, localValue, multiple],
+      () => (multiple ? constantOptions.filter((option) => selectedValue?.includes(option.value)) : []),
+      [constantOptions, selectedValue, multiple],
     );
 
-    const hoverOptionIndex = React.useMemo(
-      () => dropDownOptions.findIndex((option) => option.value === hoverValue),
-      [dropDownOptions, hoverValue],
-    );
-
-    const dropDownChildren = React.useMemo(() => {
-      return (
-        <>
-          {!dropDownOptions.length && emptyMessage}
-          {children}
-        </>
-      );
-    }, [isLoading, children, dropDownOptions]);
+    const dropDownModel = React.useMemo<Array<ItemProps>>(() => {
+      return dropDownItems.length
+        ? dropDownItems
+        : [
+            {
+              id: 'emptyMessage',
+              render: () => <EmptyMessageWrapper>{emptyMessage}</EmptyMessageWrapper>,
+              disabled: true,
+            },
+          ];
+    }, [isLoading, dropDownItems]);
 
     const inputRef = React.useRef<HTMLInputElement | null>(null);
     const selectRef = React.useRef<HTMLSelectElement | null>(null);
@@ -241,47 +239,21 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       [],
     );
 
-    // const onDropDownOptionMount = React.useCallback(
-    //   (option: IDropdownOption) =>
-    //     setDropDownOptions((prev) => {
-    //       return [...prev, option];
-    //     }),
-    //   [],
-    // );
-    //
-    // const onDropDownOptionUnMount = React.useCallback(
-    //   (option: IDropdownOption) =>
-    //     setDropDownOptions((prev) => {
-    //       console.log('UNMOUNT', prev, option);
-    //       return prev.filter((prevOption) => prevOption.value !== option.value);
-    //     }),
-    //   [],
-    // );
-
     const handleDropDownOptionMount = React.useCallback(
-      (option: ItemProps) =>
-        setDropItems((prev) => {
-          // console.log('MOUNT NEW', prev, option);
-          return [...prev, option];
-        }),
+      (option: ItemProps) => setDropItems((prev) => [...prev, option]),
       [],
     );
 
     const handleDropDownOptionUnMount = React.useCallback(
-      (option: ItemProps) =>
-        setDropItems((prev) => {
-          // console.log('UNMOUNT', prev, option);
-          return prev.filter((prevOption) => prevOption.id !== option.id);
-        }),
+      (option: ItemProps) => setDropItems((prev) => prev.filter((prevOption) => prevOption.id !== option.id)),
       [],
     );
 
     const onCloseSelect = React.useCallback(() => {
       setIsSearchPanelOpen(false);
-      setHoverValue(Array.isArray(localValue) ? localValue[0] : localValue || '');
       if (inputRef.current) changeInputData(inputRef.current, { value: '' });
       setShouldRenderSelectValue(true);
-    }, [localValue]);
+    }, [selectedValue]);
 
     const handleOptionSelect = React.useCallback(
       (optionValue: string) => {
@@ -331,14 +303,14 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       [selectedOptions, shouldFixMultiSelectHeight, disabled, readOnly, handleOptionSelect, stopPropagation],
     );
 
-    const isEmptyValue = multiple ? !localValue?.length : !localValue;
+    const isEmptyValue = multiple ? !selectedValue?.length : !selectedValue;
     const isEmpty = isEmptyValue && !!placeholder && !searchValue;
 
-    const renderedSelectValue = renderSelectValue?.(localValue, searchValue);
+    const renderedSelectValue = renderSelectValue?.(selectedValue, searchValue);
 
     const renderedSelectedOption = selectedOption?.children;
     const renderedDefaultSelectValue = multiple ? renderMultipleSelectValue() : renderedSelectedOption;
-    const visibleValue = renderedSelectValue || renderedDefaultSelectValue || localValue || null;
+    const visibleValue = renderedSelectValue || renderedDefaultSelectValue || selectedValue || null;
 
     const visibleValueIsString = typeof visibleValue === 'string';
 
@@ -377,77 +349,9 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
     };
 
     const deleteOrHideSelectValueOnBackspace = () => {
-      if (searchValue || !localValue) return;
+      if (searchValue || !selectedValue) return;
       if (!multiple) return setShouldRenderSelectValue(false);
       onMultipleSelectBackSpace();
-    };
-
-    const chooseOptionOnEnter = () => {
-      const targetOption = dropDownOptions[hoverOptionIndex];
-      if (!targetOption) return;
-      handleOptionSelect(targetOption.value);
-
-      if (multiple) return;
-      onCloseSelect();
-    };
-
-    const onClosedSelectEnter = () => setIsSearchPanelOpen(true);
-
-    const onOpenedSelectEnter = () => chooseOptionOnEnter();
-
-    const onEnter = () => {
-      if (isSearchPanelOpen) return onOpenedSelectEnter();
-      onClosedSelectEnter();
-    };
-
-    const scrollToOption = (optionValue: string) => {
-      const scrollElem = dropDownRef.current;
-      const optionElem = dropDownOptions.find((option) => option.value === optionValue)?.ref?.current;
-      if (!scrollElem || !optionElem) return;
-
-      scrollToNotVisibleELem(optionElem, scrollElem);
-    };
-
-    const findNextHoverOptionValue = React.useCallback(() => {
-      const nextAbledOptionValue = findAbledOptionValue(dropDownOptions.slice(hoverOptionIndex + 1));
-      if (nextAbledOptionValue) return nextAbledOptionValue;
-      return findAbledOptionValue(dropDownOptions);
-    }, [hoverOptionIndex, dropDownOptions]);
-
-    const findPrevHoverOptionValue = React.useCallback(() => {
-      const sliceInd = hoverOptionIndex === -1 ? undefined : hoverOptionIndex;
-      const prevAbledOptionValue = findAbledOptionValue(dropDownOptions.slice(0, sliceInd).reverse());
-      if (prevAbledOptionValue) return prevAbledOptionValue;
-      return findAbledOptionValue(dropDownOptions.slice().reverse());
-    }, [hoverOptionIndex, dropDownOptions]);
-
-    const handleKeyUp = (e: React.KeyboardEvent) => {
-      const code = keyboardKey.getCode(e);
-
-      switch (code) {
-        case keyboardKey.Enter: {
-          onEnter();
-          break;
-        }
-        case keyboardKey.Escape: {
-          onCloseSelect();
-          break;
-        }
-        case keyboardKey.ArrowUp: {
-          const prevValue = findPrevHoverOptionValue();
-          if (!prevValue) break;
-          scrollToOption(prevValue);
-          setHoverValue(prevValue);
-          break;
-        }
-        case keyboardKey.ArrowDown: {
-          const nextValue = findNextHoverOptionValue();
-          if (!nextValue) break;
-          scrollToOption(nextValue);
-          setHoverValue(nextValue);
-          break;
-        }
-      }
     };
 
     const extendSelectValueToInputValue = () => {
@@ -457,7 +361,8 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
     };
 
     const narrowSelectValueToInputValue = (evt: React.KeyboardEvent) => {
-      if (!visibleValueIsString || !inputRef.current || searchValue || !shouldRenderSelectValue || !localValue) return;
+      if (!visibleValueIsString || !inputRef.current || searchValue || !shouldRenderSelectValue || !selectedValue)
+        return;
 
       // Предотвратить удаление выделенного с помощью selection символа
       evt.preventDefault();
@@ -469,14 +374,30 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       });
     };
 
-    const onWrapperKeyDown = (evt: React.KeyboardEvent) => {
+    const handleWrapperKeyDown = (evt: React.KeyboardEvent) => {
       const code = keyboardKey.getCode(evt);
 
-      if (code === keyboardKey.ArrowUp || code === keyboardKey.ArrowDown) evt.preventDefault();
+      if (code === keyboardKey[' ']) {
+        if (!modeIsSelect && !!searchValue) evt.stopPropagation();
+        else if (!isSearchPanelOpen) {
+          evt.preventDefault();
+          setIsSearchPanelOpen(true);
+          evt.stopPropagation();
+        }
+      }
+
+      if ((code === keyboardKey.ArrowDown || code === keyboardKey.ArrowUp) && !isSearchPanelOpen) {
+        setIsSearchPanelOpen(true);
+        evt.stopPropagation();
+      }
+
       if (evt.key.length === 1) extendSelectValueToInputValue();
       if (code === keyboardKey.Backspace && !evt.repeat) deleteOrHideSelectValueOnBackspace();
-      if (code === keyboardKey.Backspace) narrowSelectValueToInputValue(evt);
-      if (code === keyboardKey.Enter && isSearchPanelOpen) evt.preventDefault();
+      if (code === keyboardKey.Backspace) {
+        narrowSelectValueToInputValue(evt);
+        setIsSearchPanelOpen(true);
+      }
+      if (code === keyboardKey.Escape) setIsSearchPanelOpen(false);
     };
 
     const onFocus = (evt: React.FocusEvent<HTMLDivElement>) => {
@@ -489,22 +410,17 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       if (!evt.currentTarget.contains(evt.relatedTarget)) {
         setIsFocused(false);
         onBlurFromProps?.(evt);
-        onCloseSelect();
       }
     };
 
     const handleNativeControlChange = (evt: React.ChangeEvent<HTMLSelectElement>) => {
       if (selectIsUncontrolled) {
-        setLocalValue(
+        setSelectedValue(
           multiple ? Array.from(evt.target.selectedOptions).map((option) => option.value) : evt.target.value,
         );
       }
       props.onChange?.(evt);
     };
-
-    React.useEffect(() => {
-      if (!Array.isArray(localValue)) setHoverValue(localValue || '');
-    }, [localValue]);
 
     React.useEffect(() => {
       if ((!isFocused && !multiple) || multiple) setShouldRenderSelectValue(true);
@@ -517,22 +433,21 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
     }, [isSearchPanelOpen, modeIsSelect]);
 
     React.useEffect(() => {
-      if (!selectIsUncontrolled) setLocalValue(value);
+      if (isSearchPanelOpen) {
+        const activeValue = selectedValue && !Array.isArray(selectedValue) ? selectedValue : undefined;
+        setActiveItem(activeValue);
+      }
+    }, [isSearchPanelOpen]);
+
+    React.useEffect(() => {
+      if (!selectIsUncontrolled) setSelectedValue(value);
     }, [value, selectIsUncontrolled]);
 
     useClickOutside([containerRef, dropDownRef], onCloseSelect);
 
-    const nativeOptions = selectRef.current ? Array.from(selectRef.current.options) : [];
+    const handleWrapperClick = (e: React.MouseEvent) => {
+      if (e.target && dropDownRef.current?.contains(e.target as Node)) return;
 
-    const handleSelectOption = () => {
-      selectRef.current?.dispatchEvent(new Event('change', { bubbles: true }));
-    };
-
-    const handleQueryOpenDropDown = () => {
-      if (!isSearchPanelOpen) setIsSearchPanelOpen(true);
-    };
-
-    const handleWrapperClick = () => {
       const passClick = !modeIsSelect && isSearchPanelOpen;
       if (!passClick) handleSearchPanelToggle();
     };
@@ -556,13 +471,11 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
         dimension={dimension}
         ref={containerRef}
         data-status={status}
-        // onKeyUp={handleKeyUp}
-        onKeyDown={onWrapperKeyDown}
+        onKeyDown={handleWrapperKeyDown}
         onClick={handleWrapperClick}
-        // onMouseDown={preventDefault}
-        // onBlur={onBlur}
         onFocus={onFocus}
         skeleton={skeleton}
+        onBlur={onBlur}
       >
         <ConstantSelectProvider
           onConstantOptionMount={onConstantOptionMount}
@@ -577,7 +490,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
           onDropDownOptionMount={handleDropDownOptionMount}
           onDropDownOptionUnMount={handleDropDownOptionUnMount}
           highlightFormat={highlightFormat}
-          selectValue={localValue}
+          selectValue={selectedValue}
           searchValue={searchValue}
           activeItem={activeItem}
           dimension={dimension}
@@ -589,11 +502,10 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
         </DropDownProvider>
         <NativeControl
           ref={refSetter(ref, selectRef)}
-          value={localValue}
+          value={selectedValue}
           multiple={multiple}
           disabled={disabled}
           options={constantOptions}
-          onQueryOpenDropDown={handleQueryOpenDropDown}
           onChange={handleNativeControlChange}
         />
         <BorderedDiv />
@@ -603,7 +515,6 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
           multiple={multiple}
           fixHeight={shouldFixHeight}
           isEmpty={isEmpty}
-          // onMouseDown={preventDefault}
         >
           {shouldRenderSelectValue && wrappedVisibleValue}
           {((placeholder && isEmpty) || !modeIsSelect) && (
@@ -623,56 +534,25 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
         </ValueWrapper>
         {isSearchPanelOpen && !skeleton && (
           <DropdownContainer
+            ref={dropDownRef}
             targetRef={portalTargetRef || containerRef}
             data-dimension={dimension}
             onClickOutside={handleClickOutside}
             alignSelf={alignDropdown}
             dropContainerCssMixin={dropContainerCssMixin}
           >
-            {dropDownItems.length ? (
-              <HighlightWrapper searchValue={searchValue} highlightFormat={highlightFormat}>
-                <StyledMenu
-                  active={activeItem}
-                  selected={localValue}
-                  onActivateItem={setActiveItem}
-                  onSelectItem={handleOptionSelect}
-                  model={dropDownItems}
-                  renderBottomPanel={renderOptionsBottomPanel}
-                />
-              </HighlightWrapper>
-            ) : (
-              <EmptyMessageWrapper>{emptyMessage}</EmptyMessageWrapper>
-            )}
+            <HighlightWrapper searchValue={searchValue} highlightFormat={highlightFormat}>
+              <StyledMenu
+                active={activeItem}
+                selected={Array.isArray(selectedValue) ? undefined : selectedValue}
+                onActivateItem={setActiveItem}
+                onSelectItem={handleOptionSelect}
+                model={dropDownModel}
+                renderTopPanel={renderDropDownTopPanel}
+                renderBottomPanel={renderDropDownBottomPanel}
+              />
+            </HighlightWrapper>
           </DropdownContainer>
-
-          // <DropdownContainer
-          //   targetRef={portalTargetRef || containerRef}
-          //   data-dimension={dimension || TextInput.defaultProps?.dimension}
-          //   // Запретит перенос фокуса с инпута при клике по всему, что внутри Dropdown
-          //   onMouseDown={preventDefault}
-          //   onClick={stopPropagation}
-          //   ref={dropDownRef}
-          //   alignSelf={alignDropdown}
-          //   // disableAutoAlign
-          // >
-          //   <DropDownSelectProvider
-          //     onOptionClick={handleOptionSelect}
-          //     onMouseEnter={setHoverValue}
-          //     onDropDownOptionMount={onDropDownOptionMount}
-          //     onDropDownOptionUnMount={onDropDownOptionUnMount}
-          //     highlightFormat={highlightFormat}
-          //     selectValue={localValue}
-          //     searchValue={searchValue}
-          //     hoverValue={hoverValue}
-          //     dimension={dimension}
-          //     multiple={multiple}
-          //     defaultHighlighted={defaultHighlighted}
-          //     showCheckbox={showCheckbox}
-          //   >
-          //     {dropDownChildren}
-          //     {/*<Menu model={[]} />*/}
-          //   </DropDownSelectProvider>
-          // </DropdownContainer>
         )}
         <IconPanel multiple={multiple} dimension={dimension} onClick={stopPropagation} onMouseDown={preventDefault}>
           {isLoading && <Spinner svgMixin={SpinnerMixin} dimension={dimension === 's' ? 's' : 'm'} />}

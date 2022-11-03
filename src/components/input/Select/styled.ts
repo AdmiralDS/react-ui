@@ -324,11 +324,11 @@ export const StyledMenu = styled(Menu)`
 `;
 
 export const EmptyMessageWrapper = styled.div`
-  padding: 8px 0;
   user-select: none;
-  ${ShadowContainerMixin}
 `;
 
-export const StyledMenuItem = styled(MenuItem)`
+export const CustomOptionWrapper = styled(MenuItem)`
   justify-content: flex-start;
+  flex-wrap: nowrap;
+  white-space: pre-wrap;
 `;

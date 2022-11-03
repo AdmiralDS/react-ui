@@ -1,11 +1,6 @@
 import * as React from 'react';
 import { TRenderChip } from '#src/components/input/Select/types';
-
-interface RenderOptionProps {
-  disabled?: boolean;
-  searchValue?: string;
-  isHovered?: boolean;
-}
+import { RenderOptionProps } from '#src/components/Menu/MenuItem';
 
 export interface OptionProps extends React.InputHTMLAttributes<HTMLDivElement> {
   id?: string;

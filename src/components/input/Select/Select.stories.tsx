@@ -16,6 +16,8 @@ import { getTextHighlightMeta } from '#src/components/input/Select/utils';
 import { MenuActionsPanel } from '#src/components/Menu/MenuActionsPanel';
 import { TextButton } from '#src/components/TextButton';
 import { PlusOutline } from '#src/icons/IconComponents-service';
+import { CustomOptionWrapper } from './styled';
+import { RenderOptionProps } from '#src/components/Menu/MenuItem';
 
 export default {
   title: 'Admiral-2.1/Input/Select',
@@ -301,18 +303,18 @@ const CustomOptionTemplate: ComponentStory<typeof Select> = (props) => {
   );
 };
 
-interface IMyIncredibleOptionProps {
+interface MyIncredibleOptionProps extends RenderOptionProps {
   shouldAnimate?: boolean;
   text: string;
 }
 
-const MyIncredibleOption = ({ text, shouldAnimate }: IMyIncredibleOptionProps) => (
-  <>
+const MyIncredibleOption = ({ text, shouldAnimate, ...props }: MyIncredibleOptionProps) => (
+  <CustomOptionWrapper {...props}>
     <Icon shouldAnimate={shouldAnimate} />
     <TextWrapper>
       <Highlight>{text}</Highlight>
     </TextWrapper>
-  </>
+  </CustomOptionWrapper>
 );
 
 const RenderPropsTemplate: ComponentStory<typeof Select> = (props) => {
@@ -330,8 +332,8 @@ const RenderPropsTemplate: ComponentStory<typeof Select> = (props) => {
           <Option
             key={value}
             value={value}
-            renderOption={({ isHovered }) => (
-              <MyIncredibleOption text={text} shouldAnimate={isHovered && value !== selectValue} />
+            renderOption={(options) => (
+              <MyIncredibleOption text={text} shouldAnimate={options.hovered && value !== selectValue} {...options} />
             )}
           />
         ))}
@@ -653,6 +655,7 @@ const TemplateMultiSelectCustomChip: ComponentStory<typeof Select> = (props) => 
 const SearchSelectWithBottomPaneTemplate: ComponentStory<typeof Select> = (props) => {
   const [selectValue, setSelectValue] = React.useState('');
   const [searchValue, setSearchValue] = React.useState('');
+  const [options, setOptions] = React.useState(OPTIONS_SIMPLE);
 
   const onChange = (e: ChangeEvent<HTMLSelectElement>) => {
     setSelectValue(e.target.value);
@@ -660,18 +663,26 @@ const SearchSelectWithBottomPaneTemplate: ComponentStory<typeof Select> = (props
   };
 
   const renderOptions = () => {
-    return OPTIONS_SIMPLE.map(
-      (option, ind) =>
-        shouldRender(option, searchValue) && (
-          <Option key={option} value={option} disabled={ind === 4}>
-            {option}
-          </Option>
-        ),
-    ).filter((item) => !!item);
+    return options
+      .map(
+        (option, ind) =>
+          shouldRender(option, searchValue) && (
+            <Option key={option} value={option} disabled={ind === 4}>
+              {option}
+            </Option>
+          ),
+      )
+      .filter((item) => !!item);
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.target.value);
+  };
+
+  const handleAddButtonClick = () => {
+    if (searchValue && !options.includes(searchValue)) {
+      setOptions([...options, searchValue]);
+    }
   };
 
   const menuPanelContentDimension = props.dimension === undefined || props.dimension === 'xl' ? 'l' : props.dimension;
@@ -685,16 +696,10 @@ const SearchSelectWithBottomPaneTemplate: ComponentStory<typeof Select> = (props
         mode="searchSelect"
         value={selectValue}
         onChange={onChange}
-        renderOptionsBottomPanel={({ dimension = menuPanelContentDimension }) => {
+        renderDropDownBottomPanel={({ dimension = menuPanelContentDimension }) => {
           return (
             <MenuActionsPanel dimension={dimension}>
-              <TextButton
-                text={'Добавить'}
-                disabled={false}
-                icon={<PlusOutline />}
-                // dimension={menuPanelContentDimension}
-                onClick={() => console.log('add click')}
-              />
+              <TextButton text={'Добавить'} disabled={false} icon={<PlusOutline />} onClick={handleAddButtonClick} />
             </MenuActionsPanel>
           );
         }}

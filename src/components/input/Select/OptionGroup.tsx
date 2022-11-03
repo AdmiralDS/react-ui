@@ -13,6 +13,7 @@ interface OptionGroupProps extends HTMLAttributes<HTMLDivElement> {
 const Category = styled(OptionWrapper)`
   font-weight: 500;
   color: ${(props) => props.theme.color['Neutral/Neutral 90']};
+  user-select: none;
 `;
 
 export const OptionGroup = ({ label, disabled, children, ...props }: React.PropsWithChildren<OptionGroupProps>) => {
@@ -23,8 +24,9 @@ export const OptionGroup = ({ label, disabled, children, ...props }: React.Props
       <Option
         key={label}
         value={label}
-        renderOption={({ isHovered }) => (
-          <Category {...props} dimension={selectContext?.dimension}>
+        readOnly={true}
+        renderOption={() => (
+          <Category {...props} dimension={selectContext?.dimension} key={label}>
             {label}
           </Category>
         )}

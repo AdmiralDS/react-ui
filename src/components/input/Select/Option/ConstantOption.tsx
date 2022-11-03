@@ -25,7 +25,7 @@ const ConstantOption = ({ disabled = false, value, children, renderOption, rende
       renderOption
         ? renderOption({
             disabled,
-            searchValue: selectContext?.searchValue,
+            // searchValue: selectContext?.searchValue,
           })
         : children,
     [renderOption, disabled, value, children, selectContext?.searchValue],

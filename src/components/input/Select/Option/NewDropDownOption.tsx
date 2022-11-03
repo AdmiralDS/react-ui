@@ -2,18 +2,26 @@ import * as React from 'react';
 import { useOptionGroupContext } from '#src/components/input/Select/useSelectContext';
 import { ComponentDimension, Highlight } from '#src/components/input';
 import type { OptionProps } from '#src/components/input/Select/Option/types';
-import { CustomOption, StyledCheckbox } from './styled';
-import { ItemProps, MenuItem, RenderOptionProps } from '#src/components/Menu/MenuItem';
-import { useDropDownContext } from '#src/components/input/Select/Dropdown/Context';
+import { StyledCheckbox } from './styled';
+import type { ItemProps, RenderOptionProps } from '#src/components/Menu/MenuItem';
+import { useDropDownContext } from '#src/components/input/Select/DropDownContext';
 import type { ItemDimension } from '#src/components/Menu/menuItemMixins';
 import { useMemo } from 'react';
-import { StyledMenuItem } from '#src/components/input/Select/styled';
+import { CustomOptionWrapper } from '#src/components/input/Select/styled';
 
 const convertDimension = (selectDimension?: ComponentDimension): ItemDimension | undefined => {
   return selectDimension === 'xl' ? 'l' : selectDimension;
 };
 
-export const DropDownOption = ({ id, disabled = false, value, children, renderOption, ...htmlProps }: OptionProps) => {
+export const DropDownOption = ({
+  id,
+  disabled = false,
+  readOnly = false,
+  value,
+  children,
+  renderOption,
+  ...htmlProps
+}: OptionProps) => {
   const dropDownContext = useDropDownContext();
   const optionGroupContext = useOptionGroupContext();
 
@@ -43,49 +51,31 @@ export const DropDownOption = ({ id, disabled = false, value, children, renderOp
     </>
   );
 
-  const ref = React.useRef<HTMLDivElement>(null);
-
   const defaultOptionRender = dropDownContext?.multiple ? multipleOptionRender() : highlightedChildrenRender;
 
-  const handleClick = () => {
-    dropDownContext?.onOptionClick?.(value);
-  };
-
-  const handleHover = (id: string) => {
-    if (dropDownContext?.activeItem !== id) {
-      dropDownContext?.onActivateItem?.(id);
-    }
-  };
-
   React.useEffect(() => {
-    const searchValue = dropDownContext?.searchValue;
-    const selectValue = dropDownContext?.selectValue;
     const itemId = id ?? value;
-    const isHovered = dropDownContext?.activeItem === itemId;
 
     const item: ItemProps = {
       id: itemId,
       render: (options: RenderOptionProps) => {
         if (renderOption) {
-          return (
-            <CustomOption
-              onMouseMove={() => handleHover(itemId)}
-              onClick={handleClick}
-              active={isHovered}
-              selected={selectValue === itemId}
-            >
-              {renderOption({ disabled: optionIsDisabled, searchValue, isHovered })}
-            </CustomOption>
-          );
+          return renderOption(options);
         }
 
         return (
-          <StyledMenuItem {...options} dimension={convertDimension(dropDownContext?.dimension)} key={itemId}>
+          <CustomOptionWrapper
+            {...options}
+            dimension={convertDimension(dropDownContext?.dimension)}
+            key={itemId}
+            {...htmlProps}
+          >
             {defaultOptionRender}
-          </StyledMenuItem>
+          </CustomOptionWrapper>
         );
       },
       disabled: optionIsDisabled,
+      readOnly,
     };
 
     dropDownContext?.onDropDownOptionMount?.(item);
@@ -95,6 +85,7 @@ export const DropDownOption = ({ id, disabled = false, value, children, renderOp
     dropDownContext?.onDropDownOptionUnMount,
     dropDownContext?.activeItem,
     dropDownContext?.searchValue,
+    dropDownContext?.selectValue,
   ]);
 
   return null;
