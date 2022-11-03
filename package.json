@@ -38,7 +38,7 @@
     "release": "standard-version",
     "generate-svg-icon-exports": "node ./scripts/generate-svg-icon-exports.cjs",
     "prepublishOnly": "npm run build",
-    "deploy-storybook": "storybook-to-ghpages"
+    "deploy-storybook": "NODE_OPTIONS=--openssl-legacy-provider storybook-to-ghpages"
   },
   "dependencies": {
     "@admiral-ds/flags": "^2.0.0",

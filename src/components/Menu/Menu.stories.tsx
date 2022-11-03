@@ -19,8 +19,9 @@ import { keyboardKey } from '#src/components/common/keyboardKey';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 import {
   CheckboxGroupItemProps,
-  checkboxTreeToMap, ItemWithCheckbox,
-  MenuItemWithCheckbox
+  checkboxTreeToMap,
+  ItemWithCheckbox,
+  MenuItemWithCheckbox,
 } from '#src/components/Menu/MenuItemWithCheckbox';
 
 const Desc = styled.div`

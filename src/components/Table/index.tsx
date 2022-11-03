@@ -216,8 +216,8 @@ export interface TableProps extends React.HTMLAttributes<HTMLDivElement> {
   onColumnResize?: (colObj: { name: string; width: string }) => void;
   /** Рендер функция для отрисовки контента ячейки. Входные параметры - объект строки и название столбца */
   renderCell?: (row: TableRow, columnName: string) => React.ReactNode;
-  /** Рендер функция для отрисовки обертки вокруг строки. 
-   * Входные параметры - объект строки, её порядковый номер и элемент который должен быть отрисован внутри создаваемой обертки 
+  /** Рендер функция для отрисовки обертки вокруг строки.
+   * Входные параметры - объект строки, её порядковый номер и элемент который должен быть отрисован внутри создаваемой обертки
    * */
   renderRowWrapper?: (row: TableRow, index: number, rowNode: React.ReactNode) => React.ReactNode;
   /** Параметр, определяющий максимальное количество строк, которое может занимать заголовок столбца таблицы.
@@ -727,23 +727,21 @@ export const Table: React.FC<TableProps> = ({
     const visible = rowInGroup ? groupToRowsMap[rowToGroupMap[row.id].groupId].expanded : true;
     const isLastRow = isLastVisibleRow({ row, isGroupRow, tableRows, index });
 
-    const node = (
-      (isGroupRow || visible) && (
-        <RowWrapper
-          dimension={dimension}
-          row={row}
-          underline={(isLastRow && showLastRowUnderline) || !isLastRow}
-          tableWidth={tableWidth}
-          isGroup={isGroupRow}
-          onRowClick={onRowClick}
-          onRowDoubleClick={onRowDoubleClick}
-          rowWidth={isGroupRow ? headerRef.current?.scrollWidth : undefined}
-          verticalScroll={verticalScroll}
-          key={`row_${row.id}`}
-        >
-          {isGroupRow ? renderGroupRow(row) : renderRegularRow(row)}
-        </RowWrapper>
-      )
+    const node = (isGroupRow || visible) && (
+      <RowWrapper
+        dimension={dimension}
+        row={row}
+        underline={(isLastRow && showLastRowUnderline) || !isLastRow}
+        tableWidth={tableWidth}
+        isGroup={isGroupRow}
+        onRowClick={onRowClick}
+        onRowDoubleClick={onRowDoubleClick}
+        rowWidth={isGroupRow ? headerRef.current?.scrollWidth : undefined}
+        verticalScroll={verticalScroll}
+        key={`row_${row.id}`}
+      >
+        {isGroupRow ? renderGroupRow(row) : renderRegularRow(row)}
+      </RowWrapper>
     );
 
     return renderRowWrapper?.(row, index, node) ?? node;
