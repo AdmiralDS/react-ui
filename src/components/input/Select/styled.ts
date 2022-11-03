@@ -5,6 +5,9 @@ import type { ComponentDimension } from '#src/components/input/types';
 import { CHIP_OFFSET, COUNTER_WIDTH } from './constants';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { skeletonMixin } from '../Container';
+import { Checkbox } from '#src/components/Checkbox';
+import { Menu } from '#src/components/Menu';
+import { MenuItem } from '#src/components/Menu/MenuItem';
 
 const getSelectValueHeight = (dimension?: ComponentDimension, multiple?: boolean) =>
   dimension === 's' && !multiple ? 20 : 24;
@@ -305,4 +308,27 @@ export const OptionWrapper = styled.div<{ dimension?: ComponentDimension }>`
 
 export const SpinnerMixin = css`
   padding: 3px;
+`;
+
+const ShadowContainerMixin = css`
+  ${typography['Body/Body 1 Short']}
+  color: ${(p) => p.theme.color['Neutral/Neutral 90']};
+  background-color: ${(p) => p.theme.color['Special/Elevated BG']};
+  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
+  ${(p) => p.theme.shadow['Shadow 08']}
+  overflow: auto;
+`;
+
+export const StyledMenu = styled(Menu)`
+  ${ShadowContainerMixin}
+`;
+
+export const EmptyMessageWrapper = styled.div`
+  user-select: none;
+`;
+
+export const CustomOptionWrapper = styled(MenuItem)`
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  white-space: pre-wrap;
 `;
