@@ -101,16 +101,18 @@ export default {
     componentSubtitle: <Description />,
     layout: 'centered',
   },
+  args: {
+    dimension: 'm',
+    appearance: 'outlined',
+  },
   argTypes: {
     dimension: {
       options: ['m', 's'],
       control: { type: 'radio' },
-      defaultValue: 'm',
     },
     appearance: {
       options: ['outlined', 'filled'],
       control: { type: 'radio' },
-      defaultValue: 'outlined',
     },
     disabled: {
       control: { type: 'boolean' },

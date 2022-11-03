@@ -52,29 +52,29 @@ export default {
       },
     ],
   },
+  args: {
+    status: 'info',
+    title: title,
+    linkText: linkText,
+    href: href,
+    displayStatusIcon: true,
+    isClosable: true,
+  },
   argTypes: {
-    status: {
-      defaultValue: 'info',
-    },
     title: {
       type: 'string',
-      defaultValue: title,
     },
     linkText: {
       type: 'string',
-      defaultValue: linkText,
     },
     href: {
       type: 'string',
-      defaultValue: href,
     },
     displayStatusIcon: {
       type: 'boolean',
-      defaultValue: true,
     },
     isClosable: {
       type: 'boolean',
-      defaultValue: true,
     },
     onClose: {
       action: 'clicked',

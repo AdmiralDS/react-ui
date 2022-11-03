@@ -43,13 +43,13 @@ export default {
       type: 'code',
     },
   },
+  args: {
+    dimension: 'xl',
+  },
   argTypes: {
     dimension: {
       options: ['xl', 'l', 'm', 's'],
-      control: {
-        type: 'radio',
-        defaultValue: 'xl',
-      },
+      control: { type: 'radio' },
     },
     settingsButtonsDisabled: {
       control: 'boolean',

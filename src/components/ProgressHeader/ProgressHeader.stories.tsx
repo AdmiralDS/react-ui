@@ -33,11 +33,13 @@ export default {
       url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=37%3A24985',
     },
   },
+  args: {
+    appearance: 'primary',
+  },
   argTypes: {
     appearance: {
       options: ['primary', 'error'],
       control: { type: 'radio' },
-      defaultValue: 'primary',
     },
   },
 } as ComponentMeta<typeof ProgressHeader>;

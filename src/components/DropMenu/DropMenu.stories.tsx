@@ -59,11 +59,13 @@ export default {
       type: 'code',
     },
   },
+  args: {
+    dimension: 'l',
+  },
   argTypes: {
     dimension: {
       options: ['l', 'm', 's'],
       control: { type: 'radio' },
-      defaultValue: 'l',
     },
     themeBorderKind: {
       options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
@@ -140,7 +142,7 @@ const SimpleTemplate: ComponentStory<typeof DropMenu> = (args) => {
     return items.map((item) => ({
       id: item.id,
       render: (options: RenderOptionProps) => (
-        <MenuItem dimension={args.dimension || 's'} {...options} key={item.id}>
+        <MenuItem dimension={args.dimension} {...options} key={item.id}>
           {item.label}
         </MenuItem>
       ),
@@ -183,6 +185,7 @@ const SimpleTemplate: ComponentStory<typeof DropMenu> = (args) => {
                 disabled={disabled}
                 onKeyDown={handleKeyDown}
                 onClick={handleClick}
+                dimension={args.dimension}
               >
                 Нажми
                 {statusIcon}
@@ -288,7 +291,7 @@ const TemplateWithCards: ComponentStory<typeof DropMenu> = (args) => {
         }),
       );
     }, []);
-  }, []);
+  }, [args.dimension]);
 
   const [selected, setSelected] = React.useState<string | undefined>('');
   const [active, setActive] = React.useState<string | undefined>('');
@@ -326,6 +329,7 @@ const TemplateWithCards: ComponentStory<typeof DropMenu> = (args) => {
                 disabled={disabled}
                 onKeyDown={handleKeyDown}
                 onClick={handleClick}
+                dimension={args.dimension}
               >
                 Нажми
                 {statusIcon}
@@ -389,16 +393,11 @@ const DropMenuTooltipTemplate: ComponentStory<typeof DropMenu> = (args) => {
         id: item.id,
         render: (options: RenderOptionProps) =>
           tooltip ? (
-            <MenuItemWithTooltip
-              renderContent={() => item.label}
-              dimension={args.dimension || 's'}
-              {...options}
-              key={item.id}
-            >
+            <MenuItemWithTooltip renderContent={() => item.label} dimension={args.dimension} {...options} key={item.id}>
               {item.label.slice(0, 17) + '...'}
             </MenuItemWithTooltip>
           ) : (
-            <MenuItem dimension={args.dimension || 's'} {...options} key={item.id}>
+            <MenuItem dimension={args.dimension} {...options} key={item.id}>
               {item.label}
             </MenuItem>
           ),
@@ -455,6 +454,7 @@ const DropMenuTooltipTemplate: ComponentStory<typeof DropMenu> = (args) => {
               disabled={disabled}
               onKeyDown={handleKeyDown}
               onClick={handleButtonClick}
+              dimension={args.dimension}
             >
               Нажми
               {statusIcon}
@@ -510,7 +510,7 @@ const TemplateWithCheckbox: ComponentStory<typeof DropMenu> = (args) => {
         <MenuItemWithCheckbox
           key={item.id}
           id={item.id}
-          dimension={args.dimension || 's'}
+          dimension={args.dimension}
           checked={!!item.checked}
           checkboxIsHovered={item.id === activeOption}
           {...options}
@@ -582,6 +582,7 @@ const TemplateWithCheckbox: ComponentStory<typeof DropMenu> = (args) => {
               disabled={disabled}
               onKeyDown={handleKeyDown}
               onClick={handleButtonClick}
+              dimension={args.dimension}
             >
               Нажми
               {statusIcon}
@@ -600,7 +601,7 @@ const TemplateWithRadiobutton: ComponentStory<typeof DropMenu> = (args) => {
     return items.map((item, index) => ({
       id: item.id,
       render: (options: RenderOptionProps) => (
-        <MenuItem dimension={args.dimension || 's'} {...options} key={item.id}>
+        <MenuItem dimension={args.dimension} {...options} key={item.id}>
           <RadioButton
             dimension={args.dimension !== 's' ? 'm' : args.dimension}
             disabled={item.disabled}
@@ -651,6 +652,7 @@ const TemplateWithRadiobutton: ComponentStory<typeof DropMenu> = (args) => {
               disabled={disabled}
               onKeyDown={handleKeyDown}
               onClick={handleClick}
+              dimension={args.dimension}
             >
               Нажми
               {statusIcon}

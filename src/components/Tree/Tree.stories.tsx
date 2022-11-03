@@ -46,6 +46,9 @@ export default {
       },
     ],
   },
+  args: {
+    withCheckbox: true,
+  },
   argTypes: {
     dimension: {
       options: ['m', 's'],
@@ -53,7 +56,6 @@ export default {
     withCheckbox: {
       options: [true, false],
       control: { type: 'radio' },
-      defaultValue: true,
     },
   },
 } as ComponentMeta<typeof Tree>;

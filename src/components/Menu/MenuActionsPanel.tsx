@@ -64,7 +64,7 @@ export function getHighlightedFilteredOptions(
         id: option.id,
         render: (options: RenderOptionProps) => {
           return (
-            <MenuItem dimension={dimension || 's'} {...options} key={option.id}>
+            <MenuItem dimension={dimension} {...options} key={option.id}>
               <TextWrapper>{itemValue}</TextWrapper>
             </MenuItem>
           );
@@ -79,7 +79,7 @@ export function getHighlightedFilteredOptions(
       id: id,
       render: (options: RenderOptionProps) => {
         return (
-          <StyledMenuItem dimension={dimension || 's'} {...options} key={id}>
+          <StyledMenuItem dimension={dimension} {...options} key={id}>
             {emptyMessage}
           </StyledMenuItem>
         );

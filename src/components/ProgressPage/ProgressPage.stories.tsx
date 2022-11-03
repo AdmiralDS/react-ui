@@ -42,11 +42,13 @@ export default {
       },
     ],
   },
+  args: {
+    appearance: 'primary',
+  },
   argTypes: {
     appearance: {
       options: ['primary', 'error'],
       control: { type: 'radio' },
-      defaultValue: 'primary',
     },
   },
 } as ComponentMeta<typeof ProgressPage>;

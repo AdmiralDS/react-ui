@@ -49,11 +49,13 @@ export default {
       type: 'code',
     },
   },
+  args: {
+    dimension: 'l',
+  },
   argTypes: {
     dimension: {
       options: ['l', 'm', 's'],
       control: { type: 'radio' },
-      defaultValue: 'l',
     },
     themeBorderKind: {
       options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
