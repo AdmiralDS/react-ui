@@ -36,9 +36,7 @@ const Input = styled(NumberInput)`
   border-radius: ${(p) => (p.skeleton ? 0 : sliderBorderRadius(p.theme.shape))};
 `;
 
-export interface SliderInputProps extends Omit<TextInputProps, 'onChange' | 'value'> {
-  /** Дефолтное значение компонента */
-  defaultValue?: string;
+export interface SliderInputProps extends Omit<TextInputProps, 'onChange'> {
   /** Колбек на изменение значения компонента (fullStr - строка вместе с префиксом/суффиксом/разделителями, shortStr - строка только с числом) */
   onChange?: (fullStr: string, shortStr: string) => void;
   /** Минимальное значение слайдера */
@@ -46,7 +44,7 @@ export interface SliderInputProps extends Omit<TextInputProps, 'onChange' | 'val
   /** Максимальное значение слайдера */
   maxValue?: number;
   /** Шаг слайдера. Это положительное число, по умолчанию 1.
-   * Компонент принимает только кратные step значения, в диапазоне minValue - maxValue
+   * Если шаг - это дробное число, то количество знаков в десятичной части step должно быть равно precision
    */
   step?: number;
   /** Массив отметок слайдера */
@@ -71,6 +69,7 @@ export const SliderInput = React.forwardRef<HTMLInputElement, SliderInputProps>(
   (
     {
       defaultValue = '',
+      value,
       onChange,
       renderTickMark,
       minValue = 0,
@@ -95,27 +94,38 @@ export const SliderInput = React.forwardRef<HTMLInputElement, SliderInputProps>(
     const decimal = '.';
     const [inputValue, setInputValue] = React.useState<string>('');
     const [sliderValue, setSliderValue] = React.useState<number>(minValue);
+    const [controlled, setControlled] = React.useState(false);
 
     React.useEffect(() => {
-      setInputValue(fitToCurrency(defaultValue, precision, decimal, thousand, true));
-      setSliderValue(+clearValue(defaultValue, precision, decimal));
-    }, [defaultValue]);
+      if (typeof value !== 'undefined') {
+        setControlled(true);
+        setInputValue(fitToCurrency(String(value), precision, decimal, thousand, true));
+        setSliderValue(+clearValue(String(value), precision, decimal));
+      } else {
+        setControlled(false);
+        setInputValue(fitToCurrency(String(defaultValue || ''), precision, decimal, thousand, true));
+        setSliderValue(+clearValue(String(defaultValue || ''), precision, decimal));
+      }
+    }, [defaultValue, value]);
 
     const handleSliderChange = (e: any, value: number) => {
       const shortValue = fitToCurrency(value.toString(), precision, decimal, thousand, true);
       const fullValue = fitToCurrency(shortValue, precision, decimal, thousand);
 
-      setSliderValue(value);
-      setInputValue(fullValue);
-
+      if (!controlled) {
+        setSliderValue(value);
+        setInputValue(fullValue);
+      }
       onChange?.(fullValue, shortValue);
     };
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       const full = event.target.value;
       const short = clearValue(full, precision, decimal);
-      setInputValue(full);
-      setSliderValue(+short);
 
+      if (!controlled) {
+        setInputValue(full);
+        setSliderValue(+short);
+      }
       onChange?.(full, short);
     };
     return (
