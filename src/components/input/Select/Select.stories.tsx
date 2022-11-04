@@ -12,7 +12,6 @@ import styled, { css, keyframes, ThemeProvider } from 'styled-components';
 import { Theme } from '#src/components/themes';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { typography } from '#src/components/Typography';
-import { getTextHighlightMeta } from '#src/components/input/Select/utils';
 import { MenuActionsPanel } from '#src/components/Menu/MenuActionsPanel';
 import { TextButton } from '#src/components/TextButton';
 import { PlusOutline } from '#src/icons/IconComponents-service';
@@ -89,10 +88,8 @@ export default {
       control: { type: 'radio' },
     },
     highlightFormat: {
-      control: {
-        type: 'radio',
-        options: ['word', 'wholly'],
-      },
+      options: ['word', 'wholly'],
+      control: { type: 'radio' },
     },
     skeleton: {
       control: { type: 'boolean' },
