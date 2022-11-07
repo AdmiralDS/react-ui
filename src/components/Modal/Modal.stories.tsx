@@ -296,14 +296,22 @@ const Template5: ComponentStory<typeof Modal> = (args) => {
           aria-labelledby="modal-title"
           overlayStyledCss={overlayStyles}
         >
-          <h1 id="modal-title">
+          <h1 id="modal-title" style={{ paddingLeft: '24px' }}>
             <strong>Modal title</strong>
           </h1>
-          <i>
+          <i style={{ paddingLeft: '24px' }}>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. At cupiditate ducimus nisi nulla numquam obcaecati
             quam quasi quod ut veritatis?
           </i>
-          <div style={{ marginTop: '40px', width: '80%', display: 'flex', justifyContent: 'space-between' }}>
+          <div
+            style={{
+              marginTop: '40px',
+              width: '80%',
+              display: 'flex',
+              justifyContent: 'space-between',
+              paddingLeft: '24px',
+            }}
+          >
             <Button appearance="primary" dimension="m" onClick={() => setOpened(false)}>
               First button
             </Button>
