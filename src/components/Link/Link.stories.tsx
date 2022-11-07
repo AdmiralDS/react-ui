@@ -13,6 +13,11 @@ export default {
   decorators: [withDesign],
   component: Link,
   parameters: {
+    docs: {
+      source: {
+        code: null,
+      },
+    },
     design: [
       {
         type: 'figma',
@@ -26,31 +31,23 @@ export default {
   },
   argTypes: {
     target: {
-      control: {
-        type: 'select',
-        options: ['_parent', '_self', '_top', '_blank'],
-      },
+      options: ['_parent', '_self', '_top', '_blank'],
+      control: { type: 'select' },
     },
     appearance: {
-      control: {
-        type: 'radio',
-        options: ['primary', 'secondary'],
-      },
+      options: ['primary', 'secondary'],
+      control: { type: 'radio' },
     },
     dimension: {
-      control: {
-        type: 'radio',
-        options: ['m', 's'],
-      },
+      options: ['m', 's'],
+      control: { type: 'radio' },
     },
     disabled: {
       control: { type: 'boolean' },
     },
     themeBorderKind: {
-      control: {
-        type: 'radio',
-        options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
-      },
+      options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
+      control: { type: 'radio' },
     },
   },
 } as ComponentMeta<typeof Link>;

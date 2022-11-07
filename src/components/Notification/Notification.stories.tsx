@@ -31,6 +31,11 @@ export default {
   decorators: [withDesign],
   component: Notification,
   parameters: {
+    docs: {
+      source: {
+        code: null,
+      },
+    },
     componentSubtitle: <Description />,
     design: [
       {
@@ -47,38 +52,36 @@ export default {
       },
     ],
   },
+  args: {
+    status: 'info',
+    title: title,
+    linkText: linkText,
+    href: href,
+    displayStatusIcon: true,
+    isClosable: true,
+  },
   argTypes: {
-    status: {
-      defaultValue: 'info',
-    },
     title: {
       type: 'string',
-      defaultValue: title,
     },
     linkText: {
       type: 'string',
-      defaultValue: linkText,
     },
     href: {
       type: 'string',
-      defaultValue: href,
     },
     displayStatusIcon: {
       type: 'boolean',
-      defaultValue: true,
     },
     isClosable: {
       type: 'boolean',
-      defaultValue: true,
     },
     onClose: {
       action: 'clicked',
     },
     themeBorderKind: {
-      control: {
-        type: 'radio',
-        options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
-      },
+      options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
+      control: { type: 'radio' },
     },
   },
 } as ComponentMeta<typeof Notification>;

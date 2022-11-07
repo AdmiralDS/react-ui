@@ -39,6 +39,11 @@ export default {
   title: 'Admiral-2.1/Accordion',
   component: Accordion,
   parameters: {
+    docs: {
+      source: {
+        code: null,
+      },
+    },
     componentSubtitle: <Description />,
     design: [
       {

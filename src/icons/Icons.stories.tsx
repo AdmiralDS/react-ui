@@ -143,6 +143,11 @@ export default {
   decorators: [withDesign],
   component: CopyOutline,
   parameters: {
+    docs: {
+      source: {
+        code: null,
+      },
+    },
     design: {
       type: 'figma',
       url: 'https://www.figma.com/file/8sqIh7WvDuF1nc6Qo2BeCA/04-%F0%9F%9A%A7-%D0%98%D0%BB%D0%BB%D1%8E%D1%81%D1%82%D1%80%D0%B0%D1%86%D0%B8%D0%B8-%D0%B8-%D0%B8%D0%BA%D0%BE%D0%BD%D0%BA%D0%B8-Web-2.0?node-id=6681%3A281585',

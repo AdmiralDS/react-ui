@@ -5,7 +5,6 @@ import type { ComponentDimension } from '#src/components/input/types';
 import { CHIP_OFFSET, COUNTER_WIDTH } from './constants';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { skeletonMixin } from '../Container';
-import { Checkbox } from '#src/components/Checkbox';
 import { Menu } from '#src/components/Menu';
 import { MenuItem } from '#src/components/Menu/MenuItem';
 

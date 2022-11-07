@@ -30,6 +30,11 @@ export default {
   decorators: [withDesign],
   component: Toggle,
   parameters: {
+    docs: {
+      source: {
+        code: null,
+      },
+    },
     design: [
       {
         type: 'figma',

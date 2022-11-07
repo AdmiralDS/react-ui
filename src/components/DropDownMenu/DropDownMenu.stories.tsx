@@ -27,6 +27,11 @@ export default {
   decorators: [withDesign],
   component: DropDownMenu,
   parameters: {
+    docs: {
+      source: {
+        code: null,
+      },
+    },
     componentSubtitle: <Description />,
     design: [
       {
@@ -44,17 +49,17 @@ export default {
       type: 'code',
     },
   },
+  args: {
+    dimension: 'l',
+  },
   argTypes: {
     dimension: {
       options: ['l', 'm', 's'],
       control: { type: 'radio' },
-      defaultValue: 'l',
     },
     themeBorderKind: {
-      control: {
-        type: 'radio',
-        options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
-      },
+      options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
+      control: { type: 'radio' },
     },
   },
 } as ComponentMeta<typeof DropDownMenu>;

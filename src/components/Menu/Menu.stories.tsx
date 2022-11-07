@@ -40,6 +40,11 @@ export default {
   decorators: [withDesign],
   component: Menu,
   parameters: {
+    docs: {
+      source: {
+        code: null,
+      },
+    },
     componentSubtitle: <Description />,
     design: [
       {
@@ -57,17 +62,17 @@ export default {
       type: 'code',
     },
   },
+  args: {
+    dimension: 'l',
+  },
   argTypes: {
     dimension: {
       options: ['l', 'm', 's'],
       control: { type: 'radio' },
-      defaultValue: 'l',
     },
     themeBorderKind: {
-      control: {
-        type: 'radio',
-        options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
-      },
+      options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
+      control: { type: 'radio' },
     },
   },
 } as ComponentMeta<typeof Menu>;
@@ -168,7 +173,7 @@ const TemplateWithCards: ComponentStory<typeof Menu> = (args) => {
         }),
       );
     }, []);
-  }, []);
+  }, [args.dimension]);
 
   const [selected, setSelected] = useState<string | undefined>('');
   const [active, setActive] = useState<string | undefined>('');
@@ -232,7 +237,7 @@ const SimpleTemplate: ComponentStory<typeof Menu> = (args) => {
     return items.map((item) => ({
       id: item.id,
       render: (options: RenderOptionProps) => (
-        <MenuItem dimension={args.dimension || 's'} {...options} key={item.id}>
+        <MenuItem dimension={args.dimension} {...options} key={item.id}>
           {item.label}
         </MenuItem>
       ),
@@ -396,7 +401,7 @@ const MenuCheckboxTemplate: ComponentStory<typeof Menu> = (args) => {
         <MenuItemWithCheckbox
           key={item.id}
           id={item.id}
-          dimension={args.dimension || 's'}
+          dimension={args.dimension}
           checked={!!item.checked}
           checkboxIsHovered={item.id === activeOption}
           {...options}
@@ -449,7 +454,7 @@ const MenuRadiobuttonTemplate: ComponentStory<typeof Menu> = (args) => {
     return items.map((item) => ({
       id: item.id,
       render: (options: RenderOptionProps) => (
-        <MenuItem dimension={args.dimension || 's'} {...options} key={item.id}>
+        <MenuItem dimension={args.dimension} {...options} key={item.id}>
           <RadioButton dimension={args.dimension !== 's' ? 'm' : args.dimension} name="menuListOption" key={item.id}>
             {item.label}
           </RadioButton>
@@ -520,16 +525,11 @@ const MenuTooltipTemplate: ComponentStory<typeof Menu> = (args) => {
         id: item.id,
         render: (options: RenderOptionProps) =>
           tooltip ? (
-            <MenuItemWithTooltip
-              renderContent={() => item.label}
-              dimension={args.dimension || 's'}
-              {...options}
-              key={item.id}
-            >
+            <MenuItemWithTooltip renderContent={() => item.label} dimension={args.dimension} {...options} key={item.id}>
               {item.label.slice(0, 17) + '...'}
             </MenuItemWithTooltip>
           ) : (
-            <MenuItem dimension={args.dimension || 's'} {...options} key={item.id}>
+            <MenuItem dimension={args.dimension} {...options} key={item.id}>
               {item.label}
             </MenuItem>
           ),
@@ -561,7 +561,7 @@ const MultiLineMenuTemplate: ComponentStory<typeof Menu> = (args) => {
       return {
         id: item.id,
         render: (options: RenderOptionProps) => (
-          <MultiLineMenuItem dimension={args.dimension || 's'} {...options} key={item.id}>
+          <MultiLineMenuItem dimension={args.dimension} {...options} key={item.id}>
             {item.label}
           </MultiLineMenuItem>
         ),
@@ -593,14 +593,12 @@ const MenuActionsTwoButtonsTemplate: ComponentStory<typeof Menu> = (props) => {
     return items.map((item) => ({
       id: item.id,
       render: (options: RenderOptionProps) => (
-        <MenuItem dimension={props.dimension || 's'} {...options} key={item.id}>
+        <MenuItem dimension={props.dimension} {...options} key={item.id}>
           {item.label}
         </MenuItem>
       ),
     }));
   }, [props.dimension, items]);
-
-  const menuPanelContentDimension = props.dimension === 'l' ? 'm' : props.dimension;
 
   function swapBorder(theme: Theme): Theme {
     theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
@@ -617,7 +615,7 @@ const MenuActionsTwoButtonsTemplate: ComponentStory<typeof Menu> = (props) => {
             return (
               <MenuActionsPanel dimension={dimension} menuActionsPanelCssMixin={menuActionsPanelCssMixin}>
                 <Button
-                  dimension={menuPanelContentDimension}
+                  dimension={'s'}
                   onClick={() => {
                     console.log('Button 1 clicked');
                   }}
@@ -625,7 +623,7 @@ const MenuActionsTwoButtonsTemplate: ComponentStory<typeof Menu> = (props) => {
                   Action 1
                 </Button>
                 <Button
-                  dimension={menuPanelContentDimension}
+                  dimension={'s'}
                   appearance="secondary"
                   onClick={() => {
                     console.log('Button 2 clicked');

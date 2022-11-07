@@ -20,6 +20,11 @@ const Description = () => (
 //   decorators: [withDesign],
 //   component: Range,
 //   parameters: {
+//     docs: {
+//       source: {
+//         code: null,
+//       },
+//     },
 //     componentSubtitle: <Description />,
 //     design: [
 //       {

@@ -34,6 +34,11 @@ export default {
   decorators: [withDesign],
   component: Stepper,
   parameters: {
+    docs: {
+      source: {
+        code: null,
+      },
+    },
     componentSubtitle: <Description />,
     design: [
       {

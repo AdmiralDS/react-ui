@@ -32,6 +32,11 @@ export default {
   decorators: [withDesign],
   component: Breadcrumbs,
   parameters: {
+    docs: {
+      source: {
+        code: null,
+      },
+    },
     componentSubtitle: <Description />,
     design: [
       {

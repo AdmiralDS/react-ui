@@ -2,7 +2,6 @@ import React, { ChangeEvent, useState } from 'react';
 import styled, { css, ThemeProvider } from 'styled-components';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
-import { INPUT_DIMENSIONS_VALUES } from '#src/components/input/types';
 import { T } from '#src/components/T';
 
 import { EditMode } from './index';
@@ -24,6 +23,11 @@ export default {
   component: EditMode,
   decorators: [withDesign],
   parameters: {
+    docs: {
+      source: {
+        code: null,
+      },
+    },
     componentSubtitle: <Description />,
     design: [
       {
@@ -63,10 +67,8 @@ export default {
       action: 'onChange',
     },
     themeBorderKind: {
-      control: {
-        type: 'radio',
-        options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
-      },
+      options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
+      control: { type: 'radio' },
     },
   },
 } as ComponentMeta<typeof EditMode>;

@@ -27,7 +27,7 @@ export default {
   parameters: {
     docs: {
       source: {
-        type: 'code',
+        code: null,
       },
     },
     componentSubtitle: <Description />,
@@ -42,11 +42,13 @@ export default {
       },
     ],
   },
+  args: {
+    appearance: 'primary',
+  },
   argTypes: {
     appearance: {
       options: ['primary', 'error'],
       control: { type: 'radio' },
-      defaultValue: 'primary',
     },
   },
 } as ComponentMeta<typeof ProgressPage>;

@@ -35,6 +35,11 @@ export default {
   decorators: [withDesign],
   component: PaginationTwo,
   parameters: {
+    docs: {
+      source: {
+        code: null,
+      },
+    },
     componentSubtitle: <Description />,
     design: [
       {

@@ -69,6 +69,11 @@ export default {
   decorators: [withDesign],
   component: Toast,
   parameters: {
+    docs: {
+      source: {
+        code: null,
+      },
+    },
     componentSubtitle: <Description />,
     design: [
       {
@@ -81,19 +86,17 @@ export default {
       },
     ],
   },
+  args: {
+    autoDeleteTime: 3000,
+    position: 'top-right',
+  },
   argTypes: {
     autoDeleteTime: {
-      defaultValue: 3000,
       type: 'number',
     },
-    position: {
-      defaultValue: 'top-right',
-    },
     themeBorderKind: {
-      control: {
-        type: 'radio',
-        options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
-      },
+      options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
+      control: { type: 'radio' },
     },
   },
 } as ComponentMeta<typeof Toast>;

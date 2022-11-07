@@ -12,7 +12,6 @@ import styled, { css, keyframes, ThemeProvider } from 'styled-components';
 import { Theme } from '#src/components/themes';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { typography } from '#src/components/Typography';
-import { getTextHighlightMeta } from '#src/components/input/Select/utils';
 import { MenuActionsPanel } from '#src/components/Menu/MenuActionsPanel';
 import { TextButton } from '#src/components/TextButton';
 import { PlusOutline } from '#src/icons/IconComponents-service';
@@ -24,6 +23,11 @@ export default {
   component: Select,
   decorators: [withDesign],
   parameters: {
+    docs: {
+      source: {
+        code: null,
+      },
+    },
     design: {
       type: 'figma',
       url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A72429',
@@ -64,8 +68,8 @@ export default {
     },
 
     status: {
-      control: { type: 'radio' },
       options: INPUT_STATUS_VALUES,
+      control: { type: 'radio' },
     },
 
     displayClearIcon: {
@@ -80,16 +84,12 @@ export default {
       action: 'onChange',
     },
     themeBorderKind: {
-      control: {
-        type: 'radio',
-        options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
-      },
+      options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
+      control: { type: 'radio' },
     },
     highlightFormat: {
-      control: {
-        type: 'radio',
-        options: ['word', 'wholly'],
-      },
+      options: ['word', 'wholly'],
+      control: { type: 'radio' },
     },
     skeleton: {
       control: { type: 'boolean' },
