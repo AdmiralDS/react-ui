@@ -52,10 +52,10 @@ const Title = styled.h5<{ mobile?: boolean }>`
   margin: 0 32px 16px 0;
 `;
 
-const Content = styled.div<{ $overflow?: boolean }>`
+const Content = styled.div<{ $overflow?: boolean; scrollbar: number }>`
   overflow-y: auto;
   outline: none;
-  ${({ $overflow }) => $overflow && 'padding-right: 24px;'}
+  ${({ $overflow, scrollbar }) => $overflow && `padding-right: ${24 - scrollbar}px;`}
 `;
 
 const ButtonPanel = styled.div<{ mobile?: boolean }>`
@@ -81,7 +81,7 @@ const ModalComponent = styled.div<{ dimension: Dimension; mobile?: boolean }>`
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  padding: ${({ mobile }) => (mobile ? '20px 16px 24px 16px' : '20px 24px 24px 24px')};
+  padding: ${({ mobile }) => (mobile ? '20px 16px 24px 0px' : '20px 24px 24px 0px')};
   ${width};
   max-height: ${({ mobile }) => (mobile ? '84vh' : '90vh')};
   background-color: ${({ theme }) => theme.color['Special/Elevated BG']};
@@ -90,6 +90,10 @@ const ModalComponent = styled.div<{ dimension: Dimension; mobile?: boolean }>`
   ${({ mobile }) => (mobile ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
   color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
   outline: none;
+
+  & > ${Title}, ${ButtonPanel}, ${Content} {
+    padding-left: ${({ mobile }) => (mobile ? 16 : 24)}px;
+  }
 
   ${({ mobile }) =>
     mobile &&
@@ -166,15 +170,32 @@ export const ModalTitle: React.FC<React.HTMLAttributes<HTMLHeadingElement>> = ({
 export const ModalContent: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, ...props }) => {
   const contentRef = React.useRef<HTMLDivElement | null>(null);
   const [overflow, setOverflow] = React.useState(false);
+  const [scrollbarSize, setScrollbarSize] = React.useState(0);
 
   React.useLayoutEffect(() => {
     if (contentRef.current && checkOverflow(contentRef.current) !== overflow) {
+      setScrollbarSize(contentRef.current.offsetWidth - contentRef.current.clientWidth);
       setOverflow(checkOverflow(contentRef.current));
     }
-  }, [children]);
+  }, [children, overflow, setOverflow]);
+
+  React.useLayoutEffect(() => {
+    if (contentRef.current) {
+      const resizeObserver = new ResizeObserver(() => {
+        if (contentRef.current && checkOverflow(contentRef.current) !== overflow) {
+          setScrollbarSize(contentRef.current.offsetWidth - contentRef.current.clientWidth);
+          setOverflow(checkOverflow(contentRef.current));
+        }
+      });
+      resizeObserver.observe(contentRef.current);
+      return () => {
+        resizeObserver.disconnect();
+      };
+    }
+  }, [contentRef.current, overflow, setOverflow]);
 
   return (
-    <Content tabIndex={-1} ref={contentRef} $overflow={overflow} {...props}>
+    <Content tabIndex={-1} ref={contentRef} $overflow={overflow} scrollbar={scrollbarSize} {...props}>
       {children}
     </Content>
   );
