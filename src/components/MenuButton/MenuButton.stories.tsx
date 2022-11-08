@@ -1197,43 +1197,15 @@ const Template4: ComponentStory<typeof MenuButton> = (args) => {
 export const MenuButtonBase = Template1.bind({});
 MenuButtonBase.args = {};
 MenuButtonBase.storyName = 'MenuButton. Базовый пример.';
-MenuButtonBase.parameters = {
-  docs: {
-    source: {
-      type: 'code',
-    },
-  },
-};
 
 export const MenuButtonOptions = Template2.bind({});
 MenuButtonOptions.args = {};
 MenuButtonOptions.storyName = 'MenuButton. Задизейбленные и кастомизированные опции.';
-MenuButtonOptions.parameters = {
-  docs: {
-    source: {
-      type: 'code',
-    },
-  },
-};
 
 export const MenuButtonVariants = Template3.bind({});
 MenuButtonVariants.args = {};
 MenuButtonVariants.storyName = 'MenuButton. Размеры и стили.';
-MenuButtonVariants.parameters = {
-  docs: {
-    source: {
-      type: 'code',
-    },
-  },
-};
 
 export const MenuButtonIcon = Template4.bind({});
 MenuButtonIcon.args = {};
 MenuButtonIcon.storyName = 'MenuButton с иконкой';
-MenuButtonIcon.parameters = {
-  docs: {
-    source: {
-      type: 'code',
-    },
-  },
-};

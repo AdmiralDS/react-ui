@@ -191,21 +191,7 @@ const Template2: ComponentStory<typeof FieldSet> = ({ disabled, dimension, ...pr
 export const Checkbox = Template1.bind({});
 Checkbox.args = {};
 Checkbox.storyName = 'Checkbox Fieldset';
-Checkbox.parameters = {
-  docs: {
-    source: {
-      type: 'code',
-    },
-  },
-};
 
 export const RadioGroup = Template2.bind({});
 RadioGroup.args = {};
 RadioGroup.storyName = 'RadioGroup Fieldset';
-RadioGroup.parameters = {
-  docs: {
-    source: {
-      type: 'code',
-    },
-  },
-};

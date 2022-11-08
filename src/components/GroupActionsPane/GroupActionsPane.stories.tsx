@@ -38,11 +38,6 @@ export default {
       },
     ],
   },
-  docs: {
-    source: {
-      type: 'code',
-    },
-  },
   args: {
     dimension: 'xl',
   },

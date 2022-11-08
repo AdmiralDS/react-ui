@@ -188,13 +188,6 @@ const Template6: ComponentStory<typeof Toggle> = ({
 
 export const Playground = Template6.bind({});
 Playground.args = {};
-Playground.parameters = {
-  docs: {
-    source: {
-      type: 'code',
-    },
-  },
-};
 
 export const ToggleSize = Template1.bind({});
 ToggleSize.args = {};

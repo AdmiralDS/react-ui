@@ -121,22 +121,12 @@ const Template2: ComponentStory<typeof AvatarGroup> = () => {
 export const Playground = Template.bind({});
 Playground.args = {};
 Playground.storyName = 'Playground';
-Playground.parameters = {
-  docs: {
-    source: {
-      type: 'code',
-    },
-  },
-};
 
 export const Width = Template2.bind({});
 Width.args = {};
 Width.storyName = 'Пример с ограниченной шириной';
 Width.parameters = {
   docs: {
-    source: {
-      type: 'code',
-    },
     description: {
       story: `При достижении условного максимума отображаемых аватаров, последним ставится аватар с отображением количества
       скрытых элементов. Внешний вид такого аватара (цвет заливки и текста) контролируется с помощью параметра appearance, переданного в 
