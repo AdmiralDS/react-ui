@@ -195,16 +195,23 @@ export const Range = ({
       const calcVal = calcValue(e, trackRef, minValue, maxValue, step);
 
       // calc nearest slider
-      if (Math.abs(value[1] - calcVal) <= Math.abs(calcVal - value[0])) {
+      if (Math.abs(value[1] - calcVal) < Math.abs(calcVal - value[0])) {
         if (!arraysEqual(sortNum([value[0], calcVal], minValue, maxValue), value)) {
           onChange(e, sortNum([value[0], calcVal], minValue, maxValue));
         }
         onSliderClick(e, 'second');
-      } else {
+      } else if (Math.abs(value[1] - calcVal) > Math.abs(calcVal - value[0])) {
         if (!arraysEqual(sortNum([calcVal, value[1]], minValue, maxValue), value)) {
           onChange(e, sortNum([calcVal, value[1]], minValue, maxValue));
         }
         onSliderClick(e, 'first');
+      } else if (Math.abs(value[1] - calcVal) === Math.abs(calcVal - value[0])) {
+        const slider = value[0] === value[1] ? (calcVal < value[0] ? 'first' : 'second') : 'first';
+        const newValue: NumberRange = slider === 'first' ? [calcVal, value[1]] : [value[0], calcVal];
+        if (!arraysEqual(sortNum(newValue, minValue, maxValue), value)) {
+          onChange(e, sortNum(newValue, minValue, maxValue));
+        }
+        onSliderClick(e, slider);
       }
     },
     [value, trackRef.current, maxValue, minValue, step],
