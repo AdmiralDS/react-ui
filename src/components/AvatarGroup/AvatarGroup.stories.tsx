@@ -28,6 +28,11 @@ export default {
   decorators: [withDesign],
   component: AvatarGroup,
   parameters: {
+    docs: {
+      source: {
+        code: null,
+      },
+    },
     componentSubtitle: (
       <Desc>
         Avatar - компонент отображающий аватарку пользователя и его статус. При необходимости компоненты Avatar можно

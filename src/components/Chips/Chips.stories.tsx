@@ -79,6 +79,11 @@ export default {
   component: Chips,
   decorators: [withDesign],
   parameters: {
+    docs: {
+      source: {
+        code: null,
+      },
+    },
     design: [
       {
         type: 'figma',
@@ -95,22 +100,19 @@ export default {
     ],
     componentSubtitle: <Description />,
     layout: 'centered',
-    docs: {
-      source: {
-        type: 'code',
-      },
-    },
+  },
+  args: {
+    dimension: 'm',
+    appearance: 'outlined',
   },
   argTypes: {
     dimension: {
       options: ['m', 's'],
       control: { type: 'radio' },
-      defaultValue: 'm',
     },
     appearance: {
-      control: { type: 'radio' },
       options: ['outlined', 'filled'],
-      defaultValue: 'outlined',
+      control: { type: 'radio' },
     },
     disabled: {
       control: { type: 'boolean' },

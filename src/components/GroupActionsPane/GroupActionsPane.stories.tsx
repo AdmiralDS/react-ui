@@ -25,6 +25,11 @@ export default {
   decorators: [withDesign],
   component: GroupActionsPane,
   parameters: {
+    docs: {
+      source: {
+        code: null,
+      },
+    },
     componentSubtitle: <Description />,
     design: [
       {
@@ -38,13 +43,13 @@ export default {
       type: 'code',
     },
   },
+  args: {
+    dimension: 'xl',
+  },
   argTypes: {
     dimension: {
-      control: {
-        type: 'radio',
-        options: ['xl', 'l', 'm', 's'],
-        defaultValue: 'xl',
-      },
+      options: ['xl', 'l', 'm', 's'],
+      control: { type: 'radio' },
     },
     settingsButtonsDisabled: {
       control: 'boolean',

@@ -25,6 +25,11 @@ export default {
   decorators: [withDesign],
   component: ContentSwitcher,
   parameters: {
+    docs: {
+      source: {
+        code: null,
+      },
+    },
     design: [
       {
         type: 'figma',
@@ -62,10 +67,8 @@ export default {
   },
   argTypes: {
     dimension: {
-      control: {
-        type: 'radio',
-        options: ['l', 'm', 's'],
-      },
+      options: ['l', 'm', 's'],
+      control: { type: 'radio' },
     },
   },
 } as ComponentMeta<typeof ContentSwitcher>;

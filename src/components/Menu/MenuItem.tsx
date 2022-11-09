@@ -21,6 +21,7 @@ export interface ItemProps {
   id: string;
   render: (options: RenderOptionProps) => React.ReactNode;
   disabled?: boolean;
+  readOnly?: boolean;
 }
 
 export interface MenuItemProps extends HTMLAttributes<HTMLDivElement>, RenderOptionProps {

@@ -52,6 +52,11 @@ export default {
   decorators: [withDesign],
   component: RadioButton,
   parameters: {
+    docs: {
+      source: {
+        code: null,
+      },
+    },
     design: [
       {
         type: 'figma',

@@ -2,6 +2,32 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.2.0](https://github.com/AdmiralDS/react-ui/compare/v3.1.0...v3.2.0) (2022-11-03)
+
+
+### Features
+
+* **Pill:** add new component Pill ([1000e36](https://github.com/AdmiralDS/react-ui/commit/1000e363e18b07834893922ddb2e61a076b438d8))
+* **Select:** change internal dropdown to  standard menu ([10a1d9e](https://github.com/AdmiralDS/react-ui/commit/10a1d9eefc5dc7f06144dc771cd4670047d7b148))
+* **SliderInput:** add opportunity to use controlled mode ([f670d29](https://github.com/AdmiralDS/react-ui/commit/f670d295afd76f91954d08ba42d1cea9c4bbc7ca))
+
+
+### Bug Fixes
+
+* **DropMenu:** add Menu visibility to props ([d016bbe](https://github.com/AdmiralDS/react-ui/commit/d016bbe84faa9e3e601f68afeadb67aab59bcda8))
+* **DropMenu:** use onSelectItem instead of onChange, pass active and onActivateItem to Menu ([cfe3bc7](https://github.com/AdmiralDS/react-ui/commit/cfe3bc78d614eea10740c40438819c1fc7262e24))
+* **Menu, DropMenu:** add disableSelectedOptionHighlight prop instead of multiSelection ([533b79b](https://github.com/AdmiralDS/react-ui/commit/533b79b0467a6c428b9155d14ddbffd6aba87e00))
+* **MenuButton:** use correct props for DropMenu ([42e77f9](https://github.com/AdmiralDS/react-ui/commit/42e77f9a3816c78e9e45ff498cb2a30afa3bf4fd))
+* **MultiButton:** add prop onMainButtonClick ([a902f01](https://github.com/AdmiralDS/react-ui/commit/a902f01a16aa2a1243d5a377b4dec6899c80a893))
+* **MultiButton:** use correct props for DropMenu ([ce8f03a](https://github.com/AdmiralDS/react-ui/commit/ce8f03a2af375b27125d3247adf52f26cf18a155))
+* **OverflowMenu:** use correct props for DropMenu ([730a2c4](https://github.com/AdmiralDS/react-ui/commit/730a2c423da91ca607f0a50f69254c556de37ea2))
+* **PaginationOne:** use correct props for DropMenu ([7d9aed8](https://github.com/AdmiralDS/react-ui/commit/7d9aed8b247a6d67144d8f422c1d8c84b19252ae))
+* **Table:** use correct props for OverflowMenu ([56b7a05](https://github.com/AdmiralDS/react-ui/commit/56b7a051e6dc781c87dd739af495e0c3062ee95d))
+* **Table:** use tooltip in title only if title is not custom ([48c9a36](https://github.com/AdmiralDS/react-ui/commit/48c9a3665b1265c421f5b79d74e2a8761df83ea2))
+* **TagMenu:** use correct props for DropMenu ([01177fe](https://github.com/AdmiralDS/react-ui/commit/01177fe32239ea52d6e1fc4832d034ef452d8732))
+* **TextButtonMenu:** use correct props for DropMenu ([48f9570](https://github.com/AdmiralDS/react-ui/commit/48f9570cd2d1b33a1506992d9cf5ce868ec9b906))
+* workaround for https://github.com/storybookjs/storybook/issues/19692 ([fe0d8fd](https://github.com/AdmiralDS/react-ui/commit/fe0d8fdf4c1ab6ae4bbe876b6381eba92b4d576b))
+
 ## [3.1.0](https://github.com/AdmiralDS/react-ui/compare/v3.0.1...v3.1.0) (2022-10-21)
 
 

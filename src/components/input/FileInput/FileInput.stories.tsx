@@ -41,6 +41,11 @@ export default {
   decorators: [withDesign],
   component: FileInput,
   parameters: {
+    docs: {
+      source: {
+        code: null,
+      },
+    },
     design: [
       {
         type: 'figma',
@@ -61,11 +66,6 @@ export default {
     ],
     componentSubtitle: <Description />,
     layout: 'centered',
-    docs: {
-      source: {
-        type: 'code',
-      },
-    },
   },
   argTypes: {
     dimension: {
@@ -79,10 +79,8 @@ export default {
       control: { type: 'boolean' },
     },
     themeBorderKind: {
-      control: {
-        type: 'radio',
-        options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
-      },
+      options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
+      control: { type: 'radio' },
     },
   },
 } as ComponentMeta<typeof FileInput>;

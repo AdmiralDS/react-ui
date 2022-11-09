@@ -21,7 +21,6 @@ export default {
   decorators: [withDesign],
   component: Pill,
   parameters: {
-    //componentSubtitle: <Description />,
     layout: 'centered',
     design: [
       {
@@ -32,10 +31,8 @@ export default {
   },
   argTypes: {
     themeBorderKind: {
-      control: {
-        type: 'radio',
-        options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
-      },
+      options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
+      control: { type: 'radio' },
     },
   },
 } as ComponentMeta<typeof Pill>;

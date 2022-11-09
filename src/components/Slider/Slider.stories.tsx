@@ -27,6 +27,11 @@ export default {
   decorators: [withDesign],
   component: Slider,
   parameters: {
+    docs: {
+      source: {
+        code: null,
+      },
+    },
     componentSubtitle: <Description />,
     design: [
       {

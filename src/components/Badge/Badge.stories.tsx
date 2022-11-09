@@ -56,6 +56,11 @@ export default {
   decorators: [withDesign],
   component: Badge,
   parameters: {
+    docs: {
+      source: {
+        code: null,
+      },
+    },
     componentSubtitle: <Description />,
     design: [
       {
@@ -74,24 +79,22 @@ export default {
       control: { type: 'radio' },
     },
     appearance: {
-      control: {
-        type: 'select',
-        options: [
-          'light',
-          'info',
-          'warning',
-          'success',
-          'error',
-          'grey',
-          'dark',
-          'lightInactive',
-          'lightDisable',
-          'white',
-          'whiteInactive',
-          'whiteDisable',
-          'whiteBlue',
-        ],
-      },
+      options: [
+        'light',
+        'info',
+        'warning',
+        'success',
+        'error',
+        'grey',
+        'dark',
+        'lightInactive',
+        'lightDisable',
+        'white',
+        'whiteInactive',
+        'whiteDisable',
+        'whiteBlue',
+      ],
+      control: { type: 'select' },
     },
   },
 } as ComponentMeta<typeof Badge>;

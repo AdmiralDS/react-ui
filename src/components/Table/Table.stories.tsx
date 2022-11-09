@@ -53,6 +53,11 @@ export default {
   decorators: [withDesign],
   component: Table,
   parameters: {
+    docs: {
+      source: {
+        code: null,
+      },
+    },
     componentSubtitle: <Description />,
     design: [
       {
@@ -80,11 +85,6 @@ export default {
         url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A91521',
       },
     ],
-    docs: {
-      source: {
-        type: 'code',
-      },
-    },
   },
   argTypes: {
     dimension: {

@@ -22,6 +22,11 @@ export default {
   decorators: [withDesign],
   component: IconButton,
   parameters: {
+    docs: {
+      source: {
+        code: null,
+      },
+    },
     layout: 'centered',
     design: [
       {
@@ -58,10 +63,8 @@ export default {
       control: { type: 'boolean' },
     },
     themeBorderKind: {
-      control: {
-        type: 'radio',
-        options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
-      },
+      options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
+      control: { type: 'radio' },
     },
     skeleton: {
       control: { type: 'boolean' },

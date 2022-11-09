@@ -1,6 +1,6 @@
 import { Option, Select, SelectProps } from './index';
 import { LIGHT_THEME } from '#src/components/themes';
-import { render, screen, within } from '@testing-library/react';
+import { fireEvent, render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React, { ChangeEvent, PropsWithChildren, useState } from 'react';
 import { ThemeProvider } from 'styled-components';
@@ -53,6 +53,10 @@ const SelectComponent = ({
  */
 
 describe('SearchSelect', () => {
+  beforeAll(() => {
+    window.HTMLElement.prototype.scrollIntoView = jest.fn();
+  });
+
   describe('InitialView', () => {
     test('Renders visible value correctly', () => {
       render(<SelectComponent initialValue={options[1]} />);
@@ -94,7 +98,7 @@ describe('SearchSelect', () => {
       const inputELem = screen.getByRole('textbox') as HTMLInputElement;
 
       userEvent.tab();
-      userEvent.keyboard('{enter}');
+      userEvent.keyboard(' ');
       userEvent.keyboard('a');
 
       expect(inputELem.value).toBe('a');
@@ -116,7 +120,7 @@ describe('SearchSelect', () => {
   });
 
   describe('Opening and closing', () => {
-    test('should open menu onEnter after select is focused', () => {
+    test('should open menu on press whitespace after select is focused', () => {
       render(<SelectComponent />);
 
       const selectElem = screen.getByRole('combobox') as HTMLSelectElement;
@@ -124,7 +128,7 @@ describe('SearchSelect', () => {
       userEvent.tab();
       expect(selectElem).toHaveFocus();
 
-      userEvent.keyboard('{enter}');
+      userEvent.keyboard(' ');
       const inputELem = screen.getByRole('textbox') as HTMLInputElement;
       const dropDownContainer = document.getElementsByClassName('dropdown-container')[0] as HTMLElement;
       expect(dropDownContainer).toBeInTheDocument();
@@ -219,7 +223,7 @@ describe('SearchSelect', () => {
       const inputELem = screen.getByRole('textbox') as HTMLInputElement;
 
       userEvent.tab();
-      userEvent.keyboard('{enter}');
+      userEvent.keyboard(' ');
       expect(!!inputELem.value).toBeFalsy();
       userEvent.keyboard('r');
       expect(inputELem.value).toBe('oner');
@@ -250,7 +254,7 @@ describe('SearchSelect', () => {
       const valueWrapper = document.getElementById('selectValueWrapper') as HTMLElement;
 
       userEvent.tab();
-      userEvent.keyboard('{enter}');
+      userEvent.keyboard(' ');
 
       const dropDownContainer = document.getElementsByClassName('dropdown-container')[0] as HTMLElement;
       const optionElements = within(dropDownContainer).getAllByTestId('option');
@@ -270,7 +274,7 @@ describe('SearchSelect', () => {
       const valueWrapper = document.getElementById('selectValueWrapper') as HTMLElement;
 
       userEvent.tab();
-      userEvent.keyboard('{enter}');
+      userEvent.keyboard(' ');
 
       const inputELem = screen.getByRole('textbox') as HTMLInputElement;
       const dropDownContainer = document.getElementsByClassName('dropdown-container')[0] as HTMLElement;
@@ -286,10 +290,10 @@ describe('SearchSelect', () => {
 
       dropDownOptions.forEach((optionElem, ind) => {
         const checkbox = within(optionElem).getByRole('checkbox') as HTMLInputElement;
-        if (ind === 0) expect(checkbox.checked).toBeTruthy();
+        if (ind === 1) expect(checkbox.checked).toBeTruthy();
         else expect(checkbox.checked).toBeFalsy();
       });
-      expect(within(valueWrapper).getByText(options[0])).toBeInTheDocument();
+      expect(within(valueWrapper).getByText(options[1])).toBeInTheDocument();
       expect(dropDownContainer).toBeInTheDocument();
       expect(inputELem).toHaveFocus();
 
@@ -300,17 +304,17 @@ describe('SearchSelect', () => {
       userEvent.keyboard('{enter}');
       dropDownOptions.forEach((optionElem, ind) => {
         const checkbox = within(optionElem).getByRole('checkbox') as HTMLInputElement;
-        if ([0, 2].includes(ind)) expect(checkbox.checked).toBeTruthy();
+        if ([0, 1].includes(ind)) expect(checkbox.checked).toBeTruthy();
         else expect(checkbox.checked).toBeFalsy();
       });
       options.forEach((optionText, optionTextInd) => {
         const chip = within(valueWrapper).queryByText(optionText);
-        if ([0, 2].includes(optionTextInd)) expect(chip).toBeInTheDocument();
+        if ([0, 1].includes(optionTextInd)) expect(chip).toBeInTheDocument();
         else expect(chip).toBeNull();
       });
 
       Array.from(selectElem.options).forEach((nativeOption, nativeOptionInd) => {
-        if ([1, 3].includes(nativeOptionInd)) expect(nativeOption.selected).toBeTruthy();
+        if ([1, 2].includes(nativeOptionInd)) expect(nativeOption.selected).toBeTruthy();
         else expect(nativeOption.selected).toBeFalsy();
       });
     });
@@ -321,9 +325,8 @@ describe('SearchSelect', () => {
       const valueWrapper = document.getElementById('selectValueWrapper') as HTMLElement;
 
       userEvent.tab();
-      userEvent.keyboard('{enter}');
+      userEvent.keyboard(' ');
 
-      const inputELem = screen.getByRole('textbox') as HTMLInputElement;
       const dropDownContainer = document.getElementsByClassName('dropdown-container')[0] as HTMLElement;
       const dropDownOptions = within(dropDownContainer).getAllByTestId('option');
 
@@ -341,7 +344,7 @@ describe('SearchSelect', () => {
       });
       expect(within(valueWrapper).getByText(options[0])).toBeInTheDocument();
       expect(dropDownContainer).toBeInTheDocument();
-      expect(inputELem).toHaveFocus();
+      // expect(inputELem).toHaveFocus();
 
       userEvent.click(dropDownOptions[1]);
       userEvent.click(dropDownOptions[1]);
@@ -500,20 +503,21 @@ describe('SearchSelect', () => {
   describe('hover onOption', () => {
     const hoverStyle = `background-color: ${LIGHT_THEME.color['Opacity/Hover']};`;
     const selectedStyle = `background-color: ${LIGHT_THEME.color['Opacity/Focus']};`;
-    const basicStyle = `background-color: transparent;`;
+    const basicStyle = `background-color: ${LIGHT_THEME.color['Special/Elevated BG']};`;
+    // const basicStyle = `background-color: transparent;`;
 
     test('basic hoveres with keyboard', () => {
       render(<SelectComponent value={options[1]} />);
 
       userEvent.tab();
-      userEvent.keyboard('{enter}');
+      userEvent.keyboard(' ');
 
       const dropDownContainer = document.getElementsByClassName('dropdown-container')[0] as HTMLElement;
 
       const dropDownOptions = within(dropDownContainer).getAllByTestId('option');
 
       dropDownOptions.forEach((option, ind) => {
-        if (ind === 1) expect(option).toHaveStyle(selectedStyle);
+        if (ind === 1) expect(option).toHaveStyle(hoverStyle);
         else expect(option).toHaveStyle(basicStyle);
       });
 
@@ -529,13 +533,16 @@ describe('SearchSelect', () => {
       render(<SelectComponent />);
 
       userEvent.tab();
-      userEvent.keyboard('{enter}');
+      userEvent.keyboard(' ');
 
       const dropDownContainer = document.getElementsByClassName('dropdown-container')[0] as HTMLElement;
 
       const dropDownOptions = within(dropDownContainer).getAllByTestId('option');
 
-      dropDownOptions.forEach((option) => expect(option).toHaveStyle(basicStyle));
+      dropDownOptions.forEach((option, ind) => {
+        if (ind === 0) expect(option).toHaveStyle(hoverStyle);
+        else expect(option).toHaveStyle(basicStyle);
+      });
 
       userEvent.keyboard('{arrowup}');
       expect(dropDownOptions[dropDownOptions.length - 1]).toHaveStyle(hoverStyle);
@@ -545,16 +552,19 @@ describe('SearchSelect', () => {
       render(<SelectComponent />);
 
       userEvent.tab();
-      userEvent.keyboard('{enter}');
+      userEvent.keyboard(' ');
 
       const dropDownContainer = document.getElementsByClassName('dropdown-container')[0] as HTMLElement;
 
       const dropDownOptions = within(dropDownContainer).getAllByTestId('option');
 
-      dropDownOptions.forEach((option) => expect(option).toHaveStyle(basicStyle));
+      dropDownOptions.forEach((option, ind) => {
+        if (ind === 0) expect(option).toHaveStyle(hoverStyle);
+        else expect(option).toHaveStyle(basicStyle);
+      });
 
       userEvent.keyboard('{arrowdown}');
-      expect(dropDownOptions[0]).toHaveStyle(hoverStyle);
+      expect(dropDownOptions[1]).toHaveStyle(hoverStyle);
     });
 
     test('skips disabled option when hover', () => {
@@ -579,7 +589,7 @@ describe('SearchSelect', () => {
       );
 
       userEvent.tab();
-      userEvent.keyboard('{enter}');
+      userEvent.keyboard(' ');
 
       const dropDownContainer = document.getElementsByClassName('dropdown-container')[0] as HTMLElement;
 
@@ -614,7 +624,7 @@ describe('SearchSelect', () => {
       );
 
       userEvent.tab();
-      userEvent.keyboard('{enter}');
+      userEvent.keyboard(' ');
 
       const dropDownContainer = document.getElementsByClassName('dropdown-container')[0] as HTMLElement;
       const dropDownOptions = within(dropDownContainer).getAllByTestId('option');
@@ -644,7 +654,7 @@ describe('SearchSelect', () => {
       );
 
       userEvent.tab();
-      userEvent.keyboard('{enter}');
+      userEvent.keyboard(' ');
 
       const dropDownContainer = document.getElementsByClassName('dropdown-container')[0] as HTMLElement;
 
@@ -669,7 +679,7 @@ describe('SearchSelect', () => {
       );
 
       userEvent.tab();
-      userEvent.keyboard('{enter}');
+      userEvent.keyboard(' ');
 
       const dropDownContainer = document.getElementsByClassName('dropdown-container')[0] as HTMLElement;
 
@@ -677,26 +687,26 @@ describe('SearchSelect', () => {
 
       userEvent.keyboard('{arrowdown}');
       userEvent.keyboard('{arrowdown}');
-      userEvent.keyboard('{arrowdown}');
       expect(dropDownOptions[2]).toHaveStyle(hoverStyle);
 
       userEvent.keyboard('one');
 
       const dropDownOptionsAfterInput = within(dropDownContainer).getAllByTestId('option');
-      expect(dropDownOptionsAfterInput.length).toBe(2);
-      dropDownOptionsAfterInput.forEach((option) => {
-        expect(option).not.toHaveStyle(hoverStyle);
+      expect(dropDownOptionsAfterInput.length).toBe(3);
+      dropDownOptionsAfterInput.forEach((option, ind) => {
+        if (ind === 2) expect(option).toHaveStyle(hoverStyle);
+        else expect(option).not.toHaveStyle(hoverStyle);
       });
       userEvent.keyboard('{arrowdown}');
       expect(dropDownOptionsAfterInput[0]).toHaveStyle(hoverStyle);
     });
   });
 
-  test('correctly higlights options', () => {
-    render(<SelectComponent />);
+  test('correctly highlights options', () => {
+    render(<SelectComponent mode={'searchSelect'} />);
 
     userEvent.tab();
-    userEvent.keyboard('{enter}');
+    userEvent.keyboard(' ');
     userEvent.keyboard('on');
 
     const dropDownContainer = document.getElementsByClassName('dropdown-container')[0] as HTMLElement;
@@ -705,19 +715,14 @@ describe('SearchSelect', () => {
     expect(spanInDropdown).toBeVisible();
     expect(spanInDropdown).toHaveStyle(`color: ${LIGHT_THEME.color['Primary/Primary 60 Main']};`);
 
-    expect(within(dropDownContainer).getAllByTestId('option').length).toBe(1);
-
-    userEvent.keyboard('1');
-
-    expect(within(dropDownContainer).queryAllByTestId('option').length).toBe(0);
-    expect(within(dropDownContainer).getByText('Нет совпадений')).toBeInTheDocument();
+    expect(within(dropDownContainer).getAllByTestId('option').length).toBe(3);
   });
   test('blur is called only when click outside component', () => {
     const onBlur = jest.fn();
     render(<SelectComponent onBlur={onBlur} />);
 
     userEvent.tab();
-    userEvent.keyboard('{enter}');
+    userEvent.keyboard(' ');
     userEvent.keyboard('on');
     userEvent.keyboard('{esc}');
     userEvent.tab();

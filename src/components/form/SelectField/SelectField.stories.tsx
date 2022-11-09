@@ -8,12 +8,19 @@ import { SelectField } from './index';
 import { Highlight, Option, OptionGroup } from '#src/components/input/Select';
 import { Theme } from '#src/components/themes';
 import { DataAttributesDescription } from '#src/components/form/common';
+import { RenderOptionProps } from '#src/components/Menu/MenuItem';
+import { CustomOptionWrapper } from '#src/components/input/Select/styled';
 
 export default {
   title: 'Admiral-2.1/Form Field/SelectField',
   component: SelectField,
   decorators: [withDesign],
   parameters: {
+    docs: {
+      source: {
+        code: null,
+      },
+    },
     componentSubtitle: <DataAttributesDescription />,
     design: {
       type: 'figma',
@@ -70,10 +77,8 @@ export default {
       control: { type: 'boolean' },
     },
     themeBorderKind: {
-      control: {
-        type: 'radio',
-        options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
-      },
+      options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
+      control: { type: 'radio' },
     },
     skeleton: {
       control: { type: 'boolean' },
@@ -211,18 +216,18 @@ const CustomOptionTemplate: ComponentStory<typeof SelectField> = (props) => {
   );
 };
 
-interface IMyIncredibleOptionProps {
+interface MyIncredibleOptionProps extends RenderOptionProps {
   shouldAnimate?: boolean;
   text: string;
 }
 
-const MyIncredibleOption = ({ text, shouldAnimate }: IMyIncredibleOptionProps) => (
-  <>
+const MyIncredibleOption = ({ text, shouldAnimate, ...props }: MyIncredibleOptionProps) => (
+  <CustomOptionWrapper {...props}>
     <Icon shouldAnimate={shouldAnimate} />
     <TextWrapper>
       <Highlight>{text}</Highlight>
     </TextWrapper>
-  </>
+  </CustomOptionWrapper>
 );
 
 const RenderPropsTemplate: ComponentStory<typeof SelectField> = (props) => {
@@ -240,8 +245,8 @@ const RenderPropsTemplate: ComponentStory<typeof SelectField> = (props) => {
           <Option
             key={value}
             value={value}
-            renderOption={({ isHovered }) => (
-              <MyIncredibleOption text={text} shouldAnimate={isHovered && value !== selectValue} />
+            renderOption={(options) => (
+              <MyIncredibleOption text={text} shouldAnimate={options.hovered && value !== selectValue} {...options} />
             )}
           />
         ))}

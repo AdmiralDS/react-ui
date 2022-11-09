@@ -38,6 +38,11 @@ export default {
   decorators: [withDesign],
   component: StatusIndicator,
   parameters: {
+    docs: {
+      source: {
+        code: null,
+      },
+    },
     componentSubtitle: <Description />,
     layout: 'centered',
     design: {

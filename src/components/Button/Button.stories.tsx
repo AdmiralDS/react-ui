@@ -46,6 +46,11 @@ export default {
   component: Button,
   decorators: [withDesign],
   parameters: {
+    docs: {
+      source: {
+        code: null,
+      },
+    },
     design: [
       {
         type: 'figma',
@@ -59,34 +64,26 @@ export default {
   },
   argTypes: {
     dimension: {
-      control: {
-        type: 'radio',
-        options: ['xl', 'l', 'm', 's'],
-      },
+      options: ['xl', 'l', 'm', 's'],
+      control: { type: 'radio' },
     },
     skeleton: {
       control: 'boolean',
     },
     appearance: {
-      control: {
-        type: 'select',
-        options: ['primary', 'secondary', 'danger', 'success', 'ghost', 'white'],
-      },
+      options: ['primary', 'secondary', 'danger', 'success', 'ghost', 'white'],
+      control: { type: 'select' },
     },
     onClick: { action: 'clicked' },
 
     type: {
-      control: {
-        type: 'radio',
-        options: ['button', 'submit', 'reset'],
-      },
+      options: ['button', 'submit', 'reset'],
+      control: { type: 'radio' },
     },
 
     themeBorderKind: {
-      control: {
-        type: 'radio',
-        options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
-      },
+      options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
+      control: { type: 'radio' },
     },
 
     disabled: {
