@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.3.0](https://github.com/AdmiralDS/react-ui/compare/v3.2.0...v3.3.0) (2022-11-09)
+
+
+### Features
+
+* **Select:** add controlled open state ([df03b2d](https://github.com/AdmiralDS/react-ui/commit/df03b2dbed1a76fb490c3e7e39dd8f1975062cb8))
+
+
+### Bug Fixes
+
+* deploy-storybook workaround for https://github.com/storybookjs/storybook/issues/19692 ([89aa572](https://github.com/AdmiralDS/react-ui/commit/89aa57239e27467c857a50e81042bba0205e6c8f))
+* **Modal:** fix bug with overflow on left side of ModalContent ([946dee9](https://github.com/AdmiralDS/react-ui/commit/946dee98b8b86570e1983ccd1681f035a8f5505d))
+* **Storybook:** disable "Show code" in Docs tab ([16bbbe2](https://github.com/AdmiralDS/react-ui/commit/16bbbe27c5e7112a3443d306289ac4884e842ec8))
+* **Storybook:** move options for a radio/check/select controls up to the argType level ([5af266e](https://github.com/AdmiralDS/react-ui/commit/5af266ed06d64901aa5f6f2b5b8639dd59fdabb9))
+* **Storybook:** set values for args at the component level ([516f4b2](https://github.com/AdmiralDS/react-ui/commit/516f4b2b4403310ec08b8131b14491ac9907ecb9))
+
 ## [3.2.0](https://github.com/AdmiralDS/react-ui/compare/v3.1.0...v3.2.0) (2022-11-03)
 
 
