@@ -6,18 +6,14 @@ import { keyboardKey } from '#src/components/common/keyboardKey';
 import { refSetter } from '#src/components/common/utils/refSetter';
 import { InputIconButton } from '#src/components/InputIconButton';
 import { ReactComponent as CloseOutlineSvg } from '@admiral-ds/icons/build/service/CloseOutline.svg';
-import { TextInput } from '../TextInput';
 import type { ComponentDimension, InputStatus } from '#src/components/input/types';
-import { ConstantSelectProvider, DropDownSelectProvider } from './useSelectContext';
-import type { HighlightFormat, IConstantOption, IDropdownOption } from './types';
+import { ConstantSelectProvider } from './useSelectContext';
+import type { HighlightFormat, IConstantOption } from './types';
 import { MultipleSelectChips } from './MultipleSelectChips';
 import {
   BorderedDiv,
-  Dropdown,
-  Hidden,
   IconPanel,
   Input,
-  NativeSelect,
   OptionWrapper,
   SelectWrapper,
   SpinnerMixin,
@@ -25,7 +21,7 @@ import {
   StyledMenu,
   EmptyMessageWrapper,
 } from './styled';
-import { preventDefault, scrollToNotVisibleELem } from './utils';
+import { preventDefault } from './utils';
 import { changeInputData } from '#src/components/common/dom/changeInputData';
 import { useClickOutside } from '#src/components/common/hooks/useClickOutside';
 import { Spinner } from '#src/components/Spinner';
@@ -137,6 +133,12 @@ export interface SelectProps extends Omit<React.InputHTMLAttributes<HTMLSelectEl
 
   /** Позволяет добавить панель сверху над выпадающим списком */
   renderDropDownTopPanel?: (props: RenderPanelProps) => React.ReactNode;
+
+  /** Состояние принудительного открытия выпадающего списка опций */
+  forcedOpen?: boolean;
+
+  /** Событие закрытия выпадающего списка опций */
+  onChangeDropDownState?: (opened: boolean) => void;
 }
 
 export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
@@ -175,6 +177,8 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       dropContainerCssMixin,
       renderDropDownTopPanel,
       renderDropDownBottomPanel,
+      forcedOpen = false,
+      onChangeDropDownState,
       ...props
     },
     ref,
@@ -193,7 +197,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
     const [constantOptions, setConstantOptions] = React.useState<IConstantOption[]>([]);
     const [dropDownItems, setDropItems] = React.useState<Array<ItemProps>>([]);
 
-    const [isSearchPanelOpen, setIsSearchPanelOpen] = React.useState(false);
+    const [isSearchPanelOpen, setIsSearchPanelOpen] = React.useState(forcedOpen);
     const [isFocused, setIsFocused] = React.useState(false);
 
     const selectIsUncontrolled = value === undefined;
@@ -284,6 +288,16 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       selectElem.selectedIndex = -1;
       selectElem.dispatchEvent(new Event('change', { bubbles: true }));
     }, []);
+
+    React.useEffect(() => {
+      if (forcedOpen !== isSearchPanelOpen) {
+        setIsSearchPanelOpen(forcedOpen);
+      }
+    }, [forcedOpen]);
+
+    React.useEffect(() => {
+      if (forcedOpen !== isSearchPanelOpen) onChangeDropDownState?.(isSearchPanelOpen);
+    }, [isSearchPanelOpen]);
 
     const handleOnClear = onClearIconClick || resetOptions;
 
@@ -407,7 +421,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
 
     const onBlur = (evt: React.FocusEvent<HTMLDivElement>) => {
       // если фокус переходит не на инпут, содержащийся внутри компонента
-      if (!evt.currentTarget.contains(evt.relatedTarget)) {
+      if (!evt.currentTarget.contains(evt.relatedTarget) && !dropDownRef.current?.contains(evt.relatedTarget)) {
         setIsFocused(false);
         onBlurFromProps?.(evt);
       }
@@ -535,6 +549,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
         {isSearchPanelOpen && !skeleton && (
           <DropdownContainer
             ref={dropDownRef}
+            tabIndex={0}
             targetRef={portalTargetRef || containerRef}
             data-dimension={dimension}
             onClickOutside={handleClickOutside}
