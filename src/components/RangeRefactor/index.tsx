@@ -10,6 +10,8 @@ export interface RangeProps extends Omit<React.HTMLAttributes<HTMLDivElement>, '
   value: NumberRange;
   /** Коллбек на изменение состояния */
   onChange: (event: any, value: NumberRange) => void;
+  /** Колбек, который срабатывает по окончании изменения значения (по окончании перетаскивания ползунка или клика на полосу диапазона) */
+  onRangeMouseUp?: (event: any) => void;
   /** Минимальное значение */
   minValue?: number;
   /** Максимальное значение */
@@ -31,6 +33,7 @@ export const Range = ({
   maxValue = 20,
   value: userValue,
   onChange,
+  onRangeMouseUp,
   disabled = false,
   step = 1,
   dimension = 'm',
@@ -42,7 +45,7 @@ export const Range = ({
     userValue.length === 2 &&
     typeof userValue[0] === 'number' &&
     typeof userValue[1] === 'number'
-      ? sortNum(userValue, minValue, maxValue)
+      ? sortNum(userValue)
       : [minValue, maxValue];
 
   const [isDraging, setDrag] = React.useState(false);
@@ -128,20 +131,20 @@ export const Range = ({
           const newValue: NumberRange = [value[1], calcVal];
           setDrag(false);
           setDrag2(true);
-          if (!arraysEqual(sortNum(newValue, minValue, maxValue), value)) {
-            onChange(e, sortNum(newValue, minValue, maxValue));
+          if (!arraysEqual(sortNum(newValue), value)) {
+            onChange(e, sortNum(newValue));
           }
         } else if (isDraging2 && calcVal < value[0]) {
           const newValue: NumberRange = [calcVal, value[0]];
           setDrag(true);
           setDrag2(false);
-          if (!arraysEqual(sortNum(newValue, minValue, maxValue), value)) {
-            onChange(e, sortNum(newValue, minValue, maxValue));
+          if (!arraysEqual(sortNum(newValue), value)) {
+            onChange(e, sortNum(newValue));
           }
         } else {
           const newValue: NumberRange = isDraging ? [calcVal, value[1]] : [value[0], calcVal];
-          if (!arraysEqual(sortNum(newValue, minValue, maxValue), value)) {
-            onChange(e, sortNum(newValue, minValue, maxValue));
+          if (!arraysEqual(sortNum(newValue), value)) {
+            onChange(e, sortNum(newValue));
           }
         }
       }
@@ -151,8 +154,6 @@ export const Range = ({
 
   const onSliderClick = React.useCallback(
     (e: any, slider: 'first' | 'second') => {
-      if (e.type === 'mousedown') e.preventDefault();
-      e.stopPropagation();
       slider === 'first' ? setDrag(true) : setDrag2(true);
       setAnimation(true);
     },
@@ -161,25 +162,23 @@ export const Range = ({
 
   const handleSliderMouseUp = React.useCallback(
     (e: any) => {
-      if (e.type === 'mouseup') e.preventDefault();
-      e.stopPropagation();
       const calcVal = calcValue(e, trackRef, minValue, maxValue, step);
-
+      onRangeMouseUp?.(e);
       if (isDraging && calcVal > value[1]) {
         const newValue: NumberRange = [value[1], calcVal];
-        if (!arraysEqual(sortNum(newValue, minValue, maxValue), value)) {
-          onChange(e, sortNum(newValue, minValue, maxValue));
+        if (!arraysEqual(sortNum(newValue), value)) {
+          onChange(e, sortNum(newValue));
         }
       }
       if (isDraging2 && calcVal < value[0]) {
         const newValue: NumberRange = [calcVal, value[0]];
-        if (!arraysEqual(sortNum(newValue, minValue, maxValue), value)) {
-          onChange(e, sortNum(newValue, minValue, maxValue));
+        if (!arraysEqual(sortNum(newValue), value)) {
+          onChange(e, sortNum(newValue));
         }
       } else {
         const newValue: NumberRange = isDraging ? [calcVal, value[1]] : [value[0], calcVal];
-        if (!arraysEqual(sortNum(newValue, minValue, maxValue), value)) {
-          onChange(e, sortNum(newValue, minValue, maxValue));
+        if (!arraysEqual(sortNum(newValue), value)) {
+          onChange(e, sortNum(newValue));
         }
       }
 
@@ -196,20 +195,20 @@ export const Range = ({
 
       // calc nearest slider
       if (Math.abs(value[1] - calcVal) < Math.abs(calcVal - value[0])) {
-        if (!arraysEqual(sortNum([value[0], calcVal], minValue, maxValue), value)) {
-          onChange(e, sortNum([value[0], calcVal], minValue, maxValue));
+        if (!arraysEqual(sortNum([value[0], calcVal]), value)) {
+          onChange(e, sortNum([value[0], calcVal]));
         }
         onSliderClick(e, 'second');
       } else if (Math.abs(value[1] - calcVal) > Math.abs(calcVal - value[0])) {
-        if (!arraysEqual(sortNum([calcVal, value[1]], minValue, maxValue), value)) {
-          onChange(e, sortNum([calcVal, value[1]], minValue, maxValue));
+        if (!arraysEqual(sortNum([calcVal, value[1]]), value)) {
+          onChange(e, sortNum([calcVal, value[1]]));
         }
         onSliderClick(e, 'first');
       } else if (Math.abs(value[1] - calcVal) === Math.abs(calcVal - value[0])) {
         const slider = value[0] === value[1] ? (calcVal < value[0] ? 'first' : 'second') : 'first';
         const newValue: NumberRange = slider === 'first' ? [calcVal, value[1]] : [value[0], calcVal];
-        if (!arraysEqual(sortNum(newValue, minValue, maxValue), value)) {
-          onChange(e, sortNum(newValue, minValue, maxValue));
+        if (!arraysEqual(sortNum(newValue), value)) {
+          onChange(e, sortNum(newValue));
         }
         onSliderClick(e, slider);
       }
@@ -226,16 +225,32 @@ export const Range = ({
             <Thumb ref={sliderRef} animation={animation} dimension={dimension}>
               <ThumbCircle
                 dimension={dimension}
-                onTouchStart={(e) => onSliderClick(e, 'first')}
-                onMouseDown={(e) => onSliderClick(e, 'first')}
+                onTouchStart={(e) => {
+                  e.stopPropagation();
+                  props.onTouchStart?.(e);
+                  onSliderClick(e, 'first');
+                }}
+                onMouseDown={(e) => {
+                  e.stopPropagation();
+                  props.onMouseDown?.(e);
+                  onSliderClick(e, 'first');
+                }}
                 active={isDraging}
               />
             </Thumb>
             <Thumb ref={slider2Ref} animation={animation} dimension={dimension}>
               <ThumbCircle
                 dimension={dimension}
-                onTouchStart={(e) => onSliderClick(e, 'second')}
-                onMouseDown={(e) => onSliderClick(e, 'second')}
+                onTouchStart={(e) => {
+                  e.stopPropagation();
+                  props.onTouchStart?.(e);
+                  onSliderClick(e, 'second');
+                }}
+                onMouseDown={(e) => {
+                  e.stopPropagation();
+                  props.onMouseDown?.(e);
+                  onSliderClick(e, 'second');
+                }}
                 active={isDraging2}
               />
             </Thumb>
