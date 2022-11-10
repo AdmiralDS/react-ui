@@ -110,47 +110,11 @@ export const SliderRange: React.FC<SliderRangeProps> = ({
     const newInput2 = getFull(defaultInput2);
     const newSlider1 = Number(clearValue(newInput1, precision));
     const newSlider2 = Number(clearValue(newInput2, precision));
-    const diff = Math.abs(newSlider2 - newSlider1);
 
-    if (value.indexOf('') > -1) {
-      // Если значения инпутов не переданы (value = ['',''] || ['', str] || [str, '']),
-      // то бегунки занимают крайние положения диапазона [minValue, maxValue]
-      setInput1(newInput1);
-      setInput2(newInput2);
-      setSlider1(newInput1 === '' ? minValue : newSlider1);
-      setSlider2(newInput2 === '' ? maxValue : newSlider2);
-    }
-    // проверяем, что соблюдено условие: минимальная разница между значениями равна одной единице (step)
-    else if (diff < step) {
-      // если условие не соблюдено, раздвигаем значения
-      const delta = step - diff;
-      if (newSlider1 - delta > minValue) {
-        const newInput1 = newSlider1 - delta;
-        setInput1(getFull(newInput1));
-        setInput2(newInput2);
-        setSlider1(newInput1);
-        setSlider2(newSlider2);
-        onChange?.([
-          { str: getFull(newInput1), num: newInput1 },
-          { str: getFull(newInput2), num: newSlider2 },
-        ]);
-      } else {
-        const newInput2 = newSlider2 + delta;
-        setInput1(newInput1);
-        setInput2(getFull(newInput2));
-        setSlider1(newSlider1);
-        setSlider2(newInput2);
-        onChange?.([
-          { str: getFull(newInput1), num: newSlider1 },
-          { str: getFull(newInput2), num: newInput2 },
-        ]);
-      }
-    } else {
-      setInput1(newInput1);
-      setInput2(newInput2);
-      setSlider1(newSlider1);
-      setSlider2(newSlider2);
-    }
+    setInput1(newInput1);
+    setInput2(newInput2);
+    setSlider1(newInput1 === '' ? minValue : newSlider1);
+    setSlider2(newInput2 === '' ? maxValue : newSlider2);
   };
 
   React.useEffect(() => {
