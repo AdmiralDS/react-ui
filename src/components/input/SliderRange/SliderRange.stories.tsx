@@ -79,7 +79,7 @@ const Template1: ComponentStory<typeof SliderRange> = ({ defaultValue, onChange,
 
   return (
     <ThemeProvider theme={swapBorder}>
-      <SliderRange defaultValue={defaultValue || ['От 2 ₽', 'До 6 ₽']} onChange={onChange || handleChange} {...args} />
+      <SliderRange defaultValue={defaultValue || ['2', '6']} onChange={onChange || handleChange} {...args} />
     </ThemeProvider>
   );
 };
@@ -125,4 +125,4 @@ Custom.storyName = 'SliderRange. Пример изменения настрое�
 
 export const Controlled = Template3.bind({});
 Controlled.args = {};
-Controlled.storyName = 'SliderRange. Controlled mode';
+Controlled.storyName = 'SliderRange. Пример контролируемого компонента.';
