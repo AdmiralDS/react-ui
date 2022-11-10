@@ -1,28 +1,12 @@
 import * as React from 'react';
-import { IConstantSelectContext, IDropDownSelectContext, HighlightContextProps, IOptionGroupContext } from './types';
+import { SelectContextProps, IOptionGroupContext } from './types';
 
-const ConstantSelectContext = React.createContext<IConstantSelectContext | null>(null);
+const ConstantSelectContext = React.createContext<SelectContextProps | null>(null);
 
 export const useConstantSelectContext = () => React.useContext(ConstantSelectContext);
 
-export const ConstantSelectProvider = ({ children, ...restProps }: React.PropsWithChildren<IConstantSelectContext>) => (
+export const ConstantSelectProvider = ({ children, ...restProps }: React.PropsWithChildren<SelectContextProps>) => (
   <ConstantSelectContext.Provider value={restProps}>{children}</ConstantSelectContext.Provider>
-);
-
-const DropDownSelectContext = React.createContext<IDropDownSelectContext | null>(null);
-
-export const useDropDownSelectContext = () => React.useContext(DropDownSelectContext);
-
-export const DropDownSelectProvider = ({ children, ...restProps }: React.PropsWithChildren<IDropDownSelectContext>) => (
-  <DropDownSelectContext.Provider value={restProps}>{children}</DropDownSelectContext.Provider>
-);
-
-const OptionContext = React.createContext<HighlightContextProps | null>(null);
-
-export const useOptionContext = () => React.useContext(OptionContext);
-
-export const OptionProvider = ({ children, ...restProps }: React.PropsWithChildren<HighlightContextProps>) => (
-  <OptionContext.Provider value={restProps}>{children}</OptionContext.Provider>
 );
 
 const OptionGroupContext = React.createContext<IOptionGroupContext | null>(null);

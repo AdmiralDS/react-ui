@@ -21,14 +21,8 @@ const ConstantOption = ({ disabled = false, value, children, renderOption, rende
   const resultRenderChip = renderChip || defaultRenderChip;
 
   const resultChildren = React.useMemo(
-    () =>
-      renderOption
-        ? renderOption({
-            disabled,
-            // searchValue: selectContext?.searchValue,
-          })
-        : children,
-    [renderOption, disabled, value, children, selectContext?.searchValue],
+    () => (renderOption ? renderOption({ disabled }) : children),
+    [renderOption, disabled, value, children],
   );
 
   const option = React.useMemo(

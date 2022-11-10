@@ -4,7 +4,6 @@ import { Chips } from '#src/components/Chips';
 import { Hint } from '#src/components/Hint';
 import type { IChipProps, IConstantOption } from './types';
 import { COUNTER_WIDTH } from './constants';
-import { preventDefault } from './utils';
 
 export const ChipBox = styled.div`
   display: flex;
@@ -169,7 +168,7 @@ export const MultipleSelectChips = ({
 }: IMultipleChipsProps) => (
   <>
     {options.map((option, optionInd) => (
-      <ChipBox key={option.value} onMouseDown={preventDefault}>
+      <ChipBox key={option.value} onMouseDown={(e) => e.preventDefault()}>
         <Chip
           className="chip"
           option={option}

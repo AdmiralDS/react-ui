@@ -3,8 +3,7 @@ import { HTMLAttributes } from 'react';
 import styled from 'styled-components';
 import type { SuggestItem } from './';
 import { MenuItem, RenderOptionProps } from '#src/components/Menu/MenuItem';
-import { getTextHighlightMeta } from '#src/components/input/Select/utils';
-import { HighlightFormat } from '#src/components/input/Select/types';
+import { getTextHighlightMeta, HighlightFormat } from '#src/components/common/utils/getTextHighlightMeta';
 
 const Highlight = styled.span`
   color: ${(p) => p.theme.color['Primary/Primary 60 Main']};

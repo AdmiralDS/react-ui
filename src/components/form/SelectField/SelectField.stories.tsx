@@ -5,7 +5,7 @@ import * as React from 'react';
 import { withDesign } from 'storybook-addon-designs';
 import styled, { css, keyframes, ThemeProvider } from 'styled-components';
 import { SelectField } from './index';
-import { Highlight, Option, OptionGroup } from '#src/components/input/Select';
+import { Option, OptionGroup } from '#src/components/input/Select';
 import { Theme } from '#src/components/themes';
 import { DataAttributesDescription } from '#src/components/form/common';
 import { RenderOptionProps } from '#src/components/Menu/MenuItem';
@@ -204,10 +204,8 @@ const CustomOptionTemplate: ComponentStory<typeof SelectField> = (props) => {
           <Option key={option.value} value={option.value}>
             <Icon />
             <TextWrapper>
-              <Highlight>{option.text}</Highlight>
-              <ExtraText>
-                <Highlight>{option.extraText}</Highlight>
-              </ExtraText>
+              {option.text}
+              <ExtraText>{option.extraText}</ExtraText>
             </TextWrapper>
           </Option>
         ))}
@@ -224,9 +222,7 @@ interface MyIncredibleOptionProps extends RenderOptionProps {
 const MyIncredibleOption = ({ text, shouldAnimate, ...props }: MyIncredibleOptionProps) => (
   <CustomOptionWrapper {...props}>
     <Icon shouldAnimate={shouldAnimate} />
-    <TextWrapper>
-      <Highlight>{text}</Highlight>
-    </TextWrapper>
+    <TextWrapper>{text}</TextWrapper>
   </CustomOptionWrapper>
 );
 
@@ -314,7 +310,6 @@ const AsyncTemplate: ComponentStory<typeof SelectField> = (props) => {
         isLoading={isLoading}
         onChange={onChange}
         onInputChange={onInputChange}
-        defaultHighlighted={false}
       >
         {options.map((option) => (
           <Option key={option.value} value={option.value}>
@@ -350,7 +345,7 @@ const TemplateSimpleMultiSelect: ComponentStory<typeof SelectField> = (props) =>
       >
         {Array.from({ length: 20 }).map((_option, ind) => (
           <Option key={ind} value={String(ind)}>
-            <Highlight>{`${ind}0000`}</Highlight>
+            {`${ind}0000`}
           </Option>
         ))}
       </SelectField>
@@ -386,7 +381,7 @@ const TemplateNotFixedMultiSelect: ComponentStory<typeof SelectField> = (props) 
       >
         {Array.from({ length: 20 }).map((_option, ind) => (
           <Option key={ind} value={String(ind)}>
-            <Highlight>{`${ind}0000`}</Highlight>
+            {`${ind}0000`}
           </Option>
         ))}
       </SelectField>
@@ -409,10 +404,8 @@ const TemplateMultiSelectCustomOption: ComponentStory<typeof SelectField> = () =
         {Array.from({ length: 20 }).map((_option, ind) => (
           <Option key={ind} value={String(ind)} renderChip={() => String(ind)}>
             <TextWrapper>
-              <Highlight>{`${ind}0000`}</Highlight>
-              <ExtraText>
-                <Highlight>{`Доп ${ind}`}</Highlight>
-              </ExtraText>
+              {`${ind}0000`}
+              <ExtraText>{`Доп ${ind}`}</ExtraText>
             </TextWrapper>
           </Option>
         ))}
