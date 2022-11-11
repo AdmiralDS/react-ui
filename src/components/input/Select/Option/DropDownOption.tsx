@@ -1,13 +1,11 @@
 import * as React from 'react';
 import { useOptionGroupContext } from '#src/components/input/Select/useSelectContext';
-import { Highlight } from '../Highlight';
 import type { ComponentDimension } from '#src/components/input/types';
 import type { OptionProps } from '#src/components/input/Select/Option/types';
 import { StyledCheckbox } from './styled';
 import type { ItemProps, RenderOptionProps } from '#src/components/Menu/MenuItem';
 import { useDropDownContext } from '#src/components/input/Select/DropDownContext';
 import type { ItemDimension } from '#src/components/Menu/menuItemMixins';
-import { useMemo } from 'react';
 import { CustomOptionWrapper } from '#src/components/input/Select/styled';
 
 const convertDimension = (selectDimension?: ComponentDimension): ItemDimension | undefined => {
@@ -28,16 +26,6 @@ export const DropDownOption = ({
 
   const optionIsDisabled = optionGroupContext?.disabled || disabled;
 
-  const highlightedChildrenRender = useMemo(
-    () =>
-      typeof children === 'string' && dropDownContext?.defaultHighlighted ? (
-        <Highlight>{children}</Highlight>
-      ) : (
-        children
-      ),
-    [dropDownContext?.searchValue, dropDownContext?.defaultHighlighted, children],
-  );
-
   const multipleOptionRender = () => (
     <>
       {dropDownContext?.showCheckbox && (
@@ -48,11 +36,11 @@ export const DropDownOption = ({
           readOnly
         />
       )}
-      {highlightedChildrenRender}
+      {children}
     </>
   );
 
-  const defaultOptionRender = dropDownContext?.multiple ? multipleOptionRender() : highlightedChildrenRender;
+  const defaultOptionRender = dropDownContext?.multiple ? multipleOptionRender() : children;
 
   React.useEffect(() => {
     const itemId = id ?? value;
@@ -85,7 +73,7 @@ export const DropDownOption = ({
     dropDownContext?.onDropDownOptionMount,
     dropDownContext?.onDropDownOptionUnMount,
     dropDownContext?.activeItem,
-    dropDownContext?.searchValue,
+    // dropDownContext?.searchValue,
     dropDownContext?.selectValue,
   ]);
 

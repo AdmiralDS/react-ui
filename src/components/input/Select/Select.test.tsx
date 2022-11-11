@@ -1,6 +1,6 @@
 import { Option, Select, SelectProps } from './index';
 import { LIGHT_THEME } from '#src/components/themes';
-import { fireEvent, render, screen, within } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React, { ChangeEvent, PropsWithChildren, useState } from 'react';
 import { ThemeProvider } from 'styled-components';
@@ -702,21 +702,6 @@ describe('SearchSelect', () => {
     });
   });
 
-  test('correctly highlights options', () => {
-    render(<SelectComponent mode={'searchSelect'} />);
-
-    userEvent.tab();
-    userEvent.keyboard(' ');
-    userEvent.keyboard('on');
-
-    const dropDownContainer = document.getElementsByClassName('dropdown-container')[0] as HTMLElement;
-
-    const spanInDropdown = within(dropDownContainer).getByText('on', { selector: 'span' });
-    expect(spanInDropdown).toBeVisible();
-    expect(spanInDropdown).toHaveStyle(`color: ${LIGHT_THEME.color['Primary/Primary 60 Main']};`);
-
-    expect(within(dropDownContainer).getAllByTestId('option').length).toBe(3);
-  });
   test('blur is called only when click outside component', () => {
     const onBlur = jest.fn();
     render(<SelectComponent onBlur={onBlur} />);

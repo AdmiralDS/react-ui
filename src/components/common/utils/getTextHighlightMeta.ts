@@ -1,18 +1,4 @@
-import type { HighlightFormat } from './types';
-import type { BaseSyntheticEvent } from 'react';
-
-export const scrollToNotVisibleELem = (elem: HTMLElement, scrollElem: HTMLElement) => {
-  const offsetFromScrollWrap = elem.offsetTop - scrollElem.offsetTop;
-  const overTop = offsetFromScrollWrap < scrollElem.scrollTop;
-  const overBottom = offsetFromScrollWrap + elem.clientHeight > scrollElem.scrollTop + scrollElem.clientHeight;
-
-  if (overTop) {
-    scrollElem.scrollTop = offsetFromScrollWrap;
-  }
-  if (overBottom) {
-    scrollElem.scrollTop = offsetFromScrollWrap + elem.clientHeight - scrollElem.clientHeight;
-  }
-};
+export type HighlightFormat = 'word' | 'wholly';
 
 export const getTextHighlightMeta = (text = '', highlight = '', highlightFormat: HighlightFormat = 'word') => {
   const splittedHighlight = highlightFormat === 'word' ? highlight.split(' ') : [highlight];
@@ -36,5 +22,3 @@ export const getTextHighlightMeta = (text = '', highlight = '', highlightFormat:
 
   return { shouldHighlight, parts, chunks };
 };
-
-export const preventDefault = (e: BaseSyntheticEvent) => e.preventDefault();

@@ -1,6 +1,6 @@
 import styled, { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import { MenuDimensions } from '#src/components/Menu/index';
-import { getTextHighlightMeta } from '#src/components/input/Select/utils';
+import { getTextHighlightMeta } from '#src/components/common/utils/getTextHighlightMeta';
 import { ItemProps, MenuItem, RenderOptionProps } from '#src/components/Menu/MenuItem';
 import React from 'react';
 import { ItemDimension } from '#src/components/Menu/menuItemMixins';

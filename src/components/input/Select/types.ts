@@ -2,8 +2,6 @@ import * as React from 'react';
 import type { ComponentDimension } from '#src/components/input/types';
 import type { ItemProps } from '#src/components/Menu/MenuItem';
 
-export type HighlightFormat = 'word' | 'wholly';
-
 export interface IOnCloseProps {
   value: string;
   disabled?: boolean;
@@ -24,31 +22,9 @@ export interface IConstantOption {
   renderChip: TRenderChip;
 }
 
-export interface IDropdownOption {
-  value: string;
-  disabled: boolean;
-  ref?: React.RefObject<HTMLDivElement> | null;
-}
-
-export interface IConstantSelectContext {
+export interface SelectContextProps {
   onConstantOptionMount: (option: IConstantOption) => void;
   onConstantOptionUnMount: (option: IConstantOption) => void;
-  searchValue: string;
-}
-
-export interface IDropDownSelectContext {
-  onDropDownOptionMount: (option: IDropdownOption) => void;
-  onDropDownOptionUnMount: (option: IDropdownOption) => void;
-  onOptionClick: (value: string) => void;
-  onMouseEnter: (value: string) => void;
-  selectValue?: string | string[];
-  hoverValue: string;
-  searchValue: string;
-  dimension: ComponentDimension;
-  highlightFormat: HighlightFormat;
-  multiple: boolean;
-  defaultHighlighted: boolean;
-  showCheckbox: boolean;
 }
 
 export interface DropDownContextProps {
@@ -58,21 +34,11 @@ export interface DropDownContextProps {
   onActivateItem?: (id: string) => void;
   selectValue?: string | string[];
   activeItem?: string;
-  searchValue: string;
   dimension: ComponentDimension;
-  highlightFormat: HighlightFormat;
   multiple: boolean;
-  defaultHighlighted: boolean;
   showCheckbox: boolean;
-}
-
-export interface HighlightContextProps {
-  onAddTextToHighlight?: (text: string) => void;
-  searchValue?: string;
-  highlightFormat?: HighlightFormat;
 }
 
 export interface IOptionGroupContext {
   disabled?: boolean;
-  // label: string;
 }
