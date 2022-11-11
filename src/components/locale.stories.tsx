@@ -110,6 +110,9 @@ const Template2: ComponentStory<any> = () => {
         selectYearText: 'Wahl des Jahres',
         selectMonthText: 'Monatsauswahl',
       },
+      fileInput: {
+        metricUnits: ['Kb', 'Mb', 'Gb'],
+      },
       groupActionsPane: {
         inputPlaceholder: 'In der Tabelle suchen',
       },
