@@ -20,6 +20,9 @@ export interface Locale {
     selectYearText: string;
     selectMonthText: string;
   };
+  fileInput: {
+    metricUnits: [string, string, string];
+  };
   groupActionsPane: {
     inputPlaceholder: string;
   };
@@ -71,6 +74,9 @@ const ruLocale: Locale = {
     returnText: 'Вернуться',
     selectYearText: 'Выбор года',
     selectMonthText: 'Выбор месяца',
+  },
+  fileInput: {
+    metricUnits: ['Кб', 'Мб', 'Гб'],
   },
   groupActionsPane: {
     inputPlaceholder: 'Искать в таблице',
@@ -124,6 +130,9 @@ const enLocale: Locale = {
     returnText: 'Return',
     selectYearText: 'Select year',
     selectMonthText: 'Select month',
+  },
+  fileInput: {
+    metricUnits: ['Kb', 'Mb', 'Gb'],
   },
   groupActionsPane: {
     inputPlaceholder: 'Search in table',
