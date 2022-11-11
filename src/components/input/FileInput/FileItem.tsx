@@ -285,6 +285,8 @@ export interface FileItemProps extends HTMLAttributes<HTMLDivElement>, FileAttri
   dimension?: FileInputDimension;
   /** Позволяет добавлять миксин для компоновки загруженных файлов, созданный с помощью styled css  */
   filesLayoutCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+  /** Позволяет выводить размер файла в требуемом формате  */
+  formatFileSizeInfo?: (sizeInBytes: number) => string;
   children?: never;
 }
 
@@ -302,13 +304,14 @@ export const FileItem = forwardRef<HTMLDivElement, FileItemProps>(
       onPreviewIconClick,
       dimension,
       filesLayoutCssMixin,
+      formatFileSizeInfo = formatFileSize,
       ...props
     },
     ref,
   ) => {
     const PreviewIcon = getIcon(fileType);
     const fileFormatInfo = getFormat(fileType);
-    const fileSizeInfo = formatFileSize(fileSize);
+    const fileSizeInfo = formatFileSizeInfo(fileSize);
     const fileInfo = `${fileFormatInfo}・${fileSizeInfo}`;
 
     const previewWrapperRef = useRef<HTMLDivElement | null>(null);

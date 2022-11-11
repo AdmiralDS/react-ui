@@ -1,14 +1,19 @@
+import * as React from 'react';
+import { ThemeContext } from 'styled-components';
+import { LIGHT_THEME } from '#src/components/themes';
+
 export const formatBytes = (bytes: number, decimals = 2): number => {
   return Number((bytes / 1024).toFixed(decimals));
 };
 
 export const formatFileSize = (bytes: number): string => {
+  const theme = React.useContext(ThemeContext) || LIGHT_THEME;
   let size = formatBytes(bytes);
   if (size < 1024) {
-    return `${size} Kb`;
+    return `${size} ${theme.locales[theme.currentLocale].fileInput.metricUnits[0]}`;
   }
   size = formatBytes(size);
-  return `${size} Mb`;
+  return `${size} ${theme.locales[theme.currentLocale].fileInput.metricUnits[1]}`;
 };
 
 /**
