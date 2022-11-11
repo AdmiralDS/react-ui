@@ -1,5 +1,14 @@
 export const formatBytes = (bytes: number, decimals = 2): number => {
-  return Number((bytes / (1024 * 1024)).toFixed(decimals));
+  return Number((bytes / 1024).toFixed(decimals));
+};
+
+export const formatFileSize = (bytes: number): string => {
+  let size = formatBytes(bytes);
+  if (size < 1024) {
+    return `${size} Kb`;
+  }
+  size = formatBytes(size);
+  return `${size} Mb`;
 };
 
 /**

@@ -4,7 +4,7 @@ import { FileInputDimension } from '#src/components/input/FileInput';
 import styled, { css, DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { typography } from '#src/components/Typography';
-import { formatBytes, getFormat } from '#src/components/input/FileInput/utils';
+import { formatFileSize, getFormat } from '#src/components/input/FileInput/utils';
 import { Spinner } from '#src/components/Spinner';
 import { ReactComponent as PDFSolid } from '@admiral-ds/icons/build/documents/PDFSolid.svg';
 import { ReactComponent as PPTSolid } from '@admiral-ds/icons/build/documents/PPTSolid.svg';
@@ -308,8 +308,8 @@ export const FileItem = forwardRef<HTMLDivElement, FileItemProps>(
   ) => {
     const PreviewIcon = getIcon(fileType);
     const fileFormatInfo = getFormat(fileType);
-    const fileSizeInfo = formatBytes(fileSize);
-    const fileInfo = `${fileFormatInfo}・${fileSizeInfo} Mb`;
+    const fileSizeInfo = formatFileSize(fileSize);
+    const fileInfo = `${fileFormatInfo}・${fileSizeInfo}`;
 
     const previewWrapperRef = useRef<HTMLDivElement | null>(null);
     const titleRef = useRef<HTMLDivElement | null>(null);
