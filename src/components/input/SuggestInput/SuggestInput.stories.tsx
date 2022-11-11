@@ -7,7 +7,7 @@ import { SuggestInput } from './index';
 import { withDesign } from 'storybook-addon-designs';
 import { LIGHT_THEME, Theme } from '#src/components/themes';
 import { ThemeProvider } from 'styled-components';
-import { getTextHighlightMeta } from '#src/components/input/Select/utils';
+import { getTextHighlightMeta } from '#src/components/common/utils/getTextHighlightMeta';
 
 export default {
   title: 'Admiral-2.1/Input/SuggestInput',
@@ -102,12 +102,6 @@ const OPTIONS = [
   'text 11',
   'text 12',
 ];
-
-async function wait(ms: number) {
-  return new Promise((resolve) => {
-    setTimeout(resolve, ms);
-  });
-}
 
 const Template: ComponentStory<typeof SuggestInput> = (props) => {
   const cleanProps = (Object.keys(props) as Array<keyof typeof props>).reduce((acc, key) => {

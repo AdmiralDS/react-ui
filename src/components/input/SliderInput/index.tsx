@@ -155,6 +155,10 @@ export const SliderInput = React.forwardRef<HTMLInputElement, SliderInputProps>(
             aria-hidden
             value={sliderValue}
             onChange={handleSliderChange}
+            onMouseDown={(e) => {
+              // prevent inputs blur
+              e.preventDefault();
+            }}
             renderTickMark={renderTickMark}
             minValue={minValue}
             maxValue={maxValue}

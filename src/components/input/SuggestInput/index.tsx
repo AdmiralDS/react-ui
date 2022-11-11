@@ -9,7 +9,7 @@ import { InputIconButton } from '#src/components/InputIconButton';
 import { StyledDropdownContainer } from '#src/components/DropdownContainer';
 import { RenderOptionProps } from '#src/components/Menu/MenuItem';
 import { Menu } from '#src/components/Menu';
-import { HighlightFormat } from '#src/components/input/Select/types';
+import { HighlightFormat } from '#src/components/common/utils/getTextHighlightMeta';
 import type { InputStatus } from '#src/components/input/types';
 import { TextInput, TextInputProps } from '#src/components/input/TextInput';
 import { MessagePanel } from '#src/components/input/SuggestInput/MessagePanel';

@@ -112,16 +112,13 @@ export const Slider = ({
     }
   }, [trackRef.current, setRangeWidth]);
 
-  const updateSlider = React.useCallback(
-    (e: any) => {
-      const newValue = calcValue(e, trackRef, minValue, maxValue, step, undefined);
-      if (newValue !== value) {
-        onChange(e, newValue);
-        setAnimation(false);
-      }
-    },
-    [setAnimation, value, trackRef.current, minValue, maxValue, step],
-  );
+  const updateSlider = (e: any) => {
+    const newValue = calcValue(e, trackRef, minValue, maxValue, step, undefined);
+    if (newValue !== value) {
+      onChange(e, newValue);
+      setAnimation(false);
+    }
+  };
 
   const [handleMouseMove, freeResources] = throttle(updateSlider, 50);
 
@@ -143,79 +140,61 @@ export const Slider = ({
     };
   });
 
-  const onSliderClick = React.useCallback(
-    (e: any) => {
-      if (e.type === 'mousedown') e.preventDefault();
-      e.stopPropagation();
-      setDrag(true);
-      setAnimation(true);
-    },
-    [setAnimation, setDrag],
-  );
+  const onSliderClick = (e: any) => {
+    e.stopPropagation();
+    e.type === 'mousedown' ? props.onMouseDown?.(e) : props.onTouchStart?.(e);
+    setDrag(true);
+    setAnimation(true);
+  };
 
-  const onPointClick = React.useCallback(
-    (e: any, newValue: number) => {
-      e.preventDefault();
-      e.stopPropagation();
-      setAnimation(true);
-      if (newValue !== value) {
-        onChange(e, newValue);
-      }
-    },
-    [setAnimation, value],
-  );
+  const onPointClick = (e: any, newValue: number) => {
+    e.stopPropagation();
+    props.onMouseDown?.(e);
+    setAnimation(true);
+    if (newValue !== value) {
+      onChange(e, newValue);
+    }
+  };
 
-  const onTrackClick = React.useCallback(
-    (e: any) => {
-      if (e.type === 'mousedown') e.preventDefault();
-      setAnimation(true);
-      if (!tickMarks) setDrag(true);
-      const newValue = calcValue(e, trackRef, minValue, maxValue, step, tickMarks);
-      if (newValue !== value) {
-        onChange(e, newValue);
-      }
-    },
-    [setAnimation, setDrag, value, trackRef.current, minValue, maxValue, step, points],
-  );
+  const onTrackClick = (e: any) => {
+    setAnimation(true);
+    if (!tickMarks) setDrag(true);
+    const newValue = calcValue(e, trackRef, minValue, maxValue, step, tickMarks);
+    if (newValue !== value) {
+      onChange(e, newValue);
+    }
+  };
 
-  const handleMouseUp = React.useCallback(
-    (e: any) => {
-      if (e.type === 'mouseup') e.preventDefault();
-      e.stopPropagation();
-      setDrag(false);
-      setAnimation(true);
-      const newValue = calcValue(e, trackRef, minValue, maxValue, step, tickMarks);
-      if (newValue !== value) {
-        onChange(e, newValue);
-      }
-    },
-    [setAnimation, setDrag, value, trackRef.current, minValue, maxValue, step, points],
-  );
+  const handleMouseUp = (e: any) => {
+    setDrag(false);
+    setAnimation(true);
+    const newValue = calcValue(e, trackRef, minValue, maxValue, step, tickMarks);
+    if (newValue !== value) {
+      onChange(e, newValue);
+    }
+  };
 
-  const handleKeyDown = React.useCallback(
-    (e: React.KeyboardEvent<HTMLDivElement>) => {
-      const code = keyboardKey.getCode(e);
-      switch (code) {
-        case keyboardKey.ArrowLeft:
-          setAnimation(true);
-          if (step !== 'any' && value - step >= minValue) {
-            value - step !== value && onChange(e, value - step);
-          }
-          e.preventDefault();
-          break;
-        case keyboardKey.ArrowRight:
-          setAnimation(true);
-          if (step !== 'any' && value + step <= maxValue) {
-            value + step !== value && onChange(e, value + step);
-          }
-          e.preventDefault();
-          break;
-        default:
-          break;
-      }
-    },
-    [setAnimation, value, step, minValue, maxValue],
-  );
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    const code = keyboardKey.getCode(e);
+    switch (code) {
+      case keyboardKey.ArrowLeft:
+        setAnimation(true);
+        if (step !== 'any' && value - step >= minValue) {
+          value - step !== value && onChange(e, value - step);
+        }
+        e.preventDefault();
+        break;
+      case keyboardKey.ArrowRight:
+        setAnimation(true);
+        if (step !== 'any' && value + step <= maxValue) {
+          value + step !== value && onChange(e, value + step);
+        }
+        e.preventDefault();
+        break;
+      default:
+        break;
+    }
+  };
 
   return (
     <Wrapper data-disabled={disabled} {...props}>

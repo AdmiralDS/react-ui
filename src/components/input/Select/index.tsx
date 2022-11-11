@@ -8,7 +8,7 @@ import { InputIconButton } from '#src/components/InputIconButton';
 import { ReactComponent as CloseOutlineSvg } from '@admiral-ds/icons/build/service/CloseOutline.svg';
 import type { ComponentDimension, InputStatus } from '#src/components/input/types';
 import { ConstantSelectProvider } from './useSelectContext';
-import type { HighlightFormat, IConstantOption } from './types';
+import type { IConstantOption } from './types';
 import { MultipleSelectChips } from './MultipleSelectChips';
 import {
   BorderedDiv,
@@ -21,7 +21,6 @@ import {
   StyledMenu,
   EmptyMessageWrapper,
 } from './styled';
-import { preventDefault } from './utils';
 import { changeInputData } from '#src/components/common/dom/changeInputData';
 import { useClickOutside } from '#src/components/common/hooks/useClickOutside';
 import { Spinner } from '#src/components/Spinner';
@@ -31,7 +30,6 @@ import type { RenderPanelProps } from '#src/components/Menu';
 import { NativeControl } from '#src/components/input/Select/NativeControl';
 import { DropDownProvider } from '#src/components/input/Select/DropDownContext';
 import type { ItemProps } from '#src/components/Menu/MenuItem';
-import { HighlightWrapper } from '#src/components/input/Select/Highlight/HighlightWrapper';
 
 /**
  * Осталось сделать:
@@ -64,10 +62,6 @@ export interface SelectProps extends Omit<React.InputHTMLAttributes<HTMLSelectEl
   /** Добавить селекту возможность множественного выбора */
   multiple?: boolean;
 
-  /** По умолчанию, если в компоннет Option передан текст и только текст, то в зависимости от набранного в Input значения,
-   * опции будут подсвечиваться. Описываемый флаг отключает это поведение. */
-  defaultHighlighted?: boolean;
-
   /** По умолчанию, если multiple = true, в опции присутствует checkbox. Данный флаг позволяет убрать его */
   showCheckbox?: boolean;
 
@@ -80,10 +74,6 @@ export interface SelectProps extends Omit<React.InputHTMLAttributes<HTMLSelectEl
   onClearIconClick?: () => void;
 
   idleHeight?: 'full' | 'fixed';
-
-  /** По умолчанию опции подсвечиваются отдельно по каждой разделенной пробелом части в поисковой строке. Данная опция
-   * позволяет искать по строке целиком */
-  highlightFormat?: HighlightFormat;
 
   /** Референс на контейнер для правильного позиционирования выпадающего списка */
   portalTargetRef?: React.RefObject<HTMLElement>;
@@ -158,9 +148,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       dimension = 'm',
       idleHeight = 'fixed',
       mode = 'select',
-      highlightFormat = 'word',
       multiple = false,
-      defaultHighlighted = true,
       showCheckbox = true,
       displayClearIcon = false,
       onClearIconClick,
@@ -494,7 +482,6 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
         <ConstantSelectProvider
           onConstantOptionMount={onConstantOptionMount}
           onConstantOptionUnMount={onConstantOptionUnMount}
-          searchValue={searchValue}
         >
           {children}
         </ConstantSelectProvider>
@@ -503,13 +490,10 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
           onActivateItem={setActiveItem}
           onDropDownOptionMount={handleDropDownOptionMount}
           onDropDownOptionUnMount={handleDropDownOptionUnMount}
-          highlightFormat={highlightFormat}
           selectValue={selectedValue}
-          searchValue={searchValue}
           activeItem={activeItem}
           dimension={dimension}
           multiple={multiple}
-          defaultHighlighted={defaultHighlighted}
           showCheckbox={showCheckbox}
         >
           {children}
@@ -556,20 +540,23 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
             alignSelf={alignDropdown}
             dropContainerCssMixin={dropContainerCssMixin}
           >
-            <HighlightWrapper searchValue={searchValue} highlightFormat={highlightFormat}>
-              <StyledMenu
-                active={activeItem}
-                selected={Array.isArray(selectedValue) ? undefined : selectedValue}
-                onActivateItem={setActiveItem}
-                onSelectItem={handleOptionSelect}
-                model={dropDownModel}
-                renderTopPanel={renderDropDownTopPanel}
-                renderBottomPanel={renderDropDownBottomPanel}
-              />
-            </HighlightWrapper>
+            <StyledMenu
+              active={activeItem}
+              selected={Array.isArray(selectedValue) ? undefined : selectedValue}
+              onActivateItem={setActiveItem}
+              onSelectItem={handleOptionSelect}
+              model={dropDownModel}
+              renderTopPanel={renderDropDownTopPanel}
+              renderBottomPanel={renderDropDownBottomPanel}
+            />
           </DropdownContainer>
         )}
-        <IconPanel multiple={multiple} dimension={dimension} onClick={stopPropagation} onMouseDown={preventDefault}>
+        <IconPanel
+          multiple={multiple}
+          dimension={dimension}
+          onClick={stopPropagation}
+          onMouseDown={(e) => e.preventDefault()}
+        >
           {isLoading && <Spinner svgMixin={SpinnerMixin} dimension={dimension === 's' ? 's' : 'm'} />}
           {displayClearIcon && !readOnly && (
             <InputIconButton icon={CloseOutlineSvg} id="searchSelectClearIcon" onClick={handleOnClear} aria-hidden />
@@ -590,7 +577,6 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
 );
 
 export { Option } from './Option';
-export { Highlight } from './Highlight';
 export { OptionGroup } from './OptionGroup';
 
 Select.displayName = 'Select';
