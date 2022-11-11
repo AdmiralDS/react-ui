@@ -79,7 +79,7 @@ const Template1: ComponentStory<typeof SliderRange> = ({ defaultValue, onChange,
 
   return (
     <ThemeProvider theme={swapBorder}>
-      <SliderRange defaultValue={defaultValue || ['От 2 ₽', 'До 6 ₽']} onChange={onChange || handleChange} {...args} />
+      <SliderRange defaultValue={defaultValue || ['2', '6']} onChange={onChange || handleChange} {...args} />
     </ThemeProvider>
   );
 };
@@ -98,6 +98,23 @@ const Template2: ComponentStory<typeof SliderRange> = () => {
   );
 };
 
+const Template3: ComponentStory<typeof SliderRange> = () => {
+  const [value, setValue] = React.useState<[string, string]>(['2', '5']);
+  return (
+    <>
+      <SliderRange
+        value={value}
+        onChange={(value: any) => {
+          console.log(value);
+          setValue([value[0].str, value[1].str]);
+        }}
+        prefix={['From', 'To']}
+        suffix="$"
+      />
+    </>
+  );
+};
+
 export const Playground = Template1.bind({});
 Playground.args = {};
 Playground.storyName = 'SliderRange. Playground';
@@ -105,3 +122,7 @@ Playground.storyName = 'SliderRange. Playground';
 export const Custom = Template2.bind({});
 Custom.args = {};
 Custom.storyName = 'SliderRange. Пример изменения настроек (prefix, suffix, minValue, maxValue)';
+
+export const Controlled = Template3.bind({});
+Controlled.args = {};
+Controlled.storyName = 'SliderRange. Пример контролируемого компонента.';

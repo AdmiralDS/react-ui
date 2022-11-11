@@ -12,10 +12,7 @@ const Desc = styled.div`
 `;
 
 const Description = () => (
-  <Desc>
-    Поле ввода с двойным слайдером позволяет выбирать диапазон внутри обозначенного диапазона значений. Так же возможен
-    ввод вручную.
-  </Desc>
+  <Desc>Двойной слайдер позволяет выбирать диапазон внутри обозначенного диапазона значений.</Desc>
 );
 
 export default {
@@ -23,11 +20,6 @@ export default {
   decorators: [withDesign],
   component: Range,
   parameters: {
-    docs: {
-      source: {
-        code: null,
-      },
-    },
     componentSubtitle: <Description />,
     design: [
       {
@@ -68,14 +60,16 @@ export default {
 } as ComponentMeta<typeof Range>;
 
 const Template0: ComponentStory<typeof Range> = (args) => {
-  const [rangeValue, setRangeValue] = React.useState<[number, number]>([0, 5]);
+  const [rangeValue, setRangeValue] = React.useState<[number, number]>([4, 5]);
+
   return (
     <>
       <Range
         {...args}
         value={rangeValue}
         onChange={(e: any, value: [number, number]) => {
-          if (e.type !== 'mousemove') setRangeValue(value);
+          console.log({ e, value });
+          setRangeValue(value);
         }}
       />
     </>
