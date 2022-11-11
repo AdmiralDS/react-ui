@@ -244,6 +244,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
     const onCloseSelect = React.useCallback(() => {
       setIsSearchPanelOpen(false);
       if (inputRef.current) changeInputData(inputRef.current, { value: '' });
+
       setShouldRenderSelectValue(true);
     }, [selectedValue]);
 
@@ -285,6 +286,10 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
 
     React.useEffect(() => {
       if (forcedOpen !== isSearchPanelOpen) onChangeDropDownState?.(isSearchPanelOpen);
+
+      if (!isSearchPanelOpen && isFocused && document.activeElement !== containerRef.current) {
+        selectRef.current?.focus();
+      }
     }, [isSearchPanelOpen]);
 
     const handleOnClear = onClearIconClick || resetOptions;
@@ -335,10 +340,8 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       mutableState.current.shouldExtendInputValue = false;
     };
 
-    const onSingleLocalInputChange = () => setShouldRenderSelectValue(false);
-
     const onLocalInputChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
-      if (!multiple) onSingleLocalInputChange();
+      if (!multiple) setShouldRenderSelectValue(false);
       mutateAndExtendTargetInputValue(evt);
       if (inputValue === undefined) setSearchValue(evt.target.value);
       onInputChange?.(evt);
@@ -393,7 +396,9 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
         evt.stopPropagation();
       }
 
-      if (evt.key.length === 1) extendSelectValueToInputValue();
+      const modifyKeyPressed = evt.ctrlKey || evt.metaKey || evt.altKey;
+
+      if (evt.key.length === 1 && !modifyKeyPressed) extendSelectValueToInputValue();
       if (code === keyboardKey.Backspace && !evt.repeat) deleteOrHideSelectValueOnBackspace();
       if (code === keyboardKey.Backspace) {
         narrowSelectValueToInputValue(evt);
@@ -407,7 +412,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       onFocusFromProps?.(evt);
     };
 
-    const onBlur = (evt: React.FocusEvent<HTMLDivElement>) => {
+    const handleWrapperBlur = (evt: React.FocusEvent<HTMLDivElement>) => {
       // если фокус переходит не на инпут, содержащийся внутри компонента
       if (!evt.currentTarget.contains(evt.relatedTarget) && !dropDownRef.current?.contains(evt.relatedTarget)) {
         setIsFocused(false);
@@ -425,7 +430,10 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
     };
 
     React.useEffect(() => {
-      if ((!isFocused && !multiple) || multiple) setShouldRenderSelectValue(true);
+      if ((!isFocused && !multiple) || multiple) {
+        if (inputRef.current) changeInputData(inputRef.current, { value: '' });
+        setShouldRenderSelectValue(true);
+      }
     }, [multiple, isFocused]);
 
     React.useEffect(() => {
@@ -477,7 +485,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
         onClick={handleWrapperClick}
         onFocus={onFocus}
         skeleton={skeleton}
-        onBlur={onBlur}
+        onBlur={handleWrapperBlur}
       >
         <ConstantSelectProvider
           onConstantOptionMount={onConstantOptionMount}
@@ -533,7 +541,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
         {isSearchPanelOpen && !skeleton && (
           <DropdownContainer
             ref={dropDownRef}
-            tabIndex={0}
+            tabIndex={-1}
             targetRef={portalTargetRef || containerRef}
             data-dimension={dimension}
             onClickOutside={handleClickOutside}
