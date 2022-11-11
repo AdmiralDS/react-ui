@@ -83,6 +83,9 @@ export default {
     skeleton: {
       control: { type: 'boolean' },
     },
+    required: {
+      control: { type: 'boolean' },
+    },
   },
 } as ComponentMeta<typeof SelectField>;
 
