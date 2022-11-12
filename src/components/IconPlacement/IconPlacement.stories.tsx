@@ -2,9 +2,10 @@ import * as React from 'react';
 import { withDesign } from 'storybook-addon-designs';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { ReactComponent as CloseOutline } from '@admiral-ds/icons/build/service/CloseOutline.svg';
-import styled from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 import { T } from '#src/components/T';
 import { IconPlacement } from '#src/components/IconPlacement/index';
+import { Theme } from '#src/components/themes';
 
 export default {
   title: 'Admiral-2.1/IconPlacement',
@@ -43,6 +44,10 @@ export default {
     disabled: {
       control: false,
     },
+    themeBorderKind: {
+      options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
+      control: { type: 'radio' },
+    },
   },
 } as ComponentMeta<typeof IconPlacement>;
 
@@ -64,76 +69,84 @@ const WrapperVertical = styled.div`
 
 const handleClick = () => console.log('IconPlacement clicked');
 const IconPlacementDemoTemplate: ComponentStory<typeof IconPlacement> = (args) => {
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
+    return theme;
+  }
+
   return (
-    <WrapperVertical>
-      <T font="Body/Body 1 Short" as="div">
-        Icon Placement - вспомогательный компонент, обычно используется в составе других компонентов или организмов. По
-        сути это любая иконка с заранее заданными состояниями Default, Hover, Press, Focus, Disable.
-      </T>
-      <T font="Body/Body 1 Short" as="div">
-        Рекомендуется в качестве отдельно стоящих иконок использовать компонент Icon Button, а Icon Placement применять
-        только в случаях, когда это действительно необходимо, как правило, это ограниченное пространство внутри
-        компонентов.
-      </T>
-      <T font="Body/Body 1 Short" as="div">
-        У компонента есть три размера иконки: M 24, S 20 и XS 16. Причем, у размеров M и S два размера Hover-круга для
-        различных ситуаций, что бы вписываться внутрь небольших компонентов. БОльшие размеры круга обозначены в названии
-        вариантов компонента как Big. Размер Hover-круга не учитывается в размере компонента и выходит за его границы.
-      </T>
-      <Wrapper>
-        <WrapperVertical>
-          <T font="Body/Body 1 Long" as="div">
-            Dimension - m
-          </T>
-          <IconPlacement dimension="m" onClick={handleClick}>
-            <CloseOutline />
-          </IconPlacement>
-          <IconPlacement dimension="m" onClick={handleClick} disabled={true}>
-            <CloseOutline />
-          </IconPlacement>
-          <T font="Body/Body 1 Long" as="div">
-            Dimension - m Big
-          </T>
-          <IconPlacement dimension="mBig" onClick={handleClick}>
-            <CloseOutline />
-          </IconPlacement>
-          <IconPlacement dimension="mBig" disabled={true} onClick={handleClick}>
-            <CloseOutline />
-          </IconPlacement>
-        </WrapperVertical>
-        <WrapperVertical>
-          <T font="Body/Body 1 Long" as="div">
-            Dimension - s
-          </T>
-          <IconPlacement dimension="s" onClick={handleClick}>
-            <CloseOutline />
-          </IconPlacement>
-          <IconPlacement dimension="s" onClick={handleClick} disabled={true}>
-            <CloseOutline />
-          </IconPlacement>
-          <T font="Body/Body 1 Long" as="div">
-            Dimension - s Big
-          </T>
-          <IconPlacement dimension="sBig" onClick={handleClick}>
-            <CloseOutline />
-          </IconPlacement>
-          <IconPlacement dimension="sBig" disabled={true} onClick={handleClick}>
-            <CloseOutline />
-          </IconPlacement>
-        </WrapperVertical>
-        <WrapperVertical>
-          <T font="Body/Body 1 Long" as="div">
-            Dimension - xs
-          </T>
-          <IconPlacement dimension="xs" onClick={handleClick}>
-            <CloseOutline />
-          </IconPlacement>
-          <IconPlacement dimension="xs" disabled={true} onClick={handleClick}>
-            <CloseOutline />
-          </IconPlacement>
-        </WrapperVertical>
-      </Wrapper>
-    </WrapperVertical>
+    <ThemeProvider theme={swapBorder}>
+      <WrapperVertical>
+        <T font="Body/Body 1 Short" as="div">
+          Icon Placement - вспомогательный компонент, обычно используется в составе других компонентов или организмов.
+          По сути это любая иконка с заранее заданными состояниями Default, Hover, Press, Focus, Disable.
+        </T>
+        <T font="Body/Body 1 Short" as="div">
+          Рекомендуется в качестве отдельно стоящих иконок использовать компонент Icon Button, а Icon Placement
+          применять только в случаях, когда это действительно необходимо, как правило, это ограниченное пространство
+          внутри компонентов.
+        </T>
+        <T font="Body/Body 1 Short" as="div">
+          У компонента есть три размера иконки: M 24, S 20 и XS 16. Причем, у размеров M и S два размера Hover-круга для
+          различных ситуаций, что бы вписываться внутрь небольших компонентов. БОльшие размеры круга обозначены в
+          названии вариантов компонента как Big. Размер Hover-круга не учитывается в размере компонента и выходит за его
+          границы.
+        </T>
+        <Wrapper>
+          <WrapperVertical>
+            <T font="Body/Body 1 Long" as="div">
+              Dimension - m
+            </T>
+            <IconPlacement dimension="m" onClick={handleClick}>
+              <CloseOutline />
+            </IconPlacement>
+            <IconPlacement dimension="m" onClick={handleClick} disabled={true}>
+              <CloseOutline />
+            </IconPlacement>
+            <T font="Body/Body 1 Long" as="div">
+              Dimension - m Big
+            </T>
+            <IconPlacement dimension="mBig" onClick={handleClick}>
+              <CloseOutline />
+            </IconPlacement>
+            <IconPlacement dimension="mBig" disabled={true} onClick={handleClick}>
+              <CloseOutline />
+            </IconPlacement>
+          </WrapperVertical>
+          <WrapperVertical>
+            <T font="Body/Body 1 Long" as="div">
+              Dimension - s
+            </T>
+            <IconPlacement dimension="s" onClick={handleClick}>
+              <CloseOutline />
+            </IconPlacement>
+            <IconPlacement dimension="s" onClick={handleClick} disabled={true}>
+              <CloseOutline />
+            </IconPlacement>
+            <T font="Body/Body 1 Long" as="div">
+              Dimension - s Big
+            </T>
+            <IconPlacement dimension="sBig" onClick={handleClick}>
+              <CloseOutline />
+            </IconPlacement>
+            <IconPlacement dimension="sBig" disabled={true} onClick={handleClick}>
+              <CloseOutline />
+            </IconPlacement>
+          </WrapperVertical>
+          <WrapperVertical>
+            <T font="Body/Body 1 Long" as="div">
+              Dimension - xs
+            </T>
+            <IconPlacement dimension="xs" onClick={handleClick}>
+              <CloseOutline />
+            </IconPlacement>
+            <IconPlacement dimension="xs" disabled={true} onClick={handleClick}>
+              <CloseOutline />
+            </IconPlacement>
+          </WrapperVertical>
+        </Wrapper>
+      </WrapperVertical>
+    </ThemeProvider>
   );
 };
 
