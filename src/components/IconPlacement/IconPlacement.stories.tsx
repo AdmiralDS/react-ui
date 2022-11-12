@@ -150,5 +150,68 @@ const IconPlacementDemoTemplate: ComponentStory<typeof IconPlacement> = (args) =
   );
 };
 
+const ScrollWrapper = styled.div`
+  box-sizing: border-box;
+  display: flex;
+  overflow: hidden;
+  flex-direction: column;
+  align-items: stretch;
+  border: rebeccapurple 1px solid;
+  height: 150px;
+  width: 50px;
+`;
+
+const StyledDiv = styled.div`
+  margin: 0;
+  appearance: none;
+  flex: 1 1 auto;
+  border: none;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+`;
+
+const IconPlacementInScrollTemplate: ComponentStory<typeof IconPlacement> = (args) => {
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
+    return theme;
+  }
+
+  return (
+    <ThemeProvider theme={swapBorder}>
+      <ScrollWrapper>
+        <StyledDiv>
+          <IconPlacement dimension="m" onClick={handleClick}>
+            <CloseOutline />
+          </IconPlacement>
+          <IconPlacement dimension="m" onClick={handleClick}>
+            <CloseOutline />
+          </IconPlacement>
+          <IconPlacement dimension="m" onClick={handleClick}>
+            <CloseOutline />
+          </IconPlacement>
+          <IconPlacement dimension="m" onClick={handleClick}>
+            <CloseOutline />
+          </IconPlacement>
+          <IconPlacement dimension="m" onClick={handleClick}>
+            <CloseOutline />
+          </IconPlacement>
+          <IconPlacement dimension="m" onClick={handleClick}>
+            <CloseOutline />
+          </IconPlacement>
+          <IconPlacement dimension="m" onClick={handleClick}>
+            <CloseOutline />
+          </IconPlacement>
+          <IconPlacement dimension="m" onClick={handleClick}>
+            <CloseOutline />
+          </IconPlacement>
+        </StyledDiv>
+      </ScrollWrapper>
+    </ThemeProvider>
+  );
+};
+
 export const IconPlacementDemo = IconPlacementDemoTemplate.bind({});
 IconPlacementDemo.storyName = 'IconPlacement. Размеры';
+
+export const IconPlacementInScroll = IconPlacementInScrollTemplate.bind({});
+IconPlacementInScroll.storyName = 'IconPlacement. В скролле';
