@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { ButtonHTMLAttributes } from 'react';
 import styled, { css } from 'styled-components';
+import { smallGroupBorderRadius } from '#src/components/themes/borderRadius';
 
 const IconSizeM = 24;
 const IconSizeS = 20;
@@ -66,6 +67,7 @@ const StyledButton = styled.button<{ dimension?: IconPlacementDimension }>`
   appearance: none;
   height: ${(p) => getIconSize(p.dimension)}px;
   width: ${(p) => getIconSize(p.dimension)}px;
+  border-radius: ${(p) => smallGroupBorderRadius(p.theme.shape)};
 
   cursor: pointer;
 
@@ -93,6 +95,11 @@ const StyledButton = styled.button<{ dimension?: IconPlacementDimension }>`
     &::before {
       background-color: ${({ theme }) => theme.color['Opacity/Press']};
     }
+  }
+
+  &:focus-visible {
+    outline-offset: 2px;
+    outline: ${(p) => p.theme.color['Primary/Primary 60 Main']} solid 2px;
   }
 `;
 
