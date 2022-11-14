@@ -158,9 +158,12 @@ const Container = styled.div<{ dimension?: IconPlacementDimension; containerRole
   border-radius: 50%;
   background-color: ${(p) => (p.containerRole ? p.theme.color[getContainerColor(p.containerRole)] : 'transparent')};
   pointer-events: none;
-  top: -${(p) => getHoverOffset(p.dimension)}px;
-  left: -${(p) => getHoverOffset(p.dimension)}px;
   position: absolute;
+  //top: -${(p) => getHoverOffset(p.dimension)}px;
+  //left: -${(p) => getHoverOffset(p.dimension)}px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 `;
 
 const Wrapper = styled.div<{ dimension?: IconPlacementDimension }>`
@@ -249,6 +252,42 @@ export const IconPlacementBefore = React.forwardRef<HTMLButtonElement, IconPlace
       <StyledButtonBefore ref={ref} type={type} dimension={dimension} disabled={disabled} {...props}>
         <IconPlacementContent dimension={dimension}>{children}</IconPlacementContent>
       </StyledButtonBefore>
+    );
+  },
+);
+
+const StyledContainer = styled(Container)`
+  visibility: hidden;
+`;
+
+const StyledButtonContainerCss = styled(StyledButton)`
+  &:hover {
+    > ${StyledContainer} {
+      visibility: visible;
+      background-color: ${({ theme }) => theme.color['Opacity/Hover']};
+    }
+  }
+  &:active {
+    > ${StyledContainer} {
+      visibility: visible;
+      background-color: ${({ theme }) => theme.color['Opacity/Press']};
+    }
+  }
+  &:focus {
+    > ${StyledContainer} {
+      visibility: visible;
+      background-color: ${({ theme }) => theme.color['Opacity/Focus']};
+    }
+  }
+`;
+
+export const IconPlacementContainerCss = React.forwardRef<HTMLButtonElement, IconPlacementProps>(
+  ({ type = 'button', dimension = 'm', disabled = false, children, ...props }, ref) => {
+    return (
+      <StyledButtonContainerCss ref={ref} type={type} dimension={dimension} disabled={disabled} {...props}>
+        <StyledContainer dimension={dimension} />
+        <IconPlacementContent dimension={dimension}>{children}</IconPlacementContent>
+      </StyledButtonContainerCss>
     );
   },
 );
