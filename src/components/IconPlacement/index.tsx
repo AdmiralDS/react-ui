@@ -61,7 +61,22 @@ export interface IconPlacementProps extends ButtonHTMLAttributes<HTMLButtonEleme
   disabled?: boolean;
 }
 
-/*  &:focus:not(:disabled) {
+const hoverStyle = css<{ dimension?: IconPlacementDimension }>`
+  &::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    width: ${(p) => getHoverSize(p.dimension)}px;
+    height: ${(p) => getHoverSize(p.dimension)}px;
+    background-color: ${({ theme }) => theme.color['Opacity/Hover']};
+  }
+`;
+
+const statusStylesCss = css`
+  &:focus:not(:disabled) {
     ${hoverStyle}
     &::before {
       background-color: ${({ theme }) => theme.color['Opacity/Focus']};
@@ -77,26 +92,16 @@ export interface IconPlacementProps extends ButtonHTMLAttributes<HTMLButtonEleme
     &::before {
       background-color: ${({ theme }) => theme.color['Opacity/Press']};
     }
-  }*/
-
-const hoverStyle = css<{ dimension?: IconPlacementDimension }>`
-  &::before {
-    content: '';
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    border-radius: 50%;
-    width: ${(p) => getHoverSize(p.dimension)}px;
-    height: ${(p) => getHoverSize(p.dimension)}px;
-    background-color: ${({ theme }) => theme.color['Opacity/Hover']};
   }
 `;
+
 const StyledButton = styled.button<{ dimension?: IconPlacementDimension }>`
   position: relative;
   padding: 0;
+  margin: 0;
   box-sizing: border-box;
   border: none;
+  //border: dashed 1px darkcyan;
   background-color: transparent;
   appearance: none;
   height: ${(p) => getIconSize(p.dimension)}px;
@@ -228,6 +233,21 @@ export const IconPlacement = React.forwardRef<HTMLButtonElement, IconPlacementPr
           <IconPlacementContent dimension={dimension}>{children}</IconPlacementContent>
         </StyledButton>
       </Wrapper>
+    );
+  },
+);
+
+const StyledButtonBefore = styled(StyledButton)`
+  display: block;
+  ${statusStylesCss}
+`;
+
+export const IconPlacementBefore = React.forwardRef<HTMLButtonElement, IconPlacementProps>(
+  ({ type = 'button', dimension = 'm', disabled = false, children, ...props }, ref) => {
+    return (
+      <StyledButtonBefore ref={ref} type={type} dimension={dimension} disabled={disabled} {...props}>
+        <IconPlacementContent dimension={dimension}>{children}</IconPlacementContent>
+      </StyledButtonBefore>
     );
   },
 );
