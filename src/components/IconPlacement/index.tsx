@@ -168,10 +168,11 @@ const Wrapper = styled.div<{ dimension?: IconPlacementDimension }>`
   width: ${(p) => getIconSize(p.dimension)}px;
   overflow: visible;
   position: relative;
+  display: inline-block;
 `;
 
 export const IconPlacement = React.forwardRef<HTMLButtonElement, IconPlacementProps>(
-  ({ type = 'button', dimension = 'm', disabled = false, children, ...props }, ref) => {
+  ({ type = 'button', className, dimension = 'm', disabled = false, children, ...props }, ref) => {
     const buttonRef = React.useRef<HTMLButtonElement>(null);
     const [visible, setVisible] = React.useState<boolean>(false);
     const [containerRole, setContainerRole] = React.useState<ContainerRole | undefined>(undefined);
@@ -227,7 +228,7 @@ export const IconPlacement = React.forwardRef<HTMLButtonElement, IconPlacementPr
     }, [buttonRef.current, visible, containerRole]);
 
     return (
-      <Wrapper dimension={dimension}>
+      <Wrapper dimension={dimension} className={className}>
         {visible && <Container containerRole={containerRole} dimension={dimension} />}
         <StyledButton ref={refSetter(ref, buttonRef)} type={type} dimension={dimension} disabled={disabled} {...props}>
           <IconPlacementContent dimension={dimension}>{children}</IconPlacementContent>
