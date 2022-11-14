@@ -7,11 +7,12 @@ function isValidDigit(string: string, number: number) {
     case 0:
       return /^([0-2])?$/.test(onlyDigitString);
     case 1:
+    case 4:
       return /^([0-9])?$/.test(onlyDigitString);
     case 2:
-      return /^([0-5])?$/.test(onlyDigitString);
+      return /^([0-4])?$/.test(onlyDigitString);
     case 3:
-      return /^([0-9])?$/.test(onlyDigitString);
+      return /^([0-5])?$/.test(onlyDigitString);
   }
 }
 
@@ -82,15 +83,15 @@ export function defaultTimeInputHandle(inputData: InputData | null): InputData {
       inputValue = splice(inputValue, 0, 1, '_');
       moveCursor = moveCursor - 1;
     }
-    if (!isValidDigit(inputValue[1], 1)) {
+    if (inputValue[0] === '2' ? !isValidDigit(inputValue[1], 2) : !isValidDigit(inputValue[1], 1)) {
       inputValue = splice(inputValue, 1, 1, '_');
       moveCursor = moveCursor - 1;
     }
-    if (!isValidDigit(inputValue[3], 2)) {
+    if (!isValidDigit(inputValue[3], 3)) {
       inputValue = splice(inputValue, 3, 1, '_');
       moveCursor = moveCursor - 1;
     }
-    if (!isValidDigit(inputValue[4], 3)) {
+    if (!isValidDigit(inputValue[4], 4)) {
       inputValue = splice(inputValue, 4, 1, '_');
       moveCursor = moveCursor - 1;
     }
