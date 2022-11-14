@@ -4,7 +4,7 @@ import { FileInputDimension } from '#src/components/input/FileInput';
 import styled, { css, DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { typography } from '#src/components/Typography';
-import { formatBytes, getFormat } from '#src/components/input/FileInput/utils';
+import { formatFileSize, getFormat } from '#src/components/input/FileInput/utils';
 import { Spinner } from '#src/components/Spinner';
 import { ReactComponent as PDFSolid } from '@admiral-ds/icons/build/documents/PDFSolid.svg';
 import { ReactComponent as PPTSolid } from '@admiral-ds/icons/build/documents/PPTSolid.svg';
@@ -285,6 +285,8 @@ export interface FileItemProps extends HTMLAttributes<HTMLDivElement>, FileAttri
   dimension?: FileInputDimension;
   /** Позволяет добавлять миксин для компоновки загруженных файлов, созданный с помощью styled css  */
   filesLayoutCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+  /** Позволяет выводить размер файла в требуемом формате  */
+  formatFileSizeInfo?: (sizeInBytes: number) => string;
   children?: never;
 }
 
@@ -302,14 +304,15 @@ export const FileItem = forwardRef<HTMLDivElement, FileItemProps>(
       onPreviewIconClick,
       dimension,
       filesLayoutCssMixin,
+      formatFileSizeInfo = formatFileSize,
       ...props
     },
     ref,
   ) => {
     const PreviewIcon = getIcon(fileType);
     const fileFormatInfo = getFormat(fileType);
-    const fileSizeInfo = formatBytes(fileSize);
-    const fileInfo = `${fileFormatInfo}・${fileSizeInfo} Mb`;
+    const fileSizeInfo = formatFileSizeInfo(fileSize);
+    const fileInfo = `${fileFormatInfo}・${fileSizeInfo}`;
 
     const previewWrapperRef = useRef<HTMLDivElement | null>(null);
     const titleRef = useRef<HTMLDivElement | null>(null);
