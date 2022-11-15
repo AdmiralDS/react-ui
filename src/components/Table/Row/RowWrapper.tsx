@@ -19,6 +19,8 @@ export interface RowWrapperProps extends HTMLAttributes<HTMLDivElement> {
   underline: boolean;
   /** Признак является ли сторока групповой */
   isGroup: boolean;
+  /** Признак входит ли строка в группу */
+  rowInGroup: boolean;
   /** Наличие вертикального скролла в таблице */
   verticalScroll: boolean;
   /** Ширина строки */
@@ -34,6 +36,7 @@ export const RowWrapper = ({
   children,
   tableWidth,
   isGroup,
+  rowInGroup,
   rowWidth,
   verticalScroll,
   ...props
@@ -54,9 +57,11 @@ export const RowWrapper = ({
       underline={underline}
       disabled={!!row.disabled}
       dimension={dimension}
-      className={row.className && `tr ${row.className}`}
+      className={`tr ${row.className || ''}`}
       isGroup={isGroup}
       rowWidth={rowWidth}
+      data-group={isGroup}
+      data-ingroup={rowInGroup}
     >
       <SimpleRow
         className="tr-simple"

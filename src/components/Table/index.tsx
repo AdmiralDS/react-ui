@@ -198,6 +198,8 @@ export interface TableProps extends React.HTMLAttributes<HTMLDivElement> {
   displayRowExpansionColumn?: boolean;
   /** Окрашивание шапки таблицы в серый цвет */
   greyHeader?: boolean;
+  /** Окрашивание строк таблицы через одну в цвет вторичного фона (зебра) */
+  greyZebraRows?: boolean;
 
   /** Ширина колонки (заголовка) регулируется через параметр Spacing Between Items в настройках
    * Auto Layout, при выбранном заголовке. Минимальное значение 12px, для таблиц S и M, и 16px для таблиц L и XL.
@@ -284,6 +286,7 @@ export const Table: React.FC<TableProps> = ({
   renderRowWrapper,
   dimension = 'm',
   greyHeader = false,
+  greyZebraRows = false,
   spacingBetweenItems,
   headerLineClamp = 1,
   headerExtraLineClamp = 1,
@@ -734,6 +737,7 @@ export const Table: React.FC<TableProps> = ({
         underline={(isLastRow && showLastRowUnderline) || !isLastRow}
         tableWidth={tableWidth}
         isGroup={isGroupRow}
+        rowInGroup={rowInGroup}
         onRowClick={onRowClick}
         onRowDoubleClick={onRowDoubleClick}
         rowWidth={isGroupRow ? headerRef.current?.scrollWidth : undefined}
@@ -780,7 +784,13 @@ export const Table: React.FC<TableProps> = ({
   };
 
   return (
-    <TableContainer ref={tableRef} data-shadow={false} {...props} className={`table ${props.className || ''}`}>
+    <TableContainer
+      ref={tableRef}
+      data-shadow={false}
+      {...props}
+      className={`table ${props.className || ''}`}
+      greyZebraRows={greyZebraRows}
+    >
       <HeaderWrapper greyHeader={greyHeader} data-verticalscroll={verticalScroll}>
         <Header dimension={dimension} ref={headerRef} className="tr">
           {(displayRowSelectionColumn || displayRowExpansionColumn || stickyColumns.length > 0) && (

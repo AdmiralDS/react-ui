@@ -100,6 +100,9 @@ export default {
     greyHeader: {
       control: { type: 'boolean' },
     },
+    greyZebraRows: {
+      control: { type: 'boolean' },
+    },
     showDividerForLastColumn: {
       control: { type: 'boolean' },
     },
