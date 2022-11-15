@@ -154,7 +154,7 @@ const Text = styled.span`
   ${typography['Caption/Caption 1']}
 `;
 
-const Circle = styled.div<{ background: TagKind | string }>`
+export const TagCircle = styled.div<{ background: TagKind | string }>`
   display: flex;
   flex-shrink: 0;
   width: 8px;
@@ -296,7 +296,7 @@ export const Tag = React.forwardRef<HTMLElement, TagProps & TagInternalProps>(
           dimension={dimension}
           {...props}
         >
-          {background !== 'neutral' && !statusViaBackground && <Circle background={background} />}
+          {background !== 'neutral' && !statusViaBackground && <TagCircle background={background} />}
           {statusViaBackground && icon && <Icon>{icon}</Icon>}
           {children && <Text ref={textRef}>{children}</Text>}
           {statusIcon && <StatusIcon>{statusIcon}</StatusIcon>}

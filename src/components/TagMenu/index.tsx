@@ -1,7 +1,7 @@
 import React, { HTMLAttributes } from 'react';
 import { TagVisualProps, TagSizeProps, Tag } from '#src/components/Tag';
 import { DropMenu, DropMenuComponentProps } from '#src/components/DropMenu';
-import { MenuItem, RenderOptionProps } from '#src/components/Menu/MenuItem';
+import { ItemProps, MenuItem, RenderOptionProps } from '#src/components/Menu/MenuItem';
 import { passDropdownDataAttributes } from '#src/components/common/utils/splitDataAttributes';
 import { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 
@@ -15,7 +15,10 @@ export interface TagMenuProps
     TagSizeProps,
     DropMenuComponentProps {
   /** Опции выпадающего списка */
-  options: Array<TagOptionProps>;
+  items?: Array<ItemProps>;
+  /** @deprecated use items instead
+   * Опции выпадающего списка */
+  options?: Array<TagOptionProps>;
   /** Выбранная опция */
   selected?: TagOptionProps;
   /** @deprecated use onSelectItem instead
@@ -45,6 +48,7 @@ export const TagMenu = React.forwardRef<HTMLButtonElement, TagMenuProps>(
       onSelectOption,
       onOpen,
       onClose,
+      items,
       options,
       disableSelectedOptionHighlight,
       selected,
@@ -64,16 +68,22 @@ export const TagMenu = React.forwardRef<HTMLButtonElement, TagMenuProps>(
     },
     ref,
   ) => {
-    const model = React.useMemo(() => {
-      return options.map((item) => ({
-        id: item.id,
-        render: (options: RenderOptionProps) => (
-          <MenuItem dimension="m" {...options} key={item.id}>
-            {item.tagText}
-          </MenuItem>
-        ),
-      }));
-    }, [options, dimension]);
+    const model =
+      items ||
+      React.useMemo(() => {
+        if (options) {
+          return options.map((item) => ({
+            id: item.id,
+            render: (options: RenderOptionProps) => (
+              <MenuItem dimension="m" {...options} key={item.id}>
+                {item.tagText}
+              </MenuItem>
+            ),
+          }));
+        } else {
+          return [];
+        }
+      }, [options, dimension]);
 
     const dropMenuProps = passDropdownDataAttributes(props);
 
