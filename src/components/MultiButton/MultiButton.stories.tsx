@@ -4,8 +4,11 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import styled, { ThemeProvider } from 'styled-components';
 import { Theme } from '#src/components/themes';
+import { MenuItem, RenderOptionProps } from '#src/components/Menu/MenuItem';
+import { ReactComponent as BonusSolid } from '@admiral-ds/icons/build/category/BonusSolid.svg';
 
 const Separator = styled.div`
+  width: 20px;
   height: 20px;
 `;
 
@@ -98,38 +101,38 @@ const handleMainButtonClick = (e: MouseEvent<HTMLButtonElement>) => {
   console.log('Main button clicked');
 };
 
-const Template1: ComponentStory<typeof MultiButton> = (args) => {
-  const items: Array<MultiButtonItem> = [
-    {
-      id: '1',
-      display: 'Option one',
-    },
-    {
-      id: '2',
-      display: 'Option two',
-    },
-    {
-      id: '3',
-      display: 'Option three',
-    },
-    {
-      id: '4',
-      display: 'Option four',
-    },
-    {
-      id: '5',
-      display: 'Option five',
-    },
-    {
-      id: '6',
-      display: 'Option six',
-    },
-    {
-      id: '7',
-      display: 'Option seven',
-    },
-  ];
+const itemsDemo: Array<MultiButtonItem> = [
+  {
+    id: '1',
+    display: 'Option one',
+  },
+  {
+    id: '2',
+    display: 'Option two',
+  },
+  {
+    id: '3',
+    display: 'Option three',
+  },
+  {
+    id: '4',
+    display: 'Option four',
+  },
+  {
+    id: '5',
+    display: 'Option five',
+  },
+  {
+    id: '6',
+    display: 'Option six',
+  },
+  {
+    id: '7',
+    display: 'Option seven',
+  },
+];
 
+const Template1: ComponentStory<typeof MultiButton> = (args) => {
   const [selected, setSelected] = React.useState<string | undefined>(undefined);
   const [selected2, setSelected2] = React.useState<string | undefined>(undefined);
 
@@ -137,6 +140,18 @@ const Template1: ComponentStory<typeof MultiButton> = (args) => {
     theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
+
+  const model = React.useMemo(() => {
+    return itemsDemo.slice(1, itemsDemo.length).map((item) => ({
+      id: item.id,
+      render: (items: RenderOptionProps) => (
+        <MenuItem dimension={args.dimension === 'xl' ? 'l' : args.dimension} {...items} key={item.id}>
+          {item.display}
+        </MenuItem>
+      ),
+      disabled: item.disabled,
+    }));
+  }, [args.dimension, itemsDemo]);
 
   return (
     <ThemeProvider theme={swapBorder}>
@@ -149,12 +164,14 @@ const Template1: ComponentStory<typeof MultiButton> = (args) => {
             logSelectedId(id);
             setSelected(id);
           }}
-          options={items}
+          items={model}
           onVisibilityChange={handleVisibilityChange}
           data-dropdown-container-id="first-multi-button-with-dropdown"
           className="multi-button-class"
           onMainButtonClick={handleMainButtonClick}
-        />
+        >
+          {itemsDemo[0].display}
+        </MultiButton>
         <Separator />
         <MultiButton
           {...args}
@@ -164,17 +181,19 @@ const Template1: ComponentStory<typeof MultiButton> = (args) => {
             logSelectedId(id);
             setSelected2(id);
           }}
-          options={items}
+          items={model}
           onVisibilityChange={handleVisibilityChange}
           data-dropdown-container-id="second-multi-button-with-dropdown"
           onMainButtonClick={handleMainButtonClick}
-        />
+        >
+          {itemsDemo[0].display}
+        </MultiButton>
       </div>
     </ThemeProvider>
   );
 };
 
-const items: Array<MultiButtonItem> = [
+const itemsDisabled: Array<MultiButtonItem> = [
   {
     id: '1',
     display: 'Option one',
@@ -211,6 +230,18 @@ const Template2: ComponentStory<typeof MultiButton> = (args) => {
   const [selected, setSelected] = React.useState<string | undefined>(undefined);
   const [selected2, setSelected2] = React.useState<string | undefined>(undefined);
 
+  const model = React.useMemo(() => {
+    return itemsDisabled.slice(1, itemsDisabled.length).map((item) => ({
+      id: item.id,
+      render: (items: RenderOptionProps) => (
+        <MenuItem dimension={args.dimension === 'xl' ? 'l' : args.dimension} {...items} key={item.id}>
+          {item.display}
+        </MenuItem>
+      ),
+      disabled: item.disabled,
+    }));
+  }, [args.dimension, itemsDisabled]);
+
   return (
     <>
       <div style={{ display: 'flex', justifyContent: 'space-around' }}>
@@ -222,7 +253,7 @@ const Template2: ComponentStory<typeof MultiButton> = (args) => {
             logSelectedId(id);
             setSelected(id);
           }}
-          options={items}
+          items={model}
           onVisibilityChange={handleVisibilityChange}
           onMainButtonClick={handleMainButtonClick}
         />
@@ -235,12 +266,114 @@ const Template2: ComponentStory<typeof MultiButton> = (args) => {
             logSelectedId(id);
             setSelected2(id);
           }}
-          options={items}
+          items={model}
           onVisibilityChange={handleVisibilityChange}
           onMainButtonClick={handleMainButtonClick}
         />
       </div>
     </>
+  );
+};
+
+const Template3: ComponentStory<typeof MultiButton> = (args) => {
+  const [selected, setSelected] = React.useState<string | undefined>(undefined);
+  const [selected2, setSelected2] = React.useState<string | undefined>(undefined);
+
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
+    return theme;
+  }
+
+  const model = React.useMemo(() => {
+    return itemsDemo.map((item) => ({
+      id: item.id,
+      render: (items: RenderOptionProps) => (
+        <MenuItem dimension={args.dimension === 'xl' ? 'l' : args.dimension} {...items} key={item.id}>
+          {item.display}
+        </MenuItem>
+      ),
+      disabled: item.disabled,
+    }));
+  }, [args.dimension, itemsDemo]);
+
+  return (
+    <ThemeProvider theme={swapBorder}>
+      <div style={{ display: 'flex' }}>
+        <MultiButton
+          {...args}
+          appearance="primary"
+          selected={selected}
+          onSelectItem={(id) => {
+            logSelectedId(id);
+            setSelected(id);
+          }}
+          items={model}
+          onVisibilityChange={handleVisibilityChange}
+          data-dropdown-container-id="first-multi-button-with-dropdown"
+          className="multi-button-class"
+          onMainButtonClick={handleMainButtonClick}
+        >
+          <BonusSolid />
+          MultiButton
+        </MultiButton>
+        <Separator />
+        <MultiButton
+          {...args}
+          appearance="secondary"
+          selected={selected2}
+          onSelectItem={(id) => {
+            logSelectedId(id);
+            setSelected2(id);
+          }}
+          items={model}
+          onVisibilityChange={handleVisibilityChange}
+          data-dropdown-container-id="second-multi-button-with-dropdown"
+          onMainButtonClick={handleMainButtonClick}
+        >
+          <BonusSolid />
+          MultiButton
+        </MultiButton>
+      </div>
+      <Separator />
+      <div style={{ display: 'flex' }}>
+        <MultiButton
+          {...args}
+          disabled
+          appearance="primary"
+          selected={selected}
+          onSelectItem={(id) => {
+            logSelectedId(id);
+            setSelected(id);
+          }}
+          items={model}
+          onVisibilityChange={handleVisibilityChange}
+          data-dropdown-container-id="first-multi-button-with-dropdown"
+          className="multi-button-class"
+          onMainButtonClick={handleMainButtonClick}
+        >
+          <BonusSolid />
+          MultiButton
+        </MultiButton>
+        <Separator />
+        <MultiButton
+          {...args}
+          disabled
+          appearance="secondary"
+          selected={selected2}
+          onSelectItem={(id) => {
+            logSelectedId(id);
+            setSelected2(id);
+          }}
+          items={model}
+          onVisibilityChange={handleVisibilityChange}
+          data-dropdown-container-id="second-multi-button-with-dropdown"
+          onMainButtonClick={handleMainButtonClick}
+        >
+          <BonusSolid />
+          MultiButton
+        </MultiButton>
+      </div>
+    </ThemeProvider>
   );
 };
 
@@ -251,3 +384,7 @@ MultiButtonAppearance.storyName = 'MultiButton. Внешний вид.';
 export const MultiButtonDisabled = Template2.bind({});
 MultiButtonDisabled.args = {};
 MultiButtonDisabled.storyName = 'MultiButton. Задизейбленность.';
+
+export const MultiButtonIcon = Template3.bind({});
+MultiButtonIcon.args = {};
+MultiButtonIcon.storyName = 'MultiButton с иконкой.';
