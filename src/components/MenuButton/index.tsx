@@ -19,10 +19,10 @@ export interface MenuButtonProps extends Omit<HTMLAttributes<HTMLButtonElement>,
   /** @deprecated use onSelectItem instead
    * Колбек на изменение выбранной опции */
   onChange: (id: string) => void;
-  /** @deprecated use isVisible and onVisibilityChange instead
+  /** @deprecated use onVisibilityChange instead
    * Колбек на открытие меню */
   onOpen?: () => void;
-  /** @deprecated use isVisible and onVisibilityChange instead
+  /** @deprecated use onVisibilityChange instead
    * Колбек на закрытие меню */
   onClose?: () => void;
   /** Размер компонента */

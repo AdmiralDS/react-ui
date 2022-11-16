@@ -102,10 +102,10 @@ export interface MultiButtonProps extends Omit<HTMLAttributes<HTMLDivElement>, '
   /** @deprecated use onSelectItem instead
    * Колбек на изменение выбранной опции */
   onChange: (id: string) => void;
-  /** @deprecated use isVisible and onVisibilityChange instead
+  /** @deprecated use onVisibilityChange instead
    * Колбек на открытие меню */
   onOpen?: () => void;
-  /** @deprecated use isVisible and onVisibilityChange instead
+  /** @deprecated use onVisibilityChange instead
    * Колбек на закрытие меню */
   onClose?: () => void;
   /** Размер компонента */
@@ -157,11 +157,9 @@ export const MultiButton = React.forwardRef<HTMLButtonElement, MultiButtonProps>
     const menuDimension = dimension === 'xl' ? 'l' : dimension;
     const menuWidth = dimension === 's' ? '240px' : '280px';
 
-    const model =
-      items ||
-      React.useMemo(() => {
-        if (options) {
-          return options.slice(1, options.length).map((item) => ({
+    const model = React.useMemo(() => {
+      return options
+        ? options.slice(1, options.length).map((item) => ({
             id: item.id,
             render: (items: RenderOptionProps) => (
               <MenuItem dimension={menuDimension} {...items} key={item.id}>
@@ -169,11 +167,9 @@ export const MultiButton = React.forwardRef<HTMLButtonElement, MultiButtonProps>
               </MenuItem>
             ),
             disabled: item.disabled,
-          }));
-        } else {
-          return [];
-        }
-      }, [dimension, options]);
+          }))
+        : [];
+    }, [dimension, options]);
 
     const handleWrapperFocus = () => {
       wrapperRef.current?.setAttribute('data-focused', 'true');
@@ -189,7 +185,7 @@ export const MultiButton = React.forwardRef<HTMLButtonElement, MultiButtonProps>
         dimension={menuDimension}
         menuWidth={menuWidth}
         menuMaxHeight={menuMaxHeight}
-        items={model}
+        items={items || model}
         disableSelectedOptionHighlight={disableSelectedOptionHighlight}
         selected={selected}
         onSelectItem={onSelectItem}

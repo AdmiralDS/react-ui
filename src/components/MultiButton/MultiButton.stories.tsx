@@ -248,6 +248,7 @@ const Template2: ComponentStory<typeof MultiButton> = (args) => {
         <MultiButton
           {...args}
           appearance="primary"
+          disabled
           selected={selected}
           onSelectItem={(id) => {
             logSelectedId(id);
@@ -256,12 +257,15 @@ const Template2: ComponentStory<typeof MultiButton> = (args) => {
           items={model}
           onVisibilityChange={handleVisibilityChange}
           onMainButtonClick={handleMainButtonClick}
-        />
+        >
+          {itemsDemo[0].display}
+        </MultiButton>
         <Separator />
         <MultiButton
           {...args}
-          selected={selected2}
+          appearance="secondary"
           disabled
+          selected={selected2}
           onSelectItem={(id) => {
             logSelectedId(id);
             setSelected2(id);
@@ -269,7 +273,9 @@ const Template2: ComponentStory<typeof MultiButton> = (args) => {
           items={model}
           onVisibilityChange={handleVisibilityChange}
           onMainButtonClick={handleMainButtonClick}
-        />
+        >
+          {itemsDemo[0].display}
+        </MultiButton>
       </div>
     </>
   );
