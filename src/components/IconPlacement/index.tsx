@@ -93,6 +93,12 @@ const statusStylesCss = css`
       background-color: ${({ theme }) => theme.color['Opacity/Press']};
     }
   }
+
+  &:focus-visible:not(:disabled) {
+    &::before {
+      background-color: transparent;
+    }
+  }
 `;
 
 const StyledButton = styled.button<{ dimension?: IconPlacementDimension }>`
@@ -101,7 +107,6 @@ const StyledButton = styled.button<{ dimension?: IconPlacementDimension }>`
   margin: 0;
   box-sizing: border-box;
   border: none;
-  //border: dashed 1px darkcyan;
   background-color: transparent;
   appearance: none;
   height: ${(p) => getIconSize(p.dimension)}px;
@@ -143,10 +148,8 @@ const getContainerColor = (containerRole?: ContainerRole) => {
       return 'Opacity/Hover';
     case 'active':
       return 'Opacity/Press';
-    //return 'Error/Error 20';
     case 'focus':
       return 'Opacity/Focus';
-    //return 'Primary/Primary 70';
     default:
       return 'Opacity/Hover';
   }
@@ -261,6 +264,12 @@ const StyledContainer = styled(Container)`
 `;
 
 const StyledButtonContainerCss = styled(StyledButton)`
+  &:focus {
+    > ${StyledContainer} {
+      visibility: visible;
+      background-color: ${({ theme }) => theme.color['Opacity/Focus']};
+    }
+  }
   &:hover {
     > ${StyledContainer} {
       visibility: visible;
@@ -273,10 +282,10 @@ const StyledButtonContainerCss = styled(StyledButton)`
       background-color: ${({ theme }) => theme.color['Opacity/Press']};
     }
   }
-  &:focus {
+  &:focus-visible {
     > ${StyledContainer} {
-      visibility: visible;
-      background-color: ${({ theme }) => theme.color['Opacity/Focus']};
+      visibility: hidden;
+      background-color: transparent;
     }
   }
 `;
