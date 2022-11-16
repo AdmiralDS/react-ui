@@ -31,7 +31,7 @@ export const StickyWrapper = styled.div<{ greyHeader?: boolean }>`
   left: 0;
   z-index: 5;
   background: ${({ theme, greyHeader }) =>
-    greyHeader ? theme.color['Neutral/Neutral 10'] : theme.color['Neutral/Neutral 00']};
+    greyHeader ? theme.color['Neutral/Neutral 05'] : theme.color['Neutral/Neutral 00']};
   transition: box-shadow 0.3s;
   ${TableContainer}[data-shadow='true'] & {
     box-shadow: 4px 0 12px rgba(138, 150, 168, 0.16);
@@ -77,7 +77,7 @@ export const HeaderWrapperContainer = styled.div<{ scrollbar: number; greyHeader
       right: 0;
       height: 100%;
       background: ${({ theme, greyHeader }) =>
-        greyHeader ? theme.color['Neutral/Neutral 10'] : theme.color['Neutral/Neutral 00']};
+        greyHeader ? theme.color['Neutral/Neutral 05'] : theme.color['Neutral/Neutral 00']};
       width: ${({ scrollbar }) => scrollbar}px;
       border-bottom: 1px solid ${({ theme }) => theme.color['Neutral/Neutral 20']};
     }
@@ -90,7 +90,7 @@ export const HeaderWrapperContainer = styled.div<{ scrollbar: number; greyHeader
     greyHeader &&
     css`
       & > div.tr {
-        background: ${({ theme }) => theme.color['Neutral/Neutral 10']};
+        background: ${({ theme }) => theme.color['Neutral/Neutral 05']};
       }
     `}
 `;
@@ -115,7 +115,7 @@ export const ScrollTableBody = styled.div`
   flex: 1 1 auto;
 `;
 
-export const ExpandIconWrapper = styled.div`
+export const ExpandIconWrapper = styled.div<{ disabled?: boolean }>`
   position: relative;
   display: flex;
   flex: 1 0 auto;
@@ -134,6 +134,7 @@ export const ExpandIconWrapper = styled.div`
       background: ${({ theme }) => theme.color['Opacity/Hover']};
     }
   }
+  ${({ disabled }) => disabled && 'pointer-events: none;'}
 `;
 
 export const ExpandIcon = styled(OpenStatusButton)`
