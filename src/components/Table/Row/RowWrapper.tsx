@@ -54,7 +54,7 @@ export const RowWrapper = ({
       underline={underline}
       disabled={!!row.disabled}
       dimension={dimension}
-      className={row.className && `tr ${row.className}`}
+      className={`tr ${row.className || ''}`}
       isGroup={isGroup}
       rowWidth={rowWidth}
     >

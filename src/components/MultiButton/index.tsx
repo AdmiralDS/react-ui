@@ -4,10 +4,11 @@ import styled, { css, DefaultTheme, FlattenInterpolation, ThemeProps } from 'sty
 import { Button } from '#src/components/Button';
 import { Shape } from '#src/components/themes/common';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
-import { MenuItem, RenderOptionProps } from '#src/components/Menu/MenuItem';
+import { ItemProps, MenuItem, RenderOptionProps } from '#src/components/Menu/MenuItem';
 import { DropMenu, DropMenuComponentProps } from '#src/components/DropMenu';
 import { skeletonAnimationMixin } from '#src/components/skeleton/animation';
 import { passDropdownDataAttributes } from '#src/components/common/utils/splitDataAttributes';
+import { uid } from '#src/components/common/uid';
 
 function mainButtonBorderRadius(shape: Shape): string {
   const radius = mediumGroupBorderRadius(shape);
@@ -89,8 +90,11 @@ export interface MultiButtonItem extends HTMLAttributes<HTMLElement> {
 }
 
 export interface MultiButtonProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'>, DropMenuComponentProps {
-  /** Массив опций */
-  options: Array<MultiButtonItem>;
+  /** Опции выпадающего списка */
+  items?: Array<ItemProps>;
+  /** @deprecated use items instead
+   * Массив опций */
+  options?: Array<MultiButtonItem>;
   /** Массив опций */
   selected?: string;
   /** Колбек на нажатие основной кнопки */
@@ -98,10 +102,10 @@ export interface MultiButtonProps extends Omit<HTMLAttributes<HTMLDivElement>, '
   /** @deprecated use onSelectItem instead
    * Колбек на изменение выбранной опции */
   onChange: (id: string) => void;
-  /** @deprecated use isVisible and onVisibilityChange instead
+  /** @deprecated use onVisibilityChange instead
    * Колбек на открытие меню */
   onOpen?: () => void;
-  /** @deprecated use isVisible and onVisibilityChange instead
+  /** @deprecated use onVisibilityChange instead
    * Колбек на закрытие меню */
   onClose?: () => void;
   /** Размер компонента */
@@ -126,6 +130,7 @@ export const MultiButton = React.forwardRef<HTMLButtonElement, MultiButtonProps>
       dimension = 'l',
       appearance = 'primary',
       disabled,
+      items,
       options,
       onMainButtonClick,
       disableSelectedOptionHighlight,
@@ -143,6 +148,7 @@ export const MultiButton = React.forwardRef<HTMLButtonElement, MultiButtonProps>
       alignSelf = 'flex-end',
       menuMaxHeight,
       dropContainerCssMixin,
+      children,
       ...props
     },
     ref,
@@ -150,17 +156,19 @@ export const MultiButton = React.forwardRef<HTMLButtonElement, MultiButtonProps>
     const wrapperRef = React.useRef<HTMLDivElement>(null);
     const menuDimension = dimension === 'xl' ? 'l' : dimension;
     const menuWidth = dimension === 's' ? '240px' : '280px';
-    const { display: firstOption, disabled: firstOptionDisabled, ...firstOptionProps } = options[0];
+
     const model = React.useMemo(() => {
-      return options.slice(1, options.length).map((item) => ({
-        id: item.id,
-        render: (items: RenderOptionProps) => (
-          <MenuItem dimension={menuDimension} {...items} key={item.id}>
-            {item.display}
-          </MenuItem>
-        ),
-        disabled: item.disabled,
-      }));
+      return options
+        ? options.slice(1, options.length).map((item) => ({
+            id: item.id,
+            render: (items: RenderOptionProps) => (
+              <MenuItem dimension={menuDimension} {...items} key={item.id}>
+                {item.display}
+              </MenuItem>
+            ),
+            disabled: item.disabled,
+          }))
+        : [];
     }, [dimension, options]);
 
     const handleWrapperFocus = () => {
@@ -177,7 +185,7 @@ export const MultiButton = React.forwardRef<HTMLButtonElement, MultiButtonProps>
         dimension={menuDimension}
         menuWidth={menuWidth}
         menuMaxHeight={menuMaxHeight}
-        items={model}
+        items={items || model}
         disableSelectedOptionHighlight={disableSelectedOptionHighlight}
         selected={selected}
         onSelectItem={onSelectItem}
@@ -204,14 +212,20 @@ export const MultiButton = React.forwardRef<HTMLButtonElement, MultiButtonProps>
               {...props}
             >
               <MainButton
-                {...firstOptionProps}
                 skeleton={skeleton}
                 dimension={dimension}
                 appearance={appearance}
-                disabled={disabled || firstOptionDisabled}
+                disabled={disabled ? disabled : options ? options[0].disabled : false} //TODO: remove after removing deprecated options
                 onClick={onMainButtonClick}
               >
-                {firstOption}
+                {/*TODO: remove after removing deprecated options*/}
+                {children
+                  ? React.Children.toArray(children).map((child) =>
+                      typeof child === 'string' ? <span key={uid()}>{child}</span> : child,
+                    )
+                  : options
+                  ? options[0].display
+                  : ''}
               </MainButton>
               <Separator disabled={disabled} skeleton={skeleton} data-appearance={appearance} aria-hidden />
               <MenuButton

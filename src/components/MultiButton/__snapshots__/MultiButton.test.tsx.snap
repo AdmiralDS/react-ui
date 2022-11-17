@@ -705,7 +705,6 @@ Object {
           data-appearance="primary"
           data-dimension="l"
           disabled=""
-          id="1"
           type="button"
         >
           <div
@@ -1443,7 +1442,6 @@ Object {
         data-appearance="primary"
         data-dimension="l"
         disabled=""
-        id="1"
         type="button"
       >
         <div
@@ -2237,7 +2235,6 @@ Object {
           class="c1 c2"
           data-appearance="primary"
           data-dimension="l"
-          id="1"
           type="button"
         >
           <div
@@ -2972,7 +2969,6 @@ Object {
         class="c1 c2"
         data-appearance="primary"
         data-dimension="l"
-        id="1"
         type="button"
       >
         <div
@@ -3764,7 +3760,6 @@ Object {
           class="c1 c2"
           data-appearance="secondary"
           data-dimension="l"
-          id="1"
           type="button"
         >
           <div
@@ -4499,7 +4494,6 @@ Object {
         class="c1 c2"
         data-appearance="secondary"
         data-dimension="l"
-        id="1"
         type="button"
       >
         <div
