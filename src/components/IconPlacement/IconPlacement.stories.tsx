@@ -92,10 +92,9 @@ const IconPlacementDemoTemplate: ComponentStory<typeof IconPlacement> = (args) =
           внутри компонентов.
         </T>
         <T font="Body/Body 1 Short" as="div">
-          У компонента есть три размера иконки: M 24, S 20 и XS 16. Причем, у размеров M и S два размера Hover-круга для
+          У компонента есть три размера иконки: L 24, M 20 и S 16. У размеров L и M два размера Hover-круга для
           различных ситуаций, что бы вписываться внутрь небольших компонентов. БОльшие размеры круга обозначены в
-          названии вариантов компонента как Big. Размер Hover-круга не учитывается в размере компонента и выходит за его
-          границы.
+          названии вариантов компонента как Big, малые — Small.
         </T>
         <Wrapper>
           <WrapperVertical>
@@ -155,58 +154,5 @@ const IconPlacementDemoTemplate: ComponentStory<typeof IconPlacement> = (args) =
   );
 };
 
-const ScrollWrapper = styled.div`
-  box-sizing: border-box;
-  display: flex;
-  flex: 1 1 auto;
-  overflow: auto;
-  flex-direction: column;
-  align-items: stretch;
-  border: rebeccapurple 1px solid;
-  height: 150px;
-  width: 60px;
-  scroll-behavior: smooth;
-`;
-
-const IconExamplePseudoClasses = () => {
-  return (
-    <IconPlacement dimension="lBig" onClick={handleClick}>
-      <CloseOutline />
-    </IconPlacement>
-  );
-};
-
-const IconPlacementInScrollTemplate: ComponentStory<typeof IconPlacement> = (args) => {
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
-  return (
-    <ThemeProvider theme={swapBorder}>
-      <Wrapper style={{ alignItems: 'stretch' }}>
-        <StyledWrapperVertical>
-          <T font="Body/Body 1 Long" as="div">
-            IconPlacement with hover/active/focus
-          </T>
-          <ScrollWrapper>
-            <IconExamplePseudoClasses />
-            <IconExamplePseudoClasses />
-            <IconExamplePseudoClasses />
-            <IconExamplePseudoClasses />
-            <IconExamplePseudoClasses />
-            <IconExamplePseudoClasses />
-            <IconExamplePseudoClasses />
-            <IconExamplePseudoClasses />
-          </ScrollWrapper>
-        </StyledWrapperVertical>
-      </Wrapper>
-    </ThemeProvider>
-  );
-};
-
 export const IconPlacementDemo = IconPlacementDemoTemplate.bind({});
 IconPlacementDemo.storyName = 'IconPlacement. Размеры';
-
-export const IconPlacementInScroll = IconPlacementInScrollTemplate.bind({});
-IconPlacementInScroll.storyName = 'IconPlacement. В скролле';
