@@ -4,7 +4,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { ReactComponent as CloseOutline } from '@admiral-ds/icons/build/service/CloseOutline.svg';
 import styled, { ThemeProvider } from 'styled-components';
 import { T } from '#src/components/T';
-import { IconPlacement, IconPlacementBefore, IconPlacementContainerCss } from '#src/components/IconPlacement/index';
+import { IconPlacement } from '#src/components/IconPlacement/index';
 import { Theme } from '#src/components/themes';
 
 export default {
@@ -164,29 +164,15 @@ const ScrollWrapper = styled.div`
   align-items: stretch;
   border: rebeccapurple 1px solid;
   height: 150px;
-  width: 45px;
+  width: 60px;
   scroll-behavior: smooth;
 `;
 
-const IconExamplePortal = () => {
+const IconExamplePseudoClasses = () => {
   return (
     <IconPlacement dimension="lBig" onClick={handleClick}>
       <CloseOutline />
     </IconPlacement>
-  );
-};
-const IconExampleBefore = () => {
-  return (
-    <IconPlacementBefore dimension="lBig" onClick={handleClick}>
-      <CloseOutline />
-    </IconPlacementBefore>
-  );
-};
-const IconExamplePseudoClasses = () => {
-  return (
-    <IconPlacementContainerCss dimension="lBig" onClick={handleClick}>
-      <CloseOutline />
-    </IconPlacementContainerCss>
   );
 };
 
@@ -199,36 +185,6 @@ const IconPlacementInScrollTemplate: ComponentStory<typeof IconPlacement> = (arg
   return (
     <ThemeProvider theme={swapBorder}>
       <Wrapper style={{ alignItems: 'stretch' }}>
-        <StyledWrapperVertical>
-          <T font="Body/Body 1 Long" as="div">
-            IconPlacement with Portal
-          </T>
-          <ScrollWrapper>
-            <IconExamplePortal />
-            <IconExamplePortal />
-            <IconExamplePortal />
-            <IconExamplePortal />
-            <IconExamplePortal />
-            <IconExamplePortal />
-            <IconExamplePortal />
-            <IconExamplePortal />
-          </ScrollWrapper>
-        </StyledWrapperVertical>
-        <StyledWrapperVertical>
-          <T font="Body/Body 1 Long" as="div">
-            IconPlacement with ::before
-          </T>
-          <ScrollWrapper>
-            <IconExampleBefore />
-            <IconExampleBefore />
-            <IconExampleBefore />
-            <IconExampleBefore />
-            <IconExampleBefore />
-            <IconExampleBefore />
-            <IconExampleBefore />
-            <IconExampleBefore />
-          </ScrollWrapper>
-        </StyledWrapperVertical>
         <StyledWrapperVertical>
           <T font="Body/Body 1 Long" as="div">
             IconPlacement with hover/active/focus
