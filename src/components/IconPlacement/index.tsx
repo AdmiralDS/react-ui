@@ -6,6 +6,8 @@ import { smallGroupBorderRadius } from '#src/components/themes/borderRadius';
 const IconSizeL = 24;
 const IconSizeM = 20;
 const IconSizeS = 16;
+const HighlighterOffsetBig = 6;
+const HighlighterOffsetSmall = 4;
 
 export type IconPlacementDimension = 'lBig' | 'lSmall' | 'mBig' | 'mSmall' | 's';
 
@@ -24,32 +26,22 @@ function getIconSize(dimension?: IconPlacementDimension) {
   }
 }
 
-function getHoverOffset(dimension?: IconPlacementDimension) {
+function getHighlighterOffset(dimension?: IconPlacementDimension) {
   switch (dimension) {
     case 'lBig':
     case 'mBig':
-      return 6;
+      return HighlighterOffsetBig;
     case 'lSmall':
     case 'mSmall':
     case 's':
-      return 4;
+      return HighlighterOffsetSmall;
     default:
-      return 4;
+      return HighlighterOffsetBig;
   }
 }
 
-function getHoverSize(dimension?: IconPlacementDimension) {
-  switch (dimension) {
-    case 'lBig':
-    case 'mBig':
-      return getIconSize(dimension) + getHoverOffset(dimension) * 2;
-    case 'lSmall':
-    case 'mSmall':
-    case 's':
-      return getIconSize(dimension) + getHoverOffset(dimension) * 2;
-    default:
-      return getIconSize(dimension) + getHoverOffset(dimension) * 2;
-  }
+function getHighlighterSize(dimension?: IconPlacementDimension) {
+  return getIconSize(dimension) + getHighlighterOffset(dimension) * 2;
 }
 
 export interface IconPlacementProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -101,9 +93,9 @@ const IconPlacementContent = styled.div<{ dimension?: IconPlacementDimension }>`
   }
 `;
 
-  width: ${(p) => getHoverSize(p.dimension)}px;
-  height: ${(p) => getHoverSize(p.dimension)}px;
 const ActivityHighlighter = styled.div<{ dimension?: IconPlacementDimension }>`
+  width: ${(p) => getHighlighterSize(p.dimension)}px;
+  height: ${(p) => getHighlighterSize(p.dimension)}px;
   border-radius: 50%;
   background-color: transparent;
   pointer-events: none;
@@ -116,19 +108,16 @@ const ActivityHighlighter = styled.div<{ dimension?: IconPlacementDimension }>`
 const ButtonStyledWithPseudoClasses = styled(StyledButton)`
   &:focus {
     > ${ActivityHighlighter} {
-      display: inline-block;
       background-color: ${({ theme }) => theme.color['Opacity/Focus']};
     }
   }
   &:hover {
     > ${ActivityHighlighter} {
-      display: inline-block;
       background-color: ${({ theme }) => theme.color['Opacity/Hover']};
     }
   }
   &:active {
     > ${ActivityHighlighter} {
-      display: inline-block;
       background-color: ${({ theme }) => theme.color['Opacity/Press']};
     }
   }
