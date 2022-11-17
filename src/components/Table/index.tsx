@@ -315,7 +315,7 @@ export const Table: React.FC<TableProps> = ({
   const checkboxCellRef = React.useRef<HTMLDivElement>(null);
 
   const groupToRowsMap = rowList.reduce<Group>((acc: Group, row) => {
-    if (row.groupRows?.length) {
+    if (typeof row.groupRows !== 'undefined') {
       acc[row.id] = {
         rows: [...row.groupRows],
         expanded: !!row.expanded,

@@ -49,10 +49,10 @@ export const GroupRow = ({
     <>
       <StickyWrapper>
         <ExpandCell dimension={dimension}>
-          <ExpandIconWrapper>
+          <ExpandIconWrapper disabled={row.disabled || row.groupRows?.length === 0}>
             <ExpandIcon
               $isOpen={row.expanded}
-              data-disabled={row.disabled ? true : undefined}
+              data-disabled={row.disabled || row.groupRows?.length === 0 ? true : undefined}
               onClick={handleExpandClick}
               aria-hidden
             />
@@ -61,7 +61,7 @@ export const GroupRow = ({
         {displayRowSelectionColumn && (
           <CheckboxCell dimension={dimension} className="td_checkbox">
             <Checkbox
-              disabled={row.disabled || row.checkboxDisabled}
+              disabled={row.disabled || row.checkboxDisabled || row.groupRows?.length === 0}
               dimension={checkboxDimension}
               checked={!!checked}
               indeterminate={indeterminate}
