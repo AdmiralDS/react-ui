@@ -4,7 +4,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { ReactComponent as CloseOutline } from '@admiral-ds/icons/build/service/CloseOutline.svg';
 import styled, { ThemeProvider } from 'styled-components';
 import { T } from '#src/components/T';
-import {IconPlacement, IconPlacementBefore, IconPlacementContainerCss} from '#src/components/IconPlacement/index';
+import { IconPlacement, IconPlacementBefore, IconPlacementContainerCss } from '#src/components/IconPlacement/index';
 import { Theme } from '#src/components/themes';
 
 export default {
@@ -67,6 +67,11 @@ const WrapperVertical = styled.div`
   gap: 20px;
 `;
 
+const StyledWrapperVertical = styled(WrapperVertical)`
+  justify-content: space-between;
+  width: 150px;
+`;
+
 const handleClick = () => console.log('IconPlacement clicked');
 const IconPlacementDemoTemplate: ComponentStory<typeof IconPlacement> = (args) => {
   function swapBorder(theme: Theme): Theme {
@@ -95,16 +100,36 @@ const IconPlacementDemoTemplate: ComponentStory<typeof IconPlacement> = (args) =
         <Wrapper>
           <WrapperVertical>
             <T font="Body/Body 1 Long" as="div">
-              Dimension - m
+              Dimension - L Small
             </T>
-            <IconPlacement dimension="m" onClick={handleClick}>
+            <IconPlacement dimension="lSmall" onClick={handleClick}>
               <CloseOutline />
             </IconPlacement>
-            <IconPlacement dimension="m" onClick={handleClick} disabled={true}>
+            <IconPlacement dimension="lSmall" onClick={handleClick} disabled={true}>
               <CloseOutline />
             </IconPlacement>
             <T font="Body/Body 1 Long" as="div">
-              Dimension - m Big
+              Dimension - L Big
+            </T>
+            <IconPlacement dimension="lBig" onClick={handleClick}>
+              <CloseOutline />
+            </IconPlacement>
+            <IconPlacement dimension="lBig" disabled={true} onClick={handleClick}>
+              <CloseOutline />
+            </IconPlacement>
+          </WrapperVertical>
+          <WrapperVertical>
+            <T font="Body/Body 1 Long" as="div">
+              Dimension - M Small
+            </T>
+            <IconPlacement dimension="mSmall" onClick={handleClick}>
+              <CloseOutline />
+            </IconPlacement>
+            <IconPlacement dimension="mSmall" onClick={handleClick} disabled={true}>
+              <CloseOutline />
+            </IconPlacement>
+            <T font="Body/Body 1 Long" as="div">
+              Dimension - M Big
             </T>
             <IconPlacement dimension="mBig" onClick={handleClick}>
               <CloseOutline />
@@ -115,32 +140,12 @@ const IconPlacementDemoTemplate: ComponentStory<typeof IconPlacement> = (args) =
           </WrapperVertical>
           <WrapperVertical>
             <T font="Body/Body 1 Long" as="div">
-              Dimension - s
+              Dimension - S
             </T>
             <IconPlacement dimension="s" onClick={handleClick}>
               <CloseOutline />
             </IconPlacement>
-            <IconPlacement dimension="s" onClick={handleClick} disabled={true}>
-              <CloseOutline />
-            </IconPlacement>
-            <T font="Body/Body 1 Long" as="div">
-              Dimension - s Big
-            </T>
-            <IconPlacement dimension="sBig" onClick={handleClick}>
-              <CloseOutline />
-            </IconPlacement>
-            <IconPlacement dimension="sBig" disabled={true} onClick={handleClick}>
-              <CloseOutline />
-            </IconPlacement>
-          </WrapperVertical>
-          <WrapperVertical>
-            <T font="Body/Body 1 Long" as="div">
-              Dimension - xs
-            </T>
-            <IconPlacement dimension="xs" onClick={handleClick}>
-              <CloseOutline />
-            </IconPlacement>
-            <IconPlacement dimension="xs" disabled={true} onClick={handleClick}>
+            <IconPlacement dimension="s" disabled={true} onClick={handleClick}>
               <CloseOutline />
             </IconPlacement>
           </WrapperVertical>
@@ -153,22 +158,37 @@ const IconPlacementDemoTemplate: ComponentStory<typeof IconPlacement> = (args) =
 const ScrollWrapper = styled.div`
   box-sizing: border-box;
   display: flex;
-  overflow: hidden;
+  flex: 1 1 auto;
+  overflow: auto;
   flex-direction: column;
   align-items: stretch;
   border: rebeccapurple 1px solid;
   height: 150px;
   width: 45px;
-`;
-
-const StyledDiv = styled.div`
-  margin: 0;
-  appearance: none;
-  flex: 1 1 auto;
-  border: none;
-  overflow-y: auto;
   scroll-behavior: smooth;
 `;
+
+const IconExamplePortal = () => {
+  return (
+    <IconPlacement dimension="lBig" onClick={handleClick}>
+      <CloseOutline />
+    </IconPlacement>
+  );
+};
+const IconExampleBefore = () => {
+  return (
+    <IconPlacementBefore dimension="lBig" onClick={handleClick}>
+      <CloseOutline />
+    </IconPlacementBefore>
+  );
+};
+const IconExamplePseudoClasses = () => {
+  return (
+    <IconPlacementContainerCss dimension="lBig" onClick={handleClick}>
+      <CloseOutline />
+    </IconPlacementContainerCss>
+  );
+};
 
 const IconPlacementInScrollTemplate: ComponentStory<typeof IconPlacement> = (args) => {
   function swapBorder(theme: Theme): Theme {
@@ -178,106 +198,52 @@ const IconPlacementInScrollTemplate: ComponentStory<typeof IconPlacement> = (arg
 
   return (
     <ThemeProvider theme={swapBorder}>
-      <Wrapper>
-        <WrapperVertical>
+      <Wrapper style={{ alignItems: 'stretch' }}>
+        <StyledWrapperVertical>
           <T font="Body/Body 1 Long" as="div">
-            IconPlacement with Wrapper and EventListeners
+            IconPlacement with Portal
           </T>
           <ScrollWrapper>
-            <StyledDiv>
-              <IconPlacement dimension="mBig" onClick={handleClick}>
-                <CloseOutline />
-              </IconPlacement>
-              <IconPlacement dimension="mBig" onClick={handleClick}>
-                <CloseOutline />
-              </IconPlacement>
-              <IconPlacement dimension="mBig" onClick={handleClick}>
-                <CloseOutline />
-              </IconPlacement>
-              <IconPlacement dimension="mBig" onClick={handleClick}>
-                <CloseOutline />
-              </IconPlacement>
-              <IconPlacement dimension="mBig" onClick={handleClick}>
-                <CloseOutline />
-              </IconPlacement>
-              <IconPlacement dimension="mBig" onClick={handleClick}>
-                <CloseOutline />
-              </IconPlacement>
-              <IconPlacement dimension="mBig" onClick={handleClick}>
-                <CloseOutline />
-              </IconPlacement>
-              <IconPlacement dimension="mBig" onClick={handleClick}>
-                <CloseOutline />
-              </IconPlacement>
-            </StyledDiv>
+            <IconExamplePortal />
+            <IconExamplePortal />
+            <IconExamplePortal />
+            <IconExamplePortal />
+            <IconExamplePortal />
+            <IconExamplePortal />
+            <IconExamplePortal />
+            <IconExamplePortal />
           </ScrollWrapper>
-        </WrapperVertical>
-        <WrapperVertical>
+        </StyledWrapperVertical>
+        <StyledWrapperVertical>
           <T font="Body/Body 1 Long" as="div">
             IconPlacement with ::before
           </T>
           <ScrollWrapper>
-            <StyledDiv>
-              <IconPlacementBefore dimension="mBig" onClick={handleClick}>
-                <CloseOutline />
-              </IconPlacementBefore>
-              <IconPlacementBefore dimension="mBig" onClick={handleClick}>
-                <CloseOutline />
-              </IconPlacementBefore>
-              <IconPlacementBefore dimension="mBig" onClick={handleClick}>
-                <CloseOutline />
-              </IconPlacementBefore>
-              <IconPlacementBefore dimension="mBig" onClick={handleClick}>
-                <CloseOutline />
-              </IconPlacementBefore>
-              <IconPlacementBefore dimension="mBig" onClick={handleClick}>
-                <CloseOutline />
-              </IconPlacementBefore>
-              <IconPlacementBefore dimension="mBig" onClick={handleClick}>
-                <CloseOutline />
-              </IconPlacementBefore>
-              <IconPlacementBefore dimension="mBig" onClick={handleClick}>
-                <CloseOutline />
-              </IconPlacementBefore>
-              <IconPlacementBefore dimension="mBig" onClick={handleClick}>
-                <CloseOutline />
-              </IconPlacementBefore>
-            </StyledDiv>
+            <IconExampleBefore />
+            <IconExampleBefore />
+            <IconExampleBefore />
+            <IconExampleBefore />
+            <IconExampleBefore />
+            <IconExampleBefore />
+            <IconExampleBefore />
+            <IconExampleBefore />
           </ScrollWrapper>
-        </WrapperVertical>
-        <WrapperVertical>
+        </StyledWrapperVertical>
+        <StyledWrapperVertical>
           <T font="Body/Body 1 Long" as="div">
             IconPlacement with hover/active/focus
           </T>
           <ScrollWrapper>
-            <StyledDiv>
-              <IconPlacementContainerCss dimension="mBig" onClick={handleClick}>
-                <CloseOutline />
-              </IconPlacementContainerCss>
-              <IconPlacementContainerCss dimension="mBig" onClick={handleClick}>
-                <CloseOutline />
-              </IconPlacementContainerCss>
-              <IconPlacementContainerCss dimension="mBig" onClick={handleClick}>
-                <CloseOutline />
-              </IconPlacementContainerCss>
-              <IconPlacementContainerCss dimension="mBig" onClick={handleClick}>
-                <CloseOutline />
-              </IconPlacementContainerCss>
-              <IconPlacementContainerCss dimension="mBig" onClick={handleClick}>
-                <CloseOutline />
-              </IconPlacementContainerCss>
-              <IconPlacementContainerCss dimension="mBig" onClick={handleClick}>
-                <CloseOutline />
-              </IconPlacementContainerCss>
-              <IconPlacementContainerCss dimension="mBig" onClick={handleClick}>
-                <CloseOutline />
-              </IconPlacementContainerCss>
-              <IconPlacementContainerCss dimension="mBig" onClick={handleClick}>
-                <CloseOutline />
-              </IconPlacementContainerCss>
-            </StyledDiv>
+            <IconExamplePseudoClasses />
+            <IconExamplePseudoClasses />
+            <IconExamplePseudoClasses />
+            <IconExamplePseudoClasses />
+            <IconExamplePseudoClasses />
+            <IconExamplePseudoClasses />
+            <IconExamplePseudoClasses />
+            <IconExamplePseudoClasses />
           </ScrollWrapper>
-        </WrapperVertical>
+        </StyledWrapperVertical>
       </Wrapper>
     </ThemeProvider>
   );

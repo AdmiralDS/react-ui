@@ -3,37 +3,38 @@ import { ButtonHTMLAttributes } from 'react';
 import styled, { css } from 'styled-components';
 import { smallGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { refSetter } from '#src/components/common/utils/refSetter';
+import { PositionInPortal } from '#src/components/PositionInPortal';
 
-const IconSizeM = 24;
-const IconSizeS = 20;
-const IconSizeXS = 16;
+const IconSizeL = 24;
+const IconSizeM = 20;
+const IconSizeS = 16;
 
-export type IconPlacementDimension = 'mBig' | 'm' | 'sBig' | 's' | 'xs';
+export type IconPlacementDimension = 'lBig' | 'lSmall' | 'mBig' | 'mSmall' | 's';
 export type ContainerRole = 'hover' | 'active' | 'focus';
 
 function getIconSize(dimension?: IconPlacementDimension) {
   switch (dimension) {
-    case 'm':
+    case 'lSmall':
+    case 'lBig':
+      return IconSizeL;
+    case 'mSmall':
     case 'mBig':
       return IconSizeM;
     case 's':
-    case 'sBig':
       return IconSizeS;
-    case 'xs':
-      return IconSizeXS;
     default:
-      return IconSizeM;
+      return IconSizeL;
   }
 }
 
 function getHoverOffset(dimension?: IconPlacementDimension) {
   switch (dimension) {
+    case 'lBig':
     case 'mBig':
-    case 'sBig':
       return 6;
-    case 'm':
+    case 'lSmall':
+    case 'mSmall':
     case 's':
-    case 'xs':
       return 4;
     default:
       return 4;
@@ -42,12 +43,12 @@ function getHoverOffset(dimension?: IconPlacementDimension) {
 
 function getHoverSize(dimension?: IconPlacementDimension) {
   switch (dimension) {
+    case 'lBig':
     case 'mBig':
-    case 'sBig':
       return getIconSize(dimension) + getHoverOffset(dimension) * 2;
-    case 'm':
+    case 'lSmall':
+    case 'mSmall':
     case 's':
-    case 'xs':
       return getIconSize(dimension) + getHoverOffset(dimension) * 2;
     default:
       return getIconSize(dimension) + getHoverOffset(dimension) * 2;
@@ -61,46 +62,6 @@ export interface IconPlacementProps extends ButtonHTMLAttributes<HTMLButtonEleme
   disabled?: boolean;
 }
 
-const hoverStyle = css<{ dimension?: IconPlacementDimension }>`
-  &::before {
-    content: '';
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    border-radius: 50%;
-    width: ${(p) => getHoverSize(p.dimension)}px;
-    height: ${(p) => getHoverSize(p.dimension)}px;
-    background-color: ${({ theme }) => theme.color['Opacity/Hover']};
-  }
-`;
-
-const statusStylesCss = css`
-  &:focus:not(:disabled) {
-    ${hoverStyle}
-    &::before {
-      background-color: ${({ theme }) => theme.color['Opacity/Focus']};
-    }
-  }
-
-  &:hover:not(:disabled) {
-    ${hoverStyle}
-  }
-
-  &:active:not(:disabled) {
-    ${hoverStyle}
-    &::before {
-      background-color: ${({ theme }) => theme.color['Opacity/Press']};
-    }
-  }
-
-  &:focus-visible:not(:disabled) {
-    &::before {
-      background-color: transparent;
-    }
-  }
-`;
-
 const StyledButton = styled.button<{ dimension?: IconPlacementDimension }>`
   position: relative;
   padding: 0;
@@ -112,6 +73,7 @@ const StyledButton = styled.button<{ dimension?: IconPlacementDimension }>`
   height: ${(p) => getIconSize(p.dimension)}px;
   width: ${(p) => getIconSize(p.dimension)}px;
   border-radius: ${(p) => smallGroupBorderRadius(p.theme.shape)};
+  overflow: visible;
 
   cursor: pointer;
 
@@ -155,20 +117,19 @@ const getContainerColor = (containerRole?: ContainerRole) => {
   }
 };
 
-const Container = styled.div<{ dimension?: IconPlacementDimension; containerRole?: ContainerRole }>`
+const ActivityHighlighter = styled.div<{ dimension?: IconPlacementDimension; containerRole?: ContainerRole }>`
   width: ${(p) => getHoverSize(p.dimension)}px;
   height: ${(p) => getHoverSize(p.dimension)}px;
   border-radius: 50%;
   background-color: ${(p) => (p.containerRole ? p.theme.color[getContainerColor(p.containerRole)] : 'transparent')};
   pointer-events: none;
   position: absolute;
-  //top: -${(p) => getHoverOffset(p.dimension)}px;
-  //left: -${(p) => getHoverOffset(p.dimension)}px;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
 `;
 
+//<editor-fold desc="With Portal">
 const Wrapper = styled.div<{ dimension?: IconPlacementDimension }>`
   height: ${(p) => getIconSize(p.dimension)}px;
   width: ${(p) => getIconSize(p.dimension)}px;
@@ -178,7 +139,7 @@ const Wrapper = styled.div<{ dimension?: IconPlacementDimension }>`
 `;
 
 export const IconPlacement = React.forwardRef<HTMLButtonElement, IconPlacementProps>(
-  ({ type = 'button', className, dimension = 'm', disabled = false, children, ...props }, ref) => {
+  ({ type = 'button', className, dimension = 'lBig', disabled = false, children, ...props }, ref) => {
     const buttonRef = React.useRef<HTMLButtonElement>(null);
     const [visible, setVisible] = React.useState<boolean>(false);
     const [containerRole, setContainerRole] = React.useState<ContainerRole | undefined>(undefined);
@@ -235,7 +196,12 @@ export const IconPlacement = React.forwardRef<HTMLButtonElement, IconPlacementPr
 
     return (
       <Wrapper dimension={dimension} className={className}>
-        {visible && <Container containerRole={containerRole} dimension={dimension} />}
+        {visible && (
+          <PositionInPortal targetRef={buttonRef}>
+            {visible && <ActivityHighlighter containerRole={containerRole} dimension={dimension} />}
+            <IconPlacementContent dimension={dimension}>{children}</IconPlacementContent>
+          </PositionInPortal>
+        )}
         <StyledButton ref={refSetter(ref, buttonRef)} type={type} dimension={dimension} disabled={disabled} {...props}>
           <IconPlacementContent dimension={dimension}>{children}</IconPlacementContent>
         </StyledButton>
@@ -243,60 +209,98 @@ export const IconPlacement = React.forwardRef<HTMLButtonElement, IconPlacementPr
     );
   },
 );
+//</editor-fold>
 
-const StyledButtonBefore = styled(StyledButton)`
-  display: block;
-  ${statusStylesCss}
+//<editor-fold desc="With ::before">
+const hoverStyle = css<{ dimension?: IconPlacementDimension }>`
+  &::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    width: ${(p) => getHoverSize(p.dimension)}px;
+    height: ${(p) => getHoverSize(p.dimension)}px;
+    background-color: ${({ theme }) => theme.color['Opacity/Hover']};
+  }
 `;
 
-export const IconPlacementBefore = React.forwardRef<HTMLButtonElement, IconPlacementProps>(
-  ({ type = 'button', dimension = 'm', disabled = false, children, ...props }, ref) => {
-    return (
-      <StyledButtonBefore ref={ref} type={type} dimension={dimension} disabled={disabled} {...props}>
-        <IconPlacementContent dimension={dimension}>{children}</IconPlacementContent>
-      </StyledButtonBefore>
-    );
-  },
-);
-
-const StyledContainer = styled(Container)`
-  visibility: hidden;
-`;
-
-const StyledButtonContainerCss = styled(StyledButton)`
-  &:focus {
-    > ${StyledContainer} {
-      visibility: visible;
+const statusStylesCss = css`
+  &:focus:not(:disabled) {
+    ${hoverStyle}
+    &::before {
       background-color: ${({ theme }) => theme.color['Opacity/Focus']};
     }
   }
-  &:hover {
-    > ${StyledContainer} {
-      visibility: visible;
-      background-color: ${({ theme }) => theme.color['Opacity/Hover']};
-    }
+
+  &:hover:not(:disabled) {
+    ${hoverStyle}
   }
-  &:active {
-    > ${StyledContainer} {
-      visibility: visible;
+
+  &:active:not(:disabled) {
+    ${hoverStyle}
+    &::before {
       background-color: ${({ theme }) => theme.color['Opacity/Press']};
     }
   }
-  &:focus-visible {
-    > ${StyledContainer} {
-      visibility: hidden;
+
+  &:focus-visible:not(:disabled) {
+    &::before {
       background-color: transparent;
     }
   }
 `;
 
-export const IconPlacementContainerCss = React.forwardRef<HTMLButtonElement, IconPlacementProps>(
-  ({ type = 'button', dimension = 'm', disabled = false, children, ...props }, ref) => {
+const ButtonStyledWithBefore = styled(StyledButton)`
+  ${statusStylesCss}
+`;
+
+export const IconPlacementBefore = React.forwardRef<HTMLButtonElement, IconPlacementProps>(
+  ({ type = 'button', dimension = 'lBig', disabled = false, children, ...props }, ref) => {
     return (
-      <StyledButtonContainerCss ref={ref} type={type} dimension={dimension} disabled={disabled} {...props}>
-        <StyledContainer dimension={dimension} />
+      <ButtonStyledWithBefore ref={ref} type={type} dimension={dimension} disabled={disabled} {...props}>
         <IconPlacementContent dimension={dimension}>{children}</IconPlacementContent>
-      </StyledButtonContainerCss>
+      </ButtonStyledWithBefore>
+    );
+  },
+);
+//</editor-fold>
+
+const ButtonStyledWithPseudoClasses = styled(StyledButton)`
+  &:focus {
+    > ${ActivityHighlighter} {
+      display: inline-block;
+      background-color: ${({ theme }) => theme.color['Opacity/Focus']};
+    }
+  }
+  &:hover {
+    > ${ActivityHighlighter} {
+      display: inline-block;
+      background-color: ${({ theme }) => theme.color['Opacity/Hover']};
+    }
+  }
+  &:active {
+    > ${ActivityHighlighter} {
+      display: inline-block;
+      background-color: ${({ theme }) => theme.color['Opacity/Press']};
+    }
+  }
+  &:focus-visible {
+    > ${ActivityHighlighter} {
+      //display: none;
+      //background-color: transparent;
+    }
+  }
+`;
+
+export const IconPlacementContainerCss = React.forwardRef<HTMLButtonElement, IconPlacementProps>(
+  ({ type = 'button', dimension = 'lBig', disabled = false, children, ...props }, ref) => {
+    return (
+      <ButtonStyledWithPseudoClasses ref={ref} type={type} dimension={dimension} disabled={disabled} {...props}>
+        <ActivityHighlighter dimension={dimension} />
+        <IconPlacementContent dimension={dimension}>{children}</IconPlacementContent>
+      </ButtonStyledWithPseudoClasses>
     );
   },
 );
