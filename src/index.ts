@@ -72,6 +72,7 @@ export * from './components/common/utils/refSetter';
 export * from './components/TagMenu';
 export * from './components/Range';
 export * from './components/Pill';
+export * from './components/IconPlacement';
 
 export { FontsVTBGroup } from './components/FontsVTBGroup';
 export { DropdownProvider } from './components/DropdownProvider';
