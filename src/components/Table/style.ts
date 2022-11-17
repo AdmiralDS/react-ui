@@ -115,7 +115,7 @@ export const ScrollTableBody = styled.div`
   flex: 1 1 auto;
 `;
 
-export const ExpandIconWrapper = styled.div`
+export const ExpandIconWrapper = styled.div<{ disabled?: boolean }>`
   position: relative;
   display: flex;
   flex: 1 0 auto;
@@ -134,6 +134,7 @@ export const ExpandIconWrapper = styled.div`
       background: ${({ theme }) => theme.color['Opacity/Hover']};
     }
   }
+  ${({ disabled }) => disabled && 'pointer-events: none;'}
 `;
 
 export const ExpandIcon = styled(OpenStatusButton)`
