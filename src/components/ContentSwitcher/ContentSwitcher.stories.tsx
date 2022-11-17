@@ -11,6 +11,7 @@ import { ReactComponent as HomeOutline } from '@admiral-ds/icons/build/system/Ho
 import { ReactComponent as PrintOutline } from '@admiral-ds/icons/build/system/PrintOutline.svg';
 import { T } from '#src/components/T';
 import { Badge } from '#src/components/Badge';
+import { TooltipHoc } from '#src/components/TooltipHOC';
 
 const Divider = styled.div`
   width: 10px;
@@ -206,6 +207,15 @@ const ContentSwitcherWithIconDemo: ComponentStory<typeof ContentSwitcher> = () =
   );
 };
 
+const WrapperVertical = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 20px;
+`;
+const ContentSwitcherItemWithTooltip = TooltipHoc(ContentSwitcherItem);
+
 const ContentSwitcherIconOnlyDemo: ComponentStory<typeof ContentSwitcher> = () => {
   const [activeLPrimary, setActiveLPrimary] = useState(0);
   const [activeMPrimary, setActiveMPrimary] = useState(0);
@@ -217,83 +227,107 @@ const ContentSwitcherIconOnlyDemo: ComponentStory<typeof ContentSwitcher> = () =
   const list = [
     {
       title: <DeleteOutline width={20} />,
+      tooltipText: 'Delete',
     },
     {
       title: <EmailOutline width={20} />,
+      tooltipText: 'Email',
     },
     {
       title: <HomeOutline width={20} />,
+      tooltipText: 'Home',
     },
     {
       title: <PrintOutline width={20} />,
+      tooltipText: 'Print',
     },
   ];
 
   return (
     <>
-      <Wrapper>
+      <WrapperVertical>
+        <T font="Body/Body 1 Long" as="div">
+          Dimension - L
+        </T>
         <ContentSwitcher dimension={'l'} appearance="primary">
           {list.map((item, index) => (
-            <ContentSwitcherItem key={index} active={index === activeLPrimary} onClick={() => setActiveLPrimary(index)}>
+            <ContentSwitcherItemWithTooltip
+              renderContent={() => item.tooltipText}
+              key={index}
+              active={index === activeLPrimary}
+              onClick={() => setActiveLPrimary(index)}
+            >
               {item.title}
-            </ContentSwitcherItem>
+            </ContentSwitcherItemWithTooltip>
           ))}
         </ContentSwitcher>
-        <Divider />
-        <ContentSwitcher dimension={'m'} appearance="primary">
-          {list.map((item, index) => (
-            <ContentSwitcherItem key={index} active={index === activeMPrimary} onClick={() => setActiveMPrimary(index)}>
-              {item.title}
-            </ContentSwitcherItem>
-          ))}
-        </ContentSwitcher>
-        <Divider />
-        <ContentSwitcher dimension={'s'} appearance="primary">
-          {list.map((item, index) => (
-            <ContentSwitcherItem key={index} active={index === activeSPrimary} onClick={() => setActiveSPrimary(index)}>
-              {item.title}
-            </ContentSwitcherItem>
-          ))}
-        </ContentSwitcher>
-      </Wrapper>
-      <Separator />
-      <Wrapper>
         <ContentSwitcher dimension={'l'} appearance="secondary">
           {list.map((item, index) => (
-            <ContentSwitcherItem
+            <ContentSwitcherItemWithTooltip
+              renderContent={() => item.tooltipText}
               key={index}
               active={index === activeLSecondary}
               onClick={() => setActiveLSecondary(index)}
             >
               {item.title}
-            </ContentSwitcherItem>
+            </ContentSwitcherItemWithTooltip>
           ))}
         </ContentSwitcher>
-        <Divider />
+        <T font="Body/Body 1 Long" as="div">
+          Dimension - M
+        </T>
+        <ContentSwitcher dimension={'m'} appearance="primary">
+          {list.map((item, index) => (
+            <ContentSwitcherItemWithTooltip
+              renderContent={() => item.tooltipText}
+              key={index}
+              active={index === activeMPrimary}
+              onClick={() => setActiveMPrimary(index)}
+            >
+              {item.title}
+            </ContentSwitcherItemWithTooltip>
+          ))}
+        </ContentSwitcher>
         <ContentSwitcher dimension={'m'} appearance="secondary">
           {list.map((item, index) => (
-            <ContentSwitcherItem
+            <ContentSwitcherItemWithTooltip
+              renderContent={() => item.tooltipText}
               key={index}
               active={index === activeMSecondary}
               onClick={() => setActiveMSecondary(index)}
             >
               {item.title}
-            </ContentSwitcherItem>
+            </ContentSwitcherItemWithTooltip>
           ))}
         </ContentSwitcher>
-        <Divider />
+        <T font="Body/Body 1 Long" as="div">
+          Dimension - S
+        </T>
+        <ContentSwitcher dimension={'s'} appearance="primary">
+          {list.map((item, index) => (
+            <ContentSwitcherItemWithTooltip
+              renderContent={() => item.tooltipText}
+              key={index}
+              active={index === activeSPrimary}
+              onClick={() => setActiveSPrimary(index)}
+            >
+              {item.title}
+            </ContentSwitcherItemWithTooltip>
+          ))}
+        </ContentSwitcher>
         <ContentSwitcher dimension={'s'} appearance="secondary">
           {list.map((item, index) => (
-            <ContentSwitcherItem
+            <ContentSwitcherItemWithTooltip
+              renderContent={() => item.tooltipText}
               key={index}
               active={index === activeSSecondary}
               onClick={() => setActiveSSecondary(index)}
             >
               {item.title}
-            </ContentSwitcherItem>
+            </ContentSwitcherItemWithTooltip>
           ))}
         </ContentSwitcher>
-      </Wrapper>
+      </WrapperVertical>
     </>
   );
 };
