@@ -1,11 +1,12 @@
 import { withDesign } from 'storybook-addon-designs';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import React from 'react';
+import * as React from 'react';
 import { TagMenu, TagOptionProps } from '#src/components/TagMenu/index';
 import styled, { ThemeProvider } from 'styled-components';
-import { Tag, TagProps } from '#src/components/Tag';
+import { Tag, TagCircle, TagKind, TagProps } from '#src/components/Tag';
 import { Theme } from '#src/components/themes';
 import { ReactComponent as CheckOutline } from '@admiral-ds/icons/build/service/CheckOutline.svg';
+import { MenuItem, RenderOptionProps } from '#src/components/Menu/MenuItem';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -78,7 +79,7 @@ const logSelectedId = (id: string) => {
   console.log(`selected: ${id}`);
 };
 
-const items: Array<TagOptionProps> = [
+const itemsDemo: Array<TagOptionProps> = [
   {
     id: '1',
     tagText: 'Option one',
@@ -118,21 +119,32 @@ const items: Array<TagOptionProps> = [
 ];
 
 const Template0: ComponentStory<typeof Tag> = (args: TagProps) => {
-  const [selected, setSelected] = React.useState<TagOptionProps | undefined>(items[0]);
+  const [selected, setSelected] = React.useState<TagOptionProps | undefined>(itemsDemo[0]);
   function swapBorder(theme: Theme): Theme {
     theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 
+  const model = React.useMemo(() => {
+    return itemsDemo.map((item) => ({
+      id: item.id,
+      render: (options: RenderOptionProps) => (
+        <MenuItem dimension="m" {...options} key={item.id}>
+          {item.tagText}
+        </MenuItem>
+      ),
+    }));
+  }, [itemsDemo]);
+
   return (
     <>
       <ThemeProvider theme={swapBorder}>
         <TagMenu
-          options={items}
+          items={model}
           selected={selected}
           onSelectItem={(id) => {
             logSelectedId(id);
-            setSelected(items.find((item) => item.id === id));
+            setSelected(itemsDemo.find((item) => item.id === id));
           }}
           onVisibilityChange={handleVisibilityChange}
           {...args}
@@ -144,20 +156,85 @@ const Template0: ComponentStory<typeof Tag> = (args: TagProps) => {
   );
 };
 
+const itemsDemoSizes: Array<TagOptionProps> = [
+  {
+    id: '1',
+    tagText: 'Option one',
+    icon: <CheckOutline />,
+    kind: 'red',
+  },
+  {
+    id: '2',
+    tagText: 'Option two',
+    kind: 'blue',
+  },
+  {
+    id: '3',
+    tagText: 'Option three',
+    kind: 'green',
+  },
+  {
+    id: '4',
+    tagText: 'Option four',
+    icon: <CheckOutline />,
+  },
+  {
+    id: '5',
+    tagText: 'Option five',
+  },
+  {
+    id: '6',
+    tagText: 'Option six',
+  },
+  {
+    id: '7',
+    tagText: 'Option seven',
+  },
+];
+
+const StyledMenuItem = styled(MenuItem)`
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+`;
+
 const Template1: ComponentStory<typeof Tag> = (args: TagProps) => {
-  const [selectedM, setSelectedM] = React.useState<TagOptionProps | undefined>(items[0]);
-  const [selectedS, setSelectedS] = React.useState<TagOptionProps | undefined>(items[0]);
+  const [selectedM, setSelectedM] = React.useState<TagOptionProps | undefined>(itemsDemoSizes[0]);
+  const [selectedS, setSelectedS] = React.useState<TagOptionProps | undefined>(itemsDemoSizes[0]);
+
+  const modelM = React.useMemo(() => {
+    return itemsDemoSizes.map((item) => ({
+      id: item.id,
+      render: (options: RenderOptionProps) => (
+        <StyledMenuItem dimension="m" {...options} key={item.id}>
+          {item.kind && !item.statusViaBackground && <TagCircle background={item.kind as TagKind} />}
+          {item.tagText}
+        </StyledMenuItem>
+      ),
+    }));
+  }, [itemsDemoSizes]);
+
+  const modelS = React.useMemo(() => {
+    return itemsDemoSizes.map((item) => ({
+      id: item.id,
+      render: (options: RenderOptionProps) => (
+        <StyledMenuItem dimension="s" {...options} key={item.id}>
+          {item.kind && !item.statusViaBackground && <TagCircle background={item.kind as TagKind} />}
+          {item.tagText}
+        </StyledMenuItem>
+      ),
+    }));
+  }, [itemsDemoSizes]);
 
   return (
     <>
       <TagMenu
         dimension="m"
-        options={items}
+        items={modelM}
         selected={selectedM}
         as="div"
         onSelectItem={(id) => {
           logSelectedId(id);
-          setSelectedM(items.find((item) => item.id === id));
+          setSelectedM(itemsDemoSizes.find((item) => item.id === id));
         }}
         onVisibilityChange={handleVisibilityChange}
         {...args}
@@ -165,12 +242,12 @@ const Template1: ComponentStory<typeof Tag> = (args: TagProps) => {
       <Separator />
       <TagMenu
         dimension="s"
-        options={items}
+        items={modelS}
         selected={selectedS}
         as="span"
         onSelectItem={(id) => {
           logSelectedId(id);
-          setSelectedS(items.find((item) => item.id === id));
+          setSelectedS(itemsDemoSizes.find((item) => item.id === id));
         }}
         onVisibilityChange={handleVisibilityChange}
         {...args}
