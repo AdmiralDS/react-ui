@@ -737,7 +737,6 @@ export const Table: React.FC<TableProps> = ({
         underline={(isLastRow && showLastRowUnderline) || !isLastRow}
         tableWidth={tableWidth}
         isGroup={isGroupRow}
-        rowInGroup={rowInGroup}
         onRowClick={onRowClick}
         onRowDoubleClick={onRowDoubleClick}
         rowWidth={isGroupRow ? headerRef.current?.scrollWidth : undefined}
@@ -784,13 +783,7 @@ export const Table: React.FC<TableProps> = ({
   };
 
   return (
-    <TableContainer
-      ref={tableRef}
-      data-shadow={false}
-      {...props}
-      className={`table ${props.className || ''}`}
-      greyZebraRows={greyZebraRows}
-    >
+    <TableContainer ref={tableRef} data-shadow={false} {...props} className={`table ${props.className || ''}`}>
       <HeaderWrapper greyHeader={greyHeader} data-verticalscroll={verticalScroll}>
         <Header dimension={dimension} ref={headerRef} className="tr">
           {(displayRowSelectionColumn || displayRowExpansionColumn || stickyColumns.length > 0) && (

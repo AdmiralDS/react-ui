@@ -17,6 +17,27 @@ import {
   underlineRow,
 } from './mixins';
 
+export const TableContainer = styled.div`
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  background: ${({ theme }) => theme.color['Neutral/Neutral 00']};
+`;
+
+export const StickyWrapper = styled.div<{ greyHeader?: boolean }>`
+  display: flex;
+  position: sticky;
+  left: 0;
+  z-index: 5;
+  background: ${({ theme, greyHeader }) =>
+    greyHeader ? theme.color['Neutral/Neutral 05'] : theme.color['Neutral/Neutral 00']};
+  transition: box-shadow 0.3s;
+  ${TableContainer}[data-shadow='true'] & {
+    box-shadow: 4px 0 12px rgba(138, 150, 168, 0.16);
+  }
+`;
+
 export const OverflowMenuWrapper = styled.div<{ $offset: number; dimension: TableProps['dimension'] }>`
   box-sizing: border-box;
   display: flex;
@@ -31,47 +52,6 @@ export const OverflowMenuWrapper = styled.div<{ $offset: number; dimension: Tabl
 
   &:hover {
     visibility: visible;
-  }
-`;
-
-// проверить при виртуальном скролле и renderRowWrapper
-const zebraRows = css`
-  .tbody > *:nth-child(odd) {
-    .tr[data-group='false'][data-ingroup='false'] .tr-simple {
-      & > *,
-      & + ${OverflowMenuWrapper} {
-        background: ${({ theme }) => theme.color['Neutral/Neutral 05']};
-      }
-    }
-    .tr[data-ingroup='true'] .tr-simple {
-      & > *,
-      & + ${OverflowMenuWrapper} {
-        background: ${({ theme }) => theme.color['Neutral/Neutral 05']};
-      }
-    }
-  }
-`;
-
-export const TableContainer = styled.div<{ greyZebraRows?: boolean }>`
-  position: relative;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  background: ${({ theme }) => theme.color['Neutral/Neutral 00']};
-
-  ${({ greyZebraRows }) => greyZebraRows && zebraRows}
-`;
-
-export const StickyWrapper = styled.div<{ greyHeader?: boolean }>`
-  display: flex;
-  position: sticky;
-  left: 0;
-  z-index: 5;
-  background: ${({ theme, greyHeader }) =>
-    greyHeader ? theme.color['Neutral/Neutral 05'] : theme.color['Neutral/Neutral 00']};
-  transition: box-shadow 0.3s;
-  ${TableContainer}[data-shadow='true'] & {
-    box-shadow: 4px 0 12px rgba(138, 150, 168, 0.16);
   }
 `;
 
