@@ -51,7 +51,32 @@ export interface IconPlacementProps extends ButtonHTMLAttributes<HTMLButtonEleme
   disabled?: boolean;
 }
 
-const StyledButton = styled.button<{ dimension?: IconPlacementDimension }>`
+const IconPlacementContent = styled.div<{ dimension?: IconPlacementDimension }>`
+  height: 100%;
+
+  & *[fill^='#'] {
+    fill: ${(p) => p.theme.color['Neutral/Neutral 50']};
+  }
+
+  & > svg {
+    height: ${(p) => getIconSize(p.dimension)}px;
+    width: ${(p) => getIconSize(p.dimension)}px;
+  }
+`;
+
+const ActivityHighlighter = styled.div<{ dimension?: IconPlacementDimension }>`
+  width: ${(p) => getHighlighterSize(p.dimension)}px;
+  height: ${(p) => getHighlighterSize(p.dimension)}px;
+  border-radius: 50%;
+  background-color: transparent;
+  pointer-events: none;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+`;
+
+const IconPlacementButton = styled.button<{ dimension?: IconPlacementDimension }>`
   position: relative;
   padding: 0;
   margin: ${(p) => getHighlighterOffset(p.dimension)}px;
@@ -78,34 +103,7 @@ const StyledButton = styled.button<{ dimension?: IconPlacementDimension }>`
     outline-offset: 2px;
     outline: ${(p) => p.theme.color['Primary/Primary 60 Main']} solid 2px;
   }
-`;
 
-const IconPlacementContent = styled.div<{ dimension?: IconPlacementDimension }>`
-  height: 100%;
-
-  & *[fill^='#'] {
-    fill: ${(p) => p.theme.color['Neutral/Neutral 50']};
-  }
-
-  & > svg {
-    height: ${(p) => getIconSize(p.dimension)}px;
-    width: ${(p) => getIconSize(p.dimension)}px;
-  }
-`;
-
-const ActivityHighlighter = styled.div<{ dimension?: IconPlacementDimension }>`
-  width: ${(p) => getHighlighterSize(p.dimension)}px;
-  height: ${(p) => getHighlighterSize(p.dimension)}px;
-  border-radius: 50%;
-  background-color: transparent;
-  pointer-events: none;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-`;
-
-const ButtonStyledWithPseudoClasses = styled(StyledButton)`
   &:focus {
     > ${ActivityHighlighter} {
       background-color: ${({ theme }) => theme.color['Opacity/Focus']};
@@ -123,8 +121,7 @@ const ButtonStyledWithPseudoClasses = styled(StyledButton)`
   }
   &:focus-visible {
     > ${ActivityHighlighter} {
-      //display: none;
-      //background-color: transparent;
+      background-color: transparent;
     }
   }
 `;
@@ -132,10 +129,12 @@ const ButtonStyledWithPseudoClasses = styled(StyledButton)`
 export const IconPlacement = React.forwardRef<HTMLButtonElement, IconPlacementProps>(
   ({ type = 'button', dimension = 'lBig', disabled = false, children, ...props }, ref) => {
     return (
-      <ButtonStyledWithPseudoClasses ref={ref} type={type} dimension={dimension} disabled={disabled} {...props}>
-        <ActivityHighlighter dimension={dimension} />
-        <IconPlacementContent dimension={dimension}>{children}</IconPlacementContent>
-      </ButtonStyledWithPseudoClasses>
+      <IconPlacementButton ref={ref} type={type} dimension={dimension} disabled={disabled} {...props}>
+        <ActivityHighlighter dimension={dimension} aria-hidden />
+        <IconPlacementContent dimension={dimension} aria-hidden>
+          {children}
+        </IconPlacementContent>
+      </IconPlacementButton>
     );
   },
 );
