@@ -62,7 +62,7 @@ export interface IconPlacementProps extends ButtonHTMLAttributes<HTMLButtonEleme
 const StyledButton = styled.button<{ dimension?: IconPlacementDimension }>`
   position: relative;
   padding: 0;
-  margin: 0;
+  margin: ${(p) => getHighlighterOffset(p.dimension)}px;
   box-sizing: border-box;
   border: none;
   background-color: transparent;
