@@ -3,7 +3,7 @@ import styled, { css, DefaultTheme, FlattenInterpolation, ThemeProps } from 'sty
 import { changeInputData } from '#src/components/common/dom/changeInputData';
 import { refSetter } from '#src/components/common/utils/refSetter';
 import { TextInput, TextInputProps } from '#src/components/input/TextInput';
-import { ReactComponent as ChevronRightOutline } from '@admiral-ds/icons/build/system/ChevronRightOutline.svg';
+import { ReactComponent as SmallArrowDownOutline } from '@admiral-ds/icons/build/system/SmallArrowDownOutline.svg';
 import { CountryCodes } from '#src/components/input/PhoneNumberInput/constants';
 import { Flag } from '#src/components/input/PhoneNumberInput/Flag';
 import { Dimension } from '#src/components/input/PhoneNumberInput/utils';
@@ -23,10 +23,10 @@ import { StyledDropdownContainer } from '#src/components/DropdownContainer';
 import type { MenuDimensions } from '#src/components/Menu';
 import { keyboardKey } from '#src/components/common/keyboardKey';
 
-const Chevron = styled(ChevronRightOutline)<{ disabled?: boolean }>`
+const Chevron = styled(SmallArrowDownOutline)<{ disabled?: boolean }>`
   transition: transform 0.3s;
   flex-shrink: 0;
-  margin-left: 5px;
+  margin-left: 1px;
 
   & path {
     fill: ${(p) => (p.disabled ? p.theme.color['Neutral/Neutral 30'] : p.theme.color['Neutral/Neutral 50'])};
@@ -49,7 +49,7 @@ const PhoneContainer = styled.div<{ dimension: Dimension; disabled?: boolean; re
   }
 
   & input {
-    padding-left: ${(p) => (p.dimension === 's' ? (p.readOnly ? '40px' : '64px') : p.readOnly ? '48px' : '76px')};
+    padding-left: ${(p) => (p.dimension === 's' ? (p.readOnly ? '40px' : '60px') : p.readOnly ? '48px' : '72px')};
   }
 `;
 
@@ -71,7 +71,7 @@ const CountryContainer = styled.div<{
       stroke: none;
     }
 
-    transform: ${(p) => (p.isOpened && !p.disabled ? 'rotate(270deg)' : 'rotate(90deg)')};
+    transform: ${(p) => (p.isOpened && !p.disabled ? 'rotate(180deg)' : 'rotate(0deg)')};
   }
 
   ${(p) => p.disabled && disabledStyles};
