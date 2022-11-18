@@ -45,11 +45,6 @@ export default {
       },
     ],
   },
-  docs: {
-    source: {
-      type: 'code',
-    },
-  },
   argTypes: {
     themeBorderKind: {
       options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],

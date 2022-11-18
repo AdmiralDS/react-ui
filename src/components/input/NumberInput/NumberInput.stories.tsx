@@ -209,33 +209,16 @@ const Template4: ComponentStory<typeof NumberInput> = () => {
 
 export const Playground = Template0.bind({});
 Playground.args = {};
-Playground.parameters = {
-  docs: {
-    source: {
-      type: 'code',
-    },
-  },
-};
 
 export const Disabled = Template1.bind({});
 Disabled.args = {};
 Disabled.storyName = 'NumberInput. Задизейбленный.';
-Disabled.parameters = {
-  docs: {
-    source: {
-      type: 'code',
-    },
-  },
-};
 
 export const MinMax = Template2.bind({});
 MinMax.args = {};
 MinMax.storyName = 'NumberInput. Пример с minValue, maxValue.';
 MinMax.parameters = {
   docs: {
-    source: {
-      type: 'code',
-    },
     description: {
       story: `Максимальное, минимальное значение. При достижении лимита, кнопки “+” или “-” принимают состояние Disabled.
       Если вручную введенное значение больше-меньше указанного диапазона, то оно принимает наиболее близкое
@@ -249,9 +232,6 @@ Customised.args = {};
 Customised.storyName = 'NumberInput. Пример изменения настроек (suffix, precision, thousand).';
 Customised.parameters = {
   docs: {
-    source: {
-      type: 'code',
-    },
     description: {
       story: `Пользователь может указать с помощью параметра precision (по умолчанию равен 2), 
       с какой точностью компонент должен выводить число (сколько разрядов должно быть в дробной части числа). 
@@ -266,9 +246,6 @@ Controlled.args = {};
 Controlled.storyName = 'NumberInput. Примеры контролируемого инпута.';
 Controlled.parameters = {
   docs: {
-    source: {
-      type: 'code',
-    },
     description: {
       story: `В случае использования контролируемого инпута в value необходимо передавать уже
       отформатированную строку с разделителями тысяч (суффикс/префикс в value вносить не нужно).\n\nБиблиотека 

@@ -153,43 +153,15 @@ const Template3: ComponentStory<typeof SliderInput> = (args) => {
 export const Playground = Template0.bind({});
 Playground.args = {};
 Playground.storyName = 'SliderInput. Пример контролируемого инпута.';
-Playground.parameters = {
-  docs: {
-    source: {
-      type: 'code',
-    },
-  },
-};
 
 export const WithTickMarks = Template1.bind({});
 WithTickMarks.args = {};
 WithTickMarks.storyName = 'SliderInput. С промежуточными отметками.';
-WithTickMarks.parameters = {
-  docs: {
-    source: {
-      type: 'code',
-    },
-  },
-};
 
 export const Customised = Template2.bind({});
 Customised.args = {};
 Customised.storyName = 'SliderInput. Пример изменения настроек (suffix, precision, thousand).';
-Customised.parameters = {
-  docs: {
-    source: {
-      type: 'code',
-    },
-  },
-};
 
 export const CustomisedMark = Template3.bind({});
 CustomisedMark.args = {};
 CustomisedMark.storyName = 'SliderInput. Пример кастомизирования текстовых подписей к отметкам слайдера.';
-CustomisedMark.parameters = {
-  docs: {
-    source: {
-      type: 'code',
-    },
-  },
-};

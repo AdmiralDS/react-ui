@@ -260,22 +260,12 @@ HintLink.parameters = {
       story: `В качества контента хинта может выступать любой ReactNode. В случае если 
     хинт содержит в себе ссылку, триггером его появления должен быть click.`,
     },
-    source: {
-      type: 'code',
-    },
   },
 };
 
 export const HintTarget = Template3.bind({});
 HintTarget.args = { anchorId: 'hint_target' };
 HintTarget.storyName = 'Hint. Позиционирование относительно target.';
-HintTarget.parameters = {
-  docs: {
-    source: {
-      type: 'code',
-    },
-  },
-};
 
 export const HintWithClassName = Template1.bind({});
 HintWithClassName.args = {
@@ -296,10 +286,3 @@ HintWithClassName.parameters = {
 export const HintAnchorCss = Template5.bind({});
 HintAnchorCss.args = { anchorId: 'hint_css' };
 HintAnchorCss.storyName = 'Hint. Стилизация внешнего контейнера (AnchorWrapper) с помощью anchorCssMixin.';
-HintAnchorCss.parameters = {
-  docs: {
-    source: {
-      type: 'code',
-    },
-  },
-};

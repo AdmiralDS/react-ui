@@ -366,32 +366,11 @@ const Template3: ComponentStory<typeof OverflowMenu> = (args) => {
 export const OverflowMenuBase = Template1.bind({});
 OverflowMenuBase.args = {};
 OverflowMenuBase.storyName = 'OverflowMenu. Базовый пример.';
-OverflowMenuBase.parameters = {
-  docs: {
-    source: {
-      type: 'code',
-    },
-  },
-};
 
 export const OverflowMenuOptions = Template2.bind({});
 OverflowMenuOptions.args = {};
 OverflowMenuOptions.storyName = 'OverflowMenu. Задизейбленные и кастомизированные опции.';
-OverflowMenuOptions.parameters = {
-  docs: {
-    source: {
-      type: 'code',
-    },
-  },
-};
 
 export const OverflowMenuSizesOrientation = Template3.bind({});
 OverflowMenuSizesOrientation.args = {};
 OverflowMenuSizesOrientation.storyName = 'OverflowMenu. Размеры и ориентация.';
-OverflowMenuSizesOrientation.parameters = {
-  docs: {
-    source: {
-      type: 'code',
-    },
-  },
-};

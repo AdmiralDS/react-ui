@@ -334,54 +334,19 @@ const Template5: ComponentStory<typeof Modal> = (args) => {
 export const ModalTwoButtons = Template1.bind({});
 ModalTwoButtons.args = {};
 ModalTwoButtons.storyName = 'Modal. Пример c двумя кнопками.';
-ModalTwoButtons.parameters = {
-  docs: {
-    source: {
-      type: 'code',
-    },
-  },
-};
 
 export const ModalOneButton = Template2.bind({});
 ModalOneButton.args = {};
 ModalOneButton.storyName = 'Modal. Пример c одной кнопкой.';
-ModalOneButton.parameters = {
-  docs: {
-    source: {
-      type: 'code',
-    },
-  },
-};
 
 export const ModalNoButton = Template3.bind({});
 ModalNoButton.args = {};
 ModalNoButton.storyName = 'Modal. Пример без кнопок.';
-ModalNoButton.parameters = {
-  docs: {
-    source: {
-      type: 'code',
-    },
-  },
-};
 
 export const ModalScroll = Template4.bind({});
 ModalScroll.args = {};
 ModalScroll.storyName = 'Modal. Пример со скроллом.';
-ModalScroll.parameters = {
-  docs: {
-    source: {
-      type: 'code',
-    },
-  },
-};
 
 export const CustomModal = Template5.bind({});
 CustomModal.args = {};
 CustomModal.storyName = 'Modal. Свободное (кастомизированное) наполнение.';
-CustomModal.parameters = {
-  docs: {
-    source: {
-      type: 'code',
-    },
-  },
-};

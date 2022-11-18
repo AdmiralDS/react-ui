@@ -326,21 +326,7 @@ const TextButtonMenuSizes: ComponentStory<typeof TextButtonMenu> = (args) => {
 export const TextButtonMenuStoryDemo = TextButtonMenuStory.bind({});
 TextButtonMenuStoryDemo.args = { text: 'Text Button' };
 TextButtonMenuStoryDemo.storyName = 'TextButtonMenu';
-TextButtonMenuStoryDemo.parameters = {
-  docs: {
-    source: {
-      type: 'code',
-    },
-  },
-};
 
 export const TextButtonMenuVariants = TextButtonMenuSizes.bind({});
 TextButtonMenuVariants.args = {};
 TextButtonMenuVariants.storyName = 'TextButtonMenu. Размеры и стили.';
-TextButtonMenuVariants.parameters = {
-  docs: {
-    source: {
-      type: 'code',
-    },
-  },
-};

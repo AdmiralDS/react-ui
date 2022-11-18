@@ -172,13 +172,6 @@ const Template4: ComponentStory<typeof RadioButton> = () => {
 
 export const Playground = Template3.bind({});
 Playground.args = {};
-Playground.parameters = {
-  docs: {
-    source: {
-      type: 'code',
-    },
-  },
-};
 
 const Template5: ComponentStory<typeof RadioButton> = () => {
   const [visible1, setVisible1] = useState(false);
