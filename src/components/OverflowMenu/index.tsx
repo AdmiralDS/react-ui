@@ -1,11 +1,14 @@
 import * as React from 'react';
+import { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 
-import type { Dimension } from '#src/components/OverflowMenu/Button';
-import { Button, OverflowMenuIcon } from '#src/components/OverflowMenu/Button';
+import { ReactComponent as MoreHorizontalOutline } from '@admiral-ds/icons/build/system/MoreHorizontalOutline.svg';
+import { ReactComponent as MoreVerticalOutline } from '@admiral-ds/icons/build/system/MoreVerticalOutline.svg';
+import { passDropdownDataAttributes } from '#src/components/common/utils/splitDataAttributes';
 import type { ItemProps } from '#src/components/Menu/MenuItem';
 import { DropMenu, DropMenuComponentProps, RenderContentProps } from '#src/components/DropMenu';
-import { passDropdownDataAttributes } from '#src/components/common/utils/splitDataAttributes';
-import { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
+import { IconPlacement, IconPlacementDimension } from '#src/components/IconPlacement';
+
+export type OverflowMenuDimension = 'l' | 'm' | 's';
 
 export interface OverflowMenuProps
   extends Omit<React.HTMLAttributes<HTMLButtonElement>, 'onChange'>,
@@ -15,14 +18,14 @@ export interface OverflowMenuProps
   /** @deprecated use onSelectItem instead
    * Колбек на изменение выбранной опции */
   onChange?: (id: string) => void;
-  /** @deprecated use isVisible and onVisibilityChange instead
+  /** @deprecated use onVisibilityChange instead
    * Колбек на открытие меню */
   onOpen?: () => void;
-  /** @deprecated use isVisible and onVisibilityChange instead
+  /** @deprecated use onVisibilityChange instead
    * Колбек на закрытие меню */
   onClose?: () => void;
   /** Размер компонента */
-  dimension?: Dimension;
+  dimension?: OverflowMenuDimension;
   /** Отключение компонента */
   disabled?: boolean;
   /** Выравнивание выпадающего меню относительно компонента https://developer.mozilla.org/en-US/docs/Web/CSS/align-self */
@@ -66,9 +69,20 @@ export const OverflowMenu = React.forwardRef<HTMLButtonElement, OverflowMenuProp
     },
     ref,
   ) => {
-    const iconRef = React.useRef<HTMLDivElement>(null);
-
     const dropMenuProps = passDropdownDataAttributes(props);
+
+    const iconPlacementDimension = (dimension?: OverflowMenuDimension): IconPlacementDimension => {
+      switch (dimension) {
+        case 'l':
+          return 'lBig';
+        case 'm':
+          return 'mBig';
+        case 's':
+          return 's';
+        default:
+          return 'lBig';
+      }
+    };
 
     return (
       <>
@@ -89,27 +103,26 @@ export const OverflowMenu = React.forwardRef<HTMLButtonElement, OverflowMenuProp
           onOpen={onOpen}
           onClose={onClose}
           disabled={disabled}
-          alignMenuRef={iconRef}
           alignSelf={alignSelf}
           dropContainerCssMixin={dropContainerCssMixin}
           ref={ref}
           {...dropMenuProps}
           renderContentProp={({ buttonRef, handleKeyDown, handleClick, menuState, disabled }: RenderContentProps) => {
             return (
-              <Button
+              <IconPlacement
                 {...props}
                 ref={buttonRef as React.Ref<HTMLButtonElement>}
-                dimension={dimension}
+                dimension={iconPlacementDimension(dimension)}
                 disabled={disabled}
-                menuOpened={menuState}
+                highlightFocus={menuState}
                 onClick={handleClick}
                 aria-expanded={menuState}
                 aria-haspopup={menuState}
                 onKeyDown={handleKeyDown}
                 className={className + ' overflow-menu-button-with-dropdown'}
               >
-                <OverflowMenuIcon ref={iconRef} dimension={dimension} isVertical={isVertical} />
-              </Button>
+                {isVertical ? <MoreVerticalOutline /> : <MoreHorizontalOutline />}
+              </IconPlacement>
             );
           }}
         />

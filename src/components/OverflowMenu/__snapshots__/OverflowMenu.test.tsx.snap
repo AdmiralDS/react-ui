@@ -3,113 +3,78 @@
 exports[`OverflowMenu should render component 1`] = `
 Object {
   "asFragment": [Function],
-  "baseElement": .c0 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  box-sizing: border-box;
-  position: relative;
-  cursor: pointer;
-  border: 0;
-  outline: none;
-  padding: 0;
-  background: transparent;
-  -webkit-tap-highlight-color: transparent;
-  overflow: visible;
+  "baseElement": .c3 {
+  height: 100%;
+}
+
+.c3 *[fill^='#'] {
+  fill: #717681;
+}
+
+.c3 > svg {
   height: 24px;
   width: 24px;
 }
 
-.c0:hover:not(:disabled):not(:disabled)::after {
-  content: '';
+.c2 {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: transparent;
+  pointer-events: none;
   position: absolute;
   left: 50%;
   top: 50%;
   -webkit-transform: translate(-50%,-50%);
   -ms-transform: translate(-50%,-50%);
   transform: translate(-50%,-50%);
-  border-radius: 50%;
-  width: calc(100% + 12px);
-  height: calc(100% + 12px);
-  background-color: #0000000D;
 }
 
-.c0:focus-visible:before {
-  content: '';
-  position: absolute;
-  top: -4px;
-  bottom: -4px;
-  left: -4px;
-  right: -4px;
-  border: 2px solid #0062FF;
+.c0 {
+  position: relative;
+  padding: 0;
+  margin: 6px;
+  box-sizing: border-box;
+  border: none;
+  background-color: transparent;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  height: 24px;
+  width: 24px;
   border-radius: 4px;
-}
-
-.c0:active:not(:disabled):not(:disabled)::after {
-  content: '';
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  -webkit-transform: translate(-50%,-50%);
-  -ms-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
-  border-radius: 50%;
-  width: calc(100% + 12px);
-  height: calc(100% + 12px);
-  background-color: #0000000D;
-}
-
-.c0:active:not(:disabled):not(:disabled)::after {
-  background-color: #00000017;
+  overflow: visible;
+  cursor: pointer;
 }
 
 .c0:disabled {
   cursor: default;
+  pointer-events: none;
 }
 
 .c0:disabled *[fill^='#'] {
   fill: #B0B5BD;
 }
 
-.c1 {
-  position: relative;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
+.c0:focus-visible {
+  outline-offset: 2px;
+  outline: #0062FF solid 2px;
 }
 
-.c2 {
-  height: 24px;
-  width: 24px;
-  margin: auto;
+.c0:focus > .c1 {
+  background-color: transparent;
 }
 
-.c2 > svg {
-  height: 100%;
-  width: 100%;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
-  flex-shrink: 0;
+.c0:hover > .c1 {
+  background-color: #0000000D;
 }
 
-.c2 > svg *[fill^='#'] {
-  fill: #717681;
+.c0:active > .c1 {
+  background-color: #0000001F;
+}
+
+.c0:focus-visible > .c1 {
+  background-color: transparent;
 }
 
 <body>
@@ -121,127 +86,91 @@ Object {
         data-testid="btn"
         type="button"
       >
-        <span
-          class="c1"
+        <div
+          aria-hidden="true"
+          class="c1 c2"
+        />
+        <div
+          aria-hidden="true"
+          class="c3"
         >
-          <div
-            class="c2"
-          >
-            <div
-              aria-hidden="true"
-            />
-          </div>
-        </span>
+          <div />
+        </div>
       </button>
     </div>
   </body>,
-  "container": .c0 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  box-sizing: border-box;
-  position: relative;
-  cursor: pointer;
-  border: 0;
-  outline: none;
-  padding: 0;
-  background: transparent;
-  -webkit-tap-highlight-color: transparent;
-  overflow: visible;
+  "container": .c3 {
+  height: 100%;
+}
+
+.c3 *[fill^='#'] {
+  fill: #717681;
+}
+
+.c3 > svg {
   height: 24px;
   width: 24px;
 }
 
-.c0:hover:not(:disabled):not(:disabled)::after {
-  content: '';
+.c2 {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: transparent;
+  pointer-events: none;
   position: absolute;
   left: 50%;
   top: 50%;
   -webkit-transform: translate(-50%,-50%);
   -ms-transform: translate(-50%,-50%);
   transform: translate(-50%,-50%);
-  border-radius: 50%;
-  width: calc(100% + 12px);
-  height: calc(100% + 12px);
-  background-color: #0000000D;
 }
 
-.c0:focus-visible:before {
-  content: '';
-  position: absolute;
-  top: -4px;
-  bottom: -4px;
-  left: -4px;
-  right: -4px;
-  border: 2px solid #0062FF;
+.c0 {
+  position: relative;
+  padding: 0;
+  margin: 6px;
+  box-sizing: border-box;
+  border: none;
+  background-color: transparent;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  height: 24px;
+  width: 24px;
   border-radius: 4px;
-}
-
-.c0:active:not(:disabled):not(:disabled)::after {
-  content: '';
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  -webkit-transform: translate(-50%,-50%);
-  -ms-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
-  border-radius: 50%;
-  width: calc(100% + 12px);
-  height: calc(100% + 12px);
-  background-color: #0000000D;
-}
-
-.c0:active:not(:disabled):not(:disabled)::after {
-  background-color: #00000017;
+  overflow: visible;
+  cursor: pointer;
 }
 
 .c0:disabled {
   cursor: default;
+  pointer-events: none;
 }
 
 .c0:disabled *[fill^='#'] {
   fill: #B0B5BD;
 }
 
-.c1 {
-  position: relative;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
+.c0:focus-visible {
+  outline-offset: 2px;
+  outline: #0062FF solid 2px;
 }
 
-.c2 {
-  height: 24px;
-  width: 24px;
-  margin: auto;
+.c0:focus > .c1 {
+  background-color: transparent;
 }
 
-.c2 > svg {
-  height: 100%;
-  width: 100%;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
-  flex-shrink: 0;
+.c0:hover > .c1 {
+  background-color: #0000000D;
 }
 
-.c2 > svg *[fill^='#'] {
-  fill: #717681;
+.c0:active > .c1 {
+  background-color: #0000001F;
+}
+
+.c0:focus-visible > .c1 {
+  background-color: transparent;
 }
 
 <div>
@@ -252,17 +181,16 @@ Object {
       data-testid="btn"
       type="button"
     >
-      <span
-        class="c1"
+      <div
+        aria-hidden="true"
+        class="c1 c2"
+      />
+      <div
+        aria-hidden="true"
+        class="c3"
       >
-        <div
-          class="c2"
-        >
-          <div
-            aria-hidden="true"
-          />
-        </div>
-      </span>
+        <div />
+      </div>
     </button>
   </div>,
   "debug": [Function],
