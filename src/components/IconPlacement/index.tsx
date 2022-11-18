@@ -49,6 +49,8 @@ export interface IconPlacementProps extends ButtonHTMLAttributes<HTMLButtonEleme
   dimension?: IconPlacementDimension;
   /** Отключение кнопки */
   disabled?: boolean;
+  /** Позволяет управлять подсветкой в состоянии фокуса, по умолчанию состояние фокуса подсвечивается */
+  highlightFocus?: boolean;
 }
 
 const IconPlacementContent = styled.div<{ dimension?: IconPlacementDimension }>`
@@ -76,7 +78,7 @@ const ActivityHighlighter = styled.div<{ dimension?: IconPlacementDimension }>`
   transform: translate(-50%, -50%);
 `;
 
-const IconPlacementButton = styled.button<{ dimension?: IconPlacementDimension }>`
+const IconPlacementButton = styled.button<{ dimension?: IconPlacementDimension; highlightFocus: boolean }>`
   position: relative;
   padding: 0;
   margin: ${(p) => getHighlighterOffset(p.dimension)}px;
@@ -106,7 +108,7 @@ const IconPlacementButton = styled.button<{ dimension?: IconPlacementDimension }
 
   &:focus {
     > ${ActivityHighlighter} {
-      background-color: ${({ theme }) => theme.color['Opacity/Focus']};
+      background-color: ${(p) => (p.highlightFocus ? p.theme.color['Opacity/Focus'] : 'transparent')};
     }
   }
   &:hover {
@@ -127,9 +129,16 @@ const IconPlacementButton = styled.button<{ dimension?: IconPlacementDimension }
 `;
 
 export const IconPlacement = React.forwardRef<HTMLButtonElement, IconPlacementProps>(
-  ({ type = 'button', dimension = 'lBig', disabled = false, children, ...props }, ref) => {
+  ({ type = 'button', dimension = 'lBig', disabled = false, highlightFocus = true, children, ...props }, ref) => {
     return (
-      <IconPlacementButton ref={ref} type={type} dimension={dimension} disabled={disabled} {...props}>
+      <IconPlacementButton
+        ref={ref}
+        type={type}
+        dimension={dimension}
+        disabled={disabled}
+        highlightFocus={highlightFocus}
+        {...props}
+      >
         <ActivityHighlighter dimension={dimension} aria-hidden />
         <IconPlacementContent dimension={dimension} aria-hidden>
           {children}
