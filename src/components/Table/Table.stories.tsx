@@ -666,6 +666,24 @@ RowState.parameters = {
   },
 };
 
+export const ZebraRows = Template.bind({});
+ZebraRows.args = {
+  rowList,
+  columnList,
+  greyHeader: true,
+  greyZebraRows: true,
+};
+ZebraRows.storyName = 'Table. Зебра (окрашивание строк через одну).';
+ZebraRows.parameters = {
+  docs: {
+    description: {
+      story: `Опционально, для лучшей визуальной сепарации строк, их можно окрашивать через одну в цвет вторичного фона (Neutral 05). Используйте для этого параметр greyZebraRows.
+      Окраска начинается со второй строки, считая от заголовка таблицы или группы. При группировке строк, строка с названием группы не окрашивается. При перетаскивании строк, поиске или сортировке, 
+      они окрашиваются в соответствии с описанным выше алгоритмом.\n\nДля консистентности рекомендуется заголовок таблицы тоже окрашивать в серый цвет (параметр greyHeader).`,
+    },
+  },
+};
+
 export const Expand = Template6.bind({});
 Expand.args = {
   rowList: rowListExpanded,
