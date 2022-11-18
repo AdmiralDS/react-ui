@@ -3,113 +3,78 @@
 exports[`TabMenu should render default component 1`] = `
 Object {
   "asFragment": [Function],
-  "baseElement": .c7 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  box-sizing: border-box;
-  position: relative;
-  cursor: pointer;
-  border: 0;
-  outline: none;
-  padding: 0;
-  background: transparent;
-  -webkit-tap-highlight-color: transparent;
-  overflow: visible;
+  "baseElement": .c11 {
+  height: 100%;
+}
+
+.c11 *[fill^='#'] {
+  fill: #717681;
+}
+
+.c11 > svg {
   height: 24px;
   width: 24px;
 }
 
-.c7:hover:not(:disabled):not(:disabled)::after {
-  content: '';
+.c10 {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: transparent;
+  pointer-events: none;
   position: absolute;
   left: 50%;
   top: 50%;
   -webkit-transform: translate(-50%,-50%);
   -ms-transform: translate(-50%,-50%);
   transform: translate(-50%,-50%);
-  border-radius: 50%;
-  width: calc(100% + 12px);
-  height: calc(100% + 12px);
-  background-color: #0000000D;
 }
 
-.c7:focus-visible:before {
-  content: '';
-  position: absolute;
-  top: -4px;
-  bottom: -4px;
-  left: -4px;
-  right: -4px;
-  border: 2px solid #0062FF;
+.c7 {
+  position: relative;
+  padding: 0;
+  margin: 6px;
+  box-sizing: border-box;
+  border: none;
+  background-color: transparent;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  height: 24px;
+  width: 24px;
   border-radius: 4px;
-}
-
-.c7:active:not(:disabled):not(:disabled)::after {
-  content: '';
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  -webkit-transform: translate(-50%,-50%);
-  -ms-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
-  border-radius: 50%;
-  width: calc(100% + 12px);
-  height: calc(100% + 12px);
-  background-color: #0000000D;
-}
-
-.c7:active:not(:disabled):not(:disabled)::after {
-  background-color: #00000017;
+  overflow: visible;
+  cursor: pointer;
 }
 
 .c7:disabled {
   cursor: default;
+  pointer-events: none;
 }
 
 .c7:disabled *[fill^='#'] {
   fill: #B0B5BD;
 }
 
-.c9 {
-  position: relative;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
+.c7:focus-visible {
+  outline-offset: 2px;
+  outline: #0062FF solid 2px;
 }
 
-.c10 {
-  height: 24px;
-  width: 24px;
-  margin: auto;
+.c7:focus > .c9 {
+  background-color: transparent;
 }
 
-.c10 > svg {
-  height: 100%;
-  width: 100%;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
-  flex-shrink: 0;
+.c7:hover > .c9 {
+  background-color: #0000000D;
 }
 
-.c10 > svg *[fill^='#'] {
-  fill: #717681;
+.c7:active > .c9 {
+  background-color: #0000001F;
+}
+
+.c7:focus-visible > .c9 {
+  background-color: transparent;
 }
 
 .c0 {
@@ -151,7 +116,7 @@ Object {
   height: 0 !important;
 }
 
-.c13 {
+.c14 {
   position: absolute;
   bottom: 0;
   display: -webkit-box;
@@ -288,7 +253,7 @@ Object {
   fill: #B0B5BD;
 }
 
-.c12 {
+.c13 {
   position: relative;
   box-sizing: border-box;
   display: -webkit-inline-box;
@@ -321,7 +286,7 @@ Object {
   -webkit-tap-highlight-color: transparent;
 }
 
-.c12:focus:not(:active):before {
+.c13:focus:not(:active):before {
   position: absolute;
   content: '';
   border: 2px solid #0062FF;
@@ -331,12 +296,12 @@ Object {
   right: 0;
 }
 
-.c12:focus,
-.c12 > .c3 {
+.c13:focus,
+.c13 > .c3 {
   outline: none;
 }
 
-.c12 svg {
+.c13 svg {
   display: inline-block;
   -webkit-flex: 1 0 auto;
   -ms-flex: 1 0 auto;
@@ -346,37 +311,37 @@ Object {
   margin-right: 8px;
 }
 
-.c12 svg *[fill^='#'] {
+.c13 svg *[fill^='#'] {
   fill: #717681;
 }
 
-.c12 [data-badge] {
+.c13 [data-badge] {
   margin-left: 8px;
 }
 
-.c12:hover:not(:disabled) {
+.c13:hover:not(:disabled) {
   background: #0000000D;
 }
 
-.c12:active:not(:disabled) {
+.c13:active:not(:disabled) {
   color: #0062FF;
 }
 
-.c12:active:not(:disabled) *[fill^='#'] {
+.c13:active:not(:disabled) *[fill^='#'] {
   fill: #0062FF;
 }
 
-.c12:active:not(:disabled) [data-badge] {
+.c13:active:not(:disabled) [data-badge] {
   background: #0062FF;
   color: #FFFFFF;
 }
 
-.c12:disabled {
+.c13:disabled {
   color: #B0B5BD;
   cursor: default;
 }
 
-.c12:disabled *[fill^='#'] {
+.c13:disabled *[fill^='#'] {
   fill: #B0B5BD;
 }
 
@@ -392,7 +357,7 @@ Object {
   margin-left: 0px;
 }
 
-.c11 {
+.c12 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -414,11 +379,8 @@ Object {
   margin: 12px;
 }
 
-.c8:focus-visible:before {
-  top: -12px;
-  left: -12px;
-  right: -12px;
-  bottom: -12px;
+.c8:focus-visible {
+  outline-offset: 10px;
   border-radius: 0;
 }
 
@@ -467,27 +429,26 @@ Object {
               tabindex="-1"
               type="button"
             >
-              <span
-                class="c9"
+              <div
+                aria-hidden="true"
+                class="c9 c10"
+              />
+              <div
+                aria-hidden="true"
+                class="c11"
               >
-                <div
-                  class="c10"
-                >
-                  <div
-                    aria-hidden="true"
-                  />
-                </div>
-              </span>
+                <div />
+              </div>
             </button>
           </div>
         </div>
         <div
-          class="c11"
+          class="c12"
           data-number="1"
         >
           <button
             aria-selected="false"
-            class="c12 tag"
+            class="c13 tag"
             id="2"
             role="tab"
             tabindex="-1"
@@ -514,27 +475,26 @@ Object {
               tabindex="-1"
               type="button"
             >
-              <span
-                class="c9"
+              <div
+                aria-hidden="true"
+                class="c9 c10"
+              />
+              <div
+                aria-hidden="true"
+                class="c11"
               >
-                <div
-                  class="c10"
-                >
-                  <div
-                    aria-hidden="true"
-                  />
-                </div>
-              </span>
+                <div />
+              </div>
             </button>
           </div>
         </div>
         <div
-          class="c11"
+          class="c12"
           data-number="2"
         >
           <button
             aria-selected="false"
-            class="c12 tag"
+            class="c13 tag"
             id="3"
             role="tab"
             tabindex="-1"
@@ -554,118 +514,83 @@ Object {
         </div>
         <div
           aria-hidden="true"
-          class="c13"
+          class="c14"
         />
       </div>
     </div>
   </body>,
-  "container": .c7 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  box-sizing: border-box;
-  position: relative;
-  cursor: pointer;
-  border: 0;
-  outline: none;
-  padding: 0;
-  background: transparent;
-  -webkit-tap-highlight-color: transparent;
-  overflow: visible;
+  "container": .c11 {
+  height: 100%;
+}
+
+.c11 *[fill^='#'] {
+  fill: #717681;
+}
+
+.c11 > svg {
   height: 24px;
   width: 24px;
 }
 
-.c7:hover:not(:disabled):not(:disabled)::after {
-  content: '';
+.c10 {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: transparent;
+  pointer-events: none;
   position: absolute;
   left: 50%;
   top: 50%;
   -webkit-transform: translate(-50%,-50%);
   -ms-transform: translate(-50%,-50%);
   transform: translate(-50%,-50%);
-  border-radius: 50%;
-  width: calc(100% + 12px);
-  height: calc(100% + 12px);
-  background-color: #0000000D;
 }
 
-.c7:focus-visible:before {
-  content: '';
-  position: absolute;
-  top: -4px;
-  bottom: -4px;
-  left: -4px;
-  right: -4px;
-  border: 2px solid #0062FF;
+.c7 {
+  position: relative;
+  padding: 0;
+  margin: 6px;
+  box-sizing: border-box;
+  border: none;
+  background-color: transparent;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  height: 24px;
+  width: 24px;
   border-radius: 4px;
-}
-
-.c7:active:not(:disabled):not(:disabled)::after {
-  content: '';
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  -webkit-transform: translate(-50%,-50%);
-  -ms-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
-  border-radius: 50%;
-  width: calc(100% + 12px);
-  height: calc(100% + 12px);
-  background-color: #0000000D;
-}
-
-.c7:active:not(:disabled):not(:disabled)::after {
-  background-color: #00000017;
+  overflow: visible;
+  cursor: pointer;
 }
 
 .c7:disabled {
   cursor: default;
+  pointer-events: none;
 }
 
 .c7:disabled *[fill^='#'] {
   fill: #B0B5BD;
 }
 
-.c9 {
-  position: relative;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
+.c7:focus-visible {
+  outline-offset: 2px;
+  outline: #0062FF solid 2px;
 }
 
-.c10 {
-  height: 24px;
-  width: 24px;
-  margin: auto;
+.c7:focus > .c9 {
+  background-color: transparent;
 }
 
-.c10 > svg {
-  height: 100%;
-  width: 100%;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
-  flex-shrink: 0;
+.c7:hover > .c9 {
+  background-color: #0000000D;
 }
 
-.c10 > svg *[fill^='#'] {
-  fill: #717681;
+.c7:active > .c9 {
+  background-color: #0000001F;
+}
+
+.c7:focus-visible > .c9 {
+  background-color: transparent;
 }
 
 .c0 {
@@ -707,7 +632,7 @@ Object {
   height: 0 !important;
 }
 
-.c13 {
+.c14 {
   position: absolute;
   bottom: 0;
   display: -webkit-box;
@@ -844,7 +769,7 @@ Object {
   fill: #B0B5BD;
 }
 
-.c12 {
+.c13 {
   position: relative;
   box-sizing: border-box;
   display: -webkit-inline-box;
@@ -877,7 +802,7 @@ Object {
   -webkit-tap-highlight-color: transparent;
 }
 
-.c12:focus:not(:active):before {
+.c13:focus:not(:active):before {
   position: absolute;
   content: '';
   border: 2px solid #0062FF;
@@ -887,12 +812,12 @@ Object {
   right: 0;
 }
 
-.c12:focus,
-.c12 > .c3 {
+.c13:focus,
+.c13 > .c3 {
   outline: none;
 }
 
-.c12 svg {
+.c13 svg {
   display: inline-block;
   -webkit-flex: 1 0 auto;
   -ms-flex: 1 0 auto;
@@ -902,37 +827,37 @@ Object {
   margin-right: 8px;
 }
 
-.c12 svg *[fill^='#'] {
+.c13 svg *[fill^='#'] {
   fill: #717681;
 }
 
-.c12 [data-badge] {
+.c13 [data-badge] {
   margin-left: 8px;
 }
 
-.c12:hover:not(:disabled) {
+.c13:hover:not(:disabled) {
   background: #0000000D;
 }
 
-.c12:active:not(:disabled) {
+.c13:active:not(:disabled) {
   color: #0062FF;
 }
 
-.c12:active:not(:disabled) *[fill^='#'] {
+.c13:active:not(:disabled) *[fill^='#'] {
   fill: #0062FF;
 }
 
-.c12:active:not(:disabled) [data-badge] {
+.c13:active:not(:disabled) [data-badge] {
   background: #0062FF;
   color: #FFFFFF;
 }
 
-.c12:disabled {
+.c13:disabled {
   color: #B0B5BD;
   cursor: default;
 }
 
-.c12:disabled *[fill^='#'] {
+.c13:disabled *[fill^='#'] {
   fill: #B0B5BD;
 }
 
@@ -948,7 +873,7 @@ Object {
   margin-left: 0px;
 }
 
-.c11 {
+.c12 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -970,11 +895,8 @@ Object {
   margin: 12px;
 }
 
-.c8:focus-visible:before {
-  top: -12px;
-  left: -12px;
-  right: -12px;
-  bottom: -12px;
+.c8:focus-visible {
+  outline-offset: 10px;
   border-radius: 0;
 }
 
@@ -1022,27 +944,26 @@ Object {
             tabindex="-1"
             type="button"
           >
-            <span
-              class="c9"
+            <div
+              aria-hidden="true"
+              class="c9 c10"
+            />
+            <div
+              aria-hidden="true"
+              class="c11"
             >
-              <div
-                class="c10"
-              >
-                <div
-                  aria-hidden="true"
-                />
-              </div>
-            </span>
+              <div />
+            </div>
           </button>
         </div>
       </div>
       <div
-        class="c11"
+        class="c12"
         data-number="1"
       >
         <button
           aria-selected="false"
-          class="c12 tag"
+          class="c13 tag"
           id="2"
           role="tab"
           tabindex="-1"
@@ -1069,27 +990,26 @@ Object {
             tabindex="-1"
             type="button"
           >
-            <span
-              class="c9"
+            <div
+              aria-hidden="true"
+              class="c9 c10"
+            />
+            <div
+              aria-hidden="true"
+              class="c11"
             >
-              <div
-                class="c10"
-              >
-                <div
-                  aria-hidden="true"
-                />
-              </div>
-            </span>
+              <div />
+            </div>
           </button>
         </div>
       </div>
       <div
-        class="c11"
+        class="c12"
         data-number="2"
       >
         <button
           aria-selected="false"
-          class="c12 tag"
+          class="c13 tag"
           id="3"
           role="tab"
           tabindex="-1"
@@ -1109,7 +1029,7 @@ Object {
       </div>
       <div
         aria-hidden="true"
-        class="c13"
+        class="c14"
       />
     </div>
   </div>,
