@@ -23,6 +23,8 @@ export interface RowWrapperProps extends HTMLAttributes<HTMLDivElement> {
   verticalScroll: boolean;
   /** Ширина строки */
   rowWidth?: number;
+  /** Окрашивание строки в серый цвет при greyZebraRows */
+  grey?: boolean;
 }
 
 export const RowWrapper = ({
@@ -36,6 +38,7 @@ export const RowWrapper = ({
   isGroup,
   rowWidth,
   verticalScroll,
+  grey,
   ...props
 }: RowWrapperProps) => {
   const handleRowClick = (rowId: RowId) => {
@@ -64,6 +67,7 @@ export const RowWrapper = ({
         disabled={!!row.disabled}
         error={!!row.error}
         success={!!row.success}
+        grey={!!grey}
       >
         {children}
       </SimpleRow>
