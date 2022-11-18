@@ -198,6 +198,8 @@ export interface TableProps extends React.HTMLAttributes<HTMLDivElement> {
   displayRowExpansionColumn?: boolean;
   /** Окрашивание шапки таблицы в серый цвет */
   greyHeader?: boolean;
+  /** Окрашивание строк таблицы через одну в цвет вторичного фона (зебра) */
+  greyZebraRows?: boolean;
 
   /** Ширина колонки (заголовка) регулируется через параметр Spacing Between Items в настройках
    * Auto Layout, при выбранном заголовке. Минимальное значение 12px, для таблиц S и M, и 16px для таблиц L и XL.
@@ -264,6 +266,7 @@ type RowInfo = {
 
 type Group = Record<string, GroupInfo>;
 type GroupRows = Record<string, RowInfo>;
+type ZebraRows = Record<string, 'odd' | 'even' | 'ingroup odd' | 'ingroup even' | 'group'>;
 
 export const Table: React.FC<TableProps> = ({
   columnList,
@@ -284,6 +287,7 @@ export const Table: React.FC<TableProps> = ({
   renderRowWrapper,
   dimension = 'm',
   greyHeader = false,
+  greyZebraRows = false,
   spacingBetweenItems,
   headerLineClamp = 1,
   headerExtraLineClamp = 1,
@@ -355,6 +359,22 @@ export const Table: React.FC<TableProps> = ({
   };
 
   const tableRows = useMemo(() => reorderRowsToGroup(), [rowList]);
+
+  const zebraRows = greyZebraRows
+    ? tableRows.reduce<ZebraRows>((acc: ZebraRows, row: TableRow, index: number) => {
+        if (rowToGroupMap[row.id]) {
+          const indexInGroup = groupToRowsMap[rowToGroupMap[row.id].groupId].rows.indexOf(String(row.id));
+          acc[row.id] = `ingroup ${indexInGroup % 2 === 0 ? 'odd' : 'even'}`;
+        } else if (groupToRowsMap[row.id]) {
+          acc[row.id] = 'group';
+        } else if (index === 0 || acc[tableRows[index - 1].id].includes('group')) {
+          acc[row.id] = 'odd';
+        } else {
+          acc[row.id] = acc[tableRows[index - 1].id] === 'odd' ? 'even' : 'odd';
+        }
+        return acc;
+      }, {})
+    : {};
 
   const scrollHeader = (scrollLeft: number) => {
     if (headerRef.current) headerRef.current.scrollLeft = scrollLeft;
@@ -738,6 +758,7 @@ export const Table: React.FC<TableProps> = ({
         onRowDoubleClick={onRowDoubleClick}
         rowWidth={isGroupRow ? headerRef.current?.scrollWidth : undefined}
         verticalScroll={verticalScroll}
+        grey={zebraRows[row.id]?.includes('even')}
         key={`row_${row.id}`}
       >
         {isGroupRow ? renderGroupRow(row) : renderRegularRow(row)}

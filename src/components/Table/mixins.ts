@@ -67,12 +67,19 @@ export const underlineRow = css`
   border-bottom: 1px solid ${({ theme }) => theme.color['Neutral/Neutral 20']};
 `;
 
-export const rowBackground = css<{ selected?: boolean; disabled?: boolean; error?: boolean; success?: boolean }>`
-  ${({ theme, selected, error, success, disabled }) => {
+export const rowBackground = css<{
+  selected?: boolean;
+  disabled?: boolean;
+  error?: boolean;
+  success?: boolean;
+  grey?: boolean;
+}>`
+  ${({ theme, selected, error, success, disabled, grey }) => {
+    if (disabled) return theme.color['Neutral/Neutral 00'];
     if (selected) return theme.color['Primary/Primary 20'];
     if (error) return theme.color['Error/Error 20'];
     if (success) return theme.color['Success/Success 20'];
-    if (disabled) return theme.color['Neutral/Neutral 00'];
+    if (grey) return theme.color['Neutral/Neutral 05'];
     return theme.color['Neutral/Neutral 00'];
   }}
 `;

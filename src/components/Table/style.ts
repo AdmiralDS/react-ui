@@ -339,7 +339,13 @@ export const Row = styled.div<{
   ${({ rowWidth }) => rowWidth && rowWidthStyle}
 `;
 
-export const SimpleRow = styled.div<{ selected?: boolean; disabled?: boolean; error?: boolean; success?: boolean }>`
+export const SimpleRow = styled.div<{
+  selected?: boolean;
+  disabled?: boolean;
+  error?: boolean;
+  success?: boolean;
+  grey?: boolean;
+}>`
   display: inline-flex;
   min-width: max-content;
 
