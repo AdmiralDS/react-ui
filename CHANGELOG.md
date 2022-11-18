@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.4.0](https://github.com/AdmiralDS/react-ui/compare/v3.3.0...v3.4.0) (2022-11-18)
+
+
+### Features
+
+* **FileItem:** add formatFileSizeInfo prop for custom file size view ([d385e20](https://github.com/AdmiralDS/react-ui/commit/d385e20321cda94bdf1caef49a7bf75c7e221f0d))
+* **FileItem:** show file size in Kb if file is less than 1Mb ([3d73e40](https://github.com/AdmiralDS/react-ui/commit/3d73e40fa53646b801f2a4cdd6b5e887f83c5bc5))
+* **IconPlacement:** add new component ([2a63e7e](https://github.com/AdmiralDS/react-ui/commit/2a63e7e1c1305116cf9fd400512ec06782c50502))
+* **MultiButton:** enable customize DropMenu options ([f32bf7d](https://github.com/AdmiralDS/react-ui/commit/f32bf7d37ec2521ff49e4ca01e91652a173015a2))
+* **PhoneNumberInput:** change Chevron icon and its margin ([b14fdbd](https://github.com/AdmiralDS/react-ui/commit/b14fdbdb922b376ed9d9b9c404c54e22c20eb4c4))
+* **Select:** duplicate input value on cmd+a ([6f9e933](https://github.com/AdmiralDS/react-ui/commit/6f9e933cd6196ada0d5c9514e644c3205a9f5b8b))
+* **Select:** remove highlight from select ([7951f16](https://github.com/AdmiralDS/react-ui/commit/7951f1626025f646a2ecefbe55480a63b9ac87b3))
+* **SliderRange:** add controlled mode, fix bug with animation for Range component ([ce8a88c](https://github.com/AdmiralDS/react-ui/commit/ce8a88c7987724f9d0d8bbdd3dadf7eb07b0aa74))
+* **Table:** add opportunity to use empty rows group ([8c86213](https://github.com/AdmiralDS/react-ui/commit/8c8621301145a4bb39058eb85da175fe765bfc09))
+* **Table:** add opportunity to use grey zebra rows ([25e6470](https://github.com/AdmiralDS/react-ui/commit/25e647099a7a19ba380a30cb9eca425917970d1a))
+* **TagMenu:** enable customize DropMenu options ([21d7f13](https://github.com/AdmiralDS/react-ui/commit/21d7f136c7c6633c983265360251142ad8f9e13a))
+
+
+### Bug Fixes
+
+* **ContentSwitcher:** fix story with icons only ([a235cee](https://github.com/AdmiralDS/react-ui/commit/a235cee6dc2625c304ce3a202655de0926c426e7))
+* **TimeInput:** fix problem with 20-24 hours ([9bcee8b](https://github.com/AdmiralDS/react-ui/commit/9bcee8b4585d9411716a9808d79e14e27d1f5d72))
+
 ## [3.3.0](https://github.com/AdmiralDS/react-ui/compare/v3.2.0...v3.3.0) (2022-11-09)
 
 
