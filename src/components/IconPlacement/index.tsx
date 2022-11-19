@@ -92,6 +92,9 @@ const IconPlacementButton = styled.button<{ dimension?: IconPlacementDimension; 
   overflow: visible;
 
   cursor: pointer;
+  > * {
+    pointer-events: none;
+  }
 
   &:disabled {
     cursor: default;
