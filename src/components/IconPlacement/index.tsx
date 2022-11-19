@@ -2,6 +2,7 @@ import * as React from 'react';
 import { ButtonHTMLAttributes } from 'react';
 import styled from 'styled-components';
 import { smallGroupBorderRadius } from '#src/components/themes/borderRadius';
+import { ReactComponent as CloseOutline } from '@admiral-ds/icons/build/service/CloseOutline.svg';
 
 const IconSizeL = 24;
 const IconSizeM = 20;
@@ -150,3 +151,11 @@ export const IconPlacement = React.forwardRef<HTMLButtonElement, IconPlacementPr
     );
   },
 );
+
+export const CloseIconPlacementButton = React.forwardRef<HTMLButtonElement, IconPlacementProps>(({ ...props }, ref) => {
+  return (
+    <IconPlacement ref={ref} {...props}>
+      <CloseOutline aria-hidden />
+    </IconPlacement>
+  );
+});

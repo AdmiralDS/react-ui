@@ -2,10 +2,9 @@ import * as React from 'react';
 import { withDesign } from 'storybook-addon-designs';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { ReactComponent as CloseOutline } from '@admiral-ds/icons/build/service/CloseOutline.svg';
-import styled, { ThemeProvider } from 'styled-components';
+import styled from 'styled-components';
 import { T } from '#src/components/T';
-import { IconPlacement } from '#src/components/IconPlacement/index';
-import { Theme } from '#src/components/themes';
+import { CloseIconPlacementButton, IconPlacement } from '#src/components/IconPlacement/index';
 
 export default {
   title: 'Admiral-2.1/IconPlacement',
@@ -152,9 +151,29 @@ const IconPlacementPlaygroundTemplate: ComponentStory<typeof IconPlacement> = (a
   );
 };
 
+const IconPlacementVariantsTemplate: ComponentStory<typeof IconPlacement> = (args) => {
+  return (
+    <WrapperVertical>
+      <T font="Body/Body 1 Long" as="div">
+        Примеры использования:
+      </T>
+      <T font="Body/Body 1 Long" as="div">
+        иконка Close в компонентах Modal, Toast, Hint и др.
+      </T>
+      <CloseIconPlacementButton {...args} />
+      <T font="Body/Body 1 Long" as="div">
+        иконка Chevrone в компонентах Select Tree, Calendar и др.
+      </T>
+    </WrapperVertical>
+  );
+};
+
 export const IconPlacementDemo = IconPlacementDemoTemplate.bind({});
 IconPlacementDemo.storyName = 'IconPlacement. Размеры';
 
 export const IconPlacementPlayground = IconPlacementPlaygroundTemplate.bind({});
 IconPlacementPlayground.storyName = 'IconPlacement. Playground';
 IconPlacementPlayground.args = { dimension: 'lBig', disabled: false, highlightFocus: false };
+
+export const IconPlacementVariants = IconPlacementVariantsTemplate.bind({});
+IconPlacementVariants.storyName = 'IconPlacement. Варианты использования';

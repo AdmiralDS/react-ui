@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { ReactComponent as CloseOutline } from '@admiral-ds/icons/build/service/CloseOutline.svg';
 import { keyboardKey } from '#src/components/common/keyboardKey';
 import { useClickOutside } from '#src/components/common/hooks/useClickOutside';
 import { getKeyboardFocusableElements } from '#src/components/common/utils/getKeyboardFocusableElements';
@@ -147,9 +146,7 @@ export const HintContainer = React.forwardRef<RefType, PropsType & React.HTMLAtt
                 previousFocusedElement.current.focus();
                 hideHint();
               }}
-            >
-              <CloseOutline width={20} height={20} aria-hidden />
-            </CloseButton>
+            />
           )}
         </HintDialog>
       </HintWrapper>

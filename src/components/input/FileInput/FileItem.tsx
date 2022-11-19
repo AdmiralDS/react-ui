@@ -13,7 +13,6 @@ import { ReactComponent as XLSSolid } from '@admiral-ds/icons/build/documents/XL
 import { ReactComponent as DocsSolid } from '@admiral-ds/icons/build/documents/DocsSolid.svg';
 import { ReactComponent as JpgSolid } from '@admiral-ds/icons/build/documents/JpgSolid.svg';
 import { ReactComponent as EyeOutline } from '@admiral-ds/icons/build/service/EyeOutline.svg';
-import { ReactComponent as CloseOutline } from '@admiral-ds/icons/build/service/CloseOutline.svg';
 import {
   ERROR_BLOCK_HEIGHT_M,
   ERROR_BLOCK_HEIGHT_XL,
@@ -27,7 +26,7 @@ import {
 } from '#src/components/input/FileInput/style';
 import { Tooltip } from '#src/components/Tooltip';
 import { checkOverflow } from '#src/components/common/utils/checkOverflow';
-import { IconPlacement } from '#src/components/IconPlacement';
+import { CloseIconPlacementButton } from '#src/components/IconPlacement';
 
 export type Status = 'Uploaded' | 'Loading' | 'Error' | 'Queue';
 
@@ -191,7 +190,7 @@ const StyledSpinner = styled(Spinner)<{ dimension?: FileInputDimension }>`
   ${functionalItemSizeMixin}
 `;
 
-const CloseButton = styled(IconPlacement)`
+const CloseButton = styled(CloseIconPlacementButton)`
   margin: 0;
 `;
 
@@ -357,9 +356,7 @@ export const FileItem = forwardRef<HTMLDivElement, FileItemProps>(
               dimension={dimension === 'xl' ? 'lSmall' : 'mSmall'}
               disabled={status === 'Queue'}
               onClick={handleCloseIconClick}
-            >
-              <CloseOutline />
-            </CloseButton>
+            />
           </FunctionalBlock>
         </PreviewWrapper>
         {errorMessage && status === 'Error' && <ErrorBlock status={status}>{errorMessage}</ErrorBlock>}

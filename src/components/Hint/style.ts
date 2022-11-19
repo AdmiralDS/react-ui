@@ -2,7 +2,7 @@ import styled, { css, DefaultTheme, FlattenInterpolation, ThemeProps } from 'sty
 import { typography } from '#src/components/Typography';
 import { PositionInPortal } from '#src/components/PositionInPortal';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
-import { IconPlacement } from '#src/components/IconPlacement';
+import { CloseIconPlacementButton } from '#src/components/IconPlacement';
 
 export const AnchorWrapper = styled.div<{ anchorCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>> }>`
   display: inline-block;
@@ -14,7 +14,7 @@ export const AnchorWrapper = styled.div<{ anchorCssMixin?: FlattenInterpolation<
 const CLOSE_BUTTON_SIZE = 20;
 const CLOSE_BUTTON_MARGIN_LEFT = 16;
 
-export const CloseButton = styled(IconPlacement)`
+export const CloseButton = styled(CloseIconPlacementButton)`
   position: absolute;
   top: 20px;
   right: 20px;

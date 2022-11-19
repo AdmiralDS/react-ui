@@ -1,7 +1,6 @@
 import { getKeyboardFocusableElements } from '#src/components/common/utils/getKeyboardFocusableElements';
 import { refSetter } from '#src/components/common/utils/refSetter';
 import { typography } from '#src/components/Typography';
-import { ReactComponent as CloseOutline } from '@admiral-ds/icons/build/service/CloseOutline.svg';
 import * as React from 'react';
 import ReactDOM from 'react-dom';
 import styled, { css, Interpolation, ThemeContext } from 'styled-components';
@@ -9,7 +8,7 @@ import { LIGHT_THEME } from '#src/components/themes';
 import ModalManager from './manager';
 import { largeGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { checkOverflow } from '#src/components/common/utils/checkOverflow';
-import { IconPlacement } from '#src/components/IconPlacement';
+import { CloseIconPlacementButton } from '#src/components/IconPlacement';
 
 type Dimension = 'xl' | 'l' | 'm' | 's';
 
@@ -115,7 +114,7 @@ const ModalComponent = styled.div<{ dimension: Dimension; mobile?: boolean }>`
     }
   `}
 `;
-const CloseButton = styled(IconPlacement)<{ mobile?: boolean }>`
+const CloseButton = styled(CloseIconPlacementButton)<{ mobile?: boolean }>`
   position: absolute;
   top: 16px;
   right: ${({ mobile }) => (mobile ? 12 : 20)}px;
@@ -308,9 +307,7 @@ export const Modal = React.forwardRef<HTMLDivElement, ModalProps>(
               aria-label={closeBtnAriaLabel}
               mobile={mobile}
               onClick={handleCloseBtnClick}
-            >
-              <CloseOutline aria-hidden />
-            </CloseButton>
+            />
           )}
         </ModalComponent>
       </Overlay>,
