@@ -139,6 +139,8 @@ export const HintContainer = React.forwardRef<RefType, PropsType & React.HTMLAtt
           <HintContent>{content}</HintContent>
           {visibilityTrigger === 'click' && (
             <CloseButton
+              dimension="mSmall"
+              highlightFocus={false}
               aria-label={closeBtnAriaLabel}
               onClick={(event?: React.MouseEvent<HTMLButtonElement>) => {
                 event?.stopPropagation();

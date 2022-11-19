@@ -2,6 +2,7 @@ import styled, { css, DefaultTheme, FlattenInterpolation, ThemeProps } from 'sty
 import { typography } from '#src/components/Typography';
 import { PositionInPortal } from '#src/components/PositionInPortal';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
+import { IconPlacement } from '#src/components/IconPlacement';
 
 export const AnchorWrapper = styled.div<{ anchorCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>> }>`
   display: inline-block;
@@ -13,49 +14,10 @@ export const AnchorWrapper = styled.div<{ anchorCssMixin?: FlattenInterpolation<
 const CLOSE_BUTTON_SIZE = 20;
 const CLOSE_BUTTON_MARGIN_LEFT = 16;
 
-export const CloseButton = styled.button`
+export const CloseButton = styled(IconPlacement)`
   position: absolute;
-  top: 24px;
-  right: 24px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-sizing: border-box;
-  cursor: pointer;
-  outline: none;
-  border: 0;
-  padding: 0;
-  width: ${CLOSE_BUTTON_SIZE};
-  height: ${CLOSE_BUTTON_SIZE};
-  background: transparent;
-  -webkit-tap-highlight-color: transparent;
-  &:before {
-    content: '';
-    position: absolute;
-    top: -4px;
-    bottom: -4px;
-    left: -4px;
-    right: -4px;
-    background: transparent;
-    border-radius: 50%;
-  }
-  ${({ theme }) => `
-    & *[fill^='#'] {
-      fill: ${theme.color['Neutral/Neutral 50']};
-    }
-
-    &:hover, &:focus {
-      &:before {
-        background: ${theme.color['Opacity/Hover']};
-      }
-    }
-
-    &:active {
-      &:before {
-        background: ${theme.color['Opacity/Press']};
-      }
-    }
-  `}
+  top: 20px;
+  right: 20px;
 `;
 
 export type Dimension = 's' | 'm' | 'l';
@@ -96,13 +58,13 @@ export const HintDialog = styled.div<{
 }>`
   display: flex;
   padding: ${HINT_PADDING}px 0 ${HINT_PADDING}px ${HINT_PADDING}px;
-  ${sizes}
   background-color: ${({ theme }) => theme.color['Special/Elevated BG']};
   ${typography['Body/Body 2 Long']}
   color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
   ${({ theme }) => theme.shadow['Shadow 08']}
   border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
   box-sizing: border-box;
+  ${sizes}
 `;
 
 export const HintContent = styled.div`
