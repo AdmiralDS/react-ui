@@ -1,39 +1,21 @@
 import * as React from 'react';
-import styled from 'styled-components';
+import { IconPlacement } from '#src/components/IconPlacement';
 
 type Dimension = 'xl' | 'l' | 'm' | 's';
 
-const Action = styled.div<{ dimension: Dimension }>`
-  display: flex;
-  box-sizing: border-box;
-  align-items: center;
-  justify-content: center;
-  width: ${({ dimension }) => (dimension === 's' || dimension === 'm' ? 32 : 36)}px;
-  height: ${({ dimension }) => (dimension === 's' || dimension === 'm' ? 32 : 36)}px;
-  padding: 6px;
-  cursor: pointer;
-  border-radius: 50%;
-
-  & *[fill^='#'] {
-    fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
-  }
-  &:hover {
-    background-color: ${({ theme }) => theme.color['Opacity/Hover']};
-  }
-
-  &:active {
-    background-color: ${({ theme }) => theme.color['Opacity/Press']};
-  }
-`;
-
-export interface RowActionProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface RowActionProps extends React.HTMLAttributes<HTMLButtonElement> {
   dimension?: Dimension;
 }
 
-export const RowAction = React.forwardRef<HTMLDivElement, RowActionProps>(({ dimension = 'm', ...props }, ref) => {
+export const RowAction = React.forwardRef<HTMLButtonElement, RowActionProps>(({ dimension = 'm', ...props }, ref) => {
   return (
-    <Action ref={ref} dimension={dimension} {...props}>
+    <IconPlacement
+      ref={ref}
+      dimension={dimension === 's' || dimension === 'm' ? 'mBig' : 'lBig'}
+      highlightFocus={false}
+      {...props}
+    >
       {props.children}
-    </Action>
+    </IconPlacement>
   );
 });
