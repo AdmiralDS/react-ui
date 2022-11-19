@@ -161,9 +161,6 @@ const IconPlacementVariantsTemplate: ComponentStory<typeof IconPlacement> = (arg
         иконка Close в компонентах Modal, Toast, Hint и др.
       </T>
       <CloseIconPlacementButton {...args} />
-      <T font="Body/Body 1 Long" as="div">
-        иконка Chevrone в компонентах Select Tree, Calendar и др.
-      </T>
     </WrapperVertical>
   );
 };
