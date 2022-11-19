@@ -27,6 +27,7 @@ import {
 } from '#src/components/input/FileInput/style';
 import { Tooltip } from '#src/components/Tooltip';
 import { checkOverflow } from '#src/components/common/utils/checkOverflow';
+import { IconPlacement } from '#src/components/IconPlacement';
 
 export type Status = 'Uploaded' | 'Loading' | 'Error' | 'Queue';
 
@@ -190,36 +191,8 @@ const StyledSpinner = styled(Spinner)<{ dimension?: FileInputDimension }>`
   ${functionalItemSizeMixin}
 `;
 
-const hoveredCloseIconCss = css`
-  &:hover {
-    &:not(:disabled) {
-      &::after {
-        content: '';
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        border-radius: 50%;
-        width: calc(100% + 8px);
-        height: calc(100% + 8px);
-        background-color: ${({ theme }) => theme.color['Opacity/Hover']};
-      }
-    }
-  }
-`;
-
-const CloseIcon = styled.div<{ status?: Status; dimension?: FileInputDimension }>`
-  position: relative;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  ${functionalItemSizeMixin}
-
-  & *[fill^='#'] {
-    fill: ${(p) => p.theme.color[getColor(p.status)]};
-  }
-  ${(p) => (p.status === 'Queue' ? disabledStyles : hoveredCloseIconCss)};
+const CloseButton = styled(IconPlacement)`
+  margin: 0;
 `;
 
 export const ErrorBlock = styled.div<{ status?: Status; dimension?: FileInputDimension }>`
@@ -380,9 +353,13 @@ export const FileItem = forwardRef<HTMLDivElement, FileItemProps>(
           </FileInfoBlock>
           <FunctionalBlock>
             {status === 'Loading' && <StyledSpinner dimension={dimension} />}
-            <CloseIcon dimension={dimension} status={status} onClick={handleCloseIconClick}>
+            <CloseButton
+              dimension={dimension === 'xl' ? 'lSmall' : 'mSmall'}
+              disabled={status === 'Queue'}
+              onClick={handleCloseIconClick}
+            >
               <CloseOutline />
-            </CloseIcon>
+            </CloseButton>
           </FunctionalBlock>
         </PreviewWrapper>
         {errorMessage && status === 'Error' && <ErrorBlock status={status}>{errorMessage}</ErrorBlock>}
