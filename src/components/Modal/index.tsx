@@ -9,6 +9,7 @@ import { LIGHT_THEME } from '#src/components/themes';
 import ModalManager from './manager';
 import { largeGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { checkOverflow } from '#src/components/common/utils/checkOverflow';
+import { IconPlacement } from '#src/components/IconPlacement';
 
 type Dimension = 'xl' | 'l' | 'm' | 's';
 
@@ -114,51 +115,10 @@ const ModalComponent = styled.div<{ dimension: Dimension; mobile?: boolean }>`
     }
   `}
 `;
-
-const CloseButton = styled.button<{ mobile?: boolean }>`
+const CloseButton = styled(IconPlacement)<{ mobile?: boolean }>`
   position: absolute;
-  top: 20px;
-  right: ${({ mobile }) => (mobile ? 16 : 24)}px;
-  flex-shrink: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-sizing: border-box;
-  cursor: pointer;
-  outline: none;
-  border: 0;
-  padding: 0;
-  width: 24px;
-  height: 24px;
-  background: transparent;
-  -webkit-tap-highlight-color: transparent;
-  &:before {
-    content: '';
-    position: absolute;
-    top: -4px;
-    bottom: -4px;
-    left: -4px;
-    right: -4px;
-    background: transparent;
-    border-radius: 50%;
-  }
-
-  & *[fill^='#'] {
-    fill: ${(p) => p.theme.color['Neutral/Neutral 50']};
-  }
-
-  &:hover,
-  &:focus {
-    &:before {
-      background: ${(p) => p.theme.color['Opacity/Hover']};
-    }
-  }
-
-  &:active {
-    &:before {
-      background: ${(p) => p.theme.color['Opacity/Press']};
-    }
-  }
+  top: 16px;
+  right: ${({ mobile }) => (mobile ? 12 : 20)}px;
 `;
 
 export const emptyOverlayStyledCss = css``;
@@ -343,8 +303,13 @@ export const Modal = React.forwardRef<HTMLDivElement, ModalProps>(
         >
           {children}
           {displayCloseIcon && (
-            <CloseButton aria-label={closeBtnAriaLabel} mobile={mobile} onClick={handleCloseBtnClick}>
-              <CloseOutline width={24} height={24} aria-hidden />
+            <CloseButton
+              dimension="lSmall"
+              aria-label={closeBtnAriaLabel}
+              mobile={mobile}
+              onClick={handleCloseBtnClick}
+            >
+              <CloseOutline aria-hidden />
             </CloseButton>
           )}
         </ModalComponent>
