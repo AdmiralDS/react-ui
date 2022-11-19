@@ -66,17 +66,9 @@ const Chevron = styled(ChevronRightOutline)<{ $isOpened?: boolean; dimension?: D
   transform: ${(p) => (p.$isOpened ? 'rotate(90deg)' : 'rotate(0deg)')};
 `;
 
-const emptyIconPlacement = css`
-  pointer-events: none;
-  tab-index: -1;
-`;
-
-const StyledIconPlacement = styled(IconPlacement)<{ isEmpty?: boolean }>`
+const StyledIconPlacement = styled(IconPlacement)`
   flex-shrink: 0;
-  margin-top: 0;
-  margin-left: 0;
-  margin-right: 16px;
-  ${(p) => p.isEmpty && emptyIconPlacement}
+  margin: 0 16px 0 0;
 `;
 
 export const backgroundColor = css<{ selected?: boolean; hovered?: boolean }>`
@@ -182,18 +174,18 @@ export const TreeNode = ({
       hovered={hovered}
       disabled={disabled}
     >
-      <StyledIconPlacement
-        ref={chevronRef}
-        isEmpty={!hasChildren}
-        dimension={dimension === 'm' ? 'lBig' : 'mBig'}
-        highlightFocus={false}
-        onClick={onToggleExpand}
-        onMouseMove={handleChevronMouseMove}
-        onMouseLeave={handleChevronMouseLeave}
-      >
-        {hasChildren && <Chevron $isOpened={expanded} dimension={dimension} aria-hidden />}
-      </StyledIconPlacement>
-
+      {hasChildren && (
+        <StyledIconPlacement
+          ref={chevronRef}
+          dimension={dimension === 'm' ? 'lBig' : 'mBig'}
+          highlightFocus={false}
+          onClick={onToggleExpand}
+          onMouseMove={handleChevronMouseMove}
+          onMouseLeave={handleChevronMouseLeave}
+        >
+          <Chevron $isOpened={expanded} dimension={dimension} aria-hidden />
+        </StyledIconPlacement>
+      )}
       {checkboxVisible && (
         <StyledCheckbox
           hovered={!mouseOnChevron && hovered}
