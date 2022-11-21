@@ -47,6 +47,10 @@ Object {
   cursor: pointer;
 }
 
+.c0 > * {
+  pointer-events: none;
+}
+
 .c0:disabled {
   cursor: default;
   pointer-events: none;
@@ -141,6 +145,10 @@ Object {
   border-radius: 4px;
   overflow: visible;
   cursor: pointer;
+}
+
+.c0 > * {
+  pointer-events: none;
 }
 
 .c0:disabled {

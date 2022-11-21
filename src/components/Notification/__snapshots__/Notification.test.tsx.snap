@@ -106,6 +106,10 @@ Object {
   cursor: pointer;
 }
 
+.c7 > * {
+  pointer-events: none;
+}
+
 .c7:disabled {
   cursor: default;
   pointer-events: none;
@@ -257,7 +261,9 @@ Object {
             aria-hidden="true"
             class="c11"
           >
-            <div />
+            <div
+              aria-hidden="true"
+            />
           </div>
         </button>
       </div>
@@ -364,6 +370,10 @@ Object {
   border-radius: 4px;
   overflow: visible;
   cursor: pointer;
+}
+
+.c7 > * {
+  pointer-events: none;
 }
 
 .c7:disabled {
@@ -516,7 +526,9 @@ Object {
           aria-hidden="true"
           class="c11"
         >
-          <div />
+          <div
+            aria-hidden="true"
+          />
         </div>
       </button>
     </div>
