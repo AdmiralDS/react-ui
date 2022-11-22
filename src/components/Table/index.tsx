@@ -5,7 +5,7 @@ import { ThemeContext } from 'styled-components';
 import { LIGHT_THEME } from '#src/components/themes';
 import { getScrollbarSize } from '#src/components/common/dom/scrollbarUtil';
 import { GroupRow } from '#src/components/Table/Row/GroupRow';
-import { RegularRow } from '#src/components/Table/Row/RerularRow';
+import { RegularRow } from '#src/components/Table/Row/RegularRow';
 import { RowWrapper } from '#src/components/Table/Row/RowWrapper';
 
 import { RowWidthResizer } from './RowWidthResizer';
