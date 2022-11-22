@@ -3,7 +3,7 @@ import {
   CheckboxCell,
   ExpandCell,
   ExpandIcon,
-  ExpandIconWrapper,
+  ExpandIconPlacement,
   Filler,
   StickyWrapper,
 } from '#src/components/Table/style';
@@ -59,14 +59,16 @@ export const RegularRow = ({
           {displayRowExpansionColumn && (
             <ExpandCell dimension={dimension}>
               {row.expandedRowRender && (
-                <ExpandIconWrapper>
-                  <ExpandIcon
-                    $isOpen={row.expanded}
-                    data-disabled={row.disabled ? true : undefined}
-                    onClick={() => onRowExpansionChange?.(row.id)}
-                    aria-hidden
-                  />
-                </ExpandIconWrapper>
+                <ExpandIconPlacement
+                  style={{ margin: 0, flexShrink: 0 }}
+                  dimension={dimension === 's' || dimension === 'm' ? 'mBig' : 'lBig'}
+                  disabled={row.disabled ? true : undefined}
+                  data-disabled={row.disabled ? true : undefined}
+                  highlightFocus={false}
+                  onClick={() => onRowExpansionChange?.(row.id)}
+                >
+                  <ExpandIcon $isOpened={row.expanded} aria-hidden />
+                </ExpandIconPlacement>
               )}
             </ExpandCell>
           )}

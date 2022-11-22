@@ -182,22 +182,11 @@ export const OverflowMenuContainer = styled.div<{ isHidden?: boolean; dimension?
     height: ${dimension === 'l' ? OVERFLOW_MENU_CONTAINER_SIZE_L : OVERFLOW_MENU_CONTAINER_SIZE_M};
   `}
 `;
-export const StyledOverflowMenu = styled(OverflowMenu)<{
-  isActive: boolean;
-  isHidden?: boolean;
-  dimension?: Dimension;
-}>`
-  margin: ${({ dimension }) => `${dimension === 'l' ? 12 : 10}px`};
+export const StyledOverflowMenu = styled(OverflowMenu)<{ isActive: boolean; dimension?: Dimension }>`
+  margin: ${(p) => (p.dimension === 'l' ? OVERFLOW_MENU_MARGIN_L : OVERFLOW_MENU_MARGIN_M)};
   &:focus-visible {
-    &:before {
-      ${({ dimension }) => `
-        top: ${dimension === 'l' ? FOCUS_BORDER_OFFSET_L : FOCUS_BORDER_OFFSET_M};
-        left: ${dimension === 'l' ? FOCUS_BORDER_OFFSET_L : FOCUS_BORDER_OFFSET_M};
-        right: ${dimension === 'l' ? FOCUS_BORDER_OFFSET_L : FOCUS_BORDER_OFFSET_M};
-        bottom: ${dimension === 'l' ? FOCUS_BORDER_OFFSET_L : FOCUS_BORDER_OFFSET_M};
-      `}
-      border-radius: 0;
-    }
+    outline-offset: ${(p) => (p.dimension === 'l' ? FOCUS_BORDER_OFFSET_L : FOCUS_BORDER_OFFSET_M)};
+    border-radius: 0;
   }
 
   & svg {

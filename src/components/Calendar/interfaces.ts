@@ -35,10 +35,10 @@ export interface CalendarPropType extends IDateSelectionProps {
   /** Контейнер, в котором при необходимости можно отрисовать тултип через ReactDOM.createPortal */
   tooltipContainer?: Element | null;
 
-  // показать экран выбора дат (месяц/год/день)
+  /** показать экран выбора дат (месяц/год/день) */
   currentActiveView?: ViewScreenType | null;
 
-  // приоритет экрана currentActiveView
+  /** приоритет экрана currentActiveView */
   currentActiveViewImportant?: boolean;
 
   /** Коллбэк срабатывает при клике на стрелках переключения дат */
@@ -50,16 +50,16 @@ export interface CalendarPropType extends IDateSelectionProps {
   /** Коллбэк при изменении года */
   onYearSelect?: (date: Date | Array<Date | null> | null) => void;
 
-  // срабатывает при открытии экрана выбора года
+  /** срабатывает при открытии экрана выбора года */
   onViewEnter?: (view: ViewScreenType) => void;
 
-  // срабатывает при открытии экрана выбора месяца
+  /** срабатывает при открытии экрана выбора месяца */
   onViewLeave?: (view: ViewScreenType) => void;
 
-  // выбор вкладки - Месяц
+  /** выбор вкладки - Месяц */
   onViewMonthSelect?: () => void;
 
-  // выбор вкладки - Год
+  /** выбор вкладки - Год */
   onViewYearSelect?: () => void;
 
   /** Коллбэк выбора даты, срабатывает при клике на дне (в режиме диапазона date - это массив из двух дат) */

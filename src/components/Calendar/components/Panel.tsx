@@ -48,9 +48,9 @@ interface IPanelProps {
 
   onMonthsViewHide(event: MouseEvent<HTMLDivElement>): void;
 
-  onNext(event: MouseEvent<HTMLDivElement>): void;
+  onNext(event: MouseEvent<HTMLButtonElement>): void;
 
-  onPrevious(event: MouseEvent<HTMLDivElement>): void;
+  onPrevious(event: MouseEvent<HTMLButtonElement>): void;
 }
 
 export const Panel: FC<IPanelProps> = ({

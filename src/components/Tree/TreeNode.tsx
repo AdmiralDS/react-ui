@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 import { typography } from '#src/components/Typography';
 import { Checkbox } from '#src/components/Checkbox';
 import { ReactComponent as ChevronRightOutline } from '@admiral-ds/icons/build/system/ChevronRightOutline.svg';
+import { IconPlacement } from '#src/components/IconPlacement';
 
 export interface RenderOptionProps {
   /** Размер компонента */
@@ -65,36 +66,9 @@ const Chevron = styled(ChevronRightOutline)<{ $isOpened?: boolean; dimension?: D
   transform: ${(p) => (p.$isOpened ? 'rotate(90deg)' : 'rotate(0deg)')};
 `;
 
-const hoveredCss = css`
-  &:hover {
-    &::after {
-      content: '';
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      border-radius: 50%;
-      width: calc(100% + 12px);
-      height: calc(100% + 12px);
-      background-color: ${(p) => p.theme.color['Opacity/Hover']};
-    }
-  }
-`;
-
-const ChevronWrapper = styled.div<{
-  dimension?: Dimension;
-  empty?: boolean;
-}>`
+const StyledIconPlacement = styled(IconPlacement)`
   flex-shrink: 0;
-  margin-right: 16px;
-  box-sizing: border-box;
-  cursor: pointer;
-  position: relative;
-
-  width: ${(p) => (p.dimension === 'm' ? `${ICON_SIZE_M}px` : `${ICON_SIZE_S}px`)};
-  height: ${(p) => (p.dimension === 'm' ? `${ICON_SIZE_M}px` : `${ICON_SIZE_S}px`)};
-
-  ${({ empty }) => !empty && hoveredCss}
+  margin: 0 16px 0 0;
 `;
 
 export const backgroundColor = css<{ selected?: boolean; hovered?: boolean }>`
@@ -167,7 +141,7 @@ export const TreeNode = ({
 }: TreeNodeProps) => {
   const Icon: React.FunctionComponent<React.SVGProps<SVGSVGElement>> | null = icon || null;
   const [mouseOnChevron, setMouseOnChevron] = useState<boolean>(false);
-  const chevronRef = useRef<HTMLDivElement | null>(null);
+  const chevronRef = useRef<HTMLButtonElement | null>(null);
 
   const handleMouseMove = () => {
     onHover?.();
@@ -200,17 +174,18 @@ export const TreeNode = ({
       hovered={hovered}
       disabled={disabled}
     >
-      <ChevronWrapper
-        ref={chevronRef}
-        empty={!hasChildren}
-        dimension={dimension}
-        onClick={onToggleExpand}
-        onMouseMove={handleChevronMouseMove}
-        onMouseLeave={handleChevronMouseLeave}
-      >
-        {hasChildren && <Chevron $isOpened={expanded} dimension={dimension} />}
-      </ChevronWrapper>
-
+      {hasChildren && (
+        <StyledIconPlacement
+          ref={chevronRef}
+          dimension={dimension === 'm' ? 'lBig' : 'mBig'}
+          highlightFocus={false}
+          onClick={onToggleExpand}
+          onMouseMove={handleChevronMouseMove}
+          onMouseLeave={handleChevronMouseLeave}
+        >
+          <Chevron $isOpened={expanded} dimension={dimension} aria-hidden />
+        </StyledIconPlacement>
+      )}
       {checkboxVisible && (
         <StyledCheckbox
           hovered={!mouseOnChevron && hovered}

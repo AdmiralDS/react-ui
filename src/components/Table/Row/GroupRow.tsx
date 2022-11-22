@@ -2,7 +2,7 @@ import {
   ExpandCell,
   Cell,
   ExpandIcon,
-  ExpandIconWrapper,
+  ExpandIconPlacement,
   CheckboxCell,
   GroupTextContent,
   StickyWrapper,
@@ -49,14 +49,17 @@ export const GroupRow = ({
     <>
       <StickyWrapper>
         <ExpandCell dimension={dimension}>
-          <ExpandIconWrapper disabled={row.disabled || row.groupRows?.length === 0}>
+          <ExpandIconPlacement
+            dimension={dimension === 's' || dimension === 'm' ? 'mBig' : 'lBig'}
+            data-disabled={row.disabled || row.groupRows?.length === 0 ? true : undefined}
+            highlightFocus={false}
+            onClick={handleExpandClick}
+          >
             <ExpandIcon
-              $isOpen={row.expanded}
-              data-disabled={row.disabled || row.groupRows?.length === 0 ? true : undefined}
-              onClick={handleExpandClick}
+              $isOpened={row.expanded}
               aria-hidden
             />
-          </ExpandIconWrapper>
+          </ExpandIconPlacement>
         </ExpandCell>
         {displayRowSelectionColumn && (
           <CheckboxCell dimension={dimension} className="td_checkbox">

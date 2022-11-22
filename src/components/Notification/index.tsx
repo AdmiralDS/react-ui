@@ -1,6 +1,5 @@
 import React, { HTMLAttributes } from 'react';
 import styled, { css } from 'styled-components';
-import { ReactComponent as CloseOutline } from '@admiral-ds/icons/build/service/CloseOutline.svg';
 import { ReactComponent as InfoIcon } from '@admiral-ds/icons/build/service/InfoSolid.svg';
 import { ReactComponent as WarningIcon } from '@admiral-ds/icons/build/service/ErrorSolid.svg';
 import { ReactComponent as SuccessIcon } from '@admiral-ds/icons/build/service/CheckSolid.svg';
@@ -10,6 +9,7 @@ import { LIGHT_THEME as DEFAULT_THEME } from '#src/components/themes';
 import { typography } from '#src/components/Typography';
 import { Link } from '#src/components/Link';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
+import { CloseIconPlacementButton } from '#src/components/IconPlacement';
 
 type Status = 'info' | 'error' | 'success' | 'warning';
 
@@ -93,34 +93,16 @@ const CustomBody = styled.div`
   color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
 `;
 
-const Close = styled.div`
+const CloseButton = styled(CloseIconPlacementButton)`
   position: absolute;
-  top: 14px;
-  right: 12px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  width: 20px;
-  height: 20px;
-
-  & svg {
-    width: 20px;
-    height: 20px;
-    & *[fill^='#'] {
-      fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
-    }
-  }
-  & svg:hover *[fill^='#'] {
-    fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
-  }
+  top: 10px;
+  right: 8px;
 `;
 
 const IconWrapper = styled.div<{ status?: Status }>`
   position: absolute;
-  top: 11px;
-  left: 15px;
+  top: 12px;
+  left: 16px;
   width: 24px;
   height: 24px;
   & svg {
@@ -181,11 +163,7 @@ export const Notification = ({
         {linkText && <LinkWrapper href={href}>{linkText || href}</LinkWrapper>}
       </Content>
 
-      {isClosable && (
-        <Close onClick={onClose} tabIndex={0}>
-          <CloseOutline />
-        </Close>
-      )}
+      {isClosable && <CloseButton dimension="mSmall" highlightFocus={false} onClick={onClose} />}
     </NotificationWrapper>
   );
 };
