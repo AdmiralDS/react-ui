@@ -8,7 +8,11 @@ export function smallGroupBorderRadius(shape: Shape): string {
       return '2px';
     case 'Border radius 4':
       return '4px';
+    case 'Border radius 6':
+      return '4px';
     case 'Border radius 8':
+      return '4px';
+    case 'Border radius 10':
       return '4px';
     default:
       return '4px';
@@ -23,8 +27,12 @@ export function mediumGroupBorderRadius(shape: Shape): string {
       return '2px';
     case 'Border radius 4':
       return '4px';
+    case 'Border radius 6':
+      return '6px';
     case 'Border radius 8':
       return '8px';
+    case 'Border radius 10':
+      return '10px';
     default:
       return '4px';
   }
@@ -38,8 +46,12 @@ export function largeGroupBorderRadius(shape: Shape): string {
       return '4px';
     case 'Border radius 4':
       return '8px';
+    case 'Border radius 6':
+      return '12px';
     case 'Border radius 8':
       return '16px';
+    case 'Border radius 10':
+      return '20px';
     default:
       return '8px';
   }
