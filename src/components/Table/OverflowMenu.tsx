@@ -1,6 +1,5 @@
 import * as React from 'react';
 import type { TableProps } from '#src/components/Table';
-import { getScrollbarSize } from '#src/components/common/dom/scrollbarUtil';
 
 import { OverflowMenuWrapper } from './style';
 
@@ -9,16 +8,17 @@ interface OverflowMenuProps {
   tableWidth: number;
   row: any;
   verticalScroll: boolean;
+  scrollbar: number;
 }
 
-export const OverflowMenu: React.FC<OverflowMenuProps> = ({ tableWidth, row, dimension, verticalScroll }) => {
+export const OverflowMenu: React.FC<OverflowMenuProps> = ({
+  tableWidth,
+  row,
+  dimension,
+  verticalScroll,
+  scrollbar,
+}) => {
   const oveflowMenuRef = React.useRef<HTMLDivElement>(null);
-  const [scrollbar, setScrollbarSize] = React.useState(16);
-
-  React.useEffect(() => {
-    const size = getScrollbarSize();
-    setScrollbarSize(size);
-  }, []);
 
   // впоследствии будет удалено
   const handleMenuOpen = () => {
