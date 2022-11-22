@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { ButtonHTMLAttributes } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { smallGroupBorderRadius } from '#src/components/themes/borderRadius';
+import { ReactComponent as CloseOutline } from '@admiral-ds/icons/build/service/CloseOutline.svg';
 
 const IconSizeL = 24;
 const IconSizeM = 20;
@@ -10,6 +11,7 @@ const HighlighterOffsetBig = 6;
 const HighlighterOffsetSmall = 4;
 
 export type IconPlacementDimension = 'lBig' | 'lSmall' | 'mBig' | 'mSmall' | 's';
+export type IconPlacementAppearance = 'primary' | 'secondary';
 
 function getIconSize(dimension?: IconPlacementDimension) {
   switch (dimension) {
@@ -49,14 +51,37 @@ export interface IconPlacementProps extends ButtonHTMLAttributes<HTMLButtonEleme
   dimension?: IconPlacementDimension;
   /** Отключение кнопки */
   disabled?: boolean;
+  /** Позволяет управлять подсветкой в состоянии фокуса, по умолчанию состояние фокуса подсвечивается */
+  highlightFocus?: boolean;
+  /** Внешний вид кнопки */
+  appearance?: IconPlacementAppearance | { iconColor: string };
 }
 
-const IconPlacementContent = styled.div<{ dimension?: IconPlacementDimension }>`
+const IconColor = css<{ iconColor: IconPlacementAppearance | string }>`
+  & *[fill^='#'] {
+    fill: ${(p) => {
+      switch (p.iconColor) {
+        case 'primary':
+          return p.theme.color['Primary/Primary 60 Main'];
+        case 'secondary':
+          return p.theme.color['Neutral/Neutral 50'];
+        default:
+          return p.iconColor;
+      }
+    }};
+  }
+`;
+
+const IconPlacementContent = styled.div<{
+  dimension?: IconPlacementDimension;
+  iconColor: IconPlacementAppearance | string;
+}>`
+  position: absolute;
+  top: 0;
+  left: 0;
   height: 100%;
 
-  & *[fill^='#'] {
-    fill: ${(p) => p.theme.color['Neutral/Neutral 50']};
-  }
+  ${IconColor}
 
   & > svg {
     height: ${(p) => getIconSize(p.dimension)}px;
@@ -76,7 +101,7 @@ const ActivityHighlighter = styled.div<{ dimension?: IconPlacementDimension }>`
   transform: translate(-50%, -50%);
 `;
 
-const IconPlacementButton = styled.button<{ dimension?: IconPlacementDimension }>`
+const IconPlacementButton = styled.button<{ dimension?: IconPlacementDimension; highlightFocus: boolean }>`
   position: relative;
   padding: 0;
   margin: ${(p) => getHighlighterOffset(p.dimension)}px;
@@ -90,6 +115,9 @@ const IconPlacementButton = styled.button<{ dimension?: IconPlacementDimension }
   overflow: visible;
 
   cursor: pointer;
+  > * {
+    pointer-events: none;
+  }
 
   &:disabled {
     cursor: default;
@@ -106,7 +134,7 @@ const IconPlacementButton = styled.button<{ dimension?: IconPlacementDimension }
 
   &:focus {
     > ${ActivityHighlighter} {
-      background-color: ${({ theme }) => theme.color['Opacity/Focus']};
+      background-color: ${(p) => (p.highlightFocus ? p.theme.color['Opacity/Focus'] : 'transparent')};
     }
   }
   &:hover {
@@ -127,14 +155,38 @@ const IconPlacementButton = styled.button<{ dimension?: IconPlacementDimension }
 `;
 
 export const IconPlacement = React.forwardRef<HTMLButtonElement, IconPlacementProps>(
-  ({ type = 'button', dimension = 'lBig', disabled = false, children, ...props }, ref) => {
+  (
+    { type = 'button', dimension = 'lBig', disabled = false, highlightFocus = true, appearance, children, ...props },
+    ref,
+  ) => {
+    const iconColor: IconPlacementAppearance | string =
+      typeof appearance === 'object'
+        ? appearance.iconColor
+          ? appearance.iconColor
+          : 'secondary'
+        : (appearance as IconPlacementAppearance);
     return (
-      <IconPlacementButton ref={ref} type={type} dimension={dimension} disabled={disabled} {...props}>
+      <IconPlacementButton
+        ref={ref}
+        type={type}
+        dimension={dimension}
+        disabled={disabled}
+        highlightFocus={highlightFocus}
+        {...props}
+      >
         <ActivityHighlighter dimension={dimension} aria-hidden />
-        <IconPlacementContent dimension={dimension} aria-hidden>
+        <IconPlacementContent dimension={dimension} iconColor={iconColor} aria-hidden>
           {children}
         </IconPlacementContent>
       </IconPlacementButton>
     );
   },
 );
+
+export const CloseIconPlacementButton = React.forwardRef<HTMLButtonElement, IconPlacementProps>(({ ...props }, ref) => {
+  return (
+    <IconPlacement ref={ref} {...props}>
+      <CloseOutline aria-hidden />
+    </IconPlacement>
+  );
+});

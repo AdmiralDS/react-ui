@@ -62,6 +62,83 @@ Object {
   fill: #0062FF;
 }
 
+.c11 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+}
+
+.c11 > svg {
+  height: 20px;
+  width: 20px;
+}
+
+.c10 {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: transparent;
+  pointer-events: none;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+}
+
+.c7 {
+  position: relative;
+  padding: 0;
+  margin: 4px;
+  box-sizing: border-box;
+  border: none;
+  background-color: transparent;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  height: 20px;
+  width: 20px;
+  border-radius: 4px;
+  overflow: visible;
+  cursor: pointer;
+}
+
+.c7 > * {
+  pointer-events: none;
+}
+
+.c7:disabled {
+  cursor: default;
+  pointer-events: none;
+}
+
+.c7:disabled *[fill^='#'] {
+  fill: #B0B5BD;
+}
+
+.c7:focus-visible {
+  outline-offset: 2px;
+  outline: #0062FF solid 2px;
+}
+
+.c7:focus > .c9 {
+  background-color: transparent;
+}
+
+.c7:hover > .c9 {
+  background-color: #0000000D;
+}
+
+.c7:active > .c9 {
+  background-color: #0000001F;
+}
+
+.c7:focus-visible > .c9 {
+  background-color: transparent;
+}
+
 .c0 {
   overflow: hidden;
   position: relative;
@@ -106,44 +183,16 @@ Object {
   color: #23262D;
 }
 
-.c7 {
+.c8 {
   position: absolute;
-  top: 14px;
-  right: 12px;
-  cursor: pointer;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  width: 20px;
-  height: 20px;
-}
-
-.c7 svg {
-  width: 20px;
-  height: 20px;
-}
-
-.c7 svg *[fill^='#'] {
-  fill: #717681;
-}
-
-.c7 svg:hover *[fill^='#'] {
-  fill: #717681;
+  top: 10px;
+  right: 8px;
 }
 
 .c1 {
   position: absolute;
-  top: 11px;
-  left: 15px;
+  top: 12px;
+  left: 16px;
   width: 24px;
   height: 24px;
 }
@@ -199,12 +248,23 @@ Object {
             Link
           </a>
         </div>
-        <div
-          class="c7"
-          tabindex="0"
+        <button
+          class="c7 c8"
+          type="button"
         >
-          <div />
-        </div>
+          <div
+            aria-hidden="true"
+            class="c9 c10"
+          />
+          <div
+            aria-hidden="true"
+            class="c11"
+          >
+            <div
+              aria-hidden="true"
+            />
+          </div>
+        </button>
       </div>
     </div>
   </body>,
@@ -267,6 +327,83 @@ Object {
   fill: #0062FF;
 }
 
+.c11 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+}
+
+.c11 > svg {
+  height: 20px;
+  width: 20px;
+}
+
+.c10 {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: transparent;
+  pointer-events: none;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+}
+
+.c7 {
+  position: relative;
+  padding: 0;
+  margin: 4px;
+  box-sizing: border-box;
+  border: none;
+  background-color: transparent;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  height: 20px;
+  width: 20px;
+  border-radius: 4px;
+  overflow: visible;
+  cursor: pointer;
+}
+
+.c7 > * {
+  pointer-events: none;
+}
+
+.c7:disabled {
+  cursor: default;
+  pointer-events: none;
+}
+
+.c7:disabled *[fill^='#'] {
+  fill: #B0B5BD;
+}
+
+.c7:focus-visible {
+  outline-offset: 2px;
+  outline: #0062FF solid 2px;
+}
+
+.c7:focus > .c9 {
+  background-color: transparent;
+}
+
+.c7:hover > .c9 {
+  background-color: #0000000D;
+}
+
+.c7:active > .c9 {
+  background-color: #0000001F;
+}
+
+.c7:focus-visible > .c9 {
+  background-color: transparent;
+}
+
 .c0 {
   overflow: hidden;
   position: relative;
@@ -311,44 +448,16 @@ Object {
   color: #23262D;
 }
 
-.c7 {
+.c8 {
   position: absolute;
-  top: 14px;
-  right: 12px;
-  cursor: pointer;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  width: 20px;
-  height: 20px;
-}
-
-.c7 svg {
-  width: 20px;
-  height: 20px;
-}
-
-.c7 svg *[fill^='#'] {
-  fill: #717681;
-}
-
-.c7 svg:hover *[fill^='#'] {
-  fill: #717681;
+  top: 10px;
+  right: 8px;
 }
 
 .c1 {
   position: absolute;
-  top: 11px;
-  left: 15px;
+  top: 12px;
+  left: 16px;
   width: 24px;
   height: 24px;
 }
@@ -403,12 +512,23 @@ Object {
           Link
         </a>
       </div>
-      <div
-        class="c7"
-        tabindex="0"
+      <button
+        class="c7 c8"
+        type="button"
       >
-        <div />
-      </div>
+        <div
+          aria-hidden="true"
+          class="c9 c10"
+        />
+        <div
+          aria-hidden="true"
+          class="c11"
+        >
+          <div
+            aria-hidden="true"
+          />
+        </div>
+      </button>
     </div>
   </div>,
   "debug": [Function],

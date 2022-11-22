@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 import { ReactComponent as ArrowUpOutline } from '@admiral-ds/icons/build/system/ArrowUpOutline.svg';
+import { ReactComponent as ChevronDownOutline } from '@admiral-ds/icons/build/system/ChevronDownOutline.svg';
 import { OpenStatusButton } from '#src/components/OpenStatusButton';
 import type { TableProps } from '#src/components/Table';
 
@@ -16,6 +17,7 @@ import {
   singleLineTitle,
   underlineRow,
 } from './mixins';
+import { IconPlacement } from '#src/components/IconPlacement';
 
 export const TableContainer = styled.div`
   position: relative;
@@ -137,16 +139,14 @@ export const ExpandIconWrapper = styled.div<{ disabled?: boolean }>`
   ${({ disabled }) => disabled && 'pointer-events: none;'}
 `;
 
-export const ExpandIcon = styled(OpenStatusButton)`
-  display: flex;
+export const ExpandIcon = styled(ChevronDownOutline)<{ $isOpened?: boolean }>`
+  transition: transform 0.3s ease-in-out;
+  transform: rotate(${(p) => (p.$isOpened ? 180 : 0)}deg);
+`;
+
+export const ExpandIconPlacement = styled(IconPlacement)`
+  margin: 0;
   flex-shrink: 0;
-  width: 100%;
-  height: 100%;
-  &&:hover {
-    & *[fill^='#'] {
-      fill: ${(props) => props.theme.color['Neutral/Neutral 50']};
-    }
-  }
 `;
 
 export const SortIconWrapper = styled.div`

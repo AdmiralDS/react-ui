@@ -124,7 +124,12 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
     const hiddenItems = items.filter((_, index) => !visibilityMap[index]);
     return hiddenItems.length ? (
       <OverflowItem>
-        <MenuButton options={hiddenItems} dimension="s" dropContainerCssMixin={dropContainerCssMixin} aria-label="" />
+        <MenuButton
+          options={hiddenItems}
+          dimension={dimension === 'l' ? 'm' : 's'}
+          dropContainerCssMixin={dropContainerCssMixin}
+          aria-label=""
+        />
         <Separator width={iconSize} height={iconSize} aria-hidden />
       </OverflowItem>
     ) : null;
