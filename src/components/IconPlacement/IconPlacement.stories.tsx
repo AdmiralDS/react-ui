@@ -47,6 +47,10 @@ export default {
     highlightFocus: {
       control: { type: 'boolean' },
     },
+    appearance: {
+      options: ['primary', 'secondary'],
+      control: { type: 'radio' },
+    },
   },
 } as ComponentMeta<typeof IconPlacement>;
 
@@ -67,7 +71,7 @@ const WrapperVertical = styled.div`
 `;
 
 const handleClick = () => console.log('IconPlacement clicked');
-const IconPlacementDemoTemplate: ComponentStory<typeof IconPlacement> = (args) => {
+const IconPlacementSizesTemplate: ComponentStory<typeof IconPlacement> = (args) => {
   return (
     <WrapperVertical>
       <T font="Body/Body 1 Short" as="div">
@@ -141,6 +145,39 @@ const IconPlacementDemoTemplate: ComponentStory<typeof IconPlacement> = (args) =
   );
 };
 
+const IconPlacementAppearanceTemplate: ComponentStory<typeof IconPlacement> = (args) => {
+  return (
+    <WrapperVertical>
+      <T font="Body/Body 1 Short" as="div">
+        Icon Placement - вспомогательный компонент, обычно используется в составе других компонентов или организмов. По
+        сути это любая иконка с заранее заданными состояниями Default, Hover, Press, Focus, Disable.
+      </T>
+      <Wrapper>
+        <WrapperVertical>
+          <T font="Body/Body 1 Long" as="div">
+            Appearance - Primary
+          </T>
+          <IconPlacement onClick={handleClick} {...args} appearance={'primary'}>
+            <CloseOutline />
+          </IconPlacement>
+          <T font="Body/Body 1 Long" as="div">
+            Appearance - Secondary
+          </T>
+          <IconPlacement onClick={handleClick} {...args} appearance={'secondary'}>
+            <CloseOutline />
+          </IconPlacement>
+          <T font="Body/Body 1 Long" as="div">
+            Appearance - Custom icon color
+          </T>
+          <IconPlacement onClick={handleClick} {...args} appearance={{ iconColor: '#E052BD' }}>
+            <CloseOutline />
+          </IconPlacement>
+        </WrapperVertical>
+      </Wrapper>
+    </WrapperVertical>
+  );
+};
+
 const IconPlacementPlaygroundTemplate: ComponentStory<typeof IconPlacement> = (args) => {
   return (
     <WrapperVertical>
@@ -165,8 +202,11 @@ const IconPlacementVariantsTemplate: ComponentStory<typeof IconPlacement> = (arg
   );
 };
 
-export const IconPlacementDemo = IconPlacementDemoTemplate.bind({});
-IconPlacementDemo.storyName = 'IconPlacement. Размеры';
+export const IconPlacementSizes = IconPlacementSizesTemplate.bind({});
+IconPlacementSizes.storyName = 'IconPlacement. Размеры';
+
+export const IconPlacementAppearance = IconPlacementAppearanceTemplate.bind({});
+IconPlacementAppearance.storyName = 'IconPlacement. Appearance';
 
 export const IconPlacementPlayground = IconPlacementPlaygroundTemplate.bind({});
 IconPlacementPlayground.storyName = 'IconPlacement. Playground';

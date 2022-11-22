@@ -17,7 +17,7 @@ import {
   singleLineTitle,
   underlineRow,
 } from './mixins';
-import {IconPlacement} from "#src/components/IconPlacement";
+import { IconPlacement } from '#src/components/IconPlacement';
 
 export const TableContainer = styled.div`
   position: relative;
