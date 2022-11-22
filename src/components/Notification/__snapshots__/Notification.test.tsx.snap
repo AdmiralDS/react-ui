@@ -63,11 +63,10 @@ Object {
 }
 
 .c11 {
+  position: absolute;
+  top: 0;
+  left: 0;
   height: 100%;
-}
-
-.c11 *[fill^='#'] {
-  fill: #717681;
 }
 
 .c11 > svg {
@@ -329,11 +328,10 @@ Object {
 }
 
 .c11 {
+  position: absolute;
+  top: 0;
+  left: 0;
   height: 100%;
-}
-
-.c11 *[fill^='#'] {
-  fill: #717681;
 }
 
 .c11 > svg {

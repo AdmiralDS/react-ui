@@ -4,11 +4,10 @@ exports[`TabMenu should render default component 1`] = `
 Object {
   "asFragment": [Function],
   "baseElement": .c11 {
+  position: absolute;
+  top: 0;
+  left: 0;
   height: 100%;
-}
-
-.c11 *[fill^='#'] {
-  fill: #717681;
 }
 
 .c11 > svg {
@@ -524,11 +523,10 @@ Object {
     </div>
   </body>,
   "container": .c11 {
+  position: absolute;
+  top: 0;
+  left: 0;
   height: 100%;
-}
-
-.c11 *[fill^='#'] {
-  fill: #717681;
 }
 
 .c11 > svg {

@@ -4,11 +4,10 @@ exports[`OverflowMenu should render component 1`] = `
 Object {
   "asFragment": [Function],
   "baseElement": .c3 {
+  position: absolute;
+  top: 0;
+  left: 0;
   height: 100%;
-}
-
-.c3 *[fill^='#'] {
-  fill: #717681;
 }
 
 .c3 > svg {
@@ -104,11 +103,10 @@ Object {
     </div>
   </body>,
   "container": .c3 {
+  position: absolute;
+  top: 0;
+  left: 0;
   height: 100%;
-}
-
-.c3 *[fill^='#'] {
-  fill: #717681;
 }
 
 .c3 > svg {
