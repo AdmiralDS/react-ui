@@ -365,49 +365,6 @@ export const Table: React.FC<TableProps> = ({
       }, {})
     : {};
 
-  const scrollHeader = (scrollLeft: number) => {
-    if (headerRef.current) headerRef.current.scrollLeft = scrollLeft;
-  };
-
-  const setShadow = (scrollLeft: number) => {
-    if (tableRef.current) {
-      const initial = tableRef.current.getAttribute('data-shadow');
-      if (scrollLeft === 0) {
-        if (initial !== 'false') tableRef.current.setAttribute('data-shadow', 'false');
-      } else {
-        if (initial !== 'true') tableRef.current.setAttribute('data-shadow', 'true');
-      }
-    }
-  };
-
-  const moveOverflowMenu = (scrollLeft: number) => {
-    if (scrollBodyRef.current) {
-      const menus = scrollBodyRef.current.querySelectorAll<HTMLElement>('[data-overflowmenu]');
-      const bodyClientWidth = scrollBodyRef.current?.clientWidth || 0;
-      menus.forEach((menu) => {
-        if (scrollLeft <= headerScrollWidth - bodyClientWidth) {
-          menu.style.marginLeft = `${scrollLeft}px`;
-        } else {
-          menu.style.marginLeft = `${headerScrollWidth - bodyClientWidth}px`;
-        }
-      });
-    }
-  };
-
-  const handleScroll = (e: any) => {
-    if (e.target === scrollBodyRef.current) {
-      requestAnimationFrame(function () {
-        scrollHeader(e.target.scrollLeft);
-        moveOverflowMenu(e.target.scrollLeft);
-      });
-    }
-    if (stickyColumns.length > 0 || displayRowSelectionColumn || displayRowExpansionColumn) {
-      requestAnimationFrame(function () {
-        setShadow(e.target.scrollLeft);
-      });
-    }
-  };
-
   const updateColumnsWidths = () => {
     const newCols = [...columnList].map((col) => {
       return {
@@ -485,11 +442,67 @@ export const Table: React.FC<TableProps> = ({
 
   React.useLayoutEffect(() => {
     const scrollBody = scrollBodyRef.current;
+
+    function scrollHeader(scrollLeft: number) {
+      if (headerRef.current) headerRef.current.scrollLeft = scrollLeft;
+    }
+
+    function moveOverflowMenu(scrollLeft: number) {
+      if (scrollBodyRef.current) {
+        const menus = scrollBodyRef.current.querySelectorAll<HTMLElement>('[data-overflowmenu]');
+        const scrollbarWidth = verticalScroll ? scrollbar : 0;
+
+        menus.forEach((menu) => {
+          if (scrollLeft <= headerScrollWidth - tableWidth + scrollbarWidth) {
+            menu.style.marginLeft = `${scrollLeft}px`;
+          } else {
+            menu.style.marginLeft = `${headerScrollWidth - tableWidth + scrollbarWidth}px`;
+          }
+        });
+      }
+    }
+
+    function setShadow(scrollLeft: number) {
+      if (tableRef.current) {
+        const initial = tableRef.current.getAttribute('data-shadow');
+        if (scrollLeft === 0) {
+          if (initial !== 'false') tableRef.current.setAttribute('data-shadow', 'false');
+        } else {
+          if (initial !== 'true') tableRef.current.setAttribute('data-shadow', 'true');
+        }
+      }
+    }
+
+    function handleScroll(e: any) {
+      if (e.target === scrollBodyRef.current) {
+        requestAnimationFrame(function () {
+          scrollHeader(e.target.scrollLeft);
+          moveOverflowMenu(e.target.scrollLeft);
+        });
+      }
+      if (stickyColumns.length > 0 || displayRowSelectionColumn || displayRowExpansionColumn) {
+        requestAnimationFrame(function () {
+          setShadow(e.target.scrollLeft);
+        });
+      }
+    }
+
     if (scrollBody) {
       scrollBody.addEventListener('scroll', handleScroll);
       return () => scrollBody.removeEventListener('scroll', handleScroll);
     }
-  }, [scrollBodyRef.current, tableWidth, headerScrollWidth]);
+  }, [
+    tableRef.current,
+    headerRef.current,
+    scrollBodyRef.current,
+    stickyColumns,
+    displayRowExpansionColumn,
+    displayRowSelectionColumn,
+    tableWidth,
+    headerScrollWidth,
+    scrollbar,
+    verticalScroll,
+  ]);
 
   const calcGroupCheckStatus = (groupInfo: GroupInfo) => {
     const indeterminate =
