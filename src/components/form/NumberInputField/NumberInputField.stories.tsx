@@ -6,6 +6,7 @@ import { withDesign } from 'storybook-addon-designs';
 import { Theme } from '#src/components/themes';
 import { ThemeProvider } from 'styled-components';
 import { DataAttributesDescription } from '#src/components/form/common';
+import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
 
 export default {
   title: 'Admiral-2.1/Form Field/NumberInputField',
@@ -96,7 +97,7 @@ export default {
       control: { type: 'text' },
     },
     themeBorderKind: {
-      options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
+      options: ALL_BORDER_RADIUS_VALUES,
       control: { type: 'radio' },
     },
     skeleton: {

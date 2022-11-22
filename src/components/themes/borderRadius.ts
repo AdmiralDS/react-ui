@@ -1,4 +1,12 @@
 import { Shape } from '#src/components/themes/common';
+export const ALL_BORDER_RADIUS_VALUES = [
+  'Border radius 0',
+  'Border radius 2',
+  'Border radius 4',
+  'Border radius 6',
+  'Border radius 8',
+  'Border radius 10',
+] as const;
 
 export function smallGroupBorderRadius(shape: Shape): string {
   switch (shape.borderRadiusKind) {

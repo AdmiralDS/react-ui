@@ -4,7 +4,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import styled, { css, ThemeProvider } from 'styled-components';
 import { Theme } from '#src/components/themes';
 import { Color, Shape } from '#src/components/themes/common';
-import { smallGroupBorderRadius } from '#src/components/themes/borderRadius';
+import { smallGroupBorderRadius, ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
 import { DropMenu } from '#src/components/DropMenu';
 import { MenuItem, RenderOptionProps } from '#src/components/Menu/MenuItem';
 import { TooltipHoc } from '#src/components/TooltipHOC';
@@ -31,7 +31,7 @@ export default {
   },
   argTypes: {
     themeBorderKind: {
-      options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
+      options: ALL_BORDER_RADIUS_VALUES,
       control: { type: 'radio' },
     },
   },
