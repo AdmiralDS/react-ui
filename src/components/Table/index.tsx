@@ -694,6 +694,8 @@ export const Table: React.FC<TableProps> = ({
         dimension={dimension}
         style={{ width: col.width || DEFAULT_COLUMN_WIDTH }}
         className="td"
+        data-column={col.name}
+        data-row={row.id}
       >
         {renderCell ? (
           renderCell(row, col.name)
@@ -717,7 +719,6 @@ export const Table: React.FC<TableProps> = ({
         checkboxDimension={checkboxDimension}
         displayRowExpansionColumn={displayRowExpansionColumn}
         displayRowSelectionColumn={displayRowSelectionColumn}
-        renderBodyCell={renderBodyCell}
         onRowExpansionChange={handleExpansionChange}
         onRowSelectionChange={handleCheckboxChange}
         renderCell={renderCell}
