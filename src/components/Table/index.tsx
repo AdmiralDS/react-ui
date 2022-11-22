@@ -402,25 +402,6 @@ export const Table: React.FC<TableProps> = ({
     setScrollbarSize,
   ]);
 
-  React.useLayoutEffect(() => {
-    const body = scrollBodyRef.current;
-    if (body) {
-      const observer = observeRect(body, (rect: any) => {
-        if (body.scrollHeight > body.offsetHeight) {
-          setVerticalScroll(true);
-        } else {
-          setVerticalScroll(false);
-        }
-        setTableWidth(rect.width);
-        setBodyHeight(rect.height);
-      });
-      observer.observe();
-      return () => {
-        observer.unobserve();
-      };
-    }
-  }, [scrollBodyRef.current, setVerticalScroll, setTableWidth, setBodyHeight]);
-
   const replaceWidthToNumber = React.useCallback(
     (width?: string | number): number => {
       const hasNumberWidth = typeof width === 'number';
@@ -489,7 +470,23 @@ export const Table: React.FC<TableProps> = ({
 
     if (scrollBody) {
       scrollBody.addEventListener('scroll', handleScroll);
-      return () => scrollBody.removeEventListener('scroll', handleScroll);
+
+      const observer = observeRect(scrollBody, (rect: any) => {
+        if (scrollBody.scrollHeight > scrollBody.offsetHeight) {
+          setVerticalScroll(true);
+        } else {
+          setVerticalScroll(false);
+        }
+        setTableWidth(rect.width);
+        setBodyHeight(rect.height);
+        moveOverflowMenu(scrollBody.scrollLeft);
+      });
+      observer.observe();
+
+      return () => {
+        scrollBody.removeEventListener('scroll', handleScroll);
+        observer.unobserve();
+      };
     }
   }, [
     tableRef.current,
@@ -502,6 +499,9 @@ export const Table: React.FC<TableProps> = ({
     headerScrollWidth,
     scrollbar,
     verticalScroll,
+    setTableWidth,
+    setVerticalScroll,
+    setBodyHeight,
   ]);
 
   const calcGroupCheckStatus = (groupInfo: GroupInfo) => {

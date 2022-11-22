@@ -55,10 +55,7 @@ export const GroupRow = ({
             highlightFocus={false}
             onClick={handleExpandClick}
           >
-            <ExpandIcon
-              $isOpened={row.expanded}
-              aria-hidden
-            />
+            <ExpandIcon $isOpened={row.expanded} aria-hidden />
           </ExpandIconPlacement>
         </ExpandCell>
         {displayRowSelectionColumn && (
