@@ -1,6 +1,12 @@
 import * as React from 'react';
 import { ThemeContext } from 'styled-components';
 import { LIGHT_THEME } from '#src/components/themes';
+import { ReactComponent as PDFSolid } from '@admiral-ds/icons/build/documents/PDFSolid.svg';
+import { ReactComponent as PPTSolid } from '@admiral-ds/icons/build/documents/PPTSolid.svg';
+import { ReactComponent as FileWordSolid } from '@admiral-ds/icons/build/documents/FileWordSolid.svg';
+import { ReactComponent as XLSSolid } from '@admiral-ds/icons/build/documents/XLSSolid.svg';
+import { ReactComponent as DocsSolid } from '@admiral-ds/icons/build/documents/DocsSolid.svg';
+import { ReactComponent as JpgSolid } from '@admiral-ds/icons/build/documents/JpgSolid.svg';
 
 export const formatBytes = (bytes: number, decimals = 2): number => {
   return Number((bytes / 1024).toFixed(decimals));
@@ -79,5 +85,36 @@ export const getFormat = (type: string) => {
       return 'Word';
     default:
       return 'Docs';
+  }
+};
+
+/**
+ * https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types#important_mime_types_for_web_developers
+ * @param type {string}
+ */
+export const getIcon = (type: string) => {
+  switch (type) {
+    case 'image/jpeg':
+    case 'image/png':
+    case 'image/tiff':
+    case 'image/svg+xml':
+    case 'image/apng':
+    case 'image/avif':
+    case 'image/gif':
+    case 'image/webp':
+      return JpgSolid;
+    case 'application/pdf':
+      return PDFSolid;
+    case 'application/vnd.ms-powerpoint':
+    case 'application/vnd.openxmlformats-officedocument.presentationml.presentation':
+      return PPTSolid;
+    case 'application/vnd.ms-excel':
+    case 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
+      return XLSSolid;
+    case 'application/msword':
+    case 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
+      return FileWordSolid;
+    default:
+      return DocsSolid;
   }
 };
