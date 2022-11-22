@@ -72,6 +72,8 @@ export const getFormat = (type: string) => {
       return 'SVG';
     case 'image/gif':
       return 'GIF';
+    case 'image/webp':
+      return 'WEBP';
     case 'application/pdf':
       return 'PDF';
     case 'application/vnd.ms-powerpoint':

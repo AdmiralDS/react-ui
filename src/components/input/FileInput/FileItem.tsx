@@ -218,10 +218,14 @@ export interface FileAttributeProps {
 export interface FileItemProps extends HTMLAttributes<HTMLDivElement>, FileAttributeProps {
   /** Размер FileItem */
   dimension?: FileInputDimension;
-  /** Позволяет добавлять миксин для компоновки загруженных файлов, созданный с помощью styled css  */
+  /** Позволяет добавлять миксин для компоновки загруженных файлов, созданный с помощью styled css */
   filesLayoutCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
-  /** Позволяет выводить размер файла в требуемом формате  */
+  /** Позволяет выводить размер файла в требуемом формате */
   formatFileSizeInfo?: (sizeInBytes: number) => string;
+  /** Позволяет назначать формат файла */
+  formatFileTypeInfo?: (type: string) => string;
+  /** Позволяет назначать иконку файла */
+  formatFileTypeIcon?: (type: string) => React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
   children?: never;
 }
 
@@ -240,12 +244,14 @@ export const FileItem = forwardRef<HTMLDivElement, FileItemProps>(
       dimension,
       filesLayoutCssMixin,
       formatFileSizeInfo = formatFileSize,
+      formatFileTypeInfo = getFormat,
+      formatFileTypeIcon = getIcon,
       ...props
     },
     ref,
   ) => {
-    const PreviewIcon = getIcon(fileType);
-    const fileFormatInfo = getFormat(fileType);
+    const PreviewIcon = formatFileTypeIcon(fileType);
+    const fileFormatInfo = formatFileTypeInfo(fileType);
     const fileSizeInfo = formatFileSizeInfo(fileSize);
     const fileInfo = `${fileFormatInfo}・${fileSizeInfo}`;
 
