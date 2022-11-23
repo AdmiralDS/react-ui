@@ -7,8 +7,11 @@ import { forwardRef } from 'react';
 import { skeletonAnimationMixin } from '#src/components/skeleton/animation';
 
 type Dimension = 'xl' | 'l' | 'm' | 's';
+type IconButtonAppearance = 'primary' | 'secondary';
 
 export interface IconButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  /** Внешний вид кнопки */
+  appearance?: IconButtonAppearance;
   /** Размер кнопки */
   dimension?: Dimension;
   /** Отключение кнопки */
@@ -19,7 +22,10 @@ export interface IconButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>
   skeleton?: boolean;
 }
 
-const StyledButton = styled.button.attrs<IconButtonProps, { 'data-dimension'?: Dimension }>((props) => ({
+const StyledButton = styled.button.attrs<
+  IconButtonProps,
+  { 'data-dimension'?: Dimension; appearance?: IconButtonAppearance }
+>((props) => ({
   'data-dimension': props.dimension,
 }))<IconButtonProps>`
   box-sizing: border-box;
@@ -58,13 +64,15 @@ const StyledButton = styled.button.attrs<IconButtonProps, { 'data-dimension'?: D
     cursor: pointer;
     background: ${({ theme }) => theme.color['Opacity/Hover']};
     & *[fill^='#'] {
-      fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
+      fill: ${(p) =>
+        p.appearance === 'primary' ? p.theme.color['Primary/Primary 60 Main'] : p.theme.color['Neutral/Neutral 50']};
     }
   }
   &:active {
     background: ${({ theme }) => theme.color['Opacity/Press']};
     & *[fill^='#'] {
-      fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
+      fill: ${(p) =>
+        p.appearance === 'primary' ? p.theme.color['Primary/Primary 60 Main'] : p.theme.color['Neutral/Neutral 50']};
     }
   }
 
@@ -84,7 +92,7 @@ const StyledButton = styled.button.attrs<IconButtonProps, { 'data-dimension'?: D
   ${({ skeleton }) => skeleton && skeletonAnimationMixin}};
 `;
 
-const IconButtonContent = styled.span<{ dimension?: Dimension }>`
+const IconButtonContent = styled.span<{ dimension?: Dimension; appearance?: IconButtonAppearance }>`
   vertical-align: top;
   display: inline-flex;
   flex-direction: row;
@@ -105,7 +113,8 @@ const IconButtonContent = styled.span<{ dimension?: Dimension }>`
   }
 
   & *[fill^='#'] {
-    fill: ${(p) => p.theme.color['Neutral/Neutral 50']};
+    fill: ${(p) =>
+      p.appearance === 'primary' ? p.theme.color['Primary/Primary 60 Main'] : p.theme.color['Neutral/Neutral 50']};
   }
 
   & > svg {
@@ -124,6 +133,7 @@ const PseudoIcon = styled.div<{ dimension?: Dimension }>`
 export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
   (
     {
+      appearance = 'secondary',
       dimension = 'xl',
       type = 'button',
       loading = false,
@@ -146,7 +156,11 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
       if (skeleton) {
         return <IconButtonContent />;
       }
-      return <IconButtonContent dimension={dimension}>{children}</IconButtonContent>;
+      return (
+        <IconButtonContent dimension={dimension} appearance={appearance}>
+          {children}
+        </IconButtonContent>
+      );
     };
 
     return (
@@ -156,6 +170,7 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
         disabled={disabledOptions}
         type={type}
         skeleton={skeleton}
+        appearance={appearance}
         {...props}
       >
         {renderContent()}
