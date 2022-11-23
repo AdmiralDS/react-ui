@@ -72,6 +72,14 @@ export default {
   },
 } as ComponentMeta<typeof IconButton>;
 
+const WrapperVertical = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+`;
+
 const IconButtonDemo: ComponentStory<typeof IconButton> = (args) => {
   function swapBorder(theme: Theme): Theme {
     theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
@@ -81,60 +89,60 @@ const IconButtonDemo: ComponentStory<typeof IconButton> = (args) => {
   return (
     <ThemeProvider theme={swapBorder}>
       <WrapperIconButton>
-        <div>
+        <WrapperVertical>
           <T font="Body/Body 1 Long" as="div">
             Dimension - xl
           </T>
           <IconButton {...args} dimension="xl">
             <StarSolid />
           </IconButton>
-        </div>
-        <div>
+        </WrapperVertical>
+        <WrapperVertical>
           <T font="Body/Body 1 Long" as="div">
             Dimension - l
           </T>
           <IconButton {...args} dimension="l">
             <StarSolid />
           </IconButton>
-        </div>
-        <div>
+        </WrapperVertical>
+        <WrapperVertical>
           <T font="Body/Body 1 Long" as="div">
             Dimension - m
           </T>
           <IconButton {...args} dimension="m">
             <StarSolid />
           </IconButton>
-        </div>
-        <div>
+        </WrapperVertical>
+        <WrapperVertical>
           <T font="Body/Body 1 Long" as="div">
             Dimension - s
           </T>
           <IconButton {...args} dimension="s">
             <StarSolid />
           </IconButton>
-        </div>
+        </WrapperVertical>
       </WrapperIconButton>
     </ThemeProvider>
   );
 };
 
-const IconButtonStateDemo: ComponentStory<typeof IconButton> = () => (
+const IconButtonStateDemo: ComponentStory<typeof IconButton> = (args) => (
   <>
     <WrapperIconButton>
-      <div>
+      <WrapperVertical>
         <T font="Body/Body 1 Long" as="div">
           Loading
         </T>
-        <IconButton loading dimension="xl" />
-      </div>
-      <div>
+        <IconButton loading dimension={args.dimension} />
+      </WrapperVertical>
+      <WrapperVertical>
         <T font="Body/Body 1 Long" as="div">
           Disabled
         </T>
-        <IconButton disabled dimension="xl">
+        <IconButton disabled dimension={args.dimension}>
           <StarSolid />
         </IconButton>
-      </div>
+      </WrapperVertical>
       {/*<div>*/}
       {/*  <T font="Body/Body 1 Long" as="div">*/}
       {/*    Skeleton*/}
@@ -145,9 +153,35 @@ const IconButtonStateDemo: ComponentStory<typeof IconButton> = () => (
   </>
 );
 
+const IconButtonAppearanceDemo: ComponentStory<typeof IconButton> = (args) => (
+  <>
+    <WrapperIconButton>
+      <WrapperVertical>
+        <T font="Body/Body 1 Long" as="div">
+          Primary
+        </T>
+        <IconButton {...args} appearance="primary">
+          <StarSolid />
+        </IconButton>
+      </WrapperVertical>
+      <WrapperVertical>
+        <T font="Body/Body 1 Long" as="div">
+          Secondary
+        </T>
+        <IconButton {...args} appearance="secondary">
+          <StarSolid />
+        </IconButton>
+      </WrapperVertical>
+    </WrapperIconButton>
+  </>
+);
+
 export const IconButtons = IconButtonDemo.bind({});
 IconButtons.args = {};
 IconButtons.storyName = 'IconButton. Размеры';
 export const IconButtonState = IconButtonStateDemo.bind({});
 IconButtonState.args = {};
 IconButtonState.storyName = 'IconButton. Состояния';
+export const IconButtonAppearance = IconButtonAppearanceDemo.bind({});
+IconButtonAppearance.args = {};
+IconButtonAppearance.storyName = 'IconButton. Appearance';
