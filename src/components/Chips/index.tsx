@@ -16,6 +16,7 @@ import {
 } from './style';
 import { BadgeAppearance } from '#src/components/Badge';
 import { CloseIconPlacementButton } from '#src/components/IconPlacement';
+import { keyboardKey } from '#src/components/common/keyboardKey';
 
 export type ChipDimension = 's' | 'm';
 export type ChipAppearance = 'filled' | 'outlined';
@@ -113,6 +114,23 @@ export const Chips: FC<ChipsProps> = ({
     [onClose],
   );
 
+  const handleKeyDown = React.useCallback(
+    (e) => {
+      e.stopPropagation();
+      if (!disabled) {
+        const code = keyboardKey.getCode(e);
+        if (code === keyboardKey.Enter || code === keyboardKey[' ']) {
+          if (withCloseIcon) {
+            onClose?.();
+          } else {
+            props.onClick?.(e);
+          }
+        }
+      }
+    },
+    [props.onClick],
+  );
+
   return (
     <>
       <ChipComponentStyled
@@ -125,6 +143,7 @@ export const Chips: FC<ChipsProps> = ({
         withCloseIcon={withCloseIcon}
         withTooltip={overflow}
         withBadge={withBadge}
+        onKeyDown={handleKeyDown}
         {...props}
         tabIndex={props.tabIndex ?? 0}
       >
@@ -162,6 +181,7 @@ export const Chips: FC<ChipsProps> = ({
               onClick={disabled ? void 0 : handleClickCloseIcon}
               disabled={disabled}
               tabIndex={-1}
+              appearance={appearance === 'outlined' ? 'primary' : 'secondary'}
             />
           )}
         </ChipContentWrapperStyled>
