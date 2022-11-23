@@ -67,7 +67,6 @@ Object {
 
 .c1 {
   text-overflow: ellipsis;
-  overflow: hidden;
   white-space: nowrap;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
@@ -174,7 +173,6 @@ Object {
 
 .c1 {
   text-overflow: ellipsis;
-  overflow: hidden;
   white-space: nowrap;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
@@ -338,7 +336,6 @@ Object {
 
 .c1 {
   text-overflow: ellipsis;
-  overflow: hidden;
   white-space: nowrap;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
@@ -447,7 +444,6 @@ Object {
 
 .c1 {
   text-overflow: ellipsis;
-  overflow: hidden;
   white-space: nowrap;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
@@ -609,7 +605,6 @@ Object {
 
 .c1 {
   text-overflow: ellipsis;
-  overflow: hidden;
   white-space: nowrap;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
@@ -716,7 +711,6 @@ Object {
 
 .c1 {
   text-overflow: ellipsis;
-  overflow: hidden;
   white-space: nowrap;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
