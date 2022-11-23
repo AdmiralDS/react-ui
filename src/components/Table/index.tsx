@@ -1,9 +1,12 @@
 import * as React from 'react';
-import { useMemo } from 'react';
 import { Checkbox } from '#src/components/Checkbox';
 import observeRect from '#src/components/common/observeRect';
 import { ThemeContext } from 'styled-components';
 import { LIGHT_THEME } from '#src/components/themes';
+import { getScrollbarSize } from '#src/components/common/dom/scrollbarUtil';
+import { GroupRow } from '#src/components/Table/Row/GroupRow';
+import { RegularRow } from '#src/components/Table/Row/RegularRow';
+import { RowWrapper } from '#src/components/Table/Row/RowWrapper';
 
 import { RowWidthResizer } from './RowWidthResizer';
 import { Filter } from './filter/Filter';
@@ -19,7 +22,7 @@ import {
   HeaderCellContent,
   HeaderCellSpacer,
   HeaderCellTitle,
-  HeaderWrapperContainer,
+  HeaderWrapper,
   Row,
   ScrollTableBody,
   SortIcon,
@@ -31,10 +34,6 @@ import {
 } from './style';
 import { TitleText } from './TitleText';
 import { VirtualBody } from './VirtualBody';
-import { getScrollbarSize } from '#src/components/common/dom/scrollbarUtil';
-import { GroupRow } from '#src/components/Table/Row/GroupRow';
-import { RegularRow } from '#src/components/Table/Row/RerularRow';
-import { RowWrapper } from '#src/components/Table/Row/RowWrapper';
 
 export * from './RowAction';
 
@@ -50,18 +49,6 @@ type FilterProps = {
    */
   setFilterActive: (isActive: boolean) => void;
 };
-
-export const HeaderWrapper = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement> & { greyHeader?: boolean }
->((props, ref) => {
-  const [scrollbar, setScrollbarSize] = React.useState(16);
-  React.useEffect(() => {
-    const size = getScrollbarSize();
-    setScrollbarSize(size);
-  }, []);
-  return <HeaderWrapperContainer ref={ref} {...props} scrollbar={scrollbar} />;
-});
 
 export type Column = {
   /** Уникальное название столбца */
@@ -309,6 +296,8 @@ export const Table: React.FC<TableProps> = ({
   const [resizerState, updateResizerState] = React.useState({} as any);
   const [tableWidth, setTableWidth] = React.useState(0);
   const [bodyHeight, setBodyHeight] = React.useState(0);
+  const [headerScrollWidth, setHeaderScrollWidth] = React.useState(0);
+  const [scrollbar, setScrollbarSize] = React.useState(0);
 
   const stickyColumns = [...cols].filter((col) => col.sticky);
 
@@ -358,7 +347,7 @@ export const Table: React.FC<TableProps> = ({
     return tableRows;
   };
 
-  const tableRows = useMemo(() => reorderRowsToGroup(), [rowList]);
+  const tableRows = React.useMemo(() => reorderRowsToGroup(), [rowList]);
 
   const zebraRows = greyZebraRows
     ? tableRows.reduce<ZebraRows>((acc: ZebraRows, row: TableRow, index: number) => {
@@ -376,44 +365,6 @@ export const Table: React.FC<TableProps> = ({
       }, {})
     : {};
 
-  const scrollHeader = (scrollLeft: number) => {
-    if (headerRef.current) headerRef.current.scrollLeft = scrollLeft;
-  };
-
-  const setShadow = (scrollLeft: number) => {
-    if (tableRef.current) {
-      const initial = tableRef.current.getAttribute('data-shadow');
-      if (scrollLeft === 0) {
-        if (initial !== 'false') tableRef.current.setAttribute('data-shadow', 'false');
-      } else {
-        if (initial !== 'true') tableRef.current.setAttribute('data-shadow', 'true');
-      }
-    }
-  };
-
-  const moveOverflowMenu = (scrollLeft: number) => {
-    if (scrollBodyRef.current) {
-      const menus = scrollBodyRef.current.querySelectorAll<HTMLElement>('[data-overflowmenu]');
-      menus.forEach((menu) => {
-        menu.style.marginLeft = `${scrollLeft}px`;
-      });
-    }
-  };
-
-  const handleScroll = (e: any) => {
-    if (e.target === scrollBodyRef.current) {
-      requestAnimationFrame(function () {
-        scrollHeader(e.target.scrollLeft);
-        moveOverflowMenu(e.target.scrollLeft);
-      });
-    }
-    if (stickyColumns.length > 0 || displayRowSelectionColumn || displayRowExpansionColumn) {
-      requestAnimationFrame(function () {
-        setShadow(e.target.scrollLeft);
-      });
-    }
-  };
-
   const updateColumnsWidths = () => {
     const newCols = [...columnList].map((col) => {
       return {
@@ -428,10 +379,13 @@ export const Table: React.FC<TableProps> = ({
 
   React.useLayoutEffect(() => {
     if (tableRef.current) {
-      updateColumnsWidths();
       const resizeObserver = new ResizeObserver((entries) => {
         entries.forEach(() => {
+          setHeaderScrollWidth(headerRef.current?.scrollWidth || 0);
           updateColumnsWidths();
+
+          const size = getScrollbarSize();
+          setScrollbarSize(size);
         });
       });
       resizeObserver.observe(tableRef.current);
@@ -439,26 +393,14 @@ export const Table: React.FC<TableProps> = ({
         resizeObserver.disconnect();
       };
     }
-  }, [tableRef.current, columnList, displayRowSelectionColumn, displayRowExpansionColumn]);
-
-  React.useLayoutEffect(() => {
-    const body = scrollBodyRef.current;
-    if (body) {
-      const observer = observeRect(body, (rect: any) => {
-        if (body.scrollHeight > body.offsetHeight) {
-          setVerticalScroll(true);
-        } else {
-          setVerticalScroll(false);
-        }
-        setTableWidth(rect.width);
-        setBodyHeight(rect.height);
-      });
-      observer.observe();
-      return () => {
-        observer.unobserve();
-      };
-    }
-  }, [scrollBodyRef.current]);
+  }, [
+    tableRef.current,
+    columnList,
+    displayRowSelectionColumn,
+    displayRowExpansionColumn,
+    setHeaderScrollWidth,
+    setScrollbarSize,
+  ]);
 
   const replaceWidthToNumber = React.useCallback(
     (width?: string | number): number => {
@@ -481,11 +423,86 @@ export const Table: React.FC<TableProps> = ({
 
   React.useLayoutEffect(() => {
     const scrollBody = scrollBodyRef.current;
+
+    function scrollHeader(scrollLeft: number) {
+      if (headerRef.current) headerRef.current.scrollLeft = scrollLeft;
+    }
+
+    function moveOverflowMenu(scrollLeft: number) {
+      if (scrollBodyRef.current) {
+        const menus = scrollBodyRef.current.querySelectorAll<HTMLElement>('[data-overflowmenu]');
+        const scrollbarWidth = verticalScroll ? scrollbar : 0;
+
+        menus.forEach((menu) => {
+          if (scrollLeft <= headerScrollWidth - tableWidth + scrollbarWidth) {
+            menu.style.marginLeft = `${scrollLeft}px`;
+          } else {
+            menu.style.marginLeft = `${headerScrollWidth - tableWidth + scrollbarWidth}px`;
+          }
+        });
+      }
+    }
+
+    function setShadow(scrollLeft: number) {
+      if (tableRef.current) {
+        const initial = tableRef.current.getAttribute('data-shadow');
+        if (scrollLeft === 0) {
+          if (initial !== 'false') tableRef.current.setAttribute('data-shadow', 'false');
+        } else {
+          if (initial !== 'true') tableRef.current.setAttribute('data-shadow', 'true');
+        }
+      }
+    }
+
+    function handleScroll(e: any) {
+      if (e.target === scrollBodyRef.current) {
+        requestAnimationFrame(function () {
+          scrollHeader(e.target.scrollLeft);
+          moveOverflowMenu(e.target.scrollLeft);
+        });
+      }
+      if (stickyColumns.length > 0 || displayRowSelectionColumn || displayRowExpansionColumn) {
+        requestAnimationFrame(function () {
+          setShadow(e.target.scrollLeft);
+        });
+      }
+    }
+
     if (scrollBody) {
       scrollBody.addEventListener('scroll', handleScroll);
-      return () => scrollBody.removeEventListener('scroll', handleScroll);
+
+      const observer = observeRect(scrollBody, (rect: any) => {
+        if (scrollBody.scrollHeight > scrollBody.offsetHeight) {
+          setVerticalScroll(true);
+        } else {
+          setVerticalScroll(false);
+        }
+        setTableWidth(rect.width);
+        setBodyHeight(rect.height);
+        moveOverflowMenu(scrollBody.scrollLeft);
+      });
+      observer.observe();
+
+      return () => {
+        scrollBody.removeEventListener('scroll', handleScroll);
+        observer.unobserve();
+      };
     }
-  }, [scrollBodyRef.current]);
+  }, [
+    tableRef.current,
+    headerRef.current,
+    scrollBodyRef.current,
+    stickyColumns,
+    displayRowExpansionColumn,
+    displayRowSelectionColumn,
+    tableWidth,
+    headerScrollWidth,
+    scrollbar,
+    verticalScroll,
+    setTableWidth,
+    setVerticalScroll,
+    setBodyHeight,
+  ]);
 
   const calcGroupCheckStatus = (groupInfo: GroupInfo) => {
     const indeterminate =
@@ -677,6 +694,8 @@ export const Table: React.FC<TableProps> = ({
         dimension={dimension}
         style={{ width: col.width || DEFAULT_COLUMN_WIDTH }}
         className="td"
+        data-column={col.name}
+        data-row={row.id}
       >
         {renderCell ? (
           renderCell(row, col.name)
@@ -700,7 +719,6 @@ export const Table: React.FC<TableProps> = ({
         checkboxDimension={checkboxDimension}
         displayRowExpansionColumn={displayRowExpansionColumn}
         displayRowSelectionColumn={displayRowSelectionColumn}
-        renderBodyCell={renderBodyCell}
         onRowExpansionChange={handleExpansionChange}
         onRowSelectionChange={handleCheckboxChange}
         renderCell={renderCell}
@@ -756,8 +774,9 @@ export const Table: React.FC<TableProps> = ({
         isGroup={isGroupRow}
         onRowClick={onRowClick}
         onRowDoubleClick={onRowDoubleClick}
-        rowWidth={isGroupRow ? headerRef.current?.scrollWidth : undefined}
+        rowWidth={isGroupRow ? headerScrollWidth : undefined}
         verticalScroll={verticalScroll}
+        scrollbar={scrollbar}
         grey={zebraRows[row.id]?.includes('even')}
         key={`row_${row.id}`}
       >
@@ -802,7 +821,7 @@ export const Table: React.FC<TableProps> = ({
 
   return (
     <TableContainer ref={tableRef} data-shadow={false} {...props} className={`table ${props.className || ''}`}>
-      <HeaderWrapper greyHeader={greyHeader} data-verticalscroll={verticalScroll}>
+      <HeaderWrapper scrollbar={scrollbar} greyHeader={greyHeader} data-verticalscroll={verticalScroll}>
         <Header dimension={dimension} ref={headerRef} className="tr">
           {(displayRowSelectionColumn || displayRowExpansionColumn || stickyColumns.length > 0) && (
             <StickyWrapper greyHeader={greyHeader}>

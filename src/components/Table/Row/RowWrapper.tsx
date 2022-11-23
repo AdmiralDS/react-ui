@@ -21,6 +21,8 @@ export interface RowWrapperProps extends HTMLAttributes<HTMLDivElement> {
   isGroup: boolean;
   /** Наличие вертикального скролла в таблице */
   verticalScroll: boolean;
+  /** Ширина вертикальной полосы прокрутки */
+  scrollbar: number;
   /** Ширина строки */
   rowWidth?: number;
   /** Окрашивание строки в серый цвет при greyZebraRows */
@@ -38,6 +40,7 @@ export const RowWrapper = ({
   isGroup,
   rowWidth,
   verticalScroll,
+  scrollbar,
   grey,
   ...props
 }: RowWrapperProps) => {
@@ -72,7 +75,13 @@ export const RowWrapper = ({
         {children}
       </SimpleRow>
       {(row.overflowMenuRender || row.actionRender) && (
-        <OverflowMenu dimension={dimension} tableWidth={tableWidth} row={row} verticalScroll={verticalScroll} />
+        <OverflowMenu
+          dimension={dimension}
+          tableWidth={tableWidth}
+          row={row}
+          verticalScroll={verticalScroll}
+          scrollbar={scrollbar}
+        />
       )}
       {row.expandedRowRender && (
         <ExpandedRow opened={row.expanded} contentMaxHeight="90vh" className="tr-expanded">
