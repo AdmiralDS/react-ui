@@ -59,7 +59,7 @@ export function acceptFile(file: File, acceptedFiles: string): boolean {
  * https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types#important_mime_types_for_web_developers
  * @param type {string}
  */
-export const getFormat = (type: string) => {
+export const formatFileType = (type: string) => {
   switch (type) {
     case 'image/jpeg':
       return 'JPEG';
@@ -94,7 +94,7 @@ export const getFormat = (type: string) => {
  * https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types#important_mime_types_for_web_developers
  * @param type {string}
  */
-export const getIcon = (type: string) => {
+export const getFileTypeIcon = (type: string) => {
   switch (type) {
     case 'image/jpeg':
     case 'image/png':

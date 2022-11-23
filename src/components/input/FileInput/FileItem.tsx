@@ -4,7 +4,7 @@ import { FileInputDimension } from '#src/components/input/FileInput';
 import styled, { css, DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { typography } from '#src/components/Typography';
-import { formatFileSize, getFormat, getIcon } from '#src/components/input/FileInput/utils';
+import { formatFileSize, formatFileType, getFileTypeIcon } from '#src/components/input/FileInput/utils';
 import { Spinner } from '#src/components/Spinner';
 import { ReactComponent as EyeOutline } from '@admiral-ds/icons/build/service/EyeOutline.svg';
 import {
@@ -244,8 +244,8 @@ export const FileItem = forwardRef<HTMLDivElement, FileItemProps>(
       dimension,
       filesLayoutCssMixin,
       formatFileSizeInfo = formatFileSize,
-      formatFileTypeInfo = getFormat,
-      formatFileTypeIcon = getIcon,
+      formatFileTypeInfo = formatFileType,
+      formatFileTypeIcon = getFileTypeIcon,
       ...props
     },
     ref,
