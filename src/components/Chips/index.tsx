@@ -15,6 +15,7 @@ import {
   StyledBadge,
 } from './style';
 import { BadgeAppearance } from '#src/components/Badge';
+import { CloseIconPlacementButton } from '#src/components/IconPlacement';
 
 export type ChipDimension = 's' | 'm';
 export type ChipAppearance = 'filled' | 'outlined';
@@ -155,16 +156,12 @@ export const Chips: FC<ChipsProps> = ({
             </StyledBadge>
           )}
           {onClose && (
-            <IconAfterWrapperStyled dimension={dimension} withCloseIcon={withCloseIcon}>
-              <IconWrapperStyled dimension={dimension} withCloseIcon={withCloseIcon}>
-                <CloseIconWrapperStyled
-                  appearance={appearance}
-                  disabled={disabled}
-                  selected={selected}
-                  onClick={disabled ? void 0 : handleClickCloseIcon}
-                />
-              </IconWrapperStyled>
-            </IconAfterWrapperStyled>
+            <CloseIconPlacementButton
+              dimension={dimension === 'm' ? 'mBig' : 's'}
+              highlightFocus={false}
+              onClick={disabled ? void 0 : handleClickCloseIcon}
+              disabled={disabled}
+            />
           )}
         </ChipContentWrapperStyled>
       </ChipComponentStyled>
