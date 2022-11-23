@@ -516,6 +516,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
         />
         <BorderedDiv />
         <ValueWrapper
+          tabIndex={-1}
           id="selectValueWrapper"
           dimension={dimension}
           multiple={multiple}

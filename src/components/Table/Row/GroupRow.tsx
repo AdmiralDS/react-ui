@@ -10,9 +10,9 @@ import {
 import * as React from 'react';
 import type { TableRow } from '#src/components/Table';
 import { Checkbox } from '#src/components/Checkbox';
-import type { RegularRowProps } from '#src/components/Table/Row/RerularRow';
+import type { RegularRowProps } from '#src/components/Table/Row/RegularRow';
 
-export interface GroupRowProps extends Omit<RegularRowProps, 'columns' | 'stickyColumns'> {
+export interface GroupRowProps extends Omit<RegularRowProps, 'columns' | 'stickyColumns' | 'renderBodyCell'> {
   /** Рендер функция для отрисовки контента ячейки. Входные параметры - объект строки и название столбца */
   renderCell?: (row: TableRow, columnName: string) => React.ReactNode;
   /** Неопределенное состояние checkbox-а */
@@ -55,10 +55,7 @@ export const GroupRow = ({
             highlightFocus={false}
             onClick={handleExpandClick}
           >
-            <ExpandIcon
-              $isOpened={row.expanded}
-              aria-hidden
-            />
+            <ExpandIcon $isOpened={row.expanded} aria-hidden />
           </ExpandIconPlacement>
         </ExpandCell>
         {displayRowSelectionColumn && (
@@ -74,7 +71,7 @@ export const GroupRow = ({
           </CheckboxCell>
         )}
       </StickyWrapper>
-      <Cell key={`${row.id}`} dimension={dimension} className="td">
+      <Cell key={`${row.id}`} dimension={dimension} className="td" data-column="group" data-row={row.id}>
         {renderCell ? renderCell(row, 'group') : <GroupTextContent>{row.groupTitle || ''}</GroupTextContent>}
       </Cell>
     </>

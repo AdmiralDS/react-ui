@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.5.0](https://github.com/AdmiralDS/react-ui/compare/v3.4.0...v3.5.0) (2022-11-22)
+
+
+### Features
+
+* **CloseIconPlacementButton:** add IconPlacement with CloseOutline icon ([8070b45](https://github.com/AdmiralDS/react-ui/commit/8070b456326d25ba069a05cb94ad3926c387be2c))
+* **IconPlacement:** add appearance ([56a1533](https://github.com/AdmiralDS/react-ui/commit/56a15331a063c3db5977f68e13ea443f4101152b))
+* **IconPlacement:** add prop highlightFocus ([275cfb1](https://github.com/AdmiralDS/react-ui/commit/275cfb15f6520d68cd0585a5cd0f3cd3beec8659))
+* **OverflowMenu:** use IconPlacement ([849c995](https://github.com/AdmiralDS/react-ui/commit/849c995a9cc5fde5fb92635126f182913200c55f))
+* **Table:** add data attributes (data-column, data-row) for table body cells ([9c17a3a](https://github.com/AdmiralDS/react-ui/commit/9c17a3a5b73235cfdd0b1313b71ea723592041e3))
+
+
+### Bug Fixes
+
+* **Breadcrumbs:** fix OverflowMenu size ([02caa7e](https://github.com/AdmiralDS/react-ui/commit/02caa7ec867a3895fbca30c71e0531b10e384401))
+* **Select:** lose focus on click on selected value ([a0dfb60](https://github.com/AdmiralDS/react-ui/commit/a0dfb60486cd268d8bf2da876a9f348dae1de5f2))
+* **Table:** fix bug with overflowMenuRender and zoom ([92b6ca1](https://github.com/AdmiralDS/react-ui/commit/92b6ca1e4f567ac0ae0e7896fb9df9795d854451))
+
 ## [3.4.0](https://github.com/AdmiralDS/react-ui/compare/v3.3.0...v3.4.0) (2022-11-18)
 
 
