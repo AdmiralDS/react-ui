@@ -161,6 +161,7 @@ export const Chips: FC<ChipsProps> = ({
               highlightFocus={false}
               onClick={disabled ? void 0 : handleClickCloseIcon}
               disabled={disabled}
+              tabIndex={-1}
             />
           )}
         </ChipContentWrapperStyled>
