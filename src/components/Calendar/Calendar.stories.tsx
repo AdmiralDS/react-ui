@@ -8,6 +8,7 @@ import { ViewScreenType } from './interfaces';
 import { ThemeProvider } from 'styled-components';
 import { Theme } from '#src/components/themes';
 import { T } from '#src/components/T';
+import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
 
 export default {
   title: 'Admiral-2.1/Calendar',
@@ -57,7 +58,7 @@ export default {
       control: false,
     },
     themeBorderKind: {
-      options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
+      options: ALL_BORDER_RADIUS_VALUES,
       control: { type: 'radio' },
     },
   },

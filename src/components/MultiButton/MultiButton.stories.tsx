@@ -6,6 +6,7 @@ import styled, { ThemeProvider } from 'styled-components';
 import { Theme } from '#src/components/themes';
 import { MenuItem, RenderOptionProps } from '#src/components/Menu/MenuItem';
 import { ReactComponent as BonusSolid } from '@admiral-ds/icons/build/category/BonusSolid.svg';
+import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
 
 const Separator = styled.div`
   width: 20px;
@@ -78,7 +79,7 @@ export default {
       control: { type: 'boolean' },
     },
     themeBorderKind: {
-      options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
+      options: ALL_BORDER_RADIUS_VALUES,
       control: { type: 'radio' },
     },
     skeleton: {

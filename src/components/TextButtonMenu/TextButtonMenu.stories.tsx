@@ -6,6 +6,7 @@ import styled, { ThemeProvider } from 'styled-components';
 import { T } from '#src/components/T';
 import { MenuItem, RenderOptionProps } from '#src/components/Menu/MenuItem';
 import { Theme } from '#src/components/themes';
+import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
 
 const StyledText = styled(T)`
   margin: 10px 0;
@@ -78,7 +79,7 @@ export default {
       type: 'string',
     },
     themeBorderKind: {
-      options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
+      options: ALL_BORDER_RADIUS_VALUES,
       control: { type: 'radio' },
     },
     skeleton: {

@@ -20,7 +20,13 @@ export interface Shadow {
   'Shadow Stroke': string;
 }
 
-export type BorderRadiusType = 'Border radius 0' | 'Border radius 2' | 'Border radius 4' | 'Border radius 8';
+export type BorderRadiusType =
+  | 'Border radius 0'
+  | 'Border radius 2'
+  | 'Border radius 4'
+  | 'Border radius 6'
+  | 'Border radius 8'
+  | 'Border radius 10';
 
 export interface Shape {
   borderRadiusKind: BorderRadiusType;

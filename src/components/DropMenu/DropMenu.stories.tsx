@@ -11,6 +11,7 @@ import { ReactComponent as CardSolid } from '@admiral-ds/icons/build/finance/Car
 import { TooltipHoc } from '#src/components/TooltipHOC';
 import { RadioButton } from '#src/components/RadioButton';
 import { ItemWithCheckbox, MenuItemWithCheckbox } from '#src/components/Menu/MenuItemWithCheckbox';
+import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -63,7 +64,7 @@ export default {
       control: { type: 'radio' },
     },
     themeBorderKind: {
-      options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
+      options: ALL_BORDER_RADIUS_VALUES,
       control: { type: 'radio' },
     },
     loading: {

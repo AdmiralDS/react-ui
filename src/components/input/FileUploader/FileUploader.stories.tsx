@@ -9,6 +9,7 @@ import { Status } from './utils';
 import { TextButton } from '#src/components/TextButton';
 import { ReactComponent as UploadSVG } from '@admiral-ds/icons/build/system/UploadOutline.svg';
 import { Theme } from '#src/components/themes';
+import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
 
 const Separator = styled.div`
   height: 40px;
@@ -78,7 +79,7 @@ export default {
       control: { type: 'boolean' },
     },
     themeBorderKind: {
-      options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
+      options: ALL_BORDER_RADIUS_VALUES,
       control: { type: 'radio' },
     },
   },
