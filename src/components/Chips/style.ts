@@ -1,8 +1,8 @@
 import styled, { css } from 'styled-components';
-import { ReactComponent as CloseOutline } from '@admiral-ds/icons/build/service/CloseOutline.svg';
 import { typography } from '#src/components/Typography';
 import type { ChipAppearance, ChipDimension } from '#src/components/Chips';
 import { Badge } from '#src/components/Badge';
+import { CloseIconPlacementButton, IconPlacementDimension } from '#src/components/IconPlacement';
 
 const heights = css<{ dimension: ChipDimension }>`
   height: ${({ dimension }) => {
@@ -204,35 +204,6 @@ export const ChipComponentStyled = styled.div<{
       : ''}
   ${chipTypography}
 `;
-export const CloseIconWrapperStyled = styled(CloseOutline)<{
-  disabled?: boolean;
-  selected?: boolean;
-  appearance?: ChipAppearance;
-}>`
-  cursor: ${({ disabled }) => (disabled ? 'default' : 'pointer')};
-
-  &:hover {
-    outline: none;
-    cursor: pointer;
-    & *[fill^='#'] {
-      fill: ${({ theme, appearance, selected }) => {
-        if (selected) return theme.color['Special/Static White'];
-        return appearance === 'filled' ? theme.color['Neutral/Neutral 50'] : theme.color['Primary/Primary 60 Main'];
-      }};
-    }
-  }
-
-  &:active {
-    outline: none;
-    border: none;
-    & *[fill^='#'] {
-      fill: ${({ theme, appearance, selected }) => {
-        if (selected) return theme.color['Special/Static White'];
-        return appearance === 'filled' ? theme.color['Neutral/Neutral 50'] : theme.color['Primary/Primary 60 Main'];
-      }};
-    }
-  }
-`;
 
 const closeIconWrapperStyle = css`
   display: flex;
@@ -248,7 +219,6 @@ export const ChipContentWrapperStyled = styled.div<{
   withCloseIcon?: boolean;
 }>`
   text-overflow: ellipsis;
-  overflow: hidden;
   white-space: nowrap;
   display: inline-flex;
 
@@ -284,30 +254,6 @@ export const IconBeforeWrapperStyled = styled.div`
 export const IconAfterWrapperStyled = styled.div<{ dimension: ChipDimension; withCloseIcon?: boolean }>`
   display: inline-block;
   margin-left: ${(p) => (p.withCloseIcon ? '2px' : '8px')};
-  ${(p) =>
-    p.withCloseIcon &&
-    `
-    &:after {
-      position: absolute;
-      content: '';
-      top: -1px;
-      right: -1px;
-      bottom: -1px;
-      width: ${p.dimension === 'm' ? 33 : 25}px;
-      border-radius: 50%;
-      pointer-events: none;
-    }
-    &:hover {
-      &:after {
-        background-color: ${p.theme.color['Opacity/Hover']};
-      }
-    }
-    &:active {
-      &:after {
-        background-color: ${p.theme.color['Opacity/Press']};
-      }
-    }
-  `}
 `;
 export const IconWrapperStyled = styled.div<{
   dimension: ChipDimension;
@@ -324,4 +270,9 @@ export const IconWrapperStyled = styled.div<{
 
 export const StyledBadge = styled(Badge)<{ dimension: ChipDimension }>`
   margin-left: ${({ dimension }) => (dimension === 's' ? '6px' : '8px')};
+`;
+
+export const CloseIconButton = styled(CloseIconPlacementButton)<{ dimension: IconPlacementDimension }>`
+  margin-left: ${(p) => (p.dimension === 's' ? '6px' : '8px')};
+  margin-right: ${(p) => (p.dimension === 's' ? '3px' : '5px')};
 `;

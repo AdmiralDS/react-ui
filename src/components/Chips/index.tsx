@@ -8,14 +8,13 @@ import {
   ChipChildrenWrapperStyled,
   ChipComponentStyled,
   ChipContentWrapperStyled,
-  CloseIconWrapperStyled,
+  CloseIconButton,
   IconAfterWrapperStyled,
   IconBeforeWrapperStyled,
   IconWrapperStyled,
   StyledBadge,
 } from './style';
 import { BadgeAppearance } from '#src/components/Badge';
-import { CloseIconPlacementButton } from '#src/components/IconPlacement';
 import { keyboardKey } from '#src/components/common/keyboardKey';
 
 export type ChipDimension = 's' | 'm';
@@ -175,7 +174,7 @@ export const Chips: FC<ChipsProps> = ({
             </StyledBadge>
           )}
           {onClose && (
-            <CloseIconPlacementButton
+            <CloseIconButton
               dimension={dimension === 'm' ? 'mBig' : 's'}
               highlightFocus={false}
               onClick={disabled ? void 0 : handleClickCloseIcon}
