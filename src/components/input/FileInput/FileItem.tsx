@@ -20,7 +20,7 @@ import {
 } from '#src/components/input/FileInput/style';
 import { Tooltip } from '#src/components/Tooltip';
 import { checkOverflow } from '#src/components/common/utils/checkOverflow';
-import { CloseIconPlacementButton } from '#src/components/IconPlacement';
+import { CloseIconPlacementButton, IconPlacementDimension } from '#src/components/IconPlacement';
 import { keyboardKey } from '#src/components/common/keyboardKey';
 
 export type Status = 'Uploaded' | 'Loading' | 'Error' | 'Queue';
@@ -201,6 +201,10 @@ export const ErrorBlock = styled.div<{ status?: Status; dimension?: FileInputDim
   height: ${(p) => (p.dimension === 'xl' ? ERROR_BLOCK_HEIGHT_XL : ERROR_BLOCK_HEIGHT_M)};
 `;
 
+const CloseButton = styled(CloseIconPlacementButton)<{ dimension?: IconPlacementDimension }>`
+  margin-right: ${(p) => (p.dimension === 'lSmall' ? '8px' : '16px')};
+`;
+
 export interface FileAttributeProps {
   fileId: string;
   /** Имя файла без расширения */
@@ -341,7 +345,7 @@ export const FileItem = forwardRef<HTMLDivElement, FileItemProps>(
           <FunctionalBlock>
             {status === 'Loading' && <StyledSpinner dimension={dimension} />}
             {onCloseIconClick && (
-              <CloseIconPlacementButton
+              <CloseButton
                 dimension={dimension === 'xl' ? 'lSmall' : 'mSmall'}
                 disabled={status === 'Queue'}
                 onClick={handleCloseIconClick}
