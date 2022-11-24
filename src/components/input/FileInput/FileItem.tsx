@@ -21,6 +21,7 @@ import {
 import { Tooltip } from '#src/components/Tooltip';
 import { checkOverflow } from '#src/components/common/utils/checkOverflow';
 import { CloseIconPlacementButton } from '#src/components/IconPlacement';
+import { keyboardKey } from '#src/components/common/keyboardKey';
 
 export type Status = 'Uploaded' | 'Loading' | 'Error' | 'Queue';
 
@@ -298,6 +299,17 @@ export const FileItem = forwardRef<HTMLDivElement, FileItemProps>(
       onPreviewIconClick?.(fileId);
     };
 
+    const handleKeyDown = React.useCallback(
+      (e) => {
+        e.stopPropagation();
+        const code = keyboardKey.getCode(e);
+        if (code === keyboardKey.Enter || code === keyboardKey[' ']) {
+          onPreviewIconClick?.(fileId);
+        }
+      },
+      [props.onClick],
+    );
+
     return (
       <Container ref={ref} dimension={dimension} filesLayoutCssMixin={filesLayoutCssMixin}>
         <PreviewWrapper {...props} ref={previewWrapperRef} status={status} dimension={dimension}>
@@ -307,6 +319,7 @@ export const FileItem = forwardRef<HTMLDivElement, FileItemProps>(
                 status={status}
                 showHover={!!onPreviewIconClick}
                 onClick={handlePreviewIconClick}
+                onKeyDown={handleKeyDown}
                 tabIndex={onPreviewIconClick ? 0 : -1}
               >
                 {previewImageURL ? (
