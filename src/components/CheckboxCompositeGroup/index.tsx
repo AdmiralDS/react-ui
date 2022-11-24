@@ -1,4 +1,5 @@
-import React, { Children, cloneElement, FC, HTMLAttributes, isValidElement } from 'react';
+import type { FC, HTMLAttributes } from 'react';
+import React, { Children, cloneElement, isValidElement } from 'react';
 
 import { CompositeWrapper } from './CompositeWrapper';
 import type { CheckboxDimension } from '../Checkbox/CheckboxDimension';

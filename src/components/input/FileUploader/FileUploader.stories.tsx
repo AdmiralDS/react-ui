@@ -1,14 +1,15 @@
 import * as React from 'react';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import styled, { ThemeProvider } from 'styled-components';
 import { FileUploader } from '#src/components/input';
-import { FileInfo, FileProps } from '#src/components/input/FileUploader/FileInfo';
+import type { FileProps } from '#src/components/input/FileUploader/FileInfo';
+import { FileInfo } from '#src/components/input/FileUploader/FileInfo';
 import { T } from '#src/components/T';
-import { Status } from './utils';
+import type { Status } from './utils';
 import { TextButton } from '#src/components/TextButton';
 import { ReactComponent as UploadSVG } from '@admiral-ds/icons/build/system/UploadOutline.svg';
-import { Theme } from '#src/components/themes';
+import type { Theme } from '#src/components/themes';
 import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
 
 const Separator = styled.div`

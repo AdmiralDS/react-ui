@@ -1,5 +1,5 @@
-import type { FC, KeyboardEvent, MouseEvent, ReactNode } from 'react';
-import React, { Children, cloneElement, HTMLAttributes, isValidElement } from 'react';
+import type { FC, KeyboardEvent, MouseEvent, ReactNode, HTMLAttributes } from 'react';
+import React, { Children, cloneElement, isValidElement } from 'react';
 import styled from 'styled-components';
 
 const TAG_MARGIN = '8px';

@@ -1,11 +1,13 @@
 import styled from 'styled-components';
 import { typography } from '#src/components/Typography';
-import { CountryBlock, CountryBlockProps } from '#src/components/input/PhoneNumberInput/CountryBlock';
+import type { CountryBlockProps } from '#src/components/input/PhoneNumberInput/CountryBlock';
+import { CountryBlock } from '#src/components/input/PhoneNumberInput/CountryBlock';
 import React, { useMemo } from 'react';
 import type { CountryAlpha3Code } from '@admiral-ds/flags';
-import { CustomInputHandler } from '#src/components/common/dom/changeInputData';
-import { Menu, MenuDimensions, MenuProps } from '#src/components/Menu';
-import { ItemProps, RenderOptionProps } from '#src/components/Menu/MenuItem';
+import type { CustomInputHandler } from '#src/components/common/dom/changeInputData';
+import type { MenuDimensions, MenuProps } from '#src/components/Menu';
+import { Menu } from '#src/components/Menu';
+import type { ItemProps, RenderOptionProps } from '#src/components/Menu/MenuItem';
 
 export type CountryInfo = {
   uid: string;

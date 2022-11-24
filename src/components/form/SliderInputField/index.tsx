@@ -1,7 +1,9 @@
 import { uid } from '#src/components/common/uid';
 import { refSetter } from '#src/components/common/utils/refSetter';
-import { Field as FieldComponent, FieldOwnProps } from '#src/components/Field';
-import { SliderInput, SliderInputProps } from '#src/components/input/SliderInput';
+import type { FieldOwnProps } from '#src/components/Field';
+import { Field as FieldComponent } from '#src/components/Field';
+import type { SliderInputProps } from '#src/components/input/SliderInput';
+import { SliderInput } from '#src/components/input/SliderInput';
 import * as React from 'react';
 import styled from 'styled-components';
 import {

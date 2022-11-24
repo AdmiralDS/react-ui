@@ -1,11 +1,13 @@
-import React, { ChangeEvent, useState } from 'react';
-import { ComponentMeta, Story } from '@storybook/react';
-import { CheckboxCompositeGroup, CheckboxCompositeGroupProps } from './index';
+import type { ChangeEvent } from 'react';
+import React, { useState } from 'react';
+import type { ComponentMeta, Story } from '@storybook/react';
+import type { CheckboxCompositeGroupProps } from './index';
+import { CheckboxCompositeGroup } from './index';
 import { CheckboxGroup } from '../CheckboxGroup';
 import { withDesign } from 'storybook-addon-designs';
 import { CheckboxField } from '#src/components/form';
 import { ThemeProvider } from 'styled-components';
-import { Theme } from '#src/components/themes';
+import type { Theme } from '#src/components/themes';
 import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
 
 export default {

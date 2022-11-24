@@ -1,4 +1,5 @@
-import { css, DefaultTheme, keyframes, ThemeProps } from 'styled-components';
+import type { DefaultTheme, ThemeProps } from 'styled-components';
+import { css, keyframes } from 'styled-components';
 
 export const skeletonAnimation = (props: ThemeProps<DefaultTheme>) => keyframes`
   0% {

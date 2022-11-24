@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import styled from 'styled-components';
 
-import { Toggle, ToggleProps } from '#src/components/Toggle';
+import type { ToggleProps } from '#src/components/Toggle';
+import { Toggle } from '#src/components/Toggle';
 
 const Separator = styled.div`
   height: 20px;

@@ -1,4 +1,5 @@
-import React, { HTMLAttributes } from 'react';
+import type { HTMLAttributes } from 'react';
+import React from 'react';
 import styled, { css } from 'styled-components';
 import { ReactComponent as InfoIcon } from '@admiral-ds/icons/build/service/InfoSolid.svg';
 import { ReactComponent as WarningIcon } from '@admiral-ds/icons/build/service/ErrorSolid.svg';

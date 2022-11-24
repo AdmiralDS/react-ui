@@ -1,12 +1,12 @@
 import * as React from 'react';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import styled, { ThemeProvider } from 'styled-components';
 import { Calendar } from '#src/components/Calendar';
 import { Label } from '#src/components/Label';
 import { ProgressStepper } from '#src/components/ProgressStepper';
 import { Button } from '#src/components/Button';
-import { Theme } from '#src/components/themes';
+import type { Theme } from '#src/components/themes';
 import type { Locale } from '#src/components/themes';
 
 const Separator = styled.div`

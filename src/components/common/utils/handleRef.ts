@@ -1,4 +1,4 @@
-import React from 'react';
+import type React from 'react';
 
 export type RefCallback<T> = (node: T | null) => void;
 export type RefObject<T> = React.MutableRefObject<T | null | undefined> | React.RefObject<T | null | undefined>;

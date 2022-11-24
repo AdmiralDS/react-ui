@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled, { css } from 'styled-components';
 import { refSetter } from '#src/components/common/utils/refSetter';
-import { InputStatus } from '#src/components/input/types';
+import type { InputStatus } from '#src/components/input/types';
 import { skeletonMixin } from '#src/components/input/Container';
 import { CharacterCounter } from '#src/components/input/TextArea/CharacterCounter';
 import { Label } from '#src/components/Label';

@@ -1,4 +1,5 @@
-import React, { Children, cloneElement, forwardRef, HTMLAttributes, isValidElement } from 'react';
+import type { HTMLAttributes } from 'react';
+import React, { Children, cloneElement, forwardRef, isValidElement } from 'react';
 
 import { CheckboxGroupWrapper } from './CheckboxWrapper';
 

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { withDesign } from 'storybook-addon-designs';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { ReactComponent as CloseOutline } from '@admiral-ds/icons/build/service/CloseOutline.svg';
 import styled from 'styled-components';
 import { T } from '#src/components/T';

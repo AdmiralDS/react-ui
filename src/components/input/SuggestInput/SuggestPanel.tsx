@@ -1,9 +1,11 @@
 import * as React from 'react';
-import { HTMLAttributes } from 'react';
+import type { HTMLAttributes } from 'react';
 import styled from 'styled-components';
 import type { SuggestItem } from './';
-import { MenuItem, RenderOptionProps } from '#src/components/Menu/MenuItem';
-import { getTextHighlightMeta, HighlightFormat } from '#src/components/common/utils/getTextHighlightMeta';
+import type { RenderOptionProps } from '#src/components/Menu/MenuItem';
+import { MenuItem } from '#src/components/Menu/MenuItem';
+import type { HighlightFormat } from '#src/components/common/utils/getTextHighlightMeta';
+import { getTextHighlightMeta } from '#src/components/common/utils/getTextHighlightMeta';
 
 const Highlight = styled.span`
   color: ${(p) => p.theme.color['Primary/Primary 60 Main']};

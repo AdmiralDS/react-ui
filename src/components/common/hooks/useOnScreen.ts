@@ -1,4 +1,5 @@
-import { RefCallback, useCallback, useEffect, useState } from 'react';
+import type { RefCallback } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 export function useOnScreen(options?: IntersectionObserverInit): [boolean, (instance: HTMLElement | null) => void] {
   const [isIntersecting, setIntersecting] = useState(false);

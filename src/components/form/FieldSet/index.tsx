@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { ExtraTextContainer } from '#src/components/Field';
-import { InputStatus } from '#src/components/input';
+import type { InputStatus } from '#src/components/input';
 import styled from 'styled-components';
 import { typography } from '#src/components/Typography';
 

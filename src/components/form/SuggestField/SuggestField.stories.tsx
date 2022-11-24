@@ -1,11 +1,11 @@
 import { INPUT_DIMENSIONS_VALUES } from '#src/components/input';
 import * as React from 'react';
-import { ChangeEvent } from 'react';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { ChangeEvent } from 'react';
+import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { SuggestField } from '#src/components/form/SuggestField';
 import { withDesign } from 'storybook-addon-designs';
 import styled, { ThemeProvider } from 'styled-components';
-import { Theme } from '#src/components/themes';
+import type { Theme } from '#src/components/themes';
 import { DataAttributesDescription } from '#src/components/form/common';
 import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
 

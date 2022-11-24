@@ -1,10 +1,11 @@
-import React, { ChangeEvent, useEffect, useState } from 'react';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { ChangeEvent } from 'react';
+import React, { useEffect, useState } from 'react';
+import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { DateInput } from '#src/components/input/DateInput';
 import { withDesign } from 'storybook-addon-designs';
 import { INPUT_DIMENSIONS_VALUES } from '#src/components/input/types';
 import { ReactComponent as CalendarSolidSVG } from '@admiral-ds/icons/build/system/CalendarSolid.svg';
-import { Theme } from '#src/components/themes';
+import type { Theme } from '#src/components/themes';
 import { ThemeProvider } from 'styled-components';
 import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
 

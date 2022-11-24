@@ -1,9 +1,10 @@
 import React from 'react';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import styled from 'styled-components';
 
-import { Column, Table } from '#src/components/Table';
+import type { Column } from '#src/components/Table';
+import { Table } from '#src/components/Table';
 import { FieldSet } from '#src/components/form';
 import { RadioButton } from '#src/components/RadioButton';
 import { Button } from '#src/components/Button';

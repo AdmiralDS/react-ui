@@ -1,4 +1,5 @@
-import React, { HTMLAttributes, useRef, useState } from 'react';
+import type { HTMLAttributes } from 'react';
+import React, { useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
 import { typography } from '#src/components/Typography';
 import { Checkbox } from '#src/components/Checkbox';

@@ -1,9 +1,10 @@
-import React, { ChangeEvent } from 'react';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { ChangeEvent } from 'react';
+import React from 'react';
+import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import { PhoneNumberInput } from '#src/components/input';
 import styled, { ThemeProvider } from 'styled-components';
-import { Theme } from '#src/components/themes';
+import type { Theme } from '#src/components/themes';
 import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
 
 const Desc = styled.div`

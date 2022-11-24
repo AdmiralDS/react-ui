@@ -1,6 +1,6 @@
-import * as React from 'react';
+import { createContext } from 'react';
 
-const StepperContext = React.createContext<{
+export const StepperContext = createContext<{
   orientation: 'horizontal' | 'vertical';
   activeStep: number;
   lineClamp: 1 | 2 | 3;
@@ -10,4 +10,3 @@ const StepperContext = React.createContext<{
 }>({ orientation: 'horizontal', activeStep: -1, lineClamp: 3, stepsAmount: 0 });
 
 StepperContext.displayName = 'StepperContext';
-export default StepperContext;

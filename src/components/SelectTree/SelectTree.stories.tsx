@@ -1,9 +1,9 @@
 import React from 'react';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import styled from 'styled-components';
 import { SelectTree } from '#src/components/SelectTree';
-import { SelectTreeNodeProps } from '#src/components/SelectTree/SelectTreeNode';
+import type { SelectTreeNodeProps } from '#src/components/SelectTree/SelectTreeNode';
 import { ReactComponent as FolderSolid } from '@admiral-ds/icons/build/documents/FolderSolid.svg';
 import RNBLogoLight from './RNBLogoLight.svg';
 import { T } from '#src/components/T';

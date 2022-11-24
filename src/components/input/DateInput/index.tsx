@@ -1,9 +1,12 @@
 import * as React from 'react';
 import { useRef, useState } from 'react';
-import styled, { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
+import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
+import styled from 'styled-components';
 import { ReactComponent as CalendarOutlineSVG } from '@admiral-ds/icons/build/system/CalendarOutline.svg';
-import { TextInput, TextInputProps } from '#src/components/input/TextInput';
-import { Calendar, CalendarPropType } from '#src/components/Calendar';
+import type { TextInputProps } from '#src/components/input/TextInput';
+import { TextInput } from '#src/components/input/TextInput';
+import type { CalendarPropType } from '#src/components/Calendar';
+import { Calendar } from '#src/components/Calendar';
 import { refSetter } from '#src/components/common/utils/refSetter';
 import { defaultDateInputHandle } from '#src/components/input/DateInput/defaultDateInputHandle';
 import { changeInputData } from '#src/components/common/dom/changeInputData';

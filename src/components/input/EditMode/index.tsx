@@ -1,7 +1,9 @@
 import * as React from 'react';
-import styled, { css, DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
+import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Button } from '#src/components/Button';
-import { TextInput, TextInputProps } from '#src/components/input/TextInput';
+import type { TextInputProps } from '#src/components/input/TextInput';
+import { TextInput } from '#src/components/input/TextInput';
 import { typography } from '#src/components/Typography';
 import { refSetter } from '#src/components/common/utils/refSetter';
 import { changeInputData } from '#src/components/common/dom/changeInputData';

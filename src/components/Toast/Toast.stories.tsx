@@ -1,11 +1,12 @@
 import * as React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import { Button } from '#src/components/Button';
-import { Toast, ToastProps, ToastProvider, useToast } from '#src/components/Toast';
-import { IdentifyToast } from '#src/components/Toast/type';
-import { Theme } from '#src/components/themes';
+import type { ToastProps } from '#src/components/Toast';
+import { Toast, ToastProvider, useToast } from '#src/components/Toast';
+import type { IdentifyToast } from '#src/components/Toast/type';
+import type { Theme } from '#src/components/themes';
 import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
 
 const Desc = styled.div`

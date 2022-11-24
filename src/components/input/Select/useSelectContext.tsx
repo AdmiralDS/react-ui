@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { SelectContextProps, IOptionGroupContext } from './types';
+import type { SelectContextProps, IOptionGroupContext } from './types';
 
 const ConstantSelectContext = React.createContext<SelectContextProps | null>(null);
 

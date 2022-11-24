@@ -1,6 +1,6 @@
 import { withDesign } from 'storybook-addon-designs';
 import * as React from 'react';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import styled from 'styled-components';
 import type { AvatarGroupProps } from '#src/components/AvatarGroup';
 import { AvatarGroup } from '#src/components/AvatarGroup';

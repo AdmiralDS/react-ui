@@ -1,6 +1,8 @@
 import * as React from 'react';
-import { SuggestInput as Suggest, SuggestInputProps } from '#src/components/input';
-import { Field, FieldOwnProps } from '#src/components/Field';
+import type { SuggestInputProps } from '#src/components/input';
+import { SuggestInput as Suggest } from '#src/components/input';
+import type { FieldOwnProps } from '#src/components/Field';
+import { Field } from '#src/components/Field';
 import { uid } from '#src/components/common/uid';
 import {
   passFormFieldContainerDataAttributes,

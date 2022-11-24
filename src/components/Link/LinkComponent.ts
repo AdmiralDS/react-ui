@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { AnchorHTMLAttributes } from 'react';
+import type { AnchorHTMLAttributes } from 'react';
 import { LIGHT_THEME as DEFAULT_THEME } from '#src/components/themes';
 import { styleColorMixin, styleDisabledMixin, styleMixin, styleTextMixin } from '#src/components/Link/mixins';
 

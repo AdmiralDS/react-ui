@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { DropDownContextProps } from '#src/components/input/Select/types';
+import type { DropDownContextProps } from '#src/components/input/Select/types';
 
 const DropDownContext = React.createContext<DropDownContextProps | null>(null);
 

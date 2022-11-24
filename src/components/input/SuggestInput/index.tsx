@@ -1,5 +1,6 @@
 import * as React from 'react';
-import styled, { DefaultTheme, FlattenInterpolation, ThemeContext, ThemeProps } from 'styled-components';
+import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
+import styled, { ThemeContext } from 'styled-components';
 import { ReactComponent as SearchOutlineSVG } from '@admiral-ds/icons/build/system/SearchOutline.svg';
 import { LIGHT_THEME } from '#src/components/themes';
 import { keyboardKey } from '#src/components/common/keyboardKey';
@@ -7,11 +8,12 @@ import { changeInputData } from '#src/components/common/dom/changeInputData';
 import { refSetter } from '#src/components/common/utils/refSetter';
 import { InputIconButton } from '#src/components/InputIconButton';
 import { StyledDropdownContainer } from '#src/components/DropdownContainer';
-import { RenderOptionProps } from '#src/components/Menu/MenuItem';
+import type { RenderOptionProps } from '#src/components/Menu/MenuItem';
 import { Menu } from '#src/components/Menu';
-import { HighlightFormat } from '#src/components/common/utils/getTextHighlightMeta';
+import type { HighlightFormat } from '#src/components/common/utils/getTextHighlightMeta';
 import type { InputStatus } from '#src/components/input/types';
-import { TextInput, TextInputProps } from '#src/components/input/TextInput';
+import type { TextInputProps } from '#src/components/input/TextInput';
+import { TextInput } from '#src/components/input/TextInput';
 import { MessagePanel } from '#src/components/input/SuggestInput/MessagePanel';
 import { SuggestPanel } from '#src/components/input/SuggestInput/SuggestPanel';
 

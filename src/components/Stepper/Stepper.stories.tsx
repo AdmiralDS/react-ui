@@ -1,10 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 
 import { Button } from '#src/components/Button';
-import { Step, StepContent, Stepper } from '#src/components/Stepper';
+import { Stepper } from '#src/components/Stepper';
+import { Step } from '#src/components/Stepper/Step';
+import { StepContent } from '#src/components/Stepper/StepContent';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
