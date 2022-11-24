@@ -2,7 +2,11 @@ import styled, { css } from 'styled-components';
 import { typography } from '#src/components/Typography';
 import type { ChipAppearance, ChipDimension } from '#src/components/Chips';
 import { Badge } from '#src/components/Badge';
-import { CloseIconPlacementButton, IconPlacementDimension } from '#src/components/IconPlacement';
+import {
+  CloseIconPlacementButton,
+  IconPlacementAppearance,
+  IconPlacementDimension,
+} from '#src/components/IconPlacement';
 
 const heights = css<{ dimension: ChipDimension }>`
   height: ${({ dimension }) => {
@@ -120,12 +124,11 @@ const colorsBorderAndBackground = css<{
     return appearance === 'filled' ? theme.color['Neutral/Neutral 10'] : 'transparent';
   }};
 
-  border: 1px solid
-    ${({ theme, appearance, disabled }) => {
-      if (disabled && appearance !== 'filled') return theme.color['Neutral/Neutral 30'];
-      if (appearance === 'filled') return 'transparent';
-      else return theme.color['Primary/Primary 60 Main'];
-    }};
+  border: ${({ theme, appearance, disabled }) => {
+    if (appearance === 'filled') return 'none';
+    if (disabled) return `1px solid ${theme.color['Neutral/Neutral 30']};`;
+    else return `1px solid ${theme.color['Primary/Primary 60 Main']};`;
+  }};
 
   border-radius: 16px;
 
@@ -219,6 +222,7 @@ export const ChipContentWrapperStyled = styled.div<{
   withCloseIcon?: boolean;
 }>`
   text-overflow: ellipsis;
+  overflow: hidden;
   white-space: nowrap;
   display: inline-flex;
 
@@ -272,7 +276,11 @@ export const StyledBadge = styled(Badge)<{ dimension: ChipDimension }>`
   margin-left: ${({ dimension }) => (dimension === 's' ? '6px' : '8px')};
 `;
 
-export const CloseIconButton = styled(CloseIconPlacementButton)<{ dimension: IconPlacementDimension }>`
+export const CloseIconButton = styled(CloseIconPlacementButton)<{
+  dimension: IconPlacementDimension;
+  appearance: IconPlacementAppearance;
+}>`
+  //дополнительный отступ в 2px, чтобы кружок ховера не стоял вплотную к элементу сдева
   margin-left: ${(p) => (p.dimension === 's' ? '6px' : '8px')};
-  margin-right: ${(p) => (p.dimension === 's' ? '3px' : '5px')};
+  ${(p) => (p.appearance === 'primary' ? (p.dimension === 's' ? 'margin-right: 3px' : 'margin-right: 5px') : '')};
 `;
