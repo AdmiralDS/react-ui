@@ -326,8 +326,6 @@ const ChipsBadgesDemo: ComponentStory<typeof Chips> = (props) => {
             onClick={() => (props.disabled ? null : setSelectedM(item.id))}
             iconBefore={item?.iconBefore}
             iconAfter={item?.iconAfter}
-            // Если onClose указан, вместо iconAfter отобразится closeIcon
-            onClose={item?.onClose}
           >
             {item.label}
           </Chips>
@@ -346,8 +344,6 @@ const ChipsBadgesDemo: ComponentStory<typeof Chips> = (props) => {
             onClick={() => (props.disabled ? null : setSelectedS(item.id))}
             iconBefore={item?.iconBefore}
             iconAfter={item?.iconAfter}
-            // Если onClose указан, вместо iconAfter отобразится closeIcon
-            onClose={item?.onClose}
           >
             {item.label}
           </Chips>
