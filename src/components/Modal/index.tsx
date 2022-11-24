@@ -46,29 +46,32 @@ const width = css<{ dimension: Dimension; mobile?: boolean }>`
   }};
 `;
 
-const Title = styled.h5<{ mobile?: boolean }>`
-  ${typography['Header/H5']}
+const Title = styled.h5<{ mobile: boolean }>`
+  ${({ mobile }) => (mobile ? typography['Header/H6'] : typography['Header/H5'])};s
   color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
-  margin: 0 32px 16px 0;
+  margin: 0 0 10px 0;
+  padding: ${({ mobile }) => (mobile ? '0 46px 0 16px' : '0 56px 0 24px')};
 `;
 
-const Content = styled.div<{ $overflow?: boolean; scrollbar: number }>`
+const Content = styled.div<{ scrollbar: number; mobile: boolean }>`
   overflow-y: auto;
   outline: none;
-  ${({ $overflow, scrollbar }) => $overflow && `padding-right: ${24 - scrollbar}px;`}
+  padding: ${({ scrollbar, mobile }) => `6px ${(mobile ? 16 : 24) - scrollbar}px 6px ${mobile ? 16 : 24}px`};
 `;
 
-const ButtonPanel = styled.div<{ mobile?: boolean }>`
+const ButtonPanel = styled.div<{ mobile: boolean }>`
   display: flex;
-  flex-direction: row-reverse;
-  margin-top: 24px;
+  flex-direction: ${({ mobile }) => (mobile ? 'column-reverse' : 'row-reverse')};
+  margin-top: 18px;
+  padding: ${({ mobile }) => (mobile ? '0 16px' : '0 24px')};
 
   & > button {
-    margin-right: 16px;
+    margin: ${({ mobile }) => (mobile ? '0 0 16px 0' : '0 16px 0 0')};
+    ${({ mobile }) => mobile && 'width: 100%;'}
   }
 
   & > button:first-child {
-    margin-right: 0;
+    margin: 0;
   }
 `;
 
@@ -81,7 +84,7 @@ const ModalComponent = styled.div<{ dimension: Dimension; mobile?: boolean }>`
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  padding: ${({ mobile }) => (mobile ? '20px 16px 24px 0px' : '20px 24px 24px 0px')};
+  padding: ${({ mobile }) => (mobile ? '20px 0 24px' : '20px 0 24px')};
   ${width};
   max-height: ${({ mobile }) => (mobile ? '84vh' : '90vh')};
   background-color: ${({ theme }) => theme.color['Special/Elevated BG']};
@@ -90,30 +93,8 @@ const ModalComponent = styled.div<{ dimension: Dimension; mobile?: boolean }>`
   ${({ mobile }) => (mobile ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
   color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
   outline: none;
-
-  & > ${Title}, ${ButtonPanel}, ${Content} {
-    padding-left: ${({ mobile }) => (mobile ? 16 : 24)}px;
-  }
-
-  ${({ mobile }) =>
-    mobile &&
-    `
-    & > ${Title} {
-      ${typography['Header/H6']}
-      margin: 0 30px 16px 0;
-    }
-    & > ${ButtonPanel} {
-      flex-direction: column-reverse;
-      & > button {
-        width: 100%;
-        margin-bottom: 16px;
-      }
-      & > button:first-child {
-          margin-bottom: 0;
-      }
-    }
-  `}
 `;
+
 const CloseButton = styled(CloseIconPlacementButton)<{ mobile?: boolean }>`
   position: absolute;
   top: 16px;
@@ -122,14 +103,22 @@ const CloseButton = styled(CloseIconPlacementButton)<{ mobile?: boolean }>`
 
 export const emptyOverlayStyledCss = css``;
 
+const ModalContext = React.createContext({ mobile: false } as { mobile: boolean });
+
 export const ModalTitle: React.FC<React.HTMLAttributes<HTMLHeadingElement>> = ({ children, ...props }) => {
-  return <Title {...props}>{children}</Title>;
+  const mobile = React.useContext(ModalContext).mobile;
+  return (
+    <Title mobile={mobile} {...props}>
+      {children}
+    </Title>
+  );
 };
 
 export const ModalContent: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, ...props }) => {
   const contentRef = React.useRef<HTMLDivElement | null>(null);
   const [overflow, setOverflow] = React.useState(false);
   const [scrollbarSize, setScrollbarSize] = React.useState(0);
+  const mobile = React.useContext(ModalContext).mobile;
 
   React.useLayoutEffect(() => {
     if (contentRef.current && checkOverflow(contentRef.current) !== overflow) {
@@ -154,14 +143,19 @@ export const ModalContent: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ c
   }, [contentRef.current, overflow, setOverflow]);
 
   return (
-    <Content tabIndex={-1} ref={contentRef} $overflow={overflow} scrollbar={scrollbarSize} {...props}>
+    <Content tabIndex={-1} ref={contentRef} scrollbar={overflow ? scrollbarSize : 0} mobile={mobile} {...props}>
       {children}
     </Content>
   );
 };
 
 export const ModalButtonPanel: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, ...props }) => {
-  return <ButtonPanel {...props}>{children}</ButtonPanel>;
+  const mobile = React.useContext(ModalContext).mobile;
+  return (
+    <ButtonPanel mobile={mobile} {...props}>
+      {children}
+    </ButtonPanel>
+  );
 };
 
 export interface ModalProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -300,7 +294,7 @@ export const Modal = React.forwardRef<HTMLDivElement, ModalProps>(
           mobile={mobile}
           {...props}
         >
-          {children}
+          <ModalContext.Provider value={{ mobile: !!mobile }}>{children}</ModalContext.Provider>
           {displayCloseIcon && (
             <CloseButton
               dimension="lSmall"
