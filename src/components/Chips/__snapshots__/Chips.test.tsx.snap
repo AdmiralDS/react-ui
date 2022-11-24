@@ -22,7 +22,7 @@ Object {
   pointer-events: auto;
   cursor: default;
   background-color: #E5E7EB;
-  border: 1px solid transparent;
+  border: none;
   border-radius: 16px;
   height: 32px;
   padding: 6px 12px;
@@ -67,6 +67,7 @@ Object {
 
 .c1 {
   text-overflow: ellipsis;
+  overflow: hidden;
   white-space: nowrap;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
@@ -128,7 +129,7 @@ Object {
   pointer-events: auto;
   cursor: default;
   background-color: #E5E7EB;
-  border: 1px solid transparent;
+  border: none;
   border-radius: 16px;
   height: 32px;
   padding: 6px 12px;
@@ -173,6 +174,7 @@ Object {
 
 .c1 {
   text-overflow: ellipsis;
+  overflow: hidden;
   white-space: nowrap;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
@@ -336,6 +338,7 @@ Object {
 
 .c1 {
   text-overflow: ellipsis;
+  overflow: hidden;
   white-space: nowrap;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
@@ -444,6 +447,7 @@ Object {
 
 .c1 {
   text-overflow: ellipsis;
+  overflow: hidden;
   white-space: nowrap;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
@@ -605,6 +609,7 @@ Object {
 
 .c1 {
   text-overflow: ellipsis;
+  overflow: hidden;
   white-space: nowrap;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
@@ -711,6 +716,7 @@ Object {
 
 .c1 {
   text-overflow: ellipsis;
+  overflow: hidden;
   white-space: nowrap;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
