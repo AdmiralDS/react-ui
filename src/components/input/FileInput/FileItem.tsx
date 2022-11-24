@@ -299,16 +299,12 @@ export const FileItem = forwardRef<HTMLDivElement, FileItemProps>(
       onPreviewIconClick?.(fileId);
     };
 
-    const handleKeyDown = React.useCallback(
-      (e) => {
-        e.stopPropagation();
-        const code = keyboardKey.getCode(e);
-        if (code === keyboardKey.Enter || code === keyboardKey[' ']) {
-          onPreviewIconClick?.(fileId);
-        }
-      },
-      [props.onClick],
-    );
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+      const code = keyboardKey.getCode(e);
+      if (code === keyboardKey.Enter || code === keyboardKey[' ']) {
+        onPreviewIconClick?.(fileId);
+      }
+    };
 
     return (
       <Container ref={ref} dimension={dimension} filesLayoutCssMixin={filesLayoutCssMixin}>
