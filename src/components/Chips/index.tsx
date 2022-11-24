@@ -1,4 +1,4 @@
-import type { FC, HTMLAttributes, MouseEvent, ReactNode } from 'react';
+import type { FC, HTMLAttributes, MouseEvent, KeyboardEvent, ReactNode } from 'react';
 import * as React from 'react';
 
 import { Tooltip } from '#src/components/Tooltip';
@@ -102,37 +102,29 @@ export const Chips: FC<ChipsProps> = ({
     }
   }, [setTooltipVisible, chipRef.current]);
 
-  const handleClickCloseIcon = React.useCallback(
-    (e: MouseEvent) => {
-      e.stopPropagation();
+  const handleClickCloseIcon = (e: MouseEvent) => {
+    e.stopPropagation();
+    onClose?.();
+  };
 
-      if (!disabled) {
-        onClose?.();
-      }
-    },
-    [onClose],
-  );
-
-  const handleKeyDown = React.useCallback(
-    (e) => {
-      e.stopPropagation();
-      if (!disabled) {
-        const code = keyboardKey.getCode(e);
-        if (code === keyboardKey.Enter || code === keyboardKey[' ']) {
-          if (withCloseIcon) {
-            onClose?.();
-          } else {
-            props.onClick?.(e);
-          }
+  const handleKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
+    if (!disabled) {
+      const code = keyboardKey.getCode(e);
+      if (code === keyboardKey.Enter || code === keyboardKey[' ']) {
+        if (withCloseIcon) {
+          onClose?.();
+        } else {
+          props.onClick?.(e as any);
         }
       }
-    },
-    [props.onClick],
-  );
+      props.onKeyDown?.(e);
+    }
+  };
 
   return (
     <>
       <ChipComponentStyled
+        {...props}
         ref={chipRef}
         dimension={dimension}
         disabled={disabled}
@@ -143,7 +135,6 @@ export const Chips: FC<ChipsProps> = ({
         withTooltip={overflow}
         withBadge={withBadge}
         onKeyDown={handleKeyDown}
-        {...props}
         tabIndex={props.tabIndex ?? 0}
       >
         <ChipContentWrapperStyled
@@ -177,7 +168,7 @@ export const Chips: FC<ChipsProps> = ({
             <CloseIconButton
               dimension={dimension === 'm' ? 'mBig' : 's'}
               highlightFocus={false}
-              onClick={disabled ? void 0 : handleClickCloseIcon}
+              onClick={handleClickCloseIcon}
               disabled={disabled}
               tabIndex={-1}
               appearance={appearance === 'outlined' ? 'primary' : 'secondary'}
