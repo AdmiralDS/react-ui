@@ -52,6 +52,7 @@ const PreviewWrapper = styled.div<{
   dimension?: FileInputDimension;
   status?: Status;
 }>`
+  padding: 0;
   box-sizing: border-box;
   display: flex;
   flex-direction: row;
@@ -60,8 +61,6 @@ const PreviewWrapper = styled.div<{
   border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
   border-width: 1px;
   border-style: solid;
-  padding: ${(p) => (p.dimension === 'xl' ? FILE_ITEM_WRAPPER_PADDING_XL : FILE_ITEM_WRAPPER_PADDING_M)};
-  height: ${(p) => (p.dimension === 'xl' ? FILE_ITEM_WRAPPER_HEIGHT_XL : FILE_ITEM_WRAPPER_HEIGHT_M)};
   ${typography['Body/Body 2 Long']};
   ${statusMixin};
 `;
@@ -126,6 +125,11 @@ const IconWrapper = styled.div<{ status?: Status; showHover: boolean }>`
   }
 
   ${(p) => (p.status === 'Queue' || !p.showHover ? disabledStyles : hoveredFileTypeIconCss)};
+
+  &:focus-visible {
+    outline-offset: 2px;
+    outline: ${(p) => p.theme.color['Primary/Primary 60 Main']} solid 2px;
+  }
 `;
 
 const StyledEyeOutline = styled(EyeOutline)`
@@ -147,13 +151,17 @@ const Content = styled.div<{ dimension?: FileInputDimension }>`
   display: flex;
   flex-direction: ${(p) => (p.dimension === 'm' ? 'row' : 'column')};
   min-width: 0;
+  overflow: hidden;
 `;
 
 const FileInfoBlock = styled.div<{ dimension?: FileInputDimension }>`
   display: ${(p) => (p.dimension === 'm' ? 'block' : 'flex')};
+  box-sizing: border-box;
   align-items: center;
   overflow: hidden;
   height: ${(p) => (p.dimension === 'xl' ? '40px' : '20px')};
+  padding: ${(p) => (p.dimension === 'xl' ? FILE_ITEM_WRAPPER_PADDING_XL : FILE_ITEM_WRAPPER_PADDING_M)};
+  height: ${(p) => (p.dimension === 'xl' ? FILE_ITEM_WRAPPER_HEIGHT_XL : FILE_ITEM_WRAPPER_HEIGHT_M)};
 `;
 
 const FileName = styled.div`
@@ -172,6 +180,7 @@ const FunctionalBlock = styled.div`
   display: flex;
   flex: 0 0 auto;
   margin-left: 8px;
+  align-items: center;
 `;
 
 const functionalItemSizeMixin = css<{ dimension?: FileInputDimension }>`
@@ -182,10 +191,6 @@ const functionalItemSizeMixin = css<{ dimension?: FileInputDimension }>`
 const StyledSpinner = styled(Spinner)<{ dimension?: FileInputDimension }>`
   margin-right: 8px;
   ${functionalItemSizeMixin}
-`;
-
-const CloseButton = styled(CloseIconPlacementButton)`
-  margin: 0;
 `;
 
 export const ErrorBlock = styled.div<{ status?: Status; dimension?: FileInputDimension }>`
@@ -298,7 +303,12 @@ export const FileItem = forwardRef<HTMLDivElement, FileItemProps>(
         <PreviewWrapper {...props} ref={previewWrapperRef} status={status} dimension={dimension}>
           <FileInfoBlock dimension={dimension}>
             {dimension === 'xl' && (
-              <IconWrapper status={status} showHover={!!onPreviewIconClick} onClick={handlePreviewIconClick}>
+              <IconWrapper
+                status={status}
+                showHover={!!onPreviewIconClick}
+                onClick={handlePreviewIconClick}
+                tabIndex={onPreviewIconClick ? 0 : -1}
+              >
                 {previewImageURL ? (
                   <ImagePreview>
                     <img src={previewImageURL} alt={''} />
@@ -321,11 +331,13 @@ export const FileItem = forwardRef<HTMLDivElement, FileItemProps>(
           </FileInfoBlock>
           <FunctionalBlock>
             {status === 'Loading' && <StyledSpinner dimension={dimension} />}
-            <CloseButton
-              dimension={dimension === 'xl' ? 'lSmall' : 'mSmall'}
-              disabled={status === 'Queue'}
-              onClick={handleCloseIconClick}
-            />
+            {onCloseIconClick && (
+              <CloseIconPlacementButton
+                dimension={dimension === 'xl' ? 'lSmall' : 'mSmall'}
+                disabled={status === 'Queue'}
+                onClick={handleCloseIconClick}
+              />
+            )}
           </FunctionalBlock>
         </PreviewWrapper>
         {errorMessage && status === 'Error' && <ErrorBlock status={status}>{errorMessage}</ErrorBlock>}
