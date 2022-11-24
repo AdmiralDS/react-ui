@@ -1,4 +1,4 @@
-import type { FC, HTMLAttributes, MouseEvent, ReactNode } from 'react';
+import type { FC, HTMLAttributes, MouseEvent, KeyboardEvent, ReactNode } from 'react';
 import * as React from 'react';
 
 import { Tooltip } from '#src/components/Tooltip';
@@ -8,13 +8,14 @@ import {
   ChipChildrenWrapperStyled,
   ChipComponentStyled,
   ChipContentWrapperStyled,
-  CloseIconWrapperStyled,
+  CloseIconButton,
   IconAfterWrapperStyled,
   IconBeforeWrapperStyled,
   IconWrapperStyled,
   StyledBadge,
 } from './style';
 import type { BadgeAppearance } from '#src/components/Badge';
+import { keyboardKey } from '#src/components/common/keyboardKey';
 
 export type ChipDimension = 's' | 'm';
 export type ChipAppearance = 'filled' | 'outlined';
@@ -101,20 +102,29 @@ export const Chips: FC<ChipsProps> = ({
     }
   }, [setTooltipVisible, chipRef.current]);
 
-  const handleClickCloseIcon = React.useCallback(
-    (e: MouseEvent) => {
-      e.stopPropagation();
+  const handleClickCloseIcon = (e: MouseEvent) => {
+    e.stopPropagation();
+    onClose?.();
+  };
 
-      if (!disabled) {
-        onClose?.();
+  const handleKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
+    if (!disabled) {
+      const code = keyboardKey.getCode(e);
+      if (code === keyboardKey.Enter || code === keyboardKey[' ']) {
+        if (withCloseIcon) {
+          onClose?.();
+        } else {
+          props.onClick?.(e as any);
+        }
       }
-    },
-    [onClose],
-  );
+      props.onKeyDown?.(e);
+    }
+  };
 
   return (
     <>
       <ChipComponentStyled
+        {...props}
         ref={chipRef}
         dimension={dimension}
         disabled={disabled}
@@ -124,7 +134,7 @@ export const Chips: FC<ChipsProps> = ({
         withCloseIcon={withCloseIcon}
         withTooltip={overflow}
         withBadge={withBadge}
-        {...props}
+        onKeyDown={handleKeyDown}
         tabIndex={props.tabIndex ?? 0}
       >
         <ChipContentWrapperStyled
@@ -155,16 +165,14 @@ export const Chips: FC<ChipsProps> = ({
             </StyledBadge>
           )}
           {onClose && (
-            <IconAfterWrapperStyled dimension={dimension} withCloseIcon={withCloseIcon}>
-              <IconWrapperStyled dimension={dimension} withCloseIcon={withCloseIcon}>
-                <CloseIconWrapperStyled
-                  appearance={appearance}
-                  disabled={disabled}
-                  selected={selected}
-                  onClick={disabled ? void 0 : handleClickCloseIcon}
-                />
-              </IconWrapperStyled>
-            </IconAfterWrapperStyled>
+            <CloseIconButton
+              dimension={dimension === 'm' ? 'mBig' : 's'}
+              highlightFocus={false}
+              onClick={handleClickCloseIcon}
+              disabled={disabled}
+              tabIndex={-1}
+              appearance={appearance === 'outlined' ? 'primary' : 'secondary'}
+            />
           )}
         </ChipContentWrapperStyled>
       </ChipComponentStyled>

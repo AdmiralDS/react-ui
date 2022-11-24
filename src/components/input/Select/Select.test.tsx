@@ -375,7 +375,7 @@ describe('SearchSelect', () => {
       const valueWrapper = document.getElementById('selectValueWrapper') as HTMLElement;
       // такой стремный селектор нужен, так как по другому svg не достанешь...
       const chipsCloses = Array.from(valueWrapper.querySelectorAll('.chip')).map(
-        (chipElem) => chipElem.firstChild?.lastChild?.firstChild?.firstChild,
+        (chipElem) => chipElem.firstChild?.lastChild,
       ) as Element[];
 
       Array.from(selectElem.options).forEach((nativeOption, nativeOptionInd) => {
@@ -405,7 +405,7 @@ describe('SearchSelect', () => {
       const valueWrapper = document.getElementById('selectValueWrapper') as HTMLElement;
       // такой стремный селектор нужен, так как по другому svg не достанешь...
       const chipsCloses = Array.from(valueWrapper.querySelectorAll('.chip')).map(
-        (chipElem) => chipElem.firstChild?.lastChild?.firstChild?.firstChild,
+        (chipElem) => chipElem.firstChild?.lastChild,
       ) as Element[];
 
       Array.from(selectElem.options).forEach((nativeOption, nativeOptionInd) => {
@@ -485,7 +485,7 @@ describe('SearchSelect', () => {
       const valueWrapper = document.getElementById('selectValueWrapper') as HTMLElement;
       // такой стремный селектор нужен, так как по другому svg не достанешь...
       const chipsCloses = Array.from(valueWrapper.querySelectorAll('.chip')).map(
-        (chipElem) => chipElem.firstChild?.lastChild?.firstChild?.firstChild,
+        (chipElem) => chipElem.firstChild?.lastChild,
       ) as Element[];
 
       Array.from(selectElem.options).forEach((nativeOption, nativeOptionInd) => {
