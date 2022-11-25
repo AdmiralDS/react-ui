@@ -109,6 +109,7 @@ const IconPlacementButton = styled.button<{ dimension?: IconPlacementDimension; 
   border: none;
   background-color: transparent;
   appearance: none;
+  flex: 0 0 auto;
   height: ${(p) => getIconSize(p.dimension)}px;
   width: ${(p) => getIconSize(p.dimension)}px;
   border-radius: ${(p) => smallGroupBorderRadius(p.theme.shape)};
