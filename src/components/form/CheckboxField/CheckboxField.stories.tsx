@@ -9,6 +9,7 @@ import styled, { ThemeProvider } from 'styled-components';
 import { ReactComponent as InfoSolidSVG } from '@admiral-ds/icons/build/service/InfoSolid.svg';
 import { Hint } from '#src/components/Hint';
 import { Theme } from '#src/components/themes';
+import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
 
 export default {
   title: 'Admiral-2.1/Form Field/CheckboxField',
@@ -52,7 +53,7 @@ export default {
       control: { type: 'text' },
     },
     themeBorderKind: {
-      options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
+      options: ALL_BORDER_RADIUS_VALUES,
       control: { type: 'radio' },
     },
   },

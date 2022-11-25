@@ -6,6 +6,7 @@ import { ReactComponent as AttachFileOutline } from '@admiral-ds/icons/build/sys
 import { TextButton } from './index';
 import { T } from '#src/components/T';
 import { Theme } from '#src/components/themes';
+import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
 
 const StyledText = styled(T)`
   margin: 10px 0;
@@ -60,7 +61,7 @@ export default {
   },
   argTypes: {
     themeBorderKind: {
-      options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
+      options: ALL_BORDER_RADIUS_VALUES,
       control: { type: 'radio' },
     },
     skeleton: {

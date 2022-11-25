@@ -8,6 +8,7 @@ import { withDesign } from 'storybook-addon-designs';
 import { LIGHT_THEME, Theme } from '#src/components/themes';
 import { ThemeProvider } from 'styled-components';
 import { getTextHighlightMeta } from '#src/components/common/utils/getTextHighlightMeta';
+import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
 
 export default {
   title: 'Admiral-2.1/Input/SuggestInput',
@@ -79,7 +80,7 @@ export default {
     },
 
     themeBorderKind: {
-      options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
+      options: ALL_BORDER_RADIUS_VALUES,
       control: { type: 'radio' },
     },
     skeleton: {

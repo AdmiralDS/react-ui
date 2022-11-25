@@ -9,7 +9,7 @@ import { withDesign } from 'storybook-addon-designs';
 import { Menu } from '#src/components/Menu';
 import { MenuItem, RenderOptionProps } from '#src/components/Menu/MenuItem';
 import { Theme } from '#src/components/themes';
-import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
+import { mediumGroupBorderRadius, ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -47,7 +47,7 @@ export default {
   },
   argTypes: {
     themeBorderKind: {
-      options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
+      options: ALL_BORDER_RADIUS_VALUES,
       control: { type: 'radio' },
     },
   },

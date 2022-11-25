@@ -12,6 +12,7 @@ import { ReactComponent as CloseOutline } from '@admiral-ds/icons/build/service/
 import { Button } from '#src/components/Button';
 import { uid } from '#src/components/common/uid';
 import { InputStatus } from '#src/components/input';
+import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
 
 const Separator = styled.div`
   height: 40px;
@@ -82,7 +83,7 @@ export default {
       control: { type: 'text' },
     },
     themeBorderKind: {
-      options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
+      options: ALL_BORDER_RADIUS_VALUES,
       control: { type: 'radio' },
     },
   },

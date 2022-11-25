@@ -12,6 +12,7 @@ import { Button } from '#src/components/Button';
 import { InputField } from '#src/components/form';
 import type { InputFieldProps } from '#src/components/form';
 import { Theme } from '#src/components/themes';
+import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
 
 const Separator = styled.div<{ height?: number }>`
   height: ${({ height }) => (height ? height : 20)}px;
@@ -91,7 +92,7 @@ export default {
       control: { type: 'radio' },
     },
     themeBorderKind: {
-      options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
+      options: ALL_BORDER_RADIUS_VALUES,
       control: { type: 'radio' },
     },
   },

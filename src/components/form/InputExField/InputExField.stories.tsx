@@ -8,6 +8,7 @@ import styled, { ThemeProvider } from 'styled-components';
 import { Theme } from '#src/components/themes';
 import { DataAttributesDescription } from '#src/components/form/common';
 import { ValueType } from '#src/components/input/InputEx/ValueType';
+import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
 
 export default {
   title: 'Admiral-2.1/Form Field/InputExField',
@@ -68,7 +69,7 @@ export default {
       control: false,
     },
     themeBorderKind: {
-      options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
+      options: ALL_BORDER_RADIUS_VALUES,
       control: { type: 'radio' },
     },
     skeleton: {

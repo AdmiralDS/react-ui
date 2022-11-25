@@ -24,6 +24,9 @@ export function TooltipHoc<P extends React.ComponentPropsWithRef<any>>(Component
   const WrappedComponent = (props: P & TooltipHocProps & WrappedComponentProps) => {
     const { forwardedRef, renderContent, container, withDelay, tooltipRef, tooltipPosition, ...wrappedCompProps } =
       props;
+    // Пустая строка, undefined, null и false не будут отображены
+    const emptyContent = !renderContent() && renderContent() !== 0;
+
     const anchorElementRef = React.useRef<any>(null);
     const [visible, setVisible] = React.useState(false);
     const [node, setNode] = React.useState<HTMLElement | null>(null);
@@ -55,7 +58,7 @@ export function TooltipHoc<P extends React.ComponentPropsWithRef<any>>(Component
     return (
       <>
         <Component {...(wrappedCompProps as P & object)} ref={refSetter(forwardedRef, anchorElementRef, setNode)} />
-        {visible && (
+        {visible && !emptyContent && (
           <Tooltip
             targetRef={anchorElementRef}
             renderContent={renderContent}

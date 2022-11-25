@@ -7,6 +7,7 @@ import { ComponentMeta, ComponentStory, Story } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import { Theme } from '#src/components/themes';
 import { TextButton } from '#src/components/TextButton';
+import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
 
 const Separator = styled.div<{ height?: number }>`
   height: ${({ height }) => (height ? height : 20)}px;
@@ -75,7 +76,7 @@ export default {
       control: { type: 'boolean' },
     },
     themeBorderKind: {
-      options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
+      options: ALL_BORDER_RADIUS_VALUES,
       control: { type: 'radio' },
     },
   },

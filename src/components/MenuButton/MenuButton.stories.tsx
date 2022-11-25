@@ -8,6 +8,7 @@ import { T } from '#src/components/T';
 import { Theme } from '#src/components/themes';
 import { MenuItem, RenderOptionProps } from '#src/components/Menu/MenuItem';
 import { ReactComponent as StarSolid } from '@admiral-ds/icons/build/system/StarSolid.svg';
+import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
 
 const DarkDiv = styled.div`
   background-color: ${({ theme }) => theme.color['Special/Dark Static Neutral 00']};
@@ -137,7 +138,7 @@ export default {
       control: { type: 'boolean' },
     },
     themeBorderKind: {
-      options: ['Border radius 0', 'Border radius 2', 'Border radius 4', 'Border radius 8'],
+      options: ALL_BORDER_RADIUS_VALUES,
       control: { type: 'radio' },
     },
   },

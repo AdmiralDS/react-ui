@@ -4,14 +4,8 @@ import { FileInputDimension } from '#src/components/input/FileInput';
 import styled, { css, DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { typography } from '#src/components/Typography';
-import { formatFileSize, getFormat } from '#src/components/input/FileInput/utils';
+import { formatFileSize, formatFileType, getFileTypeIcon } from '#src/components/input/FileInput/utils';
 import { Spinner } from '#src/components/Spinner';
-import { ReactComponent as PDFSolid } from '@admiral-ds/icons/build/documents/PDFSolid.svg';
-import { ReactComponent as PPTSolid } from '@admiral-ds/icons/build/documents/PPTSolid.svg';
-import { ReactComponent as FileWordSolid } from '@admiral-ds/icons/build/documents/FileWordSolid.svg';
-import { ReactComponent as XLSSolid } from '@admiral-ds/icons/build/documents/XLSSolid.svg';
-import { ReactComponent as DocsSolid } from '@admiral-ds/icons/build/documents/DocsSolid.svg';
-import { ReactComponent as JpgSolid } from '@admiral-ds/icons/build/documents/JpgSolid.svg';
 import { ReactComponent as EyeOutline } from '@admiral-ds/icons/build/service/EyeOutline.svg';
 import {
   ERROR_BLOCK_HEIGHT_M,
@@ -201,37 +195,6 @@ export const ErrorBlock = styled.div<{ status?: Status; dimension?: FileInputDim
   height: ${(p) => (p.dimension === 'xl' ? ERROR_BLOCK_HEIGHT_XL : ERROR_BLOCK_HEIGHT_M)};
 `;
 
-/**
- * https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types#important_mime_types_for_web_developers
- * @param type {string}
- */
-const getIcon = (type: string) => {
-  switch (type) {
-    case 'image/jpeg':
-    case 'image/png':
-    case 'image/tiff':
-    case 'image/svg+xml':
-    case 'image/apng':
-    case 'image/avif':
-    case 'image/gif':
-    case 'image/webp':
-      return JpgSolid;
-    case 'application/pdf':
-      return PDFSolid;
-    case 'application/vnd.ms-powerpoint':
-    case 'application/vnd.openxmlformats-officedocument.presentationml.presentation':
-      return PPTSolid;
-    case 'application/vnd.ms-excel':
-    case 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
-      return XLSSolid;
-    case 'application/msword':
-    case 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
-      return FileWordSolid;
-    default:
-      return DocsSolid;
-  }
-};
-
 export interface FileAttributeProps {
   fileId: string;
   /** Имя файла без расширения */
@@ -255,10 +218,14 @@ export interface FileAttributeProps {
 export interface FileItemProps extends HTMLAttributes<HTMLDivElement>, FileAttributeProps {
   /** Размер FileItem */
   dimension?: FileInputDimension;
-  /** Позволяет добавлять миксин для компоновки загруженных файлов, созданный с помощью styled css  */
+  /** Позволяет добавлять миксин для компоновки загруженных файлов, созданный с помощью styled css */
   filesLayoutCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
-  /** Позволяет выводить размер файла в требуемом формате  */
+  /** Позволяет выводить размер файла в требуемом формате */
   formatFileSizeInfo?: (sizeInBytes: number) => string;
+  /** Позволяет назначать формат файла */
+  formatFileTypeInfo?: (type: string) => string;
+  /** Позволяет назначать иконку файла */
+  formatFileTypeIcon?: (type: string) => React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
   children?: never;
 }
 
@@ -277,12 +244,14 @@ export const FileItem = forwardRef<HTMLDivElement, FileItemProps>(
       dimension,
       filesLayoutCssMixin,
       formatFileSizeInfo = formatFileSize,
+      formatFileTypeInfo = formatFileType,
+      formatFileTypeIcon = getFileTypeIcon,
       ...props
     },
     ref,
   ) => {
-    const PreviewIcon = getIcon(fileType);
-    const fileFormatInfo = getFormat(fileType);
+    const PreviewIcon = formatFileTypeIcon(fileType);
+    const fileFormatInfo = formatFileTypeInfo(fileType);
     const fileSizeInfo = formatFileSizeInfo(fileSize);
     const fileInfo = `${fileFormatInfo}・${fileSizeInfo}`;
 

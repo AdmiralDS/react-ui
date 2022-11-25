@@ -25,6 +25,9 @@ export const Tooltip = React.forwardRef<HTMLDivElement, ITooltipProps>(
     const tooltipElementRef = React.useRef<HTMLDivElement | null>(null);
     const container: Element = userContainer || document.body;
 
+    // Пустая строка, undefined, null и false не будут отображены
+    const emptyContent = !renderContent() && renderContent() !== 0;
+
     const [portalFlexDirection, setPortalFlexDirection] = React.useState('');
     const [portalFullWidth, setPortalFullWidth] = React.useState(false);
 
@@ -93,7 +96,7 @@ export const Tooltip = React.forwardRef<HTMLDivElement, ITooltipProps>(
       }
     }, [tooltipElementRef.current]);
 
-    return (
+    return emptyContent ? null : (
       <Portal
         targetRef={targetRef}
         container={container}
