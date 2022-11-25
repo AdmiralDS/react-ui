@@ -49,8 +49,8 @@ const width = css<{ dimension: Dimension; mobile?: boolean }>`
 const Title = styled.h5<{ mobile: boolean }>`
   ${({ mobile }) => (mobile ? typography['Header/H6'] : typography['Header/H5'])};s
   color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
-  margin: 0 0 10px 0;
-  padding: ${({ mobile }) => (mobile ? '0 46px 0 16px' : '0 56px 0 24px')};
+  margin: 0;
+  padding: ${({ mobile }) => (mobile ? '0 46px 10px 16px' : '0 56px 10px 24px')};
 `;
 
 const Content = styled.div<{ scrollbar: number; mobile: boolean }>`
@@ -62,8 +62,7 @@ const Content = styled.div<{ scrollbar: number; mobile: boolean }>`
 const ButtonPanel = styled.div<{ mobile: boolean }>`
   display: flex;
   flex-direction: ${({ mobile }) => (mobile ? 'column-reverse' : 'row-reverse')};
-  margin-top: 18px;
-  padding: ${({ mobile }) => (mobile ? '0 16px' : '0 24px')};
+  padding: ${({ mobile }) => (mobile ? '18px 16px 0' : '18px 24px 0')};
 
   & > button {
     margin: ${({ mobile }) => (mobile ? '0 0 16px 0' : '0 16px 0 0')};
