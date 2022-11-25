@@ -424,7 +424,7 @@ const TemplateMultipleWithApply: ComponentStory<typeof Select> = (props) => {
         inputValue={searchValue}
         multiple={true}
         onChange={onChange}
-        dimension="xl"
+        // dimension="xl"
         displayClearIcon={true}
         placeholder="Placeholder"
         mode="searchSelect"
@@ -459,7 +459,15 @@ const TemplateNotFixedMultiSelect: ComponentStory<typeof Select> = (props) => {
 
   return (
     <>
-      <Select {...props} value={selectValue} mode="searchSelect" multiple={true} onChange={onChange} idleHeight="full">
+      <Select
+        {...props}
+        value={selectValue}
+        mode="searchSelect"
+        multiple={true}
+        onChange={onChange}
+        idleHeight="full"
+        rowCount={4}
+      >
         {Array.from({ length: 20 }).map((_option, ind) => (
           <Option key={ind} value={String(ind)}>
             {`${ind}0000`}

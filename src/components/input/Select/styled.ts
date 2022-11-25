@@ -54,6 +54,13 @@ const fixHeightStyle = css<{ multiple?: boolean; dimension?: ComponentDimension 
   height: ${({ multiple, dimension }) => getSelectValueHeight(dimension, multiple)}px;
 `;
 
+const rowHeightStyle = css<{ multiple?: boolean; rowCount?: number; dimension?: ComponentDimension }>`
+  max-height: ${({ multiple, dimension, rowCount }) => {
+    const rowHeight = !multiple ? getSelectValueHeight(dimension, multiple) : 24;
+    return rowCount && rowCount > 1 ? rowHeight * rowCount + (rowCount - 1) * 4 : 'none';
+  }}px;
+`;
+
 const chipsShiftStyle = css`
   > * {
     margin-left: ${`-${COUNTER_WIDTH + CHIP_OFFSET}px`};
@@ -66,6 +73,7 @@ export const ValueWrapper = styled.div<{
   dimension?: ComponentDimension;
   multiple?: boolean;
   fixHeight?: boolean;
+  rowCount?: number;
   isEmpty?: boolean;
 }>`
   flex: 1 1 auto;
@@ -82,6 +90,7 @@ export const ValueWrapper = styled.div<{
   color: ${(props) => props.theme.color['Neutral/Neutral 90']};
 
   ${({ fixHeight }) => fixHeight && fixHeightStyle}
+  ${({ fixHeight, rowCount }) => !fixHeight && (rowCount || 0 > 1) && rowHeightStyle}
   [data-disabled='true'] &&& {
     color: ${(props) => props.theme.color['Neutral/Neutral 30']};
   }

@@ -75,6 +75,10 @@ export interface SelectProps extends Omit<React.InputHTMLAttributes<HTMLSelectEl
 
   idleHeight?: 'full' | 'fixed';
 
+  minRowCount?: number;
+  rowCount?: number;
+  maxRowCount?: number;
+
   /** Референс на контейнер для правильного позиционирования выпадающего списка */
   portalTargetRef?: React.RefObject<HTMLElement>;
 
@@ -147,6 +151,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       defaultValue,
       dimension = 'm',
       idleHeight = 'fixed',
+      rowCount = 1,
       mode = 'select',
       multiple = false,
       showCheckbox = true,
@@ -215,6 +220,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
     const inputRef = React.useRef<HTMLInputElement | null>(null);
     const selectRef = React.useRef<HTMLSelectElement | null>(null);
     const containerRef = React.useRef<HTMLDivElement | null>(null);
+    const valueWrapperRef = React.useRef<HTMLDivElement>(null);
     const dropDownRef = React.useRef<HTMLDivElement | null>(null);
     const mutableState = React.useRef<{ shouldExtendInputValue: boolean }>({
       shouldExtendInputValue: false,
@@ -299,15 +305,16 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
     const renderMultipleSelectValue = React.useCallback(
       () => (
         <MultipleSelectChips
+          wrapperRef={valueWrapperRef}
           options={selectedOptions}
-          shouldShowCount={shouldFixMultiSelectHeight}
+          shouldShowCount={shouldFixMultiSelectHeight || !!rowCount}
           disabled={disabled}
           readOnly={readOnly}
           onChipRemove={handleOptionSelect}
           onChipClick={stopPropagation}
         />
       ),
-      [selectedOptions, shouldFixMultiSelectHeight, disabled, readOnly, handleOptionSelect, stopPropagation],
+      [valueWrapperRef, selectedOptions, shouldFixMultiSelectHeight, disabled, readOnly, handleOptionSelect],
     );
 
     const isEmptyValue = multiple ? !selectedValue?.length : !selectedValue;
@@ -517,9 +524,11 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
         <BorderedDiv />
         <ValueWrapper
           tabIndex={-1}
+          ref={valueWrapperRef}
           id="selectValueWrapper"
           dimension={dimension}
           multiple={multiple}
+          rowCount={rowCount}
           fixHeight={shouldFixHeight}
           isEmpty={isEmpty}
         >
