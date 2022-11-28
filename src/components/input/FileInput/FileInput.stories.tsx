@@ -182,7 +182,7 @@ const FileInputDemoTemplate: ComponentStory<typeof FileInput> = (props) => {
             onCloseIconClick={() => handleRemoveFile(file)}
             onPreviewIconClick={attributes.onPreviewIconClick}
             dimension={props.dimension}
-            filesLayoutCssMixin={props.dimension === 'm' ? halfWidthPositionMixin : fullWidthPositionMixin}
+            filesLayoutCssMixin={props.dimension === 'xl' ? halfWidthPositionMixin : fullWidthPositionMixin}
           />
         );
       }
