@@ -2,7 +2,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { OptionGroupProvider } from './useSelectContext';
 import { OptionWrapper } from './styled';
-import { HTMLAttributes } from 'react';
+import type { HTMLAttributes } from 'react';
 import { Option } from './Option';
 import { useDropDownContext } from '#src/components/input/Select/DropDownContext';
 

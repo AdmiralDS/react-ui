@@ -1,4 +1,4 @@
-import { Shape } from '#src/components/themes/common';
+import type { Shape } from '#src/components/themes/common';
 export const ALL_BORDER_RADIUS_VALUES = [
   'Border radius 0',
   'Border radius 2',

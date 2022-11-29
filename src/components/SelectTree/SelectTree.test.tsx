@@ -1,7 +1,8 @@
 import { render } from '@testing-library/react';
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
-import { SelectTree, SelectTreeProps } from '#src/components/SelectTree';
+import type { SelectTreeProps } from '#src/components/SelectTree';
+import { SelectTree } from '#src/components/SelectTree';
 import { LIGHT_THEME } from '#src/components/themes';
 
 const selectTreeList = [

@@ -1,10 +1,12 @@
 import * as React from 'react';
-import { HTMLAttributes, MouseEventHandler, useEffect } from 'react';
+import type { HTMLAttributes, MouseEventHandler } from 'react';
+import { useEffect } from 'react';
 import styled, { css } from 'styled-components';
 import { ErrorBlock } from '#src/components/input/FileUploader/ErrorBlock';
 import { Spinner } from '#src/components/Spinner';
 import { Tooltip } from '#src/components/Tooltip';
-import { dataTransferConstructorSupported, Dimension, formatBytes, Status } from './utils';
+import type { Dimension, Status } from './utils';
+import { dataTransferConstructorSupported, formatBytes } from './utils';
 import { ReactComponent as FilePDFSolid } from '@admiral-ds/icons/build/documents/FilePDFSolid.svg';
 import { ReactComponent as FilePPTSolid } from '@admiral-ds/icons/build/documents/FilePPTSolid.svg';
 import { ReactComponent as FileWordSolid } from '@admiral-ds/icons/build/documents/FileWordSolid.svg';

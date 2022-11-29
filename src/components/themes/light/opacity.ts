@@ -1,4 +1,4 @@
-import { Opacity } from '#src/components/themes/common/opacity';
+import type { Opacity } from '#src/components/themes/common/opacity';
 
 export const OPACITY: Opacity = {
   'Opacity/Hover': { color: '#000000', level: 0.05 },

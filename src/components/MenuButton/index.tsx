@@ -1,11 +1,12 @@
 import type { HTMLAttributes } from 'react';
 import * as React from 'react';
 
-import { ItemProps } from '#src/components/Menu/MenuItem';
-import { DropMenu, DropMenuComponentProps } from '#src/components/DropMenu';
+import type { ItemProps } from '#src/components/Menu/MenuItem';
+import type { DropMenuComponentProps } from '#src/components/DropMenu';
+import { DropMenu } from '#src/components/DropMenu';
 import { uid } from '#src/components/common/uid';
 import { Button } from '#src/components/Button';
-import { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
+import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import { passDropdownDataAttributes } from '#src/components/common/utils/splitDataAttributes';
 
 export type MenuButtonDimension = 'xl' | 'l' | 'm' | 's';

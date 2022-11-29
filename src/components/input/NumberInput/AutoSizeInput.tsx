@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { changeInputData, InputData, isInputDataDifferent } from '#src/components/common/dom/changeInputData';
+import type { InputData } from '#src/components/common/dom/changeInputData';
+import { changeInputData, isInputDataDifferent } from '#src/components/common/dom/changeInputData';
 import type { ExtraProps } from '#src/components/input/types';
 import type { TextInputProps } from '#src/components/input/TextInput';
 import { typography } from '#src/components/Typography';

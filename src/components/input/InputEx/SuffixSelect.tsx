@@ -1,9 +1,10 @@
 import React from 'react';
-import styled, { css, DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
+import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
+import styled, { css } from 'styled-components';
 import { OpenStatusButton } from '#src/components/OpenStatusButton';
 import { StyledDropdownContainer } from '#src/components/DropdownContainer';
 import { Menu } from '#src/components/input/InputEx/Menu';
-import { ValueType } from '#src/components/input/InputEx/ValueType';
+import type { ValueType } from '#src/components/input/InputEx/ValueType';
 
 const StyledMenu = styled(Menu)<{ width?: string }>`
   width: ${({ width }) => (width ? width : 'auto')};

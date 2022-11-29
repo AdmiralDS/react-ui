@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import { ContentSwitcher } from '#src/components/ContentSwitcher';
 import { ContentSwitcherItem } from '#src/components/ContentSwitcher/ContentSwitcherItem';

@@ -1,6 +1,7 @@
 import type { HTMLAttributes } from 'react';
 import * as React from 'react';
-import styled, { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
+import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
+import styled from 'styled-components';
 import { useMemo, useRef, useState } from 'react';
 import { Checkbox } from '#src/components/Checkbox';
 import { IconButton } from '#src/components/IconButton';

@@ -9,7 +9,7 @@ import {
 } from '#src/components/Table/style';
 import { Checkbox } from '#src/components/Checkbox';
 import type { TableRow, RowId, Column, Dimension } from '#src/components/Table';
-import { CheckboxDimension } from '#src/components/Checkbox/CheckboxDimension';
+import type { CheckboxDimension } from '#src/components/Checkbox/CheckboxDimension';
 
 export interface RegularRowProps {
   /** Размер таблицы */

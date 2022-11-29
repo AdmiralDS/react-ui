@@ -1,8 +1,8 @@
 import { TooltipHoc } from '#src/components/TooltipHOC';
 import { typography } from '#src/components/Typography';
 import { withDesign } from 'storybook-addon-designs';
-import React from 'react';
-import { Meta, Story } from '@storybook/react';
+import * as React from 'react';
+import type { Meta, Story } from '@storybook/react';
 import styled from 'styled-components';
 import metadata from '@admiral-ds/icons/metadata.json';
 import { ReactComponent as CopyOutline } from '@admiral-ds/icons/build/documents/CopyOutline.svg';

@@ -1,6 +1,8 @@
-import styled, { css, DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
+import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
+import styled, { css } from 'styled-components';
 import { typography } from '#src/components/Typography';
-import { ColorName, DefaultFontColorName } from '#src/components/themes';
+import type { ColorName } from '#src/components/themes';
+import { DefaultFontColorName } from '#src/components/themes';
 // import { color } from '@storybook/theming';
 import { skeletonAnimationMixin } from '#src/components/skeleton/animation';
 

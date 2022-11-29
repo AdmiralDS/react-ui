@@ -1,14 +1,14 @@
 import { INPUT_DIMENSIONS_VALUES } from '#src/components/input';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import type { ChangeEvent } from 'react';
 import * as React from 'react';
 import { withDesign } from 'storybook-addon-designs';
 import styled, { css, keyframes, ThemeProvider } from 'styled-components';
 import { SelectField } from './index';
 import { Option, OptionGroup } from '#src/components/input/Select';
-import { Theme } from '#src/components/themes';
+import type { Theme } from '#src/components/themes';
 import { DataAttributesDescription } from '#src/components/form/common';
-import { RenderOptionProps } from '#src/components/Menu/MenuItem';
+import type { RenderOptionProps } from '#src/components/Menu/MenuItem';
 import { CustomOptionWrapper } from '#src/components/input/Select/styled';
 import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
 

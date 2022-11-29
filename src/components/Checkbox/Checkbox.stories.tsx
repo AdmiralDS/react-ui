@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { Checkbox } from './index';
 
 import { withDesign } from 'storybook-addon-designs';
 import { ALL_DIMENSIONS_VALUES } from '#src/components/Checkbox/CheckboxDimension';
 import styled, { ThemeProvider } from 'styled-components';
 import { T } from '#src/components/T';
-import { Theme } from '#src/components/themes';
+import type { Theme } from '#src/components/themes';
 import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
 
 export default {

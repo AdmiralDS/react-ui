@@ -1,10 +1,12 @@
 import * as React from 'react';
-import styled, { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
+import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
+import styled from 'styled-components';
 
 import { OverflowMenu } from '#src/components/OverflowMenu';
 import { TooltipHoc } from '#src/components/TooltipHOC';
-import { BreadcrumbProps } from '#src/components/Breadcrumbs/BreadCrumb';
-import { MenuItem, RenderOptionProps } from '#src/components/Menu/MenuItem';
+import type { BreadcrumbProps } from '#src/components/Breadcrumbs/BreadCrumb';
+import type { RenderOptionProps } from '#src/components/Menu/MenuItem';
+import { MenuItem } from '#src/components/Menu/MenuItem';
 import { uid } from '#src/components/common/uid';
 
 const Option = styled.a`

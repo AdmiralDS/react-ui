@@ -1,4 +1,4 @@
-import { ComponentDimension } from '#src/components/input/types';
+import type { ComponentDimension } from '#src/components/input/types';
 import styled, { css } from 'styled-components';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { skeletonAnimationMixin } from '#src/components/skeleton/animation';

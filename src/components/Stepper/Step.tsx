@@ -1,11 +1,11 @@
-import type { FC } from 'react';
-import React, { HTMLAttributes } from 'react';
+import type { FC, HTMLAttributes } from 'react';
+import * as React from 'react';
 
-import { ReactComponent as StepDefault } from '#src/components/Stepper/svg/Step.svg';
-import { ReactComponent as StepCompleted } from '#src/components/Stepper/svg/StepCompleted.svg';
-import { ReactComponent as StepError } from '#src/components/Stepper/svg/StepError.svg';
-import { StepContentWrapper, StepIcon, StepRail, StepTrack, StepWrapper } from '#src/components/Stepper/style';
-import StepperContext from '#src/components/Stepper/StepperContext';
+import { ReactComponent as StepDefault } from './svg/Step.svg';
+import { ReactComponent as StepCompleted } from './svg/StepCompleted.svg';
+import { ReactComponent as StepError } from './svg/StepError.svg';
+import { StepContentWrapper, StepIcon, StepRail, StepTrack, StepWrapper } from './style';
+import { StepperContext } from './StepperContext';
 
 export interface StepProps
   extends Omit<HTMLAttributes<HTMLLIElement | HTMLButtonElement | HTMLAnchorElement>, 'onClick'> {
@@ -82,3 +82,5 @@ export const Step: FC<StepProps> = ({
     </StepWrapper>
   );
 };
+
+Step.displayName = 'Step';

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ElementType } from 'react';
+import type { ElementType } from 'react';
 import styled from 'styled-components';
 import { Flag } from '#src/components/input/PhoneNumberInput/Flag';
 import type { ComponentName } from '@admiral-ds/flags';

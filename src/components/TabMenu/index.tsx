@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { keyboardKey } from '#src/components/common/keyboardKey';
 import { Badge } from '#src/components/Badge';
-import { ItemProps, MenuItem, RenderOptionProps } from '#src/components/Menu/MenuItem';
+import type { ItemProps, RenderOptionProps } from '#src/components/Menu/MenuItem';
+import { MenuItem } from '#src/components/Menu/MenuItem';
 
 import {
   BadgeWrapper,
@@ -17,7 +18,7 @@ import {
   Wrapper,
 } from '#src/components/TabMenu/style';
 import type { Dimension } from '#src/components/TabMenu/constants';
-import { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
+import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 
 export interface TabProps extends React.HTMLAttributes<HTMLButtonElement> {
   /** Контент вкладки */

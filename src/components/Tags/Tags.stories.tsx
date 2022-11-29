@@ -1,11 +1,11 @@
 import React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 
 import { Tag } from '#src/components/Tag';
 import { Tags } from '#src/components/Tags';
-import { Theme } from '#src/components/themes';
+import type { Theme } from '#src/components/themes';
 import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
 
 const Separator = styled.div`

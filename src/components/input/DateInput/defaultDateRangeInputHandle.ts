@@ -1,4 +1,4 @@
-import { InputData } from '#src/components/common/dom/changeInputData';
+import type { InputData } from '#src/components/common/dom/changeInputData';
 import { formatDate, MASK_VALUE as DATE_MASK_VALUE } from './defaultDateInputHandle';
 import { splice } from '#src/components/common/utils/splice';
 

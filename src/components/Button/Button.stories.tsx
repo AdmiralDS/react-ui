@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { ReactComponent as StarSolid } from '@admiral-ds/icons/build/system/StarSolid.svg';
 import { Button } from './index';
 import { PseudoText } from '#src/components/skeleton/PseudoText';
@@ -8,7 +8,7 @@ import { PseudoIcon } from '#src/components/skeleton/PseudoIcon';
 import { T } from '#src/components/T';
 import { withDesign } from 'storybook-addon-designs';
 import { filterKeysWithUndefinedValues } from '#src/components/common/utils/filterKeysWithUndefinedValues';
-import { Theme } from '#src/components/themes';
+import type { Theme } from '#src/components/themes';
 import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
 
 const WrapperButton = styled.div`

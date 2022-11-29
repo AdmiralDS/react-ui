@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import styled, { css, ThemeContext } from 'styled-components';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import { FONTS, NEW_FONTS } from './storyDescriptions';
 import { TYPOGRAPHY, typography } from '#src/components/Typography';

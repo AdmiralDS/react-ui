@@ -1,5 +1,7 @@
-import React, { HTMLAttributes } from 'react';
-import styled, { css, DefaultTheme, FlattenInterpolation, keyframes, ThemeProps } from 'styled-components';
+import type { HTMLAttributes } from 'react';
+import React from 'react';
+import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 
 import { ReactComponent as SpinnerXL } from './svgs/Subtract_xl.svg';
 import { ReactComponent as SpinnerL } from './svgs/Subtract_l.svg';

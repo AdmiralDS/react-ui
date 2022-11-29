@@ -1,12 +1,13 @@
-import React, { ChangeEvent, useEffect, useState } from 'react';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { ChangeEvent } from 'react';
+import React, { useEffect, useState } from 'react';
+import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { TimeInput } from '../TimeInput';
 import { withDesign } from 'storybook-addon-designs';
 import { INPUT_DIMENSIONS_VALUES } from '#src/components/input/types';
 import { ReactComponent as GPSOutline } from '@admiral-ds/icons/build/location/GPSOutline.svg';
 import { ReactComponent as TimeSolid } from '@admiral-ds/icons/build/system/TimeSolid.svg';
 import styled, { ThemeProvider } from 'styled-components';
-import { Theme } from '#src/components/themes';
+import type { Theme } from '#src/components/themes';
 import { InputIconButton } from '#src/components/InputIconButton';
 import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
 

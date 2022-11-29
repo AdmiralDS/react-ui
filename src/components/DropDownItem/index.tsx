@@ -1,7 +1,8 @@
 import type { HTMLAttributes } from 'react';
 import * as React from 'react';
 import styled, { css } from 'styled-components';
-import { backgroundColor, colorTextMixin, DropDownItemDimension, paddings, styleTextMixin } from './mixins';
+import type { DropDownItemDimension } from './mixins';
+import { backgroundColor, colorTextMixin, paddings, styleTextMixin } from './mixins';
 
 export interface DropDownItemProps extends HTMLAttributes<HTMLLIElement> {
   /** Отключение секции */

@@ -1,17 +1,21 @@
 import { withDesign } from 'storybook-addon-designs';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import * as React from 'react';
-import styled, { DefaultTheme, FlattenInterpolation, ThemeProps, ThemeProvider } from 'styled-components';
-import { FileInput, RenderFileInputProps } from '#src/components/input/FileInput';
-import { Theme } from '#src/components/themes';
-import { ChangeEvent, HTMLAttributes, useRef, useState } from 'react';
-import { FileAttributeProps, FileItem } from '#src/components/input/FileInput/FileItem';
+import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
+import type { RenderFileInputProps } from '#src/components/input/FileInput';
+import { FileInput } from '#src/components/input/FileInput';
+import type { Theme } from '#src/components/themes';
+import type { ChangeEvent, HTMLAttributes } from 'react';
+import { useRef, useState } from 'react';
+import type { FileAttributeProps } from '#src/components/input/FileInput/FileItem';
+import { FileItem } from '#src/components/input/FileInput/FileItem';
 import { fullWidthPositionMixin, halfWidthPositionMixin } from '#src/components/input/FileInput/style';
 import { ReactComponent as AttachFileOutline } from '@admiral-ds/icons/build/system/AttachFileOutline.svg';
 import { ReactComponent as CloseOutline } from '@admiral-ds/icons/build/service/CloseOutline.svg';
 import { Button } from '#src/components/Button';
 import { uid } from '#src/components/common/uid';
-import { InputStatus } from '#src/components/input';
+import type { InputStatus } from '#src/components/input';
 import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
 
 const Separator = styled.div`

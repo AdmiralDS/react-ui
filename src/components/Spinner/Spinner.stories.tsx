@@ -2,7 +2,7 @@ import { Button } from '#src/components/Button';
 import { Spinner } from '#src/components/Spinner';
 import React from 'react';
 import styled from 'styled-components';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import { DefaultBackgroundColorName, MainPrimaryColorName } from '#src/components/themes';
 

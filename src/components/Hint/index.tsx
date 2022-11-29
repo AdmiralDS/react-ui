@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
+import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import type { RefCallback, RefObject } from '#src/components/common/utils/handleRef';
 import { handleRef } from '#src/components/common/utils/handleRef';
 import { getScrollableParents } from '#src/components/common/utils/getScrollableParents';

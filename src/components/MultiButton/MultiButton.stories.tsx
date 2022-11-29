@@ -1,10 +1,13 @@
-import { MultiButton, MultiButtonItem } from '#src/components/MultiButton';
-import React, { MouseEvent } from 'react';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { MultiButtonItem } from '#src/components/MultiButton';
+import { MultiButton } from '#src/components/MultiButton';
+import type { MouseEvent } from 'react';
+import React from 'react';
+import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import styled, { ThemeProvider } from 'styled-components';
-import { Theme } from '#src/components/themes';
-import { MenuItem, RenderOptionProps } from '#src/components/Menu/MenuItem';
+import type { Theme } from '#src/components/themes';
+import type { RenderOptionProps } from '#src/components/Menu/MenuItem';
+import { MenuItem } from '#src/components/Menu/MenuItem';
 import { ReactComponent as BonusSolid } from '@admiral-ds/icons/build/category/BonusSolid.svg';
 import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
 

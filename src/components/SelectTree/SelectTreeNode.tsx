@@ -1,4 +1,5 @@
-import React, { ChangeEvent, FC, HTMLAttributes, KeyboardEvent, MouseEvent } from 'react';
+import type { ChangeEvent, FC, HTMLAttributes, KeyboardEvent, MouseEvent } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { typography } from '#src/components/Typography';
 import { Checkbox } from '#src/components/Checkbox';

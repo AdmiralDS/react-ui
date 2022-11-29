@@ -14,7 +14,7 @@ import {
   IconWrapperStyled,
   StyledBadge,
 } from './style';
-import { BadgeAppearance } from '#src/components/Badge';
+import type { BadgeAppearance } from '#src/components/Badge';
 import { keyboardKey } from '#src/components/common/keyboardKey';
 import { refSetter } from '#src/components/common/utils/refSetter';
 

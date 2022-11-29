@@ -1,22 +1,26 @@
 import * as React from 'react';
-import styled, { css, DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
+import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
+import styled, { css } from 'styled-components';
 import { changeInputData } from '#src/components/common/dom/changeInputData';
 import { refSetter } from '#src/components/common/utils/refSetter';
-import { TextInput, TextInputProps } from '#src/components/input/TextInput';
+import type { TextInputProps } from '#src/components/input/TextInput';
+import { TextInput } from '#src/components/input/TextInput';
 import { ReactComponent as SmallArrowDownOutline } from '@admiral-ds/icons/build/system/SmallArrowDownOutline.svg';
 import { CountryCodes } from '#src/components/input/PhoneNumberInput/constants';
 import { Flag } from '#src/components/input/PhoneNumberInput/Flag';
-import { Dimension } from '#src/components/input/PhoneNumberInput/utils';
+import type { Dimension } from '#src/components/input/PhoneNumberInput/utils';
 import {
   clojureHandler,
   defaultPhoneNumberInputHandler,
 } from '#src/components/input/PhoneNumberInput/defaultPhoneNumberInputHandle';
-import { CountriesList, CountryInfo } from '#src/components/input/PhoneNumberInput/CountriesList';
+import type { CountryInfo } from '#src/components/input/PhoneNumberInput/CountriesList';
+import { CountriesList } from '#src/components/input/PhoneNumberInput/CountriesList';
 import { uid } from '#src/components/common/uid';
-import getFindCountryFunction, {
+import type {
   CountryPhoneCode,
   findCountryFunction,
 } from '#src/components/input/PhoneNumberInput/findCoutryWithPriority';
+import getFindCountryFunction from '#src/components/input/PhoneNumberInput/findCoutryWithPriority';
 import type { ComponentName, CountryAlpha3Code } from '@admiral-ds/flags';
 import { ComponentsNames, CountriesRusNames, FlagsPack } from '@admiral-ds/flags';
 import { StyledDropdownContainer } from '#src/components/DropdownContainer';

@@ -1,7 +1,9 @@
 import { refSetter } from '#src/components/common/utils/refSetter';
 import * as React from 'react';
-import { TextArea as Input, TextAreaProps } from '#src/components/input';
-import { Field, FieldOwnProps } from '#src/components/Field';
+import type { TextAreaProps } from '#src/components/input';
+import { TextArea as Input } from '#src/components/input';
+import type { FieldOwnProps } from '#src/components/Field';
+import { Field } from '#src/components/Field';
 import { uid } from '#src/components/common/uid';
 import {
   passFormFieldContainerDataAttributes,

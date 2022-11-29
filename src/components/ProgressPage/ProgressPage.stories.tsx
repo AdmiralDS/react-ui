@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import { ProgressPage } from './index';
 import styled from 'styled-components';

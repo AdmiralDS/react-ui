@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { FC, HTMLAttributes, ReactNode } from 'react';
-import styled, { css, DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
+import type { FC, HTMLAttributes, ReactNode } from 'react';
+import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
+import styled, { css } from 'styled-components';
 import { typography } from '#src/components/Typography';
 
 type Dimension = 'm' | 's';

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import { Link as RouterLink, MemoryRouter as Router } from 'react-router-dom';
 import { Breadcrumbs } from '#src/components/Breadcrumbs';

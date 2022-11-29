@@ -1,4 +1,4 @@
-import { HTMLAttributes } from 'react';
+import type { HTMLAttributes } from 'react';
 import styled from 'styled-components';
 import { ContentSwitcherItem } from '#src/components/ContentSwitcher/ContentSwitcherItem';
 

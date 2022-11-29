@@ -1,12 +1,13 @@
 import React, { useMemo } from 'react';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import styled, { ThemeProvider } from 'styled-components';
 import { ReactComponent as MinusCircleOutline } from '@admiral-ds/icons/build/service/MinusCircleOutline.svg';
 
 import { OverflowMenu } from '#src/components/OverflowMenu';
-import { MenuItem, RenderOptionProps } from '#src/components/Menu/MenuItem';
-import { Theme } from '#src/components/themes';
+import type { RenderOptionProps } from '#src/components/Menu/MenuItem';
+import { MenuItem } from '#src/components/Menu/MenuItem';
+import type { Theme } from '#src/components/themes';
 import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
 
 const Separator = styled.div`

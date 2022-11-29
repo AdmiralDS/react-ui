@@ -1,11 +1,11 @@
 import { INPUT_DIMENSIONS_VALUES } from '#src/components/input';
 import { Spinner } from '#src/components/Spinner';
 import * as React from 'react';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { InputField } from '#src/components/form/InputField';
 import { withDesign } from 'storybook-addon-designs';
 import styled, { ThemeProvider } from 'styled-components';
-import { Theme } from '#src/components/themes';
+import type { Theme } from '#src/components/themes';
 import { DataAttributesDescription } from '#src/components/form/common';
 import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
 

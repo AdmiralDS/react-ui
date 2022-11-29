@@ -1,4 +1,4 @@
-import { InputData } from '#src/components/common/dom/changeInputData';
+import type { InputData } from '#src/components/common/dom/changeInputData';
 import { splice } from '#src/components/common/utils/splice';
 
 function isValidDigit(string: string, number: number) {

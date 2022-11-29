@@ -3,9 +3,11 @@ import * as React from 'react';
 import type { Appearance, Dimension } from '#src/components/TextButton/types';
 import type { ItemProps } from '#src/components/Menu/MenuItem';
 import { TextButton } from '#src/components/TextButton';
-import styled, { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
+import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
+import styled from 'styled-components';
 import { IconContainer } from '#src/components/TextButton/commonMixin';
-import { DropMenu, DropMenuComponentProps } from '#src/components/DropMenu';
+import type { DropMenuComponentProps } from '#src/components/DropMenu';
+import { DropMenu } from '#src/components/DropMenu';
 import { passDropdownDataAttributes } from '#src/components/common/utils/splitDataAttributes';
 
 const StyledTextButton = styled(TextButton)<{ menuOpened?: boolean; appearance?: Appearance }>`

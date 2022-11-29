@@ -1,7 +1,9 @@
 import * as React from 'react';
-import { forwardRef, HTMLAttributes, useEffect, useRef, useState } from 'react';
-import { FileInputDimension } from '#src/components/input/FileInput';
-import styled, { css, DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
+import type { HTMLAttributes } from 'react';
+import { forwardRef, useEffect, useRef, useState } from 'react';
+import type { FileInputDimension } from '#src/components/input/FileInput';
+import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
+import styled, { css } from 'styled-components';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { typography } from '#src/components/Typography';
 import { formatFileSize, formatFileType, getFileTypeIcon } from '#src/components/input/FileInput/utils';

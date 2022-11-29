@@ -1,10 +1,6 @@
 import * as React from 'react';
-import {
-  changeInputData,
-  CustomInputHandler,
-  InputData,
-  isInputDataDifferent,
-} from '#src/components/common/dom/changeInputData';
+import type { CustomInputHandler, InputData } from '#src/components/common/dom/changeInputData';
+import { changeInputData, isInputDataDifferent } from '#src/components/common/dom/changeInputData';
 import { refSetter } from '#src/components/common/utils/refSetter';
 import { HeightLimitedContainer as Container } from '../Container';
 import type { ComponentDimension, ExtraProps, InputStatus } from '#src/components/input/types';

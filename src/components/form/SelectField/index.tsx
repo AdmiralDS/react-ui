@@ -1,7 +1,8 @@
 import type { SelectProps } from '#src/components/input/Select';
 import { Select as BaseSelect } from '#src/components/input/Select';
 import * as React from 'react';
-import { Field, FieldOwnProps } from '#src/components/Field';
+import type { FieldOwnProps } from '#src/components/Field';
+import { Field } from '#src/components/Field';
 import styled from 'styled-components';
 import { uid } from '#src/components/common/uid';
 import {

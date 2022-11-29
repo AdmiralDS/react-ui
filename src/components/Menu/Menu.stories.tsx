@@ -1,12 +1,15 @@
-import React, { ChangeEvent, HTMLAttributes, useContext, useEffect, useMemo, useState } from 'react';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { ChangeEvent, HTMLAttributes } from 'react';
+import React, { useContext, useEffect, useMemo, useState } from 'react';
+import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { Menu } from '#src/components/Menu';
-import { ItemProps, MenuItem, RenderOptionProps } from '#src/components/Menu/MenuItem';
+import type { ItemProps, RenderOptionProps } from '#src/components/Menu/MenuItem';
+import { MenuItem } from '#src/components/Menu/MenuItem';
 import styled, { css, ThemeContext, ThemeProvider } from 'styled-components';
 import { typography } from '#src/components/Typography';
 import { ReactComponent as CardSolid } from '@admiral-ds/icons/build/finance/CardSolid.svg';
 import { withDesign } from 'storybook-addon-designs';
-import { LIGHT_THEME, Theme } from '#src/components/themes';
+import type { Theme } from '#src/components/themes';
+import { LIGHT_THEME } from '#src/components/themes';
 import { RadioButton } from '#src/components/RadioButton';
 import { TooltipHoc } from '#src/components/TooltipHOC';
 import { TextInput } from '#src/components/input';
@@ -17,12 +20,8 @@ import { ReactComponent as PlusOutline } from '@admiral-ds/icons/build/service/P
 import { uid } from '#src/components/common/uid';
 import { keyboardKey } from '#src/components/common/keyboardKey';
 import { mediumGroupBorderRadius, ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
-import {
-  CheckboxGroupItemProps,
-  checkboxTreeToMap,
-  ItemWithCheckbox,
-  MenuItemWithCheckbox,
-} from '#src/components/Menu/MenuItemWithCheckbox';
+import type { CheckboxGroupItemProps, ItemWithCheckbox } from '#src/components/Menu/MenuItemWithCheckbox';
+import { checkboxTreeToMap, MenuItemWithCheckbox } from '#src/components/Menu/MenuItemWithCheckbox';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';

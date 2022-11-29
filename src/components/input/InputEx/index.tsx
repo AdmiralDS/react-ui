@@ -1,9 +1,10 @@
 import * as React from 'react';
-import { ForwardedRef, InputHTMLAttributes } from 'react';
+import type { ForwardedRef, InputHTMLAttributes } from 'react';
 import { ReactComponent as CloseOutlineSvg } from '@admiral-ds/icons/build/service/CloseOutline.svg';
 import type { ComponentDimension, ExtraProps, InputStatus } from '#src/components/input/types';
 import { containerHeights, skeletonMixin } from '../Container';
-import styled, { css, DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
+import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
+import styled, { css } from 'styled-components';
 import { typography } from '#src/components/Typography';
 import { changeInputData } from '#src/components/common/dom/changeInputData';
 import { InputIconButton } from '#src/components/InputIconButton';

@@ -1,4 +1,4 @@
-import { CustomInputHandler, InputData } from '#src/components/common/dom/changeInputData';
+import type { CustomInputHandler, InputData } from '#src/components/common/dom/changeInputData';
 import type { CountryAlpha3Code } from '@admiral-ds/flags';
 
 type ParsedData = {

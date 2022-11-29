@@ -1,7 +1,8 @@
-import { Color } from '#src/components/themes/common/color';
-import { ZIndex } from '#src/components/themes/common/zIndex';
-import { Locale } from '#src/components/themes/common/locales';
-import baseStyled, { ThemedStyledInterface } from 'styled-components';
+import type { Color } from '#src/components/themes/common/color';
+import type { ZIndex } from '#src/components/themes/common/zIndex';
+import type { Locale } from '#src/components/themes/common/locales';
+import type { ThemedStyledInterface } from 'styled-components';
+import baseStyled from 'styled-components';
 
 export * from './color';
 export * from './locales';

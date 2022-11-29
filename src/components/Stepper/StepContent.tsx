@@ -1,11 +1,11 @@
 import type { FC } from 'react';
-import React from 'react';
+import * as React from 'react';
 import type { ITooltipProps } from '#src/components/Tooltip';
 import { Tooltip } from '#src/components/Tooltip';
 import { checkOverflow } from '#src/components/common/utils/checkOverflow';
 
-import { Content, ContentWrapper } from '#src/components/Stepper/style';
-import StepperContext from '#src/components/Stepper/StepperContext';
+import { Content, ContentWrapper } from './style';
+import { StepperContext } from './StepperContext';
 
 export const StepContent: FC<{ children: string; tooltipProps?: Partial<ITooltipProps> }> = ({
   children,
@@ -54,3 +54,5 @@ export const StepContent: FC<{ children: string; tooltipProps?: Partial<ITooltip
     </>
   );
 };
+
+StepContent.displayName = 'StepContent';

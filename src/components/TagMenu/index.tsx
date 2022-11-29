@@ -1,9 +1,13 @@
-import React, { HTMLAttributes } from 'react';
-import { TagVisualProps, TagSizeProps, Tag } from '#src/components/Tag';
-import { DropMenu, DropMenuComponentProps } from '#src/components/DropMenu';
-import { ItemProps, MenuItem, RenderOptionProps } from '#src/components/Menu/MenuItem';
+import type { HTMLAttributes } from 'react';
+import React from 'react';
+import type { TagVisualProps, TagSizeProps } from '#src/components/Tag';
+import { Tag } from '#src/components/Tag';
+import type { DropMenuComponentProps } from '#src/components/DropMenu';
+import { DropMenu } from '#src/components/DropMenu';
+import type { ItemProps, RenderOptionProps } from '#src/components/Menu/MenuItem';
+import { MenuItem } from '#src/components/Menu/MenuItem';
 import { passDropdownDataAttributes } from '#src/components/common/utils/splitDataAttributes';
-import { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
+import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 
 export interface TagOptionProps extends HTMLAttributes<HTMLButtonElement>, TagVisualProps {
   id: string;

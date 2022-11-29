@@ -1,11 +1,11 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { Slider as SliderComponent } from '#src/components/Slider';
-import { TextInputProps } from '#src/components/input/TextInput';
+import type { TextInputProps } from '#src/components/input/TextInput';
 
 import { NumberInput } from '#src/components/input/NumberInput';
 import { clearValue, fitToCurrency } from '#src/components/input/NumberInput/utils';
-import { Shape } from '#src/components/themes/common';
+import type { Shape } from '#src/components/themes/common';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 
 function sliderBorderRadius(shape: Shape): string {

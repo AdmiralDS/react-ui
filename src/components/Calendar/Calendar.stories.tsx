@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import { Button } from '#src/components/Button';
 
-import { Calendar, CalendarPropType } from './index';
-import { ViewScreenType } from './interfaces';
+import type { CalendarPropType } from './index';
+import { Calendar } from './index';
+import type { ViewScreenType } from './interfaces';
 import { ThemeProvider } from 'styled-components';
-import { Theme } from '#src/components/themes';
+import type { Theme } from '#src/components/themes';
 import { T } from '#src/components/T';
 import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
 

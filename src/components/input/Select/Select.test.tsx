@@ -1,8 +1,10 @@
-import { Option, Select, SelectProps } from './index';
+import type { SelectProps } from './index';
+import { Option, Select } from './index';
 import { LIGHT_THEME } from '#src/components/themes';
 import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import React, { ChangeEvent, PropsWithChildren, useState } from 'react';
+import type { ChangeEvent, PropsWithChildren } from 'react';
+import React, { useState } from 'react';
 import { ThemeProvider } from 'styled-components';
 
 const options = ['one', 'two', 'three'];

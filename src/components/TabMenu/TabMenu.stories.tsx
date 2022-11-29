@@ -1,9 +1,9 @@
 import React from 'react';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import { ReactComponent as MinusCircleOutline } from '@admiral-ds/icons/build/service/MinusCircleOutline.svg';
 import { TabMenu } from '#src/components/TabMenu';
-import { Theme } from '#src/components/themes';
+import type { Theme } from '#src/components/themes';
 import { ThemeProvider } from 'styled-components';
 import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
 

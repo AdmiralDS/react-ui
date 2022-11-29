@@ -1,12 +1,13 @@
 import * as React from 'react';
 import { CheckboxField } from '#src/components/form';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import styled, { ThemeProvider } from 'styled-components';
 
 import { RadioButton } from '#src/components/RadioButton';
-import { FieldSet, PropsType as FieldSetPropsType } from '#src/components/form/FieldSet';
-import { Theme } from '#src/components/themes';
+import type { PropsType as FieldSetPropsType } from '#src/components/form/FieldSet';
+import { FieldSet } from '#src/components/form/FieldSet';
+import type { Theme } from '#src/components/themes';
 import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
 
 const Desc = styled.div`
