@@ -1,6 +1,5 @@
 import styled, { css } from 'styled-components';
 import { typography } from '#src/components/Typography';
-import { Dropdown as DropComponent } from '#src/components/Dropdown';
 import type { ComponentDimension } from '#src/components/input/types';
 import { CHIP_OFFSET, COUNTER_WIDTH } from './constants';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
@@ -10,17 +9,6 @@ import { MenuItem } from '#src/components/Menu/MenuItem';
 
 const getSelectValueHeight = (dimension?: ComponentDimension, multiple?: boolean) =>
   dimension === 's' && !multiple ? 20 : 24;
-
-export const Dropdown = styled(DropComponent)`
-  padding: 8px 0;
-
-  max-height: 256px;
-  overflow: auto;
-
-  option {
-    display: none;
-  }
-`;
 
 export const BorderedDiv = styled.div`
   position: absolute;
@@ -39,19 +27,26 @@ export const BorderedDiv = styled.div`
   border-radius: inherit;
 `;
 
-export const NativeSelect = styled.select`
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  border: none;
-  pointer-events: none;
-`;
+const getRowHeight = (dimension?: ComponentDimension) => (dimension === 's' ? 20 : 24);
 
-const fixHeightStyle = css<{ multiple?: boolean; dimension?: ComponentDimension }>`
-  height: ${({ multiple, dimension }) => getSelectValueHeight(dimension, multiple)}px;
+const rowHeightStyle = css<{
+  multiple?: boolean;
+  opened?: boolean;
+  minRowCount?: number;
+  maxRowCount?: number;
+  dimension?: ComponentDimension;
+}>`
+  min-height: ${({ multiple, dimension, minRowCount }) => {
+    if (!multiple || !minRowCount) return 'none';
+
+    return `${getRowHeight(dimension) * minRowCount + (minRowCount - 1) * 4}px`;
+  }};
+
+  max-height: ${({ multiple, dimension, maxRowCount, opened }) => {
+    if (!multiple || !maxRowCount || opened) return 'none';
+
+    return `${getRowHeight(dimension) * maxRowCount + (maxRowCount - 1) * 4}px`;
+  }};
 `;
 
 const chipsShiftStyle = css`
@@ -65,8 +60,10 @@ const chipsShiftStyle = css`
 export const ValueWrapper = styled.div<{
   dimension?: ComponentDimension;
   multiple?: boolean;
-  fixHeight?: boolean;
+  minRowCount?: number;
+  maxRowCount?: number;
   isEmpty?: boolean;
+  opened?: boolean;
 }>`
   flex: 1 1 auto;
   display: flex;
@@ -81,7 +78,7 @@ export const ValueWrapper = styled.div<{
   ${(props) => (props.dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
   color: ${(props) => props.theme.color['Neutral/Neutral 90']};
 
-  ${({ fixHeight }) => fixHeight && fixHeightStyle}
+  ${rowHeightStyle}
   [data-disabled='true'] &&& {
     color: ${(props) => props.theme.color['Neutral/Neutral 30']};
   }
@@ -263,15 +260,6 @@ export const SelectWrapper = styled.div<{
 
   ${({ skeleton }) => skeleton && skeletonMixin};
   ${({ skeleton }) => skeleton && disableEventMixin};
-`;
-
-export const Hidden = styled.div`
-  position: absolute;
-  width: 0;
-  height: 0;
-  opacity: 0;
-  overflow: hidden;
-  pointer-events: none;
 `;
 
 export const OptionWrapper = styled.div<{ dimension?: ComponentDimension }>`
