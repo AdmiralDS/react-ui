@@ -98,6 +98,9 @@ Object {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
+  -webkit-flex: 0 0 auto;
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
   height: 20px;
   width: 20px;
   border-radius: 4px;
@@ -363,6 +366,9 @@ Object {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
+  -webkit-flex: 0 0 auto;
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
   height: 20px;
   width: 20px;
   border-radius: 4px;
