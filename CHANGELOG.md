@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.6.0](https://github.com/AdmiralDS/react-ui/compare/v3.5.0...v3.6.0) (2022-11-29)
+
+
+### Features
+
+* **FileItem:** add file type and icon handlers ([6101f44](https://github.com/AdmiralDS/react-ui/commit/6101f44dad6e69dbde0f347407220bf2649362d1))
+* **IconButton:** add primary and secondary appearance ([10927d2](https://github.com/AdmiralDS/react-ui/commit/10927d2c5946a39a2c1f5c8a468645d0e17d5d08))
+* **Modal:** move content scrollbar on modal right side, reduce modal left-right paddings ([575d6bb](https://github.com/AdmiralDS/react-ui/commit/575d6bb76db42b6903654c647f5ac895e5e11a4f))
+* **Select:** Add property to control max row count in multiple mode ([9d3361e](https://github.com/AdmiralDS/react-ui/commit/9d3361e87598142b87826191f95990b6b436a580))
+* **themes:** add 6px and 10px border radius ([899ca40](https://github.com/AdmiralDS/react-ui/commit/899ca404c75013bcf26201ca0b88cd7528a84d01))
+* **Tooltip:** if renderContent result is empty, tooltip will not display ([ff25c40](https://github.com/AdmiralDS/react-ui/commit/ff25c400c1ef9c7a351b5d42a2821cf248cba02e))
+
+
+### Bug Fixes
+
+* **Table:** fix column minWidth which can be achieved by column resize ([a94a060](https://github.com/AdmiralDS/react-ui/commit/a94a060dd5df351d9a6e10c8cc2cf7ea38cf02b3))
+* typings import statements, enforce linting ([da541d1](https://github.com/AdmiralDS/react-ui/commit/da541d11428d06b8fed20d9d8fadf83e07f3f7d8))
+
 ## [3.5.0](https://github.com/AdmiralDS/react-ui/compare/v3.4.0...v3.5.0) (2022-11-22)
 
 
