@@ -73,11 +73,11 @@ export interface SelectProps extends Omit<React.InputHTMLAttributes<HTMLSelectEl
   /** Позволяет определить действия при нажатии на иконку очистки. По умолчанию произойдет очистка выбранных значений */
   onClearIconClick?: () => void;
 
+  /** @deprecated используйте maxRowCount **/
   idleHeight?: 'full' | 'fixed';
 
-  minRowCount?: number;
-  rowCount?: number;
-  maxRowCount?: number;
+  minRowCount?: number | 'none';
+  maxRowCount?: number | 'none';
 
   /** Референс на контейнер для правильного позиционирования выпадающего списка */
   portalTargetRef?: React.RefObject<HTMLElement>;
@@ -151,7 +151,8 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       defaultValue,
       dimension = 'm',
       idleHeight = 'fixed',
-      rowCount = 1,
+      minRowCount = 'none',
+      maxRowCount = 'none',
       mode = 'select',
       multiple = false,
       showCheckbox = true,
@@ -195,6 +196,14 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
 
     const selectIsUncontrolled = value === undefined;
     const modeIsSelect = mode === 'select';
+
+    const calcRowCount = React.useMemo<number | 'none'>(() => {
+      if (maxRowCount !== 'none' && maxRowCount > 0) return maxRowCount;
+
+      return idleHeight === 'fixed' ? 1 : 'none';
+    }, [maxRowCount, idleHeight]);
+
+    const fixedHeight = calcRowCount !== 'none';
 
     const selectedOption = React.useMemo(
       () => (multiple ? null : constantOptions.find((option) => option.value === selectedValue)),
@@ -300,14 +309,14 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
 
     const handleOnClear = onClearIconClick || resetOptions;
 
-    const shouldFixMultiSelectHeight = idleHeight === 'fixed' && !isSearchPanelOpen;
+    const shouldFixMultiSelectHeight = fixedHeight && !isSearchPanelOpen;
 
     const renderMultipleSelectValue = React.useCallback(
       () => (
         <MultipleSelectChips
-          wrapperRef={valueWrapperRef}
+          containerRef={valueWrapperRef}
           options={selectedOptions}
-          shouldShowCount={shouldFixMultiSelectHeight || !!rowCount}
+          shouldShowCount={shouldFixMultiSelectHeight}
           disabled={disabled}
           readOnly={readOnly}
           onChipRemove={handleOptionSelect}
@@ -327,9 +336,6 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
     const visibleValue = renderedSelectValue || renderedDefaultSelectValue || selectedValue || null;
 
     const visibleValueIsString = typeof visibleValue === 'string';
-
-    const shouldFixSingleSelectHeight = idleHeight === 'fixed' && visibleValueIsString;
-    const shouldFixHeight = multiple ? shouldFixMultiSelectHeight : shouldFixSingleSelectHeight;
 
     const wrappedVisibleValue = visibleValueIsString ? (
       <DisplayValue visibleValue={visibleValue} isSearchPanelOpen={isSearchPanelOpen} targetRef={containerRef} />
@@ -528,8 +534,10 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
           id="selectValueWrapper"
           dimension={dimension}
           multiple={multiple}
-          rowCount={rowCount}
-          fixHeight={shouldFixHeight}
+          minRowCount={minRowCount !== 'none' ? minRowCount : undefined}
+          // rowCount={calcRowCount}
+          maxRowCount={calcRowCount !== 'none' ? calcRowCount : undefined}
+          opened={isSearchPanelOpen}
           isEmpty={isEmpty}
         >
           {shouldRenderSelectValue && wrappedVisibleValue}

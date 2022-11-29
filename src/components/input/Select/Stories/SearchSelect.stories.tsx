@@ -459,15 +459,7 @@ const TemplateNotFixedMultiSelect: ComponentStory<typeof Select> = (props) => {
 
   return (
     <>
-      <Select
-        {...props}
-        value={selectValue}
-        mode="searchSelect"
-        multiple={true}
-        onChange={onChange}
-        idleHeight="full"
-        rowCount={4}
-      >
+      <Select {...props} value={selectValue} mode="searchSelect" multiple={true} onChange={onChange} maxRowCount={3}>
         {Array.from({ length: 20 }).map((_option, ind) => (
           <Option key={ind} value={String(ind)}>
             {`${ind}0000`}

@@ -17,6 +17,10 @@ export const ShadowCounterChip = styled.div`
 export const CounterChipWrap = styled.div`
   display: flex;
   width: ${COUNTER_WIDTH}px;
+  visibility: hidden;
+  [data-show-count] & {
+    visibility: visible;
+  }
   > * {
     width: ${COUNTER_WIDTH}px;
     border-radius: 16px;
@@ -33,10 +37,6 @@ export const StyledCounterChip = styled(Chips)`
   align-items: center;
   width: 35px;
   padding: 4px 0;
-  visibility: hidden;
-  [data-visible-counter] & {
-    visibility: visible;
-  }
 `;
 
 export const ContentTooltip = styled.div`

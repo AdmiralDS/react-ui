@@ -6,16 +6,9 @@ export interface CounterChipsProps {
   count: number;
   disabled?: boolean;
   onClick?: (evt: React.MouseEvent) => void;
-  onMount: (ref: HTMLDivElement) => void;
 }
 
-export const CounterChip = ({
-  children,
-  count,
-  disabled,
-  onClick,
-  onMount,
-}: React.PropsWithChildren<CounterChipsProps>) => {
+export const CounterChip = ({ children, count, disabled, onClick }: React.PropsWithChildren<CounterChipsProps>) => {
   const ref = React.useRef<HTMLDivElement>(null);
   const counterRef = React.useRef<HTMLDivElement>(null);
   const [visibleHint, setVisibleHint] = React.useState(false);
@@ -24,10 +17,6 @@ export const CounterChip = ({
   const renderContent = React.useCallback(() => <ChipsHintWrap>{children}</ChipsHintWrap>, [children]);
 
   if (!count) return <ShadowCounterChip />;
-
-  React.useLayoutEffect(() => {
-    if (ref.current) onMount(ref.current);
-  }, [ref]);
 
   return (
     <CounterChipWrap onClick={onClick} ref={ref} className={'counter'}>
