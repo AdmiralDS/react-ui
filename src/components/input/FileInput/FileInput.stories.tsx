@@ -4,7 +4,6 @@ import * as React from 'react';
 import styled, { DefaultTheme, FlattenInterpolation, ThemeProps, ThemeProvider } from 'styled-components';
 import { FileInput, RenderFileInputProps } from '#src/components/input/FileInput';
 import { Theme } from '#src/components/themes';
-import { ChangeEvent, HTMLAttributes, useRef, useState } from 'react';
 import { FileAttributeProps, FileItem } from '#src/components/input/FileInput/FileItem';
 import { fullWidthPositionMixin, halfWidthPositionMixin } from '#src/components/input/FileInput/style';
 import { ReactComponent as AttachFileOutline } from '@admiral-ds/icons/build/system/AttachFileOutline.svg';
@@ -95,9 +94,9 @@ const FileInputDemoTemplate: ComponentStory<typeof FileInput> = (props) => {
     return theme;
   }
 
-  const inputRef = useRef<HTMLInputElement>(null);
-  const [fileList, setFileList] = useState<File[]>([]);
-  const [fileAttributesMap, setFileAttributesMap] = useState(new Map<File, FileAttributeProps>());
+  const inputRef = React.useRef<HTMLInputElement>(null);
+  const [fileList, setFileList] = React.useState<File[]>([]);
+  const [fileAttributesMap, setFileAttributesMap] = React.useState(new Map<File, FileAttributeProps>());
   const [status, setStatus] = React.useState<InputStatus | undefined>(undefined);
   const [extraText, setExtraText] = React.useState<React.ReactNode | undefined>(undefined);
 
@@ -114,7 +113,7 @@ const FileInputDemoTemplate: ComponentStory<typeof FileInput> = (props) => {
     console.log(`Preview icon on file "${file.name}" was clicked`);
   };
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const userSelectedFileList = Array.from(e.target.files || []);
     const updatedFileAttributesMap = new Map<File, FileAttributeProps>(fileAttributesMap);
     const updatedFileList = fileList.reduce((acc: File[], file) => {
@@ -195,8 +194,7 @@ const FileInputDemoTemplate: ComponentStory<typeof FileInput> = (props) => {
         dimension={props.dimension}
         disabled={props.disabled}
         width={props.width}
-        title={`Загрузите не более 3-х файлов типа ${accept.join(', ')}`}
-        description="Добавьте файлы"
+        title={props.dimension === 'xl' ? `Загрузите не более 3-х файлов типа ${accept.join(', ')}` : 'Добавьте файлы'}
         ref={inputRef}
         onInput={handleChange}
         accept={accept.join(', ')}
@@ -264,9 +262,9 @@ const filesMapInitial = () => {
 //</editor-fold>
 
 const FileInputWithStatus: ComponentStory<typeof FileInput> = (props) => {
-  const inputRef = useRef<HTMLInputElement>(null);
-  const [fileList, setFileList] = useState<File[]>([...filesInitial]);
-  const [fileAttributesMap, setFileAttributesMap] = useState(filesMapInitial());
+  const inputRef = React.useRef<HTMLInputElement>(null);
+  const [fileList, setFileList] = React.useState<File[]>([...filesInitial]);
+  const [fileAttributesMap, setFileAttributesMap] = React.useState(filesMapInitial());
 
   const filesAreEqual = (file1: File, file2: File) =>
     file1.name === file2.name &&
@@ -278,7 +276,7 @@ const FileInputWithStatus: ComponentStory<typeof FileInput> = (props) => {
     console.log(`Preview icon on file "${file.name}" was clicked`);
   };
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const userSelectedFileList = Array.from(e.target.files || []);
     const updatedFileAttributesMap = new Map<File, FileAttributeProps>(fileAttributesMap);
     const updatedFileList = fileList.reduce((acc: File[], file) => {
@@ -348,8 +346,7 @@ const FileInputWithStatus: ComponentStory<typeof FileInput> = (props) => {
       dimension={props.dimension}
       disabled={props.disabled}
       width={props.dimension === 'xl' ? '480px' : '288px'}
-      description="Добавьте файлы"
-      title={`Загрузите файлы изображений`}
+      title={props.dimension === 'xl' ? `Загрузите файлы изображений` : 'Добавьте файлы'}
       ref={inputRef}
       onInput={handleChange}
       accept="image/*"
@@ -361,7 +358,7 @@ const FileInputWithStatus: ComponentStory<typeof FileInput> = (props) => {
 };
 
 //<editor-fold desc="MyFileItem">
-interface MyFileItemProps extends HTMLAttributes<HTMLDivElement> {
+interface MyFileItemProps extends React.HTMLAttributes<HTMLDivElement> {
   filesLayoutCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
   onCloseIconClick?: () => void;
 }
@@ -415,8 +412,8 @@ const CustomFileItem = ({ children, filesLayoutCssMixin, onCloseIconClick, ...pr
 //</editor-fold>
 
 const FileInputCustomTemplate: ComponentStory<typeof FileInput> = (props) => {
-  const inputRef = useRef<HTMLInputElement>(null);
-  const [fileList, setFileList] = useState<File[]>([]);
+  const inputRef = React.useRef<HTMLInputElement>(null);
+  const [fileList, setFileList] = React.useState<File[]>([]);
 
   const filesAreEqual = (file1: File, file2: File) =>
     file1.name === file2.name &&
@@ -424,7 +421,7 @@ const FileInputCustomTemplate: ComponentStory<typeof FileInput> = (props) => {
     file1.type === file2.type &&
     file1.lastModified === file2.lastModified;
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const userSelectedFileList = Array.from(e.target.files || []);
     const updatedFileList = fileList.reduce((acc: File[], file) => {
       if (userSelectedFileList.findIndex((userFile) => filesAreEqual(userFile, file)) === -1) {
@@ -471,7 +468,6 @@ const FileInputCustomTemplate: ComponentStory<typeof FileInput> = (props) => {
       dimension={props.dimension}
       disabled={props.disabled}
       width="260px"
-      description="Добавьте файлы"
       ref={inputRef}
       onInput={handleChange}
       renderCustomFileInput={renderCustomInput}

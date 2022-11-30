@@ -1,13 +1,9 @@
 import styled from 'styled-components';
-import { TYPOGRAPHY } from '#src/components/Typography';
+import { typography } from '#src/components/Typography';
 
 export const Label = styled.label<{ disabled?: boolean }>`
   text-align: left;
-  font-family: ${() => TYPOGRAPHY.fontFamily};
-  font-style: normal;
-  font-weight: normal;
-  font-size: 14px;
-  line-height: 16px;
+  ${typography['Body/Body 2 Short']}
   color: ${(props) => props.theme.color['Neutral/Neutral 50']};
 
   [data-disabled] & {

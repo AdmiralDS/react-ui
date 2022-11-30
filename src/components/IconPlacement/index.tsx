@@ -184,10 +184,12 @@ export const IconPlacement = React.forwardRef<HTMLButtonElement, IconPlacementPr
   },
 );
 
-export const CloseIconPlacementButton = React.forwardRef<HTMLButtonElement, IconPlacementProps>(({ ...props }, ref) => {
-  return (
-    <IconPlacement ref={ref} {...props}>
-      <CloseOutline aria-hidden />
-    </IconPlacement>
-  );
-});
+export const CloseIconPlacementButton = React.forwardRef<HTMLButtonElement, IconPlacementProps>(
+  ({ className, ...props }, ref) => {
+    return (
+      <IconPlacement ref={ref} className={`close-button ${className || ''}`} {...props}>
+        <CloseOutline aria-hidden />
+      </IconPlacement>
+    );
+  },
+);
