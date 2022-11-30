@@ -1,5 +1,6 @@
-import React, { Fragment, KeyboardEventHandler, MouseEventHandler, useRef, useState } from 'react';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { KeyboardEventHandler, MouseEventHandler } from 'react';
+import React, { Fragment, useRef, useState } from 'react';
+import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { DropDownMenu } from '#src/components/DropDownMenu';
 import { DropDownItem } from '#src/components/DropDownItem';
 import { Button } from '#src/components/Button';
@@ -7,7 +8,7 @@ import styled, { ThemeProvider } from 'styled-components';
 import { typography } from '#src/components/Typography';
 import { ReactComponent as CardSolid } from '@admiral-ds/icons/build/finance/CardSolid.svg';
 import { withDesign } from 'storybook-addon-designs';
-import { Theme } from '#src/components/themes';
+import type { Theme } from '#src/components/themes';
 import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
 
 const Desc = styled.div`

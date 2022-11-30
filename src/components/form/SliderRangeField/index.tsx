@@ -1,6 +1,8 @@
 import { uid } from '#src/components/common/uid';
-import { Field as FieldComponent, FieldOwnProps } from '#src/components/Field';
-import { SliderRange, SliderRangeProps } from '#src/components/input/SliderRange';
+import type { FieldOwnProps } from '#src/components/Field';
+import { Field as FieldComponent } from '#src/components/Field';
+import type { SliderRangeProps } from '#src/components/input/SliderRange';
+import { SliderRange } from '#src/components/input/SliderRange';
 import * as React from 'react';
 import styled from 'styled-components';
 import {

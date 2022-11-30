@@ -1,6 +1,6 @@
 import { withDesign } from 'storybook-addon-designs';
 import * as React from 'react';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import styled from 'styled-components';
 import { ReactComponent as PersonSolid } from '@admiral-ds/icons/build/system/PersonSolid.svg';
 import { DefaultFontColorName } from '#src/components/themes';

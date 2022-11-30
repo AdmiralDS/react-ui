@@ -1,5 +1,5 @@
 import { locales } from './locales';
-import { LocaleType } from './constants';
+import type { LocaleType } from './constants';
 
 export { format, parse };
 

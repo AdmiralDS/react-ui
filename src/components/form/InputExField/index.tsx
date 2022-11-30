@@ -1,8 +1,10 @@
 import * as React from 'react';
 import { uid } from '#src/components/common/uid';
 import { refSetter } from '#src/components/common/utils/refSetter';
-import { Field, FieldOwnProps } from '#src/components/Field';
-import { InputEx as Input, InputExProps } from '#src/components/input';
+import type { FieldOwnProps } from '#src/components/Field';
+import { Field } from '#src/components/Field';
+import type { InputExProps } from '#src/components/input';
+import { InputEx as Input } from '#src/components/input';
 import {
   passFormFieldContainerDataAttributes,
   passFormFieldDataAttributes,

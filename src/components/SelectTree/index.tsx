@@ -1,7 +1,8 @@
 import type { FC, HTMLAttributes, ChangeEvent, KeyboardEvent, MouseEvent } from 'react';
 import * as React from 'react';
 import styled from 'styled-components';
-import { Dimension, SelectTreeNode, SelectTreeNodeProps } from '#src/components/SelectTree/SelectTreeNode';
+import type { Dimension, SelectTreeNodeProps } from '#src/components/SelectTree/SelectTreeNode';
+import { SelectTreeNode } from '#src/components/SelectTree/SelectTreeNode';
 import { keyboardKey } from '#src/components/common/keyboardKey';
 import { checkParent, setNodeStatus, updateNodeStatus } from '#src/components/SelectTree/utils';
 

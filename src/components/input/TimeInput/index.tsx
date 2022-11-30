@@ -1,8 +1,11 @@
 import * as React from 'react';
-import { HTMLAttributes, useRef, useState } from 'react';
-import styled, { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
+import type { HTMLAttributes } from 'react';
+import { useRef, useState } from 'react';
+import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
+import styled from 'styled-components';
 import { ReactComponent as TimeSVG } from '@admiral-ds/icons/build/system/TimeOutline.svg';
-import { TextInput, TextInputProps } from '../TextInput';
+import type { TextInputProps } from '../TextInput';
+import { TextInput } from '../TextInput';
 import { refSetter } from '#src/components/common/utils/refSetter';
 import { defaultTimeInputHandle } from '#src/components/input/TimeInput/defaultTimeInputHandle';
 import { changeInputData } from '#src/components/common/dom/changeInputData';
@@ -10,7 +13,8 @@ import { getTimeInMinutes, parseStringToTime } from './utils';
 import { typography } from '#src/components/Typography';
 import { InputIconButton } from '#src/components/InputIconButton';
 import { StyledDropdownContainer } from '#src/components/DropdownContainer';
-import { MenuItem, RenderOptionProps } from '#src/components/Menu/MenuItem';
+import type { RenderOptionProps } from '#src/components/Menu/MenuItem';
+import { MenuItem } from '#src/components/Menu/MenuItem';
 import { Menu } from '#src/components/Menu';
 
 export interface SlotProps extends HTMLAttributes<HTMLDivElement>, RenderOptionProps {

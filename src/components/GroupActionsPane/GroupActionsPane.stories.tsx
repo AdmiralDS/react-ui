@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { GroupActionsPane, PaneSeparator } from '#src/components/GroupActionsPane';
 import styled, { ThemeProvider } from 'styled-components';
 import { typography } from '#src/components/Typography';
@@ -8,7 +8,7 @@ import { ReactComponent as TelegramOutline } from '@admiral-ds/icons/build/commu
 import { ReactComponent as AlertOutline } from '@admiral-ds/icons/build/category/AlertOutline.svg';
 import { ReactComponent as CardSolid } from '@admiral-ds/icons/build/finance/CardSolid.svg';
 import { withDesign } from 'storybook-addon-designs';
-import { Theme } from '#src/components/themes';
+import type { Theme } from '#src/components/themes';
 import { TextButton } from '#src/components/TextButton';
 
 const Desc = styled.div`

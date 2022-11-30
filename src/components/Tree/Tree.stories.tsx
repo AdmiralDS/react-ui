@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Tree } from '#src/components/Tree';
-import { RenderOptionProps, TreeItemProps, TreeNode } from '#src/components/Tree/TreeNode';
+import type { RenderOptionProps, TreeItemProps } from '#src/components/Tree/TreeNode';
+import { TreeNode } from '#src/components/Tree/TreeNode';
 import { withDesign } from 'storybook-addon-designs';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { T } from '#src/components/T';
 import { ReactComponent as FolderSolid } from '@admiral-ds/icons/build/documents/FolderSolid.svg';
 

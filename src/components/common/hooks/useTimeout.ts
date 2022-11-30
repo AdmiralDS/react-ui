@@ -1,6 +1,7 @@
 // Copy-Paste from https://gist.github.com/Danziger/336e75b6675223ad805a88c2dfdcfd4a
 
-import React, { useEffect, useRef } from 'react';
+import type React from 'react';
+import { useEffect, useRef } from 'react';
 
 /**
  * Use setTimeout with Hooks in a declarative way.

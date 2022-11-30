@@ -1,7 +1,8 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { ItemDimension } from '#src/components/Menu/menuItemMixins';
-import { MenuItem, MenuItemProps } from '#src/components/Menu/MenuItem';
+import type { ItemDimension } from '#src/components/Menu/menuItemMixins';
+import type { MenuItemProps } from '#src/components/Menu/MenuItem';
+import { MenuItem } from '#src/components/Menu/MenuItem';
 import { Checkbox } from '#src/components/Checkbox';
 
 export interface ItemWithCheckbox {

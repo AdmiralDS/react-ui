@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ButtonHTMLAttributes } from 'react';
+import type { ButtonHTMLAttributes } from 'react';
 import styled, { css } from 'styled-components';
 import { smallGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { ReactComponent as CloseOutline } from '@admiral-ds/icons/build/service/CloseOutline.svg';

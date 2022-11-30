@@ -16,7 +16,7 @@ import {
   hoverStyles,
   titleXL,
 } from '#src/components/input/FileInput/style';
-import { InputStatus } from '#src/components/input/types';
+import type { InputStatus } from '#src/components/input/types';
 import { ExtraTextContainer } from '#src/components/Field';
 import { Label } from '#src/components/Label';
 

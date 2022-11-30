@@ -1,4 +1,4 @@
-import React from 'react';
+import type React from 'react';
 
 const correctValueWithRanges = (ranges: number[], value: number, minValue: number, maxValue: number) => {
   const fullRangePoints = [...ranges.map((elem) => elem), minValue, maxValue].sort((a, b) => a - b);

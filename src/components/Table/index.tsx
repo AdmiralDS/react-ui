@@ -38,6 +38,8 @@ import { VirtualBody } from './VirtualBody';
 export * from './RowAction';
 
 export const DEFAULT_COLUMN_WIDTH = 100;
+const COLUMN_MIN_WIDTH_M = 25;
+const COLUMN_MIN_WIDTH_L = 33;
 
 export type Dimension = 'xl' | 'l' | 'm' | 's';
 
@@ -290,6 +292,7 @@ export const Table: React.FC<TableProps> = ({
   const iconSize = dimension === 's' || dimension === 'm' ? 16 : 20;
   const defaultSpacer = dimension === 'l' || dimension === 'xl' ? '16px' : '12px';
   const spacer = spacingBetweenItems || defaultSpacer;
+  const columnMinWidth = dimension === 's' || dimension === 'm' ? COLUMN_MIN_WIDTH_M : COLUMN_MIN_WIDTH_L;
 
   const [cols, setColumns] = React.useState([...columnList]);
   const [verticalScroll, setVerticalScroll] = React.useState(false);
@@ -582,7 +585,7 @@ export const Table: React.FC<TableProps> = ({
       column.name === name
         ? {
             ...column,
-            width: width > DEFAULT_COLUMN_WIDTH ? width : DEFAULT_COLUMN_WIDTH,
+            width: width >= columnMinWidth ? width : columnMinWidth,
           }
         : column,
     );

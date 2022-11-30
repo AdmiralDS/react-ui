@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ReactElement } from 'react';
+import type { ReactElement } from 'react';
 import styled, { css } from 'styled-components';
 import type { DropdownProps } from '#src/components/Dropdown';
 import { Dropdown } from '#src/components/Dropdown';

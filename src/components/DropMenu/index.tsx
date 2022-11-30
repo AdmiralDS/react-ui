@@ -3,10 +3,13 @@ import * as React from 'react';
 import { keyboardKey } from '#src/components/common/keyboardKey';
 import { OpenStatusButton } from '#src/components/OpenStatusButton';
 import type { ItemProps } from '#src/components/Menu/MenuItem';
-import { DropdownContainerProps, StyledDropdownContainer } from '#src/components/DropdownContainer';
-import { Menu, MenuDimensions as Dimension, MenuProps } from '#src/components/Menu';
+import type { DropdownContainerProps } from '#src/components/DropdownContainer';
+import { StyledDropdownContainer } from '#src/components/DropdownContainer';
+import type { MenuDimensions as Dimension, MenuProps } from '#src/components/Menu';
+import { Menu } from '#src/components/Menu';
 import { refSetter } from '#src/components/common/utils/refSetter';
-import styled, { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
+import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
+import styled from 'styled-components';
 
 const StyledMenu = styled(Menu)<{ width?: string }>`
   width: ${({ width }) => (width ? width : 'auto')};

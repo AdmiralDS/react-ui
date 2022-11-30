@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { ReactComponent as DeleteOutline } from '@admiral-ds/icons/build/system/DeleteOutline.svg';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import styled, { ThemeProvider } from 'styled-components';
 
@@ -11,7 +11,7 @@ import { refSetter } from '#src/components/common/utils/refSetter';
 import { Button } from '#src/components/Button';
 import { InputField } from '#src/components/form';
 import type { InputFieldProps } from '#src/components/form';
-import { Theme } from '#src/components/themes';
+import type { Theme } from '#src/components/themes';
 import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
 
 const Separator = styled.div<{ height?: number }>`

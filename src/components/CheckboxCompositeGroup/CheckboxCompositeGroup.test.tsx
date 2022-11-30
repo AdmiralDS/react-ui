@@ -2,7 +2,8 @@ import { LIGHT_THEME } from '#src/components/themes';
 import React from 'react';
 import { render } from '@testing-library/react';
 
-import { CheckboxCompositeGroup, CheckboxCompositeGroupProps } from './';
+import type { CheckboxCompositeGroupProps } from './';
+import { CheckboxCompositeGroup } from './';
 import { CheckboxField } from '../form/CheckboxField';
 import { CheckboxGroup } from '../CheckboxGroup';
 import { ThemeProvider } from 'styled-components';

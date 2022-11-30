@@ -1,13 +1,9 @@
-import type { FC } from 'react';
-import React, { HTMLAttributes } from 'react';
+import type { FC, HTMLAttributes } from 'react';
+import * as React from 'react';
 
-import StepperContext from '#src/components/Stepper/StepperContext';
-import { List } from '#src/components/Stepper/style';
-
-export * from '#src/components/Stepper/StepContent';
-export * from '#src/components/Stepper/Step';
-
-export type Orientation = 'horizontal' | 'vertical';
+import { StepperContext } from './StepperContext';
+import { List } from './style';
+import type { Orientation } from './type';
 
 export interface StepperProps extends HTMLAttributes<HTMLUListElement> {
   /** Ориентация компонента */
@@ -34,6 +30,11 @@ export interface StepperProps extends HTMLAttributes<HTMLUListElement> {
   mobile?: boolean;
 }
 
+export * from './type';
+export * from './Step';
+export * from './StepContent';
+export * from './StepperContext';
+
 export const Stepper: FC<StepperProps> = ({
   orientation = 'horizontal',
   activeStep = -1,
@@ -44,7 +45,7 @@ export const Stepper: FC<StepperProps> = ({
   children,
   ...props
 }) => {
-  const listRef = React.useRef<any>();
+  const listRef = React.useRef<HTMLUListElement>(null);
   const steps = React.Children.toArray(children).map((step, index) => {
     if (!React.isValidElement(step)) {
       return null;
@@ -79,7 +80,7 @@ export const Stepper: FC<StepperProps> = ({
 
   React.useEffect(() => {
     if (listRef.current && mobile && orientation === 'horizontal') {
-      const activeNode = listRef.current.childNodes[activeStep] || listRef.current.firstChild;
+      const activeNode = (listRef.current.childNodes[activeStep] || listRef.current.firstChild) as HTMLElement;
       listRef.current.scrollLeft = activeStep === 0 ? activeNode.offsetLeft : activeNode.offsetLeft - 16;
     }
   }, [activeStep, listRef.current, steps]);

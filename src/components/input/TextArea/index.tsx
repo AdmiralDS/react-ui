@@ -1,4 +1,5 @@
-import { changeInputData, CustomInputHandler, InputData } from '#src/components/common/dom/changeInputData';
+import type { CustomInputHandler, InputData } from '#src/components/common/dom/changeInputData';
+import { changeInputData } from '#src/components/common/dom/changeInputData';
 import { refSetter } from '#src/components/common/utils/refSetter';
 import type { ComponentDimension, ExtraProps, InputStatus } from '#src/components/input/types';
 import { typography } from '#src/components/Typography';

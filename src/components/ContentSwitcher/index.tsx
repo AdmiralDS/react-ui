@@ -1,4 +1,5 @@
-import React, { HTMLAttributes, KeyboardEvent, ReactNode, useRef } from 'react';
+import type { HTMLAttributes, KeyboardEvent, ReactNode } from 'react';
+import React, { useRef } from 'react';
 import type { Dimension } from '#src/components/ContentSwitcher/ContentSwitcherComponent';
 import { ContentSwitcherComponent } from '#src/components/ContentSwitcher/ContentSwitcherComponent';
 import { moveFocus, nextItem, previousItem } from '#src/components/ContentSwitcher/utils';

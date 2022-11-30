@@ -1,5 +1,6 @@
 import * as React from 'react';
-import styled, { DefaultTheme, FlattenInterpolation, ThemeContext, ThemeProps } from 'styled-components';
+import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
+import styled, { ThemeContext } from 'styled-components';
 import { LIGHT_THEME } from '#src/components/themes';
 import { OpenStatusButton } from '#src/components/OpenStatusButton';
 import { keyboardKey } from '#src/components/common/keyboardKey';
@@ -73,7 +74,11 @@ export interface SelectProps extends Omit<React.InputHTMLAttributes<HTMLSelectEl
   /** Позволяет определить действия при нажатии на иконку очистки. По умолчанию произойдет очистка выбранных значений */
   onClearIconClick?: () => void;
 
+  /** @deprecated используйте maxRowCount **/
   idleHeight?: 'full' | 'fixed';
+
+  minRowCount?: number | 'none';
+  maxRowCount?: number | 'none';
 
   /** Референс на контейнер для правильного позиционирования выпадающего списка */
   portalTargetRef?: React.RefObject<HTMLElement>;
@@ -147,6 +152,8 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       defaultValue,
       dimension = 'm',
       idleHeight = 'fixed',
+      minRowCount = 'none',
+      maxRowCount = 'none',
       mode = 'select',
       multiple = false,
       showCheckbox = true,
@@ -191,6 +198,14 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
     const selectIsUncontrolled = value === undefined;
     const modeIsSelect = mode === 'select';
 
+    const calcRowCount = React.useMemo<number | 'none'>(() => {
+      if (maxRowCount !== 'none' && maxRowCount > 0) return maxRowCount;
+
+      return idleHeight === 'fixed' ? 1 : 'none';
+    }, [maxRowCount, idleHeight]);
+
+    const fixedHeight = calcRowCount !== 'none';
+
     const selectedOption = React.useMemo(
       () => (multiple ? null : constantOptions.find((option) => option.value === selectedValue)),
       [multiple, constantOptions, selectedValue],
@@ -215,6 +230,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
     const inputRef = React.useRef<HTMLInputElement | null>(null);
     const selectRef = React.useRef<HTMLSelectElement | null>(null);
     const containerRef = React.useRef<HTMLDivElement | null>(null);
+    const valueWrapperRef = React.useRef<HTMLDivElement>(null);
     const dropDownRef = React.useRef<HTMLDivElement | null>(null);
     const mutableState = React.useRef<{ shouldExtendInputValue: boolean }>({
       shouldExtendInputValue: false,
@@ -294,11 +310,12 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
 
     const handleOnClear = onClearIconClick || resetOptions;
 
-    const shouldFixMultiSelectHeight = idleHeight === 'fixed' && !isSearchPanelOpen;
+    const shouldFixMultiSelectHeight = fixedHeight && !isSearchPanelOpen;
 
     const renderMultipleSelectValue = React.useCallback(
       () => (
         <MultipleSelectChips
+          containerRef={valueWrapperRef}
           options={selectedOptions}
           shouldShowCount={shouldFixMultiSelectHeight}
           disabled={disabled}
@@ -307,7 +324,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
           onChipClick={stopPropagation}
         />
       ),
-      [selectedOptions, shouldFixMultiSelectHeight, disabled, readOnly, handleOptionSelect, stopPropagation],
+      [valueWrapperRef, selectedOptions, shouldFixMultiSelectHeight, disabled, readOnly, handleOptionSelect],
     );
 
     const isEmptyValue = multiple ? !selectedValue?.length : !selectedValue;
@@ -320,9 +337,6 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
     const visibleValue = renderedSelectValue || renderedDefaultSelectValue || selectedValue || null;
 
     const visibleValueIsString = typeof visibleValue === 'string';
-
-    const shouldFixSingleSelectHeight = idleHeight === 'fixed' && visibleValueIsString;
-    const shouldFixHeight = multiple ? shouldFixMultiSelectHeight : shouldFixSingleSelectHeight;
 
     const wrappedVisibleValue = visibleValueIsString ? (
       <DisplayValue visibleValue={visibleValue} isSearchPanelOpen={isSearchPanelOpen} targetRef={containerRef} />
@@ -517,10 +531,14 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
         <BorderedDiv />
         <ValueWrapper
           tabIndex={-1}
+          ref={valueWrapperRef}
           id="selectValueWrapper"
           dimension={dimension}
           multiple={multiple}
-          fixHeight={shouldFixHeight}
+          minRowCount={minRowCount !== 'none' ? minRowCount : undefined}
+          // rowCount={calcRowCount}
+          maxRowCount={calcRowCount !== 'none' ? calcRowCount : undefined}
+          opened={isSearchPanelOpen}
           isEmpty={isEmpty}
         >
           {shouldRenderSelectValue && wrappedVisibleValue}

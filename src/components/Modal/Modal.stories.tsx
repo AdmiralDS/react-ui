@@ -3,11 +3,11 @@ import { hexToRgba } from '#src/components/common/utils/hexToRgba';
 import { Option } from '#src/components/input/Select';
 import { InputField, SelectField } from '#src/components/form';
 import { Modal, ModalButtonPanel, ModalContent, ModalTitle } from '#src/components/Modal';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 import { withDesign } from 'storybook-addon-designs';
 import styled, { css, ThemeProvider } from 'styled-components';
-import { Theme } from '#src/components/themes';
+import type { Theme } from '#src/components/themes';
 import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
 
 const Desc = styled.div`

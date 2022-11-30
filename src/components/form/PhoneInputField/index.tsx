@@ -1,6 +1,8 @@
 import { uid } from '#src/components/common/uid';
-import { Field, FieldOwnProps } from '#src/components/Field';
-import { PhoneNumberInput, PhoneNumberInputProps } from '#src/components/input/PhoneNumberInput';
+import type { FieldOwnProps } from '#src/components/Field';
+import { Field } from '#src/components/Field';
+import type { PhoneNumberInputProps } from '#src/components/input/PhoneNumberInput';
+import { PhoneNumberInput } from '#src/components/input/PhoneNumberInput';
 import * as React from 'react';
 import {
   passFormFieldContainerDataAttributes,

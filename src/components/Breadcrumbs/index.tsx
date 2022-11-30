@@ -4,7 +4,7 @@ import { MenuButton } from './Menu';
 import type { BreadcrumbProps } from './BreadCrumb';
 import { Breadcrumb } from './BreadCrumb';
 import { Compensator, Navigation, OverflowContentWrapper, OverflowItem, Separator, Wrapper } from './style';
-import { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
+import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 
 type Dimension = 'l' | 'm' | 's';
 

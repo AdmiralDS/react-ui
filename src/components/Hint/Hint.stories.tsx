@@ -1,11 +1,12 @@
 import { Button } from '#src/components/Button';
-import { Hint, HintProps } from '#src/components/Hint';
+import type { HintProps } from '#src/components/Hint';
+import { Hint } from '#src/components/Hint';
 import React, { useRef } from 'react';
 import styled, { css, ThemeProvider } from 'styled-components';
 import { ReactComponent as HelpOutline } from '@admiral-ds/icons/build/service/HelpOutline.svg';
-import { ComponentMeta, ComponentStory, Story } from '@storybook/react';
+import type { ComponentMeta, ComponentStory, Story } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
-import { Theme } from '#src/components/themes';
+import type { Theme } from '#src/components/themes';
 import { TextButton } from '#src/components/TextButton';
 import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
 

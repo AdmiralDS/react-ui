@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { FieldSet } from '#src/components/form';
 import { RadioButton } from '#src/components/RadioButton';
 import { SelectField as Select } from '#src/components/form/SelectField';

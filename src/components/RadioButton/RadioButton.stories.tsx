@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import styled from 'styled-components';
 
-import { RadioButton, RadioButtonProps } from '#src/components/RadioButton';
+import type { RadioButtonProps } from '#src/components/RadioButton';
+import { RadioButton } from '#src/components/RadioButton';
 import { Button } from '#src/components/Button';
 import { ReactComponent as InfoSolidSVG } from '@admiral-ds/icons/build/service/InfoSolid.svg';
 import { Hint } from '#src/components/Hint';

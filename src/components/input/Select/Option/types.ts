@@ -1,6 +1,6 @@
-import * as React from 'react';
-import { TRenderChip } from '#src/components/input/Select/types';
-import { RenderOptionProps } from '#src/components/Menu/MenuItem';
+import type * as React from 'react';
+import type { TRenderChip } from '#src/components/input/Select/types';
+import type { RenderOptionProps } from '#src/components/Menu/MenuItem';
 
 export interface OptionProps extends React.InputHTMLAttributes<HTMLDivElement> {
   id?: string;

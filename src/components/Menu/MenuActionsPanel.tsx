@@ -1,9 +1,11 @@
-import styled, { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
-import { MenuDimensions } from '#src/components/Menu/index';
+import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
+import styled from 'styled-components';
+import type { MenuDimensions } from '#src/components/Menu/index';
 import { getTextHighlightMeta } from '#src/components/common/utils/getTextHighlightMeta';
-import { ItemProps, MenuItem, RenderOptionProps } from '#src/components/Menu/MenuItem';
+import type { ItemProps, RenderOptionProps } from '#src/components/Menu/MenuItem';
+import { MenuItem } from '#src/components/Menu/MenuItem';
 import React from 'react';
-import { ItemDimension } from '#src/components/Menu/menuItemMixins';
+import type { ItemDimension } from '#src/components/Menu/menuItemMixins';
 import { uid } from '#src/components/common/uid';
 
 export const MenuActionsPanel = styled.div<{

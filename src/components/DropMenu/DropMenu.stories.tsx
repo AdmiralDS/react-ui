@@ -1,16 +1,18 @@
 import React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import { withDesign } from 'storybook-addon-designs';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { DropMenu } from '#src/components/DropMenu';
-import { MenuItem, RenderOptionProps } from '#src/components/Menu/MenuItem';
-import { Theme } from '#src/components/themes';
+import type { RenderOptionProps } from '#src/components/Menu/MenuItem';
+import { MenuItem } from '#src/components/Menu/MenuItem';
+import type { Theme } from '#src/components/themes';
 import { Button } from '#src/components/Button';
 import { typography } from '#src/components/Typography';
 import { ReactComponent as CardSolid } from '@admiral-ds/icons/build/finance/CardSolid.svg';
 import { TooltipHoc } from '#src/components/TooltipHOC';
 import { RadioButton } from '#src/components/RadioButton';
-import { ItemWithCheckbox, MenuItemWithCheckbox } from '#src/components/Menu/MenuItemWithCheckbox';
+import type { ItemWithCheckbox } from '#src/components/Menu/MenuItemWithCheckbox';
+import { MenuItemWithCheckbox } from '#src/components/Menu/MenuItemWithCheckbox';
 import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
 
 const Desc = styled.div`

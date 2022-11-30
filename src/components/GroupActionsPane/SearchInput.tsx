@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
-import { InputHTMLAttributes, useEffect, useRef, useState } from 'react';
+import type { InputHTMLAttributes } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import * as React from 'react';
 import { typography } from '#src/components/Typography';
 import { refSetter } from '#src/components/common/utils/refSetter';

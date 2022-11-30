@@ -1,11 +1,13 @@
 import { refSetter } from '#src/components/common/utils/refSetter';
-import { FileInfo, FileProps } from './FileInfo';
+import type { FileProps } from './FileInfo';
+import { FileInfo } from './FileInfo';
 import { typography } from '#src/components/Typography';
 import { ReactComponent as AttachFileOutline } from '@admiral-ds/icons/build/system/AttachFileOutline.svg';
 import * as React from 'react';
-import { InputHTMLAttributes, ReactNode } from 'react';
+import type { InputHTMLAttributes, ReactNode } from 'react';
 import styled, { css } from 'styled-components';
-import { acceptFile, Dimension } from './utils';
+import type { Dimension } from './utils';
+import { acceptFile } from './utils';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 
 export * from './FileInfo';

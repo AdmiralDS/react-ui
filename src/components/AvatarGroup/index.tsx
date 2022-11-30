@@ -1,9 +1,11 @@
 import * as React from 'react';
-import styled, { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
+import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
+import styled from 'styled-components';
 import { uid } from '#src/components/common/uid';
 import type { AvatarProps } from '#src/components/Avatar';
 import { Avatar } from '#src/components/Avatar';
-import { MenuItem, RenderOptionProps } from '#src/components/Menu/MenuItem';
+import type { RenderOptionProps } from '#src/components/Menu/MenuItem';
+import { MenuItem } from '#src/components/Menu/MenuItem';
 import { DropMenu } from '#src/components/DropMenu';
 import { keyboardKey } from '#src/components/common/keyboardKey';
 import { passDropdownDataAttributes } from '#src/components/common/utils/splitDataAttributes';

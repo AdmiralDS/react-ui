@@ -1,5 +1,5 @@
 import React, { useMemo, useRef, useState } from 'react';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { DropdownContainer } from '#src/components/DropdownContainer';
 import { Button } from '#src/components/Button';
 import styled, { css, ThemeProvider } from 'styled-components';
@@ -7,8 +7,9 @@ import { typography } from '#src/components/Typography';
 import { ReactComponent as CardSolid } from '@admiral-ds/icons/build/finance/CardSolid.svg';
 import { withDesign } from 'storybook-addon-designs';
 import { Menu } from '#src/components/Menu';
-import { MenuItem, RenderOptionProps } from '#src/components/Menu/MenuItem';
-import { Theme } from '#src/components/themes';
+import type { RenderOptionProps } from '#src/components/Menu/MenuItem';
+import { MenuItem } from '#src/components/Menu/MenuItem';
+import type { Theme } from '#src/components/themes';
 import { mediumGroupBorderRadius, ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
 
 const Desc = styled.div`

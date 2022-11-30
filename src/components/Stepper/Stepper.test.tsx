@@ -1,6 +1,7 @@
-import { Orientation, Step, StepContent, Stepper } from '#src/components/Stepper';
+import type { Orientation } from '#src/components/Stepper';
+import { Step, StepContent, Stepper } from '#src/components/Stepper';
 import { render } from '@testing-library/react';
-import React from 'react';
+import * as React from 'react';
 import { ThemeProvider } from 'styled-components';
 
 import { LIGHT_THEME } from '#src/components/themes';

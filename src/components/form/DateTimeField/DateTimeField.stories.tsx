@@ -1,6 +1,6 @@
 import { DateTimeDateInput, DateTimeTimeInput, INPUT_DIMENSIONS_VALUES } from '#src/components/input';
 import * as React from 'react';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { Field } from '#src/components/Field';
 import { withDesign } from 'storybook-addon-designs';
 import styled from 'styled-components';

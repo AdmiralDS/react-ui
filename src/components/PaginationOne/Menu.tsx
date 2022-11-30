@@ -1,9 +1,12 @@
 import * as React from 'react';
-import styled, { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
+import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
+import styled from 'styled-components';
 import { typography } from '#src/components/Typography';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
-import { DropMenu, DropMenuComponentProps } from '#src/components/DropMenu';
-import { MenuItem, RenderOptionProps } from '#src/components/Menu/MenuItem';
+import type { DropMenuComponentProps } from '#src/components/DropMenu';
+import { DropMenu } from '#src/components/DropMenu';
+import type { RenderOptionProps } from '#src/components/Menu/MenuItem';
+import { MenuItem } from '#src/components/Menu/MenuItem';
 
 const Button = styled.button<{ $menuOpened?: boolean }>`
   position: relative;

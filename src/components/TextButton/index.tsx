@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { ButtonHTMLAttributes, ReactNode } from 'react';
+import type { ButtonHTMLAttributes, ReactNode } from 'react';
 import styled from 'styled-components';
 import { Spinner } from '#src/components/Spinner';
-import { Appearance, Dimension, StyledButtonProps } from './types';
+import type { Appearance, Dimension, StyledButtonProps } from './types';
 import { appearanceMixin } from './appearanceMixin';
 import { ButtonContainer, IconContainer } from '#src/components/TextButton/commonMixin';
 import { dimensionMixin } from '#src/components/TextButton/dimensionMixin';

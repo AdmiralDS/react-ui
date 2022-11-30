@@ -1,18 +1,18 @@
 import { INPUT_DIMENSIONS_VALUES, INPUT_STATUS_VALUES } from '#src/components/input';
 import { Modal, ModalButtonPanel, ModalContent, ModalTitle } from '#src/components/Modal';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import type { ChangeEvent } from 'react';
 import * as React from 'react';
 import { withDesign } from 'storybook-addon-designs';
 import { Option, OptionGroup, Select } from '#src/components/input/Select';
-import { IOnCloseProps } from '../types';
+import type { IOnCloseProps } from '../types';
 import { Button } from '#src/components/Button';
 import { useState } from '@storybook/addons';
 import { MenuActionsPanel } from '#src/components/Menu/MenuActionsPanel';
 import { TextButton } from '#src/components/TextButton';
 import { PlusOutline } from '#src/icons/IconComponents-service';
 import { CustomOptionWrapper } from '../styled';
-import { RenderOptionProps } from '#src/components/Menu/MenuItem';
+import type { RenderOptionProps } from '#src/components/Menu/MenuItem';
 import { T } from '#src/components/T';
 import { createOptions, formDataToObject, shouldRender, wait } from './utils';
 import { OPTIONS, OPTIONS_ASYNC, OPTIONS_SIMPLE } from './data';
@@ -424,7 +424,7 @@ const TemplateMultipleWithApply: ComponentStory<typeof Select> = (props) => {
         inputValue={searchValue}
         multiple={true}
         onChange={onChange}
-        dimension="xl"
+        // dimension="xl"
         displayClearIcon={true}
         placeholder="Placeholder"
         mode="searchSelect"
@@ -459,7 +459,7 @@ const TemplateNotFixedMultiSelect: ComponentStory<typeof Select> = (props) => {
 
   return (
     <>
-      <Select {...props} value={selectValue} mode="searchSelect" multiple={true} onChange={onChange} idleHeight="full">
+      <Select {...props} value={selectValue} mode="searchSelect" multiple={true} onChange={onChange} maxRowCount={3}>
         {Array.from({ length: 20 }).map((_option, ind) => (
           <Option key={ind} value={String(ind)}>
             {`${ind}0000`}

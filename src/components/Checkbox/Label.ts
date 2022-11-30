@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { CheckboxDimension } from '#src/components/Checkbox/CheckboxDimension';
+import type { CheckboxDimension } from '#src/components/Checkbox/CheckboxDimension';
 import { TYPOGRAPHY } from '#src/components/Typography';
 
 export const styleTextMixin = css<{ dimension: CheckboxDimension; disabled?: boolean }>`

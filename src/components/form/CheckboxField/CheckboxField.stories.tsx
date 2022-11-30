@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { CheckboxField } from '#src/components/form/CheckboxField';
 
 import { withDesign } from 'storybook-addon-designs';
@@ -8,7 +8,7 @@ import { ALL_DIMENSIONS_VALUES } from '#src/components/Checkbox/CheckboxDimensio
 import styled, { ThemeProvider } from 'styled-components';
 import { ReactComponent as InfoSolidSVG } from '@admiral-ds/icons/build/service/InfoSolid.svg';
 import { Hint } from '#src/components/Hint';
-import { Theme } from '#src/components/themes';
+import type { Theme } from '#src/components/themes';
 import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
 
 export default {

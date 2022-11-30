@@ -17,7 +17,7 @@ import {
 } from './date-utils';
 import { CalendarComponent } from './styled/CalendarComponent';
 import type { CalendarPropType, IDateSelectionProps } from './interfaces';
-import { ViewScreenType } from './interfaces';
+import type { ViewScreenType } from './interfaces';
 
 export type { CalendarPropType, IDateSelectionProps, ViewScreenType };
 

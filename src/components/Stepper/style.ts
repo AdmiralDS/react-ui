@@ -3,8 +3,7 @@ import { typography } from '#src/components/Typography';
 
 import { ReactComponent as StepSvg } from '#src/components/Stepper/svg/Step.svg';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
-
-type Orientation = 'horizontal' | 'vertical';
+import type { Orientation } from './type';
 
 export const StepTrack = styled.div`
   box-sizing: border-box;

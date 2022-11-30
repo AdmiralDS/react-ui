@@ -1,5 +1,6 @@
-import React, { forwardRef, HTMLAttributes, useEffect, useMemo, useState } from 'react';
-import { Dimension, TreeItemProps } from './TreeNode';
+import type { HTMLAttributes } from 'react';
+import React, { forwardRef, useEffect, useMemo, useState } from 'react';
+import type { Dimension, TreeItemProps } from './TreeNode';
 import styled from 'styled-components';
 
 export interface TreeProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> {
