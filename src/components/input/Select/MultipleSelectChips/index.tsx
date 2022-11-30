@@ -1,6 +1,7 @@
 import * as React from 'react';
 import type { IConstantOption } from '../types';
-import { ChipBox, CommonChipProps } from './ChipBox';
+import type { CommonChipProps } from './ChipBox';
+import { ChipBox } from './ChipBox';
 
 interface MultipleChipsProps extends CommonChipProps {
   options: Array<IConstantOption>;

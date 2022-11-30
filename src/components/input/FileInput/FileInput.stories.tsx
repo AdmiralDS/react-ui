@@ -81,9 +81,6 @@ export default {
     disabled: {
       control: { type: 'boolean' },
     },
-    extraText: {
-      control: { type: 'text' },
-    },
     themeBorderKind: {
       options: ALL_BORDER_RADIUS_VALUES,
       control: { type: 'radio' },
@@ -101,7 +98,6 @@ const FileInputDemoTemplate: ComponentStory<typeof FileInput> = (props) => {
   const [fileList, setFileList] = React.useState<File[]>([]);
   const [fileAttributesMap, setFileAttributesMap] = React.useState(new Map<File, FileAttributeProps>());
   const [status, setStatus] = React.useState<InputStatus | undefined>(undefined);
-  const [extraText, setExtraText] = React.useState<React.ReactNode | undefined>(undefined);
 
   const filesAreEqual = (file1: File, file2: File) =>
     file1.name === file2.name &&
@@ -130,10 +126,8 @@ const FileInputDemoTemplate: ComponentStory<typeof FileInput> = (props) => {
     if (userSelectedFileList.length + updatedFileList.length > maxFilesNumber) {
       userSelectedFileList.splice(maxFilesNumber - updatedFileList.length);
       setStatus('error');
-      setExtraText('Несколько файлов не было загружено, так как превышен лимит количества загружаемых файлов');
     } else {
       setStatus(undefined);
-      setExtraText(undefined);
     }
     userSelectedFileList.forEach((file) => {
       const imageURL = file.type.startsWith('image') ? URL.createObjectURL(file) : undefined;
@@ -164,7 +158,6 @@ const FileInputDemoTemplate: ComponentStory<typeof FileInput> = (props) => {
     setFileList(updatedFileList);
     setFileAttributesMap(updatedFileAttributesMap);
     setStatus(undefined);
-    setExtraText(undefined);
   };
 
   const renderFileList = () => {
@@ -203,7 +196,6 @@ const FileInputDemoTemplate: ComponentStory<typeof FileInput> = (props) => {
         accept={accept.join(', ')}
         files={fileList}
         status={status}
-        extraText={extraText}
       >
         {renderFileList()}
       </FileInput>

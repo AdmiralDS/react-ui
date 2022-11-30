@@ -106,7 +106,7 @@ const InputWrapper = styled.div<{ disabled?: boolean; dimension: FileInputDimens
 
 const Wrapper = styled.div<{ dimension: FileInputDimension; width?: string | number }>`
   min-width: ${(p) => (p.dimension === 'm' ? FILE_INPUT_MIN_WIDTH_M : FILE_INPUT_MIN_WIDTH_XL)};
-  ${(p) => (p.width ? `width: ${p.width};` : '')}
+  ${(p) => (p.width ? `width: ${typeof p.width === 'number' ? p.width + 'px' : p.width};` : '')}
   box-sizing: border-box;
   ${typography['Body/Body 2 Long']};
   display: flex;
@@ -130,7 +130,7 @@ export interface FileInputProps extends Omit<React.InputHTMLAttributes<HTMLInput
   /** Задает ширину */
   width?: string | number;
   /** Текстовое описание компонента (текст внутри области загрузки файлов).
-   * Если к компоненту также нужно добавить label, используйте компонент FileInputField */
+   * Если к компоненту также нужно добавить label, используйте компонент FileInputField и его проп label*/
   title?: React.ReactNode;
   /** @deprecated Используйте взамен проп title
    * Текст для кнопки при dimension M */
@@ -139,7 +139,8 @@ export interface FileInputProps extends Omit<React.InputHTMLAttributes<HTMLInput
   renderCustomFileInput?: (option: RenderFileInputProps) => React.ReactNode;
   /** Список файлов для синхронизации с нативным инпутом */
   files?: Array<File>;
-  /** Текст будет виден ниже компонента */
+  /** @deprecated Используйте взамен компонент FileInputField и его проп extraText
+   * Текст будет виден ниже компонента */
   extraText?: React.ReactNode;
   /** Установка статуса поля */
   status?: InputStatus;

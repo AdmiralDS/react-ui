@@ -5,7 +5,7 @@ import { ReactComponent as CloseOutline } from '@admiral-ds/icons/build/service/
 import styled, { ThemeProvider } from 'styled-components';
 import { T } from '#src/components/T';
 import { CloseIconPlacementButton, IconPlacement } from '#src/components/IconPlacement/index';
-import { Theme } from '#src/components/themes';
+import type { Theme } from '#src/components/themes';
 import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
 
 export default {

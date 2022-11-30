@@ -2,10 +2,10 @@ import { FileInputField } from '#src/components/form/FileInputField';
 import { FileItem } from '#src/components/input';
 import type { InputStatus, FileAttributeProps } from '#src/components/input';
 import * as React from 'react';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import { ThemeProvider } from 'styled-components';
-import { Theme } from '#src/components/themes';
+import type { Theme } from '#src/components/themes';
 import { DataAttributesDescription } from '#src/components/form/common';
 import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
 import { uid } from '#src/components/common/uid';
@@ -161,28 +161,36 @@ const FileInputFieldDemo: ComponentStory<typeof FileInputField> = ({ dimension =
 
   return (
     <ThemeProvider theme={swapBorder}>
-      <FileInputField
-        {...props}
-        dimension={dimension}
-        disabled={props.disabled}
-        width="480px"
-        title={dimension === 'xl' ? `Загрузите не более 3-х файлов типа ${accept.join(', ')}` : 'Добавьте файлы'}
-        ref={inputRef}
-        onInput={handleChange}
-        accept={accept.join(', ')}
-        files={fileList}
-        status={status}
-        extraText={extraText}
-      >
-        {renderFileList()}
-      </FileInputField>
+      <div style={{ width: '480px' }}>
+        <FileInputField
+          {...props}
+          dimension={dimension}
+          disabled={props.disabled}
+          title={dimension === 'xl' ? `Загрузите не более 3-х файлов типа ${accept.join(', ')}` : 'Добавьте файлы'}
+          ref={inputRef}
+          onInput={handleChange}
+          accept={accept.join(', ')}
+          files={fileList}
+          status={status}
+          extraText={extraText}
+        >
+          {renderFileList()}
+        </FileInputField>
+      </div>
     </ThemeProvider>
   );
 };
 
 export const Demo = FileInputFieldDemo.bind({});
 Demo.args = {
+  label: 'Label',
+};
+Demo.storyName = 'FileInputField. Example';
+
+export const Required = FileInputFieldDemo.bind({});
+
+Required.args = {
   label: 'Обязательно для заполнения',
   required: true,
 };
-Demo.storyName = 'FileInputField. Example';
+Required.storyName = 'FileInputField. Required';

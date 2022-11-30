@@ -22,7 +22,8 @@ import {
 } from '#src/components/input/FileInput/style';
 import { Tooltip } from '#src/components/Tooltip';
 import { checkOverflow } from '#src/components/common/utils/checkOverflow';
-import { CloseIconPlacementButton, IconPlacementDimension } from '#src/components/IconPlacement';
+import type { IconPlacementDimension } from '#src/components/IconPlacement';
+import { CloseIconPlacementButton } from '#src/components/IconPlacement';
 import { keyboardKey } from '#src/components/common/keyboardKey';
 
 export type Status = 'Uploaded' | 'Loading' | 'Error' | 'Queue';

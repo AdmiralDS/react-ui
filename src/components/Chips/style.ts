@@ -2,11 +2,8 @@ import styled, { css } from 'styled-components';
 import { typography } from '#src/components/Typography';
 import type { ChipAppearance, ChipDimension } from '#src/components/Chips';
 import { Badge } from '#src/components/Badge';
-import {
-  CloseIconPlacementButton,
-  IconPlacementAppearance,
-  IconPlacementDimension,
-} from '#src/components/IconPlacement';
+import type { IconPlacementAppearance, IconPlacementDimension } from '#src/components/IconPlacement';
+import { CloseIconPlacementButton } from '#src/components/IconPlacement';
 
 const heights = css<{ dimension: ChipDimension }>`
   height: ${({ dimension }) => {

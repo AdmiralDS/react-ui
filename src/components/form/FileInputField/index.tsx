@@ -1,14 +1,24 @@
 import { uid } from '#src/components/common/uid';
 import { refSetter } from '#src/components/common/utils/refSetter';
-import { Field, FieldOwnProps } from '#src/components/Field';
-import { FileInput, FileInputProps } from '#src/components/input';
+import type { FieldOwnProps } from '#src/components/Field';
+import { Field as FieldComponent } from '#src/components/Field';
+import type { FileInputProps } from '#src/components/input';
+import { FileInput } from '#src/components/input';
 import * as React from 'react';
 import {
   passFormFieldContainerDataAttributes,
   passFormFieldDataAttributes,
 } from '#src/components/common/utils/splitDataAttributes';
+import styled from 'styled-components';
+import { ExtraTextContainer } from '#src/components/Field';
 
-export interface FileInputFieldProps extends FileInputProps, Omit<FieldOwnProps, 'inputRef'> {}
+const Field = styled(FieldComponent)`
+  & ${ExtraTextContainer} {
+    padding-top: 20px;
+  }
+`;
+
+export interface FileInputFieldProps extends Omit<FileInputProps, 'extraText'>, Omit<FieldOwnProps, 'inputRef'> {}
 
 export const FileInputField = React.forwardRef<HTMLInputElement, FileInputFieldProps>((props, ref) => {
   const inputRef = React.useRef<HTMLInputElement>(null);
