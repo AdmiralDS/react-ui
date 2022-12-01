@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.7.0](https://github.com/AdmiralDS/react-ui/compare/v3.6.0...v3.7.0) (2022-12-01)
+
+
+### Features
+
+* **FileInputField:** add FileInputField component, in FileInput mark prop description as deprecated ([4ee9749](https://github.com/AdmiralDS/react-ui/commit/4ee9749ec4286b7c958c04482a9c1dcb41b61549))
+
+
+### Bug Fixes
+
+* **FileItem:** add focus for preview icon ([7ca0932](https://github.com/AdmiralDS/react-ui/commit/7ca0932debe2c5926f269552678749f6260cd55c))
+* typscripts set to fixed verson where path transform know to works ([ac4d398](https://github.com/AdmiralDS/react-ui/commit/ac4d3980bf8b5684c951803a42d837adf29d99e3))
+
 ## [3.6.0](https://github.com/AdmiralDS/react-ui/compare/v3.5.0...v3.6.0) (2022-11-29)
 
 
