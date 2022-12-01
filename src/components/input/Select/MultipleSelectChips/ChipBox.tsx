@@ -2,9 +2,9 @@ import { InfoChip } from './InfoChip';
 import { CounterChip } from './CounterChip';
 import { ShadowCounterChip } from './styled';
 import * as React from 'react';
-import { IConstantOption } from '#src/components/input/Select/types';
+import type { IConstantOption } from '#src/components/input/Select/types';
 import styled from 'styled-components';
-import { HTMLAttributes } from 'react';
+import type { HTMLAttributes } from 'react';
 import { refSetter } from '#src/components/common/utils/refSetter';
 
 export interface CommonChipProps {

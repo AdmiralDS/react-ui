@@ -2,7 +2,7 @@ import { css } from 'styled-components';
 
 export const FILE_INPUT_ICON_SIZE_XL = '40px';
 export const FILE_INPUT_ICON_SIZE_M = '24px';
-export const FILE_INPUT_ICON_MARGIN = '14px';
+export const FILE_INPUT_ICON_MARGIN = '16px';
 export const FILE_INPUT_MIN_WIDTH_M = '288px';
 export const FILE_INPUT_MIN_WIDTH_XL = '320px';
 const FILE_INPUT_WRAPPER_PADDING_XL = '24px';
@@ -64,4 +64,10 @@ export const halfWidthPositionMixin = css`
   &:nth-of-type(odd) {
     margin-left: 16px;
   }
+`;
+
+export const titleXL = css`
+  max-width: 100%;
+  text-align: center;
+  margin: 0 24px;
 `;

@@ -252,7 +252,7 @@ Object {
           </a>
         </div>
         <button
-          class="c7 c8"
+          class="c7 close-button c8"
           type="button"
         >
           <div
@@ -519,7 +519,7 @@ Object {
         </a>
       </div>
       <button
-        class="c7 c8"
+        class="c7 close-button c8"
         type="button"
       >
         <div

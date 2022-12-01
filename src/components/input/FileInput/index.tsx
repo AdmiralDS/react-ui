@@ -14,9 +14,11 @@ import {
   dimensionXLStyles,
   disabledStyles,
   hoverStyles,
+  titleXL,
 } from '#src/components/input/FileInput/style';
 import type { InputStatus } from '#src/components/input/types';
 import { ExtraTextContainer } from '#src/components/Field';
+import { Label } from '#src/components/Label';
 
 /** TODO:
  * переключение по файлам списка (клик на иконку документа, удаление документа из списка)
@@ -24,29 +26,35 @@ import { ExtraTextContainer } from '#src/components/Field';
 
 export type FileInputDimension = 'xl' | 'm';
 
+const ExtraText = styled(ExtraTextContainer)`
+  padding-top: 20px;
+`;
+
 const Icon = styled(AttachFileOutline)<{ dimension?: FileInputDimension }>`
   height: ${(p) => (p.dimension === 'xl' ? FILE_INPUT_ICON_SIZE_XL : FILE_INPUT_ICON_SIZE_M)};
   width: ${(p) => (p.dimension === 'xl' ? FILE_INPUT_ICON_SIZE_XL : FILE_INPUT_ICON_SIZE_M)};
   margin-right: ${(p) => (p.dimension === 'm' ? FILE_INPUT_ICON_MARGIN : '')};
   margin-bottom: ${(p) => (p.dimension === 'xl' ? FILE_INPUT_ICON_MARGIN : '')};
+  flex-shrink: 0;
 
   > * {
     fill: ${(p) => p.theme.color['Primary/Primary 60 Main']};
   }
 `;
 
+// TODO: удалить LabelM, Description при поднятии версии до новой мажорной
+const LabelM = styled(Label)`
+  display: flex;
+`;
 const Description = styled.div<{ disabled?: boolean }>`
   color: ${(p) => (p.disabled ? p.theme.color['Neutral/Neutral 30'] : p.theme.color['Neutral/Neutral 90'])};
   ${typography['Body/Body 1 Long']};
 `;
 
 const TitleText = styled.div<{ dimension?: FileInputDimension; disabled?: boolean }>`
-  text-align: ${(p) => (p.dimension === 'xl' ? 'center' : 'start')};
-  margin: 0 ${(p) => (p.dimension === 'xl' ? '24px' : '')};
-  margin-bottom: ${(p) => (p.dimension === 'm' ? '16px' : '0px')};
-  max-width: 100%;
   color: ${(p) => (p.disabled ? p.theme.color['Neutral/Neutral 30'] : p.theme.color['Neutral/Neutral 90'])};
-  ${typography['Body/Body 2 Long']};
+  ${(p) => (p.dimension === 'xl' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
+  ${(p) => p.dimension === 'xl' && titleXL}
 `;
 
 const FocusBorder = styled.div`
@@ -98,7 +106,7 @@ const InputWrapper = styled.div<{ disabled?: boolean; dimension: FileInputDimens
 
 const Wrapper = styled.div<{ dimension: FileInputDimension; width?: string | number }>`
   min-width: ${(p) => (p.dimension === 'm' ? FILE_INPUT_MIN_WIDTH_M : FILE_INPUT_MIN_WIDTH_XL)};
-  ${(p) => (p.width ? `width: ${p.width};` : '')}
+  ${(p) => (p.width ? `width: ${typeof p.width === 'number' ? p.width + 'px' : p.width};` : '')}
   box-sizing: border-box;
   ${typography['Body/Body 2 Long']};
   display: flex;
@@ -121,15 +129,18 @@ export interface FileInputProps extends Omit<React.InputHTMLAttributes<HTMLInput
   dimension: FileInputDimension;
   /** Задает ширину */
   width?: string | number;
-  /** Текст для лейбла компонента */
+  /** Текстовое описание компонента (текст внутри области загрузки файлов).
+   * Если к компоненту также нужно добавить label, используйте компонент FileInputField и его проп label*/
   title?: React.ReactNode;
-  /** Текст для кнопки при dimension M */
+  /** @deprecated Используйте взамен проп title
+   * Текст для кнопки при dimension M */
   description?: React.ReactNode;
   /** Функция, возвращающая компонент, на который нужно "повесить" файловый инпут */
   renderCustomFileInput?: (option: RenderFileInputProps) => React.ReactNode;
   /** Список файлов для синхронизации с нативным инпутом */
   files?: Array<File>;
-  /** Текст будет виден ниже компонента */
+  /** @deprecated Используйте взамен компонент FileInputField и его проп extraText
+   * Текст будет виден ниже компонента */
   extraText?: React.ReactNode;
   /** Установка статуса поля */
   status?: InputStatus;
@@ -154,9 +165,17 @@ export const FileInput = React.forwardRef<HTMLInputElement, FileInputProps>(
     ref,
   ) => {
     const inputRef = React.useRef<HTMLInputElement>(null);
+    const titleWithDescription = dimension === 'm' && title && description;
 
-    const renderTitleText = () => <TitleText dimension={dimension} disabled={disabled} children={title} />;
+    // TODO: удалить description, renderLabel, renderDescription, extraText при поднятии версии до новой мажорной
+    const renderLabel = () => <LabelM disabled={disabled} children={title} />;
     const renderDescription = () => <Description disabled={disabled}>{description}</Description>;
+
+    const renderTitleText = () => (
+      <TitleText dimension={dimension} disabled={disabled}>
+        {title}
+      </TitleText>
+    );
 
     const handleQueryUpload = () => {
       inputRef.current?.click();
@@ -189,11 +208,11 @@ export const FileInput = React.forwardRef<HTMLInputElement, FileInputProps>(
             </>
           ) : (
             <>
-              {title && dimension === 'm' && renderTitleText()}
+              {titleWithDescription && renderLabel()}
               <InputWrapper dimension={dimension} disabled={disabled}>
                 <Icon dimension={dimension} />
-                {title && dimension === 'xl' && renderTitleText()}
-                {description && dimension === 'm' && renderDescription()}
+                {title && !titleWithDescription && renderTitleText()}
+                {titleWithDescription && renderDescription()}
                 <StyledInput
                   {...props}
                   ref={refSetter(ref, inputRef)}
@@ -207,7 +226,7 @@ export const FileInput = React.forwardRef<HTMLInputElement, FileInputProps>(
           )}
         </FileInputWrapper>
         {children}
-        {extraText && status === 'error' && <ExtraTextContainer>{extraText}</ExtraTextContainer>}
+        {extraText && status === 'error' && <ExtraText>{extraText}</ExtraText>}
       </Wrapper>
     );
   },

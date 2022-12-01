@@ -1,4 +1,4 @@
-import { IChipProps, IConstantOption } from '#src/components/input/Select/types';
+import type { IChipProps, IConstantOption } from '#src/components/input/Select/types';
 import * as React from 'react';
 import { ContentTooltip, StyledChip } from './styled';
 
