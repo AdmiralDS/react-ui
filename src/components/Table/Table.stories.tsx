@@ -8,7 +8,7 @@ import { Table } from '#src/components/Table';
 import { FieldSet } from '#src/components/form';
 import { RadioButton } from '#src/components/RadioButton';
 import { Button } from '#src/components/Button';
-import { DateInput } from '#src/components/input/DateInput';
+import { DateField } from '#src/components/form';
 import {
   columnList,
   columnListExtra,
@@ -308,10 +308,10 @@ const ButtonWrapper = styled.div`
 
 const Template4: ComponentStory<typeof Table> = (args) => {
   const [selected, setSelected] = React.useState<string>('');
+  const [selectedDate, setSelectedDate] = React.useState<string>('');
   const [rows, setRows] = React.useState([...args.rowList]);
-  const calendarRef = React.useRef<HTMLDivElement>(null);
 
-  const renderSomeFilter = ({ closeMenu, setFilterActive }: any) => (
+  const renderNumFilter = ({ closeMenu, setFilterActive }: any, column: any) => (
     <Wrapper>
       <FieldSet
         legend="Варианты фильтрации:"
@@ -334,12 +334,12 @@ const Template4: ComponentStory<typeof Table> = (args) => {
             setFilterActive(true);
             if (selected === '1') {
               const newRows = args.rowList.filter(
-                (row) => Number((row['transfer_amount'] as string).replace(/\D/g, '')) > 1000000000,
+                (row) => Number((row[column.name] as string).replace(/\D/g, '')) > 1000000000,
               );
               setRows(newRows);
             } else {
               const newRows = args.rowList.filter(
-                (row) => Number((row['transfer_amount'] as string).replace(/\D/g, '')) < 1000000000,
+                (row) => Number((row[column.name] as string).replace(/\D/g, '')) < 1000000000,
               );
               setRows(newRows);
             }
@@ -361,9 +361,43 @@ const Template4: ComponentStory<typeof Table> = (args) => {
     </Wrapper>
   );
 
-  const onFilterMenuClickOutside = ({ closeMenu }: any, event: Event) => {
-    closeMenu();
-  };
+  const renderDateFilter = ({ closeMenu, setFilterActive }: any, column: any) => (
+    <Wrapper>
+      <DateField
+        label="Выберите дату:"
+        value={selectedDate}
+        onChange={(e: any) => {
+          setSelectedDate((e.target as HTMLInputElement).value);
+        }}
+      />
+      <ButtonWrapper>
+        <Button
+          dimension="m"
+          onClick={() => {
+            closeMenu();
+            setFilterActive(true);
+            const newRows = args.rowList.filter((row) => row[column.name] === selectedDate);
+            setRows(newRows);
+          }}
+        >
+          Применить
+        </Button>
+        <Button
+          dimension="m"
+          onClick={() => {
+            closeMenu();
+            setFilterActive(false);
+            setSelectedDate('');
+            setRows([...args.rowList]);
+          }}
+        >
+          Очистить
+        </Button>
+      </ButtonWrapper>
+    </Wrapper>
+  );
+
+  const onFilterMenuClickOutside = ({ closeMenu }: any) => closeMenu();
 
   const cols = columnList.map((col, index) => {
     if (index === 0) {
@@ -371,35 +405,30 @@ const Template4: ComponentStory<typeof Table> = (args) => {
         ...col,
         renderFilter: () => <Wrapper>Пример кастомизации иконки фильтра с помощью функции renderFilterIcon</Wrapper>,
         renderFilterIcon: () => <AcceptSolid />,
-        onFilterMenuClickOutside: ({ closeMenu }: any) => closeMenu(),
+        onFilterMenuClickOutside,
       };
     }
     if (index === 1) {
       return {
         ...col,
-        renderFilter: () => (
-          <Wrapper>
-            Пример использования колбека onFilterMenuClickOutside в сочетании с DateInput
-            <DateInput calendarRef={calendarRef} style={{ marginTop: '20px' }} />
-          </Wrapper>
-        ),
+        renderFilter: renderDateFilter,
         onFilterMenuClickOutside,
       };
     }
     if (index === 2) {
       return {
         ...col,
-        renderFilter: renderSomeFilter,
+        renderFilter: renderNumFilter,
         onFilterMenuClose: () => console.log('filter menu close'),
         onFilterMenuOpen: () => console.log('filter menu open'),
-        onFilterMenuClickOutside: ({ closeMenu }: any) => closeMenu(),
+        onFilterMenuClickOutside,
       };
     } else if (index === 4) {
       return {
         ...col,
         cellAlign: 'right' as any,
         renderFilter: () => <Wrapper>Пример отображения фильтра в колонке с выравниванием по правому краю</Wrapper>,
-        onFilterMenuClickOutside: ({ closeMenu }: any) => closeMenu(),
+        onFilterMenuClickOutside,
       };
     } else return col;
   });
@@ -598,7 +627,7 @@ Filter.parameters = {
       При этом у заголовка будет появляться иконка фильтрации, по нажатию на которую будет 
       открываться меню фильтрации.\n\nДля того чтобы задать фильтр для столбца достаточно 
       задать для него параметр renderFilter - функцию, которая будет отрисовывать содержимое 
-      меню фильтра. Данная функция имеет в качетсве входного параметра объект с двумя 
+      меню фильтра. Данная функция имеет в качестве входных параметров объект столбца и объект с двумя 
       свойствами:\n\n 1) closeMenu - колбек, при вызове которого происходит закрытие меню 
       фильтра;\n\n2) setFilterActive - колбек, который устанавливает фильтр в активное/неактивное 
       состояние. В неактивном состоянии иконка фильтра окрашена в серый цвет, 
