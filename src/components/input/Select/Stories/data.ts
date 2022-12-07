@@ -5,6 +5,9 @@ export const OPTIONS_SIMPLE = [
   'text 4',
   'text 5',
   'texttt 6',
+  'text 7',
+  'Ответ на «Главный вопрос жизни, вселенной и всего такого»',
+  'text 69',
 ];
 
 export const OPTIONS = [

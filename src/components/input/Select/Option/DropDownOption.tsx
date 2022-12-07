@@ -75,6 +75,7 @@ export const DropDownOption = ({
     dropDownContext?.activeItem,
     // dropDownContext?.searchValue,
     dropDownContext?.selectValue,
+    dropDownContext?.dimension,
   ]);
 
   return null;
