@@ -1,4 +1,4 @@
-import type { MultiButtonItem } from '#src/components/MultiButton';
+import type { MultiButtonItem, MultiButtonProps } from '#src/components/MultiButton';
 import { MultiButton } from '#src/components/MultiButton';
 import type { MouseEvent } from 'react';
 import React from 'react';
@@ -10,6 +10,7 @@ import type { RenderOptionProps } from '#src/components/Menu/MenuItem';
 import { MenuItem } from '#src/components/Menu/MenuItem';
 import { ReactComponent as BonusSolid } from '@admiral-ds/icons/build/category/BonusSolid.svg';
 import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
+import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 const Separator = styled.div`
   width: 20px;
@@ -88,6 +89,10 @@ export default {
     skeleton: {
       control: { type: 'boolean' },
     },
+    alignSelf: {
+      options: [undefined, 'auto', 'flex-start', 'flex-end', 'center', 'baseline', 'stretch'],
+      control: { type: 'select' },
+    },
   },
 } as ComponentMeta<typeof MultiButton>;
 
@@ -137,6 +142,8 @@ const itemsDemo: Array<MultiButtonItem> = [
 ];
 
 const Template1: ComponentStory<typeof MultiButton> = (args) => {
+  const cleanProps = cleanUpProps(args) as MultiButtonProps;
+
   const [selected, setSelected] = React.useState<string | undefined>(undefined);
   const [selected2, setSelected2] = React.useState<string | undefined>(undefined);
 
@@ -149,7 +156,7 @@ const Template1: ComponentStory<typeof MultiButton> = (args) => {
     return itemsDemo.slice(1, itemsDemo.length).map((item) => ({
       id: item.id,
       render: (items: RenderOptionProps) => (
-        <MenuItem dimension={args.dimension === 'xl' ? 'l' : args.dimension} {...items} key={item.id}>
+        <MenuItem dimension={cleanProps.dimension === 'xl' ? 'l' : cleanProps.dimension} {...items} key={item.id}>
           {item.display}
         </MenuItem>
       ),
@@ -161,7 +168,7 @@ const Template1: ComponentStory<typeof MultiButton> = (args) => {
     <ThemeProvider theme={swapBorder}>
       <div style={{ display: 'flex', justifyContent: 'space-around' }}>
         <MultiButton
-          {...args}
+          {...cleanProps}
           appearance="primary"
           selected={selected}
           onSelectItem={(id) => {
@@ -178,7 +185,7 @@ const Template1: ComponentStory<typeof MultiButton> = (args) => {
         </MultiButton>
         <Separator />
         <MultiButton
-          {...args}
+          {...cleanProps}
           appearance="secondary"
           selected={selected2}
           onSelectItem={(id) => {
@@ -231,6 +238,8 @@ const itemsDisabled: Array<MultiButtonItem> = [
 ];
 
 const Template2: ComponentStory<typeof MultiButton> = (args) => {
+  const cleanProps = cleanUpProps(args) as MultiButtonProps;
+
   const [selected, setSelected] = React.useState<string | undefined>(undefined);
   const [selected2, setSelected2] = React.useState<string | undefined>(undefined);
 
@@ -250,7 +259,7 @@ const Template2: ComponentStory<typeof MultiButton> = (args) => {
     <>
       <div style={{ display: 'flex', justifyContent: 'space-around' }}>
         <MultiButton
-          {...args}
+          {...cleanProps}
           appearance="primary"
           disabled
           selected={selected}
@@ -266,7 +275,7 @@ const Template2: ComponentStory<typeof MultiButton> = (args) => {
         </MultiButton>
         <Separator />
         <MultiButton
-          {...args}
+          {...cleanProps}
           appearance="secondary"
           disabled
           selected={selected2}
@@ -286,6 +295,8 @@ const Template2: ComponentStory<typeof MultiButton> = (args) => {
 };
 
 const Template3: ComponentStory<typeof MultiButton> = (args) => {
+  const cleanProps = cleanUpProps(args) as MultiButtonProps;
+
   const [selected, setSelected] = React.useState<string | undefined>(undefined);
   const [selected2, setSelected2] = React.useState<string | undefined>(undefined);
 
@@ -310,7 +321,7 @@ const Template3: ComponentStory<typeof MultiButton> = (args) => {
     <ThemeProvider theme={swapBorder}>
       <div style={{ display: 'flex' }}>
         <MultiButton
-          {...args}
+          {...cleanProps}
           appearance="primary"
           selected={selected}
           onSelectItem={(id) => {
@@ -328,7 +339,7 @@ const Template3: ComponentStory<typeof MultiButton> = (args) => {
         </MultiButton>
         <Separator />
         <MultiButton
-          {...args}
+          {...cleanProps}
           appearance="secondary"
           selected={selected2}
           onSelectItem={(id) => {
@@ -347,7 +358,7 @@ const Template3: ComponentStory<typeof MultiButton> = (args) => {
       <Separator />
       <div style={{ display: 'flex' }}>
         <MultiButton
-          {...args}
+          {...cleanProps}
           disabled
           appearance="primary"
           selected={selected}
@@ -366,7 +377,7 @@ const Template3: ComponentStory<typeof MultiButton> = (args) => {
         </MultiButton>
         <Separator />
         <MultiButton
-          {...args}
+          {...cleanProps}
           disabled
           appearance="secondary"
           selected={selected2}
