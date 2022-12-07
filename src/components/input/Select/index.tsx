@@ -225,7 +225,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
               disabled: true,
             },
           ];
-    }, [isLoading, dropDownItems]);
+    }, [isLoading, dropDownItems, dimension]);
 
     const inputRef = React.useRef<HTMLInputElement | null>(null);
     const selectRef = React.useRef<HTMLSelectElement | null>(null);
@@ -569,6 +569,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
             dropContainerCssMixin={dropContainerCssMixin}
           >
             <StyledMenu
+              dimension={dimension === 'xl' ? 'l' : dimension}
               active={activeItem}
               selected={Array.isArray(selectedValue) ? undefined : selectedValue}
               onActivateItem={setActiveItem}
