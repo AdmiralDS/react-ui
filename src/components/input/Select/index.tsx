@@ -77,7 +77,10 @@ export interface SelectProps extends Omit<React.InputHTMLAttributes<HTMLSelectEl
   /** @deprecated используйте maxRowCount **/
   idleHeight?: 'full' | 'fixed';
 
+  /** Минимальное количество строк поля в режиме multiple */
   minRowCount?: number | 'none';
+
+  /** Максимальное количество строк поля в режиме multiple */
   maxRowCount?: number | 'none';
 
   /** Референс на контейнер для правильного позиционирования выпадающего списка */
