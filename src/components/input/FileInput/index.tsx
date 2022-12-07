@@ -166,6 +166,7 @@ export const FileInput = React.forwardRef<HTMLInputElement, FileInputProps>(
   ) => {
     const inputRef = React.useRef<HTMLInputElement>(null);
     const titleWithDescription = dimension === 'm' && title && description;
+    const titleWithoutDescription = (title && !description) || (title && description && dimension === 'xl');
 
     // TODO: удалить description, renderLabel, renderDescription, extraText при поднятии версии до новой мажорной
     const renderLabel = () => <LabelM disabled={disabled} children={title} />;
@@ -211,8 +212,8 @@ export const FileInput = React.forwardRef<HTMLInputElement, FileInputProps>(
               {titleWithDescription && renderLabel()}
               <InputWrapper dimension={dimension} disabled={disabled}>
                 <Icon dimension={dimension} />
-                {title && !titleWithDescription && renderTitleText()}
-                {titleWithDescription && renderDescription()}
+                {titleWithoutDescription && renderTitleText()}
+                {dimension === 'm' && description && renderDescription()}
                 <StyledInput
                   {...props}
                   ref={refSetter(ref, inputRef)}
