@@ -486,6 +486,8 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       onCloseSelect();
     };
 
+    const needShowClearIcon = shouldRenderSelectValue && !!visibleValue;
+
     return (
       <SelectWrapper
         className={className}
@@ -539,7 +541,6 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
           dimension={dimension}
           multiple={multiple}
           minRowCount={minRowCount !== 'none' ? minRowCount : undefined}
-          // rowCount={calcRowCount}
           maxRowCount={calcRowCount !== 'none' ? calcRowCount : undefined}
           opened={isSearchPanelOpen}
           isEmpty={isEmpty}
@@ -588,7 +589,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
           onMouseDown={(e) => e.preventDefault()}
         >
           {isLoading && <Spinner svgMixin={SpinnerMixin} dimension={dimension === 's' ? 's' : 'm'} />}
-          {displayClearIcon && !readOnly && (
+          {displayClearIcon && !readOnly && needShowClearIcon && (
             <InputIconButton icon={CloseOutlineSvg} id="searchSelectClearIcon" onClick={handleOnClear} aria-hidden />
           )}
           {icons}

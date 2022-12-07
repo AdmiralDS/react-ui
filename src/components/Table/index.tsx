@@ -8,8 +8,7 @@ import { GroupRow } from '#src/components/Table/Row/GroupRow';
 import { RegularRow } from '#src/components/Table/Row/RegularRow';
 import { RowWrapper } from '#src/components/Table/Row/RowWrapper';
 
-import { RowWidthResizer } from './RowWidthResizer';
-import { Filter } from './filter/Filter';
+import { HeaderCellComponent } from './HeaderCell';
 import {
   Cell,
   CellTextContent,
@@ -18,21 +17,12 @@ import {
   ExpandCell,
   Filler,
   Header,
-  HeaderCell,
-  HeaderCellContent,
-  HeaderCellSpacer,
-  HeaderCellTitle,
   HeaderWrapper,
   Row,
   ScrollTableBody,
-  SortIcon,
-  SortIconWrapper,
-  SortOrder,
   StickyWrapper,
   TableContainer,
-  TitleContent,
 } from './style';
-import { TitleText } from './TitleText';
 import { VirtualBody } from './VirtualBody';
 
 export * from './RowAction';
@@ -78,7 +68,7 @@ export type Column = {
   /** Отключение возможности ресайза колонки */
   disableResize?: boolean;
   /** Функция отрисовки содержимого фильтра (выпадающего меню фильтра). Если её не передать, значок фильтра отображаться не будет */
-  renderFilter?: (obj: FilterProps) => React.ReactNode;
+  renderFilter?: (obj: FilterProps, column: Column) => React.ReactNode;
   /** Функция отрисовки иконки фильтра. По умолчанию в качестве иконки фильтра применяется OverflowIcon (троеточие) */
   renderFilterIcon?: () => React.ReactNode;
   /** Колбек на клик вне меню фильтра */
@@ -289,9 +279,6 @@ export const Table: React.FC<TableProps> = ({
 }) => {
   const theme = React.useContext(ThemeContext) || LIGHT_THEME;
   const checkboxDimension = dimension === 's' || dimension === 'm' ? 's' : 'm';
-  const iconSize = dimension === 's' || dimension === 'm' ? 16 : 20;
-  const defaultSpacer = dimension === 'l' || dimension === 'xl' ? '16px' : '12px';
-  const spacer = spacingBetweenItems || defaultSpacer;
   const columnMinWidth = dimension === 's' || dimension === 'm' ? COLUMN_MIN_WIDTH_M : COLUMN_MIN_WIDTH_L;
 
   const [cols, setColumns] = React.useState([...columnList]);
@@ -605,90 +592,24 @@ export const Table: React.FC<TableProps> = ({
     return columnList.filter((col) => !!col.sort).length > 1;
   }, [columnList]);
 
-  const renderHeaderCell = (
-    {
-      name,
-      title,
-      extraText,
-      width = DEFAULT_COLUMN_WIDTH,
-      resizerWidth,
-      cellAlign = 'left',
-      sortable = false,
-      sort,
-      sortOrder,
-      disableResize = false,
-      renderFilter,
-      renderFilterIcon,
-      onFilterMenuClickOutside,
-      onFilterMenuClose,
-      onFilterMenuOpen,
-    }: ColumnWithResizerWidth,
-    index: number,
-  ) => {
-    const cellRef = React.createRef<HTMLDivElement>();
-    return (
-      <HeaderCell
-        key={`head_${name}`}
-        dimension={dimension}
-        style={{ width: width, minWidth: width }}
-        className="th"
-        ref={cellRef}
-      >
-        <HeaderCellContent cellAlign={cellAlign}>
-          <HeaderCellTitle
-            sort={sort || 'initial'}
-            onClick={sortable ? () => handleSort(name, sort || 'initial') : undefined}
-          >
-            <TitleContent dimension={dimension} sortable={sortable}>
-              <TitleText dimension={dimension} lineClamp={headerLineClamp} title={title} />
-              {extraText && (
-                <TitleText extraText dimension={dimension} lineClamp={headerExtraLineClamp} title={extraText} />
-              )}
-            </TitleContent>
-            {sortable && (
-              <SortIconWrapper>
-                <SortIcon sort={sort || 'initial'} width={iconSize} height={iconSize} />
-                {multipleSort && sort && sortOrder && <SortOrder>{sortOrder}</SortOrder>}
-              </SortIconWrapper>
-            )}
-          </HeaderCellTitle>
-          <HeaderCellSpacer width={renderFilter ? spacer : `${parseInt(spacer) - parseInt(defaultSpacer)}px`} />
-          {renderFilter && (
-            <Filter
-              dimension={dimension}
-              renderFilter={renderFilter}
-              renderFilterIcon={renderFilterIcon}
-              onFilterMenuClickOutside={onFilterMenuClickOutside}
-              onFilterMenuOpen={onFilterMenuOpen}
-              onFilterMenuClose={onFilterMenuClose}
-              cellAlign={cellAlign}
-              targetRef={cellRef}
-            />
-          )}
-        </HeaderCellContent>
-        {index < cols.length - 1 && (
-          <RowWidthResizer
-            name={name}
-            width={width ? resizerWidth : DEFAULT_COLUMN_WIDTH}
-            onChange={handleResizeChange}
-            disabled={disableResize || disableColumnResize}
-            resizerState={resizerState}
-            dimension={dimension}
-          />
-        )}
-        {index === cols.length - 1 && showDividerForLastColumn && (
-          <RowWidthResizer
-            name={name}
-            width={width ? resizerWidth : DEFAULT_COLUMN_WIDTH}
-            onChange={handleResizeChange}
-            disabled={disableResize || disableColumnResize}
-            resizerState={resizerState}
-            dimension={dimension}
-          />
-        )}
-      </HeaderCell>
-    );
-  };
+  const renderHeaderCell = (column: ColumnWithResizerWidth, index: number) => (
+    <HeaderCellComponent
+      key={`head_${column.name}`}
+      column={column}
+      index={index}
+      columnsAmount={cols.length}
+      showDividerForLastColumn={showDividerForLastColumn}
+      disableColumnResize={disableColumnResize}
+      headerLineClamp={headerLineClamp}
+      headerExtraLineClamp={headerExtraLineClamp}
+      resizerState={resizerState}
+      handleResizeChange={handleResizeChange}
+      handleSort={handleSort}
+      dimension={dimension}
+      spacingBetweenItems={spacingBetweenItems}
+      multipleSort={multipleSort}
+    />
+  );
 
   const renderBodyCell = (row: TableRow, col: Column) => {
     return (
