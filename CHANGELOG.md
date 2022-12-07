@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.8.0](https://github.com/AdmiralDS/react-ui/compare/v3.7.0...v3.8.0) (2022-12-07)
+
+
+### Features
+
+* **Select:** show ClearIon only when option is selected ([0ce4ec9](https://github.com/AdmiralDS/react-ui/commit/0ce4ec9cf03c59846bd8741989d782ec1c94f585))
+* **Table:** add column argument to renderFilter callback, fix stories ([ca3460d](https://github.com/AdmiralDS/react-ui/commit/ca3460dfc6e7c2c9c08c7ae3c602017af571eac8))
+
+
+### Bug Fixes
+
+* **DropdownContainer:** fix infinity position recalculate ([a97a5fe](https://github.com/AdmiralDS/react-ui/commit/a97a5fea4997ab8aa08b4b749206379f69d607d3))
+* **FileInput:** fix bug with incompatible API changes ([9e1ddde](https://github.com/AdmiralDS/react-ui/commit/9e1dddee96bcdb79b910ed5ff1d43435640908f6))
+* **Select, Suggest:** pass dimension to dropdown container ([dcf2172](https://github.com/AdmiralDS/react-ui/commit/dcf2172cacea6267540591b1a99120190439d398))
+
 ## [3.7.0](https://github.com/AdmiralDS/react-ui/compare/v3.6.0...v3.7.0) (2022-12-01)
 
 
