@@ -126,7 +126,17 @@ export default {
 } as ComponentMeta<typeof Table>;
 
 const Template: ComponentStory<typeof Table> = (args) => {
-  return <Table {...args} />;
+  const [cols, setCols] = React.useState(args.columnList);
+  return (
+    <Table
+      {...args}
+      columnList={cols}
+      onColumnResize={({ name, width }) => {
+        const newCols = cols.map((col) => ({ ...col, width: col.name === name ? width : col.width }));
+        setCols(newCols);
+      }}
+    />
+  );
 };
 
 const StrToTime = (str: string) => {

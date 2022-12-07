@@ -1,6 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import type { TableProps } from '#src/components/Table';
+import { throttle } from '#src/components/common/utils/throttle';
 
 const RESIZER_WIDTH = '17px';
 
@@ -47,19 +48,41 @@ export function RowWidthResizer(props: {
   dimension: TableProps['dimension'];
   onChange: (evt: { name: string; width: number; mouseUp: boolean }) => void;
 }) {
-  const { width: startWidth, name, disabled, resizerState, dimension, onChange } = props;
-  const node = React.useRef(null);
-  const [width, setWidth] = React.useState(startWidth);
+  const {
+    // width: startWidth,
+    width,
+    name,
+    disabled,
+    resizerState,
+    dimension,
+    onChange,
+  } = props;
+  const node = React.useRef<HTMLDivElement | null>(null);
+  // const [width, setWidth] = React.useState(startWidth);
   const [isTaken, setTaken] = React.useState(false);
   const [clientX, setClientX] = React.useState<number | null>(null);
 
-  React.useEffect(() => {
-    setWidth(startWidth);
-  }, [resizerState]);
+  // React.useEffect(() => {
+  //   setWidth(startWidth);
+  // }, [resizerState]);
 
-  React.useLayoutEffect(() => {
-    if (startWidth !== width) setWidth(startWidth);
-  }, [startWidth]);
+  // React.useLayoutEffect(() => {
+  //   if (startWidth !== width) setWidth(startWidth);
+  // }, [startWidth]);
+
+  const updateOnMouseMove = (e: MouseEvent) => {
+    if (isTaken && clientX !== null) {
+      e.preventDefault();
+      const newWidth = width - (clientX - e.clientX);
+      if (width !== newWidth) {
+        onChange({ name, width: newWidth, mouseUp: false });
+      }
+      //???
+      setClientX(e.clientX);
+    }
+  };
+
+  const [handleMouseMove, freeResources] = throttle(updateOnMouseMove, 5);
 
   React.useEffect(() => {
     if (!disabled) {
@@ -68,6 +91,7 @@ export function RowWidthResizer(props: {
       document.addEventListener('mouseup', handleMouseUp);
 
       return () => {
+        freeResources();
         document.removeEventListener('mousedown', handleMouseDown);
         document.removeEventListener('mousemove', handleMouseMove);
         document.removeEventListener('mouseup', handleMouseUp);
@@ -78,17 +102,9 @@ export function RowWidthResizer(props: {
   const handleMouseDown = (e: MouseEvent) => {
     if (e.target === node.current) {
       e.preventDefault();
-      setWidth(width);
+      // setWidth(width);
       setTaken(true);
       setClientX(e.clientX);
-    }
-  };
-
-  const handleMouseMove = (e: MouseEvent) => {
-    if (isTaken && clientX !== null) {
-      e.preventDefault();
-      const newWidth = width - (clientX - e.clientX);
-      onChange({ name, width: newWidth, mouseUp: false });
     }
   };
 
@@ -98,7 +114,7 @@ export function RowWidthResizer(props: {
       const newWidth = width - (clientX - e.clientX);
       setTaken(false);
       onChange({ name, width: newWidth, mouseUp: true });
-      setWidth(newWidth);
+      // setWidth(newWidth);
       setClientX(e.clientX);
     }
   };

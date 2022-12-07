@@ -364,8 +364,12 @@ export const Table: React.FC<TableProps> = ({
       };
     });
     setColumns(newCols);
-    updateResizerState({});
+    // updateResizerState({});
   };
+
+  React.useLayoutEffect(() => {
+    updateColumnsWidths();
+  }, [columnList, setColumns, updateResizerState]);
 
   React.useLayoutEffect(() => {
     if (tableRef.current) {
@@ -565,18 +569,18 @@ export const Table: React.FC<TableProps> = ({
   }
 
   function handleResizeChange({ name, width, mouseUp }: { name: string; width: number; mouseUp: boolean }) {
-    if (mouseUp) {
-      onColumnResize?.({ name, width: width + 'px' });
-    }
-    const newColumns = cols.map((column) =>
-      column.name === name
-        ? {
-            ...column,
-            width: width >= columnMinWidth ? width : columnMinWidth,
-          }
-        : column,
-    );
-    setColumns(newColumns);
+    // if (mouseUp) {
+    onColumnResize?.({ name, width: (width >= columnMinWidth ? width : columnMinWidth) + 'px' });
+    // }
+    // const newColumns = cols.map((column) =>
+    //   column.name === name
+    //     ? {
+    //         ...column,
+    //         width: width >= columnMinWidth ? width : columnMinWidth,
+    //       }
+    //     : column,
+    // );
+    // setColumns(newColumns);
   }
 
   const handleSort = (name: string, colSort: 'asc' | 'desc' | 'initial') => {
