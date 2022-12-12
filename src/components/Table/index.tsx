@@ -79,8 +79,6 @@ export type Column = {
   onFilterMenuClose?: () => void;
 };
 
-type ColumnWithResizerWidth = Column & { resizerWidth: number };
-
 export type RowId = string | number;
 type IdSelectionStatusMap = Record<RowId, boolean>;
 
@@ -283,7 +281,6 @@ export const Table: React.FC<TableProps> = ({
 
   const [cols, setColumns] = React.useState([...columnList]);
   const [verticalScroll, setVerticalScroll] = React.useState(false);
-  const [resizerState, updateResizerState] = React.useState({} as any);
   const [tableWidth, setTableWidth] = React.useState(0);
   const [bodyHeight, setBodyHeight] = React.useState(0);
   const [headerScrollWidth, setHeaderScrollWidth] = React.useState(0);
@@ -360,16 +357,14 @@ export const Table: React.FC<TableProps> = ({
       return {
         ...col,
         width: replaceWidthToNumber(col.width),
-        resizerWidth: replaceWidthToNumber(col.width),
       };
     });
     setColumns(newCols);
-    // updateResizerState({});
   };
 
   React.useLayoutEffect(() => {
     updateColumnsWidths();
-  }, [columnList, setColumns, updateResizerState]);
+  }, [columnList, setColumns]);
 
   React.useLayoutEffect(() => {
     if (tableRef.current) {
@@ -568,19 +563,8 @@ export const Table: React.FC<TableProps> = ({
     onHeaderSelectionChange?.(e.target.checked);
   }
 
-  function handleResizeChange({ name, width, mouseUp }: { name: string; width: number; mouseUp: boolean }) {
-    // if (mouseUp) {
+  function handleResizeChange({ name, width }: { name: string; width: number }) {
     onColumnResize?.({ name, width: (width >= columnMinWidth ? width : columnMinWidth) + 'px' });
-    // }
-    // const newColumns = cols.map((column) =>
-    //   column.name === name
-    //     ? {
-    //         ...column,
-    //         width: width >= columnMinWidth ? width : columnMinWidth,
-    //       }
-    //     : column,
-    // );
-    // setColumns(newColumns);
   }
 
   const handleSort = (name: string, colSort: 'asc' | 'desc' | 'initial') => {
@@ -596,7 +580,7 @@ export const Table: React.FC<TableProps> = ({
     return columnList.filter((col) => !!col.sort).length > 1;
   }, [columnList]);
 
-  const renderHeaderCell = (column: ColumnWithResizerWidth, index: number) => (
+  const renderHeaderCell = (column: Column, index: number) => (
     <HeaderCellComponent
       key={`head_${column.name}`}
       column={column}
@@ -606,7 +590,6 @@ export const Table: React.FC<TableProps> = ({
       disableColumnResize={disableColumnResize}
       headerLineClamp={headerLineClamp}
       headerExtraLineClamp={headerExtraLineClamp}
-      resizerState={resizerState}
       handleResizeChange={handleResizeChange}
       handleSort={handleSort}
       dimension={dimension}
@@ -765,11 +748,10 @@ export const Table: React.FC<TableProps> = ({
                   />
                 </CheckboxCell>
               )}
-              {stickyColumns.length > 0 &&
-                stickyColumns.map((col, index) => renderHeaderCell(col as ColumnWithResizerWidth, index))}
+              {stickyColumns.length > 0 && stickyColumns.map((col, index) => renderHeaderCell(col as Column, index))}
             </StickyWrapper>
           )}
-          {cols.map((col, index) => (col.sticky ? null : renderHeaderCell(col as ColumnWithResizerWidth, index)))}
+          {cols.map((col, index) => (col.sticky ? null : renderHeaderCell(col as Column, index)))}
           <Filler />
         </Header>
       </HeaderWrapper>

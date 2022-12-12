@@ -26,8 +26,7 @@ type HeaderCellType = {
   headerLineClamp: number;
   headerExtraLineClamp: number;
   spacingBetweenItems?: string;
-  resizerState: any;
-  handleResizeChange: (props: { name: string; width: number; mouseUp: boolean }) => void;
+  handleResizeChange: (props: { name: string; width: number }) => void;
   handleSort: (name: string, colSort: 'asc' | 'desc' | 'initial') => void;
   multipleSort?: boolean;
 };
@@ -41,7 +40,6 @@ export const HeaderCellComponent = ({
   headerExtraLineClamp,
   spacingBetweenItems,
   dimension,
-  resizerState,
   handleResizeChange,
   handleSort,
   multipleSort,
@@ -52,7 +50,6 @@ export const HeaderCellComponent = ({
     title,
     extraText,
     width = DEFAULT_COLUMN_WIDTH,
-    resizerWidth,
     cellAlign = 'left',
     sortable = false,
     sort,
@@ -91,20 +88,18 @@ export const HeaderCellComponent = ({
       {index < columnsAmount - 1 && (
         <RowWidthResizer
           name={name}
-          width={width ? resizerWidth : DEFAULT_COLUMN_WIDTH}
+          width={width}
           onChange={handleResizeChange}
           disabled={disableResize || disableColumnResize}
-          resizerState={resizerState}
           dimension={dimension}
         />
       )}
       {index === columnsAmount - 1 && showDividerForLastColumn && (
         <RowWidthResizer
           name={name}
-          width={width ? resizerWidth : DEFAULT_COLUMN_WIDTH}
+          width={width}
           onChange={handleResizeChange}
           disabled={disableResize || disableColumnResize}
-          resizerState={resizerState}
           dimension={dimension}
         />
       )}
