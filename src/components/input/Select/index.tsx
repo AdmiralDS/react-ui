@@ -142,6 +142,7 @@ export interface SelectProps extends Omit<React.InputHTMLAttributes<HTMLSelectEl
 export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
   (
     {
+      id,
       value,
       isLoading,
       className,
@@ -548,6 +549,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
           {shouldRenderSelectValue && wrappedVisibleValue}
           {((placeholder && isEmpty) || !modeIsSelect) && (
             <Input
+              id={id}
               placeholder={isEmpty ? placeholder : ''}
               tabIndex={-1}
               ref={inputRef}
