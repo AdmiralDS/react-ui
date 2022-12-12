@@ -405,7 +405,7 @@ const MultipleWithApplyOptions = createOptions(10);
 const TemplateMultipleWithApply: ComponentStory<typeof Select> = (props) => {
   const cleanProps = cleanUpProps(props);
 
-  const [selectValue, setSelectValue] = React.useState<string[]>([]);
+  const [selectValue, setSelectValue] = React.useState<string[]>(['big', '1', '3']);
   const [searchValue, setSearchValue] = React.useState('');
   const [forcedOpen, setForcedOpen] = React.useState(false);
 

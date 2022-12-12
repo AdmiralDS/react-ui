@@ -1,6 +1,5 @@
 import type { HTMLAttributes } from 'react';
 import * as React from 'react';
-import { useEffect } from 'react';
 import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import styled, { css } from 'styled-components';
 import type { ItemProps } from '#src/components/Menu/MenuItem';
@@ -105,19 +104,6 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
     },
     ref,
   ) => {
-    const uncontrolledActiveValue = model.length > 0 ? model[0].id : undefined;
-    const [selectedState, setSelectedState] = React.useState<string | undefined>(defaultSelected);
-    const [activeState, setActiveState] = React.useState<string | undefined>(uncontrolledActiveValue);
-
-    const selectedId =
-      multiSelection || disableSelectedOptionHighlight ? undefined : selected === undefined ? selectedState : selected;
-    const activeId = active === undefined ? activeState : active;
-
-    const menuRef = React.useRef<HTMLDivElement | null>(null);
-
-    const hasTopPanel = !!renderTopPanel;
-    const hasBottomPanel = !!renderBottomPanel;
-
     const findNextId = () => {
       const currentIndex = model.findIndex((item) => item.id === activeId);
       let nextIndex = currentIndex < model.length - 1 ? currentIndex + 1 : 0;
@@ -138,17 +124,34 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
       return model[prevIndex].id;
     };
 
+    const uncontrolledActiveValue = model.length > 0 ? findNextId() : undefined;
+    const [selectedState, setSelectedState] = React.useState<string | undefined>(defaultSelected);
+    const [activeState, setActiveState] = React.useState<string | undefined>(uncontrolledActiveValue);
+
+    const selectedId =
+      multiSelection || disableSelectedOptionHighlight ? undefined : selected === undefined ? selectedState : selected;
+    const activeId = active === undefined ? activeState : active;
+
+    const menuRef = React.useRef<HTMLDivElement | null>(null);
+
+    const hasTopPanel = !!renderTopPanel;
+    const hasBottomPanel = !!renderBottomPanel;
+
     const activateItem = (id?: string) => {
       if (activeId !== id) setActiveState(id);
-      onActivateItem?.(id);
+
+      const item = model.find((item) => item.id === id);
+      if (item && !item.disabled) onActivateItem?.(id);
     };
 
     const selectItem = (id: string) => {
       if (selectedId !== id && !multiSelection && !disableSelectedOptionHighlight) setSelectedState(id);
-      onSelectItem?.(id);
+
+      const item = model.find((item) => item.id === id);
+      if (item && !item.disabled) onSelectItem?.(id);
     };
 
-    useEffect(() => {
+    React.useEffect(() => {
       function handleKeyDown(e: KeyboardEvent) {
         const code = keyboardKey.getCode(e);
         switch (code) {
@@ -193,14 +196,16 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
       );
     };
 
-    useEffect(() => {
-      const hoveredItem = menuRef.current?.querySelector('[data-hovered="true"]');
+    React.useLayoutEffect(() => {
+      setTimeout(() => {
+        const hoveredItem = menuRef.current?.querySelector('[data-hovered="true"]');
 
-      hoveredItem?.scrollIntoView({
-        behavior: 'smooth',
-        inline: 'center',
-        block: 'nearest',
-      });
+        hoveredItem?.scrollIntoView({
+          behavior: 'smooth',
+          inline: 'center',
+          block: 'nearest',
+        });
+      }, 0);
     }, [active, activeState]);
 
     return (
