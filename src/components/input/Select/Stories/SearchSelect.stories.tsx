@@ -423,7 +423,7 @@ const TemplateMultipleWithApply: ComponentStory<typeof Select> = (props) => {
     return MultipleWithApplyOptions.map(
       (option, ind) =>
         shouldRender(option.text, searchValue) && (
-          <Option key={option.value} value={option.value} disabled={[2, 4].includes(ind)}>
+          <Option key={option.value} value={option.value} disabled={[0, 2, 4].includes(ind)}>
             {option.text}
           </Option>
         ),

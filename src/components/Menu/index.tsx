@@ -104,8 +104,8 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
     },
     ref,
   ) => {
-    const findNextId = () => {
-      const currentIndex = model.findIndex((item) => item.id === activeId);
+    const findNextId = (currentId?: string) => {
+      const currentIndex = currentId ? model.findIndex((item) => item.id === currentId) : -1;
       let nextIndex = currentIndex < model.length - 1 ? currentIndex + 1 : 0;
 
       while ((model[nextIndex].disabled || model[nextIndex].readOnly) && nextIndex !== currentIndex) {
@@ -114,8 +114,8 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
       return model[nextIndex].id;
     };
 
-    const findPreviousId = () => {
-      const currentIndex = model.findIndex((item) => item.id === activeId);
+    const findPreviousId = (currentId?: string) => {
+      const currentIndex = currentId ? model.findIndex((item) => item.id === currentId) : -1;
       let prevIndex = currentIndex > 0 ? currentIndex - 1 : model.length - 1;
 
       while ((model[prevIndex].disabled || model[prevIndex].readOnly) && prevIndex !== currentIndex) {
@@ -139,9 +139,7 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
 
     const activateItem = (id?: string) => {
       if (activeId !== id) setActiveState(id);
-
-      const item = model.find((item) => item.id === id);
-      if (item && !item.disabled) onActivateItem?.(id);
+      onActivateItem?.(id);
     };
 
     const selectItem = (id: string) => {
@@ -162,13 +160,13 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
             break;
           }
           case keyboardKey.ArrowDown: {
-            const nextId = findNextId();
+            const nextId = findNextId(activeId);
             activateItem(nextId);
             e.preventDefault();
             break;
           }
           case keyboardKey.ArrowUp: {
-            const previousId = findPreviousId();
+            const previousId = findPreviousId(activeId);
             activateItem(previousId);
             e.preventDefault();
             break;
