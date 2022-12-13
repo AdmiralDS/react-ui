@@ -405,7 +405,7 @@ const MultipleWithApplyOptions = createOptions(10);
 const TemplateMultipleWithApply: ComponentStory<typeof Select> = (props) => {
   const cleanProps = cleanUpProps(props);
 
-  const [selectValue, setSelectValue] = React.useState<string[]>([]);
+  const [selectValue, setSelectValue] = React.useState<string[]>(['big', '1', '3']);
   const [searchValue, setSearchValue] = React.useState('');
   const [forcedOpen, setForcedOpen] = React.useState(false);
 
@@ -423,7 +423,7 @@ const TemplateMultipleWithApply: ComponentStory<typeof Select> = (props) => {
     return MultipleWithApplyOptions.map(
       (option, ind) =>
         shouldRender(option.text, searchValue) && (
-          <Option key={option.value} value={option.value} disabled={[2, 4].includes(ind)}>
+          <Option key={option.value} value={option.value} disabled={[0, 2, 4].includes(ind)}>
             {option.text}
           </Option>
         ),
