@@ -531,6 +531,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
           multiple={multiple}
           disabled={disabled}
           options={constantOptions}
+          {...props}
           onChange={handleNativeControlChange}
         />
         <BorderedDiv />
