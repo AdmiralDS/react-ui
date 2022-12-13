@@ -352,26 +352,42 @@ export const Table: React.FC<TableProps> = ({
       }, {})
     : {};
 
-  const updateColumnsWidths = () => {
-    const newCols = [...columnList].map((col) => {
-      return {
-        ...col,
-        width: replaceWidthToNumber(col.width),
-      };
-    });
-    setColumns(newCols);
-  };
-
   React.useLayoutEffect(() => {
-    updateColumnsWidths();
-  }, [columnList, setColumns]);
+    if (headerRef.current) {
+      const columns = headerRef.current.querySelectorAll<HTMLElement>('.th');
+      const resizeObserver = new ResizeObserver((entries) => {
+        entries.forEach((entry) => {
+          // продумать момент с dataset
+          (entry.target as HTMLElement).dataset.resize = '' + entry.borderBoxSize[0].inlineSize;
+        });
+      });
+      columns.forEach((col) => resizeObserver.observe(col));
+      return () => {
+        resizeObserver.disconnect();
+      };
+    }
+  }, [headerRef.current]);
+
+  // const updateColumnsWidths = () => {
+  // const newCols = [...columnList].map((col) => {
+  //   return {
+  //     ...col,
+  //     width: replaceWidthToNumber(col.width),
+  //   };
+  // });
+  // setColumns(newCols);
+  // };
+
+  // React.useLayoutEffect(() => {
+  //   updateColumnsWidths();
+  // }, [columnList, setColumns]);
 
   React.useLayoutEffect(() => {
     if (tableRef.current) {
       const resizeObserver = new ResizeObserver((entries) => {
         entries.forEach(() => {
           setHeaderScrollWidth(headerRef.current?.scrollWidth || 0);
-          updateColumnsWidths();
+          // updateColumnsWidths();
 
           const size = getScrollbarSize();
           setScrollbarSize(size);
@@ -391,24 +407,24 @@ export const Table: React.FC<TableProps> = ({
     setScrollbarSize,
   ]);
 
-  const replaceWidthToNumber = React.useCallback(
-    (width?: string | number): number => {
-      const hasNumberWidth = typeof width === 'number';
-      const hasPercentWidth = typeof width === 'string' && width.includes('%');
-      const hasPixelWidth = typeof width === 'string' && width.includes('px');
+  // const replaceWidthToNumber = React.useCallback(
+  //   (width?: string | number): number => {
+  //     const hasNumberWidth = typeof width === 'number';
+  //     const hasPercentWidth = typeof width === 'string' && width.includes('%');
+  //     const hasPixelWidth = typeof width === 'string' && width.includes('px');
 
-      if (hasPercentWidth && tableRef?.current) {
-        const checkboxCellWidth = checkboxCellRef?.current?.clientWidth || 0;
-        const expandCellWidth = expandCellRef?.current?.clientWidth || 0;
-        const maxWidth = tableRef.current.clientWidth - checkboxCellWidth - expandCellWidth;
-        return Math.round((parseInt(width) * (maxWidth || 1)) / 100);
-      }
-      if (hasNumberWidth) return width;
-      if (hasPixelWidth) return parseInt(width);
-      return DEFAULT_COLUMN_WIDTH;
-    },
-    [tableRef.current],
-  );
+  //     if (hasPercentWidth && tableRef?.current) {
+  //       const checkboxCellWidth = checkboxCellRef?.current?.clientWidth || 0;
+  //       const expandCellWidth = expandCellRef?.current?.clientWidth || 0;
+  //       const maxWidth = tableRef.current.clientWidth - checkboxCellWidth - expandCellWidth;
+  //       return Math.round((parseInt(width) * (maxWidth || 1)) / 100);
+  //     }
+  //     if (hasNumberWidth) return width;
+  //     if (hasPixelWidth) return parseInt(width);
+  //     return DEFAULT_COLUMN_WIDTH;
+  //   },
+  //   [tableRef.current],
+  // );
 
   React.useLayoutEffect(() => {
     const scrollBody = scrollBodyRef.current;
@@ -599,11 +615,12 @@ export const Table: React.FC<TableProps> = ({
   );
 
   const renderBodyCell = (row: TableRow, col: Column) => {
+    const colWidth = col.width ? (typeof col.width === 'number' ? col.width + 'px' : col.width) : DEFAULT_COLUMN_WIDTH;
     return (
       <Cell
         key={`${row.id}_${col.name}`}
         dimension={dimension}
-        style={{ width: col.width || DEFAULT_COLUMN_WIDTH }}
+        style={{ width: colWidth }}
         className="td"
         data-column={col.name}
         data-row={row.id}

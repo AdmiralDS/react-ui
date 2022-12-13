@@ -61,9 +61,16 @@ export const HeaderCellComponent = ({
   const defaultSpacer = dimension === 'l' || dimension === 'xl' ? '16px' : '12px';
   const spacer = spacingBetweenItems || defaultSpacer;
   const cellRef = React.createRef<HTMLDivElement>();
+  const colWidth = typeof width === 'number' ? width + 'px' : width;
 
   return (
-    <HeaderCell dimension={dimension} style={{ width: width, minWidth: width }} className="th" ref={cellRef}>
+    <HeaderCell
+      dimension={dimension}
+      style={{ width: colWidth, minWidth: colWidth }}
+      className="th"
+      data-column={name}
+      ref={cellRef}
+    >
       <HeaderCellContent cellAlign={cellAlign}>
         <HeaderCellTitle
           sort={sort || 'initial'}
