@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.8.1](https://github.com/AdmiralDS/react-ui/compare/v3.8.0...v3.8.1) (2022-12-13)
+
+
+### Bug Fixes
+
+* **MenuButton:** set onChange prop to optional ([4be4e71](https://github.com/AdmiralDS/react-ui/commit/4be4e716bd001993d6f386cb056bbdfcc9ae89c1))
+* **MultiButton:** set onChange prop to optional ([7517bb2](https://github.com/AdmiralDS/react-ui/commit/7517bb2247554eea146a5f8b45b947f1714016a3))
+* **Select:** add passing props to native select ([401880a](https://github.com/AdmiralDS/react-ui/commit/401880a6beaa5278810970170b89a43bc6304d36))
+* **Select:** change state disabled option ([de038c6](https://github.com/AdmiralDS/react-ui/commit/de038c65be0ffaec822d86c780fd85105915b12f))
+* **StyledDropdownContainer:** fix DropdownContainer width to its content ([6388ef7](https://github.com/AdmiralDS/react-ui/commit/6388ef71bbe551a3375651bd521b36986c1b48e1))
+
 ## [3.8.0](https://github.com/AdmiralDS/react-ui/compare/v3.7.0...v3.8.0) (2022-12-07)
 
 
