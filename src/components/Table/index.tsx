@@ -370,6 +370,7 @@ export const Table: React.FC<TableProps> = ({
   React.useLayoutEffect(() => {
     if (tableRef.current) {
       const resizeObserver = new ResizeObserver((entries) => {
+        updateColumnsWidths();
         entries.forEach(() => {
           setHeaderScrollWidth(headerRef.current?.scrollWidth || 0);
           updateColumnsWidths();
@@ -698,7 +699,7 @@ export const Table: React.FC<TableProps> = ({
         isGroup={isGroupRow}
         onRowClick={onRowClick}
         onRowDoubleClick={onRowDoubleClick}
-        rowWidth={isGroupRow ? headerScrollWidth : undefined}
+        rowWidth={isGroupRow ? headerRef.current?.scrollWidth : undefined}
         verticalScroll={verticalScroll}
         scrollbar={scrollbar}
         grey={zebraRows[row.id]?.includes('even')}
