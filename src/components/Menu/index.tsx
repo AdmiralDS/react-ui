@@ -107,21 +107,29 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
     const findNextId = (currentId?: string) => {
       const currentIndex = currentId ? model.findIndex((item) => item.id === currentId) : -1;
       let nextIndex = currentIndex < model.length - 1 ? currentIndex + 1 : 0;
+      let finishCycle = false;
 
-      while ((model[nextIndex].disabled || model[nextIndex].readOnly) && nextIndex !== currentIndex) {
+      while ((model[nextIndex].disabled || model[nextIndex].readOnly) && !finishCycle) {
         nextIndex = nextIndex < model.length - 1 ? nextIndex + 1 : 0;
+        finishCycle = currentIndex === -1 ? nextIndex === 0 : nextIndex === currentIndex;
       }
-      return model[nextIndex].id;
+
+      const disabled = model[nextIndex].disabled || model[nextIndex].readOnly;
+      return disabled ? undefined : model[nextIndex].id;
     };
 
     const findPreviousId = (currentId?: string) => {
       const currentIndex = currentId ? model.findIndex((item) => item.id === currentId) : -1;
       let prevIndex = currentIndex > 0 ? currentIndex - 1 : model.length - 1;
+      let finishCycle = false;
 
-      while ((model[prevIndex].disabled || model[prevIndex].readOnly) && prevIndex !== currentIndex) {
+      while ((model[prevIndex].disabled || model[prevIndex].readOnly) && !finishCycle) {
         prevIndex = prevIndex > 0 ? prevIndex - 1 : model.length - 1;
+        finishCycle = currentIndex === -1 ? prevIndex === 0 : prevIndex === currentIndex;
       }
-      return model[prevIndex].id;
+
+      const disabled = model[prevIndex].disabled || model[prevIndex].readOnly;
+      return disabled ? undefined : model[prevIndex].id;
     };
 
     const uncontrolledActiveValue = model.length > 0 ? findNextId() : undefined;
@@ -204,7 +212,7 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
           block: 'nearest',
         });
       }, 0);
-    }, [active, activeState]);
+    }, [active, activeState, model]);
 
     return (
       <Wrapper ref={ref} dimension={dimension} hasTopPanel={hasTopPanel} hasBottomPanel={hasBottomPanel} {...props}>

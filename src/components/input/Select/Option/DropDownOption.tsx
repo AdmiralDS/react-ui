@@ -73,7 +73,6 @@ export const DropDownOption = ({
     dropDownContext?.onDropDownOptionMount,
     dropDownContext?.onDropDownOptionUnMount,
     dropDownContext?.activeItem,
-    // dropDownContext?.searchValue,
     dropDownContext?.selectValue,
     dropDownContext?.dimension,
   ]);
