@@ -557,7 +557,7 @@ export const Table: React.FC<TableProps> = ({
 
   function handleHeaderCheckboxChange(e: React.ChangeEvent<HTMLInputElement>) {
     const toRemove = rowList.reduce((ids: IdSelectionStatusMap, row) => {
-      ids[row.id] = !someRowsChecked;
+      ids[row.id] = row.checkboxDisabled ? !!row.selected : !someRowsChecked;
       return ids;
     }, {});
     onRowSelectionChange?.(toRemove);

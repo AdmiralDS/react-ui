@@ -160,6 +160,7 @@ Object {
         <button
           class="c1"
           data-testid="1"
+          type="button"
           width="50"
         >
           <div
@@ -174,6 +175,7 @@ Object {
         <button
           class="c4"
           data-testid="2"
+          type="button"
           width="auto"
         >
           <div
@@ -188,6 +190,7 @@ Object {
         <button
           class="c1"
           data-testid="3"
+          type="button"
           width="50"
         >
           <div
@@ -358,6 +361,7 @@ Object {
       <button
         class="c1"
         data-testid="1"
+        type="button"
         width="50"
       >
         <div
@@ -372,6 +376,7 @@ Object {
       <button
         class="c4"
         data-testid="2"
+        type="button"
         width="auto"
       >
         <div
@@ -386,6 +391,7 @@ Object {
       <button
         class="c1"
         data-testid="3"
+        type="button"
         width="50"
       >
         <div
