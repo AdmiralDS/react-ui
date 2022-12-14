@@ -69,7 +69,7 @@ export const DateInput = React.forwardRef<HTMLInputElement, DateInputProps>(
       maxDate,
       validator,
       filterDate,
-      alignDropdown = 'flex-end',
+      alignDropdown = 'auto',
       currentActiveView,
       currentActiveViewImportant,
       onMonthSelect,

@@ -55,7 +55,7 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
       disabled = false,
       loading = false,
       skeleton = false,
-      alignSelf = 'flex-end',
+      alignSelf = 'auto',
       onClose,
       onOpen,
       items,
