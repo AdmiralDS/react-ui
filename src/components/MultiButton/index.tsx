@@ -148,7 +148,7 @@ export const MultiButton = React.forwardRef<HTMLButtonElement, MultiButtonProps>
       onClose,
       onOpen,
       skeleton = false,
-      alignSelf = 'flex-end',
+      alignSelf = 'auto',
       menuMaxHeight,
       dropContainerCssMixin,
       children,

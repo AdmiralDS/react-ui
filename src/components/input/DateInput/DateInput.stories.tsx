@@ -107,7 +107,13 @@ const Template: ComponentStory<typeof DateInput> = (props) => {
 
   return (
     <ThemeProvider theme={swapBorder}>
-      <DateInput {...cleanProps} value={localValue} onChange={handleChange} placeholder={'Some placeholder'} />
+      <DateInput
+        {...cleanProps}
+        value={localValue}
+        onChange={handleChange}
+        placeholder={'Some placeholder'}
+        style={{ maxWidth: 300 }}
+      />
     </ThemeProvider>
   );
 };

@@ -106,7 +106,7 @@ export const DropdownContainer = React.forwardRef<HTMLDivElement, React.PropsWit
         if (!enoughWidthOnTheLeft && !enoughWidthOnTheRight) {
           node.style.alignSelf = 'center';
         } else if (enoughWidthOnTheLeft && enoughWidthOnTheRight) {
-          node.style.alignSelf = '';
+          node.style.alignSelf = 'flex-end';
         } else if (containerWiderTarget && !enoughWidthOnTheLeft && enoughWidthOnTheRight) {
           node.style.alignSelf = 'flex-start';
         } else if (containerWiderTarget && !enoughWidthOnTheRight && enoughWidthOnTheLeft) {
