@@ -286,7 +286,6 @@ export const Table: React.FC<TableProps> = ({
   const [resizerState, updateResizerState] = React.useState({} as any);
   const [tableWidth, setTableWidth] = React.useState(0);
   const [bodyHeight, setBodyHeight] = React.useState(0);
-  const [headerScrollWidth, setHeaderScrollWidth] = React.useState(0);
   const [scrollbar, setScrollbarSize] = React.useState(0);
 
   const stickyColumns = [...cols].filter((col) => col.sticky);
@@ -370,8 +369,8 @@ export const Table: React.FC<TableProps> = ({
   React.useLayoutEffect(() => {
     if (tableRef.current) {
       const resizeObserver = new ResizeObserver((entries) => {
+        updateColumnsWidths();
         entries.forEach(() => {
-          setHeaderScrollWidth(headerRef.current?.scrollWidth || 0);
           updateColumnsWidths();
 
           const size = getScrollbarSize();
@@ -383,14 +382,7 @@ export const Table: React.FC<TableProps> = ({
         resizeObserver.disconnect();
       };
     }
-  }, [
-    tableRef.current,
-    columnList,
-    displayRowSelectionColumn,
-    displayRowExpansionColumn,
-    setHeaderScrollWidth,
-    setScrollbarSize,
-  ]);
+  }, [tableRef.current, columnList, displayRowSelectionColumn, displayRowExpansionColumn, setScrollbarSize]);
 
   const replaceWidthToNumber = React.useCallback(
     (width?: string | number): number => {
@@ -422,6 +414,7 @@ export const Table: React.FC<TableProps> = ({
       if (scrollBodyRef.current) {
         const menus = scrollBodyRef.current.querySelectorAll<HTMLElement>('[data-overflowmenu]');
         const scrollbarWidth = verticalScroll ? scrollbar : 0;
+        const headerScrollWidth = headerRef.current?.scrollWidth || tableWidth;
 
         menus.forEach((menu) => {
           if (scrollLeft <= headerScrollWidth - tableWidth + scrollbarWidth) {
@@ -486,7 +479,6 @@ export const Table: React.FC<TableProps> = ({
     displayRowExpansionColumn,
     displayRowSelectionColumn,
     tableWidth,
-    headerScrollWidth,
     scrollbar,
     verticalScroll,
     setTableWidth,
@@ -557,7 +549,7 @@ export const Table: React.FC<TableProps> = ({
 
   function handleHeaderCheckboxChange(e: React.ChangeEvent<HTMLInputElement>) {
     const toRemove = rowList.reduce((ids: IdSelectionStatusMap, row) => {
-      ids[row.id] = !someRowsChecked;
+      ids[row.id] = row.checkboxDisabled ? !!row.selected : !someRowsChecked;
       return ids;
     }, {});
     onRowSelectionChange?.(toRemove);
@@ -698,7 +690,7 @@ export const Table: React.FC<TableProps> = ({
         isGroup={isGroupRow}
         onRowClick={onRowClick}
         onRowDoubleClick={onRowDoubleClick}
-        rowWidth={isGroupRow ? headerScrollWidth : undefined}
+        rowWidth={isGroupRow ? headerRef.current?.scrollWidth : undefined}
         verticalScroll={verticalScroll}
         scrollbar={scrollbar}
         grey={zebraRows[row.id]?.includes('even')}

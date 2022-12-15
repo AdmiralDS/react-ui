@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.8.2](https://github.com/AdmiralDS/react-ui/compare/v3.8.1...v3.8.2) (2022-12-15)
+
+
+### Bug Fixes
+
+* **Select:** fix cycle deadlock ([1abdfba](https://github.com/AdmiralDS/react-ui/commit/1abdfbaf91592b94fdff980c55bae9c7e0af7b9c))
+* **Table:** fix bug with header checkbox and checkboxDisabled rows ([8d4a722](https://github.com/AdmiralDS/react-ui/commit/8d4a722c5588239bf2d702763fbc13d405f303d7))
+* **Table:** fix bug with horizontal scroll and group row width ([af3550e](https://github.com/AdmiralDS/react-ui/commit/af3550ecbee0fc3c5d403c41b02bbb441a2de7e2))
+* **Table:** fix bug with overflowMenu and horizontal scroll ([3d7c00b](https://github.com/AdmiralDS/react-ui/commit/3d7c00bca7c58858276c5a06ef26ea729962db7c))
+
 ### [3.8.1](https://github.com/AdmiralDS/react-ui/compare/v3.8.0...v3.8.1) (2022-12-13)
 
 
