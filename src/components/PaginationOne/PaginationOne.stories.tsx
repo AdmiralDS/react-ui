@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import * as React from 'react';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import styled, { ThemeProvider } from 'styled-components';
 import { PaginationOne } from '#src/components/PaginationOne';
@@ -66,8 +66,8 @@ export default {
 } as ComponentMeta<typeof PaginationOne>;
 
 const Template1: ComponentStory<typeof PaginationOne> = (args) => {
-  const [pageSize, setPageSize] = useState(8);
-  const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = React.useState(8);
+  const [page, setPage] = React.useState(1);
   const pageSizes = [8, 20, 50, 100, 200];
   const totalElements = args.totalItems;
 
@@ -97,10 +97,10 @@ const Template1: ComponentStory<typeof PaginationOne> = (args) => {
 };
 
 const Template2: ComponentStory<typeof PaginationOne> = () => {
-  const [pageSize1, setPageSize1] = useState(8);
-  const [page1, setPage1] = useState(1);
-  const [pageSize2, setPageSize2] = useState(8);
-  const [page2, setPage2] = useState(1);
+  const [pageSize1, setPageSize1] = React.useState(8);
+  const [page1, setPage1] = React.useState(1);
+  const [pageSize2, setPageSize2] = React.useState(8);
+  const [page2, setPage2] = React.useState(1);
   const pageSizes = [8, 20, 50, 100, 200];
   const totalElements = 100;
   return (
