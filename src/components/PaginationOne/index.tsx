@@ -140,6 +140,12 @@ export const PaginationOne: React.FC<PaginationOneProps> = ({
   const backButtonDisabled = page === 1;
   const forwardButtonDisabled = page === totalPages;
 
+  const [isVisible, setIsVisible] = React.useState(false);
+
+  const handleVisibilityChange = (isVisible: boolean) => {
+    setIsVisible(isVisible);
+  };
+
   const handleSizeChange = (pageSizeSelected: string) => {
     const pageSize = parseInt(pageSizeSelected);
     onChange({ page: 1, pageSize: pageSize });
@@ -153,12 +159,21 @@ export const PaginationOne: React.FC<PaginationOneProps> = ({
         pageSize,
       });
     }
+    handleVisibilityChange(false);
   };
 
   const pageIncrement = () => onChange({ page: page + 1, pageSize });
   const pageDecrement = () => onChange({ page: page - 1, pageSize });
 
   const dropMenuProps = passDropdownDataAttributes(props);
+
+  const handleClickOutside = (e: Event) => {
+    handleVisibilityChange(false);
+  };
+
+  const handleMenuButtonClick = (e: React.MouseEvent<HTMLElement>) => {
+    handleVisibilityChange(!isVisible);
+  };
 
   const renderComplex = () => {
     return (
@@ -201,6 +216,10 @@ export const PaginationOne: React.FC<PaginationOneProps> = ({
             menuWidth={menuWidth}
             dropMenuDataAttributes={dropMenuProps}
             className="current-page-number-with-dropdown"
+            isVisible={isVisible}
+            onVisibilityChange={handleVisibilityChange}
+            onClickOutside={handleClickOutside}
+            onClick={handleMenuButtonClick}
           >
             {page}
           </MenuButton>
