@@ -549,6 +549,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
           {shouldRenderSelectValue && wrappedVisibleValue}
           {((placeholder && isEmpty) || !modeIsSelect) && (
             <Input
+              data-id={props.id}
               placeholder={isEmpty ? placeholder : ''}
               tabIndex={-1}
               ref={inputRef}
