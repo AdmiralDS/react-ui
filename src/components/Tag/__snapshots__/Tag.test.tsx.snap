@@ -81,6 +81,7 @@ Object {
     <div>
       <button
         class="c0"
+        type="button"
         width="60px"
       >
         <div
@@ -171,6 +172,7 @@ Object {
 <div>
     <button
       class="c0"
+      type="button"
       width="60px"
     >
       <div
@@ -302,6 +304,7 @@ Object {
     <div>
       <button
         class="c0"
+        type="button"
       >
         <span
           class="c1"
@@ -372,6 +375,7 @@ Object {
 <div>
     <button
       class="c0"
+      type="button"
     >
       <span
         class="c1"
