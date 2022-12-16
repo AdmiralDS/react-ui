@@ -141,6 +141,7 @@ export const PaginationOne: React.FC<PaginationOneProps> = ({
   const forwardButtonDisabled = page === totalPages;
 
   const [isVisible, setIsVisible] = React.useState(false);
+  const [selectedPageNumber, setSelectedPageNumber] = React.useState(page.toString());
 
   const handleVisibilityChange = (isVisible: boolean) => {
     setIsVisible(isVisible);
@@ -152,6 +153,7 @@ export const PaginationOne: React.FC<PaginationOneProps> = ({
   };
 
   const handlePageInputChange = (pageSelected: string) => {
+    setSelectedPageNumber(pageSelected);
     const page = parseInt(pageSelected);
     if (page > 0 && page <= totalPages) {
       onChange({
@@ -207,7 +209,7 @@ export const PaginationOne: React.FC<PaginationOneProps> = ({
           <Divider />
           <MenuButton
             options={pages}
-            selected={page.toString()}
+            selected={selectedPageNumber}
             onSelectItem={handlePageInputChange}
             disabled={pageSelectDisabled}
             aria-label={pageSelectLabel(page, totalPages)}
