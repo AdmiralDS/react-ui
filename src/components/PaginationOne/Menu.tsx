@@ -103,6 +103,7 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
       onVisibilityChange,
       onClickOutside,
       onClick,
+      renderTopPanel,
       ...props
     },
     ref,
@@ -137,6 +138,7 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
         isVisible={isVisible}
         onVisibilityChange={onVisibilityChange}
         onClickOutside={onClickOutside}
+        renderTopPanel={renderTopPanel}
         {...dropMenuDataAttributes}
         renderContentProp={({ buttonRef, handleKeyDown, handleClick, statusIcon, menuState }) => {
           return (

@@ -9,6 +9,10 @@ import { ReactComponent as ChevronRight } from '@admiral-ds/icons/build/system/C
 import { PaginationButton } from '#src/components/PaginationOne/PaginationButton';
 import { MenuButton } from '#src/components/PaginationOne/Menu';
 import { passDropdownDataAttributes } from '#src/components/common/utils/splitDataAttributes';
+import { MenuActionsPanel } from '#src/components/Menu/MenuActionsPanel';
+import { TextInput } from '#src/components/input';
+import { ChangeEvent } from 'react';
+import { keyboardKey } from '#src/components/common/keyboardKey';
 
 const ComplexWrapper = styled.div`
   display: flex;
@@ -142,6 +146,7 @@ export const PaginationOne: React.FC<PaginationOneProps> = ({
 
   const [isVisible, setIsVisible] = React.useState(false);
   const [selectedPageNumber, setSelectedPageNumber] = React.useState(page.toString());
+  const [inputPageNumber, setInputPageNumber] = React.useState('');
 
   const handleVisibilityChange = (isVisible: boolean) => {
     setIsVisible(isVisible);
@@ -175,6 +180,20 @@ export const PaginationOne: React.FC<PaginationOneProps> = ({
 
   const handleMenuButtonClick = (e: React.MouseEvent<HTMLElement>) => {
     handleVisibilityChange(!isVisible);
+  };
+
+  const handleInputPageNumberChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const inputValue = e.target.value;
+    setInputPageNumber(inputValue);
+  };
+
+  const handleInputPageNumberKeyDown = (e: React.KeyboardEvent) => {
+    const code = keyboardKey.getCode(e);
+
+    // prevent selecting option on Space press
+    if (code === keyboardKey[' ']) {
+      e.stopPropagation();
+    }
   };
 
   const renderComplex = () => {
@@ -222,6 +241,18 @@ export const PaginationOne: React.FC<PaginationOneProps> = ({
             onVisibilityChange={handleVisibilityChange}
             onClickOutside={handleClickOutside}
             onClick={handleMenuButtonClick}
+            renderTopPanel={({ dimension = 's' }) => {
+              return (
+                <MenuActionsPanel dimension={dimension}>
+                  <TextInput
+                    dimension="s"
+                    value={inputPageNumber}
+                    onChange={handleInputPageNumberChange}
+                    onKeyDown={handleInputPageNumberKeyDown}
+                  />
+                </MenuActionsPanel>
+              );
+            }}
           >
             {page}
           </MenuButton>
