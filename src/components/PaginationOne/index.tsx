@@ -156,6 +156,8 @@ export const PaginationOne: React.FC<PaginationOneProps> = ({
   const [selectedPageNumber, setSelectedPageNumber] = React.useState(page.toString());
   const [inputPageNumber, setInputPageNumber] = React.useState('');
 
+  const pageNumberInputRef = React.useRef<HTMLInputElement>(null);
+
   const handleVisibilityChange = (isVisible: boolean) => {
     setIsVisible(isVisible);
   };
@@ -197,6 +199,13 @@ export const PaginationOne: React.FC<PaginationOneProps> = ({
   const handleMenuButtonClick = (e: React.MouseEvent<HTMLElement>) => {
     handleVisibilityChange(!isVisible);
   };
+
+  React.useEffect(() => {
+    if (isVisible && pageNumberInputRef) {
+      console.log(`new isVisible: ${isVisible}\nref: ${pageNumberInputRef.current}`);
+      pageNumberInputRef.current?.focus();
+    }
+  }, [isVisible]);
 
   const handleInputPageNumberChange = (e: ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
@@ -269,6 +278,7 @@ export const PaginationOne: React.FC<PaginationOneProps> = ({
                     value={inputPageNumber}
                     onChange={handleInputPageNumberChange}
                     onKeyDown={handleInputPageNumberKeyDown}
+                    ref={pageNumberInputRef}
                   />
                 </MenuActionsPanel>
               );
