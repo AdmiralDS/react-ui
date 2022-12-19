@@ -62,6 +62,10 @@ const ButtonsWrapper = styled.div`
   }
 `;
 
+const StyledTextInput = styled(TextInput)<{ pageNumberInputWidth: string }>`
+  width: ${(p) => p.pageNumberInputWidth};
+`;
+
 export interface PaginationOneProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'> {
   /** Колбек, который срабатывает при изменении номера  страницы или размера страницы */
   onChange: (result: { page: number; pageSize: number }) => void;
@@ -83,7 +87,10 @@ export interface PaginationOneProps extends Omit<React.HTMLAttributes<HTMLDivEle
   dropMaxHeight?: string | number;
   /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
   dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+  /** Позволяет задать ширину выпадающего списка */
   menuWidth?: string;
+  /** Позволяет задать ширину окна ввода номера страниц в выпадающем списке */
+  pageNumberInputWidth?: string;
   /** Объект локализации - позволяет перезадать текстовые константы используемые в компоненте,
    * по умолчанию значения констант берутся из темы в соответствии с параметром currentLocale, заданном в теме
    **/
@@ -118,6 +125,7 @@ export const PaginationOne: React.FC<PaginationOneProps> = ({
   dropMaxHeight = '',
   dropContainerCssMixin,
   locale,
+  pageNumberInputWidth = '56px',
   ...props
 }) => {
   const theme = React.useContext(ThemeContext) || LIGHT_THEME;
@@ -255,7 +263,8 @@ export const PaginationOne: React.FC<PaginationOneProps> = ({
             renderTopPanel={({ dimension = 's' }) => {
               return (
                 <MenuActionsPanel dimension={dimension}>
-                  <TextInput
+                  <StyledTextInput
+                    pageNumberInputWidth={pageNumberInputWidth}
                     dimension="s"
                     value={inputPageNumber}
                     onChange={handleInputPageNumberChange}
