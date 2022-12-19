@@ -11,7 +11,7 @@ import { MenuButton } from '#src/components/PaginationOne/Menu';
 import { passDropdownDataAttributes } from '#src/components/common/utils/splitDataAttributes';
 import { MenuActionsPanel } from '#src/components/Menu/MenuActionsPanel';
 import { TextInput } from '#src/components/input';
-import { ChangeEvent } from 'react';
+import type { ChangeEvent } from 'react';
 import { keyboardKey } from '#src/components/common/keyboardKey';
 
 const ComplexWrapper = styled.div`
@@ -152,20 +152,28 @@ export const PaginationOne: React.FC<PaginationOneProps> = ({
     setIsVisible(isVisible);
   };
 
+  const parsePageNumber = (pageSelected: string) => {
+    const page = parseInt(pageSelected);
+    if (page < 1) {
+      return 1;
+    } else if (page > totalPages) {
+      return totalPages;
+    }
+    return page;
+  };
+
   const handleSizeChange = (pageSizeSelected: string) => {
     const pageSize = parseInt(pageSizeSelected);
     onChange({ page: 1, pageSize: pageSize });
   };
 
   const handlePageInputChange = (pageSelected: string) => {
-    setSelectedPageNumber(pageSelected);
-    const page = parseInt(pageSelected);
-    if (page > 0 && page <= totalPages) {
-      onChange({
-        page,
-        pageSize,
-      });
-    }
+    const page = parsePageNumber(pageSelected);
+    setSelectedPageNumber(page.toString());
+    onChange({
+      page,
+      pageSize,
+    });
     handleVisibilityChange(false);
   };
 
@@ -193,6 +201,9 @@ export const PaginationOne: React.FC<PaginationOneProps> = ({
     // prevent selecting option on Space press
     if (code === keyboardKey[' ']) {
       e.stopPropagation();
+    } else if (code === keyboardKey.Enter) {
+      handlePageInputChange(inputPageNumber);
+      setIsVisible(false);
     }
   };
 
