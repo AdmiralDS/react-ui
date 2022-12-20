@@ -45,9 +45,10 @@ export function RowWidthResizer(props: {
   disabled: boolean;
   resizerState: any;
   dimension: TableProps['dimension'];
+  columnMinWidth: number;
   onChange: (evt: { name: string; width: number; mouseUp: boolean }) => void;
 }) {
-  const { width: startWidth, name, disabled, resizerState, dimension, onChange } = props;
+  const { width: startWidth, name, disabled, resizerState, dimension, columnMinWidth, onChange } = props;
   const node = React.useRef(null);
   const [width, setWidth] = React.useState(startWidth);
   const [isTaken, setTaken] = React.useState(false);
@@ -87,7 +88,8 @@ export function RowWidthResizer(props: {
   const handleMouseMove = (e: MouseEvent) => {
     if (isTaken && clientX !== null) {
       e.preventDefault();
-      const newWidth = width - (clientX - e.clientX);
+      let newWidth = width - (clientX - e.clientX);
+      newWidth = newWidth >= columnMinWidth ? newWidth : columnMinWidth;
       onChange({ name, width: newWidth, mouseUp: false });
     }
   };
@@ -95,7 +97,8 @@ export function RowWidthResizer(props: {
   const handleMouseUp = (e: MouseEvent) => {
     if (isTaken && clientX !== null) {
       e.preventDefault();
-      const newWidth = width - (clientX - e.clientX);
+      let newWidth = width - (clientX - e.clientX);
+      newWidth = newWidth >= columnMinWidth ? newWidth : columnMinWidth;
       setTaken(false);
       onChange({ name, width: newWidth, mouseUp: true });
       setWidth(newWidth);

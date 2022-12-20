@@ -1,7 +1,6 @@
 import styled, { css } from 'styled-components';
 import { ReactComponent as ArrowUpOutline } from '@admiral-ds/icons/build/system/ArrowUpOutline.svg';
 import { ReactComponent as ChevronDownOutline } from '@admiral-ds/icons/build/system/ChevronDownOutline.svg';
-import { OpenStatusButton } from '#src/components/OpenStatusButton';
 import type { TableProps } from '#src/components/Table';
 
 import {
@@ -27,11 +26,14 @@ export const TableContainer = styled.div`
   background: ${({ theme }) => theme.color['Neutral/Neutral 00']};
 `;
 
-export const StickyWrapper = styled.div<{ greyHeader?: boolean }>`
+export const StickyGroupRow = styled.div`
   display: flex;
   position: sticky;
   left: 0;
   z-index: 5;
+`;
+
+export const StickyWrapper = styled(StickyGroupRow)<{ greyHeader?: boolean }>`
   background: ${({ theme, greyHeader }) =>
     greyHeader ? theme.color['Neutral/Neutral 05'] : theme.color['Neutral/Neutral 00']};
   transition: box-shadow 0.3s;

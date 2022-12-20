@@ -560,14 +560,7 @@ export const Table: React.FC<TableProps> = ({
     if (mouseUp) {
       onColumnResize?.({ name, width: width + 'px' });
     }
-    const newColumns = cols.map((column) =>
-      column.name === name
-        ? {
-            ...column,
-            width: width >= columnMinWidth ? width : columnMinWidth,
-          }
-        : column,
-    );
+    const newColumns = cols.map((column) => (column.name === name ? { ...column, width } : column));
     setColumns(newColumns);
   }
 
@@ -600,6 +593,7 @@ export const Table: React.FC<TableProps> = ({
       dimension={dimension}
       spacingBetweenItems={spacingBetweenItems}
       multipleSort={multipleSort}
+      columnMinWidth={columnMinWidth}
     />
   );
 

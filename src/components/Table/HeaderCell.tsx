@@ -30,6 +30,7 @@ type HeaderCellType = {
   handleResizeChange: (props: { name: string; width: number; mouseUp: boolean }) => void;
   handleSort: (name: string, colSort: 'asc' | 'desc' | 'initial') => void;
   multipleSort?: boolean;
+  columnMinWidth: number;
 };
 
 export const HeaderCellComponent = ({
@@ -45,6 +46,7 @@ export const HeaderCellComponent = ({
   handleResizeChange,
   handleSort,
   multipleSort,
+  columnMinWidth,
   index,
 }: HeaderCellType) => {
   const {
@@ -96,6 +98,7 @@ export const HeaderCellComponent = ({
           disabled={disableResize || disableColumnResize}
           resizerState={resizerState}
           dimension={dimension}
+          columnMinWidth={columnMinWidth}
         />
       )}
       {index === columnsAmount - 1 && showDividerForLastColumn && (
@@ -106,6 +109,7 @@ export const HeaderCellComponent = ({
           disabled={disableResize || disableColumnResize}
           resizerState={resizerState}
           dimension={dimension}
+          columnMinWidth={columnMinWidth}
         />
       )}
     </HeaderCell>
