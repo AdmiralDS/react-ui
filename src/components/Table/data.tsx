@@ -670,8 +670,6 @@ export const rowListWithGroup: RowData[] = [
     ),
     currency: 'RUB',
     rate: 2.5,
-    expanded: true,
-    expandedRowRender: expandedRowRender,
   },
   {
     id: '0003',
@@ -684,7 +682,6 @@ export const rowListWithGroup: RowData[] = [
     ),
     currency: 'RUB',
     rate: 2.5,
-    expandedRowRender: expandedRowRender,
   },
   {
     id: '0004',
@@ -697,7 +694,6 @@ export const rowListWithGroup: RowData[] = [
     ),
     currency: 'RUB',
     rate: 2.5,
-    expandedRowRender: expandedRowRender,
   },
   {
     id: '0001',
@@ -725,7 +721,6 @@ export const rowListWithGroup: RowData[] = [
     ),
     currency: 'RUB',
     rate: 2.5,
-    expandedRowRender: expandedRowRender,
   },
   {
     id: '0006',
