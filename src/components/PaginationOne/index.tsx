@@ -210,8 +210,7 @@ export const PaginationOne: React.FC<PaginationOneProps> = ({
   }, [isVisible]);
 
   const handleInputPageNumberChange = (e: ChangeEvent<HTMLInputElement>) => {
-    let inputValue = e.target.value;
-    inputValue = inputValue.replace(/\D/g, '');
+    const inputValue = e.target.value;
     setInputPageNumber(inputValue);
   };
 
@@ -224,6 +223,8 @@ export const PaginationOne: React.FC<PaginationOneProps> = ({
     } else if (code === keyboardKey.Enter) {
       handlePageInputChange(inputPageNumber);
       setIsVisible(false);
+    } else if (code && (code < 48 || code > 57)) {
+      e.preventDefault();
     }
   };
 
