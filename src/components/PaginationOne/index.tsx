@@ -91,6 +91,8 @@ export interface PaginationOneProps extends Omit<React.HTMLAttributes<HTMLDivEle
   menuWidth?: string;
   /** Позволяет задать ширину окна ввода номера страниц в выпадающем списке */
   pageNumberInputWidth?: string;
+  /** Включает окно ввода номера страницы в выпадающем списке */
+  showPageNumberInput?: boolean;
   /** Объект локализации - позволяет перезадать текстовые константы используемые в компоненте,
    * по умолчанию значения констант берутся из темы в соответствии с параметром currentLocale, заданном в теме
    **/
@@ -126,6 +128,7 @@ export const PaginationOne: React.FC<PaginationOneProps> = ({
   dropContainerCssMixin,
   locale,
   pageNumberInputWidth = '56px',
+  showPageNumberInput = false,
   ...props
 }) => {
   const theme = React.useContext(ThemeContext) || LIGHT_THEME;
@@ -269,20 +272,24 @@ export const PaginationOne: React.FC<PaginationOneProps> = ({
             onVisibilityChange={handleVisibilityChange}
             onClickOutside={handleClickOutside}
             onClick={handleMenuButtonClick}
-            renderTopPanel={({ dimension = 's' }) => {
-              return (
-                <MenuActionsPanel dimension={dimension}>
-                  <StyledTextInput
-                    pageNumberInputWidth={pageNumberInputWidth}
-                    dimension="s"
-                    value={inputPageNumber}
-                    onChange={handleInputPageNumberChange}
-                    onKeyDown={handleInputPageNumberKeyDown}
-                    ref={pageNumberInputRef}
-                  />
-                </MenuActionsPanel>
-              );
-            }}
+            renderTopPanel={
+              showPageNumberInput
+                ? ({ dimension = 's' }) => {
+                    return (
+                      <MenuActionsPanel dimension={dimension}>
+                        <TextInput
+                          //pageNumberInputWidth={pageNumberInputWidth}
+                          dimension="s"
+                          value={inputPageNumber}
+                          onChange={handleInputPageNumberChange}
+                          onKeyDown={handleInputPageNumberKeyDown}
+                          ref={pageNumberInputRef}
+                        />
+                      </MenuActionsPanel>
+                    );
+                  }
+                : undefined
+            }
           >
             {page}
           </MenuButton>

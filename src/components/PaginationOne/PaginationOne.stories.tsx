@@ -58,6 +58,9 @@ export default {
     dropMaxHeight: {
       control: { type: 'text' },
     },
+    showPageNumberInput: {
+      control: { type: 'boolean' },
+    },
     themeBorderKind: {
       options: ALL_BORDER_RADIUS_VALUES,
       control: { type: 'radio' },
