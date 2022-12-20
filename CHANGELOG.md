@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.8.3](https://github.com/AdmiralDS/react-ui/compare/v3.8.2...v3.8.3) (2022-12-20)
+
+
+### Bug Fixes
+
+* **FileInputField:** add export ([dbc6563](https://github.com/AdmiralDS/react-ui/commit/dbc65636f41e25ce5bed7ff32f306155e8408b85))
+* **Table:** fix bug with negative values in onColumnResize callback ([90e99b1](https://github.com/AdmiralDS/react-ui/commit/90e99b19f93eaa62ef9999f623b5b229def48171))
+* **Table:** row with group name should not be scrolled ([505ff07](https://github.com/AdmiralDS/react-ui/commit/505ff07a19a34c86d1da35fe89a4cb7d6d4ccdc2))
+
 ### [3.8.2](https://github.com/AdmiralDS/react-ui/compare/v3.8.1...v3.8.2) (2022-12-15)
 
 
