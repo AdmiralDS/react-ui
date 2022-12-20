@@ -202,13 +202,13 @@ export const PaginationOne: React.FC<PaginationOneProps> = ({
 
   React.useEffect(() => {
     if (isVisible && pageNumberInputRef) {
-      console.log(`new isVisible: ${isVisible}\nref: ${pageNumberInputRef.current}`);
       pageNumberInputRef.current?.focus();
     }
   }, [isVisible]);
 
   const handleInputPageNumberChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const inputValue = e.target.value;
+    let inputValue = e.target.value;
+    inputValue = inputValue.replace(/\D/g, '');
     setInputPageNumber(inputValue);
   };
 
