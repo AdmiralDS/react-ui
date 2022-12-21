@@ -124,8 +124,8 @@ const Wrapper = styled.button<{
 
   &:hover,
   &:active {
-    ${({ statusViaBackground, theme }) =>
-      statusViaBackground ? wrapperHover : `background: ${theme.color['Neutral/Neutral 20']};`}
+    ${({ statusViaBackground, theme, clickable }) =>
+      clickable ? (statusViaBackground ? wrapperHover : `background: ${theme.color['Neutral/Neutral 20']};`) : ''}
   }
 
   &:focus-visible {
@@ -289,7 +289,7 @@ export const Tag = React.forwardRef<HTMLElement, TagProps & TagInternalProps>(
           ref={refSetter(ref, wrapperRef)}
           width={width}
           onClick={onClick}
-          clickable={!!onClick || overflow}
+          clickable={!!onClick}
           statusViaBackground={statusViaBackground}
           border={border}
           background={background}
