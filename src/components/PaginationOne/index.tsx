@@ -162,6 +162,9 @@ export const PaginationOne: React.FC<PaginationOneProps> = ({
   const pageNumberInputRef = React.useRef<HTMLInputElement>(null);
 
   const handleVisibilityChange = (isVisible: boolean) => {
+    if (isVisible) {
+      setInputPageNumber('');
+    }
     setIsVisible(isVisible);
   };
 
