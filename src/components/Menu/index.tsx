@@ -1,6 +1,5 @@
 import type { HTMLAttributes } from 'react';
 import * as React from 'react';
-import { useEffect } from 'react';
 import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import styled, { css } from 'styled-components';
 import type { ItemProps } from '#src/components/Menu/MenuItem';
@@ -105,7 +104,35 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
     },
     ref,
   ) => {
-    const uncontrolledActiveValue = model.length > 0 ? model[0].id : undefined;
+    const findNextId = (currentId?: string) => {
+      const currentIndex = currentId ? model.findIndex((item) => item.id === currentId) : -1;
+      let nextIndex = currentIndex < model.length - 1 ? currentIndex + 1 : 0;
+      let finishCycle = false;
+
+      while ((model[nextIndex].disabled || model[nextIndex].readOnly) && !finishCycle) {
+        nextIndex = nextIndex < model.length - 1 ? nextIndex + 1 : 0;
+        finishCycle = currentIndex === -1 ? nextIndex === 0 : nextIndex === currentIndex;
+      }
+
+      const disabled = model[nextIndex].disabled || model[nextIndex].readOnly;
+      return disabled ? undefined : model[nextIndex].id;
+    };
+
+    const findPreviousId = (currentId?: string) => {
+      const currentIndex = currentId ? model.findIndex((item) => item.id === currentId) : -1;
+      let prevIndex = currentIndex > 0 ? currentIndex - 1 : model.length - 1;
+      let finishCycle = false;
+
+      while ((model[prevIndex].disabled || model[prevIndex].readOnly) && !finishCycle) {
+        prevIndex = prevIndex > 0 ? prevIndex - 1 : model.length - 1;
+        finishCycle = currentIndex === -1 ? prevIndex === 0 : prevIndex === currentIndex;
+      }
+
+      const disabled = model[prevIndex].disabled || model[prevIndex].readOnly;
+      return disabled ? undefined : model[prevIndex].id;
+    };
+
+    const uncontrolledActiveValue = model.length > 0 ? findNextId() : undefined;
     const [selectedState, setSelectedState] = React.useState<string | undefined>(defaultSelected);
     const [activeState, setActiveState] = React.useState<string | undefined>(uncontrolledActiveValue);
 
@@ -118,26 +145,6 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
     const hasTopPanel = !!renderTopPanel;
     const hasBottomPanel = !!renderBottomPanel;
 
-    const findNextId = () => {
-      const currentIndex = model.findIndex((item) => item.id === activeId);
-      let nextIndex = currentIndex < model.length - 1 ? currentIndex + 1 : 0;
-
-      while ((model[nextIndex].disabled || model[nextIndex].readOnly) && nextIndex !== currentIndex) {
-        nextIndex = nextIndex < model.length - 1 ? nextIndex + 1 : 0;
-      }
-      return model[nextIndex].id;
-    };
-
-    const findPreviousId = () => {
-      const currentIndex = model.findIndex((item) => item.id === activeId);
-      let prevIndex = currentIndex > 0 ? currentIndex - 1 : model.length - 1;
-
-      while ((model[prevIndex].disabled || model[prevIndex].readOnly) && prevIndex !== currentIndex) {
-        prevIndex = prevIndex > 0 ? prevIndex - 1 : model.length - 1;
-      }
-      return model[prevIndex].id;
-    };
-
     const activateItem = (id?: string) => {
       if (activeId !== id) setActiveState(id);
       onActivateItem?.(id);
@@ -145,10 +152,12 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
 
     const selectItem = (id: string) => {
       if (selectedId !== id && !multiSelection && !disableSelectedOptionHighlight) setSelectedState(id);
-      onSelectItem?.(id);
+
+      const item = model.find((item) => item.id === id);
+      if (item && !item.disabled) onSelectItem?.(id);
     };
 
-    useEffect(() => {
+    React.useEffect(() => {
       function handleKeyDown(e: KeyboardEvent) {
         const code = keyboardKey.getCode(e);
         switch (code) {
@@ -159,13 +168,13 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
             break;
           }
           case keyboardKey.ArrowDown: {
-            const nextId = findNextId();
+            const nextId = findNextId(activeId);
             activateItem(nextId);
             e.preventDefault();
             break;
           }
           case keyboardKey.ArrowUp: {
-            const previousId = findPreviousId();
+            const previousId = findPreviousId(activeId);
             activateItem(previousId);
             e.preventDefault();
             break;
@@ -193,15 +202,17 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
       );
     };
 
-    useEffect(() => {
-      const hoveredItem = menuRef.current?.querySelector('[data-hovered="true"]');
+    React.useLayoutEffect(() => {
+      setTimeout(() => {
+        const hoveredItem = menuRef.current?.querySelector('[data-hovered="true"]');
 
-      hoveredItem?.scrollIntoView({
-        behavior: 'smooth',
-        inline: 'center',
-        block: 'nearest',
-      });
-    }, [active, activeState]);
+        hoveredItem?.scrollIntoView({
+          behavior: 'smooth',
+          inline: 'center',
+          block: 'nearest',
+        });
+      }, 0);
+    }, [active, activeState, model]);
 
     return (
       <Wrapper ref={ref} dimension={dimension} hasTopPanel={hasTopPanel} hasBottomPanel={hasBottomPanel} {...props}>

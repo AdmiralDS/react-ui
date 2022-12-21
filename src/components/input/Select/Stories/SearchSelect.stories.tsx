@@ -18,6 +18,7 @@ import { createOptions, formDataToObject, shouldRender, wait } from './utils';
 import { OPTIONS, OPTIONS_ASYNC, OPTIONS_SIMPLE } from './data';
 import { ExtraText, Form, FormValuesWrapper, Icon, Separator, StyledGroup, TextWrapper } from './styled';
 import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
+import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 export default {
   title: 'Admiral-2.1/Input/Select/режим "searchSelect"',
@@ -84,10 +85,16 @@ export default {
     skeleton: {
       control: { type: 'boolean' },
     },
+    alignDropdown: {
+      options: [undefined, 'auto', 'flex-start', 'flex-end', 'center', 'baseline', 'stretch'],
+      control: { type: 'select' },
+    },
   },
 } as ComponentMeta<typeof Select>;
 
 const TemplateSearchSelectWithFilter: ComponentStory<typeof Select> = (props) => {
+  const cleanProps = cleanUpProps(props);
+
   const [selectValue, setSelectValue] = React.useState('');
   const [searchValue, setSearchValue] = React.useState('');
 
@@ -119,7 +126,7 @@ const TemplateSearchSelectWithFilter: ComponentStory<typeof Select> = (props) =>
       </T>
       <Separator />
       <Select
-        {...props}
+        {...cleanProps}
         onInputChange={handleInputChange}
         placeholder="Placeholder"
         mode="searchSelect"
@@ -133,7 +140,9 @@ const TemplateSearchSelectWithFilter: ComponentStory<typeof Select> = (props) =>
 };
 
 const TemplateCustomOption: ComponentStory<typeof Select> = (props) => {
-  const [selectValue, setSelectValue] = React.useState(props.value ? String(props.value) : OPTIONS[2].value);
+  const cleanProps = cleanUpProps(props);
+
+  const [selectValue, setSelectValue] = React.useState(cleanProps.value ? String(cleanProps.value) : OPTIONS[2].value);
 
   const onChange = (e: ChangeEvent<HTMLSelectElement>) => {
     setSelectValue(e.target.value);
@@ -142,7 +151,7 @@ const TemplateCustomOption: ComponentStory<typeof Select> = (props) => {
 
   return (
     <>
-      <Select {...props} value={selectValue} mode="searchSelect" onChange={onChange}>
+      <Select {...cleanProps} value={selectValue} mode="searchSelect" onChange={onChange}>
         {OPTIONS.map((option) => (
           <Option key={option.value} value={option.value}>
             <Icon />
@@ -170,7 +179,9 @@ const MyIncredibleOption = ({ text, shouldAnimate, ...props }: MyIncredibleOptio
 );
 
 const TemplateRenderProps: ComponentStory<typeof Select> = (props) => {
-  const [selectValue, setSelectValue] = React.useState(props.value ? String(props.value) : OPTIONS[2].value);
+  const cleanProps = cleanUpProps(props);
+
+  const [selectValue, setSelectValue] = React.useState(cleanProps.value ? String(cleanProps.value) : OPTIONS[2].value);
 
   const onChange = (e: ChangeEvent<HTMLSelectElement>) => {
     setSelectValue(e.target.value);
@@ -179,7 +190,7 @@ const TemplateRenderProps: ComponentStory<typeof Select> = (props) => {
 
   return (
     <>
-      <Select {...props} value={selectValue} mode="searchSelect" onChange={onChange}>
+      <Select {...cleanProps} value={selectValue} mode="searchSelect" onChange={onChange}>
         {OPTIONS.map(({ text, value }) => (
           <Option
             key={value}
@@ -195,13 +206,15 @@ const TemplateRenderProps: ComponentStory<typeof Select> = (props) => {
 };
 
 const TemplateOptionGroup: ComponentStory<typeof Select> = (props) => {
+  const cleanProps = cleanUpProps(props);
+
   const [selectValue, setSelectValue] = React.useState('Похо Торо Моронго');
 
   const onChange = (e: ChangeEvent<HTMLSelectElement>) => setSelectValue(e.target.value);
 
   return (
     <>
-      <Select {...props} value={selectValue} mode="searchSelect" onChange={onChange} dimension="xl">
+      <Select {...cleanProps} value={selectValue} mode="searchSelect" onChange={onChange} dimension="xl">
         <StyledGroup label="Сегодня выступают">
           <Option value="Анигиляторная пушка">Анигиляторная пушка</Option>
           <Option value="Похо Торо Моронго">Похо Торо Моронго</Option>
@@ -221,7 +234,9 @@ const TemplateOptionGroup: ComponentStory<typeof Select> = (props) => {
 };
 
 const AsyncTemplate: ComponentStory<typeof Select> = (props) => {
-  const [selectValue, setSelectValue] = React.useState(props.value ? String(props.value) : OPTIONS[2].value);
+  const cleanProps = cleanUpProps(props);
+
+  const [selectValue, setSelectValue] = React.useState(cleanProps.value ? String(cleanProps.value) : OPTIONS[2].value);
   const [options, setOptions] = React.useState<Array<{ value: string; text: string }>>([]);
   const [searchValue, setSearchValue] = React.useState('');
   const [isLoading, setIsLoading] = React.useState(true);
@@ -256,7 +271,7 @@ const AsyncTemplate: ComponentStory<typeof Select> = (props) => {
   return (
     <>
       <Select
-        {...props}
+        {...cleanProps}
         value={selectValue}
         isLoading={isLoading}
         onChange={onChange}
@@ -274,6 +289,8 @@ const AsyncTemplate: ComponentStory<typeof Select> = (props) => {
 };
 
 const UncontrolledTemplate: ComponentStory<typeof Select> = (props) => {
+  const cleanProps = cleanUpProps(props);
+
   const [submitValues, setSubmitValues] = useState<null | Record<string, any>>(null);
 
   const onSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
@@ -288,7 +305,7 @@ const UncontrolledTemplate: ComponentStory<typeof Select> = (props) => {
   return (
     <>
       <Form action="" onSubmit={onSubmit}>
-        <Select {...props} name="myOwesomeField" mode="searchSelect" defaultValue={OPTIONS_SIMPLE[0]}>
+        <Select {...cleanProps} name="myOwesomeField" mode="searchSelect" defaultValue={OPTIONS_SIMPLE[0]}>
           {OPTIONS_SIMPLE.map((option, ind) => (
             <Option key={option} value={option} disabled={ind === 4}>
               {option}
@@ -309,6 +326,8 @@ const UncontrolledTemplate: ComponentStory<typeof Select> = (props) => {
 };
 
 const TemplateMultipleWithAddOption: ComponentStory<typeof Select> = (props) => {
+  const cleanProps = cleanUpProps(props);
+
   const [selectValue, setSelectValue] = React.useState<string[]>([]);
   const [searchValue, setSearchValue] = React.useState('');
   const [options, setOptions] = React.useState(createOptions(20));
@@ -351,12 +370,13 @@ const TemplateMultipleWithAddOption: ComponentStory<typeof Select> = (props) => 
     };
   }, [searchValue, options]);
 
-  const menuPanelContentDimension = props.dimension === undefined || props.dimension === 'xl' ? 'l' : props.dimension;
+  const menuPanelContentDimension =
+    cleanProps.dimension === undefined || cleanProps.dimension === 'xl' ? 'l' : cleanProps.dimension;
 
   return (
     <>
       <Select
-        {...props}
+        {...cleanProps}
         value={selectValue}
         inputValue={searchValue}
         multiple={true}
@@ -383,7 +403,9 @@ const TemplateMultipleWithAddOption: ComponentStory<typeof Select> = (props) => 
 const MultipleWithApplyOptions = createOptions(10);
 
 const TemplateMultipleWithApply: ComponentStory<typeof Select> = (props) => {
-  const [selectValue, setSelectValue] = React.useState<string[]>([]);
+  const cleanProps = cleanUpProps(props);
+
+  const [selectValue, setSelectValue] = React.useState<string[]>(['big', '1', '3']);
   const [searchValue, setSearchValue] = React.useState('');
   const [forcedOpen, setForcedOpen] = React.useState(false);
 
@@ -401,7 +423,7 @@ const TemplateMultipleWithApply: ComponentStory<typeof Select> = (props) => {
     return MultipleWithApplyOptions.map(
       (option, ind) =>
         shouldRender(option.text, searchValue) && (
-          <Option key={option.value} value={option.value} disabled={[2, 4].includes(ind)}>
+          <Option key={option.value} value={option.value} disabled={[0, 2, 4].includes(ind)}>
             {option.text}
           </Option>
         ),
@@ -413,18 +435,18 @@ const TemplateMultipleWithApply: ComponentStory<typeof Select> = (props) => {
     console.log('selected', selectValue.toString());
   };
 
-  const menuPanelContentDimension = props.dimension === undefined || props.dimension === 'xl' ? 'l' : props.dimension;
+  const menuPanelContentDimension =
+    cleanProps.dimension === undefined || cleanProps.dimension === 'xl' ? 'l' : cleanProps.dimension;
 
   return (
     <>
       <Select
-        {...props}
+        {...cleanProps}
         forcedOpen={forcedOpen}
         value={selectValue}
         inputValue={searchValue}
         multiple={true}
         onChange={onChange}
-        // dimension="xl"
         displayClearIcon={true}
         placeholder="Placeholder"
         mode="searchSelect"
@@ -447,6 +469,8 @@ const TemplateMultipleWithApply: ComponentStory<typeof Select> = (props) => {
 };
 
 const TemplateNotFixedMultiSelect: ComponentStory<typeof Select> = (props) => {
+  const cleanProps = cleanUpProps(props);
+
   const [selectValue, setSelectValue] = React.useState<string[]>(
     Array.from({ length: 20 }).map((_, ind) => String(ind)),
   );
@@ -459,7 +483,14 @@ const TemplateNotFixedMultiSelect: ComponentStory<typeof Select> = (props) => {
 
   return (
     <>
-      <Select {...props} value={selectValue} mode="searchSelect" multiple={true} onChange={onChange} maxRowCount={3}>
+      <Select
+        {...cleanProps}
+        value={selectValue}
+        mode="searchSelect"
+        multiple={true}
+        onChange={onChange}
+        maxRowCount={3}
+      >
         {Array.from({ length: 20 }).map((_option, ind) => (
           <Option key={ind} value={String(ind)}>
             {`${ind}0000`}
@@ -471,6 +502,8 @@ const TemplateNotFixedMultiSelect: ComponentStory<typeof Select> = (props) => {
 };
 
 const TemplateMultiSelectCustomOption: ComponentStory<typeof Select> = (props) => {
+  const cleanProps = cleanUpProps(props);
+
   const [selectValue, setSelectValue] = React.useState<string[]>(
     Array.from({ length: 15 }).map((_, ind) => String(ind)),
   );
@@ -481,7 +514,7 @@ const TemplateMultiSelectCustomOption: ComponentStory<typeof Select> = (props) =
 
   return (
     <>
-      <Select {...props} value={selectValue} multiple={true} onChange={onChange} mode="searchSelect">
+      <Select {...cleanProps} value={selectValue} multiple={true} onChange={onChange} mode="searchSelect">
         {Array.from({ length: 20 }).map((_option, ind) => (
           <Option key={ind} value={String(ind)} renderChip={() => String(ind)}>
             <TextWrapper>
@@ -496,6 +529,8 @@ const TemplateMultiSelectCustomOption: ComponentStory<typeof Select> = (props) =
 };
 
 const TemplateMultiSelectCustomChip: ComponentStory<typeof Select> = (props) => {
+  const cleanProps = cleanUpProps(props);
+
   const [selectValue, setSelectValue] = React.useState<string[]>(
     Array.from({ length: 5 }).map((_, ind) => String(ind)),
   );
@@ -526,7 +561,7 @@ const TemplateMultiSelectCustomChip: ComponentStory<typeof Select> = (props) => 
 
   return (
     <>
-      <Select {...props} value={selectValue} multiple={true} onChange={onChange} mode="searchSelect">
+      <Select {...cleanProps} value={selectValue} multiple={true} onChange={onChange} mode="searchSelect">
         {Array.from({ length: 20 }).map((_option, ind) => (
           <Option key={ind} value={String(ind)} renderChip={renderChip(ind)} disabled={[0, 2].includes(ind)}>
             {ind}
@@ -552,6 +587,8 @@ const TemplateMultiSelectCustomChip: ComponentStory<typeof Select> = (props) => 
 };
 
 const TemplateWithAddButton: ComponentStory<typeof Select> = (props) => {
+  const cleanProps = cleanUpProps(props);
+
   const [selectValue, setSelectValue] = React.useState('');
   const [searchValue, setSearchValue] = React.useState('');
   const [options, setOptions] = React.useState(OPTIONS_SIMPLE);
@@ -596,7 +633,7 @@ const TemplateWithAddButton: ComponentStory<typeof Select> = (props) => {
   return (
     <>
       <Select
-        {...props}
+        {...cleanProps}
         onInputChange={handleInputChange}
         placeholder="Placeholder"
         mode="searchSelect"

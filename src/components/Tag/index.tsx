@@ -294,6 +294,7 @@ export const Tag = React.forwardRef<HTMLElement, TagProps & TagInternalProps>(
           border={border}
           background={background}
           dimension={dimension}
+          type="button"
           {...props}
         >
           {background !== 'neutral' && !statusViaBackground && <TagCircle background={background} />}

@@ -10,6 +10,8 @@ import type { RenderOptionProps } from '#src/components/Menu/MenuItem';
 import { MenuItem } from '#src/components/Menu/MenuItem';
 import { ReactComponent as StarSolid } from '@admiral-ds/icons/build/system/StarSolid.svg';
 import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
+import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+import type { MenuButtonProps } from '#src/components/MenuButton';
 
 const DarkDiv = styled.div`
   background-color: ${({ theme }) => theme.color['Special/Dark Static Neutral 00']};
@@ -142,6 +144,10 @@ export default {
       options: ALL_BORDER_RADIUS_VALUES,
       control: { type: 'radio' },
     },
+    alignSelf: {
+      options: [undefined, 'auto', 'flex-start', 'flex-end', 'center', 'baseline', 'stretch'],
+      control: { type: 'select' },
+    },
   },
 } as ComponentMeta<typeof MenuButton>;
 
@@ -188,10 +194,11 @@ const items = [
 ];
 
 const Template1: ComponentStory<typeof MenuButton> = (args) => {
+  const cleanProps = cleanUpProps(args) as MenuButtonProps;
   const [selected, setSelected] = React.useState<string | undefined>(undefined);
 
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = (cleanProps as any).themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 
@@ -199,7 +206,7 @@ const Template1: ComponentStory<typeof MenuButton> = (args) => {
     return items.map((item) => ({
       id: item.id,
       render: (items: RenderOptionProps) => (
-        <MenuItem dimension={args.dimension === 'xl' ? 'l' : args.dimension} {...items} key={item.id}>
+        <MenuItem dimension={cleanProps.dimension === 'xl' ? 'l' : cleanProps.dimension} {...items} key={item.id}>
           {item.display}
         </MenuItem>
       ),
@@ -210,7 +217,7 @@ const Template1: ComponentStory<typeof MenuButton> = (args) => {
   return (
     <ThemeProvider theme={swapBorder}>
       <MenuButton
-        {...args}
+        {...cleanProps}
         selected={selected}
         onSelectItem={(id) => {
           logSelectedId(id);
@@ -228,6 +235,8 @@ const Template1: ComponentStory<typeof MenuButton> = (args) => {
 };
 
 const Template2: ComponentStory<typeof MenuButton> = (args) => {
+  const cleanProps = cleanUpProps(args) as MenuButtonProps;
+
   const items = [
     {
       id: '1',
@@ -269,7 +278,7 @@ const Template2: ComponentStory<typeof MenuButton> = (args) => {
   return (
     <>
       <MenuButton
-        {...args}
+        {...cleanProps}
         selected={selected}
         onSelectItem={(id) => {
           logSelectedId(id);
@@ -285,6 +294,8 @@ const Template2: ComponentStory<typeof MenuButton> = (args) => {
 };
 
 const Template3: ComponentStory<typeof MenuButton> = (args) => {
+  const cleanProps = cleanUpProps(args) as MenuButtonProps;
+
   const items = [
     {
       id: '1',
@@ -353,7 +364,7 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
             Size XL
           </T>
           <MenuButton
-            {...args}
+            {...cleanProps}
             appearance="primary"
             dimension="xl"
             selected={selected}
@@ -367,7 +378,7 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
             Button 56
           </MenuButton>
           <MenuButton
-            {...args}
+            {...cleanProps}
             appearance="primary"
             dimension="xl"
             loading
@@ -382,7 +393,7 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
             Button 56
           </MenuButton>
           <MenuButton
-            {...args}
+            {...cleanProps}
             appearance="secondary"
             dimension="xl"
             selected={selected}
@@ -396,7 +407,7 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
             Button 56
           </MenuButton>
           <MenuButton
-            {...args}
+            {...cleanProps}
             appearance="secondary"
             dimension="xl"
             loading
@@ -411,7 +422,7 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
             Button 56
           </MenuButton>
           <MenuButton
-            {...args}
+            {...cleanProps}
             appearance="ghost"
             dimension="xl"
             selected={selected}
@@ -425,7 +436,7 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
             Button 56
           </MenuButton>
           <MenuButton
-            {...args}
+            {...cleanProps}
             appearance="ghost"
             dimension="xl"
             loading
@@ -441,7 +452,7 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
           </MenuButton>
           <DarkDiv>
             <MenuButton
-              {...args}
+              {...cleanProps}
               appearance="white"
               dimension="xl"
               selected={selected}
@@ -457,7 +468,7 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
           </DarkDiv>
           <DarkDiv>
             <MenuButton
-              {...args}
+              {...cleanProps}
               appearance="white"
               dimension="xl"
               loading
@@ -479,7 +490,7 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
             Size L
           </T>
           <MenuButton
-            {...args}
+            {...cleanProps}
             appearance="primary"
             dimension="l"
             selected={selected}
@@ -493,7 +504,7 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
             Button 56
           </MenuButton>
           <MenuButton
-            {...args}
+            {...cleanProps}
             appearance="primary"
             dimension="l"
             loading
@@ -508,7 +519,7 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
             Button 56
           </MenuButton>
           <MenuButton
-            {...args}
+            {...cleanProps}
             appearance="secondary"
             dimension="l"
             selected={selected}
@@ -522,7 +533,7 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
             Button 56
           </MenuButton>
           <MenuButton
-            {...args}
+            {...cleanProps}
             appearance="secondary"
             dimension="l"
             loading
@@ -537,7 +548,7 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
             Button 56
           </MenuButton>
           <MenuButton
-            {...args}
+            {...cleanProps}
             appearance="ghost"
             dimension="l"
             selected={selected}
@@ -551,7 +562,7 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
             Button 56
           </MenuButton>
           <MenuButton
-            {...args}
+            {...cleanProps}
             appearance="ghost"
             dimension="l"
             loading
@@ -567,7 +578,7 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
           </MenuButton>
           <DarkDiv>
             <MenuButton
-              {...args}
+              {...cleanProps}
               appearance="white"
               dimension="l"
               selected={selected}
@@ -583,7 +594,7 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
           </DarkDiv>
           <DarkDiv>
             <MenuButton
-              {...args}
+              {...cleanProps}
               appearance="white"
               dimension="l"
               loading
@@ -605,7 +616,7 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
             Size M
           </T>
           <MenuButton
-            {...args}
+            {...cleanProps}
             appearance="primary"
             dimension="m"
             selected={selected}
@@ -619,7 +630,7 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
             Button 56
           </MenuButton>
           <MenuButton
-            {...args}
+            {...cleanProps}
             appearance="primary"
             dimension="m"
             loading
@@ -634,7 +645,7 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
             Button 56
           </MenuButton>
           <MenuButton
-            {...args}
+            {...cleanProps}
             appearance="secondary"
             dimension="m"
             selected={selected}
@@ -648,7 +659,7 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
             Button 56
           </MenuButton>
           <MenuButton
-            {...args}
+            {...cleanProps}
             appearance="secondary"
             dimension="m"
             loading
@@ -663,7 +674,7 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
             Button 56
           </MenuButton>
           <MenuButton
-            {...args}
+            {...cleanProps}
             appearance="ghost"
             dimension="m"
             selected={selected}
@@ -677,7 +688,7 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
             Button 56
           </MenuButton>
           <MenuButton
-            {...args}
+            {...cleanProps}
             appearance="ghost"
             dimension="m"
             loading
@@ -693,7 +704,7 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
           </MenuButton>
           <DarkDiv>
             <MenuButton
-              {...args}
+              {...cleanProps}
               appearance="white"
               dimension="m"
               selected={selected}
@@ -709,7 +720,7 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
           </DarkDiv>
           <DarkDiv>
             <MenuButton
-              {...args}
+              {...cleanProps}
               appearance="white"
               dimension="m"
               loading
@@ -731,7 +742,7 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
             Size S
           </T>
           <MenuButton
-            {...args}
+            {...cleanProps}
             appearance="primary"
             dimension="s"
             selected={selected}
@@ -745,7 +756,7 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
             Button 56
           </MenuButton>
           <MenuButton
-            {...args}
+            {...cleanProps}
             appearance="primary"
             dimension="s"
             loading
@@ -760,7 +771,7 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
             Button 56
           </MenuButton>
           <MenuButton
-            {...args}
+            {...cleanProps}
             appearance="secondary"
             dimension="s"
             selected={selected}
@@ -774,7 +785,7 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
             Button 56
           </MenuButton>
           <MenuButton
-            {...args}
+            {...cleanProps}
             appearance="secondary"
             dimension="s"
             loading
@@ -789,7 +800,7 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
             Button 56
           </MenuButton>
           <MenuButton
-            {...args}
+            {...cleanProps}
             appearance="ghost"
             dimension="s"
             selected={selected}
@@ -803,7 +814,7 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
             Button 56
           </MenuButton>
           <MenuButton
-            {...args}
+            {...cleanProps}
             appearance="ghost"
             dimension="s"
             loading
@@ -819,7 +830,7 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
           </MenuButton>
           <DarkDiv>
             <MenuButton
-              {...args}
+              {...cleanProps}
               appearance="white"
               dimension="s"
               selected={selected}
@@ -835,7 +846,7 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
           </DarkDiv>
           <DarkDiv>
             <MenuButton
-              {...args}
+              {...cleanProps}
               appearance="white"
               dimension="s"
               loading
@@ -857,6 +868,8 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
 };
 
 const Template4: ComponentStory<typeof MenuButton> = (args) => {
+  const cleanProps = cleanUpProps(args) as MenuButtonProps;
+
   const items = [
     {
       id: '1',
@@ -925,7 +938,7 @@ const Template4: ComponentStory<typeof MenuButton> = (args) => {
             Size XL
           </T>
           <MenuButton
-            {...args}
+            {...cleanProps}
             appearance="primary"
             dimension="xl"
             selected={selected}
@@ -940,7 +953,7 @@ const Template4: ComponentStory<typeof MenuButton> = (args) => {
             Button 56
           </MenuButton>
           <MenuButton
-            {...args}
+            {...cleanProps}
             appearance="secondary"
             dimension="xl"
             selected={selected}
@@ -955,7 +968,7 @@ const Template4: ComponentStory<typeof MenuButton> = (args) => {
             Button 56
           </MenuButton>
           <MenuButton
-            {...args}
+            {...cleanProps}
             appearance="ghost"
             dimension="xl"
             selected={selected}
@@ -971,7 +984,7 @@ const Template4: ComponentStory<typeof MenuButton> = (args) => {
           </MenuButton>
           <DarkDiv>
             <MenuButton
-              {...args}
+              {...cleanProps}
               appearance="white"
               dimension="xl"
               selected={selected}
@@ -993,7 +1006,7 @@ const Template4: ComponentStory<typeof MenuButton> = (args) => {
             Size L
           </T>
           <MenuButton
-            {...args}
+            {...cleanProps}
             appearance="primary"
             dimension="l"
             selected={selected}
@@ -1008,7 +1021,7 @@ const Template4: ComponentStory<typeof MenuButton> = (args) => {
             Button 56
           </MenuButton>
           <MenuButton
-            {...args}
+            {...cleanProps}
             appearance="secondary"
             dimension="l"
             selected={selected}
@@ -1023,7 +1036,7 @@ const Template4: ComponentStory<typeof MenuButton> = (args) => {
             Button 56
           </MenuButton>
           <MenuButton
-            {...args}
+            {...cleanProps}
             appearance="ghost"
             dimension="l"
             selected={selected}
@@ -1039,7 +1052,7 @@ const Template4: ComponentStory<typeof MenuButton> = (args) => {
           </MenuButton>
           <DarkDiv>
             <MenuButton
-              {...args}
+              {...cleanProps}
               appearance="white"
               dimension="l"
               selected={selected}
@@ -1061,7 +1074,7 @@ const Template4: ComponentStory<typeof MenuButton> = (args) => {
             Size M
           </T>
           <MenuButton
-            {...args}
+            {...cleanProps}
             appearance="primary"
             dimension="m"
             selected={selected}
@@ -1076,7 +1089,7 @@ const Template4: ComponentStory<typeof MenuButton> = (args) => {
             Button 56
           </MenuButton>
           <MenuButton
-            {...args}
+            {...cleanProps}
             appearance="secondary"
             dimension="m"
             selected={selected}
@@ -1091,7 +1104,7 @@ const Template4: ComponentStory<typeof MenuButton> = (args) => {
             Button 56
           </MenuButton>
           <MenuButton
-            {...args}
+            {...cleanProps}
             appearance="ghost"
             dimension="m"
             selected={selected}
@@ -1107,7 +1120,7 @@ const Template4: ComponentStory<typeof MenuButton> = (args) => {
           </MenuButton>
           <DarkDiv>
             <MenuButton
-              {...args}
+              {...cleanProps}
               appearance="white"
               dimension="m"
               selected={selected}
@@ -1129,7 +1142,7 @@ const Template4: ComponentStory<typeof MenuButton> = (args) => {
             Size S
           </T>
           <MenuButton
-            {...args}
+            {...cleanProps}
             appearance="primary"
             dimension="s"
             selected={selected}
@@ -1144,7 +1157,7 @@ const Template4: ComponentStory<typeof MenuButton> = (args) => {
             Button 56
           </MenuButton>
           <MenuButton
-            {...args}
+            {...cleanProps}
             appearance="secondary"
             dimension="s"
             selected={selected}
@@ -1159,7 +1172,7 @@ const Template4: ComponentStory<typeof MenuButton> = (args) => {
             Button 56
           </MenuButton>
           <MenuButton
-            {...args}
+            {...cleanProps}
             appearance="ghost"
             dimension="s"
             selected={selected}
@@ -1175,7 +1188,7 @@ const Template4: ComponentStory<typeof MenuButton> = (args) => {
           </MenuButton>
           <DarkDiv>
             <MenuButton
-              {...args}
+              {...cleanProps}
               appearance="white"
               dimension="s"
               selected={selected}

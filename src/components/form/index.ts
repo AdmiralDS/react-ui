@@ -12,3 +12,4 @@ export * from './NumberInputField';
 export * from './EditModeField';
 export * from './PhoneInputField';
 export * from './InputExField';
+export * from './FileInputField';

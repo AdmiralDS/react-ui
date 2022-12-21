@@ -19,7 +19,7 @@ export interface MenuButtonProps extends Omit<HTMLAttributes<HTMLButtonElement>,
   selected?: string;
   /** @deprecated use onSelectItem instead
    * Колбек на изменение выбранной опции */
-  onChange: (id: string) => void;
+  onChange?: (id: string) => void;
   /** @deprecated use onVisibilityChange instead
    * Колбек на открытие меню */
   onOpen?: () => void;
@@ -55,7 +55,7 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
       disabled = false,
       loading = false,
       skeleton = false,
-      alignSelf = 'flex-end',
+      alignSelf = 'auto',
       onClose,
       onOpen,
       items,

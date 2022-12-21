@@ -5,7 +5,7 @@ import {
   ExpandIconPlacement,
   CheckboxCell,
   GroupTextContent,
-  StickyWrapper,
+  StickyGroupRow,
 } from '#src/components/Table/style';
 import * as React from 'react';
 import type { TableRow } from '#src/components/Table';
@@ -46,34 +46,32 @@ export const GroupRow = ({
   };
 
   return (
-    <>
-      <StickyWrapper>
-        <ExpandCell dimension={dimension}>
-          <ExpandIconPlacement
-            dimension={dimension === 's' || dimension === 'm' ? 'mBig' : 'lBig'}
-            data-disabled={row.disabled || row.groupRows?.length === 0 ? true : undefined}
-            highlightFocus={false}
-            onClick={handleExpandClick}
-          >
-            <ExpandIcon $isOpened={row.expanded} aria-hidden />
-          </ExpandIconPlacement>
-        </ExpandCell>
-        {displayRowSelectionColumn && (
-          <CheckboxCell dimension={dimension} className="td_checkbox">
-            <Checkbox
-              disabled={row.disabled || row.checkboxDisabled || row.groupRows?.length === 0}
-              dimension={checkboxDimension}
-              checked={!!checked}
-              indeterminate={indeterminate}
-              onChange={handleCheckboxChange}
-              onClick={handleCheckboxClick}
-            />
-          </CheckboxCell>
-        )}
-      </StickyWrapper>
+    <StickyGroupRow>
+      <ExpandCell dimension={dimension}>
+        <ExpandIconPlacement
+          dimension={dimension === 's' || dimension === 'm' ? 'mBig' : 'lBig'}
+          data-disabled={row.disabled || row.groupRows?.length === 0 ? true : undefined}
+          highlightFocus={false}
+          onClick={handleExpandClick}
+        >
+          <ExpandIcon $isOpened={row.expanded} aria-hidden />
+        </ExpandIconPlacement>
+      </ExpandCell>
+      {displayRowSelectionColumn && (
+        <CheckboxCell dimension={dimension} className="td_checkbox">
+          <Checkbox
+            disabled={row.disabled || row.checkboxDisabled || row.groupRows?.length === 0}
+            dimension={checkboxDimension}
+            checked={!!checked}
+            indeterminate={indeterminate}
+            onChange={handleCheckboxChange}
+            onClick={handleCheckboxClick}
+          />
+        </CheckboxCell>
+      )}
       <Cell key={`${row.id}`} dimension={dimension} className="td" data-column="group" data-row={row.id}>
         {renderCell ? renderCell(row, 'group') : <GroupTextContent>{row.groupTitle || ''}</GroupTextContent>}
       </Cell>
-    </>
+    </StickyGroupRow>
   );
 };

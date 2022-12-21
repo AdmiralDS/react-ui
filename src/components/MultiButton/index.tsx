@@ -104,7 +104,7 @@ export interface MultiButtonProps extends Omit<HTMLAttributes<HTMLDivElement>, '
   onMainButtonClick?: (e: MouseEvent<HTMLButtonElement>) => void;
   /** @deprecated use onSelectItem instead
    * Колбек на изменение выбранной опции */
-  onChange: (id: string) => void;
+  onChange?: (id: string) => void;
   /** @deprecated use onVisibilityChange instead
    * Колбек на открытие меню */
   onOpen?: () => void;
@@ -148,7 +148,7 @@ export const MultiButton = React.forwardRef<HTMLButtonElement, MultiButtonProps>
       onClose,
       onOpen,
       skeleton = false,
-      alignSelf = 'flex-end',
+      alignSelf = 'auto',
       menuMaxHeight,
       dropContainerCssMixin,
       children,

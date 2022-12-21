@@ -10,6 +10,7 @@ import { InputIconButton } from '#src/components/InputIconButton';
 import { StyledDropdownContainer } from '#src/components/DropdownContainer';
 import type { RenderOptionProps } from '#src/components/Menu/MenuItem';
 import { Menu } from '#src/components/Menu';
+import type { MenuDimensions } from '#src/components/Menu';
 import type { HighlightFormat } from '#src/components/common/utils/getTextHighlightMeta';
 import type { InputStatus } from '#src/components/input/types';
 import type { TextInputProps } from '#src/components/input/TextInput';
@@ -87,6 +88,7 @@ export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps
       status,
       highlightFormat,
       locale,
+      dimension = TextInput.defaultProps?.dimension || 'xl',
       ...props
     },
     ref,
@@ -101,6 +103,8 @@ export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps
     const [activeOption, setActiveOption] = React.useState<string | undefined>('');
 
     const [, forceUpdate] = React.useReducer((x) => x + 1, 0);
+
+    const menuDimension: MenuDimensions = dimension === 'xl' ? 'l' : dimension;
 
     const handleOptionSelect = (option: string) => {
       onOptionSelect?.(option);
@@ -178,6 +182,7 @@ export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps
               text={text}
               searchText={props.value || inputRef.current?.value || ''}
               highlightFormat={highlightFormat}
+              dimension={menuDimension}
               {...options}
             />
           ),
@@ -185,7 +190,7 @@ export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps
       } else {
         return [];
       }
-    }, [options, props.dimension, props.value, inputRef.current?.value]);
+    }, [options, dimension, props.value, inputRef.current?.value]);
 
     React.useEffect(() => {
       if (isSuggestPanelOpen) {
@@ -201,6 +206,7 @@ export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps
         status={status}
         skeleton={skeleton}
         isLoading={isLoading}
+        dimension={dimension}
         showTooltip={!isSuggestPanelOpen && !skeleton}
         onKeyDown={(...p) => {
           props.onKeyDown?.(...p);
@@ -219,7 +225,7 @@ export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps
           <SuggestDropdownContainer
             targetRef={portalTargetRef || inputRef}
             alignSelf={alignDropdown}
-            data-dimension={props.dimension || TextInput.defaultProps?.dimension}
+            data-dimension={dimension}
             dropContainerCssMixin={dropContainerCssMixin}
           >
             {options.length === 0 && !isLoading ? (
@@ -229,6 +235,7 @@ export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps
             ) : (
               <Menu
                 model={model}
+                dimension={menuDimension}
                 maxHeight={dropMaxHeight}
                 active={activeOption}
                 onActivateItem={setActiveOption}

@@ -19,6 +19,7 @@ import { createOptions, formDataToObject, shouldRender, wait } from './utils';
 import { OPTIONS, OPTIONS_ASYNC, OPTIONS_SIMPLE } from './data';
 import { ExtraText, Form, FormValuesWrapper, Icon, StyledGroup, TextWrapper } from './styled';
 import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
+import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 export default {
   title: 'Admiral-2.1/Input/Select/режим "select"',
@@ -85,22 +86,28 @@ export default {
     skeleton: {
       control: { type: 'boolean' },
     },
+    alignDropdown: {
+      options: [undefined, 'auto', 'flex-start', 'flex-end', 'center', 'baseline', 'stretch'],
+      control: { type: 'select' },
+    },
   },
 } as ComponentMeta<typeof Select>;
 
 const SelectSimpleTemplate: ComponentStory<typeof Select> = (props) => {
+  const cleanProps = cleanUpProps(props);
+
   const [selectValue, setSelectValue] = React.useState('');
 
   const onChange = (e: ChangeEvent<HTMLSelectElement>) => setSelectValue(e.target.value);
 
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = (cleanProps as any).themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 
   return (
     <ThemeProvider theme={swapBorder}>
-      <Select {...props} value={selectValue} onChange={onChange} placeholder="Select option">
+      <Select {...cleanProps} value={selectValue} onChange={onChange} placeholder="Select option">
         <Option value="Анигиляторная пушка">Анигиляторная пушка</Option>
         <Option value="Похо Торо Моронго">Похо Торо Моронго</Option>
         <Option value="Саша Даль">Саша Даль</Option>
@@ -396,6 +403,8 @@ const TemplateSimpleMultiSelect: ComponentStory<typeof Select> = (props) => {
 };
 
 const TemplateMultiSelect: ComponentStory<typeof Select> = (props) => {
+  const cleanProps = cleanUpProps(props);
+
   const [selectValue, setSelectValue] = React.useState<string[]>(
     Array.from({ length: 20 })
       .map((_, ind) => String(ind))
@@ -411,7 +420,7 @@ const TemplateMultiSelect: ComponentStory<typeof Select> = (props) => {
   return (
     <>
       <Select
-        {...props}
+        {...cleanProps}
         value={selectValue}
         multiple={true}
         onChange={onChange}

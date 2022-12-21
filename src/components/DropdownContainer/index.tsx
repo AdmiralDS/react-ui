@@ -76,6 +76,8 @@ export const DropdownContainer = React.forwardRef<HTMLDivElement, React.PropsWit
     }, [containerRef]);
 
     const checkDropdownPosition = () => {
+      if (props.alignSelf && props.alignSelf !== 'auto') return;
+
       const node = containerRef.current;
       const targetNode = targetRef.current;
       if (node && targetNode) {
@@ -94,13 +96,20 @@ export const DropdownContainer = React.forwardRef<HTMLDivElement, React.PropsWit
 
         const rectWidth = rect.right - rect.left;
 
-        if (targetRect.right < rectWidth && viewportWidth - targetRect.left < rectWidth) {
+        // впишится ли контейнер во viewport, начиная от левого края target
+        const enoughWidthOnTheRight = viewportWidth - targetRect.left >= rectWidth;
+        // впишится ли контейнер во viewport, если его правой границей будет правый край target
+        const enoughWidthOnTheLeft = targetRect.right - 16 >= rectWidth;
+
+        const containerWiderTarget = rectWidth > targetRect.width;
+
+        if (!enoughWidthOnTheLeft && !enoughWidthOnTheRight) {
           node.style.alignSelf = 'center';
-        } else if (targetRect.right - 16 >= rectWidth && viewportWidth - targetRect.left >= rectWidth) {
-          node.style.alignSelf = '';
-        } else if (targetRect.right - 16 < rectWidth) {
+        } else if (enoughWidthOnTheLeft && enoughWidthOnTheRight) {
+          node.style.alignSelf = 'flex-end';
+        } else if (containerWiderTarget && !enoughWidthOnTheLeft && enoughWidthOnTheRight) {
           node.style.alignSelf = 'flex-start';
-        } else if (viewportWidth - targetRect.left < rectWidth) {
+        } else if (containerWiderTarget && !enoughWidthOnTheRight && enoughWidthOnTheLeft) {
           node.style.alignSelf = 'flex-end';
         }
       }
@@ -140,6 +149,7 @@ export const StyledDropdownContainer = styled(DropdownContainer)`
   ${(p) => p.theme.shadow['Shadow 08']}
   border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
   overflow: hidden;
+  width: max-content;
 `;
 
 StyledDropdownContainer.displayName = 'StyledDropdownContainer';

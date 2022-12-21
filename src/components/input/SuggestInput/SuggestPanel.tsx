@@ -1,8 +1,7 @@
 import * as React from 'react';
-import type { HTMLAttributes } from 'react';
 import styled from 'styled-components';
 import type { SuggestItem } from './';
-import type { RenderOptionProps } from '#src/components/Menu/MenuItem';
+import type { MenuItemProps } from '#src/components/Menu/MenuItem';
 import { MenuItem } from '#src/components/Menu/MenuItem';
 import type { HighlightFormat } from '#src/components/common/utils/getTextHighlightMeta';
 import { getTextHighlightMeta } from '#src/components/common/utils/getTextHighlightMeta';
@@ -25,7 +24,7 @@ const TextWrapper = styled.div`
   white-space: nowrap;
 `;
 
-export interface SuggestPanelProps extends SuggestItem, HTMLAttributes<HTMLDivElement>, RenderOptionProps {
+export interface SuggestPanelProps extends SuggestItem, MenuItemProps {
   text?: string;
   highlightFormat?: HighlightFormat;
 }

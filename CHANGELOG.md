@@ -2,6 +2,51 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.8.3](https://github.com/AdmiralDS/react-ui/compare/v3.8.2...v3.8.3) (2022-12-20)
+
+
+### Bug Fixes
+
+* **FileInputField:** add export ([dbc6563](https://github.com/AdmiralDS/react-ui/commit/dbc65636f41e25ce5bed7ff32f306155e8408b85))
+* **Table:** fix bug with negative values in onColumnResize callback ([90e99b1](https://github.com/AdmiralDS/react-ui/commit/90e99b19f93eaa62ef9999f623b5b229def48171))
+* **Table:** row with group name should not be scrolled ([505ff07](https://github.com/AdmiralDS/react-ui/commit/505ff07a19a34c86d1da35fe89a4cb7d6d4ccdc2))
+
+### [3.8.2](https://github.com/AdmiralDS/react-ui/compare/v3.8.1...v3.8.2) (2022-12-15)
+
+
+### Bug Fixes
+
+* **Select:** fix cycle deadlock ([1abdfba](https://github.com/AdmiralDS/react-ui/commit/1abdfbaf91592b94fdff980c55bae9c7e0af7b9c))
+* **Table:** fix bug with header checkbox and checkboxDisabled rows ([8d4a722](https://github.com/AdmiralDS/react-ui/commit/8d4a722c5588239bf2d702763fbc13d405f303d7))
+* **Table:** fix bug with horizontal scroll and group row width ([af3550e](https://github.com/AdmiralDS/react-ui/commit/af3550ecbee0fc3c5d403c41b02bbb441a2de7e2))
+* **Table:** fix bug with overflowMenu and horizontal scroll ([3d7c00b](https://github.com/AdmiralDS/react-ui/commit/3d7c00bca7c58858276c5a06ef26ea729962db7c))
+
+### [3.8.1](https://github.com/AdmiralDS/react-ui/compare/v3.8.0...v3.8.1) (2022-12-13)
+
+
+### Bug Fixes
+
+* **MenuButton:** set onChange prop to optional ([4be4e71](https://github.com/AdmiralDS/react-ui/commit/4be4e716bd001993d6f386cb056bbdfcc9ae89c1))
+* **MultiButton:** set onChange prop to optional ([7517bb2](https://github.com/AdmiralDS/react-ui/commit/7517bb2247554eea146a5f8b45b947f1714016a3))
+* **Select:** add passing props to native select ([401880a](https://github.com/AdmiralDS/react-ui/commit/401880a6beaa5278810970170b89a43bc6304d36))
+* **Select:** change state disabled option ([de038c6](https://github.com/AdmiralDS/react-ui/commit/de038c65be0ffaec822d86c780fd85105915b12f))
+* **StyledDropdownContainer:** fix DropdownContainer width to its content ([6388ef7](https://github.com/AdmiralDS/react-ui/commit/6388ef71bbe551a3375651bd521b36986c1b48e1))
+
+## [3.8.0](https://github.com/AdmiralDS/react-ui/compare/v3.7.0...v3.8.0) (2022-12-07)
+
+
+### Features
+
+* **Select:** show ClearIon only when option is selected ([0ce4ec9](https://github.com/AdmiralDS/react-ui/commit/0ce4ec9cf03c59846bd8741989d782ec1c94f585))
+* **Table:** add column argument to renderFilter callback, fix stories ([ca3460d](https://github.com/AdmiralDS/react-ui/commit/ca3460dfc6e7c2c9c08c7ae3c602017af571eac8))
+
+
+### Bug Fixes
+
+* **DropdownContainer:** fix infinity position recalculate ([a97a5fe](https://github.com/AdmiralDS/react-ui/commit/a97a5fea4997ab8aa08b4b749206379f69d607d3))
+* **FileInput:** fix bug with incompatible API changes ([9e1ddde](https://github.com/AdmiralDS/react-ui/commit/9e1dddee96bcdb79b910ed5ff1d43435640908f6))
+* **Select, Suggest:** pass dimension to dropdown container ([dcf2172](https://github.com/AdmiralDS/react-ui/commit/dcf2172cacea6267540591b1a99120190439d398))
+
 ## [3.7.0](https://github.com/AdmiralDS/react-ui/compare/v3.6.0...v3.7.0) (2022-12-01)
 
 

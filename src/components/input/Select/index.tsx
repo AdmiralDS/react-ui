@@ -77,7 +77,10 @@ export interface SelectProps extends Omit<React.InputHTMLAttributes<HTMLSelectEl
   /** @deprecated используйте maxRowCount **/
   idleHeight?: 'full' | 'fixed';
 
+  /** Минимальное количество строк поля в режиме multiple */
   minRowCount?: number | 'none';
+
+  /** Максимальное количество строк поля в режиме multiple */
   maxRowCount?: number | 'none';
 
   /** Референс на контейнер для правильного позиционирования выпадающего списка */
@@ -225,7 +228,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
               disabled: true,
             },
           ];
-    }, [isLoading, dropDownItems]);
+    }, [isLoading, dropDownItems, dimension]);
 
     const inputRef = React.useRef<HTMLInputElement | null>(null);
     const selectRef = React.useRef<HTMLSelectElement | null>(null);
@@ -528,6 +531,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
           multiple={multiple}
           disabled={disabled}
           options={constantOptions}
+          {...props}
           onChange={handleNativeControlChange}
         />
         <BorderedDiv />
@@ -545,6 +549,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
           {shouldRenderSelectValue && wrappedVisibleValue}
           {((placeholder && isEmpty) || !modeIsSelect) && (
             <Input
+              data-id={props.id}
               placeholder={isEmpty ? placeholder : ''}
               tabIndex={-1}
               ref={inputRef}
@@ -569,6 +574,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
             dropContainerCssMixin={dropContainerCssMixin}
           >
             <StyledMenu
+              dimension={dimension === 'xl' ? 'l' : dimension}
               active={activeItem}
               selected={Array.isArray(selectedValue) ? undefined : selectedValue}
               onActivateItem={setActiveItem}
