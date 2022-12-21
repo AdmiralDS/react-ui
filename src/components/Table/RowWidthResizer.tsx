@@ -51,61 +51,65 @@ type ResizerProps = {
 
 export function RowWidthResizer({ width, name, disabled, dimension, columnMinWidth, onChange }: ResizerProps) {
   const node = React.useRef<HTMLDivElement | null>(null);
-  const clientXRef = React.useRef(0);
+  // const clientXRef = React.useRef(0);
   const [isTaken, setTaken] = React.useState(false);
 
   const handleMouseMove = (e: MouseEvent) => {
-    if (isTaken && clientXRef.current) {
+    if (isTaken) {
       e.preventDefault();
-      let newWidth = width - (clientXRef.current - e.clientX);
+      const width = Number(node.current?.parentElement?.dataset.resize) || 0;
+      // let newWidth = width - (clientXRef.current - e.clientX);
+      let newWidth = width - ((node.current?.getBoundingClientRect().right || 0) - e.clientX);
       newWidth = newWidth >= columnMinWidth ? newWidth : columnMinWidth;
       if (width !== newWidth) {
         onChange({ name, width: newWidth });
       }
-      clientXRef.current = e.clientX;
+      // clientXRef.current = e.clientX;
     }
   };
 
-  const [updateOnMove, freeResources] = throttle(handleMouseMove, 50);
+  const [updateOnMove, freeResources] = throttle(handleMouseMove, 0);
 
   React.useEffect(() => {
     if (!disabled) {
-      document.addEventListener('mousedown', handleMouseDown);
+      // document.addEventListener('mousedown', handleMouseDown);
       document.addEventListener('mousemove', updateOnMove);
       document.addEventListener('mouseup', handleMouseUp);
 
       return () => {
         freeResources();
-        document.removeEventListener('mousedown', handleMouseDown);
+        // document.removeEventListener('mousedown', handleMouseDown);
         document.removeEventListener('mousemove', updateOnMove);
         document.removeEventListener('mouseup', handleMouseUp);
       };
     }
   });
 
-  const handleMouseDown = (e: MouseEvent) => {
-    if (e.target === node.current) {
-      e.preventDefault();
-      setTaken(true);
-      clientXRef.current = e.clientX;
-    }
+  const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+    // if (e.target === node.current) {
+    e.preventDefault();
+    setTaken(true);
+    // clientXRef.current = e.clientX;
+    // }
   };
 
   const handleMouseUp = (e: MouseEvent) => {
-    if (isTaken && clientXRef.current) {
+    if (isTaken) {
       e.preventDefault();
-      let newWidth = width - (clientXRef.current - e.clientX);
+      const width = Number(node.current?.parentElement?.dataset.resize) || 0;
+      let newWidth = width - ((node.current?.getBoundingClientRect().right || 0) - e.clientX);
+      // let newWidth = width - (clientXRef.current - e.clientX);
       newWidth = newWidth >= columnMinWidth ? newWidth : columnMinWidth;
       setTaken(false);
       if (width !== newWidth) {
         onChange({ name, width: newWidth });
       }
-      clientXRef.current = e.clientX;
+      // clientXRef.current = e.clientX;
     }
   };
 
   return (
-    <ResizerWrapper ref={node} disabled={disabled} dimension={dimension}>
+    <ResizerWrapper ref={node} disabled={disabled} dimension={dimension} onMouseDown={handleMouseDown}>
       <Resizer />
     </ResizerWrapper>
   );

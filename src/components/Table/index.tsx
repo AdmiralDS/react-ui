@@ -279,13 +279,14 @@ export const Table: React.FC<TableProps> = ({
   const checkboxDimension = dimension === 's' || dimension === 'm' ? 's' : 'm';
   const columnMinWidth = dimension === 's' || dimension === 'm' ? COLUMN_MIN_WIDTH_M : COLUMN_MIN_WIDTH_L;
 
-  const [cols, setColumns] = React.useState([...columnList]);
+  // const [cols, setColumns] = React.useState([...columnList]);
   const [verticalScroll, setVerticalScroll] = React.useState(false);
   const [tableWidth, setTableWidth] = React.useState(0);
   const [bodyHeight, setBodyHeight] = React.useState(0);
   const [scrollbar, setScrollbarSize] = React.useState(0);
 
-  const stickyColumns = [...cols].filter((col) => col.sticky);
+  // const stickyColumns = [...cols].filter((col) => col.sticky);
+  const stickyColumns = [...columnList].filter((col) => col.sticky);
 
   const tableRef = React.useRef<HTMLDivElement>(null);
   const headerRef = React.useRef<HTMLDivElement>(null);
@@ -593,7 +594,8 @@ export const Table: React.FC<TableProps> = ({
       key={`head_${column.name}`}
       column={column}
       index={index}
-      columnsAmount={cols.length}
+      // columnsAmount={cols.length}
+      columnsAmount={columnList.length}
       showDividerForLastColumn={showDividerForLastColumn}
       disableColumnResize={disableColumnResize}
       headerLineClamp={headerLineClamp}
@@ -608,7 +610,12 @@ export const Table: React.FC<TableProps> = ({
   );
 
   const renderBodyCell = (row: TableRow, col: Column) => {
+    const headerColumn: HTMLElement | undefined = headerRef.current?.querySelectorAll<HTMLElement>(
+      `[data-column="${col.name}"]`,
+    )[0];
+    const width = Number(headerColumn?.dataset.resize) || DEFAULT_COLUMN_WIDTH;
     const colWidth = col.width ? (typeof col.width === 'number' ? col.width + 'px' : col.width) : DEFAULT_COLUMN_WIDTH;
+    // const colWidth = width;
     return (
       <Cell
         key={`${row.id}_${col.name}`}
@@ -654,7 +661,8 @@ export const Table: React.FC<TableProps> = ({
       row={row}
       dimension={dimension}
       checkboxDimension={checkboxDimension}
-      columns={cols}
+      columns={columnList}
+      // columns={cols}
       stickyColumns={stickyColumns}
       displayRowExpansionColumn={displayRowExpansionColumn}
       displayRowSelectionColumn={displayRowSelectionColumn}
@@ -761,7 +769,8 @@ export const Table: React.FC<TableProps> = ({
               {stickyColumns.length > 0 && stickyColumns.map((col, index) => renderHeaderCell(col as Column, index))}
             </StickyWrapper>
           )}
-          {cols.map((col, index) => (col.sticky ? null : renderHeaderCell(col as Column, index)))}
+          {/* {cols.map((col, index) => (col.sticky ? null : renderHeaderCell(col as Column, index)))} */}
+          {columnList.map((col, index) => (col.sticky ? null : renderHeaderCell(col as Column, index)))}
           <Filler />
         </Header>
       </HeaderWrapper>
