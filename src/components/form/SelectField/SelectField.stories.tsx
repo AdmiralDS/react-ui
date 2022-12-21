@@ -305,6 +305,19 @@ const AsyncTemplate: ComponentStory<typeof SelectField> = (props) => {
     })();
   }, [searchValue]);
 
+  // Пример работы с нативным событием клавиатуры на внутреннем input
+  const inputRef = React.useRef<HTMLInputElement | null>(null);
+  React.useEffect(() => {
+    function keyboardEventListener(e: KeyboardEvent) {
+      console.log(`Нативное событие ${e}`);
+    }
+    const inputNode = inputRef.current;
+    if (inputNode) {
+      inputNode.addEventListener('keydown', keyboardEventListener);
+      return () => inputNode.removeEventListener('keydown', keyboardEventListener);
+    }
+  }, []);
+
   return (
     <>
       <SelectField
@@ -314,6 +327,8 @@ const AsyncTemplate: ComponentStory<typeof SelectField> = (props) => {
         isLoading={isLoading}
         onChange={onChange}
         onInputChange={onInputChange}
+        onInputKeyDown={(e) => console.log(e.key)}
+        inputTargetRef={inputRef}
       >
         {options.map((option) => (
           <Option key={option.value} value={option.value}>
