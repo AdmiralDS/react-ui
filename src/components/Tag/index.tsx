@@ -126,6 +126,8 @@ const Wrapper = styled.button<{
   &:hover,
   &:active {
     ${({ statusViaBackground, theme, clickable }) =>
+      clickable && !statusViaBackground ? `border: 1px solid ${theme.color['Neutral/Neutral 20']};` : ''}
+    ${({ statusViaBackground, theme, clickable }) =>
       clickable ? (statusViaBackground ? wrapperHover : `background: ${theme.color['Neutral/Neutral 20']};`) : ''}
   }
 
