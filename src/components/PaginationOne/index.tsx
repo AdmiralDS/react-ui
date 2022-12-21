@@ -1,6 +1,6 @@
 import * as React from 'react';
 import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
-import styled, { ThemeContext } from 'styled-components';
+import styled, { css, ThemeContext } from 'styled-components';
 import { LIGHT_THEME } from '#src/components/themes';
 import { typography } from '#src/components/Typography';
 import { ReactComponent as ChevronLeft } from '@admiral-ds/icons/build/system/ChevronLeftOutline.svg';
@@ -64,6 +64,13 @@ const ButtonsWrapper = styled.div`
 
 const StyledTextInput = styled(TextInput)<{ pageNumberInputWidth: string }>`
   width: ${(p) => p.pageNumberInputWidth};
+`;
+
+const extendMixin = (mixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>) => css`
+  width: auto;
+  min-width: 80px;
+
+  ${mixin};
 `;
 
 export interface PaginationOneProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'> {
@@ -264,7 +271,7 @@ export const PaginationOne: React.FC<PaginationOneProps> = ({
             disabled={pageSelectDisabled}
             aria-label={pageSelectLabel(page, totalPages)}
             dropMaxHeight={dropMaxHeight}
-            dropContainerCssMixin={dropContainerCssMixin}
+            dropContainerCssMixin={extendMixin(dropContainerCssMixin)}
             menuWidth={menuWidth}
             dropMenuDataAttributes={dropMenuProps}
             className="current-page-number-with-dropdown"
