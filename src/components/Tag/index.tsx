@@ -71,9 +71,9 @@ const wrapperBorder = css<{ border: TagKind | string }>`
     }};
 `;
 
-const wrapperHover = css<{ background: TagKind | string }>`
-  background: ${({ background, theme }) => {
-    switch (background) {
+const wrapperHover = css<{ backgroundHover: TagKind | string }>`
+  background: ${({ backgroundHover, theme }) => {
+    switch (backgroundHover) {
       case 'green':
         return theme.color['Success/Success 20'];
       case 'blue':
@@ -85,7 +85,7 @@ const wrapperHover = css<{ background: TagKind | string }>`
       case 'neutral':
         return theme.color['Neutral/Neutral 20'];
       default:
-        return background || theme.color['Neutral/Neutral 20'];
+        return backgroundHover || theme.color['Neutral/Neutral 20'];
     }
   }};
 `;
@@ -98,6 +98,7 @@ const Wrapper = styled.button<{
   statusViaBackground?: boolean;
   border: TagKind | string;
   background: TagKind | string;
+  backgroundHover: TagKind | string;
 }>`
   position: relative;
   box-sizing: border-box;
@@ -202,7 +203,7 @@ export interface TagVisualProps {
    * В случае когда статус задается через цвет фона и обводки, свойство background отвечает за цвет фона,
    * свойство border отвечает за цвет обводки.
    */
-  kind?: TagKind | { background: string; border?: string };
+  kind?: TagKind | { background: string; border?: string; backgroundHover?: string };
   /** Отображение статуса через цвет обводки и фона. По умолчанию, при statusViaBackground = false, отображение статуса
    * происходит через цветную статусную метку (цветной кружок рядом с текстом)
    */
@@ -253,6 +254,14 @@ export const Tag = React.forwardRef<HTMLElement, TagProps & TagInternalProps>(
       typeof kind === 'object' ? (kind.background ? kind.background : 'neutral') : (kind as TagKind);
     const border: TagKind | string =
       typeof kind === 'object' ? (!!kind.background && !!kind.border ? kind.border : 'neutral') : (kind as TagKind);
+    const backgroundHover: TagKind | string =
+      typeof kind === 'object'
+        ? kind.backgroundHover
+          ? kind.backgroundHover
+          : kind.background
+          ? kind.background
+          : 'neutral'
+        : (kind as TagKind);
 
     React.useLayoutEffect(() => {
       const element = textRef.current;
@@ -293,6 +302,7 @@ export const Tag = React.forwardRef<HTMLElement, TagProps & TagInternalProps>(
           statusViaBackground={statusViaBackground}
           border={border}
           background={background}
+          backgroundHover={backgroundHover}
           dimension={dimension}
           type="button"
           {...props}
