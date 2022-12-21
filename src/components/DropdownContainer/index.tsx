@@ -76,8 +76,6 @@ export const DropdownContainer = React.forwardRef<HTMLDivElement, React.PropsWit
     }, [containerRef]);
 
     const checkDropdownPosition = () => {
-      if (props.alignSelf && props.alignSelf !== 'auto') return;
-
       const node = containerRef.current;
       const targetNode = targetRef.current;
       if (node && targetNode) {
@@ -93,6 +91,8 @@ export const DropdownContainer = React.forwardRef<HTMLDivElement, React.PropsWit
         ) {
           setDisplayUpward(false);
         }
+
+        if (props.alignSelf && props.alignSelf !== 'auto') return;
 
         const rectWidth = rect.right - rect.left;
 
