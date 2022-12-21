@@ -86,6 +86,9 @@ export interface SelectProps extends Omit<React.InputHTMLAttributes<HTMLSelectEl
   /** Референс на контейнер для правильного позиционирования выпадающего списка */
   portalTargetRef?: React.RefObject<HTMLElement>;
 
+  /** Ref внутреннего input компонента */
+  inputTargetRef?: React.RefObject<HTMLInputElement>;
+
   /** Делает высоту компонента больше или меньше обычной */
   dimension?: ComponentDimension;
 
@@ -137,6 +140,18 @@ export interface SelectProps extends Omit<React.InputHTMLAttributes<HTMLSelectEl
 
   /** Событие закрытия выпадающего списка опций */
   onChangeDropDownState?: (opened: boolean) => void;
+
+  /** Inner input keyboard event handler */
+  onInputKeyDown?: React.KeyboardEventHandler<HTMLInputElement>;
+
+  /** Inner input keyboard event handler */
+  onInputKeyUp?: React.KeyboardEventHandler<HTMLInputElement>;
+
+  /** Inner input keyboard event handler */
+  onInputKeyUpCapture?: React.KeyboardEventHandler<HTMLInputElement>;
+
+  /** Inner input keyboard event handler */
+  onInputKeyDownCapture?: React.KeyboardEventHandler<HTMLInputElement>;
 }
 
 export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
@@ -149,6 +164,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       status,
       icons,
       portalTargetRef,
+      inputTargetRef,
       disabled,
       readOnly,
       placeholder,
@@ -177,6 +193,10 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       renderDropDownBottomPanel,
       forcedOpen = false,
       onChangeDropDownState,
+      onInputKeyDown,
+      onInputKeyUp,
+      onInputKeyUpCapture,
+      onInputKeyDownCapture,
       ...props
     },
     ref,
@@ -230,7 +250,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
           ];
     }, [isLoading, dropDownItems, dimension]);
 
-    const inputRef = React.useRef<HTMLInputElement | null>(null);
+    const inputRef = inputTargetRef ?? React.useRef<HTMLInputElement | null>(null);
     const selectRef = React.useRef<HTMLSelectElement | null>(null);
     const containerRef = React.useRef<HTMLDivElement | null>(null);
     const valueWrapperRef = React.useRef<HTMLDivElement>(null);
@@ -560,6 +580,10 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
               isMultiple={multiple}
               dimension={dimension}
               onChange={onLocalInputChange}
+              onKeyDown={onInputKeyDown}
+              onKeyUp={onInputKeyUp}
+              onKeyUpCapture={onInputKeyUpCapture}
+              onKeyDownCapture={onInputKeyDownCapture}
             />
           )}
         </ValueWrapper>
