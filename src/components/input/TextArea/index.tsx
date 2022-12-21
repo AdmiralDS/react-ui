@@ -285,14 +285,13 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
 
     const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
       if (autoHeight) {
-        const textareaLineHeight = 24;
+        const textareaLineHeight = props.dimension === 's' ? 20 : 24;
         const previousRows = e.target.rows;
         e.target.rows = rows;
         const currentRows = ~~(e.target.scrollHeight / textareaLineHeight);
         if (currentRows === previousRows) {
           e.target.rows = currentRows;
-        }
-        if (currentRows >= previousRows) {
+        } else if (currentRows > previousRows) {
           e.target.rows = currentRows;
           e.target.scrollTop = e.target.scrollHeight;
         }
@@ -301,6 +300,15 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
       }
       props.onChange?.(e);
     };
+
+    React.useEffect(() => {
+      if (inputRef.current) {
+        const textareaLineHeight = props.dimension === 's' ? 20 : 24;
+        const currentRows = ~~(inputRef.current.scrollHeight / textareaLineHeight);
+        const rowCount = currentRows > rows ? currentRows : rows;
+        setTextRows(rowCount);
+      }
+    }, []);
 
     return (
       <Container
