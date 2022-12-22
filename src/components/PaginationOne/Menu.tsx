@@ -94,6 +94,8 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
       options,
       selected,
       onSelectItem = (id: string) => undefined,
+      active,
+      onActivateItem = (id?: string) => undefined,
       dropMaxHeight,
       dropContainerCssMixin,
       menuWidth,
@@ -135,6 +137,8 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
         disabled={disabled}
         selected={selected}
         onSelectItem={onSelectItem}
+        active={active}
+        onActivateItem={onActivateItem}
         isVisible={isVisible}
         onVisibilityChange={onVisibilityChange}
         onClickOutside={onClickOutside}

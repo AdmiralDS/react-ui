@@ -157,20 +157,28 @@ export const PaginationOne: React.FC<PaginationOneProps> = ({
 
   const [isVisible, setIsVisible] = React.useState(false);
   const [selectedPageNumber, setSelectedPageNumber] = React.useState(page.toString());
-  const [inputPageNumber, setInputPageNumber] = React.useState('');
+  const [activePageNumber, setActivePageNumber] = React.useState<string | undefined>(page.toString());
+  const [inputPageNumber, setInputPageNumber] = React.useState(page.toString());
 
   const pageNumberInputRef = React.useRef<HTMLInputElement>(null);
 
   const handleVisibilityChange = (isVisible: boolean) => {
-    if (isVisible) {
-      setInputPageNumber('');
-    }
     setIsVisible(isVisible);
   };
 
+  const handlePageInputHover = (activePage?: string) => {
+    if (activePage) {
+      setActivePageNumber(activePage);
+      setInputPageNumber(activePage);
+    }
+  };
+
   const parsePageNumber = (pageSelected: string) => {
+    if (pageSelected === '') {
+      return parseInt(selectedPageNumber);
+    }
     const page = parseInt(pageSelected);
-    if (page < 1) {
+    if (isNaN(page) || page < 1) {
       return 1;
     } else if (page > totalPages) {
       return totalPages;
@@ -186,6 +194,8 @@ export const PaginationOne: React.FC<PaginationOneProps> = ({
   const handlePageInputChange = (pageSelected: string) => {
     const page = parsePageNumber(pageSelected);
     setSelectedPageNumber(page.toString());
+    setInputPageNumber(page.toString());
+    setActivePageNumber(page.toString());
     onChange({
       page,
       pageSize,
@@ -208,6 +218,7 @@ export const PaginationOne: React.FC<PaginationOneProps> = ({
 
   React.useEffect(() => {
     if (isVisible && pageNumberInputRef) {
+      pageNumberInputRef.current?.select();
       pageNumberInputRef.current?.focus();
     }
   }, [isVisible]);
@@ -216,17 +227,17 @@ export const PaginationOne: React.FC<PaginationOneProps> = ({
     let inputValue = e.target.value;
     inputValue = inputValue.replace(/\D/g, '');
     setInputPageNumber(inputValue);
+    setActivePageNumber(parsePageNumber(inputValue).toString());
   };
 
   const handleInputPageNumberKeyDown = (e: React.KeyboardEvent) => {
     const code = keyboardKey.getCode(e);
 
-    // prevent selecting option on Space press
-    if (code === keyboardKey[' ']) {
-      e.stopPropagation();
-    } else if (code === keyboardKey.Enter) {
+    if (code === keyboardKey.Enter) {
       handlePageInputChange(inputPageNumber);
       setIsVisible(false);
+    } else if (code === keyboardKey.ArrowDown || code === keyboardKey.ArrowUp) {
+      pageNumberInputRef.current?.blur();
     }
   };
 
@@ -264,6 +275,8 @@ export const PaginationOne: React.FC<PaginationOneProps> = ({
             options={pages}
             selected={selectedPageNumber}
             onSelectItem={handlePageInputChange}
+            active={activePageNumber}
+            onActivateItem={handlePageInputHover}
             disabled={pageSelectDisabled}
             aria-label={pageSelectLabel(page, totalPages)}
             dropMaxHeight={dropMaxHeight}
