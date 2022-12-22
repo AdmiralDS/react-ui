@@ -14,11 +14,12 @@ import { PlusOutline } from '#src/icons/IconComponents-service';
 import { CustomOptionWrapper } from '../styled';
 import type { RenderOptionProps } from '#src/components/Menu/MenuItem';
 import { T } from '#src/components/T';
-import { createOptions, formDataToObject, shouldRender, wait } from './utils';
+import { createOptions, formDataToObject, wait } from './utils';
 import { OPTIONS, OPTIONS_ASYNC, OPTIONS_SIMPLE } from './data';
 import { ExtraText, Form, FormValuesWrapper, Icon, Separator, StyledGroup, TextWrapper } from './styled';
 import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+import type { SearchFormat } from '#src/components/input/Select/Stories/types';
 
 export default {
   title: 'Admiral-2.1/Input/Select/режим "searchSelect"',
@@ -91,6 +92,27 @@ export default {
     },
   },
 } as ComponentMeta<typeof Select>;
+
+export const shouldRender = (text = '', searchValue = '', searchFormat: SearchFormat = 'wholly') => {
+  const strings = searchFormat === 'word' ? searchValue.split(' ') : [searchValue];
+  const chunks = strings.filter(Boolean).map((chunk) => chunk.toLowerCase());
+
+  const specialCharacters = ['[', ']', '\\', '^', '$', '.', '|', '?', '*', '+', '(', ')'];
+
+  const pattern = chunks
+    .map((chunk) => {
+      const chunkForRegExp = chunk
+        .split('')
+        .map((letter) => (specialCharacters.includes(letter) ? `\\${letter}` : letter))
+        .join('');
+      return `(${chunkForRegExp})?`;
+    })
+    .join('');
+
+  const parts = text.split(new RegExp(pattern, 'gi')).filter(Boolean);
+
+  return !searchValue ? true : parts.some((part) => chunks.includes(part.toLowerCase()));
+};
 
 const TemplateSearchSelectWithFilter: ComponentStory<typeof Select> = (props) => {
   const cleanProps = cleanUpProps(props);

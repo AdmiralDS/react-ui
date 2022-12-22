@@ -11,6 +11,8 @@ import { DataAttributesDescription } from '#src/components/form/common';
 import type { RenderOptionProps } from '#src/components/Menu/MenuItem';
 import { CustomOptionWrapper } from '#src/components/input/Select/styled';
 import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
+import { T } from '#src/components/T';
+import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 export default {
   title: 'Admiral-2.1/Form Field/SelectField',
@@ -120,6 +122,10 @@ const ExtraText = styled.div`
   color: #626f84;
 `;
 
+const Separator = styled.div`
+  height: 20px;
+`;
+
 const OPTIONS_SIMPLE = [
   'teeext 1',
   'text 2 text text 2 text text 2 text text 2 text text 2 text text 2 text text 2 text ',
@@ -127,6 +133,9 @@ const OPTIONS_SIMPLE = [
   'text 4',
   'text 5',
   'texttt 6',
+  'text 7',
+  'Ответ на «Главный вопрос жизни, вселенной и всего такого»',
+  'text 69',
 ];
 
 const OPTIONS = [
@@ -158,8 +167,48 @@ async function wait(ms: number) {
   });
 }
 
+type SearchFormat = 'word' | 'wholly';
+const shouldRender = (text = '', searchValue = '', searchFormat: SearchFormat = 'wholly') => {
+  const strings = searchFormat === 'word' ? searchValue.split(' ') : [searchValue];
+  const chunks = strings.filter(Boolean).map((chunk) => chunk.toLowerCase());
+
+  const specialCharacters = ['[', ']', '\\', '^', '$', '.', '|', '?', '*', '+', '(', ')'];
+
+  const pattern = chunks
+    .map((chunk) => {
+      const chunkForRegExp = chunk
+        .split('')
+        .map((letter) => (specialCharacters.includes(letter) ? `\\${letter}` : letter))
+        .join('');
+      return `(${chunkForRegExp})?`;
+    })
+    .join('');
+
+  const parts = text.split(new RegExp(pattern, 'gi')).filter(Boolean);
+
+  return !searchValue ? true : parts.some((part) => chunks.includes(part.toLowerCase()));
+};
+
 const SimpleTemplate: ComponentStory<typeof SelectField> = (props) => {
+  const cleanProps = cleanUpProps(props);
+
   const [selectValue, setSelectValue] = React.useState('');
+  const [searchValue, setSearchValue] = React.useState('');
+
+  const renderOptions = () => {
+    return OPTIONS_SIMPLE.map(
+      (option, ind) =>
+        shouldRender(option, searchValue) && (
+          <Option key={option} value={option} disabled={ind === 4}>
+            {option}
+          </Option>
+        ),
+    ).filter((item) => !!item);
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchValue(e.target.value);
+  };
 
   const onChange = (e: ChangeEvent<HTMLSelectElement>) => {
     setSelectValue(e.target.value);
@@ -173,21 +222,23 @@ const SimpleTemplate: ComponentStory<typeof SelectField> = (props) => {
 
   return (
     <ThemeProvider theme={swapBorder}>
+      <T font="Body/Body 2 Long" as="div">
+        Фильтрация элементов списка осуществляется вызывающим кодом
+        <br />В данном примере показан один из возможных способов
+      </T>
+      <Separator />
       <SelectField
         data-container-id="selectFieldIdOne"
-        {...props}
+        {...cleanProps}
         mode="searchSelect"
         label="Label"
         className="Search"
         value={selectValue}
+        onInputChange={handleInputChange}
         onChange={onChange}
         placeholder="Placeholder"
       >
-        {OPTIONS_SIMPLE.map((option, ind) => (
-          <Option key={option} value={option} disabled={ind === 4}>
-            {option}
-          </Option>
-        ))}
+        {renderOptions()}
       </SelectField>
     </ThemeProvider>
   );
