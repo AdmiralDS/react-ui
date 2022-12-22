@@ -162,17 +162,6 @@ export const PaginationOne: React.FC<PaginationOneProps> = ({
 
   const pageNumberInputRef = React.useRef<HTMLInputElement>(null);
 
-  const handleVisibilityChange = (isVisible: boolean) => {
-    setIsVisible(isVisible);
-  };
-
-  const handlePageInputHover = (activePage?: string) => {
-    if (activePage) {
-      setActivePageNumber(activePage);
-      setInputPageNumber(activePage);
-    }
-  };
-
   const parsePageNumber = (pageSelected: string) => {
     if (pageSelected === '') {
       return parseInt(selectedPageNumber);
@@ -186,6 +175,18 @@ export const PaginationOne: React.FC<PaginationOneProps> = ({
     return page;
   };
 
+  const handlePageInputHover = (activePage?: string) => {
+    if (activePage) {
+      setActivePageNumber(activePage);
+      setInputPageNumber(activePage);
+    }
+  };
+
+  const handleClosePageNumberDropMenu = (pageNumber: string) => {
+    handlePageInputHover(pageNumber);
+    setIsVisible(false);
+  };
+
   const handleSizeChange = (pageSizeSelected: string) => {
     const pageSize = parseInt(pageSizeSelected);
     onChange({ page: 1, pageSize: pageSize });
@@ -194,13 +195,11 @@ export const PaginationOne: React.FC<PaginationOneProps> = ({
   const handlePageInputChange = (pageSelected: string) => {
     const page = parsePageNumber(pageSelected);
     setSelectedPageNumber(page.toString());
-    setInputPageNumber(page.toString());
-    setActivePageNumber(page.toString());
     onChange({
       page,
       pageSize,
     });
-    handleVisibilityChange(false);
+    handleClosePageNumberDropMenu(page.toString());
   };
 
   const pageIncrement = () => onChange({ page: page + 1, pageSize });
@@ -209,11 +208,15 @@ export const PaginationOne: React.FC<PaginationOneProps> = ({
   const dropMenuProps = passDropdownDataAttributes(props);
 
   const handleClickOutside = (e: Event) => {
-    handleVisibilityChange(false);
+    handleClosePageNumberDropMenu(selectedPageNumber);
   };
 
   const handleMenuButtonClick = (e: React.MouseEvent<HTMLElement>) => {
-    handleVisibilityChange(!isVisible);
+    if (isVisible) {
+      handleClosePageNumberDropMenu(selectedPageNumber);
+    } else {
+      setIsVisible(true);
+    }
   };
 
   React.useEffect(() => {
@@ -238,6 +241,8 @@ export const PaginationOne: React.FC<PaginationOneProps> = ({
       setIsVisible(false);
     } else if (code === keyboardKey.ArrowDown || code === keyboardKey.ArrowUp) {
       pageNumberInputRef.current?.blur();
+    } else if (code === keyboardKey.Escape) {
+      handleClosePageNumberDropMenu(selectedPageNumber);
     }
   };
 
@@ -285,7 +290,7 @@ export const PaginationOne: React.FC<PaginationOneProps> = ({
             dropMenuDataAttributes={dropMenuProps}
             className="current-page-number-with-dropdown"
             isVisible={isVisible}
-            onVisibilityChange={handleVisibilityChange}
+            onVisibilityChange={setIsVisible}
             onClickOutside={handleClickOutside}
             onClick={handleMenuButtonClick}
             renderTopPanel={
