@@ -93,7 +93,7 @@ export default {
   },
 } as ComponentMeta<typeof Select>;
 
-export const shouldRender = (text = '', searchValue = '', searchFormat: SearchFormat = 'wholly') => {
+const shouldRender = (text = '', searchValue = '', searchFormat: SearchFormat = 'wholly') => {
   const strings = searchFormat === 'word' ? searchValue.split(' ') : [searchValue];
   const chunks = strings.filter(Boolean).map((chunk) => chunk.toLowerCase());
 

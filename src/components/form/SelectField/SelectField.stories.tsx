@@ -391,10 +391,12 @@ const AsyncTemplate: ComponentStory<typeof SelectField> = (props) => {
   );
 };
 
+const createOptions = (length: number) => Array.from({ length }).map((option, index) => String(index));
+
 const TemplateSimpleMultiSelect: ComponentStory<typeof SelectField> = (props) => {
-  const [selectValue, setSelectValue] = React.useState<string[]>(
-    Array.from({ length: 10 }).map((_, ind) => String(ind)),
-  );
+  const [selectValue, setSelectValue] = React.useState<string[]>(createOptions(4));
+  const [searchValue, setSearchValue] = React.useState('');
+  const [options] = React.useState(createOptions(20));
 
   const onChange = (e: ChangeEvent<HTMLSelectElement>) => {
     const newValues = Array.from(e.target.selectedOptions).map((option) => option.value);
@@ -402,8 +404,30 @@ const TemplateSimpleMultiSelect: ComponentStory<typeof SelectField> = (props) =>
     props.onChange?.(e);
   };
 
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchValue(e.target.value);
+  };
+
+  const renderOptions = () => {
+    return options
+      .map(
+        (option) =>
+          (selectValue.includes(option) || shouldRender(option, searchValue)) && (
+            <Option key={option} value={option}>
+              {`${option}0000`}
+            </Option>
+          ),
+      )
+      .filter((item) => !!item);
+  };
+
   return (
     <>
+      <T font="Body/Body 2 Long" as="div">
+        Фильтрация элементов списка осуществляется вызывающим кодом
+        <br />В данном примере показан один из возможных способов
+      </T>
+      <Separator />
       <SelectField
         mode="searchSelect"
         label="label"
@@ -412,12 +436,9 @@ const TemplateSimpleMultiSelect: ComponentStory<typeof SelectField> = (props) =>
         onChange={onChange}
         dimension="xl"
         displayClearIcon={true}
+        onInputChange={handleInputChange}
       >
-        {Array.from({ length: 20 }).map((_option, ind) => (
-          <Option key={ind} value={String(ind)}>
-            {`${ind}0000`}
-          </Option>
-        ))}
+        {renderOptions()}
       </SelectField>
     </>
   );
@@ -446,7 +467,7 @@ const TemplateNotFixedMultiSelect: ComponentStory<typeof SelectField> = (props) 
         value={selectValue}
         multiple={true}
         onChange={onChange}
-        idleHeight="full"
+        maxRowCount={3}
         dropContainerCssMixin={containerContrastBorder}
       >
         {Array.from({ length: 20 }).map((_option, ind) => (
