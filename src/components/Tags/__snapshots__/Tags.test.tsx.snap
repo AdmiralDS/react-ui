@@ -45,6 +45,7 @@ Object {
 
 .c1:hover,
 .c1:active {
+  border: 1px solid #D5D8DE;
   background: #D5D8DE;
 }
 
@@ -87,6 +88,7 @@ Object {
 
 .c4:hover,
 .c4:active {
+  border: 1px solid #D5D8DE;
   background: #D5D8DE;
 }
 
@@ -247,6 +249,7 @@ Object {
 
 .c1:hover,
 .c1:active {
+  border: 1px solid #D5D8DE;
   background: #D5D8DE;
 }
 
@@ -289,6 +292,7 @@ Object {
 
 .c4:hover,
 .c4:active {
+  border: 1px solid #D5D8DE;
   background: #D5D8DE;
 }
 

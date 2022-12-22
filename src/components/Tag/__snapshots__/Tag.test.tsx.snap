@@ -25,11 +25,6 @@ Object {
   cursor: default;
 }
 
-.c0:hover,
-.c0:active {
-  background: #D5D8DE;
-}
-
 .c0:focus-visible {
   outline: none;
 }
@@ -115,11 +110,6 @@ Object {
   -ms-flex-align: center;
   align-items: center;
   cursor: default;
-}
-
-.c0:hover,
-.c0:active {
-  background: #D5D8DE;
 }
 
 .c0:focus-visible {
@@ -263,11 +253,6 @@ Object {
   cursor: default;
 }
 
-.c0:hover,
-.c0:active {
-  background: #D5D8DE;
-}
-
 .c0:focus-visible {
   outline: none;
 }
@@ -333,11 +318,6 @@ Object {
   -ms-flex-align: center;
   align-items: center;
   cursor: default;
-}
-
-.c0:hover,
-.c0:active {
-  background: #D5D8DE;
 }
 
 .c0:focus-visible {
