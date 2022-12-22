@@ -64,25 +64,21 @@ export function RowWidthResizer(props: {
 
   React.useEffect(() => {
     if (!disabled) {
-      document.addEventListener('mousedown', handleMouseDown);
       document.addEventListener('mousemove', handleMouseMove);
       document.addEventListener('mouseup', handleMouseUp);
 
       return () => {
-        document.removeEventListener('mousedown', handleMouseDown);
         document.removeEventListener('mousemove', handleMouseMove);
         document.removeEventListener('mouseup', handleMouseUp);
       };
     }
   });
 
-  const handleMouseDown = (e: MouseEvent) => {
-    if (e.target === node.current) {
-      e.preventDefault();
-      setWidth(width);
-      setTaken(true);
-      setClientX(e.clientX);
-    }
+  const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    setWidth(width);
+    setTaken(true);
+    setClientX(e.clientX);
   };
 
   const handleMouseMove = (e: MouseEvent) => {
@@ -107,7 +103,7 @@ export function RowWidthResizer(props: {
   };
 
   return (
-    <ResizerWrapper ref={node} disabled={disabled} dimension={dimension}>
+    <ResizerWrapper ref={node} disabled={disabled} dimension={dimension} onMouseDown={handleMouseDown}>
       <Resizer />
     </ResizerWrapper>
   );
