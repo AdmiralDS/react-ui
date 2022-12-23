@@ -27,25 +27,24 @@ export const BorderedDiv = styled.div`
   border-radius: inherit;
 `;
 
-const getRowHeight = (dimension?: ComponentDimension) => (dimension === 's' ? 20 : 24);
+const ROW_HEIGHT = 24;
 
 const rowHeightStyle = css<{
   multiple?: boolean;
   opened?: boolean;
   minRowCount?: number;
   maxRowCount?: number;
-  dimension?: ComponentDimension;
 }>`
-  min-height: ${({ multiple, dimension, minRowCount }) => {
+  min-height: ${({ multiple, minRowCount }) => {
     if (!multiple || !minRowCount) return 'none';
 
-    return `${getRowHeight(dimension) * minRowCount + (minRowCount - 1) * 4}px`;
+    return `${ROW_HEIGHT * minRowCount + (minRowCount - 1) * 4}px`;
   }};
 
-  max-height: ${({ multiple, dimension, maxRowCount, opened }) => {
+  max-height: ${({ multiple, maxRowCount, opened }) => {
     if (!multiple || !maxRowCount || opened) return 'none';
 
-    return `${getRowHeight(dimension) * maxRowCount + (maxRowCount - 1) * 4}px`;
+    return `${ROW_HEIGHT * maxRowCount + (maxRowCount - 1) * 4}px`;
   }};
 `;
 
