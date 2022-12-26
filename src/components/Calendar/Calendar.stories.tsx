@@ -58,6 +58,9 @@ export default {
     maxDate: {
       control: false,
     },
+    highlightWeekend: {
+      control: { type: 'boolean' },
+    },
     themeBorderKind: {
       options: ALL_BORDER_RADIUS_VALUES,
       control: { type: 'radio' },

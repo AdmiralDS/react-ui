@@ -12,6 +12,7 @@ type DayComponentProps = {
   disabled?: boolean;
   inSelectingRange: boolean;
   outsideMonth?: boolean;
+  isWeekend?: boolean;
 };
 
 const DAY_SIZE = '36px';
@@ -63,6 +64,12 @@ export const DayComponent = styled.div<DayComponentProps>`
       color: ${theme.color['Neutral/Neutral 30']};
       opacity: 0;
       pointer-events: none;
+    `}
+
+  ${({ disabled, isWeekend, theme }) =>
+    isWeekend &&
+    `
+      color: ${disabled ? theme.color['Error/Error 30'] : theme.color['Error/Error 60 Main']};
     `}
 
   ${(p) => (p.disabled ? '' : hoverMixin)}

@@ -62,6 +62,9 @@ export interface CalendarPropType extends IDateSelectionProps {
   /** выбор вкладки - Год */
   onViewYearSelect?: () => void;
 
+  /** устанавливает подсветку выходных дней (сб и вс) */
+  highlightWeekend?: boolean;
+
   /** Коллбэк выбора даты, срабатывает при клике на дне (в режиме диапазона date - это массив из двух дат) */
   onChange(date: Date | Array<Date | null> | null, event?: SyntheticEvent<any>): void;
 
@@ -95,6 +98,7 @@ export interface IDayCalendarProps extends IDateCalendarBaseProps {
   day: Date;
   month: number;
   onMouseEnter: (date: Date, event: MouseEvent<HTMLDivElement>) => void;
+  highlightWeekend: boolean;
 }
 
 export type IWeekCalendarProps = IDayCalendarProps;
@@ -103,6 +107,7 @@ export interface IMonthCalendarProps extends IDateCalendarBaseProps {
   day: Date;
   onMouseEnter: (date: Date, event: MouseEvent<HTMLDivElement>) => void;
   onMouseLeave: () => void;
+  highlightWeekend: boolean;
 }
 
 export interface IYearsCalendarProps extends IDateCalendarBaseProps {

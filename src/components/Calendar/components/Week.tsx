@@ -21,6 +21,7 @@ export const Week: FC<IWeekCalendarProps> = ({
   filterDate,
   onMouseEnter,
   onClick,
+  highlightWeekend,
 }) => {
   const theme = React.useContext(ThemeContext) || LIGHT_THEME;
   const handleMouseEnter = (day: Date, e: any) => onMouseEnter && onMouseEnter(day, e);
@@ -44,6 +45,7 @@ export const Week: FC<IWeekCalendarProps> = ({
             filterDate={filterDate}
             onMouseEnter={(_, e) => handleMouseEnter(nextDay, e)}
             onClick={(_, e) => handleDayClick(nextDay, e)}
+            highlightWeekend={highlightWeekend}
           />
         );
       })}
