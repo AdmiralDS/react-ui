@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import * as React from 'react';
 
 import { DEFAULT_YEAR_COUNT } from './constants';
 import { getDefaultDateValidator } from './validator';
@@ -16,8 +16,7 @@ import {
   subYears,
 } from './date-utils';
 import { CalendarComponent } from './styled/CalendarComponent';
-import type { CalendarPropType, IDateSelectionProps } from './interfaces';
-import type { ViewScreenType } from './interfaces';
+import type { CalendarPropType, IDateSelectionProps, ViewScreenType } from './interfaces';
 
 export type { CalendarPropType, IDateSelectionProps, ViewScreenType };
 
@@ -63,16 +62,16 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarPropType>(
     };
 
     // дата, которую отображаем (в том числе в верхней панели)
-    const [viewDate, setViewDate] = useState(getInitialViewDate());
+    const [viewDate, setViewDate] = React.useState(getInitialViewDate());
     // активная дата, на которой сейчас ховер
-    const [activeDate, setActiveDate] = useState<Date | null>(null);
+    const [activeDate, setActiveDate] = React.useState<Date | null>(null);
     // отображаем выбор года
-    const [yearsView, setYearsView] = useState(false);
+    const [yearsView, setYearsView] = React.useState(false);
     // отображаем выбор месяца
-    const [monthsView, setMonthsView] = useState(false);
+    const [monthsView, setMonthsView] = React.useState(false);
 
     // показать экран выбора года или месяца в зависимости от внешнего параметра currentActiveView
-    useEffect(() => {
+    React.useEffect(() => {
       if (currentActiveView === 'MONTH') {
         setYearsView(false);
         setMonthsView(true);
@@ -87,22 +86,22 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarPropType>(
       }
     }, [currentActiveView]);
 
-    useEffect(() => {
+    React.useEffect(() => {
       setViewDate(getInitialViewDate());
     }, [selected]);
 
-    useEffect(() => {
+    React.useEffect(() => {
       if (range && startDate) {
         changeYear(startDate.getFullYear());
         changeMonth(startDate.getMonth());
       }
     }, []);
 
-    useEffect(() => {
+    React.useEffect(() => {
       yearsView ? onViewEnter && onViewEnter('YEAR') : onViewLeave && onViewLeave('YEAR');
     }, [yearsView]);
 
-    useEffect(() => {
+    React.useEffect(() => {
       monthsView ? onViewEnter && onViewEnter('MONTH') : onViewLeave && onViewLeave('MONTH');
     }, [monthsView]);
 
