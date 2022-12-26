@@ -188,7 +188,15 @@ const TemplateWithCards: ComponentStory<typeof Menu> = (args) => {
   );
 };
 
-const items = [
+type StoryItem = {
+  id: string;
+  label: string;
+  value: number;
+  disabled?: boolean;
+  readOnly?: boolean;
+};
+
+const STORY_ITEMS: Array<StoryItem> = [
   {
     id: '1',
     label: 'Option one',
@@ -228,7 +236,7 @@ const items = [
 
 const SimpleTemplate: ComponentStory<typeof Menu> = (args) => {
   const model = React.useMemo(() => {
-    return items.map((item) => ({
+    return STORY_ITEMS.map((item) => ({
       id: item.id,
       render: (options: RenderOptionProps) => (
         <MenuItem dimension={args.dimension} {...options} key={item.id}>
@@ -247,6 +255,36 @@ const SimpleTemplate: ComponentStory<typeof Menu> = (args) => {
     <ThemeProvider theme={swapBorder}>
       <Wrapper style={{ width: 'fit-content' }}>
         <Menu {...args} model={model} />
+      </Wrapper>
+    </ThemeProvider>
+  );
+};
+
+const ITEMS_WITH_DISABLED_ITEMS = [...STORY_ITEMS];
+ITEMS_WITH_DISABLED_ITEMS[0].disabled = true;
+ITEMS_WITH_DISABLED_ITEMS[6].disabled = true;
+const MenuWithLockCycleScrollTemplate: ComponentStory<typeof Menu> = (args) => {
+  const model = React.useMemo(() => {
+    return ITEMS_WITH_DISABLED_ITEMS.map((item) => ({
+      id: item.id,
+      disabled: item.disabled,
+      render: (options: RenderOptionProps) => (
+        <MenuItem dimension={args.dimension} {...options} key={item.id}>
+          {item.label}
+        </MenuItem>
+      ),
+    }));
+  }, [args.dimension]);
+
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
+    return theme;
+  }
+
+  return (
+    <ThemeProvider theme={swapBorder}>
+      <Wrapper style={{ width: 'fit-content' }}>
+        <Menu {...args} model={model} onForwardCycleApprove={() => false} onBackwardCycleApprove={() => false} />
       </Wrapper>
     </ThemeProvider>
   );
@@ -334,7 +372,7 @@ const MyMenuItem = ({
 
 const CustomItemTemplate: ComponentStory<typeof Menu> = (args) => {
   const model = React.useMemo(() => {
-    return items.map((item) => ({
+    return STORY_ITEMS.map((item) => ({
       id: item.id,
       render: (options: RenderOptionProps) => (
         <MyMenuItem success={item.id === '3'} {...options} key={item.id} text={item.label} />
@@ -445,7 +483,7 @@ const MenuCheckboxTemplate: ComponentStory<typeof Menu> = (args) => {
 
 const MenuRadiobuttonTemplate: ComponentStory<typeof Menu> = (args) => {
   const model = React.useMemo(() => {
-    return items.map((item) => ({
+    return STORY_ITEMS.map((item) => ({
       id: item.id,
       render: (options: RenderOptionProps) => (
         <MenuItem dimension={args.dimension} {...options} key={item.id}>
@@ -584,7 +622,7 @@ const ActionPanelFlex = css`
 
 const MenuActionsTwoButtonsTemplate: ComponentStory<typeof Menu> = (props) => {
   const model = React.useMemo(() => {
-    return items.map((item) => ({
+    return STORY_ITEMS.map((item) => ({
       id: item.id,
       render: (options: RenderOptionProps) => (
         <MenuItem dimension={props.dimension} {...options} key={item.id}>
@@ -592,7 +630,7 @@ const MenuActionsTwoButtonsTemplate: ComponentStory<typeof Menu> = (props) => {
         </MenuItem>
       ),
     }));
-  }, [props.dimension, items]);
+  }, [props.dimension, STORY_ITEMS]);
 
   function swapBorder(theme: Theme): Theme {
     theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
@@ -638,7 +676,7 @@ const MenuActionsAddUserValueTemplate: ComponentStory<typeof Menu> = (props) => 
   const initialButtonText = 'Добавить';
   const theme = React.useContext(ThemeContext) || LIGHT_THEME;
 
-  const [options, setOptions] = React.useState([...items]);
+  const [options, setOptions] = React.useState([...STORY_ITEMS]);
   const [inputValue, setInputValue] = React.useState<string>('');
   const [buttonText, setButtonText] = React.useState<string>(initialButtonText);
   const [buttonDisabled, setButtonDisabled] = React.useState<boolean>(true);
@@ -893,6 +931,7 @@ const MenuCheckboxGroupTemplate: ComponentStory<typeof Menu> = (args) => {
 };
 
 export const Simple = SimpleTemplate.bind({});
+export const MenuWithLockCycleScroll = MenuWithLockCycleScrollTemplate.bind({});
 export const Category = TemplateWithCards.bind({});
 export const CustomItems = CustomItemTemplate.bind({});
 export const MenuCheckbox = MenuCheckboxTemplate.bind({});
@@ -904,6 +943,7 @@ export const MenuActionsAddUserValue = MenuActionsAddUserValueTemplate.bind({});
 export const MenuCheckboxGroup = MenuCheckboxGroupTemplate.bind({});
 
 Simple.storyName = 'Базовый пример';
+MenuWithLockCycleScroll.storyName = 'Пример без цикла обхода пунктов';
 Category.storyName = 'Пример с группами';
 CustomItems.storyName = 'Пример с кастомными пунктами меню';
 MenuCheckbox.storyName = 'Пример с Checkbox';
