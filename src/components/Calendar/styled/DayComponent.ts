@@ -51,10 +51,18 @@ export const DayComponent = styled.div<DayComponentProps>`
     border-radius: 50%;
   }
 
-  ${({ disabled, theme, outsideMonth }) =>
-    (disabled || outsideMonth) &&
+  ${({ disabled, theme }) =>
+    disabled &&
     `
       color: ${theme.color['Neutral/Neutral 30']};
+    `}
+
+  ${({ theme, outsideMonth }) =>
+    outsideMonth &&
+    `
+      color: ${theme.color['Neutral/Neutral 30']};
+      opacity: 0;
+      pointer-events: none;
     `}
 
   ${(p) => (p.disabled ? '' : hoverMixin)}
