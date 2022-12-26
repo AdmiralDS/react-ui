@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import React from 'react';
+import * as React from 'react';
 
 import { DEFAULT_YEAR_COUNT } from '../constants';
 import { setYear, startOfYear, yearsRange } from '../date-utils';

@@ -1,6 +1,6 @@
 import { Button } from '#src/components/Button';
 import { Spinner } from '#src/components/Spinner';
-import React from 'react';
+import * as React from 'react';
 import styled from 'styled-components';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';

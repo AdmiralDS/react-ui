@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import React from 'react';
+import * as React from 'react';
 import { ThemeContext } from 'styled-components';
 import { LIGHT_THEME } from '#src/components/themes';
 

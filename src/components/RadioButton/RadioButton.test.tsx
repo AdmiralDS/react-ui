@@ -1,5 +1,5 @@
 import { LIGHT_THEME } from '#src/components/themes';
-import React from 'react';
+import * as React from 'react';
 import { ThemeProvider } from 'styled-components';
 import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';

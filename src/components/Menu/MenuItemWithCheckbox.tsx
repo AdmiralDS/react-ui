@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import styled, { css } from 'styled-components';
 import type { ItemDimension } from '#src/components/Menu/menuItemMixins';
 import type { MenuItemProps } from '#src/components/Menu/MenuItem';
