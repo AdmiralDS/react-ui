@@ -17,7 +17,7 @@ type DayComponentProps = {
 
 const DAY_SIZE = '36px';
 const DAY_PADDING = '8px 0';
-const DAY_MARGIN_BOTOM = '4px';
+const DAY_MARGIN_BOTTOM = '4px';
 
 const hoverMixin = css`
   &:hover:after {
@@ -33,7 +33,7 @@ export const DayComponent = styled.div<DayComponentProps>`
   width: ${DAY_SIZE};
   height: ${DAY_SIZE};
   padding: ${DAY_PADDING};
-  margin-bottom: ${DAY_MARGIN_BOTOM};
+  margin-bottom: ${DAY_MARGIN_BOTTOM};
   ${typography['Body/Body 2 Long']}
   color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
   box-sizing: border-box;
