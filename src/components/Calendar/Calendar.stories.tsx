@@ -6,11 +6,11 @@ import { Button } from '#src/components/Button';
 import type { CalendarPropType } from './index';
 import { Calendar } from './index';
 import type { ViewScreenType } from './interfaces';
-import { css, ThemeProvider } from 'styled-components';
+import { ThemeProvider } from 'styled-components';
 import type { Theme } from '#src/components/themes';
 import { T } from '#src/components/T';
 import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
-import { endOfWeek, sameDay } from '#src/components/Calendar/date-utils';
+import { highlightWeekends } from '#src/components/Calendar/highlightDate';
 
 export default {
   title: 'Admiral-2.1/Calendar',
@@ -349,16 +349,6 @@ const Template8: ComponentStory<typeof Calendar> = ({ range, ...args }: Calendar
       />
     </>
   );
-};
-
-const weekendMixin = css<{ disabled?: boolean }>`
-  color: ${(p) => (p.disabled ? p.theme.color['Error/Error 30'] : p.theme.color['Error/Error 60 Main'])};
-`;
-const highlightWeekends = (date: Date) => {
-  if (sameDay(date, endOfWeek(date, 1)) || sameDay(date, endOfWeek(date, 0))) {
-    return weekendMixin;
-  }
-  return undefined;
 };
 
 export const CalendarSimple = Template1.bind({});
