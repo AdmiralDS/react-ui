@@ -46,6 +46,8 @@ export interface DropMenuComponentProps
       | 'disableSelectedOptionHighlight'
       | 'renderTopPanel'
       | 'renderBottomPanel'
+      | 'onForwardCycleApprove'
+      | 'onBackwardCycleApprove'
     >,
     Pick<DropdownContainerProps, 'onClickOutside'> {}
 
@@ -59,6 +61,8 @@ export interface DropMenuProps
       | 'disableSelectedOptionHighlight'
       | 'renderTopPanel'
       | 'renderBottomPanel'
+      | 'onForwardCycleApprove'
+      | 'onBackwardCycleApprove'
     >,
     Pick<DropdownContainerProps, 'onClickOutside'>,
     Omit<HTMLAttributes<HTMLElement>, 'onChange'> {
@@ -128,6 +132,8 @@ export const DropMenu = React.forwardRef<HTMLElement, DropMenuProps>(
       onClickOutside,
       renderTopPanel,
       renderBottomPanel,
+      onForwardCycleApprove,
+      onBackwardCycleApprove,
       ...props
     },
     ref,
@@ -227,6 +233,8 @@ export const DropMenu = React.forwardRef<HTMLElement, DropMenuProps>(
               disableSelectedOptionHighlight={disableSelectedOptionHighlight}
               renderTopPanel={renderTopPanel}
               renderBottomPanel={renderBottomPanel}
+              onForwardCycleApprove={onForwardCycleApprove}
+              onBackwardCycleApprove={onBackwardCycleApprove}
             />
           </DropMenuContainer>
         )}

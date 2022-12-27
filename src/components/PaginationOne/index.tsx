@@ -246,6 +246,11 @@ export const PaginationOne: React.FC<PaginationOneProps> = ({
     }
   };
 
+  const handleMenuCycle = () => {
+    pageNumberInputRef.current?.focus();
+    return false;
+  };
+
   const renderComplex = () => {
     return (
       <ComplexWrapper data-simple={simple} {...props}>
@@ -293,6 +298,8 @@ export const PaginationOne: React.FC<PaginationOneProps> = ({
             onVisibilityChange={setIsVisible}
             onClickOutside={handleClickOutside}
             onClick={handleMenuButtonClick}
+            onForwardCycleApprove={handleMenuCycle}
+            onBackwardCycleApprove={handleMenuCycle}
             renderTopPanel={
               showPageNumberInput
                 ? ({ dimension = 's' }) => {
