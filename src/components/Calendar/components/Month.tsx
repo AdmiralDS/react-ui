@@ -21,7 +21,7 @@ export const Month: FC<IMonthCalendarProps> = ({
   onMouseEnter,
   onMouseLeave,
   onClick,
-  highlightWeekend,
+  highlightSpecialDay,
 }) => {
   const theme = React.useContext(ThemeContext) || LIGHT_THEME;
   const weeks: Array<Date> = [];
@@ -53,7 +53,7 @@ export const Month: FC<IMonthCalendarProps> = ({
           filterDate={filterDate}
           onMouseEnter={handleMouseEnter}
           onClick={handleDayClick}
-          highlightWeekend={highlightWeekend}
+          highlightSpecialDay={highlightSpecialDay}
         />
       ))}
     </div>

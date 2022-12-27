@@ -20,7 +20,7 @@ export const Day: FC<IDayCalendarProps> = ({
   filterDate,
   onMouseEnter,
   onClick,
-  highlightWeekend,
+  highlightSpecialDay,
 }) => {
   const theme = React.useContext(ThemeContext) || LIGHT_THEME;
   const disabled = !!validator?.invalidValue(day) || (filterDate && !filterDate(day));
@@ -51,7 +51,6 @@ export const Day: FC<IDayCalendarProps> = ({
     corners['top-right'] = end || (weekEnd && !start);
     corners['bottom-right'] = end || (weekEnd && !start);
   }
-  const isWeekend = highlightWeekend && (sameDay(day, endOfWeek(day, 1)) || sameDay(day, endOfWeek(day, 0)));
 
   return (
     <DayComponent
@@ -63,7 +62,7 @@ export const Day: FC<IDayCalendarProps> = ({
       inRange={inRange || inSelectingRange}
       disabled={disabled}
       outsideMonth={outsideMonth}
-      isWeekend={isWeekend}
+      highlightSpecialDayMixin={highlightSpecialDay(day)}
       onMouseEnter={(e) => !disabled && onMouseEnter && onMouseEnter(day, e)}
       onMouseDown={(e) => {
         e.preventDefault();

@@ -1,6 +1,7 @@
 import type { MouseEvent, SyntheticEvent } from 'react';
 
 import type { DateValidator } from './validator';
+import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 
 export interface IDateBaseProps {
   /** Выбранное значение даты */
@@ -62,8 +63,8 @@ export interface CalendarPropType extends IDateSelectionProps {
   /** Выбор вкладки - Год */
   onViewYearSelect?: () => void;
 
-  /** устанавливает подсветку выходных дней (сб и вс) */
-  highlightWeekend?: boolean;
+  /** Позволяет добавлять стили на необходимые даты */
+  highlightSpecialDay?: (date: Date, disabled?: boolean) => FlattenInterpolation<ThemeProps<DefaultTheme>> | undefined;
 
   /** Коллбэк выбора даты, срабатывает при клике на дне (в режиме диапазона date - это массив из двух дат) */
   onChange(date: Date | Array<Date | null> | null, event?: SyntheticEvent<any>): void;
@@ -98,7 +99,7 @@ export interface IDayCalendarProps extends IDateCalendarBaseProps {
   day: Date;
   month: number;
   onMouseEnter: (date: Date, event: MouseEvent<HTMLDivElement>) => void;
-  highlightWeekend: boolean;
+  highlightSpecialDay: (date: Date, disabled?: boolean) => FlattenInterpolation<ThemeProps<DefaultTheme>> | undefined;
 }
 
 export type IWeekCalendarProps = IDayCalendarProps;
@@ -107,7 +108,7 @@ export interface IMonthCalendarProps extends IDateCalendarBaseProps {
   day: Date;
   onMouseEnter: (date: Date, event: MouseEvent<HTMLDivElement>) => void;
   onMouseLeave: () => void;
-  highlightWeekend: boolean;
+  highlightSpecialDay: (date: Date, disabled?: boolean) => FlattenInterpolation<ThemeProps<DefaultTheme>> | undefined;
 }
 
 export interface IYearsCalendarProps extends IDateCalendarBaseProps {

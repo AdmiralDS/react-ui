@@ -1,3 +1,4 @@
+import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import styled, { css } from 'styled-components';
 import { typography } from '#src/components/Typography';
 
@@ -12,7 +13,7 @@ type DayComponentProps = {
   disabled?: boolean;
   inSelectingRange: boolean;
   outsideMonth?: boolean;
-  isWeekend?: boolean;
+  highlightSpecialDayMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
 };
 
 const DAY_SIZE = '36px';
@@ -66,12 +67,7 @@ export const DayComponent = styled.div<DayComponentProps>`
       pointer-events: none;
     `}
 
-  ${({ disabled, isWeekend, theme }) =>
-    isWeekend &&
-    `
-      color: ${disabled ? theme.color['Error/Error 30'] : theme.color['Error/Error 60 Main']};
-    `}
-
+  ${(p) => p.highlightSpecialDayMixin}
   ${(p) => (p.disabled ? '' : hoverMixin)}
 
   ${({ disabled, theme, selected, inSelectingRange }) =>

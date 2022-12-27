@@ -43,7 +43,7 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarPropType>(
       onViewLeave,
       onViewMonthSelect,
       onViewYearSelect,
-      highlightWeekend = false,
+      highlightSpecialDay = (date: Date) => undefined,
       ...props
     },
     ref,
@@ -244,7 +244,7 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarPropType>(
           onMouseEnter={handleDayMouseEnter}
           onMouseLeave={handleMonthMouseLeave}
           onClick={handleDayClick}
-          highlightWeekend={highlightWeekend}
+          highlightSpecialDay={highlightSpecialDay}
         />
       </>
     );
