@@ -1,6 +1,6 @@
 import * as React from 'react';
 import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
-import styled, { ThemeContext } from 'styled-components';
+import styled, { css, ThemeContext } from 'styled-components';
 import { LIGHT_THEME } from '#src/components/themes';
 import { typography } from '#src/components/Typography';
 import { ReactComponent as ChevronLeft } from '@admiral-ds/icons/build/system/ChevronLeftOutline.svg';
@@ -9,6 +9,10 @@ import { ReactComponent as ChevronRight } from '@admiral-ds/icons/build/system/C
 import { PaginationButton } from '#src/components/PaginationOne/PaginationButton';
 import { MenuButton } from '#src/components/PaginationOne/Menu';
 import { passDropdownDataAttributes } from '#src/components/common/utils/splitDataAttributes';
+import { MenuActionsPanel } from '#src/components/Menu/MenuActionsPanel';
+import { TextInput } from '#src/components/input';
+import type { ChangeEvent } from 'react';
+import { keyboardKey } from '#src/components/common/keyboardKey';
 
 const ComplexWrapper = styled.div`
   display: flex;
@@ -58,6 +62,13 @@ const ButtonsWrapper = styled.div`
   }
 `;
 
+const extendMixin = (mixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>) => css`
+  width: auto;
+  min-width: 80px;
+
+  ${mixin};
+`;
+
 export interface PaginationOneProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'> {
   /** Колбек, который срабатывает при изменении номера  страницы или размера страницы */
   onChange: (result: { page: number; pageSize: number }) => void;
@@ -79,7 +90,10 @@ export interface PaginationOneProps extends Omit<React.HTMLAttributes<HTMLDivEle
   dropMaxHeight?: string | number;
   /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
   dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+  /** Позволяет задать ширину выпадающего списка */
   menuWidth?: string;
+  /** Включает окно ввода номера страницы в выпадающем списке */
+  showPageNumberInput?: boolean;
   /** Объект локализации - позволяет перезадать текстовые константы используемые в компоненте,
    * по умолчанию значения констант берутся из темы в соответствии с параметром currentLocale, заданном в теме
    **/
@@ -114,6 +128,7 @@ export const PaginationOne: React.FC<PaginationOneProps> = ({
   dropMaxHeight = '',
   dropContainerCssMixin,
   locale,
+  showPageNumberInput = false,
   ...props
 }) => {
   const theme = React.useContext(ThemeContext) || LIGHT_THEME;
@@ -140,25 +155,101 @@ export const PaginationOne: React.FC<PaginationOneProps> = ({
   const backButtonDisabled = page === 1;
   const forwardButtonDisabled = page === totalPages;
 
+  const [isVisible, setIsVisible] = React.useState(false);
+  const [selectedPageNumber, setSelectedPageNumber] = React.useState(page.toString());
+  const [activePageNumber, setActivePageNumber] = React.useState<string | undefined>(page.toString());
+  const [inputPageNumber, setInputPageNumber] = React.useState(page.toString());
+
+  const pageNumberInputRef = React.useRef<HTMLInputElement>(null);
+
+  const parsePageNumber = (pageSelected: string) => {
+    if (pageSelected === '') {
+      return parseInt(selectedPageNumber);
+    }
+    const page = parseInt(pageSelected);
+    if (isNaN(page) || page < 1) {
+      return 1;
+    } else if (page > totalPages) {
+      return totalPages;
+    }
+    return page;
+  };
+
+  const handlePageInputHover = (activePage?: string) => {
+    if (activePage) {
+      setActivePageNumber(activePage);
+      setInputPageNumber(activePage);
+    }
+  };
+
+  const handleClosePageNumberDropMenu = (pageNumber: string) => {
+    handlePageInputHover(pageNumber);
+    setIsVisible(false);
+  };
+
   const handleSizeChange = (pageSizeSelected: string) => {
     const pageSize = parseInt(pageSizeSelected);
     onChange({ page: 1, pageSize: pageSize });
   };
 
   const handlePageInputChange = (pageSelected: string) => {
-    const page = parseInt(pageSelected);
-    if (page > 0 && page <= totalPages) {
-      onChange({
-        page,
-        pageSize,
-      });
-    }
+    const page = parsePageNumber(pageSelected);
+    setSelectedPageNumber(page.toString());
+    onChange({
+      page,
+      pageSize,
+    });
+    handleClosePageNumberDropMenu(page.toString());
   };
 
   const pageIncrement = () => onChange({ page: page + 1, pageSize });
   const pageDecrement = () => onChange({ page: page - 1, pageSize });
 
   const dropMenuProps = passDropdownDataAttributes(props);
+
+  const handleClickOutside = (e: Event) => {
+    handleClosePageNumberDropMenu(selectedPageNumber);
+  };
+
+  const handleMenuButtonClick = (e: React.MouseEvent<HTMLElement>) => {
+    if (isVisible) {
+      handleClosePageNumberDropMenu(selectedPageNumber);
+    } else {
+      setIsVisible(true);
+    }
+  };
+
+  React.useEffect(() => {
+    if (isVisible && pageNumberInputRef) {
+      pageNumberInputRef.current?.select();
+      pageNumberInputRef.current?.focus();
+    }
+  }, [isVisible]);
+
+  const handleInputPageNumberChange = (e: ChangeEvent<HTMLInputElement>) => {
+    let inputValue = e.target.value;
+    inputValue = inputValue.replace(/\D/g, '');
+    setInputPageNumber(inputValue);
+    setActivePageNumber(parsePageNumber(inputValue).toString());
+  };
+
+  const handleInputPageNumberKeyDown = (e: React.KeyboardEvent) => {
+    const code = keyboardKey.getCode(e);
+
+    if (code === keyboardKey.Enter) {
+      handlePageInputChange(inputPageNumber);
+      setIsVisible(false);
+    } else if (code === keyboardKey.ArrowDown || code === keyboardKey.ArrowUp) {
+      pageNumberInputRef.current?.blur();
+    } else if (code === keyboardKey.Escape) {
+      handleClosePageNumberDropMenu(selectedPageNumber);
+    }
+  };
+
+  const handleMenuCycle = () => {
+    pageNumberInputRef.current?.focus();
+    return false;
+  };
 
   const renderComplex = () => {
     return (
@@ -192,15 +283,40 @@ export const PaginationOne: React.FC<PaginationOneProps> = ({
           <Divider />
           <MenuButton
             options={pages}
-            selected={page.toString()}
+            selected={selectedPageNumber}
             onSelectItem={handlePageInputChange}
+            active={activePageNumber}
+            onActivateItem={handlePageInputHover}
             disabled={pageSelectDisabled}
             aria-label={pageSelectLabel(page, totalPages)}
             dropMaxHeight={dropMaxHeight}
-            dropContainerCssMixin={dropContainerCssMixin}
+            dropContainerCssMixin={extendMixin(dropContainerCssMixin)}
             menuWidth={menuWidth}
             dropMenuDataAttributes={dropMenuProps}
             className="current-page-number-with-dropdown"
+            isVisible={isVisible}
+            onVisibilityChange={setIsVisible}
+            onClickOutside={handleClickOutside}
+            onClick={handleMenuButtonClick}
+            onForwardCycleApprove={handleMenuCycle}
+            onBackwardCycleApprove={handleMenuCycle}
+            renderTopPanel={
+              showPageNumberInput
+                ? ({ dimension = 's' }) => {
+                    return (
+                      <MenuActionsPanel dimension={dimension}>
+                        <TextInput
+                          dimension="s"
+                          value={inputPageNumber}
+                          onChange={handleInputPageNumberChange}
+                          onKeyDown={handleInputPageNumberKeyDown}
+                          ref={pageNumberInputRef}
+                        />
+                      </MenuActionsPanel>
+                    );
+                  }
+                : undefined
+            }
           >
             {page}
           </MenuButton>

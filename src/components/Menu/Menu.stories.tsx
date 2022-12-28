@@ -1,5 +1,5 @@
 import type { ChangeEvent, HTMLAttributes } from 'react';
-import React, { useContext, useEffect, useMemo, useState } from 'react';
+import * as React from 'react';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { Menu } from '#src/components/Menu';
 import type { ItemProps, RenderOptionProps } from '#src/components/Menu/MenuItem';
@@ -140,7 +140,7 @@ const TemplateWithCards: ComponentStory<typeof Menu> = (args) => {
     },
   ];
 
-  const model = useMemo(() => {
+  const model = React.useMemo(() => {
     return category.reduce((acc: any, item: any) => {
       acc.push({
         id: item.id,
@@ -169,8 +169,8 @@ const TemplateWithCards: ComponentStory<typeof Menu> = (args) => {
     }, []);
   }, [args.dimension]);
 
-  const [selected, setSelected] = useState<string | undefined>('');
-  const [active, setActive] = useState<string | undefined>('');
+  const [selected, setSelected] = React.useState<string | undefined>('');
+  const [active, setActive] = React.useState<string | undefined>('');
 
   return (
     <>
@@ -188,7 +188,15 @@ const TemplateWithCards: ComponentStory<typeof Menu> = (args) => {
   );
 };
 
-const items = [
+type StoryItem = {
+  id: string;
+  label: string;
+  value: number;
+  disabled?: boolean;
+  readOnly?: boolean;
+};
+
+const STORY_ITEMS: Array<StoryItem> = [
   {
     id: '1',
     label: 'Option one',
@@ -227,8 +235,8 @@ const items = [
 ];
 
 const SimpleTemplate: ComponentStory<typeof Menu> = (args) => {
-  const model = useMemo(() => {
-    return items.map((item) => ({
+  const model = React.useMemo(() => {
+    return STORY_ITEMS.map((item) => ({
       id: item.id,
       render: (options: RenderOptionProps) => (
         <MenuItem dimension={args.dimension} {...options} key={item.id}>
@@ -247,6 +255,36 @@ const SimpleTemplate: ComponentStory<typeof Menu> = (args) => {
     <ThemeProvider theme={swapBorder}>
       <Wrapper style={{ width: 'fit-content' }}>
         <Menu {...args} model={model} />
+      </Wrapper>
+    </ThemeProvider>
+  );
+};
+
+const ITEMS_WITH_DISABLED_ITEMS = [...STORY_ITEMS];
+ITEMS_WITH_DISABLED_ITEMS[0].disabled = true;
+ITEMS_WITH_DISABLED_ITEMS[6].disabled = true;
+const MenuWithLockCycleScrollTemplate: ComponentStory<typeof Menu> = (args) => {
+  const model = React.useMemo(() => {
+    return ITEMS_WITH_DISABLED_ITEMS.map((item) => ({
+      id: item.id,
+      disabled: item.disabled,
+      render: (options: RenderOptionProps) => (
+        <MenuItem dimension={args.dimension} {...options} key={item.id}>
+          {item.label}
+        </MenuItem>
+      ),
+    }));
+  }, [args.dimension]);
+
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
+    return theme;
+  }
+
+  return (
+    <ThemeProvider theme={swapBorder}>
+      <Wrapper style={{ width: 'fit-content' }}>
+        <Menu {...args} model={model} onForwardCycleApprove={() => false} onBackwardCycleApprove={() => false} />
       </Wrapper>
     </ThemeProvider>
   );
@@ -333,8 +371,8 @@ const MyMenuItem = ({
 //</editor-fold>
 
 const CustomItemTemplate: ComponentStory<typeof Menu> = (args) => {
-  const model = useMemo(() => {
-    return items.map((item) => ({
+  const model = React.useMemo(() => {
+    return STORY_ITEMS.map((item) => ({
       id: item.id,
       render: (options: RenderOptionProps) => (
         <MyMenuItem success={item.id === '3'} {...options} key={item.id} text={item.label} />
@@ -384,11 +422,11 @@ const itemsWithCheckbox: Array<ItemWithCheckbox> = [
 ];
 
 const MenuCheckboxTemplate: ComponentStory<typeof Menu> = (args) => {
-  const [innerState, setInnerState] = useState<Array<ItemWithCheckbox>>(itemsWithCheckbox.map((item) => item));
-  const [activeOption, setActiveOption] = useState<string | undefined>(innerState[0].id);
-  const [selectedOption, setSelectedOption] = useState<string | undefined>();
+  const [innerState, setInnerState] = React.useState<Array<ItemWithCheckbox>>(itemsWithCheckbox.map((item) => item));
+  const [activeOption, setActiveOption] = React.useState<string | undefined>(innerState[0].id);
+  const [selectedOption, setSelectedOption] = React.useState<string | undefined>();
 
-  const model = useMemo(() => {
+  const model = React.useMemo(() => {
     return innerState.map((item) => ({
       id: item.id,
       render: (options: RenderOptionProps) => (
@@ -444,8 +482,8 @@ const MenuCheckboxTemplate: ComponentStory<typeof Menu> = (args) => {
 };
 
 const MenuRadiobuttonTemplate: ComponentStory<typeof Menu> = (args) => {
-  const model = useMemo(() => {
-    return items.map((item) => ({
+  const model = React.useMemo(() => {
+    return STORY_ITEMS.map((item) => ({
       id: item.id,
       render: (options: RenderOptionProps) => (
         <MenuItem dimension={args.dimension} {...options} key={item.id}>
@@ -511,7 +549,7 @@ const itemsLongText = [
 const MenuItemWithTooltip = TooltipHoc(MenuItem);
 
 const MenuTooltipTemplate: ComponentStory<typeof Menu> = (args) => {
-  const model = useMemo(() => {
+  const model = React.useMemo(() => {
     return itemsLongText.map((item) => {
       const tooltip = item.label.length > 20;
 
@@ -550,7 +588,7 @@ const MultiLineMenuItem = styled(MenuItem)`
 `;
 
 const MultiLineMenuTemplate: ComponentStory<typeof Menu> = (args) => {
-  const model = useMemo(() => {
+  const model = React.useMemo(() => {
     return itemsLongText.map((item) => {
       return {
         id: item.id,
@@ -583,8 +621,8 @@ const ActionPanelFlex = css`
 `;
 
 const MenuActionsTwoButtonsTemplate: ComponentStory<typeof Menu> = (props) => {
-  const model = useMemo(() => {
-    return items.map((item) => ({
+  const model = React.useMemo(() => {
+    return STORY_ITEMS.map((item) => ({
       id: item.id,
       render: (options: RenderOptionProps) => (
         <MenuItem dimension={props.dimension} {...options} key={item.id}>
@@ -592,7 +630,7 @@ const MenuActionsTwoButtonsTemplate: ComponentStory<typeof Menu> = (props) => {
         </MenuItem>
       ),
     }));
-  }, [props.dimension, items]);
+  }, [props.dimension, STORY_ITEMS]);
 
   function swapBorder(theme: Theme): Theme {
     theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
@@ -636,15 +674,15 @@ const MenuActionsTwoButtonsTemplate: ComponentStory<typeof Menu> = (props) => {
 
 const MenuActionsAddUserValueTemplate: ComponentStory<typeof Menu> = (props) => {
   const initialButtonText = 'Добавить';
-  const theme = useContext(ThemeContext) || LIGHT_THEME;
+  const theme = React.useContext(ThemeContext) || LIGHT_THEME;
 
-  const [options, setOptions] = useState([...items]);
-  const [inputValue, setInputValue] = useState<string>('');
-  const [buttonText, setButtonText] = useState<string>(initialButtonText);
-  const [buttonDisabled, setButtonDisabled] = useState<boolean>(true);
-  const [active, setActive] = useState<string | undefined>(options[0].id);
+  const [options, setOptions] = React.useState([...STORY_ITEMS]);
+  const [inputValue, setInputValue] = React.useState<string>('');
+  const [buttonText, setButtonText] = React.useState<string>(initialButtonText);
+  const [buttonDisabled, setButtonDisabled] = React.useState<boolean>(true);
+  const [active, setActive] = React.useState<string | undefined>(options[0].id);
 
-  const model = useMemo(() => {
+  const model = React.useMemo(() => {
     return getHighlightedFilteredOptions(
       options,
       inputValue,
@@ -676,7 +714,7 @@ const MenuActionsAddUserValueTemplate: ComponentStory<typeof Menu> = (props) => 
     setActive(newId);
   };
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (inputValue === '') {
       setButtonText(initialButtonText);
       setButtonDisabled(true);
@@ -789,10 +827,10 @@ const itemsCheckboxGroup: Array<CheckboxGroupItemProps> = [
 ];
 
 const MenuCheckboxGroupTemplate: ComponentStory<typeof Menu> = (args) => {
-  const [internalModel, setInternalModel] = useState<Array<CheckboxGroupItemProps>>([...itemsCheckboxGroup]);
-  const [activeOption, setActiveOption] = useState<string | undefined>();
+  const [internalModel, setInternalModel] = React.useState<Array<CheckboxGroupItemProps>>([...itemsCheckboxGroup]);
+  const [activeOption, setActiveOption] = React.useState<string | undefined>();
 
-  const map = useMemo(() => {
+  const map = React.useMemo(() => {
     return checkboxTreeToMap(internalModel);
   }, [internalModel]);
 
@@ -827,7 +865,7 @@ const MenuCheckboxGroupTemplate: ComponentStory<typeof Menu> = (args) => {
     setInternalModel([...internalModel]);
   };
 
-  const model = useMemo(() => {
+  const model = React.useMemo(() => {
     const menuModel: ItemProps[] = [];
     map.forEach((item) => {
       const node = item.node;
@@ -893,6 +931,7 @@ const MenuCheckboxGroupTemplate: ComponentStory<typeof Menu> = (args) => {
 };
 
 export const Simple = SimpleTemplate.bind({});
+export const MenuWithLockCycleScroll = MenuWithLockCycleScrollTemplate.bind({});
 export const Category = TemplateWithCards.bind({});
 export const CustomItems = CustomItemTemplate.bind({});
 export const MenuCheckbox = MenuCheckboxTemplate.bind({});
@@ -904,6 +943,7 @@ export const MenuActionsAddUserValue = MenuActionsAddUserValueTemplate.bind({});
 export const MenuCheckboxGroup = MenuCheckboxGroupTemplate.bind({});
 
 Simple.storyName = 'Базовый пример';
+MenuWithLockCycleScroll.storyName = 'Пример без цикла обхода пунктов';
 Category.storyName = 'Пример с группами';
 CustomItems.storyName = 'Пример с кастомными пунктами меню';
 MenuCheckbox.storyName = 'Пример с Checkbox';

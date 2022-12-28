@@ -78,6 +78,12 @@ export interface MenuButtonProps
   menuWidth?: string;
   /** Data-attributes для DropMenu */
   dropMenuDataAttributes?: Record<string, any>;
+  /** Видимость выпадающего меню */
+  isVisible?: boolean;
+  /** Колбек на изменение видимости меню */
+  onVisibilityChange?: (isVisible: boolean) => void;
+  /** Позволяет обработать событие при клике вне компонента */
+  onClickOutside?: (e: Event) => void;
 }
 
 export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
@@ -88,11 +94,20 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
       options,
       selected,
       onSelectItem = (id: string) => undefined,
+      active,
+      onActivateItem = (id?: string) => undefined,
       dropMaxHeight,
       dropContainerCssMixin,
       menuWidth,
       dropMenuDataAttributes,
       className = '',
+      isVisible,
+      onVisibilityChange,
+      onClickOutside,
+      onClick,
+      renderTopPanel,
+      onForwardCycleApprove,
+      onBackwardCycleApprove,
       ...props
     },
     ref,
@@ -124,6 +139,14 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
         disabled={disabled}
         selected={selected}
         onSelectItem={onSelectItem}
+        active={active}
+        onActivateItem={onActivateItem}
+        isVisible={isVisible}
+        onVisibilityChange={onVisibilityChange}
+        onClickOutside={onClickOutside}
+        renderTopPanel={renderTopPanel}
+        onForwardCycleApprove={onForwardCycleApprove}
+        onBackwardCycleApprove={onBackwardCycleApprove}
         {...dropMenuDataAttributes}
         renderContentProp={({ buttonRef, handleKeyDown, handleClick, statusIcon, menuState }) => {
           return (
@@ -133,7 +156,7 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
               disabled={disabled}
               $menuOpened={menuState}
               onKeyDown={handleKeyDown}
-              onClick={handleClick}
+              onClick={onClick || handleClick}
               aria-expanded={menuState}
               type="button"
               className={className}
