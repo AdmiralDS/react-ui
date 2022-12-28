@@ -64,7 +64,7 @@ export interface CalendarPropType extends IDateSelectionProps {
   onViewYearSelect?: () => void;
 
   /** Позволяет добавлять стили на необходимые даты */
-  highlightSpecialDay?: (date: Date, disabled?: boolean) => FlattenInterpolation<ThemeProps<DefaultTheme>> | undefined;
+  highlightSpecialDay?: (date: Date) => FlattenInterpolation<ThemeProps<DefaultTheme>> | undefined;
 
   /** Коллбэк выбора даты, срабатывает при клике на дне (в режиме диапазона date - это массив из двух дат) */
   onChange(date: Date | Array<Date | null> | null, event?: SyntheticEvent<any>): void;
@@ -99,7 +99,7 @@ export interface IDayCalendarProps extends IDateCalendarBaseProps {
   day: Date;
   month: number;
   onMouseEnter: (date: Date, event: MouseEvent<HTMLDivElement>) => void;
-  highlightSpecialDay: (date: Date, disabled?: boolean) => FlattenInterpolation<ThemeProps<DefaultTheme>> | undefined;
+  highlightSpecialDay: (date: Date) => FlattenInterpolation<ThemeProps<DefaultTheme>> | undefined;
 }
 
 export type IWeekCalendarProps = IDayCalendarProps;
@@ -108,7 +108,7 @@ export interface IMonthCalendarProps extends IDateCalendarBaseProps {
   day: Date;
   onMouseEnter: (date: Date, event: MouseEvent<HTMLDivElement>) => void;
   onMouseLeave: () => void;
-  highlightSpecialDay: (date: Date, disabled?: boolean) => FlattenInterpolation<ThemeProps<DefaultTheme>> | undefined;
+  highlightSpecialDay: (date: Date) => FlattenInterpolation<ThemeProps<DefaultTheme>> | undefined;
 }
 
 export interface IYearsCalendarProps extends IDateCalendarBaseProps {
