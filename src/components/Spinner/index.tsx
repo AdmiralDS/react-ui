@@ -1,5 +1,5 @@
 import type { HTMLAttributes } from 'react';
-import React from 'react';
+import * as React from 'react';
 import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import styled, { css, keyframes } from 'styled-components';
 

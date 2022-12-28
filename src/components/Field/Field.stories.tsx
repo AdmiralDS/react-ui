@@ -1,6 +1,6 @@
 import { Field } from '#src/components/Field';
 import { TextInput } from '#src/components/input';
-import React from 'react';
+import * as React from 'react';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import styled, { ThemeProvider } from 'styled-components';

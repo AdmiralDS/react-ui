@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import React from 'react';
+import * as React from 'react';
 import { ThemeContext } from 'styled-components';
 import { LIGHT_THEME } from '#src/components/themes';
 
@@ -20,6 +20,7 @@ export const Day: FC<IDayCalendarProps> = ({
   filterDate,
   onMouseEnter,
   onClick,
+  highlightSpecialDay,
 }) => {
   const theme = React.useContext(ThemeContext) || LIGHT_THEME;
   const disabled = !!validator?.invalidValue(day) || (filterDate && !filterDate(day));
@@ -61,6 +62,7 @@ export const Day: FC<IDayCalendarProps> = ({
       inRange={inRange || inSelectingRange}
       disabled={disabled}
       outsideMonth={outsideMonth}
+      highlightSpecialDayMixin={highlightSpecialDay(day)}
       onMouseEnter={(e) => !disabled && onMouseEnter && onMouseEnter(day, e)}
       onMouseDown={(e) => {
         e.preventDefault();

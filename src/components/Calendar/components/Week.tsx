@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import React from 'react';
+import * as React from 'react';
 import { ThemeContext } from 'styled-components';
 import { LIGHT_THEME } from '#src/components/themes';
 
@@ -21,6 +21,7 @@ export const Week: FC<IWeekCalendarProps> = ({
   filterDate,
   onMouseEnter,
   onClick,
+  highlightSpecialDay,
 }) => {
   const theme = React.useContext(ThemeContext) || LIGHT_THEME;
   const handleMouseEnter = (day: Date, e: any) => onMouseEnter && onMouseEnter(day, e);
@@ -44,6 +45,7 @@ export const Week: FC<IWeekCalendarProps> = ({
             filterDate={filterDate}
             onMouseEnter={(_, e) => handleMouseEnter(nextDay, e)}
             onClick={(_, e) => handleDayClick(nextDay, e)}
+            highlightSpecialDay={highlightSpecialDay}
           />
         );
       })}

@@ -4,7 +4,7 @@ import type { MenuDimensions } from '#src/components/Menu/index';
 import { getTextHighlightMeta } from '#src/components/common/utils/getTextHighlightMeta';
 import type { ItemProps, RenderOptionProps } from '#src/components/Menu/MenuItem';
 import { MenuItem } from '#src/components/Menu/MenuItem';
-import React from 'react';
+import * as React from 'react';
 import type { ItemDimension } from '#src/components/Menu/menuItemMixins';
 import { uid } from '#src/components/common/uid';
 

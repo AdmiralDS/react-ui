@@ -1,6 +1,7 @@
 import type { MouseEvent, SyntheticEvent } from 'react';
 
 import type { DateValidator } from './validator';
+import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 
 export interface IDateBaseProps {
   /** Выбранное значение даты */
@@ -35,10 +36,10 @@ export interface CalendarPropType extends IDateSelectionProps {
   /** Контейнер, в котором при необходимости можно отрисовать тултип через ReactDOM.createPortal */
   tooltipContainer?: Element | null;
 
-  /** показать экран выбора дат (месяц/год/день) */
+  /** Показать экран выбора дат (месяц/год/день) */
   currentActiveView?: ViewScreenType | null;
 
-  /** приоритет экрана currentActiveView */
+  /** Приоритет экрана currentActiveView */
   currentActiveViewImportant?: boolean;
 
   /** Коллбэк срабатывает при клике на стрелках переключения дат */
@@ -50,17 +51,20 @@ export interface CalendarPropType extends IDateSelectionProps {
   /** Коллбэк при изменении года */
   onYearSelect?: (date: Date | Array<Date | null> | null) => void;
 
-  /** срабатывает при открытии экрана выбора года */
+  /** Срабатывает при открытии экрана выбора года */
   onViewEnter?: (view: ViewScreenType) => void;
 
-  /** срабатывает при открытии экрана выбора месяца */
+  /** Срабатывает при открытии экрана выбора месяца */
   onViewLeave?: (view: ViewScreenType) => void;
 
-  /** выбор вкладки - Месяц */
+  /** Выбор вкладки - Месяц */
   onViewMonthSelect?: () => void;
 
-  /** выбор вкладки - Год */
+  /** Выбор вкладки - Год */
   onViewYearSelect?: () => void;
+
+  /** Позволяет добавлять стили на необходимые даты */
+  highlightSpecialDay?: (date: Date) => FlattenInterpolation<ThemeProps<DefaultTheme>> | undefined;
 
   /** Коллбэк выбора даты, срабатывает при клике на дне (в режиме диапазона date - это массив из двух дат) */
   onChange(date: Date | Array<Date | null> | null, event?: SyntheticEvent<any>): void;
@@ -95,6 +99,7 @@ export interface IDayCalendarProps extends IDateCalendarBaseProps {
   day: Date;
   month: number;
   onMouseEnter: (date: Date, event: MouseEvent<HTMLDivElement>) => void;
+  highlightSpecialDay: (date: Date) => FlattenInterpolation<ThemeProps<DefaultTheme>> | undefined;
 }
 
 export type IWeekCalendarProps = IDayCalendarProps;
@@ -103,6 +108,7 @@ export interface IMonthCalendarProps extends IDateCalendarBaseProps {
   day: Date;
   onMouseEnter: (date: Date, event: MouseEvent<HTMLDivElement>) => void;
   onMouseLeave: () => void;
+  highlightSpecialDay: (date: Date) => FlattenInterpolation<ThemeProps<DefaultTheme>> | undefined;
 }
 
 export interface IYearsCalendarProps extends IDateCalendarBaseProps {

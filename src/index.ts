@@ -4,6 +4,7 @@ export { LIGHT_THEME, DARK_THEME } from './components/themes';
 export * from './components/Accordion';
 export * from './components/Badge';
 export * from './components/Calendar';
+export * from './components/Calendar/highlightDate';
 export * from './components/RadioButton';
 export * from './components/Typography';
 export * from './components/Link';
