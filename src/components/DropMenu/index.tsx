@@ -44,13 +44,25 @@ export interface DropMenuComponentProps
       | 'onActivateItem'
       | 'onSelectItem'
       | 'disableSelectedOptionHighlight'
+      | 'renderTopPanel'
+      | 'renderBottomPanel'
+      | 'onForwardCycleApprove'
+      | 'onBackwardCycleApprove'
     >,
     Pick<DropdownContainerProps, 'onClickOutside'> {}
 
 export interface DropMenuProps
   extends Pick<
       MenuProps,
-      'active' | 'onActivateItem' | 'onSelectItem' | 'multiSelection' | 'disableSelectedOptionHighlight'
+      | 'active'
+      | 'onActivateItem'
+      | 'onSelectItem'
+      | 'multiSelection'
+      | 'disableSelectedOptionHighlight'
+      | 'renderTopPanel'
+      | 'renderBottomPanel'
+      | 'onForwardCycleApprove'
+      | 'onBackwardCycleApprove'
     >,
     Pick<DropdownContainerProps, 'onClickOutside'>,
     Omit<HTMLAttributes<HTMLElement>, 'onChange'> {
@@ -118,6 +130,10 @@ export const DropMenu = React.forwardRef<HTMLElement, DropMenuProps>(
       isVisible,
       onVisibilityChange = (isVisible: boolean) => undefined,
       onClickOutside,
+      renderTopPanel,
+      renderBottomPanel,
+      onForwardCycleApprove,
+      onBackwardCycleApprove,
       ...props
     },
     ref,
@@ -215,6 +231,10 @@ export const DropMenu = React.forwardRef<HTMLElement, DropMenuProps>(
               onActivateItem={onActivateItem}
               multiSelection={multiSelection}
               disableSelectedOptionHighlight={disableSelectedOptionHighlight}
+              renderTopPanel={renderTopPanel}
+              renderBottomPanel={renderBottomPanel}
+              onForwardCycleApprove={onForwardCycleApprove}
+              onBackwardCycleApprove={onBackwardCycleApprove}
             />
           </DropMenuContainer>
         )}
