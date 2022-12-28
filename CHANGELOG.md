@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.10.0](https://github.com/AdmiralDS/react-ui/compare/v3.9.0...v3.10.0) (2022-12-28)
+
+
+### Features
+
+* **Calendar:** add highlightWeekend prop ([468cc50](https://github.com/AdmiralDS/react-ui/commit/468cc50c9504226197c4387a7f22b255eb1b0276))
+* **Calendar:** hide dates outside Month ([26100b3](https://github.com/AdmiralDS/react-ui/commit/26100b312807fcd7b4706b83429bb09b9c31489d))
+* **PaginationOne:** add page number input panel to dropdown ([e0c01e6](https://github.com/AdmiralDS/react-ui/commit/e0c01e6f973feb19d30b4a0549aca0a9b3ca28d2))
+
+
+### Bug Fixes
+
+* **TextArea:** fix autoHeight on first render ([766f112](https://github.com/AdmiralDS/react-ui/commit/766f11220a88bfa941f3f356695e186ae5aa9aba))
+
 ## [3.9.0](https://github.com/AdmiralDS/react-ui/compare/v3.8.3...v3.9.0) (2022-12-22)
 
 
