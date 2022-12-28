@@ -609,6 +609,14 @@ const preHolidayMixin = css<{ disabled?: boolean }>`
     p.disabled ? p.theme.color['Attention/Attention 30'] : p.theme.color['Attention/Attention 50 Main']};
 `;
 
+const holidayDates = new Map(
+  holidayCalendar.map((day) => {
+    const date = new Date(day.date);
+    const keyDate = startOfDay(date);
+    return [keyDate.getTime(), day.type];
+  }),
+);
+
 const Template9: ComponentStory<typeof Calendar> = (args) => {
   const [selected, setSelected] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
@@ -618,13 +626,6 @@ const Template9: ComponentStory<typeof Calendar> = (args) => {
     return theme;
   }
 
-  const holidayDates = new Map(
-    holidayCalendar.map((day) => {
-      const date = new Date(day.date);
-      const keyDate = startOfDay(date);
-      return [keyDate.getTime(), day.type];
-    }),
-  );
   const highlightHolidays = (day: Date) => {
     const key = startOfDay(day).getTime();
     const check = holidayDates.get(key);
