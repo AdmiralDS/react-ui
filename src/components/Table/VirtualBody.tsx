@@ -14,14 +14,13 @@ interface VirtualBodyProps extends React.HTMLAttributes<HTMLDivElement> {
   childHeight: number;
   renderAhread?: number;
   rowList: any[];
-  renderRow: (row: any, index: number) => void;
+  renderRow: (row: any, index: number) => React.ReactNode;
 }
 
 export const VirtualBody = React.forwardRef<HTMLDivElement, VirtualBodyProps>(
   ({ height, childHeight, renderAhread = 20, rowList, renderRow, ...props }, ref) => {
     const [scrollTop, setScrollTop] = React.useState(0);
     const scrollContainerRef = React.useRef<HTMLDivElement>(null);
-    const itemCount = rowList.length;
 
     const handleScroll = (e: any) => {
       requestAnimationFrame(() => {
@@ -40,6 +39,12 @@ export const VirtualBody = React.forwardRef<HTMLDivElement, VirtualBodyProps>(
     let startNode = Math.floor(scrollTop / childHeight) - renderAhread;
     startNode = Math.max(0, startNode);
 
+    const rowNodes = React.useMemo(
+      () => rowList.map((row, index) => renderRow(row, index)).filter(Boolean),
+      [rowList, renderRow],
+    );
+    const itemCount = rowNodes.length;
+
     let visibleNodeCount = Math.ceil(height / childHeight) + 2 * renderAhread;
     visibleNodeCount = Math.min(itemCount - startNode, visibleNodeCount);
 
@@ -47,8 +52,8 @@ export const VirtualBody = React.forwardRef<HTMLDivElement, VirtualBodyProps>(
     const bottomPadding = `${(itemCount - startNode - visibleNodeCount) * childHeight}px`;
 
     const visibleChildren = React.useMemo(
-      () => [...rowList].slice(startNode, startNode + visibleNodeCount).map((row, index) => renderRow(row, index)),
-      [startNode, visibleNodeCount, renderRow],
+      () => [...rowNodes].slice(startNode, startNode + visibleNodeCount),
+      [rowNodes, startNode, visibleNodeCount],
     );
 
     return (
