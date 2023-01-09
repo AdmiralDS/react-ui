@@ -279,13 +279,11 @@ export const Table: React.FC<TableProps> = ({
   const checkboxDimension = dimension === 's' || dimension === 'm' ? 's' : 'm';
   const columnMinWidth = dimension === 's' || dimension === 'm' ? COLUMN_MIN_WIDTH_M : COLUMN_MIN_WIDTH_L;
 
-  // const [cols, setColumns] = React.useState([...columnList]);
   const [verticalScroll, setVerticalScroll] = React.useState(false);
   const [tableWidth, setTableWidth] = React.useState(0);
   const [bodyHeight, setBodyHeight] = React.useState(0);
   const [scrollbar, setScrollbarSize] = React.useState(0);
 
-  // const stickyColumns = [...cols].filter((col) => col.sticky);
   const stickyColumns = [...columnList].filter((col) => col.sticky);
 
   const tableRef = React.useRef<HTMLDivElement>(null);
@@ -357,8 +355,12 @@ export const Table: React.FC<TableProps> = ({
       const columns = headerRef.current.querySelectorAll<HTMLElement>('.th');
       const resizeObserver = new ResizeObserver((entries) => {
         entries.forEach((entry) => {
-          // продумать момент с dataset
-          (entry.target as HTMLElement).dataset.resize = '' + entry.borderBoxSize[0].inlineSize;
+          const cells = scrollBodyRef.current?.querySelectorAll<HTMLElement>(
+            `[data-column="${(entry.target as HTMLElement).dataset.column}"]`,
+          );
+          cells?.forEach((cell) => {
+            cell.style.width = entry.borderBoxSize[0].inlineSize + 'px';
+          });
         });
       });
       columns.forEach((col) => resizeObserver.observe(col));
@@ -368,27 +370,10 @@ export const Table: React.FC<TableProps> = ({
     }
   }, [headerRef.current]);
 
-  // const updateColumnsWidths = () => {
-  // const newCols = [...columnList].map((col) => {
-  //   return {
-  //     ...col,
-  //     width: replaceWidthToNumber(col.width),
-  //   };
-  // });
-  // setColumns(newCols);
-  // };
-
-  // React.useLayoutEffect(() => {
-  //   updateColumnsWidths();
-  // }, [columnList, setColumns]);
-
   React.useLayoutEffect(() => {
     if (tableRef.current) {
       const resizeObserver = new ResizeObserver((entries) => {
-        // updateColumnsWidths();
         entries.forEach(() => {
-          // updateColumnsWidths();
-
           const size = getScrollbarSize();
           setScrollbarSize(size);
         });
@@ -399,25 +384,6 @@ export const Table: React.FC<TableProps> = ({
       };
     }
   }, [tableRef.current, columnList, displayRowSelectionColumn, displayRowExpansionColumn, setScrollbarSize]);
-
-  // const replaceWidthToNumber = React.useCallback(
-  //   (width?: string | number): number => {
-  //     const hasNumberWidth = typeof width === 'number';
-  //     const hasPercentWidth = typeof width === 'string' && width.includes('%');
-  //     const hasPixelWidth = typeof width === 'string' && width.includes('px');
-
-  //     if (hasPercentWidth && tableRef?.current) {
-  //       const checkboxCellWidth = checkboxCellRef?.current?.clientWidth || 0;
-  //       const expandCellWidth = expandCellRef?.current?.clientWidth || 0;
-  //       const maxWidth = tableRef.current.clientWidth - checkboxCellWidth - expandCellWidth;
-  //       return Math.round((parseInt(width) * (maxWidth || 1)) / 100);
-  //     }
-  //     if (hasNumberWidth) return width;
-  //     if (hasPixelWidth) return parseInt(width);
-  //     return DEFAULT_COLUMN_WIDTH;
-  //   },
-  //   [tableRef.current],
-  // );
 
   React.useLayoutEffect(() => {
     const scrollBody = scrollBodyRef.current;
@@ -594,7 +560,6 @@ export const Table: React.FC<TableProps> = ({
       key={`head_${column.name}`}
       column={column}
       index={index}
-      // columnsAmount={cols.length}
       columnsAmount={columnList.length}
       showDividerForLastColumn={showDividerForLastColumn}
       disableColumnResize={disableColumnResize}
@@ -610,17 +575,11 @@ export const Table: React.FC<TableProps> = ({
   );
 
   const renderBodyCell = (row: TableRow, col: Column) => {
-    const headerColumn: HTMLElement | undefined = headerRef.current?.querySelectorAll<HTMLElement>(
-      `[data-column="${col.name}"]`,
-    )[0];
-    const width = Number(headerColumn?.dataset.resize) || DEFAULT_COLUMN_WIDTH;
-    const colWidth = col.width ? (typeof col.width === 'number' ? col.width + 'px' : col.width) : DEFAULT_COLUMN_WIDTH;
-    // const colWidth = width;
     return (
       <Cell
         key={`${row.id}_${col.name}`}
         dimension={dimension}
-        style={{ width: colWidth }}
+        style={{ width: '100px' }}
         className="td"
         data-column={col.name}
         data-row={row.id}
@@ -769,7 +728,6 @@ export const Table: React.FC<TableProps> = ({
               {stickyColumns.length > 0 && stickyColumns.map((col, index) => renderHeaderCell(col as Column, index))}
             </StickyWrapper>
           )}
-          {/* {cols.map((col, index) => (col.sticky ? null : renderHeaderCell(col as Column, index)))} */}
           {columnList.map((col, index) => (col.sticky ? null : renderHeaderCell(col as Column, index)))}
           <Filler />
         </Header>

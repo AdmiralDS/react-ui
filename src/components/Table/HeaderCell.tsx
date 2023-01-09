@@ -68,7 +68,6 @@ export const HeaderCellComponent = ({
   return (
     <HeaderCell
       dimension={dimension}
-      // style={{ width: colWidth, minWidth: colWidth }}
       style={{ width: colWidth || '100px', minWidth: colWidth || '100px' }}
       className="th"
       data-column={name}
@@ -98,7 +97,6 @@ export const HeaderCellComponent = ({
       {index < columnsAmount - 1 && (
         <RowWidthResizer
           name={name}
-          width={width}
           onChange={handleResizeChange}
           disabled={disableResize || disableColumnResize}
           dimension={dimension}
@@ -108,7 +106,6 @@ export const HeaderCellComponent = ({
       {index === columnsAmount - 1 && showDividerForLastColumn && (
         <RowWidthResizer
           name={name}
-          width={width}
           onChange={handleResizeChange}
           disabled={disableResize || disableColumnResize}
           dimension={dimension}
