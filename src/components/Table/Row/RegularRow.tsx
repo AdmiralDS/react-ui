@@ -63,7 +63,6 @@ export const RegularRow = ({
                   style={{ margin: 0, flexShrink: 0 }}
                   dimension={dimension === 's' || dimension === 'm' ? 'mBig' : 'lBig'}
                   disabled={row.disabled ? true : undefined}
-                  data-disabled={row.disabled ? true : undefined}
                   highlightFocus={false}
                   onClick={() => onRowExpansionChange?.(row.id)}
                 >
