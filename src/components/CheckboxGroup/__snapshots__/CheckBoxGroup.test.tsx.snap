@@ -183,6 +183,7 @@ fieldset:disabled .c1 {
       >
         <label
           class="c1 c2"
+          data-field-id="2gcczd85sct0ppo3ddz3p6k"
           disabled=""
         >
           <div
@@ -191,6 +192,7 @@ fieldset:disabled .c1 {
             <input
               class="c6"
               disabled=""
+              id="2gcczd85sct0ppo3ddz3p6k"
               type="checkbox"
             />
             <div
@@ -207,6 +209,7 @@ fieldset:disabled .c1 {
         </label>
         <label
           class="c1 c2"
+          data-field-id="2hp4q1bar9l0tx7bt6lsfv"
           disabled=""
         >
           <div
@@ -215,6 +218,7 @@ fieldset:disabled .c1 {
             <input
               class="c6"
               disabled=""
+              id="2hp4q1bar9l0tx7bt6lsfv"
               type="checkbox"
             />
             <div
@@ -231,6 +235,7 @@ fieldset:disabled .c1 {
         </label>
         <label
           class="c1 c2"
+          data-field-id="2hqvst91b120dhup8e839de"
           disabled=""
         >
           <div
@@ -239,6 +244,7 @@ fieldset:disabled .c1 {
             <input
               class="c6"
               disabled=""
+              id="2hqvst91b120dhup8e839de"
               type="checkbox"
             />
             <div
@@ -435,6 +441,7 @@ fieldset:disabled .c1 {
     >
       <label
         class="c1 c2"
+        data-field-id="2gcczd85sct0ppo3ddz3p6k"
         disabled=""
       >
         <div
@@ -443,6 +450,7 @@ fieldset:disabled .c1 {
           <input
             class="c6"
             disabled=""
+            id="2gcczd85sct0ppo3ddz3p6k"
             type="checkbox"
           />
           <div
@@ -459,6 +467,7 @@ fieldset:disabled .c1 {
       </label>
       <label
         class="c1 c2"
+        data-field-id="2hp4q1bar9l0tx7bt6lsfv"
         disabled=""
       >
         <div
@@ -467,6 +476,7 @@ fieldset:disabled .c1 {
           <input
             class="c6"
             disabled=""
+            id="2hp4q1bar9l0tx7bt6lsfv"
             type="checkbox"
           />
           <div
@@ -483,6 +493,7 @@ fieldset:disabled .c1 {
       </label>
       <label
         class="c1 c2"
+        data-field-id="2hqvst91b120dhup8e839de"
         disabled=""
       >
         <div
@@ -491,6 +502,7 @@ fieldset:disabled .c1 {
           <input
             class="c6"
             disabled=""
+            id="2hqvst91b120dhup8e839de"
             type="checkbox"
           />
           <div
@@ -744,12 +756,14 @@ fieldset:disabled .c1 {
         Выберите города
         <label
           class="c1 c2"
+          data-field-id="2cu2tmt5zkl0ikh2arlsdyi"
         >
           <div
             class="c3 c4 c5"
           >
             <input
               class="c6"
+              id="2cu2tmt5zkl0ikh2arlsdyi"
               type="checkbox"
             />
             <div
@@ -766,12 +780,14 @@ fieldset:disabled .c1 {
         </label>
         <label
           class="c1 c2"
+          data-field-id="2duh27v4nmp0s36ci1nhep"
         >
           <div
             class="c3 c4 c5"
           >
             <input
               class="c6"
+              id="2duh27v4nmp0s36ci1nhep"
               type="checkbox"
             />
             <div
@@ -788,12 +804,14 @@ fieldset:disabled .c1 {
         </label>
         <label
           class="c1 c2"
+          data-field-id="2dyjilznq2o059jvr5i14le"
         >
           <div
             class="c3 c4 c5"
           >
             <input
               class="c6"
+              id="2dyjilznq2o059jvr5i14le"
               type="checkbox"
             />
             <div
@@ -990,12 +1008,14 @@ fieldset:disabled .c1 {
       Выберите города
       <label
         class="c1 c2"
+        data-field-id="2cu2tmt5zkl0ikh2arlsdyi"
       >
         <div
           class="c3 c4 c5"
         >
           <input
             class="c6"
+            id="2cu2tmt5zkl0ikh2arlsdyi"
             type="checkbox"
           />
           <div
@@ -1012,12 +1032,14 @@ fieldset:disabled .c1 {
       </label>
       <label
         class="c1 c2"
+        data-field-id="2duh27v4nmp0s36ci1nhep"
       >
         <div
           class="c3 c4 c5"
         >
           <input
             class="c6"
+            id="2duh27v4nmp0s36ci1nhep"
             type="checkbox"
           />
           <div
@@ -1034,12 +1056,14 @@ fieldset:disabled .c1 {
       </label>
       <label
         class="c1 c2"
+        data-field-id="2dyjilznq2o059jvr5i14le"
       >
         <div
           class="c3 c4 c5"
         >
           <input
             class="c6"
+            id="2dyjilznq2o059jvr5i14le"
             type="checkbox"
           />
           <div
@@ -1292,12 +1316,14 @@ fieldset:disabled .c1 {
       >
         <label
           class="c1 c2"
+          data-field-id="2f1jqhh07jq0fezncuqibit"
         >
           <div
             class="c3 c4 c5"
           >
             <input
               class="c6"
+              id="2f1jqhh07jq0fezncuqibit"
               type="checkbox"
             />
             <div
@@ -1314,12 +1340,14 @@ fieldset:disabled .c1 {
         </label>
         <label
           class="c1 c2"
+          data-field-id="2fi94h0crub0itl3luqnme"
         >
           <div
             class="c3 c4 c5"
           >
             <input
               class="c6"
+              id="2fi94h0crub0itl3luqnme"
               type="checkbox"
             />
             <div
@@ -1336,12 +1364,14 @@ fieldset:disabled .c1 {
         </label>
         <label
           class="c1 c2"
+          data-field-id="2fplntis5qp0aglz117h9qv"
         >
           <div
             class="c3 c4 c5"
           >
             <input
               class="c6"
+              id="2fplntis5qp0aglz117h9qv"
               type="checkbox"
             />
             <div
@@ -1537,12 +1567,14 @@ fieldset:disabled .c1 {
     >
       <label
         class="c1 c2"
+        data-field-id="2f1jqhh07jq0fezncuqibit"
       >
         <div
           class="c3 c4 c5"
         >
           <input
             class="c6"
+            id="2f1jqhh07jq0fezncuqibit"
             type="checkbox"
           />
           <div
@@ -1559,12 +1591,14 @@ fieldset:disabled .c1 {
       </label>
       <label
         class="c1 c2"
+        data-field-id="2fi94h0crub0itl3luqnme"
       >
         <div
           class="c3 c4 c5"
         >
           <input
             class="c6"
+            id="2fi94h0crub0itl3luqnme"
             type="checkbox"
           />
           <div
@@ -1581,12 +1615,14 @@ fieldset:disabled .c1 {
       </label>
       <label
         class="c1 c2"
+        data-field-id="2fplntis5qp0aglz117h9qv"
       >
         <div
           class="c3 c4 c5"
         >
           <input
             class="c6"
+            id="2fplntis5qp0aglz117h9qv"
             type="checkbox"
           />
           <div
@@ -1839,12 +1875,14 @@ fieldset:disabled .c1 {
       >
         <label
           class="c1 c2"
+          data-field-id="28cbxvqy42h07rfm0pzozsa"
         >
           <div
             class="c3 c4 c5"
           >
             <input
               class="c6"
+              id="28cbxvqy42h07rfm0pzozsa"
               type="checkbox"
             />
             <div
@@ -1861,12 +1899,14 @@ fieldset:disabled .c1 {
         </label>
         <label
           class="c1 c2"
+          data-field-id="2ajah2dk1j3072ez9mp1c17"
         >
           <div
             class="c3 c4 c5"
           >
             <input
               class="c6"
+              id="2ajah2dk1j3072ez9mp1c17"
               type="checkbox"
             />
             <div
@@ -1883,12 +1923,14 @@ fieldset:disabled .c1 {
         </label>
         <label
           class="c1 c2"
+          data-field-id="2ankbk3k8bx0fglrhi9739"
         >
           <div
             class="c3 c4 c5"
           >
             <input
               class="c6"
+              id="2ankbk3k8bx0fglrhi9739"
               type="checkbox"
             />
             <div
@@ -2084,12 +2126,14 @@ fieldset:disabled .c1 {
     >
       <label
         class="c1 c2"
+        data-field-id="28cbxvqy42h07rfm0pzozsa"
       >
         <div
           class="c3 c4 c5"
         >
           <input
             class="c6"
+            id="28cbxvqy42h07rfm0pzozsa"
             type="checkbox"
           />
           <div
@@ -2106,12 +2150,14 @@ fieldset:disabled .c1 {
       </label>
       <label
         class="c1 c2"
+        data-field-id="2ajah2dk1j3072ez9mp1c17"
       >
         <div
           class="c3 c4 c5"
         >
           <input
             class="c6"
+            id="2ajah2dk1j3072ez9mp1c17"
             type="checkbox"
           />
           <div
@@ -2128,12 +2174,14 @@ fieldset:disabled .c1 {
       </label>
       <label
         class="c1 c2"
+        data-field-id="2ankbk3k8bx0fglrhi9739"
       >
         <div
           class="c3 c4 c5"
         >
           <input
             class="c6"
+            id="2ankbk3k8bx0fglrhi9739"
             type="checkbox"
           />
           <div

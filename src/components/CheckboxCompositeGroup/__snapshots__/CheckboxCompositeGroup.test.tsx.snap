@@ -292,6 +292,7 @@ fieldset:disabled .c1 {
       >
         <label
           class="c1 c2"
+          data-field-id="2yto8srh0vg0dyanulb87qb"
           disabled=""
         >
           <div
@@ -300,6 +301,7 @@ fieldset:disabled .c1 {
             <input
               class="c6"
               disabled=""
+              id="2yto8srh0vg0dyanulb87qb"
               type="checkbox"
             />
             <div
@@ -320,6 +322,8 @@ fieldset:disabled .c1 {
         >
           <label
             class="c1 c2"
+            data-field-id="30a28wtsast0aey6wxkpeao"
+            data-field-name="Москва"
             disabled=""
           >
             <div
@@ -328,6 +332,7 @@ fieldset:disabled .c1 {
               <input
                 class="c12"
                 disabled=""
+                id="30a28wtsast0aey6wxkpeao"
                 name="Москва"
                 type="checkbox"
               />
@@ -345,6 +350,8 @@ fieldset:disabled .c1 {
           </label>
           <label
             class="c1 c2"
+            data-field-id="30os811leau0af692v1pqh"
+            data-field-name="Воронеж"
             disabled=""
           >
             <div
@@ -353,6 +360,7 @@ fieldset:disabled .c1 {
               <input
                 class="c12"
                 disabled=""
+                id="30os811leau0af692v1pqh"
                 name="Воронеж"
                 type="checkbox"
               />
@@ -370,6 +378,8 @@ fieldset:disabled .c1 {
           </label>
           <label
             class="c1 c2"
+            data-field-id="30qb9q184jk0datjkv9opmp"
+            data-field-name="Самара"
             disabled=""
           >
             <div
@@ -378,6 +388,7 @@ fieldset:disabled .c1 {
               <input
                 class="c12"
                 disabled=""
+                id="30qb9q184jk0datjkv9opmp"
                 name="Самара"
                 type="checkbox"
               />
@@ -395,6 +406,8 @@ fieldset:disabled .c1 {
           </label>
           <label
             class="c1 c2"
+            data-field-id="30t95gf6lmv02kjbo2y1io3"
+            data-field-name="Омск"
             disabled=""
           >
             <div
@@ -403,6 +416,7 @@ fieldset:disabled .c1 {
               <input
                 class="c12"
                 disabled=""
+                id="30t95gf6lmv02kjbo2y1io3"
                 name="Омск"
                 type="checkbox"
               />
@@ -710,6 +724,7 @@ fieldset:disabled .c1 {
     >
       <label
         class="c1 c2"
+        data-field-id="2yto8srh0vg0dyanulb87qb"
         disabled=""
       >
         <div
@@ -718,6 +733,7 @@ fieldset:disabled .c1 {
           <input
             class="c6"
             disabled=""
+            id="2yto8srh0vg0dyanulb87qb"
             type="checkbox"
           />
           <div
@@ -738,6 +754,8 @@ fieldset:disabled .c1 {
       >
         <label
           class="c1 c2"
+          data-field-id="30a28wtsast0aey6wxkpeao"
+          data-field-name="Москва"
           disabled=""
         >
           <div
@@ -746,6 +764,7 @@ fieldset:disabled .c1 {
             <input
               class="c12"
               disabled=""
+              id="30a28wtsast0aey6wxkpeao"
               name="Москва"
               type="checkbox"
             />
@@ -763,6 +782,8 @@ fieldset:disabled .c1 {
         </label>
         <label
           class="c1 c2"
+          data-field-id="30os811leau0af692v1pqh"
+          data-field-name="Воронеж"
           disabled=""
         >
           <div
@@ -771,6 +792,7 @@ fieldset:disabled .c1 {
             <input
               class="c12"
               disabled=""
+              id="30os811leau0af692v1pqh"
               name="Воронеж"
               type="checkbox"
             />
@@ -788,6 +810,8 @@ fieldset:disabled .c1 {
         </label>
         <label
           class="c1 c2"
+          data-field-id="30qb9q184jk0datjkv9opmp"
+          data-field-name="Самара"
           disabled=""
         >
           <div
@@ -796,6 +820,7 @@ fieldset:disabled .c1 {
             <input
               class="c12"
               disabled=""
+              id="30qb9q184jk0datjkv9opmp"
               name="Самара"
               type="checkbox"
             />
@@ -813,6 +838,8 @@ fieldset:disabled .c1 {
         </label>
         <label
           class="c1 c2"
+          data-field-id="30t95gf6lmv02kjbo2y1io3"
+          data-field-name="Омск"
           disabled=""
         >
           <div
@@ -821,6 +848,7 @@ fieldset:disabled .c1 {
             <input
               class="c12"
               disabled=""
+              id="30t95gf6lmv02kjbo2y1io3"
               name="Омск"
               type="checkbox"
             />
@@ -1184,12 +1212,14 @@ fieldset:disabled .c1 {
       >
         <label
           class="c1 c2"
+          data-field-id="2ovb5z0f0go0bjzb8xtflk9"
         >
           <div
             class="c3 c4 c5"
           >
             <input
               class="c6"
+              id="2ovb5z0f0go0bjzb8xtflk9"
               type="checkbox"
             />
             <div
@@ -1209,12 +1239,15 @@ fieldset:disabled .c1 {
         >
           <label
             class="c1 c2"
+            data-field-id="2q3ftd1xu750w1j9g1bemts"
+            data-field-name="Москва"
           >
             <div
               class="c3 c4 c5"
             >
               <input
                 class="c12"
+                id="2q3ftd1xu750w1j9g1bemts"
                 name="Москва"
                 type="checkbox"
               />
@@ -1232,12 +1265,15 @@ fieldset:disabled .c1 {
           </label>
           <label
             class="c1 c2"
+            data-field-id="2qvzy7dqcgq0ow0fq6geg7k"
+            data-field-name="Воронеж"
           >
             <div
               class="c3 c4 c5"
             >
               <input
                 class="c12"
+                id="2qvzy7dqcgq0ow0fq6geg7k"
                 name="Воронеж"
                 type="checkbox"
               />
@@ -1255,12 +1291,15 @@ fieldset:disabled .c1 {
           </label>
           <label
             class="c1 c2"
+            data-field-id="2qxo070i2y10t4jumar98e"
+            data-field-name="Самара"
           >
             <div
               class="c3 c4 c5"
             >
               <input
                 class="c12"
+                id="2qxo070i2y10t4jumar98e"
                 name="Самара"
                 type="checkbox"
               />
@@ -1278,12 +1317,15 @@ fieldset:disabled .c1 {
           </label>
           <label
             class="c1 c2"
+            data-field-id="2rdfdbjnifz0hrwqrwl3p55"
+            data-field-name="Омск"
           >
             <div
               class="c3 c4 c5"
             >
               <input
                 class="c12"
+                id="2rdfdbjnifz0hrwqrwl3p55"
                 name="Омск"
                 type="checkbox"
               />
@@ -1590,12 +1632,14 @@ fieldset:disabled .c1 {
     >
       <label
         class="c1 c2"
+        data-field-id="2ovb5z0f0go0bjzb8xtflk9"
       >
         <div
           class="c3 c4 c5"
         >
           <input
             class="c6"
+            id="2ovb5z0f0go0bjzb8xtflk9"
             type="checkbox"
           />
           <div
@@ -1615,12 +1659,15 @@ fieldset:disabled .c1 {
       >
         <label
           class="c1 c2"
+          data-field-id="2q3ftd1xu750w1j9g1bemts"
+          data-field-name="Москва"
         >
           <div
             class="c3 c4 c5"
           >
             <input
               class="c12"
+              id="2q3ftd1xu750w1j9g1bemts"
               name="Москва"
               type="checkbox"
             />
@@ -1638,12 +1685,15 @@ fieldset:disabled .c1 {
         </label>
         <label
           class="c1 c2"
+          data-field-id="2qvzy7dqcgq0ow0fq6geg7k"
+          data-field-name="Воронеж"
         >
           <div
             class="c3 c4 c5"
           >
             <input
               class="c12"
+              id="2qvzy7dqcgq0ow0fq6geg7k"
               name="Воронеж"
               type="checkbox"
             />
@@ -1661,12 +1711,15 @@ fieldset:disabled .c1 {
         </label>
         <label
           class="c1 c2"
+          data-field-id="2qxo070i2y10t4jumar98e"
+          data-field-name="Самара"
         >
           <div
             class="c3 c4 c5"
           >
             <input
               class="c12"
+              id="2qxo070i2y10t4jumar98e"
               name="Самара"
               type="checkbox"
             />
@@ -1684,12 +1737,15 @@ fieldset:disabled .c1 {
         </label>
         <label
           class="c1 c2"
+          data-field-id="2rdfdbjnifz0hrwqrwl3p55"
+          data-field-name="Омск"
         >
           <div
             class="c3 c4 c5"
           >
             <input
               class="c12"
+              id="2rdfdbjnifz0hrwqrwl3p55"
               name="Омск"
               type="checkbox"
             />
@@ -2053,12 +2109,14 @@ fieldset:disabled .c1 {
       >
         <label
           class="c1 c2"
+          data-field-id="2tgzgn07sok036ujt3yelmc"
         >
           <div
             class="c3 c4 c5"
           >
             <input
               class="c6"
+              id="2tgzgn07sok036ujt3yelmc"
               type="checkbox"
             />
             <div
@@ -2078,12 +2136,15 @@ fieldset:disabled .c1 {
         >
           <label
             class="c1 c2"
+            data-field-id="2v37elnhj4d05xb820s07ue"
+            data-field-name="Москва"
           >
             <div
               class="c3 c4 c5"
             >
               <input
                 class="c12"
+                id="2v37elnhj4d05xb820s07ue"
                 name="Москва"
                 type="checkbox"
               />
@@ -2101,12 +2162,15 @@ fieldset:disabled .c1 {
           </label>
           <label
             class="c1 c2"
+            data-field-id="2wfmasb99io05dt84d0sqng"
+            data-field-name="Воронеж"
           >
             <div
               class="c3 c4 c5"
             >
               <input
                 class="c12"
+                id="2wfmasb99io05dt84d0sqng"
                 name="Воронеж"
                 type="checkbox"
               />
@@ -2124,12 +2188,15 @@ fieldset:disabled .c1 {
           </label>
           <label
             class="c1 c2"
+            data-field-id="2wh0wa271n50cxxlbwb01kr"
+            data-field-name="Самара"
           >
             <div
               class="c3 c4 c5"
             >
               <input
                 class="c12"
+                id="2wh0wa271n50cxxlbwb01kr"
                 name="Самара"
                 type="checkbox"
               />
@@ -2147,12 +2214,15 @@ fieldset:disabled .c1 {
           </label>
           <label
             class="c1 c2"
+            data-field-id="2wjbvqhi4iq03ps7twn9z0c"
+            data-field-name="Омск"
           >
             <div
               class="c3 c4 c5"
             >
               <input
                 class="c12"
+                id="2wjbvqhi4iq03ps7twn9z0c"
                 name="Омск"
                 type="checkbox"
               />
@@ -2459,12 +2529,14 @@ fieldset:disabled .c1 {
     >
       <label
         class="c1 c2"
+        data-field-id="2tgzgn07sok036ujt3yelmc"
       >
         <div
           class="c3 c4 c5"
         >
           <input
             class="c6"
+            id="2tgzgn07sok036ujt3yelmc"
             type="checkbox"
           />
           <div
@@ -2484,12 +2556,15 @@ fieldset:disabled .c1 {
       >
         <label
           class="c1 c2"
+          data-field-id="2v37elnhj4d05xb820s07ue"
+          data-field-name="Москва"
         >
           <div
             class="c3 c4 c5"
           >
             <input
               class="c12"
+              id="2v37elnhj4d05xb820s07ue"
               name="Москва"
               type="checkbox"
             />
@@ -2507,12 +2582,15 @@ fieldset:disabled .c1 {
         </label>
         <label
           class="c1 c2"
+          data-field-id="2wfmasb99io05dt84d0sqng"
+          data-field-name="Воронеж"
         >
           <div
             class="c3 c4 c5"
           >
             <input
               class="c12"
+              id="2wfmasb99io05dt84d0sqng"
               name="Воронеж"
               type="checkbox"
             />
@@ -2530,12 +2608,15 @@ fieldset:disabled .c1 {
         </label>
         <label
           class="c1 c2"
+          data-field-id="2wh0wa271n50cxxlbwb01kr"
+          data-field-name="Самара"
         >
           <div
             class="c3 c4 c5"
           >
             <input
               class="c12"
+              id="2wh0wa271n50cxxlbwb01kr"
               name="Самара"
               type="checkbox"
             />
@@ -2553,12 +2634,15 @@ fieldset:disabled .c1 {
         </label>
         <label
           class="c1 c2"
+          data-field-id="2wjbvqhi4iq03ps7twn9z0c"
+          data-field-name="Омск"
         >
           <div
             class="c3 c4 c5"
           >
             <input
               class="c12"
+              id="2wjbvqhi4iq03ps7twn9z0c"
               name="Омск"
               type="checkbox"
             />
@@ -2922,12 +3006,14 @@ fieldset:disabled .c1 {
       >
         <label
           class="c1 c2"
+          data-field-id="2insds737vg01s22qdorxih"
         >
           <div
             class="c3 c4 c5"
           >
             <input
               class="c6"
+              id="2insds737vg01s22qdorxih"
               type="checkbox"
             />
             <div
@@ -2947,12 +3033,15 @@ fieldset:disabled .c1 {
         >
           <label
             class="c1 c2"
+            data-field-id="2kfi7ubctwy0xfdxmne4k1i"
+            data-field-name="Москва"
           >
             <div
               class="c3 c4 c5"
             >
               <input
                 class="c12"
+                id="2kfi7ubctwy0xfdxmne4k1i"
                 name="Москва"
                 type="checkbox"
               />
@@ -2970,12 +3059,15 @@ fieldset:disabled .c1 {
           </label>
           <label
             class="c1 c2"
+            data-field-id="2l1157pgv2f0xgvymp68lqn"
+            data-field-name="Воронеж"
           >
             <div
               class="c3 c4 c5"
             >
               <input
                 class="c12"
+                id="2l1157pgv2f0xgvymp68lqn"
                 name="Воронеж"
                 type="checkbox"
               />
@@ -2993,12 +3085,15 @@ fieldset:disabled .c1 {
           </label>
           <label
             class="c1 c2"
+            data-field-id="2l9nwksozg0f98oj17t89t"
+            data-field-name="Самара"
           >
             <div
               class="c3 c4 c5"
             >
               <input
                 class="c12"
+                id="2l9nwksozg0f98oj17t89t"
                 name="Самара"
                 type="checkbox"
               />
@@ -3016,12 +3111,15 @@ fieldset:disabled .c1 {
           </label>
           <label
             class="c1 c2"
+            data-field-id="2ld1aza2voi0rawulnefwl8"
+            data-field-name="Омск"
           >
             <div
               class="c3 c4 c5"
             >
               <input
                 class="c12"
+                id="2ld1aza2voi0rawulnefwl8"
                 name="Омск"
                 type="checkbox"
               />
@@ -3328,12 +3426,14 @@ fieldset:disabled .c1 {
     >
       <label
         class="c1 c2"
+        data-field-id="2insds737vg01s22qdorxih"
       >
         <div
           class="c3 c4 c5"
         >
           <input
             class="c6"
+            id="2insds737vg01s22qdorxih"
             type="checkbox"
           />
           <div
@@ -3353,12 +3453,15 @@ fieldset:disabled .c1 {
       >
         <label
           class="c1 c2"
+          data-field-id="2kfi7ubctwy0xfdxmne4k1i"
+          data-field-name="Москва"
         >
           <div
             class="c3 c4 c5"
           >
             <input
               class="c12"
+              id="2kfi7ubctwy0xfdxmne4k1i"
               name="Москва"
               type="checkbox"
             />
@@ -3376,12 +3479,15 @@ fieldset:disabled .c1 {
         </label>
         <label
           class="c1 c2"
+          data-field-id="2l1157pgv2f0xgvymp68lqn"
+          data-field-name="Воронеж"
         >
           <div
             class="c3 c4 c5"
           >
             <input
               class="c12"
+              id="2l1157pgv2f0xgvymp68lqn"
               name="Воронеж"
               type="checkbox"
             />
@@ -3399,12 +3505,15 @@ fieldset:disabled .c1 {
         </label>
         <label
           class="c1 c2"
+          data-field-id="2l9nwksozg0f98oj17t89t"
+          data-field-name="Самара"
         >
           <div
             class="c3 c4 c5"
           >
             <input
               class="c12"
+              id="2l9nwksozg0f98oj17t89t"
               name="Самара"
               type="checkbox"
             />
@@ -3422,12 +3531,15 @@ fieldset:disabled .c1 {
         </label>
         <label
           class="c1 c2"
+          data-field-id="2ld1aza2voi0rawulnefwl8"
+          data-field-name="Омск"
         >
           <div
             class="c3 c4 c5"
           >
             <input
               class="c12"
+              id="2ld1aza2voi0rawulnefwl8"
               name="Омск"
               type="checkbox"
             />
