@@ -696,7 +696,7 @@ export const Table: React.FC<TableProps> = ({
       </RowWrapper>
     );
 
-    return renderRowWrapper?.(row, index, node) ?? node;
+    return node ? renderRowWrapper?.(row, index, node) ?? node : node;
   };
 
   const renderBody = () => {
