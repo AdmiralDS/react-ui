@@ -17,6 +17,7 @@ import {
   ExpandCell,
   Filler,
   Header,
+  HeaderCellsWrapper,
   HeaderWrapper,
   Row,
   ScrollTableBody,
@@ -49,7 +50,8 @@ export type Column = {
   title: React.ReactNode;
   /** Дополнительный текст заголовка столбца */
   extraText?: React.ReactNode;
-  /** Ширина столбца. По умолчанию 100px */
+  /** Ширина столбца. В качестве ширины можно использовать любое валидное css значение (пиксели, проценты, функция calc...).
+   * По умолчанию 100px */
   width?: number | string;
   /** Выравнивание контента ячеек столбца по левому или правому краю. По умолчанию left */
   cellAlign?: 'left' | 'right';
@@ -189,8 +191,10 @@ export interface TableProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   onSortChange?: (sortObj: { name: string; sort: 'asc' | 'desc' | 'initial' }) => void;
   /** Колбек, который срабатывает при изменении ширины столбца.
-   * Колбек не срабатывает, когда пользователь тянет ресайзер влево/вправо (onMouseMove).
-   * Колбек срабатывает в момент, когда пользователь отпускает ресайзер (onMouseUp) и столбец принимает окончательную ширину.
+   * Данный колбек обязателен в случае, если таблица должна поддерживать ресайзинг.
+   * При срабатывании колбек сообщает пользователю о попытке ресайзинга столбца,
+   * после чего пользователь должен обновить ширину соответсвующего столбца.
+   * Таким образом изменение ширина столбца полностью контролируется пользователем.
    */
   onColumnResize?: (colObj: { name: string; width: string }) => void;
   /** Рендер функция для отрисовки контента ячейки. Входные параметры - объект строки и название столбца */
@@ -356,7 +360,7 @@ export const Table: React.FC<TableProps> = ({
       const resizeObserver = new ResizeObserver((entries) => {
         entries.forEach((entry) => {
           const cells = scrollBodyRef.current?.querySelectorAll<HTMLElement>(
-            `[data-column="${(entry.target as HTMLElement).dataset.column}"]`,
+            `[data-column="${(entry.target as HTMLElement).dataset['th-column']}"]`,
           );
           cells?.forEach((cell) => {
             cell.style.width = entry.borderBoxSize[0].inlineSize + 'px';
@@ -370,6 +374,7 @@ export const Table: React.FC<TableProps> = ({
     }
   }, [headerRef.current]);
 
+  // нужно ли здесь столько зависимостей
   React.useLayoutEffect(() => {
     if (tableRef.current) {
       const resizeObserver = new ResizeObserver((entries) => {
@@ -730,8 +735,10 @@ export const Table: React.FC<TableProps> = ({
               {stickyColumns.length > 0 && stickyColumns.map((col, index) => renderHeaderCell(col as Column, index))}
             </StickyWrapper>
           )}
-          {columnList.map((col, index) => (col.sticky ? null : renderHeaderCell(col as Column, index)))}
-          <Filler />
+          <HeaderCellsWrapper>
+            {columnList.map((col, index) => (col.sticky ? null : renderHeaderCell(col as Column, index)))}
+            <Filler />
+          </HeaderCellsWrapper>
         </Header>
       </HeaderWrapper>
       {renderBody()}

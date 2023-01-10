@@ -383,3 +383,12 @@ export const EmptyMessage = styled(Cell)`
   margin: 2px 0;
   color: ${({ theme }) => theme.color['Neutral/Neutral 50']};
 `;
+
+export const HeaderCellsWrapper = styled.div`
+  display: flex;
+  width: 100%;
+  border-bottom: none;
+  & > * {
+    border-bottom: 1px solid ${({ theme }) => theme.color['Neutral/Neutral 20']};
+  }
+`;
