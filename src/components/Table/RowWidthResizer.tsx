@@ -56,9 +56,7 @@ export function RowWidthResizer({ name, disabled, dimension, columnMinWidth, onC
   const handleMouseMove = (e: MouseEvent) => {
     if (isTaken) {
       e.preventDefault();
-      // некорректно работает если width выражена не в пикселях
-      const width = parseFloat(node.current?.parentElement?.style.width || '100px');
-      console.log(node.current?.parentElement?.style.width);
+      const width = node.current?.parentElement?.getBoundingClientRect().width || 100;
       let newWidth = width - (clientXRef.current - e.clientX);
       newWidth = newWidth >= columnMinWidth ? newWidth : columnMinWidth;
       if (width !== newWidth) {
@@ -68,7 +66,7 @@ export function RowWidthResizer({ name, disabled, dimension, columnMinWidth, onC
     }
   };
 
-  const [updateOnMove, freeResources] = throttle(handleMouseMove, 0);
+  const [updateOnMove, freeResources] = throttle(handleMouseMove, 50);
 
   React.useEffect(() => {
     if (!disabled) {
@@ -92,7 +90,7 @@ export function RowWidthResizer({ name, disabled, dimension, columnMinWidth, onC
   const handleMouseUp = (e: MouseEvent) => {
     if (isTaken) {
       e.preventDefault();
-      const width = parseFloat(node.current?.parentElement?.style.width || '100px');
+      const width = node.current?.parentElement?.getBoundingClientRect().width || 100;
       let newWidth = width - (clientXRef.current - e.clientX);
       newWidth = newWidth >= columnMinWidth ? newWidth : columnMinWidth;
       setTaken(false);
