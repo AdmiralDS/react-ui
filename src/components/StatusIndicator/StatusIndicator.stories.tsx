@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import styled, { css } from 'styled-components';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';

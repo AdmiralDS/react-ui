@@ -2,7 +2,7 @@ import { SuggestInput } from '#src/components/input';
 import { LIGHT_THEME } from '#src/components/themes';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import React from 'react';
+import * as React from 'react';
 import { ThemeProvider } from 'styled-components';
 
 const options = ['one', 'two', 'three'];

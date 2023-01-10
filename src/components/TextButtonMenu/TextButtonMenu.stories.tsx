@@ -1,7 +1,7 @@
 import { withDesign } from 'storybook-addon-designs';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { TextButtonMenu } from '#src/components/TextButtonMenu/index';
-import React from 'react';
+import * as React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import { T } from '#src/components/T';
 import type { RenderOptionProps } from '#src/components/Menu/MenuItem';

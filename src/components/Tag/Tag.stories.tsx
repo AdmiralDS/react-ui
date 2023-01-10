@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
@@ -91,13 +91,19 @@ const Template1: ComponentStory<typeof Tag> = (args: TagProps) => {
   return (
     <>
       <Tags>
-        <Tag>Neutral</Tag>
-        <Tag kind="green">Green</Tag>
-        <Tag kind="blue">Blue</Tag>
-        <Tag as="span" kind="red">
+        <Tag onClick={clickHandler}>Neutral</Tag>
+        <Tag onClick={clickHandler} kind="green">
+          Green
+        </Tag>
+        <Tag onClick={clickHandler} kind="blue">
+          Blue
+        </Tag>
+        <Tag onClick={clickHandler} as="span" kind="red">
           Red
         </Tag>
-        <Tag kind="orange">Orange</Tag>
+        <Tag onClick={clickHandler} kind="orange">
+          Orange
+        </Tag>
       </Tags>
       <Tags dimension="s">
         <Tag>Neutral</Tag>
@@ -116,17 +122,19 @@ const Template2: ComponentStory<typeof Tag> = (args: TagProps) => {
   return (
     <>
       <Tags>
-        <Tag statusViaBackground>Neutral</Tag>
-        <Tag statusViaBackground kind="green">
+        <Tag onClick={clickHandler} statusViaBackground>
+          Neutral
+        </Tag>
+        <Tag onClick={clickHandler} statusViaBackground kind="green">
           Green
         </Tag>
-        <Tag statusViaBackground kind="blue">
+        <Tag onClick={clickHandler} statusViaBackground kind="blue">
           Blue
         </Tag>
-        <Tag statusViaBackground kind="red">
+        <Tag onClick={clickHandler} statusViaBackground kind="red">
           Red
         </Tag>
-        <Tag statusViaBackground kind="orange">
+        <Tag onClick={clickHandler} statusViaBackground kind="orange">
           Orange
         </Tag>
       </Tags>
@@ -153,11 +161,21 @@ const Template3: ComponentStory<typeof Tag> = (args: TagProps) => {
   return (
     <>
       <Tags>
-        <Tag kind={{ background: '#E052BD' }}>Green</Tag>
-        <Tag statusViaBackground kind={{ background: '#EAFAF9', border: '#4AD2CA' }}>
+        <Tag onClick={clickHandler} kind={{ background: '#E052BD' }}>
+          Green
+        </Tag>
+        <Tag
+          onClick={clickHandler}
+          statusViaBackground
+          kind={{ background: '#EAFAF9', border: '#4AD2CA', backgroundHover: '#7EFFDB' }}
+        >
           Turquoise
         </Tag>
-        <Tag statusViaBackground kind={{ background: '#FBE9F7', border: '#E052BD' }}>
+        <Tag
+          onClick={clickHandler}
+          statusViaBackground
+          kind={{ background: '#FBE9F7', border: '#E052BD', backgroundHover: '#D59BF6' }}
+        >
           Magenta
         </Tag>
       </Tags>
@@ -180,8 +198,10 @@ const Template4: ComponentStory<typeof Tag> = (args: TagProps) => {
   return (
     <>
       <Tags>
-        <Tag onClick={clickHandler}>Active</Tag>
-        <Tag>Passive</Tag>
+        <Tag {...args} onClick={clickHandler}>
+          Active
+        </Tag>
+        <Tag {...args}>Passive</Tag>
       </Tags>
     </>
   );
@@ -190,7 +210,12 @@ const Template4: ComponentStory<typeof Tag> = (args: TagProps) => {
 const Template5: ComponentStory<typeof Tag> = (args) => {
   return (
     <>
-      <Tag width={150}>Если текст длинее ширины тэга, добавляется тултип </Tag>
+      <Tags>
+        <Tag width={150} onClick={clickHandler}>
+          Если текст длинее ширины тэга, добавляется тултип{' '}
+        </Tag>
+        <Tag width={150}>Если текст длинее ширины тэга, добавляется тултип </Tag>
+      </Tags>
     </>
   );
 };

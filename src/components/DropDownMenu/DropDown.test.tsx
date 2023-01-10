@@ -1,7 +1,7 @@
 import { DropDownItem } from '#src/components/DropDownItem';
 import { DropDownMenu } from '#src/components/DropDownMenu';
 import { LIGHT_THEME } from '#src/components/themes';
-import React from 'react';
+import * as React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { ThemeProvider } from 'styled-components';
 import { ReactComponent as CardSolid } from '@admiral-ds/icons/build/finance/CardSolid.svg';

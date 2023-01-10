@@ -597,7 +597,9 @@ export const Table: React.FC<TableProps> = ({
     const indeterminate =
       row.groupRows?.some((rowId) => rowToGroupMap[rowId].checked) &&
       row.groupRows?.some((rowId) => !rowToGroupMap[rowId].checked);
-    const checked = row.groupRows?.every((rowId) => rowToGroupMap[rowId].checked);
+
+    const hasGroupRows = row.groupRows?.length;
+    const checked = hasGroupRows ? row.groupRows?.every((rowId) => rowToGroupMap[rowId].checked) : row.selected;
 
     return (
       <GroupRow
@@ -672,7 +674,7 @@ export const Table: React.FC<TableProps> = ({
       </RowWrapper>
     );
 
-    return renderRowWrapper?.(row, index, node) ?? node;
+    return node ? renderRowWrapper?.(row, index, node) ?? node : node;
   };
 
   const renderBody = () => {

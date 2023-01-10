@@ -84,6 +84,8 @@ export interface MenuProps extends HTMLAttributes<HTMLDivElement> {
   /** Возможность отключить подсветку выбранной опции
    * (например, при множественном выборе, когда у каждой опции есть Checkbox */
   disableSelectedOptionHighlight?: boolean;
+  onForwardCycleApprove?: () => boolean;
+  onBackwardCycleApprove?: () => boolean;
 }
 
 export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
@@ -100,6 +102,8 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
       dimension = 'l',
       multiSelection = false,
       disableSelectedOptionHighlight = false,
+      onForwardCycleApprove,
+      onBackwardCycleApprove,
       ...props
     },
     ref,
@@ -114,6 +118,11 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
         finishCycle = currentIndex === -1 ? nextIndex === 0 : nextIndex === currentIndex;
       }
 
+      const isCycle = currentIndex > -1 && nextIndex < currentIndex;
+      const approve = isCycle && onForwardCycleApprove ? onForwardCycleApprove() : true;
+
+      nextIndex = approve ? nextIndex : currentIndex;
+
       const disabled = model[nextIndex].disabled || model[nextIndex].readOnly;
       return disabled ? undefined : model[nextIndex].id;
     };
@@ -127,6 +136,11 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
         prevIndex = prevIndex > 0 ? prevIndex - 1 : model.length - 1;
         finishCycle = currentIndex === -1 ? prevIndex === 0 : prevIndex === currentIndex;
       }
+
+      const isCycle = currentIndex > -1 && prevIndex > currentIndex;
+      const approve = isCycle && onBackwardCycleApprove ? onBackwardCycleApprove() : true;
+
+      prevIndex = approve ? prevIndex : currentIndex;
 
       const disabled = model[prevIndex].disabled || model[prevIndex].readOnly;
       return disabled ? undefined : model[prevIndex].id;

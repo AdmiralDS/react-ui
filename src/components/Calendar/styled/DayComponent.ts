@@ -1,3 +1,4 @@
+import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import styled, { css } from 'styled-components';
 import { typography } from '#src/components/Typography';
 
@@ -12,11 +13,12 @@ type DayComponentProps = {
   disabled?: boolean;
   inSelectingRange: boolean;
   outsideMonth?: boolean;
+  highlightSpecialDayMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
 };
 
 const DAY_SIZE = '36px';
 const DAY_PADDING = '8px 0';
-const DAY_MARGIN_BOTOM = '4px';
+const DAY_MARGIN_BOTTOM = '4px';
 
 const hoverMixin = css`
   &:hover:after {
@@ -32,7 +34,7 @@ export const DayComponent = styled.div<DayComponentProps>`
   width: ${DAY_SIZE};
   height: ${DAY_SIZE};
   padding: ${DAY_PADDING};
-  margin-bottom: ${DAY_MARGIN_BOTOM};
+  margin-bottom: ${DAY_MARGIN_BOTTOM};
   ${typography['Body/Body 2 Long']}
   color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
   box-sizing: border-box;
@@ -51,12 +53,21 @@ export const DayComponent = styled.div<DayComponentProps>`
     border-radius: 50%;
   }
 
-  ${({ disabled, theme, outsideMonth }) =>
-    (disabled || outsideMonth) &&
+  ${({ disabled, theme }) =>
+    disabled &&
     `
       color: ${theme.color['Neutral/Neutral 30']};
     `}
 
+  ${({ theme, outsideMonth }) =>
+    outsideMonth &&
+    `
+      color: ${theme.color['Neutral/Neutral 30']};
+      opacity: 0;
+      pointer-events: none;
+    `}
+
+  ${(p) => p.highlightSpecialDayMixin}
   ${(p) => (p.disabled ? '' : hoverMixin)}
 
   ${({ disabled, theme, selected, inSelectingRange }) =>

@@ -1,7 +1,7 @@
 import type { MultiButtonItem, MultiButtonProps } from '#src/components/MultiButton';
 import { MultiButton } from '#src/components/MultiButton';
 import type { MouseEvent } from 'react';
-import React from 'react';
+import * as React from 'react';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import styled, { ThemeProvider } from 'styled-components';

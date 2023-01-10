@@ -2,6 +2,38 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.10.0](https://github.com/AdmiralDS/react-ui/compare/v3.9.0...v3.10.0) (2022-12-28)
+
+
+### Features
+
+* **Calendar:** add highlightWeekend prop ([468cc50](https://github.com/AdmiralDS/react-ui/commit/468cc50c9504226197c4387a7f22b255eb1b0276))
+* **Calendar:** hide dates outside Month ([26100b3](https://github.com/AdmiralDS/react-ui/commit/26100b312807fcd7b4706b83429bb09b9c31489d))
+* **PaginationOne:** add page number input panel to dropdown ([e0c01e6](https://github.com/AdmiralDS/react-ui/commit/e0c01e6f973feb19d30b4a0549aca0a9b3ca28d2))
+
+
+### Bug Fixes
+
+* **TextArea:** fix autoHeight on first render ([766f112](https://github.com/AdmiralDS/react-ui/commit/766f11220a88bfa941f3f356695e186ae5aa9aba))
+
+## [3.9.0](https://github.com/AdmiralDS/react-ui/compare/v3.8.3...v3.9.0) (2022-12-22)
+
+
+### Features
+
+* **Select:** expose input ref and keyboard event handlers ([6e3da69](https://github.com/AdmiralDS/react-ui/commit/6e3da690525e47f45182106b444d360e4c88f808))
+* **SelectField:** add filtering example story ([215f326](https://github.com/AdmiralDS/react-ui/commit/215f326ee8c6d24cdb817d90dbafdbdc65390ac3))
+* **Tag:** add custom hover background for active tag ([af51ff2](https://github.com/AdmiralDS/react-ui/commit/af51ff21b5965bc55da8db5827eee2e6752e30fd))
+* **Tag:** remove change background color on hover for passive tags ([94c2963](https://github.com/AdmiralDS/react-ui/commit/94c2963a6200c80c52ff6c8039f128e467c31778))
+
+
+### Bug Fixes
+
+* **DropdownContainer:** autocalculate vertical position ([7e7a618](https://github.com/AdmiralDS/react-ui/commit/7e7a6189838fd53438a93fd230de81371a0d5089))
+* **Select:** fix paddings for size s ([8ad5cd3](https://github.com/AdmiralDS/react-ui/commit/8ad5cd3fe5c73e7229d8303b69cc96b1c5e83889))
+* **Table:** fix bug resize cursor ([48e508b](https://github.com/AdmiralDS/react-ui/commit/48e508b9519b8b35cdccef8da56553cf85f0fa05))
+* **Tag:** fix hover border color on active tag ([f6c24a6](https://github.com/AdmiralDS/react-ui/commit/f6c24a6b78c56178fee4aea25e23fe6f2a46201c))
+
 ### [3.8.3](https://github.com/AdmiralDS/react-ui/compare/v3.8.2...v3.8.3) (2022-12-20)
 
 

@@ -1,5 +1,5 @@
 import type { HTMLAttributes } from 'react';
-import React from 'react';
+import * as React from 'react';
 import type { TagVisualProps, TagSizeProps } from '#src/components/Tag';
 import { Tag } from '#src/components/Tag';
 import type { DropMenuComponentProps } from '#src/components/DropMenu';

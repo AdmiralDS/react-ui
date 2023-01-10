@@ -76,8 +76,6 @@ export const DropdownContainer = React.forwardRef<HTMLDivElement, React.PropsWit
     }, [containerRef]);
 
     const checkDropdownPosition = () => {
-      if (props.alignSelf && props.alignSelf !== 'auto') return;
-
       const node = containerRef.current;
       const targetNode = targetRef.current;
       if (node && targetNode) {
@@ -94,11 +92,13 @@ export const DropdownContainer = React.forwardRef<HTMLDivElement, React.PropsWit
           setDisplayUpward(false);
         }
 
+        if (props.alignSelf && props.alignSelf !== 'auto') return;
+
         const rectWidth = rect.right - rect.left;
 
-        // впишится ли контейнер во viewport, начиная от левого края target
+        // впишется ли контейнер во viewport, начиная от левого края target
         const enoughWidthOnTheRight = viewportWidth - targetRect.left >= rectWidth;
-        // впишится ли контейнер во viewport, если его правой границей будет правый край target
+        // впишется ли контейнер во viewport, если его правой границей будет правый край target
         const enoughWidthOnTheLeft = targetRect.right - 16 >= rectWidth;
 
         const containerWiderTarget = rectWidth > targetRect.width;

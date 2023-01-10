@@ -121,6 +121,8 @@ const CheckboxFieldDemo: ComponentStory<typeof CheckboxField> = (props) => {
             setChecked(e.target.checked);
           }}
           data-container-id="checkboxFieldIdOne"
+          id="checkboxFieldId"
+          name="checkboxFieldName"
         >
           Управляемый чекбокс
         </CheckboxField>

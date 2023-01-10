@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import styled from 'styled-components';
 import { typography } from '#src/components/Typography';
 import { fitToCurrency } from '#src/components/input/NumberInput';

@@ -71,9 +71,9 @@ const wrapperBorder = css<{ border: TagKind | string }>`
     }};
 `;
 
-const wrapperHover = css<{ background: TagKind | string }>`
-  background: ${({ background, theme }) => {
-    switch (background) {
+const wrapperHover = css<{ backgroundHover: TagKind | string }>`
+  background: ${({ backgroundHover, theme }) => {
+    switch (backgroundHover) {
       case 'green':
         return theme.color['Success/Success 20'];
       case 'blue':
@@ -85,7 +85,7 @@ const wrapperHover = css<{ background: TagKind | string }>`
       case 'neutral':
         return theme.color['Neutral/Neutral 20'];
       default:
-        return background || theme.color['Neutral/Neutral 20'];
+        return backgroundHover || theme.color['Neutral/Neutral 20'];
     }
   }};
 `;
@@ -98,6 +98,7 @@ const Wrapper = styled.button<{
   statusViaBackground?: boolean;
   border: TagKind | string;
   background: TagKind | string;
+  backgroundHover: TagKind | string;
 }>`
   position: relative;
   box-sizing: border-box;
@@ -124,8 +125,10 @@ const Wrapper = styled.button<{
 
   &:hover,
   &:active {
-    ${({ statusViaBackground, theme }) =>
-      statusViaBackground ? wrapperHover : `background: ${theme.color['Neutral/Neutral 20']};`}
+    ${({ statusViaBackground, theme, clickable }) =>
+      clickable && !statusViaBackground ? `border: 1px solid ${theme.color['Neutral/Neutral 20']};` : ''}
+    ${({ statusViaBackground, theme, clickable }) =>
+      clickable ? (statusViaBackground ? wrapperHover : `background: ${theme.color['Neutral/Neutral 20']};`) : ''}
   }
 
   &:focus-visible {
@@ -200,9 +203,9 @@ export interface TagVisualProps {
   /** Тип тэга. Можно выбрать из предложенных вариантов, либо задать свои цвета для тэга.
    * В случае когда статус задается через статусную метку (кружок), свойство background отвечает за цвет статусной метки.
    * В случае когда статус задается через цвет фона и обводки, свойство background отвечает за цвет фона,
-   * свойство border отвечает за цвет обводки.
+   * свойство border отвечает за цвет обводки, свойство backgroundHover отвечает за цвет фона при ховере в случае активного тэга.
    */
-  kind?: TagKind | { background: string; border?: string };
+  kind?: TagKind | { background: string; border?: string; backgroundHover?: string };
   /** Отображение статуса через цвет обводки и фона. По умолчанию, при statusViaBackground = false, отображение статуса
    * происходит через цветную статусную метку (цветной кружок рядом с текстом)
    */
@@ -253,6 +256,14 @@ export const Tag = React.forwardRef<HTMLElement, TagProps & TagInternalProps>(
       typeof kind === 'object' ? (kind.background ? kind.background : 'neutral') : (kind as TagKind);
     const border: TagKind | string =
       typeof kind === 'object' ? (!!kind.background && !!kind.border ? kind.border : 'neutral') : (kind as TagKind);
+    const backgroundHover: TagKind | string =
+      typeof kind === 'object'
+        ? kind.backgroundHover
+          ? kind.backgroundHover
+          : kind.background
+          ? kind.background
+          : 'neutral'
+        : (kind as TagKind);
 
     React.useLayoutEffect(() => {
       const element = textRef.current;
@@ -289,10 +300,11 @@ export const Tag = React.forwardRef<HTMLElement, TagProps & TagInternalProps>(
           ref={refSetter(ref, wrapperRef)}
           width={width}
           onClick={onClick}
-          clickable={!!onClick || overflow}
+          clickable={!!onClick}
           statusViaBackground={statusViaBackground}
           border={border}
           background={background}
+          backgroundHover={backgroundHover}
           dimension={dimension}
           type="button"
           {...props}

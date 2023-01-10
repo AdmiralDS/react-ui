@@ -50,7 +50,7 @@ export const GroupRow = ({
       <ExpandCell dimension={dimension}>
         <ExpandIconPlacement
           dimension={dimension === 's' || dimension === 'm' ? 'mBig' : 'lBig'}
-          data-disabled={row.disabled || row.groupRows?.length === 0 ? true : undefined}
+          disabled={row.disabled || row.groupRows?.length === 0 ? true : undefined}
           highlightFocus={false}
           onClick={handleExpandClick}
         >

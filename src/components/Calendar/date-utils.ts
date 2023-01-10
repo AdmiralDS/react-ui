@@ -97,7 +97,7 @@ const isWithinInterval = (date: Date, interval: { start: Date; end: Date }): boo
   return time >= startTime && time <= endTime;
 };
 
-const startOfDay = (date: Date): Date => {
+export const startOfDay = (date: Date): Date => {
   date.setHours(0, 0, 0, 0);
   return date;
 };
