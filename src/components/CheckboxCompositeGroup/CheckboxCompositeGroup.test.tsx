@@ -23,11 +23,13 @@ describe('CheckboxCompositeGroup', () => {
   const Component = (props: CheckboxCompositeGroupProps) => (
     <ThemeProvider theme={LIGHT_THEME}>
       <CheckboxCompositeGroup {...props}>
-        <CheckboxField indeterminate>Города :</CheckboxField>
+        <CheckboxField id="checkboxFieldCities" indeterminate>
+          Города :
+        </CheckboxField>
         <CheckboxGroup>
           {initialValue.map((item) => {
             return (
-              <CheckboxField name={item.label} key={item.id}>
+              <CheckboxField id={`checkboxField${item.id}`} name={item.label} key={item.id}>
                 {item.label}
               </CheckboxField>
             );

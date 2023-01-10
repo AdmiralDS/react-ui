@@ -15,9 +15,9 @@ describe('CheckboxGroup', () => {
   const Component = (props: CheckboxGroupProps) => (
     <ThemeProvider theme={LIGHT_THEME}>
       <CheckboxGroup {...props}>
-        <Checkbox>Москва</Checkbox>
-        <Checkbox>Воронеж</Checkbox>
-        <Checkbox>Самара</Checkbox>
+        <Checkbox id="checkboxFieldMoscow">Москва</Checkbox>
+        <Checkbox id="checkboxFieldVoronezh">Воронеж</Checkbox>
+        <Checkbox id="checkboxFieldSamara">Самара</Checkbox>
       </CheckboxGroup>
     </ThemeProvider>
   );
