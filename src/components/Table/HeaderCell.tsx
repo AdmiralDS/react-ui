@@ -68,7 +68,7 @@ export const HeaderCellComponent = ({
   return (
     <HeaderCell
       dimension={dimension}
-      style={{ width: colWidth || '100px', minWidth: colWidth || '100px' }}
+      style={{ width: colWidth, minWidth: colWidth }}
       className="th"
       data-th-column={name}
       ref={cellRef}

@@ -132,7 +132,7 @@ const Template: ComponentStory<typeof Table> = (args) => {
       {...args}
       columnList={cols}
       onColumnResize={({ name, width }) => {
-        const newCols = cols.map((col) => ({ ...col, width: col.name === name ? width : col.width }));
+        const newCols = cols.map((col) => (col.name === name ? { ...col, width } : col));
         setCols(newCols);
       }}
     />

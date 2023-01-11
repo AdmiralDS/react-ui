@@ -216,7 +216,6 @@ export const columnList: Column[] = [
   {
     name: 'currency',
     title: 'Валюта',
-    width: 'calc(100% - 500px)',
   },
   {
     name: 'rate',
@@ -243,6 +242,7 @@ export const columnListWithWidth: Column[] = [
   {
     name: 'currency',
     title: 'Валюта',
+    width: '20%',
   },
   {
     name: 'rate',

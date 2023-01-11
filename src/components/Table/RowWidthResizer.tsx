@@ -53,20 +53,37 @@ export function RowWidthResizer({ name, disabled, dimension, columnMinWidth, onC
   const clientXRef = React.useRef(0);
   const [isTaken, setTaken] = React.useState(false);
 
+  const handleResize = (e: any) => {
+    e.preventDefault();
+    const width = node.current?.parentElement?.getBoundingClientRect().width || 100;
+    let newWidth = width - (clientXRef.current - e.clientX);
+    newWidth = newWidth >= columnMinWidth ? newWidth : columnMinWidth;
+    if (width !== newWidth) {
+      onChange({ name, width: newWidth });
+    }
+    clientXRef.current = e.clientX;
+  };
+
+  const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    setTaken(true);
+    clientXRef.current = e.clientX;
+  };
+
   const handleMouseMove = (e: MouseEvent) => {
     if (isTaken) {
-      e.preventDefault();
-      const width = node.current?.parentElement?.getBoundingClientRect().width || 100;
-      let newWidth = width - (clientXRef.current - e.clientX);
-      newWidth = newWidth >= columnMinWidth ? newWidth : columnMinWidth;
-      if (width !== newWidth) {
-        onChange({ name, width: newWidth });
-      }
-      clientXRef.current = e.clientX;
+      handleResize(e);
     }
   };
 
-  const [updateOnMove, freeResources] = throttle(handleMouseMove, 50);
+  const handleMouseUp = (e: MouseEvent) => {
+    if (isTaken) {
+      handleResize(e);
+      setTaken(false);
+    }
+  };
+
+  const [updateOnMove, freeResources] = throttle(handleMouseMove, 100);
 
   React.useEffect(() => {
     if (!disabled) {
@@ -80,26 +97,6 @@ export function RowWidthResizer({ name, disabled, dimension, columnMinWidth, onC
       };
     }
   });
-
-  const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    setTaken(true);
-    clientXRef.current = e.clientX;
-  };
-
-  const handleMouseUp = (e: MouseEvent) => {
-    if (isTaken) {
-      e.preventDefault();
-      const width = node.current?.parentElement?.getBoundingClientRect().width || 100;
-      let newWidth = width - (clientXRef.current - e.clientX);
-      newWidth = newWidth >= columnMinWidth ? newWidth : columnMinWidth;
-      setTaken(false);
-      if (width !== newWidth) {
-        onChange({ name, width: newWidth });
-      }
-      clientXRef.current = e.clientX;
-    }
-  };
 
   return (
     <ResizerWrapper ref={node} disabled={disabled} dimension={dimension} onMouseDown={handleMouseDown}>

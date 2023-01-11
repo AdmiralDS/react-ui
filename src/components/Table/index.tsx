@@ -194,7 +194,7 @@ export interface TableProps extends React.HTMLAttributes<HTMLDivElement> {
    * Данный колбек обязателен в случае, если таблица должна поддерживать ресайзинг.
    * При срабатывании колбек сообщает пользователю о попытке ресайзинга столбца,
    * после чего пользователь должен обновить ширину соответсвующего столбца.
-   * Таким образом изменение ширина столбца полностью контролируется пользователем.
+   * Таким образом контроль за ресайзингом происходит на стороне пользователя.
    */
   onColumnResize?: (colObj: { name: string; width: string }) => void;
   /** Рендер функция для отрисовки контента ячейки. Входные параметры - объект строки и название столбца */
@@ -360,7 +360,7 @@ export const Table: React.FC<TableProps> = ({
       const resizeObserver = new ResizeObserver((entries) => {
         entries.forEach((entry) => {
           const cells = scrollBodyRef.current?.querySelectorAll<HTMLElement>(
-            `[data-column="${(entry.target as HTMLElement).dataset['th-column']}"]`,
+            `[data-column="${(entry.target as HTMLElement).dataset.thColumn}"]`,
           );
           cells?.forEach((cell) => {
             cell.style.width = entry.borderBoxSize[0].inlineSize + 'px';
@@ -372,23 +372,12 @@ export const Table: React.FC<TableProps> = ({
         resizeObserver.disconnect();
       };
     }
-  }, [headerRef.current]);
+  }, [headerRef.current, columnList]);
 
-  // нужно ли здесь столько зависимостей
-  React.useLayoutEffect(() => {
-    if (tableRef.current) {
-      const resizeObserver = new ResizeObserver((entries) => {
-        entries.forEach(() => {
-          const size = getScrollbarSize();
-          setScrollbarSize(size);
-        });
-      });
-      resizeObserver.observe(tableRef.current);
-      return () => {
-        resizeObserver.disconnect();
-      };
-    }
-  }, [tableRef.current, columnList, displayRowSelectionColumn, displayRowExpansionColumn, setScrollbarSize]);
+  React.useEffect(() => {
+    const size = getScrollbarSize();
+    setScrollbarSize(size);
+  }, [setScrollbarSize]);
 
   React.useLayoutEffect(() => {
     const scrollBody = scrollBodyRef.current;
