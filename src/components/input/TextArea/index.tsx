@@ -192,6 +192,30 @@ function defaultHandleInput(newInputData: InputData): InputData {
 
 const stopEvent = (e: React.MouseEvent) => e.preventDefault();
 
+const StyledSpan = styled.span<{ dimension: ComponentDimension }>`
+  margin: 0;
+  padding: ${verticalPaddingValue}px ${horizontalPaddingValue}px;
+  overflow-wrap: anywhere;
+
+  ${(props) => (props.dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
+`;
+
+const textAreaHeight = (rows: number, dimension?: ComponentDimension) => {
+  const textAreaLineHeight = dimension === 's' ? 20 : 24;
+  return rows * textAreaLineHeight + 2 * verticalPaddingValue({ dimension });
+};
+
+const StyledContainer = styled(Container)<{
+  autoHeight: boolean;
+  rows: number;
+  dimension: ComponentDimension;
+}>`
+  ${(p) =>
+    p.autoHeight
+      ? `min-height: ${textAreaHeight(p.rows, p.dimension)}px`
+      : `height: ${textAreaHeight(p.rows, p.dimension)}px`}
+`;
+
 export interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   /** Максимальное количество символов для ввода */
   maxLength?: number;
@@ -244,12 +268,12 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
       className,
       autoHeight,
       skeleton = false,
+      dimension = 'm',
       ...props
     },
     ref,
   ) => {
     const inputRef = React.useRef<HTMLTextAreaElement>(null);
-    const [textRows, setTextRows] = React.useState<number>(rows);
 
     const iconArray = React.Children.toArray(icons);
 
@@ -296,60 +320,37 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
       }
     }, [inputRef.current, handleInput]);
 
-    const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-      if (autoHeight) {
-        const textareaLineHeight = props.dimension === 's' ? 20 : 24;
-        const previousRows = e.target.rows;
-        e.target.rows = rows;
-        const currentRows = ~~(e.target.scrollHeight / textareaLineHeight);
-        if (currentRows === previousRows) {
-          e.target.rows = currentRows;
-        } else if (currentRows > previousRows) {
-          e.target.rows = currentRows;
-          e.target.scrollTop = e.target.scrollHeight;
-        }
-        const rowCount = currentRows > rows ? currentRows : rows;
-        setTextRows(rowCount);
-      }
-      props.onChange?.(e);
-    };
-
-    React.useEffect(() => {
-      if (inputRef.current) {
-        const textareaLineHeight = props.dimension === 's' ? 20 : 24;
-        const currentRows = ~~(inputRef.current.scrollHeight / textareaLineHeight);
-        const rowCount = currentRows > rows ? currentRows : rows;
-        setTextRows(rowCount);
-      }
-    }, []);
-
     return (
-      <Container
+      <StyledContainer
         className={className}
         ref={containerRef}
         data-read-only={props.readOnly ? true : undefined}
         data-status={status}
         skeleton={skeleton}
+        autoHeight={!!autoHeight}
+        rows={rows}
+        dimension={dimension}
         {...(props.disableCopying && {
           onMouseDown: stopEvent,
         })}
       >
+        <StyledSpan dimension={dimension}>{inputData.value}</StyledSpan>
         <Text
           ref={refSetter(ref, inputRef)}
           {...props}
+          dimension={dimension}
           iconCount={iconCount}
           value={inputData.value}
-          rows={textRows}
-          onChange={onChange}
+          style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
         />
         <BorderedDiv />
         {iconCount > 0 && (
-          <IconPanel disabled={props.disabled} dimension={props.dimension}>
+          <IconPanel disabled={props.disabled} dimension={dimension}>
             {iconArray}
           </IconPanel>
         )}
         {children}
-      </Container>
+      </StyledContainer>
     );
   },
 );
