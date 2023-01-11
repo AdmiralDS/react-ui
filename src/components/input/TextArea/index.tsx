@@ -20,9 +20,22 @@ const iconSizeValue = (props: { dimension?: ComponentDimension }) => {
       return 24;
   }
 };
+const verticalPaddingValue = (props: { dimension?: ComponentDimension }) => {
+  switch (props.dimension) {
+    case 'xl':
+      return 16;
+    case 'm':
+      return 8;
+    case 's':
+      return 6;
+    default:
+      return 8;
+  }
+};
 const horizontalPaddingValue = (props: { dimension?: ComponentDimension }) => {
   switch (props.dimension) {
     case 'xl':
+    case 'm':
       return 16;
     case 's':
       return 12;
@@ -132,7 +145,7 @@ const Text = styled.textarea<ExtraProps>`
   border: none;
   background: transparent;
   overflow: auto;
-  padding: ${(props) => (props.dimension === 'xl' ? '' : '8px ')}${horizontalPaddingValue}px;
+  padding: ${verticalPaddingValue}px ${horizontalPaddingValue}px;
   color: ${(props) => props.theme.color['Neutral/Neutral 90']};
 
   ${(props) => (props.dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
