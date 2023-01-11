@@ -20,7 +20,7 @@ export { fitToCurrency, clearValue } from './utils';
 const extraPadding = css<ExtraProps>`
   padding-right: ${(props) => horizontalPaddingValue(props) + (iconSizeValue(props) + 8) * (props.iconCount ?? 0)}px;
 `;
-
+const preventDefault = (e: React.MouseEvent) => e.preventDefault();
 const horizontalPaddingValue = (props: { dimension?: ComponentDimension }) => {
   switch (props.dimension) {
     case 'xl':
@@ -333,6 +333,8 @@ export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
         dimension={props.dimension}
         readOnly={props.readOnly}
         data-read-only={props.readOnly ? true : undefined}
+        data-disable-copying={props.disableCopying ? true : undefined}
+        onMouseDown={props.disableCopying ? preventDefault : undefined}
         skeleton={skeleton}
         status={status}
       >

@@ -125,7 +125,7 @@ export const Input = styled.input<{ dimension?: ComponentDimension; isMultiple?:
     color: ${(props) => props.theme.color['Neutral/Neutral 30']};
   }
 
-  [data-read-only] & {
+  [data-disable-copying] & {
     user-select: none;
     pointer-events: none;
   }

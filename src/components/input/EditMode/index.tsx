@@ -138,7 +138,14 @@ const Text = styled.div`
       }
     }
   }
+
+  [data-disable-copying] & {
+    user-select: none;
+    pointer-events: none;
+  }
 `;
+
+const stopEvent = (e: React.MouseEvent) => e.preventDefault();
 
 type Dimension = 's' | 'm' | 'xl' | 'xxl';
 
@@ -244,6 +251,10 @@ export const EditMode = React.forwardRef<HTMLInputElement, EditModeProps>(
         data-disabled={disabled}
         cssMixin={containerCssMixin}
         ref={wrapperRef}
+        data-disable-copying={props.disableCopying ? true : undefined}
+        {...(props.disableCopying && {
+          onMouseDown: stopEvent,
+        })}
       >
         {edit ? (
           !disabled &&
