@@ -145,7 +145,7 @@ const Text = styled.textarea<ExtraProps>`
     color: ${(props) => props.theme.color['Neutral/Neutral 30']};
   }
 
-  [data-read-only] & {
+  [data-disable-copying] & {
     user-select: none;
     pointer-events: none;
   }
@@ -317,6 +317,7 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
         data-read-only={props.readOnly ? true : undefined}
         data-status={status}
         skeleton={skeleton}
+        data-disable-copying={props.disableCopying ? true : undefined}
         {...(props.disableCopying && {
           onMouseDown: stopEvent,
         })}
