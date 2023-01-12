@@ -155,7 +155,7 @@ fieldset:disabled .c0 {
     <div>
       <label
         class="c0 c1"
-        data-field-id="trsh1rv0raj0h2tyrxkcsxt"
+        data-field-id="checkboxField"
         disabled=""
       >
         <div
@@ -165,7 +165,7 @@ fieldset:disabled .c0 {
             class="c5"
             data-testid="element"
             disabled=""
-            id="trsh1rv0raj0h2tyrxkcsxt"
+            id="checkboxField"
             type="checkbox"
           />
           <div
@@ -333,7 +333,7 @@ fieldset:disabled .c0 {
 <div>
     <label
       class="c0 c1"
-      data-field-id="trsh1rv0raj0h2tyrxkcsxt"
+      data-field-id="checkboxField"
       disabled=""
     >
       <div
@@ -343,7 +343,7 @@ fieldset:disabled .c0 {
           class="c5"
           data-testid="element"
           disabled=""
-          id="trsh1rv0raj0h2tyrxkcsxt"
+          id="checkboxField"
           type="checkbox"
         />
         <div
@@ -568,7 +568,7 @@ fieldset:disabled .c0 {
     <div>
       <label
         class="c0 c1"
-        data-field-id="tm8e1ujbhh0ezxh0sxccl8"
+        data-field-id="checkboxField"
       >
         <div
           class="c2 c3 c4"
@@ -576,7 +576,7 @@ fieldset:disabled .c0 {
           <input
             class="c5"
             data-testid="element"
-            id="tm8e1ujbhh0ezxh0sxccl8"
+            id="checkboxField"
             type="checkbox"
           />
           <div
@@ -744,7 +744,7 @@ fieldset:disabled .c0 {
 <div>
     <label
       class="c0 c1"
-      data-field-id="tm8e1ujbhh0ezxh0sxccl8"
+      data-field-id="checkboxField"
     >
       <div
         class="c2 c3 c4"
@@ -752,7 +752,7 @@ fieldset:disabled .c0 {
         <input
           class="c5"
           data-testid="element"
-          id="tm8e1ujbhh0ezxh0sxccl8"
+          id="checkboxField"
           type="checkbox"
         />
         <div
@@ -977,7 +977,7 @@ fieldset:disabled .c0 {
     <div>
       <label
         class="c0 c1"
-        data-field-id="tshzizx48j0m3ar8078dar"
+        data-field-id="checkboxField"
       >
         <div
           class="c2 c3 c4"
@@ -985,7 +985,7 @@ fieldset:disabled .c0 {
           <input
             class="c5"
             data-testid="element"
-            id="tshzizx48j0m3ar8078dar"
+            id="checkboxField"
             type="checkbox"
           />
           <div
@@ -1153,7 +1153,7 @@ fieldset:disabled .c0 {
 <div>
     <label
       class="c0 c1"
-      data-field-id="tshzizx48j0m3ar8078dar"
+      data-field-id="checkboxField"
     >
       <div
         class="c2 c3 c4"
@@ -1161,7 +1161,7 @@ fieldset:disabled .c0 {
         <input
           class="c5"
           data-testid="element"
-          id="tshzizx48j0m3ar8078dar"
+          id="checkboxField"
           type="checkbox"
         />
         <div

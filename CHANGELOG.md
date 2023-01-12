@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.10.1](https://github.com/AdmiralDS/react-ui/compare/v3.10.0...v3.10.1) (2023-01-10)
+
+
+### Bug Fixes
+
+* **CheckboxField:** add setting data-field attributes to container ([5cf3bf1](https://github.com/AdmiralDS/react-ui/commit/5cf3bf13990ad7a763277e1ae837706f54b0b137))
+* linter and snapshots ([8a7e9f3](https://github.com/AdmiralDS/react-ui/commit/8a7e9f3a90d81cbe8381e8dbaa144d5382e1dac0))
+* remove misleading doc text ([4412690](https://github.com/AdmiralDS/react-ui/commit/44126903eace3394279281c6770bfb56e140808d))
+* **Table:** fix bug with disabled chevron icon for empty rows group ([3e292ae](https://github.com/AdmiralDS/react-ui/commit/3e292ae76e523074c6627df7d8b8bff002a6f1d5))
+
 ## [3.10.0](https://github.com/AdmiralDS/react-ui/compare/v3.9.0...v3.10.0) (2022-12-28)
 
 

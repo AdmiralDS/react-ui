@@ -73,9 +73,6 @@ export default {
     containerRef: {
       control: false,
     },
-    handleInput: {
-      control: false,
-    },
     themeBorderKind: {
       options: ALL_BORDER_RADIUS_VALUES,
       control: { type: 'radio' },

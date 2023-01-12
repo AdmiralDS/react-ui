@@ -14,6 +14,7 @@ describe('CheckboxField', () => {
   const CheckboxFieldRequiredProps = {
     onChange: jest.fn(),
     checked: false,
+    id: 'checkboxField',
 
     'data-testid': 'element',
   };

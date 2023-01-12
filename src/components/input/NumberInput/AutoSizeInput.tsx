@@ -128,7 +128,7 @@ const Input = styled.input<ExtraProps>`
     color: ${(props) => props.theme.color['Neutral/Neutral 30']};
   }
 
-  [data-read-only] & {
+  [data-disable-copying] & {
     user-select: none;
     pointer-events: none;
   }

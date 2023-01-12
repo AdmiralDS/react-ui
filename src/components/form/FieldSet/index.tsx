@@ -7,7 +7,7 @@ import { typography } from '#src/components/Typography';
 export const ALL_FIELDSET_DIMENSIONS_VALUES = ['m', 's'] as const;
 
 /** Размеры компонента относительно начального */
-export type FieldSetDimension = typeof ALL_FIELDSET_DIMENSIONS_VALUES[number];
+export type FieldSetDimension = (typeof ALL_FIELDSET_DIMENSIONS_VALUES)[number];
 
 const Legend = styled.legend<{ dimension?: FieldSetDimension }>`
   ${(props) => (props.dimension === 's' ? typography['Body/Body 2 Short'] : typography['Body/Body 1 Short'])}
