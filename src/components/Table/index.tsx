@@ -372,7 +372,7 @@ export const Table: React.FC<TableProps> = ({
         resizeObserver.disconnect();
       };
     }
-  }, [headerRef.current, columnList]);
+  }, [headerRef.current, scrollBodyRef.current, columnList]);
 
   React.useEffect(() => {
     const size = getScrollbarSize();
@@ -617,7 +617,6 @@ export const Table: React.FC<TableProps> = ({
       dimension={dimension}
       checkboxDimension={checkboxDimension}
       columns={columnList}
-      // columns={cols}
       stickyColumns={stickyColumns}
       displayRowExpansionColumn={displayRowExpansionColumn}
       displayRowSelectionColumn={displayRowSelectionColumn}
