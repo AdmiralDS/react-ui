@@ -192,12 +192,14 @@ function defaultHandleInput(newInputData: InputData): InputData {
 
 const stopEvent = (e: React.MouseEvent) => e.preventDefault();
 
-const StyledSpan = styled.span<{ dimension: ComponentDimension }>`
+const StyledSpan = styled.span<ExtraProps>`
+  visibility: hidden;
   margin: 0;
   padding: ${verticalPaddingValue}px ${horizontalPaddingValue}px;
   overflow-wrap: anywhere;
 
   ${(props) => (props.dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
+  ${extraPadding}
 `;
 
 const textAreaHeight = (rows: number, dimension?: ComponentDimension) => {
