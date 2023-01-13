@@ -9,6 +9,7 @@ import * as React from 'react';
 import styled, { css } from 'styled-components';
 import { InputIconButton } from '#src/components/InputIconButton';
 import { Container } from '../Container';
+import { Fragment } from 'react';
 
 const iconSizeValue = (props: { dimension?: ComponentDimension }) => {
   switch (props.dimension) {
@@ -133,24 +134,33 @@ const ieFixes = css`
   }
 `;
 
-const Text = styled.textarea<ExtraProps>`
+const textBlockStyleMixin = css<TextBlockProps>`
   outline: none;
   appearance: none;
-  resize: none;
   border-radius: inherit;
+  border: none;
+  box-sizing: border-box;
+  margin: 0;
+  padding: ${verticalPaddingValue}px ${horizontalPaddingValue}px;
+  overflow-wrap: anywhere;
+
+  ${(props) => (props.dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
+  ${colorsBorderAndBackground}
+  ${extraPadding}
+`;
+
+const Text = styled.textarea<ExtraProps>`
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+  resize: none;
 
-  box-sizing: border-box;
   flex: 1 1 auto;
   min-width: 10px;
-  border: none;
   background: transparent;
   overflow: auto;
-  padding: ${verticalPaddingValue}px ${horizontalPaddingValue}px;
   color: ${(props) => props.theme.color['Neutral/Neutral 90']};
 
   ${(props) => (props.dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
@@ -168,8 +178,7 @@ const Text = styled.textarea<ExtraProps>`
     pointer-events: none;
   }
 
-  ${colorsBorderAndBackground}
-  ${extraPadding}
+  ${textBlockStyleMixin}
   ${ieFixes}
 `;
 
@@ -197,14 +206,13 @@ function defaultHandleInput(newInputData: InputData): InputData {
 
 const stopEvent = (e: React.MouseEvent) => e.preventDefault();
 
-const StyledSpan = styled.span<ExtraProps>`
-  visibility: hidden;
-  margin: 0;
-  padding: ${verticalPaddingValue}px ${horizontalPaddingValue}px;
-  overflow-wrap: anywhere;
+interface TextBlockProps extends ExtraProps {
+  disabled?: boolean;
+}
 
-  ${(props) => (props.dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
-  ${extraPadding}
+const StyledSpan = styled.span<TextBlockProps>`
+  visibility: hidden;
+  ${textBlockStyleMixin}
 `;
 
 const textAreaHeight = (rows: number, dimension?: ComponentDimension) => {
@@ -303,6 +311,21 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
 
     const inputData = value !== undefined && value !== null ? handleInput({ value: String(value) }) : {};
 
+    const HiddenDivLines = (value?: string) => {
+      const lines = value?.split(/\r?\n/g) || [''];
+
+      return (
+        <>
+          {lines.map((line, index) => (
+            <Fragment key={index}>
+              {line}
+              <br />
+            </Fragment>
+          ))}
+        </>
+      );
+    };
+
     React.useLayoutEffect(() => {
       function oninput(this: HTMLTextAreaElement) {
         const { value, selectionStart, selectionEnd } = this;
@@ -342,7 +365,9 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
           onMouseDown: stopEvent,
         })}
       >
-        <StyledSpan dimension={dimension}>{inputData.value}</StyledSpan>
+        <StyledSpan dimension={dimension} disabled={props.disabled}>
+          {HiddenDivLines(inputData.value)}
+        </StyledSpan>
         <Text
           ref={refSetter(ref, inputRef)}
           {...props}
