@@ -138,6 +138,11 @@ const Text = styled.textarea<ExtraProps>`
   appearance: none;
   resize: none;
   border-radius: inherit;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 
   box-sizing: border-box;
   flex: 1 1 auto;
@@ -344,7 +349,6 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
           dimension={dimension}
           iconCount={iconCount}
           value={inputData.value}
-          style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
         />
         <BorderedDiv />
         {iconCount > 0 && (
