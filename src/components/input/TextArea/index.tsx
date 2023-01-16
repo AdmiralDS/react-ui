@@ -46,7 +46,7 @@ const horizontalPaddingValue = (props: { dimension?: ComponentDimension }) => {
 };
 
 const extraPadding = css<ExtraProps>`
-  padding-right: ${(props) => (props.iconCount ? iconSizeValue(props) + 8 : horizontalPaddingValue(props))}px;
+  padding-right: ${(props) => horizontalPaddingValue(props) + (props.iconCount ? iconSizeValue(props) + 8 : 0)}px;
 `;
 
 const disabledColors = css`
@@ -190,7 +190,7 @@ const Text = styled.textarea<ExtraProps>`
 
 const IconPanel = styled.div<{ disabled?: boolean; dimension?: ComponentDimension }>`
   position: absolute;
-  top: 8px;
+  top: 0;
   bottom: 0;
   right: 0;
 
@@ -198,7 +198,8 @@ const IconPanel = styled.div<{ disabled?: boolean; dimension?: ComponentDimensio
   flex-direction: column;
   align-items: center;
 
-  padding-right: 8px;
+  padding-right: ${horizontalPaddingValue}px;
+  padding-top: ${verticalPaddingValue}px;
 
   & > * {
     display: block;
