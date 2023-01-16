@@ -10,7 +10,7 @@ function isValidDigit(string: string, number: number) {
     case 4:
       return /^([0-9])?$/.test(onlyDigitString);
     case 2:
-      return /^([0-4])?$/.test(onlyDigitString);
+      return /^([0-3])?$/.test(onlyDigitString);
     case 3:
       return /^([0-5])?$/.test(onlyDigitString);
   }
