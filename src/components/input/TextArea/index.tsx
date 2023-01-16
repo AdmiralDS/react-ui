@@ -216,10 +216,6 @@ interface TextBlockProps extends ExtraProps {
   disabled?: boolean;
 }
 
-const StyledSpan = styled.span<TextBlockProps>`
-  ${textBlockStyleMixin}
-`;
-
 const textAreaHeight = (rows: number, dimension?: ComponentDimension) => {
   const textAreaLineHeight = dimension === 's' ? 20 : 24;
   return rows * textAreaLineHeight + 2 * verticalPaddingValue({ dimension });
@@ -316,7 +312,7 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
 
     const inputData = value !== undefined && value !== null ? handleInput({ value: String(value) }) : {};
 
-    const HiddenDivLines = (value?: string) => {
+    const HiddenSpanLines = (value?: string) => {
       const lines = value?.split(/\r?\n/g) || [''];
 
       return (
@@ -371,9 +367,7 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
         })}
       >
         <HiddenSpanContainer dimension={dimension} disabled={props.disabled} iconCount={iconCount}>
-          <StyledSpan dimension={dimension} disabled={props.disabled} iconCount={iconCount}>
-            {HiddenDivLines(inputData.value)}
-          </StyledSpan>
+          <span>{HiddenSpanLines(inputData.value)}</span>
         </HiddenSpanContainer>
         <Text
           ref={refSetter(ref, inputRef)}
