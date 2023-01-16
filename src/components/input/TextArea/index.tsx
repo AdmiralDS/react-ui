@@ -142,11 +142,17 @@ const textBlockStyleMixin = css<TextBlockProps>`
   box-sizing: border-box;
   margin: 0;
   padding: ${verticalPaddingValue}px ${horizontalPaddingValue}px;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 
   ${(props) => (props.dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
   ${colorsBorderAndBackground}
   ${extraPadding}
+`;
+
+const HiddenSpanContainer = styled.div<TextBlockProps>`
+  overflow: hidden;
+  visibility: hidden;
+  ${textBlockStyleMixin}
 `;
 
 const Text = styled.textarea<ExtraProps>`
@@ -211,7 +217,6 @@ interface TextBlockProps extends ExtraProps {
 }
 
 const StyledSpan = styled.span<TextBlockProps>`
-  visibility: hidden;
   ${textBlockStyleMixin}
 `;
 
@@ -365,9 +370,11 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
           onMouseDown: stopEvent,
         })}
       >
-        <StyledSpan dimension={dimension} disabled={props.disabled}>
-          {HiddenDivLines(inputData.value)}
-        </StyledSpan>
+        <HiddenSpanContainer dimension={dimension} disabled={props.disabled} iconCount={iconCount}>
+          <StyledSpan dimension={dimension} disabled={props.disabled} iconCount={iconCount}>
+            {HiddenDivLines(inputData.value)}
+          </StyledSpan>
+        </HiddenSpanContainer>
         <Text
           ref={refSetter(ref, inputRef)}
           {...props}
