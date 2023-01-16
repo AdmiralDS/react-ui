@@ -406,4 +406,5 @@ export const HiddenHeader = styled.div`
   left: 0;
   right: 0;
   visibility: hidden;
+  display: flex;
 `;
