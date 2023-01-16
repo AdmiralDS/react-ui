@@ -30,6 +30,7 @@ import {
 } from '#src/components/Table/data';
 import { ReactComponent as AcceptSolid } from '@admiral-ds/icons/build/category/AcceptSolid.svg';
 import { DefaultFontColorName } from '#src/components/themes';
+import { checkParent } from '../SelectTree/utils';
 
 const Separator = styled.div`
   height: 20px;
@@ -125,8 +126,8 @@ export default {
   },
 } as ComponentMeta<typeof Table>;
 
-const Template: ComponentStory<typeof Table> = (args) => {
-  const [cols, setCols] = React.useState(args.columnList);
+const Template: ComponentStory<typeof Table> = ({ columnList, ...args }) => {
+  const [cols, setCols] = React.useState([...columnList]);
   return (
     <Table
       {...args}
@@ -282,13 +283,23 @@ const Template2: ComponentStory<typeof Table> = ({ rowList, columnList, ...args 
         Логика сортировки (взаимосвязи) выстраивается пользователем. При этом, у иконок сортировки появляются цифры
         обозначающие порядок (приоритет) сортировки.
       </Text>
-      <Table {...args} columnList={cols} rowList={rows} onSortChange={handleSort} />
+      <Table
+        {...args}
+        columnList={cols}
+        rowList={rows}
+        onSortChange={handleSort}
+        onColumnResize={({ name, width }) => {
+          const newCols = cols.map((col) => (col.name === name ? { ...col, width } : col));
+          setCols(newCols);
+        }}
+      />
     </>
   );
 };
 
-const Template3: ComponentStory<typeof Table> = ({ rowList, ...args }) => {
+const Template3: ComponentStory<typeof Table> = ({ rowList, columnList, ...args }) => {
   const [rows, setRows] = React.useState([...rowList]);
+  const [cols, setCols] = React.useState([...columnList]);
 
   const handleSelectionChange = (ids: Record<string | number, boolean>): void => {
     const updRows = rows.map((row) => ({ ...row, selected: ids[row.id] }));
@@ -297,7 +308,16 @@ const Template3: ComponentStory<typeof Table> = ({ rowList, ...args }) => {
 
   return (
     <>
-      <Table {...args} rowList={rows} onRowSelectionChange={handleSelectionChange} />
+      <Table
+        {...args}
+        rowList={rows}
+        columnList={cols}
+        onRowSelectionChange={handleSelectionChange}
+        onColumnResize={({ name, width }) => {
+          const newCols = cols.map((col) => (col.name === name ? { ...col, width } : col));
+          setCols(newCols);
+        }}
+      />
     </>
   );
 };
@@ -409,7 +429,8 @@ const Template4: ComponentStory<typeof Table> = (args) => {
 
   const onFilterMenuClickOutside = ({ closeMenu }: any) => closeMenu();
 
-  const cols = columnList.map((col, index) => {
+  const [columns, setCols] = React.useState([...columnList]);
+  const cols = columns.map((col, index) => {
     if (index === 0) {
       return {
         ...col,
@@ -444,7 +465,14 @@ const Template4: ComponentStory<typeof Table> = (args) => {
   });
   return (
     <>
-      <Table columnList={cols} rowList={rows} />
+      <Table
+        columnList={cols}
+        rowList={rows}
+        onColumnResize={({ name, width }) => {
+          const newCols = columns.map((col) => (col.name === name ? { ...col, width } : col));
+          setCols(newCols);
+        }}
+      />
     </>
   );
 };
@@ -458,6 +486,7 @@ const CellTextContent = styled.div`
 `;
 
 const Template5: ComponentStory<typeof Table> = (args) => {
+  const [cols, setCols] = React.useState([...args.columnList]);
   const renderCell = (row: any, columnName: string) => {
     return (
       <CellTextContent>
@@ -467,13 +496,24 @@ const Template5: ComponentStory<typeof Table> = (args) => {
   };
   return (
     <>
-      <Table headerLineClamp={2} displayRowSelectionColumn renderCell={renderCell} {...args} />
+      <Table
+        headerLineClamp={2}
+        displayRowSelectionColumn
+        renderCell={renderCell}
+        {...args}
+        columnList={cols}
+        onColumnResize={({ name, width }) => {
+          const newCols = cols.map((col) => (col.name === name ? { ...col, width } : col));
+          setCols(newCols);
+        }}
+      />
     </>
   );
 };
 
-const Template6: ComponentStory<typeof Table> = ({ rowList, ...args }) => {
+const Template6: ComponentStory<typeof Table> = ({ rowList, columnList, ...args }) => {
   const [rows, setRows] = React.useState([...rowList]);
+  const [cols, setCols] = React.useState([...columnList]);
 
   const handleExpansionChange = (ids: Record<string | number, boolean>): void => {
     const updRows = rows.map((row) => ({ ...row, expanded: ids[row.id] }));
@@ -482,17 +522,39 @@ const Template6: ComponentStory<typeof Table> = ({ rowList, ...args }) => {
 
   return (
     <>
-      <Table {...args} rowList={rows} onRowExpansionChange={handleExpansionChange} />
+      <Table
+        {...args}
+        columnList={cols}
+        rowList={rows}
+        onRowExpansionChange={handleExpansionChange}
+        onColumnResize={({ name, width }) => {
+          const newCols = cols.map((col) => (col.name === name ? { ...col, width } : col));
+          setCols(newCols);
+        }}
+      />
     </>
   );
 };
 
 const Template7: ComponentStory<typeof Table> = (args) => {
-  return <Table {...args} virtualScroll={{ fixedRowHeight: 40 }} style={{ height: '500px' }} />;
+  const [cols, setCols] = React.useState([...args.columnList]);
+  return (
+    <Table
+      {...args}
+      columnList={cols}
+      virtualScroll={{ fixedRowHeight: 40 }}
+      style={{ height: '500px' }}
+      onColumnResize={({ name, width }) => {
+        const newCols = cols.map((col) => (col.name === name ? { ...col, width } : col));
+        setCols(newCols);
+      }}
+    />
+  );
 };
 
-const Template8: ComponentStory<typeof Table> = ({ rowList, ...args }) => {
+const Template8: ComponentStory<typeof Table> = ({ rowList, columnList, ...args }) => {
   const [rows, setRows] = React.useState([...rowList]);
+  const [cols, setCols] = React.useState([...columnList]);
 
   const handleExpansionChange = (ids: Record<string | number, boolean>): void => {
     const updRows = rows.map((row) => ({ ...row, expanded: ids[row.id] }));
@@ -509,8 +571,13 @@ const Template8: ComponentStory<typeof Table> = ({ rowList, ...args }) => {
       <Table
         {...args}
         rowList={rows}
+        columnList={cols}
         onRowExpansionChange={handleExpansionChange}
         onRowSelectionChange={handleSelectionChange}
+        onColumnResize={({ name, width }) => {
+          const newCols = cols.map((col) => (col.name === name ? { ...col, width } : col));
+          setCols(newCols);
+        }}
       />
     </>
   );

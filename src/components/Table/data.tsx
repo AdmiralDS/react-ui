@@ -469,7 +469,7 @@ export const columnListSticky: Column[] = [
   {
     name: 'transfer_type',
     title: 'Тип сделки',
-    width: 150,
+    width: '20%',
     sticky: true,
   },
   {

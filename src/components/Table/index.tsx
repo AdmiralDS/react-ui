@@ -23,6 +23,7 @@ import {
   ScrollTableBody,
   StickyWrapper,
   TableContainer,
+  HiddenHeader,
 } from './style';
 import { VirtualBody } from './VirtualBody';
 
@@ -292,9 +293,8 @@ export const Table: React.FC<TableProps> = ({
 
   const tableRef = React.useRef<HTMLDivElement>(null);
   const headerRef = React.useRef<HTMLDivElement>(null);
+  const hiddenHeaderRef = React.useRef<HTMLDivElement>(null);
   const scrollBodyRef = React.useRef<HTMLDivElement>(null);
-  const expandCellRef = React.useRef<HTMLDivElement>(null);
-  const checkboxCellRef = React.useRef<HTMLDivElement>(null);
 
   const groupToRowsMap = rowList.reduce<Group>((acc: Group, row) => {
     if (typeof row.groupRows !== 'undefined') {
@@ -355,24 +355,36 @@ export const Table: React.FC<TableProps> = ({
     : {};
 
   React.useLayoutEffect(() => {
-    if (headerRef.current) {
-      const columns = headerRef.current.querySelectorAll<HTMLElement>('.th');
+    if (hiddenHeaderRef.current) {
+      const hiddenColumns = hiddenHeaderRef.current?.querySelectorAll<HTMLElement>('.th');
+
       const resizeObserver = new ResizeObserver((entries) => {
         entries.forEach((entry) => {
-          const cells = scrollBodyRef.current?.querySelectorAll<HTMLElement>(
+          // find all body cells in the same column as entry column
+          const bodyCells = scrollBodyRef.current?.querySelectorAll<HTMLElement>(
             `[data-column="${(entry.target as HTMLElement).dataset.thColumn}"]`,
           );
-          cells?.forEach((cell) => {
+          bodyCells?.forEach((cell) => {
             cell.style.width = entry.borderBoxSize[0].inlineSize + 'px';
+          });
+
+          // find all header cells in the same column as entry column
+          const headerCells = headerRef.current?.querySelectorAll<HTMLElement>(
+            `[data-th-column="${(entry.target as HTMLElement).dataset.thColumn}"]`,
+          );
+          headerCells?.forEach((cell) => {
+            cell.style.width = entry.borderBoxSize[0].inlineSize + 'px';
+            cell.style.minWidth = entry.borderBoxSize[0].inlineSize + 'px';
           });
         });
       });
-      columns.forEach((col) => resizeObserver.observe(col));
+
+      hiddenColumns?.forEach((col) => resizeObserver.observe(col));
       return () => {
         resizeObserver.disconnect();
       };
     }
-  }, [headerRef.current, scrollBodyRef.current, columnList]);
+  }, [hiddenHeaderRef.current, headerRef.current, scrollBodyRef.current, columnList, rowList]);
 
   React.useEffect(() => {
     const size = getScrollbarSize();
@@ -702,15 +714,47 @@ export const Table: React.FC<TableProps> = ({
     );
   };
 
+  const renderHiddenHeader = () => {
+    return (
+      <HiddenHeader ref={hiddenHeaderRef}>
+        {(displayRowSelectionColumn || displayRowExpansionColumn) && (
+          <StickyWrapper greyHeader={greyHeader}>
+            {displayRowExpansionColumn && <ExpandCell dimension={dimension} />}
+            {displayRowSelectionColumn && (
+              <CheckboxCell dimension={dimension} className="th_checkbox">
+                <Checkbox
+                  dimension={checkboxDimension}
+                  checked={allRowsChecked || someRowsChecked || headerCheckboxChecked}
+                  indeterminate={(someRowsChecked && !allRowsChecked) || headerCheckboxIndeterminate}
+                  disabled={tableRows.length === 0 || headerCheckboxDisabled}
+                  onChange={handleHeaderCheckboxChange}
+                />
+              </CheckboxCell>
+            )}
+          </StickyWrapper>
+        )}
+        <HeaderCellsWrapper
+          displayRowExpansionColumn={displayRowExpansionColumn}
+          displayRowSelectionColumn={displayRowSelectionColumn}
+          dimension={dimension}
+        >
+          {stickyColumns.length > 0 && stickyColumns.map((col, index) => renderHeaderCell(col as Column, index))}
+          {columnList.map((col, index) => (col.sticky ? null : renderHeaderCell(col as Column, index)))}
+        </HeaderCellsWrapper>
+      </HiddenHeader>
+    );
+  };
+
   return (
     <TableContainer ref={tableRef} data-shadow={false} {...props} className={`table ${props.className || ''}`}>
+      {renderHiddenHeader()}
       <HeaderWrapper scrollbar={scrollbar} greyHeader={greyHeader} data-verticalscroll={verticalScroll}>
         <Header dimension={dimension} ref={headerRef} className="tr">
           {(displayRowSelectionColumn || displayRowExpansionColumn || stickyColumns.length > 0) && (
             <StickyWrapper greyHeader={greyHeader}>
-              {displayRowExpansionColumn && <ExpandCell ref={expandCellRef} dimension={dimension} />}
+              {displayRowExpansionColumn && <ExpandCell dimension={dimension} />}
               {displayRowSelectionColumn && (
-                <CheckboxCell ref={checkboxCellRef} dimension={dimension} className="th_checkbox">
+                <CheckboxCell dimension={dimension} className="th_checkbox">
                   <Checkbox
                     dimension={checkboxDimension}
                     checked={allRowsChecked || someRowsChecked || headerCheckboxChecked}
@@ -723,10 +767,8 @@ export const Table: React.FC<TableProps> = ({
               {stickyColumns.length > 0 && stickyColumns.map((col, index) => renderHeaderCell(col as Column, index))}
             </StickyWrapper>
           )}
-          <HeaderCellsWrapper>
-            {columnList.map((col, index) => (col.sticky ? null : renderHeaderCell(col as Column, index)))}
-            <Filler />
-          </HeaderCellsWrapper>
+          {columnList.map((col, index) => (col.sticky ? null : renderHeaderCell(col as Column, index)))}
+          <Filler />
         </Header>
       </HeaderWrapper>
       {renderBody()}

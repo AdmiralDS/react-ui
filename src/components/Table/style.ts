@@ -208,7 +208,8 @@ export const GroupTextContent = styled.div`
 
 // padding-bottom меньше padding-top на 1px, т.к. 1px остается для border-bottom ячейки
 export const CheckboxCell = styled(Cell)<{ dimension: TableProps['dimension'] }>`
-  width: unset;
+  // width: unset;
+  width: ${({ dimension }) => (dimension === 's' || dimension === 'm' ? 44 : 56)}px;
   padding: ${({ dimension }) => {
     switch (dimension) {
       case 's':
@@ -384,11 +385,25 @@ export const EmptyMessage = styled(Cell)`
   color: ${({ theme }) => theme.color['Neutral/Neutral 50']};
 `;
 
-export const HeaderCellsWrapper = styled.div`
+export const HeaderCellsWrapper = styled.div<{
+  displayRowSelectionColumn?: boolean;
+  displayRowExpansionColumn?: boolean;
+  dimension: TableProps['dimension'];
+}>`
   display: flex;
-  width: 100%;
-  border-bottom: none;
-  & > * {
-    border-bottom: 1px solid ${({ theme }) => theme.color['Neutral/Neutral 20']};
-  }
+  flex: 0 0 auto;
+  width: calc(
+    100% -
+      ${({ displayRowSelectionColumn, displayRowExpansionColumn, dimension }) =>
+        (displayRowSelectionColumn ? (dimension === 's' || dimension === 'm' ? 44 : 56) : 0) +
+        (displayRowExpansionColumn ? (dimension === 's' || dimension === 'm' ? 44 : 56) : 0)}px
+  );
+`;
+
+export const HiddenHeader = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  visibility: hidden;
 `;
