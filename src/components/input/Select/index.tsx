@@ -329,7 +329,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       if (!isSearchPanelOpen && isFocused && document.activeElement !== containerRef.current) {
         selectRef.current?.focus();
       }
-    }, [isSearchPanelOpen]);
+    }, [isSearchPanelOpen, forcedOpen]);
 
     const handleOnClear = onClearIconClick || resetOptions;
 
@@ -467,6 +467,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       if (!evt.currentTarget.contains(evt.relatedTarget) && !dropDownRef.current?.contains(evt.relatedTarget)) {
         setIsFocused(false);
         setIsSearchPanelOpen(false);
+        selectRef.current?.blur();
         onBlurFromProps?.(evt);
       }
     };
