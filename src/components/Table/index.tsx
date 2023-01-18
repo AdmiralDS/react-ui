@@ -734,8 +734,8 @@ export const Table: React.FC<TableProps> = ({
           </StickyWrapper>
         )}
         <HeaderCellsWrapper
-          displayRowExpansionColumn={displayRowExpansionColumn}
-          displayRowSelectionColumn={displayRowSelectionColumn}
+          expansionColumn={displayRowExpansionColumn}
+          selectionColumn={displayRowSelectionColumn}
           dimension={dimension}
         >
           {stickyColumns.length > 0 && stickyColumns.map((col, index) => renderHeaderCell(col as Column, index))}

@@ -208,7 +208,6 @@ export const GroupTextContent = styled.div`
 
 // padding-bottom меньше padding-top на 1px, т.к. 1px остается для border-bottom ячейки
 export const CheckboxCell = styled(Cell)<{ dimension: TableProps['dimension'] }>`
-  // width: unset;
   width: ${({ dimension }) => (dimension === 's' || dimension === 'm' ? 44 : 56)}px;
   padding: ${({ dimension }) => {
     switch (dimension) {
@@ -385,19 +384,22 @@ export const EmptyMessage = styled(Cell)`
   color: ${({ theme }) => theme.color['Neutral/Neutral 50']};
 `;
 
+const getTechColumnsWidth = (
+  dimension: TableProps['dimension'],
+  selectionCol?: boolean,
+  expansionCol?: boolean,
+): number =>
+  (selectionCol ? (dimension === 's' || dimension === 'm' ? 44 : 56) : 0) +
+  (expansionCol ? (dimension === 's' || dimension === 'm' ? 44 : 56) : 0);
+
 export const HeaderCellsWrapper = styled.div<{
-  displayRowSelectionColumn?: boolean;
-  displayRowExpansionColumn?: boolean;
   dimension: TableProps['dimension'];
+  selectionColumn?: boolean;
+  expansionColumn?: boolean;
 }>`
   display: flex;
   flex: 0 0 auto;
-  width: calc(
-    100% -
-      ${({ displayRowSelectionColumn, displayRowExpansionColumn, dimension }) =>
-        (displayRowSelectionColumn ? (dimension === 's' || dimension === 'm' ? 44 : 56) : 0) +
-        (displayRowExpansionColumn ? (dimension === 's' || dimension === 'm' ? 44 : 56) : 0)}px
-  );
+  width: calc(100% - ${(p) => getTechColumnsWidth(p.dimension, p.selectionColumn, p.expansionColumn) + 'px'});
 `;
 
 export const HiddenHeader = styled.div`
