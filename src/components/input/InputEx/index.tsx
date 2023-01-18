@@ -378,12 +378,12 @@ export const InputEx = React.forwardRef<HTMLInputElement, InputExProps>(
           </PrefixContainer>
         )}
         <Input ref={refSetter(ref, inputRef)} {...props} placeholder={placeholder} iconCount={iconCount} />
+        <BorderedDiv />
         {iconCount > 0 && (
           <IconPanel disabled={props.disabled} dimension={props.dimension}>
             {iconArray}
           </IconPanel>
         )}
-        <BorderedDiv />
         {!!suffix && (
           <SuffixContainer dimension={props.dimension} disabled={props.disabled}>
             {suffix}
