@@ -334,7 +334,7 @@ export const InputEx = React.forwardRef<HTMLInputElement, InputExProps>(
             dropContainerCssMixin={dropContainerCssMixin}
           />
         )
-      : renderPrefixValue;
+      : renderSuffixValue;
 
     const suffix = renderSuffix({ value: suffixValue, disabled: props.disabled, readOnly: props.readOnly });
 
