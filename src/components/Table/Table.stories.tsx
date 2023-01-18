@@ -128,16 +128,13 @@ export default {
 
 const Template: ComponentStory<typeof Table> = ({ columnList, ...args }) => {
   const [cols, setCols] = React.useState([...columnList]);
-  return (
-    <Table
-      {...args}
-      columnList={cols}
-      onColumnResize={({ name, width }) => {
-        const newCols = cols.map((col) => (col.name === name ? { ...col, width } : col));
-        setCols(newCols);
-      }}
-    />
-  );
+
+  const handleResize = ({ name, width }: { name: string; width: string }) => {
+    const newCols = cols.map((col) => (col.name === name ? { ...col, width } : col));
+    setCols(newCols);
+  };
+
+  return <Table {...args} columnList={cols} onColumnResize={handleResize} />;
 };
 
 const StrToTime = (str: string) => {
@@ -275,6 +272,11 @@ const Template2: ComponentStory<typeof Table> = ({ rowList, columnList, ...args 
     }
   }, [cols]);
 
+  const handleResize = ({ name, width }: { name: string; width: string }) => {
+    const newCols = cols.map((col) => (col.name === name ? { ...col, width } : col));
+    setCols(newCols);
+  };
+
   return (
     <>
       <Text>
@@ -283,16 +285,7 @@ const Template2: ComponentStory<typeof Table> = ({ rowList, columnList, ...args 
         Логика сортировки (взаимосвязи) выстраивается пользователем. При этом, у иконок сортировки появляются цифры
         обозначающие порядок (приоритет) сортировки.
       </Text>
-      <Table
-        {...args}
-        columnList={cols}
-        rowList={rows}
-        onSortChange={handleSort}
-        onColumnResize={({ name, width }) => {
-          const newCols = cols.map((col) => (col.name === name ? { ...col, width } : col));
-          setCols(newCols);
-        }}
-      />
+      <Table {...args} columnList={cols} rowList={rows} onSortChange={handleSort} onColumnResize={handleResize} />
     </>
   );
 };
@@ -306,6 +299,11 @@ const Template3: ComponentStory<typeof Table> = ({ rowList, columnList, ...args 
     setRows(updRows);
   };
 
+  const handleResize = ({ name, width }: { name: string; width: string }) => {
+    const newCols = cols.map((col) => (col.name === name ? { ...col, width } : col));
+    setCols(newCols);
+  };
+
   return (
     <>
       <Table
@@ -313,10 +311,7 @@ const Template3: ComponentStory<typeof Table> = ({ rowList, columnList, ...args 
         rowList={rows}
         columnList={cols}
         onRowSelectionChange={handleSelectionChange}
-        onColumnResize={({ name, width }) => {
-          const newCols = cols.map((col) => (col.name === name ? { ...col, width } : col));
-          setCols(newCols);
-        }}
+        onColumnResize={handleResize}
       />
     </>
   );
@@ -340,6 +335,7 @@ const Template4: ComponentStory<typeof Table> = (args) => {
   const [selected, setSelected] = React.useState<string>('');
   const [selectedDate, setSelectedDate] = React.useState<string>('');
   const [rows, setRows] = React.useState([...args.rowList]);
+  const [columns, setCols] = React.useState([...args.columnList]);
 
   const renderNumFilter = ({ closeMenu, setFilterActive }: any, column: any) => (
     <Wrapper>
@@ -429,50 +425,54 @@ const Template4: ComponentStory<typeof Table> = (args) => {
 
   const onFilterMenuClickOutside = ({ closeMenu }: any) => closeMenu();
 
-  const [columns, setCols] = React.useState([...columnList]);
-  const cols = columns.map((col, index) => {
-    if (index === 0) {
-      return {
-        ...col,
-        renderFilter: () => <Wrapper>Пример кастомизации иконки фильтра с помощью функции renderFilterIcon</Wrapper>,
-        renderFilterIcon: () => <AcceptSolid />,
-        onFilterMenuClickOutside,
-      };
-    }
-    if (index === 1) {
-      return {
-        ...col,
-        renderFilter: renderDateFilter,
-        onFilterMenuClickOutside,
-      };
-    }
-    if (index === 2) {
-      return {
-        ...col,
-        renderFilter: renderNumFilter,
-        onFilterMenuClose: () => console.log('filter menu close'),
-        onFilterMenuOpen: () => console.log('filter menu open'),
-        onFilterMenuClickOutside,
-      };
-    } else if (index === 4) {
-      return {
-        ...col,
-        cellAlign: 'right' as any,
-        renderFilter: () => <Wrapper>Пример отображения фильтра в колонке с выравниванием по правому краю</Wrapper>,
-        onFilterMenuClickOutside,
-      };
-    } else return col;
-  });
+  const handleResize = ({ name, width }: { name: string; width: string }) => {
+    const newCols = cols.map((col) => (col.name === name ? { ...col, width } : col));
+    setCols(newCols);
+  };
+
+  const cols = React.useMemo(
+    () =>
+      columns.map((col, index) => {
+        if (index === 0) {
+          return {
+            ...col,
+            renderFilter: () => (
+              <Wrapper>Пример кастомизации иконки фильтра с помощью функции renderFilterIcon</Wrapper>
+            ),
+            renderFilterIcon: () => <AcceptSolid />,
+            onFilterMenuClickOutside,
+          };
+        }
+        if (index === 1) {
+          return {
+            ...col,
+            renderFilter: renderDateFilter,
+            onFilterMenuClickOutside,
+          };
+        }
+        if (index === 2) {
+          return {
+            ...col,
+            renderFilter: renderNumFilter,
+            onFilterMenuClose: () => console.log('filter menu close'),
+            onFilterMenuOpen: () => console.log('filter menu open'),
+            onFilterMenuClickOutside,
+          };
+        } else if (index === 4) {
+          return {
+            ...col,
+            cellAlign: 'right' as any,
+            renderFilter: () => <Wrapper>Пример отображения фильтра в колонке с выравниванием по правому краю</Wrapper>,
+            onFilterMenuClickOutside,
+          };
+        } else return col;
+      }),
+    [columns, selected, selectedDate],
+  );
+
   return (
     <>
-      <Table
-        columnList={cols}
-        rowList={rows}
-        onColumnResize={({ name, width }) => {
-          const newCols = columns.map((col) => (col.name === name ? { ...col, width } : col));
-          setCols(newCols);
-        }}
-      />
+      <Table columnList={cols} rowList={rows} onColumnResize={handleResize} />
     </>
   );
 };
@@ -494,6 +494,10 @@ const Template5: ComponentStory<typeof Table> = (args) => {
       </CellTextContent>
     );
   };
+  const handleResize = ({ name, width }: { name: string; width: string }) => {
+    const newCols = cols.map((col) => (col.name === name ? { ...col, width } : col));
+    setCols(newCols);
+  };
   return (
     <>
       <Table
@@ -502,10 +506,7 @@ const Template5: ComponentStory<typeof Table> = (args) => {
         renderCell={renderCell}
         {...args}
         columnList={cols}
-        onColumnResize={({ name, width }) => {
-          const newCols = cols.map((col) => (col.name === name ? { ...col, width } : col));
-          setCols(newCols);
-        }}
+        onColumnResize={handleResize}
       />
     </>
   );
@@ -520,6 +521,11 @@ const Template6: ComponentStory<typeof Table> = ({ rowList, columnList, ...args 
     setRows(updRows);
   };
 
+  const handleResize = ({ name, width }: { name: string; width: string }) => {
+    const newCols = cols.map((col) => (col.name === name ? { ...col, width } : col));
+    setCols(newCols);
+  };
+
   return (
     <>
       <Table
@@ -527,10 +533,7 @@ const Template6: ComponentStory<typeof Table> = ({ rowList, columnList, ...args 
         columnList={cols}
         rowList={rows}
         onRowExpansionChange={handleExpansionChange}
-        onColumnResize={({ name, width }) => {
-          const newCols = cols.map((col) => (col.name === name ? { ...col, width } : col));
-          setCols(newCols);
-        }}
+        onColumnResize={handleResize}
       />
     </>
   );
@@ -538,16 +541,17 @@ const Template6: ComponentStory<typeof Table> = ({ rowList, columnList, ...args 
 
 const Template7: ComponentStory<typeof Table> = (args) => {
   const [cols, setCols] = React.useState([...args.columnList]);
+  const handleResize = ({ name, width }: { name: string; width: string }) => {
+    const newCols = cols.map((col) => (col.name === name ? { ...col, width } : col));
+    setCols(newCols);
+  };
   return (
     <Table
       {...args}
       columnList={cols}
       virtualScroll={{ fixedRowHeight: 40 }}
       style={{ height: '500px' }}
-      onColumnResize={({ name, width }) => {
-        const newCols = cols.map((col) => (col.name === name ? { ...col, width } : col));
-        setCols(newCols);
-      }}
+      onColumnResize={handleResize}
     />
   );
 };
@@ -566,6 +570,11 @@ const Template8: ComponentStory<typeof Table> = ({ rowList, columnList, ...args 
     setRows(updRows);
   };
 
+  const handleResize = ({ name, width }: { name: string; width: string }) => {
+    const newCols = cols.map((col) => (col.name === name ? { ...col, width } : col));
+    setCols(newCols);
+  };
+
   return (
     <>
       <Table
@@ -574,10 +583,7 @@ const Template8: ComponentStory<typeof Table> = ({ rowList, columnList, ...args 
         columnList={cols}
         onRowExpansionChange={handleExpansionChange}
         onRowSelectionChange={handleSelectionChange}
-        onColumnResize={({ name, width }) => {
-          const newCols = cols.map((col) => (col.name === name ? { ...col, width } : col));
-          setCols(newCols);
-        }}
+        onColumnResize={handleResize}
       />
     </>
   );
@@ -600,10 +606,17 @@ ColumnWidth.parameters = {
     description: {
       story: `По умолчанию ширина столбца составляет 100 пикселей. Чтобы изменить этот 
       параметр в массиве columnList для столбца, чью ширину нужно изменить, следует задать параметр width. 
-      В качестве значения width может выступать любое валидное css значение (пиксели, проценты, функция calc и т.д.).
-      Также ширину столбца можно регулировать с помощью ручного ресайза, для этого нужно 
-      потянуть разделитель между столбцами в нужном направлении. С помощью колбека onColumnResize можно получать сведения
-      о том, как изменилась ширина столбца в результате ручного ресайза.`,
+      В качестве значения width может выступать любое валидное css значение (пиксели, проценты, функция calc и т.д.).\n\nТакже
+      ширину столбца можно регулировать с помощью ручного ресайза, для этого нужно 
+      потянуть разделитель между столбцами в нужном направлении. При этом обязательно должен быть задан колбек onColumnResize.
+      При срабатывании колбек сообщает пользователю о попытке ресайзинга столбца, после чего пользователь должен 
+      обновить ширину соответсвующего столбца в массиве columnList. 
+      Таким образом контроль за ресайзингом происходит на стороне пользователя.\n\nПо умолчанию
+      в таблице всегда включена возможность ручного ресайза столбцов, однако с помощью параметра disableColumnResize 
+      можно отменить эту возможность для всей таблицы, 
+      либо с помощью параметра disableResize отключить ресайз для отдельного столбца. 
+      Также в таблице по умолчанию не отображается разделитель для последнего столбца, данное поведение можно 
+      изменить с помощью параметра showDividerForLastColumn.`,
     },
   },
 };
