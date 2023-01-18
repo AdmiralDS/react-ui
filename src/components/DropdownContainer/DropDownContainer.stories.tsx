@@ -77,7 +77,7 @@ const Wrapper = styled.div`
 
 const Simple: ComponentStory<typeof DropdownContainer> = (args) => {
   const [open, setOpen] = useState(false);
-  const buttonRef = useRef(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
   const { targetRef, ...other } = args;
 
@@ -85,6 +85,13 @@ const Simple: ComponentStory<typeof DropdownContainer> = (args) => {
     theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
+
+  const clickOutside = (e: Event) => {
+    if (e.target && buttonRef.current?.contains(e.target as Node)) {
+      return;
+    }
+    setOpen(!open);
+  };
 
   return (
     <ThemeProvider theme={swapBorder}>
@@ -96,7 +103,7 @@ const Simple: ComponentStory<typeof DropdownContainer> = (args) => {
           <DropdownContainer
             alignSelf="flex-end"
             targetRef={targetRef || buttonRef}
-            onClickOutside={() => setOpen(!open)}
+            onClickOutside={clickOutside}
             {...other}
           >
             <StyledText>
@@ -177,6 +184,13 @@ const TemplateWithMenu: ComponentStory<typeof DropdownContainer> = (args) => {
     setOpen(false);
   };
 
+  const clickOutside = (e: Event) => {
+    if (e.target && buttonRef.current?.contains(e.target as Node)) {
+      return;
+    }
+    setOpen(!open);
+  };
+
   return (
     <>
       <Wrapper>
@@ -187,7 +201,7 @@ const TemplateWithMenu: ComponentStory<typeof DropdownContainer> = (args) => {
           <DropdownContainer
             alignSelf="flex-start"
             targetRef={targetRef || buttonRef}
-            onClickOutside={() => setOpen(!open)}
+            onClickOutside={clickOutside}
             {...other}
             dropContainerCssMixin={containerContrastBorder}
           >
