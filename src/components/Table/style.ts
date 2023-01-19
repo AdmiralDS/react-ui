@@ -409,4 +409,5 @@ export const HiddenHeader = styled.div`
   right: 0;
   visibility: hidden;
   display: flex;
+  overflow: hidden;
 `;
