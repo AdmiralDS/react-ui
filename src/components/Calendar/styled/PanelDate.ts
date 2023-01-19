@@ -31,7 +31,7 @@ export const Month = styled.h6<{
 export const Year = styled.h6<{
   view: boolean;
 }>`
-  ${panelItemStyle}
+  ${panelItemStyle};
   width: ${YEAR_WIDTH};
 `;
 

@@ -48,7 +48,7 @@ const width = css<{ dimension: Dimension; mobile?: boolean }>`
 `;
 
 const Title = styled.h5<{ mobile: boolean }>`
-  ${({ mobile }) => (mobile ? typography['Header/H6'] : typography['Header/H5'])};s
+  ${({ mobile }) => (mobile ? typography['Header/H6'] : typography['Header/H5'])};
   color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
   margin: 0;
   padding: ${({ mobile }) => (mobile ? '0 46px 10px 16px' : '0 56px 10px 24px')};
