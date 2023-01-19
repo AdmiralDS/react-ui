@@ -194,7 +194,7 @@ export interface TableProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Колбек, который срабатывает при изменении ширины столбца.
    * Данный колбек обязателен в случае, если таблица должна поддерживать ресайзинг.
    * При срабатывании колбек сообщает пользователю о попытке ресайзинга столбца,
-   * после чего пользователь должен обновить ширину соответсвующего столбца.
+   * после чего пользователь должен обновить ширину соответствующего столбца.
    * Таким образом контроль за ресайзингом происходит на стороне пользователя.
    */
   onColumnResize?: (colObj: { name: string; width: string }) => void;
@@ -581,11 +581,14 @@ export const Table: React.FC<TableProps> = ({
   );
 
   const renderBodyCell = (row: TableRow, col: Column) => {
+    const headerCellWidth = hiddenHeaderRef.current
+      ?.querySelector<HTMLElement>(`[data-th-column="${col.name}"]`)
+      ?.getBoundingClientRect().width;
     return (
       <Cell
         key={`${row.id}_${col.name}`}
         dimension={dimension}
-        style={{ width: '100px' }}
+        style={{ width: headerCellWidth || '100px' }}
         className="td"
         data-column={col.name}
         data-row={row.id}
@@ -718,17 +721,11 @@ export const Table: React.FC<TableProps> = ({
     return (
       <HiddenHeader ref={hiddenHeaderRef}>
         {(displayRowSelectionColumn || displayRowExpansionColumn) && (
-          <StickyWrapper greyHeader={greyHeader}>
+          <StickyWrapper>
             {displayRowExpansionColumn && <ExpandCell dimension={dimension} />}
             {displayRowSelectionColumn && (
-              <CheckboxCell dimension={dimension} className="th_checkbox">
-                <Checkbox
-                  dimension={checkboxDimension}
-                  checked={allRowsChecked || someRowsChecked || headerCheckboxChecked}
-                  indeterminate={(someRowsChecked && !allRowsChecked) || headerCheckboxIndeterminate}
-                  disabled={tableRows.length === 0 || headerCheckboxDisabled}
-                  onChange={handleHeaderCheckboxChange}
-                />
+              <CheckboxCell dimension={dimension}>
+                <Checkbox dimension={checkboxDimension} />
               </CheckboxCell>
             )}
           </StickyWrapper>

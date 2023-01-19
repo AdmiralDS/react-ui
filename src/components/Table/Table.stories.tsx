@@ -30,7 +30,6 @@ import {
 } from '#src/components/Table/data';
 import { ReactComponent as AcceptSolid } from '@admiral-ds/icons/build/category/AcceptSolid.svg';
 import { DefaultFontColorName } from '#src/components/themes';
-import { checkParent } from '../SelectTree/utils';
 
 const Separator = styled.div`
   height: 20px;
@@ -610,7 +609,7 @@ ColumnWidth.parameters = {
       ширину столбца можно регулировать с помощью ручного ресайза, для этого нужно 
       потянуть разделитель между столбцами в нужном направлении. При этом обязательно должен быть задан колбек onColumnResize.
       При срабатывании колбек сообщает пользователю о попытке ресайзинга столбца, после чего пользователь должен 
-      обновить ширину соответсвующего столбца в массиве columnList. 
+      обновить ширину соответствующего столбца в массиве columnList. 
       Таким образом контроль за ресайзингом происходит на стороне пользователя.\n\nПо умолчанию
       в таблице всегда включена возможность ручного ресайза столбцов, однако с помощью параметра disableColumnResize 
       можно отменить эту возможность для всей таблицы, 
