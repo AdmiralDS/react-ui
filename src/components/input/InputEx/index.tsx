@@ -316,6 +316,7 @@ export const InputEx = React.forwardRef<HTMLInputElement, InputExProps>(
             disabled={props.disabled}
             readOnly={props.readOnly}
             dropContainerCssMixin={dropContainerCssMixin}
+            renderValue={renderPrefixValue}
             renderOption={renderPrefixOption}
           />
         )
@@ -334,6 +335,7 @@ export const InputEx = React.forwardRef<HTMLInputElement, InputExProps>(
             disabled={props.disabled}
             readOnly={props.readOnly}
             dropContainerCssMixin={dropContainerCssMixin}
+            renderValue={renderSuffixValue}
             renderOption={renderSuffixOption}
           />
         )
