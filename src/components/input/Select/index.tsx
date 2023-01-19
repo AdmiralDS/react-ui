@@ -329,7 +329,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       if (!isSearchPanelOpen && isFocused && document.activeElement !== containerRef.current) {
         selectRef.current?.focus();
       }
-    }, [isSearchPanelOpen]);
+    }, [isSearchPanelOpen, forcedOpen]);
 
     const handleOnClear = onClearIconClick || resetOptions;
 
@@ -402,7 +402,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       mutableState.current.shouldExtendInputValue = true;
     };
 
-    const narrowSelectValueToInputValue = (evt: React.KeyboardEvent) => {
+    const narrowSelectValueToInputValue = (evt: KeyboardEvent) => {
       if (!visibleValueIsString || !inputRef.current || searchValue || !shouldRenderSelectValue || !selectedValue)
         return;
 
@@ -416,33 +416,46 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       });
     };
 
-    const handleWrapperKeyDown = (evt: React.KeyboardEvent) => {
-      const code = keyboardKey.getCode(evt);
+    React.useEffect(() => {
+      function handleKeyDown(evt: KeyboardEvent) {
+        const code = keyboardKey.getCode(evt);
 
-      if (code === keyboardKey[' ']) {
-        if (!modeIsSelect && !!searchValue) evt.stopPropagation();
-        else if (!isSearchPanelOpen) {
+        if (code === keyboardKey[' ']) {
+          if (!modeIsSelect && !!searchValue) evt.stopPropagation();
+          else if (!isSearchPanelOpen) {
+            evt.preventDefault();
+            setIsSearchPanelOpen(true);
+            evt.stopPropagation();
+          }
+        }
+
+        if (code === keyboardKey.Enter && !isSearchPanelOpen) {
           evt.preventDefault();
           setIsSearchPanelOpen(true);
           evt.stopPropagation();
         }
+
+        if ((code === keyboardKey.ArrowDown || code === keyboardKey.ArrowUp) && !isSearchPanelOpen) {
+          setIsSearchPanelOpen(true);
+          evt.stopPropagation();
+        }
+
+        const modifyKeyPressed = evt.ctrlKey || evt.metaKey || evt.altKey;
+
+        if (evt.key.length === 1 && !modifyKeyPressed) extendSelectValueToInputValue();
+        if (code === keyboardKey.Backspace && !evt.repeat) deleteOrHideSelectValueOnBackspace();
+        if (code === keyboardKey.Backspace) {
+          narrowSelectValueToInputValue(evt);
+          setIsSearchPanelOpen(true);
+        }
+        if (code === keyboardKey.Escape) setIsSearchPanelOpen(false);
       }
 
-      if ((code === keyboardKey.ArrowDown || code === keyboardKey.ArrowUp) && !isSearchPanelOpen) {
-        setIsSearchPanelOpen(true);
-        evt.stopPropagation();
-      }
-
-      const modifyKeyPressed = evt.ctrlKey || evt.metaKey || evt.altKey;
-
-      if (evt.key.length === 1 && !modifyKeyPressed) extendSelectValueToInputValue();
-      if (code === keyboardKey.Backspace && !evt.repeat) deleteOrHideSelectValueOnBackspace();
-      if (code === keyboardKey.Backspace) {
-        narrowSelectValueToInputValue(evt);
-        setIsSearchPanelOpen(true);
-      }
-      if (code === keyboardKey.Escape) setIsSearchPanelOpen(false);
-    };
+      containerRef.current?.addEventListener('keydown', handleKeyDown);
+      return () => {
+        containerRef.current?.removeEventListener('keydown', handleKeyDown);
+      };
+    }, [containerRef, modeIsSelect, searchValue, isSearchPanelOpen]);
 
     const onFocus = (evt: React.FocusEvent<HTMLDivElement>) => {
       setIsFocused(true);
@@ -453,6 +466,8 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       // если фокус переходит не на инпут, содержащийся внутри компонента
       if (!evt.currentTarget.contains(evt.relatedTarget) && !dropDownRef.current?.contains(evt.relatedTarget)) {
         setIsFocused(false);
+        setIsSearchPanelOpen(false);
+        selectRef.current?.blur();
         onBlurFromProps?.(evt);
       }
     };
@@ -520,7 +535,6 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
         dimension={dimension}
         ref={containerRef}
         data-status={status}
-        onKeyDown={handleWrapperKeyDown}
         onClick={handleWrapperClick}
         onFocus={onFocus}
         skeleton={skeleton}
