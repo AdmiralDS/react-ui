@@ -110,6 +110,8 @@ export { ReactComponent as OpenInFullOutline } from '@admiral-ds/icons/build/sys
 export { ReactComponent as OpenInFullSolid } from '@admiral-ds/icons/build/system/OpenInFullSolid.svg';
 export { ReactComponent as PeopleOutline } from '@admiral-ds/icons/build/system/PeopleOutline.svg';
 export { ReactComponent as PeopleSolid } from '@admiral-ds/icons/build/system/PeopleSolid.svg';
+export { ReactComponent as PersonAccountOutline } from '@admiral-ds/icons/build/system/PersonAccountOutline.svg';
+export { ReactComponent as PersonAccountSolid } from '@admiral-ds/icons/build/system/PersonAccountSolid.svg';
 export { ReactComponent as PersonAddOutline } from '@admiral-ds/icons/build/system/PersonAddOutline.svg';
 export { ReactComponent as PersonAddSolid } from '@admiral-ds/icons/build/system/PersonAddSolid.svg';
 export { ReactComponent as PersonLimitSolid } from '@admiral-ds/icons/build/system/PersonLimitSolid.svg';

@@ -46,6 +46,8 @@ export { ReactComponent as DocumentAddOutline } from '@admiral-ds/icons/build/do
 export { ReactComponent as DocumentAddSolid } from '@admiral-ds/icons/build/documents/DocumentAddSolid.svg';
 export { ReactComponent as DuplicateOutline } from '@admiral-ds/icons/build/documents/DuplicateOutline.svg';
 export { ReactComponent as DuplicateSolid } from '@admiral-ds/icons/build/documents/DuplicateSolid.svg';
+export { ReactComponent as FileCSVOutline } from '@admiral-ds/icons/build/documents/FileCSVOutline.svg';
+export { ReactComponent as FileCSVSolid } from '@admiral-ds/icons/build/documents/FileCSVSolid.svg';
 export { ReactComponent as FileCurrencyOutline } from '@admiral-ds/icons/build/documents/FileCurrencyOutline.svg';
 export { ReactComponent as FileCurrencySolid } from '@admiral-ds/icons/build/documents/FileCurrencySolid.svg';
 export { ReactComponent as FileDOCOutline } from '@admiral-ds/icons/build/documents/FileDOCOutline.svg';
@@ -83,6 +85,10 @@ export { ReactComponent as RotateLeftSolid } from '@admiral-ds/icons/build/docum
 export { ReactComponent as RotateRightOutline } from '@admiral-ds/icons/build/documents/RotateRightOutline.svg';
 export { ReactComponent as RotateRightSolid } from '@admiral-ds/icons/build/documents/RotateRightSolid.svg';
 export { ReactComponent as ScanOutline } from '@admiral-ds/icons/build/documents/ScanOutline.svg';
+export { ReactComponent as ScanRedoOutline } from '@admiral-ds/icons/build/documents/ScanRedoOutline.svg';
+export { ReactComponent as ScanRedoSolid } from '@admiral-ds/icons/build/documents/ScanRedoSolid.svg';
+export { ReactComponent as ScanSendOutline } from '@admiral-ds/icons/build/documents/ScanSendOutline.svg';
+export { ReactComponent as ScanSendSolid } from '@admiral-ds/icons/build/documents/ScanSendSolid.svg';
 export { ReactComponent as ScanSolid } from '@admiral-ds/icons/build/documents/ScanSolid.svg';
 export { ReactComponent as SendSignOutline } from '@admiral-ds/icons/build/documents/SendSignOutline.svg';
 export { ReactComponent as SendSignSolid } from '@admiral-ds/icons/build/documents/SendSignSolid.svg';

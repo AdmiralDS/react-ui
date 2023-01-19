@@ -9,7 +9,10 @@ export { ReactComponent as LockSolid } from '@admiral-ds/icons/build/security/Lo
 export { ReactComponent as PasswordOutline } from '@admiral-ds/icons/build/security/PasswordOutline.svg';
 export { ReactComponent as PasswordSolid } from '@admiral-ds/icons/build/security/PasswordSolid.svg';
 export { ReactComponent as SafetyCertificateOutline } from '@admiral-ds/icons/build/security/SafetyCertificateOutline.svg';
+export { ReactComponent as SafetyCertificateSolid } from '@admiral-ds/icons/build/security/SafetyCertificateSolid.svg';
 export { ReactComponent as SafetyOutline } from '@admiral-ds/icons/build/security/SafetyOutline.svg';
 export { ReactComponent as SafetySolid } from '@admiral-ds/icons/build/security/SafetySolid.svg';
 export { ReactComponent as UnlockOutline } from '@admiral-ds/icons/build/security/UnlockOutline.svg';
 export { ReactComponent as UnlockSolid } from '@admiral-ds/icons/build/security/UnlockSolid.svg';
+export { ReactComponent as UnsafetyOutline } from '@admiral-ds/icons/build/security/UnsafetyOutline.svg';
+export { ReactComponent as UnsafetySolid } from '@admiral-ds/icons/build/security/UnsafetySolid.svg';
