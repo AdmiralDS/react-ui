@@ -273,7 +273,6 @@ export interface InputExProps extends Omit<InputHTMLAttributes<HTMLInputElement>
 export const InputEx = React.forwardRef<HTMLInputElement, InputExProps>(
   (
     {
-      type,
       displayClearIcon,
       status,
       containerRef = () => null,
