@@ -11,7 +11,9 @@ import { InputIconButton } from '#src/components/InputIconButton';
 import { refSetter } from '#src/components/common/utils/refSetter';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 import type { ValueType } from './ValueType';
+import type { RenderPropsType } from '#src/components/input/InputEx/SuffixSelect';
 import { SuffixSelect } from '#src/components/input/InputEx/SuffixSelect';
+import type { MenuItemProps } from '#src/components/Menu/MenuItem';
 
 const iconSizeValue = (props: { dimension?: ComponentDimension }) => {
   switch (props.dimension) {
@@ -246,7 +248,7 @@ export interface InputExProps extends Omit<InputHTMLAttributes<HTMLInputElement>
   renderPrefixValue?: (props: RenderProps) => React.ReactNode;
 
   /** Специальный метод для рендера опции списка префикса по значению */
-  renderPrefixOption?: (props: RenderProps) => React.ReactNode;
+  renderPrefixOption?: (props: RenderPropsType<ValueType> & MenuItemProps) => React.ReactNode;
 
   /** Значение суффикса */
   suffixValue?: ValueType;
@@ -261,7 +263,7 @@ export interface InputExProps extends Omit<InputHTMLAttributes<HTMLInputElement>
   renderSuffixValue?: (props: RenderProps) => React.ReactNode;
 
   /** Специальный метод для рендера опции списка суффикса по значению */
-  renderSuffixOption?: (props: RenderProps) => React.ReactNode;
+  renderSuffixOption?: (props: RenderPropsType<ValueType> & MenuItemProps) => React.ReactNode;
 
   /** Состояние skeleton */
   skeleton?: boolean;
@@ -287,13 +289,13 @@ export const InputEx = React.forwardRef<HTMLInputElement, InputExProps>(
       renderPrefixValue = ({ value }) => value,
       prefixValueList,
       onPrefixValueChange,
-      renderPrefixOption = ({ value }) => value,
+      renderPrefixOption,
 
       suffixValue,
       renderSuffixValue = ({ value }) => value,
       suffixValueList,
       onSuffixValueChange,
-      renderSuffixOption = ({ value }) => value,
+      renderSuffixOption,
 
       skeleton = false,
       dropContainerCssMixin,
@@ -314,6 +316,7 @@ export const InputEx = React.forwardRef<HTMLInputElement, InputExProps>(
             disabled={props.disabled}
             readOnly={props.readOnly}
             dropContainerCssMixin={dropContainerCssMixin}
+            renderOption={renderPrefixOption}
           />
         )
       : renderPrefixValue;
@@ -331,6 +334,7 @@ export const InputEx = React.forwardRef<HTMLInputElement, InputExProps>(
             disabled={props.disabled}
             readOnly={props.readOnly}
             dropContainerCssMixin={dropContainerCssMixin}
+            renderOption={renderSuffixOption}
           />
         )
       : renderSuffixValue;
