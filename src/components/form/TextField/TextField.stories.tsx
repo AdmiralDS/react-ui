@@ -114,6 +114,13 @@ const Template: ComponentStory<typeof TextField> = (props) => {
   return (
     <ThemeProvider theme={swapBorder}>
       <DisplayContainer>
+        <TextField
+          data-container-id="textFieldIdOne"
+          {...props}
+          value={localValue}
+          autoHeight={true}
+          onChange={handleChange}
+        />
         <TextField data-container-id="textFieldIdOne" {...props} value={localValue} onChange={handleChange} />
         <TextField data-container-id="textFieldIdTwo" required label="Поле необходимо заполнить" />
         <TextField data-container-id="textFieldIdThree" ref={fieldRef} label="Напишите сочинение на заданную тему" />
@@ -125,7 +132,15 @@ const Template: ComponentStory<typeof TextField> = (props) => {
 export const TextFieldInput = Template.bind({});
 
 TextFieldInput.args = {
-  value: 'Привет',
+  value:
+    'At breakpoint boundaries, mini units divide the screen into a fixed master ' +
+    'grid, and multiples of mini units map to fluid grid column widths and row ' +
+    'heights.At breakpoint boundaries, mini units divide the screen into a fixed ' +
+    'master grid, and multiples of mini units map to fluid grid column widths and ' +
+    'row heights.At breakpoint boundaries, mini units divide the screen into a fixed ' +
+    'master grid, and multiples of mini units map to fluid grid column widths and row ' +
+    'heights.At breakpoint boundaries, mini units divide the screen into a fixed master ' +
+    'grid, and multiples of mini units map to fluid grid column widths and row heights.',
   label: 'Label',
 };
 

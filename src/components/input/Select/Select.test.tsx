@@ -226,7 +226,7 @@ describe('SearchSelect', () => {
       const inputELem = screen.getByRole('textbox') as HTMLInputElement;
 
       userEvent.tab();
-      userEvent.keyboard('{enter}');
+      userEvent.keyboard(' ');
       expect(!!inputELem.value).toBeFalsy();
       userEvent.keyboard('{Backspace}');
       expect(inputELem.value).toBe('on');
@@ -256,9 +256,9 @@ describe('SearchSelect', () => {
       userEvent.keyboard('{arrowdown}');
       userEvent.keyboard('{enter}');
 
-      const visibleText = within(valueWrapper).getByText(options[0]);
+      const visibleText = within(valueWrapper).getByText(options[1]);
       expect(visibleText).toBeInTheDocument();
-      expect(selectElem.value).toBe(options[0]);
+      expect(selectElem.value).toBe(options[1]);
     });
 
     test('selects a value onClick', () => {
@@ -439,7 +439,7 @@ describe('SearchSelect', () => {
       const selectElem = screen.getByRole('listbox') as HTMLSelectElement;
 
       userEvent.tab();
-      userEvent.keyboard('{enter}');
+      userEvent.keyboard('{space}');
 
       Array.from(selectElem.options).forEach((nativeOption, nativeOptionInd) => {
         if ([1, 2].includes(nativeOptionInd)) expect(nativeOption.selected).toBeTruthy();

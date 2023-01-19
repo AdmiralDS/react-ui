@@ -9,6 +9,7 @@ import * as React from 'react';
 import styled, { css } from 'styled-components';
 import { InputIconButton } from '#src/components/InputIconButton';
 import { Container } from '../Container';
+import { Fragment } from 'react';
 
 const iconSizeValue = (props: { dimension?: ComponentDimension }) => {
   switch (props.dimension) {
@@ -20,9 +21,22 @@ const iconSizeValue = (props: { dimension?: ComponentDimension }) => {
       return 24;
   }
 };
+const verticalPaddingValue = (props: { dimension?: ComponentDimension }) => {
+  switch (props.dimension) {
+    case 'xl':
+      return 16;
+    case 'm':
+      return 8;
+    case 's':
+      return 6;
+    default:
+      return 8;
+  }
+};
 const horizontalPaddingValue = (props: { dimension?: ComponentDimension }) => {
   switch (props.dimension) {
     case 'xl':
+    case 'm':
       return 16;
     case 's':
       return 12;
@@ -32,7 +46,7 @@ const horizontalPaddingValue = (props: { dimension?: ComponentDimension }) => {
 };
 
 const extraPadding = css<ExtraProps>`
-  padding-right: ${(props) => (props.iconCount ? iconSizeValue(props) + 8 : horizontalPaddingValue(props))}px;
+  padding-right: ${(props) => horizontalPaddingValue(props) + (props.iconCount ? iconSizeValue(props) + 8 : 0)}px;
 `;
 
 const disabledColors = css`
@@ -120,19 +134,39 @@ const ieFixes = css`
   }
 `;
 
-const Text = styled.textarea<ExtraProps>`
+const textBlockStyleMixin = css<TextBlockProps>`
   outline: none;
   appearance: none;
-  resize: none;
   border-radius: inherit;
-
+  border: none;
   box-sizing: border-box;
+  margin: 0;
+  padding: ${verticalPaddingValue}px ${horizontalPaddingValue}px;
+  overflow-wrap: break-word;
+
+  ${(props) => (props.dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
+  ${colorsBorderAndBackground}
+  ${extraPadding}
+`;
+
+const HiddenSpanContainer = styled.div<TextBlockProps>`
+  overflow: hidden;
+  visibility: hidden;
+  ${textBlockStyleMixin}
+`;
+
+const Text = styled.textarea<ExtraProps>`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  resize: none;
+
   flex: 1 1 auto;
   min-width: 10px;
-  border: none;
   background: transparent;
   overflow: auto;
-  padding: ${(props) => (props.dimension === 'xl' ? '' : '8px ')}${horizontalPaddingValue}px;
   color: ${(props) => props.theme.color['Neutral/Neutral 90']};
 
   ${(props) => (props.dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
@@ -150,14 +184,13 @@ const Text = styled.textarea<ExtraProps>`
     pointer-events: none;
   }
 
-  ${colorsBorderAndBackground}
-  ${extraPadding}
+  ${textBlockStyleMixin}
   ${ieFixes}
 `;
 
 const IconPanel = styled.div<{ disabled?: boolean; dimension?: ComponentDimension }>`
   position: absolute;
-  top: 8px;
+  top: 0;
   bottom: 0;
   right: 0;
 
@@ -165,7 +198,8 @@ const IconPanel = styled.div<{ disabled?: boolean; dimension?: ComponentDimensio
   flex-direction: column;
   align-items: center;
 
-  padding-right: 8px;
+  padding-right: ${horizontalPaddingValue}px;
+  padding-top: ${verticalPaddingValue}px;
 
   & > * {
     display: block;
@@ -178,6 +212,26 @@ function defaultHandleInput(newInputData: InputData): InputData {
 }
 
 const stopEvent = (e: React.MouseEvent) => e.preventDefault();
+
+interface TextBlockProps extends ExtraProps {
+  disabled?: boolean;
+}
+
+const textAreaHeight = (rows: number, dimension?: ComponentDimension) => {
+  const textAreaLineHeight = dimension === 's' ? 20 : 24;
+  return rows * textAreaLineHeight + 2 * verticalPaddingValue({ dimension });
+};
+
+const StyledContainer = styled(Container)<{
+  autoHeight: boolean;
+  rows: number;
+  dimension: ComponentDimension;
+}>`
+  ${(p) =>
+    p.autoHeight
+      ? `min-height: ${textAreaHeight(p.rows, p.dimension)}px`
+      : `height: ${textAreaHeight(p.rows, p.dimension)}px`}
+`;
 
 export interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   /** Максимальное количество символов для ввода */
@@ -231,12 +285,12 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
       className,
       autoHeight,
       skeleton = false,
+      dimension = 'm',
       ...props
     },
     ref,
   ) => {
     const inputRef = React.useRef<HTMLTextAreaElement>(null);
-    const [textRows, setTextRows] = React.useState<number>(rows);
 
     const iconArray = React.Children.toArray(icons);
 
@@ -258,6 +312,21 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
     const iconCount = iconArray.length;
 
     const inputData = value !== undefined && value !== null ? handleInput({ value: String(value) }) : {};
+
+    const HiddenSpanLines = (value?: string) => {
+      const lines = value?.split(/\r?\n/g) || [''];
+
+      return (
+        <>
+          {lines.map((line, index) => (
+            <Fragment key={index}>
+              {line}
+              <br />
+            </Fragment>
+          ))}
+        </>
+      );
+    };
 
     React.useLayoutEffect(() => {
       function oninput(this: HTMLTextAreaElement) {
@@ -283,61 +352,39 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
       }
     }, [inputRef.current, handleInput]);
 
-    const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-      if (autoHeight) {
-        const textareaLineHeight = props.dimension === 's' ? 20 : 24;
-        const previousRows = e.target.rows;
-        e.target.rows = rows;
-        const currentRows = ~~(e.target.scrollHeight / textareaLineHeight);
-        if (currentRows === previousRows) {
-          e.target.rows = currentRows;
-        } else if (currentRows > previousRows) {
-          e.target.rows = currentRows;
-          e.target.scrollTop = e.target.scrollHeight;
-        }
-        const rowCount = currentRows > rows ? currentRows : rows;
-        setTextRows(rowCount);
-      }
-      props.onChange?.(e);
-    };
-
-    React.useEffect(() => {
-      if (inputRef.current) {
-        const textareaLineHeight = props.dimension === 's' ? 20 : 24;
-        const currentRows = ~~(inputRef.current.scrollHeight / textareaLineHeight);
-        const rowCount = currentRows > rows ? currentRows : rows;
-        setTextRows(rowCount);
-      }
-    }, []);
-
     return (
-      <Container
+      <StyledContainer
         className={className}
         ref={containerRef}
         data-read-only={props.readOnly ? true : undefined}
         data-status={status}
         skeleton={skeleton}
         data-disable-copying={props.disableCopying ? true : undefined}
+        autoHeight={!!autoHeight}
+        rows={rows}
+        dimension={dimension}
         {...(props.disableCopying && {
           onMouseDown: stopEvent,
         })}
       >
+        <HiddenSpanContainer dimension={dimension} disabled={props.disabled} iconCount={iconCount}>
+          <span>{HiddenSpanLines(inputData.value)}</span>
+        </HiddenSpanContainer>
         <Text
           ref={refSetter(ref, inputRef)}
           {...props}
+          dimension={dimension}
           iconCount={iconCount}
           value={inputData.value}
-          rows={textRows}
-          onChange={onChange}
         />
         <BorderedDiv />
         {iconCount > 0 && (
-          <IconPanel disabled={props.disabled} dimension={props.dimension}>
+          <IconPanel disabled={props.disabled} dimension={dimension}>
             {iconArray}
           </IconPanel>
         )}
         {children}
-      </Container>
+      </StyledContainer>
     );
   },
 );
