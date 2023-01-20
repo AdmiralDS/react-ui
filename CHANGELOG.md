@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.0.0](https://github.com/AdmiralDS/react-ui/compare/v3.10.1...v4.0.0) (2023-01-19)
+
+
+### ⚠ BREAKING CHANGES
+
+* **Table:** Table columns resize is controlled by user, onColumnResize callback is compulsory prop
+
+### Features
+
+* **Table:** add opportunity to use any valid css value as column width (px, percents, calc function etc.) ([2759d44](https://github.com/AdmiralDS/react-ui/commit/2759d4484670f203b5cc5bc32207565b24cfc106))
+
+
+### Bug Fixes
+
+* **InputEx:** fix focus style when icons prop is used ([ca663cb](https://github.com/AdmiralDS/react-ui/commit/ca663cb1777acb9c92d91658913237471e4b2c45))
+* **Select:** space close options in searchMode (React 16) ([a2beb1a](https://github.com/AdmiralDS/react-ui/commit/a2beb1a7deaea67b6f44054f98a2b6c0c18068ba))
+* **TextArea:** fix autoHeight behaviour ([e36e84f](https://github.com/AdmiralDS/react-ui/commit/e36e84f5d0847623d6fd3e0169b6747d84b57f14))
+* **TextArea:** fix vertical paddings ([9b90a09](https://github.com/AdmiralDS/react-ui/commit/9b90a09dd521866358cff2ee601016d629c47ef5))
+* **TimeInput:** fix bug with incorrect second number in time value ([4be4772](https://github.com/AdmiralDS/react-ui/commit/4be477288d3c0c459bd5551a5592f17ad928d391))
+
+
+* **Table:** now column resize is controlled by user ([54b8c5c](https://github.com/AdmiralDS/react-ui/commit/54b8c5cc4bc7bf17b2661d8de73bf901a61c89eb))
+
 ### [3.10.1](https://github.com/AdmiralDS/react-ui/compare/v3.10.0...v3.10.1) (2023-01-10)
 
 
