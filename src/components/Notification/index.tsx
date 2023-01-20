@@ -27,7 +27,7 @@ export interface NotificationProps extends Omit<HTMLAttributes<HTMLDivElement>, 
   isClosable?: boolean;
   /** Закрытие notification */
   onClose?: () => void;
-  /** Переключатель видимоти статусных иконок */
+  /** Переключатель видимости статусных иконок */
   displayStatusIcon?: boolean;
 }
 
