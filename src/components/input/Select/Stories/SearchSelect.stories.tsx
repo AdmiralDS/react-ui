@@ -1,4 +1,4 @@
-import { INPUT_DIMENSIONS_VALUES, INPUT_STATUS_VALUES } from '#src/components/input';
+import { INPUT_DIMENSIONS_VALUES, INPUT_STATUS_VALUES, SelectValueWrapper } from '#src/components/input';
 import { Modal, ModalButtonPanel, ModalContent, ModalTitle } from '#src/components/Modal';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import type { ChangeEvent } from 'react';
@@ -15,11 +15,13 @@ import { CustomOptionWrapper } from '../styled';
 import type { RenderOptionProps } from '#src/components/Menu/MenuItem';
 import { T } from '#src/components/T';
 import { createOptions, formDataToObject, wait } from './utils';
-import { OPTIONS, OPTIONS_ASYNC, OPTIONS_SIMPLE } from './data';
+import { OPTIONS, OPTIONS_ASYNC, OPTIONS_NAMES, OPTIONS_SIMPLE } from './data';
 import { ExtraText, Form, FormValuesWrapper, Icon, Separator, StyledGroup, TextWrapper } from './styled';
 import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 import type { SearchFormat } from '#src/components/input/Select/Stories/types';
+import styled, { css } from 'styled-components';
+import { Belarus, Cuba, RussianFederation } from '#src/icons/IconComponents-flags';
 
 export default {
   title: 'Admiral-2.1/Input/Select/режим "searchSelect"',
@@ -222,6 +224,80 @@ const TemplateRenderProps: ComponentStory<typeof Select> = (props) => {
             )}
           />
         ))}
+      </Select>
+    </>
+  );
+};
+
+const RenderingValue = styled.div`
+  color: ${(p) => p.theme.color['Teal/Teal 80']};
+  display: flex;
+  column-gap: 8px;
+  padding: 0 3px;
+  border-width: 1px;
+  border-style: dotted;
+  border-radius: 4px;
+  border-color: ${(p) => p.theme.color['Teal/Teal 80']};
+  background-color: ${(p) => p.theme.color['Teal/Teal 10']};
+  box-sizing: border-box;
+`;
+
+const getFlag = (value: string) => {
+  return value === 'Фидель' ? Cuba : value === 'Константин Колешонок' ? Belarus : RussianFederation;
+};
+
+const RenderValueTemplate: ComponentStory<typeof Select> = (props) => {
+  const cleanProps = cleanUpProps(props);
+
+  const [selectValue, setSelectValue] = React.useState('');
+  const [searchValue, setSearchValue] = React.useState('');
+
+  const onChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    setSelectValue(e.target.value);
+    props.onChange?.(e);
+  };
+
+  const renderOptions = () => {
+    return OPTIONS_NAMES.map(
+      (option, ind) =>
+        shouldRender(option, searchValue) && (
+          <Option key={option} value={option}>
+            {option}
+          </Option>
+        ),
+    ).filter((item) => !!item);
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchValue(e.target.value);
+  };
+
+  const renderValue = (value: string | string[] | undefined) => {
+    if (typeof value === 'string' && !!value) {
+      const Flag = getFlag(value);
+
+      return (
+        <RenderingValue>
+          <Flag height={24} />
+          {value}
+        </RenderingValue>
+      );
+    }
+  };
+
+  return (
+    <>
+      <Select
+        {...cleanProps}
+        value={selectValue}
+        onInputChange={handleInputChange}
+        onChange={onChange}
+        mode="searchSelect"
+        multiple={false}
+        placeholder="Placeholder"
+        renderSelectValue={renderValue}
+      >
+        {renderOptions()}
       </Select>
     </>
   );
@@ -693,6 +769,12 @@ CustomOption.storyName = 'Кастомные опции';
 
 export const RenderProps = TemplateRenderProps.bind({});
 RenderProps.storyName = 'Кастомные опции через renderProps';
+
+export const RenderValueStory = RenderValueTemplate.bind({});
+RenderValueStory.args = {
+  defaultValue: 'Фидель',
+};
+RenderValueStory.storyName = 'Кастомное отображение значения';
 
 export const WithAddButton = TemplateWithAddButton.bind({});
 WithAddButton.storyName = 'Нижняя панель с кнопкой "Добавить"';
