@@ -1,5 +1,5 @@
 import type { ChangeEvent } from 'react';
-import React, { useState } from 'react';
+import * as React from 'react';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { InputEx } from './index';
 import { withDesign } from 'storybook-addon-designs';
@@ -87,7 +87,7 @@ const Template: ComponentStory<typeof InputEx> = (props) => {
     return acc;
   }, {} as Record<any, any>);
 
-  const [localValue, setValue] = useState<string>(String(props.value) ?? '');
+  const [localValue, setValue] = React.useState<string>(String(props.value) ?? '');
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.currentTarget.value;
@@ -117,7 +117,7 @@ const Template2: ComponentStory<typeof InputEx> = (props) => {
     return acc;
   }, {} as Record<any, any>);
 
-  const [localValue, setValue] = useState<string>(String(props.value) ?? '');
+  const [localValue, setValue] = React.useState<string>(String(props.value) ?? '');
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.currentTarget.value;

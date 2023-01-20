@@ -26,8 +26,7 @@ type HeaderCellType = {
   headerLineClamp: number;
   headerExtraLineClamp: number;
   spacingBetweenItems?: string;
-  resizerState: any;
-  handleResizeChange: (props: { name: string; width: number; mouseUp: boolean }) => void;
+  handleResizeChange: (props: { name: string; width: number }) => void;
   handleSort: (name: string, colSort: 'asc' | 'desc' | 'initial') => void;
   multipleSort?: boolean;
   columnMinWidth: number;
@@ -42,7 +41,6 @@ export const HeaderCellComponent = ({
   headerExtraLineClamp,
   spacingBetweenItems,
   dimension,
-  resizerState,
   handleResizeChange,
   handleSort,
   multipleSort,
@@ -54,7 +52,6 @@ export const HeaderCellComponent = ({
     title,
     extraText,
     width = DEFAULT_COLUMN_WIDTH,
-    resizerWidth,
     cellAlign = 'left',
     sortable = false,
     sort,
@@ -66,9 +63,16 @@ export const HeaderCellComponent = ({
   const defaultSpacer = dimension === 'l' || dimension === 'xl' ? '16px' : '12px';
   const spacer = spacingBetweenItems || defaultSpacer;
   const cellRef = React.createRef<HTMLDivElement>();
+  const colWidth = typeof width === 'number' ? width + 'px' : width;
 
   return (
-    <HeaderCell dimension={dimension} style={{ width: width, minWidth: width }} className="th" ref={cellRef}>
+    <HeaderCell
+      dimension={dimension}
+      style={{ width: colWidth, minWidth: colWidth }}
+      className="th"
+      data-th-column={name}
+      ref={cellRef}
+    >
       <HeaderCellContent cellAlign={cellAlign}>
         <HeaderCellTitle
           sort={sort || 'initial'}
@@ -93,10 +97,8 @@ export const HeaderCellComponent = ({
       {index < columnsAmount - 1 && (
         <RowWidthResizer
           name={name}
-          width={width ? resizerWidth : DEFAULT_COLUMN_WIDTH}
           onChange={handleResizeChange}
           disabled={disableResize || disableColumnResize}
-          resizerState={resizerState}
           dimension={dimension}
           columnMinWidth={columnMinWidth}
         />
@@ -104,10 +106,8 @@ export const HeaderCellComponent = ({
       {index === columnsAmount - 1 && showDividerForLastColumn && (
         <RowWidthResizer
           name={name}
-          width={width ? resizerWidth : DEFAULT_COLUMN_WIDTH}
           onChange={handleResizeChange}
           disabled={disableResize || disableColumnResize}
-          resizerState={resizerState}
           dimension={dimension}
           columnMinWidth={columnMinWidth}
         />

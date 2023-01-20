@@ -227,7 +227,7 @@ export const columnListWithWidth: Column[] = [
   {
     name: 'transfer_type',
     title: 'Тип сделки',
-    width: '20%',
+    width: 'calc(20% - 40px)',
   },
   {
     name: 'transfer_date',
@@ -242,6 +242,7 @@ export const columnListWithWidth: Column[] = [
   {
     name: 'currency',
     title: 'Валюта',
+    width: '20%',
   },
   {
     name: 'rate',
@@ -468,7 +469,7 @@ export const columnListSticky: Column[] = [
   {
     name: 'transfer_type',
     title: 'Тип сделки',
-    width: 150,
+    width: '20%',
     sticky: true,
   },
   {

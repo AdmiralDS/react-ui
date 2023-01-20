@@ -208,7 +208,7 @@ export const GroupTextContent = styled.div`
 
 // padding-bottom меньше padding-top на 1px, т.к. 1px остается для border-bottom ячейки
 export const CheckboxCell = styled(Cell)<{ dimension: TableProps['dimension'] }>`
-  width: unset;
+  width: ${({ dimension }) => (dimension === 's' || dimension === 'm' ? 44 : 56)}px;
   padding: ${({ dimension }) => {
     switch (dimension) {
       case 's':
@@ -382,4 +382,32 @@ export const ExpandedRowContent = styled.div`
 export const EmptyMessage = styled(Cell)`
   margin: 2px 0;
   color: ${({ theme }) => theme.color['Neutral/Neutral 50']};
+`;
+
+const getTechColumnsWidth = (
+  dimension: TableProps['dimension'],
+  selectionCol?: boolean,
+  expansionCol?: boolean,
+): number =>
+  (selectionCol ? (dimension === 's' || dimension === 'm' ? 44 : 56) : 0) +
+  (expansionCol ? (dimension === 's' || dimension === 'm' ? 44 : 56) : 0);
+
+export const HeaderCellsWrapper = styled.div<{
+  dimension: TableProps['dimension'];
+  selectionColumn?: boolean;
+  expansionColumn?: boolean;
+}>`
+  display: flex;
+  flex: 0 0 auto;
+  width: calc(100% - ${(p) => getTechColumnsWidth(p.dimension, p.selectionColumn, p.expansionColumn) + 'px'});
+`;
+
+export const HiddenHeader = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  visibility: hidden;
+  display: flex;
+  overflow: hidden;
 `;

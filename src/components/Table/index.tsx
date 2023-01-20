@@ -17,11 +17,13 @@ import {
   ExpandCell,
   Filler,
   Header,
+  HeaderCellsWrapper,
   HeaderWrapper,
   Row,
   ScrollTableBody,
   StickyWrapper,
   TableContainer,
+  HiddenHeader,
 } from './style';
 import { VirtualBody } from './VirtualBody';
 
@@ -49,7 +51,8 @@ export type Column = {
   title: React.ReactNode;
   /** Дополнительный текст заголовка столбца */
   extraText?: React.ReactNode;
-  /** Ширина столбца. По умолчанию 100px */
+  /** Ширина столбца. В качестве ширины можно использовать любое валидное css значение (пиксели, проценты, функция calc...).
+   * По умолчанию 100px */
   width?: number | string;
   /** Выравнивание контента ячеек столбца по левому или правому краю. По умолчанию left */
   cellAlign?: 'left' | 'right';
@@ -78,8 +81,6 @@ export type Column = {
   /** Колбек на закрытие меню фильтра */
   onFilterMenuClose?: () => void;
 };
-
-type ColumnWithResizerWidth = Column & { resizerWidth: number };
 
 export type RowId = string | number;
 type IdSelectionStatusMap = Record<RowId, boolean>;
@@ -191,8 +192,10 @@ export interface TableProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   onSortChange?: (sortObj: { name: string; sort: 'asc' | 'desc' | 'initial' }) => void;
   /** Колбек, который срабатывает при изменении ширины столбца.
-   * Колбек не срабатывает, когда пользователь тянет ресайзер влево/вправо (onMouseMove).
-   * Колбек срабатывает в момент, когда пользователь отпускает ресайзер (onMouseUp) и столбец принимает окончательную ширину.
+   * Данный колбек обязателен в случае, если таблица должна поддерживать ресайзинг.
+   * При срабатывании колбек сообщает пользователю о попытке ресайзинга столбца,
+   * после чего пользователь должен обновить ширину соответствующего столбца.
+   * Таким образом контроль за ресайзингом происходит на стороне пользователя.
    */
   onColumnResize?: (colObj: { name: string; width: string }) => void;
   /** Рендер функция для отрисовки контента ячейки. Входные параметры - объект строки и название столбца */
@@ -281,20 +284,17 @@ export const Table: React.FC<TableProps> = ({
   const checkboxDimension = dimension === 's' || dimension === 'm' ? 's' : 'm';
   const columnMinWidth = dimension === 's' || dimension === 'm' ? COLUMN_MIN_WIDTH_M : COLUMN_MIN_WIDTH_L;
 
-  const [cols, setColumns] = React.useState([...columnList]);
   const [verticalScroll, setVerticalScroll] = React.useState(false);
-  const [resizerState, updateResizerState] = React.useState({} as any);
   const [tableWidth, setTableWidth] = React.useState(0);
   const [bodyHeight, setBodyHeight] = React.useState(0);
   const [scrollbar, setScrollbarSize] = React.useState(0);
 
-  const stickyColumns = [...cols].filter((col) => col.sticky);
+  const stickyColumns = [...columnList].filter((col) => col.sticky);
 
   const tableRef = React.useRef<HTMLDivElement>(null);
   const headerRef = React.useRef<HTMLDivElement>(null);
+  const hiddenHeaderRef = React.useRef<HTMLDivElement>(null);
   const scrollBodyRef = React.useRef<HTMLDivElement>(null);
-  const expandCellRef = React.useRef<HTMLDivElement>(null);
-  const checkboxCellRef = React.useRef<HTMLDivElement>(null);
 
   const groupToRowsMap = rowList.reduce<Group>((acc: Group, row) => {
     if (typeof row.groupRows !== 'undefined') {
@@ -354,54 +354,42 @@ export const Table: React.FC<TableProps> = ({
       }, {})
     : {};
 
-  const updateColumnsWidths = () => {
-    const newCols = [...columnList].map((col) => {
-      return {
-        ...col,
-        width: replaceWidthToNumber(col.width),
-        resizerWidth: replaceWidthToNumber(col.width),
-      };
-    });
-    setColumns(newCols);
-    updateResizerState({});
-  };
-
   React.useLayoutEffect(() => {
-    if (tableRef.current) {
-      const resizeObserver = new ResizeObserver((entries) => {
-        updateColumnsWidths();
-        entries.forEach(() => {
-          updateColumnsWidths();
+    if (hiddenHeaderRef.current) {
+      const hiddenColumns = hiddenHeaderRef.current?.querySelectorAll<HTMLElement>('.th');
 
-          const size = getScrollbarSize();
-          setScrollbarSize(size);
+      const resizeObserver = new ResizeObserver((entries) => {
+        entries.forEach((entry) => {
+          // find all body cells in the same column as entry column
+          const bodyCells = scrollBodyRef.current?.querySelectorAll<HTMLElement>(
+            `[data-column="${(entry.target as HTMLElement).dataset.thColumn}"]`,
+          );
+          bodyCells?.forEach((cell) => {
+            cell.style.width = entry.borderBoxSize[0].inlineSize + 'px';
+          });
+
+          // find all header cells in the same column as entry column
+          const headerCells = headerRef.current?.querySelectorAll<HTMLElement>(
+            `[data-th-column="${(entry.target as HTMLElement).dataset.thColumn}"]`,
+          );
+          headerCells?.forEach((cell) => {
+            cell.style.width = entry.borderBoxSize[0].inlineSize + 'px';
+            cell.style.minWidth = entry.borderBoxSize[0].inlineSize + 'px';
+          });
         });
       });
-      resizeObserver.observe(tableRef.current);
+
+      hiddenColumns?.forEach((col) => resizeObserver.observe(col));
       return () => {
         resizeObserver.disconnect();
       };
     }
-  }, [tableRef.current, columnList, displayRowSelectionColumn, displayRowExpansionColumn, setScrollbarSize]);
+  }, [hiddenHeaderRef.current, headerRef.current, scrollBodyRef.current, columnList, rowList]);
 
-  const replaceWidthToNumber = React.useCallback(
-    (width?: string | number): number => {
-      const hasNumberWidth = typeof width === 'number';
-      const hasPercentWidth = typeof width === 'string' && width.includes('%');
-      const hasPixelWidth = typeof width === 'string' && width.includes('px');
-
-      if (hasPercentWidth && tableRef?.current) {
-        const checkboxCellWidth = checkboxCellRef?.current?.clientWidth || 0;
-        const expandCellWidth = expandCellRef?.current?.clientWidth || 0;
-        const maxWidth = tableRef.current.clientWidth - checkboxCellWidth - expandCellWidth;
-        return Math.round((parseInt(width) * (maxWidth || 1)) / 100);
-      }
-      if (hasNumberWidth) return width;
-      if (hasPixelWidth) return parseInt(width);
-      return DEFAULT_COLUMN_WIDTH;
-    },
-    [tableRef.current],
-  );
+  React.useEffect(() => {
+    const size = getScrollbarSize();
+    setScrollbarSize(size);
+  }, [setScrollbarSize]);
 
   React.useLayoutEffect(() => {
     const scrollBody = scrollBodyRef.current;
@@ -556,12 +544,8 @@ export const Table: React.FC<TableProps> = ({
     onHeaderSelectionChange?.(e.target.checked);
   }
 
-  function handleResizeChange({ name, width, mouseUp }: { name: string; width: number; mouseUp: boolean }) {
-    if (mouseUp) {
-      onColumnResize?.({ name, width: width + 'px' });
-    }
-    const newColumns = cols.map((column) => (column.name === name ? { ...column, width } : column));
-    setColumns(newColumns);
+  function handleResizeChange({ name, width }: { name: string; width: number }) {
+    onColumnResize?.({ name, width: width + 'px' });
   }
 
   const handleSort = (name: string, colSort: 'asc' | 'desc' | 'initial') => {
@@ -577,17 +561,16 @@ export const Table: React.FC<TableProps> = ({
     return columnList.filter((col) => !!col.sort).length > 1;
   }, [columnList]);
 
-  const renderHeaderCell = (column: ColumnWithResizerWidth, index: number) => (
+  const renderHeaderCell = (column: Column, index: number) => (
     <HeaderCellComponent
       key={`head_${column.name}`}
       column={column}
       index={index}
-      columnsAmount={cols.length}
+      columnsAmount={columnList.length}
       showDividerForLastColumn={showDividerForLastColumn}
       disableColumnResize={disableColumnResize}
       headerLineClamp={headerLineClamp}
       headerExtraLineClamp={headerExtraLineClamp}
-      resizerState={resizerState}
       handleResizeChange={handleResizeChange}
       handleSort={handleSort}
       dimension={dimension}
@@ -598,11 +581,14 @@ export const Table: React.FC<TableProps> = ({
   );
 
   const renderBodyCell = (row: TableRow, col: Column) => {
+    const headerCellWidth = hiddenHeaderRef.current
+      ?.querySelector<HTMLElement>(`[data-th-column="${col.name}"]`)
+      ?.getBoundingClientRect().width;
     return (
       <Cell
         key={`${row.id}_${col.name}`}
         dimension={dimension}
-        style={{ width: col.width || DEFAULT_COLUMN_WIDTH }}
+        style={{ width: headerCellWidth || '100px' }}
         className="td"
         data-column={col.name}
         data-row={row.id}
@@ -645,7 +631,7 @@ export const Table: React.FC<TableProps> = ({
       row={row}
       dimension={dimension}
       checkboxDimension={checkboxDimension}
-      columns={cols}
+      columns={columnList}
       stickyColumns={stickyColumns}
       displayRowExpansionColumn={displayRowExpansionColumn}
       displayRowSelectionColumn={displayRowSelectionColumn}
@@ -731,15 +717,41 @@ export const Table: React.FC<TableProps> = ({
     );
   };
 
+  const renderHiddenHeader = () => {
+    return (
+      <HiddenHeader ref={hiddenHeaderRef}>
+        {(displayRowSelectionColumn || displayRowExpansionColumn) && (
+          <StickyWrapper>
+            {displayRowExpansionColumn && <ExpandCell dimension={dimension} />}
+            {displayRowSelectionColumn && (
+              <CheckboxCell dimension={dimension}>
+                <Checkbox dimension={checkboxDimension} />
+              </CheckboxCell>
+            )}
+          </StickyWrapper>
+        )}
+        <HeaderCellsWrapper
+          expansionColumn={displayRowExpansionColumn}
+          selectionColumn={displayRowSelectionColumn}
+          dimension={dimension}
+        >
+          {stickyColumns.length > 0 && stickyColumns.map((col, index) => renderHeaderCell(col as Column, index))}
+          {columnList.map((col, index) => (col.sticky ? null : renderHeaderCell(col as Column, index)))}
+        </HeaderCellsWrapper>
+      </HiddenHeader>
+    );
+  };
+
   return (
     <TableContainer ref={tableRef} data-shadow={false} {...props} className={`table ${props.className || ''}`}>
+      {renderHiddenHeader()}
       <HeaderWrapper scrollbar={scrollbar} greyHeader={greyHeader} data-verticalscroll={verticalScroll}>
         <Header dimension={dimension} ref={headerRef} className="tr">
           {(displayRowSelectionColumn || displayRowExpansionColumn || stickyColumns.length > 0) && (
             <StickyWrapper greyHeader={greyHeader}>
-              {displayRowExpansionColumn && <ExpandCell ref={expandCellRef} dimension={dimension} />}
+              {displayRowExpansionColumn && <ExpandCell dimension={dimension} />}
               {displayRowSelectionColumn && (
-                <CheckboxCell ref={checkboxCellRef} dimension={dimension} className="th_checkbox">
+                <CheckboxCell dimension={dimension} className="th_checkbox">
                   <Checkbox
                     dimension={checkboxDimension}
                     checked={allRowsChecked || someRowsChecked || headerCheckboxChecked}
@@ -749,11 +761,10 @@ export const Table: React.FC<TableProps> = ({
                   />
                 </CheckboxCell>
               )}
-              {stickyColumns.length > 0 &&
-                stickyColumns.map((col, index) => renderHeaderCell(col as ColumnWithResizerWidth, index))}
+              {stickyColumns.length > 0 && stickyColumns.map((col, index) => renderHeaderCell(col as Column, index))}
             </StickyWrapper>
           )}
-          {cols.map((col, index) => (col.sticky ? null : renderHeaderCell(col as ColumnWithResizerWidth, index)))}
+          {columnList.map((col, index) => (col.sticky ? null : renderHeaderCell(col as Column, index)))}
           <Filler />
         </Header>
       </HeaderWrapper>
