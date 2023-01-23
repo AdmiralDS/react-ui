@@ -20,8 +20,7 @@ export interface FilterCompProps extends Omit<React.HTMLAttributes<HTMLButtonEle
 }
 
 export const Filter = React.forwardRef<HTMLButtonElement, FilterCompProps>(({ column, targetRef, ...props }, ref) => {
-  const { renderFilter, renderFilterIcon, onFilterMenuClickOutside, onFilterMenuOpen, onFilterMenuClose, cellAlign } =
-    column;
+  const { renderFilter, renderFilterIcon, onFilterMenuClickOutside, onFilterMenuOpen, onFilterMenuClose } = column;
   const [menuOpened, setMenuOpened] = React.useState<boolean>(false);
   const [isFilterActive, setFilterActive] = React.useState<boolean>(false);
   const btnRef = React.useRef<HTMLButtonElement>(null);
@@ -75,7 +74,7 @@ export const Filter = React.forwardRef<HTMLButtonElement, FilterCompProps>(({ co
         <FilterDropdownContainer
           role="listbox"
           targetRef={targetRef}
-          alignSelf={cellAlign === 'left' ? 'flex-end' : 'flex-start'}
+          alignSelf="flex-end"
           onClickOutside={clickOutside}
           onKeyDown={handleMenuKeyDown}
         >
