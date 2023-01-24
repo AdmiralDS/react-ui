@@ -33,7 +33,7 @@ const FieldSetExtrasContainer = styled.div`
   margin: 0;
 `;
 
-const FieldSetContainer = styled.fieldset<{
+const FieldSetContainer = styled.div<{
   dimension?: FieldSetDimension;
   flexDirection?: 'column' | 'row';
 }>`
@@ -51,6 +51,10 @@ const FieldSetContainer = styled.fieldset<{
 
   ${Legend} {
     margin-top: 0;
+  }
+
+  & > * {
+    width: 100%;
   }
 `;
 
