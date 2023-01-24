@@ -448,7 +448,13 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
           narrowSelectValueToInputValue(evt);
           setIsSearchPanelOpen(true);
         }
-        if (code === keyboardKey.Escape) setIsSearchPanelOpen(false);
+        if (code === keyboardKey.Escape && isSearchPanelOpen) {
+          setIsSearchPanelOpen(false);
+          // prevent browser-specific escape key behavior (Safari exits fullscreen)
+          evt.preventDefault();
+          // prevent other overlays from closing (Modal for example)
+          evt.stopPropagation();
+        }
       }
 
       containerRef.current?.addEventListener('keydown', handleKeyDown);
