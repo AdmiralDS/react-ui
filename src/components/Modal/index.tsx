@@ -244,9 +244,11 @@ export const Modal = React.forwardRef<HTMLDivElement, ModalProps>(
     }, []);
 
     const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
-      event.stopPropagation();
       if (event.key === 'Escape' && closeOnEscapeKeyDown) {
+        // prevent browser-specific escape key behavior (Safari exits fullscreen)
         event.preventDefault();
+        // prevent other overlays from closing
+        event.stopPropagation();
         onClose?.();
       } else if (event.key === 'Tab') {
         // focus trap

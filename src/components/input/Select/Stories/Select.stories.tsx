@@ -1,4 +1,4 @@
-import { INPUT_DIMENSIONS_VALUES, INPUT_STATUS_VALUES } from '#src/components/input';
+import { INPUT_DIMENSIONS_VALUES, INPUT_STATUS_VALUES, SelectValueWrapper } from '#src/components/input';
 import { Modal, ModalButtonPanel, ModalContent, ModalTitle } from '#src/components/Modal';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import type { ChangeEvent } from 'react';
@@ -8,11 +8,11 @@ import { Option, OptionGroup, Select } from '#src/components/input/Select';
 import type { IOnCloseProps } from '../types';
 import { Button } from '#src/components/Button';
 import { useState } from '@storybook/addons';
-import { ThemeProvider } from 'styled-components';
+import styled, { css, ThemeProvider } from 'styled-components';
 import type { Theme } from '#src/components/themes';
 import { MenuActionsPanel } from '#src/components/Menu/MenuActionsPanel';
 import { TextButton } from '#src/components/TextButton';
-import { PlusOutline } from '#src/icons/IconComponents-service';
+import { RussianFederation, Belarus, Cuba } from '#src/icons/IconComponents-flags';
 import { CustomOptionWrapper } from '../styled';
 import type { RenderOptionProps } from '#src/components/Menu/MenuItem';
 import { createOptions, formDataToObject, shouldRender, wait } from './utils';
@@ -116,42 +116,105 @@ const SelectSimpleTemplate: ComponentStory<typeof Select> = (props) => {
   );
 };
 
-const SearchSelectSimpleTemplate: ComponentStory<typeof Select> = (props) => {
-  const [selectValue, setSelectValue] = React.useState('');
-  const [searchValue, setSearchValue] = React.useState('');
+const RenderingValue = styled.div`
+  color: ${(p) => p.theme.color['Teal/Teal 80']};
+  display: flex;
+  column-gap: 8px;
+  padding: 0 3px;
+  border-width: 1px;
+  border-style: dotted;
+  border-radius: 4px;
+  border-color: ${(p) => p.theme.color['Teal/Teal 80']};
+  background-color: ${(p) => p.theme.color['Teal/Teal 10']};
+`;
 
-  const onChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    setSelectValue(e.target.value);
-    props.onChange?.(e);
-  };
+const MultipleRenderingValue = styled.div`
+  color: ${(p) => p.theme.color['Magenta/Magenta 50']};
+  display: flex;
+  column-gap: 8px;
+  margin: 0;
+  padding: 0 3px;
+  border-width: 1px;
+  border-style: dotted;
+  border-radius: 4px;
+  border-color: ${(p) => p.theme.color['Magenta/Magenta 50']};
+`;
 
-  const renderOptions = () => {
-    return OPTIONS_SIMPLE.map(
-      (option, ind) =>
-        shouldRender(option, searchValue) && (
-          <Option key={option} value={option} disabled={ind === 4}>
-            {option}
-          </Option>
-        ),
-    ).filter((item) => !!item);
-  };
+const MultipleMixin = css`
+  & ${SelectValueWrapper} {
+    padding-left: 0;
+    column-gap: 16px;
+    max-height: none;
+  }
+`;
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchValue(e.target.value);
+const CustomSelect = styled(Select)<{ multiple?: boolean }>`
+  ${(p) => p.multiple && MultipleMixin}
+`;
+
+const getFlag = (value: string) => {
+  return value === 'Фидель' ? Cuba : value === 'Константин Колешонок' ? Belarus : RussianFederation;
+};
+
+const RenderValueTemplate: ComponentStory<typeof Select> = (props) => {
+  const cleanProps = cleanUpProps(props);
+
+  const renderValue = (value: string | string[] | undefined) => {
+    if (typeof value === 'string') {
+      const Flag = getFlag(value);
+
+      return (
+        <RenderingValue>
+          <Flag height={24} />
+          {value}
+        </RenderingValue>
+      );
+    }
   };
 
   return (
     <>
-      <Select
-        {...props}
-        onInputChange={handleInputChange}
-        placeholder="Placeholder"
-        mode="searchSelect"
-        value={selectValue}
-        onChange={onChange}
-      >
-        {renderOptions()}
-      </Select>
+      <CustomSelect {...cleanProps} multiple={false} placeholder="Placeholder" renderSelectValue={renderValue}>
+        <Option value="Саша Даль">Саша Даль</Option>
+        <Option value="Алексей Елесин">Алексей Елесин</Option>
+        <Option value="Константин Ионочкин">Константин Ионочкин</Option>
+        <Option value="Анна Корженко">Анна Корженко</Option>
+        <Option value="Фидель">Фидель</Option>
+        <Option value="Константин Колешонок">Константин Колешонок</Option>
+        <Option value="Алексей Орлов">Алексей Орлов</Option>
+      </CustomSelect>
+    </>
+  );
+};
+
+const MultipleRenderValueTemplate: ComponentStory<typeof Select> = (props) => {
+  const cleanProps = cleanUpProps(props);
+
+  const renderValue = (value: string | string[] | undefined) => {
+    if (Array.isArray(value)) {
+      return value.map((item) => {
+        const Flag = getFlag(item);
+        return (
+          <MultipleRenderingValue>
+            <Flag height={24} />
+            {item}
+          </MultipleRenderingValue>
+        );
+      });
+    }
+  };
+
+  return (
+    <>
+      <CustomSelect {...cleanProps} multiple placeholder="Placeholder" renderSelectValue={renderValue}>
+        <Option value="Саша Даль">Саша Даль</Option>
+        <Option value="Алексей Елесин">Алексей Елесин</Option>
+        <Option value="Константин Ионочкин">Константин Ионочкин</Option>
+        <Option value="Анна Корженко">Анна Корженко</Option>
+        <Option value="Фидель">Фидель</Option>
+        <Option value="Константин Колешонок">Константин Колешонок</Option>
+        <Option value="Алексей Орлов">Алексей Орлов</Option>
+      </CustomSelect>
     </>
   );
 };
@@ -391,7 +454,7 @@ const TemplateSimpleMultiSelect: ComponentStory<typeof Select> = (props) => {
         renderDropDownBottomPanel={({ dimension = menuPanelContentDimension }) => {
           return (
             <MenuActionsPanel dimension={dimension}>
-              <TextButton text={'Добавить'} disabled={false} icon={<PlusOutline />} onClick={handleAddButtonClick} />
+              <TextButton text={'Добавить'} disabled={false} icon={<Cuba />} onClick={handleAddButtonClick} />
             </MenuActionsPanel>
           );
         }}
@@ -593,7 +656,7 @@ const SearchSelectWithBottomPaneTemplate: ComponentStory<typeof Select> = (props
         renderDropDownBottomPanel={({ dimension = menuPanelContentDimension }) => {
           return (
             <MenuActionsPanel dimension={dimension}>
-              <TextButton text={'Добавить'} disabled={false} icon={<PlusOutline />} onClick={handleAddButtonClick} />
+              <TextButton text={'Добавить'} disabled={false} icon={<Cuba />} onClick={handleAddButtonClick} />
             </MenuActionsPanel>
           );
         }}
@@ -610,17 +673,20 @@ SimpleSelectStory.args = {
 };
 SimpleSelectStory.storyName = 'Select. Простой Select';
 
-// export const SelectStory = SelectTemplate.bind({});
-// SelectStory.storyName = 'Select на основе SearchSelect';
-
 export const MultiSelectStory = TemplateMultiSelect.bind({});
 MultiSelectStory.storyName = 'Select. Простой MultiSelect';
 
-// export const SimpleSearchSelectStory = SearchSelectSimpleTemplate.bind({});
-// SimpleSearchSelectStory.args = {
-//   placeholder: 'Начните ввод для поиска',
-// };
-// SimpleSearchSelectStory.storyName = 'SearchSelect. Простой SearchSelect';
+export const RenderValueStory = RenderValueTemplate.bind({});
+RenderValueStory.args = {
+  defaultValue: 'Фидель',
+};
+RenderValueStory.storyName = 'Кастомное отображение значения';
+
+export const MultipleRenderValueStory = MultipleRenderValueTemplate.bind({});
+MultipleRenderValueStory.args = {
+  defaultValue: ['Фидель', 'Саша Даль'],
+};
+MultipleRenderValueStory.storyName = 'Multiple. Кастомное отображение значения';
 //
 // export const CustomOptionSearchSelectStory = CustomOptionTemplate.bind({});
 // CustomOptionSearchSelectStory.storyName = 'SearchSelect. С кастомными опциями';
