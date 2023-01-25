@@ -10,6 +10,16 @@ export const OPTIONS_SIMPLE = [
   'text 69',
 ];
 
+export const OPTIONS_NAMES = [
+  'Саша Даль',
+  'Алексей Елесин',
+  'Константин Ионочкин',
+  'Анна Корженко',
+  'Фидель',
+  'Константин Колешонок',
+  'Алексей Орлов',
+];
+
 export const OPTIONS = [
   {
     value: 'val1',

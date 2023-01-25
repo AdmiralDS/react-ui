@@ -650,5 +650,6 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
 
 export { Option } from './Option';
 export { OptionGroup } from './OptionGroup';
+export { ValueWrapper as SelectValueWrapper } from './styled';
 
 Select.displayName = 'Select';
