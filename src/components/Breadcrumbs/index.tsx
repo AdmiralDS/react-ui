@@ -83,7 +83,7 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
         <Separator width={iconSize} height={iconSize} aria-hidden />
       </Breadcrumb>
     ) : null;
-  }, [items]);
+  }, [items, dimension]);
 
   const renderLastItem = React.useCallback(() => {
     const item = items[items.length - 1];
@@ -99,7 +99,7 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
         {...item}
       />
     ) : null;
-  }, [items, mobile]);
+  }, [items, mobile, dimension]);
 
   const renderVisibleItems = React.useCallback(() => {
     return visible.map((item, index) => {
@@ -118,7 +118,7 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
         </Breadcrumb>
       );
     });
-  }, [visible, mobile, visibilityMap]);
+  }, [visible, mobile, visibilityMap, items.length, dimension]);
 
   const renderHiddenItems = React.useCallback(() => {
     const hiddenItems = items.filter((_, index) => !visibilityMap[index]);
@@ -133,7 +133,7 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
         <Separator width={iconSize} height={iconSize} aria-hidden />
       </OverflowItem>
     ) : null;
-  }, [items, visibilityMap]);
+  }, [items, visibilityMap, dimension, dropContainerCssMixin]);
 
   return (
     <Navigation aria-label="Breadcrumb" {...props}>
