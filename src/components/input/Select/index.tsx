@@ -9,7 +9,6 @@ import { InputIconButton } from '#src/components/InputIconButton';
 import { ReactComponent as CloseOutlineSvg } from '@admiral-ds/icons/build/service/CloseOutline.svg';
 import type { ComponentDimension, InputStatus } from '#src/components/input/types';
 import { ConstantSelectProvider } from './useSelectContext';
-import type { IConstantOption } from './types';
 import { MultipleSelectChips } from './MultipleSelectChips';
 import {
   BorderedDiv,
@@ -31,6 +30,8 @@ import type { RenderPanelProps } from '#src/components/Menu';
 import { NativeControl } from '#src/components/input/Select/NativeControl';
 import { DropDownProvider } from '#src/components/input/Select/DropDownContext';
 import type { ItemProps } from '#src/components/Menu/MenuItem';
+import type { SearchFormat, SelectItemProps, IConstantOption } from '#src/components/input/Select/types';
+import { defaultFilterItem } from '#src/components/input/Select/utils';
 
 /**
  * Осталось сделать:
@@ -152,6 +153,9 @@ export interface SelectProps extends Omit<React.InputHTMLAttributes<HTMLSelectEl
 
   /** Inner input keyboard event handler */
   onInputKeyDownCapture?: React.KeyboardEventHandler<HTMLInputElement>;
+
+  searchFormat?: SearchFormat;
+  onFilterItem?: (value: string, searchValue: string, searchFormat: SearchFormat) => boolean;
 }
 
 export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
@@ -197,6 +201,8 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       onInputKeyUp,
       onInputKeyUpCapture,
       onInputKeyDownCapture,
+      searchFormat = 'wholly',
+      onFilterItem = defaultFilterItem,
       ...props
     },
     ref,
@@ -213,7 +219,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
     const [activeItem, setActiveItem] = React.useState<string>();
 
     const [constantOptions, setConstantOptions] = React.useState<IConstantOption[]>([]);
-    const [dropDownItems, setDropItems] = React.useState<Array<ItemProps>>([]);
+    const [dropDownItems, setDropItems] = React.useState<Array<SelectItemProps>>([]);
 
     const [isSearchPanelOpen, setIsSearchPanelOpen] = React.useState(forcedOpen);
     const [isFocused, setIsFocused] = React.useState(false);
@@ -239,8 +245,12 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
     );
 
     const dropDownModel = React.useMemo<Array<ItemProps>>(() => {
-      return dropDownItems.length
-        ? dropDownItems
+      const filteredItems = dropDownItems.filter((item) => {
+        return onFilterItem(item.value, searchValue, searchFormat);
+      });
+
+      return filteredItems.length
+        ? filteredItems
         : [
             {
               id: 'emptyMessage',
@@ -248,7 +258,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
               disabled: true,
             },
           ];
-    }, [isLoading, dropDownItems, dimension]);
+    }, [isLoading, dropDownItems, dimension, searchValue]);
 
     const inputRef = inputTargetRef ?? React.useRef<HTMLInputElement | null>(null);
     const selectRef = React.useRef<HTMLSelectElement | null>(null);
@@ -271,7 +281,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
     );
 
     const handleDropDownOptionMount = React.useCallback(
-      (option: ItemProps) => setDropItems((prev) => [...prev, option]),
+      (option: SelectItemProps) => setDropItems((prev) => [...prev, option]),
       [],
     );
 
@@ -324,12 +334,12 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
     }, [forcedOpen]);
 
     React.useEffect(() => {
-      if (forcedOpen !== isSearchPanelOpen) onChangeDropDownState?.(isSearchPanelOpen);
+      onChangeDropDownState?.(isSearchPanelOpen);
 
       if (!isSearchPanelOpen && isFocused && document.activeElement !== containerRef.current) {
         selectRef.current?.focus();
       }
-    }, [isSearchPanelOpen, forcedOpen]);
+    }, [isSearchPanelOpen]);
 
     const handleOnClear = onClearIconClick || resetOptions;
 
@@ -650,5 +660,6 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
 
 export { Option } from './Option';
 export { OptionGroup } from './OptionGroup';
+export { defaultFilterItem } from './utils';
 
 Select.displayName = 'Select';
