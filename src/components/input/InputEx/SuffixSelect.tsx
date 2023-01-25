@@ -5,6 +5,7 @@ import { OpenStatusButton } from '#src/components/OpenStatusButton';
 import { StyledDropdownContainer } from '#src/components/DropdownContainer';
 import { Menu } from '#src/components/input/InputEx/Menu';
 import type { ValueType } from '#src/components/input/InputEx/ValueType';
+import type { MenuItemProps } from '#src/components/Menu/MenuItem';
 
 const StyledMenu = styled(Menu)<{ width?: string }>`
   width: ${({ width }) => (width ? width : 'auto')};
@@ -73,7 +74,7 @@ export type SuffixSelectProps<T> = {
   onOpenChange?: (isOpen: boolean) => void;
 
   renderValue?: (props: RenderPropsType<T>) => React.ReactNode;
-  renderOption?: (props: RenderPropsType<T>) => React.ReactNode;
+  renderOption?: (props: RenderPropsType<ValueType> & MenuItemProps) => React.ReactNode;
 
   disabled?: boolean;
 
@@ -91,6 +92,8 @@ export const SuffixSelect = <T extends ValueType>({
   value,
   disabled,
   dropContainerCssMixin,
+  renderValue,
+  renderOption,
   ...props
 }: React.PropsWithChildren<SuffixSelectProps<T>>) => {
   const [isOpenState, setIsOpenState] = React.useState<boolean>(false);
@@ -126,7 +129,7 @@ export const SuffixSelect = <T extends ValueType>({
         data-read-only={props.readOnly ? true : undefined}
         onMouseDown={props.readOnly || disabled ? preventDefault : handleContainerClick}
       >
-        <ValueContainer>{value}</ValueContainer>
+        {renderValue ? renderValue({ value }) : <ValueContainer>{value}</ValueContainer>}
         {!props.readOnly && <OpenStatusButton $isOpen={isOpen} aria-hidden data-disabled={disabled} />}
       </Container>
       {isOpen && (
@@ -137,7 +140,13 @@ export const SuffixSelect = <T extends ValueType>({
           onClickOutside={clickOutside}
           dropContainerCssMixin={dropContainerCssMixin}
         >
-          <StyledMenu maxHeight={dropMaxHeight} options={options} selected={value} onSelect={handleOnSelect} />
+          <StyledMenu
+            maxHeight={dropMaxHeight}
+            options={options}
+            selected={value}
+            onSelect={handleOnSelect}
+            renderOption={renderOption}
+          />
         </StyledDropdownContainer>
       )}
     </>
