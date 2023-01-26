@@ -12,11 +12,11 @@ import { Link } from '#src/components/Link';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { CloseIconPlacementButton } from '#src/components/IconPlacement';
 
-type Status = 'info' | 'error' | 'success' | 'warning';
+export type NotificationStatus = 'info' | 'error' | 'success' | 'warning';
 
 export interface NotificationProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title' | 'id'> {
   /** Статус notification */
-  status?: Status;
+  status?: NotificationStatus;
   /** Заголовок notification */
   title?: React.ReactNode;
   /** Название для ссылки */
@@ -31,7 +31,7 @@ export interface NotificationProps extends Omit<HTMLAttributes<HTMLDivElement>, 
   displayStatusIcon?: boolean;
 }
 
-const getIcon = (status: Status) => {
+const getIcon = (status: NotificationStatus) => {
   switch (status) {
     case 'info':
       return InfoIcon;
@@ -45,7 +45,7 @@ const getIcon = (status: Status) => {
   }
 };
 
-const backGroundColorMixin = css<{ status?: Status }>`
+const backGroundColorMixin = css<{ status?: NotificationStatus }>`
   background-color: ${({ theme, status }) => {
     if (status === 'warning') return theme.color['Warning/Warning 10'];
     if (status === 'error') return theme.color['Error/Error 10'];
@@ -54,7 +54,7 @@ const backGroundColorMixin = css<{ status?: Status }>`
   }};
 `;
 
-const borderColorMixin = css<{ status?: Status }>`
+const borderColorMixin = css<{ status?: NotificationStatus }>`
   border-color: ${({ theme, status }) => {
     if (status === 'warning') return theme.color['Warning/Warning 50 Main'];
     if (status === 'error') return theme.color['Error/Error 60 Main'];
@@ -63,7 +63,7 @@ const borderColorMixin = css<{ status?: Status }>`
   }};
 `;
 
-const NotificationWrapper = styled.div<{ status?: Status; displayStatusIcon: boolean; isClosable: boolean }>`
+const NotificationWrapper = styled.div<{ status?: NotificationStatus; displayStatusIcon: boolean; isClosable: boolean }>`
   overflow: hidden;
   position: relative;
   box-sizing: border-box;
@@ -100,7 +100,7 @@ const CloseButton = styled(CloseIconPlacementButton)`
   right: 8px;
 `;
 
-const IconWrapper = styled.div<{ status?: Status }>`
+const IconWrapper = styled.div<{ status?: NotificationStatus }>`
   position: absolute;
   top: 12px;
   left: 16px;
