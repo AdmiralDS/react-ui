@@ -154,7 +154,10 @@ export interface SelectProps extends Omit<React.InputHTMLAttributes<HTMLSelectEl
   /** Inner input keyboard event handler */
   onInputKeyDownCapture?: React.KeyboardEventHandler<HTMLInputElement>;
 
+  /** Данная опция позволяет при фильтрации искать по строке целиком или по отдельным словам */
   searchFormat?: SearchFormat;
+
+  /** Позволяет фильтровать отображаемые опции */
   onFilterItem?: (value: string, searchValue: string, searchFormat: SearchFormat) => boolean;
 }
 

@@ -1,4 +1,4 @@
-import { defaultFilterItem, INPUT_DIMENSIONS_VALUES, INPUT_STATUS_VALUES, SelectValueWrapper } from '#src/components/input';
+import { defaultFilterItem, INPUT_DIMENSIONS_VALUES, INPUT_STATUS_VALUES } from '#src/components/input';
 import { Modal, ModalButtonPanel, ModalContent, ModalTitle } from '#src/components/Modal';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import type { ChangeEvent } from 'react';
@@ -19,7 +19,7 @@ import { OPTIONS, OPTIONS_ASYNC, OPTIONS_NAMES, OPTIONS_SIMPLE } from './data';
 import { ExtraText, Form, FormValuesWrapper, Icon, Separator, StyledGroup, TextWrapper } from './styled';
 import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { Belarus, Cuba, RussianFederation } from '#src/icons/IconComponents-flags';
 
 export default {
@@ -208,6 +208,7 @@ const TemplateRenderProps: ComponentStory<typeof Select> = (props) => {
 const RenderingValue = styled.div`
   color: ${(p) => p.theme.color['Teal/Teal 80']};
   display: flex;
+  flex: 1 1 100%;
   column-gap: 8px;
   padding: 0 3px;
   border-width: 1px;
@@ -225,27 +226,12 @@ const getFlag = (value: string) => {
 const RenderValueTemplate: ComponentStory<typeof Select> = (props) => {
   const cleanProps = cleanUpProps(props);
 
-  const [selectValue, setSelectValue] = React.useState('');
-  const [searchValue, setSearchValue] = React.useState('');
-
-  const onChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    setSelectValue(e.target.value);
-    props.onChange?.(e);
-  };
-
   const renderOptions = () => {
-    return OPTIONS_NAMES.map(
-      (option, ind) =>
-        shouldRender(option, searchValue) && (
-          <Option key={option} value={option}>
-            {option}
-          </Option>
-        ),
-    ).filter((item) => !!item);
-  };
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchValue(e.target.value);
+    return OPTIONS_NAMES.map((option) => (
+      <Option key={option} value={option}>
+        {option}
+      </Option>
+    ));
   };
 
   const renderValue = (value: string | string[] | undefined) => {
@@ -265,9 +251,6 @@ const RenderValueTemplate: ComponentStory<typeof Select> = (props) => {
     <>
       <Select
         {...cleanProps}
-        value={selectValue}
-        onInputChange={handleInputChange}
-        onChange={onChange}
         mode="searchSelect"
         multiple={false}
         placeholder="Placeholder"
