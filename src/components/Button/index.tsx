@@ -131,7 +131,7 @@ const StyledButton = styled.button.attrs<
   ${({ skeleton }) => skeleton && skeletonAnimationMixin}};
 
   ${ButtonContent} {
-    visibility: ${(p) => (p.$loading || p.skeleton ? 'hidden' : 'visible')};
+    ${(p) => (p.$loading || p.skeleton ? 'visibility: hidden' : '')};
   }
 
   &:hover {
