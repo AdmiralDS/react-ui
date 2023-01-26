@@ -703,10 +703,10 @@ describe('SearchSelect', () => {
       userEvent.keyboard('{arrowdown}');
       expect(dropDownOptions[2]).toHaveStyle(hoverStyle);
 
-      userEvent.keyboard('one');
+      userEvent.keyboard('1');
 
       const dropDownOptionsAfterInput = within(dropDownContainer).getAllByTestId('option');
-      expect(dropDownOptionsAfterInput.length).toBe(3);
+      expect(dropDownOptionsAfterInput.length).toBe(1);
       dropDownOptionsAfterInput.forEach((option, ind) => {
         if (ind === 2) expect(option).toHaveStyle(hoverStyle);
         else expect(option).not.toHaveStyle(hoverStyle);

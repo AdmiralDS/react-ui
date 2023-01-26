@@ -1,26 +1,4 @@
-import type { SearchFormat } from '#src/components/input/Select/Stories/types';
 import { MULTISELECT_OPTIONS } from '#src/components/input/Select/Stories/data';
-
-export const shouldRender = (text = '', searchValue = '', searchFormat: SearchFormat = 'wholly') => {
-  const strings = searchFormat === 'word' ? searchValue.split(' ') : [searchValue];
-  const chunks = strings.filter(Boolean).map((chunk) => chunk.toLowerCase());
-
-  const specialCharacters = ['[', ']', '\\', '^', '$', '.', '|', '?', '*', '+', '(', ')'];
-
-  const pattern = chunks
-    .map((chunk) => {
-      const chunkForRegExp = chunk
-        .split('')
-        .map((letter) => (specialCharacters.includes(letter) ? `\\${letter}` : letter))
-        .join('');
-      return `(${chunkForRegExp})?`;
-    })
-    .join('');
-
-  const parts = text.split(new RegExp(pattern, 'gi')).filter(Boolean);
-
-  return !searchValue ? true : parts.some((part) => chunks.includes(part.toLowerCase()));
-};
 
 export async function wait(ms: number) {
   return new Promise((resolve) => {
