@@ -29,8 +29,6 @@ export interface NotificationProps extends Omit<HTMLAttributes<HTMLDivElement>, 
   onClose?: () => void;
   /** Переключатель видимости статусных иконок */
   displayStatusIcon?: boolean;
-  /** Значение прогресса от 100 до 1 */
-  percent?: number;
 }
 
 const getIcon = (status: NotificationStatus) => {
@@ -135,21 +133,6 @@ NotificationWrapper.defaultProps = {
   theme: DEFAULT_THEME,
 };
 
-const Progress = styled.div<{ percent: number; status?: NotificationStatus }>`
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  background: ${({ theme, status }) => {
-    if (status === 'warning') return theme.color['Warning/Warning 50 Main'];
-    if (status === 'error') return theme.color['Error/Error 60 Main'];
-    if (status === 'success') return theme.color['Success/Success 50 Main'];
-    return theme.color['Primary/Primary 60 Main'];
-  }};
-  width: ${({ percent }) => percent}%;
-  height: 3px;
-  transition: all 0.3s linear;
-`;
-
 export const Notification = ({
   status = 'info',
   title,
@@ -158,7 +141,6 @@ export const Notification = ({
   displayStatusIcon = false,
   isClosable = false,
   onClose,
-  percent = 0,
   children,
   ...props
 }: React.PropsWithChildren<NotificationProps>) => {
@@ -187,8 +169,6 @@ export const Notification = ({
       </Content>
 
       {isClosable && <CloseButton dimension="mSmall" highlightFocus={false} onClick={onClose} />}
-
-      {percent > 0 && <Progress percent={percent} status={status} />}
     </NotificationWrapper>
   );
 };

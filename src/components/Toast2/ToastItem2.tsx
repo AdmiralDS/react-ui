@@ -1,8 +1,9 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import type { NotificationProps } from '#src/components/Notification';
+import type { NotificationProps, NotificationStatus } from '#src/components/Notification';
 import { Notification } from '#src/components/Notification';
 import { useToast2 } from '#src/components/Toast2/ToastProvider2';
+import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 
 const StyledNotification = styled(Notification)`
   ${(props) => props.theme.shadow['Shadow 08']}
@@ -11,6 +12,27 @@ const StyledNotification = styled(Notification)`
 export interface ToastItem2Props extends NotificationProps {
   id: string;
 }
+
+const Progress = styled.div<{ percent: number; status?: NotificationStatus }>`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background: ${({ theme, status }) => {
+    if (status === 'warning') return theme.color['Warning/Warning 50 Main'];
+    if (status === 'error') return theme.color['Error/Error 60 Main'];
+    if (status === 'success') return theme.color['Success/Success 50 Main'];
+    return theme.color['Primary/Primary 60 Main'];
+  }};
+  width: ${({ percent }) => percent}%;
+  height: 4px;
+  /*transition: all 0.3s linear;*/
+`;
+
+const Wrapper = styled.div`
+  position: relative;
+  overflow: hidden;
+  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
+`;
 
 export const ToastItem2 = ({ children, ...props }: ToastItem2Props) => {
   const { removeToast2, autoDeleteTime2, showProgress2 } = useToast2();
@@ -43,8 +65,11 @@ export const ToastItem2 = ({ children, ...props }: ToastItem2Props) => {
   console.log(tik);
 
   return (
-    <StyledNotification {...props} percent={tik} onClose={() => removeToast2(props.id)}>
-      {children}
-    </StyledNotification>
+    <Wrapper>
+      <StyledNotification {...props} onClose={() => removeToast2(props.id)}>
+        {children}
+      </StyledNotification>
+      {showProgress2 && <Progress percent={tik} status={props.status} />}
+    </Wrapper>
   );
 };

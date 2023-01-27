@@ -127,51 +127,8 @@ const Template2: ComponentStory<typeof Notification> = (args) => {
   );
 };
 
-const Template3: ComponentStory<typeof Notification> = (args) => {
-  const [tik, setTick] = React.useState(100);
-
-  React.useEffect(() => {
-    const counter = () => setTick((prev) => prev - 3);
-    const timerId = setTimeout(counter, 300);
-    if (tik == 0) {
-      clearTimeout(timerId);
-    }
-    return () => {
-      clearTimeout(timerId);
-    };
-  }, [tik]);
-
-  return (
-    <>
-      <Layout>
-        <Notification {...args} percent={args.percent || tik} status="info" title={title}>
-          {body}
-        </Notification>
-      </Layout>
-      <Layout>
-        <Notification {...args} percent={args.percent || tik} status="warning" title={title}>
-          {body}
-        </Notification>
-      </Layout>
-      <Layout>
-        <Notification {...args} percent={args.percent || tik} status="error" title={title}>
-          {body}
-        </Notification>
-      </Layout>
-      <Layout>
-        <Notification {...args} percent={args.percent || tik} status="success" title={title}>
-          {body}
-        </Notification>
-      </Layout>
-    </>
-  );
-};
-
 export const StaticNotificationBase = Template1.bind({});
 StaticNotificationBase.storyName = 'Статическая нотификация. Базовый пример.';
 
 export const StaticNotificationBaseStatus = Template2.bind({});
 StaticNotificationBaseStatus.storyName = 'Статусы статических нотификаций';
-
-export const StaticNotificationBaseProgress = Template3.bind({});
-StaticNotificationBaseProgress.storyName = 'Статические нотификации с прогрессом';
