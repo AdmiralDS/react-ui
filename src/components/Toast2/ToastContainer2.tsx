@@ -1,6 +1,7 @@
 import * as React from 'react';
 import type { PositionToasts } from '#src/components/Toast';
 import styled, { css, keyframes } from 'styled-components';
+import { useToast2 } from '#src/components/Toast2/ToastProvider2';
 
 const fadeInRight = keyframes`
   from {
@@ -59,15 +60,15 @@ export interface Toast2Props {
 }
 
 export interface ToastContainer2Props extends React.HTMLAttributes<HTMLDivElement> {
-  toasts: Toast2Props[];
   position?: PositionToasts;
   renderToast: (id: string) => React.ReactNode;
 }
 
-export const ToastContainer2 = ({ position = 'top-right', toasts, renderToast, ...props }: ToastContainer2Props) => {
+export const ToastContainer2 = ({ position = 'top-right', renderToast, ...props }: ToastContainer2Props) => {
+  const { toasts2, removeToast2 } = useToast2();
   return (
     <Container position={position} {...props}>
-      {toasts.map((item) => {
+      {toasts2.map((item) => {
         return (
           <Transition key={item.id} position={position}>
             {renderToast(item.id)}

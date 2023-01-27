@@ -2,21 +2,24 @@ import * as React from 'react';
 import styled from 'styled-components';
 import type { NotificationProps } from '#src/components/Notification';
 import { Notification } from '#src/components/Notification';
+import { useToast2 } from '#src/components/Toast2/ToastProvider2';
 
 const StyledNotification = styled(Notification)`
   ${(props) => props.theme.shadow['Shadow 08']}
 `;
 
 export interface ToastItem2Props extends NotificationProps {
-  autoDeleteTime?: number;
+  id: string;
 }
 
-export const ToastItem2 = ({ children, onClose, autoDeleteTime, ...props }: ToastItem2Props) => {
+export const ToastItem2 = ({ children, ...props }: ToastItem2Props) => {
+  const { removeToast2, autoDeleteTime2 } = useToast2();
+
   React.useEffect(() => {
-    if (!autoDeleteTime) return;
+    if (!autoDeleteTime2) return;
     const timer = setTimeout(() => {
-      onClose?.();
-    }, autoDeleteTime);
+      removeToast2(props.id);
+    }, autoDeleteTime2);
 
     return () => {
       clearTimeout(timer);
@@ -24,24 +27,8 @@ export const ToastItem2 = ({ children, onClose, autoDeleteTime, ...props }: Toas
   }, []);
 
   return (
-    <StyledNotification {...props} onClose={onClose}>
+    <StyledNotification {...props} onClose={() => removeToast2(props.id)}>
       {children}
     </StyledNotification>
   );
-};
-
-export const InfoToastItem = ({ ...props }: ToastItem2Props) => {
-  return <ToastItem2 {...props} status={'info'} />;
-};
-
-export const SuccessToastItem = ({ ...props }: ToastItem2Props) => {
-  return <ToastItem2 {...props} status={'success'} />;
-};
-
-export const WarningToastItem = ({ ...props }: ToastItem2Props) => {
-  return <ToastItem2 {...props} status={'warning'} />;
-};
-
-export const ErrorToastItem = ({ ...props }: ToastItem2Props) => {
-  return <ToastItem2 {...props} status={'error'} />;
 };
