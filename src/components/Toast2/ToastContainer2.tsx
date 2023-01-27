@@ -65,7 +65,7 @@ export interface ToastContainer2Props extends React.HTMLAttributes<HTMLDivElemen
 }
 
 export const ToastContainer2 = ({ position = 'top-right', renderToast, ...props }: ToastContainer2Props) => {
-  const { toasts2, removeToast2 } = useToast2();
+  const { toasts2 } = useToast2();
   return (
     <Container position={position} {...props}>
       {toasts2.map((item) => {

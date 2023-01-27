@@ -13,9 +13,24 @@ export interface ToastItem2Props extends NotificationProps {
 }
 
 export const ToastItem2 = ({ children, ...props }: ToastItem2Props) => {
-  const { removeToast2, autoDeleteTime2 } = useToast2();
+  const { removeToast2, autoDeleteTime2, showProgress2 } = useToast2();
+  const [tik, setTick] = React.useState(showProgress2 ? 100 : 0);
 
   React.useEffect(() => {
+    if (!showProgress2) return;
+    if (!autoDeleteTime2) return;
+    const delta = autoDeleteTime2 / 100;
+    const counter = () => setTick((prev) => prev - 1);
+    const timerId = setTimeout(counter, delta);
+    if (tik == 0) {
+      clearTimeout(timerId);
+    }
+    return () => {
+      clearTimeout(timerId);
+    };
+  }, [tik]);
+
+  /*React.useEffect(() => {
     if (!autoDeleteTime2) return;
     const timer = setTimeout(() => {
       removeToast2(props.id);
@@ -24,10 +39,11 @@ export const ToastItem2 = ({ children, ...props }: ToastItem2Props) => {
     return () => {
       clearTimeout(timer);
     };
-  }, []);
+  }, []);*/
+  console.log(tik);
 
   return (
-    <StyledNotification {...props} onClose={() => removeToast2(props.id)}>
+    <StyledNotification {...props} percent={tik} onClose={() => removeToast2(props.id)}>
       {children}
     </StyledNotification>
   );

@@ -118,7 +118,7 @@ const Temp1: ComponentStory<typeof ToastContainer2> = (args) => {
 
   return (
     <ThemeProvider theme={swapBorder}>
-      <ToastProvider2 autoDeleteTime2={5000}>
+      <ToastProvider2 showProgress2={true} autoDeleteTime2={5000}>
         <NotificationEmitter />
         <ToastContainer2 renderToast={renderToast} />
       </ToastProvider2>

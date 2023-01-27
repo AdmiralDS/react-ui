@@ -7,6 +7,7 @@ export interface ToastProvider2Props {
   position?: PositionToasts;
   autoDeleteTime2?: number;
   children?: ReactNode;
+  showProgress2?: boolean;
 }
 
 export interface IContext2Props extends ToastProvider2Props {
@@ -17,7 +18,7 @@ export interface IContext2Props extends ToastProvider2Props {
 
 export const ToastProvider2Context = React.createContext({} as IContext2Props);
 
-export const ToastProvider2 = ({ autoDeleteTime2, ...props }: ToastProvider2Props) => {
+export const ToastProvider2 = ({ autoDeleteTime2, showProgress2, ...props }: ToastProvider2Props) => {
   const [toasts2, setToasts2] = React.useState<Toast2Props[]>([]);
 
   const addToast2 = React.useCallback((id: string) => {
@@ -29,8 +30,8 @@ export const ToastProvider2 = ({ autoDeleteTime2, ...props }: ToastProvider2Prop
   }, []);
 
   const providerValue = React.useMemo(
-    () => ({ addToast2, removeToast2, toasts2, autoDeleteTime2 }),
-    [addToast2, removeToast2, toasts2, autoDeleteTime2],
+    () => ({ addToast2, removeToast2, toasts2, autoDeleteTime2, showProgress2 }),
+    [addToast2, removeToast2, toasts2, autoDeleteTime2, showProgress2],
   );
 
   return <ToastProvider2Context.Provider value={providerValue} children={props.children} />;
@@ -44,5 +45,6 @@ export function useToast2(): IContext2Props {
     removeToast2: context?.removeToast2,
     toasts2: context?.toasts2,
     autoDeleteTime2: context?.autoDeleteTime2,
+    showProgress2: context?.showProgress2,
   };
 }
