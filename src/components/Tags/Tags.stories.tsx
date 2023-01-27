@@ -30,7 +30,7 @@ const Description = () => (
 );
 
 export default {
-  title: 'Admiral-2.1/Tags',
+  title: 'Admiral-2.1/Tag/Tags',
   decorators: [withDesign],
   component: Tags,
   parameters: {
