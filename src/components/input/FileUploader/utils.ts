@@ -1,4 +1,6 @@
-export type Status = 'Uploaded' | 'Loading' | 'Error' | 'Queue';
+export type FileUploadingStatus = 'Uploaded' | 'Loading' | 'Error' | 'Queue';
+/** @deprecated use FileUploadingStatus instead */
+export type Status = FileUploadingStatus;
 
 export type Dimension = 'xl' | 'm';
 
