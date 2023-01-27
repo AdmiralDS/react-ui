@@ -1,6 +1,40 @@
 import * as React from 'react';
 import type { PositionToasts } from '#src/components/Toast';
-import styled from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
+
+const fadeInRight = keyframes`
+  from {
+    transform: translateX(100%);
+
+  }
+  to {
+    transform: translateX(0);
+  }
+`;
+
+const fadeInLeft = keyframes`
+  from {
+    transform: translateX(-100%);
+
+  }
+  to {
+    transform: translateX(0);
+  }
+`;
+
+const fadeMixin = css<{ position?: PositionToasts }>`
+  animation-name: ${({ position }) => {
+    if (position === 'bottom-left') return fadeInLeft;
+    return fadeInRight;
+  }};
+`;
+
+const Transition = styled.div<{ position?: PositionToasts }>`
+  margin-bottom: 16px;
+  animation-duration: 1s;
+  animation-timing-function: ease-out;
+  ${fadeMixin}
+`;
 
 const Container = styled.div<{ position: PositionToasts }>`
   position: fixed;
@@ -21,6 +55,7 @@ const Container = styled.div<{ position: PositionToasts }>`
 
 export interface Toast2Props {
   id: string;
+  autoDeleteTime?: number;
 }
 
 export interface ToastContainer2Props extends React.HTMLAttributes<HTMLDivElement> {
@@ -32,7 +67,13 @@ export interface ToastContainer2Props extends React.HTMLAttributes<HTMLDivElemen
 export const ToastContainer2 = ({ position = 'top-right', toasts, renderToast, ...props }: ToastContainer2Props) => {
   return (
     <Container position={position} {...props}>
-      {toasts.map((item) => renderToast(item.id))}
+      {toasts.map((item) => {
+        return (
+          <Transition key={item.id} position={position}>
+            {renderToast(item.id)}
+          </Transition>
+        );
+      })}
     </Container>
   );
 };

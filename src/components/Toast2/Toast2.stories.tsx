@@ -74,6 +74,7 @@ const Temp1: ComponentStory<typeof ToastContainer2> = (args) => {
     theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
+  const autoDeleteTime = 5000;
 
   const [toasts, setToasts] = React.useState<Toast2Props[]>([]);
   const [id, setId] = React.useState<number>(0);
@@ -83,26 +84,50 @@ const Temp1: ComponentStory<typeof ToastContainer2> = (args) => {
     switch (type) {
       case 1:
         return (
-          <SuccessToastItem key={id} isClosable={true} displayStatusIcon={true} onClose={() => removeToast(id)}>
+          <SuccessToastItem
+            key={id}
+            autoDeleteTime={autoDeleteTime}
+            isClosable={true}
+            displayStatusIcon={true}
+            onClose={() => removeToast(id)}
+          >
             {notificationMessages[1].text}
           </SuccessToastItem>
         );
       case 2:
         return (
-          <WarningToastItem key={id} isClosable={true} displayStatusIcon={true} onClose={() => removeToast(id)}>
+          <WarningToastItem
+            key={id}
+            autoDeleteTime={autoDeleteTime}
+            isClosable={true}
+            displayStatusIcon={true}
+            onClose={() => removeToast(id)}
+          >
             {notificationMessages[2].text}
           </WarningToastItem>
         );
       case 3:
         return (
-          <ErrorToastItem key={id} isClosable={true} displayStatusIcon={true} onClose={() => removeToast(id)}>
+          <ErrorToastItem
+            key={id}
+            autoDeleteTime={autoDeleteTime}
+            isClosable={true}
+            displayStatusIcon={true}
+            onClose={() => removeToast(id)}
+          >
             {notificationMessages[3].text}
           </ErrorToastItem>
         );
       case 0:
       default:
         return (
-          <InfoToastItem key={id} isClosable={true} displayStatusIcon={true} onClose={() => removeToast(id)}>
+          <InfoToastItem
+            key={id}
+            autoDeleteTime={autoDeleteTime}
+            isClosable={true}
+            displayStatusIcon={true}
+            onClose={() => removeToast(id)}
+          >
             {notificationMessages[0].text}
           </InfoToastItem>
         );
