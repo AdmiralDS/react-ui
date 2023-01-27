@@ -368,10 +368,6 @@ Object {
   font-feature-settings: 'tnum' on,'lnum' on;
 }
 
-.c0 .c1 {
-  visibility: visible;
-}
-
 .c0:hover {
   cursor: pointer;
 }
@@ -763,10 +759,6 @@ Object {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-}
-
-.c0 .c1 {
-  visibility: visible;
 }
 
 .c0:hover {

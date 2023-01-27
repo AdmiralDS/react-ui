@@ -343,10 +343,6 @@ Object {
   font-feature-settings: 'tnum' on,'lnum' on;
 }
 
-.c1 .c3 {
-  visibility: visible;
-}
-
 .c1:hover {
   cursor: pointer;
 }
@@ -639,10 +635,6 @@ Object {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-}
-
-.c6 .c3 {
-  visibility: visible;
 }
 
 .c6:hover {
@@ -1123,10 +1115,6 @@ Object {
   font-feature-settings: 'tnum' on,'lnum' on;
 }
 
-.c1 .c3 {
-  visibility: visible;
-}
-
 .c1:hover {
   cursor: pointer;
 }
@@ -1419,10 +1407,6 @@ Object {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-}
-
-.c6 .c3 {
-  visibility: visible;
 }
 
 .c6:hover {
@@ -1958,10 +1942,6 @@ Object {
   font-feature-settings: 'tnum' on,'lnum' on;
 }
 
-.c1 .c3 {
-  visibility: visible;
-}
-
 .c1:hover {
   cursor: pointer;
 }
@@ -2254,10 +2234,6 @@ Object {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-}
-
-.c6 .c3 {
-  visibility: visible;
 }
 
 .c6:hover {
@@ -2735,10 +2711,6 @@ Object {
   font-feature-settings: 'tnum' on,'lnum' on;
 }
 
-.c1 .c3 {
-  visibility: visible;
-}
-
 .c1:hover {
   cursor: pointer;
 }
@@ -3031,10 +3003,6 @@ Object {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-}
-
-.c6 .c3 {
-  visibility: visible;
 }
 
 .c6:hover {
@@ -3567,10 +3535,6 @@ Object {
   font-feature-settings: 'tnum' on,'lnum' on;
 }
 
-.c1 .c3 {
-  visibility: visible;
-}
-
 .c1:hover {
   cursor: pointer;
 }
@@ -3863,10 +3827,6 @@ Object {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-}
-
-.c6 .c3 {
-  visibility: visible;
 }
 
 .c6:hover {
@@ -4344,10 +4304,6 @@ Object {
   font-feature-settings: 'tnum' on,'lnum' on;
 }
 
-.c1 .c3 {
-  visibility: visible;
-}
-
 .c1:hover {
   cursor: pointer;
 }
@@ -4640,10 +4596,6 @@ Object {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-}
-
-.c6 .c3 {
-  visibility: visible;
 }
 
 .c6:hover {

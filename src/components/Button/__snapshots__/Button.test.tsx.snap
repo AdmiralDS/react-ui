@@ -341,10 +341,6 @@ exports[`Button should render component 1`] = `
   font-feature-settings: 'tnum' on,'lnum' on;
 }
 
-.c0 .c1 {
-  visibility: visible;
-}
-
 .c0:hover {
   cursor: pointer;
 }
@@ -702,10 +698,6 @@ exports[`Button should render component with text 1`] = `
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
-}
-
-.c0 .c1 {
-  visibility: visible;
 }
 
 .c0:hover {

@@ -1,11 +1,11 @@
-import { INPUT_DIMENSIONS_VALUES, INPUT_STATUS_VALUES, SelectValueWrapper } from '#src/components/input';
+import { defaultFilterItem, INPUT_DIMENSIONS_VALUES, INPUT_STATUS_VALUES } from '#src/components/input';
 import { Modal, ModalButtonPanel, ModalContent, ModalTitle } from '#src/components/Modal';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import type { ChangeEvent } from 'react';
 import * as React from 'react';
 import { withDesign } from 'storybook-addon-designs';
 import { Option, OptionGroup, Select } from '#src/components/input/Select';
-import type { IOnCloseProps } from '../types';
+import type { IOnCloseProps, SearchFormat } from '../types';
 import { Button } from '#src/components/Button';
 import { useState } from '@storybook/addons';
 import { MenuActionsPanel } from '#src/components/Menu/MenuActionsPanel';
@@ -19,8 +19,7 @@ import { OPTIONS, OPTIONS_ASYNC, OPTIONS_NAMES, OPTIONS_SIMPLE } from './data';
 import { ExtraText, Form, FormValuesWrapper, Icon, Separator, StyledGroup, TextWrapper } from './styled';
 import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
-import type { SearchFormat } from '#src/components/input/Select/Stories/types';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { Belarus, Cuba, RussianFederation } from '#src/icons/IconComponents-flags';
 
 export default {
@@ -95,68 +94,20 @@ export default {
   },
 } as ComponentMeta<typeof Select>;
 
-const shouldRender = (text = '', searchValue = '', searchFormat: SearchFormat = 'wholly') => {
-  const strings = searchFormat === 'word' ? searchValue.split(' ') : [searchValue];
-  const chunks = strings.filter(Boolean).map((chunk) => chunk.toLowerCase());
-
-  const specialCharacters = ['[', ']', '\\', '^', '$', '.', '|', '?', '*', '+', '(', ')'];
-
-  const pattern = chunks
-    .map((chunk) => {
-      const chunkForRegExp = chunk
-        .split('')
-        .map((letter) => (specialCharacters.includes(letter) ? `\\${letter}` : letter))
-        .join('');
-      return `(${chunkForRegExp})?`;
-    })
-    .join('');
-
-  const parts = text.split(new RegExp(pattern, 'gi')).filter(Boolean);
-
-  return !searchValue ? true : parts.some((part) => chunks.includes(part.toLowerCase()));
-};
-
 const TemplateSearchSelectWithFilter: ComponentStory<typeof Select> = (props) => {
   const cleanProps = cleanUpProps(props);
 
-  const [selectValue, setSelectValue] = React.useState('');
-  const [searchValue, setSearchValue] = React.useState('');
-
-  const onChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    setSelectValue(e.target.value);
-    props.onChange?.(e);
-  };
-
   const renderOptions = () => {
-    return OPTIONS_SIMPLE.map(
-      (option, ind) =>
-        shouldRender(option, searchValue) && (
-          <Option key={option} value={option} disabled={ind === 4}>
-            {option}
-          </Option>
-        ),
-    ).filter((item) => !!item);
-  };
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchValue(e.target.value);
+    return OPTIONS_SIMPLE.map((option, ind) => (
+      <Option key={option} value={option} disabled={ind === 4}>
+        {option}
+      </Option>
+    ));
   };
 
   return (
     <>
-      <T font="Body/Body 2 Long" as="div">
-        Фильтрация элементов списка осуществляется вызывающим кодом
-        <br />В данном примере показан один из возможных способов
-      </T>
-      <Separator />
-      <Select
-        {...cleanProps}
-        onInputChange={handleInputChange}
-        placeholder="Placeholder"
-        mode="searchSelect"
-        value={selectValue}
-        onChange={onChange}
-      >
+      <Select {...cleanProps} placeholder="Placeholder" mode="searchSelect">
         {renderOptions()}
       </Select>
     </>
@@ -173,9 +124,29 @@ const TemplateCustomOption: ComponentStory<typeof Select> = (props) => {
     props.onChange?.(e);
   };
 
+  const handleFilterItem = (value: string, searchValue: string, searchFormat: SearchFormat) => {
+    const option = OPTIONS.find((item) => item.value === value);
+    return (
+      !!option &&
+      (defaultFilterItem(value, searchValue, searchFormat) ||
+        defaultFilterItem(option.text, searchValue, searchFormat) ||
+        defaultFilterItem(option.extraText, searchValue, searchFormat))
+    );
+  };
+
   return (
     <>
-      <Select {...cleanProps} value={selectValue} mode="searchSelect" onChange={onChange}>
+      <T font="Body/Body 2 Long" as="div">
+        Фильтрация элементов значению, тексту и дополнительному тексту
+      </T>
+      <Separator />
+      <Select
+        {...cleanProps}
+        value={selectValue}
+        mode="searchSelect"
+        onFilterItem={handleFilterItem}
+        onChange={onChange}
+      >
         {OPTIONS.map((option) => (
           <Option key={option.value} value={option.value}>
             <Icon />
@@ -220,7 +191,12 @@ const TemplateRenderProps: ComponentStory<typeof Select> = (props) => {
             key={value}
             value={value}
             renderOption={(options) => (
-              <MyIncredibleOption text={text} shouldAnimate={options.hovered && value !== selectValue} {...options} />
+              <MyIncredibleOption
+                text={text}
+                shouldAnimate={options.hovered && value !== selectValue}
+                {...options}
+                key={value}
+              />
             )}
           />
         ))}
@@ -232,6 +208,7 @@ const TemplateRenderProps: ComponentStory<typeof Select> = (props) => {
 const RenderingValue = styled.div`
   color: ${(p) => p.theme.color['Teal/Teal 80']};
   display: flex;
+  flex: 1 1 100%;
   column-gap: 8px;
   padding: 0 3px;
   border-width: 1px;
@@ -249,27 +226,12 @@ const getFlag = (value: string) => {
 const RenderValueTemplate: ComponentStory<typeof Select> = (props) => {
   const cleanProps = cleanUpProps(props);
 
-  const [selectValue, setSelectValue] = React.useState('');
-  const [searchValue, setSearchValue] = React.useState('');
-
-  const onChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    setSelectValue(e.target.value);
-    props.onChange?.(e);
-  };
-
   const renderOptions = () => {
-    return OPTIONS_NAMES.map(
-      (option, ind) =>
-        shouldRender(option, searchValue) && (
-          <Option key={option} value={option}>
-            {option}
-          </Option>
-        ),
-    ).filter((item) => !!item);
-  };
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchValue(e.target.value);
+    return OPTIONS_NAMES.map((option) => (
+      <Option key={option} value={option}>
+        {option}
+      </Option>
+    ));
   };
 
   const renderValue = (value: string | string[] | undefined) => {
@@ -289,9 +251,6 @@ const RenderValueTemplate: ComponentStory<typeof Select> = (props) => {
     <>
       <Select
         {...cleanProps}
-        value={selectValue}
-        onInputChange={handleInputChange}
-        onChange={onChange}
         mode="searchSelect"
         multiple={false}
         placeholder="Placeholder"
@@ -441,16 +400,11 @@ const TemplateMultipleWithAddOption: ComponentStory<typeof Select> = (props) => 
   };
 
   const renderOptions = () => {
-    return options
-      .map(
-        (option, ind) =>
-          shouldRender(option.text, searchValue) && (
-            <Option key={option.value} value={option.value} disabled={[2, 4].includes(ind)}>
-              {option.text}
-            </Option>
-          ),
-      )
-      .filter((item) => !!item);
+    return options.map((option, ind) => (
+      <Option key={option.value} value={option.value} disabled={[2, 4].includes(ind)}>
+        {option.text}
+      </Option>
+    ));
   };
 
   const handleAddButtonClick = () => {
@@ -504,7 +458,6 @@ const TemplateMultipleWithApply: ComponentStory<typeof Select> = (props) => {
   const cleanProps = cleanUpProps(props);
 
   const [selectValue, setSelectValue] = React.useState<string[]>(['big', '1', '3']);
-  const [searchValue, setSearchValue] = React.useState('');
   const [forcedOpen, setForcedOpen] = React.useState(false);
 
   const onChange = (e: ChangeEvent<HTMLSelectElement>) => {
@@ -513,23 +466,17 @@ const TemplateMultipleWithApply: ComponentStory<typeof Select> = (props) => {
     props.onChange?.(e);
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchValue(e.target.value);
-  };
-
   const renderOptions = () => {
-    return MultipleWithApplyOptions.map(
-      (option, ind) =>
-        shouldRender(option.text, searchValue) && (
-          <Option key={option.value} value={option.value} disabled={[0, 2, 4].includes(ind)}>
-            {option.text}
-          </Option>
-        ),
-    ).filter((item) => !!item);
+    return MultipleWithApplyOptions.map((option, ind) => (
+      <Option key={option.value} value={option.value} disabled={[0, 2, 4].includes(ind)}>
+        {option.text}
+      </Option>
+    ));
   };
 
   const handleApplyButtonClick = () => {
     setForcedOpen(false);
+    // eslint-disable-next-line no-console
     console.log('selected', selectValue.toString());
   };
 
@@ -542,13 +489,11 @@ const TemplateMultipleWithApply: ComponentStory<typeof Select> = (props) => {
         {...cleanProps}
         forcedOpen={forcedOpen}
         value={selectValue}
-        inputValue={searchValue}
         multiple={true}
         onChange={onChange}
         displayClearIcon={true}
         placeholder="Placeholder"
         mode="searchSelect"
-        onInputChange={handleInputChange}
         onChangeDropDownState={setForcedOpen}
         renderDropDownBottomPanel={({ dimension = menuPanelContentDimension }) => {
           return (
@@ -697,16 +642,11 @@ const TemplateWithAddButton: ComponentStory<typeof Select> = (props) => {
   };
 
   const renderOptions = () => {
-    return options
-      .map(
-        (option, ind) =>
-          shouldRender(option, searchValue) && (
-            <Option key={option} value={option} disabled={ind === 4}>
-              {option}
-            </Option>
-          ),
-      )
-      .filter((item) => !!item);
+    return options.map((option, ind) => (
+      <Option key={option} value={option} disabled={ind === 4}>
+        {option}
+      </Option>
+    ));
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -765,7 +705,7 @@ SearchSelectWithFilter.parameters = {
 };
 
 export const CustomOption = TemplateCustomOption.bind({});
-CustomOption.storyName = 'Кастомные опции';
+CustomOption.storyName = 'Кастомные опции с кастомной фильтрацией';
 
 export const RenderProps = TemplateRenderProps.bind({});
 RenderProps.storyName = 'Кастомные опции через renderProps';

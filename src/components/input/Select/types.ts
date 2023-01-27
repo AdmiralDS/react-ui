@@ -2,6 +2,12 @@ import type * as React from 'react';
 import type { ComponentDimension } from '#src/components/input/types';
 import type { ItemProps } from '#src/components/Menu/MenuItem';
 
+export interface SelectItemProps extends ItemProps {
+  value: string;
+}
+
+export type SearchFormat = 'word' | 'wholly';
+
 export interface IOnCloseProps {
   value: string;
   disabled?: boolean;
@@ -28,8 +34,8 @@ export interface SelectContextProps {
 }
 
 export interface DropDownContextProps {
-  onDropDownOptionMount: (option: ItemProps) => void;
-  onDropDownOptionUnMount: (option: ItemProps) => void;
+  onDropDownOptionMount: (option: SelectItemProps) => void;
+  onDropDownOptionUnMount: (option: SelectItemProps) => void;
   onOptionClick?: (value: string) => void;
   onActivateItem?: (id: string) => void;
   selectValue?: string | string[];
