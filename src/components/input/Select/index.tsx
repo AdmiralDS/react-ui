@@ -257,7 +257,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
         : [
             {
               id: 'emptyMessage',
-              render: () => <EmptyMessageWrapper>{emptyMessage}</EmptyMessageWrapper>,
+              render: () => <EmptyMessageWrapper key={'empty'}>{emptyMessage}</EmptyMessageWrapper>,
               disabled: true,
             },
           ];

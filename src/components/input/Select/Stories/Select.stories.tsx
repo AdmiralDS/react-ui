@@ -15,7 +15,7 @@ import { TextButton } from '#src/components/TextButton';
 import { RussianFederation, Belarus, Cuba } from '#src/icons/IconComponents-flags';
 import { CustomOptionWrapper } from '../styled';
 import type { RenderOptionProps } from '#src/components/Menu/MenuItem';
-import { createOptions, formDataToObject, shouldRender, wait } from './utils';
+import { createOptions, formDataToObject, wait } from './utils';
 import { OPTIONS, OPTIONS_ASYNC, OPTIONS_SIMPLE } from './data';
 import { ExtraText, Form, FormValuesWrapper, Icon, StyledGroup, TextWrapper } from './styled';
 import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
@@ -418,16 +418,11 @@ const TemplateSimpleMultiSelect: ComponentStory<typeof Select> = (props) => {
   };
 
   const renderOptions = () => {
-    return options
-      .map(
-        (option, ind) =>
-          shouldRender(option.text, searchValue) && (
-            <Option key={option.value} value={option.value} disabled={[2, 4].includes(ind)}>
-              {option.text}
-            </Option>
-          ),
-      )
-      .filter((item) => !!item);
+    return options.map((option, ind) => (
+      <Option key={option.value} value={option.value} disabled={[2, 4].includes(ind)}>
+        {option.text}
+      </Option>
+    ));
   };
 
   const handleAddButtonClick = () => {
@@ -620,16 +615,11 @@ const SearchSelectWithBottomPaneTemplate: ComponentStory<typeof Select> = (props
   };
 
   const renderOptions = () => {
-    return options
-      .map(
-        (option, ind) =>
-          shouldRender(option, searchValue) && (
-            <Option key={option} value={option} disabled={ind === 4}>
-              {option}
-            </Option>
-          ),
-      )
-      .filter((item) => !!item);
+    return options.map((option, ind) => (
+      <Option key={option} value={option} disabled={ind === 4}>
+        {option}
+      </Option>
+    ));
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
