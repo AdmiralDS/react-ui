@@ -112,7 +112,6 @@ const Wrapper = styled.button<{
   `}
 
   ${({ width }) => width && `width: ${typeof width === 'number' ? `${width}px` : width};`}
-  margin-top: 8px;
   border-radius: ${(p) => smallGroupBorderRadius(p.theme.shape)};
   ${({ statusViaBackground, theme }) =>
     statusViaBackground ? wrapperBackground : `background: ${theme.color['Neutral/Neutral 10']};`}

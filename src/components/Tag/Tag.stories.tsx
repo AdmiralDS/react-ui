@@ -105,7 +105,7 @@ const Template1: ComponentStory<typeof Tag> = (args: TagProps) => {
           Orange
         </Tag>
       </Tags>
-      <Tags dimension="s">
+      <Tags dimension="s" style={{ marginTop: 24 }}>
         <Tag>Neutral</Tag>
         <Tag kind="green">Green</Tag>
         <Tag kind="blue">Blue</Tag>
@@ -138,7 +138,7 @@ const Template2: ComponentStory<typeof Tag> = (args: TagProps) => {
           Orange
         </Tag>
       </Tags>
-      <Tags dimension="s">
+      <Tags dimension="s" style={{ marginTop: 24 }}>
         <Tag statusViaBackground>Neutral</Tag>
         <Tag statusViaBackground kind="green">
           Green
@@ -179,7 +179,7 @@ const Template3: ComponentStory<typeof Tag> = (args: TagProps) => {
           Magenta
         </Tag>
       </Tags>
-      <Tags dimension="s">
+      <Tags dimension="s" style={{ marginTop: 24 }}>
         <Tag kind={{ background: '#E052BD' }}>Green</Tag>
         <Tag statusViaBackground kind={{ background: '#EAFAF9', border: '#4AD2CA' }}>
           Turquoise
@@ -240,7 +240,7 @@ const Template6: ComponentStory<typeof Tag> = (args: TagProps) => {
           Orange
         </Tag>
       </Tags>
-      <Tags dimension="s">
+      <Tags dimension="s" style={{ marginTop: 24 }}>
         <Tag statusViaBackground onClick={clickHandler} icon={<CheckOutline />}>
           Neutral
         </Tag>

@@ -10,7 +10,6 @@ Object {
   height: 24px;
   padding: 3px 7px;
   width: 60px;
-  margin-top: 8px;
   border-radius: 4px;
   background: #E5E7EB;
   border: 1px solid #E5E7EB;
@@ -97,7 +96,6 @@ Object {
   height: 24px;
   padding: 3px 7px;
   width: 60px;
-  margin-top: 8px;
   border-radius: 4px;
   background: #E5E7EB;
   border: 1px solid #E5E7EB;
@@ -238,7 +236,6 @@ Object {
   max-width: 100%;
   height: 24px;
   padding: 3px 7px;
-  margin-top: 8px;
   border-radius: 4px;
   background: #E5E7EB;
   border: 1px solid #E5E7EB;
@@ -305,7 +302,6 @@ Object {
   max-width: 100%;
   height: 24px;
   padding: 3px 7px;
-  margin-top: 8px;
   border-radius: 4px;
   background: #E5E7EB;
   border: 1px solid #E5E7EB;

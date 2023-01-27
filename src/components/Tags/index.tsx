@@ -2,17 +2,10 @@ import type { FC, KeyboardEvent, MouseEvent, ReactNode, HTMLAttributes } from 'r
 import React, { Children, cloneElement, isValidElement } from 'react';
 import styled from 'styled-components';
 
-const TAG_MARGIN = '8px';
 const TagsWrapper = styled.div`
   display: flex;
   flex-flow: wrap;
-  & > * {
-    margin-right: ${TAG_MARGIN};
-  }
-
-  & > *:last-child {
-    margin-right: 0;
-  }
+  gap: 8px;
 `;
 
 type Dimension = 'm' | 's';
@@ -29,9 +22,9 @@ export interface TagsProps extends HTMLAttributes<HTMLDivElement> {
   onClick?: (event: MouseEvent<HTMLElement> | KeyboardEvent<HTMLElement>) => void;
 }
 
-export const Tags: FC<TagsProps> = ({ children, width, dimension, kind, onClick }) => {
+export const Tags: FC<TagsProps> = ({ children, width, dimension, kind, onClick, ...props }) => {
   return (
-    <TagsWrapper>
+    <TagsWrapper {...props}>
       {Children.map(children, (child: ReactNode) => {
         if (!isValidElement(child)) {
           return null;
