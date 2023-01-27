@@ -245,6 +245,7 @@ const Template1: ComponentStory<typeof Tag> = (args: TagProps) => {
       />
       <Separator />
       <TagMenu
+        style={{ marginTop: 24 }}
         dimension="s"
         items={modelS}
         selected={selectedS}
