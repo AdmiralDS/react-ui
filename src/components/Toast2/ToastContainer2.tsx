@@ -21,18 +21,18 @@ const Container = styled.div<{ position: PositionToasts }>`
 
 export interface Toast2Props {
   id: string;
-  renderToast: (id: string) => React.ReactNode;
 }
 
 export interface ToastContainer2Props extends React.HTMLAttributes<HTMLDivElement> {
   toasts: Toast2Props[];
   position?: PositionToasts;
+  renderToast: (id: string) => React.ReactNode;
 }
 
-export const ToastContainer2 = ({ position = 'top-right', toasts, ...props }: ToastContainer2Props) => {
+export const ToastContainer2 = ({ position = 'top-right', toasts, renderToast, ...props }: ToastContainer2Props) => {
   return (
     <Container position={position} {...props}>
-      {toasts.map((item) => item.renderToast(item.id))}
+      {toasts.map((item) => renderToast(item.id))}
     </Container>
   );
 };

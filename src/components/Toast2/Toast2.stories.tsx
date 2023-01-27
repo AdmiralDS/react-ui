@@ -2,16 +2,11 @@ import * as React from 'react';
 import { withDesign } from 'storybook-addon-designs';
 import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { Toast2Props, ToastContainer2 } from '#src/components/Toast2/ToastContainer2';
+import type { Toast2Props } from '#src/components/Toast2/ToastContainer2';
+import { ToastContainer2 } from '#src/components/Toast2/ToastContainer2';
 import type { Theme } from '#src/components/themes';
-import { ThemeProvider } from 'styled-components';
-import {
-  ErrorToastItem,
-  InfoToastItem,
-  SuccessToastItem,
-  ToastItem2,
-  WarningToastItem,
-} from '#src/components/Toast2/ToastItem2';
+import styled, { ThemeProvider } from 'styled-components';
+import { ErrorToastItem, InfoToastItem, SuccessToastItem, WarningToastItem } from '#src/components/Toast2/ToastItem2';
 import { Button } from '#src/components/Button';
 
 export default {
@@ -69,6 +64,11 @@ const notificationMessages = [
   },
 ];
 
+const Separator = styled.div`
+  width: 20px;
+  height: 20px;
+`;
+
 const Temp1: ComponentStory<typeof ToastContainer2> = (args) => {
   function swapBorder(theme: Theme): Theme {
     theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
@@ -110,7 +110,7 @@ const Temp1: ComponentStory<typeof ToastContainer2> = (args) => {
   };
 
   const addToast = (id: string) => {
-    const newToast = { id: id, renderToast: renderToast };
+    const newToast = { id: id };
     setToasts((prevState) => [newToast, ...prevState]);
   };
 
@@ -132,10 +132,11 @@ const Temp1: ComponentStory<typeof ToastContainer2> = (args) => {
       <Button appearance="success" onClick={handleAddToast}>
         Add
       </Button>
+      <Separator />
       <Button appearance="danger" onClick={handleRemoveToast}>
         Delete
       </Button>
-      <ToastContainer2 toasts={toasts} />
+      <ToastContainer2 toasts={toasts} renderToast={renderToast} />
     </ThemeProvider>
   );
 };
