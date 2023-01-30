@@ -54,13 +54,10 @@ const Container = styled.div<{ position: PositionToasts }>`
   }
 `;
 
-export interface Toast2Props {
-  id: string;
-  autoDeleteTime?: number;
-}
-
 export interface ToastContainer2Props extends React.HTMLAttributes<HTMLDivElement> {
+  /** Позиция всплывающего уведомления */
   position?: PositionToasts;
+  /** Render функция всплывающего уведомления */
   renderToast: (id: string) => React.ReactNode;
 }
 

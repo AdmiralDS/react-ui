@@ -10,6 +10,7 @@ const StyledNotification = styled(Notification)`
 `;
 
 export interface ToastItem2Props extends NotificationProps {
+  /** Id всплывающего уведомления */
   id: string;
 }
 
@@ -36,10 +37,10 @@ const Wrapper = styled.div`
 `;
 
 export const ToastItem2 = ({ children, ...props }: ToastItem2Props) => {
-  const { removeToast2, autoDeleteTime2, showProgress2, progressStep = 1 } = useToast2();
+  const { removeToast2, autoDeleteTime2, showProgress2, progressStep2 = 1 } = useToast2();
   const [progress, setProgress] = React.useState(showProgress2 ? 100 : 0);
 
-  const delta = (autoDeleteTime2 || 0) / (100 * progressStep);
+  const delta = (autoDeleteTime2 || 0) / (100 * progressStep2);
 
   React.useEffect(() => {
     if (!autoDeleteTime2) return;
@@ -49,7 +50,7 @@ export const ToastItem2 = ({ children, ...props }: ToastItem2Props) => {
     if (showProgress2) {
       if (progress === 0) removeToast2(props.id);
 
-      timerId = setTimeout(() => setProgress((prev) => prev - progressStep), delta);
+      timerId = setTimeout(() => setProgress((prev) => prev - progressStep2), delta);
     } else {
       timerId = setTimeout(() => {
         removeToast2(props.id);
@@ -59,7 +60,7 @@ export const ToastItem2 = ({ children, ...props }: ToastItem2Props) => {
     return () => {
       clearTimeout(timerId);
     };
-  }, [progress, autoDeleteTime2, showProgress2, progressStep]);
+  }, [progress, autoDeleteTime2, showProgress2, progressStep2]);
 
   return (
     <Wrapper>

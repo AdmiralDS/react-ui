@@ -1,26 +1,30 @@
 import * as React from 'react';
-import type { PositionToasts } from '#src/components/Toast';
-import type { Toast2Props } from '#src/components/Toast2/ToastContainer2';
 import type { ReactNode } from 'react';
+import type { ToastItem2Props } from '#src/components/Toast2/ToastItem2';
 
 export interface ToastProvider2Props {
-  position?: PositionToasts;
+  /** Время, через которое удаляются уведомления */
   autoDeleteTime2?: number;
-  children?: ReactNode;
+  /** Позволяет отображать шкалу времени, через которое закроется уведомление */
   showProgress2?: boolean;
-  progressStep?: number;
+  /** Шаг шкалы времени */
+  progressStep2?: number;
+  children?: ReactNode;
 }
 
 export interface IContext2Props extends ToastProvider2Props {
+  /** Добавляет уведомление */
   addToast2: (toastId: string) => void;
+  /** Удаляет уведомление */
   removeToast2: (toastId: string) => void;
-  toasts2: Toast2Props[];
+  /** Список уведомлений */
+  toasts2: ToastItem2Props[];
 }
 
 export const ToastProvider2Context = React.createContext({} as IContext2Props);
 
 export const ToastProvider2 = ({ autoDeleteTime2, showProgress2, ...props }: ToastProvider2Props) => {
-  const [toasts2, setToasts2] = React.useState<Toast2Props[]>([]);
+  const [toasts2, setToasts2] = React.useState<ToastItem2Props[]>([]);
 
   const addToast2 = React.useCallback((id: string) => {
     setToasts2((prevState) => [{ id: id }, ...prevState]);
@@ -47,6 +51,6 @@ export function useToast2(): IContext2Props {
     toasts2: context?.toasts2,
     autoDeleteTime2: context?.autoDeleteTime2,
     showProgress2: context?.showProgress2,
-    progressStep: context?.progressStep,
+    progressStep2: context?.progressStep2,
   };
 }

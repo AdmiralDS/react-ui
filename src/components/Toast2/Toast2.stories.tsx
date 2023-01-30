@@ -2,7 +2,6 @@ import * as React from 'react';
 import { withDesign } from 'storybook-addon-designs';
 import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import type { Toast2Props } from '#src/components/Toast2/ToastContainer2';
 import { ToastContainer2 } from '#src/components/Toast2/ToastContainer2';
 import type { Theme } from '#src/components/themes';
 import styled, { ThemeProvider } from 'styled-components';
@@ -118,7 +117,7 @@ const Temp1: ComponentStory<typeof ToastContainer2> = (args) => {
 
   return (
     <ThemeProvider theme={swapBorder}>
-      <ToastProvider2 autoDeleteTime2={3000} showProgress2 progressStep={10}>
+      <ToastProvider2 autoDeleteTime2={3000} showProgress2 progressStep2={10}>
         <NotificationEmitter />
         <ToastContainer2 renderToast={renderToast} />
       </ToastProvider2>
