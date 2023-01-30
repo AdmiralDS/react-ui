@@ -13,7 +13,9 @@ export interface ToastItem2Props extends NotificationProps {
   id: string;
 }
 
-const Progress = styled.div<{ percent: number; status?: NotificationStatus }>`
+const Progress = styled.div.attrs((props: { percent: number }) => ({
+  style: { width: `${props.percent}%` },
+}))<{ percent: number; status?: NotificationStatus; duration: number }>`
   position: absolute;
   bottom: 0;
   left: 0;
@@ -23,9 +25,8 @@ const Progress = styled.div<{ percent: number; status?: NotificationStatus }>`
     if (status === 'success') return theme.color['Success/Success 50 Main'];
     return theme.color['Primary/Primary 60 Main'];
   }};
-  width: ${({ percent }) => percent}%;
   height: 4px;
-  /*transition: all 0.3s linear;*/
+  transition: ${({ duration }) => `all ${duration}ms linear`};
 `;
 
 const Wrapper = styled.div`
@@ -35,41 +36,37 @@ const Wrapper = styled.div`
 `;
 
 export const ToastItem2 = ({ children, ...props }: ToastItem2Props) => {
-  const { removeToast2, autoDeleteTime2, showProgress2 } = useToast2();
-  const [tik, setTick] = React.useState(showProgress2 ? 100 : 0);
+  const { removeToast2, autoDeleteTime2, showProgress2, progressStep = 1 } = useToast2();
+  const [progress, setProgress] = React.useState(showProgress2 ? 100 : 0);
+
+  const delta = (autoDeleteTime2 || 0) / (100 * progressStep);
 
   React.useEffect(() => {
-    if (!showProgress2) return;
     if (!autoDeleteTime2) return;
-    const delta = autoDeleteTime2 / 100;
-    const counter = () => setTick((prev) => prev - 1);
-    const timerId = setTimeout(counter, delta);
-    if (tik == 0) {
-      clearTimeout(timerId);
+
+    let timerId: NodeJS.Timeout;
+
+    if (showProgress2) {
+      if (progress === 0) removeToast2(props.id);
+
+      timerId = setTimeout(() => setProgress((prev) => prev - progressStep), delta);
+    } else {
+      timerId = setTimeout(() => {
+        removeToast2(props.id);
+      }, autoDeleteTime2);
     }
+
     return () => {
       clearTimeout(timerId);
     };
-  }, [tik]);
-
-  /*React.useEffect(() => {
-    if (!autoDeleteTime2) return;
-    const timer = setTimeout(() => {
-      removeToast2(props.id);
-    }, autoDeleteTime2);
-
-    return () => {
-      clearTimeout(timer);
-    };
-  }, []);*/
-  console.log(tik);
+  }, [progress, autoDeleteTime2, showProgress2, progressStep]);
 
   return (
     <Wrapper>
       <StyledNotification {...props} onClose={() => removeToast2(props.id)}>
         {children}
       </StyledNotification>
-      {showProgress2 && <Progress percent={tik} status={props.status} />}
+      {showProgress2 && <Progress percent={progress} status={props.status} duration={delta} />}
     </Wrapper>
   );
 };

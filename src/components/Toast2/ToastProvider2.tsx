@@ -8,6 +8,7 @@ export interface ToastProvider2Props {
   autoDeleteTime2?: number;
   children?: ReactNode;
   showProgress2?: boolean;
+  progressStep?: number;
 }
 
 export interface IContext2Props extends ToastProvider2Props {
@@ -46,5 +47,6 @@ export function useToast2(): IContext2Props {
     toasts2: context?.toasts2,
     autoDeleteTime2: context?.autoDeleteTime2,
     showProgress2: context?.showProgress2,
+    progressStep: context?.progressStep,
   };
 }
