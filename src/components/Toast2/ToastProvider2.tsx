@@ -14,7 +14,7 @@ export interface ToastProvider2Props {
 
 export interface IContext2Props extends ToastProvider2Props {
   /** Добавляет уведомление */
-  addToast2: (toastId: string) => void;
+  addToast2: (item: ToastItem2Props) => void;
   /** Удаляет уведомление */
   removeToast2: (toastId: string) => void;
   /** Список уведомлений */
@@ -26,8 +26,8 @@ export const ToastProvider2Context = React.createContext({} as IContext2Props);
 export const ToastProvider2 = ({ autoDeleteTime2, showProgress2, ...props }: ToastProvider2Props) => {
   const [toasts2, setToasts2] = React.useState<ToastItem2Props[]>([]);
 
-  const addToast2 = React.useCallback((id: string) => {
-    setToasts2((prevState) => [{ id: id }, ...prevState]);
+  const addToast2 = React.useCallback((item: ToastItem2Props) => {
+    setToasts2((prevState) => [item, ...prevState]);
   }, []);
 
   const removeToast2 = React.useCallback((id: string) => {

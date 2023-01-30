@@ -9,6 +9,7 @@ const StyledNotification = styled(Notification)`
   ${(props) => props.theme.shadow['Shadow 08']}
 `;
 
+/*export interface ToastItem2Props extends Omit<NotificationProps, 'id'> {*/
 export interface ToastItem2Props extends NotificationProps {
   /** Id всплывающего уведомления */
   id: string;
