@@ -9,8 +9,8 @@ import type { ToastItem2Props } from '#src/components/Toast2/ToastItem2';
 import { ToastItem2 } from '#src/components/Toast2/ToastItem2';
 import { Button } from '#src/components/Button';
 import { ToastProvider2, useToast2 } from '#src/components/Toast2/ToastProvider2';
-import type { NotificationStatus } from '#src/components/Notification';
-import type { IdentifyToast } from '#src/components/Toast/type';
+import type { NotificationProps, NotificationStatus } from '#src/components/Notification';
+import { uid } from '#src/components/common/uid';
 
 export default {
   title: 'Admiral-2.1/Toast2',
@@ -127,9 +127,8 @@ const Temp1: ComponentStory<typeof ToastContainer2> = (args) => {
   );
 };
 
-const items: ToastItem2Props[] = [
+const items: NotificationProps[] = [
   {
-    id: '0',
     status: 'error',
     children: `Запрос завершился ошибкой`,
     title: 'Заголовок',
@@ -138,7 +137,6 @@ const items: ToastItem2Props[] = [
     displayStatusIcon: true,
   },
   {
-    id: '1',
     status: 'warning',
     children: 'Слишком много попыток',
     title: 'Заголовок',
@@ -147,7 +145,6 @@ const items: ToastItem2Props[] = [
     displayStatusIcon: true,
   },
   {
-    id: '2',
     status: 'info',
     children: 'Осталось 7 попыток',
     title: 'Заголовок',
@@ -156,7 +153,6 @@ const items: ToastItem2Props[] = [
     displayStatusIcon: true,
   },
   {
-    id: '3',
     status: 'success',
     children: 'Запрос выполнен успешно',
     title: 'Заголовок',
@@ -172,7 +168,8 @@ const NotificationEmitter2 = () => {
   const [id, setId] = React.useState<number>(0);
 
   const onClickHandleAdd = () => {
-    const newToast = items[id % 4];
+    const toastId = uid();
+    const newToast = { id: toastId, ...items[id % 4] };
     addToast2(newToast);
     setId(id + 1);
   };
@@ -200,19 +197,11 @@ const Temp2: ComponentStory<typeof ToastContainer2> = (args) => {
     return theme;
   }
 
-  const renderToast = ({ id, children, ...props }: ToastItem2Props) => {
-    return (
-      <ToastItem2 id={id} {...props}>
-        {children}
-      </ToastItem2>
-    );
-  };
-
   return (
     <ThemeProvider theme={swapBorder}>
-      <ToastProvider2 autoDeleteTime2={3000} showProgress2 progressStep2={10}>
+      <ToastProvider2 autoDeleteTime2={5000} showProgress2 progressStep2={10}>
         <NotificationEmitter2 />
-        <ToastContainer2 renderToast={renderToast} />
+        <ToastContainer2 />
       </ToastProvider2>
     </ThemeProvider>
   );

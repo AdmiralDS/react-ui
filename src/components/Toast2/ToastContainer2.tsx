@@ -68,7 +68,7 @@ export interface ToastContainer2Props extends React.HTMLAttributes<HTMLDivElemen
   /** Позиция всплывающего уведомления */
   position?: PositionToasts;
   /** Render функция всплывающего уведомления */
-  renderToast: (item: ToastItem2Props) => React.ReactNode;
+  renderToast?: (item: ToastItem2Props) => React.ReactNode;
 }
 
 export const ToastContainer2 = ({

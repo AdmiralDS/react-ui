@@ -14,7 +14,7 @@ export interface ToastProvider2Props {
 
 export interface IContext2Props extends ToastProvider2Props {
   /** Добавляет уведомление */
-  addToast2: (item: ToastItem2Props) => void;
+  addToast2: (item: ToastItem2Props) => string;
   /** Удаляет уведомление */
   removeToast2: (toastId: string) => void;
   /** Список уведомлений */
@@ -28,6 +28,7 @@ export const ToastProvider2 = ({ autoDeleteTime2, showProgress2, ...props }: Toa
 
   const addToast2 = React.useCallback((item: ToastItem2Props) => {
     setToasts2((prevState) => [item, ...prevState]);
+    return item.id;
   }, []);
 
   const removeToast2 = React.useCallback((id: string) => {
