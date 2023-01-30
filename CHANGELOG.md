@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.1.0](https://github.com/AdmiralDS/react-ui/compare/v4.0.0...v4.1.0) (2023-01-27)
+
+
+### Features
+
+* **Select:** add default filter for mode "searchSelect" ([95afa27](https://github.com/AdmiralDS/react-ui/commit/95afa27643cf44fd1b989223adea82a267bf330a))
+
+
+### Bug Fixes
+
+* **Breadcrumbs:** fix bug with dimension change ([c66e07c](https://github.com/AdmiralDS/react-ui/commit/c66e07c38f7264615f42db0ae121471385c9ba8d))
+* **InputEx:** add passing render Options props to dropdown ([aaeb98b](https://github.com/AdmiralDS/react-ui/commit/aaeb98b4fd6284a09d793bfe55467668578df2c3))
+* **InputEx:** add passing render Value prop ([cf4e7f7](https://github.com/AdmiralDS/react-ui/commit/cf4e7f7f1dc6b3db61229dd60b0bc616ad9cff81))
+* invisibility styles ([10cc351](https://github.com/AdmiralDS/react-ui/commit/10cc3514d74c3639bea71c20b0ff8552e66edc07))
+* **Modal:** fix bug with select in modal and incorrect arrows work ([9bf170b](https://github.com/AdmiralDS/react-ui/commit/9bf170b464aa28ef19afddc09929d226a42931a9))
+* removed margin from Tag ([36935bc](https://github.com/AdmiralDS/react-ui/commit/36935bcfdf73b045c2671f69065d9cf4ac60d187))
+* **Table:** fix filter dropdown menu alignment ([18391cb](https://github.com/AdmiralDS/react-ui/commit/18391cbf8759d3d1898b891345aa778bef1e7aec))
+
 ## [4.0.0](https://github.com/AdmiralDS/react-ui/compare/v3.10.1...v4.0.0) (2023-01-19)
 
 

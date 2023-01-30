@@ -11,14 +11,7 @@ Object {
   -webkit-flex-flow: wrap;
   -ms-flex-flow: wrap;
   flex-flow: wrap;
-}
-
-.c0 > * {
-  margin-right: 8px;
-}
-
-.c0 > *:last-child {
-  margin-right: 0;
+  gap: 8px;
 }
 
 .c1 {
@@ -28,7 +21,6 @@ Object {
   height: 24px;
   padding: 3px 7px;
   width: 50px;
-  margin-top: 8px;
   border-radius: 4px;
   background: #E5E7EB;
   border: 1px solid #E5E7EB;
@@ -71,7 +63,6 @@ Object {
   height: 24px;
   padding: 3px 7px;
   width: auto;
-  margin-top: 8px;
   border-radius: 4px;
   background: #E5E7EB;
   border: 1px solid #E5E7EB;
@@ -215,14 +206,7 @@ Object {
   -webkit-flex-flow: wrap;
   -ms-flex-flow: wrap;
   flex-flow: wrap;
-}
-
-.c0 > * {
-  margin-right: 8px;
-}
-
-.c0 > *:last-child {
-  margin-right: 0;
+  gap: 8px;
 }
 
 .c1 {
@@ -232,7 +216,6 @@ Object {
   height: 24px;
   padding: 3px 7px;
   width: 50px;
-  margin-top: 8px;
   border-radius: 4px;
   background: #E5E7EB;
   border: 1px solid #E5E7EB;
@@ -275,7 +258,6 @@ Object {
   height: 24px;
   padding: 3px 7px;
   width: auto;
-  margin-top: 8px;
   border-radius: 4px;
   background: #E5E7EB;
   border: 1px solid #E5E7EB;
