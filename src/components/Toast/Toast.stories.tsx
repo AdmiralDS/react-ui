@@ -9,8 +9,12 @@ import type { IdentifyToast } from '#src/components/Toast/type';
 import type { Theme } from '#src/components/themes';
 import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
 import { TextInput } from '#src/components/input';
-import { Notification } from '#src/components/Notification';
-import { Link } from '#src/components/Link';
+import {
+  Notification,
+  NotificationButtonPanel,
+  NotificationContent,
+  NotificationTitle,
+} from '#src/components/Notification';
 import { TextButton } from '#src/components/TextButton';
 
 const Desc = styled.div`
@@ -182,9 +186,13 @@ const StyledNotification = styled(Notification)`
   ${(props) => props.theme.shadow['Shadow 08']}
 `;
 
+const handleTextButtonClick = () => {
+  console.log('TextButton click');
+};
+
 const MessageForm = () => {
   const [toastIdStack, setToastIdStack] = React.useState<Array<string>>([]);
-  const [inputValue, setInputValue] = React.useState('5');
+  const [inputValue, setInputValue] = React.useState('Notification message');
 
   const { addToast, removeById } = useToast();
 
@@ -198,11 +206,12 @@ const MessageForm = () => {
         };
         return (
           <StyledNotification isClosable={true} displayStatusIcon={true} onClose={handleCloseToast}>
-            <div>{inputValue}</div>
-            <div style={{ display: 'flex', gap: '4px' }}>
-              <TextButton dimension="s" text={inputValue} />
-              <TextButton dimension="s" text={inputValue} />
-            </div>
+            <NotificationTitle>Title</NotificationTitle>
+            <NotificationContent>{inputValue}</NotificationContent>
+            <NotificationButtonPanel>
+              <TextButton dimension="s" text="TextButton1" onClick={handleTextButtonClick} />
+              <TextButton dimension="s" text="TextButton2" onClick={handleTextButtonClick} />
+            </NotificationButtonPanel>
           </StyledNotification>
         );
       },
