@@ -1,6 +1,13 @@
 import * as React from 'react';
 import type { ReactNode } from 'react';
-import type { ToastItem2Props } from '#src/components/Toast2/ToastItem2';
+import { uid } from '#src/components/common/uid';
+
+export interface ToastProvider2ItemProps {
+  /** Id всплывающего уведомления */
+  id: string;
+  /** Render функция всплывающего уведомления */
+  renderToast: () => React.ReactNode;
+}
 
 export interface ToastProvider2Props {
   /** Время, через которое удаляются уведомления */
@@ -14,21 +21,22 @@ export interface ToastProvider2Props {
 
 export interface IContext2Props extends ToastProvider2Props {
   /** Добавляет уведомление */
-  addToast2: (item: ToastItem2Props) => string;
+  addToast2: (renderToast: () => React.ReactNode) => string;
   /** Удаляет уведомление */
   removeToast2: (toastId: string) => void;
   /** Список уведомлений */
-  toasts2: ToastItem2Props[];
+  toasts2: ToastProvider2ItemProps[];
 }
 
 export const ToastProvider2Context = React.createContext({} as IContext2Props);
 
 export const ToastProvider2 = ({ autoDeleteTime2, showProgress2, ...props }: ToastProvider2Props) => {
-  const [toasts2, setToasts2] = React.useState<ToastItem2Props[]>([]);
+  const [toasts2, setToasts2] = React.useState<ToastProvider2ItemProps[]>([]);
 
-  const addToast2 = React.useCallback((item: ToastItem2Props) => {
-    setToasts2((prevState) => [item, ...prevState]);
-    return item.id;
+  const addToast2 = React.useCallback((renderToast: () => React.ReactNode) => {
+    const id = uid();
+    setToasts2((prevState) => [{ id, renderToast }, ...prevState]);
+    return id;
   }, []);
 
   const removeToast2 = React.useCallback((id: string) => {

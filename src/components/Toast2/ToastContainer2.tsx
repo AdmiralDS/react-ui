@@ -2,8 +2,6 @@ import * as React from 'react';
 import type { PositionToasts } from '#src/components/Toast';
 import styled, { css, keyframes } from 'styled-components';
 import { useToast2 } from '#src/components/Toast2/ToastProvider2';
-import type { ToastItem2Props } from '#src/components/Toast2/ToastItem2';
-import { ToastItem2 } from '#src/components/Toast2/ToastItem2';
 
 const fadeInRight = keyframes`
   from {
@@ -56,33 +54,19 @@ const Container = styled.div<{ position: PositionToasts }>`
   }
 `;
 
-function defaultToastRender({ id, children, ...props }: ToastItem2Props) {
-  return (
-    <ToastItem2 id={id} {...props}>
-      {children}
-    </ToastItem2>
-  );
-}
-
 export interface ToastContainer2Props extends React.HTMLAttributes<HTMLDivElement> {
   /** Позиция всплывающего уведомления */
   position?: PositionToasts;
-  /** Render функция всплывающего уведомления */
-  renderToast?: (item: ToastItem2Props) => React.ReactNode;
 }
 
-export const ToastContainer2 = ({
-  position = 'top-right',
-  renderToast = defaultToastRender,
-  ...props
-}: ToastContainer2Props) => {
+export const ToastContainer2 = ({ position = 'top-right', ...props }: ToastContainer2Props) => {
   const { toasts2 } = useToast2();
   return (
     <Container position={position} {...props}>
       {toasts2.map((item) => {
         return (
           <Transition key={item.id} position={position}>
-            {renderToast(item)}
+            {item.renderToast()}
           </Transition>
         );
       })}

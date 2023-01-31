@@ -10,7 +10,7 @@ const StyledNotification = styled(Notification)`
 `;
 
 /*export interface ToastItem2Props extends Omit<NotificationProps, 'id'> {*/
-export interface ToastItem2Props extends NotificationProps {
+interface ToastItem2Props extends NotificationProps {
   /** Id всплывающего уведомления */
   id: string;
 }
