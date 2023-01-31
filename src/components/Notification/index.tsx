@@ -17,11 +17,11 @@ export type NotificationStatus = 'info' | 'error' | 'success' | 'warning';
 export interface NotificationProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title' | 'id'> {
   /** Статус notification */
   status?: NotificationStatus;
-  /** Заголовок notification */
+  /** @deprecated Заголовок notification */
   title?: React.ReactNode;
-  /** Название для ссылки */
+  /** @deprecated Название для ссылки */
   linkText?: string;
-  /** Url ссылки */
+  /** @deprecated Url ссылки */
   href?: string;
   /** Переключатель видимости иконки "Close" */
   isClosable?: boolean;
@@ -91,6 +91,12 @@ const Title = styled.div`
   ${typography['Subtitle/Subtitle 3']}
   color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
   margin-bottom: 4px;
+`;
+
+const ButtonPanel = styled.div`
+  display: flex;
+  margin-top: 4px;
+  gap: 16px;
 `;
 
 const CustomBody = styled.div`
@@ -171,6 +177,18 @@ export const Notification = ({
       {isClosable && <CloseButton dimension="mSmall" highlightFocus={false} onClick={onClose} />}
     </NotificationWrapper>
   );
+};
+
+export const NotificationTitle: React.FC<React.HTMLAttributes<HTMLHeadingElement>> = ({ children, ...props }) => {
+  return <Title {...props}>{children}</Title>;
+};
+
+export const NotificationContent: React.FC<React.HTMLAttributes<HTMLHeadingElement>> = ({ children, ...props }) => {
+  return <CustomBody {...props}>{children}</CustomBody>;
+};
+
+export const NotificationButtonPanel: React.FC<React.HTMLAttributes<HTMLHeadingElement>> = ({ children, ...props }) => {
+  return <ButtonPanel {...props}>{children}</ButtonPanel>;
 };
 
 Notification.displayName = 'Notification';
