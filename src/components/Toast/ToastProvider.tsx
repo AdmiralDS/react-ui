@@ -16,17 +16,22 @@ export interface ToastProps {
   children?: ReactNode;
 }
 
+export interface ToastProviderItem extends IdentifyToast {
+  /** Render функция всплывающего уведомления */
+  renderToast?: () => React.ReactNode;
+}
+
 export interface IContextProps extends ToastProps {
-  addToast: (newToast: IdentifyToast) => string;
-  removeToast: (removeToast: IdentifyToast) => void;
+  addToast: (newToast: ToastProviderItem) => string;
+  removeToast: (removeToast: ToastProviderItem) => void;
   removeById: (toastId: string) => void;
-  toasts: IdentifyToast[];
+  toasts: ToastProviderItem[];
 }
 
 export const ToastContext = React.createContext({} as IContextProps);
 
 export const ToastProvider = ({ autoDeleteTime, ...props }: ToastProps) => {
-  const [toasts, setToast] = React.useState<IdentifyToast[]>([]);
+  const [toasts, setToast] = React.useState<ToastProviderItem[]>([]);
 
   const removeToast = React.useCallback((removeToast: IdentifyToast) => {
     setToast((prevToasts) => prevToasts.filter(({ id }) => id !== removeToast.id));
