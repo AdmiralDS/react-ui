@@ -8,6 +8,9 @@ import { ReactComponent as ArrowLeftOutline } from '@admiral-ds/icons/build/syst
 import { ReactComponent as ArrowRightOutline } from '@admiral-ds/icons/build/system/ArrowRightOutline.svg';
 import type { Theme } from '#src/components/themes';
 import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
+import { Link as RouterLink, MemoryRouter as Router } from 'react-router-dom';
+import { LinkComponentCssMixin } from '#src/components/Link';
+import type { LinkComponent } from '#src/components/Link';
 
 export default {
   title: 'Admiral-2.1/Link',
@@ -59,6 +62,7 @@ const Separator = styled.div`
 
 const Devider = styled.div`
   width: 10px;
+  height: 12px;
 `;
 
 const LinkPrimary: ComponentStory<typeof Link> = (args) => {
@@ -130,10 +134,29 @@ const LinkWithIcon: ComponentStory<typeof Link> = () => {
   );
 };
 
+const StyledRouterLink = styled(RouterLink)<LinkComponent>`
+  ${LinkComponentCssMixin}
+`;
+
+const LinkMixin: ComponentStory<typeof Link> = () => (
+  <Router>
+    <StyledRouterLink to="">Styled RouterLink - dimension m</StyledRouterLink>
+    <Devider />
+    <StyledRouterLink to="" dimension="s">
+      Styled RouterLink - dimension s
+    </StyledRouterLink>
+    <Devider />
+    <StyledRouterLink to="" appearance="secondary">
+      Styled RouterLink - appearance secondary
+    </StyledRouterLink>
+  </Router>
+);
+
 const LinkDefault: ComponentStory<typeof Link> = ({ children, ...args }) => <Link {...args}>{children}</Link>;
 export const Primary = LinkPrimary.bind({});
 export const Secondary = LinkSecondary.bind({});
 export const IconLink = LinkWithIcon.bind({});
+export const CssMixin = LinkMixin.bind({});
 export const Playground = LinkDefault.bind({});
 
 Playground.args = {

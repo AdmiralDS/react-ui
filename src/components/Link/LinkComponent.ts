@@ -1,18 +1,16 @@
-import styled from 'styled-components';
-import type { AnchorHTMLAttributes } from 'react';
-import { LIGHT_THEME as DEFAULT_THEME } from '#src/components/themes';
+import styled, { css } from 'styled-components';
 import { styleColorMixin, styleDisabledMixin, styleMixin, styleTextMixin } from '#src/components/Link/mixins';
 
 export type AppearanceLink = 'primary' | 'secondary';
 export type Dimension = 'm' | 's';
 
-type LinkComponent = AnchorHTMLAttributes<HTMLAnchorElement> & {
-  disabled: boolean;
-  appearance: AppearanceLink;
-  dimension: Dimension;
+export type LinkComponent = {
+  disabled?: boolean;
+  appearance?: AppearanceLink;
+  dimension?: Dimension;
 };
 
-export const LinkComponent = styled.a<LinkComponent>`
+export const LinkComponentCssMixin = css<LinkComponent>`
   cursor: ${(props) => (props.disabled ? 'default' : 'pointer')};
   display: flex;
   pointer-events: ${(props) => (props.disabled ? 'none' : 'auto')};
@@ -26,6 +24,6 @@ export const LinkComponent = styled.a<LinkComponent>`
   ${(props) => (props.disabled ? styleDisabledMixin : '')}
 `;
 
-LinkComponent.defaultProps = {
-  theme: DEFAULT_THEME,
-};
+export const LinkComponent = styled.a<LinkComponent>`
+  ${LinkComponentCssMixin}
+`;

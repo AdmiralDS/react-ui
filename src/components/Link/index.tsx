@@ -3,6 +3,9 @@ import * as React from 'react';
 import type { AppearanceLink, Dimension } from '#src/components/Link/LinkComponent';
 import { LinkComponent } from '#src/components/Link/LinkComponent';
 
+export { LinkComponentCssMixin } from '#src/components/Link/LinkComponent';
+export type { LinkComponent } from '#src/components/Link/LinkComponent';
+
 export interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   /** Текст ссылки */
   children: ReactNode;
