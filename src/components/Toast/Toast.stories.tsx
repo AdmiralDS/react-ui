@@ -9,9 +9,13 @@ import type { IdentifyToast } from '#src/components/Toast/type';
 import type { Theme } from '#src/components/themes';
 import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
 import { TextInput } from '#src/components/input';
-import { Notification } from '#src/components/Notification';
-import { Link } from '#src/components/Link';
 import { TextButton } from '#src/components/TextButton';
+import {
+  NotificationItem,
+  NotificationItemButtonPanel,
+  NotificationItemContent,
+  NotificationItemTitle,
+} from '#src/components/NotificationItem';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -178,13 +182,17 @@ const NotificationEmitter = () => {
   );
 };
 
-const StyledNotification = styled(Notification)`
+const StyledNotificationItem = styled(NotificationItem)`
   ${(props) => props.theme.shadow['Shadow 08']}
 `;
 
+const handleTextButtonClick = () => {
+  console.log('TextButton click');
+};
+
 const MessageForm = () => {
   const [toastIdStack, setToastIdStack] = React.useState<Array<string>>([]);
-  const [inputValue, setInputValue] = React.useState('5');
+  const [inputValue, setInputValue] = React.useState('Notification message');
 
   const { addToast, removeById } = useToast();
 
@@ -197,13 +205,14 @@ const MessageForm = () => {
           setToastIdStack((prevToastIdStack) => prevToastIdStack.filter((toastID) => toastID !== id));
         };
         return (
-          <StyledNotification isClosable={true} displayStatusIcon={true} onClose={handleCloseToast}>
-            <div>{inputValue}</div>
-            <div style={{ display: 'flex', gap: '4px' }}>
-              <TextButton dimension="s" text={inputValue} />
-              <TextButton dimension="s" text={inputValue} />
-            </div>
-          </StyledNotification>
+          <StyledNotificationItem isClosable={true} displayStatusIcon={true} onClose={handleCloseToast}>
+            <NotificationItemTitle>Title</NotificationItemTitle>
+            <NotificationItemContent>{inputValue}</NotificationItemContent>
+            <NotificationItemButtonPanel>
+              <TextButton dimension="s" text="TextButton1" onClick={handleTextButtonClick} />
+              <TextButton dimension="s" text="TextButton2" onClick={handleTextButtonClick} />
+            </NotificationItemButtonPanel>
+          </StyledNotificationItem>
         );
       },
     });
