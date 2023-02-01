@@ -3,66 +3,7 @@
 exports[`Notification should render error components with all properties 1`] = `
 Object {
   "asFragment": [Function],
-  "baseElement": .c5 {
-  cursor: pointer;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  pointer-events: auto;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  position: relative;
-  border-radius: 4px;
-  color: #0062FF;
-  font-size: 16px;
-  font-weight: normal;
-  line-height: 24px;
-  font-family: 'VTB Group UI',sans-serif;
-}
-
-.c5:hover {
-  color: #0046E2;
-}
-
-.c5:hover *[fill^='#'] {
-  fill: #0046E2;
-}
-
-.c5:focus {
-  color: #0046E2;
-  outline-color: #0046E2;
-}
-
-.c5:focus *[fill^='#'] {
-  fill: #0046E2;
-}
-
-.c5:active {
-  color: #0132B0;
-}
-
-.c5:active *[fill^='#'] {
-  fill: #0132B0;
-}
-
-.c5:focus-visible {
-  outline-offset: 2px;
-  outline: #0062FF solid 2px;
-}
-
-.c5 *[fill^='#'] {
-  fill: #0062FF;
-}
-
-.c11 {
+  "baseElement": .c11 {
   position: absolute;
   top: 0;
   left: 0;
@@ -165,7 +106,7 @@ Object {
   padding: 2px 0;
 }
 
-.c3 {
+.c4 {
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 550;
@@ -176,7 +117,16 @@ Object {
   margin-bottom: 4px;
 }
 
-.c4 {
+.c5 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: 4px;
+  gap: 16px;
+}
+
+.c3 {
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -210,7 +160,69 @@ Object {
 }
 
 .c6 {
-  margin-top: 4px;
+  position: relative;
+  box-sizing: border-box;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  vertical-align: middle;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: none;
+  background: transparent;
+  padding: 0;
+  white-space: nowrap;
+  border-radius: 4px;
+  pointer-events: all;
+}
+
+.c6[data-appearance='primary'] {
+  color: #0062FF;
+}
+
+.c6[data-appearance='secondary'] {
+  color: #23262D;
+}
+
+.c6:focus-visible {
+  outline-offset: 2px;
+  outline: #0062FF solid 2px;
+}
+
+.c6:focus,
+.c6:hover {
+  cursor: pointer;
+  color: #0046E2;
+}
+
+.c6:active {
+  color: #0132B0;
+}
+
+.c6:disabled {
+  cursor: not-allowed;
+  color: #B0B5BD;
+}
+
+.c6[data-dimension='m'] {
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+}
+
+.c6[data-dimension='s'] {
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -237,19 +249,37 @@ Object {
           <div
             class="c3"
           >
-            Title
-          </div>
-          <div
-            class="c4"
-          >
             text
+            <div
+              class="c4"
+            >
+              Title
+            </div>
+            <div
+              class="c3"
+            >
+              text
+            </div>
+            <div
+              class="c5"
+            >
+              <button
+                class="c6"
+                data-appearance="primary"
+                data-dimension="s"
+                type="button"
+              >
+                <div
+                  class=""
+                >
+                  <span>
+                    Link
+                  </span>
+                </div>
+              </button>
+            </div>
           </div>
-          <a
-            class="c5 c6"
-            href="http://localhost"
-          >
-            Link
-          </a>
+          
         </div>
         <button
           class="c7 close-button c8"
@@ -271,66 +301,7 @@ Object {
       </div>
     </div>
   </body>,
-  "container": .c5 {
-  cursor: pointer;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  pointer-events: auto;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  position: relative;
-  border-radius: 4px;
-  color: #0062FF;
-  font-size: 16px;
-  font-weight: normal;
-  line-height: 24px;
-  font-family: 'VTB Group UI',sans-serif;
-}
-
-.c5:hover {
-  color: #0046E2;
-}
-
-.c5:hover *[fill^='#'] {
-  fill: #0046E2;
-}
-
-.c5:focus {
-  color: #0046E2;
-  outline-color: #0046E2;
-}
-
-.c5:focus *[fill^='#'] {
-  fill: #0046E2;
-}
-
-.c5:active {
-  color: #0132B0;
-}
-
-.c5:active *[fill^='#'] {
-  fill: #0132B0;
-}
-
-.c5:focus-visible {
-  outline-offset: 2px;
-  outline: #0062FF solid 2px;
-}
-
-.c5 *[fill^='#'] {
-  fill: #0062FF;
-}
-
-.c11 {
+  "container": .c11 {
   position: absolute;
   top: 0;
   left: 0;
@@ -433,7 +404,7 @@ Object {
   padding: 2px 0;
 }
 
-.c3 {
+.c4 {
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 550;
@@ -444,7 +415,16 @@ Object {
   margin-bottom: 4px;
 }
 
-.c4 {
+.c5 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: 4px;
+  gap: 16px;
+}
+
+.c3 {
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -478,7 +458,69 @@ Object {
 }
 
 .c6 {
-  margin-top: 4px;
+  position: relative;
+  box-sizing: border-box;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  vertical-align: middle;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: none;
+  background: transparent;
+  padding: 0;
+  white-space: nowrap;
+  border-radius: 4px;
+  pointer-events: all;
+}
+
+.c6[data-appearance='primary'] {
+  color: #0062FF;
+}
+
+.c6[data-appearance='secondary'] {
+  color: #23262D;
+}
+
+.c6:focus-visible {
+  outline-offset: 2px;
+  outline: #0062FF solid 2px;
+}
+
+.c6:focus,
+.c6:hover {
+  cursor: pointer;
+  color: #0046E2;
+}
+
+.c6:active {
+  color: #0132B0;
+}
+
+.c6:disabled {
+  cursor: not-allowed;
+  color: #B0B5BD;
+}
+
+.c6[data-dimension='m'] {
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+}
+
+.c6[data-dimension='s'] {
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -504,19 +546,37 @@ Object {
         <div
           class="c3"
         >
-          Title
-        </div>
-        <div
-          class="c4"
-        >
           text
+          <div
+            class="c4"
+          >
+            Title
+          </div>
+          <div
+            class="c3"
+          >
+            text
+          </div>
+          <div
+            class="c5"
+          >
+            <button
+              class="c6"
+              data-appearance="primary"
+              data-dimension="s"
+              type="button"
+            >
+              <div
+                class=""
+              >
+                <span>
+                  Link
+                </span>
+              </div>
+            </button>
+          </div>
         </div>
-        <a
-          class="c5 c6"
-          href="http://localhost"
-        >
-          Link
-        </a>
+        
       </div>
       <button
         class="c7 close-button c8"
