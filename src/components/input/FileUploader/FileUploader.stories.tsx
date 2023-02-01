@@ -38,7 +38,7 @@ const Description = () => (
 );
 
 export default {
-  title: 'Deprecated/FileUploader (DEPRECATED используйте FileInput)',
+  title: 'Deprecated/FileUploader (Deprecated используйте FileInput)',
   decorators: [withDesign],
   component: FileUploader,
   parameters: {

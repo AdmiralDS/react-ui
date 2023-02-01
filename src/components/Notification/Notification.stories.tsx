@@ -28,7 +28,7 @@ const linkText = 'Link';
 const href = 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=37%3A26531';
 
 export default {
-  title: 'Admiral-2.1/Notification',
+  title: 'Deprecated/Notification (Deprecated используйте NotificationItem компонент)',
   decorators: [withDesign],
   component: Notification,
   parameters: {
