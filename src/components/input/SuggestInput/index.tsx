@@ -22,6 +22,8 @@ const SuggestDropdownContainer = styled(StyledDropdownContainer)`
   overflow-x: hidden;
   overflow-y: auto;
   min-width: 100%;
+  padding: 8px 0;
+  background-color: ${(p) => p.theme.color['Special/Elevated BG']};
 `;
 
 export interface SuggestItem {
@@ -88,7 +90,7 @@ export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps
       status,
       highlightFormat,
       locale,
-      dimension = TextInput.defaultProps?.dimension || 'xl',
+      dimension = TextInput.defaultProps?.dimension ?? 'xl',
       ...props
     },
     ref,
@@ -229,7 +231,7 @@ export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps
             dropContainerCssMixin={dropContainerCssMixin}
           >
             {options.length === 0 && !isLoading ? (
-              <MessagePanel>
+              <MessagePanel dimension={menuDimension}>
                 {locale?.emptyMessage || theme.locales[theme.currentLocale].suggestInput.emptyMessage}
               </MessagePanel>
             ) : (
