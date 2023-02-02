@@ -33,6 +33,11 @@ const horizontalPaddingValue = (props: { dimension?: ComponentDimension }) => {
 };
 
 const PlusMinusIcon = styled(InputIconButton)<{ disabled?: boolean }>`
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   ${({ disabled, theme }) =>
     disabled
       ? css`
