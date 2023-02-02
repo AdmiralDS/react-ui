@@ -45,6 +45,28 @@ export default {
       url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=37%3A32367',
     },
   },
+  argTypes: {
+    dimension: {
+      options: ['xl', 'l', 'm', 's', 'xs'],
+      control: { type: 'radio' },
+    },
+    items: {
+      control: false,
+    },
+    appearance: {
+      options: ['light', 'white', 'grey', 'dark'],
+      control: { type: 'radio' },
+    },
+    dropContainerCssMixin: {
+      control: false,
+    },
+    menuWidth: {
+      control: false,
+    },
+    menuMaxHeight: {
+      control: false,
+    },
+  },
 } as ComponentMeta<typeof AvatarGroup>;
 
 const onSelectAvatar = (id: string) => {

@@ -61,6 +61,29 @@ export default {
     icon: {
       control: false,
     },
+    userInitials: {
+      control: { type: 'text' },
+    },
+    href: {
+      control: { type: 'text' },
+    },
+    status: {
+      options: ['success', 'danger', 'warn', 'inactive'],
+      control: { type: 'radio' },
+    },
+    appearance: {
+      options: ['light', 'white', 'grey', 'dark'],
+      control: { type: 'radio' },
+    },
+    svgMaskId: {
+      control: { type: 'text' },
+    },
+    showTooltip: {
+      control: false,
+    },
+    isMenuAvatar: {
+      control: false,
+    },
   },
 } as ComponentMeta<typeof Avatar>;
 
