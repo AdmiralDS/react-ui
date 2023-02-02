@@ -7,9 +7,11 @@ export function useToast(): IContextProps {
 
   return {
     addToast: context?.addToast,
+    addRenderToast: context?.addRenderToast,
     removeToast: context?.removeToast,
     removeById: context?.removeById,
     toasts: context?.toasts,
+    renderToastList: context?.renderToastList,
     autoDeleteTime: context?.autoDeleteTime,
   };
 }

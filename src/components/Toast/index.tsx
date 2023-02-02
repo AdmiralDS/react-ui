@@ -59,31 +59,15 @@ export interface ToastTransitionProps extends React.HTMLAttributes<HTMLDivElemen
   position?: PositionToasts;
 }
 
-const StyledNotification = styled(Notification)`
-  ${(props) => props.theme.shadow['Shadow 08']}
-`;
-
 export const Toast = ({ position = 'top-right', ...props }: ToastTransitionProps) => {
-  const { toasts, removeToast } = useToast();
-
-  function renderDefaultNotification(item: IdentifyToast) {
-    const handleOnClose = () => {
-      removeToast(item);
-    };
-
-    return (
-      <StyledNotification {...item} onClose={item.onClose || handleOnClose}>
-        {item.children}
-      </StyledNotification>
-    );
-  }
+  const { renderToastList } = useToast();
   return (
     <Container position={position} {...props}>
-      {!!toasts?.length &&
-        toasts.map(({ renderToast, ...item }) => {
+      {!!renderToastList?.length &&
+        renderToastList.map(({ renderToast, id }) => {
           return (
-            <Transition key={item.id} position={position}>
-              {renderToast ? renderToast() : renderDefaultNotification(item)}
+            <Transition key={id} position={position}>
+              {renderToast()}
             </Transition>
           );
         })}

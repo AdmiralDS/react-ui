@@ -194,27 +194,25 @@ const MessageForm = () => {
   const [toastIdStack, setToastIdStack] = React.useState<Array<string>>([]);
   const [inputValue, setInputValue] = React.useState('Notification message');
 
-  const { addToast, removeById } = useToast();
+  const { addRenderToast, removeById } = useToast();
 
   const onClickHandlerAdd = () => {
-    const id = addToast({
-      renderToast: () => {
-        const handleCloseToast = () => {
-          removeById(id);
-          console.log('Toast is closed');
-          setToastIdStack((prevToastIdStack) => prevToastIdStack.filter((toastID) => toastID !== id));
-        };
-        return (
-          <StyledNotificationItem isClosable={true} displayStatusIcon={true} onClose={handleCloseToast}>
-            <NotificationItemTitle>Title</NotificationItemTitle>
-            <NotificationItemContent>{inputValue}</NotificationItemContent>
-            <NotificationItemButtonPanel>
-              <TextButton dimension="s" text="TextButton1" onClick={handleTextButtonClick} />
-              <TextButton dimension="s" text="TextButton2" onClick={handleTextButtonClick} />
-            </NotificationItemButtonPanel>
-          </StyledNotificationItem>
-        );
-      },
+    const id = addRenderToast(() => {
+      const handleCloseToast = () => {
+        removeById(id);
+        console.log('Toast is closed');
+        setToastIdStack((prevToastIdStack) => prevToastIdStack.filter((toastID) => toastID !== id));
+      };
+      return (
+        <StyledNotificationItem isClosable={true} displayStatusIcon={true} onClose={handleCloseToast}>
+          <NotificationItemTitle>Title</NotificationItemTitle>
+          <NotificationItemContent>{inputValue}</NotificationItemContent>
+          <NotificationItemButtonPanel>
+            <TextButton dimension="s" text="TextButton1" onClick={handleTextButtonClick} />
+            <TextButton dimension="s" text="TextButton2" onClick={handleTextButtonClick} />
+          </NotificationItemButtonPanel>
+        </StyledNotificationItem>
+      );
     });
     setToastIdStack((prev) => [...prev, id]);
   };
