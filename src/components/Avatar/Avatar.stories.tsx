@@ -79,10 +79,10 @@ export default {
       control: { type: 'text' },
     },
     showTooltip: {
-      control: { type: 'boolean' },
+      control: false,
     },
     isMenuAvatar: {
-      control: { type: 'boolean' },
+      control: false,
     },
   },
 } as ComponentMeta<typeof Avatar>;
