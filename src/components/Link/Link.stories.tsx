@@ -152,11 +152,28 @@ const LinkMixin: ComponentStory<typeof Link> = () => (
   </Router>
 );
 
+const LinkPolymorphic: ComponentStory<typeof Link> = () => (
+  <>
+    <Link as="button">Render button instead of anchor</Link>
+    <Devider />
+    <Link as="div" dimension="s">
+      Render div instead of anchor
+    </Link>
+    <Devider />
+    <Router>
+      <Link as={RouterLink} to="" appearance="secondary">
+        Render RouterLink instead of anchor
+      </Link>
+    </Router>
+  </>
+);
+
 const LinkDefault: ComponentStory<typeof Link> = ({ children, ...args }) => <Link {...args}>{children}</Link>;
 export const Primary = LinkPrimary.bind({});
 export const Secondary = LinkSecondary.bind({});
 export const IconLink = LinkWithIcon.bind({});
 export const CssMixin = LinkMixin.bind({});
+export const LinkAsProp = LinkPolymorphic.bind({});
 export const Playground = LinkDefault.bind({});
 
 Playground.args = {
