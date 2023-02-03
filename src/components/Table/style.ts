@@ -341,12 +341,21 @@ export const Row = styled.div<{
   ${({ rowWidth }) => rowWidth && rowWidthStyle}
 `;
 
+const rowHoverMixin = css`
+  cursor: pointer;
+  & > *,
+  & + ${OverflowMenuWrapper} {
+    background: ${({ theme }) => theme.color['Primary/Primary 10']};
+  }
+`;
+
 export const SimpleRow = styled.div<{
   selected?: boolean;
   disabled?: boolean;
   error?: boolean;
   success?: boolean;
   grey?: boolean;
+  hover?: boolean;
 }>`
   display: inline-flex;
   min-width: max-content;
@@ -360,6 +369,7 @@ export const SimpleRow = styled.div<{
     & + ${OverflowMenuWrapper} {
       visibility: visible;
     }
+    ${({ hover }) => hover && rowHoverMixin}
   }
   & + div[data-opened='true'] {
     visibility: visible;
