@@ -1,5 +1,12 @@
 export type { Theme } from './components/themes';
-export { LIGHT_THEME, DARK_THEME } from './components/themes';
+export {
+  LIGHT_THEME,
+  DARK_THEME,
+  ALL_BORDER_RADIUS_VALUES,
+  smallGroupBorderRadius,
+  mediumGroupBorderRadius,
+  largeGroupBorderRadius,
+} from './components/themes';
 
 export * from './components/Accordion';
 export * from './components/Badge';
@@ -70,6 +77,9 @@ export * from './components/InputIconButton';
 export * from './components/GroupActionsPane';
 export * from './components/skeleton/animation';
 export * from './components/common/utils/refSetter';
+export * from './components/common/utils/checkOverflow';
+export * from './components/common/keyboardKey';
+export * from './components/common/hooks/useClickOutside';
 export * from './components/TagMenu';
 export * from './components/Range';
 export * from './components/Pill';
