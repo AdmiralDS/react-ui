@@ -76,14 +76,14 @@ const LinkPrimary: ComponentStory<typeof Link> = (args) => {
       <T font="Body/Body 1 Long" as="div">
         Dimension - M
       </T>
-      <Link appearance={'primary'} href="" onClick={(e) => e.preventDefault()}>
+      <Link appearance={'primary'} onClick={(e: any) => e.preventDefault()}>
         Link
       </Link>
       <Separator />
       <T font="Body/Body 1 Long" as="div">
         Dimension - S
       </T>
-      <Link appearance={'primary'} dimension="s" href="" onClick={(e) => e.preventDefault()}>
+      <Link appearance={'primary'} dimension="s" href="" onClick={(e: any) => e.preventDefault()}>
         Link
       </Link>
     </ThemeProvider>
@@ -95,14 +95,14 @@ const LinkSecondary: ComponentStory<typeof Link> = () => (
     <T font="Body/Body 1 Long" as="div">
       Dimension - M
     </T>
-    <Link appearance={'secondary'} href="" onClick={(e) => e.preventDefault()}>
+    <Link appearance={'secondary'} href="" onClick={(e: any) => e.preventDefault()}>
       Link
     </Link>
     <Separator />
     <T font="Body/Body 1 Long" as="div">
       Dimension - S
     </T>
-    <Link appearance={'secondary'} dimension="s" href="" onClick={(e) => e.preventDefault()}>
+    <Link appearance={'secondary'} dimension="s" href="" onClick={(e: any) => e.preventDefault()}>
       Link
     </Link>
   </>
@@ -115,7 +115,7 @@ const LinkWithIcon: ComponentStory<typeof Link> = () => {
         Link with icon. Dimension - m
       </T>
       <Separator />
-      <Link appearance={'primary'} href="" onClick={(e) => e.preventDefault()}>
+      <Link appearance={'primary'} href="" onClick={(e: any) => e.preventDefault()}>
         <ArrowLeftOutline width={24} />
         <Devider />
         Link
@@ -125,7 +125,7 @@ const LinkWithIcon: ComponentStory<typeof Link> = () => {
         Link with icon. Dimension - s
       </T>
       <Separator />
-      <Link appearance={'secondary'} dimension="s" href="" onClick={(e) => e.preventDefault()}>
+      <Link appearance={'secondary'} dimension="s" href="" onClick={(e: any) => e.preventDefault()}>
         Link
         <Devider />
         <ArrowRightOutline width={20} />
