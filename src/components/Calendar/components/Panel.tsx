@@ -86,7 +86,7 @@ export const Panel: FC<IPanelProps> = ({
   };
   return (
     <PanelComponent yearsView={yearsView} monthsView={monthsView} className="ui-kit-calendar-panel-component">
-      {!monthsView && (
+      {!monthsView && !previousDisabled ? (
         <ButtonWithTooltip
           renderContent={() =>
             yearsView
@@ -98,6 +98,8 @@ export const Panel: FC<IPanelProps> = ({
           disabled={previousDisabled}
           type="left"
         />
+      ) : (
+        <Button onMouseDown={onPrevious} disabled={previousDisabled} type="left" />
       )}
       <PanelDate>
         <MonthWithTooltip
@@ -125,7 +127,7 @@ export const Panel: FC<IPanelProps> = ({
           {viewDate.getFullYear()}
         </YearWithTooltip>
       </PanelDate>
-      {!monthsView && (
+      {!monthsView && !nextDisabled ? (
         <ButtonWithTooltip
           renderContent={() =>
             yearsView
@@ -137,6 +139,8 @@ export const Panel: FC<IPanelProps> = ({
           disabled={nextDisabled}
           type="right"
         />
+      ) : (
+        <Button onMouseDown={onNext} disabled={nextDisabled} type="right" />
       )}
     </PanelComponent>
   );
