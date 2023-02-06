@@ -424,29 +424,6 @@ const ButtonLoaderDemo: ComponentStory<typeof Button> = () => (
   </>
 );
 
-const ButtonSkeleton: ComponentStory<typeof Button> = ({ appearance = 'primary', dimension = 'xl', ...args }) => (
-  <>
-    <WrapperButton>
-      <Button disabled dimension={dimension} appearance={appearance} {...args}>
-        <PseudoText dimension={dimension} appearance={appearance} />
-      </Button>
-      <Button disabled dimension={dimension} appearance={appearance} {...args}>
-        <PseudoIcon dimension={dimension} appearance={appearance} />
-        <PseudoText dimension={dimension} appearance={appearance} />
-      </Button>
-      <Button disabled dimension={dimension} appearance={appearance} {...args}>
-        <PseudoText dimension={dimension} appearance={appearance} />
-        <PseudoIcon dimension={dimension} appearance={appearance} />
-      </Button>
-      <div style={{ marginLeft: 10 }}>
-        <Button disabled displayAsSquare dimension={dimension} appearance={appearance} {...args}>
-          <PseudoIcon dimension={dimension} appearance={appearance} />
-        </Button>
-      </div>
-    </WrapperButton>
-  </>
-);
-
 const ButtonPlaygroundDemo: ComponentStory<typeof Button> = ({ children, ...args }) => {
   const cleanProps = filterKeysWithUndefinedValues(args);
 
@@ -484,4 +461,3 @@ ButtonWithIcon.args = {};
 export const ButtonLoader = ButtonLoaderDemo.bind({});
 ButtonLoader.storyName = 'Button. Загрузка';
 ButtonLoader.args = {};
-// export const Skeleton = ButtonSkeleton.bind({});
