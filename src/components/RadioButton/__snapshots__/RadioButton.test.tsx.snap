@@ -109,7 +109,7 @@ fieldset[data-dimension='s'] .c2 {
   margin: 0;
   padding-top: 2px;
   padding-bottom: 2px;
-  padding-left: 30px;
+  padding-left: 32px;
   display: inline-block;
   position: relative;
   box-sizing: content-box;
@@ -272,7 +272,7 @@ fieldset[data-dimension='s'] .c2 {
   margin: 0;
   padding-top: 2px;
   padding-bottom: 2px;
-  padding-left: 30px;
+  padding-left: 32px;
   display: inline-block;
   position: relative;
   box-sizing: content-box;
@@ -490,7 +490,7 @@ fieldset[data-dimension='s'] .c2 {
   margin: 0;
   padding-top: 2px;
   padding-bottom: 2px;
-  padding-left: 30px;
+  padding-left: 32px;
   display: inline-block;
   position: relative;
   box-sizing: content-box;
@@ -650,7 +650,7 @@ fieldset[data-dimension='s'] .c2 {
   margin: 0;
   padding-top: 2px;
   padding-bottom: 2px;
-  padding-left: 30px;
+  padding-left: 32px;
   display: inline-block;
   position: relative;
   box-sizing: content-box;
@@ -865,7 +865,7 @@ fieldset[data-dimension='s'] .c2 {
   margin: 0;
   padding-top: 3px;
   padding-bottom: 3px;
-  padding-left: 27px;
+  padding-left: 28px;
   display: inline-block;
   position: relative;
   box-sizing: content-box;
@@ -1025,7 +1025,7 @@ fieldset[data-dimension='s'] .c2 {
   margin: 0;
   padding-top: 3px;
   padding-bottom: 3px;
-  padding-left: 27px;
+  padding-left: 28px;
   display: inline-block;
   position: relative;
   box-sizing: content-box;

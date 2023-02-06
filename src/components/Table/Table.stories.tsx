@@ -777,11 +777,13 @@ RowState.args = {
   columnList,
   displayRowSelectionColumn: true,
 };
-RowState.storyName = 'Table. Стили строк (selected, disabled, error, success).';
+RowState.storyName = 'Table. Стили строк (selected, disabled, error, success, hover).';
 RowState.parameters = {
   docs: {
     description: {
-      story: `Для каждой строки помимо содержимого ячеек и id, можно задать следующие состояния строки: selected, disabled, error, success.`,
+      story: `Для каждой строки помимо содержимого ячеек и id, можно задать следующие состояния строки: selected, 
+      disabled, error, success, hover. Нужно учесть, что окраска строки по hover должна использоваться для 
+      тех случаев, когда строка кликабельна и ведет к каким-либо действиям.`,
     },
   },
 };
