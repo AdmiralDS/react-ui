@@ -6,17 +6,6 @@ import type { PolymorphicComponentPropsWithRef, PolymorphicRef } from '../common
 export { LinkComponentCssMixin } from '#src/components/Link/LinkComponent';
 export type { LinkComponent } from '#src/components/Link/LinkComponent';
 
-// export interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
-//   /** Текст ссылки */
-//   children: ReactNode;
-//   /** Вид ссылки */
-//   appearance?: AppearanceLink;
-//   /** Отключение ссылки */
-//   disabled?: boolean;
-//   /** Размер ссылки */
-//   dimension?: Dimension;
-// }
-
 export interface LinkProps {
   /** Текст ссылки */
   children: React.ReactNode;
@@ -29,11 +18,6 @@ export interface LinkProps {
 }
 
 export type LinkPolymorphicProps<C extends React.ElementType> = PolymorphicComponentPropsWithRef<C, LinkProps>;
-
-// type LinkComp<C extends React.ElementType = 'a'> = {
-//   (props: LinkPolymorphicProps<C>, context?: any): React.ReactElement<any, any> | null;
-//   displayName?: string | undefined;
-// };
 
 type LinkComp = <C extends React.ElementType = 'a'>(props: LinkPolymorphicProps<C>) => React.ReactElement | null;
 

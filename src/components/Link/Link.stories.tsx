@@ -161,7 +161,7 @@ const LinkPolymorphic: ComponentStory<typeof Link> = () => (
     </Link>
     <Devider />
     <Router>
-      <Link as={RouterLink} to="" appearance="secondary">
+      <Link as={RouterLink} to="">
         Render RouterLink instead of anchor
       </Link>
     </Router>
@@ -173,7 +173,25 @@ export const Primary = LinkPrimary.bind({});
 export const Secondary = LinkSecondary.bind({});
 export const IconLink = LinkWithIcon.bind({});
 export const CssMixin = LinkMixin.bind({});
+CssMixin.parameters = {
+  docs: {
+    description: {
+      story: `Помимо компонента Link библиотека предоставляет LinkComponentCssMixin - миксин, включающий в себя 
+      все стили компонента Link согласно дизайну Admiral 2.1. Данный миксин целесообразно применять, если 
+      пользователь хочет использовать свой собственный компонент, стилизованный согласно дизайну Admiral 2.1.`,
+    },
+  },
+};
 export const LinkAsProp = LinkPolymorphic.bind({});
+LinkAsProp.parameters = {
+  docs: {
+    description: {
+      story: `Компонент Link является полиморфным компонентом. По умолчанию компонент Link возвращает стандартный html anchor элемент. 
+      Однако с помощью параметра as можно перезадать тип элемента, который будет отрисован. 
+      В качестве значения as можно передать строку, в которой будет прописан тип html элемента, или компонент.`,
+    },
+  },
+};
 export const Playground = LinkDefault.bind({});
 
 Playground.args = {
