@@ -2,15 +2,15 @@ import * as React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { ReactComponent as StarSolid } from '@admiral-ds/icons/build/system/StarSolid.svg';
-import { Button, ButtonProps } from './index';
-import { PseudoText } from '#src/components/skeleton/PseudoText';
-import { PseudoIcon } from '#src/components/skeleton/PseudoIcon';
+import type { ButtonProps } from './index';
+import { Button } from './index';
 import { T } from '#src/components/T';
 import { withDesign } from 'storybook-addon-designs';
 import { filterKeysWithUndefinedValues } from '#src/components/common/utils/filterKeysWithUndefinedValues';
 import type { Theme } from '#src/components/themes';
 import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
-import { Appearance } from '#src/components/Button/types';
+import type { Appearance } from '#src/components/Button/types';
+import { PaddingForButtonWithIconLeft, PaddingForButtonWithIconRight } from '#src/components/Button/dimensionMixin';
 
 const WrapperButton = styled.div`
   display: flex;
@@ -107,6 +107,10 @@ export default {
     icon: {
       control: false,
     },
+
+    buttonCssMixin: {
+      control: false,
+    },
   },
 } as ComponentMeta<typeof Button>;
 
@@ -130,16 +134,47 @@ const TemplatePlayground = (props: ButtonProps) => {
 
   return (
     <ThemeProvider theme={swapBorder}>
+      <T font="Body/Body 1 Long" as="div">
+        В связи с корректировкой внутренних отступов при наличии иконок рекомендуется их передавать через props "icon" и
+        "iconPlace" = "left" | "right".
+      </T>
       <ButtonContainer appearance={props.appearance}>
         <Button {...props} displayAsSquare={false}>
           Button 56
         </Button>
 
-        <Button {...props} displayAsSquare={false} icon={<StarSolid />} iconPlace={props.iconPlace}>
+        <Button {...props} displayAsSquare={false} icon={<StarSolid />}>
+          Button 56
+        </Button>
+
+        <Button {...props} displayAsSquare={false} icon={<StarSolid />} iconPlace="right">
           Button 56
         </Button>
 
         <Button {...props} icon={<StarSolid />} displayAsSquare />
+      </ButtonContainer>
+      <T font="Body/Body 1 Long" as="div">
+        При передаче иконок через children необходимо прокидывать соответствующий css mixin
+        (PaddingForButtonWithIconLeft | PaddingForButtonWithIconRight).
+      </T>
+      <ButtonContainer appearance={props.appearance}>
+        <Button {...props} displayAsSquare={false}>
+          Button 56
+        </Button>
+
+        <Button {...props} buttonCssMixin={PaddingForButtonWithIconLeft} displayAsSquare={false}>
+          <StarSolid />
+          Button 56
+        </Button>
+
+        <Button {...props} buttonCssMixin={PaddingForButtonWithIconRight} displayAsSquare={false}>
+          Button 56
+          <StarSolid />
+        </Button>
+
+        <Button {...props} displayAsSquare>
+          <StarSolid />
+        </Button>
       </ButtonContainer>
     </ThemeProvider>
   );
@@ -157,10 +192,6 @@ const TemplateVariants = (props: ButtonProps) => {
 
   return (
     <ThemeProvider theme={swapBorder}>
-      <T font="Body/Body 1 Long" as="div">
-        В связи с корректировкой внутренних отступов при наличии иконок рекомендуется их передавать через props "icon" и
-        "iconPlace" = "left" | "right".
-      </T>
       <ButtonContainer>
         <Button dimension={props.dimension}>Button 56</Button>
 
@@ -234,7 +265,7 @@ const TemplateVariants = (props: ButtonProps) => {
 
         <Button dimension={props.dimension} appearance="success" displayAsSquare icon={<StarSolid />} />
       </ButtonContainer>
-      <ButtonContainer appearance={props.appearance}>
+      <ButtonContainer appearance="white">
         <Button dimension={props.dimension} appearance="white">
           Button 56
         </Button>
@@ -300,7 +331,7 @@ const TemplateWithIcon = (props: ButtonProps) => {
         </div>
         <>
           <DarkDiv>
-            <T font="Body/Body 1 Long" as="div">
+            <T font="Body/Body 1 Long" as="div" style={{ color: 'white' }}>
               White - l
             </T>
             <Button dimension="l" appearance="white" iconPlace="right" icon={<StarSolid />}>
@@ -472,7 +503,7 @@ export const Playground = ButtonPlaygroundDemo.bind({});
 Playground.storyName = 'Button. Playground';
 Playground.args = {};
 export const PlaygroundVariants = ButtonVariants.bind({});
-PlaygroundVariants.storyName = 'Button. Стили (передача иконок с помощью "icon" и "iconPlace")';
+PlaygroundVariants.storyName = 'Button. Стили';
 PlaygroundVariants.args = {};
 export const ButtonWithIcon = ButtonWithIconDemo.bind({});
 ButtonWithIcon.storyName = 'Button с иконкой';

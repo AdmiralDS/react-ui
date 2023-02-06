@@ -1,6 +1,7 @@
 import type { Appearance, Dimension, StyledButtonProps } from './types';
 import type { ButtonHTMLAttributes, ReactNode } from 'react';
 import * as React from 'react';
+import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import styled from 'styled-components';
 import { Spinner } from '#src/components/Spinner';
 import { appearanceMixin } from './appearanceMixin';
@@ -35,6 +36,9 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
   /** Распооложение иконки кнопки */
   iconPlace?: IconPlace;
+
+  /** Позволяет добавлять миксин для кнопок, созданный с помощью styled css  */
+  buttonCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
 }
 
 const ButtonContent = styled.div<{ dimension?: Dimension; $loading?: boolean }>`
@@ -91,6 +95,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       icon,
       iconPlace = 'left',
       children,
+      buttonCssMixin,
       ...props
     },
     ref,
@@ -110,6 +115,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         skeleton={skeleton}
         hasIconLeft={hasIconLeft}
         hasIconRight={hasIconRight}
+        buttonCssMixin={buttonCssMixin}
         {...props}
       >
         {loading && <StyledSpinner dimension={spinnerDimension} inverse={spinnerInverse} />}
@@ -145,6 +151,7 @@ const StyledButton = styled.button.attrs<
 
   ${appearanceMixin}
   ${dimensionMixin}
+  ${(p) => p.buttonCssMixin}
   ${({ skeleton }) => skeleton && skeletonAnimationMixin}};
 
   ${ButtonContent} {

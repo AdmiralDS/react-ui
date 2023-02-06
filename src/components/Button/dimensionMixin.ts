@@ -1,13 +1,60 @@
 import { css } from 'styled-components';
 import { typography } from '#src/components/Typography';
 import { IconContainer } from '#src/components/TextButton/commonMixin';
+import type { Dimension } from '#src/components/Button/types';
+
+function getHorizontalIconPadding(dimension: Dimension) {
+  switch (dimension) {
+    case 's':
+      return 13;
+    case 'm':
+      return 17;
+    case 'l':
+      return 21;
+    case 'xl':
+    default:
+      return 29;
+  }
+}
+
+export const PaddingForButtonWithIconLeft = css<{ displayAsSquare?: boolean }>`
+  &[data-dimension='xl'] {
+    ${(props) => !props.displayAsSquare && `padding-left: ${getHorizontalIconPadding('xl')}px;`}
+  }
+
+  &[data-dimension='l'] {
+    ${(props) => !props.displayAsSquare && `padding-left: ${getHorizontalIconPadding('l')}px;`}
+  }
+
+  &[data-dimension='m'] {
+    ${(props) => !props.displayAsSquare && `padding-left: ${getHorizontalIconPadding('m')}px;`}
+  }
+
+  &[data-dimension='s'] {
+    ${(props) => !props.displayAsSquare && `padding-left: ${getHorizontalIconPadding('s')}px;`}
+`;
+
+export const PaddingForButtonWithIconRight = css<{ displayAsSquare?: boolean }>`
+  &[data-dimension='xl'] {
+    ${(props) => !props.displayAsSquare && `padding-right: ${getHorizontalIconPadding('xl')}px;`}
+  }
+
+  &[data-dimension='l'] {
+    ${(props) => !props.displayAsSquare && `padding-right: ${getHorizontalIconPadding('l')}px;`}
+  }
+
+  &[data-dimension='m'] {
+    ${(props) => !props.displayAsSquare && `padding-right: ${getHorizontalIconPadding('m')}px;`}
+  }
+
+  &[data-dimension='s'] {
+    ${(props) => !props.displayAsSquare && `padding-right: ${getHorizontalIconPadding('s')}px;`}
+`;
 
 const defaultDimensionMixin = css<{ displayAsSquare?: boolean; hasIconLeft?: boolean; hasIconRight?: boolean }>`
   padding: 0;
   height: 56px;
   ${(props) => (props.displayAsSquare ? 'width: 56px;' : 'padding: 0 31px;')}
-  ${(props) => (!props.displayAsSquare && props.hasIconLeft ? 'padding-left: 29px;' : '')}
-  ${(props) => (!props.displayAsSquare && props.hasIconRight ? 'padding-right: 29px;' : '')}
   ${IconContainer} {
     width: 24px;
     height: 24px;
@@ -26,26 +73,23 @@ export const dimensionMixin = css<{ displayAsSquare?: boolean; hasIconLeft?: boo
   &[data-dimension='l'] {
     height: 48px;
     ${(props) => (props.displayAsSquare ? 'width: 48px;' : 'padding: 0 23px;')}
-    ${(props) => (!props.displayAsSquare && props.hasIconLeft ? 'padding-left: 21px;' : '')}
-    ${(props) => (!props.displayAsSquare && props.hasIconRight ? 'padding-right: 21px;' : '')}
   }
 
   &[data-dimension='m'] {
     height: 40px;
     ${(props) => (props.displayAsSquare ? 'width: 40px;' : 'padding: 0 19px;')}
-    ${(props) => (!props.displayAsSquare && props.hasIconLeft ? 'padding-left: 17px;' : '')}
-    ${(props) => (!props.displayAsSquare && props.hasIconRight ? 'padding-right: 17px;' : '')}
   }
 
   &[data-dimension='s'] {
     height: 32px;
     ${(props) => (props.displayAsSquare ? 'width: 32px;' : 'padding: 0 15px;')}
-    ${(props) => (!props.displayAsSquare && props.hasIconLeft ? 'padding-left: 13px;' : '')}
-    ${(props) => (!props.displayAsSquare && props.hasIconRight ? 'padding-right: 13px;' : '')}
     ${IconContainer} {
       width: 20px;
       height: 20px;
     }
     ${typography['Button/Button 2']}
   }
+
+  ${(p) => p.hasIconLeft && PaddingForButtonWithIconLeft}
+  ${(p) => p.hasIconRight && PaddingForButtonWithIconRight}
 `;
