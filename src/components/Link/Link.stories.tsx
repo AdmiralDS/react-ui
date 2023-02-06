@@ -76,7 +76,7 @@ const LinkPrimary: ComponentStory<typeof Link> = (args) => {
       <T font="Body/Body 1 Long" as="div">
         Dimension - M
       </T>
-      <Link appearance={'primary'} onClick={(e: any) => e.preventDefault()}>
+      <Link appearance={'primary'} href="" onClick={(e: any) => e.preventDefault()}>
         Link
       </Link>
       <Separator />
