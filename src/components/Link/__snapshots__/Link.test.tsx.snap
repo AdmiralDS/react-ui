@@ -20,10 +20,12 @@ exports[`Link should render component 1`] = `
   position: relative;
   border-radius: 4px;
   color: #0062FF;
-  font-size: 16px;
-  font-weight: normal;
-  line-height: 24px;
   font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  font-feature-settings: 'tnum' on,'lnum' on;
 }
 
 .c0:hover {
@@ -66,7 +68,6 @@ exports[`Link should render component 1`] = `
     href="#"
   >
     Link TextInput
-     
   </a>
 </div>
 `;
