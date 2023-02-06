@@ -71,6 +71,7 @@ export const RowWrapper = ({
         error={!!row.error}
         success={!!row.success}
         grey={!!grey}
+        hover={!!row.hover}
       >
         {children}
       </SimpleRow>

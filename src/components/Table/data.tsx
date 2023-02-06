@@ -31,6 +31,7 @@ export type RowData = {
   error?: boolean;
   success?: boolean;
   expanded?: boolean;
+  hover?: boolean;
   expandedRowRender?: (row: RowData) => React.ReactNode;
   overflowMenuRender?: (
     row: RowData,
@@ -497,6 +498,7 @@ export const rowListRowState: RowData[] = [
   {
     id: '0001',
     selected: true,
+    hover: true,
     transfer_type: 'МНО',
     transfer_date: new Date('2020-08-06').toLocaleDateString(),
     transfer_amount: (
@@ -523,6 +525,7 @@ export const rowListRowState: RowData[] = [
   {
     id: '0003',
     error: true,
+    hover: true,
     transfer_type: 'МНО',
     transfer_date: new Date('2020-08-06').toLocaleDateString(),
     transfer_amount: (
@@ -536,6 +539,20 @@ export const rowListRowState: RowData[] = [
   {
     id: '0004',
     success: true,
+    hover: true,
+    transfer_type: 'МНО',
+    transfer_date: new Date('2020-08-06').toLocaleDateString(),
+    transfer_amount: (
+      <AmountCell>
+        <T font="Body/Body 2 Short">{numberFormatter.format(32_500_000_000)}</T>
+      </AmountCell>
+    ),
+    currency: 'RUB',
+    rate: 2.5,
+  },
+  {
+    id: '0005',
+    hover: true,
     transfer_type: 'МНО',
     transfer_date: new Date('2020-08-06').toLocaleDateString(),
     transfer_amount: (

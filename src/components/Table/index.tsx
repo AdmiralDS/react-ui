@@ -100,6 +100,8 @@ export interface TableRow extends Record<RowId, React.ReactNode> {
   success?: boolean;
   /** Строка в раскрытом состоянии */
   expanded?: boolean;
+  /** Окраска строки по Hover. Данная окраска должна применяться, если строка кликабельна и ведет к каким-либо действиям */
+  hover?: boolean;
   /** Название группы */
   groupTitle?: string;
   /** Строки таблицы, находящиеся в группе */
