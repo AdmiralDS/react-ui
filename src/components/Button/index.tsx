@@ -1,5 +1,5 @@
 import type { Appearance, Dimension, StyledButtonProps } from './types';
-import type { ButtonHTMLAttributes } from 'react';
+import type { ButtonHTMLAttributes, ReactNode } from 'react';
 import * as React from 'react';
 import styled from 'styled-components';
 import { Spinner } from '#src/components/Spinner';
@@ -7,6 +7,9 @@ import { appearanceMixin } from './appearanceMixin';
 import { dimensionMixin } from './dimensionMixin';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { skeletonAnimationMixin } from '#src/components/skeleton/animation';
+import { IconContainer } from '#src/components/TextButton/commonMixin';
+
+type IconPlace = 'left' | 'right';
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   /** Внешний вид кнопки */
@@ -26,6 +29,12 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
   /** Состояние скелетона */
   skeleton?: boolean;
+
+  /** Иконка кнопки */
+  icon?: ReactNode;
+
+  /** Распооложение иконки кнопки */
+  iconPlace?: IconPlace;
 }
 
 const ButtonContent = styled.div<{ dimension?: Dimension; $loading?: boolean }>`
@@ -79,6 +88,8 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       type = 'button',
       loading = false,
       skeleton = false,
+      icon,
+      iconPlace = 'left',
       children,
       ...props
     },
@@ -86,6 +97,8 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ) => {
     const spinnerDimension = dimension === 's' ? 's' : 'm';
     const spinnerInverse = appearance !== 'secondary' && appearance !== 'ghost';
+    const hasIconLeft = !!icon && iconPlace === 'left';
+    const hasIconRight = !!icon && iconPlace === 'right';
 
     return (
       <StyledButton
@@ -95,13 +108,17 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         type={type}
         $loading={loading}
         skeleton={skeleton}
+        hasIconLeft={hasIconLeft}
+        hasIconRight={hasIconRight}
         {...props}
       >
         {loading && <StyledSpinner dimension={spinnerDimension} inverse={spinnerInverse} />}
         <ButtonContent>
+          {hasIconLeft && <IconContainer>{icon}</IconContainer>}
           {React.Children.toArray(children).map((child, index) =>
             typeof child === 'string' ? <div key={child + index}>{child}</div> : child,
           )}
+          {hasIconRight && <IconContainer>{icon}</IconContainer>}
         </ButtonContent>
       </StyledButton>
     );

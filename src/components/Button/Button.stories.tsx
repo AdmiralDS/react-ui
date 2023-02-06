@@ -90,6 +90,22 @@ export default {
     disabled: {
       control: { type: 'boolean' },
     },
+
+    displayAsSquare: {
+      control: { type: 'boolean' },
+    },
+
+    displayAsDisabled: {
+      control: { type: 'boolean' },
+    },
+
+    loading: {
+      control: { type: 'boolean' },
+    },
+
+    icon: {
+      control: false,
+    },
   },
 } as ComponentMeta<typeof Button>;
 
@@ -103,10 +119,113 @@ const ButtonContainer = styled.div`
   }
 `;
 
+const ButtonVariants: ComponentStory<typeof Button> = ({ children, ...args }) => {
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
+    return theme;
+  }
+
+  return (
+    <ThemeProvider theme={swapBorder}>
+      <T font="Body/Body 1 Long" as="div">
+        В связи с корректировкой внутренних отступов при наличии иконок рекомендуется их передавать через props "icon" и
+        "iconPlace" = "left" | "right".
+      </T>
+      <ButtonContainer>
+        <Button dimension={args.dimension}>Button 56</Button>
+
+        <Button dimension={args.dimension} icon={<StarSolid />}>
+          Button 56
+        </Button>
+
+        <Button dimension={args.dimension} iconPlace="right" icon={<StarSolid />}>
+          Button 56
+        </Button>
+
+        <Button dimension={args.dimension} displayAsSquare icon={<StarSolid />} />
+      </ButtonContainer>
+      <ButtonContainer>
+        <Button dimension={args.dimension} appearance="secondary">
+          Button 56
+        </Button>
+
+        <Button dimension={args.dimension} appearance="secondary" icon={<StarSolid />}>
+          Button 56
+        </Button>
+
+        <Button dimension={args.dimension} appearance="secondary" iconPlace="right" icon={<StarSolid />}>
+          Button 56
+        </Button>
+
+        <Button dimension={args.dimension} appearance="secondary" displayAsSquare icon={<StarSolid />} />
+      </ButtonContainer>
+      <ButtonContainer>
+        <Button dimension={args.dimension} appearance="ghost">
+          Button 56
+        </Button>
+
+        <Button dimension={args.dimension} appearance="ghost" icon={<StarSolid />}>
+          Button 56
+        </Button>
+
+        <Button dimension={args.dimension} appearance="ghost" iconPlace="right" icon={<StarSolid />}>
+          Button 56
+        </Button>
+
+        <Button dimension={args.dimension} appearance="ghost" displayAsSquare icon={<StarSolid />} />
+      </ButtonContainer>
+      <ButtonContainer>
+        <Button dimension={args.dimension} appearance="danger">
+          Button 56
+        </Button>
+
+        <Button dimension={args.dimension} appearance="danger" icon={<StarSolid />}>
+          Button 56
+        </Button>
+
+        <Button dimension={args.dimension} appearance="danger" iconPlace="right" icon={<StarSolid />}>
+          Button 56
+        </Button>
+
+        <Button dimension={args.dimension} appearance="danger" displayAsSquare icon={<StarSolid />} />
+      </ButtonContainer>
+      <ButtonContainer>
+        <Button dimension={args.dimension} appearance="success">
+          Button 56
+        </Button>
+
+        <Button dimension={args.dimension} appearance="success" icon={<StarSolid />}>
+          Button 56
+        </Button>
+
+        <Button dimension={args.dimension} appearance="success" iconPlace="right" icon={<StarSolid />}>
+          Button 56
+        </Button>
+
+        <Button dimension={args.dimension} appearance="success" displayAsSquare icon={<StarSolid />} />
+      </ButtonContainer>
+      <ButtonContainer style={{ backgroundColor: '#2B313B' }}>
+        <Button dimension={args.dimension} appearance="white">
+          Button 56
+        </Button>
+
+        <Button dimension={args.dimension} appearance="white" icon={<StarSolid />}>
+          Button 56
+        </Button>
+
+        <Button dimension={args.dimension} appearance="white" iconPlace="right" icon={<StarSolid />}>
+          Button 56
+        </Button>
+
+        <Button dimension={args.dimension} appearance="white" displayAsSquare icon={<StarSolid />} />
+      </ButtonContainer>
+    </ThemeProvider>
+  );
+};
+
 const ButtonWithIconDemo: ComponentStory<typeof Button> = (args) => {
   function swapBorder(theme: Theme): Theme {
     theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
-    console.log(`Current border ${theme.shape.borderRadiusKind}`);
     return theme;
   }
 
@@ -117,17 +236,15 @@ const ButtonWithIconDemo: ComponentStory<typeof Button> = (args) => {
           <T font="Body/Body 1 Long" as="div">
             Dimension - xl
           </T>
-          <Button dimension="xl" appearance="primary">
+          <Button dimension="xl" appearance="primary" iconPlace="right" icon={<StarSolid />}>
             Button 56
-            <StarSolid />
           </Button>
         </div>
         <div>
           <T font="Body/Body 1 Long" as="div">
             Dimension - l
           </T>
-          <Button dimension="l" appearance="secondary">
-            <StarSolid />
+          <Button dimension="l" appearance="secondary" icon={<StarSolid />}>
             Button 48
           </Button>
         </div>
@@ -135,18 +252,16 @@ const ButtonWithIconDemo: ComponentStory<typeof Button> = (args) => {
           <T font="Body/Body 1 Long" as="div">
             Dimension - m
           </T>
-          <Button dimension="m" appearance="danger">
+          <Button dimension="m" appearance="danger" iconPlace="right" icon={<StarSolid />}>
             Button 40
-            <StarSolid />
           </Button>
         </div>
         <div>
           <T font="Body/Body 1 Long" as="div">
             Ghost - xl
           </T>
-          <Button dimension="xl" appearance="ghost">
+          <Button dimension="xl" appearance="ghost" iconPlace="right" icon={<StarSolid />}>
             Button 56
-            <StarSolid />
           </Button>
         </div>
         <>
@@ -154,9 +269,8 @@ const ButtonWithIconDemo: ComponentStory<typeof Button> = (args) => {
             <T font="Body/Body 1 Long" as="div">
               White - l
             </T>
-            <Button dimension="l" appearance="white">
+            <Button dimension="l" appearance="white" iconPlace="right" icon={<StarSolid />}>
               Button 48
-              <StarSolid />
             </Button>
           </DarkDiv>
         </>
@@ -164,8 +278,7 @@ const ButtonWithIconDemo: ComponentStory<typeof Button> = (args) => {
           <T font="Body/Body 1 Long" as="div">
             Dimension - s
           </T>
-          <Button dimension="s" appearance="success">
-            <StarSolid />
+          <Button dimension="s" appearance="success" icon={<StarSolid />}>
             Button 32
           </Button>
         </div>
@@ -175,8 +288,7 @@ const ButtonWithIconDemo: ComponentStory<typeof Button> = (args) => {
         <T font="Body/Body 1 Long" as="div">
           Button with icon stretch
         </T>
-        <Button dimension="l" appearance="primary" style={{ width: '100%' }}>
-          <StarSolid />
+        <Button dimension="l" appearance="primary" style={{ width: '100%' }} icon={<StarSolid />}>
           Button
         </Button>
       </div>
@@ -340,201 +452,36 @@ const ButtonPlaygroundDemo: ComponentStory<typeof Button> = ({ children, ...args
 
   function swapBorder(theme: Theme): Theme {
     theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
-    console.log(`Current border ${theme.shape.borderRadiusKind}`);
     return theme;
   }
 
   return (
     <ThemeProvider theme={swapBorder}>
       <ButtonContainer>
-        <Button {...cleanProps}>Button 56</Button>
-
-        <Button {...cleanProps}>
-          <StarSolid />
+        <Button {...cleanProps} displayAsSquare={false}>
           Button 56
         </Button>
 
-        <Button {...cleanProps}>Button 56</Button>
-
-        <Button {...cleanProps}>
-          Button 56
-          <StarSolid />
-        </Button>
-
-        <Button {...cleanProps}>
-          <StarSolid />
-        </Button>
-
-        <Button {...cleanProps} displayAsSquare>
-          <StarSolid />
-        </Button>
-      </ButtonContainer>
-      <ButtonContainer>
-        <Button dimension="xl">Button 56</Button>
-
-        <Button dimension="xl">
-          <StarSolid />
+        <Button {...cleanProps} displayAsSquare={false} icon={<StarSolid />} iconPlace={args.iconPlace}>
           Button 56
         </Button>
 
-        <Button dimension="xl">Button 56</Button>
-
-        <Button dimension="xl">
-          Button 56
-          <StarSolid />
-        </Button>
-
-        <Button dimension="xl">
-          <StarSolid />
-        </Button>
-
-        <Button dimension="xl" displayAsSquare>
-          <StarSolid />
-        </Button>
-      </ButtonContainer>
-      <ButtonContainer>
-        <Button dimension="xl" appearance="secondary">
-          Button 56
-        </Button>
-
-        <Button dimension="xl" appearance="secondary">
-          <StarSolid />
-          Button 56
-        </Button>
-
-        <Button dimension="xl" appearance="secondary">
-          Button 56
-        </Button>
-
-        <Button dimension="xl" appearance="secondary">
-          Button 56
-          <StarSolid />
-        </Button>
-
-        <Button dimension="xl" appearance="secondary">
-          <StarSolid />
-        </Button>
-
-        <Button dimension="xl" appearance="secondary" displayAsSquare>
-          <StarSolid />
-        </Button>
-      </ButtonContainer>
-      <ButtonContainer>
-        <Button dimension="xl" appearance="ghost">
-          Button 56
-        </Button>
-
-        <Button dimension="xl" appearance="ghost">
-          <StarSolid />
-          Button 56
-        </Button>
-
-        <Button dimension="xl" appearance="ghost">
-          Button 56
-        </Button>
-
-        <Button dimension="xl" appearance="ghost">
-          Button 56
-          <StarSolid />
-        </Button>
-
-        <Button dimension="xl" appearance="ghost">
-          <StarSolid />
-        </Button>
-
-        <Button dimension="xl" appearance="ghost" displayAsSquare>
-          <StarSolid />
-        </Button>
-      </ButtonContainer>
-      <ButtonContainer>
-        <Button dimension="xl" appearance="danger">
-          Button 56
-        </Button>
-
-        <Button dimension="xl" appearance="danger">
-          <StarSolid />
-          Button 56
-        </Button>
-
-        <Button dimension="xl" appearance="danger">
-          Button 56
-        </Button>
-
-        <Button dimension="xl" appearance="danger">
-          Button 56
-          <StarSolid />
-        </Button>
-
-        <Button dimension="xl" appearance="danger">
-          <StarSolid />
-        </Button>
-
-        <Button dimension="xl" appearance="danger" displayAsSquare>
-          <StarSolid />
-        </Button>
-      </ButtonContainer>
-      <ButtonContainer>
-        <Button dimension="xl" appearance="success">
-          Button 56
-        </Button>
-
-        <Button dimension="xl" appearance="success">
-          <StarSolid />
-          Button 56
-        </Button>
-
-        <Button dimension="xl" appearance="success">
-          Button 56
-        </Button>
-
-        <Button dimension="xl" appearance="success">
-          Button 56
-          <StarSolid />
-        </Button>
-
-        <Button dimension="xl" appearance="success">
-          <StarSolid />
-        </Button>
-
-        <Button dimension="xl" appearance="success" displayAsSquare>
-          <StarSolid />
-        </Button>
-      </ButtonContainer>
-      <ButtonContainer style={{ backgroundColor: '#2B313B' }}>
-        <Button dimension="xl" appearance="white">
-          Button 56
-        </Button>
-
-        <Button dimension="xl" appearance="white">
-          <StarSolid />
-          Button 56
-        </Button>
-
-        <Button dimension="xl" appearance="white">
-          Button 56
-        </Button>
-
-        <Button dimension="xl" appearance="white">
-          Button 56
-          <StarSolid />
-        </Button>
-
-        <Button dimension="xl" appearance="white">
-          <StarSolid />
-        </Button>
-
-        <Button dimension="xl" appearance="white" displayAsSquare>
-          <StarSolid />
-        </Button>
+        <Button {...cleanProps} icon={<StarSolid />} displayAsSquare />
       </ButtonContainer>
     </ThemeProvider>
   );
 };
 
 export const Playground = ButtonPlaygroundDemo.bind({});
-Playground.args = {
-  children: 'Нажми меня',
-};
+Playground.storyName = 'Button. Playground';
+Playground.args = {};
+export const PlaygroundVariants = ButtonVariants.bind({});
+PlaygroundVariants.storyName = 'Button. Стили (передача иконок с помощью "icon" и "iconPlace")';
+PlaygroundVariants.args = {};
 export const ButtonWithIcon = ButtonWithIconDemo.bind({});
+ButtonWithIcon.storyName = 'Button с иконкой';
+ButtonWithIcon.args = {};
 export const ButtonLoader = ButtonLoaderDemo.bind({});
+ButtonLoader.storyName = 'Button. Загрузка';
+ButtonLoader.args = {};
 // export const Skeleton = ButtonSkeleton.bind({});
