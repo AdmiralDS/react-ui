@@ -8,6 +8,9 @@ import { ReactComponent as ArrowLeftOutline } from '@admiral-ds/icons/build/syst
 import { ReactComponent as ArrowRightOutline } from '@admiral-ds/icons/build/system/ArrowRightOutline.svg';
 import type { Theme } from '#src/components/themes';
 import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
+import { Link as RouterLink, MemoryRouter as Router } from 'react-router-dom';
+import { LinkComponentCssMixin } from '#src/components/Link';
+import type { LinkComponent } from '#src/components/Link';
 
 export default {
   title: 'Admiral-2.1/Link',
@@ -59,6 +62,7 @@ const Separator = styled.div`
 
 const Devider = styled.div`
   width: 10px;
+  height: 12px;
 `;
 
 const LinkPrimary: ComponentStory<typeof Link> = (args) => {
@@ -72,14 +76,14 @@ const LinkPrimary: ComponentStory<typeof Link> = (args) => {
       <T font="Body/Body 1 Long" as="div">
         Dimension - M
       </T>
-      <Link appearance={'primary'} href="" onClick={(e) => e.preventDefault()}>
+      <Link appearance={'primary'} href="" onClick={(e: any) => e.preventDefault()}>
         Link
       </Link>
       <Separator />
       <T font="Body/Body 1 Long" as="div">
         Dimension - S
       </T>
-      <Link appearance={'primary'} dimension="s" href="" onClick={(e) => e.preventDefault()}>
+      <Link appearance={'primary'} dimension="s" href="" onClick={(e: any) => e.preventDefault()}>
         Link
       </Link>
     </ThemeProvider>
@@ -91,14 +95,14 @@ const LinkSecondary: ComponentStory<typeof Link> = () => (
     <T font="Body/Body 1 Long" as="div">
       Dimension - M
     </T>
-    <Link appearance={'secondary'} href="" onClick={(e) => e.preventDefault()}>
+    <Link appearance={'secondary'} href="" onClick={(e: any) => e.preventDefault()}>
       Link
     </Link>
     <Separator />
     <T font="Body/Body 1 Long" as="div">
       Dimension - S
     </T>
-    <Link appearance={'secondary'} dimension="s" href="" onClick={(e) => e.preventDefault()}>
+    <Link appearance={'secondary'} dimension="s" href="" onClick={(e: any) => e.preventDefault()}>
       Link
     </Link>
   </>
@@ -111,7 +115,7 @@ const LinkWithIcon: ComponentStory<typeof Link> = () => {
         Link with icon. Dimension - m
       </T>
       <Separator />
-      <Link appearance={'primary'} href="" onClick={(e) => e.preventDefault()}>
+      <Link appearance={'primary'} href="" onClick={(e: any) => e.preventDefault()}>
         <ArrowLeftOutline width={24} />
         <Devider />
         Link
@@ -121,7 +125,7 @@ const LinkWithIcon: ComponentStory<typeof Link> = () => {
         Link with icon. Dimension - s
       </T>
       <Separator />
-      <Link appearance={'secondary'} dimension="s" href="" onClick={(e) => e.preventDefault()}>
+      <Link appearance={'secondary'} dimension="s" href="" onClick={(e: any) => e.preventDefault()}>
         Link
         <Devider />
         <ArrowRightOutline width={20} />
@@ -130,10 +134,64 @@ const LinkWithIcon: ComponentStory<typeof Link> = () => {
   );
 };
 
+const StyledRouterLink = styled(RouterLink)<LinkComponent>`
+  ${LinkComponentCssMixin}
+`;
+
+const LinkMixin: ComponentStory<typeof Link> = () => (
+  <Router>
+    <StyledRouterLink to="">Styled RouterLink - dimension m</StyledRouterLink>
+    <Devider />
+    <StyledRouterLink to="" dimension="s">
+      Styled RouterLink - dimension s
+    </StyledRouterLink>
+    <Devider />
+    <StyledRouterLink to="" appearance="secondary">
+      Styled RouterLink - appearance secondary
+    </StyledRouterLink>
+  </Router>
+);
+
+const LinkPolymorphic: ComponentStory<typeof Link> = () => (
+  <>
+    <Link as="button">Render button instead of anchor</Link>
+    <Devider />
+    <Link as="div" dimension="s">
+      Render div instead of anchor
+    </Link>
+    <Devider />
+    <Router>
+      <Link as={RouterLink} to="">
+        Render RouterLink instead of anchor
+      </Link>
+    </Router>
+  </>
+);
+
 const LinkDefault: ComponentStory<typeof Link> = ({ children, ...args }) => <Link {...args}>{children}</Link>;
 export const Primary = LinkPrimary.bind({});
 export const Secondary = LinkSecondary.bind({});
 export const IconLink = LinkWithIcon.bind({});
+export const CssMixin = LinkMixin.bind({});
+CssMixin.parameters = {
+  docs: {
+    description: {
+      story: `Помимо компонента Link библиотека предоставляет LinkComponentCssMixin - миксин, включающий в себя 
+      все стили компонента Link согласно дизайну Admiral 2.1. Данный миксин целесообразно применять, если 
+      пользователь хочет использовать свой собственный компонент, стилизованный согласно дизайну Admiral 2.1.`,
+    },
+  },
+};
+export const LinkAsProp = LinkPolymorphic.bind({});
+LinkAsProp.parameters = {
+  docs: {
+    description: {
+      story: `Компонент Link является полиморфным компонентом. По умолчанию компонент Link возвращает стандартный html anchor элемент. 
+      Однако с помощью параметра as можно перезадать тип элемента, который будет отрисован. 
+      В качестве значения as можно передать строку, в которой будет прописан тип html элемента, или компонент.`,
+    },
+  },
+};
 export const Playground = LinkDefault.bind({});
 
 Playground.args = {

@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.2.0](https://github.com/AdmiralDS/react-ui/compare/v4.1.0...v4.2.0) (2023-02-06)
+
+
+### Features
+
+* **Link:** add LinkComponentCssMixin for styling different components as link ([a49b1f4](https://github.com/AdmiralDS/react-ui/commit/a49b1f4066f88c51897adfd8b2fb8a9592de97c0))
+* **Link:** add prop 'as' for rendering different html elements or components as root node ([fdee069](https://github.com/AdmiralDS/react-ui/commit/fdee0694d95a69f400db51259494e050d7716957))
+* **Table:** add hover state for clickable rows ([eea3dbe](https://github.com/AdmiralDS/react-ui/commit/eea3dbe10c112567ac3e646c1647acbfbdd03d11))
+
+
+### Bug Fixes
+
+* **Avatar:** fix stories controls ([2de7902](https://github.com/AdmiralDS/react-ui/commit/2de7902e26c5cc002c0bb06e3b6f32ad7b16d486))
+* **AvatarGroup:** fix stories controls ([ab5a16a](https://github.com/AdmiralDS/react-ui/commit/ab5a16a89d8b5f965a4b9a99af5a0316466b74f0))
+* **Calendar:** fix bug with tooltip and disabled buttons ([184c110](https://github.com/AdmiralDS/react-ui/commit/184c110176ed4f8f1b9f0526a1cddb2cd684ec47))
+* **NumberInput:** block selecting text on double click ([7cb0825](https://github.com/AdmiralDS/react-ui/commit/7cb08257218de95116e9c0b517b256a979932103))
+* **RadioButton:** fix left text padding ([99c22b7](https://github.com/AdmiralDS/react-ui/commit/99c22b70e889579eaf306fe3fa5a5f686cff6bf1))
+* **SuggestInput:** remove wrong transparent paddings in drop container ([966c183](https://github.com/AdmiralDS/react-ui/commit/966c1835e5428f8afa0008e0dfc8edf298bc14ec))
+* **TreeNode:** add properly passing styling props on container ([c83d977](https://github.com/AdmiralDS/react-ui/commit/c83d9773742633bd20509a70f1fe3da07a62eb9b))
+
 ## [4.1.0](https://github.com/AdmiralDS/react-ui/compare/v4.0.0...v4.1.0) (2023-01-27)
 
 
