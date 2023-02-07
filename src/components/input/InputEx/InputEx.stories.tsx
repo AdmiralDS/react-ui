@@ -59,6 +59,9 @@ export default {
     displayClearIcon: {
       control: { type: 'boolean' },
     },
+    showTooltip: {
+      control: { type: 'boolean' },
+    },
     placeholder: {
       type: 'string',
     },
@@ -76,6 +79,21 @@ export default {
     },
     containerRef: {
       control: false,
+    },
+    prefixValueList: {
+      control: false,
+    },
+    suffixValueList: {
+      control: false,
+    },
+    alignDropRef: {
+      control: false,
+    },
+    dropContainerCssMixin: {
+      control: false,
+    },
+    skeleton: {
+      control: { type: 'boolean' },
     },
     themeBorderKind: {
       options: ALL_BORDER_RADIUS_VALUES,
