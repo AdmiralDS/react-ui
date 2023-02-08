@@ -112,15 +112,15 @@ export default {
   },
 } as ComponentMeta<typeof Toast>;
 
-const Temp1: ComponentStory<typeof Toast> = (args: ToastProps) => {
+const Template1 = (props: ToastProps) => {
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 
   return (
     <ThemeProvider theme={swapBorder}>
-      <ToastProvider autoDeleteTime={args.autoDeleteTime}>
+      <ToastProvider autoDeleteTime={props.autoDeleteTime}>
         <NotificationEmitter />
         <Toast style={{ top: 128, left: 64 }} />
       </ToastProvider>
@@ -128,26 +128,48 @@ const Temp1: ComponentStory<typeof Toast> = (args: ToastProps) => {
   );
 };
 
-const Temp2: ComponentStory<typeof Toast> = (args: ToastProps) => {
+const Temp1: ComponentStory<typeof Toast> = (args: ToastProps) => {
+  return <Template1 {...args} />;
+};
+
+const Template2 = (props: ToastProps) => {
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    return theme;
+  }
+
   return (
-    <>
-      <ToastProvider autoDeleteTime={args.autoDeleteTime}>
+    <ThemeProvider theme={swapBorder}>
+      <ToastProvider autoDeleteTime={props.autoDeleteTime}>
         <NotificationEmitter />
-        <Toast position={args.position} />
+        <Toast position={props.position} />
       </ToastProvider>
-    </>
+    </ThemeProvider>
+  );
+};
+
+const Temp2: ComponentStory<typeof Toast> = (args: ToastProps) => {
+  return <Template2 {...args} />;
+};
+
+const Template3 = (props: ToastProps) => {
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    return theme;
+  }
+
+  return (
+    <ThemeProvider theme={swapBorder}>
+      <ToastProvider autoDeleteTime={props.autoDeleteTime}>
+        <NotificationEmitter />
+        <Toast style={{ top: 128, left: 64, width: 'initial' }} />
+      </ToastProvider>
+    </ThemeProvider>
   );
 };
 
 const Temp3: ComponentStory<typeof Toast> = (args: ToastProps) => {
-  return (
-    <>
-      <ToastProvider autoDeleteTime={args.autoDeleteTime}>
-        <NotificationEmitter />
-        <Toast style={{ top: 128, left: 64, width: 'initial' }} />
-      </ToastProvider>
-    </>
-  );
+  return <Template3 {...args} />;
 };
 
 const NotificationEmitter = () => {
@@ -243,19 +265,24 @@ const MessageForm = () => {
   );
 };
 
-const Temp4: ComponentStory<typeof Toast> = (args: ToastProps) => {
+const Template4 = (props: ToastProps) => {
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
+
   return (
     <ThemeProvider theme={swapBorder}>
       <ToastProvider>
         <MessageForm />
-        <Toast position={args.position} />
+        <Toast position={props.position} />
       </ToastProvider>
     </ThemeProvider>
   );
+};
+
+const Temp4: ComponentStory<typeof Toast> = (args: ToastProps) => {
+  return <Template4 {...args} />;
 };
 
 export const ToastNotification = Temp1.bind({});

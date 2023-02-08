@@ -4,6 +4,7 @@ import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import type { Theme } from '#src/components/themes';
 import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
+import type { NotificationItemProps } from '#src/components/NotificationItem/index';
 import {
   NotificationItemButtonPanel,
   NotificationItemContent,
@@ -80,15 +81,15 @@ export default {
   },
 } as ComponentMeta<typeof NotificationItem>;
 
-const Template1: ComponentStory<typeof NotificationItem> = (args) => {
+const TemplateComponent1 = (props: NotificationItemProps) => {
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 
   return (
     <ThemeProvider theme={swapBorder}>
-      <NotificationItem {...args}>
+      <NotificationItem {...props}>
         <NotificationItemTitle>{title}</NotificationItemTitle>
         <NotificationItemContent>{body}</NotificationItemContent>
         <NotificationItemButtonPanel>
@@ -99,11 +100,20 @@ const Template1: ComponentStory<typeof NotificationItem> = (args) => {
   );
 };
 
-const Template2: ComponentStory<typeof NotificationItem> = (args) => {
+const Template1: ComponentStory<typeof NotificationItem> = (args) => {
+  return <TemplateComponent1 {...args} />;
+};
+
+const TemplateComponent2 = (props: NotificationItemProps) => {
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    return theme;
+  }
+
   return (
-    <>
+    <ThemeProvider theme={swapBorder}>
       <Layout>
-        <NotificationItem {...args} status="info">
+        <NotificationItem {...props} status="info">
           <NotificationItemTitle>{title}</NotificationItemTitle>
           <NotificationItemContent>{body}</NotificationItemContent>
           <NotificationItemButtonPanel>
@@ -112,7 +122,7 @@ const Template2: ComponentStory<typeof NotificationItem> = (args) => {
         </NotificationItem>
       </Layout>
       <Layout>
-        <NotificationItem {...args} status="warning">
+        <NotificationItem {...props} status="warning">
           <NotificationItemTitle>{title}</NotificationItemTitle>
           <NotificationItemContent>{body}</NotificationItemContent>
           <NotificationItemButtonPanel>
@@ -121,7 +131,7 @@ const Template2: ComponentStory<typeof NotificationItem> = (args) => {
         </NotificationItem>
       </Layout>
       <Layout>
-        <NotificationItem {...args} status="error">
+        <NotificationItem {...props} status="error">
           <NotificationItemTitle>{title}</NotificationItemTitle>
           <NotificationItemContent>{body}</NotificationItemContent>
           <NotificationItemButtonPanel>
@@ -130,7 +140,7 @@ const Template2: ComponentStory<typeof NotificationItem> = (args) => {
         </NotificationItem>
       </Layout>
       <Layout>
-        <NotificationItem {...args} status="success">
+        <NotificationItem {...props} status="success">
           <NotificationItemTitle>{title}</NotificationItemTitle>
           <NotificationItemContent>{body}</NotificationItemContent>
           <NotificationItemButtonPanel>
@@ -138,8 +148,12 @@ const Template2: ComponentStory<typeof NotificationItem> = (args) => {
           </NotificationItemButtonPanel>
         </NotificationItem>
       </Layout>
-    </>
+    </ThemeProvider>
   );
+};
+
+const Template2: ComponentStory<typeof NotificationItem> = (args) => {
+  return <TemplateComponent2 {...args} />;
 };
 
 export const StaticNotificationItemBase = Template1.bind({});
