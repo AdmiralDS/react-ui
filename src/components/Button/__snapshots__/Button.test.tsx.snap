@@ -64,7 +64,7 @@ exports[`Button should render component 1`] = `
   pointer-events: all;
   padding: 0;
   height: 56px;
-  padding: 0 30px;
+  padding: 0 31px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -311,7 +311,7 @@ exports[`Button should render component 1`] = `
 .c0[data-dimension='xl'] {
   padding: 0;
   height: 56px;
-  padding: 0 30px;
+  padding: 0 31px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -322,17 +322,17 @@ exports[`Button should render component 1`] = `
 
 .c0[data-dimension='l'] {
   height: 48px;
-  padding: 0 22px;
+  padding: 0 23px;
 }
 
 .c0[data-dimension='m'] {
   height: 40px;
-  padding: 0 18px;
+  padding: 0 19px;
 }
 
 .c0[data-dimension='s'] {
   height: 32px;
-  padding: 0 14px;
+  padding: 0 15px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -423,7 +423,7 @@ exports[`Button should render component with text 1`] = `
   pointer-events: all;
   padding: 0;
   height: 56px;
-  padding: 0 30px;
+  padding: 0 31px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -670,7 +670,7 @@ exports[`Button should render component with text 1`] = `
 .c0[data-dimension='xl'] {
   padding: 0;
   height: 56px;
-  padding: 0 30px;
+  padding: 0 31px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -681,17 +681,17 @@ exports[`Button should render component with text 1`] = `
 
 .c0[data-dimension='l'] {
   height: 48px;
-  padding: 0 22px;
+  padding: 0 23px;
 }
 
 .c0[data-dimension='m'] {
   height: 40px;
-  padding: 0 18px;
+  padding: 0 19px;
 }
 
 .c0[data-dimension='s'] {
   height: 32px;
-  padding: 0 14px;
+  padding: 0 15px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 500;

@@ -66,7 +66,7 @@ Object {
   pointer-events: none;
   padding: 0;
   height: 56px;
-  padding: 0 30px;
+  padding: 0 31px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -313,7 +313,7 @@ Object {
 .c1[data-dimension='xl'] {
   padding: 0;
   height: 56px;
-  padding: 0 30px;
+  padding: 0 31px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -324,17 +324,17 @@ Object {
 
 .c1[data-dimension='l'] {
   height: 48px;
-  padding: 0 22px;
+  padding: 0 23px;
 }
 
 .c1[data-dimension='m'] {
   height: 40px;
-  padding: 0 18px;
+  padding: 0 19px;
 }
 
 .c1[data-dimension='s'] {
   height: 32px;
-  padding: 0 14px;
+  padding: 0 15px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -838,7 +838,7 @@ Object {
   pointer-events: none;
   padding: 0;
   height: 56px;
-  padding: 0 30px;
+  padding: 0 31px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -1085,7 +1085,7 @@ Object {
 .c1[data-dimension='xl'] {
   padding: 0;
   height: 56px;
-  padding: 0 30px;
+  padding: 0 31px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -1096,17 +1096,17 @@ Object {
 
 .c1[data-dimension='l'] {
   height: 48px;
-  padding: 0 22px;
+  padding: 0 23px;
 }
 
 .c1[data-dimension='m'] {
   height: 40px;
-  padding: 0 18px;
+  padding: 0 19px;
 }
 
 .c1[data-dimension='s'] {
   height: 32px;
-  padding: 0 14px;
+  padding: 0 15px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -1665,7 +1665,7 @@ Object {
   pointer-events: all;
   padding: 0;
   height: 56px;
-  padding: 0 30px;
+  padding: 0 31px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -1912,7 +1912,7 @@ Object {
 .c1[data-dimension='xl'] {
   padding: 0;
   height: 56px;
-  padding: 0 30px;
+  padding: 0 31px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -1923,17 +1923,17 @@ Object {
 
 .c1[data-dimension='l'] {
   height: 48px;
-  padding: 0 22px;
+  padding: 0 23px;
 }
 
 .c1[data-dimension='m'] {
   height: 40px;
-  padding: 0 18px;
+  padding: 0 19px;
 }
 
 .c1[data-dimension='s'] {
   height: 32px;
-  padding: 0 14px;
+  padding: 0 15px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -2434,7 +2434,7 @@ Object {
   pointer-events: all;
   padding: 0;
   height: 56px;
-  padding: 0 30px;
+  padding: 0 31px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -2681,7 +2681,7 @@ Object {
 .c1[data-dimension='xl'] {
   padding: 0;
   height: 56px;
-  padding: 0 30px;
+  padding: 0 31px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -2692,17 +2692,17 @@ Object {
 
 .c1[data-dimension='l'] {
   height: 48px;
-  padding: 0 22px;
+  padding: 0 23px;
 }
 
 .c1[data-dimension='m'] {
   height: 40px;
-  padding: 0 18px;
+  padding: 0 19px;
 }
 
 .c1[data-dimension='s'] {
   height: 32px;
-  padding: 0 14px;
+  padding: 0 15px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -3258,7 +3258,7 @@ Object {
   pointer-events: all;
   padding: 0;
   height: 56px;
-  padding: 0 30px;
+  padding: 0 31px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -3505,7 +3505,7 @@ Object {
 .c1[data-dimension='xl'] {
   padding: 0;
   height: 56px;
-  padding: 0 30px;
+  padding: 0 31px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -3516,17 +3516,17 @@ Object {
 
 .c1[data-dimension='l'] {
   height: 48px;
-  padding: 0 22px;
+  padding: 0 23px;
 }
 
 .c1[data-dimension='m'] {
   height: 40px;
-  padding: 0 18px;
+  padding: 0 19px;
 }
 
 .c1[data-dimension='s'] {
   height: 32px;
-  padding: 0 14px;
+  padding: 0 15px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -4027,7 +4027,7 @@ Object {
   pointer-events: all;
   padding: 0;
   height: 56px;
-  padding: 0 30px;
+  padding: 0 31px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -4274,7 +4274,7 @@ Object {
 .c1[data-dimension='xl'] {
   padding: 0;
   height: 56px;
-  padding: 0 30px;
+  padding: 0 31px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -4285,17 +4285,17 @@ Object {
 
 .c1[data-dimension='l'] {
   height: 48px;
-  padding: 0 22px;
+  padding: 0 23px;
 }
 
 .c1[data-dimension='m'] {
   height: 40px;
-  padding: 0 18px;
+  padding: 0 19px;
 }
 
 .c1[data-dimension='s'] {
   height: 32px;
-  padding: 0 14px;
+  padding: 0 15px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 500;
