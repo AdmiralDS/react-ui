@@ -2,7 +2,7 @@ import * as React from 'react';
 import type { ForwardedRef, InputHTMLAttributes } from 'react';
 import { ReactComponent as CloseOutlineSvg } from '@admiral-ds/icons/build/service/CloseOutline.svg';
 import type { ComponentDimension, ExtraProps, InputStatus } from '#src/components/input/types';
-import { containerHeights, skeletonMixin } from '../Container';
+import { containerHeights, skeletonMixin } from '#src/components/input/Container';
 import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import styled, { css } from 'styled-components';
 import { typography } from '#src/components/Typography';
@@ -10,10 +10,12 @@ import { changeInputData } from '#src/components/common/dom/changeInputData';
 import { InputIconButton } from '#src/components/InputIconButton';
 import { refSetter } from '#src/components/common/utils/refSetter';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
-import type { ValueType } from './ValueType';
+import type { ValueType } from '#src/components/input/InputEx/ValueType';
 import type { RenderPropsType } from '#src/components/input/InputEx/SuffixSelect';
 import { SuffixSelect } from '#src/components/input/InputEx/SuffixSelect';
 import type { MenuItemProps } from '#src/components/Menu/MenuItem';
+import { Tooltip } from '#src/components/Tooltip';
+import { checkOverflow } from '#src/components/common/utils/checkOverflow';
 
 const iconSizeValue = (props: { dimension?: ComponentDimension }) => {
   switch (props.dimension) {
@@ -270,6 +272,9 @@ export interface InputExProps extends Omit<InputHTMLAttributes<HTMLInputElement>
 
   /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
   dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+
+  /** Отображение тултипа, по умолчанию true */
+  showTooltip?: boolean;
 }
 
 export const InputEx = React.forwardRef<HTMLInputElement, InputExProps>(
@@ -299,6 +304,7 @@ export const InputEx = React.forwardRef<HTMLInputElement, InputExProps>(
 
       skeleton = false,
       dropContainerCssMixin,
+      showTooltip = true,
       ...props
     },
     ref,
@@ -344,6 +350,36 @@ export const InputEx = React.forwardRef<HTMLInputElement, InputExProps>(
     const suffix = renderSuffix({ value: suffixValue, disabled: props.disabled, readOnly: props.readOnly });
 
     const inputRef = React.useRef<HTMLInputElement>(null);
+    const [overflowActive, setOverflowActive] = React.useState<boolean>(false);
+    const [tooltipVisible, setTooltipVisible] = React.useState<boolean>(false);
+
+    React.useEffect(() => {
+      if (checkOverflow(inputRef.current)) {
+        setOverflowActive(true);
+        return;
+      }
+      setOverflowActive(false);
+    }, [tooltipVisible, inputRef.current, setOverflowActive]);
+
+    React.useLayoutEffect(() => {
+      function show() {
+        if (document.activeElement !== inputRef.current) setTooltipVisible(true);
+      }
+      function hide() {
+        setTooltipVisible(false);
+      }
+      const wrapper = innerContainerRef.current;
+      if (wrapper) {
+        wrapper.addEventListener('mouseenter', show);
+        wrapper.addEventListener('mouseleave', hide);
+        wrapper.addEventListener('mousedown', hide);
+        return () => {
+          wrapper.removeEventListener('mouseenter', show);
+          wrapper.removeEventListener('mouseleave', hide);
+          wrapper.removeEventListener('mousedown', hide);
+        };
+      }
+    }, [setTooltipVisible, innerContainerRef.current, inputRef.current]);
 
     const iconArray = React.Children.toArray(icons);
 
@@ -365,38 +401,43 @@ export const InputEx = React.forwardRef<HTMLInputElement, InputExProps>(
     const iconCount = iconArray.length;
 
     return (
-      <Container
-        className={className}
-        style={style}
-        data-disabled={props.disabled ? true : undefined}
-        dimension={props.dimension}
-        ref={refSetter(innerContainerRef, containerRef)}
-        data-read-only={props.readOnly ? true : undefined}
-        data-status={status}
-        data-disable-copying={props.disableCopying ? true : undefined}
-        onMouseDown={props.disableCopying ? preventDefault : undefined}
-        skeleton={skeleton}
-      >
-        {!!prefix && (
-          <PrefixContainer dimension={props.dimension} disabled={props.disabled}>
-            {prefix}
-          </PrefixContainer>
-        )}
-        <Input ref={refSetter(ref, inputRef)} {...props} placeholder={placeholder} iconCount={iconCount} />
-        <BorderedDiv />
-        {iconCount > 0 && (
-          <IconPanel disabled={props.disabled} dimension={props.dimension}>
-            {iconArray}
-          </IconPanel>
-        )}
-        {!!suffix && (
-          <SuffixContainer dimension={props.dimension} disabled={props.disabled}>
-            {suffix}
-          </SuffixContainer>
-        )}
+      <>
+        <Container
+          className={className}
+          style={style}
+          data-disabled={props.disabled ? true : undefined}
+          dimension={props.dimension}
+          ref={refSetter(innerContainerRef, containerRef)}
+          data-read-only={props.readOnly ? true : undefined}
+          data-status={status}
+          data-disable-copying={props.disableCopying ? true : undefined}
+          onMouseDown={props.disableCopying ? preventDefault : undefined}
+          skeleton={skeleton}
+        >
+          {!!prefix && (
+            <PrefixContainer dimension={props.dimension} disabled={props.disabled}>
+              {prefix}
+            </PrefixContainer>
+          )}
+          <Input ref={refSetter(ref, inputRef)} {...props} placeholder={placeholder} iconCount={iconCount} />
+          <BorderedDiv />
+          {iconCount > 0 && (
+            <IconPanel disabled={props.disabled} dimension={props.dimension}>
+              {iconArray}
+            </IconPanel>
+          )}
+          {!!suffix && (
+            <SuffixContainer dimension={props.dimension} disabled={props.disabled}>
+              {suffix}
+            </SuffixContainer>
+          )}
 
-        {children}
-      </Container>
+          {children}
+        </Container>
+        {showTooltip && tooltipVisible && overflowActive && (
+          <Tooltip renderContent={() => inputRef?.current?.value || ''} targetRef={innerContainerRef} />
+        )}
+      </>
     );
   },
 );
