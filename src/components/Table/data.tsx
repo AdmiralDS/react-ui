@@ -33,14 +33,7 @@ export type RowData = {
   expanded?: boolean;
   hover?: boolean;
   expandedRowRender?: (row: RowData) => React.ReactNode;
-  overflowMenuRender?: (
-    row: RowData,
-    /** @deprecated use onVisibilityChange instead */
-    onMenuOpen?: () => void,
-    /** @deprecated use onVisibilityChange instead */
-    onMenuClose?: () => void,
-    onVisibilityChange?: (isVisible: boolean) => void,
-  ) => React.ReactNode;
+  overflowMenuRender?: (row: RowData, onVisibilityChange?: (isVisible: boolean) => void) => React.ReactNode;
   actionRender?: (row: any) => React.ReactNode;
   transfer_type: string;
   transfer_date: string;
@@ -810,14 +803,10 @@ export const columnListExtra: Column[] = [
 
 interface MenuProps {
   row: RowData;
-  /** @deprecated use onVisibilityChange instead */
-  onMenuOpen?: () => void;
-  /** @deprecated use onVisibilityChange instead */
-  onMenuClose?: () => void;
   onVisibilityChange?: (isVisible: boolean) => void;
 }
 
-const Menu: React.FC<MenuProps> = ({ row, onMenuOpen, onMenuClose, onVisibilityChange }) => {
+const Menu: React.FC<MenuProps> = ({ row, onVisibilityChange }) => {
   const items: Array<any> = [
     {
       id: '1',
@@ -876,12 +865,9 @@ export const rowListMenu: RowData[] = [
     transfer_amount: numberFormatter.format(500_000),
     currency: 'RUB',
     rate: 2.5,
-    overflowMenuRender: (
-      row: RowData,
-      onMenuOpen?: () => void,
-      onMenuClose?: () => void,
-      onVisibilityChange?: (isVisible: boolean) => void,
-    ) => <Menu row={row} onMenuOpen={onMenuOpen} onMenuClose={onMenuClose} onVisibilityChange={onVisibilityChange} />,
+    overflowMenuRender: (row: RowData, onVisibilityChange?: (isVisible: boolean) => void) => (
+      <Menu row={row} onVisibilityChange={onVisibilityChange} />
+    ),
   },
   {
     id: '0002',
@@ -890,12 +876,9 @@ export const rowListMenu: RowData[] = [
     transfer_amount: numberFormatter.format(32_500_000_000),
     currency: 'RUB',
     rate: 5.5,
-    overflowMenuRender: (
-      row: RowData,
-      onMenuOpen?: () => void,
-      onMenuClose?: () => void,
-      onVisibilityChange?: (isVisible: boolean) => void,
-    ) => <Menu row={row} onMenuOpen={onMenuOpen} onMenuClose={onMenuClose} onVisibilityChange={onVisibilityChange} />,
+    overflowMenuRender: (row: RowData, onVisibilityChange?: (isVisible: boolean) => void) => (
+      <Menu row={row} onVisibilityChange={onVisibilityChange} />
+    ),
   },
   {
     id: '0003',
