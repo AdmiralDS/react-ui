@@ -172,20 +172,12 @@ const Template: ComponentStory<typeof SuggestInput> = (props) => {
 
 const options = ['one', 'two', 'three'];
 const TemplateUncontrolled: ComponentStory<typeof SuggestInput> = (props) => {
-  return (
-    <ThemeProvider theme={LIGHT_THEME}>
-      <SuggestInput options={options} placeholder="numbers" dimension={props.dimension} />
-    </ThemeProvider>
-  );
+  return <SuggestInput options={options} placeholder="numbers" dimension={props.dimension} />;
 };
 
 const optionsNoMatch: string[] = [];
 const TemplateNoMatch: ComponentStory<typeof SuggestInput> = (props) => {
-  return (
-    <ThemeProvider theme={LIGHT_THEME}>
-      <SuggestInput options={optionsNoMatch} placeholder="numbers" dimension={props.dimension} />
-    </ThemeProvider>
-  );
+  return <SuggestInput options={optionsNoMatch} placeholder="numbers" dimension={props.dimension} />;
 };
 
 const TemplateFilter: ComponentStory<typeof SuggestInput> = (props) => {
@@ -218,20 +210,18 @@ const TemplateFilter: ComponentStory<typeof SuggestInput> = (props) => {
   }, [localValue]);
 
   return (
-    <ThemeProvider theme={LIGHT_THEME}>
-      <SuggestInput
-        className="suggest"
-        {...cleanProps}
-        value={localValue}
-        onInput={handleChange}
-        onOptionSelect={handleSelectOption}
-        options={options}
-        onSearchButtonClick={() => {
-          console.log('search button click');
-        }}
-        displayClearIcon
-      />
-    </ThemeProvider>
+    <SuggestInput
+      className="suggest"
+      {...cleanProps}
+      value={localValue}
+      onInput={handleChange}
+      onOptionSelect={handleSelectOption}
+      options={options}
+      onSearchButtonClick={() => {
+        console.log('search button click');
+      }}
+      displayClearIcon
+    />
   );
 };
 

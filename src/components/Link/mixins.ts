@@ -1,9 +1,9 @@
 import { css } from 'styled-components';
 import type { AppearanceLink, Dimension } from '#src/components/Link/LinkComponent';
-import { TYPOGRAPHY } from '#src/components/Typography';
+import { typography } from '#src/components/Typography';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 
-export const styleDisabledMixin = css<{ disabled: boolean }>`
+export const styleDisabledMixin = css`
   color: ${({ theme }) => theme.color['Neutral/Neutral 30']};
   & *[fill^='#'] {
     fill: ${({ theme }) => theme.color['Neutral/Neutral 30']};
@@ -11,7 +11,7 @@ export const styleDisabledMixin = css<{ disabled: boolean }>`
   user-select: none;
 `;
 
-export const styleColorMixin = css<{ appearance: AppearanceLink }>`
+export const styleColorMixin = css<{ appearance?: AppearanceLink }>`
   color: ${({ theme, appearance }) =>
     appearance === 'secondary' ? theme.color['Neutral/Neutral 90'] : theme.color['Primary/Primary 60 Main']};
   & *[fill^='#'] {
@@ -49,9 +49,6 @@ export const styleMixin = css`
   }
 `;
 
-export const styleTextMixin = css<{ dimension: Dimension }>`
-  font-size: ${({ dimension }) => (dimension === 'm' ? 16 : 14)}px;
-  font-weight: normal;
-  line-height: ${({ dimension }) => (dimension === 'm' ? 24 : 20)}px;
-  font-family: ${TYPOGRAPHY.fontFamily};
+export const styleTextMixin = css<{ dimension?: Dimension }>`
+  ${({ dimension }) => (dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
 `;

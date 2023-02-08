@@ -139,6 +139,9 @@ export const TreeNode = ({
   onClickItem,
   onToggleExpand,
   children,
+  className,
+  style,
+  ...props
 }: TreeNodeProps) => {
   const Icon: React.FunctionComponent<React.SVGProps<SVGSVGElement>> | null = icon || null;
   const [mouseOnChevron, setMouseOnChevron] = useState<boolean>(false);
@@ -167,6 +170,8 @@ export const TreeNode = ({
 
   return (
     <RowWrapper
+      className={className}
+      style={style}
       dimension={dimension}
       level={level}
       onMouseMove={handleMouseMove}
@@ -189,6 +194,7 @@ export const TreeNode = ({
       )}
       {checkboxVisible && (
         <StyledCheckbox
+          {...props}
           hovered={!mouseOnChevron && hovered}
           dimension={dimension}
           disabled={disabled}

@@ -22,10 +22,12 @@ Object {
   position: relative;
   border-radius: 4px;
   color: #0062FF;
-  font-size: 16px;
-  font-weight: normal;
-  line-height: 24px;
   font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  font-feature-settings: 'tnum' on,'lnum' on;
 }
 
 .c5:hover {
@@ -290,10 +292,12 @@ Object {
   position: relative;
   border-radius: 4px;
   color: #0062FF;
-  font-size: 16px;
-  font-weight: normal;
-  line-height: 24px;
   font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  font-feature-settings: 'tnum' on,'lnum' on;
 }
 
 .c5:hover {
