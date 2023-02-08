@@ -2,8 +2,6 @@ import * as React from 'react';
 import styled, { css, keyframes } from 'styled-components';
 import { useToast } from '#src/components/Toast/useToast';
 import type { PositionToasts } from '#src/components/Toast/ToastProvider';
-import type { IdentifyToast } from '#src/components/Toast/type';
-import { Notification } from '#src/components/Notification';
 
 const Container = styled.div<{ position: PositionToasts }>`
   position: fixed;
@@ -67,7 +65,7 @@ export const Toast = ({ position = 'top-right', ...props }: ToastTransitionProps
         renderToastList.map(({ renderToast, id }) => {
           return (
             <Transition key={id} position={position}>
-              {renderToast()}
+              {renderToast(id)}
             </Transition>
           );
         })}

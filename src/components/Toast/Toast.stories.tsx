@@ -3,9 +3,9 @@ import styled, { ThemeProvider } from 'styled-components';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import { Button } from '#src/components/Button';
-import type { ToastProps } from '#src/components/Toast';
+import type { ToastProps, RenderToastProviderItem } from '#src/components/Toast';
 import { Toast, ToastProvider, useToast } from '#src/components/Toast';
-import type { IdentifyToast } from '#src/components/Toast/type';
+import type { IdentifyToast, ID } from '#src/components/Toast/type';
 import type { Theme } from '#src/components/themes';
 import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
 import { TextInput } from '#src/components/input';
@@ -16,6 +16,7 @@ import {
   NotificationItemContent,
   NotificationItemTitle,
 } from '#src/components/NotificationItem';
+import { uid } from '#src/components/common/uid';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -191,17 +192,18 @@ const handleTextButtonClick = () => {
 };
 
 const MessageForm = () => {
-  const [toastIdStack, setToastIdStack] = React.useState<Array<string>>([]);
+  const [toastIdStack, setToastIdStack] = React.useState<Array<RenderToastProviderItem>>([]);
   const [inputValue, setInputValue] = React.useState('Notification message');
 
-  const { addRenderToast, removeById } = useToast();
+  const { addRenderToast, removeRenderToast } = useToast();
 
   const onClickHandlerAdd = () => {
-    const id = addRenderToast(() => {
+    const id = uid();
+    const renderFunction = (id: ID) => {
       const handleCloseToast = () => {
-        removeById(id);
+        removeRenderToast({ id, renderToast: renderFunction });
         console.log('Toast is closed');
-        setToastIdStack((prevToastIdStack) => prevToastIdStack.filter((toastID) => toastID !== id));
+        setToastIdStack((prevToastIdStack) => prevToastIdStack.filter((toast) => toast.id !== id));
       };
       return (
         <StyledNotificationItem isClosable={true} displayStatusIcon={true} onClose={handleCloseToast}>
@@ -213,15 +215,16 @@ const MessageForm = () => {
           </NotificationItemButtonPanel>
         </StyledNotificationItem>
       );
-    });
-    setToastIdStack((prev) => [...prev, id]);
+    };
+    addRenderToast({ id, renderToast: renderFunction });
+    setToastIdStack((prev) => [...prev, { id, renderToast: renderFunction }]);
   };
   const onClickHandlerRemove = () => {
     const newToastIdStack = [...toastIdStack];
-    const toastId = newToastIdStack.shift();
+    const removeToast = newToastIdStack.shift();
     setToastIdStack(newToastIdStack);
-    if (toastId) {
-      removeById(toastId);
+    if (removeToast) {
+      removeRenderToast(removeToast);
     }
   };
 
@@ -241,13 +244,17 @@ const MessageForm = () => {
 };
 
 const Temp4: ComponentStory<typeof Toast> = (args: ToastProps) => {
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
+    return theme;
+  }
   return (
-    <>
+    <ThemeProvider theme={swapBorder}>
       <ToastProvider>
         <MessageForm />
         <Toast position={args.position} />
       </ToastProvider>
-    </>
+    </ThemeProvider>
   );
 };
 

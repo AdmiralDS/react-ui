@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 import * as React from 'react';
-import type { IdentifyToast } from '#src/components/Toast/type';
+import type { IdentifyToast, ID } from '#src/components/Toast/type';
 import { uid } from '#src/components/common/uid';
 import styled from 'styled-components';
 import {
@@ -12,7 +12,6 @@ import {
 import { Link } from '#src/components/Link';
 import { typography } from '#src/components/Typography';
 import type { NotificationProps } from '#src/components/Notification';
-import type { ID } from '#src/components/Toast/type';
 
 const StyledNotificationItem = styled(NotificationItem)`
   ${(props) => props.theme.shadow['Shadow 08']}
@@ -57,18 +56,22 @@ export interface ToastProps {
 }
 
 export interface RenderToastProviderItem {
+  /** @deprecated */
   id: ID;
   /** Render функция всплывающего уведомления */
-  renderToast: () => React.ReactNode;
+  renderToast: (id: ID) => React.ReactNode;
 }
 
 export interface IdentifyToastProviderItem extends Omit<NotificationProps, 'id'>, IdentifyField {}
 
 export interface IContextProps extends ToastProps {
   addToast: (newToast: IdentifyToast) => string;
-  addRenderToast: (renderToast: () => React.ReactNode) => string;
+  addRenderToast: (toast: RenderToastProviderItem) => void;
   removeToast: (removeToast: IdentifyToast) => void;
-  removeById: (toastId: string) => void;
+  removeById: (toastId: ID) => void;
+  findRenderToastById: (toastId: ID) => RenderToastProviderItem | undefined;
+  removeRenderToast: (toast: RenderToastProviderItem) => void;
+  /** @deprecated use renderToastList instead */
   toasts: IdentifyToast[];
   renderToastList: RenderToastProviderItem[];
 }
@@ -91,16 +94,7 @@ export const ToastProvider = ({ autoDeleteTime, ...props }: ToastProps) => {
   const [toasts, setToast] = React.useState<IdentifyToastProviderItem[]>([]);
   const [renderToastList, setRenderToastList] = React.useState<RenderToastProviderItem[]>([]);
 
-  const removeToast = React.useCallback((removeToast: IdentifyToast) => {
-    setToast((prevToasts) => prevToasts.filter(({ id }) => id !== removeToast.id));
-    setRenderToastList((prevToasts) => prevToasts.filter(({ id }) => id !== removeToast.id));
-  }, []);
-
-  const removeById = React.useCallback((toastId: string) => {
-    setToast((prevToasts) => prevToasts.filter(({ id }) => id !== toastId));
-    setRenderToastList((prevToasts) => prevToasts.filter(({ id }) => id !== toastId));
-  }, []);
-
+  //--------------model IdentifyToast
   const addToast = React.useCallback((toast: IdentifyToast) => {
     const id = uid();
     const newToast = { ...toast, id };
@@ -117,12 +111,25 @@ export const ToastProvider = ({ autoDeleteTime, ...props }: ToastProps) => {
     setRenderToastList((prevToasts) => makeToastList(prevToasts, newRenderToast));
     return id;
   }, []);
+  const removeToast = React.useCallback((removeToast: IdentifyToast) => {
+    setToast((prevToasts) => prevToasts.filter(({ id }) => id !== removeToast.id));
+    setRenderToastList((prevToasts) => prevToasts.filter(({ id }) => id !== removeToast.id));
+  }, []);
 
-  const addRenderToast = React.useCallback((renderToast: () => React.ReactNode) => {
-    const id = uid();
-    const newRenderToast = { id, renderToast };
-    setRenderToastList((prevToasts) => makeToastList(prevToasts, newRenderToast));
-    return id;
+  const removeById = React.useCallback((toastId: ID) => {
+    setToast((prevToasts) => prevToasts.filter(({ id }) => id !== toastId));
+    setRenderToastList((prevToasts) => prevToasts.filter(({ id }) => id !== toastId));
+  }, []);
+
+  //--------------model RenderToastProviderItem
+  const addRenderToast = React.useCallback((renderToastItem: RenderToastProviderItem) => {
+    setRenderToastList((prevToasts) => makeToastList(prevToasts, renderToastItem));
+  }, []);
+  const findRenderToastById = (toastId: ID) => {
+    return renderToastList.find((item) => item.id === toastId);
+  };
+  const removeRenderToast = React.useCallback((removeToast: RenderToastProviderItem) => {
+    setRenderToastList((prevToasts) => prevToasts.filter((toast) => toast.renderToast !== removeToast.renderToast));
   }, []);
 
   React.useEffect(() => {
@@ -136,8 +143,26 @@ export const ToastProvider = ({ autoDeleteTime, ...props }: ToastProps) => {
   }, [toasts]);
 
   const providerValue = React.useMemo(
-    () => ({ addToast, addRenderToast, removeToast, removeById, toasts, renderToastList }),
-    [addToast, addRenderToast, removeToast, removeById, toasts, renderToastList],
+    () => ({
+      addToast,
+      removeToast,
+      removeById,
+      addRenderToast,
+      findRenderToastById,
+      removeRenderToast,
+      toasts,
+      renderToastList,
+    }),
+    [
+      addToast,
+      removeToast,
+      removeById,
+      addRenderToast,
+      findRenderToastById,
+      removeRenderToast,
+      toasts,
+      renderToastList,
+    ],
   );
 
   return <ToastContext.Provider value={providerValue} children={props.children} />;
