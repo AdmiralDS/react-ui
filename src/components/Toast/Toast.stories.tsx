@@ -17,6 +17,9 @@ import {
   NotificationItemTitle,
 } from '#src/components/NotificationItem';
 import { uid } from '#src/components/common/uid';
+import type { NotificationStatus } from '#src/components/Notification';
+import { mediumGroupBorderRadius } from '#src/components/themes';
+import { NotificationItemWithProgress } from '#src/components/NotificationItem/NotificationItemWithProgress';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -285,6 +288,103 @@ const Temp4: ComponentStory<typeof Toast> = (args: ToastProps) => {
   return <Template4 {...args} />;
 };
 
+const Progress = styled.div.attrs((props: { percent: number }) => ({
+  style: { width: `${props.percent}%` },
+}))<{ percent: number; status?: NotificationStatus; duration: number }>`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background: ${({ theme, status }) => {
+    if (status === 'warning') return theme.color['Warning/Warning 50 Main'];
+    if (status === 'error') return theme.color['Error/Error 60 Main'];
+    if (status === 'success') return theme.color['Success/Success 50 Main'];
+    return theme.color['Primary/Primary 60 Main'];
+  }};
+  height: 4px;
+  transition: ${({ duration }) => `all ${duration}ms linear`};
+`;
+
+const Wrapper = styled.div`
+  position: relative;
+  overflow: hidden;
+  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
+`;
+
+const MessageForm2 = () => {
+  const [toastIdStack, setToastIdStack] = React.useState<Array<RenderToastProviderItem>>([]);
+  const [inputValue, setInputValue] = React.useState('Notification message');
+
+  const { addRenderToast, removeRenderToast, autoDeleteTime } = useToast();
+
+  const onClickHandlerAdd = () => {
+    const id = uid();
+    const renderFunction = (id: ID) => {
+      const handleCloseToast = () => {
+        removeRenderToast({ id, renderToast: renderFunction });
+        console.log('Toast is closed');
+        setToastIdStack((prevToastIdStack) => prevToastIdStack.filter((toast) => toast.id !== id));
+      };
+
+      return (
+        <NotificationItemWithProgress autoDeleteTime={autoDeleteTime} removeRenderToast={handleCloseToast}>
+          <StyledNotificationItem isClosable={true} displayStatusIcon={true} onClose={handleCloseToast}>
+            <NotificationItemTitle>Title</NotificationItemTitle>
+            <NotificationItemContent>{inputValue}</NotificationItemContent>
+            <NotificationItemButtonPanel>
+              <TextButton dimension="s" text="TextButton1" onClick={handleTextButtonClick} />
+              <TextButton dimension="s" text="TextButton2" onClick={handleTextButtonClick} />
+            </NotificationItemButtonPanel>
+          </StyledNotificationItem>
+        </NotificationItemWithProgress>
+      );
+    };
+    addRenderToast({ id, renderToast: renderFunction });
+    setToastIdStack((prev) => [...prev, { id, renderToast: renderFunction }]);
+  };
+  const onClickHandlerRemove = () => {
+    const newToastIdStack = [...toastIdStack];
+    const removeToast = newToastIdStack.shift();
+    setToastIdStack(newToastIdStack);
+    if (removeToast) {
+      removeRenderToast(removeToast);
+    }
+  };
+
+  return (
+    <>
+      <TextInput value={inputValue} onChange={(e) => setInputValue(e.target.value)} />
+      <Separator />
+      <div style={{ display: 'flex', alignItems: 'flex-start' }}>
+        <Button onClick={onClickHandlerAdd}>Добавить сообщение</Button>
+        <div style={{ width: 20 }} />
+        <Button disabled={toastIdStack.length === 0} onClick={onClickHandlerRemove}>
+          Удалить первое сообщение
+        </Button>
+      </div>
+    </>
+  );
+};
+
+const Template5 = (props: ToastProps) => {
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    return theme;
+  }
+
+  return (
+    <ThemeProvider theme={swapBorder}>
+      <ToastProvider autoDeleteTime={3000}>
+        <MessageForm2 />
+        <Toast position={props.position} />
+      </ToastProvider>
+    </ThemeProvider>
+  );
+};
+
+const Temp5: ComponentStory<typeof Toast> = (args: ToastProps) => {
+  return <Template5 {...args} />;
+};
+
 export const ToastNotification = Temp1.bind({});
 ToastNotification.storyName = 'Нотификация настройка места всплытия через стили.';
 
@@ -295,4 +395,7 @@ export const ToastLineNotification = Temp3.bind({});
 ToastLineNotification.storyName = 'Всплывающая нотификация. Line Notification.';
 
 export const ToastCustomComponent = Temp4.bind({});
-ToastLineNotification.storyName = 'Всплывающая нотификация. Custom component.';
+ToastCustomComponent.storyName = 'Всплывающая нотификация. Custom component.';
+
+export const ToastProgressComponent = Temp5.bind({});
+ToastProgressComponent.storyName = 'Всплывающая нотификация. Custom component with Progress.';

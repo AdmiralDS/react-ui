@@ -56,6 +56,7 @@ export interface ToastProps {
 }
 
 export interface RenderToastProviderItem {
+  // TODO: описать подробнее
   /** @deprecated */
   id: ID;
   /** Render функция всплывающего уведомления */
@@ -66,11 +67,15 @@ export interface IdentifyToastProviderItem extends Omit<NotificationProps, 'id'>
 
 export interface IContextProps extends ToastProps {
   addToast: (newToast: IdentifyToast) => string;
-  addRenderToast: (toast: RenderToastProviderItem) => void;
   removeToast: (removeToast: IdentifyToast) => void;
   removeById: (toastId: ID) => void;
+  // TODO: описать подробнее
+  addRenderToast: (toast: RenderToastProviderItem) => void;
+  // TODO: описать подробнее
   findRenderToastById: (toastId: ID) => RenderToastProviderItem | undefined;
+  // TODO: описать подробнее
   removeRenderToast: (toast: RenderToastProviderItem) => void;
+  // TODO: описать подробнее
   /** @deprecated use renderToastList instead */
   toasts: IdentifyToast[];
   renderToastList: RenderToastProviderItem[];
@@ -152,6 +157,7 @@ export const ToastProvider = ({ autoDeleteTime, ...props }: ToastProps) => {
       removeRenderToast,
       toasts,
       renderToastList,
+      autoDeleteTime,
     }),
     [
       addToast,
@@ -162,6 +168,7 @@ export const ToastProvider = ({ autoDeleteTime, ...props }: ToastProps) => {
       removeRenderToast,
       toasts,
       renderToastList,
+      autoDeleteTime,
     ],
   );
 

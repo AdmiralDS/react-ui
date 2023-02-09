@@ -6,7 +6,6 @@ import type { Theme } from '#src/components/themes';
 import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
 import { Button } from '#src/components/Button';
 import { TextInput } from '#src/components/input';
-import type { NotificationStatus } from '#src/components/Notification';
 import { Notification } from '#src/components/Notification';
 import { ToastContainer2 } from '#src/components/Toast2/ToastContainer2';
 import { ToastProvider2, useToast2 } from '#src/components/Toast2/ToastProvider2';
