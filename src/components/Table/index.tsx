@@ -38,10 +38,11 @@ export type Dimension = 'xl' | 'l' | 'm' | 's';
 type FilterProps = {
   /** Функция закрытия меню фильтра */
   closeMenu: () => void;
-  /** Функция установки состояния фильтра (активный/неактивный).
+  /** @deprecated - взамен используйте параметр isFilterActive, задаваемый для столбца
+   * Функция установки состояния фильтра (активный/неактивный).
    * Необходимо для окрашивания иконки фильтра в синий цвет при активном фильтре и в серый при неактивном фильтре.
    */
-  setFilterActive: (isActive: boolean) => void;
+  setFilterActive?: (isActive: boolean) => void;
 };
 
 export type Column = {
@@ -70,6 +71,10 @@ export type Column = {
   sticky?: boolean;
   /** Отключение возможности ресайза колонки */
   disableResize?: boolean;
+  /** Состояние фильтра.
+   * Необходимо для окрашивания иконки фильтра в синий цвет при активном фильтре и в серый при неактивном фильтре.
+   */
+  isFilterActive?: boolean;
   /** Функция отрисовки содержимого фильтра (выпадающего меню фильтра). Если её не передать, значок фильтра отображаться не будет */
   renderFilter?: (obj: FilterProps, column: Column) => React.ReactNode;
   /** Функция отрисовки иконки фильтра. По умолчанию в качестве иконки фильтра применяется OverflowIcon (троеточие) */
@@ -109,8 +114,7 @@ export interface TableRow extends Record<RowId, React.ReactNode> {
   /** Функция рендера содержимого раскрытой части строки (детализации строки) */
   expandedRowRender?: (row: any) => React.ReactNode;
   /** Функция рендера OverflowMenu для строки.
-   * Входные параметры: сама строка, колбеки onMenuOpen/onMenuClose (устаревшее api, впоследствии будет удалено) и onVisibilityChange (актуальное api).
-   * Рекомендуется использовать колбек onVisibilityChange вместо onMenuOpen/onMenuClose.
+   * Входные параметры: сама строка, колбек onVisibilityChange.
    * Колбек необходимо вызывать при открытии/закрытии меню для того, чтобы таблица могла управлять видимостью OverflowMenu.
    * OverflowMenu отображается при ховере на строку или при открытом меню
    * и располагается по правому краю строки в видимой области таблицы.
@@ -119,14 +123,7 @@ export interface TableRow extends Record<RowId, React.ReactNode> {
    * Для таблицы с dimension='s' или dimension='m' используется OverflowMenu c dimension='m'.
    * Для таблицы с dimension='l' или dimension='xl' используется OverflowMenu c dimension='l'.
    */
-  overflowMenuRender?: (
-    row: any,
-    /** @deprecated use onVisibilityChange instead */
-    onMenuOpen?: () => void,
-    /** @deprecated use onVisibilityChange instead */
-    onMenuClose?: () => void,
-    onVisibilityChange?: (isVisible: boolean) => void,
-  ) => React.ReactNode;
+  overflowMenuRender?: (row: any, onVisibilityChange?: (isVisible: boolean) => void) => React.ReactNode;
   /** Функция рендера одиночного действия над строкой.
    * Одиночное действие отображается в виде иконки при ховере на строку
    * и располагается по правому краю строки в видимой области таблицы.
