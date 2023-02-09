@@ -2,7 +2,7 @@ import * as React from 'react';
 import type { CustomInputHandler, InputData } from '#src/components/common/dom/changeInputData';
 import { changeInputData, isInputDataDifferent } from '#src/components/common/dom/changeInputData';
 import { refSetter } from '#src/components/common/utils/refSetter';
-import { HeightLimitedContainer as Container } from '../Container';
+import { HeightLimitedContainer as Container } from '#src/components/input/Container';
 import type { ComponentDimension, ExtraProps, InputStatus } from '#src/components/input/types';
 import { typography } from '#src/components/Typography';
 import { ReactComponent as CloseOutlineSvg } from '@admiral-ds/icons/build/service/CloseOutline.svg';
