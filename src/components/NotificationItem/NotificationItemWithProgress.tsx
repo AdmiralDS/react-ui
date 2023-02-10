@@ -28,7 +28,7 @@ const Wrapper = styled.div`
 
 export interface NotificationItemWithProgressProps {
   status?: NotificationItemStatus;
-  removeRenderToast: () => void;
+  onRemoveNotification: () => void;
   autoDeleteTime?: number;
   progressStep?: number;
 }
@@ -36,7 +36,7 @@ export interface NotificationItemWithProgressProps {
 export const NotificationItemWithProgress = ({
   children,
   status,
-  removeRenderToast,
+  onRemoveNotification,
   autoDeleteTime,
   progressStep = 1,
 }: React.PropsWithChildren<NotificationItemWithProgressProps>) => {
@@ -47,13 +47,11 @@ export const NotificationItemWithProgress = ({
   React.useEffect(() => {
     if (!autoDeleteTime) return;
 
-    let timerId: NodeJS.Timeout;
-
     if (progress === 0) {
-      removeRenderToast();
-    } else {
-      timerId = setTimeout(() => setProgress((prev) => prev - 1), delta);
+      onRemoveNotification();
+      return;
     }
+    const timerId = setTimeout(() => setProgress((prev) => prev - 1), delta);
 
     return () => {
       clearTimeout(timerId);

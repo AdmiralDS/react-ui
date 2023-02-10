@@ -326,7 +326,7 @@ const MessageForm2 = () => {
       };
 
       return (
-        <NotificationItemWithProgress autoDeleteTime={autoDeleteTime} removeRenderToast={handleCloseToast}>
+        <NotificationItemWithProgress autoDeleteTime={autoDeleteTime} onRemoveNotification={handleCloseToast}>
           <StyledNotificationItem isClosable={true} displayStatusIcon={true} onClose={handleCloseToast}>
             <NotificationItemTitle>Title</NotificationItemTitle>
             <NotificationItemContent>{inputValue}</NotificationItemContent>

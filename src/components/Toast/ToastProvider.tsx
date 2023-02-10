@@ -12,6 +12,7 @@ import {
 import { Link } from '#src/components/Link';
 import { typography } from '#src/components/Typography';
 import type { NotificationProps } from '#src/components/Notification';
+import { NotificationItemWithAutoDelete } from '#src/components/NotificationItem/NotificationItemWithAutoDelete';
 
 const StyledNotificationItem = styled(NotificationItem)`
   ${(props) => props.theme.shadow['Shadow 08']}
@@ -66,8 +67,11 @@ export interface RenderToastProviderItem {
 export interface IdentifyToastProviderItem extends Omit<NotificationProps, 'id'>, IdentifyField {}
 
 export interface IContextProps extends ToastProps {
+  /** @deprecated use renderToastList instead */
   addToast: (newToast: IdentifyToast) => string;
+  /** @deprecated use renderToastList instead */
   removeToast: (removeToast: IdentifyToast) => void;
+  /** @deprecated use renderToastList instead */
   removeById: (toastId: ID) => void;
   // TODO: описать подробнее
   addRenderToast: (toast: RenderToastProviderItem) => void;
@@ -107,10 +111,21 @@ export const ToastProvider = ({ autoDeleteTime, ...props }: ToastProps) => {
 
     const renderDefaultNotificationItem = () => {
       const handleOnClose = () => {
-        removeById(id);
+        removeRenderToast({ id, renderToast: renderDefaultNotificationItem });
       };
 
-      return <DefaultNotificationItem {...toast} onClose={toast.onClose || handleOnClose} />;
+      const renderContent = () => {
+        if (autoDeleteTime) {
+          return (
+            <NotificationItemWithAutoDelete onRemoveNotification={handleOnClose} autoDeleteTime={autoDeleteTime}>
+              <DefaultNotificationItem {...toast} onClose={toast.onClose || handleOnClose} />
+            </NotificationItemWithAutoDelete>
+          );
+        }
+        return <DefaultNotificationItem {...toast} onClose={toast.onClose || handleOnClose} />;
+      };
+
+      return renderContent();
     };
     const newRenderToast = { id: id, renderToast: renderDefaultNotificationItem };
     setRenderToastList((prevToasts) => makeToastList(prevToasts, newRenderToast));
@@ -136,16 +151,6 @@ export const ToastProvider = ({ autoDeleteTime, ...props }: ToastProps) => {
   const removeRenderToast = React.useCallback((removeToast: RenderToastProviderItem) => {
     setRenderToastList((prevToasts) => prevToasts.filter((toast) => toast.renderToast !== removeToast.renderToast));
   }, []);
-
-  React.useEffect(() => {
-    if (!autoDeleteTime) return setToast(toasts);
-    const interval = setInterval(() => {
-      if (toasts.length) {
-        removeToast(toasts[toasts?.length - 1]);
-      }
-    }, autoDeleteTime);
-    return () => clearInterval(interval);
-  }, [toasts]);
 
   const providerValue = React.useMemo(
     () => ({
