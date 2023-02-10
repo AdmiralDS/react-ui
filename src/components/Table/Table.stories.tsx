@@ -335,8 +335,10 @@ const Template4: ComponentStory<typeof Table> = (args) => {
   const [selectedDate, setSelectedDate] = React.useState<string>('');
   const [rows, setRows] = React.useState([...args.rowList]);
   const [columns, setCols] = React.useState([...args.columnList]);
+  const [numFilterActive, setNumFilterActive] = React.useState(false);
+  const [dateFilterActive, setDateFilterActive] = React.useState(false);
 
-  const renderNumFilter = ({ closeMenu, setFilterActive }: any, column: any) => (
+  const renderNumFilter = ({ closeMenu }: any, column: any) => (
     <Wrapper>
       <FieldSet
         legend="Варианты фильтрации:"
@@ -356,7 +358,7 @@ const Template4: ComponentStory<typeof Table> = (args) => {
           dimension="m"
           onClick={() => {
             closeMenu();
-            setFilterActive(true);
+            setNumFilterActive(true);
             if (selected === '1') {
               const newRows = args.rowList.filter(
                 (row) => Number((row[column.name] as string).replace(/\D/g, '')) > 1000000000,
@@ -376,7 +378,8 @@ const Template4: ComponentStory<typeof Table> = (args) => {
           dimension="m"
           onClick={() => {
             closeMenu();
-            setFilterActive(false);
+            setNumFilterActive(false);
+            setSelected('');
             setRows([...args.rowList]);
           }}
         >
@@ -386,7 +389,7 @@ const Template4: ComponentStory<typeof Table> = (args) => {
     </Wrapper>
   );
 
-  const renderDateFilter = ({ closeMenu, setFilterActive }: any, column: any) => (
+  const renderDateFilter = ({ closeMenu }: any, column: any) => (
     <Wrapper>
       <DateField
         label="Выберите дату:"
@@ -400,7 +403,7 @@ const Template4: ComponentStory<typeof Table> = (args) => {
           dimension="m"
           onClick={() => {
             closeMenu();
-            setFilterActive(true);
+            setDateFilterActive(true);
             const newRows = args.rowList.filter((row) => row[column.name] === selectedDate);
             setRows(newRows);
           }}
@@ -411,7 +414,7 @@ const Template4: ComponentStory<typeof Table> = (args) => {
           dimension="m"
           onClick={() => {
             closeMenu();
-            setFilterActive(false);
+            setDateFilterActive(false);
             setSelectedDate('');
             setRows([...args.rowList]);
           }}
@@ -445,6 +448,7 @@ const Template4: ComponentStory<typeof Table> = (args) => {
         if (index === 1) {
           return {
             ...col,
+            isFilterActive: dateFilterActive,
             renderFilter: renderDateFilter,
             onFilterMenuClickOutside,
           };
@@ -452,6 +456,7 @@ const Template4: ComponentStory<typeof Table> = (args) => {
         if (index === 2) {
           return {
             ...col,
+            isFilterActive: numFilterActive,
             renderFilter: renderNumFilter,
             onFilterMenuClose: () => console.log('filter menu close'),
             onFilterMenuOpen: () => console.log('filter menu open'),
@@ -466,7 +471,7 @@ const Template4: ComponentStory<typeof Table> = (args) => {
           };
         } else return col;
       }),
-    [columns, selected, selectedDate],
+    [columns, selected, selectedDate, numFilterActive, dateFilterActive],
   );
 
   return (
@@ -720,7 +725,9 @@ Filter.parameters = {
       меню фильтра. Данная функция имеет в качестве входных параметров объект столбца и объект с двумя 
       свойствами:\n\n 1) closeMenu - колбек, при вызове которого происходит закрытие меню 
       фильтра;\n\n2) setFilterActive - колбек, который устанавливает фильтр в активное/неактивное 
-      состояние. В неактивном состоянии иконка фильтра окрашена в серый цвет, 
+      состояние. Колбек setFilterActive - это устаревшее api, вместо него рекомендуется 
+      использовать параметр столбца isFilterActive, который также устанавливает фильтр в активное/неактивное 
+      состояние.В неактивном состоянии иконка фильтра окрашена в серый цвет, 
       при активном (включенном фильтре) иконка фильтра окрашивается в синий цвет.\n\nМеню 
       фильтра является произвольным и полностью контролируется пользователем. Закрытие меню и
       установка фильтра в активное/неактивное состояние производится пользователем внутри функции 
@@ -856,8 +863,7 @@ RowOverflowMenu.parameters = {
       под иконкой меню добавляется квадратная подложка белого цвета. В примере ниже Overflow Menu 
       задано для первых двух строк.\n\nДля того чтобы задать для строки OverflowMenu необходимо 
       для строки прописать функцию overflowMenuRender. Входные параметры функции: сама 
-      строка, колбеки onMenuOpen/onMenuClose (устаревшее api, впоследствии будет удалено) и onVisibilityChange (актуальное api).
-      Рекомендуется использовать колбек onVisibilityChange вместо onMenuOpen/onMenuClose. Колбек необходимо вызывать 
+      строка и колбек onVisibilityChange. Колбек необходимо вызывать 
       при открытии/закрытии меню для того, чтобы таблица могла управлять видимостью OverflowMenu.
       В качестве результата функция должна возвращать компонент OverflowMenu. Размер OverflowMenu 
       следует задавать согласно правилу:\n\n* Для таблицы с dimension="s" или dimension="m" используется 

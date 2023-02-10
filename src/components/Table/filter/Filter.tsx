@@ -20,8 +20,16 @@ export interface FilterCompProps extends Omit<React.HTMLAttributes<HTMLButtonEle
 }
 
 export const Filter = React.forwardRef<HTMLButtonElement, FilterCompProps>(({ column, targetRef, ...props }, ref) => {
-  const { renderFilter, renderFilterIcon, onFilterMenuClickOutside, onFilterMenuOpen, onFilterMenuClose } = column;
+  const {
+    renderFilter,
+    renderFilterIcon,
+    onFilterMenuClickOutside,
+    onFilterMenuOpen,
+    onFilterMenuClose,
+    isFilterActive: filterActive,
+  } = column;
   const [menuOpened, setMenuOpened] = React.useState<boolean>(false);
+  /** TODO: удалить данный useState в дальнейшем и использовать взамен параметр column.isFilterActive */
   const [isFilterActive, setFilterActive] = React.useState<boolean>(false);
   const btnRef = React.useRef<HTMLButtonElement>(null);
 
@@ -66,7 +74,7 @@ export const Filter = React.forwardRef<HTMLButtonElement, FilterCompProps>(({ co
         onClick={reverseMenu}
         aria-expanded={menuOpened}
         aria-haspopup={menuOpened}
-        isFilterActive={isFilterActive}
+        isFilterActive={filterActive ?? isFilterActive}
         renderFilterIcon={renderFilterIcon}
         {...props}
       />

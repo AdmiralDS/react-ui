@@ -20,15 +20,6 @@ export const OverflowMenu: React.FC<OverflowMenuProps> = ({
 }) => {
   const oveflowMenuRef = React.useRef<HTMLDivElement>(null);
 
-  // впоследствии будет удалено
-  const handleMenuOpen = () => {
-    if (oveflowMenuRef.current) oveflowMenuRef.current.dataset.opened = 'true';
-  };
-  // впоследствии будет удалено
-  const handleMenuClose = () => {
-    if (oveflowMenuRef.current) oveflowMenuRef.current.dataset.opened = 'false';
-  };
-
   const handleVisibilityChange = (isVisible: boolean) => {
     if (isVisible) {
       if (oveflowMenuRef.current) oveflowMenuRef.current.dataset.opened = 'true';
@@ -45,9 +36,7 @@ export const OverflowMenu: React.FC<OverflowMenuProps> = ({
       $offset={tableWidth - (verticalScroll ? scrollbar : 0)}
       dimension={dimension}
     >
-      {row.actionRender
-        ? row.actionRender(row)
-        : row.overflowMenuRender?.(row, handleMenuOpen, handleMenuClose, handleVisibilityChange)}
+      {row.actionRender ? row.actionRender(row) : row.overflowMenuRender?.(row, handleVisibilityChange)}
     </OverflowMenuWrapper>
   );
 };

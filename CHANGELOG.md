@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.3.0](https://github.com/AdmiralDS/react-ui/compare/v4.2.0...v4.3.0) (2023-02-09)
+
+
+### Features
+
+* **InputEx:** add Tooltip ([61c1345](https://github.com/AdmiralDS/react-ui/commit/61c13457c7d4393a6023e938235bc80c5a25acd9))
+* **Table:** add isFilterActive prop for column to control filter state, setFilterActive callback is deprecated now ([8617756](https://github.com/AdmiralDS/react-ui/commit/8617756a466e17135a85306d1f77c6a75846eab9))
+
+
+### Bug Fixes
+
+* **Button:** use props for icon to fix paddings ([d73c215](https://github.com/AdmiralDS/react-ui/commit/d73c215dc16bde2d49681cb08024deccad0bd0b1))
+* **Table:** remove deprecated onMenuOpen, onMenuClose callbacks from row overflowMenuRender method ([4a6154e](https://github.com/AdmiralDS/react-ui/commit/4a6154e03748cc7cd54ef78159f1e63381c75584))
+
 ## [4.2.0](https://github.com/AdmiralDS/react-ui/compare/v4.1.0...v4.2.0) (2023-02-06)
 
 
