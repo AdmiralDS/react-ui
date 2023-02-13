@@ -75,5 +75,6 @@ export const Toast = ({ position = 'top-right', ...props }: ToastTransitionProps
 
 export * from './useToast';
 export * from './ToastProvider';
+export * from './ToastItem';
 
 Toast.displayName = 'Toast';

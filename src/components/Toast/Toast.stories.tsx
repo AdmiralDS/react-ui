@@ -11,15 +11,17 @@ import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
 import { TextInput } from '#src/components/input';
 import { TextButton } from '#src/components/TextButton';
 import {
-  NotificationItem,
+  StyledNotificationItem,
   NotificationItemButtonPanel,
   NotificationItemContent,
   NotificationItemTitle,
 } from '#src/components/NotificationItem';
 import { uid } from '#src/components/common/uid';
-import type { NotificationStatus } from '#src/components/Notification';
-import { mediumGroupBorderRadius } from '#src/components/themes';
-import { NotificationItemWithProgress } from '#src/components/NotificationItem/NotificationItemWithProgress';
+import {
+  DefaultToastItem,
+  ToastItemWithAutoDelete,
+  ToastItemWithProgress,
+} from '#src/components/Toast/ToastItem';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -115,6 +117,57 @@ export default {
   },
 } as ComponentMeta<typeof Toast>;
 
+const NotificationEmitter = () => {
+  const [toastStack, setToastStack] = React.useState<Array<RenderToastProviderItem>>([]);
+
+  const { addRenderToast, removeRenderToast, autoDeleteTime } = useToast();
+
+  const onClickHandlerAdd = () => {
+    const customItem = random(0, 3);
+    const toast = items[customItem];
+    const id = uid();
+    const renderToast = (id: ID) => {
+      const handleOnClose = () => {
+        removeRenderToast({ id, renderToast });
+        console.log('Toast is closed');
+        setToastStack((prevToastIdStack) => prevToastIdStack.filter((toast) => toast.renderToast !== renderToast));
+      };
+
+      return (
+        <>
+          {autoDeleteTime ? (
+            <ToastItemWithAutoDelete onRemoveNotification={handleOnClose} autoDeleteTime={autoDeleteTime}>
+              <DefaultToastItem {...toast} onClose={toast.onClose || handleOnClose} />
+            </ToastItemWithAutoDelete>
+          ) : (
+            <DefaultToastItem {...toast} onClose={toast.onClose || handleOnClose} />
+          )}
+        </>
+      );
+    };
+    addRenderToast({ id, renderToast });
+    setToastStack((prev) => [...prev, { id, renderToast }]);
+  };
+  const onClickHandlerRemove = () => {
+    const newToastIdStack = [...toastStack];
+    const toastToRemove = newToastIdStack.shift();
+    setToastStack(newToastIdStack);
+    if (toastToRemove) {
+      removeRenderToast(toastToRemove);
+    }
+  };
+
+  return (
+    <div style={{ display: 'flex', alignItems: 'flex-start' }}>
+      <Button onClick={onClickHandlerAdd}>Добавить сообщение</Button>
+      <div style={{ width: 20 }} />
+      <Button disabled={toastStack.length === 0} onClick={onClickHandlerRemove}>
+        Удалить первое сообщение
+      </Button>
+    </div>
+  );
+};
+
 const Template1 = (props: ToastProps) => {
   function swapBorder(theme: Theme): Theme {
     theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
@@ -174,43 +227,6 @@ const Template3 = (props: ToastProps) => {
 const Temp3: ComponentStory<typeof Toast> = (args: ToastProps) => {
   return <Template3 {...args} />;
 };
-
-const NotificationEmitter = () => {
-  const [openToasts, setOpenToasts] = React.useState<Record<string, any>>({});
-  const [toastIdStack, setToastIdStack] = React.useState<Array<string>>([]);
-
-  const { addToast, removeById } = useToast();
-
-  const onClickHandlerAdd = () => {
-    const customItem = random(0, 3);
-    const toast = items[customItem];
-    const toastId = addToast(toast);
-    setOpenToasts((prev) => ({ ...prev, [toastId]: toast }));
-    setToastIdStack((prev) => [...prev, toastId]);
-  };
-  const onClickHandlerRemove = () => {
-    const newToastIdStack = [...toastIdStack];
-    const toastId = newToastIdStack.shift();
-    setToastIdStack(newToastIdStack);
-    if (toastId) {
-      removeById(toastId);
-    }
-  };
-
-  return (
-    <div style={{ display: 'flex', alignItems: 'flex-start' }}>
-      <Button onClick={onClickHandlerAdd}>Добавить сообщение</Button>
-      <div style={{ width: 20 }} />
-      <Button disabled={toastIdStack.length === 0} onClick={onClickHandlerRemove}>
-        Удалить первое сообщение
-      </Button>
-    </div>
-  );
-};
-
-const StyledNotificationItem = styled(NotificationItem)`
-  ${(props) => props.theme.shadow['Shadow 08']}
-`;
 
 const handleTextButtonClick = () => {
   console.log('TextButton click');
@@ -288,28 +304,6 @@ const Temp4: ComponentStory<typeof Toast> = (args: ToastProps) => {
   return <Template4 {...args} />;
 };
 
-const Progress = styled.div.attrs((props: { percent: number }) => ({
-  style: { width: `${props.percent}%` },
-}))<{ percent: number; status?: NotificationStatus; duration: number }>`
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  background: ${({ theme, status }) => {
-    if (status === 'warning') return theme.color['Warning/Warning 50 Main'];
-    if (status === 'error') return theme.color['Error/Error 60 Main'];
-    if (status === 'success') return theme.color['Success/Success 50 Main'];
-    return theme.color['Primary/Primary 60 Main'];
-  }};
-  height: 4px;
-  transition: ${({ duration }) => `all ${duration}ms linear`};
-`;
-
-const Wrapper = styled.div`
-  position: relative;
-  overflow: hidden;
-  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
-`;
-
 const MessageForm2 = () => {
   const [toastIdStack, setToastIdStack] = React.useState<Array<RenderToastProviderItem>>([]);
   const [inputValue, setInputValue] = React.useState('Notification message');
@@ -322,11 +316,11 @@ const MessageForm2 = () => {
       const handleCloseToast = () => {
         removeRenderToast({ id, renderToast: renderFunction });
         console.log('Toast is closed');
-        setToastIdStack((prevToastIdStack) => prevToastIdStack.filter((toast) => toast.id !== id));
+        setToastIdStack((prevToastIdStack) => prevToastIdStack.filter((toast) => toast.renderToast !== renderFunction));
       };
 
       return (
-        <NotificationItemWithProgress autoDeleteTime={autoDeleteTime} onRemoveNotification={handleCloseToast}>
+        <ToastItemWithProgress autoDeleteTime={autoDeleteTime} onRemoveNotification={handleCloseToast}>
           <StyledNotificationItem isClosable={true} displayStatusIcon={true} onClose={handleCloseToast}>
             <NotificationItemTitle>Title</NotificationItemTitle>
             <NotificationItemContent>{inputValue}</NotificationItemContent>
@@ -335,7 +329,7 @@ const MessageForm2 = () => {
               <TextButton dimension="s" text="TextButton2" onClick={handleTextButtonClick} />
             </NotificationItemButtonPanel>
           </StyledNotificationItem>
-        </NotificationItemWithProgress>
+        </ToastItemWithProgress>
       );
     };
     addRenderToast({ id, renderToast: renderFunction });

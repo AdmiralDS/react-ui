@@ -1,47 +1,8 @@
-import type { ReactNode } from 'react';
 import * as React from 'react';
-import type { IdentifyToast, ID } from '#src/components/Toast/type';
 import { uid } from '#src/components/common/uid';
-import styled from 'styled-components';
-import {
-  NotificationItem,
-  NotificationItemButtonPanel,
-  NotificationItemContent,
-  NotificationItemTitle,
-} from '#src/components/NotificationItem';
-import { Link } from '#src/components/Link';
-import { typography } from '#src/components/Typography';
 import type { NotificationProps } from '#src/components/Notification';
-import { NotificationItemWithAutoDelete } from '#src/components/NotificationItem/NotificationItemWithAutoDelete';
-
-const StyledNotificationItem = styled(NotificationItem)`
-  ${(props) => props.theme.shadow['Shadow 08']}
-`;
-
-const StyledLink = styled(Link)`
-  ${typography['Button/Button 2']}
-`;
-
-const DefaultNotificationItem = ({
-  title,
-  linkText = '',
-  href = '',
-  onClose,
-  children,
-  ...props
-}: React.PropsWithChildren<NotificationProps>) => {
-  return (
-    <StyledNotificationItem {...props} onClose={onClose}>
-      {title && <NotificationItemTitle>{title}</NotificationItemTitle>}
-      <NotificationItemContent>{children}</NotificationItemContent>
-      {linkText && (
-        <NotificationItemButtonPanel>
-          <StyledLink href={href}>{linkText || href}</StyledLink>
-        </NotificationItemButtonPanel>
-      )}
-    </StyledNotificationItem>
-  );
-};
+import type { IdentifyToast, ID } from '#src/components/Toast/type';
+import { DefaultToastItem, ToastItemWithAutoDelete } from '#src/components/Toast/ToastItem';
 
 export type PositionToasts = 'top-right' | 'bottom-right' | 'bottom-left';
 
@@ -53,7 +14,7 @@ export interface ToastProps {
   /**время через которое удаляются toast */
   autoDeleteTime?: number;
   /**время через которое удаляются toast */
-  children?: ReactNode;
+  children?: React.ReactNode;
 }
 
 export interface RenderToastProviderItem {
@@ -114,18 +75,17 @@ export const ToastProvider = ({ autoDeleteTime, ...props }: ToastProps) => {
         removeRenderToast({ id, renderToast: renderDefaultNotificationItem });
       };
 
-      const renderContent = () => {
-        if (autoDeleteTime) {
-          return (
-            <NotificationItemWithAutoDelete onRemoveNotification={handleOnClose} autoDeleteTime={autoDeleteTime}>
-              <DefaultNotificationItem {...toast} onClose={toast.onClose || handleOnClose} />
-            </NotificationItemWithAutoDelete>
-          );
-        }
-        return <DefaultNotificationItem {...toast} onClose={toast.onClose || handleOnClose} />;
-      };
-
-      return renderContent();
+      return (
+        <>
+          {autoDeleteTime ? (
+            <ToastItemWithAutoDelete onRemoveNotification={handleOnClose} autoDeleteTime={autoDeleteTime}>
+              <DefaultToastItem {...toast} onClose={toast.onClose || handleOnClose} />
+            </ToastItemWithAutoDelete>
+          ) : (
+            <DefaultToastItem {...toast} onClose={toast.onClose || handleOnClose} />
+          )}
+        </>
+      );
     };
     const newRenderToast = { id: id, renderToast: renderDefaultNotificationItem };
     setRenderToastList((prevToasts) => makeToastList(prevToasts, newRenderToast));
