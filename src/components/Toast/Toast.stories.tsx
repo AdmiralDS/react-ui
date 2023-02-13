@@ -10,6 +10,7 @@ import type { Theme } from '#src/components/themes';
 import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
 import { TextInput } from '#src/components/input';
 import { TextButton } from '#src/components/TextButton';
+import type { NotificationItemStatus } from '#src/components/NotificationItem';
 import {
   StyledNotificationItem,
   NotificationItemButtonPanel,
@@ -17,11 +18,7 @@ import {
   NotificationItemTitle,
 } from '#src/components/NotificationItem';
 import { uid } from '#src/components/common/uid';
-import {
-  DefaultToastItem,
-  ToastItemWithAutoDelete,
-  ToastItemWithProgress,
-} from '#src/components/Toast/ToastItem';
+import { DefaultToastItem, ToastItemWithAutoDelete, ToastItemWithProgress } from '#src/components/Toast/ToastItem';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -103,7 +100,6 @@ export default {
     ],
   },
   args: {
-    autoDeleteTime: 3000,
     position: 'top-right',
   },
   argTypes: {
@@ -116,6 +112,14 @@ export default {
     },
   },
 } as ComponentMeta<typeof Toast>;
+
+const Wrapper = styled.div`
+  display: flex;
+  gap: 10px;
+  > * {
+    flex: 1 1 auto;
+  }
+`;
 
 const NotificationEmitter = () => {
   const [toastStack, setToastStack] = React.useState<Array<ToastItemProps>>([]);
@@ -270,17 +274,16 @@ const MessageForm = () => {
   };
 
   return (
-    <>
+    <div style={{ width: '550px' }}>
       <TextInput value={inputValue} onChange={(e) => setInputValue(e.target.value)} />
       <Separator />
-      <div style={{ display: 'flex', alignItems: 'flex-start' }}>
+      <Wrapper>
         <Button onClick={onClickHandlerAdd}>Добавить сообщение</Button>
-        <div style={{ width: 20 }} />
         <Button disabled={toastIdStack.length === 0} onClick={onClickHandlerRemove}>
           Удалить первое сообщение
         </Button>
-      </div>
-    </>
+      </Wrapper>
+    </div>
   );
 };
 
@@ -304,9 +307,15 @@ const Temp4: ComponentStory<typeof Toast> = (args: ToastProps) => {
   return <Template4 {...args} />;
 };
 
+const toastStatuses: NotificationItemStatus[] = ['info', 'error', 'success', 'warning'];
+
 const MessageForm2 = () => {
   const [toastIdStack, setToastIdStack] = React.useState<Array<ToastItemProps>>([]);
-  const [inputValue, setInputValue] = React.useState('Notification message');
+  const [titleValue, setTitleValue] = React.useState('Toast title');
+  const [contentValue, setContentValue] = React.useState('Toast content');
+  const [textButton1Value, setTextButton1Value] = React.useState('TextButton1');
+  const [textButton2Value, setTextButton2Value] = React.useState('TextButton2');
+  const [toastStatus, setToastStatus] = React.useState(0);
 
   const { addToastItem, removeToastItem, autoDeleteTime } = useToast();
 
@@ -320,13 +329,22 @@ const MessageForm2 = () => {
       };
 
       return (
-        <ToastItemWithProgress autoDeleteTime={autoDeleteTime} onRemoveNotification={handleCloseToast}>
-          <StyledNotificationItem isClosable={true} displayStatusIcon={true} onClose={handleCloseToast}>
-            <NotificationItemTitle>Title</NotificationItemTitle>
-            <NotificationItemContent>{inputValue}</NotificationItemContent>
+        <ToastItemWithProgress
+          status={toastStatuses[toastStatus]}
+          autoDeleteTime={autoDeleteTime}
+          onRemoveNotification={handleCloseToast}
+        >
+          <StyledNotificationItem
+            status={toastStatuses[toastStatus]}
+            isClosable={true}
+            displayStatusIcon={true}
+            onClose={handleCloseToast}
+          >
+            <NotificationItemTitle>{titleValue}</NotificationItemTitle>
+            <NotificationItemContent>{contentValue}</NotificationItemContent>
             <NotificationItemButtonPanel>
-              <TextButton dimension="s" text="TextButton1" onClick={handleTextButtonClick} />
-              <TextButton dimension="s" text="TextButton2" onClick={handleTextButtonClick} />
+              <TextButton dimension="s" text={textButton1Value} onClick={handleTextButtonClick} />
+              <TextButton dimension="s" text={textButton2Value} onClick={handleTextButtonClick} />
             </NotificationItemButtonPanel>
           </StyledNotificationItem>
         </ToastItemWithProgress>
@@ -334,6 +352,7 @@ const MessageForm2 = () => {
     };
     addToastItem({ id, renderToast: renderFunction });
     setToastIdStack((prev) => [...prev, { id, renderToast: renderFunction }]);
+    setToastStatus((prevStatus) => (prevStatus + 1) % 4);
   };
   const onClickHandlerRemove = () => {
     const newToastIdStack = [...toastIdStack];
@@ -345,17 +364,23 @@ const MessageForm2 = () => {
   };
 
   return (
-    <>
-      <TextInput value={inputValue} onChange={(e) => setInputValue(e.target.value)} />
+    <div style={{ width: '550px' }}>
+      <TextInput value={titleValue} onChange={(e) => setTitleValue(e.target.value)} />
       <Separator />
-      <div style={{ display: 'flex', alignItems: 'flex-start' }}>
+      <TextInput value={contentValue} onChange={(e) => setContentValue(e.target.value)} />
+      <Separator />
+      <Wrapper>
+        <TextInput value={textButton1Value} onChange={(e) => setTextButton1Value(e.target.value)} />
+        <TextInput value={textButton2Value} onChange={(e) => setTextButton2Value(e.target.value)} />
+      </Wrapper>
+      <Separator />
+      <Wrapper>
         <Button onClick={onClickHandlerAdd}>Добавить сообщение</Button>
-        <div style={{ width: 20 }} />
         <Button disabled={toastIdStack.length === 0} onClick={onClickHandlerRemove}>
           Удалить первое сообщение
         </Button>
-      </div>
-    </>
+      </Wrapper>
+    </div>
   );
 };
 
@@ -367,7 +392,7 @@ const Template5 = (props: ToastProps) => {
 
   return (
     <ThemeProvider theme={swapBorder}>
-      <ToastProvider autoDeleteTime={3000}>
+      <ToastProvider autoDeleteTime={5000}>
         <MessageForm2 />
         <Toast position={props.position} />
       </ToastProvider>
@@ -380,16 +405,16 @@ const Temp5: ComponentStory<typeof Toast> = (args: ToastProps) => {
 };
 
 export const ToastNotification = Temp1.bind({});
-ToastNotification.storyName = 'Нотификация настройка места всплытия через стили.';
+ToastNotification.storyName = 'Toast. Настройка места всплытия через стили.';
 
 export const ToastNotificationBase = Temp2.bind({});
-ToastNotificationBase.storyName = 'Всплывающая нотификация. Базовый пример.';
+ToastNotificationBase.storyName = 'Toast. Базовый пример.';
 
 export const ToastLineNotification = Temp3.bind({});
-ToastLineNotification.storyName = 'Всплывающая нотификация. Line Notification.';
+ToastLineNotification.storyName = 'Line Notification.';
 
 export const ToastCustomComponent = Temp4.bind({});
-ToastCustomComponent.storyName = 'Всплывающая нотификация. Custom component.';
+ToastCustomComponent.storyName = 'Toast. Custom component.';
 
 export const ToastProgressComponent = Temp5.bind({});
-ToastProgressComponent.storyName = 'Всплывающая нотификация. Custom component with Progress.';
+ToastProgressComponent.storyName = 'Toast. Custom component with Progress.';
