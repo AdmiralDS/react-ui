@@ -58,11 +58,11 @@ export interface ToastTransitionProps extends React.HTMLAttributes<HTMLDivElemen
 }
 
 export const Toast = ({ position = 'top-right', ...props }: ToastTransitionProps) => {
-  const { renderToastList } = useToast();
+  const { toastItemList } = useToast();
   return (
     <Container position={position} {...props}>
-      {!!renderToastList?.length &&
-        renderToastList.map(({ renderToast, id }) => {
+      {!!toastItemList?.length &&
+        toastItemList.map(({ renderToast, id }) => {
           return (
             <Transition key={id} position={position}>
               {renderToast(id)}

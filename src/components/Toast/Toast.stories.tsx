@@ -3,7 +3,7 @@ import styled, { ThemeProvider } from 'styled-components';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import { Button } from '#src/components/Button';
-import type { ToastProps, RenderToastProviderItem } from '#src/components/Toast';
+import type { ToastProps, ToastItemProps } from '#src/components/Toast';
 import { Toast, ToastProvider, useToast } from '#src/components/Toast';
 import type { IdentifyToast, ID } from '#src/components/Toast/type';
 import type { Theme } from '#src/components/themes';
@@ -118,9 +118,9 @@ export default {
 } as ComponentMeta<typeof Toast>;
 
 const NotificationEmitter = () => {
-  const [toastStack, setToastStack] = React.useState<Array<RenderToastProviderItem>>([]);
+  const [toastStack, setToastStack] = React.useState<Array<ToastItemProps>>([]);
 
-  const { addRenderToast, removeRenderToast, autoDeleteTime } = useToast();
+  const { addToastItem, removeToastItem, autoDeleteTime } = useToast();
 
   const onClickHandlerAdd = () => {
     const customItem = random(0, 3);
@@ -128,7 +128,7 @@ const NotificationEmitter = () => {
     const id = uid();
     const renderToast = (id: ID) => {
       const handleOnClose = () => {
-        removeRenderToast({ id, renderToast });
+        removeToastItem({ id, renderToast });
         console.log('Toast is closed');
         setToastStack((prevToastIdStack) => prevToastIdStack.filter((toast) => toast.renderToast !== renderToast));
       };
@@ -145,7 +145,7 @@ const NotificationEmitter = () => {
         </>
       );
     };
-    addRenderToast({ id, renderToast });
+    addToastItem({ id, renderToast });
     setToastStack((prev) => [...prev, { id, renderToast }]);
   };
   const onClickHandlerRemove = () => {
@@ -153,7 +153,7 @@ const NotificationEmitter = () => {
     const toastToRemove = newToastIdStack.shift();
     setToastStack(newToastIdStack);
     if (toastToRemove) {
-      removeRenderToast(toastToRemove);
+      removeToastItem(toastToRemove);
     }
   };
 
@@ -233,16 +233,16 @@ const handleTextButtonClick = () => {
 };
 
 const MessageForm = () => {
-  const [toastIdStack, setToastIdStack] = React.useState<Array<RenderToastProviderItem>>([]);
+  const [toastIdStack, setToastIdStack] = React.useState<Array<ToastItemProps>>([]);
   const [inputValue, setInputValue] = React.useState('Notification message');
 
-  const { addRenderToast, removeRenderToast } = useToast();
+  const { addToastItem, removeToastItem } = useToast();
 
   const onClickHandlerAdd = () => {
     const id = uid();
     const renderFunction = (id: ID) => {
       const handleCloseToast = () => {
-        removeRenderToast({ id, renderToast: renderFunction });
+        removeToastItem({ id, renderToast: renderFunction });
         console.log('Toast is closed');
         setToastIdStack((prevToastIdStack) => prevToastIdStack.filter((toast) => toast.id !== id));
       };
@@ -257,7 +257,7 @@ const MessageForm = () => {
         </StyledNotificationItem>
       );
     };
-    addRenderToast({ id, renderToast: renderFunction });
+    addToastItem({ id, renderToast: renderFunction });
     setToastIdStack((prev) => [...prev, { id, renderToast: renderFunction }]);
   };
   const onClickHandlerRemove = () => {
@@ -265,7 +265,7 @@ const MessageForm = () => {
     const removeToast = newToastIdStack.shift();
     setToastIdStack(newToastIdStack);
     if (removeToast) {
-      removeRenderToast(removeToast);
+      removeToastItem(removeToast);
     }
   };
 
@@ -305,16 +305,16 @@ const Temp4: ComponentStory<typeof Toast> = (args: ToastProps) => {
 };
 
 const MessageForm2 = () => {
-  const [toastIdStack, setToastIdStack] = React.useState<Array<RenderToastProviderItem>>([]);
+  const [toastIdStack, setToastIdStack] = React.useState<Array<ToastItemProps>>([]);
   const [inputValue, setInputValue] = React.useState('Notification message');
 
-  const { addRenderToast, removeRenderToast, autoDeleteTime } = useToast();
+  const { addToastItem, removeToastItem, autoDeleteTime } = useToast();
 
   const onClickHandlerAdd = () => {
     const id = uid();
     const renderFunction = (id: ID) => {
       const handleCloseToast = () => {
-        removeRenderToast({ id, renderToast: renderFunction });
+        removeToastItem({ id, renderToast: renderFunction });
         console.log('Toast is closed');
         setToastIdStack((prevToastIdStack) => prevToastIdStack.filter((toast) => toast.renderToast !== renderFunction));
       };
@@ -332,7 +332,7 @@ const MessageForm2 = () => {
         </ToastItemWithProgress>
       );
     };
-    addRenderToast({ id, renderToast: renderFunction });
+    addToastItem({ id, renderToast: renderFunction });
     setToastIdStack((prev) => [...prev, { id, renderToast: renderFunction }]);
   };
   const onClickHandlerRemove = () => {
@@ -340,7 +340,7 @@ const MessageForm2 = () => {
     const removeToast = newToastIdStack.shift();
     setToastIdStack(newToastIdStack);
     if (removeToast) {
-      removeRenderToast(removeToast);
+      removeToastItem(removeToast);
     }
   };
 

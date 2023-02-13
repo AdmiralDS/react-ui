@@ -7,43 +7,52 @@ import { DefaultToastItem, ToastItemWithAutoDelete } from '#src/components/Toast
 export type PositionToasts = 'top-right' | 'bottom-right' | 'bottom-left';
 
 export interface ToastProps {
-  /**позиция всплывающей toast */
+  /** Позиция всплывающего уведомления */
   position?: PositionToasts;
-  /**ширина контейнера toast */
+  /** Ширина контейнера уведомлений */
   widthContainer?: number | string;
-  /**время через которое удаляются toast */
+  /** Время, через которое удаляются уведомления */
   autoDeleteTime?: number;
-  /**время через которое удаляются toast */
+  /** Элементы, имеющие доступ к контексту */
   children?: React.ReactNode;
 }
 
-export interface RenderToastProviderItem {
-  // TODO: описать подробнее
-  /** @deprecated */
+export interface ToastItemProps {
+  /** @deprecated В дальнейшем для идентификации уведомления будет использоваться render функция.
+   * Идентификатор уведомления */
   id: ID;
   /** Render функция всплывающего уведомления */
   renderToast: (id: ID) => React.ReactNode;
 }
 
-export interface IdentifyToastProviderItem extends Omit<NotificationProps, 'id'>, IdentifyField {}
+export interface IdentifyToastItemProps extends Omit<NotificationProps, 'id'>, IdentifyField {}
 
 export interface IContextProps extends ToastProps {
-  /** @deprecated use renderToastList instead */
+  /** @deprecated Не рекомендуется использовать в связи с переходом на новую структуру ToastProvider.
+   * Используйте addRenderToast.
+   * Добавление всплывающего уведомления через модель для Notification */
   addToast: (newToast: IdentifyToast) => string;
-  /** @deprecated use renderToastList instead */
+  /** @deprecated Не рекомендуется использовать в связи с переходом на новую структуру ToastProvider.
+   * Используйте removeRenderToast.
+   * Удаление всплывающего уведомления через модель для Notification */
   removeToast: (removeToast: IdentifyToast) => void;
-  /** @deprecated use renderToastList instead */
+  /** @deprecated Не рекомендуется использовать в связи с переходом на новую структуру ToastProvider.
+   * Используйте removeRenderToast.
+   * Удаление всплывающего уведомления по идентификатору */
   removeById: (toastId: ID) => void;
-  // TODO: описать подробнее
-  addRenderToast: (toast: RenderToastProviderItem) => void;
-  // TODO: описать подробнее
-  findRenderToastById: (toastId: ID) => RenderToastProviderItem | undefined;
-  // TODO: описать подробнее
-  removeRenderToast: (toast: RenderToastProviderItem) => void;
-  // TODO: описать подробнее
-  /** @deprecated use renderToastList instead */
+  /** Добавление всплывающего уведомления.
+   * Позволяет передавать в качестве уведомления любой необходимый элемент */
+  addToastItem: (toast: ToastItemProps) => void;
+  /** Получение всплывающего уведомления по идентификатору */
+  findToastItemById: (toastId: ID) => ToastItemProps | undefined;
+  /** Удаление всплывающего уведомления */
+  removeToastItem: (toast: ToastItemProps) => void;
+  /** @deprecated Не рекомендуется использовать в связи с переходом на новую структуру ToastProvider.
+   * Используйте renderToastList.
+   * Список существующих уведомлений */
   toasts: IdentifyToast[];
-  renderToastList: RenderToastProviderItem[];
+  /** Список существующих уведомлений */
+  toastItemList: ToastItemProps[];
 }
 
 export const ToastContext = React.createContext({} as IContextProps);
@@ -61,8 +70,8 @@ function makeToastList<T extends IdentifyField>(prevList: T[], newToast: T) {
 }
 
 export const ToastProvider = ({ autoDeleteTime, ...props }: ToastProps) => {
-  const [toasts, setToast] = React.useState<IdentifyToastProviderItem[]>([]);
-  const [renderToastList, setRenderToastList] = React.useState<RenderToastProviderItem[]>([]);
+  const [toasts, setToast] = React.useState<IdentifyToastItemProps[]>([]);
+  const [toastItemList, setToastItemList] = React.useState<ToastItemProps[]>([]);
 
   //--------------model IdentifyToast
   const addToast = React.useCallback((toast: IdentifyToast) => {
@@ -72,7 +81,7 @@ export const ToastProvider = ({ autoDeleteTime, ...props }: ToastProps) => {
 
     const renderDefaultNotificationItem = () => {
       const handleOnClose = () => {
-        removeRenderToast({ id, renderToast: renderDefaultNotificationItem });
+        removeToastItem({ id, renderToast: renderDefaultNotificationItem });
       };
 
       return (
@@ -88,28 +97,30 @@ export const ToastProvider = ({ autoDeleteTime, ...props }: ToastProps) => {
       );
     };
     const newRenderToast = { id: id, renderToast: renderDefaultNotificationItem };
-    setRenderToastList((prevToasts) => makeToastList(prevToasts, newRenderToast));
+    setToastItemList((prevToasts) => makeToastList(prevToasts, newRenderToast));
     return id;
   }, []);
   const removeToast = React.useCallback((removeToast: IdentifyToast) => {
     setToast((prevToasts) => prevToasts.filter(({ id }) => id !== removeToast.id));
-    setRenderToastList((prevToasts) => prevToasts.filter(({ id }) => id !== removeToast.id));
+    setToastItemList((prevToasts) => prevToasts.filter(({ id }) => id !== removeToast.id));
   }, []);
 
   const removeById = React.useCallback((toastId: ID) => {
     setToast((prevToasts) => prevToasts.filter(({ id }) => id !== toastId));
-    setRenderToastList((prevToasts) => prevToasts.filter(({ id }) => id !== toastId));
+    setToastItemList((prevToasts) => prevToasts.filter(({ id }) => id !== toastId));
   }, []);
 
   //--------------model RenderToastProviderItem
-  const addRenderToast = React.useCallback((renderToastItem: RenderToastProviderItem) => {
-    setRenderToastList((prevToasts) => makeToastList(prevToasts, renderToastItem));
+  const addToastItem = React.useCallback((toastItem: ToastItemProps) => {
+    setToast((prevToasts) => makeToastList(prevToasts, { id: toastItem.id }));
+    setToastItemList((prevToasts) => makeToastList(prevToasts, toastItem));
   }, []);
-  const findRenderToastById = (toastId: ID) => {
-    return renderToastList.find((item) => item.id === toastId);
+  const findToastItemById = (toastId: ID) => {
+    return toastItemList.find((item) => item.id === toastId);
   };
-  const removeRenderToast = React.useCallback((removeToast: RenderToastProviderItem) => {
-    setRenderToastList((prevToasts) => prevToasts.filter((toast) => toast.renderToast !== removeToast.renderToast));
+  const removeToastItem = React.useCallback((removeToast: ToastItemProps) => {
+    setToast((prevToasts) => prevToasts.filter(({ id }) => id !== removeToast.id));
+    setToastItemList((prevToasts) => prevToasts.filter((toast) => toast.renderToast !== removeToast.renderToast));
   }, []);
 
   const providerValue = React.useMemo(
@@ -117,22 +128,22 @@ export const ToastProvider = ({ autoDeleteTime, ...props }: ToastProps) => {
       addToast,
       removeToast,
       removeById,
-      addRenderToast,
-      findRenderToastById,
-      removeRenderToast,
+      addToastItem,
+      findToastItemById,
+      removeToastItem,
       toasts,
-      renderToastList,
+      toastItemList,
       autoDeleteTime,
     }),
     [
       addToast,
       removeToast,
       removeById,
-      addRenderToast,
-      findRenderToastById,
-      removeRenderToast,
+      addToastItem,
+      findToastItemById,
+      removeToastItem,
       toasts,
-      renderToastList,
+      toastItemList,
       autoDeleteTime,
     ],
   );
