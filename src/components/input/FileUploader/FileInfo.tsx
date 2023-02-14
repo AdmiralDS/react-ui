@@ -5,7 +5,7 @@ import styled, { css } from 'styled-components';
 import { ErrorBlock } from '#src/components/input/FileUploader/ErrorBlock';
 import { Spinner } from '#src/components/Spinner';
 import { Tooltip } from '#src/components/Tooltip';
-import type { Dimension, FileUploadingStatus } from './utils';
+import type { Dimension, FileUploadStatus } from './utils';
 import { dataTransferConstructorSupported, formatBytes } from './utils';
 import { ReactComponent as FilePDFSolid } from '@admiral-ds/icons/build/documents/FilePDFSolid.svg';
 import { ReactComponent as FilePPTSolid } from '@admiral-ds/icons/build/documents/FilePPTSolid.svg';
@@ -20,7 +20,7 @@ import { checkOverflow } from '#src/components/common/utils/checkOverflow';
 export type FileProps = {
   file: File;
   /** Статус компонента, имеет четыре состояния: Uploaded, Loading, Error, Queue */
-  status?: FileUploadingStatus;
+  status?: FileUploadStatus;
   /** Ошибка при загрузке файла */
   error?: string;
   /** Отображение превью изображений  */
@@ -94,7 +94,7 @@ const Container = styled.div<{ dimension?: Dimension }>`
   }
 `;
 
-const statusMixin = css<{ status?: FileUploadingStatus }>`
+const statusMixin = css<{ status?: FileUploadStatus }>`
   border-color: ${(p) => {
     if (p.status === 'Error') return p.theme.color['Error/Error 60 Main'];
     return p.theme.color['Neutral/Neutral 40'];
@@ -103,7 +103,7 @@ const statusMixin = css<{ status?: FileUploadingStatus }>`
   background: ${(p) => p.theme.color['Special/Static White']};
 `;
 
-const PreviewWrapper = styled.div<{ dimension?: Dimension; fileDimension?: Dimension; status?: FileUploadingStatus }>`
+const PreviewWrapper = styled.div<{ dimension?: Dimension; fileDimension?: Dimension; status?: FileUploadStatus }>`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -135,7 +135,7 @@ const ImagePreview = styled.div`
   }
 `;
 
-const IconWrapper = styled.div<{ status?: FileUploadingStatus }>`
+const IconWrapper = styled.div<{ status?: FileUploadStatus }>`
   margin-right: 8px;
   border-radius: 4px;
 
@@ -167,7 +167,7 @@ const Title = styled.div`
   white-space: nowrap;
 `;
 
-const Size = styled.span<{ fileDimension?: Dimension; status?: FileUploadingStatus }>`
+const Size = styled.span<{ fileDimension?: Dimension; status?: FileUploadStatus }>`
   color: ${(p) => (p.status === 'Queue' ? p.theme.color['Neutral/Neutral 30'] : p.theme.color['Neutral/Neutral 50'])};
   margin-left: ${(p) => (p.fileDimension === 'xl' ? '0' : '4px')};
   white-space: nowrap;

@@ -6,7 +6,7 @@ import { FileUploader } from '#src/components/input';
 import type { FileProps } from '#src/components/input/FileUploader/FileInfo';
 import { FileInfo } from '#src/components/input/FileUploader/FileInfo';
 import { T } from '#src/components/T';
-import type { FileUploadingStatus } from './utils';
+import type { FileUploadStatus } from './utils';
 import { TextButton } from '#src/components/TextButton';
 import { ReactComponent as UploadSVG } from '@admiral-ds/icons/build/system/UploadOutline.svg';
 import type { Theme } from '#src/components/themes';
@@ -149,7 +149,7 @@ const FileUploaderWithStatus: ComponentStory<typeof FileUploader> = (props) => {
 
   const [files, setFiles] = React.useState<FileProps[]>([]);
   const [isLoading, setIsLoading] = React.useState(false);
-  const statusOptions: FileUploadingStatus[] = ['Loading', 'Queue', 'Uploaded', 'Error'];
+  const statusOptions: FileUploadStatus[] = ['Loading', 'Queue', 'Uploaded', 'Error'];
   const previewOptions = [true, false];
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
