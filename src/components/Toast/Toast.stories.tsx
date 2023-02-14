@@ -100,6 +100,7 @@ export default {
     ],
   },
   args: {
+    autoDeleteTime: 3000,
     position: 'top-right',
   },
   argTypes: {
@@ -404,6 +405,57 @@ const Temp5: ComponentStory<typeof Toast> = (args: ToastProps) => {
   return <Template5 {...args} />;
 };
 
+const NotificationEmitter2 = () => {
+  const [toastIdStack, setToastIdStack] = React.useState<Array<string>>([]);
+
+  const { addToast, removeById } = useToast();
+
+  const onClickHandlerAdd = () => {
+    const customItem = random(0, 3);
+    const toast = items[customItem];
+    const toastId = addToast(toast);
+    setToastIdStack((prev) => [...prev, toastId]);
+  };
+  const onClickHandlerRemove = () => {
+    const newToastIdStack = [...toastIdStack];
+    const toastId = newToastIdStack.shift();
+    setToastIdStack(newToastIdStack);
+    if (toastId) {
+      removeById(toastId);
+    }
+  };
+
+  return (
+    <div style={{ display: 'flex', alignItems: 'flex-start' }}>
+      <Button onClick={onClickHandlerAdd}>Добавить сообщение</Button>
+      <div style={{ width: 20 }} />
+      <Button disabled={toastIdStack.length === 0} onClick={onClickHandlerRemove}>
+        Удалить первое сообщение
+      </Button>
+    </div>
+  );
+};
+
+const Template6 = (props: ToastProps) => {
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    return theme;
+  }
+
+  return (
+    <ThemeProvider theme={swapBorder}>
+      <ToastProvider autoDeleteTime={props.autoDeleteTime}>
+        <NotificationEmitter2 />
+        <Toast position={props.position} />
+      </ToastProvider>
+    </ThemeProvider>
+  );
+};
+
+const Temp6: ComponentStory<typeof Toast> = (args: ToastProps) => {
+  return <Template6 {...args} />;
+};
+
 export const ToastNotification = Temp1.bind({});
 ToastNotification.storyName = 'Toast. Настройка места всплытия через стили.';
 
@@ -418,3 +470,6 @@ ToastCustomComponent.storyName = 'Toast. Custom component.';
 
 export const ToastProgressComponent = Temp5.bind({});
 ToastProgressComponent.storyName = 'Toast. Custom component with Progress.';
+
+export const ToastBackwardCompatibility = Temp6.bind({});
+ToastBackwardCompatibility.storyName = 'Toast. Backward compatibility.';
