@@ -336,6 +336,10 @@ const Demo2: ComponentStory<typeof Tree> = (props) => {
   }, {} as Record<any, any>);
   const [activeItem, setActiveItem] = useState<string | undefined>('1');
 
+  const handleMouseLeave = () => {
+    setActiveItem(undefined);
+  };
+
   return (
     <>
       <Tree
@@ -345,6 +349,7 @@ const Demo2: ComponentStory<typeof Tree> = (props) => {
         model={demo2_TreeModel}
         active={activeItem}
         onActivateItem={setActiveItem}
+        onMouseLeaveTree={handleMouseLeave}
       />
     </>
   );
