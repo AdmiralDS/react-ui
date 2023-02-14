@@ -1,5 +1,5 @@
-import type { HTMLAttributes } from 'react';
 import * as React from 'react';
+import type { HTMLAttributes } from 'react';
 import styled, { css } from 'styled-components';
 import { ReactComponent as InfoIcon } from '@admiral-ds/icons/build/service/InfoSolid.svg';
 import { ReactComponent as WarningIcon } from '@admiral-ds/icons/build/service/ErrorSolid.svg';
@@ -8,21 +8,14 @@ import { ReactComponent as ErrorIcon } from '@admiral-ds/icons/build/service/Clo
 
 import { LIGHT_THEME as DEFAULT_THEME } from '#src/components/themes';
 import { typography } from '#src/components/Typography';
-import { Link } from '#src/components/Link';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { CloseIconPlacementButton } from '#src/components/IconPlacement';
 
-export type NotificationStatus = 'info' | 'error' | 'success' | 'warning';
+export type NotificationItemStatus = 'info' | 'error' | 'success' | 'warning';
 
-export interface NotificationProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title' | 'id'> {
+export interface NotificationItemProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title' | 'id'> {
   /** Статус notification */
-  status?: NotificationStatus;
-  /** Заголовок notification */
-  title?: React.ReactNode;
-  /** Название для ссылки */
-  linkText?: string;
-  /** Url ссылки */
-  href?: string;
+  status?: NotificationItemStatus;
   /** Переключатель видимости иконки "Close" */
   isClosable?: boolean;
   /** Закрытие notification */
@@ -31,7 +24,7 @@ export interface NotificationProps extends Omit<HTMLAttributes<HTMLDivElement>, 
   displayStatusIcon?: boolean;
 }
 
-const getIcon = (status: NotificationStatus) => {
+const getIcon = (status: NotificationItemStatus) => {
   switch (status) {
     case 'info':
       return InfoIcon;
@@ -45,7 +38,7 @@ const getIcon = (status: NotificationStatus) => {
   }
 };
 
-const backGroundColorMixin = css<{ status?: NotificationStatus }>`
+const backGroundColorMixin = css<{ status?: NotificationItemStatus }>`
   background-color: ${({ theme, status }) => {
     if (status === 'warning') return theme.color['Warning/Warning 10'];
     if (status === 'error') return theme.color['Error/Error 10'];
@@ -54,7 +47,7 @@ const backGroundColorMixin = css<{ status?: NotificationStatus }>`
   }};
 `;
 
-const borderColorMixin = css<{ status?: NotificationStatus }>`
+const borderColorMixin = css<{ status?: NotificationItemStatus }>`
   border-color: ${({ theme, status }) => {
     if (status === 'warning') return theme.color['Warning/Warning 50 Main'];
     if (status === 'error') return theme.color['Error/Error 60 Main'];
@@ -63,8 +56,8 @@ const borderColorMixin = css<{ status?: NotificationStatus }>`
   }};
 `;
 
-const NotificationWrapper = styled.div<{
-  status?: NotificationStatus;
+const NotificationItemWrapper = styled.div<{
+  status?: NotificationItemStatus;
   displayStatusIcon: boolean;
   isClosable: boolean;
 }>`
@@ -98,13 +91,19 @@ const CustomBody = styled.div`
   color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
 `;
 
+const ButtonPanel = styled.div`
+  display: flex;
+  margin-top: 4px;
+  gap: 16px;
+`;
+
 const CloseButton = styled(CloseIconPlacementButton)`
   position: absolute;
   top: 10px;
   right: 8px;
 `;
 
-const IconWrapper = styled.div<{ status?: NotificationStatus }>`
+const IconWrapper = styled.div<{ status?: NotificationItemStatus }>`
   position: absolute;
   top: 12px;
   left: 16px;
@@ -124,35 +123,24 @@ const IconWrapper = styled.div<{ status?: NotificationStatus }>`
   }
 `;
 
-const LinkWrapper = styled(Link)`
-  margin-top: 4px;
-  ${typography['Button/Button 2']}
-`;
-
-NotificationWrapper.defaultProps = {
+NotificationItemWrapper.defaultProps = {
   theme: DEFAULT_THEME,
 };
 
-/**
- * @deprecated use NotificationItem component instead
- */
-export const Notification = ({
+export const NotificationItem = ({
   status = 'info',
-  title,
-  linkText = '',
-  href = '',
   displayStatusIcon = false,
   isClosable = false,
   onClose,
   children,
   ...props
-}: React.PropsWithChildren<NotificationProps>) => {
+}: React.PropsWithChildren<NotificationItemProps>) => {
   const NotificationIcon = getIcon(status);
 
   const isAlert = status !== 'info';
 
   return (
-    <NotificationWrapper
+    <NotificationItemWrapper
       role={isAlert ? 'alert' : 'status'}
       aria-live={isAlert ? 'assertive' : 'polite'}
       status={status}
@@ -165,15 +153,29 @@ export const Notification = ({
           <NotificationIcon />
         </IconWrapper>
       )}
-      <Content>
-        {title && <Title>{title}</Title>}
-        <CustomBody>{children}</CustomBody>
-        {linkText && <LinkWrapper href={href}>{linkText || href}</LinkWrapper>}
-      </Content>
-
+      <Content>{children}</Content>
       {isClosable && <CloseButton dimension="mSmall" highlightFocus={false} onClick={onClose} />}
-    </NotificationWrapper>
+    </NotificationItemWrapper>
   );
 };
 
-Notification.displayName = 'Notification';
+export const NotificationItemTitle: React.FC<React.HTMLAttributes<HTMLHeadingElement>> = ({ children, ...props }) => {
+  return <Title {...props}>{children}</Title>;
+};
+
+export const NotificationItemContent: React.FC<React.HTMLAttributes<HTMLHeadingElement>> = ({ children, ...props }) => {
+  return <CustomBody {...props}>{children}</CustomBody>;
+};
+
+export const NotificationItemButtonPanel: React.FC<React.HTMLAttributes<HTMLHeadingElement>> = ({
+  children,
+  ...props
+}) => {
+  return <ButtonPanel {...props}>{children}</ButtonPanel>;
+};
+
+NotificationItem.displayName = 'NotificationItem';
+
+export const StyledNotificationItem = styled(NotificationItem)`
+  ${(props) => props.theme.shadow['Shadow 08']}
+`;
