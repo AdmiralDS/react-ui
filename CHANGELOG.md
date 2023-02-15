@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.4.0](https://github.com/AdmiralDS/react-ui/compare/v4.3.0...v4.4.0) (2023-02-14)
+
+
+### Features
+
+* **Notification:** add ability to customize Notification content ([72ca847](https://github.com/AdmiralDS/react-ui/commit/72ca847f47bffa2953e2c308c6b412db2854c273))
+* **NotificationItem:** add new component ([9f0df38](https://github.com/AdmiralDS/react-ui/commit/9f0df385ebe4af8dc3b0468e46abf0e9bcb1ccda))
+* **Toast:** add api for adding/removing customized toasts ([49af07e](https://github.com/AdmiralDS/react-ui/commit/49af07e4069247f55ae3afe80f97705a76b4156b))
+* **Toast:** add renderToast prop ([dd3af77](https://github.com/AdmiralDS/react-ui/commit/dd3af77ec97946caf0f2d9e03d7c37f92987ff39))
+* **Toast:** add toast item templates ([4391a5c](https://github.com/AdmiralDS/react-ui/commit/4391a5c26c88adbf297b5dc7b674f44f46482621))
+
+
+### Bug Fixes
+
+* **FileUploader:** fix Status type name to FileUploadingStatus ([e45809c](https://github.com/AdmiralDS/react-ui/commit/e45809c5ebb82a23287887f09f93a78ef9986283))
+
 ## [4.3.0](https://github.com/AdmiralDS/react-ui/compare/v4.2.0...v4.3.0) (2023-02-09)
 
 

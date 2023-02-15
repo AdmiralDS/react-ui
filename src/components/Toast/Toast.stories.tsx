@@ -3,11 +3,22 @@ import styled, { ThemeProvider } from 'styled-components';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import { Button } from '#src/components/Button';
-import type { ToastProps } from '#src/components/Toast';
+import type { ToastProps, ToastItemProps } from '#src/components/Toast';
 import { Toast, ToastProvider, useToast } from '#src/components/Toast';
-import type { IdentifyToast } from '#src/components/Toast/type';
+import type { IdentifyToast, ID } from '#src/components/Toast/type';
 import type { Theme } from '#src/components/themes';
 import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
+import { TextInput } from '#src/components/input';
+import { TextButton } from '#src/components/TextButton';
+import type { NotificationItemStatus } from '#src/components/NotificationItem';
+import {
+  StyledNotificationItem,
+  NotificationItemButtonPanel,
+  NotificationItemContent,
+  NotificationItemTitle,
+} from '#src/components/NotificationItem';
+import { uid } from '#src/components/common/uid';
+import { DefaultToastItem, ToastItemWithAutoDelete, ToastItemWithProgress } from '#src/components/Toast/ToastItem';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -103,15 +114,74 @@ export default {
   },
 } as ComponentMeta<typeof Toast>;
 
-const Temp1: ComponentStory<typeof Toast> = (args: ToastProps) => {
+const Wrapper = styled.div`
+  display: flex;
+  gap: 10px;
+  > * {
+    flex: 1 1 auto;
+  }
+`;
+
+const NotificationEmitter = () => {
+  const [toastStack, setToastStack] = React.useState<Array<ToastItemProps>>([]);
+
+  const { addToastItem, removeToastItem, autoDeleteTime } = useToast();
+
+  const onClickHandlerAdd = () => {
+    const customItem = random(0, 3);
+    const toast = items[customItem];
+    const id = uid();
+    const renderToast = (id: ID) => {
+      const handleOnClose = () => {
+        removeToastItem({ id, renderToast });
+        console.log('Toast is closed');
+        setToastStack((prevToastIdStack) => prevToastIdStack.filter((toast) => toast.renderToast !== renderToast));
+      };
+
+      return (
+        <>
+          {autoDeleteTime ? (
+            <ToastItemWithAutoDelete onRemoveNotification={handleOnClose} autoDeleteTime={autoDeleteTime}>
+              <DefaultToastItem {...toast} onClose={toast.onClose || handleOnClose} />
+            </ToastItemWithAutoDelete>
+          ) : (
+            <DefaultToastItem {...toast} onClose={toast.onClose || handleOnClose} />
+          )}
+        </>
+      );
+    };
+    addToastItem({ id, renderToast });
+    setToastStack((prev) => [...prev, { id, renderToast }]);
+  };
+  const onClickHandlerRemove = () => {
+    const newToastIdStack = [...toastStack];
+    const toastToRemove = newToastIdStack.shift();
+    setToastStack(newToastIdStack);
+    if (toastToRemove) {
+      removeToastItem(toastToRemove);
+    }
+  };
+
+  return (
+    <div style={{ display: 'flex', alignItems: 'flex-start' }}>
+      <Button onClick={onClickHandlerAdd}>Добавить сообщение</Button>
+      <div style={{ width: 20 }} />
+      <Button disabled={toastStack.length === 0} onClick={onClickHandlerRemove}>
+        Удалить первое сообщение
+      </Button>
+    </div>
+  );
+};
+
+const Template1 = (props: ToastProps) => {
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 
   return (
     <ThemeProvider theme={swapBorder}>
-      <ToastProvider autoDeleteTime={args.autoDeleteTime}>
+      <ToastProvider autoDeleteTime={props.autoDeleteTime}>
         <NotificationEmitter />
         <Toast style={{ top: 128, left: 64 }} />
       </ToastProvider>
@@ -119,30 +189,223 @@ const Temp1: ComponentStory<typeof Toast> = (args: ToastProps) => {
   );
 };
 
-const Temp2: ComponentStory<typeof Toast> = (args: ToastProps) => {
+const Temp1: ComponentStory<typeof Toast> = (args: ToastProps) => {
+  return <Template1 {...args} />;
+};
+
+const Template2 = (props: ToastProps) => {
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    return theme;
+  }
+
   return (
-    <>
-      <ToastProvider autoDeleteTime={args.autoDeleteTime}>
+    <ThemeProvider theme={swapBorder}>
+      <ToastProvider autoDeleteTime={props.autoDeleteTime}>
         <NotificationEmitter />
-        <Toast position={args.position} />
+        <Toast position={props.position} />
       </ToastProvider>
-    </>
+    </ThemeProvider>
+  );
+};
+
+const Temp2: ComponentStory<typeof Toast> = (args: ToastProps) => {
+  return <Template2 {...args} />;
+};
+
+const Template3 = (props: ToastProps) => {
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    return theme;
+  }
+
+  return (
+    <ThemeProvider theme={swapBorder}>
+      <ToastProvider autoDeleteTime={props.autoDeleteTime}>
+        <NotificationEmitter />
+        <Toast style={{ top: 128, left: 64, width: 'initial' }} />
+      </ToastProvider>
+    </ThemeProvider>
   );
 };
 
 const Temp3: ComponentStory<typeof Toast> = (args: ToastProps) => {
+  return <Template3 {...args} />;
+};
+
+const handleTextButtonClick = () => {
+  console.log('TextButton click');
+};
+
+const MessageForm = () => {
+  const [toastIdStack, setToastIdStack] = React.useState<Array<ToastItemProps>>([]);
+  const [inputValue, setInputValue] = React.useState('Notification message');
+
+  const { addToastItem, removeToastItem } = useToast();
+
+  const onClickHandlerAdd = () => {
+    const id = uid();
+    const renderFunction = (id: ID) => {
+      const handleCloseToast = () => {
+        removeToastItem({ id, renderToast: renderFunction });
+        console.log('Toast is closed');
+        setToastIdStack((prevToastIdStack) => prevToastIdStack.filter((toast) => toast.id !== id));
+      };
+      return (
+        <StyledNotificationItem isClosable={true} displayStatusIcon={true} onClose={handleCloseToast}>
+          <NotificationItemTitle>Title</NotificationItemTitle>
+          <NotificationItemContent>{inputValue}</NotificationItemContent>
+          <NotificationItemButtonPanel>
+            <TextButton dimension="s" text="TextButton1" onClick={handleTextButtonClick} />
+            <TextButton dimension="s" text="TextButton2" onClick={handleTextButtonClick} />
+          </NotificationItemButtonPanel>
+        </StyledNotificationItem>
+      );
+    };
+    addToastItem({ id, renderToast: renderFunction });
+    setToastIdStack((prev) => [...prev, { id, renderToast: renderFunction }]);
+  };
+  const onClickHandlerRemove = () => {
+    const newToastIdStack = [...toastIdStack];
+    const removeToast = newToastIdStack.shift();
+    setToastIdStack(newToastIdStack);
+    if (removeToast) {
+      removeToastItem(removeToast);
+    }
+  };
+
   return (
-    <>
-      <ToastProvider autoDeleteTime={args.autoDeleteTime}>
-        <NotificationEmitter />
-        <Toast style={{ top: 128, left: 64, width: 'initial' }} />
-      </ToastProvider>
-    </>
+    <div style={{ width: '550px' }}>
+      <TextInput value={inputValue} onChange={(e) => setInputValue(e.target.value)} />
+      <Separator />
+      <Wrapper>
+        <Button onClick={onClickHandlerAdd}>Добавить сообщение</Button>
+        <Button disabled={toastIdStack.length === 0} onClick={onClickHandlerRemove}>
+          Удалить первое сообщение
+        </Button>
+      </Wrapper>
+    </div>
   );
 };
 
-const NotificationEmitter = () => {
-  const [openToasts, setOpenToasts] = React.useState<Record<string, any>>({});
+const Template4 = (props: ToastProps) => {
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    return theme;
+  }
+
+  return (
+    <ThemeProvider theme={swapBorder}>
+      <ToastProvider>
+        <MessageForm />
+        <Toast position={props.position} />
+      </ToastProvider>
+    </ThemeProvider>
+  );
+};
+
+const Temp4: ComponentStory<typeof Toast> = (args: ToastProps) => {
+  return <Template4 {...args} />;
+};
+
+const toastStatuses: NotificationItemStatus[] = ['info', 'error', 'success', 'warning'];
+
+const MessageForm2 = () => {
+  const [toastIdStack, setToastIdStack] = React.useState<Array<ToastItemProps>>([]);
+  const [titleValue, setTitleValue] = React.useState('Toast title');
+  const [contentValue, setContentValue] = React.useState('Toast content');
+  const [textButton1Value, setTextButton1Value] = React.useState('TextButton1');
+  const [textButton2Value, setTextButton2Value] = React.useState('TextButton2');
+  const [toastStatus, setToastStatus] = React.useState(0);
+
+  const { addToastItem, removeToastItem, autoDeleteTime } = useToast();
+
+  const onClickHandlerAdd = () => {
+    const id = uid();
+    const renderFunction = (id: ID) => {
+      const handleCloseToast = () => {
+        removeToastItem({ id, renderToast: renderFunction });
+        console.log('Toast is closed');
+        setToastIdStack((prevToastIdStack) => prevToastIdStack.filter((toast) => toast.renderToast !== renderFunction));
+      };
+
+      return (
+        <ToastItemWithProgress
+          status={toastStatuses[toastStatus]}
+          autoDeleteTime={autoDeleteTime}
+          onRemoveNotification={handleCloseToast}
+        >
+          <StyledNotificationItem
+            status={toastStatuses[toastStatus]}
+            isClosable={true}
+            displayStatusIcon={true}
+            onClose={handleCloseToast}
+          >
+            <NotificationItemTitle>{titleValue}</NotificationItemTitle>
+            <NotificationItemContent>{contentValue}</NotificationItemContent>
+            <NotificationItemButtonPanel>
+              <TextButton dimension="s" text={textButton1Value} onClick={handleTextButtonClick} />
+              <TextButton dimension="s" text={textButton2Value} onClick={handleTextButtonClick} />
+            </NotificationItemButtonPanel>
+          </StyledNotificationItem>
+        </ToastItemWithProgress>
+      );
+    };
+    addToastItem({ id, renderToast: renderFunction });
+    setToastIdStack((prev) => [...prev, { id, renderToast: renderFunction }]);
+    setToastStatus((prevStatus) => (prevStatus + 1) % 4);
+  };
+  const onClickHandlerRemove = () => {
+    const newToastIdStack = [...toastIdStack];
+    const removeToast = newToastIdStack.shift();
+    setToastIdStack(newToastIdStack);
+    if (removeToast) {
+      removeToastItem(removeToast);
+    }
+  };
+
+  return (
+    <div style={{ width: '550px' }}>
+      <TextInput value={titleValue} onChange={(e) => setTitleValue(e.target.value)} />
+      <Separator />
+      <TextInput value={contentValue} onChange={(e) => setContentValue(e.target.value)} />
+      <Separator />
+      <Wrapper>
+        <TextInput value={textButton1Value} onChange={(e) => setTextButton1Value(e.target.value)} />
+        <TextInput value={textButton2Value} onChange={(e) => setTextButton2Value(e.target.value)} />
+      </Wrapper>
+      <Separator />
+      <Wrapper>
+        <Button onClick={onClickHandlerAdd}>Добавить сообщение</Button>
+        <Button disabled={toastIdStack.length === 0} onClick={onClickHandlerRemove}>
+          Удалить первое сообщение
+        </Button>
+      </Wrapper>
+    </div>
+  );
+};
+
+const Template5 = (props: ToastProps) => {
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    return theme;
+  }
+
+  return (
+    <ThemeProvider theme={swapBorder}>
+      <ToastProvider autoDeleteTime={5000}>
+        <MessageForm2 />
+        <Toast position={props.position} />
+      </ToastProvider>
+    </ThemeProvider>
+  );
+};
+
+const Temp5: ComponentStory<typeof Toast> = (args: ToastProps) => {
+  return <Template5 {...args} />;
+};
+
+const NotificationEmitter2 = () => {
   const [toastIdStack, setToastIdStack] = React.useState<Array<string>>([]);
 
   const { addToast, removeById } = useToast();
@@ -151,7 +414,6 @@ const NotificationEmitter = () => {
     const customItem = random(0, 3);
     const toast = items[customItem];
     const toastId = addToast(toast);
-    setOpenToasts((prev) => ({ ...prev, [toastId]: toast }));
     setToastIdStack((prev) => [...prev, toastId]);
   };
   const onClickHandlerRemove = () => {
@@ -174,11 +436,40 @@ const NotificationEmitter = () => {
   );
 };
 
+const Template6 = (props: ToastProps) => {
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    return theme;
+  }
+
+  return (
+    <ThemeProvider theme={swapBorder}>
+      <ToastProvider autoDeleteTime={props.autoDeleteTime}>
+        <NotificationEmitter2 />
+        <Toast position={props.position} />
+      </ToastProvider>
+    </ThemeProvider>
+  );
+};
+
+const Temp6: ComponentStory<typeof Toast> = (args: ToastProps) => {
+  return <Template6 {...args} />;
+};
+
 export const ToastNotification = Temp1.bind({});
-ToastNotification.storyName = 'Нотификация настройка места всплытия через стили.';
+ToastNotification.storyName = 'Toast. Настройка места всплытия через стили.';
 
 export const ToastNotificationBase = Temp2.bind({});
-ToastNotificationBase.storyName = 'Всплывающая нотификация. Базовый пример.';
+ToastNotificationBase.storyName = 'Toast. Базовый пример.';
 
 export const ToastLineNotification = Temp3.bind({});
-ToastLineNotification.storyName = 'Всплывающая нотификация. Line Notification.';
+ToastLineNotification.storyName = 'Line Notification.';
+
+export const ToastCustomComponent = Temp4.bind({});
+ToastCustomComponent.storyName = 'Toast. Custom component.';
+
+export const ToastProgressComponent = Temp5.bind({});
+ToastProgressComponent.storyName = 'Toast. Custom component with Progress.';
+
+export const ToastBackwardCompatibility = Temp6.bind({});
+ToastBackwardCompatibility.storyName = 'Toast. Backward compatibility.';

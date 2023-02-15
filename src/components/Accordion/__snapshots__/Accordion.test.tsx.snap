@@ -3,15 +3,7 @@
 exports[`Spinner should render component with dimension m 1`] = `
 Object {
   "asFragment": [Function],
-  "baseElement": .c10 {
-  overflow: hidden;
-  -webkit-transition: max-height 250ms cubic-bezier(0.4,0,0.2,1),visibility 250ms cubic-bezier(0.4,0,0.2,1);
-  transition: max-height 250ms cubic-bezier(0.4,0,0.2,1),visibility 250ms cubic-bezier(0.4,0,0.2,1);
-  max-height: 0;
-  visibility: hidden;
-}
-
-.c9 {
+  "baseElement": .c9 {
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
   -webkit-flex-shrink: 0;
@@ -184,6 +176,14 @@ Object {
 
 .c0 > .c1:last-child {
   border-bottom: 1px solid #D5D8DE;
+}
+
+.c10 {
+  overflow: hidden;
+  -webkit-transition: max-height 250ms cubic-bezier(0.4,0,0.2,1),visibility 250ms cubic-bezier(0.4,0,0.2,1);
+  transition: max-height 250ms cubic-bezier(0.4,0,0.2,1),visibility 250ms cubic-bezier(0.4,0,0.2,1);
+  max-height: 0;
+  visibility: hidden;
 }
 
 <body>
@@ -310,15 +310,7 @@ Object {
       </div>
     </div>
   </body>,
-  "container": .c10 {
-  overflow: hidden;
-  -webkit-transition: max-height 250ms cubic-bezier(0.4,0,0.2,1),visibility 250ms cubic-bezier(0.4,0,0.2,1);
-  transition: max-height 250ms cubic-bezier(0.4,0,0.2,1),visibility 250ms cubic-bezier(0.4,0,0.2,1);
-  max-height: 0;
-  visibility: hidden;
-}
-
-.c9 {
+  "container": .c9 {
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
   -webkit-flex-shrink: 0;
@@ -491,6 +483,14 @@ Object {
 
 .c0 > .c1:last-child {
   border-bottom: 1px solid #D5D8DE;
+}
+
+.c10 {
+  overflow: hidden;
+  -webkit-transition: max-height 250ms cubic-bezier(0.4,0,0.2,1),visibility 250ms cubic-bezier(0.4,0,0.2,1);
+  transition: max-height 250ms cubic-bezier(0.4,0,0.2,1),visibility 250ms cubic-bezier(0.4,0,0.2,1);
+  max-height: 0;
+  visibility: hidden;
 }
 
 <div>
@@ -672,15 +672,7 @@ Object {
 exports[`Spinner should render default component 1`] = `
 Object {
   "asFragment": [Function],
-  "baseElement": .c10 {
-  overflow: hidden;
-  -webkit-transition: max-height 250ms cubic-bezier(0.4,0,0.2,1),visibility 250ms cubic-bezier(0.4,0,0.2,1);
-  transition: max-height 250ms cubic-bezier(0.4,0,0.2,1),visibility 250ms cubic-bezier(0.4,0,0.2,1);
-  max-height: 0;
-  visibility: hidden;
-}
-
-.c9 {
+  "baseElement": .c9 {
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
   -webkit-flex-shrink: 0;
@@ -853,6 +845,14 @@ Object {
 
 .c0 > .c1:last-child {
   border-bottom: 1px solid #D5D8DE;
+}
+
+.c10 {
+  overflow: hidden;
+  -webkit-transition: max-height 250ms cubic-bezier(0.4,0,0.2,1),visibility 250ms cubic-bezier(0.4,0,0.2,1);
+  transition: max-height 250ms cubic-bezier(0.4,0,0.2,1),visibility 250ms cubic-bezier(0.4,0,0.2,1);
+  max-height: 0;
+  visibility: hidden;
 }
 
 <body>
@@ -979,15 +979,7 @@ Object {
       </div>
     </div>
   </body>,
-  "container": .c10 {
-  overflow: hidden;
-  -webkit-transition: max-height 250ms cubic-bezier(0.4,0,0.2,1),visibility 250ms cubic-bezier(0.4,0,0.2,1);
-  transition: max-height 250ms cubic-bezier(0.4,0,0.2,1),visibility 250ms cubic-bezier(0.4,0,0.2,1);
-  max-height: 0;
-  visibility: hidden;
-}
-
-.c9 {
+  "container": .c9 {
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
   -webkit-flex-shrink: 0;
@@ -1160,6 +1152,14 @@ Object {
 
 .c0 > .c1:last-child {
   border-bottom: 1px solid #D5D8DE;
+}
+
+.c10 {
+  overflow: hidden;
+  -webkit-transition: max-height 250ms cubic-bezier(0.4,0,0.2,1),visibility 250ms cubic-bezier(0.4,0,0.2,1);
+  transition: max-height 250ms cubic-bezier(0.4,0,0.2,1),visibility 250ms cubic-bezier(0.4,0,0.2,1);
+  max-height: 0;
+  visibility: hidden;
 }
 
 <div>
