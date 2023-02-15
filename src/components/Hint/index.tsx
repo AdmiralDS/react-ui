@@ -134,6 +134,30 @@ export const Hint: React.FC<HintProps> = ({
             hint.style.alignSelf = 'center';
             hint.style.margin = '0';
             break;
+          case 'right-bottom':
+            setPortalFlexDirection('row');
+            setPortalFullWidth(false);
+            hint.style.alignSelf = 'flex-start';
+            hint.style.margin = '-8px 0 0 0';
+            break;
+          case 'right-top':
+            setPortalFlexDirection('row');
+            setPortalFullWidth(false);
+            hint.style.alignSelf = 'flex-end';
+            hint.style.margin = '0 0 -8px 0';
+            break;
+          case 'left-bottom':
+            setPortalFlexDirection('row-reverse');
+            setPortalFullWidth(false);
+            hint.style.alignSelf = 'flex-start';
+            hint.style.margin = '-8px 0 0 0';
+            break;
+          case 'left-top':
+            setPortalFlexDirection('row-reverse');
+            setPortalFullWidth(false);
+            hint.style.alignSelf = 'flex-end';
+            hint.style.margin = '0 0 -8px 0';
+            break;
           case 'top-right':
             setPortalFlexDirection('column-reverse');
             setPortalFullWidth(false);

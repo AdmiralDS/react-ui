@@ -91,8 +91,8 @@ const Template1: ComponentStory<typeof Hint> = ({ anchorId, ...args }) => {
     theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
-  const [visible, setVisible] = React.useState(false);
-  const handleVisibilityChange = (visible: boolean) => setVisible(visible);
+  const [visible, setVisible] = React.useState(true);
+  const handleVisibilityChange = (visible: boolean) => setVisible(true);
 
   return (
     <ThemeProvider theme={swapBorder}>
@@ -184,7 +184,7 @@ const Template4: ComponentStory<typeof Hint> = ({ anchorId, ...args }) => {
           <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
             {text}
             <Separator height={8} />
-            <TextButton appearance="primary" dimension="s" text="Link" />
+            <TextButton appearance="primary" dimension="s" text="Text Button" />
           </div>
         )}
         anchorId={anchorId}

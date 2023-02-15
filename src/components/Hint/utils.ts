@@ -7,10 +7,8 @@ type HintPositionType =
   | 'top-pageCenter'
   | 'right-bottom'
   | 'right-top'
-  | 'right-pageCenter'
   | 'left-bottom'
-  | 'left-top'
-  | 'left-pageCenter';
+  | 'left-top';
 
 export type CalculationResult = {
   check: (
@@ -118,16 +116,16 @@ const POSITION_MAPPER: Record<HintPositionType, CalculationResult> = {
       );
     },
   },
-  'right-pageCenter': {
-    /** проверяем, что тултипу хватит места справа и по центру страницы */
-    check: (anchorElementRect: DOMRect, hintRect: DOMRect, withScroll: boolean, _, viewportScrollWidth: number) => {
-      const isEnoughOnRight = document.documentElement.clientWidth - anchorElementRect.right >= hintRect.width;
-      const isEnoughOnRightWithScroll =
-        viewportScrollWidth - (anchorElementRect.right + window.scrollX) > hintRect.width;
-      const isEnoughOnCenter = hintRect.height < document.documentElement.clientHeight;
-      return isEnoughOnCenter && (withScroll ? isEnoughOnRightWithScroll : isEnoughOnRight);
-    },
-  },
+  // 'right-pageCenter': {
+  //   /** проверяем, что тултипу хватит места справа и по центру страницы */
+  //   check: (anchorElementRect: DOMRect, hintRect: DOMRect, withScroll: boolean, _, viewportScrollWidth: number) => {
+  //     const isEnoughOnRight = document.documentElement.clientWidth - anchorElementRect.right >= hintRect.width;
+  //     const isEnoughOnRightWithScroll =
+  //       viewportScrollWidth - (anchorElementRect.right + window.scrollX) > hintRect.width;
+  //     const isEnoughOnCenter = hintRect.height < document.documentElement.clientHeight;
+  //     return isEnoughOnCenter && (withScroll ? isEnoughOnRightWithScroll : isEnoughOnRight);
+  //   },
+  // },
   'left-bottom': {
     /** проверяем, что тултипу хватит места слева и снизу */
     check: (
@@ -161,15 +159,15 @@ const POSITION_MAPPER: Record<HintPositionType, CalculationResult> = {
       );
     },
   },
-  'left-pageCenter': {
-    /** проверяем, что тултипу хватит места слева и по центру страницы */
-    check: (anchorElementRect: DOMRect, hintRect: DOMRect, withScroll: boolean, _, viewportScrollWidth: number) => {
-      const isEnoughOnLeft = document.documentElement.clientWidth - anchorElementRect.left >= hintRect.width;
-      const isEnoughOnLeftWithScroll = viewportScrollWidth - (anchorElementRect.left + window.scrollX) > hintRect.width;
-      const isEnoughOnCenter = hintRect.height < document.documentElement.clientHeight;
-      return isEnoughOnCenter && (withScroll ? isEnoughOnLeftWithScroll : isEnoughOnLeft);
-    },
-  },
+  // 'left-pageCenter': {
+  //   /** проверяем, что тултипу хватит места слева и по центру страницы */
+  //   check: (anchorElementRect: DOMRect, hintRect: DOMRect, withScroll: boolean, _, viewportScrollWidth: number) => {
+  //     const isEnoughOnLeft = document.documentElement.clientWidth - anchorElementRect.left >= hintRect.width;
+  //     const isEnoughOnLeftWithScroll = viewportScrollWidth - (anchorElementRect.left + window.scrollX) > hintRect.width;
+  //     const isEnoughOnCenter = hintRect.height < document.documentElement.clientHeight;
+  //     return isEnoughOnCenter && (withScroll ? isEnoughOnLeftWithScroll : isEnoughOnLeft);
+  //   },
+  // },
 };
 
 export function getHintDirection(anchorElement: HTMLElement, hintElement: HTMLElement): any {
