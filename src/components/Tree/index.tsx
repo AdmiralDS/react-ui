@@ -74,6 +74,7 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps>(
       onActivateItem,
       onSelectItem,
       onChange,
+      onMouseLeave,
       ...props
     },
     ref,
@@ -188,11 +189,11 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps>(
     const handleMouseLeave = (e: React.MouseEvent<HTMLDivElement>) => {
       setActiveState(undefined);
       onActivateItem?.(null);
-      if (props.onMouseLeave) props.onMouseLeave(e);
+      onMouseLeave?.(e);
     };
 
     return (
-      <Wrapper ref={ref} $width={width} onMouseLeave={handleMouseLeave} {...props}>
+      <Wrapper ref={ref} {...props} $width={width} onMouseLeave={handleMouseLeave}>
         {renderChildren(model)}
       </Wrapper>
     );
