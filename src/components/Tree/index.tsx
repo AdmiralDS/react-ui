@@ -18,8 +18,6 @@ export interface TreeProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChang
   onSelectItem?: (id: string | null) => void;
   /** Обработчик изменения данных дерева */
   onChange?: (model: Array<TreeItemProps>) => void;
-  /** Колбек при покидании мышью области Tree */
-  onMouseLeaveTree?: () => void;
   /** Модель данных, с рендер-пропсами*/
   model: Array<TreeItemProps>;
   /** Признак того, что дерево содержит checkbox-ы */
@@ -76,7 +74,6 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps>(
       onActivateItem,
       onSelectItem,
       onChange,
-      onMouseLeaveTree,
       ...props
     },
     ref,

@@ -339,6 +339,7 @@ const Demo2: ComponentStory<typeof Tree> = (props) => {
   const handleMouseLeave = () => {
     // eslint-disable-next-line no-console
     console.log('Mouse leave tree');
+    setActiveItem(null);
   };
 
   return (
@@ -351,7 +352,6 @@ const Demo2: ComponentStory<typeof Tree> = (props) => {
         active={activeItem}
         onActivateItem={setActiveItem}
         onMouseLeave={handleMouseLeave}
-        // onMouseLeaveTree={handleMouseLeave}
       />
     </>
   );
