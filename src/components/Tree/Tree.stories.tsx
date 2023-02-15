@@ -334,10 +334,11 @@ const Demo2: ComponentStory<typeof Tree> = (props) => {
 
     return acc;
   }, {} as Record<any, any>);
-  const [activeItem, setActiveItem] = useState<string | undefined>('1');
+  const [activeItem, setActiveItem] = useState<string | null>('1');
 
   const handleMouseLeave = () => {
-    setActiveItem(undefined);
+    // eslint-disable-next-line no-console
+    console.log('Mouse leave tree');
   };
 
   return (
@@ -349,7 +350,8 @@ const Demo2: ComponentStory<typeof Tree> = (props) => {
         model={demo2_TreeModel}
         active={activeItem}
         onActivateItem={setActiveItem}
-        onMouseLeaveTree={handleMouseLeave}
+        onMouseLeave={handleMouseLeave}
+        // onMouseLeaveTree={handleMouseLeave}
       />
     </>
   );

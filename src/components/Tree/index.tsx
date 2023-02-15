@@ -7,15 +7,15 @@ export interface TreeProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChang
   /** Размер компонента */
   dimension?: Dimension;
   /** Активная секция Tree */
-  active?: string;
+  active?: string | null;
   /** выбранная секция Tree */
-  selected?: string;
-  /** выбранная по умолчаниию секция Tree */
+  selected?: string | null;
+  /** выбранная по умолчанию секция Tree */
   defaultSelected?: string;
   /** Обработчик выбора элемента дерева */
-  onActivateItem?: (id?: string) => void;
+  onActivateItem?: (id: string | null) => void;
   /** Обработчик выбора элемента дерева */
-  onSelectItem?: (id: string) => void;
+  onSelectItem?: (id: string | null) => void;
   /** Обработчик изменения данных дерева */
   onChange?: (model: Array<TreeItemProps>) => void;
   /** Колбек при покидании мышью области Tree */
@@ -90,7 +90,7 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps>(
 
     const activateItem = (id?: string) => {
       if (activeId !== id) setActiveState(id);
-      onActivateItem?.(id);
+      onActivateItem?.(id || null);
     };
 
     const selectItem = (id: string) => {
@@ -188,9 +188,10 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps>(
       });
     };
 
-    const handleMouseLeave = () => {
+    const handleMouseLeave = (e: React.MouseEvent<HTMLDivElement>) => {
       setActiveState(undefined);
-      onMouseLeaveTree?.();
+      onActivateItem?.(null);
+      if (props.onMouseLeave) props.onMouseLeave(e);
     };
 
     return (
