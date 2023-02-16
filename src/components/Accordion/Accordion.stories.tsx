@@ -38,6 +38,7 @@ const SelectField = styled(Select)`
 export default {
   title: 'Admiral-2.1/Accordion',
   component: Accordion,
+  subcomponents: { AccordionItem },
   parameters: {
     docs: {
       source: {
@@ -318,8 +319,10 @@ AccordionDevider.parameters = {
     description: {
       story: `В зависимости от контекста можно включать-выключать разделители блоков компонента 
       (верхнюю и нижнюю полоски). Например при использовании на подложке. Высота компонента при 
-      этом не меняется.\n\nДля отключения верхнего разделителя используйте параметр hideTopDivider, для отключения
-      нижнего - параметр hideBottomDivider.`,
+      этом не меняется.\n\nДля отключения верхнего разделителя используйте параметр hideTopDivider, данный параметр 
+      скрывает верхний разделитель у первого AccordionItem, заданного внутри Accordion. Для отключения
+      нижнего разделителя используйте параметр hideBottomDivider, данный параметр скрывает нижний 
+      разделитель у последнего AccordionItem, заданного внутри Accordion.`,
     },
   },
 };
