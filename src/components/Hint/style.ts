@@ -58,7 +58,7 @@ export const HintDialog = styled.div<{
   isMobile: boolean;
 }>`
   display: flex;
-  padding: ${HINT_PADDING}px 0 ${HINT_PADDING}px ${HINT_PADDING}px;
+  padding: ${HINT_PADDING}px 0;
   background-color: ${({ theme }) => theme.color['Special/Elevated BG']};
   ${typography['Body/Body 2 Long']}
   color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
@@ -73,7 +73,7 @@ export const HintContent = styled.div`
   flex: 1 1 auto;
   max-height: 320px;
   overflow: auto;
-  padding-right: ${HINT_PADDING}px;
+  padding: 6px ${HINT_PADDING}px 6px ${HINT_PADDING}px;
   [data-trigger='click'] & {
     padding-right: ${CLOSE_BUTTON_SIZE + HINT_PADDING + CLOSE_BUTTON_MARGIN_LEFT}px;
   }

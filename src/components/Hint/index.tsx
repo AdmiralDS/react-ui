@@ -9,6 +9,7 @@ import { keyboardKey } from '#src/components/common/keyboardKey';
 import type { Dimension } from './style';
 import { AnchorWrapper, FakeTarget, Portal } from './style';
 import { getHintDirection } from './utils';
+import type { HintPositionType, InternalHintPositionType } from './utils';
 import { HintContainer } from './HintContainer';
 
 type Trigger = 'click' | 'hover';
@@ -29,6 +30,8 @@ export interface HintProps extends React.HTMLAttributes<HTMLDivElement> {
   onVisibilityChange?: (visible: boolean) => void;
   /** Функция, которая возвращает реакт-компонент с контентом тултипа. Если этому компоненту нужны props, используйте замыкание */
   renderContent: () => React.ReactNode;
+  /** Расположение хинта */
+  hintPosition?: HintPositionType;
   /** Контейнер, в котором будет отрисован тултип через React.createPortal. По умолчанию тултип отрисовывается в document.body */
   container?: Element | null;
   /** Элемент, относительно которого будет позиционироваться хинт, если позиционирование относительно children не подходит */
@@ -58,6 +61,7 @@ export const Hint: React.FC<HintProps> = ({
   visible,
   onVisibilityChange,
   renderContent,
+  hintPosition,
   container: userContainer,
   target,
   visibilityTrigger = 'hover',
@@ -120,63 +124,63 @@ export const Hint: React.FC<HintProps> = ({
         hint.style.alignSelf = 'center';
         hint.style.margin = '0';
       } else {
-        const direction = getHintDirection(targetElement, hint);
+        const direction: InternalHintPositionType = getHintDirection(targetElement, hint, hintPosition);
         switch (direction) {
-          case 'top-pageCenter':
+          case 'topPageCenter':
             setPortalFlexDirection('column-reverse');
             setPortalFullWidth(true);
             hint.style.alignSelf = 'center';
             hint.style.margin = '0';
             break;
-          case 'bottom-pageCenter':
+          case 'bottomPageCenter':
             setPortalFlexDirection('column');
             setPortalFullWidth(true);
             hint.style.alignSelf = 'center';
             hint.style.margin = '0';
             break;
-          case 'right-bottom':
+          case 'rightBottom':
             setPortalFlexDirection('row');
             setPortalFullWidth(false);
             hint.style.alignSelf = 'flex-start';
             hint.style.margin = '-8px 0 0 0';
             break;
-          case 'right-top':
+          case 'rightTop':
             setPortalFlexDirection('row');
             setPortalFullWidth(false);
             hint.style.alignSelf = 'flex-end';
             hint.style.margin = '0 0 -8px 0';
             break;
-          case 'left-bottom':
+          case 'leftBottom':
             setPortalFlexDirection('row-reverse');
             setPortalFullWidth(false);
             hint.style.alignSelf = 'flex-start';
             hint.style.margin = '-8px 0 0 0';
             break;
-          case 'left-top':
+          case 'leftTop':
             setPortalFlexDirection('row-reverse');
             setPortalFullWidth(false);
             hint.style.alignSelf = 'flex-end';
             hint.style.margin = '0 0 -8px 0';
             break;
-          case 'top-right':
+          case 'topRight':
             setPortalFlexDirection('column-reverse');
             setPortalFullWidth(false);
             hint.style.alignSelf = 'flex-start';
             hint.style.margin = '0 0 0 -8px';
             break;
-          case 'bottom-right':
+          case 'bottomRight':
             setPortalFlexDirection('column');
             setPortalFullWidth(false);
             hint.style.alignSelf = 'flex-start';
             hint.style.margin = '0 0 0 -8px';
             break;
-          case 'top-left':
+          case 'topLeft':
             setPortalFlexDirection('column-reverse');
             setPortalFullWidth(false);
             hint.style.alignSelf = 'flex-end';
             hint.style.margin = '0 -8px 0 0';
             break;
-          case 'bottom-left':
+          case 'bottomLeft':
           default:
             setPortalFlexDirection('column');
             setPortalFullWidth(false);
@@ -189,6 +193,7 @@ export const Hint: React.FC<HintProps> = ({
     target?.current,
     anchorElementRef.current,
     hintElementRef.current,
+    hintPosition,
     visible,
     recalculation,
     dimension,

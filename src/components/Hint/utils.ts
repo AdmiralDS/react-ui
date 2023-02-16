@@ -1,14 +1,16 @@
-type HintPositionType =
-  | 'bottom-right'
-  | 'bottom-left'
-  | 'bottom-pageCenter'
-  | 'top-right'
-  | 'top-left'
-  | 'top-pageCenter'
-  | 'right-bottom'
-  | 'right-top'
-  | 'left-bottom'
-  | 'left-top';
+export type HintPositionType = 'bottom' | 'top' | 'left' | 'right';
+export type InternalHintPositionType =
+  | HintPositionType
+  | 'bottomRight'
+  | 'bottomLeft'
+  | 'topRight'
+  | 'topLeft'
+  | 'leftBottom'
+  | 'leftTop'
+  | 'rightBottom'
+  | 'rightTop'
+  | 'bottomPageCenter'
+  | 'topPageCenter';
 
 export type CalculationResult = {
   check: (
@@ -21,19 +23,19 @@ export type CalculationResult = {
 };
 
 // расположены в порядке приоритета при подборе стороны открытия тултипа
-const POSITION_MAPPER: Record<HintPositionType, CalculationResult> = {
-  'bottom-right': {
+const POSITION_MAPPER: Record<InternalHintPositionType, CalculationResult> = {
+  bottomRight: {
     /** проверяем, что тултипу хватит места снизу и справа */
     check: (anchorElementRect: DOMRect, hintRect: DOMRect, withScroll: boolean, viewportScrollHeight: number) => {
       const isEnoughOnBottom = document.documentElement.clientHeight - anchorElementRect.bottom > hintRect.height;
       const isEnoughOnBottomWithScroll =
         viewportScrollHeight - (anchorElementRect.bottom + window.scrollY) > hintRect.height;
       const isEnoughOnRight =
-        document.documentElement.clientWidth - anchorElementRect.right >= hintRect.width - anchorElementRect.width;
+        document.documentElement.clientWidth - anchorElementRect.right > hintRect.width - anchorElementRect.width;
       return (withScroll ? isEnoughOnBottomWithScroll : isEnoughOnBottom) && isEnoughOnRight;
     },
   },
-  'bottom-left': {
+  bottomLeft: {
     /** проверяем, что тултипу хватит места снизу и слева */
     check: (anchorElementRect: DOMRect, hintRect: DOMRect, withScroll: boolean, viewportScrollHeight: number) => {
       const isEnoughOnBottom = document.documentElement.clientHeight - anchorElementRect.bottom > hintRect.height;
@@ -43,7 +45,204 @@ const POSITION_MAPPER: Record<HintPositionType, CalculationResult> = {
       return (withScroll ? isEnoughOnBottomWithScroll : isEnoughOnBottom) && isEnoughOnLeft;
     },
   },
-  'bottom-pageCenter': {
+  topRight: {
+    /** проверяем, что тултипу хватит места сверху и справа */
+    check: (anchorElementRect: DOMRect, hintRect: DOMRect, withScroll: boolean) => {
+      const isEnoughOnTop = anchorElementRect.top > hintRect.height;
+      const isEnoughOnTopWithScroll = anchorElementRect.top + window.scrollY > hintRect.height;
+      const isEnoughOnRight =
+        document.documentElement.clientWidth - anchorElementRect.right > hintRect.width - anchorElementRect.width;
+      return isEnoughOnRight && (withScroll ? isEnoughOnTopWithScroll : isEnoughOnTop);
+    },
+  },
+  topLeft: {
+    /** проверяем, что тултипу хватит места сверху и слева */
+    check: (anchorElementRect: DOMRect, hintRect: DOMRect, withScroll: boolean) => {
+      const isEnoughOnTop = anchorElementRect.top > hintRect.height;
+      const isEnoughOnTopWithScroll = anchorElementRect.top + window.scrollY > hintRect.height;
+      const isEnoughOnLeft = anchorElementRect.left > hintRect.width - anchorElementRect.width;
+      return isEnoughOnLeft && (withScroll ? isEnoughOnTopWithScroll : isEnoughOnTop);
+    },
+  },
+  leftBottom: {
+    /** проверяем, что тултипу хватит места слева и снизу */
+    check: (anchorElementRect: DOMRect, hintRect: DOMRect, withScroll: boolean, viewportScrollHeight: number) => {
+      const isEnoughOnLeft = anchorElementRect.left > hintRect.width;
+      const isEnoughOnLeftWithScroll = anchorElementRect.left + window.scrollX > hintRect.width;
+      const isEnoughOnBottom = document.documentElement.clientHeight - anchorElementRect.top > hintRect.height;
+      const isEnoughOnBottomWithScroll =
+        viewportScrollHeight - (anchorElementRect.top + window.scrollY) > hintRect.height;
+      return (
+        (withScroll ? isEnoughOnLeftWithScroll : isEnoughOnLeft) &&
+        (withScroll ? isEnoughOnBottomWithScroll : isEnoughOnBottom)
+      );
+    },
+  },
+  leftTop: {
+    /** проверяем, что тултипу хватит места слева и сверху */
+    check: (anchorElementRect: DOMRect, hintRect: DOMRect, withScroll: boolean) => {
+      const isEnoughOnLeft = anchorElementRect.left > hintRect.width;
+      const isEnoughOnLeftWithScroll = anchorElementRect.left + window.scrollX > hintRect.width;
+      const isEnoughOnTop = anchorElementRect.bottom > hintRect.height;
+      const isEnoughOnTopWithScroll = anchorElementRect.bottom + window.scrollY > hintRect.height;
+      return (
+        (withScroll ? isEnoughOnLeftWithScroll : isEnoughOnLeft) &&
+        (withScroll ? isEnoughOnTopWithScroll : isEnoughOnTop)
+      );
+    },
+  },
+  rightBottom: {
+    /** проверяем, что тултипу хватит места справа и снизу */
+    check: (
+      anchorElementRect: DOMRect,
+      hintRect: DOMRect,
+      withScroll: boolean,
+      viewportScrollHeight: number,
+      viewportScrollWidth: number,
+    ) => {
+      const isEnoughOnRight = document.documentElement.clientWidth - anchorElementRect.right > hintRect.width;
+      const isEnoughOnRightWithScroll =
+        viewportScrollWidth - (anchorElementRect.right + window.scrollX) > hintRect.width;
+      const isEnoughOnBottom = document.documentElement.clientHeight - anchorElementRect.top > hintRect.height;
+      const isEnoughOnBottomWithScroll =
+        viewportScrollHeight - (anchorElementRect.top + window.scrollY) > hintRect.height;
+      return (
+        (withScroll ? isEnoughOnRightWithScroll : isEnoughOnRight) &&
+        (withScroll ? isEnoughOnBottomWithScroll : isEnoughOnBottom)
+      );
+    },
+  },
+  rightTop: {
+    /** проверяем, что тултипу хватит места справа и сверху */
+    check: (anchorElementRect: DOMRect, hintRect: DOMRect, withScroll: boolean, _, viewportScrollWidth: number) => {
+      const isEnoughOnRight = document.documentElement.clientWidth - anchorElementRect.right > hintRect.width;
+      const isEnoughOnRightWithScroll =
+        viewportScrollWidth - (anchorElementRect.right + window.scrollX) > hintRect.width;
+      const isEnoughOnTop = anchorElementRect.bottom > hintRect.height;
+      const isEnoughOnTopWithScroll = anchorElementRect.bottom + window.scrollY > hintRect.height;
+      return (
+        (withScroll ? isEnoughOnRightWithScroll : isEnoughOnRight) &&
+        (withScroll ? isEnoughOnTopWithScroll : isEnoughOnTop)
+      );
+    },
+  },
+  bottom: {
+    /** проверяем, что тултипу хватит места снизу и по центру anchorElementRect */
+    check: (
+      anchorElementRect: DOMRect,
+      hintRect: DOMRect,
+      withScroll: boolean,
+      viewportScrollHeight: number,
+      viewportScrollWidth: number,
+    ) => {
+      const isEnoughOnBottom = document.documentElement.clientHeight - anchorElementRect.bottom > hintRect.height;
+      const isEnoughOnBottomWithScroll =
+        viewportScrollHeight - (anchorElementRect.bottom + window.scrollY) > hintRect.height;
+
+      const isEnoughOnLeft = anchorElementRect.left + anchorElementRect.width / 2 > hintRect.width / 2;
+      const isEnoughOnLeftWithScroll =
+        anchorElementRect.left + window.scrollX + anchorElementRect.width / 2 > hintRect.width / 2;
+
+      const isEnoughOnRight =
+        document.documentElement.clientWidth - anchorElementRect.right + anchorElementRect.width / 2 >
+        hintRect.width / 2;
+      const isEnoughOnRightWithScroll =
+        viewportScrollWidth - (anchorElementRect.right + window.scrollX) + anchorElementRect.width / 2 >
+        hintRect.width / 2;
+
+      return (
+        (withScroll ? isEnoughOnBottomWithScroll : isEnoughOnBottom) &&
+        (withScroll ? isEnoughOnLeftWithScroll : isEnoughOnLeft) &&
+        (withScroll ? isEnoughOnRightWithScroll : isEnoughOnRight)
+      );
+    },
+  },
+  top: {
+    /** проверяем, что тултипу хватит места сверху и по центру anchorElementRect */
+    check: (
+      anchorElementRect: DOMRect,
+      hintRect: DOMRect,
+      withScroll: boolean,
+      viewportScrollHeight: number,
+      viewportScrollWidth: number,
+    ) => {
+      const isEnoughOnBottom = document.documentElement.clientHeight - anchorElementRect.bottom > hintRect.height;
+      const isEnoughOnBottomWithScroll =
+        viewportScrollHeight - (anchorElementRect.bottom + window.scrollY) > hintRect.height;
+
+      const isEnoughOnLeft = anchorElementRect.left + anchorElementRect.width / 2 > hintRect.width / 2;
+      const isEnoughOnLeftWithScroll =
+        anchorElementRect.left + window.scrollX + anchorElementRect.width / 2 > hintRect.width / 2;
+
+      const isEnoughOnRight =
+        document.documentElement.clientWidth - anchorElementRect.right + anchorElementRect.width / 2 >
+        hintRect.width / 2;
+      const isEnoughOnRightWithScroll =
+        viewportScrollWidth - (anchorElementRect.right + window.scrollX) + anchorElementRect.width / 2 >
+        hintRect.width / 2;
+
+      return (
+        (withScroll ? isEnoughOnBottomWithScroll : isEnoughOnBottom) &&
+        (withScroll ? isEnoughOnLeftWithScroll : isEnoughOnLeft) &&
+        (withScroll ? isEnoughOnRightWithScroll : isEnoughOnRight)
+      );
+    },
+  },
+  left: {
+    /** проверяем, что тултипу хватит места слева и по центру anchorElementRect */
+    check: (anchorElementRect: DOMRect, hintRect: DOMRect, withScroll: boolean, viewportScrollHeight: number) => {
+      const isEnoughOnLeft = anchorElementRect.left > hintRect.width;
+      const isEnoughOnLeftWithScroll = anchorElementRect.left + window.scrollX > hintRect.width;
+
+      const isEnoughOnTop = anchorElementRect.top > (hintRect.height - anchorElementRect.height) / 2;
+      const isEnoughOnTopWithScroll =
+        anchorElementRect.top + window.screenY > (hintRect.height - anchorElementRect.height) / 2;
+
+      const isEnoughOnBottom =
+        document.documentElement.clientHeight - anchorElementRect.bottom >
+        (hintRect.height - anchorElementRect.height) / 2;
+      const isEnoughOnBottomWithScroll =
+        viewportScrollHeight - (anchorElementRect.bottom + window.scrollY) >
+        (hintRect.height - anchorElementRect.height) / 2;
+
+      return (
+        (withScroll ? isEnoughOnLeftWithScroll : isEnoughOnLeft) &&
+        (withScroll ? isEnoughOnTopWithScroll : isEnoughOnTop) &&
+        (withScroll ? isEnoughOnBottomWithScroll : isEnoughOnBottom)
+      );
+    },
+  },
+  right: {
+    /** проверяем, что тултипу хватит места справа и по центру anchorElementRect */
+    check: (
+      anchorElementRect: DOMRect,
+      hintRect: DOMRect,
+      withScroll: boolean,
+      viewportScrollHeight: number,
+      viewportScrollWidth: number,
+    ) => {
+      const isEnoughOnRight = document.documentElement.clientWidth - anchorElementRect.right > hintRect.width;
+      const isEnoughOnRightWithScroll =
+        viewportScrollWidth - (anchorElementRect.right + window.scrollX) > hintRect.width;
+
+      const isEnoughOnTop = anchorElementRect.top > (hintRect.height - anchorElementRect.height) / 2;
+      const isEnoughOnTopWithScroll =
+        anchorElementRect.top + window.screenY > (hintRect.height - anchorElementRect.height) / 2;
+
+      const isEnoughOnBottom =
+        document.documentElement.clientHeight - anchorElementRect.bottom >
+        (hintRect.height - anchorElementRect.height) / 2;
+      const isEnoughOnBottomWithScroll =
+        viewportScrollHeight - (anchorElementRect.bottom + window.scrollY) >
+        (hintRect.height - anchorElementRect.height) / 2;
+      return (
+        (withScroll ? isEnoughOnRightWithScroll : isEnoughOnRight) &&
+        (withScroll ? isEnoughOnTopWithScroll : isEnoughOnTop) &&
+        (withScroll ? isEnoughOnBottomWithScroll : isEnoughOnBottom)
+      );
+    },
+  },
+  bottomPageCenter: {
     /** проверяем, что тултипу хватит места снизу и по центру страницы */
     check: (anchorElementRect: DOMRect, hintRect: DOMRect, withScroll: boolean, viewportScrollHeight: number) => {
       const isEnoughOnBottom = document.documentElement.clientHeight - anchorElementRect.bottom > hintRect.height;
@@ -53,26 +252,7 @@ const POSITION_MAPPER: Record<HintPositionType, CalculationResult> = {
       return (withScroll ? isEnoughOnBottomWithScroll : isEnoughOnBottom) && isEnoughOnCenter;
     },
   },
-  'top-right': {
-    /** проверяем, что тултипу хватит места сверху и справа */
-    check: (anchorElementRect: DOMRect, hintRect: DOMRect, withScroll: boolean) => {
-      const isEnoughOnTop = anchorElementRect.top > hintRect.height;
-      const isEnoughOnTopWithScroll = anchorElementRect.top + window.scrollY > hintRect.height;
-      const isEnoughOnRight =
-        document.documentElement.clientWidth - anchorElementRect.right >= hintRect.width - anchorElementRect.width;
-      return isEnoughOnRight && (withScroll ? isEnoughOnTopWithScroll : isEnoughOnTop);
-    },
-  },
-  'top-left': {
-    /** проверяем, что тултипу хватит места сверху и слева */
-    check: (anchorElementRect: DOMRect, hintRect: DOMRect, withScroll: boolean) => {
-      const isEnoughOnTop = anchorElementRect.top > hintRect.height;
-      const isEnoughOnTopWithScroll = anchorElementRect.top + window.scrollY > hintRect.height;
-      const isEnoughOnLeft = anchorElementRect.left > hintRect.width - anchorElementRect.width;
-      return isEnoughOnLeft && (withScroll ? isEnoughOnTopWithScroll : isEnoughOnTop);
-    },
-  },
-  'top-pageCenter': {
+  topPageCenter: {
     /** проверяем, что тултипу хватит места сверху и по центру страницы */
     check: (anchorElementRect: DOMRect, hintRect: DOMRect, withScroll: boolean) => {
       const isEnoughOnTop = anchorElementRect.top > hintRect.height;
@@ -81,96 +261,13 @@ const POSITION_MAPPER: Record<HintPositionType, CalculationResult> = {
       return isEnoughOnCenter && (withScroll ? isEnoughOnTopWithScroll : isEnoughOnTop);
     },
   },
-  'right-bottom': {
-    /** проверяем, что тултипу хватит места справа и снизу */
-    check: (
-      anchorElementRect: DOMRect,
-      hintRect: DOMRect,
-      withScroll: boolean,
-      viewportScrollHeight: number,
-      viewportScrollWidth: number,
-    ) => {
-      const isEnoughOnRight = document.documentElement.clientWidth - anchorElementRect.right >= hintRect.width;
-      const isEnoughOnRightWithScroll =
-        viewportScrollWidth - (anchorElementRect.right + window.scrollX) > hintRect.width;
-      const isEnoughOnBottom = document.documentElement.clientHeight - anchorElementRect.top > hintRect.height;
-      const isEnoughOnBottomWithScroll =
-        viewportScrollHeight - (anchorElementRect.top + window.scrollY) > hintRect.height;
-      return (
-        (withScroll ? isEnoughOnRightWithScroll : isEnoughOnRight) &&
-        (withScroll ? isEnoughOnBottomWithScroll : isEnoughOnBottom)
-      );
-    },
-  },
-  'right-top': {
-    /** проверяем, что тултипу хватит места справа и сверху */
-    check: (anchorElementRect: DOMRect, hintRect: DOMRect, withScroll: boolean, _, viewportScrollWidth: number) => {
-      const isEnoughOnRight = document.documentElement.clientWidth - anchorElementRect.right >= hintRect.width;
-      const isEnoughOnRightWithScroll =
-        viewportScrollWidth - (anchorElementRect.right + window.scrollX) > hintRect.width;
-      const isEnoughOnTop = anchorElementRect.bottom > hintRect.height;
-      const isEnoughOnTopWithScroll = anchorElementRect.bottom + window.scrollY > hintRect.height;
-      return (
-        (withScroll ? isEnoughOnRightWithScroll : isEnoughOnRight) &&
-        (withScroll ? isEnoughOnTopWithScroll : isEnoughOnTop)
-      );
-    },
-  },
-  // 'right-pageCenter': {
-  //   /** проверяем, что тултипу хватит места справа и по центру страницы */
-  //   check: (anchorElementRect: DOMRect, hintRect: DOMRect, withScroll: boolean, _, viewportScrollWidth: number) => {
-  //     const isEnoughOnRight = document.documentElement.clientWidth - anchorElementRect.right >= hintRect.width;
-  //     const isEnoughOnRightWithScroll =
-  //       viewportScrollWidth - (anchorElementRect.right + window.scrollX) > hintRect.width;
-  //     const isEnoughOnCenter = hintRect.height < document.documentElement.clientHeight;
-  //     return isEnoughOnCenter && (withScroll ? isEnoughOnRightWithScroll : isEnoughOnRight);
-  //   },
-  // },
-  'left-bottom': {
-    /** проверяем, что тултипу хватит места слева и снизу */
-    check: (
-      anchorElementRect: DOMRect,
-      hintRect: DOMRect,
-      withScroll: boolean,
-      viewportScrollHeight: number,
-      viewportScrollWidth: number,
-    ) => {
-      const isEnoughOnLeft = document.documentElement.clientWidth - anchorElementRect.left >= hintRect.width;
-      const isEnoughOnLeftWithScroll = viewportScrollWidth - (anchorElementRect.left + window.scrollX) > hintRect.width;
-      const isEnoughOnBottom = document.documentElement.clientHeight - anchorElementRect.top > hintRect.height;
-      const isEnoughOnBottomWithScroll =
-        viewportScrollHeight - (anchorElementRect.top + window.scrollY) > hintRect.height;
-      return (
-        (withScroll ? isEnoughOnLeftWithScroll : isEnoughOnLeft) &&
-        (withScroll ? isEnoughOnBottomWithScroll : isEnoughOnBottom)
-      );
-    },
-  },
-  'left-top': {
-    /** проверяем, что тултипу хватит места слева и сверху */
-    check: (anchorElementRect: DOMRect, hintRect: DOMRect, withScroll: boolean, _, viewportScrollWidth: number) => {
-      const isEnoughOnLeft = document.documentElement.clientWidth - anchorElementRect.left >= hintRect.width;
-      const isEnoughOnLeftWithScroll = viewportScrollWidth - (anchorElementRect.left + window.scrollX) > hintRect.width;
-      const isEnoughOnTop = anchorElementRect.bottom > hintRect.height;
-      const isEnoughOnTopWithScroll = anchorElementRect.bottom + window.scrollY > hintRect.height;
-      return (
-        (withScroll ? isEnoughOnLeftWithScroll : isEnoughOnLeft) &&
-        (withScroll ? isEnoughOnTopWithScroll : isEnoughOnTop)
-      );
-    },
-  },
-  // 'left-pageCenter': {
-  //   /** проверяем, что тултипу хватит места слева и по центру страницы */
-  //   check: (anchorElementRect: DOMRect, hintRect: DOMRect, withScroll: boolean, _, viewportScrollWidth: number) => {
-  //     const isEnoughOnLeft = document.documentElement.clientWidth - anchorElementRect.left >= hintRect.width;
-  //     const isEnoughOnLeftWithScroll = viewportScrollWidth - (anchorElementRect.left + window.scrollX) > hintRect.width;
-  //     const isEnoughOnCenter = hintRect.height < document.documentElement.clientHeight;
-  //     return isEnoughOnCenter && (withScroll ? isEnoughOnLeftWithScroll : isEnoughOnLeft);
-  //   },
-  // },
 };
 
-export function getHintDirection(anchorElement: HTMLElement, hintElement: HTMLElement): any {
+export function getHintDirection(
+  anchorElement: HTMLElement,
+  hintElement: HTMLElement,
+  hintPosition?: HintPositionType,
+): InternalHintPositionType {
   const anchorElementRect: DOMRect = anchorElement.getBoundingClientRect();
   const hintRect: DOMRect = hintElement.getBoundingClientRect();
   const positions = Object.entries(POSITION_MAPPER) as [HintPositionType, CalculationResult][];
@@ -193,16 +290,36 @@ export function getHintDirection(anchorElement: HTMLElement, hintElement: HTMLEl
     document.documentElement.clientWidth,
   );
 
-  let compatiblePositions = positions.filter((kv) => {
-    return kv[1].check(anchorElementRect, hintRect, false, viewportScrollHeight, viewportScrollWidth);
-  });
+  /** Если задан параметр hintPosition, то тултип обязательно должен отрендериться в указанном направлении
+   * (с возможностью сдвига по горизонтальной оси при hintPosition === 'top' | 'bottom',
+   * и по вертикальной оси при hintPosition = 'right' | 'left').
+   * Н-р, если hintPosition === 'top', то происходит проверка позиций topLeft|topRight|top|topPageCenter
+   */
+  let compatiblePositions = hintPosition
+    ? positions.filter((kv) => {
+        return (
+          kv[0].includes(hintPosition) &&
+          kv[1].check(anchorElementRect, hintRect, false, viewportScrollHeight, viewportScrollWidth)
+        );
+      })
+    : positions.filter((kv) => {
+        return kv[1].check(anchorElementRect, hintRect, false, viewportScrollHeight, viewportScrollWidth);
+      });
 
-  // вычисляем позицию хинта с учетом вертикального скролла
+  // вычисляем позицию хинта с учетом вертикального и горизонтального скроллов
   if (compatiblePositions.length === 0) {
-    compatiblePositions = positions.filter((kv) => {
-      return kv[1].check(anchorElementRect, hintRect, true, viewportScrollHeight, viewportScrollWidth);
-    });
+    compatiblePositions = hintPosition
+      ? positions.filter((kv) => {
+          return (
+            kv[0].includes(hintPosition) &&
+            kv[1].check(anchorElementRect, hintRect, true, viewportScrollHeight, viewportScrollWidth)
+          );
+        })
+      : positions.filter((kv) => {
+          return kv[1].check(anchorElementRect, hintRect, true, viewportScrollHeight, viewportScrollWidth);
+        });
   }
 
-  return compatiblePositions.length ? compatiblePositions[0][0] : 'bottom-right';
+  const defaultPosition = hintPosition || 'bottomRight';
+  return compatiblePositions.length ? compatiblePositions[0][0] : defaultPosition;
 }

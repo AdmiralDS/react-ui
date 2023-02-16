@@ -91,8 +91,8 @@ const Template1: ComponentStory<typeof Hint> = ({ anchorId, ...args }) => {
     theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
-  const [visible, setVisible] = React.useState(true);
-  const handleVisibilityChange = (visible: boolean) => setVisible(true);
+  const [visible, setVisible] = React.useState(false);
+  const handleVisibilityChange = (visible: boolean) => setVisible(visible);
 
   return (
     <ThemeProvider theme={swapBorder}>
