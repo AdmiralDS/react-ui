@@ -106,10 +106,6 @@ const BorderedDivStyles = css<{ disabled?: boolean; readOnly?: boolean; status?:
     border-color: ${(props) =>
       props.disabled || props.readOnly ? 'transparent' : props.theme.color[getHoverBorderColor(props.status)]};
   }
-
-  &&&:disabled {
-    color: ${(props) => props.theme.color['Neutral/Neutral 30']};
-  }
 `;
 
 const ieFixes = css`
@@ -132,6 +128,10 @@ const Input = styled.input<ExtraProps>`
   padding: 0 ${horizontalPaddingValue}px;
 
   color: ${(props) => props.theme.color['Neutral/Neutral 90']};
+
+  &&&:disabled {
+    color: ${(props) => props.theme.color['Neutral/Neutral 30']};
+  }
 
   ${(props) => (props.dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
   &::placeholder {
@@ -394,12 +394,12 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
           style={style}
           dimension={props.dimension}
           ref={wrapperRef}
-          status={status}
           disabled={props.disabled}
           readOnly={props.readOnly}
+          status={status}
+          data-disabled={props.disabled ? true : undefined}
           data-read-only={props.readOnly ? true : undefined}
           data-status={status}
-          data-disabled={props.disabled ? true : undefined}
           skeleton={skeleton}
           data-disable-copying={props.disableCopying ? true : undefined}
           {...(props.disableCopying && {
