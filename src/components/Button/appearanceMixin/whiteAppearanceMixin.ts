@@ -8,7 +8,6 @@ export const whiteAppearanceMixin = css`
     fill: ${({ theme }) => theme.color['Special/Static White']};
   }
 
-  &:focus,
   &:hover {
     background-color: ${({ theme }) => theme.color['Opacity/Dark Static Hover']};
     color: ${({ theme }) => theme.color['Special/Static White']};
