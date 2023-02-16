@@ -79,10 +79,17 @@ const DisplayContainer = styled.div`
 
 const Template: ComponentStory<typeof InputField> = (props) => {
   const [localValue, setValue] = React.useState<string>(String(props.value) ?? '');
+  const [invalidInputValue, setInvalidInputValue] = React.useState<string>('Hello');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
     setValue(inputValue);
+    props.onChange?.(e);
+  };
+
+  const handleInvalidInputValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const invalidInputValue = e.target.value;
+    setInvalidInputValue(invalidInputValue);
     props.onChange?.(e);
   };
 
@@ -112,14 +119,21 @@ const Template: ComponentStory<typeof InputField> = (props) => {
         />
         <InputField
           data-container-id="inputFieldIdFive"
+          label="Поле с ошибкой (invalid)"
+          pattern="[a-z]+"
+          value={invalidInputValue}
+          onChange={handleInvalidInputValueChange}
+        />
+        <InputField
+          data-container-id="inputFieldIdFive"
           status="error"
-          label="Поле с ошибкой"
+          label="Поле с ошибкой (status = error)"
           extraText="Поле не прошло валидацию, необходимо ввести корректное значение"
         />
         <InputField
           data-container-id="inputFieldIdWSix"
           status="success"
-          label="Поле с индикацией успеха"
+          label="Поле с индикацией успеха (status = success)"
           extraText="Поле успешно прошло валидацию"
         />
         <InputField

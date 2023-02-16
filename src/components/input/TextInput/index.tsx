@@ -68,65 +68,47 @@ export const InputBorderedDiv = styled.div`
     border: 1px solid ${(props) => props.theme.color['Success/Success 50 Main']};
   }
 
+  [data-disabled] &&&,
   [data-read-only] &&& {
     border-color: transparent;
   }
 `;
 
-const colorsBorderAndBackground = css<{ disabled?: boolean }>`
-  background-color: ${(props) => props.theme.color['Neutral/Neutral 00']};
+function getHoverBorderColor(status?: InputStatus) {
+  if (!status) return 'Neutral/Neutral 60';
+  switch (status) {
+    case 'error':
+      return 'Error/Error 70';
+    case 'success':
+      return 'Success/Success 60';
+  }
+}
 
-  &:focus + ${InputBorderedDiv} {
-    border: 2px solid ${(props) => props.theme.color['Primary/Primary 60 Main']};
+function getFocusBorderColor(status?: InputStatus) {
+  if (!status) return 'Primary/Primary 60 Main';
+  switch (status) {
+    case 'error':
+      return 'Error/Error 60 Main';
+    case 'success':
+      return 'Success/Success 50 Main';
+  }
+}
+
+const BorderedDivStyles = css<{ disabled?: boolean; readOnly?: boolean; status?: InputStatus }>`
+  &&&:focus-within:not(:disabled) > ${InputBorderedDiv} {
+    ${(p) =>
+      p.disabled || p.readOnly
+        ? 'border-color: transparent'
+        : `border: 2px solid ${p.theme.color[getFocusBorderColor(p.status)]}`}
   }
 
-  &&&:disabled + ${InputBorderedDiv}, [data-read-only] &&& + ${InputBorderedDiv} {
-    border-color: transparent;
-  }
-
-  &:hover:not(:focus) + ${InputBorderedDiv} {
-    border-color: ${(props) => (props.disabled ? 'transparent' : props.theme.color['Neutral/Neutral 60'])};
-  }
-
-  &:invalid + ${InputBorderedDiv} {
-    border: 1px solid ${(props) => props.theme.color['Error/Error 60 Main']};
-  }
-
-  [data-status='error']
-    &&&:hover:not(:disabled)
-    + ${InputBorderedDiv},
-    &:invalid:hover:not(:disabled)
-    + ${InputBorderedDiv} {
-    border: 1px solid ${(props) => props.theme.color['Error/Error 70']};
-  }
-
-  [data-status='success'] &&&:hover:not(:disabled) + ${InputBorderedDiv} {
-    border: 1px solid ${(props) => props.theme.color['Success/Success 60']};
-  }
-
-  [data-status='error']
-    &&&:focus:not(:disabled)
-    + ${InputBorderedDiv},
-    &:invalid:focus:not(:disabled)
-    + ${InputBorderedDiv} {
-    border: 2px solid ${(props) => props.theme.color['Error/Error 60 Main']};
-  }
-
-  [data-status='success'] &&&:focus:not(:disabled) + ${InputBorderedDiv} {
-    border: 2px solid ${(props) => props.theme.color['Success/Success 50 Main']};
-  }
-
-  [data-read-only] &&&,
-  &&&:disabled {
-    ${disabledColors}
+  &:hover:not(:focus-within) > ${InputBorderedDiv} {
+    border-color: ${(props) =>
+      props.disabled || props.readOnly ? 'transparent' : props.theme.color[getHoverBorderColor(props.status)]};
   }
 
   &&&:disabled {
     color: ${(props) => props.theme.color['Neutral/Neutral 30']};
-  }
-
-  [data-read-only] &&&:hover + ${InputBorderedDiv}, [data-read-only] &&&:focus + ${InputBorderedDiv} {
-    border-color: transparent;
   }
 `;
 
@@ -146,7 +128,6 @@ const Input = styled.input<ExtraProps>`
   flex: 1 1 auto;
   min-width: 10px;
   border: none;
-  background: transparent;
   text-overflow: ellipsis;
   padding: 0 ${horizontalPaddingValue}px;
 
@@ -166,7 +147,25 @@ const Input = styled.input<ExtraProps>`
     pointer-events: none;
   }
 
-  ${colorsBorderAndBackground}
+  background-color: ${(props) => props.theme.color['Neutral/Neutral 00']};
+
+  [data-read-only] &&&,
+  &&&:disabled {
+    ${disabledColors}
+  }
+
+  &&&:invalid + ${InputBorderedDiv} {
+    border: 1px solid ${(props) => props.theme.color['Error/Error 60 Main']};
+  }
+
+  &&&:invalid:hover:not(:disabled) + ${InputBorderedDiv} {
+    border: 1px solid ${(props) => props.theme.color['Error/Error 70']};
+  }
+
+  &&&:invalid:focus:not(:disabled) + ${InputBorderedDiv} {
+    border: 2px solid ${(props) => props.theme.color['Error/Error 60 Main']};
+  }
+
   ${extraPadding}
   ${ieFixes}
 `;
@@ -200,6 +199,10 @@ const IconPanel = styled.div<{ disabled?: boolean; dimension?: ComponentDimensio
   & > *:not(:first-child) {
     margin-left: 8px;
   }
+`;
+
+const StyledContainer = styled(Container)<{ disabled?: boolean; readOnly?: boolean; status?: InputStatus }>`
+  ${BorderedDivStyles}
 `;
 
 const StyledSpinner = styled(Spinner)`
@@ -386,13 +389,17 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
     }, [inputRef.current, handleInput, placeholder]);
     return (
       <>
-        <Container
+        <StyledContainer
           className={className}
           style={style}
           dimension={props.dimension}
           ref={wrapperRef}
+          status={status}
+          disabled={props.disabled}
+          readOnly={props.readOnly}
           data-read-only={props.readOnly ? true : undefined}
           data-status={status}
+          data-disabled={props.disabled ? true : undefined}
           skeleton={skeleton}
           data-disable-copying={props.disableCopying ? true : undefined}
           {...(props.disableCopying && {
@@ -413,7 +420,7 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
             </IconPanel>
           )}
           {children}
-        </Container>
+        </StyledContainer>
         {showTooltip && tooltipVisible && overflowActive && (
           <Tooltip renderContent={() => inputRef?.current?.value || ''} targetRef={wrapperRef} />
         )}
