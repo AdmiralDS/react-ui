@@ -271,7 +271,7 @@ export const TabMenu: React.FC<TabMenuProps> = ({
       });
     }
     return () => observer.disconnect();
-  }, [tablistRef, mobile, setVisibilityMap]);
+  }, [tabsWithRef, tablistRef, mobile, setVisibilityMap]);
 
   const handleTabClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     mobile && event.currentTarget.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
