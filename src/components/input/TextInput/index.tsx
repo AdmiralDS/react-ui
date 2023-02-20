@@ -45,7 +45,17 @@ const disabledColors = css`
   border-color: transparent;
 `;
 
-export const InputBorderedDiv = styled.div`
+function getBorderColor(status?: InputStatus) {
+  if (!status) return 'Neutral/Neutral 40';
+  switch (status) {
+    case 'error':
+      return 'Error/Error 60 Main';
+    case 'success':
+      return 'Success/Success 50 Main';
+  }
+}
+
+export const InputBorderedDiv = styled.div<{ disabled?: boolean; status?: InputStatus }>`
   position: absolute;
   top: 0;
   bottom: 0;
@@ -57,21 +67,10 @@ export const InputBorderedDiv = styled.div`
   min-width: 0;
 
   background: none;
-  border: 1px solid ${(props) => props.theme.color['Neutral/Neutral 40']};
   border-radius: inherit;
 
-  [data-status='error'] &&& {
-    border: 1px solid ${(props) => props.theme.color['Error/Error 60 Main']};
-  }
-
-  [data-status='success'] &&& {
-    border: 1px solid ${(props) => props.theme.color['Success/Success 50 Main']};
-  }
-
-  [data-disabled] &&&,
-  [data-read-only] &&& {
-    border-color: transparent;
-  }
+  border: 1px solid ${(p) => p.theme.color[getBorderColor(p.status)]};
+  ${(p) => p.disabled && 'border-color: transparent;'};
 `;
 
 function getHoverBorderColor(status?: InputStatus) {
@@ -95,7 +94,7 @@ function getFocusBorderColor(status?: InputStatus) {
 }
 
 const BorderedDivStyles = css<{ disabled?: boolean; readOnly?: boolean; status?: InputStatus }>`
-  &&&:focus-within:not(:disabled) > ${InputBorderedDiv} {
+  &:focus-within:not(:disabled) > ${InputBorderedDiv} {
     ${(p) =>
       p.disabled || p.readOnly
         ? 'border-color: transparent'
@@ -127,13 +126,14 @@ const Input = styled.input<ExtraProps>`
   text-overflow: ellipsis;
   padding: 0 ${horizontalPaddingValue}px;
 
+  ${(props) => (props.dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
+
   color: ${(props) => props.theme.color['Neutral/Neutral 90']};
 
   &&&:disabled {
     color: ${(props) => props.theme.color['Neutral/Neutral 30']};
   }
 
-  ${(props) => (props.dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
   &::placeholder {
     color: ${(props) => props.theme.color['Neutral/Neutral 50']};
   }
@@ -149,11 +149,6 @@ const Input = styled.input<ExtraProps>`
 
   background-color: ${(props) => props.theme.color['Neutral/Neutral 00']};
 
-  [data-read-only] &&&,
-  &&&:disabled {
-    ${disabledColors}
-  }
-
   &&&:invalid + ${InputBorderedDiv} {
     border: 1px solid ${(props) => props.theme.color['Error/Error 60 Main']};
   }
@@ -164,6 +159,11 @@ const Input = styled.input<ExtraProps>`
 
   &&&:invalid:focus:not(:disabled) + ${InputBorderedDiv} {
     border: 2px solid ${(props) => props.theme.color['Error/Error 60 Main']};
+  }
+
+  [data-read-only] &&&,
+  &&&:disabled {
+    ${disabledColors}
   }
 
   ${extraPadding}
@@ -413,7 +413,7 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
             iconCount={iconCount}
             type={type === 'password' && isPasswordVisible ? 'text' : type}
           />
-          <InputBorderedDiv />
+          <InputBorderedDiv status={status} disabled={props.disabled || props.readOnly} />
           {iconCount > 0 && (
             <IconPanel disabled={props.disabled} dimension={props.dimension}>
               {iconArray}
