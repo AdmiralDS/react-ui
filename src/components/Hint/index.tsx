@@ -92,7 +92,8 @@ export const Hint: React.FC<HintProps> = ({
   const showHint = () => onVisibilityChange?.(true);
   const hideHint = () => onVisibilityChange?.(false);
 
-  // если ширина экрана меньше 640 пикселей, хинт переходит в состояние mobile (адаптируется по ширине к экрану)
+  // если ширина экрана меньше 640 пикселей, хинт переходит в состояние mobile
+  // (адаптируется по ширине к экрану и может располагаться только снизу или сверху от target-элемента)
   React.useLayoutEffect(() => {
     const listener = () => {
       if (window.innerWidth < 640) {
@@ -126,6 +127,30 @@ export const Hint: React.FC<HintProps> = ({
       } else {
         const direction: InternalHintPositionType = getHintDirection(targetElement, hint, hintPosition);
         switch (direction) {
+          case 'right':
+            setPortalFlexDirection('row');
+            setPortalFullWidth(false);
+            hint.style.alignSelf = 'center';
+            hint.style.margin = '0';
+            break;
+          case 'left':
+            setPortalFlexDirection('row-reverse');
+            setPortalFullWidth(false);
+            hint.style.alignSelf = 'center';
+            hint.style.margin = '0';
+            break;
+          case 'top':
+            setPortalFlexDirection('column-reverse');
+            setPortalFullWidth(false);
+            hint.style.alignSelf = 'center';
+            hint.style.margin = '0';
+            break;
+          case 'bottom':
+            setPortalFlexDirection('column');
+            setPortalFullWidth(false);
+            hint.style.alignSelf = 'center';
+            hint.style.margin = '0';
+            break;
           case 'topPageCenter':
             setPortalFlexDirection('column-reverse');
             setPortalFullWidth(true);
