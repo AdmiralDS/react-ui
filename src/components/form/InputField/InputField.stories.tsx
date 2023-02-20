@@ -58,7 +58,25 @@ export default {
     displayInline: {
       control: { type: 'boolean' },
     },
+    showTooltip: {
+      control: { type: 'boolean' },
+    },
+    disabled: {
+      control: { type: 'boolean' },
+    },
+    readOnly: {
+      control: { type: 'boolean' },
+    },
+    isLoading: {
+      control: { type: 'boolean' },
+    },
     icons: {
+      control: false,
+    },
+    containerRef: {
+      control: false,
+    },
+    handleInput: {
       control: false,
     },
     themeBorderKind: {
@@ -118,7 +136,7 @@ const Template: ComponentStory<typeof InputField> = (props) => {
           placeholder="Placeholder"
         />
         <InputField
-          data-container-id="inputFieldIdFive"
+          data-container-id="inputFieldIdFiveInvalid"
           label="Поле с ошибкой (invalid)"
           pattern="[a-z]+"
           value={invalidInputValue}
@@ -131,7 +149,7 @@ const Template: ComponentStory<typeof InputField> = (props) => {
           extraText="Поле не прошло валидацию, необходимо ввести корректное значение"
         />
         <InputField
-          data-container-id="inputFieldIdWSix"
+          data-container-id="inputFieldIdSix"
           status="success"
           label="Поле с индикацией успеха (status = success)"
           extraText="Поле успешно прошло валидацию"
