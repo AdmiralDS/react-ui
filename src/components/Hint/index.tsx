@@ -127,6 +127,18 @@ export const Hint: React.FC<HintProps> = ({
       } else {
         const direction: InternalHintPositionType = getHintDirection(targetElement, hint, hintPosition);
         switch (direction) {
+          case 'topPageCenter':
+            setPortalFlexDirection('column-reverse');
+            setPortalFullWidth(true);
+            hint.style.alignSelf = 'center';
+            hint.style.margin = '0';
+            break;
+          case 'bottomPageCenter':
+            setPortalFlexDirection('column');
+            setPortalFullWidth(true);
+            hint.style.alignSelf = 'center';
+            hint.style.margin = '0';
+            break;
           case 'right':
             setPortalFlexDirection('row');
             setPortalFullWidth(false);
@@ -151,32 +163,14 @@ export const Hint: React.FC<HintProps> = ({
             hint.style.alignSelf = 'center';
             hint.style.margin = '0';
             break;
-          case 'topPageCenter':
-            setPortalFlexDirection('column-reverse');
-            setPortalFullWidth(true);
-            hint.style.alignSelf = 'center';
-            hint.style.margin = '0';
-            break;
-          case 'bottomPageCenter':
-            setPortalFlexDirection('column');
-            setPortalFullWidth(true);
-            hint.style.alignSelf = 'center';
-            hint.style.margin = '0';
-            break;
-          case 'rightBottom':
-            setPortalFlexDirection('row');
-            setPortalFullWidth(false);
-            hint.style.alignSelf = 'flex-start';
-            hint.style.margin = '-8px 0 0 0';
-            break;
           case 'rightTop':
             setPortalFlexDirection('row');
             setPortalFullWidth(false);
             hint.style.alignSelf = 'flex-end';
             hint.style.margin = '0 0 -8px 0';
             break;
-          case 'leftBottom':
-            setPortalFlexDirection('row-reverse');
+          case 'rightBottom':
+            setPortalFlexDirection('row');
             setPortalFullWidth(false);
             hint.style.alignSelf = 'flex-start';
             hint.style.margin = '-8px 0 0 0';
@@ -187,17 +181,11 @@ export const Hint: React.FC<HintProps> = ({
             hint.style.alignSelf = 'flex-end';
             hint.style.margin = '0 0 -8px 0';
             break;
-          case 'topRight':
-            setPortalFlexDirection('column-reverse');
+          case 'leftBottom':
+            setPortalFlexDirection('row-reverse');
             setPortalFullWidth(false);
             hint.style.alignSelf = 'flex-start';
-            hint.style.margin = '0 0 0 -8px';
-            break;
-          case 'bottomRight':
-            setPortalFlexDirection('column');
-            setPortalFullWidth(false);
-            hint.style.alignSelf = 'flex-start';
-            hint.style.margin = '0 0 0 -8px';
+            hint.style.margin = '-8px 0 0 0';
             break;
           case 'topLeft':
             setPortalFlexDirection('column-reverse');
@@ -205,12 +193,24 @@ export const Hint: React.FC<HintProps> = ({
             hint.style.alignSelf = 'flex-end';
             hint.style.margin = '0 -8px 0 0';
             break;
+          case 'topRight':
+            setPortalFlexDirection('column-reverse');
+            setPortalFullWidth(false);
+            hint.style.alignSelf = 'flex-start';
+            hint.style.margin = '0 0 0 -8px';
+            break;
           case 'bottomLeft':
-          default:
             setPortalFlexDirection('column');
             setPortalFullWidth(false);
             hint.style.alignSelf = 'flex-end';
             hint.style.margin = '0 -8px 0 0';
+            break;
+          case 'bottomRight':
+          default:
+            setPortalFlexDirection('column');
+            setPortalFullWidth(false);
+            hint.style.alignSelf = 'flex-start';
+            hint.style.margin = '0 0 0 -8px';
         }
       }
     }

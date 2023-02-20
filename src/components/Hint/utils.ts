@@ -16,10 +16,10 @@ export type CalculationResult = {
   check: (anchorElementRect: DOMRect, hintRect: DOMRect, withScroll: boolean, viewportScrollHeight: number) => boolean;
 };
 
-// расположены в порядке приоритета при подборе стороны открытия тултипа
+// расположены в порядке приоритета при подборе стороны открытия хинта
 const POSITION_MAPPER: Record<InternalHintPositionType, CalculationResult> = {
   bottomRight: {
-    /** проверяем, что тултипу хватит места снизу и справа */
+    /** проверяем, что хинту хватит места снизу и справа */
     check: (anchorElementRect: DOMRect, hintRect: DOMRect, withScroll: boolean, viewportScrollHeight: number) => {
       const isEnoughOnBottom = document.documentElement.clientHeight - anchorElementRect.bottom > hintRect.height;
       const isEnoughOnBottomWithScroll =
@@ -30,7 +30,7 @@ const POSITION_MAPPER: Record<InternalHintPositionType, CalculationResult> = {
     },
   },
   bottomLeft: {
-    /** проверяем, что тултипу хватит места снизу и слева */
+    /** проверяем, что хинту хватит места снизу и слева */
     check: (anchorElementRect: DOMRect, hintRect: DOMRect, withScroll: boolean, viewportScrollHeight: number) => {
       const isEnoughOnBottom = document.documentElement.clientHeight - anchorElementRect.bottom > hintRect.height;
       const isEnoughOnBottomWithScroll =
@@ -40,7 +40,7 @@ const POSITION_MAPPER: Record<InternalHintPositionType, CalculationResult> = {
     },
   },
   topRight: {
-    /** проверяем, что тултипу хватит места сверху и справа */
+    /** проверяем, что хинту хватит места сверху и справа */
     check: (anchorElementRect: DOMRect, hintRect: DOMRect, withScroll: boolean) => {
       const isEnoughOnTop = anchorElementRect.top > hintRect.height;
       const isEnoughOnTopWithScroll = anchorElementRect.top + window.scrollY > hintRect.height;
@@ -50,7 +50,7 @@ const POSITION_MAPPER: Record<InternalHintPositionType, CalculationResult> = {
     },
   },
   topLeft: {
-    /** проверяем, что тултипу хватит места сверху и слева */
+    /** проверяем, что хинту хватит места сверху и слева */
     check: (anchorElementRect: DOMRect, hintRect: DOMRect, withScroll: boolean) => {
       const isEnoughOnTop = anchorElementRect.top > hintRect.height;
       const isEnoughOnTopWithScroll = anchorElementRect.top + window.scrollY > hintRect.height;
@@ -59,7 +59,7 @@ const POSITION_MAPPER: Record<InternalHintPositionType, CalculationResult> = {
     },
   },
   leftBottom: {
-    /** проверяем, что тултипу хватит места слева и снизу */
+    /** проверяем, что хинту хватит места слева и снизу */
     check: (anchorElementRect: DOMRect, hintRect: DOMRect, withScroll: boolean, viewportScrollHeight: number) => {
       const isEnoughOnLeft = anchorElementRect.left > hintRect.width;
       const isEnoughOnBottom = document.documentElement.clientHeight - anchorElementRect.top > hintRect.height;
@@ -69,7 +69,7 @@ const POSITION_MAPPER: Record<InternalHintPositionType, CalculationResult> = {
     },
   },
   leftTop: {
-    /** проверяем, что тултипу хватит места слева и сверху */
+    /** проверяем, что хинту хватит места слева и сверху */
     check: (anchorElementRect: DOMRect, hintRect: DOMRect, withScroll: boolean) => {
       const isEnoughOnLeft = anchorElementRect.left > hintRect.width;
       const isEnoughOnTop = anchorElementRect.bottom > hintRect.height;
@@ -78,7 +78,7 @@ const POSITION_MAPPER: Record<InternalHintPositionType, CalculationResult> = {
     },
   },
   rightBottom: {
-    /** проверяем, что тултипу хватит места справа и снизу */
+    /** проверяем, что хинту хватит места справа и снизу */
     check: (anchorElementRect: DOMRect, hintRect: DOMRect, withScroll: boolean, viewportScrollHeight: number) => {
       const isEnoughOnRight = document.documentElement.clientWidth - anchorElementRect.right > hintRect.width;
       const isEnoughOnBottom = document.documentElement.clientHeight - anchorElementRect.top > hintRect.height;
@@ -88,7 +88,7 @@ const POSITION_MAPPER: Record<InternalHintPositionType, CalculationResult> = {
     },
   },
   rightTop: {
-    /** проверяем, что тултипу хватит места справа и сверху */
+    /** проверяем, что хинту хватит места справа и сверху */
     check: (anchorElementRect: DOMRect, hintRect: DOMRect, withScroll: boolean) => {
       const isEnoughOnRight = document.documentElement.clientWidth - anchorElementRect.right > hintRect.width;
       const isEnoughOnTop = anchorElementRect.bottom > hintRect.height;
@@ -97,7 +97,7 @@ const POSITION_MAPPER: Record<InternalHintPositionType, CalculationResult> = {
     },
   },
   bottom: {
-    /** проверяем, что тултипу хватит места снизу и по центру anchorElementRect */
+    /** проверяем, что хинту хватит места снизу и по центру anchorElementRect */
     check: (anchorElementRect: DOMRect, hintRect: DOMRect, withScroll: boolean, viewportScrollHeight: number) => {
       const isEnoughOnBottom = document.documentElement.clientHeight - anchorElementRect.bottom > hintRect.height;
       const isEnoughOnBottomWithScroll =
@@ -112,7 +112,7 @@ const POSITION_MAPPER: Record<InternalHintPositionType, CalculationResult> = {
     },
   },
   top: {
-    /** проверяем, что тултипу хватит места сверху и по центру anchorElementRect */
+    /** проверяем, что хинту хватит места сверху и по центру anchorElementRect */
     check: (anchorElementRect: DOMRect, hintRect: DOMRect, withScroll: boolean) => {
       const isEnoughOnTop = anchorElementRect.top > hintRect.height;
       const isEnoughOnTopWithScroll = anchorElementRect.top + window.scrollY > hintRect.height;
@@ -126,7 +126,7 @@ const POSITION_MAPPER: Record<InternalHintPositionType, CalculationResult> = {
     },
   },
   left: {
-    /** проверяем, что тултипу хватит места слева и по центру anchorElementRect */
+    /** проверяем, что хинту хватит места слева и по центру anchorElementRect */
     check: (anchorElementRect: DOMRect, hintRect: DOMRect, withScroll: boolean, viewportScrollHeight: number) => {
       const isEnoughOnLeft = anchorElementRect.left > hintRect.width;
 
@@ -149,7 +149,7 @@ const POSITION_MAPPER: Record<InternalHintPositionType, CalculationResult> = {
     },
   },
   right: {
-    /** проверяем, что тултипу хватит места справа и по центру anchorElementRect */
+    /** проверяем, что хинту хватит места справа и по центру anchorElementRect */
     check: (anchorElementRect: DOMRect, hintRect: DOMRect, withScroll: boolean, viewportScrollHeight: number) => {
       const isEnoughOnRight = document.documentElement.clientWidth - anchorElementRect.right > hintRect.width;
 
@@ -172,7 +172,7 @@ const POSITION_MAPPER: Record<InternalHintPositionType, CalculationResult> = {
     },
   },
   bottomPageCenter: {
-    /** проверяем, что тултипу хватит места снизу и по центру страницы */
+    /** проверяем, что хинту хватит места снизу и по центру страницы */
     check: (anchorElementRect: DOMRect, hintRect: DOMRect, withScroll: boolean, viewportScrollHeight: number) => {
       const isEnoughOnBottom = document.documentElement.clientHeight - anchorElementRect.bottom > hintRect.height;
       const isEnoughOnBottomWithScroll =
@@ -182,7 +182,7 @@ const POSITION_MAPPER: Record<InternalHintPositionType, CalculationResult> = {
     },
   },
   topPageCenter: {
-    /** проверяем, что тултипу хватит места сверху и по центру страницы */
+    /** проверяем, что хинту хватит места сверху и по центру страницы */
     check: (anchorElementRect: DOMRect, hintRect: DOMRect, withScroll: boolean) => {
       const isEnoughOnTop = anchorElementRect.top > hintRect.height;
       const isEnoughOnTopWithScroll = anchorElementRect.top + window.scrollY > hintRect.height;
