@@ -23,7 +23,6 @@ export const CloseButton = styled(CloseIconPlacementButton)`
 
 export type Dimension = 's' | 'm' | 'l';
 
-const HINT_PADDING = 16;
 const HINT_WIDTH_S = '280px';
 const HINT_WIDTH_M = '384px';
 const HINT_WIDTH_L = '488px';
@@ -58,7 +57,7 @@ export const HintDialog = styled.div<{
   isMobile: boolean;
 }>`
   display: flex;
-  padding: ${HINT_PADDING}px 0 ${HINT_PADDING}px ${HINT_PADDING}px;
+  padding: 10px 0;
   background-color: ${({ theme }) => theme.color['Special/Elevated BG']};
   ${typography['Body/Body 2 Long']}
   color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
@@ -71,11 +70,12 @@ export const HintDialog = styled.div<{
 export const HintContent = styled.div`
   display: flex;
   flex: 1 1 auto;
-  max-height: 320px;
+  box-sizing: border-box;
+  max-height: 300px;
   overflow: auto;
-  padding-right: ${HINT_PADDING}px;
+  padding: 6px 16px;
   [data-trigger='click'] & {
-    padding-right: ${CLOSE_BUTTON_SIZE + HINT_PADDING + CLOSE_BUTTON_MARGIN_LEFT}px;
+    padding-right: ${16 + CLOSE_BUTTON_SIZE + CLOSE_BUTTON_MARGIN_LEFT}px;
   }
 `;
 
