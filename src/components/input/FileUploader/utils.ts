@@ -1,4 +1,6 @@
-export type Status = 'Uploaded' | 'Loading' | 'Error' | 'Queue';
+export type FileUploadStatus = 'Uploaded' | 'Loading' | 'Error' | 'Queue';
+/** @deprecated use FileUploadingStatus instead */
+export type Status = FileUploadStatus;
 
 export type Dimension = 'xl' | 'm';
 
@@ -29,7 +31,6 @@ export const dataTransferConstructorSupported = (): boolean => {
  * @param acceptedFiles {string}
  * @returns {boolean}
  */
-
 export function acceptFile(file: File, acceptedFiles: string): boolean {
   if (file && acceptedFiles) {
     const acceptedFilesArray = Array.isArray(acceptedFiles) ? acceptedFiles : acceptedFiles.split(',');

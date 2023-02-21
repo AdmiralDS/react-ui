@@ -24,14 +24,17 @@ const StyledButton = styled(Button)`
 const Description = () => (
   <Desc>
     Всплывающая подсказка используется для ситуаций, когда требуется пояснить или раскрыть информацию более детально.
-    Вызывается либо по клику на иконку Question, либо по ховеру на любом элементе, когда недостаточно Tooltip-а.
+    Вызывается либо по клику, например на иконку Question, либо по ховеру на любом элементе, когда недостаточно
+    Tooltip-а.
     <Separator />В случае, когда Hint вызывается по клику, у нас есть возможность его закрыть кликом вне Hint-а, либо
     нажатием на крестик.
     <Separator />В сценарии, когда Hint вызывается по ховеру, иконки закрытия на компоненте нет и он скрывается, когда
-    мы уводим курсор с объекта к которому он привязан.
+    мы уводим курсор с объекта, к которому он привязан.
     <Separator />
-    Hint имеет три фиксированных по ширине размера: 280px, 384px и 488px. Которые используются в зависимости от
-    предполагаемого объема текста. Высота компонента настраивается автоматически при редактировании.
+    Hint имеет три фиксированных по ширине размера: 280px, 384px и 488px, которые используются в зависимости от
+    предполагаемого объема текста. На экранах мобильных устройств, меньше 640px, компонент адаптируется по ширине к
+    рабочей области устройства. Высота компонента настраивается автоматически при задании контента. Максимальная высота
+    компонента – 320px, после чего у контента появляется вертикальный скролл.
     <Separator />
     По умолчанию Hint-у присваивается самый большой размер, Hint появляется по ховеру.
   </Desc>
@@ -73,8 +76,9 @@ export default {
       options: ['hover', 'click'],
       control: { type: 'radio' },
     },
-    isMobile: {
-      control: { type: 'boolean' },
+    hintPosition: {
+      options: ['bottom', 'top', 'left', 'right'],
+      control: { type: 'radio' },
     },
     themeBorderKind: {
       options: ALL_BORDER_RADIUS_VALUES,
@@ -105,11 +109,15 @@ const Template1: ComponentStory<typeof Hint> = ({ anchorId, ...args }) => {
   );
 };
 
-const Template2: Story<HintProps & { anchorId1: string; anchorId2: string }> = ({ anchorId1, anchorId2, ...args }) => {
+const Template2: ComponentStory<typeof Hint> = (args) => {
   const [visible1, setVisible1] = React.useState(false);
   const [visible2, setVisible2] = React.useState(false);
+  const [visible3, setVisible3] = React.useState(false);
+  const [visible4, setVisible4] = React.useState(false);
   const handleVisibilityChange1 = (visible: boolean) => setVisible1(visible);
   const handleVisibilityChange2 = (visible: boolean) => setVisible2(visible);
+  const handleVisibilityChange3 = (visible: boolean) => setVisible3(visible);
+  const handleVisibilityChange4 = (visible: boolean) => setVisible4(visible);
   return (
     <>
       <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
@@ -118,10 +126,11 @@ const Template2: Story<HintProps & { anchorId1: string; anchorId2: string }> = (
           visible={visible1}
           onVisibilityChange={handleVisibilityChange1}
           renderContent={() => text}
-          anchorId={anchorId1}
+          anchorId="right_pos"
+          hintPosition="right"
         >
-          <StyledButton dimension="s" aria-label="Additional information" aria-describedby={anchorId1}>
-            <HelpOutline aria-hidden />
+          <StyledButton dimension="s" aria-label="Additional information" aria-describedby="right_pos">
+            Right
           </StyledButton>
         </Hint>
         <Hint
@@ -129,10 +138,35 @@ const Template2: Story<HintProps & { anchorId1: string; anchorId2: string }> = (
           visible={visible2}
           onVisibilityChange={handleVisibilityChange2}
           renderContent={() => text}
-          id={anchorId2}
+          id="top_pos"
+          hintPosition="top"
         >
-          <StyledButton dimension="s" aria-label="Additional information" aria-describedby={anchorId2}>
-            <HelpOutline aria-hidden />
+          <StyledButton dimension="s" aria-label="Additional information" aria-describedby="top_pos">
+            Top
+          </StyledButton>
+        </Hint>
+        <Hint
+          {...args}
+          visible={visible3}
+          onVisibilityChange={handleVisibilityChange3}
+          renderContent={() => text}
+          anchorId="bottom_pos"
+          hintPosition="bottom"
+        >
+          <StyledButton dimension="s" aria-label="Additional information" aria-describedby="bottom_pos">
+            Bottom
+          </StyledButton>
+        </Hint>
+        <Hint
+          {...args}
+          visible={visible4}
+          onVisibilityChange={handleVisibilityChange4}
+          renderContent={() => text}
+          id="left-pos"
+          hintPosition="left"
+        >
+          <StyledButton dimension="s" aria-label="Additional information" aria-describedby="left-pos">
+            Left
           </StyledButton>
         </Hint>
       </div>
@@ -184,7 +218,7 @@ const Template4: ComponentStory<typeof Hint> = ({ anchorId, ...args }) => {
           <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
             {text}
             <Separator height={8} />
-            <TextButton appearance="primary" dimension="s" text="Link" />
+            <TextButton appearance="primary" dimension="s" text="Text Button" />
           </div>
         )}
         anchorId={anchorId}
@@ -231,16 +265,29 @@ HintBase.storyName = 'Hint. Базовый пример.';
 
 /**  docs.story.description doesn't shown for the first story, only for the other stories on the page */
 export const HintPosition = Template2.bind({});
-HintPosition.args = { anchorId1: 'hint_pos1', anchorId2: 'hint_pos2' };
 HintPosition.storyName = 'Hint. Позиционирование.';
 HintPosition.parameters = {
   docs: {
     description: {
-      story: `Компонент имеет 4 варианта позиционирования: снизу справа, снизу слева, сверху справа, 
-      сверху слева. Позиции перечислены в порядке приоритета. Данный пример демонстрирует все 4 варианта. Если 
-      нужно увидеть расположение хинта сверху, следует прокрутить страницу таким образом, чтобы пространтсва 
-      под кнопками было недостаточно для отображения хинта.\n\nНа экранах мобильных устройств, меньше 640px, 
-      компонент адаптируется по ширине к рабочей области устройства.`,
+      story: `Компонент имеет 8 основных вариантов позиционирования: снизу справа, снизу слева, сверху справа, 
+      сверху слева, слева внизу, слева вверху, справа внизу и справа вверху. Позиции перечислены в порядке приоритета.
+      По умолчанию компонент сам рассчитывает свою позицию, исходя из приоритета позиций и свободного места на экране.
+      Если хинт не помещается ни в один из перечисленных 8 вариантов позиционирования, то происходит проверка того, можно ли разместить хинт
+      снизу/сверху/слева/справа относительно центра target-элемента или снизу/сверху по центру страницы.\n\nТакже 
+      пользователь может сам с помощью параметра hintPosition задать, с какой стороны от target-элемента должен появляться Hint.
+      Параметр hintPosition может принимать следующие значения - bottom|top|left|right. \n\n* При hintPosition='bottom' 
+      хинт рендерится снизу от target-элемента с возможным сдвигом по горизонтальной оси, т.е. происходит выбор 
+      из 4 вариантов позиционирования: снизу справа, снизу слева, снизу по центру target-элемента и 
+      снизу по центру страницы (позиции расположены в порядке приоритета);\n\n* При hintPosition='top' хинт рендерится сверху от target-элемента 
+      с возможным сдвигом по горизонтальной оси, т.е. происходит выбор из 4 вариантов позиционирования: сверху справа, сверху слева, сверху 
+      по центру target-элемента и сверху по центру страницы (позиции расположены в порядке приоритета);\n\n* При hintPosition='left' 
+      хинт рендерится слева от target-элемента с возможным сдвигом по вертикальной оси, т.е. происходит выбор из 3 вариантов позиционирования: 
+      слева снизу, слева сверху и слева по центру target-элемента (позиции расположены в порядке приоритета);\n\n* При hintPosition='right' 
+      хинт рендерится справа от target-элемента с возможным сдвигом по вертикальной оси, т.е. происходит выбор из 3 вариантов 
+      позиционирования: справа снизу, справа сверху и справа по центру target-элемента (позиции расположены в порядке приоритета).\n\nНа 
+      экранах мобильных устройств, меньше 640px, 
+      компонент адаптируется по ширине к рабочей области устройства, то есть занимает всю ширину экрана 
+      и позиционируется только снизу или сверху от target-элемента.\n\nНиже приведен пример с использованием параметра hintPosition.`,
     },
   },
 };

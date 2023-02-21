@@ -9,7 +9,6 @@ export const ghostAppearanceMixin = css`
     fill: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
   }
 
-  &:focus,
   &:hover {
     background-color: ${({ theme }) => theme.color['Opacity/Hover']};
     color: ${({ theme }) => theme.color['Primary/Primary 60 Main']};

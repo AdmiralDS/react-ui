@@ -1,8 +1,7 @@
 import * as React from 'react';
-import styled from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import { useToast } from '#src/components/Toast/useToast';
 import type { PositionToasts } from '#src/components/Toast/ToastProvider';
-import { AnimationToast } from '#src/components/Toast/AnimationToast';
 
 const Container = styled.div<{ position: PositionToasts }>`
   position: fixed;
@@ -20,18 +19,55 @@ const Container = styled.div<{ position: PositionToasts }>`
     pointer-events: initial;
   }
 `;
+const fadeInRight = keyframes`
+  from {
+    transform: translateX(100%);
+
+  }
+  to {
+    transform: translateX(0);
+  }
+`;
+
+const fadeInLeft = keyframes`
+  from {
+    transform: translateX(-100%);
+
+  }
+  to {
+    transform: translateX(0);
+  }
+`;
+
+const fadeMixin = css<{ position?: PositionToasts }>`
+  animation-name: ${({ position }) => {
+    if (position === 'bottom-left') return fadeInLeft;
+    return fadeInRight;
+  }};
+`;
+
+const Transition = styled.div<{ position?: PositionToasts }>`
+  margin-bottom: 16px;
+  animation-duration: 1s;
+  animation-timing-function: ease-out;
+  ${fadeMixin}
+`;
 
 export interface ToastTransitionProps extends React.HTMLAttributes<HTMLDivElement> {
   position?: PositionToasts;
 }
 
 export const Toast = ({ position = 'top-right', ...props }: ToastTransitionProps) => {
-  const { toasts } = useToast();
+  const { toastItemList } = useToast();
   return (
     <Container position={position} {...props}>
-      {!!toasts?.length &&
-        toasts.map((item) => {
-          return <AnimationToast key={item.id} position={position} item={item} />;
+      {!!toastItemList?.length &&
+        toastItemList.map(({ renderToast, id }) => {
+          return (
+            <Transition key={id} position={position}>
+              {renderToast(id)}
+            </Transition>
+          );
         })}
     </Container>
   );
@@ -39,5 +75,6 @@ export const Toast = ({ position = 'top-right', ...props }: ToastTransitionProps
 
 export * from './useToast';
 export * from './ToastProvider';
+export * from './ToastItem';
 
 Toast.displayName = 'Toast';

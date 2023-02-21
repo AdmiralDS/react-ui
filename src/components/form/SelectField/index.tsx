@@ -21,7 +21,6 @@ export interface SearchSelectFieldProps
     Omit<FieldOwnProps, 'inputRef' | 'onChange' | 'displayCharacterCounter' | 'maxLength'> {}
 
 export const SelectField = React.forwardRef<HTMLSelectElement, SearchSelectFieldProps>((props, ref) => {
-  const fieldRef = React.useRef(null);
   const {
     className,
     displayInline,
@@ -43,7 +42,6 @@ export const SelectField = React.forwardRef<HTMLSelectElement, SearchSelectField
     id,
     displayInline,
     disabled,
-    ref: fieldRef,
     skeleton,
     'data-field-id': id,
     'data-field-name': restProps.name,
@@ -60,7 +58,6 @@ export const SelectField = React.forwardRef<HTMLSelectElement, SearchSelectField
     disabled,
     skeleton,
     ...restProps,
-    portalTargetRef: fieldRef,
   };
   return (
     <Field {...fieldContainerProps}>

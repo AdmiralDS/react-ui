@@ -19,7 +19,6 @@ const defaultAppearanceMixin = css<StyledButtonProps>`
     outline: ${(p) => p.theme.color['Primary/Primary 60 Main']} solid 2px;
   }
 
-  &:focus,
   &:hover {
     cursor: pointer;
     color: ${({ theme }) => theme.color['Primary/Primary 70']};

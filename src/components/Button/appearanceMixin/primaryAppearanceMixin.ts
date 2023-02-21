@@ -8,7 +8,6 @@ export const primaryAppearanceMixin = css`
     fill: ${({ theme }) => theme.color['Special/Static White']};
   }
 
-  :focus,
   :hover {
     background-color: ${({ theme }) => theme.color['Primary/Primary 70']};
     border-color: ${({ theme }) => theme.color['Primary/Primary 70']};
