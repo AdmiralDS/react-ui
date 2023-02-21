@@ -35,7 +35,7 @@ const StyledButton = styled.button.attrs<
   background: ${({ skeleton }) => (skeleton ? 'red' : 'transparent')};
   -webkit-tap-highlight-color: transparent;
   appearance: none;
-  vertical-align: center;
+  vertical-align: middle;
 
   pointer-events: ${(p) => (p.disabled || p.skeleton ? 'none' : 'all')};
   
