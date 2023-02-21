@@ -1,11 +1,24 @@
-import { DateTimeDateInput, DateTimeTimeInput, INPUT_DIMENSIONS_VALUES } from '#src/components/input';
+import type { InputStatus, ComponentDimension } from '#src/components/input';
+import {
+  DateTimeContainer,
+  DateTimeDateInput,
+  DateTimeTimeInput,
+  INPUT_DIMENSIONS_VALUES,
+  INPUT_STATUS_VALUES,
+  DateTimeSeparator,
+} from '#src/components/input';
 import * as React from 'react';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { FieldProps } from '#src/components/Field';
 import { Field } from '#src/components/Field';
 import { withDesign } from 'storybook-addon-designs';
 import styled from 'styled-components';
 import { DataAttributesDescription } from '#src/components/form/common';
 import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
+
+interface DateTimeFieldProps extends FieldProps {
+  dimension?: ComponentDimension;
+}
 
 export default {
   title: 'Admiral-2.1/Form Field/DateTimeField',
@@ -73,6 +86,16 @@ export default {
     skeleton: {
       control: { type: 'boolean' },
     },
+    disabled: {
+      control: { type: 'boolean' },
+    },
+    readOnly: {
+      control: { type: 'boolean' },
+    },
+    status: {
+      options: INPUT_STATUS_VALUES,
+      control: { type: 'radio' },
+    },
   },
 } as ComponentMeta<typeof Field>;
 
@@ -82,19 +105,15 @@ const DisplayContainer = styled.div`
   }
 `;
 
-const FlexDiv = styled.div`
-  display: flex;
-  min-width: 288px;
-`;
-
 const Template1: ComponentStory<typeof Field> = (props) => {
   return (
     <DisplayContainer>
       <Field label="Введите дату">
-        <FlexDiv>
+        <DateTimeContainer>
           <DateTimeDateInput />
+          <DateTimeSeparator />
           <DateTimeTimeInput />
-        </FlexDiv>
+        </DateTimeContainer>
       </Field>
     </DisplayContainer>
   );
@@ -104,10 +123,11 @@ const Template2: ComponentStory<typeof Field> = (props) => {
   return (
     <DisplayContainer>
       <Field label="Disabled control" disabled>
-        <FlexDiv>
+        <DateTimeContainer disabled>
           <DateTimeDateInput disabled />
+          <DateTimeSeparator disabled />
           <DateTimeTimeInput disabled />
-        </FlexDiv>
+        </DateTimeContainer>
       </Field>
     </DisplayContainer>
   );
@@ -117,23 +137,85 @@ const Template3: ComponentStory<typeof Field> = (props) => {
   return (
     <DisplayContainer>
       <Field label="read only control" readOnly>
-        <FlexDiv>
+        <DateTimeContainer readOnly>
           <DateTimeDateInput defaultValue="12.10.2022" readOnly />
+          <DateTimeSeparator readOnly />
           <DateTimeTimeInput defaultValue="12:10" readOnly />
-        </FlexDiv>
+        </DateTimeContainer>
+      </Field>
+    </DisplayContainer>
+  );
+};
+
+const Template4: ComponentStory<typeof Field> = (props: DateTimeFieldProps) => {
+  const [dateTimeStatus, setDateTimeStatus] = React.useState<InputStatus | undefined>(props.status);
+  const [additionalText, setAdditionalText] = React.useState<string>('');
+
+  React.useEffect(() => {
+    if (props.disabled || props.readOnly) {
+      setAdditionalText('');
+      return;
+    }
+    setAdditionalText('Additional text');
+  }, [props.disabled, props.readOnly]);
+
+  React.useEffect(() => {
+    if (props.disabled || props.readOnly) {
+      return;
+    }
+    switch (props.status) {
+      case 'success':
+        setDateTimeStatus('success');
+        break;
+      case 'error':
+        setDateTimeStatus('error');
+        break;
+    }
+    setAdditionalText('Additional text');
+  }, [props.status]);
+
+  return (
+    <DisplayContainer>
+      <Field
+        label="Status control"
+        status={dateTimeStatus}
+        extraText={additionalText}
+        disabled={props.disabled}
+        readOnly={props.readOnly}
+      >
+        <DateTimeContainer status={dateTimeStatus} disabled={props.disabled} readOnly={props.readOnly}>
+          <DateTimeDateInput
+            defaultValue="12.10.2022"
+            status={dateTimeStatus}
+            disabled={props.disabled}
+            readOnly={props.readOnly}
+            dimension={props.dimension}
+          />
+          <DateTimeSeparator status={dateTimeStatus} disabled={props.disabled} readOnly={props.readOnly} />
+          <DateTimeTimeInput
+            defaultValue="12:10"
+            status={dateTimeStatus}
+            disabled={props.disabled}
+            readOnly={props.readOnly}
+            dimension={props.dimension}
+          />
+        </DateTimeContainer>
       </Field>
     </DisplayContainer>
   );
 };
 
 export const DateTimeField1 = Template1.bind({});
-
 DateTimeField1.storyName = 'DateTimeField example';
 
 export const DateTimeField2 = Template2.bind({});
-
 DateTimeField2.storyName = 'DateTimeField disabled example';
 
 export const DateTimeField3 = Template3.bind({});
-
 DateTimeField3.storyName = 'DateTimeField read only example';
+
+export const DateTimeField4 = Template4.bind({});
+DateTimeField4.args = {
+  status: 'success',
+};
+DateTimeField4.storyName = 'DateTimeField status example';
