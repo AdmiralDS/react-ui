@@ -69,6 +69,15 @@ export default {
     handleInput: {
       control: false,
     },
+    theme: {
+      control: false,
+    },
+    as: {
+      control: false,
+    },
+    forwardedAs: {
+      control: false,
+    },
     themeBorderKind: {
       options: ALL_BORDER_RADIUS_VALUES,
       control: { type: 'radio' },
@@ -101,7 +110,7 @@ const Template: ComponentStory<typeof TextInput> = (props) => {
 
   return (
     <ThemeProvider theme={swapBorder}>
-      <TextInput {...cleanProps} value={localValue} onChange={handleChange} />
+      <TextInput {...cleanProps} value={localValue} placeholder={props.placeholder} onChange={handleChange} />
     </ThemeProvider>
   );
 };
