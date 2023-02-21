@@ -134,6 +134,12 @@ export default {
     disabled: {
       control: { type: 'boolean' },
     },
+    disableSelectedOptionHighlight: {
+      control: { type: 'boolean' },
+    },
+    isVisible: {
+      control: { type: 'boolean' },
+    },
     loading: {
       control: { type: 'boolean' },
     },
@@ -147,6 +153,24 @@ export default {
     alignSelf: {
       options: [undefined, 'auto', 'flex-start', 'flex-end', 'center', 'baseline', 'stretch'],
       control: { type: 'select' },
+    },
+    items: {
+      control: false,
+    },
+    selected: {
+      control: false,
+    },
+    active: {
+      control: false,
+    },
+    menuWidth: {
+      control: false,
+    },
+    menuMaxHeight: {
+      control: false,
+    },
+    dropContainerCssMixin: {
+      control: false,
     },
   },
 } as ComponentMeta<typeof MenuButton>;
