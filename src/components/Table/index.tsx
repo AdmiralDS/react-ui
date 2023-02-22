@@ -7,6 +7,7 @@ import { getScrollbarSize } from '#src/components/common/dom/scrollbarUtil';
 import { GroupRow } from '#src/components/Table/Row/GroupRow';
 import { RegularRow } from '#src/components/Table/Row/RegularRow';
 import { RowWrapper } from '#src/components/Table/Row/RowWrapper';
+import { LoadingRow } from '#src/components/Table/Row/LoadingRow';
 
 import { InfiniteLoader } from './InfiniteLoader';
 import { HeaderCellComponent } from './HeaderCell';
@@ -25,8 +26,10 @@ import {
   StickyWrapper,
   TableContainer,
   HiddenHeader,
+  Skeleton,
 } from './style';
 import { VirtualBody } from './VirtualBody';
+import { refSetter } from '#src/components/common/utils/refSetter';
 
 export * from './RowAction';
 
@@ -608,7 +611,23 @@ export const Table: React.FC<TableProps> = ({
     );
   };
 
-  const renderGroupRow = (row: TableRow, loading?: boolean) => {
+  const renderLoadingBodyCell = (rowIndex: number, col: Column) => {
+    const headerCellWidth = hiddenHeaderRef.current
+      ?.querySelector<HTMLElement>(`[data-th-column="${col.name}"]`)
+      ?.getBoundingClientRect().width;
+    return (
+      <Cell
+        key={`row${rowIndex}_${col.name}`}
+        dimension={dimension}
+        style={{ width: headerCellWidth || '100px' }}
+        data-column={col.name}
+      >
+        <Skeleton dimension={dimension} appearance="primary" />
+      </Cell>
+    );
+  };
+
+  const renderGroupRow = (row: TableRow) => {
     const indeterminate =
       row.groupRows?.some((rowId) => rowToGroupMap[rowId].checked) &&
       row.groupRows?.some((rowId) => !rowToGroupMap[rowId].checked);
@@ -628,12 +647,11 @@ export const Table: React.FC<TableProps> = ({
         renderCell={renderCell}
         indeterminate={indeterminate}
         checked={checked}
-        loading={loading}
       />
     );
   };
 
-  const renderRegularRow = (row: TableRow, loading?: boolean) => (
+  const renderRegularRow = (row: TableRow) => (
     <RegularRow
       row={row}
       dimension={dimension}
@@ -645,7 +663,6 @@ export const Table: React.FC<TableProps> = ({
       renderBodyCell={renderBodyCell}
       onRowExpansionChange={handleExpansionChange}
       onRowSelectionChange={handleCheckboxChange}
-      loading={loading}
     />
   );
 
@@ -716,16 +733,19 @@ export const Table: React.FC<TableProps> = ({
           grey={zebraRows[row.id]?.includes('even')}
           key={`row_${row.id}`}
         >
-          {isGroupRow ? renderGroupRow(row, row ? false : true) : renderRegularRow(row, row ? false : true)}
+          {isGroupRow ? renderGroupRow(row) : renderRegularRow(row)}
         </RowWrapper>
       );
 
       return node ? renderRowWrapper?.(row, index, node) ?? node : node;
     } else {
       return (
-        <Cell dimension={dimension} key={index}>
-          'loading'
-        </Cell>
+        <LoadingRow
+          dimension={dimension}
+          renderLoadingBodyCell={renderLoadingBodyCell}
+          columns={columnList}
+          rowIndex={index}
+        />
       );
     }
   };
@@ -752,13 +772,13 @@ export const Table: React.FC<TableProps> = ({
         loadMoreItems={virtualScroll.loadMoreItems}
         isItemLoaded={(index) => !!tableRows[index]}
       >
-        {(onItemsRendered: (params: { visibleStartIndex: number; visibleStopIndex: number }) => void) => (
+        {({ onItemsRendered, ref }: any) => (
           <VirtualBody
             height={bodyHeight}
             childHeight={virtualScroll.fixedRowHeight}
             itemCount={virtualScroll.itemCount || rowList.length}
             renderRow={renderRow}
-            ref={scrollBodyRef}
+            ref={refSetter(ref, scrollBodyRef)}
             className="tbody"
             onItemsRendered={onItemsRendered}
           />

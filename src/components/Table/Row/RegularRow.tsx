@@ -33,7 +33,6 @@ export interface RegularRowProps {
   onRowSelectionChange?: (rowId: RowId) => void;
   /** Функция рендера ячейки */
   renderBodyCell: (row: TableRow, column: Column) => React.ReactNode;
-  loading?: boolean;
 }
 
 export const RegularRow = ({
@@ -47,7 +46,6 @@ export const RegularRow = ({
   onRowExpansionChange,
   onRowSelectionChange,
   renderBodyCell,
-  loading,
 }: RegularRowProps) => {
   const handleCheckboxClick = (e: React.MouseEvent<HTMLElement>) => {
     // клик по чекбоксу не должен вызывать событие клика по строке
@@ -87,7 +85,7 @@ export const RegularRow = ({
           {stickyColumns.length > 0 && stickyColumns.map((col) => renderBodyCell(row, col))}
         </StickyWrapper>
       )}
-      {columns.map((col) => (col.sticky ? null : loading ? 'Loading row' : renderBodyCell(row, col)))}
+      {columns.map((col) => (col.sticky ? null : renderBodyCell(row, col)))}
       <Filler />
     </>
   );

@@ -3,7 +3,7 @@
 // Ranges is array of pairs: [start0, stop0, start1, stop1, ..., startN, stopN]
 export type Ranges = Array<number>;
 
-export default function scanForUnloadedRanges({
+export const scanForUnloadedRanges = ({
   isItemLoaded,
   itemCount,
   minimumBatchSize,
@@ -15,7 +15,7 @@ export default function scanForUnloadedRanges({
   minimumBatchSize: number;
   startIndex: number;
   stopIndex: number;
-}): any {
+}): any => {
   // Ranges is array of pairs: [start0, stop0, start1, stop1, ..., startN, stopN]
   const unloadedRanges: any = [];
 
@@ -81,4 +81,4 @@ export default function scanForUnloadedRanges({
   }
 
   return unloadedRanges;
-}
+};

@@ -580,19 +580,9 @@ const Template72: ComponentStory<typeof Table> = ({ rowList, columnList, ...args
     const newCols = cols.map((col) => (col.name === name ? { ...col, width } : col));
     setCols(newCols);
   };
-  // const loadMoreItems = () => {
-  // let newRows = [...Array(30).keys()].map((item, index) => ({
-  //   id: String(index + rows.length),
-  //   transfer_number: index + rows.length,
-  //   transfer_date: new Date('2020-08-06').toLocaleDateString(),
-  // }));
-  //   setTimeout(() => {
-  //     setRows([...rows, ...newRows]);
-  //   }, 1500);
-  // };
 
   const loadMoreItems = (startIndex: number, stopIndex: number): Promise<any> => {
-    console.log({ startIndex, stopIndex });
+    // console.log({ startIndex, stopIndex });
     // for (let index = startIndex; index <= stopIndex; index++) {
     //   itemStatusMap[index] = LOADING;
     // }
@@ -605,7 +595,7 @@ const Template72: ComponentStory<typeof Table> = ({ rowList, columnList, ...args
         }));
         setRows([...rows, ...newRows]);
         resolve('');
-      }, 2500),
+      }, 1000),
     );
   };
 

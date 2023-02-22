@@ -20,7 +20,6 @@ export interface GroupRowProps extends Omit<RegularRowProps, 'columns' | 'sticky
   indeterminate?: boolean;
   /** Значение checkbox-а */
   checked?: boolean;
-  loading?: boolean;
 }
 
 export const GroupRow = ({
@@ -33,7 +32,6 @@ export const GroupRow = ({
   onRowSelectionChange,
   indeterminate,
   checked,
-  loading,
 }: GroupRowProps) => {
   const handleExpandClick = () => {
     onRowExpansionChange?.(row.id);
@@ -74,13 +72,7 @@ export const GroupRow = ({
           </CheckboxCell>
         )}
         <Cell key={`${row.id}`} dimension={dimension} className="td" data-column="group" data-row={row.id}>
-          {loading ? (
-            'Loading row'
-          ) : renderCell ? (
-            renderCell(row, 'group')
-          ) : (
-            <GroupTextContent>{row.groupTitle || ''}</GroupTextContent>
-          )}
+          {renderCell ? renderCell(row, 'group') : <GroupTextContent>{row.groupTitle || ''}</GroupTextContent>}
         </Cell>
       </StickyGroupRow>
       <Filler />

@@ -47,7 +47,9 @@ export const VirtualBody = React.forwardRef<HTMLDivElement, VirtualBodyProps>(
     const topPadding = `${startNode * childHeight}px`;
     const bottomPadding = `${(itemCount - startNode - visibleNodeCount) * childHeight}px`;
 
-    onItemsRendered?.({ visibleStartIndex: startNode, visibleStopIndex: startNode + visibleNodeCount });
+    React.useEffect(() => {
+      onItemsRendered?.({ visibleStartIndex: startNode, visibleStopIndex: startNode + visibleNodeCount });
+    }, [onItemsRendered, startNode, visibleNodeCount]);
 
     const nodes = [];
     for (let i = startNode; i < startNode + visibleNodeCount + 1; i++) {

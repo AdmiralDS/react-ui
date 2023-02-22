@@ -1,15 +1,16 @@
 import React from 'react';
-import scanForUnloadedRanges from './scan';
+import { scanForUnloadedRanges } from './scan';
 
 type onItemsRenderedParams = {
   visibleStartIndex: number;
   visibleStopIndex: number;
 };
 type onItemsRendered = (params: onItemsRenderedParams) => void;
+type setRef = (ref: any) => void;
 
 type Props = {
   // Render prop.
-  children: (onItemsRendered: onItemsRendered) => any;
+  children: ({ onItemsRendered, ref }: { onItemsRendered: onItemsRendered; ref: setRef }) => any;
 
   // Function responsible for tracking the loaded state of each item.
   isItemLoaded: (index: number) => boolean;
@@ -56,7 +57,11 @@ export const InfiniteLoader = ({
   const [lastRenderedStopIndex, setLastRenderedStopIndex] = React.useState<number>(-1);
   const [memoizedUnloadedRanges, setMemoizedUnloadedRanges] = React.useState<Array<number>>([]);
   const [update, forceUpdate] = React.useState({});
+  const [listRef, setListRef] = React.useState<any>(null);
 
+  const setRef = (listRef: any) => {
+    setListRef(listRef);
+  };
   const onItemsRendered: onItemsRendered = ({ visibleStartIndex, visibleStopIndex }: onItemsRenderedParams) => {
     setLastRenderedStartIndex(visibleStartIndex);
     setLastRenderedStopIndex(visibleStopIndex);
@@ -86,6 +91,8 @@ export const InfiniteLoader = ({
     }
   };
 
+  const content = React.useCallback(() => children({ onItemsRendered, ref: setRef }), [update, children]);
+
   const loadUnloadedRanges = (unloadedRanges: Array<number>) => {
     for (let i = 0; i < unloadedRanges.length; i += 2) {
       const startIndex = unloadedRanges[i];
@@ -103,11 +110,12 @@ export const InfiniteLoader = ({
               stopIndex,
             })
           ) {
-            forceUpdate({});
             // Handle an unmount while promises are still in flight.
-            // if (this._listRef == null) {
-            //   return;
-            // }
+            if (listRef == null) {
+              return;
+            } else {
+              forceUpdate({});
+            }
             // // Resize cached row sizes for VariableSizeList,
             // // otherwise just re-render the list.
             // if (typeof this._listRef.resetAfterIndex === 'function') {
@@ -125,5 +133,5 @@ export const InfiniteLoader = ({
       }
     }
   };
-  return children(onItemsRendered);
+  return content();
 };

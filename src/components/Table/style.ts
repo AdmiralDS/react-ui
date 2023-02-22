@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components';
 import { ReactComponent as ArrowUpOutline } from '@admiral-ds/icons/build/system/ArrowUpOutline.svg';
 import { ReactComponent as ChevronDownOutline } from '@admiral-ds/icons/build/system/ChevronDownOutline.svg';
 import type { TableProps } from '#src/components/Table';
+import { PseudoText } from '#src/components/skeleton/PseudoText';
 
 import {
   cellStyle,
@@ -420,4 +421,10 @@ export const HiddenHeader = styled.div`
   visibility: hidden;
   display: flex;
   overflow: hidden;
+`;
+
+export const Skeleton = styled(PseudoText)<{ dimension: TableProps['dimension'] }>`
+  display: block;
+  width: 100%;
+  height: ${({ dimension }) => (dimension === 's' || dimension === 'm' ? 20 : 24)}px;
 `;
