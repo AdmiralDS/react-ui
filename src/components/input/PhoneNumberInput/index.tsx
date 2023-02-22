@@ -82,6 +82,10 @@ const CountryContainer = styled.div<{
   visibility: ${(p) => (p.skeleton ? 'hidden' : 'visible')};
 `;
 
+const PhoneInputDropContainer = styled(StyledDropdownContainer)`
+  width: 100%;
+`;
+
 export interface PhoneNumberInputProps extends Omit<TextInputProps, 'value'> {
   value?: string;
   /** Код ISO A3 страны для определния префикса номера по умолчанию */
@@ -302,9 +306,10 @@ export const PhoneNumberInput = React.forwardRef<HTMLInputElement, PhoneNumberIn
           }}
         >
           {isOpened && !disabled && !skeleton && (
-            <StyledDropdownContainer
+            <PhoneInputDropContainer
               targetRef={inputRef}
               onClickOutside={clickOutside}
+              alignSelf="stretch"
               dropContainerCssMixin={dropContainerCssMixin}
             >
               <CountriesList
@@ -315,7 +320,7 @@ export const PhoneNumberInput = React.forwardRef<HTMLInputElement, PhoneNumberIn
                 onSelectItem={handleSelectCountry}
                 dimension={menuDimension}
               />
-            </StyledDropdownContainer>
+            </PhoneInputDropContainer>
           )}
         </TextInput>
         <CountryContainer
