@@ -6,6 +6,9 @@ import type { ComponentName } from '@admiral-ds/flags';
 import { FlagsPack } from '@admiral-ds/flags';
 import type { MenuItemProps } from '#src/components/Menu/MenuItem';
 import { MenuItem } from '#src/components/Menu/MenuItem';
+import { Tooltip } from '#src/components/Tooltip';
+import { checkOverflow } from '#src/components/common/utils/checkOverflow';
+import { refSetter } from '#src/components/common/utils/refSetter';
 
 export interface CountryBlockProps extends MenuItemProps {
   name: ComponentName;
@@ -39,13 +42,50 @@ const CountryCode = styled.span`
 export const CountryBlock = React.forwardRef<HTMLDivElement, CountryBlockProps>((props, ref) => {
   const { dimension, value, code, name, ...otherProps }: CountryBlockProps = props;
 
+  const wrapperRef = React.useRef<HTMLDivElement>(null);
+  const textRef = React.useRef<HTMLElement>(null);
+  const [overflow, setOverflow] = React.useState(false);
+  const [tooltipVisible, setTooltipVisible] = React.useState(false);
+
+  React.useLayoutEffect(() => {
+    const element = textRef.current;
+    if (element && checkOverflow(element) !== overflow) {
+      setOverflow(checkOverflow(element));
+    }
+  }, [tooltipVisible, textRef.current, setOverflow]);
+
+  React.useLayoutEffect(() => {
+    function show() {
+      setTooltipVisible(true);
+    }
+    function hide() {
+      setTooltipVisible(false);
+    }
+    const wrapper = wrapperRef.current;
+    if (wrapper) {
+      wrapper.addEventListener('mouseenter', show);
+      wrapper.addEventListener('mouseleave', hide);
+      wrapper.addEventListener('focus', show);
+      wrapper.addEventListener('blur', hide);
+      return () => {
+        wrapper.removeEventListener('mouseenter', show);
+        wrapper.removeEventListener('mouseleave', hide);
+        wrapper.removeEventListener('focus', show);
+        wrapper.removeEventListener('blur', hide);
+      };
+    }
+  }, [setTooltipVisible, wrapperRef.current]);
+
   const SvgFlag = (FlagsPack as { [key: ComponentName]: ElementType })[name];
 
   return (
-    <StyledCountryBlock dimension={dimension} ref={ref} {...otherProps}>
-      {SvgFlag && <StyledFlag dimension={dimension} Component={SvgFlag} />}
-      <StyledCountryName>{value}</StyledCountryName>
-      <CountryCode>{code}</CountryCode>
-    </StyledCountryBlock>
+    <>
+      <StyledCountryBlock dimension={dimension} ref={refSetter(ref, wrapperRef)} {...otherProps}>
+        {SvgFlag && <StyledFlag dimension={dimension} Component={SvgFlag} />}
+        <StyledCountryName ref={textRef}>{value}</StyledCountryName>
+        <CountryCode>{code}</CountryCode>
+      </StyledCountryBlock>
+      {tooltipVisible && overflow && <Tooltip targetRef={wrapperRef} renderContent={() => value} />}
+    </>
   );
 });
