@@ -65,7 +65,25 @@ export default {
     displayInline: {
       control: { type: 'boolean' },
     },
+    showTooltip: {
+      control: { type: 'boolean' },
+    },
     icons: {
+      control: false,
+    },
+    alignDropRef: {
+      control: false,
+    },
+    containerRef: {
+      control: false,
+    },
+    prefixValueList: {
+      control: false,
+    },
+    suffixValueList: {
+      control: false,
+    },
+    dropContainerCssMixin: {
       control: false,
     },
     themeBorderKind: {
