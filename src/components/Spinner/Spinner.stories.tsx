@@ -61,11 +61,14 @@ export default {
   },
   argTypes: {
     dimension: {
-      options: ['xl', 'l', 'm', 's'],
+      options: ['xl', 'l', 'm', 'ms', 's'],
       control: { type: 'radio' },
     },
     inverse: {
       control: { type: 'boolean' },
+    },
+    svgMixin: {
+      control: false,
     },
   },
 } as ComponentMeta<typeof Spinner>;
