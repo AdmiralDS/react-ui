@@ -52,6 +52,15 @@ export default {
       options: ALL_BORDER_RADIUS_VALUES,
       control: { type: 'radio' },
     },
+    theme: {
+      control: false,
+    },
+    as: {
+      control: false,
+    },
+    forwardedAs: {
+      control: false,
+    },
   },
 } as ComponentMeta<typeof Checkbox>;
 const Container = styled.div`
