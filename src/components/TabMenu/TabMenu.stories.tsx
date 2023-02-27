@@ -2,10 +2,12 @@ import * as React from 'react';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import { ReactComponent as MinusCircleOutline } from '@admiral-ds/icons/build/service/MinusCircleOutline.svg';
+import type { TabMenuProps } from '#src/components/TabMenu';
 import { TabMenu } from '#src/components/TabMenu';
 import type { Theme } from '#src/components/themes';
 import { ThemeProvider } from 'styled-components';
 import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
+import { Button } from '#src/components/Button';
 
 export default {
   title: 'Admiral-2.1/TabMenu',
@@ -172,18 +174,17 @@ const onChangeTab = (id: string) => {
   console.log(`selected: ${id}`);
 };
 
-const Template1: ComponentStory<typeof TabMenu> = (args) => {
-  const [selected, setSelected] = React.useState<string>('3');
-
+const Temp1 = (props: TabMenuProps) => {
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
+  const [selected, setSelected] = React.useState<string>('3');
 
   return (
     <ThemeProvider theme={swapBorder}>
       <TabMenu
-        {...args}
+        {...props}
         activeTab={selected}
         onChange={(id) => {
           onChangeTab(id);
@@ -194,13 +195,20 @@ const Template1: ComponentStory<typeof TabMenu> = (args) => {
     </ThemeProvider>
   );
 };
+const Template1: ComponentStory<typeof TabMenu> = (args) => {
+  return <Temp1 {...args} />;
+};
 
-const Template2: ComponentStory<typeof TabMenu> = (args) => {
+const Temp2 = (props: TabMenuProps) => {
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    return theme;
+  }
   const [selected, setSelected] = React.useState<string>('3');
   return (
-    <>
+    <ThemeProvider theme={swapBorder}>
       <TabMenu
-        {...args}
+        {...props}
         activeTab={selected}
         onChange={(id) => {
           setSelected(id);
@@ -208,33 +216,47 @@ const Template2: ComponentStory<typeof TabMenu> = (args) => {
         tabs={tabs}
         underline
       />
-    </>
+    </ThemeProvider>
   );
 };
+const Template2: ComponentStory<typeof TabMenu> = (args) => {
+  return <Temp2 {...args} />;
+};
 
-const Template3: ComponentStory<typeof TabMenu> = (args) => {
+const Temp3 = (props: TabMenuProps) => {
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    return theme;
+  }
   const [selected, setSelected] = React.useState<string>('2');
   return (
-    <>
+    <ThemeProvider theme={swapBorder}>
       <TabMenu
-        {...args}
+        {...props}
         activeTab={selected}
         onChange={(id) => {
           setSelected(id);
         }}
         tabs={disabledTabs}
       />
-    </>
+    </ThemeProvider>
   );
 };
+const Template3: ComponentStory<typeof TabMenu> = (args) => {
+  return <Temp3 {...args} />;
+};
 
-const Template4: ComponentStory<typeof TabMenu> = (args) => {
+const Temp4 = (props: TabMenuProps) => {
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    return theme;
+  }
   const [selected, setSelected] = React.useState<string>('3');
   return (
-    <>
+    <ThemeProvider theme={swapBorder}>
       <div style={{ display: 'flex', width: '500px' }}>
         <TabMenu
-          {...args}
+          {...props}
           activeTab={selected}
           onChange={(id) => {
             setSelected(id);
@@ -242,8 +264,55 @@ const Template4: ComponentStory<typeof TabMenu> = (args) => {
           tabs={overflowTabs}
         />
       </div>
-    </>
+    </ThemeProvider>
   );
+};
+const Template4: ComponentStory<typeof TabMenu> = (args) => {
+  return <Temp4 {...args} />;
+};
+
+const Temp5 = (props: TabMenuProps) => {
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    return theme;
+  }
+  const [tabs, setTabs] = React.useState([
+    {
+      id: '1',
+      content: 'Вкладка 1',
+    },
+    {
+      id: '2',
+      content: 'Вкладка 2',
+    },
+    {
+      id: '3',
+      content: 'Вкладка 3',
+    },
+  ]);
+  const [activeTab, setActiveTav] = React.useState('1');
+
+  return (
+    <ThemeProvider theme={swapBorder}>
+      <div>
+        <TabMenu {...props} activeTab={activeTab} onChange={(id) => setActiveTav(id)} tabs={tabs} underline />
+        <div style={{ height: '20px' }} />
+        <Button
+          onClick={() =>
+            setTabs((prev) => {
+              const id = (tabs.length + 1).toString();
+              return [...prev, { id, content: `Вкладка ${id}` }];
+            })
+          }
+        >
+          Добавить вкладку
+        </Button>
+      </div>
+    </ThemeProvider>
+  );
+};
+const Template5: ComponentStory<typeof TabMenu> = (args) => {
+  return <Temp5 {...args} />;
 };
 
 export const TabMenuBase = Template1.bind({});
@@ -261,3 +330,7 @@ TabMenuDisabled.storyName = 'TabMenu. Пример с задизейбленны
 export const TabMenuTooltip = Template4.bind({});
 TabMenuTooltip.args = {};
 TabMenuTooltip.storyName = 'TabMenu. Пример с OverflowMenu.';
+
+export const TabMenuDynamicAdd = Template5.bind({});
+TabMenuDynamicAdd.args = {};
+TabMenuDynamicAdd.storyName = 'TabMenu. Динамическое добавление вкладок';

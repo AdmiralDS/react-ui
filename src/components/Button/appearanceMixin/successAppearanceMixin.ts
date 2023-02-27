@@ -9,7 +9,6 @@ export const successAppearanceMixin = css`
     fill: ${({ theme }) => theme.color['Special/Static White']};
   }
 
-  &:focus,
   &:hover {
     background-color: ${({ theme }) => theme.color['Success/Success 60']};
     border-color: ${({ theme }) => theme.color['Success/Success 60']};

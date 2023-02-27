@@ -83,7 +83,6 @@ exports[`Button should render component 1`] = `
   fill: #FFFFFF;
 }
 
-.c0[data-appearance~='primary']:focus,
 .c0[data-appearance~='primary']:hover {
   background-color: #0046E2;
   border-color: #0046E2;
@@ -116,14 +115,12 @@ exports[`Button should render component 1`] = `
   fill: #0062FF;
 }
 
-.c0[data-appearance~='secondary']:focus,
 .c0[data-appearance~='secondary']:hover {
   background-color: #0000000D;
   color: #0062FF;
   border-color: #0062FF;
 }
 
-.c0[data-appearance~='secondary']:focus *[fill^='#'],
 .c0[data-appearance~='secondary']:hover *[fill^='#'] {
   fill: #0062FF;
 }
@@ -160,14 +157,12 @@ exports[`Button should render component 1`] = `
   fill: #0062FF;
 }
 
-.c0[data-appearance~='ghost']:focus,
 .c0[data-appearance~='ghost']:hover {
   background-color: #0000000D;
   color: #0062FF;
   border-color: transparent;
 }
 
-.c0[data-appearance~='ghost']:focus *[fill^='#'],
 .c0[data-appearance~='ghost']:hover *[fill^='#'] {
   fill: #0062FF;
 }
@@ -204,14 +199,12 @@ exports[`Button should render component 1`] = `
   fill: #FFFFFF;
 }
 
-.c0[data-appearance~='white']:focus,
 .c0[data-appearance~='white']:hover {
   background-color: #FFFFFF0F;
   color: #FFFFFF;
   border-color: #FFFFFF;
 }
 
-.c0[data-appearance~='white']:focus *[fill^='#'],
 .c0[data-appearance~='white']:hover *[fill^='#'] {
   fill: #FFFFFF;
 }
@@ -247,7 +240,6 @@ exports[`Button should render component 1`] = `
   fill: #FFFFFF;
 }
 
-.c0[data-appearance~='danger']:focus,
 .c0[data-appearance~='danger']:hover {
   background-color: #BA1717;
   border-color: #BA1717;
@@ -280,7 +272,6 @@ exports[`Button should render component 1`] = `
   fill: #FFFFFF;
 }
 
-.c0[data-appearance~='success']:focus,
 .c0[data-appearance~='success']:hover {
   background-color: #128238;
   border-color: #128238;
@@ -442,7 +433,6 @@ exports[`Button should render component with text 1`] = `
   fill: #FFFFFF;
 }
 
-.c0[data-appearance~='primary']:focus,
 .c0[data-appearance~='primary']:hover {
   background-color: #0046E2;
   border-color: #0046E2;
@@ -475,14 +465,12 @@ exports[`Button should render component with text 1`] = `
   fill: #0062FF;
 }
 
-.c0[data-appearance~='secondary']:focus,
 .c0[data-appearance~='secondary']:hover {
   background-color: #0000000D;
   color: #0062FF;
   border-color: #0062FF;
 }
 
-.c0[data-appearance~='secondary']:focus *[fill^='#'],
 .c0[data-appearance~='secondary']:hover *[fill^='#'] {
   fill: #0062FF;
 }
@@ -519,14 +507,12 @@ exports[`Button should render component with text 1`] = `
   fill: #0062FF;
 }
 
-.c0[data-appearance~='ghost']:focus,
 .c0[data-appearance~='ghost']:hover {
   background-color: #0000000D;
   color: #0062FF;
   border-color: transparent;
 }
 
-.c0[data-appearance~='ghost']:focus *[fill^='#'],
 .c0[data-appearance~='ghost']:hover *[fill^='#'] {
   fill: #0062FF;
 }
@@ -563,14 +549,12 @@ exports[`Button should render component with text 1`] = `
   fill: #FFFFFF;
 }
 
-.c0[data-appearance~='white']:focus,
 .c0[data-appearance~='white']:hover {
   background-color: #FFFFFF0F;
   color: #FFFFFF;
   border-color: #FFFFFF;
 }
 
-.c0[data-appearance~='white']:focus *[fill^='#'],
 .c0[data-appearance~='white']:hover *[fill^='#'] {
   fill: #FFFFFF;
 }
@@ -606,7 +590,6 @@ exports[`Button should render component with text 1`] = `
   fill: #FFFFFF;
 }
 
-.c0[data-appearance~='danger']:focus,
 .c0[data-appearance~='danger']:hover {
   background-color: #BA1717;
   border-color: #BA1717;
@@ -639,7 +622,6 @@ exports[`Button should render component with text 1`] = `
   fill: #FFFFFF;
 }
 
-.c0[data-appearance~='success']:focus,
 .c0[data-appearance~='success']:hover {
   background-color: #128238;
   border-color: #128238;

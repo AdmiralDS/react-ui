@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.4.1](https://github.com/AdmiralDS/react-ui/compare/v4.4.0...v4.4.1) (2023-02-16)
+
+
+### Bug Fixes
+
+* **TabMenu:** fix tabs update ([ccfcee8](https://github.com/AdmiralDS/react-ui/commit/ccfcee84c9d880f0401222ec9553951ce78126ae))
+* **TextButton:** remove focus style after click ([2d22bd0](https://github.com/AdmiralDS/react-ui/commit/2d22bd0d97765163f779eca78ed317f9b21b1625))
+* **Tree:** expose mouseleave event ([036edbb](https://github.com/AdmiralDS/react-ui/commit/036edbba83d434fb1a97d0e4cf4142b63ca0a52d))
+
 ## [4.4.0](https://github.com/AdmiralDS/react-ui/compare/v4.3.0...v4.4.0) (2023-02-14)
 
 

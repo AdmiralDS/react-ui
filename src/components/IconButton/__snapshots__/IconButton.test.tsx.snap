@@ -11,7 +11,7 @@ exports[`IconButton should render component 1`] = `
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  vertical-align: center;
+  vertical-align: middle;
   pointer-events: all;
 }
 

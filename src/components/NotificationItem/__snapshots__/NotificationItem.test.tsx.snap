@@ -42,7 +42,6 @@ Object {
   outline: #0062FF solid 2px;
 }
 
-.c6:focus,
 .c6:hover {
   cursor: pointer;
   color: #0046E2;
@@ -334,7 +333,6 @@ Object {
   outline: #0062FF solid 2px;
 }
 
-.c6:focus,
 .c6:hover {
   cursor: pointer;
   color: #0046E2;

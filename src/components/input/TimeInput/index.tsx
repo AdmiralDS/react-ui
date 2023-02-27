@@ -158,6 +158,7 @@ export const TimeInput = React.forwardRef<HTMLInputElement, TimeInputProps>(
         } else {
           setActiveOption('');
         }
+        inputRef.current?.focus();
       }
       setIsOpened(!isOpened);
     };
@@ -224,7 +225,13 @@ export const TimeInput = React.forwardRef<HTMLInputElement, TimeInputProps>(
         return availableSlots.map((slot, index) => ({
           id: slot.value,
           render: (options: RenderOptionProps) => (
-            <StyledMenuItem key={index} data-dimension={dimension} disabled={slot.disabled} {...options}>
+            <StyledMenuItem
+              onMouseDown={(e) => e.preventDefault()}
+              key={index}
+              data-dimension={dimension}
+              disabled={slot.disabled}
+              {...options}
+            >
               {slot.value}
             </StyledMenuItem>
           ),

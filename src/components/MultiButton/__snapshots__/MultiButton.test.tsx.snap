@@ -85,7 +85,6 @@ Object {
   fill: #FFFFFF;
 }
 
-.c1[data-appearance~='primary']:focus,
 .c1[data-appearance~='primary']:hover {
   background-color: #0046E2;
   border-color: #0046E2;
@@ -118,14 +117,12 @@ Object {
   fill: #0062FF;
 }
 
-.c1[data-appearance~='secondary']:focus,
 .c1[data-appearance~='secondary']:hover {
   background-color: #0000000D;
   color: #0062FF;
   border-color: #0062FF;
 }
 
-.c1[data-appearance~='secondary']:focus *[fill^='#'],
 .c1[data-appearance~='secondary']:hover *[fill^='#'] {
   fill: #0062FF;
 }
@@ -162,14 +159,12 @@ Object {
   fill: #0062FF;
 }
 
-.c1[data-appearance~='ghost']:focus,
 .c1[data-appearance~='ghost']:hover {
   background-color: #0000000D;
   color: #0062FF;
   border-color: transparent;
 }
 
-.c1[data-appearance~='ghost']:focus *[fill^='#'],
 .c1[data-appearance~='ghost']:hover *[fill^='#'] {
   fill: #0062FF;
 }
@@ -206,14 +201,12 @@ Object {
   fill: #FFFFFF;
 }
 
-.c1[data-appearance~='white']:focus,
 .c1[data-appearance~='white']:hover {
   background-color: #FFFFFF0F;
   color: #FFFFFF;
   border-color: #FFFFFF;
 }
 
-.c1[data-appearance~='white']:focus *[fill^='#'],
 .c1[data-appearance~='white']:hover *[fill^='#'] {
   fill: #FFFFFF;
 }
@@ -249,7 +242,6 @@ Object {
   fill: #FFFFFF;
 }
 
-.c1[data-appearance~='danger']:focus,
 .c1[data-appearance~='danger']:hover {
   background-color: #BA1717;
   border-color: #BA1717;
@@ -282,7 +274,6 @@ Object {
   fill: #FFFFFF;
 }
 
-.c1[data-appearance~='success']:focus,
 .c1[data-appearance~='success']:hover {
   background-color: #128238;
   border-color: #128238;
@@ -379,7 +370,6 @@ Object {
   fill: #FFFFFF;
 }
 
-.c6[data-appearance~='primary']:focus,
 .c6[data-appearance~='primary']:hover {
   background-color: #0046E2;
   border-color: #0046E2;
@@ -412,14 +402,12 @@ Object {
   fill: #0062FF;
 }
 
-.c6[data-appearance~='secondary']:focus,
 .c6[data-appearance~='secondary']:hover {
   background-color: #0000000D;
   color: #0062FF;
   border-color: #0062FF;
 }
 
-.c6[data-appearance~='secondary']:focus *[fill^='#'],
 .c6[data-appearance~='secondary']:hover *[fill^='#'] {
   fill: #0062FF;
 }
@@ -456,14 +444,12 @@ Object {
   fill: #0062FF;
 }
 
-.c6[data-appearance~='ghost']:focus,
 .c6[data-appearance~='ghost']:hover {
   background-color: #0000000D;
   color: #0062FF;
   border-color: transparent;
 }
 
-.c6[data-appearance~='ghost']:focus *[fill^='#'],
 .c6[data-appearance~='ghost']:hover *[fill^='#'] {
   fill: #0062FF;
 }
@@ -500,14 +486,12 @@ Object {
   fill: #FFFFFF;
 }
 
-.c6[data-appearance~='white']:focus,
 .c6[data-appearance~='white']:hover {
   background-color: #FFFFFF0F;
   color: #FFFFFF;
   border-color: #FFFFFF;
 }
 
-.c6[data-appearance~='white']:focus *[fill^='#'],
 .c6[data-appearance~='white']:hover *[fill^='#'] {
   fill: #FFFFFF;
 }
@@ -543,7 +527,6 @@ Object {
   fill: #FFFFFF;
 }
 
-.c6[data-appearance~='danger']:focus,
 .c6[data-appearance~='danger']:hover {
   background-color: #BA1717;
   border-color: #BA1717;
@@ -576,7 +559,6 @@ Object {
   fill: #FFFFFF;
 }
 
-.c6[data-appearance~='success']:focus,
 .c6[data-appearance~='success']:hover {
   background-color: #128238;
   border-color: #128238;
@@ -857,7 +839,6 @@ Object {
   fill: #FFFFFF;
 }
 
-.c1[data-appearance~='primary']:focus,
 .c1[data-appearance~='primary']:hover {
   background-color: #0046E2;
   border-color: #0046E2;
@@ -890,14 +871,12 @@ Object {
   fill: #0062FF;
 }
 
-.c1[data-appearance~='secondary']:focus,
 .c1[data-appearance~='secondary']:hover {
   background-color: #0000000D;
   color: #0062FF;
   border-color: #0062FF;
 }
 
-.c1[data-appearance~='secondary']:focus *[fill^='#'],
 .c1[data-appearance~='secondary']:hover *[fill^='#'] {
   fill: #0062FF;
 }
@@ -934,14 +913,12 @@ Object {
   fill: #0062FF;
 }
 
-.c1[data-appearance~='ghost']:focus,
 .c1[data-appearance~='ghost']:hover {
   background-color: #0000000D;
   color: #0062FF;
   border-color: transparent;
 }
 
-.c1[data-appearance~='ghost']:focus *[fill^='#'],
 .c1[data-appearance~='ghost']:hover *[fill^='#'] {
   fill: #0062FF;
 }
@@ -978,14 +955,12 @@ Object {
   fill: #FFFFFF;
 }
 
-.c1[data-appearance~='white']:focus,
 .c1[data-appearance~='white']:hover {
   background-color: #FFFFFF0F;
   color: #FFFFFF;
   border-color: #FFFFFF;
 }
 
-.c1[data-appearance~='white']:focus *[fill^='#'],
 .c1[data-appearance~='white']:hover *[fill^='#'] {
   fill: #FFFFFF;
 }
@@ -1021,7 +996,6 @@ Object {
   fill: #FFFFFF;
 }
 
-.c1[data-appearance~='danger']:focus,
 .c1[data-appearance~='danger']:hover {
   background-color: #BA1717;
   border-color: #BA1717;
@@ -1054,7 +1028,6 @@ Object {
   fill: #FFFFFF;
 }
 
-.c1[data-appearance~='success']:focus,
 .c1[data-appearance~='success']:hover {
   background-color: #128238;
   border-color: #128238;
@@ -1151,7 +1124,6 @@ Object {
   fill: #FFFFFF;
 }
 
-.c6[data-appearance~='primary']:focus,
 .c6[data-appearance~='primary']:hover {
   background-color: #0046E2;
   border-color: #0046E2;
@@ -1184,14 +1156,12 @@ Object {
   fill: #0062FF;
 }
 
-.c6[data-appearance~='secondary']:focus,
 .c6[data-appearance~='secondary']:hover {
   background-color: #0000000D;
   color: #0062FF;
   border-color: #0062FF;
 }
 
-.c6[data-appearance~='secondary']:focus *[fill^='#'],
 .c6[data-appearance~='secondary']:hover *[fill^='#'] {
   fill: #0062FF;
 }
@@ -1228,14 +1198,12 @@ Object {
   fill: #0062FF;
 }
 
-.c6[data-appearance~='ghost']:focus,
 .c6[data-appearance~='ghost']:hover {
   background-color: #0000000D;
   color: #0062FF;
   border-color: transparent;
 }
 
-.c6[data-appearance~='ghost']:focus *[fill^='#'],
 .c6[data-appearance~='ghost']:hover *[fill^='#'] {
   fill: #0062FF;
 }
@@ -1272,14 +1240,12 @@ Object {
   fill: #FFFFFF;
 }
 
-.c6[data-appearance~='white']:focus,
 .c6[data-appearance~='white']:hover {
   background-color: #FFFFFF0F;
   color: #FFFFFF;
   border-color: #FFFFFF;
 }
 
-.c6[data-appearance~='white']:focus *[fill^='#'],
 .c6[data-appearance~='white']:hover *[fill^='#'] {
   fill: #FFFFFF;
 }
@@ -1315,7 +1281,6 @@ Object {
   fill: #FFFFFF;
 }
 
-.c6[data-appearance~='danger']:focus,
 .c6[data-appearance~='danger']:hover {
   background-color: #BA1717;
   border-color: #BA1717;
@@ -1348,7 +1313,6 @@ Object {
   fill: #FFFFFF;
 }
 
-.c6[data-appearance~='success']:focus,
 .c6[data-appearance~='success']:hover {
   background-color: #128238;
   border-color: #128238;
@@ -1684,7 +1648,6 @@ Object {
   fill: #FFFFFF;
 }
 
-.c1[data-appearance~='primary']:focus,
 .c1[data-appearance~='primary']:hover {
   background-color: #0046E2;
   border-color: #0046E2;
@@ -1717,14 +1680,12 @@ Object {
   fill: #0062FF;
 }
 
-.c1[data-appearance~='secondary']:focus,
 .c1[data-appearance~='secondary']:hover {
   background-color: #0000000D;
   color: #0062FF;
   border-color: #0062FF;
 }
 
-.c1[data-appearance~='secondary']:focus *[fill^='#'],
 .c1[data-appearance~='secondary']:hover *[fill^='#'] {
   fill: #0062FF;
 }
@@ -1761,14 +1722,12 @@ Object {
   fill: #0062FF;
 }
 
-.c1[data-appearance~='ghost']:focus,
 .c1[data-appearance~='ghost']:hover {
   background-color: #0000000D;
   color: #0062FF;
   border-color: transparent;
 }
 
-.c1[data-appearance~='ghost']:focus *[fill^='#'],
 .c1[data-appearance~='ghost']:hover *[fill^='#'] {
   fill: #0062FF;
 }
@@ -1805,14 +1764,12 @@ Object {
   fill: #FFFFFF;
 }
 
-.c1[data-appearance~='white']:focus,
 .c1[data-appearance~='white']:hover {
   background-color: #FFFFFF0F;
   color: #FFFFFF;
   border-color: #FFFFFF;
 }
 
-.c1[data-appearance~='white']:focus *[fill^='#'],
 .c1[data-appearance~='white']:hover *[fill^='#'] {
   fill: #FFFFFF;
 }
@@ -1848,7 +1805,6 @@ Object {
   fill: #FFFFFF;
 }
 
-.c1[data-appearance~='danger']:focus,
 .c1[data-appearance~='danger']:hover {
   background-color: #BA1717;
   border-color: #BA1717;
@@ -1881,7 +1837,6 @@ Object {
   fill: #FFFFFF;
 }
 
-.c1[data-appearance~='success']:focus,
 .c1[data-appearance~='success']:hover {
   background-color: #128238;
   border-color: #128238;
@@ -1978,7 +1933,6 @@ Object {
   fill: #FFFFFF;
 }
 
-.c6[data-appearance~='primary']:focus,
 .c6[data-appearance~='primary']:hover {
   background-color: #0046E2;
   border-color: #0046E2;
@@ -2011,14 +1965,12 @@ Object {
   fill: #0062FF;
 }
 
-.c6[data-appearance~='secondary']:focus,
 .c6[data-appearance~='secondary']:hover {
   background-color: #0000000D;
   color: #0062FF;
   border-color: #0062FF;
 }
 
-.c6[data-appearance~='secondary']:focus *[fill^='#'],
 .c6[data-appearance~='secondary']:hover *[fill^='#'] {
   fill: #0062FF;
 }
@@ -2055,14 +2007,12 @@ Object {
   fill: #0062FF;
 }
 
-.c6[data-appearance~='ghost']:focus,
 .c6[data-appearance~='ghost']:hover {
   background-color: #0000000D;
   color: #0062FF;
   border-color: transparent;
 }
 
-.c6[data-appearance~='ghost']:focus *[fill^='#'],
 .c6[data-appearance~='ghost']:hover *[fill^='#'] {
   fill: #0062FF;
 }
@@ -2099,14 +2049,12 @@ Object {
   fill: #FFFFFF;
 }
 
-.c6[data-appearance~='white']:focus,
 .c6[data-appearance~='white']:hover {
   background-color: #FFFFFF0F;
   color: #FFFFFF;
   border-color: #FFFFFF;
 }
 
-.c6[data-appearance~='white']:focus *[fill^='#'],
 .c6[data-appearance~='white']:hover *[fill^='#'] {
   fill: #FFFFFF;
 }
@@ -2142,7 +2090,6 @@ Object {
   fill: #FFFFFF;
 }
 
-.c6[data-appearance~='danger']:focus,
 .c6[data-appearance~='danger']:hover {
   background-color: #BA1717;
   border-color: #BA1717;
@@ -2175,7 +2122,6 @@ Object {
   fill: #FFFFFF;
 }
 
-.c6[data-appearance~='success']:focus,
 .c6[data-appearance~='success']:hover {
   background-color: #128238;
   border-color: #128238;
@@ -2453,7 +2399,6 @@ Object {
   fill: #FFFFFF;
 }
 
-.c1[data-appearance~='primary']:focus,
 .c1[data-appearance~='primary']:hover {
   background-color: #0046E2;
   border-color: #0046E2;
@@ -2486,14 +2431,12 @@ Object {
   fill: #0062FF;
 }
 
-.c1[data-appearance~='secondary']:focus,
 .c1[data-appearance~='secondary']:hover {
   background-color: #0000000D;
   color: #0062FF;
   border-color: #0062FF;
 }
 
-.c1[data-appearance~='secondary']:focus *[fill^='#'],
 .c1[data-appearance~='secondary']:hover *[fill^='#'] {
   fill: #0062FF;
 }
@@ -2530,14 +2473,12 @@ Object {
   fill: #0062FF;
 }
 
-.c1[data-appearance~='ghost']:focus,
 .c1[data-appearance~='ghost']:hover {
   background-color: #0000000D;
   color: #0062FF;
   border-color: transparent;
 }
 
-.c1[data-appearance~='ghost']:focus *[fill^='#'],
 .c1[data-appearance~='ghost']:hover *[fill^='#'] {
   fill: #0062FF;
 }
@@ -2574,14 +2515,12 @@ Object {
   fill: #FFFFFF;
 }
 
-.c1[data-appearance~='white']:focus,
 .c1[data-appearance~='white']:hover {
   background-color: #FFFFFF0F;
   color: #FFFFFF;
   border-color: #FFFFFF;
 }
 
-.c1[data-appearance~='white']:focus *[fill^='#'],
 .c1[data-appearance~='white']:hover *[fill^='#'] {
   fill: #FFFFFF;
 }
@@ -2617,7 +2556,6 @@ Object {
   fill: #FFFFFF;
 }
 
-.c1[data-appearance~='danger']:focus,
 .c1[data-appearance~='danger']:hover {
   background-color: #BA1717;
   border-color: #BA1717;
@@ -2650,7 +2588,6 @@ Object {
   fill: #FFFFFF;
 }
 
-.c1[data-appearance~='success']:focus,
 .c1[data-appearance~='success']:hover {
   background-color: #128238;
   border-color: #128238;
@@ -2747,7 +2684,6 @@ Object {
   fill: #FFFFFF;
 }
 
-.c6[data-appearance~='primary']:focus,
 .c6[data-appearance~='primary']:hover {
   background-color: #0046E2;
   border-color: #0046E2;
@@ -2780,14 +2716,12 @@ Object {
   fill: #0062FF;
 }
 
-.c6[data-appearance~='secondary']:focus,
 .c6[data-appearance~='secondary']:hover {
   background-color: #0000000D;
   color: #0062FF;
   border-color: #0062FF;
 }
 
-.c6[data-appearance~='secondary']:focus *[fill^='#'],
 .c6[data-appearance~='secondary']:hover *[fill^='#'] {
   fill: #0062FF;
 }
@@ -2824,14 +2758,12 @@ Object {
   fill: #0062FF;
 }
 
-.c6[data-appearance~='ghost']:focus,
 .c6[data-appearance~='ghost']:hover {
   background-color: #0000000D;
   color: #0062FF;
   border-color: transparent;
 }
 
-.c6[data-appearance~='ghost']:focus *[fill^='#'],
 .c6[data-appearance~='ghost']:hover *[fill^='#'] {
   fill: #0062FF;
 }
@@ -2868,14 +2800,12 @@ Object {
   fill: #FFFFFF;
 }
 
-.c6[data-appearance~='white']:focus,
 .c6[data-appearance~='white']:hover {
   background-color: #FFFFFF0F;
   color: #FFFFFF;
   border-color: #FFFFFF;
 }
 
-.c6[data-appearance~='white']:focus *[fill^='#'],
 .c6[data-appearance~='white']:hover *[fill^='#'] {
   fill: #FFFFFF;
 }
@@ -2911,7 +2841,6 @@ Object {
   fill: #FFFFFF;
 }
 
-.c6[data-appearance~='danger']:focus,
 .c6[data-appearance~='danger']:hover {
   background-color: #BA1717;
   border-color: #BA1717;
@@ -2944,7 +2873,6 @@ Object {
   fill: #FFFFFF;
 }
 
-.c6[data-appearance~='success']:focus,
 .c6[data-appearance~='success']:hover {
   background-color: #128238;
   border-color: #128238;
@@ -3277,7 +3205,6 @@ Object {
   fill: #FFFFFF;
 }
 
-.c1[data-appearance~='primary']:focus,
 .c1[data-appearance~='primary']:hover {
   background-color: #0046E2;
   border-color: #0046E2;
@@ -3310,14 +3237,12 @@ Object {
   fill: #0062FF;
 }
 
-.c1[data-appearance~='secondary']:focus,
 .c1[data-appearance~='secondary']:hover {
   background-color: #0000000D;
   color: #0062FF;
   border-color: #0062FF;
 }
 
-.c1[data-appearance~='secondary']:focus *[fill^='#'],
 .c1[data-appearance~='secondary']:hover *[fill^='#'] {
   fill: #0062FF;
 }
@@ -3354,14 +3279,12 @@ Object {
   fill: #0062FF;
 }
 
-.c1[data-appearance~='ghost']:focus,
 .c1[data-appearance~='ghost']:hover {
   background-color: #0000000D;
   color: #0062FF;
   border-color: transparent;
 }
 
-.c1[data-appearance~='ghost']:focus *[fill^='#'],
 .c1[data-appearance~='ghost']:hover *[fill^='#'] {
   fill: #0062FF;
 }
@@ -3398,14 +3321,12 @@ Object {
   fill: #FFFFFF;
 }
 
-.c1[data-appearance~='white']:focus,
 .c1[data-appearance~='white']:hover {
   background-color: #FFFFFF0F;
   color: #FFFFFF;
   border-color: #FFFFFF;
 }
 
-.c1[data-appearance~='white']:focus *[fill^='#'],
 .c1[data-appearance~='white']:hover *[fill^='#'] {
   fill: #FFFFFF;
 }
@@ -3441,7 +3362,6 @@ Object {
   fill: #FFFFFF;
 }
 
-.c1[data-appearance~='danger']:focus,
 .c1[data-appearance~='danger']:hover {
   background-color: #BA1717;
   border-color: #BA1717;
@@ -3474,7 +3394,6 @@ Object {
   fill: #FFFFFF;
 }
 
-.c1[data-appearance~='success']:focus,
 .c1[data-appearance~='success']:hover {
   background-color: #128238;
   border-color: #128238;
@@ -3571,7 +3490,6 @@ Object {
   fill: #FFFFFF;
 }
 
-.c6[data-appearance~='primary']:focus,
 .c6[data-appearance~='primary']:hover {
   background-color: #0046E2;
   border-color: #0046E2;
@@ -3604,14 +3522,12 @@ Object {
   fill: #0062FF;
 }
 
-.c6[data-appearance~='secondary']:focus,
 .c6[data-appearance~='secondary']:hover {
   background-color: #0000000D;
   color: #0062FF;
   border-color: #0062FF;
 }
 
-.c6[data-appearance~='secondary']:focus *[fill^='#'],
 .c6[data-appearance~='secondary']:hover *[fill^='#'] {
   fill: #0062FF;
 }
@@ -3648,14 +3564,12 @@ Object {
   fill: #0062FF;
 }
 
-.c6[data-appearance~='ghost']:focus,
 .c6[data-appearance~='ghost']:hover {
   background-color: #0000000D;
   color: #0062FF;
   border-color: transparent;
 }
 
-.c6[data-appearance~='ghost']:focus *[fill^='#'],
 .c6[data-appearance~='ghost']:hover *[fill^='#'] {
   fill: #0062FF;
 }
@@ -3692,14 +3606,12 @@ Object {
   fill: #FFFFFF;
 }
 
-.c6[data-appearance~='white']:focus,
 .c6[data-appearance~='white']:hover {
   background-color: #FFFFFF0F;
   color: #FFFFFF;
   border-color: #FFFFFF;
 }
 
-.c6[data-appearance~='white']:focus *[fill^='#'],
 .c6[data-appearance~='white']:hover *[fill^='#'] {
   fill: #FFFFFF;
 }
@@ -3735,7 +3647,6 @@ Object {
   fill: #FFFFFF;
 }
 
-.c6[data-appearance~='danger']:focus,
 .c6[data-appearance~='danger']:hover {
   background-color: #BA1717;
   border-color: #BA1717;
@@ -3768,7 +3679,6 @@ Object {
   fill: #FFFFFF;
 }
 
-.c6[data-appearance~='success']:focus,
 .c6[data-appearance~='success']:hover {
   background-color: #128238;
   border-color: #128238;
@@ -4046,7 +3956,6 @@ Object {
   fill: #FFFFFF;
 }
 
-.c1[data-appearance~='primary']:focus,
 .c1[data-appearance~='primary']:hover {
   background-color: #0046E2;
   border-color: #0046E2;
@@ -4079,14 +3988,12 @@ Object {
   fill: #0062FF;
 }
 
-.c1[data-appearance~='secondary']:focus,
 .c1[data-appearance~='secondary']:hover {
   background-color: #0000000D;
   color: #0062FF;
   border-color: #0062FF;
 }
 
-.c1[data-appearance~='secondary']:focus *[fill^='#'],
 .c1[data-appearance~='secondary']:hover *[fill^='#'] {
   fill: #0062FF;
 }
@@ -4123,14 +4030,12 @@ Object {
   fill: #0062FF;
 }
 
-.c1[data-appearance~='ghost']:focus,
 .c1[data-appearance~='ghost']:hover {
   background-color: #0000000D;
   color: #0062FF;
   border-color: transparent;
 }
 
-.c1[data-appearance~='ghost']:focus *[fill^='#'],
 .c1[data-appearance~='ghost']:hover *[fill^='#'] {
   fill: #0062FF;
 }
@@ -4167,14 +4072,12 @@ Object {
   fill: #FFFFFF;
 }
 
-.c1[data-appearance~='white']:focus,
 .c1[data-appearance~='white']:hover {
   background-color: #FFFFFF0F;
   color: #FFFFFF;
   border-color: #FFFFFF;
 }
 
-.c1[data-appearance~='white']:focus *[fill^='#'],
 .c1[data-appearance~='white']:hover *[fill^='#'] {
   fill: #FFFFFF;
 }
@@ -4210,7 +4113,6 @@ Object {
   fill: #FFFFFF;
 }
 
-.c1[data-appearance~='danger']:focus,
 .c1[data-appearance~='danger']:hover {
   background-color: #BA1717;
   border-color: #BA1717;
@@ -4243,7 +4145,6 @@ Object {
   fill: #FFFFFF;
 }
 
-.c1[data-appearance~='success']:focus,
 .c1[data-appearance~='success']:hover {
   background-color: #128238;
   border-color: #128238;
@@ -4340,7 +4241,6 @@ Object {
   fill: #FFFFFF;
 }
 
-.c6[data-appearance~='primary']:focus,
 .c6[data-appearance~='primary']:hover {
   background-color: #0046E2;
   border-color: #0046E2;
@@ -4373,14 +4273,12 @@ Object {
   fill: #0062FF;
 }
 
-.c6[data-appearance~='secondary']:focus,
 .c6[data-appearance~='secondary']:hover {
   background-color: #0000000D;
   color: #0062FF;
   border-color: #0062FF;
 }
 
-.c6[data-appearance~='secondary']:focus *[fill^='#'],
 .c6[data-appearance~='secondary']:hover *[fill^='#'] {
   fill: #0062FF;
 }
@@ -4417,14 +4315,12 @@ Object {
   fill: #0062FF;
 }
 
-.c6[data-appearance~='ghost']:focus,
 .c6[data-appearance~='ghost']:hover {
   background-color: #0000000D;
   color: #0062FF;
   border-color: transparent;
 }
 
-.c6[data-appearance~='ghost']:focus *[fill^='#'],
 .c6[data-appearance~='ghost']:hover *[fill^='#'] {
   fill: #0062FF;
 }
@@ -4461,14 +4357,12 @@ Object {
   fill: #FFFFFF;
 }
 
-.c6[data-appearance~='white']:focus,
 .c6[data-appearance~='white']:hover {
   background-color: #FFFFFF0F;
   color: #FFFFFF;
   border-color: #FFFFFF;
 }
 
-.c6[data-appearance~='white']:focus *[fill^='#'],
 .c6[data-appearance~='white']:hover *[fill^='#'] {
   fill: #FFFFFF;
 }
@@ -4504,7 +4398,6 @@ Object {
   fill: #FFFFFF;
 }
 
-.c6[data-appearance~='danger']:focus,
 .c6[data-appearance~='danger']:hover {
   background-color: #BA1717;
   border-color: #BA1717;
@@ -4537,7 +4430,6 @@ Object {
   fill: #FFFFFF;
 }
 
-.c6[data-appearance~='success']:focus,
 .c6[data-appearance~='success']:hover {
   background-color: #128238;
   border-color: #128238;

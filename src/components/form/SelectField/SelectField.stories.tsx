@@ -3,16 +3,18 @@ import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import type { ChangeEvent } from 'react';
 import * as React from 'react';
 import { withDesign } from 'storybook-addon-designs';
-import styled, { css, keyframes, ThemeProvider } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import { SelectField } from './index';
 import { Option, OptionGroup } from '#src/components/input/Select';
-import type { Theme } from '#src/components/themes';
 import { DataAttributesDescription } from '#src/components/form/common';
 import type { RenderOptionProps } from '#src/components/Menu/MenuItem';
 import { CustomOptionWrapper } from '#src/components/input/Select/styled';
 import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
 import { T } from '#src/components/T';
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+import { CustomOptionsTemplate, SimpleTemplate } from '#src/components/form/SelectField/Stories';
+import SimpleRaw from '!!raw-loader!./Stories/Simple';
+import CustomOptionsRaw from '!!raw-loader!./Stories/CustomOptions';
 
 export default {
   title: 'Admiral-2.1/Form Field/SelectField',
@@ -126,18 +128,6 @@ const Separator = styled.div`
   height: 20px;
 `;
 
-const OPTIONS_SIMPLE = [
-  'teeext 1',
-  'text 2 text text 2 text text 2 text text 2 text text 2 text text 2 text text 2 text ',
-  'text 3',
-  'text 4',
-  'text 5',
-  'texttt 6',
-  'text 7',
-  'Ответ на «Главный вопрос жизни, вселенной и всего такого»',
-  'text 69',
-];
-
 const OPTIONS = [
   {
     value: 'val1',
@@ -189,85 +179,49 @@ const shouldRender = (text = '', searchValue = '', searchFormat: SearchFormat = 
   return !searchValue ? true : parts.some((part) => chunks.includes(part.toLowerCase()));
 };
 
-const SimpleTemplate: ComponentStory<typeof SelectField> = (props) => {
-  const cleanProps = cleanUpProps(props);
+const SimpleStory: ComponentStory<typeof SelectField> = (props) => {
+  return <SimpleTemplate {...cleanUpProps(props)} />;
+};
+export const SimpleSearchSelectStory = SimpleStory.bind({});
+SimpleSearchSelectStory.args = {
+  placeholder: 'Начните ввод для поиска',
+};
+SimpleSearchSelectStory.parameters = {
+  docs: {
+    source: {
+      code: SimpleRaw,
+    },
+    description: {
+      story:
+        'Селект с возможностью контекстного поиска среди вариантов.\n' +
+        'Используется при большом количестве элементов в списке.\n' +
+        '\n' +
+        'При клике на любом месте поля (кроме иконки крестика) открывается меню выбора и активируется поле ввода текста. ' +
+        'Меню закрывается при повторном клике в поле, либо при клике вне компонента, либо при выборе опции в меню.',
+    },
+  },
+};
+SimpleSearchSelectStory.storyName = 'Простой SearchSelect';
 
-  const [selectValue, setSelectValue] = React.useState('');
-  const [searchValue, setSearchValue] = React.useState('');
-
-  const renderOptions = () => {
-    return OPTIONS_SIMPLE.map(
-      (option, ind) =>
-        shouldRender(option, searchValue) && (
-          <Option key={option} value={option} disabled={ind === 4}>
-            {option}
-          </Option>
-        ),
-    ).filter((item) => !!item);
-  };
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchValue(e.target.value);
-  };
-
-  const onChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    setSelectValue(e.target.value);
-    props.onChange?.(e);
-  };
-
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
-  return (
-    <ThemeProvider theme={swapBorder}>
-      <T font="Body/Body 2 Long" as="div">
-        Фильтрация элементов списка осуществляется вызывающим кодом
-        <br />В данном примере показан один из возможных способов
-      </T>
-      <Separator />
-      <SelectField
-        data-container-id="selectFieldIdOne"
-        {...cleanProps}
-        mode="searchSelect"
-        label="Label"
-        className="Search"
-        value={selectValue}
-        onInputChange={handleInputChange}
-        onChange={onChange}
-        placeholder="Placeholder"
-      >
-        {renderOptions()}
-      </SelectField>
-    </ThemeProvider>
-  );
+const CustomOptionStory: ComponentStory<typeof SelectField> = (props) => {
+  return <CustomOptionsTemplate {...cleanUpProps(props)} />;
 };
 
-const CustomOptionTemplate: ComponentStory<typeof SelectField> = (props) => {
-  const [selectValue, setSelectValue] = React.useState(props.value ? String(props.value) : OPTIONS[2].value);
-
-  const onChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    setSelectValue(e.target.value);
-    props.onChange?.(e);
-  };
-
-  return (
-    <>
-      <SelectField mode="searchSelect" label="label" value={selectValue} onChange={onChange}>
-        {OPTIONS.map((option) => (
-          <Option key={option.value} value={option.value}>
-            <Icon />
-            <TextWrapper>
-              {option.text}
-              <ExtraText>{option.extraText}</ExtraText>
-            </TextWrapper>
-          </Option>
-        ))}
-      </SelectField>
-    </>
-  );
+export const CustomOptionSearchSelectStory = CustomOptionStory.bind({});
+CustomOptionSearchSelectStory.args = {
+  placeholder: 'Начните ввод для поиска',
 };
+CustomOptionSearchSelectStory.parameters = {
+  docs: {
+    source: {
+      code: CustomOptionsRaw,
+    },
+    description: {
+      story: 'Пример отображения кастомных опций с использованием компонента Option',
+    },
+  },
+};
+CustomOptionSearchSelectStory.storyName = 'SearchSelect с кастомными опциями';
 
 interface MyIncredibleOptionProps extends RenderOptionProps {
   shouldAnimate?: boolean;
@@ -504,18 +458,6 @@ const TemplateMultiSelectCustomOption: ComponentStory<typeof SelectField> = () =
     </>
   );
 };
-
-export const SimpleSearchSelectStory = SimpleTemplate.bind({});
-SimpleSearchSelectStory.args = {
-  placeholder: 'Начните ввод для поиска',
-};
-SimpleSearchSelectStory.storyName = 'Простой SearchSelect';
-
-export const CustomOptionSearchSelectStory = CustomOptionTemplate.bind({});
-CustomOptionSearchSelectStory.args = {
-  placeholder: 'Начните ввод для поиска',
-};
-CustomOptionSearchSelectStory.storyName = 'SearchSelect с кастомными опциями';
 
 export const RenderPropsSearchSelectStory = RenderPropsTemplate.bind({});
 RenderPropsSearchSelectStory.args = {

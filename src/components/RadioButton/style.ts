@@ -102,8 +102,7 @@ export const Input = styled.input<{ dimension: Dimension }>`
     border: ${BORDER_WIDTH_CHECKED}px solid ${({ theme }) => theme.color['Primary/Primary 60 Main']};
   }
 
-  &:not(:disabled):hover,
-  &:not(:disabled):focus {
+  &:not(:disabled):hover {
     &::after {
       content: '';
       position: absolute;
