@@ -134,11 +134,29 @@ export interface TableRow extends Record<RowId, React.ReactNode> {
   actionRender?: (row: any) => React.ReactNode;
 }
 
+interface Options {
+  dimension: any;
+  scrollbar: number;
+  tableWidth: number;
+  headerScrollWidth?: number;
+  verticalScroll: boolean;
+  displayRowExpansionColumn: boolean;
+  displayRowSelectionColumn: boolean;
+  onRowSelectionChange?: (id: RowId, selected: boolean) => void;
+  onRowExpansionChange?: (id: RowId, expanded: boolean) => void;
+  renderCell?: (row: TableRow, columnName: string) => React.ReactNode;
+  renderBodyCell: (row: TableRow, col: Column) => React.ReactNode;
+  columnList: Column[];
+}
+
 export interface TableProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Массив столбцов */
   columnList: Column[];
   /** Массив строк */
-  rowList: TableRow[];
+  // rowList: TableRow[];
+  /** Общее количество строк */
+  itemCount: number;
+  renderRow: (index: number, options: Options) => React.ReactNode;
   /** Установка чекбокса в шапке таблицы в состояние checked.
    * По умолчанию состояние checked вычисляется на основе анализа параметра selected у строк таблицы
    */
@@ -159,12 +177,14 @@ export interface TableProps extends React.HTMLAttributes<HTMLDivElement> {
    * idSelectionStatusMap - это объект, ключами которого являются id строк, чье состояние checked было изменено,
    * а значениями ключей - значение checked
    */
-  onRowSelectionChange?: (idSelectionStatusMap: IdSelectionStatusMap, id?: RowId) => void;
+  // onRowSelectionChange?: (idSelectionStatusMap: IdSelectionStatusMap, id?: RowId) => void;
+  onRowSelectionChange?: (id: RowId, selected: boolean) => void;
   /** Колбек на раскрытие/свертывание строки (на нажатие по стрелке слева).
    * idSelectionStatusMap - это объект, ключами которого являются id строк, чье состояние expanded было изменено,
    * а значениями ключей - значение expanded
    */
-  onRowExpansionChange?: (idSelectionStatusMap: IdSelectionStatusMap) => void;
+  // onRowExpansionChange?: (idSelectionStatusMap: IdSelectionStatusMap) => void;
+  onRowExpansionChange?: (id: RowId, expanded: boolean) => void;
   /** Колбек для клика по строке таблицы */
   onRowClick?: (rowId: RowId) => void;
   /** Колбек для двойного клика по строке таблицы */
@@ -202,7 +222,7 @@ export interface TableProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Рендер функция для отрисовки обертки вокруг строки.
    * Входные параметры - объект строки, её порядковый номер и элемент который должен быть отрисован внутри создаваемой обертки
    * */
-  renderRowWrapper?: (row: TableRow, index: number, rowNode: React.ReactNode) => React.ReactNode;
+  // renderRowWrapper?: (row: TableRow, index: number, rowNode: React.ReactNode) => React.ReactNode;
   /** Параметр, определяющий максимальное количество строк, которое может занимать заголовок столбца таблицы.
    * По умолчанию заголовок занимает не более одной строки
    */
@@ -251,7 +271,8 @@ type ZebraRows = Record<string, 'odd' | 'even' | 'ingroup odd' | 'ingroup even' 
 
 export const Table: React.FC<TableProps> = ({
   columnList,
-  rowList,
+  // rowList,
+  itemCount,
   displayRowSelectionColumn = false,
   displayRowExpansionColumn = false,
   headerCheckboxChecked = false,
@@ -265,7 +286,8 @@ export const Table: React.FC<TableProps> = ({
   onSortChange,
   onColumnResize,
   renderCell,
-  renderRowWrapper,
+  renderRow,
+  // renderRowWrapper,
   dimension = 'm',
   greyHeader = false,
   greyZebraRows = false,
@@ -295,64 +317,65 @@ export const Table: React.FC<TableProps> = ({
   const hiddenHeaderRef = React.useRef<HTMLDivElement>(null);
   const scrollBodyRef = React.useRef<HTMLDivElement>(null);
 
-  const groupToRowsMap = rowList.reduce<Group>((acc: Group, row) => {
-    if (typeof row.groupRows !== 'undefined') {
-      acc[row.id] = {
-        rows: [...row.groupRows],
-        expanded: !!row.expanded,
-      };
-    }
-    return acc;
-  }, {});
+  // const groupToRowsMap = rowList.reduce<Group>((acc: Group, row) => {
+  //   if (typeof row.groupRows !== 'undefined') {
+  //     acc[row.id] = {
+  //       rows: [...row.groupRows],
+  //       expanded: !!row.expanded,
+  //     };
+  //   }
+  //   return acc;
+  // }, {});
 
-  const rowToGroupMap = Object.entries(groupToRowsMap).reduce<GroupRows>((acc, [groupId, info]) => {
-    info.rows.forEach((id) => {
-      const row = rowList.find((item) => item.id.toString() === id);
-      if (row && !groupToRowsMap[id]) {
-        acc[id] = { groupId, checked: !!row.selected };
-      }
-    });
-    return acc;
-  }, {});
+  // const rowToGroupMap = Object.entries(groupToRowsMap).reduce<GroupRows>((acc, [groupId, info]) => {
+  //   info.rows.forEach((id) => {
+  //     const row = rowList.find((item) => item.id.toString() === id);
+  //     if (row && !groupToRowsMap[id]) {
+  //       acc[id] = { groupId, checked: !!row.selected };
+  //     }
+  //   });
+  //   return acc;
+  // }, {});
 
-  const reorderRowsToGroup = () => {
-    const tableRows: Array<TableRow> = [];
-    rowList.forEach((row) => {
-      const isGroupRow = !!groupToRowsMap[row.id];
-      const rowInGroup = !!rowToGroupMap[row.id];
-      if (!rowInGroup) {
-        tableRows.push(row);
-      }
+  // const reorderRowsToGroup = () => {
+  //   const tableRows: Array<TableRow> = [];
+  //   rowList.forEach((row) => {
+  //     const isGroupRow = !!groupToRowsMap[row.id];
+  //     const rowInGroup = !!rowToGroupMap[row.id];
+  //     if (!rowInGroup) {
+  //       tableRows.push(row);
+  //     }
 
-      if (isGroupRow) {
-        groupToRowsMap[row.id].rows.forEach((rowId) => {
-          const row = rowList.find((item) => item.id.toString() === rowId);
-          if (row) tableRows.push(row);
-        });
-      }
-    });
+  //     if (isGroupRow) {
+  //       groupToRowsMap[row.id].rows.forEach((rowId) => {
+  //         const row = rowList.find((item) => item.id.toString() === rowId);
+  //         if (row) tableRows.push(row);
+  //       });
+  //     }
+  //   });
 
-    return tableRows;
-  };
+  //   return tableRows;
+  // };
 
-  const tableRows = React.useMemo(() => reorderRowsToGroup(), [rowList]);
+  // const tableRows = React.useMemo(() => reorderRowsToGroup(), [rowList]);
 
-  const zebraRows = greyZebraRows
-    ? tableRows.reduce<ZebraRows>((acc: ZebraRows, row: TableRow, index: number) => {
-        if (rowToGroupMap[row.id]) {
-          const indexInGroup = groupToRowsMap[rowToGroupMap[row.id].groupId].rows.indexOf(String(row.id));
-          acc[row.id] = `ingroup ${indexInGroup % 2 === 0 ? 'odd' : 'even'}`;
-        } else if (groupToRowsMap[row.id]) {
-          acc[row.id] = 'group';
-        } else if (index === 0 || acc[tableRows[index - 1].id].includes('group')) {
-          acc[row.id] = 'odd';
-        } else {
-          acc[row.id] = acc[tableRows[index - 1].id] === 'odd' ? 'even' : 'odd';
-        }
-        return acc;
-      }, {})
-    : {};
+  // const zebraRows = greyZebraRows
+  //   ? tableRows.reduce<ZebraRows>((acc: ZebraRows, row: TableRow, index: number) => {
+  //       if (rowToGroupMap[row.id]) {
+  //         const indexInGroup = groupToRowsMap[rowToGroupMap[row.id].groupId].rows.indexOf(String(row.id));
+  //         acc[row.id] = `ingroup ${indexInGroup % 2 === 0 ? 'odd' : 'even'}`;
+  //       } else if (groupToRowsMap[row.id]) {
+  //         acc[row.id] = 'group';
+  //       } else if (index === 0 || acc[tableRows[index - 1].id].includes('group')) {
+  //         acc[row.id] = 'odd';
+  //       } else {
+  //         acc[row.id] = acc[tableRows[index - 1].id] === 'odd' ? 'even' : 'odd';
+  //       }
+  //       return acc;
+  //     }, {})
+  //   : {};
 
+  // !!! Достаточно ли теперь будет следить за изменением itemCount
   React.useLayoutEffect(() => {
     if (hiddenHeaderRef.current) {
       const hiddenColumns = hiddenHeaderRef.current?.querySelectorAll<HTMLElement>('.th');
@@ -383,7 +406,8 @@ export const Table: React.FC<TableProps> = ({
         resizeObserver.disconnect();
       };
     }
-  }, [hiddenHeaderRef.current, headerRef.current, scrollBodyRef.current, columnList, rowList]);
+    // }, [hiddenHeaderRef.current, headerRef.current, scrollBodyRef.current, columnList, rowList]);
+  }, [hiddenHeaderRef.current, headerRef.current, scrollBodyRef.current, columnList, itemCount]);
 
   React.useEffect(() => {
     const size = getScrollbarSize();
@@ -473,74 +497,71 @@ export const Table: React.FC<TableProps> = ({
     setBodyHeight,
   ]);
 
-  const calcGroupCheckStatus = (groupInfo: GroupInfo) => {
-    const indeterminate =
-      groupInfo.rows.some((rowId) => rowToGroupMap[rowId].checked) &&
-      groupInfo.rows.some((rowId) => !rowToGroupMap[rowId].checked);
-    const checked = groupInfo.rows.every((rowId) => rowToGroupMap[rowId].checked);
-    return { checked, indeterminate };
-  };
+  // const calcGroupCheckStatus = (groupInfo: GroupInfo) => {
+  //   const indeterminate =
+  //     groupInfo.rows.some((rowId) => rowToGroupMap[rowId].checked) &&
+  //     groupInfo.rows.some((rowId) => !rowToGroupMap[rowId].checked);
+  //   const checked = groupInfo.rows.every((rowId) => rowToGroupMap[rowId].checked);
+  //   return { checked, indeterminate };
+  // };
 
-  const parentGroupWillBeChecked = (changedDepId: RowId) => {
-    const groupId = rowToGroupMap[changedDepId]?.groupId;
-    const groupInfo = groupId ? groupToRowsMap[groupId] : undefined;
+  // const parentGroupWillBeChecked = (changedDepId: RowId) => {
+  //   const groupId = rowToGroupMap[changedDepId]?.groupId;
+  //   const groupInfo = groupId ? groupToRowsMap[groupId] : undefined;
 
-    if (!groupInfo) return;
+  //   if (!groupInfo) return;
 
-    const value = groupInfo?.rows.some((rowId) =>
-      rowId === changedDepId.toString() ? !rowToGroupMap[rowId].checked : rowToGroupMap[rowId].checked,
-    );
-    return { groupId, value };
-  };
+  //   const value = groupInfo?.rows.some((rowId) =>
+  //     rowId === changedDepId.toString() ? !rowToGroupMap[rowId].checked : rowToGroupMap[rowId].checked,
+  //   );
+  //   return { groupId, value };
+  // };
 
   function handleCheckboxChange(id: RowId) {
-    const groupInfo = groupToRowsMap[id];
-    const rowHasGroup = rowToGroupMap[id];
-
-    const groupCheckStatus = groupInfo && calcGroupCheckStatus(groupInfo);
-    const parentGroupNewValue = rowHasGroup && parentGroupWillBeChecked(id);
-
-    const idsMap = rowList.reduce((ids: IdSelectionStatusMap, row) => {
-      if (groupInfo) {
-        const rowInCurrentGroup = groupInfo.rows.includes(row.id.toString());
-
-        if (row.id === id || rowInCurrentGroup) {
-          ids[row.id] = !(groupCheckStatus?.indeterminate || groupCheckStatus?.checked);
-        } else {
-          ids[row.id] = row.id === id ? !row.selected : !!row.selected;
-        }
-      } else {
-        ids[row.id] = row.id === id ? !row.selected : !!row.selected;
-        if (rowHasGroup && row.id === parentGroupNewValue?.groupId) {
-          ids[row.id] = parentGroupNewValue?.value;
-        }
-      }
-      return ids;
-    }, {});
-    onRowSelectionChange?.(idsMap, id);
+    // const groupInfo = groupToRowsMap[id];
+    // const rowHasGroup = rowToGroupMap[id];
+    // const groupCheckStatus = groupInfo && calcGroupCheckStatus(groupInfo);
+    // const parentGroupNewValue = rowHasGroup && parentGroupWillBeChecked(id);
+    // const idsMap = rowList.reduce((ids: IdSelectionStatusMap, row) => {
+    //   if (groupInfo) {
+    //     const rowInCurrentGroup = groupInfo.rows.includes(row.id.toString());
+    //     if (row.id === id || rowInCurrentGroup) {
+    //       ids[row.id] = !(groupCheckStatus?.indeterminate || groupCheckStatus?.checked);
+    //     } else {
+    //       ids[row.id] = row.id === id ? !row.selected : !!row.selected;
+    //     }
+    //   } else {
+    //     ids[row.id] = row.id === id ? !row.selected : !!row.selected;
+    //     if (rowHasGroup && row.id === parentGroupNewValue?.groupId) {
+    //       ids[row.id] = parentGroupNewValue?.value;
+    //     }
+    //   }
+    //   return ids;
+    // }, {});
+    // onRowSelectionChange?.(idsMap, id);
   }
 
   function handleExpansionChange(id: RowId) {
-    const idsMap = rowList.reduce((ids: IdSelectionStatusMap, row) => {
-      const value = row.id === id ? !row.expanded : !!row.expanded;
-      ids[row.id] = value;
-      return ids;
-    }, {});
-    onRowExpansionChange?.(idsMap);
+    // const idsMap = rowList.reduce((ids: IdSelectionStatusMap, row) => {
+    //   const value = row.id === id ? !row.expanded : !!row.expanded;
+    //   ids[row.id] = value;
+    //   return ids;
+    // }, {});
+    // onRowExpansionChange?.(idsMap);
   }
 
   const isSelected = (row: { selected?: boolean }) => row.selected;
   // When invoked on an empty array, every() always returns true. So we need to check rowList.length.
-  const allRowsChecked = rowList.length > 0 && rowList.every(isSelected);
-  const someRowsChecked = rowList.some(isSelected);
+  // const allRowsChecked = rowList.length > 0 && rowList.every(isSelected);
+  // const someRowsChecked = rowList.some(isSelected);
 
   function handleHeaderCheckboxChange(e: React.ChangeEvent<HTMLInputElement>) {
-    const toRemove = rowList.reduce((ids: IdSelectionStatusMap, row) => {
-      ids[row.id] = row.checkboxDisabled ? !!row.selected : !someRowsChecked;
-      return ids;
-    }, {});
-    onRowSelectionChange?.(toRemove);
-    onHeaderSelectionChange?.(e.target.checked);
+    // const toRemove = rowList.reduce((ids: IdSelectionStatusMap, row) => {
+    //   ids[row.id] = row.checkboxDisabled ? !!row.selected : !someRowsChecked;
+    //   return ids;
+    // }, {});
+    // onRowSelectionChange?.(toRemove);
+    // onHeaderSelectionChange?.(e.target.checked);
   }
 
   function handleResizeChange({ name, width }: { name: string; width: number }) {
@@ -602,12 +623,13 @@ export const Table: React.FC<TableProps> = ({
   };
 
   const renderGroupRow = (row: TableRow) => {
-    const indeterminate =
-      row.groupRows?.some((rowId) => rowToGroupMap[rowId].checked) &&
-      row.groupRows?.some((rowId) => !rowToGroupMap[rowId].checked);
+    let indeterminate, checked;
+    // const indeterminate =
+    //   row.groupRows?.some((rowId) => rowToGroupMap[rowId].checked) &&
+    //   row.groupRows?.some((rowId) => !rowToGroupMap[rowId].checked);
 
     const hasGroupRows = row.groupRows?.length;
-    const checked = hasGroupRows ? row.groupRows?.every((rowId) => rowToGroupMap[rowId].checked) : row.selected;
+    // const checked = hasGroupRows ? row.groupRows?.every((rowId) => rowToGroupMap[rowId].checked) : row.selected;
 
     return (
       <GroupRow
@@ -656,37 +678,55 @@ export const Table: React.FC<TableProps> = ({
       : index === tableRows.length - 1;
   };
 
-  const renderRow = (row: TableRow, index: number) => {
-    const isGroupRow = !!groupToRowsMap[row.id];
-    const rowInGroup = !!rowToGroupMap[row.id];
-    const visible = rowInGroup ? groupToRowsMap[rowToGroupMap[row.id].groupId].expanded : true;
-    const isLastRow = isLastVisibleRow({ row, isGroupRow, tableRows, index });
+  // const renderRow = (row: TableRow, index: number) => {
+  //   const isGroupRow = !!groupToRowsMap[row.id];
+  //   const rowInGroup = !!rowToGroupMap[row.id];
+  //   const visible = rowInGroup ? groupToRowsMap[rowToGroupMap[row.id].groupId].expanded : true;
+  //   const isLastRow = isLastVisibleRow({ row, isGroupRow, tableRows, index });
 
-    const node = (isGroupRow || visible) && (
-      <RowWrapper
-        dimension={dimension}
-        row={row}
-        underline={(isLastRow && showLastRowUnderline) || !isLastRow}
-        tableWidth={tableWidth}
-        isGroup={isGroupRow}
-        onRowClick={onRowClick}
-        onRowDoubleClick={onRowDoubleClick}
-        rowWidth={isGroupRow ? headerRef.current?.scrollWidth : undefined}
-        verticalScroll={verticalScroll}
-        scrollbar={scrollbar}
-        grey={zebraRows[row.id]?.includes('even')}
-        key={`row_${row.id}`}
-      >
-        {isGroupRow ? renderGroupRow(row) : renderRegularRow(row)}
-      </RowWrapper>
-    );
+  //   const node = (isGroupRow || visible) && (
+  //     <RowWrapper
+  //       dimension={dimension}
+  //       row={row}
+  //       underline={(isLastRow && showLastRowUnderline) || !isLastRow}
+  //       tableWidth={tableWidth}
+  //       isGroup={isGroupRow}
+  //       onRowClick={onRowClick}
+  //       onRowDoubleClick={onRowDoubleClick}
+  //       rowWidth={isGroupRow ? headerRef.current?.scrollWidth : undefined}
+  //       verticalScroll={verticalScroll}
+  //       scrollbar={scrollbar}
+  //       grey={zebraRows[row.id]?.includes('even')}
+  //       key={`row_${row.id}`}
+  //     >
+  //       {isGroupRow ? renderGroupRow(row) : renderRegularRow(row)}
+  //     </RowWrapper>
+  //   );
 
-    return node ? renderRowWrapper?.(row, index, node) ?? node : node;
+  //   return node ? renderRowWrapper?.(row, index, node) ?? node : node;
+  // };
+
+  const renderItem = (index: number) => {
+    return renderRow(index, {
+      dimension,
+      scrollbar,
+      verticalScroll,
+      tableWidth,
+      headerScrollWidth: headerRef.current?.scrollWidth,
+      renderBodyCell,
+      renderCell,
+      columnList,
+      displayRowExpansionColumn,
+      displayRowSelectionColumn,
+      onRowExpansionChange,
+      onRowSelectionChange,
+    });
   };
 
   const renderBody = () => {
     const emptyMessage = locale?.emptyMessage || theme.locales[theme.currentLocale].table.emptyMessage;
-    if (tableRows.length === 0) {
+    // if (tableRows.length === 0) {
+    if (itemCount === 0) {
       return (
         <ScrollTableBody ref={scrollBodyRef} className="tbody">
           <Row
@@ -703,15 +743,18 @@ export const Table: React.FC<TableProps> = ({
     return virtualScroll ? (
       <VirtualBody
         height={bodyHeight}
-        rowList={tableRows}
+        // rowList={tableRows}
+        itemCount={itemCount}
         childHeight={virtualScroll.fixedRowHeight}
-        renderRow={renderRow}
+        // renderRow={renderRow}
+        renderRow={renderItem}
         ref={scrollBodyRef}
         className="tbody"
       />
     ) : (
       <ScrollTableBody ref={scrollBodyRef} className="tbody">
-        {tableRows.map((row, index) => renderRow(row, index))}
+        {/* {tableRows.map((row, index) => renderRow(row, index))} */}
+        {[...Array(itemCount).keys()].map((index) => renderItem(index))}
       </ScrollTableBody>
     );
   };
@@ -753,9 +796,12 @@ export const Table: React.FC<TableProps> = ({
                 <CheckboxCell dimension={dimension} className="th_checkbox">
                   <Checkbox
                     dimension={checkboxDimension}
-                    checked={allRowsChecked || someRowsChecked || headerCheckboxChecked}
-                    indeterminate={(someRowsChecked && !allRowsChecked) || headerCheckboxIndeterminate}
-                    disabled={tableRows.length === 0 || headerCheckboxDisabled}
+                    // checked={allRowsChecked || someRowsChecked || headerCheckboxChecked}
+                    checked={headerCheckboxChecked}
+                    // indeterminate={(someRowsChecked && !allRowsChecked) || headerCheckboxIndeterminate}
+                    indeterminate={headerCheckboxIndeterminate}
+                    // disabled={tableRows.length === 0 || headerCheckboxDisabled}
+                    disabled={itemCount === 0 || headerCheckboxDisabled}
                     onChange={handleHeaderCheckboxChange}
                   />
                 </CheckboxCell>

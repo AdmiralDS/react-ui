@@ -13,12 +13,14 @@ interface VirtualBodyProps extends React.HTMLAttributes<HTMLDivElement> {
   height: number;
   childHeight: number;
   renderAhread?: number;
-  rowList: any[];
-  renderRow: (row: any, index: number) => React.ReactNode;
+  // rowList: any[];
+  itemCount: number;
+  // renderRow: (row: any, index: number) => React.ReactNode;
+  renderRow: (index: number) => React.ReactNode;
 }
 
 export const VirtualBody = React.forwardRef<HTMLDivElement, VirtualBodyProps>(
-  ({ height, childHeight, renderAhread = 20, rowList, renderRow, ...props }, ref) => {
+  ({ height, childHeight, renderAhread = 20, itemCount, renderRow, ...props }, ref) => {
     const [scrollTop, setScrollTop] = React.useState(0);
     const scrollContainerRef = React.useRef<HTMLDivElement>(null);
 
@@ -39,11 +41,11 @@ export const VirtualBody = React.forwardRef<HTMLDivElement, VirtualBodyProps>(
     let startNode = Math.floor(scrollTop / childHeight) - renderAhread;
     startNode = Math.max(0, startNode);
 
-    const rowNodes = React.useMemo(
-      () => rowList.map((row, index) => renderRow(row, index)).filter(Boolean),
-      [rowList, renderRow],
-    );
-    const itemCount = rowNodes.length;
+    // const rowNodes = React.useMemo(
+    //   () => rowList.map((row, index) => renderRow(row, index)).filter(Boolean),
+    //   [rowList, renderRow],
+    // );
+    // const itemCount = rowNodes.length;
 
     let visibleNodeCount = Math.ceil(height / childHeight) + 2 * renderAhread;
     visibleNodeCount = Math.min(itemCount - startNode, visibleNodeCount);
@@ -51,10 +53,14 @@ export const VirtualBody = React.forwardRef<HTMLDivElement, VirtualBodyProps>(
     const topPadding = `${startNode * childHeight}px`;
     const bottomPadding = `${(itemCount - startNode - visibleNodeCount) * childHeight}px`;
 
-    const visibleChildren = React.useMemo(
-      () => [...rowNodes].slice(startNode, startNode + visibleNodeCount),
-      [rowNodes, startNode, visibleNodeCount],
-    );
+    // const visibleChildren = React.useMemo(
+    //   () => [...rowNodes].slice(startNode, startNode + visibleNodeCount),
+    //   [rowNodes, startNode, visibleNodeCount],
+    // );
+    const visibleChildren = [];
+    for (let i = startNode; i < startNode + visibleNodeCount; i++) {
+      visibleChildren.push(renderRow(i));
+    }
 
     return (
       <ScrollTableBody style={{ height }} ref={refSetter(ref, scrollContainerRef)} {...props}>
