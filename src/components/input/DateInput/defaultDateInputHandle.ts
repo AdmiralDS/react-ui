@@ -53,7 +53,7 @@ export function defaultDateInputHandle(inputData: InputData | null): InputData {
     }
   }
 
-  const clearValue = splice(inputValue, selectionStart + addCount, lengthDifference, '').replace(/\D/g, '');
+  const clearValue = splice(inputValue, selectionStart + addCount, lengthDifference, '').replace(/[^\d_]/g, '');
   inputValue = formatDate(clearValue);
   const cursorPos = calcCursorPosition(inputValue, selectionStart);
 
