@@ -58,7 +58,16 @@ export default {
       control: { type: 'boolean' },
     },
     thousand: {
-      control: { type: 'text' },
+      control: { type: 'string' },
+    },
+    prefix: {
+      type: 'string',
+    },
+    suffix: {
+      type: 'string',
+    },
+    placeholder: {
+      type: 'string',
     },
     themeBorderKind: {
       options: ALL_BORDER_RADIUS_VALUES,
@@ -66,6 +75,30 @@ export default {
     },
     skeleton: {
       control: { type: 'boolean' },
+    },
+    minValue: {
+      type: 'number',
+    },
+    maxValue: {
+      type: 'number',
+    },
+    precision: {
+      type: 'number',
+    },
+    step: {
+      type: 'number',
+    },
+    value: {
+      control: false,
+    },
+    defaultValue: {
+      control: false,
+    },
+    input1: {
+      control: false,
+    },
+    input2: {
+      control: false,
     },
   },
 } as unknown as ComponentMeta<typeof SliderRange>;
