@@ -186,9 +186,9 @@ export interface TableProps extends React.HTMLAttributes<HTMLDivElement> {
   // onRowExpansionChange?: (idSelectionStatusMap: IdSelectionStatusMap) => void;
   onRowExpansionChange?: (id: RowId, expanded: boolean) => void;
   /** Колбек для клика по строке таблицы */
-  onRowClick?: (rowId: RowId) => void;
-  /** Колбек для двойного клика по строке таблицы */
-  onRowDoubleClick?: (rowId: RowId) => void;
+  // onRowClick?: (rowId: RowId) => void;
+  // /** Колбек для двойного клика по строке таблицы */
+  // onRowDoubleClick?: (rowId: RowId) => void;
   /** Размер таблицы */
   dimension?: Dimension;
   /** Отображение столбца с чекбоксами, позволяющими выбрать необходимые строки */
@@ -281,8 +281,8 @@ export const Table: React.FC<TableProps> = ({
   onHeaderSelectionChange,
   onRowSelectionChange,
   onRowExpansionChange,
-  onRowClick,
-  onRowDoubleClick,
+  // onRowClick,
+  // onRowDoubleClick,
   onSortChange,
   onColumnResize,
   renderCell,

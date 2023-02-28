@@ -9,17 +9,18 @@ interface TableProps extends React.HTMLAttributes<HTMLDivElement>, Options {
 }
 
 export interface Options {
-  dimension: any;
   scrollbar: number;
   tableWidth: number;
   headerScrollWidth?: number;
   verticalScroll: boolean;
+  renderBodyCell: (row: Row, col: Column) => React.ReactNode;
+
+  dimension: any;
   displayRowExpansionColumn: boolean;
   displayRowSelectionColumn: boolean;
   onRowSelectionChange?: (id: RowId, selected: boolean) => void;
   onRowExpansionChange?: (id: RowId, expanded: boolean) => void;
   renderCell?: (row: Row, columnName: string) => React.ReactNode;
-  renderBodyCell: (row: Row, col: Column) => React.ReactNode;
   columnList: Column[];
 }
 
@@ -102,7 +103,7 @@ export const TableRow: React.FC<TableProps> = ({
       verticalScroll={verticalScroll}
       scrollbar={scrollbar}
       //   grey={zebraRows[row.id]?.includes('even')}
-      key={`row_${row.id}`}
+      //   key={`row_${row.id}`}
       {...props}
     >
       {isGroupRow ? renderGroupRow(row) : renderRegularRow(row)}

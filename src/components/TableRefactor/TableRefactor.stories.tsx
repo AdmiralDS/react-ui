@@ -137,7 +137,15 @@ const Template: ComponentStory<typeof Table> = ({ columnList, ...args }) => {
 
   const renderRow = (index: number, options: Options) => {
     const row = rowList[index];
-    return <TableRow row={row} key={`row_${row.id}`} {...options} />;
+    return (
+      <TableRow
+        row={row}
+        key={`row_${row.id}`}
+        onClick={() => console.log(`click row ${row.id}`)}
+        onDoubleClick={() => console.log(`double click row ${row.id}`)}
+        {...options}
+      />
+    );
   };
 
   return (
@@ -525,32 +533,49 @@ const Template: ComponentStory<typeof Table> = ({ columnList, ...args }) => {
 //   );
 // };
 
-// const Template6: ComponentStory<typeof Table> = ({ rowList, columnList, ...args }) => {
-//   const [rows, setRows] = React.useState([...rowList]);
-//   const [cols, setCols] = React.useState([...columnList]);
+const Template6: ComponentStory<typeof Table> = ({ columnList, ...args }) => {
+  const [cols, setCols] = React.useState([...columnList]);
+  const [rows, setRows] = React.useState([...rowListExpanded]);
 
-//   const handleExpansionChange = (ids: Record<string | number, boolean>): void => {
-//     const updRows = rows.map((row) => ({ ...row, expanded: ids[row.id] }));
-//     setRows(updRows);
-//   };
+  const handleExpansionChange = (id: string | number, expanded: boolean): void => {
+    const updRows = rows.map((row) => (row.id === id ? { ...row, expanded } : row));
+    setRows(updRows);
+  };
 
-//   const handleResize = ({ name, width }: { name: string; width: string }) => {
-//     const newCols = cols.map((col) => (col.name === name ? { ...col, width } : col));
-//     setCols(newCols);
-//   };
+  const handleResize = ({ name, width }: { name: string; width: string }) => {
+    const newCols = cols.map((col) => (col.name === name ? { ...col, width } : col));
+    setCols(newCols);
+  };
 
-//   return (
-//     <>
-//       <Table
-//         {...args}
-//         columnList={cols}
-//         rowList={rows}
-//         onRowExpansionChange={handleExpansionChange}
-//         onColumnResize={handleResize}
-//       />
-//     </>
-//   );
-// };
+  const renderRow = React.useCallback(
+    (index: number, options: Options) => {
+      const row = rows[index];
+      return (
+        <TableRow
+          row={row}
+          key={`row_${row.id}`}
+          onClick={() => console.log(`click row ${row.id}`)}
+          onDoubleClick={() => console.log(`double click row ${row.id}`)}
+          {...options}
+        />
+      );
+    },
+    [rows],
+  );
+
+  return (
+    <>
+      <Table
+        {...args}
+        itemCount={rows.length}
+        renderRow={renderRow}
+        columnList={cols}
+        onRowExpansionChange={handleExpansionChange}
+        onColumnResize={handleResize}
+      />
+    </>
+  );
+};
 
 // const Template7: ComponentStory<typeof Table> = (args) => {
 //   const [cols, setCols] = React.useState([...args.columnList]);
@@ -821,23 +846,23 @@ Playground.args = {
 //   },
 // };
 
-// export const Expand = Template6.bind({});
-// Expand.args = {
-//   rowList: rowListExpanded,
-//   columnList,
-//   displayRowExpansionColumn: true,
-// };
-// Expand.storyName = 'Table. Пример c детализацией строки.';
-// Expand.parameters = {
-//   docs: {
-//     description: {
-//       story: `Отображение столбца детализации (столбец со стрелками) регулируется параметром displayRowExpansionColumn.
-//       Стрелка позволяет развернуть строку и посмотреть более детализированную информацию о строке.
-//       По нажатию на любую из стрелок срабатывает колбек onRowExpansionChange. Развернутое/свернутое состояние строки
-//       задается параметром expanded. А с помощью функции expandedRowRender происходит рендер развернутой части строки (рендер детализированной информации).`,
-//     },
-//   },
-// };
+export const Expand = Template6.bind({});
+Expand.args = {
+  // rowList: rowListExpanded,
+  columnList,
+  displayRowExpansionColumn: true,
+};
+Expand.storyName = 'Table. Пример c детализацией строки.';
+Expand.parameters = {
+  docs: {
+    description: {
+      story: `Отображение столбца детализации (столбец со стрелками) регулируется параметром displayRowExpansionColumn.
+      Стрелка позволяет развернуть строку и посмотреть более детализированную информацию о строке.
+      По нажатию на любую из стрелок срабатывает колбек onRowExpansionChange. Развернутое/свернутое состояние строки
+      задается параметром expanded. А с помощью функции expandedRowRender происходит рендер развернутой части строки (рендер детализированной информации).`,
+    },
+  },
+};
 
 // export const ExtraText = Template.bind({});
 // ExtraText.args = {
