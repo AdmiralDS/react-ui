@@ -292,10 +292,6 @@ export const OptionWrapper = styled.div<{ dimension?: ComponentDimension }>`
   }}
 `;
 
-export const SpinnerMixin = css`
-  padding: 3px;
-`;
-
 const ShadowContainerMixin = css`
   ${typography['Body/Body 1 Short']}
   color: ${(p) => p.theme.color['Neutral/Neutral 90']};

@@ -84,6 +84,15 @@ export default {
     isMenuAvatar: {
       control: false,
     },
+    theme: {
+      control: false,
+    },
+    as: {
+      control: false,
+    },
+    forwardedAs: {
+      control: false,
+    },
   },
 } as ComponentMeta<typeof Avatar>;
 
