@@ -7,6 +7,7 @@ const YEAR_MONTH_BORDER_RADIUS = '16px';
 const YEAR_WIDTH = '54px';
 
 const panelItemStyle = css<{ view: boolean }>`
+  cursor: pointer;
   display: flex;
   align-items: center;
   box-sizing: border-box;
