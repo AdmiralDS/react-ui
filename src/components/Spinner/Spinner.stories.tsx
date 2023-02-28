@@ -90,6 +90,7 @@ const Template2: ComponentStory<typeof Spinner> = (args) => {
         <Spinner dimension="xl" inverse={args.inverse} />
         <Spinner dimension="l" inverse={args.inverse} />
         <Spinner dimension="m" inverse={args.inverse} />
+        <Spinner dimension="ms" inverse={args.inverse} />
         <Spinner dimension="s" inverse={args.inverse} />
       </Layout>
     </>

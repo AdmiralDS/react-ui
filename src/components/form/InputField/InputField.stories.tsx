@@ -159,7 +159,7 @@ const Template: ComponentStory<typeof InputField> = (props) => {
           displayClearIcon
           placeholder="идет поиск ..."
           label="Поле с иконкой загрузки"
-          icons={<Spinner dimension="m" />}
+          isLoading
         />
         <InputField
           data-container-id="inputFieldIdEight"
