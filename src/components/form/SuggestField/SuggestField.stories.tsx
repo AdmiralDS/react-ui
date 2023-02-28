@@ -55,13 +55,43 @@ export default {
     displayInline: {
       control: { type: 'boolean' },
     },
+    showTooltip: {
+      control: { type: 'boolean' },
+    },
     extraText: {
+      control: { type: 'text' },
+    },
+    value: {
       control: { type: 'text' },
     },
     handleInput: {
       control: false,
     },
     containerRef: {
+      control: false,
+    },
+    options: {
+      control: false,
+    },
+    portalTargetRef: {
+      control: false,
+    },
+    onSearchButtonClick: {
+      control: false,
+    },
+    dropMaxHeight: {
+      control: false,
+    },
+    icon: {
+      control: false,
+    },
+    icons: {
+      control: false,
+    },
+    locale: {
+      control: false,
+    },
+    dropContainerCssMixin: {
       control: false,
     },
     themeBorderKind: {

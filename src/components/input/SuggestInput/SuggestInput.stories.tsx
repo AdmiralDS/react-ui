@@ -41,51 +41,77 @@ export default {
       options: INPUT_DIMENSIONS_VALUES,
       control: { type: 'radio' },
     },
-
     status: {
       options: INPUT_STATUS_VALUES,
       control: { type: 'radio' },
     },
-
     disabled: {
       control: { type: 'boolean' },
     },
-
     readOnly: {
       control: { type: 'boolean' },
     },
-
     isLoading: {
       control: { type: 'boolean' },
     },
-
     disableCopying: {
       control: { type: 'boolean' },
     },
-
     displayClearIcon: {
       control: { type: 'boolean' },
     },
-
     alignDropdown: {
       options: ['auto', 'flex-start', 'flex-end', 'center', 'baseline', 'stretch'],
       control: { type: 'radio' },
     },
-
     placeholder: {
       type: 'string',
     },
-
+    value: {
+      type: 'string',
+    },
     onChange: {
       action: 'onChange',
     },
-
     themeBorderKind: {
       options: ALL_BORDER_RADIUS_VALUES,
       control: { type: 'radio' },
     },
     skeleton: {
       control: { type: 'boolean' },
+    },
+    showTooltip: {
+      control: { type: 'boolean' },
+    },
+    options: {
+      control: false,
+    },
+    portalTargetRef: {
+      control: false,
+    },
+    onSearchButtonClick: {
+      control: false,
+    },
+    dropMaxHeight: {
+      control: false,
+    },
+    icon: {
+      control: false,
+    },
+    icons: {
+      control: false,
+    },
+    locale: {
+      control: false,
+    },
+    dropContainerCssMixin: {
+      control: false,
+    },
+    containerRef: {
+      control: false,
+    },
+    handleInput: {
+      control: false,
     },
   },
 } as ComponentMeta<typeof SuggestInput>;

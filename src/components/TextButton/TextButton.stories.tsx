@@ -138,27 +138,54 @@ export const TextButtonStoryDemo = TextButtonStory.bind({});
 TextButtonStoryDemo.args = {};
 TextButtonStoryDemo.storyName = 'Text Button';
 
-const TextButtonStatusStory: ComponentStory<typeof TextButton> = () => {
+const TextButtonStatusStory: ComponentStory<typeof TextButton> = (args) => {
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
+    return theme;
+  }
+
   return (
-    <>
-      <StyledText font="Body/Body 1 Long" as="div">
-        Загрузка
-      </StyledText>
-      <TextButton dimension="m" text="Text Button" icon={<AttachFileOutline />} loading />
-      <Separator />
-      <TextButton dimension="s" text="Text Button" icon={<AttachFileOutline />} loading />
-      <Separator />
-      <TextButton dimension="m" text="Text Button" loading />
-      <Separator />
-      <StyledText font="Body/Body 1 Long" as="div">
-        Скелетон
-      </StyledText>
-      <TextButton dimension="m" text="Text Button" icon={<AttachFileOutline />} skeleton />
-      <Separator />
-      <TextButton dimension="s" text="Text Button" icon={<AttachFileOutline />} displayRight skeleton />
-      <Separator />
-      <TextButton dimension="m" text="Text Button" skeleton />
-    </>
+    <ThemeProvider theme={swapBorder}>
+      <WrapperButton>
+        <div>
+          <StyledText font="Body/Body 1 Long" as="div">
+            Dimension - M
+          </StyledText>
+          <TextButton dimension="m" text="Text Button" icon={<AttachFileOutline />} />
+          <Separator />
+          <TextButton dimension="m" text="Text Button" icon={<AttachFileOutline />} loading />
+          <Separator />
+          <TextButton dimension="m" text="Text Button" icon={<AttachFileOutline />} skeleton />
+          <StyledText font="Body/Body 1 Long" as="div">
+            Dimension - S
+          </StyledText>
+          <TextButton dimension="s" text="Text Button" icon={<AttachFileOutline />} />
+          <Separator />
+          <TextButton dimension="s" text="Text Button" icon={<AttachFileOutline />} loading />
+          <Separator />
+          <TextButton dimension="s" text="Text Button" icon={<AttachFileOutline />} displayRight skeleton />
+          <Separator />
+        </div>
+        <div>
+          <StyledText font="Body/Body 1 Long" as="div">
+            Dimension - M
+          </StyledText>
+          <TextButton dimension="m" text="Text Button" />
+          <Separator />
+          <TextButton dimension="m" text="Text Button" loading />
+          <Separator />
+          <TextButton dimension="m" text="Text Button" skeleton />
+          <StyledText font="Body/Body 1 Long" as="div">
+            Dimension - S
+          </StyledText>
+          <TextButton dimension="s" text="Text Button" />
+          <Separator />
+          <TextButton dimension="s" text="Text Button" loading />
+          <Separator />
+          <TextButton dimension="s" text="Text Button" skeleton />
+        </div>
+      </WrapperButton>
+    </ThemeProvider>
   );
 };
 

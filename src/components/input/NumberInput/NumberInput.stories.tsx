@@ -83,6 +83,12 @@ export default {
     disableCopying: {
       control: { type: 'boolean' },
     },
+    showTooltip: {
+      control: { type: 'boolean' },
+    },
+    isLoading: {
+      control: { type: 'boolean' },
+    },
     icons: {
       control: false,
     },
