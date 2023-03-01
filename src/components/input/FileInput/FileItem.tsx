@@ -12,7 +12,6 @@ import { ReactComponent as EyeOutline } from '@admiral-ds/icons/build/service/Ey
 import {
   ERROR_BLOCK_HEIGHT_M,
   ERROR_BLOCK_HEIGHT_XL,
-  FILE_ITEM_FUNCTIONAL_ICON_SIZE_M,
   FILE_ITEM_FUNCTIONAL_ICON_SIZE_XL,
   FILE_ITEM_PREVIEW_ICON_SIZE_XL,
   FILE_ITEM_WRAPPER_HEIGHT_M,
@@ -187,14 +186,8 @@ const FunctionalBlock = styled.div`
   align-items: center;
 `;
 
-const functionalItemSizeMixin = css<{ dimension?: FileInputDimension }>`
-  width: ${(p) => (p.dimension === 'xl' ? FILE_ITEM_FUNCTIONAL_ICON_SIZE_XL : FILE_ITEM_FUNCTIONAL_ICON_SIZE_M)};
-  height: ${(p) => (p.dimension === 'xl' ? FILE_ITEM_FUNCTIONAL_ICON_SIZE_XL : FILE_ITEM_FUNCTIONAL_ICON_SIZE_M)};
-`;
-
-const StyledSpinner = styled(Spinner)<{ dimension?: FileInputDimension }>`
+const StyledSpinner = styled(Spinner)`
   margin-right: 8px;
-  ${functionalItemSizeMixin}
 `;
 
 export const ErrorBlock = styled.div<{ status?: Status; dimension?: FileInputDimension }>`
@@ -346,7 +339,7 @@ export const FileItem = forwardRef<HTMLDivElement, FileItemProps>(
             </Content>
           </FileInfoBlock>
           <FunctionalBlock>
-            {status === 'Loading' && <StyledSpinner dimension={dimension} />}
+            {status === 'Loading' && <StyledSpinner dimension={dimension === 'm' ? 'ms' : 'm'} />}
             {onCloseIconClick && (
               <CloseButton
                 dimension={dimension === 'xl' ? 'lSmall' : 'mSmall'}

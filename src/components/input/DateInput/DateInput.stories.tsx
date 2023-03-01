@@ -78,6 +78,39 @@ export default {
     skeleton: {
       control: { type: 'boolean' },
     },
+    locale: {
+      control: false,
+    },
+    startDate: {
+      control: false,
+    },
+    endDate: {
+      control: false,
+    },
+    validator: {
+      control: false,
+    },
+    selected: {
+      control: false,
+    },
+    tooltipContainer: {
+      control: false,
+    },
+    currentActiveView: {
+      control: false,
+    },
+    currentActiveViewImportant: {
+      control: false,
+    },
+    theme: {
+      control: false,
+    },
+    as: {
+      control: false,
+    },
+    forwardedAs: {
+      control: false,
+    },
   },
 } as ComponentMeta<typeof DateInput>;
 

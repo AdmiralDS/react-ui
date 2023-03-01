@@ -16,7 +16,6 @@ import {
   Input,
   OptionWrapper,
   SelectWrapper,
-  SpinnerMixin,
   ValueWrapper,
   StyledMenu,
   EmptyMessageWrapper,
@@ -649,7 +648,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
           onClick={stopPropagation}
           onMouseDown={(e) => e.preventDefault()}
         >
-          {isLoading && <Spinner svgMixin={SpinnerMixin} dimension={dimension === 's' ? 's' : 'm'} />}
+          {isLoading && <Spinner dimension={dimension === 's' ? 'ms' : 'm'} />}
           {displayClearIcon && !readOnly && needShowClearIcon && (
             <InputIconButton icon={CloseOutlineSvg} id="searchSelectClearIcon" onClick={handleOnClear} aria-hidden />
           )}

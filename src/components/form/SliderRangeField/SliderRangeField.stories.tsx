@@ -51,6 +51,9 @@ export default {
     displayInline: {
       control: { type: 'boolean' },
     },
+    readOnly: {
+      control: { type: 'boolean' },
+    },
     extraText: {
       control: { type: 'text' },
     },
@@ -69,12 +72,39 @@ export default {
     maxLength: {
       control: { type: 'number' },
     },
+    minValue: {
+      control: { type: 'number' },
+    },
+    maxValue: {
+      control: { type: 'number' },
+    },
+    step: {
+      control: { type: 'number' },
+    },
+    precision: {
+      control: { type: 'number' },
+    },
     themeBorderKind: {
       options: ALL_BORDER_RADIUS_VALUES,
       control: { type: 'radio' },
     },
     skeleton: {
       control: { type: 'boolean' },
+    },
+    input1: {
+      control: false,
+    },
+    input2: {
+      control: false,
+    },
+    defaultValue: {
+      control: false,
+    },
+    value: {
+      control: false,
+    },
+    name: {
+      control: false,
     },
   },
 } as ComponentMeta<typeof SliderRangeField>;

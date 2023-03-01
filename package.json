@@ -58,7 +58,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.16.0",
-    "@rollup/plugin-commonjs": "^22.0.2",
+    "@rollup/plugin-commonjs": "^24.0.1",
     "@storybook/addon-docs": "^6.4.12",
     "@storybook/addon-essentials": "^6.4.12",
     "@storybook/addon-links": "^6.4.12",

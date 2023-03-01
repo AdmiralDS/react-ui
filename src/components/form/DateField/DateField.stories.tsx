@@ -39,6 +39,10 @@ export default {
       options: INPUT_DIMENSIONS_VALUES,
       control: { type: 'radio' },
     },
+    currentActiveView: {
+      options: [undefined, 'DAY', 'MONTH', 'YEAR'],
+      control: { type: 'radio' },
+    },
     disabled: {
       control: { type: 'boolean' },
     },
@@ -60,6 +64,15 @@ export default {
     defaultIsCalendarOpen: {
       control: { type: 'boolean' },
     },
+    isLoading: {
+      control: { type: 'boolean' },
+    },
+    showTooltip: {
+      control: { type: 'boolean' },
+    },
+    currentActiveViewImportant: {
+      control: { type: 'boolean' },
+    },
     extraText: {
       control: { type: 'text' },
     },
@@ -73,6 +86,39 @@ export default {
       control: false,
     },
     maxDate: {
+      control: false,
+    },
+    calendarRef: {
+      control: false,
+    },
+    containerRef: {
+      control: false,
+    },
+    dropContainerCssMixin: {
+      control: false,
+    },
+    icon: {
+      control: false,
+    },
+    icons: {
+      control: false,
+    },
+    locale: {
+      control: false,
+    },
+    startDate: {
+      control: false,
+    },
+    endDate: {
+      control: false,
+    },
+    validator: {
+      control: false,
+    },
+    selected: {
+      control: false,
+    },
+    tooltipContainer: {
       control: false,
     },
     themeBorderKind: {

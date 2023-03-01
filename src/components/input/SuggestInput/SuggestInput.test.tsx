@@ -1,6 +1,6 @@
 import { SuggestInput } from '#src/components/input';
 import { LIGHT_THEME } from '#src/components/themes';
-import { render, screen } from '@testing-library/react';
+import { act, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import * as React from 'react';
 import { ThemeProvider } from 'styled-components';
@@ -18,9 +18,9 @@ describe('SuggestInput', () => {
 
     const input = screen.getByPlaceholderText('numbers') as HTMLInputElement;
     input.focus();
-    await userEvent.keyboard('on');
-    await userEvent.keyboard('{arrowdown}');
-    await userEvent.keyboard('{enter}');
+    act(() => userEvent.type(input, 'on'));
+    act(() => userEvent.type(input, '{arrowdown}'));
+    act(() => userEvent.type(input, '{enter}'));
     expect(input.value).toBe('two');
   });
 
@@ -58,14 +58,14 @@ describe('SuggestInput', () => {
       return expectElementByTextVisible(suggestText);
     }, Promise.resolve());
 
-    userEvent.type(input, 'on');
+    act(() => userEvent.type(input, 'on'));
 
     // На открывшейся панели должен появиться текст выделенный синим цветом
     const spanInDropdown = screen.getByText('on', { selector: 'span' });
     expect(spanInDropdown).toBeVisible();
     expect(spanInDropdown).toHaveStyle(`color: ${LIGHT_THEME.color['Primary/Primary 60 Main']};`);
 
-    userEvent.type(input, '{enter}');
+    act(() => userEvent.type(input, '{enter}'));
     expect(input.value).toBe('one');
     expect(submit.mock.calls).toHaveLength(0);
   });

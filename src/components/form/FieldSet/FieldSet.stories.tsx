@@ -49,6 +49,9 @@ export default {
     label: {
       control: { type: 'text' },
     },
+    legend: {
+      control: { type: 'text' },
+    },
     name: {
       control: { type: 'text' },
     },
