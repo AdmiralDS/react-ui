@@ -86,6 +86,8 @@ export interface MenuProps extends HTMLAttributes<HTMLDivElement> {
   disableSelectedOptionHighlight?: boolean;
   onForwardCycleApprove?: () => boolean;
   onBackwardCycleApprove?: () => boolean;
+  /** ссылка на контейнер, в котором находится Menu*/
+  containerRef?: React.RefObject<HTMLElement>;
 }
 
 export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
@@ -104,6 +106,7 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
       disableSelectedOptionHighlight = false,
       onForwardCycleApprove,
       onBackwardCycleApprove,
+      containerRef,
       ...props
     },
     ref,
@@ -212,6 +215,7 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
           },
           onClickItem: () => selectItem(item.id),
           disabled: item.disabled,
+          containerRef,
         }),
       );
     };
