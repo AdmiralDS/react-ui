@@ -11,8 +11,6 @@ import { useState } from '@storybook/addons';
 import { MenuActionsPanel } from '#src/components/Menu/MenuActionsPanel';
 import { TextButton } from '#src/components/TextButton';
 import { PlusOutline } from '#src/icons/IconComponents-service';
-import { CustomOptionWrapper } from '../styled';
-import type { RenderOptionProps } from '#src/components/Menu/MenuItem';
 import { T } from '#src/components/T';
 import { createOptions, formDataToObject, wait } from './utils';
 import { OPTIONS, OPTIONS_ASYNC, OPTIONS_NAMES, OPTIONS_SIMPLE } from './data';
@@ -21,6 +19,9 @@ import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 import styled from 'styled-components';
 import { Belarus, Cuba, RussianFederation } from '#src/icons/IconComponents-flags';
+import { LoadOnScrollTemplate, RenderPropsTemplate } from './Templates';
+import RenderPropsRaw from '!!raw-loader!./Templates/RenderProps';
+import LoadOnScrollRaw from '!!raw-loader!./Templates/LoadingOnScroll';
 
 export default {
   title: 'Admiral-2.1/Input/Select/режим "searchSelect"',
@@ -155,50 +156,6 @@ const TemplateCustomOption: ComponentStory<typeof Select> = (props) => {
               <ExtraText>{option.extraText}</ExtraText>
             </TextWrapper>
           </Option>
-        ))}
-      </Select>
-    </>
-  );
-};
-
-interface MyIncredibleOptionProps extends RenderOptionProps {
-  shouldAnimate?: boolean;
-  text: string;
-}
-
-const MyIncredibleOption = ({ text, shouldAnimate, ...props }: MyIncredibleOptionProps) => (
-  <CustomOptionWrapper {...props}>
-    <Icon shouldAnimate={shouldAnimate} />
-    <TextWrapper>{text}</TextWrapper>
-  </CustomOptionWrapper>
-);
-
-const TemplateRenderProps: ComponentStory<typeof Select> = (props) => {
-  const cleanProps = cleanUpProps(props);
-
-  const [selectValue, setSelectValue] = React.useState(cleanProps.value ? String(cleanProps.value) : OPTIONS[2].value);
-
-  const onChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    setSelectValue(e.target.value);
-    props.onChange?.(e);
-  };
-
-  return (
-    <>
-      <Select {...cleanProps} value={selectValue} mode="searchSelect" onChange={onChange}>
-        {OPTIONS.map(({ text, value }) => (
-          <Option
-            key={value}
-            value={value}
-            renderOption={(options) => (
-              <MyIncredibleOption
-                text={text}
-                shouldAnimate={options.hovered && value !== selectValue}
-                {...options}
-                key={value}
-              />
-            )}
-          />
         ))}
       </Select>
     </>
@@ -707,8 +664,40 @@ SearchSelectWithFilter.parameters = {
 export const CustomOption = TemplateCustomOption.bind({});
 CustomOption.storyName = 'Кастомные опции с кастомной фильтрацией';
 
-export const RenderProps = TemplateRenderProps.bind({});
-RenderProps.storyName = 'Кастомные опции через renderProps';
+const RenderPropsStory: ComponentStory<typeof Select> = (props) => {
+  return <RenderPropsTemplate {...cleanUpProps(props)} />;
+};
+export const RenderPropsExample = RenderPropsStory.bind({});
+RenderPropsExample.parameters = {
+  docs: {
+    source: {
+      code: RenderPropsRaw,
+    },
+    description: {
+      story: 'Пример кастомизации select через renderProps',
+    },
+  },
+};
+RenderPropsExample.storyName = 'Кастомные опции через renderProps';
+
+const LoadOnScrollStory: ComponentStory<typeof Select> = (props) => {
+  return <LoadOnScrollTemplate {...cleanUpProps(props)} />;
+};
+export const LoadOnScrollExample = LoadOnScrollStory.bind({});
+LoadOnScrollExample.parameters = {
+  docs: {
+    source: {
+      code: LoadOnScrollRaw,
+    },
+    description: {
+      story:
+        'Последним элементом списка опций select добавляется скрытый MenuItem, ' +
+        'который отслеживает прокрутку списка до конца, и сообщает об этом ' +
+        'вызывающему коду. По этому событию происходит изменение списка опций',
+    },
+  },
+};
+LoadOnScrollExample.storyName = 'Подгрузка данных при scroll';
 
 export const RenderValueStory = RenderValueTemplate.bind({});
 RenderValueStory.args = {

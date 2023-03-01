@@ -638,6 +638,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
               model={dropDownModel}
               renderTopPanel={renderDropDownTopPanel}
               renderBottomPanel={renderDropDownBottomPanel}
+              containerRef={dropDownRef}
             />
           </DropdownContainer>
         )}
