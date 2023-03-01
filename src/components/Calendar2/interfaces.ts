@@ -36,6 +36,9 @@ export interface CalendarPropType extends IDateSelectionProps {
   /** Контейнер, в котором при необходимости можно отрисовать тултип через ReactDOM.createPortal */
   tooltipContainer?: Element | null;
 
+  /** Режим сдвоенного календаря для выбора диапазона дат  */
+  doubleViewRange?: boolean;
+
   /** Показать экран выбора дат (месяц/год/день) */
   currentActiveView?: ViewScreenType | null;
 

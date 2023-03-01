@@ -15,7 +15,7 @@ import {
   subMonths,
   subYears,
 } from '#src/components/Calendar2/date-utils';
-import { CalendarComponent } from '#src/components/Calendar2/styled/CalendarComponent';
+import { CalendarComponent, CalendarWrapper } from '#src/components/Calendar2/styled/CalendarComponent';
 import type { CalendarPropType, IDateSelectionProps, ViewScreenType } from '#src/components/Calendar2/interfaces';
 
 export type { CalendarPropType, IDateSelectionProps, ViewScreenType };
@@ -30,6 +30,7 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarPropType>(
       maxDate,
       selected,
       range,
+      doubleViewRange,
       tooltipContainer,
       filterDate,
       currentActiveView,
@@ -273,12 +274,22 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarPropType>(
       />
     );
     return (
-      <CalendarComponent yearsView={yearsView} monthsView={monthsView} {...props} ref={ref}>
-        {renderPanel()}
-        {yearsView && renderYears()}
-        {monthsView && renderMonths()}
-        {!yearsView && !monthsView && renderMonth()}
-      </CalendarComponent>
+      <CalendarWrapper>
+        <CalendarComponent yearsView={yearsView} monthsView={monthsView} {...props} ref={ref}>
+          {renderPanel()}
+          {yearsView && renderYears()}
+          {monthsView && renderMonths()}
+          {!yearsView && !monthsView && renderMonth()}
+        </CalendarComponent>
+        {doubleViewRange && (
+          <CalendarComponent yearsView={yearsView} monthsView={monthsView} {...props} ref={ref}>
+            {renderPanel()}
+            {yearsView && renderYears()}
+            {monthsView && renderMonths()}
+            {!yearsView && !monthsView && renderMonth()}
+          </CalendarComponent>
+        )}
+      </CalendarWrapper>
     );
   },
 );

@@ -29,6 +29,12 @@ export const CalendarComponent = styled.div<CalendarComponentProps>`
   background: ${({ theme }) => theme.color['Special/Elevated BG']};
   ${typography['Body/Body 2 Long']}
   color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
+`;
+
+export const CalendarWrapper = styled.div`
+  display: flex;
+  overflow: hidden;
+  width: max-content;
   border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
   ${(props) => props.theme.shadow['Shadow 08']}
 `;
