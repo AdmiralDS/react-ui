@@ -2,6 +2,31 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.5.0](https://github.com/AdmiralDS/react-ui/compare/v4.4.1...v4.5.0) (2023-03-01)
+
+
+### Features
+
+* **Hint:** add prop hintPosition and add new variants of positions ([239067a](https://github.com/AdmiralDS/react-ui/commit/239067af37698e2856feca529d10a574d4a494ea))
+* **PhoneNumberInput:** add Tooltip to drop down items ([c0ba451](https://github.com/AdmiralDS/react-ui/commit/c0ba451125f344800893664139c246475c5cf10a))
+* **Spinner:** add new size MS 20px ([22db645](https://github.com/AdmiralDS/react-ui/commit/22db645c0f2573cd9e4f68daaa13c40be8664cfd))
+
+
+### Bug Fixes
+
+* **Button, IconButton, TextButton:** fix spinner size ([cf96192](https://github.com/AdmiralDS/react-ui/commit/cf961920b5b00a1c9a6d5381ddbc58309d26c79e))
+* **DateInput:** date range should always replace symbols ([8c809c3](https://github.com/AdmiralDS/react-ui/commit/8c809c344864415ffb97fef2075cfc80bc6c1040))
+* **DateInput:** when editing value the result must always follow replace pattern ([987eeae](https://github.com/AdmiralDS/react-ui/commit/987eeae09733408555f3e75ea6473ffc3552a0bb))
+* **DateTime:** fix styles, add Container and Separator components ([f72695b](https://github.com/AdmiralDS/react-ui/commit/f72695be9506772fe2f5a792b3ddc279e4661946))
+* **FileItem, TextInput:** fix spinner size ([4bdf6a2](https://github.com/AdmiralDS/react-ui/commit/4bdf6a2e83d8ffe51a5904f2351a0239b167aaed))
+* **Hint:** fix styles for content area ([f924dbb](https://github.com/AdmiralDS/react-ui/commit/f924dbbbd45292b1f38375c29f2f29168df8f609))
+* **IconButton:** fix vertical-align wrong value ([ad9583e](https://github.com/AdmiralDS/react-ui/commit/ad9583ed7af5d0ce9b5758629454747d8980fb4f))
+* **PhoneNumberInput:** fix drop container width ([62c76ad](https://github.com/AdmiralDS/react-ui/commit/62c76ad6e98d14091ed17146ffa260bfcf3a6b63))
+* **RadioButton:** remove hover circle after click ([d48db9b](https://github.com/AdmiralDS/react-ui/commit/d48db9b423903cf2228b44eec79b73fc426d826d))
+* **SelectField:** fix dropdown position ([37a3d05](https://github.com/AdmiralDS/react-ui/commit/37a3d05507f6149a4754a536b1383a4ab2d6a611))
+* **Select:** fix spinner size ([5a81029](https://github.com/AdmiralDS/react-ui/commit/5a8102995cca1186b78920f24d5e64778e65fde1))
+* **TimeInput:** set focus on input when drop menu is opened ([9ea42d5](https://github.com/AdmiralDS/react-ui/commit/9ea42d5f14252c7e550ff7720050670822e4bc02))
+
 ### [4.4.1](https://github.com/AdmiralDS/react-ui/compare/v4.4.0...v4.4.1) (2023-02-16)
 
 
