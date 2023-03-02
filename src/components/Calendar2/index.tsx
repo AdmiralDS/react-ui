@@ -179,63 +179,52 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarPropType>(
     const changeMonth = (month: number) => setViewDate((date) => setMonth(date, month));
     const changeMonthRight = (month: number) => setViewDateRight((date) => setMonth(date, month));
 
-    const increaseYear = () => {
-      setViewDate((date) => {
-        const increase = addYears(date, yearsView ? DEFAULT_YEAR_COUNT : 1);
-        onDateIncreaseDecrease && onDateIncreaseDecrease(increase);
-        return increase;
-      });
+    const increaseYear = (date: Date, yearsView: boolean) => {
+      const increase = addYears(date, yearsView ? DEFAULT_YEAR_COUNT : 1);
+      onDateIncreaseDecrease && onDateIncreaseDecrease(increase);
+      return increase;
     };
-    const increaseYearRight = () => {
-      setViewDateRight((date) => {
-        const increase = addYears(date, yearsViewRight ? DEFAULT_YEAR_COUNT : 1);
-        onDateIncreaseDecrease && onDateIncreaseDecrease(increase);
-        return increase;
-      });
+    const handleIncreaseYear = () => {
+      setViewDate((date) => increaseYear(date, yearsView));
     };
-    const decreaseYear = () => {
-      setViewDate((date) => {
-        const decrease = subYears(date, yearsView ? DEFAULT_YEAR_COUNT : 1);
-        onDateIncreaseDecrease && onDateIncreaseDecrease(decrease);
-        return decrease;
-      });
-    };
-    const decreaseYearRight = () => {
-      setViewDateRight((date) => {
-        const decrease = subYears(date, yearsViewRight ? DEFAULT_YEAR_COUNT : 1);
-        onDateIncreaseDecrease && onDateIncreaseDecrease(decrease);
-        return decrease;
-      });
+    const handleIncreaseYearRight = () => {
+      setViewDateRight((date) => increaseYear(date, yearsViewRight));
     };
 
-    const increaseMonth = () => {
-      setViewDate((date) => {
-        const increase = addMonths(date, 1);
-        onDateIncreaseDecrease && onDateIncreaseDecrease(increase);
-        return increase;
-      });
+    const decreaseYear = (date: Date, yearsView: boolean) => {
+      const decrease = subYears(date, yearsView ? DEFAULT_YEAR_COUNT : 1);
+      onDateIncreaseDecrease && onDateIncreaseDecrease(decrease);
+      return decrease;
     };
-    const increaseMonthRight = () => {
-      setViewDateRight((date) => {
-        const increase = addMonths(date, 1);
-        onDateIncreaseDecrease && onDateIncreaseDecrease(increase);
-        return increase;
-      });
+    const handleDecreaseYear = () => {
+      setViewDate((date) => decreaseYear(date, yearsView));
+    };
+    const handleDecreaseYearRight = () => {
+      setViewDateRight((date) => decreaseYear(date, yearsViewRight));
     };
 
-    const decreaseMonth = () => {
-      setViewDate((date) => {
-        const decrease = subMonths(date, 1);
-        onDateIncreaseDecrease && onDateIncreaseDecrease(decrease);
-        return decrease;
-      });
+    const increaseMonth = (date: Date) => {
+      const increase = addMonths(date, 1);
+      onDateIncreaseDecrease && onDateIncreaseDecrease(increase);
+      return increase;
     };
-    const decreaseMonthRight = () => {
-      setViewDateRight((date) => {
-        const decrease = subMonths(date, 1);
-        onDateIncreaseDecrease && onDateIncreaseDecrease(decrease);
-        return decrease;
-      });
+    const handleIncreaseMonth = () => {
+      setViewDate((date) => increaseMonth(date));
+    };
+    const handleIncreaseMonthRight = () => {
+      setViewDateRight((date) => increaseMonth(date));
+    };
+
+    const decreaseMonth = (date: Date) => {
+      const decrease = subMonths(date, 1);
+      onDateIncreaseDecrease && onDateIncreaseDecrease(decrease);
+      return decrease;
+    };
+    const handleDecreaseMonth = () => {
+      setViewDate((date) => decreaseMonth(date));
+    };
+    const handleDecreaseMonthRight = () => {
+      setViewDateRight((date) => decreaseMonth(date));
     };
 
     const handleDayMouseEnter = (day: Date, _: any) => setActiveDate(day);
@@ -304,8 +293,8 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarPropType>(
         onYearsViewHide={handleYearsViewHide}
         onMonthsViewShow={handleMonthsViewShow}
         onMonthsViewHide={handleMonthsViewHide}
-        onNext={yearsView ? increaseYear : increaseMonth}
-        onPrevious={yearsView ? decreaseYear : decreaseMonth}
+        onNext={yearsView ? handleIncreaseYear : handleIncreaseMonth}
+        onPrevious={yearsView ? handleDecreaseYear : handleDecreaseMonth}
         tooltipContainer={tooltipContainer}
       />
     );
@@ -322,8 +311,8 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarPropType>(
         onYearsViewHide={handleYearsViewHideRight}
         onMonthsViewShow={handleMonthsViewShowRight}
         onMonthsViewHide={handleMonthsViewHideRight}
-        onNext={yearsView ? increaseYearRight : increaseMonthRight}
-        onPrevious={yearsView ? decreaseYearRight : decreaseMonthRight}
+        onNext={yearsViewRight ? handleIncreaseYearRight : handleIncreaseMonthRight}
+        onPrevious={yearsViewRight ? handleDecreaseYearRight : handleDecreaseMonthRight}
         tooltipContainer={tooltipContainer}
       />
     );
