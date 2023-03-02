@@ -403,9 +403,9 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarPropType>(
       />
     );
     return (
-      <CalendarWrapper>
+      <CalendarWrapper ref={ref}>
         {!doubleViewRange ? (
-          <CalendarComponent yearsView={yearsView} monthsView={monthsView} {...props} ref={ref}>
+          <CalendarComponent yearsView={yearsView} monthsView={monthsView} {...props}>
             {renderPanel()}
             {yearsView && renderYears()}
             {monthsView && renderMonths()}
@@ -413,13 +413,13 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarPropType>(
           </CalendarComponent>
         ) : (
           <>
-            <CalendarComponent yearsView={yearsView} monthsView={monthsView} {...props} ref={ref}>
+            <CalendarComponent yearsView={yearsView} monthsView={monthsView} {...props}>
               {renderPanel()}
               {yearsView && renderYears()}
               {monthsView && renderMonths()}
               {!yearsView && !monthsView && renderMonth()}
             </CalendarComponent>
-            <CalendarComponent yearsView={yearsViewRight} monthsView={monthsViewRight} {...props} ref={ref}>
+            <CalendarComponent yearsView={yearsViewRight} monthsView={monthsViewRight} {...props}>
               {renderPanelRight()}
               {yearsViewRight && renderYearsRight()}
               {monthsViewRight && renderMonthsRight()}
