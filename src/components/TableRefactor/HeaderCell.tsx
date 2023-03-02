@@ -11,7 +11,6 @@ import {
   SortOrder,
 } from './style';
 import { RowWidthResizer } from './RowWidthResizer';
-import { Filter } from './filter/Filter';
 import { TitleText } from './TitleText';
 
 const DEFAULT_COLUMN_WIDTH = 100;
@@ -21,13 +20,13 @@ type HeaderCellType = {
   index: number;
   columnsAmount: number;
   showDividerForLastColumn?: boolean;
-  disableColumnResize: boolean;
+  disableColumnResize?: boolean;
   dimension?: 'xl' | 'l' | 'm' | 's';
-  headerLineClamp: number;
-  headerExtraLineClamp: number;
+  headerLineClamp?: number;
+  headerExtraLineClamp?: number;
   spacingBetweenItems?: string;
-  handleResizeChange: (props: { name: string; width: number }) => void;
-  handleSort: (name: string, colSort: 'asc' | 'desc' | 'initial') => void;
+  handleResizeChange?: (props: { name: string; width: number }) => void;
+  handleSort?: (name: string, colSort: 'asc' | 'desc' | 'initial') => void;
   multipleSort?: boolean;
   columnMinWidth: number;
 };
@@ -37,8 +36,8 @@ export const HeaderCellComponent = ({
   columnsAmount,
   showDividerForLastColumn,
   disableColumnResize,
-  headerLineClamp,
-  headerExtraLineClamp,
+  headerLineClamp = 1,
+  headerExtraLineClamp = 1,
   spacingBetweenItems,
   dimension,
   handleResizeChange,
@@ -76,7 +75,7 @@ export const HeaderCellComponent = ({
       <HeaderCellContent cellAlign={cellAlign}>
         <HeaderCellTitle
           sort={sort || 'initial'}
-          onClick={sortable ? () => handleSort(name, sort || 'initial') : undefined}
+          onClick={sortable ? () => handleSort?.(name, sort || 'initial') : undefined}
         >
           <TitleContent dimension={dimension} sortable={sortable}>
             <TitleText dimension={dimension} lineClamp={headerLineClamp} title={title} />
@@ -92,7 +91,6 @@ export const HeaderCellComponent = ({
           )}
         </HeaderCellTitle>
         <HeaderCellSpacer width={renderFilter ? spacer : `${parseInt(spacer) - parseInt(defaultSpacer)}px`} />
-        {renderFilter && <Filter column={column} dimension={dimension} targetRef={cellRef} />}
       </HeaderCellContent>
       {index < columnsAmount - 1 && (
         <RowWidthResizer

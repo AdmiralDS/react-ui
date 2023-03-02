@@ -45,7 +45,7 @@ type ResizerProps = {
   disabled: boolean;
   dimension: TableProps['dimension'];
   columnMinWidth: number;
-  onChange: (evt: { name: string; width: number }) => void;
+  onChange?: (evt: { name: string; width: number }) => void;
 };
 
 export function RowWidthResizer({ name, disabled, dimension, columnMinWidth, onChange }: ResizerProps) {
@@ -59,7 +59,7 @@ export function RowWidthResizer({ name, disabled, dimension, columnMinWidth, onC
     let newWidth = width - (clientXRef.current - e.clientX);
     newWidth = newWidth >= columnMinWidth ? newWidth : columnMinWidth;
     if (width !== newWidth) {
-      onChange({ name, width: newWidth });
+      onChange?.({ name, width: newWidth });
     }
     clientXRef.current = e.clientX;
   };
