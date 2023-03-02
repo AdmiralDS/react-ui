@@ -108,10 +108,12 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarPropType>(
       }
     }, []);
 
+    // TODO: нужно ли отслеживать по второй панели отдельно?
     React.useEffect(() => {
       yearsView || yearsViewRight ? onViewEnter && onViewEnter('YEAR') : onViewLeave && onViewLeave('YEAR');
     }, [yearsView, yearsViewRight]);
 
+    // TODO: нужно ли отслеживать по второй панели отдельно?
     React.useEffect(() => {
       monthsView || monthsViewRight ? onViewEnter && onViewEnter('MONTH') : onViewLeave && onViewLeave('MONTH');
     }, [monthsView, monthsViewRight]);

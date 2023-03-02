@@ -12,11 +12,13 @@ export interface IDateBaseProps {
   endDate?: Date | null;
   /** Режим выбора диапазона дат */
   range?: boolean;
+  // TODO: нужно ли отслеживать по второй панели отдельно?
   /** Предоставляет функции проверки корректности даты, возможности её выбора в календаре.
    *  Если возвращаемое значение не 'null', то дата считается некорректной, а возвращаемое
    *  функцией значение является текстом ошибки
    */
   validator?: DateValidator;
+  // TODO: нужно ли отслеживать по второй панели отдельно?
   /** Функция фильтрации даты. Если функция возвращает false для конкретного дня, то этот день будет задизейблен и его нельзя будет выбрать
    * Пример функции https://reactdatepicker.com/#example-filter-dates
    */
@@ -33,36 +35,46 @@ export interface IDateSelectionProps extends IDateBaseProps {
 }
 
 export interface CalendarPropType extends IDateSelectionProps {
+  // TODO: нужно ли отслеживать по второй панели отдельно?
   /** Контейнер, в котором при необходимости можно отрисовать тултип через ReactDOM.createPortal */
   tooltipContainer?: Element | null;
 
   /** Режим сдвоенного календаря для выбора диапазона дат  */
   doubleViewRange?: boolean;
 
+  // TODO: нужно ли отслеживать по второй панели отдельно?
   /** Показать экран выбора дат (месяц/год/день) */
   currentActiveView?: ViewScreenType | null;
 
+  // TODO: нужно ли отслеживать по второй панели отдельно?
   /** Приоритет экрана currentActiveView */
   currentActiveViewImportant?: boolean;
 
+  // TODO: нужно ли отслеживать по второй панели отдельно?
   /** Коллбэк срабатывает при клике на стрелках переключения дат */
   onDateIncreaseDecrease?: (date: Date | Array<Date | null> | null, event?: SyntheticEvent<any>) => void;
 
+  // TODO: нужно ли отслеживать по второй панели отдельно?
   /** Коллбэк при изменении месяца */
   onMonthSelect?: (date: Date | Array<Date | null> | null) => void;
 
+  // TODO: нужно ли отслеживать по второй панели отдельно?
   /** Коллбэк при изменении года */
   onYearSelect?: (date: Date | Array<Date | null> | null) => void;
 
+  // TODO: нужно ли отслеживать по второй панели отдельно?
   /** Срабатывает при открытии экрана выбора года */
   onViewEnter?: (view: ViewScreenType) => void;
 
+  // TODO: нужно ли отслеживать по второй панели отдельно?
   /** Срабатывает при открытии экрана выбора месяца */
   onViewLeave?: (view: ViewScreenType) => void;
 
+  // TODO: нужно ли отслеживать по второй панели отдельно?
   /** Выбор вкладки - Месяц */
   onViewMonthSelect?: () => void;
 
+  // TODO: нужно ли отслеживать по второй панели отдельно?
   /** Выбор вкладки - Год */
   onViewYearSelect?: () => void;
 
