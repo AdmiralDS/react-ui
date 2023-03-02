@@ -70,7 +70,7 @@ const getTimezoneOffsetInMilliseconds = (date: Date): number => {
   return date.getTime() - utcDate.getTime();
 };
 
-const isEqual = (dateLeft: Date, dateRight: Date): boolean => {
+export const isEqual = (dateLeft: Date, dateRight: Date): boolean => {
   return dateLeft.getTime() === dateRight.getTime();
 };
 

@@ -10,6 +10,7 @@ import {
   before,
   changeTime,
   equal,
+  isEqual,
   setMonth,
   setYear,
   subMonths,
@@ -62,12 +63,15 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarPropType>(
       }
       return current;
     };
+    const getInitialViewDateRight = () => {
+      return addMonths(getInitialViewDate(), 1);
+    };
 
     // активная дата, на которой сейчас ховер
     const [activeDate, setActiveDate] = React.useState<Date | null>(null);
     // дата, которую отображаем (в том числе в верхней панели)
     const [viewDate, setViewDate] = React.useState(getInitialViewDate());
-    const [viewDateRight, setViewDateRight] = React.useState(getInitialViewDate());
+    const [viewDateRight, setViewDateRight] = React.useState(getInitialViewDateRight());
     // отображаем выбор года
     const [yearsView, setYearsView] = React.useState(false);
     const [yearsViewRight, setYearsViewRight] = React.useState(false);
@@ -100,6 +104,17 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarPropType>(
     React.useEffect(() => {
       setViewDate(getInitialViewDate());
     }, [selected]);
+
+    React.useEffect(() => {
+      if (before(viewDateRight, viewDate) || isEqual(viewDateRight, viewDate)) {
+        setViewDate(subMonths(viewDateRight, 1));
+      }
+    }, [viewDateRight]);
+    React.useEffect(() => {
+      if (before(viewDateRight, viewDate) || isEqual(viewDateRight, viewDate)) {
+        setViewDateRight(addMonths(viewDate, 1));
+      }
+    }, [viewDate]);
 
     React.useEffect(() => {
       if (range && startDate) {
