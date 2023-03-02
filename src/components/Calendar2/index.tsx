@@ -79,15 +79,21 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarPropType>(
     React.useEffect(() => {
       if (currentActiveView === 'MONTH') {
         setYearsView(false);
+        setYearsViewRight(false);
         setMonthsView(true);
+        setMonthsViewRight(true);
       }
       if (currentActiveView === 'YEAR') {
         setMonthsView(false);
+        setMonthsViewRight(false);
         setYearsView(true);
+        setYearsViewRight(true);
       }
       if (currentActiveView === 'DAY') {
         setYearsView(false);
+        setYearsViewRight(false);
         setMonthsView(false);
+        setMonthsViewRight(false);
       }
     }, [currentActiveView]);
 
@@ -103,12 +109,12 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarPropType>(
     }, []);
 
     React.useEffect(() => {
-      yearsView ? onViewEnter && onViewEnter('YEAR') : onViewLeave && onViewLeave('YEAR');
-    }, [yearsView]);
+      yearsView || yearsViewRight ? onViewEnter && onViewEnter('YEAR') : onViewLeave && onViewLeave('YEAR');
+    }, [yearsView, yearsViewRight]);
 
     React.useEffect(() => {
-      monthsView ? onViewEnter && onViewEnter('MONTH') : onViewLeave && onViewLeave('MONTH');
-    }, [monthsView]);
+      monthsView || monthsViewRight ? onViewEnter && onViewEnter('MONTH') : onViewLeave && onViewLeave('MONTH');
+    }, [monthsView, monthsViewRight]);
 
     const getValidator = () => {
       return validator || getDefaultDateValidator(minDate, maxDate);
