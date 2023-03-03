@@ -10,7 +10,6 @@ import {
   before,
   changeTime,
   equal,
-  isEqual,
   setMonth,
   setYear,
   subMonths,
@@ -106,12 +105,12 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarPropType>(
     }, [selected]);
 
     React.useEffect(() => {
-      if (before(viewDateRight, viewDate) || isEqual(viewDateRight, viewDate)) {
+      if (before(viewDateRight, viewDate) || equal(viewDateRight, viewDate)) {
         setViewDate(subMonths(viewDateRight, 1));
       }
     }, [viewDateRight]);
     React.useEffect(() => {
-      if (before(viewDateRight, viewDate) || isEqual(viewDateRight, viewDate)) {
+      if (before(viewDateRight, viewDate) || equal(viewDateRight, viewDate)) {
         setViewDateRight(addMonths(viewDate, 1));
       }
     }, [viewDate]);
