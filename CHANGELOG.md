@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.5.2](https://github.com/AdmiralDS/react-ui/compare/v4.5.1...v4.5.2) (2023-03-06)
+
+
+### Bug Fixes
+
+* **Menu:** fix scroll on repeat keydown ([5c77581](https://github.com/AdmiralDS/react-ui/commit/5c77581aa7201afc74a010df9936d5397ef28920))
+* **PhoneNumberInput:** fix move more than 1 point on scroll on arrow key down ([0a39b50](https://github.com/AdmiralDS/react-ui/commit/0a39b5072e9c59de73a9cf9440aa95bad0a6c783))
+
 ### [4.5.1](https://github.com/AdmiralDS/react-ui/compare/v4.5.0...v4.5.1) (2023-03-03)
 
 ## [4.5.0](https://github.com/AdmiralDS/react-ui/compare/v4.4.1...v4.5.0) (2023-03-01)
