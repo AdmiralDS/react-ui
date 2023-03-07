@@ -44,6 +44,7 @@
     "@admiral-ds/flags": "^2.0.0",
     "@admiral-ds/fonts": "^2.0.0",
     "@admiral-ds/icons": "^2.0.0",
+    "dayjs": "^1.11.7",
     "react": ">=16",
     "react-dom": ">=16",
     "styled-components": "^5.1.0"
@@ -52,6 +53,7 @@
     "@admiral-ds/flags": "^2.0.0",
     "@admiral-ds/fonts": "^2.0.0",
     "@admiral-ds/icons": "^2.0.0",
+    "dayjs": "^1.11.7",
     "react": ">=16",
     "react-dom": ">=16",
     "styled-components": "^5.1.0"
