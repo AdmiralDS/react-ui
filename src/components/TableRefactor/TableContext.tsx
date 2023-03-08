@@ -5,9 +5,10 @@ type Dimension = 'xl' | 'l' | 'm' | 's';
 type TableContextProps = {
   dimension: Dimension;
   renderBodyCell: (row: any, column: any) => React.ReactNode;
+  columns: any[];
 };
 
-const TableContext = React.createContext<TableContextProps>({ renderBodyCell: () => {}, dimension: 'm' });
+const TableContext = React.createContext<TableContextProps>({ renderBodyCell: () => {}, dimension: 'm', columns: [] });
 
 export const useTableContext = () => React.useContext(TableContext);
 

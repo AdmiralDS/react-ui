@@ -6,10 +6,9 @@ import { useTableContext } from '#src/components/TableRefactor/TableContext';
 
 export interface RowWrapperProps extends HTMLAttributes<HTMLDivElement> {
   row: TableRowType;
-  columns: any[];
 }
 
-export const TableRow = ({ columns, row, ...props }: RowWrapperProps) => {
+export const TableRow = ({ row, ...props }: RowWrapperProps) => {
   const context = useTableContext();
 
   return (
@@ -28,7 +27,7 @@ export const TableRow = ({ columns, row, ...props }: RowWrapperProps) => {
         success={!!row.success}
         hover={!!row.hover}
       >
-        {columns.map((col) => (col.sticky ? null : context.renderBodyCell(row, col)))}
+        {context.columns.map((col) => (col.sticky ? null : context.renderBodyCell(row, col)))}
         <Filler />
       </SimpleRow>
     </Row>

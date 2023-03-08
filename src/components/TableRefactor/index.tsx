@@ -32,6 +32,8 @@ export type Column = {
   /** Ширина столбца. В качестве ширины можно использовать любое валидное css значение (пиксели, проценты, функция calc...).
    * По умолчанию 100px */
   width?: number | string;
+  /** Отключение возможности ресайза колонки */
+  disableResize?: boolean;
 };
 
 export type RowId = string | number;
@@ -56,9 +58,29 @@ export interface TableProps extends React.HTMLAttributes<HTMLDivElement> {
   dimension?: Dimension;
   /** Рендер функция для отрисовки контента ячейки. Входные параметры - объект строки и название столбца */
   renderRow: (index: number) => React.ReactNode;
+  /** Колбек, который срабатывает при изменении ширины столбца.
+   * Данный колбек обязателен в случае, если таблица должна поддерживать ресайзинг.
+   * При срабатывании колбек сообщает пользователю о попытке ресайзинга столбца,
+   * после чего пользователь должен обновить ширину соответствующего столбца.
+   * Таким образом контроль за ресайзингом происходит на стороне пользователя.
+   */
+  onColumnResize?: (colObj: { name: string; width: string }) => void;
+  /** Отображение разделителя для последней колонки. По умолчанию разделитель не отображается */
+  showDividerForLastColumn?: boolean;
+  /** Отключение возможности ресайза колонок. По умолчанию эта возможность включена */
+  disableColumnResize?: boolean;
 }
 
-export const Table: React.FC<TableProps> = ({ columnList, rowCount, renderRow, dimension = 'm', ...props }) => {
+export const Table: React.FC<TableProps> = ({
+  columnList,
+  rowCount,
+  renderRow,
+  dimension = 'm',
+  onColumnResize,
+  showDividerForLastColumn = false,
+  disableColumnResize = false,
+  ...props
+}) => {
   const columnMinWidth = dimension === 's' || dimension === 'm' ? COLUMN_MIN_WIDTH_M : COLUMN_MIN_WIDTH_L;
 
   const [verticalScroll, setVerticalScroll] = React.useState(false);
@@ -70,6 +92,7 @@ export const Table: React.FC<TableProps> = ({ columnList, rowCount, renderRow, d
   const hiddenHeaderRef = React.useRef<HTMLDivElement>(null);
   const scrollBodyRef = React.useRef<HTMLDivElement>(null);
 
+  // rowList раньше был в массиве зависимостей, обдумать этот момент
   React.useLayoutEffect(() => {
     if (hiddenHeaderRef.current) {
       const hiddenColumns = hiddenHeaderRef.current?.querySelectorAll<HTMLElement>('.th');
@@ -151,12 +174,19 @@ export const Table: React.FC<TableProps> = ({ columnList, rowCount, renderRow, d
     setVerticalScroll,
   ]);
 
+  function handleResizeChange({ name, width }: { name: string; width: number }) {
+    onColumnResize?.({ name, width: width + 'px' });
+  }
+
   const renderHeaderCell = (column: Column, index: number) => (
     <HeaderCellComponent
       key={`head_${column.name}`}
       column={column}
       index={index}
       columnsAmount={columnList.length}
+      showDividerForLastColumn={showDividerForLastColumn}
+      disableColumnResize={disableColumnResize}
+      handleResizeChange={handleResizeChange}
       dimension={dimension}
       columnMinWidth={columnMinWidth}
     />
@@ -199,7 +229,7 @@ export const Table: React.FC<TableProps> = ({ columnList, rowCount, renderRow, d
   };
 
   return (
-    <TableProvider renderBodyCell={renderBodyCell} dimension={dimension}>
+    <TableProvider renderBodyCell={renderBodyCell} dimension={dimension} columns={columnList}>
       <TableContainer ref={tableRef} data-shadow={false} {...props} className={`table ${props.className || ''}`}>
         {renderHiddenHeader()}
         <HeaderWrapper scrollbar={scrollbar} data-verticalscroll={verticalScroll}>

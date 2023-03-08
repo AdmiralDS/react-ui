@@ -107,10 +107,17 @@ const Template: ComponentStory<typeof Table> = ({ columnList, ...args }) => {
 
   const renderRow = (index: number) => {
     const rowData = rowList[index];
-    return <TableRow row={rowData} columns={cols} key={`row_${rowData.id}`} />;
+    return <TableRow row={rowData} key={`row_${rowData.id}`} />;
   };
 
-  return <Table {...args} columnList={cols} rowCount={rows.length} renderRow={renderRow} />;
+  const handleResize = ({ name, width }: { name: string; width: string }) => {
+    const newCols = cols.map((col) => (col.name === name ? { ...col, width } : col));
+    setCols(newCols);
+  };
+
+  return (
+    <Table {...args} columnList={cols} rowCount={rows.length} renderRow={renderRow} onColumnResize={handleResize} />
+  );
 };
 
 export const Playground = Template.bind({});
