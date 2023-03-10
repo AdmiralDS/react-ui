@@ -7,6 +7,7 @@ import { getScrollbarSize } from '#src/components/common/dom/scrollbarUtil';
 import { GroupRow } from '#src/components/Table/Row/GroupRow';
 import { RegularRow } from '#src/components/Table/Row/RegularRow';
 import { RowWrapper } from '#src/components/Table/Row/RowWrapper';
+import type { FlattenInterpolation, ThemeProps, DefaultTheme } from 'styled-components';
 
 import { HeaderCellComponent } from './HeaderCell';
 import {
@@ -85,6 +86,14 @@ export type Column = {
   onFilterMenuOpen?: () => void;
   /** Колбек на закрытие меню фильтра */
   onFilterMenuClose?: () => void;
+  /**
+   *  Позволяет выравнивать меню фильтра относительно столбца
+   *  https://developer.mozilla.org/en-US/docs/Web/CSS/align-self
+   */
+  filterMenuAlignSelf?: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
+
+  /** Позволяет добавлять миксин для меню фильтра, созданный с помощью styled css  */
+  filterMenuCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
 };
 
 export type RowId = string | number;
