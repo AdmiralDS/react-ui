@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Tree } from '#src/components/Tree';
-import type { RenderOptionProps, TreeItemProps } from '#src/components/Tree/TreeNode';
+import type { TreeNodeRenderOptionProps, TreeItemProps } from '#src/components/Tree/TreeNode';
 import { TreeNode } from '#src/components/Tree/TreeNode';
 import { withDesign } from 'storybook-addon-designs';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
@@ -63,7 +63,7 @@ export default {
 
 const demo1_TreeModel: Array<TreeItemProps> = [
   {
-    render: (options: RenderOptionProps) => (
+    render: (options: TreeNodeRenderOptionProps) => (
       <TreeNode
         key={'1'}
         icon={FolderSolid}
@@ -75,7 +75,7 @@ const demo1_TreeModel: Array<TreeItemProps> = [
     checked: false,
     children: [
       {
-        render: (options: RenderOptionProps) => (
+        render: (options: TreeNodeRenderOptionProps) => (
           <TreeNode
             key={'1-3'}
             icon={FolderSolid}
@@ -87,7 +87,7 @@ const demo1_TreeModel: Array<TreeItemProps> = [
         checked: false,
         children: [
           {
-            render: (options: RenderOptionProps) => (
+            render: (options: TreeNodeRenderOptionProps) => (
               <TreeNode
                 key={'2-2'}
                 icon={FolderSolid}
@@ -98,7 +98,7 @@ const demo1_TreeModel: Array<TreeItemProps> = [
             id: '2-2',
           },
           {
-            render: (options: RenderOptionProps) => (
+            render: (options: TreeNodeRenderOptionProps) => (
               <TreeNode
                 key={'2-3'}
                 icon={FolderSolid}
@@ -109,7 +109,7 @@ const demo1_TreeModel: Array<TreeItemProps> = [
             id: '2-3',
           },
           {
-            render: (options: RenderOptionProps) => (
+            render: (options: TreeNodeRenderOptionProps) => (
               <TreeNode
                 key={'2-4'}
                 icon={FolderSolid}
@@ -120,7 +120,7 @@ const demo1_TreeModel: Array<TreeItemProps> = [
             id: '2-4',
           },
           {
-            render: (options: RenderOptionProps) => (
+            render: (options: TreeNodeRenderOptionProps) => (
               <TreeNode
                 key={'2-5'}
                 icon={FolderSolid}
@@ -132,7 +132,7 @@ const demo1_TreeModel: Array<TreeItemProps> = [
             checked: false,
             children: [
               {
-                render: (options: RenderOptionProps) => (
+                render: (options: TreeNodeRenderOptionProps) => (
                   <TreeNode
                     key={'3-1'}
                     label={'Текст  строки с чекбоксом, четвертый уровень компонента 1'}
@@ -143,7 +143,7 @@ const demo1_TreeModel: Array<TreeItemProps> = [
                 checked: false,
               },
               {
-                render: (options: RenderOptionProps) => (
+                render: (options: TreeNodeRenderOptionProps) => (
                   <TreeNode
                     {...options}
                     label={'Текст  строки с чекбоксом, четвертый уровень компонента 2'}
@@ -154,7 +154,7 @@ const demo1_TreeModel: Array<TreeItemProps> = [
                 checked: false,
               },
               {
-                render: (options: RenderOptionProps) => (
+                render: (options: TreeNodeRenderOptionProps) => (
                   <TreeNode
                     {...options}
                     label={
@@ -169,7 +169,7 @@ const demo1_TreeModel: Array<TreeItemProps> = [
                 checked: false,
               },
               {
-                render: (options: RenderOptionProps) => (
+                render: (options: TreeNodeRenderOptionProps) => (
                   <TreeNode
                     {...options}
                     label={'Текст  строки с чекбоксом, четвертый уровень компонента 4'}
@@ -180,7 +180,7 @@ const demo1_TreeModel: Array<TreeItemProps> = [
                 checked: false,
                 children: [
                   {
-                    render: (options: RenderOptionProps) => (
+                    render: (options: TreeNodeRenderOptionProps) => (
                       <TreeNode
                         {...options}
                         label={'Текст  строки с чекбоксом, пятый уровень компонента 1'}
@@ -191,7 +191,7 @@ const demo1_TreeModel: Array<TreeItemProps> = [
                     checked: false,
                   },
                   {
-                    render: (options: RenderOptionProps) => (
+                    render: (options: TreeNodeRenderOptionProps) => (
                       <TreeNode
                         {...options}
                         label={'Текст  строки с чекбоксом, пятый уровень компонента 2'}
@@ -210,7 +210,7 @@ const demo1_TreeModel: Array<TreeItemProps> = [
       {
         id: '1-1',
         checked: false,
-        render: (options: RenderOptionProps) => (
+        render: (options: TreeNodeRenderOptionProps) => (
           <TreeNode
             {...options}
             icon={FolderSolid}
@@ -222,7 +222,7 @@ const demo1_TreeModel: Array<TreeItemProps> = [
       {
         id: '1-2',
         checked: false,
-        render: (options: RenderOptionProps) => (
+        render: (options: TreeNodeRenderOptionProps) => (
           <TreeNode
             {...options}
             icon={FolderSolid}
@@ -234,7 +234,7 @@ const demo1_TreeModel: Array<TreeItemProps> = [
     ],
   },
   {
-    render: (options: RenderOptionProps) => (
+    render: (options: TreeNodeRenderOptionProps) => (
       <TreeNode
         {...options}
         icon={FolderSolid}
@@ -246,7 +246,7 @@ const demo1_TreeModel: Array<TreeItemProps> = [
     checked: false,
   },
   {
-    render: (options: RenderOptionProps) => (
+    render: (options: TreeNodeRenderOptionProps) => (
       <TreeNode
         {...options}
         icon={FolderSolid}
@@ -257,7 +257,7 @@ const demo1_TreeModel: Array<TreeItemProps> = [
     id: '3',
   },
   {
-    render: (options: RenderOptionProps) => (
+    render: (options: TreeNodeRenderOptionProps) => (
       <TreeNode
         {...options}
         icon={FolderSolid}
@@ -287,7 +287,7 @@ const Demo1: ComponentStory<typeof Tree> = (props) => {
 
 const demo2_TreeModel: Array<TreeItemProps> = [
   {
-    render: (options: RenderOptionProps) => (
+    render: (options: TreeNodeRenderOptionProps) => (
       <TreeNode key={'1'} {...options}>
         <T as="div" style={{ paddingTop: 2 }} font="Subtitle/Subtitle 2">
           Элемент дерева с кастомным заголовком
@@ -298,20 +298,20 @@ const demo2_TreeModel: Array<TreeItemProps> = [
     expanded: true,
     children: [
       {
-        render: (options: RenderOptionProps) => (
+        render: (options: TreeNodeRenderOptionProps) => (
           <TreeNode key={'1-1'} icon={FolderSolid} label={'Второй уровень 1'} {...options} />
         ),
         id: '1-1',
         checked: false,
         children: [
           {
-            render: (options: RenderOptionProps) => (
+            render: (options: TreeNodeRenderOptionProps) => (
               <TreeNode key={'1-1-1'} icon={FolderSolid} label={'Третий уровень 1'} {...options} />
             ),
             id: '1-1-1',
           },
           {
-            render: (options: RenderOptionProps) => (
+            render: (options: TreeNodeRenderOptionProps) => (
               <TreeNode key={'1-1-2'} icon={FolderSolid} label={'Третий уровень 2'} {...options} />
             ),
             id: '1-1-2',
@@ -321,7 +321,7 @@ const demo2_TreeModel: Array<TreeItemProps> = [
     ],
   },
   {
-    render: (options: RenderOptionProps) => (
+    render: (options: TreeNodeRenderOptionProps) => (
       <TreeNode key={'4'} icon={FolderSolid} label={'Первый уровень 2'} {...options} />
     ),
     id: '4',
