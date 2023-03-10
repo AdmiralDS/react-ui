@@ -51,6 +51,7 @@ export * from './components/TabMenu';
 export * from './components/PositionInPortal';
 export * from './components/MultiButton';
 export * from './components/Notification';
+export * from './components/NotificationItem';
 export * from './components/Toast';
 export * from './components/Stepper';
 export * from './components/PaginationOne';
