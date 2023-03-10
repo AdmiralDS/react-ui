@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.6.0](https://github.com/AdmiralDS/react-ui/compare/v4.5.2...v4.6.0) (2023-03-10)
+
+
+### Features
+
+* **Table:** add filterMenuAlignSelf and filterMenuCssMixin props for column ([2bbcad1](https://github.com/AdmiralDS/react-ui/commit/2bbcad1e9e9b4ada3bc0e9aac6bdc67cddfdf5ba))
+
+
+### Bug Fixes
+
+* **MenuButton:** pass renderBottomPanel prop ([c609a4e](https://github.com/AdmiralDS/react-ui/commit/c609a4ed65d51131a8fd71108b0aa5330a9664d8))
+* **NotificationItem:** add missing types to export ([5bdc451](https://github.com/AdmiralDS/react-ui/commit/5bdc4510b5cb9b97df84243cd6b77f62d628f9c4))
+* **NumberInput:** value can be changed by ArrowUp, ArrowDown press as well as Plus, Minus icon click ([2da0175](https://github.com/AdmiralDS/react-ui/commit/2da0175d2e88edc5b3bd97b69f55b628bae0dc8e))
+* **Tree:** add missing types to export ([5495219](https://github.com/AdmiralDS/react-ui/commit/5495219dd051f766e4d91ec8e6fdbb7266576562))
+
 ### [4.5.2](https://github.com/AdmiralDS/react-ui/compare/v4.5.1...v4.5.2) (2023-03-06)
 
 
