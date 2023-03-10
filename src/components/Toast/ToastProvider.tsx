@@ -29,15 +29,15 @@ export interface IdentifyToastItemProps extends Omit<NotificationProps, 'id'>, I
 
 export interface IContextProps extends ToastProps {
   /** @deprecated Не рекомендуется использовать в связи с переходом на новую структуру ToastProvider.
-   * Используйте addRenderToast.
+   * Используйте addToastItem.
    * Добавление всплывающего уведомления через модель для Notification */
   addToast: (newToast: IdentifyToast) => string;
   /** @deprecated Не рекомендуется использовать в связи с переходом на новую структуру ToastProvider.
-   * Используйте removeRenderToast.
+   * Используйте removeToastItem.
    * Удаление всплывающего уведомления через модель для Notification */
   removeToast: (removeToast: IdentifyToast) => void;
   /** @deprecated Не рекомендуется использовать в связи с переходом на новую структуру ToastProvider.
-   * Используйте removeRenderToast.
+   * Используйте removeToastItem.
    * Удаление всплывающего уведомления по идентификатору */
   removeById: (toastId: ID) => void;
   /** Добавление всплывающего уведомления.
@@ -48,7 +48,7 @@ export interface IContextProps extends ToastProps {
   /** Удаление всплывающего уведомления */
   removeToastItem: (toast: ToastItemProps) => void;
   /** @deprecated Не рекомендуется использовать в связи с переходом на новую структуру ToastProvider.
-   * Используйте renderToastList.
+   * Используйте toastItemList.
    * Список существующих уведомлений */
   toasts: IdentifyToast[];
   /** Список существующих уведомлений */
