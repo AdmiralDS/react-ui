@@ -13,7 +13,7 @@ import { keyboardKey } from '#src/components/common/keyboardKey';
 
 import { HeightLimitedContainer } from '../Container';
 
-import { AutoSizeInput, BorderedDiv, horizontalPaddingValue } from './AutoSizeInput';
+import { AutoSizeInput, BorderedDiv, horizontalPaddingValue, iconSizeValue } from './AutoSizeInput';
 import { clearValue, fitToCurrency, validateThousand } from './utils';
 
 export { fitToCurrency, clearValue } from './utils';
@@ -40,17 +40,6 @@ const PlusMinusIcon = styled(InputIconButton)<{ disabled?: boolean }>`
         `
       : ''}
 `;
-
-const iconSizeValue = (props: { dimension?: ComponentDimension }) => {
-  switch (props.dimension) {
-    case 'xl':
-      return 24;
-    case 's':
-      return 20;
-    default:
-      return 24;
-  }
-};
 
 const IconPanel = styled.div<{ disabled?: boolean; dimension?: ComponentDimension }>`
   position: absolute;
@@ -354,6 +343,7 @@ export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
             precision={precision}
             status={status}
             minValue={minValue}
+            iconCount={iconCount}
             {...props}
           />
         </Content>

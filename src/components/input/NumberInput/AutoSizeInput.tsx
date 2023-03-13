@@ -11,6 +11,7 @@ import { fitToCurrency } from './utils';
 
 const Prefix = styled.div<{ disabled?: boolean }>`
   display: flex;
+  flex-shrink: 0;
   align-items: center;
   user-select: none;
   color: ${({ theme, disabled }) => (disabled ? theme.color['Neutral/Neutral 30'] : theme.color['Neutral/Neutral 50'])};
@@ -22,9 +23,9 @@ const Suffix = styled(Prefix)`
 
 const Sizer = styled.div`
   display: flex;
+  flex-shrink: 0;
   visibility: hidden;
   white-space: pre;
-  pointer-events: none;
   box-sizing: border-box;
 `;
 
@@ -95,8 +96,8 @@ const Input = styled.input<ExtraProps>`
   appearance: none;
   border: none;
   padding: 0;
+  position: relative;
   box-sizing: border-box;
-  z-index: 1;
   display: flex;
   flex: 1 0 auto;
   min-width: 10px;
@@ -134,14 +135,28 @@ export const horizontalPaddingValue = (props: { dimension?: ComponentDimension }
   }
 };
 
-const HiddenContent = styled.div<{ dimension?: ComponentDimension }>`
+export const iconSizeValue = (props: { dimension?: ComponentDimension }) => {
+  switch (props.dimension) {
+    case 'xl':
+      return 24;
+    case 's':
+      return 20;
+    default:
+      return 24;
+  }
+};
+
+const HiddenContent = styled.div<{ dimension?: ComponentDimension; iconCount?: number }>`
   position: absolute;
-  left: 0;
   top: 0;
   bottom: 0;
+  overflow: hidden;
+  pointer-events: none;
+  box-sizing: border-box;
   display: flex;
   align-items: center;
-  padding: 0 ${horizontalPaddingValue}px;
+  left: ${horizontalPaddingValue}px;
+  right: ${(props) => horizontalPaddingValue(props) + (iconSizeValue(props) + 8) * (props.iconCount ?? 0)}px;
 `;
 
 export interface InputProps extends TextInputProps {
@@ -157,6 +172,8 @@ export interface InputProps extends TextInputProps {
   decimal?: string;
   /** Минимальное значение */
   minValue?: number;
+  /** Количество иконок */
+  iconCount?: number;
 }
 
 export const AutoSizeInput = React.forwardRef<HTMLInputElement, InputProps>(
@@ -171,6 +188,7 @@ export const AutoSizeInput = React.forwardRef<HTMLInputElement, InputProps>(
       decimal = '.',
       status,
       minValue,
+      iconCount,
       ...props
     },
     ref,
@@ -272,7 +290,7 @@ export const AutoSizeInput = React.forwardRef<HTMLInputElement, InputProps>(
     }, [props.value, props.defaultValue, props.dimension, placeholder, inputRef.current, sizerRef.current]);
 
     React.useLayoutEffect(
-      () => updateInputPadding,
+      () => updateInputPadding(),
       [prefix, props.dimension, prefixRef.current, inputRef.current, showPrefixSuffix],
     );
 
@@ -288,11 +306,11 @@ export const AutoSizeInput = React.forwardRef<HTMLInputElement, InputProps>(
           resizeObserver.disconnect();
         };
       }
-    }, [prefixRef.current, inputRef.current]);
+    }, [prefixRef.current, inputRef.current, showPrefixSuffix]);
 
     return (
       <>
-        <HiddenContent>
+        <HiddenContent iconCount={iconCount} dimension={props.dimension}>
           {prefix && showPrefixSuffix && (
             <Prefix ref={prefixRef} disabled={props.disabled}>
               {prefix}&nbsp;
