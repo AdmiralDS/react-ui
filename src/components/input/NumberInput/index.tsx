@@ -9,6 +9,7 @@ import { ReactComponent as CloseOutlineSvg } from '@admiral-ds/icons/build/servi
 import { ReactComponent as MinusOutline } from '@admiral-ds/icons/build/service/MinusOutline.svg';
 import { ReactComponent as PlusOutline } from '@admiral-ds/icons/build/service/PlusOutline.svg';
 import { InputIconButton } from '#src/components/InputIconButton';
+import { keyboardKey } from '#src/components/common/keyboardKey';
 
 import { HeightLimitedContainer } from '../Container';
 
@@ -329,6 +330,22 @@ export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       }
     };
 
+    const handleKeyDown = (e: React.KeyboardEvent) => {
+      const code = keyboardKey.getCode(e);
+      switch (code) {
+        case keyboardKey.ArrowUp: {
+          handlePlus();
+          e.preventDefault();
+          break;
+        }
+        case keyboardKey.ArrowDown: {
+          handleMinus();
+          e.preventDefault();
+          break;
+        }
+      }
+    };
+
     return (
       <Wrapper
         ref={containerRef}
@@ -348,6 +365,7 @@ export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
           dimension={props.dimension}
           iconCount={iconCount}
           onMouseDown={handleContentMouseDown}
+          onKeyDown={handleKeyDown}
         >
           <AutoSizeInput
             ref={refSetter(ref, inputRef)}

@@ -58,7 +58,6 @@ const StyledDiv = styled.div<{ hasTopPanel: boolean; hasBottomPanel: boolean }>`
   flex: 1 1 auto;
   border: none;
   overflow-y: auto;
-  scroll-behavior: smooth;
 `;
 
 export interface RenderPanelProps {
@@ -173,6 +172,7 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
     const uncontrolledActiveValue = model.length > 0 ? findNextId() : undefined;
     const [selectedState, setSelectedState] = React.useState<string | undefined>(defaultSelected);
     const [activeState, setActiveState] = React.useState<string | undefined>(uncontrolledActiveValue);
+    const [lastScrollEvent, setLastScrollEvent] = React.useState<number>();
 
     const selectedId =
       multiSelection || disableSelectedOptionHighlight ? undefined : selected === undefined ? selectedState : selected;
@@ -263,11 +263,16 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
       setTimeout(() => {
         const hoveredItem = menuRef.current?.querySelector('[data-hovered="true"]');
 
-        hoveredItem?.scrollIntoView({
-          behavior: 'smooth',
-          inline: 'center',
-          block: 'nearest',
-        });
+        if (hoveredItem) {
+          const scrollEventTime = Date.now();
+          setLastScrollEvent(scrollEventTime);
+
+          hoveredItem?.scrollIntoView({
+            behavior: !lastScrollEvent || scrollEventTime - lastScrollEvent < 150 ? 'auto' : 'smooth',
+            inline: 'center',
+            block: 'nearest',
+          });
+        }
       }, 0);
     }, [active, activeState, model]);
 
