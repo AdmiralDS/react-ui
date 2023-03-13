@@ -1,7 +1,7 @@
 import * as React from 'react';
 import type { InputData } from '#src/components/common/dom/changeInputData';
 import { changeInputData, isInputDataDifferent } from '#src/components/common/dom/changeInputData';
-import type { ExtraProps } from '#src/components/input/types';
+import type { ComponentDimension, ExtraProps } from '#src/components/input/types';
 import type { TextInputProps } from '#src/components/input/TextInput';
 import { typography } from '#src/components/Typography';
 import styled, { css } from 'styled-components';
@@ -9,28 +9,19 @@ import { refSetter } from '#src/components/common/utils/refSetter';
 
 import { fitToCurrency } from './utils';
 
-const Prefix = styled.div`
+const Prefix = styled.div<{ disabled?: boolean }>`
   display: flex;
   align-items: center;
   user-select: none;
+  color: ${({ theme, disabled }) => (disabled ? theme.color['Neutral/Neutral 30'] : theme.color['Neutral/Neutral 50'])};
 `;
 
 const Suffix = styled(Prefix)`
   min-width: 0;
 `;
 
-const Wrapper = styled.div`
-  display: flex;
-  overflow: hidden;
-  max-height: 100%;
-  border-radius: inherit;
-`;
-
 const Sizer = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 0;
+  display: flex;
   visibility: hidden;
   white-space: pre;
   pointer-events: none;
@@ -63,8 +54,6 @@ export const BorderedDiv = styled.div<{ status?: TextInputProps['status'] }>`
 `;
 
 const colorsBorderAndBackground = css<{ disabled?: boolean }>`
-  background-color: ${(props) => props.theme.color['Neutral/Neutral 00']};
-
   &:focus + ${BorderedDiv} {
     border: 2px solid ${(props) => props.theme.color['Primary/Primary 60 Main']};
   }
@@ -83,11 +72,6 @@ const colorsBorderAndBackground = css<{ disabled?: boolean }>`
 
   &[data-status='success']:focus + ${BorderedDiv} {
     border: 2px solid ${(props) => props.theme.color['Success/Success 50 Main']};
-  }
-
-  [data-read-only] &&&,
-  &&&:disabled {
-    background-color: ${(props) => props.theme.color['Neutral/Neutral 10']};
   }
 
   &:disabled {
@@ -112,11 +96,13 @@ const Input = styled.input<ExtraProps>`
   border: none;
   padding: 0;
   box-sizing: border-box;
+  z-index: 1;
   display: flex;
-  flex-shrink: 0;
+  flex: 1 0 auto;
   min-width: 10px;
   max-width: 100%;
 
+  background: transparent;
   color: ${(props) => props.theme.color['Neutral/Neutral 90']};
 
   ${(props) => (props.dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
@@ -135,6 +121,27 @@ const Input = styled.input<ExtraProps>`
 
   ${colorsBorderAndBackground}
   ${ieFixes}
+`;
+
+export const horizontalPaddingValue = (props: { dimension?: ComponentDimension }) => {
+  switch (props.dimension) {
+    case 'xl':
+      return 16;
+    case 's':
+      return 12;
+    default:
+      return 16;
+  }
+};
+
+const HiddenContent = styled.div<{ dimension?: ComponentDimension }>`
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  padding: 0 ${horizontalPaddingValue}px;
 `;
 
 export interface InputProps extends TextInputProps {
@@ -172,17 +179,26 @@ export const AutoSizeInput = React.forwardRef<HTMLInputElement, InputProps>(
 
     const sizerRef = React.useRef<HTMLDivElement>(null);
     const inputRef = React.useRef<HTMLInputElement>(null);
+    const prefixRef = React.useRef<HTMLDivElement>(null);
 
-    const updateInputWidth = (newValue: any) => {
-      if (sizerRef.current && inputRef.current) {
+    const updateHiddenContent = (newValue: any) => {
+      if (sizerRef.current) {
         sizerRef.current.innerHTML = newValue || placeholder || '';
-        // 2px с расчетом на курсор
-        inputRef.current.style.width = `${sizerRef.current.getBoundingClientRect().width + 2}px`;
       }
       if (newValue) {
         setPrefixSuffix?.(true);
       } else {
         setPrefixSuffix?.(false);
+      }
+    };
+
+    const updateInputPadding = () => {
+      if (inputRef.current) {
+        if (!showPrefixSuffix) {
+          inputRef.current.style.paddingLeft = '0px';
+        } else if (prefixRef.current && showPrefixSuffix) {
+          inputRef.current.style.paddingLeft = `${prefixRef.current.getBoundingClientRect().width}px`;
+        }
       }
     };
 
@@ -192,7 +208,7 @@ export const AutoSizeInput = React.forwardRef<HTMLInputElement, InputProps>(
       const init_value = value || '';
       const newValue = fitToCurrency(init_value, precision, decimal, thousand, undefined, minValue);
 
-      updateInputWidth(newValue);
+      updateHiddenContent(newValue);
 
       if (thousand && init_value.charAt(cursor - 1) === thousand && newValue.length === init_value.length) {
         // если пытаемся стереть разделитель thousand, то курсор перескакивает через него
@@ -251,50 +267,43 @@ export const AutoSizeInput = React.forwardRef<HTMLInputElement, InputProps>(
 
     React.useLayoutEffect(() => {
       if (inputRef.current) {
-        updateInputWidth(inputRef.current.value);
+        updateHiddenContent(inputRef.current.value);
       }
-    }, [props.value, props.defaultValue, props.dimension, placeholder]);
+    }, [props.value, props.defaultValue, props.dimension, placeholder, inputRef.current, sizerRef.current]);
 
-    // recalculation on resize. For example, it happens after fonts loading
+    React.useLayoutEffect(
+      () => updateInputPadding,
+      [prefix, props.dimension, prefixRef.current, inputRef.current, showPrefixSuffix],
+    );
+
     React.useLayoutEffect(() => {
-      if (sizerRef.current) {
+      if (prefixRef.current) {
         const resizeObserver = new ResizeObserver((entries) => {
           entries.forEach(() => {
-            if (inputRef.current) {
-              updateInputWidth(inputRef.current.value);
-            }
+            updateInputPadding();
           });
         });
-        resizeObserver.observe(sizerRef.current);
+        resizeObserver.observe(prefixRef.current);
         return () => {
           resizeObserver.disconnect();
         };
       }
-    }, [sizerRef.current, placeholder]);
-
-    const handleMouseDown = (e: React.MouseEvent<HTMLInputElement>) => {
-      // отменяю всплытие события, чтобы не сработал onMouseDown на Content и фокус не был снова установлен
-      e.stopPropagation();
-      props.onMouseDown?.(e);
-    };
+    }, [prefixRef.current, inputRef.current]);
 
     return (
-      <Wrapper>
-        {prefix && showPrefixSuffix && <Prefix>{prefix}&nbsp;</Prefix>}
-        <Wrapper>
+      <>
+        <HiddenContent>
+          {prefix && showPrefixSuffix && (
+            <Prefix ref={prefixRef} disabled={props.disabled}>
+              {prefix}&nbsp;
+            </Prefix>
+          )}
           <Sizer ref={sizerRef} />
-          <Input
-            {...props}
-            ref={refSetter(ref, inputRef)}
-            placeholder={placeholder}
-            type="text"
-            onMouseDown={handleMouseDown}
-            data-status={status}
-          />
-          <BorderedDiv status={status} />
-          {suffix && showPrefixSuffix && <Suffix>&nbsp;{suffix}</Suffix>}
-        </Wrapper>
-      </Wrapper>
+          {suffix && showPrefixSuffix && <Suffix disabled={props.disabled}>&nbsp;{suffix}</Suffix>}
+        </HiddenContent>
+        <Input {...props} ref={refSetter(ref, inputRef)} placeholder={placeholder} type="text" data-status={status} />
+        <BorderedDiv status={status} />
+      </>
     );
   },
 );
