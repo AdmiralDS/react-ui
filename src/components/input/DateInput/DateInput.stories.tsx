@@ -96,11 +96,8 @@ export default {
     tooltipContainer: {
       control: false,
     },
-    currentActiveView: {
-      control: false,
-    },
     currentActiveViewImportant: {
-      control: false,
+      control: { type: 'boolean' },
     },
     theme: {
       control: false,
@@ -110,6 +107,16 @@ export default {
     },
     forwardedAs: {
       control: false,
+    },
+    isVisible: {
+      control: false,
+    },
+    onVisibilityChange: {
+      control: false,
+    },
+    currentActiveView: {
+      options: [undefined, 'DAY', 'MONTH', 'YEAR'],
+      control: { type: 'radio' },
     },
   },
 } as ComponentMeta<typeof DateInput>;
@@ -151,6 +158,60 @@ const Template: ComponentStory<typeof DateInput> = (props) => {
   );
 };
 
+const Template2: ComponentStory<typeof DateInput> = (props) => {
+  const cleanProps = (Object.keys(props) as Array<keyof typeof props>).reduce((acc, key) => {
+    if (props[key] !== undefined) acc[key] = props[key];
+
+    return acc;
+  }, {} as Record<any, any>);
+
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    return theme;
+  }
+
+  const [localValue, setValue] = useState<string>(String(props.value) ?? '');
+  const [isVisible, setIsVisible] = React.useState<boolean>(false);
+
+  useEffect(() => {
+    if (props.value !== undefined) {
+      setValue(String(props.value));
+    }
+  }, [props.value]);
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const inputValue = e.currentTarget.value;
+    setValue(inputValue);
+    props.onChange?.(e);
+  };
+
+  const handleVisibilityChange = (newIsVisible: boolean) => {
+    setIsVisible(newIsVisible);
+  };
+
+  const handleMonthClick = (date: any) => {
+    console.log(`click on month ${date.toLocaleDateString()}`);
+    setValue(date.toLocaleDateString());
+    handleVisibilityChange(false);
+  };
+
+  return (
+    <ThemeProvider theme={swapBorder}>
+      <DateInput
+        {...cleanProps}
+        isVisible={isVisible}
+        onVisibilityChange={handleVisibilityChange}
+        value={localValue}
+        onChange={handleChange}
+        placeholder={'Some placeholder'}
+        style={{ maxWidth: 300 }}
+        onMonthSelect={handleMonthClick}
+        currentActiveViewImportant
+        currentActiveView="MONTH"
+      />
+    </ThemeProvider>
+  );
+};
+
 export const DateInputStory = Template.bind({});
 
 DateInputStory.args = {};
@@ -160,3 +221,7 @@ DateInputStory.storyName = 'DateInput (input type="date")';
 export const DateInputStory2 = Template.bind({});
 DateInputStory2.args = { icon: CalendarSolidSVG };
 DateInputStory2.storyName = 'DateInput альтернативная иконка';
+
+export const DateInputStory3 = Template2.bind({});
+DateInputStory3.args = {};
+DateInputStory3.storyName = 'DateInput выбор месяца';
