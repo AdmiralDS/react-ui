@@ -117,12 +117,12 @@ const Template0: ComponentStory<typeof NumberInput> = (args) => {
   return (
     <ThemeProvider theme={swapBorder}>
       <NumberInput
-        {...args}
         prefix="От"
         defaultValue="2.00"
         onChange={(event) => {
           console.log(event.target.value);
         }}
+        {...args}
       />
     </ThemeProvider>
   );

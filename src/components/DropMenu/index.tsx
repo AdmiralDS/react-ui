@@ -141,7 +141,7 @@ export const DropMenu = React.forwardRef<HTMLElement, DropMenuProps>(
     const [isMenuOpenState, setIsMenuOpenState] = React.useState<boolean>(false);
     const btnRef = React.useRef<HTMLElement>(null);
 
-    const isMenuOpen = isVisible || isMenuOpenState;
+    const isMenuOpen = isVisible ?? isMenuOpenState;
     const setIsMenuOpen = (newMenuOpenState: boolean) => {
       setIsMenuOpenState(newMenuOpenState);
       onVisibilityChange(newMenuOpenState);
