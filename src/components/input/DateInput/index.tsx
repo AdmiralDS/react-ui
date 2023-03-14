@@ -14,6 +14,7 @@ import { isValidDate } from './isValidDate';
 import { defaultParser } from './defaultParser';
 import { defaultDateRangeInputHandle } from '#src/components/input/DateInput/defaultDateRangeInputHandle';
 import { InputIconButton } from '#src/components/InputIconButton';
+import type { DropdownContainerProps } from '#src/components/DropdownContainer';
 import { StyledDropdownContainer } from '#src/components/DropdownContainer';
 
 const Input = styled(TextInput)`
@@ -49,13 +50,16 @@ export interface DateInputProps extends TextInputProps, Omit<CalendarPropType, '
   /** Ref для календаря */
   calendarRef?: React.RefObject<HTMLDivElement>;
 
-  /**
-   * Компонент для отображения альтернативной иконки
-   */
+  /** Компонент для отображения альтернативной иконки */
   icon?: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
 
   /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
   dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+
+  /** Видимость выпадающего меню */
+  isVisible?: boolean;
+  /** Колбек на изменение видимости меню */
+  onVisibilityChange?: (isVisible: boolean) => void;
 }
 
 export const DateInput = React.forwardRef<HTMLInputElement, DateInputProps>(
@@ -84,6 +88,8 @@ export const DateInput = React.forwardRef<HTMLInputElement, DateInputProps>(
       icons,
       skeleton = false,
       dropContainerCssMixin,
+      isVisible,
+      onVisibilityChange = (isVisible: boolean) => undefined,
       ...props
     },
     ref,
@@ -108,7 +114,14 @@ export const DateInput = React.forwardRef<HTMLInputElement, DateInputProps>(
     const [calendarValue, setCalendarValue] = useState<Date | (Date | null)[] | null>(null);
     const inputRef = useRef<HTMLInputElement>(null);
     const inputContainerRef = useRef<HTMLDivElement>(null);
-    const [isCalendarOpen, setCalendarOpen] = useState<boolean>(defaultIsCalendarOpen);
+    const [isCalendarOpenState, setCalendarOpenState] = useState<boolean>(defaultIsCalendarOpen);
+
+    const isCalendarOpen = isVisible ?? isCalendarOpenState;
+    const setCalendarOpen = (newCalendarOpenState: boolean) => {
+      console.log(`setting menu state ${newCalendarOpenState}`);
+      setCalendarOpenState(newCalendarOpenState);
+      onVisibilityChange(newCalendarOpenState);
+    };
 
     const [startDate, endDate, selectedCalendarValue] = Array.isArray(calendarValue)
       ? calendarValue
