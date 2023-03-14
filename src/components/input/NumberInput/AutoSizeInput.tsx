@@ -15,11 +15,7 @@ const Prefix = styled.div<{ disabled?: boolean; align?: 'left' | 'right' }>`
   align-items: center;
   user-select: none;
   color: ${({ theme, disabled }) => (disabled ? theme.color['Neutral/Neutral 30'] : theme.color['Neutral/Neutral 50'])};
-  ${({ align }) =>
-    align === 'right' &&
-    css`
-      margin-left: auto;
-    `}
+  ${({ align }) => align === 'right' && 'margin-left: auto;'}
 `;
 
 const Suffix = styled(Prefix)`
@@ -237,10 +233,10 @@ export const AutoSizeInput = React.forwardRef<HTMLInputElement, InputProps>(
     };
 
     const updateInputRightPadding = () => {
-      if (inputRef.current && align === 'right') {
-        if (!showPrefixSuffix || !suffix) {
+      if (inputRef.current) {
+        if (!showPrefixSuffix || !suffix || align === 'left') {
           inputRef.current.style.paddingRight = '0px';
-        } else if (suffixRef.current && showPrefixSuffix) {
+        } else if (suffixRef.current && showPrefixSuffix && align === 'right') {
           inputRef.current.style.paddingRight = `${suffixRef.current.getBoundingClientRect().width}px`;
         }
       }
