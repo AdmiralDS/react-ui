@@ -8,85 +8,138 @@ const Spacer = styled.div`
 `;
 
 interface VirtualBodyProps extends React.HTMLAttributes<HTMLDivElement> {
+  /** ссылка на контейнер, в котором находится Menu*/
   scrollContainerRef: React.RefObject<HTMLElement>;
+  /** Высота 1 элемента меню*/
   itemHeight: number;
-  renderAhead?: number;
+  /** Максимальное количество строк в меню */
+  rowCount?: number;
+  /** Количество отображаемых строк в начале и в конце виртуального списка */
+  aheadItemsCount?: number;
+  /** Обработчик активации (hover) item в меню */
+  onActivateItem: (id?: string) => void;
+  /** Обработчик выбора item в меню */
+  onSelectItem: (id: string) => void;
+  /** Модель данных, с рендер-пропсами*/
   model: Array<ItemProps>;
-  activeId: string | undefined;
-  selectedId: string | undefined;
-  activateItem: (id: string | undefined) => void;
-  selectItem: (id: string) => void;
+  /** Id активного элемента */
+  activeId?: string;
+  /** Id выбранного элемента */
+  selectedId?: string;
 }
 
-export const VirtualBody = React.forwardRef<HTMLDivElement, VirtualBodyProps>(
-  (
-    {
-      scrollContainerRef,
-      itemHeight,
-      renderAhead = 20,
-      model,
-      activeId,
-      selectedId,
-      activateItem,
-      selectItem,
-      ...props
+interface PreviousValues {
+  activeId?: string;
+}
+function usePrevious(value: PreviousValues) {
+  const ref = React.useRef<PreviousValues>();
+  React.useEffect(() => {
+    ref.current = value;
+  });
+  return ref.current;
+}
+
+type Partition = {
+  startIndex: number;
+  endIndex: number;
+  topPadding: string;
+  bottomPadding: string;
+};
+
+export const VirtualBody = ({
+  scrollContainerRef,
+  itemHeight,
+  rowCount = 6,
+  aheadItemsCount = 3,
+  model,
+  activeId,
+  selectedId,
+  onActivateItem,
+  onSelectItem,
+}: VirtualBodyProps) => {
+  const [scrollTop, setScrollTop] = React.useState(0);
+  const [partition, setPartition] = React.useState<Partition>({
+    startIndex: 0,
+    endIndex: rowCount,
+    topPadding: '',
+    bottomPadding: '',
+  });
+  const prevValue = usePrevious({ activeId });
+
+  const handleScroll = (e: Event) => {
+    requestAnimationFrame(() => {
+      if (e.target) setScrollTop((e.target as HTMLDivElement).scrollTop);
+    });
+  };
+
+  React.useEffect(() => {
+    const scrollContainer = scrollContainerRef.current;
+    setScrollTop(scrollContainer?.scrollTop || 0);
+
+    scrollContainer?.addEventListener('scroll', handleScroll);
+    return () => scrollContainer?.removeEventListener('scroll', handleScroll);
+  }, [scrollContainerRef]);
+
+  const calcPartition = React.useCallback(
+    (start: number) => {
+      return () => {
+        const itemCount = model.length;
+
+        const startIndex = Math.max(0, start);
+
+        let visibleNodeCount = rowCount + 2 * aheadItemsCount;
+        visibleNodeCount = Math.min(itemCount - startIndex, visibleNodeCount);
+        const endIndex = startIndex + visibleNodeCount;
+
+        const topPadding = `${startIndex * itemHeight}px`;
+        const bottomPadding = `${(itemCount - startIndex - visibleNodeCount) * itemHeight}px`;
+
+        return { startIndex, endIndex, topPadding, bottomPadding };
+      };
     },
-    ref,
-  ) => {
-    const [scrollTop, setScrollTop] = React.useState(0);
+    [itemHeight, aheadItemsCount, model, rowCount],
+  );
 
-    const handleScroll = (e: any) => {
-      requestAnimationFrame(() => {
-        setScrollTop(e.target.scrollTop);
-      });
-    };
+  React.useEffect(() => {
+    const start = Math.floor(scrollTop / itemHeight - aheadItemsCount);
+    setPartition(calcPartition(start));
+  }, [scrollTop, calcPartition]);
 
-    React.useEffect(() => {
-      const scrollContainer = scrollContainerRef.current;
-      setScrollTop(scrollContainer?.scrollTop || 0);
+  React.useEffect(() => {
+    if (!activeId || !prevValue) return;
+    const prevActiveId = prevValue.activeId;
 
-      scrollContainer?.addEventListener('scroll', handleScroll);
-      return () => scrollContainer?.removeEventListener('scroll', handleScroll);
-    }, []);
+    if (prevActiveId === activeId) return;
 
-    let startIndex = Math.floor(scrollTop / itemHeight) - renderAhead;
-    startIndex = Math.max(0, startIndex);
+    const index = model.findIndex((item) => item.id === activeId);
 
-    // const rowNodes = React.useMemo(
-    //   () => rowList.map((row, index) => renderRow(row, index)).filter(Boolean),
-    //   [rowList, renderRow],
-    // );
-    const itemCount = model.length;
+    if (index === -1) return;
 
-    // let visibleNodeCount = Math.ceil(height / childHeight) + 2 * renderAhead;
-    const visibleNodeCount = Math.min(itemCount - startIndex, 6);
+    if (index < partition.startIndex || index > partition.endIndex) setPartition(calcPartition(index));
+  }, [activeId, partition, calcPartition]);
 
-    const topPadding = `${startIndex * itemHeight}px`;
-    const bottomPadding = `${(itemCount - startIndex - visibleNodeCount) * itemHeight}px`;
+  const visibleChildren = React.useMemo(() => {
+    const visibleItems = [...model].slice(partition.startIndex, partition.endIndex);
 
-    const visibleChildren = React.useMemo(() => {
-      const visibleItems = [...model].slice(startIndex, startIndex + visibleNodeCount);
-
-      return visibleItems.map((item) =>
-        item.render({
-          hovered: activeId === item.id,
-          selected: selectedId === item.id,
-          onHover: () => {
-            activateItem(item.disabled ? undefined : item.id);
-          },
-          onClickItem: () => selectItem(item.id),
-          disabled: item.disabled,
-          containerRef: scrollContainerRef,
-        }),
-      );
-    }, [model, startIndex, activeId, activateItem, selectedId, selectItem, visibleNodeCount, scrollContainerRef]);
-
-    return (
-      <>
-        <Spacer style={{ minHeight: topPadding }} />
-        {visibleChildren}
-        <Spacer style={{ minHeight: bottomPadding }} />
-      </>
+    return visibleItems.map((item) =>
+      item.render({
+        hovered: activeId === item.id,
+        selected: selectedId === item.id,
+        onHover: () => {
+          onActivateItem(item.disabled ? undefined : item.id);
+        },
+        onClickItem: () => onSelectItem(item.id),
+        disabled: item.disabled,
+        containerRef: scrollContainerRef,
+      }),
     );
-  },
-);
+  }, [model, activeId, onActivateItem, selectedId, onSelectItem, scrollContainerRef, partition]);
+
+  return (
+    <>
+      <Spacer style={{ minHeight: partition.topPadding }} />
+      {visibleChildren}
+      <Spacer style={{ minHeight: partition.bottomPadding }} />
+    </>
+  );
+};

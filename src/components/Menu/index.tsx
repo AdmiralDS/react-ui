@@ -99,10 +99,11 @@ export interface MenuProps extends HTMLAttributes<HTMLDivElement> {
   /** ссылка на контейнер, в котором находится Menu*/
   containerRef?: React.RefObject<HTMLElement>;
   /** Включение виртуального скролла для меню.
-   * У таблицы обязательно должна быть задана высота, тогда тело таблицы растянется по высоте и подстроится под высоту таблицы.
+   * Максимальная высота меню рассчитывается исходя из высоты 1 пункта, если параметр 'auto', то в расчет идет
+   * высота согласно dimension
    */
   virtualScroll?: {
-    /** Фиксированная высота строки, для правильного функционирования виртуального скролла
+    /** Фиксированная высота 1 пункта меню, для правильного функционирования виртуального скролла
      * все строки должны быть одной фиксированной высоты
      */
     itemHeight: 'auto' | number;
@@ -253,8 +254,8 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
           model={model}
           activeId={activeId}
           selectedId={selectedId}
-          activateItem={activateItem}
-          selectItem={selectItem}
+          onActivateItem={activateItem}
+          onSelectItem={selectItem}
         />
       );
     };

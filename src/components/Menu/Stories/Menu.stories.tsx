@@ -22,9 +22,10 @@ import { keyboardKey } from '#src/components/common/keyboardKey';
 import { mediumGroupBorderRadius, ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
 import type { CheckboxGroupItemProps, ItemWithCheckbox } from '#src/components/Menu/MenuItemWithCheckbox';
 import { checkboxTreeToMap, MenuItemWithCheckbox } from '#src/components/Menu/MenuItemWithCheckbox';
-import { LargeNumberOfItemsTemplate } from '#src/components/Menu/Stories/Templates';
+import { LargeNumberOfItemsTemplate, VirtualScrollTemplate } from '#src/components/Menu/Stories/Templates';
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 import LargeNumberOfItemsRaw from '!!raw-loader!./Templates/LargeNumberOfItems';
+import VirtualScrollRaw from '!!raw-loader!./Templates/VirtualScroll';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -961,6 +962,25 @@ LargeNumberOfItemsExample.parameters = {
   },
 };
 LargeNumberOfItemsExample.storyName = 'Пример с большим количеством item';
+
+const VirtualScrollStory: ComponentStory<typeof Menu> = (props) => (
+  <VirtualScrollTemplate model={[]} {...cleanUpProps(props)} />
+);
+export const VirtualScrollExample = VirtualScrollStory.bind({});
+VirtualScrollExample.parameters = {
+  docs: {
+    source: {
+      code: VirtualScrollRaw,
+    },
+    description: {
+      story:
+        'Для включения виртуального скролла, необходимо передать в параметр virtualScroll объект, ' +
+        'содержаний размер 1 элемента меню, для расчета максимальной высоты контейнера меню. ' +
+        'Или установить значение "auto". В этом случае максимальная высота будет рассчитана исходя из свойства "dimension"',
+    },
+  },
+};
+VirtualScrollExample.storyName = 'Виртуальный скролл';
 
 MenuWithLockCycleScroll.storyName = 'Пример без цикла обхода пунктов';
 Category.storyName = 'Пример с группами';
