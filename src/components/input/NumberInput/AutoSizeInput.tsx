@@ -32,12 +32,13 @@ const Suffix = styled(Prefix)`
     `}
 `;
 
-const Sizer = styled.div`
+const Sizer = styled.div<{ hasPrefix?: boolean; align?: 'left' | 'right' }>`
   display: flex;
   flex-shrink: 0;
   visibility: hidden;
   white-space: pre;
   box-sizing: border-box;
+  ${({ hasPrefix, align }) => !hasPrefix && align === 'right' && 'margin-left: auto;'}
 `;
 
 export const BorderedDiv = styled.div<{ status?: TextInputProps['status'] }>`
@@ -111,7 +112,6 @@ const Input = styled.input<ExtraProps & { align?: 'left' | 'right' }>`
   box-sizing: border-box;
   display: flex;
   flex: 1 0 auto;
-  min-width: 10px;
   max-width: 100%;
 
   background: transparent;
@@ -228,7 +228,7 @@ export const AutoSizeInput = React.forwardRef<HTMLInputElement, InputProps>(
 
     const updateInputLeftPadding = () => {
       if (inputRef.current) {
-        if (!showPrefixSuffix) {
+        if (!showPrefixSuffix || !prefix) {
           inputRef.current.style.paddingLeft = '0px';
         } else if (prefixRef.current && showPrefixSuffix) {
           inputRef.current.style.paddingLeft = `${prefixRef.current.getBoundingClientRect().width}px`;
@@ -238,7 +238,7 @@ export const AutoSizeInput = React.forwardRef<HTMLInputElement, InputProps>(
 
     const updateInputRightPadding = () => {
       if (inputRef.current && align === 'right') {
-        if (!showPrefixSuffix) {
+        if (!showPrefixSuffix || !suffix) {
           inputRef.current.style.paddingRight = '0px';
         } else if (suffixRef.current && showPrefixSuffix) {
           inputRef.current.style.paddingRight = `${suffixRef.current.getBoundingClientRect().width}px`;
@@ -337,7 +337,7 @@ export const AutoSizeInput = React.forwardRef<HTMLInputElement, InputProps>(
           resizeObserver.disconnect();
         };
       }
-    }, [prefixRef.current, inputRef.current, showPrefixSuffix]);
+    }, [prefixRef.current, inputRef.current, showPrefixSuffix, prefix]);
 
     React.useLayoutEffect(() => {
       if (suffixRef.current) {
@@ -351,7 +351,7 @@ export const AutoSizeInput = React.forwardRef<HTMLInputElement, InputProps>(
           resizeObserver.disconnect();
         };
       }
-    }, [suffixRef.current, inputRef.current, showPrefixSuffix, align]);
+    }, [suffixRef.current, inputRef.current, showPrefixSuffix, suffix, align]);
 
     return (
       <>
@@ -361,7 +361,7 @@ export const AutoSizeInput = React.forwardRef<HTMLInputElement, InputProps>(
               {prefix}&nbsp;
             </Prefix>
           )}
-          <Sizer ref={sizerRef} />
+          <Sizer ref={sizerRef} hasPrefix={!!prefix} align={align} />
           {suffix && showPrefixSuffix && (
             <Suffix ref={suffixRef} disabled={props.disabled} align={align}>
               &nbsp;{suffix}
