@@ -18,8 +18,7 @@ const Prefix = styled.div<{ disabled?: boolean; align?: 'left' | 'right' }>`
   ${({ align }) =>
     align === 'right' &&
     css`
-      flex: 1 0 auto;
-      justify-content: flex-end;
+      margin-left: auto;
     `}
 `;
 
@@ -29,7 +28,7 @@ const Suffix = styled(Prefix)`
     align === 'right' &&
     css`
       flex: 0 1 auto;
-      justify-content: flex-start;
+      margin-left: 0;
     `}
 `;
 
