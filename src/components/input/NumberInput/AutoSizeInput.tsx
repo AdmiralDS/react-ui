@@ -9,16 +9,28 @@ import { refSetter } from '#src/components/common/utils/refSetter';
 
 import { fitToCurrency } from './utils';
 
-const Prefix = styled.div<{ disabled?: boolean }>`
+const Prefix = styled.div<{ disabled?: boolean; align?: 'left' | 'right' }>`
   display: flex;
   flex-shrink: 0;
   align-items: center;
   user-select: none;
   color: ${({ theme, disabled }) => (disabled ? theme.color['Neutral/Neutral 30'] : theme.color['Neutral/Neutral 50'])};
+  ${({ align }) =>
+    align === 'right' &&
+    css`
+      flex: 1 0 auto;
+      justify-content: flex-end;
+    `}
 `;
 
 const Suffix = styled(Prefix)`
   min-width: 0;
+  ${({ align }) =>
+    align === 'right' &&
+    css`
+      flex: 0 1 auto;
+      justify-content: flex-start;
+    `}
 `;
 
 const Sizer = styled.div`
@@ -91,7 +103,7 @@ const ieFixes = css`
   }
 `;
 
-const Input = styled.input<ExtraProps>`
+const Input = styled.input<ExtraProps & { align?: 'left' | 'right' }>`
   outline: none;
   appearance: none;
   border: none;
@@ -105,6 +117,7 @@ const Input = styled.input<ExtraProps>`
 
   background: transparent;
   color: ${(props) => props.theme.color['Neutral/Neutral 90']};
+  text-align: ${({ align }) => (align === 'left' ? 'left' : 'right')};
 
   ${(props) => (props.dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
   &::placeholder {
@@ -174,6 +187,8 @@ export interface InputProps extends TextInputProps {
   minValue?: number;
   /** Количество иконок */
   iconCount?: number;
+  /** Выравнивание контента. По умолчанию выравнивание происходит по левому краю */
+  align?: 'left' | 'right';
 }
 
 export const AutoSizeInput = React.forwardRef<HTMLInputElement, InputProps>(
@@ -189,6 +204,7 @@ export const AutoSizeInput = React.forwardRef<HTMLInputElement, InputProps>(
       status,
       minValue,
       iconCount,
+      align,
       ...props
     },
     ref,
@@ -198,6 +214,7 @@ export const AutoSizeInput = React.forwardRef<HTMLInputElement, InputProps>(
     const sizerRef = React.useRef<HTMLDivElement>(null);
     const inputRef = React.useRef<HTMLInputElement>(null);
     const prefixRef = React.useRef<HTMLDivElement>(null);
+    const suffixRef = React.useRef<HTMLDivElement>(null);
 
     const updateHiddenContent = (newValue: any) => {
       if (sizerRef.current) {
@@ -210,12 +227,22 @@ export const AutoSizeInput = React.forwardRef<HTMLInputElement, InputProps>(
       }
     };
 
-    const updateInputPadding = () => {
+    const updateInputLeftPadding = () => {
       if (inputRef.current) {
         if (!showPrefixSuffix) {
           inputRef.current.style.paddingLeft = '0px';
         } else if (prefixRef.current && showPrefixSuffix) {
           inputRef.current.style.paddingLeft = `${prefixRef.current.getBoundingClientRect().width}px`;
+        }
+      }
+    };
+
+    const updateInputRightPadding = () => {
+      if (inputRef.current && align === 'right') {
+        if (!showPrefixSuffix) {
+          inputRef.current.style.paddingRight = '0px';
+        } else if (suffixRef.current && showPrefixSuffix) {
+          inputRef.current.style.paddingRight = `${suffixRef.current.getBoundingClientRect().width}px`;
         }
       }
     };
@@ -287,18 +314,23 @@ export const AutoSizeInput = React.forwardRef<HTMLInputElement, InputProps>(
       if (inputRef.current) {
         updateHiddenContent(inputRef.current.value);
       }
-    }, [props.value, props.defaultValue, props.dimension, placeholder, inputRef.current, sizerRef.current]);
+    }, [props.value, props.defaultValue, placeholder, inputRef.current, sizerRef.current]);
 
     React.useLayoutEffect(
-      () => updateInputPadding(),
+      () => updateInputLeftPadding(),
       [prefix, props.dimension, prefixRef.current, inputRef.current, showPrefixSuffix],
+    );
+
+    React.useLayoutEffect(
+      () => updateInputRightPadding(),
+      [suffix, props.dimension, suffixRef.current, inputRef.current, showPrefixSuffix, align],
     );
 
     React.useLayoutEffect(() => {
       if (prefixRef.current) {
         const resizeObserver = new ResizeObserver((entries) => {
           entries.forEach(() => {
-            updateInputPadding();
+            updateInputLeftPadding();
           });
         });
         resizeObserver.observe(prefixRef.current);
@@ -308,18 +340,43 @@ export const AutoSizeInput = React.forwardRef<HTMLInputElement, InputProps>(
       }
     }, [prefixRef.current, inputRef.current, showPrefixSuffix]);
 
+    React.useLayoutEffect(() => {
+      if (suffixRef.current) {
+        const resizeObserver = new ResizeObserver((entries) => {
+          entries.forEach(() => {
+            updateInputRightPadding();
+          });
+        });
+        resizeObserver.observe(suffixRef.current);
+        return () => {
+          resizeObserver.disconnect();
+        };
+      }
+    }, [suffixRef.current, inputRef.current, showPrefixSuffix, align]);
+
     return (
       <>
         <HiddenContent iconCount={iconCount} dimension={props.dimension}>
           {prefix && showPrefixSuffix && (
-            <Prefix ref={prefixRef} disabled={props.disabled}>
+            <Prefix ref={prefixRef} disabled={props.disabled} align={align}>
               {prefix}&nbsp;
             </Prefix>
           )}
           <Sizer ref={sizerRef} />
-          {suffix && showPrefixSuffix && <Suffix disabled={props.disabled}>&nbsp;{suffix}</Suffix>}
+          {suffix && showPrefixSuffix && (
+            <Suffix ref={suffixRef} disabled={props.disabled} align={align}>
+              &nbsp;{suffix}
+            </Suffix>
+          )}
         </HiddenContent>
-        <Input {...props} ref={refSetter(ref, inputRef)} placeholder={placeholder} type="text" data-status={status} />
+        <Input
+          {...props}
+          ref={refSetter(ref, inputRef)}
+          placeholder={placeholder}
+          type="text"
+          data-status={status}
+          align={align}
+        />
         <BorderedDiv status={status} />
       </>
     );

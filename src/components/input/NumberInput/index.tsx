@@ -69,10 +69,6 @@ const Content = styled.div`
   padding: 0 ${horizontalPaddingValue}px;
   ${extraPadding};
   border-radius: inherit;
-
-  &[data-align='right'] {
-    justify-content: flex-end;
-  }
 `;
 
 const Wrapper = styled(HeightLimitedContainer)<{
@@ -330,7 +326,7 @@ export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
         skeleton={skeleton}
         status={status}
       >
-        <Content data-align={align} dimension={props.dimension} iconCount={iconCount} onKeyDown={handleKeyDown}>
+        <Content dimension={props.dimension} iconCount={iconCount} onKeyDown={handleKeyDown}>
           <AutoSizeInput
             ref={refSetter(ref, inputRef)}
             onChange={handleChange}
@@ -344,6 +340,7 @@ export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
             status={status}
             minValue={minValue}
             iconCount={iconCount}
+            align={align}
             {...props}
           />
         </Content>
