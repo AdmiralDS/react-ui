@@ -4,22 +4,33 @@ import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-comp
 import styled, { css } from 'styled-components';
 import type { ItemProps } from '#src/components/Menu/MenuItem';
 import { keyboardKey } from '#src/components/common/keyboardKey';
+import { VirtualBody } from '#src/components/Menu/VirtualBody';
 
 export type MenuDimensions = 'l' | 'm' | 's';
+
+const ITEMS_COUNT = 6;
+
+const getItemHeight = (dimension?: MenuDimensions) => {
+  switch (dimension) {
+    case 'l':
+      return 48;
+    case 'm':
+      return 40;
+    case 's':
+      return 32;
+    default:
+      return 48;
+  }
+};
+
+const getHeight = (dimension?: MenuDimensions) => {
+  return getItemHeight(dimension) * ITEMS_COUNT + 16;
+};
 
 const menuListHeights = css<{ dimension?: MenuDimensions; maxHeight?: string | number }>`
   max-height: ${({ dimension, maxHeight }) => {
     if (maxHeight) return maxHeight;
-    switch (dimension) {
-      case 'l':
-        return `${48 * 6 + 16}px`;
-      case 'm':
-        return `${40 * 6 + 16}px`;
-      case 's':
-        return `${32 * 6 + 16}px`;
-      default:
-        return `${48 * 6 + 16}px`;
-    }
+    return `${getHeight(dimension)}px`;
   }};
 `;
 
@@ -87,6 +98,16 @@ export interface MenuProps extends HTMLAttributes<HTMLDivElement> {
   onBackwardCycleApprove?: () => boolean;
   /** ссылка на контейнер, в котором находится Menu*/
   containerRef?: React.RefObject<HTMLElement>;
+  /** Включение виртуального скролла для меню.
+   * Максимальная высота меню рассчитывается исходя из высоты 1 пункта, если параметр 'auto', то в расчет идет
+   * высота согласно dimension
+   */
+  virtualScroll?: {
+    /** Фиксированная высота 1 пункта меню, для правильного функционирования виртуального скролла
+     * все строки должны быть одной фиксированной высоты
+     */
+    itemHeight: 'auto' | number;
+  };
 }
 
 export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
@@ -106,6 +127,7 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
       onForwardCycleApprove,
       onBackwardCycleApprove,
       containerRef,
+      virtualScroll,
       ...props
     },
     ref,
@@ -220,6 +242,24 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
       );
     };
 
+    const renderVirtualChildren = () => {
+      if (!virtualScroll) return null;
+
+      const itemHeight = virtualScroll.itemHeight === 'auto' ? getItemHeight(dimension) : virtualScroll.itemHeight;
+
+      return (
+        <VirtualBody
+          scrollContainerRef={menuRef}
+          itemHeight={itemHeight}
+          model={model}
+          activeId={activeId}
+          selectedId={selectedId}
+          onActivateItem={activateItem}
+          onSelectItem={selectItem}
+        />
+      );
+    };
+
     React.useLayoutEffect(() => {
       setTimeout(() => {
         const hoveredItem = menuRef.current?.querySelector('[data-hovered="true"]');
@@ -241,7 +281,7 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
       <Wrapper ref={ref} dimension={dimension} hasTopPanel={hasTopPanel} hasBottomPanel={hasBottomPanel} {...props}>
         {hasTopPanel && renderTopPanel({ dimension })}
         <StyledDiv ref={menuRef} hasTopPanel={hasTopPanel} hasBottomPanel={hasBottomPanel}>
-          {renderChildren()}
+          {virtualScroll ? renderVirtualChildren() : renderChildren()}
         </StyledDiv>
         {hasBottomPanel && renderBottomPanel({ dimension })}
       </Wrapper>

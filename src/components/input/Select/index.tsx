@@ -158,6 +158,17 @@ export interface SelectProps extends Omit<React.InputHTMLAttributes<HTMLSelectEl
 
   /** Позволяет фильтровать отображаемые опции */
   onFilterItem?: (value: string, searchValue: string, searchFormat: SearchFormat) => boolean;
+
+  /** Включение виртуального скролла для меню.
+   * Максимальная высота меню рассчитывается исходя из высоты 1 пункта, если параметр 'auto', то в расчет идет
+   * высота согласно dimension
+   */
+  virtualScroll?: {
+    /** Фиксированная высота 1 пункта меню, для правильного функционирования виртуального скролла
+     * все строки должны быть одной фиксированной высоты
+     */
+    itemHeight: 'auto' | number;
+  };
 }
 
 export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
@@ -205,6 +216,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       onInputKeyDownCapture,
       searchFormat = 'wholly',
       onFilterItem = defaultFilterItem,
+      virtualScroll,
       ...props
     },
     ref,
@@ -639,6 +651,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
               renderTopPanel={renderDropDownTopPanel}
               renderBottomPanel={renderDropDownBottomPanel}
               containerRef={dropDownRef}
+              virtualScroll={virtualScroll}
             />
           </DropdownContainer>
         )}
