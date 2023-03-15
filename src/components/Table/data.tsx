@@ -7,7 +7,7 @@ import { MenuItem } from '#src/components/Menu/MenuItem';
 import { ReactComponent as DeleteOutline } from '@admiral-ds/icons/build/system/DeleteOutline.svg';
 import { RowAction } from '#src/components/Table';
 
-import type { Column } from '../Table';
+import type { Column, TableRow } from '../Table';
 import { TooltipHoc } from '#src/components/TooltipHOC';
 import { Badge } from '../Badge';
 
@@ -24,25 +24,13 @@ const AmountCell = styled.div`
 
 const numberFormatter = new Intl.NumberFormat();
 
-export type RowData = {
-  id: string;
-  selected?: boolean;
-  disabled?: boolean;
-  error?: boolean;
-  success?: boolean;
-  expanded?: boolean;
-  hover?: boolean;
-  expandedRowRender?: (row: RowData) => React.ReactNode;
-  overflowMenuRender?: (row: RowData, onVisibilityChange?: (isVisible: boolean) => void) => React.ReactNode;
-  actionRender?: (row: any) => React.ReactNode;
+type RowData = TableRow & {
   transfer_type: string;
   transfer_date: string;
   transfer_amount: React.ReactNode;
   currency: string;
   rate: number;
   customer?: string;
-  groupTitle?: string;
-  groupRows?: Array<string>;
 };
 
 export const rowList: RowData[] = [
@@ -963,5 +951,148 @@ export const columnListWithCustomTitle: Column[] = [
   {
     name: 'rate',
     title: 'Ставка',
+  },
+];
+
+export const columnListWithCustomRender: Column[] = [
+  {
+    name: 'transfer_type',
+    title: (
+      <>
+        Тип сделки <Badge>5</Badge>
+      </>
+    ),
+    width: '20%',
+    render(data, rowData, idx): React.ReactNode {
+      return (
+        <div style={{ border: '1px solid #aaa', padding: '3px' }}>
+          {data} <Badge>{idx}</Badge>
+        </div>
+      );
+    },
+  },
+  {
+    name: 'transfer_date',
+    title: <b>Дата сделки</b>,
+    width: '250px',
+    render(date: string): React.ReactNode {
+      return <div>Дата - {date}</div>;
+    },
+  },
+  {
+    name: 'rate',
+    title: 'Ставка',
+    render(data: string): React.ReactNode {
+      return <i>{data}$</i>;
+    },
+  },
+];
+
+export const rowListWithCustomRenderGroup: RowData[] = [
+  {
+    id: '0002',
+    transfer_type: 'МНО',
+    transfer_date: new Date('2020-08-06').toLocaleDateString(),
+    transfer_amount: (
+      <AmountCell>
+        <T font="Body/Body 2 Short">{numberFormatter.format(32_500_000_000)}</T>
+      </AmountCell>
+    ),
+    currency: 'RUB',
+    rate: 2.5,
+  },
+  {
+    id: '0003',
+    transfer_type: 'МНО',
+    transfer_date: new Date('2020-08-06').toLocaleDateString(),
+    transfer_amount: (
+      <AmountCell>
+        <T font="Body/Body 2 Short">{numberFormatter.format(18_000_000)}</T>
+      </AmountCell>
+    ),
+    currency: 'RUB',
+    rate: 2.5,
+  },
+  {
+    id: '0004',
+    transfer_type: 'МНО',
+    transfer_date: new Date('2020-08-06').toLocaleDateString(),
+    transfer_amount: (
+      <AmountCell>
+        <T font="Body/Body 2 Short">{numberFormatter.format(32_500_000_000)}</T>
+      </AmountCell>
+    ),
+    currency: 'RUB',
+    rate: 2.5,
+  },
+  {
+    id: '0001',
+    transfer_type: 'Group name',
+    expanded: false,
+    transfer_date: new Date('2020-08-06').toLocaleDateString(),
+    transfer_amount: (
+      <AmountCell>
+        <T font="Body/Body 2 Short">{numberFormatter.format(18_000_000)}</T>
+      </AmountCell>
+    ),
+    currency: 'RUB',
+    rate: 2.5,
+    groupTitle: 'Группа',
+    renderGroup(row: TableRow): React.ReactNode {
+      return (
+        <div style={{ fontSize: '36px' }}>
+          {row.transfer_type} - {row.transfer_date}
+        </div>
+      );
+    },
+    groupRows: ['0007', '0008'],
+  },
+  {
+    id: '0005',
+    transfer_type: 'МНО',
+    transfer_date: new Date('2020-08-06').toLocaleDateString(),
+    transfer_amount: (
+      <AmountCell>
+        <T font="Body/Body 2 Short">{numberFormatter.format(18_000_000)}</T>
+      </AmountCell>
+    ),
+    currency: 'RUB',
+    rate: 2.5,
+  },
+  {
+    id: '0006',
+    transfer_type: 'МНО',
+    transfer_date: new Date('2020-08-06').toLocaleDateString(),
+    transfer_amount: (
+      <AmountCell>
+        <T font="Body/Body 2 Short">{numberFormatter.format(32_500_000_000)}</T>
+      </AmountCell>
+    ),
+    currency: 'RUB',
+    rate: 2.5,
+  },
+  {
+    id: '0007',
+    transfer_type: 'GR1',
+    transfer_date: new Date('2020-07-18').toLocaleDateString(),
+    transfer_amount: (
+      <AmountCell>
+        <T font="Body/Body 2 Short">{numberFormatter.format(200)}</T>
+      </AmountCell>
+    ),
+    currency: 'RUB',
+    rate: 2.5,
+  },
+  {
+    id: '0008',
+    transfer_type: 'GR1',
+    transfer_date: new Date('2020-08-25').toLocaleDateString(),
+    transfer_amount: (
+      <AmountCell>
+        <T font="Body/Body 2 Short">{numberFormatter.format(100)}</T>
+      </AmountCell>
+    ),
+    currency: 'RUB',
+    rate: 2.5,
   },
 ];

@@ -5,10 +5,9 @@ import styled from 'styled-components';
 
 import type { Column } from '#src/components/Table';
 import { Table } from '#src/components/Table';
-import { FieldSet } from '#src/components/form';
+import { FieldSet, DateField } from '#src/components/form';
 import { RadioButton } from '#src/components/RadioButton';
 import { Button } from '#src/components/Button';
-import { DateField } from '#src/components/form';
 import {
   columnList,
   columnListExtra,
@@ -27,6 +26,8 @@ import {
   rowListWithGroup,
   virtualColumnList,
   virtualRowList,
+  columnListWithCustomRender,
+  rowListWithCustomRenderGroup,
 } from '#src/components/Table/data';
 import { ReactComponent as AcceptSolid } from '@admiral-ds/icons/build/category/AcceptSolid.svg';
 import { DefaultFontColorName } from '#src/components/themes';
@@ -920,3 +921,18 @@ CustomTitle.args = {
   columnList: columnListWithCustomTitle,
 };
 CustomTitle.storyName = 'Table. Пример кастомизации заголовков столбцов.';
+
+export const CustomRenderCell = Template.bind({});
+CustomRenderCell.args = {
+  rowList,
+  columnList: columnListWithCustomRender,
+};
+CustomRenderCell.storyName = 'Table. Пример кастомизации компонента ячейки.';
+
+export const CustomRenderGroup = Template8.bind({});
+CustomRenderGroup.args = {
+  rowList: rowListWithCustomRenderGroup,
+  columnList,
+  displayRowExpansionColumn: true,
+};
+CustomRenderGroup.storyName = 'Table. Пример кастомизации группы';

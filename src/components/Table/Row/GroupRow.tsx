@@ -46,6 +46,16 @@ export const GroupRow = ({
     onRowSelectionChange?.(row.id);
   };
 
+  const renderGroup = () => {
+    if (row.renderGroup) {
+      return row.renderGroup(row);
+    }
+    if (renderCell) {
+      return renderCell(row, 'group');
+    }
+    return <GroupTextContent>{row.groupTitle || ''}</GroupTextContent>;
+  };
+
   return (
     <>
       <StickyGroupRow>
@@ -72,7 +82,7 @@ export const GroupRow = ({
           </CheckboxCell>
         )}
         <Cell key={`${row.id}`} dimension={dimension} className="td" data-column="group" data-row={row.id}>
-          {renderCell ? renderCell(row, 'group') : <GroupTextContent>{row.groupTitle || ''}</GroupTextContent>}
+          {renderGroup()}
         </Cell>
       </StickyGroupRow>
       <Filler />
