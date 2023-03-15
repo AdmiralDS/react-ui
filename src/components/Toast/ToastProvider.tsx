@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { uid } from '#src/components/common/uid';
 import type { NotificationProps } from '#src/components/Notification';
-import type { IdentifyToast, ID } from '#src/components/Toast/type';
-import { DefaultToastItem, ToastItemWithAutoDelete } from '#src/components/Toast/ToastItem';
+import type { IdentifyToast, ID } from './type';
+import { DefaultToastItem, ToastItemWithAutoDelete } from './ToastItem';
 
 export type PositionToasts = 'top-right' | 'bottom-right' | 'bottom-left';
 

@@ -12,6 +12,10 @@ export const createOptions = (length: number) => {
   );
 };
 
+export const createClearOptions = (length: number) => {
+  return Array.from({ length }).map((option, index) => ({ text: `${index}0000`, value: String(index) }));
+};
+
 export const formDataToObject = (data: FormData) => {
   const obj = {} as Record<string, any>;
   data.forEach((value, key) => (obj[key] = value));

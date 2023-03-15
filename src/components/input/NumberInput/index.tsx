@@ -13,7 +13,7 @@ import { keyboardKey } from '#src/components/common/keyboardKey';
 
 import { HeightLimitedContainer } from '../Container';
 
-import { AutoSizeInput, BorderedDiv } from './AutoSizeInput';
+import { AutoSizeInput, BorderedDiv, horizontalPaddingValue, iconSizeValue } from './AutoSizeInput';
 import { clearValue, fitToCurrency, validateThousand } from './utils';
 
 export { fitToCurrency, clearValue } from './utils';
@@ -22,16 +22,6 @@ const extraPadding = css<ExtraProps>`
   padding-right: ${(props) => horizontalPaddingValue(props) + (iconSizeValue(props) + 8) * (props.iconCount ?? 0)}px;
 `;
 const preventDefault = (e: React.MouseEvent) => e.preventDefault();
-const horizontalPaddingValue = (props: { dimension?: ComponentDimension }) => {
-  switch (props.dimension) {
-    case 'xl':
-      return 16;
-    case 's':
-      return 12;
-    default:
-      return 16;
-  }
-};
 
 const PlusMinusIcon = styled(InputIconButton)<{ disabled?: boolean }>`
   -webkit-touch-callout: none;
@@ -50,17 +40,6 @@ const PlusMinusIcon = styled(InputIconButton)<{ disabled?: boolean }>`
         `
       : ''}
 `;
-
-const iconSizeValue = (props: { dimension?: ComponentDimension }) => {
-  switch (props.dimension) {
-    case 'xl':
-      return 24;
-    case 's':
-      return 20;
-    default:
-      return 24;
-  }
-};
 
 const IconPanel = styled.div<{ disabled?: boolean; dimension?: ComponentDimension }>`
   position: absolute;
@@ -90,10 +69,6 @@ const Content = styled.div`
   padding: 0 ${horizontalPaddingValue}px;
   ${extraPadding};
   border-radius: inherit;
-
-  &[data-align='right'] {
-    justify-content: flex-end;
-  }
 `;
 
 const Wrapper = styled(HeightLimitedContainer)<{
@@ -321,15 +296,6 @@ export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       onChange?.(event);
     };
 
-    const handleContentMouseDown = (e: any) => {
-      // Запретит перенос фокуса с инпута при клике по всему, что внутри Content
-      e.preventDefault();
-      if (e.target !== inputRef.current) {
-        inputRef.current?.focus();
-        inputRef.current?.setSelectionRange(inputRef.current?.value.length || 0, inputRef.current?.value.length || 0);
-      }
-    };
-
     const handleKeyDown = (e: React.KeyboardEvent) => {
       const code = keyboardKey.getCode(e);
       switch (code) {
@@ -360,13 +326,7 @@ export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
         skeleton={skeleton}
         status={status}
       >
-        <Content
-          data-align={align}
-          dimension={props.dimension}
-          iconCount={iconCount}
-          onMouseDown={handleContentMouseDown}
-          onKeyDown={handleKeyDown}
-        >
+        <Content dimension={props.dimension} iconCount={iconCount} onKeyDown={handleKeyDown}>
           <AutoSizeInput
             ref={refSetter(ref, inputRef)}
             onChange={handleChange}
@@ -379,6 +339,8 @@ export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
             precision={precision}
             status={status}
             minValue={minValue}
+            iconCount={iconCount}
+            align={align}
             {...props}
           />
         </Content>

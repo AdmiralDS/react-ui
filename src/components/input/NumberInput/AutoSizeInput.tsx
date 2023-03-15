@@ -1,7 +1,7 @@
 import * as React from 'react';
 import type { InputData } from '#src/components/common/dom/changeInputData';
 import { changeInputData, isInputDataDifferent } from '#src/components/common/dom/changeInputData';
-import type { ExtraProps } from '#src/components/input/types';
+import type { ComponentDimension, ExtraProps } from '#src/components/input/types';
 import type { TextInputProps } from '#src/components/input/TextInput';
 import { typography } from '#src/components/Typography';
 import styled, { css } from 'styled-components';
@@ -9,32 +9,32 @@ import { refSetter } from '#src/components/common/utils/refSetter';
 
 import { fitToCurrency } from './utils';
 
-const Prefix = styled.div`
+const Prefix = styled.div<{ disabled?: boolean; align?: 'left' | 'right' }>`
   display: flex;
+  flex-shrink: 0;
   align-items: center;
   user-select: none;
+  color: ${({ theme, disabled }) => (disabled ? theme.color['Neutral/Neutral 30'] : theme.color['Neutral/Neutral 50'])};
+  ${({ align }) => align === 'right' && 'margin-left: auto;'}
 `;
 
 const Suffix = styled(Prefix)`
   min-width: 0;
+  ${({ align }) =>
+    align === 'right' &&
+    css`
+      flex: 0 1 auto;
+      margin-left: 0;
+    `}
 `;
 
-const Wrapper = styled.div`
+const Sizer = styled.div<{ hasPrefix?: boolean; align?: 'left' | 'right' }>`
   display: flex;
-  overflow: hidden;
-  max-height: 100%;
-  border-radius: inherit;
-`;
-
-const Sizer = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 0;
+  flex-shrink: 0;
   visibility: hidden;
   white-space: pre;
-  pointer-events: none;
   box-sizing: border-box;
+  ${({ hasPrefix, align }) => !hasPrefix && align === 'right' && 'margin-left: auto;'}
 `;
 
 export const BorderedDiv = styled.div<{ status?: TextInputProps['status'] }>`
@@ -63,8 +63,6 @@ export const BorderedDiv = styled.div<{ status?: TextInputProps['status'] }>`
 `;
 
 const colorsBorderAndBackground = css<{ disabled?: boolean }>`
-  background-color: ${(props) => props.theme.color['Neutral/Neutral 00']};
-
   &:focus + ${BorderedDiv} {
     border: 2px solid ${(props) => props.theme.color['Primary/Primary 60 Main']};
   }
@@ -85,11 +83,6 @@ const colorsBorderAndBackground = css<{ disabled?: boolean }>`
     border: 2px solid ${(props) => props.theme.color['Success/Success 50 Main']};
   }
 
-  [data-read-only] &&&,
-  &&&:disabled {
-    background-color: ${(props) => props.theme.color['Neutral/Neutral 10']};
-  }
-
   &:disabled {
     color: ${(props) => props.theme.color['Neutral/Neutral 30']};
   }
@@ -106,18 +99,20 @@ const ieFixes = css`
   }
 `;
 
-const Input = styled.input<ExtraProps>`
+const Input = styled.input<ExtraProps & { align?: 'left' | 'right' }>`
   outline: none;
   appearance: none;
   border: none;
   padding: 0;
+  position: relative;
   box-sizing: border-box;
   display: flex;
-  flex-shrink: 0;
-  min-width: 10px;
+  flex: 1 0 auto;
   max-width: 100%;
 
+  background: transparent;
   color: ${(props) => props.theme.color['Neutral/Neutral 90']};
+  text-align: ${({ align }) => (align === 'left' ? 'left' : 'right')};
 
   ${(props) => (props.dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
   &::placeholder {
@@ -137,6 +132,41 @@ const Input = styled.input<ExtraProps>`
   ${ieFixes}
 `;
 
+export const horizontalPaddingValue = (props: { dimension?: ComponentDimension }) => {
+  switch (props.dimension) {
+    case 'xl':
+      return 16;
+    case 's':
+      return 12;
+    default:
+      return 16;
+  }
+};
+
+export const iconSizeValue = (props: { dimension?: ComponentDimension }) => {
+  switch (props.dimension) {
+    case 'xl':
+      return 24;
+    case 's':
+      return 20;
+    default:
+      return 24;
+  }
+};
+
+const HiddenContent = styled.div<{ dimension?: ComponentDimension; iconCount?: number }>`
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  overflow: hidden;
+  pointer-events: none;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  left: ${horizontalPaddingValue}px;
+  right: ${(props) => horizontalPaddingValue(props) + (iconSizeValue(props) + 8) * (props.iconCount ?? 0)}px;
+`;
+
 export interface InputProps extends TextInputProps {
   /** точность (количество знаков после точки). Если precision равно 0, то точку ввести нельзя, только целые числа */
   precision?: number;
@@ -150,6 +180,10 @@ export interface InputProps extends TextInputProps {
   decimal?: string;
   /** Минимальное значение */
   minValue?: number;
+  /** Количество иконок */
+  iconCount?: number;
+  /** Выравнивание контента. По умолчанию выравнивание происходит по левому краю */
+  align?: 'left' | 'right';
 }
 
 export const AutoSizeInput = React.forwardRef<HTMLInputElement, InputProps>(
@@ -164,6 +198,8 @@ export const AutoSizeInput = React.forwardRef<HTMLInputElement, InputProps>(
       decimal = '.',
       status,
       minValue,
+      iconCount,
+      align,
       ...props
     },
     ref,
@@ -172,17 +208,37 @@ export const AutoSizeInput = React.forwardRef<HTMLInputElement, InputProps>(
 
     const sizerRef = React.useRef<HTMLDivElement>(null);
     const inputRef = React.useRef<HTMLInputElement>(null);
+    const prefixRef = React.useRef<HTMLDivElement>(null);
+    const suffixRef = React.useRef<HTMLDivElement>(null);
 
-    const updateInputWidth = (newValue: any) => {
-      if (sizerRef.current && inputRef.current) {
+    const updateHiddenContent = (newValue: any) => {
+      if (sizerRef.current) {
         sizerRef.current.innerHTML = newValue || placeholder || '';
-        // 2px с расчетом на курсор
-        inputRef.current.style.width = `${sizerRef.current.getBoundingClientRect().width + 2}px`;
       }
       if (newValue) {
         setPrefixSuffix?.(true);
       } else {
         setPrefixSuffix?.(false);
+      }
+    };
+
+    const updateInputLeftPadding = () => {
+      if (inputRef.current) {
+        if (!showPrefixSuffix || !prefix) {
+          inputRef.current.style.paddingLeft = '0px';
+        } else if (prefixRef.current && showPrefixSuffix) {
+          inputRef.current.style.paddingLeft = `${prefixRef.current.getBoundingClientRect().width}px`;
+        }
+      }
+    };
+
+    const updateInputRightPadding = () => {
+      if (inputRef.current) {
+        if (!showPrefixSuffix || !suffix || align === 'left') {
+          inputRef.current.style.paddingRight = '0px';
+        } else if (suffixRef.current && showPrefixSuffix && align === 'right') {
+          inputRef.current.style.paddingRight = `${suffixRef.current.getBoundingClientRect().width}px`;
+        }
       }
     };
 
@@ -192,7 +248,7 @@ export const AutoSizeInput = React.forwardRef<HTMLInputElement, InputProps>(
       const init_value = value || '';
       const newValue = fitToCurrency(init_value, precision, decimal, thousand, undefined, minValue);
 
-      updateInputWidth(newValue);
+      updateHiddenContent(newValue);
 
       if (thousand && init_value.charAt(cursor - 1) === thousand && newValue.length === init_value.length) {
         // если пытаемся стереть разделитель thousand, то курсор перескакивает через него
@@ -251,50 +307,73 @@ export const AutoSizeInput = React.forwardRef<HTMLInputElement, InputProps>(
 
     React.useLayoutEffect(() => {
       if (inputRef.current) {
-        updateInputWidth(inputRef.current.value);
+        updateHiddenContent(inputRef.current.value);
       }
-    }, [props.value, props.defaultValue, props.dimension, placeholder]);
+    }, [props.value, props.defaultValue, placeholder, inputRef.current, sizerRef.current]);
 
-    // recalculation on resize. For example, it happens after fonts loading
+    React.useLayoutEffect(
+      () => updateInputLeftPadding(),
+      [prefix, props.dimension, prefixRef.current, inputRef.current, showPrefixSuffix],
+    );
+
+    React.useLayoutEffect(
+      () => updateInputRightPadding(),
+      [suffix, props.dimension, suffixRef.current, inputRef.current, showPrefixSuffix, align],
+    );
+
     React.useLayoutEffect(() => {
-      if (sizerRef.current) {
+      if (prefixRef.current) {
         const resizeObserver = new ResizeObserver((entries) => {
           entries.forEach(() => {
-            if (inputRef.current) {
-              updateInputWidth(inputRef.current.value);
-            }
+            updateInputLeftPadding();
           });
         });
-        resizeObserver.observe(sizerRef.current);
+        resizeObserver.observe(prefixRef.current);
         return () => {
           resizeObserver.disconnect();
         };
       }
-    }, [sizerRef.current, placeholder]);
+    }, [prefixRef.current, inputRef.current, showPrefixSuffix, prefix]);
 
-    const handleMouseDown = (e: React.MouseEvent<HTMLInputElement>) => {
-      // отменяю всплытие события, чтобы не сработал onMouseDown на Content и фокус не был снова установлен
-      e.stopPropagation();
-      props.onMouseDown?.(e);
-    };
+    React.useLayoutEffect(() => {
+      if (suffixRef.current) {
+        const resizeObserver = new ResizeObserver((entries) => {
+          entries.forEach(() => {
+            updateInputRightPadding();
+          });
+        });
+        resizeObserver.observe(suffixRef.current);
+        return () => {
+          resizeObserver.disconnect();
+        };
+      }
+    }, [suffixRef.current, inputRef.current, showPrefixSuffix, suffix, align]);
 
     return (
-      <Wrapper>
-        {prefix && showPrefixSuffix && <Prefix>{prefix}&nbsp;</Prefix>}
-        <Wrapper>
-          <Sizer ref={sizerRef} />
-          <Input
-            {...props}
-            ref={refSetter(ref, inputRef)}
-            placeholder={placeholder}
-            type="text"
-            onMouseDown={handleMouseDown}
-            data-status={status}
-          />
-          <BorderedDiv status={status} />
-          {suffix && showPrefixSuffix && <Suffix>&nbsp;{suffix}</Suffix>}
-        </Wrapper>
-      </Wrapper>
+      <>
+        <HiddenContent iconCount={iconCount} dimension={props.dimension}>
+          {prefix && showPrefixSuffix && (
+            <Prefix ref={prefixRef} disabled={props.disabled} align={align}>
+              {prefix}&nbsp;
+            </Prefix>
+          )}
+          <Sizer ref={sizerRef} hasPrefix={!!prefix} align={align} />
+          {suffix && showPrefixSuffix && (
+            <Suffix ref={suffixRef} disabled={props.disabled} align={align}>
+              &nbsp;{suffix}
+            </Suffix>
+          )}
+        </HiddenContent>
+        <Input
+          {...props}
+          ref={refSetter(ref, inputRef)}
+          placeholder={placeholder}
+          type="text"
+          data-status={status}
+          align={align}
+        />
+        <BorderedDiv status={status} />
+      </>
     );
   },
 );
