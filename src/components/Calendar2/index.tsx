@@ -63,20 +63,30 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarPropType>(
       return current;
     };
     const getInitialViewDateRight = () => {
+      if (currentActiveViewImportant && range && yearsView && yearsViewRight) {
+        const newDate = addYears(getInitialViewDate(), DEFAULT_YEAR_COUNT);
+        console.log(newDate);
+        return addYears(getInitialViewDate(), DEFAULT_YEAR_COUNT);
+      }
+      if (currentActiveViewImportant && range && monthsView && monthsViewRight) {
+        const newDate = addYears(getInitialViewDate(), 1);
+        console.log(newDate);
+        return addYears(getInitialViewDate(), 1);
+      }
       return addMonths(getInitialViewDate(), 1);
     };
 
     // активная дата, на которой сейчас ховер
     const [activeDate, setActiveDate] = React.useState<Date | null>(null);
-    // дата, которую отображаем (в том числе в верхней панели)
-    const [viewDate, setViewDate] = React.useState(getInitialViewDate());
-    const [viewDateRight, setViewDateRight] = React.useState(getInitialViewDateRight());
     // отображаем выбор года
     const [yearsView, setYearsView] = React.useState(false);
     const [yearsViewRight, setYearsViewRight] = React.useState(false);
     // отображаем выбор месяца
     const [monthsView, setMonthsView] = React.useState(false);
     const [monthsViewRight, setMonthsViewRight] = React.useState(false);
+    // дата, которую отображаем (в том числе в верхней панели)
+    const [viewDate, setViewDate] = React.useState(getInitialViewDate());
+    const [viewDateRight, setViewDateRight] = React.useState(getInitialViewDateRight());
 
     // показать экран выбора года или месяца в зависимости от внешнего параметра currentActiveView
     React.useEffect(() => {
@@ -114,6 +124,20 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarPropType>(
         setViewDateRight(addMonths(viewDate, 1));
       }
     }, [viewDate]);
+
+    /*React.useEffect(() => {
+      if (currentActiveViewImportant && range && yearsView && yearsViewRight) {
+        const newDate = addYears(viewDate, DEFAULT_YEAR_COUNT);
+        console.log(`set years range - ${newDate}`);
+        return setViewDateRight(addYears(viewDate, DEFAULT_YEAR_COUNT));
+      }
+      if (currentActiveViewImportant && range && monthsView && monthsViewRight) {
+        const newDate = addYears(viewDate, 1);
+        console.log(`set month range - ${newDate}`);
+        return setViewDateRight(addYears(viewDate, 1));
+      }
+      setViewDateRight(addMonths(viewDate, 1));
+    }, [currentActiveViewImportant]);*/
 
     React.useEffect(() => {
       if (range && startDate) {
@@ -302,6 +326,8 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarPropType>(
         viewDate={viewDate}
         minDate={minDate}
         maxDate={maxDate}
+        range={range}
+        currentActiveViewImportant={currentActiveViewImportant}
         yearsView={yearsView}
         monthsView={monthsView}
         locale={locale}
@@ -320,6 +346,8 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarPropType>(
         viewDate={viewDateRight}
         minDate={minDate}
         maxDate={maxDate}
+        range={range}
+        currentActiveViewImportant={currentActiveViewImportant}
         yearsView={yearsViewRight}
         monthsView={monthsViewRight}
         locale={locale}
@@ -396,17 +424,19 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarPropType>(
       />
     );
 
-    const renderYears = () => (
-      <Years
-        viewDate={viewDate}
-        startDate={startDate}
-        endDate={endDate}
-        selected={selected}
-        range={range}
-        validator={getValidator()}
-        onClick={handleYearClick}
-      />
-    );
+    const renderYears = () => {
+      return (
+        <Years
+          viewDate={viewDate}
+          startDate={startDate}
+          endDate={endDate}
+          selected={selected}
+          range={range}
+          validator={getValidator()}
+          onClick={handleYearClick}
+        />
+      );
+    };
     const renderYearsRight = () => (
       <Years
         viewDate={viewDateRight}

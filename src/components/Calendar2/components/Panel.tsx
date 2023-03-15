@@ -12,10 +12,11 @@ import {
   getFormattedValue,
   subMonths,
   subYears,
+  yearsRange,
 } from '../date-utils';
 import { PanelComponent } from '../styled/PanelComponent';
-import { Month, PanelDate, Year } from '../styled/PanelDate';
-import { capitalizeFirstLetter } from '../constants';
+import { Month, PanelDate, Year, YearRange } from '../styled/PanelDate';
+import { capitalizeFirstLetter, DEFAULT_YEAR_COUNT } from '../constants';
 
 import { Button } from './Button';
 
@@ -29,6 +30,8 @@ interface IPanelProps {
   monthsView: boolean;
   minDate?: Date;
   maxDate?: Date;
+  range?: boolean;
+  currentActiveViewImportant?: boolean;
   tooltipContainer?: Element | null;
   locale?: {
     backwardText?: string;
@@ -57,6 +60,8 @@ export const Panel: FC<IPanelProps> = ({
   viewDate,
   minDate,
   maxDate,
+  range,
+  currentActiveViewImportant,
   yearsView,
   monthsView,
   tooltipContainer,
@@ -75,6 +80,8 @@ export const Panel: FC<IPanelProps> = ({
   const nextYearDisabled = !!maxDate && differenceYears(addYears(viewDate, 1), maxDate) > 0;
   const previousDisabled = yearsView ? previousYearDisabled : previousMonthDisabled;
   const nextDisabled = yearsView ? nextYearDisabled : nextMonthDisabled;
+  const yearRange = yearsView && !!range && !!currentActiveViewImportant;
+  const monthRange = monthsView && !!range && !!currentActiveViewImportant;
 
   const monthMouseDownHandle = (event: any) => {
     event.preventDefault();
@@ -84,24 +91,18 @@ export const Panel: FC<IPanelProps> = ({
     event.preventDefault();
     yearsView ? onYearsViewHide(event) : onYearsViewShow(event);
   };
-  return (
-    <PanelComponent yearsView={yearsView} monthsView={monthsView} className="ui-kit-calendar-panel-component">
-      {!monthsView && !previousDisabled ? (
-        <ButtonWithTooltip
-          renderContent={() =>
-            yearsView
-              ? locale?.backwardText || theme.locales[theme.currentLocale].calendar.backwardText
-              : locale?.previousMonthText || theme.locales[theme.currentLocale].calendar.previousMonthText
-          }
-          container={tooltipContainer}
-          onMouseDown={onPrevious}
-          disabled={previousDisabled}
-          type="left"
-        />
-      ) : (
-        <Button onMouseDown={onPrevious} disabled={previousDisabled} type="left" />
-      )}
-      <PanelDate>
+  const renderYears = () => {
+    console.log(`here, viewDate - ${viewDate}`);
+    const { start, end } = yearsRange(viewDate, DEFAULT_YEAR_COUNT);
+    const range = `${start}–${end}`;
+    return <YearRange>{range}</YearRange>;
+  };
+  const renderMonths = () => {
+    return <Year view={yearsView}>{viewDate.getFullYear()}</Year>;
+  };
+  const renderMonthYear = () => {
+    return (
+      <>
         <MonthWithTooltip
           renderContent={() =>
             monthsView
@@ -126,6 +127,30 @@ export const Panel: FC<IPanelProps> = ({
         >
           {viewDate.getFullYear()}
         </YearWithTooltip>
+      </>
+    );
+  };
+  return (
+    <PanelComponent yearsView={yearsView} monthsView={monthsView} className="ui-kit-calendar-panel-component">
+      {!monthsView && !previousDisabled ? (
+        <ButtonWithTooltip
+          renderContent={() =>
+            yearsView
+              ? locale?.backwardText || theme.locales[theme.currentLocale].calendar.backwardText
+              : locale?.previousMonthText || theme.locales[theme.currentLocale].calendar.previousMonthText
+          }
+          container={tooltipContainer}
+          onMouseDown={onPrevious}
+          disabled={previousDisabled}
+          type="left"
+        />
+      ) : (
+        <Button onMouseDown={onPrevious} disabled={previousDisabled} type="left" />
+      )}
+      <PanelDate>
+        {yearRange && renderYears()}
+        {monthRange && renderMonths()}
+        {!yearRange && !monthRange && renderMonthYear()}
       </PanelDate>
       {!monthsView && !nextDisabled ? (
         <ButtonWithTooltip
