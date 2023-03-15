@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.7.0](https://github.com/AdmiralDS/react-ui/compare/v4.6.0...v4.7.0) (2023-03-15)
+
+
+### Features
+
+* **DateInput:** add drop menu visibility control ([1b38947](https://github.com/AdmiralDS/react-ui/commit/1b389470cef623f743054d708fbf170f99f65bd3))
+* **Menu:** add virtual scroll ([c78a41c](https://github.com/AdmiralDS/react-ui/commit/c78a41ca193eb1a5f3f3d0fbab165e88e9a1ab8c))
+
+
+### Bug Fixes
+
+* **DropdownContainer:** should't rerender when no real state change ([d9ef469](https://github.com/AdmiralDS/react-ui/commit/d9ef469bab02b9503f58d55cbe1225d5bdcda570))
+* **DropMenu:** fix using isVisible prop ([f6955c6](https://github.com/AdmiralDS/react-ui/commit/f6955c6151e592a7878c21fdfc18d8119c459c9f))
+* **NumberInput:** fix bug with cursor and copy, paste actions ([bfa509f](https://github.com/AdmiralDS/react-ui/commit/bfa509f1b66be6120e16f7bedd07c1fb2c99d0c2))
+* **ToastProvider:** add type export ([56938b6](https://github.com/AdmiralDS/react-ui/commit/56938b661701dfe9172b3c76ad1f0b3ee19c01e8))
+
 ## [4.6.0](https://github.com/AdmiralDS/react-ui/compare/v4.5.2...v4.6.0) (2023-03-10)
 
 
