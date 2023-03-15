@@ -66,7 +66,6 @@ export default {
 } as ComponentMeta<typeof CalendarWidget>;
 
 const Template2: ComponentStory<typeof CalendarWidget> = (args: CalendarWidgetProps) => {
-  console.log(dayjs.locale());
   return (
     <>
       <CalendarWidget {...args} viewDate={dayjs()} />

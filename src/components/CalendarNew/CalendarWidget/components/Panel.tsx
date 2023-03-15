@@ -5,15 +5,6 @@ import { ThemeContext } from 'styled-components';
 import { LIGHT_THEME } from '#src/components/themes';
 import type { Dayjs } from 'dayjs';
 
-import {
-  addMonths,
-  addYears,
-  differenceMonths,
-  differenceYears,
-  getFormattedValue,
-  subMonths,
-  subYears,
-} from '../date-utils';
 import { PanelComponent } from '../styled/PanelComponent';
 import { Month, PanelDate, Year } from '../styled/PanelDate';
 import { capitalizeFirstLetter } from '../constants';
@@ -41,17 +32,18 @@ interface IPanelProps {
     selectMonthText?: string;
   };
 
-  /*onYearsViewShow(event: MouseEvent<HTMLDivElement>): void;
+  onYearsViewShow?: (event: MouseEvent<HTMLDivElement>) => void;
 
-  onYearsViewHide(event: MouseEvent<HTMLDivElement>): void;
+  onYearsViewHide?: (event: MouseEvent<HTMLDivElement>) => void;
 
-  onMonthsViewShow(event: MouseEvent<HTMLDivElement>): void;
+  onMonthsViewShow?: (event: MouseEvent<HTMLDivElement>) => void;
 
-  onMonthsViewHide(event: MouseEvent<HTMLDivElement>): void;
+  onMonthsViewHide?: (event: MouseEvent<HTMLDivElement>) => void;
 
-  onNext(event: MouseEvent<HTMLButtonElement>): void;
+  onNext?: (event: MouseEvent<HTMLButtonElement>) => void;
 
-  onPrevious(event: MouseEvent<HTMLButtonElement>): void;*/
+  onPrevious?: (event: MouseEvent<HTMLButtonElement>) => void;
+  userLocale?: string;
 }
 
 export const Panel: FC<IPanelProps> = ({
@@ -62,36 +54,43 @@ export const Panel: FC<IPanelProps> = ({
   monthsView,
   tooltipContainer,
   locale,
-  /*onYearsViewShow,
+  onYearsViewShow,
   onYearsViewHide,
   onMonthsViewShow,
   onMonthsViewHide,
-  onNext,
-  onPrevious,*/
+  onNext = () => undefined,
+  onPrevious = () => undefined,
+  userLocale,
 }) => {
   const theme = React.useContext(ThemeContext) || LIGHT_THEME;
-  /*const previousMonthDisabled = !!minDate && differenceMonths(minDate, subMonths(viewDate, 1)) > 0;
-  const nextMonthDisabled = !!maxDate && differenceMonths(addMonths(viewDate, 1), maxDate) > 0;
-  const previousYearDisabled = !!minDate && differenceYears(minDate, subYears(viewDate, 1)) > 0;
-  const nextYearDisabled = !!maxDate && differenceYears(addYears(viewDate, 1), maxDate) > 0;
-  const previousDisabled = yearsView ? previousYearDisabled : previousMonthDisabled;
-  const nextDisabled = yearsView ? nextYearDisabled : nextMonthDisabled;*/
-  const previousMonthDisabled = false;
-  const nextMonthDisabled = false;
-  const previousYearDisabled = false;
-  const nextYearDisabled = false;
+  const previousMonthDisabled = !!minDate && minDate.diff(viewDate.subtract(1, 'month'), 'month') > 0;
+  const nextMonthDisabled = !!maxDate && viewDate.add(1, 'month').diff(maxDate, 'year') > 0;
+  const previousYearDisabled = !!minDate && minDate.diff(viewDate.subtract(1, 'year'), 'year') > 0;
+  const nextYearDisabled = !!maxDate && viewDate.add(1, 'year').diff(maxDate, 'year') > 0;
   const previousDisabled = yearsView ? previousYearDisabled : previousMonthDisabled;
   const nextDisabled = yearsView ? nextYearDisabled : nextMonthDisabled;
+  const [currentLocale, setCurrentLocale] = React.useState<string>();
 
-  /*const monthMouseDownHandle = (event: any) => {
+  const defineLocale = userLocale || theme.currentLocale || 'ru';
+  if (currentLocale !== defineLocale) {
+    import(`dayjs/locale/${defineLocale}.js`)
+      .then(() => setCurrentLocale(defineLocale))
+      .catch(() => {
+        setCurrentLocale('ru');
+        import(`dayjs/locale/ru`);
+      });
+  }
+
+  const monthMouseDownHandle = (event: any) => {
     event.preventDefault();
-    monthsView ? onMonthsViewHide(event) : onMonthsViewShow(event);
+    monthsView ? onMonthsViewHide?.(event) : onMonthsViewShow?.(event);
   };
   const yearMouseDownHandle = (event: any) => {
     event.preventDefault();
-    yearsView ? onYearsViewHide(event) : onYearsViewShow(event);
-  };*/
-  return (
+    yearsView ? onYearsViewHide?.(event) : onYearsViewShow?.(event);
+  };
+
+  return currentLocale ? (
     <PanelComponent yearsView={yearsView} monthsView={monthsView} className="ui-kit-calendar-panel-component">
       {!monthsView && !previousDisabled ? (
         <ButtonWithTooltip
@@ -101,12 +100,12 @@ export const Panel: FC<IPanelProps> = ({
               : locale?.previousMonthText || theme.locales[theme.currentLocale].calendar.previousMonthText
           }
           container={tooltipContainer}
-          onMouseDown={() => undefined}
+          onMouseDown={onPrevious}
           disabled={previousDisabled}
           type="left"
         />
       ) : (
-        <Button onMouseDown={() => undefined} disabled={previousDisabled} type="left" />
+        <Button onMouseDown={onPrevious} disabled={previousDisabled} type="left" />
       )}
       <PanelDate>
         <MonthWithTooltip
@@ -117,10 +116,9 @@ export const Panel: FC<IPanelProps> = ({
           }
           container={tooltipContainer}
           view={monthsView}
-          onMouseDown={() => undefined}
+          onMouseDown={monthMouseDownHandle}
         >
-          {/*{capitalizeFirstLetter(getFormattedValue(viewDate, { month: 'long' }, theme.currentLocale || 'ru'))}*/}
-          {capitalizeFirstLetter(viewDate.format('MMMM'))}
+          {capitalizeFirstLetter(viewDate.locale(currentLocale).format('MMMM'))}
         </MonthWithTooltip>
         <YearWithTooltip
           renderContent={() =>
@@ -130,7 +128,7 @@ export const Panel: FC<IPanelProps> = ({
           }
           container={tooltipContainer}
           view={yearsView}
-          onMouseDown={() => undefined}
+          onMouseDown={yearMouseDownHandle}
         >
           {viewDate.get('year')}
         </YearWithTooltip>
@@ -143,13 +141,17 @@ export const Panel: FC<IPanelProps> = ({
               : locale?.nextMonthText || theme.locales[theme.currentLocale].calendar.nextMonthText
           }
           container={tooltipContainer}
-          onMouseDown={() => undefined}
+          onMouseDown={onNext}
           disabled={nextDisabled}
           type="right"
         />
       ) : (
-        <Button onMouseDown={() => undefined} disabled={nextDisabled} type="right" />
+        <Button onMouseDown={onNext} disabled={nextDisabled} type="right" />
       )}
     </PanelComponent>
-  );
+  ) : null;
+};
+
+export const renderDefaultPanel = (props: IPanelProps) => {
+  return <Panel {...props} />;
 };

@@ -1,12 +1,7 @@
 import * as React from 'react';
-import * as dayjs from 'dayjs';
-import 'dayjs/locale/ru';
 import type { Dayjs } from 'dayjs';
 import { CalendarComponent } from '#src/components/CalendarNew/CalendarWidget/styled/CalendarComponent';
-import { Panel } from '#src/components/CalendarNew/CalendarWidget/components/Panel';
-
-//require('dayjs/locale/ru');
-dayjs.locale('ru');
+import { renderDefaultPanel } from '#src/components/CalendarNew/CalendarWidget/components/Panel';
 
 export type CalendarViewScreenType = 'YEAR' | 'MONTH' | 'DAY';
 
@@ -50,6 +45,7 @@ export interface CalendarWidgetProps {
     /** Надпись (тултип) для кнопки, открывающей панель выбора месяца */
     selectMonthText?: string;
   };
+  userLocale?: string;
 }
 
 export const CalendarWidget = React.forwardRef<HTMLDivElement, CalendarWidgetProps>(
@@ -65,33 +61,26 @@ export const CalendarWidget = React.forwardRef<HTMLDivElement, CalendarWidgetPro
       minDate,
       maxDate,
       locale,
+      userLocale,
     },
     ref,
   ) => {
     const monthView = mode === 'MONTH';
     const yearView = mode === 'YEAR';
 
-    const renderPanel = () => (
-      <Panel
-        viewDate={viewDate}
-        minDate={minDate}
-        maxDate={maxDate}
-        yearsView={yearView}
-        monthsView={monthView}
-        locale={locale}
-        /*onYearsViewShow={handleYearsViewShow}
-        onYearsViewHide={handleYearsViewHide}
-        onMonthsViewShow={handleMonthsViewShow}
-        onMonthsViewHide={handleMonthsViewHide}
-        onNext={yearsView ? increaseYear : increaseMonth}
-        onPrevious={yearsView ? decreaseYear : decreaseMonth}
-        tooltipContainer={tooltipContainer}*/
-      />
-    );
+    const calendarPanelProps = {
+      viewDate,
+      minDate,
+      maxDate,
+      yearsView: yearView,
+      monthsView: monthView,
+      locale,
+      userLocale,
+    };
 
     return (
       <CalendarComponent ref={ref} monthsView={monthView} yearsView={yearView}>
-        {(headerRender && headerRender(viewDate)) || renderPanel()}
+        {(headerRender && headerRender(viewDate)) || renderDefaultPanel(calendarPanelProps)}
         Test
       </CalendarComponent>
     );
