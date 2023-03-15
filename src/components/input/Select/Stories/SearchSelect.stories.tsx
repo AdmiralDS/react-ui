@@ -19,10 +19,10 @@ import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 import styled from 'styled-components';
 import { Belarus, Cuba, RussianFederation } from '#src/icons/IconComponents-flags';
-import { LoadOnScrollTemplate, RenderPropsTemplate, VirtualScrollTemplate } from './Templates';
+import { LoadOnScrollTemplate, RenderPropsTemplate } from './Templates';
 import RenderPropsRaw from '!!raw-loader!./Templates/RenderProps';
 import LoadOnScrollRaw from '!!raw-loader!./Templates/LoadingOnScroll';
-import VirtualScrollRaw from '!!raw-loader!./Templates/VirtualScroll';
+// import VirtualScrollRaw from '!!raw-loader!./Templates/VirtualScroll';
 
 export default {
   title: 'Admiral-2.1/Input/Select/режим "searchSelect"',
@@ -700,21 +700,21 @@ LoadOnScrollExample.parameters = {
 };
 LoadOnScrollExample.storyName = 'Подгрузка данных при scroll';
 
-const VirtualScrollStory: ComponentStory<typeof Select> = (props) => {
-  return <VirtualScrollTemplate {...cleanUpProps(props)} />;
-};
-export const VirtualScrollExample = VirtualScrollStory.bind({});
-VirtualScrollExample.parameters = {
-  docs: {
-    source: {
-      code: VirtualScrollRaw,
-    },
-    description: {
-      story: 'Пример использования виртуального скролла в select',
-    },
-  },
-};
-VirtualScrollExample.storyName = 'Виртуальный scroll';
+// const VirtualScrollStory: ComponentStory<typeof Select> = (props) => {
+//   return <VirtualScrollTemplate {...cleanUpProps(props)} />;
+// };
+// export const VirtualScrollExample = VirtualScrollStory.bind({});
+// VirtualScrollExample.parameters = {
+//   docs: {
+//     source: {
+//       code: VirtualScrollRaw,
+//     },
+//     description: {
+//       story: 'Пример использования виртуального скролла в select',
+//     },
+//   },
+// };
+// VirtualScrollExample.storyName = 'Виртуальный scroll';
 
 export const RenderValueStory = RenderValueTemplate.bind({});
 RenderValueStory.args = {
