@@ -39,12 +39,16 @@ function usePrevious(value: PreviousValues) {
   return ref.current;
 }
 
-type Partition = {
+interface Partition {
   startIndex: number;
   endIndex: number;
   topPadding: string;
   bottomPadding: string;
-};
+}
+
+interface PartitionExt extends Partition {
+  needAddListener: boolean;
+}
 
 export const VirtualBody = ({
   scrollContainerRef,
@@ -58,19 +62,23 @@ export const VirtualBody = ({
   onSelectItem,
 }: VirtualBodyProps) => {
   const [scrollTop, setScrollTop] = React.useState(0);
-  const [partition, setPartition] = React.useState<Partition>({
+  const [partition, setPartition] = React.useState<PartitionExt>({
     startIndex: 0,
     endIndex: rowCount,
     topPadding: '',
     bottomPadding: '',
+    needAddListener: false,
   });
   const prevValue = usePrevious({ activeId });
 
-  const handleScroll = (e: Event) => {
-    requestAnimationFrame(() => {
-      if (e.target) setScrollTop((e.target as HTMLDivElement).scrollTop);
-    });
-  };
+  const handleScroll = React.useCallback(
+    (e: Event) => {
+      requestAnimationFrame(() => {
+        if (e.target) setScrollTop((e.target as HTMLDivElement).scrollTop);
+      });
+    },
+    [scrollContainerRef],
+  );
 
   React.useEffect(() => {
     const scrollContainer = scrollContainerRef.current;
@@ -78,31 +86,37 @@ export const VirtualBody = ({
 
     scrollContainer?.addEventListener('scroll', handleScroll);
     return () => scrollContainer?.removeEventListener('scroll', handleScroll);
-  }, [scrollContainerRef]);
+  }, [handleScroll]);
+
+  React.useEffect(() => {
+    if (partition.needAddListener) {
+      setTimeout(() => scrollContainerRef?.current?.addEventListener('scroll', handleScroll));
+      setPartition({ ...partition, needAddListener: false });
+    }
+  }, [partition, scrollContainerRef]);
 
   const calcPartition = React.useCallback(
     (start: number) => {
-      return () => {
-        const itemCount = model.length;
+      const itemCount = model.length;
 
-        const startIndex = Math.max(0, start);
+      const startIndex = Math.max(0, start);
 
-        let visibleNodeCount = rowCount + 2 * aheadItemsCount;
-        visibleNodeCount = Math.min(itemCount - startIndex, visibleNodeCount);
-        const endIndex = startIndex + visibleNodeCount;
+      let visibleNodeCount = rowCount + 2 * aheadItemsCount;
+      visibleNodeCount = Math.min(itemCount - startIndex, visibleNodeCount);
+      const endIndex = startIndex + visibleNodeCount;
 
-        const topPadding = `${startIndex * itemHeight}px`;
-        const bottomPadding = `${(itemCount - startIndex - visibleNodeCount) * itemHeight}px`;
+      const topPadding = `${startIndex * itemHeight}px`;
+      const bottomPadding = `${(itemCount - startIndex - visibleNodeCount) * itemHeight}px`;
 
-        return { startIndex, endIndex, topPadding, bottomPadding };
-      };
+      return { startIndex, endIndex, topPadding, bottomPadding };
     },
     [itemHeight, aheadItemsCount, model, rowCount],
   );
 
   React.useEffect(() => {
     const start = Math.floor(scrollTop / itemHeight - aheadItemsCount);
-    setPartition(calcPartition(start));
+    const partition: PartitionExt = { ...calcPartition(start), needAddListener: false };
+    setPartition(partition);
   }, [scrollTop, calcPartition]);
 
   React.useEffect(() => {
@@ -115,8 +129,11 @@ export const VirtualBody = ({
 
     if (index === -1) return;
 
-    if (index < partition.startIndex || index > partition.endIndex) setPartition(calcPartition(index));
-  }, [activeId, partition, calcPartition]);
+    if (index < partition.startIndex || index > partition.endIndex) {
+      scrollContainerRef?.current?.removeEventListener('scroll', handleScroll);
+      setPartition({ ...calcPartition(index), needAddListener: true });
+    }
+  }, [activeId, partition, calcPartition, scrollContainerRef]);
 
   const visibleChildren = React.useMemo(() => {
     const visibleItems = [...model].slice(partition.startIndex, partition.endIndex);
