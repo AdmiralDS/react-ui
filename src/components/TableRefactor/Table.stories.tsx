@@ -4,7 +4,7 @@ import { withDesign } from 'storybook-addon-designs';
 import styled from 'styled-components';
 
 import { Table } from '#src/components/TableRefactor';
-import { columnList, rowList } from '#src/components/TableRefactor/data';
+import { columnList, rowList, columnListWithWidth, columnListOrientation } from '#src/components/TableRefactor/data';
 import { TableRow } from '../TableRow';
 
 const Separator = styled.div`
@@ -123,4 +123,43 @@ const Template: ComponentStory<typeof Table> = ({ columnList, ...args }) => {
 export const Playground = Template.bind({});
 Playground.args = {
   columnList,
+};
+
+export const ColumnWidth = Template.bind({});
+ColumnWidth.args = {
+  columnList: columnListWithWidth,
+};
+ColumnWidth.storyName = 'Table. Пример изменения ширины столбцов.';
+ColumnWidth.parameters = {
+  docs: {
+    description: {
+      story: `По умолчанию ширина столбца составляет 100 пикселей. Чтобы изменить этот 
+      параметр в массиве columnList для столбца, чью ширину нужно изменить, следует задать параметр width. 
+      В качестве значения width может выступать любое валидное css значение (пиксели, проценты, функция calc и т.д.).\n\nТакже
+      ширину столбца можно регулировать с помощью ручного ресайза, для этого нужно 
+      потянуть разделитель между столбцами в нужном направлении. При этом обязательно должен быть задан колбек onColumnResize.
+      При срабатывании колбек сообщает пользователю о попытке ресайзинга столбца, после чего пользователь должен 
+      обновить ширину соответствующего столбца в массиве columnList. 
+      Таким образом контроль за ресайзингом происходит на стороне пользователя.\n\nПо умолчанию
+      в таблице всегда включена возможность ручного ресайза столбцов, однако с помощью параметра disableColumnResize 
+      можно отменить эту возможность для всей таблицы, 
+      либо с помощью параметра disableResize отключить ресайз для отдельного столбца. 
+      Также в таблице по умолчанию не отображается разделитель для последнего столбца, данное поведение можно 
+      изменить с помощью параметра showDividerForLastColumn.`,
+    },
+  },
+};
+
+export const Orientation = Template.bind({});
+Orientation.args = {
+  columnList: columnListOrientation,
+};
+Orientation.storyName = 'Table. Пример с настройкой выравнивания контента столбца.';
+Orientation.parameters = {
+  docs: {
+    description: {
+      story: `По умолчанию контент столбца выравнивается по левому краю. Если необходимо выравнивание по правому краю, 
+      то следует задать параметр cellAlign: 'right' для столбца.`,
+    },
+  },
 };

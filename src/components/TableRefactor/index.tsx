@@ -29,9 +29,13 @@ export type Column = {
   name: string;
   /** Заголовок столбца */
   title: React.ReactNode;
+  /** Дополнительный текст заголовка столбца */
+  extraText?: React.ReactNode;
   /** Ширина столбца. В качестве ширины можно использовать любое валидное css значение (пиксели, проценты, функция calc...).
    * По умолчанию 100px */
   width?: number | string;
+  /** Выравнивание контента ячеек столбца по левому или правому краю. По умолчанию left */
+  cellAlign?: 'left' | 'right';
   /** Отключение возможности ресайза колонки */
   disableResize?: boolean;
 };
@@ -205,7 +209,7 @@ export const Table: React.FC<TableProps> = ({
         data-column={col.name}
         data-row={row.id}
       >
-        {<CellTextContent>{row[col.name]}</CellTextContent>}
+        {<CellTextContent cellAlign={col.cellAlign}>{row[col.name]}</CellTextContent>}
       </Cell>
     );
   };
