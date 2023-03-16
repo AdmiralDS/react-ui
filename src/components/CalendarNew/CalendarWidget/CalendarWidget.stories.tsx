@@ -6,8 +6,6 @@ import type { CalendarWidgetProps } from '#src/components/CalendarNew/CalendarWi
 import { CalendarWidget } from '#src/components/CalendarNew/CalendarWidget/index';
 import dayjs from 'dayjs';
 
-//dayjs.locale('ru');
-
 export default {
   title: 'Admiral-2.1/CalendarNew/CalendarWidget',
   decorators: [withDesign],

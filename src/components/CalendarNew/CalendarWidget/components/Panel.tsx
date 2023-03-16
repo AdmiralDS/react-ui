@@ -1,5 +1,6 @@
 import type { FC, MouseEvent } from 'react';
 import * as React from 'react';
+import 'dayjs/locale/ru';
 import { TooltipHoc } from '#src/components/TooltipHOC';
 import { ThemeContext } from 'styled-components';
 import { LIGHT_THEME } from '#src/components/themes';
@@ -77,7 +78,6 @@ export const Panel: FC<IPanelProps> = ({
       .then(() => setCurrentLocale(defineLocale))
       .catch(() => {
         setCurrentLocale('ru');
-        import(`dayjs/locale/ru`);
       });
   }
 
