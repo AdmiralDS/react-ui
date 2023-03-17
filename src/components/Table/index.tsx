@@ -98,11 +98,11 @@ export type Column = {
 
   /**
    * Метод для переопределения стандартного вида ячейки
-   * @param cellData
-   * @param rowList
+   * @param data
+   * @param row
    * @param rowIdx
    */
-  render?(cellData: any, rowList: TableRow, rowIdx: number): React.ReactNode;
+  renderCell?(data: React.ReactNode, row: TableRow, rowIdx: number): React.ReactNode;
 };
 
 export type RowId = string | number;
@@ -154,7 +154,7 @@ export interface TableRow extends Record<RowId, React.ReactNode> {
    * Метод для переопределения стандартного вида группы
    * @param row
    */
-  renderGroup?(row: TableRow): React.ReactNode;
+  renderGroupTitle?(row: TableRow): React.ReactNode;
 }
 
 export interface TableProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -609,8 +609,8 @@ export const Table: React.FC<TableProps> = ({
       ?.getBoundingClientRect().width;
 
     const render = () => {
-      if (col.render) {
-        return col.render(get(row, col.name), rowList[idx], idx);
+      if (col.renderCell) {
+        return col.renderCell(get(row, col.name), row, idx);
       }
       if (renderCell) {
         return renderCell(row, col.name);

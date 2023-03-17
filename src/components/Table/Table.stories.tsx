@@ -929,10 +929,10 @@ CustomRenderCell.args = {
 };
 CustomRenderCell.storyName = 'Table. Пример кастомизации компонента ячейки.';
 
-export const CustomRenderGroup = Template8.bind({});
-CustomRenderGroup.args = {
+export const CustomRenderGroupTitle = Template8.bind({});
+CustomRenderGroupTitle.args = {
   rowList: rowListWithCustomRenderGroup,
   columnList,
   displayRowExpansionColumn: true,
 };
-CustomRenderGroup.storyName = 'Table. Пример кастомизации группы';
+CustomRenderGroupTitle.storyName = 'Пример кастомизации заголовка группы';

@@ -47,8 +47,8 @@ export const GroupRow = ({
   };
 
   const renderGroup = () => {
-    if (row.renderGroup) {
-      return row.renderGroup(row);
+    if (row.renderGroupTitle) {
+      return row.renderGroupTitle(row);
     }
     if (renderCell) {
       return renderCell(row, 'group');

@@ -963,7 +963,7 @@ export const columnListWithCustomRender: Column[] = [
       </>
     ),
     width: '20%',
-    render(data, rowData, idx): React.ReactNode {
+    renderCell(data, row, idx): React.ReactNode {
       return (
         <div style={{ border: '1px solid #aaa', padding: '3px' }}>
           {data} <Badge>{idx}</Badge>
@@ -975,14 +975,14 @@ export const columnListWithCustomRender: Column[] = [
     name: 'transfer_date',
     title: <b>Дата сделки</b>,
     width: '250px',
-    render(date: string): React.ReactNode {
+    renderCell(date: string): React.ReactNode {
       return <div>Дата - {date}</div>;
     },
   },
   {
     name: 'rate',
     title: 'Ставка',
-    render(data: string): React.ReactNode {
+    renderCell(data: string): React.ReactNode {
       return <i>{data}$</i>;
     },
   },
@@ -1038,7 +1038,7 @@ export const rowListWithCustomRenderGroup: RowData[] = [
     currency: 'RUB',
     rate: 2.5,
     groupTitle: 'Группа',
-    renderGroup(row: TableRow): React.ReactNode {
+    renderGroupTitle(row: TableRow): React.ReactNode {
       return (
         <div style={{ fontSize: '36px' }}>
           {row.transfer_type} - {row.transfer_date}
