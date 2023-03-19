@@ -38,6 +38,12 @@ export type Column = {
   cellAlign?: 'left' | 'right';
   /** Отключение возможности ресайза колонки */
   disableResize?: boolean;
+  /** Является ли столбец сортируемым. По умолчанию false */
+  sortable?: boolean;
+  /** Сортировка столбца (по возрастанию или по убыванию) */
+  sort?: 'asc' | 'desc';
+  /** Порядковый номер в многоуровневой сортировке */
+  sortOrder?: number;
 };
 
 export type RowId = string | number;
@@ -73,6 +79,10 @@ export interface TableProps extends React.HTMLAttributes<HTMLDivElement> {
   showDividerForLastColumn?: boolean;
   /** Отключение возможности ресайза колонок. По умолчанию эта возможность включена */
   disableColumnResize?: boolean;
+  /** Колбек на изменение сортировки. Возвращает уникальное имя столбца, к которому применили сортировку,
+   * и порядок сортировки (возрастающий/убывающий или сброс сортировки до первоначального состояния (initial))
+   */
+  onSortChange?: (sortObj: { name: string; sort: 'asc' | 'desc' | 'initial' }) => void;
 }
 
 export const Table: React.FC<TableProps> = ({
@@ -81,6 +91,7 @@ export const Table: React.FC<TableProps> = ({
   renderRow,
   dimension = 'm',
   onColumnResize,
+  onSortChange,
   showDividerForLastColumn = false,
   disableColumnResize = false,
   ...props
@@ -182,6 +193,19 @@ export const Table: React.FC<TableProps> = ({
     onColumnResize?.({ name, width: width + 'px' });
   }
 
+  const handleSort = (name: string, colSort: 'asc' | 'desc' | 'initial') => {
+    let newSort: 'asc' | 'desc' | 'initial' = 'initial';
+    if (colSort === 'asc') newSort = 'desc';
+    if (colSort === 'desc') newSort = 'initial';
+    if (colSort === 'initial') newSort = 'asc';
+
+    onSortChange?.({ name, sort: newSort });
+  };
+
+  const multipleSort = React.useMemo<boolean>(() => {
+    return columnList.filter((col) => !!col.sort).length > 1;
+  }, [columnList]);
+
   const renderHeaderCell = (column: Column, index: number) => (
     <HeaderCellComponent
       key={`head_${column.name}`}
@@ -191,8 +215,10 @@ export const Table: React.FC<TableProps> = ({
       showDividerForLastColumn={showDividerForLastColumn}
       disableColumnResize={disableColumnResize}
       handleResizeChange={handleResizeChange}
+      handleSort={handleSort}
       dimension={dimension}
       columnMinWidth={columnMinWidth}
+      multipleSort={multipleSort}
     />
   );
 

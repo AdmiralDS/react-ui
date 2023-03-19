@@ -4,8 +4,18 @@ import { withDesign } from 'storybook-addon-designs';
 import styled from 'styled-components';
 
 import { Table } from '#src/components/TableRefactor';
-import { columnList, rowList, columnListWithWidth, columnListOrientation } from '#src/components/TableRefactor/data';
+import {
+  columnList,
+  rowList,
+  columnListWithWidth,
+  columnListOrientation,
+  rowListSort,
+  columnListSort,
+} from '#src/components/TableRefactor/data';
 import { TableRow } from '../TableRow';
+import { fetchProfileData } from './fakeApi';
+
+import { Template_Sort } from './stories/sortStory';
 
 const Separator = styled.div`
   height: 20px;
@@ -120,6 +130,29 @@ const Template: ComponentStory<typeof Table> = ({ columnList, ...args }) => {
   );
 };
 
+const Template3: ComponentStory<typeof Table> = ({ columnList, ...args }) => {
+  const [cols, setCols] = React.useState([...columnList]);
+  const [rows, setRows] = React.useState([...rowListSort]);
+  const resource = fetchProfileData();
+
+  const renderRow = (index: number) => {
+    // const resource = fetchProfileData();
+    const rowData = resource.rows.read()[index];
+    return <TableRow row={rowData} key={`row_${index}`} />;
+  };
+
+  const handleResize = ({ name, width }: { name: string; width: string }) => {
+    const newCols = cols.map((col) => (col.name === name ? { ...col, width } : col));
+    setCols(newCols);
+  };
+
+  return (
+    <React.Suspense fallback={<h1>Loading profile...</h1>}>
+      <Table {...args} columnList={cols} rowCount={rows.length} renderRow={renderRow} onColumnResize={handleResize} />
+    </React.Suspense>
+  );
+};
+
 export const Playground = Template.bind({});
 Playground.args = {
   columnList,
@@ -160,6 +193,45 @@ Orientation.parameters = {
     description: {
       story: `По умолчанию контент столбца выравнивается по левому краю. Если необходимо выравнивание по правому краю, 
       то следует задать параметр cellAlign: 'right' для столбца.`,
+    },
+  },
+};
+
+export const Sort = Template_Sort.bind({});
+Sort.args = {
+  columnList: columnListSort,
+};
+Sort.storyName = 'Table. Сортировка.';
+Sort.parameters = {
+  docs: {
+    description: {
+      story: `Если сортировка выключена, то значок виден только при наведении на область заголовка и окрашивается в серый цвет.
+      Если сортировка включена (первое нажатие - сортировка по возрастанию), то ее значок-стрелка остается видимым при снятии фокуса 
+      с заголовка и окрашивается в синий цвет. При повторном нажатии происходит сортировка в обратном порядке (стрелка меняет направление, 
+      по убыванию). При третьем нажатии сортировка отменяется.\n\nПо умолчанию возможность сортировки столбца отключена.
+      Чтобы сделать столбец сортируемым, необходимо задать ему параметр sortable: true. Сортировка - это контролируемый пользователем параметр. 
+      Чтобы включить для столбца сортировку по возрастанию/убыванию, пользователь должен задать для столбца параметр sort: 'asc' | 'desc'.
+      Если для столбца задан только параметр sortable: true, а параметр sort не задан, это говорит о том, что столбец сортируемый 
+      (при наведении на его заголовок будет видна стрелка сортировки), но в данный момент к нему никакая сортировка не применена.\n\nПри 
+      изменении сортировки столбца будет срабатывать колбек onSortChange, который будет возвращать два аргумента: 
+      name - уникальное имя столбца, к которому была применена сортировка, и sort - тип сортировки ('asc' - возрастающая, 
+      'desc' - убывающая и 'initial' - отмена сортировки, возврат к первоначальному состоянию). Сортировка массива строк 
+      происходит на стороне пользователя при срабатывании колбека onSortChange.\n\n Дизайн-системой предусматривается многоуровневая сортировка. Рекомендуется использовать не более ДВУХ уровней.
+      Логика сортировки (взаимосвязи) выстраивается пользователем. При этом, у иконок сортировки появляются цифры
+      обозначающие порядок (приоритет) сортировки.`,
+    },
+  },
+};
+
+export const Suspense = Template3.bind({});
+Suspense.args = {
+  columnList: columnListSort,
+};
+Suspense.storyName = 'Table. Suspense.';
+Suspense.parameters = {
+  docs: {
+    source: {
+      code: 'Disabled for this story, see https://github.com/storybookjs/storybook/issues/11554',
     },
   },
 };
