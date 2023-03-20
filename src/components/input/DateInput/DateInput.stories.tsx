@@ -114,6 +114,15 @@ export default {
     onVisibilityChange: {
       control: false,
     },
+    dropContainerCssMixin: {
+      control: false,
+    },
+    dropContainerClassName: {
+      control: false,
+    },
+    dropContainerStyle: {
+      control: false,
+    },
     currentActiveView: {
       options: [undefined, 'DAY', 'MONTH', 'YEAR'],
       control: { type: 'radio' },
@@ -153,6 +162,7 @@ const Template: ComponentStory<typeof DateInput> = (props) => {
         onChange={handleChange}
         placeholder={'Some placeholder'}
         style={{ maxWidth: 300 }}
+        dropContainerClassName="dropContainerClass"
       />
     </ThemeProvider>
   );
