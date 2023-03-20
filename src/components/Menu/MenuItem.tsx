@@ -16,6 +16,8 @@ export interface RenderOptionProps {
   onClickItem?: () => void;
   /** Обработчик наведения мыши на item */
   onHover?: () => void;
+  /** ссылка на контейнер, в котором находится Menu*/
+  containerRef?: React.RefObject<HTMLElement>;
 }
 
 export interface ItemProps {

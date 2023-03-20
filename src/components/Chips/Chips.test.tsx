@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { fireEvent, render } from '@testing-library/react';
+import { act, fireEvent, render } from '@testing-library/react';
 import { ThemeProvider } from 'styled-components';
 import userEvent from '@testing-library/user-event';
 import { LIGHT_THEME } from '#src/components/themes';
@@ -52,7 +52,9 @@ describe('Chips', () => {
       </ThemeProvider>,
     );
     expect(document.body).toHaveFocus();
-    userEvent.tab();
+    act(() => {
+      userEvent.tab();
+    });
     expect(wrapper.getByTestId('test-element')).toHaveFocus();
   });
 });

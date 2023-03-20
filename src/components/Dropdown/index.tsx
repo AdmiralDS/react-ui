@@ -176,7 +176,7 @@ export const Dropdown = React.forwardRef<HTMLDivElement, React.PropsWithChildren
       };
     }, [containerRef.current]);
 
-    const checkDropdownPosition = () => {
+    const checkDropdownPosition = React.useCallback(() => {
       const node = containerRef.current;
       const targetNode = targetRef.current;
       if (node && targetNode) {
@@ -185,12 +185,12 @@ export const Dropdown = React.forwardRef<HTMLDivElement, React.PropsWithChildren
         const viewportHeight = window.innerHeight;
         const viewportWidth = window.innerWidth;
         if (viewportHeight - rect.bottom < 0 && targetRect.top > viewportHeight - targetRect.bottom) {
-          setDisplayUpward(true);
+          if (!displayUpward) setDisplayUpward(true);
         } else if (
           targetRect.bottom + (targetRect.top - rect.top) < viewportHeight - 8 ||
           targetRect.top < viewportHeight - targetRect.bottom
         ) {
-          setDisplayUpward(false);
+          if (displayUpward) setDisplayUpward(false);
         }
 
         if (!props.disableAutoAlign) {
@@ -207,7 +207,7 @@ export const Dropdown = React.forwardRef<HTMLDivElement, React.PropsWithChildren
           }
         }
       }
-    };
+    }, [displayUpward]);
 
     useInterval(checkDropdownPosition, 100);
 

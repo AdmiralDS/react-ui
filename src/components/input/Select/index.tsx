@@ -16,7 +16,6 @@ import {
   Input,
   OptionWrapper,
   SelectWrapper,
-  SpinnerMixin,
   ValueWrapper,
   StyledMenu,
   EmptyMessageWrapper,
@@ -159,6 +158,17 @@ export interface SelectProps extends Omit<React.InputHTMLAttributes<HTMLSelectEl
 
   /** Позволяет фильтровать отображаемые опции */
   onFilterItem?: (value: string, searchValue: string, searchFormat: SearchFormat) => boolean;
+
+  /** Включение виртуального скролла для меню.
+   * Максимальная высота меню рассчитывается исходя из высоты 1 пункта, если параметр 'auto', то в расчет идет
+   * высота согласно dimension
+   */
+  virtualScroll?: {
+    /** Фиксированная высота 1 пункта меню, для правильного функционирования виртуального скролла
+     * все строки должны быть одной фиксированной высоты
+     */
+    itemHeight: 'auto' | number;
+  };
 }
 
 export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
@@ -206,6 +216,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       onInputKeyDownCapture,
       searchFormat = 'wholly',
       onFilterItem = defaultFilterItem,
+      virtualScroll,
       ...props
     },
     ref,
@@ -639,6 +650,8 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
               model={dropDownModel}
               renderTopPanel={renderDropDownTopPanel}
               renderBottomPanel={renderDropDownBottomPanel}
+              containerRef={dropDownRef}
+              virtualScroll={virtualScroll}
             />
           </DropdownContainer>
         )}
@@ -648,7 +661,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
           onClick={stopPropagation}
           onMouseDown={(e) => e.preventDefault()}
         >
-          {isLoading && <Spinner svgMixin={SpinnerMixin} dimension={dimension === 's' ? 's' : 'm'} />}
+          {isLoading && <Spinner dimension={dimension === 's' ? 'ms' : 'm'} />}
           {displayClearIcon && !readOnly && needShowClearIcon && (
             <InputIconButton icon={CloseOutlineSvg} id="searchSelectClearIcon" onClick={handleOnClear} aria-hidden />
           )}

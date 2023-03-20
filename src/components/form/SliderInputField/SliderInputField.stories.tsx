@@ -54,6 +54,12 @@ export default {
     displayInline: {
       control: { type: 'boolean' },
     },
+    showTooltip: {
+      control: { type: 'boolean' },
+    },
+    isLoading: {
+      control: { type: 'boolean' },
+    },
     icons: {
       control: false,
     },
@@ -66,6 +72,12 @@ export default {
     handleInput: {
       control: false,
     },
+    tickMarks: {
+      control: false,
+    },
+    wrapperProps: {
+      control: false,
+    },
     prefix: {
       control: { type: 'text' },
     },
@@ -74,6 +86,21 @@ export default {
     },
     placeholder: {
       control: { type: 'text' },
+    },
+    thousand: {
+      control: { type: 'text' },
+    },
+    minValue: {
+      control: { type: 'number' },
+    },
+    maxValue: {
+      control: { type: 'number' },
+    },
+    step: {
+      control: { type: 'number' },
+    },
+    precision: {
+      control: { type: 'number' },
     },
     themeBorderKind: {
       options: ALL_BORDER_RADIUS_VALUES,

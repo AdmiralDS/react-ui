@@ -49,12 +49,27 @@ export default {
     extraText: {
       type: 'string',
     },
+    title: {
+      type: 'string',
+    },
+    description: {
+      type: 'string',
+    },
     themeBorderKind: {
       options: ALL_BORDER_RADIUS_VALUES,
       control: { type: 'radio' },
     },
     skeleton: {
       control: { type: 'boolean' },
+    },
+    displayCharacterCounter: {
+      control: { type: 'boolean' },
+    },
+    width: {
+      control: false,
+    },
+    files: {
+      control: false,
     },
   },
 } as ComponentMeta<typeof FileInputField>;

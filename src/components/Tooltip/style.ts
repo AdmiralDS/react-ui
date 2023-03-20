@@ -25,6 +25,7 @@ export const TooltipContainer = styled.div`
   ${(props) => props.theme.shadow['Shadow 04']}
   padding: ${TOOLTIP_PADDING};
   max-width: min(488px, calc(100vw - 16px));
+  overflow-wrap: break-word;
 `;
 
 export const FakeTarget = styled.div`

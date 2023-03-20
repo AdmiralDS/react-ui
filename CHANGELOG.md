@@ -2,6 +2,72 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.7.0](https://github.com/AdmiralDS/react-ui/compare/v4.6.0...v4.7.0) (2023-03-15)
+
+
+### Features
+
+* **DateInput:** add drop menu visibility control ([1b38947](https://github.com/AdmiralDS/react-ui/commit/1b389470cef623f743054d708fbf170f99f65bd3))
+* **Menu:** add virtual scroll ([c78a41c](https://github.com/AdmiralDS/react-ui/commit/c78a41ca193eb1a5f3f3d0fbab165e88e9a1ab8c))
+
+
+### Bug Fixes
+
+* **DropdownContainer:** should't rerender when no real state change ([d9ef469](https://github.com/AdmiralDS/react-ui/commit/d9ef469bab02b9503f58d55cbe1225d5bdcda570))
+* **DropMenu:** fix using isVisible prop ([f6955c6](https://github.com/AdmiralDS/react-ui/commit/f6955c6151e592a7878c21fdfc18d8119c459c9f))
+* **NumberInput:** fix bug with cursor and copy, paste actions ([bfa509f](https://github.com/AdmiralDS/react-ui/commit/bfa509f1b66be6120e16f7bedd07c1fb2c99d0c2))
+* **ToastProvider:** add type export ([56938b6](https://github.com/AdmiralDS/react-ui/commit/56938b661701dfe9172b3c76ad1f0b3ee19c01e8))
+
+## [4.6.0](https://github.com/AdmiralDS/react-ui/compare/v4.5.2...v4.6.0) (2023-03-10)
+
+
+### Features
+
+* **Table:** add filterMenuAlignSelf and filterMenuCssMixin props for column ([2bbcad1](https://github.com/AdmiralDS/react-ui/commit/2bbcad1e9e9b4ada3bc0e9aac6bdc67cddfdf5ba))
+
+
+### Bug Fixes
+
+* **MenuButton:** pass renderBottomPanel prop ([c609a4e](https://github.com/AdmiralDS/react-ui/commit/c609a4ed65d51131a8fd71108b0aa5330a9664d8))
+* **NotificationItem:** add missing types to export ([5bdc451](https://github.com/AdmiralDS/react-ui/commit/5bdc4510b5cb9b97df84243cd6b77f62d628f9c4))
+* **NumberInput:** value can be changed by ArrowUp, ArrowDown press as well as Plus, Minus icon click ([2da0175](https://github.com/AdmiralDS/react-ui/commit/2da0175d2e88edc5b3bd97b69f55b628bae0dc8e))
+* **Tree:** add missing types to export ([5495219](https://github.com/AdmiralDS/react-ui/commit/5495219dd051f766e4d91ec8e6fdbb7266576562))
+
+### [4.5.2](https://github.com/AdmiralDS/react-ui/compare/v4.5.1...v4.5.2) (2023-03-06)
+
+
+### Bug Fixes
+
+* **Menu:** fix scroll on repeat keydown ([5c77581](https://github.com/AdmiralDS/react-ui/commit/5c77581aa7201afc74a010df9936d5397ef28920))
+* **PhoneNumberInput:** fix move more than 1 point on scroll on arrow key down ([0a39b50](https://github.com/AdmiralDS/react-ui/commit/0a39b5072e9c59de73a9cf9440aa95bad0a6c783))
+
+### [4.5.1](https://github.com/AdmiralDS/react-ui/compare/v4.5.0...v4.5.1) (2023-03-03)
+
+## [4.5.0](https://github.com/AdmiralDS/react-ui/compare/v4.4.1...v4.5.0) (2023-03-01)
+
+
+### Features
+
+* **Hint:** add prop hintPosition and add new variants of positions ([239067a](https://github.com/AdmiralDS/react-ui/commit/239067af37698e2856feca529d10a574d4a494ea))
+* **PhoneNumberInput:** add Tooltip to drop down items ([c0ba451](https://github.com/AdmiralDS/react-ui/commit/c0ba451125f344800893664139c246475c5cf10a))
+* **Spinner:** add new size MS 20px ([22db645](https://github.com/AdmiralDS/react-ui/commit/22db645c0f2573cd9e4f68daaa13c40be8664cfd))
+
+
+### Bug Fixes
+
+* **Button, IconButton, TextButton:** fix spinner size ([cf96192](https://github.com/AdmiralDS/react-ui/commit/cf961920b5b00a1c9a6d5381ddbc58309d26c79e))
+* **DateInput:** date range should always replace symbols ([8c809c3](https://github.com/AdmiralDS/react-ui/commit/8c809c344864415ffb97fef2075cfc80bc6c1040))
+* **DateInput:** when editing value the result must always follow replace pattern ([987eeae](https://github.com/AdmiralDS/react-ui/commit/987eeae09733408555f3e75ea6473ffc3552a0bb))
+* **DateTime:** fix styles, add Container and Separator components ([f72695b](https://github.com/AdmiralDS/react-ui/commit/f72695be9506772fe2f5a792b3ddc279e4661946))
+* **FileItem, TextInput:** fix spinner size ([4bdf6a2](https://github.com/AdmiralDS/react-ui/commit/4bdf6a2e83d8ffe51a5904f2351a0239b167aaed))
+* **Hint:** fix styles for content area ([f924dbb](https://github.com/AdmiralDS/react-ui/commit/f924dbbbd45292b1f38375c29f2f29168df8f609))
+* **IconButton:** fix vertical-align wrong value ([ad9583e](https://github.com/AdmiralDS/react-ui/commit/ad9583ed7af5d0ce9b5758629454747d8980fb4f))
+* **PhoneNumberInput:** fix drop container width ([62c76ad](https://github.com/AdmiralDS/react-ui/commit/62c76ad6e98d14091ed17146ffa260bfcf3a6b63))
+* **RadioButton:** remove hover circle after click ([d48db9b](https://github.com/AdmiralDS/react-ui/commit/d48db9b423903cf2228b44eec79b73fc426d826d))
+* **SelectField:** fix dropdown position ([37a3d05](https://github.com/AdmiralDS/react-ui/commit/37a3d05507f6149a4754a536b1383a4ab2d6a611))
+* **Select:** fix spinner size ([5a81029](https://github.com/AdmiralDS/react-ui/commit/5a8102995cca1186b78920f24d5e64778e65fde1))
+* **TimeInput:** set focus on input when drop menu is opened ([9ea42d5](https://github.com/AdmiralDS/react-ui/commit/9ea42d5f14252c7e550ff7720050670822e4bc02))
+
 ### [4.4.1](https://github.com/AdmiralDS/react-ui/compare/v4.4.0...v4.4.1) (2023-02-16)
 
 

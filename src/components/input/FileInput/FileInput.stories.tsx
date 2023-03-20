@@ -85,6 +85,15 @@ export default {
       options: ALL_BORDER_RADIUS_VALUES,
       control: { type: 'radio' },
     },
+    description: {
+      control: false,
+    },
+    files: {
+      control: false,
+    },
+    extraText: {
+      control: false,
+    },
   },
 } as ComponentMeta<typeof FileInput>;
 

@@ -216,29 +216,16 @@ export const PhoneNumberInput = React.forwardRef<HTMLInputElement, PhoneNumberIn
           if (!isOpened) {
             setIsOpened(true);
             e.preventDefault();
-            break;
+            e.stopPropagation();
           }
-          if (activeIndex >= countryList.length - 1) {
-            setActiveIndex(0);
-          } else {
-            setActiveIndex(activeIndex + 1);
-          }
-          e.preventDefault();
           break;
         }
         case keyboardKey.ArrowUp: {
           if (!isOpened) {
             setIsOpened(true);
             e.preventDefault();
-            break;
+            e.stopPropagation();
           }
-
-          if (activeIndex <= 0) {
-            setActiveIndex(countryList.length - 1);
-          } else {
-            setActiveIndex(activeIndex - 1);
-          }
-          e.preventDefault();
           break;
         }
         case keyboardKey.Escape: {

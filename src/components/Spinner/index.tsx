@@ -6,9 +6,10 @@ import styled, { css, keyframes } from 'styled-components';
 import { ReactComponent as SpinnerXL } from './svgs/Subtract_xl.svg';
 import { ReactComponent as SpinnerL } from './svgs/Subtract_l.svg';
 import { ReactComponent as SpinnerM } from './svgs/Subtract_m.svg';
+import { ReactComponent as SpinnerMS } from './svgs/Subtract_ms.svg';
 import { ReactComponent as SpinnerS } from './svgs/Subtract_s.svg';
 
-type Dimension = 'xl' | 'l' | 'm' | 's';
+type Dimension = 'xl' | 'l' | 'm' | 'ms' | 's';
 
 export interface SpinnerProps extends HTMLAttributes<HTMLDivElement> {
   /** Рзамер спиннера */
@@ -23,6 +24,8 @@ const getIcon = (dimension: Dimension) => {
   switch (dimension) {
     case 's':
       return SpinnerS;
+    case 'ms':
+      return SpinnerMS;
     case 'm':
       return SpinnerM;
     case 'xl':
@@ -38,6 +41,8 @@ const sizes = css<{ dimension: Dimension }>`
     switch (dimension) {
       case 's':
         return '16px';
+      case 'ms':
+        return '20px';
       case 'm':
         return '24px';
       case 'xl':
@@ -51,6 +56,8 @@ const sizes = css<{ dimension: Dimension }>`
     switch (dimension) {
       case 's':
         return '16px';
+      case 'ms':
+        return '20px';
       case 'm':
         return '24px';
       case 'xl':

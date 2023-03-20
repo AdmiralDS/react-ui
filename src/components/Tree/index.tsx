@@ -201,3 +201,4 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps>(
 );
 
 export { TreeNode } from './TreeNode';
+export type { TreeNodeRenderOptionProps, TreeItemProps } from './TreeNode';

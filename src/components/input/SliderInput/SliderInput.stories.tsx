@@ -55,6 +55,27 @@ export default {
     thousand: {
       type: 'string',
     },
+    prefix: {
+      type: 'string',
+    },
+    suffix: {
+      type: 'string',
+    },
+    placeholder: {
+      type: 'string',
+    },
+    precision: {
+      type: 'number',
+    },
+    step: {
+      type: 'number',
+    },
+    minValue: {
+      type: 'number',
+    },
+    maxValue: {
+      type: 'number',
+    },
     displayClearIcon: {
       control: { type: 'boolean' },
     },
@@ -67,6 +88,12 @@ export default {
     readOnly: {
       control: { type: 'boolean' },
     },
+    showTooltip: {
+      control: { type: 'boolean' },
+    },
+    isLoading: {
+      control: { type: 'boolean' },
+    },
     icons: {
       control: false,
     },
@@ -74,6 +101,12 @@ export default {
       control: false,
     },
     handleInput: {
+      control: false,
+    },
+    tickMarks: {
+      control: false,
+    },
+    wrapperProps: {
       control: false,
     },
     themeBorderKind: {

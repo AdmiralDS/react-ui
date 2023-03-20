@@ -65,7 +65,25 @@ export default {
     displayInline: {
       control: { type: 'boolean' },
     },
+    showTooltip: {
+      control: { type: 'boolean' },
+    },
     icons: {
+      control: false,
+    },
+    alignDropRef: {
+      control: false,
+    },
+    containerRef: {
+      control: false,
+    },
+    prefixValueList: {
+      control: false,
+    },
+    suffixValueList: {
+      control: false,
+    },
+    dropContainerCssMixin: {
       control: false,
     },
     themeBorderKind: {
@@ -83,7 +101,9 @@ const DisplayContainer = styled.div`
     margin-bottom: 24px;
   }
 `;
+
 const PREFIX_OPTIONS = ['prefix One', 'prefix Two', 'prefix Three'];
+const SUFFIX_OPTIONS = ['suffix One', 'suffix Two', 'suffix Three'];
 const Template: ComponentStory<typeof InputExField> = (props) => {
   const [localValue, setValue] = React.useState<string>(String(props.value) ?? '');
 
@@ -99,10 +119,19 @@ const Template: ComponentStory<typeof InputExField> = (props) => {
   }
 
   const [prefixValue, setPrefixValue] = React.useState<ValueType>('prefix One');
+  const [suffixValue, setSuffixValue] = React.useState<ValueType>('suffix One');
   return (
     <ThemeProvider theme={swapBorder}>
       <DisplayContainer>
-        <InputExField data-container-id="InputExFieldIdOne" {...props} value={localValue} onChange={handleChange} />
+        <InputExField
+          data-container-id="InputExFieldIdOne"
+          {...props}
+          value={localValue}
+          onChange={handleChange}
+          suffixValue={suffixValue}
+          suffixValueList={SUFFIX_OPTIONS}
+          onSuffixValueChange={setSuffixValue}
+        />
         <InputExField
           data-container-id="InputExFieldIdTwo"
           required
@@ -113,6 +142,8 @@ const Template: ComponentStory<typeof InputExField> = (props) => {
         />
         <InputExField
           data-container-id="InputExFieldIdThree"
+          suffixValue={'suffix'}
+          prefixValue={'prefix'}
           readOnly
           aria-readonly
           label="Поле с атрибутом readOnly"
@@ -120,6 +151,8 @@ const Template: ComponentStory<typeof InputExField> = (props) => {
         />
         <InputExField
           data-container-id="InputExFieldIdFour"
+          suffixValue={'suffix'}
+          prefixValue={'prefix'}
           disabled
           aria-disabled
           label="Поле с атрибутом disabled"
@@ -127,28 +160,31 @@ const Template: ComponentStory<typeof InputExField> = (props) => {
         />
         <InputExField
           data-container-id="InputExFieldIdFive"
+          prefixValue={'prefix'}
           status="error"
           label="Поле с ошибкой"
           extraText="Поле не прошло валидацию, необходимо ввести корректное значение"
         />
         <InputExField
           data-container-id="InputExFieldIdWSix"
+          suffixValue={'suffix'}
           status="success"
           label="Поле с индикацией успеха"
           extraText="Поле успешно прошло валидацию"
         />
         <InputExField
           data-container-id="InputExFieldIdSeven"
-          displayClearIcon
+          prefixValue={'prefix'}
           placeholder="идет поиск ..."
           label="Поле с иконкой загрузки"
           suffixValue={'suffix'}
-          icons={<Spinner dimension="s" />}
+          icons={<Spinner dimension="m" />}
         />
         <InputExField
+          displayClearIcon
           data-container-id="InputExFieldIdEight"
-          label="Поле для ввода пароля (type='password')"
-          type="password"
+          prefixValue={'prefix'}
+          label="Поле иконкой очистки"
         />
       </DisplayContainer>
     </ThemeProvider>

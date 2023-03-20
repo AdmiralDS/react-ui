@@ -205,15 +205,6 @@ const StyledContainer = styled(Container)<{ disabled?: boolean; readOnly?: boole
   ${BorderedDivStyles}
 `;
 
-const StyledSpinner = styled(Spinner)`
-  width: ${(p) => (p.dimension === 's' ? '20px' : '24px')};
-  height: ${(p) => (p.dimension === 's' ? '20px' : '24px')};
-`;
-
-export const SpinnerMixin = css`
-  padding: 3px;
-`;
-
 function defaultHandleInput(newInputData: InputData | null): InputData {
   return newInputData || {};
 }
@@ -342,9 +333,7 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
     }
 
     if (isLoading) {
-      iconArray.unshift(
-        <StyledSpinner key="loading-icon" svgMixin={SpinnerMixin} dimension={props.dimension === 's' ? 's' : 'm'} />,
-      );
+      iconArray.unshift(<Spinner key="loading-icon" dimension={props.dimension === 's' ? 'ms' : 'm'} />);
     }
 
     const iconCount = iconArray.length;

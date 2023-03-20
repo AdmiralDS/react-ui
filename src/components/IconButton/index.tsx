@@ -100,6 +100,7 @@ const IconButtonContent = styled.span<{ dimension?: Dimension; appearance?: Icon
   flex-wrap: nowrap;
   justify-content: center;
   align-items: center;
+  width: ${({ dimension }) => (dimension === 's' ? 20 : 24)}px;
   height: ${({ dimension }) => (dimension === 's' ? 20 : 24)}px;
 
   > * {
@@ -123,13 +124,6 @@ const IconButtonContent = styled.span<{ dimension?: Dimension; appearance?: Icon
   }
 `;
 
-const PseudoIcon = styled.div<{ dimension?: Dimension }>`
-  border-radius: 50%;
-  width: ${({ dimension }) => (dimension === 's' ? 20 : 24)}px;
-  height: ${({ dimension }) => (dimension === 's' ? 20 : 24)}px;
-  background: ${({ theme }) => theme.color['Neutral/Neutral 50']};
-`;
-
 export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
   (
     {
@@ -148,8 +142,8 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
     const renderContent = () => {
       if (loading) {
         return (
-          <IconButtonContent>
-            <Spinner />
+          <IconButtonContent dimension={dimension}>
+            <Spinner dimension={dimension === 's' ? 'ms' : 'm'} />
           </IconButtonContent>
         );
       }

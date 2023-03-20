@@ -8,13 +8,11 @@ import { ButtonContainer, IconContainer } from '#src/components/TextButton/commo
 import { dimensionMixin } from '#src/components/TextButton/dimensionMixin';
 import { skeletonAnimationMixin } from '#src/components/skeleton/animation';
 
-const StyledSpinner = styled(Spinner)<{ dimension?: Dimension }>`
+const StyledSpinner = styled(Spinner)`
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: ${(p) => (p.dimension === 'm' ? '24px' : '20px')};
-  height: ${(p) => (p.dimension === 'm' ? '24px' : '20px')};
 `;
 
 const StyledButton = styled.button.attrs<StyledButtonProps>((props) => ({
@@ -92,7 +90,7 @@ export const TextButton = React.forwardRef<HTMLButtonElement, TextButtonProps>(
         $loading={loading}
         skeleton={skeleton}
       >
-        {loading && <StyledSpinner dimension={dimension} />}
+        {loading && <StyledSpinner dimension={dimension === 's' ? 'ms' : 'm'} />}
         {icon && <IconContainer>{icon}</IconContainer>}
         <ButtonContainer>
           <span>{text}</span>

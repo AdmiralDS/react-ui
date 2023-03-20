@@ -56,6 +56,12 @@ export default {
     displayInline: {
       control: { type: 'boolean' },
     },
+    showTooltip: {
+      control: { type: 'boolean' },
+    },
+    isLoading: {
+      control: { type: 'boolean' },
+    },
     startTime: {
       type: 'string',
     },
@@ -67,6 +73,18 @@ export default {
     },
     value: {
       control: { type: 'text' },
+    },
+    containerRef: {
+      control: false,
+    },
+    handleInput: {
+      control: false,
+    },
+    dropContainerCssMixin: {
+      control: false,
+    },
+    icon: {
+      control: false,
     },
     icons: {
       control: false,

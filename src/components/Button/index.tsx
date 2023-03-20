@@ -77,7 +77,7 @@ const ButtonContent = styled.div<{ dimension?: Dimension; $loading?: boolean }>`
   }
 `;
 
-const StyledSpinner = styled(Spinner)<{ dimension?: Dimension }>`
+const StyledSpinner = styled(Spinner)`
   position: absolute;
   left: 50%;
   top: 50%;
@@ -100,7 +100,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     },
     ref,
   ) => {
-    const spinnerDimension = dimension === 's' ? 's' : 'm';
+    const spinnerDimension = dimension === 's' ? 'ms' : 'm';
     const spinnerInverse = appearance !== 'secondary' && appearance !== 'ghost';
     const hasIconLeft = !!icon && iconPlace === 'left';
     const hasIconRight = !!icon && iconPlace === 'right';

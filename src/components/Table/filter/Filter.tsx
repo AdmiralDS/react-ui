@@ -27,6 +27,8 @@ export const Filter = React.forwardRef<HTMLButtonElement, FilterCompProps>(({ co
     onFilterMenuOpen,
     onFilterMenuClose,
     isFilterActive: filterActive,
+    filterMenuAlignSelf = 'flex-end',
+    filterMenuCssMixin,
   } = column;
   const [menuOpened, setMenuOpened] = React.useState<boolean>(false);
   /** TODO: удалить данный useState в дальнейшем и использовать взамен параметр column.isFilterActive */
@@ -82,9 +84,10 @@ export const Filter = React.forwardRef<HTMLButtonElement, FilterCompProps>(({ co
         <FilterDropdownContainer
           role="listbox"
           targetRef={targetRef}
-          alignSelf="flex-end"
+          alignSelf={filterMenuAlignSelf}
           onClickOutside={clickOutside}
           onKeyDown={handleMenuKeyDown}
+          dropContainerCssMixin={filterMenuCssMixin}
         >
           {renderFilter?.({ closeMenu, setFilterActive }, column)}
         </FilterDropdownContainer>

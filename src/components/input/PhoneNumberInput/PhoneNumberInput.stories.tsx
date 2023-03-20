@@ -52,7 +52,9 @@ export default {
     ],
   },
   argTypes: {
-    value: { control: { type: 'text', disabled: true }, description: 'Значение PhoneNumberInput' },
+    value: {
+      control: false,
+    },
     onChange: {
       action: 'onChange',
     },
@@ -77,11 +79,26 @@ export default {
     handleInput: {
       control: false,
     },
+    dropContainerCssMixin: {
+      control: false,
+    },
+    onlyCountries: {
+      control: false,
+    },
+    defaultCountry: {
+      control: false,
+    },
     themeBorderKind: {
       options: ALL_BORDER_RADIUS_VALUES,
       control: { type: 'radio' },
     },
     skeleton: {
+      control: { type: 'boolean' },
+    },
+    showTooltip: {
+      control: { type: 'boolean' },
+    },
+    isLoading: {
       control: { type: 'boolean' },
     },
   },

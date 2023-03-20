@@ -49,12 +49,18 @@ export default {
     error: {
       control: { type: 'boolean' },
     },
+    hovered: {
+      control: { type: 'boolean' },
+    },
     extraText: {
       control: { type: 'text' },
     },
     themeBorderKind: {
       options: ALL_BORDER_RADIUS_VALUES,
       control: { type: 'radio' },
+    },
+    children: {
+      control: false,
     },
   },
 } as ComponentMeta<typeof CheckboxField>;

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { refSetter } from '#src/components/common/utils/refSetter';
 
 import { ScrollTableBody } from './style';
+import { throttle } from '#src/components/common/utils/throttle';
 
 const Spacer = styled.div`
   display: flex;
@@ -12,23 +13,23 @@ const Spacer = styled.div`
 interface VirtualBodyProps extends React.HTMLAttributes<HTMLDivElement> {
   height: number;
   childHeight: number;
-  renderAhread?: number;
+  renderAhead?: number;
   rowList: any[];
   renderRow: (row: any, index: number) => React.ReactNode;
 }
 
 export const VirtualBody = React.forwardRef<HTMLDivElement, VirtualBodyProps>(
-  ({ height, childHeight, renderAhread = 20, rowList, renderRow, ...props }, ref) => {
+  ({ height, childHeight, renderAhead = 20, rowList, renderRow, ...props }, ref) => {
     const [scrollTop, setScrollTop] = React.useState(0);
     const scrollContainerRef = React.useRef<HTMLDivElement>(null);
 
-    const handleScroll = (e: any) => {
-      requestAnimationFrame(() => {
-        setScrollTop(e.target.scrollTop);
-      });
-    };
-
     React.useEffect(() => {
+      function handleScroll(e: any) {
+        requestAnimationFrame(() => {
+          setScrollTop(e.target.scrollTop);
+        });
+      }
+
       const scrollContainer = scrollContainerRef.current;
       setScrollTop(scrollContainer?.scrollTop || 0);
 
@@ -36,7 +37,7 @@ export const VirtualBody = React.forwardRef<HTMLDivElement, VirtualBodyProps>(
       return () => scrollContainer?.removeEventListener('scroll', handleScroll);
     }, []);
 
-    let startNode = Math.floor(scrollTop / childHeight) - renderAhread;
+    let startNode = Math.floor(scrollTop / childHeight) - renderAhead;
     startNode = Math.max(0, startNode);
 
     const rowNodes = React.useMemo(
@@ -45,7 +46,7 @@ export const VirtualBody = React.forwardRef<HTMLDivElement, VirtualBodyProps>(
     );
     const itemCount = rowNodes.length;
 
-    let visibleNodeCount = Math.ceil(height / childHeight) + 2 * renderAhread;
+    let visibleNodeCount = Math.ceil(height / childHeight) + 2 * renderAhead;
     visibleNodeCount = Math.min(itemCount - startNode, visibleNodeCount);
 
     const topPadding = `${startNode * childHeight}px`;

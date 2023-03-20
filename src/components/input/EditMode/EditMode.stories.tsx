@@ -66,11 +66,32 @@ export default {
       type: 'string',
     },
     onChange: {
-      action: 'onChange',
+      control: false,
     },
     themeBorderKind: {
       options: ALL_BORDER_RADIUS_VALUES,
       control: { type: 'radio' },
+    },
+    containerCssMixin: {
+      control: false,
+    },
+    icons: {
+      control: false,
+    },
+    containerRef: {
+      control: false,
+    },
+    handleInput: {
+      control: false,
+    },
+    showTooltip: {
+      control: { type: 'boolean' },
+    },
+    skeleton: {
+      control: { type: 'boolean' },
+    },
+    isLoading: {
+      control: { type: 'boolean' },
     },
   },
 } as ComponentMeta<typeof EditMode>;

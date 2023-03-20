@@ -3,7 +3,7 @@ import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import { ReactComponent as MinusCircleOutline } from '@admiral-ds/icons/build/service/MinusCircleOutline.svg';
 import { MenuButton } from '../MenuButton';
-import styled, { ThemeProvider } from 'styled-components';
+import styled, { css, ThemeProvider } from 'styled-components';
 import { T } from '#src/components/T';
 import type { Theme } from '#src/components/themes';
 import type { RenderOptionProps } from '#src/components/Menu/MenuItem';
@@ -12,6 +12,11 @@ import { ReactComponent as StarSolid } from '@admiral-ds/icons/build/system/Star
 import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 import type { MenuButtonProps } from '#src/components/MenuButton';
+import { MenuActionsPanel } from '#src/components/Menu/MenuActionsPanel';
+import { Button } from '#src/components/Button';
+import type { ItemWithCheckbox } from '#src/components/Menu/MenuItemWithCheckbox';
+import { MenuItemWithCheckbox } from '#src/components/Menu/MenuItemWithCheckbox';
+import type { RenderPanelProps } from '#src/components/Menu';
 
 const DarkDiv = styled.div`
   background-color: ${({ theme }) => theme.color['Special/Dark Static Neutral 00']};
@@ -258,37 +263,35 @@ const Template1: ComponentStory<typeof MenuButton> = (args) => {
   );
 };
 
+const items2 = [
+  {
+    id: '1',
+    display: 'Option one',
+  },
+  {
+    id: '2',
+    display: (
+      <div style={{ display: 'flex', width: '115px', justifyContent: 'space-between', alignItems: 'center' }}>
+        <MinusCircleOutline width={20} height={20} />
+        Option two
+      </div>
+    ),
+    disabled: true,
+  },
+  {
+    id: '3',
+    display: 'Option three',
+  },
+  {
+    id: '4',
+    display: 'Option four',
+  },
+];
 const Template2: ComponentStory<typeof MenuButton> = (args) => {
   const cleanProps = cleanUpProps(args) as MenuButtonProps;
-
-  const items = [
-    {
-      id: '1',
-      display: 'Option one',
-    },
-    {
-      id: '2',
-      display: (
-        <div style={{ display: 'flex', width: '115px', justifyContent: 'space-between', alignItems: 'center' }}>
-          <MinusCircleOutline width={20} height={20} />
-          Option two
-        </div>
-      ),
-      disabled: true,
-    },
-    {
-      id: '3',
-      display: 'Option three',
-    },
-    {
-      id: '4',
-      display: 'Option four',
-    },
-  ];
-
   const [selected, setSelected] = React.useState<string | undefined>(undefined);
   const model = React.useMemo(() => {
-    return items.map((item) => ({
+    return items2.map((item) => ({
       id: item.id,
       render: (items: RenderOptionProps) => (
         <MenuItem dimension={args.dimension === 'xl' ? 'l' : args.dimension} {...items} key={item.id}>
@@ -310,6 +313,29 @@ const Template2: ComponentStory<typeof MenuButton> = (args) => {
         }}
         items={model}
         onVisibilityChange={handleVisibilityChange}
+        renderBottomPanel={({ dimension, menuActionsPanelCssMixin = ActionPanelFlex }) => {
+          return (
+            <MenuActionsPanel dimension={dimension} menuActionsPanelCssMixin={menuActionsPanelCssMixin}>
+              <Button
+                dimension={'s'}
+                onClick={() => {
+                  console.log('Button 1 clicked');
+                }}
+              >
+                Action 1
+              </Button>
+              <Button
+                dimension={'s'}
+                appearance="secondary"
+                onClick={() => {
+                  console.log('Button 2 clicked');
+                }}
+              >
+                Action 2
+              </Button>
+            </MenuActionsPanel>
+          );
+        }}
       >
         test
       </MenuButton>
@@ -891,37 +917,40 @@ const Template3: ComponentStory<typeof MenuButton> = (args) => {
   );
 };
 
+const ActionPanelFlex = css`
+  display: flex;
+  gap: 8px;
+`;
+
+const items4 = [
+  {
+    id: '1',
+    display: 'Option one',
+  },
+  {
+    id: '2',
+    display: (
+      <div style={{ display: 'flex', width: '115px', justifyContent: 'space-between', alignItems: 'center' }}>
+        <MinusCircleOutline width={20} height={20} />
+        Option two
+      </div>
+    ),
+    disabled: true,
+  },
+  {
+    id: '3',
+    display: 'Option three',
+  },
+  {
+    id: '4',
+    display: 'Option four',
+  },
+];
 const Template4: ComponentStory<typeof MenuButton> = (args) => {
   const cleanProps = cleanUpProps(args) as MenuButtonProps;
-
-  const items = [
-    {
-      id: '1',
-      display: 'Option one',
-    },
-    {
-      id: '2',
-      display: (
-        <div style={{ display: 'flex', width: '115px', justifyContent: 'space-between', alignItems: 'center' }}>
-          <MinusCircleOutline width={20} height={20} />
-          Option two
-        </div>
-      ),
-      disabled: true,
-    },
-    {
-      id: '3',
-      display: 'Option three',
-    },
-    {
-      id: '4',
-      display: 'Option four',
-    },
-  ];
-
   const [selected, setSelected] = React.useState<string | undefined>(undefined);
   const modelL = React.useMemo(() => {
-    return items.map((item) => ({
+    return items4.map((item) => ({
       id: item.id,
       render: (items: RenderOptionProps) => (
         <MenuItem dimension="l" {...items} key={item.id}>
@@ -932,7 +961,7 @@ const Template4: ComponentStory<typeof MenuButton> = (args) => {
     }));
   }, []);
   const modelM = React.useMemo(() => {
-    return items.map((item) => ({
+    return items4.map((item) => ({
       id: item.id,
       render: (items: RenderOptionProps) => (
         <MenuItem dimension="m" {...items} key={item.id}>
@@ -943,7 +972,7 @@ const Template4: ComponentStory<typeof MenuButton> = (args) => {
     }));
   }, []);
   const modelS = React.useMemo(() => {
-    return items.map((item) => ({
+    return items4.map((item) => ({
       id: item.id,
       render: (items: RenderOptionProps) => (
         <MenuItem dimension="s" {...items} key={item.id}>
@@ -1233,13 +1262,124 @@ const Template4: ComponentStory<typeof MenuButton> = (args) => {
   );
 };
 
+const itemsWithCheckbox: Array<ItemWithCheckbox> = [
+  {
+    id: '1',
+    label: 'Option one',
+  },
+  {
+    id: '2',
+    label: 'Option two',
+  },
+  {
+    id: '3',
+    label: 'Option three',
+  },
+  {
+    id: '4',
+    label: 'Option four',
+  },
+  {
+    id: '5',
+    label: 'Option five',
+  },
+  {
+    id: '6',
+    label: 'Option six',
+  },
+  {
+    id: '7',
+    label: 'Option seven',
+  },
+];
+
+const Template5: ComponentStory<typeof MenuButton> = (args) => {
+  const cleanProps = cleanUpProps(args) as MenuButtonProps;
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (cleanProps as any).themeBorderKind || theme.shape.borderRadiusKind;
+    return theme;
+  }
+
+  const [innerState, setInnerState] = React.useState<Array<ItemWithCheckbox>>(itemsWithCheckbox.map((item) => item));
+  const [activeOption, setActiveOption] = React.useState<string | undefined>(innerState[0].id);
+  const [selectedOption, setSelectedOption] = React.useState<string | undefined>();
+  const [menuVisible, setMenuVisible] = React.useState<boolean>(false);
+
+  const model = React.useMemo(() => {
+    return innerState.map((item) => ({
+      id: item.id,
+      render: (options: RenderOptionProps) => (
+        <MenuItemWithCheckbox
+          key={item.id}
+          id={item.id}
+          checked={!!item.checked}
+          checkboxIsHovered={item.id === activeOption}
+          {...options}
+          dimension="s"
+        >
+          {item.label}
+        </MenuItemWithCheckbox>
+      ),
+    }));
+  }, [innerState, activeOption]);
+
+  const handleActivateItem = (id: string | undefined) => {
+    setActiveOption(id);
+  };
+
+  const handleSelectItem = (id: string) => {
+    console.log(`Option ${id} clicked`);
+    const updatedInnerState = [...innerState];
+    const itemToUpdate = updatedInnerState.find((item) => item.id === id);
+    if (itemToUpdate) {
+      itemToUpdate.checked = !itemToUpdate.checked;
+    }
+    setInnerState(updatedInnerState);
+    setSelectedOption(undefined);
+  };
+
+  const handleMenuVisibilityChange = (visible: boolean) => {
+    console.log('user menu visibilty change');
+    setMenuVisible(visible);
+  };
+
+  return (
+    <ThemeProvider theme={swapBorder}>
+      <MenuButton
+        dimension="s"
+        appearance="ghost"
+        items={model}
+        active={activeOption}
+        onActivateItem={handleActivateItem}
+        selected={selectedOption}
+        onSelectItem={handleSelectItem}
+        disableSelectedOptionHighlight={true}
+        isVisible={menuVisible}
+        onVisibilityChange={handleMenuVisibilityChange}
+        renderBottomPanel={({ dimension }: RenderPanelProps) => (
+          <MenuActionsPanel dimension={dimension} menuActionsPanelCssMixin={ActionPanelFlex}>
+            <Button dimension="s" onClick={() => handleMenuVisibilityChange(false)}>
+              Action 1
+            </Button>
+            <Button dimension="s" appearance="secondary" onClick={() => handleMenuVisibilityChange(false)}>
+              Action 2
+            </Button>
+          </MenuActionsPanel>
+        )}
+      >
+        Выберите опцию
+      </MenuButton>
+    </ThemeProvider>
+  );
+};
+
 export const MenuButtonBase = Template1.bind({});
 MenuButtonBase.args = {};
 MenuButtonBase.storyName = 'MenuButton. Базовый пример.';
 
 export const MenuButtonOptions = Template2.bind({});
 MenuButtonOptions.args = {};
-MenuButtonOptions.storyName = 'MenuButton. Задизейбленные и кастомизированные опции.';
+MenuButtonOptions.storyName = 'MenuButton. Задизейбленные и кастомизированные опции и панель с кнопками';
 
 export const MenuButtonVariants = Template3.bind({});
 MenuButtonVariants.args = {};
@@ -1248,3 +1388,7 @@ MenuButtonVariants.storyName = 'MenuButton. Размеры и стили.';
 export const MenuButtonIcon = Template4.bind({});
 MenuButtonIcon.args = {};
 MenuButtonIcon.storyName = 'MenuButton с иконкой';
+
+export const MenuButtonWithPanel = Template5.bind({});
+MenuButtonWithPanel.args = {};
+MenuButtonWithPanel.storyName = 'MenuButton с чекбоксами и нижней панелью в выпадающем меню';

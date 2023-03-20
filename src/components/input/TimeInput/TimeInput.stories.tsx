@@ -77,6 +77,12 @@ export default {
     disableCopying: {
       control: { type: 'boolean' },
     },
+    isLoading: {
+      control: { type: 'boolean' },
+    },
+    showTooltip: {
+      control: { type: 'boolean' },
+    },
     icons: {
       control: false,
     },
@@ -93,6 +99,12 @@ export default {
       type: 'string',
     },
     disabledSlots: {
+      control: false,
+    },
+    dropContainerCssMixin: {
+      control: false,
+    },
+    containerRef: {
       control: false,
     },
     themeBorderKind: {

@@ -6,7 +6,7 @@ import { Checkbox } from '#src/components/Checkbox';
 import { ReactComponent as ChevronRightOutline } from '@admiral-ds/icons/build/system/ChevronRightOutline.svg';
 import { IconPlacement } from '#src/components/IconPlacement';
 
-export interface RenderOptionProps {
+export interface TreeNodeRenderOptionProps {
   /** Размер компонента */
   dimension?: Dimension;
   /** Активная секция Tree */
@@ -37,7 +37,7 @@ export interface RenderOptionProps {
 
 export interface TreeItemProps {
   id: string;
-  render: (options: RenderOptionProps) => React.ReactNode;
+  render: (options: TreeNodeRenderOptionProps) => React.ReactNode;
   disabled?: boolean;
   checked?: boolean;
   children?: Array<TreeItemProps>;
@@ -55,7 +55,7 @@ export interface NodeProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChang
   onChange?: (value: boolean) => void;
 }
 
-export interface TreeNodeProps extends NodeProps, RenderOptionProps {}
+export interface TreeNodeProps extends NodeProps, TreeNodeRenderOptionProps {}
 
 const Chevron = styled(ChevronRightOutline)<{ $isOpened?: boolean; dimension?: Dimension }>`
   transition: all 0.3s;

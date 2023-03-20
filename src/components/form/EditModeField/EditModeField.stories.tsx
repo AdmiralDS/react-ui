@@ -55,6 +55,15 @@ export default {
     displayCharacterCounter: {
       control: { type: 'boolean' },
     },
+    showTooltip: {
+      control: { type: 'boolean' },
+    },
+    skeleton: {
+      control: { type: 'boolean' },
+    },
+    isLoading: {
+      control: { type: 'boolean' },
+    },
     placeholder: {
       type: 'string',
     },
@@ -67,7 +76,13 @@ export default {
     handleInput: {
       control: false,
     },
+    containerCssMixin: {
+      control: false,
+    },
     extraText: {
+      control: { type: 'text' },
+    },
+    label: {
       control: { type: 'text' },
     },
     icons: {

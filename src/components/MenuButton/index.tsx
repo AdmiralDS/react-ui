@@ -2,7 +2,7 @@ import type { HTMLAttributes } from 'react';
 import * as React from 'react';
 
 import type { ItemProps } from '#src/components/Menu/MenuItem';
-import type { DropMenuComponentProps } from '#src/components/DropMenu';
+import type { DropMenuComponentProps, RenderContentProps } from '#src/components/DropMenu';
 import { DropMenu } from '#src/components/DropMenu';
 import { uid } from '#src/components/common/uid';
 import { Button } from '#src/components/Button';
@@ -72,58 +72,69 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
       menuMaxHeight,
       dropContainerCssMixin,
       className = '',
+      renderBottomPanel,
       ...props
     },
     ref,
   ) => {
-    const dropMenuProps = passDropdownDataAttributes(props);
+    const renderContentProp: (options: RenderContentProps) => React.ReactNode = ({
+      buttonRef,
+      handleKeyDown,
+      handleClick,
+      statusIcon,
+      menuState,
+    }) => {
+      return (
+        <Button
+          {...props}
+          ref={buttonRef as React.Ref<HTMLButtonElement>}
+          skeleton={skeleton}
+          dimension={dimension}
+          appearance={appearance}
+          disabled={skeleton ? true : disabled}
+          loading={loading}
+          onKeyDown={handleKeyDown}
+          onClick={handleClick}
+          aria-expanded={menuState}
+          className={className + ' menu-button-with-dropdown'}
+        >
+          {React.Children.toArray(children).map((child) =>
+            typeof child === 'string' ? <span key={uid()}>{child}</span> : child,
+          )}
+          {statusIcon}
+        </Button>
+      );
+    };
+    const dropMenuProps = {
+      ...passDropdownDataAttributes(props),
+      renderBottomPanel,
+      items,
+      onChange,
+      onOpen,
+      onClose,
+      isVisible,
+      onVisibilityChange,
+      onClickOutside,
+      loading,
+      disableSelectedOptionHighlight,
+      selected,
+      onSelectItem,
+      active,
+      onActivateItem,
+      menuMaxHeight,
+      menuWidth,
+      dropContainerCssMixin,
+      alignSelf,
+      renderContentProp,
+    };
 
     return (
       <>
         <DropMenu
-          items={items}
-          onChange={onChange}
-          onOpen={onOpen}
-          onClose={onClose}
-          isVisible={isVisible}
-          onVisibilityChange={onVisibilityChange}
-          onClickOutside={onClickOutside}
           ref={ref}
           dimension={dimension === 'xl' ? 'l' : dimension}
           disabled={skeleton ? true : disabled}
-          loading={loading}
-          disableSelectedOptionHighlight={disableSelectedOptionHighlight}
-          selected={selected}
-          onSelectItem={onSelectItem}
-          active={active}
-          onActivateItem={onActivateItem}
-          menuMaxHeight={menuMaxHeight}
-          menuWidth={menuWidth}
-          dropContainerCssMixin={dropContainerCssMixin}
-          alignSelf={alignSelf}
           {...dropMenuProps}
-          renderContentProp={({ buttonRef, handleKeyDown, handleClick, statusIcon, menuState }) => {
-            return (
-              <Button
-                {...props}
-                ref={buttonRef as React.Ref<HTMLButtonElement>}
-                skeleton={skeleton}
-                dimension={dimension}
-                appearance={appearance}
-                disabled={skeleton ? true : disabled}
-                loading={loading}
-                onKeyDown={handleKeyDown}
-                onClick={handleClick}
-                aria-expanded={menuState}
-                className={className + ' menu-button-with-dropdown'}
-              >
-                {React.Children.toArray(children).map((child) =>
-                  typeof child === 'string' ? <span key={uid()}>{child}</span> : child,
-                )}
-                {statusIcon}
-              </Button>
-            );
-          }}
         >
           {children}
         </DropMenu>

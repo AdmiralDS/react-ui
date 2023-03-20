@@ -22,6 +22,10 @@ import { keyboardKey } from '#src/components/common/keyboardKey';
 import { mediumGroupBorderRadius, ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
 import type { CheckboxGroupItemProps, ItemWithCheckbox } from '#src/components/Menu/MenuItemWithCheckbox';
 import { checkboxTreeToMap, MenuItemWithCheckbox } from '#src/components/Menu/MenuItemWithCheckbox';
+import { LargeNumberOfItemsTemplate, VirtualScrollTemplate } from '#src/components/Menu/Stories/Templates';
+import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+import LargeNumberOfItemsRaw from '!!raw-loader!./Templates/LargeNumberOfItems';
+import VirtualScrollRaw from '!!raw-loader!./Templates/VirtualScroll';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -931,6 +935,7 @@ const MenuCheckboxGroupTemplate: ComponentStory<typeof Menu> = (args) => {
 };
 
 export const Simple = SimpleTemplate.bind({});
+Simple.storyName = 'Базовый пример';
 export const MenuWithLockCycleScroll = MenuWithLockCycleScrollTemplate.bind({});
 export const Category = TemplateWithCards.bind({});
 export const CustomItems = CustomItemTemplate.bind({});
@@ -942,7 +947,41 @@ export const MenuActionsTwoButtons = MenuActionsTwoButtonsTemplate.bind({});
 export const MenuActionsAddUserValue = MenuActionsAddUserValueTemplate.bind({});
 export const MenuCheckboxGroup = MenuCheckboxGroupTemplate.bind({});
 
-Simple.storyName = 'Базовый пример';
+const LargeNumberOfItemsStory: ComponentStory<typeof Menu> = (props) => (
+  <LargeNumberOfItemsTemplate model={[]} {...cleanUpProps(props)} />
+);
+export const LargeNumberOfItemsExample = LargeNumberOfItemsStory.bind({});
+LargeNumberOfItemsExample.parameters = {
+  docs: {
+    source: {
+      code: LargeNumberOfItemsRaw,
+    },
+    description: {
+      story: 'Пример с большим количеством item. Для проверки прокрутки меню при быстрой смене активного элемента.',
+    },
+  },
+};
+LargeNumberOfItemsExample.storyName = 'Пример с большим количеством item';
+
+const VirtualScrollStory: ComponentStory<typeof Menu> = (props) => (
+  <VirtualScrollTemplate model={[]} {...cleanUpProps(props)} />
+);
+export const VirtualScrollExample = VirtualScrollStory.bind({});
+VirtualScrollExample.parameters = {
+  docs: {
+    source: {
+      code: VirtualScrollRaw,
+    },
+    description: {
+      story:
+        'Для включения виртуального скролла, необходимо передать в параметр virtualScroll объект, ' +
+        'содержаний размер 1 элемента меню, для расчета максимальной высоты контейнера меню. ' +
+        'Или установить значение "auto". В этом случае максимальная высота будет рассчитана исходя из свойства "dimension"',
+    },
+  },
+};
+VirtualScrollExample.storyName = 'Виртуальный скролл';
+
 MenuWithLockCycleScroll.storyName = 'Пример без цикла обхода пунктов';
 Category.storyName = 'Пример с группами';
 CustomItems.storyName = 'Пример с кастомными пунктами меню';
