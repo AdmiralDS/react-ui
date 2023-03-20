@@ -3,28 +3,18 @@ import type { HTMLAttributes } from 'react';
 import { Row, SimpleRow, Filler } from '#src/components/TableRefactor/style';
 import type { TableRow as TableRowType } from '#src/components/TableRefactor';
 import { useTableContext } from '#src/components/TableRefactor/TableContext';
-import { PseudoText } from '../skeleton/PseudoText';
 
 export interface RowWrapperProps extends HTMLAttributes<HTMLDivElement> {
-  row: TableRowType;
+  row?: TableRowType;
+  getRow?: () => TableRowType;
+  /** Колбек на выбор/снятие выбора со строки (на нажатие по чекбоксу строки).*/
+  onRowSelectionChange?: (selected: boolean) => void;
 }
 
-export const TableRow = ({ row, ...props }: RowWrapperProps) => {
+export const TableRow = ({ row: userRow, getRow, onRowSelectionChange, ...props }: RowWrapperProps) => {
   const context = useTableContext();
-
-  const renderLoadingRow = () => {
-    return (
-      <Row {...props} underline dimension={context.dimension}>
-        <SimpleRow className="tr-simple">
-          {context.columns.map((col, index) => (
-            <PseudoText key={`pseudo_${col.name}}`} dimension={context.dimension} appearance="primary" />
-          ))}
-          <Filler />
-        </SimpleRow>
-      </Row>
-    );
-  };
-
+  const row = getRow?.() as any;
+  console.log(row);
   return (
     <Row
       {...props}

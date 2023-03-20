@@ -136,9 +136,12 @@ const Template3: ComponentStory<typeof Table> = ({ columnList, ...args }) => {
   const resource = fetchProfileData();
 
   const renderRow = (index: number) => {
-    // const resource = fetchProfileData();
-    const rowData = resource.rows.read()[index];
-    return <TableRow row={rowData} key={`row_${index}`} />;
+    // const rowData = resource.rows.read()[index];
+    return (
+      <React.Suspense fallback={<h5>Loading profile...</h5>}>
+        <TableRow getRow={() => resource.rows.read()[index]} key={`row_${index}`} />
+      </React.Suspense>
+    );
   };
 
   const handleResize = ({ name, width }: { name: string; width: string }) => {
@@ -219,6 +222,25 @@ Sort.parameters = {
       происходит на стороне пользователя при срабатывании колбека onSortChange.\n\n Дизайн-системой предусматривается многоуровневая сортировка. Рекомендуется использовать не более ДВУХ уровней.
       Логика сортировки (взаимосвязи) выстраивается пользователем. При этом, у иконок сортировки появляются цифры
       обозначающие порядок (приоритет) сортировки.`,
+    },
+  },
+};
+
+export const Checkbox = Template3.bind({});
+Checkbox.args = {
+  columnList: columnList,
+  displayRowSelectionColumn: true,
+};
+Checkbox.storyName = 'Table. Пример c чекбоксами.';
+Checkbox.parameters = {
+  docs: {
+    description: {
+      story: `Отображение столбца с чекбоксами регулируется параметром displayRowSelectionColumn. 
+      Чекбокс в шапке таблицы позволяет выбрать все строки (если не выбрано ни одной строки), 
+      либо отменить выбранные до этого строки. По нажатию на любой из чекбоксов срабатывает колбек onRowSelectionChange.\n\nТакже
+      с помощью параметров headerCheckboxChecked, headerCheckboxIndeterminate можно контролировать состояние чекбокса в шапке таблицы. А
+      с помощью колбека onHeaderSelectionChange отслеживать нажатие на данный чекбокс.\n\nЕсли необходимо задизейблить чекбокс отдельной строки,
+      для данной строки нужно задать параметр checkboxDisabled.`,
     },
   },
 };

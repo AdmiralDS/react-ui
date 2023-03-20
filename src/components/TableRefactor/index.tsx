@@ -1,8 +1,9 @@
 import * as React from 'react';
 import observeRect from '#src/components/common/observeRect';
 import { getScrollbarSize } from '#src/components/common/dom/scrollbarUtil';
-import { TableProvider } from './TableContext';
+import { Checkbox } from '#src/components/Checkbox';
 
+import { TableProvider } from './TableContext';
 import { HeaderCellComponent } from './HeaderCell';
 import {
   Cell,
@@ -14,6 +15,8 @@ import {
   ScrollTableBody,
   TableContainer,
   HiddenHeader,
+  StickyWrapper,
+  CheckboxCell,
 } from './style';
 
 export const DEFAULT_COLUMN_WIDTH = 100;
@@ -57,6 +60,8 @@ export interface TableRow extends Record<RowId, React.ReactNode> {
   error?: boolean;
   /** Строка в состоянии success */
   success?: boolean;
+  /** Строка в состоянии selected */
+  selected?: boolean;
 }
 
 export interface TableProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -83,6 +88,20 @@ export interface TableProps extends React.HTMLAttributes<HTMLDivElement> {
    * и порядок сортировки (возрастающий/убывающий или сброс сортировки до первоначального состояния (initial))
    */
   onSortChange?: (sortObj: { name: string; sort: 'asc' | 'desc' | 'initial' }) => void;
+  /** Отображение столбца с чекбоксами, позволяющими выбрать необходимые строки */
+  displayRowSelectionColumn?: boolean;
+  /** Установка чекбокса в шапке таблицы в состояние checked. */
+  headerCheckboxChecked?: boolean;
+  /** Установка чекбокса в шапке таблицы в состояние indeterminate (состояние, при котором выбрана только часть строк). */
+  headerCheckboxIndeterminate?: boolean;
+  /** Установка чекбокса в шапке таблицы в состояние disabled.
+   * По умолчанию состояние disabled устанавливается при отсутствии строк в таблице
+   */
+  headerCheckboxDisabled?: boolean;
+  /** Колбек на изменение состояния чекбокса, находящегося в хедере
+   * Возвращает параметр selectAll (если true - выбраны все строки в таблице, false - выбор снят со всех строк таблицы)
+   */
+  onHeaderSelectionChange?: (selectAll: boolean) => void;
 }
 
 export const Table: React.FC<TableProps> = ({
@@ -94,9 +113,15 @@ export const Table: React.FC<TableProps> = ({
   onSortChange,
   showDividerForLastColumn = false,
   disableColumnResize = false,
+  displayRowSelectionColumn = false,
+  headerCheckboxChecked = false,
+  headerCheckboxDisabled = false,
+  headerCheckboxIndeterminate = false,
+  onHeaderSelectionChange,
   ...props
 }) => {
   const columnMinWidth = dimension === 's' || dimension === 'm' ? COLUMN_MIN_WIDTH_M : COLUMN_MIN_WIDTH_L;
+  const checkboxDimension = dimension === 's' || dimension === 'm' ? 's' : 'm';
 
   const [verticalScroll, setVerticalScroll] = React.useState(false);
   const [tableWidth, setTableWidth] = React.useState(0);
@@ -206,6 +231,10 @@ export const Table: React.FC<TableProps> = ({
     return columnList.filter((col) => !!col.sort).length > 1;
   }, [columnList]);
 
+  function handleHeaderCheckboxChange(e: React.ChangeEvent<HTMLInputElement>) {
+    onHeaderSelectionChange?.(e.target.checked);
+  }
+
   const renderHeaderCell = (column: Column, index: number) => (
     <HeaderCellComponent
       key={`head_${column.name}`}
@@ -264,6 +293,21 @@ export const Table: React.FC<TableProps> = ({
         {renderHiddenHeader()}
         <HeaderWrapper scrollbar={scrollbar} data-verticalscroll={verticalScroll}>
           <Header dimension={dimension} ref={headerRef} className="tr">
+            {displayRowSelectionColumn && (
+              <StickyWrapper>
+                {displayRowSelectionColumn && (
+                  <CheckboxCell dimension={dimension} className="th_checkbox">
+                    <Checkbox
+                      dimension={checkboxDimension}
+                      checked={headerCheckboxChecked}
+                      indeterminate={headerCheckboxIndeterminate}
+                      disabled={rowCount === 0 || headerCheckboxDisabled}
+                      onChange={handleHeaderCheckboxChange}
+                    />
+                  </CheckboxCell>
+                )}
+              </StickyWrapper>
+            )}
             {columnList.map((col, index) => renderHeaderCell(col as Column, index))}
             <Filler />
           </Header>
