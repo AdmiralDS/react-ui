@@ -93,6 +93,15 @@ export default {
       options: [undefined, 'auto', 'flex-start', 'flex-end', 'center', 'baseline', 'stretch'],
       control: { type: 'select' },
     },
+    dropContainerCssMixin: {
+      control: false,
+    },
+    dropContainerClassName: {
+      control: false,
+    },
+    dropContainerStyle: {
+      control: false,
+    },
   },
 } as ComponentMeta<typeof MultiButton>;
 
@@ -180,6 +189,8 @@ const Template1: ComponentStory<typeof MultiButton> = (args) => {
           data-dropdown-container-id="first-multi-button-with-dropdown"
           className="multi-button-class"
           onMainButtonClick={handleMainButtonClick}
+          dropContainerClassName="dropContainerClass"
+          dropContainerStyle={{ width: '250px' }}
         >
           {itemsDemo[0].display}
         </MultiButton>
@@ -196,6 +207,8 @@ const Template1: ComponentStory<typeof MultiButton> = (args) => {
           onVisibilityChange={handleVisibilityChange}
           data-dropdown-container-id="second-multi-button-with-dropdown"
           onMainButtonClick={handleMainButtonClick}
+          dropContainerClassName="dropContainerClass"
+          dropContainerStyle={{ width: '250px' }}
         >
           {itemsDemo[0].display}
         </MultiButton>

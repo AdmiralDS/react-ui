@@ -1,4 +1,4 @@
-import type { MouseEvent, ReactNode, HTMLAttributes } from 'react';
+import type { CSSProperties, MouseEvent, ReactNode, HTMLAttributes } from 'react';
 import * as React from 'react';
 import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import styled, { css } from 'styled-components';
@@ -123,6 +123,10 @@ export interface MultiButtonProps extends Omit<HTMLAttributes<HTMLDivElement>, '
   menuMaxHeight?: string | number;
   /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
   dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+  /** Позволяет добавлять класс на контейнер выпадающего меню  */
+  dropContainerClassName?: string;
+  /** Позволяет добавлять стили на контейнер выпадающего меню  */
+  dropContainerStyle?: CSSProperties;
   /** Состояние skeleton */
   skeleton?: boolean;
 }
@@ -151,6 +155,8 @@ export const MultiButton = React.forwardRef<HTMLButtonElement, MultiButtonProps>
       alignSelf = 'auto',
       menuMaxHeight,
       dropContainerCssMixin,
+      dropContainerClassName,
+      dropContainerStyle,
       children,
       ...props
     },
@@ -203,6 +209,8 @@ export const MultiButton = React.forwardRef<HTMLButtonElement, MultiButtonProps>
         disabled={disabled}
         alignSelf={alignSelf}
         dropContainerCssMixin={dropContainerCssMixin}
+        dropContainerClassName={dropContainerClassName}
+        dropContainerStyle={dropContainerStyle}
         ref={ref}
         {...dropMenuProps}
         renderContentProp={({ buttonRef, handleKeyDown, handleClick, statusIcon, menuState }) => {
