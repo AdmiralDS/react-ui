@@ -1,4 +1,5 @@
 import * as React from 'react';
+import type { CSSProperties } from 'react';
 import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import styled, { ThemeContext } from 'styled-components';
 import { ReactComponent as SearchOutlineSVG } from '@admiral-ds/icons/build/system/SearchOutline.svg';
@@ -73,6 +74,10 @@ export interface SuggestInputProps extends Omit<TextInputProps, 'value'> {
 
   /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
   dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+  /** Позволяет добавлять класс на контейнер выпадающего меню  */
+  dropContainerClassName?: string;
+  /** Позволяет добавлять стили на контейнер выпадающего меню  */
+  dropContainerStyle?: CSSProperties;
 }
 
 export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps>(
@@ -83,6 +88,8 @@ export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps
       alignDropdown = 'stretch',
       dropMaxHeight,
       dropContainerCssMixin,
+      dropContainerClassName,
+      dropContainerStyle,
       onSearchButtonClick = () => undefined,
       icons,
       icon = SearchOutlineSVG,
@@ -229,6 +236,8 @@ export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps
             alignSelf={alignDropdown}
             data-dimension={dimension}
             dropContainerCssMixin={dropContainerCssMixin}
+            className={dropContainerClassName}
+            style={dropContainerStyle}
           >
             {options.length === 0 && !isLoading ? (
               <MessagePanel dimension={menuDimension}>
