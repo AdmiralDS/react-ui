@@ -93,6 +93,15 @@ export default {
       options: [undefined, 'auto', 'flex-start', 'flex-end', 'center', 'baseline', 'stretch'],
       control: { type: 'select' },
     },
+    dropContainerCssMixin: {
+      control: false,
+    },
+    dropContainerClassName: {
+      control: false,
+    },
+    dropContainerStyle: {
+      control: false,
+    },
   },
 } as ComponentMeta<typeof Select>;
 
@@ -109,7 +118,7 @@ const TemplateSearchSelectWithFilter: ComponentStory<typeof Select> = (props) =>
 
   return (
     <>
-      <Select {...cleanProps} placeholder="Placeholder" mode="searchSelect">
+      <Select {...cleanProps} placeholder="Placeholder" mode="searchSelect" dropContainerClassName="dropContainerClass">
         {renderOptions()}
       </Select>
     </>
