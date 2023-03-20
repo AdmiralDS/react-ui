@@ -51,6 +51,9 @@ export default {
       options: ALL_BORDER_RADIUS_VALUES,
       control: { type: 'radio' },
     },
+    dropContainerCssMixin: {
+      control: false,
+    },
   },
 } as ComponentMeta<typeof DropdownContainer>;
 
