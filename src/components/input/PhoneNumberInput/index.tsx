@@ -1,5 +1,6 @@
 import * as React from 'react';
-import type { CSSProperties, DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
+import type { CSSProperties } from 'react';
+import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import styled, { css } from 'styled-components';
 import { changeInputData } from '#src/components/common/dom/changeInputData';
 import { refSetter } from '#src/components/common/utils/refSetter';

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import type { ForwardedRef, InputHTMLAttributes } from 'react';
+import type { CSSProperties, ForwardedRef, InputHTMLAttributes } from 'react';
 import { ReactComponent as CloseOutlineSvg } from '@admiral-ds/icons/build/service/CloseOutline.svg';
 import type { ComponentDimension, ExtraProps, InputStatus } from '#src/components/input/types';
 import { containerHeights, skeletonMixin } from '#src/components/input/Container';
