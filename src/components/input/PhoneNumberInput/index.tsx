@@ -1,5 +1,5 @@
 import * as React from 'react';
-import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
+import type { CSSProperties, DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import styled, { css } from 'styled-components';
 import { changeInputData } from '#src/components/common/dom/changeInputData';
 import { refSetter } from '#src/components/common/utils/refSetter';
@@ -94,6 +94,10 @@ export interface PhoneNumberInputProps extends Omit<TextInputProps, 'value'> {
   onlyCountries?: Array<CountryAlpha3Code>;
   /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
   dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+  /** Позволяет добавлять класс на контейнер выпадающего меню  */
+  dropContainerClassName?: string;
+  /** Позволяет добавлять стили на контейнер выпадающего меню  */
+  dropContainerStyle?: CSSProperties;
 }
 
 const AVAILABLE_ALPHA3_CODES = Object.keys(ComponentsNames);
@@ -109,6 +113,8 @@ export const PhoneNumberInput = React.forwardRef<HTMLInputElement, PhoneNumberIn
       handleInput,
       skeleton = false,
       dropContainerCssMixin,
+      dropContainerClassName,
+      dropContainerStyle,
       ...props
     },
     ref,
@@ -298,6 +304,8 @@ export const PhoneNumberInput = React.forwardRef<HTMLInputElement, PhoneNumberIn
               onClickOutside={clickOutside}
               alignSelf="stretch"
               dropContainerCssMixin={dropContainerCssMixin}
+              className={dropContainerClassName}
+              style={dropContainerStyle}
             >
               <CountriesList
                 countries={countryList}
