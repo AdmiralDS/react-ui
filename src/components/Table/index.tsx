@@ -8,7 +8,6 @@ import { GroupRow } from '#src/components/Table/Row/GroupRow';
 import { RegularRow } from '#src/components/Table/Row/RegularRow';
 import { RowWrapper } from '#src/components/Table/Row/RowWrapper';
 import type { FlattenInterpolation, ThemeProps, DefaultTheme } from 'styled-components';
-import { get } from '#src/components/Table/get';
 
 import { HeaderCellComponent } from './HeaderCell';
 import {
@@ -610,13 +609,13 @@ export const Table: React.FC<TableProps> = ({
 
     const render = () => {
       if (col.renderCell) {
-        return col.renderCell(get(row, col.name), row, idx);
+        return col.renderCell(row[col.name], row, idx);
       }
       if (renderCell) {
         return renderCell(row, col.name);
       }
 
-      return <CellTextContent cellAlign={col.cellAlign}>{get(row, col.name)}</CellTextContent>;
+      return <CellTextContent cellAlign={col.cellAlign}>{row[col.name]}</CellTextContent>;
     };
 
     return (
