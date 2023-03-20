@@ -1,7 +1,11 @@
 import { rowListSort } from './data';
 
-export function fetchProfileData() {
-  let rowsPromise = fetchRows();
+export function fetchData() {
+  let rowsPromise = new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(rowListSort);
+    }, 3000);
+  });
   return {
     rows: wrapPromise(rowsPromise),
   };
@@ -37,12 +41,28 @@ function wrapPromise(promise) {
   };
 }
 
-function fetchRows() {
-  console.log('fetch rows...');
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      console.log('fetched rows');
-      resolve(rowListSort);
-    }, 1000);
-  });
-}
+// function fetchRows() {
+//   return new Promise((resolve) => {
+//     setTimeout(() => {
+//       resolve(rowListSort);
+//     }, 3000);
+//   });
+// }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+// async function fetchRows() {
+//   // Add a fake delay to make waiting noticeable.
+//   await new Promise((resolve) => {
+//     setTimeout(resolve, 3000);
+//   });
+//   return rowListSort;
+// }

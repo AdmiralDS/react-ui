@@ -13,8 +13,7 @@ export interface RowWrapperProps extends HTMLAttributes<HTMLDivElement> {
 
 export const TableRow = ({ row: userRow, getRow, onRowSelectionChange, ...props }: RowWrapperProps) => {
   const context = useTableContext();
-  const row = getRow?.() as any;
-  console.log(row);
+  const row: any = getRow?.() || userRow;
   return (
     <Row
       {...props}
