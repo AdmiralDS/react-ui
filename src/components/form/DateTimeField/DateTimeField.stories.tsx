@@ -119,9 +119,9 @@ const Template1: ComponentStory<typeof Field> = (props) => {
     <DisplayContainer>
       <Field label="Введите дату">
         <DateTimeContainer>
-          <DateTimeDateInput dropContainerClassName="dropContainerClass" />
+          <DateTimeDateInput dropContainerClassName="dateDropContainerClass" />
           <DateTimeSeparator />
-          <DateTimeTimeInput dropContainerClassName="dropContainerClass" />
+          <DateTimeTimeInput dropContainerClassName="timeDropContainerClass" />
         </DateTimeContainer>
       </Field>
     </DisplayContainer>
