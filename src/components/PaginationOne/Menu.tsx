@@ -1,4 +1,5 @@
 import * as React from 'react';
+import type { CSSProperties } from 'react';
 import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import styled from 'styled-components';
 import { typography } from '#src/components/Typography';
@@ -74,6 +75,10 @@ export interface MenuButtonProps
   dropMaxHeight: string | number;
   /** Позволяет добавлять миксин на дроп контейнер созданный с помощью styled css  */
   dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+  /** Позволяет добавлять класс на контейнер выпадающего меню  */
+  dropContainerClassName?: string;
+  /** Позволяет добавлять стили на контейнер выпадающего меню  */
+  dropContainerStyle?: CSSProperties;
   /** Ширина выпадающего меню */
   menuWidth?: string;
   /** Data-attributes для DropMenu */
@@ -98,6 +103,8 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
       onActivateItem = (id?: string) => undefined,
       dropMaxHeight,
       dropContainerCssMixin,
+      dropContainerClassName,
+      dropContainerStyle,
       menuWidth,
       dropMenuDataAttributes,
       className = '',
@@ -136,6 +143,8 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
         alignSelf={menuWidth ? 'flex-end' : 'stretch'}
         menuMaxHeight={dropMaxHeight}
         dropContainerCssMixin={dropContainerCssMixin}
+        dropContainerClassName={dropContainerClassName}
+        dropContainerStyle={dropContainerStyle}
         disabled={disabled}
         selected={selected}
         onSelectItem={onSelectItem}

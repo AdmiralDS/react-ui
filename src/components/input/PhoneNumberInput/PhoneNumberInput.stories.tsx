@@ -82,6 +82,12 @@ export default {
     dropContainerCssMixin: {
       control: false,
     },
+    dropContainerClassName: {
+      control: false,
+    },
+    dropContainerStyle: {
+      control: false,
+    },
     onlyCountries: {
       control: false,
     },
@@ -138,6 +144,7 @@ const PhoneNumberInputXL: ComponentStory<typeof PhoneNumberInput> = (props) => {
         value={localValue}
         style={{ maxWidth: '320px' }}
         onChange={handleChange}
+        dropContainerClassName="dropContainerClass"
       />
     </ThemeProvider>
   );

@@ -214,6 +214,7 @@ const PillMenu = React.forwardRef<HTMLElement, PillMenuProps>(({ options, ...pro
     <DropMenu
       ref={ref}
       items={model}
+      dropContainerClassName="dropContainerClass"
       selected={selectedPill?.id}
       onSelectItem={(id) => setSelectedPill(options.find((item) => item.id === id))}
       renderContentProp={({ buttonRef, handleKeyDown, handleClick, statusIcon }) => {

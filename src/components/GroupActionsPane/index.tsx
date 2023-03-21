@@ -7,6 +7,7 @@ import type { MenuDimension } from '#src/components/GroupActionsPane/ColumnsButt
 import { ColumnsButton } from '#src/components/GroupActionsPane/ColumnsButton';
 import { SettingsButton } from '#src/components/GroupActionsPane/SettingsButton';
 import { SearchBlock } from '#src/components/GroupActionsPane/SearchBlock';
+import type { DropContainerStyles } from '#src/components/DropdownContainer';
 
 export type PaneDimension = 's' | 'm' | 'l' | 'xl';
 
@@ -84,8 +85,13 @@ export interface GroupActionsPaneProps extends HTMLAttributes<HTMLDivElement> {
     inputPlaceholder?: string;
   };
 
-  /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
+  /** @deprecated use columnsButtonDropContainerStyle.dropContainerCssMixin instead
+   * Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
   dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+  /** Позволяет добавлять стили и className для выпадающего меню кнопки настройки видимости колонок  */
+  columnsButtonDropContainerStyle?: DropContainerStyles;
+  /** Позволяет добавлять стили и className для выпадающего меню кнопки настроек  */
+  settingsButtonDropContainerStyle?: DropContainerStyles;
 }
 
 export const GroupActionsPane = ({
@@ -101,6 +107,8 @@ export const GroupActionsPane = ({
   settingsButtonsDisabled = false,
   locale,
   dropContainerCssMixin,
+  columnsButtonDropContainerStyle,
+  settingsButtonDropContainerStyle,
   ...props
 }: React.PropsWithChildren<GroupActionsPaneProps>) => {
   const [searchOpened, setSearchOpened] = useState<boolean>(false);
@@ -138,13 +146,18 @@ export const GroupActionsPane = ({
           buttonDimension={iconButtonDimension}
           onColumnsChange={onColumnsChange}
           disabled={settingsButtonsDisabled}
-          dropContainerCssMixin={dropContainerCssMixin}
+          dropContainerCssMixin={columnsButtonDropContainerStyle?.dropContainerCssMixin || dropContainerCssMixin}
+          dropContainerClassName={columnsButtonDropContainerStyle?.dropContainerClassName}
+          dropContainerStyle={columnsButtonDropContainerStyle?.dropContainerStyle}
         />
         {settingsMenu && (
           <SettingsButton
             menu={settingsMenu}
             buttonDimension={iconButtonDimension}
             disabled={settingsButtonsDisabled}
+            dropContainerCssMixin={settingsButtonDropContainerStyle?.dropContainerCssMixin}
+            dropContainerClassName={settingsButtonDropContainerStyle?.dropContainerClassName}
+            dropContainerStyle={settingsButtonDropContainerStyle?.dropContainerStyle}
           />
         )}
       </IconsBlock>

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import type { CSSProperties } from 'react';
 import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import styled, { css } from 'styled-components';
 import { OpenStatusButton } from '#src/components/OpenStatusButton';
@@ -82,6 +83,10 @@ export type SuffixSelectProps<T> = {
 
   /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
   dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+  /** Позволяет добавлять класс на контейнер выпадающего меню  */
+  dropContainerClassName?: string;
+  /** Позволяет добавлять стили на контейнер выпадающего меню  */
+  dropContainerStyle?: CSSProperties;
 };
 
 export const SuffixSelect = <T extends ValueType>({
@@ -92,6 +97,8 @@ export const SuffixSelect = <T extends ValueType>({
   value,
   disabled,
   dropContainerCssMixin,
+  dropContainerClassName,
+  dropContainerStyle,
   renderValue,
   renderOption,
   ...props
@@ -139,6 +146,8 @@ export const SuffixSelect = <T extends ValueType>({
           targetRef={alignContainerRef}
           onClickOutside={clickOutside}
           dropContainerCssMixin={dropContainerCssMixin}
+          className={dropContainerClassName}
+          style={dropContainerStyle}
         >
           <StyledMenu
             maxHeight={dropMaxHeight}
