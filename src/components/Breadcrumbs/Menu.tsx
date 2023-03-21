@@ -85,6 +85,7 @@ export const MenuButton: React.FC<MenuButtonProps> = ({
       dimension={dimension}
       items={model}
       dropContainerCssMixin={dropContainerCssMixin}
+      alignSelf="auto"
       dropContainerClassName={dropContainerClassName}
       dropContainerStyle={dropContainerStyle}
     />
