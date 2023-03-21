@@ -1,5 +1,5 @@
 import * as React from 'react';
-import type { CSSProperties, ForwardedRef, InputHTMLAttributes } from 'react';
+import type { ForwardedRef, InputHTMLAttributes } from 'react';
 import { ReactComponent as CloseOutlineSvg } from '@admiral-ds/icons/build/service/CloseOutline.svg';
 import type { ComponentDimension, ExtraProps, InputStatus } from '#src/components/input/types';
 import { containerHeights, skeletonMixin } from '#src/components/input/Container';
@@ -16,6 +16,7 @@ import { SuffixSelect } from '#src/components/input/InputEx/SuffixSelect';
 import type { MenuItemProps } from '#src/components/Menu/MenuItem';
 import { Tooltip } from '#src/components/Tooltip';
 import { checkOverflow } from '#src/components/common/utils/checkOverflow';
+import type { DropContainerStyles } from '#src/components/DropdownContainer';
 
 const iconSizeValue = (props: { dimension?: ComponentDimension }) => {
   switch (props.dimension) {
@@ -270,8 +271,13 @@ export interface InputExProps extends Omit<InputHTMLAttributes<HTMLInputElement>
   /** Состояние skeleton */
   skeleton?: boolean;
 
-  /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
+  /** @deprecated use columnsButtonDropContainerStyle.dropContainerCssMixin instead
+   * Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
   dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+  /** Позволяет добавлять стили и className для выпадающего меню кнопки настройки видимости колонок  */
+  prefixDropContainerStyle?: DropContainerStyles;
+  /** Позволяет добавлять стили и className для выпадающего меню кнопки настроек  */
+  suffixDropContainerStyle?: DropContainerStyles;
 
   /** Отображение тултипа, по умолчанию true */
   showTooltip?: boolean;
@@ -304,6 +310,8 @@ export const InputEx = React.forwardRef<HTMLInputElement, InputExProps>(
 
       skeleton = false,
       dropContainerCssMixin,
+      prefixDropContainerStyle,
+      suffixDropContainerStyle,
       showTooltip = true,
       ...props
     },
@@ -321,7 +329,9 @@ export const InputEx = React.forwardRef<HTMLInputElement, InputExProps>(
             options={prefixValueList}
             disabled={props.disabled}
             readOnly={props.readOnly}
-            dropContainerCssMixin={dropContainerCssMixin}
+            dropContainerCssMixin={prefixDropContainerStyle?.dropContainerCssMixin || dropContainerCssMixin}
+            dropContainerClassName={prefixDropContainerStyle?.dropContainerClassName}
+            dropContainerStyle={prefixDropContainerStyle?.dropContainerStyle}
             renderValue={renderPrefixValue}
             renderOption={renderPrefixOption}
           />
@@ -340,7 +350,9 @@ export const InputEx = React.forwardRef<HTMLInputElement, InputExProps>(
             options={suffixValueList}
             disabled={props.disabled}
             readOnly={props.readOnly}
-            dropContainerCssMixin={dropContainerCssMixin}
+            dropContainerCssMixin={suffixDropContainerStyle?.dropContainerCssMixin || dropContainerCssMixin}
+            dropContainerClassName={suffixDropContainerStyle?.dropContainerClassName}
+            dropContainerStyle={suffixDropContainerStyle?.dropContainerStyle}
             renderValue={renderSuffixValue}
             renderOption={renderSuffixOption}
           />
