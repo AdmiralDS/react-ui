@@ -49,6 +49,15 @@ export default {
     settingsButtonsDisabled: {
       control: 'boolean',
     },
+    dropContainerCssMixin: {
+      control: false,
+    },
+    columnsButtonDropContainerStyle: {
+      control: false,
+    },
+    settingsButtonDropContainerStyle: {
+      control: false,
+    },
   },
 } as ComponentMeta<typeof GroupActionsPane>;
 
@@ -108,6 +117,8 @@ const Simple: ComponentStory<typeof GroupActionsPane> = (args) => {
           onColumnsChange={setColumnsVisibility}
           onSearchEnter={handleSearchEnter}
           onSearchLeave={handleSearchLeave}
+          columnsButtonDropContainerStyle={{ dropContainerClassName: 'columnsButtonDropContainerClass' }}
+          settingsButtonDropContainerStyle={{ dropContainerClassName: 'settingsButtonDropContainerClass' }}
           settingsMenu={<SettingsMenu>Здесь может быть меню настройки</SettingsMenu>}
         >
           <TextButton text={'Action 1'} dimension={dimension} icon={<GovernmentOutline />} />

@@ -1,4 +1,4 @@
-import type { ButtonHTMLAttributes, HTMLAttributes } from 'react';
+import type { ButtonHTMLAttributes, CSSProperties, HTMLAttributes } from 'react';
 import React, { useState } from 'react';
 import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import styled from 'styled-components';
@@ -48,6 +48,15 @@ export interface ActionRenderProps extends ButtonHTMLAttributes<HTMLButtonElemen
   dimension: ButtonDimension;
 }
 
+interface DropContainerStyles {
+  /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
+  dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+  /** Позволяет добавлять класс на контейнер выпадающего меню  */
+  dropContainerClassName?: string;
+  /** Позволяет добавлять стили на контейнер выпадающего меню  */
+  dropContainerStyle?: CSSProperties;
+}
+
 export interface GroupActionsPaneProps extends HTMLAttributes<HTMLDivElement> {
   /** Размер панели */
   dimension?: PaneDimension;
@@ -84,8 +93,13 @@ export interface GroupActionsPaneProps extends HTMLAttributes<HTMLDivElement> {
     inputPlaceholder?: string;
   };
 
-  /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
+  /** @deprecated use columnsButtonDropContainerStyle.dropContainerCssMixin instead
+   * Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
   dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+  /** Позволяет добавлять стили и className для выпадающего меню кнопки настройки видимости колонок  */
+  columnsButtonDropContainerStyle?: DropContainerStyles;
+  /** Позволяет добавлять стили и className для выпадающего меню кнопки настроек  */
+  settingsButtonDropContainerStyle?: DropContainerStyles;
 }
 
 export const GroupActionsPane = ({
@@ -101,6 +115,8 @@ export const GroupActionsPane = ({
   settingsButtonsDisabled = false,
   locale,
   dropContainerCssMixin,
+  columnsButtonDropContainerStyle,
+  settingsButtonDropContainerStyle,
   ...props
 }: React.PropsWithChildren<GroupActionsPaneProps>) => {
   const [searchOpened, setSearchOpened] = useState<boolean>(false);
@@ -138,13 +154,18 @@ export const GroupActionsPane = ({
           buttonDimension={iconButtonDimension}
           onColumnsChange={onColumnsChange}
           disabled={settingsButtonsDisabled}
-          dropContainerCssMixin={dropContainerCssMixin}
+          dropContainerCssMixin={columnsButtonDropContainerStyle?.dropContainerCssMixin || dropContainerCssMixin}
+          dropContainerClassName={columnsButtonDropContainerStyle?.dropContainerClassName}
+          dropContainerStyle={columnsButtonDropContainerStyle?.dropContainerStyle}
         />
         {settingsMenu && (
           <SettingsButton
             menu={settingsMenu}
             buttonDimension={iconButtonDimension}
             disabled={settingsButtonsDisabled}
+            dropContainerCssMixin={settingsButtonDropContainerStyle?.dropContainerCssMixin}
+            dropContainerClassName={settingsButtonDropContainerStyle?.dropContainerClassName}
+            dropContainerStyle={settingsButtonDropContainerStyle?.dropContainerStyle}
           />
         )}
       </IconsBlock>
