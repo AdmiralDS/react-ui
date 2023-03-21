@@ -69,5 +69,12 @@ export const MenuButton: React.FC<MenuButtonProps> = ({ dimension, options, drop
     });
   }, [options]);
 
-  return <OverflowMenu dimension={dimension} items={model} dropContainerCssMixin={dropContainerCssMixin} />;
+  return (
+    <OverflowMenu
+      dimension={dimension}
+      items={model}
+      dropContainerCssMixin={dropContainerCssMixin}
+      alignSelf="auto"
+    />
+  );
 };
