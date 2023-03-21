@@ -1,4 +1,4 @@
-import type { ButtonHTMLAttributes, CSSProperties, HTMLAttributes } from 'react';
+import type { ButtonHTMLAttributes, HTMLAttributes } from 'react';
 import React, { useState } from 'react';
 import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import styled from 'styled-components';
@@ -7,6 +7,7 @@ import type { MenuDimension } from '#src/components/GroupActionsPane/ColumnsButt
 import { ColumnsButton } from '#src/components/GroupActionsPane/ColumnsButton';
 import { SettingsButton } from '#src/components/GroupActionsPane/SettingsButton';
 import { SearchBlock } from '#src/components/GroupActionsPane/SearchBlock';
+import type { DropContainerStyles } from '#src/components/DropdownContainer';
 
 export type PaneDimension = 's' | 'm' | 'l' | 'xl';
 
@@ -46,15 +47,6 @@ const IconsBlock = styled.div<{ dimension?: PaneDimension }>`
 
 export interface ActionRenderProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   dimension: ButtonDimension;
-}
-
-interface DropContainerStyles {
-  /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
-  dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
-  /** Позволяет добавлять класс на контейнер выпадающего меню  */
-  dropContainerClassName?: string;
-  /** Позволяет добавлять стили на контейнер выпадающего меню  */
-  dropContainerStyle?: CSSProperties;
 }
 
 export interface GroupActionsPaneProps extends HTMLAttributes<HTMLDivElement> {
