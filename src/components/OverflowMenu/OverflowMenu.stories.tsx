@@ -144,6 +144,7 @@ const Template1: ComponentStory<typeof OverflowMenu> = (args) => {
         aria-label="Overflow Menu component"
         data-dropdown-container-id="overflow-menu-with-dropdown"
         className="overflow-menu-class"
+        dropContainerClassName="dropContainerClass"
       />
     </ThemeProvider>
   );
