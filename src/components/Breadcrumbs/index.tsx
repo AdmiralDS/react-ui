@@ -48,11 +48,9 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
       const target = entry.target;
       const targetNumber = target.dataset.number;
 
-      if (entry.isIntersecting && entry.intersectionRatio === 1.0) {
-        updatedEntries[targetNumber] = true;
-      } else {
-        updatedEntries[targetNumber] = false;
-      }
+      // intersectionRatio - имеет значение float, сравнение с 1 может привести к неправильному
+      // результату, данное сравнение равносильно (a - b) < 0.01
+      updatedEntries[targetNumber] = entry.isIntersecting && entry.intersectionRatio > 0.99;
     });
 
     setVisibilityMap((prev: { [index: number | string]: boolean }) => ({
