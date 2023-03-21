@@ -27,7 +27,7 @@ import {
   HiddenHeader,
 } from './style';
 import { VirtualBody } from './VirtualBody';
-import {CSSProperties} from "react";
+import type { CSSProperties } from 'react';
 
 export * from './RowAction';
 
