@@ -5,7 +5,7 @@ import { ReactComponent as MinusCircleOutline } from '@admiral-ds/icons/build/se
 import type { TabMenuProps } from '#src/components/TabMenu';
 import { TabMenu } from '#src/components/TabMenu';
 import type { Theme } from '#src/components/themes';
-import { ThemeProvider } from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
 import { Button } from '#src/components/Button';
 
@@ -44,6 +44,15 @@ export default {
     themeBorderKind: {
       options: ALL_BORDER_RADIUS_VALUES,
       control: { type: 'radio' },
+    },
+    dropContainerCssMixin: {
+      control: false,
+    },
+    dropContainerClassName: {
+      control: false,
+    },
+    dropContainerStyle: {
+      control: false,
     },
   },
 } as ComponentMeta<typeof TabMenu>;
@@ -174,6 +183,11 @@ const onChangeTab = (id: string) => {
   console.log(`selected: ${id}`);
 };
 
+const Wrapper = styled.div`
+  width: 100%;
+  height: 900px;
+`;
+
 const Temp1 = (props: TabMenuProps) => {
   function swapBorder(theme: Theme): Theme {
     theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
@@ -183,15 +197,18 @@ const Temp1 = (props: TabMenuProps) => {
 
   return (
     <ThemeProvider theme={swapBorder}>
-      <TabMenu
-        {...props}
-        activeTab={selected}
-        onChange={(id) => {
-          onChangeTab(id);
-          setSelected(id);
-        }}
-        tabs={tabs}
-      />
+      <Wrapper>
+        <TabMenu
+          {...props}
+          activeTab={selected}
+          onChange={(id) => {
+            onChangeTab(id);
+            setSelected(id);
+          }}
+          tabs={tabs}
+          dropContainerClassName="dropContainerClass"
+        />
+      </Wrapper>
     </ThemeProvider>
   );
 };

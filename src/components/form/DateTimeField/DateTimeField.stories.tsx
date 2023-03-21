@@ -96,6 +96,15 @@ export default {
       options: INPUT_STATUS_VALUES,
       control: { type: 'radio' },
     },
+    dropContainerCssMixin: {
+      control: false,
+    },
+    dropContainerClassName: {
+      control: false,
+    },
+    dropContainerStyle: {
+      control: false,
+    },
   },
 } as ComponentMeta<typeof Field>;
 
@@ -110,9 +119,9 @@ const Template1: ComponentStory<typeof Field> = (props) => {
     <DisplayContainer>
       <Field label="Введите дату">
         <DateTimeContainer>
-          <DateTimeDateInput />
+          <DateTimeDateInput dropContainerClassName="dateDropContainerClass" />
           <DateTimeSeparator />
-          <DateTimeTimeInput />
+          <DateTimeTimeInput dropContainerClassName="timeDropContainerClass" />
         </DateTimeContainer>
       </Field>
     </DisplayContainer>

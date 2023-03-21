@@ -1,5 +1,5 @@
 import * as React from 'react';
-import type { HTMLAttributes } from 'react';
+import type { CSSProperties, HTMLAttributes } from 'react';
 import { useRef, useState } from 'react';
 import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import styled from 'styled-components';
@@ -118,6 +118,10 @@ export interface TimeInputProps extends Omit<TextInputProps, 'value'> {
   alignDropdown?: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
   /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
   dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+  /** Позволяет добавлять класс на контейнер выпадающего меню  */
+  dropContainerClassName?: string;
+  /** Позволяет добавлять стили на контейнер выпадающего меню  */
+  dropContainerStyle?: CSSProperties;
 }
 
 export const TimeInput = React.forwardRef<HTMLInputElement, TimeInputProps>(
@@ -134,6 +138,8 @@ export const TimeInput = React.forwardRef<HTMLInputElement, TimeInputProps>(
       alignDropdown = 'flex-end',
       skeleton = false,
       dropContainerCssMixin,
+      dropContainerClassName,
+      dropContainerStyle,
       ...props
     },
     ref,
@@ -259,6 +265,8 @@ export const TimeInput = React.forwardRef<HTMLInputElement, TimeInputProps>(
             alignSelf={alignDropdown}
             onClickOutside={clickOutside}
             dropContainerCssMixin={dropContainerCssMixin}
+            className={dropContainerClassName}
+            style={dropContainerStyle}
           >
             <StyledMenu
               selected={timeValue}

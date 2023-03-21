@@ -75,6 +75,15 @@ export default {
     disabled: {
       control: { type: 'boolean' },
     },
+    dropContainerCssMixin: {
+      control: false,
+    },
+    dropContainerClassName: {
+      control: false,
+    },
+    dropContainerStyle: {
+      control: false,
+    },
   },
 } as ComponentMeta<typeof DropMenu>;
 
@@ -175,6 +184,7 @@ const SimpleTemplate: ComponentStory<typeof DropMenu> = (args) => {
           dimension={args.dimension}
           disabled={args.disabled}
           selected={selected}
+          dropContainerClassName="dropContainerClass"
           renderContentProp={({ buttonRef, handleKeyDown, handleClick, statusIcon, disabled }) => {
             return (
               <Button

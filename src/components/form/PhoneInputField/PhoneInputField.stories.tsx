@@ -62,6 +62,15 @@ export default {
     skeleton: {
       control: { type: 'boolean' },
     },
+    dropContainerCssMixin: {
+      control: false,
+    },
+    dropContainerClassName: {
+      control: false,
+    },
+    dropContainerStyle: {
+      control: false,
+    },
   },
 } as ComponentMeta<typeof PhoneInputField>;
 
@@ -99,6 +108,7 @@ const Template: ComponentStory<typeof PhoneInputField> = (props) => {
         value={localValue}
         defaultCountry="RUS"
         onChange={handleChange}
+        dropContainerClassName="dropContainerClass"
       />
     </ThemeProvider>
   );

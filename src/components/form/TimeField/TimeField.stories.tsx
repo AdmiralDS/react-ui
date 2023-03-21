@@ -83,6 +83,12 @@ export default {
     dropContainerCssMixin: {
       control: false,
     },
+    dropContainerClassName: {
+      control: false,
+    },
+    dropContainerStyle: {
+      control: false,
+    },
     icon: {
       control: false,
     },
@@ -145,6 +151,7 @@ const Template: ComponentStory<typeof TimeField> = (props) => {
           endTime="18:00"
           value={localValue}
           onChange={handleChange}
+          dropContainerClassName="dropContainerClass"
         />
       </DisplayContainer>
     </ThemeProvider>

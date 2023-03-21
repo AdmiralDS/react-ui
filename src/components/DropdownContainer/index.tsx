@@ -1,4 +1,5 @@
 import * as React from 'react';
+import type { CSSProperties } from 'react';
 import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import styled from 'styled-components';
 import { useClickOutside } from '#src/components/common/hooks/useClickOutside';
@@ -40,6 +41,15 @@ const Portal = styled(PositionInPortal)<{ reverse: boolean }>`
   flex-wrap: nowrap;
 `;
 
+export interface DropContainerStyles {
+  /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
+  dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+  /** Позволяет добавлять класс на контейнер выпадающего меню  */
+  dropContainerClassName?: string;
+  /** Позволяет добавлять стили на контейнер выпадающего меню  */
+  dropContainerStyle?: CSSProperties;
+}
+
 export interface DropdownContainerProps extends React.HTMLAttributes<HTMLDivElement> {
   targetRef: React.RefObject<HTMLElement>;
 
@@ -75,7 +85,7 @@ export const DropdownContainer = React.forwardRef<HTMLDivElement, React.PropsWit
       }
     }, [containerRef]);
 
-    const checkDropdownPosition = () => {
+    const checkDropdownPosition = React.useCallback(() => {
       const node = containerRef.current;
       const targetNode = targetRef.current;
       if (node && targetNode) {
@@ -84,12 +94,12 @@ export const DropdownContainer = React.forwardRef<HTMLDivElement, React.PropsWit
         const viewportHeight = window.innerHeight;
         const viewportWidth = window.innerWidth;
         if (viewportHeight - rect.bottom < 0 && targetRect.top > viewportHeight - targetRect.bottom) {
-          setDisplayUpward(true);
+          if (!displayUpward) setDisplayUpward(true);
         } else if (
           targetRect.bottom + (targetRect.top - rect.top) < viewportHeight - 8 ||
           targetRect.top < viewportHeight - targetRect.bottom
         ) {
-          setDisplayUpward(false);
+          if (displayUpward) setDisplayUpward(false);
         }
 
         if (props.alignSelf && props.alignSelf !== 'auto') return;
@@ -113,7 +123,7 @@ export const DropdownContainer = React.forwardRef<HTMLDivElement, React.PropsWit
           node.style.alignSelf = 'flex-end';
         }
       }
-    };
+    }, [displayUpward]);
 
     useInterval(checkDropdownPosition, 100);
 

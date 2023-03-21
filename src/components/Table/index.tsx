@@ -27,6 +27,7 @@ import {
   HiddenHeader,
 } from './style';
 import { VirtualBody } from './VirtualBody';
+import {CSSProperties} from "react";
 
 export * from './RowAction';
 
@@ -94,7 +95,10 @@ export type Column = {
 
   /** Позволяет добавлять миксин для меню фильтра, созданный с помощью styled css  */
   filterMenuCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
-
+  /** Позволяет добавлять класс на контейнер выпадающего меню  */
+  filterMenuClassName?: string;
+  /** Позволяет добавлять стили на контейнер выпадающего меню  */
+  filterMenuStyle?: CSSProperties;
   /**
    * Метод для переопределения стандартного вида ячейки
    * @param data

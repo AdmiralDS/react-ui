@@ -65,6 +65,15 @@ export default {
       options: ALL_BORDER_RADIUS_VALUES,
       control: { type: 'radio' },
     },
+    dropContainerCssMixin: {
+      control: false,
+    },
+    pageSizeDropContainerStyle: {
+      control: false,
+    },
+    pageNumberDropContainerStyle: {
+      control: false,
+    },
   },
 } as ComponentMeta<typeof PaginationOne>;
 
@@ -94,6 +103,8 @@ const Template1: ComponentStory<typeof PaginationOne> = (args) => {
         data-dropdown-container-id="pagination-with-dropdown"
         data-dropdown-container-test-id="pagination-test-id-with-dropdown"
         className="pagination-class-name"
+        pageSizeDropContainerStyle={{ dropContainerClassName: 'pageSizeDropContainerClass' }}
+        pageNumberDropContainerStyle={{ dropContainerClassName: 'pageNumberDropContainerClass' }}
       />
     </ThemeProvider>
   );
@@ -118,6 +129,8 @@ const Template2: ComponentStory<typeof PaginationOne> = () => {
           pageSize={pageSize1}
           totalItems={totalElements}
           pageSizes={pageSizes}
+          pageSizeDropContainerStyle={{ dropContainerClassName: 'pageSizeDropContainerClass' }}
+          pageNumberDropContainerStyle={{ dropContainerClassName: 'pageNumberDropContainerClass' }}
         />
       </Field>
       <Separator />
@@ -132,6 +145,8 @@ const Template2: ComponentStory<typeof PaginationOne> = () => {
           pageSize={pageSize1}
           totalItems={totalElements}
           pageSizes={pageSizes}
+          pageSizeDropContainerStyle={{ dropContainerClassName: 'pageSizeDropContainerClass' }}
+          pageNumberDropContainerStyle={{ dropContainerClassName: 'pageNumberDropContainerClass' }}
         />
       </Field>
       <Separator />
