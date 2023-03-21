@@ -95,6 +95,15 @@ export default {
     displayRowSelectionColumn: {
       control: { type: 'boolean' },
     },
+    headerCheckboxChecked: {
+      control: { type: 'boolean' },
+    },
+    headerCheckboxIndeterminate: {
+      control: { type: 'boolean' },
+    },
+    headerCheckboxDisabled: {
+      control: { type: 'boolean' },
+    },
     displayRowExpansionColumn: {
       control: { type: 'boolean' },
     },

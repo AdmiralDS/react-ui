@@ -47,20 +47,24 @@ export default {
   },
 } as ComponentMeta<typeof PaginationSimple>;
 
-const Template1: ComponentStory<typeof PaginationSimple> = ({ totalItems, currentItem, ...args }) => {
-  const [current, setCurrent] = React.useState(1);
-  const items = ['first item', 'second item', 'third item', 'forth item', 'fifth item', 'sixth item'];
+const Template1: ComponentStory<typeof PaginationSimple> = ({ totalItems = 5, currentItem = 1, ...args }) => {
+  const [current, setCurrent] = React.useState(currentItem);
+
+  React.useEffect(() => {
+    setCurrent(currentItem);
+  }, [currentItem]);
+
   return (
     <>
       <PaginationSimple
         {...args}
-        totalItems={totalItems || 5}
-        currentItem={currentItem || current}
+        totalItems={totalItems}
+        currentItem={current}
         onChange={(_, item) => setCurrent(item)}
       >
-        {items.map((item) => (
-          <PaginationSimpleItem aria-label={item} key={item} />
-        ))}
+        {[...Array(totalItems).keys()].map((item) => {
+          return <PaginationSimpleItem aria-label={`Item ${item}`} key={item} />;
+        })}
       </PaginationSimple>
     </>
   );
