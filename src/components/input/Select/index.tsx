@@ -1,4 +1,5 @@
 import * as React from 'react';
+import type { CSSProperties } from 'react';
 import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import styled, { ThemeContext } from 'styled-components';
 import { LIGHT_THEME } from '#src/components/themes';
@@ -117,6 +118,10 @@ export interface SelectProps extends Omit<React.InputHTMLAttributes<HTMLSelectEl
 
   /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
   dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+  /** Позволяет добавлять класс на контейнер выпадающего меню  */
+  dropContainerClassName?: string;
+  /** Позволяет добавлять стили на контейнер выпадающего меню  */
+  dropContainerStyle?: CSSProperties;
 
   /** Состояние skeleton */
   skeleton?: boolean;
@@ -206,6 +211,8 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       skeleton = false,
       locale,
       dropContainerCssMixin,
+      dropContainerClassName,
+      dropContainerStyle,
       renderDropDownTopPanel,
       renderDropDownBottomPanel,
       forcedOpen = false,
@@ -640,6 +647,8 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
             onClickOutside={handleClickOutside}
             alignSelf={alignDropdown}
             dropContainerCssMixin={dropContainerCssMixin}
+            className={dropContainerClassName}
+            style={dropContainerStyle}
           >
             <StyledMenu
               dimension={dimension === 'xl' ? 'l' : dimension}

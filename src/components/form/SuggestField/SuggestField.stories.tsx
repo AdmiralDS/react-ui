@@ -94,6 +94,12 @@ export default {
     dropContainerCssMixin: {
       control: false,
     },
+    dropContainerClassName: {
+      control: false,
+    },
+    dropContainerStyle: {
+      control: false,
+    },
     themeBorderKind: {
       options: ALL_BORDER_RADIUS_VALUES,
       control: { type: 'radio' },

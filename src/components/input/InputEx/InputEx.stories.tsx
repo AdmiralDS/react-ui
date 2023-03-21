@@ -92,6 +92,12 @@ export default {
     dropContainerCssMixin: {
       control: false,
     },
+    prefixDropContainerStyle: {
+      control: false,
+    },
+    suffixDropContainerStyle: {
+      control: false,
+    },
     skeleton: {
       control: { type: 'boolean' },
     },
@@ -203,6 +209,8 @@ const Template2: ComponentStory<typeof InputEx> = (props) => {
         suffixValue={suffixValue}
         suffixValueList={SUFFIX_OPTIONS}
         onSuffixValueChange={setSuffixValue}
+        prefixDropContainerStyle={{ dropContainerClassName: 'prefixDropContainerClass' }}
+        suffixDropContainerStyle={{ dropContainerClassName: 'suffixDropContainerClass' }}
       />
     </ThemeProvider>
   );
@@ -282,7 +290,14 @@ const Template3: ComponentStory<typeof InputEx> = (props) => {
         onSuffixValueChange={setSuffixValue}
         renderSuffixValue={customValueRender}
         renderSuffixOption={customOptionRender}
-        dropContainerCssMixin={containerContrastBorder}
+        prefixDropContainerStyle={{
+          dropContainerCssMixin: containerContrastBorder,
+          dropContainerClassName: 'prefixDropContainerClass',
+        }}
+        suffixDropContainerStyle={{
+          dropContainerClassName: 'suffixDropContainerClass',
+          dropContainerStyle: { border: 'dashed 2px red' },
+        }}
       />
     </ThemeProvider>
   );

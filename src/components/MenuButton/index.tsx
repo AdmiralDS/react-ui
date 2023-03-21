@@ -1,5 +1,5 @@
-import type { HTMLAttributes } from 'react';
 import * as React from 'react';
+import type { CSSProperties, HTMLAttributes } from 'react';
 
 import type { ItemProps } from '#src/components/Menu/MenuItem';
 import type { DropMenuComponentProps, RenderContentProps } from '#src/components/DropMenu';
@@ -44,6 +44,10 @@ export interface MenuButtonProps extends Omit<HTMLAttributes<HTMLButtonElement>,
   menuMaxHeight?: string | number;
   /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
   dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+  /** Позволяет добавлять класс на контейнер выпадающего меню  */
+  dropContainerClassName?: string;
+  /** Позволяет добавлять стили на контейнер выпадающего меню  */
+  dropContainerStyle?: CSSProperties;
 }
 
 export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
@@ -71,6 +75,8 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
       menuWidth,
       menuMaxHeight,
       dropContainerCssMixin,
+      dropContainerClassName,
+      dropContainerStyle,
       className = '',
       renderBottomPanel,
       ...props
@@ -124,6 +130,8 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
       menuMaxHeight,
       menuWidth,
       dropContainerCssMixin,
+      dropContainerClassName,
+      dropContainerStyle,
       alignSelf,
       renderContentProp,
     };

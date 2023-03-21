@@ -69,6 +69,15 @@ export default {
       options: ALL_BORDER_RADIUS_VALUES,
       control: { type: 'radio' },
     },
+    dropContainerCssMixin: {
+      control: false,
+    },
+    dropContainerClassName: {
+      control: false,
+    },
+    dropContainerStyle: {
+      control: false,
+    },
   },
 } as ComponentMeta<typeof TagMenu>;
 
@@ -154,6 +163,7 @@ const Template0: ComponentStory<typeof Tag> = (args: TagProps) => {
           {...args}
           data-dropdown-container-id="tag-menu-with-dropdown"
           className="tag-menu-class"
+          dropContainerClassName="dropContainerClass"
         />
       </ThemeProvider>
     </>

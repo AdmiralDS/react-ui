@@ -57,6 +57,15 @@ export default {
     mobile: {
       control: { type: 'boolean' },
     },
+    dropContainerCssMixin: {
+      control: false,
+    },
+    dropContainerClassName: {
+      control: false,
+    },
+    dropContainerStyle: {
+      control: false,
+    },
   },
 } as ComponentMeta<typeof Breadcrumbs>;
 
@@ -77,7 +86,7 @@ const Template1: ComponentStory<typeof Breadcrumbs> = (args) => {
   ];
   return (
     <>
-      <Breadcrumbs {...args} items={items} />
+      <Breadcrumbs {...args} items={items} dropContainerClassName="dropContainerClass" />
     </>
   );
 };

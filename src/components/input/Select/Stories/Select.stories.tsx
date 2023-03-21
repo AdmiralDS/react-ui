@@ -90,6 +90,15 @@ export default {
       options: [undefined, 'auto', 'flex-start', 'flex-end', 'center', 'baseline', 'stretch'],
       control: { type: 'select' },
     },
+    dropContainerCssMixin: {
+      control: false,
+    },
+    dropContainerClassName: {
+      control: false,
+    },
+    dropContainerStyle: {
+      control: false,
+    },
   },
 } as ComponentMeta<typeof Select>;
 
@@ -107,7 +116,13 @@ const SelectSimpleTemplate: ComponentStory<typeof Select> = (props) => {
 
   return (
     <ThemeProvider theme={swapBorder}>
-      <Select {...cleanProps} value={selectValue} onChange={onChange} placeholder="Select option">
+      <Select
+        {...cleanProps}
+        value={selectValue}
+        onChange={onChange}
+        placeholder="Select option"
+        dropContainerClassName="dropContainerClass"
+      >
         <Option value="Анигиляторная пушка">Анигиляторная пушка</Option>
         <Option value="Похо Торо Моронго">Похо Торо Моронго</Option>
         <Option value="Саша Даль">Саша Даль</Option>

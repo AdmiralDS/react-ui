@@ -61,6 +61,12 @@ export default {
     dropContainerCssMixin: {
       control: false,
     },
+    dropContainerClassName: {
+      control: false,
+    },
+    dropContainerStyle: {
+      control: false,
+    },
     menuWidth: {
       control: false,
     },
@@ -141,7 +147,13 @@ const Template2: ComponentStory<typeof AvatarGroup> = (props) => {
   return (
     <>
       <Text>Пример AvatarGroup с единым для всех аватаров внешним видом (appearance)</Text>
-      <AvatarGroup style={{ width: '300px' }} items={items2} onAvatarSelect={onSelectAvatar} {...clearProps} />
+      <AvatarGroup
+        style={{ width: '300px' }}
+        items={items2}
+        onAvatarSelect={onSelectAvatar}
+        dropContainerClassName="dropContainerClass"
+        {...clearProps}
+      />
       <div style={{ height: '40px' }} />
       <Text>Пример AvatarGroup с различными по внешнему виду (appearance) аватарами</Text>
       <AvatarGroup
@@ -149,6 +161,8 @@ const Template2: ComponentStory<typeof AvatarGroup> = (props) => {
         items={items3}
         onAvatarSelect={onSelectAvatar}
         appearance="dark"
+        dropContainerClassName="dropContainerClass"
+        dropContainerStyle={{ width: '250px' }}
         {...clearProps}
       />
     </>

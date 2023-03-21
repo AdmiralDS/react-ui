@@ -104,6 +104,12 @@ export default {
     dropContainerCssMixin: {
       control: false,
     },
+    dropContainerClassName: {
+      control: false,
+    },
+    dropContainerStyle: {
+      control: false,
+    },
     containerRef: {
       control: false,
     },
@@ -147,6 +153,7 @@ const TimeInputIconAlternative: ComponentStory<typeof TimeInput> = (props) => {
         value={localValue}
         onChange={handleChange}
         readOnly
+        dropContainerClassName="dropContainerClass"
       />
     </>
   );
@@ -179,7 +186,13 @@ const TimeInputSimple: ComponentStory<typeof TimeInput> = (props) => {
 
   return (
     <ThemeProvider theme={swapBorder}>
-      <TimeInput {...cleanProps} style={{ maxWidth: '320px' }} value={localValue} onChange={handleChange} />
+      <TimeInput
+        {...cleanProps}
+        style={{ maxWidth: '320px' }}
+        value={localValue}
+        onChange={handleChange}
+        dropContainerClassName="dropContainerClass"
+      />
     </ThemeProvider>
   );
 };
@@ -212,6 +225,7 @@ const TimeInputRange: ComponentStory<typeof TimeInput> = (props) => {
         endTime="18:00"
         value={localValue}
         onChange={handleChange}
+        dropContainerClassName="dropContainerClass"
       />
     </>
   );
@@ -246,6 +260,7 @@ const TimeInputRangeDisabled: ComponentStory<typeof TimeInput> = (props) => {
         endTime="20:00"
         value={localValue}
         onChange={handleChange}
+        dropContainerClassName="dropContainerClass"
       />
     </>
   );
@@ -278,6 +293,7 @@ const TimeInputSimpleDisabled: ComponentStory<typeof TimeInput> = (props) => {
         disabledSlots={['01:00', '03:30', '05:00', '07:30', '10:00', '12:30', '15:30', '17:00', '19:30']}
         value={localValue}
         onChange={handleChange}
+        dropContainerClassName="dropContainerClass"
       />
     </>
   );
