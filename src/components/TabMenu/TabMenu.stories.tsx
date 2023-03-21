@@ -45,6 +45,15 @@ export default {
       options: ALL_BORDER_RADIUS_VALUES,
       control: { type: 'radio' },
     },
+    dropContainerCssMixin: {
+      control: false,
+    },
+    dropContainerClassName: {
+      control: false,
+    },
+    dropContainerStyle: {
+      control: false,
+    },
   },
 } as ComponentMeta<typeof TabMenu>;
 
@@ -197,6 +206,7 @@ const Temp1 = (props: TabMenuProps) => {
             setSelected(id);
           }}
           tabs={tabs}
+          dropContainerClassName="dropContainerClass"
         />
       </Wrapper>
     </ThemeProvider>

@@ -1,4 +1,4 @@
-import type { HTMLAttributes } from 'react';
+import type { CSSProperties, HTMLAttributes } from 'react';
 import * as React from 'react';
 import type { TagVisualProps, TagSizeProps } from '#src/components/Tag';
 import { Tag } from '#src/components/Tag';
@@ -42,6 +42,10 @@ export interface TagMenuProps
   menuMaxHeight?: string | number;
   /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
   dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+  /** Позволяет добавлять класс на контейнер выпадающего меню  */
+  dropContainerClassName?: string;
+  /** Позволяет добавлять стили на контейнер выпадающего меню  */
+  dropContainerStyle?: CSSProperties;
 }
 
 export const TagMenu = React.forwardRef<HTMLButtonElement, TagMenuProps>(
@@ -68,6 +72,8 @@ export const TagMenu = React.forwardRef<HTMLButtonElement, TagMenuProps>(
       menuWidth,
       menuMaxHeight,
       dropContainerCssMixin,
+      dropContainerClassName,
+      dropContainerStyle,
       ...props
     },
     ref,
@@ -110,6 +116,8 @@ export const TagMenu = React.forwardRef<HTMLButtonElement, TagMenuProps>(
         onClickOutside={onClickOutside}
         alignSelf={alignSelf}
         dropContainerCssMixin={dropContainerCssMixin}
+        dropContainerClassName={dropContainerClassName}
+        dropContainerStyle={dropContainerStyle}
         {...dropMenuProps}
         renderContentProp={({ buttonRef, handleKeyDown, handleClick, statusIcon, menuState }) => {
           return (

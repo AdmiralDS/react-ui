@@ -86,6 +86,15 @@ export default {
     skeleton: {
       control: { type: 'boolean' },
     },
+    dropContainerCssMixin: {
+      control: false,
+    },
+    dropContainerClassName: {
+      control: false,
+    },
+    dropContainerStyle: {
+      control: false,
+    },
   },
 } as ComponentMeta<typeof TextButtonMenu>;
 
@@ -170,6 +179,7 @@ const TextButtonMenuStory: ComponentStory<typeof TextButtonMenu> = (args) => {
           onVisibilityChange={handleVisibilityChange}
           data-dropdown-container-id="text-button-menu-with-dropdown"
           className="text-button-menu-class"
+          dropContainerClassName="dropContainerClass"
         />
       </Wrapper>
     </ThemeProvider>

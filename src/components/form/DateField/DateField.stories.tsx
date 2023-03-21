@@ -97,6 +97,12 @@ export default {
     dropContainerCssMixin: {
       control: false,
     },
+    dropContainerClassName: {
+      control: false,
+    },
+    dropContainerStyle: {
+      control: false,
+    },
     icon: {
       control: false,
     },
@@ -177,14 +183,22 @@ const Template: ComponentStory<typeof DateField> = (props) => {
           onChange={handleChange}
           id={'date 1'}
           placeholder="Это placeholder"
+          dropContainerClassName="dropContainerClass"
         />
-        <DateField data-container-id="dateFieldIdTwo" required label="uncontrolled input" id={'date 2'} />
+        <DateField
+          data-container-id="dateFieldIdTwo"
+          required
+          label="uncontrolled input"
+          id={'date 2'}
+          dropContainerClassName="dropContainerClass"
+        />
         <DateField
           data-container-id="dateFieldIdThree"
           type="date-range"
           id="date range 1"
           label="uncontrolled date range"
           placeholder={'Введите отрезок времени'}
+          dropContainerClassName="dropContainerClass"
         />
       </FormContainer>
     </ThemeProvider>

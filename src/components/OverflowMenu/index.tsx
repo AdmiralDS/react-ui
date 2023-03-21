@@ -1,4 +1,5 @@
 import * as React from 'react';
+import type { CSSProperties } from 'react';
 import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 
 import { ReactComponent as MoreHorizontalOutline } from '@admiral-ds/icons/build/system/MoreHorizontalOutline.svg';
@@ -38,6 +39,10 @@ export interface OverflowMenuProps
   menuMaxHeight?: string | number;
   /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
   dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+  /** Позволяет добавлять класс на контейнер выпадающего меню  */
+  dropContainerClassName?: string;
+  /** Позволяет добавлять стили на контейнер выпадающего меню  */
+  dropContainerStyle?: CSSProperties;
   /** Ориентация компонента */
   isVertical?: boolean;
   /** Опции выпадающего списка */
@@ -67,6 +72,8 @@ export const OverflowMenu = React.forwardRef<HTMLButtonElement, OverflowMenuProp
       menuWidth,
       menuMaxHeight,
       dropContainerCssMixin,
+      dropContainerClassName,
+      dropContainerStyle,
       ...props
     },
     ref,
@@ -107,6 +114,8 @@ export const OverflowMenu = React.forwardRef<HTMLButtonElement, OverflowMenuProp
           disabled={disabled}
           alignSelf={alignSelf}
           dropContainerCssMixin={dropContainerCssMixin}
+          dropContainerClassName={dropContainerClassName}
+          dropContainerStyle={dropContainerStyle}
           ref={ref}
           {...dropMenuProps}
           renderContentProp={({ buttonRef, handleKeyDown, handleClick, menuState, disabled }: RenderContentProps) => {

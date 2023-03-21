@@ -177,6 +177,12 @@ export default {
     dropContainerCssMixin: {
       control: false,
     },
+    dropContainerClassName: {
+      control: false,
+    },
+    dropContainerStyle: {
+      control: false,
+    },
   },
 } as ComponentMeta<typeof MenuButton>;
 
@@ -256,6 +262,7 @@ const Template1: ComponentStory<typeof MenuButton> = (args) => {
         onVisibilityChange={handleVisibilityChange}
         data-dropdown-container-id="menu-button-with-dropdown"
         className="menu-button-class"
+        dropContainerClassName="dropContainerClass"
       >
         test
       </MenuButton>

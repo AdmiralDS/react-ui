@@ -1,4 +1,5 @@
 import * as React from 'react';
+import type { CSSProperties, ChangeEvent } from 'react';
 import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import styled, { css, ThemeContext } from 'styled-components';
 import { LIGHT_THEME } from '#src/components/themes';
@@ -11,8 +12,8 @@ import { MenuButton } from '#src/components/PaginationOne/Menu';
 import { passDropdownDataAttributes } from '#src/components/common/utils/splitDataAttributes';
 import { MenuActionsPanel } from '#src/components/Menu/MenuActionsPanel';
 import { TextInput } from '#src/components/input';
-import type { ChangeEvent } from 'react';
 import { keyboardKey } from '#src/components/common/keyboardKey';
+import { DropContainerStyles } from '#src/components/DropdownContainer';
 
 const ComplexWrapper = styled.div`
   display: flex;
@@ -86,12 +87,20 @@ export interface PaginationOneProps extends Omit<React.HTMLAttributes<HTMLDivEle
   pageSizeSelectDisabled?: boolean;
   /** Отображение компонента в упрощенном варианте, применяется в мобильных версиях */
   simple?: boolean;
+
   /** Задает максимальную высоту выпадающих меню */
   dropMaxHeight?: string | number;
-  /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
+  /** @deprecated use pageSizeDropContainerStyle.dropContainerCssMixin and
+   * pageNumberDropContainerStyle.dropContainerCssMixin instead.
+   * Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
   dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+  /** Позволяет добавлять стили и className для выпадающего меню кнопки настройки видимости колонок  */
+  pageSizeDropContainerStyle?: DropContainerStyles;
+  /** Позволяет добавлять стили и className для выпадающего меню кнопки настроек  */
+  pageNumberDropContainerStyle?: DropContainerStyles;
   /** Позволяет задать ширину выпадающего списка */
   menuWidth?: string;
+
   /** Включает окно ввода номера страницы в выпадающем списке */
   showPageNumberInput?: boolean;
   /** Объект локализации - позволяет перезадать текстовые константы используемые в компоненте,
@@ -127,6 +136,8 @@ export const PaginationOne: React.FC<PaginationOneProps> = ({
   menuWidth,
   dropMaxHeight = '',
   dropContainerCssMixin,
+  pageSizeDropContainerStyle,
+  pageNumberDropContainerStyle,
   locale,
   showPageNumberInput = false,
   ...props
@@ -263,7 +274,9 @@ export const PaginationOne: React.FC<PaginationOneProps> = ({
             disabled={pageSizeSelectDisabled}
             aria-label={pageSizeSelectLabel(pageSize, totalItems)}
             dropMaxHeight={dropMaxHeight}
-            dropContainerCssMixin={dropContainerCssMixin}
+            dropContainerCssMixin={pageSizeDropContainerStyle?.dropContainerCssMixin || dropContainerCssMixin}
+            dropContainerClassName={pageSizeDropContainerStyle?.dropContainerClassName}
+            dropContainerStyle={pageSizeDropContainerStyle?.dropContainerStyle}
             menuWidth={menuWidth}
             dropMenuDataAttributes={dropMenuProps}
             className="records-per-page-with-dropdown"
@@ -290,7 +303,11 @@ export const PaginationOne: React.FC<PaginationOneProps> = ({
             disabled={pageSelectDisabled}
             aria-label={pageSelectLabel(page, totalPages)}
             dropMaxHeight={dropMaxHeight}
-            dropContainerCssMixin={extendMixin(dropContainerCssMixin)}
+            dropContainerCssMixin={
+              pageNumberDropContainerStyle?.dropContainerCssMixin || extendMixin(dropContainerCssMixin)
+            }
+            dropContainerClassName={pageNumberDropContainerStyle?.dropContainerClassName}
+            dropContainerStyle={pageNumberDropContainerStyle?.dropContainerStyle}
             menuWidth={menuWidth}
             dropMenuDataAttributes={dropMenuProps}
             className="current-page-number-with-dropdown"
