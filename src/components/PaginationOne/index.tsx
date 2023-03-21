@@ -13,7 +13,7 @@ import { passDropdownDataAttributes } from '#src/components/common/utils/splitDa
 import { MenuActionsPanel } from '#src/components/Menu/MenuActionsPanel';
 import { TextInput } from '#src/components/input';
 import { keyboardKey } from '#src/components/common/keyboardKey';
-import { DropContainerStyles } from '#src/components/DropdownContainer';
+import type { DropContainerStyles } from '#src/components/DropdownContainer';
 
 const ComplexWrapper = styled.div`
   display: flex;
