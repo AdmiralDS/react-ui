@@ -61,6 +61,24 @@ export default {
     width: {
       control: { type: 'text' },
     },
+    selected: {
+      control: { type: 'text' },
+    },
+    active: {
+      control: { type: 'text' },
+    },
+    menuWidth: {
+      control: { type: 'text' },
+    },
+    menuMaxHeight: {
+      control: { type: 'text' },
+    },
+    disableSelectedOptionHighlight: {
+      control: { type: 'boolean' },
+    },
+    isVisible: {
+      control: { type: 'boolean' },
+    },
     as: {
       options: ['div', 'span', 'button'],
       control: { type: 'radio' },
@@ -76,6 +94,12 @@ export default {
       control: false,
     },
     dropContainerStyle: {
+      control: false,
+    },
+    items: {
+      control: false,
+    },
+    options: {
       control: false,
     },
   },
