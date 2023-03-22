@@ -33,35 +33,32 @@ export const Accordion: React.FC<AccordionProps> = ({
   ...props
 }) => {
   const accordionRef = React.useRef<HTMLDivElement | null>(null);
-  const handleKeyDown = React.useCallback(
-    (e) => {
-      let focusedOption: any = ((accordionRef.current && accordionRef.current.ownerDocument) || document).activeElement;
-      // если фокус находится на AccordionItem Title, то можно переключаться между accordion items с помощью ArrowDown, ArrowUp, Home, End
-      if (focusedOption.id.indexOf('accordion_title') > -1 && focusedOption.tagName.toLowerCase() === 'button') {
-        do {
-          focusedOption = focusedOption?.parentNode;
-        } while (focusedOption.parentNode !== accordionRef.current);
+  const handleKeyDown = React.useCallback((e) => {
+    let focusedOption: any = ((accordionRef.current && accordionRef.current.ownerDocument) || document).activeElement;
+    // если фокус находится на AccordionItem Title, то можно переключаться между accordion items с помощью ArrowDown, ArrowUp, Home, End
+    if (focusedOption.id.indexOf('accordion_title') > -1 && focusedOption.tagName.toLowerCase() === 'button') {
+      do {
+        focusedOption = focusedOption?.parentNode;
+      } while (focusedOption.parentNode !== accordionRef.current);
 
-        const code = keyboardKey.getCode(e);
+      const code = keyboardKey.getCode(e);
 
-        if (code === keyboardKey.ArrowDown) {
-          moveFocus(accordionRef.current, focusedOption, nextItem);
-          e.preventDefault();
-        } else if (code === keyboardKey.ArrowUp) {
-          moveFocus(accordionRef.current, focusedOption, previousItem);
-          e.preventDefault();
-        } else if (code === keyboardKey.Home) {
-          e.preventDefault();
-          moveFocus(accordionRef.current, null, nextItem);
-        } else if (code === keyboardKey.End) {
-          e.preventDefault();
-          moveFocus(accordionRef.current, null, previousItem);
-        }
+      if (code === keyboardKey.ArrowDown) {
+        moveFocus(accordionRef.current, focusedOption, nextItem);
+        e.preventDefault();
+      } else if (code === keyboardKey.ArrowUp) {
+        moveFocus(accordionRef.current, focusedOption, previousItem);
+        e.preventDefault();
+      } else if (code === keyboardKey.Home) {
+        e.preventDefault();
+        moveFocus(accordionRef.current, null, nextItem);
+      } else if (code === keyboardKey.End) {
+        e.preventDefault();
+        moveFocus(accordionRef.current, null, previousItem);
       }
-      onKeyDown?.(e);
-    },
-    [accordionRef.current],
-  );
+    }
+    onKeyDown?.(e);
+  }, []);
   return (
     <AccordionWrapper
       ref={accordionRef}
