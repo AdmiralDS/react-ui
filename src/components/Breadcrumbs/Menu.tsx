@@ -1,4 +1,5 @@
 import * as React from 'react';
+import type { CSSProperties } from 'react';
 import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import styled from 'styled-components';
 
@@ -35,9 +36,19 @@ export interface MenuButtonProps {
   options: Array<BreadcrumbProps>;
   /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
   dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+  /** Позволяет добавлять класс на контейнер выпадающего меню  */
+  dropContainerClassName?: string;
+  /** Позволяет добавлять стили на контейнер выпадающего меню  */
+  dropContainerStyle?: CSSProperties;
 }
 
-export const MenuButton: React.FC<MenuButtonProps> = ({ dimension, options, dropContainerCssMixin }) => {
+export const MenuButton: React.FC<MenuButtonProps> = ({
+  dimension,
+  options,
+  dropContainerCssMixin,
+  dropContainerClassName,
+  dropContainerStyle,
+}) => {
   const model = React.useMemo(() => {
     return options.map((item) => {
       const id = uid();
@@ -69,5 +80,14 @@ export const MenuButton: React.FC<MenuButtonProps> = ({ dimension, options, drop
     });
   }, [options]);
 
-  return <OverflowMenu dimension={dimension} items={model} dropContainerCssMixin={dropContainerCssMixin} />;
+  return (
+    <OverflowMenu
+      dimension={dimension}
+      items={model}
+      dropContainerCssMixin={dropContainerCssMixin}
+      alignSelf="auto"
+      dropContainerClassName={dropContainerClassName}
+      dropContainerStyle={dropContainerStyle}
+    />
+  );
 };

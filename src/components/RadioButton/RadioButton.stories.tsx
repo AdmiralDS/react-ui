@@ -94,7 +94,20 @@ export default {
   },
 } as ComponentMeta<typeof RadioButton>;
 
-const Template1: ComponentStory<typeof RadioButton> = () => {
+const Template1: ComponentStory<typeof RadioButton> = ({ checked: argChecked, ...args }: RadioButtonProps) => {
+  const [checked, setChecked] = useState(argChecked || false);
+  return (
+    <>
+      <RadioButton value={1} checked={checked} onChange={(event) => setChecked(event.currentTarget.checked)} {...args}>
+        Some text
+      </RadioButton>
+      <Separator />
+      <Button onClick={() => setChecked(false)}>Сбросить состояние радиокнопки</Button>
+    </>
+  );
+};
+
+const Template2: ComponentStory<typeof RadioButton> = () => {
   return (
     <>
       <RadioButton value={1}>Dimension - m</RadioButton>
@@ -106,7 +119,7 @@ const Template1: ComponentStory<typeof RadioButton> = () => {
   );
 };
 
-const Template2: ComponentStory<typeof RadioButton> = () => {
+const Template3: ComponentStory<typeof RadioButton> = () => {
   return (
     <>
       <RadioButton value={1} checked readOnly>
@@ -132,31 +145,6 @@ const Template2: ComponentStory<typeof RadioButton> = () => {
   );
 };
 
-const Template3: ComponentStory<typeof RadioButton> = ({
-  dimension,
-  disabled,
-  checked: argChecked,
-  error,
-}: RadioButtonProps) => {
-  const [checked, setChecked] = useState(argChecked || false);
-  return (
-    <>
-      <RadioButton
-        value={1}
-        checked={checked}
-        onChange={(event) => setChecked(event.currentTarget.checked)}
-        dimension={dimension}
-        disabled={disabled}
-        error={error}
-      >
-        Some text
-      </RadioButton>
-      <Separator />
-      <Button onClick={() => setChecked(false)}>Сбросить состояние радиокнопки</Button>
-    </>
-  );
-};
-
 const Template4: ComponentStory<typeof RadioButton> = () => {
   return (
     <>
@@ -170,9 +158,6 @@ const Template4: ComponentStory<typeof RadioButton> = () => {
     </>
   );
 };
-
-export const Playground = Template3.bind({});
-Playground.args = {};
 
 const Template5: ComponentStory<typeof RadioButton> = () => {
   const [visible1, setVisible1] = useState(false);
@@ -214,11 +199,14 @@ const Template5: ComponentStory<typeof RadioButton> = () => {
   );
 };
 
-export const RadioSize = Template1.bind({});
+export const Playground = Template1.bind({});
+Playground.args = {};
+
+export const RadioSize = Template2.bind({});
 RadioSize.args = {};
 RadioSize.storyName = 'RadioButton. Размеры';
 
-export const RadioState = Template2.bind({});
+export const RadioState = Template3.bind({});
 RadioState.args = {};
 RadioState.storyName = 'RadioButton. Состояния';
 

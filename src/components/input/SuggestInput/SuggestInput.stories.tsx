@@ -6,7 +6,6 @@ import { ReactComponent as SearchSolidSVG } from '@admiral-ds/icons/build/system
 import { SuggestInput } from './index';
 import { withDesign } from 'storybook-addon-designs';
 import type { Theme } from '#src/components/themes';
-import { LIGHT_THEME } from '#src/components/themes';
 import { ThemeProvider } from 'styled-components';
 import { getTextHighlightMeta } from '#src/components/common/utils/getTextHighlightMeta';
 import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
@@ -107,6 +106,12 @@ export default {
     dropContainerCssMixin: {
       control: false,
     },
+    dropContainerClassName: {
+      control: false,
+    },
+    dropContainerStyle: {
+      control: false,
+    },
     containerRef: {
       control: false,
     },
@@ -191,6 +196,7 @@ const Template: ComponentStory<typeof SuggestInput> = (props) => {
           console.log('search button click');
         }}
         displayClearIcon
+        dropContainerClassName="dropContainerClass"
       />
     </ThemeProvider>
   );

@@ -86,6 +86,12 @@ export default {
     dropContainerCssMixin: {
       control: false,
     },
+    dropContainerClassName: {
+      control: false,
+    },
+    dropContainerStyle: {
+      control: false,
+    },
     themeBorderKind: {
       options: ALL_BORDER_RADIUS_VALUES,
       control: { type: 'radio' },
@@ -131,6 +137,7 @@ const Template: ComponentStory<typeof InputExField> = (props) => {
           suffixValue={suffixValue}
           suffixValueList={SUFFIX_OPTIONS}
           onSuffixValueChange={setSuffixValue}
+          suffixDropContainerStyle={{ dropContainerClassName: 'suffixDropContainerClass' }}
         />
         <InputExField
           data-container-id="InputExFieldIdTwo"
@@ -139,6 +146,7 @@ const Template: ComponentStory<typeof InputExField> = (props) => {
           prefixValue={prefixValue}
           prefixValueList={PREFIX_OPTIONS}
           onPrefixValueChange={setPrefixValue}
+          prefixDropContainerStyle={{ dropContainerClassName: 'prefixDropContainerClass' }}
         />
         <InputExField
           data-container-id="InputExFieldIdThree"

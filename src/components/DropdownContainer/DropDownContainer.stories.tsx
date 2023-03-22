@@ -51,6 +51,9 @@ export default {
       options: ALL_BORDER_RADIUS_VALUES,
       control: { type: 'radio' },
     },
+    dropContainerCssMixin: {
+      control: false,
+    },
   },
 } as ComponentMeta<typeof DropdownContainer>;
 
@@ -104,6 +107,7 @@ const Simple: ComponentStory<typeof DropdownContainer> = (args) => {
             alignSelf="flex-end"
             targetRef={targetRef || buttonRef}
             onClickOutside={clickOutside}
+            className="dropContainerClass"
             {...other}
           >
             <StyledText>
@@ -204,6 +208,7 @@ const TemplateWithMenu: ComponentStory<typeof DropdownContainer> = (args) => {
             onClickOutside={clickOutside}
             {...other}
             dropContainerCssMixin={containerContrastBorder}
+            className="dropContainerClass"
           >
             <Menu
               model={model}

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import type { CSSProperties } from 'react';
 import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import styled from 'styled-components';
 import { useClickOutside } from '#src/components/common/hooks/useClickOutside';
@@ -39,6 +40,15 @@ const Portal = styled(PositionInPortal)<{ reverse: boolean }>`
   flex-direction: ${(p) => (p.reverse ? 'column-reverse' : 'column')};
   flex-wrap: nowrap;
 `;
+
+export interface DropContainerStyles {
+  /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
+  dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+  /** Позволяет добавлять класс на контейнер выпадающего меню  */
+  dropContainerClassName?: string;
+  /** Позволяет добавлять стили на контейнер выпадающего меню  */
+  dropContainerStyle?: CSSProperties;
+}
 
 export interface DropdownContainerProps extends React.HTMLAttributes<HTMLDivElement> {
   targetRef: React.RefObject<HTMLElement>;
@@ -105,12 +115,19 @@ export const DropdownContainer = React.forwardRef<HTMLDivElement, React.PropsWit
 
         if (!enoughWidthOnTheLeft && !enoughWidthOnTheRight) {
           node.style.alignSelf = 'center';
-        } else if (enoughWidthOnTheLeft && enoughWidthOnTheRight) {
-          node.style.alignSelf = 'flex-end';
-        } else if (containerWiderTarget && !enoughWidthOnTheLeft && enoughWidthOnTheRight) {
-          node.style.alignSelf = 'flex-start';
-        } else if (containerWiderTarget && !enoughWidthOnTheRight && enoughWidthOnTheLeft) {
-          node.style.alignSelf = 'flex-end';
+          // компенсация сдвига относительно target компонента (targetRect) таким образом, чтобы
+          // контейнер выпадающего меню (rect) вписывался в границы экрана (viewport)
+          const offset = (viewportWidth - rect.width) / 2 - (targetRect.left - (rectWidth - targetRect.width) / 2);
+          node.style.transform = `translateX(${offset}px)`;
+        } else {
+          node.style.transform = 'translateX(0)';
+          if (enoughWidthOnTheLeft && enoughWidthOnTheRight) {
+            node.style.alignSelf = 'flex-end';
+          } else if (containerWiderTarget && !enoughWidthOnTheLeft && enoughWidthOnTheRight) {
+            node.style.alignSelf = 'flex-start';
+          } else if (containerWiderTarget && !enoughWidthOnTheRight && enoughWidthOnTheLeft) {
+            node.style.alignSelf = 'flex-end';
+          }
         }
       }
     }, [displayUpward]);

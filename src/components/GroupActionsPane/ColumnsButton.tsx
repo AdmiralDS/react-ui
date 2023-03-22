@@ -1,4 +1,4 @@
-import type { HTMLAttributes } from 'react';
+import type { CSSProperties, HTMLAttributes } from 'react';
 import * as React from 'react';
 import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import styled from 'styled-components';
@@ -41,6 +41,10 @@ export interface ColumnsButtonProps extends HTMLAttributes<HTMLButtonElement>, R
   menuDimension?: MenuDimension;
   /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
   dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+  /** Позволяет добавлять класс на контейнер выпадающего меню  */
+  dropContainerClassName?: string;
+  /** Позволяет добавлять стили на контейнер выпадающего меню  */
+  dropContainerStyle?: CSSProperties;
 }
 
 const ColumnsMenu = styled(Menu)`
@@ -57,7 +61,19 @@ const StyledCheckbox = styled(Checkbox)`
 `;
 
 export const ColumnsButton = React.forwardRef<HTMLButtonElement, ColumnsButtonProps>(
-  ({ columns, menuDimension = 'l', buttonDimension = 'l', onColumnsChange, dropContainerCssMixin, ...props }, ref) => {
+  (
+    {
+      columns,
+      menuDimension = 'l',
+      buttonDimension = 'l',
+      onColumnsChange,
+      dropContainerCssMixin,
+      dropContainerClassName,
+      dropContainerStyle,
+      ...props
+    },
+    ref,
+  ) => {
     const [opened, setOpened] = useState<boolean>(false);
     const buttonRef = useRef<HTMLButtonElement | null>(null);
 
@@ -118,6 +134,8 @@ export const ColumnsButton = React.forwardRef<HTMLButtonElement, ColumnsButtonPr
             alignSelf={'flex-end'}
             onClickOutside={handleClickOutside}
             dropContainerCssMixin={dropContainerCssMixin}
+            className={dropContainerClassName}
+            style={dropContainerStyle}
           >
             <ColumnsMenu model={renderColumns} selected={''} />
           </StyledDropdownContainer>

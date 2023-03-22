@@ -91,6 +91,15 @@ export default {
     required: {
       control: { type: 'boolean' },
     },
+    dropContainerCssMixin: {
+      control: false,
+    },
+    dropContainerClassName: {
+      control: false,
+    },
+    dropContainerStyle: {
+      control: false,
+    },
   },
 } as ComponentMeta<typeof SelectField>;
 
@@ -423,6 +432,7 @@ const TemplateNotFixedMultiSelect: ComponentStory<typeof SelectField> = (props) 
         onChange={onChange}
         maxRowCount={3}
         dropContainerCssMixin={containerContrastBorder}
+        dropContainerClassName="dropContainerClass"
       >
         {Array.from({ length: 20 }).map((_option, ind) => (
           <Option key={ind} value={String(ind)}>

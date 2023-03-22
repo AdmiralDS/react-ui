@@ -1,4 +1,4 @@
-import type { HTMLAttributes } from 'react';
+import type { CSSProperties, HTMLAttributes } from 'react';
 import * as React from 'react';
 import type { Appearance, Dimension } from '#src/components/TextButton/types';
 import type { ItemProps } from '#src/components/Menu/MenuItem';
@@ -65,6 +65,10 @@ export interface TextButtonMenuProps
   menuMaxHeight?: string | number;
   /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
   dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+  /** Позволяет добавлять класс на контейнер выпадающего меню  */
+  dropContainerClassName?: string;
+  /** Позволяет добавлять стили на контейнер выпадающего меню  */
+  dropContainerStyle?: CSSProperties;
   /** Состояние skeleton */
   skeleton?: boolean;
 }
@@ -95,6 +99,8 @@ export const TextButtonMenu = React.forwardRef<HTMLButtonElement, TextButtonMenu
       menuMaxHeight,
       alignSelf,
       dropContainerCssMixin,
+      dropContainerClassName,
+      dropContainerStyle,
       ...props
     },
     ref,
@@ -123,6 +129,8 @@ export const TextButtonMenu = React.forwardRef<HTMLButtonElement, TextButtonMenu
         disabled={disabled}
         alignSelf={alignSelf}
         dropContainerCssMixin={dropContainerCssMixin}
+        dropContainerClassName={dropContainerClassName}
+        dropContainerStyle={dropContainerStyle}
         {...dropMenuProps}
         renderContentProp={({ buttonRef, handleKeyDown, handleClick, statusIcon, menuState }) => {
           return (

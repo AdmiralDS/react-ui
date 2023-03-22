@@ -1,4 +1,5 @@
 import * as React from 'react';
+import type { CSSProperties } from 'react';
 import { useRef, useState } from 'react';
 import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import styled from 'styled-components';
@@ -14,7 +15,6 @@ import { isValidDate } from './isValidDate';
 import { defaultParser } from './defaultParser';
 import { defaultDateRangeInputHandle } from '#src/components/input/DateInput/defaultDateRangeInputHandle';
 import { InputIconButton } from '#src/components/InputIconButton';
-import type { DropdownContainerProps } from '#src/components/DropdownContainer';
 import { StyledDropdownContainer } from '#src/components/DropdownContainer';
 
 const Input = styled(TextInput)`
@@ -55,6 +55,10 @@ export interface DateInputProps extends TextInputProps, Omit<CalendarPropType, '
 
   /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
   dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+  /** Позволяет добавлять класс на контейнер выпадающего меню  */
+  dropContainerClassName?: string;
+  /** Позволяет добавлять стили на контейнер выпадающего меню  */
+  dropContainerStyle?: CSSProperties;
 
   /** Видимость выпадающего меню */
   isVisible?: boolean;
@@ -88,6 +92,8 @@ export const DateInput = React.forwardRef<HTMLInputElement, DateInputProps>(
       icons,
       skeleton = false,
       dropContainerCssMixin,
+      dropContainerClassName,
+      dropContainerStyle,
       isVisible,
       onVisibilityChange = (isVisible: boolean) => undefined,
       ...props
@@ -188,6 +194,8 @@ export const DateInput = React.forwardRef<HTMLInputElement, DateInputProps>(
             alignSelf={alignDropdown}
             onClickOutside={handleBlurCalendarContainer}
             dropContainerCssMixin={dropContainerCssMixin}
+            className={dropContainerClassName}
+            style={dropContainerStyle}
           >
             <StyledCalendar
               {...calendarProps}

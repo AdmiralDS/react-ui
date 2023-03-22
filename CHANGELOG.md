@@ -2,6 +2,44 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.8.0](https://github.com/AdmiralDS/react-ui/compare/v4.7.0...v4.8.0) (2023-03-21)
+
+
+### Features
+
+* **AvatarGroup:** add dropContainerClassName and dropContainerStyle props ([371d8fe](https://github.com/AdmiralDS/react-ui/commit/371d8fe5b4112374756be76ee12456c421e43d3a))
+* **Breadcrumbs:** add dropContainerClassName and dropContainerStyle props ([523034c](https://github.com/AdmiralDS/react-ui/commit/523034c8a87877a6e070420b40b29a2eec16d791))
+* **DateInput:** add dropContainerClassName and dropContainerStyle props ([a9a8e77](https://github.com/AdmiralDS/react-ui/commit/a9a8e77ef8a69e099e013a33cdc4ad87f818a59a))
+* **DropMenu:** add dropContainerClassName and dropContainerStyle props ([911528e](https://github.com/AdmiralDS/react-ui/commit/911528ee9716d2ff759bd2a64f2b5d7151f78691))
+* **GroupActionsPane:** add columnsButtonDropContainerStyle and settingsButtonDropContainerStyle props ([9fb0514](https://github.com/AdmiralDS/react-ui/commit/9fb0514ba028155eefa0b98d76b482797bf52037))
+* **InputEx:** add pageSizeDropContainerStyle and pageNumberDropContainerStyle props ([efa9ee7](https://github.com/AdmiralDS/react-ui/commit/efa9ee752577aa3974564a6fc300441ecaf3a8af))
+* **MenuButton:** add dropContainerClassName and dropContainerStyle props ([bdc8e94](https://github.com/AdmiralDS/react-ui/commit/bdc8e945f8484470bbdab87e972f68ecced75df3))
+* **MultiButton:** add dropContainerClassName and dropContainerStyle props ([114be03](https://github.com/AdmiralDS/react-ui/commit/114be037849d89ab05e45af7a4f43bb5750a5221))
+* **OverflowMenu:** add dropContainerClassName and dropContainerStyle props ([79ae6d2](https://github.com/AdmiralDS/react-ui/commit/79ae6d2d6357446cac939bd520860b32de4b4d32))
+* **PaginationOne:** add pageSizeDropContainerStyle and pageNumberDropContainerStyle props ([f9e0a67](https://github.com/AdmiralDS/react-ui/commit/f9e0a675784018a3f15ee6170204fa5fb84affd1))
+* **PhoneNumberInput:** add dropContainerClassName and dropContainerStyle props ([5714018](https://github.com/AdmiralDS/react-ui/commit/5714018176878d3c5c80a17e600731ad91e1c293))
+* **Select:** add dropContainerClassName and dropContainerStyle props ([ee5749f](https://github.com/AdmiralDS/react-ui/commit/ee5749f84e3cb51faa3044acf1534b5622768a19))
+* **SuggestInput:** add dropContainerClassName and dropContainerStyle props ([3648add](https://github.com/AdmiralDS/react-ui/commit/3648add67e78f071043b41d27a56838b4da2bcc1))
+* **Table:** add filterMenuClassName and filterMenuStyle props ([15911b1](https://github.com/AdmiralDS/react-ui/commit/15911b195d77cf4d09c3828b096505744cff0c4f))
+* **Table:** add methods for custom render cell and group ([983d938](https://github.com/AdmiralDS/react-ui/commit/983d938b3094c5622def949c5ea0a70c088ac3b3))
+* **Table:** fix review ([1eb4166](https://github.com/AdmiralDS/react-ui/commit/1eb416643dcd80f756ca7b3fc0eb2ea2833a78fe))
+* **Table:** remove get helper ([339b85f](https://github.com/AdmiralDS/react-ui/commit/339b85f318e51431072205fb3c0b5013c02a03b8))
+* **TabMenu):** add dropContainerClassName and dropContainerStyle props ([2a8038f](https://github.com/AdmiralDS/react-ui/commit/2a8038f6b167cf6b820804312c50fa30b7d8bb08))
+* **TagMenu:** add dropContainerClassName and dropContainerStyle props ([6eb96d3](https://github.com/AdmiralDS/react-ui/commit/6eb96d33eb28ea4226ab6991991f098257d17a85))
+* **TextButtonMenu:** add dropContainerClassName and dropContainerStyle props ([2b32293](https://github.com/AdmiralDS/react-ui/commit/2b32293b458efff09b8d43a4fee3c3e98066ea37))
+* **TimeField:** add dropContainerClassName and dropContainerStyle props ([e777290](https://github.com/AdmiralDS/react-ui/commit/e777290bf1f77733cb6115973968fd3b11e68116))
+
+
+### Bug Fixes
+
+* **Breadcrumbs:** set alignSelf to auto ([cf1acff](https://github.com/AdmiralDS/react-ui/commit/cf1acff8e5fb20d976a1493d8fd47ace65cdeca9))
+* lint fixes ([2411218](https://github.com/AdmiralDS/react-ui/commit/241121856e8edd31b7f408f4f571216b60ef6107))
+* **PaginationSimple:** fix bug with inactive controls in storybook ([f060cc2](https://github.com/AdmiralDS/react-ui/commit/f060cc25b374357a2c53cee7837af12044a35b64))
+* **RadioButton:** fix control extraText and playground example in storybook ([d62c80b](https://github.com/AdmiralDS/react-ui/commit/d62c80bc605ff39d4bb60788cc6c35f2099c41d9))
+* **Stepper:** fix type of mobile prop in storybook ([66d581d](https://github.com/AdmiralDS/react-ui/commit/66d581d33abfe9520ca13118d8329024e68a92ef))
+* **TabMenu:** fix layout jumping ([8d330d9](https://github.com/AdmiralDS/react-ui/commit/8d330d961461a17e9597b28ca8861801dbbe1c24))
+* **Tooltip:** long words should break ([0c986f5](https://github.com/AdmiralDS/react-ui/commit/0c986f538859fb7770554a3e624329e8ad1ffd9b))
+
 ## [4.7.0](https://github.com/AdmiralDS/react-ui/compare/v4.6.0...v4.7.0) (2023-03-15)
 
 

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import type { CSSProperties } from 'react';
 import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import styled from 'styled-components';
 import { uid } from '#src/components/common/uid';
@@ -24,6 +25,10 @@ export interface AvatarGroupProps extends React.HTMLAttributes<HTMLDivElement> {
   menuMaxHeight?: string | number;
   /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
   dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+  /** Позволяет добавлять класс на контейнер выпадающего меню  */
+  dropContainerClassName?: string;
+  /** Позволяет добавлять стили на контейнер выпадающего меню  */
+  dropContainerStyle?: CSSProperties;
 }
 
 const AvatarsWrapper = styled.div`
@@ -60,6 +65,8 @@ export const AvatarGroup: React.FC<AvatarGroupProps> = ({
   menuWidth,
   menuMaxHeight,
   dropContainerCssMixin,
+  dropContainerClassName,
+  dropContainerStyle,
   ...props
 }) => {
   const dropMenuProps = passDropdownDataAttributes(props);
@@ -183,6 +190,8 @@ export const AvatarGroup: React.FC<AvatarGroupProps> = ({
           disabled={false}
           alignSelf="flex-start"
           dropContainerCssMixin={dropContainerCssMixin}
+          dropContainerClassName={dropContainerClassName}
+          dropContainerStyle={dropContainerStyle}
           {...dropMenuProps}
           renderContentProp={({ buttonRef, handleKeyDown, handleClick }) => {
             return (
