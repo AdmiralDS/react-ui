@@ -115,12 +115,19 @@ export const DropdownContainer = React.forwardRef<HTMLDivElement, React.PropsWit
 
         if (!enoughWidthOnTheLeft && !enoughWidthOnTheRight) {
           node.style.alignSelf = 'center';
-        } else if (enoughWidthOnTheLeft && enoughWidthOnTheRight) {
-          node.style.alignSelf = 'flex-end';
-        } else if (containerWiderTarget && !enoughWidthOnTheLeft && enoughWidthOnTheRight) {
-          node.style.alignSelf = 'flex-start';
-        } else if (containerWiderTarget && !enoughWidthOnTheRight && enoughWidthOnTheLeft) {
-          node.style.alignSelf = 'flex-end';
+          // компенсация сдвига относительно target компонента (targetRect) таким образом, чтобы
+          // контейнер выпадающего меню (rect) вписывался в границы экрана (viewport)
+          const offset = (viewportWidth - rect.width) / 2 - (targetRect.left - (rectWidth - targetRect.width) / 2);
+          node.style.transform = `translateX(${offset}px)`;
+        } else {
+          node.style.transform = 'translateX(0)';
+          if (enoughWidthOnTheLeft && enoughWidthOnTheRight) {
+            node.style.alignSelf = 'flex-end';
+          } else if (containerWiderTarget && !enoughWidthOnTheLeft && enoughWidthOnTheRight) {
+            node.style.alignSelf = 'flex-start';
+          } else if (containerWiderTarget && !enoughWidthOnTheRight && enoughWidthOnTheLeft) {
+            node.style.alignSelf = 'flex-end';
+          }
         }
       }
     }, [displayUpward]);
