@@ -75,6 +75,27 @@ export default {
     disabled: {
       control: { type: 'boolean' },
     },
+    multiSelection: {
+      control: { type: 'boolean' },
+    },
+    disableSelectedOptionHighlight: {
+      control: { type: 'boolean' },
+    },
+    isVisible: {
+      control: { type: 'boolean' },
+    },
+    menuWidth: {
+      control: { type: 'text' },
+    },
+    menuMaxHeight: {
+      control: { type: 'text' },
+    },
+    selected: {
+      control: { type: 'text' },
+    },
+    active: {
+      control: { type: 'text' },
+    },
     dropContainerCssMixin: {
       control: false,
     },
@@ -82,6 +103,12 @@ export default {
       control: false,
     },
     dropContainerStyle: {
+      control: false,
+    },
+    items: {
+      control: false,
+    },
+    alignMenuRef: {
       control: false,
     },
   },
