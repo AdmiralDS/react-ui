@@ -58,16 +58,10 @@ export default {
       control: { type: 'boolean' },
     },
     thousand: {
-      control: { type: 'string' },
-    },
-    prefix: {
-      type: 'string',
+      control: { type: 'text' },
     },
     suffix: {
-      type: 'string',
-    },
-    placeholder: {
-      type: 'string',
+      control: { type: 'text' },
     },
     themeBorderKind: {
       options: ALL_BORDER_RADIUS_VALUES,
@@ -77,16 +71,16 @@ export default {
       control: { type: 'boolean' },
     },
     minValue: {
-      type: 'number',
+      control: { type: 'number' },
     },
     maxValue: {
-      type: 'number',
+      control: { type: 'number' },
     },
     precision: {
-      type: 'number',
+      control: { type: 'number' },
     },
     step: {
-      type: 'number',
+      control: { type: 'number' },
     },
     value: {
       control: false,
@@ -98,6 +92,12 @@ export default {
       control: false,
     },
     input2: {
+      control: false,
+    },
+    prefix: {
+      control: false,
+    },
+    placeholder: {
       control: false,
     },
   },
