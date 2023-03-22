@@ -9,7 +9,6 @@ import * as React from 'react';
 import styled, { css } from 'styled-components';
 import { InputIconButton } from '#src/components/InputIconButton';
 import { Container } from '../Container';
-import { Fragment } from 'react';
 
 const iconSizeValue = (props: { dimension?: ComponentDimension }) => {
   switch (props.dimension) {
@@ -233,6 +232,16 @@ const StyledContainer = styled(Container)<{
       : `height: ${textAreaHeight(p.rows, p.dimension)}px`}
 `;
 
+function toHtmlString(value?: string) {
+  return String(value || '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;')
+    .replace(/(\r?\n)$/g, '<br /><br />')
+    .replace(/\r?\n/g, '<br /> ');
+}
 export interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   /** Максимальное количество символов для ввода */
   maxLength?: number;
@@ -291,7 +300,7 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
     ref,
   ) => {
     const inputRef = React.useRef<HTMLTextAreaElement>(null);
-
+    const hiddenDivRef = React.useRef<HTMLDivElement>(null);
     const iconArray = React.Children.toArray(icons);
 
     if (!props.readOnly && displayClearIcon) {
@@ -312,21 +321,6 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
     const iconCount = iconArray.length;
 
     const inputData = value !== undefined && value !== null ? handleInput({ value: String(value) }) : {};
-
-    const HiddenSpanLines = (value?: string) => {
-      const lines = value?.split(/\r?\n/g) || [''];
-
-      return (
-        <>
-          {lines.map((line, index) => (
-            <Fragment key={index}>
-              {line}
-              <br />
-            </Fragment>
-          ))}
-        </>
-      );
-    };
 
     React.useLayoutEffect(() => {
       function oninput(this: HTMLTextAreaElement) {
@@ -352,6 +346,23 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
       }
     }, [inputRef.current, handleInput]);
 
+    React.useEffect(() => {
+      function oninput(this: HTMLTextAreaElement) {
+        const { value } = this;
+        if (hiddenDivRef.current) {
+          hiddenDivRef.current.innerHTML = toHtmlString(value);
+        }
+      }
+
+      if (inputRef.current && hiddenDivRef.current) {
+        const node = inputRef.current;
+        hiddenDivRef.current.innerHTML = toHtmlString(node.value);
+        node.addEventListener('input', oninput);
+        return () => {
+          node.removeEventListener('input', oninput);
+        };
+      }
+    }, []);
     return (
       <StyledContainer
         className={className}
@@ -367,9 +378,7 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
           onMouseDown: stopEvent,
         })}
       >
-        <HiddenSpanContainer dimension={dimension} disabled={props.disabled} iconCount={iconCount}>
-          <span>{HiddenSpanLines(inputData.value)}</span>
-        </HiddenSpanContainer>
+        <HiddenSpanContainer ref={hiddenDivRef} dimension={dimension} disabled={props.disabled} iconCount={iconCount} />
         <Text
           ref={refSetter(ref, inputRef)}
           {...props}
