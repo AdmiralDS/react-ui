@@ -60,13 +60,7 @@ export default {
     thousand: {
       control: { type: 'text' },
     },
-    prefix: {
-      control: { type: 'text' },
-    },
     suffix: {
-      control: { type: 'text' },
-    },
-    placeholder: {
       control: { type: 'text' },
     },
     maxLength: {
@@ -91,6 +85,9 @@ export default {
     skeleton: {
       control: { type: 'boolean' },
     },
+    name: {
+      control: { type: 'text' },
+    },
     input1: {
       control: false,
     },
@@ -103,7 +100,10 @@ export default {
     value: {
       control: false,
     },
-    name: {
+    prefix: {
+      control: false,
+    },
+    placeholder: {
       control: false,
     },
   },
