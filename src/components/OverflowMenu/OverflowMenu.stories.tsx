@@ -66,6 +66,21 @@ export default {
     dropContainerStyle: {
       control: false,
     },
+    selected: {
+      control: { type: 'text' },
+    },
+    active: {
+      control: { type: 'text' },
+    },
+    menuWidth: {
+      control: { type: 'text' },
+    },
+    isVisible: {
+      control: { type: 'boolean' },
+    },
+    disableSelectedOptionHighlight: {
+      control: { type: 'boolean' },
+    },
   },
 } as ComponentMeta<typeof OverflowMenu>;
 

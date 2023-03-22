@@ -95,10 +95,13 @@ export interface MultiButtonItem extends HTMLAttributes<HTMLElement> {
 export interface MultiButtonProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'>, DropMenuComponentProps {
   /** Опции выпадающего списка */
   items?: Array<ItemProps>;
-  /** @deprecated use items instead
-   * Массив опций */
+  /**
+   * Массив опций
+   *
+   * @deprecated Do not use! Use `items` instead!
+   */
   options?: Array<MultiButtonItem>;
-  /** Массив опций */
+  /** Id выбранной опции списка */
   selected?: string;
   /** Колбек на нажатие основной кнопки */
   onMainButtonClick?: (e: MouseEvent<HTMLButtonElement>) => void;

@@ -7,6 +7,7 @@ import { TextButton } from './index';
 import { T } from '#src/components/T';
 import type { Theme } from '#src/components/themes';
 import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
+import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 const StyledText = styled(T)`
   margin: 10px 0;
@@ -67,8 +68,34 @@ export default {
     skeleton: {
       control: { type: 'boolean' },
     },
+    loading: {
+      control: { type: 'boolean' },
+    },
+    text: {
+      control: { type: 'text' },
+    },
+    displayRight: {
+      control: { type: 'boolean' },
+    },
   },
 } as ComponentMeta<typeof TextButton>;
+
+const SimpleStory: ComponentStory<typeof TextButton> = (args) => {
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
+    return theme;
+  }
+
+  return (
+    <ThemeProvider theme={swapBorder}>
+      <TextButton text="Text Button" icon={<AttachFileOutline />} {...cleanUpProps(args)} />
+    </ThemeProvider>
+  );
+};
+
+export const SimpleDemo = SimpleStory.bind({});
+SimpleDemo.args = {};
+SimpleDemo.storyName = 'Простой пример с изменяемыми свойствами';
 
 const TextButtonStory: ComponentStory<typeof TextButton> = (args) => {
   function swapBorder(theme: Theme): Theme {
@@ -136,7 +163,7 @@ const TextButtonStory: ComponentStory<typeof TextButton> = (args) => {
 
 export const TextButtonStoryDemo = TextButtonStory.bind({});
 TextButtonStoryDemo.args = {};
-TextButtonStoryDemo.storyName = 'Text Button';
+TextButtonStoryDemo.storyName = 'Text Button (Демо)';
 
 const TextButtonStatusStory: ComponentStory<typeof TextButton> = (args) => {
   function swapBorder(theme: Theme): Theme {
@@ -191,4 +218,4 @@ const TextButtonStatusStory: ComponentStory<typeof TextButton> = (args) => {
 
 export const TextButtonStatusDemo = TextButtonStatusStory.bind({});
 TextButtonStatusDemo.args = {};
-TextButtonStatusDemo.storyName = 'Text Button. Скелетон, загрузка';
+TextButtonStatusDemo.storyName = 'Text Button. Скелетон, загрузка (Демо)';
