@@ -115,6 +115,8 @@ export const DropdownContainer = React.forwardRef<HTMLDivElement, React.PropsWit
 
         if (!enoughWidthOnTheLeft && !enoughWidthOnTheRight) {
           node.style.alignSelf = 'center';
+          // компенсация сдвига относительно target компонента (targetRect) таким образом, чтобы
+          // контейнер выпадающего меню (rect) вписывался в границы экрана (viewport)
           const offset = (viewportWidth - rect.width) / 2 - (targetRect.left - (rectWidth - targetRect.width) / 2);
           node.style.transform = `translateX(${offset}px)`;
         } else {
