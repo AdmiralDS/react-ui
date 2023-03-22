@@ -111,7 +111,7 @@ export const AvatarGroup: React.FC<AvatarGroupProps> = ({
         resizeObserver.disconnect();
       };
     }
-  }, [wrapperRef.current]);
+  }, []);
 
   const visible = items.slice(0, visibleItems);
   const hidden = items.slice(visibleItems, visibleItems + hiddenItems);

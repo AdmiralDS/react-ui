@@ -83,7 +83,7 @@ export const DropdownContainer = React.forwardRef<HTMLDivElement, React.PropsWit
       if (containerRef.current !== document.activeElement) {
         containerRef?.current?.focus();
       }
-    }, [containerRef]);
+    }, []);
 
     const checkDropdownPosition = React.useCallback(() => {
       const node = containerRef.current;
@@ -140,7 +140,7 @@ export const DropdownContainer = React.forwardRef<HTMLDivElement, React.PropsWit
       if (containerRef.current) {
         containerRef.current.style.opacity = '1';
       }
-    }, [containerRef.current]);
+    }, []);
 
     React.useLayoutEffect(() => {
       addDropdown?.(containerRef);

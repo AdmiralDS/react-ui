@@ -47,7 +47,7 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
         block: 'nearest',
       });
     }
-  }, [items, mobile, wrapperRef]);
+  }, [items, mobile]);
 
   const handleIntersection = (entries: IntersectionObserverEntry[]) => {
     const updatedEntries: { [index: number | string]: boolean } = {};
@@ -78,7 +78,7 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
       });
     }
     return () => observer.disconnect();
-  }, [overflowRef, wrapperRef, mobile, setVisibilityMap, items]);
+  }, [mobile, setVisibilityMap, items]);
 
   const renderFirstItem = React.useCallback(() => {
     const item = items[0];
