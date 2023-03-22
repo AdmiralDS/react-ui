@@ -95,6 +95,18 @@ export default {
     dropContainerStyle: {
       control: false,
     },
+    menuWidth: {
+      control: { type: 'text' },
+    },
+    disableSelectedOptionHighlight: {
+      control: { type: 'boolean' },
+    },
+    isVisible: {
+      control: { type: 'boolean' },
+    },
+    active: {
+      control: { type: 'text' },
+    },
   },
 } as ComponentMeta<typeof TextButtonMenu>;
 

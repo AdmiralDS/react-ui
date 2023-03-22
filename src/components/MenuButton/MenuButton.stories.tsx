@@ -169,7 +169,7 @@ export default {
       control: false,
     },
     menuWidth: {
-      control: false,
+      control: { type: 'text' },
     },
     menuMaxHeight: {
       control: false,
