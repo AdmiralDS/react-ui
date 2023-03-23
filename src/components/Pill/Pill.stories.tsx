@@ -416,7 +416,7 @@ const TemplatePillWithTooltip: ComponentStory<typeof Pill> = (args) => {
     if (element && checkOverflow(element) !== overflow) {
       setOverflow(checkOverflow(element));
     }
-  }, [tooltipVisible, textRef.current, setOverflow]);
+  }, [tooltipVisible, setOverflow]);
 
   React.useLayoutEffect(() => {
     function show() {
@@ -438,7 +438,7 @@ const TemplatePillWithTooltip: ComponentStory<typeof Pill> = (args) => {
         wrapper.removeEventListener('blur', hide);
       };
     }
-  }, [setTooltipVisible, wrapperRef.current]);
+  }, [setTooltipVisible]);
 
   return (
     <WrapperVertical>
