@@ -84,7 +84,7 @@ export const Range = ({
     }
 
     correctSliderPosition(value);
-  }, [value, rangeWidth, minValue, maxValue, step, sliderRef.current, slider2Ref.current, filledRef.current]);
+  }, [value, rangeWidth, minValue, maxValue, step]);
 
   React.useLayoutEffect(() => {
     if (trackRef.current) {
@@ -96,7 +96,7 @@ export const Range = ({
         resizeObserver.disconnect();
       };
     }
-  }, [trackRef.current, setRangeWidth]);
+  }, [setRangeWidth]);
 
   const [moveListener, freeResources] = throttle((e: any) => {
     updateSlider(e);
