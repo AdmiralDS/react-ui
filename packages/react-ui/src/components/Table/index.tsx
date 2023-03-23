@@ -27,6 +27,7 @@ import {
   HiddenHeader,
 } from './style';
 import { VirtualBody } from './VirtualBody';
+import type { CSSProperties } from 'react';
 
 export * from './RowAction';
 
@@ -94,6 +95,17 @@ export type Column = {
 
   /** Позволяет добавлять миксин для меню фильтра, созданный с помощью styled css  */
   filterMenuCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+  /** Позволяет добавлять класс на контейнер выпадающего меню  */
+  filterMenuClassName?: string;
+  /** Позволяет добавлять стили на контейнер выпадающего меню  */
+  filterMenuStyle?: CSSProperties;
+  /**
+   * Метод для переопределения стандартного вида ячейки
+   * @param data
+   * @param row
+   * @param rowIdx
+   */
+  renderCell?(data: React.ReactNode, row: TableRow, rowIdx: number): React.ReactNode;
 };
 
 export type RowId = string | number;
@@ -141,6 +153,11 @@ export interface TableRow extends Record<RowId, React.ReactNode> {
    * внутрь которого нужно передать произвольную иконку для отображения действия.
    */
   actionRender?: (row: any) => React.ReactNode;
+  /**
+   * Метод для переопределения стандартного вида группы
+   * @param row
+   */
+  renderGroupTitle?(row: TableRow): React.ReactNode;
 }
 
 export interface TableProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -207,6 +224,7 @@ export interface TableProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   onColumnResize?: (colObj: { name: string; width: string }) => void;
   /** Рендер функция для отрисовки контента ячейки. Входные параметры - объект строки и название столбца */
+  /** @deprecated use render prop in Column type */
   renderCell?: (row: TableRow, columnName: string) => React.ReactNode;
   /** Рендер функция для отрисовки обертки вокруг строки.
    * Входные параметры - объект строки, её порядковый номер и элемент который должен быть отрисован внутри создаваемой обертки
@@ -588,10 +606,22 @@ export const Table: React.FC<TableProps> = ({
     />
   );
 
-  const renderBodyCell = (row: TableRow, col: Column) => {
+  const renderBodyCell = (idx: number) => (row: TableRow, col: Column) => {
     const headerCellWidth = hiddenHeaderRef.current
       ?.querySelector<HTMLElement>(`[data-th-column="${col.name}"]`)
       ?.getBoundingClientRect().width;
+
+    const render = () => {
+      if (col.renderCell) {
+        return col.renderCell(row[col.name], row, idx);
+      }
+      if (renderCell) {
+        return renderCell(row, col.name);
+      }
+
+      return <CellTextContent cellAlign={col.cellAlign}>{row[col.name]}</CellTextContent>;
+    };
+
     return (
       <Cell
         key={`${row.id}_${col.name}`}
@@ -601,11 +631,7 @@ export const Table: React.FC<TableProps> = ({
         data-column={col.name}
         data-row={row.id}
       >
-        {renderCell ? (
-          renderCell(row, col.name)
-        ) : (
-          <CellTextContent cellAlign={col.cellAlign}>{row[col.name]}</CellTextContent>
-        )}
+        {render()}
       </Cell>
     );
   };
@@ -634,7 +660,7 @@ export const Table: React.FC<TableProps> = ({
     );
   };
 
-  const renderRegularRow = (row: TableRow) => (
+  const renderRegularRow = (row: TableRow, idx: number) => (
     <RegularRow
       row={row}
       dimension={dimension}
@@ -643,7 +669,7 @@ export const Table: React.FC<TableProps> = ({
       stickyColumns={stickyColumns}
       displayRowExpansionColumn={displayRowExpansionColumn}
       displayRowSelectionColumn={displayRowSelectionColumn}
-      renderBodyCell={renderBodyCell}
+      renderBodyCell={renderBodyCell(idx)}
       onRowExpansionChange={handleExpansionChange}
       onRowSelectionChange={handleCheckboxChange}
     />
@@ -686,7 +712,7 @@ export const Table: React.FC<TableProps> = ({
         grey={zebraRows[row.id]?.includes('even')}
         key={`row_${row.id}`}
       >
-        {isGroupRow ? renderGroupRow(row) : renderRegularRow(row)}
+        {isGroupRow ? renderGroupRow(row) : renderRegularRow(row, index)}
       </RowWrapper>
     );
 

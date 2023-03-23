@@ -1,4 +1,5 @@
 import * as React from 'react';
+import type { CSSProperties } from 'react';
 
 import { MenuButton } from './Menu';
 import type { BreadcrumbProps } from './BreadCrumb';
@@ -17,6 +18,10 @@ export interface BreadcrumbsProps extends React.HTMLAttributes<HTMLElement> {
   mobile?: boolean;
   /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
   dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+  /** Позволяет добавлять класс на контейнер выпадающего меню  */
+  dropContainerClassName?: string;
+  /** Позволяет добавлять стили на контейнер выпадающего меню  */
+  dropContainerStyle?: CSSProperties;
 }
 
 export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
@@ -24,6 +29,8 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
   dimension = 'l',
   mobile,
   dropContainerCssMixin,
+  dropContainerClassName,
+  dropContainerStyle,
   ...props
 }) => {
   const iconSize = dimension === 'l' ? 20 : 16;
@@ -40,7 +47,7 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
         block: 'nearest',
       });
     }
-  }, [items, mobile, wrapperRef]);
+  }, [items, mobile]);
 
   const handleIntersection = (entries: IntersectionObserverEntry[]) => {
     const updatedEntries: { [index: number | string]: boolean } = {};
@@ -48,11 +55,9 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
       const target = entry.target;
       const targetNumber = target.dataset.number;
 
-      if (entry.isIntersecting && entry.intersectionRatio === 1.0) {
-        updatedEntries[targetNumber] = true;
-      } else {
-        updatedEntries[targetNumber] = false;
-      }
+      // intersectionRatio - имеет значение float, сравнение с 1 может привести к неправильному
+      // результату, данное сравнение равносильно (a - b) < 0.01
+      updatedEntries[targetNumber] = entry.isIntersecting && entry.intersectionRatio > 0.99;
     });
 
     setVisibilityMap((prev: { [index: number | string]: boolean }) => ({
@@ -73,7 +78,7 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
       });
     }
     return () => observer.disconnect();
-  }, [overflowRef, wrapperRef, mobile, setVisibilityMap, items]);
+  }, [mobile, setVisibilityMap, items]);
 
   const renderFirstItem = React.useCallback(() => {
     const item = items[0];
@@ -128,6 +133,8 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
           options={hiddenItems}
           dimension={dimension === 'l' ? 'm' : 's'}
           dropContainerCssMixin={dropContainerCssMixin}
+          dropContainerClassName={dropContainerClassName}
+          dropContainerStyle={dropContainerStyle}
           aria-label=""
         />
         <Separator width={iconSize} height={iconSize} aria-hidden />

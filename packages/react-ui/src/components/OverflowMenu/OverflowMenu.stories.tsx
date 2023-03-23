@@ -57,6 +57,30 @@ export default {
       options: ALL_BORDER_RADIUS_VALUES,
       control: { type: 'radio' },
     },
+    dropContainerCssMixin: {
+      control: false,
+    },
+    dropContainerClassName: {
+      control: false,
+    },
+    dropContainerStyle: {
+      control: false,
+    },
+    selected: {
+      control: { type: 'text' },
+    },
+    active: {
+      control: { type: 'text' },
+    },
+    menuWidth: {
+      control: { type: 'text' },
+    },
+    isVisible: {
+      control: { type: 'boolean' },
+    },
+    disableSelectedOptionHighlight: {
+      control: { type: 'boolean' },
+    },
   },
 } as ComponentMeta<typeof OverflowMenu>;
 
@@ -135,6 +159,7 @@ const Template1: ComponentStory<typeof OverflowMenu> = (args) => {
         aria-label="Overflow Menu component"
         data-dropdown-container-id="overflow-menu-with-dropdown"
         className="overflow-menu-class"
+        dropContainerClassName="dropContainerClass"
       />
     </ThemeProvider>
   );

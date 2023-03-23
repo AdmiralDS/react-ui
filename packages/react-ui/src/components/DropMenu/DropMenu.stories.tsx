@@ -75,6 +75,42 @@ export default {
     disabled: {
       control: { type: 'boolean' },
     },
+    multiSelection: {
+      control: { type: 'boolean' },
+    },
+    disableSelectedOptionHighlight: {
+      control: { type: 'boolean' },
+    },
+    isVisible: {
+      control: { type: 'boolean' },
+    },
+    menuWidth: {
+      control: { type: 'text' },
+    },
+    menuMaxHeight: {
+      control: { type: 'text' },
+    },
+    selected: {
+      control: { type: 'text' },
+    },
+    active: {
+      control: { type: 'text' },
+    },
+    dropContainerCssMixin: {
+      control: false,
+    },
+    dropContainerClassName: {
+      control: false,
+    },
+    dropContainerStyle: {
+      control: false,
+    },
+    items: {
+      control: false,
+    },
+    alignMenuRef: {
+      control: false,
+    },
   },
 } as ComponentMeta<typeof DropMenu>;
 
@@ -175,6 +211,7 @@ const SimpleTemplate: ComponentStory<typeof DropMenu> = (args) => {
           dimension={args.dimension}
           disabled={args.disabled}
           selected={selected}
+          dropContainerClassName="dropContainerClass"
           renderContentProp={({ buttonRef, handleKeyDown, handleClick, statusIcon, disabled }) => {
             return (
               <Button

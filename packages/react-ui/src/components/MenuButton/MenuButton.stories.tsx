@@ -169,12 +169,18 @@ export default {
       control: false,
     },
     menuWidth: {
-      control: false,
+      control: { type: 'text' },
     },
     menuMaxHeight: {
       control: false,
     },
     dropContainerCssMixin: {
+      control: false,
+    },
+    dropContainerClassName: {
+      control: false,
+    },
+    dropContainerStyle: {
       control: false,
     },
   },
@@ -256,6 +262,7 @@ const Template1: ComponentStory<typeof MenuButton> = (args) => {
         onVisibilityChange={handleVisibilityChange}
         data-dropdown-container-id="menu-button-with-dropdown"
         className="menu-button-class"
+        dropContainerClassName="dropContainerClass"
       >
         test
       </MenuButton>

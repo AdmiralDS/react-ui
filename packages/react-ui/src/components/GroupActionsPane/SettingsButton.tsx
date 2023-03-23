@@ -1,10 +1,11 @@
-import type { HTMLAttributes } from 'react';
+import type { CSSProperties, HTMLAttributes } from 'react';
 import * as React from 'react';
 import { useRef, useState } from 'react';
 import { IconButton } from '#src/components/IconButton';
 import { DropdownContainer } from '#src/components/DropdownContainer';
 import { ReactComponent as SettingsOutline } from '@admiral-ds/icons/build/system/SettingsOutline.svg';
 import { refSetter } from '#src/components/common/utils/refSetter';
+import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import styled from 'styled-components';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 
@@ -23,10 +24,16 @@ export interface ColumnsButtonProps extends HTMLAttributes<HTMLButtonElement> {
   menu: React.ReactNode;
   buttonDimension?: 's' | 'l';
   disabled?: boolean;
+  dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+  dropContainerClassName?: string;
+  dropContainerStyle?: CSSProperties;
 }
 
 export const SettingsButton = React.forwardRef<HTMLButtonElement, ColumnsButtonProps>(
-  ({ menu, buttonDimension = 'l', ...props }, ref) => {
+  (
+    { menu, buttonDimension = 'l', dropContainerCssMixin, dropContainerClassName, dropContainerStyle, ...props },
+    ref,
+  ) => {
     const [opened, setOpened] = useState<boolean>(false);
     const buttonRef = useRef<HTMLButtonElement | null>(null);
 
@@ -52,7 +59,14 @@ export const SettingsButton = React.forwardRef<HTMLButtonElement, ColumnsButtonP
           <SettingsOutline />
         </StyledIconButton>
         {opened && (
-          <StyledDrop targetRef={buttonRef} alignSelf={'flex-end'} onClickOutside={handleClickOutside}>
+          <StyledDrop
+            targetRef={buttonRef}
+            alignSelf={'flex-end'}
+            onClickOutside={handleClickOutside}
+            dropContainerCssMixin={dropContainerCssMixin}
+            className={dropContainerClassName}
+            style={dropContainerStyle}
+          >
             {menu}
           </StyledDrop>
         )}

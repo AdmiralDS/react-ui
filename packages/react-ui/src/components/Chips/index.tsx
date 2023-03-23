@@ -83,7 +83,7 @@ export const Chips = React.forwardRef<HTMLDivElement, ChipsProps>(
       if (refItems.current && checkOverflow(refItems.current) !== overflow) {
         setOverflow(checkOverflow(refItems.current));
       }
-    }, [refItems.current, tooltipVisible, setOverflow]);
+    }, [tooltipVisible, setOverflow]);
 
     React.useLayoutEffect(() => {
       function show() {
@@ -105,7 +105,7 @@ export const Chips = React.forwardRef<HTMLDivElement, ChipsProps>(
           chip.removeEventListener('blur', hide);
         };
       }
-    }, [setTooltipVisible, chipRef.current]);
+    }, [setTooltipVisible]);
 
     const handleClickCloseIcon = (e: MouseEvent) => {
       e.stopPropagation();

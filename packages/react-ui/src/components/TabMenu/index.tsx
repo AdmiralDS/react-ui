@@ -1,4 +1,5 @@
 import * as React from 'react';
+import type { CSSProperties } from 'react';
 import { keyboardKey } from '#src/components/common/keyboardKey';
 import { Badge } from '#src/components/Badge';
 import type { ItemProps, RenderOptionProps } from '#src/components/Menu/MenuItem';
@@ -56,6 +57,10 @@ export interface TabMenuProps extends Omit<React.HTMLAttributes<HTMLDivElement>,
   alignSelf?: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
   /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
   dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+  /** Позволяет добавлять класс на контейнер выпадающего меню  */
+  dropContainerClassName?: string;
+  /** Позволяет добавлять стили на контейнер выпадающего меню  */
+  dropContainerStyle?: CSSProperties;
 }
 
 export const TabMenu: React.FC<TabMenuProps> = ({
@@ -67,6 +72,8 @@ export const TabMenu: React.FC<TabMenuProps> = ({
   activeTab,
   onChange,
   dropContainerCssMixin,
+  dropContainerClassName,
+  dropContainerStyle,
   ...props
 }) => {
   const [openedMenu, setOpenedMenu] = React.useState(false);
@@ -250,7 +257,9 @@ export const TabMenu: React.FC<TabMenuProps> = ({
       const target = entry.target;
       const targetNumber = target.dataset.number;
 
-      updatedEntries[targetNumber] = entry.isIntersecting && entry.intersectionRatio === 1.0;
+      // intersectionRatio - имеет значение float, сравнение с 1 может привести к неправильному
+      // результату, данное сравнение равносильно (a - b) < 0.01
+      updatedEntries[targetNumber] = entry.isIntersecting && entry.intersectionRatio > 0.99;
     });
 
     setVisibilityMap((prev: { [index: number | string]: boolean }) => ({
@@ -345,6 +354,8 @@ export const TabMenu: React.FC<TabMenuProps> = ({
           }}
           tabIndex={tabIndex}
           dropContainerCssMixin={dropContainerCssMixin}
+          dropContainerClassName={dropContainerClassName}
+          dropContainerStyle={dropContainerStyle}
         />
       </OverflowMenuContainer>
     );

@@ -58,6 +58,10 @@ export default {
       options: [true, false],
       control: { type: 'radio' },
     },
+    width: { control: 'number' },
+    defaultSelected: { control: 'text' },
+    selected: { control: 'text' },
+    active: { control: 'text' },
   },
 } as ComponentMeta<typeof Tree>;
 

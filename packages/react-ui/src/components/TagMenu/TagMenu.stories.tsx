@@ -61,6 +61,24 @@ export default {
     width: {
       control: { type: 'text' },
     },
+    selected: {
+      control: { type: 'text' },
+    },
+    active: {
+      control: { type: 'text' },
+    },
+    menuWidth: {
+      control: { type: 'text' },
+    },
+    menuMaxHeight: {
+      control: { type: 'text' },
+    },
+    disableSelectedOptionHighlight: {
+      control: { type: 'boolean' },
+    },
+    isVisible: {
+      control: { type: 'boolean' },
+    },
     as: {
       options: ['div', 'span', 'button'],
       control: { type: 'radio' },
@@ -68,6 +86,21 @@ export default {
     themeBorderKind: {
       options: ALL_BORDER_RADIUS_VALUES,
       control: { type: 'radio' },
+    },
+    dropContainerCssMixin: {
+      control: false,
+    },
+    dropContainerClassName: {
+      control: false,
+    },
+    dropContainerStyle: {
+      control: false,
+    },
+    items: {
+      control: false,
+    },
+    options: {
+      control: false,
     },
   },
 } as ComponentMeta<typeof TagMenu>;
@@ -154,6 +187,7 @@ const Template0: ComponentStory<typeof Tag> = (args: TagProps) => {
           {...args}
           data-dropdown-container-id="tag-menu-with-dropdown"
           className="tag-menu-class"
+          dropContainerClassName="dropContainerClass"
         />
       </ThemeProvider>
     </>

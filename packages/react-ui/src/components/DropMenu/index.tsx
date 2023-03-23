@@ -1,4 +1,4 @@
-import type { HTMLAttributes } from 'react';
+import type { CSSProperties, HTMLAttributes } from 'react';
 import * as React from 'react';
 import { keyboardKey } from '#src/components/common/keyboardKey';
 import { OpenStatusButton } from '#src/components/OpenStatusButton';
@@ -97,6 +97,10 @@ export interface DropMenuProps
   renderContentProp: (options: RenderContentProps) => React.ReactNode;
   /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
   dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+  /** Позволяет добавлять класс на контейнер выпадающего меню  */
+  dropContainerClassName?: string;
+  /** Позволяет добавлять стили на контейнер выпадающего меню  */
+  dropContainerStyle?: CSSProperties;
   /** Видимость выпадающего меню */
   isVisible?: boolean;
   /** Колбек на изменение видимости меню */
@@ -125,6 +129,8 @@ export const DropMenu = React.forwardRef<HTMLElement, DropMenuProps>(
       renderContentProp,
       menuMaxHeight,
       dropContainerCssMixin,
+      dropContainerClassName,
+      dropContainerStyle,
       multiSelection = false, // TODO: убрать после удаления в Menu
       disableSelectedOptionHighlight = false,
       isVisible,
@@ -218,6 +224,8 @@ export const DropMenu = React.forwardRef<HTMLElement, DropMenuProps>(
             targetRef={alignMenuRef || btnRef}
             onClickOutside={clickOutside}
             dropContainerCssMixin={dropContainerCssMixin}
+            className={dropContainerClassName}
+            style={dropContainerStyle}
             {...props}
           >
             <StyledMenu
