@@ -1,6 +1,6 @@
 {
   "name": "@admiral-ds/react-ui",
-  "version": "4.7.1",
+  "version": "4.8.0",
   "description": "React component library for Admiral design system 2.1",
   "keywords": [],
   "author": "",
@@ -39,8 +39,7 @@
     "generate-svg-icon-exports": "node scripts/generate-svg-icon-exports.cjs",
     "prepublishOnly": "npm run build",
     "deploy-storybook": "NODE_OPTIONS=--openssl-legacy-provider storybook-to-ghpages",
-    "clean": "rm -rf .turbo && rm -rf node_modules",
-    "dev": "npm run generate-svg-icon-exports && NODE_OPTIONS=--openssl-legacy-provider start-storybook -p 6006"
+    "clean": "rm -rf .turbo && rm -rf node_modules"
   },
   "dependencies": {
     "@admiral-ds/flags": "^2.0.0",

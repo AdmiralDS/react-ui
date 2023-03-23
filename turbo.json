@@ -10,7 +10,7 @@
       "dependsOn": []
     },
     "lint": {},
-    "dev": {
+    "storybook": {
       "cache": false,
       "persistent": true
     },
