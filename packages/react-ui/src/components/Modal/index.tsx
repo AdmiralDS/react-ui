@@ -140,7 +140,7 @@ export const ModalContent: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ c
         resizeObserver.disconnect();
       };
     }
-  }, [contentRef.current, overflow, setOverflow]);
+  }, [overflow, setOverflow]);
 
   return (
     <Content tabIndex={-1} ref={contentRef} scrollbar={overflow ? scrollbarSize : 0} mobile={mobile} {...props}>

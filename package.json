@@ -1,13 +1,13 @@
 {
   "private": true,
   "workspaces": [
-    "apps/*",
     "packages/*"
   ],
   "scripts": {
     "build": "turbo run build",
-    "storybook": "turbo run storybook --no-cache --continue",
-    "clean": "turbo run clean && rm -rf node_modules"
+    "dev": "turbo run dev --no-cache --continue",
+    "storybook": "npm run storybook --workspaces @admiral-ds/react-ui",
+    "clean": "rm -rf ./**/node_modules ./**/package-lock.json"
   },
   "devDependencies": {
     "turbo": "latest"

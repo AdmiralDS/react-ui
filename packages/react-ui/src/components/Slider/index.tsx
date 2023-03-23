@@ -98,7 +98,7 @@ export const Slider = ({
     }
 
     correctSliderPosition(newValue);
-  }, [value, minValue, maxValue, step, rangeWidth, sliderRef.current, filledRef.current]);
+  }, [value, minValue, maxValue, step, rangeWidth]);
 
   React.useLayoutEffect(() => {
     if (trackRef.current) {
@@ -110,7 +110,7 @@ export const Slider = ({
         resizeObserver.disconnect();
       };
     }
-  }, [trackRef.current, setRangeWidth]);
+  }, [setRangeWidth]);
 
   const updateSlider = (e: any) => {
     const newValue = calcValue(e, trackRef, minValue, maxValue, step, undefined);

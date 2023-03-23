@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.8.1](https://github.com/AdmiralDS/react-ui/compare/v4.8.0...v4.8.1) (2023-03-23)
+
+
+### Bug Fixes
+
+* **Breadcrumbs:** fix tag names ([3e4f7e0](https://github.com/AdmiralDS/react-ui/commit/3e4f7e0d41f6d61cee0dfb290b93bd9cdfa2ebe9))
+* **Breadcrumbs:** remove user agent styles for ol element ([8ba2301](https://github.com/AdmiralDS/react-ui/commit/8ba2301b12515eb544933e12adaff2835ac7f7b7))
+* **DropdownContainer:** fix center position coordinates to be inside viewport ([feff3eb](https://github.com/AdmiralDS/react-ui/commit/feff3ebf10708f18659936aec6b8f405fe859b99))
+* **SliderRange:** fix controls type in storybook ([6ba2ce5](https://github.com/AdmiralDS/react-ui/commit/6ba2ce51171e1c016b6d08de30849aa97cddcd12))
+* **TextAria:** atoheight must work for uncontrolled component ([ac11b80](https://github.com/AdmiralDS/react-ui/commit/ac11b802d9b684f2e93d470440664f618a91a607))
+
 ## [4.8.0](https://github.com/AdmiralDS/react-ui/compare/v4.7.0...v4.8.0) (2023-03-21)
 
 

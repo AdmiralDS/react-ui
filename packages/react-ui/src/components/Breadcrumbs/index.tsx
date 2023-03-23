@@ -4,7 +4,15 @@ import type { CSSProperties } from 'react';
 import { MenuButton } from './Menu';
 import type { BreadcrumbProps } from './BreadCrumb';
 import { Breadcrumb } from './BreadCrumb';
-import { Compensator, Navigation, OverflowContentWrapper, OverflowItem, Separator, Wrapper } from './style';
+import {
+  Compensator,
+  Navigation,
+  OverflowContentWrapper,
+  OverflowContent,
+  OverflowItem,
+  Separator,
+  Wrapper,
+} from './style';
 import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 
 type Dimension = 'l' | 'm' | 's';
@@ -36,7 +44,7 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
   const iconSize = dimension === 'l' ? 20 : 16;
   const visible = items.slice(1, items.length - 1);
   const wrapperRef = React.useRef<HTMLOListElement>(null);
-  const overflowRef = React.useRef<HTMLDivElement>(null);
+  const overflowRef = React.useRef<HTMLOListElement>(null);
   const [visibilityMap, setVisibilityMap] = React.useState<{ [index: number | string]: boolean }>({ 0: true });
 
   React.useLayoutEffect(() => {
@@ -55,9 +63,11 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
       const target = entry.target;
       const targetNumber = target.dataset.number;
 
-      // intersectionRatio - имеет значение float, сравнение с 1 может привести к неправильному
-      // результату, данное сравнение равносильно (a - b) < 0.01
-      updatedEntries[targetNumber] = entry.isIntersecting && entry.intersectionRatio > 0.99;
+      if (targetNumber) {
+        // intersectionRatio - имеет значение float, сравнение с 1 может привести к неправильному
+        // результату, данное сравнение равносильно (a - b) < 0.01
+        updatedEntries[targetNumber] = entry.isIntersecting && entry.intersectionRatio > 0.99;
+      }
     });
 
     setVisibilityMap((prev: { [index: number | string]: boolean }) => ({
@@ -155,10 +165,12 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
           <>
             {renderFirstItem()}
             {renderHiddenItems()}
-            <OverflowContentWrapper dimension={dimension} ref={overflowRef}>
-              {renderVisibleItems()}
-              {renderLastItem()}
-              <Compensator data-number={items.length} />
+            <OverflowContentWrapper dimension={dimension} data-overflow>
+              <OverflowContent ref={overflowRef}>
+                {renderVisibleItems()}
+                {renderLastItem()}
+                <Compensator aria-hidden />
+              </OverflowContent>
             </OverflowContentWrapper>
           </>
         )}
