@@ -21,7 +21,7 @@ export const StepContent: FC<{ children: string; tooltipProps?: Partial<ITooltip
     if (contentRef.current && checkOverflow(contentRef.current) !== overflow) {
       setOverflow(checkOverflow(contentRef.current));
     }
-  }, [tooltipVisible, contentRef.current, setOverflow]);
+  }, [tooltipVisible, setOverflow]);
 
   React.useLayoutEffect(() => {
     function show() {
@@ -39,7 +39,7 @@ export const StepContent: FC<{ children: string; tooltipProps?: Partial<ITooltip
         wrapper.removeEventListener('mouseleave', hide);
       };
     }
-  }, [setTooltipVisible, wrapperRef.current]);
+  }, [setTooltipVisible]);
 
   return (
     <>

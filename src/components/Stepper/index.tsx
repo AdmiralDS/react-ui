@@ -83,7 +83,7 @@ export const Stepper: FC<StepperProps> = ({
       const activeNode = (listRef.current.childNodes[activeStep] || listRef.current.firstChild) as HTMLElement;
       listRef.current.scrollLeft = activeStep === 0 ? activeNode.offsetLeft : activeNode.offsetLeft - 16;
     }
-  }, [activeStep, listRef.current, steps]);
+  }, [activeStep, steps]);
 
   return (
     <StepperContext.Provider value={contextValue}>
