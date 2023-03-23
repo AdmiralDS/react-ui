@@ -1,0 +1,117 @@
+{
+  "name": "@admiral-ds/react-ui",
+  "version": "4.8.1",
+  "description": "React component library for Admiral design system 2.1",
+  "keywords": [],
+  "author": "",
+  "license": "See license in ./LICENSE",
+  "engines": {
+    "node": ">=14"
+  },
+  "files": [
+    "dist",
+    "src",
+    "tsconfig.json"
+  ],
+  "main": "dist/react-ui.cjs.js",
+  "module": "dist/react-ui.es.js",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "types": "./dist/index.d.ts",
+      "require": "./dist/react-ui.cjs.js",
+      "import": "./dist/react-ui.es.js"
+    }
+  },
+  "imports": {
+    "#src/*": "./src/*"
+  },
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "vite build && ttsc --emitDeclarationOnly",
+    "test": "jest",
+    "test:update": "jest -u",
+    "test:watch": "jest --watch",
+    "lint": "eslint './src/**/*.{js,jsx,ts,tsx}' --quiet --fix",
+    "storybook": "npm run generate-svg-icon-exports && NODE_OPTIONS=--openssl-legacy-provider start-storybook -p 6006",
+    "build-storybook": "npm run generate-svg-icon-exports && build-storybook",
+    "release": "standard-version",
+    "generate-svg-icon-exports": "node scripts/generate-svg-icon-exports.cjs",
+    "prepublishOnly": "npm run build",
+    "deploy-storybook": "NODE_OPTIONS=--openssl-legacy-provider storybook-to-ghpages",
+    "clean": "rm -rf .turbo && rm -rf node_modules"
+  },
+  "dependencies": {
+    "@admiral-ds/flags": "^2.0.0",
+    "@admiral-ds/fonts": "^2.0.0",
+    "@admiral-ds/icons": "^2.0.0",
+    "react": ">=16",
+    "react-dom": ">=16",
+    "styled-components": "^5.1.0"
+  },
+  "peerDependencies": {
+    "@admiral-ds/flags": "^2.0.0",
+    "@admiral-ds/fonts": "^2.0.0",
+    "@admiral-ds/icons": "^2.0.0",
+    "react": ">=16",
+    "react-dom": ">=16",
+    "styled-components": "^5.1.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.16.0",
+    "@rollup/plugin-commonjs": "^24.0.1",
+    "@storybook/addon-docs": "^6.4.12",
+    "@storybook/addon-essentials": "^6.4.12",
+    "@storybook/addon-links": "^6.4.12",
+    "@storybook/addon-storysource": "^6.4.22",
+    "@storybook/addons": "^6.4.12",
+    "@storybook/react": "^6.4.12",
+    "@storybook/storybook-deployer": "^2.8.11",
+    "@storybook/theming": "^6.4.12",
+    "@svgr/webpack": "^5.5.0",
+    "@testing-library/jest-dom": "^5.15.0",
+    "@testing-library/react": "^12.0.0",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/fs-extra": "^11.0.0",
+    "@types/jest": "^27.0.1",
+    "@types/react": "^17.0.34",
+    "@types/react-dom": "^17.0.11",
+    "@types/styled-components": "^5.1.20",
+    "@types/testing-library__jest-dom": "^5.9.5",
+    "@typescript-eslint/eslint-plugin": "^5.3.1",
+    "@typescript-eslint/parser": "^5.3.1",
+    "@vitejs/plugin-react-refresh": "^1.3.3",
+    "chromatic": "^6.5.4",
+    "eslint": "^8.34.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-import-resolver-typescript": "^3.2.0",
+    "eslint-import-resolver-webpack": "^0.13.2",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.27.0",
+    "fs-extra": "^11.0.0",
+    "jest": "^27.3.1",
+    "jest-styled-components": "^7.0.2",
+    "prettier": "^2.0.5",
+    "raw-loader": "^4.0.2",
+    "react-router-dom": "^6.0.2",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "standard-version": "^9.3.2",
+    "storybook-addon-designs": "^6.1.0",
+    "storybook-css-modules-preset": "^1.1.1",
+    "storybook-dark-mode": "^1.0.8",
+    "ts-jest": "^27.0.7",
+    "ttypescript": "^1.5.12",
+    "typescript": "4.8.4",
+    "typescript-transform-paths": "^3.0.0",
+    "vite": "^3.2.5",
+    "vite-plugin-svgr": "^2.4.0"
+  },
+  "repository": "AdmiralDS/react-ui",
+  "bugs": {
+    "url": "https://github.com/AdmiralDS/react-ui/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
