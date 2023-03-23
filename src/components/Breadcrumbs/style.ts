@@ -2,6 +2,10 @@ import styled from 'styled-components';
 import { ReactComponent as ChevronRight } from '@admiral-ds/icons/build/system/ChevronRightOutline.svg';
 import type { BreadcrumbsProps } from '#src/components/Breadcrumbs';
 
+/** Стили прописаны с учетом accessability макетов,
+ * то есть при задании размеров учтены размеры синей рамки, которая появляется при переходе табом на хлебную крошку.
+ * */
+
 export const Separator = styled(ChevronRight)`
   & *[fill^='#'] {
     fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
@@ -28,6 +32,7 @@ export const Wrapper = styled.ol<{ mobile?: boolean }>`
   width: 100%;
   list-style: none;
   padding: 0;
+  margin: 0;
   flex-wrap: nowrap;
   overflow-x: ${({ mobile }) => (mobile ? 'scroll' : 'visible')};
   overflow-y: visible;
@@ -66,6 +71,7 @@ export const OverflowContent = styled.ol`
   height: 100%;
   width: 100%;
   padding: 0;
+  margin: 0;
   list-style: none;
 
   & > li {
