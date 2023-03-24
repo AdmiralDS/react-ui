@@ -17,7 +17,6 @@ type PropsType = {
   scrollableParents: Array<Element>;
   anchorElementRef: any;
   anchorId: string;
-  trapFocus: boolean;
   hideHint: () => void;
   startRecalculation: React.Dispatch<React.SetStateAction<any>>;
   locale?: {
@@ -37,7 +36,6 @@ export const HintContainer = React.forwardRef<RefType, PropsType & React.HTMLAtt
       scrollableParents,
       anchorElementRef,
       anchorId,
-      trapFocus,
       hideHint,
       startRecalculation,
       locale,
@@ -71,14 +69,15 @@ export const HintContainer = React.forwardRef<RefType, PropsType & React.HTMLAtt
       };
     }, []);
 
+    // trap focus
     React.useLayoutEffect(() => {
-      if (hintRef.current && visibilityTrigger === 'click' && trapFocus) {
+      if (hintRef.current && visibilityTrigger === 'click') {
         const focusableEls = getKeyboardFocusableElements(hintRef.current);
         setFirstFocusableChild(focusableEls[0]);
         setLastFocusableChild(focusableEls[focusableEls.length - 1]);
         (focusableEls[0] as any)?.focus();
       }
-    }, [hintRef.current, visibilityTrigger, content, trapFocus]);
+    }, [visibilityTrigger, content]);
 
     React.useImperativeHandle(ref, () => hintRef.current);
 

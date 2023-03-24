@@ -87,7 +87,6 @@ export const Hint: React.FC<HintProps> = ({
   const [portalFlexDirection, setPortalFlexDirection] = React.useState('');
   const [portalFullWidth, setPortalFullWidth] = React.useState(false);
   const [isMobile, setMobile] = React.useState(window.innerWidth < 640);
-  const [trapFocus, setTrapFocus] = React.useState(false);
 
   const showHint = () => onVisibilityChange?.(true);
   const hideHint = () => onVisibilityChange?.(false);
@@ -240,14 +239,13 @@ export const Hint: React.FC<HintProps> = ({
     }
   };
 
-  // First container render always happens downward and transparent,
+  // First hint render always happens downward and transparent,
   // after size and position settled transparency returns to normal
   React.useEffect(() => {
     if (hintElementRef.current) {
       hintElementRef.current.style.opacity = '1';
-      setTrapFocus(true);
     }
-  }, [hintElementRef.current, visible]);
+  }, [visible]);
 
   return (
     <AnchorWrapper
@@ -281,7 +279,6 @@ export const Hint: React.FC<HintProps> = ({
             startRecalculation={startRecalculation}
             anchorElementRef={anchorElementRef}
             anchorId={anchorId}
-            trapFocus={trapFocus}
             hideHint={hideHint}
             locale={locale}
             {...props}

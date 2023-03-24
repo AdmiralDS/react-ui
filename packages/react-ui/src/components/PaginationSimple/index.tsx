@@ -86,21 +86,19 @@ const Item = styled.button`
 `;
 
 export interface PaginationSimpleProps extends Omit<React.HTMLAttributes<HTMLUListElement>, 'onChange'> {
-  /**  Общее количество секций */
-  totalItems: number;
+  /**
+   * Общее количество секций
+   *
+   * @deprecated Do not use! Use {@link PaginationSimpleProps.children} instead!
+   */
+  totalItems?: number;
   /** Номер выбранной секции (нумерация с 0) */
   currentItem: number;
   /** Колбек на изменение текущей секции */
   onChange: (event: any, item: number) => void;
 }
 
-export const PaginationSimple: React.FC<PaginationSimpleProps> = ({
-  totalItems,
-  currentItem,
-  onChange,
-  children,
-  ...props
-}) => {
+export const PaginationSimple: React.FC<PaginationSimpleProps> = ({ currentItem, onChange, children, ...props }) => {
   return (
     <Wrapper {...props}>
       {children &&

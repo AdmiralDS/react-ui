@@ -25,6 +25,7 @@ export default {
   title: 'Admiral-2.1/PaginationSimple',
   decorators: [withDesign],
   component: PaginationSimple,
+  controls: { expanded: true },
   parameters: {
     docs: {
       source: {
@@ -39,7 +40,7 @@ export default {
   },
   argTypes: {
     totalItems: {
-      control: { type: 'number' },
+      control: false,
     },
     currentItem: {
       control: { type: 'number' },
@@ -47,7 +48,7 @@ export default {
   },
 } as ComponentMeta<typeof PaginationSimple>;
 
-const Template1: ComponentStory<typeof PaginationSimple> = ({ totalItems = 5, currentItem = 1, ...args }) => {
+const Template1: ComponentStory<typeof PaginationSimple> = ({ currentItem = 1, ...args }) => {
   const [current, setCurrent] = React.useState(currentItem);
 
   React.useEffect(() => {
@@ -56,13 +57,8 @@ const Template1: ComponentStory<typeof PaginationSimple> = ({ totalItems = 5, cu
 
   return (
     <>
-      <PaginationSimple
-        {...args}
-        totalItems={totalItems}
-        currentItem={current}
-        onChange={(_, item) => setCurrent(item)}
-      >
-        {[...Array(totalItems).keys()].map((item) => {
+      <PaginationSimple {...args} currentItem={current} onChange={(_, item) => setCurrent(item)}>
+        {[...Array(5).keys()].map((item) => {
           return <PaginationSimpleItem aria-label={`Item ${item}`} key={item} />;
         })}
       </PaginationSimple>
