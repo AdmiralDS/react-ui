@@ -240,7 +240,7 @@ export const Hint: React.FC<HintProps> = ({
   // First hint render always happens downward and transparent,
   // after size and position settled transparency returns to normal
   React.useEffect(() => {
-    if (hintElementRef.current) {
+    if (visible && hintElementRef.current) {
       hintElementRef.current.style.opacity = '1';
     }
   }, [visible]);
