@@ -25,7 +25,6 @@ export default {
   title: 'Admiral-2.1/PaginationSimple',
   decorators: [withDesign],
   component: PaginationSimple,
-  controls: { expanded: true },
   parameters: {
     docs: {
       source: {

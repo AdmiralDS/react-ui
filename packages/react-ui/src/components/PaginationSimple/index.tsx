@@ -89,7 +89,7 @@ export interface PaginationSimpleProps extends Omit<React.HTMLAttributes<HTMLULi
   /**
    * Общее количество секций
    *
-   * @deprecated Do not use! Use {@link PaginationSimpleProps.children} instead!
+   * @deprecated Do not use! Use children instead!
    */
   totalItems?: number;
   /** Номер выбранной секции (нумерация с 0) */
