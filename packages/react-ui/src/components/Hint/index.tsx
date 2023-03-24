@@ -214,9 +214,7 @@ export const Hint: React.FC<HintProps> = ({
       }
     }
   }, [
-    target?.current,
-    anchorElementRef.current,
-    hintElementRef.current,
+    target,
     hintPosition,
     visible,
     recalculation,
