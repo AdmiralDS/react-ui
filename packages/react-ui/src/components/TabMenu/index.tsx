@@ -158,7 +158,7 @@ export const TabMenu: React.FC<TabMenuProps> = ({
         disabled: item.disabled,
       };
     });
-  }, [dimension, tabs, tabsWithRef]);
+  }, [dimension, tabs, tabsWithRef, activeTab]);
 
   const containsActiveTab = (items: Array<ItemProps>) => {
     return items.findIndex((item) => item.id === activeTab) != -1;
