@@ -11,8 +11,25 @@ export const Template_Checkbox: ComponentStory<typeof Table> = ({ columnList, ..
   const [headerChecked, setHeaderChecked] = React.useState(false);
   const [headerIndeterminate, setHeaderIndeterminate] = React.useState(false);
 
+  React.useEffect(() => {
+    function isSelected(row: { selected?: boolean }) {
+      return row.selected;
+    }
+    // When invoked on an empty array, every() always returns true. So we need to check rowList.length.
+    const allRowsChecked = rows.length > 0 && rows.every(isSelected);
+    const someRowsChecked = rows.some(isSelected);
+
+    setHeaderChecked(allRowsChecked || someRowsChecked);
+    setHeaderIndeterminate(someRowsChecked && !allRowsChecked);
+  }, [rows]);
+
   const handleHeaderSelectionChange = (selectAll: boolean): void => {
     const updRows = rows.map((row) => ({ ...row, selected: selectAll }));
+    setRows(updRows);
+  };
+
+  const handleRowSelection = (id: string | number, selected: boolean) => {
+    const updRows = rows.map((row) => (row.id === id ? { ...row, selected } : row));
     setRows(updRows);
   };
 
@@ -22,7 +39,7 @@ export const Template_Checkbox: ComponentStory<typeof Table> = ({ columnList, ..
   };
 
   const renderRow = (index: number) => {
-    const rowData = rowList[index];
+    const rowData = rows[index];
     const { id, className, selected, disabled, error, checkboxDisabled, success, hover, ...data } = rowData;
     return (
       <TableRow
@@ -36,6 +53,7 @@ export const Template_Checkbox: ComponentStory<typeof Table> = ({ columnList, ..
         success={success}
         hover={hover}
         key={`row_${rowData.id}`}
+        onRowSelectionChange={handleRowSelection}
       />
     );
   };

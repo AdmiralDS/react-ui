@@ -1,7 +1,9 @@
 import * as React from 'react';
 import type { HTMLAttributes } from 'react';
-import { Row, SimpleRow, Filler, Cell, CellTextContent } from '#src/components/TableRefactor/style';
+import { Row, SimpleRow, Filler, Cell } from '#src/components/TableRefactor/style';
 import { useTableContext } from '#src/components/TableRefactor/TableContext';
+
+import { RegularRow } from './RegularRow';
 
 type RowId = string | number;
 type RowData = Record<RowId, React.ReactNode>;
@@ -23,7 +25,7 @@ export interface TableRowProps extends Omit<HTMLAttributes<HTMLDivElement>, 'id'
   /** Окраска строки по Hover. Данная окраска должна применяться, если строка кликабельна и ведет к каким-либо действиям */
   hover?: boolean;
   /** Колбек на выбор/снятие выбора со строки (на нажатие по чекбоксу строки).*/
-  onRowSelectionChange?: (selected: boolean) => void;
+  onRowSelectionChange?: (id: RowId, selected: boolean) => void;
 }
 
 export const TableRow = ({
@@ -39,28 +41,10 @@ export const TableRow = ({
   onRowSelectionChange,
   ...props
 }: TableRowProps) => {
-  const context = useTableContext();
-
-  const renderBodyCell = (row: RowData, col: any) => {
-    const headerCellWidth = context.hiddenHeaderRef.current
-      ?.querySelector<HTMLElement>(`[data-th-column="${col.name}"]`)
-      ?.getBoundingClientRect().width;
-    return (
-      <Cell
-        key={`${id}_${col.name}`}
-        dimension={context.dimension}
-        style={{ width: headerCellWidth || '100px' }}
-        className="td"
-        data-column={col.name}
-        data-row={id}
-      >
-        {<CellTextContent cellAlign={col.cellAlign}>{row[col.name]}</CellTextContent>}
-      </Cell>
-    );
-  };
+  const { dimension, displayRowSelectionColumn, columns, hiddenHeaderRef } = useTableContext();
 
   return (
-    <Row {...props} underline disabled={!!disabled} dimension={context.dimension} className={`tr ${className || ''}`}>
+    <Row {...props} underline disabled={!!disabled} dimension={dimension} className={`tr ${className || ''}`}>
       <SimpleRow
         className="tr-simple"
         selected={!!selected}
@@ -69,7 +53,15 @@ export const TableRow = ({
         success={!!success}
         hover={!!hover}
       >
-        {context.columns.map((col) => (col.sticky ? null : renderBodyCell(row, col)))}
+        {/* {columns.map((col) => renderBodyCell(row, col))} */}
+        <RegularRow
+          id={id}
+          rowData={row}
+          selected={selected}
+          disabled={disabled}
+          checkboxDisabled={checkboxDisabled}
+          onRowSelectionChange={onRowSelectionChange}
+        />
         <Filler />
       </SimpleRow>
     </Row>

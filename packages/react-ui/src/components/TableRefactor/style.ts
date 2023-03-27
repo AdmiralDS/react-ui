@@ -181,12 +181,33 @@ export const SortOrder = styled.div`
   color: ${(p) => p.theme.color['Primary/Primary 60 Main']};
 `;
 
-export const Cell = styled.div<{ dimension: TableProps['dimension'] }>`
+const cellMinHeight = css<{ dimension: TableProps['dimension'] }>`
+  min-height: ${({ dimension }) => {
+    switch (dimension) {
+      case 's':
+        return '32px';
+      case 'l':
+        return '48px';
+      case 'xl':
+        return '56px';
+      case 'm':
+      default:
+        return '40px';
+    }
+  }};
+`;
+
+export const Cell = styled.div<{ dimension: TableProps['dimension']; cellAlign?: 'left' | 'right' }>`
   display: flex;
-  align-items: flex-start;
+  // align-items: flex-start;
   flex: 0 0 auto;
   box-sizing: border-box;
   ${cellStyle};
+  overflow: hidden;
+  ${cellMinHeight}
+  align-items: center;
+  width: 100%;
+  ${({ cellAlign }) => cellAlign === 'right' && 'justify-content: flex-end;'}
   overflow: hidden;
 `;
 
@@ -194,7 +215,7 @@ export const CellTextContent = styled.div<{ cellAlign?: 'left' | 'right' }>`
   display: block;
   align-items: center;
   width: 100%;
-  margin: 2px 0;
+  // margin: 2px 0;
   ${({ cellAlign }) => cellAlign === 'right' && 'text-align: right;'}
   overflow: hidden;
 `;

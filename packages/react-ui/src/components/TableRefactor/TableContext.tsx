@@ -1,17 +1,18 @@
 import * as React from 'react';
-
-type Dimension = 'xl' | 'l' | 'm' | 's';
+import type { TableProps } from '#src/components/TableRefactor';
 
 type TableContextProps = {
-  dimension: Dimension;
+  dimension: TableProps['dimension'];
   hiddenHeaderRef: React.RefObject<HTMLElement>;
-  columns: any[];
+  columns: TableProps['columnList'];
+  displayRowSelectionColumn?: boolean;
 };
 
 const TableContext = React.createContext<TableContextProps>({
   hiddenHeaderRef: { current: null },
   dimension: 'm',
   columns: [],
+  displayRowSelectionColumn: false,
 });
 
 export const useTableContext = () => React.useContext(TableContext);

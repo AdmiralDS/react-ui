@@ -255,7 +255,12 @@ export const Table: React.FC<TableProps> = ({
   };
 
   return (
-    <TableProvider hiddenHeaderRef={hiddenHeaderRef} dimension={dimension} columns={columnList}>
+    <TableProvider
+      hiddenHeaderRef={hiddenHeaderRef}
+      dimension={dimension}
+      columns={columnList}
+      displayRowSelectionColumn={displayRowSelectionColumn}
+    >
       <TableContainer ref={tableRef} data-shadow={false} {...props} className={`table ${props.className || ''}`}>
         {renderHiddenHeader()}
         <HeaderWrapper scrollbar={scrollbar} data-verticalscroll={verticalScroll}>

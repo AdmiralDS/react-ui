@@ -13,7 +13,7 @@ import {
 } from '#src/components/TableRefactor/data';
 import { TableRow } from '../TableRow';
 
-import { Template_Sort } from './stories/sortStory';
+import { Template_Sort, Template_Checkbox } from './Templates';
 
 const Separator = styled.div`
   height: 20px;
@@ -212,21 +212,21 @@ Sort.parameters = {
   },
 };
 
-// export const Checkbox = Template3.bind({});
-// Checkbox.args = {
-//   columnList: columnList,
-//   displayRowSelectionColumn: true,
-// };
-// Checkbox.storyName = 'Table. Пример c чекбоксами.';
-// Checkbox.parameters = {
-//   docs: {
-//     description: {
-//       story: `Отображение столбца с чекбоксами регулируется параметром displayRowSelectionColumn.
-//       Чекбокс в шапке таблицы позволяет выбрать все строки (если не выбрано ни одной строки),
-//       либо отменить выбранные до этого строки. По нажатию на любой из чекбоксов срабатывает колбек onRowSelectionChange.\n\nТакже
-//       с помощью параметров headerCheckboxChecked, headerCheckboxIndeterminate можно контролировать состояние чекбокса в шапке таблицы. А
-//       с помощью колбека onHeaderSelectionChange отслеживать нажатие на данный чекбокс.\n\nЕсли необходимо задизейблить чекбокс отдельной строки,
-//       для данной строки нужно задать параметр checkboxDisabled.`,
-//     },
-//   },
-// };
+export const Checkbox = Template_Checkbox.bind({});
+Checkbox.args = {
+  columnList: columnList,
+  displayRowSelectionColumn: true,
+};
+Checkbox.storyName = 'Table. Пример c чекбоксами.';
+Checkbox.parameters = {
+  docs: {
+    description: {
+      story: `Отображение столбца с чекбоксами регулируется параметром displayRowSelectionColumn.
+      Чекбокс в шапке таблицы позволяет выбрать все строки (если не выбрано ни одной строки),
+      либо отменить выбранные до этого строки. По нажатию на любой из чекбоксов срабатывает колбек onRowSelectionChange.\n\nТакже
+      с помощью параметров headerCheckboxChecked, headerCheckboxIndeterminate можно контролировать состояние чекбокса в шапке таблицы. А
+      с помощью колбека onHeaderSelectionChange отслеживать нажатие на данный чекбокс.\n\nЕсли необходимо задизейблить чекбокс отдельной строки,
+      для данной строки нужно задать параметр checkboxDisabled.`,
+    },
+  },
+};
