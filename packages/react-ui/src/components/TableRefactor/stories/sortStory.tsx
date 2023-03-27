@@ -134,7 +134,21 @@ export const Template_Sort: ComponentStory<typeof Table> = ({ columnList, ...arg
   const renderRow = React.useCallback(
     (index: number) => {
       const rowData = rows[index];
-      return <TableRow row={rowData} key={`row_${rowData.id}`} />;
+      const { id, className, selected, disabled, error, checkboxDisabled, success, hover, ...data } = rowData;
+      return (
+        <TableRow
+          row={data}
+          id={id}
+          className={className}
+          selected={selected}
+          error={error}
+          disabled={disabled}
+          checkboxDisabled={checkboxDisabled}
+          success={success}
+          hover={hover}
+          key={`row_${rowData.id}`}
+        />
+      );
     },
     [rows],
   );

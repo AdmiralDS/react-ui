@@ -22,8 +22,22 @@ export const Template_Checkbox: ComponentStory<typeof Table> = ({ columnList, ..
   };
 
   const renderRow = (index: number) => {
-    const rowData = rows[index];
-    return <TableRow row={rowData} key={`row_${rowData.id}`} />;
+    const rowData = rowList[index];
+    const { id, className, selected, disabled, error, checkboxDisabled, success, hover, ...data } = rowData;
+    return (
+      <TableRow
+        row={data}
+        id={id}
+        className={className}
+        selected={selected}
+        error={error}
+        disabled={disabled}
+        checkboxDisabled={checkboxDisabled}
+        success={success}
+        hover={hover}
+        key={`row_${rowData.id}`}
+      />
+    );
   };
 
   return (

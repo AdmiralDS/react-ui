@@ -6,6 +6,7 @@ import type { RenderOptionProps } from '#src/components/Menu/MenuItem';
 import { MenuItem } from '#src/components/Menu/MenuItem';
 import { ReactComponent as DeleteOutline } from '@admiral-ds/icons/build/system/DeleteOutline.svg';
 import { RowAction } from '#src/components/Table';
+import type { TableRowProps } from '#src/components/TableRow';
 
 import type { Column } from '../Table';
 import { TooltipHoc } from '#src/components/TooltipHOC';
@@ -24,26 +25,15 @@ const AmountCell = styled.div`
 
 const numberFormatter = new Intl.NumberFormat();
 
-export type RowData = {
-  id: string;
-  selected?: boolean;
-  disabled?: boolean;
-  error?: boolean;
-  success?: boolean;
-  expanded?: boolean;
-  hover?: boolean;
-  expandedRowRender?: (row: RowData) => React.ReactNode;
-  overflowMenuRender?: (row: RowData, onVisibilityChange?: (isVisible: boolean) => void) => React.ReactNode;
-  actionRender?: (row: any) => React.ReactNode;
-  transfer_type: string;
-  transfer_date: string;
-  transfer_amount: React.ReactNode;
-  currency: string;
-  rate: number;
-  customer?: string;
-  groupTitle?: string;
-  groupRows?: Array<string>;
-};
+type RowData = TableRowProps &
+  any & {
+    transfer_type: string;
+    transfer_date: string;
+    transfer_amount: React.ReactNode;
+    currency: string;
+    rate: number;
+    customer?: string;
+  };
 
 export const rowList: RowData[] = [
   {

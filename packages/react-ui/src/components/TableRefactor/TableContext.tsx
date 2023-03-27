@@ -4,11 +4,15 @@ type Dimension = 'xl' | 'l' | 'm' | 's';
 
 type TableContextProps = {
   dimension: Dimension;
-  renderBodyCell: (row: any, column: any) => React.ReactNode;
+  hiddenHeaderRef: React.RefObject<HTMLElement>;
   columns: any[];
 };
 
-const TableContext = React.createContext<TableContextProps>({ renderBodyCell: () => {}, dimension: 'm', columns: [] });
+const TableContext = React.createContext<TableContextProps>({
+  hiddenHeaderRef: { current: null },
+  dimension: 'm',
+  columns: [],
+});
 
 export const useTableContext = () => React.useContext(TableContext);
 

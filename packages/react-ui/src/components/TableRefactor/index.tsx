@@ -49,21 +49,6 @@ export type Column = {
   sortOrder?: number;
 };
 
-export type RowId = string | number;
-
-export interface TableRow extends Record<RowId, React.ReactNode> {
-  id: RowId;
-  className?: string;
-  /** Строка в состоянии disabled  */
-  disabled?: boolean;
-  /** Строка в состоянии error */
-  error?: boolean;
-  /** Строка в состоянии success */
-  success?: boolean;
-  /** Строка в состоянии selected */
-  selected?: boolean;
-}
-
 export interface TableProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Массив столбцов */
   columnList: Column[];
@@ -251,24 +236,6 @@ export const Table: React.FC<TableProps> = ({
     />
   );
 
-  const renderBodyCell = (row: TableRow, col: Column) => {
-    const headerCellWidth = hiddenHeaderRef.current
-      ?.querySelector<HTMLElement>(`[data-th-column="${col.name}"]`)
-      ?.getBoundingClientRect().width;
-    return (
-      <Cell
-        key={`${row.id}_${col.name}`}
-        dimension={dimension}
-        style={{ width: headerCellWidth || '100px' }}
-        className="td"
-        data-column={col.name}
-        data-row={row.id}
-      >
-        {<CellTextContent cellAlign={col.cellAlign}>{row[col.name]}</CellTextContent>}
-      </Cell>
-    );
-  };
-
   const renderBody = () => {
     return (
       <ScrollTableBody ref={scrollBodyRef} className="tbody">
@@ -288,7 +255,7 @@ export const Table: React.FC<TableProps> = ({
   };
 
   return (
-    <TableProvider renderBodyCell={renderBodyCell} dimension={dimension} columns={columnList}>
+    <TableProvider hiddenHeaderRef={hiddenHeaderRef} dimension={dimension} columns={columnList}>
       <TableContainer ref={tableRef} data-shadow={false} {...props} className={`table ${props.className || ''}`}>
         {renderHiddenHeader()}
         <HeaderWrapper scrollbar={scrollbar} data-verticalscroll={verticalScroll}>

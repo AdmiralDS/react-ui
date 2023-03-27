@@ -115,7 +115,21 @@ const Template: ComponentStory<typeof Table> = ({ columnList, ...args }) => {
 
   const renderRow = (index: number) => {
     const rowData = rowList[index];
-    return <TableRow row={rowData} key={`row_${rowData.id}`} />;
+    const { id, className, selected, disabled, error, checkboxDisabled, success, hover, ...data } = rowData;
+    return (
+      <TableRow
+        row={data}
+        id={id}
+        className={className}
+        selected={selected}
+        error={error}
+        disabled={disabled}
+        checkboxDisabled={checkboxDisabled}
+        success={success}
+        hover={hover}
+        key={`row_${rowData.id}`}
+      />
+    );
   };
 
   const handleResize = ({ name, width }: { name: string; width: string }) => {
