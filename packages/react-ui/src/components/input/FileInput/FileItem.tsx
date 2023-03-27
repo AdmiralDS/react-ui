@@ -272,7 +272,7 @@ export const FileItem = forwardRef<HTMLDivElement, FileItemProps>(
       if (element && checkOverflow(element) !== fileNameOverflow) {
         setFileNameOverflow(checkOverflow(element));
       }
-    }, [tooltipVisible, titleRef.current, setFileNameOverflow]);
+    }, [tooltipVisible, setFileNameOverflow]);
 
     useEffect(() => {
       function show() {
@@ -290,7 +290,7 @@ export const FileItem = forwardRef<HTMLDivElement, FileItemProps>(
           title.removeEventListener('mouseleave', hide);
         };
       }
-    }, [setTooltipVisible, titleRef.current]);
+    }, [setTooltipVisible]);
 
     const handleCloseIconClick = () => {
       onCloseIconClick?.(fileId);

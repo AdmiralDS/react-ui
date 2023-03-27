@@ -22,7 +22,7 @@ export const TitleText: React.FC<TitleTextProps> = ({ lineClamp, dimension, extr
     if (element && checkOverflow(element) !== overflow) {
       setOverflow(checkOverflow(element));
     }
-  }, [tooltipVisible, textRef.current, setOverflow]);
+  }, [tooltipVisible, setOverflow]);
 
   React.useLayoutEffect(() => {
     function show() {
@@ -40,7 +40,7 @@ export const TitleText: React.FC<TitleTextProps> = ({ lineClamp, dimension, extr
         text.removeEventListener('mouseleave', hide);
       };
     }
-  }, [setTooltipVisible, textRef.current]);
+  }, [setTooltipVisible]);
 
   return (
     <>

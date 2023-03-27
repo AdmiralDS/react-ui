@@ -371,7 +371,7 @@ export const InputEx = React.forwardRef<HTMLInputElement, InputExProps>(
         return;
       }
       setOverflowActive(false);
-    }, [tooltipVisible, inputRef.current, setOverflowActive]);
+    }, [tooltipVisible, setOverflowActive]);
 
     React.useLayoutEffect(() => {
       function show() {
@@ -391,7 +391,7 @@ export const InputEx = React.forwardRef<HTMLInputElement, InputExProps>(
           wrapper.removeEventListener('mousedown', hide);
         };
       }
-    }, [setTooltipVisible, innerContainerRef.current, inputRef.current]);
+    }, [setTooltipVisible]);
 
     const iconArray = React.Children.toArray(icons);
 
