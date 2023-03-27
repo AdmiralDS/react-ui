@@ -14,7 +14,6 @@ import {
 import { TableRow } from '../TableRow';
 
 import { Template_Sort } from './stories/sortStory';
-import { Template_Suspense } from './stories/suspenseStory';
 
 const Separator = styled.div`
   height: 20px;
@@ -217,16 +216,3 @@ Sort.parameters = {
 //     },
 //   },
 // };
-
-export const Suspense = Template_Suspense.bind({});
-Suspense.args = {
-  columnList: columnListSort,
-};
-Suspense.storyName = 'Table. Suspense.';
-Suspense.parameters = {
-  docs: {
-    source: {
-      code: 'Disabled for this story, see https://github.com/storybookjs/storybook/issues/11554',
-    },
-  },
-};
