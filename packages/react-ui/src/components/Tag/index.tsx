@@ -269,7 +269,7 @@ export const Tag = React.forwardRef<HTMLElement, TagProps & TagInternalProps>(
       if (element && checkOverflow(element) !== overflow) {
         setOverflow(checkOverflow(element));
       }
-    }, [tooltipVisible, textRef.current, setOverflow]);
+    }, [tooltipVisible, setOverflow]);
 
     React.useLayoutEffect(() => {
       function show() {
@@ -291,7 +291,7 @@ export const Tag = React.forwardRef<HTMLElement, TagProps & TagInternalProps>(
           wrapper.removeEventListener('blur', hide);
         };
       }
-    }, [setTooltipVisible, wrapperRef.current]);
+    }, [setTooltipVisible]);
 
     return (
       <>
