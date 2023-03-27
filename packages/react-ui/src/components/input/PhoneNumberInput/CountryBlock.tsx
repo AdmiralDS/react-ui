@@ -52,7 +52,7 @@ export const CountryBlock = React.forwardRef<HTMLDivElement, CountryBlockProps>(
     if (element && checkOverflow(element) !== overflow) {
       setOverflow(checkOverflow(element));
     }
-  }, [tooltipVisible, textRef.current, setOverflow]);
+  }, [tooltipVisible, setOverflow]);
 
   React.useLayoutEffect(() => {
     function show() {
@@ -74,7 +74,7 @@ export const CountryBlock = React.forwardRef<HTMLDivElement, CountryBlockProps>(
         wrapper.removeEventListener('blur', hide);
       };
     }
-  }, [setTooltipVisible, wrapperRef.current]);
+  }, [setTooltipVisible]);
 
   const SvgFlag = (FlagsPack as { [key: ComponentName]: ElementType })[name];
 
