@@ -8,7 +8,7 @@ import { VirtualBody } from '#src/components/Menu/VirtualBody';
 
 export type MenuDimensions = 'l' | 'm' | 's';
 
-const ITEMS_COUNT = 6;
+// const ITEMS_COUNT = 6;
 
 const getItemHeight = (dimension?: MenuDimensions) => {
   switch (dimension) {
@@ -23,18 +23,23 @@ const getItemHeight = (dimension?: MenuDimensions) => {
   }
 };
 
-const getHeight = (dimension?: MenuDimensions) => {
-  return getItemHeight(dimension) * ITEMS_COUNT + 16;
+const getHeight = (rowCount: number, dimension?: MenuDimensions) => {
+  return getItemHeight(dimension) * rowCount + 16;
 };
 
-const menuListHeights = css<{ dimension?: MenuDimensions; maxHeight?: string | number }>`
-  max-height: ${({ dimension, maxHeight }) => {
+const menuListHeights = css<{ dimension?: MenuDimensions; maxHeight?: string | number; rowCount: number }>`
+  max-height: ${({ dimension, maxHeight, rowCount }) => {
     if (maxHeight) return maxHeight;
-    return `${getHeight(dimension)}px`;
+    return `${getHeight(rowCount, dimension)}px`;
   }};
 `;
 
-const Wrapper = styled.div<{ dimension?: MenuDimensions; hasTopPanel: boolean; hasBottomPanel: boolean }>`
+const Wrapper = styled.div<{
+  dimension?: MenuDimensions;
+  hasTopPanel: boolean;
+  hasBottomPanel: boolean;
+  rowCount: number;
+}>`
   padding: 0;
   ${(p) => (p.hasTopPanel ? 'padding-top: 8px' : '')};
   ${(p) => (p.hasBottomPanel ? 'padding-bottom: 8px' : '')};
@@ -91,6 +96,8 @@ export interface MenuProps extends HTMLAttributes<HTMLDivElement> {
   /** @deprecated use disableSelectedOptionHighlight instead
    * Возможность множественного выбора (опции с Checkbox) */
   multiSelection?: boolean;
+  /** Количество строк в меню */
+  rowCount?: number;
   /** Возможность отключить подсветку выбранной опции
    * (например, при множественном выборе, когда у каждой опции есть Checkbox */
   disableSelectedOptionHighlight?: boolean;
@@ -128,6 +135,7 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
       onBackwardCycleApprove,
       containerRef,
       virtualScroll,
+      rowCount = 6,
       ...props
     },
     ref,
@@ -252,6 +260,7 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
           scrollContainerRef={menuRef}
           itemHeight={itemHeight}
           model={model}
+          rowCount={rowCount}
           activeId={activeId}
           selectedId={selectedId}
           onActivateItem={activateItem}
@@ -278,7 +287,14 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
     }, [active, activeState, model]);
 
     return (
-      <Wrapper ref={ref} dimension={dimension} hasTopPanel={hasTopPanel} hasBottomPanel={hasBottomPanel} {...props}>
+      <Wrapper
+        ref={ref}
+        dimension={dimension}
+        hasTopPanel={hasTopPanel}
+        hasBottomPanel={hasBottomPanel}
+        rowCount={rowCount}
+        {...props}
+      >
         {hasTopPanel && renderTopPanel({ dimension })}
         <StyledDiv ref={menuRef} hasTopPanel={hasTopPanel} hasBottomPanel={hasBottomPanel}>
           {virtualScroll ? renderVirtualChildren() : renderChildren()}

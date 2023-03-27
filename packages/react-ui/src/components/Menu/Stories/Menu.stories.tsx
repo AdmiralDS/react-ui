@@ -68,6 +68,27 @@ export default {
       options: ['l', 'm', 's'],
       control: { type: 'radio' },
     },
+    active: {
+      control: { type: 'text' },
+    },
+    selected: {
+      control: { type: 'text' },
+    },
+    defaultSelected: {
+      control: { type: 'text' },
+    },
+    maxHeight: {
+      control: { type: 'text' },
+    },
+    multiSelection: {
+      control: { type: 'boolean' },
+    },
+    disableSelectedOptionHighlight: {
+      control: { type: 'boolean' },
+    },
+    rowCount: {
+      control: { type: 'number' },
+    },
     themeBorderKind: {
       options: ALL_BORDER_RADIUS_VALUES,
       control: { type: 'radio' },
