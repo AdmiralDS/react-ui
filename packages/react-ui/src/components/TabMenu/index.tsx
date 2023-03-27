@@ -249,7 +249,7 @@ export const TabMenu: React.FC<TabMenuProps> = ({
         resizeObserver.disconnect();
       };
     }
-  }, [tablistRef.current]);
+  }, []);
 
   const handleIntersection = (entries: IntersectionObserverEntry[]) => {
     const updatedEntries: { [index: number | string]: boolean } = {};
@@ -280,7 +280,7 @@ export const TabMenu: React.FC<TabMenuProps> = ({
       });
     }
     return () => observer.disconnect();
-  }, [tabsWithRef, tablistRef, mobile, setVisibilityMap]);
+  }, [tabsWithRef, mobile, setVisibilityMap]);
 
   const handleTabClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     mobile && event.currentTarget.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
