@@ -28,6 +28,7 @@
   },
   "types": "./dist/index.d.ts",
   "scripts": {
+    "dev": "vite build",
     "build": "vite build && ttsc --emitDeclarationOnly",
     "test": "jest",
     "test:update": "jest -u",

@@ -1,4 +1,13 @@
-import type { Preview } from "@storybook/react";
+import type { Preview, ReactRenderer } from "@storybook/react";
+import type { DecoratorFunction } from "@storybook/types"
+import { DARK_THEME, DropdownProvider, FontsVTBGroup, LIGHT_THEME } from "@admiral-ds/react-ui";
+import * as React from "react";
+import { createGlobalStyle, ThemeProvider } from 'styled-components';
+import { withThemeFromJSXProvider } from '@storybook/addon-styling';
+
+
+const GlobalStyles = createGlobalStyle`
+`;
 
 const preview: Preview = {
   parameters: {
@@ -10,6 +19,26 @@ const preview: Preview = {
       },
     },
   },
+  decorators: [
+    (Story) => (
+      <ThemeProvider theme={LIGHT_THEME} >
+      <DropdownProvider>
+        <FontsVTBGroup />
+        <Story/>
+      </DropdownProvider>
+      </ThemeProvider>
+    ),
+
+    // withThemeFromJSXProvider({
+    //   themes: {
+    //     light: LIGHT_THEME,
+    //     dark: DARK_THEME,
+    //   },
+    //   defaultTheme: 'light',
+    //   Provider: ThemeProvider,
+    //   GlobalStyles,
+    // }) as DecoratorFunction<ReactRenderer>,
+  ],
 };
 
 export default preview;
