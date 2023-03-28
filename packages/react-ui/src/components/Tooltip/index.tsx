@@ -94,7 +94,7 @@ export const Tooltip = React.forwardRef<HTMLDivElement, ITooltipProps>(
       if (tooltipElementRef.current) {
         tooltipElementRef.current.style.opacity = '1';
       }
-    }, [tooltipElementRef.current]);
+    }, []);
 
     return emptyContent ? null : (
       <Portal
