@@ -5,6 +5,8 @@ import styled, { css } from 'styled-components';
 import type { ItemProps } from '#src/components/Menu/MenuItem';
 import { keyboardKey } from '#src/components/common/keyboardKey';
 import { VirtualBody } from '#src/components/Menu/VirtualBody';
+import { useClickOutside } from '#src/components/common/hooks/useClickOutside';
+import { refSetter } from '#src/components/common/utils/refSetter';
 
 export type MenuDimensions = 'l' | 'm' | 's';
 
@@ -93,8 +95,11 @@ export interface MenuProps extends HTMLAttributes<HTMLDivElement> {
   renderTopPanel?: (props: RenderPanelProps) => React.ReactNode;
   /** Позволяет добавить панель внизу под выпадающим списком */
   renderBottomPanel?: (props: RenderPanelProps) => React.ReactNode;
-  /** @deprecated use disableSelectedOptionHighlight instead
-   * Возможность множественного выбора (опции с Checkbox) */
+  /**
+   * Возможность множественного выбора (опции с Checkbox)
+   *
+   * @deprecated use disableSelectedOptionHighlight instead
+   */
   multiSelection?: boolean;
   /** Количество строк в меню */
   rowCount?: number;
@@ -115,6 +120,8 @@ export interface MenuProps extends HTMLAttributes<HTMLDivElement> {
      */
     itemHeight: 'auto' | number;
   };
+
+  isActive?: boolean;
 }
 
 export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
@@ -136,6 +143,7 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
       containerRef,
       virtualScroll,
       rowCount = 6,
+      isActive,
       ...props
     },
     ref,
@@ -182,6 +190,10 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
     const [selectedState, setSelectedState] = React.useState<string | undefined>(defaultSelected);
     const [activeState, setActiveState] = React.useState<string | undefined>(uncontrolledActiveValue);
     const [lastScrollEvent, setLastScrollEvent] = React.useState<number>();
+    const [inFocus, setInFocus] = React.useState<boolean>(false);
+    const wrapperRef = React.useRef<HTMLDivElement | null>(null);
+
+    const isFocused = isActive ?? inFocus;
 
     const selectedId =
       multiSelection || disableSelectedOptionHighlight ? undefined : selected === undefined ? selectedState : selected;
@@ -206,6 +218,8 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
 
     React.useEffect(() => {
       function handleKeyDown(e: KeyboardEvent) {
+        if (!isFocused) return;
+
         const code = keyboardKey.getCode(e);
         switch (code) {
           case keyboardKey[' ']:
@@ -233,7 +247,7 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
       return () => {
         document.removeEventListener('keydown', handleKeyDown);
       };
-    }, [active, activeState]);
+    }, [active, activeState, isFocused]);
 
     const renderChildren = () => {
       return model.map((item) =>
@@ -286,13 +300,24 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
       }, 0);
     }, [active, activeState, model]);
 
+    const handleFocus = () => {
+      setInFocus(true);
+    };
+
+    const handleBlur = () => {
+      setInFocus(false);
+    };
+
+    useClickOutside([wrapperRef], handleBlur);
+
     return (
       <Wrapper
-        ref={ref}
+        ref={refSetter(wrapperRef, ref)}
         dimension={dimension}
         hasTopPanel={hasTopPanel}
         hasBottomPanel={hasBottomPanel}
         rowCount={rowCount}
+        onClick={handleFocus}
         {...props}
       >
         {hasTopPanel && renderTopPanel({ dimension })}
