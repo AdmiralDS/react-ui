@@ -28,42 +28,41 @@ export interface TableRowProps extends Omit<HTMLAttributes<HTMLDivElement>, 'id'
   onRowSelectionChange?: (id: RowId, selected: boolean) => void;
 }
 
-export const TableRow = ({
-  row,
-  id,
-  className,
-  selected,
-  disabled,
-  checkboxDisabled,
-  error,
-  success,
-  hover,
-  onRowSelectionChange,
-  ...props
-}: TableRowProps) => {
-  const { dimension, displayRowSelectionColumn, columns, hiddenHeaderRef } = useTableContext();
+export const TableRow = React.forwardRef<HTMLDivElement, TableRowProps>(
+  (
+    { row, id, className, selected, disabled, checkboxDisabled, error, success, hover, onRowSelectionChange, ...props },
+    ref,
+  ) => {
+    const { dimension } = useTableContext();
 
-  return (
-    <Row {...props} underline disabled={!!disabled} dimension={dimension} className={`tr ${className || ''}`}>
-      <SimpleRow
-        className="tr-simple"
-        selected={!!selected}
+    return (
+      <Row
+        {...props}
+        ref={ref}
+        underline
         disabled={!!disabled}
-        error={!!error}
-        success={!!success}
-        hover={!!hover}
+        dimension={dimension}
+        className={`tr ${className || ''}`}
       >
-        {/* {columns.map((col) => renderBodyCell(row, col))} */}
-        <RegularRow
-          id={id}
-          rowData={row}
-          selected={selected}
-          disabled={disabled}
-          checkboxDisabled={checkboxDisabled}
-          onRowSelectionChange={onRowSelectionChange}
-        />
-        <Filler />
-      </SimpleRow>
-    </Row>
-  );
-};
+        <SimpleRow
+          className="tr-simple"
+          selected={!!selected}
+          disabled={!!disabled}
+          error={!!error}
+          success={!!success}
+          hover={!!hover}
+        >
+          <RegularRow
+            id={id}
+            rowData={row}
+            selected={selected}
+            disabled={disabled}
+            checkboxDisabled={checkboxDisabled}
+            onRowSelectionChange={onRowSelectionChange}
+          />
+          <Filler />
+        </SimpleRow>
+      </Row>
+    );
+  },
+);

@@ -2,12 +2,12 @@ import * as React from 'react';
 import observeRect from '#src/components/common/observeRect';
 import { getScrollbarSize } from '#src/components/common/dom/scrollbarUtil';
 import { Checkbox } from '#src/components/Checkbox';
+import { ThemeContext } from 'styled-components';
+import { LIGHT_THEME } from '#src/components/themes';
 
 import { TableProvider } from './TableContext';
 import { HeaderCellComponent } from './HeaderCell';
 import {
-  Cell,
-  CellTextContent,
   Filler,
   HeaderCellsWrapper,
   HeaderWrapper,
@@ -17,6 +17,8 @@ import {
   HiddenHeader,
   StickyWrapper,
   CheckboxCell,
+  Row,
+  EmptyMessage,
 } from './style';
 
 export const DEFAULT_COLUMN_WIDTH = 100;
@@ -87,6 +89,15 @@ export interface TableProps extends React.HTMLAttributes<HTMLDivElement> {
    * Возвращает параметр selectAll (если true - выбраны все строки в таблице, false - выбор снят со всех строк таблицы)
    */
   onHeaderSelectionChange?: (selectAll: boolean) => void;
+  /** Отображение серой линии подчеркивания для последней строки. По умолчанию линия отображается */
+  showLastRowUnderline?: boolean;
+  /** Объект локализации - позволяет перезадать текстовые константы используемые в компоненте,
+   * по умолчанию значения констант берутся из темы в соответствии с параметром currentLocale, заданном в теме
+   **/
+  locale?: {
+    /** Сообщение, отображаемое при отсутствии совпадений в строках после применения фильтра */
+    emptyMessage?: React.ReactNode;
+  };
 }
 
 export const Table: React.FC<TableProps> = ({
@@ -102,11 +113,14 @@ export const Table: React.FC<TableProps> = ({
   headerCheckboxChecked = false,
   headerCheckboxDisabled = false,
   headerCheckboxIndeterminate = false,
+  showLastRowUnderline = true,
   onHeaderSelectionChange,
+  locale,
   ...props
 }) => {
   const columnMinWidth = dimension === 's' || dimension === 'm' ? COLUMN_MIN_WIDTH_M : COLUMN_MIN_WIDTH_L;
   const checkboxDimension = dimension === 's' || dimension === 'm' ? 's' : 'm';
+  const theme = React.useContext(ThemeContext) || LIGHT_THEME;
 
   const [verticalScroll, setVerticalScroll] = React.useState(false);
   const [tableWidth, setTableWidth] = React.useState(0);
@@ -237,6 +251,21 @@ export const Table: React.FC<TableProps> = ({
   );
 
   const renderBody = () => {
+    const emptyMessage = locale?.emptyMessage || theme.locales[theme.currentLocale].table.emptyMessage;
+    if (rowCount === 0) {
+      return (
+        <ScrollTableBody ref={scrollBodyRef} className="tbody">
+          <Row
+            underline={showLastRowUnderline}
+            dimension={dimension}
+            className="tr"
+            rowWidth={headerRef.current?.scrollWidth}
+          >
+            <EmptyMessage dimension={dimension}>{emptyMessage}</EmptyMessage>
+          </Row>
+        </ScrollTableBody>
+      );
+    }
     return (
       <ScrollTableBody ref={scrollBodyRef} className="tbody">
         {[...Array(rowCount).keys()].map((index) => renderRow(index))}
