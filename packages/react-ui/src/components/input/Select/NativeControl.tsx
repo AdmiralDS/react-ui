@@ -41,7 +41,7 @@ export const NativeControl = forwardRef<HTMLSelectElement, NativeSelectProps>(
 
       selectRef.current?.addEventListener('keydown', handleKeyDown);
       return () => selectRef.current?.removeEventListener('keydown', handleKeyDown);
-    }, [selectRef]);
+    }, []);
 
     return (
       <NativeSelect ref={refSetter(ref, selectRef)} {...props} onClick={stopPropagation}>
