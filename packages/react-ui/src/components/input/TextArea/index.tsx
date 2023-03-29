@@ -344,7 +344,7 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
           node.removeEventListener('input', oninput);
         };
       }
-    }, [inputRef.current, handleInput]);
+    }, [handleInput]);
 
     React.useEffect(() => {
       function oninput(this: HTMLTextAreaElement) {
