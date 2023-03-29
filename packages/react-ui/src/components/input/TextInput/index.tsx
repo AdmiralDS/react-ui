@@ -280,7 +280,7 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
         return;
       }
       setOverflowActive(false);
-    }, [tooltipVisible, inputRef.current, setOverflowActive]);
+    }, [tooltipVisible, setOverflowActive]);
 
     React.useLayoutEffect(() => {
       function show() {
@@ -300,7 +300,7 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
           wrapper.removeEventListener('mousedown', hide);
         };
       }
-    }, [setTooltipVisible, wrapperRef.current, inputRef.current]);
+    }, [setTooltipVisible]);
 
     const [isPasswordVisible, setPasswordVisible] = React.useState(false);
     if (!props.readOnly && type === 'password') {
@@ -375,7 +375,7 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
           node.removeEventListener('input', oninput);
         };
       }
-    }, [inputRef.current, handleInput, placeholder]);
+    }, [handleInput, placeholder]);
     return (
       <>
         <StyledContainer
