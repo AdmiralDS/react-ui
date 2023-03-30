@@ -186,7 +186,7 @@ const Template3: ComponentStory<typeof Hint> = ({ anchorId, ...args }) => {
   return (
     <>
       <StyledButton dimension="s" ref={btnRef}>
-        Press&nbsp;&nbsp;&nbsp;
+        Hover on icon&nbsp;&nbsp;&nbsp;
         <Hint
           {...args}
           visible={visible}
