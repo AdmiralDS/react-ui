@@ -246,7 +246,7 @@ export const FileInfo = ({
     if (element && checkOverflow(element) !== titleOverflow) {
       setTitleOverflow(checkOverflow(element));
     }
-  }, [tooltipVisible, titleRef.current, setTitleOverflow]);
+  }, [tooltipVisible, setTitleOverflow]);
 
   useEffect(() => {
     function show() {
@@ -264,7 +264,7 @@ export const FileInfo = ({
         title.removeEventListener('mouseleave', hide);
       };
     }
-  }, [setTooltipVisible, titleRef.current]);
+  }, [setTooltipVisible]);
 
   useEffect(() => {
     if (file && imageFile && !children) {

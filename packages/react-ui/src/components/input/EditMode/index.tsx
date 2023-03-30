@@ -218,7 +218,7 @@ export const EditMode = React.forwardRef<HTMLInputElement, EditModeProps>(
       if (textRef.current && checkOverflow(textRef.current) !== overflowActive) {
         setOverflowActive(checkOverflow(textRef.current));
       }
-    }, [tooltipVisible, textRef.current, setOverflowActive]);
+    }, [tooltipVisible, setOverflowActive]);
 
     React.useEffect(() => {
       if (!localVal && value) {

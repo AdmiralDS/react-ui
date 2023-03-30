@@ -18,7 +18,7 @@ export const DisplayValue: React.FC<DisplayValueProps> = ({ visibleValue, isSear
     if (valueRef.current && checkOverflow(valueRef.current) !== overflowActive) {
       setOverflowActive(checkOverflow(valueRef.current));
     }
-  }, [tooltipVisible, valueRef.current, setOverflowActive]);
+  }, [tooltipVisible, setOverflowActive]);
 
   React.useEffect(() => {
     function show() {
@@ -36,7 +36,7 @@ export const DisplayValue: React.FC<DisplayValueProps> = ({ visibleValue, isSear
         value.removeEventListener('mouseleave', hide);
       };
     }
-  }, [setTooltipVisible, valueRef.current]);
+  }, [setTooltipVisible]);
 
   return (
     <>

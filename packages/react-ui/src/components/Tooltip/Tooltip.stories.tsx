@@ -131,7 +131,7 @@ const Template1: ComponentStory<typeof Tooltip> = (args) => {
         button.removeEventListener('blur', hide);
       };
     }
-  }, [btnRef.current, setVisible]);
+  }, [setVisible]);
 
   return (
     <ThemeProvider theme={swapBorder}>
@@ -188,7 +188,7 @@ const Template2: ComponentStory<typeof Tooltip> = () => {
         button.removeEventListener('blur', hide);
       };
     }
-  }, [btnRef.current, setTimer, setVisible, timer]);
+  }, [setTimer, setVisible, timer]);
 
   return (
     <>
@@ -242,7 +242,7 @@ const Template3: ComponentStory<typeof Tooltip> = () => {
         button.removeEventListener('blur', hide);
       };
     }
-  }, [btnRef.current, setVisible]);
+  }, [setVisible]);
 
   return (
     <>
