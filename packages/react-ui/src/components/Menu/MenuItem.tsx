@@ -38,7 +38,9 @@ export const MenuItem = React.forwardRef<HTMLDivElement, MenuItemProps>(
       onHover?.();
     };
 
-    const handleClick = () => {
+    const handleClick = (e: React.MouseEvent) => {
+      e.preventDefault();
+      e.stopPropagation();
       if (!disabled) onClickItem?.();
     };
 
@@ -51,7 +53,7 @@ export const MenuItem = React.forwardRef<HTMLDivElement, MenuItemProps>(
         data-hovered={hovered}
         data-disabled={disabled}
         onMouseMove={handleMouseMove}
-        onClick={handleClick}
+        onMouseDown={handleClick}
         {...props}
       >
         {children}
