@@ -19,22 +19,13 @@ const Button = styled.button`
     fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
   }
 
-  &:hover {
+  &:hover,
+  &:active {
     cursor: pointer;
     background-color: ${({ theme }) => theme.color['Neutral/Neutral 20']};
-    & *[fill^='#'] {
-      fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
-    }
   }
 
-  &:active {
-    background-color: ${({ theme }) => theme.color['Neutral/Neutral 20']};
-    & *[fill^='#'] {
-      fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
-    }
-  }
-
-  &:focus {
+  &:focus-visible {
     outline: none;
     &:before {
       position: absolute;
@@ -46,14 +37,10 @@ const Button = styled.button`
       right: -4px;
       border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
     }
-    & *[fill^='#'] {
-      fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
-    }
   }
 
   &:disabled {
     cursor: not-allowed;
-    background-color: ${({ theme }) => theme.color['Neutral/Neutral 10']};
     & *[fill^='#'] {
       fill: ${({ theme }) => theme.color['Neutral/Neutral 30']};
     }
