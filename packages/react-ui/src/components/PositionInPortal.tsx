@@ -57,7 +57,7 @@ export const PositionInPortal = ({
         observer.unobserve();
       };
     }
-  }, [targetRef.current, positionedPortalContainerRef.current, fullContainerWidth]);
+  }, [targetRef, fullContainerWidth]);
 
   return createPortal(
     <PositionedPortalContainer ref={positionedPortalContainerRef} {...props} />,

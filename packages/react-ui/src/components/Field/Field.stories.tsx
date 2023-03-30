@@ -81,7 +81,7 @@ export const FieldStory = Template.bind({});
 
 FieldStory.args = {
   label: 'some label of wrapped component',
-  id: 'some_id',
+  id: 'props_id',
 };
 
 FieldStory.storyName = 'Пример обертывания компонента TextInput';

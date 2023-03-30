@@ -378,7 +378,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
           onChipClick={stopPropagation}
         />
       ),
-      [valueWrapperRef, selectedOptions, shouldFixMultiSelectHeight, disabled, readOnly, handleOptionSelect],
+      [selectedOptions, shouldFixMultiSelectHeight, disabled, readOnly, handleOptionSelect],
     );
 
     const isEmptyValue = multiple ? !selectedValue?.length : !selectedValue;
@@ -492,7 +492,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       return () => {
         containerRef.current?.removeEventListener('keydown', handleKeyDown);
       };
-    }, [containerRef, modeIsSelect, searchValue, isSearchPanelOpen]);
+    }, [modeIsSelect, searchValue, isSearchPanelOpen]);
 
     const onFocus = (evt: React.FocusEvent<HTMLDivElement>) => {
       setIsFocused(true);

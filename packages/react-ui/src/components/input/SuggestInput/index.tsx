@@ -110,6 +110,8 @@ export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps
     const [isSuggestPanelOpen, setIsSuggestPanelOpen] = React.useState<boolean>(false);
     const [isFocused, setIsFocused] = React.useState<boolean>(false);
     const [activeOption, setActiveOption] = React.useState<string | undefined>('');
+    const [searchText, setSearchText] = React.useState<string>(props.value || '');
+    const currentSearchText = props.value ?? searchText;
 
     const [, forceUpdate] = React.useReducer((x) => x + 1, 0);
 
@@ -189,7 +191,7 @@ export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps
             <SuggestPanel
               key={index}
               text={text}
-              searchText={props.value || inputRef.current?.value || ''}
+              searchText={currentSearchText}
               highlightFormat={highlightFormat}
               dimension={menuDimension}
               {...options}
@@ -199,7 +201,7 @@ export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps
       } else {
         return [];
       }
-    }, [options, dimension, props.value, inputRef.current?.value]);
+    }, [options, dimension, currentSearchText]);
 
     React.useEffect(() => {
       if (isSuggestPanelOpen) {
@@ -228,6 +230,10 @@ export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps
         onBlur={(...p) => {
           props.onBlur?.(...p);
           triggerDelayedBlur({});
+        }}
+        onChange={(e) => {
+          props.onChange?.(e);
+          setSearchText(e.currentTarget.value);
         }}
       >
         {options && isSuggestPanelOpen && !skeleton && !emptyAtLoading && (

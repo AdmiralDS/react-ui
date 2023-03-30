@@ -170,7 +170,7 @@ export const Field = React.forwardRef<HTMLDivElement, FieldProps>(
           containerNode.removeEventListener('focusout', onFocusOut);
         }
       };
-    }, [containerRef.current]);
+    }, []);
 
     return (
       <Container
