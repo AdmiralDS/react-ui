@@ -23,13 +23,15 @@ export const TOOLTIP_DELAY = 1500;
 export const Tooltip = React.forwardRef<HTMLDivElement, ITooltipProps>(
   ({ renderContent, targetRef, container: userContainer, tooltipPosition, ...props }, ref) => {
     const tooltipElementRef = React.useRef<HTMLDivElement | null>(null);
+    const tooltipHeight = React.useRef(0);
     const container: Element = userContainer || document.body;
 
     // Пустая строка, undefined, null и false не будут отображены
-    const emptyContent = !renderContent() && renderContent() !== 0;
+    const emptyContent: boolean = React.useMemo(() => !renderContent() && renderContent() !== 0, [renderContent]);
 
     const [portalFlexDirection, setPortalFlexDirection] = React.useState('');
     const [portalFullWidth, setPortalFullWidth] = React.useState(false);
+    const [recalculation, startRecalculation] = React.useState({});
 
     const manageTooltip = (scrollbarSize: number) => {
       if (targetRef.current && tooltipElementRef.current) {
@@ -86,15 +88,35 @@ export const Tooltip = React.forwardRef<HTMLDivElement, ITooltipProps>(
     React.useEffect(() => {
       const scrollbarSize = getScrollbarSize();
       manageTooltip(scrollbarSize);
-    }, [renderContent(), targetRef, tooltipPosition, container]);
+    }, [renderContent(), targetRef, tooltipPosition, container, recalculation]);
+
+    // During fonts loading tooltip size can be changed and tooltip direction should be recalculated
+    React.useLayoutEffect(() => {
+      if (tooltipElementRef.current && !emptyContent) {
+        const resizeObserver = new ResizeObserver((entries) => {
+          entries.forEach((entry) => {
+            if (tooltipHeight.current === 0) {
+              // don't recalculate tooltip direction on its mount
+              tooltipHeight.current = entry.contentRect.height;
+            } else {
+              startRecalculation({});
+            }
+          });
+        });
+        resizeObserver.observe(tooltipElementRef.current);
+        return () => {
+          resizeObserver.disconnect();
+        };
+      }
+    }, [emptyContent]);
 
     // First container render always happens downward and transparent,
     // after size and position settled transparency returns to normal
     React.useEffect(() => {
-      if (tooltipElementRef.current) {
+      if (tooltipElementRef.current && !emptyContent) {
         tooltipElementRef.current.style.opacity = '1';
       }
-    }, []);
+    }, [emptyContent]);
 
     return emptyContent ? null : (
       <Portal
