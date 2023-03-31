@@ -236,7 +236,6 @@ export const DropMenu = React.forwardRef<HTMLElement, DropMenuProps>(
               onSelectItem={handleSelectItem}
               dimension={dimension}
               active={active}
-              isActive={isMenuOpen}
               onActivateItem={onActivateItem}
               multiSelection={multiSelection}
               disableSelectedOptionHighlight={disableSelectedOptionHighlight}
