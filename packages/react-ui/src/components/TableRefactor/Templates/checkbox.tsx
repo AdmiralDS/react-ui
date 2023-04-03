@@ -43,7 +43,7 @@ export const Template_Checkbox: ComponentStory<typeof Table> = ({ columnList, ..
     const { id, className, selected, disabled, error, checkboxDisabled, success, hover, ...data } = rowData;
     return (
       <TableRow
-        row={data}
+        renderCell={(colName: string) => data[colName]}
         id={id}
         className={className}
         selected={selected}

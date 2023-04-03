@@ -111,14 +111,19 @@ export default {
 
 const Template: ComponentStory<typeof Table> = ({ columnList, ...args }) => {
   const [cols, setCols] = React.useState([...columnList]);
-  const [rows, setRows] = React.useState([...rowList]);
+  // const [rows, setRows] = React.useState<any>([]);
+
+  // React.useEffect(() => {
+  //   // backend
+  //   setRows([...rowList]);
+  // }, []);
 
   const renderRow = (index: number) => {
     const rowData = rowList[index];
     const { id, className, selected, disabled, error, checkboxDisabled, success, hover, ...data } = rowData;
     return (
       <TableRow
-        row={data}
+        renderCell={(colName: string) => data[colName]}
         id={id}
         className={className}
         selected={selected}
@@ -138,7 +143,7 @@ const Template: ComponentStory<typeof Table> = ({ columnList, ...args }) => {
   };
 
   return (
-    <Table {...args} columnList={cols} rowCount={rows.length} renderRow={renderRow} onColumnResize={handleResize} />
+    <Table {...args} columnList={cols} rowCount={rowList.length} renderRow={renderRow} onColumnResize={handleResize} />
   );
 };
 

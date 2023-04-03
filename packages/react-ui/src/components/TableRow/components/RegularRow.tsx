@@ -1,20 +1,11 @@
 import * as React from 'react';
-import {
-  CheckboxCell,
-  ExpandCell,
-  ExpandIcon,
-  ExpandIconPlacement,
-  Filler,
-  StickyWrapper,
-  Cell,
-} from '#src/components/TableRefactor/style';
+import { CheckboxCell, Filler, StickyWrapper, Cell } from '#src/components/TableRefactor/style';
 import { Checkbox } from '#src/components/Checkbox';
-import type { TableRow, RowId, Column, Dimension } from '#src/components/Table';
+import type { RowId } from '#src/components/Table';
 import { useTableContext } from '#src/components/TableRefactor/TableContext';
 
-type RowData = Record<RowId, React.ReactNode>;
 export interface RegularRowProps {
-  rowData: RowData;
+  renderCell: (colName: string) => React.ReactNode;
   id: RowId;
   /** Строка в состоянии selected */
   selected?: boolean;
@@ -27,12 +18,12 @@ export interface RegularRowProps {
 }
 
 export const RegularRow = ({
-  rowData,
   id,
   disabled = false,
   checkboxDisabled = false,
   selected = false,
   onRowSelectionChange,
+  renderCell,
 }: RegularRowProps) => {
   const { dimension, columns, hiddenHeaderRef, displayRowSelectionColumn } = useTableContext();
   const checkboxDimension = dimension === 's' || dimension === 'm' ? 's' : 'm';
@@ -42,7 +33,7 @@ export const RegularRow = ({
     e.stopPropagation();
   };
 
-  const renderBodyCell = (row: RowData, col: any) => {
+  const renderBodyCell = (col: any) => {
     const headerCellWidth = hiddenHeaderRef.current
       ?.querySelector<HTMLElement>(`[data-th-column="${col.name}"]`)
       ?.getBoundingClientRect().width;
@@ -57,7 +48,7 @@ export const RegularRow = ({
         cellAlign={col.cellAlign}
       >
         {/* {<CellTextContent cellAlign={col.cellAlign}>{row[col.name]}</CellTextContent>} */}
-        {row[col.name]}
+        {renderCell(col.name)}
       </Cell>
     );
   };
@@ -79,7 +70,7 @@ export const RegularRow = ({
           )}
         </StickyWrapper>
       )}
-      {columns.map((col) => renderBodyCell(rowData, col))}
+      {columns.map((col) => renderBodyCell(col))}
       <Filler />
     </>
   );
