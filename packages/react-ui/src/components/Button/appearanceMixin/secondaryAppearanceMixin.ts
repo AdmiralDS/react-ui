@@ -5,20 +5,20 @@ export const secondaryAppearanceMixin = css`
   color: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
   border: 1px solid ${({ theme }) => theme.color['Primary/Primary 60 Main']};
 
-  & *[fill^='#'] {
+  &&& *[fill^='#'] {
     fill: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
   }
 
-  &:hover {
+  &&&:hover {
     background-color: ${({ theme }) => theme.color['Opacity/Hover']};
     color: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
     border-color: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
-    & *[fill^='#'] {
+    &&& *[fill^='#'] {
       fill: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
     }
   }
 
-  &:active {
+  &&&:active {
     background-color: ${({ theme }) => theme.color['Opacity/Press']};
     color: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
     border-color: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
@@ -27,12 +27,12 @@ export const secondaryAppearanceMixin = css`
     }
   }
 
-  &[data-appearance~='disabled'],
-  &:disabled {
+  &&&[data-appearance~='disabled'],
+  &&&:disabled {
     background-color: transparent;
     color: ${({ theme }) => theme.color['Neutral/Neutral 30']};
     border-color: ${({ theme }) => theme.color['Neutral/Neutral 30']};
-    & *[fill^='#'] {
+    &&& *[fill^='#'] {
       fill: ${({ theme }) => theme.color['Neutral/Neutral 30']};
     }
   }
