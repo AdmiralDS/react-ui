@@ -6,7 +6,6 @@ import type { ItemProps, RenderOptionProps } from '#src/components/Menu/MenuItem
 import { MenuItem } from '#src/components/Menu/MenuItem';
 import styled, { css, ThemeContext, ThemeProvider } from 'styled-components';
 import { typography } from '#src/components/Typography';
-import { ReactComponent as CardSolid } from '@admiral-ds/icons/build/finance/CardSolid.svg';
 import { withDesign } from 'storybook-addon-designs';
 import type { Theme } from '#src/components/themes';
 import { LIGHT_THEME } from '#src/components/themes';
@@ -22,10 +21,17 @@ import { keyboardKey } from '#src/components/common/keyboardKey';
 import { mediumGroupBorderRadius, ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
 import type { CheckboxGroupItemProps, ItemWithCheckbox } from '#src/components/Menu/MenuItemWithCheckbox';
 import { checkboxTreeToMap, MenuItemWithCheckbox } from '#src/components/Menu/MenuItemWithCheckbox';
-import { LargeNumberOfItemsTemplate, VirtualScrollTemplate } from '#src/components/Menu/Stories/Templates';
+import {
+  CardGroupsTemplate,
+  LargeNumberOfItemsTemplate,
+  MenuWithLockCycleScrollTemplate,
+  VirtualScrollTemplate,
+} from '#src/components/Menu/Stories/Templates';
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 import LargeNumberOfItemsRaw from '!!raw-loader!./Templates/LargeNumberOfItems';
+import MenuWithLockCycleScrollRaw from '!!raw-loader!./Templates/MenuWithLockCycleScroll';
 import VirtualScrollRaw from '!!raw-loader!./Templates/VirtualScroll';
+import CardGroupsRaw from '!!raw-loader!./Templates/CardGroups';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -68,6 +74,27 @@ export default {
       options: ['l', 'm', 's'],
       control: { type: 'radio' },
     },
+    active: {
+      control: { type: 'text' },
+    },
+    selected: {
+      control: { type: 'text' },
+    },
+    defaultSelected: {
+      control: { type: 'text' },
+    },
+    maxHeight: {
+      control: { type: 'text' },
+    },
+    multiSelection: {
+      control: { type: 'boolean' },
+    },
+    disableSelectedOptionHighlight: {
+      control: { type: 'boolean' },
+    },
+    rowCount: {
+      control: { type: 'number' },
+    },
     themeBorderKind: {
       options: ALL_BORDER_RADIUS_VALUES,
       control: { type: 'radio' },
@@ -75,122 +102,12 @@ export default {
   },
 } as ComponentMeta<typeof Menu>;
 
-const StyledAdditionalText = styled.div`
-  ${typography['Body/Body 2 Long']}
-  color: ${({ theme }) => theme.color['Neutral/Neutral 50']};
-  pointer-events: none;
-`;
-
-const StyledMenuItem = styled(MenuItem)`
-  padding: 6px 8px;
-  margin: 0 8px 0 24px;
-  border-bottom: ${({ theme }) => `1px solid ${theme.color['Neutral/Neutral 20']}`};
-  flex-direction: column;
-  align-items: flex-start;
-`;
-
 const Wrapper = styled.div`
   border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
   overflow: hidden;
   border-color: transparent;
   ${(p) => p.theme.shadow['Shadow 08']}
 `;
-
-const TemplateWithCards: ComponentStory<typeof Menu> = (args) => {
-  const category = [
-    {
-      name: 'Категория 1',
-      id: '1',
-      content: [
-        {
-          id: '2',
-          label: 'Номер Карты /****45',
-          value: 1,
-        },
-        {
-          id: '3',
-          label: 'Номер Карты /****75',
-          value: 2,
-        },
-        { id: '4', label: 'Номер Карты /****22', value: 3 },
-        {
-          id: '5',
-          label: 'Номер Карты /****33',
-          value: 4,
-        },
-      ],
-    },
-    {
-      name: 'Категория 2',
-      id: '9',
-      content: [
-        {
-          id: '10',
-          label: 'Номер Карты /****21',
-          value: 5,
-        },
-        {
-          id: '11',
-          label: 'Номер Карты /****35',
-          value: 6,
-        },
-        { id: '12', label: 'Номер Карты /****39', value: 7 },
-        {
-          id: '13',
-          label: 'Номер Карты /****41',
-          value: 8,
-        },
-      ],
-    },
-  ];
-
-  const model = React.useMemo(() => {
-    return category.reduce((acc: any, item: any) => {
-      acc.push({
-        id: item.id,
-        render: (options: RenderOptionProps) => (
-          <MenuItem dimension={args.dimension} key={item.id} {...options}>
-            {item.name}
-          </MenuItem>
-        ),
-        disabled: true,
-      });
-      return acc.concat(
-        item.content.map((subitem: any) => {
-          return {
-            id: subitem.id,
-            render: (options: RenderOptionProps) => (
-              <StyledMenuItem dimension={args.dimension} key={subitem.id} {...options}>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                  {subitem.label} <CardSolid width={24} height={24} />
-                </div>
-                <StyledAdditionalText>Дополнительный текст</StyledAdditionalText>
-              </StyledMenuItem>
-            ),
-          };
-        }),
-      );
-    }, []);
-  }, [args.dimension]);
-
-  const [selected, setSelected] = React.useState<string | undefined>('');
-  const [active, setActive] = React.useState<string | undefined>('');
-
-  return (
-    <>
-      <Wrapper style={{ width: 'fit-content' }}>
-        <Menu
-          {...args}
-          model={model}
-          selected={selected}
-          onSelectItem={setSelected}
-          active={active}
-          onActivateItem={setActive}
-        />
-      </Wrapper>
-    </>
-  );
-};
 
 type StoryItem = {
   id: string;
@@ -259,36 +176,6 @@ const SimpleTemplate: ComponentStory<typeof Menu> = (args) => {
     <ThemeProvider theme={swapBorder}>
       <Wrapper style={{ width: 'fit-content' }}>
         <Menu {...args} model={model} />
-      </Wrapper>
-    </ThemeProvider>
-  );
-};
-
-const ITEMS_WITH_DISABLED_ITEMS = [...STORY_ITEMS];
-ITEMS_WITH_DISABLED_ITEMS[0].disabled = true;
-ITEMS_WITH_DISABLED_ITEMS[6].disabled = true;
-const MenuWithLockCycleScrollTemplate: ComponentStory<typeof Menu> = (args) => {
-  const model = React.useMemo(() => {
-    return ITEMS_WITH_DISABLED_ITEMS.map((item) => ({
-      id: item.id,
-      disabled: item.disabled,
-      render: (options: RenderOptionProps) => (
-        <MenuItem dimension={args.dimension} {...options} key={item.id}>
-          {item.label}
-        </MenuItem>
-      ),
-    }));
-  }, [args.dimension]);
-
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
-  return (
-    <ThemeProvider theme={swapBorder}>
-      <Wrapper style={{ width: 'fit-content' }}>
-        <Menu {...args} model={model} onForwardCycleApprove={() => false} onBackwardCycleApprove={() => false} />
       </Wrapper>
     </ThemeProvider>
   );
@@ -936,8 +823,25 @@ const MenuCheckboxGroupTemplate: ComponentStory<typeof Menu> = (args) => {
 
 export const Simple = SimpleTemplate.bind({});
 Simple.storyName = 'Базовый пример';
-export const MenuWithLockCycleScroll = MenuWithLockCycleScrollTemplate.bind({});
-export const Category = TemplateWithCards.bind({});
+
+//<editor-fold desc="Пример с большим количеством item">
+const CardGroupsStory: ComponentStory<typeof Menu> = (props) => (
+  <CardGroupsTemplate model={[]} {...cleanUpProps(props)} />
+);
+export const CardGroupsExample = CardGroupsStory.bind({});
+CardGroupsExample.parameters = {
+  docs: {
+    source: {
+      code: CardGroupsRaw,
+    },
+    description: {
+      story: 'Пример построения меню с группированием пунктов',
+    },
+  },
+};
+CardGroupsExample.storyName = 'Пример с группами карт';
+//</editor-fold>
+
 export const CustomItems = CustomItemTemplate.bind({});
 export const MenuCheckbox = MenuCheckboxTemplate.bind({});
 export const MenuRadiobutton = MenuRadiobuttonTemplate.bind({});
@@ -947,6 +851,7 @@ export const MenuActionsTwoButtons = MenuActionsTwoButtonsTemplate.bind({});
 export const MenuActionsAddUserValue = MenuActionsAddUserValueTemplate.bind({});
 export const MenuCheckboxGroup = MenuCheckboxGroupTemplate.bind({});
 
+//<editor-fold desc="Пример с большим количеством item">
 const LargeNumberOfItemsStory: ComponentStory<typeof Menu> = (props) => (
   <LargeNumberOfItemsTemplate model={[]} {...cleanUpProps(props)} />
 );
@@ -962,7 +867,29 @@ LargeNumberOfItemsExample.parameters = {
   },
 };
 LargeNumberOfItemsExample.storyName = 'Пример с большим количеством item';
+//</editor-fold>
 
+//<editor-fold desc="Пример без цикла обхода пунктов">
+const MenuWithLockCycleScrollStory: ComponentStory<typeof Menu> = (props) => (
+  <MenuWithLockCycleScrollTemplate model={[]} {...cleanUpProps(props)} />
+);
+
+export const MenuWithLockCycleScrollExample = MenuWithLockCycleScrollStory.bind({});
+MenuWithLockCycleScrollExample.parameters = {
+  docs: {
+    source: {
+      code: MenuWithLockCycleScrollRaw,
+    },
+    description: {
+      story:
+        'Для блокировки цикличного обхода пунктов меню можно использовать onForwardCycleApprove и onBackwardCycleApprove.',
+    },
+  },
+};
+MenuWithLockCycleScrollExample.storyName = 'Пример без цикла обхода пунктов';
+//</editor-fold>
+
+//<editor-fold desc="Виртуальный скролл">
 const VirtualScrollStory: ComponentStory<typeof Menu> = (props) => (
   <VirtualScrollTemplate model={[]} {...cleanUpProps(props)} />
 );
@@ -981,9 +908,8 @@ VirtualScrollExample.parameters = {
   },
 };
 VirtualScrollExample.storyName = 'Виртуальный скролл';
+//</editor-fold>
 
-MenuWithLockCycleScroll.storyName = 'Пример без цикла обхода пунктов';
-Category.storyName = 'Пример с группами';
 CustomItems.storyName = 'Пример с кастомными пунктами меню';
 MenuCheckbox.storyName = 'Пример с Checkbox';
 MenuRadiobutton.storyName = 'Пример с Radiobutton';

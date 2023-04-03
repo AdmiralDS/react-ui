@@ -134,7 +134,7 @@ export const DropMenu = React.forwardRef<HTMLElement, DropMenuProps>(
       multiSelection = false, // TODO: убрать после удаления в Menu
       disableSelectedOptionHighlight = false,
       isVisible,
-      onVisibilityChange = (isVisible: boolean) => undefined,
+      onVisibilityChange = () => undefined,
       onClickOutside,
       renderTopPanel,
       renderBottomPanel,

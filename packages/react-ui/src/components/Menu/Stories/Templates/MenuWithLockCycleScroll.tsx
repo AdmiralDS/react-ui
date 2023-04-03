@@ -1,0 +1,47 @@
+import * as React from 'react';
+import styled, { ThemeProvider } from 'styled-components';
+import { Menu } from '#src/components/Menu';
+import { MenuItem } from '#src/components/Menu/MenuItem';
+import { mediumGroupBorderRadius } from '#src/components/themes';
+import { STORY_ITEMS } from '#src/components/Menu/Stories/Templates/data';
+import type { MenuProps } from '#src/components/Menu';
+import type { RenderOptionProps } from '#src/components/Menu/MenuItem';
+import type { Theme } from '#src/components/themes';
+
+const ITEMS_WITH_DISABLED_ITEMS = [...STORY_ITEMS];
+ITEMS_WITH_DISABLED_ITEMS[0].disabled = true;
+ITEMS_WITH_DISABLED_ITEMS[6].disabled = true;
+
+const Wrapper = styled.div`
+  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
+  overflow: hidden;
+  border-color: transparent;
+  ${(p) => p.theme.shadow['Shadow 08']}
+`;
+
+export const MenuWithLockCycleScrollTemplate = (props: MenuProps) => {
+  const model = React.useMemo(() => {
+    return ITEMS_WITH_DISABLED_ITEMS.map((item) => ({
+      id: item.id,
+      disabled: item.disabled,
+      render: (options: RenderOptionProps) => (
+        <MenuItem dimension={props.dimension} {...options} key={item.id}>
+          {item.label}
+        </MenuItem>
+      ),
+    }));
+  }, [props.dimension]);
+
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    return theme;
+  }
+
+  return (
+    <ThemeProvider theme={swapBorder}>
+      <Wrapper style={{ width: 'fit-content' }}>
+        <Menu {...props} model={model} onForwardCycleApprove={() => false} onBackwardCycleApprove={() => false} />
+      </Wrapper>
+    </ThemeProvider>
+  );
+};
