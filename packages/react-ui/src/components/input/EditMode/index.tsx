@@ -361,7 +361,6 @@ export const EditMode = React.forwardRef<HTMLInputElement, EditModeProps>(
         ) : (
           <>
             <Text
-              className={'my-text-class'}
               ref={refSetter(textRef, setNode)}
               $multiline={multilineView}
               onClick={!props.readOnly ? enableEdit : undefined}
