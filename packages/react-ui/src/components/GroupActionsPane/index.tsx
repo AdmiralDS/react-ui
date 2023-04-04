@@ -131,7 +131,7 @@ export const GroupActionsPane = ({
     <Pane dimension={dimension} {...props}>
       {!searchOpened && <Actions>{children}</Actions>}
       <IconsBlock>
-        {searchValue && onChangeSearchValue && (
+        {searchValue !== undefined && onChangeSearchValue && (
           <SearchBlock
             searchValue={searchValue}
             onChangeSearchValue={onChangeSearchValue}
