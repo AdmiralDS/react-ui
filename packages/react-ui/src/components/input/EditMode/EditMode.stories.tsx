@@ -93,6 +93,9 @@ export default {
     isLoading: {
       control: { type: 'boolean' },
     },
+    multilineView: {
+      control: { type: 'boolean' },
+    },
   },
 } as ComponentMeta<typeof EditMode>;
 
