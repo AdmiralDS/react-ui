@@ -54,10 +54,10 @@ export interface GroupActionsPaneProps extends HTMLAttributes<HTMLDivElement> {
   dimension?: PaneDimension;
 
   /** Массив объектов с видимостью колонок */
-  columns: Array<{ name: string; visible: boolean }>;
+  columns?: Array<{ name: string; visible: boolean }>;
 
   /** Значение строки поиска */
-  searchValue: string;
+  searchValue?: string;
 
   /** Обработчик изменения видимости колонок */
   onColumnsChange?: (columns: Array<{ name: string; visible: boolean }>) => void;
@@ -69,7 +69,7 @@ export interface GroupActionsPaneProps extends HTMLAttributes<HTMLDivElement> {
   onSearchLeave?: () => void;
 
   /** Обработчик изменения строки поиска */
-  onChangeSearchValue: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeSearchValue?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 
   /** Объект, отображаемый в качестве меню настройки */
   settingsMenu?: React.ReactNode;
@@ -131,25 +131,29 @@ export const GroupActionsPane = ({
     <Pane dimension={dimension} {...props}>
       {!searchOpened && <Actions>{children}</Actions>}
       <IconsBlock>
-        <SearchBlock
-          searchValue={searchValue}
-          onChangeSearchValue={onChangeSearchValue}
-          dimension={iconButtonDimension}
-          opened={searchOpened}
-          onOpenSearch={handleOpenSearch}
-          onCloseSearch={handleCloseSearch}
-          locale={locale}
-        />
-        <ColumnsButton
-          columns={columns}
-          menuDimension={menuDimension}
-          buttonDimension={iconButtonDimension}
-          onColumnsChange={onColumnsChange}
-          disabled={settingsButtonsDisabled}
-          dropContainerCssMixin={columnsButtonDropContainerStyle?.dropContainerCssMixin || dropContainerCssMixin}
-          dropContainerClassName={columnsButtonDropContainerStyle?.dropContainerClassName}
-          dropContainerStyle={columnsButtonDropContainerStyle?.dropContainerStyle}
-        />
+        {searchValue && onChangeSearchValue && (
+          <SearchBlock
+            searchValue={searchValue}
+            onChangeSearchValue={onChangeSearchValue}
+            dimension={iconButtonDimension}
+            opened={searchOpened}
+            onOpenSearch={handleOpenSearch}
+            onCloseSearch={handleCloseSearch}
+            locale={locale}
+          />
+        )}
+        {columns && onColumnsChange && (
+          <ColumnsButton
+            columns={columns}
+            menuDimension={menuDimension}
+            buttonDimension={iconButtonDimension}
+            onColumnsChange={onColumnsChange}
+            disabled={settingsButtonsDisabled}
+            dropContainerCssMixin={columnsButtonDropContainerStyle?.dropContainerCssMixin || dropContainerCssMixin}
+            dropContainerClassName={columnsButtonDropContainerStyle?.dropContainerClassName}
+            dropContainerStyle={columnsButtonDropContainerStyle?.dropContainerStyle}
+          />
+        )}
         {settingsMenu && (
           <SettingsButton
             menu={settingsMenu}
