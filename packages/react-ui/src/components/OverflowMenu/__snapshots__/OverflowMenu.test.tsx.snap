@@ -1,0 +1,260 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`OverflowMenu should render component 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": .c3 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+}
+
+.c3 > svg {
+  height: 24px;
+  width: 24px;
+}
+
+.c2 {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: transparent;
+  pointer-events: none;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+}
+
+.c0 {
+  position: relative;
+  padding: 0;
+  margin: 6px;
+  box-sizing: border-box;
+  border: none;
+  background-color: transparent;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  -webkit-flex: 0 0 auto;
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
+  height: 24px;
+  width: 24px;
+  border-radius: 4px;
+  overflow: visible;
+  cursor: pointer;
+}
+
+.c0 > * {
+  pointer-events: none;
+}
+
+.c0:disabled {
+  cursor: default;
+  pointer-events: none;
+}
+
+.c0:disabled *[fill^='#'] {
+  fill: #B0B5BD;
+}
+
+.c0:focus-visible {
+  outline-offset: 2px;
+  outline: #0062FF solid 2px;
+}
+
+.c0:focus > .c1 {
+  background-color: transparent;
+}
+
+.c0:hover > .c1 {
+  background-color: #0000000D;
+}
+
+.c0:active > .c1 {
+  background-color: #0000001F;
+}
+
+.c0:focus-visible > .c1 {
+  background-color: transparent;
+}
+
+<body>
+    <div>
+      <button
+        aria-expanded="false"
+        aria-haspopup="false"
+        class="c0  overflow-menu-button-with-dropdown"
+        data-testid="btn"
+        type="button"
+      >
+        <div
+          aria-hidden="true"
+          class="c1 c2"
+        />
+        <div
+          aria-hidden="true"
+          class="c3"
+        >
+          <div />
+        </div>
+      </button>
+    </div>
+  </body>,
+  "container": .c3 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+}
+
+.c3 > svg {
+  height: 24px;
+  width: 24px;
+}
+
+.c2 {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: transparent;
+  pointer-events: none;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+}
+
+.c0 {
+  position: relative;
+  padding: 0;
+  margin: 6px;
+  box-sizing: border-box;
+  border: none;
+  background-color: transparent;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  -webkit-flex: 0 0 auto;
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
+  height: 24px;
+  width: 24px;
+  border-radius: 4px;
+  overflow: visible;
+  cursor: pointer;
+}
+
+.c0 > * {
+  pointer-events: none;
+}
+
+.c0:disabled {
+  cursor: default;
+  pointer-events: none;
+}
+
+.c0:disabled *[fill^='#'] {
+  fill: #B0B5BD;
+}
+
+.c0:focus-visible {
+  outline-offset: 2px;
+  outline: #0062FF solid 2px;
+}
+
+.c0:focus > .c1 {
+  background-color: transparent;
+}
+
+.c0:hover > .c1 {
+  background-color: #0000000D;
+}
+
+.c0:active > .c1 {
+  background-color: #0000001F;
+}
+
+.c0:focus-visible > .c1 {
+  background-color: transparent;
+}
+
+<div>
+    <button
+      aria-expanded="false"
+      aria-haspopup="false"
+      class="c0  overflow-menu-button-with-dropdown"
+      data-testid="btn"
+      type="button"
+    >
+      <div
+        aria-hidden="true"
+        class="c1 c2"
+      />
+      <div
+        aria-hidden="true"
+        class="c3"
+      >
+        <div />
+      </div>
+    </button>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;

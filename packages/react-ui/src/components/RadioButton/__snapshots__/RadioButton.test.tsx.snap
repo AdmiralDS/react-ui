@@ -1,0 +1,1126 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RadioButton should render component with disabled state 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": .c6 {
+  display: inline-block;
+  position: absolute;
+  margin: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  content: '';
+  box-sizing: border-box;
+  pointer-events: none;
+  background-color: #FFFFFF;
+  width: 20px;
+  height: 20px;
+  border: 1px solid #B0B5BD;
+  border-radius: 50%;
+  -webkit-transition: all 0.25s ease-in-out;
+  transition: all 0.25s ease-in-out;
+}
+
+fieldset[data-dimension='s'] .c5 {
+  width: 18px;
+  height: 18px;
+}
+
+fieldset:disabled .c5 {
+  border: 1px solid #B0B5BD;
+}
+
+.c3 {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  display: inline-block;
+  min-width: 20px;
+  height: 20px;
+}
+
+fieldset[data-dimension='s'] .c2 {
+  min-width: 18px;
+  height: 18px;
+}
+
+.c4 {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  box-sizing: border-box;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.c4::-ms-check {
+  display: none;
+}
+
+.c4:disabled {
+  pointer-events: none;
+}
+
+.c4:not(:checked):disabled + .c5 {
+  background-color: #E5E7EB;
+}
+
+.c4:checked:disabled + .c5 {
+  border: 5px solid #A7C7FF;
+}
+
+.c4:checked:not(disabled) + .c5 {
+  border: 5px solid #0062FF;
+}
+
+.c4:not(:disabled):hover::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  border-radius: 50%;
+  width: calc(100% + 16px);
+  height: calc(100% + 16px);
+  background-color: #0000000D;
+}
+
+.c4:focus-visible {
+  outline-offset: 2px;
+  outline: #0062FF solid 2px;
+}
+
+.c1 {
+  margin: 0;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-left: 32px;
+  display: inline-block;
+  position: relative;
+  box-sizing: content-box;
+  cursor: default;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #B0B5BD;
+}
+
+fieldset[data-dimension='s'] .c1.c1 {
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #B0B5BD;
+}
+
+fieldset:disabled .c1.c1 {
+  color: #B0B5BD;
+}
+
+fieldset:disabled .c0 {
+  cursor: default;
+}
+
+<body>
+    <div>
+      <label
+        class="c0 c1"
+        disabled=""
+      >
+        <div
+          class="c2 c3"
+        >
+          <input
+            class="c4"
+            data-testid="element"
+            disabled=""
+            type="radio"
+            value="radio1"
+          />
+          <span
+            class="c5 c6"
+            disabled=""
+          />
+        </div>
+        text
+      </label>
+    </div>
+  </body>,
+  "container": .c6 {
+  display: inline-block;
+  position: absolute;
+  margin: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  content: '';
+  box-sizing: border-box;
+  pointer-events: none;
+  background-color: #FFFFFF;
+  width: 20px;
+  height: 20px;
+  border: 1px solid #B0B5BD;
+  border-radius: 50%;
+  -webkit-transition: all 0.25s ease-in-out;
+  transition: all 0.25s ease-in-out;
+}
+
+fieldset[data-dimension='s'] .c5 {
+  width: 18px;
+  height: 18px;
+}
+
+fieldset:disabled .c5 {
+  border: 1px solid #B0B5BD;
+}
+
+.c3 {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  display: inline-block;
+  min-width: 20px;
+  height: 20px;
+}
+
+fieldset[data-dimension='s'] .c2 {
+  min-width: 18px;
+  height: 18px;
+}
+
+.c4 {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  box-sizing: border-box;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.c4::-ms-check {
+  display: none;
+}
+
+.c4:disabled {
+  pointer-events: none;
+}
+
+.c4:not(:checked):disabled + .c5 {
+  background-color: #E5E7EB;
+}
+
+.c4:checked:disabled + .c5 {
+  border: 5px solid #A7C7FF;
+}
+
+.c4:checked:not(disabled) + .c5 {
+  border: 5px solid #0062FF;
+}
+
+.c4:not(:disabled):hover::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  border-radius: 50%;
+  width: calc(100% + 16px);
+  height: calc(100% + 16px);
+  background-color: #0000000D;
+}
+
+.c4:focus-visible {
+  outline-offset: 2px;
+  outline: #0062FF solid 2px;
+}
+
+.c1 {
+  margin: 0;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-left: 32px;
+  display: inline-block;
+  position: relative;
+  box-sizing: content-box;
+  cursor: default;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #B0B5BD;
+}
+
+fieldset[data-dimension='s'] .c1.c1 {
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #B0B5BD;
+}
+
+fieldset:disabled .c1.c1 {
+  color: #B0B5BD;
+}
+
+fieldset:disabled .c0 {
+  cursor: default;
+}
+
+<div>
+    <label
+      class="c0 c1"
+      disabled=""
+    >
+      <div
+        class="c2 c3"
+      >
+        <input
+          class="c4"
+          data-testid="element"
+          disabled=""
+          type="radio"
+          value="radio1"
+        />
+        <span
+          class="c5 c6"
+          disabled=""
+        />
+      </div>
+      text
+    </label>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`RadioButton should render component with required properties 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": .c6 {
+  display: inline-block;
+  position: absolute;
+  margin: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  content: '';
+  box-sizing: border-box;
+  pointer-events: none;
+  background-color: #FFFFFF;
+  width: 20px;
+  height: 20px;
+  border: 1px solid #717681;
+  border-radius: 50%;
+  -webkit-transition: all 0.25s ease-in-out;
+  transition: all 0.25s ease-in-out;
+}
+
+fieldset[data-dimension='s'] .c5 {
+  width: 18px;
+  height: 18px;
+}
+
+fieldset:disabled .c5 {
+  border: 1px solid #B0B5BD;
+}
+
+.c3 {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  display: inline-block;
+  min-width: 20px;
+  height: 20px;
+}
+
+fieldset[data-dimension='s'] .c2 {
+  min-width: 18px;
+  height: 18px;
+}
+
+.c4 {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  box-sizing: border-box;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.c4::-ms-check {
+  display: none;
+}
+
+.c4:disabled {
+  pointer-events: none;
+}
+
+.c4:not(:checked):disabled + .c5 {
+  background-color: #E5E7EB;
+}
+
+.c4:checked:disabled + .c5 {
+  border: 5px solid #A7C7FF;
+}
+
+.c4:checked:not(disabled) + .c5 {
+  border: 5px solid #0062FF;
+}
+
+.c4:not(:disabled):hover::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  border-radius: 50%;
+  width: calc(100% + 16px);
+  height: calc(100% + 16px);
+  background-color: #0000000D;
+}
+
+.c4:focus-visible {
+  outline-offset: 2px;
+  outline: #0062FF solid 2px;
+}
+
+.c1 {
+  margin: 0;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-left: 32px;
+  display: inline-block;
+  position: relative;
+  box-sizing: content-box;
+  cursor: pointer;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #23262D;
+}
+
+fieldset[data-dimension='s'] .c1.c1 {
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #23262D;
+}
+
+fieldset:disabled .c1.c1 {
+  color: #B0B5BD;
+}
+
+fieldset:disabled .c0 {
+  cursor: default;
+}
+
+<body>
+    <div>
+      <label
+        class="c0 c1"
+      >
+        <div
+          class="c2 c3"
+        >
+          <input
+            class="c4"
+            data-testid="element"
+            type="radio"
+            value="radio1"
+          />
+          <span
+            class="c5 c6"
+          />
+        </div>
+        text
+      </label>
+    </div>
+  </body>,
+  "container": .c6 {
+  display: inline-block;
+  position: absolute;
+  margin: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  content: '';
+  box-sizing: border-box;
+  pointer-events: none;
+  background-color: #FFFFFF;
+  width: 20px;
+  height: 20px;
+  border: 1px solid #717681;
+  border-radius: 50%;
+  -webkit-transition: all 0.25s ease-in-out;
+  transition: all 0.25s ease-in-out;
+}
+
+fieldset[data-dimension='s'] .c5 {
+  width: 18px;
+  height: 18px;
+}
+
+fieldset:disabled .c5 {
+  border: 1px solid #B0B5BD;
+}
+
+.c3 {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  display: inline-block;
+  min-width: 20px;
+  height: 20px;
+}
+
+fieldset[data-dimension='s'] .c2 {
+  min-width: 18px;
+  height: 18px;
+}
+
+.c4 {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  box-sizing: border-box;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.c4::-ms-check {
+  display: none;
+}
+
+.c4:disabled {
+  pointer-events: none;
+}
+
+.c4:not(:checked):disabled + .c5 {
+  background-color: #E5E7EB;
+}
+
+.c4:checked:disabled + .c5 {
+  border: 5px solid #A7C7FF;
+}
+
+.c4:checked:not(disabled) + .c5 {
+  border: 5px solid #0062FF;
+}
+
+.c4:not(:disabled):hover::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  border-radius: 50%;
+  width: calc(100% + 16px);
+  height: calc(100% + 16px);
+  background-color: #0000000D;
+}
+
+.c4:focus-visible {
+  outline-offset: 2px;
+  outline: #0062FF solid 2px;
+}
+
+.c1 {
+  margin: 0;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-left: 32px;
+  display: inline-block;
+  position: relative;
+  box-sizing: content-box;
+  cursor: pointer;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #23262D;
+}
+
+fieldset[data-dimension='s'] .c1.c1 {
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #23262D;
+}
+
+fieldset:disabled .c1.c1 {
+  color: #B0B5BD;
+}
+
+fieldset:disabled .c0 {
+  cursor: default;
+}
+
+<div>
+    <label
+      class="c0 c1"
+    >
+      <div
+        class="c2 c3"
+      >
+        <input
+          class="c4"
+          data-testid="element"
+          type="radio"
+          value="radio1"
+        />
+        <span
+          class="c5 c6"
+        />
+      </div>
+      text
+    </label>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`RadioButton should render component with small dimension 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": .c6 {
+  display: inline-block;
+  position: absolute;
+  margin: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  content: '';
+  box-sizing: border-box;
+  pointer-events: none;
+  background-color: #FFFFFF;
+  width: 18px;
+  height: 18px;
+  border: 1px solid #717681;
+  border-radius: 50%;
+  -webkit-transition: all 0.25s ease-in-out;
+  transition: all 0.25s ease-in-out;
+}
+
+fieldset[data-dimension='s'] .c5 {
+  width: 18px;
+  height: 18px;
+}
+
+fieldset:disabled .c5 {
+  border: 1px solid #B0B5BD;
+}
+
+.c3 {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  display: inline-block;
+  min-width: 18px;
+  height: 18px;
+}
+
+fieldset[data-dimension='s'] .c2 {
+  min-width: 18px;
+  height: 18px;
+}
+
+.c4 {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  box-sizing: border-box;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.c4::-ms-check {
+  display: none;
+}
+
+.c4:disabled {
+  pointer-events: none;
+}
+
+.c4:not(:checked):disabled + .c5 {
+  background-color: #E5E7EB;
+}
+
+.c4:checked:disabled + .c5 {
+  border: 5px solid #A7C7FF;
+}
+
+.c4:checked:not(disabled) + .c5 {
+  border: 5px solid #0062FF;
+}
+
+.c4:not(:disabled):hover::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  border-radius: 50%;
+  width: calc(100% + 14px);
+  height: calc(100% + 14px);
+  background-color: #0000000D;
+}
+
+.c4:focus-visible {
+  outline-offset: 2px;
+  outline: #0062FF solid 2px;
+}
+
+.c1 {
+  margin: 0;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-left: 28px;
+  display: inline-block;
+  position: relative;
+  box-sizing: content-box;
+  cursor: pointer;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #23262D;
+}
+
+fieldset[data-dimension='s'] .c1.c1 {
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #23262D;
+}
+
+fieldset:disabled .c1.c1 {
+  color: #B0B5BD;
+}
+
+fieldset:disabled .c0 {
+  cursor: default;
+}
+
+<body>
+    <div>
+      <label
+        class="c0 c1"
+      >
+        <div
+          class="c2 c3"
+        >
+          <input
+            class="c4"
+            data-testid="element"
+            type="radio"
+            value="radio1"
+          />
+          <span
+            class="c5 c6"
+          />
+        </div>
+        text
+      </label>
+    </div>
+  </body>,
+  "container": .c6 {
+  display: inline-block;
+  position: absolute;
+  margin: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  content: '';
+  box-sizing: border-box;
+  pointer-events: none;
+  background-color: #FFFFFF;
+  width: 18px;
+  height: 18px;
+  border: 1px solid #717681;
+  border-radius: 50%;
+  -webkit-transition: all 0.25s ease-in-out;
+  transition: all 0.25s ease-in-out;
+}
+
+fieldset[data-dimension='s'] .c5 {
+  width: 18px;
+  height: 18px;
+}
+
+fieldset:disabled .c5 {
+  border: 1px solid #B0B5BD;
+}
+
+.c3 {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  display: inline-block;
+  min-width: 18px;
+  height: 18px;
+}
+
+fieldset[data-dimension='s'] .c2 {
+  min-width: 18px;
+  height: 18px;
+}
+
+.c4 {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  box-sizing: border-box;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.c4::-ms-check {
+  display: none;
+}
+
+.c4:disabled {
+  pointer-events: none;
+}
+
+.c4:not(:checked):disabled + .c5 {
+  background-color: #E5E7EB;
+}
+
+.c4:checked:disabled + .c5 {
+  border: 5px solid #A7C7FF;
+}
+
+.c4:checked:not(disabled) + .c5 {
+  border: 5px solid #0062FF;
+}
+
+.c4:not(:disabled):hover::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  border-radius: 50%;
+  width: calc(100% + 14px);
+  height: calc(100% + 14px);
+  background-color: #0000000D;
+}
+
+.c4:focus-visible {
+  outline-offset: 2px;
+  outline: #0062FF solid 2px;
+}
+
+.c1 {
+  margin: 0;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-left: 28px;
+  display: inline-block;
+  position: relative;
+  box-sizing: content-box;
+  cursor: pointer;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #23262D;
+}
+
+fieldset[data-dimension='s'] .c1.c1 {
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  color: #23262D;
+}
+
+fieldset:disabled .c1.c1 {
+  color: #B0B5BD;
+}
+
+fieldset:disabled .c0 {
+  cursor: default;
+}
+
+<div>
+    <label
+      class="c0 c1"
+    >
+      <div
+        class="c2 c3"
+      >
+        <input
+          class="c4"
+          data-testid="element"
+          type="radio"
+          value="radio1"
+        />
+        <span
+          class="c5 c6"
+        />
+      </div>
+      text
+    </label>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;

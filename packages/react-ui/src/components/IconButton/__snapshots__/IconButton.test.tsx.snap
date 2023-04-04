@@ -1,0 +1,127 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`IconButton should render component 1`] = `
+.c0 {
+  box-sizing: border-box;
+  display: inline-block;
+  border: none;
+  border-radius: 4px;
+  background: transparent;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  vertical-align: middle;
+  pointer-events: all;
+}
+
+.c0[data-dimension='xl'] {
+  padding: 0;
+  height: 56px;
+  width: 56px;
+}
+
+.c0[data-dimension='l'] {
+  height: 48px;
+  width: 48px;
+}
+
+.c0[data-dimension='m'] {
+  height: 40px;
+  width: 40px;
+}
+
+.c0[data-dimension='s'] {
+  height: 32px;
+  width: 32px;
+}
+
+.c0:hover {
+  cursor: pointer;
+  background: #0000000D;
+}
+
+.c0:hover *[fill^='#'] {
+  fill: #717681;
+}
+
+.c0:active {
+  background: #0000001F;
+}
+
+.c0:active *[fill^='#'] {
+  fill: #717681;
+}
+
+.c0:disabled {
+  cursor: not-allowed;
+  background-color: transparent;
+}
+
+.c0:disabled *[fill^='#'] {
+  fill: #B0B5BD;
+}
+
+.c0:focus-visible {
+  outline-offset: 2px;
+  outline: #0062FF solid 2px;
+}
+
+.c1 {
+  vertical-align: top;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  overflow: hidden;
+  -webkit-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 24px;
+  height: 24px;
+}
+
+.c1 > * {
+  display: inline-block;
+  -webkit-flex: 0 1 auto;
+  -ms-flex: 0 1 auto;
+  flex: 0 1 auto;
+  white-space: nowrap;
+}
+
+.c1 > *:not(:first-child) {
+  margin-left: 8px;
+}
+
+.c1 *[fill^='#'] {
+  fill: #717681;
+}
+
+.c1 > svg {
+  width: 24px;
+  height: 24px;
+}
+
+<div>
+  <button
+    class="c0"
+    data-dimension="xl"
+    type="button"
+  >
+    <span
+      class="c1"
+    />
+  </button>
+</div>
+`;
