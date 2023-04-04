@@ -1,11 +1,9 @@
 import type { Dayjs, ManipulateType } from 'dayjs';
 import dayjs from 'dayjs';
-import utc from 'dayjs/plugin/utc';
 import isBetween from 'dayjs/plugin/isBetween';
 import objectSupport from 'dayjs/plugin/objectSupport';
 import localeData from 'dayjs/plugin/localeData';
 
-dayjs.extend(utc);
 dayjs.extend(isBetween);
 dayjs.extend(objectSupport);
 dayjs.extend(localeData);

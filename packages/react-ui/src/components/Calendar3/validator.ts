@@ -54,16 +54,16 @@ export const getDefaultDateValidator = (minDate?: Dayjs, maxDate?: Dayjs): DateV
     },
     invalidYear: (year: number): InvalidDateMessage => {
       // год не входит в диапазон, если его последний день был раньше minDate или если его первый день был позже maxDate
-      return !!outOfBounds(dayjs({ y: year, m: 11, d: 31 }), minDate) ||
-        !!outOfBounds(dayjs({ y: year, m: 0, d: 1 }), null, maxDate)
+      return !!outOfBounds(dayjs({ y: year, M: 11, d: 31 }), minDate) ||
+        !!outOfBounds(dayjs({ y: year, M: 0, d: 1 }), null, maxDate)
         ? MESSAGE_DATE_OUTOFRANGE
         : null;
     },
     invalidMonth: (month: number, year: number): InvalidDateMessage => {
       // месяц не входит в диапазон, если его последний день был раньше minDate или если его первый день был позже maxDate
-      const lastDay = lastDayOfMonth(dayjs({ y: year, m: month, d: 1 }));
-      return !!outOfBounds(dayjs({ y: year, m: month, d: lastDay }), minDate) ||
-        !!outOfBounds(dayjs({ y: year, m: month, d: 1 }), null, maxDate)
+      const lastDay = lastDayOfMonth(dayjs({ y: year, M: month, d: 1 }));
+      return !!outOfBounds(dayjs({ y: year, M: month, d: lastDay }), minDate) ||
+        !!outOfBounds(dayjs({ y: year, M: month, d: 1 }), null, maxDate)
         ? MESSAGE_DATE_OUTOFRANGE
         : null;
     },

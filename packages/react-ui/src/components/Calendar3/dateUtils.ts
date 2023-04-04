@@ -1,11 +1,13 @@
 import type { Dayjs } from 'dayjs';
 import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
 import objectSupport from 'dayjs/plugin/objectSupport';
 import { locales } from './locales';
 import type { LocaleType } from './constants';
 
 export { format, parse };
 
+dayjs.extend(utc);
 dayjs.extend(objectSupport);
 
 /**
@@ -50,7 +52,7 @@ const compile = (formatString: string): string[] => {
 
 const format = (dateObj: Dayjs, arg: string | string[], locale: LocaleType, utc?: boolean): string => {
   const pattern = typeof arg === 'string' ? compile(arg) : arg;
-  const d: any = addMinutes(dateObj, utc ? dateObj.getTimezoneOffset() : 0);
+  const d: any = addMinutes(dateObj, utc ? dateObj.utcOffset() : 0);
   const formatter = locales[locale].formatter;
   let str = '';
   d.utc = utc || false;
@@ -71,7 +73,7 @@ const addSeconds = (dateObj: Dayjs, seconds: number): Dayjs => {
 };
 
 const addMilliseconds = (dateObj: Dayjs, milliseconds: number): Dayjs => {
-  return dayjs(dateObj.getTime() + milliseconds);
+  return dayjs(dateObj.valueOf() + milliseconds);
 };
 
 const preparse = (dateString: string, arg: string | string[], locale: LocaleType) => {
@@ -143,9 +145,9 @@ const parse = (dateString: string, arg: string | string[], locale: LocaleType, u
   if (isValid(dt, '', locale)) {
     dt.M -= dt.Y < 100 ? 22801 : 1; // 22801 = 1900 * 12 + 1
     if (utc || dt.Z) {
-      return dayjs(Dayjs.UTC(dt.Y, dt.M, dt.D, dt.H, dt.m + dt.Z, dt.s, dt.S));
+      return dayjs(dayjs({ y: dt.Y, M: dt.M, d: dt.D, h: dt.H, m: dt.m + dt.Z, s: dt.s, ms: dt.S }).utc());
     }
-    return dayjs(dt.Y, dt.M, dt.D, dt.H, dt.m, dt.s, dt.S);
+    return dayjs({ y: dt.Y, M: dt.M, d: dt.D, h: dt.H, m: dt.m, s: dt.s, ms: dt.S });
   }
   return dayjs(NaN);
 };
