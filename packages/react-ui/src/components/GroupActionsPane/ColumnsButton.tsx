@@ -35,7 +35,7 @@ export interface ItemProps {
 type ItemValue = { name: string; visible: boolean };
 
 export interface ColumnsButtonProps extends HTMLAttributes<HTMLButtonElement>, RenderOptionProps {
-  columns: Array<ItemValue>;
+  columns?: Array<ItemValue>;
   onColumnsChange?: (columns: Array<ItemValue>) => void;
   buttonDimension?: 's' | 'l';
   menuDimension?: MenuDimension;
@@ -63,7 +63,7 @@ const StyledCheckbox = styled(Checkbox)`
 export const ColumnsButton = React.forwardRef<HTMLButtonElement, ColumnsButtonProps>(
   (
     {
-      columns,
+      columns = [],
       menuDimension = 'l',
       buttonDimension = 'l',
       onColumnsChange,
@@ -82,7 +82,7 @@ export const ColumnsButton = React.forwardRef<HTMLButtonElement, ColumnsButtonPr
     };
 
     const handleChangeColumn = ({ name, visible }: ItemValue) => {
-      if (onColumnsChange) {
+      if (onColumnsChange && columns.length > 0) {
         const newValue = [...columns];
         const item = newValue.find((column) => column.name === name);
         if (item) item.visible = visible;
@@ -106,7 +106,8 @@ export const ColumnsButton = React.forwardRef<HTMLButtonElement, ColumnsButtonPr
               <StyledCheckbox
                 checked={column.visible}
                 onChange={(e: React.FormEvent<HTMLInputElement>) => {
-                  handleChangeColumn({ name: column.name, visible: e.currentTarget.checked });
+                  e.preventDefault();
+                  e.stopPropagation();
                 }}
               />
               {column.name}
@@ -125,7 +126,13 @@ export const ColumnsButton = React.forwardRef<HTMLButtonElement, ColumnsButtonPr
 
     return (
       <>
-        <IconButton ref={refSetter(ref, buttonRef)} dimension={buttonDimension} onClick={handleBtnClick} {...props}>
+        <IconButton
+          ref={refSetter(ref, buttonRef)}
+          dimension={buttonDimension}
+          onClick={handleBtnClick}
+          {...props}
+          disabled={columns.length === 0}
+        >
           <PlusOutline />
         </IconButton>
         {opened && (
