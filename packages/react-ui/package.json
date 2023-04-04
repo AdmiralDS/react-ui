@@ -97,6 +97,7 @@
     "prettier": "^2.0.5",
     "raw-loader": "^4.0.2",
     "react-router-dom": "^6.0.2",
+    "resize-observer-polyfill": "^1.5.1",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "standard-version": "^9.3.2",
     "storybook-addon-designs": "^6.1.0",
