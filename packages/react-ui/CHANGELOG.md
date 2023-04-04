@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.9.0](https://github.com/AdmiralDS/react-ui/compare/v4.8.1...v4.9.0) (2023-04-04)
+
+
+### Features
+
+* **Avatar:** move showTooltip prop from internal to usual props ([3772b3a](https://github.com/AdmiralDS/react-ui/commit/3772b3a71992b77a9811d78e1df8b4e140398ade))
+* **EditMode:** add multiline view mode ([77396ae](https://github.com/AdmiralDS/react-ui/commit/77396ae73bc98441fd645b227d7e148fb7d9d6e3))
+* **Menu:** add property rowCount ([760d2e3](https://github.com/AdmiralDS/react-ui/commit/760d2e331c2cf1377fd3fe086774a332d8913697))
+
+
+### Bug Fixes
+
+* **Button:** rise appearance style specificity ([4aef532](https://github.com/AdmiralDS/react-ui/commit/4aef532b647fb38ab7e9fc86f2251e66929b7ec8))
+* **MenuItem:** click on menu item shouldnt steal focus ([bb7f229](https://github.com/AdmiralDS/react-ui/commit/bb7f22920b8d8c1ae64eb06de575d59d0cfb2ba6))
+* npm run storybook must work from project root ([dea7ce4](https://github.com/AdmiralDS/react-ui/commit/dea7ce4d9dc380e852db233cff5079b1e21d109a))
+* **PaginationOne:** fix button focus style ([6b92385](https://github.com/AdmiralDS/react-ui/commit/6b9238523ddb03e497e3bfc67ca317670f7d6389))
+* **TabMenu:** fix render badge in OverflowMenu ([a9f0a48](https://github.com/AdmiralDS/react-ui/commit/a9f0a48b3ed91fd6fac730d5dbffc8c65d34c2ac))
+* **Tooltip:** fix bug with fonts loading ([c8fdc8a](https://github.com/AdmiralDS/react-ui/commit/c8fdc8ae4304e0dba284fbe64a07782aabd7319c))
+
 ### [4.8.1](https://github.com/AdmiralDS/react-ui/compare/v4.8.0...v4.8.1) (2023-03-23)
 
 
