@@ -1,5 +1,6 @@
 import type { FC } from 'react';
 import * as React from 'react';
+import type { Dayjs } from 'dayjs';
 import { ThemeContext } from 'styled-components';
 import { LIGHT_THEME } from '#src/components/themes';
 
@@ -24,8 +25,8 @@ export const Week: FC<IWeekCalendarProps> = ({
   highlightSpecialDay,
 }) => {
   const theme = React.useContext(ThemeContext) || LIGHT_THEME;
-  const handleMouseEnter = (day: Date, e: any) => onMouseEnter && onMouseEnter(day, e);
-  const handleDayClick = (day: Date, e: any) => onClick && onClick(day, e);
+  const handleMouseEnter = (day: Dayjs, e: any) => onMouseEnter && onMouseEnter(day, e);
+  const handleDayClick = (day: Dayjs, e: any) => onClick && onClick(day, e);
   const weekStart = startOfWeek(day, theme.locales[theme.currentLocale].firstDayOfWeek ?? 1);
   return (
     <WeekComponent>

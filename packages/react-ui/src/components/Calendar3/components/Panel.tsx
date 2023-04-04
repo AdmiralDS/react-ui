@@ -1,5 +1,6 @@
 import type { FC, MouseEvent } from 'react';
 import * as React from 'react';
+import type { Dayjs } from 'dayjs';
 import { TooltipHoc } from '#src/components/TooltipHOC';
 import { ThemeContext } from 'styled-components';
 import { LIGHT_THEME } from '#src/components/themes';
@@ -24,11 +25,11 @@ const YearWithTooltip = TooltipHoc(Year);
 const ButtonWithTooltip = TooltipHoc(Button);
 
 interface IPanelProps {
-  viewDate: Date;
+  viewDate: Dayjs;
   yearsView: boolean;
   monthsView: boolean;
-  minDate?: Date;
-  maxDate?: Date;
+  minDate?: Dayjs;
+  maxDate?: Dayjs;
   tooltipContainer?: Element | null;
   locale?: {
     backwardText?: string;
@@ -112,7 +113,8 @@ export const Panel: FC<IPanelProps> = ({
           view={monthsView}
           onMouseDown={monthMouseDownHandle}
         >
-          {capitalizeFirstLetter(getFormattedValue(viewDate, { month: 'long' }, theme.currentLocale || 'ru'))}
+          {/*{capitalizeFirstLetter(getFormattedValue(viewDate, { month: 'long' }, theme.currentLocale || 'ru'))}*/}
+          {capitalizeFirstLetter(getFormattedValue(viewDate, { month: 'long' }))}
         </MonthWithTooltip>
         <YearWithTooltip
           renderContent={() =>
@@ -124,7 +126,7 @@ export const Panel: FC<IPanelProps> = ({
           view={yearsView}
           onMouseDown={yearMouseDownHandle}
         >
-          {viewDate.getFullYear()}
+          {viewDate.year()}
         </YearWithTooltip>
       </PanelDate>
       {!monthsView && !nextDisabled ? (

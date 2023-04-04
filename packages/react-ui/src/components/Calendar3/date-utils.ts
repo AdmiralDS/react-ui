@@ -1,10 +1,20 @@
+import type { Dayjs, ManipulateType } from 'dayjs';
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+import isBetween from 'dayjs/plugin/isBetween';
+import objectSupport from 'dayjs/plugin/objectSupport';
+import localeData from 'dayjs/plugin/localeData';
+
+dayjs.extend(utc);
+dayjs.extend(isBetween);
+dayjs.extend(objectSupport);
+dayjs.extend(localeData);
+
 export {
   addDays,
   addMonths,
   addWeeks,
   addYears,
-  after,
-  before,
   changeTime,
   compareDates,
   dayInRange,
@@ -22,6 +32,7 @@ export {
   setYear,
   startOfMonth,
   startOfWeek,
+  startOfDay,
   startOfYear,
   subMonths,
   subYears,
@@ -33,129 +44,61 @@ export {
 
 const MILLISECONDS_IN_DAY = 86400000;
 
-const endOfDay = (date: Date): Date => {
-  date.setHours(23, 59, 59, 999);
-  return date;
-};
-
-const endOfMonth = (date: Date): Date => {
-  const month = date.getMonth();
-  date.setFullYear(date.getFullYear(), month + 1, 0);
-  date.setHours(23, 59, 59, 999);
-  return date;
-};
-
-const getDaysInMonth = (date: Date): number => {
-  const year = date.getFullYear();
-  const monthIndex = date.getMonth();
-  const lastDayOfMonth = new Date(0);
-  lastDayOfMonth.setFullYear(year, monthIndex + 1, 0);
-  lastDayOfMonth.setHours(0, 0, 0, 0);
-  return lastDayOfMonth.getDate();
-};
-
-const getTimezoneOffsetInMilliseconds = (date: Date): number => {
-  const utcDate = new Date(
-    Date.UTC(
-      date.getFullYear(),
-      date.getMonth(),
-      date.getDate(),
-      date.getHours(),
-      date.getMinutes(),
-      date.getSeconds(),
-      date.getMilliseconds(),
-    ),
-  );
-  utcDate.setUTCFullYear(date.getFullYear());
-  return date.getTime() - utcDate.getTime();
-};
-
-const isEqual = (dateLeft: Date, dateRight: Date): boolean => {
-  return dateLeft.getTime() === dateRight.getTime();
-};
-
-const isSameDay = (dateLeft: Date, dateRight: Date): boolean => {
-  const dateLeftStartOfDay = startOfDay(dateLeft);
-  const dateRightStartOfDay = startOfDay(dateRight);
-
-  return dateLeftStartOfDay.getTime() === dateRightStartOfDay.getTime();
-};
-
-const isSameMonth = (dateLeft: Date, dateRight: Date): boolean => {
-  return dateLeft.getFullYear() === dateRight.getFullYear() && dateLeft.getMonth() === dateRight.getMonth();
-};
-
-const isWithinInterval = (date: Date, interval: { start: Date; end: Date }): boolean => {
-  const time = date.getTime();
-  const startTime = interval.start.getTime();
-  const endTime = interval.end.getTime();
-
-  if (!(startTime <= endTime)) {
+//TODO: test
+const isWithinInterval = (date: Dayjs, interval: { start: Dayjs; end: Dayjs }): boolean => {
+  if (interval.start.isAfter(interval.end)) {
     throw new RangeError('Invalid interval');
   }
 
-  return time >= startTime && time <= endTime;
+  return date.isBetween(interval.start, interval.end, null, '[]');
 };
 
-export const startOfDay = (date: Date): Date => {
-  date.setHours(0, 0, 0, 0);
-  return date;
-};
-
-const addDays = (current: Date, amount: number): Date => {
-  const date = new Date(current.getTime());
+//TODO: test
+const addWithAmountCheck = (date: Dayjs, amount: number, unit: ManipulateType | undefined): Dayjs => {
   if (isNaN(amount)) {
-    return new Date(NaN);
+    return dayjs(NaN);
   }
   if (!amount) {
     return date;
   }
-  date.setDate(date.getDate() + amount);
+  date = date.add(amount, unit);
   return date;
 };
 
-const addWeeks = (date: Date, amount: number): Date => {
-  const days = amount * 7;
-  return addDays(date, days);
+//TODO: test
+const addDays = (date: Dayjs, amount: number): Dayjs => {
+  return addWithAmountCheck(date, amount, 'day');
 };
 
-const addYears = (date: Date, amount: number): Date => {
-  return addMonths(date, amount * 12);
+//TODO: test
+const addWeeks = (date: Dayjs, amount: number): Dayjs => {
+  return addWithAmountCheck(date, amount, 'week');
 };
 
-const addMonths = (current: Date, amount: number): Date => {
-  const date = new Date(current.getTime());
-  if (isNaN(amount)) {
-    return new Date(NaN);
-  }
-  if (!amount) {
-    return date;
-  }
-  const dayOfMonth = date.getDate();
-  const endOfDesiredMonth = new Date(date.getTime());
-  endOfDesiredMonth.setMonth(date.getMonth() + amount + 1, 0);
-  const daysInMonth = endOfDesiredMonth.getDate();
-  if (dayOfMonth >= daysInMonth) {
-    return endOfDesiredMonth;
-  } else {
-    date.setFullYear(endOfDesiredMonth.getFullYear(), endOfDesiredMonth.getMonth(), dayOfMonth);
-    return date;
-  }
+//TODO: test
+const addMonths = (date: Dayjs, amount: number): Dayjs => {
+  return addWithAmountCheck(date, amount, 'month');
 };
 
-const after = (date: Date, dateToCompare: Date): boolean => date.getTime() > dateToCompare.getTime();
-const before = (date: Date, dateToCompare: Date): boolean => date.getTime() < dateToCompare.getTime();
+//TODO: test
+const addYears = (date: Dayjs, amount: number): Dayjs => {
+  return addWithAmountCheck(date, amount, 'year');
+};
 
-const changeTime = (dateTime: Date, newTime?: Date | null): Date => {
+//TODO: test
+const changeTime = (dateTime: Dayjs, newTime?: Dayjs | null): Dayjs => {
   if (!newTime) return dateTime;
-  dateTime.setMilliseconds(newTime.getMilliseconds());
-  dateTime.setSeconds(newTime.getSeconds());
-  dateTime.setMinutes(newTime.getMinutes());
-  dateTime.setHours(newTime.getHours());
-  return dateTime;
+
+  return dateTime.set({
+    hour: newTime.hour(),
+    minute: newTime.minute(),
+    second: newTime.second(),
+    millisecond: newTime.millisecond(),
+  });
 };
 
-const compareDates = (date1?: Date | null, date2?: Date | null): number => {
+//TODO: test
+const compareDates = (date1?: Dayjs | null, date2?: Dayjs | null): number => {
   // no dates
   if ((date1 === null && date2 === null) || (date1 === undefined && date2 === undefined)) return 0;
   // only second date exists
@@ -163,13 +106,13 @@ const compareDates = (date1?: Date | null, date2?: Date | null): number => {
   // only first day exists
   if ((date2 === undefined || date2 === null) && date1 !== undefined && date1 !== null) return 1;
   // return diff in time between dates
-  return date1 && date2 ? date1.getTime() - date2.getTime() : 0;
+  return date1 && date2 ? date1.diff(date2) : 0;
 };
 
-const dayInRange = (day: Date, startDate: Date, endDate: Date): boolean => {
+const dayInRange = (day: Dayjs, startDate: Dayjs, endDate: Dayjs): boolean => {
   let valid = false;
-  const start = startOfDay(startDate);
-  const end = endOfDay(endDate);
+  const start = startDate.startOf('day');
+  const end = endDate.endOf('day');
 
   try {
     valid = isWithinInterval(day, { start, end });
@@ -179,144 +122,145 @@ const dayInRange = (day: Date, startDate: Date, endDate: Date): boolean => {
   return valid;
 };
 
-const differenceDays = (dateLeft: Date, dateRight: Date) => {
-  const startOfDayLeft = startOfDay(dateLeft);
-  const startOfDayRight = startOfDay(dateRight);
-
-  const timestampLeft = startOfDayLeft.getTime() - getTimezoneOffsetInMilliseconds(startOfDayLeft);
-  const timestampRight = startOfDayRight.getTime() - getTimezoneOffsetInMilliseconds(startOfDayRight);
-  return Math.round((timestampLeft - timestampRight) / MILLISECONDS_IN_DAY);
+const unitDifference = (dateLeft: Dayjs, dateRight: Dayjs, unit: ManipulateType | undefined): number => {
+  return dateLeft.diff(dateRight, unit);
 };
 
-const differenceMonths = (dateLeft: Date, dateRight: Date): number => {
-  const yearDiff = dateLeft.getFullYear() - dateRight.getFullYear();
-  const monthDiff = dateLeft.getMonth() - dateRight.getMonth();
+//TODO: test
+const differenceDays = (dateLeft: Dayjs, dateRight: Dayjs) => {
+  /*const startOfDayLeft = dateLeft.startOf('day');
+  const startOfDayRight = dateRight.startOf('day');
 
-  return yearDiff * 12 + monthDiff;
+  const timestampLeft = startOfDayLeft.valueOf() - getTimezoneOffsetInMilliseconds(startOfDayLeft);
+  const timestampRight = startOfDayRight.valueOf() - getTimezoneOffsetInMilliseconds(startOfDayRight);
+  return Math.round((timestampLeft - timestampRight) / MILLISECONDS_IN_DAY);*/
+  return unitDifference(dateLeft, dateRight, 'day');
 };
 
-const differenceYears = (dateLeft: Date, dateRight: Date): number => {
-  return dateLeft.getFullYear() - dateRight.getFullYear();
+//TODO: test
+const differenceMonths = (dateLeft: Dayjs, dateRight: Dayjs): number => {
+  return unitDifference(dateLeft, dateRight, 'month');
 };
 
-const endOfWeek = (current: Date, weekStartsOn: number): Date => {
-  const date = new Date(current.getTime());
+//TODO: test
+const differenceYears = (dateLeft: Dayjs, dateRight: Dayjs): number => {
+  return unitDifference(dateLeft, dateRight, 'year');
+};
+
+//TODO: test
+const endOfWeek = (current: Dayjs, weekStartsOn: number): Dayjs => {
+  /*const date = dayjs(current.getTime());
   const day = date.getDay();
   const diff = (day < weekStartsOn ? -7 : 0) + 6 - (day - weekStartsOn);
 
   date.setDate(date.getDate() + diff);
-  date.setHours(23, 59, 59, 999);
-  return date;
+  date.setHours(23, 59, 59, 999);*/
+  return current.endOf('week');
 };
 
-const equal = (date1?: Date | null, date2?: Date | null) => {
+const equal = (date1?: Dayjs | null, date2?: Dayjs | null) => {
   if (date1 && date2) {
-    return isEqual(date1, date2);
+    return date1.isSame(date2);
   } else {
     return !date1 && !date2;
   }
 };
 
-const getFormattedValue = (date: Date | null, options: any, localeName: string) => {
-  return new Intl.DateTimeFormat(localeName, options).format(date || new Date());
+// TODO: check locale
+const getFormattedValue = (date: Dayjs | null, format: any) => {
+  return dayjs(date || dayjs()).format(format);
 };
 
-const lastDayOfMonth = (date: Date) => {
-  return endOfMonth(date).getDate();
+const lastDayOfMonth = (date: Dayjs) => {
+  return date.endOf('month').date();
 };
 
-const outOfBounds = (day: Date, minDate?: Date | null, maxDate?: Date | null) =>
+// TODO: check
+const outOfBounds = (day: Dayjs, minDate?: Dayjs | null, maxDate?: Dayjs | null) =>
   (minDate && differenceDays(day, minDate) < 0) || (maxDate && differenceDays(day, maxDate) > 0);
 
-const sameDay = (date1?: Date | null, date2?: Date | null) => {
+const sameDay = (date1?: Dayjs | null, date2?: Dayjs | null) => {
   if (date1 && date2) {
-    return isSameDay(date1, date2);
+    return date1.isSame(date2, 'day');
   } else {
     return !date1 && !date2;
   }
 };
 
-const sameMonth = (date1?: Date | null, date2?: Date | null) => {
+const sameMonth = (date1?: Dayjs | null, date2?: Dayjs | null) => {
   if (date1 && date2) {
-    return isSameMonth(date1, date2);
+    return date1.isSame(date2, 'month');
   } else {
     return !date1 && !date2;
   }
 };
 
-const setMonth = (date: Date, month: number): Date => {
-  const year = date.getFullYear();
-  const day = date.getDate();
-
-  const dateWithDesiredMonth = new Date(0);
-  dateWithDesiredMonth.setFullYear(year, month, 15);
-  dateWithDesiredMonth.setHours(0, 0, 0, 0);
-  const daysInMonth = getDaysInMonth(dateWithDesiredMonth);
-  const d = new Date(date);
-  d.setMonth(month, Math.min(day, daysInMonth));
-  return d;
+// TODO: check
+const setMonth = (date: Dayjs, month: number): Dayjs => {
+  return date.month(month);
 };
 
-const setYear = (date: Date, year: number) => {
+// TODO: check
+const setYear = (date: Dayjs, year: number) => {
   if (isNaN(date as any)) {
-    return new Date(NaN);
+    return dayjs(NaN);
   }
 
-  const d = new Date(date);
-  d.setFullYear(year);
-  return d;
+  return date.year(year);
 };
 
-const subYears = (date: Date, amount: number): Date => {
+const subYears = (date: Dayjs, amount: number): Dayjs => {
   return addYears(date, -amount);
 };
 
-const startOfYear = (startDate: Date): Date => {
-  const date = new Date(0);
-  date.setFullYear(startDate.getFullYear(), 0, 1);
-  date.setHours(0, 0, 0, 0);
-  return date;
+// TODO: check
+const startOfYear = (startDate: Dayjs): Dayjs => {
+  return startDate.startOf('year');
 };
 
-const startOfMonth = (someDate: Date): Date => {
-  const date = new Date(someDate);
-  date.setDate(1);
-  date.setHours(0, 0, 0, 0);
-  return date;
+// TODO: check
+const startOfMonth = (someDate: Dayjs): Dayjs => {
+  return someDate.startOf('month');
 };
 
-const weekInMonth = (startOfWeek: Date, day: Date) => {
+// TODO: check
+const weekInMonth = (startOfWeek: Dayjs, day: Dayjs) => {
   const endOfWeek = addDays(startOfWeek, 6);
   return sameMonth(startOfWeek, day) || sameMonth(endOfWeek, day);
 };
 
-const yearsRange = (date: Date, yearCount: number) => {
-  const end = Math.ceil(date.getFullYear() / yearCount) * yearCount;
+// TODO: check
+const yearsRange = (date: Dayjs, yearCount: number) => {
+  const end = Math.ceil(date.year() / yearCount) * yearCount;
   const start = end - (yearCount - 1);
   return { start, end };
 };
 
-const startOfWeek = (current: Date, weekStartsOn: number): Date => {
-  const date = new Date(current.getTime());
-  const day = date.getDay();
-  const diff = (day < weekStartsOn ? 7 : 0) + day - weekStartsOn;
-  date.setDate(date.getDate() - diff);
-  date.setHours(0, 0, 0, 0);
-  return date;
+// TODO: check
+const startOfWeek = (current: Dayjs, weekStartsOn: number): Dayjs => {
+  return current.startOf('week');
 };
 
-const subMonths = (date: Date, amount: number): Date => addMonths(date, -amount);
+// TODO: check
+const startOfDay = (current: Dayjs): Dayjs => {
+  return current.startOf('day');
+};
+
+const subMonths = (date: Dayjs, amount: number): Dayjs => addMonths(date, -amount);
 
 const valid = (date: any): boolean => !isNaN(date as any);
 
+// TODO: check
 const getMonthList = (locale: string, format: 'long' | 'short' = 'long'): string[] => {
-  const year = new Date().getFullYear();
+  /*const year = dayjs().year();
   const monthList = [...Array(12).keys()];
   const formatter = new Intl.DateTimeFormat(locale, {
     month: format,
   });
 
-  const getMonthName = (monthIndex: number) => formatter.format(new Date(year, monthIndex));
+  const getMonthName = (monthIndex: number) => formatter.format(dayjs(year, monthIndex));
 
-  return monthList.map(getMonthName);
+  return monthList.map(getMonthName);*/
+  const globalLocaleData = dayjs.localeData();
+  return format === 'short' ? globalLocaleData.monthsShort() : globalLocaleData.months();
 };

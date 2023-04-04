@@ -1,20 +1,11 @@
 import * as React from 'react';
+import type { Dayjs } from 'dayjs';
+import dayjs from 'dayjs';
 
 import { DEFAULT_YEAR_COUNT } from './constants';
 import { getDefaultDateValidator } from './validator';
 import { DayNames, Month, Months, Panel, Years } from './components';
-import {
-  addMonths,
-  addYears,
-  after,
-  before,
-  changeTime,
-  equal,
-  setMonth,
-  setYear,
-  subMonths,
-  subYears,
-} from './date-utils';
+import { addMonths, addYears, changeTime, equal, setMonth, setYear, subMonths, subYears } from './date-utils';
 import { CalendarComponent } from './styled/CalendarComponent';
 import type { CalendarPropType, IDateSelectionProps, ViewScreenType } from './interfaces';
 
@@ -43,19 +34,19 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarPropType>(
       onViewLeave,
       onViewMonthSelect,
       onViewYearSelect,
-      highlightSpecialDay = (date: Date) => undefined,
+      highlightSpecialDay = (date: Dayjs) => undefined,
       ...props
     },
     ref,
   ) => {
     const getInitialViewDate = () => {
-      const current = new Date();
+      const current = dayjs();
       if (selected) {
         return selected;
       } else {
-        if (minDate && before(current, minDate)) {
+        if (minDate && current.isBefore(minDate)) {
           return minDate;
-        } else if (maxDate && after(current, maxDate)) {
+        } else if (maxDate && current.isAfter(maxDate)) {
           return maxDate;
         }
       }
@@ -65,7 +56,7 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarPropType>(
     // дата, которую отображаем (в том числе в верхней панели)
     const [viewDate, setViewDate] = React.useState(getInitialViewDate());
     // активная дата, на которой сейчас ховер
-    const [activeDate, setActiveDate] = React.useState<Date | null>(null);
+    const [activeDate, setActiveDate] = React.useState<Dayjs | null>(null);
     // отображаем выбор года
     const [yearsView, setYearsView] = React.useState(false);
     // отображаем выбор месяца
@@ -93,8 +84,8 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarPropType>(
 
     React.useEffect(() => {
       if (range && startDate) {
-        changeYear(startDate.getFullYear());
-        changeMonth(startDate.getMonth());
+        changeYear(startDate.year());
+        changeMonth(startDate.month());
       }
     }, []);
 
@@ -167,10 +158,10 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarPropType>(
         return decrease;
       });
 
-    const handleDayMouseEnter = (day: Date, _: any) => setActiveDate(day);
+    const handleDayMouseEnter = (day: Dayjs, _: any) => setActiveDate(day);
     const handleMonthMouseLeave = () => setActiveDate(null);
 
-    const handleDayClick = (day: Date, event: any) => {
+    const handleDayClick = (day: Dayjs, event: any) => {
       let date = day;
       if (range || !equal(selected, date)) {
         date = changeTime(date, selected);
@@ -178,13 +169,13 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarPropType>(
           if (!startDate && !endDate) {
             onChange([date, null], event);
           } else if (startDate && !endDate) {
-            if (before(date, startDate)) {
+            if (date.isBefore(startDate)) {
               onChange([date, null], event);
             } else {
               onChange([startDate, date], event);
             }
           } else if (!startDate && endDate) {
-            if (before(date, endDate)) {
+            if (date.isBefore(endDate)) {
               onChange([date, endDate], event);
             } else {
               onChange([date, null], event);
@@ -199,14 +190,14 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarPropType>(
       }
     };
 
-    const handleYearClick = (date: Date) => {
-      changeYear(date.getFullYear());
+    const handleYearClick = (date: Dayjs) => {
+      changeYear(date.year());
       !currentActiveViewImportant && setYearsView(false);
       onYearSelect && onYearSelect(date);
     };
 
-    const handleMonthClick = (date: Date) => {
-      changeMonth(date.getMonth());
+    const handleMonthClick = (date: Dayjs) => {
+      changeMonth(date.month());
       !currentActiveViewImportant && setMonthsView(false);
       onMonthSelect && onMonthSelect(date);
     };

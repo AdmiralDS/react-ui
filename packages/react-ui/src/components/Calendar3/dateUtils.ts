@@ -1,7 +1,12 @@
+import type { Dayjs } from 'dayjs';
+import dayjs from 'dayjs';
+import objectSupport from 'dayjs/plugin/objectSupport';
 import { locales } from './locales';
 import type { LocaleType } from './constants';
 
 export { format, parse };
+
+dayjs.extend(objectSupport);
 
 /**
  *  token      meaning                                  examples of output
@@ -43,7 +48,7 @@ const compile = (formatString: string): string[] => {
   return pattern;
 };
 
-const format = (dateObj: Date, arg: string | string[], locale: LocaleType, utc?: boolean): string => {
+const format = (dateObj: Dayjs, arg: string | string[], locale: LocaleType, utc?: boolean): string => {
   const pattern = typeof arg === 'string' ? compile(arg) : arg;
   const d: any = addMinutes(dateObj, utc ? dateObj.getTimezoneOffset() : 0);
   const formatter = locales[locale].formatter;
@@ -57,16 +62,16 @@ const format = (dateObj: Date, arg: string | string[], locale: LocaleType, utc?:
   return str;
 };
 
-const addMinutes = (dateObj: Date, minutes: number): Date => {
+const addMinutes = (dateObj: Dayjs, minutes: number): Dayjs => {
   return addSeconds(dateObj, minutes * 60);
 };
 
-const addSeconds = (dateObj: Date, seconds: number): Date => {
+const addSeconds = (dateObj: Dayjs, seconds: number): Dayjs => {
   return addMilliseconds(dateObj, seconds * 1000);
 };
 
-const addMilliseconds = (dateObj: Date, milliseconds: number): Date => {
-  return new Date(dateObj.getTime() + milliseconds);
+const addMilliseconds = (dateObj: Dayjs, milliseconds: number): Dayjs => {
+  return dayjs(dateObj.getTime() + milliseconds);
 };
 
 const preparse = (dateString: string, arg: string | string[], locale: LocaleType) => {
@@ -132,17 +137,17 @@ const isValid = (arg1: any, arg2: string | string[], locale: LocaleType): boolea
   );
 };
 
-const parse = (dateString: string, arg: string | string[], locale: LocaleType, utc?: boolean): Date => {
+const parse = (dateString: string, arg: string | string[], locale: LocaleType, utc?: boolean): Dayjs => {
   const dt = preparse(dateString, arg, locale);
 
   if (isValid(dt, '', locale)) {
     dt.M -= dt.Y < 100 ? 22801 : 1; // 22801 = 1900 * 12 + 1
     if (utc || dt.Z) {
-      return new Date(Date.UTC(dt.Y, dt.M, dt.D, dt.H, dt.m + dt.Z, dt.s, dt.S));
+      return dayjs(Dayjs.UTC(dt.Y, dt.M, dt.D, dt.H, dt.m + dt.Z, dt.s, dt.S));
     }
-    return new Date(dt.Y, dt.M, dt.D, dt.H, dt.m, dt.s, dt.S);
+    return dayjs(dt.Y, dt.M, dt.D, dt.H, dt.m, dt.s, dt.S);
   }
-  return new Date(NaN);
+  return dayjs(NaN);
 };
 
 const isLeapYear = (y: number) => {

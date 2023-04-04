@@ -1,5 +1,7 @@
 import type { FC } from 'react';
 import * as React from 'react';
+import type { Dayjs } from 'dayjs';
+import dayjs from 'dayjs';
 import { ThemeContext } from 'styled-components';
 import { LIGHT_THEME } from '#src/components/themes';
 
@@ -14,7 +16,7 @@ export const Months: FC<IYearsCalendarProps> = ({ viewDate, startDate, selected,
   return (
     <>
       {months.map((month, index) => {
-        const disabled = !!validator?.invalidMonth(index, viewDate.getFullYear());
+        const disabled = !!validator?.invalidMonth(index, viewDate.year());
         const handleClick = (e: any) => {
           e.preventDefault();
           const day = startOfMonth(setMonth(viewDate, index));
@@ -23,8 +25,8 @@ export const Months: FC<IYearsCalendarProps> = ({ viewDate, startDate, selected,
         return (
           <MonthComponent
             key={month}
-            today={index === new Date().getMonth()}
-            selected={!!(selected || startDate) && index === ((selected || startDate) as Date).getMonth()}
+            today={index === dayjs().month()}
+            selected={!!(selected || startDate) && index === ((selected || startDate) as Dayjs).month()}
             disabled={disabled}
             onMouseDown={handleClick}
           >

@@ -1,3 +1,5 @@
+import type { Dayjs } from 'dayjs';
+
 const res_enUS = {
   MMMM: [
     'January',
@@ -64,9 +66,9 @@ const res_de = {
   A: ['Uhr nachmittags', 'Uhr morgens'],
 };
 
-const A_enUS = (d: Date) => res_enUS.A[((d.getHours() > 11) as any) | 0];
-const A_ru = (d: Date) => {
-  const h = d.getHours();
+const A_enUS = (d: Dayjs) => res_enUS.A[((d.hour() > 11) as any) | 0];
+const A_ru = (d: Dayjs) => {
+  const h = d.hour();
   if (h < 4) {
     return res_ru.A[0]; // ночи
   } else if (h < 12) {
@@ -78,29 +80,29 @@ const A_ru = (d: Date) => {
 };
 
 const formatter = (res: any) => ({
-  YYYY: (d: Date) => ('000' + d.getFullYear()).slice(-4),
-  YY: (d: Date) => ('0' + d.getFullYear()).slice(-2),
-  Y: (d: Date) => '' + d.getFullYear(),
-  MMMM: (d: Date) => res.MMMM[d.getMonth()],
-  MMM: (d: Date) => res.MMM[d.getMonth()],
-  MM: (d: Date) => ('0' + (d.getMonth() + 1)).slice(-2),
-  M: (d: Date) => '' + (d.getMonth() + 1),
-  DD: (d: Date) => ('0' + d.getDate()).slice(-2),
-  D: (d: Date) => '' + d.getDate(),
-  HH: (d: Date) => ('0' + d.getHours()).slice(-2),
-  H: (d: Date) => '' + d.getHours(),
-  hh: (d: Date) => ('0' + (d.getHours() % 12 || 12)).slice(-2),
-  h: (d: Date) => '' + (d.getHours() % 12 || 12),
-  mm: (d: Date) => ('0' + d.getMinutes()).slice(-2),
-  m: (d: Date) => '' + d.getMinutes(),
-  ss: (d: Date) => ('0' + d.getSeconds()).slice(-2),
-  s: (d: Date) => '' + d.getSeconds(),
-  SSS: (d: Date) => ('00' + d.getMilliseconds()).slice(-3),
-  SS: (d: Date) => ('0' + ((d.getMilliseconds() / 10) | 0)).slice(-2),
-  S: (d: Date) => '' + ((d.getMilliseconds() / 100) | 0),
-  dddd: (d: Date) => res.dddd[d.getDay()],
-  ddd: (d: Date) => res.ddd[d.getDay()],
-  dd: (d: Date) => res.dd[d.getDay()],
+  YYYY: (d: Dayjs) => ('000' + d.year()).slice(-4),
+  YY: (d: Dayjs) => ('0' + d.year()).slice(-2),
+  Y: (d: Dayjs) => '' + d.year(),
+  MMMM: (d: Dayjs) => res.MMMM[d.month()],
+  MMM: (d: Dayjs) => res.MMM[d.month()],
+  MM: (d: Dayjs) => ('0' + (d.month() + 1)).slice(-2),
+  M: (d: Dayjs) => '' + (d.month() + 1),
+  DD: (d: Dayjs) => ('0' + d.date()).slice(-2),
+  D: (d: Dayjs) => '' + d.date(),
+  HH: (d: Dayjs) => ('0' + d.hour()).slice(-2),
+  H: (d: Dayjs) => '' + d.hour(),
+  hh: (d: Dayjs) => ('0' + (d.hour() % 12 || 12)).slice(-2),
+  h: (d: Dayjs) => '' + (d.hour() % 12 || 12),
+  mm: (d: Dayjs) => ('0' + d.minute()).slice(-2),
+  m: (d: Dayjs) => '' + d.minute(),
+  ss: (d: Dayjs) => ('0' + d.second()).slice(-2),
+  s: (d: Dayjs) => '' + d.second(),
+  SSS: (d: Dayjs) => ('00' + d.millisecond()).slice(-3),
+  SS: (d: Dayjs) => ('0' + ((d.millisecond() / 10) | 0)).slice(-2),
+  S: (d: Dayjs) => '' + ((d.millisecond() / 100) | 0),
+  dddd: (d: Dayjs) => res.dddd[d.day()],
+  ddd: (d: Dayjs) => res.ddd[d.day()],
+  dd: (d: Dayjs) => res.dd[d.day()],
   Z: (d: any) => (d.utc ? '+0000' : /[+-]\d{4}/.exec(d.toTimeString())?.[0]),
   post: (str: any) => str,
 });

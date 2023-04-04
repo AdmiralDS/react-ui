@@ -1,5 +1,7 @@
 import type { FC } from 'react';
 import * as React from 'react';
+import type { Dayjs } from 'dayjs';
+import dayjs from 'dayjs';
 
 import { DEFAULT_YEAR_COUNT } from '../constants';
 import { setYear, startOfYear, yearsRange } from '../date-utils';
@@ -23,8 +25,8 @@ export const Years: FC<IYearsCalendarProps> = ({ viewDate, startDate, selected, 
         return (
           <YearComponent
             key={year}
-            today={year === new Date().getFullYear()}
-            selected={!!(selected || startDate) && year === ((selected || startDate) as Date).getFullYear()}
+            today={year === dayjs().year()}
+            selected={!!(selected || startDate) && year === ((selected || startDate) as Dayjs).year()}
             disabled={disabled}
             onMouseDown={handleClick}
           >

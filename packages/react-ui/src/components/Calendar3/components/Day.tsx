@@ -1,12 +1,16 @@
 import type { FC } from 'react';
 import * as React from 'react';
+import dayjs from 'dayjs';
+import isSameOrAfter from 'dayjs/plugin/isSameOrAfter';
 import { ThemeContext } from 'styled-components';
 import { LIGHT_THEME } from '#src/components/themes';
 
-import { after, dayInRange, endOfWeek, equal, sameDay, startOfWeek } from '../date-utils';
+import { dayInRange, endOfWeek, sameDay, startOfWeek } from '../date-utils';
 import { DayComponent } from '../styled/DayComponent';
 import type { Corners } from '../constants';
 import type { IDayCalendarProps } from '../interfaces';
+
+dayjs.extend(isSameOrAfter);
 
 export const Day: FC<IDayCalendarProps> = ({
   day,
@@ -24,14 +28,14 @@ export const Day: FC<IDayCalendarProps> = ({
 }) => {
   const theme = React.useContext(ThemeContext) || LIGHT_THEME;
   const disabled = !!validator?.invalidValue(day) || (filterDate && !filterDate(day));
-  const outsideMonth = month !== undefined && month !== day.getMonth();
+  const outsideMonth = month !== undefined && month !== day.month();
   const inSelectingRange =
     !disabled &&
     !!range &&
     !!startDate &&
     !!activeDate &&
     !endDate &&
-    (after(activeDate, startDate) || equal(activeDate, startDate)) &&
+    activeDate.isSameOrAfter(startDate) &&
     dayInRange(day, startDate, activeDate);
   const inRange = !!startDate && !!endDate && dayInRange(day, startDate, endDate);
   const rangeStart = !!startDate && sameDay(day, startDate);
@@ -54,7 +58,7 @@ export const Day: FC<IDayCalendarProps> = ({
 
   return (
     <DayComponent
-      today={sameDay(day, new Date())}
+      today={sameDay(day, dayjs())}
       selected={sameDay(day, selected) || rangeStart || rangeEnd}
       inSelectingRange={inSelectingRange}
       isActiveDate={sameDay(day, activeDate)}
@@ -74,7 +78,7 @@ export const Day: FC<IDayCalendarProps> = ({
           : 'ui-kit-calendar-day-component'
       }
     >
-      {day.getDate()}
+      {day.date()}
     </DayComponent>
   );
 };

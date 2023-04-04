@@ -1,5 +1,6 @@
 import type { FC } from 'react';
 import * as React from 'react';
+import type { Dayjs } from 'dayjs';
 import { ThemeContext } from 'styled-components';
 import { LIGHT_THEME } from '#src/components/themes';
 
@@ -10,24 +11,24 @@ import type { IMonthCalendarProps } from '../interfaces';
 const FIXED_WEEK_COUNT = 6;
 
 export const Month: FC<IMonthCalendarProps> = ({
-  day,
-  startDate,
-  endDate,
-  selected,
-  activeDate,
-  range,
-  validator,
-  filterDate,
-  onMouseEnter,
-  onMouseLeave,
-  onClick,
-  highlightSpecialDay,
-}) => {
+                                                 day,
+                                                 startDate,
+                                                 endDate,
+                                                 selected,
+                                                 activeDate,
+                                                 range,
+                                                 validator,
+                                                 filterDate,
+                                                 onMouseEnter,
+                                                 onMouseLeave,
+                                                 onClick,
+                                                 highlightSpecialDay,
+                                               }) => {
   const theme = React.useContext(ThemeContext) || LIGHT_THEME;
-  const weeks: Array<Date> = [];
-  const handleMouseEnter = (day: Date, event: any) => onMouseEnter && onMouseEnter(day, event);
+  const weeks: Array<Dayjs> = [];
+  const handleMouseEnter = (day: Dayjs, event: any) => onMouseEnter && onMouseEnter(day, event);
   const handleMouseLeave = () => onMouseLeave && onMouseLeave();
-  const handleDayClick = (day: Date, event: any) => onClick && onClick(day, event);
+  const handleDayClick = (day: Dayjs, event: any) => onClick && onClick(day, event);
 
   let weekIndex = 0;
   let weekStart = startOfWeek(startOfMonth(day), theme.locales[theme.currentLocale].firstDayOfWeek ?? 1);
@@ -43,7 +44,7 @@ export const Month: FC<IMonthCalendarProps> = ({
         <Week
           key={week.valueOf()}
           day={week}
-          month={day.getMonth()}
+          month={day.month()}
           startDate={startDate}
           endDate={endDate}
           selected={selected}

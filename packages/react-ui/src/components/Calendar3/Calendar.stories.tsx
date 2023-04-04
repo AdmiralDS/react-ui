@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import type { Dayjs } from 'dayjs';
+import dayjs from 'dayjs';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import { Button } from '#src/components/Button';
@@ -10,8 +12,8 @@ import { css, ThemeProvider } from 'styled-components';
 import type { Theme } from '#src/components/themes';
 import { T } from '#src/components/T';
 import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
-import { weekendMixin } from '#src/components/Calendar/highlightDate';
-import { startOfDay } from '#src/components/Calendar/date-utils';
+import { weekendMixin } from '#src/components/Calendar3/highlightDate';
+import { startOfDay } from '#src/components/Calendar3/date-utils';
 
 export default {
   title: 'Admiral-2.1/Calendar3',
@@ -71,8 +73,8 @@ export default {
 } as ComponentMeta<typeof Calendar>;
 
 const Template1: ComponentStory<typeof Calendar> = (args) => {
-  const [selected, setSelected] = useState<Date | null>(null);
-  const [endDate, setEndDate] = useState<Date | null>(null);
+  const [selected, setSelected] = useState<Dayjs | null>(null);
+  const [endDate, setEndDate] = useState<Dayjs | null>(null);
 
   function swapBorder(theme: Theme): Theme {
     theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
@@ -106,8 +108,8 @@ const Template1: ComponentStory<typeof Calendar> = (args) => {
 };
 
 const Template2: ComponentStory<typeof Calendar> = (args: CalendarPropType) => {
-  const [startDate, setStartDate] = useState<Date | null>(null);
-  const [endDate, setEndDate] = useState<Date | null>(null);
+  const [startDate, setStartDate] = useState<Dayjs | null>(null);
+  const [endDate, setEndDate] = useState<Dayjs | null>(null);
   return (
     <>
       <Calendar
@@ -125,10 +127,9 @@ const Template2: ComponentStory<typeof Calendar> = (args: CalendarPropType) => {
 };
 
 const Template3: ComponentStory<typeof Calendar> = ({ range, ...args }: CalendarPropType) => {
-  const [selected, setSelected] = useState<Date | null>(null);
-  const [endDate, setEndDate] = useState<Date | null>(null);
-  const tomorrow = new Date();
-  tomorrow.setDate(new Date().getDate() + 1);
+  const [selected, setSelected] = useState<Dayjs | null>(null);
+  const [endDate, setEndDate] = useState<Dayjs | null>(null);
+  const tomorrow = dayjs().add(1, 'day');
   return range ? (
     <>
       <Calendar
@@ -158,10 +159,10 @@ const Template3: ComponentStory<typeof Calendar> = ({ range, ...args }: Calendar
 };
 
 const Template4: ComponentStory<typeof Calendar> = ({ range, ...args }: CalendarPropType) => {
-  const [selected, setSelected] = useState<Date | null>(null);
-  const [endDate, setEndDate] = useState<Date | null>(null);
-  const isWeekday = (date: Date) => {
-    const day = date.getDay();
+  const [selected, setSelected] = useState<Dayjs | null>(null);
+  const [endDate, setEndDate] = useState<Dayjs | null>(null);
+  const isWeekday = (date: Dayjs) => {
+    const day = date.day();
     return day !== 0 && day !== 6;
   };
   return range ? (
@@ -193,7 +194,7 @@ const Template4: ComponentStory<typeof Calendar> = ({ range, ...args }: Calendar
 };
 
 const Template5: ComponentStory<typeof Calendar> = ({ range, ...args }: CalendarPropType) => {
-  const [selected, setSelected] = useState<Date | null>(null);
+  const [selected, setSelected] = useState<Dayjs | null>(null);
 
   return (
     <>
@@ -228,7 +229,7 @@ const Template5: ComponentStory<typeof Calendar> = ({ range, ...args }: Calendar
 };
 
 const Template6: ComponentStory<typeof Calendar> = ({ range, ...args }: CalendarPropType) => {
-  const [selected, setSelected] = useState<Date | null>(null);
+  const [selected, setSelected] = useState<Dayjs | null>(null);
   const [currentActiveView, setCurrentActiveView] = useState<ViewScreenType | null>(null);
 
   return (
@@ -259,11 +260,11 @@ const Template6: ComponentStory<typeof Calendar> = ({ range, ...args }: Calendar
           setCurrentActiveView(null);
         }}
         onYearSelect={(data) => {
-          setSelected(data as Date);
+          setSelected(data as Dayjs);
           setCurrentActiveView('MONTH');
         }}
         onMonthSelect={(data) => {
-          setSelected(data as Date);
+          setSelected(data as Dayjs);
         }}
         onViewMonthSelect={() => {
           console.log('onViewMonthSelect');
@@ -282,7 +283,7 @@ const Template6: ComponentStory<typeof Calendar> = ({ range, ...args }: Calendar
 };
 
 const Template7: ComponentStory<typeof Calendar> = ({ range, ...args }: CalendarPropType) => {
-  const [selected, setSelected] = useState<Date | null>(null);
+  const [selected, setSelected] = useState<Dayjs | null>(null);
   const [currentActiveView, setActiveViewDateScreen] = useState<ViewScreenType | null>(null);
 
   return (
@@ -311,7 +312,7 @@ const Template7: ComponentStory<typeof Calendar> = ({ range, ...args }: Calendar
 };
 
 const Template8: ComponentStory<typeof Calendar> = ({ range, ...args }: CalendarPropType) => {
-  const [selected, setSelected] = useState<Date | null>(null);
+  const [selected, setSelected] = useState<Dayjs | null>(null);
   const [currentActiveView, setCurrentActiveView] = useState<ViewScreenType | null>('MONTH');
 
   return (
@@ -323,7 +324,7 @@ const Template8: ComponentStory<typeof Calendar> = ({ range, ...args }: Calendar
         Если выставлен currentActiveViewImportant, то необходимо самому управлять открытием экранов
       </T>
       <div>
-        <Button onClick={() => setSelected(new Date())}>set Date now</Button>
+        <Button onClick={() => setSelected(dayjs())}>set Dayjs now</Button>
       </div>
       <br />
       <Calendar
@@ -611,23 +612,23 @@ const preHolidayMixin = css<{ disabled?: boolean }>`
 
 const holidayDates = new Map(
   holidayCalendar.map((day) => {
-    const date = new Date(day.date);
+    const date = dayjs(day.date);
     const keyDate = startOfDay(date);
-    return [keyDate.getTime(), day.type];
+    return [keyDate.valueOf(), day.type];
   }),
 );
 
 const Template9: ComponentStory<typeof Calendar> = (args) => {
-  const [selected, setSelected] = useState<Date | null>(null);
-  const [endDate, setEndDate] = useState<Date | null>(null);
+  const [selected, setSelected] = useState<Dayjs | null>(null);
+  const [endDate, setEndDate] = useState<Dayjs | null>(null);
 
   function swapBorder(theme: Theme): Theme {
     theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 
-  const highlightHolidays = (day: Date) => {
-    const key = startOfDay(day).getTime();
+  const highlightHolidays = (day: Dayjs) => {
+    const key = startOfDay(day).valueOf();
     const check = holidayDates.get(key);
     switch (check) {
       case HOLIDAY:
