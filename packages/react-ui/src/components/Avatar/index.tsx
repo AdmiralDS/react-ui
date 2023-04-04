@@ -155,13 +155,13 @@ export interface AvatarProps extends React.HTMLAttributes<HTMLButtonElement> {
   dimension?: Dimension;
   /** Уникальный идентификатор svg маски */
   svgMaskId?: string;
+  /** Отображение тултипа */
+  showTooltip?: boolean;
 }
 
 export interface AvatarInternalProps {
   /** Для внутреннего использования! Отображение аватара в составе группы (когда правый край аватара усечен) */
   group?: boolean;
-  /** Для внутреннего использования! Отображение тултипа. Тултип убирается, если аватар идет в сочетании с выпадающим меню */
-  showTooltip?: boolean;
   /** Для внутреннего использования! Используется ли аватар в качестве меню. Если да - то userName выводится без изменений */
   isMenuAvatar?: boolean;
 }
