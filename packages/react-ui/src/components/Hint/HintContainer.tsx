@@ -9,7 +9,7 @@ import { LIGHT_THEME } from '#src/components/themes';
 
 import { CloseButton, HintContent, HintDialog, HintWrapper } from './style';
 
-type PropsType = {
+export interface HintContainerPropsType extends Omit<React.HTMLAttributes<HTMLDivElement>, 'content'> {
   visibilityTrigger: 'click' | 'hover';
   isMobile: boolean;
   dimension: 's' | 'm' | 'l';
@@ -22,11 +22,11 @@ type PropsType = {
   locale?: {
     closeButtonAriaLabel?: string;
   };
-};
+}
 
-type RefType = HTMLDivElement | null;
+export type RefType = HTMLDivElement | null;
 
-export const HintContainer = React.forwardRef<RefType, PropsType & React.HTMLAttributes<HTMLDivElement>>(
+export const HintContainer = React.forwardRef<RefType, HintContainerPropsType>(
   (
     {
       dimension,

@@ -213,15 +213,7 @@ export const Hint: React.FC<HintProps> = ({
         }
       }
     }
-  }, [
-    target,
-    hintPosition,
-    visible,
-    recalculation,
-    dimension,
-    content,
-    isMobile,
-  ]);
+  }, [target, hintPosition, visible, recalculation, dimension, content, isMobile]);
 
   const attachRef = (node: HTMLDivElement) => handleRef(node, hintRef, hintElementRef);
   const scrollableParents = React.useMemo(
