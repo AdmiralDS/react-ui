@@ -8,6 +8,7 @@ import { GroupRow } from '#src/components/Table/Row/GroupRow';
 import { RegularRow } from '#src/components/Table/Row/RegularRow';
 import { RowWrapper } from '#src/components/Table/Row/RowWrapper';
 import type { FlattenInterpolation, ThemeProps, DefaultTheme } from 'styled-components';
+import { Header } from './Header';
 
 import { HeaderCellComponent } from './HeaderCell';
 import {
@@ -17,7 +18,7 @@ import {
   EmptyMessage,
   ExpandCell,
   Filler,
-  Header,
+  // Header,
   HeaderCellsWrapper,
   HeaderWrapper,
   Row,
