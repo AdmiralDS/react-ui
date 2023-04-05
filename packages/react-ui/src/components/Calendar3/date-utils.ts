@@ -21,7 +21,6 @@ export {
   differenceYears,
   endOfWeek,
   equal,
-  getFormattedValue,
   lastDayOfMonth,
   outOfBounds,
   sameDay,
@@ -162,11 +161,6 @@ const equal = (date1?: Dayjs | null, date2?: Dayjs | null) => {
   } else {
     return !date1 && !date2;
   }
-};
-
-// TODO: check locale
-const getFormattedValue = (date: Dayjs | null, format: any) => {
-  return dayjs(date || dayjs()).format(format);
 };
 
 const lastDayOfMonth = (date: Dayjs) => {

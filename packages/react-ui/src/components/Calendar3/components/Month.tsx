@@ -11,19 +11,19 @@ import type { IMonthCalendarProps } from '../interfaces';
 const FIXED_WEEK_COUNT = 6;
 
 export const Month: FC<IMonthCalendarProps> = ({
-                                                 day,
-                                                 startDate,
-                                                 endDate,
-                                                 selected,
-                                                 activeDate,
-                                                 range,
-                                                 validator,
-                                                 filterDate,
-                                                 onMouseEnter,
-                                                 onMouseLeave,
-                                                 onClick,
-                                                 highlightSpecialDay,
-                                               }) => {
+  day,
+  startDate,
+  endDate,
+  selected,
+  activeDate,
+  range,
+  validator,
+  filterDate,
+  onMouseEnter,
+  onMouseLeave,
+  onClick,
+  highlightSpecialDay,
+}) => {
   const theme = React.useContext(ThemeContext) || LIGHT_THEME;
   const weeks: Array<Dayjs> = [];
   const handleMouseEnter = (day: Dayjs, event: any) => onMouseEnter && onMouseEnter(day, event);

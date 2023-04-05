@@ -5,15 +5,7 @@ import { TooltipHoc } from '#src/components/TooltipHOC';
 import { ThemeContext } from 'styled-components';
 import { LIGHT_THEME } from '#src/components/themes';
 
-import {
-  addMonths,
-  addYears,
-  differenceMonths,
-  differenceYears,
-  getFormattedValue,
-  subMonths,
-  subYears,
-} from '../date-utils';
+import { addMonths, addYears, differenceMonths, differenceYears, subMonths, subYears } from '../date-utils';
 import { PanelComponent } from '../styled/PanelComponent';
 import { Month, PanelDate, Year } from '../styled/PanelDate';
 import { capitalizeFirstLetter } from '../constants';
@@ -113,8 +105,7 @@ export const Panel: FC<IPanelProps> = ({
           view={monthsView}
           onMouseDown={monthMouseDownHandle}
         >
-          {/*{capitalizeFirstLetter(getFormattedValue(viewDate, { month: 'long' }, theme.currentLocale || 'ru'))}*/}
-          {capitalizeFirstLetter(getFormattedValue(viewDate, { month: 'long' }))}
+          {capitalizeFirstLetter(viewDate.format('MMMM'))}
         </MonthWithTooltip>
         <YearWithTooltip
           renderContent={() =>
