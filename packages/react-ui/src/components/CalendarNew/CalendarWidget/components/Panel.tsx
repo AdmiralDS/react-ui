@@ -1,10 +1,10 @@
 import type { FC, MouseEvent } from 'react';
 import * as React from 'react';
 import 'dayjs/locale/ru';
+import type { Dayjs } from 'dayjs';
 import { TooltipHoc } from '#src/components/TooltipHOC';
 import { ThemeContext } from 'styled-components';
 import { LIGHT_THEME } from '#src/components/themes';
-import type { Dayjs } from 'dayjs';
 
 import { PanelComponent } from '../styled/PanelComponent';
 import { Month, PanelDate, Year } from '../styled/PanelDate';

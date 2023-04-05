@@ -1,7 +1,12 @@
 import * as React from 'react';
+import dayjs from 'dayjs';
 import type { Dayjs } from 'dayjs';
 import { CalendarComponent } from '#src/components/CalendarNew/CalendarWidget/styled/CalendarComponent';
 import { renderDefaultPanel } from '#src/components/CalendarNew/CalendarWidget/components/Panel';
+import { DayNames } from '#src/components/CalendarNew/CalendarWidget/components/DayNames';
+import { Month } from '#src/components/Calendar3/components';
+import { changeTime, equal } from '#src/components/Calendar3/date-utils';
+import type { SyntheticEvent } from 'react';
 
 export type CalendarViewScreenType = 'YEAR' | 'MONTH' | 'DAY';
 
@@ -26,6 +31,16 @@ export interface CalendarWidgetProps {
   /**  */
   minDate?: Dayjs;
   maxDate?: Dayjs;
+  /** Коллбэк выбора даты, срабатывает при клике на дне (в режиме диапазона date - это массив из двух дат) */
+  onChange(date: Dayjs | Array<Dayjs | null> | null, event?: SyntheticEvent<any>): void;
+  /** Выбранное значение даты */
+  selected?: Dayjs | null;
+  /** Начальная дата диапазона */
+  startDate?: Dayjs | null;
+  /** Конечная дата диапазона */
+  endDate?: Dayjs | null;
+  /** Режим выбора диапазона дат */
+  range?: boolean;
   /** Объект локализации - позволяет перезадать текстовые константы используемые в компоненте,
    * по умолчанию значения констант берутся из темы в соответствии с параметром currentLocale, заданном в теме
    **/
@@ -62,11 +77,18 @@ export const CalendarWidget = React.forwardRef<HTMLDivElement, CalendarWidgetPro
       maxDate,
       locale,
       userLocale,
+      startDate,
+      endDate,
+      selected,
+      onChange,
+      range,
     },
     ref,
   ) => {
     const monthView = mode === 'MONTH';
     const yearView = mode === 'YEAR';
+    // активная дата, на которой сейчас ховер
+    const [activeDate, setActiveDate] = React.useState<Dayjs | null>(null);
 
     const calendarPanelProps = {
       viewDate,
@@ -78,10 +100,63 @@ export const CalendarWidget = React.forwardRef<HTMLDivElement, CalendarWidgetPro
       userLocale,
     };
 
+    const handleDayMouseEnter = (day: Dayjs, _: any) => setActiveDate(day);
+    const handleMonthMouseLeave = () => setActiveDate(null);
+
+    const handleDayClick = (day: Dayjs, event: any) => {
+      let date = day;
+      if (range || !equal(selected, date)) {
+        date = changeTime(date, selected);
+        if (range) {
+          if (!startDate && !endDate) {
+            onChange([date, null], event);
+          } else if (startDate && !endDate) {
+            if (date.isBefore(startDate)) {
+              onChange([date, null], event);
+            } else {
+              onChange([startDate, date], event);
+            }
+          } else if (!startDate && endDate) {
+            if (date.isBefore(endDate)) {
+              onChange([date, endDate], event);
+            } else {
+              onChange([date, null], event);
+            }
+          }
+          if (startDate && endDate) {
+            onChange([date, null], event);
+          }
+        } else {
+          onChange(date, event);
+        }
+      }
+    };
+    const weekDayNames = dayjs.weekdaysShort();
+
+    const renderMonth = () => (
+      <>
+        <DayNames date={viewDate} />
+        <Month
+          day={viewDate}
+          startDate={startDate}
+          endDate={endDate}
+          selected={selected}
+          activeDate={activeDate}
+          range={range}
+          //validator={getValidator()}
+          //filterDate={filterDate}
+          onMouseEnter={handleDayMouseEnter}
+          onMouseLeave={handleMonthMouseLeave}
+          onClick={handleDayClick}
+          highlightSpecialDay={(date: Dayjs) => undefined}
+        />
+      </>
+    );
+
     return (
       <CalendarComponent ref={ref} monthsView={monthView} yearsView={yearView}>
         {(headerRender && headerRender(viewDate)) || renderDefaultPanel(calendarPanelProps)}
-        Test
+        {renderMonth()}
       </CalendarComponent>
     );
   },
