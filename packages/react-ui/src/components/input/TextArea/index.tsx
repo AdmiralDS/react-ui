@@ -149,8 +149,8 @@ const textBlockStyleMixin = css<TextBlockProps>`
 `;
 
 const HiddenSpanContainer = styled.div<TextBlockProps>`
-  overflow: hidden;
-  visibility: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
   ${textBlockStyleMixin}
 `;
 
@@ -165,7 +165,9 @@ const Text = styled.textarea<ExtraProps>`
   flex: 1 1 auto;
   min-width: 10px;
   background: transparent;
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
+
   color: ${(props) => props.theme.color['Neutral/Neutral 90']};
 
   ${(props) => (props.dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
@@ -224,12 +226,12 @@ const textAreaHeight = (rows: number, dimension?: ComponentDimension) => {
 const StyledContainer = styled(Container)<{
   autoHeight: boolean;
   rows: number;
+  maxRows?: number;
   dimension: ComponentDimension;
 }>`
-  ${(p) =>
-    p.autoHeight
-      ? `min-height: ${textAreaHeight(p.rows, p.dimension)}px`
-      : `height: ${textAreaHeight(p.rows, p.dimension)}px`}
+  min-height: ${(p) => textAreaHeight(p.rows, p.dimension)}px;
+  ${(p) => (p.maxRows ? `max-height: ${textAreaHeight(p.maxRows, p.dimension)}px;` : '')}
+  ${(p) => (p.autoHeight ? '' : `height: ${textAreaHeight(p.rows, p.dimension)}px;`)}
 `;
 
 function toHtmlString(value?: string) {
@@ -248,6 +250,9 @@ export interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElemen
 
   /** Начальная высота компонента в количествах строк */
   rows?: number;
+
+  /** Максимальная высота компонента в количествах строк  */
+  maxRows?: number;
 
   /** Делает высоту компонента больше или меньше обычной */
   dimension?: ComponentDimension;
@@ -284,6 +289,7 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
   (
     {
       rows = 3,
+      maxRows,
       value,
       displayClearIcon,
       status,
@@ -349,20 +355,24 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
     React.useEffect(() => {
       function oninput(this: HTMLTextAreaElement) {
         const { value } = this;
-        if (hiddenDivRef.current) {
-          hiddenDivRef.current.innerHTML = toHtmlString(value);
+        const hiddenDiv = hiddenDivRef.current;
+        if (hiddenDiv) {
+          hiddenDiv.innerHTML = toHtmlString(value);
+          this.style.overflowY = hiddenDiv.clientHeight < hiddenDiv.scrollHeight ? '' : 'hidden';
         }
       }
 
-      if (inputRef.current && hiddenDivRef.current) {
+      if (autoHeight && inputRef.current && hiddenDivRef.current) {
         const node = inputRef.current;
         hiddenDivRef.current.innerHTML = toHtmlString(node.value);
         node.addEventListener('input', oninput);
+        node.style.overflowY = hiddenDivRef.current.clientHeight < hiddenDivRef.current.scrollHeight ? '' : 'hidden';
         return () => {
           node.removeEventListener('input', oninput);
+          node.style.overflowY = '';
         };
       }
-    }, []);
+    }, [autoHeight]);
     return (
       <StyledContainer
         className={className}
@@ -373,6 +383,7 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
         data-disable-copying={props.disableCopying ? true : undefined}
         autoHeight={!!autoHeight}
         rows={rows}
+        maxRows={maxRows}
         dimension={dimension}
         {...(props.disableCopying && {
           onMouseDown: stopEvent,
@@ -384,6 +395,7 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
           {...props}
           dimension={dimension}
           iconCount={iconCount}
+          autoHeight={autoHeight}
           value={inputData.value}
         />
         <BorderedDiv />
