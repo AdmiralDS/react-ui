@@ -11,4 +11,6 @@ export interface ExtraProps {
 
   /** Количество иконок отображаемых справа */
   iconCount?: number;
+
+  autoHeight?: boolean;
 }
