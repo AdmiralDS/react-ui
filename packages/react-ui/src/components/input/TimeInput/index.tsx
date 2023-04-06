@@ -151,7 +151,11 @@ export const TimeInput = React.forwardRef<HTMLInputElement, TimeInputProps>(
     const inputRef = useRef<HTMLInputElement>(null);
     const [isOpened, setIsOpened] = useState<boolean>(false);
 
-    const handleButtonClick = () => {
+    const handleButtonClick = (e: React.MouseEvent) => {
+      e.preventDefault();
+      if (inputRef.current !== document.activeElement) {
+        inputRef.current?.focus();
+      }
       if (!isOpened) {
         const inputTimeValue = parser(inputRef.current?.value);
         setTimeValue(inputTimeValue);
@@ -164,14 +168,13 @@ export const TimeInput = React.forwardRef<HTMLInputElement, TimeInputProps>(
         } else {
           setActiveOption('');
         }
-        inputRef.current?.focus();
       }
       setIsOpened(!isOpened);
     };
 
     const iconArray = React.Children.toArray(icons);
     if (!props.readOnly) {
-      iconArray.push(<InputIconButton icon={icon} onClick={handleButtonClick} tabIndex={0} />);
+      iconArray.push(<InputIconButton icon={icon} onMouseDown={handleButtonClick} tabIndex={0} />);
     }
 
     const disableSlots = (defaultArray: SlotProps[], disabledArr: string[]) => {
@@ -231,13 +234,7 @@ export const TimeInput = React.forwardRef<HTMLInputElement, TimeInputProps>(
         return availableSlots.map((slot, index) => ({
           id: slot.value,
           render: (options: RenderOptionProps) => (
-            <StyledMenuItem
-              onMouseDown={(e) => e.preventDefault()}
-              key={index}
-              data-dimension={dimension}
-              disabled={slot.disabled}
-              {...options}
-            >
+            <StyledMenuItem key={index} data-dimension={dimension} disabled={slot.disabled} {...options}>
               {slot.value}
             </StyledMenuItem>
           ),
