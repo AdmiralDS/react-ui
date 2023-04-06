@@ -8,9 +8,13 @@ import { DAY_NUMBERS } from '../constants';
 import { addDays, startOfWeek } from '../date-utils';
 import { Day } from './Day';
 import { WeekComponent } from '../styled/WeekComponent';
-import type { IWeekCalendarProps } from '../interfaces';
+import type { IWeekCalendarProps } from '#src/components/Calendar3/interfaces';
 
-export const Week: FC<IWeekCalendarProps> = ({
+interface ICalendarWeekProps extends IWeekCalendarProps {
+  userLocale?: string;
+}
+
+export const Week = ({
   day,
   month,
   startDate,
@@ -23,11 +27,13 @@ export const Week: FC<IWeekCalendarProps> = ({
   onMouseEnter,
   onClick,
   highlightSpecialDay,
-}) => {
+  userLocale,
+}: ICalendarWeekProps) => {
   const theme = React.useContext(ThemeContext) || LIGHT_THEME;
   const handleMouseEnter = (day: Dayjs, e: any) => onMouseEnter && onMouseEnter(day, e);
   const handleDayClick = (day: Dayjs, e: any) => onClick && onClick(day, e);
-  const weekStart = startOfWeek(day, theme.locales[theme.currentLocale].firstDayOfWeek ?? 1);
+  const currentLocale = userLocale || theme.currentLocale || 'ru';
+  const weekStart = startOfWeek(day, currentLocale);
   return (
     <WeekComponent>
       {DAY_NUMBERS.map((offset) => {
@@ -47,6 +53,7 @@ export const Week: FC<IWeekCalendarProps> = ({
             onMouseEnter={(_, e) => handleMouseEnter(nextDay, e)}
             onClick={(_, e) => handleDayClick(nextDay, e)}
             highlightSpecialDay={highlightSpecialDay}
+            userLocale={userLocale}
           />
         );
       })}

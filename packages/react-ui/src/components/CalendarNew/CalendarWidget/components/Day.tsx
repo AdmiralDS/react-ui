@@ -1,4 +1,3 @@
-import type { FC } from 'react';
 import * as React from 'react';
 import dayjs from 'dayjs';
 import isSameOrAfter from 'dayjs/plugin/isSameOrAfter';
@@ -8,11 +7,15 @@ import { LIGHT_THEME } from '#src/components/themes';
 import { dayInRange, endOfWeek, sameDay, startOfWeek } from '../date-utils';
 import { DayComponent } from '../styled/DayComponent';
 import type { Corners } from '../constants';
-import type { IDayCalendarProps } from '../interfaces';
+import type { IDayCalendarProps } from '#src/components/Calendar3/interfaces';
 
 dayjs.extend(isSameOrAfter);
 
-export const Day: FC<IDayCalendarProps> = ({
+interface ICalendarDayProps extends IDayCalendarProps {
+  userLocale?: string;
+}
+
+export const Day = ({
   day,
   month,
   startDate,
@@ -25,7 +28,8 @@ export const Day: FC<IDayCalendarProps> = ({
   onMouseEnter,
   onClick,
   highlightSpecialDay,
-}) => {
+  userLocale,
+}: ICalendarDayProps) => {
   const theme = React.useContext(ThemeContext) || LIGHT_THEME;
   const disabled = !!validator?.invalidValue(day) || (filterDate && !filterDate(day));
   const outsideMonth = month !== undefined && month !== day.month();
@@ -42,11 +46,12 @@ export const Day: FC<IDayCalendarProps> = ({
   const rangeEnd = !!startDate && !!endDate && sameDay(day, endDate);
   const rangeSelectingStart = inSelectingRange && sameDay(day, startDate);
   const rangeSelectingEnd = inSelectingRange && sameDay(day, activeDate);
+  const currentLocale = userLocale || theme.currentLocale || 'ru';
 
   const corners: Corners = {};
   if (startDate) {
-    const weekStart = sameDay(day, startOfWeek(day, theme.locales[theme.currentLocale].firstDayOfWeek ?? 1));
-    const weekEnd = sameDay(day, endOfWeek(day, theme.locales[theme.currentLocale].firstDayOfWeek ?? 1));
+    const weekStart = sameDay(day, startOfWeek(day, currentLocale));
+    const weekEnd = sameDay(day, endOfWeek(day, currentLocale));
     const start = rangeStart || rangeSelectingStart;
     const end = rangeEnd || rangeSelectingEnd;
     // если endDate не определена, то активную дату мы не выделяем серым фоном

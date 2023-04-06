@@ -1,16 +1,19 @@
-import type { FC } from 'react';
 import * as React from 'react';
 import type { Dayjs } from 'dayjs';
 import { ThemeContext } from 'styled-components';
 import { LIGHT_THEME } from '#src/components/themes';
 
-import { addWeeks, startOfMonth, startOfWeek } from '../date-utils';
+import { addWeeks, startOfMonth, startOfWeek } from '#src/components/CalendarNew/CalendarWidget/date-utils';
 import { Week } from './Week';
-import type { IMonthCalendarProps } from '../interfaces';
+import type { IMonthCalendarProps } from '#src/components/Calendar3/interfaces';
 
 const FIXED_WEEK_COUNT = 6;
 
-export const Month: FC<IMonthCalendarProps> = ({
+interface ICalendarMonthProps extends IMonthCalendarProps {
+  userLocale?: string;
+}
+
+export const Month = ({
   day,
   startDate,
   endDate,
@@ -23,15 +26,17 @@ export const Month: FC<IMonthCalendarProps> = ({
   onMouseLeave,
   onClick,
   highlightSpecialDay,
-}) => {
+  userLocale,
+}: ICalendarMonthProps) => {
   const theme = React.useContext(ThemeContext) || LIGHT_THEME;
   const weeks: Array<Dayjs> = [];
   const handleMouseEnter = (day: Dayjs, event: any) => onMouseEnter && onMouseEnter(day, event);
   const handleMouseLeave = () => onMouseLeave && onMouseLeave();
   const handleDayClick = (day: Dayjs, event: any) => onClick && onClick(day, event);
+  const currentLocale = userLocale || theme.currentLocale || 'ru';
 
   let weekIndex = 0;
-  let weekStart = startOfWeek(startOfMonth(day), theme.locales[theme.currentLocale].firstDayOfWeek ?? 1);
+  let weekStart = startOfWeek(startOfMonth(day), currentLocale);
   do {
     weekIndex++;
     weeks.push(weekStart);
@@ -55,6 +60,7 @@ export const Month: FC<IMonthCalendarProps> = ({
           onMouseEnter={handleMouseEnter}
           onClick={handleDayClick}
           highlightSpecialDay={highlightSpecialDay}
+          userLocale={userLocale}
         />
       ))}
     </div>

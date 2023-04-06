@@ -1,12 +1,12 @@
 import * as React from 'react';
+import type { SyntheticEvent } from 'react';
 import dayjs from 'dayjs';
 import type { Dayjs } from 'dayjs';
 import { CalendarComponent } from '#src/components/CalendarNew/CalendarWidget/styled/CalendarComponent';
 import { renderDefaultPanel } from '#src/components/CalendarNew/CalendarWidget/components/Panel';
 import { DayNames } from '#src/components/CalendarNew/CalendarWidget/components/DayNames';
-import { Month } from '#src/components/Calendar3/components';
-import { changeTime, equal } from '#src/components/Calendar3/date-utils';
-import type { SyntheticEvent } from 'react';
+import { Month } from '#src/components/CalendarNew/CalendarWidget/components/Month';
+import { changeTime, equal } from '#src/components/CalendarNew/CalendarWidget/date-utils';
 
 export type CalendarViewScreenType = 'YEAR' | 'MONTH' | 'DAY';
 
@@ -104,9 +104,8 @@ export const CalendarWidget = React.forwardRef<HTMLDivElement, CalendarWidgetPro
     const handleMonthMouseLeave = () => setActiveDate(null);
 
     const handleDayClick = (day: Dayjs, event: any) => {
-      let date = day;
-      if (range || !equal(selected, date)) {
-        date = changeTime(date, selected);
+      if (range || !equal(selected, day)) {
+        const date = changeTime(day, selected);
         if (range) {
           if (!startDate && !endDate) {
             onChange([date, null], event);
@@ -135,7 +134,7 @@ export const CalendarWidget = React.forwardRef<HTMLDivElement, CalendarWidgetPro
 
     const renderMonth = () => (
       <>
-        <DayNames date={viewDate} />
+        <DayNames date={viewDate} userLocale={userLocale} />
         <Month
           day={viewDate}
           startDate={startDate}
@@ -149,6 +148,7 @@ export const CalendarWidget = React.forwardRef<HTMLDivElement, CalendarWidgetPro
           onMouseLeave={handleMonthMouseLeave}
           onClick={handleDayClick}
           highlightSpecialDay={(date: Dayjs) => undefined}
+          userLocale={userLocale}
         />
       </>
     );

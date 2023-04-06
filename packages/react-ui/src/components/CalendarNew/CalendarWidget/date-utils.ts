@@ -1,5 +1,6 @@
 import type { Dayjs, ManipulateType } from 'dayjs';
 import dayjs from 'dayjs';
+import 'dayjs/locale/ru';
 import isBetween from 'dayjs/plugin/isBetween';
 import objectSupport from 'dayjs/plugin/objectSupport';
 import localeData from 'dayjs/plugin/localeData';
@@ -25,7 +26,6 @@ export {
   differenceYears,
   endOfWeek,
   equal,
-  //getFormattedValue,
   lastDayOfMonth,
   outOfBounds,
   sameDay,
@@ -63,8 +63,7 @@ const addWithAmountCheck = (date: Dayjs, amount: number, unit: ManipulateType | 
   if (!amount) {
     return date;
   }
-  date = date.add(amount, unit);
-  return date;
+  return date.add(amount, unit);
 };
 
 //TODO: test
@@ -74,7 +73,7 @@ const addDays = (date: Dayjs, amount: number): Dayjs => {
 
 //TODO: test
 const addWeeks = (date: Dayjs, amount: number): Dayjs => {
-  return addWithAmountCheck(date, amount, 'week');
+  return addWithAmountCheck(date, amount * 7, 'day');
 };
 
 //TODO: test
@@ -150,14 +149,17 @@ const differenceYears = (dateLeft: Dayjs, dateRight: Dayjs): number => {
 };
 
 //TODO: test
-const endOfWeek = (current: Dayjs, weekStartsOn: number): Dayjs => {
+const endOfWeek = (date: Dayjs, locale: string): Dayjs => {
   /*const date = dayjs(current.getTime());
   const day = date.getDay();
   const diff = (day < weekStartsOn ? -7 : 0) + 6 - (day - weekStartsOn);
 
   date.setDate(date.getDate() + diff);
   date.setHours(23, 59, 59, 999);*/
-  return current.endOf('week');
+  import(`dayjs/locale/${locale}.js`);
+  const instanceLocaleData = date.locale(locale).localeData();
+  return date.day(instanceLocaleData.firstDayOfWeek() + 6);
+  //return date.endOf('week');
 };
 
 const equal = (date1?: Dayjs | null, date2?: Dayjs | null) => {
@@ -239,8 +241,11 @@ const yearsRange = (date: Dayjs, yearCount: number) => {
 };
 
 // TODO: check
-const startOfWeek = (current: Dayjs): Dayjs => {
-  return current.startOf('week');
+const startOfWeek = (date: Dayjs, locale: string): Dayjs => {
+  import(`dayjs/locale/${locale}.js`);
+  const instanceLocaleData = date.locale(locale).localeData();
+  return date.day(instanceLocaleData.firstDayOfWeek());
+  //return date.startOf('week');
 };
 
 // TODO: check

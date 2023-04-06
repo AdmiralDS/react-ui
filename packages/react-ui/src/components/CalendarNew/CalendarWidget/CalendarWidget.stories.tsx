@@ -4,7 +4,9 @@ import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import type { CalendarWidgetProps } from '#src/components/CalendarNew/CalendarWidget/index';
 import { CalendarWidget } from '#src/components/CalendarNew/CalendarWidget/index';
+import type { Dayjs } from 'dayjs';
 import dayjs from 'dayjs';
+import styled from 'styled-components';
 
 export default {
   title: 'Admiral-2.1/CalendarNew/CalendarWidget',
@@ -63,10 +65,23 @@ export default {
   },
 } as ComponentMeta<typeof CalendarWidget>;
 
+const Separator = styled.div`
+  height: 20px;
+  width: 20px;
+`;
+
 const Template2: ComponentStory<typeof CalendarWidget> = (args: CalendarWidgetProps) => {
+  const [selected, setSelected] = React.useState(dayjs());
+
+  const handleOnChange = (date: Dayjs) => {
+    setSelected(date);
+  };
+
   return (
     <>
-      <CalendarWidget {...args} viewDate={dayjs()} />
+      <CalendarWidget {...args} viewDate={dayjs()} selected={selected} onChange={handleOnChange} />
+      <Separator />
+      <CalendarWidget {...args} viewDate={dayjs()} selected={selected} onChange={handleOnChange} userLocale="en" />
     </>
   );
 };

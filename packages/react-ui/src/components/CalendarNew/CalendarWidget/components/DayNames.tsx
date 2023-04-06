@@ -1,4 +1,3 @@
-import type { FC } from 'react';
 import * as React from 'react';
 import type { Dayjs } from 'dayjs';
 import 'dayjs/locale/ru';
@@ -6,7 +5,7 @@ import { ThemeContext } from 'styled-components';
 import { LIGHT_THEME } from '#src/components/themes';
 
 import { capitalizeFirstLetter, DAY_NUMBERS } from '../constants';
-import { addDays } from '../date-utils';
+import {addDays, startOfWeek} from '../date-utils';
 import { DayNameComponent } from '../styled/DayNameComponent';
 
 interface IDayNamesProps {
@@ -16,7 +15,7 @@ interface IDayNamesProps {
 
 export const DayNames = ({ date, userLocale }: IDayNamesProps) => {
   const theme = React.useContext(ThemeContext) || LIGHT_THEME;
-  const [currentLocale, setCurrentLocale] = React.useState<string>('');
+  /*const [currentLocale, setCurrentLocale] = React.useState<string>('');
 
   const defineLocale = userLocale || theme.currentLocale || 'ru';
 
@@ -26,12 +25,13 @@ export const DayNames = ({ date, userLocale }: IDayNamesProps) => {
       .catch(() => {
         setCurrentLocale('ru');
       });
-  }
+  }*/
+  const currentLocale = userLocale || theme.currentLocale || 'ru';
 
   const renderNames = () => {
-    const instanceLocaleData = date.locale(currentLocale).localeData();
-    const start = instanceLocaleData.firstDayOfWeek();
-    const weekStart = date.day(start);
+    /*const instanceLocaleData = date.locale(currentLocale).localeData();
+    const weekStart = date.day(instanceLocaleData.firstDayOfWeek());*/
+    const weekStart = startOfWeek(date, currentLocale);
 
     return (
       <div>
