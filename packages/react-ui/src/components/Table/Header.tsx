@@ -83,6 +83,8 @@ export const Header = React.forwardRef<HTMLDivElement, HeaderProps>(({ children,
     const mirror = _item.current.cloneNode(true);
     mirror.style.width = getRectWidth(rect) + 'px';
     mirror.style.height = getRectHeight(rect) + 'px';
+    mirror.style.position = 'fixed';
+    mirror.style.background = 'white';
     rmClass(mirror, 'gu-transit');
     addClass(mirror, 'gu-mirror');
     document.body.appendChild(mirror);
@@ -229,18 +231,22 @@ export const Header = React.forwardRef<HTMLDivElement, HeaderProps>(({ children,
     }
     e.preventDefault();
 
-    var clientX = getCoord('clientX', e) || 0;
-    var clientY = getCoord('clientY', e) || 0;
-    var x = clientX - _offsetX.current;
-    var y = clientY - _offsetY.current;
+    // var clientX = getCoord('clientX', e) || 0;
+    // var clientY = getCoord('clientY', e) || 0;
+    // var x = clientX - _offsetX.current;
+    // var y = clientY - _offsetY.current;
 
-    _mirror.current.style.left = x + 'px';
-    _mirror.current.style.top = y + 'px';
+    var clientX = e.clientX;
+    var clientY = e.clientY;
+    _mirror.current.style.left = e.clientX + 'px';
+    // _mirror.current.style.top = y + 'px';
+    _mirror.current.style.top = (headerRef.current?.getBoundingClientRect().x || 0) + 'px';
 
     var item = _copy.current || _item.current;
     var elementBehindCursor = getElementBehindPoint(_mirror.current, clientX, clientY);
-    var dropTarget = findDropTarget(elementBehindCursor, clientX, clientY);
-    var changed = dropTarget !== null && dropTarget !== _lastDropTarget;
+    // var dropTarget = findDropTarget(elementBehindCursor, clientX, clientY);
+    var dropTarget = headerRef.current;
+    var changed = dropTarget !== null && dropTarget !== _lastDropTarget.current;
 
     var parent = getParent(item);
     if (dropTarget === _source.current && _copy.current) {
@@ -250,6 +256,7 @@ export const Header = React.forwardRef<HTMLDivElement, HeaderProps>(({ children,
       return;
     }
     var reference;
+    console.log(elementBehindCursor);
     var immediate = getImmediateChild(dropTarget, elementBehindCursor);
     if (immediate !== null) {
       reference = getReference(dropTarget, immediate, clientX, clientY);
@@ -261,7 +268,7 @@ export const Header = React.forwardRef<HTMLDivElement, HeaderProps>(({ children,
     }
     if ((reference === null && changed) || (reference !== item && reference !== nextEl(item))) {
       _currentSibling.current = reference;
-      dropTarget.insertBefore(item, reference);
+      dropTarget?.insertBefore(item, reference);
     }
   }
 

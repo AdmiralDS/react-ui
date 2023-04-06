@@ -110,6 +110,27 @@ export const Header = styled.div<{ dimension: TableProps['dimension'] }>`
   & > * {
     border-bottom: 1px solid ${({ theme }) => theme.color['Neutral/Neutral 20']};
   }
+
+  .gu-mirror {
+    margin: 0;
+    z-index: 9999;
+  }
+  .gu-hide {
+    display: none !important;
+  }
+  .gu-unselectable {
+    user-select: none !important;
+  }
+  .gu-transit:before {
+    position: absolute;
+    content: '';
+    top: 0;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    background: white;
+    z-index: 2;
+  }
 `;
 
 export const ScrollTableBody = styled.div`
