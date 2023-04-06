@@ -2,11 +2,14 @@ import * as React from 'react';
 import type { SyntheticEvent } from 'react';
 import dayjs from 'dayjs';
 import type { Dayjs } from 'dayjs';
+import 'dayjs/locale/ru';
 import { CalendarComponent } from '#src/components/CalendarNew/CalendarWidget/styled/CalendarComponent';
 import { renderDefaultPanel } from '#src/components/CalendarNew/CalendarWidget/components/Panel';
 import { DayNames } from '#src/components/CalendarNew/CalendarWidget/components/DayNames';
 import { Month } from '#src/components/CalendarNew/CalendarWidget/components/Month';
 import { changeTime, equal } from '#src/components/CalendarNew/CalendarWidget/date-utils';
+import { ThemeContext } from 'styled-components';
+import { LIGHT_THEME } from '#src/components/themes';
 
 export type CalendarViewScreenType = 'YEAR' | 'MONTH' | 'DAY';
 
@@ -100,6 +103,18 @@ export const CalendarWidget = React.forwardRef<HTMLDivElement, CalendarWidgetPro
       userLocale,
     };
 
+    const theme = React.useContext(ThemeContext) || LIGHT_THEME;
+    const [currentLocale, setCurrentLocale] = React.useState<string>();
+
+    const defineLocale = userLocale || theme.currentLocale || 'ru';
+    if (currentLocale !== defineLocale) {
+      import(`dayjs/locale/${defineLocale}.js`)
+        .then(() => setCurrentLocale(defineLocale))
+        .catch(() => {
+          setCurrentLocale('ru');
+        });
+    }
+
     const handleDayMouseEnter = (day: Dayjs, _: any) => setActiveDate(day);
     const handleMonthMouseLeave = () => setActiveDate(null);
 
@@ -153,11 +168,11 @@ export const CalendarWidget = React.forwardRef<HTMLDivElement, CalendarWidgetPro
       </>
     );
 
-    return (
+    return currentLocale ? (
       <CalendarComponent ref={ref} monthsView={monthView} yearsView={yearView}>
         {(headerRender && headerRender(viewDate)) || renderDefaultPanel(calendarPanelProps)}
         {renderMonth()}
       </CalendarComponent>
-    );
+    ) : null;
   },
 );

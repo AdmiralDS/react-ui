@@ -1,6 +1,5 @@
 import type { Dayjs, ManipulateType } from 'dayjs';
 import dayjs from 'dayjs';
-import 'dayjs/locale/ru';
 import isBetween from 'dayjs/plugin/isBetween';
 import objectSupport from 'dayjs/plugin/objectSupport';
 import localeData from 'dayjs/plugin/localeData';
@@ -26,6 +25,8 @@ export {
   differenceYears,
   endOfWeek,
   equal,
+  getFormattedValue,
+  getMonthList,
   lastDayOfMonth,
   outOfBounds,
   sameDay,
@@ -41,7 +42,6 @@ export {
   valid,
   weekInMonth,
   yearsRange,
-  getMonthList,
 };
 
 const MILLISECONDS_IN_DAY = 86400000;
@@ -150,13 +150,6 @@ const differenceYears = (dateLeft: Dayjs, dateRight: Dayjs): number => {
 
 //TODO: test
 const endOfWeek = (date: Dayjs, locale: string): Dayjs => {
-  /*const date = dayjs(current.getTime());
-  const day = date.getDay();
-  const diff = (day < weekStartsOn ? -7 : 0) + 6 - (day - weekStartsOn);
-
-  date.setDate(date.getDate() + diff);
-  date.setHours(23, 59, 59, 999);*/
-  import(`dayjs/locale/${locale}.js`);
   const instanceLocaleData = date.locale(locale).localeData();
   return date.day(instanceLocaleData.firstDayOfWeek() + 6);
   //return date.endOf('week');
@@ -169,11 +162,6 @@ const equal = (date1?: Dayjs | null, date2?: Dayjs | null) => {
     return !date1 && !date2;
   }
 };
-
-// TODO: check locale
-/*const getFormattedValue = (date: Dayjs | null, format?: string) => {
-  return dayjs(date || dayjs()).format(format);
-};*/
 
 const lastDayOfMonth = (date: Dayjs) => {
   return date.endOf('month').date();
@@ -242,10 +230,8 @@ const yearsRange = (date: Dayjs, yearCount: number) => {
 
 // TODO: check
 const startOfWeek = (date: Dayjs, locale: string): Dayjs => {
-  import(`dayjs/locale/${locale}.js`);
   const instanceLocaleData = date.locale(locale).localeData();
   return date.day(instanceLocaleData.firstDayOfWeek());
-  //return date.startOf('week');
 };
 
 // TODO: check
@@ -259,15 +245,10 @@ const valid = (date: any): boolean => !isNaN(date as any);
 
 // TODO: check
 const getMonthList = (locale: string, format: 'long' | 'short' = 'long'): string[] => {
-  /*const year = dayjs().year();
-  const monthList = [...Array(12).keys()];
-  const formatter = new Intl.DateTimeFormat(locale, {
-    month: format,
-  });
-
-  const getMonthName = (monthIndex: number) => formatter.format(dayjs(year, monthIndex));
-
-  return monthList.map(getMonthName);*/
-  const globalLocaleData = dayjs.localeData();
-  return format === 'short' ? globalLocaleData.monthsShort() : globalLocaleData.months();
+  const instanceLocaleData = dayjs().locale(locale).localeData();
+  return format === 'short' ? instanceLocaleData.monthsShort() : instanceLocaleData.months();
 };
+
+function getFormattedValue(date: Dayjs, locale: string, format: string) {
+  return date.locale(locale).format(format);
+}

@@ -78,11 +78,11 @@ const Template2: ComponentStory<typeof CalendarWidget> = (args: CalendarWidgetPr
   };
 
   return (
-    <>
+    <div style={{ display: 'flex' }}>
       <CalendarWidget {...args} viewDate={dayjs()} selected={selected} onChange={handleOnChange} />
       <Separator />
-      <CalendarWidget {...args} viewDate={dayjs()} selected={selected} onChange={handleOnChange} userLocale="en" />
-    </>
+      <CalendarWidget {...args} viewDate={dayjs()} selected={selected} onChange={handleOnChange} userLocale="es" />
+    </div>
   );
 };
 

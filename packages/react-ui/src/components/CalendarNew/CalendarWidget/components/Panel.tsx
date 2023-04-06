@@ -1,6 +1,5 @@
 import type { FC, MouseEvent } from 'react';
 import * as React from 'react';
-import 'dayjs/locale/ru';
 import type { Dayjs } from 'dayjs';
 import { TooltipHoc } from '#src/components/TooltipHOC';
 import { ThemeContext } from 'styled-components';
@@ -11,6 +10,7 @@ import { Month, PanelDate, Year } from '../styled/PanelDate';
 import { capitalizeFirstLetter } from '../constants';
 
 import { Button } from './Button';
+import { getFormattedValue } from '#src/components/CalendarNew/CalendarWidget/date-utils';
 
 const MonthWithTooltip = TooltipHoc(Month);
 const YearWithTooltip = TooltipHoc(Year);
@@ -70,16 +70,8 @@ export const Panel: FC<IPanelProps> = ({
   const nextYearDisabled = !!maxDate && viewDate.add(1, 'year').diff(maxDate, 'year') > 0;
   const previousDisabled = yearsView ? previousYearDisabled : previousMonthDisabled;
   const nextDisabled = yearsView ? nextYearDisabled : nextMonthDisabled;
-  const [currentLocale, setCurrentLocale] = React.useState<string>();
 
-  const defineLocale = userLocale || theme.currentLocale || 'ru';
-  if (currentLocale !== defineLocale) {
-    import(`dayjs/locale/${defineLocale}.js`)
-      .then(() => setCurrentLocale(defineLocale))
-      .catch(() => {
-        setCurrentLocale('ru');
-      });
-  }
+  const currentLocale = userLocale || theme.currentLocale || 'ru';
 
   const monthMouseDownHandle = (event: any) => {
     event.preventDefault();
@@ -90,7 +82,7 @@ export const Panel: FC<IPanelProps> = ({
     yearsView ? onYearsViewHide?.(event) : onYearsViewShow?.(event);
   };
 
-  return currentLocale ? (
+  return (
     <PanelComponent yearsView={yearsView} monthsView={monthsView} className="ui-kit-calendar-panel-component">
       {!monthsView && !previousDisabled ? (
         <ButtonWithTooltip
@@ -118,7 +110,7 @@ export const Panel: FC<IPanelProps> = ({
           view={monthsView}
           onMouseDown={monthMouseDownHandle}
         >
-          {capitalizeFirstLetter(viewDate.locale(currentLocale).format('MMMM'))}
+          {capitalizeFirstLetter(getFormattedValue(viewDate, currentLocale, 'MMMM'))}
         </MonthWithTooltip>
         <YearWithTooltip
           renderContent={() =>
@@ -149,7 +141,7 @@ export const Panel: FC<IPanelProps> = ({
         <Button onMouseDown={onNext} disabled={nextDisabled} type="right" />
       )}
     </PanelComponent>
-  ) : null;
+  );
 };
 
 export const renderDefaultPanel = (props: IPanelProps) => {
