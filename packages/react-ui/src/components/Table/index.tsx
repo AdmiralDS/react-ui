@@ -101,9 +101,9 @@ export type Column = {
   filterMenuStyle?: CSSProperties;
   /**
    * Метод для переопределения стандартного вида ячейки
-   * @param data
-   * @param row
-   * @param rowIdx
+   * @param data - контент ячейки
+   * @param row - объект строки
+   * @param rowIdx - индекс строки
    */
   renderCell?(data: React.ReactNode, row: TableRow, rowIdx: number): React.ReactNode;
 };
@@ -154,8 +154,8 @@ export interface TableRow extends Record<RowId, React.ReactNode> {
    */
   actionRender?: (row: any) => React.ReactNode;
   /**
-   * Метод для переопределения стандартного вида группы
-   * @param row
+   * Метод для переопределения стандартного вида заголовка группы
+   * @param row - объект строки
    */
   renderGroupTitle?(row: TableRow): React.ReactNode;
 }
@@ -223,8 +223,10 @@ export interface TableProps extends React.HTMLAttributes<HTMLDivElement> {
    * Таким образом контроль за ресайзингом происходит на стороне пользователя.
    */
   onColumnResize?: (colObj: { name: string; width: string }) => void;
-  /** Рендер функция для отрисовки контента ячейки. Входные параметры - объект строки и название столбца */
-  /** @deprecated use render prop in Column type */
+  /**
+   * @deprecated use renderCell prop in Column type
+   * Рендер функция для отрисовки контента ячейки. Входные параметры - объект строки и название столбца
+   */
   renderCell?: (row: TableRow, columnName: string) => React.ReactNode;
   /** Рендер функция для отрисовки обертки вокруг строки.
    * Входные параметры - объект строки, её порядковый номер и элемент который должен быть отрисован внутри создаваемой обертки
