@@ -143,17 +143,9 @@ export const Tab = styled.button<{ dimension: Dimension; selected: boolean }>`
 
   &:hover:not(:disabled) {
     background: ${({ theme }) => theme.color['Opacity/Hover']};
-    }
   }
   &:active:not(:disabled) {
-    color: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
-    & *[fill^='#'] {
-      fill: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
-    }
-    [data-badge] {
-      background: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
-      color: ${({ theme }) => theme.color['Special/Static White']};
-    }
+    background: ${({ theme }) => theme.color['Opacity/Press']};
   }
   &:disabled {
     color: ${({ theme }) => theme.color['Neutral/Neutral 30']};
