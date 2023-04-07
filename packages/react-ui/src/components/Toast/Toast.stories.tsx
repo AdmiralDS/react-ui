@@ -2,6 +2,7 @@ import * as React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
+import LinkTo from '@storybook/addon-links/react';
 import { Button } from '#src/components/Button';
 import type { ToastProps, ToastItemProps } from '#src/components/Toast';
 import { Toast, ToastProvider, useToast } from '#src/components/Toast';
@@ -34,9 +35,9 @@ const Description = () => (
   <Desc>
     Компонент служит для демонстрации выплывающих сообщений. В качестве таких уведомлений рекомендуется
     использовать&nbsp;
-    <a href="https://admiralds.github.io/react-ui/?path=/docs/admiral-2-1-notificationitem--static-notification-item-base-status">
+    <LinkTo kind="Admiral-2.1/NotificationItem" story="static-notification-item-base-status">
       NotificationItem
-    </a>
+    </LinkTo>
     .
     <Separator />
     Компонент Toast необходимо оборачивать в ToastProvider для управления состоянием всплывающих нотификаций. Через
