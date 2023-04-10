@@ -105,7 +105,7 @@ export const Header = styled.div<{ dimension: TableProps['dimension'] }>`
   flex: 0 0 auto;
   overflow-x: hidden;
   ${headerStyle};
-  transform: translateZ(0);
+  // transform: translateZ(0);
 
   & > * {
     border-bottom: 1px solid ${({ theme }) => theme.color['Neutral/Neutral 20']};
@@ -115,21 +115,20 @@ export const Header = styled.div<{ dimension: TableProps['dimension'] }>`
     margin: 0;
     z-index: 9999;
   }
-  .gu-hide {
-    display: none !important;
-  }
   .gu-unselectable {
     user-select: none !important;
+  }
+  .gu-transit {
+    visibility: hidden;
   }
   .gu-transit:before {
     position: absolute;
     content: '';
-    top: 0;
+    top: 100%;
     bottom: -1px;
     left: 0;
     right: 0;
     background: white;
-    z-index: 2;
   }
 `;
 
