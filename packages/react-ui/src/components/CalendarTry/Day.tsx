@@ -1,8 +1,8 @@
 import * as React from 'react';
+import dayjs from 'dayjs';
 import type { Dayjs } from 'dayjs';
 import styled from 'styled-components';
 import { typography } from '#src/components/Typography';
-import dayjs from 'dayjs';
 
 const DAY_SIZE = 36;
 const DAY_PADDING = '8px 0';
@@ -12,9 +12,15 @@ export interface DayProps {
   viewDate: Dayjs;
   date: Dayjs;
   selected?: Dayjs;
+  onClickHandler?: (date: Dayjs) => void;
 }
 
-const DayWrapper = styled.div<{ today?: boolean; disabled?: boolean; outsideMonth?: boolean; selected?: boolean }>`
+export const DayWrapper = styled.div<{
+  today?: boolean;
+  disabled?: boolean;
+  outsideMonth?: boolean;
+  selected?: boolean;
+}>`
   position: relative;
   display: inline-block;
   box-sizing: border-box;
@@ -63,18 +69,19 @@ const DayWrapper = styled.div<{ today?: boolean; disabled?: boolean; outsideMont
       }
     `}
 `;
-export const Day = ({ viewDate, date, selected }: DayProps) => {
+export const Day = ({ viewDate, date, selected, onClickHandler }: DayProps) => {
+  const handleClick = () => {
+    onClickHandler?.(date);
+  };
+
   return (
     <DayWrapper
       today={date.isSame(dayjs(), 'day')}
       outsideMonth={!date.isSame(viewDate, 'month')}
       selected={date.isSame(selected, 'date')}
+      onClick={handleClick}
     >
       {date.date()}
     </DayWrapper>
   );
-};
-
-export const defaultRenderDay = ({ viewDate, date, selected }: DayProps) => {
-  return <Day key={date.valueOf()} viewDate={viewDate} date={date} selected={selected} />;
 };

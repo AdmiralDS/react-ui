@@ -1,11 +1,12 @@
-import { withDesign } from 'storybook-addon-designs';
-import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes';
-import type { ComponentMeta } from '@storybook/react';
-import { CalendarTry } from '#src/components/CalendarTry/index';
-import styled from 'styled-components';
-import type { ComponentStory } from '@storybook/react';
 import * as React from 'react';
-import dayjs, { Dayjs } from 'dayjs';
+import dayjs from 'dayjs';
+import type { Dayjs } from 'dayjs';
+import { withDesign } from 'storybook-addon-designs';
+import styled from 'styled-components';
+import type { ComponentMeta, ComponentStory } from '@storybook/react';
+import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes';
+import { CalendarTry } from '#src/components/CalendarTry/index';
+import { DayWrapper } from '#src/components/CalendarTry/Day';
 
 export default {
   title: 'Admiral-2.1/CalendarTry',
@@ -69,13 +70,37 @@ const Separator = styled.div`
   width: 20px;
 `;
 
+const StyledDay = styled(DayWrapper)`
+  color: ${({ theme }) => theme.color['Error/Error 60 Main']};
+`;
+
 const Template1: ComponentStory<typeof CalendarTry> = (args) => {
-  const selected = dayjs();
+  const [selected, setSelected] = React.useState<Dayjs>(dayjs());
+  const [viewDate, setViewDate] = React.useState<Dayjs>(dayjs());
+
+  const handleDayClick = (date: Dayjs) => {
+    console.log(`click on ${date.format('DD MMM')}`);
+    setSelected(date);
+  };
+
+  const customRenderDay = (date: Dayjs) => {
+    return (
+      <StyledDay
+        key={date.valueOf()}
+        today={date.isSame(dayjs(), 'date')}
+        selected={date.isSame(selected, 'date')}
+        outsideMonth={!date.isSame(viewDate, 'month')}
+        onClick={() => handleDayClick(date)}
+      >
+        {date.date()}
+      </StyledDay>
+    );
+  };
   return (
     <div style={{ display: 'flex' }}>
-      <CalendarTry date={dayjs()} selected={selected} />
+      <CalendarTry viewDate={viewDate} selected={selected} renderDay={customRenderDay} />
       <Separator />
-      <CalendarTry date={dayjs()} selected={selected} userLocale="en" />
+      <CalendarTry viewDate={viewDate} selected={selected} userLocale="en" onClickHandler={handleDayClick} />
     </div>
   );
 };

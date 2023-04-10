@@ -1,14 +1,12 @@
 import * as React from 'react';
 import type { Dayjs } from 'dayjs';
-import 'dayjs/locale/ru';
 import dayjs from 'dayjs';
+import 'dayjs/locale/ru';
 import styled, { ThemeContext } from 'styled-components';
 import { LIGHT_THEME } from '#src/components/themes';
-import type { DayProps } from '#src/components/CalendarTry/Day';
-import { defaultRenderDay } from '#src/components/CalendarTry/Day';
-import { Week } from '#src/components/CalendarTry/Week';
 import { typography } from '#src/components/Typography';
-import {Month} from "#src/components/CalendarTry/Month";
+import { Month } from '#src/components/CalendarTry/Month';
+import { Day } from '#src/components/CalendarTry/Day';
 
 const CALENDAR_WIDTH = 284;
 /*const YEARS_VIEW_PADDING = '20px 12px 16px';
@@ -36,14 +34,15 @@ export const CalendarWidgetWrapper = styled.div`
 `;
 
 export interface CalendarTryProps {
-  date: Dayjs;
+  viewDate: Dayjs;
   selected?: Dayjs;
-  renderDay?: (props: DayProps) => React.ReactNode;
+  renderDay?: (date: Dayjs) => React.ReactNode;
+  onClickHandler?: (date: Dayjs) => void;
   userLocale?: string;
 }
 
 export const CalendarTry = React.forwardRef<HTMLDivElement, CalendarTryProps>(
-  ({ date, selected, renderDay, userLocale }, ref) => {
+  ({ viewDate, selected, renderDay, userLocale, onClickHandler }, ref) => {
     const theme = React.useContext(ThemeContext) || LIGHT_THEME;
     const [currentLocale, setCurrentLocale] = React.useState<string>();
 
@@ -56,12 +55,18 @@ export const CalendarTry = React.forwardRef<HTMLDivElement, CalendarTryProps>(
         });
     }
 
-    const viewDate = React.useMemo(() => date.locale(currentLocale || 'ru'), [currentLocale]);
+    const viewDateLocale = React.useMemo(() => viewDate.locale(currentLocale || 'ru'), [currentLocale]);
+
+    const defaultRenderDay = (date: Dayjs) => {
+      return (
+        <Day key={date.valueOf()} viewDate={viewDate} date={date} selected={selected} onClickHandler={onClickHandler} />
+      );
+    };
 
     return currentLocale ? (
       <CalendarWidgetWrapper ref={ref}>
-        <div>{viewDate.format('MMMM YYYY')}</div>
-        <Month viewDate={viewDate} renderDay={renderDay || defaultRenderDay} selected={selected} />
+        <div>{viewDateLocale.format('MMMM YYYY')}</div>
+        <Month viewDate={viewDateLocale} renderDay={renderDay || defaultRenderDay} selected={selected} />
       </CalendarWidgetWrapper>
     ) : null;
   },
