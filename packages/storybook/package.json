@@ -22,7 +22,7 @@
     "@storybook/blocks": "^7.0.1",
     "@storybook/react": "^7.0.1",
     "@storybook/react-vite": "^7.0.1",
-    "@storybook/testing-library": "^0.0.14-next.1",
+    "@storybook/testing-library": "^0.1.0",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "@vitejs/plugin-react-swc": "^3.0.0",
