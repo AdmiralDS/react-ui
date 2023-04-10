@@ -1,21 +1,23 @@
 import * as React from 'react';
+import styled from 'styled-components';
 import type { Dayjs } from 'dayjs';
-import { Day } from '#src/components/CalendarTry/Day';
+import type { DayProps } from '#src/components/CalendarTry/Day';
 
 export const DAY_NUMBERS = [0, 1, 2, 3, 4, 5, 6];
 
 export interface WeekProps {
   viewDate: Dayjs;
-  date: Dayjs;
+  weekStartDate: Dayjs;
   selected?: Dayjs;
+  renderDay: (props: DayProps) => React.ReactNode;
 }
 
-export const Week = ({ viewDate, date, selected }: WeekProps) => {
+const WeekWrapper = styled.div`
+  white-space: nowrap;
+`;
+
+export const Week = ({ viewDate, weekStartDate, selected, renderDay }: WeekProps) => {
   return (
-    <div>
-      {DAY_NUMBERS.map((day) => (
-        <Day key={date.add(day, 'day').valueOf()} viewDate={viewDate} date={date.add(day, 'day')} selected={selected} />
-      ))}
-    </div>
+    <WeekWrapper>{DAY_NUMBERS.map((day) => renderDay({ viewDate, date: weekStartDate.add(day, 'day'), selected }))}</WeekWrapper>
   );
 };

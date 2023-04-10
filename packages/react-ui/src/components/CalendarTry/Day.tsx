@@ -64,14 +64,17 @@ const DayWrapper = styled.div<{ today?: boolean; disabled?: boolean; outsideMont
     `}
 `;
 export const Day = ({ viewDate, date, selected }: DayProps) => {
-  console.log(selected);
   return (
     <DayWrapper
       today={date.isSame(dayjs(), 'day')}
       outsideMonth={!date.isSame(viewDate, 'month')}
-      selected={date.isSame(selected)}
+      selected={date.isSame(selected, 'date')}
     >
       {date.date()}
     </DayWrapper>
   );
+};
+
+export const defaultRenderDay = ({ viewDate, date, selected }: DayProps) => {
+  return <Day key={date.valueOf()} viewDate={viewDate} date={date} selected={selected} />;
 };
