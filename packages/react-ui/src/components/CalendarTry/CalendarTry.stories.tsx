@@ -71,12 +71,16 @@ const Separator = styled.div`
 `;
 
 const StyledDay = styled(DayWrapper)`
-  color: ${({ theme }) => theme.color['Error/Error 60 Main']};
+  color: ${(p) => (p.disabled ? p.theme.color['Neutral/Neutral 10'] : p.theme.color['Error/Error 60 Main'])};
 `;
 
 const Template1: ComponentStory<typeof CalendarTry> = (args) => {
   const [selected, setSelected] = React.useState<Dayjs>(dayjs());
   const [viewDate, setViewDate] = React.useState<Dayjs>(dayjs());
+
+  const filterDate = (date: Dayjs) => {
+    return date.day() === 6;
+  };
 
   const handleDayClick = (date: Dayjs) => {
     console.log(`click on ${date.format('DD MMM')}`);
@@ -89,8 +93,9 @@ const Template1: ComponentStory<typeof CalendarTry> = (args) => {
         key={date.valueOf()}
         today={date.isSame(dayjs(), 'date')}
         selected={date.isSame(selected, 'date')}
+        disabled={filterDate(date)}
         outsideMonth={!date.isSame(viewDate, 'month')}
-        onClick={() => handleDayClick(date)}
+        onClick={() => !filterDate(date) && handleDayClick(date)}
       >
         {date.date()}
       </StyledDay>
@@ -98,9 +103,9 @@ const Template1: ComponentStory<typeof CalendarTry> = (args) => {
   };
   return (
     <div style={{ display: 'flex' }}>
-      <CalendarTry viewDate={viewDate} selected={selected} renderDay={customRenderDay} />
+      <CalendarTry viewDate={viewDate} selected={selected} onClickHandler={handleDayClick} filterDate={filterDate} />
       <Separator />
-      <CalendarTry viewDate={viewDate} selected={selected} userLocale="en" onClickHandler={handleDayClick} />
+      <CalendarTry viewDate={viewDate} selected={selected} renderDay={customRenderDay} userLocale="en" />
     </div>
   );
 };

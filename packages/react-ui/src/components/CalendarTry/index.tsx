@@ -38,11 +38,12 @@ export interface CalendarTryProps {
   selected?: Dayjs;
   renderDay?: (date: Dayjs) => React.ReactNode;
   onClickHandler?: (date: Dayjs) => void;
+  filterDate?: (date: Dayjs) => boolean;
   userLocale?: string;
 }
 
 export const CalendarTry = React.forwardRef<HTMLDivElement, CalendarTryProps>(
-  ({ viewDate, selected, renderDay, userLocale, onClickHandler }, ref) => {
+  ({ viewDate, selected, renderDay, filterDate, userLocale, onClickHandler }, ref) => {
     const theme = React.useContext(ThemeContext) || LIGHT_THEME;
     const [currentLocale, setCurrentLocale] = React.useState<string>();
 
@@ -59,7 +60,14 @@ export const CalendarTry = React.forwardRef<HTMLDivElement, CalendarTryProps>(
 
     const defaultRenderDay = (date: Dayjs) => {
       return (
-        <Day key={date.valueOf()} viewDate={viewDate} date={date} selected={selected} onClickHandler={onClickHandler} />
+        <Day
+          key={date.valueOf()}
+          viewDate={viewDate}
+          date={date}
+          selected={selected}
+          disabled={filterDate?.(date)}
+          onClickHandler={onClickHandler}
+        />
       );
     };
 

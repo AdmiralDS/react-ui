@@ -13,6 +13,7 @@ export interface DayProps {
   date: Dayjs;
   selected?: Dayjs;
   onClickHandler?: (date: Dayjs) => void;
+  disabled?: boolean;
 }
 
 export const DayWrapper = styled.div<{
@@ -40,38 +41,45 @@ export const DayWrapper = styled.div<{
     right: 0;
     top: 0;
     bottom: 0;
-    border: 1px solid
-      ${({ theme, today, selected }) => (today && !selected ? theme.color['Neutral/Neutral 90'] : 'transparent')};
+    border: 1px solid ${(p) => (p.today && !p.selected ? p.theme.color['Neutral/Neutral 90'] : 'transparent')};
     border-radius: 50%;
   }
 
   &:hover:after {
-    border: 1px solid ${(p) => p.theme.color['Primary/Primary 60 Main']};
+    ${(p) => (p.disabled ? '' : `border: 1px solid ${p.theme.color['Primary/Primary 60 Main']};`)}
   }
 
-  ${({ theme, outsideMonth }) =>
-    outsideMonth &&
+  ${(p) =>
+    p.disabled &&
     `
-      color: ${theme.color['Neutral/Neutral 30']};
+      color: ${p.theme.color['Neutral/Neutral 30']};
+    `}
+
+  ${(p) =>
+    p.outsideMonth &&
+    `
+      color: ${p.theme.color['Neutral/Neutral 30']};
       opacity: 0;
       pointer-events: none;
     `}
 
-  ${({ disabled, theme, selected }) =>
-    !disabled &&
-    selected &&
+  ${(p) =>
+    !p.disabled &&
+    p.selected &&
     `
-      color: ${theme.color['Special/Static White']};
-      background: ${theme.color['Primary/Primary 60 Main']};
+      color: ${p.theme.color['Special/Static White']};
+      background: ${p.theme.color['Primary/Primary 60 Main']};
       border-radius: 50%;
       &:hover {
-        background: ${theme.color['Primary/Primary 70']};
+        background: ${p.theme.color['Primary/Primary 70']};
       }
     `}
 `;
-export const Day = ({ viewDate, date, selected, onClickHandler }: DayProps) => {
+export const Day = ({ viewDate, date, selected, disabled, onClickHandler }: DayProps) => {
   const handleClick = () => {
-    onClickHandler?.(date);
+    if (!disabled) {
+      onClickHandler?.(date);
+    }
   };
 
   return (
@@ -79,6 +87,7 @@ export const Day = ({ viewDate, date, selected, onClickHandler }: DayProps) => {
       today={date.isSame(dayjs(), 'day')}
       outsideMonth={!date.isSame(viewDate, 'month')}
       selected={date.isSame(selected, 'date')}
+      disabled={disabled}
       onClick={handleClick}
     >
       {date.date()}
