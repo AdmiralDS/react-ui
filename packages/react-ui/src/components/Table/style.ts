@@ -323,12 +323,21 @@ const rowWidthStyle = css<{ rowWidth?: number }>`
   width: ${(p) => `${p.rowWidth}px`};
 `;
 
+const rowHoverMixin = css`
+  cursor: pointer;
+  & > .tr-simple > *,
+  & ${OverflowMenuWrapper} {
+    background: ${({ theme }) => theme.color['Primary/Primary 10']};
+  }
+`;
+
 export const Row = styled.div<{
   dimension: TableProps['dimension'];
   underline: boolean;
   disabled?: boolean;
   isGroup?: boolean;
   rowWidth?: number;
+  hover?: boolean;
 }>`
   position: relative;
   display: flex;
@@ -339,13 +348,8 @@ export const Row = styled.div<{
   ${({ disabled }) => disabled && disabledRow}
   ${({ underline }) => underline && underlineRow}
   ${({ rowWidth }) => rowWidth && rowWidthStyle}
-`;
-
-const rowHoverMixin = css`
-  cursor: pointer;
-  & > *,
-  & + ${OverflowMenuWrapper} {
-    background: ${({ theme }) => theme.color['Primary/Primary 10']};
+   &:hover:is(.hoverable) {
+    ${({ hover }) => hover && rowHoverMixin}
   }
 `;
 
@@ -355,7 +359,6 @@ export const SimpleRow = styled.div<{
   error?: boolean;
   success?: boolean;
   grey?: boolean;
-  hover?: boolean;
 }>`
   display: inline-flex;
   min-width: max-content;
@@ -369,7 +372,6 @@ export const SimpleRow = styled.div<{
     & + ${OverflowMenuWrapper} {
       visibility: visible;
     }
-    ${({ hover }) => hover && rowHoverMixin}
   }
   & + div[data-opened='true'] {
     visibility: visible;

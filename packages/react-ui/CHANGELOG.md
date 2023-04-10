@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.9.2](https://github.com/AdmiralDS/react-ui/compare/v4.9.1...v4.9.2) (2023-04-06)
+
+
+### Bug Fixes
+
+* **TimeInput:** manage focus properly ([66cb3e0](https://github.com/AdmiralDS/react-ui/commit/66cb3e0cec4db6922c0552b28cd8cb24eeb7f06c))
+
 ### [4.9.1](https://github.com/AdmiralDS/react-ui/compare/v4.9.0...v4.9.1) (2023-04-04)
 
 ## [4.9.0](https://github.com/AdmiralDS/react-ui/compare/v4.8.1...v4.9.0) (2023-04-04)

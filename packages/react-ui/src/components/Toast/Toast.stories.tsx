@@ -2,6 +2,7 @@ import * as React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
+import LinkTo from '@storybook/addon-links/react';
 import { Button } from '#src/components/Button';
 import type { ToastProps, ToastItemProps } from '#src/components/Toast';
 import { Toast, ToastProvider, useToast } from '#src/components/Toast';
@@ -32,11 +33,17 @@ const Separator = styled.div`
 
 const Description = () => (
   <Desc>
-    Компонент служит для демонстрации выплывающих нотификаций. Существует четыре типа нотификаций: Информационное
-    сообщение, предупреждение, ошибка и положительные действия. Применяется как самостоятельный элемент.
+    Компонент служит для демонстрации выплывающих сообщений. В качестве таких уведомлений рекомендуется
+    использовать&nbsp;
+    <LinkTo kind="Admiral-2.1/NotificationItem" story="static-notification-item-base-status">
+      NotificationItem
+    </LinkTo>
+    .
     <Separator />
     Компонент Toast необходимо оборачивать в ToastProvider для управления состоянием всплывающих нотификаций. Через
-    значение autoDeleteTime в ToastProvider можно задать в ms время, по истечению которого нотификация скроется.
+    значение autoDeleteTime в ToastProvider можно задать в ms время, по истечению которого нотификация скроется. Если
+    данный параметр не задан, то следует дать возможность закрывать уведомление по нажатию иконки закрытия (при
+    использовании NotificationItem выставить isClosable и передать в onClose removeToastItem).
   </Desc>
 );
 
