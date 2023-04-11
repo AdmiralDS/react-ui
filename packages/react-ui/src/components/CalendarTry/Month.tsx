@@ -3,7 +3,7 @@ import type { Dayjs } from 'dayjs';
 import { Week } from '#src/components/CalendarTry/Week';
 
 export interface MonthProps {
-  viewDate: Dayjs;
+  date: Dayjs;
   selected?: Dayjs;
   renderDay: (date: Dayjs) => React.ReactNode;
 }
@@ -20,18 +20,12 @@ function getWeeksStartDates(viewDate: Dayjs, weeksNum: number) {
   return weeks;
 }
 
-export const Month = ({ viewDate, selected, renderDay }: MonthProps) => {
-  const weeks = getWeeksStartDates(viewDate, FIXED_WEEK_COUNT);
+export const Month = ({ date, renderDay }: MonthProps) => {
+  const weeks = getWeeksStartDates(date, FIXED_WEEK_COUNT);
   return (
     <>
       {weeks.map((weekStart) => (
-        <Week
-          key={weekStart.valueOf()}
-          viewDate={viewDate}
-          weekStartDate={weekStart}
-          selected={selected}
-          renderDay={renderDay}
-        />
+        <Week key={weekStart.valueOf()} weekStartDate={weekStart} renderDay={renderDay} />
       ))}
     </>
   );

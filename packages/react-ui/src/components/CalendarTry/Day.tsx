@@ -9,11 +9,11 @@ const DAY_PADDING = '8px 0';
 const DAY_MARGIN_BOTTOM = '4px';
 
 export interface DayProps {
-  viewDate: Dayjs;
   date: Dayjs;
   selected?: Dayjs;
-  onClickHandler?: (date: Dayjs) => void;
+  onSelectDate?: (date: Dayjs) => void;
   disabled?: boolean;
+  isHidden: boolean;
 }
 
 export const DayWrapper = styled.div<{
@@ -75,17 +75,17 @@ export const DayWrapper = styled.div<{
       }
     `}
 `;
-export const Day = ({ viewDate, date, selected, disabled, onClickHandler }: DayProps) => {
+export const Day = ({ date, selected, disabled, onSelectDate, isHidden }: DayProps) => {
   const handleClick = () => {
     if (!disabled) {
-      onClickHandler?.(date);
+      onSelectDate?.(date);
     }
   };
 
   return (
     <DayWrapper
       today={date.isSame(dayjs(), 'day')}
-      outsideMonth={!date.isSame(viewDate, 'month')}
+      outsideMonth={isHidden}
       selected={date.isSame(selected, 'date')}
       disabled={disabled}
       onClick={handleClick}

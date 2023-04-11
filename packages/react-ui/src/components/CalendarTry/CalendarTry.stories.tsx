@@ -76,7 +76,7 @@ const StyledDay = styled(DayWrapper)`
 
 const Template1: ComponentStory<typeof CalendarTry> = (args) => {
   const [selected, setSelected] = React.useState<Dayjs>(dayjs());
-  const [viewDate, setViewDate] = React.useState<Dayjs>(dayjs());
+  const [viewDate, setViewDate] = React.useState<Dayjs>(selected);
 
   const filterDate = (date: Dayjs) => {
     return date.day() === 6;
@@ -85,6 +85,7 @@ const Template1: ComponentStory<typeof CalendarTry> = (args) => {
   const handleDayClick = (date: Dayjs) => {
     console.log(`click on ${date.format('DD MMM')}`);
     setSelected(date);
+    setViewDate(date);
   };
 
   const customRenderDay = (date: Dayjs) => {
@@ -101,11 +102,16 @@ const Template1: ComponentStory<typeof CalendarTry> = (args) => {
       </StyledDay>
     );
   };
+
+  const customRenderPanel = (date: Dayjs) => {
+    return <div>{date.format('MMMM YYYY')}</div>;
+  };
+
   return (
     <div style={{ display: 'flex' }}>
-      <CalendarTry viewDate={viewDate} selected={selected} onClickHandler={handleDayClick} filterDate={filterDate} />
+      <CalendarTry selected={selected} onSelectDate={handleDayClick} disabledDate={filterDate} />
       <Separator />
-      <CalendarTry viewDate={viewDate} selected={selected} renderDay={customRenderDay} userLocale="en" />
+      <CalendarTry selected={selected} renderDay={customRenderDay} renderPanel={customRenderPanel} userLocale="en" />
     </div>
   );
 };
