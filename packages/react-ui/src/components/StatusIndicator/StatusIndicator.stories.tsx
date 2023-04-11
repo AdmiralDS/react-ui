@@ -50,9 +50,37 @@ export default {
       url: 'https://www.figma.com/file/CC0WL5u9TPtZpyLbbAGFGt/Admiral-2.0-UI-Kit?node-id=37%3A18744',
     },
   },
+  argTypes: {
+    dimension: {
+      options: ['m', 's'],
+      control: { type: 'radio' },
+    },
+    text: {
+      control: { type: 'text' },
+    },
+    displayRight: {
+      control: { type: 'boolean' },
+    },
+    cssMixin: {
+      control: false,
+    },
+  },
 } as ComponentMeta<typeof StatusIndicator>;
 
-const StatusIndicatorDemoDefaultStory: ComponentStory<typeof StatusIndicator> = () => {
+const StatusIndicatorDemoPlayground: ComponentStory<typeof StatusIndicator> = (props) => {
+  const cleanProps = (Object.keys(props) as Array<keyof typeof props>).reduce((acc, key) => {
+    if (props[key] !== undefined) acc[key] = props[key];
+
+    return acc;
+  }, {} as Record<any, any>);
+  return (
+      <StatusIndicator text="P 16px/24 book" icon={<CheckOutline />} {...cleanProps} />
+  );
+};
+export const Playground = StatusIndicatorDemoPlayground.bind({});
+Playground.args = {};
+
+const StatusIndicatorDemoDimensionStory: ComponentStory<typeof StatusIndicator> = () => {
   return (
     <>
       <StyledText font="Body/Body 1 Long" as="div">
@@ -67,13 +95,13 @@ const StatusIndicatorDemoDefaultStory: ComponentStory<typeof StatusIndicator> = 
   );
 };
 
-export const StatusIndicatorDemoDefault = StatusIndicatorDemoDefaultStory.bind({});
-StatusIndicatorDemoDefault.args = {};
-StatusIndicatorDemoDefault.storyName = 'Status Indicator';
-StatusIndicatorDemoDefault.parameters = {
+export const StatusIndicatorDemoDimension = StatusIndicatorDemoDimensionStory.bind({});
+StatusIndicatorDemoDimension.args = {};
+StatusIndicatorDemoDimension.storyName = 'Status Indicator. Размеры компонента';
+StatusIndicatorDemoDimension.parameters = {
   docs: {
     description: {
-      story: `Компонент регулируется только по высоте и представлен в размерах M (24px) и S (20px), ширина подстраивается под контент. Через параметр cssMixin можно переключать цветовое решение статуса`,
+      story: `Компонент регулируется только по высоте и представлен в размерах M (24px) и S (20px), ширина подстраивается под контент.`,
     },
   },
 };
@@ -100,3 +128,11 @@ const StatusIndicatorDemoStoryPosition: ComponentStory<typeof StatusIndicator> =
 export const StatusIndicatorDemoPosition = StatusIndicatorDemoStoryPosition.bind({});
 StatusIndicatorDemoPosition.args = {};
 StatusIndicatorDemoPosition.storyName = 'Status Indicator. Альтернативные варианты отображения';
+StatusIndicatorDemoPosition.parameters = {
+  docs: {
+    description: {
+      story: `Через параметр cssMixin можно изменять цветовое отображение статуса. Также с помощью 
+      параметра displayRight можно управлять позиционированием иконки.`,
+    },
+  },
+};
