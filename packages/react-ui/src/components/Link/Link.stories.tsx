@@ -60,7 +60,7 @@ const Separator = styled.div`
   margin-top: 10px;
 `;
 
-const Devider = styled.div`
+const Divider = styled.div`
   width: 10px;
   height: 12px;
 `;
@@ -117,7 +117,7 @@ const LinkWithIcon: ComponentStory<typeof Link> = () => {
       <Separator />
       <Link appearance={'primary'} href="" onClick={(e: any) => e.preventDefault()}>
         <ArrowLeftOutline width={24} />
-        <Devider />
+        <Divider />
         Link
       </Link>
       <Separator />
@@ -127,7 +127,7 @@ const LinkWithIcon: ComponentStory<typeof Link> = () => {
       <Separator />
       <Link appearance={'secondary'} dimension="s" href="" onClick={(e: any) => e.preventDefault()}>
         Link
-        <Devider />
+        <Divider />
         <ArrowRightOutline width={20} />
       </Link>
     </>
@@ -141,11 +141,11 @@ const StyledRouterLink = styled(RouterLink)<LinkComponent>`
 const LinkMixin: ComponentStory<typeof Link> = () => (
   <Router>
     <StyledRouterLink to="">Styled RouterLink - dimension m</StyledRouterLink>
-    <Devider />
+    <Divider />
     <StyledRouterLink to="" dimension="s">
       Styled RouterLink - dimension s
     </StyledRouterLink>
-    <Devider />
+    <Divider />
     <StyledRouterLink to="" appearance="secondary">
       Styled RouterLink - appearance secondary
     </StyledRouterLink>
@@ -155,11 +155,11 @@ const LinkMixin: ComponentStory<typeof Link> = () => (
 const LinkPolymorphic: ComponentStory<typeof Link> = () => (
   <>
     <Link as="button">Render button instead of anchor</Link>
-    <Devider />
+    <Divider />
     <Link as="div" dimension="s">
       Render div instead of anchor
     </Link>
-    <Devider />
+    <Divider />
     <Router>
       <Link as={RouterLink} to="">
         Render RouterLink instead of anchor
@@ -168,7 +168,25 @@ const LinkPolymorphic: ComponentStory<typeof Link> = () => (
   </>
 );
 
-const LinkDefault: ComponentStory<typeof Link> = ({ children, ...args }) => <Link {...args}>{children}</Link>;
+const LinkDefault: ComponentStory<typeof Link> = ({ children, ...args }) => (
+  <>
+    <T font="Body/Body 1 Short" as="div">
+      Компонент Link используется для навигации. Может применяться отдельно или внутри текста, с иконкой или без.
+    </T>
+    <T font="Body/Body 1 Short" as="div">
+      Ссылки бывают двух типов — Primary и Secondary, и двух размеров — M (24px) и S (20px).
+    </T>
+    <Divider />
+    <Link {...args}>{children}</Link>
+  </>
+);
+
+export const Playground = LinkDefault.bind({});
+
+Playground.args = {
+  children: 'Link',
+  href: 'http://localhost:6006/?path=/story/example-link--playground',
+};
 export const Primary = LinkPrimary.bind({});
 export const Secondary = LinkSecondary.bind({});
 export const IconLink = LinkWithIcon.bind({});
@@ -191,10 +209,4 @@ LinkAsProp.parameters = {
       В качестве значения as можно передать строку, в которой будет прописан тип html элемента, или компонент.`,
     },
   },
-};
-export const Playground = LinkDefault.bind({});
-
-Playground.args = {
-  children: 'Link',
-  href: 'http://localhost:6006/?path=/story/example-link--playground',
 };
