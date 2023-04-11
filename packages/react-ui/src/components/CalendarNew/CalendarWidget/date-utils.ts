@@ -25,6 +25,7 @@ export {
   differenceYears,
   endOfWeek,
   equal,
+  getDayNamesList,
   getFormattedValue,
   getMonthList,
   lastDayOfMonth,
@@ -247,6 +248,15 @@ const valid = (date: any): boolean => !isNaN(date as any);
 const getMonthList = (locale: string, format: 'long' | 'short' = 'long'): string[] => {
   const instanceLocaleData = dayjs().locale(locale).localeData();
   return format === 'short' ? instanceLocaleData.monthsShort() : instanceLocaleData.months();
+};
+
+const getDayNamesList = (locale: string): string[] => {
+  const instanceLocaleData = dayjs().locale(locale).localeData();
+  const nameList = instanceLocaleData.weekdaysMin();
+  const firstDay = instanceLocaleData.firstDayOfWeek();
+  return nameList.map((name, index, arr) => {
+    return arr[(firstDay + index) % 7];
+  });
 };
 
 function getFormattedValue(date: Dayjs, locale: string, format: string) {
