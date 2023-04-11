@@ -85,7 +85,6 @@ const Template1: ComponentStory<typeof CalendarTry> = (args) => {
   const handleDayClick = (date: Dayjs) => {
     console.log(`click on ${date.format('DD MMM')}`);
     setSelected(date);
-    setViewDate(date);
   };
 
   const customRenderDay = (date: Dayjs) => {
@@ -103,15 +102,15 @@ const Template1: ComponentStory<typeof CalendarTry> = (args) => {
     );
   };
 
-  const customRenderPanel = (date: Dayjs) => {
-    return <div>{date.format('MMMM YYYY')}</div>;
+  const handlePanelChange = (date: Dayjs) => {
+    setViewDate(date);
   };
 
   return (
     <div style={{ display: 'flex' }}>
       <CalendarTry selected={selected} onSelectDate={handleDayClick} disabledDate={filterDate} />
       <Separator />
-      <CalendarTry selected={selected} renderDay={customRenderDay} renderPanel={customRenderPanel} userLocale="en" />
+      <CalendarTry selected={selected} renderDay={customRenderDay} onPanelChange={handlePanelChange} userLocale="en" />
     </div>
   );
 };
