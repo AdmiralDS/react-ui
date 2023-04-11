@@ -105,59 +105,6 @@ export const emptyOverlayStyledCss = css``;
 
 const ModalContext = React.createContext({ mobile: false } as { mobile: boolean });
 
-export const ModalTitle: React.FC<React.HTMLAttributes<HTMLHeadingElement>> = ({ children, ...props }) => {
-  const mobile = React.useContext(ModalContext).mobile;
-  return (
-    <Title mobile={mobile} {...props}>
-      {children}
-    </Title>
-  );
-};
-
-export const ModalContent: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, ...props }) => {
-  const contentRef = React.useRef<HTMLDivElement | null>(null);
-  const [overflow, setOverflow] = React.useState(false);
-  const [scrollbarSize, setScrollbarSize] = React.useState(0);
-  const mobile = React.useContext(ModalContext).mobile;
-
-  React.useLayoutEffect(() => {
-    if (contentRef.current && checkOverflow(contentRef.current) !== overflow) {
-      setScrollbarSize(contentRef.current.offsetWidth - contentRef.current.clientWidth);
-      setOverflow(checkOverflow(contentRef.current));
-    }
-  }, [children, overflow, setOverflow]);
-
-  React.useLayoutEffect(() => {
-    if (contentRef.current) {
-      const resizeObserver = new ResizeObserver(() => {
-        if (contentRef.current && checkOverflow(contentRef.current) !== overflow) {
-          setScrollbarSize(contentRef.current.offsetWidth - contentRef.current.clientWidth);
-          setOverflow(checkOverflow(contentRef.current));
-        }
-      });
-      resizeObserver.observe(contentRef.current);
-      return () => {
-        resizeObserver.disconnect();
-      };
-    }
-  }, [overflow, setOverflow]);
-
-  return (
-    <Content tabIndex={-1} ref={contentRef} scrollbar={overflow ? scrollbarSize : 0} mobile={mobile} {...props}>
-      {children}
-    </Content>
-  );
-};
-
-export const ModalButtonPanel: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, ...props }) => {
-  const mobile = React.useContext(ModalContext).mobile;
-  return (
-    <ButtonPanel mobile={mobile} {...props}>
-      {children}
-    </ButtonPanel>
-  );
-};
-
 export interface ModalProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Размер компонента */
   dimension?: Dimension;
@@ -313,3 +260,56 @@ export const Modal = React.forwardRef<HTMLDivElement, ModalProps>(
 );
 
 Modal.displayName = 'Modal';
+
+export const ModalTitle: React.FC<React.HTMLAttributes<HTMLHeadingElement>> = ({ children, ...props }) => {
+  const mobile = React.useContext(ModalContext).mobile;
+  return (
+    <Title mobile={mobile} {...props}>
+      {children}
+    </Title>
+  );
+};
+
+export const ModalContent: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, ...props }) => {
+  const contentRef = React.useRef<HTMLDivElement | null>(null);
+  const [overflow, setOverflow] = React.useState(false);
+  const [scrollbarSize, setScrollbarSize] = React.useState(0);
+  const mobile = React.useContext(ModalContext).mobile;
+
+  React.useLayoutEffect(() => {
+    if (contentRef.current && checkOverflow(contentRef.current) !== overflow) {
+      setScrollbarSize(contentRef.current.offsetWidth - contentRef.current.clientWidth);
+      setOverflow(checkOverflow(contentRef.current));
+    }
+  }, [children, overflow, setOverflow]);
+
+  React.useLayoutEffect(() => {
+    if (contentRef.current) {
+      const resizeObserver = new ResizeObserver(() => {
+        if (contentRef.current && checkOverflow(contentRef.current) !== overflow) {
+          setScrollbarSize(contentRef.current.offsetWidth - contentRef.current.clientWidth);
+          setOverflow(checkOverflow(contentRef.current));
+        }
+      });
+      resizeObserver.observe(contentRef.current);
+      return () => {
+        resizeObserver.disconnect();
+      };
+    }
+  }, [overflow, setOverflow]);
+
+  return (
+    <Content tabIndex={-1} ref={contentRef} scrollbar={overflow ? scrollbarSize : 0} mobile={mobile} {...props}>
+      {children}
+    </Content>
+  );
+};
+
+export const ModalButtonPanel: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, ...props }) => {
+  const mobile = React.useContext(ModalContext).mobile;
+  return (
+    <ButtonPanel mobile={mobile} {...props}>
+      {children}
+    </ButtonPanel>
+  );
+};
