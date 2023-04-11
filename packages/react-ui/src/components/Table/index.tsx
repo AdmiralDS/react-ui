@@ -783,7 +783,7 @@ export const Table: React.FC<TableProps> = ({
       <HeaderWrapper scrollbar={scrollbar} greyHeader={greyHeader} data-verticalscroll={verticalScroll}>
         <Header dimension={dimension} ref={headerRef} className="tr">
           {(displayRowSelectionColumn || displayRowExpansionColumn || stickyColumns.length > 0) && (
-            <StickyWrapper greyHeader={greyHeader}>
+            <StickyWrapper greyHeader={greyHeader} data-draggable={false} data-droppable={false}>
               {displayRowExpansionColumn && <ExpandCell dimension={dimension} />}
               {displayRowSelectionColumn && (
                 <CheckboxCell dimension={dimension} className="th_checkbox">
@@ -800,7 +800,7 @@ export const Table: React.FC<TableProps> = ({
             </StickyWrapper>
           )}
           {columnList.map((col, index) => (col.sticky ? null : renderHeaderCell(col as Column, index)))}
-          <Filler />
+          <Filler data-draggable={false} />
         </Header>
       </HeaderWrapper>
       {renderBody()}

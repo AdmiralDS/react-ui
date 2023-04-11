@@ -115,9 +115,6 @@ export const Header = styled.div<{ dimension: TableProps['dimension'] }>`
     margin: 0;
     z-index: 9999;
   }
-  .gu-unselectable {
-    user-select: none !important;
-  }
   .gu-transit {
     visibility: hidden;
   }

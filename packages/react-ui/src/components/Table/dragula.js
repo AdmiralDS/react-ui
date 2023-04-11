@@ -48,6 +48,12 @@ export function dragula(initialContainers, options) {
   if (typeof o.mirrorContainer === 'undefined') {
     o.mirrorContainer = document.body;
   }
+  if (typeof o.invalid === 'undefined') {
+    o.invalid = invalidTarget;
+    function invalidTarget() {
+      return false;
+    }
+  }
 
   var drake = {
     containers: o.containers,
@@ -144,8 +150,11 @@ export function dragula(initialContainers, options) {
     if (isContainer(item)) {
       return; // don't drag container itself
     }
-
+    var handle = item;
     while (getParent(item) && isContainer(getParent(item)) === false) {
+      if (o.invalid(item, handle)) {
+        return;
+      }
       item = getParent(item); // drag target should be a top element
       if (!item) {
         return;
@@ -153,6 +162,9 @@ export function dragula(initialContainers, options) {
     }
     var source = getParent(item);
     if (!source) {
+      return;
+    }
+    if (o.invalid(item, handle)) {
       return;
     }
 
@@ -277,7 +289,6 @@ export function dragula(initialContainers, options) {
     _mirror.style.background = 'white';
 
     var elementBehindCursor = getElementBehindPoint(_mirror, clientX, clientY);
-    console.log(elementBehindCursor);
     var dropTarget = findDropTarget(elementBehindCursor, clientX, clientY);
     var changed = dropTarget !== null && dropTarget !== _lastDropTarget;
     if (changed || dropTarget === null) {
@@ -305,18 +316,18 @@ export function dragula(initialContainers, options) {
     }
     var rect = _item.getBoundingClientRect();
     _mirror = _item.cloneNode(true);
-    _mirror.style.width = getRectWidth(rect) + 'px';
-    _mirror.style.height = getRectHeight(rect) + 'px';
+    _mirror.style.width = rect.width + 'px';
+    _mirror.style.height = rect.height + 'px';
     rmClass(_mirror, 'gu-transit');
     addClass(_mirror, 'gu-mirror');
     o.mirrorContainer.appendChild(_mirror);
     touchy(documentElement, 'add', 'mousemove', drag);
-    addClass(o.mirrorContainer, 'gu-unselectable');
+    o.mirrorContainer.style.userSelect = 'none';
   }
 
   function removeMirrorImage() {
     if (_mirror) {
-      rmClass(o.mirrorContainer, 'gu-unselectable');
+      o.mirrorContainer.style.userSelect = 'auto';
       touchy(documentElement, 'remove', 'mousemove', drag);
       getParent(_mirror).removeChild(_mirror);
       _mirror = null;
@@ -362,9 +373,9 @@ export function dragula(initialContainers, options) {
       // faster, but only available if dropped inside a child element
       var rect = target.getBoundingClientRect();
       if (horizontal) {
-        return resolve(x > rect.left + getRectWidth(rect) / 2);
+        return resolve(x > rect.left + rect.width / 2);
       }
-      return resolve(y > rect.top + getRectHeight(rect) / 2);
+      return resolve(y > rect.top + rect.height / 2);
     }
 
     function resolve(after) {
@@ -384,43 +395,27 @@ function touchy(el, op, type, fn) {
   crossvent[op](el, type, fn);
 }
 
+// получаем координаты относительно document, а не viewport
 function getOffset(el) {
   var rect = el.getBoundingClientRect();
   return {
-    left: rect.left + getScroll('scrollLeft', 'pageXOffset'),
-    top: rect.top + getScroll('scrollTop', 'pageYOffset'),
+    left: rect.left + window.scrollX,
+    top: rect.top + window.scrollY,
   };
-}
-
-function getScroll(scrollProp, offsetProp) {
-  if (typeof global[offsetProp] !== 'undefined') {
-    return global[offsetProp];
-  }
-  if (documentElement.clientHeight) {
-    return documentElement[scrollProp];
-  }
-  return document.body[scrollProp];
 }
 
 function getElementBehindPoint(point, x, y) {
   point = point || {};
-  var state = point.style.display;
-  var el;
+  const state = point.style.display;
   // временно прячем mirror, чтобы вычислить, какой сейчас за ним скрывается элемент
   point.style.display = 'none';
-  el = document.elementFromPoint(x, y);
+  const el = document.elementFromPoint(x, y);
   point.style.display = state;
   return el;
 }
 
 function always() {
   return true;
-}
-function getRectWidth(rect) {
-  return rect.width || rect.right - rect.left;
-}
-function getRectHeight(rect) {
-  return rect.height || rect.bottom - rect.top;
 }
 function getParent(el) {
   return el.parentNode === document ? null : el.parentNode;
