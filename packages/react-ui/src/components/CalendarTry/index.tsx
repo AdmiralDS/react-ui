@@ -9,7 +9,7 @@ import { Month } from '#src/components/CalendarTry/Month';
 import { Day } from '#src/components/CalendarTry/Day';
 import { DayNames } from '#src/components/CalendarTry/DayNames';
 import { Panel } from '#src/components/CalendarTry/Panel/Panel';
-import { addMonths, subMonths } from '#src/components/Calendar/date-utils';
+import type { DateValidator } from '#src/components/CalendarTry/validator';
 
 const CALENDAR_WIDTH = 284;
 /*const YEARS_VIEW_PADDING = '20px 12px 16px';
@@ -38,7 +38,10 @@ export const CalendarWidgetWrapper = styled.div`
 
 export interface CalendarTryProps {
   selected?: Dayjs;
+  minDate?: Dayjs;
+  maxDate?: Dayjs;
   renderDay?: (date: Dayjs) => React.ReactNode;
+  validator?: DateValidator;
   onSelectDate?: (date: Dayjs) => void;
   disabledDate?: (date: Dayjs) => boolean;
   isHiddenDate?: (date: Dayjs) => boolean;
@@ -56,18 +59,32 @@ export interface CalendarTryProps {
 }
 
 export const CalendarTry = React.forwardRef<HTMLDivElement, CalendarTryProps>(
-  ({ selected, renderDay, disabledDate, isHiddenDate, userLocale, onSelectDate, onPanelChange, locale }, ref) => {
+  (
+    {
+      selected,
+      minDate,
+      maxDate,
+      renderDay,
+      disabledDate,
+      isHiddenDate,
+      userLocale,
+      onSelectDate,
+      onPanelChange,
+      locale,
+    },
+    ref,
+  ) => {
     const getInitialViewDate = () => {
       const current = dayjs();
       if (selected) {
         return selected.locale(currentLocale || 'ru');
-      } /*else {
-        if (minDate && before(current, minDate)) {
+      } else {
+        if (minDate && current.isBefore(minDate)) {
           return minDate;
-        } else if (maxDate && after(current, maxDate)) {
+        } else if (maxDate && current.isAfter(maxDate)) {
           return maxDate;
         }
-      }*/
+      }
       return current.locale(currentLocale || 'ru');
     };
     const theme = React.useContext(ThemeContext) || LIGHT_THEME;
