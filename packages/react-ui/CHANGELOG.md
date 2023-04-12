@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.10.0](https://github.com/AdmiralDS/react-ui/compare/v4.9.2...v4.10.0) (2023-04-11)
+
+
+### Features
+
+* **Select:** fix clear icon for multiselect mode ([f3ed09d](https://github.com/AdmiralDS/react-ui/commit/f3ed09db24a4a7145ddc2916540b9bcf899fec4f))
+
+
+### Bug Fixes
+
+* **Modal:** fix problem with props description ([e8447d8](https://github.com/AdmiralDS/react-ui/commit/e8447d8e9f824fa9ac6c04f35f7b0c1a5fcd837b))
+* **StatusIndicator:** fix docs, add playground ([9e652ac](https://github.com/AdmiralDS/react-ui/commit/9e652ac87e13959787fe89d0f6dbafd90279b5aa))
+* **Table:** fix bug with OverflowMenu mouseenter and row hover state ([d9349a5](https://github.com/AdmiralDS/react-ui/commit/d9349a585eade0306c614073bc90acef9e09451d))
+* **TabMenu:** fix press Tab style ([6a3827a](https://github.com/AdmiralDS/react-ui/commit/6a3827a0e435e8a9beaf1cb2d174b476ed50bfc9))
+* **Tag:** fix problem with props description ([b5e981a](https://github.com/AdmiralDS/react-ui/commit/b5e981a8ecaec9d01d299cedb97fe1e7648da924))
+
 ### [4.9.2](https://github.com/AdmiralDS/react-ui/compare/v4.9.1...v4.9.2) (2023-04-06)
 
 
