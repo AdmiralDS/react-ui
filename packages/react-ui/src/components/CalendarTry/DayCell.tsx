@@ -8,7 +8,7 @@ const DAY_SIZE = 36;
 const DAY_PADDING = '8px 0';
 const DAY_MARGIN_BOTTOM = '4px';
 
-export interface DayProps {
+export interface DayCellProps {
   date: Dayjs;
   selected?: Dayjs;
   onSelectDate?: (date: Dayjs) => void;
@@ -16,7 +16,7 @@ export interface DayProps {
   isHidden: boolean;
 }
 
-export const DayWrapper = styled.div<{
+export const DayCellWrapper = styled.div<{
   today?: boolean;
   disabled?: boolean;
   outsideMonth?: boolean;
@@ -75,7 +75,7 @@ export const DayWrapper = styled.div<{
       }
     `}
 `;
-export const Day = ({ date, selected, disabled, onSelectDate, isHidden }: DayProps) => {
+export const DayCell = ({ date, selected, disabled, onSelectDate, isHidden }: DayCellProps) => {
   const handleClick = () => {
     if (!disabled) {
       onSelectDate?.(date);
@@ -83,7 +83,7 @@ export const Day = ({ date, selected, disabled, onSelectDate, isHidden }: DayPro
   };
 
   return (
-    <DayWrapper
+    <DayCellWrapper
       today={date.isSame(dayjs(), 'day')}
       outsideMonth={isHidden}
       selected={date.isSame(selected, 'date')}
@@ -91,6 +91,6 @@ export const Day = ({ date, selected, disabled, onSelectDate, isHidden }: DayPro
       onClick={handleClick}
     >
       {date.date()}
-    </DayWrapper>
+    </DayCellWrapper>
   );
 };

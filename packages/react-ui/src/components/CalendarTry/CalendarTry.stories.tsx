@@ -6,7 +6,8 @@ import styled from 'styled-components';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes';
 import { CalendarTry } from '#src/components/CalendarTry/index';
-import { DayWrapper } from '#src/components/CalendarTry/Day';
+import type { CalendarViewMode } from '#src/components/CalendarTry/constants';
+import { DayCellWrapper } from '#src/components/CalendarTry/DayCell';
 
 export default {
   title: 'Admiral-2.1/CalendarTry',
@@ -70,32 +71,38 @@ const Separator = styled.div`
   width: 20px;
 `;
 
-const StyledDay = styled(DayWrapper)`
+const StyledDay = styled(DayCellWrapper)`
   color: ${(p) => (p.disabled ? p.theme.color['Neutral/Neutral 10'] : p.theme.color['Error/Error 60 Main'])};
 `;
 
 const Template1: ComponentStory<typeof CalendarTry> = (args) => {
-  const [selected, setSelected] = React.useState<Dayjs>(dayjs());
-  const [viewDate, setViewDate] = React.useState<Dayjs>(selected);
+  const [selected1, setSelected1] = React.useState<Dayjs>(dayjs());
+  const [selected2, setSelected2] = React.useState<Dayjs>(dayjs());
+  const [viewDate2, setViewDate2] = React.useState<Dayjs>(selected2);
 
   const filterDate = (date: Dayjs) => {
     return date.day() === 6;
   };
 
-  const handleDayClick = (date: Dayjs) => {
+  const handleDayClick1 = (date: Dayjs) => {
     console.log(`click on ${date.format('DD MMM')}`);
-    setSelected(date);
+    setSelected1(date);
   };
 
-  const customRenderDay = (date: Dayjs) => {
+  const handleDayClick2 = (date: Dayjs) => {
+    console.log(`click on ${date.format('DD MMM')}`);
+    setSelected2(date);
+  };
+
+  const customRenderDay = (date: Dayjs, viewMode: CalendarViewMode) => {
     return (
       <StyledDay
         key={date.valueOf()}
         today={date.isSame(dayjs(), 'date')}
-        selected={date.isSame(selected, 'date')}
+        selected={date.isSame(selected2, 'date')}
         disabled={filterDate(date)}
-        outsideMonth={!date.isSame(viewDate, 'month')}
-        onClick={() => !filterDate(date) && handleDayClick(date)}
+        outsideMonth={!date.isSame(viewDate2, 'month')}
+        onClick={() => !filterDate(date) && handleDayClick2(date)}
       >
         {date.date()}
       </StyledDay>
@@ -103,14 +110,19 @@ const Template1: ComponentStory<typeof CalendarTry> = (args) => {
   };
 
   const handlePanelChange = (date: Dayjs) => {
-    setViewDate(date);
+    setViewDate2(date);
   };
 
   return (
     <div style={{ display: 'flex' }}>
-      <CalendarTry selected={selected} onSelectDate={handleDayClick} disabledDate={filterDate} />
+      <CalendarTry viewMode="MONTHS" selected={selected1} onSelectDate={handleDayClick1} disabledDate={filterDate} />
       <Separator />
-      <CalendarTry selected={selected} renderDay={customRenderDay} onPanelChange={handlePanelChange} userLocale="en" />
+      <CalendarTry
+        selected={selected1}
+        renderCell={customRenderDay}
+        onPanelChange={handlePanelChange}
+        userLocale="en"
+      />
     </div>
   );
 };

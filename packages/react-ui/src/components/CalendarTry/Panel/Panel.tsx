@@ -8,12 +8,14 @@ import { TooltipHoc } from '#src/components/TooltipHOC';
 import { Button } from '#src/components/CalendarTry/Panel/PanelButton';
 import { ThemeContext } from 'styled-components';
 import { LIGHT_THEME } from '#src/components/themes';
+import type { CalendarViewMode } from '#src/components/CalendarTry/constants';
 
 const MonthWithTooltip = TooltipHoc(Month);
 const YearWithTooltip = TooltipHoc(Year);
 const ButtonWithTooltip = TooltipHoc(Button);
 
 interface PanelProps {
+  viewMode?: CalendarViewMode;
   date: Dayjs;
   userLocale?: string;
   locale?: {
@@ -30,18 +32,26 @@ interface PanelProps {
   onPrevious(event: MouseEvent<HTMLButtonElement>): void;
 }
 
-export const Panel = ({ date, userLocale, locale, onNext, onPrevious }: PanelProps) => {
+export const Panel = ({ viewMode, date, userLocale, locale, onNext, onPrevious }: PanelProps) => {
   const theme = React.useContext(ThemeContext) || LIGHT_THEME;
   const currentLocale = userLocale || theme.currentLocale;
+  const monthsView = viewMode === 'MONTHS';
+  const yearsView = viewMode === 'YEARS';
 
   return (
-    <PanelWrapper monthsView={false} yearsView={false}>
-      <ButtonWithTooltip
-        disabled={false}
-        type={'left'}
-        onMouseDown={onPrevious}
-        renderContent={() => locale?.previousMonthText || theme.locales[currentLocale].calendar.previousMonthText}
-      />
+    <PanelWrapper monthsView={monthsView} yearsView={yearsView}>
+      {!monthsView && (
+        <ButtonWithTooltip
+          disabled={false}
+          type={'left'}
+          onMouseDown={onPrevious}
+          renderContent={() =>
+            yearsView
+              ? locale?.backwardText || theme.locales[currentLocale].calendar.backwardText
+              : locale?.previousMonthText || theme.locales[currentLocale].calendar.previousMonthText
+          }
+        />
+      )}
       <PanelDate>
         <MonthWithTooltip
           renderContent={() => locale?.selectMonthText || theme.locales[currentLocale].calendar.selectMonthText}
@@ -56,12 +66,18 @@ export const Panel = ({ date, userLocale, locale, onNext, onPrevious }: PanelPro
           {date.format('YYYY')}
         </YearWithTooltip>
       </PanelDate>
-      <ButtonWithTooltip
-        disabled={false}
-        type={'right'}
-        onMouseDown={onNext}
-        renderContent={() => locale?.nextMonthText || theme.locales[currentLocale].calendar.nextMonthText}
-      />
+      {!monthsView && (
+        <ButtonWithTooltip
+          disabled={false}
+          type={'right'}
+          onMouseDown={onNext}
+          renderContent={() =>
+            yearsView
+              ? locale?.forwardText || theme.locales[currentLocale].calendar.forwardText
+              : locale?.nextMonthText || theme.locales[currentLocale].calendar.nextMonthText
+          }
+        />
+      )}
     </PanelWrapper>
   );
 };

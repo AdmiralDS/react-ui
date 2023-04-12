@@ -19,6 +19,11 @@ export const getDayNamesList = (locale: string): string[] => {
   });
 };
 
+export const getMonthNamesList = (locale: string, format: 'long' | 'short' = 'long'): string[] => {
+  const globalLocaleData = dayjs.localeData();
+  return format === 'short' ? globalLocaleData.monthsShort() : globalLocaleData.months();
+};
+
 export const valid = (date: Dayjs | null): boolean => {
   return dayjs(date, 'DD.MM.YYYY', true).isValid();
 };
@@ -51,4 +56,10 @@ export const compareDates = (date1?: Dayjs | null, date2?: Dayjs | null): number
   if ((date2 === undefined || date2 === null) && date1 !== undefined && date1 !== null) return 1;
   // return diff in time between dates
   return date1 && date2 ? date1.diff(date2) : 0;
+};
+
+export const yearsRange = (date: Dayjs, yearCount: number) => {
+  const end = Math.ceil(date.year() / yearCount) * yearCount;
+  const start = end - (yearCount - 1);
+  return { start, end };
 };
