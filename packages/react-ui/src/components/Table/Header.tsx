@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { Header as HeaderComp } from './style';
 import { refSetter } from '#src/components/common/utils/refSetter';
-import { dragula } from './dragula';
+import { dragObserver } from './dragula';
 
 interface HeaderProps extends React.HTMLAttributes<HTMLDivElement> {
   dimension: 'xl' | 'l' | 'm' | 's';
@@ -14,7 +14,7 @@ export const Header = React.forwardRef<HTMLDivElement, HeaderProps>(({ children,
   React.useEffect(() => {
     const header = headerRef.current;
     if (header) {
-      const drake = dragula([header], {
+      const observer = dragObserver([header], {
         direction: 'horizontal',
         invalid: (el: any) => {
           return el.dataset.draggable == 'false';
@@ -28,7 +28,7 @@ export const Header = React.forwardRef<HTMLDivElement, HeaderProps>(({ children,
         },
       });
       return () => {
-        drake.destroy();
+        observer.unobserve();
       };
     }
   }, []);
