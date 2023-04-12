@@ -63,9 +63,9 @@ const ButtonsWrapper = styled.div`
   }
 `;
 
-const extendMixin = (mixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>) => css`
+const extendMixin = (mixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>, showPageNumberInput?: boolean) => css`
   width: auto;
-  min-width: 80px;
+  min-width: ${showPageNumberInput ? 80 : 68}px;
 
   ${mixin};
 `;
@@ -274,7 +274,9 @@ export const PaginationOne: React.FC<PaginationOneProps> = ({
             disabled={pageSizeSelectDisabled}
             aria-label={pageSizeSelectLabel(pageSize, totalItems)}
             dropMaxHeight={dropMaxHeight}
-            dropContainerCssMixin={pageSizeDropContainerStyle?.dropContainerCssMixin || dropContainerCssMixin}
+            dropContainerCssMixin={
+              pageSizeDropContainerStyle?.dropContainerCssMixin || extendMixin(dropContainerCssMixin)
+            }
             dropContainerClassName={pageSizeDropContainerStyle?.dropContainerClassName}
             dropContainerStyle={pageSizeDropContainerStyle?.dropContainerStyle}
             menuWidth={menuWidth}
@@ -304,7 +306,8 @@ export const PaginationOne: React.FC<PaginationOneProps> = ({
             aria-label={pageSelectLabel(page, totalPages)}
             dropMaxHeight={dropMaxHeight}
             dropContainerCssMixin={
-              pageNumberDropContainerStyle?.dropContainerCssMixin || extendMixin(dropContainerCssMixin)
+              pageNumberDropContainerStyle?.dropContainerCssMixin ||
+              extendMixin(dropContainerCssMixin, showPageNumberInput)
             }
             dropContainerClassName={pageNumberDropContainerStyle?.dropContainerClassName}
             dropContainerStyle={pageNumberDropContainerStyle?.dropContainerStyle}
