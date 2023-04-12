@@ -1,11 +1,10 @@
 import * as React from 'react';
 import type { Dayjs } from 'dayjs';
-import { Week } from '#src/components/CalendarTry/Week';
+import { Week } from '#src/components/CalendarTry/CalendarContent/Week';
 import type { CalendarViewMode } from '#src/components/CalendarTry/constants';
 
 export interface MonthProps {
   date: Dayjs;
-  selected?: Dayjs;
   renderCell: (date: Dayjs, viewMode: CalendarViewMode) => React.ReactNode;
 }
 

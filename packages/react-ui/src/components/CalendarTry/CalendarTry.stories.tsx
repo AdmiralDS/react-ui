@@ -7,7 +7,7 @@ import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes';
 import { CalendarTry } from '#src/components/CalendarTry/index';
 import type { CalendarViewMode } from '#src/components/CalendarTry/constants';
-import { DayCellWrapper } from '#src/components/CalendarTry/DayCell';
+import { DayCellWrapper } from '#src/components/CalendarTry/CalendarContent/DayCell';
 
 export default {
   title: 'Admiral-2.1/CalendarTry',

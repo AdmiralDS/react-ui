@@ -5,25 +5,18 @@ import 'dayjs/locale/ru';
 import styled, { ThemeContext } from 'styled-components';
 import { LIGHT_THEME } from '#src/components/themes';
 import { typography } from '#src/components/Typography';
-import { DayCell } from '#src/components/CalendarTry/DayCell';
+import { DayCell } from '#src/components/CalendarTry/CalendarContent/DayCell';
 import { Panel } from '#src/components/CalendarTry/Panel/Panel';
 import type { DateValidator } from '#src/components/CalendarTry/validator';
-import { DateCalendarView } from '#src/components/CalendarTry/DateCalendarView';
-import { YearsCalendarView } from '#src/components/CalendarTry/YearsCalendarView';
-import { YearCell } from '#src/components/CalendarTry/YearCell';
+import { YearCell } from '#src/components/CalendarTry/CalendarContent/YearCell';
 import type { CalendarViewMode } from '#src/components/CalendarTry/constants';
-import { MonthsCalendarView } from '#src/components/CalendarTry/MonthsCalendarView';
-import { MonthCell } from '#src/components/CalendarTry/MonthCell';
+import { MonthCell } from '#src/components/CalendarTry/CalendarContent/MonthCell';
+import { CalendarContent } from '#src/components/CalendarTry/CalendarContent/CalendarContent';
 
 const CALENDAR_WIDTH = 284;
 const YEARS_VIEW_PADDING = '20px 12px 16px';
 const MONTHS_VIEW_PADDING = '20px 16px 4px';
 const DAYS_VIEW_PADDING = '20px 12px 12px';
-
-/*type CalendarComponentProps = {
-  yearsView: boolean;
-  monthsView: boolean;
-};*/
 
 export const CalendarWidgetWrapper = styled.div<{ viewMode: CalendarViewMode }>`
   position: relative;
@@ -206,20 +199,10 @@ export const CalendarTry = React.forwardRef<HTMLDivElement, CalendarTryProps>(
       );
     };
 
-    const renderCalendarContent = (viewMode: CalendarViewMode) => {
-      if (viewMode === 'YEARS') {
-        return <YearsCalendarView date={viewDate} renderCell={renderCell || defaultRenderCell} />;
-      }
-      if (viewMode === 'MONTHS') {
-        return <MonthsCalendarView date={viewDate} renderCell={renderCell || defaultRenderCell} />;
-      }
-      return <DateCalendarView date={viewDate} renderCell={renderCell || defaultRenderCell} selected={selected} />;
-    };
-
     return currentLocale ? (
       <CalendarWidgetWrapper ref={ref} viewMode={viewMode}>
         {renderPanel()}
-        {renderCalendarContent(viewMode)}
+        <CalendarContent viewMode={viewMode} date={viewDate} renderCell={renderCell || defaultRenderCell} />
       </CalendarWidgetWrapper>
     ) : null;
   },

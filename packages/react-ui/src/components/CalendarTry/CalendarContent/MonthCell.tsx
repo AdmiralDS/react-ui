@@ -3,7 +3,7 @@ import type { MouseEvent } from 'react';
 import dayjs from 'dayjs';
 import type { Dayjs } from 'dayjs';
 import styled from 'styled-components';
-import { YearCellWrapper } from '#src/components/CalendarTry/YearCell';
+import { YearCellWrapper } from '#src/components/CalendarTry/CalendarContent/YearCell';
 import { setMonth, startOfMonth } from '#src/components/Calendar/date-utils';
 import { MonthComponent } from '#src/components/Calendar/styled/MonthComponent';
 import { capitalizeFirstLetter } from '#src/components/Calendar/constants';
