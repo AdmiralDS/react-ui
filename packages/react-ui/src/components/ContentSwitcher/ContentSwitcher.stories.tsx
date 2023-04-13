@@ -71,6 +71,13 @@ export default {
       options: ['l', 'm', 's'],
       control: { type: 'radio' },
     },
+    appearance: {
+      options: ['primary', 'secondary'],
+      control: { type: 'radio' },
+    },
+    children: {
+      control: false,
+    },
   },
 } as ComponentMeta<typeof ContentSwitcher>;
 
@@ -419,14 +426,18 @@ const Template: ComponentStory<typeof ContentSwitcher> = ({ dimension, className
   );
 };
 
-export const Example = ContentSwitcherDemo.bind({});
-export const ContentSwitcherWithIcon = ContentSwitcherWithIconDemo.bind({});
-export const ContentSwitcherIconOnly = ContentSwitcherIconOnlyDemo.bind({});
-export const ContentSwitcherWithBadge = ContentSwitcherWithBadgeDemo.bind({});
 export const Playground = Template.bind({});
-Example.storyName = 'Базовый пример';
-ContentSwitcherWithIcon.storyName = 'ContentSwitcher с иконками';
-ContentSwitcherIconOnly.storyName = 'ContentSwitcher только с иконками';
-ContentSwitcherWithBadge.storyName = 'ContentSwitcher с Badge';
 Playground.storyName = 'ContentSwitcher. Playground';
 Playground.args = {};
+
+export const Example = ContentSwitcherDemo.bind({});
+Example.storyName = 'Базовый пример';
+
+export const ContentSwitcherWithIcon = ContentSwitcherWithIconDemo.bind({});
+ContentSwitcherWithIcon.storyName = 'ContentSwitcher с иконками';
+
+export const ContentSwitcherIconOnly = ContentSwitcherIconOnlyDemo.bind({});
+ContentSwitcherIconOnly.storyName = 'ContentSwitcher только с иконками';
+
+export const ContentSwitcherWithBadge = ContentSwitcherWithBadgeDemo.bind({});
+ContentSwitcherWithBadge.storyName = 'ContentSwitcher с Badge';
