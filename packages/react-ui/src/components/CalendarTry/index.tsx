@@ -12,6 +12,7 @@ import { YearCell } from '#src/components/CalendarTry/CalendarContent/YearCell';
 import type { CalendarViewMode } from '#src/components/CalendarTry/constants';
 import { MonthCell } from '#src/components/CalendarTry/CalendarContent/MonthCell';
 import { CalendarContent } from '#src/components/CalendarTry/CalendarContent/CalendarContent';
+import {PickerTypeMode} from "#src/components/CalendarTry/constants";
 
 const CALENDAR_WIDTH = 284;
 const YEARS_VIEW_PADDING = '20px 12px 16px';
@@ -36,6 +37,7 @@ export const CalendarWidgetWrapper = styled.div<{ viewMode: CalendarViewMode }>`
 
 export interface CalendarTryProps {
   viewMode?: CalendarViewMode;
+  pickerType?: PickerTypeMode;
   selected?: Dayjs;
   minDate?: Dayjs;
   maxDate?: Dayjs;
@@ -63,6 +65,7 @@ export const CalendarTry = React.forwardRef<HTMLDivElement, CalendarTryProps>(
   (
     {
       viewMode = 'DATES',
+      pickerType = 'DATE_MONTH_YEAR',
       selected,
       minDate,
       maxDate,
@@ -190,6 +193,7 @@ export const CalendarTry = React.forwardRef<HTMLDivElement, CalendarTryProps>(
       return (
         <Panel
           viewMode={viewMode}
+          pickerType={pickerType}
           date={viewDate}
           userLocale={currentLocale}
           locale={locale}

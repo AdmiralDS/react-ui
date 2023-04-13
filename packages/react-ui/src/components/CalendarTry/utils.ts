@@ -40,8 +40,14 @@ const unitDifference = (dateLeft: Dayjs, dateRight: Dayjs, unit: ManipulateType 
   return dateLeft.diff(dateRight, unit);
 };
 
-const differenceDays = (dateLeft: Dayjs, dateRight: Dayjs) => {
+export const differenceDays = (dateLeft: Dayjs, dateRight: Dayjs) => {
   return unitDifference(dateLeft, dateRight, 'day');
+};
+export const differenceMonths = (dateLeft: Dayjs, dateRight: Dayjs): number => {
+  return unitDifference(dateLeft, dateRight, 'month');
+};
+export const differenceYears = (dateLeft: Dayjs, dateRight: Dayjs): number => {
+  return unitDifference(dateLeft, dateRight, 'year');
 };
 
 export const outOfBounds = (day: Dayjs, minDate?: Dayjs | null, maxDate?: Dayjs | null) =>

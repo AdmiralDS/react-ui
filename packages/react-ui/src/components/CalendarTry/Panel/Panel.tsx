@@ -1,21 +1,15 @@
 import * as React from 'react';
 import type { MouseEvent } from 'react';
 import type { Dayjs } from 'dayjs';
-import { capitalizeFirstLetter } from '#src/components/CalendarTry/utils';
-import { Month, PanelDate, Year } from '#src/components/CalendarTry/Panel/PanelDate';
-import { PanelWrapper } from '#src/components/CalendarTry/Panel/PanelWrapper';
-import { TooltipHoc } from '#src/components/TooltipHOC';
-import { Button } from '#src/components/CalendarTry/Panel/PanelButton';
 import { ThemeContext } from 'styled-components';
 import { LIGHT_THEME } from '#src/components/themes';
-import type { CalendarViewMode } from '#src/components/CalendarTry/constants';
-
-const MonthWithTooltip = TooltipHoc(Month);
-const YearWithTooltip = TooltipHoc(Year);
-const ButtonWithTooltip = TooltipHoc(Button);
+import { PanelWrapper } from '#src/components/CalendarTry/Panel/PanelWrapper';
+import type { CalendarViewMode, PickerTypeMode } from '#src/components/CalendarTry/constants';
+import { DateMonthYearPanel } from '#src/components/CalendarTry/Panel/PanelTypes';
 
 interface PanelProps {
-  viewMode?: CalendarViewMode;
+  viewMode: CalendarViewMode;
+  pickerType: PickerTypeMode;
   date: Dayjs;
   userLocale?: string;
   locale?: {
@@ -32,50 +26,22 @@ interface PanelProps {
   onPrevious(event: MouseEvent<HTMLButtonElement>): void;
 }
 
-export const Panel = ({ viewMode, date, userLocale, locale, onNext, onPrevious }: PanelProps) => {
+export const Panel = ({ viewMode, pickerType, date, userLocale, locale, onNext, onPrevious }: PanelProps) => {
   const theme = React.useContext(ThemeContext) || LIGHT_THEME;
-  const currentLocale = userLocale || theme.currentLocale;
+  const defineLocale = userLocale || theme.currentLocale;
+  const currentLocale = locale || theme.locales[defineLocale].calendar;
   const monthsView = viewMode === 'MONTHS';
   const yearsView = viewMode === 'YEARS';
 
   return (
     <PanelWrapper monthsView={monthsView} yearsView={yearsView}>
-      {!monthsView && (
-        <ButtonWithTooltip
-          disabled={false}
-          type={'left'}
-          onMouseDown={onPrevious}
-          renderContent={() =>
-            yearsView
-              ? locale?.backwardText || theme.locales[currentLocale].calendar.backwardText
-              : locale?.previousMonthText || theme.locales[currentLocale].calendar.previousMonthText
-          }
-        />
-      )}
-      <PanelDate>
-        <MonthWithTooltip
-          renderContent={() => locale?.selectMonthText || theme.locales[currentLocale].calendar.selectMonthText}
-          view={false}
-        >
-          {capitalizeFirstLetter(date.format('MMMM'))}
-        </MonthWithTooltip>
-        <YearWithTooltip
-          renderContent={() => locale?.selectYearText || theme.locales[currentLocale].calendar.selectYearText}
-          view={false}
-        >
-          {date.format('YYYY')}
-        </YearWithTooltip>
-      </PanelDate>
-      {!monthsView && (
-        <ButtonWithTooltip
-          disabled={false}
-          type={'right'}
-          onMouseDown={onNext}
-          renderContent={() =>
-            yearsView
-              ? locale?.forwardText || theme.locales[currentLocale].calendar.forwardText
-              : locale?.nextMonthText || theme.locales[currentLocale].calendar.nextMonthText
-          }
+      {pickerType === 'DATE_MONTH_YEAR' && (
+        <DateMonthYearPanel
+          viewMode={viewMode}
+          date={date}
+          locale={currentLocale}
+          onNext={onNext}
+          onPrevious={onPrevious}
         />
       )}
     </PanelWrapper>
