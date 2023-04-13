@@ -29,11 +29,6 @@ function defaultFormatter(isoValues: string[], joinString = ' - '): string {
     .join(joinString);
 }
 
-export const StyledCalendar = styled(Calendar)`
-  box-shadow: none;
-  border-radius: 0;
-`;
-
 export interface DateInputProps extends TextInputProps, Omit<CalendarPropType, 'onChange'> {
   /** Устанавливает тип ввода даты или интервала даты*/
   type?: 'date' | 'date-range';
@@ -212,6 +207,11 @@ export const DateInput = React.forwardRef<HTMLInputElement, DateInputProps>(
     );
   },
 );
+
+export const StyledCalendar = styled(Calendar)`
+  box-shadow: none;
+  border-radius: 0;
+`;
 
 DateInput.defaultProps = { dimension: 'm' };
 DateInput.displayName = 'DateInput';
