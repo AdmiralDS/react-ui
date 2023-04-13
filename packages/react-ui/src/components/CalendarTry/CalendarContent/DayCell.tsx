@@ -84,6 +84,7 @@ export const DayCell = ({ date, selected, disabled, onSelectDate, isHidden }: Da
 
   return (
     <DayCellWrapper
+      key={date.valueOf()}
       today={date.isSame(dayjs(), 'day')}
       outsideMonth={isHidden}
       selected={date.isSame(selected, 'date')}

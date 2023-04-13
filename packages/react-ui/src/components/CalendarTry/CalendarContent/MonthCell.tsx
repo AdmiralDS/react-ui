@@ -26,17 +26,16 @@ const MonthCellCWrapper = styled(YearCellWrapper)`
 
 export const MonthCell = ({ date, selected, validator, onSelectMonth }: MonthCellProps) => {
   const disabled = !!validator?.invalidMonth(date.month(), date.year());
-  const month = date.month();
   const handleClick = (e: any) => {
     e.preventDefault();
-    const day = date.set('month', month).startOf('month');
+    const day = date.startOf('month');
     !disabled && onSelectMonth && onSelectMonth(day, e);
   };
   return (
     <MonthComponent
-      key={month}
-      today={month === dayjs().month()}
-      selected={!!selected && month === selected.month()}
+      key={date.valueOf()}
+      today={date.isSame(dayjs(), 'month')}
+      selected={!!selected && date.isSame(selected, 'month')}
       disabled={disabled}
       onMouseDown={handleClick}
     >

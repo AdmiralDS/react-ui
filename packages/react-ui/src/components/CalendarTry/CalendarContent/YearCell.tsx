@@ -71,22 +71,21 @@ export const YearCellWrapper = styled.div<YearCellWrapperProps>`
 `;
 
 export const YearCell = ({ date, selected, validator, onSelectYear }: YearCellProps) => {
-  const year = date.year();
-  const disabled = !!validator?.invalidYear(year);
+  const disabled = !!validator?.invalidYear(date.year());
   const handleClick = (e: any) => {
     e.preventDefault();
-    const day = date.set('year', year).startOf('year');
+    const day = date.startOf('year');
     !disabled && onSelectYear && onSelectYear(day, e);
   };
   return (
     <YearCellWrapper
-      key={year}
-      today={year === dayjs().year()}
-      selected={!!selected && year === selected.year()}
+      key={date.valueOf()}
+      today={date.isSame(dayjs(), 'year')}
+      selected={!!selected && date.isSame(selected, 'year')}
       disabled={disabled}
       onMouseDown={handleClick}
     >
-      {year}
+      {date.format('YYYY')}
     </YearCellWrapper>
   );
 };
