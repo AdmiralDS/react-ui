@@ -12,7 +12,8 @@ import { YearCell } from '#src/components/CalendarTry/CalendarContent/YearCell';
 import type { CalendarViewMode } from '#src/components/CalendarTry/constants';
 import { MonthCell } from '#src/components/CalendarTry/CalendarContent/MonthCell';
 import { CalendarContent } from '#src/components/CalendarTry/CalendarContent/CalendarContent';
-import {PickerTypeMode} from "#src/components/CalendarTry/constants";
+import type { PickerTypeMode } from '#src/components/CalendarTry/constants';
+import { DEFAULT_YEAR_COUNT } from '#src/components/CalendarTry/constants';
 
 const CALENDAR_WIDTH = 284;
 const YEARS_VIEW_PADDING = '20px 12px 16px';
@@ -108,6 +109,27 @@ export const CalendarTry = React.forwardRef<HTMLDivElement, CalendarTryProps>(
     }
 
     const [viewDate, setViewDate] = React.useState(getInitialViewDate());
+    // отображаем выбор года
+    const [yearsView, setYearsView] = React.useState(false);
+    // отображаем выбор месяца
+    const [monthsView, setMonthsView] = React.useState(false);
+    const [datesView, setDatesView] = React.useState(false);
+
+    React.useEffect(() => {
+      if (viewMode === 'YEARS') {
+        setYearsView(true);
+        setMonthsView(false);
+        setDatesView(false);
+      } else if (viewMode === 'MONTHS') {
+        setYearsView(false);
+        setMonthsView(true);
+        setDatesView(false);
+      } else {
+        setYearsView(false);
+        setMonthsView(false);
+        setDatesView(true);
+      }
+    }, [viewMode, pickerType]);
 
     React.useEffect(() => {
       if (onViewDateChange) {
@@ -189,6 +211,21 @@ export const CalendarTry = React.forwardRef<HTMLDivElement, CalendarTryProps>(
         return decrease;
       });
 
+    const increaseYear = () =>
+      setViewDate((date) => {
+        const increase = date.add(yearsView ? DEFAULT_YEAR_COUNT : 1, 'year');
+        console.log(increase.format('DD-MM-YYYY'));
+        /*onDateIncreaseDecrease && onDateIncreaseDecrease(increase);*/
+        return increase;
+      });
+    const decreaseYear = () =>
+      setViewDate((date) => {
+        const decrease = date.subtract(yearsView ? DEFAULT_YEAR_COUNT : 1, 'year');
+        console.log(decrease.format('DD-MM-YYYY'));
+        /*onDateIncreaseDecrease && onDateIncreaseDecrease(decrease);*/
+        return decrease;
+      });
+
     const renderPanel = () => {
       return (
         <Panel
@@ -197,8 +234,8 @@ export const CalendarTry = React.forwardRef<HTMLDivElement, CalendarTryProps>(
           date={viewDate}
           userLocale={currentLocale}
           locale={locale}
-          onNext={increaseMonth}
-          onPrevious={decreaseMonth}
+          onNext={datesView ? increaseMonth : increaseYear}
+          onPrevious={datesView ? decreaseMonth : decreaseYear}
         />
       );
     };
