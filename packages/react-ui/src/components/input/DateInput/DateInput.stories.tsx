@@ -60,7 +60,11 @@ export default {
       control: { type: 'boolean' },
     },
     range: {
-      control: { type: 'boolean' },
+      control: false,
+    },
+    type: {
+      options: ['date', 'date-range'],
+      control: { type: 'radio' },
     },
     placeholder: {
       type: 'string',
@@ -71,11 +75,32 @@ export default {
     maxDate: {
       control: false,
     },
+    containerRef: {
+      control: false,
+    },
+    handleInput: {
+      control: false,
+    },
+    icon: {
+      control: false,
+    },
+    icons: {
+      control: false,
+    },
+    calendarRef: {
+      control: false,
+    },
     themeBorderKind: {
       options: ALL_BORDER_RADIUS_VALUES,
       control: { type: 'radio' },
     },
     skeleton: {
+      control: { type: 'boolean' },
+    },
+    showTooltip: {
+      control: { type: 'boolean' },
+    },
+    isLoading: {
       control: { type: 'boolean' },
     },
     locale: {
