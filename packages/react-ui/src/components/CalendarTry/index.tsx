@@ -48,7 +48,7 @@ export interface CalendarTryProps {
   onSelectYear?: (date: Dayjs) => void;
   disabledDate?: (date: Dayjs) => boolean;
   isHiddenDate?: (date: Dayjs) => boolean;
-  onPanelChange?: (date: Dayjs) => void;
+  onViewDateChange?: (date: Dayjs) => void;
   userLocale?: string;
   locale?: {
     backwardText?: string;
@@ -77,7 +77,7 @@ export const CalendarTry = React.forwardRef<HTMLDivElement, CalendarTryProps>(
       onSelectDate,
       onSelectMonth,
       onSelectYear,
-      onPanelChange,
+      onViewDateChange,
       locale,
     },
     ref,
@@ -110,8 +110,8 @@ export const CalendarTry = React.forwardRef<HTMLDivElement, CalendarTryProps>(
     const [viewDate, setViewDate] = React.useState(getInitialViewDate());
 
     React.useEffect(() => {
-      if (onPanelChange) {
-        onPanelChange(viewDate);
+      if (onViewDateChange) {
+        onViewDateChange(viewDate);
       }
     }, [viewDate]);
 

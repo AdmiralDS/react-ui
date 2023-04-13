@@ -126,7 +126,7 @@ const Template1: ComponentStory<typeof CalendarTry> = (args) => {
       <CalendarTry
         selected={selected1}
         renderCell={customRenderDay}
-        onPanelChange={handlePanelChange}
+        onViewDateChange={handlePanelChange}
         userLocale="en"
       />
     </div>
