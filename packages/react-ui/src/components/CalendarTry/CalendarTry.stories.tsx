@@ -25,29 +25,18 @@ export default {
     },
   },
   argTypes: {
-    range: {
-      control: { type: 'boolean' },
+    viewMode: {
+      options: ['DATES', 'MONTHS', 'YEARS'],
+      control: { type: 'radio' },
     },
-    currentActiveViewImportant: {
-      control: { type: 'boolean' },
-    },
-    currentActiveView: {
-      options: ['YEAR', 'MONTH', 'DAY'],
+    pickerType: {
+      options: ['DATE_MONTH_YEAR', 'MONTH_YEAR', 'YEAR'],
       control: { type: 'radio' },
     },
     validator: {
       control: false,
     },
-    tooltipContainer: {
-      control: false,
-    },
-    startDate: {
-      control: false,
-    },
     selected: {
-      control: false,
-    },
-    endDate: {
       control: false,
     },
     minDate: {
@@ -55,9 +44,6 @@ export default {
     },
     maxDate: {
       control: false,
-    },
-    highlightWeekend: {
-      control: { type: 'boolean' },
     },
     themeBorderKind: {
       options: ALL_BORDER_RADIUS_VALUES,
@@ -76,6 +62,7 @@ const StyledDay = styled(DayCellWrapper)`
 `;
 
 const Template1: ComponentStory<typeof CalendarTry> = (args) => {
+  const [viewMode, setViewMode] = React.useState<CalendarViewMode>(args.viewMode || 'DATES');
   const [selected1, setSelected1] = React.useState<Dayjs>(dayjs());
   const [selected2, setSelected2] = React.useState<Dayjs>(dayjs());
   const [viewDate2, setViewDate2] = React.useState<Dayjs>(selected2);
@@ -85,16 +72,26 @@ const Template1: ComponentStory<typeof CalendarTry> = (args) => {
   };
 
   const handleDayClick1 = (date: Dayjs) => {
-    console.log(`click on ${date.format('DD MMM')}`);
+    console.log(`click on ${date.format('DD MMM YYYY')}`);
     setSelected1(date);
   };
 
+  const handleMonthClick1 = (date: Dayjs) => {
+    console.log(`click on ${date.format('DD MMM YYYY')}`);
+    setSelected1((selected) => selected.month(date.month()));
+  };
+
+  const handleYearClick1 = (date: Dayjs) => {
+    console.log(`click on ${date.format('DD MMM YYYY')}`);
+    setSelected1((selected) => selected.year(date.year()));
+  };
+
   const handleDayClick2 = (date: Dayjs) => {
-    console.log(`click on ${date.format('DD MMM')}`);
+    console.log(`click on ${date.format('DD MMM YYYY')}`);
     setSelected2(date);
   };
 
-  const customRenderDay = (date: Dayjs, viewMode: CalendarViewMode) => {
+  const customRenderDay = (date: Dayjs) => {
     return (
       <StyledDay
         key={date.valueOf()}
@@ -109,24 +106,29 @@ const Template1: ComponentStory<typeof CalendarTry> = (args) => {
     );
   };
 
-  const handlePanelChange = (date: Dayjs) => {
+  const handleViewDateChange = (date: Dayjs) => {
     setViewDate2(date);
   };
+
+  const handleViewModeChange = (viewMode: CalendarViewMode) => setViewMode(viewMode);
 
   return (
     <div style={{ display: 'flex' }}>
       <CalendarTry
         pickerType={args.pickerType}
-        viewMode={args.viewMode}
+        viewMode={viewMode}
+        onViewModeChange={handleViewModeChange}
         selected={selected1}
         onSelectDate={handleDayClick1}
+        /*onSelectMonth={handleMonthClick1}
+        onSelectYear={handleYearClick1}*/
         disabledDate={filterDate}
       />
       <Separator />
       <CalendarTry
         selected={selected1}
-        renderCell={customRenderDay}
-        onViewDateChange={handlePanelChange}
+        renderDateCell={customRenderDay}
+        onViewDateChange={handleViewDateChange}
         userLocale="en"
       />
     </div>

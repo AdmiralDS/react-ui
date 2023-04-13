@@ -11,9 +11,11 @@ import type { DateValidator } from '#src/components/CalendarTry/validator';
 import { YearCell } from '#src/components/CalendarTry/CalendarContent/YearCell';
 import type { CalendarViewMode } from '#src/components/CalendarTry/constants';
 import { MonthCell } from '#src/components/CalendarTry/CalendarContent/MonthCell';
-import { CalendarContent } from '#src/components/CalendarTry/CalendarContent/CalendarContent';
 import type { PickerTypeMode } from '#src/components/CalendarTry/constants';
 import { DEFAULT_YEAR_COUNT } from '#src/components/CalendarTry/constants';
+import { YearsCalendarView } from '#src/components/CalendarTry/CalendarContent/YearsCalendarView';
+import { MonthsCalendarView } from '#src/components/CalendarTry/CalendarContent/MonthsCalendarView';
+import { DateCalendarView } from '#src/components/CalendarTry/CalendarContent/DateCalendarView';
 
 const CALENDAR_WIDTH = 284;
 const YEARS_VIEW_PADDING = '20px 12px 16px';
@@ -38,11 +40,14 @@ export const CalendarWidgetWrapper = styled.div<{ viewMode: CalendarViewMode }>`
 
 export interface CalendarTryProps {
   viewMode?: CalendarViewMode;
+  onViewModeChange?: (viewMode: CalendarViewMode) => void;
   pickerType?: PickerTypeMode;
   selected?: Dayjs;
   minDate?: Dayjs;
   maxDate?: Dayjs;
-  renderCell?: (date: Dayjs, viewMode: CalendarViewMode) => React.ReactNode;
+  renderDateCell?: (date: Dayjs) => React.ReactNode;
+  renderMonthCell?: (date: Dayjs) => React.ReactNode;
+  renderYearCell?: (date: Dayjs) => React.ReactNode;
   validator?: DateValidator;
   onSelectDate?: (date: Dayjs) => void;
   onSelectMonth?: (date: Dayjs) => void;
@@ -66,11 +71,14 @@ export const CalendarTry = React.forwardRef<HTMLDivElement, CalendarTryProps>(
   (
     {
       viewMode = 'DATES',
+      onViewModeChange,
       pickerType = 'DATE_MONTH_YEAR',
       selected,
       minDate,
       maxDate,
-      renderCell,
+      renderDateCell,
+      renderMonthCell,
+      renderYearCell,
       validator,
       disabledDate,
       isHiddenDate,
@@ -109,27 +117,6 @@ export const CalendarTry = React.forwardRef<HTMLDivElement, CalendarTryProps>(
     }
 
     const [viewDate, setViewDate] = React.useState(getInitialViewDate());
-    // отображаем выбор года
-    const [yearsView, setYearsView] = React.useState(false);
-    // отображаем выбор месяца
-    const [monthsView, setMonthsView] = React.useState(false);
-    const [datesView, setDatesView] = React.useState(false);
-
-    React.useEffect(() => {
-      if (viewMode === 'YEARS') {
-        setYearsView(true);
-        setMonthsView(false);
-        setDatesView(false);
-      } else if (viewMode === 'MONTHS') {
-        setYearsView(false);
-        setMonthsView(true);
-        setDatesView(false);
-      } else {
-        setYearsView(false);
-        setMonthsView(false);
-        setDatesView(true);
-      }
-    }, [viewMode, pickerType]);
 
     React.useEffect(() => {
       if (onViewDateChange) {
@@ -149,53 +136,62 @@ export const CalendarTry = React.forwardRef<HTMLDivElement, CalendarTryProps>(
       return !date.isSame(viewDate, 'month');
     };
 
+    const changeYear = (year: number) => setViewDate((date) => date.year(year));
+    const changeMonth = (month: number) => setViewDate((date) => date.month(month));
+
     const handleYearClick = (date: Dayjs) => {
-      /*changeYear(date.getFullYear());
-      !currentActiveViewImportant && setYearsView(false);*/
+      changeYear(date.year());
+      /*!currentActiveViewImportant && setYearsView(false);*/
+      if (pickerType === 'DATE_MONTH_YEAR') {
+        onViewModeChange?.('DATES');
+      } else if (pickerType === 'MONTH_YEAR') {
+        onViewModeChange?.('MONTHS');
+      }
       onSelectYear && onSelectYear(date);
     };
 
     const handleMonthClick = (date: Dayjs) => {
-      /*changeMonth(date.getMonth());
-      !currentActiveViewImportant && setMonthsView(false);*/
+      changeMonth(date.month());
+      /*!currentActiveViewImportant && setMonthsView(false);*/
+      if (pickerType === 'DATE_MONTH_YEAR') {
+        onViewModeChange?.('DATES');
+      }
       onSelectMonth && onSelectMonth(date);
     };
 
-    const defaultRenderCell = (date: Dayjs, viewMode: CalendarViewMode) => {
-      if (viewMode === 'DATES') {
-        return (
-          <DayCell
-            key={date.valueOf()}
-            date={date}
-            selected={selected}
-            disabled={disabledDate?.(date)}
-            onSelectDate={onSelectDate}
-            isHidden={isHiddenDate?.(date) || defaultIsHidden(date)}
-          />
-        );
-      }
-      if (viewMode === 'MONTHS') {
-        return (
-          <MonthCell
-            key={date.valueOf()}
-            date={date}
-            selected={selected}
-            validator={validator}
-            onSelectMonth={handleMonthClick}
-          />
-        );
-      }
-      if (viewMode === 'YEARS') {
-        return (
-          <YearCell
-            key={date.valueOf()}
-            date={date}
-            selected={selected}
-            validator={validator}
-            onSelectYear={handleYearClick}
-          />
-        );
-      }
+    const defaultRenderDateCell = (date: Dayjs) => {
+      return (
+        <DayCell
+          key={date.valueOf()}
+          date={date}
+          selected={selected}
+          disabled={disabledDate?.(date)}
+          onSelectDate={onSelectDate}
+          isHidden={isHiddenDate?.(date) || defaultIsHidden(date)}
+        />
+      );
+    };
+    const defaultRenderMonthCell = (date: Dayjs) => {
+      return (
+        <MonthCell
+          key={date.valueOf()}
+          date={date}
+          selected={selected}
+          validator={validator}
+          onSelectMonth={handleMonthClick}
+        />
+      );
+    };
+    const defaultRenderYearCell = (date: Dayjs) => {
+      return (
+        <YearCell
+          key={date.valueOf()}
+          date={date}
+          selected={selected}
+          validator={validator}
+          onSelectYear={handleYearClick}
+        />
+      );
     };
 
     const increaseMonth = () =>
@@ -213,14 +209,14 @@ export const CalendarTry = React.forwardRef<HTMLDivElement, CalendarTryProps>(
 
     const increaseYear = () =>
       setViewDate((date) => {
-        const increase = date.add(yearsView ? DEFAULT_YEAR_COUNT : 1, 'year');
+        const increase = date.add(viewMode === 'YEARS' ? DEFAULT_YEAR_COUNT : 1, 'year');
         console.log(increase.format('DD-MM-YYYY'));
         /*onDateIncreaseDecrease && onDateIncreaseDecrease(increase);*/
         return increase;
       });
     const decreaseYear = () =>
       setViewDate((date) => {
-        const decrease = date.subtract(yearsView ? DEFAULT_YEAR_COUNT : 1, 'year');
+        const decrease = date.subtract(viewMode === 'YEARS' ? DEFAULT_YEAR_COUNT : 1, 'year');
         console.log(decrease.format('DD-MM-YYYY'));
         /*onDateIncreaseDecrease && onDateIncreaseDecrease(decrease);*/
         return decrease;
@@ -234,16 +230,27 @@ export const CalendarTry = React.forwardRef<HTMLDivElement, CalendarTryProps>(
           date={viewDate}
           userLocale={currentLocale}
           locale={locale}
-          onNext={datesView ? increaseMonth : increaseYear}
-          onPrevious={datesView ? decreaseMonth : decreaseYear}
+          onNext={viewMode === 'DATES' ? increaseMonth : increaseYear}
+          onPrevious={viewMode === 'DATES' ? decreaseMonth : decreaseYear}
         />
       );
+    };
+    const renderContent = () => {
+      switch (viewMode) {
+        case 'YEARS':
+          return <YearsCalendarView date={viewDate} renderCell={renderYearCell || defaultRenderYearCell} />;
+        case 'MONTHS':
+          return <MonthsCalendarView date={viewDate} renderCell={renderMonthCell || defaultRenderMonthCell} />;
+        case 'DATES':
+        default:
+          return <DateCalendarView date={viewDate} renderCell={renderDateCell || defaultRenderDateCell} />;
+      }
     };
 
     return currentLocale ? (
       <CalendarWidgetWrapper ref={ref} viewMode={viewMode}>
         {renderPanel()}
-        <CalendarContent viewMode={viewMode} date={viewDate} renderCell={renderCell || defaultRenderCell} />
+        {renderContent()}
       </CalendarWidgetWrapper>
     ) : null;
   },
