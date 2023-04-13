@@ -3,9 +3,15 @@ import type { MouseEvent } from 'react';
 import type { Dayjs } from 'dayjs';
 import { TooltipHoc } from '#src/components/TooltipHOC';
 import { Button } from '#src/components/CalendarTry/Panel/PanelButton';
-import { Month, PanelDate, Year } from '#src/components/CalendarTry/Panel/PanelDate';
-import { capitalizeFirstLetter, differenceMonths, differenceYears } from '#src/components/CalendarTry/utils';
+import { Month, PanelDate, Year, YearsRange } from '#src/components/CalendarTry/Panel/PanelDate';
+import {
+  capitalizeFirstLetter,
+  differenceMonths,
+  differenceYears,
+  yearsRange,
+} from '#src/components/CalendarTry/utils';
 import type { CalendarViewMode } from '#src/components/CalendarTry/constants';
+import { DEFAULT_YEAR_COUNT } from '#src/components/CalendarTry/constants';
 
 const MonthWithTooltip = TooltipHoc(Month);
 const YearWithTooltip = TooltipHoc(Year);
@@ -76,5 +82,61 @@ export const DateMonthYearPanel = ({
     </>
   );
 };
-export const MonthYearPanel = () => {};
-export const YearsPanel = () => {};
+export const MonthYearPanel = ({ viewMode, date, minDate, maxDate, locale, onNext, onPrevious }: PanelTypesProps) => {
+  const yearsView = viewMode === 'YEARS';
+  const previousDisabled = !!minDate && differenceYears(minDate, date.subtract(1, 'year')) > 0;
+  const nextDisabled = !!maxDate && differenceYears(date.add(1, 'year'), maxDate) > 0;
+  return (
+    <>
+      {!previousDisabled && (
+        <ButtonWithTooltip
+          disabled={false}
+          type={'left'}
+          onMouseDown={onPrevious}
+          renderContent={() => locale.backwardText}
+        />
+      )}
+      <PanelDate>
+        <YearWithTooltip renderContent={() => (yearsView ? locale.returnText : locale.selectYearText)} view={false}>
+          {date.format('YYYY')}
+        </YearWithTooltip>
+      </PanelDate>
+      {!nextDisabled && (
+        <ButtonWithTooltip
+          disabled={false}
+          type={'right'}
+          onMouseDown={onNext}
+          renderContent={() => locale.forwardText}
+        />
+      )}
+    </>
+  );
+};
+export const YearPanel = ({ date, minDate, maxDate, locale, onNext, onPrevious }: PanelTypesProps) => {
+  const { start, end } = yearsRange(date, DEFAULT_YEAR_COUNT);
+  const previousDisabled = !!minDate && differenceYears(minDate, date.subtract(1, 'year')) > 0;
+  const nextDisabled = !!maxDate && differenceYears(date.add(1, 'year'), maxDate) > 0;
+  return (
+    <>
+      {!previousDisabled && (
+        <ButtonWithTooltip
+          disabled={false}
+          type={'left'}
+          onMouseDown={onPrevious}
+          renderContent={() => locale.backwardText}
+        />
+      )}
+      <PanelDate>
+        <YearsRange>{`${start} – ${end}`}</YearsRange>
+      </PanelDate>
+      {!nextDisabled && (
+        <ButtonWithTooltip
+          disabled={false}
+          type={'right'}
+          onMouseDown={onNext}
+          renderContent={() => locale.forwardText}
+        />
+      )}
+    </>
+  );
+};

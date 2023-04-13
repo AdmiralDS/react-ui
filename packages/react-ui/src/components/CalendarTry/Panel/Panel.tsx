@@ -5,7 +5,7 @@ import { ThemeContext } from 'styled-components';
 import { LIGHT_THEME } from '#src/components/themes';
 import { PanelWrapper } from '#src/components/CalendarTry/Panel/PanelWrapper';
 import type { CalendarViewMode, PickerTypeMode } from '#src/components/CalendarTry/constants';
-import { DateMonthYearPanel } from '#src/components/CalendarTry/Panel/PanelTypes';
+import { DateMonthYearPanel, MonthYearPanel, YearPanel } from '#src/components/CalendarTry/Panel/PanelTypes';
 
 interface PanelProps {
   viewMode: CalendarViewMode;
@@ -43,6 +43,18 @@ export const Panel = ({ viewMode, pickerType, date, userLocale, locale, onNext, 
           onNext={onNext}
           onPrevious={onPrevious}
         />
+      )}
+      {pickerType === 'MONTH_YEAR' && (
+        <MonthYearPanel
+          viewMode={viewMode}
+          date={date}
+          locale={currentLocale}
+          onNext={onNext}
+          onPrevious={onPrevious}
+        />
+      )}
+      {pickerType === 'YEAR' && (
+        <YearPanel viewMode={viewMode} date={date} locale={currentLocale} onNext={onNext} onPrevious={onPrevious} />
       )}
     </PanelWrapper>
   );

@@ -115,7 +115,13 @@ const Template1: ComponentStory<typeof CalendarTry> = (args) => {
 
   return (
     <div style={{ display: 'flex' }}>
-      <CalendarTry viewMode="MONTHS" selected={selected1} onSelectDate={handleDayClick1} disabledDate={filterDate} />
+      <CalendarTry
+        pickerType={args.pickerType}
+        viewMode={args.viewMode}
+        selected={selected1}
+        onSelectDate={handleDayClick1}
+        disabledDate={filterDate}
+      />
       <Separator />
       <CalendarTry
         selected={selected1}
