@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import * as React from 'react';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
-import { ProgressHeader } from './index';
 import styled from 'styled-components';
+import { ProgressHeader } from '#src/components/ProgressHeader/index';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -18,7 +18,7 @@ const Description = () => (
 );
 
 export default {
-  title: 'Admiral-2.1/ProgressHeader',
+  title: 'Admiral-2.1/ProgressHeader/Base',
   decorators: [withDesign],
   component: ProgressHeader,
   parameters: {
@@ -33,50 +33,32 @@ export default {
       url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=37%3A24985',
     },
   },
-  args: {
-    appearance: 'primary',
-  },
   argTypes: {
     appearance: {
       options: ['primary', 'error'],
       control: { type: 'radio' },
     },
+    percent: {
+      control: { type: 'number' },
+    },
   },
 } as ComponentMeta<typeof ProgressHeader>;
+
+const StyledProgressHeader = styled(ProgressHeader)`
+  bottom: 90%;
+`;
 
 const Template1: ComponentStory<typeof ProgressHeader> = ({ ...args }) => {
   return (
     <>
-      <ProgressHeader {...args} percent={args.percent} role="alert" aria-live="assertive" />
-    </>
-  );
-};
-
-const Template2: ComponentStory<typeof ProgressHeader> = ({ ...args }) => {
-  const [tik, setTick] = useState(0);
-
-  useEffect(() => {
-    const counter = () => setTick((prev) => prev + 1);
-    const timerId = setTimeout(counter, 1000);
-    if (tik >= 20) {
-      clearTimeout(timerId);
-    }
-    return () => {
-      clearTimeout(timerId);
-    };
-  }, [tik]);
-
-  return (
-    <>
-      <ProgressHeader {...args} percent={args.percent || tik} role="alert" aria-live="assertive" />
+      <StyledProgressHeader {...args} percent={args.percent} role="alert" aria-live="assertive" />
     </>
   );
 };
 
 export const Progress = Template1.bind({});
-export const ProgressAnimation = Template2.bind({});
 Progress.storyName = 'Базовый пример';
-ProgressAnimation.storyName = 'Прогресс бар с анимацией';
 Progress.args = {
+  appearance: 'primary',
   percent: 50,
 };
