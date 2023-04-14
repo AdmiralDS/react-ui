@@ -3,15 +3,14 @@ import type { Dayjs } from 'dayjs';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ru';
 import styled, { ThemeContext } from 'styled-components';
-import { LIGHT_THEME } from '#src/components/themes';
+import { LIGHT_THEME, mediumGroupBorderRadius } from '#src/components/themes';
 import { typography } from '#src/components/Typography';
 import { DayCell } from '#src/components/CalendarTry/CalendarContent/DayCell';
 import { Panel } from '#src/components/CalendarTry/Panel/Panel';
 import type { DateValidator } from '#src/components/CalendarTry/validator';
 import { YearCell } from '#src/components/CalendarTry/CalendarContent/YearCell';
-import type { CalendarViewMode } from '#src/components/CalendarTry/constants';
+import type { CalendarViewMode, PickerTypeMode } from '#src/components/CalendarTry/constants';
 import { MonthCell } from '#src/components/CalendarTry/CalendarContent/MonthCell';
-import type { PickerTypeMode } from '#src/components/CalendarTry/constants';
 import { DEFAULT_YEAR_COUNT } from '#src/components/CalendarTry/constants';
 import { YearsCalendarView } from '#src/components/CalendarTry/CalendarContent/YearsCalendarView';
 import { MonthsCalendarView } from '#src/components/CalendarTry/CalendarContent/MonthsCalendarView';
@@ -32,15 +31,19 @@ export const CalendarWidgetWrapper = styled.div<{ viewMode: CalendarViewMode }>`
   padding: ${(p) =>
     p.viewMode === 'YEARS' ? YEARS_VIEW_PADDING : p.viewMode === 'MONTHS' ? MONTHS_VIEW_PADDING : DAYS_VIEW_PADDING};
 
+  flex: 0 0 auto;
   width: ${CALENDAR_WIDTH}px;
+  //min-width: ${CALENDAR_WIDTH}px;
   background: ${({ theme }) => theme.color['Special/Elevated BG']};
   ${typography['Body/Body 2 Long']}
   color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
+  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
+  ${(props) => props.theme.shadow['Shadow 08']}
 `;
 
 export interface CalendarTryProps {
   viewMode?: CalendarViewMode;
-  onViewModeChange?: (viewMode: CalendarViewMode) => void;
+  onViewModeChange: (viewMode: CalendarViewMode) => void;
   pickerType?: PickerTypeMode;
   selected?: Dayjs;
   minDate?: Dayjs;
@@ -222,6 +225,30 @@ export const CalendarTry = React.forwardRef<HTMLDivElement, CalendarTryProps>(
         return decrease;
       });
 
+    const handleYearsViewShow = () => {
+      onViewModeChange('YEARS');
+      //onViewYearSelect && onViewYearSelect();
+    };
+    const handleYearsViewHide = () => {
+      if (pickerType === 'DATE_MONTH_YEAR') {
+        onViewModeChange('DATES');
+      } else if (pickerType === 'MONTH_YEAR') {
+        onViewModeChange('MONTHS');
+      }
+      //onViewYearSelect && onViewYearSelect();
+    };
+
+    const handleMonthsViewShow = () => {
+      onViewModeChange('MONTHS');
+      //onViewMonthSelect && onViewMonthSelect();
+    };
+    const handleMonthsViewHide = () => {
+      if (pickerType === 'DATE_MONTH_YEAR') {
+        onViewModeChange('DATES');
+      }
+      //onViewMonthSelect && onViewMonthSelect();
+    };
+
     const renderPanel = () => {
       return (
         <Panel
@@ -232,6 +259,10 @@ export const CalendarTry = React.forwardRef<HTMLDivElement, CalendarTryProps>(
           locale={locale}
           onNext={viewMode === 'DATES' ? increaseMonth : increaseYear}
           onPrevious={viewMode === 'DATES' ? decreaseMonth : decreaseYear}
+          onMonthsViewShow={handleMonthsViewShow}
+          onMonthsViewHide={handleMonthsViewHide}
+          onYearsViewShow={handleYearsViewShow}
+          onYearsViewHide={handleYearsViewHide}
         />
       );
     };

@@ -7,7 +7,19 @@ import { YearMonthPanel } from '#src/components/CalendarTry/Panel/YearMonthPanel
 import { YearPanel } from '#src/components/CalendarTry/Panel/YearPanel';
 import type { PanelProps } from '#src/components/CalendarTry/Panel/interfaces';
 
-export const Panel = ({ viewMode, pickerType, date, userLocale, locale, onNext, onPrevious }: PanelProps) => {
+export const Panel = ({
+  viewMode,
+  pickerType,
+  date,
+  userLocale,
+  locale,
+  onNext,
+  onPrevious,
+  onMonthsViewShow,
+  onMonthsViewHide,
+  onYearsViewShow,
+  onYearsViewHide,
+}: PanelProps) => {
   const theme = React.useContext(ThemeContext) || LIGHT_THEME;
   const defineLocale = userLocale || theme.currentLocale;
   const currentLocale = locale || theme.locales[defineLocale].calendar;
@@ -23,6 +35,10 @@ export const Panel = ({ viewMode, pickerType, date, userLocale, locale, onNext, 
           locale={currentLocale}
           onNext={onNext}
           onPrevious={onPrevious}
+          onMonthsViewShow={onMonthsViewShow}
+          onMonthsViewHide={onMonthsViewHide}
+          onYearsViewShow={onYearsViewShow}
+          onYearsViewHide={onYearsViewHide}
         />
       )}
       {pickerType === 'MONTH_YEAR' && (
@@ -32,6 +48,8 @@ export const Panel = ({ viewMode, pickerType, date, userLocale, locale, onNext, 
           locale={currentLocale}
           onNext={onNext}
           onPrevious={onPrevious}
+          onYearsViewShow={onYearsViewShow}
+          onYearsViewHide={onYearsViewHide}
         />
       )}
       {pickerType === 'YEAR' && (

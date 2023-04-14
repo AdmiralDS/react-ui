@@ -1,9 +1,10 @@
 import * as React from 'react';
 import dayjs from 'dayjs';
 import type { Dayjs } from 'dayjs';
+import styled, { ThemeProvider } from 'styled-components';
 import { withDesign } from 'storybook-addon-designs';
-import styled from 'styled-components';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { Theme } from '#src/components/themes';
 import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes';
 import { CalendarTry } from '#src/components/CalendarTry/index';
 import type { CalendarViewMode } from '#src/components/CalendarTry/constants';
@@ -62,10 +63,33 @@ const StyledDay = styled(DayCellWrapper)`
 `;
 
 const Template1: ComponentStory<typeof CalendarTry> = (args) => {
-  const [viewMode, setViewMode] = React.useState<CalendarViewMode>(args.viewMode || 'DATES');
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
+    return theme;
+  }
+
+  const [viewMode1, setViewMode1] = React.useState<CalendarViewMode>('DATES');
+  const [viewMode2, setViewMode2] = React.useState<CalendarViewMode>('DATES');
   const [selected1, setSelected1] = React.useState<Dayjs>(dayjs());
   const [selected2, setSelected2] = React.useState<Dayjs>(dayjs());
   const [viewDate2, setViewDate2] = React.useState<Dayjs>(selected2);
+
+  React.useEffect(() => {
+    switch (args.pickerType) {
+      case 'DATE_MONTH_YEAR':
+        setViewMode1('DATES');
+        setViewMode2('DATES');
+        break;
+      case 'MONTH_YEAR':
+        setViewMode1('MONTHS');
+        setViewMode2('MONTHS');
+        break;
+      case 'YEAR':
+        setViewMode1('YEARS');
+        setViewMode2('YEARS');
+        break;
+    }
+  }, [args.pickerType]);
 
   const filterDate = (date: Dayjs) => {
     return date.day() === 6;
@@ -110,28 +134,34 @@ const Template1: ComponentStory<typeof CalendarTry> = (args) => {
     setViewDate2(date);
   };
 
-  const handleViewModeChange = (viewMode: CalendarViewMode) => setViewMode(viewMode);
+  const handleViewModeChange1 = (viewMode: CalendarViewMode) => setViewMode1(viewMode);
+  const handleViewModeChange2 = (viewMode: CalendarViewMode) => setViewMode2(viewMode);
 
   return (
-    <div style={{ display: 'flex' }}>
-      <CalendarTry
-        pickerType={args.pickerType}
-        viewMode={viewMode}
-        onViewModeChange={handleViewModeChange}
-        selected={selected1}
-        onSelectDate={handleDayClick1}
-        /*onSelectMonth={handleMonthClick1}
+    <ThemeProvider theme={swapBorder}>
+      <div style={{ display: 'flex' }}>
+        <CalendarTry
+          pickerType={args.pickerType}
+          viewMode={viewMode1}
+          onViewModeChange={handleViewModeChange1}
+          selected={selected1}
+          onSelectDate={handleDayClick1}
+          /*onSelectMonth={handleMonthClick1}
         onSelectYear={handleYearClick1}*/
-        disabledDate={filterDate}
-      />
-      <Separator />
-      <CalendarTry
-        selected={selected1}
-        renderDateCell={customRenderDay}
-        onViewDateChange={handleViewDateChange}
-        userLocale="en"
-      />
-    </div>
+          disabledDate={filterDate}
+        />
+        <Separator />
+        <CalendarTry
+          pickerType={args.pickerType}
+          viewMode={viewMode2}
+          onViewModeChange={handleViewModeChange2}
+          selected={selected2}
+          renderDateCell={customRenderDay}
+          onViewDateChange={handleViewDateChange}
+          userLocale="en"
+        />
+      </div>
+    </ThemeProvider>
   );
 };
 
