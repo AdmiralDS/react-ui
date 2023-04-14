@@ -57,6 +57,9 @@ export default {
     mobile: {
       control: { type: 'boolean' },
     },
+    lastBreadcrumbActive: {
+      control: { type: 'boolean' },
+    },
     dropContainerCssMixin: {
       control: false,
     },
@@ -82,7 +85,7 @@ const Template1: ComponentStory<typeof Breadcrumbs> = (args) => {
     { url: '#', text: 'page 9' },
     { url: '#', text: 'page 10' },
     { url: '#', text: 'page 11' },
-    { url: '#', text: 'current page' },
+    { text: 'current page' },
   ];
   return (
     <>
@@ -97,7 +100,7 @@ const Template2: ComponentStory<typeof Breadcrumbs> = (args) => {
     { url: '#', text: 'page 2222222222222222222222222222222222222222' },
     { url: '#', text: 'page 3' },
     { url: '#', text: 'page 4' },
-    { url: '#', text: 'current page' },
+    { text: 'current page' },
   ];
   return (
     <>
@@ -121,7 +124,7 @@ const Template3: ComponentStory<typeof Breadcrumbs> = (args) => {
     { url: '#', text: 'page 9' },
     { url: '#', text: 'page 10' },
     { url: '#', text: 'page 11' },
-    { url: '#', text: 'current page' },
+    { text: 'current page' },
   ];
   return (
     <>
@@ -136,13 +139,29 @@ const Template4: ComponentStory<typeof Breadcrumbs> = (args) => {
     { linkAs: RouterLink, text: 'page 1', linkProps: { to: '/page1' } },
     { linkAs: RouterLink, text: 'page 2222222222222222222222222222222222222222', linkProps: { to: '/page2' } },
     { linkAs: RouterLink, text: 'page 3', linkProps: { to: '/page3' } },
-    { linkAs: RouterLink, text: 'current page', linkProps: { to: '#' } },
+    { text: 'current page' },
   ];
   return (
     <>
       <Router>
         <Breadcrumbs {...args} items={items} />
       </Router>
+    </>
+  );
+};
+
+const Template5: ComponentStory<typeof Breadcrumbs> = (args) => {
+  const items = [
+    { url: '#', text: 'page 1' },
+    { url: '#', text: 'page 2' },
+    { url: '#', text: 'page 3' },
+    { url: '#', text: 'page 4' },
+    { url: '#', text: 'current page' },
+  ];
+  return (
+    <>
+      <Breadcrumbs items={items} />
+      <Breadcrumbs items={items} lastBreadcrumbActive />
     </>
   );
 };
@@ -168,6 +187,19 @@ IntrenalLink.parameters = {
       story: `С помощью параметров linkAs и linkProps (входят в состав BreadcrumbProps) 
       можно вместо обычного anchor отрендерить внутри хлебной крошки любой другой компонент. 
       Этот компонент можно задать с помощью свойства  linkAs и передать в него необходимые параметры через linkProps.`,
+    },
+  },
+};
+
+export const ActiveCrumb = Template5.bind({});
+ActiveCrumb.args = {};
+ActiveCrumb.storyName = 'Breadcrumbs. Пример с активной/неактивной последней вкладкой.';
+ActiveCrumb.parameters = {
+  docs: {
+    description: {
+      story: `Последняя вкладка в компоненте может быть либо неактивной (по умолчанию), в таком случае она отображает 
+      текущее местоположение. Либо последняя вкладка активна и отображает предыдущий уровень сайта. Управляет 
+      поведением последней вкладки параметр lastBreadcrumbActive.`,
     },
   },
 };

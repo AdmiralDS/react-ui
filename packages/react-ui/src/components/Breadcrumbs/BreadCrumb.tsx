@@ -42,23 +42,23 @@ const TextWrapper = styled.div`
 
 const TextWithTooltip = TooltipHoc(TextWrapper);
 
-export const CrumbAnchor = styled.a`
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-  position: relative;
-  color: ${({ theme }) => theme.color['Neutral/Neutral 50']};
-
-  [aria-current='page'] & {
-    pointer-events: none;
-  }
-
+const activeCrumbMixin = css`
   &:hover {
     color: ${({ theme }) => theme.color['Primary/Primary 70']};
   }
   &:active {
     color: ${({ theme }) => theme.color['Primary/Primary 80']};
   }
+`;
+
+export const CrumbAnchor = styled.a<{ $active?: boolean }>`
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  position: relative;
+  color: ${({ theme }) => theme.color['Neutral/Neutral 50']};
+
+  ${({ $active }) => $active && activeCrumbMixin}
 
   &:focus {
     &:before {
@@ -83,7 +83,9 @@ export interface BreadcrumbProps extends React.HTMLAttributes<HTMLLIElement> {
   text: string;
   /** Url хлебной крошки (href атрибут, используемый во внутреннем Anchor) */
   url?: string;
-  /** Позволяет вместо внутреннего Anchor отрендерить любой другой компонент (https://styled-components.com/docs/api#as-polymorphic-prop) */
+  /** Позволяет вместо внутреннего Anchor отрендерить любой другой компонент (https://styled-components.com/docs/api#as-polymorphic-prop)
+   * Кроме последней неактивной вкладки, она по умолчанию рендерится как span и не является кликабельной.
+   */
   linkAs?: React.ElementType;
   /** Дополнительные параметры, которые можно передать во внутренний Anchor */
   linkProps?: { [key: string]: string };
@@ -91,13 +93,24 @@ export interface BreadcrumbProps extends React.HTMLAttributes<HTMLLIElement> {
   dimension?: BreadcrumbsProps['dimension'];
 }
 
-export const Breadcrumb = React.forwardRef<HTMLLIElement, BreadcrumbProps>(
-  ({ text, url = '#', linkAs, linkProps, children, tabIndex, dimension = 'l', ...props }, ref) => {
+interface InternalBreadcrumbProps {
+  /** Признак активности хлебной крошки */
+  active?: boolean;
+}
+
+export const Breadcrumb = React.forwardRef<HTMLLIElement, BreadcrumbProps & InternalBreadcrumbProps>(
+  ({ text, url = '#', linkAs, linkProps, children, tabIndex, dimension = 'l', active = true, ...props }, ref) => {
     const tooltip = text.length > 40;
 
     return (
       <Crumb ref={ref} dimension={dimension} {...props}>
-        <CrumbAnchor href={url} as={linkAs} tabIndex={tabIndex} {...linkProps}>
+        <CrumbAnchor
+          {...(active ? { href: url } : {})}
+          as={active ? linkAs : 'span'}
+          tabIndex={tabIndex}
+          $active={active}
+          {...linkProps}
+        >
           <Content tabIndex={-1} role="link">
             {tooltip ? <TextWithTooltip renderContent={() => text}>{text.slice(0, 37) + '...'}</TextWithTooltip> : text}
             {children}

@@ -24,6 +24,8 @@ export interface BreadcrumbsProps extends React.HTMLAttributes<HTMLElement> {
   dimension?: Dimension;
   /** Мобильное отображение компонента */
   mobile?: boolean;
+  /** Является ли последняя хлебная крошка активной */
+  lastBreadcrumbActive?: boolean;
   /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
   dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
   /** Позволяет добавлять класс на контейнер выпадающего меню  */
@@ -36,6 +38,7 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
   items,
   dimension = 'l',
   mobile,
+  lastBreadcrumbActive = false,
   dropContainerCssMixin,
   dropContainerClassName,
   dropContainerStyle,
@@ -110,11 +113,12 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
         aria-current="page"
         data-number={items.length - 1}
         dimension={dimension}
+        active={lastBreadcrumbActive}
         {...(mobile ? {} : order)}
         {...item}
       />
     ) : null;
-  }, [items, mobile, dimension]);
+  }, [items, mobile, dimension, lastBreadcrumbActive]);
 
   const renderVisibleItems = () => {
     return visible.map((item, index) => {
