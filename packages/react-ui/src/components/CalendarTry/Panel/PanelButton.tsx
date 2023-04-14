@@ -3,6 +3,7 @@ import { ReactComponent as ChevronLeftOutline } from '@admiral-ds/icons/build/sy
 import { ReactComponent as ChevronRightOutline } from '@admiral-ds/icons/build/system/ChevronRightOutline.svg';
 
 import { IconPlacement } from '#src/components/IconPlacement';
+import { TooltipHoc } from '#src/components/TooltipHOC';
 
 type ButtonProps = {
   onMouseDown: (event: React.MouseEvent<HTMLButtonElement>) => void;
@@ -25,3 +26,5 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(({ onMous
     {type === 'right' && <ChevronRightOutline />}
   </IconPlacement>
 ));
+
+export const ButtonWithTooltip = TooltipHoc(Button);

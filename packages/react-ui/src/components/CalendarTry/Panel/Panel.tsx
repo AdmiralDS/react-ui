@@ -1,30 +1,11 @@
 import * as React from 'react';
-import type { MouseEvent } from 'react';
-import type { Dayjs } from 'dayjs';
 import { ThemeContext } from 'styled-components';
 import { LIGHT_THEME } from '#src/components/themes';
 import { PanelWrapper } from '#src/components/CalendarTry/Panel/PanelWrapper';
-import type { CalendarViewMode, PickerTypeMode } from '#src/components/CalendarTry/constants';
-import { DateMonthYearPanel, MonthYearPanel, YearPanel } from '#src/components/CalendarTry/Panel/PanelTypes';
-
-interface PanelProps {
-  viewMode: CalendarViewMode;
-  pickerType: PickerTypeMode;
-  date: Dayjs;
-  userLocale?: string;
-  locale?: {
-    backwardText?: string;
-    forwardText?: string;
-    nextMonthText?: string;
-    previousMonthText?: string;
-    returnText?: string;
-    selectYearText?: string;
-    selectMonthText?: string;
-  };
-
-  onNext(event: MouseEvent<HTMLButtonElement>): void;
-  onPrevious(event: MouseEvent<HTMLButtonElement>): void;
-}
+import { YearMonthDatePanel } from '#src/components/CalendarTry/Panel/YearMonthDatePanel';
+import { YearMonthPanel } from '#src/components/CalendarTry/Panel/YearMonthPanel';
+import { YearPanel } from '#src/components/CalendarTry/Panel/YearPanel';
+import type { PanelProps } from '#src/components/CalendarTry/Panel/interfaces';
 
 export const Panel = ({ viewMode, pickerType, date, userLocale, locale, onNext, onPrevious }: PanelProps) => {
   const theme = React.useContext(ThemeContext) || LIGHT_THEME;
@@ -36,7 +17,7 @@ export const Panel = ({ viewMode, pickerType, date, userLocale, locale, onNext, 
   return (
     <PanelWrapper monthsView={monthsView} yearsView={yearsView}>
       {pickerType === 'DATE_MONTH_YEAR' && (
-        <DateMonthYearPanel
+        <YearMonthDatePanel
           viewMode={viewMode}
           date={date}
           locale={currentLocale}
@@ -45,7 +26,7 @@ export const Panel = ({ viewMode, pickerType, date, userLocale, locale, onNext, 
         />
       )}
       {pickerType === 'MONTH_YEAR' && (
-        <MonthYearPanel
+        <YearMonthPanel
           viewMode={viewMode}
           date={date}
           locale={currentLocale}

@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 import { typography } from '#src/components/Typography';
+import { TooltipHoc } from '#src/components/TooltipHOC';
 
 const YEAR_MONTH_HEIGHT = '32px';
 const YEAR_MONTH_PADDING = '4px 8px';
@@ -51,3 +52,6 @@ export const PanelDate = styled.div`
   justify-content: center;
   width: 100%;
 `;
+
+export const MonthWithTooltip = TooltipHoc(Month);
+export const YearWithTooltip = TooltipHoc(Year);
