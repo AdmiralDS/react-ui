@@ -101,18 +101,34 @@ const Template1: ComponentStory<typeof CalendarTry> = (args) => {
   };
 
   const handleMonthClick1 = (date: Dayjs) => {
-    console.log(`click on ${date.format('DD MMM YYYY')}`);
-    setSelected1((selected) => selected.month(date.month()));
+    if (args.pickerType === 'MONTH_YEAR') {
+      setSelected1(date);
+    }
   };
 
   const handleYearClick1 = (date: Dayjs) => {
-    console.log(`click on ${date.format('DD MMM YYYY')}`);
-    setSelected1((selected) => selected.year(date.year()));
+    if (args.pickerType === 'YEAR') {
+      setSelected1(date);
+    }
   };
 
   const handleDayClick2 = (date: Dayjs) => {
     console.log(`click on ${date.format('DD MMM YYYY')}`);
     setSelected2(date);
+  };
+
+  const handleMonthClick2 = (date: Dayjs) => {
+    if (args.pickerType === 'MONTH_YEAR') {
+      setSelected2(date);
+      setViewDate2(date);
+    }
+  };
+
+  const handleYearClick2 = (date: Dayjs) => {
+    if (args.pickerType === 'YEAR') {
+      setSelected2(date);
+      setViewDate2(date);
+    }
   };
 
   const customRenderDay = (date: Dayjs) => {
@@ -146,8 +162,8 @@ const Template1: ComponentStory<typeof CalendarTry> = (args) => {
           onViewModeChange={handleViewModeChange1}
           selected={selected1}
           onSelectDate={handleDayClick1}
-          /*onSelectMonth={handleMonthClick1}
-        onSelectYear={handleYearClick1}*/
+          onSelectMonth={handleMonthClick1}
+          onSelectYear={handleYearClick1}
           disabledDate={filterDate}
         />
         <Separator />
@@ -156,6 +172,8 @@ const Template1: ComponentStory<typeof CalendarTry> = (args) => {
           viewMode={viewMode2}
           onViewModeChange={handleViewModeChange2}
           selected={selected2}
+          onSelectMonth={handleMonthClick2}
+          onSelectYear={handleYearClick2}
           renderDateCell={customRenderDay}
           onViewDateChange={handleViewDateChange}
           userLocale="en"
