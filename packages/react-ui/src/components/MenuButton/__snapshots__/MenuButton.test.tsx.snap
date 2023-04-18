@@ -367,7 +367,7 @@ Object {
     <div>
       <button
         aria-expanded="false"
-        class="c0 c1  menu-button-with-dropdown"
+        class="c0 c1 menu-button-with-dropdown"
         data-appearance="primary"
         data-dimension="l"
         data-testid="btn"
@@ -750,7 +750,7 @@ Object {
 <div>
     <button
       aria-expanded="false"
-      class="c0 c1  menu-button-with-dropdown"
+      class="c0 c1 menu-button-with-dropdown"
       data-appearance="primary"
       data-dimension="l"
       data-testid="btn"
@@ -1218,7 +1218,7 @@ Object {
     <div>
       <button
         aria-expanded="false"
-        class="c0 c1  menu-button-with-dropdown"
+        class="c0 c1 menu-button-with-dropdown"
         data-appearance="primary"
         data-dimension="l"
         data-testid="btn"
@@ -1636,7 +1636,7 @@ Object {
 <div>
     <button
       aria-expanded="false"
-      class="c0 c1  menu-button-with-dropdown"
+      class="c0 c1 menu-button-with-dropdown"
       data-appearance="primary"
       data-dimension="l"
       data-testid="btn"
@@ -2089,7 +2089,7 @@ Object {
     <div>
       <button
         aria-expanded="false"
-        class="c0 c1  menu-button-with-dropdown"
+        class="c0 c1 menu-button-with-dropdown"
         data-appearance="primary"
         data-dimension="l"
         data-testid="btn"
@@ -2479,7 +2479,7 @@ Object {
 <div>
     <button
       aria-expanded="false"
-      class="c0 c1  menu-button-with-dropdown"
+      class="c0 c1 menu-button-with-dropdown"
       data-appearance="primary"
       data-dimension="l"
       data-testid="btn"

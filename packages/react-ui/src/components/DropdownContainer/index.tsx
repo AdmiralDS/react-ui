@@ -52,6 +52,7 @@ export interface DropContainerStyles {
 
 export interface DropdownContainerProps extends React.HTMLAttributes<HTMLDivElement> {
   targetRef: React.RefObject<HTMLElement>;
+  targetElement?: Element;
 
   /**
    *  Позволяет обработать событие при клике вне компонента
@@ -69,7 +70,7 @@ export interface DropdownContainerProps extends React.HTMLAttributes<HTMLDivElem
 }
 
 export const DropdownContainer = React.forwardRef<HTMLDivElement, React.PropsWithChildren<DropdownContainerProps>>(
-  ({ targetRef, onClickOutside = () => null, className = '', ...props }, ref) => {
+  ({ targetRef, targetElement, onClickOutside = () => null, className = '', ...props }, ref) => {
     const containerRef = React.useRef<HTMLDivElement | null>(null);
     const [displayUpward, setDisplayUpward] = React.useState(false);
 
@@ -151,7 +152,7 @@ export const DropdownContainer = React.forwardRef<HTMLDivElement, React.PropsWit
 
     return (
       <>
-        <Portal targetRef={targetRef} reverse={displayUpward}>
+        <Portal targetRef={targetRef} targetElement={targetElement} reverse={displayUpward}>
           <FakeTarget />
           <Container ref={refSetter(ref, containerRef)} {...props} className={className + ' dropdown-container'} />
         </Portal>

@@ -214,7 +214,6 @@ export const MultiButton = React.forwardRef<HTMLButtonElement, MultiButtonProps>
         dropContainerCssMixin={dropContainerCssMixin}
         dropContainerClassName={dropContainerClassName}
         dropContainerStyle={dropContainerStyle}
-        ref={ref}
         {...dropMenuProps}
         renderContentProp={({ buttonRef, handleKeyDown, handleClick, statusIcon, menuState }) => {
           return (
@@ -226,6 +225,7 @@ export const MultiButton = React.forwardRef<HTMLButtonElement, MultiButtonProps>
               {...props}
             >
               <MainButton
+                ref={ref}
                 skeleton={skeleton}
                 dimension={dimension}
                 appearance={appearance}
