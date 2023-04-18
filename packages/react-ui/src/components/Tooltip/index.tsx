@@ -12,6 +12,8 @@ export interface ITooltipProps extends React.HTMLAttributes<HTMLDivElement> {
   renderContent: () => React.ReactNode;
   /** Ref на элемент, относительно которого позиционируется тултип */
   targetRef: React.RefObject<HTMLElement>;
+  /** Элемент, относительно которого позиционируется портал */
+  targetElement?: Element;
   /** Контейнер, в котором будет отрисован тултип через React.createPortal. По умолчанию тултип отрисовывается в document.body */
   container?: Element | null;
   /** Расположение тултипа */
@@ -21,7 +23,7 @@ export interface ITooltipProps extends React.HTMLAttributes<HTMLDivElement> {
 export const TOOLTIP_DELAY = 1500;
 
 export const Tooltip = React.forwardRef<HTMLDivElement, ITooltipProps>(
-  ({ renderContent, targetRef, container: userContainer, tooltipPosition, ...props }, ref) => {
+  ({ renderContent, targetRef, targetElement, container: userContainer, tooltipPosition, ...props }, ref) => {
     const tooltipElementRef = React.useRef<HTMLDivElement | null>(null);
     const tooltipHeight = React.useRef(0);
     const container: Element = userContainer || document.body;
@@ -121,6 +123,7 @@ export const Tooltip = React.forwardRef<HTMLDivElement, ITooltipProps>(
     return emptyContent ? null : (
       <Portal
         targetRef={targetRef}
+        targetElement={targetElement}
         container={container}
         flexDirection={portalFlexDirection}
         fullContainerWidth={portalFullWidth}

@@ -10,6 +10,7 @@ import type { DropMenuComponentProps, RenderContentProps } from '#src/components
 import { DropMenu } from '#src/components/DropMenu';
 import type { IconPlacementDimension } from '#src/components/IconPlacement';
 import { IconPlacement } from '#src/components/IconPlacement';
+import { refSetter } from '../common/utils/refSetter';
 
 export type OverflowMenuDimension = 'l' | 'm' | 's';
 
@@ -116,13 +117,12 @@ export const OverflowMenu = React.forwardRef<HTMLButtonElement, OverflowMenuProp
           dropContainerCssMixin={dropContainerCssMixin}
           dropContainerClassName={dropContainerClassName}
           dropContainerStyle={dropContainerStyle}
-          ref={ref}
           {...dropMenuProps}
           renderContentProp={({ buttonRef, handleKeyDown, handleClick, menuState, disabled }: RenderContentProps) => {
             return (
               <IconPlacement
                 {...props}
-                ref={buttonRef as React.Ref<HTMLButtonElement>}
+                ref={refSetter(ref, buttonRef as React.Ref<HTMLButtonElement>)}
                 dimension={iconPlacementDimension(dimension)}
                 disabled={disabled}
                 highlightFocus={menuState}

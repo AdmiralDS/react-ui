@@ -8,6 +8,7 @@ import type { DropMenuComponentProps } from '#src/components/DropMenu';
 import { DropMenu } from '#src/components/DropMenu';
 import type { RenderOptionProps } from '#src/components/Menu/MenuItem';
 import { MenuItem } from '#src/components/Menu/MenuItem';
+import { refSetter } from '../common/utils/refSetter';
 
 const Button = styled.button<{ $menuOpened?: boolean }>`
   position: relative;
@@ -137,7 +138,6 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
     return (
       <DropMenu
         items={model}
-        ref={ref}
         dimension="s"
         menuWidth={menuWidth}
         alignSelf={menuWidth ? 'flex-end' : 'stretch'}
@@ -161,7 +161,7 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
           return (
             <Button
               {...props}
-              ref={buttonRef as React.Ref<HTMLButtonElement>}
+              ref={refSetter(ref, buttonRef as React.Ref<HTMLButtonElement>)}
               disabled={disabled}
               $menuOpened={menuState}
               onKeyDown={handleKeyDown}

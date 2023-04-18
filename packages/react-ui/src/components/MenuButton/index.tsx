@@ -8,6 +8,7 @@ import { uid } from '#src/components/common/uid';
 import { Button } from '#src/components/Button';
 import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import { passDropdownDataAttributes } from '#src/components/common/utils/splitDataAttributes';
+import { refSetter } from '#src/components/common/utils/refSetter';
 
 export type MenuButtonDimension = 'xl' | 'l' | 'm' | 's';
 export type MenuButtonAppearance = 'primary' | 'secondary' | 'ghost' | 'white';
@@ -77,7 +78,7 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
       dropContainerCssMixin,
       dropContainerClassName,
       dropContainerStyle,
-      className = '',
+      className,
       renderBottomPanel,
       ...props
     },
@@ -93,7 +94,7 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
       return (
         <Button
           {...props}
-          ref={buttonRef as React.Ref<HTMLButtonElement>}
+          ref={refSetter(ref, buttonRef as React.Ref<HTMLButtonElement>)}
           skeleton={skeleton}
           dimension={dimension}
           appearance={appearance}
@@ -102,7 +103,7 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
           onKeyDown={handleKeyDown}
           onClick={handleClick}
           aria-expanded={menuState}
-          className={className + ' menu-button-with-dropdown'}
+          className={'menu-button-with-dropdown' + (className ? ` ${className}` : '')}
         >
           {React.Children.toArray(children).map((child) =>
             typeof child === 'string' ? <span key={uid()}>{child}</span> : child,
@@ -139,7 +140,6 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
     return (
       <>
         <DropMenu
-          ref={ref}
           dimension={dimension === 'xl' ? 'l' : dimension}
           disabled={skeleton ? true : disabled}
           {...dropMenuProps}
