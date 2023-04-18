@@ -81,6 +81,7 @@ export const ValueWrapper = styled.div<{
   [data-disabled='true'] &&& {
     color: ${(props) => props.theme.color['Neutral/Neutral 30']};
   }
+  min-height: ${(p) => (p.dimension === 's' ? 20 : 24)}px;
 `;
 
 export const StringValueWrapper = styled.div`
