@@ -105,13 +105,13 @@ export type Column = {
    * @param row - объект строки
    * @param rowIdx - индекс строки
    */
-  renderCell?(data: React.ReactNode, row: TableRow, rowIdx: number): React.ReactNode;
+  renderCell?(data: any, row: TableRow, rowIdx: number): React.ReactNode;
 };
 
 export type RowId = string | number;
 type IdSelectionStatusMap = Record<RowId, boolean>;
 
-export interface TableRow extends Record<RowId, React.ReactNode> {
+export interface TableRow {
   id: RowId;
   className?: string;
   /** Строка в состоянии selected */
@@ -615,13 +615,13 @@ export const Table: React.FC<TableProps> = ({
 
     const render = () => {
       if (col.renderCell) {
-        return col.renderCell(row[col.name], row, idx);
+        return col.renderCell((row as any)[col.name], row, idx);
       }
       if (renderCell) {
         return renderCell(row, col.name);
       }
 
-      return <CellTextContent cellAlign={col.cellAlign}>{row[col.name]}</CellTextContent>;
+      return <CellTextContent cellAlign={col.cellAlign}>{(row as any)[col.name]}</CellTextContent>;
     };
 
     return (

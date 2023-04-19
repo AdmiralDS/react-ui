@@ -371,12 +371,12 @@ const Template4: ComponentStory<typeof Table> = (args) => {
             setNumFilterActive(true);
             if (selected === '1') {
               const newRows = args.rowList.filter(
-                (row) => Number((row[column.name] as string).replace(/\D/g, '')) > 1000000000,
+                (row) => Number(((row as any)[column.name] as string).replace(/\D/g, '')) > 1000000000,
               );
               setRows(newRows);
             } else {
               const newRows = args.rowList.filter(
-                (row) => Number((row[column.name] as string).replace(/\D/g, '')) < 1000000000,
+                (row) => Number(((row as any)[column.name] as string).replace(/\D/g, '')) < 1000000000,
               );
               setRows(newRows);
             }
@@ -414,7 +414,7 @@ const Template4: ComponentStory<typeof Table> = (args) => {
           onClick={() => {
             closeMenu();
             setDateFilterActive(true);
-            const newRows = args.rowList.filter((row) => row[column.name] === selectedDate);
+            const newRows = args.rowList.filter((row) => (row as any)[column.name] === selectedDate);
             setRows(newRows);
           }}
         >
