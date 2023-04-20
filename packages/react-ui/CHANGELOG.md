@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.11.1](https://github.com/AdmiralDS/react-ui/compare/v4.11.0...v4.11.1) (2023-04-20)
+
+
+### Bug Fixes
+
+* **TabeRow:** workaround typing problem under typescript 5 ([99054d5](https://github.com/AdmiralDS/react-ui/commit/99054d5da234976c8ff4a4b997b6a5772edf166d))
+
 ## [4.11.0](https://github.com/AdmiralDS/react-ui/compare/v4.10.0...v4.11.0) (2023-04-18)
 
 
