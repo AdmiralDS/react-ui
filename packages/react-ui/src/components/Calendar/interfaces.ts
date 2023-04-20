@@ -33,8 +33,11 @@ export interface IDateSelectionProps extends IDateBaseProps {
 }
 
 export interface CalendarPropType extends IDateSelectionProps {
-  /** Контейнер, в котором при необходимости можно отрисовать тултип через ReactDOM.createPortal */
-  tooltipContainer?: Element | null;
+  /**
+   * @deprecated Используйте rootRef пропсу на DropdownProvider
+   * Контейнер, в котором при необходимости можно отрисовать тултип через ReactDOM.createPortal
+   */
+  tooltipContainer?: never;
 
   /** Показать экран выбора дат (месяц/год/день) */
   currentActiveView?: ViewScreenType | null;

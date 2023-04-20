@@ -11,6 +11,7 @@ import { AnchorWrapper, FakeTarget, Portal } from './style';
 import { getHintDirection } from './utils';
 import type { HintPositionType, InternalHintPositionType } from './utils';
 import { HintContainer } from './HintContainer';
+import { DropdownContext, useDropdown } from '#src/components/DropdownProvider';
 
 type Trigger = 'click' | 'hover';
 
@@ -32,8 +33,12 @@ export interface HintProps extends React.HTMLAttributes<HTMLDivElement> {
   renderContent: () => React.ReactNode;
   /** Расположение хинта */
   hintPosition?: HintPositionType;
-  /** Контейнер, в котором будет отрисован тултип через React.createPortal. По умолчанию тултип отрисовывается в document.body */
-  container?: Element | null;
+  /**
+   * @deprecated Используйте rootRef пропсу на DropdownProvider
+   * Контейнер, в котором будет отрисован тултип через React.createPortal.
+   * По умолчанию тултип отрисовывается в document.body
+   * */
+  container?: never;
   /** Элемент, относительно которого будет позиционироваться хинт, если позиционирование относительно children не подходит */
   target?: React.MutableRefObject<Element | null | undefined>;
   /** Триггер появления компонента (событие, которое вызывает появление хинта) */
@@ -62,7 +67,6 @@ export const Hint: React.FC<HintProps> = ({
   onVisibilityChange,
   renderContent,
   hintPosition,
-  container: userContainer,
   target,
   visibilityTrigger = 'hover',
   dimension = 'l',
@@ -74,9 +78,9 @@ export const Hint: React.FC<HintProps> = ({
   locale,
   ...props
 }) => {
+  const { rootRef } = React.useContext(DropdownContext);
   const anchorElementRef = React.useRef<HTMLDivElement | null>(null);
   const hintElementRef = React.useRef<HTMLDivElement | null>(null);
-  const container: Element = userContainer || document.body;
   const content = renderContent();
   const anchorId = anchorIdProp || uid();
 
@@ -254,7 +258,7 @@ export const Hint: React.FC<HintProps> = ({
       {visible && (
         <Portal
           targetRef={targetRef}
-          container={container}
+          rootRef={rootRef}
           flexDirection={portalFlexDirection}
           fullContainerWidth={portalFullWidth}
         >
