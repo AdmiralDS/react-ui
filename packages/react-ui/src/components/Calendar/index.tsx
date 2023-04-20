@@ -30,7 +30,6 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarPropType>(
       maxDate,
       selected,
       range,
-      tooltipContainer,
       filterDate,
       currentActiveView,
       currentActiveViewImportant,
@@ -225,7 +224,6 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarPropType>(
         onMonthsViewHide={handleMonthsViewHide}
         onNext={yearsView ? increaseYear : increaseMonth}
         onPrevious={yearsView ? decreaseYear : decreaseMonth}
-        tooltipContainer={tooltipContainer}
       />
     );
 

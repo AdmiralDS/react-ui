@@ -6,7 +6,7 @@ import { useClickOutside } from '#src/components/common/hooks/useClickOutside';
 import { PositionInPortal } from '#src/components/PositionInPortal';
 import { useInterval } from '#src/components/common/hooks/useInterval';
 import { refSetter } from '#src/components/common/utils/refSetter';
-import { useDropdown, useDropdownsClickOutside } from '#src/components/DropdownProvider';
+import { DropdownContext, useDropdown, useDropdownsClickOutside } from '#src/components/DropdownProvider';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 
 const Container = styled.div<{
@@ -75,6 +75,8 @@ export const DropdownContainer = React.forwardRef<HTMLDivElement, React.PropsWit
     const [displayUpward, setDisplayUpward] = React.useState(false);
 
     const { addDropdown, removeDropdown, dropdowns } = useDropdown(containerRef);
+    const { rootRef } = React.useContext(DropdownContext);
+
     const handleClickOutside = (e: Event) => {
       if (useDropdownsClickOutside(e, dropdowns)) onClickOutside(e);
     };
@@ -152,7 +154,7 @@ export const DropdownContainer = React.forwardRef<HTMLDivElement, React.PropsWit
 
     return (
       <>
-        <Portal targetRef={targetRef} targetElement={targetElement} reverse={displayUpward}>
+        <Portal targetRef={targetRef} targetElement={targetElement} reverse={displayUpward} rootRef={rootRef}>
           <FakeTarget />
           <Container ref={refSetter(ref, containerRef)} {...props} className={className + ' dropdown-container'} />
         </Portal>

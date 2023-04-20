@@ -18,7 +18,7 @@ export interface PositionInPortalProps {
   targetElement?: Element;
 
   /** Контейнер, внутри которого будет отрисован портал, по умолчанию портал рендерится в document.body */
-  container?: Element;
+  rootRef?: React.RefObject<HTMLElement>;
 
   /** Отрисовка портала на всю ширину контейнера */
   fullContainerWidth?: boolean;
@@ -39,7 +39,7 @@ export interface PositionInPortalProps {
 export const PositionInPortal = ({
   targetRef,
   targetElement,
-  container,
+  rootRef,
   fullContainerWidth,
   ...props
 }: React.PropsWithChildren<PositionInPortalProps>) => {
@@ -68,6 +68,6 @@ export const PositionInPortal = ({
 
   return createPortal(
     <PositionedPortalContainer ref={positionedPortalContainerRef} {...props} />,
-    container || document.body,
+    rootRef?.current || document.body,
   );
 };
