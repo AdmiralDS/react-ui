@@ -146,14 +146,15 @@ export const CalendarTry = React.forwardRef<HTMLDivElement, CalendarTryProps>(
       changeYear(date.year());
       /*!currentActiveViewImportant && setYearsView(false);*/
       switch (pickerType) {
-        case 'DATE_MONTH_YEAR':
-          onViewModeChange?.('DATES');
+        case 'YEAR':
+          setViewDate(date);
           break;
         case 'MONTH_YEAR':
           onViewModeChange?.('MONTHS');
           break;
-        case 'YEAR':
-          setViewDate(date);
+        default:
+        case 'DATE_MONTH_YEAR':
+          onViewModeChange?.('DATES');
           break;
       }
       onSelectYear && onSelectYear(date);
@@ -162,8 +163,17 @@ export const CalendarTry = React.forwardRef<HTMLDivElement, CalendarTryProps>(
     const handleMonthClick = (date: Dayjs) => {
       changeMonth(date.month());
       /*!currentActiveViewImportant && setMonthsView(false);*/
-      if (pickerType === 'DATE_MONTH_YEAR') {
-        onViewModeChange?.('DATES');
+      switch (pickerType) {
+        case 'YEAR':
+          break;
+        case 'MONTH_YEAR':
+          setViewDate(date);
+          onViewModeChange?.('MONTHS');
+          break;
+        default:
+        case 'DATE_MONTH_YEAR':
+          onViewModeChange?.('DATES');
+          break;
       }
       onSelectMonth && onSelectMonth(date);
     };
