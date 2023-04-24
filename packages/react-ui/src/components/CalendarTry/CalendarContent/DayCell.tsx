@@ -48,7 +48,7 @@ export const DayCellWrapper = styled.div<{
   }
 
   &:hover:after {
-    ${(p) => (p.disabled ? '' : `border: 1px solid ${p.theme.color['Primary/Primary 60 Main']};`)}
+    ${(p) => (p.disabled || p.selected ? '' : `border: 1px solid ${p.theme.color['Primary/Primary 60 Main']};`)}
   }
 
   ${(p) => p.highlightSpecialDayMixin}
