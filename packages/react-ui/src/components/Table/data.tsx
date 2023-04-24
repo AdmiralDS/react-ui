@@ -794,21 +794,22 @@ interface MenuProps {
   onVisibilityChange?: (isVisible: boolean) => void;
 }
 
+const items = [
+  {
+    id: '1',
+    display: 'Вывести дату сделки в локали ru',
+  },
+  {
+    id: '2',
+    display: 'Вывести дату сделки в локали en-US',
+  },
+  {
+    id: '3',
+    display: 'Вывести дату сделки в локали de-AT',
+  },
+];
+
 const Menu: React.FC<MenuProps> = ({ row, onVisibilityChange }) => {
-  const items: Array<any> = [
-    {
-      id: '1',
-      display: 'Вывести дату сделки в локали ru',
-    },
-    {
-      id: '2',
-      display: 'Вывести дату сделки в локали en-US',
-    },
-    {
-      id: '3',
-      display: 'Вывести дату сделки в локали de-AT',
-    },
-  ];
   const model = React.useMemo(() => {
     return items.map((item) => ({
       id: item.id,
@@ -817,7 +818,6 @@ const Menu: React.FC<MenuProps> = ({ row, onVisibilityChange }) => {
           {item.display}
         </MenuItem>
       ),
-      disabled: item.disabled,
     }));
   }, []);
 
@@ -829,7 +829,7 @@ const Menu: React.FC<MenuProps> = ({ row, onVisibilityChange }) => {
   return (
     <OverflowMenu
       onSelectItem={(id) => {
-        const options: any = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        const options: Intl.DateTimeFormatOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
         if (id === '1') alert(StrToDate(row['transfer_date']).toLocaleString('ru', options));
         if (id === '2') alert(StrToDate(row['transfer_date']).toLocaleString('en-US', options));
         if (id === '3') alert(StrToDate(row['transfer_date']).toLocaleString('de-AT', options));
@@ -904,7 +904,7 @@ export const rowListMenu: RowData[] = [
   },
 ];
 
-export const virtualRowList = [...Array(1000).keys()].map((item, index) => ({
+export const virtualRowList = [...Array(1000).keys()].map((_item, index) => ({
   id: String(index),
   transfer_number: index,
   transfer_date: new Date('2020-08-06').toLocaleDateString(),
@@ -963,7 +963,7 @@ export const columnListWithCustomRender: Column[] = [
       </>
     ),
     width: '20%',
-    renderCell(data, row, idx): React.ReactNode {
+    renderCell(data, _row, idx): React.ReactNode {
       return (
         <div style={{ border: '1px solid #aaa', padding: '3px' }}>
           {data} <Badge>{idx}</Badge>
@@ -1038,7 +1038,7 @@ export const rowListWithCustomRenderGroup: RowData[] = [
     currency: 'RUB',
     rate: 2.5,
     groupTitle: 'Группа',
-    renderGroupTitle(row: TableRow): React.ReactNode {
+    renderGroupTitle(row: RowData): React.ReactNode {
       return (
         <div style={{ fontSize: '36px' }}>
           {row.transfer_type} - {row.transfer_date}

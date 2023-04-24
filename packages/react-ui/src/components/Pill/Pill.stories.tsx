@@ -16,6 +16,7 @@ import { ReactComponent as HeartOutline } from '@admiral-ds/icons/build/category
 import { ReactComponent as AlertOutline } from '@admiral-ds/icons/build/category/AlertOutline.svg';
 import { ReactComponent as BonusOutline } from '@admiral-ds/icons/build/category/BonusOutline.svg';
 import { ReactComponent as BurnSolid } from '@admiral-ds/icons/build/category/BurnSolid.svg';
+import { refSetter } from '../common/utils/refSetter';
 
 export default {
   title: 'Admiral-2.1/Pills',
@@ -196,7 +197,7 @@ interface PillMenuProps {
   options: Array<PillOptionProps>;
 }
 
-const PillMenu = React.forwardRef<HTMLElement, PillMenuProps>(({ options, ...props }, ref) => {
+const PillMenu = React.forwardRef<HTMLDivElement, PillMenuProps>(({ options, ...props }, ref) => {
   const [selectedPill, setSelectedPill] = React.useState<PillOptionProps | undefined>(options[0]);
 
   const model = React.useMemo(() => {
@@ -212,7 +213,6 @@ const PillMenu = React.forwardRef<HTMLElement, PillMenuProps>(({ options, ...pro
 
   return (
     <DropMenu
-      ref={ref}
       items={model}
       dropContainerClassName="dropContainerClass"
       selected={selectedPill?.id}
@@ -221,7 +221,7 @@ const PillMenu = React.forwardRef<HTMLElement, PillMenuProps>(({ options, ...pro
         return (
           <StatusPill
             {...props}
-            ref={buttonRef as React.Ref<HTMLDivElement>}
+            ref={refSetter(ref, buttonRef as React.Ref<HTMLDivElement>)}
             status={selectedPill?.status}
             onKeyDown={handleKeyDown}
             onClick={handleClick}

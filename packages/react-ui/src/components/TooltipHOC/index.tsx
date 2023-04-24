@@ -6,8 +6,12 @@ import type { ITooltipProps } from '#src/components/Tooltip';
 export interface TooltipHocProps {
   /** Функция, которая возвращает реакт-компонент с контентом тултипа. Если этому компоненту нужны props, используйте замыкание */
   renderContent: () => React.ReactNode;
-  /** Контейнер, в котором будет отрисован тултип через React.createPortal. По умолчанию тултип отрисовывается в document.body */
-  container?: Element | null;
+  /**
+   * @deprecated Используйте rootRef пропсу на DropdownProvider
+   * Контейнер, в котором будет отрисован тултип через React.createPortal.
+   * По умолчанию тултип отрисовывается в document.body
+   */
+  container?: never;
   /** Отобразить тултип с задержкой в 1.5 секунды */
   withDelay?: boolean;
   /** Ссылка на тултип */

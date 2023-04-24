@@ -18,7 +18,7 @@ const Description = () => (
 );
 
 export default {
-  title: 'Admiral-2.1/ProgressHeader/Base',
+  title: 'Admiral-2.1/ProgressHeader/Animation',
   decorators: [withDesign],
   component: ProgressHeader,
   parameters: {
@@ -39,7 +39,7 @@ export default {
       control: { type: 'radio' },
     },
     percent: {
-      control: { type: 'number' },
+      control: false,
     },
   },
 } as ComponentMeta<typeof ProgressHeader>;
@@ -48,17 +48,29 @@ const StyledProgressHeader = styled(ProgressHeader)`
   bottom: 90%;
 `;
 
-const Template1: ComponentStory<typeof ProgressHeader> = ({ ...args }) => {
+const Template2: ComponentStory<typeof ProgressHeader> = ({ ...args }) => {
+  const [tik, setTick] = React.useState(0);
+
+  React.useEffect(() => {
+    const counter = () => setTick((prev) => prev + 1);
+    const timerId = setTimeout(counter, 1000);
+    if (tik >= 20) {
+      clearTimeout(timerId);
+    }
+    return () => {
+      clearTimeout(timerId);
+    };
+  }, [tik]);
+
   return (
     <>
-      <StyledProgressHeader {...args} percent={args.percent} role="alert" aria-live="assertive" />
+      <StyledProgressHeader {...args} percent={args.percent || tik} role="alert" aria-live="assertive" />
     </>
   );
 };
 
-export const Progress = Template1.bind({});
-Progress.storyName = 'Базовый пример';
-Progress.args = {
+export const ProgressAnimation = Template2.bind({});
+ProgressAnimation.storyName = 'Прогресс бар с анимацией';
+ProgressAnimation.args = {
   appearance: 'primary',
-  percent: 50,
 };

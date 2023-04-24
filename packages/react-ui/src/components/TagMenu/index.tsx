@@ -8,6 +8,7 @@ import type { ItemProps, RenderOptionProps } from '#src/components/Menu/MenuItem
 import { MenuItem } from '#src/components/Menu/MenuItem';
 import { passDropdownDataAttributes } from '#src/components/common/utils/splitDataAttributes';
 import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
+import { refSetter } from '../common/utils/refSetter';
 
 export interface TagOptionProps extends HTMLAttributes<HTMLButtonElement>, TagVisualProps {
   id: string;
@@ -99,7 +100,6 @@ export const TagMenu = React.forwardRef<HTMLButtonElement, TagMenuProps>(
 
     return (
       <DropMenu
-        ref={ref}
         dimension="m"
         menuWidth={menuWidth}
         menuMaxHeight={menuMaxHeight}
@@ -123,7 +123,7 @@ export const TagMenu = React.forwardRef<HTMLButtonElement, TagMenuProps>(
           return (
             <Tag
               {...props}
-              ref={buttonRef as React.Ref<HTMLButtonElement>}
+              ref={refSetter(ref, buttonRef as React.Ref<HTMLButtonElement>)}
               kind={selected?.kind}
               icon={selected?.icon}
               dimension={dimension}

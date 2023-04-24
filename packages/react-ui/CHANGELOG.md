@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.11.1](https://github.com/AdmiralDS/react-ui/compare/v4.11.0...v4.11.1) (2023-04-20)
+
+
+### Bug Fixes
+
+* **TabeRow:** workaround typing problem under typescript 5 ([99054d5](https://github.com/AdmiralDS/react-ui/commit/99054d5da234976c8ff4a4b997b6a5772edf166d))
+
+## [4.11.0](https://github.com/AdmiralDS/react-ui/compare/v4.10.0...v4.11.0) (2023-04-18)
+
+
+### Features
+
+* **Breadcrumbs:** add lastBreadcrumbActive prop to control active-inactive state of last breadcrumb ([a1d0fd7](https://github.com/AdmiralDS/react-ui/commit/a1d0fd7aec3eb6de7fb230b33f8a7e5dd18171c3))
+* components with drop now properly pass ref (was drop ref before) ([e53a7f9](https://github.com/AdmiralDS/react-ui/commit/e53a7f9f7b329642b005be49d6ffb72a7e6babcc))
+
+
+### Bug Fixes
+
+* **ContentSwitcher:** fix storybook docs, place playground story on 1st place ([9bb5c31](https://github.com/AdmiralDS/react-ui/commit/9bb5c315ee82e0662812c9d6c217bfa619e10055))
+* **DateInput:** fix stories controls ([21bbc31](https://github.com/AdmiralDS/react-ui/commit/21bbc3177434b61450a77a61c536fc9389453441))
+* **PaginationOne:** fix bug with menu width ([0056e78](https://github.com/AdmiralDS/react-ui/commit/0056e78b7c0b6489b8e38e3348938f4cdde2b91d))
+* **Select:** collapse control in readOnly mode without placeholder ([50efccd](https://github.com/AdmiralDS/react-ui/commit/50efccdebb167a9ba89c8c2ea45b0109c0a58fcd))
+
 ## [4.10.0](https://github.com/AdmiralDS/react-ui/compare/v4.9.2...v4.10.0) (2023-04-11)
 
 
