@@ -86,7 +86,6 @@ export const Panel: FC<IPanelProps> = ({
               ? locale?.backwardText || theme.locales[theme.currentLocale].calendar.backwardText
               : locale?.previousMonthText || theme.locales[theme.currentLocale].calendar.previousMonthText
           }
-          container={tooltipContainer}
           onMouseDown={onPrevious}
           disabled={previousDisabled}
           type="left"
@@ -101,7 +100,6 @@ export const Panel: FC<IPanelProps> = ({
               ? locale?.returnText || theme.locales[theme.currentLocale].calendar.returnText
               : locale?.selectMonthText || theme.locales[theme.currentLocale].calendar.selectMonthText
           }
-          container={tooltipContainer}
           view={monthsView}
           onMouseDown={monthMouseDownHandle}
         >
@@ -113,7 +111,6 @@ export const Panel: FC<IPanelProps> = ({
               ? locale?.returnText || theme.locales[theme.currentLocale].calendar.returnText
               : locale?.selectYearText || theme.locales[theme.currentLocale].calendar.selectYearText
           }
-          container={tooltipContainer}
           view={yearsView}
           onMouseDown={yearMouseDownHandle}
         >
@@ -127,7 +124,6 @@ export const Panel: FC<IPanelProps> = ({
               ? locale?.forwardText || theme.locales[theme.currentLocale].calendar.forwardText
               : locale?.nextMonthText || theme.locales[theme.currentLocale].calendar.nextMonthText
           }
-          container={tooltipContainer}
           onMouseDown={onNext}
           disabled={nextDisabled}
           type="right"
