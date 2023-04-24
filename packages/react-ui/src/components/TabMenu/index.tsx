@@ -21,7 +21,7 @@ import {
 import type { Dimension } from '#src/components/TabMenu/constants';
 import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 
-export interface TabProps extends React.HTMLAttributes<HTMLButtonElement> {
+export interface TabProps extends Omit<React.HTMLAttributes<HTMLButtonElement>, 'content'> {
   /** Контент вкладки */
   content: React.ReactNode;
   /** Id вкладки */

@@ -61,6 +61,9 @@ export default {
     statusViaBackground: {
       control: { type: 'boolean' },
     },
+    statusIcon: {
+      control: false,
+    },
     as: {
       options: ['div', 'span', 'button'],
       control: { type: 'radio' },

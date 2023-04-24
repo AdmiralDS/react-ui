@@ -5,10 +5,9 @@ import styled, { css } from 'styled-components';
 import type { ItemProps } from '#src/components/Menu/MenuItem';
 import { keyboardKey } from '#src/components/common/keyboardKey';
 import { VirtualBody } from '#src/components/Menu/VirtualBody';
+import { refSetter } from '#src/components/common/utils/refSetter';
 
 export type MenuDimensions = 'l' | 'm' | 's';
-
-const ITEMS_COUNT = 6;
 
 const getItemHeight = (dimension?: MenuDimensions) => {
   switch (dimension) {
@@ -23,18 +22,23 @@ const getItemHeight = (dimension?: MenuDimensions) => {
   }
 };
 
-const getHeight = (dimension?: MenuDimensions) => {
-  return getItemHeight(dimension) * ITEMS_COUNT + 16;
+const getHeight = (rowCount: number, dimension?: MenuDimensions) => {
+  return getItemHeight(dimension) * rowCount + 16;
 };
 
-const menuListHeights = css<{ dimension?: MenuDimensions; maxHeight?: string | number }>`
-  max-height: ${({ dimension, maxHeight }) => {
+const menuListHeights = css<{ dimension?: MenuDimensions; maxHeight?: string | number; rowCount: number }>`
+  max-height: ${({ dimension, maxHeight, rowCount }) => {
     if (maxHeight) return maxHeight;
-    return `${getHeight(dimension)}px`;
+    return `${getHeight(rowCount, dimension)}px`;
   }};
 `;
 
-const Wrapper = styled.div<{ dimension?: MenuDimensions; hasTopPanel: boolean; hasBottomPanel: boolean }>`
+const Wrapper = styled.div<{
+  dimension?: MenuDimensions;
+  hasTopPanel: boolean;
+  hasBottomPanel: boolean;
+  rowCount: number;
+}>`
   padding: 0;
   ${(p) => (p.hasTopPanel ? 'padding-top: 8px' : '')};
   ${(p) => (p.hasBottomPanel ? 'padding-bottom: 8px' : '')};
@@ -88,9 +92,14 @@ export interface MenuProps extends HTMLAttributes<HTMLDivElement> {
   renderTopPanel?: (props: RenderPanelProps) => React.ReactNode;
   /** Позволяет добавить панель внизу под выпадающим списком */
   renderBottomPanel?: (props: RenderPanelProps) => React.ReactNode;
-  /** @deprecated use disableSelectedOptionHighlight instead
-   * Возможность множественного выбора (опции с Checkbox) */
+  /**
+   * Возможность множественного выбора (опции с Checkbox)
+   *
+   * @deprecated use disableSelectedOptionHighlight instead
+   */
   multiSelection?: boolean;
+  /** Количество строк в меню */
+  rowCount?: number;
   /** Возможность отключить подсветку выбранной опции
    * (например, при множественном выборе, когда у каждой опции есть Checkbox */
   disableSelectedOptionHighlight?: boolean;
@@ -128,6 +137,7 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
       onBackwardCycleApprove,
       containerRef,
       virtualScroll,
+      rowCount = 6,
       ...props
     },
     ref,
@@ -174,6 +184,7 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
     const [selectedState, setSelectedState] = React.useState<string | undefined>(defaultSelected);
     const [activeState, setActiveState] = React.useState<string | undefined>(uncontrolledActiveValue);
     const [lastScrollEvent, setLastScrollEvent] = React.useState<number>();
+    const wrapperRef = React.useRef<HTMLDivElement | null>(null);
 
     const selectedId =
       multiSelection || disableSelectedOptionHighlight ? undefined : selected === undefined ? selectedState : selected;
@@ -252,6 +263,7 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
           scrollContainerRef={menuRef}
           itemHeight={itemHeight}
           model={model}
+          rowCount={rowCount}
           activeId={activeId}
           selectedId={selectedId}
           onActivateItem={activateItem}
@@ -278,7 +290,14 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
     }, [active, activeState, model]);
 
     return (
-      <Wrapper ref={ref} dimension={dimension} hasTopPanel={hasTopPanel} hasBottomPanel={hasBottomPanel} {...props}>
+      <Wrapper
+        ref={refSetter(wrapperRef, ref)}
+        dimension={dimension}
+        hasTopPanel={hasTopPanel}
+        hasBottomPanel={hasBottomPanel}
+        rowCount={rowCount}
+        {...props}
+      >
         {hasTopPanel && renderTopPanel({ dimension })}
         <StyledDiv ref={menuRef} hasTopPanel={hasTopPanel} hasBottomPanel={hasBottomPanel}>
           {virtualScroll ? renderVirtualChildren() : renderChildren()}

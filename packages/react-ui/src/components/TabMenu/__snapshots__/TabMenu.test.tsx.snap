@@ -238,16 +238,7 @@ Object {
 }
 
 .c2:active:not(:disabled) {
-  color: #0062FF;
-}
-
-.c2:active:not(:disabled) *[fill^='#'] {
-  fill: #0062FF;
-}
-
-.c2:active:not(:disabled) [data-badge] {
-  background: #0062FF;
-  color: #FFFFFF;
+  background: #0000001F;
 }
 
 .c2:disabled {
@@ -330,16 +321,7 @@ Object {
 }
 
 .c13:active:not(:disabled) {
-  color: #0062FF;
-}
-
-.c13:active:not(:disabled) *[fill^='#'] {
-  fill: #0062FF;
-}
-
-.c13:active:not(:disabled) [data-badge] {
-  background: #0062FF;
-  color: #FFFFFF;
+  background: #0000001F;
 }
 
 .c13:disabled {
@@ -760,16 +742,7 @@ Object {
 }
 
 .c2:active:not(:disabled) {
-  color: #0062FF;
-}
-
-.c2:active:not(:disabled) *[fill^='#'] {
-  fill: #0062FF;
-}
-
-.c2:active:not(:disabled) [data-badge] {
-  background: #0062FF;
-  color: #FFFFFF;
+  background: #0000001F;
 }
 
 .c2:disabled {
@@ -852,16 +825,7 @@ Object {
 }
 
 .c13:active:not(:disabled) {
-  color: #0062FF;
-}
-
-.c13:active:not(:disabled) *[fill^='#'] {
-  fill: #0062FF;
-}
-
-.c13:active:not(:disabled) [data-badge] {
-  background: #0062FF;
-  color: #FFFFFF;
+  background: #0000001F;
 }
 
 .c13:disabled {

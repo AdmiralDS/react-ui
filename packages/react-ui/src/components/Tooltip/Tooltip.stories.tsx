@@ -5,6 +5,9 @@ import { withDesign } from 'storybook-addon-designs';
 import styled, { ThemeProvider } from 'styled-components';
 
 import { Tooltip, TOOLTIP_DELAY } from '#src/components/Tooltip';
+import type { RenderOptionProps, ItemProps } from '#src/components/Menu/MenuItem';
+import { MenuButton } from '#src/components/MenuButton';
+import { MenuItem } from '#src/components/Menu/MenuItem';
 import { TooltipHoc } from '#src/components/TooltipHOC';
 import { TooltipHocStory } from '#src/components/TooltipHOC/story';
 import { refSetter } from '#src/components/common/utils/refSetter';
@@ -340,6 +343,87 @@ const Template8: ComponentStory<typeof Tooltip> = () => {
   );
 };
 
+const menuItems = [
+  { id: 1, label: 'item-1' },
+  { id: 2, label: 'item-2' },
+  { id: 3, label: 'item-3' },
+];
+
+const Template9: ComponentStory<typeof Tooltip> = (args) => {
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
+    return theme;
+  }
+
+  const menuModel: ItemProps[] = React.useMemo(() => {
+    return menuItems.map((item) => ({
+      id: String(item.id),
+      render: (props: RenderOptionProps) => (
+        <MenuItem {...props} key={item.id}>
+          {item.label}
+        </MenuItem>
+      ),
+    }));
+  }, []);
+
+  const btnRef = React.useRef<HTMLButtonElement | null>(null);
+  const [visible, setVisible] = React.useState(false);
+
+  React.useEffect(() => {
+    function show() {
+      setVisible(true);
+    }
+    function hide() {
+      setVisible(false);
+    }
+    const button = btnRef.current;
+    if (button) {
+      /** Рекомендуется использовать именно addEventListener, так как React SyntheticEvent onMouseEnter
+       * отрабатывает некорректно в случае, если мышь была наведена на задизейбленный элемент,
+       * а затем была наведена на target элемент
+       * https://github.com/facebook/react/issues/19419 */
+      button.addEventListener('mouseenter', show);
+      button.addEventListener('focus', show);
+      button.addEventListener('mouseleave', hide);
+      button.addEventListener('blur', hide);
+      return () => {
+        button.removeEventListener('mouseenter', show);
+        button.removeEventListener('focus', show);
+        button.removeEventListener('mouseleave', hide);
+        button.removeEventListener('blur', hide);
+      };
+    }
+  }, [visible, setVisible]);
+
+  const renderTooltipContent = React.useMemo(
+    () => () =>
+      `Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin
+literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney
+College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage,
+and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem
+Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum'`,
+    [],
+  );
+  return (
+    <ThemeProvider theme={swapBorder}>
+      <MenuButton dimension="m" items={menuModel} style={{ marginRight: 20 }}>
+        TEST
+      </MenuButton>
+      <MenuButton ref={btnRef} dimension="m" items={menuModel}>
+        TEST WITH TOOLTIP
+      </MenuButton>
+      {visible && (
+        <Tooltip
+          targetRef={btnRef}
+          renderContent={renderTooltipContent}
+          style={{ minWidth: '200px', maxWidth: '300px' }}
+          id="test1"
+        />
+      )}
+    </ThemeProvider>
+  );
+};
+
 export const TooltipBase = Template1.bind({});
 TooltipBase.args = {};
 TooltipBase.storyName = 'Tooltip. Базовый пример.';
@@ -379,3 +463,7 @@ TooltipHocRefSetter.parameters = {
 export const TooltipHocRef = Template8.bind({});
 TooltipHocRef.args = {};
 TooltipHocRef.storyName = 'TooltipHoc. Прокидывание ref на результат вызова TooltipHoc.';
+
+export const TooltipMenuButton = Template9.bind({});
+TooltipMenuButton.args = {};
+TooltipMenuButton.storyName = 'Tooltip. Базовый пример с MenuButton.';

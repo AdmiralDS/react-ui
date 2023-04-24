@@ -18,7 +18,13 @@ const Desc = styled.div`
 `;
 
 const Description = () => (
-  <Desc>Опциональная надстройка над таблицей. Размерность : xl - 56px, l - 48px, m - 40px, s - 32px</Desc>
+  <Desc>
+    Опциональная надстройка над таблицей. Размерность : xl - 56px, l - 48px, m - 40px, s - 32px
+    <br />
+    Для того чтобы была видна кнопка поиска("лупа") необходимо определить свойства searchValue и onChangeSearchValue,
+    для кнопки настройки видимости колонок("плюс") - columns и onColumnsChange, для кнопки настроек("шестерёнка") -
+    settingsMenu
+  </Desc>
 );
 export default {
   title: 'Admiral-2.1/Data Table/GroupActionsPane',
@@ -135,3 +141,13 @@ const Simple: ComponentStory<typeof GroupActionsPane> = (args) => {
 export const SimpleContainer = Simple.bind({});
 
 SimpleContainer.storyName = 'Простой пример';
+SimpleContainer.parameters = {
+  docs: {
+    description: {
+      story:
+        'Для того чтобы была видна кнопка поиска("лупа") необходимо определить свойства searchValue и onChangeSearchValue, ' +
+        'для кнопки настройки видимости колонок("плюс") - columns и onColumnsChange, для кнопки настроек("шестерёнка") - ' +
+        'settingsMenu',
+    },
+  },
+};

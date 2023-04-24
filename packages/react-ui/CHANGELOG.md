@@ -2,6 +2,73 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.11.1](https://github.com/AdmiralDS/react-ui/compare/v4.11.0...v4.11.1) (2023-04-20)
+
+
+### Bug Fixes
+
+* **TabeRow:** workaround typing problem under typescript 5 ([99054d5](https://github.com/AdmiralDS/react-ui/commit/99054d5da234976c8ff4a4b997b6a5772edf166d))
+
+## [4.11.0](https://github.com/AdmiralDS/react-ui/compare/v4.10.0...v4.11.0) (2023-04-18)
+
+
+### Features
+
+* **Breadcrumbs:** add lastBreadcrumbActive prop to control active-inactive state of last breadcrumb ([a1d0fd7](https://github.com/AdmiralDS/react-ui/commit/a1d0fd7aec3eb6de7fb230b33f8a7e5dd18171c3))
+* components with drop now properly pass ref (was drop ref before) ([e53a7f9](https://github.com/AdmiralDS/react-ui/commit/e53a7f9f7b329642b005be49d6ffb72a7e6babcc))
+
+
+### Bug Fixes
+
+* **ContentSwitcher:** fix storybook docs, place playground story on 1st place ([9bb5c31](https://github.com/AdmiralDS/react-ui/commit/9bb5c315ee82e0662812c9d6c217bfa619e10055))
+* **DateInput:** fix stories controls ([21bbc31](https://github.com/AdmiralDS/react-ui/commit/21bbc3177434b61450a77a61c536fc9389453441))
+* **PaginationOne:** fix bug with menu width ([0056e78](https://github.com/AdmiralDS/react-ui/commit/0056e78b7c0b6489b8e38e3348938f4cdde2b91d))
+* **Select:** collapse control in readOnly mode without placeholder ([50efccd](https://github.com/AdmiralDS/react-ui/commit/50efccdebb167a9ba89c8c2ea45b0109c0a58fcd))
+
+## [4.10.0](https://github.com/AdmiralDS/react-ui/compare/v4.9.2...v4.10.0) (2023-04-11)
+
+
+### Features
+
+* **Select:** fix clear icon for multiselect mode ([f3ed09d](https://github.com/AdmiralDS/react-ui/commit/f3ed09db24a4a7145ddc2916540b9bcf899fec4f))
+
+
+### Bug Fixes
+
+* **Modal:** fix problem with props description ([e8447d8](https://github.com/AdmiralDS/react-ui/commit/e8447d8e9f824fa9ac6c04f35f7b0c1a5fcd837b))
+* **StatusIndicator:** fix docs, add playground ([9e652ac](https://github.com/AdmiralDS/react-ui/commit/9e652ac87e13959787fe89d0f6dbafd90279b5aa))
+* **Table:** fix bug with OverflowMenu mouseenter and row hover state ([d9349a5](https://github.com/AdmiralDS/react-ui/commit/d9349a585eade0306c614073bc90acef9e09451d))
+* **TabMenu:** fix press Tab style ([6a3827a](https://github.com/AdmiralDS/react-ui/commit/6a3827a0e435e8a9beaf1cb2d174b476ed50bfc9))
+* **Tag:** fix problem with props description ([b5e981a](https://github.com/AdmiralDS/react-ui/commit/b5e981a8ecaec9d01d299cedb97fe1e7648da924))
+
+### [4.9.2](https://github.com/AdmiralDS/react-ui/compare/v4.9.1...v4.9.2) (2023-04-06)
+
+
+### Bug Fixes
+
+* **TimeInput:** manage focus properly ([66cb3e0](https://github.com/AdmiralDS/react-ui/commit/66cb3e0cec4db6922c0552b28cd8cb24eeb7f06c))
+
+### [4.9.1](https://github.com/AdmiralDS/react-ui/compare/v4.9.0...v4.9.1) (2023-04-04)
+
+## [4.9.0](https://github.com/AdmiralDS/react-ui/compare/v4.8.1...v4.9.0) (2023-04-04)
+
+
+### Features
+
+* **Avatar:** move showTooltip prop from internal to usual props ([3772b3a](https://github.com/AdmiralDS/react-ui/commit/3772b3a71992b77a9811d78e1df8b4e140398ade))
+* **EditMode:** add multiline view mode ([77396ae](https://github.com/AdmiralDS/react-ui/commit/77396ae73bc98441fd645b227d7e148fb7d9d6e3))
+* **Menu:** add property rowCount ([760d2e3](https://github.com/AdmiralDS/react-ui/commit/760d2e331c2cf1377fd3fe086774a332d8913697))
+
+
+### Bug Fixes
+
+* **Button:** rise appearance style specificity ([4aef532](https://github.com/AdmiralDS/react-ui/commit/4aef532b647fb38ab7e9fc86f2251e66929b7ec8))
+* **MenuItem:** click on menu item shouldnt steal focus ([bb7f229](https://github.com/AdmiralDS/react-ui/commit/bb7f22920b8d8c1ae64eb06de575d59d0cfb2ba6))
+* npm run storybook must work from project root ([dea7ce4](https://github.com/AdmiralDS/react-ui/commit/dea7ce4d9dc380e852db233cff5079b1e21d109a))
+* **PaginationOne:** fix button focus style ([6b92385](https://github.com/AdmiralDS/react-ui/commit/6b9238523ddb03e497e3bfc67ca317670f7d6389))
+* **TabMenu:** fix render badge in OverflowMenu ([a9f0a48](https://github.com/AdmiralDS/react-ui/commit/a9f0a48b3ed91fd6fac730d5dbffc8c65d34c2ac))
+* **Tooltip:** fix bug with fonts loading ([c8fdc8a](https://github.com/AdmiralDS/react-ui/commit/c8fdc8ae4304e0dba284fbe64a07782aabd7319c))
+
 ### [4.8.1](https://github.com/AdmiralDS/react-ui/compare/v4.8.0...v4.8.1) (2023-03-23)
 
 
