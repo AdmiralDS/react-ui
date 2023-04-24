@@ -11,7 +11,7 @@ const TEXT_PADDING_M = 12;
 const TEXT_PADDING_S = 10;
 const INPUT_OFFSET = 2;
 const INNER_PADDING_M = 2;
-const INNER_PADDING_S = 3;
+const INNER_PADDING_S = 2;
 const FOCUS_OFFSET = 2;
 const FOCUS_BORDER_WIDTH = 2;
 const HOVER_BORDER_WIDTH_M = 8;
@@ -54,8 +54,8 @@ export const Span = styled.span<{ dimension: Dimension; disabled?: boolean; erro
 
 export const InputContainer = styled.div<{ dimension: Dimension }>`
   position: absolute;
-  top: ${INPUT_OFFSET}px;
-  left: ${INPUT_OFFSET}px;
+  top: ${(p) => (p.dimension === 's' ? 1 : INPUT_OFFSET)}px;
+  left: ${(p) => (p.dimension === 's' ? 1 : INPUT_OFFSET)}px;
   display: inline-block;
   ${({ dimension }) => `
     min-width: ${dimension === 's' ? DIMENSION_S : DIMENSION_M}px;

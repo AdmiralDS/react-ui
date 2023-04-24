@@ -32,15 +32,14 @@ const SkeletonLabel = styled.div`
   position: absolute;
   top: 0;
   left: 0;
-  height: 100%;
+  height: 16px;
   width: 50%;
-
+  margin-bottom: 8px;
   ${skeletonMixin}
 `;
 
 const LabelContainer = styled.div`
   position: relative;
-  margin-bottom: 8px;
   text-align: left;
 `;
 

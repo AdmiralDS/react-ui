@@ -148,12 +148,12 @@ const Template3: ComponentStory<typeof RadioButton> = () => {
 const Template4: ComponentStory<typeof RadioButton> = () => {
   return (
     <>
-      <RadioButton value={1} extraText="Add text">
-        Dimension - m
+      <RadioButton value={1} extraText="Additional text">
+        Text
       </RadioButton>
       <Separator />
-      <RadioButton value={1} dimension="s" extraText="Add text">
-        Dimension - s
+      <RadioButton value={1} dimension="s" extraText="Additional text">
+        Text
       </RadioButton>
     </>
   );
