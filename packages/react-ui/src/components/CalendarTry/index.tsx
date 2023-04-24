@@ -94,7 +94,7 @@ export const CalendarTry = React.forwardRef<HTMLDivElement, CalendarTryProps>(
     },
     ref,
   ) => {
-    const getInitialViewDate = () => {
+    const getInitialViewDate = (): Dayjs => {
       const current = dayjs();
       if (selected) {
         return selected.locale(currentLocale || 'ru');
@@ -119,7 +119,7 @@ export const CalendarTry = React.forwardRef<HTMLDivElement, CalendarTryProps>(
         });
     }
 
-    const [viewDate, setViewDate] = React.useState(getInitialViewDate());
+    const [viewDate, setViewDate] = React.useState<Dayjs>(getInitialViewDate());
 
     React.useEffect(() => {
       if (onViewDateChange) {
@@ -145,10 +145,16 @@ export const CalendarTry = React.forwardRef<HTMLDivElement, CalendarTryProps>(
     const handleYearClick = (date: Dayjs) => {
       changeYear(date.year());
       /*!currentActiveViewImportant && setYearsView(false);*/
-      if (pickerType === 'DATE_MONTH_YEAR') {
-        onViewModeChange?.('DATES');
-      } else if (pickerType === 'MONTH_YEAR') {
-        onViewModeChange?.('MONTHS');
+      switch (pickerType) {
+        case 'DATE_MONTH_YEAR':
+          onViewModeChange?.('DATES');
+          break;
+        case 'MONTH_YEAR':
+          onViewModeChange?.('MONTHS');
+          break;
+        case 'YEAR':
+          setViewDate(date);
+          break;
       }
       onSelectYear && onSelectYear(date);
     };

@@ -115,6 +115,7 @@ const Template1: ComponentStory<typeof CalendarTry> = (args) => {
   const handleDayClick2 = (date: Dayjs) => {
     console.log(`click on ${date.format('DD MMM YYYY')}`);
     setSelected2(date);
+    setViewDate2(date);
   };
 
   const handleMonthClick2 = (date: Dayjs) => {
