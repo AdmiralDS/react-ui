@@ -1,7 +1,7 @@
 import * as React from 'react';
 import dayjs from 'dayjs';
 import type { Dayjs } from 'dayjs';
-import styled, { ThemeProvider } from 'styled-components';
+import styled, { css, ThemeProvider } from 'styled-components';
 import { withDesign } from 'storybook-addon-designs';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import type { Theme } from '#src/components/themes';
@@ -61,6 +61,17 @@ const Separator = styled.div`
 const StyledDay = styled(DayCellWrapper)`
   color: ${(p) => (p.disabled ? p.theme.color['Neutral/Neutral 10'] : p.theme.color['Error/Error 60 Main'])};
 `;
+
+const weekendMixin = css<{ disabled?: boolean }>`
+  color: ${(p) => (p.disabled ? p.theme.color['Error/Error 30'] : p.theme.color['Error/Error 60 Main'])};
+`;
+
+const highlightSundays = (date: Dayjs) => {
+  if (date.day() === 0) {
+    return weekendMixin;
+  }
+  return undefined;
+};
 
 const Template1: ComponentStory<typeof CalendarTry> = (args) => {
   function swapBorder(theme: Theme): Theme {
@@ -166,6 +177,7 @@ const Template1: ComponentStory<typeof CalendarTry> = (args) => {
           onSelectMonth={handleMonthClick1}
           onSelectYear={handleYearClick1}
           disabledDate={filterDate}
+          highlightSpecialDay={highlightSundays}
         />
         <Separator />
         <CalendarTry

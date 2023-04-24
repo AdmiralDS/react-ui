@@ -1,7 +1,7 @@
 import * as React from 'react';
 import dayjs from 'dayjs';
 import type { Dayjs } from 'dayjs';
-import styled from 'styled-components';
+import styled, {DefaultTheme, FlattenInterpolation, ThemeProps} from 'styled-components';
 import { typography } from '#src/components/Typography';
 
 const DAY_SIZE = 36;
@@ -14,6 +14,7 @@ export interface DayCellProps {
   onSelectDate?: (date: Dayjs) => void;
   disabled?: boolean;
   isHidden: boolean;
+  highlightSpecialDay?: (date: Dayjs) => FlattenInterpolation<ThemeProps<DefaultTheme>> | undefined;
 }
 
 export const DayCellWrapper = styled.div<{
@@ -21,6 +22,7 @@ export const DayCellWrapper = styled.div<{
   disabled?: boolean;
   outsideMonth?: boolean;
   selected?: boolean;
+  highlightSpecialDayMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
 }>`
   position: relative;
   display: inline-block;
@@ -49,6 +51,8 @@ export const DayCellWrapper = styled.div<{
     ${(p) => (p.disabled ? '' : `border: 1px solid ${p.theme.color['Primary/Primary 60 Main']};`)}
   }
 
+  ${(p) => p.highlightSpecialDayMixin}
+
   ${(p) =>
     p.disabled &&
     `
@@ -75,7 +79,7 @@ export const DayCellWrapper = styled.div<{
       }
     `}
 `;
-export const DayCell = ({ date, selected, disabled, onSelectDate, isHidden }: DayCellProps) => {
+export const DayCell = ({ date, selected, disabled, onSelectDate, isHidden, highlightSpecialDay }: DayCellProps) => {
   const handleClick = () => {
     if (!disabled) {
       onSelectDate?.(date);
@@ -90,6 +94,7 @@ export const DayCell = ({ date, selected, disabled, onSelectDate, isHidden }: Da
       selected={date.isSame(selected, 'date')}
       disabled={disabled}
       onClick={handleClick}
+      highlightSpecialDayMixin={highlightSpecialDay?.(date)}
     >
       {date.date()}
     </DayCellWrapper>

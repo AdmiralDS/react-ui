@@ -2,6 +2,7 @@ import * as React from 'react';
 import type { Dayjs } from 'dayjs';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ru';
+import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import styled, { ThemeContext } from 'styled-components';
 import { LIGHT_THEME, mediumGroupBorderRadius } from '#src/components/themes';
 import { typography } from '#src/components/Typography';
@@ -57,6 +58,7 @@ export interface CalendarTryProps {
   onSelectYear?: (date: Dayjs) => void;
   disabledDate?: (date: Dayjs) => boolean;
   isHiddenDate?: (date: Dayjs) => boolean;
+  highlightSpecialDay?: (date: Dayjs) => FlattenInterpolation<ThemeProps<DefaultTheme>> | undefined;
   onViewDateChange?: (date: Dayjs) => void;
   userLocale?: string;
   locale?: {
@@ -85,6 +87,7 @@ export const CalendarTry = React.forwardRef<HTMLDivElement, CalendarTryProps>(
       validator,
       disabledDate,
       isHiddenDate,
+      highlightSpecialDay,
       userLocale,
       onSelectDate,
       onSelectMonth,
@@ -187,6 +190,7 @@ export const CalendarTry = React.forwardRef<HTMLDivElement, CalendarTryProps>(
           disabled={disabledDate?.(date)}
           onSelectDate={onSelectDate}
           isHidden={isHiddenDate?.(date) || defaultIsHidden(date)}
+          highlightSpecialDay={highlightSpecialDay}
         />
       );
     };
