@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.11.2](https://github.com/AdmiralDS/react-ui/compare/v4.11.1...v4.11.2) (2023-04-25)
+
+
+### Bug Fixes
+
+* radiobutton and field paddings ([dce4f7a](https://github.com/AdmiralDS/react-ui/commit/dce4f7affc166238e4e43680a56c388b95a7f367))
+* **Table:** fix onRowClick trigger when user clicks ExpandIcon ([527f3a7](https://github.com/AdmiralDS/react-ui/commit/527f3a75ed894ad083b66d0a944252076f33dc2b))
+* **Tooltip:** remove irrelevant withDelay prop from docs ([9c95db3](https://github.com/AdmiralDS/react-ui/commit/9c95db3b839b7b0b3c5f9d61a3c561a4f1519958))
+
 ### [4.11.1](https://github.com/AdmiralDS/react-ui/compare/v4.11.0...v4.11.1) (2023-04-20)
 
 
