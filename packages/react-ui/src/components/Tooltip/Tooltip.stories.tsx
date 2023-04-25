@@ -87,9 +87,6 @@ export default {
     layout: 'centered',
   },
   argTypes: {
-    withDelay: {
-      control: { type: 'boolean' },
-    },
     tooltipPosition: {
       options: ['bottom', 'top', 'left', 'right'],
       control: { type: 'radio' },
