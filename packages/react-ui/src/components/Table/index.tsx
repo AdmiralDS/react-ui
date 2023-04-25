@@ -263,6 +263,7 @@ export interface TableProps extends React.HTMLAttributes<HTMLDivElement> {
     /** Сообщение, отображаемое при отсутствии совпадений в строках после применения фильтра */
     emptyMessage?: React.ReactNode;
   };
+  onColumnDrag?: (newColumns: Column[]) => void;
 }
 
 type GroupInfo = {
@@ -307,6 +308,7 @@ export const Table: React.FC<TableProps> = ({
   showLastRowUnderline = true,
   virtualScroll,
   locale,
+  onColumnDrag,
   ...props
 }) => {
   const theme = React.useContext(ThemeContext) || LIGHT_THEME;
@@ -778,12 +780,20 @@ export const Table: React.FC<TableProps> = ({
       </HiddenHeader>
     );
   };
+  function handleDrop(item: any, before: any) {
+    const cols = [...columnList];
+    const movedIndex = cols.findIndex((col) => col.name === item.dataset.thColumn);
+    const moved = cols.splice(movedIndex, 1)[0];
+    const beforeIndex = cols.findIndex((col) => col.name === before.dataset.thColumn);
+    cols.splice(beforeIndex, 0, moved);
+    onColumnDrag?.(cols);
+  }
 
   return (
     <TableContainer ref={tableRef} data-shadow={false} {...props} className={`table ${props.className || ''}`}>
       {renderHiddenHeader()}
       <HeaderWrapper scrollbar={scrollbar} greyHeader={greyHeader} data-verticalscroll={verticalScroll}>
-        <Header dimension={dimension} ref={headerRef} className="tr">
+        <Header dimension={dimension} ref={headerRef} className="tr" onDrop={handleDrop}>
           {(displayRowSelectionColumn || displayRowExpansionColumn || stickyColumns.length > 0) && (
             <StickyWrapper greyHeader={greyHeader} data-draggable={false} data-droppable={false}>
               {displayRowExpansionColumn && <ExpandCell dimension={dimension} />}

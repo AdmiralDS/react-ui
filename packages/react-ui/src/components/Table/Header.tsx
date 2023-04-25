@@ -6,9 +6,10 @@ import { dragObserver } from './dragula';
 
 interface HeaderProps extends React.HTMLAttributes<HTMLDivElement> {
   dimension: 'xl' | 'l' | 'm' | 's';
+  onDrop: any
 }
 
-export const Header = React.forwardRef<HTMLDivElement, HeaderProps>(({ children, ...props }, ref) => {
+export const Header = React.forwardRef<HTMLDivElement, HeaderProps>(({ children, onDrop, ...props }, ref) => {
   const headerRef = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
@@ -26,7 +27,7 @@ export const Header = React.forwardRef<HTMLDivElement, HeaderProps>(({ children,
           if (sibling?.dataset.droppable == 'false') return false;
           return true; // elements can be dropped in any of the `containers` by default
         },
-      });
+      }, onDrop);
       return () => {
         observer.unobserve();
       };

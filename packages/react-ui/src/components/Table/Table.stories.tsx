@@ -143,7 +143,10 @@ const Template: ComponentStory<typeof Table> = ({ columnList, ...args }) => {
     setCols(newCols);
   };
 
-  return <Table {...args} columnList={cols} onColumnResize={handleResize} />;
+  const handleColumnDrag = (columns: any) => setCols(columns);
+  // const handleColumnDrag = (columns: any) => {}
+
+  return <Table {...args} columnList={cols} onColumnResize={handleResize} onColumnDrag={handleColumnDrag} />;
 };
 
 const StrToTime = (str: string) => {

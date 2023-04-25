@@ -116,16 +116,7 @@ export const Header = styled.div<{ dimension: TableProps['dimension'] }>`
     z-index: 9999;
   }
   .gu-transit {
-    visibility: hidden;
-  }
-  .gu-transit:before {
-    position: absolute;
-    content: '';
-    top: 100%;
-    bottom: -1px;
-    left: 0;
-    right: 0;
-    background: white;
+    opacity: 0.5;
   }
 `;
 

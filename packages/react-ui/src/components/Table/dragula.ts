@@ -22,7 +22,7 @@ type Options = {
   direction?: 'horizontal' | 'vertical';
 };
 
-export function dragObserver(initialContainers: HTMLElement[], options: Options) {
+export function dragObserver(initialContainers: HTMLElement[], options: Options, onDrop?: any) {
   let _mirror: any; // mirror image
   let _source: any; // source container
   let _item: any; // item being dragged
@@ -305,7 +305,8 @@ export function dragObserver(initialContainers: HTMLElement[], options: Options)
 
     if ((reference === null && changed) || (reference !== _item && reference !== nextEl(_item))) {
       _currentSibling = reference;
-      dropTarget.insertBefore(_item, reference);
+      // dropTarget.insertBefore(_item, reference);
+      onDrop?.(_item, reference);
     }
   }
 
