@@ -46,7 +46,10 @@ export interface CalendarTryProps {
   viewMode?: CalendarViewMode;
   onViewModeChange: (viewMode: CalendarViewMode) => void;
   pickerType?: PickerTypeMode;
+  rangePicker?: boolean;
   selected?: Dayjs;
+  startDate?: Dayjs;
+  endDate?: Dayjs;
   minDate?: Dayjs;
   maxDate?: Dayjs;
   renderDateCell?: (date: Dayjs) => React.ReactNode;
@@ -78,6 +81,7 @@ export const CalendarTry = React.forwardRef<HTMLDivElement, CalendarTryProps>(
       viewMode = 'DATES',
       onViewModeChange,
       pickerType = 'DATE_MONTH_YEAR',
+      rangePicker = false,
       selected,
       minDate,
       maxDate,
