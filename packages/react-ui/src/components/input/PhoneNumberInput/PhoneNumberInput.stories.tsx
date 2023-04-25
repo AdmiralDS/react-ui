@@ -53,7 +53,10 @@ export default {
   },
   argTypes: {
     value: {
-      control: false,
+      control: { type: 'text' },
+    },
+    defaultCountry: {
+      control: { type: 'text' },
     },
     onChange: {
       action: 'onChange',
@@ -89,9 +92,6 @@ export default {
       control: false,
     },
     onlyCountries: {
-      control: false,
-    },
-    defaultCountry: {
       control: false,
     },
     themeBorderKind: {
@@ -142,6 +142,7 @@ const PhoneNumberInputXL: ComponentStory<typeof PhoneNumberInput> = (props) => {
         {...cleanProps}
         dimension="xl"
         value={localValue}
+        defaultCountry={props.defaultCountry}
         style={{ maxWidth: '320px' }}
         onChange={handleChange}
         dropContainerClassName="dropContainerClass"
@@ -221,7 +222,10 @@ const PhoneNumberInputS: ComponentStory<typeof PhoneNumberInput> = (props) => {
 };
 
 export const PhoneNumberInputXLStory = PhoneNumberInputXL.bind({});
-PhoneNumberInputXLStory.args = {};
+PhoneNumberInputXLStory.args = {
+  defaultCountry: 'RUS',
+  value: '+7 123 456 78 90',
+};
 PhoneNumberInputXLStory.storyName = 'Phone Number Input. Размер XL';
 
 export const PhoneNumberInputMStory = PhoneNumberInputM.bind({});
