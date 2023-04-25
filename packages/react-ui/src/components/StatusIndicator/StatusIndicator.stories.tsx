@@ -73,9 +73,7 @@ const StatusIndicatorDemoPlayground: ComponentStory<typeof StatusIndicator> = (p
 
     return acc;
   }, {} as Record<any, any>);
-  return (
-      <StatusIndicator text="P 16px/24 book" icon={<CheckOutline />} {...cleanProps} />
-  );
+  return <StatusIndicator text="P 16px/24 book" icon={<CheckOutline />} {...cleanProps} />;
 };
 export const Playground = StatusIndicatorDemoPlayground.bind({});
 Playground.args = {};
