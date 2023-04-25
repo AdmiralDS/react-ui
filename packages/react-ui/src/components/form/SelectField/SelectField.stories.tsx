@@ -91,6 +91,9 @@ export default {
     required: {
       control: { type: 'boolean' },
     },
+    forcedOpen: {
+      control: { type: 'boolean' },
+    },
     dropContainerCssMixin: {
       control: false,
     },
@@ -99,6 +102,60 @@ export default {
     },
     dropContainerStyle: {
       control: false,
+    },
+    portalTargetRef: {
+      control: false,
+    },
+    inputTargetRef: {
+      control: false,
+    },
+    icons: {
+      control: false,
+    },
+    onInputChange: {
+      control: false,
+    },
+    onInputKeyDown: {
+      control: false,
+    },
+    onInputKeyUp: {
+      control: false,
+    },
+    onInputKeyDownCapture: {
+      control: false,
+    },
+    onInputKeyUpCapture: {
+      control: false,
+    },
+    locale: {
+      control: false,
+    },
+    virtualScroll: {
+      control: false,
+    },
+    value: {
+      control: { type: 'text' },
+    },
+    inputValue: {
+      control: { type: 'text' },
+    },
+    defaultValue: {
+      control: { type: 'text' },
+    },
+    defaultInputValue: {
+      control: { type: 'text' },
+    },
+    label: {
+      control: { type: 'text' },
+    },
+    extraText: {
+      control: { type: 'text' },
+    },
+    minRowCount: {
+      control: { type: 'number' },
+    },
+    maxRowCount: {
+      control: { type: 'number' },
     },
   },
 } as ComponentMeta<typeof SelectField>;
