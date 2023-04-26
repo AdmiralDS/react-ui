@@ -6,13 +6,11 @@ import ReactDOM from 'react-dom';
 import type { Interpolation } from 'styled-components';
 import styled, { css, ThemeContext } from 'styled-components';
 import { LIGHT_THEME } from '#src/components/themes';
-import { manager } from './manager';
-import { largeGroupBorderRadius } from '#src/components/themes/borderRadius';
+import { manager } from '#src/components/Modal/manager';
 import { checkOverflow } from '#src/components/common/utils/checkOverflow';
 import { CloseIconPlacementButton } from '#src/components/IconPlacement';
-import type { CSSProperties } from 'react';
 
-type Dimension = 'xl' | 'l' | 'm' | 's';
+type Placement = 'right' | 'left';
 
 const Overlay = styled.div<{ overlayStyledCss: Interpolation<any> }>`
   display: flex;
@@ -30,31 +28,13 @@ const Overlay = styled.div<{ overlayStyledCss: Interpolation<any> }>`
   outline: none;
 `;
 
-const width = css<{ dimension: Dimension; mobile?: boolean }>`
-  width: ${({ dimension, mobile }) => {
-    // 16px on left and right side
-    if (mobile) return 'calc(100% - 32px)';
-    switch (dimension) {
-      case 's':
-        return '384px';
-      case 'm':
-        return '488px';
-      case 'xl':
-        return '800px';
-      case 'l':
-      default:
-        return '592px';
-    }
-  }};
-`;
-
 const Title = styled.h5<{ mobile: boolean; displayCloseIcon: boolean }>`
   ${({ mobile }) => (mobile ? typography['Header/H6'] : typography['Header/H5'])};
   color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
   margin: 0;
   padding: ${({ mobile, displayCloseIcon }) => {
     if (mobile) {
-      return displayCloseIcon ? '0 46px 10px 16px' : '0 16px 10px';
+      return displayCloseIcon ? '0 48px 10px 16px' : '0 16px 10px';
     }
     return displayCloseIcon ? '0 56px 10px 24px' : '0 24px 10px';
   }};
@@ -81,42 +61,43 @@ const ButtonPanel = styled.div<{ mobile: boolean }>`
   }
 `;
 
-const ModalComponent = styled.div<{ dimension: Dimension; mobile?: boolean }>`
+const ModalComponent = styled.div<{ mobile?: boolean }>`
   position: absolute;
   box-sizing: border-box;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  top: 0;
+  bottom: 0;
+  right: 0;
+  ${({ mobile }) => mobile && 'left: 16px;'}
   display: flex;
+  flex: 1 0 auto;
   flex-direction: column;
   overflow: hidden;
   padding: 20px 0 24px;
-  ${width};
-  max-height: ${({ mobile }) => (mobile ? '84vh' : '90vh')};
-  background-color: ${({ theme }) => theme.color['Special/Elevated BG']};
+  min-width: 320px;
+  background-color: ${({ theme }) => theme.color['Neutral/Neutral 00']};
   ${({ theme }) => theme.shadow['Shadow 16']}
-  border-radius: ${(p) => largeGroupBorderRadius(p.theme.shape)};
-  ${({ mobile }) => (mobile ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
   color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
   outline: none;
 `;
 
 const CloseButton = styled(CloseIconPlacementButton)<{ mobile?: boolean }>`
   position: absolute;
-  top: 16px;
-  right: ${({ mobile }) => (mobile ? 12 : 20)}px;
+  top: 20px;
+  right: ${({ mobile }) => (mobile ? 16 : 24)}px;
 `;
 
 export const emptyOverlayStyledCss = css``;
 
-const ModalContext = React.createContext({ mobile: false, displayCloseIcon: true } as {
+const DrawerContext = React.createContext({ mobile: false, displayCloseIcon: true } as {
   mobile: boolean;
   displayCloseIcon: boolean;
 });
 
 export interface ModalProps extends React.HTMLAttributes<HTMLDivElement> {
-  /** Размер компонента */
-  dimension?: Dimension;
+  /** С какой части экрана будет выдвигаться компонент */
+  placement?: Placement;
+  /** Происходит ли блокировка контента страницы */
+  backdrop?: boolean;
   /** Контейнер, в котором происходит размещение модального окна (BODY по умолчанию) */
   container?: Element;
   /** Мобильная версия компонента */
@@ -135,15 +116,11 @@ export interface ModalProps extends React.HTMLAttributes<HTMLDivElement> {
   onClose?: () => void;
 
   /**
-   * Возможность изменять стили для подложки модального окна через миксин, созданный с помощью styled css.
+   * Возможность изменять стили для подложки модального окна.
    * Например цвет фона в зависимости от темы:
    *  const overlayStyles = css\`background-color: ${({ theme }) => hexToRgba(theme.color["Neutral/Neutral 05"], 0.6)};\`
    * */
   overlayStyledCss?: Interpolation<any>;
-  /** Позволяет добавлять класс на подложку модального окна  */
-  overlayClassName?: string;
-  /** Позволяет добавлять стили на подложку модального окна  */
-  overlayStyle?: CSSProperties;
   /** Объект локализации - позволяет перезадать текстовые константы используемые в компоненте,
    * по умолчанию значения констант берутся из темы в соответствии с параметром currentLocale, заданном в теме
    **/
@@ -153,13 +130,12 @@ export interface ModalProps extends React.HTMLAttributes<HTMLDivElement> {
   };
 }
 
-export const Modal = React.forwardRef<HTMLDivElement, ModalProps>(
+export const Drawer = React.forwardRef<HTMLDivElement, ModalProps>(
   (
     {
+      placement = 'right',
+      backdrop = true,
       overlayStyledCss = emptyOverlayStyledCss,
-      overlayClassName,
-      overlayStyle,
-      dimension = 'l',
       container,
       mobile = false,
       onClose,
@@ -246,19 +222,16 @@ export const Modal = React.forwardRef<HTMLDivElement, ModalProps>(
         onMouseDown={handleMouseDown}
         onKeyDown={handleKeyDown}
         overlayStyledCss={overlayStyledCss}
-        className={overlayClassName}
-        style={overlayStyle}
       >
         <ModalComponent
           ref={refSetter(ref, modalRef)}
           tabIndex={-1}
           role="dialog"
           aria-modal
-          dimension={dimension}
           mobile={mobile}
           {...props}
         >
-          <ModalContext.Provider value={{ mobile, displayCloseIcon }}>{children}</ModalContext.Provider>
+          <DrawerContext.Provider value={{ mobile, displayCloseIcon }}>{children}</DrawerContext.Provider>
           {displayCloseIcon && (
             <CloseButton
               dimension="lSmall"
@@ -274,10 +247,10 @@ export const Modal = React.forwardRef<HTMLDivElement, ModalProps>(
   },
 );
 
-Modal.displayName = 'Modal';
+Drawer.displayName = 'Drawer';
 
-export const ModalTitle: React.FC<React.HTMLAttributes<HTMLHeadingElement>> = ({ children, ...props }) => {
-  const { mobile, displayCloseIcon } = React.useContext(ModalContext);
+export const DrawerTitle: React.FC<React.HTMLAttributes<HTMLHeadingElement>> = ({ children, ...props }) => {
+  const { mobile, displayCloseIcon } = React.useContext(DrawerContext);
   const asProp = mobile ? 'h6' : 'h5';
   return (
     <Title mobile={mobile} displayCloseIcon={displayCloseIcon} as={asProp} {...props}>
@@ -286,11 +259,11 @@ export const ModalTitle: React.FC<React.HTMLAttributes<HTMLHeadingElement>> = ({
   );
 };
 
-export const ModalContent: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, ...props }) => {
+export const DrawerContent: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, ...props }) => {
   const contentRef = React.useRef<HTMLDivElement | null>(null);
   const [overflow, setOverflow] = React.useState(false);
   const [scrollbarSize, setScrollbarSize] = React.useState(0);
-  const mobile = React.useContext(ModalContext).mobile;
+  const mobile = React.useContext(DrawerContext).mobile;
 
   React.useLayoutEffect(() => {
     if (contentRef.current && checkOverflow(contentRef.current) !== overflow) {
@@ -321,8 +294,8 @@ export const ModalContent: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ c
   );
 };
 
-export const ModalButtonPanel: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, ...props }) => {
-  const mobile = React.useContext(ModalContext).mobile;
+export const DrawerButtonPanel: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, ...props }) => {
+  const mobile = React.useContext(DrawerContext).mobile;
   return (
     <ButtonPanel mobile={mobile} {...props}>
       {children}
