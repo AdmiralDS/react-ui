@@ -3,13 +3,14 @@ import { refSetter } from '#src/components/common/utils/refSetter';
 import { typography } from '#src/components/Typography';
 import * as React from 'react';
 import ReactDOM from 'react-dom';
-import type { Interpolation } from 'styled-components';
+import type { Interpolation, DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import styled, { css, ThemeContext } from 'styled-components';
 import { LIGHT_THEME } from '#src/components/themes';
 import ModalManager from './manager';
 import { largeGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { checkOverflow } from '#src/components/common/utils/checkOverflow';
 import { CloseIconPlacementButton } from '#src/components/IconPlacement';
+import type { CSSProperties } from 'react';
 
 type Dimension = 'xl' | 'l' | 'm' | 's';
 
@@ -126,14 +127,18 @@ export interface ModalProps extends React.HTMLAttributes<HTMLDivElement> {
   onClose?: () => void;
 
   /**
-   * Возможность изменять стили для подложки модального окна.
+   * Возможность изменять стили для подложки модального окна через миксин, созданный с помощью styled css.
    * Например цвет фона в зависимости от темы:
    *  const overlayStyles = css\`background-color: ${({ theme }) => hexToRgba(theme.color["Neutral/Neutral 05"], 0.6)};\`
    * */
-  overlayStyledCss?: Interpolation<any>;
+  overlayStyledCss?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
   /** Объект локализации - позволяет перезадать текстовые константы используемые в компоненте,
    * по умолчанию значения констант берутся из темы в соответствии с параметром currentLocale, заданном в теме
    **/
+  /** Позволяет добавлять класс на подложку модального окна  */
+  overlayClassName?: string;
+  /** Позволяет добавлять стили на подложку модального окна  */
+  overlayStyle?: CSSProperties;
   locale?: {
     /** Атрибут aria-label, описывающий назначение кнопки с крестиком, закрывающей модальное окно */
     closeButtonAriaLabel?: string;
@@ -146,6 +151,8 @@ export const Modal = React.forwardRef<HTMLDivElement, ModalProps>(
   (
     {
       overlayStyledCss = emptyOverlayStyledCss,
+      overlayClassName,
+      overlayStyle,
       dimension = 'l',
       container,
       mobile,
@@ -233,6 +240,8 @@ export const Modal = React.forwardRef<HTMLDivElement, ModalProps>(
         onMouseDown={handleMouseDown}
         onKeyDown={handleKeyDown}
         overlayStyledCss={overlayStyledCss}
+        className={overlayClassName}
+        style={overlayStyle}
       >
         <ModalComponent
           ref={refSetter(ref, modalRef)}
