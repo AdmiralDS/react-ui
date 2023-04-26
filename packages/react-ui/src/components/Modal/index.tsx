@@ -48,11 +48,16 @@ const width = css<{ dimension: Dimension; mobile?: boolean }>`
   }};
 `;
 
-const Title = styled.h5<{ mobile: boolean }>`
+const Title = styled.h5<{ mobile: boolean; displayCloseIcon: boolean }>`
   ${({ mobile }) => (mobile ? typography['Header/H6'] : typography['Header/H5'])};
   color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
   margin: 0;
-  padding: ${({ mobile }) => (mobile ? '0 46px 10px 16px' : '0 56px 10px 24px')};
+  padding: ${({ mobile, displayCloseIcon }) => {
+    if (mobile) {
+      return displayCloseIcon ? '0 46px 10px 16px' : '0 16px 10px';
+    }
+    return displayCloseIcon ? '0 56px 10px 24px' : '0 24px 10px';
+  }};
 `;
 
 const Content = styled.div<{ scrollbar: number; mobile: boolean }>`
@@ -85,7 +90,7 @@ const ModalComponent = styled.div<{ dimension: Dimension; mobile?: boolean }>`
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  padding: ${({ mobile }) => (mobile ? '20px 0 24px' : '20px 0 24px')};
+  padding: 20px 0 24px;
   ${width};
   max-height: ${({ mobile }) => (mobile ? '84vh' : '90vh')};
   background-color: ${({ theme }) => theme.color['Special/Elevated BG']};
@@ -104,7 +109,10 @@ const CloseButton = styled(CloseIconPlacementButton)<{ mobile?: boolean }>`
 
 export const emptyOverlayStyledCss = css``;
 
-const ModalContext = React.createContext({ mobile: false } as { mobile: boolean });
+const ModalContext = React.createContext({ mobile: false, displayCloseIcon: true } as {
+  mobile: boolean;
+  displayCloseIcon: boolean;
+});
 
 export interface ModalProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Размер компонента */
@@ -155,7 +163,7 @@ export const Modal = React.forwardRef<HTMLDivElement, ModalProps>(
       overlayStyle,
       dimension = 'l',
       container,
-      mobile,
+      mobile = false,
       onClose,
       closeOnEscapeKeyDown,
       closeOnOutsideClick,
@@ -252,7 +260,7 @@ export const Modal = React.forwardRef<HTMLDivElement, ModalProps>(
           mobile={mobile}
           {...props}
         >
-          <ModalContext.Provider value={{ mobile: !!mobile }}>{children}</ModalContext.Provider>
+          <ModalContext.Provider value={{ mobile, displayCloseIcon }}>{children}</ModalContext.Provider>
           {displayCloseIcon && (
             <CloseButton
               dimension="lSmall"
@@ -271,9 +279,10 @@ export const Modal = React.forwardRef<HTMLDivElement, ModalProps>(
 Modal.displayName = 'Modal';
 
 export const ModalTitle: React.FC<React.HTMLAttributes<HTMLHeadingElement>> = ({ children, ...props }) => {
-  const mobile = React.useContext(ModalContext).mobile;
+  const { mobile, displayCloseIcon } = React.useContext(ModalContext);
+  const asProp = mobile ? 'h6' : 'h5';
   return (
-    <Title mobile={mobile} {...props}>
+    <Title mobile={mobile} displayCloseIcon={displayCloseIcon} as={asProp} {...props}>
       {children}
     </Title>
   );
