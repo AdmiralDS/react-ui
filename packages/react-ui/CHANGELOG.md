@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.12.0](https://github.com/AdmiralDS/react-ui/compare/v4.11.2...v4.12.0) (2023-04-27)
+
+
+### Features
+
+* **Modal:** add overlayStyle and overlayClassname props ([823a1ac](https://github.com/AdmiralDS/react-ui/commit/823a1ac23056bf93ea6a4879ed081c6fb730a66b))
+
+
+### Bug Fixes
+
+* add text-rendering: geometricPrecision to all text tokens ([821c762](https://github.com/AdmiralDS/react-ui/commit/821c76218fd8a771b8613e330c8781b357ac2131))
+* **Chips:** fix behavior and hover style ([8119af7](https://github.com/AdmiralDS/react-ui/commit/8119af7f41ec4fac0eaeb518f9628d3893a9f33c))
+* **PaginationTwo:** clear input on new page selection ([4b8fe08](https://github.com/AdmiralDS/react-ui/commit/4b8fe0843ce08ba32aef3e641599acffe26def28))
+* **PaginationTwo:** fix button styles in mobile mode ([503fe9e](https://github.com/AdmiralDS/react-ui/commit/503fe9e9c9e63ccdc5393a874eaafa81ec624f9e))
+
 ### [4.11.2](https://github.com/AdmiralDS/react-ui/compare/v4.11.1...v4.11.2) (2023-04-25)
 
 
