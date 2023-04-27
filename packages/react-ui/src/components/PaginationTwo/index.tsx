@@ -162,14 +162,13 @@ export const PaginationTwo: React.FC<PaginationTwoProps> = ({
 
   const onInputSubmit = (event: any, value: string) => {
     const parsed = parseInt(value, 10);
-    if (isNaN(parsed)) {
-      setInputValue('');
-    } else if (disabledPages.indexOf(parsed) > -1) {
-      setInputValue('');
+    setInputValue('');
+
+    if (isNaN(parsed) || disabledPages.indexOf(parsed) > -1) {
+      return;
     } else {
       if (parsed !== page) {
         const newValue = parsed > count ? count : parsed < 1 ? 1 : parsed;
-        setInputValue(newValue.toString());
         onChange?.(event, newValue);
       }
     }
