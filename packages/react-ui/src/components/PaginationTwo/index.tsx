@@ -17,14 +17,6 @@ const Wrapper = styled.div<{ mobile?: boolean }>`
   flex: 1 1 auto;
   list-style: none;
   color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
-
-  ${({ mobile }) =>
-    mobile &&
-    `
-  & > ul {
-    margin: 0 4px 0 4px;
-  }
-  `}
 `;
 const PagesWrapper = styled.ul`
   position: relative;
@@ -43,6 +35,7 @@ const Input = styled(TextInput)`
 `;
 
 const Button = styled(SecondaryButton)`
+  width: 100%;
   margin-bottom: 20px;
 `;
 
