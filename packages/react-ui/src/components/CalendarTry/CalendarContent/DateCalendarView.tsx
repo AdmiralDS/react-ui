@@ -7,13 +7,14 @@ import type { CalendarViewMode } from '#src/components/CalendarTry/constants';
 export interface DateCalendarProps {
   date: Dayjs;
   renderCell: (date: Dayjs, viewMode: CalendarViewMode) => React.ReactNode;
+  onMouseLeave: () => void;
 }
 
-export const DateCalendarView = ({ date, renderCell }: DateCalendarProps) => {
+export const DateCalendarView = ({ date, renderCell, onMouseLeave }: DateCalendarProps) => {
   return (
     <>
       <DayNames date={date} />
-      <Month date={date} renderCell={renderCell} />
+      <Month onMouseLeave={onMouseLeave} date={date} renderCell={renderCell} />
     </>
   );
 };

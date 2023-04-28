@@ -34,6 +34,9 @@ export default {
       options: ['DATE_MONTH_YEAR', 'MONTH_YEAR', 'YEAR'],
       control: { type: 'radio' },
     },
+    rangePicker: {
+      control: { type: 'boolean' },
+    },
     validator: {
       control: false,
     },
@@ -82,8 +85,11 @@ const Template1: ComponentStory<typeof CalendarTry> = (args) => {
   const [viewMode1, setViewMode1] = React.useState<CalendarViewMode>('DATES');
   const [viewMode2, setViewMode2] = React.useState<CalendarViewMode>('DATES');
   const [selected1, setSelected1] = React.useState<Dayjs>(dayjs());
+  const [startDate1, setStartDate1] = React.useState<Dayjs | undefined>(undefined);
+  const [endDate1, setEndDate1] = React.useState<Dayjs | undefined>(undefined);
   const [selected2, setSelected2] = React.useState<Dayjs>(dayjs());
   const [viewDate2, setViewDate2] = React.useState<Dayjs>(selected2);
+  const [activeDate2, setActiveDate2] = React.useState<Dayjs | undefined>(undefined);
 
   React.useEffect(() => {
     switch (args.pickerType) {
@@ -103,12 +109,28 @@ const Template1: ComponentStory<typeof CalendarTry> = (args) => {
   }, [args.pickerType]);
 
   const filterDate = (date: Dayjs) => {
-    return date.day() === 6;
+    return date.date() < 7;
+    //return date.isSame(dayjs(), 'date');
   };
 
   const handleDayClick1 = (date: Dayjs) => {
     console.log(`click on ${date.format('DD MMM YYYY')}`);
-    setSelected1(date);
+    if (args.rangePicker) {
+      if (!startDate1) {
+        setStartDate1(date);
+      } else {
+        if (!endDate1) {
+          if (date.isAfter(startDate1)) {
+            setEndDate1(date);
+          }
+        } else {
+          setStartDate1(date);
+          setEndDate1(undefined);
+        }
+      }
+    } else {
+      setSelected1(date);
+    }
   };
 
   const handleMonthClick1 = (date: Dayjs) => {
@@ -123,6 +145,9 @@ const Template1: ComponentStory<typeof CalendarTry> = (args) => {
     }
   };
 
+  const handleViewModeChange1 = (viewMode: CalendarViewMode) => setViewMode1(viewMode);
+
+  //<editor-fold desc="custom variant">
   const handleDayClick2 = (date: Dayjs) => {
     console.log(`click on ${date.format('DD MMM YYYY')}`);
     setSelected2(date);
@@ -143,27 +168,38 @@ const Template1: ComponentStory<typeof CalendarTry> = (args) => {
     }
   };
 
+  const handleDayMouseEnter2 = (date: Dayjs, _: any) => {
+    setActiveDate2(date);
+  };
+  const handleDayMouseLeave2 = (date: Dayjs, _: any) => {
+    setActiveDate2(undefined);
+  };
+
   const customRenderDay = (date: Dayjs) => {
+    const disabled = filterDate(date);
     return (
       <StyledDay
         key={date.valueOf()}
         today={date.isSame(dayjs(), 'date')}
         selected={date.isSame(selected2, 'date')}
-        disabled={filterDate(date)}
+        disabled={disabled}
         outsideMonth={!date.isSame(viewDate2, 'month')}
         onClick={() => !filterDate(date) && handleDayClick2(date)}
+        isActiveDate={!!activeDate2 && date.isSame(activeDate2, 'date')}
+        onMouseEnter={(e) => !disabled && handleDayMouseEnter2(date, e)}
+        onMouseLeave={(e) => !disabled && handleDayMouseLeave2(date, e)}
       >
         {date.date()}
       </StyledDay>
     );
   };
 
-  const handleViewDateChange = (date: Dayjs) => {
+  const handleViewDateChange2 = (date: Dayjs) => {
     setViewDate2(date);
   };
 
-  const handleViewModeChange1 = (viewMode: CalendarViewMode) => setViewMode1(viewMode);
   const handleViewModeChange2 = (viewMode: CalendarViewMode) => setViewMode2(viewMode);
+  //</editor-fold>
 
   return (
     <ThemeProvider theme={swapBorder}>
@@ -172,7 +208,9 @@ const Template1: ComponentStory<typeof CalendarTry> = (args) => {
           pickerType={args.pickerType}
           viewMode={viewMode1}
           onViewModeChange={handleViewModeChange1}
-          selected={selected1}
+          //selected={selected1}
+          startDate={startDate1}
+          endDate={endDate1}
           onSelectDate={handleDayClick1}
           onSelectMonth={handleMonthClick1}
           onSelectYear={handleYearClick1}
@@ -188,7 +226,7 @@ const Template1: ComponentStory<typeof CalendarTry> = (args) => {
           onSelectMonth={handleMonthClick2}
           onSelectYear={handleYearClick2}
           renderDateCell={customRenderDay}
-          onViewDateChange={handleViewDateChange}
+          onViewDateChange={handleViewDateChange2}
           userLocale="en"
         />
       </div>
@@ -197,5 +235,7 @@ const Template1: ComponentStory<typeof CalendarTry> = (args) => {
 };
 
 export const CalendarWidgetSimple = Template1.bind({});
-CalendarWidgetSimple.args = {};
+CalendarWidgetSimple.args = {
+  rangePicker: true,
+};
 CalendarWidgetSimple.storyName = 'Simple.';

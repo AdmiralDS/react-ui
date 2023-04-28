@@ -27,7 +27,7 @@ export const CalendarWidgetWrapper = styled.div<{ viewMode: CalendarViewMode }>`
   box-sizing: border-box;
   text-align: center;
   border: 0 none;
-  //z-index: 0; /* to fix range rounded corners fill */
+  z-index: 0; /* для отрисовки белого кружка с синей рамочкой при ховере над датой в выбранном диапазоне */
 
   padding: ${(p) =>
     p.viewMode === 'YEARS' ? YEARS_VIEW_PADDING : p.viewMode === 'MONTHS' ? MONTHS_VIEW_PADDING : DAYS_VIEW_PADDING};
@@ -83,6 +83,8 @@ export const CalendarTry = React.forwardRef<HTMLDivElement, CalendarTryProps>(
       pickerType = 'DATE_MONTH_YEAR',
       rangePicker = false,
       selected,
+      startDate,
+      endDate,
       minDate,
       maxDate,
       renderDateCell,
@@ -127,6 +129,8 @@ export const CalendarTry = React.forwardRef<HTMLDivElement, CalendarTryProps>(
     }
 
     const [viewDate, setViewDate] = React.useState<Dayjs>(getInitialViewDate());
+    // активная дата, на которой сейчас ховер
+    const [activeDate, setActiveDate] = React.useState<Dayjs | undefined>(undefined);
 
     React.useEffect(() => {
       if (onViewDateChange) {
@@ -141,6 +145,13 @@ export const CalendarTry = React.forwardRef<HTMLDivElement, CalendarTryProps>(
         });
       }
     }, [currentLocale]);
+
+    const handleDayMouseEnter = (date: Dayjs, _: any) => {
+      setActiveDate(date);
+    };
+    const handleMonthMouseLeave = () => {
+      setActiveDate(undefined);
+    };
 
     const defaultIsHidden = (date: Dayjs) => {
       return !date.isSame(viewDate, 'month');
@@ -190,11 +201,15 @@ export const CalendarTry = React.forwardRef<HTMLDivElement, CalendarTryProps>(
         <DayCell
           key={date.valueOf()}
           date={date}
+          startDate={startDate}
+          endDate={endDate}
           selected={selected}
+          activeDate={activeDate}
           disabled={disabledDate?.(date)}
           onSelectDate={onSelectDate}
           isHidden={isHiddenDate?.(date) || defaultIsHidden(date)}
           highlightSpecialDay={highlightSpecialDay}
+          onMouseEnter={handleDayMouseEnter}
         />
       );
     };
@@ -291,6 +306,9 @@ export const CalendarTry = React.forwardRef<HTMLDivElement, CalendarTryProps>(
       );
     };
     const renderContent = () => {
+      /*console.log(`selected: ${selected?.format('DD-MM-YYYY')}`);
+      console.log(`startDate: ${startDate?.format('DD-MM-YYYY')}`);
+      console.log(`endDate: ${endDate?.format('DD-MM-YYYY')}`);*/
       switch (viewMode) {
         case 'YEARS':
           return <YearsCalendarView date={viewDate} renderCell={renderYearCell || defaultRenderYearCell} />;
@@ -298,7 +316,13 @@ export const CalendarTry = React.forwardRef<HTMLDivElement, CalendarTryProps>(
           return <MonthsCalendarView date={viewDate} renderCell={renderMonthCell || defaultRenderMonthCell} />;
         case 'DATES':
         default:
-          return <DateCalendarView date={viewDate} renderCell={renderDateCell || defaultRenderDateCell} />;
+          return (
+            <DateCalendarView
+              date={viewDate}
+              renderCell={renderDateCell || defaultRenderDateCell}
+              onMouseLeave={handleMonthMouseLeave}
+            />
+          );
       }
     };
 

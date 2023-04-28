@@ -6,6 +6,7 @@ import type { CalendarViewMode } from '#src/components/CalendarTry/constants';
 export interface MonthProps {
   date: Dayjs;
   renderCell: (date: Dayjs, viewMode: CalendarViewMode) => React.ReactNode;
+  onMouseLeave: () => void;
 }
 
 const FIXED_WEEK_COUNT = 6;
@@ -20,13 +21,15 @@ function getWeeksStartDates(viewDate: Dayjs, weeksNum: number) {
   return weeks;
 }
 
-export const Month = ({ date, renderCell }: MonthProps) => {
+export const Month = ({ date, renderCell, onMouseLeave }: MonthProps) => {
+  const handleMouseLeave = () => onMouseLeave();
+
   const weeks = getWeeksStartDates(date, FIXED_WEEK_COUNT);
   return (
-    <>
+    <div onMouseLeave={handleMouseLeave}>
       {weeks.map((weekStart) => (
         <Week key={weekStart.valueOf()} weekStartDate={weekStart} renderCell={renderCell} />
       ))}
-    </>
+    </div>
   );
 };
