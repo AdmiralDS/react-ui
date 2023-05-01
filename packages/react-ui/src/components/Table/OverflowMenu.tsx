@@ -3,7 +3,7 @@ import type { TableProps } from '#src/components/Table';
 
 import { OverflowMenuWrapper } from './style';
 
-interface OverflowMenuProps {
+interface OverflowMenuProps extends React.HTMLAttributes<HTMLDivElement> {
   dimension: TableProps['dimension'];
   tableWidth: number;
   row: any;
@@ -17,6 +17,7 @@ export const OverflowMenu: React.FC<OverflowMenuProps> = ({
   dimension,
   verticalScroll,
   scrollbar,
+  ...props
 }) => {
   const oveflowMenuRef = React.useRef<HTMLDivElement>(null);
 
@@ -35,6 +36,7 @@ export const OverflowMenu: React.FC<OverflowMenuProps> = ({
       data-opened={false}
       $offset={tableWidth - (verticalScroll ? scrollbar : 0)}
       dimension={dimension}
+      {...props}
     >
       {row.actionRender ? row.actionRender(row) : row.overflowMenuRender?.(row, handleVisibilityChange)}
     </OverflowMenuWrapper>

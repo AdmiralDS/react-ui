@@ -44,6 +44,8 @@ export const RowWrapper = ({
   grey,
   ...props
 }: RowWrapperProps) => {
+  const rowRef = React.useRef<HTMLDivElement>(null);
+
   const handleRowClick = (rowId: RowId) => {
     onRowClick?.(rowId);
   };
@@ -52,17 +54,26 @@ export const RowWrapper = ({
     onRowDoubleClick?.(rowId);
   };
 
+  const handleExpandedMouseEnter = () => {
+    rowRef.current?.classList.remove('hoverable');
+  };
+  const handleExpandedMouseLeave = () => {
+    rowRef.current?.classList.add('hoverable');
+  };
+
   return (
     <Row
       {...props}
+      ref={rowRef}
       onClick={() => handleRowClick(row.id)}
       onDoubleClick={() => handleRowDoubleClick(row.id)}
       underline={underline}
       disabled={!!row.disabled}
       dimension={dimension}
-      className={`tr ${row.className || ''}`}
+      className={`tr ${row.className || ''} hoverable`}
       isGroup={isGroup}
       rowWidth={rowWidth}
+      hover={!!row.hover}
     >
       <SimpleRow
         className="tr-simple"
@@ -71,7 +82,6 @@ export const RowWrapper = ({
         error={!!row.error}
         success={!!row.success}
         grey={!!grey}
-        hover={!!row.hover}
       >
         {children}
       </SimpleRow>
@@ -85,7 +95,13 @@ export const RowWrapper = ({
         />
       )}
       {row.expandedRowRender && (
-        <ExpandedRow opened={row.expanded} contentMaxHeight="90vh" className="tr-expanded">
+        <ExpandedRow
+          opened={row.expanded}
+          contentMaxHeight="90vh"
+          className="tr-expanded"
+          onMouseEnter={handleExpandedMouseEnter}
+          onMouseLeave={handleExpandedMouseLeave}
+        >
           <ExpandedRowContent>{row.expandedRowRender(row)}</ExpandedRowContent>
         </ExpandedRow>
       )}

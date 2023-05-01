@@ -70,6 +70,12 @@ export { ReactComponent as EmailOutline } from '@admiral-ds/icons/build/system/E
 export { ReactComponent as EmailReadOutline } from '@admiral-ds/icons/build/system/EmailReadOutline.svg';
 export { ReactComponent as EmailReadSolid } from '@admiral-ds/icons/build/system/EmailReadSolid.svg';
 export { ReactComponent as EmailSolid } from '@admiral-ds/icons/build/system/EmailSolid.svg';
+export { ReactComponent as EmojiNeutalOutline } from '@admiral-ds/icons/build/system/EmojiNeutalOutline.svg';
+export { ReactComponent as EmojiNeutralSolid } from '@admiral-ds/icons/build/system/EmojiNeutralSolid.svg';
+export { ReactComponent as EmojiSadOutline } from '@admiral-ds/icons/build/system/EmojiSadOutline.svg';
+export { ReactComponent as EmojiSadSolid } from '@admiral-ds/icons/build/system/EmojiSadSolid.svg';
+export { ReactComponent as EmojiSmileOutline } from '@admiral-ds/icons/build/system/EmojiSmileOutline.svg';
+export { ReactComponent as EmojiSmileSolid } from '@admiral-ds/icons/build/system/EmojiSmileSolid.svg';
 export { ReactComponent as ExitOutline } from '@admiral-ds/icons/build/system/ExitOutline.svg';
 export { ReactComponent as ExitSolid } from '@admiral-ds/icons/build/system/ExitSolid.svg';
 export { ReactComponent as ExportOutline } from '@admiral-ds/icons/build/system/ExportOutline.svg';

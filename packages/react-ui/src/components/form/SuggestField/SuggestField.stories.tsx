@@ -80,7 +80,7 @@ export default {
       control: false,
     },
     dropMaxHeight: {
-      control: false,
+      control: { type: 'text' },
     },
     icon: {
       control: false,

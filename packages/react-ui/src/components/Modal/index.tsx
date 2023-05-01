@@ -3,13 +3,14 @@ import { refSetter } from '#src/components/common/utils/refSetter';
 import { typography } from '#src/components/Typography';
 import * as React from 'react';
 import ReactDOM from 'react-dom';
-import type { Interpolation } from 'styled-components';
+import type { Interpolation, DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import styled, { css, ThemeContext } from 'styled-components';
 import { LIGHT_THEME } from '#src/components/themes';
 import ModalManager from './manager';
 import { largeGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { checkOverflow } from '#src/components/common/utils/checkOverflow';
 import { CloseIconPlacementButton } from '#src/components/IconPlacement';
+import type { CSSProperties } from 'react';
 
 type Dimension = 'xl' | 'l' | 'm' | 's';
 
@@ -47,11 +48,16 @@ const width = css<{ dimension: Dimension; mobile?: boolean }>`
   }};
 `;
 
-const Title = styled.h5<{ mobile: boolean }>`
+const Title = styled.h5<{ mobile: boolean; displayCloseIcon: boolean }>`
   ${({ mobile }) => (mobile ? typography['Header/H6'] : typography['Header/H5'])};
   color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
   margin: 0;
-  padding: ${({ mobile }) => (mobile ? '0 46px 10px 16px' : '0 56px 10px 24px')};
+  padding: ${({ mobile, displayCloseIcon }) => {
+    if (mobile) {
+      return displayCloseIcon ? '0 46px 10px 16px' : '0 16px 10px';
+    }
+    return displayCloseIcon ? '0 56px 10px 24px' : '0 24px 10px';
+  }};
 `;
 
 const Content = styled.div<{ scrollbar: number; mobile: boolean }>`
@@ -84,7 +90,7 @@ const ModalComponent = styled.div<{ dimension: Dimension; mobile?: boolean }>`
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  padding: ${({ mobile }) => (mobile ? '20px 0 24px' : '20px 0 24px')};
+  padding: 20px 0 24px;
   ${width};
   max-height: ${({ mobile }) => (mobile ? '84vh' : '90vh')};
   background-color: ${({ theme }) => theme.color['Special/Elevated BG']};
@@ -103,60 +109,10 @@ const CloseButton = styled(CloseIconPlacementButton)<{ mobile?: boolean }>`
 
 export const emptyOverlayStyledCss = css``;
 
-const ModalContext = React.createContext({ mobile: false } as { mobile: boolean });
-
-export const ModalTitle: React.FC<React.HTMLAttributes<HTMLHeadingElement>> = ({ children, ...props }) => {
-  const mobile = React.useContext(ModalContext).mobile;
-  return (
-    <Title mobile={mobile} {...props}>
-      {children}
-    </Title>
-  );
-};
-
-export const ModalContent: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, ...props }) => {
-  const contentRef = React.useRef<HTMLDivElement | null>(null);
-  const [overflow, setOverflow] = React.useState(false);
-  const [scrollbarSize, setScrollbarSize] = React.useState(0);
-  const mobile = React.useContext(ModalContext).mobile;
-
-  React.useLayoutEffect(() => {
-    if (contentRef.current && checkOverflow(contentRef.current) !== overflow) {
-      setScrollbarSize(contentRef.current.offsetWidth - contentRef.current.clientWidth);
-      setOverflow(checkOverflow(contentRef.current));
-    }
-  }, [children, overflow, setOverflow]);
-
-  React.useLayoutEffect(() => {
-    if (contentRef.current) {
-      const resizeObserver = new ResizeObserver(() => {
-        if (contentRef.current && checkOverflow(contentRef.current) !== overflow) {
-          setScrollbarSize(contentRef.current.offsetWidth - contentRef.current.clientWidth);
-          setOverflow(checkOverflow(contentRef.current));
-        }
-      });
-      resizeObserver.observe(contentRef.current);
-      return () => {
-        resizeObserver.disconnect();
-      };
-    }
-  }, [overflow, setOverflow]);
-
-  return (
-    <Content tabIndex={-1} ref={contentRef} scrollbar={overflow ? scrollbarSize : 0} mobile={mobile} {...props}>
-      {children}
-    </Content>
-  );
-};
-
-export const ModalButtonPanel: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, ...props }) => {
-  const mobile = React.useContext(ModalContext).mobile;
-  return (
-    <ButtonPanel mobile={mobile} {...props}>
-      {children}
-    </ButtonPanel>
-  );
-};
+const ModalContext = React.createContext({ mobile: false, displayCloseIcon: true } as {
+  mobile: boolean;
+  displayCloseIcon: boolean;
+});
 
 export interface ModalProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Размер компонента */
@@ -179,11 +135,15 @@ export interface ModalProps extends React.HTMLAttributes<HTMLDivElement> {
   onClose?: () => void;
 
   /**
-   * Возможность изменять стили для подложки модального окна.
+   * Позволяет добавлять стили для подложки модального окна через миксин, созданный с помощью styled css.
    * Например цвет фона в зависимости от темы:
    *  const overlayStyles = css\`background-color: ${({ theme }) => hexToRgba(theme.color["Neutral/Neutral 05"], 0.6)};\`
    * */
-  overlayStyledCss?: Interpolation<any>;
+  overlayStyledCss?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+  /** Позволяет добавлять класс на подложку модального окна  */
+  overlayClassName?: string;
+  /** Позволяет добавлять стили на подложку модального окна  */
+  overlayStyle?: CSSProperties;
   /** Объект локализации - позволяет перезадать текстовые константы используемые в компоненте,
    * по умолчанию значения констант берутся из темы в соответствии с параметром currentLocale, заданном в теме
    **/
@@ -199,9 +159,11 @@ export const Modal = React.forwardRef<HTMLDivElement, ModalProps>(
   (
     {
       overlayStyledCss = emptyOverlayStyledCss,
+      overlayClassName,
+      overlayStyle,
       dimension = 'l',
       container,
-      mobile,
+      mobile = false,
       onClose,
       closeOnEscapeKeyDown,
       closeOnOutsideClick,
@@ -286,6 +248,8 @@ export const Modal = React.forwardRef<HTMLDivElement, ModalProps>(
         onMouseDown={handleMouseDown}
         onKeyDown={handleKeyDown}
         overlayStyledCss={overlayStyledCss}
+        className={overlayClassName}
+        style={overlayStyle}
       >
         <ModalComponent
           ref={refSetter(ref, modalRef)}
@@ -296,7 +260,7 @@ export const Modal = React.forwardRef<HTMLDivElement, ModalProps>(
           mobile={mobile}
           {...props}
         >
-          <ModalContext.Provider value={{ mobile: !!mobile }}>{children}</ModalContext.Provider>
+          <ModalContext.Provider value={{ mobile, displayCloseIcon }}>{children}</ModalContext.Provider>
           {displayCloseIcon && (
             <CloseButton
               dimension="lSmall"
@@ -313,3 +277,57 @@ export const Modal = React.forwardRef<HTMLDivElement, ModalProps>(
 );
 
 Modal.displayName = 'Modal';
+
+export const ModalTitle: React.FC<React.HTMLAttributes<HTMLHeadingElement>> = ({ children, ...props }) => {
+  const { mobile, displayCloseIcon } = React.useContext(ModalContext);
+  const asProp = mobile ? 'h6' : 'h5';
+  return (
+    <Title mobile={mobile} displayCloseIcon={displayCloseIcon} as={asProp} {...props}>
+      {children}
+    </Title>
+  );
+};
+
+export const ModalContent: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, ...props }) => {
+  const contentRef = React.useRef<HTMLDivElement | null>(null);
+  const [overflow, setOverflow] = React.useState(false);
+  const [scrollbarSize, setScrollbarSize] = React.useState(0);
+  const mobile = React.useContext(ModalContext).mobile;
+
+  React.useLayoutEffect(() => {
+    if (contentRef.current && checkOverflow(contentRef.current) !== overflow) {
+      setScrollbarSize(contentRef.current.offsetWidth - contentRef.current.clientWidth);
+      setOverflow(checkOverflow(contentRef.current));
+    }
+  }, [children, overflow, setOverflow]);
+
+  React.useLayoutEffect(() => {
+    if (contentRef.current) {
+      const resizeObserver = new ResizeObserver(() => {
+        if (contentRef.current && checkOverflow(contentRef.current) !== overflow) {
+          setScrollbarSize(contentRef.current.offsetWidth - contentRef.current.clientWidth);
+          setOverflow(checkOverflow(contentRef.current));
+        }
+      });
+      resizeObserver.observe(contentRef.current);
+      return () => {
+        resizeObserver.disconnect();
+      };
+    }
+  }, [overflow, setOverflow]);
+
+  return (
+    <Content tabIndex={-1} ref={contentRef} scrollbar={overflow ? scrollbarSize : 0} mobile={mobile} {...props}>
+      {children}
+    </Content>
+  );
+};
+
+export const ModalButtonPanel: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, ...props }) => {
+  const mobile = React.useContext(ModalContext).mobile;
+  return (
+    <ButtonPanel mobile={mobile} {...props}>
+      {children}
+    </ButtonPanel>
+  );
+};

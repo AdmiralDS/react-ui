@@ -9,6 +9,7 @@ import { IconContainer } from '#src/components/TextButton/commonMixin';
 import type { DropMenuComponentProps } from '#src/components/DropMenu';
 import { DropMenu } from '#src/components/DropMenu';
 import { passDropdownDataAttributes } from '#src/components/common/utils/splitDataAttributes';
+import { refSetter } from '../common/utils/refSetter';
 
 const StyledTextButton = styled(TextButton)<{ menuOpened?: boolean; appearance?: Appearance }>`
   &:focus {
@@ -109,7 +110,6 @@ export const TextButtonMenu = React.forwardRef<HTMLButtonElement, TextButtonMenu
 
     return (
       <DropMenu
-        ref={ref}
         dimension={dimension}
         menuWidth={menuWidth}
         menuMaxHeight={menuMaxHeight}
@@ -138,7 +138,7 @@ export const TextButtonMenu = React.forwardRef<HTMLButtonElement, TextButtonMenu
               {...props}
               text={text}
               skeleton={skeleton}
-              ref={buttonRef as React.Ref<HTMLButtonElement>}
+              ref={refSetter(ref, buttonRef as React.Ref<HTMLButtonElement>)}
               dimension={dimension}
               appearance={appearance === 'primary' ? 'primary' : 'secondary'}
               displayRight

@@ -141,6 +141,7 @@ export const Chips = React.forwardRef<HTMLDivElement, ChipsProps>(
           withBadge={withBadge}
           onKeyDown={handleKeyDown}
           tabIndex={props.tabIndex ?? 0}
+          clickable={!!props.onClick}
         >
           <ChipContentWrapperStyled
             dimension={dimension}

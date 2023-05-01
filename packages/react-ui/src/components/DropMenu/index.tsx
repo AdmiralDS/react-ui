@@ -7,7 +7,6 @@ import type { DropdownContainerProps } from '#src/components/DropdownContainer';
 import { StyledDropdownContainer } from '#src/components/DropdownContainer';
 import type { MenuDimensions as Dimension, MenuProps } from '#src/components/Menu';
 import { Menu } from '#src/components/Menu';
-import { refSetter } from '#src/components/common/utils/refSetter';
 import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import styled from 'styled-components';
 
@@ -91,6 +90,8 @@ export interface DropMenuProps
   disabled?: boolean;
   /**  Компонент, относительно которого необходимо выравнивать выпадающее меню */
   alignMenuRef?: React.RefObject<HTMLElement>;
+  /** Элемент, относительно которого позиционируется портал */
+  targetElement?: Element;
   /** Выравнивание выпадающего меню относительно компонента https://developer.mozilla.org/en-US/docs/Web/CSS/align-self */
   alignSelf?: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
   /** Компонент, для которого необходимо Menu */
@@ -107,7 +108,7 @@ export interface DropMenuProps
   onVisibilityChange?: (isVisible: boolean) => void;
 }
 
-export const DropMenu = React.forwardRef<HTMLElement, DropMenuProps>(
+export const DropMenu = React.forwardRef<HTMLDivElement, DropMenuProps>(
   (
     {
       dimension = 'm',
@@ -126,6 +127,7 @@ export const DropMenu = React.forwardRef<HTMLElement, DropMenuProps>(
       onClick,
       onKeyDown,
       alignMenuRef,
+      targetElement,
       renderContentProp,
       menuMaxHeight,
       dropContainerCssMixin,
@@ -211,7 +213,7 @@ export const DropMenu = React.forwardRef<HTMLElement, DropMenuProps>(
       <>
         {renderContentProp({
           disabled,
-          buttonRef: refSetter(ref, btnRef),
+          buttonRef: btnRef,
           handleKeyDown: handleBtnKeyDown,
           handleClick: reverseMenu,
           statusIcon: <OpenStatusButton $isOpen={isMenuOpen} aria-hidden />,
@@ -219,9 +221,11 @@ export const DropMenu = React.forwardRef<HTMLElement, DropMenuProps>(
         })}
         {isMenuOpen && !loading && (
           <DropMenuContainer
+            ref={ref}
             role="listbox"
             alignSelf={alignSelf}
             targetRef={alignMenuRef || btnRef}
+            targetElement={targetElement}
             onClickOutside={clickOutside}
             dropContainerCssMixin={dropContainerCssMixin}
             className={dropContainerClassName}

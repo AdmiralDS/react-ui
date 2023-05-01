@@ -89,7 +89,7 @@ const PhoneInputDropContainer = styled(StyledDropdownContainer)`
 
 export interface PhoneNumberInputProps extends Omit<TextInputProps, 'value'> {
   value?: string;
-  /** Код ISO A3 страны для определния префикса номера по умолчанию */
+  /** Код ISO A3 страны для определения префикса номера по умолчанию */
   defaultCountry?: CountryAlpha3Code;
   /** Список стран для выпадающего списка. Отмечается кодом ISO A3 страны */
   onlyCountries?: Array<CountryAlpha3Code>;

@@ -50,6 +50,9 @@ export default {
       options: ['primary', 'error'],
       control: { type: 'radio' },
     },
+    label: {
+      control: { type: 'text' },
+    },
   },
 } as ComponentMeta<typeof ProgressPage>;
 
@@ -59,10 +62,16 @@ const Template1: ComponentStory<typeof ProgressPage> = ({ ...args }) => {
       <ProgressPage
         {...args}
         label={
-          <>
-            <div>{args.appearance === 'error' ? 'Ошибка загрузки' : 'Загрузка данных...'}</div>
-            <div> {args.percent}%</div>
-          </>
+          args.label ? (
+            <>
+              <div>{args.label}</div>
+            </>
+          ) : (
+            <>
+              <div>{args.appearance === 'error' ? 'Ошибка загрузки' : 'Загрузка данных...'}</div>
+              <div> {args.percent}%</div>
+            </>
+          )
         }
         percent={args.percent}
         role="alert"

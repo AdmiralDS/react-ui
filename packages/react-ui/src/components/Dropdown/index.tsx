@@ -8,7 +8,7 @@ import { keyboardKey } from '#src/components/common/keyboardKey';
 import { moveFocus, nextItem, previousItem } from '#src/components/Dropdown/utils';
 import { refSetter } from '#src/components/common/utils/refSetter';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
-import { useDropdown, useDropdownsClickOutside } from '#src/components/DropdownProvider';
+import { DropdownContext, useDropdown, useDropdownsClickOutside } from '#src/components/DropdownProvider';
 
 const Container = styled.div<{
   alignSelf?: string;
@@ -93,6 +93,7 @@ export const Dropdown = React.forwardRef<HTMLDivElement, React.PropsWithChildren
     const [displayUpward, setDisplayUpward] = React.useState(false);
 
     const { addDropdown, removeDropdown, dropdowns } = useDropdown(containerRef);
+    const { rootRef } = React.useContext(DropdownContext);
     const handleClickOutside = (e: Event) => {
       if (useDropdownsClickOutside(e, dropdowns)) onClickOutside(e);
     };
@@ -227,7 +228,7 @@ export const Dropdown = React.forwardRef<HTMLDivElement, React.PropsWithChildren
     }, []);
 
     return (
-      <Portal targetRef={targetRef} reverse={displayUpward}>
+      <Portal targetRef={targetRef} reverse={displayUpward} rootRef={rootRef}>
         <FakeTarget />
         <Container ref={refSetter(ref, containerRef)} {...props} className={className + ' dropdown-container'} />
       </Portal>

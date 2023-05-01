@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { typography } from '#src/components/Typography';
 
 export const Label = styled.label<{ disabled?: boolean }>`
+  display: block;
   text-align: left;
   ${typography['Body/Body 2 Short']}
   color: ${(props) => props.theme.color['Neutral/Neutral 50']};

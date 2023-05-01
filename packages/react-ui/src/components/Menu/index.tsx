@@ -9,7 +9,7 @@ import { refSetter } from '#src/components/common/utils/refSetter';
 
 export type MenuDimensions = 'l' | 'm' | 's';
 
-const getItemHeight = (dimension?: MenuDimensions) => {
+export const getItemHeight = (dimension?: MenuDimensions) => {
   switch (dimension) {
     case 'l':
       return 48;

@@ -6,6 +6,8 @@ export { ReactComponent as AddTemplateOutline } from '@admiral-ds/icons/build/do
 export { ReactComponent as AddTemplateSolid } from '@admiral-ds/icons/build/documents/AddTemplateSolid.svg';
 export { ReactComponent as ArchiveOutline } from '@admiral-ds/icons/build/documents/ArchiveOutline.svg';
 export { ReactComponent as ArchiveSolid } from '@admiral-ds/icons/build/documents/ArchiveSolid.svg';
+export { ReactComponent as BurnCardOutline } from '@admiral-ds/icons/build/documents/BurnCardOutline.svg';
+export { ReactComponent as BurnCardSolid } from '@admiral-ds/icons/build/documents/BurnCardSolid.svg';
 export { ReactComponent as CatalogOutline } from '@admiral-ds/icons/build/documents/CatalogOutline.svg';
 export { ReactComponent as CatalogSolid } from '@admiral-ds/icons/build/documents/CatalogSolid.svg';
 export { ReactComponent as ComponentTemplateOutline } from '@admiral-ds/icons/build/documents/ComponentTemplateOutline.svg';
@@ -80,6 +82,8 @@ export { ReactComponent as PDFOutline } from '@admiral-ds/icons/build/documents/
 export { ReactComponent as PDFSolid } from '@admiral-ds/icons/build/documents/PDFSolid.svg';
 export { ReactComponent as PPTOutline } from '@admiral-ds/icons/build/documents/PPTOutline.svg';
 export { ReactComponent as PPTSolid } from '@admiral-ds/icons/build/documents/PPTSolid.svg';
+export { ReactComponent as PersonCardOutline } from '@admiral-ds/icons/build/documents/PersonCardOutline.svg';
+export { ReactComponent as PersonCardSolid } from '@admiral-ds/icons/build/documents/PersonCardSolid.svg';
 export { ReactComponent as RotateLeftOutline } from '@admiral-ds/icons/build/documents/RotateLeftOutline.svg';
 export { ReactComponent as RotateLeftSolid } from '@admiral-ds/icons/build/documents/RotateLeftSolid.svg';
 export { ReactComponent as RotateRightOutline } from '@admiral-ds/icons/build/documents/RotateRightOutline.svg';
@@ -92,6 +96,8 @@ export { ReactComponent as ScanSendSolid } from '@admiral-ds/icons/build/documen
 export { ReactComponent as ScanSolid } from '@admiral-ds/icons/build/documents/ScanSolid.svg';
 export { ReactComponent as SendSignOutline } from '@admiral-ds/icons/build/documents/SendSignOutline.svg';
 export { ReactComponent as SendSignSolid } from '@admiral-ds/icons/build/documents/SendSignSolid.svg';
+export { ReactComponent as SignAnotherPersonOutline } from '@admiral-ds/icons/build/documents/SignAnotherPersonOutline.svg';
+export { ReactComponent as SignAnotherPersonSolid } from '@admiral-ds/icons/build/documents/SignAnotherPersonSolid.svg';
 export { ReactComponent as SignOutline } from '@admiral-ds/icons/build/documents/SignOutline.svg';
 export { ReactComponent as SignSolid } from '@admiral-ds/icons/build/documents/SignSolid.svg';
 export { ReactComponent as TasksOutline } from '@admiral-ds/icons/build/documents/TasksOutline.svg';
@@ -106,3 +112,5 @@ export { ReactComponent as XLSOutline } from '@admiral-ds/icons/build/documents/
 export { ReactComponent as XLSSolid } from '@admiral-ds/icons/build/documents/XLSSolid.svg';
 export { ReactComponent as XMLOutline } from '@admiral-ds/icons/build/documents/XMLOutline.svg';
 export { ReactComponent as XMLSolid } from '@admiral-ds/icons/build/documents/XMLSolid.svg';
+export { ReactComponent as ZIPOutline } from '@admiral-ds/icons/build/documents/ZIPOutline.svg';
+export { ReactComponent as ZIPSolid } from '@admiral-ds/icons/build/documents/ZIPSolid.svg';
