@@ -89,6 +89,9 @@ export default {
     skeleton: {
       control: { type: 'boolean' },
     },
+    forceHideOverflowTooltip: {
+      control: { type: 'boolean' },
+    },
     alignDropdown: {
       options: [undefined, 'auto', 'flex-start', 'flex-end', 'center', 'baseline', 'stretch'],
       control: { type: 'select' },
