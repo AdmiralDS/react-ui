@@ -32,16 +32,8 @@ Object {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
   color: #23262D;
-}
-
-.c0:hover {
-  background-color: #D5D8DE;
-}
-
-.c0:active {
-  color: #0062FF;
-  background-color: #D5D8DE;
 }
 
 .c0:focus-visible {
@@ -139,16 +131,8 @@ Object {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
   color: #23262D;
-}
-
-.c0:hover {
-  background-color: #D5D8DE;
-}
-
-.c0:active {
-  color: #0062FF;
-  background-color: #D5D8DE;
 }
 
 .c0:focus-visible {
@@ -301,18 +285,8 @@ Object {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
   color: #FFFFFF;
-}
-
-.c0:hover {
-  background-color: #0046E2;
-  border-color: #0046E2;
-}
-
-.c0:active {
-  color: #FFFFFF;
-  background-color: #0062FF;
-  border-color: #0062FF;
 }
 
 .c0:focus-visible {
@@ -410,18 +384,8 @@ Object {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
   color: #FFFFFF;
-}
-
-.c0:hover {
-  background-color: #0046E2;
-  border-color: #0046E2;
-}
-
-.c0:active {
-  color: #FFFFFF;
-  background-color: #0062FF;
-  border-color: #0062FF;
 }
 
 .c0:focus-visible {
@@ -574,16 +538,8 @@ Object {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
   color: #0062FF;
-}
-
-.c0:hover {
-  background-color: #0000000D;
-}
-
-.c0:active {
-  color: #FFFFFF;
-  background-color: #0000000D;
 }
 
 .c0:focus-visible {
@@ -681,16 +637,8 @@ Object {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
   color: #0062FF;
-}
-
-.c0:hover {
-  background-color: #0000000D;
-}
-
-.c0:active {
-  color: #FFFFFF;
-  background-color: #0000000D;
 }
 
 .c0:focus-visible {

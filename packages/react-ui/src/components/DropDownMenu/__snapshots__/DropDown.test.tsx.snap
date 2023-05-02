@@ -34,6 +34,7 @@ Object {
   font-size: 16px;
   line-height: 24px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
   text-overflow: ellipsis;
   color: #23262D;
   background: #FFFFFF;
@@ -54,6 +55,7 @@ ul[data-dimension='s'] .c6 {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
 }
 
 .c7:hover {
@@ -245,6 +247,7 @@ Object {
   font-size: 16px;
   line-height: 24px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
   text-overflow: ellipsis;
   color: #23262D;
   background: #FFFFFF;
@@ -265,6 +268,7 @@ ul[data-dimension='s'] .c6 {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
 }
 
 .c7:hover {
@@ -313,6 +317,7 @@ ul[data-dimension='s'] .c6 {
   font-size: 16px;
   line-height: 24px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
   text-overflow: ellipsis;
   color: #23262D;
   background: #FFFFFF;
@@ -333,6 +338,7 @@ ul[data-dimension='s'] .c6 {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
 }
 
 ul[data-selectedid="2"] .c8.c8 {
@@ -385,6 +391,7 @@ ul[data-selectedid="2"] .c8.c8 {
   font-size: 16px;
   line-height: 24px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
   text-overflow: ellipsis;
   color: #23262D;
   background: #FFFFFF;
@@ -405,6 +412,7 @@ ul[data-dimension='s'] .c6 {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
 }
 
 ul[data-selectedid="3"] .c9.c9 {
@@ -457,6 +465,7 @@ ul[data-selectedid="3"] .c9.c9 {
   font-size: 16px;
   line-height: 24px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
   text-overflow: ellipsis;
   color: #23262D;
   background: #FFFFFF;
@@ -477,6 +486,7 @@ ul[data-dimension='s'] .c6 {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
 }
 
 ul[data-selectedid="4"] .c10.c10 {
@@ -529,6 +539,7 @@ ul[data-selectedid="4"] .c10.c10 {
   font-size: 16px;
   line-height: 24px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
   text-overflow: ellipsis;
   color: #23262D;
   background: #FFFFFF;
@@ -549,6 +560,7 @@ ul[data-dimension='s'] .c6 {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
 }
 
 ul[data-selectedid="5"] .c11.c11 {
@@ -601,6 +613,7 @@ ul[data-selectedid="5"] .c11.c11 {
   font-size: 16px;
   line-height: 24px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
   text-overflow: ellipsis;
   color: #23262D;
   background: #FFFFFF;
@@ -621,6 +634,7 @@ ul[data-dimension='s'] .c6 {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
 }
 
 ul[data-selectedid="10"] .c12.c12 {
@@ -673,6 +687,7 @@ ul[data-selectedid="10"] .c12.c12 {
   font-size: 16px;
   line-height: 24px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
   text-overflow: ellipsis;
   color: #23262D;
   background: #FFFFFF;
@@ -693,6 +708,7 @@ ul[data-dimension='s'] .c6 {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
 }
 
 ul[data-selectedid="11"] .c13.c13 {
@@ -745,6 +761,7 @@ ul[data-selectedid="11"] .c13.c13 {
   font-size: 16px;
   line-height: 24px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
   text-overflow: ellipsis;
   color: #23262D;
   background: #FFFFFF;
@@ -765,6 +782,7 @@ ul[data-dimension='s'] .c6 {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
 }
 
 ul[data-selectedid="12"] .c14.c14 {
@@ -817,6 +835,7 @@ ul[data-selectedid="12"] .c14.c14 {
   font-size: 16px;
   line-height: 24px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
   text-overflow: ellipsis;
   color: #23262D;
   background: #FFFFFF;
@@ -837,6 +856,7 @@ ul[data-dimension='s'] .c6 {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
 }
 
 ul[data-selectedid="13"] .c15.c15 {
@@ -1162,6 +1182,7 @@ Object {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
   text-overflow: ellipsis;
   color: #23262D;
   background: #FFFFFF;
@@ -1182,6 +1203,7 @@ ul[data-dimension='s'] .c6 {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
 }
 
 .c7:hover {

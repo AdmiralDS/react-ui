@@ -192,6 +192,7 @@ Object {
   font-size: 16px;
   line-height: 24px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -275,6 +276,7 @@ Object {
   font-size: 16px;
   line-height: 24px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -696,6 +698,7 @@ Object {
   font-size: 16px;
   line-height: 24px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -779,6 +782,7 @@ Object {
   font-size: 16px;
   line-height: 24px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;

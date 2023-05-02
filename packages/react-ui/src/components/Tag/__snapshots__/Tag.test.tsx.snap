@@ -54,6 +54,7 @@ Object {
   font-size: 12px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
 }
 
 .c1 {
@@ -140,6 +141,7 @@ Object {
   font-size: 12px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
 }
 
 .c1 {
@@ -280,6 +282,7 @@ Object {
   font-size: 12px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
 }
 
 <body>
@@ -346,6 +349,7 @@ Object {
   font-size: 12px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
 }
 
 <div>
