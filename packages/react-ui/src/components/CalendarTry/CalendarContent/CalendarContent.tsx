@@ -9,8 +9,9 @@ export interface CalendarContentProps {
   viewMode: CalendarViewMode;
   date: Dayjs;
   renderCell: (date: Dayjs, viewMode: CalendarViewMode) => React.ReactNode;
+  onMouseLeave: () => void;
 }
-export const CalendarContent = ({ viewMode, date, renderCell }: CalendarContentProps) => {
+export const CalendarContent = ({ viewMode, date, renderCell, onMouseLeave }: CalendarContentProps) => {
   switch (viewMode) {
     case 'YEARS':
       return <YearsCalendarView date={date} renderCell={renderCell} />;
@@ -18,6 +19,6 @@ export const CalendarContent = ({ viewMode, date, renderCell }: CalendarContentP
       return <MonthsCalendarView date={date} renderCell={renderCell} />;
     case 'DATES':
     default:
-      return <DateCalendarView date={date} renderCell={renderCell} />;
+      return <DateCalendarView onMouseLeave={onMouseLeave} date={date} renderCell={renderCell} />;
   }
 };
