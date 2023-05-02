@@ -127,22 +127,31 @@ export const DayCellWrapper = styled.div<{
         top: 0;
         bottom: 0;
         background: ${inSelectingRange ? theme.color['Opacity/Focus'] : theme.color['Opacity/Hover']};
-        ${isRangeStart && isWeekStart ? `border-top-left-radius: 50%;` : ''};
-        ${isRangeStart && isWeekStart ? `border-bottom-left-radius: 50%;` : ''};
-        ${isRangeEnd && isWeekEnd ? `border-top-right-radius: 50%;` : ''};
-        ${isRangeEnd && isWeekEnd ? `border-bottom-right-radius: 50%;` : ''};
-        ${isWeekStart && !isRangeStart ? `border-top-left-radius: ${mediumGroupBorderRadius(theme.shape)};` : ''};
-        ${isWeekStart && !isRangeStart ? `border-bottom-left-radius: ${mediumGroupBorderRadius(theme.shape)};` : ''};
-        ${isWeekEnd && !isRangeEnd ? `border-top-right-radius: ${mediumGroupBorderRadius(theme.shape)};` : ''};
-        ${isWeekEnd && !isRangeEnd ? `border-bottom-right-radius: ${mediumGroupBorderRadius(theme.shape)};` : ''};
-        ${isRangeEnd && isWeekStart ? `border-top-right-radius: 50%;` : ''};
-        ${isRangeEnd && isWeekStart ? `border-bottom-right-radius: 50%;` : ''};
-        ${isRangeStart && isWeekEnd ? `border-top-left-radius: 50%;` : ''};
-        ${isRangeStart && isWeekEnd ? `border-bottom-left-radius: 50%;` : ''};
-        ${isRangeStart && !isWeekEnd && !isWeekStart ? `border-top-left-radius: 50%;` : ''};
-        ${isRangeStart && !isWeekEnd && !isWeekStart ? `border-bottom-left-radius: 50%;` : ''};
-        ${isRangeEnd && !isWeekEnd && !isWeekStart ? `border-top-right-radius: 50%;` : ''};
-        ${isRangeEnd && !isWeekEnd && !isWeekStart ? `border-bottom-right-radius: 50%;` : ''};
+        ${
+          (isRangeStart && isWeekStart) || (isRangeStart && isWeekEnd) || (isRangeStart && !isWeekEnd && !isWeekStart)
+            ? `border-top-left-radius: 50%;
+               border-bottom-left-radius: 50%;`
+            : ''
+        };
+        ${
+          (isRangeEnd && isWeekEnd) || (isRangeEnd && isWeekStart) || (isRangeEnd && !isWeekEnd && !isWeekStart)
+            ? `border-top-right-radius: 50%;
+               border-bottom-right-radius: 50%;`
+            : ''
+        };        
+        
+        ${
+          isWeekStart && !isRangeStart
+            ? `border-top-left-radius: ${mediumGroupBorderRadius(theme.shape)};
+               border-bottom-left-radius: ${mediumGroupBorderRadius(theme.shape)};`
+            : ''
+        };
+        ${
+          isWeekEnd && !isRangeEnd
+            ? `border-top-right-radius: ${mediumGroupBorderRadius(theme.shape)};
+               border-bottom-right-radius: ${mediumGroupBorderRadius(theme.shape)};`
+            : ''
+        };
       }
     `}
 `;
