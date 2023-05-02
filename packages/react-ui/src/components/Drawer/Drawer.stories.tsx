@@ -100,7 +100,7 @@ const ModalForm = ({ onYesClick, onNoClick }: Props) => {
 
   return (
     <>
-      <DrawerContent>
+      <DrawerContent style={{ width: '480px' }}>
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. At cupiditate ducimus nisi nulla numquam obcaecati
         quam quasi quod ut veritatis?
         <Separator />
@@ -148,29 +148,28 @@ const Template1: ComponentStory<typeof Drawer> = (args) => {
 
   return (
     <ThemeProvider theme={swapBorder}>
-      <Button onClick={() => setOpened(true)}>Open modal with 2 buttons</Button>
-      {opened && (
-        <Drawer
-          {...args}
-          onClose={() => {
+      <Button onClick={() => setOpened(true)}>Open drawer with 2 buttons</Button>
+      <Drawer
+        {...args}
+        visible={opened}
+        onClose={() => {
+          setOpened(false);
+        }}
+        aria-labelledby="modal-title"
+      >
+        <DrawerTitle id="modal-title">Drawer title</DrawerTitle>
+        <ModalForm
+          onYesClick={(p) => {
+            console.log(`value ${p.inputValue}`);
             setOpened(false);
           }}
-          aria-labelledby="modal-title"
-        >
-          <DrawerTitle id="modal-title">Modal title</DrawerTitle>
-          <ModalForm
-            onYesClick={(p) => {
-              console.log(`value ${p.inputValue}`);
-              setOpened(false);
-            }}
-            onNoClick={() => setOpened(false)}
-          />
-        </Drawer>
-      )}
+          onNoClick={() => setOpened(false)}
+        />
+      </Drawer>
     </ThemeProvider>
   );
 };
 
 export const ModalTwoButtons = Template1.bind({});
 ModalTwoButtons.args = {};
-ModalTwoButtons.storyName = 'Modal. Пример c двумя кнопками.';
+ModalTwoButtons.storyName = 'Drawer. Пример c двумя кнопками.';

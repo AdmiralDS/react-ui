@@ -1,18 +1,21 @@
 import { getKeyboardFocusableElements } from '#src/components/common/utils/getKeyboardFocusableElements';
 import { refSetter } from '#src/components/common/utils/refSetter';
-import { typography } from '#src/components/Typography';
 import * as React from 'react';
 import ReactDOM from 'react-dom';
 import type { Interpolation } from 'styled-components';
-import styled, { css, ThemeContext } from 'styled-components';
+import styled, { ThemeContext } from 'styled-components';
 import { LIGHT_THEME } from '#src/components/themes';
 import { manager } from '#src/components/Modal/manager';
-import { checkOverflow } from '#src/components/common/utils/checkOverflow';
 import { CloseIconPlacementButton } from '#src/components/IconPlacement';
 
-type Placement = 'right' | 'left';
+import { DrawerContext } from './components';
+import useMountTransition from './useMountTransition';
 
-const Overlay = styled.div<{ overlayStyledCss: Interpolation<any> }>`
+export { DrawerTitle, DrawerContent, DrawerButtonPanel } from './components';
+
+type Position = 'right' | 'left';
+
+const Overlay = styled.div<{ overlayStyledCss: Interpolation<any>; $visible?: boolean; $in?: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -21,47 +24,15 @@ const Overlay = styled.div<{ overlayStyledCss: Interpolation<any> }>`
   left: 0;
   bottom: 0;
   right: 0;
-  background-color: ${({ theme }) => theme.color['Opacity/Modal']};
-  transition: opacity 0.3s ease 0s;
   z-index: ${({ theme }) => theme.zIndex.modal};
   ${(p) => p.overlayStyledCss}
   outline: none;
+
+  background-color: ${({ $visible, $in, theme }) => ($visible && $in ? theme.color['Opacity/Modal'] : 'transparent')};
+  transition: 0.3s background-color cubic-bezier(0, 0, 0.2, 1) 0ms;
 `;
 
-const Title = styled.h5<{ mobile: boolean; displayCloseIcon: boolean }>`
-  ${({ mobile }) => (mobile ? typography['Header/H6'] : typography['Header/H5'])};
-  color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
-  margin: 0;
-  padding: ${({ mobile, displayCloseIcon }) => {
-    if (mobile) {
-      return displayCloseIcon ? '0 48px 10px 16px' : '0 16px 10px';
-    }
-    return displayCloseIcon ? '0 56px 10px 24px' : '0 24px 10px';
-  }};
-`;
-
-const Content = styled.div<{ scrollbar: number; mobile: boolean }>`
-  overflow-y: auto;
-  outline: none;
-  padding: ${({ scrollbar, mobile }) => `6px ${(mobile ? 16 : 24) - scrollbar}px 6px ${mobile ? 16 : 24}px`};
-`;
-
-const ButtonPanel = styled.div<{ mobile: boolean }>`
-  display: flex;
-  flex-direction: ${({ mobile }) => (mobile ? 'column-reverse' : 'row-reverse')};
-  padding: ${({ mobile }) => (mobile ? '18px 16px 0' : '18px 24px 0')};
-
-  & > button {
-    margin: ${({ mobile }) => (mobile ? '0 0 16px 0' : '0 16px 0 0')};
-    ${({ mobile }) => mobile && 'width: 100%;'}
-  }
-
-  & > button:first-child {
-    margin: 0;
-  }
-`;
-
-const ModalComponent = styled.div<{ mobile?: boolean }>`
+const DrawerComponent = styled.div<{ mobile?: boolean; $visible?: boolean; $in?: boolean }>`
   position: absolute;
   box-sizing: border-box;
   top: 0;
@@ -74,10 +45,14 @@ const ModalComponent = styled.div<{ mobile?: boolean }>`
   overflow: hidden;
   padding: 20px 0 24px;
   min-width: 320px;
+  max-width: calc(100vw - 16px);
   background-color: ${({ theme }) => theme.color['Neutral/Neutral 00']};
   ${({ theme }) => theme.shadow['Shadow 16']}
   color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
   outline: none;
+
+  transform: ${({ $visible, $in, theme }) => ($visible && $in ? 'translateX(0)' : 'translateX(100%)')};
+  transition: 0.3s transform cubic-bezier(0, 0, 0.2, 1) 0ms;
 `;
 
 const CloseButton = styled(CloseIconPlacementButton)<{ mobile?: boolean }>`
@@ -86,16 +61,11 @@ const CloseButton = styled(CloseIconPlacementButton)<{ mobile?: boolean }>`
   right: ${({ mobile }) => (mobile ? 16 : 24)}px;
 `;
 
-export const emptyOverlayStyledCss = css``;
-
-const DrawerContext = React.createContext({ mobile: false, displayCloseIcon: true } as {
-  mobile: boolean;
-  displayCloseIcon: boolean;
-});
-
-export interface ModalProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface DrawerProps extends React.HTMLAttributes<HTMLDivElement> {
+  /** */
+  visible?: boolean;
   /** С какой части экрана будет выдвигаться компонент */
-  placement?: Placement;
+  position?: Position;
   /** Происходит ли блокировка контента страницы */
   backdrop?: boolean;
   /** Контейнер, в котором происходит размещение модального окна (BODY по умолчанию) */
@@ -130,17 +100,18 @@ export interface ModalProps extends React.HTMLAttributes<HTMLDivElement> {
   };
 }
 
-export const Drawer = React.forwardRef<HTMLDivElement, ModalProps>(
+export const Drawer = React.forwardRef<HTMLDivElement, DrawerProps>(
   (
     {
-      placement = 'right',
+      visible = false,
+      position = 'right',
       backdrop = true,
-      overlayStyledCss = emptyOverlayStyledCss,
+      overlayStyledCss,
       container,
       mobile = false,
       onClose,
-      closeOnEscapeKeyDown,
-      closeOnOutsideClick,
+      closeOnEscapeKeyDown = true,
+      closeOnOutsideClick = true,
       displayCloseIcon = true,
       children,
       locale,
@@ -148,6 +119,8 @@ export const Drawer = React.forwardRef<HTMLDivElement, ModalProps>(
     },
     ref,
   ) => {
+    const hasTransitionedIn = useMountTransition(visible, 300);
+
     const theme = React.useContext(ThemeContext) || LIGHT_THEME;
     const closeBtnAriaLabel =
       locale?.closeButtonAriaLabel || theme.locales[theme.currentLocale].modal.closeButtonAriaLabel;
@@ -163,21 +136,23 @@ export const Drawer = React.forwardRef<HTMLDivElement, ModalProps>(
     };
 
     React.useLayoutEffect(() => {
-      previousFocusedElement.current = document.activeElement;
-      // set focus inside modalComponent
-      modalRef.current?.focus();
+      if (backdrop && (visible || hasTransitionedIn)) {
+        previousFocusedElement.current = document.activeElement;
+        // set focus inside modalComponent
+        modalRef.current?.focus();
 
-      manager.add(getModal(), container || document.body);
-      if (modalRef.current) {
-        manager.mount(getModal());
+        manager.add(getModal(), container || document.body);
+        if (modalRef.current) {
+          manager.mount(getModal());
+        }
+        return () => {
+          // return focus on close/unmount of modal
+          previousFocusedElement.current?.focus();
+
+          manager.remove(getModal());
+        };
       }
-      return () => {
-        // return focus on close/unmount of modal
-        previousFocusedElement.current?.focus();
-
-        manager.remove(getModal());
-      };
-    }, []);
+    }, [backdrop, visible, hasTransitionedIn]);
 
     const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
       if (event.key === 'Escape' && closeOnEscapeKeyDown) {
@@ -186,7 +161,7 @@ export const Drawer = React.forwardRef<HTMLDivElement, ModalProps>(
         // prevent other overlays from closing
         event.stopPropagation();
         onClose?.();
-      } else if (event.key === 'Tab') {
+      } else if (event.key === 'Tab' && backdrop) {
         // focus trap
         const focusableEls: any = getKeyboardFocusableElements(modalRef.current);
         if (event.shiftKey) {
@@ -215,90 +190,42 @@ export const Drawer = React.forwardRef<HTMLDivElement, ModalProps>(
       onClose?.();
     };
 
-    return ReactDOM.createPortal(
-      <Overlay
-        ref={overlayRef}
-        tabIndex={-1}
-        onMouseDown={handleMouseDown}
-        onKeyDown={handleKeyDown}
-        overlayStyledCss={overlayStyledCss}
-      >
-        <ModalComponent
-          ref={refSetter(ref, modalRef)}
-          tabIndex={-1}
-          role="dialog"
-          aria-modal
-          mobile={mobile}
-          {...props}
-        >
-          <DrawerContext.Provider value={{ mobile, displayCloseIcon }}>{children}</DrawerContext.Provider>
-          {displayCloseIcon && (
-            <CloseButton
-              dimension="lSmall"
-              aria-label={closeBtnAriaLabel}
+    return visible || hasTransitionedIn
+      ? ReactDOM.createPortal(
+          <Overlay
+            ref={overlayRef}
+            tabIndex={-1}
+            onMouseDown={handleMouseDown}
+            onKeyDown={handleKeyDown}
+            overlayStyledCss={overlayStyledCss}
+            $visible={visible}
+            $in={hasTransitionedIn}
+          >
+            <DrawerComponent
+              ref={refSetter(ref, modalRef)}
+              tabIndex={-1}
+              role="dialog"
+              aria-modal
               mobile={mobile}
-              onClick={handleCloseBtnClick}
-            />
-          )}
-        </ModalComponent>
-      </Overlay>,
-      container || document.body,
-    );
+              $visible={visible}
+              $in={hasTransitionedIn}
+              {...props}
+            >
+              <DrawerContext.Provider value={{ mobile, displayCloseIcon }}>{children}</DrawerContext.Provider>
+              {displayCloseIcon && (
+                <CloseButton
+                  dimension="lSmall"
+                  aria-label={closeBtnAriaLabel}
+                  mobile={mobile}
+                  onClick={handleCloseBtnClick}
+                />
+              )}
+            </DrawerComponent>
+          </Overlay>,
+          container || document.body,
+        )
+      : null;
   },
 );
 
 Drawer.displayName = 'Drawer';
-
-export const DrawerTitle: React.FC<React.HTMLAttributes<HTMLHeadingElement>> = ({ children, ...props }) => {
-  const { mobile, displayCloseIcon } = React.useContext(DrawerContext);
-  const asProp = mobile ? 'h6' : 'h5';
-  return (
-    <Title mobile={mobile} displayCloseIcon={displayCloseIcon} as={asProp} {...props}>
-      {children}
-    </Title>
-  );
-};
-
-export const DrawerContent: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, ...props }) => {
-  const contentRef = React.useRef<HTMLDivElement | null>(null);
-  const [overflow, setOverflow] = React.useState(false);
-  const [scrollbarSize, setScrollbarSize] = React.useState(0);
-  const mobile = React.useContext(DrawerContext).mobile;
-
-  React.useLayoutEffect(() => {
-    if (contentRef.current && checkOverflow(contentRef.current) !== overflow) {
-      setScrollbarSize(contentRef.current.offsetWidth - contentRef.current.clientWidth);
-      setOverflow(checkOverflow(contentRef.current));
-    }
-  }, [children, overflow, setOverflow]);
-
-  React.useLayoutEffect(() => {
-    if (contentRef.current) {
-      const resizeObserver = new ResizeObserver(() => {
-        if (contentRef.current && checkOverflow(contentRef.current) !== overflow) {
-          setScrollbarSize(contentRef.current.offsetWidth - contentRef.current.clientWidth);
-          setOverflow(checkOverflow(contentRef.current));
-        }
-      });
-      resizeObserver.observe(contentRef.current);
-      return () => {
-        resizeObserver.disconnect();
-      };
-    }
-  }, [overflow, setOverflow]);
-
-  return (
-    <Content tabIndex={-1} ref={contentRef} scrollbar={overflow ? scrollbarSize : 0} mobile={mobile} {...props}>
-      {children}
-    </Content>
-  );
-};
-
-export const DrawerButtonPanel: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, ...props }) => {
-  const mobile = React.useContext(DrawerContext).mobile;
-  return (
-    <ButtonPanel mobile={mobile} {...props}>
-      {children}
-    </ButtonPanel>
-  );
-};

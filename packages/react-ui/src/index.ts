@@ -85,6 +85,7 @@ export * from './components/TagMenu';
 export * from './components/Range';
 export * from './components/Pill';
 export * from './components/IconPlacement';
+export * from './components/Drawer';
 
 export { FontsVTBGroup } from './components/FontsVTBGroup';
 export { DropdownProvider } from './components/DropdownProvider';
