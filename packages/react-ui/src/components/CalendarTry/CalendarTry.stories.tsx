@@ -177,6 +177,19 @@ const Template1: ComponentStory<typeof CalendarTry> = (args) => {
 
   const customRenderDay = (date: Dayjs) => {
     const disabled = filterDate(date);
+    /*// ранее выбранный диапазон
+    const inRange = !!startDate && !!endDate && date.isBetween(startDate, endDate, 'date', '[]');
+    const rangeStart = !!startDate && date.isSame(startDate, 'date');
+    const rangeEnd = !!startDate && !!endDate && date.isSame(endDate, 'date');
+    // диапазон в процессе выбора
+    const inSelectingRange = isInSelectingRange(date, disabled, startDate, endDate, activeDate);
+    const rangeSelectingStart = inSelectingRange && date.isSame(startDate, 'date');
+    const rangeSelectingEnd = inSelectingRange && date.isSame(activeDate, 'date');
+
+    const weekStart = date.isSame(date.startOf('week'), 'date');
+    const weekEnd = date.isSame(date.endOf('week'), 'date');
+    const start = rangeStart || rangeSelectingStart;
+    const end = rangeEnd || rangeSelectingEnd;*/
     return (
       <StyledDay
         key={date.valueOf()}
@@ -186,6 +199,10 @@ const Template1: ComponentStory<typeof CalendarTry> = (args) => {
         outsideMonth={!date.isSame(viewDate2, 'month')}
         onClick={() => !filterDate(date) && handleDayClick2(date)}
         isActiveDate={!!activeDate2 && date.isSame(activeDate2, 'date')}
+        isRangeStart={false}
+        isRangeEnd={false}
+        isWeekStart={false}
+        isWeekEnd={false}
         onMouseEnter={(e) => !disabled && handleDayMouseEnter2(date, e)}
         onMouseLeave={(e) => !disabled && handleDayMouseLeave2(date, e)}
       >

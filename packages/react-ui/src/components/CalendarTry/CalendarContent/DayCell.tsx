@@ -5,7 +5,6 @@ import type { Dayjs } from 'dayjs';
 import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import styled from 'styled-components';
 import { typography } from '#src/components/Typography';
-import type { Corners, CornerKeys } from '#src/components/CalendarTry/constants';
 import { mediumGroupBorderRadius } from '#src/components/themes';
 
 const DAY_SIZE = 36;
@@ -33,7 +32,10 @@ export const DayCellWrapper = styled.div<{
   selected?: boolean;
   inRange?: boolean;
   inSelectingRange?: boolean;
-  corners?: Corners;
+  isWeekStart: boolean;
+  isWeekEnd: boolean;
+  isRangeStart: boolean;
+  isRangeEnd: boolean;
   highlightSpecialDayMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
 }>`
   position: relative;
@@ -111,7 +113,7 @@ export const DayCellWrapper = styled.div<{
     `}
 
   // подсветка диапазона
-  ${({ disabled, inRange, inSelectingRange, theme, corners, selected, isActiveDate }) =>
+  ${({ disabled, inRange, inSelectingRange, theme, isWeekStart, isWeekEnd, isRangeStart, isRangeEnd }) =>
     !disabled &&
     (inRange || inSelectingRange) &&
     `
@@ -125,68 +127,25 @@ export const DayCellWrapper = styled.div<{
         top: 0;
         bottom: 0;
         background: ${inSelectingRange ? theme.color['Opacity/Focus'] : theme.color['Opacity/Hover']};
-        ${
-          corners &&
-          Object.keys(corners)
-            .map((key) =>
-              corners[key as CornerKeys]
-                ? selected || isActiveDate
-                  ? `border-${key}-radius: 50%;`
-                  : `border-${key}-radius: ${mediumGroupBorderRadius(theme.shape)};`
-                : '',
-            )
-            .join('')
-        }
+        ${isRangeStart && isWeekStart ? `border-top-left-radius: 50%;` : ''};
+        ${isRangeStart && isWeekStart ? `border-bottom-left-radius: 50%;` : ''};
+        ${isRangeEnd && isWeekEnd ? `border-top-right-radius: 50%;` : ''};
+        ${isRangeEnd && isWeekEnd ? `border-bottom-right-radius: 50%;` : ''};
+        ${isWeekStart && !isRangeStart ? `border-top-left-radius: ${mediumGroupBorderRadius(theme.shape)};` : ''};
+        ${isWeekStart && !isRangeStart ? `border-bottom-left-radius: ${mediumGroupBorderRadius(theme.shape)};` : ''};
+        ${isWeekEnd && !isRangeEnd ? `border-top-right-radius: ${mediumGroupBorderRadius(theme.shape)};` : ''};
+        ${isWeekEnd && !isRangeEnd ? `border-bottom-right-radius: ${mediumGroupBorderRadius(theme.shape)};` : ''};
+        ${isRangeEnd && isWeekStart ? `border-top-right-radius: 50%;` : ''};
+        ${isRangeEnd && isWeekStart ? `border-bottom-right-radius: 50%;` : ''};
+        ${isRangeStart && isWeekEnd ? `border-top-left-radius: 50%;` : ''};
+        ${isRangeStart && isWeekEnd ? `border-bottom-left-radius: 50%;` : ''};
+        ${isRangeStart && !isWeekEnd && !isWeekStart ? `border-top-left-radius: 50%;` : ''};
+        ${isRangeStart && !isWeekEnd && !isWeekStart ? `border-bottom-left-radius: 50%;` : ''};
+        ${isRangeEnd && !isWeekEnd && !isWeekStart ? `border-top-right-radius: 50%;` : ''};
+        ${isRangeEnd && !isWeekEnd && !isWeekStart ? `border-bottom-right-radius: 50%;` : ''};
       }
     `}
 `;
-
-function isInSelectingRange(date: Dayjs, disabled?: boolean, startDate?: Dayjs, endDate?: Dayjs, activeDate?: Dayjs) {
-  const res =
-    !disabled &&
-    !!startDate &&
-    !endDate &&
-    !!activeDate &&
-    activeDate.isSameOrAfter(startDate, 'date') &&
-    date.isBetween(startDate, activeDate, 'date', '[]');
-  /*if (res) {
-    console.log(`${date.format('DD-MM-YYYY')} isInSelectingRange`);
-  }*/
-  return res;
-}
-
-function getCorners(
-  date: Dayjs,
-  startDate?: Dayjs,
-  rangeStart?: boolean,
-  rangeEnd?: boolean,
-  rangeSelectingStart?: boolean,
-  rangeSelectingEnd?: boolean,
-) {
-  const corners: Corners = {};
-  if (startDate) {
-    const weekStart = date.isSame(date.startOf('week'), 'date');
-    const weekEnd = date.isSame(date.endOf('week'), 'date');
-    const start = rangeStart || rangeSelectingStart;
-    const end = rangeEnd || rangeSelectingEnd;
-    // если endDate не определена, то активную дату мы не выделяем серым фоном
-    corners['top-left'] = start || weekStart;
-    corners['bottom-left'] = start || weekStart;
-    corners['top-right'] = end || weekEnd;
-    corners['bottom-right'] = end || weekEnd;
-    /*corners['top-left'] = start || (weekStart && !end);
-    corners['bottom-left'] = start || (weekStart && !end);
-    corners['top-right'] = end || (weekEnd && !start);
-    corners['bottom-right'] = end || (weekEnd && !start);*/
-    /*if (corners['top-left'] && corners['bottom-left']) {
-      console.log(`${date.format('DD-MM-YYYY')}: left`);
-    }
-    if (corners['top-right'] && corners['bottom-right']) {
-      console.log(`${date.format('DD-MM-YYYY')}: right`);
-    }*/
-  }
-  return corners;
-}
 
 export const DayCell = ({
   date,
@@ -205,18 +164,20 @@ export const DayCell = ({
   const rangeStart = !!startDate && date.isSame(startDate, 'date');
   const rangeEnd = !!startDate && !!endDate && date.isSame(endDate, 'date');
   // диапазон в процессе выбора
-  const inSelectingRange = isInSelectingRange(date, disabled, startDate, endDate, activeDate);
-  /*const inSelectingRange =
+  const inSelectingRange =
     !disabled &&
     !!startDate &&
     !endDate &&
     !!activeDate &&
     activeDate.isSameOrAfter(startDate, 'date') &&
-    date.isBetween(startDate, activeDate, 'date', '[]');*/
+    date.isBetween(startDate, activeDate, 'date', '[]');
   const rangeSelectingStart = inSelectingRange && date.isSame(startDate, 'date');
   const rangeSelectingEnd = inSelectingRange && date.isSame(activeDate, 'date');
 
-  const corners: Corners = getCorners(date, startDate, rangeStart, rangeEnd, rangeSelectingStart, rangeSelectingEnd);
+  const weekStart = date.isSame(date.startOf('week'), 'date');
+  const weekEnd = date.isSame(date.endOf('week'), 'date');
+  const start = rangeStart || rangeSelectingStart;
+  const end = rangeEnd || rangeSelectingEnd;
 
   const handleClick = () => {
     if (!disabled) {
@@ -234,7 +195,10 @@ export const DayCell = ({
       disabled={disabled}
       inRange={inRange}
       inSelectingRange={inSelectingRange}
-      corners={corners}
+      isWeekStart={weekStart}
+      isWeekEnd={weekEnd}
+      isRangeStart={start}
+      isRangeEnd={end}
       onClick={handleClick}
       highlightSpecialDayMixin={highlightSpecialDay?.(date)}
       onMouseEnter={(e) => !disabled && onMouseEnter && onMouseEnter(date, e)}
