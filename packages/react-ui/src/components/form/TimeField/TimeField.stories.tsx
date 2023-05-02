@@ -1,4 +1,4 @@
-import { INPUT_DIMENSIONS_VALUES } from '#src/components/input';
+import { INPUT_DIMENSIONS_VALUES, INPUT_STATUS_VALUES } from '#src/components/input';
 import * as React from 'react';
 import type { ChangeEvent } from 'react';
 import { useEffect, useState } from 'react';
@@ -40,6 +40,10 @@ export default {
     dimension: {
       options: INPUT_DIMENSIONS_VALUES,
       control: { type: 'radio' },
+    },
+    status: {
+      control: { type: 'radio' },
+      options: INPUT_STATUS_VALUES,
     },
     disabled: {
       control: { type: 'boolean' },

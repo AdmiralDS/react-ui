@@ -8,6 +8,7 @@ import { T } from '#src/components/T';
 import { EditMode } from './index';
 import type { Theme } from '#src/components/themes';
 import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
+import { INPUT_STATUS_VALUES } from '#src/components/input';
 
 const Separator = styled.div`
   height: 20px;
@@ -46,6 +47,10 @@ export default {
     dimension: {
       options: ['xxl', 'xl', 'm', 's'],
       control: { type: 'radio' },
+    },
+    status: {
+      control: { type: 'radio' },
+      options: INPUT_STATUS_VALUES,
     },
     bold: {
       control: { type: 'boolean' },

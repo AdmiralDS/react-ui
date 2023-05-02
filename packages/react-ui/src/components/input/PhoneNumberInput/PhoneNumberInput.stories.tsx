@@ -2,7 +2,7 @@ import type { ChangeEvent } from 'react';
 import * as React from 'react';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
-import { PhoneNumberInput } from '#src/components/input';
+import { INPUT_STATUS_VALUES, PhoneNumberInput } from '#src/components/input';
 import styled, { ThemeProvider } from 'styled-components';
 import type { Theme } from '#src/components/themes';
 import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
@@ -52,6 +52,10 @@ export default {
     ],
   },
   argTypes: {
+    status: {
+      control: { type: 'radio' },
+      options: INPUT_STATUS_VALUES,
+    },
     value: {
       control: { type: 'text' },
     },
