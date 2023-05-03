@@ -40,6 +40,12 @@ const Container = styled.div<{ iconSizeValue?: string; disabled?: boolean }>`
     }
   }
 
+  &:hover {
+    & > ${OpenStatusButton} *[fill^='#'] {
+      fill: ${(p) => p.theme.color['Primary/Primary 70']};
+    }
+  }
+
   ${(p) => (p.disabled ? disableEventMixin : '')}
 `;
 const ValueContainer = styled.div`

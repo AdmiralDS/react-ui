@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { TimeInput } from '../TimeInput';
 import { withDesign } from 'storybook-addon-designs';
-import { INPUT_DIMENSIONS_VALUES } from '#src/components/input/types';
+import { INPUT_DIMENSIONS_VALUES, INPUT_STATUS_VALUES } from '#src/components/input/types';
 import { ReactComponent as GPSOutline } from '@admiral-ds/icons/build/location/GPSOutline.svg';
 import { ReactComponent as TimeSolid } from '@admiral-ds/icons/build/system/TimeSolid.svg';
 import styled, { ThemeProvider } from 'styled-components';
@@ -60,6 +60,10 @@ export default {
     dimension: {
       options: INPUT_DIMENSIONS_VALUES,
       control: { type: 'radio' },
+    },
+    status: {
+      control: { type: 'radio' },
+      options: INPUT_STATUS_VALUES,
     },
     value: { control: { type: 'text', disabled: true }, description: 'Значение TimePicker' },
     onChange: {
