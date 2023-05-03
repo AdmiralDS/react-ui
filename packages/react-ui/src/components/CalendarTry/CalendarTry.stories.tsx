@@ -201,8 +201,8 @@ const Template1: ComponentStory<typeof CalendarTry> = (args) => {
         isActiveDate={!!activeDate2 && date.isSame(activeDate2, 'date')}
         isRangeStart={false}
         isRangeEnd={false}
-        isWeekStart={false}
-        isWeekEnd={false}
+        isRowStart={false}
+        isRowEnd={false}
         onMouseEnter={(e) => !disabled && handleDayMouseEnter2(date, e)}
         onMouseLeave={(e) => !disabled && handleDayMouseLeave2(date, e)}
       >

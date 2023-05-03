@@ -33,11 +33,11 @@ export const DayCellWrapper = styled(CellWrapper)<{
   selected?: boolean;
   inRange?: boolean;
   inSelectingRange?: boolean;
-  isWeekStart: boolean;
-  isWeekEnd: boolean;
+  isRowStart: boolean;
+  isRowEnd: boolean;
   isRangeStart: boolean;
   isRangeEnd: boolean;
-  highlightSpecialDayMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+  highlightSpecialDateMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
 }>`
   width: ${DAY_SIZE}px;
   height: ${DAY_SIZE}px;
@@ -105,12 +105,12 @@ export const DayCell = ({
       disabled={disabled}
       inRange={inRange}
       inSelectingRange={inSelectingRange}
-      isWeekStart={weekStart}
-      isWeekEnd={weekEnd}
+      isRowStart={weekStart}
+      isRowEnd={weekEnd}
       isRangeStart={start}
       isRangeEnd={end}
       onClick={handleClick}
-      highlightSpecialDayMixin={highlightSpecialDay?.(date)}
+      highlightSpecialDateMixin={highlightSpecialDay?.(date)}
       onMouseEnter={(e) => !disabled && onMouseEnter && onMouseEnter(date, e)}
     >
       {date.date()}

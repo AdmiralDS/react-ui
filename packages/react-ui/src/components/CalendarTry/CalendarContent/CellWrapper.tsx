@@ -9,8 +9,8 @@ export const CellWrapper = styled.div<{
   isActiveDate: boolean;
   inRange?: boolean;
   inSelectingRange?: boolean;
-  isWeekStart: boolean;
-  isWeekEnd: boolean;
+  isRowStart: boolean;
+  isRowEnd: boolean;
   isRangeStart: boolean;
   isRangeEnd: boolean;
 }>`

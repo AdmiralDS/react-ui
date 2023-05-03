@@ -5,12 +5,12 @@ export const rangeHighlightMixin = css<{
   disabled?: boolean;
   inRange?: boolean;
   inSelectingRange?: boolean;
-  isWeekStart: boolean;
-  isWeekEnd: boolean;
+  isRowStart: boolean;
+  isRowEnd: boolean;
   isRangeStart: boolean;
   isRangeEnd: boolean;
 }>`
-  ${({ disabled, inRange, inSelectingRange, isRangeStart, isRangeEnd, isWeekStart, isWeekEnd, theme }) =>
+  ${({ disabled, inRange, inSelectingRange, isRangeStart, isRangeEnd, isRowStart, isRowEnd, theme }) =>
     !disabled &&
     (inRange || inSelectingRange) &&
     `
@@ -25,26 +25,26 @@ export const rangeHighlightMixin = css<{
         bottom: 0;
         background: ${inSelectingRange ? theme.color['Opacity/Focus'] : theme.color['Opacity/Hover']};
         ${
-          (isRangeStart && isWeekStart) || (isRangeStart && isWeekEnd) || (isRangeStart && !isWeekEnd && !isWeekStart)
+          (isRangeStart && isRowStart) || (isRangeStart && isRowEnd) || (isRangeStart && !isRowEnd && !isRowStart)
             ? `border-top-left-radius: 50%;
                border-bottom-left-radius: 50%;`
             : ''
         };
         ${
-          (isRangeEnd && isWeekEnd) || (isRangeEnd && isWeekStart) || (isRangeEnd && !isWeekEnd && !isWeekStart)
+          (isRangeEnd && isRowEnd) || (isRangeEnd && isRowStart) || (isRangeEnd && !isRowEnd && !isRowStart)
             ? `border-top-right-radius: 50%;
                border-bottom-right-radius: 50%;`
             : ''
         };        
         
         ${
-          isWeekStart && !isRangeStart
+          isRowStart && !isRangeStart
             ? `border-top-left-radius: ${mediumGroupBorderRadius(theme.shape)};
                border-bottom-left-radius: ${mediumGroupBorderRadius(theme.shape)};`
             : ''
         };
         ${
-          isWeekEnd && !isRangeEnd
+          isRowEnd && !isRangeEnd
             ? `border-top-right-radius: ${mediumGroupBorderRadius(theme.shape)};
                border-bottom-right-radius: ${mediumGroupBorderRadius(theme.shape)};`
             : ''
