@@ -4,8 +4,6 @@ import dayjs from 'dayjs';
 import type { Dayjs } from 'dayjs';
 import styled from 'styled-components';
 import { YearCellWrapper } from '#src/components/CalendarTry/CalendarContent/YearCell';
-import { setMonth, startOfMonth } from '#src/components/Calendar/date-utils';
-import { MonthComponent } from '#src/components/Calendar/styled/MonthComponent';
 import { capitalizeFirstLetter } from '#src/components/Calendar/constants';
 import type { DateValidator } from '#src/components/CalendarTry/validator';
 
@@ -32,7 +30,7 @@ export const MonthCell = ({ date, selected, validator, onSelectMonth }: MonthCel
     !disabled && onSelectMonth && onSelectMonth(day, e);
   };
   return (
-    <MonthComponent
+    <MonthCellCWrapper
       key={date.valueOf()}
       today={date.isSame(dayjs(), 'month')}
       selected={!!selected && date.isSame(selected, 'month')}
@@ -40,6 +38,6 @@ export const MonthCell = ({ date, selected, validator, onSelectMonth }: MonthCel
       onMouseDown={handleClick}
     >
       {capitalizeFirstLetter(date.format('MMMM'))}
-    </MonthComponent>
+    </MonthCellCWrapper>
   );
 };
