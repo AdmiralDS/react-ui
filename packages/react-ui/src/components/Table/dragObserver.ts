@@ -1,5 +1,3 @@
-'use strict';
-
 import { addClass, rmClass } from './classes';
 
 const crossvent = {

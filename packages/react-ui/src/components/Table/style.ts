@@ -42,6 +42,10 @@ export const StickyWrapper = styled(StickyGroupRow)<{ greyHeader?: boolean }>`
   }
 `;
 
+export const NormalWrapper = styled.div`
+  display: flex;
+`;
+
 export const OverflowMenuWrapper = styled.div<{ $offset: number; dimension: TableProps['dimension'] }>`
   box-sizing: border-box;
   display: flex;
@@ -105,16 +109,11 @@ export const Header = styled.div<{ dimension: TableProps['dimension'] }>`
   flex: 0 0 auto;
   overflow-x: hidden;
   ${headerStyle};
-  // transform: translateZ(0);
 
   & > * {
     border-bottom: 1px solid ${({ theme }) => theme.color['Neutral/Neutral 20']};
   }
 
-  .gu-mirror {
-    margin: 0;
-    z-index: 9999;
-  }
   .gu-transit {
     opacity: 0.5;
   }

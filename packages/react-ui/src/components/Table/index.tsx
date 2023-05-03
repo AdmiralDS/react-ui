@@ -8,9 +8,9 @@ import { GroupRow } from '#src/components/Table/Row/GroupRow';
 import { RegularRow } from '#src/components/Table/Row/RegularRow';
 import { RowWrapper } from '#src/components/Table/Row/RowWrapper';
 import type { FlattenInterpolation, ThemeProps, DefaultTheme } from 'styled-components';
-import { Header } from './Header';
 
 import { HeaderCellComponent } from './HeaderCell';
+import { dragObserver } from './dragObserver';
 import {
   Cell,
   CellTextContent,
@@ -18,12 +18,13 @@ import {
   EmptyMessage,
   ExpandCell,
   Filler,
-  // Header,
+  Header,
   HeaderCellsWrapper,
   HeaderWrapper,
   Row,
   ScrollTableBody,
   StickyWrapper,
+  NormalWrapper,
   TableContainer,
   HiddenHeader,
 } from './style';
@@ -326,6 +327,8 @@ export const Table: React.FC<TableProps> = ({
   const headerRef = React.useRef<HTMLDivElement>(null);
   const hiddenHeaderRef = React.useRef<HTMLDivElement>(null);
   const scrollBodyRef = React.useRef<HTMLDivElement>(null);
+  const stickyColumnsWrapperRef = React.useRef<HTMLDivElement>(null);
+  const normalColumnsWrapperRef = React.useRef<HTMLDivElement>(null);
 
   const groupToRowsMap = rowList.reduce<Group>((acc: Group, row) => {
     if (typeof row.groupRows !== 'undefined') {
@@ -780,25 +783,65 @@ export const Table: React.FC<TableProps> = ({
       </HiddenHeader>
     );
   };
-  function handleDrop(item: any, before: any) {
-    const cols = [...columnList];
-    const movedIndex = cols.findIndex((col) => col.name === item.dataset.thColumn);
-    const moved = cols.splice(movedIndex, 1)[0];
-    const beforeIndex = cols.findIndex((col) => col.name === before.dataset.thColumn);
-    cols.splice(beforeIndex, 0, moved);
-    onColumnDrag?.(cols);
-  }
+
+  React.useEffect(() => {
+    const stickyCols = stickyColumnsWrapperRef.current;
+    const normalCols = normalColumnsWrapperRef.current;
+
+    function handleDrop(item: any, before: any) {
+      if (item?.dataset?.thColumn) {
+        const cols = [...columnList];
+        const movedIndex = cols.findIndex((col) => col.name === item?.dataset?.thColumn);
+        const movedColumn = cols.splice(movedIndex, 1)[0];
+        const beforeIndex = before?.dataset?.thColumn
+          ? cols.findIndex((col) => col.name === before?.dataset?.thColumn)
+          : cols.length;
+        cols.splice(beforeIndex, 0, movedColumn);
+        onColumnDrag?.(cols);
+      }
+    }
+
+    if (normalCols) {
+      const observer = dragObserver(
+        [normalCols],
+        {
+          direction: 'horizontal',
+          invalid: (el: any) => {
+            //например чекбоксы или стрелки нельзя перетаскивать
+            return el.dataset.draggable == 'false';
+          },
+          accepts: (el: any, target: any, source: any, sibling: any) => {
+            // нельзя вставить колонку перед колонкой с чекбоксом или стрелкой
+            if (sibling?.dataset.droppable == 'false') return false;
+            return true; // elements can be dropped in any of the `containers` by default
+          },
+        },
+        handleDrop,
+      );
+      if (stickyCols) observer.containers.push(stickyCols);
+      return () => {
+        observer.unobserve();
+      };
+    }
+  }, [columnList]);
 
   return (
     <TableContainer ref={tableRef} data-shadow={false} {...props} className={`table ${props.className || ''}`}>
       {renderHiddenHeader()}
       <HeaderWrapper scrollbar={scrollbar} greyHeader={greyHeader} data-verticalscroll={verticalScroll}>
-        <Header dimension={dimension} ref={headerRef} className="tr" onDrop={handleDrop}>
+        <Header dimension={dimension} ref={headerRef} className="tr">
           {(displayRowSelectionColumn || displayRowExpansionColumn || stickyColumns.length > 0) && (
-            <StickyWrapper greyHeader={greyHeader} data-draggable={false} data-droppable={false}>
-              {displayRowExpansionColumn && <ExpandCell dimension={dimension} />}
+            <StickyWrapper ref={stickyColumnsWrapperRef} greyHeader={greyHeader}>
+              {displayRowExpansionColumn && (
+                <ExpandCell dimension={dimension} data-draggable={false} data-droppable={false} />
+              )}
               {displayRowSelectionColumn && (
-                <CheckboxCell dimension={dimension} className="th_checkbox">
+                <CheckboxCell
+                  dimension={dimension}
+                  className="th_checkbox"
+                  data-draggable={false}
+                  data-droppable={false}
+                >
                   <Checkbox
                     dimension={checkboxDimension}
                     checked={allRowsChecked || someRowsChecked || headerCheckboxChecked}
@@ -811,8 +854,10 @@ export const Table: React.FC<TableProps> = ({
               {stickyColumns.length > 0 && stickyColumns.map((col, index) => renderHeaderCell(col as Column, index))}
             </StickyWrapper>
           )}
-          {columnList.map((col, index) => (col.sticky ? null : renderHeaderCell(col as Column, index)))}
-          <Filler data-draggable={false} />
+          <NormalWrapper ref={normalColumnsWrapperRef}>
+            {columnList.map((col, index) => (col.sticky ? null : renderHeaderCell(col as Column, index)))}
+          </NormalWrapper>
+          <Filler />
         </Header>
       </HeaderWrapper>
       {renderBody()}

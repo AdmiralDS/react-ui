@@ -1,5 +1,3 @@
-'use strict';
-
 var cache = {};
 var start = '(?:^|\\s)';
 var end = '(?:\\s|$)';

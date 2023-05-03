@@ -143,8 +143,9 @@ const Template: ComponentStory<typeof Table> = ({ columnList, ...args }) => {
     setCols(newCols);
   };
 
-  const handleColumnDrag = (columns: any) => setCols(columns);
-  // const handleColumnDrag = (columns: any) => {}
+  const handleColumnDrag = (columns: any) => {
+    setCols(columns);
+  };
 
   return <Table {...args} columnList={cols} onColumnResize={handleResize} onColumnDrag={handleColumnDrag} />;
 };
