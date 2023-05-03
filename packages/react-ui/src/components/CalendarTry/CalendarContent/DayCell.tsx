@@ -19,7 +19,7 @@ export interface DayCellProps {
   onSelectDate?: (date: Dayjs) => void;
   disabled?: boolean;
   isHidden: boolean;
-  highlightSpecialDay?: (date: Dayjs) => FlattenInterpolation<ThemeProps<DefaultTheme>> | undefined;
+  highlightSpecialDate?: (date: Dayjs) => FlattenInterpolation<ThemeProps<DefaultTheme>> | undefined;
   onMouseEnter: (date: Dayjs, event: MouseEvent<HTMLDivElement>) => void;
 }
 
@@ -43,7 +43,7 @@ export const DayCellWrapper = styled(CellWrapper)<{
   margin-bottom: ${DAY_MARGIN_BOTTOM};
   text-align: center;
 
-  ${(p) => p.highlightSpecialDayMixin}
+  ${(p) => p.highlightSpecialDateMixin}
 
   // дата, не входящая в отображаемый месяц
   ${(p) =>
@@ -64,7 +64,7 @@ export const DayCell = ({
   disabled,
   onSelectDate,
   isHidden,
-  highlightSpecialDay,
+  highlightSpecialDate,
   onMouseEnter,
 }: DayCellProps) => {
   // ранее выбранный диапазон
@@ -108,7 +108,7 @@ export const DayCell = ({
       isRangeStart={start}
       isRangeEnd={end}
       onClick={handleClick}
-      highlightSpecialDateMixin={highlightSpecialDay?.(date)}
+      highlightSpecialDateMixin={highlightSpecialDate?.(date)}
       onMouseEnter={(e) => !disabled && onMouseEnter && onMouseEnter(date, e)}
     >
       {date.date()}

@@ -208,7 +208,7 @@ export const CalendarTry = React.forwardRef<HTMLDivElement, CalendarTryProps>(
           disabled={disabledDate?.(date)}
           onSelectDate={onSelectDate}
           isHidden={isHiddenDate?.(date) || defaultIsHidden(date)}
-          highlightSpecialDay={highlightSpecialDay}
+          highlightSpecialDate={highlightSpecialDay}
           onMouseEnter={handleDayMouseEnter}
         />
       );
