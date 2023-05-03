@@ -17,7 +17,7 @@ import type { MenuItemProps } from '#src/components/Menu/MenuItem';
 import { Tooltip } from '#src/components/Tooltip';
 import { checkOverflow } from '#src/components/common/utils/checkOverflow';
 import type { DropContainerStyles } from '#src/components/DropdownContainer';
-import { BorderedDivStyles, InputBorderedDiv } from '#src/components/input';
+import { BorderedDivStyles, InputBorderedDiv } from '#src/components/input/TextInput';
 
 const iconSizeValue = (props: { dimension?: ComponentDimension }) => {
   switch (props.dimension) {
