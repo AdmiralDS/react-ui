@@ -158,7 +158,7 @@ const Template1: ComponentStory<typeof Drawer> = (args) => {
       <Button onClick={() => setOpened(true)}>Open drawer with 2 buttons</Button>
       <Drawer
         {...args}
-        open={opened}
+        isOpen={opened}
         onClose={() => {
           setOpened(false);
         }}
