@@ -306,9 +306,6 @@ export const CalendarTry = React.forwardRef<HTMLDivElement, CalendarTryProps>(
       );
     };
     const renderContent = () => {
-      /*console.log(`selected: ${selected?.format('DD-MM-YYYY')}`);
-      console.log(`startDate: ${startDate?.format('DD-MM-YYYY')}`);
-      console.log(`endDate: ${endDate?.format('DD-MM-YYYY')}`);*/
       switch (viewMode) {
         case 'YEARS':
           return <YearsCalendarView date={viewDate} renderCell={renderYearCell || defaultRenderYearCell} />;
