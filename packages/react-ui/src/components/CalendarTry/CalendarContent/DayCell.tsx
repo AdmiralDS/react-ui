@@ -2,10 +2,8 @@ import * as React from 'react';
 import type { MouseEvent } from 'react';
 import dayjs from 'dayjs';
 import type { Dayjs } from 'dayjs';
-import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import styled from 'styled-components';
-import { typography } from '#src/components/Typography';
-import { rangeHighlightMixin } from '#src/components/CalendarTry/CalendarContent/styled';
+import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import { CellWrapper } from '#src/components/CalendarTry/CalendarContent/CellWrapper';
 
 const DAY_SIZE = 36;
