@@ -1,12 +1,11 @@
 import * as React from 'react';
 import type { Dayjs } from 'dayjs';
 import { yearsRange } from '#src/components/CalendarTry/utils';
-import type { CalendarViewMode } from '#src/components/CalendarTry/constants';
 import { DEFAULT_YEAR_COUNT } from '#src/components/CalendarTry/constants';
 
 export interface YearsCalendarViewProps {
   date: Dayjs;
-  renderCell: (date: Dayjs, viewMode: CalendarViewMode) => React.ReactNode;
+  renderCell: (date: Dayjs) => React.ReactNode;
 }
 
 export const YearsCalendarView = ({ date, renderCell }: YearsCalendarViewProps) => {
@@ -19,7 +18,7 @@ export const YearsCalendarView = ({ date, renderCell }: YearsCalendarViewProps) 
     <>
       {years.map((year) => {
         const yearStart = date.set('year', year).startOf('year');
-        return renderCell(yearStart, 'YEARS');
+        return renderCell(yearStart);
       })}
     </>
   );
