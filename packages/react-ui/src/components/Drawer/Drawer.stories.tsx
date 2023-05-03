@@ -9,6 +9,7 @@ import { withDesign } from 'storybook-addon-designs';
 import styled, { css, ThemeProvider } from 'styled-components';
 import type { Theme } from '#src/components/themes';
 import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
+import { Modal } from '../Modal';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -54,9 +55,12 @@ export default {
     ],
   },
   argTypes: {
-    dimension: {
-      options: ['xl', 'l', 'm', 's'],
+    position: {
+      options: ['right', 'left'],
       control: { type: 'radio' },
+    },
+    backdrop: {
+      control: { type: 'boolean' },
     },
     mobile: {
       control: { type: 'boolean' },
@@ -94,16 +98,19 @@ interface Props {
 const ModalForm = ({ onYesClick, onNoClick }: Props) => {
   const [selected, setSelected] = React.useState('');
   const [inputValue, setInputValue] = React.useState('');
+  const [opened, setOpened] = React.useState(false);
   const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelected(e.target.value);
   };
 
   return (
     <>
-      <DrawerContent style={{ width: '480px' }}>
+      <DrawerContent>
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. At cupiditate ducimus nisi nulla numquam obcaecati
         quam quasi quod ut veritatis?
         <Separator />
+        <button onClick={() => setOpened(true)}>Open modal</button>
+        {opened && <Modal onClose={() => setOpened(false)} />}
         <SelectField
           label="label"
           className="Search"
@@ -151,11 +158,12 @@ const Template1: ComponentStory<typeof Drawer> = (args) => {
       <Button onClick={() => setOpened(true)}>Open drawer with 2 buttons</Button>
       <Drawer
         {...args}
-        visible={opened}
+        open={opened}
         onClose={() => {
           setOpened(false);
         }}
         aria-labelledby="modal-title"
+        style={{ width: '480px' }}
       >
         <DrawerTitle id="modal-title">Drawer title</DrawerTitle>
         <ModalForm

@@ -1,6 +1,7 @@
 import { getKeyboardFocusableElements } from '#src/components/common/utils/getKeyboardFocusableElements';
 import { refSetter } from '#src/components/common/utils/refSetter';
 import * as React from 'react';
+import type { CSSProperties } from 'react';
 import ReactDOM from 'react-dom';
 import type { Interpolation } from 'styled-components';
 import styled, { ThemeContext } from 'styled-components';
@@ -11,11 +12,9 @@ import { CloseIconPlacementButton } from '#src/components/IconPlacement';
 import { DrawerContext } from './components';
 import useMountTransition from './useMountTransition';
 
-export { DrawerTitle, DrawerContent, DrawerButtonPanel } from './components';
-
 type Position = 'right' | 'left';
 
-const Overlay = styled.div<{ overlayStyledCss: Interpolation<any>; $visible?: boolean; $in?: boolean }>`
+const Overlay = styled.div<{ overlayStyledCss: Interpolation<any>; background?: boolean; backdrop?: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -28,31 +27,35 @@ const Overlay = styled.div<{ overlayStyledCss: Interpolation<any>; $visible?: bo
   ${(p) => p.overlayStyledCss}
   outline: none;
 
-  background-color: ${({ $visible, $in, theme }) => ($visible && $in ? theme.color['Opacity/Modal'] : 'transparent')};
+  background-color: ${({ background, backdrop, theme }) =>
+    background && backdrop ? theme.color['Opacity/Modal'] : 'transparent'};
   transition: 0.3s background-color cubic-bezier(0, 0, 0.2, 1) 0ms;
+
+  ${({ backdrop }) => !backdrop && 'pointer-events: none;'}
 `;
 
-const DrawerComponent = styled.div<{ mobile?: boolean; $visible?: boolean; $in?: boolean }>`
+const DrawerComponent = styled.div<{ position: Position; mobile?: boolean; visible?: boolean }>`
   position: absolute;
   box-sizing: border-box;
   top: 0;
   bottom: 0;
-  right: 0;
-  ${({ mobile }) => mobile && 'left: 16px;'}
+  ${({ position }) => (position === 'right' ? 'right: 0;' : 'left: 0;')}
   display: flex;
   flex: 1 0 auto;
   flex-direction: column;
   overflow: hidden;
   padding: 20px 0 24px;
-  min-width: 320px;
-  max-width: calc(100vw - 16px);
+  min-width: ${({ mobile }) => (mobile ? 'calc(100% - 16px)' : '320px')};
+  max-width: calc(100% - 16px);
   background-color: ${({ theme }) => theme.color['Neutral/Neutral 00']};
   ${({ theme }) => theme.shadow['Shadow 16']}
   color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
   outline: none;
 
-  transform: ${({ $visible, $in, theme }) => ($visible && $in ? 'translateX(0)' : 'translateX(100%)')};
+  transform: ${({ visible, position }) =>
+    visible ? 'translateX(0)' : position === 'right' ? 'translateX(100%)' : 'translateX(-100%)'};
   transition: 0.3s transform cubic-bezier(0, 0, 0.2, 1) 0ms;
+  pointer-events: auto;
 `;
 
 const CloseButton = styled(CloseIconPlacementButton)<{ mobile?: boolean }>`
@@ -63,7 +66,7 @@ const CloseButton = styled(CloseIconPlacementButton)<{ mobile?: boolean }>`
 
 export interface DrawerProps extends React.HTMLAttributes<HTMLDivElement> {
   /** */
-  visible?: boolean;
+  open?: boolean;
   /** С какой части экрана будет выдвигаться компонент */
   position?: Position;
   /** Происходит ли блокировка контента страницы */
@@ -86,14 +89,15 @@ export interface DrawerProps extends React.HTMLAttributes<HTMLDivElement> {
   onClose?: () => void;
 
   /**
-   * Возможность изменять стили для подложки модального окна.
+   * Возможность изменять стили для подложки drawerа через миксин, созданный с помощью styled css.
    * Например цвет фона в зависимости от темы:
    *  const overlayStyles = css\`background-color: ${({ theme }) => hexToRgba(theme.color["Neutral/Neutral 05"], 0.6)};\`
    * */
-  overlayStyledCss?: Interpolation<any>;
-  /** Объект локализации - позволяет перезадать текстовые константы используемые в компоненте,
-   * по умолчанию значения констант берутся из темы в соответствии с параметром currentLocale, заданном в теме
-   **/
+  overlayCssMixin?: Interpolation<any>;
+  /** Позволяет добавлять класс на подложку drawerа  */
+  overlayClassName?: string;
+  /** Позволяет добавлять стили на подложку drawerа  */
+  overlayStyle?: CSSProperties;
   locale?: {
     /** Атрибут aria-label, описывающий назначение кнопки с крестиком, закрывающей модальное окно */
     closeButtonAriaLabel?: string;
@@ -103,15 +107,17 @@ export interface DrawerProps extends React.HTMLAttributes<HTMLDivElement> {
 export const Drawer = React.forwardRef<HTMLDivElement, DrawerProps>(
   (
     {
-      visible = false,
-      position = 'right',
+      open = false,
+      position: userPosition = 'right',
       backdrop = true,
-      overlayStyledCss,
+      overlayCssMixin,
+      overlayClassName,
+      overlayStyle,
       container,
       mobile = false,
       onClose,
-      closeOnEscapeKeyDown = true,
-      closeOnOutsideClick = true,
+      closeOnEscapeKeyDown,
+      closeOnOutsideClick,
       displayCloseIcon = true,
       children,
       locale,
@@ -119,8 +125,9 @@ export const Drawer = React.forwardRef<HTMLDivElement, DrawerProps>(
     },
     ref,
   ) => {
-    const hasTransitionedIn = useMountTransition(visible, 300);
+    const hasTransitionedIn = useMountTransition(open, 300);
 
+    const position = mobile ? 'right' : userPosition;
     const theme = React.useContext(ThemeContext) || LIGHT_THEME;
     const closeBtnAriaLabel =
       locale?.closeButtonAriaLabel || theme.locales[theme.currentLocale].modal.closeButtonAriaLabel;
@@ -136,7 +143,7 @@ export const Drawer = React.forwardRef<HTMLDivElement, DrawerProps>(
     };
 
     React.useLayoutEffect(() => {
-      if (backdrop && (visible || hasTransitionedIn)) {
+      if (backdrop && (open || hasTransitionedIn)) {
         previousFocusedElement.current = document.activeElement;
         // set focus inside modalComponent
         modalRef.current?.focus();
@@ -152,7 +159,7 @@ export const Drawer = React.forwardRef<HTMLDivElement, DrawerProps>(
           manager.remove(getModal());
         };
       }
-    }, [backdrop, visible, hasTransitionedIn]);
+    }, [backdrop, open, hasTransitionedIn]);
 
     const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
       if (event.key === 'Escape' && closeOnEscapeKeyDown) {
@@ -190,25 +197,27 @@ export const Drawer = React.forwardRef<HTMLDivElement, DrawerProps>(
       onClose?.();
     };
 
-    return visible || hasTransitionedIn
+    return open || hasTransitionedIn
       ? ReactDOM.createPortal(
           <Overlay
             ref={overlayRef}
             tabIndex={-1}
             onMouseDown={handleMouseDown}
             onKeyDown={handleKeyDown}
-            overlayStyledCss={overlayStyledCss}
-            $visible={visible}
-            $in={hasTransitionedIn}
+            overlayStyledCss={overlayCssMixin}
+            className={overlayClassName}
+            style={overlayStyle}
+            background={open && hasTransitionedIn}
+            backdrop={backdrop}
           >
             <DrawerComponent
               ref={refSetter(ref, modalRef)}
               tabIndex={-1}
               role="dialog"
               aria-modal
+              position={position}
               mobile={mobile}
-              $visible={visible}
-              $in={hasTransitionedIn}
+              visible={open && hasTransitionedIn}
               {...props}
             >
               <DrawerContext.Provider value={{ mobile, displayCloseIcon }}>{children}</DrawerContext.Provider>
@@ -229,3 +238,5 @@ export const Drawer = React.forwardRef<HTMLDivElement, DrawerProps>(
 );
 
 Drawer.displayName = 'Drawer';
+
+export { DrawerTitle, DrawerContent, DrawerButtonPanel } from './components';
