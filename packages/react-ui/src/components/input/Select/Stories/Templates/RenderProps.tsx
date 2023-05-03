@@ -27,23 +27,21 @@ export const RenderPropsTemplate = (props: SelectProps) => {
   };
 
   return (
-    <>
-      <Select {...props} value={selectValue} mode="searchSelect" onChange={onChange}>
-        {OPTIONS.map(({ text, value }) => (
-          <Option
-            key={value}
-            value={value}
-            renderOption={(options) => (
-              <MyIncredibleOption
-                text={text}
-                shouldAnimate={options.hovered && value !== selectValue}
-                {...options}
-                key={value}
-              />
-            )}
-          />
-        ))}
-      </Select>
-    </>
+    <Select {...props} value={selectValue} mode="searchSelect" onChange={onChange}>
+      {OPTIONS.map(({ text, value }) => (
+        <Option
+          key={value}
+          value={value}
+          renderOption={(options) => (
+            <MyIncredibleOption
+              text={text}
+              shouldAnimate={options.hovered && value !== selectValue}
+              {...options}
+              key={value}
+            />
+          )}
+        />
+      ))}
+    </Select>
   );
 };
