@@ -1,23 +1,23 @@
 import * as React from 'react';
-import type { Dayjs } from 'dayjs';
-import dayjs from 'dayjs';
-import type { DateValidator } from '#src/components/CalendarTry/validator';
 import type { MouseEvent } from 'react';
+import dayjs from 'dayjs';
+import type { Dayjs } from 'dayjs';
 import styled from 'styled-components';
-import { typography } from '#src/components/Typography';
+import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
+import { CellWrapper } from '#src/components/CalendarTry/CalendarContent/CellWrapper';
+import { YEARS_IN_ROW } from '#src/components/CalendarTry/constants';
 
 export interface YearCellProps {
   date: Dayjs;
+  activeDate?: Dayjs;
+  startDate?: Dayjs;
+  endDate?: Dayjs;
   selected?: Dayjs;
-  validator?: DateValidator;
   onSelectYear: (date: Dayjs, event: MouseEvent<HTMLDivElement>) => void;
-}
-
-type YearCellWrapperProps = {
-  today?: boolean;
-  selected?: boolean;
   disabled?: boolean;
-};
+  highlightSpecialDate?: (date: Dayjs) => FlattenInterpolation<ThemeProps<DefaultTheme>> | undefined;
+  onMouseEnter: (date: Dayjs, event: MouseEvent<HTMLDivElement>) => void;
+}
 
 const YEAR_HEIGHT = '36px';
 const YEAR_WIDTH = '60px';
@@ -25,36 +25,25 @@ const YEAR_MARGIN_BOTTOM = '16px';
 const YEAR_PADDING = '8px 0';
 const YEAR_BORDER_RADIUS = '18px';
 
-export const YearCellWrapper = styled.div<YearCellWrapperProps>`
-  position: relative;
-  display: inline-block;
-  box-sizing: border-box;
+export const YearCellWrapper = styled(CellWrapper)<{
+  today?: boolean;
+  isActiveDate: boolean;
+  disabled?: boolean;
+  selected?: boolean;
+  inRange?: boolean;
+  inSelectingRange?: boolean;
+  isRowStart: boolean;
+  isRowEnd: boolean;
+  isRangeStart: boolean;
+  isRangeEnd: boolean;
+  highlightSpecialDateMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+}>`
   width: ${YEAR_WIDTH};
   height: ${YEAR_HEIGHT};
   padding: ${YEAR_PADDING};
   margin-bottom: ${YEAR_MARGIN_BOTTOM};
-  border: 1px solid ${({ today, theme }) => (today ? theme.color['Neutral/Neutral 90'] : 'transparent')};
-  border-radius: ${YEAR_BORDER_RADIUS};
   background: transparent;
-  ${typography['Body/Body 2 Long']}
-  color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
   user-select: none;
-  cursor: pointer;
-
-  ${({ disabled, theme }) =>
-    disabled &&
-    `
-      cursor: default;
-      color: ${theme.color['Neutral/Neutral 30']};
-    `}
-
-  ${({ disabled, theme }) =>
-    !disabled &&
-    `
-      &:hover {
-        border: 1px solid ${theme.color['Primary/Primary 60 Main']};
-      }
-    `}
 
   ${({ disabled, theme, selected }) =>
     !disabled &&
@@ -70,8 +59,7 @@ export const YearCellWrapper = styled.div<YearCellWrapperProps>`
     `}
 `;
 
-export const YearCell = ({ date, selected, validator, onSelectYear }: YearCellProps) => {
-  const disabled = !!validator?.invalidYear(date.year());
+export const YearCell = ({ date, activeDate, selected, disabled, onSelectYear }: YearCellProps) => {
   const handleClick = (e: any) => {
     e.preventDefault();
     const day = date.startOf('year');
@@ -79,11 +67,17 @@ export const YearCell = ({ date, selected, validator, onSelectYear }: YearCellPr
   };
   return (
     <YearCellWrapper
+      isRowStart={date.year() % YEARS_IN_ROW === 1}
+      isRowEnd={date.year() % YEARS_IN_ROW === 0}
       key={date.valueOf()}
       today={date.isSame(dayjs(), 'year')}
       selected={!!selected && date.isSame(selected, 'year')}
       disabled={disabled}
       onMouseDown={handleClick}
+      isActiveDate={!!activeDate && date.isSame(activeDate, 'year')}
+      isRangeStart={false}
+      isRangeEnd={false}
+      borderRadius={YEAR_BORDER_RADIUS}
     >
       {date.format('YYYY')}
     </YearCellWrapper>

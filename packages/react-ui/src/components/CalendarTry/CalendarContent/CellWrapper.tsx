@@ -13,6 +13,7 @@ export const CellWrapper = styled.div<{
   isRowEnd: boolean;
   isRangeStart: boolean;
   isRangeEnd: boolean;
+  borderRadius: string;
 }>`
   position: relative;
   display: inline-block;
@@ -36,7 +37,7 @@ export const CellWrapper = styled.div<{
             ? p.theme.color['Neutral/Neutral 30']
             : p.theme.color['Neutral/Neutral 90']
           : 'transparent'};
-    border-radius: 50%;
+    border-radius: ${(p) => p.borderRadius};
   }
 
   // активная дата
@@ -65,7 +66,7 @@ export const CellWrapper = styled.div<{
       background: ${
         p.inSelectingRange ? p.theme.color['Primary/Primary 70'] : p.theme.color['Primary/Primary 60 Main']
       };
-      border-radius: 50%;
+      border-radius: ${p.borderRadius};
       &:hover {
         background: ${p.theme.color['Primary/Primary 70']};
       }

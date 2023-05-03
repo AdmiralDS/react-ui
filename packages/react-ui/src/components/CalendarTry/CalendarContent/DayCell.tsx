@@ -9,6 +9,7 @@ import { CellWrapper } from '#src/components/CalendarTry/CalendarContent/CellWra
 const DAY_SIZE = 36;
 const DAY_PADDING = '8px 0';
 const DAY_MARGIN_BOTTOM = '4px';
+const DAY_BORDER_RADIUS = '50%';
 
 export interface DayCellProps {
   date: Dayjs;
@@ -110,6 +111,7 @@ export const DayCell = ({
       onClick={handleClick}
       highlightSpecialDateMixin={highlightSpecialDate?.(date)}
       onMouseEnter={(e) => !disabled && onMouseEnter && onMouseEnter(date, e)}
+      borderRadius={DAY_BORDER_RADIUS}
     >
       {date.date()}
     </DayCellWrapper>

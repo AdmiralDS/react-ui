@@ -146,6 +146,10 @@ export const CalendarTry = React.forwardRef<HTMLDivElement, CalendarTryProps>(
       }
     }, [currentLocale]);
 
+    const handleYearMouseEnter = (date: Dayjs, _: any) => {
+      setActiveDate(date);
+    };
+
     const handleDayMouseEnter = (date: Dayjs, _: any) => {
       setActiveDate(date);
     };
@@ -229,9 +233,13 @@ export const CalendarTry = React.forwardRef<HTMLDivElement, CalendarTryProps>(
         <YearCell
           key={date.valueOf()}
           date={date}
+          activeDate={activeDate}
+          startDate={startDate}
+          endDate={endDate}
           selected={selected}
-          validator={validator}
           onSelectYear={handleYearClick}
+          disabled={!!validator?.invalidYear(date.year())}
+          onMouseEnter={handleYearMouseEnter}
         />
       );
     };

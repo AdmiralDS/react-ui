@@ -9,8 +9,9 @@ export const rangeHighlightMixin = css<{
   isRowEnd: boolean;
   isRangeStart: boolean;
   isRangeEnd: boolean;
+  borderRadius: string;
 }>`
-  ${({ disabled, inRange, inSelectingRange, isRangeStart, isRangeEnd, isRowStart, isRowEnd, theme }) =>
+  ${({ disabled, inRange, inSelectingRange, isRangeStart, isRangeEnd, isRowStart, isRowEnd, theme, borderRadius }) =>
     !disabled &&
     (inRange || inSelectingRange) &&
     `
@@ -26,14 +27,14 @@ export const rangeHighlightMixin = css<{
         background: ${inSelectingRange ? theme.color['Opacity/Focus'] : theme.color['Opacity/Hover']};
         ${
           (isRangeStart && isRowStart) || (isRangeStart && isRowEnd) || (isRangeStart && !isRowEnd && !isRowStart)
-            ? `border-top-left-radius: 50%;
-               border-bottom-left-radius: 50%;`
+            ? `border-top-left-radius: ${borderRadius};
+               border-bottom-left-radius: ${borderRadius};`
             : ''
         };
         ${
           (isRangeEnd && isRowEnd) || (isRangeEnd && isRowStart) || (isRangeEnd && !isRowEnd && !isRowStart)
-            ? `border-top-right-radius: 50%;
-               border-bottom-right-radius: 50%;`
+            ? `border-top-right-radius: ${borderRadius};
+               border-bottom-right-radius: ${borderRadius};`
             : ''
         };        
         
