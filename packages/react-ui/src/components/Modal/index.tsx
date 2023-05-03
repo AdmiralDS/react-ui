@@ -3,7 +3,7 @@ import { refSetter } from '#src/components/common/utils/refSetter';
 import { typography } from '#src/components/Typography';
 import * as React from 'react';
 import ReactDOM from 'react-dom';
-import type { Interpolation } from 'styled-components';
+import type { Interpolation, DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import styled, { css, ThemeContext } from 'styled-components';
 import { LIGHT_THEME } from '#src/components/themes';
 import { manager } from './manager';
@@ -135,11 +135,11 @@ export interface ModalProps extends React.HTMLAttributes<HTMLDivElement> {
   onClose?: () => void;
 
   /**
-   * Возможность изменять стили для подложки модального окна через миксин, созданный с помощью styled css.
+   * Позволяет добавлять стили для подложки модального окна через миксин, созданный с помощью styled css.
    * Например цвет фона в зависимости от темы:
    *  const overlayStyles = css\`background-color: ${({ theme }) => hexToRgba(theme.color["Neutral/Neutral 05"], 0.6)};\`
    * */
-  overlayStyledCss?: Interpolation<any>;
+  overlayStyledCss?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
   /** Позволяет добавлять класс на подложку модального окна  */
   overlayClassName?: string;
   /** Позволяет добавлять стили на подложку модального окна  */

@@ -281,10 +281,6 @@ const Template4: ComponentStory<typeof Modal> = (args) => {
   );
 };
 
-const overlayStyles = css`
-  background-color: ${({ theme }) => hexToRgba(theme.color['Error/Error 20'], 0.6)};
-`;
-
 const Template5: ComponentStory<typeof Modal> = (args) => {
   const [opened, setOpened] = React.useState(false);
   return (
@@ -298,7 +294,6 @@ const Template5: ComponentStory<typeof Modal> = (args) => {
             setOpened(false);
           }}
           aria-labelledby="modal-title"
-          overlayStyledCss={overlayStyles}
         >
           <h1 id="modal-title" style={{ paddingLeft: '24px' }}>
             <strong>Modal title</strong>
@@ -332,6 +327,35 @@ const Template5: ComponentStory<typeof Modal> = (args) => {
   );
 };
 
+const overlayStyles = css`
+  background-color: ${({ theme }) => hexToRgba(theme.color['Error/Error 20'], 0.6)};
+`;
+
+const Template6: ComponentStory<typeof Modal> = (args) => {
+  const [opened, setOpened] = React.useState(false);
+  return (
+    <>
+      <Button onClick={() => setOpened(true)}>Open modal with custom overlay</Button>
+      {opened && (
+        <Modal
+          {...args}
+          onClose={() => {
+            setOpened(false);
+          }}
+          aria-labelledby="modal-title"
+          overlayStyledCss={overlayStyles}
+        >
+          <ModalTitle id="modal-title">Modal title</ModalTitle>
+          <ModalContent>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. At cupiditate ducimus nisi nulla numquam obcaecati
+            quam quasi quod ut veritatis?
+          </ModalContent>
+        </Modal>
+      )}
+    </>
+  );
+};
+
 export const ModalTwoButtons = Template1.bind({});
 ModalTwoButtons.args = {};
 ModalTwoButtons.storyName = 'Modal. Пример c двумя кнопками.';
@@ -351,3 +375,16 @@ ModalScroll.storyName = 'Modal. Пример со скроллом.';
 export const CustomModal = Template5.bind({});
 CustomModal.args = {};
 CustomModal.storyName = 'Modal. Свободное (кастомизированное) наполнение.';
+
+export const CustomOverlay = Template6.bind({});
+CustomOverlay.args = {};
+CustomOverlay.storyName = 'Modal. Кастомизация подложки модального окна.';
+CustomOverlay.parameters = {
+  docs: {
+    description: {
+      story: `У пользователя есть возможность кастомизировать внешний вид подложки модального окна.
+      Для этого можно воспользоваться параметром overlayStyledCss, чтобы задать миксин со стилями для подложки.
+      Либо можно воспользоваться параметрами overlayClassName, overlayStyle.`,
+    },
+  },
+};

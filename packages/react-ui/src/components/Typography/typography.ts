@@ -82,6 +82,7 @@ export const typography = {
     font-size: 42px;
     line-height: 52px;
     font-feature-settings: 'tnum' on, 'lnum' on;
+    text-rendering: geometricPrecision;
   `,
 
   'Main/XL': css`
@@ -91,6 +92,7 @@ export const typography = {
     font-size: 36px;
     line-height: 44px;
     font-feature-settings: 'tnum' on, 'lnum' on;
+    text-rendering: geometricPrecision;
   `,
 
   'Main/L': css`
@@ -100,6 +102,7 @@ export const typography = {
     font-size: 32px;
     line-height: 40px;
     font-feature-settings: 'tnum' on, 'lnum' on;
+    text-rendering: geometricPrecision;
   `,
 
   'Main/M': css`
@@ -109,6 +112,7 @@ export const typography = {
     font-size: 28px;
     line-height: 36px;
     font-feature-settings: 'tnum' on, 'lnum' on;
+    text-rendering: geometricPrecision;
   `,
 
   'Main/S': css`
@@ -118,6 +122,7 @@ export const typography = {
     font-size: 20px;
     line-height: 28px;
     font-feature-settings: 'tnum' on, 'lnum' on;
+    text-rendering: geometricPrecision;
   `,
 
   'Main/XS-bold': css`
@@ -127,6 +132,7 @@ export const typography = {
     font-size: 18px;
     line-height: 24px;
     font-feature-settings: 'tnum' on, 'lnum' on;
+    text-rendering: geometricPrecision;
   `,
 
   'Main/XS': css`
@@ -136,6 +142,7 @@ export const typography = {
     font-size: 18px;
     line-height: 24px;
     font-feature-settings: 'tnum' on, 'lnum' on;
+    text-rendering: geometricPrecision;
   `,
 
   'Additional/L-bold': css`
@@ -145,6 +152,7 @@ export const typography = {
     font-size: 16px;
     line-height: 24px;
     font-feature-settings: 'tnum' on, 'lnum' on;
+    text-rendering: geometricPrecision;
   `,
 
   'Additional/L': css`
@@ -154,6 +162,7 @@ export const typography = {
     font-size: 16px;
     line-height: 24px;
     font-feature-settings: 'tnum' on, 'lnum' on;
+    text-rendering: geometricPrecision;
   `,
 
   'Additional/M': css`
@@ -163,6 +172,7 @@ export const typography = {
     font-size: 16px;
     line-height: 20px;
     font-feature-settings: 'tnum' on, 'lnum' on;
+    text-rendering: geometricPrecision;
   `,
 
   'Additional/S': css`
@@ -172,6 +182,7 @@ export const typography = {
     font-size: 14px;
     line-height: 20px;
     font-feature-settings: 'tnum' on, 'lnum' on;
+    text-rendering: geometricPrecision;
   `,
 
   'Additional/S-bold': css`
@@ -181,6 +192,7 @@ export const typography = {
     font-size: 14px;
     line-height: 20px;
     font-feature-settings: 'tnum' on, 'lnum' on;
+    text-rendering: geometricPrecision;
   `,
 
   'Additional/XS': css`
@@ -190,6 +202,7 @@ export const typography = {
     font-size: 14px;
     line-height: 16px;
     font-feature-settings: 'tnum' on, 'lnum' on;
+    text-rendering: geometricPrecision;
   `,
 
   'Button/M': css`
@@ -201,6 +214,7 @@ export const typography = {
     /* or 150% */
 
     font-feature-settings: 'tnum' on, 'lnum' on;
+    text-rendering: geometricPrecision;
   `,
 
   'Button/S': css`
@@ -212,6 +226,7 @@ export const typography = {
     /* or 143% */
 
     font-feature-settings: 'tnum' on, 'lnum' on;
+    text-rendering: geometricPrecision;
   `,
 
   'Caption/XS': css`
@@ -223,6 +238,7 @@ export const typography = {
     /* identical to box height, or 133% */
 
     font-feature-settings: 'tnum' on, 'lnum' on;
+    text-rendering: geometricPrecision;
   `,
 
   'Header/HL1': css`
@@ -233,6 +249,7 @@ export const typography = {
     line-height: 80px;
     /* or 111% */
     font-feature-settings: 'tnum' on, 'lnum' on;
+    text-rendering: geometricPrecision;
   `,
 
   'Header/HL2': css`
@@ -243,6 +260,7 @@ export const typography = {
     line-height: 64px;
     /* or 114% */
     font-feature-settings: 'tnum' on, 'lnum' on;
+    text-rendering: geometricPrecision;
   `,
 
   'Header/HL3': css`
@@ -253,6 +271,7 @@ export const typography = {
     line-height: 56px;
     /* or 117% */
     font-feature-settings: 'tnum' on, 'lnum' on;
+    text-rendering: geometricPrecision;
   `,
 
   'Header/H1': css`
@@ -263,6 +282,7 @@ export const typography = {
     line-height: 48px;
     /* or 120% */
     font-feature-settings: 'tnum' on, 'lnum' on;
+    text-rendering: geometricPrecision;
   `,
 
   'Header/H2': css`
@@ -273,6 +293,7 @@ export const typography = {
     line-height: 40px;
     /* or 118% */
     font-feature-settings: 'tnum' on, 'lnum' on;
+    text-rendering: geometricPrecision;
   `,
 
   'Header/H3': css`
@@ -283,6 +304,7 @@ export const typography = {
     line-height: 36px;
     /* or 129% */
     font-feature-settings: 'tnum' on, 'lnum' on;
+    text-rendering: geometricPrecision;
   `,
 
   'Header/H4': css`
@@ -293,6 +315,7 @@ export const typography = {
     line-height: 32px;
     /* or 133% */
     font-feature-settings: 'tnum' on, 'lnum' on;
+    text-rendering: geometricPrecision;
   `,
 
   'Header/H5': css`
@@ -303,6 +326,7 @@ export const typography = {
     line-height: 28px;
     /* or 140% */
     font-feature-settings: 'tnum' on, 'lnum' on;
+    text-rendering: geometricPrecision;
   `,
 
   'Header/H6': css`
@@ -313,6 +337,7 @@ export const typography = {
     line-height: 24px;
     /* or 133% */
     font-feature-settings: 'tnum' on, 'lnum' on;
+    text-rendering: geometricPrecision;
   `,
 
   'Subtitle/Subtitle 1': css`
@@ -323,6 +348,7 @@ export const typography = {
     line-height: 24px;
     /* or 133% */
     font-feature-settings: 'tnum' on, 'lnum' on;
+    text-rendering: geometricPrecision;
   `,
 
   'Subtitle/Subtitle 2': css`
@@ -333,6 +359,7 @@ export const typography = {
     line-height: 24px;
     /* or 150% */
     font-feature-settings: 'tnum' on, 'lnum' on;
+    text-rendering: geometricPrecision;
   `,
 
   'Subtitle/Subtitle 3': css`
@@ -343,6 +370,7 @@ export const typography = {
     line-height: 20px;
     /* or 143% */
     font-feature-settings: 'tnum' on, 'lnum' on;
+    text-rendering: geometricPrecision;
   `,
 
   'Body/Body 1 Long': css`
@@ -353,6 +381,7 @@ export const typography = {
     line-height: 24px;
     /* or 150% */
     font-feature-settings: 'tnum' on, 'lnum' on;
+    text-rendering: geometricPrecision;
   `,
 
   'Body/Body 1 Short': css`
@@ -363,6 +392,7 @@ export const typography = {
     line-height: 20px;
     /* or 125% */
     font-feature-settings: 'tnum' on, 'lnum' on;
+    text-rendering: geometricPrecision;
   `,
 
   'Body/Body 2 Long': css`
@@ -373,6 +403,7 @@ export const typography = {
     line-height: 20px;
     /* or 133% */
     font-feature-settings: 'tnum' on, 'lnum' on;
+    text-rendering: geometricPrecision;
   `,
 
   'Body/Body 2 Short': css`
@@ -383,6 +414,7 @@ export const typography = {
     line-height: 16px;
     /* or 114% */
     font-feature-settings: 'tnum' on, 'lnum' on;
+    text-rendering: geometricPrecision;
   `,
 
   'Button/Button 1': css`
@@ -393,6 +425,7 @@ export const typography = {
     line-height: 24px;
     /* or 150% */
     font-feature-settings: 'tnum' on, 'lnum' on;
+    text-rendering: geometricPrecision;
   `,
 
   'Button/Button 2': css`
@@ -403,6 +436,7 @@ export const typography = {
     line-height: 20px;
     /* or 143% */
     font-feature-settings: 'tnum' on, 'lnum' on;
+    text-rendering: geometricPrecision;
   `,
 
   'Caption/Caption 1': css`
@@ -413,6 +447,7 @@ export const typography = {
     line-height: 16px;
     /* identical to box height, or 133% */
     font-feature-settings: 'tnum' on, 'lnum' on;
+    text-rendering: geometricPrecision;
   `,
 
   'Caption/Caption 2': css`
@@ -423,5 +458,6 @@ export const typography = {
     line-height: 12px;
     /* or 120% */
     font-feature-settings: 'tnum' on, 'lnum' on;
+    text-rendering: geometricPrecision;
   `,
 } as const;

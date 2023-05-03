@@ -38,7 +38,7 @@ const listDataIcon = [
   { id: '2', label: 'Тверь', disabled: false, iconBefore: <TrophyIcon />, selected: false },
   { id: '3', label: 'Самара', disabled: false, iconAfter: <BurnIcon />, selected: false },
   { id: '4', label: 'Омск', disabled: false, iconAfter: <DiamondSolid />, selected: false },
-  { id: '5', label: 'Вильнус', disabled: false, iconAfter: <BurnIcon />, onClose: () => undefined, selected: false },
+  { id: '5', label: 'Вильнус', disabled: false, iconBefore: <BurnIcon />, selected: false, badge: 3 },
 ];
 
 const listDataIconTooltip = [
@@ -66,11 +66,9 @@ const StyledChipsTooltip = styled(Chips)`
 const Description = () => (
   <Desc>
     Чипсы представляют собой перечень выбранных нами фильтров, опций или каких-либо элементов из списка. В библиотеке
-    есть два типа чипсов — Filled и Outlined. Chips можно использовать при множественном выборе из списка опций для
-    большей доступности отображения выбранных опций и возможности их быстрого редактирования (добавление, удаление).
-    Примером может служить компонент Multi Select или выбор участников встречи, когда имена выбранных людей выводятся
-    списком в виде чипсов. При нажатии на чипс элемент удаляется из списка выбранных.
-    <Separator />В зависимости от ситуации используются большие — 32 px, либо маленькие — 24 px чипсы.
+    есть два типа чипсов — Filled и Outlined. В зависимости от ситуации используются большие — 28 px, либо маленькие —
+    24 px чипсы. Примером может служить компонент Multi Select или выбор участников встречи, когда имена выбранных людей
+    выводятся списком в виде чипсов.
   </Desc>
 );
 
@@ -189,8 +187,6 @@ const ChipsIconDemo: ComponentStory<typeof Chips> = (props) => {
             onClick={() => (props.disabled ? null : setSelectedM(d.id))}
             iconBefore={d?.iconBefore}
             iconAfter={d?.iconAfter}
-            // Если onClose указан, вместо iconAfter отобразится closeIcon
-            onClose={d?.onClose}
           >
             {d.label}
           </Chips>
@@ -207,8 +203,6 @@ const ChipsIconDemo: ComponentStory<typeof Chips> = (props) => {
             onClick={() => (props.disabled ? null : setSelectedS(d.id))}
             iconBefore={d?.iconBefore}
             iconAfter={d?.iconAfter}
-            // Если onClose указан, вместо iconAfter отобразится closeIcon
-            onClose={d?.onClose}
           >
             {d.label}
           </Chips>
@@ -320,7 +314,7 @@ const ChipsBadgesDemo: ComponentStory<typeof Chips> = (props) => {
           <Chips
             {...props}
             key={item.id}
-            badge={3}
+            badge={props.badge}
             dimension="m"
             selected={selectedM === item.id}
             onClick={() => (props.disabled ? null : setSelectedM(item.id))}
@@ -337,7 +331,7 @@ const ChipsBadgesDemo: ComponentStory<typeof Chips> = (props) => {
           <Chips
             {...props}
             key={item.id}
-            badge={3}
+            badge={props.badge}
             dimension="s"
             appearance="filled"
             selected={selectedS === item.id}
@@ -362,9 +356,65 @@ export const ChipsTooltip = ChipsTagsCloseTooltipDemo.bind({});
 export const ChipsBadges = ChipsBadgesDemo.bind({});
 
 ChipsTags.storyName = 'Chips базовый пример';
+
 ChipsTagsClose.storyName = 'Chips с текстом и иконкой закрыть';
+ChipsTagsClose.parameters = {
+  docs: {
+    description: {
+      story: `Взаимодействовать можно только с чипсами имеющими иконку закрытия “Close”. При 
+      нажатии на иконку закрытия элемент удаляется из списка выбранных.`,
+    },
+  },
+};
+
 ChipsIcon.storyName = 'Chips с иконкой';
+ChipsIcon.parameters = {
+  docs: {
+    description: {
+      story: `В компоненте можно включать иконки справа и/или слева от текста.`,
+    },
+  },
+};
+
 ChipsSelect.storyName = 'Chips с текстом и выбором';
+ChipsSelect.parameters = {
+  docs: {
+    description: {
+      story: `Набор из двух и более чипсов, которые могут быть в активном (выбранном) состоянии 
+      или пассивном (выключенном) состоянии. Chips в режиме радио кнопок, когда можно выбрать 
+      только одно значение из списка. `,
+    },
+  },
+};
+
 ChipsMultiSelectIcon.storyName = 'Chips для множественного выбора';
+ChipsMultiSelectIcon.parameters = {
+  docs: {
+    description: {
+      story: `Chips в режиме чекбоксов, когда можно выбрать любое количество значений`,
+    },
+  },
+};
+
 ChipsTooltip.storyName = 'Chips с Tooltip';
+ChipsTooltip.parameters = {
+  docs: {
+    description: {
+      story: `По дефолту в компоненте (в коде) задано граничение ширины в 190 px, после которой 
+      происходит уход в троеточие. Но можно изменять этот параметр стилизуя компонент через styled 
+      components. В случае сокращения, над компонентом при ховере появляется Тултип с расшифровкой.`,
+    },
+  },
+};
+
 ChipsBadges.storyName = 'Chips с Badge';
+ChipsBadges.parameters = {
+  docs: {
+    description: {
+      story: `В компоненте можно включать бейджи.`,
+    },
+  },
+};
+ChipsBadges.args = {
+  badge: 5,
+};

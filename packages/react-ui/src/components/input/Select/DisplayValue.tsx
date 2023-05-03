@@ -4,12 +4,18 @@ import { StringValueWrapper } from './styled';
 import { checkOverflow } from '#src/components/common/utils/checkOverflow';
 
 export interface DisplayValueProps {
+  forceHideOverflowTooltip: boolean;
   visibleValue: string;
   isSearchPanelOpen: boolean;
   targetRef: React.RefObject<HTMLElement>;
 }
 
-export const DisplayValue: React.FC<DisplayValueProps> = ({ visibleValue, isSearchPanelOpen, targetRef }) => {
+export const DisplayValue = ({
+  visibleValue,
+  isSearchPanelOpen,
+  targetRef,
+  forceHideOverflowTooltip,
+}: DisplayValueProps) => {
   const valueRef = React.useRef<HTMLDivElement>(null);
   const [overflowActive, setOverflowActive] = React.useState<boolean>(false);
   const [tooltipVisible, setTooltipVisible] = React.useState<boolean>(false);
@@ -38,12 +44,12 @@ export const DisplayValue: React.FC<DisplayValueProps> = ({ visibleValue, isSear
     }
   }, [setTooltipVisible]);
 
+  const showTooltip = !forceHideOverflowTooltip && !isSearchPanelOpen && tooltipVisible && overflowActive;
+
   return (
     <>
       <StringValueWrapper ref={valueRef}>{visibleValue}</StringValueWrapper>
-      {!isSearchPanelOpen && tooltipVisible && overflowActive && (
-        <Tooltip renderContent={() => visibleValue} targetRef={targetRef} />
-      )}
+      {showTooltip && <Tooltip renderContent={() => visibleValue} targetRef={targetRef} />}
     </>
   );
 };

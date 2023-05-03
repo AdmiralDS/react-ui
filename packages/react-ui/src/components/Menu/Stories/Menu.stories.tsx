@@ -32,6 +32,7 @@ import LargeNumberOfItemsRaw from '!!raw-loader!./Templates/LargeNumberOfItems';
 import MenuWithLockCycleScrollRaw from '!!raw-loader!./Templates/MenuWithLockCycleScroll';
 import VirtualScrollRaw from '!!raw-loader!./Templates/VirtualScroll';
 import CardGroupsRaw from '!!raw-loader!./Templates/CardGroups';
+import { IconsAndAdditionalTextTemplate } from '#src/components/Menu/Stories/Templates/IconsAndAdditionalText';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -823,6 +824,19 @@ const MenuCheckboxGroupTemplate: ComponentStory<typeof Menu> = (args) => {
 
 export const Simple = SimpleTemplate.bind({});
 Simple.storyName = 'Базовый пример';
+
+const IconsStory: ComponentStory<typeof Menu> = (props) => (
+  <IconsAndAdditionalTextTemplate model={[]} {...cleanUpProps(props)} />
+);
+export const IconsExample = IconsStory.bind({});
+IconsExample.parameters = {
+  docs: {
+    description: {
+      story: 'Пример меню с иконками и дополнительным текстом',
+    },
+  },
+};
+IconsExample.storyName = 'Пример с иконками и дополнительным текстом';
 
 //<editor-fold desc="Пример с большим количеством item">
 const CardGroupsStory: ComponentStory<typeof Menu> = (props) => (

@@ -1,4 +1,4 @@
-import { INPUT_DIMENSIONS_VALUES, INPUT_STATUS_VALUES, SelectValueWrapper } from '#src/components/input';
+import { INPUT_DIMENSIONS_VALUES, INPUT_STATUS_VALUES } from '#src/components/input';
 import { Modal, ModalButtonPanel, ModalContent, ModalTitle } from '#src/components/Modal';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import type { ChangeEvent } from 'react';
@@ -8,11 +8,11 @@ import { Option, OptionGroup, Select } from '#src/components/input/Select';
 import type { IOnCloseProps } from '../types';
 import { Button } from '#src/components/Button';
 import { useState } from '@storybook/addons';
-import styled, { css, ThemeProvider } from 'styled-components';
+import { ThemeProvider } from 'styled-components';
 import type { Theme } from '#src/components/themes';
 import { MenuActionsPanel } from '#src/components/Menu/MenuActionsPanel';
 import { TextButton } from '#src/components/TextButton';
-import { RussianFederation, Belarus, Cuba } from '#src/icons/IconComponents-flags';
+import { Cuba } from '#src/icons/IconComponents-flags';
 import { CustomOptionWrapper } from '../styled';
 import type { RenderOptionProps } from '#src/components/Menu/MenuItem';
 import { createOptions, formDataToObject, wait } from './utils';
@@ -20,6 +20,14 @@ import { OPTIONS, OPTIONS_ASYNC, OPTIONS_SIMPLE } from './data';
 import { ExtraText, Form, FormValuesWrapper, Icon, StyledGroup, TextWrapper } from './styled';
 import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+import {
+  CustomRenderMultipleValuesTemplate,
+  CustomRenderValueTemplate,
+  SelectWithTitleTemplate,
+} from '#src/components/input/Select/Stories/Templates';
+import CustomRenderValueRaw from '!!raw-loader!./Templates/Select/CustomRenderValue';
+import CustomRenderMultipleValuesRaw from '!!raw-loader!./Templates/Select/CustomRenderMultipleValues';
+import SelectWithTitleRaw from '!!raw-loader!./Templates/Select/SelectWithTitle';
 
 export default {
   title: 'Admiral-2.1/Input/Select/режим "select"',
@@ -86,6 +94,9 @@ export default {
     skeleton: {
       control: { type: 'boolean' },
     },
+    forceHideOverflowTooltip: {
+      control: { type: 'boolean' },
+    },
     alignDropdown: {
       options: [undefined, 'auto', 'flex-start', 'flex-end', 'center', 'baseline', 'stretch'],
       control: { type: 'select' },
@@ -128,109 +139,6 @@ const SelectSimpleTemplate: ComponentStory<typeof Select> = (props) => {
         <Option value="Саша Даль">Саша Даль</Option>
       </Select>
     </ThemeProvider>
-  );
-};
-
-const RenderingValue = styled.div`
-  color: ${(p) => p.theme.color['Teal/Teal 80']};
-  display: flex;
-  column-gap: 8px;
-  padding: 0 3px;
-  border-width: 1px;
-  border-style: dotted;
-  border-radius: 4px;
-  border-color: ${(p) => p.theme.color['Teal/Teal 80']};
-  background-color: ${(p) => p.theme.color['Teal/Teal 10']};
-`;
-
-const MultipleRenderingValue = styled.div`
-  color: ${(p) => p.theme.color['Magenta/Magenta 50']};
-  display: flex;
-  column-gap: 8px;
-  margin: 0;
-  padding: 0 3px;
-  border-width: 1px;
-  border-style: dotted;
-  border-radius: 4px;
-  border-color: ${(p) => p.theme.color['Magenta/Magenta 50']};
-`;
-
-const MultipleMixin = css`
-  & ${SelectValueWrapper} {
-    padding-left: 0;
-    column-gap: 16px;
-    max-height: none;
-  }
-`;
-
-const CustomSelect = styled(Select)<{ multiple?: boolean }>`
-  ${(p) => p.multiple && MultipleMixin}
-`;
-
-const getFlag = (value: string) => {
-  return value === 'Фидель' ? Cuba : value === 'Константин Колешонок' ? Belarus : RussianFederation;
-};
-
-const RenderValueTemplate: ComponentStory<typeof Select> = (props) => {
-  const cleanProps = cleanUpProps(props);
-
-  const renderValue = (value: string | string[] | undefined) => {
-    if (typeof value === 'string') {
-      const Flag = getFlag(value);
-
-      return (
-        <RenderingValue>
-          <Flag height={24} />
-          {value}
-        </RenderingValue>
-      );
-    }
-  };
-
-  return (
-    <>
-      <CustomSelect {...cleanProps} multiple={false} placeholder="Placeholder" renderSelectValue={renderValue}>
-        <Option value="Саша Даль">Саша Даль</Option>
-        <Option value="Алексей Елесин">Алексей Елесин</Option>
-        <Option value="Константин Ионочкин">Константин Ионочкин</Option>
-        <Option value="Анна Корженко">Анна Корженко</Option>
-        <Option value="Фидель">Фидель</Option>
-        <Option value="Константин Колешонок">Константин Колешонок</Option>
-        <Option value="Алексей Орлов">Алексей Орлов</Option>
-      </CustomSelect>
-    </>
-  );
-};
-
-const MultipleRenderValueTemplate: ComponentStory<typeof Select> = (props) => {
-  const cleanProps = cleanUpProps(props);
-
-  const renderValue = (value: string | string[] | undefined) => {
-    if (Array.isArray(value)) {
-      return value.map((item) => {
-        const Flag = getFlag(item);
-        return (
-          <MultipleRenderingValue>
-            <Flag height={24} />
-            {item}
-          </MultipleRenderingValue>
-        );
-      });
-    }
-  };
-
-  return (
-    <>
-      <CustomSelect {...cleanProps} multiple placeholder="Placeholder" renderSelectValue={renderValue}>
-        <Option value="Саша Даль">Саша Даль</Option>
-        <Option value="Алексей Елесин">Алексей Елесин</Option>
-        <Option value="Константин Ионочкин">Константин Ионочкин</Option>
-        <Option value="Анна Корженко">Анна Корженко</Option>
-        <Option value="Фидель">Фидель</Option>
-        <Option value="Константин Колешонок">Константин Колешонок</Option>
-        <Option value="Алексей Орлов">Алексей Орлов</Option>
-      </CustomSelect>
-    </>
   );
 };
 
@@ -678,20 +586,72 @@ SimpleSelectStory.args = {
 };
 SimpleSelectStory.storyName = 'Select. Простой Select';
 
+const SelectWithTitleStory: ComponentStory<typeof Select> = (props) => {
+  return <SelectWithTitleTemplate {...cleanUpProps(props)} />;
+};
+export const SelectWithTitleExample = SelectWithTitleStory.bind({});
+SelectWithTitleExample.parameters = {
+  docs: {
+    source: {
+      code: SelectWithTitleRaw,
+    },
+    description: {
+      story:
+        'Для того чтобы скрыть tooltip, отображаемый при переполнении, необходимо установить свойство ' +
+        'forceHideOverflowTooltip={true}. Title является отображается стандартными средствами браузера, ' +
+        'поэтому не кастомизируется.',
+    },
+  },
+};
+SelectWithTitleExample.storyName = 'Отображается Title, tooltip скрыт';
+
+const CustomRenderValueStory: ComponentStory<typeof Select> = (props) => {
+  return <CustomRenderValueTemplate {...cleanUpProps(props)} />;
+};
+
+export const CustomRenderValueExample = CustomRenderValueStory.bind({});
+CustomRenderValueExample.args = {
+  defaultValue: 'Фидель',
+};
+CustomRenderValueExample.parameters = {
+  docs: {
+    source: {
+      code: CustomRenderValueRaw,
+    },
+    description: {
+      story:
+        'Для кастомного отображения выбранного значения необходимо использовать свойство renderSelectValue.' +
+        'Туда передается функция, получающая выбранные значения, и, возвращающая отображаемый ReactNode',
+    },
+  },
+};
+CustomRenderValueExample.storyName = 'Кастомное отображение значения';
+
+const CustomRenderMultipleValuesStory: ComponentStory<typeof Select> = (props) => {
+  return <CustomRenderMultipleValuesTemplate {...cleanUpProps(props)} />;
+};
+
+export const CustomRenderMultipleValuesExample = CustomRenderMultipleValuesStory.bind({});
+CustomRenderMultipleValuesExample.args = {
+  defaultValue: ['Фидель', 'Саша Даль'],
+};
+CustomRenderMultipleValuesExample.parameters = {
+  docs: {
+    source: {
+      code: CustomRenderMultipleValuesRaw,
+    },
+    description: {
+      story:
+        'Для кастомного отображения выбранного значения необходимо использовать свойство renderSelectValue.' +
+        'Туда передается функция, получающая выбранные значения, и, возвращающая массив отображаемых ReactNode',
+    },
+  },
+};
+CustomRenderMultipleValuesExample.storyName = 'Кастомное отображение значения с множественным выбором';
+
 export const MultiSelectStory = TemplateMultiSelect.bind({});
 MultiSelectStory.storyName = 'Select. Простой MultiSelect';
 
-export const RenderValueStory = RenderValueTemplate.bind({});
-RenderValueStory.args = {
-  defaultValue: 'Фидель',
-};
-RenderValueStory.storyName = 'Кастомное отображение значения';
-
-export const MultipleRenderValueStory = MultipleRenderValueTemplate.bind({});
-MultipleRenderValueStory.args = {
-  defaultValue: ['Фидель', 'Саша Даль'],
-};
-MultipleRenderValueStory.storyName = 'Multiple. Кастомное отображение значения';
 //
 // export const CustomOptionSearchSelectStory = CustomOptionTemplate.bind({});
 // CustomOptionSearchSelectStory.storyName = 'SearchSelect. С кастомными опциями';

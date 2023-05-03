@@ -14,15 +14,19 @@ import { PlusOutline } from '#src/icons/IconComponents-service';
 import { T } from '#src/components/T';
 import { createOptions, formDataToObject, wait } from './utils';
 import { OPTIONS, OPTIONS_ASYNC, OPTIONS_NAMES, OPTIONS_SIMPLE } from './data';
+import { useQuery, QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ExtraText, Form, FormValuesWrapper, Icon, Separator, StyledGroup, TextWrapper } from './styled';
 import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 import styled from 'styled-components';
 import { Belarus, Cuba, RussianFederation } from '#src/icons/IconComponents-flags';
-import { LoadOnScrollTemplate, RenderPropsTemplate } from './Templates';
+import { LoadOnScrollTemplate, RenderPropsTemplate, SelectWithAsyncLoading } from './Templates';
 import RenderPropsRaw from '!!raw-loader!./Templates/RenderProps';
 import LoadOnScrollRaw from '!!raw-loader!./Templates/LoadingOnScroll';
+import SelectWithAsyncLoadingRaw from '!!raw-loader!./Templates/Select/SelectWithAsyncLoading';
 // import VirtualScrollRaw from '!!raw-loader!./Templates/VirtualScroll';
+
+const queryClient = new QueryClient();
 
 export default {
   title: 'Admiral-2.1/Input/Select/режим "searchSelect"',
@@ -87,6 +91,9 @@ export default {
       },
     },
     skeleton: {
+      control: { type: 'boolean' },
+    },
+    forceHideOverflowTooltip: {
       control: { type: 'boolean' },
     },
     alignDropdown: {
@@ -252,61 +259,6 @@ const TemplateOptionGroup: ComponentStory<typeof Select> = (props) => {
           <Option value="Константин Колешонок">Константин Колешонок</Option>
           <Option value="Алексей Орлов">Алексей Орлов</Option>
         </OptionGroup>
-      </Select>
-    </>
-  );
-};
-
-const AsyncTemplate: ComponentStory<typeof Select> = (props) => {
-  const cleanProps = cleanUpProps(props);
-
-  const [selectValue, setSelectValue] = React.useState(cleanProps.value ? String(cleanProps.value) : OPTIONS[2].value);
-  const [options, setOptions] = React.useState<Array<{ value: string; text: string }>>([]);
-  const [searchValue, setSearchValue] = React.useState('');
-  const [isLoading, setIsLoading] = React.useState(true);
-
-  const onChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    setSelectValue(e.target.value);
-    props.onChange?.(e);
-  };
-
-  const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setSearchValue(e.target.value);
-  };
-
-  React.useEffect(() => {
-    (async () => {
-      setIsLoading(true);
-      await wait(1500);
-      if (searchValue.length === 0) setOptions([...OPTIONS_ASYNC]);
-      if (searchValue.length === 1) setOptions([...OPTIONS_ASYNC.slice(0, 2), { value: 'new', text: 'neeeew' }]);
-      if (searchValue.length === 2)
-        setOptions([
-          { value: 'new', text: 'neeeew' },
-          ...OPTIONS_ASYNC.slice(2, 3),
-          { value: 'new2', text: 'neeeew2' },
-          { value: 'new3', text: '33neeeew' },
-        ]);
-      if (searchValue.length >= 3) setOptions([]);
-      setIsLoading(false);
-    })();
-  }, [searchValue]);
-
-  return (
-    <>
-      <Select
-        {...cleanProps}
-        value={selectValue}
-        isLoading={isLoading}
-        onChange={onChange}
-        onInputChange={onInputChange}
-        mode="searchSelect"
-      >
-        {options.map((option) => (
-          <Option key={option.value} value={option.value}>
-            {option.text}
-          </Option>
-        ))}
       </Select>
     </>
   );
@@ -737,7 +689,25 @@ WithAddButton.storyName = 'Нижняя панель с кнопкой "Доба
 export const OptionGroupStory = TemplateOptionGroup.bind({});
 OptionGroupStory.storyName = 'Использование групп';
 
+const AsyncTemplate: ComponentStory<typeof Select> = (props) => {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <SelectWithAsyncLoading {...cleanUpProps(props)} />
+    </QueryClientProvider>
+  );
+};
 export const AsyncSearchSelectStory = AsyncTemplate.bind({});
+AsyncSearchSelectStory.parameters = {
+  docs: {
+    source: {
+      code: SelectWithAsyncLoadingRaw,
+      source: { language: 'tsx' },
+    },
+    description: {
+      story: 'Пример демонстрирует подгрузку данных для селекта с фильтром по имени',
+    },
+  },
+};
 AsyncSearchSelectStory.storyName = 'SearchSelect. Асинхронный';
 
 export const UncontrolledSearchSelectStory = UncontrolledTemplate.bind({});
