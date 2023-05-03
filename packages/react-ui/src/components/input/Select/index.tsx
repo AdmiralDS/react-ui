@@ -174,6 +174,8 @@ export interface SelectProps extends Omit<React.InputHTMLAttributes<HTMLSelectEl
      */
     itemHeight: 'auto' | number;
   };
+  /** Признак принудительного скрытия тултипа, показываемого при переполнении */
+  forceHideOverflowTooltip?: boolean;
 }
 
 export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
@@ -224,6 +226,8 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       searchFormat = 'wholly',
       onFilterItem = defaultFilterItem,
       virtualScroll,
+      title,
+      forceHideOverflowTooltip = false,
       ...props
     },
     ref,
@@ -393,7 +397,12 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
     const visibleValueIsString = typeof visibleValue === 'string';
 
     const wrappedVisibleValue = visibleValueIsString ? (
-      <DisplayValue visibleValue={visibleValue} isSearchPanelOpen={isSearchPanelOpen} targetRef={containerRef} />
+      <DisplayValue
+        visibleValue={visibleValue}
+        isSearchPanelOpen={isSearchPanelOpen}
+        targetRef={containerRef}
+        forceHideOverflowTooltip={forceHideOverflowTooltip}
+      />
     ) : (
       visibleValue
     );
@@ -576,6 +585,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
         onFocus={onFocus}
         skeleton={skeleton}
         onBlur={handleWrapperBlur}
+        title={title}
       >
         <ConstantSelectProvider
           onConstantOptionMount={onConstantOptionMount}

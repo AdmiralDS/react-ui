@@ -2,6 +2,39 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.13.0](https://github.com/AdmiralDS/react-ui/compare/v4.12.0...v4.13.0) (2023-05-03)
+
+
+### Features
+
+* **InputEx:** border should hover when hovering suffix/prefix area ([88a382f](https://github.com/AdmiralDS/react-ui/commit/88a382ffa90e6b094375b3440c99eb37935cdb94))
+* **InputEx:** hover chevron when hovering all suffix/prefix area ([611fdbd](https://github.com/AdmiralDS/react-ui/commit/611fdbd836f3a08e665f11e8158f3e3b0861010a))
+* **Select:** add forceHideOverflowTooltip property & correct pass title ([191b9b5](https://github.com/AdmiralDS/react-ui/commit/191b9b51d50dd22ac6c43cd5f815a13d71491fc6))
+
+## [4.12.0](https://github.com/AdmiralDS/react-ui/compare/v4.11.2...v4.12.0) (2023-04-27)
+
+
+### Features
+
+* **Modal:** add overlayStyle and overlayClassname props ([823a1ac](https://github.com/AdmiralDS/react-ui/commit/823a1ac23056bf93ea6a4879ed081c6fb730a66b))
+
+
+### Bug Fixes
+
+* add text-rendering: geometricPrecision to all text tokens ([821c762](https://github.com/AdmiralDS/react-ui/commit/821c76218fd8a771b8613e330c8781b357ac2131))
+* **Chips:** fix behavior and hover style ([8119af7](https://github.com/AdmiralDS/react-ui/commit/8119af7f41ec4fac0eaeb518f9628d3893a9f33c))
+* **PaginationTwo:** clear input on new page selection ([4b8fe08](https://github.com/AdmiralDS/react-ui/commit/4b8fe0843ce08ba32aef3e641599acffe26def28))
+* **PaginationTwo:** fix button styles in mobile mode ([503fe9e](https://github.com/AdmiralDS/react-ui/commit/503fe9e9c9e63ccdc5393a874eaafa81ec624f9e))
+
+### [4.11.2](https://github.com/AdmiralDS/react-ui/compare/v4.11.1...v4.11.2) (2023-04-25)
+
+
+### Bug Fixes
+
+* radiobutton and field paddings ([dce4f7a](https://github.com/AdmiralDS/react-ui/commit/dce4f7affc166238e4e43680a56c388b95a7f367))
+* **Table:** fix onRowClick trigger when user clicks ExpandIcon ([527f3a7](https://github.com/AdmiralDS/react-ui/commit/527f3a75ed894ad083b66d0a944252076f33dc2b))
+* **Tooltip:** remove irrelevant withDelay prop from docs ([9c95db3](https://github.com/AdmiralDS/react-ui/commit/9c95db3b839b7b0b3c5f9d61a3c561a4f1519958))
+
 ### [4.11.1](https://github.com/AdmiralDS/react-ui/compare/v4.11.0...v4.11.1) (2023-04-20)
 
 

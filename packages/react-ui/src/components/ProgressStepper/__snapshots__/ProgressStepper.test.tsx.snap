@@ -52,6 +52,7 @@ Object {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
   color: #23262D;
 }
 
@@ -67,6 +68,7 @@ Object {
   font-size: 12px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
 }
 
 .c6 {
@@ -82,6 +84,7 @@ Object {
   font-size: 12px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
 }
 
 <body>
@@ -175,6 +178,7 @@ Object {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
   color: #23262D;
 }
 
@@ -190,6 +194,7 @@ Object {
   font-size: 12px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
 }
 
 .c6 {
@@ -205,6 +210,7 @@ Object {
   font-size: 12px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
 }
 
 <div>
@@ -353,6 +359,7 @@ Object {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
   color: #23262D;
 }
 
@@ -368,6 +375,7 @@ Object {
   font-size: 12px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
 }
 
 .c6 {
@@ -383,6 +391,7 @@ Object {
   font-size: 12px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
 }
 
 <body>
@@ -476,6 +485,7 @@ Object {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
   color: #23262D;
 }
 
@@ -491,6 +501,7 @@ Object {
   font-size: 12px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
 }
 
 .c6 {
@@ -506,6 +517,7 @@ Object {
   font-size: 12px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
 }
 
 <div>
@@ -650,6 +662,7 @@ Object {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
   color: #23262D;
 }
 
@@ -665,6 +678,7 @@ Object {
   font-size: 12px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
 }
 
 <body>
@@ -748,6 +762,7 @@ Object {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
   color: #23262D;
 }
 
@@ -763,6 +778,7 @@ Object {
   font-size: 12px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
 }
 
 <div>
@@ -905,6 +921,7 @@ Object {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
   color: #23262D;
 }
 
@@ -920,6 +937,7 @@ Object {
   font-size: 12px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
 }
 
 .c6 {
@@ -935,6 +953,7 @@ Object {
   font-size: 12px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
 }
 
 <body>
@@ -1028,6 +1047,7 @@ Object {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
   color: #23262D;
 }
 
@@ -1043,6 +1063,7 @@ Object {
   font-size: 12px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
 }
 
 .c6 {
@@ -1058,6 +1079,7 @@ Object {
   font-size: 12px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
 }
 
 <div>
@@ -1202,6 +1224,7 @@ Object {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
   color: #23262D;
 }
 
@@ -1217,6 +1240,7 @@ Object {
   font-size: 12px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
 }
 
 .c6 {
@@ -1232,6 +1256,7 @@ Object {
   font-size: 12px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
 }
 
 <body>
@@ -1321,6 +1346,7 @@ Object {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
   color: #23262D;
 }
 
@@ -1336,6 +1362,7 @@ Object {
   font-size: 12px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
 }
 
 .c6 {
@@ -1351,6 +1378,7 @@ Object {
   font-size: 12px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
 }
 
 <div>

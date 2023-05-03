@@ -106,12 +106,32 @@ const chipTypography = css<{
     }}
 `;
 
+const hoverMixin = css<{
+  selected?: boolean;
+  appearance?: ChipAppearance;
+  withCloseIcon?: boolean;
+}>`
+  &:hover {
+    background-color: ${({ theme, appearance, selected, withCloseIcon }) => {
+      if (selected) return theme.color['Primary/Primary 70'];
+      if (appearance === 'filled') return theme.color['Neutral/Neutral 20'];
+      else if (!withCloseIcon) return theme.color['Opacity/Hover'];
+    }};
+    ${(p) =>
+      p.selected &&
+      `
+      border-color: ${p.theme.color['Primary/Primary 70']};
+    `}
+  }
+`;
+
 const colorsBorderAndBackground = css<{
   dimension: ChipDimension;
   disabled?: boolean;
   selected?: boolean;
   appearance?: ChipAppearance;
   withCloseIcon?: boolean;
+  clickable: boolean;
 }>`
   background-color: ${({ theme, appearance, selected, disabled }) => {
     if (selected && !disabled) {
@@ -129,34 +149,7 @@ const colorsBorderAndBackground = css<{
 
   border-radius: 16px;
 
-  &:hover {
-    background-color: ${({ theme, appearance, selected, withCloseIcon }) => {
-      if (selected) return theme.color['Primary/Primary 70'];
-      if (appearance === 'filled') return theme.color['Neutral/Neutral 20'];
-      else if (!withCloseIcon) return theme.color['Opacity/Hover'];
-    }};
-    ${(p) =>
-      p.selected &&
-      `
-      border-color: ${p.theme.color['Primary/Primary 70']};
-    `}
-  }
-
-  &:active {
-    color: ${({ theme, appearance }) =>
-      appearance === 'filled' ? theme.color['Primary/Primary 60 Main'] : theme.color['Special/Static White']};
-    background-color: ${({ theme, appearance, selected }) => {
-      if (selected) {
-        return theme.color['Primary/Primary 60 Main'];
-      }
-      return appearance === 'filled' ? theme.color['Neutral/Neutral 20'] : theme.color['Opacity/Hover'];
-    }};
-    ${(p) =>
-      p.selected &&
-      `
-      border-color: ${p.theme.color['Primary/Primary 60 Main']};
-    `}
-  }
+  ${(p) => p.clickable && hoverMixin}
 
   &:focus-visible {
     outline: 0;
@@ -184,6 +177,7 @@ export const ChipComponentStyled = styled.div<{
   withCloseIcon?: boolean;
   withBadge?: boolean;
   withTooltip?: boolean;
+  clickable: boolean;
 }>`
   display: inline-flex;
   align-items: center;
@@ -277,7 +271,7 @@ export const CloseIconButton = styled(CloseIconPlacementButton)<{
   dimension: IconPlacementDimension;
   appearance: IconPlacementAppearance;
 }>`
-  //дополнительный отступ в 2px, чтобы кружок ховера не стоял вплотную к элементу сдева
+  //дополнительный отступ в 2px, чтобы кружок ховера не стоял вплотную к элементу слева
   margin-left: ${(p) => (p.dimension === 's' ? '6px' : '8px')};
   ${(p) => (p.appearance === 'primary' ? (p.dimension === 's' ? 'margin-right: 3px' : 'margin-right: 5px') : '')};
 `;

@@ -2,7 +2,7 @@ import type { ChangeEvent } from 'react';
 import * as React from 'react';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
-import { PhoneNumberInput } from '#src/components/input';
+import { INPUT_STATUS_VALUES, PhoneNumberInput } from '#src/components/input';
 import styled, { ThemeProvider } from 'styled-components';
 import type { Theme } from '#src/components/themes';
 import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
@@ -52,8 +52,15 @@ export default {
     ],
   },
   argTypes: {
+    status: {
+      control: { type: 'radio' },
+      options: INPUT_STATUS_VALUES,
+    },
     value: {
-      control: false,
+      control: { type: 'text' },
+    },
+    defaultCountry: {
+      control: { type: 'text' },
     },
     onChange: {
       action: 'onChange',
@@ -89,9 +96,6 @@ export default {
       control: false,
     },
     onlyCountries: {
-      control: false,
-    },
-    defaultCountry: {
       control: false,
     },
     themeBorderKind: {
@@ -142,6 +146,7 @@ const PhoneNumberInputXL: ComponentStory<typeof PhoneNumberInput> = (props) => {
         {...cleanProps}
         dimension="xl"
         value={localValue}
+        defaultCountry={props.defaultCountry}
         style={{ maxWidth: '320px' }}
         onChange={handleChange}
         dropContainerClassName="dropContainerClass"
@@ -221,7 +226,10 @@ const PhoneNumberInputS: ComponentStory<typeof PhoneNumberInput> = (props) => {
 };
 
 export const PhoneNumberInputXLStory = PhoneNumberInputXL.bind({});
-PhoneNumberInputXLStory.args = {};
+PhoneNumberInputXLStory.args = {
+  defaultCountry: 'RUS',
+  value: '+7 123 456 78 90',
+};
 PhoneNumberInputXLStory.storyName = 'Phone Number Input. Размер XL';
 
 export const PhoneNumberInputMStory = PhoneNumberInputM.bind({});

@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { TextInput } from './index';
 import { withDesign } from 'storybook-addon-designs';
-import { INPUT_DIMENSIONS_VALUES } from '#src/components/input/types';
+import { INPUT_DIMENSIONS_VALUES, INPUT_STATUS_VALUES } from '#src/components/input/types';
 import type { Theme } from '#src/components/themes';
 import { ThemeProvider } from 'styled-components';
 import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
@@ -38,7 +38,10 @@ export default {
       options: INPUT_DIMENSIONS_VALUES,
       control: { type: 'radio' },
     },
-
+    status: {
+      control: { type: 'radio' },
+      options: INPUT_STATUS_VALUES,
+    },
     disabled: {
       control: { type: 'boolean' },
     },

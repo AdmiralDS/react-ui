@@ -52,6 +52,12 @@ export const RegularRow = ({
     e.stopPropagation();
   };
 
+  const handleExpandIconClick = (e: React.MouseEvent<HTMLElement>) => {
+    // клик по иконке стрелки не должен вызывать событие клика по строке
+    e.stopPropagation();
+    onRowExpansionChange?.(row.id);
+  };
+
   return (
     <>
       {(displayRowSelectionColumn || displayRowExpansionColumn || stickyColumns.length > 0) && (
@@ -64,7 +70,7 @@ export const RegularRow = ({
                   dimension={dimension === 's' || dimension === 'm' ? 'mBig' : 'lBig'}
                   disabled={row.disabled ? true : undefined}
                   highlightFocus={false}
-                  onClick={() => onRowExpansionChange?.(row.id)}
+                  onClick={handleExpandIconClick}
                 >
                   <ExpandIcon $isOpened={row.expanded} aria-hidden />
                 </ExpandIconPlacement>
