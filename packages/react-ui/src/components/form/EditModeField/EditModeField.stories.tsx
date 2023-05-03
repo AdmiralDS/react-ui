@@ -6,6 +6,7 @@ import type { Theme } from '#src/components/themes';
 import { ThemeProvider } from 'styled-components';
 import { DataAttributesDescription } from '#src/components/form/common';
 import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
+import { INPUT_STATUS_VALUES } from '#src/components/input';
 
 export default {
   title: 'Admiral-2.1/Form Field/EditModeField',
@@ -33,6 +34,10 @@ export default {
     dimension: {
       options: ['xxl', 'xl', 'm', 's'],
       control: { type: 'radio' },
+    },
+    status: {
+      control: { type: 'radio' },
+      options: INPUT_STATUS_VALUES,
     },
     bold: {
       control: { type: 'boolean' },
