@@ -6,6 +6,7 @@ import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-comp
 import styled from 'styled-components';
 import { typography } from '#src/components/Typography';
 import { rangeHighlightMixin } from '#src/components/CalendarTry/CalendarContent/styled';
+import { CellWrapper } from '#src/components/CalendarTry/CalendarContent/CellWrapper';
 
 const DAY_SIZE = 36;
 const DAY_PADDING = '8px 0';
@@ -24,7 +25,7 @@ export interface DayCellProps {
   onMouseEnter: (date: Dayjs, event: MouseEvent<HTMLDivElement>) => void;
 }
 
-export const DayCellWrapper = styled.div<{
+export const DayCellWrapper = styled(CellWrapper)<{
   today?: boolean;
   isActiveDate: boolean;
   disabled?: boolean;
@@ -38,54 +39,13 @@ export const DayCellWrapper = styled.div<{
   isRangeEnd: boolean;
   highlightSpecialDayMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
 }>`
-  position: relative;
-  display: inline-block;
-  box-sizing: border-box;
   width: ${DAY_SIZE}px;
   height: ${DAY_SIZE}px;
   padding: ${DAY_PADDING};
   margin-bottom: ${DAY_MARGIN_BOTTOM};
   text-align: center;
-  ${typography['Body/Body 2 Long']}
-  color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
-  cursor: ${({ disabled }) => (disabled ? 'default' : 'pointer')};
-
-  // рамка у "сегодня"
-  &:after {
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    border: 1px solid
-      ${(p) =>
-        p.today && !p.selected && !(p.inSelectingRange && p.isActiveDate)
-          ? p.disabled
-            ? p.theme.color['Neutral/Neutral 30']
-            : p.theme.color['Neutral/Neutral 90']
-          : 'transparent'};
-    border-radius: 50%;
-  }
-
-  // активная дата
-  &:hover:after {
-    ${(p) =>
-      p.disabled || p.selected || (p.inSelectingRange && p.isActiveDate)
-        ? ''
-        : `border: 1px solid ${p.theme.color['Primary/Primary 60 Main']};
-           background: ${p.theme.color['Special/Elevated BG']};
-           z-index: -1;`}
-  }
 
   ${(p) => p.highlightSpecialDayMixin}
-
-  // недоступная для выбора дата
-  ${(p) =>
-    p.disabled &&
-    `
-      color: ${p.theme.color['Neutral/Neutral 30']};
-    `}
 
   // дата, не входящая в отображаемый месяц
   ${(p) =>
@@ -95,25 +55,6 @@ export const DayCellWrapper = styled.div<{
       opacity: 0;
       pointer-events: none;
     `}
-
-  // выбранная или активная дата
-  ${(p) =>
-    !p.disabled &&
-    (p.selected || (p.inSelectingRange && p.isActiveDate)) &&
-    //p.selected &&
-    `
-      color: ${p.theme.color['Special/Static White']};
-      background: ${
-        p.inSelectingRange ? p.theme.color['Primary/Primary 70'] : p.theme.color['Primary/Primary 60 Main']
-      };
-      border-radius: 50%;
-      &:hover {
-        background: ${p.theme.color['Primary/Primary 70']};
-      }
-    `}
-
-  // подсветка диапазона
-  ${rangeHighlightMixin}
 `;
 
 export const DayCell = ({
