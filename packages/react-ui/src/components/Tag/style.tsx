@@ -13,12 +13,16 @@ const TAG_PADDING_LEFT_M = 7;
 const circleBackground = css<{ background: TagKind | string }>`
   background: ${({ background, theme }) => {
     switch (background) {
+      case 'success':
       case 'green':
         return theme.color['Success/Success 50 Main'];
+      case 'primary':
       case 'blue':
         return theme.color['Primary/Primary 60 Main'];
+      case 'danger':
       case 'red':
         return theme.color['Error/Error 60 Main'];
+      case 'warning':
       case 'orange':
         return theme.color['Warning/Warning 50 Main'];
       default:
@@ -30,12 +34,16 @@ const circleBackground = css<{ background: TagKind | string }>`
 const wrapperBackground = css<{ background: TagKind | string }>`
   background: ${({ background, theme }) => {
     switch (background) {
+      case 'success':
       case 'green':
         return theme.color['Success/Success 10'];
+      case 'primary':
       case 'blue':
         return theme.color['Primary/Primary 10'];
+      case 'danger':
       case 'red':
         return theme.color['Error/Error 10'];
+      case 'warning':
       case 'orange':
         return theme.color['Warning/Warning 10'];
       case 'neutral':
@@ -50,12 +58,16 @@ const wrapperBorder = css<{ border: TagKind | string }>`
   border: 1px solid
     ${({ border, theme }) => {
       switch (border) {
+        case 'success':
         case 'green':
           return theme.color['Success/Success 40'];
+        case 'primary':
         case 'blue':
           return theme.color['Primary/Primary 50'];
+        case 'danger':
         case 'red':
           return theme.color['Error/Error 50'];
+        case 'warning':
         case 'orange':
           return theme.color['Warning/Warning 40'];
         case 'neutral':
@@ -69,12 +81,16 @@ const wrapperBorder = css<{ border: TagKind | string }>`
 const wrapperHover = css<{ backgroundHover: TagKind | string }>`
   background: ${({ backgroundHover, theme }) => {
     switch (backgroundHover) {
+      case 'success':
       case 'green':
         return theme.color['Success/Success 20'];
+      case 'primary':
       case 'blue':
         return theme.color['Primary/Primary 20'];
+      case 'danger':
       case 'red':
         return theme.color['Error/Error 20'];
+      case 'warning':
       case 'orange':
         return theme.color['Warning/Warning 20'];
       case 'neutral':
