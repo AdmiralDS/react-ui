@@ -150,6 +150,10 @@ export const CalendarTry = React.forwardRef<HTMLDivElement, CalendarTryProps>(
       setActiveDate(date);
     };
 
+    const handleMonthMouseEnter = (date: Dayjs, _: any) => {
+      setActiveDate(date);
+    };
+
     const handleDayMouseEnter = (date: Dayjs, _: any) => {
       setActiveDate(date);
     };
@@ -205,9 +209,9 @@ export const CalendarTry = React.forwardRef<HTMLDivElement, CalendarTryProps>(
         <DayCell
           key={date.valueOf()}
           date={date}
-          startDate={startDate}
-          endDate={endDate}
-          selected={selected}
+          startDate={rangePicker ? startDate : undefined}
+          endDate={rangePicker ? endDate : undefined}
+          selected={!rangePicker ? selected : undefined}
           activeDate={activeDate}
           disabled={disabledDate?.(date)}
           onSelectDate={onSelectDate}
@@ -222,9 +226,13 @@ export const CalendarTry = React.forwardRef<HTMLDivElement, CalendarTryProps>(
         <MonthCell
           key={date.valueOf()}
           date={date}
-          selected={selected}
-          validator={validator}
+          activeDate={activeDate}
+          startDate={rangePicker && pickerType === 'MONTH_YEAR' ? startDate : undefined}
+          endDate={rangePicker && pickerType === 'MONTH_YEAR' ? endDate : undefined}
+          selected={!rangePicker ? selected : pickerType !== 'MONTH_YEAR' ? startDate : undefined}
           onSelectMonth={handleMonthClick}
+          disabled={!!validator?.invalidMonth(date.month(), date.year())}
+          onMouseEnter={handleMonthMouseEnter}
         />
       );
     };
@@ -234,9 +242,9 @@ export const CalendarTry = React.forwardRef<HTMLDivElement, CalendarTryProps>(
           key={date.valueOf()}
           date={date}
           activeDate={activeDate}
-          startDate={startDate}
-          endDate={endDate}
-          selected={selected}
+          startDate={rangePicker && pickerType === 'YEAR' ? startDate : undefined}
+          endDate={rangePicker && pickerType === 'YEAR' ? endDate : undefined}
+          selected={!rangePicker ? selected : pickerType !== 'YEAR' ? startDate : undefined}
           onSelectYear={handleYearClick}
           disabled={!!validator?.invalidYear(date.year())}
           onMouseEnter={handleYearMouseEnter}

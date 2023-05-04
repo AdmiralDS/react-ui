@@ -15,7 +15,7 @@ export interface YearCellProps {
   selected?: Dayjs;
   onSelectYear: (date: Dayjs, event: MouseEvent<HTMLDivElement>) => void;
   disabled?: boolean;
-  highlightSpecialDate?: (date: Dayjs) => FlattenInterpolation<ThemeProps<DefaultTheme>> | undefined;
+  highlightSpecialYear?: (date: Dayjs) => FlattenInterpolation<ThemeProps<DefaultTheme>> | undefined;
   onMouseEnter: (date: Dayjs, event: MouseEvent<HTMLDivElement>) => void;
 }
 
@@ -45,7 +45,37 @@ export const YearCellWrapper = styled(CellWrapper)<{
   user-select: none;
 `;
 
-export const YearCell = ({ date, activeDate, selected, disabled, onSelectYear }: YearCellProps) => {
+export const YearCell = ({
+  date,
+  activeDate,
+  startDate,
+  endDate,
+  selected,
+  onSelectYear,
+  disabled,
+  highlightSpecialYear,
+  onMouseEnter,
+}: YearCellProps) => {
+  // ранее выбранный диапазон
+  const inRange = !!startDate && !!endDate && date.isBetween(startDate, endDate, 'year', '[]');
+  const rangeStart = !!startDate && date.isSame(startDate, 'year');
+  const rangeEnd = !!startDate && !!endDate && date.isSame(endDate, 'year');
+  // диапазон в процессе выбора
+  const inSelectingRange =
+    !disabled &&
+    !!startDate &&
+    !endDate &&
+    !!activeDate &&
+    activeDate.isSameOrAfter(startDate, 'year') &&
+    date.isBetween(startDate, activeDate, 'year', '[]');
+  const rangeSelectingStart = inSelectingRange && date.isSame(startDate, 'year');
+  const rangeSelectingEnd = inSelectingRange && date.isSame(activeDate, 'year');
+
+  const rowStart = date.year() % YEARS_IN_ROW === 1;
+  const rowEnd = date.year() % YEARS_IN_ROW === 0;
+  const start = rangeStart || rangeSelectingStart;
+  const end = rangeEnd || rangeSelectingEnd;
+
   const handleClick = (e: any) => {
     e.preventDefault();
     const day = date.startOf('year');
@@ -54,16 +84,20 @@ export const YearCell = ({ date, activeDate, selected, disabled, onSelectYear }:
 
   return (
     <YearCellWrapper
-      isRowStart={date.year() % YEARS_IN_ROW === 1}
-      isRowEnd={date.year() % YEARS_IN_ROW === 0}
       key={date.valueOf()}
       today={date.isSame(dayjs(), 'year')}
-      selected={!!selected && date.isSame(selected, 'year')}
+      selected={(!!selected && date.isSame(selected, 'year')) || rangeStart || rangeEnd}
       disabled={disabled}
+      inRange={inRange}
+      inSelectingRange={inSelectingRange}
       onMouseDown={handleClick}
       isActiveDate={!!activeDate && date.isSame(activeDate, 'year')}
-      isRangeStart={false}
-      isRangeEnd={false}
+      isRangeStart={start}
+      isRangeEnd={end}
+      isRowStart={rowStart}
+      isRowEnd={rowEnd}
+      highlightSpecialDateMixin={highlightSpecialYear?.(date)}
+      onMouseEnter={(e) => !disabled && onMouseEnter && onMouseEnter(date, e)}
       borderRadius={YEAR_BORDER_RADIUS}
     >
       {date.format('YYYY')}

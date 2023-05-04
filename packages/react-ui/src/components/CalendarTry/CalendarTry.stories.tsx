@@ -91,6 +91,16 @@ const Template1: ComponentStory<typeof CalendarTry> = (args) => {
   const [viewDate2, setViewDate2] = React.useState<Dayjs>(selected2);
   const [activeDate2, setActiveDate2] = React.useState<Dayjs | undefined>(undefined);
 
+  const resetDateStates1 = () => {
+    setSelected1(dayjs());
+    setStartDate1(undefined);
+    setEndDate1(undefined);
+  };
+  const resetDateStates2 = () => {
+    setSelected2(dayjs());
+    //setStartDate2(undefined);
+    //setEndDate2(undefined);
+  };
   React.useEffect(() => {
     switch (args.pickerType) {
       case 'DATE_MONTH_YEAR':
@@ -106,7 +116,12 @@ const Template1: ComponentStory<typeof CalendarTry> = (args) => {
         setViewMode2('YEARS');
         break;
     }
+    resetDateStates1();
   }, [args.pickerType]);
+
+  React.useEffect(() => {
+    resetDateStates1();
+  }, [args.rangePicker]);
 
   const filterDate = (date: Dayjs) => {
     return date.date() < 7;
@@ -135,13 +150,44 @@ const Template1: ComponentStory<typeof CalendarTry> = (args) => {
 
   const handleMonthClick1 = (date: Dayjs) => {
     if (args.pickerType === 'MONTH_YEAR') {
-      setSelected1(date);
+      if (args.rangePicker) {
+        if (!startDate1) {
+          setStartDate1(date);
+        } else {
+          if (!endDate1) {
+            if (date.isAfter(startDate1)) {
+              setEndDate1(date);
+            }
+          } else {
+            setStartDate1(date);
+            setEndDate1(undefined);
+          }
+        }
+      } else {
+        setSelected1(date);
+      }
     }
   };
 
   const handleYearClick1 = (date: Dayjs) => {
     if (args.pickerType === 'YEAR') {
       setSelected1(date);
+    }
+  };
+  const handleYearRangeClick1 = (date: Dayjs) => {
+    if (args.pickerType === 'YEAR') {
+      if (!startDate1) {
+        setStartDate1(date);
+      } else {
+        if (!endDate1) {
+          if (date.isAfter(startDate1)) {
+            setEndDate1(date);
+          }
+        } else {
+          setStartDate1(date);
+          setEndDate1(undefined);
+        }
+      }
     }
   };
 
@@ -223,16 +269,17 @@ const Template1: ComponentStory<typeof CalendarTry> = (args) => {
     <ThemeProvider theme={swapBorder}>
       <div style={{ display: 'flex' }}>
         <CalendarTry
+          rangePicker={args.rangePicker}
           pickerType={args.pickerType}
           viewMode={viewMode1}
           onViewModeChange={handleViewModeChange1}
           selected={selected1}
-          //startDate={startDate1}
-          //endDate={endDate1}
+          startDate={startDate1}
+          endDate={endDate1}
           onSelectDate={handleDayClick1}
           onSelectMonth={handleMonthClick1}
-          onSelectYear={handleYearClick1}
-          disabledDate={filterDate}
+          onSelectYear={args.rangePicker ? handleYearRangeClick1 : handleYearClick1}
+          //disabledDate={filterDate}
           highlightSpecialDay={highlightSundays}
         />
         <Separator />
