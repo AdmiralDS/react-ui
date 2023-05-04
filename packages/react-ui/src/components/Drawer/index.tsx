@@ -34,8 +34,8 @@ const Overlay = styled.div<{ overlayStyledCss: Interpolation<any>; backdrop?: bo
     ${({ backdrop }) => backdrop && `pointer-events: auto;`}
 
     & > div {
+      visibility: visible;
       transform: translateX(0);
-      ${({ theme }) => theme.shadow['Shadow 16']}
     }
   }
 `;
@@ -55,10 +55,12 @@ const DrawerComponent = styled.div<{ position: Position; mobile?: boolean }>`
   max-width: calc(100% - 16px);
   background-color: ${({ theme }) => theme.color['Neutral/Neutral 00']};
   color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
+  ${({ theme }) => theme.shadow['Shadow 16']}
   outline: none;
   transform: ${({ position }) => (position === 'right' ? 'translateX(100%)' : 'translateX(-100%)')};
-  transition: 0.3s transform cubic-bezier(0, 0, 0.2, 1) 0ms;
+  transition: 0.3s all cubic-bezier(0, 0, 0.2, 1) 0ms;
   pointer-events: auto;
+  visibility: hidden;
 `;
 
 const CloseButton = styled(CloseIconPlacementButton)<{ mobile?: boolean }>`
@@ -128,7 +130,6 @@ export const Drawer = React.forwardRef<HTMLDivElement, DrawerProps>(
     },
     ref,
   ) => {
-    console.log(isOpen);
     const position = mobile ? 'right' : userPosition;
     const theme = React.useContext(ThemeContext) || LIGHT_THEME;
     const closeBtnAriaLabel =
