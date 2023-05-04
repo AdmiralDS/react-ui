@@ -3,8 +3,8 @@ import { refSetter } from '#src/components/common/utils/refSetter';
 import * as React from 'react';
 import type { CSSProperties } from 'react';
 import ReactDOM from 'react-dom';
-import type { Interpolation } from 'styled-components';
-import styled, { ThemeContext } from 'styled-components';
+import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
+import styled, { ThemeContext, css } from 'styled-components';
 import { LIGHT_THEME } from '#src/components/themes';
 import { manager } from '#src/components/Modal/manager';
 import { CloseIconPlacementButton } from '#src/components/IconPlacement';
@@ -13,7 +13,9 @@ import { DrawerContext } from './components';
 
 type Position = 'right' | 'left';
 
-const Overlay = styled.div<{ overlayStyledCss: Interpolation<any>; backdrop?: boolean }>`
+const transitionMixin = css`0.3s cubic-bezier(0, 0, 0.2, 1) 0ms`;
+
+const Overlay = styled.div<{ overlayCssMixin: FlattenInterpolation<ThemeProps<DefaultTheme>>; backdrop?: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -23,11 +25,11 @@ const Overlay = styled.div<{ overlayStyledCss: Interpolation<any>; backdrop?: bo
   bottom: 0;
   right: 0;
   z-index: ${({ theme }) => theme.zIndex.modal};
-  ${(p) => p.overlayStyledCss}
+  ${(p) => p.overlayCssMixin}
   outline: none;
   pointer-events: none;
   background-color: transparent;
-  transition: 0.3s background-color cubic-bezier(0, 0, 0.2, 1) 0ms;
+  transition: background-color ${transitionMixin};
 
   &[data-visible='true'] {
     ${({ theme, backdrop }) => backdrop && `background-color: ${theme.color['Opacity/Modal']};`}
@@ -58,7 +60,7 @@ const DrawerComponent = styled.div<{ position: Position; mobile?: boolean }>`
   ${({ theme }) => theme.shadow['Shadow 16']}
   outline: none;
   transform: ${({ position }) => (position === 'right' ? 'translateX(100%)' : 'translateX(-100%)')};
-  transition: 0.3s all cubic-bezier(0, 0, 0.2, 1) 0ms;
+  transition: all ${transitionMixin};
   pointer-events: auto;
   visibility: hidden;
 `;
@@ -70,26 +72,29 @@ const CloseButton = styled(CloseIconPlacementButton)<{ mobile?: boolean }>`
 `;
 
 export interface DrawerProps extends React.HTMLAttributes<HTMLDivElement> {
-  /** */
+  /** Состояние компонента: открыт/закрыт */
   isOpen?: boolean;
   /** С какой части экрана будет выдвигаться компонент */
   position?: Position;
-  /** Происходит ли блокировка контента страницы */
+  /** Наличие затемненного фона, блокирующего контент страницы */
   backdrop?: boolean;
-  /** Контейнер, в котором происходит размещение модального окна (BODY по умолчанию) */
+  /** Контейнер, в котором происходит размещение компонента (BODY по умолчанию) */
   container?: Element;
   /** Мобильная версия компонента */
   mobile?: boolean;
-  /** Закрытие на нажатие клавиши Escape */
+  /** Закрытие на нажатие клавиши Escape. Происходит только при условии, что фокус находится внутри drawerа.
+   * По умолчанию при открытии компонента фокус проставляется внутри него.
+   * Однако при backdrop = false, пользователь может взаимодействовать с остальной страницей и вывести фокус из drawerа,
+   * в этом случае нажатие на клавишу Escape обработано не будет. */
   closeOnEscapeKeyDown?: boolean;
-  /** Закрытие на клик извне */
+  /** Закрытие на клик по затемненному фону (если backdrop = true) */
   closeOnBackdropClick?: boolean;
   /** Отображение иконки крестика в верхнем правом углу */
   displayCloseIcon?: boolean;
   /** Обработчик закрытия компонента. Срабатывает:
    * 1) при клике на крестик в верхнем правому углу
    * 2) при нажатии Escape и closeOnEscapeKeyDown равным true
-   * 3) при клике извне и closeOnOutsideClick равным true
+   * 3) при клике по затемненному фону и closeOnBackdropClick равным true
    */
   onClose?: () => void;
 
@@ -98,13 +103,13 @@ export interface DrawerProps extends React.HTMLAttributes<HTMLDivElement> {
    * Например цвет фона в зависимости от темы:
    *  const overlayStyles = css\`background-color: ${({ theme }) => hexToRgba(theme.color["Neutral/Neutral 05"], 0.6)};\`
    * */
-  overlayCssMixin?: Interpolation<any>;
+  overlayCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
   /** Позволяет добавлять класс на подложку drawerа  */
   overlayClassName?: string;
   /** Позволяет добавлять стили на подложку drawerа  */
   overlayStyle?: CSSProperties;
   locale?: {
-    /** Атрибут aria-label, описывающий назначение кнопки с крестиком, закрывающей модальное окно */
+    /** Атрибут aria-label, описывающий назначение кнопки с крестиком, закрывающей компонент */
     closeButtonAriaLabel?: string;
   };
 }
@@ -115,7 +120,7 @@ export const Drawer = React.forwardRef<HTMLDivElement, DrawerProps>(
       isOpen = false,
       position: userPosition = 'right',
       backdrop = true,
-      overlayCssMixin,
+      overlayCssMixin = css``,
       overlayClassName,
       overlayStyle,
       container,
@@ -224,7 +229,7 @@ export const Drawer = React.forwardRef<HTMLDivElement, DrawerProps>(
         tabIndex={-1}
         onMouseDown={handleMouseDown}
         onKeyDown={handleKeyDown}
-        overlayStyledCss={overlayCssMixin}
+        overlayCssMixin={overlayCssMixin}
         className={overlayClassName}
         style={overlayStyle}
         backdrop={backdrop}

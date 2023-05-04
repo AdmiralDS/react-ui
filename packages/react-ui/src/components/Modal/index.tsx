@@ -3,7 +3,7 @@ import { refSetter } from '#src/components/common/utils/refSetter';
 import { typography } from '#src/components/Typography';
 import * as React from 'react';
 import ReactDOM from 'react-dom';
-import type { Interpolation, DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
+import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import styled, { css, ThemeContext } from 'styled-components';
 import { LIGHT_THEME } from '#src/components/themes';
 import { manager } from './manager';
@@ -14,7 +14,7 @@ import type { CSSProperties } from 'react';
 
 type Dimension = 'xl' | 'l' | 'm' | 's';
 
-const Overlay = styled.div<{ overlayStyledCss: Interpolation<any> }>`
+const Overlay = styled.div<{ overlayStyledCss: FlattenInterpolation<ThemeProps<DefaultTheme>> }>`
   display: flex;
   align-items: center;
   justify-content: center;
