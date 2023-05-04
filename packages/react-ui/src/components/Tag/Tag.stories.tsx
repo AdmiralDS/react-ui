@@ -48,7 +48,7 @@ export default {
   },
   argTypes: {
     kind: {
-      options: ['neutral', 'blue', 'green', 'red', 'orange'],
+      options: ['neutral', 'primary', 'success', 'danger', 'warning'],
       control: { type: 'radio' },
     },
     dimension: {
@@ -95,27 +95,27 @@ const Template1: ComponentStory<typeof Tag> = (args: TagProps) => {
     <>
       <Tags>
         <Tag onClick={clickHandler}>Neutral</Tag>
-        <Tag onClick={clickHandler} kind="green">
-          Green
+        <Tag onClick={clickHandler} kind="success">
+          Success
         </Tag>
-        <Tag onClick={clickHandler} kind="blue">
-          Blue
+        <Tag onClick={clickHandler} kind="primary">
+          Primary
         </Tag>
-        <Tag onClick={clickHandler} as="span" kind="red">
-          Red
+        <Tag onClick={clickHandler} as="span" kind="danger">
+          Danger
         </Tag>
-        <Tag onClick={clickHandler} kind="orange">
-          Orange
+        <Tag onClick={clickHandler} kind="warning">
+          Warning
         </Tag>
       </Tags>
       <Tags dimension="s" style={{ marginTop: 24 }}>
         <Tag>Neutral</Tag>
-        <Tag kind="green">Green</Tag>
-        <Tag kind="blue">Blue</Tag>
-        <Tag as="span" kind="red">
-          Red
+        <Tag kind="success">Success</Tag>
+        <Tag kind="primary">Primary</Tag>
+        <Tag as="span" kind="danger">
+          Danger
         </Tag>
-        <Tag kind="orange">Orange</Tag>
+        <Tag kind="warning">Warning</Tag>
       </Tags>
     </>
   );
@@ -128,32 +128,32 @@ const Template2: ComponentStory<typeof Tag> = (args: TagProps) => {
         <Tag onClick={clickHandler} statusViaBackground>
           Neutral
         </Tag>
-        <Tag onClick={clickHandler} statusViaBackground kind="green">
-          Green
+        <Tag onClick={clickHandler} statusViaBackground kind="success">
+          Success
         </Tag>
-        <Tag onClick={clickHandler} statusViaBackground kind="blue">
-          Blue
+        <Tag onClick={clickHandler} statusViaBackground kind="primary">
+          Primary
         </Tag>
-        <Tag onClick={clickHandler} statusViaBackground kind="red">
-          Red
+        <Tag onClick={clickHandler} statusViaBackground kind="danger">
+          Danger
         </Tag>
-        <Tag onClick={clickHandler} statusViaBackground kind="orange">
-          Orange
+        <Tag onClick={clickHandler} statusViaBackground kind="warning">
+          Warning
         </Tag>
       </Tags>
       <Tags dimension="s" style={{ marginTop: 24 }}>
         <Tag statusViaBackground>Neutral</Tag>
-        <Tag statusViaBackground kind="green">
-          Green
+        <Tag statusViaBackground kind="success">
+          Success
         </Tag>
-        <Tag statusViaBackground kind="blue">
-          Blue
+        <Tag statusViaBackground kind="primary">
+          Primary
         </Tag>
-        <Tag statusViaBackground kind="red">
-          Red
+        <Tag statusViaBackground kind="danger">
+          Danger
         </Tag>
-        <Tag statusViaBackground kind="orange">
-          Orange
+        <Tag statusViaBackground kind="warning">
+          Warning
         </Tag>
       </Tags>
     </>
@@ -165,7 +165,7 @@ const Template3: ComponentStory<typeof Tag> = (args: TagProps) => {
     <>
       <Tags>
         <Tag onClick={clickHandler} kind={{ background: '#E052BD' }}>
-          Green
+          Magenta
         </Tag>
         <Tag
           onClick={clickHandler}
@@ -183,7 +183,7 @@ const Template3: ComponentStory<typeof Tag> = (args: TagProps) => {
         </Tag>
       </Tags>
       <Tags dimension="s" style={{ marginTop: 24 }}>
-        <Tag kind={{ background: '#E052BD' }}>Green</Tag>
+        <Tag kind={{ background: '#E052BD' }}>Magenta</Tag>
         <Tag statusViaBackground kind={{ background: '#EAFAF9', border: '#4AD2CA' }}>
           Turquoise
         </Tag>
@@ -230,34 +230,34 @@ const Template6: ComponentStory<typeof Tag> = (args: TagProps) => {
         <Tag statusViaBackground onClick={clickHandler} icon={<CheckOutline />}>
           Neutral
         </Tag>
-        <Tag statusViaBackground onClick={clickHandler} icon={<CheckOutline />} kind="green">
-          Green
+        <Tag statusViaBackground onClick={clickHandler} icon={<CheckOutline />} kind="success">
+          Success
         </Tag>
-        <Tag statusViaBackground onClick={clickHandler} icon={<CheckOutline />} kind="blue">
-          Blue
+        <Tag statusViaBackground onClick={clickHandler} icon={<CheckOutline />} kind="primary">
+          Primary
         </Tag>
-        <Tag statusViaBackground onClick={clickHandler} icon={<CheckOutline />} kind="red">
-          Red
+        <Tag statusViaBackground onClick={clickHandler} icon={<CheckOutline />} kind="danger">
+          Danger
         </Tag>
-        <Tag statusViaBackground onClick={clickHandler} icon={<CheckOutline />} kind="orange">
-          Orange
+        <Tag statusViaBackground onClick={clickHandler} icon={<CheckOutline />} kind="warning">
+          Warning
         </Tag>
       </Tags>
       <Tags dimension="s" style={{ marginTop: 24 }}>
         <Tag statusViaBackground onClick={clickHandler} icon={<CheckOutline />}>
           Neutral
         </Tag>
-        <Tag statusViaBackground onClick={clickHandler} icon={<CheckOutline />} kind="green">
-          Green
+        <Tag statusViaBackground onClick={clickHandler} icon={<CheckOutline />} kind="success">
+          Success
         </Tag>
-        <Tag statusViaBackground onClick={clickHandler} icon={<CheckOutline />} kind="blue">
-          Blue
+        <Tag statusViaBackground onClick={clickHandler} icon={<CheckOutline />} kind="primary">
+          Primary
         </Tag>
-        <Tag statusViaBackground onClick={clickHandler} icon={<CheckOutline />} kind="red">
-          Red
+        <Tag statusViaBackground onClick={clickHandler} icon={<CheckOutline />} kind="danger">
+          Danger
         </Tag>
-        <Tag statusViaBackground onClick={clickHandler} icon={<CheckOutline />} kind="orange">
-          Orange
+        <Tag statusViaBackground onClick={clickHandler} icon={<CheckOutline />} kind="warning">
+          Warning
         </Tag>
       </Tags>
     </>

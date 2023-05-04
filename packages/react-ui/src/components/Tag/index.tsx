@@ -7,7 +7,7 @@ import { Wrapper, TagCircle, Icon, Text, StatusIcon } from './style';
 
 export type TagDimension = 'm' | 's';
 
-export type TagKind = 'neutral' | 'green' | 'blue' | 'red' | 'orange';
+export type TagKind = 'neutral' | 'success' | 'primary' | 'danger' | 'warning' | 'green' | 'blue' | 'red' | 'orange';
 
 export interface TagVisualProps {
   /** Тип тэга. Можно выбрать из предложенных вариантов, либо задать свои цвета для тэга.
