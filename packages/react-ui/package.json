@@ -1,6 +1,6 @@
 {
   "name": "@admiral-ds/react-ui",
-  "version": "4.12.0",
+  "version": "4.13.0",
   "description": "React component library for Admiral design system 2.1",
   "keywords": [],
   "author": "",
@@ -71,6 +71,7 @@
     "@storybook/storybook-deployer": "^2.8.11",
     "@storybook/theming": "^6.4.12",
     "@svgr/webpack": "^5.5.0",
+    "@tanstack/react-query": "^4.29.5",
     "@testing-library/jest-dom": "^5.15.0",
     "@testing-library/react": "^12.0.0",
     "@testing-library/user-event": "^13.5.0",

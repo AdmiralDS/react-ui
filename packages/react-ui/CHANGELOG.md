@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.13.0](https://github.com/AdmiralDS/react-ui/compare/v4.12.0...v4.13.0) (2023-05-03)
+
+
+### Features
+
+* **InputEx:** border should hover when hovering suffix/prefix area ([88a382f](https://github.com/AdmiralDS/react-ui/commit/88a382ffa90e6b094375b3440c99eb37935cdb94))
+* **InputEx:** hover chevron when hovering all suffix/prefix area ([611fdbd](https://github.com/AdmiralDS/react-ui/commit/611fdbd836f3a08e665f11e8158f3e3b0861010a))
+* **Select:** add forceHideOverflowTooltip property & correct pass title ([191b9b5](https://github.com/AdmiralDS/react-ui/commit/191b9b51d50dd22ac6c43cd5f815a13d71491fc6))
+
 ## [4.12.0](https://github.com/AdmiralDS/react-ui/compare/v4.11.2...v4.12.0) (2023-04-27)
 
 
