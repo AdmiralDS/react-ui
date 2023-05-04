@@ -14,9 +14,9 @@ export interface CalendarContentProps {
 export const CalendarContent = ({ viewMode, date, renderCell, onMouseLeave }: CalendarContentProps) => {
   switch (viewMode) {
     case 'YEARS':
-      return <YearsCalendarView date={date} renderCell={renderCell} />;
+      return <YearsCalendarView date={date} renderCell={renderCell} onMouseLeave={onMouseLeave} />;
     case 'MONTHS':
-      return <MonthsCalendarView date={date} renderCell={renderCell} />;
+      return <MonthsCalendarView date={date} renderCell={renderCell} onMouseLeave={onMouseLeave} />;
     case 'DATES':
     default:
       return <DateCalendarView onMouseLeave={onMouseLeave} date={date} renderCell={renderCell} />;

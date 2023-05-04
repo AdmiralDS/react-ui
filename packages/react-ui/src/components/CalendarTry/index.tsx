@@ -157,7 +157,7 @@ export const CalendarTry = React.forwardRef<HTMLDivElement, CalendarTryProps>(
     const handleDayMouseEnter = (date: Dayjs, _: any) => {
       setActiveDate(date);
     };
-    const handleMonthMouseLeave = () => {
+    const handleAreaMouseLeave = () => {
       setActiveDate(undefined);
     };
 
@@ -324,16 +324,28 @@ export const CalendarTry = React.forwardRef<HTMLDivElement, CalendarTryProps>(
     const renderContent = () => {
       switch (viewMode) {
         case 'YEARS':
-          return <YearsCalendarView date={viewDate} renderCell={renderYearCell || defaultRenderYearCell} />;
+          return (
+            <YearsCalendarView
+              date={viewDate}
+              renderCell={renderYearCell || defaultRenderYearCell}
+              onMouseLeave={handleAreaMouseLeave}
+            />
+          );
         case 'MONTHS':
-          return <MonthsCalendarView date={viewDate} renderCell={renderMonthCell || defaultRenderMonthCell} />;
+          return (
+            <MonthsCalendarView
+              date={viewDate}
+              renderCell={renderMonthCell || defaultRenderMonthCell}
+              onMouseLeave={handleAreaMouseLeave}
+            />
+          );
         case 'DATES':
         default:
           return (
             <DateCalendarView
               date={viewDate}
               renderCell={renderDateCell || defaultRenderDateCell}
-              onMouseLeave={handleMonthMouseLeave}
+              onMouseLeave={handleAreaMouseLeave}
             />
           );
       }
