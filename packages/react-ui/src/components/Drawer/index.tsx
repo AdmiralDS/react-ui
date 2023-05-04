@@ -59,7 +59,7 @@ const DrawerComponent = styled.div<{ position: Position; mobile?: boolean }>`
   color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
   ${({ theme }) => theme.shadow['Shadow 16']}
   outline: none;
-  transform: ${({ position }) => (position === 'right' ? 'translateX(100%)' : 'translateX(-100%)')};
+  transform: ${({ position }) => (position === 'right' ? ' translateX(100%)' : 'translateX(-100%)')};
   transition: all ${transitionMixin};
   pointer-events: auto;
   visibility: hidden;
@@ -147,7 +147,11 @@ export const Drawer = React.forwardRef<HTMLDivElement, DrawerProps>(
     React.useEffect(() => {
       if (overlayRef.current) {
         if (isOpen) {
-          overlayRef.current.dataset.visible = 'true';
+          const timer = setTimeout(() => {
+            if (overlayRef.current) overlayRef.current.dataset.visible = 'true';
+          }, 100);
+          return () => clearTimeout(timer);
+          // overlayRef.current.dataset.visible = 'true';
         } else {
           overlayRef.current.dataset.visible = 'false';
         }
@@ -176,11 +180,14 @@ export const Drawer = React.forwardRef<HTMLDivElement, DrawerProps>(
     // manage focus
     React.useLayoutEffect(() => {
       if (isOpen) {
-        previousFocusedElement.current = document.activeElement;
-        // set focus inside drawer
-        drawerRef.current?.focus();
+        const timer = setTimeout(() => {
+          previousFocusedElement.current = document.activeElement;
+          // set focus inside drawer
+          drawerRef.current?.focus();
+        }, 300);
 
         return () => {
+          clearTimeout(timer);
           // return focus on close of drawer
           previousFocusedElement.current?.focus();
         };
