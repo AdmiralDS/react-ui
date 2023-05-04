@@ -23,7 +23,7 @@ const YEAR_HEIGHT = '36px';
 const YEAR_WIDTH = '60px';
 const YEAR_MARGIN_BOTTOM = '16px';
 const YEAR_PADDING = '8px 0';
-const YEAR_BORDER_RADIUS = '18px';
+export const YEAR_BORDER_RADIUS = '18px';
 
 export const YearCellWrapper = styled(CellWrapper)<{
   today?: boolean;
@@ -42,21 +42,7 @@ export const YearCellWrapper = styled(CellWrapper)<{
   height: ${YEAR_HEIGHT};
   padding: ${YEAR_PADDING};
   margin-bottom: ${YEAR_MARGIN_BOTTOM};
-  background: transparent;
   user-select: none;
-
-  ${({ disabled, theme, selected }) =>
-    !disabled &&
-    selected &&
-    `
-      border: 1px solid ${theme.color['Primary/Primary 60 Main']};
-      color: ${theme.color['Special/Static White']};
-      background: ${theme.color['Primary/Primary 60 Main']};
-      &:hover {
-        border: 1px solid ${theme.color['Primary/Primary 70']};
-        background: ${theme.color['Primary/Primary 70']};
-      }
-    `}
 `;
 
 export const YearCell = ({ date, activeDate, selected, disabled, onSelectYear }: YearCellProps) => {
@@ -65,6 +51,7 @@ export const YearCell = ({ date, activeDate, selected, disabled, onSelectYear }:
     const day = date.startOf('year');
     !disabled && onSelectYear && onSelectYear(day, e);
   };
+
   return (
     <YearCellWrapper
       isRowStart={date.year() % YEARS_IN_ROW === 1}

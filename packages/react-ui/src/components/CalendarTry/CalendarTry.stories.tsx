@@ -8,7 +8,7 @@ import type { Theme } from '#src/components/themes';
 import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes';
 import { CalendarTry } from '#src/components/CalendarTry/index';
 import type { CalendarViewMode } from '#src/components/CalendarTry/constants';
-import { DayCellWrapper } from '#src/components/CalendarTry/CalendarContent/DayCell';
+import { DAY_BORDER_RADIUS, DayCellWrapper } from '#src/components/CalendarTry/CalendarContent/DayCell';
 
 export default {
   title: 'Admiral-2.1/CalendarTry',
@@ -205,6 +205,7 @@ const Template1: ComponentStory<typeof CalendarTry> = (args) => {
         isRowEnd={false}
         onMouseEnter={(e) => !disabled && handleDayMouseEnter2(date, e)}
         onMouseLeave={(e) => !disabled && handleDayMouseLeave2(date, e)}
+        borderRadius={DAY_BORDER_RADIUS}
       >
         {date.date()}
       </StyledDay>
@@ -225,9 +226,9 @@ const Template1: ComponentStory<typeof CalendarTry> = (args) => {
           pickerType={args.pickerType}
           viewMode={viewMode1}
           onViewModeChange={handleViewModeChange1}
-          //selected={selected1}
-          startDate={startDate1}
-          endDate={endDate1}
+          selected={selected1}
+          //startDate={startDate1}
+          //endDate={endDate1}
           onSelectDate={handleDayClick1}
           onSelectMonth={handleMonthClick1}
           onSelectYear={handleYearClick1}

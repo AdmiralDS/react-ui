@@ -8,7 +8,7 @@ import { DateCalendarView } from '#src/components/CalendarTry/CalendarContent/Da
 export interface CalendarContentProps {
   viewMode: CalendarViewMode;
   date: Dayjs;
-  renderCell: (date: Dayjs, viewMode: CalendarViewMode) => React.ReactNode;
+  renderCell: (date: Dayjs) => React.ReactNode;
   onMouseLeave: () => void;
 }
 export const CalendarContent = ({ viewMode, date, renderCell, onMouseLeave }: CalendarContentProps) => {

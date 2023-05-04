@@ -3,7 +3,7 @@ import type { MouseEvent } from 'react';
 import dayjs from 'dayjs';
 import type { Dayjs } from 'dayjs';
 import styled from 'styled-components';
-import { YearCellWrapper } from '#src/components/CalendarTry/CalendarContent/YearCell';
+import { YEAR_BORDER_RADIUS, YearCellWrapper } from '#src/components/CalendarTry/CalendarContent/YearCell';
 import { capitalizeFirstLetter } from '#src/components/Calendar/constants';
 import type { DateValidator } from '#src/components/CalendarTry/validator';
 
@@ -36,6 +36,12 @@ export const MonthCell = ({ date, selected, validator, onSelectMonth }: MonthCel
       selected={!!selected && date.isSame(selected, 'month')}
       disabled={disabled}
       onMouseDown={handleClick}
+      borderRadius={YEAR_BORDER_RADIUS}
+      isRangeStart={false}
+      isRangeEnd={false}
+      isRowStart={false}
+      isRowEnd={false}
+      isActiveDate={false}
     >
       {capitalizeFirstLetter(date.format('MMMM'))}
     </MonthCellCWrapper>
