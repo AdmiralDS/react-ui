@@ -36,8 +36,9 @@ const Overlay = styled.div<{ overlayCssMixin: FlattenInterpolation<ThemeProps<De
     ${({ backdrop }) => backdrop && `pointer-events: auto;`}
 
     & > div {
-      visibility: visible;
+      opacity: 1;
       transform: translateX(0);
+      transition: transform ${transitionMixin}, opacity 0ms linear 0ms;
     }
   }
 `;
@@ -60,9 +61,9 @@ const DrawerComponent = styled.div<{ position: Position; mobile?: boolean }>`
   ${({ theme }) => theme.shadow['Shadow 16']}
   outline: none;
   transform: ${({ position }) => (position === 'right' ? ' translateX(100%)' : 'translateX(-100%)')};
-  transition: all ${transitionMixin};
+  transition: transform ${transitionMixin}, opacity 0ms linear 0.3s;
   pointer-events: auto;
-  visibility: hidden;
+  opacity: 0;
 `;
 
 const CloseButton = styled(CloseIconPlacementButton)<{ mobile?: boolean }>`
@@ -147,11 +148,7 @@ export const Drawer = React.forwardRef<HTMLDivElement, DrawerProps>(
     React.useEffect(() => {
       if (overlayRef.current) {
         if (isOpen) {
-          const timer = setTimeout(() => {
-            if (overlayRef.current) overlayRef.current.dataset.visible = 'true';
-          }, 100);
-          return () => clearTimeout(timer);
-          // overlayRef.current.dataset.visible = 'true';
+          overlayRef.current.dataset.visible = 'true';
         } else {
           overlayRef.current.dataset.visible = 'false';
         }
@@ -180,14 +177,12 @@ export const Drawer = React.forwardRef<HTMLDivElement, DrawerProps>(
     // manage focus
     React.useLayoutEffect(() => {
       if (isOpen) {
-        const timer = setTimeout(() => {
-          previousFocusedElement.current = document.activeElement;
-          // set focus inside drawer
-          drawerRef.current?.focus();
-        }, 300);
+        previousFocusedElement.current = document.activeElement;
+
+        // set focus inside drawer
+        drawerRef.current?.focus();
 
         return () => {
-          clearTimeout(timer);
           // return focus on close of drawer
           previousFocusedElement.current?.focus();
         };
