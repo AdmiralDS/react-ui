@@ -131,6 +131,7 @@ export const CalendarTry = React.forwardRef<HTMLDivElement, CalendarTryProps>(
     const [viewDate, setViewDate] = React.useState<Dayjs>(getInitialViewDate());
     // активная дата, на которой сейчас ховер
     const [activeDate, setActiveDate] = React.useState<Dayjs | undefined>(undefined);
+    const clearActiveDate = () => setActiveDate(undefined);
 
     React.useEffect(() => {
       if (onViewDateChange) {
@@ -158,7 +159,7 @@ export const CalendarTry = React.forwardRef<HTMLDivElement, CalendarTryProps>(
       setActiveDate(date);
     };
     const handleAreaMouseLeave = () => {
-      setActiveDate(undefined);
+      clearActiveDate();
     };
 
     const defaultIsHidden = (date: Dayjs) => {
@@ -176,10 +177,12 @@ export const CalendarTry = React.forwardRef<HTMLDivElement, CalendarTryProps>(
           setViewDate(date);
           break;
         case 'MONTH_YEAR':
+          clearActiveDate();
           onViewModeChange?.('MONTHS');
           break;
         default:
         case 'DATE_MONTH_YEAR':
+          clearActiveDate();
           onViewModeChange?.('DATES');
           break;
       }
@@ -198,6 +201,7 @@ export const CalendarTry = React.forwardRef<HTMLDivElement, CalendarTryProps>(
           break;
         default:
         case 'DATE_MONTH_YEAR':
+          clearActiveDate();
           onViewModeChange?.('DATES');
           break;
       }
@@ -229,7 +233,7 @@ export const CalendarTry = React.forwardRef<HTMLDivElement, CalendarTryProps>(
           activeDate={activeDate}
           startDate={rangePicker && pickerType === 'MONTH_YEAR' ? startDate : undefined}
           endDate={rangePicker && pickerType === 'MONTH_YEAR' ? endDate : undefined}
-          selected={!rangePicker ? selected : pickerType !== 'MONTH_YEAR' ? startDate : undefined}
+          selected={!rangePicker ? selected : undefined}
           onSelectMonth={handleMonthClick}
           disabled={!!validator?.invalidMonth(date.month(), date.year())}
           onMouseEnter={handleMonthMouseEnter}
@@ -244,7 +248,7 @@ export const CalendarTry = React.forwardRef<HTMLDivElement, CalendarTryProps>(
           activeDate={activeDate}
           startDate={rangePicker && pickerType === 'YEAR' ? startDate : undefined}
           endDate={rangePicker && pickerType === 'YEAR' ? endDate : undefined}
-          selected={!rangePicker ? selected : pickerType !== 'YEAR' ? startDate : undefined}
+          selected={!rangePicker ? selected : undefined}
           onSelectYear={handleYearClick}
           disabled={!!validator?.invalidYear(date.year())}
           onMouseEnter={handleYearMouseEnter}
@@ -287,8 +291,10 @@ export const CalendarTry = React.forwardRef<HTMLDivElement, CalendarTryProps>(
     const handleYearsViewHide = () => {
       if (pickerType === 'DATE_MONTH_YEAR') {
         onViewModeChange('DATES');
+        clearActiveDate();
       } else if (pickerType === 'MONTH_YEAR') {
         onViewModeChange('MONTHS');
+        clearActiveDate();
       }
       //onViewYearSelect && onViewYearSelect();
     };
@@ -300,6 +306,7 @@ export const CalendarTry = React.forwardRef<HTMLDivElement, CalendarTryProps>(
     const handleMonthsViewHide = () => {
       if (pickerType === 'DATE_MONTH_YEAR') {
         onViewModeChange('DATES');
+        clearActiveDate();
       }
       //onViewMonthSelect && onViewMonthSelect();
     };

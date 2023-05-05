@@ -43,7 +43,7 @@ export const CellWrapper = styled.div<{
   // активная дата
   &:hover:after {
     ${(p) =>
-      p.disabled || p.selected || (p.inSelectingRange && p.isActiveDate)
+      p.disabled || p.selected || !p.isActiveDate
         ? ''
         : `border: 1px solid ${p.theme.color['Primary/Primary 60 Main']};
            background: ${p.theme.color['Special/Elevated BG']};
