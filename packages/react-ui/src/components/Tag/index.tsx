@@ -8,11 +8,11 @@ import { Wrapper, TagCircle, Icon, Text, StatusIcon } from './style';
 export type TagDimension = 'm' | 's';
 
 /**
- * @depricated Use alternative values 'neutral' | 'success' | 'primary' | 'danger' | 'warning'
+ * @deprecated Use alternative values 'neutral' | 'success' | 'primary' | 'danger' | 'warning'
  */
-export type DepricatedTagKind = 'green' | 'blue' | 'red' | 'orange';
+export type DeprecatedTagKind = 'green' | 'blue' | 'red' | 'orange';
 
-export type TagKind = 'neutral' | 'success' | 'primary' | 'danger' | 'warning' | DepricatedTagKind;
+export type TagKind = 'neutral' | 'success' | 'primary' | 'danger' | 'warning' | DeprecatedTagKind;
 
 export interface TagVisualProps {
   /** Тип тэга. Можно выбрать из предложенных вариантов, либо задать свои цвета для тэга.
