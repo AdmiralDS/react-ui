@@ -4,7 +4,7 @@ import * as React from 'react';
 import type { CSSProperties } from 'react';
 import ReactDOM from 'react-dom';
 import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
-import styled, { ThemeContext, css } from 'styled-components';
+import styled, { ThemeContext, css, keyframes } from 'styled-components';
 import { LIGHT_THEME } from '#src/components/themes';
 import { manager } from '#src/components/Modal/manager';
 import { CloseIconPlacementButton } from '#src/components/IconPlacement';
@@ -13,9 +13,41 @@ import { DrawerContext } from './components';
 
 type Position = 'right' | 'left';
 
-const transitionMixin = css`0.3s cubic-bezier(0, 0, 0.2, 1) 0ms`;
+const transitionTimingFunc = 'cubic-bezier(0, 0, 0.2, 1)';
+const transitionDuration = '0.3s';
+const transitionMixin = css`
+  ${transitionDuration} ${transitionTimingFunc} 0ms
+`;
 
-const Overlay = styled.div<{ overlayCssMixin: FlattenInterpolation<ThemeProps<DefaultTheme>>; backdrop?: boolean }>`
+const fadeInRight = keyframes`
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+`;
+
+const fadeInLeft = keyframes`
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+`;
+
+const fadeInMixin = css<{ position?: Position }>`
+  animation-name: ${({ position }) => (position === 'right' ? fadeInRight : fadeInLeft)};
+  animation-duration: ${transitionDuration};
+  animation-timing-function: ${transitionTimingFunc};
+`;
+
+const Overlay = styled.div<{
+  overlayCssMixin: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+  backdrop?: boolean;
+  position: Position;
+}>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -38,7 +70,8 @@ const Overlay = styled.div<{ overlayCssMixin: FlattenInterpolation<ThemeProps<De
     & > div {
       opacity: 1;
       transform: translateX(0);
-      transition: transform ${transitionMixin}, opacity 0ms linear 0ms;
+      transition: opacity 0ms linear 0ms;
+      ${fadeInMixin}
     }
   }
 `;
@@ -60,7 +93,7 @@ const DrawerComponent = styled.div<{ position: Position; mobile?: boolean }>`
   color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
   ${({ theme }) => theme.shadow['Shadow 16']}
   outline: none;
-  transform: ${({ position }) => (position === 'right' ? ' translateX(100%)' : 'translateX(-100%)')};
+  transform: ${({ position }) => (position === 'right' ? 'translateX(100%)' : 'translateX(-100%)')};
   transition: transform ${transitionMixin}, opacity 0ms linear 0.3s;
   pointer-events: auto;
   opacity: 0;
@@ -236,6 +269,7 @@ export const Drawer = React.forwardRef<HTMLDivElement, DrawerProps>(
         style={overlayStyle}
         backdrop={backdrop}
         data-visible={false}
+        position={position}
       >
         <DrawerComponent
           ref={refSetter(ref, drawerRef)}
