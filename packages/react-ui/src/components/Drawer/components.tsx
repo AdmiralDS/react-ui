@@ -19,6 +19,7 @@ const Content = styled.div<{ scrollbar: number; mobile: boolean }>`
   overflow-y: auto;
   outline: none;
   padding: ${({ scrollbar, mobile }) => `8px ${(mobile ? 16 : 24) - scrollbar}px 8px ${mobile ? 16 : 24}px`};
+  box-sizing: border-box;
 `;
 
 const ButtonPanel = styled.div<{ mobile: boolean }>`

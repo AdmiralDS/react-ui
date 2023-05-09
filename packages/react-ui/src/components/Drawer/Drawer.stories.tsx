@@ -1,13 +1,11 @@
 import { Button } from '#src/components/Button';
-import { hexToRgba } from '#src/components/common/utils/hexToRgba';
-import { Option } from '#src/components/input/Select';
-import { InputField, SelectField } from '#src/components/form';
+import { InputField } from '#src/components/form';
 import type { DrawerProps } from '#src/components/Drawer';
 import { Drawer, DrawerButtonPanel, DrawerContent, DrawerTitle } from '#src/components/Drawer';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import * as React from 'react';
 import { withDesign } from 'storybook-addon-designs';
-import styled, { css, ThemeProvider } from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 import type { Theme } from '#src/components/themes';
 import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
 import { ReactComponent as ArrowLeftOutline } from '@admiral-ds/icons/build/system/ArrowLeftOutline.svg';
@@ -24,7 +22,7 @@ const Separator = styled.div`
 
 const Description = () => (
   <Desc>
-    Компонент Drawer — это панель, которая накладывается поверх страницы, выдвигаясь c правой или левой части экрана. Он
+    Компонент Drawer — это панель, которая накладывается поверх страницы, выдвигаясь c правой или левой части экрана. Он
     содержит набор информации или действий. Поскольку пользователь может взаимодействовать с Drawer, не покидая текущую
     страницу, задачи могут выполняться более эффективно в том же контексте. Используется для детализации, создания или
     редактирования информации.
@@ -104,26 +102,13 @@ const ContentArea = styled.div`
   background: ${({ theme }) => theme.color['Success/Success 20']};
 `;
 
-const OPTIONS_SIMPLE = [
-  'teeext 1',
-  'text 2 text text 2 text text 2 text text 2 text text 2 text text 2 text text 2 text ',
-  'text 3',
-  'text 4',
-  'text 5',
-  'texttt 6',
-];
-
 interface Props {
-  onYesClick: (p: { selected: number | string | null; inputValue: string }) => void;
+  onYesClick: (p: { inputValue: string }) => void;
   onNoClick: () => void;
 }
 
 const DrawerForm = ({ onYesClick, onNoClick }: Props) => {
-  const [selected, setSelected] = React.useState('');
   const [inputValue, setInputValue] = React.useState('');
-  const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelected(e.target.value);
-  };
 
   return (
     <>
@@ -131,22 +116,8 @@ const DrawerForm = ({ onYesClick, onNoClick }: Props) => {
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. At cupiditate ducimus nisi nulla numquam obcaecati
         quam quasi quod ut veritatis?
         <Separator />
-        <SelectField
-          label="label"
-          className="Search"
-          value={selected}
-          onChange={handleSelectChange}
-          placeholder="Placeholder"
-        >
-          {OPTIONS_SIMPLE.map((option, ind) => (
-            <Option key={option} value={option} disabled={ind === 4}>
-              {option}
-            </Option>
-          ))}
-        </SelectField>
-        <Separator />
         <InputField
-          label="введите значение"
+          label="Введите значение"
           value={inputValue}
           onChange={(e) => {
             setInputValue(e.target.value);
@@ -154,7 +125,7 @@ const DrawerForm = ({ onYesClick, onNoClick }: Props) => {
         />
       </DrawerContent>
       <DrawerButtonPanel>
-        <Button appearance="primary" dimension="m" onClick={() => onYesClick({ selected, inputValue })}>
+        <Button appearance="primary" dimension="m" onClick={() => onYesClick({ inputValue })}>
           Yes button
         </Button>
         <Button appearance="secondary" dimension="m" onClick={onNoClick}>
@@ -176,6 +147,37 @@ const Template1: ComponentStory<typeof Drawer> = (args) => {
   return (
     <ThemeProvider theme={swapBorder}>
       <Button onClick={() => setOpened(true)}>Open drawer with 2 buttons</Button>
+      <Drawer
+        {...args}
+        isOpen={opened}
+        onClose={() => setOpened(false)}
+        style={{ width: '480px' }}
+        aria-labelledby="drawer-title"
+      >
+        <DrawerTitle id="drawer-title">Drawer title</DrawerTitle>
+        <DrawerForm
+          onYesClick={(p) => {
+            console.log(`value ${p.inputValue}`);
+            setOpened(false);
+          }}
+          onNoClick={() => setOpened(false)}
+        />
+      </Drawer>
+    </ThemeProvider>
+  );
+};
+
+const Template10: ComponentStory<typeof Drawer> = (args) => {
+  const [opened, setOpened] = React.useState(false);
+
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
+    return theme;
+  }
+
+  return (
+    <ThemeProvider theme={swapBorder}>
+      <Button onClick={() => setOpened(true)}>Open drawer with backdrop</Button>
       <Drawer
         {...args}
         isOpen={opened}
@@ -210,7 +212,7 @@ const Template2: ComponentStory<typeof Drawer> = (args) => {
 
   return (
     <ThemeProvider theme={swapBorder}>
-      <Button onClick={() => setOpened(true)}>Open drawer with 2 buttons</Button>
+      <Button onClick={() => setOpened(true)}>Open drawer without backdrop</Button>
       <Drawer
         {...args}
         isOpen={opened}
@@ -245,7 +247,7 @@ const Template3: ComponentStory<typeof Drawer> = (args) => {
 
   return (
     <ThemeProvider theme={swapBorder}>
-      <Button onClick={() => setOpened(true)}>Open drawer with 2 buttons</Button>
+      <Button onClick={() => setOpened(true)}>Open non-closable drawer</Button>
       <Drawer
         {...args}
         isOpen={opened}
@@ -328,19 +330,11 @@ const Template5: ComponentStory<typeof Drawer> = (args) => {
 
   return (
     <ThemeProvider theme={swapBorder}>
-      <Button
-        onClick={() => {
-          setOpened(true);
-        }}
-      >
-        Open mobile drawer
-      </Button>
+      <Button onClick={() => setOpened(true)}>Open mobile drawer</Button>
       <Drawer
         {...args}
         isOpen={opened}
-        onClose={() => {
-          setOpened(false);
-        }}
+        onClose={() => setOpened(false)}
         mobile
         closeOnEscapeKeyDown
         aria-labelledby="drawer-title"
@@ -362,15 +356,84 @@ const Template5: ComponentStory<typeof Drawer> = (args) => {
   );
 };
 
-export const DrawerWithBackdrop = Template1.bind({});
+const Template6: ComponentStory<typeof Drawer> = (args) => {
+  const [opened, setOpened] = React.useState(false);
+
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
+    return theme;
+  }
+
+  return (
+    <ThemeProvider theme={swapBorder}>
+      <Button onClick={() => setOpened(true)}>Open drawer</Button>
+      <Drawer
+        {...args}
+        isOpen={opened}
+        onClose={() => setOpened(false)}
+        closeOnBackdropClick
+        closeOnEscapeKeyDown
+        aria-labelledby="drawer-title"
+      >
+        <DrawerTitle id="drawer-title">Drawer title</DrawerTitle>
+        <DrawerContent style={{ width: '500px' }}>
+          <ContentArea />
+        </DrawerContent>
+      </Drawer>
+    </ThemeProvider>
+  );
+};
+
+const Template7: ComponentStory<typeof Drawer> = (args) => {
+  const [opened, setOpened] = React.useState(false);
+  return (
+    <>
+      <Button onClick={() => setOpened(true)}>Open drawer with custom content</Button>
+      <Drawer {...args} isOpen={opened} onClose={() => setOpened(false)} aria-labelledby="drawer-title">
+        <h1 id="drawer-title" style={{ paddingLeft: '24px' }}>
+          <strong>Drawer title</strong>
+        </h1>
+        <i style={{ paddingLeft: '24px' }}>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. At cupiditate ducimus nisi nulla numquam obcaecati
+          quam quasi quod ut veritatis?
+        </i>
+        <div
+          style={{
+            marginTop: '40px',
+            width: '80%',
+            display: 'flex',
+            justifyContent: 'space-between',
+            paddingLeft: '24px',
+          }}
+        >
+          <Button appearance="primary" dimension="m" onClick={() => setOpened(false)}>
+            First button
+          </Button>
+          <Button appearance="primary" dimension="m" onClick={() => setOpened(false)}>
+            Second button
+          </Button>
+          <Button appearance="primary" dimension="m" onClick={() => setOpened(false)}>
+            Third button
+          </Button>
+        </div>
+      </Drawer>
+    </>
+  );
+};
+
+export const Playground = Template1.bind({});
+Playground.args = {};
+
+export const DrawerWithBackdrop = Template10.bind({});
 DrawerWithBackdrop.args = {};
 DrawerWithBackdrop.storyName = 'Drawer с блокировкой контента страницы (Backdrop = True)';
 DrawerWithBackdrop.parameters = {
   docs: {
     description: {
-      story: `Поверх экрана накладывается цвет Opacity/Modal. Взаимодействовать с контентом 
-      страницы при открытой панели нельзя. Нажатие на затемненную область приводит 
-      к закрытию боковой панели. Закрытие так же происходит по нажатию на крестик либо кнопке внизу панели.`,
+      story: `По умолчанию Drawer блокирует контент страницы, за это отвечает параметр backdrop, равный по умолчанию true. 
+      В этом случае страница затемняется, поверх экрана накладывается цвет Opacity/Modal. Взаимодействовать с контентом 
+      страницы при открытой панели нельзя. Закрытие Drawer может происходить по клику на крестик, по клику на кнопке в футере панели, 
+      по нажатию на затемненную область (при closeOnBackdropClick = true), по нажатию на клавишу Escape (при closeOnEscapeKeyDown = true).`,
     },
   },
 };
@@ -378,10 +441,30 @@ DrawerWithBackdrop.parameters = {
 export const DrawerWithoutBackdrop = Template2.bind({});
 DrawerWithoutBackdrop.args = {};
 DrawerWithoutBackdrop.storyName = 'Drawer без блокировки (Backdrop = False)';
+DrawerWithoutBackdrop.parameters = {
+  docs: {
+    description: {
+      story: `Если необходим Drawer без блокировки контента страницы, то необходимо использовать параметр backdrop равный false.
+      В этом случае пользователь сможет одновременно взаимодействовать и с Drawer, и с содержимым страницы. 
+      Закрытие Drawer может происходить по клику на крестик, по клику на кнопке в футере панели, 
+      по нажатию на клавишу Escape (при closeOnEscapeKeyDown = true).`,
+    },
+  },
+};
 
 export const DrawerWithoutCloseIcon = Template3.bind({});
 DrawerWithoutCloseIcon.args = {};
 DrawerWithoutCloseIcon.storyName = 'Drawer с обязательным условием (non-closable Drawer)';
+DrawerWithoutCloseIcon.parameters = {
+  docs: {
+    description: {
+      story: `В некоторых случаях применим Drawer с обязательным условием (non-closable Drawer), то есть такая панель, 
+      которую можно закрыть только нажав одну из кнопок в футере. Крестик закрытия отсутствует, 
+      нажатие на затемненную область ни к чему не приводит. Для того чтобы крестик закрытия отсутствовал используйте параметр
+      displayCloseIcon равный false.`,
+    },
+  },
+};
 
 export const DrawerPosition = Template4.bind({});
 DrawerPosition.args = {};
@@ -405,6 +488,31 @@ DrawerMobile.parameters = {
       На мобильных устройствах компонент всегда появляется с правой стороны экрана. 
       Заполняет весь экран по ширине, кроме стандартного отступа для контента с левой стороны.\nДля того чтобы 
       перевести компонент в адаптивный режим, используйте параметр mobile.`,
+    },
+  },
+};
+
+export const DrawerWidth = Template6.bind({});
+DrawerWidth.args = {};
+DrawerWidth.storyName = 'Drawer. Ширина компонента';
+DrawerWidth.parameters = {
+  docs: {
+    description: {
+      story: `Ширина компонента задается пользователем, но не меньше 320 px. Drawer подстраивает свою ширину под ширину контента,
+      либо пользователь может задать ширину компонента напрямую через параметры style или classname.`,
+    },
+  },
+};
+
+export const DrawerCustomContent = Template7.bind({});
+DrawerCustomContent.args = {};
+DrawerCustomContent.storyName = 'Drawer. Свободное (кастомизированное) наполнение';
+DrawerCustomContent.parameters = {
+  docs: {
+    description: {
+      story: `Наполнение Drawer контентом полностью контролируется пользоателем. Пользователь может разместить внутри Drawer
+      любые свои компоненты, а также может воспользоваться вспомогательными компонентами DrawerTitle, DrawerContent, DrawerButtonPanel, 
+      экспортируемыми из библиотеки @admital-ds/react-ui.`,
     },
   },
 };
