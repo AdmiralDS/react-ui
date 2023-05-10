@@ -139,6 +139,7 @@ export const Hint = styled.div<{ dimension: Dimension; disabled?: boolean }>`
 export const RadioButtonComponent = styled.label<{
   dimension: Dimension;
   disabled?: boolean;
+  readOnly: boolean;
 }>`
   margin: 0;
   ${({ dimension }) => `
@@ -150,7 +151,7 @@ export const RadioButtonComponent = styled.label<{
   position: relative;
   box-sizing: content-box;
 
-  cursor: ${({ disabled }) => (disabled ? 'default' : 'pointer')};
+  cursor: ${({ disabled, readOnly }) => (disabled || readOnly ? 'default' : 'pointer')};
 
   ${({ dimension }) => (dimension === 's' ? typography['Body/Body 2 Short'] : typography['Body/Body 1 Short'])}
   color: ${({ disabled, theme }) => (disabled ? theme.color['Neutral/Neutral 30'] : theme.color['Neutral/Neutral 90'])};
