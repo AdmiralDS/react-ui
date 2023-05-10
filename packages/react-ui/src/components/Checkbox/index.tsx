@@ -12,6 +12,7 @@ export interface CheckBoxProps extends InputHTMLAttributes<HTMLInputElement> {
   error?: boolean;
   hovered?: boolean;
   children?: never;
+  readOnly?: boolean;
 }
 
 const width = css<{ dimension: CheckboxDimension }>`
@@ -173,10 +174,16 @@ const Input = styled.input<{ indeterminate?: boolean; hovered?: boolean }>`
 `;
 
 export const Checkbox = React.forwardRef<HTMLInputElement, CheckBoxProps>(
-  ({ className, dimension = 'm', ...props }, ref) => {
+  ({ className, dimension = 'm', disabled = false, readOnly = false, ...props }, ref) => {
     return (
       <Container dimension={dimension} className={className}>
-        <Input ref={ref} {...props} type="checkbox" indeterminate={props.indeterminate} />
+        <Input
+          ref={ref}
+          disabled={disabled || readOnly}
+          {...props}
+          type="checkbox"
+          indeterminate={props.indeterminate}
+        />
         <Background error={props.error}>
           {props.indeterminate ? (
             <Indeterminate aria-hidden="true" focusable="false" />

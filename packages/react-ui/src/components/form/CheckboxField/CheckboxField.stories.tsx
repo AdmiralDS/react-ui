@@ -46,6 +46,9 @@ export default {
     disabled: {
       control: { type: 'boolean' },
     },
+    readOnly: {
+      control: { type: 'boolean' },
+    },
     error: {
       control: { type: 'boolean' },
     },
@@ -148,6 +151,19 @@ const CheckboxFieldDemo: ComponentStory<typeof CheckboxField> = (props) => {
         >
           Disabled не управляемый чекбокс
         </CheckboxField>
+        <CheckboxField disabled data-container-id="checkboxFieldIdFive">
+          Disabled не управляемый чекбокс
+        </CheckboxField>
+        <CheckboxField readOnly defaultChecked data-container-id="checkboxFieldIdSix">
+          Readonly не управляемый чекбокс
+        </CheckboxField>
+        <CheckboxField
+          readOnly
+          extraText="Дополнительный текст. Additional text"
+          data-container-id="checkboxFieldIdSeven"
+        >
+          Readonly не управляемый чекбокс
+        </CheckboxField>
         <CheckboxField
           error
           extraText={
@@ -155,7 +171,7 @@ const CheckboxFieldDemo: ComponentStory<typeof CheckboxField> = (props) => {
               Вариация с <i>дополнительно</i> декорированным <b>текстом</b>
             </span>
           }
-          data-container-id="checkboxFieldIdFive"
+          data-container-id="checkboxFieldIdEight"
         >
           Error не управляемый чекбокс
         </CheckboxField>
@@ -163,12 +179,12 @@ const CheckboxFieldDemo: ComponentStory<typeof CheckboxField> = (props) => {
           dimension="s"
           indeterminate
           extraText="Вариация с дополнительным текстом"
-          data-container-id="checkboxFieldIdSix"
+          data-container-id="checkboxFieldIdNine"
         >
           Не управляемый маленький чекбокс indeterminate
         </CheckboxField>
         <CheckboxWithInformer>
-          <CheckboxField dimension="m" extraText="Вариация с информером" data-container-id="checkboxFieldIdSeven">
+          <CheckboxField dimension="m" extraText="Вариация с информером" data-container-id="checkboxFieldIdTen">
             Чекбокс с информером
           </CheckboxField>
           <Hint
@@ -183,7 +199,7 @@ const CheckboxFieldDemo: ComponentStory<typeof CheckboxField> = (props) => {
           </Hint>
         </CheckboxWithInformer>
         <CheckboxWithInformer>
-          <CheckboxField dimension="s" extraText="Вариация с информером" data-container-id="checkboxFieldIdEight">
+          <CheckboxField dimension="s" extraText="Вариация с информером" data-container-id="checkboxFieldIdEleven">
             Маленький чекбокс с информером
           </CheckboxField>
           <Hint
