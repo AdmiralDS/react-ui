@@ -108,7 +108,7 @@ const CloseButton = styled(CloseIconPlacementButton)<{ mobile?: boolean }>`
 export interface DrawerProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Состояние компонента: открыт/закрыт */
   isOpen?: boolean;
-  /** С какой части экрана будет выдвигаться компонент */
+  /** С какой части экрана будет выдвигаться компонент (right по умолчанию) */
   position?: Position;
   /** Наличие затемненного фона, блокирующего контент страницы */
   backdrop?: boolean;
@@ -160,8 +160,8 @@ export const Drawer = React.forwardRef<HTMLDivElement, DrawerProps>(
       container,
       mobile = false,
       onClose,
-      closeOnEscapeKeyDown,
-      closeOnBackdropClick,
+      closeOnEscapeKeyDown = false,
+      closeOnBackdropClick = false,
       displayCloseIcon = true,
       children,
       locale,
@@ -205,7 +205,7 @@ export const Drawer = React.forwardRef<HTMLDivElement, DrawerProps>(
           manager.remove(getDrawer());
         };
       }
-    }, [backdrop, isOpen]);
+    }, [backdrop, isOpen, container]);
 
     // manage focus
     React.useLayoutEffect(() => {
