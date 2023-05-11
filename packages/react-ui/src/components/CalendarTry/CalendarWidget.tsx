@@ -34,18 +34,17 @@ export const CalendarWidgetWrapper = styled.div<{ viewMode: CalendarViewMode }>`
 
   flex: 0 0 auto;
   width: ${CALENDAR_WIDTH}px;
-  //min-width: ${CALENDAR_WIDTH}px;
   background: ${({ theme }) => theme.color['Special/Elevated BG']};
   ${typography['Body/Body 2 Long']}
   color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
-  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
 `;
 
-export interface CalendarTryProps {
+export interface CalendarWidgetTryProps {
   viewMode?: CalendarViewMode;
   onViewModeChange: (viewMode: CalendarViewMode) => void;
   pickerType?: PickerTypeMode;
   rangePicker?: boolean;
+  viewDate?: Dayjs;
   selected?: Dayjs;
   startDate?: Dayjs;
   endDate?: Dayjs;
@@ -55,13 +54,13 @@ export interface CalendarTryProps {
   renderMonthCell?: (date: Dayjs) => React.ReactNode;
   renderYearCell?: (date: Dayjs) => React.ReactNode;
   validator?: DateValidator;
+  onViewDateChange?: (date: Dayjs) => void;
   onSelectDate?: (date: Dayjs) => void;
   onSelectMonth?: (date: Dayjs) => void;
   onSelectYear?: (date: Dayjs) => void;
   disabledDate?: (date: Dayjs) => boolean;
   isHiddenDate?: (date: Dayjs) => boolean;
   highlightSpecialDay?: (date: Dayjs) => FlattenInterpolation<ThemeProps<DefaultTheme>> | undefined;
-  onViewDateChange?: (date: Dayjs) => void;
   userLocale?: string;
   locale?: {
     backwardText?: string;
@@ -74,13 +73,14 @@ export interface CalendarTryProps {
   };
 }
 
-export const CalendarWidgetTry = React.forwardRef<HTMLDivElement, CalendarTryProps>(
+export const CalendarWidgetTry = React.forwardRef<HTMLDivElement, CalendarWidgetTryProps>(
   (
     {
       viewMode = 'DATES',
       onViewModeChange,
       pickerType = 'DATE_MONTH_YEAR',
       rangePicker = false,
+      viewDate,
       selected,
       startDate,
       endDate,
@@ -104,14 +104,17 @@ export const CalendarWidgetTry = React.forwardRef<HTMLDivElement, CalendarTryPro
   ) => {
     const getInitialViewDate = (): Dayjs => {
       const current = dayjs();
+      if (viewDate) {
+        return viewDate.locale(currentLocale || 'ru');
+      }
       if (selected) {
         return selected.locale(currentLocale || 'ru');
-      } else {
-        if (minDate && current.isBefore(minDate)) {
-          return minDate;
-        } else if (maxDate && current.isAfter(maxDate)) {
-          return maxDate;
-        }
+      }
+      if (minDate && current.isBefore(minDate)) {
+        return minDate;
+      }
+      if (maxDate && current.isAfter(maxDate)) {
+        return maxDate;
       }
       return current.locale(currentLocale || 'ru');
     };
@@ -127,20 +130,22 @@ export const CalendarWidgetTry = React.forwardRef<HTMLDivElement, CalendarTryPro
         });
     }
 
-    const [viewDate, setViewDate] = React.useState<Dayjs>(getInitialViewDate());
+    const [innerViewDate, setInnerViewDate] = React.useState<Dayjs>(getInitialViewDate());
     // активная дата, на которой сейчас ховер
     const [activeDate, setActiveDate] = React.useState<Dayjs | undefined>(undefined);
     const clearActiveDate = () => setActiveDate(undefined);
 
+    const finalViewDate = viewDate ?? innerViewDate;
+
     React.useEffect(() => {
       if (onViewDateChange) {
-        onViewDateChange(viewDate);
+        onViewDateChange(innerViewDate);
       }
-    }, [viewDate]);
+    }, [innerViewDate]);
 
     React.useEffect(() => {
       if (currentLocale) {
-        setViewDate((date) => {
+        setInnerViewDate((date) => {
           return date.locale(currentLocale);
         });
       }
@@ -162,18 +167,18 @@ export const CalendarWidgetTry = React.forwardRef<HTMLDivElement, CalendarTryPro
     };
 
     const defaultIsHidden = (date: Dayjs) => {
-      return !date.isSame(viewDate, 'month');
+      return !date.isSame(finalViewDate, 'month');
     };
 
-    const changeYear = (year: number) => setViewDate((date) => date.year(year));
-    const changeMonth = (month: number) => setViewDate((date) => date.month(month));
+    const changeYear = (year: number) => setInnerViewDate((date) => date.year(year));
+    const changeMonth = (month: number) => setInnerViewDate((date) => date.month(month));
 
     const handleYearClick = (date: Dayjs) => {
       changeYear(date.year());
       /*!currentActiveViewImportant && setYearsView(false);*/
       switch (pickerType) {
         case 'YEAR':
-          setViewDate(date);
+          setInnerViewDate(date);
           break;
         case 'MONTH_YEAR':
           clearActiveDate();
@@ -195,7 +200,7 @@ export const CalendarWidgetTry = React.forwardRef<HTMLDivElement, CalendarTryPro
         case 'YEAR':
           break;
         case 'MONTH_YEAR':
-          setViewDate(date);
+          setInnerViewDate(date);
           onViewModeChange?.('MONTHS');
           break;
         default:
@@ -256,27 +261,27 @@ export const CalendarWidgetTry = React.forwardRef<HTMLDivElement, CalendarTryPro
     };
 
     const increaseMonth = () =>
-      setViewDate((date) => {
+      setInnerViewDate((date) => {
         const increase = date.add(1, 'month');
         //onDateIncreaseDecrease && onDateIncreaseDecrease(increase);
         return increase;
       });
     const decreaseMonth = () =>
-      setViewDate((date) => {
+      setInnerViewDate((date) => {
         const decrease = date.subtract(1, 'month');
         //onDateIncreaseDecrease && onDateIncreaseDecrease(decrease);
         return decrease;
       });
 
     const increaseYear = () =>
-      setViewDate((date) => {
+      setInnerViewDate((date) => {
         const increase = date.add(viewMode === 'YEARS' ? DEFAULT_YEAR_COUNT : 1, 'year');
         console.log(increase.format('DD-MM-YYYY'));
         /*onDateIncreaseDecrease && onDateIncreaseDecrease(increase);*/
         return increase;
       });
     const decreaseYear = () =>
-      setViewDate((date) => {
+      setInnerViewDate((date) => {
         const decrease = date.subtract(viewMode === 'YEARS' ? DEFAULT_YEAR_COUNT : 1, 'year');
         console.log(decrease.format('DD-MM-YYYY'));
         /*onDateIncreaseDecrease && onDateIncreaseDecrease(decrease);*/
@@ -315,7 +320,7 @@ export const CalendarWidgetTry = React.forwardRef<HTMLDivElement, CalendarTryPro
         <Panel
           viewMode={viewMode}
           pickerType={pickerType}
-          date={viewDate}
+          date={finalViewDate}
           userLocale={currentLocale}
           locale={locale}
           onNext={viewMode === 'DATES' ? increaseMonth : increaseYear}
@@ -332,7 +337,7 @@ export const CalendarWidgetTry = React.forwardRef<HTMLDivElement, CalendarTryPro
         case 'YEARS':
           return (
             <YearsCalendarView
-              date={viewDate}
+              date={finalViewDate}
               renderCell={renderYearCell || defaultRenderYearCell}
               onMouseLeave={handleAreaMouseLeave}
             />
@@ -340,7 +345,7 @@ export const CalendarWidgetTry = React.forwardRef<HTMLDivElement, CalendarTryPro
         case 'MONTHS':
           return (
             <MonthsCalendarView
-              date={viewDate}
+              date={finalViewDate}
               renderCell={renderMonthCell || defaultRenderMonthCell}
               onMouseLeave={handleAreaMouseLeave}
             />
@@ -349,7 +354,7 @@ export const CalendarWidgetTry = React.forwardRef<HTMLDivElement, CalendarTryPro
         default:
           return (
             <DateCalendarView
-              date={viewDate}
+              date={finalViewDate}
               renderCell={renderDateCell || defaultRenderDateCell}
               onMouseLeave={handleAreaMouseLeave}
             />

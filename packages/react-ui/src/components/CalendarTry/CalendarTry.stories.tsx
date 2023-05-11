@@ -37,6 +37,9 @@ export default {
     rangePicker: {
       control: { type: 'boolean' },
     },
+    doubleView: {
+      control: { type: 'boolean' },
+    },
     validator: {
       control: false,
     },
@@ -269,6 +272,7 @@ const Template1: ComponentStory<typeof CalendarTry> = (args) => {
     <ThemeProvider theme={swapBorder}>
       <div style={{ display: 'flex' }}>
         <CalendarTry
+          doubleView={args.doubleView}
           rangePicker={args.rangePicker}
           pickerType={args.pickerType}
           viewMode={viewMode1}
@@ -282,7 +286,7 @@ const Template1: ComponentStory<typeof CalendarTry> = (args) => {
           //disabledDate={filterDate}
           highlightSpecialDay={highlightSundays}
         />
-        <Separator />
+        {/*<Separator />
         <CalendarTry
           pickerType={args.pickerType}
           viewMode={viewMode2}
@@ -293,7 +297,7 @@ const Template1: ComponentStory<typeof CalendarTry> = (args) => {
           renderDateCell={customRenderDay}
           onViewDateChange={handleViewDateChange2}
           userLocale="en"
-        />
+        />*/}
       </div>
     </ThemeProvider>
   );
@@ -302,5 +306,6 @@ const Template1: ComponentStory<typeof CalendarTry> = (args) => {
 export const CalendarWidgetSimple = Template1.bind({});
 CalendarWidgetSimple.args = {
   rangePicker: true,
+  doubleView: true,
 };
 CalendarWidgetSimple.storyName = 'Simple.';
