@@ -45,6 +45,7 @@ export interface CalendarWidgetTryProps {
   pickerType?: PickerTypeMode;
   rangePicker?: boolean;
   viewDate?: Dayjs;
+  activeDate?: Dayjs;
   selected?: Dayjs;
   startDate?: Dayjs;
   endDate?: Dayjs;
@@ -55,6 +56,9 @@ export interface CalendarWidgetTryProps {
   renderYearCell?: (date: Dayjs) => React.ReactNode;
   validator?: DateValidator;
   onViewDateChange?: (date: Dayjs) => void;
+  onActiveDateChange: (date: Dayjs | undefined) => void;
+  onDateMouseEnter: (date: Dayjs, _: any) => void;
+  onDateMouseLeave: () => void;
   onSelectDate?: (date: Dayjs) => void;
   onSelectMonth?: (date: Dayjs) => void;
   onSelectYear?: (date: Dayjs) => void;
@@ -81,6 +85,7 @@ export const CalendarWidgetTry = React.forwardRef<HTMLDivElement, CalendarWidget
       pickerType = 'DATE_MONTH_YEAR',
       rangePicker = false,
       viewDate,
+      activeDate,
       selected,
       startDate,
       endDate,
@@ -98,6 +103,9 @@ export const CalendarWidgetTry = React.forwardRef<HTMLDivElement, CalendarWidget
       onSelectMonth,
       onSelectYear,
       onViewDateChange,
+      onActiveDateChange,
+      onDateMouseEnter,
+      onDateMouseLeave,
       locale,
     },
     ref,
@@ -131,11 +139,9 @@ export const CalendarWidgetTry = React.forwardRef<HTMLDivElement, CalendarWidget
     }
 
     const [innerViewDate, setInnerViewDate] = React.useState<Dayjs>(getInitialViewDate());
-    // активная дата, на которой сейчас ховер
-    const [activeDate, setActiveDate] = React.useState<Dayjs | undefined>(undefined);
-    const clearActiveDate = () => setActiveDate(undefined);
-
     const finalViewDate = viewDate ?? innerViewDate;
+
+    const clearActiveDate = () => onActiveDateChange(undefined);
 
     React.useEffect(() => {
       if (onViewDateChange) {
@@ -151,19 +157,9 @@ export const CalendarWidgetTry = React.forwardRef<HTMLDivElement, CalendarWidget
       }
     }, [currentLocale]);
 
-    const handleYearMouseEnter = (date: Dayjs, _: any) => {
-      setActiveDate(date);
-    };
-
-    const handleMonthMouseEnter = (date: Dayjs, _: any) => {
-      setActiveDate(date);
-    };
-
-    const handleDayMouseEnter = (date: Dayjs, _: any) => {
-      setActiveDate(date);
-    };
     const handleAreaMouseLeave = () => {
       clearActiveDate();
+      onDateMouseLeave();
     };
 
     const defaultIsHidden = (date: Dayjs) => {
@@ -225,7 +221,7 @@ export const CalendarWidgetTry = React.forwardRef<HTMLDivElement, CalendarWidget
           onSelectDate={onSelectDate}
           isHidden={isHiddenDate?.(date) || defaultIsHidden(date)}
           highlightSpecialDate={highlightSpecialDay}
-          onMouseEnter={handleDayMouseEnter}
+          onMouseEnter={onDateMouseEnter}
         />
       );
     };
@@ -240,7 +236,7 @@ export const CalendarWidgetTry = React.forwardRef<HTMLDivElement, CalendarWidget
           selected={!rangePicker ? selected : undefined}
           onSelectMonth={handleMonthClick}
           disabled={!!validator?.invalidMonth(date.month(), date.year())}
-          onMouseEnter={handleMonthMouseEnter}
+          onMouseEnter={onDateMouseEnter}
         />
       );
     };
@@ -255,7 +251,7 @@ export const CalendarWidgetTry = React.forwardRef<HTMLDivElement, CalendarWidget
           selected={!rangePicker ? selected : undefined}
           onSelectYear={handleYearClick}
           disabled={!!validator?.invalidYear(date.year())}
-          onMouseEnter={handleYearMouseEnter}
+          onMouseEnter={onDateMouseEnter}
         />
       );
     };

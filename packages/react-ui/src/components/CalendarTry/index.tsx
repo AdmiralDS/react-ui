@@ -21,7 +21,8 @@ const CalendarWrapper = styled.div`
   ${(props) => props.theme.shadow['Shadow 08']}
 `;
 
-export interface CalendarTryProps extends CalendarWidgetTryProps {
+export interface CalendarTryProps
+  extends Omit<CalendarWidgetTryProps, 'onActiveDateChange' | 'onDateMouseEnter' | 'onDateMouseLeave'> {
   doubleView?: boolean;
 }
 
@@ -40,10 +41,14 @@ const DoubleCalendarTry = React.forwardRef<HTMLDivElement, CalendarWidgetTryProp
       pickerType = 'DATE_MONTH_YEAR',
       viewMode,
       viewDate,
+      activeDate,
       selected,
       minDate,
       maxDate,
       onViewModeChange,
+      onActiveDateChange,
+      onDateMouseEnter,
+      onDateMouseLeave,
       ...props
     },
     ref,
@@ -96,6 +101,7 @@ const DoubleCalendarTry = React.forwardRef<HTMLDivElement, CalendarWidgetTryProp
     const getInitialViewDateRight = (): Dayjs => {
       return getViewDateRight(getInitialViewDateLeft());
     };
+
     const [viewDateLeft, setViewDateLeft] = React.useState<Dayjs>(getInitialViewDateLeft());
     const [viewDateRight, setViewDateRight] = React.useState<Dayjs>(getInitialViewDateRight());
 
@@ -136,17 +142,25 @@ const DoubleCalendarTry = React.forwardRef<HTMLDivElement, CalendarWidgetTryProp
         <CalendarWidgetTry
           {...calendarWidgetProps}
           viewDate={viewDateLeft}
+          activeDate={activeDate}
           onViewDateChange={handleViewDateLeftChange}
           viewMode={viewModeLeft}
           onViewModeChange={handleViewModeLeftChange}
+          onDateMouseEnter={onDateMouseEnter}
+          onDateMouseLeave={onDateMouseLeave}
+          onActiveDateChange={onActiveDateChange}
         />
         <CalendarWidgetTry
           {...calendarWidgetProps}
           ref={ref}
           viewDate={viewDateRight}
+          activeDate={activeDate}
           onViewDateChange={handleViewDateRightChange}
           viewMode={viewModeRight}
           onViewModeChange={handleViewModeRightChange}
+          onDateMouseEnter={onDateMouseEnter}
+          onDateMouseLeave={onDateMouseLeave}
+          onActiveDateChange={onActiveDateChange}
         />
       </CalendarWrapper>
     );
@@ -155,10 +169,37 @@ const DoubleCalendarTry = React.forwardRef<HTMLDivElement, CalendarWidgetTryProp
 
 export const CalendarTry = React.forwardRef<HTMLDivElement, CalendarTryProps>(
   ({ doubleView = false, rangePicker = false, ...props }, ref) => {
+    // активная дата, на которой сейчас ховер
+    const [activeDate, setActiveDate] = React.useState<Dayjs | undefined>(undefined);
+    const handleActiveDateChange = (date: Dayjs | undefined) => setActiveDate(date);
+    const clearActiveDate = () => setActiveDate(undefined);
+
+    const handleDateMouseEnter = (date: Dayjs, _: any) => {
+      setActiveDate(date);
+    };
+    const handleAreaMouseLeave = () => {
+      clearActiveDate();
+    };
     return doubleView && rangePicker ? (
-      <DoubleCalendarTry {...props} rangePicker={rangePicker} ref={ref} />
+      <DoubleCalendarTry
+        {...props}
+        activeDate={activeDate}
+        onActiveDateChange={handleActiveDateChange}
+        onDateMouseEnter={handleDateMouseEnter}
+        onDateMouseLeave={handleAreaMouseLeave}
+        rangePicker={rangePicker}
+        ref={ref}
+      />
     ) : (
-      <SingleCalendarTry {...props} rangePicker={rangePicker} ref={ref} />
+      <SingleCalendarTry
+        {...props}
+        activeDate={activeDate}
+        onActiveDateChange={handleActiveDateChange}
+        onDateMouseEnter={handleDateMouseEnter}
+        onDateMouseLeave={handleAreaMouseLeave}
+        rangePicker={rangePicker}
+        ref={ref}
+      />
     );
   },
 );
