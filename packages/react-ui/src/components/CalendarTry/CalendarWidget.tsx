@@ -39,7 +39,6 @@ export const CalendarWidgetWrapper = styled.div<{ viewMode: CalendarViewMode }>`
   ${typography['Body/Body 2 Long']}
   color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
   border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
-  ${(props) => props.theme.shadow['Shadow 08']}
 `;
 
 export interface CalendarTryProps {
@@ -75,7 +74,7 @@ export interface CalendarTryProps {
   };
 }
 
-export const CalendarTry = React.forwardRef<HTMLDivElement, CalendarTryProps>(
+export const CalendarWidgetTry = React.forwardRef<HTMLDivElement, CalendarTryProps>(
   (
     {
       viewMode = 'DATES',
