@@ -9,6 +9,8 @@ export interface RadioButtonProps extends React.InputHTMLAttributes<HTMLInputEle
   checked?: boolean;
   /** Отключение кнопки */
   disabled?: boolean;
+  /** Только для чтения */
+  readOnly?: boolean;
   /** Размер радиокнопки */
   dimension?: Dimension;
   /** Дополнительный текст (подсказка), который выводится нижней строкой */
@@ -18,12 +20,12 @@ export interface RadioButtonProps extends React.InputHTMLAttributes<HTMLInputEle
 }
 
 export const RadioButton = React.forwardRef<HTMLInputElement, RadioButtonProps>(
-  ({ children, disabled, error = false, dimension = 'm', extraText, className, ...props }, ref) => {
+  ({ children, disabled, readOnly = false, error = false, dimension = 'm', extraText, className, ...props }, ref) => {
     return (
-      <RadioButtonComponent disabled={disabled} className={className} dimension={dimension}>
+      <RadioButtonComponent disabled={disabled} readOnly={readOnly} className={className} dimension={dimension}>
         <InputContainer dimension={dimension}>
-          <Input ref={ref} type="radio" disabled={disabled} dimension={dimension} {...props} />
-          <Span disabled={disabled} dimension={dimension} error={error} />
+          <Input ref={ref} type="radio" disabled={disabled || readOnly} dimension={dimension} {...props} />
+          <Span disabled={disabled || readOnly} dimension={dimension} error={error} />
         </InputContainer>
         {children}
         {extraText && (

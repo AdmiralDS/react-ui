@@ -64,10 +64,16 @@ export default {
     disabled: {
       control: { type: 'boolean' },
     },
+    readOnly: {
+      control: { type: 'boolean' },
+    },
     checked: {
       control: { type: 'boolean' },
     },
     width: {
+      control: { type: 'text' },
+    },
+    extraText: {
       control: { type: 'text' },
     },
   },
@@ -86,12 +92,20 @@ const Template1: ComponentStory<typeof Toggle> = () => {
 const Template2: ComponentStory<typeof Toggle> = () => {
   return (
     <>
-      <Toggle checked readOnly>
+      <Toggle checked onChange={() => undefined}>
         Active
       </Toggle>
       <Separator />
-      <Toggle checked={false} readOnly>
+      <Toggle checked={false} onChange={() => undefined}>
         Not active
+      </Toggle>
+      <Separator />
+      <Toggle checked readOnly>
+        Active readonly
+      </Toggle>
+      <Separator />
+      <Toggle checked={false} readOnly>
+        Not active readonly
       </Toggle>
       <Separator />
       <Toggle checked disabled>
@@ -162,7 +176,9 @@ const Template5: ComponentStory<typeof Toggle> = () => {
 const Template6: ComponentStory<typeof Toggle> = ({
   dimension,
   disabled,
+  readOnly,
   width,
+  extraText,
   labelPosition,
   checked: argChecked,
 }: ToggleProps) => {
@@ -174,13 +190,22 @@ const Template6: ComponentStory<typeof Toggle> = ({
         onChange={(event) => setChecked(event.currentTarget.checked)}
         dimension={dimension}
         disabled={disabled}
+        readOnly={readOnly}
         width={width}
+        extraText={extraText}
         labelPosition={labelPosition}
       >
         Controlled component
       </Toggle>
       <Separator />
-      <Toggle dimension={dimension} disabled={disabled} width={width} labelPosition={labelPosition}>
+      <Toggle
+        dimension={dimension}
+        disabled={disabled}
+        readOnly={readOnly}
+        width={width}
+        extraText={extraText}
+        labelPosition={labelPosition}
+      >
         Uncontrolled component
       </Toggle>
     </>

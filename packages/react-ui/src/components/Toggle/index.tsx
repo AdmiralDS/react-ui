@@ -18,6 +18,8 @@ export interface ToggleProps extends InputHTMLAttributes<HTMLInputElement> {
   dimension?: Dimension;
   /** Отключение компонента */
   disabled?: boolean;
+  /** Только для чтения */
+  readOnly?: boolean;
   /** Ширина компонента. Применяется только в случае labelPosition == 'left'.
    * Рекомендуется использовать в мобильной версии компонента, указываю ширину равную всему экрану */
   width?: number | string;
@@ -137,21 +139,36 @@ const SliderWrapper = styled.div<{ dimension: Dimension }>`
   ${sizes}
 `;
 
-const Wrapper = styled.label<{ width?: number | string; disabled: boolean; labelPosition: LabelPosition }>`
+const Wrapper = styled.label<{
+  width?: number | string;
+  disabled: boolean;
+  readOnly: boolean;
+  labelPosition: LabelPosition;
+}>`
   display: flex;
   flex-direction: ${({ labelPosition }) => (labelPosition === 'right' ? 'row' : 'row-reverse')};
   align-items: flex-start;
   justify-content: space-between;
   position: relative;
   width: ${({ width }) => (width ? (typeof width === 'number' ? `${width}px` : width) : 'fit-content')};
-  cursor: ${({ disabled }) => (disabled ? 'default' : 'pointer')};
+  cursor: ${({ disabled, readOnly }) => (disabled || readOnly ? 'default' : 'pointer')};
   -webkit-tap-highlight-color: transparent;
   user-select: none;
 `;
 
 export const Toggle = React.forwardRef<HTMLInputElement, ToggleProps>(
   (
-    { dimension = 'm', labelPosition = 'right', disabled = false, width, extraText, className, children, ...props },
+    {
+      dimension = 'm',
+      labelPosition = 'right',
+      disabled = false,
+      readOnly = false,
+      width,
+      extraText,
+      className,
+      children,
+      ...props
+    },
     ref,
   ) => {
     return (
@@ -160,13 +177,14 @@ export const Toggle = React.forwardRef<HTMLInputElement, ToggleProps>(
         width={labelPosition === 'left' ? width : undefined}
         labelPosition={labelPosition}
         disabled={disabled}
+        readOnly={readOnly}
         role="switch"
         aria-checked={props.checked || props['aria-checked']}
       >
-        <Input ref={ref} type="checkbox" dimension={dimension} disabled={disabled} {...props} />
+        <Input ref={ref} type="checkbox" dimension={dimension} disabled={disabled || readOnly} {...props} />
         <SliderWrapper dimension={dimension}>
           <Hover dimension={dimension} />
-          <Slider dimension={dimension} checked={props.checked} disabled={disabled} aria-hidden />
+          <Slider dimension={dimension} checked={props.checked} disabled={disabled || readOnly} aria-hidden />
         </SliderWrapper>
         {children && (
           <Label dimension={dimension} disabled={disabled} position={labelPosition}>
