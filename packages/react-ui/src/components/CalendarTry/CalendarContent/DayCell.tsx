@@ -83,8 +83,8 @@ export const DayCell = ({
   const rangeSelectingStart = inSelectingRange && date.isSame(startDate, 'date');
   const rangeSelectingEnd = inSelectingRange && date.isSame(activeDate, 'date');
 
-  const weekStart = date.isSame(date.startOf('week'), 'date');
-  const weekEnd = date.isSame(date.endOf('week'), 'date');
+  const rowStart = date.isSame(date.startOf('week'), 'date') || date.isSame(date.startOf('month'), 'date');
+  const rowEnd = date.isSame(date.endOf('week'), 'date') || date.isSame(date.endOf('month'), 'date');
   const start = rangeStart || rangeSelectingStart;
   const end = rangeEnd || rangeSelectingEnd;
 
@@ -104,8 +104,8 @@ export const DayCell = ({
       disabled={disabled}
       inRange={inRange}
       inSelectingRange={inSelectingRange}
-      isRowStart={weekStart}
-      isRowEnd={weekEnd}
+      isRowStart={rowStart}
+      isRowEnd={rowEnd}
       isRangeStart={start}
       isRangeEnd={end}
       onClick={handleClick}
