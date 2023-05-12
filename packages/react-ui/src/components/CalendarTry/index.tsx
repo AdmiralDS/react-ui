@@ -136,6 +136,23 @@ const DoubleCalendarTry = React.forwardRef<HTMLDivElement, CalendarWidgetTryProp
 
     const handleViewModeLeftChange = (viewMode: CalendarViewMode) => setViewModeLeft(viewMode);
     const handleViewModeRightChange = (viewMode: CalendarViewMode) => setViewModeRight(viewMode);
+    React.useEffect(() => {
+      switch (pickerType) {
+        case 'DATE_MONTH_YEAR':
+          setViewModeLeft('DATES');
+          setViewModeRight('DATES');
+          break;
+        case 'MONTH_YEAR':
+          setViewModeLeft('MONTHS');
+          setViewModeRight('MONTHS');
+          break;
+        case 'YEAR':
+          setViewModeLeft('YEARS');
+          setViewModeRight('YEARS');
+          break;
+      }
+      //resetDateStates1();
+    }, [pickerType]);
 
     return (
       <CalendarWrapper ref={ref}>
@@ -152,7 +169,6 @@ const DoubleCalendarTry = React.forwardRef<HTMLDivElement, CalendarWidgetTryProp
         />
         <CalendarWidgetTry
           {...calendarWidgetProps}
-          ref={ref}
           viewDate={viewDateRight}
           activeDate={activeDate}
           onViewDateChange={handleViewDateRightChange}
