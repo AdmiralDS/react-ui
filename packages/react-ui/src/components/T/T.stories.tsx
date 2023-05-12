@@ -152,6 +152,8 @@ const Template1: ComponentStory<typeof T> = (args) => {
       <CustomParagraph font="Header/H5" as="p">
         Это параграф со стилем Header/H5 и цветом шрифта Tertiary.
       </CustomParagraph>
+
+      <T font='Header/H3' as="h3">Выбор конфигурации</T>
     </>
   );
 };
@@ -174,7 +176,7 @@ const Template: ComponentStory<typeof T> = () => {
         <tbody>
           {NEW_FONTS.map((item: any, index: number) => {
             const text = `
-            import { T, typography } from '@vtb/ui-kit3';
+            import { T, typography } from '@admiral-ds/react-ui';
             import styled from 'styled-components';
 
             const Paragraph = styled.p\`
@@ -236,7 +238,7 @@ const Template: ComponentStory<typeof T> = () => {
         <tbody>
           {FONTS.map((item: any, index: number) => {
             const text = `
-            import { T, typography } from '@vtb/ui-kit3';
+            import { T, typography } from '@admiral-ds/react-ui';
             import styled from 'styled-components';
 
             const Paragraph = styled.p\`
