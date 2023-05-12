@@ -4,7 +4,7 @@ import dayjs from 'dayjs';
 import 'dayjs/locale/ru';
 import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import styled, { ThemeContext } from 'styled-components';
-import { LIGHT_THEME, mediumGroupBorderRadius } from '#src/components/themes';
+import { LIGHT_THEME } from '#src/components/themes';
 import { typography } from '#src/components/Typography';
 import { DayCell } from '#src/components/CalendarTry/CalendarContent/DayCell';
 import { Panel } from '#src/components/CalendarTry/Panel/Panel';
