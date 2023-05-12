@@ -19,7 +19,7 @@ import { DateCalendarView } from '#src/components/CalendarTry/CalendarContent/Da
 
 const CALENDAR_WIDTH = 284;
 const YEARS_VIEW_PADDING = '20px 12px 16px';
-const MONTHS_VIEW_PADDING = '20px 16px 4px';
+const MONTHS_VIEW_PADDING = '20px 12px 4px';
 const DAYS_VIEW_PADDING = '20px 12px 12px';
 
 export const CalendarWidgetWrapper = styled.div<{ viewMode: CalendarViewMode }>`
