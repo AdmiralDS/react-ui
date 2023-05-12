@@ -115,7 +115,7 @@ const DoubleCalendarTry = React.forwardRef<HTMLDivElement, CalendarWidgetTryProp
     }, [viewDateLeft]);
 
     React.useEffect(() => {
-      if (viewDateLeft.isSameOrBefore(viewDateRight, 'date')) {
+      if (viewDateLeft.isSameOrAfter(viewDateRight, 'date')) {
         setViewDateLeft(getViewDateLeft(viewDateRight));
       }
     }, [viewDateRight]);
