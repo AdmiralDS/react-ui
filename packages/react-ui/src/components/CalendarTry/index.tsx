@@ -82,29 +82,29 @@ const DoubleCalendarTry = React.forwardRef<HTMLDivElement, CalendarWidgetTryProp
       const rangeRight = yearsRange(dateRight, DEFAULT_YEAR_COUNT);
       return rangeLeft.start - rangeRight.start;
     };
-    const checkViewDateLeft = (dateRight: Dayjs) => {
+    const dateLeftIsSameOrAfter = (dateLeft: Dayjs, dateRight: Dayjs) => {
       switch (pickerType) {
         case 'YEAR':
-          return compareYearsRange(viewDateLeft, dateRight) >= 0;
+          return compareYearsRange(dateLeft, dateRight) >= 0;
         case 'MONTH_YEAR':
-          return viewDateLeft.isSameOrAfter(viewDateRight, 'year');
+          return dateLeft.isSameOrAfter(dateRight, 'year');
         case 'DATE_MONTH_YEAR':
         default:
-          return viewDateLeft.isSameOrAfter(viewDateRight, 'date');
+          return dateLeft.isSameOrAfter(dateRight, 'date');
       }
     };
-    const checkViewDateRight = (dateLeft: Dayjs) => {
+    const dateRightIsSameOrBefore = (dateLeft: Dayjs, dateRight: Dayjs) => {
       switch (pickerType) {
         case 'YEAR':
-          return compareYearsRange(dateLeft, viewDateRight) <= 0;
+          return compareYearsRange(dateLeft, dateRight) <= 0;
         case 'MONTH_YEAR':
-          return viewDateRight.isSameOrBefore(dateLeft, 'year');
+          return dateRight.isSameOrBefore(dateLeft, 'year');
         case 'DATE_MONTH_YEAR':
         default:
-          return viewDateRight.isSameOrBefore(dateLeft, 'date');
+          return dateRight.isSameOrBefore(dateLeft, 'date');
       }
     };
-    const getViewDateLeft = (dateRight: Dayjs) => {
+    const decreaseDate = (dateRight: Dayjs) => {
       switch (pickerType) {
         case 'YEAR':
           return dateRight.subtract(DEFAULT_YEAR_COUNT, 'year');
@@ -115,7 +115,7 @@ const DoubleCalendarTry = React.forwardRef<HTMLDivElement, CalendarWidgetTryProp
           return dateRight.subtract(1, 'month');
       }
     };
-    const getViewDateRight = (dateLeft: Dayjs) => {
+    const increaseDate = (dateLeft: Dayjs) => {
       switch (pickerType) {
         case 'YEAR':
           return dateLeft.add(DEFAULT_YEAR_COUNT, 'year');
@@ -127,28 +127,24 @@ const DoubleCalendarTry = React.forwardRef<HTMLDivElement, CalendarWidgetTryProp
       }
     };
     const getInitialViewDateRight = (): Dayjs => {
-      return getViewDateRight(getInitialViewDateLeft());
+      return increaseDate(getInitialViewDateLeft());
     };
 
     const [viewDateLeft, setViewDateLeft] = React.useState<Dayjs>(getInitialViewDateLeft());
     const [viewDateRight, setViewDateRight] = React.useState<Dayjs>(getInitialViewDateRight());
 
-    const handleViewDateLeftChange = (date: Dayjs) => {
-      setViewDateLeft(date);
-    };
-    const handleViewDateRightChange = (date: Dayjs) => {
-      setViewDateRight(date);
-    };
+    const handleViewDateLeftChange = (date: Dayjs) => setViewDateLeft(date);
+    const handleViewDateRightChange = (date: Dayjs) => setViewDateRight(date);
 
     React.useEffect(() => {
-      if (checkViewDateRight(viewDateLeft)) {
-        setViewDateRight(getViewDateRight(viewDateLeft));
+      if (dateRightIsSameOrBefore(viewDateLeft, viewDateRight)) {
+        setViewDateRight(increaseDate(viewDateLeft));
       }
     }, [viewDateLeft]);
 
     React.useEffect(() => {
-      if (checkViewDateLeft(viewDateRight)) {
-        setViewDateLeft(getViewDateLeft(viewDateRight));
+      if (dateLeftIsSameOrAfter(viewDateLeft, viewDateRight)) {
+        setViewDateLeft(decreaseDate(viewDateRight));
       }
     }, [viewDateRight]);
 
