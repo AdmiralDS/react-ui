@@ -86,37 +86,26 @@ const Template1: ComponentStory<typeof CalendarTry> = (args) => {
   }
 
   const [viewMode1, setViewMode1] = React.useState<CalendarViewMode>('DATES');
-  const [viewMode2, setViewMode2] = React.useState<CalendarViewMode>('DATES');
   const [selected1, setSelected1] = React.useState<Dayjs>(dayjs());
   const [startDate1, setStartDate1] = React.useState<Dayjs | undefined>(undefined);
   const [endDate1, setEndDate1] = React.useState<Dayjs | undefined>(undefined);
-  const [selected2, setSelected2] = React.useState<Dayjs>(dayjs());
-  const [viewDate2, setViewDate2] = React.useState<Dayjs>(selected2);
-  const [activeDate2, setActiveDate2] = React.useState<Dayjs | undefined>(undefined);
 
   const resetDateStates1 = () => {
     setSelected1(dayjs());
     setStartDate1(undefined);
     setEndDate1(undefined);
   };
-  const resetDateStates2 = () => {
-    setSelected2(dayjs());
-    //setStartDate2(undefined);
-    //setEndDate2(undefined);
-  };
+
   React.useEffect(() => {
     switch (args.pickerType) {
       case 'DATE_MONTH_YEAR':
         setViewMode1('DATES');
-        setViewMode2('DATES');
         break;
       case 'MONTH_YEAR':
         setViewMode1('MONTHS');
-        setViewMode2('MONTHS');
         break;
       case 'YEAR':
         setViewMode1('YEARS');
-        setViewMode2('YEARS');
         break;
     }
     resetDateStates1();
@@ -196,7 +185,69 @@ const Template1: ComponentStory<typeof CalendarTry> = (args) => {
 
   const handleViewModeChange1 = (viewMode: CalendarViewMode) => setViewMode1(viewMode);
 
-  //<editor-fold desc="custom variant">
+  return (
+    <ThemeProvider theme={swapBorder}>
+      <div style={{ display: 'flex' }}>
+        <CalendarTry
+          doubleView={args.doubleView}
+          rangePicker={args.rangePicker}
+          pickerType={args.pickerType}
+          viewMode={viewMode1}
+          onViewModeChange={handleViewModeChange1}
+          selected={selected1}
+          startDate={startDate1}
+          endDate={endDate1}
+          onSelectDate={handleDayClick1}
+          onSelectMonth={handleMonthClick1}
+          onSelectYear={args.rangePicker ? handleYearRangeClick1 : handleYearClick1}
+          //disabledDate={filterDate}
+          highlightSpecialDay={highlightSundays}
+        />
+      </div>
+    </ThemeProvider>
+  );
+};
+
+const Template2: ComponentStory<typeof CalendarTry> = (args) => {
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
+    return theme;
+  }
+
+  const [viewMode2, setViewMode2] = React.useState<CalendarViewMode>('DATES');
+  const [selected2, setSelected2] = React.useState<Dayjs>(dayjs());
+  const [viewDate2, setViewDate2] = React.useState<Dayjs>(selected2);
+  const [activeDate2, setActiveDate2] = React.useState<Dayjs | undefined>(undefined);
+
+  const resetDateStates2 = () => {
+    setSelected2(dayjs());
+    //setStartDate2(undefined);
+    //setEndDate2(undefined);
+  };
+  React.useEffect(() => {
+    switch (args.pickerType) {
+      case 'DATE_MONTH_YEAR':
+        setViewMode2('DATES');
+        break;
+      case 'MONTH_YEAR':
+        setViewMode2('MONTHS');
+        break;
+      case 'YEAR':
+        setViewMode2('YEARS');
+        break;
+    }
+    //resetDateStates2();
+  }, [args.pickerType]);
+
+  React.useEffect(() => {
+    //resetDateStates2();
+  }, [args.rangePicker]);
+
+  const filterDate = (date: Dayjs) => {
+    return date.date() < 7;
+    //return date.isSame(dayjs(), 'date');
+  };
+
   const handleDayClick2 = (date: Dayjs) => {
     console.log(`click on ${date.format('DD MMM YYYY')}`);
     setSelected2(date);
@@ -266,7 +317,6 @@ const Template1: ComponentStory<typeof CalendarTry> = (args) => {
   };
 
   const handleViewModeChange2 = (viewMode: CalendarViewMode) => setViewMode2(viewMode);
-  //</editor-fold>
 
   return (
     <ThemeProvider theme={swapBorder}>
@@ -274,20 +324,6 @@ const Template1: ComponentStory<typeof CalendarTry> = (args) => {
         <CalendarTry
           doubleView={args.doubleView}
           rangePicker={args.rangePicker}
-          pickerType={args.pickerType}
-          viewMode={viewMode1}
-          onViewModeChange={handleViewModeChange1}
-          selected={selected1}
-          startDate={startDate1}
-          endDate={endDate1}
-          onSelectDate={handleDayClick1}
-          onSelectMonth={handleMonthClick1}
-          onSelectYear={args.rangePicker ? handleYearRangeClick1 : handleYearClick1}
-          //disabledDate={filterDate}
-          highlightSpecialDay={highlightSundays}
-        />
-        {/*<Separator />
-        <CalendarTry
           pickerType={args.pickerType}
           viewMode={viewMode2}
           onViewModeChange={handleViewModeChange2}
@@ -297,7 +333,7 @@ const Template1: ComponentStory<typeof CalendarTry> = (args) => {
           renderDateCell={customRenderDay}
           onViewDateChange={handleViewDateChange2}
           userLocale="en"
-        />*/}
+        />
       </div>
     </ThemeProvider>
   );
@@ -309,3 +345,10 @@ CalendarWidgetSimple.args = {
   doubleView: true,
 };
 CalendarWidgetSimple.storyName = 'Simple.';
+
+export const CalendarWidgetCustom = Template2.bind({});
+CalendarWidgetCustom.args = {
+  //rangePicker: true,
+  //doubleView: true,
+};
+CalendarWidgetCustom.storyName = 'Custom.';
