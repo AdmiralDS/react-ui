@@ -8,6 +8,7 @@ import { GroupRow } from '#src/components/Table/Row/GroupRow';
 import { RegularRow } from '#src/components/Table/Row/RegularRow';
 import { RowWrapper } from '#src/components/Table/Row/RowWrapper';
 import type { FlattenInterpolation, ThemeProps, DefaultTheme } from 'styled-components';
+import ReactDOM from 'react-dom';
 
 import { HeaderCellComponent } from './HeaderCell';
 import { dragObserver } from './dragObserver';
@@ -27,6 +28,7 @@ import {
   NormalWrapper,
   TableContainer,
   HiddenHeader,
+  Mirror,
 } from './style';
 import { VirtualBody } from './VirtualBody';
 import type { CSSProperties } from 'react';
@@ -329,6 +331,7 @@ export const Table: React.FC<TableProps> = ({
   const scrollBodyRef = React.useRef<HTMLDivElement>(null);
   const stickyColumnsWrapperRef = React.useRef<HTMLDivElement>(null);
   const normalColumnsWrapperRef = React.useRef<HTMLDivElement>(null);
+  const mirrorRef = React.useRef<HTMLDivElement>(null);
 
   const groupToRowsMap = rowList.reduce<Group>((acc: Group, row) => {
     if (typeof row.groupRows !== 'undefined') {
@@ -805,6 +808,7 @@ export const Table: React.FC<TableProps> = ({
       const observer = dragObserver(
         [normalCols],
         {
+          mirrorRef,
           direction: 'horizontal',
           invalid: (el: any) => {
             //например чекбоксы или стрелки нельзя перетаскивать
@@ -861,6 +865,7 @@ export const Table: React.FC<TableProps> = ({
         </Header>
       </HeaderWrapper>
       {renderBody()}
+      {onColumnDrag && ReactDOM.createPortal(<Mirror dimension={dimension} ref={mirrorRef} />, document.body)}
     </TableContainer>
   );
 };

@@ -71,6 +71,7 @@ export const HeaderCellComponent = ({
       style={{ width: colWidth, minWidth: colWidth }}
       className="th"
       data-th-column={name}
+      data-th-title={title}
       ref={cellRef}
     >
       <HeaderCellContent cellAlign={cellAlign}>

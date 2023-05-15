@@ -14,6 +14,7 @@ function removeEventEasy(el: HTMLElement, type: any, fn: any, capturing?: boolea
 }
 
 type Options = {
+  mirrorRef: any;
   accepts?: (el: any, target: any, source: any, sibling: any) => boolean;
   invalid?: (el: any, handle: any) => boolean;
   mirrorContainer?: HTMLElement;
@@ -78,7 +79,6 @@ export function dragObserver(initialContainers: HTMLElement[], options: Options,
 
   function movements(remove?: boolean) {
     const op = remove ? 'remove' : 'add';
-    crossvent[op](document.documentElement, 'selectstart', preventGrabbed); // IE8
     crossvent[op](document.documentElement, 'click', preventGrabbed);
   }
 
@@ -113,17 +113,9 @@ export function dragObserver(initialContainers: HTMLElement[], options: Options,
       return;
     }
 
-    // truthy check fixes #239, equality fixes #207, fixes #501
     // это проверка на то, был ли сейчас просто клик или движение мыши
-    if (
-      typeof e.clientX !== 'undefined' &&
-      Math.abs(e.clientX - _moveX) <= 0 &&
-      typeof e.clientY !== 'undefined' &&
-      Math.abs(e.clientY - _moveY) <= 0
-    ) {
-      return;
-    }
-    // if ((event.movementX == 0) && (event.movementY == 0)) return;
+    // если вообще есть такая проблема ??
+    if (e.movementX == 0 && e.movementY == 0) return;
 
     const grabbed = _grabbed; // call to end() unsets _grabbed
     eventualMovements(true);
@@ -229,8 +221,6 @@ export function dragObserver(initialContainers: HTMLElement[], options: Options,
       rmClass(_item, 'gu-transit');
     }
     drake.dragging = false;
-    if (_lastDropTarget) {
-    }
     _source = _item = _initialSibling = _currentSibling = _lastDropTarget = null;
   }
 
@@ -282,8 +272,6 @@ export function dragObserver(initialContainers: HTMLElement[], options: Options,
 
     _mirror.style.left = x + 'px';
     _mirror.style.top = y + 'px';
-    _mirror.style.position = 'fixed';
-    _mirror.style.background = 'white';
 
     const elementBehindCursor = getElementBehindPoint(_mirror, clientX, clientY);
     const dropTarget = findDropTarget(elementBehindCursor, clientX, clientY);
@@ -309,25 +297,23 @@ export function dragObserver(initialContainers: HTMLElement[], options: Options,
   }
 
   function renderMirrorImage() {
-    if (_mirror) {
+    if (_mirror && !o.mirrorRef.current) {
       return;
     }
-    const rect = _item.getBoundingClientRect();
-    _mirror = _item.cloneNode(true);
-    _mirror.style.width = rect.width + 'px';
-    _mirror.style.height = rect.height + 'px';
-    rmClass(_mirror, 'gu-transit');
-    addClass(_mirror, 'gu-mirror');
-    o.mirrorContainer.appendChild(_mirror);
+    const title = _item.dataset.thTitle;
+    o.mirrorRef.current.innerHTML = title;
+    o.mirrorRef.current.style.visibility = 'visible';
+    _mirror = o.mirrorRef.current;
+
     touchy(document.documentElement, 'add', 'mousemove', drag);
     o.mirrorContainer.style.userSelect = 'none';
   }
 
   function removeMirrorImage() {
-    if (_mirror) {
+    if (_mirror && o.mirrorRef.current) {
       o.mirrorContainer.style.userSelect = 'auto';
+      o.mirrorRef.current.style.visibility = 'hidden';
       touchy(document.documentElement, 'remove', 'mousemove', drag);
-      getParent(_mirror).removeChild(_mirror);
       _mirror = null;
     }
   }
@@ -419,7 +405,9 @@ function getParent(el: any) {
   return el.parentNode === document ? null : el.parentNode;
 }
 
+// вернет или соседний элемент, или если элемент сам по себе последний, то вернет null
 function nextEl(el: any) {
+  // return el.nextElementSibling;
   return el.nextElementSibling || manually();
   function manually() {
     let sibling: any = el;

@@ -113,10 +113,6 @@ export const Header = styled.div<{ dimension: TableProps['dimension'] }>`
   & > * {
     border-bottom: 1px solid ${({ theme }) => theme.color['Neutral/Neutral 20']};
   }
-
-  .gu-transit {
-    opacity: 0.5;
-  }
 `;
 
 export const ScrollTableBody = styled.div`
@@ -429,4 +425,12 @@ export const HiddenHeader = styled.div`
   visibility: hidden;
   display: flex;
   overflow: hidden;
+`;
+
+export const Mirror = styled(HeaderCell)`
+  position: fixed;
+  z-index: 6;
+  visibility: hidden;
+  ${({ theme }) => theme.shadow['Shadow 08']}
+  background: ${({ theme }) => theme.color['Neutral/Neutral 00']};
 `;
