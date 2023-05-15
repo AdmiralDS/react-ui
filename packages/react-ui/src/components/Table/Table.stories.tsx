@@ -143,8 +143,14 @@ const Template: ComponentStory<typeof Table> = ({ columnList, ...args }) => {
     setCols(newCols);
   };
 
-  const handleColumnDrag = (columns: any) => {
-    setCols(columns);
+  const handleColumnDrag = (columnName: string, nextColumn: string | null) => {
+    const cols = [...columnList];
+    const movedIndex = cols.findIndex((col) => col.name === columnName);
+    const movedColumn = cols.splice(movedIndex, 1)[0];
+    const beforeIndex = nextColumn ? cols.findIndex((col) => col.name === nextColumn) : cols.length;
+    cols.splice(beforeIndex, 0, movedColumn);
+
+    setCols(cols);
   };
 
   return <Table {...args} columnList={cols} onColumnResize={handleResize} onColumnDrag={handleColumnDrag} />;

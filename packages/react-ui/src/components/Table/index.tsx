@@ -266,7 +266,7 @@ export interface TableProps extends React.HTMLAttributes<HTMLDivElement> {
     /** Сообщение, отображаемое при отсутствии совпадений в строках после применения фильтра */
     emptyMessage?: React.ReactNode;
   };
-  onColumnDrag?: (newColumns: Column[]) => void;
+  onColumnDrag?: (columnName: string, nextColumnName: string | null) => void;
 }
 
 type GroupInfo = {
@@ -793,14 +793,7 @@ export const Table: React.FC<TableProps> = ({
 
     function handleDrop(item: any, before: any) {
       if (item?.dataset?.thColumn) {
-        const cols = [...columnList];
-        const movedIndex = cols.findIndex((col) => col.name === item?.dataset?.thColumn);
-        const movedColumn = cols.splice(movedIndex, 1)[0];
-        const beforeIndex = before?.dataset?.thColumn
-          ? cols.findIndex((col) => col.name === before?.dataset?.thColumn)
-          : cols.length;
-        cols.splice(beforeIndex, 0, movedColumn);
-        onColumnDrag?.(cols);
+        onColumnDrag?.(item?.dataset?.thColumn, before?.dataset?.thColumn ?? null);
       }
     }
 
@@ -815,9 +808,11 @@ export const Table: React.FC<TableProps> = ({
             return el.dataset.draggable == 'false';
           },
           accepts: (el: any, target: any, source: any, sibling: any) => {
+            // элемент можно перемещать только в рамках своего контейнера
+            if (target !== source) return false;
             // нельзя вставить колонку перед колонкой с чекбоксом или стрелкой
             if (sibling?.dataset.droppable == 'false') return false;
-            return true; // elements can be dropped in any of the `containers` by default
+            return true;
           },
         },
         handleDrop,
@@ -827,7 +822,7 @@ export const Table: React.FC<TableProps> = ({
         observer.unobserve();
       };
     }
-  }, [columnList]);
+  }, []);
 
   return (
     <TableContainer ref={tableRef} data-shadow={false} {...props} className={`table ${props.className || ''}`}>
