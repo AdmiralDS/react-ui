@@ -151,9 +151,7 @@ export const CalendarWidgetTry = React.forwardRef<HTMLDivElement, CalendarWidget
 
     React.useEffect(() => {
       if (currentLocale) {
-        setInnerViewDate((date) => {
-          return date.locale(currentLocale);
-        });
+        setInnerViewDate(finalViewDate.locale(currentLocale));
       }
     }, [currentLocale]);
 
@@ -166,8 +164,8 @@ export const CalendarWidgetTry = React.forwardRef<HTMLDivElement, CalendarWidget
       return !date.isSame(finalViewDate, 'month');
     };
 
-    const changeYear = (year: number) => setInnerViewDate((date) => date.year(year));
-    const changeMonth = (month: number) => setInnerViewDate((date) => date.month(month));
+    const changeYear = (year: number) => setInnerViewDate(finalViewDate.year(year));
+    const changeMonth = (month: number) => setInnerViewDate(finalViewDate.month(month));
 
     const handleYearClick = (date: Dayjs) => {
       changeYear(date.year());
@@ -256,33 +254,13 @@ export const CalendarWidgetTry = React.forwardRef<HTMLDivElement, CalendarWidget
       );
     };
 
-    const increaseMonth = () =>
-      setInnerViewDate((date) => {
-        const increase = date.add(1, 'month');
-        //onDateIncreaseDecrease && onDateIncreaseDecrease(increase);
-        return increase;
-      });
-    const decreaseMonth = () =>
-      setInnerViewDate((date) => {
-        const decrease = date.subtract(1, 'month');
-        //onDateIncreaseDecrease && onDateIncreaseDecrease(decrease);
-        return decrease;
-      });
+    const increaseMonth = () => setInnerViewDate(finalViewDate.add(1, 'month'));
+    const decreaseMonth = () => setInnerViewDate(finalViewDate.subtract(1, 'month'));
 
     const increaseYear = () =>
-      setInnerViewDate((date) => {
-        const increase = date.add(viewMode === 'YEARS' ? DEFAULT_YEAR_COUNT : 1, 'year');
-        console.log(increase.format('DD-MM-YYYY'));
-        /*onDateIncreaseDecrease && onDateIncreaseDecrease(increase);*/
-        return increase;
-      });
+      setInnerViewDate(finalViewDate.add(viewMode === 'YEARS' ? DEFAULT_YEAR_COUNT : 1, 'year'));
     const decreaseYear = () =>
-      setInnerViewDate((date) => {
-        const decrease = date.subtract(viewMode === 'YEARS' ? DEFAULT_YEAR_COUNT : 1, 'year');
-        console.log(decrease.format('DD-MM-YYYY'));
-        /*onDateIncreaseDecrease && onDateIncreaseDecrease(decrease);*/
-        return decrease;
-      });
+      setInnerViewDate(finalViewDate.subtract(viewMode === 'YEARS' ? DEFAULT_YEAR_COUNT : 1, 'year'));
 
     const handleYearsViewShow = () => {
       onViewModeChange('YEARS');
