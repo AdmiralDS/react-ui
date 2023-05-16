@@ -217,7 +217,7 @@ const Template4: ComponentStory<typeof Hint> = ({ anchorId, ...args }) => {
         renderContent={() => (
           <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
             {text}
-            <Separator height={8} />
+            <Separator height={4} />
             <TextButton appearance="primary" dimension="s" text="Text Button" />
           </div>
         )}
