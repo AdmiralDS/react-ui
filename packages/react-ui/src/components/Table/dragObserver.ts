@@ -1,5 +1,3 @@
-import { addClass, rmClass } from './classes';
-
 const crossvent = {
   add: addEventEasy,
   remove: removeEventEasy,
@@ -27,30 +25,19 @@ export function dragObserver(initialContainers: HTMLElement[], options: Options,
   let _item: any; // item being dragged
   let _offsetX: any; // reference x
   let _offsetY: any; // reference y
-  let _moveX: any; // reference move x
-  let _moveY: any; // reference move y
   let _initialSibling: any; // reference sibling when grabbed
   let _currentSibling: any; // reference sibling now
   let _lastDropTarget: any = null; // last container item was over
   let _grabbed: any; // holds mousedown context until first mousemove
 
-  const o: any = options || {};
-  if (typeof o.accepts === 'undefined') {
-    o.accepts = always;
-  }
-  o.containers = initialContainers || [];
-  if (typeof o.direction === 'undefined') {
-    o.direction = 'vertical';
-  }
-  if (typeof o.mirrorContainer === 'undefined') {
-    o.mirrorContainer = document.body;
-  }
-  if (typeof o.invalid === 'undefined') {
-    o.invalid = invalidTarget;
-    function invalidTarget() {
-      return false;
-    }
-  }
+  const o: any = {
+    ...options,
+    accepts: options.accepts ?? always,
+    direction: options.direction ?? 'horizontal',
+    mirrorContainer: options.mirrorContainer ?? document.body,
+    invalid: options.invalid ?? invalidTarget,
+    containers: [...initialContainers],
+  };
 
   const drake = {
     containers: o.containers,
@@ -94,9 +81,6 @@ export function dragObserver(initialContainers: HTMLElement[], options: Options,
   }
 
   function grab(e: any) {
-    _moveX = e.clientX;
-    _moveY = e.clientY;
-
     const context = canStart(e.target);
     if (!context) {
       return;
@@ -124,10 +108,11 @@ export function dragObserver(initialContainers: HTMLElement[], options: Options,
     start(grabbed);
 
     const offset = getOffset(_item);
+    // расстояние между левым краем элемента и позицией курсора
     _offsetX = getCoord('pageX', e) - offset.left;
     _offsetY = getCoord('pageY', e) - offset.top;
 
-    addClass(_item, 'gu-transit');
+    _item.dataset.dragover = 'true';
     renderMirrorImage();
     drag(e);
   }
@@ -166,7 +151,7 @@ export function dragObserver(initialContainers: HTMLElement[], options: Options,
   function start(context: any) {
     _source = context.source;
     _item = context.item;
-    _initialSibling = _currentSibling = nextEl(context.item);
+    _initialSibling = _currentSibling = context.item.nextElementSibling;
 
     drake.dragging = true;
   }
@@ -218,7 +203,7 @@ export function dragObserver(initialContainers: HTMLElement[], options: Options,
     ungrab();
     removeMirrorImage();
     if (_item) {
-      rmClass(_item, 'gu-transit');
+      delete _item.dataset.dragover;
     }
     drake.dragging = false;
     _source = _item = _initialSibling = _currentSibling = _lastDropTarget = null;
@@ -231,7 +216,7 @@ export function dragObserver(initialContainers: HTMLElement[], options: Options,
     } else if (_mirror) {
       sibling = _currentSibling;
     } else {
-      sibling = nextEl(_item);
+      sibling = _item.nextElementSibling;
     }
     return target === _source && sibling === _initialSibling;
   }
@@ -289,7 +274,7 @@ export function dragObserver(initialContainers: HTMLElement[], options: Options,
       return;
     }
 
-    if ((reference === null && changed) || (reference !== _item && reference !== nextEl(_item))) {
+    if ((reference === null && changed) || (reference !== _item && reference !== _item.nextElementSibling)) {
       _currentSibling = reference;
       // dropTarget.insertBefore(_item, reference);
       onDrop?.(_item, reference);
@@ -297,6 +282,7 @@ export function dragObserver(initialContainers: HTMLElement[], options: Options,
   }
 
   function renderMirrorImage() {
+    // нет реализации для direction vertical
     if (_mirror && !o.mirrorRef.current) {
       return;
     }
@@ -318,6 +304,7 @@ export function dragObserver(initialContainers: HTMLElement[], options: Options,
     }
   }
 
+  // находит дочерний элемент dropTarget, содержащий в себе target
   function getImmediateChild(dropTarget: any, target: any) {
     let immediate = target;
     while (immediate !== dropTarget && getParent(immediate) !== dropTarget) {
@@ -363,7 +350,7 @@ export function dragObserver(initialContainers: HTMLElement[], options: Options,
     }
 
     function resolve(after: boolean) {
-      return after ? nextEl(target) : target;
+      return after ? target.nextElementSibling : target;
     }
   }
 }
@@ -379,7 +366,7 @@ function touchy(el: HTMLElement, op: 'remove' | 'add', type: 'mouseup' | 'moused
   crossvent[op](el, type, fn);
 }
 
-// получаем координаты относительно document, а не viewport
+// получаем координаты элемента в контексте документа
 function getOffset(el: HTMLElement) {
   const rect = el.getBoundingClientRect();
   return {
@@ -401,30 +388,18 @@ function getElementBehindPoint(point: HTMLElement, x: number, y: number) {
 function always() {
   return true;
 }
+function invalidTarget() {
+  return false;
+}
 function getParent(el: any) {
   return el.parentNode === document ? null : el.parentNode;
 }
 
-// вернет или соседний элемент, или если элемент сам по себе последний, то вернет null
-function nextEl(el: any) {
-  // return el.nextElementSibling;
-  return el.nextElementSibling || manually();
-  function manually() {
-    let sibling: any = el;
-    do {
-      sibling = sibling.nextSibling;
-    } while (sibling && sibling.nodeType !== 1);
-    return sibling;
-  }
-}
-
 function getEventHost(e: any) {
-  // on touchend event, we have to use `e.changedTouches`
-  // see http://stackoverflow.com/questions/7192563/touchend-event-properties
-  // see https://github.com/bevacqua/dragula/issues/34
   if (e.targetTouches && e.targetTouches.length) {
     return e.targetTouches[0];
   }
+  // on touchend event, we have to use `e.changedTouches`
   if (e.changedTouches && e.changedTouches.length) {
     return e.changedTouches[0];
   }
@@ -433,12 +408,5 @@ function getEventHost(e: any) {
 
 function getCoord(coord: 'pageX' | 'pageY' | 'clientX' | 'clientY', e: any) {
   const host = getEventHost(e);
-  const missMap: any = {
-    pageX: 'clientX', // IE8
-    pageY: 'clientY', // IE8
-  };
-  if (coord in missMap && !(coord in host) && missMap[coord] in host) {
-    coord = missMap[coord];
-  }
   return host[coord];
 }

@@ -433,4 +433,6 @@ export const Mirror = styled(HeaderCell)`
   visibility: hidden;
   ${({ theme }) => theme.shadow['Shadow 08']}
   background: ${({ theme }) => theme.color['Neutral/Neutral 00']};
+  padding-left: 36px;
+  cursor: grabbing !important;
 `;
