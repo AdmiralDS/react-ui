@@ -1,10 +1,9 @@
 import { Button } from '#src/components/Button';
-import type { HintProps } from '#src/components/Hint';
 import { Hint } from '#src/components/Hint';
 import React, { useRef } from 'react';
 import styled, { css, ThemeProvider } from 'styled-components';
 import { ReactComponent as HelpOutline } from '@admiral-ds/icons/build/service/HelpOutline.svg';
-import type { ComponentMeta, ComponentStory, Story } from '@storybook/react';
+import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import type { Theme } from '#src/components/themes';
 import { TextButton } from '#src/components/TextButton';
