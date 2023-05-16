@@ -77,6 +77,12 @@ export default {
     displayRight: {
       control: { type: 'boolean' },
     },
+    icon: {
+      control: false,
+    },
+    statusIcon: {
+      control: false,
+    },
   },
 } as ComponentMeta<typeof TextButton>;
 

@@ -29,6 +29,7 @@ const StyledButton = styled.button.attrs<StyledButtonProps>((props) => ({
   border: none;
   background: transparent;
   padding: 0;
+  gap: 8px;
   white-space: nowrap;
   ${(p) => p.skeleton && skeletonAnimationMixin};
 
@@ -64,7 +65,12 @@ export interface TextButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>
   skeleton?: boolean;
 }
 
-export const TextButton = React.forwardRef<HTMLButtonElement, TextButtonProps>(
+export interface TextButtonInternalProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  /** Для внутреннего использования! Иконка кнопки выпадающего меню */
+  statusIcon?: ReactNode;
+}
+
+export const TextButton = React.forwardRef<HTMLButtonElement, TextButtonProps & TextButtonInternalProps>(
   (
     {
       appearance = 'primary',
@@ -75,6 +81,7 @@ export const TextButton = React.forwardRef<HTMLButtonElement, TextButtonProps>(
       displayRight = false,
       loading = false,
       skeleton = false,
+      statusIcon,
       ...props
     },
     ref,
@@ -95,6 +102,7 @@ export const TextButton = React.forwardRef<HTMLButtonElement, TextButtonProps>(
         <ButtonContainer>
           <span>{text}</span>
         </ButtonContainer>
+        {statusIcon && !displayRight && <IconContainer>{statusIcon}</IconContainer>}
       </StyledButton>
     );
   },
