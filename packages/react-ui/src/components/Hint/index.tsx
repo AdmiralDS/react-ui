@@ -11,7 +11,7 @@ import { AnchorWrapper, FakeTarget, Portal } from './style';
 import { getHintDirection } from './utils';
 import type { HintPositionType, InternalHintPositionType } from './utils';
 import { HintContainer } from './HintContainer';
-import { DropdownContext, useDropdown } from '#src/components/DropdownProvider';
+import { DropdownContext } from '#src/components/DropdownProvider';
 
 type Trigger = 'click' | 'hover';
 
