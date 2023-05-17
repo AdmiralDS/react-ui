@@ -127,11 +127,11 @@ const Simple: ComponentStory<typeof GroupActionsPane> = (args) => {
           settingsButtonDropContainerStyle={{ dropContainerClassName: 'settingsButtonDropContainerClass' }}
           settingsMenu={<SettingsMenu>Здесь может быть меню настройки</SettingsMenu>}
         >
-          <TextButton text={'Action 1'} dimension={dimension} icon={<GovernmentOutline />} />
-          <TextButton text={'Action 2'} dimension={dimension} icon={<TelegramOutline />} />
-          <TextButton text={'Action 3'} dimension={dimension} icon={<AlertOutline />} disabled />
+          <TextButton text={'Action 1'} dimension={dimension} iconStart={<GovernmentOutline />} />
+          <TextButton text={'Action 2'} dimension={dimension} iconStart={<TelegramOutline />} />
+          <TextButton text={'Action 3'} dimension={dimension} iconStart={<AlertOutline />} disabled />
           <PaneSeparator dimension={dimension} />
-          <TextButton text={'Action 4'} dimension={dimension} icon={<CardSolid />} />
+          <TextButton text={'Action 4'} dimension={dimension} iconStart={<CardSolid />} />
         </GroupActionsPane>
       </Wrapper>
     </ThemeProvider>

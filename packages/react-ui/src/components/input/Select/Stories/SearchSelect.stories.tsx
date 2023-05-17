@@ -360,7 +360,7 @@ const TemplateMultipleWithAddOption: ComponentStory<typeof Select> = (props) => 
         renderDropDownBottomPanel={({ dimension = menuPanelContentDimension }) => {
           return (
             <MenuActionsPanel dimension={dimension}>
-              <TextButton {...addButtonProps} icon={<PlusOutline />} onClick={handleAddButtonClick} />
+              <TextButton {...addButtonProps} iconStart={<PlusOutline />} onClick={handleAddButtonClick} />
             </MenuActionsPanel>
           );
         }}
@@ -599,7 +599,7 @@ const TemplateWithAddButton: ComponentStory<typeof Select> = (props) => {
         renderDropDownBottomPanel={({ dimension = menuPanelContentDimension }) => {
           return (
             <MenuActionsPanel dimension={dimension}>
-              <TextButton {...addButtonProps} icon={<PlusOutline />} onClick={handleAddButtonClick} />
+              <TextButton {...addButtonProps} iconStart={<PlusOutline />} onClick={handleAddButtonClick} />
             </MenuActionsPanel>
           );
         }}
