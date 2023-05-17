@@ -24,7 +24,6 @@ Object {
   border: none;
   background: transparent;
   padding: 0;
-  gap: 8px;
   white-space: nowrap;
   border-radius: 4px;
   pointer-events: all;
@@ -320,7 +319,6 @@ Object {
   border: none;
   background: transparent;
   padding: 0;
-  gap: 8px;
   white-space: nowrap;
   border-radius: 4px;
   pointer-events: all;
