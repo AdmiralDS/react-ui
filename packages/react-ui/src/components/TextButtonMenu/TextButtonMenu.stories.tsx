@@ -8,7 +8,6 @@ import type { RenderOptionProps } from '#src/components/Menu/MenuItem';
 import { MenuItem } from '#src/components/Menu/MenuItem';
 import type { Theme } from '#src/components/themes';
 import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
-import { ReactComponent as AttachFileOutline } from '@admiral-ds/icons/build/system/AttachFileOutline.svg';
 
 const StyledText = styled(T)`
   margin: 10px 0;
@@ -96,19 +95,7 @@ export default {
     dropContainerStyle: {
       control: false,
     },
-    icon: {
-      control: false,
-    },
-    items: {
-      control: false,
-    },
-    selected: {
-      control: false,
-    },
     menuWidth: {
-      control: { type: 'text' },
-    },
-    menuMaxHeight: {
       control: { type: 'text' },
     },
     disableSelectedOptionHighlight: {
@@ -360,52 +347,6 @@ const TextButtonMenuSizes: ComponentStory<typeof TextButtonMenu> = (args) => {
   );
 };
 
-const TextButtonMenuWithIconTemplate: ComponentStory<typeof TextButtonMenu> = (args) => {
-  const [selected, setSelected] = React.useState<string | undefined>(undefined);
-  const model = React.useMemo(() => {
-    return items.map((item) => ({
-      id: item.id,
-      render: (options: RenderOptionProps) => (
-        <MenuItem dimension={args.dimension} {...options} key={item.id}>
-          {item.display}
-        </MenuItem>
-      ),
-      disabled: item.disabled,
-    }));
-  }, [args.dimension]);
-
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
-  return (
-    <ThemeProvider theme={swapBorder}>
-      <Wrapper>
-        <TextButtonMenu
-          {...args}
-          text={args.text}
-          selected={selected}
-          dimension={args.dimension}
-          loading={args.loading}
-          disabled={args.disabled}
-          appearance={args.appearance}
-          onSelectItem={(id) => {
-            logSelectedId(id);
-            setSelected(id);
-          }}
-          items={model}
-          onVisibilityChange={handleVisibilityChange}
-          data-dropdown-container-id="text-button-menu-with-dropdown"
-          className="text-button-menu-class"
-          dropContainerClassName="dropContainerClass"
-          icon={<AttachFileOutline />}
-        />
-      </Wrapper>
-    </ThemeProvider>
-  );
-};
-
 export const TextButtonMenuStoryDemo = TextButtonMenuStory.bind({});
 TextButtonMenuStoryDemo.args = { text: 'Text Button' };
 TextButtonMenuStoryDemo.storyName = 'TextButtonMenu';
@@ -413,7 +354,3 @@ TextButtonMenuStoryDemo.storyName = 'TextButtonMenu';
 export const TextButtonMenuVariants = TextButtonMenuSizes.bind({});
 TextButtonMenuVariants.args = {};
 TextButtonMenuVariants.storyName = 'TextButtonMenu. Размеры и стили.';
-
-export const TextButtonMenuWithIcon = TextButtonMenuWithIconTemplate.bind({});
-TextButtonMenuWithIcon.args = { text: 'Text Button' };
-TextButtonMenuWithIcon.storyName = 'TextButtonMenu. С иконкой.';

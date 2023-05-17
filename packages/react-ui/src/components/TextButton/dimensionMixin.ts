@@ -8,7 +8,15 @@ interface DimensionProps {
   displayRight?: boolean;
 }
 
+const defaultDimensionMixin = css<DimensionProps>`
+  ${IconContainer} {
+    margin: ${(p) => (p.displayRight ? '0 0 0 8px' : '0 8px 0 0')};
+  }
+`;
+
 export const dimensionMixin = css<DimensionProps>`
+  ${defaultDimensionMixin}
+
   &[data-dimension='m'] {
     ${IconContainer} {
       width: 24px;
