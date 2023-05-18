@@ -34,7 +34,6 @@ export const DropDownOption = ({
           checked={dropDownContext?.selectValue?.includes(value)}
           dimension={dropDownContext?.dimension === 's' ? 's' : 'm'}
           disabled={disabled}
-          readOnly
         />
       )}
       {children}
