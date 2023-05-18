@@ -6,8 +6,11 @@ import type { ItemProps } from '#src/components/Menu/MenuItem';
 import { keyboardKey } from '#src/components/common/keyboardKey';
 import { VirtualBody } from '#src/components/Menu/VirtualBody';
 import { refSetter } from '#src/components/common/utils/refSetter';
+import type { MenuDimensions } from '#src/components/Menu/types';
+import { DropdownContainer } from '#src/components/DropdownContainer';
+import { SubMenuContainer } from '#src/components/Menu/SubMenuContainer';
 
-export type MenuDimensions = 'l' | 'm' | 's';
+// export type MenuDimensions = 'l' | 'm' | 's';
 
 export const getItemHeight = (dimension?: MenuDimensions) => {
   switch (dimension) {
@@ -185,6 +188,7 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
     const [activeState, setActiveState] = React.useState<string | undefined>(uncontrolledActiveValue);
     const [lastScrollEvent, setLastScrollEvent] = React.useState<number>();
     const wrapperRef = React.useRef<HTMLDivElement | null>(null);
+    const activeItemRef = React.useRef<HTMLDivElement | null>(null);
 
     const selectedId =
       multiSelection || disableSelectedOptionHighlight ? undefined : selected === undefined ? selectedState : selected;
@@ -248,6 +252,14 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
           },
           onClickItem: () => selectItem(item.id),
           disabled: item.disabled,
+          hasSubmenu: item.subItems && item.subItems.length > 0,
+          expandIcon: item.expandIcon,
+          selfRef: (ref) => {
+            if (activeId === item.id && item.subItems && item.subItems.length > 0) {
+              console.log(ref);
+              activeItemRef.current = ref;
+            }
+          },
           containerRef,
         }),
       );
@@ -289,6 +301,14 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
       }, 0);
     }, [active, activeState, model]);
 
+    const renderSubMenu = () => {
+      const activeItem = model.find((item) => item.id === activeId);
+
+      return (
+        activeItem && activeItem.subItems && activeItem.subItems.length > 0 && <Menu model={activeItem.subItems} />
+      );
+    };
+
     return (
       <Wrapper
         ref={refSetter(wrapperRef, ref)}
@@ -302,6 +322,11 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
         <StyledDiv ref={menuRef} hasTopPanel={hasTopPanel} hasBottomPanel={hasBottomPanel}>
           {virtualScroll ? renderVirtualChildren() : renderChildren()}
         </StyledDiv>
+        {activeItemRef && activeItemRef.current && (
+          <SubMenuContainer target={activeItemRef} visible={true}>
+            {renderSubMenu()}
+          </SubMenuContainer>
+        )}
         {hasBottomPanel && renderBottomPanel({ dimension })}
       </Wrapper>
     );
@@ -309,3 +334,5 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
 );
 
 Menu.displayName = 'Menu';
+
+export type { MenuDimensions } from '#src/components/Menu/types';

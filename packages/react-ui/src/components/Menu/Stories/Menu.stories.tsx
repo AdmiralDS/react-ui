@@ -25,14 +25,19 @@ import {
   CardGroupsTemplate,
   LargeNumberOfItemsTemplate,
   MenuWithLockCycleScrollTemplate,
+  IconsAndAdditionalTextTemplate,
+  SimpleTemplate,
   VirtualScrollTemplate,
+  MultiLevelTemplate,
 } from '#src/components/Menu/Stories/Templates';
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 import LargeNumberOfItemsRaw from '!!raw-loader!./Templates/LargeNumberOfItems';
 import MenuWithLockCycleScrollRaw from '!!raw-loader!./Templates/MenuWithLockCycleScroll';
 import VirtualScrollRaw from '!!raw-loader!./Templates/VirtualScroll';
 import CardGroupsRaw from '!!raw-loader!./Templates/CardGroups';
-import { IconsAndAdditionalTextTemplate } from '#src/components/Menu/Stories/Templates/IconsAndAdditionalText';
+import SimpleRaw from '!!raw-loader!./Templates/Simple';
+import IconsAndAdditionalTextRaw from '!!raw-loader!./Templates/IconsAndAdditionalText';
+// import MultiLevelRaw from '!!raw-loader!./Templates/MultiLevel';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -155,32 +160,6 @@ const STORY_ITEMS: Array<StoryItem> = [
     value: 6,
   },
 ];
-
-const SimpleTemplate: ComponentStory<typeof Menu> = (args) => {
-  const model = React.useMemo(() => {
-    return STORY_ITEMS.map((item) => ({
-      id: item.id,
-      render: (options: RenderOptionProps) => (
-        <MenuItem dimension={args.dimension} {...options} key={item.id}>
-          {item.label}
-        </MenuItem>
-      ),
-    }));
-  }, [args.dimension]);
-
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
-  return (
-    <ThemeProvider theme={swapBorder}>
-      <Wrapper style={{ width: 'fit-content' }}>
-        <Menu {...args} model={model} />
-      </Wrapper>
-    </ThemeProvider>
-  );
-};
 
 interface MyMenuItemProps extends HTMLAttributes<HTMLDivElement>, RenderOptionProps {
   text: string;
@@ -822,23 +801,43 @@ const MenuCheckboxGroupTemplate: ComponentStory<typeof Menu> = (args) => {
   );
 };
 
-export const Simple = SimpleTemplate.bind({});
-Simple.storyName = 'Базовый пример';
+//<editor-fold desc="Базовый пример">
+const SimpleStory: ComponentStory<typeof Menu> = (props) => <SimpleTemplate model={[]} {...cleanUpProps(props)} />;
 
+export const SimpleExample = SimpleStory.bind({});
+SimpleExample.parameters = {
+  docs: {
+    source: {
+      code: SimpleRaw,
+    },
+    description: {
+      story: 'Базовый пример построения Menu.',
+    },
+  },
+};
+SimpleExample.storyName = 'Базовый пример';
+//</editor-fold>
+
+// <editor-fold desc="Пример с иконками и дополнительным текстом">
 const IconsStory: ComponentStory<typeof Menu> = (props) => (
   <IconsAndAdditionalTextTemplate model={[]} {...cleanUpProps(props)} />
 );
+
 export const IconsExample = IconsStory.bind({});
 IconsExample.parameters = {
   docs: {
+    source: {
+      code: IconsAndAdditionalTextRaw,
+    },
     description: {
       story: 'Пример меню с иконками и дополнительным текстом',
     },
   },
 };
 IconsExample.storyName = 'Пример с иконками и дополнительным текстом';
+//</editor-fold>
 
-//<editor-fold desc="Пример с большим количеством item">
+//<editor-fold desc="Пример с группами карт">
 const CardGroupsStory: ComponentStory<typeof Menu> = (props) => (
   <CardGroupsTemplate model={[]} {...cleanUpProps(props)} />
 );
@@ -932,3 +931,24 @@ MultiLineMenu.storyName = 'Пример с многострочными пунк
 MenuActionsTwoButtons.storyName = 'Пример с Actions с двумя кнопками';
 MenuActionsAddUserValue.storyName = 'Пример с Actions и Search';
 MenuCheckboxGroup.storyName = 'Пример с CheckboxGroup';
+
+//<editor-fold desc="Многоуровневое меню">
+const MultiLevelStory: ComponentStory<typeof Menu> = (props) => (
+  <MultiLevelTemplate model={[]} {...cleanUpProps(props)} />
+);
+export const MultiLevelExample = MultiLevelStory.bind({});
+MultiLevelExample.parameters = {
+  docs: {
+    // source: {
+    //   code: MultiLevelRaw,
+    // },
+    description: {
+      story:
+        'Для включения виртуального скролла, необходимо передать в параметр virtualScroll объект, ' +
+        'содержаний размер 1 элемента меню, для расчета максимальной высоты контейнера меню. ' +
+        'Или установить значение "auto". В этом случае максимальная высота будет рассчитана исходя из свойства "dimension"',
+    },
+  },
+};
+MultiLevelExample.storyName = 'Многоуровневое меню';
+//</editor-fold>

@@ -3,6 +3,8 @@ import * as React from 'react';
 import styled from 'styled-components';
 import type { ItemDimension } from './menuItemMixins';
 import { backgroundColor, colorTextMixin, paddings, styleTextMixin } from './menuItemMixins';
+import { Chevron } from '#src/components/Menu/styled';
+import { refSetter } from '#src/components/common/utils/refSetter';
 
 export interface RenderOptionProps {
   key?: string | number;
@@ -18,6 +20,9 @@ export interface RenderOptionProps {
   onHover?: () => void;
   /** ссылка на контейнер, в котором находится Menu*/
   containerRef?: React.RefObject<HTMLElement>;
+  expandIcon?: React.ReactNode;
+  hasSubmenu?: boolean;
+  selfRef: ((instance: HTMLDivElement | null) => void) | React.RefObject<HTMLDivElement> | null;
 }
 
 export interface ItemProps {
@@ -25,6 +30,8 @@ export interface ItemProps {
   render: (options: RenderOptionProps) => React.ReactNode;
   disabled?: boolean;
   readOnly?: boolean;
+  subItems?: Array<ItemProps>;
+  expandIcon?: React.ReactNode;
 }
 
 export interface MenuItemProps extends HTMLAttributes<HTMLDivElement>, RenderOptionProps {
@@ -33,7 +40,22 @@ export interface MenuItemProps extends HTMLAttributes<HTMLDivElement>, RenderOpt
 }
 
 export const MenuItem = React.forwardRef<HTMLDivElement, MenuItemProps>(
-  ({ children, onHover, onClickItem, disabled = false, hovered, dimension = 'l', selected = false, ...props }, ref) => {
+  (
+    {
+      children,
+      expandIcon = <Chevron />,
+      hasSubmenu,
+      onHover,
+      onClickItem,
+      disabled = false,
+      hovered,
+      dimension = 'l',
+      selected = false,
+      selfRef,
+      ...props
+    },
+    ref,
+  ) => {
     const handleMouseMove = () => {
       onHover?.();
     };
@@ -44,9 +66,14 @@ export const MenuItem = React.forwardRef<HTMLDivElement, MenuItemProps>(
       if (!disabled) onClickItem?.();
     };
 
+    const callbackRef = (node: HTMLDivElement) => {
+      if (hovered) console.log('Attached node: ', node);
+    };
+
     return (
       <Item
-        ref={ref}
+        ref={refSetter(ref, selfRef)}
+        // ref={callbackRef}
         dimension={dimension}
         selected={selected}
         hovered={hovered}
@@ -57,6 +84,7 @@ export const MenuItem = React.forwardRef<HTMLDivElement, MenuItemProps>(
         {...props}
       >
         {children}
+        {hasSubmenu && expandIcon}
       </Item>
     );
   },

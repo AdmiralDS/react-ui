@@ -1,12 +1,12 @@
 import * as React from 'react';
+import styled, { ThemeProvider } from 'styled-components';
 import { Menu } from '#src/components/Menu';
 import { MenuItem } from '#src/components/Menu/MenuItem';
+import { createItems } from '#src/components/Menu/Stories/Templates/utils';
+import { mediumGroupBorderRadius } from '#src/components/themes';
 import type { MenuProps } from '#src/components/Menu';
 import type { RenderOptionProps } from '#src/components/Menu/MenuItem';
 import type { Theme } from '#src/components/themes';
-import styled, { ThemeProvider } from 'styled-components';
-import { createItems } from '#src/components/Menu/Stories/Templates/utils';
-import { mediumGroupBorderRadius } from '#src/components/themes';
 
 const ITEMS = createItems(200);
 
