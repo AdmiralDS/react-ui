@@ -16,6 +16,7 @@ const Wrapper = styled.div`
 `;
 const Title = styled.div`
   ${typography['Header/H4']}
+  margin-bottom: 8px;
 `;
 const SubTitle = styled.div`
   margin-bottom: 20px;
@@ -24,7 +25,7 @@ const SubTitle = styled.div`
 const CategoryWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  padding-bottom: 40px;
+  margin-bottom: 40px;
   background: ${({ theme }) => theme.color['Neutral/Neutral 00']};
   color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
   ${typography['Body/Body 2 Long']}
@@ -159,6 +160,7 @@ const Description = () => (
 export default {
   title: 'Colors/Colors',
   decorators: [withDesign],
+  component: CopyOutline,
   parameters: {
     docs: {
       source: {
