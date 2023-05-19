@@ -43,6 +43,7 @@ module.exports = {
         },
       },
     },
+    'storybook-addon-rtl',
   ],
   typescript: {
     check: true, // type-check stories during Storybook build
