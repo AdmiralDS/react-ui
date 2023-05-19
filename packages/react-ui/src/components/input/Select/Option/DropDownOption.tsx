@@ -34,6 +34,8 @@ export const DropDownOption = ({
           checked={dropDownContext?.selectValue?.includes(value)}
           dimension={dropDownContext?.dimension === 's' ? 's' : 'm'}
           disabled={disabled}
+          // Состояние контролируется через Item, по сути контролируемый readOnly
+          onChange={() => false}
         />
       )}
       {children}
