@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.15.0](https://github.com/AdmiralDS/react-ui/compare/v4.14.1...v4.15.0) (2023-05-19)
+
+
+### Features
+
+* **Colors:** add colors section in storybook ([bc59e49](https://github.com/AdmiralDS/react-ui/commit/bc59e4912d2e9fcdc8e3e74e1c97ecdd844f6880))
+* **Hint:** change internal vertical paddings ([f30a4fd](https://github.com/AdmiralDS/react-ui/commit/f30a4fd33c31a84ab4c8c41c10fa1a102bc1a479))
+* **Modal:** change internal vertical paddings ([3f44b38](https://github.com/AdmiralDS/react-ui/commit/3f44b3835185b98b6382f8b475e258a355276e5d))
+
+
+### Bug Fixes
+
+* **Drawer:** fix paddings for DrawerTitle and DrawerButtonPanel ([d6af714](https://github.com/AdmiralDS/react-ui/commit/d6af714777836bd6918ebe8250e2816e6b5e71fe))
+* **Select:** fix disabled chip border && remove checkbox redundant readOnly state ([73d8076](https://github.com/AdmiralDS/react-ui/commit/73d8076edd283010ad832598fde2c35527a37b99))
+
 ### [4.14.1](https://github.com/AdmiralDS/react-ui/compare/v4.14.0...v4.14.1) (2023-05-15)
 
 ## [4.14.0](https://github.com/AdmiralDS/react-ui/compare/v4.13.0...v4.14.0) (2023-05-11)
