@@ -45,6 +45,7 @@ import LargeNumberOfItemsRaw from '!!raw-loader!./Templates/LargeNumberOfItems';
 import MenuWithLockCycleScrollRaw from '!!raw-loader!./Templates/MenuWithLockCycleScroll';
 import VirtualScrollRaw from '!!raw-loader!./Templates/VirtualScroll';
 import CardGroupsRaw from '!!raw-loader!./Templates/CardGroups';
+import IconsAndAdditionalTextRaw from '!!raw-loader!./Templates/IconsAndAdditionalText';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -843,6 +844,9 @@ const IconsStory: ComponentStory<typeof Menu> = (props) => (
 export const IconsExample = IconsStory.bind({});
 IconsExample.parameters = {
   docs: {
+    source: {
+      code: IconsAndAdditionalTextRaw,
+    },
     description: {
       story: 'Пример меню с иконками и дополнительным текстом',
     },
