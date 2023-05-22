@@ -1,6 +1,6 @@
 import type { Dayjs } from 'dayjs';
 import { css } from 'styled-components';
-import { endOfWeek, sameDay } from '#src/components/Calendar3/date-utils';
+import { endOfWeek, sameDay } from './date-utils';
 
 export const workDayMixin = css<{ disabled?: boolean }>`
   color: ${(p) => (p.disabled ? p.theme.color['Neutral/Neutral 90'] : p.theme.color['Neutral/Neutral 30'])};

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { typography } from '#src/components/Typography';
+import { typography } from '@admiral-ds/react-ui';
 
 type YearComponentProps = {
   today?: boolean;

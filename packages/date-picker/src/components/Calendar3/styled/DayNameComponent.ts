@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { typography } from '#src/components/Typography';
+import { typography } from '@admiral-ds/react-ui';
 
 const DAY_NAME_SIZE = '36px';
 const DAY_NAME_MARGIN_BOTTOM = '4px';

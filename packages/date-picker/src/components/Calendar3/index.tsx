@@ -298,4 +298,4 @@ export const Calendar3 = React.forwardRef<HTMLDivElement, Calendar3Props>(
   }
 );
 
-Calendar.displayName = "Calendar";
+Calendar3.displayName = "Calendar3";

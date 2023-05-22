@@ -3,22 +3,22 @@ import type { Dayjs } from "dayjs";
 import dayjs from "dayjs";
 import type { ComponentMeta, ComponentStory } from "@storybook/react";
 import { withDesign } from "storybook-addon-designs";
-import { Button } from "#src/components/Button";
+import { Button } from "@admiral-ds/react-ui";
 
-import type { CalendarPropType } from "./index";
-import { Calendar } from "./index";
-import type { ViewScreen3 } from "./interfaces";
+import type { Calendar3Props } from "@admiral-ds/date-picker";
+import { Calendar3 } from "@admiral-ds/date-picker";
+import type { ViewScreen3 } from "@admiral-ds/date-picker";
 import { css, ThemeProvider } from "styled-components";
-import type { Theme } from "#src/components/themes";
-import { T } from "#src/components/T";
-import { ALL_BORDER_RADIUS_VALUES } from "#src/components/themes/borderRadius";
-import { weekendMixin } from "#src/components/Calendar3/highlightDate";
-import { startOfDay } from "#src/components/Calendar3/date-utils";
+import type { Theme } from "@admiral-ds/react-ui";
+import { T } from "@admiral-ds/react-ui";
+import { ALL_BORDER_RADIUS_VALUES } from "@admiral-ds/react-ui";
+import { weekendMixin } from "@admiral-ds/react-ui";
+import { startOfDay } from "./date-utils";
 
 export default {
   title: "Admiral-2.1/Calendar3",
   decorators: [withDesign],
-  component: Calendar,
+  component: Calendar3,
   parameters: {
     docs: {
       source: {
@@ -70,9 +70,9 @@ export default {
       control: { type: "radio" },
     },
   },
-} as ComponentMeta<typeof Calendar>;
+} as ComponentMeta<typeof Calendar3>;
 
-const Template1: ComponentStory<typeof Calendar> = (args) => {
+const Template1: ComponentStory<typeof Calendar3> = (args) => {
   const [selected, setSelected] = useState<Dayjs | null>(null);
   const [endDate, setEndDate] = useState<Dayjs | null>(null);
 
@@ -84,7 +84,7 @@ const Template1: ComponentStory<typeof Calendar> = (args) => {
 
   return args.range ? (
     <ThemeProvider theme={swapBorder}>
-      <Calendar
+      <Calendar3
         {...args}
         range
         startDate={selected}
@@ -97,7 +97,7 @@ const Template1: ComponentStory<typeof Calendar> = (args) => {
     </ThemeProvider>
   ) : (
     <ThemeProvider theme={swapBorder}>
-      <Calendar
+      <Calendar3
         {...args}
         selected={selected}
         onChange={(value: any) => {
@@ -108,12 +108,12 @@ const Template1: ComponentStory<typeof Calendar> = (args) => {
   );
 };
 
-const Template2: ComponentStory<typeof Calendar> = (args: CalendarPropType) => {
+const Template2: ComponentStory<typeof Calendar3> = (args: Calendar3Props) => {
   const [startDate, setStartDate] = useState<Dayjs | null>(null);
   const [endDate, setEndDate] = useState<Dayjs | null>(null);
   return (
     <>
-      <Calendar
+      <Calendar3
         {...args}
         range
         startDate={startDate}
@@ -127,16 +127,16 @@ const Template2: ComponentStory<typeof Calendar> = (args: CalendarPropType) => {
   );
 };
 
-const Template3: ComponentStory<typeof Calendar> = ({
+const Template3: ComponentStory<typeof Calendar3> = ({
   range,
   ...args
-}: CalendarPropType) => {
+}: Calendar3Props) => {
   const [selected, setSelected] = useState<Dayjs | null>(null);
   const [endDate, setEndDate] = useState<Dayjs | null>(null);
   const tomorrow = dayjs().add(1, "day");
   return range ? (
     <>
-      <Calendar
+      <Calendar3
         {...args}
         range
         startDate={selected}
@@ -150,7 +150,7 @@ const Template3: ComponentStory<typeof Calendar> = ({
     </>
   ) : (
     <>
-      <Calendar
+      <Calendar3
         {...args}
         maxDate={tomorrow}
         selected={selected}
@@ -162,10 +162,10 @@ const Template3: ComponentStory<typeof Calendar> = ({
   );
 };
 
-const Template4: ComponentStory<typeof Calendar> = ({
+const Template4: ComponentStory<typeof Calendar3> = ({
   range,
   ...args
-}: CalendarPropType) => {
+}: Calendar3Props) => {
   const [selected, setSelected] = useState<Dayjs | null>(null);
   const [endDate, setEndDate] = useState<Dayjs | null>(null);
   const isWeekday = (date: Dayjs) => {
@@ -174,7 +174,7 @@ const Template4: ComponentStory<typeof Calendar> = ({
   };
   return range ? (
     <>
-      <Calendar
+      <Calendar3
         {...args}
         range
         startDate={selected}
@@ -188,7 +188,7 @@ const Template4: ComponentStory<typeof Calendar> = ({
     </>
   ) : (
     <>
-      <Calendar
+      <Calendar3
         {...args}
         filterDate={isWeekday}
         selected={selected}
@@ -200,10 +200,10 @@ const Template4: ComponentStory<typeof Calendar> = ({
   );
 };
 
-const Template5: ComponentStory<typeof Calendar> = ({
+const Template5: ComponentStory<typeof Calendar3> = ({
   range,
   ...args
-}: CalendarPropType) => {
+}: Calendar3Props) => {
   const [selected, setSelected] = useState<Dayjs | null>(null);
 
   return (
@@ -219,7 +219,7 @@ const Template5: ComponentStory<typeof Calendar> = ({
         `(onIncreaseDecreaseDate)`
       </T>
 
-      <Calendar
+      <Calendar3
         {...args}
         selected={selected}
         onChange={(value: any) => {
@@ -239,10 +239,10 @@ const Template5: ComponentStory<typeof Calendar> = ({
   );
 };
 
-const Template6: ComponentStory<typeof Calendar> = ({
+const Template6: ComponentStory<typeof Calendar3> = ({
   range,
   ...args
-}: CalendarPropType) => {
+}: Calendar3Props) => {
   const [selected, setSelected] = useState<Dayjs | null>(null);
   const [currentActiveView, setCurrentActiveView] =
     useState<ViewScreen3 | null>(null);
@@ -266,7 +266,7 @@ const Template6: ComponentStory<typeof Calendar> = ({
         </Button>
       </div>
       <br />
-      <Calendar
+      <Calendar3
         {...args}
         selected={selected}
         currentActiveView={currentActiveView}
@@ -297,10 +297,10 @@ const Template6: ComponentStory<typeof Calendar> = ({
   );
 };
 
-const Template7: ComponentStory<typeof Calendar> = ({
+const Template7: ComponentStory<typeof Calendar3> = ({
   range,
   ...args
-}: CalendarPropType) => {
+}: Calendar3Props) => {
   const [selected, setSelected] = useState<Dayjs | null>(null);
   const [currentActiveView, setActiveViewDateScreen] =
     useState<ViewScreen3 | null>(null);
@@ -310,7 +310,7 @@ const Template7: ComponentStory<typeof Calendar> = ({
       <T font="Body/Body 1 Long" as="div" style={{ marginBottom: "25px" }}>
         Открытие экрана выбора месяца после выбора года
       </T>
-      <Calendar
+      <Calendar3
         {...args}
         selected={selected}
         currentActiveView={currentActiveView}
@@ -330,10 +330,10 @@ const Template7: ComponentStory<typeof Calendar> = ({
   );
 };
 
-const Template8: ComponentStory<typeof Calendar> = ({
+const Template8: ComponentStory<typeof Calendar3> = ({
   range,
   ...args
-}: CalendarPropType) => {
+}: Calendar3Props) => {
   const [selected, setSelected] = useState<Dayjs | null>(null);
   const [currentActiveView, setCurrentActiveView] =
     useState<ViewScreen3 | null>("MONTH");
@@ -351,7 +351,7 @@ const Template8: ComponentStory<typeof Calendar> = ({
         <Button onClick={() => setSelected(dayjs())}>set Dayjs now</Button>
       </div>
       <br />
-      <Calendar
+      <Calendar3
         {...args}
         selected={selected}
         currentActiveView={currentActiveView}
@@ -647,7 +647,7 @@ const holidayDates = new Map(
   })
 );
 
-const Template9: ComponentStory<typeof Calendar> = (args) => {
+const Template9: ComponentStory<typeof Calendar3> = (args) => {
   const [selected, setSelected] = useState<Dayjs | null>(null);
   const [endDate, setEndDate] = useState<Dayjs | null>(null);
 
@@ -674,7 +674,7 @@ const Template9: ComponentStory<typeof Calendar> = (args) => {
 
   return args.range ? (
     <ThemeProvider theme={swapBorder}>
-      <Calendar
+      <Calendar3
         {...args}
         range
         startDate={selected}
@@ -688,7 +688,7 @@ const Template9: ComponentStory<typeof Calendar> = (args) => {
     </ThemeProvider>
   ) : (
     <ThemeProvider theme={swapBorder}>
-      <Calendar
+      <Calendar3
         {...args}
         selected={selected}
         onChange={(value: any) => {

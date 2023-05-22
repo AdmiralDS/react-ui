@@ -1,5 +1,5 @@
 import type { Dayjs } from 'dayjs';
-import { compareDates, outOfBounds, valid } from '#src/components/CalendarTry/utils';
+import { compareDates, outOfBounds, valid } from './utils';
 import dayjs from 'dayjs';
 
 const MESSAGE_DATE_UNDEFINED = 'Неверный формат даты';

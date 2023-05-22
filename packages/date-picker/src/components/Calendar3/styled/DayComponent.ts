@@ -1,6 +1,6 @@
 import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import styled, { css } from 'styled-components';
-import { typography } from '#src/components/Typography';
+import { typography } from '@admiral-ds/react-ui';
 
 import type { CornerKeys, Corners } from '../constants';
 
