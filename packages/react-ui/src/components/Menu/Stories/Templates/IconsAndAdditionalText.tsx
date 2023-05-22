@@ -13,13 +13,9 @@ import { ReactComponent as PostOutline } from '@admiral-ds/icons/build/category/
 import { ReactComponent as ShoppingBagOutline } from '@admiral-ds/icons/build/category/ShoppingBagOutline.svg';
 import { ReactComponent as TrophyOutline } from '@admiral-ds/icons/build/category/TrophyOutline.svg';
 import { ReactComponent as AgreedSolid } from '@admiral-ds/icons/build/service/AgreedSolid.svg';
-import type { MenuProps } from '#src/components/Menu';
-import { getItemHeight, Menu } from '#src/components/Menu';
-import type { RenderOptionProps } from '#src/components/Menu/MenuItem';
-import { MenuItem } from '#src/components/Menu/MenuItem';
+import type { MenuProps, RenderOptionProps } from '@admiral-ds/react-ui';
+import { getItemHeight, Menu, MenuItem, mediumGroupBorderRadius, typography } from '@admiral-ds/react-ui';
 import styled, { css } from 'styled-components';
-import { mediumGroupBorderRadius } from '#src/components/themes';
-import { typography } from '#src/components/Typography';
 
 const items = [
   {

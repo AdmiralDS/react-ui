@@ -153,7 +153,9 @@ const Template1: ComponentStory<typeof T> = (args) => {
         Это параграф со стилем Header/H5 и цветом шрифта Tertiary.
       </CustomParagraph>
 
-      <T font='Header/H3' as="h3">Выбор конфигурации</T>
+      <T font="Header/H3" as="h3">
+        Выбор конфигурации
+      </T>
     </>
   );
 };

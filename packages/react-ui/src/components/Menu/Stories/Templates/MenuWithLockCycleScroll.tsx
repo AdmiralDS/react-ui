@@ -1,12 +1,8 @@
 import * as React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
-import { Menu } from '#src/components/Menu';
-import { MenuItem } from '#src/components/Menu/MenuItem';
-import { mediumGroupBorderRadius } from '#src/components/themes';
-import { STORY_ITEMS } from '#src/components/Menu/Stories/Templates/data';
-import type { MenuProps } from '#src/components/Menu';
-import type { RenderOptionProps } from '#src/components/Menu/MenuItem';
-import type { Theme } from '#src/components/themes';
+import { Menu, MenuItem, mediumGroupBorderRadius } from '@admiral-ds/react-ui';
+import { STORY_ITEMS } from './data';
+import type { MenuProps, RenderOptionProps, Theme } from '@admiral-ds/react-ui';
 
 const ITEMS_WITH_DISABLED_ITEMS = [...STORY_ITEMS];
 ITEMS_WITH_DISABLED_ITEMS[0].disabled = true;
