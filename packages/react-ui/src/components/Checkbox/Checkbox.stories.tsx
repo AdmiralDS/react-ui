@@ -48,6 +48,9 @@ export default {
     readOnly: {
       control: { type: 'boolean' },
     },
+    hovered: {
+      control: { type: 'boolean' },
+    },
     error: {
       control: { type: 'boolean' },
     },

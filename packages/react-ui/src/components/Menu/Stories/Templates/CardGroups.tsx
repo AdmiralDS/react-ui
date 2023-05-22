@@ -1,12 +1,8 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { Menu } from '#src/components/Menu';
-import { MenuItem } from '#src/components/Menu/MenuItem';
-import { typography } from '#src/components/Typography';
-import { mediumGroupBorderRadius } from '#src/components/themes';
+import { Menu, MenuItem, typography, mediumGroupBorderRadius } from '@admiral-ds/react-ui';
 import { ReactComponent as CardSolid } from '@admiral-ds/icons/build/finance/CardSolid.svg';
-import type { MenuProps } from '#src/components/Menu';
-import type { RenderOptionProps } from '#src/components/Menu/MenuItem';
+import type { MenuProps, RenderOptionProps } from '@admiral-ds/react-ui';
 
 const category = [
   {

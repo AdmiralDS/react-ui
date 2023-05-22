@@ -79,6 +79,7 @@ module.exports = {
     ];
 
     config.resolve.alias['#src'] = path.resolve(__dirname, '../src');
+    config.resolve.alias['@admiral-ds/react-ui'] = path.resolve(__dirname, '../src/index');
     // Return the altered config
     return config;
   },

@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.15.1](https://github.com/AdmiralDS/react-ui/compare/v4.15.0...v4.15.1) (2023-05-19)
+
+
+### Bug Fixes
+
+* **Select:** fix checkbox color in Select drop container for multiple mode ([eaf0b28](https://github.com/AdmiralDS/react-ui/commit/eaf0b28cbad67a6cb135c31fdd09ed4adef3594a))
+
 ## [4.15.0](https://github.com/AdmiralDS/react-ui/compare/v4.14.1...v4.15.0) (2023-05-19)
 
 
