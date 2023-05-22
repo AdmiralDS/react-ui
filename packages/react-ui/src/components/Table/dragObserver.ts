@@ -12,7 +12,7 @@ function removeEventEasy(el: HTMLElement, type: any, fn: any, capturing?: boolea
 }
 
 type Options = {
-  mirrorRef: any;
+  mirrorRef: React.RefObject<HTMLElement>;
   accepts?: (el: any, target: any, source: any, sibling: any) => boolean;
   invalid?: (el: any, handle: any) => boolean;
   mirrorContainer?: HTMLElement;

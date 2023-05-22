@@ -143,17 +143,7 @@ const Template: ComponentStory<typeof Table> = ({ columnList, ...args }) => {
     setCols(newCols);
   };
 
-  const handleColumnDrag = (columnName: string, nextColumn: string | null) => {
-    const cols = [...columnList];
-    const movedIndex = cols.findIndex((col) => col.name === columnName);
-    const movedColumn = cols.splice(movedIndex, 1)[0];
-    const beforeIndex = nextColumn ? cols.findIndex((col) => col.name === nextColumn) : cols.length;
-    cols.splice(beforeIndex, 0, movedColumn);
-
-    setCols(cols);
-  };
-
-  return <Table {...args} columnList={cols} onColumnResize={handleResize} onColumnDrag={handleColumnDrag} />;
+  return <Table {...args} columnList={cols} onColumnResize={handleResize} />;
 };
 
 const StrToTime = (str: string) => {
@@ -613,6 +603,35 @@ const Template8: ComponentStory<typeof Table> = ({ rowList, columnList, ...args 
   );
 };
 
+const Template9: ComponentStory<typeof Table> = ({ columnList, ...args }) => {
+  const [cols, setCols] = React.useState([...columnList]);
+
+  const handleResize = ({ name, width }: { name: string; width: string }) => {
+    const newCols = cols.map((col) => (col.name === name ? { ...col, width } : col));
+    setCols(newCols);
+  };
+
+  const handleColumnDrag = (columnName: string, nextColumn: string | null) => {
+    const columns = [...cols];
+    const movedIndex = columns.findIndex((col) => col.name === columnName);
+    const movedColumn = columns.splice(movedIndex, 1)[0];
+    const beforeIndex = nextColumn ? columns.findIndex((col) => col.name === nextColumn) : columns.length;
+    columns.splice(beforeIndex, 0, movedColumn);
+
+    setCols(columns);
+  };
+
+  return (
+    <Table
+      {...args}
+      columnList={cols}
+      onColumnResize={handleResize}
+      onColumnDrag={handleColumnDrag}
+      isColumnsDraggable
+    />
+  );
+};
+
 export const Playground = Template.bind({});
 Playground.args = {
   rowList,
@@ -958,3 +977,11 @@ CustomRenderGroupTitle.args = {
   displayRowExpansionColumn: true,
 };
 CustomRenderGroupTitle.storyName = 'Пример кастомизации заголовка группы';
+
+export const DraggableColumns = Template9.bind({});
+DraggableColumns.args = {
+  rowList,
+  columnList: columnListWithWidth,
+  style: { width: '700px' },
+};
+DraggableColumns.storyName = 'Пример drag&drop столбцов';

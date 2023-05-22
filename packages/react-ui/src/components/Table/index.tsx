@@ -266,6 +266,8 @@ export interface TableProps extends React.HTMLAttributes<HTMLDivElement> {
     /** Сообщение, отображаемое при отсутствии совпадений в строках после применения фильтра */
     emptyMessage?: React.ReactNode;
   };
+  isColumnsDraggable?: boolean;
+  isStickyColumnsDraggable?: boolean;
   onColumnDrag?: (columnName: string, nextColumnName: string | null) => void;
 }
 
@@ -311,6 +313,8 @@ export const Table: React.FC<TableProps> = ({
   showLastRowUnderline = true,
   virtualScroll,
   locale,
+  isColumnsDraggable = false,
+  isStickyColumnsDraggable = false,
   onColumnDrag,
   ...props
 }) => {
@@ -332,6 +336,7 @@ export const Table: React.FC<TableProps> = ({
   const stickyColumnsWrapperRef = React.useRef<HTMLDivElement>(null);
   const normalColumnsWrapperRef = React.useRef<HTMLDivElement>(null);
   const mirrorRef = React.useRef<HTMLDivElement>(null);
+  const columnDragCallback = React.useRef(onColumnDrag);
 
   const groupToRowsMap = rowList.reduce<Group>((acc: Group, row) => {
     if (typeof row.groupRows !== 'undefined') {
@@ -788,16 +793,39 @@ export const Table: React.FC<TableProps> = ({
   };
 
   React.useEffect(() => {
+    columnDragCallback.current = onColumnDrag;
+  }, [onColumnDrag]);
+
+  React.useEffect(() => {
+    if (mirrorRef.current) {
+      const observer = observeRect(mirrorRef.current, (rect: any) => {
+        const tableRight = tableRef.current?.getBoundingClientRect().right || 0;
+        const tableLeft = tableRef.current?.getBoundingClientRect().left || 0;
+
+        if (rect.right > tableRight && scrollBodyRef.current) {
+          scrollBodyRef.current.scrollBy({ left: Math.abs(tableRight - rect.right) });
+        }
+        if (rect.left < tableLeft && scrollBodyRef.current) {
+          scrollBodyRef.current.scrollBy({ left: -Math.abs(tableLeft - rect.left) });
+        }
+      });
+
+      observer.observe();
+      return () => observer.unobserve();
+    }
+  }, [isColumnsDraggable, isStickyColumnsDraggable]);
+
+  React.useEffect(() => {
     const stickyCols = stickyColumnsWrapperRef.current;
     const normalCols = normalColumnsWrapperRef.current;
 
     function handleDrop(item: any, before: any) {
       if (item?.dataset?.thColumn) {
-        onColumnDrag?.(item?.dataset?.thColumn, before?.dataset?.thColumn ?? null);
+        columnDragCallback.current?.(item?.dataset?.thColumn, before?.dataset?.thColumn ?? null);
       }
     }
 
-    if (normalCols) {
+    if (normalCols && isColumnsDraggable) {
       const observer = dragObserver(
         [normalCols],
         {
@@ -817,12 +845,12 @@ export const Table: React.FC<TableProps> = ({
         },
         handleDrop,
       );
-      if (stickyCols) observer.containers.push(stickyCols);
+      if (stickyCols && isStickyColumnsDraggable) observer.containers.push(stickyCols);
       return () => {
         observer.unobserve();
       };
     }
-  }, []);
+  }, [isColumnsDraggable, isStickyColumnsDraggable]);
 
   return (
     <TableContainer ref={tableRef} data-shadow={false} {...props} className={`table ${props.className || ''}`}>
@@ -860,7 +888,7 @@ export const Table: React.FC<TableProps> = ({
         </Header>
       </HeaderWrapper>
       {renderBody()}
-      {onColumnDrag && ReactDOM.createPortal(<Mirror dimension={dimension} ref={mirrorRef} />, document.body)}
+      {isColumnsDraggable && ReactDOM.createPortal(<Mirror dimension={dimension} ref={mirrorRef} />, document.body)}
     </TableContainer>
   );
 };
