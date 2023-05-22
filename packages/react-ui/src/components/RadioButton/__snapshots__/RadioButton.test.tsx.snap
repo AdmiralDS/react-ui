@@ -77,7 +77,7 @@ fieldset[data-dimension='s'] .c2 {
   border: 5px solid #A7C7FF;
 }
 
-.c4:checked:not(disabled) + .c5 {
+.c4:checked:not(:disabled) + .c5 {
   border: 5px solid #0062FF;
 }
 
@@ -237,7 +237,7 @@ fieldset[data-dimension='s'] .c2 {
   border: 5px solid #A7C7FF;
 }
 
-.c4:checked:not(disabled) + .c5 {
+.c4:checked:not(:disabled) + .c5 {
   border: 5px solid #0062FF;
 }
 
@@ -452,7 +452,7 @@ fieldset[data-dimension='s'] .c2 {
   border: 5px solid #A7C7FF;
 }
 
-.c4:checked:not(disabled) + .c5 {
+.c4:checked:not(:disabled) + .c5 {
   border: 5px solid #0062FF;
 }
 
@@ -609,7 +609,7 @@ fieldset[data-dimension='s'] .c2 {
   border: 5px solid #A7C7FF;
 }
 
-.c4:checked:not(disabled) + .c5 {
+.c4:checked:not(:disabled) + .c5 {
   border: 5px solid #0062FF;
 }
 
@@ -821,7 +821,7 @@ fieldset[data-dimension='s'] .c2 {
   border: 5px solid #A7C7FF;
 }
 
-.c4:checked:not(disabled) + .c5 {
+.c4:checked:not(:disabled) + .c5 {
   border: 5px solid #0062FF;
 }
 
@@ -978,7 +978,7 @@ fieldset[data-dimension='s'] .c2 {
   border: 5px solid #A7C7FF;
 }
 
-.c4:checked:not(disabled) + .c5 {
+.c4:checked:not(:disabled) + .c5 {
   border: 5px solid #0062FF;
 }
 
