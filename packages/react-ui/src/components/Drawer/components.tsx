@@ -9,9 +9,9 @@ const Title = styled.h5<{ mobile: boolean; displayCloseIcon: boolean }>`
   margin: 0;
   padding: ${({ mobile, displayCloseIcon }) => {
     if (mobile) {
-      return displayCloseIcon ? '0 48px 10px 16px' : '0 16px 10px';
+      return displayCloseIcon ? '0 48px 8px 16px' : '0 16px 8px';
     }
-    return displayCloseIcon ? '0 56px 10px 24px' : '0 24px 10px';
+    return displayCloseIcon ? '0 56px 8px 24px' : '0 24px 8px';
   }};
 `;
 
@@ -25,7 +25,7 @@ const Content = styled.div<{ scrollbar: number; mobile: boolean }>`
 const ButtonPanel = styled.div<{ mobile: boolean }>`
   display: flex;
   flex-direction: ${({ mobile }) => (mobile ? 'column-reverse' : 'row-reverse')};
-  padding: ${({ mobile }) => (mobile ? '18px 16px 0' : '18px 24px 0')};
+  padding: ${({ mobile }) => (mobile ? '16px 16px 0' : '16px 24px 0')};
 
   & > button {
     margin: ${({ mobile }) => (mobile ? '0 0 16px 0' : '0 16px 0 0')};
