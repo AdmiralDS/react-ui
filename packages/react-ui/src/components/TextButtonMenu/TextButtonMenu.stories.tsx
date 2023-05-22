@@ -1,13 +1,9 @@
-import { withDesign } from 'storybook-addon-designs';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { TextButtonMenu } from '#src/components/TextButtonMenu/index';
 import * as React from 'react';
+import type { ComponentMeta, ComponentStory } from '@storybook/react';
+import { withDesign } from 'storybook-addon-designs';
 import styled, { ThemeProvider } from 'styled-components';
-import { T } from '#src/components/T';
-import type { RenderOptionProps } from '#src/components/Menu/MenuItem';
-import { MenuItem } from '#src/components/Menu/MenuItem';
-import type { Theme } from '#src/components/themes';
-import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
+import { TextButtonMenu, MenuItem, T, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
+import type { RenderOptionProps, Theme } from '@admiral-ds/react-ui';
 
 const StyledText = styled(T)`
   margin: 10px 0;
