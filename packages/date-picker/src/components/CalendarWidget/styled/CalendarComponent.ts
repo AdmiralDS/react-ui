@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { typography } from '#src/components/Typography';
-import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
+import { typography } from '@admiral-ds/react-ui';
+import { mediumGroupBorderRadius } from '@admiral-ds/react-ui';
 
 const CALENDAR_WIDTH = 284;
 const YEARS_VIEW_PADDING = '20px 12px 16px';

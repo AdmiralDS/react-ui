@@ -1,13 +1,13 @@
-import * as React from 'react';
-import dayjs from 'dayjs';
-import isSameOrAfter from 'dayjs/plugin/isSameOrAfter';
-import { ThemeContext } from 'styled-components';
-import { LIGHT_THEME } from '#src/components/themes';
+import * as React from "react";
+import dayjs from "dayjs";
+import isSameOrAfter from "dayjs/plugin/isSameOrAfter";
+import { ThemeContext } from "styled-components";
+import { LIGHT_THEME } from "@admiral-ds/react-ui";
 
-import { dayInRange, endOfWeek, sameDay, startOfWeek } from '../date-utils';
-import { DayComponent } from '../styled/DayComponent';
-import type { Corners } from '../constants';
-import type { IDayCalendarProps } from '#src/components/Calendar3/interfaces';
+import { dayInRange, endOfWeek, sameDay, startOfWeek } from "../date-utils";
+import { DayComponent } from "../styled/DayComponent";
+import type { Corners } from "../constants";
+import type { IDayCalendarProps } from "../../Calendar3/interfaces";
 
 dayjs.extend(isSameOrAfter);
 
@@ -31,7 +31,8 @@ export const Day = ({
   userLocale,
 }: ICalendarDayProps) => {
   const theme = React.useContext(ThemeContext) || LIGHT_THEME;
-  const disabled = !!validator?.invalidValue(day) || (filterDate && !filterDate(day));
+  const disabled =
+    !!validator?.invalidValue(day) || (filterDate && !filterDate(day));
   const outsideMonth = month !== undefined && month !== day.month();
   const inSelectingRange =
     !disabled &&
@@ -41,12 +42,13 @@ export const Day = ({
     !endDate &&
     activeDate.isSameOrAfter(startDate) &&
     dayInRange(day, startDate, activeDate);
-  const inRange = !!startDate && !!endDate && dayInRange(day, startDate, endDate);
+  const inRange =
+    !!startDate && !!endDate && dayInRange(day, startDate, endDate);
   const rangeStart = !!startDate && sameDay(day, startDate);
   const rangeEnd = !!startDate && !!endDate && sameDay(day, endDate);
   const rangeSelectingStart = inSelectingRange && sameDay(day, startDate);
   const rangeSelectingEnd = inSelectingRange && sameDay(day, activeDate);
-  const currentLocale = userLocale || theme.currentLocale || 'ru';
+  const currentLocale = userLocale || theme.currentLocale || "ru";
 
   const corners: Corners = {};
   if (startDate) {
@@ -55,10 +57,10 @@ export const Day = ({
     const start = rangeStart || rangeSelectingStart;
     const end = rangeEnd || rangeSelectingEnd;
     // если endDate не определена, то активную дату мы не выделяем серым фоном
-    corners['top-left'] = start || (weekStart && !end);
-    corners['bottom-left'] = start || (weekStart && !end);
-    corners['top-right'] = end || (weekEnd && !start);
-    corners['bottom-right'] = end || (weekEnd && !start);
+    corners["top-left"] = start || (weekStart && !end);
+    corners["bottom-left"] = start || (weekStart && !end);
+    corners["top-right"] = end || (weekEnd && !start);
+    corners["bottom-right"] = end || (weekEnd && !start);
   }
 
   return (
@@ -79,8 +81,8 @@ export const Day = ({
       }}
       className={
         sameDay(day, selected) && !rangeStart && !rangeEnd
-          ? 'ui-kit-calendar-day-component_selected'
-          : 'ui-kit-calendar-day-component'
+          ? "ui-kit-calendar-day-component_selected"
+          : "ui-kit-calendar-day-component"
       }
     >
       {day.date()}

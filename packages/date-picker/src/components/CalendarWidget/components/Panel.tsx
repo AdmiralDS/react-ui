@@ -1,16 +1,16 @@
-import type { FC, MouseEvent } from 'react';
-import * as React from 'react';
-import type { Dayjs } from 'dayjs';
-import { TooltipHoc } from '#src/components/TooltipHOC';
-import { ThemeContext } from 'styled-components';
-import { LIGHT_THEME } from '#src/components/themes';
+import type { FC, MouseEvent } from "react";
+import * as React from "react";
+import type { Dayjs } from "dayjs";
+import { TooltipHoc } from "@admiral-ds/react-ui";
+import { ThemeContext } from "styled-components";
+import { LIGHT_THEME } from "@admiral-ds/react-ui";
 
-import { PanelComponent } from '../styled/PanelComponent';
-import { Month, PanelDate, Year } from '../styled/PanelDate';
-import { capitalizeFirstLetter } from '../constants';
+import { PanelComponent } from "../styled/PanelComponent";
+import { Month, PanelDate, Year } from "../styled/PanelDate";
+import { capitalizeFirstLetter } from "../constants";
 
-import { Button } from './Button';
-import { getFormattedValue } from '#src/components/CalendarNew/CalendarWidget/date-utils';
+import { Button } from "./Button";
+import { getFormattedValue } from "../date-utils";
 
 const MonthWithTooltip = TooltipHoc(Month);
 const YearWithTooltip = TooltipHoc(Year);
@@ -64,14 +64,20 @@ export const Panel: FC<IPanelProps> = ({
   userLocale,
 }) => {
   const theme = React.useContext(ThemeContext) || LIGHT_THEME;
-  const previousMonthDisabled = !!minDate && minDate.diff(viewDate.subtract(1, 'month'), 'month') > 0;
-  const nextMonthDisabled = !!maxDate && viewDate.add(1, 'month').diff(maxDate, 'year') > 0;
-  const previousYearDisabled = !!minDate && minDate.diff(viewDate.subtract(1, 'year'), 'year') > 0;
-  const nextYearDisabled = !!maxDate && viewDate.add(1, 'year').diff(maxDate, 'year') > 0;
-  const previousDisabled = yearsView ? previousYearDisabled : previousMonthDisabled;
+  const previousMonthDisabled =
+    !!minDate && minDate.diff(viewDate.subtract(1, "month"), "month") > 0;
+  const nextMonthDisabled =
+    !!maxDate && viewDate.add(1, "month").diff(maxDate, "year") > 0;
+  const previousYearDisabled =
+    !!minDate && minDate.diff(viewDate.subtract(1, "year"), "year") > 0;
+  const nextYearDisabled =
+    !!maxDate && viewDate.add(1, "year").diff(maxDate, "year") > 0;
+  const previousDisabled = yearsView
+    ? previousYearDisabled
+    : previousMonthDisabled;
   const nextDisabled = yearsView ? nextYearDisabled : nextMonthDisabled;
 
-  const currentLocale = userLocale || theme.currentLocale || 'ru';
+  const currentLocale = userLocale || theme.currentLocale || "ru";
 
   const monthMouseDownHandle = (event: any) => {
     event.preventDefault();
@@ -83,51 +89,69 @@ export const Panel: FC<IPanelProps> = ({
   };
 
   return (
-    <PanelComponent yearsView={yearsView} monthsView={monthsView} className="ui-kit-calendar-panel-component">
+    <PanelComponent
+      yearsView={yearsView}
+      monthsView={monthsView}
+      className="ui-kit-calendar-panel-component"
+    >
       {!monthsView && !previousDisabled ? (
         <ButtonWithTooltip
           renderContent={() =>
             yearsView
-              ? locale?.backwardText || theme.locales[theme.currentLocale].calendar.backwardText
-              : locale?.previousMonthText || theme.locales[theme.currentLocale].calendar.previousMonthText
+              ? locale?.backwardText ||
+                theme.locales[theme.currentLocale].calendar.backwardText
+              : locale?.previousMonthText ||
+                theme.locales[theme.currentLocale].calendar.previousMonthText
           }
           onMouseDown={onPrevious}
           disabled={previousDisabled}
           type="left"
         />
       ) : (
-        <Button onMouseDown={onPrevious} disabled={previousDisabled} type="left" />
+        <Button
+          onMouseDown={onPrevious}
+          disabled={previousDisabled}
+          type="left"
+        />
       )}
       <PanelDate>
         <MonthWithTooltip
           renderContent={() =>
             monthsView
-              ? locale?.returnText || theme.locales[theme.currentLocale].calendar.returnText
-              : locale?.selectMonthText || theme.locales[theme.currentLocale].calendar.selectMonthText
+              ? locale?.returnText ||
+                theme.locales[theme.currentLocale].calendar.returnText
+              : locale?.selectMonthText ||
+                theme.locales[theme.currentLocale].calendar.selectMonthText
           }
           view={monthsView}
           onMouseDown={monthMouseDownHandle}
         >
-          {capitalizeFirstLetter(getFormattedValue(viewDate, currentLocale, 'MMMM'))}
+          {capitalizeFirstLetter(
+            getFormattedValue(viewDate, currentLocale, "MMMM")
+          )}
         </MonthWithTooltip>
         <YearWithTooltip
           renderContent={() =>
             yearsView
-              ? locale?.returnText || theme.locales[theme.currentLocale].calendar.returnText
-              : locale?.selectYearText || theme.locales[theme.currentLocale].calendar.selectYearText
+              ? locale?.returnText ||
+                theme.locales[theme.currentLocale].calendar.returnText
+              : locale?.selectYearText ||
+                theme.locales[theme.currentLocale].calendar.selectYearText
           }
           view={yearsView}
           onMouseDown={yearMouseDownHandle}
         >
-          {viewDate.get('year')}
+          {viewDate.get("year")}
         </YearWithTooltip>
       </PanelDate>
       {!monthsView && !nextDisabled ? (
         <ButtonWithTooltip
           renderContent={() =>
             yearsView
-              ? locale?.forwardText || theme.locales[theme.currentLocale].calendar.forwardText
-              : locale?.nextMonthText || theme.locales[theme.currentLocale].calendar.nextMonthText
+              ? locale?.forwardText ||
+                theme.locales[theme.currentLocale].calendar.forwardText
+              : locale?.nextMonthText ||
+                theme.locales[theme.currentLocale].calendar.nextMonthText
           }
           onMouseDown={onNext}
           disabled={nextDisabled}

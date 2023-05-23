@@ -3,16 +3,13 @@ import type { SyntheticEvent } from "react";
 import dayjs from "dayjs";
 import type { Dayjs } from "dayjs";
 import "dayjs/locale/ru";
-import { CalendarComponent } from "#src/components/CalendarNew/CalendarWidget/styled/CalendarComponent";
-import { renderDefaultPanel } from "#src/components/CalendarNew/CalendarWidget/components/Panel";
-import { DayNames } from "#src/components/CalendarNew/CalendarWidget/components/DayNames";
-import { Month } from "#src/components/CalendarNew/CalendarWidget/components/Month";
-import {
-  changeTime,
-  equal,
-} from "#src/components/CalendarNew/CalendarWidget/date-utils";
+import { CalendarComponent } from "./styled/CalendarComponent";
+import { renderDefaultPanel } from "./components/Panel";
+import { DayNames } from "./components/DayNames";
+import { Month } from "./components/Month";
+import { changeTime, equal } from "./date-utils";
 import { ThemeContext } from "styled-components";
-import { LIGHT_THEME } from "#src/components/themes";
+import { LIGHT_THEME, type Theme } from "@admiral-ds/react-ui";
 
 export type CalendarViewScreenType = "YEAR" | "MONTH" | "DAY";
 
@@ -72,7 +69,10 @@ export interface CalendarWidgetProps {
   userLocale?: string;
 }
 
-export const Calendar4 = React.forwardRef<HTMLDivElement, CalendarWidgetProps>(
+export const CalendarWidget = React.forwardRef<
+  HTMLDivElement,
+  CalendarWidgetProps
+>(
   (
     {
       viewDate,

@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { typography } from '#src/components/Typography';
+import { typography } from '@admiral-ds/react-ui';
 
 const YEAR_MONTH_HEIGHT = '32px';
 const YEAR_MONTH_PADDING = '4px 8px';
