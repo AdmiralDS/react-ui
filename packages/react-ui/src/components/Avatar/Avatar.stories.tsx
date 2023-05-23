@@ -3,9 +3,7 @@ import * as React from 'react';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import styled from 'styled-components';
 import { ReactComponent as PersonSolid } from '@admiral-ds/icons/build/system/PersonSolid.svg';
-import { DefaultFontColorName } from '#src/components/themes';
-
-import { Avatar } from '.';
+import { Avatar, DefaultFontColorName } from '@admiral-ds/react-ui';
 
 const imageURL = 'https://github.com/DrUNE.png?size=100';
 

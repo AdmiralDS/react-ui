@@ -3,9 +3,8 @@ import styled, { ThemeProvider } from 'styled-components';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import { ReactComponent as AttachFileOutline } from '@admiral-ds/icons/build/system/AttachFileOutline.svg';
-import { TextButton, T, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
+import { TextButton, T, ALL_BORDER_RADIUS_VALUES, cleanUpProps } from '@admiral-ds/react-ui';
 import type { Theme } from '@admiral-ds/react-ui';
-import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 const StyledText = styled(T)`
   margin: 10px 0;
