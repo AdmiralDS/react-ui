@@ -17,6 +17,7 @@ export interface Shadow {
   'Shadow 02': string;
   'Shadow 04': string;
   'Shadow 08': string;
+  'Shadow 12': string;
   'Shadow 16': string;
   'Shadow Stroke': string;
 }

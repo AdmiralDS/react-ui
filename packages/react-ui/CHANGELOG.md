@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.16.0](https://github.com/AdmiralDS/react-ui/compare/v4.15.1...v4.16.0) (2023-05-23)
+
+
+### Features
+
+* **TextButton:** add iconStart and iconEnd props instead of icon and displayRight ([e077c99](https://github.com/AdmiralDS/react-ui/commit/e077c99303b282a28b0589b6d3aec4fc368b1c88))
+* **TextButtonMenu:** add icon prop ([ee97c8a](https://github.com/AdmiralDS/react-ui/commit/ee97c8a00f1f27bd65c14d6b81cc053c0baf0306))
+* **TextButtonMenu:** add iconStart prop ([1832ef8](https://github.com/AdmiralDS/react-ui/commit/1832ef8842203a6d50d8b36356cd1b17c7e9cf82))
+* **themes:** add shadow style 'Shadow 12' ([628966c](https://github.com/AdmiralDS/react-ui/commit/628966c5e024a30ab440d7eae1bf9a1cfe05f70e))
+
+
+### Bug Fixes
+
+* **Menu:** fix Menu width ([07cd291](https://github.com/AdmiralDS/react-ui/commit/07cd2915e6f838bb7871c9102b5f564e40552703))
+* **Toggle, RadioButton:** fix readOnly state style ([31c11ec](https://github.com/AdmiralDS/react-ui/commit/31c11ece82e1effc61afd9c39cff19ecc88b55ad))
+
 ### [4.15.1](https://github.com/AdmiralDS/react-ui/compare/v4.15.0...v4.15.1) (2023-05-19)
 
 

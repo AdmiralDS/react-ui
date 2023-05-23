@@ -62,6 +62,7 @@ const StyledDiv = styled.div<{ hasTopPanel: boolean; hasBottomPanel: boolean }>`
   flex: 1 1 auto;
   border: none;
   overflow-y: auto;
+  box-sizing: border-box;
 `;
 
 export interface RenderPanelProps {
