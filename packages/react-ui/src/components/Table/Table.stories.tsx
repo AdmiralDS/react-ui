@@ -28,6 +28,7 @@ import {
   virtualRowList,
   columnListWithCustomRender,
   rowListWithCustomRenderGroup,
+  columnListWithDrag,
 } from '#src/components/Table/data';
 import { ReactComponent as AcceptSolid } from '@admiral-ds/icons/build/category/AcceptSolid.svg';
 import { DefaultFontColorName } from '#src/components/themes';
@@ -621,15 +622,7 @@ const Template9: ComponentStory<typeof Table> = ({ columnList, ...args }) => {
     setCols(columns);
   };
 
-  return (
-    <Table
-      {...args}
-      columnList={cols}
-      onColumnResize={handleResize}
-      onColumnDrag={handleColumnDrag}
-      isColumnsDraggable
-    />
-  );
+  return <Table {...args} columnList={cols} onColumnResize={handleResize} onColumnDrag={handleColumnDrag} />;
 };
 
 export const Playground = Template.bind({});
@@ -981,7 +974,7 @@ CustomRenderGroupTitle.storyName = 'Пример кастомизации заг
 export const DraggableColumns = Template9.bind({});
 DraggableColumns.args = {
   rowList,
-  columnList: columnListWithWidth,
+  columnList: columnListWithDrag,
   style: { width: '700px' },
 };
 DraggableColumns.storyName = 'Пример drag&drop столбцов';

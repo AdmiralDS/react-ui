@@ -252,7 +252,12 @@ export function dragObserver(initialContainers: HTMLElement[], options: Options,
 
     const clientX = getCoord('clientX', e) || 0;
     const clientY = getCoord('clientY', e) || 0;
-    const x = clientX - _offsetX;
+    let x;
+    if (o.direction === 'vertical') {
+      x = clientX - _offsetX;
+    } else if (o.direction === 'horizontal') {
+      x = clientX - 18;
+    }
     const y = clientY - _offsetY;
 
     _mirror.style.left = x + 'px';

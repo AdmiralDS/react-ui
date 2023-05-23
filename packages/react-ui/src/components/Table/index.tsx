@@ -77,6 +77,8 @@ export type Column = {
   sticky?: boolean;
   /** Отключение возможности ресайза колонки */
   disableResize?: boolean;
+  /** */
+  draggable?: boolean;
   /** Состояние фильтра.
    * Необходимо для окрашивания иконки фильтра в синий цвет при активном фильтре и в серый при неактивном фильтре.
    */
@@ -266,9 +268,10 @@ export interface TableProps extends React.HTMLAttributes<HTMLDivElement> {
     /** Сообщение, отображаемое при отсутствии совпадений в строках после применения фильтра */
     emptyMessage?: React.ReactNode;
   };
-  isColumnsDraggable?: boolean;
-  isStickyColumnsDraggable?: boolean;
+  /** */
   onColumnDrag?: (columnName: string, nextColumnName: string | null) => void;
+  /** Контейнер, внутри которого будет отрисован портал, по умолчанию портал рендерится в document.body */
+  rootRef?: React.RefObject<HTMLElement>;
 }
 
 type GroupInfo = {
@@ -313,9 +316,8 @@ export const Table: React.FC<TableProps> = ({
   showLastRowUnderline = true,
   virtualScroll,
   locale,
-  isColumnsDraggable = false,
-  isStickyColumnsDraggable = false,
   onColumnDrag,
+  rootRef,
   ...props
 }) => {
   const theme = React.useContext(ThemeContext) || LIGHT_THEME;
@@ -328,6 +330,9 @@ export const Table: React.FC<TableProps> = ({
   const [scrollbar, setScrollbarSize] = React.useState(0);
 
   const stickyColumns = [...columnList].filter((col) => col.sticky);
+
+  const isAnyColumnDraggable = columnList.filter((col) => !col.sticky && col.draggable).length > 0;
+  const isAnyStickyColumnDraggable = columnList.filter((col) => col.sticky && col.draggable).length > 0;
 
   const tableRef = React.useRef<HTMLDivElement>(null);
   const headerRef = React.useRef<HTMLDivElement>(null);
@@ -797,7 +802,7 @@ export const Table: React.FC<TableProps> = ({
   }, [onColumnDrag]);
 
   React.useEffect(() => {
-    if (mirrorRef.current) {
+    if (mirrorRef.current && (isAnyColumnDraggable || isAnyStickyColumnDraggable)) {
       const observer = observeRect(mirrorRef.current, (rect: any) => {
         const tableRight = tableRef.current?.getBoundingClientRect().right || 0;
         const tableLeft = tableRef.current?.getBoundingClientRect().left || 0;
@@ -813,7 +818,7 @@ export const Table: React.FC<TableProps> = ({
       observer.observe();
       return () => observer.unobserve();
     }
-  }, [isColumnsDraggable, isStickyColumnsDraggable]);
+  }, [isAnyColumnDraggable, isAnyStickyColumnDraggable]);
 
   React.useEffect(() => {
     const stickyCols = stickyColumnsWrapperRef.current;
@@ -825,7 +830,7 @@ export const Table: React.FC<TableProps> = ({
       }
     }
 
-    if (normalCols && isColumnsDraggable) {
+    if (normalCols && isAnyColumnDraggable) {
       const observer = dragObserver(
         [normalCols],
         {
@@ -845,12 +850,12 @@ export const Table: React.FC<TableProps> = ({
         },
         handleDrop,
       );
-      if (stickyCols && isStickyColumnsDraggable) observer.containers.push(stickyCols);
+      if (stickyCols && isAnyStickyColumnDraggable) observer.containers.push(stickyCols);
       return () => {
         observer.unobserve();
       };
     }
-  }, [isColumnsDraggable, isStickyColumnsDraggable]);
+  }, [isAnyColumnDraggable, isAnyStickyColumnDraggable]);
 
   return (
     <TableContainer ref={tableRef} data-shadow={false} {...props} className={`table ${props.className || ''}`}>
@@ -888,7 +893,8 @@ export const Table: React.FC<TableProps> = ({
         </Header>
       </HeaderWrapper>
       {renderBody()}
-      {isColumnsDraggable && ReactDOM.createPortal(<Mirror dimension={dimension} ref={mirrorRef} />, document.body)}
+      {(isAnyColumnDraggable || isAnyStickyColumnDraggable) &&
+        ReactDOM.createPortal(<Mirror dimension={dimension} ref={mirrorRef} />, rootRef?.current || document.body)}
     </TableContainer>
   );
 };
