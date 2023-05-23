@@ -6,6 +6,9 @@ export {
   smallGroupBorderRadius,
   mediumGroupBorderRadius,
   largeGroupBorderRadius,
+  DefaultFontColorName,
+  DefaultBackgroundColorName,
+  MainPrimaryColorName,
 } from './components/themes';
 
 export * from './components/Accordion';
