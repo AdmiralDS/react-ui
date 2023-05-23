@@ -3,9 +3,8 @@ import * as React from 'react';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import styled from 'styled-components';
 import type { AvatarGroupProps } from '@admiral-ds/react-ui';
-import { AvatarGroup, DefaultFontColorName } from '@admiral-ds/react-ui';
+import { AvatarGroup, DefaultFontColorName, cleanUpProps } from '@admiral-ds/react-ui';
 import { ReactComponent as PersonSolid } from '@admiral-ds/icons/build/system/PersonSolid.svg';
-import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 const imageURL = 'https://github.com/DrUNE.png?size=100';
 

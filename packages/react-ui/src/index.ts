@@ -82,6 +82,7 @@ export * from './components/GroupActionsPane';
 export * from './components/skeleton/animation';
 export * from './components/common/utils/refSetter';
 export * from './components/common/utils/checkOverflow';
+export * from './components/common/utils/cleanUpStoriesProps';
 export * from './components/common/keyboardKey';
 export * from './components/common/hooks/useClickOutside';
 export * from './components/common/hooks/useDebounce';
