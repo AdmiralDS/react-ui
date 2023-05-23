@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import { Link as RouterLink, MemoryRouter as Router } from 'react-router-dom';
-import { Breadcrumbs } from '#src/components/Breadcrumbs';
+import { Breadcrumbs } from '@admiral-ds/react-ui';
 
 const Separator = styled.div`
   height: 20px;
