@@ -22,7 +22,8 @@ const StyledButton = styled.button.attrs<StyledButtonProps>((props) => ({
   position: relative;
   box-sizing: border-box;
   display: inline-flex;
-  flex-direction: ${(p) => (p.displayRight ? 'row-reverse' : 'row')};
+  flex-direction: row;
+  gap: 8px;
   align-items: center;
   vertical-align: middle;
   appearance: none;
@@ -52,11 +53,21 @@ export interface TextButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>
   appearance?: Appearance;
   /** Размер кнопки */
   dimension?: Dimension;
-  /** Иконка кнопки */
+  /**
+   * @deprecated Используйте iconStart или iconEnd
+   * Иконка кнопки
+   */
   icon?: ReactNode;
+  /** Иконка перед текстом кнопки */
+  iconStart?: ReactNode;
+  /** Иконка после текста кнопки */
+  iconEnd?: ReactNode;
   /** Текст кнопки */
   text?: string;
-  /** Позиционирование иконки. По умолчанию - слева */
+  /**
+   * @deprecated Используйте iconStart или iconEnd
+   * Позиционирование иконки. По умолчанию - слева
+   */
   displayRight?: boolean;
   /** Состояние загрузки */
   loading?: boolean;
@@ -70,6 +81,8 @@ export const TextButton = React.forwardRef<HTMLButtonElement, TextButtonProps>(
       appearance = 'primary',
       dimension = 'm',
       icon,
+      iconStart,
+      iconEnd,
       type = 'button',
       text,
       displayRight = false,
@@ -85,16 +98,26 @@ export const TextButton = React.forwardRef<HTMLButtonElement, TextButtonProps>(
         ref={ref}
         appearance={appearance}
         dimension={dimension}
-        displayRight={displayRight}
         type={type}
         $loading={loading}
         skeleton={skeleton}
       >
         {loading && <StyledSpinner dimension={dimension === 's' ? 'ms' : 'm'} />}
-        {icon && <IconContainer>{icon}</IconContainer>}
+        {iconStart ? (
+          <IconContainer>{iconStart}</IconContainer>
+        ) : icon && !displayRight ? (
+          <IconContainer>{icon}</IconContainer>
+        ) : null}
+        {/*{icon && !displayRight && <IconContainer>{icon}</IconContainer>}*/}
         <ButtonContainer>
           <span>{text}</span>
         </ButtonContainer>
+        {iconEnd ? (
+          <IconContainer>{iconEnd}</IconContainer>
+        ) : icon && displayRight ? (
+          <IconContainer>{icon}</IconContainer>
+        ) : null}
+        {/*{icon && displayRight && <IconContainer>{icon}</IconContainer>}*/}
       </StyledButton>
     );
   },

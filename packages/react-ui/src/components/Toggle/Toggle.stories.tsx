@@ -5,6 +5,7 @@ import styled from 'styled-components';
 
 import type { ToggleProps } from '#src/components/Toggle';
 import { Toggle } from '#src/components/Toggle';
+import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 const Separator = styled.div`
   height: 20px;
@@ -181,11 +182,18 @@ const Template6: ComponentStory<typeof Toggle> = ({
   extraText,
   labelPosition,
   checked: argChecked,
+  ...props
 }: ToggleProps) => {
   const [checked, setChecked] = useState(argChecked || false);
+  const clearProps = cleanUpProps(props);
+
+  React.useEffect(() => {
+    setChecked(!!argChecked);
+  }, [argChecked]);
   return (
     <>
       <Toggle
+        {...clearProps}
         checked={checked}
         onChange={(event) => setChecked(event.currentTarget.checked)}
         dimension={dimension}
