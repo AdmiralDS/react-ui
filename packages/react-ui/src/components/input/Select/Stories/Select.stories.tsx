@@ -372,7 +372,7 @@ const TemplateSimpleMultiSelect: ComponentStory<typeof Select> = (props) => {
         renderDropDownBottomPanel={({ dimension = menuPanelContentDimension }) => {
           return (
             <MenuActionsPanel dimension={dimension}>
-              <TextButton text={'Добавить'} disabled={false} icon={<Cuba />} onClick={handleAddButtonClick} />
+              <TextButton text={'Добавить'} disabled={false} iconStart={<Cuba />} onClick={handleAddButtonClick} />
             </MenuActionsPanel>
           );
         }}
@@ -569,7 +569,7 @@ const SearchSelectWithBottomPaneTemplate: ComponentStory<typeof Select> = (props
         renderDropDownBottomPanel={({ dimension = menuPanelContentDimension }) => {
           return (
             <MenuActionsPanel dimension={dimension}>
-              <TextButton text={'Добавить'} disabled={false} icon={<Cuba />} onClick={handleAddButtonClick} />
+              <TextButton text={'Добавить'} disabled={false} iconStart={<Cuba />} onClick={handleAddButtonClick} />
             </MenuActionsPanel>
           );
         }}

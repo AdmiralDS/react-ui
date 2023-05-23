@@ -4,6 +4,7 @@ import { withDesign } from 'storybook-addon-designs';
 import styled, { ThemeProvider } from 'styled-components';
 import { TextButtonMenu, MenuItem, T, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 import type { RenderOptionProps, Theme } from '@admiral-ds/react-ui';
+import { ReactComponent as AttachFileOutline } from '@admiral-ds/icons/build/system/AttachFileOutline.svg';
 
 const StyledText = styled(T)`
   margin: 10px 0;
@@ -90,6 +91,18 @@ export default {
     },
     dropContainerStyle: {
       control: false,
+    },
+    iconStart: {
+      control: false,
+    },
+    items: {
+      control: false,
+    },
+    selected: {
+      control: false,
+    },
+    menuMaxHeight: {
+      control: { type: 'text' },
     },
     menuWidth: {
       control: { type: 'text' },
@@ -215,9 +228,39 @@ const TextButtonMenuSizes: ComponentStory<typeof TextButtonMenu> = (args) => {
   return (
     <WrapperButton>
       <div>
-        <StyledText font="Body/Body 1 Long" as="div">
+        <StyledText font="Header/H6" as="div">
           Dimension - M
         </StyledText>
+        <TextButtonMenu
+          items={model}
+          selected={selected}
+          dimension="m"
+          text="Text Button"
+          appearance="primary"
+          onSelectItem={handleSelectItem}
+          iconStart={<AttachFileOutline />}
+        />
+        <Separator />
+        <TextButtonMenu
+          items={model}
+          selected={selected}
+          dimension="m"
+          text="Text Button"
+          disabled
+          onSelectItem={handleSelectItem}
+          iconStart={<AttachFileOutline />}
+        />
+        <Separator />
+        <TextButtonMenu
+          items={model}
+          selected={selected}
+          dimension="m"
+          text="Text Button"
+          onSelectItem={handleSelectItem}
+          iconStart={<AttachFileOutline />}
+          loading
+        />
+        <Separator />
         <TextButtonMenu
           items={model}
           selected={selected}
@@ -232,8 +275,8 @@ const TextButtonMenuSizes: ComponentStory<typeof TextButtonMenu> = (args) => {
           selected={selected}
           dimension="m"
           text="Text Button"
+          disabled
           onSelectItem={handleSelectItem}
-          loading
         />
         <Separator />
         <TextButtonMenu
@@ -241,11 +284,11 @@ const TextButtonMenuSizes: ComponentStory<typeof TextButtonMenu> = (args) => {
           selected={selected}
           dimension="m"
           text="Text Button"
-          disabled
           onSelectItem={handleSelectItem}
+          loading
         />
         <Separator />
-        <StyledText font="Body/Body 1 Long" as="div">
+        <StyledText font="Header/H6" as="div">
           Dimension - S
         </StyledText>
         <TextButtonMenu
@@ -254,6 +297,7 @@ const TextButtonMenuSizes: ComponentStory<typeof TextButtonMenu> = (args) => {
           dimension="s"
           text="Text Button"
           onSelectItem={handleSelectItem}
+          iconStart={<AttachFileOutline />}
         />
         <Separator />
         <TextButtonMenu
@@ -262,7 +306,26 @@ const TextButtonMenuSizes: ComponentStory<typeof TextButtonMenu> = (args) => {
           dimension="s"
           text="Text Button"
           onSelectItem={handleSelectItem}
+          iconStart={<AttachFileOutline />}
+          disabled
+        />
+        <Separator />
+        <TextButtonMenu
+          items={model}
+          selected={selected}
+          dimension="s"
+          text="Text Button"
+          onSelectItem={handleSelectItem}
+          iconStart={<AttachFileOutline />}
           loading
+        />
+        <Separator />
+        <TextButtonMenu
+          items={model}
+          selected={selected}
+          dimension="s"
+          text="Text Button"
+          onSelectItem={handleSelectItem}
         />
         <Separator />
         <TextButtonMenu
@@ -273,9 +336,18 @@ const TextButtonMenuSizes: ComponentStory<typeof TextButtonMenu> = (args) => {
           onSelectItem={handleSelectItem}
           disabled
         />
+        <Separator />
+        <TextButtonMenu
+          items={model}
+          selected={selected}
+          dimension="s"
+          text="Text Button"
+          onSelectItem={handleSelectItem}
+          loading
+        />
       </div>
       <div>
-        <StyledText font="Body/Body 1 Long" as="div">
+        <StyledText font="Header/H6" as="div">
           Dimension - M
         </StyledText>
         <TextButtonMenu
@@ -285,6 +357,18 @@ const TextButtonMenuSizes: ComponentStory<typeof TextButtonMenu> = (args) => {
           text="Text Button"
           appearance="secondary"
           onSelectItem={handleSelectItem}
+          iconStart={<AttachFileOutline />}
+        />
+        <Separator />
+        <TextButtonMenu
+          items={model}
+          selected={selected}
+          dimension="m"
+          text="Text Button"
+          appearance="secondary"
+          disabled
+          onSelectItem={handleSelectItem}
+          iconStart={<AttachFileOutline />}
         />
         <Separator />
         <TextButtonMenu
@@ -294,7 +378,17 @@ const TextButtonMenuSizes: ComponentStory<typeof TextButtonMenu> = (args) => {
           text="Text Button"
           appearance="secondary"
           onSelectItem={handleSelectItem}
+          iconStart={<AttachFileOutline />}
           loading
+        />
+        <Separator />
+        <TextButtonMenu
+          items={model}
+          selected={selected}
+          dimension="m"
+          text="Text Button"
+          appearance="secondary"
+          onSelectItem={handleSelectItem}
         />
         <Separator />
         <TextButtonMenu
@@ -307,7 +401,17 @@ const TextButtonMenuSizes: ComponentStory<typeof TextButtonMenu> = (args) => {
           onSelectItem={handleSelectItem}
         />
         <Separator />
-        <StyledText font="Body/Body 1 Long" as="div">
+        <TextButtonMenu
+          items={model}
+          selected={selected}
+          dimension="m"
+          text="Text Button"
+          appearance="secondary"
+          onSelectItem={handleSelectItem}
+          loading
+        />
+        <Separator />
+        <StyledText font="Header/H6" as="div">
           Dimension - S
         </StyledText>
         <TextButtonMenu
@@ -317,6 +421,7 @@ const TextButtonMenuSizes: ComponentStory<typeof TextButtonMenu> = (args) => {
           text="Text Button"
           appearance="secondary"
           onSelectItem={handleSelectItem}
+          iconStart={<AttachFileOutline />}
         />
         <Separator />
         <TextButtonMenu
@@ -326,7 +431,28 @@ const TextButtonMenuSizes: ComponentStory<typeof TextButtonMenu> = (args) => {
           text="Text Button"
           appearance="secondary"
           onSelectItem={handleSelectItem}
+          iconStart={<AttachFileOutline />}
+          disabled
+        />
+        <Separator />
+        <TextButtonMenu
+          items={model}
+          selected={selected}
+          dimension="s"
+          text="Text Button"
+          appearance="secondary"
+          onSelectItem={handleSelectItem}
+          iconStart={<AttachFileOutline />}
           loading
+        />
+        <Separator />
+        <TextButtonMenu
+          items={model}
+          selected={selected}
+          dimension="s"
+          text="Text Button"
+          appearance="secondary"
+          onSelectItem={handleSelectItem}
         />
         <Separator />
         <TextButtonMenu
@@ -338,8 +464,64 @@ const TextButtonMenuSizes: ComponentStory<typeof TextButtonMenu> = (args) => {
           onSelectItem={handleSelectItem}
           disabled
         />
+        <Separator />
+        <TextButtonMenu
+          items={model}
+          selected={selected}
+          dimension="s"
+          text="Text Button"
+          appearance="secondary"
+          onSelectItem={handleSelectItem}
+          loading
+        />
       </div>
     </WrapperButton>
+  );
+};
+
+const TextButtonMenuWithIconTemplate: ComponentStory<typeof TextButtonMenu> = (args) => {
+  const [selected, setSelected] = React.useState<string | undefined>(undefined);
+  const model = React.useMemo(() => {
+    return items.map((item) => ({
+      id: item.id,
+      render: (options: RenderOptionProps) => (
+        <MenuItem dimension={args.dimension} {...options} key={item.id}>
+          {item.display}
+        </MenuItem>
+      ),
+      disabled: item.disabled,
+    }));
+  }, [args.dimension]);
+
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
+    return theme;
+  }
+
+  return (
+    <ThemeProvider theme={swapBorder}>
+      <Wrapper>
+        <TextButtonMenu
+          {...args}
+          text={args.text}
+          selected={selected}
+          dimension={args.dimension}
+          loading={args.loading}
+          disabled={args.disabled}
+          appearance={args.appearance}
+          onSelectItem={(id) => {
+            logSelectedId(id);
+            setSelected(id);
+          }}
+          items={model}
+          onVisibilityChange={handleVisibilityChange}
+          data-dropdown-container-id="text-button-menu-with-dropdown"
+          className="text-button-menu-class"
+          dropContainerClassName="dropContainerClass"
+          iconStart={<AttachFileOutline />}
+        />
+      </Wrapper>
+    </ThemeProvider>
   );
 };
 
@@ -350,3 +532,7 @@ TextButtonMenuStoryDemo.storyName = 'TextButtonMenu';
 export const TextButtonMenuVariants = TextButtonMenuSizes.bind({});
 TextButtonMenuVariants.args = {};
 TextButtonMenuVariants.storyName = 'TextButtonMenu. Размеры и стили.';
+
+export const TextButtonMenuWithIcon = TextButtonMenuWithIconTemplate.bind({});
+TextButtonMenuWithIcon.args = { text: 'Text Button' };
+TextButtonMenuWithIcon.storyName = 'TextButtonMenu. С иконкой.';

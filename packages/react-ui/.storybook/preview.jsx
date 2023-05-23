@@ -11,6 +11,10 @@ import { DropdownProvider } from '#src/components/DropdownProvider';
 
 import LogoSvg from './Logo.svg';
 
+import { initializeRTL } from 'storybook-addon-rtl';
+
+initializeRTL();
+
 const customTheme = {
   brandImage: LogoSvg,
   brandTitle: `version ${version}`,
