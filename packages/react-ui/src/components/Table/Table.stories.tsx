@@ -3,11 +3,11 @@ import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import styled from 'styled-components';
 
-import type { Column } from '#src/components/Table';
-import { Table } from '#src/components/Table';
-import { FieldSet, DateField } from '#src/components/form';
-import { RadioButton } from '#src/components/RadioButton';
-import { Button } from '#src/components/Button';
+import type { Column } from '@admiral-ds/react-ui';
+import { Table, Button, RadioButton, FieldSet, DateField, DefaultFontColorName } from '@admiral-ds/react-ui';
+import { ReactComponent as AcceptSolid } from '@admiral-ds/icons/build/category/AcceptSolid.svg';
+
+// Массивы с данными столбцов и строк вынесены в отдельный файл в связи с большим объемом информации
 import {
   columnList,
   columnListExtra,
@@ -28,9 +28,7 @@ import {
   virtualRowList,
   columnListWithCustomRender,
   rowListWithCustomRenderGroup,
-} from '#src/components/Table/data';
-import { ReactComponent as AcceptSolid } from '@admiral-ds/icons/build/category/AcceptSolid.svg';
-import { DefaultFontColorName } from '#src/components/themes';
+} from './data';
 
 const Separator = styled.div`
   height: 20px;
@@ -356,10 +354,10 @@ const Template4: ComponentStory<typeof Table> = (args) => {
           setSelected((e.target as HTMLInputElement).value);
         }}
       >
-        <RadioButton value="1" name="test" checked={'1' === selected} readOnly>
+        <RadioButton value="1" name="test" checked={'1' === selected}>
           Сумма превышает миллиард
         </RadioButton>
-        <RadioButton value="2" name="test" checked={'2' === selected} readOnly>
+        <RadioButton value="2" name="test" checked={'2' === selected}>
           Сумма меньше миллиарда
         </RadioButton>
       </FieldSet>
