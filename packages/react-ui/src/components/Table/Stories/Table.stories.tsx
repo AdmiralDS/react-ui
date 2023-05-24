@@ -20,7 +20,6 @@ import {
   rowList,
   rowListExpanded,
   rowListLineClamp,
-  rowListMenu,
   rowListRowState,
   rowListSort,
   rowListWithGroup,
@@ -29,10 +28,11 @@ import {
 } from './data';
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
-import { VirtualScrollTemplate } from './Templates';
+import { VirtualScrollTemplate, OverflowMenuTemplate } from './Templates';
 // Imports of text sources
 /* eslint-disable import/default */
 import VirtualScrollRaw from '!!raw-loader!./Templates/TableVirtualScroll';
+import OverflowMenuRaw from '!!raw-loader!./Templates/TableOverflowMenu';
 
 const Separator = styled.div`
   height: 20px;
@@ -863,14 +863,16 @@ ExtraText.parameters = {
   },
 };
 
-export const RowOverflowMenu = Template.bind({});
-RowOverflowMenu.args = {
-  rowList: rowListMenu,
-  columnList,
-};
-RowOverflowMenu.storyName = 'Table. Пример строк с OverflowMenu и иконками для одиночного действия.';
-RowOverflowMenu.parameters = {
+//<editor-fold desc="Пример с оверфлоу меню и одиночными действиями над строкой">
+const OverflowMenuStory: ComponentStory<typeof Table> = (props) => (
+  <OverflowMenuTemplate columnList={[]} rowList={[]} {...cleanUpProps(props)} />
+);
+export const OverflowMenuExample = OverflowMenuStory.bind({});
+OverflowMenuExample.parameters = {
   docs: {
+    source: {
+      code: OverflowMenuRaw,
+    },
     description: {
       story: `Опционально со строками можно производить набор действий через Overflow Menu, 
       которое появляется при ховере над строкой. При этом, чтобы не накладываться на возможный текст, 
@@ -889,6 +891,8 @@ RowOverflowMenu.parameters = {
     },
   },
 };
+OverflowMenuExample.storyName = 'Table. Пример строк с OverflowMenu и иконками для одиночного действия.';
+//</editor-fold>
 
 //<editor-fold desc="Пример с виртуальным скроллом">
 const VirtualScrollStory: ComponentStory<typeof Table> = (props) => (

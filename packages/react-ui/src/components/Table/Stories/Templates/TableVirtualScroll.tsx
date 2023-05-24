@@ -2,7 +2,12 @@ import * as React from 'react';
 import { Table } from "@admiral-ds/react-ui";
 import type { TableProps, Column, TableRow } from '@admiral-ds/react-ui';
 
-const virtualRowList: TableRow[] = [...Array(1000).keys()].map((_item, index) => ({
+type RowData = TableRow & {    
+  transfer_number: number;
+  transfer_date: string;
+};
+
+const virtualRowList: RowData[] = [...Array(1000).keys()].map((_item, index) => ({
     id: String(index),
     transfer_number: index,
     transfer_date: new Date('2020-08-06').toLocaleDateString(),
