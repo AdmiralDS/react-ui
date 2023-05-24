@@ -1,38 +1,51 @@
 import type { ChangeEvent, HTMLAttributes } from 'react';
 import * as React from 'react';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { Menu } from '#src/components/Menu';
-import type { ItemProps, RenderOptionProps } from '#src/components/Menu/MenuItem';
-import { MenuItem } from '#src/components/Menu/MenuItem';
+import {
+  Menu,
+  MenuItem,
+  typography,
+  LIGHT_THEME,
+  RadioButton,
+  TooltipHoc,
+  TextInput,
+  TextButton,
+  getHighlightedFilteredOptions,
+  MenuActionsPanel,
+  Button,
+  keyboardKey,
+  mediumGroupBorderRadius,
+  ALL_BORDER_RADIUS_VALUES,
+  checkboxTreeToMap,
+  MenuItemWithCheckbox,
+} from '@admiral-ds/react-ui';
+import type {
+  ItemProps,
+  RenderOptionProps,
+  Theme,
+  CheckboxGroupItemProps,
+  ItemWithCheckbox,
+} from '@admiral-ds/react-ui';
 import styled, { css, ThemeContext, ThemeProvider } from 'styled-components';
-import { typography } from '#src/components/Typography';
 import { withDesign } from 'storybook-addon-designs';
-import type { Theme } from '#src/components/themes';
-import { LIGHT_THEME } from '#src/components/themes';
-import { RadioButton } from '#src/components/RadioButton';
-import { TooltipHoc } from '#src/components/TooltipHOC';
-import { TextInput } from '#src/components/input';
-import { TextButton } from '#src/components/TextButton';
-import { getHighlightedFilteredOptions, MenuActionsPanel } from '#src/components/Menu/MenuActionsPanel';
-import { Button } from '#src/components/Button';
 import { ReactComponent as PlusOutline } from '@admiral-ds/icons/build/service/PlusOutline.svg';
 import { uid } from '#src/components/common/uid';
-import { keyboardKey } from '#src/components/common/keyboardKey';
-import { mediumGroupBorderRadius, ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
-import type { CheckboxGroupItemProps, ItemWithCheckbox } from '#src/components/Menu/MenuItemWithCheckbox';
-import { checkboxTreeToMap, MenuItemWithCheckbox } from '#src/components/Menu/MenuItemWithCheckbox';
 import {
   CardGroupsTemplate,
   LargeNumberOfItemsTemplate,
   MenuWithLockCycleScrollTemplate,
   VirtualScrollTemplate,
-} from '#src/components/Menu/Stories/Templates';
+  IconsAndAdditionalTextTemplate,
+} from './Templates';
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+
+// Imports of text sorrces
+/* eslint-disable import/default */
 import LargeNumberOfItemsRaw from '!!raw-loader!./Templates/LargeNumberOfItems';
 import MenuWithLockCycleScrollRaw from '!!raw-loader!./Templates/MenuWithLockCycleScroll';
 import VirtualScrollRaw from '!!raw-loader!./Templates/VirtualScroll';
 import CardGroupsRaw from '!!raw-loader!./Templates/CardGroups';
-import { IconsAndAdditionalTextTemplate } from '#src/components/Menu/Stories/Templates/IconsAndAdditionalText';
+import IconsAndAdditionalTextRaw from '!!raw-loader!./Templates/IconsAndAdditionalText';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -831,6 +844,9 @@ const IconsStory: ComponentStory<typeof Menu> = (props) => (
 export const IconsExample = IconsStory.bind({});
 IconsExample.parameters = {
   docs: {
+    source: {
+      code: IconsAndAdditionalTextRaw,
+    },
     description: {
       story: 'Пример меню с иконками и дополнительным текстом',
     },

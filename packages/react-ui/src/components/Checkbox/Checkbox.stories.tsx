@@ -45,6 +45,12 @@ export default {
     disabled: {
       control: { type: 'boolean' },
     },
+    readOnly: {
+      control: { type: 'boolean' },
+    },
+    hovered: {
+      control: { type: 'boolean' },
+    },
     error: {
       control: { type: 'boolean' },
     },
@@ -146,6 +152,20 @@ const CheckboxDemo: ComponentStory<typeof Checkbox> = (props) => {
             <Checkbox dimension="s" error />
             <T font="Body/Body 1 Long" as="div">
               Состояние ошибки
+            </T>
+          </Row>
+          <Row>
+            <Checkbox readOnly />
+            <Checkbox dimension="s" readOnly />
+            <T font="Body/Body 1 Long" as="div">
+              Readonly
+            </T>
+          </Row>
+          <Row>
+            <Checkbox readOnly defaultChecked />
+            <Checkbox dimension="s" readOnly defaultChecked />
+            <T font="Body/Body 1 Long" as="div">
+              Readonly active
             </T>
           </Row>
         </Container>

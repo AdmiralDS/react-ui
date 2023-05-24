@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { typography } from '#src/components/Typography';
 
 type Dimension = 'm' | 's';
@@ -67,6 +67,14 @@ export const InputContainer = styled.div<{ dimension: Dimension }>`
   }
 `;
 
+const readOnlyCss = css`
+  pointer-events: none;
+
+  &:not(:checked) + ${Span} {
+    background-color: ${({ theme }) => theme.color['Neutral/Neutral 10']};
+  }
+`;
+
 export const Input = styled.input<{ dimension: Dimension }>`
   appearance: none;
   ::-ms-check {
@@ -86,9 +94,7 @@ export const Input = styled.input<{ dimension: Dimension }>`
   cursor: pointer;
   border-radius: 50%;
 
-  &:disabled {
-    pointer-events: none;
-  }
+  ${({ readOnly }) => readOnly && readOnlyCss};
 
   &:not(:checked):disabled + ${Span} {
     background-color: ${({ theme }) => theme.color['Neutral/Neutral 10']};
@@ -98,8 +104,11 @@ export const Input = styled.input<{ dimension: Dimension }>`
     border: ${BORDER_WIDTH_CHECKED}px solid ${({ theme }) => theme.color['Primary/Primary 30']};
   }
 
-  &:checked:not(disabled) + ${Span} {
-    border: ${BORDER_WIDTH_CHECKED}px solid ${({ theme }) => theme.color['Primary/Primary 60 Main']};
+  &:checked:not(:disabled) + ${Span} {
+    border: ${({ theme, readOnly }) =>
+      readOnly
+        ? `${BORDER_WIDTH_CHECKED}px solid ${theme.color['Primary/Primary 30']}`
+        : `${BORDER_WIDTH_CHECKED}px solid ${theme.color['Primary/Primary 60 Main']}`};
   }
 
   &:not(:disabled):hover {
@@ -139,6 +148,7 @@ export const Hint = styled.div<{ dimension: Dimension; disabled?: boolean }>`
 export const RadioButtonComponent = styled.label<{
   dimension: Dimension;
   disabled?: boolean;
+  readOnly?: boolean;
 }>`
   margin: 0;
   ${({ dimension }) => `
@@ -150,7 +160,7 @@ export const RadioButtonComponent = styled.label<{
   position: relative;
   box-sizing: content-box;
 
-  cursor: ${({ disabled }) => (disabled ? 'default' : 'pointer')};
+  cursor: ${({ disabled, readOnly }) => (disabled || readOnly ? 'default' : 'pointer')};
 
   ${({ dimension }) => (dimension === 's' ? typography['Body/Body 2 Short'] : typography['Body/Body 1 Short'])}
   color: ${({ disabled, theme }) => (disabled ? theme.color['Neutral/Neutral 30'] : theme.color['Neutral/Neutral 90'])};
@@ -167,4 +177,6 @@ export const RadioButtonComponent = styled.label<{
   fieldset:disabled & {
     cursor: default;
   }
+
+  ${({ readOnly }) => readOnly && `pointer-events: none`};
 `;

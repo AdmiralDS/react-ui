@@ -5,6 +5,7 @@ import { ReactComponent as CheckSVG } from './Success.svg';
 import { ReactComponent as IndeterminateSVG } from './Minus.svg';
 import type { CheckboxDimension } from './CheckboxDimension';
 import { smallGroupBorderRadius } from '#src/components/themes/borderRadius';
+import { keyboardKey } from '#src/components/common/keyboardKey';
 
 export interface CheckBoxProps extends InputHTMLAttributes<HTMLInputElement> {
   dimension?: CheckboxDimension;
@@ -118,6 +119,27 @@ const hoveredCss = css`
   }
 `;
 
+const disabledCss = css`
+  pointer-events: none;
+  & + ${Background} {
+    border: 1px solid ${({ theme }) => theme.color['Neutral/Neutral 30']};
+    background-color: ${({ theme }) => theme.color['Neutral/Neutral 10']};
+  }
+`;
+
+const disabledCheckedBackgroundCss = css`
+  background-color: ${({ theme }) => theme.color['Primary/Primary 30']};
+  border: none;
+  & *[fill^='#'] {
+    fill: ${({ theme }) => theme.color['Neutral/Neutral 00']};
+  }
+`;
+
+const checkedBackgroundCss = css`
+  background-color: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
+  border: none;
+`;
+
 const Input = styled.input<{ indeterminate?: boolean; hovered?: boolean }>`
   appearance: none;
   ::-ms-check {
@@ -137,33 +159,25 @@ const Input = styled.input<{ indeterminate?: boolean; hovered?: boolean }>`
   margin: 0;
   padding: 0;
 
-  :disabled {
-    pointer-events: none;
-  }
+  ${(props) => props.readOnly && disabledCss}
 
   &:checked + ${Background} {
-    background-color: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
-    border: none;
+    ${(props) => (props.readOnly ? disabledCheckedBackgroundCss : checkedBackgroundCss)}
   }
 
-  ${(props) => props.hovered && hoveredCss}
+  &:disabled {
+    ${disabledCss};
+  }
+
+  ${(props) => !props.readOnly && props.hovered && hoveredCss}
 
   ${indeterminate}
 
   &:hover:not(:disabled),
   &:focus:not(:disabled) + ${hoveredCss}
 
-  &:disabled + ${Background} {
-    border: 1px solid ${({ theme }) => theme.color['Neutral/Neutral 30']};
-    background-color: ${({ theme }) => theme.color['Neutral/Neutral 10']};
-  }
-
   &:checked:disabled + ${Background} {
-    background-color: ${({ theme }) => theme.color['Primary/Primary 30']};
-    border: none;
-    & *[fill^='#'] {
-      fill: ${({ theme }) => theme.color['Neutral/Neutral 00']};
-    }
+    ${disabledCheckedBackgroundCss}
   }
 
   &:focus-visible {
@@ -173,10 +187,30 @@ const Input = styled.input<{ indeterminate?: boolean; hovered?: boolean }>`
 `;
 
 export const Checkbox = React.forwardRef<HTMLInputElement, CheckBoxProps>(
-  ({ className, dimension = 'm', ...props }, ref) => {
+  ({ className, dimension = 'm', disabled, readOnly, ...props }, ref) => {
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+      if (readOnly) {
+        const code = keyboardKey.getCode(e);
+        if (code === keyboardKey[' ']) {
+          e.preventDefault();
+        }
+      }
+
+      props.onKeyDown?.(e);
+    };
+
     return (
       <Container dimension={dimension} className={className}>
-        <Input ref={ref} {...props} type="checkbox" indeterminate={props.indeterminate} />
+        <Input
+          ref={ref}
+          disabled={disabled}
+          readOnly={readOnly}
+          {...props}
+          type="checkbox"
+          indeterminate={props.indeterminate}
+          onKeyDown={handleKeyDown}
+          data-hovered={props.hovered}
+        />
         <Background error={props.error}>
           {props.indeterminate ? (
             <Indeterminate aria-hidden="true" focusable="false" />

@@ -1,6 +1,7 @@
 import type { FC, KeyboardEvent, MouseEvent, ReactNode, HTMLAttributes } from 'react';
 import React, { Children, cloneElement, isValidElement } from 'react';
 import styled from 'styled-components';
+import type { TagDimension, TagKind } from '#src/components/Tag';
 
 const TagsWrapper = styled.div`
   display: flex;
@@ -8,8 +9,8 @@ const TagsWrapper = styled.div`
   gap: 8px;
 `;
 
-type Dimension = 'm' | 's';
-type Kind = 'neutral' | 'green' | 'blue' | 'red' | 'orange';
+type Kind = TagKind;
+type Dimension = TagDimension;
 
 export interface TagsProps extends HTMLAttributes<HTMLDivElement> {
   /** Ширина тэгов */

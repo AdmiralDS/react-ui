@@ -3,11 +3,8 @@ import styled, { ThemeProvider } from 'styled-components';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import { ReactComponent as AttachFileOutline } from '@admiral-ds/icons/build/system/AttachFileOutline.svg';
-import { TextButton } from './index';
-import { T } from '#src/components/T';
-import type { Theme } from '#src/components/themes';
-import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
-import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+import { TextButton, T, ALL_BORDER_RADIUS_VALUES, cleanUpProps } from '@admiral-ds/react-ui';
+import type { Theme } from '@admiral-ds/react-ui';
 
 const StyledText = styled(T)`
   margin: 10px 0;
@@ -75,7 +72,16 @@ export default {
       control: { type: 'text' },
     },
     displayRight: {
-      control: { type: 'boolean' },
+      control: false,
+    },
+    iconStart: {
+      control: false,
+    },
+    iconEnd: {
+      control: false,
+    },
+    icon: {
+      control: false,
     },
   },
 } as ComponentMeta<typeof TextButton>;
@@ -88,7 +94,9 @@ const SimpleStory: ComponentStory<typeof TextButton> = (args) => {
 
   return (
     <ThemeProvider theme={swapBorder}>
-      <TextButton text="Text Button" icon={<AttachFileOutline />} {...cleanUpProps(args)} />
+      <TextButton text="Text Button" iconStart={<AttachFileOutline />} {...cleanUpProps(args)} />
+      <Separator />
+      <TextButton text="Text Button" iconEnd={<AttachFileOutline />} {...cleanUpProps(args)} />
     </ThemeProvider>
   );
 };
@@ -110,18 +118,24 @@ const TextButtonStory: ComponentStory<typeof TextButton> = (args) => {
           <StyledText font="Body/Body 1 Long" as="div">
             Dimension - M
           </StyledText>
-          <TextButton {...args} dimension="m" text="Text Button" icon={<AttachFileOutline />} appearance="primary" />
+          <TextButton
+            {...args}
+            dimension="m"
+            text="Text Button"
+            iconStart={<AttachFileOutline />}
+            appearance="primary"
+          />
           <Separator />
-          <TextButton dimension="m" text="Text Button" icon={<AttachFileOutline />} displayRight />
+          <TextButton dimension="m" text="Text Button" iconEnd={<AttachFileOutline />} />
           <Separator />
-          <TextButton dimension="m" text="Text Button" icon={<AttachFileOutline />} disabled={true} />
+          <TextButton dimension="m" text="Text Button" iconStart={<AttachFileOutline />} disabled={true} />
           <Separator />
           <StyledText font="Body/Body 1 Long" as="div">
             Dimension - S
           </StyledText>
-          <TextButton dimension="s" text="Text Button" icon={<AttachFileOutline />} />
+          <TextButton dimension="s" text="Text Button" iconStart={<AttachFileOutline />} />
           <Separator />
-          <TextButton dimension="s" text="Text Button" icon={<AttachFileOutline />} displayRight />
+          <TextButton dimension="s" text="Text Button" iconEnd={<AttachFileOutline />} />
           <Separator />
           <TextButton dimension="s" text="Text Button" />
         </div>
@@ -129,30 +143,24 @@ const TextButtonStory: ComponentStory<typeof TextButton> = (args) => {
           <StyledText font="Body/Body 1 Long" as="div">
             Dimension - M
           </StyledText>
-          <TextButton dimension="m" text="Text Button" icon={<AttachFileOutline />} appearance="secondary" />
+          <TextButton dimension="m" text="Text Button" iconStart={<AttachFileOutline />} appearance="secondary" />
+          <Separator />
+          <TextButton dimension="m" text="Text Button" iconEnd={<AttachFileOutline />} appearance="secondary" />
           <Separator />
           <TextButton
             dimension="m"
             text="Text Button"
-            icon={<AttachFileOutline />}
+            iconStart={<AttachFileOutline />}
             appearance="secondary"
-            displayRight
+            disabled
           />
-          <Separator />
-          <TextButton dimension="m" text="Text Button" icon={<AttachFileOutline />} appearance="secondary" disabled />
           <Separator />
           <StyledText font="Body/Body 1 Long" as="div">
             Dimension - S
           </StyledText>
-          <TextButton dimension="s" text="Text Button" icon={<AttachFileOutline />} appearance="secondary" />
+          <TextButton dimension="s" text="Text Button" iconStart={<AttachFileOutline />} appearance="secondary" />
           <Separator />
-          <TextButton
-            dimension="s"
-            text="Text Button"
-            icon={<AttachFileOutline />}
-            appearance="secondary"
-            displayRight
-          />
+          <TextButton dimension="s" text="Text Button" iconEnd={<AttachFileOutline />} appearance="secondary" />
           <Separator />
           <TextButton dimension="s" text="Text Button" appearance="secondary" />
         </div>
@@ -178,19 +186,19 @@ const TextButtonStatusStory: ComponentStory<typeof TextButton> = (args) => {
           <StyledText font="Body/Body 1 Long" as="div">
             Dimension - M
           </StyledText>
-          <TextButton dimension="m" text="Text Button" icon={<AttachFileOutline />} />
+          <TextButton dimension="m" text="Text Button" iconStart={<AttachFileOutline />} />
           <Separator />
-          <TextButton dimension="m" text="Text Button" icon={<AttachFileOutline />} loading />
+          <TextButton dimension="m" text="Text Button" iconStart={<AttachFileOutline />} loading />
           <Separator />
-          <TextButton dimension="m" text="Text Button" icon={<AttachFileOutline />} skeleton />
+          <TextButton dimension="m" text="Text Button" iconStart={<AttachFileOutline />} skeleton />
           <StyledText font="Body/Body 1 Long" as="div">
             Dimension - S
           </StyledText>
-          <TextButton dimension="s" text="Text Button" icon={<AttachFileOutline />} />
+          <TextButton dimension="s" text="Text Button" iconStart={<AttachFileOutline />} />
           <Separator />
-          <TextButton dimension="s" text="Text Button" icon={<AttachFileOutline />} loading />
+          <TextButton dimension="s" text="Text Button" iconStart={<AttachFileOutline />} loading />
           <Separator />
-          <TextButton dimension="s" text="Text Button" icon={<AttachFileOutline />} displayRight skeleton />
+          <TextButton dimension="s" text="Text Button" iconEnd={<AttachFileOutline />} skeleton />
           <Separator />
         </div>
         <div>

@@ -1,12 +1,8 @@
 import * as React from 'react';
-import { Menu } from '#src/components/Menu';
-import { MenuItem } from '#src/components/Menu/MenuItem';
-import type { MenuProps } from '#src/components/Menu';
-import type { RenderOptionProps } from '#src/components/Menu/MenuItem';
-import type { Theme } from '#src/components/themes';
+import { Menu, MenuItem, mediumGroupBorderRadius } from '@admiral-ds/react-ui';
+import type { MenuProps, RenderOptionProps, Theme } from '@admiral-ds/react-ui';
 import styled, { ThemeProvider } from 'styled-components';
-import { createItems } from '#src/components/Menu/Stories/Templates/utils';
-import { mediumGroupBorderRadius } from '#src/components/themes';
+import { createItems } from './utils';
 
 const ITEMS = createItems(40);
 

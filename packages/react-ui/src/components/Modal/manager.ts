@@ -17,7 +17,7 @@ interface Container {
  * (hide vertical scrollbars, when modals exist, and restore initial styles for containers, when modals are unmounted).
  * the main idea is from https://github.com/mui-org/material-ui/blob/master/packages/mui-core/src/ModalUnstyled/ModalManager.ts
  */
-export default class ModalManager {
+class ModalManager {
   private containers: Container[];
   private modals: Modal[];
 
@@ -82,3 +82,5 @@ export default class ModalManager {
     return modalIndex;
   }
 }
+
+export const manager = new ModalManager();

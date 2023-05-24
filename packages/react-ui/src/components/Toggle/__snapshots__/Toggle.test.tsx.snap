@@ -18,6 +18,10 @@ Object {
   left: calc(16px + 2px);
 }
 
+.c1:checked:disabled + div > span {
+  background: #A7C7FF;
+}
+
 .c1:checked + div > div {
   left: calc(16px + -12px + 4px);
 }
@@ -33,10 +37,6 @@ Object {
 
 .c1:not(:disabled):hover:focus-visible + div > span {
   outline: none;
-}
-
-.c1:disabled + div > span {
-  background: #B0B5BD;
 }
 
 .c5 {
@@ -66,7 +66,7 @@ Object {
   flex-shrink: 0;
   width: 36px;
   height: 20px;
-  background: #717681;
+  background: #B0B5BD;
 }
 
 .c4:before {
@@ -153,7 +153,6 @@ Object {
           <span
             aria-hidden="true"
             class="c4"
-            disabled=""
           />
         </div>
         <div
@@ -180,6 +179,10 @@ Object {
   left: calc(16px + 2px);
 }
 
+.c1:checked:disabled + div > span {
+  background: #A7C7FF;
+}
+
 .c1:checked + div > div {
   left: calc(16px + -12px + 4px);
 }
@@ -195,10 +198,6 @@ Object {
 
 .c1:not(:disabled):hover:focus-visible + div > span {
   outline: none;
-}
-
-.c1:disabled + div > span {
-  background: #B0B5BD;
 }
 
 .c5 {
@@ -228,7 +227,7 @@ Object {
   flex-shrink: 0;
   width: 36px;
   height: 20px;
-  background: #717681;
+  background: #B0B5BD;
 }
 
 .c4:before {
@@ -314,7 +313,6 @@ Object {
         <span
           aria-hidden="true"
           class="c4"
-          disabled=""
         />
       </div>
       <div
@@ -397,6 +395,10 @@ Object {
   left: calc(16px + 2px);
 }
 
+.c1:checked:disabled + div > span {
+  background: #A7C7FF;
+}
+
 .c1:checked + div > div {
   left: calc(16px + -12px + 4px);
 }
@@ -412,10 +414,6 @@ Object {
 
 .c1:not(:disabled):hover:focus-visible + div > span {
   outline: none;
-}
-
-.c1:disabled + div > span {
-  background: #B0B5BD;
 }
 
 .c5 {
@@ -555,6 +553,10 @@ Object {
   left: calc(16px + 2px);
 }
 
+.c1:checked:disabled + div > span {
+  background: #A7C7FF;
+}
+
 .c1:checked + div > div {
   left: calc(16px + -12px + 4px);
 }
@@ -570,10 +572,6 @@ Object {
 
 .c1:not(:disabled):hover:focus-visible + div > span {
   outline: none;
-}
-
-.c1:disabled + div > span {
-  background: #B0B5BD;
 }
 
 .c5 {
@@ -768,6 +766,10 @@ Object {
   left: calc(16px + 2px);
 }
 
+.c1:checked:disabled + div > span {
+  background: #A7C7FF;
+}
+
 .c1:checked + div > div {
   left: calc(16px + -12px + 4px);
 }
@@ -783,10 +785,6 @@ Object {
 
 .c1:not(:disabled):hover:focus-visible + div > span {
   outline: none;
-}
-
-.c1:disabled + div > span {
-  background: #B0B5BD;
 }
 
 .c5 {
@@ -926,6 +924,10 @@ Object {
   left: calc(16px + 2px);
 }
 
+.c1:checked:disabled + div > span {
+  background: #A7C7FF;
+}
+
 .c1:checked + div > div {
   left: calc(16px + -12px + 4px);
 }
@@ -941,10 +943,6 @@ Object {
 
 .c1:not(:disabled):hover:focus-visible + div > span {
   outline: none;
-}
-
-.c1:disabled + div > span {
-  background: #B0B5BD;
 }
 
 .c5 {
@@ -1139,6 +1137,10 @@ Object {
   left: calc(12px + 2px);
 }
 
+.c1:checked:disabled + div > span {
+  background: #A7C7FF;
+}
+
 .c1:checked + div > div {
   left: calc(12px + -12px + 4px);
 }
@@ -1154,10 +1156,6 @@ Object {
 
 .c1:not(:disabled):hover:focus-visible + div > span {
   outline: none;
-}
-
-.c1:disabled + div > span {
-  background: #B0B5BD;
 }
 
 .c5 {
@@ -1297,6 +1295,10 @@ Object {
   left: calc(12px + 2px);
 }
 
+.c1:checked:disabled + div > span {
+  background: #A7C7FF;
+}
+
 .c1:checked + div > div {
   left: calc(12px + -12px + 4px);
 }
@@ -1312,10 +1314,6 @@ Object {
 
 .c1:not(:disabled):hover:focus-visible + div > span {
   outline: none;
-}
-
-.c1:disabled + div > span {
-  background: #B0B5BD;
 }
 
 .c5 {

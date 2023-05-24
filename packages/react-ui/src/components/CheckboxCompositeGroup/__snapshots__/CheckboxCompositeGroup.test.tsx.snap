@@ -127,13 +127,18 @@ fieldset[data-dimension='s'] .c3 {
   display: none;
 }
 
+.c6:checked + .c7 {
+  background-color: #0062FF;
+  border: none;
+}
+
 .c6:disabled {
   pointer-events: none;
 }
 
-.c6:checked + .c7 {
-  background-color: #0062FF;
-  border: none;
+.c6:disabled + .c7 {
+  border: 1px solid #B0B5BD;
+  background-color: #E5E7EB;
 }
 
 .c6:not(:checked) + .c7 {
@@ -158,11 +163,6 @@ fieldset[data-dimension='s'] .c3 {
   width: calc(100% + 16px);
   height: calc(100% + 16px);
   background-color: #0000000D;
-}
-
-.c6:disabled + .c7 {
-  border: 1px solid #B0B5BD;
-  background-color: #E5E7EB;
 }
 
 .c6:checked:disabled + .c7 {
@@ -202,13 +202,18 @@ fieldset[data-dimension='s'] .c3 {
   display: none;
 }
 
+.c12:checked + .c7 {
+  background-color: #0062FF;
+  border: none;
+}
+
 .c12:disabled {
   pointer-events: none;
 }
 
-.c12:checked + .c7 {
-  background-color: #0062FF;
-  border: none;
+.c12:disabled + .c7 {
+  border: 1px solid #B0B5BD;
+  background-color: #E5E7EB;
 }
 
 .c12:not(:checked) + .c7 > * {
@@ -228,11 +233,6 @@ fieldset[data-dimension='s'] .c3 {
   width: calc(100% + 16px);
   height: calc(100% + 16px);
   background-color: #0000000D;
-}
-
-.c12:disabled + .c7 {
-  border: 1px solid #B0B5BD;
-  background-color: #E5E7EB;
 }
 
 .c12:checked:disabled + .c7 {
@@ -260,6 +260,7 @@ fieldset[data-dimension='s'] .c3 {
   position: relative;
   padding-top: 2px;
   padding-bottom: 2px;
+  pointer-events: none;
   padding-left: 32px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
@@ -564,13 +565,18 @@ fieldset[data-dimension='s'] .c3 {
   display: none;
 }
 
+.c6:checked + .c7 {
+  background-color: #0062FF;
+  border: none;
+}
+
 .c6:disabled {
   pointer-events: none;
 }
 
-.c6:checked + .c7 {
-  background-color: #0062FF;
-  border: none;
+.c6:disabled + .c7 {
+  border: 1px solid #B0B5BD;
+  background-color: #E5E7EB;
 }
 
 .c6:not(:checked) + .c7 {
@@ -595,11 +601,6 @@ fieldset[data-dimension='s'] .c3 {
   width: calc(100% + 16px);
   height: calc(100% + 16px);
   background-color: #0000000D;
-}
-
-.c6:disabled + .c7 {
-  border: 1px solid #B0B5BD;
-  background-color: #E5E7EB;
 }
 
 .c6:checked:disabled + .c7 {
@@ -639,13 +640,18 @@ fieldset[data-dimension='s'] .c3 {
   display: none;
 }
 
+.c12:checked + .c7 {
+  background-color: #0062FF;
+  border: none;
+}
+
 .c12:disabled {
   pointer-events: none;
 }
 
-.c12:checked + .c7 {
-  background-color: #0062FF;
-  border: none;
+.c12:disabled + .c7 {
+  border: 1px solid #B0B5BD;
+  background-color: #E5E7EB;
 }
 
 .c12:not(:checked) + .c7 > * {
@@ -665,11 +671,6 @@ fieldset[data-dimension='s'] .c3 {
   width: calc(100% + 16px);
   height: calc(100% + 16px);
   background-color: #0000000D;
-}
-
-.c12:disabled + .c7 {
-  border: 1px solid #B0B5BD;
-  background-color: #E5E7EB;
 }
 
 .c12:checked:disabled + .c7 {
@@ -697,6 +698,7 @@ fieldset[data-dimension='s'] .c3 {
   position: relative;
   padding-top: 2px;
   padding-bottom: 2px;
+  pointer-events: none;
   padding-left: 32px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
@@ -1056,13 +1058,18 @@ fieldset[data-dimension='s'] .c3 {
   display: none;
 }
 
+.c6:checked + .c7 {
+  background-color: #0062FF;
+  border: none;
+}
+
 .c6:disabled {
   pointer-events: none;
 }
 
-.c6:checked + .c7 {
-  background-color: #0062FF;
-  border: none;
+.c6:disabled + .c7 {
+  border: 1px solid #B0B5BD;
+  background-color: #E5E7EB;
 }
 
 .c6:not(:checked) + .c7 {
@@ -1087,11 +1094,6 @@ fieldset[data-dimension='s'] .c3 {
   width: calc(100% + 16px);
   height: calc(100% + 16px);
   background-color: #0000000D;
-}
-
-.c6:disabled + .c7 {
-  border: 1px solid #B0B5BD;
-  background-color: #E5E7EB;
 }
 
 .c6:checked:disabled + .c7 {
@@ -1131,13 +1133,18 @@ fieldset[data-dimension='s'] .c3 {
   display: none;
 }
 
+.c12:checked + .c7 {
+  background-color: #0062FF;
+  border: none;
+}
+
 .c12:disabled {
   pointer-events: none;
 }
 
-.c12:checked + .c7 {
-  background-color: #0062FF;
-  border: none;
+.c12:disabled + .c7 {
+  border: 1px solid #B0B5BD;
+  background-color: #E5E7EB;
 }
 
 .c12:not(:checked) + .c7 > * {
@@ -1157,11 +1164,6 @@ fieldset[data-dimension='s'] .c3 {
   width: calc(100% + 16px);
   height: calc(100% + 16px);
   background-color: #0000000D;
-}
-
-.c12:disabled + .c7 {
-  border: 1px solid #B0B5BD;
-  background-color: #E5E7EB;
 }
 
 .c12:checked:disabled + .c7 {
@@ -1189,6 +1191,7 @@ fieldset[data-dimension='s'] .c3 {
   position: relative;
   padding-top: 2px;
   padding-bottom: 2px;
+  pointer-events: auto;
   padding-left: 32px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
@@ -1481,13 +1484,18 @@ fieldset[data-dimension='s'] .c3 {
   display: none;
 }
 
+.c6:checked + .c7 {
+  background-color: #0062FF;
+  border: none;
+}
+
 .c6:disabled {
   pointer-events: none;
 }
 
-.c6:checked + .c7 {
-  background-color: #0062FF;
-  border: none;
+.c6:disabled + .c7 {
+  border: 1px solid #B0B5BD;
+  background-color: #E5E7EB;
 }
 
 .c6:not(:checked) + .c7 {
@@ -1512,11 +1520,6 @@ fieldset[data-dimension='s'] .c3 {
   width: calc(100% + 16px);
   height: calc(100% + 16px);
   background-color: #0000000D;
-}
-
-.c6:disabled + .c7 {
-  border: 1px solid #B0B5BD;
-  background-color: #E5E7EB;
 }
 
 .c6:checked:disabled + .c7 {
@@ -1556,13 +1559,18 @@ fieldset[data-dimension='s'] .c3 {
   display: none;
 }
 
+.c12:checked + .c7 {
+  background-color: #0062FF;
+  border: none;
+}
+
 .c12:disabled {
   pointer-events: none;
 }
 
-.c12:checked + .c7 {
-  background-color: #0062FF;
-  border: none;
+.c12:disabled + .c7 {
+  border: 1px solid #B0B5BD;
+  background-color: #E5E7EB;
 }
 
 .c12:not(:checked) + .c7 > * {
@@ -1582,11 +1590,6 @@ fieldset[data-dimension='s'] .c3 {
   width: calc(100% + 16px);
   height: calc(100% + 16px);
   background-color: #0000000D;
-}
-
-.c12:disabled + .c7 {
-  border: 1px solid #B0B5BD;
-  background-color: #E5E7EB;
 }
 
 .c12:checked:disabled + .c7 {
@@ -1614,6 +1617,7 @@ fieldset[data-dimension='s'] .c3 {
   position: relative;
   padding-top: 2px;
   padding-bottom: 2px;
+  pointer-events: auto;
   padding-left: 32px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
@@ -1961,13 +1965,18 @@ fieldset[data-dimension='s'] .c3 {
   display: none;
 }
 
+.c6:checked + .c7 {
+  background-color: #0062FF;
+  border: none;
+}
+
 .c6:disabled {
   pointer-events: none;
 }
 
-.c6:checked + .c7 {
-  background-color: #0062FF;
-  border: none;
+.c6:disabled + .c7 {
+  border: 1px solid #B0B5BD;
+  background-color: #E5E7EB;
 }
 
 .c6:not(:checked) + .c7 {
@@ -1992,11 +2001,6 @@ fieldset[data-dimension='s'] .c3 {
   width: calc(100% + 16px);
   height: calc(100% + 16px);
   background-color: #0000000D;
-}
-
-.c6:disabled + .c7 {
-  border: 1px solid #B0B5BD;
-  background-color: #E5E7EB;
 }
 
 .c6:checked:disabled + .c7 {
@@ -2036,13 +2040,18 @@ fieldset[data-dimension='s'] .c3 {
   display: none;
 }
 
+.c12:checked + .c7 {
+  background-color: #0062FF;
+  border: none;
+}
+
 .c12:disabled {
   pointer-events: none;
 }
 
-.c12:checked + .c7 {
-  background-color: #0062FF;
-  border: none;
+.c12:disabled + .c7 {
+  border: 1px solid #B0B5BD;
+  background-color: #E5E7EB;
 }
 
 .c12:not(:checked) + .c7 > * {
@@ -2062,11 +2071,6 @@ fieldset[data-dimension='s'] .c3 {
   width: calc(100% + 16px);
   height: calc(100% + 16px);
   background-color: #0000000D;
-}
-
-.c12:disabled + .c7 {
-  border: 1px solid #B0B5BD;
-  background-color: #E5E7EB;
 }
 
 .c12:checked:disabled + .c7 {
@@ -2094,6 +2098,7 @@ fieldset[data-dimension='s'] .c3 {
   position: relative;
   padding-top: 2px;
   padding-bottom: 2px;
+  pointer-events: auto;
   padding-left: 28px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
@@ -2386,13 +2391,18 @@ fieldset[data-dimension='s'] .c3 {
   display: none;
 }
 
+.c6:checked + .c7 {
+  background-color: #0062FF;
+  border: none;
+}
+
 .c6:disabled {
   pointer-events: none;
 }
 
-.c6:checked + .c7 {
-  background-color: #0062FF;
-  border: none;
+.c6:disabled + .c7 {
+  border: 1px solid #B0B5BD;
+  background-color: #E5E7EB;
 }
 
 .c6:not(:checked) + .c7 {
@@ -2417,11 +2427,6 @@ fieldset[data-dimension='s'] .c3 {
   width: calc(100% + 16px);
   height: calc(100% + 16px);
   background-color: #0000000D;
-}
-
-.c6:disabled + .c7 {
-  border: 1px solid #B0B5BD;
-  background-color: #E5E7EB;
 }
 
 .c6:checked:disabled + .c7 {
@@ -2461,13 +2466,18 @@ fieldset[data-dimension='s'] .c3 {
   display: none;
 }
 
+.c12:checked + .c7 {
+  background-color: #0062FF;
+  border: none;
+}
+
 .c12:disabled {
   pointer-events: none;
 }
 
-.c12:checked + .c7 {
-  background-color: #0062FF;
-  border: none;
+.c12:disabled + .c7 {
+  border: 1px solid #B0B5BD;
+  background-color: #E5E7EB;
 }
 
 .c12:not(:checked) + .c7 > * {
@@ -2487,11 +2497,6 @@ fieldset[data-dimension='s'] .c3 {
   width: calc(100% + 16px);
   height: calc(100% + 16px);
   background-color: #0000000D;
-}
-
-.c12:disabled + .c7 {
-  border: 1px solid #B0B5BD;
-  background-color: #E5E7EB;
 }
 
 .c12:checked:disabled + .c7 {
@@ -2519,6 +2524,7 @@ fieldset[data-dimension='s'] .c3 {
   position: relative;
   padding-top: 2px;
   padding-bottom: 2px;
+  pointer-events: auto;
   padding-left: 28px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
@@ -2866,13 +2872,18 @@ fieldset[data-dimension='s'] .c3 {
   display: none;
 }
 
+.c6:checked + .c7 {
+  background-color: #0062FF;
+  border: none;
+}
+
 .c6:disabled {
   pointer-events: none;
 }
 
-.c6:checked + .c7 {
-  background-color: #0062FF;
-  border: none;
+.c6:disabled + .c7 {
+  border: 1px solid #B0B5BD;
+  background-color: #E5E7EB;
 }
 
 .c6:not(:checked) + .c7 {
@@ -2897,11 +2908,6 @@ fieldset[data-dimension='s'] .c3 {
   width: calc(100% + 16px);
   height: calc(100% + 16px);
   background-color: #0000000D;
-}
-
-.c6:disabled + .c7 {
-  border: 1px solid #B0B5BD;
-  background-color: #E5E7EB;
 }
 
 .c6:checked:disabled + .c7 {
@@ -2941,13 +2947,18 @@ fieldset[data-dimension='s'] .c3 {
   display: none;
 }
 
+.c12:checked + .c7 {
+  background-color: #0062FF;
+  border: none;
+}
+
 .c12:disabled {
   pointer-events: none;
 }
 
-.c12:checked + .c7 {
-  background-color: #0062FF;
-  border: none;
+.c12:disabled + .c7 {
+  border: 1px solid #B0B5BD;
+  background-color: #E5E7EB;
 }
 
 .c12:not(:checked) + .c7 > * {
@@ -2967,11 +2978,6 @@ fieldset[data-dimension='s'] .c3 {
   width: calc(100% + 16px);
   height: calc(100% + 16px);
   background-color: #0000000D;
-}
-
-.c12:disabled + .c7 {
-  border: 1px solid #B0B5BD;
-  background-color: #E5E7EB;
 }
 
 .c12:checked:disabled + .c7 {
@@ -2999,6 +3005,7 @@ fieldset[data-dimension='s'] .c3 {
   position: relative;
   padding-top: 2px;
   padding-bottom: 2px;
+  pointer-events: auto;
   padding-left: 32px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
@@ -3291,13 +3298,18 @@ fieldset[data-dimension='s'] .c3 {
   display: none;
 }
 
+.c6:checked + .c7 {
+  background-color: #0062FF;
+  border: none;
+}
+
 .c6:disabled {
   pointer-events: none;
 }
 
-.c6:checked + .c7 {
-  background-color: #0062FF;
-  border: none;
+.c6:disabled + .c7 {
+  border: 1px solid #B0B5BD;
+  background-color: #E5E7EB;
 }
 
 .c6:not(:checked) + .c7 {
@@ -3322,11 +3334,6 @@ fieldset[data-dimension='s'] .c3 {
   width: calc(100% + 16px);
   height: calc(100% + 16px);
   background-color: #0000000D;
-}
-
-.c6:disabled + .c7 {
-  border: 1px solid #B0B5BD;
-  background-color: #E5E7EB;
 }
 
 .c6:checked:disabled + .c7 {
@@ -3366,13 +3373,18 @@ fieldset[data-dimension='s'] .c3 {
   display: none;
 }
 
+.c12:checked + .c7 {
+  background-color: #0062FF;
+  border: none;
+}
+
 .c12:disabled {
   pointer-events: none;
 }
 
-.c12:checked + .c7 {
-  background-color: #0062FF;
-  border: none;
+.c12:disabled + .c7 {
+  border: 1px solid #B0B5BD;
+  background-color: #E5E7EB;
 }
 
 .c12:not(:checked) + .c7 > * {
@@ -3392,11 +3404,6 @@ fieldset[data-dimension='s'] .c3 {
   width: calc(100% + 16px);
   height: calc(100% + 16px);
   background-color: #0000000D;
-}
-
-.c12:disabled + .c7 {
-  border: 1px solid #B0B5BD;
-  background-color: #E5E7EB;
 }
 
 .c12:checked:disabled + .c7 {
@@ -3424,6 +3431,7 @@ fieldset[data-dimension='s'] .c3 {
   position: relative;
   padding-top: 2px;
   padding-bottom: 2px;
+  pointer-events: auto;
   padding-left: 32px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;

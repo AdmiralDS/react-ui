@@ -6,6 +6,7 @@ import { typography } from '#src/components/Typography';
 
 import type { Dimension, LabelPosition } from '#src/components/Toggle/mixins';
 import { hoverSizes, sizes, SLIDER_SIZE_M, SLIDER_SIZE_S, sliderSizes } from '#src/components/Toggle/mixins';
+import { keyboardKey } from '#src/components/common/keyboardKey';
 
 export interface ToggleProps extends InputHTMLAttributes<HTMLInputElement> {
   /** Состояние компонента */
@@ -18,6 +19,8 @@ export interface ToggleProps extends InputHTMLAttributes<HTMLInputElement> {
   dimension?: Dimension;
   /** Отключение компонента */
   disabled?: boolean;
+  /** Только для чтения */
+  readOnly?: boolean;
   /** Ширина компонента. Применяется только в случае labelPosition == 'left'.
    * Рекомендуется использовать в мобильной версии компонента, указываю ширину равную всему экрану */
   width?: number | string;
@@ -50,7 +53,12 @@ const Input = styled.input<{ dimension: Dimension; checked?: boolean }>`
         ${({ dimension }) => `left: calc(${dimension === 'm' ? SLIDER_SIZE_M : SLIDER_SIZE_S} + ${SLIDER_INDENT}px);`}
       }
 
-      background: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
+      background: ${({ theme, readOnly }) =>
+        readOnly ? theme.color['Primary/Primary 30'] : theme.color['Primary/Primary 60 Main']};
+    }
+
+    &:disabled + div > span {
+      background: ${({ theme }) => theme.color['Primary/Primary 30']};
     }
 
     ${hoverInputStyles};
@@ -64,17 +72,12 @@ const Input = styled.input<{ dimension: Dimension; checked?: boolean }>`
 
     &:hover {
       & + div > div {
-        visibility: visible;
+        ${({ readOnly }) => !readOnly && `visibility: visible`};
       }
       &:focus-visible + div > span {
         outline: none;
       }
     }
-  }
-
-  &:disabled + div > span {
-    background: ${({ theme, checked }) =>
-      checked ? theme.color['Primary/Primary 30'] : theme.color['Neutral/Neutral 30']};
   }
 `;
 const Label = styled.div<{
@@ -100,8 +103,7 @@ const Hint = styled.div<{
 
 const Slider = styled.span<{
   dimension: Dimension;
-  disabled: boolean;
-  checked?: boolean;
+  faded?: boolean;
 }>`
   position: absolute;
   border-radius: ${BORDER_RADIUS};
@@ -118,7 +120,7 @@ const Slider = styled.span<{
     ${sliderSizes}
   }
 
-  background: ${({ theme }) => theme.color['Neutral/Neutral 50']};
+  background: ${({ theme, faded }) => (faded ? theme.color['Neutral/Neutral 30'] : theme.color['Neutral/Neutral 50'])};
 `;
 
 const Hover = styled.div<{ dimension: Dimension }>`
@@ -137,36 +139,72 @@ const SliderWrapper = styled.div<{ dimension: Dimension }>`
   ${sizes}
 `;
 
-const Wrapper = styled.label<{ width?: number | string; disabled: boolean; labelPosition: LabelPosition }>`
+const Wrapper = styled.label<{
+  width?: number | string;
+  disabled?: boolean;
+  readOnly?: boolean;
+  labelPosition: LabelPosition;
+}>`
   display: flex;
   flex-direction: ${({ labelPosition }) => (labelPosition === 'right' ? 'row' : 'row-reverse')};
   align-items: flex-start;
   justify-content: space-between;
   position: relative;
   width: ${({ width }) => (width ? (typeof width === 'number' ? `${width}px` : width) : 'fit-content')};
-  cursor: ${({ disabled }) => (disabled ? 'default' : 'pointer')};
+  cursor: ${({ disabled, readOnly }) => (disabled || readOnly ? 'default' : 'pointer')};
   -webkit-tap-highlight-color: transparent;
   user-select: none;
+  ${({ readOnly }) => readOnly && `pointer-events: none`};
 `;
 
 export const Toggle = React.forwardRef<HTMLInputElement, ToggleProps>(
   (
-    { dimension = 'm', labelPosition = 'right', disabled = false, width, extraText, className, children, ...props },
+    {
+      dimension = 'm',
+      labelPosition = 'right',
+      disabled = false,
+      readOnly = false,
+      width,
+      extraText,
+      className,
+      children,
+      ...props
+    },
     ref,
   ) => {
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+      if (readOnly) {
+        const code = keyboardKey.getCode(e);
+        if (code === keyboardKey[' ']) {
+          e.preventDefault();
+        }
+      }
+
+      props.onKeyDown?.(e);
+    };
+
     return (
       <Wrapper
         className={className}
         width={labelPosition === 'left' ? width : undefined}
         labelPosition={labelPosition}
         disabled={disabled}
+        readOnly={readOnly}
         role="switch"
         aria-checked={props.checked || props['aria-checked']}
       >
-        <Input ref={ref} type="checkbox" dimension={dimension} disabled={disabled} {...props} />
+        <Input
+          ref={ref}
+          type="checkbox"
+          dimension={dimension}
+          disabled={disabled}
+          readOnly={readOnly}
+          {...props}
+          onKeyDown={handleKeyDown}
+        />
         <SliderWrapper dimension={dimension}>
           <Hover dimension={dimension} />
-          <Slider dimension={dimension} checked={props.checked} disabled={disabled} aria-hidden />
+          <Slider dimension={dimension} faded={disabled || readOnly} aria-hidden />
         </SliderWrapper>
         {children && (
           <Label dimension={dimension} disabled={disabled} position={labelPosition}>
