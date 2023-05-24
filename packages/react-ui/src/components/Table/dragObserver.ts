@@ -252,13 +252,14 @@ export function dragObserver(initialContainers: HTMLElement[], options: Options,
 
     const clientX = getCoord('clientX', e) || 0;
     const clientY = getCoord('clientY', e) || 0;
-    let x;
+    let x, y;
     if (o.direction === 'vertical') {
       x = clientX - _offsetX;
+      y = clientY - _offsetY;
     } else if (o.direction === 'horizontal') {
-      x = clientX - 18;
+      x = clientX - 8;
+      y = clientY - (_mirror.getBoundingClientRect().height - 20) / 2;
     }
-    const y = clientY - _offsetY;
 
     _mirror.style.left = x + 'px';
     _mirror.style.top = y + 'px';
@@ -268,6 +269,11 @@ export function dragObserver(initialContainers: HTMLElement[], options: Options,
     const changed = dropTarget !== null && dropTarget !== _lastDropTarget;
     if (changed || dropTarget === null) {
       _lastDropTarget = dropTarget;
+    }
+    if (dropTarget == null) {
+      _mirror.dataset.cursor = 'error';
+    } else {
+      _mirror.dataset.cursor = 'normal';
     }
 
     let reference;
