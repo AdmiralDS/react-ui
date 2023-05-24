@@ -7,9 +7,9 @@ import { MenuItem } from '#src/components/Menu/MenuItem';
 import { ReactComponent as DeleteOutline } from '@admiral-ds/icons/build/system/DeleteOutline.svg';
 import { RowAction } from '#src/components/Table';
 
-import type { Column, TableRow } from '../Table';
+import type { Column, TableRow } from '..';
 import { TooltipHoc } from '#src/components/TooltipHOC';
-import { Badge } from '../Badge';
+import { Badge } from '../../Badge';
 
 const AmountCell = styled.div`
   text-overflow: ellipsis;
@@ -901,25 +901,6 @@ export const rowListMenu: RowData[] = [
     transfer_amount: numberFormatter.format(60_000),
     currency: 'RUB',
     rate: 4,
-  },
-];
-
-export const virtualRowList = [...Array(1000).keys()].map((_item, index) => ({
-  id: String(index),
-  transfer_number: index,
-  transfer_date: new Date('2020-08-06').toLocaleDateString(),
-}));
-
-export const virtualColumnList: Column[] = [
-  {
-    name: 'transfer_number',
-    title: 'Номер сделки',
-    width: '40%',
-  },
-  {
-    name: 'transfer_date',
-    title: 'Дата сделки',
-    width: '40%',
   },
 ];
 

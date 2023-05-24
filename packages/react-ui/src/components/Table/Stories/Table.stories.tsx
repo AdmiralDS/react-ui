@@ -24,11 +24,15 @@ import {
   rowListRowState,
   rowListSort,
   rowListWithGroup,
-  virtualColumnList,
-  virtualRowList,
   columnListWithCustomRender,
   rowListWithCustomRenderGroup,
 } from './data';
+import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+
+import { VirtualScrollTemplate } from './Templates';
+// Imports of text sources
+/* eslint-disable import/default */
+import VirtualScrollRaw from '!!raw-loader!./Templates/TableVirtualScroll';
 
 const Separator = styled.div`
   height: 20px;
@@ -886,14 +890,16 @@ RowOverflowMenu.parameters = {
   },
 };
 
-export const VirtualScroll = Template7.bind({});
-VirtualScroll.args = {
-  rowList: virtualRowList,
-  columnList: virtualColumnList,
-};
-VirtualScroll.storyName = 'Table. Виртуальный скролл.';
-VirtualScroll.parameters = {
+//<editor-fold desc="Пример с виртуальным скроллом">
+const VirtualScrollStory: ComponentStory<typeof Table> = (props) => (
+  <VirtualScrollTemplate columnList={[]} rowList={[]} {...cleanUpProps(props)} />
+);
+export const VirtualScrollExample = VirtualScrollStory.bind({});
+VirtualScrollExample.parameters = {
   docs: {
+    source: {
+      code: VirtualScrollRaw,
+    },
     description: {
       story: `В случае если в таблице необходимо отобразить большое количество строк, возможно использовать функцию виртуального скролла.
       На данный момент функция виртуального скролла реализована только для случая, когда все строки в таблице единой фиксированной высоты. 
@@ -906,6 +912,8 @@ VirtualScroll.parameters = {
     },
   },
 };
+VirtualScrollExample.storyName = 'Table. Виртуальный скролл.';
+//</editor-fold>
 
 export const Group = Template8.bind({});
 Group.args = {
