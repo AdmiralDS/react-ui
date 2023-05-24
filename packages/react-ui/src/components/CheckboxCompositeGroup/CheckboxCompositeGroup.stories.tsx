@@ -1,14 +1,10 @@
 import type { ChangeEvent } from 'react';
 import React, { useState } from 'react';
-import type { ComponentMeta, Story } from '@storybook/react';
-import type { CheckboxCompositeGroupProps } from './index';
-import { CheckboxCompositeGroup } from './index';
-import { CheckboxGroup } from '../CheckboxGroup';
-import { withDesign } from 'storybook-addon-designs';
-import { CheckboxField } from '#src/components/form';
 import { ThemeProvider } from 'styled-components';
-import type { Theme } from '#src/components/themes';
-import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
+import type { ComponentMeta, Story } from '@storybook/react';
+import { withDesign } from 'storybook-addon-designs';
+import type { CheckboxCompositeGroupProps, Theme } from '@admiral-ds/react-ui';
+import { CheckboxCompositeGroup, CheckboxGroup, CheckboxField, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
 export default {
   title: 'Admiral-2.1/CheckboxCompositeGroup',

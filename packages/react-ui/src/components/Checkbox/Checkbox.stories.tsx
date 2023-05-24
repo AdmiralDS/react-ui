@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { Checkbox } from './index';
-
 import { withDesign } from 'storybook-addon-designs';
-import { ALL_DIMENSIONS_VALUES } from '#src/components/Checkbox/CheckboxDimension';
 import styled, { ThemeProvider } from 'styled-components';
-import { T } from '#src/components/T';
-import type { Theme } from '#src/components/themes';
-import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
+
+import { Checkbox, T, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
+import type { Theme } from '@admiral-ds/react-ui';
+import { ALL_DIMENSIONS_VALUES } from '#src/components/Checkbox/CheckboxDimension';
 
 export default {
   title: 'Admiral-2.1/Atoms/Checkbox',

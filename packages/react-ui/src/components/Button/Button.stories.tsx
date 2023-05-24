@@ -1,14 +1,11 @@
 import * as React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { ReactComponent as StarSolid } from '@admiral-ds/icons/build/system/StarSolid.svg';
-import type { ButtonProps } from './index';
-import { Button } from './index';
-import { T } from '#src/components/T';
 import { withDesign } from 'storybook-addon-designs';
+import { ReactComponent as StarSolid } from '@admiral-ds/icons/build/system/StarSolid.svg';
+import type { ButtonProps, Theme } from '@admiral-ds/react-ui';
+import { Button, T, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 import { filterKeysWithUndefinedValues } from '#src/components/common/utils/filterKeysWithUndefinedValues';
-import type { Theme } from '#src/components/themes';
-import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
 import type { Appearance } from '#src/components/Button/types';
 import { PaddingForButtonWithIconLeft, PaddingForButtonWithIconRight } from '#src/components/Button/dimensionMixin';
 
