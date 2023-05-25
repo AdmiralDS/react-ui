@@ -2,11 +2,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
-
-import { Button } from '#src/components/Button';
-import { Stepper } from '#src/components/Stepper';
-import { Step } from '#src/components/Stepper/Step';
-import { StepContent } from '#src/components/Stepper/StepContent';
+import { Stepper, Step, StepContent, Button } from '@admiral-ds/react-ui';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
