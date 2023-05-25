@@ -2,16 +2,12 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
-import { ContentSwitcher } from '#src/components/ContentSwitcher';
-import { ContentSwitcherItem } from '#src/components/ContentSwitcher/ContentSwitcherItem';
+import { ContentSwitcher, ContentSwitcherItem, T, Badge, TooltipHoc } from '@admiral-ds/react-ui';
 import { ReactComponent as StarSolid } from '@admiral-ds/icons/build/system/StarSolid.svg';
 import { ReactComponent as DeleteOutline } from '@admiral-ds/icons/build/system/DeleteOutline.svg';
 import { ReactComponent as EmailOutline } from '@admiral-ds/icons/build/system/EmailOutline.svg';
 import { ReactComponent as HomeOutline } from '@admiral-ds/icons/build/system/HomeOutline.svg';
 import { ReactComponent as PrintOutline } from '@admiral-ds/icons/build/system/PrintOutline.svg';
-import { T } from '#src/components/T';
-import { Badge } from '#src/components/Badge';
-import { TooltipHoc } from '#src/components/TooltipHOC';
 
 const Divider = styled.div`
   width: 10px;
