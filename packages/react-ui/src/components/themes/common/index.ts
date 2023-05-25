@@ -1,11 +1,8 @@
-import type { Color } from '#src/components/themes/common/color';
-import type { ZIndex } from '#src/components/themes/common/zIndex';
-import type { Locale } from '#src/components/themes/common/locales';
+import type { Color } from './color';
+import type { ZIndex } from './zIndex';
+import type { Locale } from './locales';
 import type { ThemedStyledInterface } from 'styled-components';
 import baseStyled from 'styled-components';
-
-export * from './color';
-export * from './locales';
 
 export type ColorName = keyof Color;
 
@@ -44,5 +41,3 @@ export interface Theme {
   currentLocale: string;
   locales: { [localeCode: string]: Locale };
 }
-
-export const styled = baseStyled as ThemedStyledInterface<Theme>;
