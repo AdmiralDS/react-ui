@@ -1,10 +1,8 @@
-import { Button } from '#src/components/Button';
-import { Spinner } from '#src/components/Spinner';
 import * as React from 'react';
 import styled from 'styled-components';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
-import { DefaultBackgroundColorName, MainPrimaryColorName } from '#src/components/themes';
+import { Spinner, Button, DefaultBackgroundColorName, MainPrimaryColorName } from '@admiral-ds/react-ui';
 
 const Separator = styled.div`
   height: 20px;
