@@ -1,11 +1,9 @@
 import * as React from 'react';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import styled, { ThemeProvider } from 'styled-components';
-import { PaginationOne } from '#src/components/PaginationOne';
 import { withDesign } from 'storybook-addon-designs';
-import { Field } from '#src/components/Field';
-import type { Theme } from '#src/components/themes';
-import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
+import styled, { ThemeProvider } from 'styled-components';
+import { PaginationOne, Field, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
+import type { Theme } from '@admiral-ds/react-ui';
 
 const Separator = styled.div`
   width: 100%;

@@ -2,8 +2,7 @@ import * as React from 'react';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import styled from 'styled-components';
-
-import { Range } from '.';
+import { Range } from '@admiral-ds/react-ui';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';

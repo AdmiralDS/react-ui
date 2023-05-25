@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
-import { ProgressPage } from './index';
 import styled from 'styled-components';
+import { ProgressPage } from '@admiral-ds/react-ui';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';

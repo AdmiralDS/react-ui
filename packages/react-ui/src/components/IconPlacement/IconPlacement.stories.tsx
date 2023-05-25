@@ -1,12 +1,10 @@
 import * as React from 'react';
 import { withDesign } from 'storybook-addon-designs';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { ReactComponent as CloseOutline } from '@admiral-ds/icons/build/service/CloseOutline.svg';
 import styled, { ThemeProvider } from 'styled-components';
-import { T } from '#src/components/T';
-import { CloseIconPlacementButton, IconPlacement } from '#src/components/IconPlacement/index';
-import type { Theme } from '#src/components/themes';
-import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
+import { CloseIconPlacementButton, IconPlacement, T, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
+import type { Theme } from '@admiral-ds/react-ui';
+import { ReactComponent as CloseOutline } from '@admiral-ds/icons/build/service/CloseOutline.svg';
 
 export default {
   title: 'Admiral-2.1/IconPlacement',

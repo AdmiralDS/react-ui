@@ -2,16 +2,15 @@ import * as React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
-import type { Theme } from '#src/components/themes';
-import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
-import type { NotificationItemProps } from '#src/components/NotificationItem/index';
 import {
   NotificationItemButtonPanel,
   NotificationItemContent,
   NotificationItem,
   NotificationItemTitle,
-} from '#src/components/NotificationItem/index';
-import { TextButton } from '#src/components/TextButton';
+  TextButton,
+  ALL_BORDER_RADIUS_VALUES,
+} from '@admiral-ds/react-ui';
+import type { NotificationItemProps, Theme } from '@admiral-ds/react-ui';
 
 const Layout = styled.div`
   margin: 20px;

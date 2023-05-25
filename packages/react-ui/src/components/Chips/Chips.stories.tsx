@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { withDesign } from 'storybook-addon-designs';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { Chips } from '#src/components/Chips';
+import { Chips } from '@admiral-ds/react-ui';
 
 import { ReactComponent as VacationIcon } from '@admiral-ds/icons/build/category/VacationSolid.svg';
 import { ReactComponent as AlertSolid } from '@admiral-ds/icons/build/category/AlertSolid.svg';

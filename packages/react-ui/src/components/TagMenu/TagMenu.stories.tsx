@@ -1,16 +1,10 @@
+import * as React from 'react';
 import { withDesign } from 'storybook-addon-designs';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import * as React from 'react';
-import type { TagOptionProps } from '#src/components/TagMenu/index';
-import { TagMenu } from '#src/components/TagMenu/index';
 import styled, { ThemeProvider } from 'styled-components';
-import type { Tag, TagKind, TagProps } from '#src/components/Tag';
-import { TagCircle } from '#src/components/Tag';
-import type { Theme } from '#src/components/themes';
+import { TagMenu, TagCircle, MenuItem, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
+import type { TagOptionProps, Tag, TagKind, TagProps, Theme, RenderOptionProps } from '@admiral-ds/react-ui';
 import { ReactComponent as CheckOutline } from '@admiral-ds/icons/build/service/CheckOutline.svg';
-import type { RenderOptionProps } from '#src/components/Menu/MenuItem';
-import { MenuItem } from '#src/components/Menu/MenuItem';
-import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';

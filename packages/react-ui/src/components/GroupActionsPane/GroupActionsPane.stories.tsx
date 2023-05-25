@@ -1,15 +1,13 @@
 import React, { useState } from 'react';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { GroupActionsPane, PaneSeparator } from '#src/components/GroupActionsPane';
+import { withDesign } from 'storybook-addon-designs';
 import styled, { ThemeProvider } from 'styled-components';
-import { typography } from '#src/components/Typography';
+import { GroupActionsPane, PaneSeparator, TextButton, typography } from '@admiral-ds/react-ui';
+import type { Theme } from '@admiral-ds/react-ui';
 import { ReactComponent as GovernmentOutline } from '@admiral-ds/icons/build/category/GovernmentOutline.svg';
 import { ReactComponent as TelegramOutline } from '@admiral-ds/icons/build/communication/TelegrammOutline.svg';
 import { ReactComponent as AlertOutline } from '@admiral-ds/icons/build/category/AlertOutline.svg';
 import { ReactComponent as CardSolid } from '@admiral-ds/icons/build/finance/CardSolid.svg';
-import { withDesign } from 'storybook-addon-designs';
-import type { Theme } from '#src/components/themes';
-import { TextButton } from '#src/components/TextButton';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';

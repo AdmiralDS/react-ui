@@ -1,15 +1,11 @@
 import type { KeyboardEventHandler, MouseEventHandler } from 'react';
 import React, { Fragment, useRef, useState } from 'react';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { DropDownMenu } from '#src/components/DropDownMenu';
-import { DropDownItem } from '#src/components/DropDownItem';
-import { Button } from '#src/components/Button';
-import styled, { ThemeProvider } from 'styled-components';
-import { typography } from '#src/components/Typography';
-import { ReactComponent as CardSolid } from '@admiral-ds/icons/build/finance/CardSolid.svg';
 import { withDesign } from 'storybook-addon-designs';
-import type { Theme } from '#src/components/themes';
-import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
+import styled, { ThemeProvider } from 'styled-components';
+import { DropDownMenu, DropDownItem, Button, typography, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
+import type { Theme } from '@admiral-ds/react-ui';
+import { ReactComponent as CardSolid } from '@admiral-ds/icons/build/finance/CardSolid.svg';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';

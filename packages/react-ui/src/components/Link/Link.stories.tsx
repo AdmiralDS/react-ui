@@ -1,16 +1,12 @@
 import * as React from 'react';
+import { Link as RouterLink, MemoryRouter as Router } from 'react-router-dom';
 import styled, { ThemeProvider } from 'styled-components';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
-import { Link } from '#src/components/Link';
-import { T } from '#src/components/T';
+import { Link, LinkComponentCssMixin, T, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
+import type { LinkComponent, Theme } from '@admiral-ds/react-ui';
 import { ReactComponent as ArrowLeftOutline } from '@admiral-ds/icons/build/system/ArrowLeftOutline.svg';
 import { ReactComponent as ArrowRightOutline } from '@admiral-ds/icons/build/system/ArrowRightOutline.svg';
-import type { Theme } from '#src/components/themes';
-import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
-import { Link as RouterLink, MemoryRouter as Router } from 'react-router-dom';
-import { LinkComponentCssMixin } from '#src/components/Link';
-import type { LinkComponent } from '#src/components/Link';
 
 export default {
   title: 'Admiral-2.1/Link',

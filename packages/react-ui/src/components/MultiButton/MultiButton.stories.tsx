@@ -1,15 +1,11 @@
-import type { MultiButtonItem, MultiButtonProps } from '#src/components/MultiButton';
-import { MultiButton } from '#src/components/MultiButton';
-import type { MouseEvent } from 'react';
 import * as React from 'react';
+import type { MouseEvent } from 'react';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import styled, { ThemeProvider } from 'styled-components';
-import type { Theme } from '#src/components/themes';
-import type { RenderOptionProps } from '#src/components/Menu/MenuItem';
-import { MenuItem } from '#src/components/Menu/MenuItem';
+import { MultiButton, MenuItem, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
+import type { MultiButtonItem, MultiButtonProps, Theme, RenderOptionProps } from '@admiral-ds/react-ui';
 import { ReactComponent as BonusSolid } from '@admiral-ds/icons/build/category/BonusSolid.svg';
-import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 const Separator = styled.div`
