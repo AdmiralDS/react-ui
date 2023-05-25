@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Tree } from '#src/components/Tree';
 import { withDesign } from 'storybook-addon-designs';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
+import { Tree } from '@admiral-ds/react-ui';
 import { TreeWithCheckboxesTemplate, SimpleTreeTemplate } from './Templates';
 import TreeWithCheckboxesRaw from '!!raw-loader!./Templates/TreeWithCheckboxes';
 import SimpleTreeRaw from '!!raw-loader!./Templates/SimpleTree';
