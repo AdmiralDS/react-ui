@@ -1,13 +1,17 @@
-import { Button } from '#src/components/Button';
-import { InputField } from '#src/components/form';
-import type { DrawerProps } from '#src/components/Drawer';
-import { Drawer, DrawerButtonPanel, DrawerContent, DrawerTitle } from '#src/components/Drawer';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import * as React from 'react';
-import { withDesign } from 'storybook-addon-designs';
 import styled, { ThemeProvider } from 'styled-components';
-import type { Theme } from '#src/components/themes';
-import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
+import type { ComponentMeta, ComponentStory } from '@storybook/react';
+import { withDesign } from 'storybook-addon-designs';
+import type { DrawerProps, Theme } from '@admiral-ds/react-ui';
+import {
+  Drawer,
+  DrawerButtonPanel,
+  DrawerContent,
+  DrawerTitle,
+  Button,
+  InputField,
+  ALL_BORDER_RADIUS_VALUES,
+} from '@admiral-ds/react-ui';
 import { ReactComponent as ArrowLeftOutline } from '@admiral-ds/icons/build/system/ArrowLeftOutline.svg';
 import { ReactComponent as ArrowRightOutline } from '@admiral-ds/icons/build/system/ArrowRightOutline.svg';
 
