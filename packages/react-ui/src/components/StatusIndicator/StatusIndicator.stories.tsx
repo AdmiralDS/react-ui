@@ -5,8 +5,7 @@ import { withDesign } from 'storybook-addon-designs';
 import { ReactComponent as InfoSolid } from '@admiral-ds/icons/build/service/InfoSolid.svg';
 import { ReactComponent as CheckOutline } from '@admiral-ds/icons/build/service/CheckOutline.svg';
 import { ReactComponent as ErrorSolid } from '@admiral-ds/icons/build/service/ErrorSolid.svg';
-import { StatusIndicator } from '#src/components/StatusIndicator';
-import { T } from '#src/components/T';
+import { StatusIndicator, T } from '@admiral-ds/react-ui';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI', serif;
