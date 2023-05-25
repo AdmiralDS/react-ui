@@ -1,13 +1,13 @@
 import * as React from 'react';
 
-export interface IContextProps {
+export interface DropdownContextProps {
   addDropdown?: (newDropdown: React.RefObject<HTMLElement>) => void;
   removeDropdown?: (removeDropdown: React.RefObject<HTMLElement>) => void;
   dropdowns: React.RefObject<HTMLElement>[];
   /** ref на дом элемент внутри которого будут создаваться все дроп контейнеры */
   rootRef?: React.RefObject<HTMLElement>;
 }
-export const DropdownContext = React.createContext({} as IContextProps);
+export const DropdownContext = React.createContext({} as DropdownContextProps);
 
 interface ProviderProps {
   children?: React.ReactNode;
@@ -37,7 +37,7 @@ export const DropdownProvider = ({ rootRef, ...props }: ProviderProps) => {
   return <DropdownContext.Provider value={providerValue} children={props.children} />;
 };
 
-export function useDropdown(dropdownRef: React.RefObject<HTMLElement>): IContextProps {
+export function useDropdown(dropdownRef: React.RefObject<HTMLElement>): DropdownContextProps {
   const { dropdowns = [], addDropdown, removeDropdown } = React.useContext(DropdownContext);
 
   const dropdownIndex = dropdowns.indexOf(dropdownRef);
