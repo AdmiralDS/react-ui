@@ -1,14 +1,20 @@
-import { Button } from '#src/components/Button';
-import { hexToRgba } from '#src/components/common/utils/hexToRgba';
-import { Option } from '#src/components/input/Select';
-import { InputField, SelectField } from '#src/components/form';
-import { Modal, ModalButtonPanel, ModalContent, ModalTitle } from '#src/components/Modal';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import * as React from 'react';
+import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import styled, { css, ThemeProvider } from 'styled-components';
-import type { Theme } from '#src/components/themes';
-import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
+import {
+  Modal,
+  ModalButtonPanel,
+  ModalContent,
+  ModalTitle,
+  Button,
+  Option,
+  InputField,
+  SelectField,
+  ALL_BORDER_RADIUS_VALUES,
+} from '@admiral-ds/react-ui';
+import type { Theme } from '@admiral-ds/react-ui';
+import { hexToRgba } from '#src/components/common/utils/hexToRgba';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
