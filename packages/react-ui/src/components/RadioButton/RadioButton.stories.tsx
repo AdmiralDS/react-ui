@@ -2,12 +2,9 @@ import React, { useState } from 'react';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import styled from 'styled-components';
-
-import type { RadioButtonProps } from '#src/components/RadioButton';
-import { RadioButton } from '#src/components/RadioButton';
-import { Button } from '#src/components/Button';
+import { RadioButton, Button, Hint } from '@admiral-ds/react-ui';
+import type { RadioButtonProps } from '@admiral-ds/react-ui';
 import { ReactComponent as InfoSolidSVG } from '@admiral-ds/icons/build/service/InfoSolid.svg';
-import { Hint } from '#src/components/Hint';
 
 const Separator = styled.div`
   height: 20px;
