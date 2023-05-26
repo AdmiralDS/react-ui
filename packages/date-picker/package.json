@@ -31,10 +31,10 @@
   "author": "Admiral DS team",
   "license": "See license in ./LICENSE",
   "dependencies": {
+    "@admiral-ds/icons": "^2.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "styled-components": "^5.1.0",
-    "@admiral-ds/icons": "^2.0.0"
+    "styled-components": "^5.1.0 || ^6.0.0-rc.1"
   },
   "devDependencies": {
     "@admiral-ds/react-ui": "*",
@@ -46,10 +46,12 @@
     "@storybook/addon-essentials": "^7.0.8",
     "@storybook/addon-interactions": "^7.0.8",
     "@storybook/addon-links": "^7.0.8",
+    "@storybook/addon-styling": "^1.0.8",
     "@storybook/blocks": "^7.0.8",
     "@storybook/react": "^7.0.8",
     "@storybook/react-webpack5": "^7.0.8",
     "@storybook/testing-library": "^0.1.0",
+    "@svgr/webpack": "^8.0.1",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^14.4.3",
@@ -69,9 +71,9 @@
     "typescript": "^5.0.4"
   },
   "peerDependencies": {
-    "react": "^18.2.0",
-    "styled-components": "^5.1.0 || ^6.0.0-rc.1",
     "@admiral-ds/icons": "^2.0.0",
-    "@admiral-ds/react-ui": "*"
+    "@admiral-ds/react-ui": "*",
+    "react": "^18.2.0",
+    "styled-components": "^5.1.0 || ^6.0.0-rc.1"
   }
 }

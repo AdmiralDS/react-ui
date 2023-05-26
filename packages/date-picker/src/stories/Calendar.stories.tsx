@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
 import { Button, T, ALL_BORDER_RADIUS_VALUES, weekendMixin } from '@admiral-ds/react-ui';
 
 import type { CalendarPropType, ViewScreenType } from '@admiral-ds/date-picker';
@@ -11,17 +10,12 @@ import { startOfDay } from './date-utils';
 
 export default {
   title: 'Admiral-2.1/Calendar2',
-  decorators: [withDesign],
   component: Calendar,
   parameters: {
     docs: {
       source: {
         code: null,
       },
-    },
-    design: {
-      type: 'figma',
-      url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A53407',
     },
   },
   argTypes: {
