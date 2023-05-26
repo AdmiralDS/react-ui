@@ -166,7 +166,7 @@ const Container = styled.div<{
   }
 
   ${containerHeights}
-  ${({ skeleton }) => skeleton && skeletonMixin}};
+  ${({ skeleton }) => skeleton && skeletonMixin};
   ${BorderedDivStyles}
 `;
 
