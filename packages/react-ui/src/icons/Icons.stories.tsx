@@ -1,11 +1,10 @@
-import { TooltipHoc } from '#src/components/TooltipHOC';
-import { typography } from '#src/components/Typography';
-import { withDesign } from 'storybook-addon-designs';
 import * as React from 'react';
 import type { Meta, Story } from '@storybook/react';
+import { withDesign } from 'storybook-addon-designs';
 import styled from 'styled-components';
-import metadata from '@admiral-ds/icons/metadata.json';
+import { TooltipHoc, typography } from '@admiral-ds/react-ui';
 import { ReactComponent as CopyOutline } from '@admiral-ds/icons/build/documents/CopyOutline.svg';
+import metadata from '@admiral-ds/icons/metadata.json';
 import * as CardsIcons from './IconComponents-cards';
 import * as CategoryIcons from './IconComponents-category';
 import * as CommunicationIcons from './IconComponents-communication';

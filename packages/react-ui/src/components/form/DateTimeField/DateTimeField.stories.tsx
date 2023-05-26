@@ -1,4 +1,7 @@
-import type { InputStatus, ComponentDimension } from '#src/components/input';
+import * as React from 'react';
+import type { ComponentMeta, ComponentStory } from '@storybook/react';
+import { withDesign } from 'storybook-addon-designs';
+import styled from 'styled-components';
 import {
   DateTimeContainer,
   DateTimeDateInput,
@@ -6,15 +9,11 @@ import {
   INPUT_DIMENSIONS_VALUES,
   INPUT_STATUS_VALUES,
   DateTimeSeparator,
-} from '#src/components/input';
-import * as React from 'react';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import type { FieldProps } from '#src/components/Field';
-import { Field } from '#src/components/Field';
-import { withDesign } from 'storybook-addon-designs';
-import styled from 'styled-components';
+  Field,
+  ALL_BORDER_RADIUS_VALUES,
+} from '@admiral-ds/react-ui';
+import type { FieldProps, InputStatus, ComponentDimension } from '@admiral-ds/react-ui';
 import { DataAttributesDescription } from '#src/components/form/common';
-import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
 
 interface DateTimeFieldProps extends FieldProps {
   dimension?: ComponentDimension;

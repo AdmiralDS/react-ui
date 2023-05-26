@@ -2,17 +2,19 @@ import * as React from 'react';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import styled, { ThemeProvider } from 'styled-components';
-import type { Theme } from '#src/components/themes';
-import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes';
-import { DateField, InputField, PhoneInputField } from '#src/components/form';
-import { DataAttributesDescription } from '#src/components/form/common';
-import type { FieldProps } from '#src/components/Field';
-import { Field } from '#src/components/Field';
-import type { ComponentDimension } from '#src/components/input';
-import { INPUT_DIMENSIONS_VALUES, INPUT_STATUS_VALUES } from '#src/components/input';
+import {
+  Field,
+  DateField,
+  InputField,
+  PhoneInputField,
+  InputIconButton,
+  INPUT_DIMENSIONS_VALUES,
+  ALL_BORDER_RADIUS_VALUES,
+} from '@admiral-ds/react-ui';
+import type { FieldProps, ComponentDimension, Theme } from '@admiral-ds/react-ui';
 import { ReactComponent as EyeCloseOutlineSvg } from '@admiral-ds/icons/build/service/EyeCloseOutline.svg';
 import { ReactComponent as EyeOutlineSvg } from '@admiral-ds/icons/build/service/EyeOutline.svg';
-import { InputIconButton } from '#src/components/InputIconButton';
+import { DataAttributesDescription } from '#src/components/form/common';
 
 interface FieldPropsWithDimension extends FieldProps {
   dimension?: ComponentDimension;
