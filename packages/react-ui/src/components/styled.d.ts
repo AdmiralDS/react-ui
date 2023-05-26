@@ -1,5 +1,5 @@
 import 'styled-components';
-import type { Theme } from './themes/index';
+import type { Theme } from './themes';
 
 interface IPalette {
   main: string;

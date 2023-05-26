@@ -4,18 +4,19 @@ import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import styled, { ThemeProvider } from 'styled-components';
 
-import { Tooltip, TOOLTIP_DELAY } from '#src/components/Tooltip';
-import type { RenderOptionProps, ItemProps } from '#src/components/Menu/MenuItem';
-import { MenuButton } from '#src/components/MenuButton';
-import { MenuItem } from '#src/components/Menu/MenuItem';
-import { TooltipHoc } from '#src/components/TooltipHOC';
+import {
+  Tooltip,
+  TOOLTIP_DELAY,
+  TooltipHoc,
+  MenuButton,
+  MenuItem,
+  Button,
+  InputField,
+  ALL_BORDER_RADIUS_VALUES,
+  refSetter,
+} from '@admiral-ds/react-ui';
+import type { RenderOptionProps, ItemProps, InputFieldProps, Theme } from '@admiral-ds/react-ui';
 import { TooltipHocStory } from '#src/components/TooltipHOC/story';
-import { refSetter } from '#src/components/common/utils/refSetter';
-import { Button } from '#src/components/Button';
-import { InputField } from '#src/components/form';
-import type { InputFieldProps } from '#src/components/form';
-import type { Theme } from '#src/components/themes';
-import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
 
 const Separator = styled.div<{ height?: number }>`
   height: ${({ height }) => (height ? height : 20)}px;

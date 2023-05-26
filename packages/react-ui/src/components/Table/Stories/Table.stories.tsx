@@ -3,11 +3,11 @@ import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import styled from 'styled-components';
 
-import type { Column } from '#src/components/Table';
-import { Table } from '#src/components/Table';
-import { FieldSet, DateField } from '#src/components/form';
-import { RadioButton } from '#src/components/RadioButton';
-import { Button } from '#src/components/Button';
+import type { Column } from '@admiral-ds/react-ui';
+import { Table, Button, RadioButton, FieldSet, DateField, DefaultFontColorName } from '@admiral-ds/react-ui';
+import { ReactComponent as AcceptSolid } from '@admiral-ds/icons/build/category/AcceptSolid.svg';
+
+// Массивы с данными столбцов и строк вынесены в отдельный файл в связи с большим объемом информации
 import {
   columnList,
   columnListExtra,
@@ -20,18 +20,20 @@ import {
   rowList,
   rowListExpanded,
   rowListLineClamp,
-  rowListMenu,
   rowListRowState,
   rowListSort,
   rowListWithGroup,
-  virtualColumnList,
-  virtualRowList,
   columnListWithCustomRender,
   rowListWithCustomRenderGroup,
   columnListWithDrag,
-} from '#src/components/Table/data';
-import { ReactComponent as AcceptSolid } from '@admiral-ds/icons/build/category/AcceptSolid.svg';
-import { DefaultFontColorName } from '#src/components/themes';
+} from './data';
+import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+
+import { VirtualScrollTemplate, OverflowMenuTemplate } from './Templates';
+// Imports of text sources
+/* eslint-disable import/default */
+import VirtualScrollRaw from '!!raw-loader!./Templates/TableVirtualScroll';
+import OverflowMenuRaw from '!!raw-loader!./Templates/TableOverflowMenu';
 
 const Separator = styled.div`
   height: 20px;
@@ -357,10 +359,10 @@ const Template4: ComponentStory<typeof Table> = (args) => {
           setSelected((e.target as HTMLInputElement).value);
         }}
       >
-        <RadioButton value="1" name="test" checked={'1' === selected} readOnly>
+        <RadioButton value="1" name="test" checked={'1' === selected}>
           Сумма превышает миллиард
         </RadioButton>
-        <RadioButton value="2" name="test" checked={'2' === selected} readOnly>
+        <RadioButton value="2" name="test" checked={'2' === selected}>
           Сумма меньше миллиарда
         </RadioButton>
       </FieldSet>
@@ -883,14 +885,16 @@ ExtraText.parameters = {
   },
 };
 
-export const RowOverflowMenu = Template.bind({});
-RowOverflowMenu.args = {
-  rowList: rowListMenu,
-  columnList,
-};
-RowOverflowMenu.storyName = 'Table. Пример строк с OverflowMenu и иконками для одиночного действия.';
-RowOverflowMenu.parameters = {
+//<editor-fold desc="Пример с оверфлоу меню и одиночными действиями над строкой">
+const OverflowMenuStory: ComponentStory<typeof Table> = (props) => (
+  <OverflowMenuTemplate columnList={[]} rowList={[]} {...cleanUpProps(props)} />
+);
+export const OverflowMenuExample = OverflowMenuStory.bind({});
+OverflowMenuExample.parameters = {
   docs: {
+    source: {
+      code: OverflowMenuRaw,
+    },
     description: {
       story: `Опционально со строками можно производить набор действий через Overflow Menu, 
       которое появляется при ховере над строкой. При этом, чтобы не накладываться на возможный текст, 
@@ -909,15 +913,19 @@ RowOverflowMenu.parameters = {
     },
   },
 };
+OverflowMenuExample.storyName = 'Table. Пример строк с OverflowMenu и иконками для одиночного действия.';
+//</editor-fold>
 
-export const VirtualScroll = Template7.bind({});
-VirtualScroll.args = {
-  rowList: virtualRowList,
-  columnList: virtualColumnList,
-};
-VirtualScroll.storyName = 'Table. Виртуальный скролл.';
-VirtualScroll.parameters = {
+//<editor-fold desc="Пример с виртуальным скроллом">
+const VirtualScrollStory: ComponentStory<typeof Table> = (props) => (
+  <VirtualScrollTemplate columnList={[]} rowList={[]} {...cleanUpProps(props)} />
+);
+export const VirtualScrollExample = VirtualScrollStory.bind({});
+VirtualScrollExample.parameters = {
   docs: {
+    source: {
+      code: VirtualScrollRaw,
+    },
     description: {
       story: `В случае если в таблице необходимо отобразить большое количество строк, возможно использовать функцию виртуального скролла.
       На данный момент функция виртуального скролла реализована только для случая, когда все строки в таблице единой фиксированной высоты. 
@@ -930,6 +938,8 @@ VirtualScroll.parameters = {
     },
   },
 };
+VirtualScrollExample.storyName = 'Table. Виртуальный скролл.';
+//</editor-fold>
 
 export const Group = Template8.bind({});
 Group.args = {

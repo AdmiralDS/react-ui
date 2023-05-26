@@ -1,16 +1,10 @@
 import React, { useState } from 'react';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
-import { Button } from '#src/components/Button';
-
-import type { CalendarPropType } from './index';
-import { Calendar } from './index';
-import type { ViewScreenType } from './interfaces';
 import { css, ThemeProvider } from 'styled-components';
-import type { Theme } from '#src/components/themes';
-import { T } from '#src/components/T';
-import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
-import { weekendMixin } from '#src/components/Calendar/highlightDate';
+
+import type { CalendarPropType, ViewScreenType, Theme } from '@admiral-ds/react-ui';
+import { Calendar, weekendMixin, Button, T, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 import { startOfDay } from '#src/components/Calendar/date-utils';
 
 export default {

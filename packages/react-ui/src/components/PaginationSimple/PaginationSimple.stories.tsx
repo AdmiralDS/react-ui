@@ -1,8 +1,8 @@
-import { PaginationSimple, PaginationSimpleItem } from '#src/components/PaginationSimple';
 import * as React from 'react';
 import styled from 'styled-components';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
+import type { ComponentMeta, ComponentStory } from '@storybook/react';
+import { PaginationSimple, PaginationSimpleItem } from '@admiral-ds/react-ui';
 
 const Separator = styled.div`
   height: 20px;

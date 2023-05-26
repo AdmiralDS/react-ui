@@ -2,7 +2,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 import type { TableRow } from '#src/components/Table';
 import { typography } from '#src/components/Typography';
-import type { Color } from '#src/components/themes/common';
+import type { Color } from '#src/components/themes';
 
 export const COLORS: any = {
   Neutral: {

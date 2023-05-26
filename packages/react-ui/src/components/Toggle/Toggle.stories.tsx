@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import styled from 'styled-components';
-
-import type { ToggleProps } from '#src/components/Toggle';
-import { Toggle } from '#src/components/Toggle';
+import { Toggle } from '@admiral-ds/react-ui';
+import type { ToggleProps } from '@admiral-ds/react-ui';
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 const Separator = styled.div`

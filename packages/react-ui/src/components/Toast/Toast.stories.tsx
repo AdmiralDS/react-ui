@@ -3,23 +3,31 @@ import styled, { ThemeProvider } from 'styled-components';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import LinkTo from '@storybook/addon-links/react';
-import { Button } from '#src/components/Button';
-import type { ToastProps, ToastItemProps } from '#src/components/Toast';
-import { Toast, ToastProvider, useToast } from '#src/components/Toast';
-import type { IdentifyToast, ID } from '#src/components/Toast/type';
-import type { Theme } from '#src/components/themes';
-import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
-import { TextInput } from '#src/components/input';
-import { TextButton } from '#src/components/TextButton';
-import type { NotificationItemStatus } from '#src/components/NotificationItem';
 import {
+  Toast,
+  ToastProvider,
+  useToast,
+  DefaultToastItem,
+  ToastItemWithAutoDelete,
+  ToastItemWithProgress,
+  Button,
+  TextInput,
+  TextButton,
   StyledNotificationItem,
   NotificationItemButtonPanel,
   NotificationItemContent,
   NotificationItemTitle,
-} from '#src/components/NotificationItem';
+  ALL_BORDER_RADIUS_VALUES,
+} from '@admiral-ds/react-ui';
+import type {
+  ToastProps,
+  ToastItemProps,
+  IdentifyToast,
+  ID,
+  Theme,
+  NotificationItemStatus,
+} from '@admiral-ds/react-ui';
 import { uid } from '#src/components/common/uid';
-import { DefaultToastItem, ToastItemWithAutoDelete, ToastItemWithProgress } from '#src/components/Toast/ToastItem';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';

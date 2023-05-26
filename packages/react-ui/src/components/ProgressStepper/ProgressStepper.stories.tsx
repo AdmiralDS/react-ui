@@ -1,9 +1,8 @@
 import * as React from 'react';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
-import { typography } from '#src/components/Typography';
 import styled from 'styled-components';
-import { ProgressStepper } from '../ProgressStepper';
+import { ProgressStepper, typography } from '@admiral-ds/react-ui';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';

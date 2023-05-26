@@ -1,5 +1,8 @@
 export * from './light';
 export * from './dark';
-export type { Theme, ColorName, Locale } from './common';
-export { DefaultFontColorName, DefaultBackgroundColorName, MainPrimaryColorName } from './common';
+export * from './common/color';
+export * from './common/zIndex';
+export * from './common/locales';
+export * from './common/opacity';
+export * from './common';
 export * from './borderRadius';

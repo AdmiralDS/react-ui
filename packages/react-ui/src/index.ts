@@ -1,16 +1,4 @@
-export type { Theme } from './components/themes';
-export {
-  LIGHT_THEME,
-  DARK_THEME,
-  ALL_BORDER_RADIUS_VALUES,
-  smallGroupBorderRadius,
-  mediumGroupBorderRadius,
-  largeGroupBorderRadius,
-  DefaultFontColorName,
-  DefaultBackgroundColorName,
-  MainPrimaryColorName,
-} from './components/themes';
-
+export * from './components/themes';
 export * from './components/Accordion';
 export * from './components/Badge';
 export * from './components/Calendar';
@@ -95,5 +83,5 @@ export * from './components/Pill';
 export * from './components/IconPlacement';
 export * from './components/Drawer';
 
-export { FontsVTBGroup } from './components/FontsVTBGroup';
-export { DropdownProvider } from './components/DropdownProvider';
+export * from './components/FontsVTBGroup';
+export * from './components/DropdownProvider';
