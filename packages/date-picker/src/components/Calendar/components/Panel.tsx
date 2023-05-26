@@ -1,7 +1,7 @@
 import type { FC, MouseEvent } from 'react';
 import * as React from 'react';
 import { TooltipHoc } from '@admiral-ds/react-ui';
-import { ThemeContext } from 'styled-components';
+import { useTheme } from 'styled-components';
 import { LIGHT_THEME } from '@admiral-ds/react-ui';
 
 import {
@@ -73,7 +73,7 @@ export const Panel: FC<IPanelProps> = ({
   onNext,
   onPrevious,
 }) => {
-  const theme = React.useContext(ThemeContext) || LIGHT_THEME;
+  const theme = useTheme() || LIGHT_THEME;
   const previousMonthDisabled = !!minDate && differenceMonths(minDate, subMonths(viewDate, 1)) > 0;
   const nextMonthDisabled = !!maxDate && differenceMonths(addMonths(viewDate, 1), maxDate) > 0;
   const previousYearDisabled = !!minDate && differenceYears(minDate, subYears(viewDate, 1)) > 0;

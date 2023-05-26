@@ -2,7 +2,7 @@ import type { FC } from 'react';
 import * as React from 'react';
 import dayjs from 'dayjs';
 import isSameOrAfter from 'dayjs/plugin/isSameOrAfter';
-import { ThemeContext } from 'styled-components';
+import { useTheme } from 'styled-components';
 import { LIGHT_THEME } from '#src/components/themes';
 
 import { dayInRange, endOfWeek, sameDay, startOfWeek } from '../date-utils';
@@ -26,7 +26,7 @@ export const Day: FC<IDayCalendarProps> = ({
   onClick,
   highlightSpecialDay,
 }) => {
-  const theme = React.useContext(ThemeContext) || LIGHT_THEME;
+  const theme = useTheme() || LIGHT_THEME;
   const disabled = !!validator?.invalidValue(day) || (filterDate && !filterDate(day));
   const outsideMonth = month !== undefined && month !== day.month();
   const inSelectingRange =

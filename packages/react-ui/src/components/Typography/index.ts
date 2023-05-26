@@ -1,2 +1,2 @@
-export * from './text';
+// export * from './text';
 export * from './typography';

@@ -2,7 +2,7 @@ import type { FC, MouseEvent } from 'react';
 import * as React from 'react';
 import type { Dayjs } from 'dayjs';
 import { TooltipHoc } from '@admiral-ds/react-ui';
-import { ThemeContext } from 'styled-components';
+import { useTheme } from 'styled-components';
 import { LIGHT_THEME } from '@admiral-ds/react-ui';
 
 import { PanelComponent } from '../styled/PanelComponent';
@@ -63,7 +63,7 @@ export const Panel: FC<IPanelProps> = ({
   onPrevious = () => undefined,
   userLocale,
 }) => {
-  const theme = React.useContext(ThemeContext) || LIGHT_THEME;
+  const theme = useTheme() || LIGHT_THEME;
   const previousMonthDisabled = !!minDate && minDate.diff(viewDate.subtract(1, 'month'), 'month') > 0;
   const nextMonthDisabled = !!maxDate && viewDate.add(1, 'month').diff(maxDate, 'year') > 0;
   const previousYearDisabled = !!minDate && minDate.diff(viewDate.subtract(1, 'year'), 'year') > 0;

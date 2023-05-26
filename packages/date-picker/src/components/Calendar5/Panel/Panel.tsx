@@ -1,5 +1,5 @@
 import { useTheme } from 'styled-components';
-import { LIGHT_THEME } from '@admiral-ds/react-ui';
+import { LIGHT_THEME, type Theme } from '@admiral-ds/react-ui';
 import { PanelWrapper } from './PanelWrapper';
 import { YearMonthDatePanel } from './YearMonthDatePanel';
 import { YearMonthPanel } from './YearMonthPanel';
@@ -19,7 +19,7 @@ export const Panel = ({
   onYearsViewShow,
   onYearsViewHide,
 }: PanelProps) => {
-  const theme = useTheme() || LIGHT_THEME;
+  const theme: Theme = useTheme() || LIGHT_THEME;
   const defineLocale = userLocale || theme.currentLocale;
   const currentLocale = locale || theme.locales[defineLocale].calendar;
   const monthsView = viewMode === 'MONTHS';

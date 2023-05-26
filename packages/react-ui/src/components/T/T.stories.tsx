@@ -1,5 +1,5 @@
-import React, { useContext } from 'react';
-import styled, { css, ThemeContext } from 'styled-components';
+import * as React from 'react';
+import styled, { css, useTheme } from 'styled-components';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import { FONTS, NEW_FONTS } from './storyDescriptions';
@@ -115,7 +115,7 @@ const CopyOutlineWrapper = styled.div`
 `;
 
 const CopyIcon = React.forwardRef<HTMLDivElement, { text: string }>(({ text }, ref) => {
-  const theme = useContext(ThemeContext) || LIGHT_THEME;
+  const theme = useTheme() || LIGHT_THEME;
   const copyToClipboard = () => {
     const el = document.createElement('textarea');
     el.value = text;

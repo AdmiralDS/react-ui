@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ThemeContext } from 'styled-components';
+import { useTheme } from 'styled-components';
 import { LIGHT_THEME } from '#src/components/themes';
 import { PanelWrapper } from '#src/components/CalendarTry/Panel/PanelWrapper';
 import { YearMonthDatePanel } from '#src/components/CalendarTry/Panel/YearMonthDatePanel';
@@ -20,7 +20,7 @@ export const Panel = ({
   onYearsViewShow,
   onYearsViewHide,
 }: PanelProps) => {
-  const theme = React.useContext(ThemeContext) || LIGHT_THEME;
+  const theme = useTheme() || LIGHT_THEME;
   const defineLocale = userLocale || theme.currentLocale;
   const currentLocale = locale || theme.locales[defineLocale].calendar;
   const monthsView = viewMode === 'MONTHS';

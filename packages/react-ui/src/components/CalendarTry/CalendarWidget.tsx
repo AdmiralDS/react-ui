@@ -3,7 +3,7 @@ import type { Dayjs } from 'dayjs';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ru';
 import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
-import styled, { ThemeContext } from 'styled-components';
+import styled, { useTheme } from 'styled-components';
 import { LIGHT_THEME } from '#src/components/themes';
 import { typography } from '#src/components/Typography';
 import { DayCell } from '#src/components/CalendarTry/CalendarContent/DayCell';
@@ -126,7 +126,7 @@ export const CalendarWidgetTry = React.forwardRef<HTMLDivElement, CalendarWidget
       }
       return current.locale(currentLocale || 'ru');
     };
-    const theme = React.useContext(ThemeContext) || LIGHT_THEME;
+    const theme = useTheme() || LIGHT_THEME;
     const [currentLocale, setCurrentLocale] = React.useState<string>();
 
     const defineLocale = userLocale || theme.currentLocale;

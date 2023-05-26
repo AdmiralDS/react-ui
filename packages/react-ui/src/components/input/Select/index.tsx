@@ -1,7 +1,7 @@
 import * as React from 'react';
 import type { CSSProperties } from 'react';
 import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
-import styled, { ThemeContext } from 'styled-components';
+import styled, { useTheme } from 'styled-components';
 import { LIGHT_THEME } from '#src/components/themes';
 import { OpenStatusButton } from '#src/components/OpenStatusButton';
 import { keyboardKey } from '#src/components/common/keyboardKey';
@@ -232,7 +232,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
     },
     ref,
   ) => {
-    const theme = React.useContext(ThemeContext) || LIGHT_THEME;
+    const theme = useTheme() || LIGHT_THEME;
     const emptyMessage = locale?.emptyMessage || (
       <DropDownText>{theme.locales[theme.currentLocale].select.emptyMessage}</DropDownText>
     );

@@ -8,7 +8,7 @@ import { renderDefaultPanel } from '#src/components/CalendarNew/CalendarWidget/c
 import { DayNames } from '#src/components/CalendarNew/CalendarWidget/components/DayNames';
 import { Month } from '#src/components/CalendarNew/CalendarWidget/components/Month';
 import { changeTime, equal } from '#src/components/CalendarNew/CalendarWidget/date-utils';
-import { ThemeContext } from 'styled-components';
+import { useTheme } from 'styled-components';
 import { LIGHT_THEME } from '#src/components/themes';
 
 export type CalendarViewScreenType = 'YEAR' | 'MONTH' | 'DAY';
@@ -103,7 +103,7 @@ export const CalendarWidget = React.forwardRef<HTMLDivElement, CalendarWidgetPro
       userLocale,
     };
 
-    const theme = React.useContext(ThemeContext) || LIGHT_THEME;
+    const theme = useTheme() || LIGHT_THEME;
     const [currentLocale, setCurrentLocale] = React.useState<string>();
 
     const defineLocale = userLocale || theme.currentLocale || 'ru';

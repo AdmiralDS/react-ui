@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Checkbox } from '#src/components/Checkbox';
 import observeRect from '#src/components/common/observeRect';
-import { ThemeContext } from 'styled-components';
+import { useTheme } from 'styled-components';
 import { LIGHT_THEME } from '#src/components/themes';
 import { getScrollbarSize } from '#src/components/common/dom/scrollbarUtil';
 import { GroupRow } from '#src/components/Table/Row/GroupRow';
@@ -308,7 +308,7 @@ export const Table: React.FC<TableProps> = ({
   locale,
   ...props
 }) => {
-  const theme = React.useContext(ThemeContext) || LIGHT_THEME;
+  const theme = useTheme() || LIGHT_THEME;
   const checkboxDimension = dimension === 's' || dimension === 'm' ? 's' : 'm';
   const columnMinWidth = dimension === 's' || dimension === 'm' ? COLUMN_MIN_WIDTH_M : COLUMN_MIN_WIDTH_L;
 

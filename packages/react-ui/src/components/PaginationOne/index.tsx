@@ -1,7 +1,7 @@
 import * as React from 'react';
 import type { ChangeEvent } from 'react';
 import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
-import styled, { css, ThemeContext } from 'styled-components';
+import styled, { css, useTheme } from 'styled-components';
 import { LIGHT_THEME } from '#src/components/themes';
 import { typography } from '#src/components/Typography';
 import { ReactComponent as ChevronLeft } from '@admiral-ds/icons/build/system/ChevronLeftOutline.svg';
@@ -142,7 +142,7 @@ export const PaginationOne: React.FC<PaginationOneProps> = ({
   showPageNumberInput = false,
   ...props
 }) => {
-  const theme = React.useContext(ThemeContext) || LIGHT_THEME;
+  const theme = useTheme() || LIGHT_THEME;
   const {
     itemsPerPageText: theme_itemsPerPageText,
     itemRangeText: theme_itemRangeText,

@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 import * as React from 'react';
-import { ThemeContext } from 'styled-components';
+import { useTheme } from 'styled-components';
 import { LIGHT_THEME } from '#src/components/themes';
 
 import { capitalizeFirstLetter, DAY_NUMBERS } from '../constants';
@@ -12,7 +12,7 @@ interface IDayNamesProps {
 }
 
 export const DayNames: FC<IDayNamesProps> = ({ date }) => {
-  const theme = React.useContext(ThemeContext) || LIGHT_THEME;
+  const theme = useTheme() || LIGHT_THEME;
   const weekStart = startOfWeek(date, theme.locales[theme.currentLocale].firstDayOfWeek ?? 1);
   return (
     <div>

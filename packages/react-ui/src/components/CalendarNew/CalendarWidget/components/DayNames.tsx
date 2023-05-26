@@ -1,6 +1,6 @@
 import * as React from 'react';
 import type { Dayjs } from 'dayjs';
-import { ThemeContext } from 'styled-components';
+import { useTheme } from 'styled-components';
 import { LIGHT_THEME } from '#src/components/themes';
 
 import { capitalizeFirstLetter, DAY_NUMBERS } from '../constants';
@@ -13,7 +13,7 @@ interface IDayNamesProps {
 }
 
 export const DayNames = ({ date, userLocale }: IDayNamesProps) => {
-  const theme = React.useContext(ThemeContext) || LIGHT_THEME;
+  const theme = useTheme() || LIGHT_THEME;
   const currentLocale = userLocale || theme.currentLocale || 'ru';
 
   const weekStart = startOfWeek(date, currentLocale);

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import type { Dayjs } from 'dayjs';
-import { ThemeContext } from 'styled-components';
+import { useTheme } from 'styled-components';
 import { LIGHT_THEME } from '#src/components/themes';
 
 import { addWeeks, startOfMonth, startOfWeek } from '#src/components/CalendarNew/CalendarWidget/date-utils';
@@ -28,7 +28,7 @@ export const Month = ({
   highlightSpecialDay,
   userLocale,
 }: ICalendarMonthProps) => {
-  const theme = React.useContext(ThemeContext) || LIGHT_THEME;
+  const theme = useTheme() || LIGHT_THEME;
   const weeks: Array<Dayjs> = [];
   const handleMouseEnter = (day: Dayjs, event: any) => onMouseEnter && onMouseEnter(day, event);
   const handleMouseLeave = () => onMouseLeave && onMouseLeave();
