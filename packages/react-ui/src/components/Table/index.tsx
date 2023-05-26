@@ -835,6 +835,7 @@ export const Table: React.FC<TableProps> = ({
         [normalCols],
         {
           mirrorRef,
+          dimension,
           direction: 'horizontal',
           invalid: (el: any) => {
             //например чекбоксы или стрелки нельзя перетаскивать
@@ -855,7 +856,7 @@ export const Table: React.FC<TableProps> = ({
         observer.unobserve();
       };
     }
-  }, [isAnyColumnDraggable, isAnyStickyColumnDraggable]);
+  }, [isAnyColumnDraggable, isAnyStickyColumnDraggable, dimension]);
 
   return (
     <TableContainer ref={tableRef} data-shadow={false} {...props} className={`table ${props.className || ''}`}>

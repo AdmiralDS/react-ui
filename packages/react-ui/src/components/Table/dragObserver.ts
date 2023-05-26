@@ -1,29 +1,7 @@
-const crossvent = {
-  add: addEventEasy,
-  remove: removeEventEasy,
-};
-
-function addEventEasy(
-  el: HTMLElement,
-  type: keyof HTMLElementEventMap,
-  fn: EventListenerOrEventListenerObject,
-  capturing?: boolean,
-) {
-  return el.addEventListener(type, fn, capturing);
-}
-
-function removeEventEasy(
-  el: HTMLElement,
-  type: keyof HTMLElementEventMap,
-  fn: EventListenerOrEventListenerObject,
-  capturing?: boolean,
-) {
-  return el.removeEventListener(type, fn, capturing);
-}
-
 type Direction = 'horizontal' | 'vertical';
 type Options = {
   mirrorRef: React.RefObject<HTMLElement>;
+  dimension: 'xl' | 'l' | 'm' | 's';
   accepts?: (el: any, target: any, source: any, sibling: any) => boolean;
   invalid?: (el: any, handle: any) => boolean;
   direction?: Direction;
@@ -196,15 +174,9 @@ export function dragObserver(initialContainers: HTMLElement[], options: Options,
     }
   }
 
-  function cancel(revert?: any) {
+  function cancel() {
     if (!drake.dragging) {
       return;
-    }
-    const reverts = arguments.length > 0 ? revert : false;
-    const parent = getParent(_item);
-    const initial = isInitialPlacement(parent);
-    if (initial === false && reverts) {
-      _source.insertBefore(_item, _initialSibling);
     }
     cleanup();
   }
@@ -254,7 +226,7 @@ export function dragObserver(initialContainers: HTMLElement[], options: Options,
     }
   }
 
-  function drag(e: any) {
+  function drag(e: Event) {
     if (!_mirror) {
       return;
     }
@@ -267,7 +239,7 @@ export function dragObserver(initialContainers: HTMLElement[], options: Options,
       x = clientX - _offsetX;
       y = clientY - _offsetY;
     } else if (o.direction === 'horizontal') {
-      x = clientX - 8;
+      x = clientX - (o.dimension === 's' || o.dimension === 'm' ? 8 : 10);
       y = clientY - (_mirror.getBoundingClientRect().height - 20) / 2;
     }
 
@@ -297,21 +269,22 @@ export function dragObserver(initialContainers: HTMLElement[], options: Options,
 
     if ((reference === null && changed) || (reference !== _item && reference !== _item.nextElementSibling)) {
       _currentSibling = reference;
-      // dropTarget.insertBefore(_item, reference);
       onDrop?.(_item, reference);
     }
   }
 
   function renderMirrorImage() {
-    // нет реализации для direction vertical
-    if (_mirror && !o.mirrorRef.current) {
+    const mirrorElement = o.mirrorRef.current;
+    if (_mirror && !mirrorElement) {
       return;
     }
-    if (o.mirrorRef.current) {
-      const mirrorParent = o.mirrorRef.current.parentElement;
+    // TODO: add realization for vertical direction
+    if (mirrorElement && o.direction === 'horizontal') {
+      const mirrorParent = mirrorElement.parentElement;
       const title = _item.dataset.thTitle;
-      o.mirrorRef.current.innerHTML = title;
-      o.mirrorRef.current.style.visibility = 'visible';
+
+      mirrorElement.innerHTML = title;
+      mirrorElement.style.visibility = 'visible';
       _mirror = o.mirrorRef.current;
 
       touchy(document.documentElement, 'add', 'mousemove', drag);
@@ -324,12 +297,14 @@ export function dragObserver(initialContainers: HTMLElement[], options: Options,
   }
 
   function removeMirrorImage() {
-    if (_mirror && o.mirrorRef.current) {
-      const mirrorParent = o.mirrorRef.current.parentElement;
+    const mirrorElement = o.mirrorRef.current;
+    if (_mirror && mirrorElement) {
+      const mirrorParent = mirrorElement.parentElement;
       if (mirrorParent) {
         mirrorParent.style.userSelect = _mirrorContainerStyle;
       }
-      o.mirrorRef.current.style.visibility = 'hidden';
+
+      mirrorElement.style.visibility = 'hidden';
       touchy(document.documentElement, 'remove', 'mousemove', drag);
       _mirror = null;
     }
@@ -386,7 +361,35 @@ export function dragObserver(initialContainers: HTMLElement[], options: Options,
   }
 }
 
-function touchy(el: HTMLElement, op: 'remove' | 'add', type: 'mouseup' | 'mousedown' | 'mousemove', fn: any) {
+const crossvent = {
+  add: addEventEasy,
+  remove: removeEventEasy,
+};
+
+function addEventEasy(
+  el: HTMLElement,
+  type: keyof HTMLElementEventMap,
+  fn: EventListenerOrEventListenerObject,
+  capturing?: boolean,
+) {
+  return el.addEventListener(type, fn, capturing);
+}
+
+function removeEventEasy(
+  el: HTMLElement,
+  type: keyof HTMLElementEventMap,
+  fn: EventListenerOrEventListenerObject,
+  capturing?: boolean,
+) {
+  return el.removeEventListener(type, fn, capturing);
+}
+
+function touchy(
+  el: HTMLElement,
+  op: 'remove' | 'add',
+  type: 'mouseup' | 'mousedown' | 'mousemove',
+  fn: EventListenerOrEventListenerObject,
+) {
   const touch = {
     mouseup: 'touchend',
     mousedown: 'touchstart',
@@ -397,7 +400,7 @@ function touchy(el: HTMLElement, op: 'remove' | 'add', type: 'mouseup' | 'moused
   crossvent[op](el, type, fn);
 }
 
-// получаем координаты элемента в контексте документа
+// get element coords according to document context
 function getOffset(el: HTMLElement) {
   const rect = el.getBoundingClientRect();
   return {
@@ -409,7 +412,6 @@ function getOffset(el: HTMLElement) {
 function getElementBehindPoint(point: HTMLElement, x: number, y: number) {
   point = point || {};
   const state = point.style.display;
-  // временно прячем mirror, чтобы вычислить, какой сейчас за ним скрывается элемент
   point.style.display = 'none';
   const el = document.elementFromPoint(x, y);
   point.style.display = state;
