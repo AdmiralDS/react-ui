@@ -1,17 +1,17 @@
-import * as React from "react";
-import type { SyntheticEvent } from "react";
-import dayjs from "dayjs";
-import type { Dayjs } from "dayjs";
-import "dayjs/locale/ru";
-import { CalendarComponent } from "./styled/CalendarComponent";
-import { renderDefaultPanel } from "./components/Panel";
-import { DayNames } from "./components/DayNames";
-import { Month } from "./components/Month";
-import { changeTime, equal } from "./date-utils";
-import { ThemeContext } from "styled-components";
-import { LIGHT_THEME, type Theme } from "@admiral-ds/react-ui";
+import * as React from 'react';
+import type { SyntheticEvent } from 'react';
+import dayjs from 'dayjs';
+import type { Dayjs } from 'dayjs';
+import 'dayjs/locale/ru';
+import { CalendarComponent } from './styled/CalendarComponent';
+import { renderDefaultPanel } from './components/Panel';
+import { DayNames } from './components/DayNames';
+import { Month } from './components/Month';
+import { changeTime, equal } from './date-utils';
+import { useTheme } from 'styled-components';
+import { LIGHT_THEME } from '@admiral-ds/react-ui';
 
-export type CalendarViewScreenType = "YEAR" | "MONTH" | "DAY";
+export type CalendarViewScreenType = 'YEAR' | 'MONTH' | 'DAY';
 
 export interface CalendarWidgetProps {
   /** Выбранное значение даты */
@@ -35,10 +35,7 @@ export interface CalendarWidgetProps {
   minDate?: Dayjs;
   maxDate?: Dayjs;
   /** Коллбэк выбора даты, срабатывает при клике на дне (в режиме диапазона date - это массив из двух дат) */
-  onChange(
-    date: Dayjs | Array<Dayjs | null> | null,
-    event?: SyntheticEvent<any>
-  ): void;
+  onChange(date: Dayjs | Array<Dayjs | null> | null, event?: SyntheticEvent<any>): void;
   /** Выбранное значение даты */
   selected?: Dayjs | null;
   /** Начальная дата диапазона */
@@ -69,10 +66,7 @@ export interface CalendarWidgetProps {
   userLocale?: string;
 }
 
-export const CalendarWidget = React.forwardRef<
-  HTMLDivElement,
-  CalendarWidgetProps
->(
+export const CalendarWidget = React.forwardRef<HTMLDivElement, CalendarWidgetProps>(
   (
     {
       viewDate,
@@ -92,10 +86,10 @@ export const CalendarWidget = React.forwardRef<
       onChange,
       range,
     },
-    ref
+    ref,
   ) => {
-    const monthView = mode === "MONTH";
-    const yearView = mode === "YEAR";
+    const monthView = mode === 'MONTH';
+    const yearView = mode === 'YEAR';
     // активная дата, на которой сейчас ховер
     const [activeDate, setActiveDate] = React.useState<Dayjs | null>(null);
 
@@ -109,15 +103,15 @@ export const CalendarWidget = React.forwardRef<
       userLocale,
     };
 
-    const theme = React.useContext(ThemeContext) || LIGHT_THEME;
+    const theme = useTheme() || LIGHT_THEME;
     const [currentLocale, setCurrentLocale] = React.useState<string>();
 
-    const defineLocale = userLocale || theme.currentLocale || "ru";
+    const defineLocale = userLocale || theme.currentLocale || 'ru';
     if (currentLocale !== defineLocale) {
       import(`dayjs/locale/${defineLocale}.js`)
         .then(() => setCurrentLocale(defineLocale))
         .catch(() => {
-          setCurrentLocale("ru");
+          setCurrentLocale('ru');
         });
     }
 
@@ -176,10 +170,9 @@ export const CalendarWidget = React.forwardRef<
 
     return currentLocale ? (
       <CalendarComponent ref={ref} monthsView={monthView} yearsView={yearView}>
-        {(headerRender && headerRender(viewDate)) ||
-          renderDefaultPanel(calendarPanelProps)}
+        {(headerRender && headerRender(viewDate)) || renderDefaultPanel(calendarPanelProps)}
         {renderMonth()}
       </CalendarComponent>
     ) : null;
-  }
+  },
 );

@@ -1,9 +1,9 @@
-import { Meta, StoryObj } from "@storybook/react";
-import { Input, type InputProps } from "@admiral-ds/date-picker";
+import type { Meta, StoryObj } from '@storybook/react';
+import { Input, type InputProps } from '@admiral-ds/date-picker';
 
 const meta: Meta<typeof Input> = {
   component: Input,
-  title: "Marbella/InputField",
+  title: 'Marbella/InputField',
   argTypes: {},
 };
 export default meta;
@@ -16,7 +16,7 @@ export const Primary: Story = (args: JSX.IntrinsicAttributes & InputProps) => (
 Primary.args = {
   error: false,
   disabled: false,
-  label: "Primary",
+  label: 'Primary',
 };
 
 export const Success: Story = (args: JSX.IntrinsicAttributes & InputProps) => (
@@ -26,7 +26,7 @@ Success.args = {
   error: false,
   success: true,
   disabled: false,
-  label: "Success",
+  label: 'Success',
 };
 
 export const Error: Story = (args: JSX.IntrinsicAttributes & InputProps) => (
@@ -35,7 +35,7 @@ export const Error: Story = (args: JSX.IntrinsicAttributes & InputProps) => (
 Error.args = {
   error: true,
   disabled: false,
-  message: "Error",
+  message: 'Error',
 };
 
 export const Disabled: Story = (args: JSX.IntrinsicAttributes & InputProps) => (
@@ -43,5 +43,5 @@ export const Disabled: Story = (args: JSX.IntrinsicAttributes & InputProps) => (
 );
 Disabled.args = {
   disabled: true,
-  label: "Disabled",
+  label: 'Disabled',
 };

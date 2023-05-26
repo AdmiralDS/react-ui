@@ -1,8 +1,8 @@
-import type { FC, MouseEvent } from "react";
-import * as React from "react";
-import { TooltipHoc } from "@admiral-ds/react-ui";
-import { ThemeContext } from "styled-components";
-import { LIGHT_THEME } from "@admiral-ds/react-ui";
+import type { FC, MouseEvent } from 'react';
+import * as React from 'react';
+import { TooltipHoc } from '@admiral-ds/react-ui';
+import { ThemeContext } from 'styled-components';
+import { LIGHT_THEME } from '@admiral-ds/react-ui';
 
 import {
   addMonths,
@@ -13,12 +13,12 @@ import {
   subMonths,
   subYears,
   yearsRange,
-} from "../date-utils";
-import { PanelComponent } from "../styled/PanelComponent";
-import { Month, PanelDate, Year, YearRange } from "../styled/PanelDate";
-import { capitalizeFirstLetter, DEFAULT_YEAR_COUNT } from "../constants";
+} from '../date-utils';
+import { PanelComponent } from '../styled/PanelComponent';
+import { Month, PanelDate, Year, YearRange } from '../styled/PanelDate';
+import { capitalizeFirstLetter, DEFAULT_YEAR_COUNT } from '../constants';
 
-import { Button } from "./Button";
+import { Button } from './Button';
 
 const MonthWithTooltip = TooltipHoc(Month);
 const YearWithTooltip = TooltipHoc(Year);
@@ -74,17 +74,11 @@ export const Panel: FC<IPanelProps> = ({
   onPrevious,
 }) => {
   const theme = React.useContext(ThemeContext) || LIGHT_THEME;
-  const previousMonthDisabled =
-    !!minDate && differenceMonths(minDate, subMonths(viewDate, 1)) > 0;
-  const nextMonthDisabled =
-    !!maxDate && differenceMonths(addMonths(viewDate, 1), maxDate) > 0;
-  const previousYearDisabled =
-    !!minDate && differenceYears(minDate, subYears(viewDate, 1)) > 0;
-  const nextYearDisabled =
-    !!maxDate && differenceYears(addYears(viewDate, 1), maxDate) > 0;
-  const previousDisabled = yearsView
-    ? previousYearDisabled
-    : previousMonthDisabled;
+  const previousMonthDisabled = !!minDate && differenceMonths(minDate, subMonths(viewDate, 1)) > 0;
+  const nextMonthDisabled = !!maxDate && differenceMonths(addMonths(viewDate, 1), maxDate) > 0;
+  const previousYearDisabled = !!minDate && differenceYears(minDate, subYears(viewDate, 1)) > 0;
+  const nextYearDisabled = !!maxDate && differenceYears(addYears(viewDate, 1), maxDate) > 0;
+  const previousDisabled = yearsView ? previousYearDisabled : previousMonthDisabled;
   const nextDisabled = yearsView ? nextYearDisabled : nextMonthDisabled;
   const yearRange = yearsView && !!range && !!currentActiveViewImportant;
   const monthRange = monthsView && !!range && !!currentActiveViewImportant;
@@ -112,29 +106,19 @@ export const Panel: FC<IPanelProps> = ({
         <MonthWithTooltip
           renderContent={() =>
             monthsView
-              ? locale?.returnText ||
-                theme.locales[theme.currentLocale].calendar.returnText
-              : locale?.selectMonthText ||
-                theme.locales[theme.currentLocale].calendar.selectMonthText
+              ? locale?.returnText || theme.locales[theme.currentLocale].calendar.returnText
+              : locale?.selectMonthText || theme.locales[theme.currentLocale].calendar.selectMonthText
           }
           view={monthsView}
           onMouseDown={monthMouseDownHandle}
         >
-          {capitalizeFirstLetter(
-            getFormattedValue(
-              viewDate,
-              { month: "long" },
-              theme.currentLocale || "ru"
-            )
-          )}
+          {capitalizeFirstLetter(getFormattedValue(viewDate, { month: 'long' }, theme.currentLocale || 'ru'))}
         </MonthWithTooltip>
         <YearWithTooltip
           renderContent={() =>
             yearsView
-              ? locale?.returnText ||
-                theme.locales[theme.currentLocale].calendar.returnText
-              : locale?.selectYearText ||
-                theme.locales[theme.currentLocale].calendar.selectYearText
+              ? locale?.returnText || theme.locales[theme.currentLocale].calendar.returnText
+              : locale?.selectYearText || theme.locales[theme.currentLocale].calendar.selectYearText
           }
           view={yearsView}
           onMouseDown={yearMouseDownHandle}
@@ -145,30 +129,20 @@ export const Panel: FC<IPanelProps> = ({
     );
   };
   return (
-    <PanelComponent
-      yearsView={yearsView}
-      monthsView={monthsView}
-      className="ui-kit-calendar-panel-component"
-    >
+    <PanelComponent yearsView={yearsView} monthsView={monthsView} className="ui-kit-calendar-panel-component">
       {!monthsView && !previousDisabled ? (
         <ButtonWithTooltip
           renderContent={() =>
             yearsView
-              ? locale?.backwardText ||
-                theme.locales[theme.currentLocale].calendar.backwardText
-              : locale?.previousMonthText ||
-                theme.locales[theme.currentLocale].calendar.previousMonthText
+              ? locale?.backwardText || theme.locales[theme.currentLocale].calendar.backwardText
+              : locale?.previousMonthText || theme.locales[theme.currentLocale].calendar.previousMonthText
           }
           onMouseDown={onPrevious}
           disabled={previousDisabled}
           type="left"
         />
       ) : (
-        <Button
-          onMouseDown={onPrevious}
-          disabled={previousDisabled}
-          type="left"
-        />
+        <Button onMouseDown={onPrevious} disabled={previousDisabled} type="left" />
       )}
       <PanelDate>
         {yearRange && renderYears()}
@@ -179,10 +153,8 @@ export const Panel: FC<IPanelProps> = ({
         <ButtonWithTooltip
           renderContent={() =>
             yearsView
-              ? locale?.forwardText ||
-                theme.locales[theme.currentLocale].calendar.forwardText
-              : locale?.nextMonthText ||
-                theme.locales[theme.currentLocale].calendar.nextMonthText
+              ? locale?.forwardText || theme.locales[theme.currentLocale].calendar.forwardText
+              : locale?.nextMonthText || theme.locales[theme.currentLocale].calendar.nextMonthText
           }
           onMouseDown={onNext}
           disabled={nextDisabled}

@@ -1,24 +1,18 @@
-import type { FC } from "react";
-import * as React from "react";
-import type { Dayjs } from "dayjs";
-import dayjs from "dayjs";
-import { ThemeContext } from "styled-components";
-import { LIGHT_THEME } from "@admiral-ds/react-ui";
+import type { FC } from 'react';
+import * as React from 'react';
+import type { Dayjs } from 'dayjs';
+import dayjs from 'dayjs';
+import { ThemeContext } from 'styled-components';
+import { LIGHT_THEME } from '@admiral-ds/react-ui';
 
-import { setMonth, startOfMonth, getMonthList } from "../date-utils";
-import { MonthComponent } from "../styled/MonthComponent";
-import type { IYearsCalendarProps } from "../interfaces";
-import { capitalizeFirstLetter } from "../constants";
+import { setMonth, startOfMonth, getMonthList } from '../date-utils';
+import { MonthComponent } from '../styled/MonthComponent';
+import type { IYearsCalendarProps } from '../interfaces';
+import { capitalizeFirstLetter } from '../constants';
 
-export const Months: FC<IYearsCalendarProps> = ({
-  viewDate,
-  startDate,
-  selected,
-  validator,
-  onClick,
-}) => {
+export const Months: FC<IYearsCalendarProps> = ({ viewDate, startDate, selected, validator, onClick }) => {
   const theme = React.useContext(ThemeContext) || LIGHT_THEME;
-  const months = getMonthList(theme.currentLocale || "ru");
+  const months = getMonthList(theme.currentLocale || 'ru');
   return (
     <>
       {months.map((month, index) => {
@@ -32,10 +26,7 @@ export const Months: FC<IYearsCalendarProps> = ({
           <MonthComponent
             key={month}
             today={index === dayjs().month()}
-            selected={
-              !!(selected || startDate) &&
-              index === ((selected || startDate) as Dayjs).month()
-            }
+            selected={!!(selected || startDate) && index === ((selected || startDate) as Dayjs).month()}
             disabled={disabled}
             onMouseDown={handleClick}
           >

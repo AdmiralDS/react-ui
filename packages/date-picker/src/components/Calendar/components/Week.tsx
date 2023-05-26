@@ -1,13 +1,13 @@
-import type { FC } from "react";
-import * as React from "react";
-import { ThemeContext } from "styled-components";
-import { LIGHT_THEME } from "@admiral-ds/react-ui";
+import type { FC } from 'react';
+import * as React from 'react';
+import { ThemeContext } from 'styled-components';
+import { LIGHT_THEME } from '@admiral-ds/react-ui';
 
-import { DAY_NUMBERS } from "../constants";
-import { addDays, startOfWeek } from "../date-utils";
-import { Day } from "./Day";
-import { WeekComponent } from "../styled/WeekComponent";
-import type { IWeekCalendarProps } from "../interfaces";
+import { DAY_NUMBERS } from '../constants';
+import { addDays, startOfWeek } from '../date-utils';
+import { Day } from './Day';
+import { WeekComponent } from '../styled/WeekComponent';
+import type { IWeekCalendarProps } from '../interfaces';
 
 export const Week: FC<IWeekCalendarProps> = ({
   day,
@@ -24,13 +24,9 @@ export const Week: FC<IWeekCalendarProps> = ({
   highlightSpecialDay,
 }) => {
   const theme = React.useContext(ThemeContext) || LIGHT_THEME;
-  const handleMouseEnter = (day: Date, e: any) =>
-    onMouseEnter && onMouseEnter(day, e);
+  const handleMouseEnter = (day: Date, e: any) => onMouseEnter && onMouseEnter(day, e);
   const handleDayClick = (day: Date, e: any) => onClick && onClick(day, e);
-  const weekStart = startOfWeek(
-    day,
-    theme.locales[theme.currentLocale].firstDayOfWeek ?? 1
-  );
+  const weekStart = startOfWeek(day, theme.locales[theme.currentLocale].firstDayOfWeek ?? 1);
   return (
     <WeekComponent>
       {DAY_NUMBERS.map((offset) => {

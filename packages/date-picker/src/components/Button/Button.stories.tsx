@@ -1,9 +1,9 @@
-import { Meta, StoryObj } from "@storybook/react";
-import { Button, type ButtonProps } from "@admiral-ds/date-picker";
+import type { Meta, StoryObj } from '@storybook/react';
+import { Button, type ButtonProps } from '@admiral-ds/date-picker';
 
 const meta: Meta<typeof Button> = {
   component: Button,
-  title: "Marbella/Button",
+  title: 'Marbella/Button',
   argTypes: {},
 };
 export default meta;
@@ -16,25 +16,25 @@ export const Primary: Story = (args: JSX.IntrinsicAttributes & ButtonProps) => (
 Primary.args = {
   primary: true,
   disabled: false,
-  text: "Primary",
+  text: 'Primary',
 };
 
-export const Secondary: Story = (
-  args: JSX.IntrinsicAttributes & ButtonProps
-) => <Button data-test-id="InputField-id" {...args} />;
+export const Secondary: Story = (args: JSX.IntrinsicAttributes & ButtonProps) => (
+  <Button data-test-id="InputField-id" {...args} />
+);
 Secondary.args = {
   primary: false,
   disabled: false,
-  text: "Secondary",
+  text: 'Secondary',
 };
 
-export const Disabled: Story = (
-  args: JSX.IntrinsicAttributes & ButtonProps
-) => <Button data-test-id="InputField-id" {...args} />;
+export const Disabled: Story = (args: JSX.IntrinsicAttributes & ButtonProps) => (
+  <Button data-test-id="InputField-id" {...args} />
+);
 Disabled.args = {
   primary: false,
   disabled: true,
-  text: "Disabled",
+  text: 'Disabled',
 };
 
 export const Small: Story = (args: JSX.IntrinsicAttributes & ButtonProps) => (
@@ -43,8 +43,8 @@ export const Small: Story = (args: JSX.IntrinsicAttributes & ButtonProps) => (
 Small.args = {
   primary: true,
   disabled: false,
-  size: "small",
-  text: "Small",
+  size: 'small',
+  text: 'Small',
 };
 
 export const Medium: Story = (args: JSX.IntrinsicAttributes & ButtonProps) => (
@@ -53,8 +53,8 @@ export const Medium: Story = (args: JSX.IntrinsicAttributes & ButtonProps) => (
 Medium.args = {
   primary: true,
   disabled: false,
-  size: "medium",
-  text: "Medium",
+  size: 'medium',
+  text: 'Medium',
 };
 
 export const Large: Story = (args: JSX.IntrinsicAttributes & ButtonProps) => (
@@ -63,6 +63,6 @@ export const Large: Story = (args: JSX.IntrinsicAttributes & ButtonProps) => (
 Large.args = {
   primary: true,
   disabled: false,
-  size: "large",
-  text: "Large",
+  size: 'large',
+  text: 'Large',
 };

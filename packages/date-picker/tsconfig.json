@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "composite": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "strict": true,
@@ -21,5 +22,13 @@
     },
     "types": ["@types/jest"]
   },
-  "exclude": ["dist", "node_modules"]
+  "include": ["./src"],
+  "exclude": ["dist", "node_modules"],
+  
+  "references": [
+    {
+      "path":"../react-ui"
+    }
+   
+  ]
 }

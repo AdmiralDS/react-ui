@@ -1,8 +1,8 @@
-import * as React from "react";
+import * as React from 'react';
 
-import { DEFAULT_YEAR_COUNT } from "./constants";
-import { getDefaultDateValidator } from "./validator";
-import { DayNames, Month, Months, Panel, Years } from "./components";
+import { DEFAULT_YEAR_COUNT } from './constants';
+import { getDefaultDateValidator } from './validator';
+import { DayNames, Month, Months, Panel, Years } from './components';
 import {
   addMonths,
   addYears,
@@ -14,13 +14,9 @@ import {
   setYear,
   subMonths,
   subYears,
-} from "./date-utils";
-import { CalendarComponent, CalendarWrapper } from "./styled/CalendarComponent";
-import type {
-  CalendarPropType,
-  IDateSelectionProps,
-  ViewScreenType,
-} from "./interfaces";
+} from './date-utils';
+import { CalendarComponent, CalendarWrapper } from './styled/CalendarComponent';
+import type { CalendarPropType, IDateSelectionProps, ViewScreenType } from './interfaces';
 
 export type { CalendarPropType, IDateSelectionProps, ViewScreenType };
 
@@ -51,7 +47,7 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarPropType>(
       highlightSpecialDay = (date: Date) => undefined,
       ...props
     },
-    ref
+    ref,
   ) => {
     const getInitialViewDate = () => {
       const current = new Date();
@@ -72,12 +68,7 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarPropType>(
         console.log(newDate);
         return addYears(getInitialViewDate(), DEFAULT_YEAR_COUNT);
       }
-      if (
-        currentActiveViewImportant &&
-        range &&
-        monthsView &&
-        monthsViewRight
-      ) {
+      if (currentActiveViewImportant && range && monthsView && monthsViewRight) {
         const newDate = addYears(getInitialViewDate(), 1);
         console.log(newDate);
         return addYears(getInitialViewDate(), 1);
@@ -95,25 +86,23 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarPropType>(
     const [monthsViewRight, setMonthsViewRight] = React.useState(false);
     // дата, которую отображаем (в том числе в верхней панели)
     const [viewDate, setViewDate] = React.useState(getInitialViewDate());
-    const [viewDateRight, setViewDateRight] = React.useState(
-      getInitialViewDateRight()
-    );
+    const [viewDateRight, setViewDateRight] = React.useState(getInitialViewDateRight());
 
     // показать экран выбора года или месяца в зависимости от внешнего параметра currentActiveView
     React.useEffect(() => {
-      if (currentActiveView === "MONTH") {
+      if (currentActiveView === 'MONTH') {
         setYearsView(false);
         setYearsViewRight(false);
         setMonthsView(true);
         setMonthsViewRight(true);
       }
-      if (currentActiveView === "YEAR") {
+      if (currentActiveView === 'YEAR') {
         setMonthsView(false);
         setMonthsViewRight(false);
         setYearsView(true);
         setYearsViewRight(true);
       }
-      if (currentActiveView === "DAY") {
+      if (currentActiveView === 'DAY') {
         setYearsView(false);
         setYearsViewRight(false);
         setMonthsView(false);
@@ -159,16 +148,12 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarPropType>(
 
     // TODO: нужно ли отслеживать по второй панели отдельно?
     React.useEffect(() => {
-      yearsView || yearsViewRight
-        ? onViewEnter && onViewEnter("YEAR")
-        : onViewLeave && onViewLeave("YEAR");
+      yearsView || yearsViewRight ? onViewEnter && onViewEnter('YEAR') : onViewLeave && onViewLeave('YEAR');
     }, [yearsView, yearsViewRight]);
 
     // TODO: нужно ли отслеживать по второй панели отдельно?
     React.useEffect(() => {
-      monthsView || monthsViewRight
-        ? onViewEnter && onViewEnter("MONTH")
-        : onViewLeave && onViewLeave("MONTH");
+      monthsView || monthsViewRight ? onViewEnter && onViewEnter('MONTH') : onViewLeave && onViewLeave('MONTH');
     }, [monthsView, monthsViewRight]);
 
     const getValidator = () => {
@@ -229,14 +214,10 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarPropType>(
       onViewMonthSelect && onViewMonthSelect();
     };
 
-    const changeYear = (year: number) =>
-      setViewDate((date) => setYear(date, year));
-    const changeYearRight = (year: number) =>
-      setViewDateRight((date) => setYear(date, year));
-    const changeMonth = (month: number) =>
-      setViewDate((date) => setMonth(date, month));
-    const changeMonthRight = (month: number) =>
-      setViewDateRight((date) => setMonth(date, month));
+    const changeYear = (year: number) => setViewDate((date) => setYear(date, year));
+    const changeYearRight = (year: number) => setViewDateRight((date) => setYear(date, year));
+    const changeMonth = (month: number) => setViewDate((date) => setMonth(date, month));
+    const changeMonthRight = (month: number) => setViewDateRight((date) => setMonth(date, month));
 
     const increaseYear = (date: Date, yearsView: boolean) => {
       const increase = addYears(date, yearsView ? DEFAULT_YEAR_COUNT : 1);
@@ -374,12 +355,8 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarPropType>(
         onYearsViewHide={handleYearsViewHideRight}
         onMonthsViewShow={handleMonthsViewShowRight}
         onMonthsViewHide={handleMonthsViewHideRight}
-        onNext={
-          yearsViewRight ? handleIncreaseYearRight : handleIncreaseMonthRight
-        }
-        onPrevious={
-          yearsViewRight ? handleDecreaseYearRight : handleDecreaseMonthRight
-        }
+        onNext={yearsViewRight ? handleIncreaseYearRight : handleIncreaseMonthRight}
+        onPrevious={yearsViewRight ? handleDecreaseYearRight : handleDecreaseMonthRight}
         tooltipContainer={tooltipContainer}
       />
     );
@@ -474,11 +451,7 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarPropType>(
     return (
       <CalendarWrapper ref={ref}>
         {!doubleViewRange ? (
-          <CalendarComponent
-            yearsView={yearsView}
-            monthsView={monthsView}
-            {...props}
-          >
+          <CalendarComponent yearsView={yearsView} monthsView={monthsView} {...props}>
             {renderPanel()}
             {yearsView && renderYears()}
             {monthsView && renderMonths()}
@@ -486,21 +459,13 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarPropType>(
           </CalendarComponent>
         ) : (
           <>
-            <CalendarComponent
-              yearsView={yearsView}
-              monthsView={monthsView}
-              {...props}
-            >
+            <CalendarComponent yearsView={yearsView} monthsView={monthsView} {...props}>
               {renderPanel()}
               {yearsView && renderYears()}
               {monthsView && renderMonths()}
               {!yearsView && !monthsView && renderMonth()}
             </CalendarComponent>
-            <CalendarComponent
-              yearsView={yearsViewRight}
-              monthsView={monthsViewRight}
-              {...props}
-            >
+            <CalendarComponent yearsView={yearsViewRight} monthsView={monthsViewRight} {...props}>
               {renderPanelRight()}
               {yearsViewRight && renderYearsRight()}
               {monthsViewRight && renderMonthsRight()}
@@ -510,7 +475,7 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarPropType>(
         )}
       </CalendarWrapper>
     );
-  }
+  },
 );
 
-Calendar.displayName = "Calendar";
+Calendar.displayName = 'Calendar';

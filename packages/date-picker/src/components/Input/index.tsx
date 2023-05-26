@@ -1,5 +1,5 @@
-import { type ChangeEventHandler, type FC } from "react";
-import styled from "styled-components";
+import { type ChangeEventHandler, type FC } from 'react';
+import styled from 'styled-components';
 
 export interface InputProps {
   id?: string;
@@ -17,14 +17,7 @@ const StyledInput = styled.input<InputProps>`
   width: 300px;
   border-radius: 3px;
   border: solid 2px
-    ${(props) =>
-      props.disabled
-        ? "#e4e3ea"
-        : props.error
-        ? "#a9150b"
-        : props.success
-        ? "#067d68"
-        : "#353637"};
+    ${(props) => (props.disabled ? '#e4e3ea' : props.error ? '#a9150b' : props.success ? '#067d68' : '#353637')};
   background-color: #fff;
   &:focus {
     border: solid 2px #1b116e;
@@ -33,7 +26,7 @@ const StyledInput = styled.input<InputProps>`
 
 const StyledLabel = styled.div<InputProps>`
   font-size: 14px;
-  color: ${(props) => (props.disabled ? "#e4e3ea" : "#080808")};
+  color: ${(props) => (props.disabled ? '#e4e3ea' : '#080808')};
   padding-bottom: 6px;
 `;
 
@@ -45,8 +38,7 @@ const StyledMessage = styled.div<InputProps>`
 
 const StyledText = styled.p<InputProps>`
   margin: 0px;
-  color: ${(props) =>
-    props.disabled ? "#e4e3ea" : props.error ? "#a9150b" : "#080808"};
+  color: ${(props) => (props.disabled ? '#e4e3ea' : props.error ? '#a9150b' : '#080808')};
 `;
 
 export const Input: FC<InputProps> = ({

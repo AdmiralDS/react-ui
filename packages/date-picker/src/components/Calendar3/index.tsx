@@ -1,26 +1,13 @@
-import * as React from "react";
-import type { Dayjs } from "dayjs";
-import dayjs from "dayjs";
+import * as React from 'react';
+import type { Dayjs } from 'dayjs';
+import dayjs from 'dayjs';
 
-import { DEFAULT_YEAR_COUNT } from "./constants";
-import { getDefaultDateValidator } from "./validator";
-import { DayNames, Month, Months, Panel, Years } from "./components";
-import {
-  addMonths,
-  addYears,
-  changeTime,
-  equal,
-  setMonth,
-  setYear,
-  subMonths,
-  subYears,
-} from "./date-utils";
-import { CalendarComponent } from "./styled/CalendarComponent";
-import type {
-  Calendar3Props,
-  DateSelection3Props,
-  ViewScreen3,
-} from "./interfaces";
+import { DEFAULT_YEAR_COUNT } from './constants';
+import { getDefaultDateValidator } from './validator';
+import { DayNames, Month, Months, Panel, Years } from './components';
+import { addMonths, addYears, changeTime, equal, setMonth, setYear, subMonths, subYears } from './date-utils';
+import { CalendarComponent } from './styled/CalendarComponent';
+import type { Calendar3Props, DateSelection3Props, ViewScreen3 } from './interfaces';
 
 export type { Calendar3Props, DateSelection3Props, ViewScreen3 };
 
@@ -50,7 +37,7 @@ export const Calendar3 = React.forwardRef<HTMLDivElement, Calendar3Props>(
       highlightSpecialDay = (date: Dayjs) => undefined,
       ...props
     },
-    ref
+    ref,
   ) => {
     const getInitialViewDate = () => {
       const current = dayjs();
@@ -77,15 +64,15 @@ export const Calendar3 = React.forwardRef<HTMLDivElement, Calendar3Props>(
 
     // показать экран выбора года или месяца в зависимости от внешнего параметра currentActiveView
     React.useEffect(() => {
-      if (currentActiveView === "MONTH") {
+      if (currentActiveView === 'MONTH') {
         setYearsView(false);
         setMonthsView(true);
       }
-      if (currentActiveView === "YEAR") {
+      if (currentActiveView === 'YEAR') {
         setMonthsView(false);
         setYearsView(true);
       }
-      if (currentActiveView === "DAY") {
+      if (currentActiveView === 'DAY') {
         setYearsView(false);
         setMonthsView(false);
       }
@@ -103,15 +90,11 @@ export const Calendar3 = React.forwardRef<HTMLDivElement, Calendar3Props>(
     }, []);
 
     React.useEffect(() => {
-      yearsView
-        ? onViewEnter && onViewEnter("YEAR")
-        : onViewLeave && onViewLeave("YEAR");
+      yearsView ? onViewEnter && onViewEnter('YEAR') : onViewLeave && onViewLeave('YEAR');
     }, [yearsView]);
 
     React.useEffect(() => {
-      monthsView
-        ? onViewEnter && onViewEnter("MONTH")
-        : onViewLeave && onViewLeave("MONTH");
+      monthsView ? onViewEnter && onViewEnter('MONTH') : onViewLeave && onViewLeave('MONTH');
     }, [monthsView]);
 
     const getValidator = () => {
@@ -146,10 +129,8 @@ export const Calendar3 = React.forwardRef<HTMLDivElement, Calendar3Props>(
       onViewMonthSelect && onViewMonthSelect();
     };
 
-    const changeYear = (year: number) =>
-      setViewDate((date) => setYear(date, year));
-    const changeMonth = (month: number) =>
-      setViewDate((date) => setMonth(date, month));
+    const changeYear = (year: number) => setViewDate((date) => setYear(date, year));
+    const changeMonth = (month: number) => setViewDate((date) => setMonth(date, month));
 
     const increaseYear = () =>
       setViewDate((date) => {
@@ -283,19 +264,14 @@ export const Calendar3 = React.forwardRef<HTMLDivElement, Calendar3Props>(
       />
     );
     return (
-      <CalendarComponent
-        yearsView={yearsView}
-        monthsView={monthsView}
-        {...props}
-        ref={ref}
-      >
+      <CalendarComponent yearsView={yearsView} monthsView={monthsView} {...props} ref={ref}>
         {renderPanel()}
         {yearsView && renderYears()}
         {monthsView && renderMonths()}
         {!yearsView && !monthsView && renderMonth()}
       </CalendarComponent>
     );
-  }
+  },
 );
 
-Calendar3.displayName = "Calendar3";
+Calendar3.displayName = 'Calendar3';

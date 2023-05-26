@@ -1,30 +1,26 @@
-import * as React from "react";
-import type { Dayjs } from "dayjs";
-import dayjs from "dayjs";
-import "dayjs/locale/ru";
-import type {
-  DefaultTheme,
-  FlattenInterpolation,
-  ThemeProps,
-} from "styled-components";
-import styled, { ThemeContext } from "styled-components";
-import { LIGHT_THEME } from "@admiral-ds/react-ui";
-import { typography } from "@admiral-ds/react-ui";
-import { DayCell } from "./CalendarContent/DayCell";
-import { Panel } from "./Panel/Panel";
-import type { DateValidator } from "./validator";
-import { YearCell } from "./CalendarContent/YearCell";
-import type { Calendar5ViewMode, Picker5TypeMode } from "./constants";
-import { MonthCell } from "./CalendarContent/MonthCell";
-import { DEFAULT_YEAR_COUNT } from "./constants";
-import { YearsCalendarView } from "./CalendarContent/YearsCalendarView";
-import { MonthsCalendarView } from "./CalendarContent/MonthsCalendarView";
-import { DateCalendarView } from "./CalendarContent/DateCalendarView";
+import * as React from 'react';
+import type { Dayjs } from 'dayjs';
+import dayjs from 'dayjs';
+import 'dayjs/locale/ru';
+import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
+import styled, { ThemeContext } from 'styled-components';
+import { LIGHT_THEME } from '@admiral-ds/react-ui';
+import { typography } from '@admiral-ds/react-ui';
+import { DayCell } from './CalendarContent/DayCell';
+import { Panel } from './Panel/Panel';
+import type { DateValidator } from './validator';
+import { YearCell } from './CalendarContent/YearCell';
+import type { Calendar5ViewMode, Picker5TypeMode } from './constants';
+import { MonthCell } from './CalendarContent/MonthCell';
+import { DEFAULT_YEAR_COUNT } from './constants';
+import { YearsCalendarView } from './CalendarContent/YearsCalendarView';
+import { MonthsCalendarView } from './CalendarContent/MonthsCalendarView';
+import { DateCalendarView } from './CalendarContent/DateCalendarView';
 
 const CALENDAR_WIDTH = 284;
-const YEARS_VIEW_PADDING = "20px 12px 16px";
-const MONTHS_VIEW_PADDING = "20px 12px 4px";
-const DAYS_VIEW_PADDING = "20px 12px 12px";
+const YEARS_VIEW_PADDING = '20px 12px 16px';
+const MONTHS_VIEW_PADDING = '20px 12px 4px';
+const DAYS_VIEW_PADDING = '20px 12px 12px';
 
 export const CalendarWidgetWrapper = styled.div<{
   viewMode: Calendar5ViewMode;
@@ -36,17 +32,13 @@ export const CalendarWidgetWrapper = styled.div<{
   z-index: 0; /* для отрисовки белого кружка с синей рамочкой при ховере над датой в выбранном диапазоне */
 
   padding: ${(p) =>
-    p.viewMode === "YEARS"
-      ? YEARS_VIEW_PADDING
-      : p.viewMode === "MONTHS"
-      ? MONTHS_VIEW_PADDING
-      : DAYS_VIEW_PADDING};
+    p.viewMode === 'YEARS' ? YEARS_VIEW_PADDING : p.viewMode === 'MONTHS' ? MONTHS_VIEW_PADDING : DAYS_VIEW_PADDING};
 
   flex: 0 0 auto;
   width: ${CALENDAR_WIDTH}px;
-  background: ${({ theme }) => theme.color["Special/Elevated BG"]};
-  ${typography["Body/Body 2 Long"]}
-  color: ${({ theme }) => theme.color["Neutral/Neutral 90"]};
+  background: ${({ theme }) => theme.color['Special/Elevated BG']};
+  ${typography['Body/Body 2 Long']}
+  color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
 `;
 
 export interface CalendarWidgetTryProps {
@@ -74,9 +66,7 @@ export interface CalendarWidgetTryProps {
   onSelectYear?: (date: Dayjs) => void;
   disabledDate?: (date: Dayjs) => boolean;
   isHiddenDate?: (date: Dayjs) => boolean;
-  highlightSpecialDay?: (
-    date: Dayjs
-  ) => FlattenInterpolation<ThemeProps<DefaultTheme>> | undefined;
+  highlightSpecialDay?: (date: Dayjs) => FlattenInterpolation<ThemeProps<DefaultTheme>> | undefined;
   userLocale?: string;
   locale?: {
     backwardText?: string;
@@ -89,15 +79,12 @@ export interface CalendarWidgetTryProps {
   };
 }
 
-export const CalendarWidgetTry = React.forwardRef<
-  HTMLDivElement,
-  CalendarWidgetTryProps
->(
+export const CalendarWidgetTry = React.forwardRef<HTMLDivElement, CalendarWidgetTryProps>(
   (
     {
-      viewMode = "DATES",
+      viewMode = 'DATES',
       onViewModeChange,
-      pickerType = "DATE_MONTH_YEAR",
+      pickerType = 'DATE_MONTH_YEAR',
       rangePicker = false,
       viewDate,
       activeDate,
@@ -123,15 +110,15 @@ export const CalendarWidgetTry = React.forwardRef<
       onDateMouseLeave,
       locale,
     },
-    ref
+    ref,
   ) => {
     const getInitialViewDate = (): Dayjs => {
       const current = dayjs();
       if (viewDate) {
-        return viewDate.locale(currentLocale || "ru");
+        return viewDate.locale(currentLocale || 'ru');
       }
       if (selected) {
-        return selected.locale(currentLocale || "ru");
+        return selected.locale(currentLocale || 'ru');
       }
       if (minDate && current.isBefore(minDate)) {
         return minDate;
@@ -139,7 +126,7 @@ export const CalendarWidgetTry = React.forwardRef<
       if (maxDate && current.isAfter(maxDate)) {
         return maxDate;
       }
-      return current.locale(currentLocale || "ru");
+      return current.locale(currentLocale || 'ru');
     };
     const theme = React.useContext(ThemeContext) || LIGHT_THEME;
     const [currentLocale, setCurrentLocale] = React.useState<string>();
@@ -149,13 +136,11 @@ export const CalendarWidgetTry = React.forwardRef<
       import(`dayjs/locale/${defineLocale}.js`)
         .then(() => setCurrentLocale(defineLocale))
         .catch(() => {
-          setCurrentLocale("ru");
+          setCurrentLocale('ru');
         });
     }
 
-    const [innerViewDate, setInnerViewDate] = React.useState<Dayjs>(
-      getInitialViewDate()
-    );
+    const [innerViewDate, setInnerViewDate] = React.useState<Dayjs>(getInitialViewDate());
     const finalViewDate = viewDate ?? innerViewDate;
 
     const clearActiveDate = () => onActiveDateChange(undefined);
@@ -178,29 +163,27 @@ export const CalendarWidgetTry = React.forwardRef<
     };
 
     const defaultIsHidden = (date: Dayjs) => {
-      return !date.isSame(finalViewDate, "month");
+      return !date.isSame(finalViewDate, 'month');
     };
 
-    const changeYear = (year: number) =>
-      setInnerViewDate(finalViewDate.year(year));
-    const changeMonth = (month: number) =>
-      setInnerViewDate(finalViewDate.month(month));
+    const changeYear = (year: number) => setInnerViewDate(finalViewDate.year(year));
+    const changeMonth = (month: number) => setInnerViewDate(finalViewDate.month(month));
 
     const handleYearClick = (date: Dayjs) => {
       changeYear(date.year());
       /*!currentActiveViewImportant && setYearsView(false);*/
       switch (pickerType) {
-        case "YEAR":
+        case 'YEAR':
           setInnerViewDate(date);
           break;
-        case "MONTH_YEAR":
+        case 'MONTH_YEAR':
           clearActiveDate();
-          onViewModeChange?.("MONTHS");
+          onViewModeChange?.('MONTHS');
           break;
         default:
-        case "DATE_MONTH_YEAR":
+        case 'DATE_MONTH_YEAR':
           clearActiveDate();
-          onViewModeChange?.("DATES");
+          onViewModeChange?.('DATES');
           break;
       }
       onSelectYear && onSelectYear(date);
@@ -210,16 +193,16 @@ export const CalendarWidgetTry = React.forwardRef<
       changeMonth(date.month());
       /*!currentActiveViewImportant && setMonthsView(false);*/
       switch (pickerType) {
-        case "YEAR":
+        case 'YEAR':
           break;
-        case "MONTH_YEAR":
+        case 'MONTH_YEAR':
           setInnerViewDate(date);
-          onViewModeChange?.("MONTHS");
+          onViewModeChange?.('MONTHS');
           break;
         default:
-        case "DATE_MONTH_YEAR":
+        case 'DATE_MONTH_YEAR':
           clearActiveDate();
-          onViewModeChange?.("DATES");
+          onViewModeChange?.('DATES');
           break;
       }
       onSelectMonth && onSelectMonth(date);
@@ -248,12 +231,8 @@ export const CalendarWidgetTry = React.forwardRef<
           key={date.valueOf()}
           date={date}
           activeDate={activeDate}
-          startDate={
-            rangePicker && pickerType === "MONTH_YEAR" ? startDate : undefined
-          }
-          endDate={
-            rangePicker && pickerType === "MONTH_YEAR" ? endDate : undefined
-          }
+          startDate={rangePicker && pickerType === 'MONTH_YEAR' ? startDate : undefined}
+          endDate={rangePicker && pickerType === 'MONTH_YEAR' ? endDate : undefined}
           selected={!rangePicker ? selected : undefined}
           onSelectMonth={handleMonthClick}
           disabled={!!validator?.invalidMonth(date.month(), date.year())}
@@ -267,10 +246,8 @@ export const CalendarWidgetTry = React.forwardRef<
           key={date.valueOf()}
           date={date}
           activeDate={activeDate}
-          startDate={
-            rangePicker && pickerType === "YEAR" ? startDate : undefined
-          }
-          endDate={rangePicker && pickerType === "YEAR" ? endDate : undefined}
+          startDate={rangePicker && pickerType === 'YEAR' ? startDate : undefined}
+          endDate={rangePicker && pickerType === 'YEAR' ? endDate : undefined}
           selected={!rangePicker ? selected : undefined}
           onSelectYear={handleYearClick}
           disabled={!!validator?.invalidYear(date.year())}
@@ -279,44 +256,36 @@ export const CalendarWidgetTry = React.forwardRef<
       );
     };
 
-    const increaseMonth = () => setInnerViewDate(finalViewDate.add(1, "month"));
-    const decreaseMonth = () =>
-      setInnerViewDate(finalViewDate.subtract(1, "month"));
+    const increaseMonth = () => setInnerViewDate(finalViewDate.add(1, 'month'));
+    const decreaseMonth = () => setInnerViewDate(finalViewDate.subtract(1, 'month'));
 
     const increaseYear = () =>
-      setInnerViewDate(
-        finalViewDate.add(viewMode === "YEARS" ? DEFAULT_YEAR_COUNT : 1, "year")
-      );
+      setInnerViewDate(finalViewDate.add(viewMode === 'YEARS' ? DEFAULT_YEAR_COUNT : 1, 'year'));
     const decreaseYear = () =>
-      setInnerViewDate(
-        finalViewDate.subtract(
-          viewMode === "YEARS" ? DEFAULT_YEAR_COUNT : 1,
-          "year"
-        )
-      );
+      setInnerViewDate(finalViewDate.subtract(viewMode === 'YEARS' ? DEFAULT_YEAR_COUNT : 1, 'year'));
 
     const handleYearsViewShow = () => {
-      onViewModeChange("YEARS");
+      onViewModeChange('YEARS');
       //onViewYearSelect && onViewYearSelect();
     };
     const handleYearsViewHide = () => {
-      if (pickerType === "DATE_MONTH_YEAR") {
-        onViewModeChange("DATES");
+      if (pickerType === 'DATE_MONTH_YEAR') {
+        onViewModeChange('DATES');
         clearActiveDate();
-      } else if (pickerType === "MONTH_YEAR") {
-        onViewModeChange("MONTHS");
+      } else if (pickerType === 'MONTH_YEAR') {
+        onViewModeChange('MONTHS');
         clearActiveDate();
       }
       //onViewYearSelect && onViewYearSelect();
     };
 
     const handleMonthsViewShow = () => {
-      onViewModeChange("MONTHS");
+      onViewModeChange('MONTHS');
       //onViewMonthSelect && onViewMonthSelect();
     };
     const handleMonthsViewHide = () => {
-      if (pickerType === "DATE_MONTH_YEAR") {
-        onViewModeChange("DATES");
+      if (pickerType === 'DATE_MONTH_YEAR') {
+        onViewModeChange('DATES');
         clearActiveDate();
       }
       //onViewMonthSelect && onViewMonthSelect();
@@ -330,8 +299,8 @@ export const CalendarWidgetTry = React.forwardRef<
           date={finalViewDate}
           userLocale={currentLocale}
           locale={locale}
-          onNext={viewMode === "DATES" ? increaseMonth : increaseYear}
-          onPrevious={viewMode === "DATES" ? decreaseMonth : decreaseYear}
+          onNext={viewMode === 'DATES' ? increaseMonth : increaseYear}
+          onPrevious={viewMode === 'DATES' ? decreaseMonth : decreaseYear}
           onMonthsViewShow={handleMonthsViewShow}
           onMonthsViewHide={handleMonthsViewHide}
           onYearsViewShow={handleYearsViewShow}
@@ -341,7 +310,7 @@ export const CalendarWidgetTry = React.forwardRef<
     };
     const renderContent = () => {
       switch (viewMode) {
-        case "YEARS":
+        case 'YEARS':
           return (
             <YearsCalendarView
               date={finalViewDate}
@@ -349,7 +318,7 @@ export const CalendarWidgetTry = React.forwardRef<
               onMouseLeave={handleAreaMouseLeave}
             />
           );
-        case "MONTHS":
+        case 'MONTHS':
           return (
             <MonthsCalendarView
               date={finalViewDate}
@@ -357,7 +326,7 @@ export const CalendarWidgetTry = React.forwardRef<
               onMouseLeave={handleAreaMouseLeave}
             />
           );
-        case "DATES":
+        case 'DATES':
         default:
           return (
             <DateCalendarView
@@ -375,5 +344,5 @@ export const CalendarWidgetTry = React.forwardRef<
         {renderContent()}
       </CalendarWidgetWrapper>
     ) : null;
-  }
+  },
 );

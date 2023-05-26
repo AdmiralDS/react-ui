@@ -1,11 +1,11 @@
-import * as React from "react";
-import type { Dayjs } from "dayjs";
-import { ThemeContext } from "styled-components";
-import { LIGHT_THEME } from "@admiral-ds/react-ui";
+import * as React from 'react';
+import type { Dayjs } from 'dayjs';
+import { ThemeContext } from 'styled-components';
+import { LIGHT_THEME } from '@admiral-ds/react-ui';
 
-import { addWeeks, startOfMonth, startOfWeek } from "../date-utils";
-import { Week } from "./Week";
-import type { IMonthCalendarProps } from "../../Calendar3/interfaces";
+import { addWeeks, startOfMonth, startOfWeek } from '../date-utils';
+import { Week } from './Week';
+import type { IMonthCalendarProps } from '../../Calendar3/interfaces';
 
 const FIXED_WEEK_COUNT = 6;
 
@@ -30,12 +30,10 @@ export const Month = ({
 }: ICalendarMonthProps) => {
   const theme = React.useContext(ThemeContext) || LIGHT_THEME;
   const weeks: Array<Dayjs> = [];
-  const handleMouseEnter = (day: Dayjs, event: any) =>
-    onMouseEnter && onMouseEnter(day, event);
+  const handleMouseEnter = (day: Dayjs, event: any) => onMouseEnter && onMouseEnter(day, event);
   const handleMouseLeave = () => onMouseLeave && onMouseLeave();
-  const handleDayClick = (day: Dayjs, event: any) =>
-    onClick && onClick(day, event);
-  const currentLocale = userLocale || theme.currentLocale || "ru";
+  const handleDayClick = (day: Dayjs, event: any) => onClick && onClick(day, event);
+  const currentLocale = userLocale || theme.currentLocale || 'ru';
 
   let weekIndex = 0;
   let weekStart = startOfWeek(startOfMonth(day), currentLocale);

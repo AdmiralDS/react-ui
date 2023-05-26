@@ -1,6 +1,6 @@
-import styled from "styled-components";
-import { typography } from "@admiral-ds/react-ui";
-import { rangeHighlightMixin } from "./styled";
+import styled from 'styled-components';
+import { typography } from '@admiral-ds/react-ui';
+import { rangeHighlightMixin } from './styled';
 
 export const CellWrapper = styled.div<{
   disabled?: boolean;
@@ -18,13 +18,13 @@ export const CellWrapper = styled.div<{
   position: relative;
   display: inline-block;
   box-sizing: border-box;
-  ${typography["Body/Body 2 Long"]}
-  cursor: ${({ disabled }) => (disabled ? "default" : "pointer")};
-  color: ${({ theme }) => theme.color["Neutral/Neutral 90"]};
+  ${typography['Body/Body 2 Long']}
+  cursor: ${({ disabled }) => (disabled ? 'default' : 'pointer')};
+  color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
 
   // рамка у "сегодня"
   &:after {
-    content: "";
+    content: '';
     position: absolute;
     left: 0;
     right: 0;
@@ -34,9 +34,9 @@ export const CellWrapper = styled.div<{
       ${(p) =>
         p.today && !p.selected && !(p.inSelectingRange && p.isActiveDate)
           ? p.disabled
-            ? p.theme.color["Neutral/Neutral 30"]
-            : p.theme.color["Neutral/Neutral 90"]
-          : "transparent"};
+            ? p.theme.color['Neutral/Neutral 30']
+            : p.theme.color['Neutral/Neutral 90']
+          : 'transparent'};
     border-radius: ${(p) => p.borderRadius};
   }
 
@@ -44,9 +44,9 @@ export const CellWrapper = styled.div<{
   &:hover:after {
     ${(p) =>
       p.disabled || p.selected || !p.isActiveDate
-        ? ""
-        : `border: 1px solid ${p.theme.color["Primary/Primary 60 Main"]};
-           background: ${p.theme.color["Special/Elevated BG"]};
+        ? ''
+        : `border: 1px solid ${p.theme.color['Primary/Primary 60 Main']};
+           background: ${p.theme.color['Special/Elevated BG']};
            z-index: -1;`}
   }
 
@@ -54,7 +54,7 @@ export const CellWrapper = styled.div<{
   ${(p) =>
     p.disabled &&
     `
-      color: ${p.theme.color["Neutral/Neutral 30"]};
+      color: ${p.theme.color['Neutral/Neutral 30']};
     `}
 
   // выбранная или активная дата
@@ -62,15 +62,13 @@ export const CellWrapper = styled.div<{
     !p.disabled &&
     (p.selected || (p.inSelectingRange && p.isActiveDate)) &&
     `
-      color: ${p.theme.color["Special/Static White"]};
+      color: ${p.theme.color['Special/Static White']};
       background: ${
-        p.inSelectingRange
-          ? p.theme.color["Primary/Primary 70"]
-          : p.theme.color["Primary/Primary 60 Main"]
+        p.inSelectingRange ? p.theme.color['Primary/Primary 70'] : p.theme.color['Primary/Primary 60 Main']
       };
       border-radius: ${p.borderRadius};
       &:hover {
-        background: ${p.theme.color["Primary/Primary 70"]};
+        background: ${p.theme.color['Primary/Primary 70']};
       }
     `}
 
