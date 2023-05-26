@@ -20,6 +20,8 @@ import type { InputStatus } from '#src/components/input/types';
 import { ExtraTextContainer } from '#src/components/Field';
 import { Label } from '#src/components/Label';
 
+export { fullWidthPositionMixin, halfWidthPositionMixin } from './style';
+
 /** TODO:
  * переключение по файлам списка (клик на иконку документа, удаление документа из списка)
  * */
