@@ -1,9 +1,8 @@
-import * as React from 'react';
-import { ButtonWithTooltip } from '#src/components/CalendarTry/Panel/PanelButton';
-import { PanelDate, YearsRange } from '#src/components/CalendarTry/Panel/PanelDate';
-import { differenceYears, yearsRange } from '#src/components/CalendarTry/utils';
-import { DEFAULT_YEAR_COUNT } from '#src/components/CalendarTry/constants';
-import type { BaseContentProps } from '#src/components/CalendarTry/Panel/interfaces';
+import { ButtonWithTooltip } from './PanelButton';
+import { PanelDate, YearsRange } from './PanelDate';
+import { differenceYears, yearsRange } from '../utils';
+import { DEFAULT_YEAR_COUNT } from '../constants';
+import type { BaseContentProps } from './interfaces';
 
 export const YearPanel = ({ date, minDate, maxDate, locale, onNext, onPrevious }: BaseContentProps) => {
   const { start, end } = yearsRange(date, DEFAULT_YEAR_COUNT);

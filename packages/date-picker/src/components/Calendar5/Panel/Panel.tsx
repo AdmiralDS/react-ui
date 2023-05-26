@@ -1,11 +1,10 @@
-import * as React from 'react';
-import { ThemeContext } from 'styled-components';
-import { LIGHT_THEME } from '#src/components/themes';
-import { PanelWrapper } from '#src/components/CalendarTry/Panel/PanelWrapper';
-import { YearMonthDatePanel } from '#src/components/CalendarTry/Panel/YearMonthDatePanel';
-import { YearMonthPanel } from '#src/components/CalendarTry/Panel/YearMonthPanel';
-import { YearPanel } from '#src/components/CalendarTry/Panel/YearPanel';
-import type { PanelProps } from '#src/components/CalendarTry/Panel/interfaces';
+import { useTheme } from 'styled-components';
+import { LIGHT_THEME } from '@admiral-ds/react-ui';
+import { PanelWrapper } from './PanelWrapper';
+import { YearMonthDatePanel } from './YearMonthDatePanel';
+import { YearMonthPanel } from './YearMonthPanel';
+import { YearPanel } from './YearPanel';
+import type { PanelProps } from './interfaces';
 
 export const Panel = ({
   viewMode,
@@ -20,7 +19,7 @@ export const Panel = ({
   onYearsViewShow,
   onYearsViewHide,
 }: PanelProps) => {
-  const theme = React.useContext(ThemeContext) || LIGHT_THEME;
+  const theme = useTheme() || LIGHT_THEME;
   const defineLocale = userLocale || theme.currentLocale;
   const currentLocale = locale || theme.locales[defineLocale].calendar;
   const monthsView = viewMode === 'MONTHS';

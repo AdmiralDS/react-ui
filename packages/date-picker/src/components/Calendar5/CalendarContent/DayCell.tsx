@@ -4,7 +4,7 @@ import dayjs from 'dayjs';
 import type { Dayjs } from 'dayjs';
 import styled from 'styled-components';
 import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
-import { CellWrapper } from '#src/components/CalendarTry/CalendarContent/CellWrapper';
+import { CellWrapper } from './CellWrapper';
 
 const DAY_SIZE = 36;
 const DAY_PADDING = '8px 0';

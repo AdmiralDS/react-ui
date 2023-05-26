@@ -1,7 +1,7 @@
 import * as React from 'react';
 import type { Dayjs } from 'dayjs';
-import { yearsRange } from '#src/components/CalendarTry/utils';
-import { DEFAULT_YEAR_COUNT } from '#src/components/CalendarTry/constants';
+import { yearsRange } from '../utils';
+import { DEFAULT_YEAR_COUNT } from '../constants';
 
 export interface YearsCalendarViewProps {
   date: Dayjs;

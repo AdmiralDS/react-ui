@@ -4,9 +4,10 @@ import dayjs from 'dayjs';
 import type { Dayjs } from 'dayjs';
 import styled from 'styled-components';
 import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
-import { YEAR_BORDER_RADIUS, YearCellWrapper } from '#src/components/CalendarTry/CalendarContent/YearCell';
+import { YEAR_BORDER_RADIUS, YearCellWrapper } from './YearCell';
+// TODO Этот импорт нужно перенести
 import { capitalizeFirstLetter } from '#src/components/Calendar/constants';
-import { MONTHS_IN_ROW } from '#src/components/CalendarTry/constants';
+import { MONTHS_IN_ROW } from '../constants';
 
 export interface MonthCellProps {
   date: Dayjs;

@@ -49,11 +49,7 @@ module.exports = {
         //   "packages/module-b/tsconfig.json"
         // ],
         //
-        // // use an array of glob patterns
-        // "project": [
-        //   "packages/*/tsconfig.json",
-        //   "other-packages/*/tsconfig.json"
-        // ]
+        project: ['packages/*/tsconfig.json'],
       },
     },
   },

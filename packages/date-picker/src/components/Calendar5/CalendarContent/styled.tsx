@@ -1,5 +1,5 @@
 import { css } from 'styled-components';
-import { mediumGroupBorderRadius } from '#src/components/themes';
+import { mediumGroupBorderRadius } from '@admiral-ds/react-ui';
 
 export const rangeHighlightMixin = css<{
   disabled?: boolean;

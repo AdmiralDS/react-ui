@@ -4,8 +4,8 @@ import dayjs from 'dayjs';
 import type { Dayjs } from 'dayjs';
 import styled from 'styled-components';
 import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
-import { CellWrapper } from '#src/components/CalendarTry/CalendarContent/CellWrapper';
-import { YEARS_IN_ROW } from '#src/components/CalendarTry/constants';
+import { CellWrapper } from './CellWrapper';
+import { YEARS_IN_ROW } from '../constants';
 
 export interface YearCellProps {
   date: Dayjs;

@@ -1,8 +1,7 @@
-import * as React from 'react';
-import { ButtonWithTooltip } from '#src/components/CalendarTry/Panel/PanelButton';
-import { PanelDate, YearWithTooltip } from '#src/components/CalendarTry/Panel/PanelDate';
-import { differenceYears } from '#src/components/CalendarTry/utils';
-import type { YearMonthPanelProps } from '#src/components/CalendarTry/Panel/interfaces';
+import { ButtonWithTooltip } from './PanelButton';
+import { PanelDate, YearWithTooltip } from './PanelDate';
+import { differenceYears } from '../utils';
+import type { YearMonthPanelProps } from './interfaces';
 
 export const YearMonthPanel = ({
   viewMode,

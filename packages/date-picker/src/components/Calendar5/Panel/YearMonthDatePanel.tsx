@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { MonthWithTooltip, PanelDate, YearWithTooltip } from '#src/components/CalendarTry/Panel/PanelDate';
-import { capitalizeFirstLetter, differenceMonths, differenceYears } from '#src/components/CalendarTry/utils';
-import type { YearMonthDatePanelProps } from '#src/components/CalendarTry/Panel/interfaces';
-import { ButtonWithTooltip } from '#src/components/CalendarTry/Panel/PanelButton';
+import { MonthWithTooltip, PanelDate, YearWithTooltip } from './PanelDate';
+import { capitalizeFirstLetter, differenceMonths, differenceYears } from '../utils';
+import type { YearMonthDatePanelProps } from './interfaces';
+import { ButtonWithTooltip } from './PanelButton';
 
 export const YearMonthDatePanel = ({
   viewMode,

@@ -16,9 +16,10 @@
     "allowSyntheticDefaultImports": true,
     "checkJs": true,
     "target": "ESNext",
-    "baseUrl": ".",
+    "baseUrl": "./src",
     "paths": {
-      "@admiral-ds/date-picker": ["./src/index"]
+      "#src/*": ["./*"],
+      "@admiral-ds/date-picker": ["./index"]
     },
     "types": ["@types/jest"]
   },
