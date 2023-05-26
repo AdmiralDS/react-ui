@@ -7,6 +7,8 @@ import type { CheckboxDimension } from './CheckboxDimension';
 import { smallGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { keyboardKey } from '#src/components/common/keyboardKey';
 
+export * from './CheckboxDimension';
+
 export interface CheckBoxProps extends InputHTMLAttributes<HTMLInputElement> {
   dimension?: CheckboxDimension;
   indeterminate?: boolean;
