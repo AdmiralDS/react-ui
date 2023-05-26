@@ -1,20 +1,24 @@
-import { INPUT_DIMENSIONS_VALUES } from '#src/components/input';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import type { ChangeEvent } from 'react';
 import * as React from 'react';
+import type { ChangeEvent } from 'react';
+import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import styled, { css, keyframes } from 'styled-components';
-import { SelectField } from './index';
-import { Option, OptionGroup } from '#src/components/input/Select';
-import { DataAttributesDescription } from '#src/components/form/common';
-import type { RenderOptionProps } from '#src/components/Menu/MenuItem';
+
+import {
+  SelectField,
+  Option,
+  OptionGroup,
+  T,
+  INPUT_DIMENSIONS_VALUES,
+  ALL_BORDER_RADIUS_VALUES,
+} from '@admiral-ds/react-ui';
+import type { RenderOptionProps } from '@admiral-ds/react-ui';
 import { CustomOptionWrapper } from '#src/components/input/Select/styled';
-import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
-import { T } from '#src/components/T';
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 import { CustomOptionsTemplate, SimpleTemplate } from '#src/components/form/SelectField/Stories';
 import SimpleRaw from '!!raw-loader!./Stories/Simple';
 import CustomOptionsRaw from '!!raw-loader!./Stories/CustomOptions';
+import { DataAttributesDescription } from '#src/components/form/common';
 
 export default {
   title: 'Admiral-2.1/Form Field/SelectField',

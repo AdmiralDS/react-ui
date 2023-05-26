@@ -1,8 +1,7 @@
 import * as React from 'react';
 import type { ChangeEvent } from 'react';
-import type { SearchSelectFieldProps } from '#src/components/form';
-import { SelectField } from '#src/components/form';
-import { Option } from '#src/components/input';
+import type { SearchSelectFieldProps } from '@admiral-ds/react-ui';
+import { SelectField, Option } from '@admiral-ds/react-ui';
 import { Icon, TextWrapper, ExtraText } from '#src/components/form/SelectField/Stories/styled';
 
 const OPTIONS = [
