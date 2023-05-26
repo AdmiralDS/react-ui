@@ -1,4 +1,4 @@
-import type { Color } from '../common';
+import type { Color } from '../common/color';
 
 export const COLOR: Color = {
   //<editor-fold desc="Neutral">

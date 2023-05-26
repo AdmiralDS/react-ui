@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { T } from '#src/components/T';
-import { Tree, TreeNode } from '#src/components/Tree';
-import type { TreeItemProps, TreeNodeRenderOptionProps, TreeProps } from '#src/components/Tree';
+import { Tree, TreeNode, T } from '@admiral-ds/react-ui';
+import type { TreeItemProps, TreeNodeRenderOptionProps, TreeProps } from '@admiral-ds/react-ui';
 import { ReactComponent as FolderSolid } from '@admiral-ds/icons/build/documents/FolderSolid.svg';
 
 const demo2_TreeModel: Array<TreeItemProps> = [

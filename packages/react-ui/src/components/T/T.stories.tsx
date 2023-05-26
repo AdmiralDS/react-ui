@@ -3,11 +3,16 @@ import styled, { css, ThemeContext } from 'styled-components';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import { FONTS, NEW_FONTS } from './storyDescriptions';
-import { TYPOGRAPHY, typography } from '#src/components/Typography';
+import {
+  T,
+  TYPOGRAPHY,
+  typography,
+  DefaultFontColorName,
+  LIGHT_THEME,
+  MainPrimaryColorName,
+  TooltipHoc,
+} from '@admiral-ds/react-ui';
 import { ReactComponent as CopyOutline } from '@admiral-ds/icons/build/documents/CopyOutline.svg';
-import { TooltipHoc } from '#src/components/TooltipHOC';
-import { DefaultFontColorName, LIGHT_THEME, MainPrimaryColorName } from '#src/components/themes';
-import { T } from './index';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI', serif;

@@ -2,8 +2,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
-
-import { PaginationTwo } from './';
+import { PaginationTwo } from '@admiral-ds/react-ui';
 
 const Separator = styled.div`
   height: 20px;
