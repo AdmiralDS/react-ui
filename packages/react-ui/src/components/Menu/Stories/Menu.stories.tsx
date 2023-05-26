@@ -26,7 +26,7 @@ import type {
   CheckboxGroupItemProps,
   ItemWithCheckbox,
 } from '@admiral-ds/react-ui';
-import styled, { css, ThemeContext, ThemeProvider } from 'styled-components';
+import styled, { css, useTheme, ThemeProvider } from 'styled-components';
 import { withDesign } from 'storybook-addon-designs';
 import { ReactComponent as PlusOutline } from '@admiral-ds/icons/build/service/PlusOutline.svg';
 import { uid } from '#src/components/common/uid';
@@ -579,7 +579,7 @@ const MenuActionsTwoButtonsTemplate: ComponentStory<typeof Menu> = (props) => {
 
 const MenuActionsAddUserValueTemplate: ComponentStory<typeof Menu> = (props) => {
   const initialButtonText = 'Добавить';
-  const theme = React.useContext(ThemeContext) || LIGHT_THEME;
+  const theme = useTheme() || LIGHT_THEME;
 
   const [options, setOptions] = React.useState([...STORY_ITEMS]);
   const [inputValue, setInputValue] = React.useState<string>('');

@@ -4,7 +4,7 @@ import * as React from 'react';
 import type { CSSProperties } from 'react';
 import ReactDOM from 'react-dom';
 import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
-import styled, { ThemeContext, css, keyframes } from 'styled-components';
+import styled, { useTheme, css, keyframes } from 'styled-components';
 import { LIGHT_THEME } from '#src/components/themes';
 import { manager } from '#src/components/Modal/manager';
 import { CloseIconPlacementButton } from '#src/components/IconPlacement';
@@ -170,7 +170,7 @@ export const Drawer = React.forwardRef<HTMLDivElement, DrawerProps>(
     ref,
   ) => {
     const position = mobile ? 'right' : userPosition;
-    const theme = React.useContext(ThemeContext) || LIGHT_THEME;
+    const theme = useTheme() || LIGHT_THEME;
     const closeBtnAriaLabel =
       locale?.closeButtonAriaLabel || theme.locales[theme.currentLocale].modal.closeButtonAriaLabel;
     const drawer = React.useRef<any>({});

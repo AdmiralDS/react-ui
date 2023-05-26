@@ -1,6 +1,6 @@
 import type { FC, HTMLAttributes } from 'react';
 import * as React from 'react';
-import styled, { ThemeContext } from 'styled-components';
+import styled, { useTheme } from 'styled-components';
 import { LIGHT_THEME } from '#src/components/themes';
 import { typography } from '#src/components/Typography';
 
@@ -82,7 +82,7 @@ export const ProgressStepper: FC<ProgressStepperProps> = ({
   locale,
   ...props
 }) => {
-  const theme = React.useContext(ThemeContext) || LIGHT_THEME;
+  const theme = useTheme() || LIGHT_THEME;
   const stepName = locale?.stepName || theme.locales[theme.currentLocale].progressStepper.stepName;
   const progressText = locale?.progressText || theme.locales[theme.currentLocale].progressStepper.progressText;
   const renderNextStepName =
