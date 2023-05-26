@@ -1,6 +1,5 @@
 import type { FC } from 'react';
-import * as React from 'react';
-import { ThemeContext } from 'styled-components';
+import { useTheme } from 'styled-components';
 import { LIGHT_THEME } from '@admiral-ds/react-ui';
 
 import { after, dayInRange, endOfWeek, equal, sameDay, startOfWeek } from '../date-utils';
@@ -22,7 +21,7 @@ export const Day: FC<IDayCalendarProps> = ({
   onClick,
   highlightSpecialDay,
 }) => {
-  const theme = React.useContext(ThemeContext) || LIGHT_THEME;
+  const theme = useTheme() || LIGHT_THEME;
   const disabled = !!validator?.invalidValue(day) || (filterDate && !filterDate(day));
   const outsideMonth = month !== undefined && month !== day.getMonth();
   const inSelectingRange =
