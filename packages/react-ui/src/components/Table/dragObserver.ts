@@ -3,20 +3,30 @@ const crossvent = {
   remove: removeEventEasy,
 };
 
-function addEventEasy(el: HTMLElement, type: any, fn: any, capturing?: boolean) {
+function addEventEasy(
+  el: HTMLElement,
+  type: keyof HTMLElementEventMap,
+  fn: EventListenerOrEventListenerObject,
+  capturing?: boolean,
+) {
   return el.addEventListener(type, fn, capturing);
 }
 
-function removeEventEasy(el: HTMLElement, type: any, fn: any, capturing?: boolean) {
+function removeEventEasy(
+  el: HTMLElement,
+  type: keyof HTMLElementEventMap,
+  fn: EventListenerOrEventListenerObject,
+  capturing?: boolean,
+) {
   return el.removeEventListener(type, fn, capturing);
 }
 
+type Direction = 'horizontal' | 'vertical';
 type Options = {
   mirrorRef: React.RefObject<HTMLElement>;
   accepts?: (el: any, target: any, source: any, sibling: any) => boolean;
   invalid?: (el: any, handle: any) => boolean;
-  mirrorContainer?: HTMLElement;
-  direction?: 'horizontal' | 'vertical';
+  direction?: Direction;
 };
 
 export function dragObserver(initialContainers: HTMLElement[], options: Options, onDrop?: any) {
@@ -29,12 +39,12 @@ export function dragObserver(initialContainers: HTMLElement[], options: Options,
   let _currentSibling: any; // reference sibling now
   let _lastDropTarget: any = null; // last container item was over
   let _grabbed: any; // holds mousedown context until first mousemove
+  let _mirrorContainerStyle: string; // initial style of mirror container
 
-  const o: any = {
+  const o: Required<Options> & { containers: HTMLElement[] } = {
     ...options,
-    accepts: options.accepts ?? always,
     direction: options.direction ?? 'horizontal',
-    mirrorContainer: options.mirrorContainer ?? document.body,
+    accepts: options.accepts ?? always,
     invalid: options.invalid ?? invalidTarget,
     containers: [...initialContainers],
   };
@@ -297,18 +307,28 @@ export function dragObserver(initialContainers: HTMLElement[], options: Options,
     if (_mirror && !o.mirrorRef.current) {
       return;
     }
-    const title = _item.dataset.thTitle;
-    o.mirrorRef.current.innerHTML = title;
-    o.mirrorRef.current.style.visibility = 'visible';
-    _mirror = o.mirrorRef.current;
+    if (o.mirrorRef.current) {
+      const mirrorParent = o.mirrorRef.current.parentElement;
+      const title = _item.dataset.thTitle;
+      o.mirrorRef.current.innerHTML = title;
+      o.mirrorRef.current.style.visibility = 'visible';
+      _mirror = o.mirrorRef.current;
 
-    touchy(document.documentElement, 'add', 'mousemove', drag);
-    o.mirrorContainer.style.userSelect = 'none';
+      touchy(document.documentElement, 'add', 'mousemove', drag);
+
+      if (mirrorParent) {
+        _mirrorContainerStyle = mirrorParent.style.userSelect;
+        mirrorParent.style.userSelect = 'none';
+      }
+    }
   }
 
   function removeMirrorImage() {
     if (_mirror && o.mirrorRef.current) {
-      o.mirrorContainer.style.userSelect = 'auto';
+      const mirrorParent = o.mirrorRef.current.parentElement;
+      if (mirrorParent) {
+        mirrorParent.style.userSelect = _mirrorContainerStyle;
+      }
       o.mirrorRef.current.style.visibility = 'hidden';
       touchy(document.documentElement, 'remove', 'mousemove', drag);
       _mirror = null;
@@ -373,7 +393,7 @@ function touchy(el: HTMLElement, op: 'remove' | 'add', type: 'mouseup' | 'moused
     mousemove: 'touchmove',
   };
 
-  crossvent[op](el, touch[type], fn);
+  crossvent[op](el, touch[type] as keyof HTMLElementEventMap, fn);
   crossvent[op](el, type, fn);
 }
 
