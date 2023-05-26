@@ -1,15 +1,17 @@
-import { FileInputField } from '#src/components/form/FileInputField';
-import { FileItem } from '#src/components/input';
-import type { InputStatus, FileAttributeProps } from '#src/components/input';
 import * as React from 'react';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import { ThemeProvider } from 'styled-components';
-import type { Theme } from '#src/components/themes';
+import {
+  FileInputField,
+  FileItem,
+  fullWidthPositionMixin,
+  halfWidthPositionMixin,
+  ALL_BORDER_RADIUS_VALUES,
+} from '@admiral-ds/react-ui';
+import type { InputStatus, FileAttributeProps, Theme } from '@admiral-ds/react-ui';
 import { DataAttributesDescription } from '#src/components/form/common';
-import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
 import { uid } from '#src/components/common/uid';
-import { fullWidthPositionMixin, halfWidthPositionMixin } from '#src/components/input/FileInput/style';
 
 export default {
   title: 'Admiral-2.1/Form Field/FileInputField',
