@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.16.1](https://github.com/AdmiralDS/react-ui/compare/v4.16.0...v4.16.1) (2023-05-26)
+
+
+### Bug Fixes
+
+* **InputEx:** fix style typo ([28a3f33](https://github.com/AdmiralDS/react-ui/commit/28a3f33401184f6cf0b0b7e107b32b691fb188e2))
+* **Styled:** fix use of context ([b66bf11](https://github.com/AdmiralDS/react-ui/commit/b66bf11ad9d88fe8e8801f006d1e39cb9fe8b927))
+* **Table:** fix problem with onRowClick callback and OverflowMenu ([abe88ae](https://github.com/AdmiralDS/react-ui/commit/abe88ae6e9ad7b80ec6b8555d1c0cd0996b7de83))
+* **Theme:** fix color theme import ([d38c0c2](https://github.com/AdmiralDS/react-ui/commit/d38c0c231716d880eac912b371e4b37e2f34c7de))
+
 ## [4.16.0](https://github.com/AdmiralDS/react-ui/compare/v4.15.1...v4.16.0) (2023-05-23)
 
 
