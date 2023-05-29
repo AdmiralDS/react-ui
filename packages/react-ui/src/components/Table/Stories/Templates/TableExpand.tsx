@@ -13,6 +13,36 @@ const AmountCell = styled.div`
     }
   }
 `;
+const Wrapper = styled.div`
+  display: flex;
+  width: 100%;
+  background: ${({ theme }) => theme.color['Cyan/Cyan 10']};
+  padding: 16px;
+`;
+const Content = styled.div`
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  padding-left: 16px;
+  background: ${({ theme }) => theme.color['Special/Elevated BG']};
+  & > div {
+    margin-bottom: 8px;
+  }
+`;
+
+const expandedRowRender = (row: RowData) => {
+  return (
+    <Wrapper>
+      <Content>
+        <div>Тип сделки: {row.transfer_type}</div>
+        <div>Дата сделки: {row.transfer_date}</div>
+        <div>Валюта: {row.currency}</div>
+        <div>Ставка: {row.rate}</div>
+      </Content>
+    </Wrapper>
+  );
+};
 
 const numberFormatter = new Intl.NumberFormat();
 
@@ -48,6 +78,8 @@ const rowList: RowData[] = [
     ),
     currency: 'RUB',
     rate: 2.5,
+    expanded: true,
+    expandedRowRender: expandedRowRender,
   },
   {
     id: '0003',
@@ -60,6 +92,7 @@ const rowList: RowData[] = [
     ),
     currency: 'RUB',
     rate: 2.5,
+    expandedRowRender: expandedRowRender,
   },
   {
     id: '0004',
@@ -72,6 +105,7 @@ const rowList: RowData[] = [
     ),
     currency: 'RUB',
     rate: 2.5,
+    expandedRowRender: expandedRowRender,
   },
   {
     id: '0005',
@@ -84,81 +118,10 @@ const rowList: RowData[] = [
     ),
     currency: 'RUB',
     rate: 2.5,
+    expandedRowRender: expandedRowRender,
   },
   {
     id: '0006',
-    transfer_type: 'МНО',
-    transfer_date: new Date('2020-08-06').toLocaleDateString(),
-    transfer_amount: (
-      <AmountCell>
-        <T font="Body/Body 2 Short">{numberFormatter.format(32_500_000_000)}</T>
-      </AmountCell>
-    ),
-    currency: 'RUB',
-    rate: 2.5,
-  },
-  {
-    id: '0007',
-    transfer_type: 'МНО',
-    transfer_date: new Date('2020-08-06').toLocaleDateString(),
-    transfer_amount: (
-      <AmountCell>
-        <T font="Body/Body 2 Short">{numberFormatter.format(18_000_000)}</T>
-      </AmountCell>
-    ),
-    currency: 'RUB',
-    rate: 2.5,
-  },
-  {
-    id: '0008',
-    transfer_type: 'МНО',
-    transfer_date: new Date('2020-08-06').toLocaleDateString(),
-    transfer_amount: (
-      <AmountCell>
-        <T font="Body/Body 2 Short">{numberFormatter.format(32_500_000_000)}</T>
-      </AmountCell>
-    ),
-    currency: 'RUB',
-    rate: 2.5,
-  },
-  {
-    id: '0009',
-    transfer_type: 'МНО',
-    transfer_date: new Date('2020-08-06').toLocaleDateString(),
-    transfer_amount: (
-      <AmountCell>
-        <T font="Body/Body 2 Short">{numberFormatter.format(18_000_000)}</T>
-      </AmountCell>
-    ),
-    currency: 'RUB',
-    rate: 2.5,
-  },
-  {
-    id: '0010',
-    transfer_type: 'МНО',
-    transfer_date: new Date('2020-08-06').toLocaleDateString(),
-    transfer_amount: (
-      <AmountCell>
-        <T font="Body/Body 2 Short">{numberFormatter.format(32_500_000_000)}</T>
-      </AmountCell>
-    ),
-    currency: 'RUB',
-    rate: 2.5,
-  },
-  {
-    id: '0011',
-    transfer_type: 'МНО',
-    transfer_date: new Date('2020-08-06').toLocaleDateString(),
-    transfer_amount: (
-      <AmountCell>
-        <T font="Body/Body 2 Short">{numberFormatter.format(18_000_000)}</T>
-      </AmountCell>
-    ),
-    currency: 'RUB',
-    rate: 2.5,
-  },
-  {
-    id: '0012',
     transfer_type: 'МНО',
     transfer_date: new Date('2020-08-06').toLocaleDateString(),
     transfer_amount: (
@@ -175,34 +138,35 @@ const columnList: Column[] = [
   {
     name: 'transfer_type',
     title: 'Тип сделки',
-    width: 150,
   },
   {
     name: 'transfer_date',
     title: 'Дата сделки',
-    extraText: 'Не позднее марта текущего года',
+    width: 150,
   },
   {
     name: 'transfer_amount',
     title: 'Сумма',
-    cellAlign: 'right',
-    width: 150,
-    extraText: 'Сумма с учетом налогов',
+    width: 170,
   },
   {
     name: 'currency',
     title: 'Валюта',
-    extraText: 'Some additional text',
   },
   {
     name: 'rate',
     title: 'Ставка',
-    cellAlign: 'right',
   },
 ];
 
-export const ExtraTextTemplate = (props: TableProps) => {
+export const ExpandTemplate = (props: TableProps) => {
+  const [rows, setRows] = React.useState(rowList);
   const [cols, setCols] = React.useState(columnList);
+
+  const handleExpansionChange = (ids: Record<string | number, boolean>): void => {
+    const updRows = rows.map((row) => ({ ...row, expanded: ids[row.id] }));
+    setRows(updRows);
+  };
 
   const handleResize = ({ name, width }: { name: string; width: string }) => {
     const newCols = cols.map((col) => (col.name === name ? { ...col, width } : col));
@@ -210,6 +174,13 @@ export const ExtraTextTemplate = (props: TableProps) => {
   };
 
   return (
-    <Table {...props} rowList={rowList} columnList={cols} headerExtraLineClamp={2} onColumnResize={handleResize} />
+    <Table
+      {...props}
+      rowList={rows}
+      columnList={cols}
+      displayRowExpansionColumn
+      onRowExpansionChange={handleExpansionChange}
+      onColumnResize={handleResize}
+    />
   );
 };

@@ -17,7 +17,6 @@ import {
   columnListWithCustomTitle,
   columnListWithWidth,
   rowList,
-  rowListExpanded,
   rowListLineClamp,
   rowListRowState,
   rowListSort,
@@ -25,13 +24,20 @@ import {
   rowListWithCustomRenderGroup,
 } from './data';
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
-import { VirtualScrollTemplate, OverflowMenuTemplate, GroupTemplate, ExtraTextTemplate } from './Templates';
+import {
+  VirtualScrollTemplate,
+  OverflowMenuTemplate,
+  GroupTemplate,
+  ExtraTextTemplate,
+  ExpandTemplate,
+} from './Templates';
 
 // Imports of text sources
 import VirtualScrollRaw from '!!raw-loader!./Templates/TableVirtualScroll';
 import OverflowMenuRaw from '!!raw-loader!./Templates/TableOverflowMenu';
 import GroupRaw from '!!raw-loader!./Templates/TableGroup';
 import ExtraTextRaw from '!!raw-loader!./Templates/TableExtraText';
+import ExpandRaw from '!!raw-loader!./Templates/TableExpand';
 
 const Separator = styled.div`
   height: 20px;
@@ -527,33 +533,6 @@ const Template5: ComponentStory<typeof Table> = (args) => {
   );
 };
 
-const Template6: ComponentStory<typeof Table> = ({ rowList, columnList, ...args }) => {
-  const [rows, setRows] = React.useState([...rowList]);
-  const [cols, setCols] = React.useState([...columnList]);
-
-  const handleExpansionChange = (ids: Record<string | number, boolean>): void => {
-    const updRows = rows.map((row) => ({ ...row, expanded: ids[row.id] }));
-    setRows(updRows);
-  };
-
-  const handleResize = ({ name, width }: { name: string; width: string }) => {
-    const newCols = cols.map((col) => (col.name === name ? { ...col, width } : col));
-    setCols(newCols);
-  };
-
-  return (
-    <>
-      <Table
-        {...args}
-        columnList={cols}
-        rowList={rows}
-        onRowExpansionChange={handleExpansionChange}
-        onColumnResize={handleResize}
-      />
-    </>
-  );
-};
-
 const Template7: ComponentStory<typeof Table> = (args) => {
   const [cols, setCols] = React.useState([...args.columnList]);
   const handleResize = ({ name, width }: { name: string; width: string }) => {
@@ -826,15 +805,16 @@ ZebraRows.parameters = {
   },
 };
 
-export const Expand = Template6.bind({});
-Expand.args = {
-  rowList: rowListExpanded,
-  columnList,
-  displayRowExpansionColumn: true,
-};
-Expand.storyName = 'Table. Пример c детализацией строки.';
-Expand.parameters = {
+//<editor-fold desc="Пример c детализацией строки">
+const ExpandStory: ComponentStory<typeof Table> = (props) => (
+  <ExpandTemplate columnList={[]} rowList={[]} {...cleanUpProps(props)} />
+);
+export const ExpandExample = ExpandStory.bind({});
+ExpandExample.parameters = {
   docs: {
+    source: {
+      code: ExpandRaw,
+    },
     description: {
       story: `Отображение столбца детализации (столбец со стрелками) регулируется параметром displayRowExpansionColumn. 
       Стрелка позволяет развернуть строку и посмотреть более детализированную информацию о строке. 
@@ -843,6 +823,8 @@ Expand.parameters = {
     },
   },
 };
+ExpandExample.storyName = 'Table. Пример c детализацией строки.';
+//</editor-fold>
 
 //<editor-fold desc="Пример c дополнительным текстом в заголовке">
 const ExtraTextStory: ComponentStory<typeof Table> = (props) => (
