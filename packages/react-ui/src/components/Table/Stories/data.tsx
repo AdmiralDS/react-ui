@@ -651,36 +651,6 @@ export const rowListExpanded: RowData[] = [
   },
 ];
 
-export const columnListExtra: Column[] = [
-  {
-    name: 'transfer_type',
-    title: 'Тип сделки',
-    width: 150,
-  },
-  {
-    name: 'transfer_date',
-    title: 'Дата сделки',
-    extraText: 'Не позднее марта текущего года',
-  },
-  {
-    name: 'transfer_amount',
-    title: 'Сумма',
-    cellAlign: 'right',
-    width: 150,
-    extraText: 'Сумма с учетом налогов',
-  },
-  {
-    name: 'currency',
-    title: 'Валюта',
-    extraText: 'Some additional text',
-  },
-  {
-    name: 'rate',
-    title: 'Ставка',
-    cellAlign: 'right',
-  },
-];
-
 export const columnListWithCustomTitle: Column[] = [
   {
     name: 'transfer_type',

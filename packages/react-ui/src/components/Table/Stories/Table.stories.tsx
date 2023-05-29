@@ -10,7 +10,6 @@ import { ReactComponent as AcceptSolid } from '@admiral-ds/icons/build/category/
 // Массивы с данными столбцов и строк вынесены в отдельный файл в связи с большим объемом информации
 import {
   columnList,
-  columnListExtra,
   columnListLineClamp,
   columnListOrientation,
   columnListSort,
@@ -26,12 +25,13 @@ import {
   rowListWithCustomRenderGroup,
 } from './data';
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
-import { VirtualScrollTemplate, OverflowMenuTemplate, GroupTemplate } from './Templates';
+import { VirtualScrollTemplate, OverflowMenuTemplate, GroupTemplate, ExtraTextTemplate } from './Templates';
 
 // Imports of text sources
 import VirtualScrollRaw from '!!raw-loader!./Templates/TableVirtualScroll';
 import OverflowMenuRaw from '!!raw-loader!./Templates/TableOverflowMenu';
 import GroupRaw from '!!raw-loader!./Templates/TableGroup';
+import ExtraTextRaw from '!!raw-loader!./Templates/TableExtraText';
 
 const Separator = styled.div`
   height: 20px;
@@ -844,15 +844,16 @@ Expand.parameters = {
   },
 };
 
-export const ExtraText = Template.bind({});
-ExtraText.args = {
-  rowList,
-  columnList: columnListExtra,
-  headerExtraLineClamp: 2,
-};
-ExtraText.storyName = 'Table. Пример c дополнительным текстом в заголовке.';
-ExtraText.parameters = {
+//<editor-fold desc="Пример c дополнительным текстом в заголовке">
+const ExtraTextStory: ComponentStory<typeof Table> = (props) => (
+  <ExtraTextTemplate columnList={[]} rowList={[]} {...cleanUpProps(props)} />
+);
+export const ExtraTextExample = ExtraTextStory.bind({});
+ExtraTextExample.parameters = {
   docs: {
+    source: {
+      code: ExtraTextRaw,
+    },
     description: {
       story: `При необходимости в заголовке таблицы можно включать дополнительный текст с помощью параметра extraText. 
       Дополнительный текст по умолчанию выводится в одну строку и при нехватке места сокращается с помощью троеточия. Увеличить высоту 
@@ -861,6 +862,8 @@ ExtraText.parameters = {
     },
   },
 };
+ExtraTextExample.storyName = 'Table. Пример c дополнительным текстом в заголовке.';
+//</editor-fold>
 
 //<editor-fold desc="Пример с оверфлоу меню и одиночными действиями над строкой">
 const OverflowMenuStory: ComponentStory<typeof Table> = (props) => (

@@ -26,6 +26,18 @@ type RowData = TableRow & {
 
 const rowList: RowData[] = [
   {
+    id: '0001',
+    transfer_type: 'МНО',
+    transfer_date: new Date('2020-08-06').toLocaleDateString(),
+    transfer_amount: (
+      <AmountCell>
+        <T font="Body/Body 2 Short">{numberFormatter.format(18_000_000)}</T>
+      </AmountCell>
+    ),
+    currency: 'RUB',
+    rate: 2.5,
+  },
+  {
     id: '0002',
     transfer_type: 'МНО',
     transfer_date: new Date('2020-08-06').toLocaleDateString(),
@@ -62,21 +74,6 @@ const rowList: RowData[] = [
     rate: 2.5,
   },
   {
-    id: '0001',
-    transfer_type: 'Group name',
-    expanded: false,
-    transfer_date: new Date('2020-08-06').toLocaleDateString(),
-    transfer_amount: (
-      <AmountCell>
-        <T font="Body/Body 2 Short">{numberFormatter.format(18_000_000)}</T>
-      </AmountCell>
-    ),
-    currency: 'RUB',
-    rate: 2.5,
-    groupTitle: 'Группа',
-    groupRows: ['0007', '0008'],
-  },
-  {
     id: '0005',
     transfer_type: 'МНО',
     transfer_date: new Date('2020-08-06').toLocaleDateString(),
@@ -102,11 +99,11 @@ const rowList: RowData[] = [
   },
   {
     id: '0007',
-    transfer_type: 'GR1',
-    transfer_date: new Date('2020-07-18').toLocaleDateString(),
+    transfer_type: 'МНО',
+    transfer_date: new Date('2020-08-06').toLocaleDateString(),
     transfer_amount: (
       <AmountCell>
-        <T font="Body/Body 2 Short">{numberFormatter.format(200)}</T>
+        <T font="Body/Body 2 Short">{numberFormatter.format(18_000_000)}</T>
       </AmountCell>
     ),
     currency: 'RUB',
@@ -114,11 +111,59 @@ const rowList: RowData[] = [
   },
   {
     id: '0008',
-    transfer_type: 'GR1',
-    transfer_date: new Date('2020-08-25').toLocaleDateString(),
+    transfer_type: 'МНО',
+    transfer_date: new Date('2020-08-06').toLocaleDateString(),
     transfer_amount: (
       <AmountCell>
-        <T font="Body/Body 2 Short">{numberFormatter.format(100)}</T>
+        <T font="Body/Body 2 Short">{numberFormatter.format(32_500_000_000)}</T>
+      </AmountCell>
+    ),
+    currency: 'RUB',
+    rate: 2.5,
+  },
+  {
+    id: '0009',
+    transfer_type: 'МНО',
+    transfer_date: new Date('2020-08-06').toLocaleDateString(),
+    transfer_amount: (
+      <AmountCell>
+        <T font="Body/Body 2 Short">{numberFormatter.format(18_000_000)}</T>
+      </AmountCell>
+    ),
+    currency: 'RUB',
+    rate: 2.5,
+  },
+  {
+    id: '0010',
+    transfer_type: 'МНО',
+    transfer_date: new Date('2020-08-06').toLocaleDateString(),
+    transfer_amount: (
+      <AmountCell>
+        <T font="Body/Body 2 Short">{numberFormatter.format(32_500_000_000)}</T>
+      </AmountCell>
+    ),
+    currency: 'RUB',
+    rate: 2.5,
+  },
+  {
+    id: '0011',
+    transfer_type: 'МНО',
+    transfer_date: new Date('2020-08-06').toLocaleDateString(),
+    transfer_amount: (
+      <AmountCell>
+        <T font="Body/Body 2 Short">{numberFormatter.format(18_000_000)}</T>
+      </AmountCell>
+    ),
+    currency: 'RUB',
+    rate: 2.5,
+  },
+  {
+    id: '0012',
+    transfer_type: 'МНО',
+    transfer_date: new Date('2020-08-06').toLocaleDateString(),
+    transfer_amount: (
+      <AmountCell>
+        <T font="Body/Body 2 Short">{numberFormatter.format(32_500_000_000)}</T>
       </AmountCell>
     ),
     currency: 'RUB',
@@ -130,40 +175,33 @@ const columnList: Column[] = [
   {
     name: 'transfer_type',
     title: 'Тип сделки',
+    width: 150,
   },
   {
     name: 'transfer_date',
     title: 'Дата сделки',
-    width: 150,
+    extraText: 'Не позднее марта текущего года',
   },
   {
     name: 'transfer_amount',
     title: 'Сумма',
-    width: 170,
+    cellAlign: 'right',
+    width: 150,
+    extraText: 'Сумма с учетом налогов',
   },
   {
     name: 'currency',
     title: 'Валюта',
+    extraText: 'Some additional text',
   },
   {
     name: 'rate',
     title: 'Ставка',
+    cellAlign: 'right',
   },
 ];
-
-export const GroupTemplate = (props: TableProps) => {
-  const [rows, setRows] = React.useState(rowList);
+export const ExtraTextTemplate = (props: TableProps) => {
   const [cols, setCols] = React.useState(columnList);
-
-  const handleExpansionChange = (ids: Record<string | number, boolean>): void => {
-    const updRows = rows.map((row) => ({ ...row, expanded: ids[row.id] }));
-    setRows(updRows);
-  };
-
-  const handleSelectionChange = (ids: Record<string | number, boolean>): void => {
-    const updRows = rows.map((row) => ({ ...row, selected: ids[row.id] }));
-    setRows(updRows);
-  };
 
   const handleResize = ({ name, width }: { name: string; width: string }) => {
     const newCols = cols.map((col) => (col.name === name ? { ...col, width } : col));
@@ -171,14 +209,6 @@ export const GroupTemplate = (props: TableProps) => {
   };
 
   return (
-    <Table
-      {...props}
-      rowList={rows}
-      columnList={cols}
-      displayRowExpansionColumn
-      onRowExpansionChange={handleExpansionChange}
-      onRowSelectionChange={handleSelectionChange}
-      onColumnResize={handleResize}
-    />
+    <Table {...props} rowList={rowList} columnList={cols} headerExtraLineClamp={2} onColumnResize={handleResize} />
   );
 };
