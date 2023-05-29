@@ -30,6 +30,7 @@ import {
   GroupTemplate,
   ExtraTextTemplate,
   ExpandTemplate,
+  ZebraTemplate,
 } from './Templates';
 
 // Imports of text sources
@@ -38,6 +39,7 @@ import OverflowMenuRaw from '!!raw-loader!./Templates/TableOverflowMenu';
 import GroupRaw from '!!raw-loader!./Templates/TableGroup';
 import ExtraTextRaw from '!!raw-loader!./Templates/TableExtraText';
 import ExpandRaw from '!!raw-loader!./Templates/TableExpand';
+import ZebraRaw from '!!raw-loader!./Templates/TableZebra';
 
 const Separator = styled.div`
   height: 20px;
@@ -787,16 +789,16 @@ RowState.parameters = {
   },
 };
 
-export const ZebraRows = Template.bind({});
-ZebraRows.args = {
-  rowList,
-  columnList,
-  greyHeader: true,
-  greyZebraRows: true,
-};
-ZebraRows.storyName = 'Table. Зебра (окрашивание строк через одну).';
-ZebraRows.parameters = {
+//<editor-fold desc="Пример c окрашиванием строк через одну">
+const ZebraStory: ComponentStory<typeof Table> = (props) => (
+  <ZebraTemplate columnList={[]} rowList={[]} {...cleanUpProps(props)} />
+);
+export const ZebraExample = ZebraStory.bind({});
+ZebraExample.parameters = {
   docs: {
+    source: {
+      code: ZebraRaw,
+    },
     description: {
       story: `Опционально, для лучшей визуальной сепарации строк, их можно окрашивать через одну в цвет вторичного фона (Neutral 05). Используйте для этого параметр greyZebraRows.
       Окраска начинается со второй строки, считая от заголовка таблицы или группы. При группировке строк, строка с названием группы не окрашивается. При перетаскивании строк, поиске или сортировке, 
@@ -804,6 +806,8 @@ ZebraRows.parameters = {
     },
   },
 };
+ZebraExample.storyName = 'Table. Зебра (окрашивание строк через одну).';
+//</editor-fold>
 
 //<editor-fold desc="Пример c детализацией строки">
 const ExpandStory: ComponentStory<typeof Table> = (props) => (
