@@ -1,14 +1,14 @@
+import type { ChangeEvent } from 'react';
+import * as React from 'react';
+import { ThemeProvider } from 'styled-components';
 import { INPUT_DIMENSIONS_VALUES, INPUT_STATUS_VALUES } from '#src/components/input';
 import { Modal, ModalButtonPanel, ModalContent, ModalTitle } from '#src/components/Modal';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import type { ChangeEvent } from 'react';
-import * as React from 'react';
 import { withDesign } from 'storybook-addon-designs';
 import { Option, OptionGroup, Select } from '#src/components/input/Select';
 import type { IOnCloseProps } from '../types';
 import { Button } from '#src/components/Button';
 import { useState } from '@storybook/addons';
-import { ThemeProvider } from 'styled-components';
 import type { Theme } from '#src/components/themes';
 import { MenuActionsPanel } from '#src/components/Menu/MenuActionsPanel';
 import { TextButton } from '#src/components/TextButton';
