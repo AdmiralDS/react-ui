@@ -40,7 +40,6 @@ import {
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
-/* eslint-disable import/default */
 import LargeNumberOfItemsRaw from '!!raw-loader!./Templates/LargeNumberOfItems';
 import MenuWithLockCycleScrollRaw from '!!raw-loader!./Templates/MenuWithLockCycleScroll';
 import VirtualScrollRaw from '!!raw-loader!./Templates/VirtualScroll';

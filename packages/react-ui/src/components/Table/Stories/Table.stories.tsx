@@ -27,10 +27,9 @@ import {
   rowListWithCustomRenderGroup,
 } from './data';
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
-
 import { VirtualScrollTemplate, OverflowMenuTemplate } from './Templates';
+
 // Imports of text sources
-/* eslint-disable import/default */
 import VirtualScrollRaw from '!!raw-loader!./Templates/TableVirtualScroll';
 import OverflowMenuRaw from '!!raw-loader!./Templates/TableOverflowMenu';
 
