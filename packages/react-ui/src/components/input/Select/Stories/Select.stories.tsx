@@ -1,24 +1,33 @@
 import type { ChangeEvent } from 'react';
 import * as React from 'react';
 import { ThemeProvider } from 'styled-components';
-import { INPUT_DIMENSIONS_VALUES, INPUT_STATUS_VALUES } from '#src/components/input';
-import { Modal, ModalButtonPanel, ModalContent, ModalTitle } from '#src/components/Modal';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
-import { Option, OptionGroup, Select } from '#src/components/input/Select';
-import type { IOnCloseProps } from '../types';
-import { Button } from '#src/components/Button';
 import { useState } from '@storybook/addons';
-import type { Theme } from '#src/components/themes';
-import { MenuActionsPanel } from '#src/components/Menu/MenuActionsPanel';
-import { TextButton } from '#src/components/TextButton';
-import { Cuba } from '#src/icons/IconComponents-flags';
+import { withDesign } from 'storybook-addon-designs';
+
+import {
+  Option,
+  OptionGroup,
+  Select,
+  Modal,
+  ModalButtonPanel,
+  ModalContent,
+  ModalTitle,
+  MenuActionsPanel,
+  Button,
+  TextButton,
+  INPUT_DIMENSIONS_VALUES,
+  INPUT_STATUS_VALUES,
+  ALL_BORDER_RADIUS_VALUES,
+} from '@admiral-ds/react-ui';
+import type { RenderOptionProps, Theme } from '@admiral-ds/react-ui';
+import type { IOnCloseProps } from '../types';
 import { CustomOptionWrapper } from '../styled';
-import type { RenderOptionProps } from '#src/components/Menu/MenuItem';
+import { ReactComponent as Cuba } from '@admiral-ds/icons/build/flags/Cuba.svg';
+
 import { createOptions, formDataToObject, wait } from './utils';
 import { OPTIONS, OPTIONS_ASYNC, OPTIONS_SIMPLE } from './data';
 import { ExtraText, Form, FormValuesWrapper, Icon, StyledGroup, TextWrapper } from './styled';
-import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 import {
   CustomRenderMultipleValuesTemplate,
