@@ -25,15 +25,15 @@ import {
   rowListWithGroup,
   columnListWithCustomRender,
   rowListWithCustomRenderGroup,
-  columnListWithDrag,
 } from './data';
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
-import { VirtualScrollTemplate, OverflowMenuTemplate } from './Templates';
+import { VirtualScrollTemplate, OverflowMenuTemplate, ColumnDragDropTemplate } from './Templates';
 // Imports of text sources
 /* eslint-disable import/default */
 import VirtualScrollRaw from '!!raw-loader!./Templates/TableVirtualScroll';
 import OverflowMenuRaw from '!!raw-loader!./Templates/TableOverflowMenu';
+import ColumnDragDropRaw from '!!raw-loader!./Templates/TableColumnDragDrop';
 
 const Separator = styled.div`
   height: 20px;
@@ -606,27 +606,6 @@ const Template8: ComponentStory<typeof Table> = ({ rowList, columnList, ...args 
   );
 };
 
-const Template9: ComponentStory<typeof Table> = ({ columnList, ...args }) => {
-  const [cols, setCols] = React.useState([...columnList]);
-
-  const handleResize = ({ name, width }: { name: string; width: string }) => {
-    const newCols = cols.map((col) => (col.name === name ? { ...col, width } : col));
-    setCols(newCols);
-  };
-
-  const handleColumnDrag = (columnName: string, nextColumn: string | null) => {
-    const columns = [...cols];
-    const movedIndex = columns.findIndex((col) => col.name === columnName);
-    const movedColumn = columns.splice(movedIndex, 1)[0];
-    const beforeIndex = nextColumn ? columns.findIndex((col) => col.name === nextColumn) : columns.length;
-    columns.splice(beforeIndex, 0, movedColumn);
-
-    setCols(columns);
-  };
-
-  return <Table {...args} columnList={cols} onColumnResize={handleResize} onColumnDrag={handleColumnDrag} />;
-};
-
 export const Playground = Template.bind({});
 Playground.args = {
   rowList,
@@ -979,12 +958,22 @@ CustomRenderGroupTitle.args = {
   columnList,
   displayRowExpansionColumn: true,
 };
-CustomRenderGroupTitle.storyName = 'Пример кастомизации заголовка группы';
+CustomRenderGroupTitle.storyName = 'Table. Пример кастомизации заголовка группы';
 
-export const DraggableColumns = Template9.bind({});
-DraggableColumns.args = {
-  rowList,
-  columnList: columnListWithDrag,
-  style: { width: '700px' },
+//<editor-fold desc="Пример с drag and drop столбцов">
+const ColumnDragDropStory: ComponentStory<typeof Table> = (props) => (
+  <ColumnDragDropTemplate columnList={[]} rowList={[]} {...cleanUpProps(props)} />
+);
+export const DraggableColumnsExample = ColumnDragDropStory.bind({});
+DraggableColumnsExample.parameters = {
+  docs: {
+    source: {
+      code: ColumnDragDropRaw,
+    },
+    description: {
+      story: ``,
+    },
+  },
 };
-DraggableColumns.storyName = 'Пример drag&drop столбцов';
+DraggableColumnsExample.storyName = 'Table. Drag and Drop столбцов';
+//</editor-fold>

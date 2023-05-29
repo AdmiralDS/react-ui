@@ -259,7 +259,6 @@ export function dragObserver(initialContainers: HTMLElement[], options: Options,
     }
 
     let reference;
-    // что такое immediate
     const immediate = getImmediateChild(dropTarget, elementBehindCursor);
     if (immediate !== null) {
       reference = getReference(dropTarget, immediate, clientX, clientY);
@@ -310,7 +309,6 @@ export function dragObserver(initialContainers: HTMLElement[], options: Options,
     }
   }
 
-  // находит дочерний элемент dropTarget, содержащий в себе target
   function getImmediateChild(dropTarget: any, target: any) {
     let immediate = target;
     while (immediate !== dropTarget && getParent(immediate) !== dropTarget) {
@@ -329,20 +327,15 @@ export function dragObserver(initialContainers: HTMLElement[], options: Options,
 
     function outside() {
       // slower, but able to figure out any position
-      const len = dropTarget.children.length;
-      let i;
-      let el;
-      let rect;
-      for (i = 0; i < len; i++) {
-        el = dropTarget.children[i];
-        rect = el.getBoundingClientRect();
+      [...dropTarget.children].forEach((el: Element) => {
+        const rect = el.getBoundingClientRect();
         if (horizontal && rect.left + rect.width / 2 > x) {
           return el;
         }
         if (!horizontal && rect.top + rect.height / 2 > y) {
           return el;
         }
-      }
+      });
       return null;
     }
 

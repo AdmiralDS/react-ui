@@ -19,6 +19,7 @@ import {
   underlineRow,
 } from './mixins';
 import { IconPlacement } from '#src/components/IconPlacement';
+import { typography } from '../Typography';
 
 export const TableContainer = styled.div`
   position: relative;
@@ -429,12 +430,20 @@ export const HiddenHeader = styled.div`
   overflow: hidden;
 `;
 
-export const Mirror = styled(HeaderCell)`
+export const Mirror = styled(HeaderCell)<{ dimension: TableProps['dimension'] }>`
   position: fixed;
   z-index: 6;
   visibility: hidden;
+  display: inline-block;
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   ${({ theme }) => theme.shadow['Shadow 08']}
   background: ${({ theme }) => theme.color['Neutral/Neutral 00']};
+  color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
+  ${({ dimension }) =>
+    dimension === 's' || dimension === 'm' ? typography['Subtitle/Subtitle 3'] : typography['Subtitle/Subtitle 2']}
   padding-left: 36px;
 
   &[data-cursor='normal'] {

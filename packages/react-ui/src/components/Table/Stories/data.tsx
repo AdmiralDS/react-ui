@@ -956,33 +956,3 @@ export const rowListWithCustomRenderGroup: RowData[] = [
     rate: 2.5,
   },
 ];
-
-export const columnListWithDrag: Column[] = [
-  {
-    name: 'transfer_type',
-    title: 'Тип сделки',
-    draggable: true,
-  },
-  {
-    name: 'transfer_date',
-    title: 'Дата сделки',
-    width: 150,
-    draggable: false,
-  },
-  {
-    name: 'transfer_amount',
-    title: 'Сумма',
-    width: 170,
-    draggable: true,
-  },
-  {
-    name: 'currency',
-    title: 'Валюта',
-    draggable: true,
-  },
-  {
-    name: 'rate',
-    title: 'Ставка',
-    draggable: true,
-  },
-];

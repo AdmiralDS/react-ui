@@ -77,7 +77,7 @@ export type Column = {
   sticky?: boolean;
   /** Отключение возможности ресайза колонки */
   disableResize?: boolean;
-  /** */
+  /** Включение возможности drag & drop столбца */
   draggable?: boolean;
   /** Состояние фильтра.
    * Необходимо для окрашивания иконки фильтра в синий цвет при активном фильтре и в серый при неактивном фильтре.
@@ -268,7 +268,11 @@ export interface TableProps extends React.HTMLAttributes<HTMLDivElement> {
     /** Сообщение, отображаемое при отсутствии совпадений в строках после применения фильтра */
     emptyMessage?: React.ReactNode;
   };
-  /** */
+  /** Колбек, который срабатывает при попытке перетащить столбец таблицы на новое место.
+   * columnName - name столбца, который перетаскивается;
+   * nextColumnName - name столбца, перед которым пытается встать передвигаемый столбец.
+   * Если nextColumnName равен null, значит столбец передвигают в самый конец списка.
+   */
   onColumnDrag?: (columnName: string, nextColumnName: string | null) => void;
   /** Контейнер, внутри которого будет отрисован портал, по умолчанию портал рендерится в document.body */
   rootRef?: React.RefObject<HTMLElement>;
@@ -804,14 +808,17 @@ export const Table: React.FC<TableProps> = ({
   React.useEffect(() => {
     if (mirrorRef.current && (isAnyColumnDraggable || isAnyStickyColumnDraggable)) {
       const observer = observeRect(mirrorRef.current, (rect: any) => {
-        const tableRight = tableRef.current?.getBoundingClientRect().right || 0;
-        const tableLeft = tableRef.current?.getBoundingClientRect().left || 0;
+        const rightCoord = tableRef.current?.getBoundingClientRect().right || 0;
+        const leftCoord =
+          stickyColumnsWrapperRef.current?.getBoundingClientRect().right ||
+          tableRef.current?.getBoundingClientRect().left ||
+          0;
 
-        if (rect.right > tableRight && scrollBodyRef.current) {
-          scrollBodyRef.current.scrollBy({ left: Math.abs(tableRight - rect.right) });
+        if (rect.right > rightCoord && scrollBodyRef.current) {
+          scrollBodyRef.current.scrollBy({ left: Math.abs(rightCoord - rect.right) });
         }
-        if (rect.left < tableLeft && scrollBodyRef.current) {
-          scrollBodyRef.current.scrollBy({ left: -Math.abs(tableLeft - rect.left) });
+        if (rect.left < leftCoord && scrollBodyRef.current) {
+          scrollBodyRef.current.scrollBy({ left: -Math.abs(leftCoord - rect.left) });
         }
       });
 
@@ -824,7 +831,7 @@ export const Table: React.FC<TableProps> = ({
     const stickyCols = stickyColumnsWrapperRef.current;
     const normalCols = normalColumnsWrapperRef.current;
 
-    function handleDrop(item: any, before: any) {
+    function handleDrop(item: HTMLElement, before: HTMLElement | null) {
       if (item?.dataset?.thColumn) {
         columnDragCallback.current?.(item?.dataset?.thColumn, before?.dataset?.thColumn ?? null);
       }
@@ -838,7 +845,6 @@ export const Table: React.FC<TableProps> = ({
           dimension,
           direction: 'horizontal',
           invalid: (el: any) => {
-            //например чекбоксы или стрелки нельзя перетаскивать
             return el.dataset.draggable == 'false';
           },
           accepts: (el: any, target: any, source: any, sibling: any) => {
