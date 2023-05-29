@@ -2,9 +2,19 @@ import * as React from 'react';
 import { withDesign } from 'storybook-addon-designs';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import styled, { css, ThemeProvider } from 'styled-components';
-import { Pill, Pills, DropMenu, MenuItem, TooltipHoc, Tooltip, checkOverflow, refSetter } from '@admiral-ds/react-ui';
+import {
+  Pill,
+  Pills,
+  DropMenu,
+  MenuItem,
+  TooltipHoc,
+  Tooltip,
+  checkOverflow,
+  refSetter,
+  smallGroupBorderRadius,
+  ALL_BORDER_RADIUS_VALUES,
+} from '@admiral-ds/react-ui';
 import type { Color, Shape, Theme, RenderOptionProps } from '@admiral-ds/react-ui';
-import { smallGroupBorderRadius, ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
 import { ReactComponent as HeartOutline } from '@admiral-ds/icons/build/category/HeartOutline.svg';
 import { ReactComponent as AlertOutline } from '@admiral-ds/icons/build/category/AlertOutline.svg';
 import { ReactComponent as BonusOutline } from '@admiral-ds/icons/build/category/BonusOutline.svg';
