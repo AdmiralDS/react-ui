@@ -23,7 +23,7 @@ import {
   INPUT_STATUS_VALUES,
   ALL_BORDER_RADIUS_VALUES,
 } from '@admiral-ds/react-ui';
-import type { IOnCloseProps, SearchFormat } from '../types';
+import type { SearchFormat } from '@admiral-ds/react-ui';
 import { ReactComponent as PlusOutline } from '@admiral-ds/icons/build/service/PlusOutline.svg';
 import { ReactComponent as Cuba } from '@admiral-ds/icons/build/flags/Cuba.svg';
 import { ReactComponent as Belarus } from '@admiral-ds/icons/build/flags/Belarus.svg';
@@ -523,7 +523,8 @@ const TemplateMultiSelectCustomChip: ComponentStory<typeof Select> = (props) => 
   };
   const onOpenModal = () => setModalOpened(true);
 
-  const onChipClose = ({ value }: IOnCloseProps) => {
+  // TODO: use interface instead of any
+  const onChipClose = ({ value }: any) => {
     setValueToDelete(value);
     onOpenModal();
   };

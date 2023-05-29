@@ -33,6 +33,8 @@ import type { ItemProps } from '#src/components/Menu/MenuItem';
 import type { SearchFormat, SelectItemProps, IConstantOption } from '#src/components/input/Select/types';
 import { defaultFilterItem } from '#src/components/input/Select/utils';
 
+export type { SearchFormat } from './types';
+
 /**
  * Осталось сделать:
  * Активное состояние у крестика на чипсах по стрелкам
