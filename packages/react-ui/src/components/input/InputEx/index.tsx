@@ -19,6 +19,9 @@ import { checkOverflow } from '#src/components/common/utils/checkOverflow';
 import type { DropContainerStyles } from '#src/components/DropdownContainer';
 import { BorderedDivStyles, InputBorderedDiv } from '#src/components/input/TextInput';
 
+export type { RenderPropsType } from '#src/components/input/InputEx/SuffixSelect';
+export type { ValueType } from '#src/components/input/InputEx/ValueType';
+
 const iconSizeValue = (props: { dimension?: ComponentDimension }) => {
   switch (props.dimension) {
     case 'xl':
