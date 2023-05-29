@@ -2,10 +2,9 @@ import type { ChangeEvent } from 'react';
 import * as React from 'react';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
-import { INPUT_STATUS_VALUES, PhoneNumberInput } from '#src/components/input';
 import styled, { ThemeProvider } from 'styled-components';
-import type { Theme } from '#src/components/themes';
-import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
+import { INPUT_STATUS_VALUES, PhoneNumberInput, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
+import type { Theme } from '@admiral-ds/react-ui';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
