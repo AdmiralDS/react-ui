@@ -2,7 +2,7 @@ import { withDesign } from 'storybook-addon-designs';
 import * as React from 'react';
 import type { Meta, Story } from '@storybook/react';
 import { useDarkMode } from 'storybook-dark-mode';
-import styled, { ThemeContext, ThemeProvider } from 'styled-components';
+import styled, { useTheme, ThemeProvider } from 'styled-components';
 import { ReactComponent as CopyOutline } from '@admiral-ds/icons/build/documents/CopyOutline.svg';
 import { TooltipHoc, typography, LIGHT_THEME, DARK_THEME, Table } from '@admiral-ds/react-ui';
 import type { Color } from '@admiral-ds/react-ui';
@@ -82,7 +82,7 @@ const CopyIcon = React.forwardRef<HTMLDivElement, { text: string }>(({ text }, r
 const CopyButton = TooltipHoc(CopyIcon);
 
 const Category = ({ categoryName }: { categoryName: string }) => {
-  const theme = React.useContext(ThemeContext) || LIGHT_THEME;
+  const theme = useTheme() || LIGHT_THEME;
   const colors = [...Object.keys(COLORS[categoryName])] as Array<keyof Color>;
   return (
     <CategoryWrapper>
