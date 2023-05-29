@@ -4,7 +4,7 @@ import { typography } from '#src/components/Typography';
 import * as React from 'react';
 import ReactDOM from 'react-dom';
 import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
-import styled, { css, ThemeContext } from 'styled-components';
+import styled, { css, useTheme } from 'styled-components';
 import { LIGHT_THEME } from '#src/components/themes';
 import { manager } from './manager';
 import { largeGroupBorderRadius } from '#src/components/themes/borderRadius';
@@ -172,7 +172,7 @@ export const Modal = React.forwardRef<HTMLDivElement, ModalProps>(
     },
     ref,
   ) => {
-    const theme = React.useContext(ThemeContext) || LIGHT_THEME;
+    const theme = useTheme() || LIGHT_THEME;
     const closeBtnAriaLabel =
       locale?.closeButtonAriaLabel || theme.locales[theme.currentLocale].modal.closeButtonAriaLabel;
     const modal = React.useRef<any>({});

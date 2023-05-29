@@ -1,10 +1,8 @@
 import * as React from 'react';
-import { Option } from '#src/components/input';
-import type { SearchSelectFieldProps } from '#src/components/form';
 import type { ChangeEvent } from 'react';
-import type { Theme } from '#src/components/themes';
 import { ThemeProvider } from 'styled-components';
-import { SelectField } from '#src/components/form';
+import { SelectField, Option } from '@admiral-ds/react-ui';
+import type { SearchSelectFieldProps, Theme } from '@admiral-ds/react-ui';
 
 const OPTIONS = [
   'teeext 1',

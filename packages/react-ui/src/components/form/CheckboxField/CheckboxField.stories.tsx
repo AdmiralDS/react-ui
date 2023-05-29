@@ -1,15 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { CheckboxField } from '#src/components/form/CheckboxField';
-
 import { withDesign } from 'storybook-addon-designs';
-import type { CheckboxDimension } from '#src/components/Checkbox/CheckboxDimension';
-import { ALL_DIMENSIONS_VALUES } from '#src/components/Checkbox/CheckboxDimension';
 import styled, { ThemeProvider } from 'styled-components';
+
+import { CheckboxField, ALL_DIMENSIONS_VALUES, Hint, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
+import type { CheckboxDimension, Theme } from '@admiral-ds/react-ui';
 import { ReactComponent as InfoSolidSVG } from '@admiral-ds/icons/build/service/InfoSolid.svg';
-import { Hint } from '#src/components/Hint';
-import type { Theme } from '#src/components/themes';
-import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
 
 export default {
   title: 'Admiral-2.1/Form Field/CheckboxField',

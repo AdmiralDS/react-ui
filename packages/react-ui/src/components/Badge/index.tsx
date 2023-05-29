@@ -1,5 +1,5 @@
 import * as React from 'react';
-import styled, { css, ThemeContext } from 'styled-components';
+import styled, { css, useTheme } from 'styled-components';
 import { LIGHT_THEME } from '#src/components/themes';
 import { typography } from '#src/components/Typography';
 
@@ -107,7 +107,7 @@ export interface BadgeProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export const Badge = React.forwardRef<HTMLDivElement, BadgeProps>(
   ({ children, dimension = 'm', appearance = 'light', locale, ...props }, ref) => {
-    const theme = React.useContext(ThemeContext) || LIGHT_THEME;
+    const theme = useTheme() || LIGHT_THEME;
     const amountText = locale?.amountAriaLabel || theme.locales[theme.currentLocale].badge.amountAriaLabel;
     return (
       <BadgeComponent
