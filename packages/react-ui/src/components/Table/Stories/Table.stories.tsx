@@ -30,7 +30,6 @@ import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 import { VirtualScrollTemplate, OverflowMenuTemplate, ColumnDragDropTemplate } from './Templates';
 // Imports of text sources
-/* eslint-disable import/default */
 import VirtualScrollRaw from '!!raw-loader!./Templates/TableVirtualScroll';
 import OverflowMenuRaw from '!!raw-loader!./Templates/TableOverflowMenu';
 import ColumnDragDropRaw from '!!raw-loader!./Templates/TableColumnDragDrop';

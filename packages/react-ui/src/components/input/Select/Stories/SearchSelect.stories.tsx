@@ -1,25 +1,38 @@
-import { defaultFilterItem, INPUT_DIMENSIONS_VALUES, INPUT_STATUS_VALUES } from '#src/components/input';
-import { Modal, ModalButtonPanel, ModalContent, ModalTitle } from '#src/components/Modal';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import type { ChangeEvent } from 'react';
 import * as React from 'react';
-import { withDesign } from 'storybook-addon-designs';
-import { Option, OptionGroup, Select } from '#src/components/input/Select';
-import type { IOnCloseProps, SearchFormat } from '../types';
-import { Button } from '#src/components/Button';
+import type { ChangeEvent } from 'react';
+import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { useState } from '@storybook/addons';
-import { MenuActionsPanel } from '#src/components/Menu/MenuActionsPanel';
-import { TextButton } from '#src/components/TextButton';
-import { PlusOutline } from '#src/icons/IconComponents-service';
-import { T } from '#src/components/T';
-import { createOptions, formDataToObject, wait } from './utils';
-import { OPTIONS, OPTIONS_ASYNC, OPTIONS_NAMES, OPTIONS_SIMPLE } from './data';
-import { useQuery, QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { ExtraText, Form, FormValuesWrapper, Icon, Separator, StyledGroup, TextWrapper } from './styled';
-import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
-import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+import { withDesign } from 'storybook-addon-designs';
 import styled from 'styled-components';
-import { Belarus, Cuba, RussianFederation } from '#src/icons/IconComponents-flags';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+import {
+  Option,
+  OptionGroup,
+  Select,
+  Modal,
+  ModalButtonPanel,
+  ModalContent,
+  ModalTitle,
+  MenuActionsPanel,
+  Button,
+  TextButton,
+  T,
+  defaultFilterItem,
+  INPUT_DIMENSIONS_VALUES,
+  INPUT_STATUS_VALUES,
+  ALL_BORDER_RADIUS_VALUES,
+} from '@admiral-ds/react-ui';
+import type { IOnCloseProps, SearchFormat } from '../types';
+import { ReactComponent as PlusOutline } from '@admiral-ds/icons/build/service/PlusOutline.svg';
+import { ReactComponent as Cuba } from '@admiral-ds/icons/build/flags/Cuba.svg';
+import { ReactComponent as Belarus } from '@admiral-ds/icons/build/flags/Belarus.svg';
+import { ReactComponent as RussianFederation } from '@admiral-ds/icons/build/flags/RussianFederation.svg';
+
+import { createOptions, formDataToObject } from './utils';
+import { OPTIONS, OPTIONS_NAMES, OPTIONS_SIMPLE } from './data';
+import { ExtraText, Form, FormValuesWrapper, Icon, Separator, StyledGroup, TextWrapper } from './styled';
+import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 import { LoadOnScrollTemplate, RenderPropsTemplate, SelectWithAsyncLoading } from './Templates';
 import RenderPropsRaw from '!!raw-loader!./Templates/RenderProps';
 import LoadOnScrollRaw from '!!raw-loader!./Templates/LoadingOnScroll';

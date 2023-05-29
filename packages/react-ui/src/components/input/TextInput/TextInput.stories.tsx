@@ -1,12 +1,15 @@
 import type { ChangeEvent } from 'react';
 import React, { useState } from 'react';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { TextInput } from './index';
 import { withDesign } from 'storybook-addon-designs';
-import { INPUT_DIMENSIONS_VALUES, INPUT_STATUS_VALUES } from '#src/components/input/types';
-import type { Theme } from '#src/components/themes';
 import { ThemeProvider } from 'styled-components';
-import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
+import {
+  TextInput,
+  INPUT_DIMENSIONS_VALUES,
+  INPUT_STATUS_VALUES,
+  ALL_BORDER_RADIUS_VALUES,
+} from '@admiral-ds/react-ui';
+import type { Theme } from '@admiral-ds/react-ui';
 
 export default {
   title: 'Admiral-2.1/Input/TextInput',

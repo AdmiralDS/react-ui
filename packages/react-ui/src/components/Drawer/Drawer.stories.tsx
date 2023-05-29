@@ -102,7 +102,7 @@ const ButtonWrapper = styled.div`
 
 const ContentArea = styled.div`
   display: flex;
-  height: 500px;
+  height: 100%;
   background: ${({ theme }) => theme.color['Success/Success 20']};
 `;
 
@@ -397,7 +397,7 @@ const Template7: ComponentStory<typeof Drawer> = (args) => {
         <h1 id="drawer-title" style={{ paddingLeft: '24px' }}>
           <strong>Drawer title</strong>
         </h1>
-        <i style={{ paddingLeft: '24px' }}>
+        <i style={{ padding: '0 24px', height: '100%' }}>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. At cupiditate ducimus nisi nulla numquam obcaecati
           quam quasi quod ut veritatis?
         </i>
@@ -406,8 +406,9 @@ const Template7: ComponentStory<typeof Drawer> = (args) => {
             marginTop: '40px',
             width: '80%',
             display: 'flex',
-            justifyContent: 'space-between',
-            paddingLeft: '24px',
+            justifyContent: 'space-around',
+            alignSelf: 'flex-end',
+            padding: '0 24px',
           }}
         >
           <Button appearance="primary" dimension="m" onClick={() => setOpened(false)}>
