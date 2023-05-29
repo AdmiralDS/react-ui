@@ -9,8 +9,7 @@ import {
   INPUT_STATUS_VALUES,
   ALL_BORDER_RADIUS_VALUES,
 } from '@admiral-ds/react-ui';
-import type { Theme } from '@admiral-ds/react-ui';
-import type { ValueType } from '#src/components/input/InputEx/ValueType';
+import type { ValueType, Theme } from '@admiral-ds/react-ui';
 import { DataAttributesDescription } from '#src/components/form/common';
 
 export default {
