@@ -2,8 +2,6 @@ import styled, { css } from 'styled-components';
 import { ReactComponent as ArrowUpOutline } from '@admiral-ds/icons/build/system/ArrowUpOutline.svg';
 import { ReactComponent as ChevronDownOutline } from '@admiral-ds/icons/build/system/ChevronDownOutline.svg';
 import type { TableProps } from '#src/components/Table';
-import CursorGrabbing from './icons/cursorGrabbing.svg';
-import CursorNotAllowed from './icons/cursorNotAllowed.svg';
 
 import {
   cellStyle,
@@ -434,22 +432,40 @@ export const Mirror = styled(HeaderCell)<{ dimension: TableProps['dimension'] }>
   position: fixed;
   z-index: 6;
   visibility: hidden;
-  display: inline-block;
+  display: flex;
   max-width: 200px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
   ${({ theme }) => theme.shadow['Shadow 08']}
   background: ${({ theme }) => theme.color['Neutral/Neutral 00']};
   color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
   ${({ dimension }) =>
     dimension === 's' || dimension === 'm' ? typography['Subtitle/Subtitle 3'] : typography['Subtitle/Subtitle 2']}
-  padding-left: 36px;
+  padding-left: ${({ dimension }) => (dimension === 's' || dimension === 'm' ? 8 : 10)}px;
+  && {
+    cursor: none;
+    svg {
+      display: none;
+      width: 20px;
+      height: 20px;
+      margin-right: 8px;
+      flex-shrink: 0;
+    }
+  }
 
   &[data-cursor='normal'] {
-    cursor: url(${CursorGrabbing}), grabbing;
+    & .icon-grabbing {
+      display: block;
+    }
   }
   &[data-cursor='error'] {
-    cursor: url(${CursorNotAllowed}), not-allowed;
+    & .icon-not-allowed {
+      display: block;
+    }
   }
+`;
+
+export const MirrorText = styled.div`
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;

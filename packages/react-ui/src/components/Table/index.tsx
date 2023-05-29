@@ -1,4 +1,5 @@
 import * as React from 'react';
+import type { CSSProperties } from 'react';
 import { Checkbox } from '#src/components/Checkbox';
 import observeRect from '#src/components/common/observeRect';
 import { useTheme } from 'styled-components';
@@ -7,6 +8,7 @@ import { getScrollbarSize } from '#src/components/common/dom/scrollbarUtil';
 import { GroupRow } from '#src/components/Table/Row/GroupRow';
 import { RegularRow } from '#src/components/Table/Row/RegularRow';
 import { RowWrapper } from '#src/components/Table/Row/RowWrapper';
+import { DropdownContext } from '#src/components/DropdownProvider';
 import type { FlattenInterpolation, ThemeProps, DefaultTheme } from 'styled-components';
 import ReactDOM from 'react-dom';
 
@@ -29,9 +31,11 @@ import {
   TableContainer,
   HiddenHeader,
   Mirror,
+  MirrorText,
 } from './style';
 import { VirtualBody } from './VirtualBody';
-import type { CSSProperties } from 'react';
+import { ReactComponent as CursorGrabbing } from './icons/cursorGrabbing.svg';
+import { ReactComponent as CursorNotAllowed } from './icons/cursorNotAllowed.svg';
 
 export * from './RowAction';
 
@@ -274,8 +278,6 @@ export interface TableProps extends React.HTMLAttributes<HTMLDivElement> {
    * Если nextColumnName равен null, значит столбец передвигают в самый конец списка.
    */
   onColumnDrag?: (columnName: string, nextColumnName: string | null) => void;
-  /** Контейнер, внутри которого будет отрисован портал, по умолчанию портал рендерится в document.body */
-  rootRef?: React.RefObject<HTMLElement>;
 }
 
 type GroupInfo = {
@@ -321,10 +323,10 @@ export const Table: React.FC<TableProps> = ({
   virtualScroll,
   locale,
   onColumnDrag,
-  rootRef,
   ...props
 }) => {
   const theme = useTheme() || LIGHT_THEME;
+  const { rootRef } = React.useContext(DropdownContext);
   const checkboxDimension = dimension === 's' || dimension === 'm' ? 's' : 'm';
   const columnMinWidth = dimension === 's' || dimension === 'm' ? COLUMN_MIN_WIDTH_M : COLUMN_MIN_WIDTH_L;
 
@@ -901,7 +903,14 @@ export const Table: React.FC<TableProps> = ({
       </HeaderWrapper>
       {renderBody()}
       {(isAnyColumnDraggable || isAnyStickyColumnDraggable) &&
-        ReactDOM.createPortal(<Mirror dimension={dimension} ref={mirrorRef} />, rootRef?.current || document.body)}
+        ReactDOM.createPortal(
+          <Mirror dimension={dimension} ref={mirrorRef}>
+            <CursorGrabbing className="icon-grabbing" />
+            <CursorNotAllowed className="icon-not-allowed" />
+            <MirrorText />
+          </Mirror>,
+          rootRef?.current || document.body,
+        )}
     </TableContainer>
   );
 };

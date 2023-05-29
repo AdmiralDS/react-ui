@@ -239,8 +239,8 @@ export function dragObserver(initialContainers: HTMLElement[], options: Options,
       x = clientX - _offsetX;
       y = clientY - _offsetY;
     } else if (o.direction === 'horizontal') {
-      x = clientX - (o.dimension === 's' || o.dimension === 'm' ? 8 : 10);
-      y = clientY - (_mirror.getBoundingClientRect().height - 20) / 2;
+      x = clientX - (o.dimension === 's' || o.dimension === 'm' ? 18 : 20);
+      y = clientY - _mirror.getBoundingClientRect().height / 2;
     }
 
     _mirror.style.left = x + 'px';
@@ -282,7 +282,7 @@ export function dragObserver(initialContainers: HTMLElement[], options: Options,
       const mirrorParent = mirrorElement.parentElement;
       const title = _item.dataset.thTitle;
 
-      mirrorElement.innerHTML = title;
+      if (mirrorElement.lastElementChild) mirrorElement.lastElementChild.innerHTML = title;
       mirrorElement.style.visibility = 'visible';
       _mirror = o.mirrorRef.current;
 
