@@ -22,16 +22,16 @@ import {
   rowListLineClamp,
   rowListRowState,
   rowListSort,
-  rowListWithGroup,
   columnListWithCustomRender,
   rowListWithCustomRenderGroup,
 } from './data';
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
-import { VirtualScrollTemplate, OverflowMenuTemplate } from './Templates';
+import { VirtualScrollTemplate, OverflowMenuTemplate, GroupTemplate } from './Templates';
 
 // Imports of text sources
 import VirtualScrollRaw from '!!raw-loader!./Templates/TableVirtualScroll';
 import OverflowMenuRaw from '!!raw-loader!./Templates/TableOverflowMenu';
+import GroupRaw from '!!raw-loader!./Templates/TableGroup';
 
 const Separator = styled.div`
   height: 20px;
@@ -918,15 +918,16 @@ VirtualScrollExample.parameters = {
 VirtualScrollExample.storyName = 'Table. Виртуальный скролл.';
 //</editor-fold>
 
-export const Group = Template8.bind({});
-Group.args = {
-  rowList: rowListWithGroup,
-  columnList,
-  displayRowExpansionColumn: true,
-};
-Group.storyName = 'Table. Пример c группировкой строк.';
-Group.parameters = {
+//<editor-fold desc="Пример с группировкой строк">
+const GroupStory: ComponentStory<typeof Table> = (props) => (
+  <GroupTemplate columnList={[]} rowList={[]} {...cleanUpProps(props)} />
+);
+export const GroupExample = GroupStory.bind({});
+GroupExample.parameters = {
   docs: {
+    source: {
+      code: GroupRaw,
+    },
     description: {
       story: `Строки в таблице можно группировать под общим заголовком. При группировке допускается только один уровень 
       вложенности строк. Для того чтобы задать группу строк, нужно в массиве rowList создать объект строки, которая будет являться 
@@ -935,6 +936,8 @@ Group.parameters = {
     },
   },
 };
+GroupExample.storyName = 'Table. Пример c группировкой строк.';
+//</editor-fold>
 
 export const CustomTitle = Template.bind({});
 CustomTitle.args = {
