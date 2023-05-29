@@ -1,9 +1,8 @@
-import type { SelectProps } from '#src/components/input';
-import { Option, Select } from '#src/components/input';
 import * as React from 'react';
-import { OPTIONS } from '#src/components/input/Select/Stories/data';
-import type { RenderOptionProps } from '#src/components/Menu/MenuItem';
+import { Option, Select } from '@admiral-ds/react-ui';
+import type { SelectProps, RenderOptionProps } from '@admiral-ds/react-ui';
 import { CustomOptionWrapper } from '#src/components/input/Select/styled';
+import { OPTIONS } from '#src/components/input/Select/Stories/data';
 import { Icon, TextWrapper } from '#src/components/input/Select/Stories/styled';
 
 interface MyIncredibleOptionProps extends RenderOptionProps {

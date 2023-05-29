@@ -1,8 +1,10 @@
 import * as React from 'react';
 import styled, { css } from 'styled-components';
-import { Option, Select, SelectValueWrapper } from '#src/components/input';
-import { Belarus, Cuba, RussianFederation } from '#src/icons/IconComponents-flags';
-import type { SelectProps } from '#src/components/input';
+import { Option, Select, SelectValueWrapper } from '@admiral-ds/react-ui';
+import type { SelectProps } from '@admiral-ds/react-ui';
+import { ReactComponent as Cuba } from '@admiral-ds/icons/build/flags/Cuba.svg';
+import { ReactComponent as Belarus } from '@admiral-ds/icons/build/flags/Belarus.svg';
+import { ReactComponent as RussianFederation } from '@admiral-ds/icons/build/flags/RussianFederation.svg';
 
 const MultipleMixin = css`
   & ${SelectValueWrapper} {
