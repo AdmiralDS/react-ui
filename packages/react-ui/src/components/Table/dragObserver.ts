@@ -2,20 +2,25 @@ type Direction = 'horizontal' | 'vertical';
 type Options = {
   mirrorRef: React.RefObject<HTMLElement>;
   dimension: 'xl' | 'l' | 'm' | 's';
-  accepts?: (el: any, target: any, source: any, sibling: any) => boolean;
-  invalid?: (el: any, handle: any) => boolean;
+  accepts?: (
+    el: HTMLElement | null,
+    target: HTMLElement | null,
+    source: HTMLElement | null,
+    sibling: HTMLElement | null,
+  ) => boolean;
+  invalid?: (el: HTMLElement, handle: HTMLElement) => boolean;
   direction?: Direction;
 };
 
 export function dragObserver(initialContainers: HTMLElement[], options: Options, onDrop?: any) {
-  let _mirror: any; // mirror image
-  let _source: any; // source container
-  let _item: any; // item being dragged
-  let _offsetX: any; // reference x
-  let _offsetY: any; // reference y
-  let _initialSibling: any; // reference sibling when grabbed
-  let _currentSibling: any; // reference sibling now
-  let _lastDropTarget: any = null; // last container item was over
+  let _mirror: HTMLElement | null; // mirror image
+  let _source: HTMLElement | null; // source container
+  let _item: HTMLElement | null; // item being dragged
+  let _offsetX: number; // reference x
+  let _offsetY: number; // reference y
+  let _initialSibling: HTMLElement | null; // reference sibling when grabbed
+  let _currentSibling: HTMLElement | null; // reference sibling now
+  let _lastDropTarget: HTMLElement | null = null; // last container item was over
   let _grabbed: any; // holds mousedown context until first mousemove
   let _mirrorContainerStyle: string; // initial style of mirror container
 
@@ -37,7 +42,7 @@ export function dragObserver(initialContainers: HTMLElement[], options: Options,
 
   return drake;
 
-  function isContainer(el: any) {
+  function isContainer(el: HTMLElement) {
     return drake.containers.indexOf(el) !== -1;
   }
 
@@ -85,8 +90,7 @@ export function dragObserver(initialContainers: HTMLElement[], options: Options,
       return;
     }
 
-    // это проверка на то, был ли сейчас просто клик или движение мыши
-    // если вообще есть такая проблема ??
+    // if mouse does not move
     if (e.movementX == 0 && e.movementY == 0) return;
 
     const grabbed = _grabbed; // call to end() unsets _grabbed
@@ -95,14 +99,16 @@ export function dragObserver(initialContainers: HTMLElement[], options: Options,
     end();
     start(grabbed);
 
-    const offset = getOffset(_item);
-    // расстояние между левым краем элемента и позицией курсора
-    _offsetX = getCoord('pageX', e) - offset.left;
-    _offsetY = getCoord('pageY', e) - offset.top;
+    if (_item) {
+      const offset = getOffset(_item);
+      // distances between left-top corner of an _item and cursor position
+      _offsetX = getCoord('pageX', e) - offset.left;
+      _offsetY = getCoord('pageY', e) - offset.top;
 
-    _item.dataset.dragover = 'true';
-    renderMirrorImage();
-    drag(e);
+      _item.dataset.dragover = 'true';
+      renderMirrorImage();
+      drag(e);
+    }
   }
 
   function canStart(item: HTMLElement) {
@@ -159,13 +165,12 @@ export function dragObserver(initialContainers: HTMLElement[], options: Options,
 
   function release(e: any) {
     ungrab();
-
     if (!drake.dragging) {
       return;
     }
     const clientX = getCoord('clientX', e) || 0;
     const clientY = getCoord('clientY', e) || 0;
-    const elementBehindCursor = getElementBehindPoint(_mirror, clientX, clientY);
+    const elementBehindCursor = getElementBehindPoint(_mirror as HTMLElement, clientX, clientY);
     const dropTarget = findDropTarget(elementBehindCursor, clientX, clientY);
     if (dropTarget && dropTarget !== _source) {
       cleanup();
@@ -198,7 +203,7 @@ export function dragObserver(initialContainers: HTMLElement[], options: Options,
     } else if (_mirror) {
       sibling = _currentSibling;
     } else {
-      sibling = _item.nextElementSibling;
+      sibling = _item?.nextElementSibling;
     }
     return target === _source && sibling === _initialSibling;
   }
@@ -266,7 +271,7 @@ export function dragObserver(initialContainers: HTMLElement[], options: Options,
       return;
     }
 
-    if ((reference === null && changed) || (reference !== _item && reference !== _item.nextElementSibling)) {
+    if (_item && ((reference === null && changed) || (reference !== _item && reference !== _item.nextElementSibling))) {
       _currentSibling = reference;
       onDrop?.(_item, reference);
     }
@@ -280,7 +285,7 @@ export function dragObserver(initialContainers: HTMLElement[], options: Options,
     // TODO: add realization for vertical direction
     if (mirrorElement && o.direction === 'horizontal') {
       const mirrorParent = mirrorElement.parentElement;
-      const title = _item.dataset.thTitle;
+      const title = (_item as HTMLElement).dataset.thTitle ?? '';
 
       if (mirrorElement.lastElementChild) mirrorElement.lastElementChild.innerHTML = title;
       mirrorElement.style.visibility = 'visible';

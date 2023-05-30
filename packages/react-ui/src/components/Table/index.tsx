@@ -347,6 +347,7 @@ export const Table: React.FC<TableProps> = ({
   const stickyColumnsWrapperRef = React.useRef<HTMLDivElement>(null);
   const normalColumnsWrapperRef = React.useRef<HTMLDivElement>(null);
   const mirrorRef = React.useRef<HTMLDivElement>(null);
+  // save callback via useRef to not update dragObserver on each callback change
   const columnDragCallback = React.useRef(onColumnDrag);
 
   const groupToRowsMap = rowList.reduce<Group>((acc: Group, row) => {
@@ -526,6 +527,78 @@ export const Table: React.FC<TableProps> = ({
     setVerticalScroll,
     setBodyHeight,
   ]);
+
+  React.useEffect(() => {
+    columnDragCallback.current = onColumnDrag;
+  }, [onColumnDrag]);
+
+  React.useEffect(() => {
+    if (mirrorRef.current && (isAnyColumnDraggable || isAnyStickyColumnDraggable)) {
+      const observer = observeRect(mirrorRef.current, (rect: any) => {
+        const rightCoord = tableRef.current?.getBoundingClientRect().right || 0;
+        const leftCoord =
+          stickyColumnsWrapperRef.current?.getBoundingClientRect().right ||
+          tableRef.current?.getBoundingClientRect().left ||
+          0;
+
+        if (rect.right > rightCoord && scrollBodyRef.current) {
+          scrollBodyRef.current.scrollBy({ left: Math.abs(rightCoord - rect.right) });
+        }
+        if (rect.left < leftCoord && scrollBodyRef.current) {
+          scrollBodyRef.current.scrollBy({ left: -Math.abs(leftCoord - rect.left) });
+        }
+      });
+
+      observer.observe();
+      return () => observer.unobserve();
+    }
+  }, [isAnyColumnDraggable, isAnyStickyColumnDraggable]);
+
+  React.useEffect(() => {
+    const stickyCols = stickyColumnsWrapperRef.current;
+    const normalCols = normalColumnsWrapperRef.current;
+
+    function handleDrop(item: HTMLElement, before: HTMLElement | null) {
+      const columnName = item?.dataset?.thColumn;
+      if (columnName) {
+        if (stickyCols?.contains(item) && before === null) {
+          // if we place sticky column at the end of stickyCols
+          columnDragCallback.current?.(
+            columnName,
+            (normalCols?.firstElementChild as HTMLElement)?.dataset?.thColumn ?? null,
+          );
+        } else {
+          columnDragCallback.current?.(columnName, before?.dataset?.thColumn ?? null);
+        }
+      }
+    }
+
+    if (normalCols && isAnyColumnDraggable) {
+      const observer = dragObserver(
+        [normalCols],
+        {
+          mirrorRef,
+          dimension,
+          direction: 'horizontal',
+          invalid: (el: HTMLElement) => {
+            return el.dataset.draggable == 'false';
+          },
+          accepts: (_, target: HTMLElement | null, source: HTMLElement | null, sibling: HTMLElement | null) => {
+            // column can be dragged only inside parent container
+            if (target !== source) return false;
+            // can not place column before CheckboxCell or ExnandCell
+            if (sibling?.dataset.droppable == 'false') return false;
+            return true;
+          },
+        },
+        handleDrop,
+      );
+      if (stickyCols && isAnyStickyColumnDraggable) observer.containers.push(stickyCols);
+      return () => {
+        observer.unobserve();
+      };
+    }
+  }, [isAnyColumnDraggable, isAnyStickyColumnDraggable, dimension]);
 
   const calcGroupCheckStatus = (groupInfo: GroupInfo) => {
     const indeterminate =
@@ -802,69 +875,6 @@ export const Table: React.FC<TableProps> = ({
       </HiddenHeader>
     );
   };
-
-  React.useEffect(() => {
-    columnDragCallback.current = onColumnDrag;
-  }, [onColumnDrag]);
-
-  React.useEffect(() => {
-    if (mirrorRef.current && (isAnyColumnDraggable || isAnyStickyColumnDraggable)) {
-      const observer = observeRect(mirrorRef.current, (rect: any) => {
-        const rightCoord = tableRef.current?.getBoundingClientRect().right || 0;
-        const leftCoord =
-          stickyColumnsWrapperRef.current?.getBoundingClientRect().right ||
-          tableRef.current?.getBoundingClientRect().left ||
-          0;
-
-        if (rect.right > rightCoord && scrollBodyRef.current) {
-          scrollBodyRef.current.scrollBy({ left: Math.abs(rightCoord - rect.right) });
-        }
-        if (rect.left < leftCoord && scrollBodyRef.current) {
-          scrollBodyRef.current.scrollBy({ left: -Math.abs(leftCoord - rect.left) });
-        }
-      });
-
-      observer.observe();
-      return () => observer.unobserve();
-    }
-  }, [isAnyColumnDraggable, isAnyStickyColumnDraggable]);
-
-  React.useEffect(() => {
-    const stickyCols = stickyColumnsWrapperRef.current;
-    const normalCols = normalColumnsWrapperRef.current;
-
-    function handleDrop(item: HTMLElement, before: HTMLElement | null) {
-      if (item?.dataset?.thColumn) {
-        columnDragCallback.current?.(item?.dataset?.thColumn, before?.dataset?.thColumn ?? null);
-      }
-    }
-
-    if (normalCols && isAnyColumnDraggable) {
-      const observer = dragObserver(
-        [normalCols],
-        {
-          mirrorRef,
-          dimension,
-          direction: 'horizontal',
-          invalid: (el: any) => {
-            return el.dataset.draggable == 'false';
-          },
-          accepts: (el: any, target: any, source: any, sibling: any) => {
-            // элемент можно перемещать только в рамках своего контейнера
-            if (target !== source) return false;
-            // нельзя вставить колонку перед колонкой с чекбоксом или стрелкой
-            if (sibling?.dataset.droppable == 'false') return false;
-            return true;
-          },
-        },
-        handleDrop,
-      );
-      if (stickyCols && isAnyStickyColumnDraggable) observer.containers.push(stickyCols);
-      return () => {
-        observer.unobserve();
-      };
-    }
-  }, [isAnyColumnDraggable, isAnyStickyColumnDraggable, dimension]);
 
   return (
     <TableContainer ref={tableRef} data-shadow={false} {...props} className={`table ${props.className || ''}`}>

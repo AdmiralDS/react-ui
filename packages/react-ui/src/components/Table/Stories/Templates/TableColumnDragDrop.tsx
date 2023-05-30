@@ -249,21 +249,21 @@ export const ColumnDragDropTemplate = (props: TableProps) => {
     setCols2(newCols);
   };
 
-  const handleColumnDrag = (columnName: string, nextColumn: string | null) => {
+  const handleColumnDrag = (columnName: string, nextColumnName: string | null) => {
     const columns = [...cols];
     const movedIndex = columns.findIndex((col) => col.name === columnName);
     const movedColumn = columns.splice(movedIndex, 1)[0];
-    const beforeIndex = nextColumn ? columns.findIndex((col) => col.name === nextColumn) : columns.length;
+    const beforeIndex = nextColumnName ? columns.findIndex((col) => col.name === nextColumnName) : columns.length;
     columns.splice(beforeIndex, 0, movedColumn);
 
     setCols(columns);
   };
 
-  const handleColumnDrag2 = (columnName: string, nextColumn: string | null) => {
+  const handleColumnDrag2 = (columnName: string, nextColumnName: string | null) => {
     const columns = [...cols2];
     const movedIndex = columns.findIndex((col) => col.name === columnName);
     const movedColumn = columns.splice(movedIndex, 1)[0];
-    const beforeIndex = nextColumn ? columns.findIndex((col) => col.name === nextColumn) : columns.length;
+    const beforeIndex = nextColumnName ? columns.findIndex((col) => col.name === nextColumnName) : columns.length;
     columns.splice(beforeIndex, 0, movedColumn);
 
     setCols2(columns);
