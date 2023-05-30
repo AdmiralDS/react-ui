@@ -1,4 +1,4 @@
-import type { Appearance, Dimension, StyledButtonProps } from './types';
+import type { ButtonAppearance, Dimension, StyledButtonProps } from './types';
 import type { ButtonHTMLAttributes, ReactNode } from 'react';
 import * as React from 'react';
 import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
@@ -10,11 +10,13 @@ import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { skeletonAnimationMixin } from '#src/components/skeleton/animation';
 import { IconContainer } from '#src/components/TextButton/commonMixin';
 
+export type { ButtonAppearance } from '#src/components/Button/types';
+
 type IconPlace = 'left' | 'right';
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   /** Внешний вид кнопки */
-  appearance?: Appearance;
+  appearance?: ButtonAppearance;
 
   /** Размер кнопки */
   dimension?: Dimension;

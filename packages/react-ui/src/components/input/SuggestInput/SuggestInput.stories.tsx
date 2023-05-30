@@ -7,11 +7,11 @@ import {
   SuggestInput,
   INPUT_DIMENSIONS_VALUES,
   INPUT_STATUS_VALUES,
+  getTextHighlightMeta,
   ALL_BORDER_RADIUS_VALUES,
 } from '@admiral-ds/react-ui';
 import type { Theme } from '@admiral-ds/react-ui';
 import { ReactComponent as SearchSolidSVG } from '@admiral-ds/icons/build/system/SearchSolid.svg';
-import { getTextHighlightMeta } from '#src/components/common/utils/getTextHighlightMeta';
 
 export default {
   title: 'Admiral-2.1/Input/SuggestInput',
