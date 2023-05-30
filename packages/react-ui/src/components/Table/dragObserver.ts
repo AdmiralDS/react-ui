@@ -12,7 +12,13 @@ type Options = {
   direction?: Direction;
 };
 
-export function dragObserver(initialContainers: HTMLElement[], options: Options, onDrop?: any) {
+export function dragObserver(
+  initialContainers: HTMLElement[],
+  options: Options,
+  onDrop?: (item: HTMLElement | null, reference: HTMLElement | null) => void,
+  onDragStart?: () => void,
+  onDragEnd?: () => void,
+) {
   let _mirror: HTMLElement | null; // mirror image
   let _source: HTMLElement | null; // source container
   let _item: HTMLElement | null; // item being dragged
@@ -148,6 +154,7 @@ export function dragObserver(initialContainers: HTMLElement[], options: Options,
     _initialSibling = _currentSibling = context.item.nextElementSibling;
 
     drake.dragging = true;
+    onDragStart?.();
   }
 
   function end() {
@@ -193,6 +200,7 @@ export function dragObserver(initialContainers: HTMLElement[], options: Options,
       delete _item.dataset.dragover;
     }
     drake.dragging = false;
+    onDragEnd?.();
     _source = _item = _initialSibling = _currentSibling = _lastDropTarget = null;
   }
 

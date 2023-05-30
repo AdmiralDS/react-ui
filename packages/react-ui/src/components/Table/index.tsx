@@ -334,6 +334,7 @@ export const Table: React.FC<TableProps> = ({
   const [tableWidth, setTableWidth] = React.useState(0);
   const [bodyHeight, setBodyHeight] = React.useState(0);
   const [scrollbar, setScrollbarSize] = React.useState(0);
+  const [columnDragging, setColumnDragging] = React.useState(false);
 
   const stickyColumns = [...columnList].filter((col) => col.sticky);
 
@@ -533,44 +534,55 @@ export const Table: React.FC<TableProps> = ({
   }, [onColumnDrag]);
 
   React.useEffect(() => {
-    if (mirrorRef.current && (isAnyColumnDraggable || isAnyStickyColumnDraggable)) {
+    if (mirrorRef.current && columnDragging && (isAnyColumnDraggable || isAnyStickyColumnDraggable)) {
       const observer = observeRect(mirrorRef.current, (rect: any) => {
         const rightCoord = tableRef.current?.getBoundingClientRect().right || 0;
         const leftCoord =
           stickyColumnsWrapperRef.current?.getBoundingClientRect().right ||
           tableRef.current?.getBoundingClientRect().left ||
           0;
+        if (scrollBodyRef.current) {
+          const scrollLeft = scrollBodyRef.current.scrollLeft;
+          const scrollWidth = scrollBodyRef.current.scrollWidth;
+          const offsetWidth = scrollBodyRef.current.offsetWidth;
 
-        if (rect.right > rightCoord && scrollBodyRef.current) {
-          scrollBodyRef.current.scrollBy({ left: Math.abs(rightCoord - rect.right) });
-        }
-        if (rect.left < leftCoord && scrollBodyRef.current) {
-          scrollBodyRef.current.scrollBy({ left: -Math.abs(leftCoord - rect.left) });
+          if (rect.right > rightCoord && scrollWidth > offsetWidth && scrollLeft + offsetWidth < scrollWidth) {
+            scrollBodyRef.current.scrollBy({ left: Math.abs(rightCoord - rect.right) });
+          }
+          if (rect.left < leftCoord && scrollLeft > 0) {
+            scrollBodyRef.current.scrollBy({ left: -Math.abs(leftCoord - rect.left) });
+          }
         }
       });
 
       observer.observe();
       return () => observer.unobserve();
     }
-  }, [isAnyColumnDraggable, isAnyStickyColumnDraggable]);
+  }, [isAnyColumnDraggable, isAnyStickyColumnDraggable, columnDragging]);
 
   React.useEffect(() => {
     const stickyCols = stickyColumnsWrapperRef.current;
     const normalCols = normalColumnsWrapperRef.current;
 
-    function handleDrop(item: HTMLElement, before: HTMLElement | null) {
+    function handleDrop(item: HTMLElement | null, before: HTMLElement | null) {
       const columnName = item?.dataset?.thColumn;
       if (columnName) {
         if (stickyCols?.contains(item) && before === null) {
           // if we place sticky column at the end of stickyCols
-          columnDragCallback.current?.(
-            columnName,
-            (normalCols?.firstElementChild as HTMLElement)?.dataset?.thColumn ?? null,
-          );
+          // columnDragCallback.current?.(
+          //   columnName,
+          //   (normalCols?.firstElementChild as HTMLElement)?.dataset?.thColumn ?? null,
+          // );
         } else {
-          columnDragCallback.current?.(columnName, before?.dataset?.thColumn ?? null);
+          // columnDragCallback.current?.(columnName, before?.dataset?.thColumn ?? null);
         }
       }
+    }
+    function handleDragStart() {
+      setColumnDragging(true);
+    }
+    function handleDragEnd() {
+      setColumnDragging(false);
     }
 
     if (normalCols && isAnyColumnDraggable) {
@@ -592,6 +604,8 @@ export const Table: React.FC<TableProps> = ({
           },
         },
         handleDrop,
+        handleDragStart,
+        handleDragEnd,
       );
       if (stickyCols && isAnyStickyColumnDraggable) observer.containers.push(stickyCols);
       return () => {

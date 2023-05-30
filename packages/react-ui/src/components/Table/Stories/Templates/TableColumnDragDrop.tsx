@@ -3,6 +3,10 @@ import { Table, T } from '@admiral-ds/react-ui';
 import type { TableProps, Column, TableRow } from '@admiral-ds/react-ui';
 import styled from 'styled-components';
 
+const Separator = styled.div`
+  height: 20px;
+`;
+
 const AmountCell = styled.div`
   text-overflow: ellipsis;
   overflow: hidden;
@@ -271,6 +275,8 @@ export const ColumnDragDropTemplate = (props: TableProps) => {
 
   return (
     <>
+      <T font="Body/Body 2 Long">Пример перемещения обычных столбцов в таблице</T>
+      <Separator />
       <Table
         {...props}
         columnList={cols}
@@ -279,6 +285,12 @@ export const ColumnDragDropTemplate = (props: TableProps) => {
         onColumnDrag={handleColumnDrag}
         displayRowSelectionColumn
       />
+      <Separator style={{ height: '40px' }} />
+      <T font="Body/Body 2 Long">
+        Пример перемещения как обычных, так и фиксированных столбцов в таблице. В данном случае фиксированными являются
+        первые два столбца.
+      </T>
+      <Separator />
       <Table
         {...props}
         columnList={cols2}
