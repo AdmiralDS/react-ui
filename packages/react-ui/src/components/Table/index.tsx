@@ -569,12 +569,12 @@ export const Table: React.FC<TableProps> = ({
       if (columnName) {
         if (stickyCols?.contains(item) && before === null) {
           // if we place sticky column at the end of stickyCols
-          // columnDragCallback.current?.(
-          //   columnName,
-          //   (normalCols?.firstElementChild as HTMLElement)?.dataset?.thColumn ?? null,
-          // );
+          columnDragCallback.current?.(
+            columnName,
+            (normalCols?.firstElementChild as HTMLElement)?.dataset?.thColumn ?? null,
+          );
         } else {
-          // columnDragCallback.current?.(columnName, before?.dataset?.thColumn ?? null);
+          columnDragCallback.current?.(columnName, before?.dataset?.thColumn ?? null);
         }
       }
     }

@@ -278,9 +278,14 @@ export function dragObserver(
     } else {
       return;
     }
-
     if (_item && ((reference === null && changed) || (reference !== _item && reference !== _item.nextElementSibling))) {
       _currentSibling = reference;
+
+      // fix bug when last item move from container and then turn back
+      if (_item.nextElementSibling === null && reference === null) {
+        return;
+      }
+
       onDrop?.(_item, reference);
     }
   }
@@ -340,7 +345,9 @@ export function dragObserver(
 
     function outside() {
       // slower, but able to figure out any position
-      [...dropTarget.children].forEach((el: Element) => {
+      const len = dropTarget.children.length;
+      for (let i = 0; i < len; i++) {
+        const el = dropTarget.children[i];
         const rect = el.getBoundingClientRect();
         if (horizontal && rect.left + rect.width / 2 > x) {
           return el;
@@ -348,7 +355,7 @@ export function dragObserver(
         if (!horizontal && rect.top + rect.height / 2 > y) {
           return el;
         }
-      });
+      }
       return null;
     }
 
