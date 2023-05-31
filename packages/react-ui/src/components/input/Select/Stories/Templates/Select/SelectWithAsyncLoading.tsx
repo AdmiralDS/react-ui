@@ -1,8 +1,7 @@
 import * as React from 'react';
-import { Option, Select } from '#src/components/input';
-import type { SelectProps } from '#src/components/input';
 import { useQuery } from '@tanstack/react-query';
-import { useDebounce } from '#src/components/common/hooks/useDebounce';
+import { Option, Select, useDebounce } from '@admiral-ds/react-ui';
+import type { SelectProps } from '@admiral-ds/react-ui';
 
 async function searchPeopleByName(name: string) {
   const response = await fetch(

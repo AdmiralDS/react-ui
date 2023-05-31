@@ -1,24 +1,32 @@
-import { INPUT_DIMENSIONS_VALUES, INPUT_STATUS_VALUES } from '#src/components/input';
-import { Modal, ModalButtonPanel, ModalContent, ModalTitle } from '#src/components/Modal';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import type { ChangeEvent } from 'react';
 import * as React from 'react';
-import { withDesign } from 'storybook-addon-designs';
-import { Option, OptionGroup, Select } from '#src/components/input/Select';
-import type { IOnCloseProps } from '../types';
-import { Button } from '#src/components/Button';
+import styled, { ThemeProvider } from 'styled-components';
+import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { useState } from '@storybook/addons';
-import { ThemeProvider } from 'styled-components';
-import type { Theme } from '#src/components/themes';
-import { MenuActionsPanel } from '#src/components/Menu/MenuActionsPanel';
-import { TextButton } from '#src/components/TextButton';
-import { Cuba } from '#src/icons/IconComponents-flags';
-import { CustomOptionWrapper } from '../styled';
-import type { RenderOptionProps } from '#src/components/Menu/MenuItem';
+import { withDesign } from 'storybook-addon-designs';
+
+import {
+  Option,
+  OptionGroup,
+  Select,
+  Modal,
+  ModalButtonPanel,
+  ModalContent,
+  ModalTitle,
+  MenuActionsPanel,
+  Button,
+  TextButton,
+  INPUT_DIMENSIONS_VALUES,
+  INPUT_STATUS_VALUES,
+  ALL_BORDER_RADIUS_VALUES,
+  MenuItem,
+} from '@admiral-ds/react-ui';
+import type { RenderOptionProps, Theme } from '@admiral-ds/react-ui';
+import { ReactComponent as Cuba } from '@admiral-ds/icons/build/flags/Cuba.svg';
+
 import { createOptions, formDataToObject, wait } from './utils';
 import { OPTIONS, OPTIONS_ASYNC, OPTIONS_SIMPLE } from './data';
 import { ExtraText, Form, FormValuesWrapper, Icon, StyledGroup, TextWrapper } from './styled';
-import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 import {
   CustomRenderMultipleValuesTemplate,
@@ -112,6 +120,12 @@ export default {
     },
   },
 } as ComponentMeta<typeof Select>;
+
+const CustomOptionWrapper = styled(MenuItem)`
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  white-space: pre-wrap;
+`;
 
 const SelectSimpleTemplate: ComponentStory<typeof Select> = (props) => {
   const cleanProps = cleanUpProps(props);
@@ -489,7 +503,8 @@ const TemplateMultiSelectCustomChip: ComponentStory<typeof Select> = (props) => 
   };
   const onOpenModal = () => setModalOpened(true);
 
-  const onChipClose = ({ value }: IOnCloseProps) => {
+  // TODO: use interface instead of any
+  const onChipClose = ({ value }: any) => {
     setValueToDelete(value);
     onOpenModal();
   };

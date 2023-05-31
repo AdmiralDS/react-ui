@@ -1,20 +1,20 @@
+import * as React from 'react';
 import { withDesign } from 'storybook-addon-designs';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import * as React from 'react';
 import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import styled, { ThemeProvider } from 'styled-components';
-import type { RenderFileInputProps } from '#src/components/input/FileInput';
-import { FileInput } from '#src/components/input/FileInput';
-import type { Theme } from '#src/components/themes';
-import type { FileAttributeProps } from '#src/components/input/FileInput/FileItem';
-import { FileItem } from '#src/components/input/FileInput/FileItem';
-import { fullWidthPositionMixin, halfWidthPositionMixin } from '#src/components/input/FileInput/style';
+import {
+  FileInput,
+  FileItem,
+  fullWidthPositionMixin,
+  halfWidthPositionMixin,
+  Button,
+  ALL_BORDER_RADIUS_VALUES,
+} from '@admiral-ds/react-ui';
+import type { FileAttributeProps, RenderFileInputProps, InputStatus, Theme } from '@admiral-ds/react-ui';
 import { ReactComponent as AttachFileOutline } from '@admiral-ds/icons/build/system/AttachFileOutline.svg';
 import { ReactComponent as CloseOutline } from '@admiral-ds/icons/build/service/CloseOutline.svg';
-import { Button } from '#src/components/Button';
 import { uid } from '#src/components/common/uid';
-import type { InputStatus } from '#src/components/input';
-import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
 
 const Separator = styled.div`
   height: 40px;

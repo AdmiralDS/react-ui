@@ -11,9 +11,10 @@ import {
   T,
   INPUT_DIMENSIONS_VALUES,
   ALL_BORDER_RADIUS_VALUES,
+  MenuItem,
 } from '@admiral-ds/react-ui';
 import type { RenderOptionProps } from '@admiral-ds/react-ui';
-import { CustomOptionWrapper } from '#src/components/input/Select/styled';
+
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 import { CustomOptionsTemplate, SimpleTemplate } from '#src/components/form/SelectField/Stories';
 import SimpleRaw from '!!raw-loader!./Stories/Simple';
@@ -172,6 +173,12 @@ const jump = keyframes`
 
 const animation = css`
   animation: ${jump} 0.35s ease-in-out;
+`;
+
+const CustomOptionWrapper = styled(MenuItem)`
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  white-space: pre-wrap;
 `;
 
 const Icon = styled.div<{ shouldAnimate?: boolean }>`
