@@ -1320,14 +1320,7 @@ const Template5: ComponentStory<typeof MenuButton> = (args) => {
     return innerState.map((item) => ({
       id: item.id,
       render: (options: RenderOptionProps) => (
-        <MenuItemWithCheckbox
-          key={item.id}
-          id={item.id}
-          checked={!!item.checked}
-          checkboxIsHovered={item.id === activeOption}
-          {...options}
-          dimension="s"
-        >
+        <MenuItemWithCheckbox key={item.id} id={item.id} checked={!!item.checked} {...options} dimension="s">
           {item.label}
         </MenuItemWithCheckbox>
       ),

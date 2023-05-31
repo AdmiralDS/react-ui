@@ -19,13 +19,7 @@ import {
   checkboxTreeToMap,
   MenuItemWithCheckbox,
 } from '@admiral-ds/react-ui';
-import type {
-  ItemProps,
-  RenderOptionProps,
-  Theme,
-  CheckboxGroupItemProps,
-  ItemWithCheckbox,
-} from '@admiral-ds/react-ui';
+import type { MenuModelItemProps, RenderOptionProps, Theme, CheckboxGroupItemProps } from '@admiral-ds/react-ui';
 import styled, { css, useTheme, ThemeProvider } from 'styled-components';
 import { withDesign } from 'storybook-addon-designs';
 import { ReactComponent as PlusOutline } from '@admiral-ds/icons/build/service/PlusOutline.svg';
@@ -36,6 +30,7 @@ import {
   MenuWithLockCycleScrollTemplate,
   VirtualScrollTemplate,
   IconsAndAdditionalTextTemplate,
+  CheckboxMenuTemplate,
 } from './Templates';
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
@@ -45,6 +40,7 @@ import MenuWithLockCycleScrollRaw from '!!raw-loader!./Templates/MenuWithLockCyc
 import VirtualScrollRaw from '!!raw-loader!./Templates/VirtualScroll';
 import CardGroupsRaw from '!!raw-loader!./Templates/CardGroups';
 import IconsAndAdditionalTextRaw from '!!raw-loader!./Templates/IconsAndAdditionalText';
+import CheckboxMenuRaw from '!!raw-loader!./Templates/CheckboxMenu';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -291,97 +287,6 @@ const CustomItemTemplate: ComponentStory<typeof Menu> = (args) => {
         <Menu {...args} model={model} defaultSelected={'4'} />
       </Wrapper>
     </>
-  );
-};
-
-const itemsWithCheckbox: Array<ItemWithCheckbox> = [
-  {
-    id: '1',
-    label: 'Option one',
-  },
-  {
-    id: '2',
-    label: 'Option two',
-  },
-  {
-    id: '3',
-    label: 'Option three',
-  },
-  {
-    id: '4',
-    label: 'Option four',
-  },
-  {
-    id: '5',
-    label: 'Option five',
-  },
-  {
-    id: '6',
-    label: 'Option six',
-  },
-  {
-    id: '7',
-    label: 'Option seven',
-  },
-];
-
-const MenuCheckboxTemplate: ComponentStory<typeof Menu> = (args) => {
-  const [innerState, setInnerState] = React.useState<Array<ItemWithCheckbox>>(itemsWithCheckbox.map((item) => item));
-  const [activeOption, setActiveOption] = React.useState<string | undefined>(innerState[0].id);
-  const [selectedOption, setSelectedOption] = React.useState<string | undefined>();
-
-  const model = React.useMemo(() => {
-    return innerState.map((item) => ({
-      id: item.id,
-      render: (options: RenderOptionProps) => (
-        <MenuItemWithCheckbox
-          key={item.id}
-          id={item.id}
-          dimension={args.dimension}
-          checked={!!item.checked}
-          checkboxIsHovered={item.id === activeOption}
-          {...options}
-        >
-          {item.label}
-        </MenuItemWithCheckbox>
-      ),
-    }));
-  }, [innerState, activeOption, args.dimension]);
-
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
-  const handleActivateItem = (id: string | undefined) => {
-    setActiveOption(id);
-  };
-
-  const handleSelectItem = (id: string) => {
-    console.log(`Option ${id} clicked`);
-    const updatedInnerState = [...innerState];
-    const itemToUpdate = updatedInnerState.find((item) => item.id === id);
-    if (itemToUpdate) {
-      itemToUpdate.checked = !itemToUpdate.checked;
-    }
-    setInnerState(updatedInnerState);
-    setSelectedOption(undefined);
-  };
-
-  return (
-    <ThemeProvider theme={swapBorder}>
-      <Wrapper style={{ width: 'fit-content' }}>
-        <Menu
-          {...args}
-          model={model}
-          active={activeOption}
-          onActivateItem={handleActivateItem}
-          selected={selectedOption}
-          onSelectItem={handleSelectItem}
-          disableSelectedOptionHighlight={true}
-        />
-      </Wrapper>
-    </ThemeProvider>
   );
 };
 
@@ -770,7 +675,7 @@ const MenuCheckboxGroupTemplate: ComponentStory<typeof Menu> = (args) => {
   };
 
   const model = React.useMemo(() => {
-    const menuModel: ItemProps[] = [];
+    const menuModel: MenuModelItemProps[] = [];
     map.forEach((item) => {
       const node = item.node;
       const hasChildren = !!node.children;
@@ -790,7 +695,6 @@ const MenuCheckboxGroupTemplate: ComponentStory<typeof Menu> = (args) => {
             disabled={node.disabled}
             checked={checked}
             indeterminate={indeterminate}
-            checkboxIsHovered={node.id === activeOption}
             level={item.level}
             {...options}
           >
@@ -837,6 +741,7 @@ const MenuCheckboxGroupTemplate: ComponentStory<typeof Menu> = (args) => {
 export const Simple = SimpleTemplate.bind({});
 Simple.storyName = 'Базовый пример';
 
+//<editor-fold desc="Пример с иконками и дополнительным текстом">
 const IconsStory: ComponentStory<typeof Menu> = (props) => (
   <IconsAndAdditionalTextTemplate model={[]} {...cleanUpProps(props)} />
 );
@@ -852,6 +757,7 @@ IconsExample.parameters = {
   },
 };
 IconsExample.storyName = 'Пример с иконками и дополнительным текстом';
+//</editor-fold>
 
 //<editor-fold desc="Пример с большим количеством item">
 const CardGroupsStory: ComponentStory<typeof Menu> = (props) => (
@@ -872,7 +778,25 @@ CardGroupsExample.storyName = 'Пример с группами карт';
 //</editor-fold>
 
 export const CustomItems = CustomItemTemplate.bind({});
-export const MenuCheckbox = MenuCheckboxTemplate.bind({});
+
+//<editor-fold desc="Меню с checkbox">
+const CheckboxMenuStory: ComponentStory<typeof Menu> = (props) => (
+  <CheckboxMenuTemplate model={[]} {...cleanUpProps(props)} />
+);
+export const CheckboxMenuExample = CheckboxMenuStory.bind({});
+CheckboxMenuExample.parameters = {
+  docs: {
+    source: {
+      code: CheckboxMenuRaw,
+    },
+    description: {
+      story: 'Пример меню с пунктами, содержащими Checkbox.',
+    },
+  },
+};
+CheckboxMenuExample.storyName = 'Меню с checkbox';
+//</editor-fold>
+
 export const MenuRadiobutton = MenuRadiobuttonTemplate.bind({});
 export const MenuTooltip = MenuTooltipTemplate.bind({});
 export const MultiLineMenu = MultiLineMenuTemplate.bind({});
@@ -940,7 +864,6 @@ VirtualScrollExample.storyName = 'Виртуальный скролл';
 //</editor-fold>
 
 CustomItems.storyName = 'Пример с кастомными пунктами меню';
-MenuCheckbox.storyName = 'Пример с Checkbox';
 MenuRadiobutton.storyName = 'Пример с Radiobutton';
 MenuTooltip.storyName = 'Пример с Tooltip';
 MultiLineMenu.storyName = 'Пример с многострочными пунктами';

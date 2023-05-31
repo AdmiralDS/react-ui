@@ -2,7 +2,7 @@ import type { HTMLAttributes } from 'react';
 import * as React from 'react';
 import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import styled, { css } from 'styled-components';
-import type { ItemProps } from '#src/components/Menu/MenuItem';
+import type { MenuModelItemProps } from '#src/components/Menu/MenuItem';
 import { keyboardKey } from '#src/components/common/keyboardKey';
 import { VirtualBody } from '#src/components/Menu/VirtualBody';
 import { refSetter } from '#src/components/common/utils/refSetter';
@@ -86,7 +86,7 @@ export interface MenuProps extends HTMLAttributes<HTMLDivElement> {
   /** Обработчик выбора item в меню */
   onSelectItem?: (id: string) => void;
   /** Модель данных, с рендер-пропсами*/
-  model: Array<ItemProps>;
+  model: Array<MenuModelItemProps>;
   /** Задает максимальную высоту меню */
   maxHeight?: string | number;
   /** Позволяет добавить панель сверху над выпадающим списком */
@@ -205,7 +205,7 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
       if (selectedId !== id && !multiSelection && !disableSelectedOptionHighlight) setSelectedState(id);
 
       const item = model.find((item) => item.id === id);
-      if (item && !item.disabled) onSelectItem?.(id);
+      if (item && !item.disabled && !item.readOnly) onSelectItem?.(id);
     };
 
     React.useEffect(() => {
@@ -240,16 +240,17 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
     }, [active, activeState]);
 
     const renderChildren = () => {
-      return model.map((item) =>
-        item.render({
-          hovered: activeId === item.id,
-          selected: selectedId === item.id,
+      return model.map(({ id, ...itemProps }) =>
+        itemProps.render({
+          hovered: activeId === id,
+          selected: selectedId === id,
           onHover: () => {
-            activateItem(item.disabled ? undefined : item.id);
+            activateItem(itemProps.disabled ? undefined : id);
           },
-          onClickItem: () => selectItem(item.id),
-          disabled: item.disabled,
+          onClickItem: () => selectItem(id),
+          disabled: itemProps.disabled,
           containerRef,
+          ...itemProps,
         }),
       );
     };
