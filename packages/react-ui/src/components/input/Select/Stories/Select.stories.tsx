@@ -1,6 +1,6 @@
 import type { ChangeEvent } from 'react';
 import * as React from 'react';
-import { ThemeProvider } from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { useState } from '@storybook/addons';
 import { withDesign } from 'storybook-addon-designs';
@@ -19,10 +19,9 @@ import {
   INPUT_DIMENSIONS_VALUES,
   INPUT_STATUS_VALUES,
   ALL_BORDER_RADIUS_VALUES,
+  MenuItem,
 } from '@admiral-ds/react-ui';
 import type { RenderOptionProps, Theme } from '@admiral-ds/react-ui';
-import type { IOnCloseProps } from '../types';
-import { CustomOptionWrapper } from '../styled';
 import { ReactComponent as Cuba } from '@admiral-ds/icons/build/flags/Cuba.svg';
 
 import { createOptions, formDataToObject, wait } from './utils';
@@ -121,6 +120,12 @@ export default {
     },
   },
 } as ComponentMeta<typeof Select>;
+
+const CustomOptionWrapper = styled(MenuItem)`
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  white-space: pre-wrap;
+`;
 
 const SelectSimpleTemplate: ComponentStory<typeof Select> = (props) => {
   const cleanProps = cleanUpProps(props);
@@ -498,7 +503,8 @@ const TemplateMultiSelectCustomChip: ComponentStory<typeof Select> = (props) => 
   };
   const onOpenModal = () => setModalOpened(true);
 
-  const onChipClose = ({ value }: IOnCloseProps) => {
+  // TODO: use interface instead of any
+  const onChipClose = ({ value }: any) => {
     setValueToDelete(value);
     onOpenModal();
   };

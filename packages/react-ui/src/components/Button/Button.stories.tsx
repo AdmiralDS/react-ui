@@ -3,10 +3,9 @@ import styled, { ThemeProvider } from 'styled-components';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import { ReactComponent as StarSolid } from '@admiral-ds/icons/build/system/StarSolid.svg';
-import type { ButtonProps, Theme } from '@admiral-ds/react-ui';
+import type { ButtonProps, ButtonAppearance, Theme } from '@admiral-ds/react-ui';
 import { Button, T, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 import { filterKeysWithUndefinedValues } from '#src/components/common/utils/filterKeysWithUndefinedValues';
-import type { Appearance } from '#src/components/Button/types';
 import { PaddingForButtonWithIconLeft, PaddingForButtonWithIconRight } from '#src/components/Button/dimensionMixin';
 
 const WrapperButton = styled.div`
@@ -111,7 +110,7 @@ export default {
   },
 } as ComponentMeta<typeof Button>;
 
-const ButtonContainer = styled.div<{ appearance?: Appearance }>`
+const ButtonContainer = styled.div<{ appearance?: ButtonAppearance }>`
   padding: 24px;
   position: relative;
   display: block;

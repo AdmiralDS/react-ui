@@ -14,7 +14,6 @@ import {
   ALL_BORDER_RADIUS_VALUES,
 } from '@admiral-ds/react-ui';
 import type { Theme } from '@admiral-ds/react-ui';
-import { hexToRgba } from '#src/components/common/utils/hexToRgba';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -334,7 +333,7 @@ const Template5: ComponentStory<typeof Modal> = (args) => {
 };
 
 const overlayStyles = css`
-  background-color: ${({ theme }) => hexToRgba(theme.color['Error/Error 20'], 0.6)};
+  background-color: ${({ theme }) => `${theme.color['Error/Error 20']}66`};
 `;
 
 const Template6: ComponentStory<typeof Modal> = (args) => {
