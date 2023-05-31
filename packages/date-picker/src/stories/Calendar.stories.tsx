@@ -6,7 +6,7 @@ import type { CalendarPropType, ViewScreenType } from '@admiral-ds/date-picker';
 import { Calendar } from '@admiral-ds/date-picker';
 import { css, ThemeProvider } from 'styled-components';
 import type { Theme } from '@admiral-ds/react-ui';
-import { startOfDay } from './date-utils';
+import { startOfDay } from '../components/Calendar/date-utils';
 
 export default {
   title: 'Admiral-2.1/Calendar2',
