@@ -66,7 +66,7 @@ export function RowWidthResizer({ name, disabled, dimension, columnMinWidth, onC
 
   const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
-    // for dragging work
+    // block column drag
     e.stopPropagation();
     setTaken(true);
     clientXRef.current = e.clientX;
