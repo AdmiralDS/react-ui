@@ -1,0 +1,337 @@
+import React, { useState } from 'react';
+import type { ComponentMeta, ComponentStory } from '@storybook/react';
+import { withDesign } from 'storybook-addon-designs';
+import { ThemeProvider } from 'styled-components';
+
+import type { CalendarPropType, ViewScreenType, Theme } from '#src/index';
+import { Calendar, T, ALL_BORDER_RADIUS_VALUES } from '#src/index';
+
+import {
+  SimpleWithSpecialDatesTemplate,
+  SimpleWithSetActiveViewWithoutDayTemplate,
+  SimpleWithSetActiveViewDateAfterChooseYearTemplate,
+  SimpleWithSetActiveViewDateTemplate,
+} from '#src/components/Calendar/Stories/Templates';
+import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+
+// Imports of text sources
+import SimpleWithSpecialDatesRaw from '!!raw-loader!./Templates/SimpleWithSpecialDates';
+import SimpleWithSetActiveViewWithoutDayRaw from '!!raw-loader!./Templates/SimpleWithSetActiveViewWithoutDay';
+import SimpleWithSetActiveViewDateAfterChooseYearRaw from '!!raw-loader!./Templates/SimpleWithSetActiveViewDateAfterChooseYear';
+import SimpleWithSetActiveViewDateRaw from '!!raw-loader!./Templates/SimpleWithSetActiveViewDate';
+
+export default {
+  title: 'Admiral-2.1/Calendar',
+  decorators: [withDesign],
+  component: Calendar,
+  parameters: {
+    docs: {
+      source: {
+        code: null,
+      },
+    },
+    design: {
+      type: 'figma',
+      url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A53407',
+    },
+  },
+  argTypes: {
+    range: {
+      control: { type: 'boolean' },
+    },
+    currentActiveViewImportant: {
+      control: { type: 'boolean' },
+    },
+    currentActiveView: {
+      options: ['YEAR', 'MONTH', 'DAY'],
+      control: { type: 'radio' },
+    },
+    validator: {
+      control: false,
+    },
+    tooltipContainer: {
+      control: false,
+    },
+    startDate: {
+      control: false,
+    },
+    selected: {
+      control: false,
+    },
+    endDate: {
+      control: false,
+    },
+    minDate: {
+      control: false,
+    },
+    maxDate: {
+      control: false,
+    },
+    themeBorderKind: {
+      options: ALL_BORDER_RADIUS_VALUES,
+      control: { type: 'radio' },
+    },
+  },
+} as ComponentMeta<typeof Calendar>;
+
+const Template1: ComponentStory<typeof Calendar> = (args) => {
+  const [selected, setSelected] = useState<Date | null>(null);
+  const [endDate, setEndDate] = useState<Date | null>(null);
+
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
+    return theme;
+  }
+
+  return args.range ? (
+    <ThemeProvider theme={swapBorder}>
+      <Calendar
+        {...args}
+        range
+        startDate={selected}
+        endDate={endDate}
+        onChange={(value: any) => {
+          setSelected(value[0]);
+          setEndDate(value[1]);
+        }}
+      />
+    </ThemeProvider>
+  ) : (
+    <ThemeProvider theme={swapBorder}>
+      <Calendar
+        {...args}
+        selected={selected}
+        onChange={(value: any) => {
+          setSelected(value);
+        }}
+      />
+    </ThemeProvider>
+  );
+};
+
+const Template2: ComponentStory<typeof Calendar> = (args: CalendarPropType) => {
+  const [startDate, setStartDate] = useState<Date | null>(null);
+  const [endDate, setEndDate] = useState<Date | null>(null);
+  return (
+    <>
+      <Calendar
+        {...args}
+        range
+        startDate={startDate}
+        endDate={endDate}
+        onChange={(value: any) => {
+          setStartDate(value[0]);
+          setEndDate(value[1]);
+        }}
+      />
+    </>
+  );
+};
+
+const Template3: ComponentStory<typeof Calendar> = ({ range, ...args }: CalendarPropType) => {
+  const [selected, setSelected] = useState<Date | null>(null);
+  const [endDate, setEndDate] = useState<Date | null>(null);
+  const tomorrow = new Date();
+  tomorrow.setDate(new Date().getDate() + 1);
+  return range ? (
+    <>
+      <Calendar
+        {...args}
+        range
+        startDate={selected}
+        endDate={endDate}
+        maxDate={tomorrow}
+        onChange={(value: any) => {
+          setSelected(value[0]);
+          setEndDate(value[1]);
+        }}
+      />
+    </>
+  ) : (
+    <>
+      <Calendar
+        {...args}
+        maxDate={tomorrow}
+        selected={selected}
+        onChange={(value: any) => {
+          setSelected(value);
+        }}
+      />
+    </>
+  );
+};
+
+const Template4: ComponentStory<typeof Calendar> = ({ range, ...args }: CalendarPropType) => {
+  const [selected, setSelected] = useState<Date | null>(null);
+  const [endDate, setEndDate] = useState<Date | null>(null);
+  const isWeekday = (date: Date) => {
+    const day = date.getDay();
+    return day !== 0 && day !== 6;
+  };
+  return range ? (
+    <>
+      <Calendar
+        {...args}
+        range
+        startDate={selected}
+        endDate={endDate}
+        filterDate={isWeekday}
+        onChange={(value: any) => {
+          setSelected(value[0]);
+          setEndDate(value[1]);
+        }}
+      />
+    </>
+  ) : (
+    <>
+      <Calendar
+        {...args}
+        filterDate={isWeekday}
+        selected={selected}
+        onChange={(value: any) => {
+          setSelected(value);
+        }}
+      />
+    </>
+  );
+};
+
+const Template5: ComponentStory<typeof Calendar> = ({ range, ...args }: CalendarPropType) => {
+  const [selected, setSelected] = useState<Date | null>(null);
+
+  return (
+    <>
+      <T font="Body/Body 1 Long" as="div" style={{ marginBottom: '25px' }}>
+        Коллбеки (смотри в консоль)
+      </T>
+      <T font="Body/Body 2 Long" as="div">
+        Открытие экранов выбора года и месяца `(onViewEnter, onViewLeave)`
+      </T>
+      <T font="Body/Body 2 Long" as="div" style={{ marginBottom: '25px' }}>
+        Изменение даты после выбора года или месяца по стрелкам `(onIncreaseDecreaseDate)`
+      </T>
+
+      <Calendar
+        {...args}
+        selected={selected}
+        onChange={(value: any) => {
+          setSelected(value);
+        }}
+        onDateIncreaseDecrease={(value: any) => {
+          console.log('onIncreaseDecreaseDate', value);
+        }}
+        onViewEnter={(view: ViewScreenType) => {
+          console.log('onViewEnter', view);
+        }}
+        onViewLeave={(view: ViewScreenType) => {
+          console.log('onViewLeave', view);
+        }}
+      />
+    </>
+  );
+};
+
+export const CalendarSimple = Template1.bind({});
+CalendarSimple.args = {};
+CalendarSimple.storyName = 'Simple.';
+
+export const Range = Template2.bind({});
+Range.args = {};
+Range.storyName = 'Range.';
+
+export const SimpleWithMaxDate = Template3.bind({});
+SimpleWithMaxDate.args = {};
+SimpleWithMaxDate.storyName = 'maxDate.';
+
+export const SimpleWithFilterDate = Template4.bind({});
+SimpleWithFilterDate.args = {};
+SimpleWithFilterDate.storyName = 'FilterDate.';
+
+export const SimpleWithChangeViewDate = Template5.bind({});
+SimpleWithChangeViewDate.args = {};
+SimpleWithChangeViewDate.storyName = 'Callback';
+
+//<editor-fold desc="Пример с переключением экранов выбора дат">
+const SimpleWithSetActiveViewDateStory: ComponentStory<typeof Calendar> = ({ range, ...args }: CalendarPropType) => (
+  <SimpleWithSetActiveViewDateTemplate onChange={() => undefined} {...cleanUpProps(args)} />
+);
+
+export const SimpleWithSetActiveViewDate = SimpleWithSetActiveViewDateStory.bind({});
+SimpleWithSetActiveViewDate.parameters = {
+  docs: {
+    source: {
+      code: SimpleWithSetActiveViewDateRaw,
+    },
+    description: {
+      story: 'Пример с переключением экранов выбора дат.',
+    },
+  },
+};
+SimpleWithSetActiveViewDate.args = {};
+SimpleWithSetActiveViewDate.storyName = 'Active ViewDate screen';
+//</editor-fold>
+
+//<editor-fold desc="Пример с выбором только месяца/года">
+const SimpleWithSetActiveViewDateAfterChooseYearStory: ComponentStory<typeof Calendar> = ({
+  range,
+  ...args
+}: CalendarPropType) => (
+  <SimpleWithSetActiveViewDateAfterChooseYearTemplate onChange={() => undefined} {...cleanUpProps(args)} />
+);
+
+export const SimpleWithSetActiveViewDateAfterChooseYear = SimpleWithSetActiveViewDateAfterChooseYearStory.bind({});
+SimpleWithSetActiveViewDateAfterChooseYear.parameters = {
+  docs: {
+    source: {
+      code: SimpleWithSetActiveViewDateAfterChooseYearRaw,
+    },
+    description: {
+      story: 'Пример с открытием экрана выбора месяца после выбора года.',
+    },
+  },
+};
+SimpleWithSetActiveViewDateAfterChooseYear.args = {};
+SimpleWithSetActiveViewDateAfterChooseYear.storyName = 'ViewDate screen after choose year';
+//</editor-fold>
+
+//<editor-fold desc="Пример с выбором только месяца/года">
+const SimpleWithSetActiveViewWithoutDayStory: ComponentStory<typeof Calendar> = ({
+  range,
+  ...args
+}: CalendarPropType) => (
+  <SimpleWithSetActiveViewWithoutDayTemplate onChange={() => undefined} {...cleanUpProps(args)} />
+);
+
+export const SimpleWithSetActiveViewWithoutDay = SimpleWithSetActiveViewWithoutDayStory.bind({});
+SimpleWithSetActiveViewWithoutDay.parameters = {
+  docs: {
+    source: {
+      code: SimpleWithSetActiveViewWithoutDayRaw,
+    },
+    description: {
+      story: 'Пример с выбором только месяца/года.',
+    },
+  },
+};
+SimpleWithSetActiveViewWithoutDay.args = {};
+SimpleWithSetActiveViewWithoutDay.storyName = 'ViewDate year/month';
+//</editor-fold>
+
+//<editor-fold desc="Пример с подсветкой выходных, праздничный и специальных дат">
+const SimpleWithSpecialDatesStory: ComponentStory<typeof Calendar> = (args) => (
+  <SimpleWithSpecialDatesTemplate onChange={() => undefined} {...cleanUpProps(args)} />
+);
+export const SimpleWithSpecialDates = SimpleWithSpecialDatesStory.bind({});
+SimpleWithSpecialDates.parameters = {
+  docs: {
+    source: {
+      code: SimpleWithSpecialDatesRaw,
+    },
+    description: {
+      story: 'Пример с подсветкой выходных, праздничный и специальных дат.',
+    },
+  },
+};
+SimpleWithSpecialDates.args = {};
+SimpleWithSpecialDates.storyName = 'Highlight special dates';
+//</editor-fold>
