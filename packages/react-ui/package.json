@@ -28,7 +28,6 @@
   },
   "types": "./dist/src/index.d.ts",
   "scripts": {
-    "postinstall": "npm run build",
     "build": "vite build && ttsc --emitDeclarationOnly",
     "test": "jest",
     "test:update": "jest -u",
