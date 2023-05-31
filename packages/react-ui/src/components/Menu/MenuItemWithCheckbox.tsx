@@ -77,54 +77,32 @@ const PositionedCheckbox = styled(Checkbox)`
 `;
 
 export interface MenuItemWithCheckboxProps extends MenuItemProps {
-  id: string;
   /** Значение Checkbox */
   checked?: boolean;
   /** Неопределенное состояние Checkbox */
   indeterminate?: boolean;
+  /** @deprecated will be removed */
   /** Состояние hovered для Checkbox */
   checkboxIsHovered?: boolean;
   /** Ref на Checkbox */
   checkboxRef?: React.RefObject<HTMLInputElement>;
   /** Сдвиг внутри MenuItem при наличии нескольких уровней (например при использовании составной группы чекбоксов внутри Menu) */
   level?: number;
-  /** Текст для Checkbox */
-  children?: React.ReactNode;
 }
-
 export const MenuItemWithCheckbox = React.forwardRef<HTMLDivElement, MenuItemWithCheckboxProps>(
-  (
-    {
-      id,
-      checked = false,
-      indeterminate = false,
-      checkboxIsHovered,
-      checkboxRef,
-      level = 0,
-      children,
-      disabled = false,
-      dimension = 'l',
-      ...props
-    },
-    ref,
-  ) => {
+  ({ checked, indeterminate, checkboxRef, level = 0, children, dimension = 'l', ...props }, ref) => {
     return (
-      <CheckboxGroupMenuItem
-        dimension={dimension || 'l'}
-        level={level}
-        key={id}
-        disabled={disabled}
-        ref={ref}
-        {...props}
-      >
+      <CheckboxGroupMenuItem dimension={dimension || 'l'} level={level} ref={ref} {...props}>
         <OptionContent dimension={dimension || 'l'}>
           <PositionedCheckbox
             dimension={dimension === 's' ? 's' : 'm'}
             checked={checked}
             indeterminate={indeterminate}
-            hovered={checkboxIsHovered}
+            hovered={props.hovered}
+            disabled={props.disabled}
+            readOnly={props.readOnly}
             ref={checkboxRef}
-            onChange={(e) => (e.target.checked = !checked)}
+            onChange={() => false}
           />
           {children}
         </OptionContent>

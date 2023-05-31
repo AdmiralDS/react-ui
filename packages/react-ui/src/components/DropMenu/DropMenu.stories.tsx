@@ -547,7 +547,6 @@ const TemplateWithCheckbox: ComponentStory<typeof DropMenu> = (args) => {
           id={item.id}
           dimension={args.dimension}
           checked={!!item.checked}
-          checkboxIsHovered={item.id === activeOption}
           {...options}
         >
           {item.label}
