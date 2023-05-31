@@ -310,17 +310,6 @@ const Template7: ComponentStory<typeof Calendar> = ({ range, ...args }: Calendar
   );
 };
 
-const SimpleWithSetActiveViewWithoutDayStory: ComponentStory<typeof Calendar> = ({
-  range,
-  ...args
-}: CalendarPropType) => (
-  <SimpleWithSetActiveViewWithoutDayTemplate onChange={() => undefined} {...cleanUpProps(args)} />
-);
-
-const SimpleWithSpecialDatesStory: ComponentStory<typeof Calendar> = (args) => (
-  <SimpleWithSpecialDatesTemplate onChange={() => undefined} {...cleanUpProps(args)} />
-);
-
 export const CalendarSimple = Template1.bind({});
 CalendarSimple.args = {};
 CalendarSimple.storyName = 'Simple.';
@@ -349,6 +338,14 @@ export const SimpleWithSetActiveViewDateAfterChooseYear = Template7.bind({});
 SimpleWithSetActiveViewDateAfterChooseYear.args = {};
 SimpleWithSetActiveViewDateAfterChooseYear.storyName = 'ViewDate screen after choose year';
 
+//<editor-fold desc="Пример с выбором только месяца/года">
+const SimpleWithSetActiveViewWithoutDayStory: ComponentStory<typeof Calendar> = ({
+  range,
+  ...args
+}: CalendarPropType) => (
+  <SimpleWithSetActiveViewWithoutDayTemplate onChange={() => undefined} {...cleanUpProps(args)} />
+);
+
 export const SimpleWithSetActiveViewWithoutDay = SimpleWithSetActiveViewWithoutDayStory.bind({});
 SimpleWithSetActiveViewWithoutDay.parameters = {
   docs: {
@@ -362,7 +359,12 @@ SimpleWithSetActiveViewWithoutDay.parameters = {
 };
 SimpleWithSetActiveViewWithoutDay.args = {};
 SimpleWithSetActiveViewWithoutDay.storyName = 'ViewDate year/month';
+//</editor-fold>
 
+//<editor-fold desc="Пример с подсветкой выходных, праздничный и специальных дат">
+const SimpleWithSpecialDatesStory: ComponentStory<typeof Calendar> = (args) => (
+  <SimpleWithSpecialDatesTemplate onChange={() => undefined} {...cleanUpProps(args)} />
+);
 export const SimpleWithSpecialDates = SimpleWithSpecialDatesStory.bind({});
 SimpleWithSpecialDates.parameters = {
   docs: {
@@ -376,3 +378,4 @@ SimpleWithSpecialDates.parameters = {
 };
 SimpleWithSpecialDates.args = {};
 SimpleWithSpecialDates.storyName = 'Highlight special dates';
+//</editor-fold>
