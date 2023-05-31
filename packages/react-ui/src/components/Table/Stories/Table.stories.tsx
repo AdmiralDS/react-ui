@@ -24,6 +24,7 @@ import {
   rowListWithCustomRenderGroup,
 } from './data';
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+
 import {
   VirtualScrollTemplate,
   OverflowMenuTemplate,
@@ -31,8 +32,8 @@ import {
   ExtraTextTemplate,
   ExpandTemplate,
   ZebraTemplate,
+  ColumnDragDropTemplate,
 } from './Templates';
-
 // Imports of text sources
 import VirtualScrollRaw from '!!raw-loader!./Templates/TableVirtualScroll';
 import OverflowMenuRaw from '!!raw-loader!./Templates/TableOverflowMenu';
@@ -40,6 +41,7 @@ import GroupRaw from '!!raw-loader!./Templates/TableGroup';
 import ExtraTextRaw from '!!raw-loader!./Templates/TableExtraText';
 import ExpandRaw from '!!raw-loader!./Templates/TableExpand';
 import ZebraRaw from '!!raw-loader!./Templates/TableZebra';
+import ColumnDragDropRaw from '!!raw-loader!./Templates/TableColumnDragDrop';
 
 const Separator = styled.div`
   height: 20px;
@@ -948,4 +950,38 @@ CustomRenderGroupTitle.args = {
   columnList,
   displayRowExpansionColumn: true,
 };
-CustomRenderGroupTitle.storyName = 'Пример кастомизации заголовка группы';
+CustomRenderGroupTitle.storyName = 'Table. Пример кастомизации заголовка группы';
+
+//<editor-fold desc="Пример с drag and drop столбцов">
+const ColumnDragDropStory: ComponentStory<typeof Table> = (props) => (
+  <ColumnDragDropTemplate columnList={[]} rowList={[]} {...cleanUpProps(props)} />
+);
+export const DraggableColumnsExample = ColumnDragDropStory.bind({});
+DraggableColumnsExample.parameters = {
+  docs: {
+    source: {
+      code: ColumnDragDropRaw,
+    },
+    description: {
+      story: `Функция изменения порядка (перемещения) столбцов является опциональной. По умолчанию столбцы таблицы не подлежат перемещению.
+      Для того чтобы столбец можно было перемещать, необходимо задать данному столбцу параметр draggable равный true.\n\nДля перемещения 
+      столбца следует “зажать” левую кнопку мыши на нем, после чего над столбцом появится миниатюра заголовка, содержащая текст заголовка.
+      Передвигая данную миниатюру по горизонтали в пределах области заголовков таблицы, можно изменить местоположение интересующего столбца.
+      Если перемещаемая миниатюра выходит за границы области заголовков таблицы наполовину своей высоты, то перемещение становится невозможным, 
+      курсор принимает соответствующий вид. Если в таблице есть фиксированные столбцы, то перемещение фиксированных столбцов происходит только между собой. 
+      Соответственно, то же самое применимо к обычным столбцам. Менять между собой местами фиксированные и нефиксированные столбцы нельзя. 
+      Поэтому, если пользователь будет перемещать обычный столбец и зайдет курсором на область с фиксированными столбцами, 
+      то перемещение столбца станет невозможным и курсор изменит свой вид.\n\nПроцесс перемещения столбцов контролируется пользователем. 
+      Поэтому для таблицы должен быть задан колбек onColumnDrag, который срабатывает при каждой попытке изменить местоположение столбца таблицы.
+      Данный колбек имеет два параметра: columnName - name столбца, который сейчас перемещается, nextColumnName - name столбца, 
+      перед которым пытается встать передвигаемый столбец. Параметр nextColumnName может быть также равен null, если столбец пытается встать в самый конец таблицы.
+      При срабатывании колбека onColumnDrag, пользователь должен будет соответственно обновить список столбцов (columnList) для таблицы.\n\nМиниатюра заголовка, 
+      возникающая при перемещении колонки, отрисовывается по умолчанию через портал в document.body. Если пользователь хочет изменить document.body
+      на свой элемент, то пользователю следует\n\n1)убедиться, что компоненты библиотеки @admiral-ds/react-ui (включая таблицу) 
+      обернуты компонентом DropdownProvider\n\n2) задать для компонента DropdownProvider параметр rootRef, где rootRef - это реф 
+      на dom-элемент, внутри которого отрендерится миниатюра заголовка.`,
+    },
+  },
+};
+DraggableColumnsExample.storyName = 'Table. Drag and Drop столбцов';
+//</editor-fold>
