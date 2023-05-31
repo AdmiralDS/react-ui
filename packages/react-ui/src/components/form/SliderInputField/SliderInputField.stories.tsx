@@ -1,12 +1,10 @@
-import { SliderInputField } from '#src/components/form/SliderInputField';
-import { INPUT_DIMENSIONS_VALUES } from '#src/components/input';
 import * as React from 'react';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
-import type { Theme } from '#src/components/themes';
 import { ThemeProvider } from 'styled-components';
+import { SliderInputField, INPUT_DIMENSIONS_VALUES, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
+import type { Theme } from '@admiral-ds/react-ui';
 import { DataAttributesDescription } from '#src/components/form/common';
-import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
 
 export default {
   title: 'Admiral-2.1/Form Field/SliderInputField',

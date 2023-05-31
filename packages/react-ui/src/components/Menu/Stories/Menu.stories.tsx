@@ -20,7 +20,7 @@ import {
   MenuItemWithCheckbox,
 } from '@admiral-ds/react-ui';
 import type { MenuModelItemProps, RenderOptionProps, Theme, CheckboxGroupItemProps } from '@admiral-ds/react-ui';
-import styled, { css, ThemeContext, ThemeProvider } from 'styled-components';
+import styled, { css, useTheme, ThemeProvider } from 'styled-components';
 import { withDesign } from 'storybook-addon-designs';
 import { ReactComponent as PlusOutline } from '@admiral-ds/icons/build/service/PlusOutline.svg';
 import { uid } from '#src/components/common/uid';
@@ -34,8 +34,7 @@ import {
 } from './Templates';
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
-// Imports of text sorrces
-/* eslint-disable import/default */
+// Imports of text sources
 import LargeNumberOfItemsRaw from '!!raw-loader!./Templates/LargeNumberOfItems';
 import MenuWithLockCycleScrollRaw from '!!raw-loader!./Templates/MenuWithLockCycleScroll';
 import VirtualScrollRaw from '!!raw-loader!./Templates/VirtualScroll';
@@ -484,7 +483,7 @@ const MenuActionsTwoButtonsTemplate: ComponentStory<typeof Menu> = (props) => {
 
 const MenuActionsAddUserValueTemplate: ComponentStory<typeof Menu> = (props) => {
   const initialButtonText = 'Добавить';
-  const theme = React.useContext(ThemeContext) || LIGHT_THEME;
+  const theme = useTheme() || LIGHT_THEME;
 
   const [options, setOptions] = React.useState([...STORY_ITEMS]);
   const [inputValue, setInputValue] = React.useState<string>('');

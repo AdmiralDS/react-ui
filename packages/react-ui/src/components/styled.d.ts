@@ -1,10 +1,5 @@
 import 'styled-components';
-import type { Theme } from './themes/index';
-
-interface IPalette {
-  main: string;
-  contrastText: string;
-}
+import type { Theme } from './themes';
 
 declare module 'styled-components' {
   export interface DefaultTheme extends Theme {

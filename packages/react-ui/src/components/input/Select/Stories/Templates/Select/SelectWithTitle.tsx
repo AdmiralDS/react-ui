@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { Option, Select } from '#src/components/input';
-import type { SelectProps } from '#src/components/input';
+import { Option, Select } from '@admiral-ds/react-ui';
+import type { SelectProps } from '@admiral-ds/react-ui';
 
 export const SelectWithTitleTemplate = (props: SelectProps) => {
   const [selectValue, setSelectValue] = React.useState(props.value ? String(props.value) : '');

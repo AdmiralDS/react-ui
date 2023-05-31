@@ -21,6 +21,7 @@ module.exports = {
         prefer: 'type-imports',
       },
     ],
+    'import/default': 0,
   },
   settings: {
     'import/parsers': {

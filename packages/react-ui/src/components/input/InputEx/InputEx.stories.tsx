@@ -1,17 +1,16 @@
 import type { ChangeEvent } from 'react';
 import * as React from 'react';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import type { RenderProps } from './index';
-import { InputEx } from './index';
 import { withDesign } from 'storybook-addon-designs';
-import { INPUT_DIMENSIONS_VALUES, INPUT_STATUS_VALUES } from '#src/components/input/types';
-import type { Theme } from '#src/components/themes';
 import styled, { css, ThemeProvider } from 'styled-components';
-import type { ValueType } from './ValueType';
-import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
-import type { RenderPropsType } from '#src/components/input/InputEx/SuffixSelect';
-import type { MenuItemProps } from '#src/components/Menu/MenuItem';
-import { MenuItem } from '#src/components/Menu/MenuItem';
+import {
+  InputEx,
+  MenuItem,
+  INPUT_DIMENSIONS_VALUES,
+  INPUT_STATUS_VALUES,
+  ALL_BORDER_RADIUS_VALUES,
+} from '@admiral-ds/react-ui';
+import type { RenderProps, RenderPropsType, ValueType, MenuItemProps, Theme } from '@admiral-ds/react-ui';
 
 export default {
   title: 'Admiral-2.1/Input/InputEx',

@@ -1,9 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { MenuItem } from '#src/components/Menu/MenuItem';
-import { Option, Select } from '#src/components/input';
-import type { SelectProps } from '#src/components/input';
-import type { RenderOptionProps } from '#src/components/Menu/MenuItem';
+import { Option, Select, MenuItem } from '@admiral-ds/react-ui';
+import type { SelectProps, RenderOptionProps } from '@admiral-ds/react-ui';
 
 const InvisibleItem = styled(MenuItem)`
   height: 1px;

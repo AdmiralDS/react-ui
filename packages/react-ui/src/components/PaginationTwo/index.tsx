@@ -1,5 +1,5 @@
 import * as React from 'react';
-import styled, { ThemeContext } from 'styled-components';
+import styled, { useTheme } from 'styled-components';
 import { LIGHT_THEME } from '#src/components/themes';
 import { typography } from '#src/components/Typography';
 import { uid } from '#src/components/common/uid';
@@ -88,7 +88,7 @@ export const PaginationTwo: React.FC<PaginationTwoProps> = ({
   locale,
   ...props
 }) => {
-  const theme = React.useContext(ThemeContext) || LIGHT_THEME;
+  const theme = useTheme() || LIGHT_THEME;
   const itemRangeText = locale?.itemRangeText || theme.locales[theme.currentLocale].paginationTwo.itemRangeText;
   const placeholder = locale?.inputPlaceholder || theme.locales[theme.currentLocale].paginationTwo.inputPlaceholder;
 

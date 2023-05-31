@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { uid } from '#src/components/common/uid';
 import { LIGHT_THEME } from '#src/components/themes';
-import { ThemeContext } from 'styled-components';
+import { useTheme } from 'styled-components';
 import type { AvatarProps } from '#src/components/Avatar';
 
 type AvatarSVGProps = {
@@ -49,7 +49,7 @@ export const AvatarSVG: React.FC<AvatarSVGProps> = ({
   group = false,
   svgMaskId,
 }) => {
-  const theme = React.useContext(ThemeContext) || LIGHT_THEME;
+  const theme = useTheme() || LIGHT_THEME;
   const id = svgMaskId || uid();
   const useId = `url(#${id})`;
 

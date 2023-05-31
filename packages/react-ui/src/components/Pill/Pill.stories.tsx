@@ -2,21 +2,23 @@ import * as React from 'react';
 import { withDesign } from 'storybook-addon-designs';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import styled, { css, ThemeProvider } from 'styled-components';
-import type { Theme } from '#src/components/themes';
-import type { Color, Shape } from '#src/components/themes/common';
-import { smallGroupBorderRadius, ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
-import { DropMenu } from '#src/components/DropMenu';
-import type { RenderOptionProps } from '#src/components/Menu/MenuItem';
-import { MenuItem } from '#src/components/Menu/MenuItem';
-import { TooltipHoc } from '#src/components/TooltipHOC';
-import { Tooltip } from '#src/components/Tooltip';
-import { checkOverflow } from '#src/components/common/utils/checkOverflow';
-import { Pill, Pills } from '#src/components/Pill/index';
+import {
+  Pill,
+  Pills,
+  DropMenu,
+  MenuItem,
+  TooltipHoc,
+  Tooltip,
+  checkOverflow,
+  refSetter,
+  smallGroupBorderRadius,
+  ALL_BORDER_RADIUS_VALUES,
+} from '@admiral-ds/react-ui';
+import type { Color, Shape, Theme, RenderOptionProps } from '@admiral-ds/react-ui';
 import { ReactComponent as HeartOutline } from '@admiral-ds/icons/build/category/HeartOutline.svg';
 import { ReactComponent as AlertOutline } from '@admiral-ds/icons/build/category/AlertOutline.svg';
 import { ReactComponent as BonusOutline } from '@admiral-ds/icons/build/category/BonusOutline.svg';
 import { ReactComponent as BurnSolid } from '@admiral-ds/icons/build/category/BurnSolid.svg';
-import { refSetter } from '../common/utils/refSetter';
 
 export default {
   title: 'Admiral-2.1/Pills',
