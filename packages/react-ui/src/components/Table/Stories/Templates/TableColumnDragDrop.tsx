@@ -210,14 +210,13 @@ const columnList2: Column[] = [
     title: 'Тип сделки',
     draggable: true,
     sticky: true,
-    width: 300,
   },
   {
     name: 'transfer_date',
     title: 'Дата сделки',
     draggable: true,
     sticky: true,
-    width: 200,
+    width: 150,
   },
   {
     name: 'transfer_amount',
@@ -229,13 +228,11 @@ const columnList2: Column[] = [
     name: 'currency',
     title: 'Валюта',
     draggable: true,
-    width: 150,
   },
   {
     name: 'rate',
     title: 'Ставка',
     draggable: true,
-    width: 150,
   },
 ];
 
