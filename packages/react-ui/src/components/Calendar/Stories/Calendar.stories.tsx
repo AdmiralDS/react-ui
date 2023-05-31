@@ -6,11 +6,15 @@ import { ThemeProvider } from 'styled-components';
 import type { CalendarPropType, ViewScreenType, Theme } from '#src/index';
 import { Calendar, Button, T, ALL_BORDER_RADIUS_VALUES } from '#src/index';
 
-import { SimpleWithSpecialDatesTemplate } from '#src/components/Calendar/Stories/Templates';
+import {
+  SimpleWithSpecialDatesTemplate,
+  SimpleWithSetActiveViewWithoutDayTemplate,
+} from '#src/components/Calendar/Stories/Templates';
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
 import SimpleWithSpecialDatesRaw from '!!raw-loader!./Templates/SimpleWithSpecialDates';
+import SimpleWithSetActiveViewWithoutDayRaw from '!!raw-loader!./Templates/SimpleWithSetActiveViewWithoutDay';
 
 export default {
   title: 'Admiral-2.1/Calendar',
@@ -306,47 +310,12 @@ const Template7: ComponentStory<typeof Calendar> = ({ range, ...args }: Calendar
   );
 };
 
-const Template8: ComponentStory<typeof Calendar> = ({ range, ...args }: CalendarPropType) => {
-  const [selected, setSelected] = useState<Date | null>(null);
-  const [currentActiveView, setCurrentActiveView] = useState<ViewScreenType | null>('MONTH');
-
-  return (
-    <>
-      <T font="Body/Body 1 Long" as="div" style={{ marginBottom: '25px' }}>
-        Показываем только экраны выбора месяца и года
-      </T>
-      <T font="Body/Body 2 Long" as="div" style={{ marginBottom: '25px' }}>
-        Если выставлен currentActiveViewImportant, то необходимо самому управлять открытием экранов
-      </T>
-      <div>
-        <Button onClick={() => setSelected(new Date())}>set Date now</Button>
-      </div>
-      <br />
-      <Calendar
-        {...args}
-        selected={selected}
-        currentActiveView={currentActiveView}
-        currentActiveViewImportant={true}
-        onDateIncreaseDecrease={(date: any) => {
-          console.log(date, 'onIncreaseDecreaseDate');
-          setSelected(date);
-        }}
-        onChange={(value: any) => {
-          setSelected(value);
-          console.log(value, 'onChange');
-        }}
-        onViewMonthSelect={() => {
-          console.log('onViewMonthSelect');
-          setCurrentActiveView('MONTH');
-        }}
-        onViewYearSelect={() => {
-          console.log('onViewYearSelect');
-          setCurrentActiveView('YEAR');
-        }}
-      />
-    </>
-  );
-};
+const SimpleWithSetActiveViewWithoutDayStory: ComponentStory<typeof Calendar> = ({
+  range,
+  ...args
+}: CalendarPropType) => (
+  <SimpleWithSetActiveViewWithoutDayTemplate onChange={() => undefined} {...cleanUpProps(args)} />
+);
 
 const SimpleWithSpecialDatesStory: ComponentStory<typeof Calendar> = (args) => (
   <SimpleWithSpecialDatesTemplate onChange={() => undefined} {...cleanUpProps(args)} />
@@ -380,9 +349,19 @@ export const SimpleWithSetActiveViewDateAfterChooseYear = Template7.bind({});
 SimpleWithSetActiveViewDateAfterChooseYear.args = {};
 SimpleWithSetActiveViewDateAfterChooseYear.storyName = 'ViewDate screen after choose year';
 
-export const SimpleWithSetActiveViewWithOutDay = Template8.bind({});
-SimpleWithSetActiveViewWithOutDay.args = {};
-SimpleWithSetActiveViewWithOutDay.storyName = 'ViewDate year/month';
+export const SimpleWithSetActiveViewWithoutDay = SimpleWithSetActiveViewWithoutDayStory.bind({});
+SimpleWithSetActiveViewWithoutDay.parameters = {
+  docs: {
+    source: {
+      code: SimpleWithSetActiveViewWithoutDayRaw,
+    },
+    description: {
+      story: 'Пример с выбором только месяца/года.',
+    },
+  },
+};
+SimpleWithSetActiveViewWithoutDay.args = {};
+SimpleWithSetActiveViewWithoutDay.storyName = 'ViewDate year/month';
 
 export const SimpleWithSpecialDates = SimpleWithSpecialDatesStory.bind({});
 SimpleWithSpecialDates.parameters = {
