@@ -9,12 +9,14 @@ import { Calendar, Button, T, ALL_BORDER_RADIUS_VALUES } from '#src/index';
 import {
   SimpleWithSpecialDatesTemplate,
   SimpleWithSetActiveViewWithoutDayTemplate,
+  SimpleWithSetActiveViewDateAfterChooseYearTemplate,
 } from '#src/components/Calendar/Stories/Templates';
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
 import SimpleWithSpecialDatesRaw from '!!raw-loader!./Templates/SimpleWithSpecialDates';
 import SimpleWithSetActiveViewWithoutDayRaw from '!!raw-loader!./Templates/SimpleWithSetActiveViewWithoutDay';
+import SimpleWithSetActiveViewDateAfterChooseYearRaw from '!!raw-loader!./Templates/SimpleWithSetActiveViewDateAfterChooseYear';
 
 export default {
   title: 'Admiral-2.1/Calendar',
@@ -281,35 +283,6 @@ const Template6: ComponentStory<typeof Calendar> = ({ range, ...args }: Calendar
   );
 };
 
-const Template7: ComponentStory<typeof Calendar> = ({ range, ...args }: CalendarPropType) => {
-  const [selected, setSelected] = useState<Date | null>(null);
-  const [currentActiveView, setActiveViewDateScreen] = useState<ViewScreenType | null>(null);
-
-  return (
-    <>
-      <T font="Body/Body 1 Long" as="div" style={{ marginBottom: '25px' }}>
-        Открытие экрана выбора месяца после выбора года
-      </T>
-      <Calendar
-        {...args}
-        selected={selected}
-        currentActiveView={currentActiveView}
-        onDateIncreaseDecrease={(date: any) => {
-          setActiveViewDateScreen(null);
-          console.log(date, 'onIncreaseDecreaseDate');
-        }}
-        onChange={(value: any) => {
-          setSelected(value);
-          console.log(value, 'onChange');
-        }}
-        onYearSelect={() => {
-          setActiveViewDateScreen('MONTH');
-        }}
-      />
-    </>
-  );
-};
-
 export const CalendarSimple = Template1.bind({});
 CalendarSimple.args = {};
 CalendarSimple.storyName = 'Simple.';
@@ -334,9 +307,28 @@ export const SimpleWithSetActiveViewDate = Template6.bind({});
 SimpleWithSetActiveViewDate.args = {};
 SimpleWithSetActiveViewDate.storyName = 'Active ViewDate screen';
 
-export const SimpleWithSetActiveViewDateAfterChooseYear = Template7.bind({});
+//<editor-fold desc="Пример с выбором только месяца/года">
+const SimpleWithSetActiveViewDateAfterChooseYearStory: ComponentStory<typeof Calendar> = ({
+  range,
+  ...args
+}: CalendarPropType) => (
+  <SimpleWithSetActiveViewDateAfterChooseYearTemplate onChange={() => undefined} {...cleanUpProps(args)} />
+);
+
+export const SimpleWithSetActiveViewDateAfterChooseYear = SimpleWithSetActiveViewDateAfterChooseYearStory.bind({});
+SimpleWithSetActiveViewDateAfterChooseYear.parameters = {
+  docs: {
+    source: {
+      code: SimpleWithSetActiveViewDateAfterChooseYearRaw,
+    },
+    description: {
+      story: 'Пример с открытием экрана выбора месяца после выбора года.',
+    },
+  },
+};
 SimpleWithSetActiveViewDateAfterChooseYear.args = {};
 SimpleWithSetActiveViewDateAfterChooseYear.storyName = 'ViewDate screen after choose year';
+//</editor-fold>
 
 //<editor-fold desc="Пример с выбором только месяца/года">
 const SimpleWithSetActiveViewWithoutDayStory: ComponentStory<typeof Calendar> = ({
