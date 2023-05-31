@@ -4,12 +4,13 @@ import { withDesign } from 'storybook-addon-designs';
 import { ThemeProvider } from 'styled-components';
 
 import type { CalendarPropType, ViewScreenType, Theme } from '#src/index';
-import { Calendar, Button, T, ALL_BORDER_RADIUS_VALUES } from '#src/index';
+import { Calendar, T, ALL_BORDER_RADIUS_VALUES } from '#src/index';
 
 import {
   SimpleWithSpecialDatesTemplate,
   SimpleWithSetActiveViewWithoutDayTemplate,
   SimpleWithSetActiveViewDateAfterChooseYearTemplate,
+  SimpleWithSetActiveViewDateTemplate,
 } from '#src/components/Calendar/Stories/Templates';
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
@@ -17,6 +18,7 @@ import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 import SimpleWithSpecialDatesRaw from '!!raw-loader!./Templates/SimpleWithSpecialDates';
 import SimpleWithSetActiveViewWithoutDayRaw from '!!raw-loader!./Templates/SimpleWithSetActiveViewWithoutDay';
 import SimpleWithSetActiveViewDateAfterChooseYearRaw from '!!raw-loader!./Templates/SimpleWithSetActiveViewDateAfterChooseYear';
+import SimpleWithSetActiveViewDateRaw from '!!raw-loader!./Templates/SimpleWithSetActiveViewDate';
 
 export default {
   title: 'Admiral-2.1/Calendar',
@@ -229,60 +231,6 @@ const Template5: ComponentStory<typeof Calendar> = ({ range, ...args }: Calendar
   );
 };
 
-const Template6: ComponentStory<typeof Calendar> = ({ range, ...args }: CalendarPropType) => {
-  const [selected, setSelected] = useState<Date | null>(null);
-  const [currentActiveView, setCurrentActiveView] = useState<ViewScreenType | null>(null);
-
-  return (
-    <>
-      <T font="Body/Body 1 Long" as="div" style={{ marginBottom: '25px' }}>
-        Переключение экранов выбора дат - месяц/год/день
-      </T>
-      <div style={{ display: 'flex' }}>
-        <Button dimension="s" onClick={() => setCurrentActiveView('MONTH')}>
-          Month
-        </Button>
-        &nbsp;
-        <Button dimension="s" onClick={() => setCurrentActiveView('YEAR')}>
-          Year
-        </Button>
-        &nbsp;
-        <Button dimension="s" onClick={() => setCurrentActiveView('DAY')}>
-          Day
-        </Button>
-      </div>
-      <br />
-      <Calendar
-        {...args}
-        selected={selected}
-        currentActiveView={currentActiveView}
-        currentActiveViewImportant={true}
-        onDateIncreaseDecrease={() => {
-          setCurrentActiveView(null);
-        }}
-        onYearSelect={(data) => {
-          setSelected(data as Date);
-          setCurrentActiveView('MONTH');
-        }}
-        onMonthSelect={(data) => {
-          setSelected(data as Date);
-        }}
-        onViewMonthSelect={() => {
-          console.log('onViewMonthSelect');
-          setCurrentActiveView('MONTH');
-        }}
-        onViewYearSelect={() => {
-          console.log('onViewYearSelect');
-          setCurrentActiveView('YEAR');
-        }}
-        onChange={(value: any) => {
-          setSelected(value);
-        }}
-      />
-    </>
-  );
-};
-
 export const CalendarSimple = Template1.bind({});
 CalendarSimple.args = {};
 CalendarSimple.storyName = 'Simple.';
@@ -303,9 +251,25 @@ export const SimpleWithChangeViewDate = Template5.bind({});
 SimpleWithChangeViewDate.args = {};
 SimpleWithChangeViewDate.storyName = 'Callback';
 
-export const SimpleWithSetActiveViewDate = Template6.bind({});
+//<editor-fold desc="Пример с переключением экранов выбора дат">
+const SimpleWithSetActiveViewDateStory: ComponentStory<typeof Calendar> = ({ range, ...args }: CalendarPropType) => (
+  <SimpleWithSetActiveViewDateTemplate onChange={() => undefined} {...cleanUpProps(args)} />
+);
+
+export const SimpleWithSetActiveViewDate = SimpleWithSetActiveViewDateStory.bind({});
+SimpleWithSetActiveViewDate.parameters = {
+  docs: {
+    source: {
+      code: SimpleWithSetActiveViewDateRaw,
+    },
+    description: {
+      story: 'Пример с переключением экранов выбора дат.',
+    },
+  },
+};
 SimpleWithSetActiveViewDate.args = {};
 SimpleWithSetActiveViewDate.storyName = 'Active ViewDate screen';
+//</editor-fold>
 
 //<editor-fold desc="Пример с выбором только месяца/года">
 const SimpleWithSetActiveViewDateAfterChooseYearStory: ComponentStory<typeof Calendar> = ({
