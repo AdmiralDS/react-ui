@@ -8,3 +8,4 @@ export * from './TableColumnDragDrop';
 export * from './TableRowState';
 export * from './TableSticky';
 export * from './TableMultiline';
+export * from './TableFilter';

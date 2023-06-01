@@ -4,8 +4,7 @@ import { withDesign } from 'storybook-addon-designs';
 import styled from 'styled-components';
 
 import type { Column } from '@admiral-ds/react-ui';
-import { Table, Button, RadioButton, FieldSet, DateField, DefaultFontColorName } from '@admiral-ds/react-ui';
-import { ReactComponent as AcceptSolid } from '@admiral-ds/icons/build/category/AcceptSolid.svg';
+import { Table, DefaultFontColorName } from '@admiral-ds/react-ui';
 
 // Массивы с данными столбцов и строк вынесены в отдельный файл в связи с большим объемом информации
 import {
@@ -32,6 +31,7 @@ import {
   RowStateTemplate,
   StickyTemplate,
   MultilineTemplate,
+  FilterTemplate,
 } from './Templates';
 // Imports of text sources
 import VirtualScrollRaw from '!!raw-loader!./Templates/TableVirtualScroll';
@@ -44,6 +44,7 @@ import ColumnDragDropRaw from '!!raw-loader!./Templates/TableColumnDragDrop';
 import RowStateRaw from '!!raw-loader!./Templates/TableRowState';
 import StickyRaw from '!!raw-loader!./Templates/TableSticky';
 import MultilineRaw from '!!raw-loader!./Templates/TableMultiline';
+import FilterRaw from '!!raw-loader!./Templates/TableFilter';
 
 const Separator = styled.div`
   height: 20px;
@@ -339,171 +340,6 @@ const Template3: ComponentStory<typeof Table> = ({ rowList, columnList, ...args 
   );
 };
 
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
-`;
-
-const ButtonWrapper = styled.div`
-  display: flex;
-  margin-top: 28px;
-  & > button:first-child {
-    margin-right: 8px;
-  }
-`;
-
-const Template4: ComponentStory<typeof Table> = (args) => {
-  const [selected, setSelected] = React.useState<string>('');
-  const [selectedDate, setSelectedDate] = React.useState<string>('');
-  const [rows, setRows] = React.useState([...args.rowList]);
-  const [columns, setCols] = React.useState([...args.columnList]);
-  const [numFilterActive, setNumFilterActive] = React.useState(false);
-  const [dateFilterActive, setDateFilterActive] = React.useState(false);
-
-  const renderNumFilter = ({ closeMenu }: any, column: any) => (
-    <Wrapper>
-      <FieldSet
-        legend="Варианты фильтрации:"
-        onChange={(e) => {
-          setSelected((e.target as HTMLInputElement).value);
-        }}
-      >
-        <RadioButton value="1" name="test" checked={'1' === selected}>
-          Сумма превышает миллиард
-        </RadioButton>
-        <RadioButton value="2" name="test" checked={'2' === selected}>
-          Сумма меньше миллиарда
-        </RadioButton>
-      </FieldSet>
-      <ButtonWrapper>
-        <Button
-          dimension="m"
-          onClick={() => {
-            closeMenu();
-            setNumFilterActive(true);
-            if (selected === '1') {
-              const newRows = args.rowList.filter(
-                (row) => Number(((row as any)[column.name] as string).replace(/\D/g, '')) > 1000000000,
-              );
-              setRows(newRows);
-            } else {
-              const newRows = args.rowList.filter(
-                (row) => Number(((row as any)[column.name] as string).replace(/\D/g, '')) < 1000000000,
-              );
-              setRows(newRows);
-            }
-          }}
-        >
-          Применить
-        </Button>
-        <Button
-          dimension="m"
-          onClick={() => {
-            closeMenu();
-            setNumFilterActive(false);
-            setSelected('');
-            setRows([...args.rowList]);
-          }}
-        >
-          Очистить
-        </Button>
-      </ButtonWrapper>
-    </Wrapper>
-  );
-
-  const renderDateFilter = ({ closeMenu }: any, column: any) => (
-    <Wrapper>
-      <DateField
-        label="Выберите дату:"
-        value={selectedDate}
-        onChange={(e: any) => {
-          setSelectedDate((e.target as HTMLInputElement).value);
-        }}
-      />
-      <ButtonWrapper>
-        <Button
-          dimension="m"
-          onClick={() => {
-            closeMenu();
-            setDateFilterActive(true);
-            const newRows = args.rowList.filter((row) => (row as any)[column.name] === selectedDate);
-            setRows(newRows);
-          }}
-        >
-          Применить
-        </Button>
-        <Button
-          dimension="m"
-          onClick={() => {
-            closeMenu();
-            setDateFilterActive(false);
-            setSelectedDate('');
-            setRows([...args.rowList]);
-          }}
-        >
-          Очистить
-        </Button>
-      </ButtonWrapper>
-    </Wrapper>
-  );
-
-  const onFilterMenuClickOutside = ({ closeMenu }: any) => closeMenu();
-
-  const handleResize = ({ name, width }: { name: string; width: string }) => {
-    const newCols = cols.map((col) => (col.name === name ? { ...col, width } : col));
-    setCols(newCols);
-  };
-
-  const cols = React.useMemo(
-    () =>
-      columns.map((col, index) => {
-        if (index === 0) {
-          return {
-            ...col,
-            renderFilter: () => (
-              <Wrapper>Пример кастомизации иконки фильтра с помощью функции renderFilterIcon</Wrapper>
-            ),
-            renderFilterIcon: () => <AcceptSolid />,
-            onFilterMenuClickOutside,
-          };
-        }
-        if (index === 1) {
-          return {
-            ...col,
-            isFilterActive: dateFilterActive,
-            renderFilter: renderDateFilter,
-            onFilterMenuClickOutside,
-          };
-        }
-        if (index === 2) {
-          return {
-            ...col,
-            isFilterActive: numFilterActive,
-            renderFilter: renderNumFilter,
-            onFilterMenuClose: () => console.log('filter menu close'),
-            onFilterMenuOpen: () => console.log('filter menu open'),
-            onFilterMenuClickOutside,
-          };
-        } else if (index === 4) {
-          return {
-            ...col,
-            cellAlign: 'right' as any,
-            renderFilter: () => <Wrapper>Пример отображения фильтра в колонке с выравниванием по правому краю</Wrapper>,
-            onFilterMenuClickOutside,
-          };
-        } else return col;
-      }),
-    [columns, selected, selectedDate, numFilterActive, dateFilterActive],
-  );
-
-  return (
-    <>
-      <Table columnList={cols} rowList={rows} onColumnResize={handleResize} />
-    </>
-  );
-};
-
 const Template8: ComponentStory<typeof Table> = ({ rowList, columnList, ...args }) => {
   const [rows, setRows] = React.useState([...rowList]);
   const [cols, setCols] = React.useState([...columnList]);
@@ -653,14 +489,16 @@ Sort.parameters = {
   },
 };
 
-export const Filter = Template4.bind({});
-Filter.args = {
-  rowList: rowListSort,
-  columnList: columnList,
-};
-Filter.storyName = 'Table. Фильтрация.';
-Filter.parameters = {
+//<editor-fold desc="Пример фильтрации">
+const FilterStory: ComponentStory<typeof Table> = (props) => (
+  <FilterTemplate columnList={[]} rowList={[]} {...cleanUpProps(props)} />
+);
+export const FilterExample = FilterStory.bind({});
+FilterExample.parameters = {
   docs: {
+    source: {
+      code: FilterRaw,
+    },
     description: {
       story: `Опционально в заголовках можно включать фильтрацию столбцов. 
       При этом у заголовка будет появляться иконка фильтрации, по нажатию на которую будет 
@@ -689,6 +527,8 @@ Filter.parameters = {
     },
   },
 };
+FilterExample.storyName = 'Table. Фильтрация.';
+//</editor-fold>
 
 //<editor-fold desc="Пример c многострочностью заголовков">
 const MultilineStory: ComponentStory<typeof Table> = (props) => (
