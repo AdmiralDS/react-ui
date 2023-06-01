@@ -15,6 +15,7 @@ import {
   SimpleWithFilterDateTemplate,
   SimpleWithMaxDateTemplate,
   RangeTemplate,
+  CalendarSimpleTemplate,
 } from '#src/components/Calendar/Stories/Templates';
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
@@ -27,6 +28,7 @@ import SimpleWithChangeViewDateRaw from '!!raw-loader!./Templates/SimpleWithChan
 import SimpleWithFilterDateRaw from '!!raw-loader!./Templates/SimpleWithFilterDate';
 import SimpleWithMaxDateRaw from '!!raw-loader!./Templates/SimpleWithMaxDate';
 import RangeRaw from '!!raw-loader!./Templates/Range';
+import CalendarSimpleRaw from '!!raw-loader!./Templates/CalendarSimple';
 
 export default {
   title: 'Admiral-2.1/Calendar',
@@ -82,44 +84,25 @@ export default {
   },
 } as ComponentMeta<typeof Calendar>;
 
-const Template1: ComponentStory<typeof Calendar> = (args) => {
-  const [selected, setSelected] = useState<Date | null>(null);
-  const [endDate, setEndDate] = useState<Date | null>(null);
+//<editor-fold desc="Пример календаря с выбором даты>">
+const CalendarSimpleStory: ComponentStory<typeof Calendar> = (args) => (
+  <CalendarSimpleTemplate onChange={() => undefined} {...cleanUpProps(args)} />
+);
 
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
-  return args.range ? (
-    <ThemeProvider theme={swapBorder}>
-      <Calendar
-        {...args}
-        range
-        startDate={selected}
-        endDate={endDate}
-        onChange={(value: any) => {
-          setSelected(value[0]);
-          setEndDate(value[1]);
-        }}
-      />
-    </ThemeProvider>
-  ) : (
-    <ThemeProvider theme={swapBorder}>
-      <Calendar
-        {...args}
-        selected={selected}
-        onChange={(value: any) => {
-          setSelected(value);
-        }}
-      />
-    </ThemeProvider>
-  );
+export const CalendarSimple = CalendarSimpleStory.bind({});
+CalendarSimple.parameters = {
+  docs: {
+    source: {
+      code: CalendarSimpleRaw,
+    },
+    description: {
+      story: 'Пример календаря с выбором даты>.',
+    },
+  },
 };
-
-export const CalendarSimple = Template1.bind({});
 CalendarSimple.args = {};
 CalendarSimple.storyName = 'Simple.';
+//</editor-fold>
 
 //<editor-fold desc="Пример с выбором диапазона">
 const RangeStory: ComponentStory<typeof Calendar> = (args: CalendarPropType) => (

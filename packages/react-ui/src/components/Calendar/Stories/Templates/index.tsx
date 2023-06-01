@@ -6,3 +6,4 @@ export * from './SimpleWithChangeViewDate';
 export * from './SimpleWithFilterDate';
 export * from './SimpleWithMaxDate';
 export * from './Range';
+export * from './CalendarSimple';
