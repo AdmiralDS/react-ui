@@ -441,34 +441,6 @@ export const rowListLineClamp: RowData[] = [
   },
 ];
 
-export const columnListSticky: Column[] = [
-  {
-    name: 'transfer_type',
-    title: 'Тип сделки',
-    width: '20%',
-    sticky: true,
-  },
-  {
-    name: 'transfer_date',
-    title: 'Дата сделки',
-    width: 150,
-    sticky: true,
-  },
-  {
-    name: 'transfer_amount',
-    title: 'Сумма',
-    width: 300,
-  },
-  {
-    name: 'currency',
-    title: 'Валюта',
-  },
-  {
-    name: 'rate',
-    title: 'Ставка',
-  },
-];
-
 export const columnListWithCustomTitle: Column[] = [
   {
     name: 'transfer_type',

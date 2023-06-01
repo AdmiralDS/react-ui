@@ -13,7 +13,6 @@ import {
   columnListLineClamp,
   columnListOrientation,
   columnListSort,
-  columnListSticky,
   columnListWithCustomTitle,
   columnListWithWidth,
   rowList,
@@ -33,6 +32,7 @@ import {
   ZebraTemplate,
   ColumnDragDropTemplate,
   RowStateTemplate,
+  StickyTemplate,
 } from './Templates';
 // Imports of text sources
 import VirtualScrollRaw from '!!raw-loader!./Templates/TableVirtualScroll';
@@ -43,6 +43,7 @@ import ExpandRaw from '!!raw-loader!./Templates/TableExpand';
 import ZebraRaw from '!!raw-loader!./Templates/TableZebra';
 import ColumnDragDropRaw from '!!raw-loader!./Templates/TableColumnDragDrop';
 import RowStateRaw from '!!raw-loader!./Templates/TableRowState';
+import StickyRaw from '!!raw-loader!./Templates/TableSticky';
 
 const Separator = styled.div`
   height: 20px;
@@ -538,23 +539,6 @@ const Template5: ComponentStory<typeof Table> = (args) => {
   );
 };
 
-const Template7: ComponentStory<typeof Table> = (args) => {
-  const [cols, setCols] = React.useState([...args.columnList]);
-  const handleResize = ({ name, width }: { name: string; width: string }) => {
-    const newCols = cols.map((col) => (col.name === name ? { ...col, width } : col));
-    setCols(newCols);
-  };
-  return (
-    <Table
-      {...args}
-      columnList={cols}
-      virtualScroll={{ fixedRowHeight: 40 }}
-      style={{ height: '500px' }}
-      onColumnResize={handleResize}
-    />
-  );
-};
-
 const Template8: ComponentStory<typeof Table> = ({ rowList, columnList, ...args }) => {
   const [rows, setRows] = React.useState([...rowList]);
   const [cols, setCols] = React.useState([...columnList]);
@@ -759,21 +743,24 @@ Multiline.parameters = {
   },
 };
 
-export const Sticky = Template.bind({});
-Sticky.args = {
-  rowList,
-  columnList: columnListSticky,
-  style: { maxHeight: '300px', maxWidth: '700px' },
-};
-Sticky.storyName = 'Table. Фиксированные столбцы.';
-Sticky.parameters = {
+//<editor-fold desc="Пример c фиксированными столбцами">
+const StickyStory: ComponentStory<typeof Table> = (props) => (
+  <StickyTemplate columnList={[]} rowList={[]} {...cleanUpProps(props)} />
+);
+export const StickyExample = StickyStory.bind({});
+StickyExample.parameters = {
   docs: {
+    source: {
+      code: StickyRaw,
+    },
     description: {
       story: `При необходимости можно “закреплять” столбцы таблицы. Фиксированные столбцы располагаются по левому краю таблицы и идут друг за другом.
       Столбец с чекбоксами является фиксированным по умолчанию.\n\nЧтобы сделать столбец фиксированным, необходимо задать для него параметр sticky равный true.`,
     },
   },
 };
+StickyExample.storyName = 'Table. Фиксированные столбцы.';
+//</editor-fold>
 
 //<editor-fold desc="Пример c различными состояниями строк">
 const RowStateStory: ComponentStory<typeof Table> = (props) => (
