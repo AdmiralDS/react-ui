@@ -14,6 +14,7 @@ import {
   SimpleWithChangeViewDateTemplate,
   SimpleWithFilterDateTemplate,
   SimpleWithMaxDateTemplate,
+  RangeTemplate,
 } from '#src/components/Calendar/Stories/Templates';
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
@@ -25,6 +26,7 @@ import SimpleWithSetActiveViewDateRaw from '!!raw-loader!./Templates/SimpleWithS
 import SimpleWithChangeViewDateRaw from '!!raw-loader!./Templates/SimpleWithChangeViewDate';
 import SimpleWithFilterDateRaw from '!!raw-loader!./Templates/SimpleWithFilterDate';
 import SimpleWithMaxDateRaw from '!!raw-loader!./Templates/SimpleWithMaxDate';
+import RangeRaw from '!!raw-loader!./Templates/Range';
 
 export default {
   title: 'Admiral-2.1/Calendar',
@@ -115,32 +117,29 @@ const Template1: ComponentStory<typeof Calendar> = (args) => {
   );
 };
 
-const Template2: ComponentStory<typeof Calendar> = (args: CalendarPropType) => {
-  const [startDate, setStartDate] = useState<Date | null>(null);
-  const [endDate, setEndDate] = useState<Date | null>(null);
-  return (
-    <>
-      <Calendar
-        {...args}
-        range
-        startDate={startDate}
-        endDate={endDate}
-        onChange={(value: any) => {
-          setStartDate(value[0]);
-          setEndDate(value[1]);
-        }}
-      />
-    </>
-  );
-};
-
 export const CalendarSimple = Template1.bind({});
 CalendarSimple.args = {};
 CalendarSimple.storyName = 'Simple.';
 
-export const Range = Template2.bind({});
+//<editor-fold desc="Пример с выбором диапазона">
+const RangeStory: ComponentStory<typeof Calendar> = (args: CalendarPropType) => (
+  <RangeTemplate onChange={() => undefined} {...cleanUpProps(args)} />
+);
+
+export const Range = RangeStory.bind({});
+Range.parameters = {
+  docs: {
+    source: {
+      code: RangeRaw,
+    },
+    description: {
+      story: 'Пример с выбором диапазона.',
+    },
+  },
+};
 Range.args = {};
 Range.storyName = 'Range.';
+//</editor-fold>
 
 //<editor-fold desc="Пример с ограничением максимальной даты">
 const SimpleWithMaxDateStory: ComponentStory<typeof Calendar> = ({ range, ...args }: CalendarPropType) => (
