@@ -4,3 +4,4 @@ export * from './SimpleWithSetActiveViewDateAfterChooseYear';
 export * from './SimpleWithSetActiveViewDate';
 export * from './SimpleWithChangeViewDate';
 export * from './SimpleWithFilterDate';
+export * from './SimpleWithMaxDate';

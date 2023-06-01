@@ -13,6 +13,7 @@ import {
   SimpleWithSetActiveViewDateTemplate,
   SimpleWithChangeViewDateTemplate,
   SimpleWithFilterDateTemplate,
+  SimpleWithMaxDateTemplate,
 } from '#src/components/Calendar/Stories/Templates';
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
@@ -23,6 +24,7 @@ import SimpleWithSetActiveViewDateAfterChooseYearRaw from '!!raw-loader!./Templa
 import SimpleWithSetActiveViewDateRaw from '!!raw-loader!./Templates/SimpleWithSetActiveViewDate';
 import SimpleWithChangeViewDateRaw from '!!raw-loader!./Templates/SimpleWithChangeViewDate';
 import SimpleWithFilterDateRaw from '!!raw-loader!./Templates/SimpleWithFilterDate';
+import SimpleWithMaxDateRaw from '!!raw-loader!./Templates/SimpleWithMaxDate';
 
 export default {
   title: 'Admiral-2.1/Calendar',
@@ -132,39 +134,6 @@ const Template2: ComponentStory<typeof Calendar> = (args: CalendarPropType) => {
   );
 };
 
-const Template3: ComponentStory<typeof Calendar> = ({ range, ...args }: CalendarPropType) => {
-  const [selected, setSelected] = useState<Date | null>(null);
-  const [endDate, setEndDate] = useState<Date | null>(null);
-  const tomorrow = new Date();
-  tomorrow.setDate(new Date().getDate() + 1);
-  return range ? (
-    <>
-      <Calendar
-        {...args}
-        range
-        startDate={selected}
-        endDate={endDate}
-        maxDate={tomorrow}
-        onChange={(value: any) => {
-          setSelected(value[0]);
-          setEndDate(value[1]);
-        }}
-      />
-    </>
-  ) : (
-    <>
-      <Calendar
-        {...args}
-        maxDate={tomorrow}
-        selected={selected}
-        onChange={(value: any) => {
-          setSelected(value);
-        }}
-      />
-    </>
-  );
-};
-
 export const CalendarSimple = Template1.bind({});
 CalendarSimple.args = {};
 CalendarSimple.storyName = 'Simple.';
@@ -173,9 +142,25 @@ export const Range = Template2.bind({});
 Range.args = {};
 Range.storyName = 'Range.';
 
-export const SimpleWithMaxDate = Template3.bind({});
+//<editor-fold desc="Пример с ограничением максимальной даты">
+const SimpleWithMaxDateStory: ComponentStory<typeof Calendar> = ({ range, ...args }: CalendarPropType) => (
+  <SimpleWithMaxDateTemplate onChange={() => undefined} {...cleanUpProps(args)} />
+);
+
+export const SimpleWithMaxDate = SimpleWithMaxDateStory.bind({});
+SimpleWithMaxDate.parameters = {
+  docs: {
+    source: {
+      code: SimpleWithMaxDateRaw,
+    },
+    description: {
+      story: 'Пример с ограничением максимальной даты.',
+    },
+  },
+};
 SimpleWithMaxDate.args = {};
 SimpleWithMaxDate.storyName = 'maxDate.';
+//</editor-fold>
 
 //<editor-fold desc="Пример с недоступными для выбора датами">
 const SimpleWithFilterDateStory: ComponentStory<typeof Calendar> = ({ range, ...args }: CalendarPropType) => (
