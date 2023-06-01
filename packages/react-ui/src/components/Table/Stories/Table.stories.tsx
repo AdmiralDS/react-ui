@@ -3,18 +3,15 @@ import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import styled from 'styled-components';
 
-import type { Column } from '@admiral-ds/react-ui';
-import { Table, DefaultFontColorName } from '@admiral-ds/react-ui';
+import { Table } from '@admiral-ds/react-ui';
 
 // Массивы с данными столбцов и строк вынесены в отдельный файл в связи с большим объемом информации
 import {
   columnList,
   columnListOrientation,
-  columnListSort,
   columnListWithCustomTitle,
   columnListWithWidth,
   rowList,
-  rowListSort,
   columnListWithCustomRender,
   rowListWithCustomRenderGroup,
 } from './data';
@@ -32,6 +29,7 @@ import {
   StickyTemplate,
   MultilineTemplate,
   FilterTemplate,
+  SortTemplate,
 } from './Templates';
 // Imports of text sources
 import VirtualScrollRaw from '!!raw-loader!./Templates/TableVirtualScroll';
@@ -45,6 +43,7 @@ import RowStateRaw from '!!raw-loader!./Templates/TableRowState';
 import StickyRaw from '!!raw-loader!./Templates/TableSticky';
 import MultilineRaw from '!!raw-loader!./Templates/TableMultiline';
 import FilterRaw from '!!raw-loader!./Templates/TableFilter';
+import SortRaw from '!!raw-loader!./Templates/TableSort';
 
 const Separator = styled.div`
   height: 20px;
@@ -158,159 +157,6 @@ const Template: ComponentStory<typeof Table> = ({ columnList, ...args }) => {
   };
 
   return <Table {...args} columnList={cols} onColumnResize={handleResize} />;
-};
-
-const StrToTime = (str: string) => {
-  const res = str.split('.').reverse().join('-');
-  return new Date(res).getTime();
-};
-
-const MAX_SORT_LEVEL = 2;
-
-type SortColumn = { [key: string]: 'asc' | 'desc' };
-
-const Text = styled.div`
-  font-family: 'VTB Group UI';
-  font-size: 16px;
-  line-height: 24px;
-  margin-bottom: 8px;
-  color: ${({ theme }) => theme.color[DefaultFontColorName]};
-`;
-
-const Template2: ComponentStory<typeof Table> = ({ rowList, columnList, ...args }) => {
-  const [rows, setRows] = React.useState([...rowList]);
-  const [cols, setCols] = React.useState([...columnList]);
-  const [sortLevel, setSortLevel] = React.useState<number>(0);
-
-  const calcSortOrder = (columns: Array<Column>): Array<Column> => {
-    const newCols = [...columns];
-
-    const sortColumns = [...newCols]
-      .filter((column) => !!column.sort)
-      .sort((a, b) => {
-        return (a.sortOrder || 0) - (b.sortOrder || 0);
-      });
-
-    sortColumns.forEach((col, index) => {
-      if (index < MAX_SORT_LEVEL) {
-        col.sortOrder = index + 1;
-      } else {
-        col.sortOrder = undefined;
-        col.sort = undefined;
-      }
-    });
-    setSortLevel(sortColumns.length);
-
-    return newCols;
-  };
-
-  const getOrderedSortColumns = (columns: Array<Column>): SortColumn => {
-    const sortColumns = columns
-      .filter((column) => !!column.sort)
-      .sort((a, b) => {
-        return (a.sortOrder || 0) - (b.sortOrder || 0);
-      });
-
-    return sortColumns.reduce((acc: SortColumn, currentValue: Column) => {
-      if (currentValue.sort) acc[currentValue.name] = currentValue.sort;
-      return acc;
-    }, {});
-  };
-
-  const handleSort = ({ name, sort }: { name: string; sort: 'asc' | 'desc' | 'initial' }) => {
-    if (sort === 'initial') {
-      const newCols = [...cols].map((col) =>
-        col.name === name ? { ...col, sort: undefined, sortOrder: undefined } : { ...col },
-      );
-      setCols(calcSortOrder(newCols));
-    } else {
-      if (sort === 'asc') {
-        if (sortLevel === MAX_SORT_LEVEL) {
-          const firstOrderCol = cols.find((col) => col.sortOrder === 1);
-          if (firstOrderCol) {
-            if (firstOrderCol.sort) firstOrderCol.sort = undefined;
-            if (firstOrderCol.sortOrder) firstOrderCol.sortOrder = undefined;
-          }
-        }
-
-        const newCols = [...cols].map((col) => {
-          const newCol = { ...col };
-
-          if (col.name === name) {
-            newCol.sort = 'asc';
-            newCol.sortOrder = sortLevel + 1;
-          }
-
-          return newCol;
-        });
-        setCols(calcSortOrder(newCols));
-      } else {
-        setCols([...cols].map((col) => (col.name === name ? { ...col, sort: 'desc' } : { ...col })));
-      }
-    }
-  };
-
-  const compare = (a: any, b: any, colName: string, sort: 'asc' | 'desc') => {
-    if (sort === 'asc') {
-      switch (colName) {
-        case 'transfer_date':
-          return StrToTime(a[colName]) - StrToTime(b[colName]);
-        case 'transfer_amount':
-          return Number(a[colName].replace(/\D/g, '')) - Number(b[colName].replace(/\D/g, ''));
-        case 'rate':
-        default:
-          return a[colName] - b[colName];
-      }
-    } else {
-      switch (colName) {
-        case 'transfer_date':
-          return StrToTime(b[colName]) - StrToTime(a[colName]);
-        case 'transfer_amount':
-          return Number(b[colName].replace(/\D/g, '')) - Number(a[colName].replace(/\D/g, ''));
-        case 'rate':
-        default:
-          return b[colName] - a[colName];
-      }
-    }
-  };
-
-  React.useEffect(() => {
-    const sortColumns = getOrderedSortColumns(cols);
-
-    if (Object.keys(sortColumns).length === 0) {
-      setRows([...rowList]);
-    } else {
-      const names = Object.keys(sortColumns);
-      const newRows = [...rows].sort((a: any, b: any) => {
-        const result = compare(a, b, names[0], sortColumns[names[0]]);
-
-        if (!result && names.length > 1) {
-          return compare(a, b, names[1], sortColumns[names[1]]);
-        } else {
-          return result;
-        }
-      });
-
-      setRows(newRows);
-    }
-  }, [cols]);
-
-  const handleResize = ({ name, width }: { name: string; width: string }) => {
-    const newCols = cols.map((col) => (col.name === name ? { ...col, width } : col));
-    setCols(newCols);
-  };
-
-  return (
-    <>
-      <Text>
-        Дизайн-системой предусматривается многоуровневая сортировка. Рекомендуется использовать не более ДВУХ уровней.
-        <br />
-        Логика сортировки (взаимосвязи) выстраивается пользователем. При этом, у иконок сортировки появляются цифры
-        обозначающие порядок (приоритет) сортировки.
-      </Text>
-      <Table {...args} columnList={cols} rowList={rows} onSortChange={handleSort} onColumnResize={handleResize} />
-    </>
-  );
 };
 
 const Template3: ComponentStory<typeof Table> = ({ rowList, columnList, ...args }) => {
@@ -464,30 +310,36 @@ Orientation.parameters = {
   },
 };
 
-export const Sort = Template2.bind({});
-Sort.args = {
-  rowList: rowListSort,
-  columnList: columnListSort,
-};
-Sort.storyName = 'Table. Сортировка.';
-Sort.parameters = {
+//<editor-fold desc="Пример сортировки">
+const SortStory: ComponentStory<typeof Table> = (props) => (
+  <SortTemplate columnList={[]} rowList={[]} {...cleanUpProps(props)} />
+);
+export const SortExample = SortStory.bind({});
+SortExample.parameters = {
   docs: {
+    source: {
+      code: SortRaw,
+    },
     description: {
-      story: `Если сортировка выключена, то значок виден только при наведении на область заголовка и окрашивается в серый цвет.
-      Если сортировка включена (первое нажатие - сортировка по возрастанию), то ее значок-стрелка остается видимым при снятии фокуса 
-      с заголовка и окрашивается в синий цвет. При повторном нажатии происходит сортировка в обратном порядке (стрелка меняет направление, 
-      по убыванию). При третьем нажатии сортировка отменяется.\n\nПо умолчанию возможность сортировки столбца отключена.
+      story: `По умолчанию возможность сортировки столбца отключена.
       Чтобы сделать столбец сортируемым, необходимо задать ему параметр sortable: true. Сортировка - это контролируемый пользователем параметр. 
       Чтобы включить для столбца сортировку по возрастанию/убыванию, пользователь должен задать для столбца параметр sort: 'asc' | 'desc'.
       Если для столбца задан только параметр sortable: true, а параметр sort не задан, это говорит о том, что столбец сортируемый 
-      (при наведении на его заголовок будет видна стрелка сортировки), но в данный момент к нему никакая сортировка не применена.\n\nПри 
-      изменении сортировки столбца будет срабатывать колбек onSortChange, который будет возвращать два аргумента: 
-      name - уникальное имя столбца, к которому была применена сортировка, и sort - тип сортировки ('asc' - возрастающая, 
+      (при наведении на его заголовок будет видна стрелка сортировки), но в данный момент к нему никакая сортировка не применена.\n\nЕсли 
+      к сортируемому столбцу пока не применена сортировка, то значок-стрелка виден только при наведении на область заголовка и окрашивается в серый цвет.
+      Если сортировка включена (первое нажатие - сортировка по возрастанию), то ее значок-стрелка остается видимым при снятии фокуса 
+      с заголовка и окрашивается в синий цвет. При повторном нажатии происходит сортировка в обратном порядке (стрелка меняет направление, 
+      по убыванию). При третьем нажатии сортировка отменяется.\n\nПри изменении сортировки столбца будет срабатывать колбек onSortChange, 
+      который будет возвращать два аргумента: name - уникальное имя столбца, к которому была применена сортировка, и sort - тип сортировки ('asc' - возрастающая, 
       'desc' - убывающая и 'initial' - отмена сортировки, возврат к первоначальному состоянию). Сортировка массива строк 
-      происходит на стороне пользователя при срабатывании колбека onSortChange.`,
+      происходит на стороне пользователя при срабатывании колбека onSortChange.\n\nДизайн-системой предусматривается многоуровневая сортировка. 
+      Рекомендуется использовать не более ДВУХ уровней. Логика сортировки (взаимосвязи) выстраивается пользователем. При этом 
+      у иконок сортировки появляются цифры, обозначающие порядок (приоритет) сортировки.`,
     },
   },
 };
+SortExample.storyName = 'Table. Сортировка.';
+//</editor-fold>
 
 //<editor-fold desc="Пример фильтрации">
 const FilterStory: ComponentStory<typeof Table> = (props) => (
