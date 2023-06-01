@@ -10,13 +10,11 @@ import { ReactComponent as AcceptSolid } from '@admiral-ds/icons/build/category/
 // Массивы с данными столбцов и строк вынесены в отдельный файл в связи с большим объемом информации
 import {
   columnList,
-  columnListLineClamp,
   columnListOrientation,
   columnListSort,
   columnListWithCustomTitle,
   columnListWithWidth,
   rowList,
-  rowListLineClamp,
   rowListSort,
   columnListWithCustomRender,
   rowListWithCustomRenderGroup,
@@ -33,6 +31,7 @@ import {
   ColumnDragDropTemplate,
   RowStateTemplate,
   StickyTemplate,
+  MultilineTemplate,
 } from './Templates';
 // Imports of text sources
 import VirtualScrollRaw from '!!raw-loader!./Templates/TableVirtualScroll';
@@ -44,6 +43,7 @@ import ZebraRaw from '!!raw-loader!./Templates/TableZebra';
 import ColumnDragDropRaw from '!!raw-loader!./Templates/TableColumnDragDrop';
 import RowStateRaw from '!!raw-loader!./Templates/TableRowState';
 import StickyRaw from '!!raw-loader!./Templates/TableSticky';
+import MultilineRaw from '!!raw-loader!./Templates/TableMultiline';
 
 const Separator = styled.div`
   height: 20px;
@@ -504,41 +504,6 @@ const Template4: ComponentStory<typeof Table> = (args) => {
   );
 };
 
-const CellTextContent = styled.div`
-  display: block;
-  align-items: center;
-  width: 100%;
-  margin: 2px 0;
-  overflow: hidden;
-`;
-
-const Template5: ComponentStory<typeof Table> = (args) => {
-  const [cols, setCols] = React.useState([...args.columnList]);
-  const renderCell = (row: any, columnName: string) => {
-    return (
-      <CellTextContent>
-        {columnName === 'transfer_date' ? new Date(row[columnName]).toLocaleDateString() : row[columnName]}
-      </CellTextContent>
-    );
-  };
-  const handleResize = ({ name, width }: { name: string; width: string }) => {
-    const newCols = cols.map((col) => (col.name === name ? { ...col, width } : col));
-    setCols(newCols);
-  };
-  return (
-    <>
-      <Table
-        headerLineClamp={2}
-        displayRowSelectionColumn
-        renderCell={renderCell}
-        {...args}
-        columnList={cols}
-        onColumnResize={handleResize}
-      />
-    </>
-  );
-};
-
 const Template8: ComponentStory<typeof Table> = ({ rowList, columnList, ...args }) => {
   const [rows, setRows] = React.useState([...rowList]);
   const [cols, setCols] = React.useState([...columnList]);
@@ -725,23 +690,27 @@ Filter.parameters = {
   },
 };
 
-export const Multiline = Template5.bind({});
-Multiline.args = {
-  rowList: rowListLineClamp,
-  columnList: columnListLineClamp,
-};
-Multiline.storyName = 'Table. Многострочность.';
-Multiline.parameters = {
+//<editor-fold desc="Пример c многострочностью заголовков">
+const MultilineStory: ComponentStory<typeof Table> = (props) => (
+  <MultilineTemplate columnList={[]} rowList={[]} {...cleanUpProps(props)} />
+);
+export const MultilineExample = MultilineStory.bind({});
+MultilineExample.parameters = {
   docs: {
+    source: {
+      code: MultilineRaw,
+    },
     description: {
       story: `Заголовки таблицы по умолчанию выводятся в одну строку и при нехватке места сокращаются с помощью троеточия. Увеличить высоту 
       заголовка можно с помощью параметра headerLineClamp, который определяет максимальное количество строк, которое может занимать заголовок таблицы. 
       В примере ниже используется headerLineClamp равный 2. \n\nСтроки таблицы не ограничены по высоте. 
-      В ячейке строки можно отрисовать любой ReactNode, передав его в rowList. Также для отрисовка контента строки 
-      можно применить функцию renderCell. `,
+      В ячейке строки можно отрисовать любой ReactNode, передав его в rowList. Также с помощью функции renderCell можно
+      переопределить стандартный вид ячеек, относящихся к определенному столбцу таблицы (смотрите "Пример кастомизации компонента ячейки").`,
     },
   },
 };
+MultilineExample.storyName = 'Table. Многострочность.';
+//</editor-fold>
 
 //<editor-fold desc="Пример c фиксированными столбцами">
 const StickyStory: ComponentStory<typeof Table> = (props) => (
