@@ -18,7 +18,6 @@ import {
   columnListWithWidth,
   rowList,
   rowListLineClamp,
-  rowListRowState,
   rowListSort,
   columnListWithCustomRender,
   rowListWithCustomRenderGroup,
@@ -33,6 +32,7 @@ import {
   ExpandTemplate,
   ZebraTemplate,
   ColumnDragDropTemplate,
+  RowStateTemplate,
 } from './Templates';
 // Imports of text sources
 import VirtualScrollRaw from '!!raw-loader!./Templates/TableVirtualScroll';
@@ -42,6 +42,7 @@ import ExtraTextRaw from '!!raw-loader!./Templates/TableExtraText';
 import ExpandRaw from '!!raw-loader!./Templates/TableExpand';
 import ZebraRaw from '!!raw-loader!./Templates/TableZebra';
 import ColumnDragDropRaw from '!!raw-loader!./Templates/TableColumnDragDrop';
+import RowStateRaw from '!!raw-loader!./Templates/TableRowState';
 
 const Separator = styled.div`
   height: 20px;
@@ -774,15 +775,16 @@ Sticky.parameters = {
   },
 };
 
-export const RowState = Template.bind({});
-RowState.args = {
-  rowList: rowListRowState,
-  columnList,
-  displayRowSelectionColumn: true,
-};
-RowState.storyName = 'Table. Стили строк (selected, disabled, error, success, hover).';
-RowState.parameters = {
+//<editor-fold desc="Пример c различными состояниями строк">
+const RowStateStory: ComponentStory<typeof Table> = (props) => (
+  <RowStateTemplate columnList={[]} rowList={[]} {...cleanUpProps(props)} />
+);
+export const RowStateExample = RowStateStory.bind({});
+RowStateExample.parameters = {
   docs: {
+    source: {
+      code: RowStateRaw,
+    },
     description: {
       story: `Для каждой строки помимо содержимого ячеек и id, можно задать следующие состояния строки: selected, 
       disabled, error, success, hover. Нужно учесть, что окраска строки по hover должна использоваться для 
@@ -790,6 +792,8 @@ RowState.parameters = {
     },
   },
 };
+RowStateExample.storyName = 'Table. Стили строк (selected, disabled, error, success, hover).';
+//</editor-fold>
 
 //<editor-fold desc="Пример c окрашиванием строк через одну">
 const ZebraStory: ComponentStory<typeof Table> = (props) => (
