@@ -57,6 +57,7 @@ export const HeaderCellComponent = ({
     sort,
     sortOrder,
     disableResize = false,
+    draggable = false,
     renderFilter,
   } = column;
   const iconSize = dimension === 's' || dimension === 'm' ? 16 : 20;
@@ -70,7 +71,9 @@ export const HeaderCellComponent = ({
       dimension={dimension}
       style={{ width: colWidth, minWidth: colWidth }}
       className="th"
+      data-draggable={draggable}
       data-th-column={name}
+      data-th-title={title}
       ref={cellRef}
     >
       <HeaderCellContent cellAlign={cellAlign}>

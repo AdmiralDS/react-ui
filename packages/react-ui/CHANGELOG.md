@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.17.0](https://github.com/AdmiralDS/react-ui/compare/v4.16.1...v4.17.0) (2023-05-31)
+
+
+### Features
+
+* **Table:** add column drag and drop ([a0c8a4b](https://github.com/AdmiralDS/react-ui/commit/a0c8a4b203c814cbfa9cb534ab7642a7864a5a8e))
+
+
+### Bug Fixes
+
+* **Button:** fix button appearance type name ([979814a](https://github.com/AdmiralDS/react-ui/commit/979814a6f4a60e908919e6d5b5bd93ea0044806b))
+* **Drawer:** fix DrawerContent height ([5b76318](https://github.com/AdmiralDS/react-ui/commit/5b763180565bdd4cad731429c01cbf087de9d1d3))
+* **Menu:** set correct checkbox color in disabled state ([8190c09](https://github.com/AdmiralDS/react-ui/commit/8190c09a6807b57e5b854885f25428ad7465e6a9))
+
 ### [4.16.1](https://github.com/AdmiralDS/react-ui/compare/v4.16.0...v4.16.1) (2023-05-26)
 
 
