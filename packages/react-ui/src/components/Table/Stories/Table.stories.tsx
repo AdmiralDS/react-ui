@@ -31,6 +31,7 @@ import {
   OrientationTemplate,
   CheckboxTemplate,
   ColumnWidthTemplate,
+  StyleTemplate,
 } from './Templates';
 // Imports of text sources
 import VirtualScrollRaw from '!!raw-loader!./Templates/TableVirtualScroll';
@@ -48,6 +49,7 @@ import SortRaw from '!!raw-loader!./Templates/TableSort';
 import OrientationRaw from '!!raw-loader!./Templates/TableOrientation';
 import CheckboxRaw from '!!raw-loader!./Templates/TableCheckbox';
 import ColumnWidthRaw from '!!raw-loader!./Templates/TableColumnWidth';
+import StyleRaw from '!!raw-loader!./Templates/TableStyle';
 
 const Separator = styled.div`
   height: 20px;
@@ -255,29 +257,39 @@ CheckboxExample.parameters = {
 CheckboxExample.storyName = 'Table. Пример c чекбоксами.';
 //</editor-fold>
 
-export const Style = Template.bind({});
-Style.args = {
-  rowList,
-  columnList,
-  greyHeader: true,
-  spacingBetweenItems: '20px',
-  style: {
-    maxHeight: '400px',
-  },
-};
-Style.storyName = 'Table. Пример стилизации.';
-Style.parameters = {
+//<editor-fold desc="Пример стилизации">
+const StyleStory: ComponentStory<typeof Table> = (props) => (
+  <StyleTemplate columnList={[]} rowList={[]} {...cleanUpProps(props)} />
+);
+export const StyleExample = StyleStory.bind({});
+StyleExample.parameters = {
   docs: {
+    source: {
+      code: StyleRaw,
+    },
     description: {
-      story: `Шапку таблицы можно окрашивать в серый цвет с помощью параметра greyHeader. 
-      Также изменять стили таблицы можно посредством атрибута style. Кроме того, к контейнеру таблицы можно применить все стандартные
-      html-атрибуты divа.\n\nШирина заголовка зависит от параметра spacingBetweenItems, подробнее о нем можно прочитать в макетах. 
-      По умолчанию минимальное значение 12, для таблиц S и M, и 16 для таблиц L и XL.\n\nС помощью параметра  showLastRowUnderline 
-      можно управлять отображением серой полоски подчеркивания для последеней строки таблицы. Кроме того, можно включать/отключать 
-      отображение вертикальной полосы разделителя для последнего столбца таблицы с помощью параметра showDividerForLastColumn.`,
+      story: `Существует ряд возможностей изменить дефолтные стили таблицы. Для таблицы можно задать атрибут style, который применится к корневому элементу таблицы. 
+      Кроме того, на корневой элемент можно прокинуть все стандартные html-атрибуты div-элемента.\n\nУ пользователя существует возможность менять стили 
+      отдельных элементов таблицы путем доступа к ним через определенные classNames и data-атрибуты. В таблице используются следующие classNames:\n\n* table - корневой
+      элемент таблицы;\n\n* tbody - тело таблицы;\n\n* tr - строка таблицы;\n\n* th - ячейка в хедере таблицы (заголовок столбца);\n\n* td - ячейка в теле таблицы.\n\nУ
+      каждого заголовка таблицы есть атрибут data-th-column={name колонки}, а у каждой ячейки в теле таблицы заданы атрибуты 
+      data-column={name колонки} и data-row={id строки}.\n\nТакже существует ряд 
+      параметров, влияющих на внешний вид таблицы:\n\n* dimension - параметр, регулирующий размер таблицы;\n\n* greyHeader - 
+      параметр, с помощью которого можно окрашивать шапку таблицы в серый цвет;\n\n* showDividerForLastColumn - параметр, 
+      который отвечает за отображение вертикальной полосы разделителя для последнего столбца таблицы. По умолчанию параметр равен false, 
+      то есть разделитель не отображается;\n\n* showLastRowUnderline - параметр, который управляет отображением серой линии 
+      подчеркивания для последней строки таблицы. По умолчанию параметр равен true, то есть линия отображается;\n\n* spacingBetweenItems -
+      параметр, который влияет на внешний вид заголовка и отвечает одновременно за размер правого бокового отступа внутри заголовка 
+      и за расстояние между иконкой фильтра (при её наличии) и остальным содержимым заголовка 
+      (<a href="https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?type=design&node-id=39-90743&t=3zpjH7G56cpfgH43-4">описание параметра в макетах</a>).
+      По умолчанию минимальное значение 12, для таблиц S и M, и 16 для таблиц L и XL. В коде предусмотрено, что
+      правый боковой отступ можно менять только в большую сторону в сравнении с дефолтным значением, а расстояние между иконкой фильтра и 
+      остальным содержимым заголовка можно как уменьшать, так и увеличивать с помощью spacingBetweenItems.`,
     },
   },
 };
+StyleExample.storyName = 'Table. Пример стилизации.';
+//</editor-fold>
 
 //<editor-fold desc="Пример с выравниванием контента">
 const OrientationStory: ComponentStory<typeof Table> = (props) => (
