@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 import type { FlexRowProps, FlexCellProps, FlexGrowCellProps, FlexContainerProps } from './Flex.types';
 import { calcCellWidth } from './Flex.utils';
-import { CELL_MAX_SIZE } from './Flex.constants';
+import { FLEX_CELL_MAX_SIZE } from './Flex.types';
 
 export const withBoxSize = css`
   box-sizing: border-box;
@@ -33,7 +33,7 @@ const Row = styled.div<FlexRowProps>`
 const Cell = styled.div<FlexCellProps>`
   ${withBoxSize};
 
-  width: ${({ col = CELL_MAX_SIZE, columnGap = 0 }: FlexCellProps) => calcCellWidth({ column: col, columnGap })};
+  width: ${({ col = FLEX_CELL_MAX_SIZE, columnGap = 0 }: FlexCellProps) => calcCellWidth({ column: col, columnGap })};
   overflow: hidden;
 `;
 

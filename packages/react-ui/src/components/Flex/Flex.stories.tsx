@@ -2,9 +2,7 @@ import * as React from 'react';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { ThemeProvider } from 'styled-components';
 import { withDesign } from 'storybook-addon-designs';
-import { LIGHT_THEME } from '#src/components/themes';
-import { Flex } from './Flex.styled';
-import { CELL_MAX_SIZE } from '#src/components/Flex/Flex.constants';
+import { LIGHT_THEME, Flex, FLEX_CELL_MAX_SIZE } from '@admiral-ds/react-ui';
 
 export default {
   title: 'Admiral-2.1/Flex.Container',
@@ -50,9 +48,9 @@ const Template: ComponentStory<typeof Flex.Container> = (props) => {
     <ThemeProvider theme={LIGHT_THEME}>
       <Flex.Container {...props} style={S.container}>
         <Flex.Row {...props} style={S.row}>
-          {Array.from({ length: CELL_MAX_SIZE }, (_, i) => (
-            <Flex.Cell {...props} style={S.column} key={CELL_MAX_SIZE - i} col={CELL_MAX_SIZE - i}>
-              col = {CELL_MAX_SIZE - i}
+          {Array.from({ length: FLEX_CELL_MAX_SIZE }, (_, i) => (
+            <Flex.Cell {...props} style={S.column} key={FLEX_CELL_MAX_SIZE - i} col={FLEX_CELL_MAX_SIZE - i}>
+              col = {FLEX_CELL_MAX_SIZE - i}
             </Flex.Cell>
           ))}
           <Flex.GrowCell {...props} style={S.column}>

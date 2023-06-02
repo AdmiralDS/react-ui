@@ -44,3 +44,5 @@ export interface FlexCellProps {
 export interface FlexGrowCellProps {
   grow?: number;
 }
+
+export const FLEX_CELL_MAX_SIZE: FlexCellSizes = 24;
