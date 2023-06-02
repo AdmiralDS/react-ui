@@ -9,7 +9,6 @@ import { Table } from '@admiral-ds/react-ui';
 import {
   columnList,
   columnListWithCustomTitle,
-  columnListWithWidth,
   rowList,
   columnListWithCustomRender,
   rowListWithCustomRenderGroup,
@@ -31,6 +30,7 @@ import {
   SortTemplate,
   OrientationTemplate,
   CheckboxTemplate,
+  ColumnWidthTemplate,
 } from './Templates';
 // Imports of text sources
 import VirtualScrollRaw from '!!raw-loader!./Templates/TableVirtualScroll';
@@ -47,6 +47,7 @@ import FilterRaw from '!!raw-loader!./Templates/TableFilter';
 import SortRaw from '!!raw-loader!./Templates/TableSort';
 import OrientationRaw from '!!raw-loader!./Templates/TableOrientation';
 import CheckboxRaw from '!!raw-loader!./Templates/TableCheckbox';
+import ColumnWidthRaw from '!!raw-loader!./Templates/TableColumnWidth';
 
 const Separator = styled.div`
   height: 20px;
@@ -201,14 +202,16 @@ Playground.args = {
   columnList,
 };
 
-export const ColumnWidth = Template.bind({});
-ColumnWidth.args = {
-  rowList,
-  columnList: columnListWithWidth,
-};
-ColumnWidth.storyName = 'Table. Пример изменения ширины столбцов.';
-ColumnWidth.parameters = {
+//<editor-fold desc="Пример с шириной столбцов">
+const ColumnWidthStory: ComponentStory<typeof Table> = (props) => (
+  <ColumnWidthTemplate columnList={[]} rowList={[]} {...cleanUpProps(props)} />
+);
+export const ColumnWidthExample = ColumnWidthStory.bind({});
+ColumnWidthExample.parameters = {
   docs: {
+    source: {
+      code: ColumnWidthRaw,
+    },
     description: {
       story: `По умолчанию ширина столбца составляет 100 пикселей. Чтобы изменить этот 
       параметр в массиве columnList для столбца, чью ширину нужно изменить, следует задать параметр width. 
@@ -226,6 +229,8 @@ ColumnWidth.parameters = {
     },
   },
 };
+ColumnWidthExample.storyName = 'Table. Пример изменения ширины столбцов.';
+//</editor-fold>
 
 //<editor-fold desc="Пример с чекбоксами">
 const CheckboxStory: ComponentStory<typeof Table> = (props) => (

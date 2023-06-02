@@ -12,3 +12,4 @@ export * from './TableFilter';
 export * from './TableSort';
 export * from './TableOrientation';
 export * from './TableCheckbox';
+export * from './TableColumnWidth';
