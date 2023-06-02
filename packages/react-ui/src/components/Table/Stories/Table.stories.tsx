@@ -8,7 +8,6 @@ import { Table } from '@admiral-ds/react-ui';
 // Массивы с данными столбцов и строк вынесены в отдельный файл в связи с большим объемом информации
 import {
   columnList,
-  columnListOrientation,
   columnListWithCustomTitle,
   columnListWithWidth,
   rowList,
@@ -30,6 +29,7 @@ import {
   MultilineTemplate,
   FilterTemplate,
   SortTemplate,
+  OrientationTemplate,
 } from './Templates';
 // Imports of text sources
 import VirtualScrollRaw from '!!raw-loader!./Templates/TableVirtualScroll';
@@ -44,6 +44,7 @@ import StickyRaw from '!!raw-loader!./Templates/TableSticky';
 import MultilineRaw from '!!raw-loader!./Templates/TableMultiline';
 import FilterRaw from '!!raw-loader!./Templates/TableFilter';
 import SortRaw from '!!raw-loader!./Templates/TableSort';
+import OrientationRaw from '!!raw-loader!./Templates/TableOrientation';
 
 const Separator = styled.div`
   height: 20px;
@@ -295,20 +296,24 @@ Style.parameters = {
   },
 };
 
-export const Orientation = Template.bind({});
-Orientation.args = {
-  rowList,
-  columnList: columnListOrientation,
-};
-Orientation.storyName = 'Table. Пример с настройкой выравнивания контента столбца.';
-Orientation.parameters = {
+//<editor-fold desc="Пример с выравниванием контента">
+const OrientationStory: ComponentStory<typeof Table> = (props) => (
+  <OrientationTemplate columnList={[]} rowList={[]} {...cleanUpProps(props)} />
+);
+export const OrientationExample = OrientationStory.bind({});
+OrientationExample.parameters = {
   docs: {
+    source: {
+      code: OrientationRaw,
+    },
     description: {
       story: `По умолчанию контент столбца выравнивается по левому краю. Если необходимо выравнивание по правому краю, 
       то следует задать параметр cellAlign: 'right' для столбца.`,
     },
   },
 };
+OrientationExample.storyName = 'Table. Пример с настройкой выравнивания контента столбца.';
+//</editor-fold>
 
 //<editor-fold desc="Пример сортировки">
 const SortStory: ComponentStory<typeof Table> = (props) => (

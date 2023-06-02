@@ -226,33 +226,6 @@ export const columnListWithWidth: Column[] = [
   },
 ];
 
-export const columnListOrientation: Column[] = [
-  {
-    name: 'transfer_type',
-    title: 'Тип сделки',
-    width: 150,
-  },
-  {
-    name: 'transfer_date',
-    title: 'Дата сделки',
-  },
-  {
-    name: 'transfer_amount',
-    title: 'Сумма',
-    cellAlign: 'right',
-    width: 150,
-  },
-  {
-    name: 'currency',
-    title: 'Валюта',
-  },
-  {
-    name: 'rate',
-    title: 'Ставка',
-    cellAlign: 'right',
-  },
-];
-
 export const columnListWithCustomTitle: Column[] = [
   {
     name: 'transfer_type',
