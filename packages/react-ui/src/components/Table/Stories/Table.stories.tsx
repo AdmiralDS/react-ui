@@ -30,6 +30,7 @@ import {
   FilterTemplate,
   SortTemplate,
   OrientationTemplate,
+  CheckboxTemplate,
 } from './Templates';
 // Imports of text sources
 import VirtualScrollRaw from '!!raw-loader!./Templates/TableVirtualScroll';
@@ -45,6 +46,7 @@ import MultilineRaw from '!!raw-loader!./Templates/TableMultiline';
 import FilterRaw from '!!raw-loader!./Templates/TableFilter';
 import SortRaw from '!!raw-loader!./Templates/TableSort';
 import OrientationRaw from '!!raw-loader!./Templates/TableOrientation';
+import CheckboxRaw from '!!raw-loader!./Templates/TableCheckbox';
 
 const Separator = styled.div`
   height: 20px;
@@ -160,33 +162,6 @@ const Template: ComponentStory<typeof Table> = ({ columnList, ...args }) => {
   return <Table {...args} columnList={cols} onColumnResize={handleResize} />;
 };
 
-const Template3: ComponentStory<typeof Table> = ({ rowList, columnList, ...args }) => {
-  const [rows, setRows] = React.useState([...rowList]);
-  const [cols, setCols] = React.useState([...columnList]);
-
-  const handleSelectionChange = (ids: Record<string | number, boolean>): void => {
-    const updRows = rows.map((row) => ({ ...row, selected: ids[row.id] }));
-    setRows(updRows);
-  };
-
-  const handleResize = ({ name, width }: { name: string; width: string }) => {
-    const newCols = cols.map((col) => (col.name === name ? { ...col, width } : col));
-    setCols(newCols);
-  };
-
-  return (
-    <>
-      <Table
-        {...args}
-        rowList={rows}
-        columnList={cols}
-        onRowSelectionChange={handleSelectionChange}
-        onColumnResize={handleResize}
-      />
-    </>
-  );
-};
-
 const Template8: ComponentStory<typeof Table> = ({ rowList, columnList, ...args }) => {
   const [rows, setRows] = React.useState([...rowList]);
   const [cols, setCols] = React.useState([...columnList]);
@@ -252,15 +227,16 @@ ColumnWidth.parameters = {
   },
 };
 
-export const Checkbox = Template3.bind({});
-Checkbox.args = {
-  rowList,
-  columnList: columnList,
-  displayRowSelectionColumn: true,
-};
-Checkbox.storyName = 'Table. Пример c чекбоксами.';
-Checkbox.parameters = {
+//<editor-fold desc="Пример с чекбоксами">
+const CheckboxStory: ComponentStory<typeof Table> = (props) => (
+  <CheckboxTemplate columnList={[]} rowList={[]} {...cleanUpProps(props)} />
+);
+export const CheckboxExample = CheckboxStory.bind({});
+CheckboxExample.parameters = {
   docs: {
+    source: {
+      code: CheckboxRaw,
+    },
     description: {
       story: `Отображение столбца с чекбоксами регулируется параметром displayRowSelectionColumn. 
       Чекбокс в шапке таблицы позволяет выбрать все строки (если не выбрано ни одной строки), 
@@ -271,6 +247,8 @@ Checkbox.parameters = {
     },
   },
 };
+CheckboxExample.storyName = 'Table. Пример c чекбоксами.';
+//</editor-fold>
 
 export const Style = Template.bind({});
 Style.args = {

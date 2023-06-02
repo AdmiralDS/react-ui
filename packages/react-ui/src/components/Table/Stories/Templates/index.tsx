@@ -11,3 +11,4 @@ export * from './TableMultiline';
 export * from './TableFilter';
 export * from './TableSort';
 export * from './TableOrientation';
+export * from './TableCheckbox';
