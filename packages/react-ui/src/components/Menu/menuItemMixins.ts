@@ -8,7 +8,6 @@ export const styleTextMixin = css<{ dimension: ItemDimension }>`
   ul[data-dimension='s'] & {
     ${typography['Body/Body 2 Long']}
   }
-  text-overflow: ellipsis;
 `;
 
 export const colorTextMixin = css<{ disabled?: boolean }>`
