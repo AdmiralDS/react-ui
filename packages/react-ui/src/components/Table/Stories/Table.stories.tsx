@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import { Table } from '@admiral-ds/react-ui';
 
 // Массивы с данными столбцов и строк вынесены в отдельный файл в связи с большим объемом информации
-import { columnList, rowList, columnListWithCustomRender, rowListWithCustomRenderGroup } from './data';
+import { columnList, rowList, rowListWithCustomRenderGroup } from './data';
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 import {
@@ -27,6 +27,7 @@ import {
   ColumnWidthTemplate,
   StyleTemplate,
   CustomTitleTemplate,
+  RenderCellTemplate,
 } from './Templates';
 // Imports of text sources
 import VirtualScrollRaw from '!!raw-loader!./Templates/TableVirtualScroll';
@@ -46,6 +47,7 @@ import CheckboxRaw from '!!raw-loader!./Templates/TableCheckbox';
 import ColumnWidthRaw from '!!raw-loader!./Templates/TableColumnWidth';
 import StyleRaw from '!!raw-loader!./Templates/TableStyle';
 import CustomTitleRaw from '!!raw-loader!./Templates/TableCustomTitle';
+import RenderCellRaw from '!!raw-loader!./Templates/TableRenderCell';
 
 const Separator = styled.div`
   height: 20px;
@@ -597,12 +599,25 @@ CustomTitleExample.parameters = {
 CustomTitleExample.storyName = 'Table. Пример кастомизации заголовков столбцов.';
 //</editor-fold>
 
-export const CustomRenderCell = Template.bind({});
-CustomRenderCell.args = {
-  rowList,
-  columnList: columnListWithCustomRender,
+//<editor-fold desc="Пример кастомизации ячейки">
+const RenderCellStory: ComponentStory<typeof Table> = (props) => (
+  <RenderCellTemplate columnList={[]} rowList={[]} {...cleanUpProps(props)} />
+);
+export const RenderCellExample = RenderCellStory.bind({});
+RenderCellExample.parameters = {
+  docs: {
+    source: {
+      code: RenderCellRaw,
+    },
+    description: {
+      story: `Для формирования контента ячейки пользователь может использовать рендер-колбек renderCell. 
+      Функция renderCell задается для каждого столбца в отдельности и представляет собой метод для переопределения стандартного вида ячейки.
+      На вход функция renderCell получает 3 параметра: data - контент ячейки, row - объект строки и rowIdx - индекс строки.`,
+    },
+  },
 };
-CustomRenderCell.storyName = 'Table. Пример кастомизации компонента ячейки.';
+RenderCellExample.storyName = 'Пример кастомизации компонента ячейки (renderCell).';
+//</editor-fold>
 
 export const CustomRenderGroupTitle = Template8.bind({});
 CustomRenderGroupTitle.args = {
@@ -610,7 +625,7 @@ CustomRenderGroupTitle.args = {
   columnList,
   displayRowExpansionColumn: true,
 };
-CustomRenderGroupTitle.storyName = 'Table. Пример кастомизации заголовка группы';
+CustomRenderGroupTitle.storyName = 'Table. Пример кастомизации заголовка группы (renderGroupTitle)';
 
 //<editor-fold desc="Пример с drag and drop столбцов">
 const ColumnDragDropStory: ComponentStory<typeof Table> = (props) => (
