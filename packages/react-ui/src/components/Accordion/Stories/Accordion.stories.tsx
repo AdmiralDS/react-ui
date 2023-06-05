@@ -2,20 +2,13 @@ import * as React from 'react';
 import styled from 'styled-components';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 
-import {
-  Accordion,
-  AccordionItem,
-  FieldSet,
-  RadioButton,
-  SelectField as Select,
-  T,
-  Option,
-} from '@admiral-ds/react-ui';
+import { Accordion, AccordionItem } from '@admiral-ds/react-ui';
 import {
   AccordionDimensionTemplate,
   AccordionDividerTemplate,
   AccordionIconTemplate,
   AccordionModesTemplate,
+  AccordionPlaygroundTemplate,
 } from './Templates';
 
 // Imports of text sources
@@ -23,6 +16,7 @@ import AccordionDividerRaw from '!!raw-loader!./Templates/AccordionDivider';
 import AccordionIconRaw from '!!raw-loader!./Templates/AccordionIcon';
 import AccordionModesRaw from '!!raw-loader!./Templates/AccordionModes';
 import AccordionDimensionRaw from '!!raw-loader!./Templates/AccordionDimension';
+import AccordionPlaygroundRaw from '!!raw-loader!./Templates/AccordionPlayground';
 
 const Separator = styled.div`
   height: 20px;
@@ -45,10 +39,6 @@ const Description = () => (
     под ак аккордеоном сдвигается вниз на высоту текста открытой вкладки.
   </Desc>
 );
-
-const SelectField = styled(Select)`
-  margin-top: 24px;
-`;
 
 export default {
   title: 'Admiral-2.1/Accordion',
@@ -93,92 +83,21 @@ export default {
     },
   },
 } as ComponentMeta<typeof Accordion>;
-const OPTIONS_SIMPLE = [
-  'teeext 1',
-  'text 2 text text 2 text text 2 text text 2 text text 2 text text 2 text text 2 text ',
-  'text 3',
-  'text 4',
-  'text 5',
-  'texttt 6',
-];
 
-const Template1: ComponentStory<typeof Accordion> = (args) => {
-  const values = ['1', '2', '3'];
-  const [selected, setSelected] = React.useState<number | string | null>('');
-  const [selectValue, setSelectValue] = React.useState('');
+//<editor-fold desc="Размеры">
+const AccordionPlaygroundStory: ComponentStory<typeof Accordion> = (args) => <AccordionPlaygroundTemplate {...args} />;
 
-  const onChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectValue(e.target.value);
-  };
-  return (
-    <>
-      <Accordion {...args}>
-        <AccordionItem
-          id="accordion1-item1"
-          title="Первый пункт"
-          onClick={(title, expanded, event) => console.log({ title, expanded, event })}
-        >
-          Контент первого пункта
-        </AccordionItem>
-        <AccordionItem
-          id="accordion1-item2"
-          title="Второй пункт"
-          onClick={(title, expanded, event) => console.log({ title, expanded, event })}
-        >
-          Аккордеон — это вертикальный список заголовков, которые, при нажатии, показывают контент находящийся под ними.
-          <FieldSet
-            style={{ marginTop: 8 }}
-            onChange={(e) => {
-              setSelected((e.target as HTMLInputElement).value);
-            }}
-            legend="Управляемая группа радиокнопок:"
-            dimension={args.dimension === 'm' ? 's' : 'm'}
-          >
-            <RadioButton value={values[0]} name="test1" checked={values[0] === selected} readOnly>
-              First option
-            </RadioButton>
-            <RadioButton value={values[1]} name="test1" checked={values[1] === selected} readOnly>
-              Second option
-            </RadioButton>
-            <RadioButton value={values[2]} name="test1" checked={values[2] === selected} readOnly>
-              Third option
-            </RadioButton>
-          </FieldSet>
-          <SelectField
-            mode="searchSelect"
-            label="label"
-            className="Search"
-            value={selectValue}
-            onChange={onChange}
-            placeholder="Placeholder"
-          >
-            {OPTIONS_SIMPLE.map((option, ind) => (
-              <Option key={option} value={option} disabled={ind === 4}>
-                {option}
-              </Option>
-            ))}
-          </SelectField>
-        </AccordionItem>
-        <AccordionItem
-          id="accordion1-item3"
-          defaultExpanded
-          title="Третий пункт"
-          onClick={(title, expanded, event) => console.log({ title, expanded, event })}
-        >
-          Будущее игр никогда не было таким вдохновляющим. Творчество в играх процветает. Новые сервисы позволяют
-          находить больше игр, а также приближают игроков к любимым играм, стримерам и создателям. Облако создает
-          огромную возможность для потоковой передачи игр консольного уровня, что позволит людям играть с теми игроками,
-          с кем хочется и где захочется. И для многих из нас нет ничего более вдохновляющего, чем рассвет нового
-          поколения консолей.
-        </AccordionItem>
-      </Accordion>
-    </>
-  );
+export const AccordionPlayground = AccordionPlaygroundStory.bind({});
+AccordionPlayground.parameters = {
+  docs: {
+    source: {
+      code: AccordionPlaygroundRaw,
+    },
+  },
 };
-
-export const AccordionPlayground = Template1.bind({});
 AccordionPlayground.args = {};
 AccordionPlayground.storyName = 'Accordion. Playground.';
+//</editor-fold>
 
 //<editor-fold desc="Размеры">
 const AccordionDimensionStory: ComponentStory<typeof Accordion> = () => <AccordionDimensionTemplate />;
