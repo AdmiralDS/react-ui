@@ -2,7 +2,7 @@ import * as React from 'react';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { ThemeProvider } from 'styled-components';
 import { withDesign } from 'storybook-addon-designs';
-import { LIGHT_THEME, Flex, FLEX_CELL_MAX_SIZE } from '@admiral-ds/react-ui';
+import { LIGHT_THEME, Flex, FLEX_CELL_MAX_SIZE, InputField, TextField } from '@admiral-ds/react-ui';
 
 export default {
   title: 'Admiral-2.1/Flex.Container',
@@ -31,59 +31,30 @@ export default {
   },
 } as ComponentMeta<typeof Flex.Container>;
 
-const S = {
-  container: {
-    backgroundColor: LIGHT_THEME.color['Attention/Attention 50 Main'],
-  },
-  row: {
-    backgroundColor: LIGHT_THEME.color['Cyan/Cyan 60 Main'],
-  },
-  column: {
-    backgroundColor: LIGHT_THEME.color['Warning/Warning 50 Main'],
-  },
-};
-
 const Template: ComponentStory<typeof Flex.Container> = (props) => {
   return (
     <ThemeProvider theme={LIGHT_THEME}>
-      <Flex.Container {...props} style={S.container}>
-        <Flex.Row {...props} style={S.row}>
+      <Flex.Container {...props}>
+        <Flex.Row {...props}>
           {Array.from({ length: FLEX_CELL_MAX_SIZE }, (_, i) => (
-            <Flex.Cell {...props} style={S.column} key={FLEX_CELL_MAX_SIZE - i} col={FLEX_CELL_MAX_SIZE - i}>
-              col = {FLEX_CELL_MAX_SIZE - i}
+            <Flex.Cell {...props} key={FLEX_CELL_MAX_SIZE - i} col={FLEX_CELL_MAX_SIZE - i}>
+              <InputField label={`Инпут шириной ${FLEX_CELL_MAX_SIZE - i}`} />
             </Flex.Cell>
           ))}
-          <Flex.GrowCell {...props} style={S.column}>
-            GrowCell
+          <Flex.GrowCell {...props}>
+            <TextField label="TextField" required />
           </Flex.GrowCell>
         </Flex.Row>
-        <Flex.Row {...props} style={S.row}>
-          <Flex.Cell {...props} style={S.column} col={23}>
-            Cell 23
+        <Flex.Row {...props}>
+          <Flex.Cell {...props} col={5}>
+            <InputField label={`Инпут шириной 5`} />
           </Flex.Cell>
-          <Flex.Cell {...props} style={S.column} col={1}>
-            Cell 1
-          </Flex.Cell>
-          <Flex.Cell {...props} style={S.column} col={2}>
-            Cell 2
-          </Flex.Cell>
-          <Flex.Cell {...props} style={S.column} col={22}>
-            Cell 22
+          {/* пространство между инпутами в 3 колонки */}
+          <Flex.Cell col={3} />
+          <Flex.Cell {...props} col={3}>
+            <InputField label={`Инпут шириной 3`} />
           </Flex.Cell>
         </Flex.Row>
-        <Flex.Row>Row</Flex.Row>
-        <Flex.Cell {...props} style={S.column} col={23}>
-          Cell 23
-        </Flex.Cell>
-        <Flex.Cell {...props} style={S.column} col={1}>
-          Cell 1
-        </Flex.Cell>
-        <Flex.Cell {...props} style={S.column} col={2}>
-          Cell 2
-        </Flex.Cell>
-        <Flex.Cell {...props} style={S.column} col={22}>
-          Cell 22
-        </Flex.Cell>
       </Flex.Container>
     </ThemeProvider>
   );
