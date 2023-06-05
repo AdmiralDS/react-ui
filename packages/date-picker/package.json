@@ -35,7 +35,7 @@
     "@admiral-ds/icons": "^2.0.0",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
-    "styled-components": "^5.1.0 || ^6.0.0-rc.1"
+    "styled-components": "^5.1.0"
   },
   "devDependencies": {
     "@admiral-ds/react-ui": "*",
@@ -76,6 +76,6 @@
     "@admiral-ds/icons": "^2.0.0",
     "@admiral-ds/react-ui": "*",
     "react": "^17.0.0 || ^18.0.0",
-    "styled-components": "^5.1.0 || ^6.0.0-rc.1"
+    "styled-components": "^5.1.0"
   }
 }
