@@ -2,9 +2,8 @@ import * as React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
-import { Notification } from '#src/components/Notification';
-import type { Theme } from '#src/components/themes';
-import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
+import { Notification, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
+import type { Theme } from '@admiral-ds/react-ui';
 
 const Layout = styled.div`
   margin: 20px;

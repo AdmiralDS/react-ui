@@ -1,7 +1,7 @@
 import * as React from 'react';
 import type { CSSProperties } from 'react';
 import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
-import styled, { ThemeContext } from 'styled-components';
+import styled, { useTheme } from 'styled-components';
 import { LIGHT_THEME } from '#src/components/themes';
 import { OpenStatusButton } from '#src/components/OpenStatusButton';
 import { keyboardKey } from '#src/components/common/keyboardKey';
@@ -32,6 +32,8 @@ import { DropDownProvider } from '#src/components/input/Select/DropDownContext';
 import type { ItemProps } from '#src/components/Menu/MenuItem';
 import type { SearchFormat, SelectItemProps, IConstantOption } from '#src/components/input/Select/types';
 import { defaultFilterItem } from '#src/components/input/Select/utils';
+
+export type { SearchFormat } from './types';
 
 /**
  * Осталось сделать:
@@ -174,6 +176,8 @@ export interface SelectProps extends Omit<React.InputHTMLAttributes<HTMLSelectEl
      */
     itemHeight: 'auto' | number;
   };
+  /** Признак принудительного скрытия тултипа, показываемого при переполнении */
+  forceHideOverflowTooltip?: boolean;
 }
 
 export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
@@ -224,11 +228,13 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       searchFormat = 'wholly',
       onFilterItem = defaultFilterItem,
       virtualScroll,
+      title,
+      forceHideOverflowTooltip = false,
       ...props
     },
     ref,
   ) => {
-    const theme = React.useContext(ThemeContext) || LIGHT_THEME;
+    const theme = useTheme() || LIGHT_THEME;
     const emptyMessage = locale?.emptyMessage || (
       <DropDownText>{theme.locales[theme.currentLocale].select.emptyMessage}</DropDownText>
     );
@@ -393,7 +399,12 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
     const visibleValueIsString = typeof visibleValue === 'string';
 
     const wrappedVisibleValue = visibleValueIsString ? (
-      <DisplayValue visibleValue={visibleValue} isSearchPanelOpen={isSearchPanelOpen} targetRef={containerRef} />
+      <DisplayValue
+        visibleValue={visibleValue}
+        isSearchPanelOpen={isSearchPanelOpen}
+        targetRef={containerRef}
+        forceHideOverflowTooltip={forceHideOverflowTooltip}
+      />
     ) : (
       visibleValue
     );
@@ -576,6 +587,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
         onFocus={onFocus}
         skeleton={skeleton}
         onBlur={handleWrapperBlur}
+        title={title}
       >
         <ConstantSelectProvider
           onConstantOptionMount={onConstantOptionMount}

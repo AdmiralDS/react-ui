@@ -1,15 +1,13 @@
 import React, { useState } from 'react';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { GroupActionsPane, PaneSeparator } from '#src/components/GroupActionsPane';
+import { withDesign } from 'storybook-addon-designs';
 import styled, { ThemeProvider } from 'styled-components';
-import { typography } from '#src/components/Typography';
+import { GroupActionsPane, PaneSeparator, TextButton, typography } from '@admiral-ds/react-ui';
+import type { Theme } from '@admiral-ds/react-ui';
 import { ReactComponent as GovernmentOutline } from '@admiral-ds/icons/build/category/GovernmentOutline.svg';
 import { ReactComponent as TelegramOutline } from '@admiral-ds/icons/build/communication/TelegrammOutline.svg';
 import { ReactComponent as AlertOutline } from '@admiral-ds/icons/build/category/AlertOutline.svg';
 import { ReactComponent as CardSolid } from '@admiral-ds/icons/build/finance/CardSolid.svg';
-import { withDesign } from 'storybook-addon-designs';
-import type { Theme } from '#src/components/themes';
-import { TextButton } from '#src/components/TextButton';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -127,11 +125,11 @@ const Simple: ComponentStory<typeof GroupActionsPane> = (args) => {
           settingsButtonDropContainerStyle={{ dropContainerClassName: 'settingsButtonDropContainerClass' }}
           settingsMenu={<SettingsMenu>Здесь может быть меню настройки</SettingsMenu>}
         >
-          <TextButton text={'Action 1'} dimension={dimension} icon={<GovernmentOutline />} />
-          <TextButton text={'Action 2'} dimension={dimension} icon={<TelegramOutline />} />
-          <TextButton text={'Action 3'} dimension={dimension} icon={<AlertOutline />} disabled />
+          <TextButton text={'Action 1'} dimension={dimension} iconStart={<GovernmentOutline />} />
+          <TextButton text={'Action 2'} dimension={dimension} iconStart={<TelegramOutline />} />
+          <TextButton text={'Action 3'} dimension={dimension} iconStart={<AlertOutline />} disabled />
           <PaneSeparator dimension={dimension} />
-          <TextButton text={'Action 4'} dimension={dimension} icon={<CardSolid />} />
+          <TextButton text={'Action 4'} dimension={dimension} iconStart={<CardSolid />} />
         </GroupActionsPane>
       </Wrapper>
     </ThemeProvider>

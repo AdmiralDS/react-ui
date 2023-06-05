@@ -3,11 +3,8 @@ import React, { useState } from 'react';
 import styled, { css, ThemeProvider } from 'styled-components';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
-import { T } from '#src/components/T';
-
-import { EditMode } from './index';
-import type { Theme } from '#src/components/themes';
-import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
+import { EditMode, T, INPUT_STATUS_VALUES, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
+import type { Theme } from '@admiral-ds/react-ui';
 
 const Separator = styled.div`
   height: 20px;
@@ -46,6 +43,10 @@ export default {
     dimension: {
       options: ['xxl', 'xl', 'm', 's'],
       control: { type: 'radio' },
+    },
+    status: {
+      control: { type: 'radio' },
+      options: INPUT_STATUS_VALUES,
     },
     bold: {
       control: { type: 'boolean' },

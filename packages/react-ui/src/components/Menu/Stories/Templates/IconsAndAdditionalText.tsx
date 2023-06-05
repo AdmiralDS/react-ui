@@ -1,9 +1,5 @@
 import * as React from 'react';
-import styled, { css } from 'styled-components';
-import { MenuItem } from '#src/components/Menu/MenuItem';
-import { typography } from '#src/components/Typography';
-import { getItemHeight, Menu } from '#src/components/Menu';
-import { mediumGroupBorderRadius } from '#src/components/themes';
+
 import { ReactComponent as VacationSolid } from '@admiral-ds/icons/build/category/VacationSolid.svg';
 import { ReactComponent as AlertSolid } from '@admiral-ds/icons/build/category/AlertSolid.svg';
 import { ReactComponent as DiamondSolid } from '@admiral-ds/icons/build/category/DiamondSolid.svg';
@@ -17,8 +13,9 @@ import { ReactComponent as PostOutline } from '@admiral-ds/icons/build/category/
 import { ReactComponent as ShoppingBagOutline } from '@admiral-ds/icons/build/category/ShoppingBagOutline.svg';
 import { ReactComponent as TrophyOutline } from '@admiral-ds/icons/build/category/TrophyOutline.svg';
 import { ReactComponent as AgreedSolid } from '@admiral-ds/icons/build/service/AgreedSolid.svg';
-import type { MenuProps } from '#src/components/Menu';
-import type { RenderOptionProps } from '#src/components/Menu/MenuItem';
+import type { MenuProps, RenderOptionProps } from '@admiral-ds/react-ui';
+import { getItemHeight, Menu, MenuItem, mediumGroupBorderRadius, typography } from '@admiral-ds/react-ui';
+import styled, { css } from 'styled-components';
 
 const items = [
   {

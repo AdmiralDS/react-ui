@@ -18,6 +18,10 @@ Object {
   left: calc(16px + 2px);
 }
 
+.c1:checked:disabled + div > span {
+  background: #A7C7FF;
+}
+
 .c1:checked + div > div {
   left: calc(16px + -12px + 4px);
 }
@@ -35,10 +39,6 @@ Object {
   outline: none;
 }
 
-.c1:disabled + div > span {
-  background: #B0B5BD;
-}
-
 .c5 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -54,6 +54,7 @@ Object {
   font-size: 16px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
   color: #B0B5BD;
 }
 
@@ -65,7 +66,7 @@ Object {
   flex-shrink: 0;
   width: 36px;
   height: 20px;
-  background: #717681;
+  background: #B0B5BD;
 }
 
 .c4:before {
@@ -152,7 +153,6 @@ Object {
           <span
             aria-hidden="true"
             class="c4"
-            disabled=""
           />
         </div>
         <div
@@ -179,6 +179,10 @@ Object {
   left: calc(16px + 2px);
 }
 
+.c1:checked:disabled + div > span {
+  background: #A7C7FF;
+}
+
 .c1:checked + div > div {
   left: calc(16px + -12px + 4px);
 }
@@ -196,10 +200,6 @@ Object {
   outline: none;
 }
 
-.c1:disabled + div > span {
-  background: #B0B5BD;
-}
-
 .c5 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -215,6 +215,7 @@ Object {
   font-size: 16px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
   color: #B0B5BD;
 }
 
@@ -226,7 +227,7 @@ Object {
   flex-shrink: 0;
   width: 36px;
   height: 20px;
-  background: #717681;
+  background: #B0B5BD;
 }
 
 .c4:before {
@@ -312,7 +313,6 @@ Object {
         <span
           aria-hidden="true"
           class="c4"
-          disabled=""
         />
       </div>
       <div
@@ -395,6 +395,10 @@ Object {
   left: calc(16px + 2px);
 }
 
+.c1:checked:disabled + div > span {
+  background: #A7C7FF;
+}
+
 .c1:checked + div > div {
   left: calc(16px + -12px + 4px);
 }
@@ -412,10 +416,6 @@ Object {
   outline: none;
 }
 
-.c1:disabled + div > span {
-  background: #B0B5BD;
-}
-
 .c5 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -431,6 +431,7 @@ Object {
   font-size: 16px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
   color: #23262D;
 }
 
@@ -552,6 +553,10 @@ Object {
   left: calc(16px + 2px);
 }
 
+.c1:checked:disabled + div > span {
+  background: #A7C7FF;
+}
+
 .c1:checked + div > div {
   left: calc(16px + -12px + 4px);
 }
@@ -569,10 +574,6 @@ Object {
   outline: none;
 }
 
-.c1:disabled + div > span {
-  background: #B0B5BD;
-}
-
 .c5 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -588,6 +589,7 @@ Object {
   font-size: 16px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
   color: #23262D;
 }
 
@@ -764,6 +766,10 @@ Object {
   left: calc(16px + 2px);
 }
 
+.c1:checked:disabled + div > span {
+  background: #A7C7FF;
+}
+
 .c1:checked + div > div {
   left: calc(16px + -12px + 4px);
 }
@@ -781,10 +787,6 @@ Object {
   outline: none;
 }
 
-.c1:disabled + div > span {
-  background: #B0B5BD;
-}
-
 .c5 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -800,6 +802,7 @@ Object {
   font-size: 16px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
   color: #23262D;
 }
 
@@ -921,6 +924,10 @@ Object {
   left: calc(16px + 2px);
 }
 
+.c1:checked:disabled + div > span {
+  background: #A7C7FF;
+}
+
 .c1:checked + div > div {
   left: calc(16px + -12px + 4px);
 }
@@ -938,10 +945,6 @@ Object {
   outline: none;
 }
 
-.c1:disabled + div > span {
-  background: #B0B5BD;
-}
-
 .c5 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -957,6 +960,7 @@ Object {
   font-size: 16px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
   color: #23262D;
 }
 
@@ -1133,6 +1137,10 @@ Object {
   left: calc(12px + 2px);
 }
 
+.c1:checked:disabled + div > span {
+  background: #A7C7FF;
+}
+
 .c1:checked + div > div {
   left: calc(12px + -12px + 4px);
 }
@@ -1150,10 +1158,6 @@ Object {
   outline: none;
 }
 
-.c1:disabled + div > span {
-  background: #B0B5BD;
-}
-
 .c5 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -1169,6 +1173,7 @@ Object {
   font-size: 14px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
   color: #23262D;
 }
 
@@ -1290,6 +1295,10 @@ Object {
   left: calc(12px + 2px);
 }
 
+.c1:checked:disabled + div > span {
+  background: #A7C7FF;
+}
+
 .c1:checked + div > div {
   left: calc(12px + -12px + 4px);
 }
@@ -1307,10 +1316,6 @@ Object {
   outline: none;
 }
 
-.c1:disabled + div > span {
-  background: #B0B5BD;
-}
-
 .c5 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -1326,6 +1331,7 @@ Object {
   font-size: 14px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
   color: #23262D;
 }
 

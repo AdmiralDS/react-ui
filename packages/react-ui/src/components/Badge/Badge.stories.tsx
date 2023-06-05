@@ -2,11 +2,9 @@ import * as React from 'react';
 import styled from 'styled-components';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
-import { Button } from '#src/components/Button';
-import { typography } from '#src/components/Typography';
 
-import type { BadgeProps } from '.';
-import { Badge } from '.';
+import type { BadgeProps } from '@admiral-ds/react-ui';
+import { Badge, Button, typography } from '@admiral-ds/react-ui';
 
 const Separator = styled.div`
   height: 20px;

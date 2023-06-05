@@ -13,6 +13,7 @@ Object {
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
+  gap: 8px;
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -63,6 +64,7 @@ Object {
   font-size: 16px;
   line-height: 24px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
 }
 
 .c6[data-dimension='s'] {
@@ -72,6 +74,7 @@ Object {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
 }
 
 .c11 {
@@ -184,6 +187,7 @@ Object {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
   color: #23262D;
   margin-bottom: 4px;
 }
@@ -195,6 +199,7 @@ Object {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
   color: #23262D;
 }
 
@@ -304,6 +309,7 @@ Object {
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
+  gap: 8px;
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -354,6 +360,7 @@ Object {
   font-size: 16px;
   line-height: 24px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
 }
 
 .c6[data-dimension='s'] {
@@ -363,6 +370,7 @@ Object {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
 }
 
 .c11 {
@@ -475,6 +483,7 @@ Object {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
   color: #23262D;
   margin-bottom: 4px;
 }
@@ -486,6 +495,7 @@ Object {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
   color: #23262D;
 }
 

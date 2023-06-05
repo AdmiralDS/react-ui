@@ -1,13 +1,16 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { FieldSet } from '#src/components/form';
-import { RadioButton } from '#src/components/RadioButton';
-import { SelectField as Select } from '#src/components/form/SelectField';
-import { Option } from '#src/components/input/Select';
-import { T } from '#src/components/T';
 
-import { Accordion, AccordionItem } from '.';
+import {
+  Accordion,
+  AccordionItem,
+  FieldSet,
+  RadioButton,
+  SelectField as Select,
+  T,
+  Option,
+} from '@admiral-ds/react-ui';
 
 const Separator = styled.div`
   height: 20px;

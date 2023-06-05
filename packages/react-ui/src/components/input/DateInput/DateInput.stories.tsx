@@ -1,13 +1,16 @@
 import type { ChangeEvent } from 'react';
 import React, { useEffect, useState } from 'react';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { DateInput } from '#src/components/input/DateInput';
 import { withDesign } from 'storybook-addon-designs';
-import { INPUT_DIMENSIONS_VALUES } from '#src/components/input/types';
-import { ReactComponent as CalendarSolidSVG } from '@admiral-ds/icons/build/system/CalendarSolid.svg';
-import type { Theme } from '#src/components/themes';
 import { ThemeProvider } from 'styled-components';
-import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
+import {
+  DateInput,
+  INPUT_DIMENSIONS_VALUES,
+  INPUT_STATUS_VALUES,
+  ALL_BORDER_RADIUS_VALUES,
+} from '@admiral-ds/react-ui';
+import type { Theme } from '@admiral-ds/react-ui';
+import { ReactComponent as CalendarSolidSVG } from '@admiral-ds/icons/build/system/CalendarSolid.svg';
 
 export default {
   title: 'Admiral-2.1/Input/DateInput',
@@ -38,6 +41,10 @@ export default {
     dimension: {
       options: INPUT_DIMENSIONS_VALUES,
       control: { type: 'radio' },
+    },
+    status: {
+      control: { type: 'radio' },
+      options: INPUT_STATUS_VALUES,
     },
     disabled: {
       control: { type: 'boolean' },

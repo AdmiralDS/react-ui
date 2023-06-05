@@ -1,14 +1,10 @@
-import { Button } from '#src/components/Button';
-import type { HintProps } from '#src/components/Hint';
-import { Hint } from '#src/components/Hint';
 import React, { useRef } from 'react';
 import styled, { css, ThemeProvider } from 'styled-components';
-import { ReactComponent as HelpOutline } from '@admiral-ds/icons/build/service/HelpOutline.svg';
-import type { ComponentMeta, ComponentStory, Story } from '@storybook/react';
+import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
-import type { Theme } from '#src/components/themes';
-import { TextButton } from '#src/components/TextButton';
-import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
+import { Hint, Button, TextButton, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
+import type { Theme } from '@admiral-ds/react-ui';
+import { ReactComponent as HelpOutline } from '@admiral-ds/icons/build/service/HelpOutline.svg';
 
 const Separator = styled.div<{ height?: number }>`
   height: ${({ height }) => (height ? height : 20)}px;
@@ -217,7 +213,7 @@ const Template4: ComponentStory<typeof Hint> = ({ anchorId, ...args }) => {
         renderContent={() => (
           <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
             {text}
-            <Separator height={8} />
+            <Separator height={4} />
             <TextButton appearance="primary" dimension="s" text="Text Button" />
           </div>
         )}

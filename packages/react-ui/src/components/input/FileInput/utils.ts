@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ThemeContext } from 'styled-components';
+import { useTheme } from 'styled-components';
 import { LIGHT_THEME } from '#src/components/themes';
 import { ReactComponent as PDFSolid } from '@admiral-ds/icons/build/documents/PDFSolid.svg';
 import { ReactComponent as PPTSolid } from '@admiral-ds/icons/build/documents/PPTSolid.svg';
@@ -13,7 +13,7 @@ export const formatBytes = (bytes: number, decimals = 2): number => {
 };
 
 export const formatFileSize = (bytes: number): string => {
-  const theme = React.useContext(ThemeContext) || LIGHT_THEME;
+  const theme = useTheme() || LIGHT_THEME;
   let size = formatBytes(bytes);
   if (size < 1024) {
     return `${size} ${theme.locales[theme.currentLocale].fileInput.metricUnits[0]}`;

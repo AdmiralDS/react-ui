@@ -54,7 +54,6 @@ const disabledChipStyle = css`
   :hover {
     color: ${({ theme }) => theme.color['Neutral/Neutral 30']};
     background-color: ${({ theme }) => theme.color['Neutral/Neutral 10']};
-    border: 1px solid ${({ theme }) => theme.color['Neutral/Neutral 10']};
   }
   & > * {
     pointer-events: none;

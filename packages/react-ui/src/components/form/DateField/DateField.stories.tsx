@@ -1,12 +1,15 @@
-import { DateField } from '#src/components/form/DateField';
-import { INPUT_DIMENSIONS_VALUES } from '#src/components/input/types';
 import * as React from 'react';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
 import styled, { ThemeProvider } from 'styled-components';
-import type { Theme } from '#src/components/themes';
+import { withDesign } from 'storybook-addon-designs';
+import {
+  DateField,
+  INPUT_DIMENSIONS_VALUES,
+  INPUT_STATUS_VALUES,
+  ALL_BORDER_RADIUS_VALUES,
+} from '@admiral-ds/react-ui';
+import type { Theme } from '@admiral-ds/react-ui';
 import { DataAttributesDescription } from '#src/components/form/common';
-import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
 
 export default {
   title: 'Admiral-2.1/Form Field/DateField',
@@ -38,6 +41,10 @@ export default {
     dimension: {
       options: INPUT_DIMENSIONS_VALUES,
       control: { type: 'radio' },
+    },
+    status: {
+      control: { type: 'radio' },
+      options: INPUT_STATUS_VALUES,
     },
     currentActiveView: {
       options: [undefined, 'DAY', 'MONTH', 'YEAR'],

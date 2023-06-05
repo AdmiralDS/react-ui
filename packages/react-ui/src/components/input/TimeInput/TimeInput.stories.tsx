@@ -1,15 +1,18 @@
 import type { ChangeEvent } from 'react';
 import React, { useEffect, useState } from 'react';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { TimeInput } from '../TimeInput';
 import { withDesign } from 'storybook-addon-designs';
-import { INPUT_DIMENSIONS_VALUES } from '#src/components/input/types';
+import styled, { ThemeProvider } from 'styled-components';
+import {
+  TimeInput,
+  InputIconButton,
+  INPUT_DIMENSIONS_VALUES,
+  INPUT_STATUS_VALUES,
+  ALL_BORDER_RADIUS_VALUES,
+} from '@admiral-ds/react-ui';
+import type { Theme } from '@admiral-ds/react-ui';
 import { ReactComponent as GPSOutline } from '@admiral-ds/icons/build/location/GPSOutline.svg';
 import { ReactComponent as TimeSolid } from '@admiral-ds/icons/build/system/TimeSolid.svg';
-import styled, { ThemeProvider } from 'styled-components';
-import type { Theme } from '#src/components/themes';
-import { InputIconButton } from '#src/components/InputIconButton';
-import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -60,6 +63,10 @@ export default {
     dimension: {
       options: INPUT_DIMENSIONS_VALUES,
       control: { type: 'radio' },
+    },
+    status: {
+      control: { type: 'radio' },
+      options: INPUT_STATUS_VALUES,
     },
     value: { control: { type: 'text', disabled: true }, description: 'Значение TimePicker' },
     onChange: {

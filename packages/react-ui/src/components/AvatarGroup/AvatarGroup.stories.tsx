@@ -2,10 +2,9 @@ import { withDesign } from 'storybook-addon-designs';
 import * as React from 'react';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import styled from 'styled-components';
-import type { AvatarGroupProps } from '#src/components/AvatarGroup';
-import { AvatarGroup } from '#src/components/AvatarGroup';
+import type { AvatarGroupProps } from '@admiral-ds/react-ui';
+import { AvatarGroup, DefaultFontColorName } from '@admiral-ds/react-ui';
 import { ReactComponent as PersonSolid } from '@admiral-ds/icons/build/system/PersonSolid.svg';
-import { DefaultFontColorName } from '#src/components/themes';
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 const imageURL = 'https://github.com/DrUNE.png?size=100';

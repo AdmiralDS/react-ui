@@ -20,16 +20,11 @@
     "jsx": "react",
     "baseUrl": "./src",
     "paths": {
-      "#src/*": ["./*"]
+      "#src/*": ["./*"],
+      "@admiral-ds/react-ui": ["./index"]
     },
-    "plugins": [
-      { "transform": "typescript-transform-paths", "afterDeclarations": true }
-    ]
+    "plugins": [{ "transform": "typescript-transform-paths", "afterDeclarations": true }]
   },
-  "include": [
-    "./src"
-  ],
-  "exclude": [
-    "./scripts"
-  ]
+  "include": ["./src"],
+  "exclude": ["node_modules","./scripts"]
 }

@@ -2,11 +2,8 @@ import * as React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
-
-import { Tag } from '#src/components/Tag';
-import { Tags } from '#src/components/Tags';
-import type { Theme } from '#src/components/themes';
-import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
+import { Tags, Tag, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
+import type { Theme } from '@admiral-ds/react-ui';
 
 const Separator = styled.div`
   height: 20px;
@@ -54,7 +51,8 @@ export default {
   },
   argTypes: {
     kind: {
-      control: false,
+      options: ['neutral', 'primary', 'success', 'danger', 'warning'],
+      control: { type: 'radio' },
     },
     width: {
       control: { type: 'text' },
@@ -78,21 +76,26 @@ const Template1: ComponentStory<typeof Tags> = (args) => {
         <Tags
           dimension={args.dimension}
           width={50}
-          kind="green"
+          kind={args.kind}
           onClick={(event) => console.log(`click tag with id: ${event.currentTarget.id}`)}
         >
-          <Tag id="1">Neutral</Tag>
-          <Tag id="2" kind="green">
-            Green
+          <Tag id="1">Tag in group</Tag>
+          <Tag id="2">Tag in group</Tag>
+          <Tag id="3">Tag in group</Tag>
+          <Tag id="4" kind="neutral">
+            Neutral
           </Tag>
-          <Tag id="3" kind="blue">
-            Blue
+          <Tag id="5" kind="success">
+            Success
           </Tag>
-          <Tag id="4" kind="red" width="auto" onClick={() => console.log('click red tag')}>
-            Red
+          <Tag id="6" kind="primary">
+            Primary
           </Tag>
-          <Tag id="5" kind="orange">
-            Orange
+          <Tag id="7" kind="danger" width="auto" onClick={() => console.log('click danger tag')}>
+            Danger
+          </Tag>
+          <Tag id="8" kind="warning">
+            Warning
           </Tag>
         </Tags>
       </ThemeProvider>
@@ -101,5 +104,7 @@ const Template1: ComponentStory<typeof Tags> = (args) => {
 };
 
 export const TagStatus = Template1.bind({});
-TagStatus.args = {};
+TagStatus.args = {
+  kind: 'success',
+};
 TagStatus.storyName = 'Tags';

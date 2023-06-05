@@ -28,6 +28,7 @@ Object {
   font-size: 16px;
   line-height: 24px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
 }
 
 .c5:hover {
@@ -174,6 +175,7 @@ Object {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
   color: #23262D;
   margin-bottom: 4px;
 }
@@ -185,6 +187,7 @@ Object {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
   color: #23262D;
 }
 
@@ -219,6 +222,7 @@ Object {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
 }
 
 <body>
@@ -298,6 +302,7 @@ Object {
   font-size: 16px;
   line-height: 24px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
 }
 
 .c5:hover {
@@ -444,6 +449,7 @@ Object {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
   color: #23262D;
   margin-bottom: 4px;
 }
@@ -455,6 +461,7 @@ Object {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
   color: #23262D;
 }
 
@@ -489,6 +496,7 @@ Object {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
 }
 
 <div>

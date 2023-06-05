@@ -17,6 +17,7 @@ import {
   underlineRow,
 } from './mixins';
 import { IconPlacement } from '#src/components/IconPlacement';
+import { typography } from '../Typography';
 
 export const TableContainer = styled.div`
   position: relative;
@@ -40,6 +41,10 @@ export const StickyWrapper = styled(StickyGroupRow)<{ greyHeader?: boolean }>`
   ${TableContainer}[data-shadow='true'] & {
     box-shadow: 4px 0 12px rgba(138, 150, 168, 0.16);
   }
+`;
+
+export const NormalWrapper = styled.div`
+  display: flex;
 `;
 
 export const OverflowMenuWrapper = styled.div<{ $offset: number; dimension: TableProps['dimension'] }>`
@@ -105,7 +110,6 @@ export const Header = styled.div<{ dimension: TableProps['dimension'] }>`
   flex: 0 0 auto;
   overflow-x: hidden;
   ${headerStyle};
-  transform: translateZ(0);
 
   & > * {
     border-bottom: 1px solid ${({ theme }) => theme.color['Neutral/Neutral 20']};
@@ -422,4 +426,50 @@ export const HiddenHeader = styled.div`
   visibility: hidden;
   display: flex;
   overflow: hidden;
+
+  &[data-verticalscroll='true'] {
+    overflow-y: scroll;
+  }
+`;
+
+export const Mirror = styled(HeaderCell)<{ dimension: TableProps['dimension'] }>`
+  position: fixed;
+  z-index: 6;
+  visibility: hidden;
+  display: flex;
+  max-width: 200px;
+  ${({ theme }) => theme.shadow['Shadow 08']}
+  background: ${({ theme }) => theme.color['Neutral/Neutral 00']};
+  color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
+  ${({ dimension }) =>
+    dimension === 's' || dimension === 'm' ? typography['Subtitle/Subtitle 3'] : typography['Subtitle/Subtitle 2']}
+  padding-left: ${({ dimension }) => (dimension === 's' || dimension === 'm' ? 8 : 10)}px;
+  && {
+    cursor: none;
+    svg {
+      display: none;
+      width: 20px;
+      height: 20px;
+      margin-right: 8px;
+      flex-shrink: 0;
+    }
+  }
+
+  &[data-cursor='normal'] {
+    & .icon-grabbing {
+      display: block;
+    }
+  }
+  &[data-cursor='error'] {
+    & .icon-not-allowed {
+      display: block;
+    }
+  }
+`;
+
+export const MirrorText = styled.div`
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;

@@ -1,13 +1,18 @@
-import React, { useContext } from 'react';
-import styled, { css, ThemeContext } from 'styled-components';
+import * as React from 'react';
+import styled, { css, useTheme } from 'styled-components';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import { FONTS, NEW_FONTS } from './storyDescriptions';
-import { TYPOGRAPHY, typography } from '#src/components/Typography';
+import {
+  T,
+  TYPOGRAPHY,
+  typography,
+  DefaultFontColorName,
+  LIGHT_THEME,
+  MainPrimaryColorName,
+  TooltipHoc,
+} from '@admiral-ds/react-ui';
 import { ReactComponent as CopyOutline } from '@admiral-ds/icons/build/documents/CopyOutline.svg';
-import { TooltipHoc } from '#src/components/TooltipHOC';
-import { DefaultFontColorName, LIGHT_THEME, MainPrimaryColorName } from '#src/components/themes';
-import { T } from './index';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI', serif;
@@ -110,7 +115,7 @@ const CopyOutlineWrapper = styled.div`
 `;
 
 const CopyIcon = React.forwardRef<HTMLDivElement, { text: string }>(({ text }, ref) => {
-  const theme = useContext(ThemeContext) || LIGHT_THEME;
+  const theme = useTheme() || LIGHT_THEME;
   const copyToClipboard = () => {
     const el = document.createElement('textarea');
     el.value = text;
@@ -152,6 +157,10 @@ const Template1: ComponentStory<typeof T> = (args) => {
       <CustomParagraph font="Header/H5" as="p">
         Это параграф со стилем Header/H5 и цветом шрифта Tertiary.
       </CustomParagraph>
+
+      <T font="Header/H3" as="h3">
+        Выбор конфигурации
+      </T>
     </>
   );
 };
@@ -174,7 +183,7 @@ const Template: ComponentStory<typeof T> = () => {
         <tbody>
           {NEW_FONTS.map((item: any, index: number) => {
             const text = `
-            import { T, typography } from '@vtb/ui-kit3';
+            import { T, typography } from '@admiral-ds/react-ui';
             import styled from 'styled-components';
 
             const Paragraph = styled.p\`
@@ -236,7 +245,7 @@ const Template: ComponentStory<typeof T> = () => {
         <tbody>
           {FONTS.map((item: any, index: number) => {
             const text = `
-            import { T, typography } from '@vtb/ui-kit3';
+            import { T, typography } from '@admiral-ds/react-ui';
             import styled from 'styled-components';
 
             const Paragraph = styled.p\`

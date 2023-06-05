@@ -1,15 +1,19 @@
 import * as React from 'react';
+import type { CSSProperties } from 'react';
 import { Checkbox } from '#src/components/Checkbox';
 import observeRect from '#src/components/common/observeRect';
-import { ThemeContext } from 'styled-components';
+import { useTheme } from 'styled-components';
 import { LIGHT_THEME } from '#src/components/themes';
 import { getScrollbarSize } from '#src/components/common/dom/scrollbarUtil';
 import { GroupRow } from '#src/components/Table/Row/GroupRow';
 import { RegularRow } from '#src/components/Table/Row/RegularRow';
 import { RowWrapper } from '#src/components/Table/Row/RowWrapper';
+import { DropdownContext } from '#src/components/DropdownProvider';
 import type { FlattenInterpolation, ThemeProps, DefaultTheme } from 'styled-components';
+import ReactDOM from 'react-dom';
 
 import { HeaderCellComponent } from './HeaderCell';
+import { dragObserver } from './dragObserver';
 import {
   Cell,
   CellTextContent,
@@ -23,11 +27,15 @@ import {
   Row,
   ScrollTableBody,
   StickyWrapper,
+  NormalWrapper,
   TableContainer,
   HiddenHeader,
+  Mirror,
+  MirrorText,
 } from './style';
 import { VirtualBody } from './VirtualBody';
-import type { CSSProperties } from 'react';
+import { ReactComponent as CursorGrabbing } from './icons/cursorGrabbing.svg';
+import { ReactComponent as CursorNotAllowed } from './icons/cursorNotAllowed.svg';
 
 export * from './RowAction';
 
@@ -73,6 +81,8 @@ export type Column = {
   sticky?: boolean;
   /** Отключение возможности ресайза колонки */
   disableResize?: boolean;
+  /** Включение возможности drag & drop столбца */
+  draggable?: boolean;
   /** Состояние фильтра.
    * Необходимо для окрашивания иконки фильтра в синий цвет при активном фильтре и в серый при неактивном фильтре.
    */
@@ -206,10 +216,9 @@ export interface TableProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Окрашивание строк таблицы через одну в цвет вторичного фона (зебра) */
   greyZebraRows?: boolean;
 
-  /** Ширина колонки (заголовка) регулируется через параметр Spacing Between Items в настройках
-   * Auto Layout, при выбранном заголовке. Минимальное значение 12px, для таблиц S и M, и 16px для таблиц L и XL.
-   * При выборе расстояния следует учитывать размеры пространства под иконки сортировки и меню, если они есть
-   * в функционале заголовка.
+  /** Параметр, который влияет на внешний вид заголовка и отвечает одновременно за размер правого бокового отступа внутри заголовка и
+   * за расстояние между иконкой фильтра (при её наличии) и остальным содержимым заголовка.
+   * Минимальное значение 12px, для таблиц S и M, и 16px для таблиц L и XL.
    */
   spacingBetweenItems?: string;
   /** Колбек на изменение сортировки. Возвращает уникальное имя столбца, к которому применили сортировку,
@@ -262,6 +271,12 @@ export interface TableProps extends React.HTMLAttributes<HTMLDivElement> {
     /** Сообщение, отображаемое при отсутствии совпадений в строках после применения фильтра */
     emptyMessage?: React.ReactNode;
   };
+  /** Колбек, который срабатывает при попытке перетащить столбец таблицы на новое место.
+   * columnName - name столбца, который перетаскивается;
+   * nextColumnName - name столбца, перед которым пытается встать передвигаемый столбец.
+   * Если nextColumnName равен null, значит столбец передвигают в самый конец списка.
+   */
+  onColumnDrag?: (columnName: string, nextColumnName: string | null) => void;
 }
 
 type GroupInfo = {
@@ -306,9 +321,11 @@ export const Table: React.FC<TableProps> = ({
   showLastRowUnderline = true,
   virtualScroll,
   locale,
+  onColumnDrag,
   ...props
 }) => {
-  const theme = React.useContext(ThemeContext) || LIGHT_THEME;
+  const theme = useTheme() || LIGHT_THEME;
+  const { rootRef } = React.useContext(DropdownContext);
   const checkboxDimension = dimension === 's' || dimension === 'm' ? 's' : 'm';
   const columnMinWidth = dimension === 's' || dimension === 'm' ? COLUMN_MIN_WIDTH_M : COLUMN_MIN_WIDTH_L;
 
@@ -316,13 +333,22 @@ export const Table: React.FC<TableProps> = ({
   const [tableWidth, setTableWidth] = React.useState(0);
   const [bodyHeight, setBodyHeight] = React.useState(0);
   const [scrollbar, setScrollbarSize] = React.useState(0);
+  const [columnDragging, setColumnDragging] = React.useState(false);
 
   const stickyColumns = [...columnList].filter((col) => col.sticky);
+
+  const isAnyColumnDraggable = columnList.filter((col) => !col.sticky && col.draggable).length > 0;
+  const isAnyStickyColumnDraggable = columnList.filter((col) => col.sticky && col.draggable).length > 0;
 
   const tableRef = React.useRef<HTMLDivElement>(null);
   const headerRef = React.useRef<HTMLDivElement>(null);
   const hiddenHeaderRef = React.useRef<HTMLDivElement>(null);
   const scrollBodyRef = React.useRef<HTMLDivElement>(null);
+  const stickyColumnsWrapperRef = React.useRef<HTMLDivElement>(null);
+  const normalColumnsWrapperRef = React.useRef<HTMLDivElement>(null);
+  const mirrorRef = React.useRef<HTMLDivElement>(null);
+  // save callback via useRef to not update dragObserver on each callback change
+  const columnDragCallback = React.useRef(onColumnDrag);
 
   const groupToRowsMap = rowList.reduce<Group>((acc: Group, row) => {
     if (typeof row.groupRows !== 'undefined') {
@@ -501,6 +527,91 @@ export const Table: React.FC<TableProps> = ({
     setVerticalScroll,
     setBodyHeight,
   ]);
+
+  React.useEffect(() => {
+    columnDragCallback.current = onColumnDrag;
+  }, [onColumnDrag]);
+
+  React.useEffect(() => {
+    if (mirrorRef.current && columnDragging && (isAnyColumnDraggable || isAnyStickyColumnDraggable)) {
+      const observer = observeRect(mirrorRef.current, (rect: any) => {
+        const rightCoord = tableRef.current?.getBoundingClientRect().right || 0;
+        const leftCoord =
+          stickyColumnsWrapperRef.current?.getBoundingClientRect().right ||
+          tableRef.current?.getBoundingClientRect().left ||
+          0;
+        if (scrollBodyRef.current) {
+          const scrollLeft = scrollBodyRef.current.scrollLeft;
+          const scrollWidth = scrollBodyRef.current.scrollWidth;
+          const offsetWidth = scrollBodyRef.current.offsetWidth;
+
+          if (rect.right > rightCoord && scrollWidth > offsetWidth && scrollLeft + offsetWidth < scrollWidth) {
+            scrollBodyRef.current.scrollBy({ left: Math.abs(rightCoord - rect.right) });
+          }
+          if (rect.left < leftCoord && scrollLeft > 0) {
+            scrollBodyRef.current.scrollBy({ left: -Math.abs(leftCoord - rect.left) });
+          }
+        }
+      });
+
+      observer.observe();
+      return () => observer.unobserve();
+    }
+  }, [isAnyColumnDraggable, isAnyStickyColumnDraggable, columnDragging]);
+
+  React.useEffect(() => {
+    const stickyCols = stickyColumnsWrapperRef.current;
+    const normalCols = normalColumnsWrapperRef.current;
+
+    function handleDrop(item: HTMLElement | null, before: HTMLElement | null) {
+      const columnName = item?.dataset?.thColumn;
+      if (columnName) {
+        if (stickyCols?.contains(item) && before === null) {
+          // if we place sticky column at the end of stickyCols
+          columnDragCallback.current?.(
+            columnName,
+            (normalCols?.firstElementChild as HTMLElement)?.dataset?.thColumn ?? null,
+          );
+        } else {
+          columnDragCallback.current?.(columnName, before?.dataset?.thColumn ?? null);
+        }
+      }
+    }
+    function handleDragStart() {
+      setColumnDragging(true);
+    }
+    function handleDragEnd() {
+      setColumnDragging(false);
+    }
+
+    if (normalCols && isAnyColumnDraggable) {
+      const observer = dragObserver(
+        [normalCols],
+        {
+          mirrorRef,
+          dimension,
+          direction: 'horizontal',
+          invalid: (el: HTMLElement) => {
+            return el.dataset.draggable == 'false';
+          },
+          accepts: (_, target: HTMLElement | null, source: HTMLElement | null, sibling: HTMLElement | null) => {
+            // column can be dragged only inside parent container
+            if (target !== source) return false;
+            // can not place column before CheckboxCell or ExnandCell
+            if (sibling?.dataset.droppable == 'false') return false;
+            return true;
+          },
+        },
+        handleDrop,
+        handleDragStart,
+        handleDragEnd,
+      );
+      if (stickyCols && isAnyStickyColumnDraggable) observer.containers.push(stickyCols);
+      return () => {
+        observer.unobserve();
+      };
+    }
+  }, [isAnyColumnDraggable, isAnyStickyColumnDraggable, dimension]);
 
   const calcGroupCheckStatus = (groupInfo: GroupInfo) => {
     const indeterminate =
@@ -755,7 +866,7 @@ export const Table: React.FC<TableProps> = ({
 
   const renderHiddenHeader = () => {
     return (
-      <HiddenHeader ref={hiddenHeaderRef}>
+      <HiddenHeader ref={hiddenHeaderRef} data-verticalscroll={verticalScroll}>
         {(displayRowSelectionColumn || displayRowExpansionColumn) && (
           <StickyWrapper>
             {displayRowExpansionColumn && <ExpandCell dimension={dimension} />}
@@ -784,10 +895,17 @@ export const Table: React.FC<TableProps> = ({
       <HeaderWrapper scrollbar={scrollbar} greyHeader={greyHeader} data-verticalscroll={verticalScroll}>
         <Header dimension={dimension} ref={headerRef} className="tr">
           {(displayRowSelectionColumn || displayRowExpansionColumn || stickyColumns.length > 0) && (
-            <StickyWrapper greyHeader={greyHeader}>
-              {displayRowExpansionColumn && <ExpandCell dimension={dimension} />}
+            <StickyWrapper ref={stickyColumnsWrapperRef} greyHeader={greyHeader}>
+              {displayRowExpansionColumn && (
+                <ExpandCell dimension={dimension} data-draggable={false} data-droppable={false} />
+              )}
               {displayRowSelectionColumn && (
-                <CheckboxCell dimension={dimension} className="th_checkbox">
+                <CheckboxCell
+                  dimension={dimension}
+                  className="th_checkbox"
+                  data-draggable={false}
+                  data-droppable={false}
+                >
                   <Checkbox
                     dimension={checkboxDimension}
                     checked={allRowsChecked || someRowsChecked || headerCheckboxChecked}
@@ -800,11 +918,22 @@ export const Table: React.FC<TableProps> = ({
               {stickyColumns.length > 0 && stickyColumns.map((col, index) => renderHeaderCell(col as Column, index))}
             </StickyWrapper>
           )}
-          {columnList.map((col, index) => (col.sticky ? null : renderHeaderCell(col as Column, index)))}
+          <NormalWrapper ref={normalColumnsWrapperRef}>
+            {columnList.map((col, index) => (col.sticky ? null : renderHeaderCell(col as Column, index)))}
+          </NormalWrapper>
           <Filler />
         </Header>
       </HeaderWrapper>
       {renderBody()}
+      {(isAnyColumnDraggable || isAnyStickyColumnDraggable) &&
+        ReactDOM.createPortal(
+          <Mirror dimension={dimension} ref={mirrorRef}>
+            <CursorGrabbing className="icon-grabbing" />
+            <CursorNotAllowed className="icon-not-allowed" />
+            <MirrorText />
+          </Mirror>,
+          rootRef?.current || document.body,
+        )}
     </TableContainer>
   );
 };

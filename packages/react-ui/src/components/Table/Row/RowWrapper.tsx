@@ -54,6 +54,11 @@ export const RowWrapper = ({
     onRowDoubleClick?.(rowId);
   };
 
+  const handleOverflowMenuClick = (e: React.MouseEvent<HTMLElement>) => {
+    // клик по меню не должен вызывать событие клика по строке
+    e.stopPropagation();
+  };
+
   const handleExpandedMouseEnter = () => {
     rowRef.current?.classList.remove('hoverable');
   };
@@ -92,6 +97,7 @@ export const RowWrapper = ({
           row={row}
           verticalScroll={verticalScroll}
           scrollbar={scrollbar}
+          onClick={handleOverflowMenuClick}
         />
       )}
       {row.expandedRowRender && (

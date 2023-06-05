@@ -93,7 +93,7 @@ function getFocusBorderColor(status?: InputStatus) {
   }
 }
 
-const BorderedDivStyles = css<{ disabled?: boolean; readOnly?: boolean; status?: InputStatus }>`
+export const BorderedDivStyles = css<{ disabled?: boolean; readOnly?: boolean; status?: InputStatus }>`
   &:focus-within:not(:disabled) > ${InputBorderedDiv} {
     ${(p) =>
       p.disabled || p.readOnly

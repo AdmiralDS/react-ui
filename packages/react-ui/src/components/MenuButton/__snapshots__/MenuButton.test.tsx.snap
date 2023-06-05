@@ -98,6 +98,7 @@ Object {
   font-size: 16px;
   line-height: 24px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
 }
 
 .c1[data-appearance~='primary'] {
@@ -336,6 +337,7 @@ Object {
   font-size: 16px;
   line-height: 24px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
 }
 
 .c1[data-dimension='l'] {
@@ -357,6 +359,7 @@ Object {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
 }
 
 .c1:hover {
@@ -482,6 +485,7 @@ Object {
   font-size: 16px;
   line-height: 24px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
 }
 
 .c1[data-appearance~='primary'] {
@@ -720,6 +724,7 @@ Object {
   font-size: 16px;
   line-height: 24px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
 }
 
 .c1[data-dimension='l'] {
@@ -741,6 +746,7 @@ Object {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
 }
 
 .c1:hover {
@@ -945,6 +951,7 @@ Object {
   font-size: 16px;
   line-height: 24px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
 }
 
 .c1[data-appearance~='primary'] {
@@ -1183,6 +1190,7 @@ Object {
   font-size: 16px;
   line-height: 24px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
 }
 
 .c1[data-dimension='l'] {
@@ -1204,6 +1212,7 @@ Object {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
 }
 
 .c1 .c4 {
@@ -1364,6 +1373,7 @@ Object {
   font-size: 16px;
   line-height: 24px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
 }
 
 .c1[data-appearance~='primary'] {
@@ -1602,6 +1612,7 @@ Object {
   font-size: 16px;
   line-height: 24px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
 }
 
 .c1[data-dimension='l'] {
@@ -1623,6 +1634,7 @@ Object {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
 }
 
 .c1 .c4 {
@@ -1814,6 +1826,7 @@ Object {
   font-size: 16px;
   line-height: 24px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
   -webkit-animation: dZhwyk 2s ease infinite;
   animation: dZhwyk 2s ease infinite;
 }
@@ -2054,6 +2067,7 @@ Object {
   font-size: 16px;
   line-height: 24px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
 }
 
 .c1[data-dimension='l'] {
@@ -2075,6 +2089,7 @@ Object {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
 }
 
 .c1 .c2 {
@@ -2205,6 +2220,7 @@ Object {
   font-size: 16px;
   line-height: 24px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
   -webkit-animation: dZhwyk 2s ease infinite;
   animation: dZhwyk 2s ease infinite;
 }
@@ -2445,6 +2461,7 @@ Object {
   font-size: 16px;
   line-height: 24px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
 }
 
 .c1[data-dimension='l'] {
@@ -2466,6 +2483,7 @@ Object {
   font-size: 14px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
 }
 
 .c1 .c2 {

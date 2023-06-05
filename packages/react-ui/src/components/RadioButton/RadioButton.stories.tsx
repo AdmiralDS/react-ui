@@ -2,12 +2,9 @@ import React, { useState } from 'react';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import styled from 'styled-components';
-
-import type { RadioButtonProps } from '#src/components/RadioButton';
-import { RadioButton } from '#src/components/RadioButton';
-import { Button } from '#src/components/Button';
+import { RadioButton, Button, Hint } from '@admiral-ds/react-ui';
+import type { RadioButtonProps } from '@admiral-ds/react-ui';
 import { ReactComponent as InfoSolidSVG } from '@admiral-ds/icons/build/service/InfoSolid.svg';
-import { Hint } from '#src/components/Hint';
 
 const Separator = styled.div`
   height: 20px;
@@ -82,6 +79,9 @@ export default {
     disabled: {
       control: { type: 'boolean' },
     },
+    readOnly: {
+      control: { type: 'boolean' },
+    },
     checked: {
       control: { type: 'boolean' },
     },
@@ -122,23 +122,31 @@ const Template2: ComponentStory<typeof RadioButton> = () => {
 const Template3: ComponentStory<typeof RadioButton> = () => {
   return (
     <>
-      <RadioButton value={1} checked readOnly>
+      <RadioButton value={1} checked onChange={() => undefined}>
         Checked
       </RadioButton>
       <Separator />
-      <RadioButton value={1} checked={false} readOnly>
+      <RadioButton value={1} checked={false} onChange={() => undefined}>
         Not checked
       </RadioButton>
       <Separator />
-      <RadioButton value={1} checked disabled readOnly>
+      <RadioButton value={1} checked readOnly>
+        Checked readonly
+      </RadioButton>
+      <Separator />
+      <RadioButton value={1} checked={false} readOnly>
+        Not checked readonly
+      </RadioButton>
+      <Separator />
+      <RadioButton value={1} checked disabled onChange={() => undefined}>
         Checked disabled
       </RadioButton>
       <Separator />
-      <RadioButton value={1} checked={false} disabled readOnly>
+      <RadioButton value={1} checked={false} disabled onChange={() => undefined}>
         Not checked disabled
       </RadioButton>
       <Separator />
-      <RadioButton value={1} checked={false} error readOnly>
+      <RadioButton value={1} checked={false} error onChange={() => undefined}>
         Not checked error
       </RadioButton>
     </>

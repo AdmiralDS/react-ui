@@ -10,7 +10,6 @@ import { uid } from '#src/components/common/uid';
 export interface CheckboxFieldProps extends Omit<CheckBoxProps, 'children'> {
   /** Текст будет виден ниже компонента */
   extraText?: React.ReactNode;
-
   /** Текст или компонент для рендеринга лейбла */
   children?: React.ReactNode;
 }
@@ -58,11 +57,14 @@ const PositionedCheckbox = styled(Checkbox)`
 const Label = styled.label<{
   dimension: CheckboxDimension;
   disabled?: boolean;
+  readOnly?: boolean;
 }>`
   display: inline-block;
   position: relative;
   padding-top: 2px;
   padding-bottom: 2px;
+
+  pointer-events: ${(props) => (props.disabled || props.readOnly ? 'none' : 'auto')};
 
   padding-left: ${(props) => (props.dimension === 's' ? 28 : 32)}px;
 
@@ -74,7 +76,7 @@ const Label = styled.label<{
 
   color: ${(props) =>
     props.disabled ? props.theme.color['Neutral/Neutral 30'] : props.theme.color['Neutral/Neutral 90']};
-  cursor: ${(props) => (props.disabled ? 'default' : 'pointer')};
+  cursor: ${(props) => (props.disabled || props.readOnly ? 'default' : 'pointer')};
 
   fieldset:disabled & {
     color: ${(props) => props.theme.color['Neutral/Neutral 30']};
@@ -109,7 +111,13 @@ export const CheckboxField = React.forwardRef<HTMLInputElement, CheckboxFieldPro
     passFormFieldContainerDataAttributes(props, fieldContainerProps);
 
     return (
-      <Label className={className} dimension={dimension} disabled={props.disabled} {...fieldContainerProps}>
+      <Label
+        className={className}
+        dimension={dimension}
+        disabled={props.disabled}
+        readOnly={props.readOnly}
+        {...fieldContainerProps}
+      >
         <PositionedCheckbox dimension={dimension} ref={ref} id={id} name={name} {...props} />
         {children}
         {extraText && <ExtrasContainer dimension={dimension} children={extraText} />}

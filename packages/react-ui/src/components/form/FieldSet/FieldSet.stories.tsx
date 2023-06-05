@@ -1,14 +1,9 @@
 import * as React from 'react';
-import { CheckboxField } from '#src/components/form';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import styled, { ThemeProvider } from 'styled-components';
-
-import { RadioButton } from '#src/components/RadioButton';
-import type { PropsType as FieldSetPropsType } from '#src/components/form/FieldSet';
-import { FieldSet } from '#src/components/form/FieldSet';
-import type { Theme } from '#src/components/themes';
-import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
+import { FieldSet, CheckboxField, RadioButton, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
+import type { PropsType as FieldSetPropsType, Theme } from '@admiral-ds/react-ui';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -123,13 +118,13 @@ const Template2: ComponentStory<typeof FieldSet> = ({ disabled, dimension, ...pr
           disabled={disabled}
           dimension={dimension}
         >
-          <RadioButton value={values[0]} name="test1" checked={values[0] === selected} readOnly>
+          <RadioButton value={values[0]} name="test1" defaultChecked={values[0] === selected}>
             First option
           </RadioButton>
-          <RadioButton value={values[1]} name="test1" checked={values[1] === selected} readOnly>
+          <RadioButton value={values[1]} name="test1" defaultChecked={values[1] === selected}>
             Second option
           </RadioButton>
-          <RadioButton value={values[2]} name="test1" checked={values[2] === selected} readOnly>
+          <RadioButton value={values[2]} name="test1" defaultChecked={values[2] === selected}>
             Third option
           </RadioButton>
         </FieldSet>

@@ -68,13 +68,18 @@ fieldset[data-dimension='s'] .c2 {
   display: none;
 }
 
+.c5:checked + .c6 {
+  background-color: #0062FF;
+  border: none;
+}
+
 .c5:disabled {
   pointer-events: none;
 }
 
-.c5:checked + .c6 {
-  background-color: #0062FF;
-  border: none;
+.c5:disabled + .c6 {
+  border: 1px solid #B0B5BD;
+  background-color: #E5E7EB;
 }
 
 .c5:not(:checked) + .c6 > * {
@@ -94,11 +99,6 @@ fieldset[data-dimension='s'] .c2 {
   width: calc(100% + 16px);
   height: calc(100% + 16px);
   background-color: #0000000D;
-}
-
-.c5:disabled + .c6 {
-  border: 1px solid #B0B5BD;
-  background-color: #E5E7EB;
 }
 
 .c5:checked:disabled + .c6 {
@@ -126,6 +126,7 @@ fieldset[data-dimension='s'] .c2 {
   position: relative;
   padding-top: 2px;
   padding-bottom: 2px;
+  pointer-events: none;
   padding-left: 32px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
@@ -133,6 +134,7 @@ fieldset[data-dimension='s'] .c2 {
   font-size: 16px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
   color: #B0B5BD;
   cursor: default;
 }
@@ -145,6 +147,7 @@ fieldset[data-dimension='s'] .c0 {
   font-size: 14px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
 }
 
 fieldset:disabled .c0 {
@@ -248,13 +251,18 @@ fieldset[data-dimension='s'] .c2 {
   display: none;
 }
 
+.c5:checked + .c6 {
+  background-color: #0062FF;
+  border: none;
+}
+
 .c5:disabled {
   pointer-events: none;
 }
 
-.c5:checked + .c6 {
-  background-color: #0062FF;
-  border: none;
+.c5:disabled + .c6 {
+  border: 1px solid #B0B5BD;
+  background-color: #E5E7EB;
 }
 
 .c5:not(:checked) + .c6 > * {
@@ -274,11 +282,6 @@ fieldset[data-dimension='s'] .c2 {
   width: calc(100% + 16px);
   height: calc(100% + 16px);
   background-color: #0000000D;
-}
-
-.c5:disabled + .c6 {
-  border: 1px solid #B0B5BD;
-  background-color: #E5E7EB;
 }
 
 .c5:checked:disabled + .c6 {
@@ -306,6 +309,7 @@ fieldset[data-dimension='s'] .c2 {
   position: relative;
   padding-top: 2px;
   padding-bottom: 2px;
+  pointer-events: none;
   padding-left: 32px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
@@ -313,6 +317,7 @@ fieldset[data-dimension='s'] .c2 {
   font-size: 16px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
   color: #B0B5BD;
   cursor: default;
 }
@@ -325,6 +330,7 @@ fieldset[data-dimension='s'] .c0 {
   font-size: 14px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
 }
 
 fieldset:disabled .c0 {
@@ -483,13 +489,18 @@ fieldset[data-dimension='s'] .c2 {
   display: none;
 }
 
+.c5:checked + .c6 {
+  background-color: #0062FF;
+  border: none;
+}
+
 .c5:disabled {
   pointer-events: none;
 }
 
-.c5:checked + .c6 {
-  background-color: #0062FF;
-  border: none;
+.c5:disabled + .c6 {
+  border: 1px solid #B0B5BD;
+  background-color: #E5E7EB;
 }
 
 .c5:not(:checked) + .c6 > * {
@@ -509,11 +520,6 @@ fieldset[data-dimension='s'] .c2 {
   width: calc(100% + 16px);
   height: calc(100% + 16px);
   background-color: #0000000D;
-}
-
-.c5:disabled + .c6 {
-  border: 1px solid #B0B5BD;
-  background-color: #E5E7EB;
 }
 
 .c5:checked:disabled + .c6 {
@@ -541,6 +547,7 @@ fieldset[data-dimension='s'] .c2 {
   position: relative;
   padding-top: 2px;
   padding-bottom: 2px;
+  pointer-events: auto;
   padding-left: 32px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
@@ -548,6 +555,7 @@ fieldset[data-dimension='s'] .c2 {
   font-size: 16px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
   color: #23262D;
   cursor: pointer;
 }
@@ -560,6 +568,7 @@ fieldset[data-dimension='s'] .c0 {
   font-size: 14px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
 }
 
 fieldset:disabled .c0 {
@@ -661,13 +670,18 @@ fieldset[data-dimension='s'] .c2 {
   display: none;
 }
 
+.c5:checked + .c6 {
+  background-color: #0062FF;
+  border: none;
+}
+
 .c5:disabled {
   pointer-events: none;
 }
 
-.c5:checked + .c6 {
-  background-color: #0062FF;
-  border: none;
+.c5:disabled + .c6 {
+  border: 1px solid #B0B5BD;
+  background-color: #E5E7EB;
 }
 
 .c5:not(:checked) + .c6 > * {
@@ -687,11 +701,6 @@ fieldset[data-dimension='s'] .c2 {
   width: calc(100% + 16px);
   height: calc(100% + 16px);
   background-color: #0000000D;
-}
-
-.c5:disabled + .c6 {
-  border: 1px solid #B0B5BD;
-  background-color: #E5E7EB;
 }
 
 .c5:checked:disabled + .c6 {
@@ -719,6 +728,7 @@ fieldset[data-dimension='s'] .c2 {
   position: relative;
   padding-top: 2px;
   padding-bottom: 2px;
+  pointer-events: auto;
   padding-left: 32px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
@@ -726,6 +736,7 @@ fieldset[data-dimension='s'] .c2 {
   font-size: 16px;
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
   color: #23262D;
   cursor: pointer;
 }
@@ -738,6 +749,7 @@ fieldset[data-dimension='s'] .c0 {
   font-size: 14px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
 }
 
 fieldset:disabled .c0 {
@@ -894,13 +906,18 @@ fieldset[data-dimension='s'] .c2 {
   display: none;
 }
 
+.c5:checked + .c6 {
+  background-color: #0062FF;
+  border: none;
+}
+
 .c5:disabled {
   pointer-events: none;
 }
 
-.c5:checked + .c6 {
-  background-color: #0062FF;
-  border: none;
+.c5:disabled + .c6 {
+  border: 1px solid #B0B5BD;
+  background-color: #E5E7EB;
 }
 
 .c5:not(:checked) + .c6 > * {
@@ -920,11 +937,6 @@ fieldset[data-dimension='s'] .c2 {
   width: calc(100% + 16px);
   height: calc(100% + 16px);
   background-color: #0000000D;
-}
-
-.c5:disabled + .c6 {
-  border: 1px solid #B0B5BD;
-  background-color: #E5E7EB;
 }
 
 .c5:checked:disabled + .c6 {
@@ -952,6 +964,7 @@ fieldset[data-dimension='s'] .c2 {
   position: relative;
   padding-top: 2px;
   padding-bottom: 2px;
+  pointer-events: auto;
   padding-left: 28px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
@@ -959,6 +972,7 @@ fieldset[data-dimension='s'] .c2 {
   font-size: 14px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
   color: #23262D;
   cursor: pointer;
 }
@@ -971,6 +985,7 @@ fieldset[data-dimension='s'] .c0 {
   font-size: 14px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
 }
 
 fieldset:disabled .c0 {
@@ -1072,13 +1087,18 @@ fieldset[data-dimension='s'] .c2 {
   display: none;
 }
 
+.c5:checked + .c6 {
+  background-color: #0062FF;
+  border: none;
+}
+
 .c5:disabled {
   pointer-events: none;
 }
 
-.c5:checked + .c6 {
-  background-color: #0062FF;
-  border: none;
+.c5:disabled + .c6 {
+  border: 1px solid #B0B5BD;
+  background-color: #E5E7EB;
 }
 
 .c5:not(:checked) + .c6 > * {
@@ -1098,11 +1118,6 @@ fieldset[data-dimension='s'] .c2 {
   width: calc(100% + 16px);
   height: calc(100% + 16px);
   background-color: #0000000D;
-}
-
-.c5:disabled + .c6 {
-  border: 1px solid #B0B5BD;
-  background-color: #E5E7EB;
 }
 
 .c5:checked:disabled + .c6 {
@@ -1130,6 +1145,7 @@ fieldset[data-dimension='s'] .c2 {
   position: relative;
   padding-top: 2px;
   padding-bottom: 2px;
+  pointer-events: auto;
   padding-left: 28px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
@@ -1137,6 +1153,7 @@ fieldset[data-dimension='s'] .c2 {
   font-size: 14px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
   color: #23262D;
   cursor: pointer;
 }
@@ -1149,6 +1166,7 @@ fieldset[data-dimension='s'] .c0 {
   font-size: 14px;
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
 }
 
 fieldset:disabled .c0 {

@@ -19,11 +19,10 @@
 Создать новый проект и установить библиотеку:
 
 ```shell
-npx create-react-app@5.0.1 admiral-web-app --template typescript
-
-npm i @admiral-ds/react-ui styled-components
-
-npm i -D @types/styled-components
+$ npm create react-app@latest -- my-web-app --template typescript
+$ cd my-web-app
+$ npm i @admiral-ds/react-ui
+$ npm i -D @types/styled-components
 ```
 
 ## Подключение
@@ -61,61 +60,107 @@ root.render(
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
 ```
+App.tsx
+```tsx
+import React from 'react';
+import logo from './logo.svg';
+import './App.css';
+import styled from 'styled-components';
+import { T, Link } from '@admiral-ds/react-ui';
+import { ReactComponent as ArrowRightOutline } from '@admiral-ds/icons/build/system/ArrowRightOutline.svg'
 
-Если ваш проект не использует _create-react-app_ для правильной работы шрифтов вам потребуется настройка webpack file-loader,
-а для импорта svg иконок в виде React компонентов [SVGR](https://github.com/gregberge/svgr/tree/main/packages/webpack).
+const Divider = styled.div`
+  width: 10px;
+  height: 12px;
+`;
 
-```sh
-npm i @svgr/webpack --dev
+function App() {
+  return (
+    <div className="App">
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <T font='Subtitle/Subtitle 1' as='p'>
+          Edit <code>src/App.tsx</code> and save to reload.
+        </T>
+        <a
+          className="App-link"
+          href="https://react.dev/learn"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Изучай React
+        </a>
+        или
+        <Link appearance="primary"
+          href="https://admiralds.github.io/react-ui"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Admiral Storybook
+          <Divider />
+          <ArrowRightOutline width={20} />
+        </Link>
+      </header>
+    </div>
+  );
+}
+
+export default App;
+```
+Если ваш проект НЕ использует _create-react-app_ , то для правильной работы _webpack_ вам потребуется настройка file-loader,
+и [SVGR](https://github.com/gregberge/svgr/tree/main/packages/webpack).
+
+```shell
+$ npm i -D @svgr/webpack
 ```
 
-```
-module: {
+webpack.config.js
+```js
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const AppConfig = require('./src/app.config');
+
+module.exports = {
+    entry: './src/index.tsx',
+    output: {
+        path: path.resolve(__dirname, 'public'),
+        filename: 'main.bundle.js',
+        publicPath: AppConfig.webPackPublicPath
+    },
+    plugins: [
+        new HtmlWebpackPlugin({
+            favicon: 'src/favicon.ico',
+            template: 'src/index.html'
+        })
+    ],
+    module: {
         rules: [
             {
-                test: /\.(js|jsx|tsx)$/,
-                use: {
-                    loader: 'babel-loader',
-                     options: {
-                      presets: ['@babel/preset-typescript']
-                    }
-                }
+                test: /\.svg$/i,
+                issuer: /\.[jt]sx?$/,
+                use: ['@svgr/webpack'],
+            },
+            {
+                test: /\.(gif|svg|jpg|png|otf|ttf)$/,
+                use: "file-loader",
+            },
+            {
+                test: /\.(js|ts|tsx)$/,
+                use: 'ts-loader',
+                exclude: /node_modules/,
             },
             {
                 test: /\.css$/,
-                use: ['style-loader', 'css-loader']
-            },
-            {
-                test: /\.(jpg|jpeg|png|gif|eot|otf|webp|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$/,
-                type: 'asset/resource'
-            },
-            {
-                test: /\.svg$/,
-                use: [
-                  {
-                    loader: '@svgr/webpack',
-                    options: {
-                      prettier: false,
-                      svgo: false,
-                      svgoConfig: {
-                        plugins: [{ removeViewBox: false }]
-                      },
-                      titleProp: true,
-                      ref: true
-                    }
-                  },
-                  {
-                    loader: 'file-loader',
-                    options: {
-                      name: 'static/media/[name].[hash].[ext]'
-                    }
-                  }
-                ],
-                issuer: {
-                  and: [/\.(ts|tsx|js|jsx|md|mdx)$/]
-                }
-              }
-
-        ]
+                use: ["style-loader", "css-loader"]
+            }
+        ],
+    },
+    resolve: {
+        extensions: ['.tsx', '.ts', '.js'],
+    },
+    devServer: {
+        hot: true
     }
+};
 ```

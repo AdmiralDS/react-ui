@@ -12,8 +12,6 @@ export interface RenderOptionProps {
   selected?: boolean;
   /** Акцентная секция MenuItems */
   hovered?: boolean;
-  /** Отключение секции */
-  disabled?: boolean;
   /** Обработчик клика по item */
   onClickItem?: () => void;
   /** Обработчик наведения мыши на item */
@@ -23,16 +21,23 @@ export interface RenderOptionProps {
   expandIcon?: React.ReactNode;
   hasSubmenu?: boolean;
   selfRef: ((instance: HTMLDivElement | null) => void) | React.RefObject<HTMLDivElement> | null;
+  /** Отключение секции */
+  disabled?: boolean;
+  /** Только для чтения */
+  readOnly?: boolean;
 }
 
-export interface ItemProps {
+export interface MenuModelItemProps {
   id: string;
   render: (options: RenderOptionProps) => React.ReactNode;
   disabled?: boolean;
   readOnly?: boolean;
-  subItems?: Array<ItemProps>;
+  subItems?: Array<MenuModelItemProps>;
   expandIcon?: React.ReactNode;
 }
+
+/** @deprecated use MenuModeItemProps instead */
+export type ItemProps = MenuModelItemProps;
 
 export interface MenuItemProps extends HTMLAttributes<HTMLDivElement>, RenderOptionProps {
   /** Размер MenuItems */
@@ -47,7 +52,7 @@ export const MenuItem = React.forwardRef<HTMLDivElement, MenuItemProps>(
       hasSubmenu,
       onHover,
       onClickItem,
-      disabled = false,
+      disabled,
       hovered,
       dimension = 'l',
       selected = false,
@@ -119,6 +124,9 @@ const Item = styled.div<{
     color: ${(p) => p.theme.color['Neutral/Neutral 30']};
     && *[fill^='#'] {
       fill: ${(p) => p.theme.color['Neutral/Neutral 30']};
+    }
+    && input[type='checkbox'] + * [fill^='#'] {
+      fill: ${(p) => p.theme.color['Neutral/Neutral 00']};
     }
   }
 `;

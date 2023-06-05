@@ -57,7 +57,7 @@ export const HintDialog = styled.div<{
   isMobile: boolean;
 }>`
   display: flex;
-  padding: 10px 0;
+  padding: 4px 0;
   background-color: ${({ theme }) => theme.color['Special/Elevated BG']};
   ${typography['Body/Body 2 Long']}
   color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
@@ -73,7 +73,7 @@ export const HintContent = styled.div`
   box-sizing: border-box;
   max-height: 300px;
   overflow: auto;
-  padding: 6px 16px;
+  padding: 8px 16px;
   [data-trigger='click'] & {
     padding-right: ${16 + CLOSE_BUTTON_SIZE + CLOSE_BUTTON_MARGIN_LEFT}px;
   }

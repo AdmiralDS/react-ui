@@ -1,22 +1,26 @@
 import * as React from 'react';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
-import { ReactComponent as MinusCircleOutline } from '@admiral-ds/icons/build/service/MinusCircleOutline.svg';
-import { MenuButton } from '../MenuButton';
 import styled, { css, ThemeProvider } from 'styled-components';
-import { T } from '#src/components/T';
-import type { Theme } from '#src/components/themes';
-import type { RenderOptionProps } from '#src/components/Menu/MenuItem';
-import { MenuItem } from '#src/components/Menu/MenuItem';
+import {
+  MenuButton,
+  MenuItem,
+  MenuItemWithCheckbox,
+  MenuActionsPanel,
+  Button,
+  T,
+  ALL_BORDER_RADIUS_VALUES,
+} from '@admiral-ds/react-ui';
+import type {
+  MenuButtonProps,
+  Theme,
+  RenderOptionProps,
+  ItemWithCheckbox,
+  RenderPanelProps,
+} from '@admiral-ds/react-ui';
 import { ReactComponent as StarSolid } from '@admiral-ds/icons/build/system/StarSolid.svg';
-import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
+import { ReactComponent as MinusCircleOutline } from '@admiral-ds/icons/build/service/MinusCircleOutline.svg';
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
-import type { MenuButtonProps } from '#src/components/MenuButton';
-import { MenuActionsPanel } from '#src/components/Menu/MenuActionsPanel';
-import { Button } from '#src/components/Button';
-import type { ItemWithCheckbox } from '#src/components/Menu/MenuItemWithCheckbox';
-import { MenuItemWithCheckbox } from '#src/components/Menu/MenuItemWithCheckbox';
-import type { RenderPanelProps } from '#src/components/Menu';
 
 const DarkDiv = styled.div`
   background-color: ${({ theme }) => theme.color['Special/Dark Static Neutral 00']};
@@ -1316,14 +1320,7 @@ const Template5: ComponentStory<typeof MenuButton> = (args) => {
     return innerState.map((item) => ({
       id: item.id,
       render: (options: RenderOptionProps) => (
-        <MenuItemWithCheckbox
-          key={item.id}
-          id={item.id}
-          checked={!!item.checked}
-          checkboxIsHovered={item.id === activeOption}
-          {...options}
-          dimension="s"
-        >
+        <MenuItemWithCheckbox key={item.id} id={item.id} checked={!!item.checked} {...options} dimension="s">
           {item.label}
         </MenuItemWithCheckbox>
       ),

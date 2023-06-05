@@ -1,11 +1,10 @@
 import * as React from 'react';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { EditModeField } from './index';
 import { withDesign } from 'storybook-addon-designs';
-import type { Theme } from '#src/components/themes';
 import { ThemeProvider } from 'styled-components';
+import { EditModeField, INPUT_STATUS_VALUES, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
+import type { Theme } from '@admiral-ds/react-ui';
 import { DataAttributesDescription } from '#src/components/form/common';
-import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
 
 export default {
   title: 'Admiral-2.1/Form Field/EditModeField',
@@ -33,6 +32,10 @@ export default {
     dimension: {
       options: ['xxl', 'xl', 'm', 's'],
       control: { type: 'radio' },
+    },
+    status: {
+      control: { type: 'radio' },
+      options: INPUT_STATUS_VALUES,
     },
     bold: {
       control: { type: 'boolean' },

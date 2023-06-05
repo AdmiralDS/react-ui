@@ -1,13 +1,16 @@
-import { INPUT_DIMENSIONS_VALUES } from '#src/components/input';
 import * as React from 'react';
 import type { ChangeEvent } from 'react';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { SuggestField } from '#src/components/form/SuggestField';
 import { withDesign } from 'storybook-addon-designs';
 import styled, { ThemeProvider } from 'styled-components';
-import type { Theme } from '#src/components/themes';
+import {
+  SuggestField,
+  INPUT_DIMENSIONS_VALUES,
+  INPUT_STATUS_VALUES,
+  ALL_BORDER_RADIUS_VALUES,
+} from '@admiral-ds/react-ui';
+import type { Theme } from '@admiral-ds/react-ui';
 import { DataAttributesDescription } from '#src/components/form/common';
-import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
 
 export default {
   title: 'Admiral-2.1/Form Field/SuggestField',
@@ -39,6 +42,10 @@ export default {
     dimension: {
       options: INPUT_DIMENSIONS_VALUES,
       control: { type: 'radio' },
+    },
+    status: {
+      control: { type: 'radio' },
+      options: INPUT_STATUS_VALUES,
     },
     isLoading: {
       control: { type: 'boolean' },

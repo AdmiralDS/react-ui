@@ -17,6 +17,10 @@ import type { MenuItemProps } from '#src/components/Menu/MenuItem';
 import { Tooltip } from '#src/components/Tooltip';
 import { checkOverflow } from '#src/components/common/utils/checkOverflow';
 import type { DropContainerStyles } from '#src/components/DropdownContainer';
+import { BorderedDivStyles, InputBorderedDiv } from '#src/components/input/TextInput';
+
+export type { RenderPropsType } from '#src/components/input/InputEx/SuffixSelect';
+export type { ValueType } from '#src/components/input/InputEx/ValueType';
 
 const iconSizeValue = (props: { dimension?: ComponentDimension }) => {
   switch (props.dimension) {
@@ -38,68 +42,6 @@ const horizontalPaddingValue = (props: { dimension?: ComponentDimension }) => {
       return 16;
   }
 };
-
-const BorderedDiv = styled.div`
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  margin: 0;
-  pointer-events: none;
-  overflow: hidden;
-  min-width: 0;
-
-  background: none;
-  border: 1px solid ${(props) => props.theme.color['Neutral/Neutral 40']};
-  border-radius: inherit;
-
-  [data-status='error'] & {
-    border: 1px solid ${(props) => props.theme.color['Error/Error 60 Main']};
-  }
-
-  [data-status='success'] & {
-    border: 1px solid ${(props) => props.theme.color['Success/Success 50 Main']};
-  }
-
-  [data-read-only] & {
-    border-color: transparent;
-  }
-`;
-
-const colorsBorderAndBackground = css<{ disabled?: boolean }>`
-  &:focus + ${BorderedDiv} {
-    border: 2px solid ${(props) => props.theme.color['Primary/Primary 60 Main']};
-  }
-
-  &:disabled + ${BorderedDiv} {
-    border-color: transparent;
-  }
-
-  &:hover:not(:focus) + ${BorderedDiv} {
-    border-color: ${(props) => (props.disabled ? 'transparent' : props.theme.color['Neutral/Neutral 60'])};
-  }
-
-  &:invalid + ${BorderedDiv}, &:invalid:hover + ${BorderedDiv} {
-    border: 1px solid ${(props) => props.theme.color['Error/Error 60 Main']};
-  }
-
-  [data-status='error'] &:hover + ${BorderedDiv}, [data-status='error'] &:focus + ${BorderedDiv} {
-    border: 2px solid ${(props) => props.theme.color['Error/Error 60 Main']};
-  }
-
-  [data-status='success'] &:hover + ${BorderedDiv}, [data-status='success'] &:focus + ${BorderedDiv} {
-    border: 2px solid ${(props) => props.theme.color['Success/Success 50 Main']};
-  }
-
-  &:disabled {
-    color: ${(props) => props.theme.color['Neutral/Neutral 30']};
-  }
-
-  [data-read-only] &:hover + ${BorderedDiv}, [data-read-only] &:focus + ${BorderedDiv} {
-    border-color: transparent;
-  }
-`;
 
 const ieFixes = css`
   ::-ms-clear,
@@ -123,6 +65,10 @@ const Input = styled.input<ExtraProps>`
 
   color: ${(props) => props.theme.color['Neutral/Neutral 90']};
 
+  &&&:disabled {
+    color: ${(props) => props.theme.color['Neutral/Neutral 30']};
+  }
+
   ${(props) => (props.dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
   &::placeholder {
     color: ${(props) => props.theme.color['Neutral/Neutral 50']};
@@ -137,7 +83,18 @@ const Input = styled.input<ExtraProps>`
     pointer-events: none;
   }
 
-  ${colorsBorderAndBackground}
+  &&&:invalid + ${InputBorderedDiv} {
+    border: 1px solid ${(props) => props.theme.color['Error/Error 60 Main']};
+  }
+
+  &&&:invalid:hover:not(:disabled) + ${InputBorderedDiv} {
+    border: 1px solid ${(props) => props.theme.color['Error/Error 70']};
+  }
+
+  &&&:invalid:focus:not(:disabled) + ${InputBorderedDiv} {
+    border: 2px solid ${(props) => props.theme.color['Error/Error 60 Main']};
+  }
+
   ${ieFixes}
 `;
 
@@ -190,7 +147,13 @@ const IconPanel = styled.div<{ disabled?: boolean; dimension?: ComponentDimensio
 
 const preventDefault = (e: React.MouseEvent) => e.preventDefault();
 
-const Container = styled.div<{ disabled?: boolean; dimension?: ComponentDimension; skeleton?: boolean }>`
+const Container = styled.div<{
+  disabled?: boolean;
+  dimension?: ComponentDimension;
+  skeleton?: boolean;
+  status?: InputStatus;
+  readOnly?: boolean;
+}>`
   position: relative;
   display: flex;
   align-items: stretch;
@@ -206,7 +169,8 @@ const Container = styled.div<{ disabled?: boolean; dimension?: ComponentDimensio
   }
 
   ${containerHeights}
-  ${({ skeleton }) => skeleton && skeletonMixin}};
+  ${({ skeleton }) => skeleton && skeletonMixin};
+  ${BorderedDivStyles}
 `;
 
 export interface RenderProps {
@@ -425,6 +389,9 @@ export const InputEx = React.forwardRef<HTMLInputElement, InputExProps>(
           data-disable-copying={props.disableCopying ? true : undefined}
           onMouseDown={props.disableCopying ? preventDefault : undefined}
           skeleton={skeleton}
+          status={status}
+          disabled={props.disabled}
+          readOnly={props.readOnly}
         >
           {!!prefix && (
             <PrefixContainer dimension={props.dimension} disabled={props.disabled}>
@@ -432,7 +399,7 @@ export const InputEx = React.forwardRef<HTMLInputElement, InputExProps>(
             </PrefixContainer>
           )}
           <Input ref={refSetter(ref, inputRef)} {...props} placeholder={placeholder} iconCount={iconCount} />
-          <BorderedDiv />
+          <InputBorderedDiv status={status} disabled={props.disabled || props.readOnly} />
           {iconCount > 0 && (
             <IconPanel disabled={props.disabled} dimension={props.dimension}>
               {iconArray}

@@ -1,6 +1,6 @@
 {
   "name": "@admiral-ds/react-ui",
-  "version": "4.12.0",
+  "version": "4.17.0",
   "description": "React component library for Admiral design system 2.1",
   "keywords": [],
   "author": "",
@@ -46,8 +46,7 @@
     "@admiral-ds/fonts": "^2.0.0",
     "@admiral-ds/icons": "^2.0.0",
     "react": ">=16",
-    "react-dom": ">=16",
-    "styled-components": "^5.1.0"
+    "react-dom": ">=16"
   },
   "peerDependencies": {
     "@admiral-ds/flags": "^2.0.0",
@@ -55,7 +54,7 @@
     "@admiral-ds/icons": "^2.0.0",
     "react": ">=16",
     "react-dom": ">=16",
-    "styled-components": "^5.1.0"
+    "styled-components": "^5.1.0 || ^6.0.0-rc.1"
   },
   "devDependencies": {
     "@babel/core": "^7.16.0",
@@ -69,6 +68,7 @@
     "@storybook/storybook-deployer": "^2.8.11",
     "@storybook/theming": "^6.4.12",
     "@svgr/webpack": "^5.5.0",
+    "@tanstack/react-query": "^4.29.5",
     "@testing-library/jest-dom": "^5.15.0",
     "@testing-library/react": "^12.0.0",
     "@testing-library/user-event": "^13.5.0",
@@ -99,8 +99,10 @@
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "standard-version": "^9.3.2",
     "storybook-addon-designs": "^6.1.0",
+    "storybook-addon-rtl": "^0.5.0",
     "storybook-css-modules-preset": "^1.1.1",
     "storybook-dark-mode": "^2.1.1",
+    "styled-components": "^5.1.0",
     "ts-jest": "^27.0.7",
     "ttypescript": "^1.5.12",
     "typescript": "4.8.4",

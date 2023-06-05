@@ -1,15 +1,21 @@
-import type { SelectProps } from '#src/components/input';
-import { Option, Select } from '#src/components/input';
 import * as React from 'react';
+import styled from 'styled-components';
+import { MenuItem, Option, Select } from '@admiral-ds/react-ui';
+import type { SelectProps, RenderOptionProps } from '@admiral-ds/react-ui';
+
 import { OPTIONS } from '#src/components/input/Select/Stories/data';
-import type { RenderOptionProps } from '#src/components/Menu/MenuItem';
-import { CustomOptionWrapper } from '#src/components/input/Select/styled';
 import { Icon, TextWrapper } from '#src/components/input/Select/Stories/styled';
 
 interface MyIncredibleOptionProps extends RenderOptionProps {
   shouldAnimate?: boolean;
   text: string;
 }
+
+const CustomOptionWrapper = styled(MenuItem)`
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  white-space: pre-wrap;
+`;
 
 const MyIncredibleOption = ({ text, shouldAnimate, ...props }: MyIncredibleOptionProps) => (
   <CustomOptionWrapper {...props}>
@@ -27,23 +33,21 @@ export const RenderPropsTemplate = (props: SelectProps) => {
   };
 
   return (
-    <>
-      <Select {...props} value={selectValue} mode="searchSelect" onChange={onChange}>
-        {OPTIONS.map(({ text, value }) => (
-          <Option
-            key={value}
-            value={value}
-            renderOption={(options) => (
-              <MyIncredibleOption
-                text={text}
-                shouldAnimate={options.hovered && value !== selectValue}
-                {...options}
-                key={value}
-              />
-            )}
-          />
-        ))}
-      </Select>
-    </>
+    <Select {...props} value={selectValue} mode="searchSelect" onChange={onChange}>
+      {OPTIONS.map(({ text, value }) => (
+        <Option
+          key={value}
+          value={value}
+          renderOption={(options) => (
+            <MyIncredibleOption
+              text={text}
+              shouldAnimate={options.hovered && value !== selectValue}
+              {...options}
+              key={value}
+            />
+          )}
+        />
+      ))}
+    </Select>
   );
 };

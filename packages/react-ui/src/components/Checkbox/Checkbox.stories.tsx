@@ -1,13 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { Checkbox } from './index';
-
 import { withDesign } from 'storybook-addon-designs';
-import { ALL_DIMENSIONS_VALUES } from '#src/components/Checkbox/CheckboxDimension';
 import styled, { ThemeProvider } from 'styled-components';
-import { T } from '#src/components/T';
-import type { Theme } from '#src/components/themes';
-import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes/borderRadius';
+import { Checkbox, T, ALL_BORDER_RADIUS_VALUES, ALL_DIMENSIONS_VALUES } from '@admiral-ds/react-ui';
+import type { Theme } from '@admiral-ds/react-ui';
 
 export default {
   title: 'Admiral-2.1/Atoms/Checkbox',
@@ -43,6 +39,12 @@ export default {
       control: { type: 'radio' },
     },
     disabled: {
+      control: { type: 'boolean' },
+    },
+    readOnly: {
+      control: { type: 'boolean' },
+    },
+    hovered: {
       control: { type: 'boolean' },
     },
     error: {
@@ -146,6 +148,20 @@ const CheckboxDemo: ComponentStory<typeof Checkbox> = (props) => {
             <Checkbox dimension="s" error />
             <T font="Body/Body 1 Long" as="div">
               Состояние ошибки
+            </T>
+          </Row>
+          <Row>
+            <Checkbox readOnly />
+            <Checkbox dimension="s" readOnly />
+            <T font="Body/Body 1 Long" as="div">
+              Readonly
+            </T>
+          </Row>
+          <Row>
+            <Checkbox readOnly defaultChecked />
+            <Checkbox dimension="s" readOnly defaultChecked />
+            <T font="Body/Body 1 Long" as="div">
+              Readonly active
             </T>
           </Row>
         </Container>

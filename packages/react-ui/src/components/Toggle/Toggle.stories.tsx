@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import styled from 'styled-components';
-
-import type { ToggleProps } from '#src/components/Toggle';
-import { Toggle } from '#src/components/Toggle';
+import { Toggle } from '@admiral-ds/react-ui';
+import type { ToggleProps } from '@admiral-ds/react-ui';
+import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 const Separator = styled.div`
   height: 20px;
@@ -64,10 +64,16 @@ export default {
     disabled: {
       control: { type: 'boolean' },
     },
+    readOnly: {
+      control: { type: 'boolean' },
+    },
     checked: {
       control: { type: 'boolean' },
     },
     width: {
+      control: { type: 'text' },
+    },
+    extraText: {
       control: { type: 'text' },
     },
   },
@@ -86,12 +92,20 @@ const Template1: ComponentStory<typeof Toggle> = () => {
 const Template2: ComponentStory<typeof Toggle> = () => {
   return (
     <>
-      <Toggle checked readOnly>
+      <Toggle checked onChange={() => undefined}>
         Active
       </Toggle>
       <Separator />
-      <Toggle checked={false} readOnly>
+      <Toggle checked={false} onChange={() => undefined}>
         Not active
+      </Toggle>
+      <Separator />
+      <Toggle checked readOnly>
+        Active readonly
+      </Toggle>
+      <Separator />
+      <Toggle checked={false} readOnly>
+        Not active readonly
       </Toggle>
       <Separator />
       <Toggle checked disabled>
@@ -162,25 +176,43 @@ const Template5: ComponentStory<typeof Toggle> = () => {
 const Template6: ComponentStory<typeof Toggle> = ({
   dimension,
   disabled,
+  readOnly,
   width,
+  extraText,
   labelPosition,
   checked: argChecked,
+  ...props
 }: ToggleProps) => {
   const [checked, setChecked] = useState(argChecked || false);
+  const clearProps = cleanUpProps(props);
+
+  React.useEffect(() => {
+    setChecked(!!argChecked);
+  }, [argChecked]);
   return (
     <>
       <Toggle
+        {...clearProps}
         checked={checked}
         onChange={(event) => setChecked(event.currentTarget.checked)}
         dimension={dimension}
         disabled={disabled}
+        readOnly={readOnly}
         width={width}
+        extraText={extraText}
         labelPosition={labelPosition}
       >
         Controlled component
       </Toggle>
       <Separator />
-      <Toggle dimension={dimension} disabled={disabled} width={width} labelPosition={labelPosition}>
+      <Toggle
+        dimension={dimension}
+        disabled={disabled}
+        readOnly={readOnly}
+        width={width}
+        extraText={extraText}
+        labelPosition={labelPosition}
+      >
         Uncontrolled component
       </Toggle>
     </>

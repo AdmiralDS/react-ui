@@ -1,7 +1,7 @@
 import * as React from 'react';
 import type { CSSProperties } from 'react';
 import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
-import styled, { ThemeContext } from 'styled-components';
+import styled, { useTheme } from 'styled-components';
 import { ReactComponent as SearchOutlineSVG } from '@admiral-ds/icons/build/system/SearchOutline.svg';
 import { LIGHT_THEME } from '#src/components/themes';
 import { keyboardKey } from '#src/components/common/keyboardKey';
@@ -102,7 +102,7 @@ export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps
     },
     ref,
   ) => {
-    const theme = React.useContext(ThemeContext) || LIGHT_THEME;
+    const theme = useTheme() || LIGHT_THEME;
     const isControlledComponentValue = undefined !== props.value;
     const { options, portalTargetRef } = props;
 

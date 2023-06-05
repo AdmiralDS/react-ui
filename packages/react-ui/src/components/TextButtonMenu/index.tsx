@@ -1,4 +1,4 @@
-import type { CSSProperties, HTMLAttributes } from 'react';
+import type { CSSProperties, HTMLAttributes, ReactNode } from 'react';
 import * as React from 'react';
 import type { Appearance, Dimension } from '#src/components/TextButton/types';
 import type { ItemProps } from '#src/components/Menu/MenuItem';
@@ -41,6 +41,8 @@ export interface TextButtonMenuProps
   dimension?: Dimension;
   /** Текст кнопки */
   text?: string;
+  /** Иконка перед текстом кнопки */
+  iconStart?: ReactNode;
   /** Состояние загрузки */
   loading?: boolean;
   /** Опции выпадающего списка */
@@ -78,6 +80,7 @@ export const TextButtonMenu = React.forwardRef<HTMLButtonElement, TextButtonMenu
   (
     {
       text,
+      iconStart,
       dimension = 'm',
       appearance = 'primary',
       disabled = false,
@@ -137,6 +140,8 @@ export const TextButtonMenu = React.forwardRef<HTMLButtonElement, TextButtonMenu
             <StyledTextButton
               {...props}
               text={text}
+              iconStart={iconStart}
+              iconEnd={statusIcon}
               skeleton={skeleton}
               ref={refSetter(ref, buttonRef as React.Ref<HTMLButtonElement>)}
               dimension={dimension}
@@ -148,7 +153,6 @@ export const TextButtonMenu = React.forwardRef<HTMLButtonElement, TextButtonMenu
               onClick={handleClick}
               aria-expanded={menuState}
               menuOpened={menuState}
-              icon={statusIcon}
               className={className + ' text-button-with-dropdown'}
             />
           );
