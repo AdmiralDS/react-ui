@@ -3,14 +3,19 @@ import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import { ThemeProvider } from 'styled-components';
 
-import type { CalendarPropType, ViewScreenType, Theme } from '#src/index';
-import { Calendar, T, ALL_BORDER_RADIUS_VALUES } from '#src/index';
+import type { CalendarPropType, Theme } from '#src/index';
+import { Calendar, ALL_BORDER_RADIUS_VALUES } from '#src/index';
 
 import {
   SimpleWithSpecialDatesTemplate,
   SimpleWithSetActiveViewWithoutDayTemplate,
   SimpleWithSetActiveViewDateAfterChooseYearTemplate,
   SimpleWithSetActiveViewDateTemplate,
+  SimpleWithChangeViewDateTemplate,
+  SimpleWithFilterDateTemplate,
+  SimpleWithMaxDateTemplate,
+  RangeTemplate,
+  CalendarSimpleTemplate,
 } from '#src/components/Calendar/Stories/Templates';
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
@@ -19,6 +24,11 @@ import SimpleWithSpecialDatesRaw from '!!raw-loader!./Templates/SimpleWithSpecia
 import SimpleWithSetActiveViewWithoutDayRaw from '!!raw-loader!./Templates/SimpleWithSetActiveViewWithoutDay';
 import SimpleWithSetActiveViewDateAfterChooseYearRaw from '!!raw-loader!./Templates/SimpleWithSetActiveViewDateAfterChooseYear';
 import SimpleWithSetActiveViewDateRaw from '!!raw-loader!./Templates/SimpleWithSetActiveViewDate';
+import SimpleWithChangeViewDateRaw from '!!raw-loader!./Templates/SimpleWithChangeViewDate';
+import SimpleWithFilterDateRaw from '!!raw-loader!./Templates/SimpleWithFilterDate';
+import SimpleWithMaxDateRaw from '!!raw-loader!./Templates/SimpleWithMaxDate';
+import RangeRaw from '!!raw-loader!./Templates/Range';
+import CalendarSimpleRaw from '!!raw-loader!./Templates/CalendarSimple';
 
 export default {
   title: 'Admiral-2.1/Calendar',
@@ -74,182 +84,105 @@ export default {
   },
 } as ComponentMeta<typeof Calendar>;
 
-const Template1: ComponentStory<typeof Calendar> = (args) => {
-  const [selected, setSelected] = useState<Date | null>(null);
-  const [endDate, setEndDate] = useState<Date | null>(null);
+//<editor-fold desc="Пример календаря с выбором даты>">
+const CalendarSimpleStory: ComponentStory<typeof Calendar> = (args) => (
+  <CalendarSimpleTemplate onChange={() => undefined} {...cleanUpProps(args)} />
+);
 
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
-  return args.range ? (
-    <ThemeProvider theme={swapBorder}>
-      <Calendar
-        {...args}
-        range
-        startDate={selected}
-        endDate={endDate}
-        onChange={(value: any) => {
-          setSelected(value[0]);
-          setEndDate(value[1]);
-        }}
-      />
-    </ThemeProvider>
-  ) : (
-    <ThemeProvider theme={swapBorder}>
-      <Calendar
-        {...args}
-        selected={selected}
-        onChange={(value: any) => {
-          setSelected(value);
-        }}
-      />
-    </ThemeProvider>
-  );
+export const CalendarSimple = CalendarSimpleStory.bind({});
+CalendarSimple.parameters = {
+  docs: {
+    source: {
+      code: CalendarSimpleRaw,
+    },
+    description: {
+      story: 'Пример календаря с выбором даты>.',
+    },
+  },
 };
-
-const Template2: ComponentStory<typeof Calendar> = (args: CalendarPropType) => {
-  const [startDate, setStartDate] = useState<Date | null>(null);
-  const [endDate, setEndDate] = useState<Date | null>(null);
-  return (
-    <>
-      <Calendar
-        {...args}
-        range
-        startDate={startDate}
-        endDate={endDate}
-        onChange={(value: any) => {
-          setStartDate(value[0]);
-          setEndDate(value[1]);
-        }}
-      />
-    </>
-  );
-};
-
-const Template3: ComponentStory<typeof Calendar> = ({ range, ...args }: CalendarPropType) => {
-  const [selected, setSelected] = useState<Date | null>(null);
-  const [endDate, setEndDate] = useState<Date | null>(null);
-  const tomorrow = new Date();
-  tomorrow.setDate(new Date().getDate() + 1);
-  return range ? (
-    <>
-      <Calendar
-        {...args}
-        range
-        startDate={selected}
-        endDate={endDate}
-        maxDate={tomorrow}
-        onChange={(value: any) => {
-          setSelected(value[0]);
-          setEndDate(value[1]);
-        }}
-      />
-    </>
-  ) : (
-    <>
-      <Calendar
-        {...args}
-        maxDate={tomorrow}
-        selected={selected}
-        onChange={(value: any) => {
-          setSelected(value);
-        }}
-      />
-    </>
-  );
-};
-
-const Template4: ComponentStory<typeof Calendar> = ({ range, ...args }: CalendarPropType) => {
-  const [selected, setSelected] = useState<Date | null>(null);
-  const [endDate, setEndDate] = useState<Date | null>(null);
-  const isWeekday = (date: Date) => {
-    const day = date.getDay();
-    return day !== 0 && day !== 6;
-  };
-  return range ? (
-    <>
-      <Calendar
-        {...args}
-        range
-        startDate={selected}
-        endDate={endDate}
-        filterDate={isWeekday}
-        onChange={(value: any) => {
-          setSelected(value[0]);
-          setEndDate(value[1]);
-        }}
-      />
-    </>
-  ) : (
-    <>
-      <Calendar
-        {...args}
-        filterDate={isWeekday}
-        selected={selected}
-        onChange={(value: any) => {
-          setSelected(value);
-        }}
-      />
-    </>
-  );
-};
-
-const Template5: ComponentStory<typeof Calendar> = ({ range, ...args }: CalendarPropType) => {
-  const [selected, setSelected] = useState<Date | null>(null);
-
-  return (
-    <>
-      <T font="Body/Body 1 Long" as="div" style={{ marginBottom: '25px' }}>
-        Коллбеки (смотри в консоль)
-      </T>
-      <T font="Body/Body 2 Long" as="div">
-        Открытие экранов выбора года и месяца `(onViewEnter, onViewLeave)`
-      </T>
-      <T font="Body/Body 2 Long" as="div" style={{ marginBottom: '25px' }}>
-        Изменение даты после выбора года или месяца по стрелкам `(onIncreaseDecreaseDate)`
-      </T>
-
-      <Calendar
-        {...args}
-        selected={selected}
-        onChange={(value: any) => {
-          setSelected(value);
-        }}
-        onDateIncreaseDecrease={(value: any) => {
-          console.log('onIncreaseDecreaseDate', value);
-        }}
-        onViewEnter={(view: ViewScreenType) => {
-          console.log('onViewEnter', view);
-        }}
-        onViewLeave={(view: ViewScreenType) => {
-          console.log('onViewLeave', view);
-        }}
-      />
-    </>
-  );
-};
-
-export const CalendarSimple = Template1.bind({});
 CalendarSimple.args = {};
 CalendarSimple.storyName = 'Simple.';
+//</editor-fold>
 
-export const Range = Template2.bind({});
+//<editor-fold desc="Пример с выбором диапазона">
+const RangeStory: ComponentStory<typeof Calendar> = (args: CalendarPropType) => (
+  <RangeTemplate onChange={() => undefined} {...cleanUpProps(args)} />
+);
+
+export const Range = RangeStory.bind({});
+Range.parameters = {
+  docs: {
+    source: {
+      code: RangeRaw,
+    },
+    description: {
+      story: 'Пример с выбором диапазона.',
+    },
+  },
+};
 Range.args = {};
 Range.storyName = 'Range.';
+//</editor-fold>
 
-export const SimpleWithMaxDate = Template3.bind({});
+//<editor-fold desc="Пример с ограничением максимальной даты">
+const SimpleWithMaxDateStory: ComponentStory<typeof Calendar> = ({ range, ...args }: CalendarPropType) => (
+  <SimpleWithMaxDateTemplate onChange={() => undefined} {...cleanUpProps(args)} />
+);
+
+export const SimpleWithMaxDate = SimpleWithMaxDateStory.bind({});
+SimpleWithMaxDate.parameters = {
+  docs: {
+    source: {
+      code: SimpleWithMaxDateRaw,
+    },
+    description: {
+      story: 'Пример с ограничением максимальной даты.',
+    },
+  },
+};
 SimpleWithMaxDate.args = {};
 SimpleWithMaxDate.storyName = 'maxDate.';
+//</editor-fold>
 
-export const SimpleWithFilterDate = Template4.bind({});
+//<editor-fold desc="Пример с недоступными для выбора датами">
+const SimpleWithFilterDateStory: ComponentStory<typeof Calendar> = ({ range, ...args }: CalendarPropType) => (
+  <SimpleWithFilterDateTemplate onChange={() => undefined} {...cleanUpProps(args)} />
+);
+
+export const SimpleWithFilterDate = SimpleWithFilterDateStory.bind({});
+SimpleWithFilterDate.parameters = {
+  docs: {
+    source: {
+      code: SimpleWithFilterDateRaw,
+    },
+    description: {
+      story: 'Пример с недоступными для выбора датами.',
+    },
+  },
+};
 SimpleWithFilterDate.args = {};
 SimpleWithFilterDate.storyName = 'FilterDate.';
+//</editor-fold>
 
-export const SimpleWithChangeViewDate = Template5.bind({});
+//<editor-fold desc="Пример с коллбеками">
+const SimpleWithChangeViewDateStory: ComponentStory<typeof Calendar> = ({ range, ...args }: CalendarPropType) => (
+  <SimpleWithChangeViewDateTemplate onChange={() => undefined} {...cleanUpProps(args)} />
+);
+
+export const SimpleWithChangeViewDate = SimpleWithChangeViewDateStory.bind({});
+SimpleWithChangeViewDate.parameters = {
+  docs: {
+    source: {
+      code: SimpleWithChangeViewDateRaw,
+    },
+    description: {
+      story: 'Пример с коллбеками.',
+    },
+  },
+};
 SimpleWithChangeViewDate.args = {};
 SimpleWithChangeViewDate.storyName = 'Callback';
+//</editor-fold>
 
 //<editor-fold desc="Пример с переключением экранов выбора дат">
 const SimpleWithSetActiveViewDateStory: ComponentStory<typeof Calendar> = ({ range, ...args }: CalendarPropType) => (

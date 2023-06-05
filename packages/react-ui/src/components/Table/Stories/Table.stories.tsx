@@ -2,27 +2,8 @@ import * as React from 'react';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import styled from 'styled-components';
+import { Table } from '@admiral-ds/react-ui';
 
-import type { Column } from '@admiral-ds/react-ui';
-import { Table, Button, RadioButton, FieldSet, DateField, DefaultFontColorName } from '@admiral-ds/react-ui';
-import { ReactComponent as AcceptSolid } from '@admiral-ds/icons/build/category/AcceptSolid.svg';
-
-// Массивы с данными столбцов и строк вынесены в отдельный файл в связи с большим объемом информации
-import {
-  columnList,
-  columnListLineClamp,
-  columnListOrientation,
-  columnListSort,
-  columnListSticky,
-  columnListWithCustomTitle,
-  columnListWithWidth,
-  rowList,
-  rowListLineClamp,
-  rowListRowState,
-  rowListSort,
-  columnListWithCustomRender,
-  rowListWithCustomRenderGroup,
-} from './data';
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 import {
@@ -33,6 +14,19 @@ import {
   ExpandTemplate,
   ZebraTemplate,
   ColumnDragDropTemplate,
+  RowStateTemplate,
+  StickyTemplate,
+  MultilineTemplate,
+  FilterTemplate,
+  SortTemplate,
+  OrientationTemplate,
+  CheckboxTemplate,
+  ColumnWidthTemplate,
+  StyleTemplate,
+  CustomTitleTemplate,
+  RenderCellTemplate,
+  RenderGroupTitleTemplate,
+  PlaygroundTemplate,
 } from './Templates';
 // Imports of text sources
 import VirtualScrollRaw from '!!raw-loader!./Templates/TableVirtualScroll';
@@ -42,6 +36,19 @@ import ExtraTextRaw from '!!raw-loader!./Templates/TableExtraText';
 import ExpandRaw from '!!raw-loader!./Templates/TableExpand';
 import ZebraRaw from '!!raw-loader!./Templates/TableZebra';
 import ColumnDragDropRaw from '!!raw-loader!./Templates/TableColumnDragDrop';
+import RowStateRaw from '!!raw-loader!./Templates/TableRowState';
+import StickyRaw from '!!raw-loader!./Templates/TableSticky';
+import MultilineRaw from '!!raw-loader!./Templates/TableMultiline';
+import FilterRaw from '!!raw-loader!./Templates/TableFilter';
+import SortRaw from '!!raw-loader!./Templates/TableSort';
+import OrientationRaw from '!!raw-loader!./Templates/TableOrientation';
+import CheckboxRaw from '!!raw-loader!./Templates/TableCheckbox';
+import ColumnWidthRaw from '!!raw-loader!./Templates/TableColumnWidth';
+import StyleRaw from '!!raw-loader!./Templates/TableStyle';
+import CustomTitleRaw from '!!raw-loader!./Templates/TableCustomTitle';
+import RenderCellRaw from '!!raw-loader!./Templates/TableRenderCell';
+import RenderGroupTitleRaw from '!!raw-loader!./Templates/TableRenderGroupTitle';
+import PlaygroundRaw from '!!raw-loader!./Templates/Playground';
 
 const Separator = styled.div`
   height: 20px;
@@ -146,461 +153,30 @@ export default {
   },
 } as ComponentMeta<typeof Table>;
 
-const Template: ComponentStory<typeof Table> = ({ columnList, ...args }) => {
-  const [cols, setCols] = React.useState([...columnList]);
-
-  const handleResize = ({ name, width }: { name: string; width: string }) => {
-    const newCols = cols.map((col) => (col.name === name ? { ...col, width } : col));
-    setCols(newCols);
-  };
-
-  return <Table {...args} columnList={cols} onColumnResize={handleResize} />;
-};
-
-const StrToTime = (str: string) => {
-  const res = str.split('.').reverse().join('-');
-  return new Date(res).getTime();
-};
-
-const MAX_SORT_LEVEL = 2;
-
-type SortColumn = { [key: string]: 'asc' | 'desc' };
-
-const Text = styled.div`
-  font-family: 'VTB Group UI';
-  font-size: 16px;
-  line-height: 24px;
-  margin-bottom: 8px;
-  color: ${({ theme }) => theme.color[DefaultFontColorName]};
-`;
-
-const Template2: ComponentStory<typeof Table> = ({ rowList, columnList, ...args }) => {
-  const [rows, setRows] = React.useState([...rowList]);
-  const [cols, setCols] = React.useState([...columnList]);
-  const [sortLevel, setSortLevel] = React.useState<number>(0);
-
-  const calcSortOrder = (columns: Array<Column>): Array<Column> => {
-    const newCols = [...columns];
-
-    const sortColumns = [...newCols]
-      .filter((column) => !!column.sort)
-      .sort((a, b) => {
-        return (a.sortOrder || 0) - (b.sortOrder || 0);
-      });
-
-    sortColumns.forEach((col, index) => {
-      if (index < MAX_SORT_LEVEL) {
-        col.sortOrder = index + 1;
-      } else {
-        col.sortOrder = undefined;
-        col.sort = undefined;
-      }
-    });
-    setSortLevel(sortColumns.length);
-
-    return newCols;
-  };
-
-  const getOrderedSortColumns = (columns: Array<Column>): SortColumn => {
-    const sortColumns = columns
-      .filter((column) => !!column.sort)
-      .sort((a, b) => {
-        return (a.sortOrder || 0) - (b.sortOrder || 0);
-      });
-
-    return sortColumns.reduce((acc: SortColumn, currentValue: Column) => {
-      if (currentValue.sort) acc[currentValue.name] = currentValue.sort;
-      return acc;
-    }, {});
-  };
-
-  const handleSort = ({ name, sort }: { name: string; sort: 'asc' | 'desc' | 'initial' }) => {
-    if (sort === 'initial') {
-      const newCols = [...cols].map((col) =>
-        col.name === name ? { ...col, sort: undefined, sortOrder: undefined } : { ...col },
-      );
-      setCols(calcSortOrder(newCols));
-    } else {
-      if (sort === 'asc') {
-        if (sortLevel === MAX_SORT_LEVEL) {
-          const firstOrderCol = cols.find((col) => col.sortOrder === 1);
-          if (firstOrderCol) {
-            if (firstOrderCol.sort) firstOrderCol.sort = undefined;
-            if (firstOrderCol.sortOrder) firstOrderCol.sortOrder = undefined;
-          }
-        }
-
-        const newCols = [...cols].map((col) => {
-          const newCol = { ...col };
-
-          if (col.name === name) {
-            newCol.sort = 'asc';
-            newCol.sortOrder = sortLevel + 1;
-          }
-
-          return newCol;
-        });
-        setCols(calcSortOrder(newCols));
-      } else {
-        setCols([...cols].map((col) => (col.name === name ? { ...col, sort: 'desc' } : { ...col })));
-      }
-    }
-  };
-
-  const compare = (a: any, b: any, colName: string, sort: 'asc' | 'desc') => {
-    if (sort === 'asc') {
-      switch (colName) {
-        case 'transfer_date':
-          return StrToTime(a[colName]) - StrToTime(b[colName]);
-        case 'transfer_amount':
-          return Number(a[colName].replace(/\D/g, '')) - Number(b[colName].replace(/\D/g, ''));
-        case 'rate':
-        default:
-          return a[colName] - b[colName];
-      }
-    } else {
-      switch (colName) {
-        case 'transfer_date':
-          return StrToTime(b[colName]) - StrToTime(a[colName]);
-        case 'transfer_amount':
-          return Number(b[colName].replace(/\D/g, '')) - Number(a[colName].replace(/\D/g, ''));
-        case 'rate':
-        default:
-          return b[colName] - a[colName];
-      }
-    }
-  };
-
-  React.useEffect(() => {
-    const sortColumns = getOrderedSortColumns(cols);
-
-    if (Object.keys(sortColumns).length === 0) {
-      setRows([...rowList]);
-    } else {
-      const names = Object.keys(sortColumns);
-      const newRows = [...rows].sort((a: any, b: any) => {
-        const result = compare(a, b, names[0], sortColumns[names[0]]);
-
-        if (!result && names.length > 1) {
-          return compare(a, b, names[1], sortColumns[names[1]]);
-        } else {
-          return result;
-        }
-      });
-
-      setRows(newRows);
-    }
-  }, [cols]);
-
-  const handleResize = ({ name, width }: { name: string; width: string }) => {
-    const newCols = cols.map((col) => (col.name === name ? { ...col, width } : col));
-    setCols(newCols);
-  };
-
-  return (
-    <>
-      <Text>
-        Дизайн-системой предусматривается многоуровневая сортировка. Рекомендуется использовать не более ДВУХ уровней.
-        <br />
-        Логика сортировки (взаимосвязи) выстраивается пользователем. При этом, у иконок сортировки появляются цифры
-        обозначающие порядок (приоритет) сортировки.
-      </Text>
-      <Table {...args} columnList={cols} rowList={rows} onSortChange={handleSort} onColumnResize={handleResize} />
-    </>
-  );
-};
-
-const Template3: ComponentStory<typeof Table> = ({ rowList, columnList, ...args }) => {
-  const [rows, setRows] = React.useState([...rowList]);
-  const [cols, setCols] = React.useState([...columnList]);
-
-  const handleSelectionChange = (ids: Record<string | number, boolean>): void => {
-    const updRows = rows.map((row) => ({ ...row, selected: ids[row.id] }));
-    setRows(updRows);
-  };
-
-  const handleResize = ({ name, width }: { name: string; width: string }) => {
-    const newCols = cols.map((col) => (col.name === name ? { ...col, width } : col));
-    setCols(newCols);
-  };
-
-  return (
-    <>
-      <Table
-        {...args}
-        rowList={rows}
-        columnList={cols}
-        onRowSelectionChange={handleSelectionChange}
-        onColumnResize={handleResize}
-      />
-    </>
-  );
-};
-
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
-`;
-
-const ButtonWrapper = styled.div`
-  display: flex;
-  margin-top: 28px;
-  & > button:first-child {
-    margin-right: 8px;
-  }
-`;
-
-const Template4: ComponentStory<typeof Table> = (args) => {
-  const [selected, setSelected] = React.useState<string>('');
-  const [selectedDate, setSelectedDate] = React.useState<string>('');
-  const [rows, setRows] = React.useState([...args.rowList]);
-  const [columns, setCols] = React.useState([...args.columnList]);
-  const [numFilterActive, setNumFilterActive] = React.useState(false);
-  const [dateFilterActive, setDateFilterActive] = React.useState(false);
-
-  const renderNumFilter = ({ closeMenu }: any, column: any) => (
-    <Wrapper>
-      <FieldSet
-        legend="Варианты фильтрации:"
-        onChange={(e) => {
-          setSelected((e.target as HTMLInputElement).value);
-        }}
-      >
-        <RadioButton value="1" name="test" checked={'1' === selected}>
-          Сумма превышает миллиард
-        </RadioButton>
-        <RadioButton value="2" name="test" checked={'2' === selected}>
-          Сумма меньше миллиарда
-        </RadioButton>
-      </FieldSet>
-      <ButtonWrapper>
-        <Button
-          dimension="m"
-          onClick={() => {
-            closeMenu();
-            setNumFilterActive(true);
-            if (selected === '1') {
-              const newRows = args.rowList.filter(
-                (row) => Number(((row as any)[column.name] as string).replace(/\D/g, '')) > 1000000000,
-              );
-              setRows(newRows);
-            } else {
-              const newRows = args.rowList.filter(
-                (row) => Number(((row as any)[column.name] as string).replace(/\D/g, '')) < 1000000000,
-              );
-              setRows(newRows);
-            }
-          }}
-        >
-          Применить
-        </Button>
-        <Button
-          dimension="m"
-          onClick={() => {
-            closeMenu();
-            setNumFilterActive(false);
-            setSelected('');
-            setRows([...args.rowList]);
-          }}
-        >
-          Очистить
-        </Button>
-      </ButtonWrapper>
-    </Wrapper>
-  );
-
-  const renderDateFilter = ({ closeMenu }: any, column: any) => (
-    <Wrapper>
-      <DateField
-        label="Выберите дату:"
-        value={selectedDate}
-        onChange={(e: any) => {
-          setSelectedDate((e.target as HTMLInputElement).value);
-        }}
-      />
-      <ButtonWrapper>
-        <Button
-          dimension="m"
-          onClick={() => {
-            closeMenu();
-            setDateFilterActive(true);
-            const newRows = args.rowList.filter((row) => (row as any)[column.name] === selectedDate);
-            setRows(newRows);
-          }}
-        >
-          Применить
-        </Button>
-        <Button
-          dimension="m"
-          onClick={() => {
-            closeMenu();
-            setDateFilterActive(false);
-            setSelectedDate('');
-            setRows([...args.rowList]);
-          }}
-        >
-          Очистить
-        </Button>
-      </ButtonWrapper>
-    </Wrapper>
-  );
-
-  const onFilterMenuClickOutside = ({ closeMenu }: any) => closeMenu();
-
-  const handleResize = ({ name, width }: { name: string; width: string }) => {
-    const newCols = cols.map((col) => (col.name === name ? { ...col, width } : col));
-    setCols(newCols);
-  };
-
-  const cols = React.useMemo(
-    () =>
-      columns.map((col, index) => {
-        if (index === 0) {
-          return {
-            ...col,
-            renderFilter: () => (
-              <Wrapper>Пример кастомизации иконки фильтра с помощью функции renderFilterIcon</Wrapper>
-            ),
-            renderFilterIcon: () => <AcceptSolid />,
-            onFilterMenuClickOutside,
-          };
-        }
-        if (index === 1) {
-          return {
-            ...col,
-            isFilterActive: dateFilterActive,
-            renderFilter: renderDateFilter,
-            onFilterMenuClickOutside,
-          };
-        }
-        if (index === 2) {
-          return {
-            ...col,
-            isFilterActive: numFilterActive,
-            renderFilter: renderNumFilter,
-            onFilterMenuClose: () => console.log('filter menu close'),
-            onFilterMenuOpen: () => console.log('filter menu open'),
-            onFilterMenuClickOutside,
-          };
-        } else if (index === 4) {
-          return {
-            ...col,
-            cellAlign: 'right' as any,
-            renderFilter: () => <Wrapper>Пример отображения фильтра в колонке с выравниванием по правому краю</Wrapper>,
-            onFilterMenuClickOutside,
-          };
-        } else return col;
-      }),
-    [columns, selected, selectedDate, numFilterActive, dateFilterActive],
-  );
-
-  return (
-    <>
-      <Table columnList={cols} rowList={rows} onColumnResize={handleResize} />
-    </>
-  );
-};
-
-const CellTextContent = styled.div`
-  display: block;
-  align-items: center;
-  width: 100%;
-  margin: 2px 0;
-  overflow: hidden;
-`;
-
-const Template5: ComponentStory<typeof Table> = (args) => {
-  const [cols, setCols] = React.useState([...args.columnList]);
-  const renderCell = (row: any, columnName: string) => {
-    return (
-      <CellTextContent>
-        {columnName === 'transfer_date' ? new Date(row[columnName]).toLocaleDateString() : row[columnName]}
-      </CellTextContent>
-    );
-  };
-  const handleResize = ({ name, width }: { name: string; width: string }) => {
-    const newCols = cols.map((col) => (col.name === name ? { ...col, width } : col));
-    setCols(newCols);
-  };
-  return (
-    <>
-      <Table
-        headerLineClamp={2}
-        displayRowSelectionColumn
-        renderCell={renderCell}
-        {...args}
-        columnList={cols}
-        onColumnResize={handleResize}
-      />
-    </>
-  );
-};
-
-const Template7: ComponentStory<typeof Table> = (args) => {
-  const [cols, setCols] = React.useState([...args.columnList]);
-  const handleResize = ({ name, width }: { name: string; width: string }) => {
-    const newCols = cols.map((col) => (col.name === name ? { ...col, width } : col));
-    setCols(newCols);
-  };
-  return (
-    <Table
-      {...args}
-      columnList={cols}
-      virtualScroll={{ fixedRowHeight: 40 }}
-      style={{ height: '500px' }}
-      onColumnResize={handleResize}
-    />
-  );
-};
-
-const Template8: ComponentStory<typeof Table> = ({ rowList, columnList, ...args }) => {
-  const [rows, setRows] = React.useState([...rowList]);
-  const [cols, setCols] = React.useState([...columnList]);
-
-  const handleExpansionChange = (ids: Record<string | number, boolean>): void => {
-    const updRows = rows.map((row) => ({ ...row, expanded: ids[row.id] }));
-    setRows(updRows);
-  };
-
-  const handleSelectionChange = (ids: Record<string | number, boolean>): void => {
-    const updRows = rows.map((row) => ({ ...row, selected: ids[row.id] }));
-    setRows(updRows);
-  };
-
-  const handleResize = ({ name, width }: { name: string; width: string }) => {
-    const newCols = cols.map((col) => (col.name === name ? { ...col, width } : col));
-    setCols(newCols);
-  };
-
-  return (
-    <>
-      <Table
-        {...args}
-        rowList={rows}
-        columnList={cols}
-        onRowExpansionChange={handleExpansionChange}
-        onRowSelectionChange={handleSelectionChange}
-        onColumnResize={handleResize}
-      />
-    </>
-  );
-};
-
-export const Playground = Template.bind({});
-Playground.args = {
-  rowList,
-  columnList,
-};
-
-export const ColumnWidth = Template.bind({});
-ColumnWidth.args = {
-  rowList,
-  columnList: columnListWithWidth,
-};
-ColumnWidth.storyName = 'Table. Пример изменения ширины столбцов.';
-ColumnWidth.parameters = {
+//<editor-fold desc="Playground">
+const PlaygroundStory: ComponentStory<typeof Table> = (props) => (
+  <PlaygroundTemplate columnList={[]} rowList={[]} {...cleanUpProps(props)} />
+);
+export const Playground = PlaygroundStory.bind({});
+Playground.parameters = {
   docs: {
+    source: {
+      code: PlaygroundRaw,
+    },
+  },
+};
+//</editor-fold>
+
+//<editor-fold desc="Пример с шириной столбцов">
+const ColumnWidthStory: ComponentStory<typeof Table> = (props) => (
+  <ColumnWidthTemplate columnList={[]} rowList={[]} {...cleanUpProps(props)} />
+);
+export const ColumnWidthExample = ColumnWidthStory.bind({});
+ColumnWidthExample.parameters = {
+  docs: {
+    source: {
+      code: ColumnWidthRaw,
+    },
     description: {
       story: `По умолчанию ширина столбца составляет 100 пикселей. Чтобы изменить этот 
       параметр в массиве columnList для столбца, чью ширину нужно изменить, следует задать параметр width. 
@@ -618,16 +194,19 @@ ColumnWidth.parameters = {
     },
   },
 };
+ColumnWidthExample.storyName = 'Table. Пример изменения ширины столбцов.';
+//</editor-fold>
 
-export const Checkbox = Template3.bind({});
-Checkbox.args = {
-  rowList,
-  columnList: columnList,
-  displayRowSelectionColumn: true,
-};
-Checkbox.storyName = 'Table. Пример c чекбоксами.';
-Checkbox.parameters = {
+//<editor-fold desc="Пример с чекбоксами">
+const CheckboxStory: ComponentStory<typeof Table> = (props) => (
+  <CheckboxTemplate columnList={[]} rowList={[]} {...cleanUpProps(props)} />
+);
+export const CheckboxExample = CheckboxStory.bind({});
+CheckboxExample.parameters = {
   docs: {
+    source: {
+      code: CheckboxRaw,
+    },
     description: {
       story: `Отображение столбца с чекбоксами регулируется параметром displayRowSelectionColumn. 
       Чекбокс в шапке таблицы позволяет выбрать все строки (если не выбрано ни одной строки), 
@@ -638,79 +217,103 @@ Checkbox.parameters = {
     },
   },
 };
+CheckboxExample.storyName = 'Table. Пример c чекбоксами.';
+//</editor-fold>
 
-export const Style = Template.bind({});
-Style.args = {
-  rowList,
-  columnList,
-  greyHeader: true,
-  spacingBetweenItems: '20px',
-  style: {
-    maxHeight: '400px',
-  },
-};
-Style.storyName = 'Table. Пример стилизации.';
-Style.parameters = {
+//<editor-fold desc="Пример стилизации">
+const StyleStory: ComponentStory<typeof Table> = (props) => (
+  <StyleTemplate columnList={[]} rowList={[]} {...cleanUpProps(props)} />
+);
+export const StyleExample = StyleStory.bind({});
+StyleExample.parameters = {
   docs: {
+    source: {
+      code: StyleRaw,
+    },
     description: {
-      story: `Шапку таблицы можно окрашивать в серый цвет с помощью параметра greyHeader. 
-      Также изменять стили таблицы можно посредством атрибута style. Кроме того, к контейнеру таблицы можно применить все стандартные
-      html-атрибуты divа.\n\nШирина заголовка зависит от параметра spacingBetweenItems, подробнее о нем можно прочитать в макетах. 
-      По умолчанию минимальное значение 12, для таблиц S и M, и 16 для таблиц L и XL.\n\nС помощью параметра  showLastRowUnderline 
-      можно управлять отображением серой полоски подчеркивания для последеней строки таблицы. Кроме того, можно включать/отключать 
-      отображение вертикальной полосы разделителя для последнего столбца таблицы с помощью параметра showDividerForLastColumn.`,
+      story: `Существует ряд возможностей изменить дефолтные стили таблицы. Для таблицы можно задать атрибут style, который применится к корневому элементу таблицы. 
+      Кроме того, на корневой элемент можно прокинуть все стандартные html-атрибуты div-элемента.\n\nУ пользователя существует возможность менять стили 
+      отдельных элементов таблицы путем доступа к ним через определенные classNames и data-атрибуты. В таблице используются следующие classNames:\n\n* table - корневой
+      элемент таблицы;\n\n* tbody - тело таблицы;\n\n* tr - строка таблицы;\n\n* th - ячейка в хедере таблицы (заголовок столбца);\n\n* td - ячейка в теле таблицы.\n\nУ
+      каждого заголовка таблицы есть атрибут data-th-column={name колонки}, а у каждой ячейки в теле таблицы заданы атрибуты 
+      data-column={name колонки} и data-row={id строки}.\n\nТакже существует ряд 
+      параметров, влияющих на внешний вид таблицы:\n\n* dimension - параметр, регулирующий размер таблицы;\n\n* greyHeader - 
+      параметр, с помощью которого можно окрашивать шапку таблицы в серый цвет;\n\n* showDividerForLastColumn - параметр, 
+      который отвечает за отображение вертикальной полосы разделителя для последнего столбца таблицы. По умолчанию параметр равен false, 
+      то есть разделитель не отображается;\n\n* showLastRowUnderline - параметр, который управляет отображением серой линии 
+      подчеркивания для последней строки таблицы. По умолчанию параметр равен true, то есть линия отображается;\n\n* spacingBetweenItems -
+      параметр, который влияет на внешний вид заголовка и отвечает одновременно за размер правого бокового отступа внутри заголовка 
+      и за расстояние между иконкой фильтра (при её наличии) и остальным содержимым заголовка 
+      (<a href="https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?type=design&node-id=39-90743&t=3zpjH7G56cpfgH43-4">описание параметра в макетах</a>).
+      По умолчанию минимальное значение 12, для таблиц S и M, и 16 для таблиц L и XL. В коде предусмотрено, что
+      правый боковой отступ можно менять только в большую сторону в сравнении с дефолтным значением, а расстояние между иконкой фильтра и 
+      остальным содержимым заголовка можно как уменьшать, так и увеличивать с помощью spacingBetweenItems.`,
     },
   },
 };
+StyleExample.storyName = 'Table. Пример стилизации.';
+//</editor-fold>
 
-export const Orientation = Template.bind({});
-Orientation.args = {
-  rowList,
-  columnList: columnListOrientation,
-};
-Orientation.storyName = 'Table. Пример с настройкой выравнивания контента столбца.';
-Orientation.parameters = {
+//<editor-fold desc="Пример с выравниванием контента">
+const OrientationStory: ComponentStory<typeof Table> = (props) => (
+  <OrientationTemplate columnList={[]} rowList={[]} {...cleanUpProps(props)} />
+);
+export const OrientationExample = OrientationStory.bind({});
+OrientationExample.parameters = {
   docs: {
+    source: {
+      code: OrientationRaw,
+    },
     description: {
       story: `По умолчанию контент столбца выравнивается по левому краю. Если необходимо выравнивание по правому краю, 
       то следует задать параметр cellAlign: 'right' для столбца.`,
     },
   },
 };
+OrientationExample.storyName = 'Table. Пример с настройкой выравнивания контента столбца.';
+//</editor-fold>
 
-export const Sort = Template2.bind({});
-Sort.args = {
-  rowList: rowListSort,
-  columnList: columnListSort,
-};
-Sort.storyName = 'Table. Сортировка.';
-Sort.parameters = {
+//<editor-fold desc="Пример сортировки">
+const SortStory: ComponentStory<typeof Table> = (props) => (
+  <SortTemplate columnList={[]} rowList={[]} {...cleanUpProps(props)} />
+);
+export const SortExample = SortStory.bind({});
+SortExample.parameters = {
   docs: {
+    source: {
+      code: SortRaw,
+    },
     description: {
-      story: `Если сортировка выключена, то значок виден только при наведении на область заголовка и окрашивается в серый цвет.
-      Если сортировка включена (первое нажатие - сортировка по возрастанию), то ее значок-стрелка остается видимым при снятии фокуса 
-      с заголовка и окрашивается в синий цвет. При повторном нажатии происходит сортировка в обратном порядке (стрелка меняет направление, 
-      по убыванию). При третьем нажатии сортировка отменяется.\n\nПо умолчанию возможность сортировки столбца отключена.
+      story: `По умолчанию возможность сортировки столбца отключена.
       Чтобы сделать столбец сортируемым, необходимо задать ему параметр sortable: true. Сортировка - это контролируемый пользователем параметр. 
       Чтобы включить для столбца сортировку по возрастанию/убыванию, пользователь должен задать для столбца параметр sort: 'asc' | 'desc'.
       Если для столбца задан только параметр sortable: true, а параметр sort не задан, это говорит о том, что столбец сортируемый 
-      (при наведении на его заголовок будет видна стрелка сортировки), но в данный момент к нему никакая сортировка не применена.\n\nПри 
-      изменении сортировки столбца будет срабатывать колбек onSortChange, который будет возвращать два аргумента: 
-      name - уникальное имя столбца, к которому была применена сортировка, и sort - тип сортировки ('asc' - возрастающая, 
+      (при наведении на его заголовок будет видна стрелка сортировки), но в данный момент к нему никакая сортировка не применена.\n\nЕсли 
+      к сортируемому столбцу пока не применена сортировка, то значок-стрелка виден только при наведении на область заголовка и окрашивается в серый цвет.
+      Если сортировка включена (первое нажатие - сортировка по возрастанию), то ее значок-стрелка остается видимым при снятии фокуса 
+      с заголовка и окрашивается в синий цвет. При повторном нажатии происходит сортировка в обратном порядке (стрелка меняет направление, 
+      по убыванию). При третьем нажатии сортировка отменяется.\n\nПри изменении сортировки столбца будет срабатывать колбек onSortChange, 
+      который будет возвращать два аргумента: name - уникальное имя столбца, к которому была применена сортировка, и sort - тип сортировки ('asc' - возрастающая, 
       'desc' - убывающая и 'initial' - отмена сортировки, возврат к первоначальному состоянию). Сортировка массива строк 
-      происходит на стороне пользователя при срабатывании колбека onSortChange.`,
+      происходит на стороне пользователя при срабатывании колбека onSortChange.\n\nДизайн-системой предусматривается многоуровневая сортировка. 
+      Рекомендуется использовать не более ДВУХ уровней. Логика сортировки (взаимосвязи) выстраивается пользователем. При этом 
+      у иконок сортировки появляются цифры, обозначающие порядок (приоритет) сортировки.`,
     },
   },
 };
+SortExample.storyName = 'Table. Сортировка.';
+//</editor-fold>
 
-export const Filter = Template4.bind({});
-Filter.args = {
-  rowList: rowListSort,
-  columnList: columnList,
-};
-Filter.storyName = 'Table. Фильтрация.';
-Filter.parameters = {
+//<editor-fold desc="Пример фильтрации">
+const FilterStory: ComponentStory<typeof Table> = (props) => (
+  <FilterTemplate columnList={[]} rowList={[]} {...cleanUpProps(props)} />
+);
+export const FilterExample = FilterStory.bind({});
+FilterExample.parameters = {
   docs: {
+    source: {
+      code: FilterRaw,
+    },
     description: {
       story: `Опционально в заголовках можно включать фильтрацию столбцов. 
       При этом у заголовка будет появляться иконка фильтрации, по нажатию на которую будет 
@@ -739,50 +342,60 @@ Filter.parameters = {
     },
   },
 };
+FilterExample.storyName = 'Table. Фильтрация.';
+//</editor-fold>
 
-export const Multiline = Template5.bind({});
-Multiline.args = {
-  rowList: rowListLineClamp,
-  columnList: columnListLineClamp,
-};
-Multiline.storyName = 'Table. Многострочность.';
-Multiline.parameters = {
+//<editor-fold desc="Пример c многострочностью заголовков">
+const MultilineStory: ComponentStory<typeof Table> = (props) => (
+  <MultilineTemplate columnList={[]} rowList={[]} {...cleanUpProps(props)} />
+);
+export const MultilineExample = MultilineStory.bind({});
+MultilineExample.parameters = {
   docs: {
+    source: {
+      code: MultilineRaw,
+    },
     description: {
       story: `Заголовки таблицы по умолчанию выводятся в одну строку и при нехватке места сокращаются с помощью троеточия. Увеличить высоту 
       заголовка можно с помощью параметра headerLineClamp, который определяет максимальное количество строк, которое может занимать заголовок таблицы. 
       В примере ниже используется headerLineClamp равный 2. \n\nСтроки таблицы не ограничены по высоте. 
-      В ячейке строки можно отрисовать любой ReactNode, передав его в rowList. Также для отрисовка контента строки 
-      можно применить функцию renderCell. `,
+      В ячейке строки можно отрисовать любой ReactNode, передав его в rowList. Также с помощью функции renderCell можно
+      переопределить стандартный вид ячеек, относящихся к определенному столбцу таблицы (смотрите "Пример кастомизации компонента ячейки").`,
     },
   },
 };
+MultilineExample.storyName = 'Table. Многострочность.';
+//</editor-fold>
 
-export const Sticky = Template.bind({});
-Sticky.args = {
-  rowList,
-  columnList: columnListSticky,
-  style: { maxHeight: '300px', maxWidth: '700px' },
-};
-Sticky.storyName = 'Table. Фиксированные столбцы.';
-Sticky.parameters = {
+//<editor-fold desc="Пример c фиксированными столбцами">
+const StickyStory: ComponentStory<typeof Table> = (props) => (
+  <StickyTemplate columnList={[]} rowList={[]} {...cleanUpProps(props)} />
+);
+export const StickyExample = StickyStory.bind({});
+StickyExample.parameters = {
   docs: {
+    source: {
+      code: StickyRaw,
+    },
     description: {
       story: `При необходимости можно “закреплять” столбцы таблицы. Фиксированные столбцы располагаются по левому краю таблицы и идут друг за другом.
       Столбец с чекбоксами является фиксированным по умолчанию.\n\nЧтобы сделать столбец фиксированным, необходимо задать для него параметр sticky равный true.`,
     },
   },
 };
+StickyExample.storyName = 'Table. Фиксированные столбцы.';
+//</editor-fold>
 
-export const RowState = Template.bind({});
-RowState.args = {
-  rowList: rowListRowState,
-  columnList,
-  displayRowSelectionColumn: true,
-};
-RowState.storyName = 'Table. Стили строк (selected, disabled, error, success, hover).';
-RowState.parameters = {
+//<editor-fold desc="Пример c различными состояниями строк">
+const RowStateStory: ComponentStory<typeof Table> = (props) => (
+  <RowStateTemplate columnList={[]} rowList={[]} {...cleanUpProps(props)} />
+);
+export const RowStateExample = RowStateStory.bind({});
+RowStateExample.parameters = {
   docs: {
+    source: {
+      code: RowStateRaw,
+    },
     description: {
       story: `Для каждой строки помимо содержимого ячеек и id, можно задать следующие состояния строки: selected, 
       disabled, error, success, hover. Нужно учесть, что окраска строки по hover должна использоваться для 
@@ -790,6 +403,8 @@ RowState.parameters = {
     },
   },
 };
+RowStateExample.storyName = 'Table. Стили строк (selected, disabled, error, success, hover).';
+//</editor-fold>
 
 //<editor-fold desc="Пример c окрашиванием строк через одну">
 const ZebraStory: ComponentStory<typeof Table> = (props) => (
@@ -930,27 +545,65 @@ GroupExample.parameters = {
 GroupExample.storyName = 'Table. Пример c группировкой строк.';
 //</editor-fold>
 
-export const CustomTitle = Template.bind({});
-CustomTitle.args = {
-  rowList,
-  columnList: columnListWithCustomTitle,
+//<editor-fold desc="Пример с кастомными заголовками">
+const CustomTitleStory: ComponentStory<typeof Table> = (props) => (
+  <CustomTitleTemplate columnList={[]} rowList={[]} {...cleanUpProps(props)} />
+);
+export const CustomTitleExample = CustomTitleStory.bind({});
+CustomTitleExample.parameters = {
+  docs: {
+    source: {
+      code: CustomTitleRaw,
+    },
+    description: {
+      story: `Пользователь может кастомизировать часть заголовка столбца, а именно область с текстом заголовка (параметр title) и 
+      область с дополнительным текстом заголовка (параметр extraText). Параметры title и extraText позволяют задать в них любой ReactNode.`,
+    },
+  },
 };
-CustomTitle.storyName = 'Table. Пример кастомизации заголовков столбцов.';
+CustomTitleExample.storyName = 'Table. Пример кастомизации заголовков столбцов.';
+//</editor-fold>
 
-export const CustomRenderCell = Template.bind({});
-CustomRenderCell.args = {
-  rowList,
-  columnList: columnListWithCustomRender,
+//<editor-fold desc="Пример кастомизации ячейки">
+const RenderCellStory: ComponentStory<typeof Table> = (props) => (
+  <RenderCellTemplate columnList={[]} rowList={[]} {...cleanUpProps(props)} />
+);
+export const RenderCellExample = RenderCellStory.bind({});
+RenderCellExample.parameters = {
+  docs: {
+    source: {
+      code: RenderCellRaw,
+    },
+    description: {
+      story: `Для формирования контента ячейки пользователь может использовать рендер-колбек renderCell. 
+      Функция renderCell задается для каждого столбца в отдельности и представляет собой метод для переопределения стандартного вида ячейки.
+      На вход функция renderCell получает 3 параметра: data - контент ячейки, row - объект строки и rowIdx - индекс строки.`,
+    },
+  },
 };
-CustomRenderCell.storyName = 'Table. Пример кастомизации компонента ячейки.';
+RenderCellExample.storyName = 'Пример кастомизации компонента ячейки (renderCell).';
+//</editor-fold>
 
-export const CustomRenderGroupTitle = Template8.bind({});
-CustomRenderGroupTitle.args = {
-  rowList: rowListWithCustomRenderGroup,
-  columnList,
-  displayRowExpansionColumn: true,
+//<editor-fold desc="Пример кастомизации заголовка группы">
+const RenderGroupTitleStory: ComponentStory<typeof Table> = (props) => (
+  <RenderGroupTitleTemplate columnList={[]} rowList={[]} {...cleanUpProps(props)} />
+);
+export const RenderGroupTitleExample = RenderGroupTitleStory.bind({});
+RenderGroupTitleExample.parameters = {
+  docs: {
+    source: {
+      code: RenderGroupTitleRaw,
+    },
+    description: {
+      story: `Пользователь может кастомизировать заголовок группы строк с помощью рендер-колбека renderGroupTitle.
+      Функция renderGroupTitle задается для каждой строки в отдельности и представляет собой метод 
+      для переопределения стандартного вида заголовка группы строк. 
+      На вход функция renderGroupTitle получает 1 параметр: row - объект строки.`,
+    },
+  },
 };
-CustomRenderGroupTitle.storyName = 'Table. Пример кастомизации заголовка группы';
+RenderGroupTitleExample.storyName = 'Table. Пример кастомизации заголовка группы (renderGroupTitle).';
+//</editor-fold>
 
 //<editor-fold desc="Пример с drag and drop столбцов">
 const ColumnDragDropStory: ComponentStory<typeof Table> = (props) => (
