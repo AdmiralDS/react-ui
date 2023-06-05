@@ -426,6 +426,10 @@ export const HiddenHeader = styled.div`
   visibility: hidden;
   display: flex;
   overflow: hidden;
+
+  &[data-verticalscroll='true'] {
+    overflow-y: scroll;
+  }
 `;
 
 export const Mirror = styled(HeaderCell)<{ dimension: TableProps['dimension'] }>`
