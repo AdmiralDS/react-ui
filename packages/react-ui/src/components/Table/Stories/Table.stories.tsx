@@ -2,11 +2,8 @@ import * as React from 'react';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import styled from 'styled-components';
-
 import { Table } from '@admiral-ds/react-ui';
 
-// Массивы с данными столбцов и строк вынесены в отдельный файл в связи с большим объемом информации
-import { columnList, rowList } from './data';
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 import {
@@ -29,6 +26,7 @@ import {
   CustomTitleTemplate,
   RenderCellTemplate,
   RenderGroupTitleTemplate,
+  PlaygroundTemplate,
 } from './Templates';
 // Imports of text sources
 import VirtualScrollRaw from '!!raw-loader!./Templates/TableVirtualScroll';
@@ -50,6 +48,7 @@ import StyleRaw from '!!raw-loader!./Templates/TableStyle';
 import CustomTitleRaw from '!!raw-loader!./Templates/TableCustomTitle';
 import RenderCellRaw from '!!raw-loader!./Templates/TableRenderCell';
 import RenderGroupTitleRaw from '!!raw-loader!./Templates/TableRenderGroupTitle';
+import PlaygroundRaw from '!!raw-loader!./Templates/Playground';
 
 const Separator = styled.div`
   height: 20px;
@@ -154,22 +153,19 @@ export default {
   },
 } as ComponentMeta<typeof Table>;
 
-const Template: ComponentStory<typeof Table> = ({ columnList, ...args }) => {
-  const [cols, setCols] = React.useState([...columnList]);
-
-  const handleResize = ({ name, width }: { name: string; width: string }) => {
-    const newCols = cols.map((col) => (col.name === name ? { ...col, width } : col));
-    setCols(newCols);
-  };
-
-  return <Table {...args} columnList={cols} onColumnResize={handleResize} />;
+//<editor-fold desc="Playground">
+const PlaygroundStory: ComponentStory<typeof Table> = (props) => (
+  <PlaygroundTemplate columnList={[]} rowList={[]} {...cleanUpProps(props)} />
+);
+export const Playground = PlaygroundStory.bind({});
+Playground.parameters = {
+  docs: {
+    source: {
+      code: PlaygroundRaw,
+    },
+  },
 };
-
-export const Playground = Template.bind({});
-Playground.args = {
-  rowList,
-  columnList,
-};
+//</editor-fold>
 
 //<editor-fold desc="Пример с шириной столбцов">
 const ColumnWidthStory: ComponentStory<typeof Table> = (props) => (

@@ -1,8 +1,7 @@
-import { T } from '#src/components/T';
 import * as React from 'react';
+import { Table, T } from '@admiral-ds/react-ui';
+import type { TableProps, Column, TableRow } from '@admiral-ds/react-ui';
 import styled from 'styled-components';
-
-import type { Column, TableRow } from '..';
 
 const AmountCell = styled.div`
   text-overflow: ellipsis;
@@ -23,10 +22,9 @@ type RowData = TableRow & {
   transfer_amount: React.ReactNode;
   currency: string;
   rate: number;
-  customer?: string;
 };
 
-export const rowList: RowData[] = [
+const rowList: RowData[] = [
   {
     id: '0001',
     transfer_type: 'МНО',
@@ -173,7 +171,7 @@ export const rowList: RowData[] = [
   },
 ];
 
-export const columnList: Column[] = [
+const columnList: Column[] = [
   {
     name: 'transfer_type',
     title: 'Тип сделки',
@@ -197,3 +195,14 @@ export const columnList: Column[] = [
     title: 'Ставка',
   },
 ];
+
+export const PlaygroundTemplate = (props: TableProps) => {
+  const [cols, setCols] = React.useState(columnList);
+
+  const handleResize = ({ name, width }: { name: string; width: string }) => {
+    const newCols = cols.map((col) => (col.name === name ? { ...col, width } : col));
+    setCols(newCols);
+  };
+
+  return <Table {...props} rowList={rowList} columnList={cols} onColumnResize={handleResize} />;
+};
