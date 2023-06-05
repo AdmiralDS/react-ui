@@ -48,15 +48,30 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
   const visible = items.slice(1, items.length - 1);
   const wrapperRef = React.useRef<HTMLOListElement>(null);
   const overflowRef = React.useRef<HTMLOListElement>(null);
+  const hasMounted = React.useRef(false);
   const [visibilityMap, setVisibilityMap] = React.useState<{ [index: number | string]: boolean }>({ 0: true });
 
+  // React.useLayoutEffect(() => {
+  //   if (wrapperRef.current) {
+  //     const resizeObserver = new ResizeObserver((entries) => {
+  //       entries.forEach((entry) => {
+  //       });
+  //     });
+  //     resizeObserver.observe(wrapperRef.current);
+  //     return () => {
+  //       resizeObserver.disconnect();
+  //     };
+  //   }
+  // }, []);
+
   React.useLayoutEffect(() => {
-    if (mobile) {
-      wrapperRef.current?.lastElementChild?.scrollIntoView({
-        behavior: 'smooth',
-        inline: 'center',
-        block: 'nearest',
-      });
+    if (!hasMounted.current) {
+      hasMounted.current = true;
+      if (mobile && wrapperRef.current) {
+        wrapperRef.current?.scrollBy({ left: wrapperRef.current.scrollWidth, behavior: 'auto' });
+      }
+    } else if (mobile && wrapperRef.current) {
+      wrapperRef.current.scrollBy({ left: wrapperRef.current.scrollWidth, behavior: 'smooth' });
     }
   }, [items, mobile]);
 
