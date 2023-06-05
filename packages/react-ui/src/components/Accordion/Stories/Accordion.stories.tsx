@@ -11,12 +11,18 @@ import {
   T,
   Option,
 } from '@admiral-ds/react-ui';
-import { AccordionDividerTemplate, AccordionIconTemplate, AccordionModesTemplate } from './Templates';
+import {
+  AccordionDimensionTemplate,
+  AccordionDividerTemplate,
+  AccordionIconTemplate,
+  AccordionModesTemplate,
+} from './Templates';
 
 // Imports of text sources
 import AccordionDividerRaw from '!!raw-loader!./Templates/AccordionDivider';
 import AccordionIconRaw from '!!raw-loader!./Templates/AccordionIcon';
 import AccordionModesRaw from '!!raw-loader!./Templates/AccordionModes';
+import AccordionDimensionRaw from '!!raw-loader!./Templates/AccordionDimension';
 
 const Separator = styled.div`
   height: 20px;
@@ -170,59 +176,27 @@ const Template1: ComponentStory<typeof Accordion> = (args) => {
   );
 };
 
-const Template2: ComponentStory<typeof Accordion> = () => {
-  return (
-    <>
-      <T font="Body/Body 1 Long" as="div">
-        Размер l
-      </T>
-      <Separator />
-      <Accordion>
-        <AccordionItem title="Первый пункт">Контент первого пункта</AccordionItem>
-        <AccordionItem title="Второй пункт">
-          Аккордеон — это вертикальный список заголовков, которые, при нажатии, показывают контент находящийся под ними.
-        </AccordionItem>
-        <AccordionItem title="Третий пункт">
-          Будущее игр никогда не было таким вдохновляющим. Творчество в играх процветает. Новые сервисы позволяют
-          находить больше игр, а также приближают игроков к любимым играм, стримерам и создателям. Облако создает
-          огромную возможность для потоковой передачи игр консольного уровня, что позволит людям играть с теми игроками,
-          с кем хочется и где захочется. И для многих из нас нет ничего более вдохновляющего, чем рассвет нового
-          поколения консолей.
-        </AccordionItem>
-      </Accordion>
-      <Separator />
-      <T font="Body/Body 1 Long" as="div">
-        Размер m
-      </T>
-      <Separator />
-      <Accordion dimension="m">
-        <AccordionItem title="Первый пункт">Контент первого пункта</AccordionItem>
-        <AccordionItem title="Второй пункт">
-          Аккордеон — это вертикальный список заголовков, которые, при нажатии, показывают контент находящийся под ними.
-        </AccordionItem>
-        <AccordionItem title="Третий пункт" contentMaxHeight="150px">
-          Будущее игр никогда не было таким вдохновляющим. Творчество в играх процветает. Новые сервисы позволяют
-          находить больше игр, а также приближают игроков к любимым играм, стримерам и создателям. Облако создает
-          огромную возможность для потоковой передачи игр консольного уровня, что позволит людям играть с теми игроками,
-          с кем хочется и где захочется. И для многих из нас нет ничего более вдохновляющего, чем рассвет нового
-          поколения консолей. Будущее игр никогда не было таким вдохновляющим. Творчество в играх процветает. Новые
-          сервисы позволяют находить больше игр, а также приближают игроков к любимым играм, стримерам и создателям.
-          Облако создает огромную возможность для потоковой передачи игр консольного уровня, что позволит людям играть с
-          теми игроками, с кем хочется и где захочется. И для многих из нас нет ничего более вдохновляющего, чем рассвет
-          нового поколения консолей.
-        </AccordionItem>
-      </Accordion>
-    </>
-  );
-};
-
 export const AccordionPlayground = Template1.bind({});
 AccordionPlayground.args = {};
 AccordionPlayground.storyName = 'Accordion. Playground.';
 
-export const AccordionDimension = Template2.bind({});
+//<editor-fold desc="Размеры">
+const AccordionDimensionStory: ComponentStory<typeof Accordion> = () => <AccordionDimensionTemplate />;
+
+export const AccordionDimension = AccordionDimensionStory.bind({});
+AccordionDimension.parameters = {
+  docs: {
+    source: {
+      code: AccordionDimensionRaw,
+    },
+    description: {
+      story: `Существует в двух размерах - L и M.`,
+    },
+  },
+};
 AccordionDimension.args = {};
 AccordionDimension.storyName = 'Accordion. Размеры.';
+//</editor-fold>
 
 //<editor-fold desc="Режимы использования">
 const AccordionModesStory: ComponentStory<typeof Accordion> = (args) => <AccordionModesTemplate {...args} />;
