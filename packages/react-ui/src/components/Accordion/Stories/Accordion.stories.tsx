@@ -11,6 +11,10 @@ import {
   T,
   Option,
 } from '@admiral-ds/react-ui';
+import { AccordionDividerTemplate } from './Templates';
+
+// Imports of text sources
+import AccordionDividerRaw from '!!raw-loader!./Templates/AccordionDivider';
 
 const Separator = styled.div`
   height: 20px;
@@ -258,26 +262,6 @@ const Template4: ComponentStory<typeof Accordion> = () => {
   );
 };
 
-const Template5: ComponentStory<typeof Accordion> = () => {
-  return (
-    <>
-      <Accordion hideTopDivider hideBottomDivider>
-        <AccordionItem title="Первый пункт">Контент первого пункта</AccordionItem>
-        <AccordionItem title="Второй пункт">
-          Аккордеон — это вертикальный список заголовков, которые, при нажатии, показывают контент находящийся под ними.
-        </AccordionItem>
-        <AccordionItem title="Третий пункт">
-          Будущее игр никогда не было таким вдохновляющим. Творчество в играх процветает. Новые сервисы позволяют
-          находить больше игр, а также приближают игроков к любимым играм, стримерам и создателям. Облако создает
-          огромную возможность для потоковой передачи игр консольного уровня, что позволит людям играть с теми игроками,
-          с кем хочется и где захочется. И для многих из нас нет ничего более вдохновляющего, чем рассвет нового
-          поколения консолей.
-        </AccordionItem>
-      </Accordion>
-    </>
-  );
-};
-
 export const AccordionPlayground = Template1.bind({});
 AccordionPlayground.args = {};
 AccordionPlayground.storyName = 'Accordion. Playground.';
@@ -314,11 +298,15 @@ AccordionIcon.parameters = {
   },
 };
 
-export const AccordionDevider = Template5.bind({});
-AccordionDevider.args = {};
-AccordionDevider.storyName = 'Accordion. Скрытие разделителей.';
-AccordionDevider.parameters = {
+//<editor-fold desc="Скрытие разделителей">
+const AccordionDividerStory: ComponentStory<typeof Accordion> = () => <AccordionDividerTemplate />;
+
+export const AccordionDivider = AccordionDividerStory.bind({});
+AccordionDivider.parameters = {
   docs: {
+    source: {
+      code: AccordionDividerRaw,
+    },
     description: {
       story: `В зависимости от контекста можно включать-выключать разделители блоков компонента 
       (верхнюю и нижнюю полоски). Например при использовании на подложке. Высота компонента при 
@@ -329,3 +317,6 @@ AccordionDevider.parameters = {
     },
   },
 };
+AccordionDivider.args = {};
+AccordionDivider.storyName = 'Accordion. Скрытие разделителей.';
+//</editor-fold>
