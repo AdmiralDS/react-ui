@@ -3,10 +3,11 @@ import * as React from 'react';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import styled from 'styled-components';
 import { Avatar } from '@admiral-ds/react-ui';
-import { SingleAvatarTemplate } from './Templates';
+import { AvatarPlaygroundTemplate, SingleAvatarTemplate } from './Templates';
 
 // Imports of text sources
 import SingleAvatarRaw from '!!raw-loader!./Templates/SingleAvatar';
+import AvatarPlaygroundRaw from '!!raw-loader!./Templates/AvatarPlayground';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -78,17 +79,20 @@ export default {
   },
 } as ComponentMeta<typeof Avatar>;
 
-const Template1: ComponentStory<typeof Avatar> = ({ userName, ...args }) => {
-  return (
-    <>
-      <Avatar userName={userName || 'Just Example'} {...args} />
-    </>
-  );
-};
+//<editor-fold desc="Avatar Playground">
+const AvatarPlaygroundStory: ComponentStory<typeof Avatar> = (args) => <AvatarPlaygroundTemplate {...args} />;
 
-export const Playground = Template1.bind({});
-Playground.args = {};
-Playground.storyName = 'Playground';
+export const AvatarPlayground = AvatarPlaygroundStory.bind({});
+AvatarPlayground.parameters = {
+  docs: {
+    source: {
+      code: AvatarPlaygroundRaw,
+    },
+  },
+};
+AvatarPlayground.args = {};
+AvatarPlayground.storyName = 'Playground';
+//</editor-fold>
 
 //<editor-fold desc="Single Avatar">
 const SingleAvatarStory: ComponentStory<typeof Avatar> = () => <SingleAvatarTemplate />;
