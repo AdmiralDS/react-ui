@@ -6,13 +6,7 @@ import styled from 'styled-components';
 import { Table } from '@admiral-ds/react-ui';
 
 // Массивы с данными столбцов и строк вынесены в отдельный файл в связи с большим объемом информации
-import {
-  columnList,
-  columnListWithCustomTitle,
-  rowList,
-  columnListWithCustomRender,
-  rowListWithCustomRenderGroup,
-} from './data';
+import { columnList, rowList, columnListWithCustomRender, rowListWithCustomRenderGroup } from './data';
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 import {
@@ -32,6 +26,7 @@ import {
   CheckboxTemplate,
   ColumnWidthTemplate,
   StyleTemplate,
+  CustomTitleTemplate,
 } from './Templates';
 // Imports of text sources
 import VirtualScrollRaw from '!!raw-loader!./Templates/TableVirtualScroll';
@@ -50,6 +45,7 @@ import OrientationRaw from '!!raw-loader!./Templates/TableOrientation';
 import CheckboxRaw from '!!raw-loader!./Templates/TableCheckbox';
 import ColumnWidthRaw from '!!raw-loader!./Templates/TableColumnWidth';
 import StyleRaw from '!!raw-loader!./Templates/TableStyle';
+import CustomTitleRaw from '!!raw-loader!./Templates/TableCustomTitle';
 
 const Separator = styled.div`
   height: 20px;
@@ -582,12 +578,24 @@ GroupExample.parameters = {
 GroupExample.storyName = 'Table. Пример c группировкой строк.';
 //</editor-fold>
 
-export const CustomTitle = Template.bind({});
-CustomTitle.args = {
-  rowList,
-  columnList: columnListWithCustomTitle,
+//<editor-fold desc="Пример с кастомными заголовками">
+const CustomTitleStory: ComponentStory<typeof Table> = (props) => (
+  <CustomTitleTemplate columnList={[]} rowList={[]} {...cleanUpProps(props)} />
+);
+export const CustomTitleExample = CustomTitleStory.bind({});
+CustomTitleExample.parameters = {
+  docs: {
+    source: {
+      code: CustomTitleRaw,
+    },
+    description: {
+      story: `Пользователь может кастомизировать часть заголовка столбца, а именно область с текстом заголовка (параметр title) и 
+      область с дополнительным текстом заголовка (параметр extraText). Параметры title и extraText позволяют задать в них любой ReactNode.`,
+    },
+  },
 };
-CustomTitle.storyName = 'Table. Пример кастомизации заголовков столбцов.';
+CustomTitleExample.storyName = 'Table. Пример кастомизации заголовков столбцов.';
+//</editor-fold>
 
 export const CustomRenderCell = Template.bind({});
 CustomRenderCell.args = {

@@ -14,3 +14,4 @@ export * from './TableOrientation';
 export * from './TableCheckbox';
 export * from './TableColumnWidth';
 export * from './TableStyle';
+export * from './TableCustomTitle';
