@@ -16,3 +16,4 @@ export * from './TableColumnWidth';
 export * from './TableStyle';
 export * from './TableCustomTitle';
 export * from './TableRenderCell';
+export * from './TableRenderGroupTitle';

@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import { Table } from '@admiral-ds/react-ui';
 
 // Массивы с данными столбцов и строк вынесены в отдельный файл в связи с большим объемом информации
-import { columnList, rowList, rowListWithCustomRenderGroup } from './data';
+import { columnList, rowList } from './data';
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 import {
@@ -28,6 +28,7 @@ import {
   StyleTemplate,
   CustomTitleTemplate,
   RenderCellTemplate,
+  RenderGroupTitleTemplate,
 } from './Templates';
 // Imports of text sources
 import VirtualScrollRaw from '!!raw-loader!./Templates/TableVirtualScroll';
@@ -48,6 +49,7 @@ import ColumnWidthRaw from '!!raw-loader!./Templates/TableColumnWidth';
 import StyleRaw from '!!raw-loader!./Templates/TableStyle';
 import CustomTitleRaw from '!!raw-loader!./Templates/TableCustomTitle';
 import RenderCellRaw from '!!raw-loader!./Templates/TableRenderCell';
+import RenderGroupTitleRaw from '!!raw-loader!./Templates/TableRenderGroupTitle';
 
 const Separator = styled.div`
   height: 20px;
@@ -161,39 +163,6 @@ const Template: ComponentStory<typeof Table> = ({ columnList, ...args }) => {
   };
 
   return <Table {...args} columnList={cols} onColumnResize={handleResize} />;
-};
-
-const Template8: ComponentStory<typeof Table> = ({ rowList, columnList, ...args }) => {
-  const [rows, setRows] = React.useState([...rowList]);
-  const [cols, setCols] = React.useState([...columnList]);
-
-  const handleExpansionChange = (ids: Record<string | number, boolean>): void => {
-    const updRows = rows.map((row) => ({ ...row, expanded: ids[row.id] }));
-    setRows(updRows);
-  };
-
-  const handleSelectionChange = (ids: Record<string | number, boolean>): void => {
-    const updRows = rows.map((row) => ({ ...row, selected: ids[row.id] }));
-    setRows(updRows);
-  };
-
-  const handleResize = ({ name, width }: { name: string; width: string }) => {
-    const newCols = cols.map((col) => (col.name === name ? { ...col, width } : col));
-    setCols(newCols);
-  };
-
-  return (
-    <>
-      <Table
-        {...args}
-        rowList={rows}
-        columnList={cols}
-        onRowExpansionChange={handleExpansionChange}
-        onRowSelectionChange={handleSelectionChange}
-        onColumnResize={handleResize}
-      />
-    </>
-  );
 };
 
 export const Playground = Template.bind({});
@@ -619,13 +588,26 @@ RenderCellExample.parameters = {
 RenderCellExample.storyName = 'Пример кастомизации компонента ячейки (renderCell).';
 //</editor-fold>
 
-export const CustomRenderGroupTitle = Template8.bind({});
-CustomRenderGroupTitle.args = {
-  rowList: rowListWithCustomRenderGroup,
-  columnList,
-  displayRowExpansionColumn: true,
+//<editor-fold desc="Пример кастомизации заголовка группы">
+const RenderGroupTitleStory: ComponentStory<typeof Table> = (props) => (
+  <RenderGroupTitleTemplate columnList={[]} rowList={[]} {...cleanUpProps(props)} />
+);
+export const RenderGroupTitleExample = RenderGroupTitleStory.bind({});
+RenderGroupTitleExample.parameters = {
+  docs: {
+    source: {
+      code: RenderGroupTitleRaw,
+    },
+    description: {
+      story: `Пользователь может кастомизировать заголовок группы строк с помощью рендер-колбека renderGroupTitle.
+      Функция renderGroupTitle задается для каждой строки в отдельности и представляет собой метод 
+      для переопределения стандартного вида заголовка группы строк. 
+      На вход функция renderGroupTitle получает 1 параметр: row - объект строки.`,
+    },
+  },
 };
-CustomRenderGroupTitle.storyName = 'Table. Пример кастомизации заголовка группы (renderGroupTitle)';
+RenderGroupTitleExample.storyName = 'Table. Пример кастомизации заголовка группы (renderGroupTitle).';
+//</editor-fold>
 
 //<editor-fold desc="Пример с drag and drop столбцов">
 const ColumnDragDropStory: ComponentStory<typeof Table> = (props) => (
