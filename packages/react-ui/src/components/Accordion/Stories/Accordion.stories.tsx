@@ -11,10 +11,11 @@ import {
   T,
   Option,
 } from '@admiral-ds/react-ui';
-import { AccordionDividerTemplate } from './Templates';
+import { AccordionDividerTemplate, AccordionIconTemplate } from './Templates';
 
 // Imports of text sources
 import AccordionDividerRaw from '!!raw-loader!./Templates/AccordionDivider';
+import AccordionIconRaw from '!!raw-loader!./Templates/AccordionIcon';
 
 const Separator = styled.div`
   height: 20px;
@@ -242,26 +243,6 @@ const Template3: ComponentStory<typeof Accordion> = (args) => {
   );
 };
 
-const Template4: ComponentStory<typeof Accordion> = () => {
-  return (
-    <>
-      <Accordion iconPosition="left">
-        <AccordionItem title="Первый пункт">Контент первого пункта</AccordionItem>
-        <AccordionItem title="Второй пункт">
-          Аккордеон — это вертикальный список заголовков, которые, при нажатии, показывают контент находящийся под ними.
-        </AccordionItem>
-        <AccordionItem title="Третий пункт">
-          Будущее игр никогда не было таким вдохновляющим. Творчество в играх процветает. Новые сервисы позволяют
-          находить больше игр, а также приближают игроков к любимым играм, стримерам и создателям. Облако создает
-          огромную возможность для потоковой передачи игр консольного уровня, что позволит людям играть с теми игроками,
-          с кем хочется и где захочется. И для многих из нас нет ничего более вдохновляющего, чем рассвет нового
-          поколения консолей.
-        </AccordionItem>
-      </Accordion>
-    </>
-  );
-};
-
 export const AccordionPlayground = Template1.bind({});
 AccordionPlayground.args = {};
 AccordionPlayground.storyName = 'Accordion. Playground.';
@@ -285,11 +266,17 @@ AccordionModes.parameters = {
   },
 };
 
-export const AccordionIcon = Template4.bind({});
+//<editor-fold desc="Расположение шеврона слева">
+const AccordionIconStory: ComponentStory<typeof Accordion> = () => <AccordionIconTemplate />;
+
+export const AccordionIcon = AccordionIconStory.bind({});
 AccordionIcon.args = {};
 AccordionIcon.storyName = 'Accordion. Расположение шеврона слева.';
 AccordionIcon.parameters = {
   docs: {
+    source: {
+      code: AccordionIconRaw,
+    },
     description: {
       story: `Альтернативным вариантом является расположение шеврона слева от заголовка. Текст заголовка и иконка 
       шеврона просто меняются местами с сохранением всех расстояний и размеров. При этом компоновка остальных 
@@ -297,6 +284,7 @@ AccordionIcon.parameters = {
     },
   },
 };
+//</editor-fold>
 
 //<editor-fold desc="Скрытие разделителей">
 const AccordionDividerStory: ComponentStory<typeof Accordion> = () => <AccordionDividerTemplate />;
