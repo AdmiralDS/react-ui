@@ -7,13 +7,13 @@ type RowData = TableRow & {
   transfer_date: string;
 };
 
-const virtualRowList: RowData[] = [...Array(1000).keys()].map((_item, index) => ({
+const rowList: RowData[] = [...Array(1000).keys()].map((_item, index) => ({
   id: String(index),
   transfer_number: index,
   transfer_date: new Date('2020-08-06').toLocaleDateString(),
 }));
 
-const virtualColumnList: Column[] = [
+const columnList: Column[] = [
   {
     name: 'transfer_number',
     title: 'Номер сделки',
@@ -27,7 +27,7 @@ const virtualColumnList: Column[] = [
 ];
 
 export const VirtualScrollTemplate = (props: TableProps) => {
-  const [cols, setCols] = React.useState(virtualColumnList);
+  const [cols, setCols] = React.useState(columnList);
 
   const handleResize = ({ name, width }: { name: string; width: string }) => {
     const newCols = cols.map((col) => (col.name === name ? { ...col, width } : col));
@@ -38,7 +38,7 @@ export const VirtualScrollTemplate = (props: TableProps) => {
     <Table
       {...props}
       columnList={cols}
-      rowList={virtualRowList}
+      rowList={rowList}
       virtualScroll={{ fixedRowHeight: 40 }}
       style={{ height: '500px' }}
       onColumnResize={handleResize}

@@ -85,3 +85,5 @@ export * from './components/Drawer';
 
 export * from './components/FontsVTBGroup';
 export * from './components/DropdownProvider';
+
+export * from './components/Flex';

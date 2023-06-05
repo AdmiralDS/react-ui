@@ -128,10 +128,10 @@ export const FilterTemplate = (props: TableProps) => {
           setSelected((e.target as HTMLInputElement).value);
         }}
       >
-        <RadioButton value="1" name="test" checked={'1' === selected}>
+        <RadioButton value="1" name="test" defaultChecked={'1' === selected}>
           Сумма превышает миллиард
         </RadioButton>
-        <RadioButton value="2" name="test" checked={'2' === selected}>
+        <RadioButton value="2" name="test" defaultChecked={'2' === selected}>
           Сумма меньше миллиарда
         </RadioButton>
       </FieldSet>

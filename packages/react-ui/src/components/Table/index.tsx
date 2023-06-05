@@ -216,10 +216,9 @@ export interface TableProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Окрашивание строк таблицы через одну в цвет вторичного фона (зебра) */
   greyZebraRows?: boolean;
 
-  /** Ширина колонки (заголовка) регулируется через параметр Spacing Between Items в настройках
-   * Auto Layout, при выбранном заголовке. Минимальное значение 12px, для таблиц S и M, и 16px для таблиц L и XL.
-   * При выборе расстояния следует учитывать размеры пространства под иконки сортировки и меню, если они есть
-   * в функционале заголовка.
+  /** Параметр, который влияет на внешний вид заголовка и отвечает одновременно за размер правого бокового отступа внутри заголовка и
+   * за расстояние между иконкой фильтра (при её наличии) и остальным содержимым заголовка.
+   * Минимальное значение 12px, для таблиц S и M, и 16px для таблиц L и XL.
    */
   spacingBetweenItems?: string;
   /** Колбек на изменение сортировки. Возвращает уникальное имя столбца, к которому применили сортировку,
@@ -867,7 +866,7 @@ export const Table: React.FC<TableProps> = ({
 
   const renderHiddenHeader = () => {
     return (
-      <HiddenHeader ref={hiddenHeaderRef}>
+      <HiddenHeader ref={hiddenHeaderRef} data-verticalscroll={verticalScroll}>
         {(displayRowSelectionColumn || displayRowExpansionColumn) && (
           <StickyWrapper>
             {displayRowExpansionColumn && <ExpandCell dimension={dimension} />}
