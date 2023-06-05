@@ -11,11 +11,12 @@ import {
   T,
   Option,
 } from '@admiral-ds/react-ui';
-import { AccordionDividerTemplate, AccordionIconTemplate } from './Templates';
+import { AccordionDividerTemplate, AccordionIconTemplate, AccordionModesTemplate } from './Templates';
 
 // Imports of text sources
 import AccordionDividerRaw from '!!raw-loader!./Templates/AccordionDivider';
 import AccordionIconRaw from '!!raw-loader!./Templates/AccordionIcon';
+import AccordionModesRaw from '!!raw-loader!./Templates/AccordionModes';
 
 const Separator = styled.div`
   height: 20px;
@@ -215,34 +216,6 @@ const Template2: ComponentStory<typeof Accordion> = () => {
   );
 };
 
-const Template3: ComponentStory<typeof Accordion> = (args) => {
-  const [expanded, setExpanded] = React.useState(false);
-  return (
-    <>
-      <Accordion {...args}>
-        <AccordionItem
-          defaultExpanded
-          title="Неконтролируемый режим использования (uncontrolled)"
-          onClick={(title, expanded, event) => console.log({ title, expanded, event })}
-        >
-          Контент первого пункта
-        </AccordionItem>
-        <AccordionItem
-          expanded={expanded}
-          title="Контролируемый режим использования (controlled)"
-          onClick={(title, expanded, event) => setExpanded(expanded)}
-        >
-          Будущее игр никогда не было таким вдохновляющим. Творчество в играх процветает. Новые сервисы позволяют
-          находить больше игр, а также приближают игроков к любимым играм, стримерам и создателям. Облако создает
-          огромную возможность для потоковой передачи игр консольного уровня, что позволит людям играть с теми игроками,
-          с кем хочется и где захочется. И для многих из нас нет ничего более вдохновляющего, чем рассвет нового
-          поколения консолей.
-        </AccordionItem>
-      </Accordion>
-    </>
-  );
-};
-
 export const AccordionPlayground = Template1.bind({});
 AccordionPlayground.args = {};
 AccordionPlayground.storyName = 'Accordion. Playground.';
@@ -251,11 +224,15 @@ export const AccordionDimension = Template2.bind({});
 AccordionDimension.args = {};
 AccordionDimension.storyName = 'Accordion. Размеры.';
 
-export const AccordionModes = Template3.bind({});
-AccordionModes.args = {};
-AccordionModes.storyName = 'Accordion. Режимы использования.';
+//<editor-fold desc="Режимы использования">
+const AccordionModesStory: ComponentStory<typeof Accordion> = (args) => <AccordionModesTemplate {...args} />;
+
+export const AccordionModes = AccordionModesStory.bind({});
 AccordionModes.parameters = {
   docs: {
+    source: {
+      code: AccordionModesRaw,
+    },
     description: {
       story: `Компонент AccordionItem может работать в контролируемом и неконтролируемом режимах.
       Параметр expanded задает состояние компонента в контролируемом режиме:\n\n - если true,
@@ -265,6 +242,9 @@ AccordionModes.parameters = {
     },
   },
 };
+AccordionModes.args = {};
+AccordionModes.storyName = 'Accordion. Режимы использования.';
+//</editor-fold>
 
 //<editor-fold desc="Расположение шеврона слева">
 const AccordionIconStory: ComponentStory<typeof Accordion> = () => <AccordionIconTemplate />;
