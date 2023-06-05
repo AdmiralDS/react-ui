@@ -138,16 +138,16 @@ export const VirtualBody = ({
   const visibleChildren = React.useMemo(() => {
     const visibleItems = [...model].slice(partition.startIndex, partition.endIndex);
 
-    return visibleItems.map((item) =>
-      item.render({
-        hovered: activeId === item.id,
-        selected: selectedId === item.id,
+    return visibleItems.map(({ id, render, ...itemProps }) =>
+      render({
+        hovered: activeId === id,
+        selected: selectedId === id,
         onHover: () => {
-          onActivateItem(item.disabled ? undefined : item.id);
+          onActivateItem(itemProps.disabled ? undefined : id);
         },
-        onClickItem: () => onSelectItem(item.id),
-        disabled: item.disabled,
+        onClickItem: () => onSelectItem(id),
         containerRef: scrollContainerRef,
+        ...itemProps,
       }),
     );
   }, [model, activeId, onActivateItem, selectedId, onSelectItem, scrollContainerRef, partition]);
