@@ -11,12 +11,13 @@ import { ReactComponent as DiamondSolid } from '@admiral-ds/icons/build/category
 import { ReactComponent as TrophyIcon } from '@admiral-ds/icons/build/category/TrophySolid.svg';
 import { ReactComponent as BurnIcon } from '@admiral-ds/icons/build/category/BurnSolid.svg';
 
-import { ChipsIconTemplate, ChipsTagsCloseTemplate, ChipsTagsTemplate } from './Templates';
+import { ChipsIconTemplate, ChipsTagsCloseTemplate, ChipsTagsTemplate, ChipsSelectTemplate } from './Templates';
 
 // Imports of text sources
 import ChipsTagsRaw from '!!raw-loader!./Templates/ChipsTags';
 import ChipsTagsCloseRaw from '!!raw-loader!./Templates/ChipsTagsClose';
 import ChipsIconRaw from '!!raw-loader!./Templates/ChipsIcon';
+import ChipsSelectRaw from '!!raw-loader!./Templates/ChipsSelect';
 
 const Separator = styled.div`
   height: 20px;
@@ -27,12 +28,6 @@ const Desc = styled.div`
   font-size: 16px;
   line-height: 24px;
 `;
-
-const listData = [
-  { id: '1', label: 'Москва', disabled: false, selected: false },
-  { id: '2', label: 'Тверь', disabled: false, selected: false },
-  { id: '3', label: 'Самара', disabled: false, selected: false },
-];
 
 const listDataIcon = [
   {
@@ -138,41 +133,6 @@ export default {
   },
 } as ComponentMeta<typeof Chips>;
 
-const ChipsSelectDemo: ComponentStory<typeof Chips> = (props) => {
-  const [selectedM, setSelectedM] = useState('');
-  const [selectedS, setSelectedS] = useState('');
-  return (
-    <>
-      <WrapperChip dimension={props.dimension}>
-        {listData.map((item) => (
-          <Chips
-            {...props}
-            key={item.id}
-            selected={selectedM === item.id}
-            onClick={() => (props.disabled ? null : setSelectedM(item.id))}
-          >
-            {item.label}
-          </Chips>
-        ))}
-      </WrapperChip>
-      <Separator />
-      <WrapperChip dimension="s">
-        {listData.map((item) => (
-          <Chips
-            {...props}
-            dimension="s"
-            key={item.id}
-            selected={selectedS === item.id}
-            onClick={() => (props.disabled ? null : setSelectedS(item.id))}
-          >
-            {item.label}
-          </Chips>
-        ))}
-      </WrapperChip>
-    </>
-  );
-};
-
 const ChipsMultiSelectIconDemo: ComponentStory<typeof Chips> = (props) => {
   const [listM, setListM] = useState(listDataIcon);
   const handleKeyM = (id: string) => {
@@ -272,7 +232,6 @@ const ChipsBadgesDemo: ComponentStory<typeof Chips> = (props) => {
     </>
   );
 };
-export const ChipsSelect = ChipsSelectDemo.bind({});
 export const ChipsMultiSelectIcon = ChipsMultiSelectIconDemo.bind({});
 export const ChipsTooltip = ChipsTagsCloseTooltipDemo.bind({});
 export const ChipsBadges = ChipsBadgesDemo.bind({});
@@ -326,9 +285,16 @@ ChipsIcon.parameters = {
 };
 //</editor-fold>
 
+//<editor-fold desc="Chips с текстом и выбором">
+const ChipsSelectStory: ComponentStory<typeof Chips> = (props) => <ChipsSelectTemplate {...props} />;
+
+export const ChipsSelect = ChipsSelectStory.bind({});
 ChipsSelect.storyName = 'Chips с текстом и выбором';
 ChipsSelect.parameters = {
   docs: {
+    source: {
+      code: ChipsSelectRaw,
+    },
     description: {
       story: `Набор из двух и более чипсов, которые могут быть в активном (выбранном) состоянии 
       или пассивном (выключенном) состоянии. Chips в режиме радио кнопок, когда можно выбрать 
@@ -336,6 +302,7 @@ ChipsSelect.parameters = {
     },
   },
 };
+//</editor-fold>
 
 ChipsMultiSelectIcon.storyName = 'Chips для множественного выбора';
 ChipsMultiSelectIcon.parameters = {
