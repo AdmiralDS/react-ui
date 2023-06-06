@@ -51,27 +51,37 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
   const hasMounted = React.useRef(false);
   const [visibilityMap, setVisibilityMap] = React.useState<{ [index: number | string]: boolean }>({ 0: true });
 
-  // React.useLayoutEffect(() => {
-  //   if (wrapperRef.current) {
-  //     const resizeObserver = new ResizeObserver((entries) => {
-  //       entries.forEach((entry) => {
-  //       });
-  //     });
-  //     resizeObserver.observe(wrapperRef.current);
-  //     return () => {
-  //       resizeObserver.disconnect();
-  //     };
-  //   }
-  // }, []);
-
-  React.useLayoutEffect(() => {
+  React.useEffect(() => {
     if (!hasMounted.current) {
       hasMounted.current = true;
-      if (mobile && wrapperRef.current) {
-        wrapperRef.current?.scrollBy({ left: wrapperRef.current.scrollWidth, behavior: 'auto' });
+    }
+  }, []);
+
+  // Если компонент в режиме mobile, нужно отслеживать изменение размера крошек,
+  // вызванное подгрузкой шрифтов или изменением dimension, для того чтобы скорректировать позицию скролла
+  React.useLayoutEffect(() => {
+    const firstCrumb = wrapperRef.current?.firstElementChild;
+    if (firstCrumb && mobile) {
+      const resizeObserver = new ResizeObserver(() => {
+        wrapperRef.current?.scrollBy({ left: wrapperRef.current.scrollWidth, behavior: 'smooth' });
+      });
+      resizeObserver.observe(firstCrumb);
+      return () => {
+        resizeObserver.disconnect();
+      };
+    }
+  }, [mobile]);
+
+  React.useLayoutEffect(() => {
+    if (mobile && wrapperRef.current) {
+      if (!hasMounted.current) {
+        // При mountе компонента в режиме mobile доскролл до активной крошки должен происходить моментально
+        wrapperRef.current?.scrollBy({ left: wrapperRef.current.scrollWidth });
+      } else {
+        // Если в ходе существования компонента меняется параметр items или компонент переходит
+        // в режим mobile, то доскролл до активной крошки должен происходить плавно
+        wrapperRef.current.scrollBy({ left: wrapperRef.current.scrollWidth, behavior: 'smooth' });
       }
-    } else if (mobile && wrapperRef.current) {
-      wrapperRef.current.scrollBy({ left: wrapperRef.current.scrollWidth, behavior: 'smooth' });
     }
   }, [items, mobile]);
 
