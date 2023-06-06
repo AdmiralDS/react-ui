@@ -1,70 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
+import * as React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
-import { Checkbox, T, ALL_BORDER_RADIUS_VALUES, ALL_DIMENSIONS_VALUES } from '@admiral-ds/react-ui';
-import type { Theme } from '@admiral-ds/react-ui';
 
-export default {
-  title: 'Admiral-2.1/Atoms/Checkbox',
-  decorators: [withDesign],
-  component: Checkbox,
-  parameters: {
-    docs: {
-      source: {
-        code: null,
-      },
-    },
-    design: [
-      {
-        type: 'figma',
-        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=37%3A20804',
-      },
-      {
-        type: 'figma',
-        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=37%3A21015',
-      },
-    ],
-  },
-  argTypes: {
-    dimension: {
-      options: ALL_DIMENSIONS_VALUES,
-      control: { type: 'radio' },
-    },
-    indeterminate: {
-      control: { type: 'boolean' },
-    },
-    checked: {
-      options: [false, true],
-      control: { type: 'radio' },
-    },
-    disabled: {
-      control: { type: 'boolean' },
-    },
-    readOnly: {
-      control: { type: 'boolean' },
-    },
-    hovered: {
-      control: { type: 'boolean' },
-    },
-    error: {
-      control: { type: 'boolean' },
-    },
-    themeBorderKind: {
-      options: ALL_BORDER_RADIUS_VALUES,
-      control: { type: 'radio' },
-    },
-    theme: {
-      control: false,
-    },
-    as: {
-      control: false,
-    },
-    forwardedAs: {
-      control: false,
-    },
-  },
-} as ComponentMeta<typeof Checkbox>;
+import { Checkbox, T } from '@admiral-ds/react-ui';
+import type { CheckBoxProps, Theme } from '@admiral-ds/react-ui';
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -86,22 +25,16 @@ const Row = styled.div`
   }
 `;
 
-const CheckboxDemo: ComponentStory<typeof Checkbox> = (props) => {
-  const args = (Object.keys(props) as Array<keyof typeof props>).reduce((acc, key) => {
-    if (props[key] !== undefined) acc[key] = props[key];
-
-    return acc;
-  }, {} as Record<any, any>);
-
+export const CheckboxDemoTemplate = (props: CheckBoxProps) => {
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 
-  const [checked, setChecked] = useState<boolean>(args.checked ?? false);
-  useEffect(() => {
-    setChecked(Boolean(args.checked));
-  }, [args.checked]);
+  const [checked, setChecked] = React.useState<boolean>(props.checked ?? false);
+  React.useEffect(() => {
+    setChecked(Boolean(props.checked));
+  }, [props.checked]);
   return (
     <>
       <ThemeProvider theme={swapBorder}>
@@ -111,7 +44,7 @@ const CheckboxDemo: ComponentStory<typeof Checkbox> = (props) => {
           </T>
           <Row>
             <Checkbox
-              {...args}
+              {...props}
               checked={checked}
               onChange={(e) => {
                 setChecked(e.target.checked);
@@ -169,5 +102,3 @@ const CheckboxDemo: ComponentStory<typeof Checkbox> = (props) => {
     </>
   );
 };
-
-export const Example = CheckboxDemo.bind({});
