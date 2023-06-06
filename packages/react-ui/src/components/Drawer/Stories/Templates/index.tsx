@@ -5,3 +5,4 @@ export * from './DrawerNonClosable';
 export * from './DrawerPosition';
 export * from './DrawerMobile';
 export * from './DrawerWidth';
+export * from './DrawerCustomContent';

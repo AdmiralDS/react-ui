@@ -2,7 +2,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
-import { Drawer, Button, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
+import { Drawer, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
 import {
   DrawerPlaygroundTemplate,
@@ -12,6 +12,7 @@ import {
   DrawerPositionTemplate,
   DrawerMobileTemplate,
   DrawerWidthTemplate,
+  DrawerCustomContentTemplate,
 } from './Templates';
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
@@ -23,6 +24,7 @@ import DrawerNonClosableRaw from '!!raw-loader!./Templates/DrawerNonClosable';
 import DrawerPositionRaw from '!!raw-loader!./Templates/DrawerPosition';
 import DrawerMobileRaw from '!!raw-loader!./Templates/DrawerMobile';
 import DrawerWidthRaw from '!!raw-loader!./Templates/DrawerWidth';
+import DrawerCustomContentRaw from '!!raw-loader!./Templates/DrawerCustomContent';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -103,44 +105,6 @@ export default {
     },
   },
 } as ComponentMeta<typeof Drawer>;
-
-const Template7: ComponentStory<typeof Drawer> = (args) => {
-  const [opened, setOpened] = React.useState(false);
-  return (
-    <>
-      <Button onClick={() => setOpened(true)}>Open drawer with custom content</Button>
-      <Drawer {...args} isOpen={opened} onClose={() => setOpened(false)} aria-labelledby="drawer-title">
-        <h1 id="drawer-title" style={{ paddingLeft: '24px' }}>
-          <strong>Drawer title</strong>
-        </h1>
-        <i style={{ padding: '0 24px', height: '100%' }}>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. At cupiditate ducimus nisi nulla numquam obcaecati
-          quam quasi quod ut veritatis?
-        </i>
-        <div
-          style={{
-            marginTop: '40px',
-            width: '80%',
-            display: 'flex',
-            justifyContent: 'space-around',
-            alignSelf: 'flex-end',
-            padding: '0 24px',
-          }}
-        >
-          <Button appearance="primary" dimension="m" onClick={() => setOpened(false)}>
-            First button
-          </Button>
-          <Button appearance="primary" dimension="m" onClick={() => setOpened(false)}>
-            Second button
-          </Button>
-          <Button appearance="primary" dimension="m" onClick={() => setOpened(false)}>
-            Third button
-          </Button>
-        </div>
-      </Drawer>
-    </>
-  );
-};
 
 //<editor-fold desc="Playground">
 const PlaygroundStory: ComponentStory<typeof Drawer> = (props) => <DrawerPlaygroundTemplate {...cleanUpProps(props)} />;
@@ -272,11 +236,16 @@ DrawerWidthExample.parameters = {
 DrawerWidthExample.storyName = 'Drawer. Ширина компонента';
 //</editor-fold>
 
-export const DrawerCustomContent = Template7.bind({});
-DrawerCustomContent.args = {};
-DrawerCustomContent.storyName = 'Drawer. Свободное (кастомизированное) наполнение';
-DrawerCustomContent.parameters = {
+//<editor-fold desc="Свободное (кастомизированное) наполнение">
+const DrawerCustomContentStory: ComponentStory<typeof Drawer> = (props) => (
+  <DrawerCustomContentTemplate {...cleanUpProps(props)} />
+);
+export const DrawerCustomContentExample = DrawerCustomContentStory.bind({});
+DrawerCustomContentExample.parameters = {
   docs: {
+    source: {
+      code: DrawerCustomContentRaw,
+    },
     description: {
       story: `Наполнение Drawer контентом полностью контролируется пользователем. Пользователь может разместить внутри Drawer
       любые свои компоненты, а также может воспользоваться вспомогательными компонентами DrawerTitle, DrawerContent, DrawerButtonPanel, 
@@ -284,3 +253,5 @@ DrawerCustomContent.parameters = {
     },
   },
 };
+DrawerCustomContentExample.storyName = 'Drawer. Свободное (кастомизированное) наполнение';
+//</editor-fold>
