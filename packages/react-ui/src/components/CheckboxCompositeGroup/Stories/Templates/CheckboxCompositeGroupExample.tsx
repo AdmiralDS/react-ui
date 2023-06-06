@@ -1,42 +1,8 @@
-import type { ChangeEvent } from 'react';
-import React, { useState } from 'react';
+import * as React from 'react';
 import { ThemeProvider } from 'styled-components';
-import type { ComponentMeta, Story } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
-import type { CheckboxCompositeGroupProps, Theme } from '@admiral-ds/react-ui';
-import { CheckboxCompositeGroup, CheckboxGroup, CheckboxField, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
-export default {
-  title: 'Admiral-2.1/CheckboxCompositeGroup',
-  decorators: [withDesign],
-  component: CheckboxCompositeGroup,
-  parameters: {
-    docs: {
-      source: {
-        code: null,
-      },
-    },
-    design: [
-      {
-        type: 'figma',
-        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=37%3A21015',
-      },
-    ],
-  },
-  argTypes: {
-    dimension: {
-      options: ['m', 's'],
-      control: { type: 'radio' },
-    },
-    disabled: {
-      control: { type: 'boolean' },
-    },
-    themeBorderKind: {
-      options: ALL_BORDER_RADIUS_VALUES,
-      control: { type: 'radio' },
-    },
-  },
-} as ComponentMeta<typeof CheckboxCompositeGroup>;
+import { CheckboxCompositeGroup, CheckboxField, CheckboxGroup } from '@admiral-ds/react-ui';
+import type { CheckboxCompositeGroupProps, Theme } from '@admiral-ds/react-ui';
 
 interface ItemValue {
   label: string;
@@ -51,20 +17,20 @@ const initialValue: Array<ItemValue> = [
   { label: 'Омск', id: '4', checked: false },
 ];
 
-const CheckboxCompositeGroupDemo: Story = (args: CheckboxCompositeGroupProps) => {
+export const CheckboxCompositeGroupExampleTemplate = (props: CheckboxCompositeGroupProps) => {
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 
-  const [list, setValue] = useState<Array<ItemValue>>(initialValue);
+  const [list, setValue] = React.useState<Array<ItemValue>>(initialValue);
 
   const someItemChecked = () => list.some((item) => item.checked);
 
   const handleOnchangeAll = () => {
     setValue((prev) => prev.map((item) => ({ ...item, checked: !someItemChecked() })));
   };
-  const handleOnchange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleOnchange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name } = e.target;
     setValue((prev) => prev.map((item) => (name === item.label ? { ...item, checked: !item.checked } : { ...item })));
   };
@@ -72,7 +38,7 @@ const CheckboxCompositeGroupDemo: Story = (args: CheckboxCompositeGroupProps) =>
 
   return (
     <ThemeProvider theme={swapBorder}>
-      <CheckboxCompositeGroup {...args}>
+      <CheckboxCompositeGroup {...props}>
         <CheckboxField
           indeterminate={getIndeterminateStatus()}
           checked={someItemChecked()}
@@ -91,5 +57,3 @@ const CheckboxCompositeGroupDemo: Story = (args: CheckboxCompositeGroupProps) =>
     </ThemeProvider>
   );
 };
-
-export const CheckboxCompositeGroupExample = CheckboxCompositeGroupDemo.bind({});
