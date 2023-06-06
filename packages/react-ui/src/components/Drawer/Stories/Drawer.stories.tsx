@@ -3,15 +3,7 @@ import styled, { ThemeProvider } from 'styled-components';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import type { Theme } from '@admiral-ds/react-ui';
-import {
-  Drawer,
-  DrawerButtonPanel,
-  DrawerContent,
-  DrawerTitle,
-  Button,
-  InputField,
-  ALL_BORDER_RADIUS_VALUES,
-} from '@admiral-ds/react-ui';
+import { Drawer, DrawerContent, DrawerTitle, Button, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
 import {
   DrawerPlaygroundTemplate,
@@ -19,6 +11,7 @@ import {
   DrawerWithoutBackdropTemplate,
   DrawerNonClosableTemplate,
   DrawerPositionTemplate,
+  DrawerMobileTemplate,
 } from './Templates';
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
@@ -28,6 +21,7 @@ import DrawerWithBackdropRaw from '!!raw-loader!./Templates/DrawerWithBackdrop';
 import DrawerWithoutBackdropRaw from '!!raw-loader!./Templates/DrawerWithoutBackdrop';
 import DrawerNonClosableRaw from '!!raw-loader!./Templates/DrawerNonClosable';
 import DrawerPositionRaw from '!!raw-loader!./Templates/DrawerPosition';
+import DrawerMobileRaw from '!!raw-loader!./Templates/DrawerMobile';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -114,42 +108,6 @@ const ContentArea = styled.div`
   height: 100%;
   background: ${({ theme }) => theme.color['Success/Success 20']};
 `;
-
-const Template5: ComponentStory<typeof Drawer> = (args) => {
-  const [opened, setOpened] = React.useState(false);
-
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
-  return (
-    <ThemeProvider theme={swapBorder}>
-      <Button onClick={() => setOpened(true)}>Open mobile drawer</Button>
-      <Drawer
-        {...args}
-        isOpen={opened}
-        onClose={() => setOpened(false)}
-        mobile
-        closeOnEscapeKeyDown
-        aria-labelledby="drawer-title"
-      >
-        <DrawerTitle id="drawer-title">Drawer title</DrawerTitle>
-        <DrawerContent>
-          <ContentArea />
-        </DrawerContent>
-        <DrawerButtonPanel>
-          <Button appearance="primary" dimension="m" onClick={() => setOpened(false)}>
-            Yes button
-          </Button>
-          <Button appearance="secondary" dimension="m" onClick={() => setOpened(false)}>
-            No button
-          </Button>
-        </DrawerButtonPanel>
-      </Drawer>
-    </ThemeProvider>
-  );
-};
 
 const Template6: ComponentStory<typeof Drawer> = (args) => {
   const [opened, setOpened] = React.useState(false);
@@ -311,11 +269,14 @@ DrawerPositionExample.parameters = {
 DrawerPositionExample.storyName = 'Drawer. Расположение компонента';
 //</editor-fold>
 
-export const DrawerMobile = Template5.bind({});
-DrawerMobile.args = {};
-DrawerMobile.storyName = 'Drawer. Адаптив (mobile)';
-DrawerMobile.parameters = {
+//<editor-fold desc="Адаптив">
+const DrawerMobileStory: ComponentStory<typeof Drawer> = (props) => <DrawerMobileTemplate {...cleanUpProps(props)} />;
+export const DrawerMobileExample = DrawerMobileStory.bind({});
+DrawerMobileExample.parameters = {
   docs: {
+    source: {
+      code: DrawerMobileRaw,
+    },
     description: {
       story: `Адаптируясь на мобильных устройствах, компонент имеет несколько иную структуру, отступы и размеры.
       На мобильных устройствах компонент всегда появляется с правой стороны экрана. 
@@ -324,6 +285,8 @@ DrawerMobile.parameters = {
     },
   },
 };
+DrawerMobileExample.storyName = 'Drawer. Адаптив (mobile)';
+//</editor-fold>
 
 export const DrawerWidth = Template6.bind({});
 DrawerWidth.args = {};
