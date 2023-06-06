@@ -866,7 +866,7 @@ export const Table: React.FC<TableProps> = ({
 
   const renderHiddenHeader = () => {
     return (
-      <HiddenHeader ref={hiddenHeaderRef}>
+      <HiddenHeader ref={hiddenHeaderRef} data-verticalscroll={verticalScroll}>
         {(displayRowSelectionColumn || displayRowExpansionColumn) && (
           <StickyWrapper>
             {displayRowExpansionColumn && <ExpandCell dimension={dimension} />}
