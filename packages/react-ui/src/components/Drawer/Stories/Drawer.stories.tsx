@@ -15,13 +15,19 @@ import {
 import { ReactComponent as ArrowLeftOutline } from '@admiral-ds/icons/build/system/ArrowLeftOutline.svg';
 import { ReactComponent as ArrowRightOutline } from '@admiral-ds/icons/build/system/ArrowRightOutline.svg';
 
-import { DrawerPlaygroundTemplate, DrawerWithBackdropTemplate, DrawerWithoutBackdropTemplate } from './Templates';
+import {
+  DrawerPlaygroundTemplate,
+  DrawerWithBackdropTemplate,
+  DrawerWithoutBackdropTemplate,
+  DrawerNonClosableTemplate,
+} from './Templates';
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
 import PlaygroundRaw from '!!raw-loader!./Templates/DrawerPlayground';
 import DrawerWithBackdropRaw from '!!raw-loader!./Templates/DrawerWithBackdrop';
 import DrawerWithoutBackdropRaw from '!!raw-loader!./Templates/DrawerWithoutBackdrop';
+import DrawerNonClosableRaw from '!!raw-loader!./Templates/DrawerNonClosable';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -145,37 +151,6 @@ const DrawerForm = ({ onYesClick, onNoClick }: Props) => {
         </Button>
       </DrawerButtonPanel>
     </>
-  );
-};
-
-const Template3: ComponentStory<typeof Drawer> = (args) => {
-  const [opened, setOpened] = React.useState(false);
-
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
-  return (
-    <ThemeProvider theme={swapBorder}>
-      <Button onClick={() => setOpened(true)}>Open non-closable drawer</Button>
-      <Drawer
-        {...args}
-        isOpen={opened}
-        displayCloseIcon={false}
-        style={{ width: '480px' }}
-        aria-labelledby="drawer-title"
-      >
-        <DrawerTitle id="drawer-title">Drawer title</DrawerTitle>
-        <DrawerForm
-          onYesClick={(p) => {
-            console.log(`value ${p.inputValue}`);
-            setOpened(false);
-          }}
-          onNoClick={() => setOpened(false)}
-        />
-      </Drawer>
-    </ThemeProvider>
   );
 };
 
@@ -387,11 +362,16 @@ DrawerWithoutBackdropExample.parameters = {
 DrawerWithoutBackdropExample.storyName = 'Drawer без блокировки контента страницы (Backdrop = False)';
 //</editor-fold>
 
-export const DrawerWithoutCloseIcon = Template3.bind({});
-DrawerWithoutCloseIcon.args = {};
-DrawerWithoutCloseIcon.storyName = 'Drawer с обязательным условием (non-closable Drawer)';
-DrawerWithoutCloseIcon.parameters = {
+//<editor-fold desc="Drawer с обязательным условием">
+const DrawerNonClosableStory: ComponentStory<typeof Drawer> = (props) => (
+  <DrawerNonClosableTemplate {...cleanUpProps(props)} />
+);
+export const DrawerNonClosableExample = DrawerNonClosableStory.bind({});
+DrawerNonClosableExample.parameters = {
   docs: {
+    source: {
+      code: DrawerNonClosableRaw,
+    },
     description: {
       story: `В некоторых случаях применим Drawer с обязательным условием (non-closable Drawer), то есть такая панель, 
       которую можно закрыть только нажав одну из кнопок в футере. Крестик закрытия отсутствует, 
@@ -400,6 +380,8 @@ DrawerWithoutCloseIcon.parameters = {
     },
   },
 };
+DrawerNonClosableExample.storyName = 'Drawer с обязательным условием (non-closable Drawer)';
+//</editor-fold>
 
 export const DrawerPosition = Template4.bind({});
 DrawerPosition.args = {};
