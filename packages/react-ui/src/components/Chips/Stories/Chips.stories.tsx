@@ -17,6 +17,7 @@ import {
   ChipsTagsTemplate,
   ChipsSelectTemplate,
   ChipsMultiSelectTemplate,
+  ChipsTooltipTemplate,
 } from './Templates';
 
 // Imports of text sources
@@ -25,6 +26,7 @@ import ChipsTagsCloseRaw from '!!raw-loader!./Templates/ChipsTagsClose';
 import ChipsIconRaw from '!!raw-loader!./Templates/ChipsIcon';
 import ChipsSelectRaw from '!!raw-loader!./Templates/ChipsSelect';
 import ChipsMultiSelectRaw from '!!raw-loader!./Templates/ChipsMultiSelect';
+import ChipsTooltipRaw from '!!raw-loader!./Templates/ChipsTooltip';
 
 const Separator = styled.div`
   height: 20px;
@@ -51,21 +53,11 @@ const listDataIcon = [
   { id: '5', label: 'Вильнус', disabled: false, iconBefore: <BurnIcon />, selected: false, badge: 3 },
 ];
 
-const listDataIconTooltip = [
-  { id: '1', label: 'Ограниченное пространство', disabled: false },
-  { id: '2', label: 'Ограниченное пространство', disabled: false },
-  { id: '3', label: 'Ограниченное пространство', disabled: false },
-];
-
 const WrapperChip = styled.div<{ dimension?: 'm' | 's' }>`
   display: flex;
   & > div {
     margin-right: ${({ dimension }) => (dimension === 's' ? 8 : 12)}px;
   }
-`;
-
-const StyledChipsTooltip = styled(Chips)`
-  width: 160px;
 `;
 
 const Description = () => (
@@ -135,20 +127,6 @@ export default {
   },
 } as ComponentMeta<typeof Chips>;
 
-const ChipsTagsCloseTooltipDemo: ComponentStory<typeof Chips> = (props) => {
-  return (
-    <>
-      <WrapperChip>
-        {listDataIconTooltip.map((item) => (
-          <StyledChipsTooltip {...props} renderContentTooltip={() => item.label} key={item.id}>
-            {item.label}
-          </StyledChipsTooltip>
-        ))}
-      </WrapperChip>
-    </>
-  );
-};
-
 const ChipsBadgesDemo: ComponentStory<typeof Chips> = (props) => {
   const [selectedM, setSelectedM] = useState('');
   const [selectedS, setSelectedS] = useState('');
@@ -192,7 +170,6 @@ const ChipsBadgesDemo: ComponentStory<typeof Chips> = (props) => {
     </>
   );
 };
-export const ChipsTooltip = ChipsTagsCloseTooltipDemo.bind({});
 export const ChipsBadges = ChipsBadgesDemo.bind({});
 
 //<editor-fold desc="Chips базовый пример">
@@ -280,9 +257,16 @@ ChipsMultiSelect.parameters = {
 };
 //</editor-fold>
 
+//<editor-fold desc="Chips с Tooltip">
+const ChipsTooltipStory: ComponentStory<typeof Chips> = (props) => <ChipsTooltipTemplate {...props} />;
+
+export const ChipsTooltip = ChipsTooltipStory.bind({});
 ChipsTooltip.storyName = 'Chips с Tooltip';
 ChipsTooltip.parameters = {
   docs: {
+    source: {
+      code: ChipsTooltipRaw,
+    },
     description: {
       story: `По дефолту в компоненте (в коде) задано граничение ширины в 190 px, после которой 
       происходит уход в троеточие. Но можно изменять этот параметр стилизуя компонент через styled 
@@ -290,6 +274,7 @@ ChipsTooltip.parameters = {
     },
   },
 };
+//</editor-fold>
 
 ChipsBadges.storyName = 'Chips с Badge';
 ChipsBadges.parameters = {
