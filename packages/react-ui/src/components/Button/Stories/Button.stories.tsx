@@ -9,11 +9,12 @@ import { Button, T, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
 import { filterKeysWithUndefinedValues } from '#src/components/common/utils/filterKeysWithUndefinedValues';
 import { PaddingForButtonWithIconLeft, PaddingForButtonWithIconRight } from '#src/components/Button/dimensionMixin';
-import { ButtonLoaderTemplate, ButtonWithIconTemplate } from './Templates';
+import { ButtonLoaderTemplate, ButtonStylesTemplate, ButtonWithIconTemplate } from './Templates';
 
 // Imports of text sources
 import ButtonLoaderRaw from '!!raw-loader!./Templates/ButtonLoader';
 import ButtonWithIconRaw from '!!raw-loader!./Templates/ButtonWithIcon';
+import ButtonStylesRaw from '!!raw-loader!./Templates/ButtonStyles';
 
 export default {
   title: 'Admiral-2.1/Button',
@@ -156,116 +157,26 @@ const ButtonPlaygroundDemo: ComponentStory<typeof Button> = (args) => {
   return <TemplatePlayground {...filterKeysWithUndefinedValues(args)} />;
 };
 
-const TemplateVariants = (props: ButtonProps) => {
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
-  return (
-    <ThemeProvider theme={swapBorder}>
-      <ButtonContainer>
-        <Button dimension={props.dimension}>Button 56</Button>
-
-        <Button dimension={props.dimension} icon={<StarSolid />}>
-          Button 56
-        </Button>
-
-        <Button dimension={props.dimension} iconPlace="right" icon={<StarSolid />}>
-          Button 56
-        </Button>
-
-        <Button dimension={props.dimension} displayAsSquare icon={<StarSolid />} />
-      </ButtonContainer>
-      <ButtonContainer>
-        <Button dimension={props.dimension} appearance="secondary">
-          Button 56
-        </Button>
-
-        <Button dimension={props.dimension} appearance="secondary" icon={<StarSolid />}>
-          Button 56
-        </Button>
-
-        <Button dimension={props.dimension} appearance="secondary" iconPlace="right" icon={<StarSolid />}>
-          Button 56
-        </Button>
-
-        <Button dimension={props.dimension} appearance="secondary" displayAsSquare icon={<StarSolid />} />
-      </ButtonContainer>
-      <ButtonContainer>
-        <Button dimension={props.dimension} appearance="ghost">
-          Button 56
-        </Button>
-
-        <Button dimension={props.dimension} appearance="ghost" icon={<StarSolid />}>
-          Button 56
-        </Button>
-
-        <Button dimension={props.dimension} appearance="ghost" iconPlace="right" icon={<StarSolid />}>
-          Button 56
-        </Button>
-
-        <Button dimension={props.dimension} appearance="ghost" displayAsSquare icon={<StarSolid />} />
-      </ButtonContainer>
-      <ButtonContainer>
-        <Button dimension={props.dimension} appearance="danger">
-          Button 56
-        </Button>
-
-        <Button dimension={props.dimension} appearance="danger" icon={<StarSolid />}>
-          Button 56
-        </Button>
-
-        <Button dimension={props.dimension} appearance="danger" iconPlace="right" icon={<StarSolid />}>
-          Button 56
-        </Button>
-
-        <Button dimension={props.dimension} appearance="danger" displayAsSquare icon={<StarSolid />} />
-      </ButtonContainer>
-      <ButtonContainer>
-        <Button dimension={props.dimension} appearance="success">
-          Button 56
-        </Button>
-
-        <Button dimension={props.dimension} appearance="success" icon={<StarSolid />}>
-          Button 56
-        </Button>
-
-        <Button dimension={props.dimension} appearance="success" iconPlace="right" icon={<StarSolid />}>
-          Button 56
-        </Button>
-
-        <Button dimension={props.dimension} appearance="success" displayAsSquare icon={<StarSolid />} />
-      </ButtonContainer>
-      <ButtonContainer appearance="white">
-        <Button dimension={props.dimension} appearance="white">
-          Button 56
-        </Button>
-
-        <Button dimension={props.dimension} appearance="white" icon={<StarSolid />}>
-          Button 56
-        </Button>
-
-        <Button dimension={props.dimension} appearance="white" iconPlace="right" icon={<StarSolid />}>
-          Button 56
-        </Button>
-
-        <Button dimension={props.dimension} appearance="white" displayAsSquare icon={<StarSolid />} />
-      </ButtonContainer>
-    </ThemeProvider>
-  );
-};
-
-const ButtonVariants: ComponentStory<typeof Button> = (args) => {
-  return <TemplateVariants {...args} />;
-};
-
 export const Playground = ButtonPlaygroundDemo.bind({});
 Playground.storyName = 'Button. Playground';
 Playground.args = {};
-export const PlaygroundVariants = ButtonVariants.bind({});
-PlaygroundVariants.storyName = 'Button. Стили';
-PlaygroundVariants.args = {};
+
+//<editor-fold desc="Button. Стили">
+const ButtonStylesStory: ComponentStory<typeof Button> = (args) => {
+  return <ButtonStylesTemplate {...args} />;
+};
+
+export const ButtonStyles = ButtonStylesStory.bind({});
+ButtonStyles.parameters = {
+  docs: {
+    source: {
+      code: ButtonStylesRaw,
+    },
+  },
+};
+ButtonStyles.storyName = 'Button. Стили';
+ButtonStyles.args = {};
+//</editor-fold>
 
 //<editor-fold desc="Button с иконкой">
 const ButtonWithIconStory: ComponentStory<typeof Button> = (args) => {
