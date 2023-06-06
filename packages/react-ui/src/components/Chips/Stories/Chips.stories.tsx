@@ -11,11 +11,12 @@ import { ReactComponent as DiamondSolid } from '@admiral-ds/icons/build/category
 import { ReactComponent as TrophyIcon } from '@admiral-ds/icons/build/category/TrophySolid.svg';
 import { ReactComponent as BurnIcon } from '@admiral-ds/icons/build/category/BurnSolid.svg';
 
-import { ChipsTagsCloseTemplate, ChipsTagsTemplate } from './Templates';
+import { ChipsIconTemplate, ChipsTagsCloseTemplate, ChipsTagsTemplate } from './Templates';
 
 // Imports of text sources
 import ChipsTagsRaw from '!!raw-loader!./Templates/ChipsTags';
 import ChipsTagsCloseRaw from '!!raw-loader!./Templates/ChipsTagsClose';
+import ChipsIconRaw from '!!raw-loader!./Templates/ChipsIcon';
 
 const Separator = styled.div`
   height: 20px;
@@ -136,45 +137,6 @@ export default {
     },
   },
 } as ComponentMeta<typeof Chips>;
-
-const ChipsIconDemo: ComponentStory<typeof Chips> = (props) => {
-  const [selectedM, setSelectedM] = useState('');
-  const [selectedS, setSelectedS] = useState('');
-  return (
-    <>
-      <WrapperChip dimension={props.dimension}>
-        {listDataIcon.map((d) => (
-          <Chips
-            {...props}
-            key={d.id}
-            selected={selectedM === d.id}
-            onClick={() => (props.disabled ? null : setSelectedM(d.id))}
-            iconBefore={d?.iconBefore}
-            iconAfter={d?.iconAfter}
-          >
-            {d.label}
-          </Chips>
-        ))}
-      </WrapperChip>
-      <Separator />
-      <WrapperChip dimension="s">
-        {listDataIcon.map((d) => (
-          <Chips
-            {...props}
-            dimension="s"
-            key={d.id}
-            selected={selectedS === d.id}
-            onClick={() => (props.disabled ? null : setSelectedS(d.id))}
-            iconBefore={d?.iconBefore}
-            iconAfter={d?.iconAfter}
-          >
-            {d.label}
-          </Chips>
-        ))}
-      </WrapperChip>
-    </>
-  );
-};
 
 const ChipsSelectDemo: ComponentStory<typeof Chips> = (props) => {
   const [selectedM, setSelectedM] = useState('');
@@ -310,7 +272,6 @@ const ChipsBadgesDemo: ComponentStory<typeof Chips> = (props) => {
     </>
   );
 };
-export const ChipsIcon = ChipsIconDemo.bind({});
 export const ChipsSelect = ChipsSelectDemo.bind({});
 export const ChipsMultiSelectIcon = ChipsMultiSelectIconDemo.bind({});
 export const ChipsTooltip = ChipsTagsCloseTooltipDemo.bind({});
@@ -348,14 +309,22 @@ ChipsTagsClose.parameters = {
 };
 //</editor-fold>
 
+//<editor-fold desc="Chips с иконкой">
+const ChipsIconStory: ComponentStory<typeof Chips> = (props) => <ChipsIconTemplate {...props} />;
+
+export const ChipsIcon = ChipsIconStory.bind({});
 ChipsIcon.storyName = 'Chips с иконкой';
 ChipsIcon.parameters = {
   docs: {
+    source: {
+      code: ChipsIconRaw,
+    },
     description: {
       story: `В компоненте можно включать иконки справа и/или слева от текста.`,
     },
   },
 };
+//</editor-fold>
 
 ChipsSelect.storyName = 'Chips с текстом и выбором';
 ChipsSelect.parameters = {
