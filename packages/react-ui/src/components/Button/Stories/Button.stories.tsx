@@ -1,20 +1,22 @@
 import * as React from 'react';
-import styled, { ThemeProvider } from 'styled-components';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 
-import { ReactComponent as StarSolid } from '@admiral-ds/icons/build/system/StarSolid.svg';
-import type { ButtonProps, ButtonAppearance, Theme } from '@admiral-ds/react-ui';
-import { Button, T, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
+import { Button, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
 import { filterKeysWithUndefinedValues } from '#src/components/common/utils/filterKeysWithUndefinedValues';
-import { PaddingForButtonWithIconLeft, PaddingForButtonWithIconRight } from '#src/components/Button/dimensionMixin';
-import { ButtonLoaderTemplate, ButtonStylesTemplate, ButtonWithIconTemplate } from './Templates';
+import {
+  ButtonLoaderTemplate,
+  ButtonPlaygroundTemplate,
+  ButtonStylesTemplate,
+  ButtonWithIconTemplate,
+} from './Templates';
 
 // Imports of text sources
 import ButtonLoaderRaw from '!!raw-loader!./Templates/ButtonLoader';
 import ButtonWithIconRaw from '!!raw-loader!./Templates/ButtonWithIcon';
 import ButtonStylesRaw from '!!raw-loader!./Templates/ButtonStyles';
+import ButtonPlaygroundRaw from '!!raw-loader!./Templates/ButtonPlayground';
 
 export default {
   title: 'Admiral-2.1/Button',
@@ -87,79 +89,22 @@ export default {
   },
 } as ComponentMeta<typeof Button>;
 
-const ButtonContainer = styled.div<{ appearance?: ButtonAppearance }>`
-  padding: 24px;
-  position: relative;
-  display: block;
-
-  > * {
-    margin: 8px 16px 0 0;
-  }
-
-  ${(p) => p.appearance === 'white' && 'background-color: #2B313B;'};
-`;
-
-const TemplatePlayground = (props: ButtonProps) => {
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
-  return (
-    <ThemeProvider theme={swapBorder}>
-      <T font="Body/Body 1 Long" as="div">
-        В связи с корректировкой внутренних отступов при наличии иконок рекомендуется их передавать через props "icon" и
-        "iconPlace" = "left" | "right".
-      </T>
-      <ButtonContainer appearance={props.appearance}>
-        <Button {...props} displayAsSquare={false}>
-          Button 56
-        </Button>
-
-        <Button {...props} displayAsSquare={false} icon={<StarSolid />}>
-          Button 56
-        </Button>
-
-        <Button {...props} displayAsSquare={false} icon={<StarSolid />} iconPlace="right">
-          Button 56
-        </Button>
-
-        <Button {...props} icon={<StarSolid />} displayAsSquare />
-      </ButtonContainer>
-      <T font="Body/Body 1 Long" as="div">
-        При передаче иконок через children необходимо прокидывать соответствующий css mixin
-        (PaddingForButtonWithIconLeft | PaddingForButtonWithIconRight).
-      </T>
-      <ButtonContainer appearance={props.appearance}>
-        <Button {...props} displayAsSquare={false}>
-          Button 56
-        </Button>
-
-        <Button {...props} buttonCssMixin={PaddingForButtonWithIconLeft} displayAsSquare={false}>
-          <StarSolid />
-          Button 56
-        </Button>
-
-        <Button {...props} buttonCssMixin={PaddingForButtonWithIconRight} displayAsSquare={false}>
-          Button 56
-          <StarSolid />
-        </Button>
-
-        <Button {...props} displayAsSquare>
-          <StarSolid />
-        </Button>
-      </ButtonContainer>
-    </ThemeProvider>
-  );
+//<editor-fold desc="Button. Playground">
+const ButtonPlaygroundStory: ComponentStory<typeof Button> = (args) => {
+  return <ButtonPlaygroundTemplate {...filterKeysWithUndefinedValues(args)} />;
 };
 
-const ButtonPlaygroundDemo: ComponentStory<typeof Button> = (args) => {
-  return <TemplatePlayground {...filterKeysWithUndefinedValues(args)} />;
+export const ButtonPlayground = ButtonPlaygroundStory.bind({});
+ButtonPlayground.parameters = {
+  docs: {
+    source: {
+      code: ButtonPlaygroundRaw,
+    },
+  },
 };
-
-export const Playground = ButtonPlaygroundDemo.bind({});
-Playground.storyName = 'Button. Playground';
-Playground.args = {};
+ButtonPlayground.storyName = 'Button. Playground';
+ButtonPlayground.args = {};
+//</editor-fold>
 
 //<editor-fold desc="Button. Стили">
 const ButtonStylesStory: ComponentStory<typeof Button> = (args) => {
