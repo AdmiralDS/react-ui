@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { withDesign } from 'storybook-addon-designs';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
+
 import { Chips } from '@admiral-ds/react-ui';
 
 import { ReactComponent as VacationIcon } from '@admiral-ds/icons/build/category/VacationSolid.svg';
@@ -9,6 +10,11 @@ import { ReactComponent as AlertSolid } from '@admiral-ds/icons/build/category/A
 import { ReactComponent as DiamondSolid } from '@admiral-ds/icons/build/category/DiamondSolid.svg';
 import { ReactComponent as TrophyIcon } from '@admiral-ds/icons/build/category/TrophySolid.svg';
 import { ReactComponent as BurnIcon } from '@admiral-ds/icons/build/category/BurnSolid.svg';
+
+import { ChipsTagsTemplate } from './Templates';
+
+// Imports of text sources
+import ChipsTagsRaw from '!!raw-loader!./Templates/ChipsTags';
 
 const Separator = styled.div`
   height: 20px;
@@ -129,20 +135,6 @@ export default {
     },
   },
 } as ComponentMeta<typeof Chips>;
-
-const ChipsTagsDemo: ComponentStory<typeof Chips> = (props) => {
-  return (
-    <>
-      <WrapperChip dimension={props.dimension}>
-        {listData.map((item) => (
-          <Chips {...props} key={item.id}>
-            {item.label}
-          </Chips>
-        ))}
-      </WrapperChip>
-    </>
-  );
-};
 
 const ChipsTagsCloseDemo: ComponentStory<typeof Chips> = (props) => {
   const [dataListM, setDataM] = useState(listData);
@@ -346,8 +338,6 @@ const ChipsBadgesDemo: ComponentStory<typeof Chips> = (props) => {
     </>
   );
 };
-
-export const ChipsTags = ChipsTagsDemo.bind({});
 export const ChipsTagsClose = ChipsTagsCloseDemo.bind({});
 export const ChipsIcon = ChipsIconDemo.bind({});
 export const ChipsSelect = ChipsSelectDemo.bind({});
@@ -355,7 +345,19 @@ export const ChipsMultiSelectIcon = ChipsMultiSelectIconDemo.bind({});
 export const ChipsTooltip = ChipsTagsCloseTooltipDemo.bind({});
 export const ChipsBadges = ChipsBadgesDemo.bind({});
 
+//<editor-fold desc="Chips базовый пример">
+const ChipsTagsStory: ComponentStory<typeof Chips> = (props) => <ChipsTagsTemplate {...props} />;
+
+export const ChipsTags = ChipsTagsStory.bind({});
+ChipsTags.parameters = {
+  docs: {
+    source: {
+      code: ChipsTagsRaw,
+    },
+  },
+};
 ChipsTags.storyName = 'Chips базовый пример';
+//</editor-fold>
 
 ChipsTagsClose.storyName = 'Chips с текстом и иконкой закрыть';
 ChipsTagsClose.parameters = {
