@@ -11,13 +11,20 @@ import { ReactComponent as DiamondSolid } from '@admiral-ds/icons/build/category
 import { ReactComponent as TrophyIcon } from '@admiral-ds/icons/build/category/TrophySolid.svg';
 import { ReactComponent as BurnIcon } from '@admiral-ds/icons/build/category/BurnSolid.svg';
 
-import { ChipsIconTemplate, ChipsTagsCloseTemplate, ChipsTagsTemplate, ChipsSelectTemplate } from './Templates';
+import {
+  ChipsIconTemplate,
+  ChipsTagsCloseTemplate,
+  ChipsTagsTemplate,
+  ChipsSelectTemplate,
+  ChipsMultiSelectTemplate,
+} from './Templates';
 
 // Imports of text sources
 import ChipsTagsRaw from '!!raw-loader!./Templates/ChipsTags';
 import ChipsTagsCloseRaw from '!!raw-loader!./Templates/ChipsTagsClose';
 import ChipsIconRaw from '!!raw-loader!./Templates/ChipsIcon';
 import ChipsSelectRaw from '!!raw-loader!./Templates/ChipsSelect';
+import ChipsMultiSelectRaw from '!!raw-loader!./Templates/ChipsMultiSelect';
 
 const Separator = styled.div`
   height: 20px;
@@ -55,11 +62,6 @@ const WrapperChip = styled.div<{ dimension?: 'm' | 's' }>`
   & > div {
     margin-right: ${({ dimension }) => (dimension === 's' ? 8 : 12)}px;
   }
-`;
-
-const WrapperContent = styled.div`
-  display: flex;
-  align-items: center;
 `;
 
 const StyledChipsTooltip = styled(Chips)`
@@ -133,48 +135,6 @@ export default {
   },
 } as ComponentMeta<typeof Chips>;
 
-const ChipsMultiSelectIconDemo: ComponentStory<typeof Chips> = (props) => {
-  const [listM, setListM] = useState(listDataIcon);
-  const handleKeyM = (id: string) => {
-    setListM((prev) => prev.map((item) => (item.id === id ? { ...item, selected: !item.selected } : { ...item })));
-  };
-  const [listS, setListS] = useState(listDataIcon);
-  const handleKeyS = (id: string) => {
-    setListS((prev) => prev.map((item) => (item.id === id ? { ...item, selected: !item.selected } : { ...item })));
-  };
-
-  return (
-    <>
-      <WrapperChip dimension={props.dimension}>
-        {listM.map((item) => (
-          <Chips
-            {...props}
-            key={item.id}
-            onClick={props.disabled ? void 0 : handleKeyM.bind(null, item.id)}
-            selected={item.selected}
-          >
-            <WrapperContent>{item.label}</WrapperContent>
-          </Chips>
-        ))}
-      </WrapperChip>
-      <Separator />
-      <WrapperChip dimension="s">
-        {listS.map((item) => (
-          <Chips
-            {...props}
-            dimension="s"
-            key={item.id}
-            onClick={props.disabled ? void 0 : handleKeyS.bind(null, item.id)}
-            selected={item.selected}
-          >
-            <WrapperContent>{item.label}</WrapperContent>
-          </Chips>
-        ))}
-      </WrapperChip>
-    </>
-  );
-};
-
 const ChipsTagsCloseTooltipDemo: ComponentStory<typeof Chips> = (props) => {
   return (
     <>
@@ -232,7 +192,6 @@ const ChipsBadgesDemo: ComponentStory<typeof Chips> = (props) => {
     </>
   );
 };
-export const ChipsMultiSelectIcon = ChipsMultiSelectIconDemo.bind({});
 export const ChipsTooltip = ChipsTagsCloseTooltipDemo.bind({});
 export const ChipsBadges = ChipsBadgesDemo.bind({});
 
@@ -304,14 +263,22 @@ ChipsSelect.parameters = {
 };
 //</editor-fold>
 
-ChipsMultiSelectIcon.storyName = 'Chips для множественного выбора';
-ChipsMultiSelectIcon.parameters = {
+//<editor-fold desc="Chips для множественного выбора">
+const ChipsMultiSelectStory: ComponentStory<typeof Chips> = (props) => <ChipsMultiSelectTemplate {...props} />;
+
+export const ChipsMultiSelect = ChipsMultiSelectStory.bind({});
+ChipsMultiSelect.storyName = 'Chips для множественного выбора';
+ChipsMultiSelect.parameters = {
   docs: {
+    source: {
+      code: ChipsMultiSelectRaw,
+    },
     description: {
       story: `Chips в режиме чекбоксов, когда можно выбрать любое количество значений`,
     },
   },
 };
+//</editor-fold>
 
 ChipsTooltip.storyName = 'Chips с Tooltip';
 ChipsTooltip.parameters = {
