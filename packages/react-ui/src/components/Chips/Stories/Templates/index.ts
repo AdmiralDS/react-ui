@@ -4,3 +4,4 @@ export * from './ChipsIcon';
 export * from './ChipsSelect';
 export * from './ChipsMultiSelect';
 export * from './ChipsTooltip';
+export * from './ChipsBadges';

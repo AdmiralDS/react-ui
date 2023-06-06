@@ -1,15 +1,9 @@
-import React, { useState } from 'react';
+import * as React from 'react';
 import styled from 'styled-components';
 import { withDesign } from 'storybook-addon-designs';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 
 import { Chips } from '@admiral-ds/react-ui';
-
-import { ReactComponent as VacationIcon } from '@admiral-ds/icons/build/category/VacationSolid.svg';
-import { ReactComponent as AlertSolid } from '@admiral-ds/icons/build/category/AlertSolid.svg';
-import { ReactComponent as DiamondSolid } from '@admiral-ds/icons/build/category/DiamondSolid.svg';
-import { ReactComponent as TrophyIcon } from '@admiral-ds/icons/build/category/TrophySolid.svg';
-import { ReactComponent as BurnIcon } from '@admiral-ds/icons/build/category/BurnSolid.svg';
 
 import {
   ChipsIconTemplate,
@@ -18,6 +12,7 @@ import {
   ChipsSelectTemplate,
   ChipsMultiSelectTemplate,
   ChipsTooltipTemplate,
+  ChipsBadgesTemplate,
 } from './Templates';
 
 // Imports of text sources
@@ -27,37 +22,12 @@ import ChipsIconRaw from '!!raw-loader!./Templates/ChipsIcon';
 import ChipsSelectRaw from '!!raw-loader!./Templates/ChipsSelect';
 import ChipsMultiSelectRaw from '!!raw-loader!./Templates/ChipsMultiSelect';
 import ChipsTooltipRaw from '!!raw-loader!./Templates/ChipsTooltip';
-
-const Separator = styled.div`
-  height: 20px;
-`;
+import ChipsBadgesRaw from '!!raw-loader!./Templates/ChipsBadges';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
   font-size: 16px;
   line-height: 24px;
-`;
-
-const listDataIcon = [
-  {
-    id: '1',
-    label: 'Москва',
-    disabled: false,
-    iconBefore: <VacationIcon />,
-    iconAfter: <AlertSolid />,
-    selected: false,
-  },
-  { id: '2', label: 'Тверь', disabled: false, iconBefore: <TrophyIcon />, selected: false },
-  { id: '3', label: 'Самара', disabled: false, iconAfter: <BurnIcon />, selected: false },
-  { id: '4', label: 'Омск', disabled: false, iconAfter: <DiamondSolid />, selected: false },
-  { id: '5', label: 'Вильнус', disabled: false, iconBefore: <BurnIcon />, selected: false, badge: 3 },
-];
-
-const WrapperChip = styled.div<{ dimension?: 'm' | 's' }>`
-  display: flex;
-  & > div {
-    margin-right: ${({ dimension }) => (dimension === 's' ? 8 : 12)}px;
-  }
 `;
 
 const Description = () => (
@@ -126,51 +96,6 @@ export default {
     },
   },
 } as ComponentMeta<typeof Chips>;
-
-const ChipsBadgesDemo: ComponentStory<typeof Chips> = (props) => {
-  const [selectedM, setSelectedM] = useState('');
-  const [selectedS, setSelectedS] = useState('');
-
-  return (
-    <>
-      <WrapperChip dimension="m">
-        {listDataIcon.map((item) => (
-          <Chips
-            {...props}
-            key={item.id}
-            badge={props.badge}
-            dimension="m"
-            selected={selectedM === item.id}
-            onClick={() => (props.disabled ? null : setSelectedM(item.id))}
-            iconBefore={item?.iconBefore}
-            iconAfter={item?.iconAfter}
-          >
-            {item.label}
-          </Chips>
-        ))}
-      </WrapperChip>
-      <Separator />
-      <WrapperChip dimension="s">
-        {listDataIcon.map((item) => (
-          <Chips
-            {...props}
-            key={item.id}
-            badge={props.badge}
-            dimension="s"
-            appearance="filled"
-            selected={selectedS === item.id}
-            onClick={() => (props.disabled ? null : setSelectedS(item.id))}
-            iconBefore={item?.iconBefore}
-            iconAfter={item?.iconAfter}
-          >
-            {item.label}
-          </Chips>
-        ))}
-      </WrapperChip>
-    </>
-  );
-};
-export const ChipsBadges = ChipsBadgesDemo.bind({});
 
 //<editor-fold desc="Chips базовый пример">
 const ChipsTagsStory: ComponentStory<typeof Chips> = (props) => <ChipsTagsTemplate {...props} />;
@@ -276,9 +201,16 @@ ChipsTooltip.parameters = {
 };
 //</editor-fold>
 
+//<editor-fold desc="Chips с Badge">
+const ChipsBadgesStory: ComponentStory<typeof Chips> = (props) => <ChipsBadgesTemplate {...props} />;
+
+export const ChipsBadges = ChipsBadgesStory.bind({});
 ChipsBadges.storyName = 'Chips с Badge';
 ChipsBadges.parameters = {
   docs: {
+    source: {
+      code: ChipsBadgesRaw,
+    },
     description: {
       story: `В компоненте можно включать бейджи.`,
     },
@@ -287,3 +219,4 @@ ChipsBadges.parameters = {
 ChipsBadges.args = {
   badge: 5,
 };
+//</editor-fold>
