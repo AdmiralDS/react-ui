@@ -9,31 +9,11 @@ import { Button, T, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
 import { filterKeysWithUndefinedValues } from '#src/components/common/utils/filterKeysWithUndefinedValues';
 import { PaddingForButtonWithIconLeft, PaddingForButtonWithIconRight } from '#src/components/Button/dimensionMixin';
-import { ButtonLoaderTemplate } from './Templates';
+import { ButtonLoaderTemplate, ButtonWithIconTemplate } from './Templates';
 
 // Imports of text sources
 import ButtonLoaderRaw from '!!raw-loader!./Templates/ButtonLoader';
-
-const WrapperButton = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-
-  > * {
-    margin: 8px;
-    flex-basis: 170px;
-  }
-
-  justify-content: space-between;
-  align-items: center;
-`;
-const Separator = styled.div`
-  height: 20px;
-  width: 20px;
-`;
-const DarkDiv = styled.div`
-  background-color: ${({ theme }) => theme.color['Special/Dark Static Neutral 00']};
-  padding: 2px;
-`;
+import ButtonWithIconRaw from '!!raw-loader!./Templates/ButtonWithIcon';
 
 export default {
   title: 'Admiral-2.1/Button',
@@ -280,92 +260,28 @@ const ButtonVariants: ComponentStory<typeof Button> = (args) => {
   return <TemplateVariants {...args} />;
 };
 
-const TemplateWithIcon = (props: ButtonProps) => {
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
-  return (
-    <ThemeProvider theme={swapBorder}>
-      <WrapperButton>
-        <div>
-          <T font="Body/Body 1 Long" as="div">
-            Dimension - xl
-          </T>
-          <Button dimension="xl" appearance="primary" iconPlace="right" icon={<StarSolid />}>
-            Button 56
-          </Button>
-        </div>
-        <div>
-          <T font="Body/Body 1 Long" as="div">
-            Dimension - l
-          </T>
-          <Button dimension="l" appearance="secondary" icon={<StarSolid />}>
-            Button 48
-          </Button>
-        </div>
-        <div>
-          <T font="Body/Body 1 Long" as="div">
-            Dimension - m
-          </T>
-          <Button dimension="m" appearance="danger" iconPlace="right" icon={<StarSolid />}>
-            Button 40
-          </Button>
-        </div>
-        <div>
-          <T font="Body/Body 1 Long" as="div">
-            Ghost - xl
-          </T>
-          <Button dimension="xl" appearance="ghost" iconPlace="right" icon={<StarSolid />}>
-            Button 56
-          </Button>
-        </div>
-        <>
-          <DarkDiv>
-            <T font="Body/Body 1 Long" as="div" style={{ color: 'white' }}>
-              White - l
-            </T>
-            <Button dimension="l" appearance="white" iconPlace="right" icon={<StarSolid />}>
-              Button 48
-            </Button>
-          </DarkDiv>
-        </>
-        <div>
-          <T font="Body/Body 1 Long" as="div">
-            Dimension - s
-          </T>
-          <Button dimension="s" appearance="success" icon={<StarSolid />}>
-            Button 32
-          </Button>
-        </div>
-      </WrapperButton>
-      <Separator />
-      <div>
-        <T font="Body/Body 1 Long" as="div">
-          Button with icon stretch
-        </T>
-        <Button dimension="l" appearance="primary" style={{ width: '100%' }} icon={<StarSolid />}>
-          Button
-        </Button>
-      </div>
-    </ThemeProvider>
-  );
-};
-
-const ButtonWithIconDemo: ComponentStory<typeof Button> = (args) => {
-  return <TemplateWithIcon {...args} />;
-};
-
 export const Playground = ButtonPlaygroundDemo.bind({});
 Playground.storyName = 'Button. Playground';
 Playground.args = {};
 export const PlaygroundVariants = ButtonVariants.bind({});
 PlaygroundVariants.storyName = 'Button. Стили';
 PlaygroundVariants.args = {};
-export const ButtonWithIcon = ButtonWithIconDemo.bind({});
+
+//<editor-fold desc="Button с иконкой">
+const ButtonWithIconStory: ComponentStory<typeof Button> = (args) => {
+  return <ButtonWithIconTemplate {...args} />;
+};
+export const ButtonWithIcon = ButtonWithIconStory.bind({});
+ButtonWithIcon.parameters = {
+  docs: {
+    source: {
+      code: ButtonWithIconRaw,
+    },
+  },
+};
 ButtonWithIcon.storyName = 'Button с иконкой';
 ButtonWithIcon.args = {};
+//</editor-fold>
 
 //<editor-fold desc="Button. Загрузка">
 const ButtonLoaderStory: ComponentStory<typeof Button> = (args) => {
