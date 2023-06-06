@@ -1,9 +1,8 @@
 import * as React from 'react';
-import styled, { ThemeProvider } from 'styled-components';
+import styled from 'styled-components';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
-import type { Theme } from '@admiral-ds/react-ui';
-import { Drawer, DrawerContent, DrawerTitle, Button, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
+import { Drawer, Button, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
 import {
   DrawerPlaygroundTemplate,
@@ -12,6 +11,7 @@ import {
   DrawerNonClosableTemplate,
   DrawerPositionTemplate,
   DrawerMobileTemplate,
+  DrawerWidthTemplate,
 } from './Templates';
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
@@ -22,6 +22,7 @@ import DrawerWithoutBackdropRaw from '!!raw-loader!./Templates/DrawerWithoutBack
 import DrawerNonClosableRaw from '!!raw-loader!./Templates/DrawerNonClosable';
 import DrawerPositionRaw from '!!raw-loader!./Templates/DrawerPosition';
 import DrawerMobileRaw from '!!raw-loader!./Templates/DrawerMobile';
+import DrawerWidthRaw from '!!raw-loader!./Templates/DrawerWidth';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -102,40 +103,6 @@ export default {
     },
   },
 } as ComponentMeta<typeof Drawer>;
-
-const ContentArea = styled.div`
-  display: flex;
-  height: 100%;
-  background: ${({ theme }) => theme.color['Success/Success 20']};
-`;
-
-const Template6: ComponentStory<typeof Drawer> = (args) => {
-  const [opened, setOpened] = React.useState(false);
-
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
-  return (
-    <ThemeProvider theme={swapBorder}>
-      <Button onClick={() => setOpened(true)}>Open drawer</Button>
-      <Drawer
-        {...args}
-        isOpen={opened}
-        onClose={() => setOpened(false)}
-        closeOnBackdropClick
-        closeOnEscapeKeyDown
-        aria-labelledby="drawer-title"
-      >
-        <DrawerTitle id="drawer-title">Drawer title</DrawerTitle>
-        <DrawerContent style={{ width: '500px' }}>
-          <ContentArea />
-        </DrawerContent>
-      </Drawer>
-    </ThemeProvider>
-  );
-};
 
 const Template7: ComponentStory<typeof Drawer> = (args) => {
   const [opened, setOpened] = React.useState(false);
@@ -288,17 +255,22 @@ DrawerMobileExample.parameters = {
 DrawerMobileExample.storyName = 'Drawer. Адаптив (mobile)';
 //</editor-fold>
 
-export const DrawerWidth = Template6.bind({});
-DrawerWidth.args = {};
-DrawerWidth.storyName = 'Drawer. Ширина компонента';
-DrawerWidth.parameters = {
+//<editor-fold desc="Ширина компонента">
+const DrawerWidthStory: ComponentStory<typeof Drawer> = (props) => <DrawerWidthTemplate {...cleanUpProps(props)} />;
+export const DrawerWidthExample = DrawerWidthStory.bind({});
+DrawerWidthExample.parameters = {
   docs: {
+    source: {
+      code: DrawerWidthRaw,
+    },
     description: {
       story: `Ширина компонента задается пользователем, но не меньше 320 px. Drawer подстраивает свою ширину под ширину контента,
       либо пользователь может задать ширину компонента напрямую через параметры style или используя classname.`,
     },
   },
 };
+DrawerWidthExample.storyName = 'Drawer. Ширина компонента';
+//</editor-fold>
 
 export const DrawerCustomContent = Template7.bind({});
 DrawerCustomContent.args = {};
