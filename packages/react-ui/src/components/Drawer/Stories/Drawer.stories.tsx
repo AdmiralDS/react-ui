@@ -2,7 +2,7 @@ import * as React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
-import type { DrawerProps, Theme } from '@admiral-ds/react-ui';
+import type { Theme } from '@admiral-ds/react-ui';
 import {
   Drawer,
   DrawerButtonPanel,
@@ -12,14 +12,13 @@ import {
   InputField,
   ALL_BORDER_RADIUS_VALUES,
 } from '@admiral-ds/react-ui';
-import { ReactComponent as ArrowLeftOutline } from '@admiral-ds/icons/build/system/ArrowLeftOutline.svg';
-import { ReactComponent as ArrowRightOutline } from '@admiral-ds/icons/build/system/ArrowRightOutline.svg';
 
 import {
   DrawerPlaygroundTemplate,
   DrawerWithBackdropTemplate,
   DrawerWithoutBackdropTemplate,
   DrawerNonClosableTemplate,
+  DrawerPositionTemplate,
 } from './Templates';
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
@@ -28,6 +27,7 @@ import PlaygroundRaw from '!!raw-loader!./Templates/DrawerPlayground';
 import DrawerWithBackdropRaw from '!!raw-loader!./Templates/DrawerWithBackdrop';
 import DrawerWithoutBackdropRaw from '!!raw-loader!./Templates/DrawerWithoutBackdrop';
 import DrawerNonClosableRaw from '!!raw-loader!./Templates/DrawerNonClosable';
+import DrawerPositionRaw from '!!raw-loader!./Templates/DrawerPosition';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -109,102 +109,11 @@ export default {
   },
 } as ComponentMeta<typeof Drawer>;
 
-const ButtonWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
-
 const ContentArea = styled.div`
   display: flex;
   height: 100%;
   background: ${({ theme }) => theme.color['Success/Success 20']};
 `;
-
-interface Props {
-  onYesClick: (p: { inputValue: string }) => void;
-  onNoClick: () => void;
-}
-
-const DrawerForm = ({ onYesClick, onNoClick }: Props) => {
-  const [inputValue, setInputValue] = React.useState('');
-
-  return (
-    <>
-      <DrawerContent>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. At cupiditate ducimus nisi nulla numquam obcaecati
-        quam quasi quod ut veritatis?
-        <Separator />
-        <InputField
-          label="Введите значение"
-          value={inputValue}
-          onChange={(e) => {
-            setInputValue(e.target.value);
-          }}
-        />
-      </DrawerContent>
-      <DrawerButtonPanel>
-        <Button appearance="primary" dimension="m" onClick={() => onYesClick({ inputValue })}>
-          Yes button
-        </Button>
-        <Button appearance="secondary" dimension="m" onClick={onNoClick}>
-          No button
-        </Button>
-      </DrawerButtonPanel>
-    </>
-  );
-};
-
-const Template4: ComponentStory<typeof Drawer> = (args) => {
-  const [opened, setOpened] = React.useState(false);
-  const [position, setPosition] = React.useState<DrawerProps['position']>('right');
-
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
-  return (
-    <ThemeProvider theme={swapBorder}>
-      <ButtonWrapper>
-        <Button
-          onClick={() => {
-            setPosition('left');
-            setOpened(true);
-          }}
-        >
-          <ArrowLeftOutline />
-          Open drawer with 'left' position
-        </Button>
-        <Button
-          onClick={() => {
-            setPosition('right');
-            setOpened(true);
-          }}
-        >
-          Open drawer with 'right' position
-          <ArrowRightOutline />
-        </Button>
-      </ButtonWrapper>
-      <Drawer
-        {...args}
-        isOpen={opened}
-        onClose={() => {
-          setOpened(false);
-        }}
-        position={position}
-        closeOnBackdropClick
-        closeOnEscapeKeyDown
-        style={{ width: '480px' }}
-        aria-labelledby="drawer-title"
-      >
-        <DrawerTitle id="drawer-title">Drawer title</DrawerTitle>
-        <DrawerContent>
-          <ContentArea />
-        </DrawerContent>
-      </Drawer>
-    </ThemeProvider>
-  );
-};
 
 const Template5: ComponentStory<typeof Drawer> = (args) => {
   const [opened, setOpened] = React.useState(false);
@@ -383,17 +292,24 @@ DrawerNonClosableExample.parameters = {
 DrawerNonClosableExample.storyName = 'Drawer с обязательным условием (non-closable Drawer)';
 //</editor-fold>
 
-export const DrawerPosition = Template4.bind({});
-DrawerPosition.args = {};
-DrawerPosition.storyName = 'Drawer. Расположение компонента';
-DrawerPosition.parameters = {
+//<editor-fold desc="Расположение компонента">
+const DrawerPositionStory: ComponentStory<typeof Drawer> = (props) => (
+  <DrawerPositionTemplate {...cleanUpProps(props)} />
+);
+export const DrawerPositionExample = DrawerPositionStory.bind({});
+DrawerPositionExample.parameters = {
   docs: {
+    source: {
+      code: DrawerPositionRaw,
+    },
     description: {
       story: `Drawer может располагаться как справа (по умолчанию), так и слева. Расположение Drawerа определяется параметром position.
       При этом, компоновка элементов внутри панели не изменяется в зависимости от расположения.`,
     },
   },
 };
+DrawerPositionExample.storyName = 'Drawer. Расположение компонента';
+//</editor-fold>
 
 export const DrawerMobile = Template5.bind({});
 DrawerMobile.args = {};
