@@ -15,6 +15,14 @@ import {
 import { ReactComponent as ArrowLeftOutline } from '@admiral-ds/icons/build/system/ArrowLeftOutline.svg';
 import { ReactComponent as ArrowRightOutline } from '@admiral-ds/icons/build/system/ArrowRightOutline.svg';
 
+import { DrawerPlaygroundTemplate, DrawerWithBackdropTemplate, DrawerWithoutBackdropTemplate } from './Templates';
+import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+
+// Imports of text sources
+import PlaygroundRaw from '!!raw-loader!./Templates/DrawerPlayground';
+import DrawerWithBackdropRaw from '!!raw-loader!./Templates/DrawerWithBackdrop';
+import DrawerWithoutBackdropRaw from '!!raw-loader!./Templates/DrawerWithoutBackdrop';
+
 const Desc = styled.div`
   font-family: 'VTB Group UI';
   font-size: 16px;
@@ -137,107 +145,6 @@ const DrawerForm = ({ onYesClick, onNoClick }: Props) => {
         </Button>
       </DrawerButtonPanel>
     </>
-  );
-};
-
-const Template1: ComponentStory<typeof Drawer> = (args) => {
-  const [opened, setOpened] = React.useState(false);
-
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
-  return (
-    <ThemeProvider theme={swapBorder}>
-      <Button onClick={() => setOpened(true)}>Open drawer with 2 buttons</Button>
-      <Drawer
-        {...args}
-        isOpen={opened}
-        onClose={() => setOpened(false)}
-        style={{ width: '480px' }}
-        aria-labelledby="drawer-title"
-      >
-        <DrawerTitle id="drawer-title">Drawer title</DrawerTitle>
-        <DrawerForm
-          onYesClick={(p) => {
-            console.log(`value ${p.inputValue}`);
-            setOpened(false);
-          }}
-          onNoClick={() => setOpened(false)}
-        />
-      </Drawer>
-    </ThemeProvider>
-  );
-};
-
-const Template10: ComponentStory<typeof Drawer> = (args) => {
-  const [opened, setOpened] = React.useState(false);
-
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
-  return (
-    <ThemeProvider theme={swapBorder}>
-      <Button onClick={() => setOpened(true)}>Open drawer with backdrop</Button>
-      <Drawer
-        {...args}
-        isOpen={opened}
-        onClose={() => {
-          setOpened(false);
-        }}
-        closeOnBackdropClick
-        closeOnEscapeKeyDown
-        style={{ width: '480px' }}
-        aria-labelledby="drawer-title"
-      >
-        <DrawerTitle id="drawer-title">Drawer title</DrawerTitle>
-        <DrawerForm
-          onYesClick={(p) => {
-            console.log(`value ${p.inputValue}`);
-            setOpened(false);
-          }}
-          onNoClick={() => setOpened(false)}
-        />
-      </Drawer>
-    </ThemeProvider>
-  );
-};
-
-const Template2: ComponentStory<typeof Drawer> = (args) => {
-  const [opened, setOpened] = React.useState(false);
-
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
-  return (
-    <ThemeProvider theme={swapBorder}>
-      <Button onClick={() => setOpened(true)}>Open drawer without backdrop</Button>
-      <Drawer
-        {...args}
-        isOpen={opened}
-        onClose={() => {
-          setOpened(false);
-        }}
-        backdrop={false}
-        closeOnEscapeKeyDown
-        style={{ width: '480px' }}
-        aria-labelledby="drawer-title"
-      >
-        <DrawerTitle id="drawer-title">Drawer title</DrawerTitle>
-        <DrawerForm
-          onYesClick={(p) => {
-            console.log(`value ${p.inputValue}`);
-            setOpened(false);
-          }}
-          onNoClick={() => setOpened(false)}
-        />
-      </Drawer>
-    </ThemeProvider>
   );
 };
 
@@ -426,14 +333,28 @@ const Template7: ComponentStory<typeof Drawer> = (args) => {
   );
 };
 
-export const Playground = Template1.bind({});
-Playground.args = {};
-
-export const DrawerWithBackdrop = Template10.bind({});
-DrawerWithBackdrop.args = {};
-DrawerWithBackdrop.storyName = 'Drawer с блокировкой контента страницы (Backdrop = True)';
-DrawerWithBackdrop.parameters = {
+//<editor-fold desc="Playground">
+const PlaygroundStory: ComponentStory<typeof Drawer> = (props) => <DrawerPlaygroundTemplate {...cleanUpProps(props)} />;
+export const Playground = PlaygroundStory.bind({});
+Playground.parameters = {
   docs: {
+    source: {
+      code: PlaygroundRaw,
+    },
+  },
+};
+//</editor-fold>
+
+//<editor-fold desc="Drawer с блокировкой контента страницы">
+const DrawerWithBackdropStory: ComponentStory<typeof Drawer> = (props) => (
+  <DrawerWithBackdropTemplate {...cleanUpProps(props)} />
+);
+export const DrawerWithBackdropExample = DrawerWithBackdropStory.bind({});
+DrawerWithBackdropExample.parameters = {
+  docs: {
+    source: {
+      code: DrawerWithBackdropRaw,
+    },
     description: {
       story: `По умолчанию Drawer блокирует контент страницы, за это отвечает параметр backdrop, равный по умолчанию true. 
       В этом случае страница затемняется, поверх экрана накладывается цвет Opacity/Modal. Взаимодействовать с контентом 
@@ -442,12 +363,19 @@ DrawerWithBackdrop.parameters = {
     },
   },
 };
+DrawerWithBackdropExample.storyName = 'Drawer с блокировкой контента страницы (Backdrop = True)';
+//</editor-fold>
 
-export const DrawerWithoutBackdrop = Template2.bind({});
-DrawerWithoutBackdrop.args = {};
-DrawerWithoutBackdrop.storyName = 'Drawer без блокировки контента страницы (Backdrop = False)';
-DrawerWithoutBackdrop.parameters = {
+//<editor-fold desc="Drawer без блокировки контента страницы">
+const DrawerWithoutBackdropStory: ComponentStory<typeof Drawer> = (props) => (
+  <DrawerWithoutBackdropTemplate {...cleanUpProps(props)} />
+);
+export const DrawerWithoutBackdropExample = DrawerWithoutBackdropStory.bind({});
+DrawerWithoutBackdropExample.parameters = {
   docs: {
+    source: {
+      code: DrawerWithoutBackdropRaw,
+    },
     description: {
       story: `Если необходим Drawer без блокировки контента страницы, то необходимо использовать параметр backdrop равный false.
       В этом случае пользователь сможет одновременно взаимодействовать и с Drawer, и с содержимым страницы. 
@@ -456,6 +384,8 @@ DrawerWithoutBackdrop.parameters = {
     },
   },
 };
+DrawerWithoutBackdropExample.storyName = 'Drawer без блокировки контента страницы (Backdrop = False)';
+//</editor-fold>
 
 export const DrawerWithoutCloseIcon = Template3.bind({});
 DrawerWithoutCloseIcon.args = {};
