@@ -5,13 +5,14 @@ import { withDesign } from 'storybook-addon-designs';
 import { Hint, Button, TextButton, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 import { ReactComponent as HelpOutline } from '@admiral-ds/icons/build/service/HelpOutline.svg';
 
-import { HintBaseTemplate, HintClassNameTemplate, HintClickTemplate } from './Templates';
+import { HintBaseTemplate, HintClassNameTemplate, HintClickTemplate, HintPositionTemplate } from './Templates';
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
 import HintBaseRaw from '!!raw-loader!./Templates/HintBase';
 import HintClassNameRaw from '!!raw-loader!./Templates/HintClassName';
 import HintClickRaw from '!!raw-loader!./Templates/HintClick';
+import HintPositionRaw from '!!raw-loader!./Templates/HintPosition';
 
 const Separator = styled.div<{ height?: number }>`
   height: ${({ height }) => (height ? height : 20)}px;
@@ -92,71 +93,6 @@ export default {
 
 const text = `At breakpoint boundaries, mini units divide the screen into a fixed master grid, and multiples
 of mini units map to fluid grid column widths and row heights.`;
-
-const Template2: ComponentStory<typeof Hint> = (args) => {
-  const [visible1, setVisible1] = React.useState(false);
-  const [visible2, setVisible2] = React.useState(false);
-  const [visible3, setVisible3] = React.useState(false);
-  const [visible4, setVisible4] = React.useState(false);
-  const handleVisibilityChange1 = (visible: boolean) => setVisible1(visible);
-  const handleVisibilityChange2 = (visible: boolean) => setVisible2(visible);
-  const handleVisibilityChange3 = (visible: boolean) => setVisible3(visible);
-  const handleVisibilityChange4 = (visible: boolean) => setVisible4(visible);
-  return (
-    <>
-      <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
-        <Hint
-          {...args}
-          visible={visible1}
-          onVisibilityChange={handleVisibilityChange1}
-          renderContent={() => text}
-          anchorId="right_pos"
-          hintPosition="right"
-        >
-          <StyledButton dimension="s" aria-label="Additional information" aria-describedby="right_pos">
-            Right
-          </StyledButton>
-        </Hint>
-        <Hint
-          {...args}
-          visible={visible2}
-          onVisibilityChange={handleVisibilityChange2}
-          renderContent={() => text}
-          id="top_pos"
-          hintPosition="top"
-        >
-          <StyledButton dimension="s" aria-label="Additional information" aria-describedby="top_pos">
-            Top
-          </StyledButton>
-        </Hint>
-        <Hint
-          {...args}
-          visible={visible3}
-          onVisibilityChange={handleVisibilityChange3}
-          renderContent={() => text}
-          anchorId="bottom_pos"
-          hintPosition="bottom"
-        >
-          <StyledButton dimension="s" aria-label="Additional information" aria-describedby="bottom_pos">
-            Bottom
-          </StyledButton>
-        </Hint>
-        <Hint
-          {...args}
-          visible={visible4}
-          onVisibilityChange={handleVisibilityChange4}
-          renderContent={() => text}
-          id="left-pos"
-          hintPosition="left"
-        >
-          <StyledButton dimension="s" aria-label="Additional information" aria-describedby="left-pos">
-            Left
-          </StyledButton>
-        </Hint>
-      </div>
-    </>
-  );
-};
 
 const Template3: ComponentStory<typeof Hint> = ({ anchorId, ...args }) => {
   const btnRef = useRef<HTMLButtonElement>(null);
@@ -258,11 +194,16 @@ HintBaseExample.parameters = {
 HintBaseExample.storyName = 'Hint. Базовый пример.';
 //</editor-fold>
 
-/**  docs.story.description doesn't shown for the first story, only for the other stories on the page */
-export const HintPosition = Template2.bind({});
-HintPosition.storyName = 'Hint. Позиционирование.';
-HintPosition.parameters = {
+//<editor-fold desc="Позиционирование">
+const HintPositionStory: ComponentStory<typeof Hint> = (props) => (
+  <HintPositionTemplate visible renderContent={() => ''} {...cleanUpProps(props)} />
+);
+export const HintPositionExample = HintPositionStory.bind({});
+HintPositionExample.parameters = {
   docs: {
+    source: {
+      code: HintPositionRaw,
+    },
     description: {
       story: `Компонент имеет 8 основных вариантов позиционирования: снизу справа, снизу слева, сверху справа, 
       сверху слева, слева внизу, слева вверху, справа внизу и справа вверху. Позиции перечислены в порядке приоритета.
@@ -286,6 +227,8 @@ HintPosition.parameters = {
     },
   },
 };
+HintPositionExample.storyName = 'Hint. Позиционирование.';
+//</editor-fold>
 
 //<editor-fold desc="Hint. Появление по клику">
 const HintClickStory: ComponentStory<typeof Hint> = (props) => (
