@@ -11,10 +11,11 @@ import { ReactComponent as DiamondSolid } from '@admiral-ds/icons/build/category
 import { ReactComponent as TrophyIcon } from '@admiral-ds/icons/build/category/TrophySolid.svg';
 import { ReactComponent as BurnIcon } from '@admiral-ds/icons/build/category/BurnSolid.svg';
 
-import { ChipsTagsTemplate } from './Templates';
+import { ChipsTagsCloseTemplate, ChipsTagsTemplate } from './Templates';
 
 // Imports of text sources
 import ChipsTagsRaw from '!!raw-loader!./Templates/ChipsTags';
+import ChipsTagsCloseRaw from '!!raw-loader!./Templates/ChipsTagsClose';
 
 const Separator = styled.div`
   height: 20px;
@@ -135,35 +136,6 @@ export default {
     },
   },
 } as ComponentMeta<typeof Chips>;
-
-const ChipsTagsCloseDemo: ComponentStory<typeof Chips> = (props) => {
-  const [dataListM, setDataM] = useState(listData);
-  const [dataListS, setDataS] = useState(listData);
-  return (
-    <>
-      <WrapperChip dimension={props.dimension}>
-        {dataListM.map((item) => (
-          <Chips key={item.id} {...props} onClose={() => setDataM((prev) => prev.filter((d) => d.id !== item.id))}>
-            {item.label}
-          </Chips>
-        ))}
-      </WrapperChip>
-      <Separator />
-      <WrapperChip dimension="s">
-        {dataListS.map((item) => (
-          <Chips
-            key={item.id}
-            {...props}
-            dimension="s"
-            onClose={() => setDataS((prev) => prev.filter((d) => d.id !== item.id))}
-          >
-            {item.label}
-          </Chips>
-        ))}
-      </WrapperChip>
-    </>
-  );
-};
 
 const ChipsIconDemo: ComponentStory<typeof Chips> = (props) => {
   const [selectedM, setSelectedM] = useState('');
@@ -338,7 +310,6 @@ const ChipsBadgesDemo: ComponentStory<typeof Chips> = (props) => {
     </>
   );
 };
-export const ChipsTagsClose = ChipsTagsCloseDemo.bind({});
 export const ChipsIcon = ChipsIconDemo.bind({});
 export const ChipsSelect = ChipsSelectDemo.bind({});
 export const ChipsMultiSelectIcon = ChipsMultiSelectIconDemo.bind({});
@@ -359,15 +330,23 @@ ChipsTags.parameters = {
 ChipsTags.storyName = 'Chips базовый пример';
 //</editor-fold>
 
+//<editor-fold desc="Chips с текстом и иконкой закрыть">
+const ChipsTagsCloseStory: ComponentStory<typeof Chips> = (props) => <ChipsTagsCloseTemplate {...props} />;
+
+export const ChipsTagsClose = ChipsTagsCloseStory.bind({});
 ChipsTagsClose.storyName = 'Chips с текстом и иконкой закрыть';
 ChipsTagsClose.parameters = {
   docs: {
+    source: {
+      code: ChipsTagsCloseRaw,
+    },
     description: {
       story: `Взаимодействовать можно только с чипсами имеющими иконку закрытия “Close”. При 
       нажатии на иконку закрытия элемент удаляется из списка выбранных.`,
     },
   },
 };
+//</editor-fold>
 
 ChipsIcon.storyName = 'Chips с иконкой';
 ChipsIcon.parameters = {
