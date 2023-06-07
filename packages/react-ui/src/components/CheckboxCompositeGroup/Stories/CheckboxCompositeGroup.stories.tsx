@@ -6,6 +6,7 @@ import { CheckboxCompositeGroup, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/re
 import type { CheckboxCompositeGroupProps } from '@admiral-ds/react-ui';
 
 import { CheckboxCompositeGroupExampleTemplate } from './Templates';
+import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
 import CheckboxCompositeGroupExampleRaw from '!!raw-loader!./Templates/CheckboxCompositeGroupExample';
@@ -43,8 +44,8 @@ export default {
 } as ComponentMeta<typeof CheckboxCompositeGroup>;
 
 //<editor-fold desc="CheckboxCompositeGroup. Пример">
-const CheckboxCompositeGroupExampleStory: Story = (args: CheckboxCompositeGroupProps) => (
-  <CheckboxCompositeGroupExampleTemplate {...args} />
+const CheckboxCompositeGroupExampleStory: Story = (props: CheckboxCompositeGroupProps) => (
+  <CheckboxCompositeGroupExampleTemplate {...cleanUpProps(props)} />
 );
 
 export const CheckboxCompositeGroupExample = CheckboxCompositeGroupExampleStory.bind({});
@@ -56,5 +57,4 @@ CheckboxCompositeGroupExample.parameters = {
   },
 };
 CheckboxCompositeGroupExample.storyName = 'CheckboxCompositeGroup. Пример';
-CheckboxCompositeGroupExample.args = {};
 //</editor-fold>

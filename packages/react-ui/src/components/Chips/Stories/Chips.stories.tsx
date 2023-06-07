@@ -14,6 +14,7 @@ import {
   ChipsTooltipTemplate,
   ChipsBadgesTemplate,
 } from './Templates';
+import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
 import ChipsTagsRaw from '!!raw-loader!./Templates/ChipsTags';
@@ -98,7 +99,7 @@ export default {
 } as ComponentMeta<typeof Chips>;
 
 //<editor-fold desc="Chips базовый пример">
-const ChipsTagsStory: ComponentStory<typeof Chips> = (props) => <ChipsTagsTemplate {...props} />;
+const ChipsTagsStory: ComponentStory<typeof Chips> = (props) => <ChipsTagsTemplate {...cleanUpProps(props)} />;
 
 export const ChipsTags = ChipsTagsStory.bind({});
 ChipsTags.parameters = {
@@ -112,7 +113,9 @@ ChipsTags.storyName = 'Chips базовый пример';
 //</editor-fold>
 
 //<editor-fold desc="Chips с текстом и иконкой закрыть">
-const ChipsTagsCloseStory: ComponentStory<typeof Chips> = (props) => <ChipsTagsCloseTemplate {...props} />;
+const ChipsTagsCloseStory: ComponentStory<typeof Chips> = (props) => (
+  <ChipsTagsCloseTemplate {...cleanUpProps(props)} />
+);
 
 export const ChipsTagsClose = ChipsTagsCloseStory.bind({});
 ChipsTagsClose.storyName = 'Chips с текстом и иконкой закрыть';
@@ -130,7 +133,7 @@ ChipsTagsClose.parameters = {
 //</editor-fold>
 
 //<editor-fold desc="Chips с иконкой">
-const ChipsIconStory: ComponentStory<typeof Chips> = (props) => <ChipsIconTemplate {...props} />;
+const ChipsIconStory: ComponentStory<typeof Chips> = (props) => <ChipsIconTemplate {...cleanUpProps(props)} />;
 
 export const ChipsIcon = ChipsIconStory.bind({});
 ChipsIcon.storyName = 'Chips с иконкой';
@@ -147,7 +150,7 @@ ChipsIcon.parameters = {
 //</editor-fold>
 
 //<editor-fold desc="Chips с текстом и выбором">
-const ChipsSelectStory: ComponentStory<typeof Chips> = (props) => <ChipsSelectTemplate {...props} />;
+const ChipsSelectStory: ComponentStory<typeof Chips> = (props) => <ChipsSelectTemplate {...cleanUpProps(props)} />;
 
 export const ChipsSelect = ChipsSelectStory.bind({});
 ChipsSelect.storyName = 'Chips с текстом и выбором';
@@ -166,7 +169,9 @@ ChipsSelect.parameters = {
 //</editor-fold>
 
 //<editor-fold desc="Chips для множественного выбора">
-const ChipsMultiSelectStory: ComponentStory<typeof Chips> = (props) => <ChipsMultiSelectTemplate {...props} />;
+const ChipsMultiSelectStory: ComponentStory<typeof Chips> = (props) => (
+  <ChipsMultiSelectTemplate {...cleanUpProps(props)} />
+);
 
 export const ChipsMultiSelect = ChipsMultiSelectStory.bind({});
 ChipsMultiSelect.storyName = 'Chips для множественного выбора';
@@ -183,7 +188,7 @@ ChipsMultiSelect.parameters = {
 //</editor-fold>
 
 //<editor-fold desc="Chips с Tooltip">
-const ChipsTooltipStory: ComponentStory<typeof Chips> = (props) => <ChipsTooltipTemplate {...props} />;
+const ChipsTooltipStory: ComponentStory<typeof Chips> = (props) => <ChipsTooltipTemplate {...cleanUpProps(props)} />;
 
 export const ChipsTooltip = ChipsTooltipStory.bind({});
 ChipsTooltip.storyName = 'Chips с Tooltip';
@@ -202,7 +207,7 @@ ChipsTooltip.parameters = {
 //</editor-fold>
 
 //<editor-fold desc="Chips с Badge">
-const ChipsBadgesStory: ComponentStory<typeof Chips> = (props) => <ChipsBadgesTemplate {...props} />;
+const ChipsBadgesStory: ComponentStory<typeof Chips> = (props) => <ChipsBadgesTemplate {...cleanUpProps(props)} />;
 
 export const ChipsBadges = ChipsBadgesStory.bind({});
 ChipsBadges.storyName = 'Chips с Badge';

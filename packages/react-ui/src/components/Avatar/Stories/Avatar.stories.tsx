@@ -2,8 +2,11 @@ import { withDesign } from 'storybook-addon-designs';
 import * as React from 'react';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import styled from 'styled-components';
+
 import { Avatar } from '@admiral-ds/react-ui';
+
 import { AvatarPlaygroundTemplate, SingleAvatarTemplate } from './Templates';
+import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
 import SingleAvatarRaw from '!!raw-loader!./Templates/SingleAvatar';
@@ -80,7 +83,9 @@ export default {
 } as ComponentMeta<typeof Avatar>;
 
 //<editor-fold desc="Avatar Playground">
-const AvatarPlaygroundStory: ComponentStory<typeof Avatar> = (args) => <AvatarPlaygroundTemplate {...args} />;
+const AvatarPlaygroundStory: ComponentStory<typeof Avatar> = ({ userName, ...props }) => (
+  <AvatarPlaygroundTemplate userName={userName} {...cleanUpProps(props)} />
+);
 
 export const AvatarPlayground = AvatarPlaygroundStory.bind({});
 AvatarPlayground.parameters = {
@@ -90,7 +95,6 @@ AvatarPlayground.parameters = {
     },
   },
 };
-AvatarPlayground.args = {};
 AvatarPlayground.storyName = 'Playground';
 //</editor-fold>
 
@@ -105,6 +109,5 @@ SingleAvatar.parameters = {
     },
   },
 };
-SingleAvatar.args = {};
 SingleAvatar.storyName = 'Avatar';
 //</editor-fold>
