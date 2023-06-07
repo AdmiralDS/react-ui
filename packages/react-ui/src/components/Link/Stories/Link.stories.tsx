@@ -1,12 +1,20 @@
 import * as React from 'react';
 import { Link as RouterLink, MemoryRouter as Router } from 'react-router-dom';
-import styled, { ThemeProvider } from 'styled-components';
+import styled from 'styled-components';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import { Link, LinkComponentCssMixin, T, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
-import type { LinkComponent, Theme } from '@admiral-ds/react-ui';
+import type { LinkComponent } from '@admiral-ds/react-ui';
 import { ReactComponent as ArrowLeftOutline } from '@admiral-ds/icons/build/system/ArrowLeftOutline.svg';
 import { ReactComponent as ArrowRightOutline } from '@admiral-ds/icons/build/system/ArrowRightOutline.svg';
+
+import { LinkPlaygroundTemplate, LinkPrimaryTemplate, LinkSecondaryTemplate } from './Templates';
+import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+
+// Imports of text sources
+import LinkPlaygroundRaw from '!!raw-loader!./Templates/LinkPlayground';
+import LinkPrimaryRaw from '!!raw-loader!./Templates/LinkPrimary';
+import LinkSecondaryRaw from '!!raw-loader!./Templates/LinkSecondary';
 
 export default {
   title: 'Admiral-2.1/Link',
@@ -60,49 +68,6 @@ const Divider = styled.div`
   width: 10px;
   height: 12px;
 `;
-
-const LinkPrimary: ComponentStory<typeof Link> = (args) => {
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
-  return (
-    <ThemeProvider theme={swapBorder}>
-      <T font="Body/Body 1 Long" as="div">
-        Dimension - M
-      </T>
-      <Link appearance={'primary'} href="" onClick={(e: any) => e.preventDefault()}>
-        Link
-      </Link>
-      <Separator />
-      <T font="Body/Body 1 Long" as="div">
-        Dimension - S
-      </T>
-      <Link appearance={'primary'} dimension="s" href="" onClick={(e: any) => e.preventDefault()}>
-        Link
-      </Link>
-    </ThemeProvider>
-  );
-};
-
-const LinkSecondary: ComponentStory<typeof Link> = () => (
-  <>
-    <T font="Body/Body 1 Long" as="div">
-      Dimension - M
-    </T>
-    <Link appearance={'secondary'} href="" onClick={(e: any) => e.preventDefault()}>
-      Link
-    </Link>
-    <Separator />
-    <T font="Body/Body 1 Long" as="div">
-      Dimension - S
-    </T>
-    <Link appearance={'secondary'} dimension="s" href="" onClick={(e: any) => e.preventDefault()}>
-      Link
-    </Link>
-  </>
-);
 
 const LinkWithIcon: ComponentStory<typeof Link> = () => {
   return (
@@ -164,27 +129,44 @@ const LinkPolymorphic: ComponentStory<typeof Link> = () => (
   </>
 );
 
-const LinkDefault: ComponentStory<typeof Link> = ({ children, ...args }) => (
-  <>
-    <T font="Body/Body 1 Short" as="div">
-      Компонент Link используется для навигации. Может применяться отдельно или внутри текста, с иконкой или без.
-    </T>
-    <T font="Body/Body 1 Short" as="div">
-      Ссылки бывают двух типов — Primary и Secondary, и двух размеров — M (24px) и S (20px).
-    </T>
-    <Divider />
-    <Link {...args}>{children}</Link>
-  </>
+//<editor-fold desc="Playground">
+const LinkPlaygroundStory: ComponentStory<typeof Link> = (props) => (
+  <LinkPlaygroundTemplate children={[]} {...cleanUpProps(props)} />
 );
-
-export const Playground = LinkDefault.bind({});
-
-Playground.args = {
-  children: 'Link',
-  href: 'http://localhost:6006/?path=/story/example-link--playground',
+export const Playground = LinkPlaygroundStory.bind({});
+Playground.parameters = {
+  docs: {
+    source: {
+      code: LinkPlaygroundRaw,
+    },
+  },
 };
-export const Primary = LinkPrimary.bind({});
-export const Secondary = LinkSecondary.bind({});
+//</editor-fold>
+
+//<editor-fold desc="Primary">
+const LinkPrimaryStory: ComponentStory<typeof Link> = () => <LinkPrimaryTemplate />;
+export const Primary = LinkPrimaryStory.bind({});
+Primary.parameters = {
+  docs: {
+    source: {
+      code: LinkPrimaryRaw,
+    },
+  },
+};
+//</editor-fold>
+
+//<editor-fold desc="Secondary">
+const LinkSecondaryStory: ComponentStory<typeof Link> = () => <LinkSecondaryTemplate />;
+export const Secondary = LinkSecondaryStory.bind({});
+Secondary.parameters = {
+  docs: {
+    source: {
+      code: LinkSecondaryRaw,
+    },
+  },
+};
+//</editor-fold>
+
 export const IconLink = LinkWithIcon.bind({});
 export const CssMixin = LinkMixin.bind({});
 CssMixin.parameters = {
