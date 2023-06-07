@@ -1,39 +1,22 @@
 import * as React from 'react';
-import styled, { ThemeProvider } from 'styled-components';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 
-import { ReactComponent as StarSolid } from '@admiral-ds/icons/build/system/StarSolid.svg';
-import type { ButtonProps, ButtonAppearance, Theme } from '@admiral-ds/react-ui';
-import { Button, T, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
+import { Button, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
 import { filterKeysWithUndefinedValues } from '#src/components/common/utils/filterKeysWithUndefinedValues';
-import { PaddingForButtonWithIconLeft, PaddingForButtonWithIconRight } from '#src/components/Button/dimensionMixin';
-import { ButtonLoaderTemplate } from './Templates';
+import {
+  ButtonLoaderTemplate,
+  ButtonPlaygroundTemplate,
+  ButtonStylesTemplate,
+  ButtonWithIconTemplate,
+} from './Templates';
 
 // Imports of text sources
 import ButtonLoaderRaw from '!!raw-loader!./Templates/ButtonLoader';
-
-const WrapperButton = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-
-  > * {
-    margin: 8px;
-    flex-basis: 170px;
-  }
-
-  justify-content: space-between;
-  align-items: center;
-`;
-const Separator = styled.div`
-  height: 20px;
-  width: 20px;
-`;
-const DarkDiv = styled.div`
-  background-color: ${({ theme }) => theme.color['Special/Dark Static Neutral 00']};
-  padding: 2px;
-`;
+import ButtonWithIconRaw from '!!raw-loader!./Templates/ButtonWithIcon';
+import ButtonStylesRaw from '!!raw-loader!./Templates/ButtonStyles';
+import ButtonPlaygroundRaw from '!!raw-loader!./Templates/ButtonPlayground';
 
 export default {
   title: 'Admiral-2.1/Button',
@@ -106,266 +89,55 @@ export default {
   },
 } as ComponentMeta<typeof Button>;
 
-const ButtonContainer = styled.div<{ appearance?: ButtonAppearance }>`
-  padding: 24px;
-  position: relative;
-  display: block;
-
-  > * {
-    margin: 8px 16px 0 0;
-  }
-
-  ${(p) => p.appearance === 'white' && 'background-color: #2B313B;'};
-`;
-
-const TemplatePlayground = (props: ButtonProps) => {
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
-  return (
-    <ThemeProvider theme={swapBorder}>
-      <T font="Body/Body 1 Long" as="div">
-        В связи с корректировкой внутренних отступов при наличии иконок рекомендуется их передавать через props "icon" и
-        "iconPlace" = "left" | "right".
-      </T>
-      <ButtonContainer appearance={props.appearance}>
-        <Button {...props} displayAsSquare={false}>
-          Button 56
-        </Button>
-
-        <Button {...props} displayAsSquare={false} icon={<StarSolid />}>
-          Button 56
-        </Button>
-
-        <Button {...props} displayAsSquare={false} icon={<StarSolid />} iconPlace="right">
-          Button 56
-        </Button>
-
-        <Button {...props} icon={<StarSolid />} displayAsSquare />
-      </ButtonContainer>
-      <T font="Body/Body 1 Long" as="div">
-        При передаче иконок через children необходимо прокидывать соответствующий css mixin
-        (PaddingForButtonWithIconLeft | PaddingForButtonWithIconRight).
-      </T>
-      <ButtonContainer appearance={props.appearance}>
-        <Button {...props} displayAsSquare={false}>
-          Button 56
-        </Button>
-
-        <Button {...props} buttonCssMixin={PaddingForButtonWithIconLeft} displayAsSquare={false}>
-          <StarSolid />
-          Button 56
-        </Button>
-
-        <Button {...props} buttonCssMixin={PaddingForButtonWithIconRight} displayAsSquare={false}>
-          Button 56
-          <StarSolid />
-        </Button>
-
-        <Button {...props} displayAsSquare>
-          <StarSolid />
-        </Button>
-      </ButtonContainer>
-    </ThemeProvider>
-  );
+//<editor-fold desc="Button. Playground">
+const ButtonPlaygroundStory: ComponentStory<typeof Button> = (args) => {
+  return <ButtonPlaygroundTemplate {...filterKeysWithUndefinedValues(args)} />;
 };
 
-const ButtonPlaygroundDemo: ComponentStory<typeof Button> = (args) => {
-  return <TemplatePlayground {...filterKeysWithUndefinedValues(args)} />;
+export const ButtonPlayground = ButtonPlaygroundStory.bind({});
+ButtonPlayground.parameters = {
+  docs: {
+    source: {
+      code: ButtonPlaygroundRaw,
+    },
+  },
+};
+ButtonPlayground.storyName = 'Button. Playground';
+ButtonPlayground.args = {};
+//</editor-fold>
+
+//<editor-fold desc="Button. Стили">
+const ButtonStylesStory: ComponentStory<typeof Button> = (args) => {
+  return <ButtonStylesTemplate {...args} />;
 };
 
-const TemplateVariants = (props: ButtonProps) => {
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
-  return (
-    <ThemeProvider theme={swapBorder}>
-      <ButtonContainer>
-        <Button dimension={props.dimension}>Button 56</Button>
-
-        <Button dimension={props.dimension} icon={<StarSolid />}>
-          Button 56
-        </Button>
-
-        <Button dimension={props.dimension} iconPlace="right" icon={<StarSolid />}>
-          Button 56
-        </Button>
-
-        <Button dimension={props.dimension} displayAsSquare icon={<StarSolid />} />
-      </ButtonContainer>
-      <ButtonContainer>
-        <Button dimension={props.dimension} appearance="secondary">
-          Button 56
-        </Button>
-
-        <Button dimension={props.dimension} appearance="secondary" icon={<StarSolid />}>
-          Button 56
-        </Button>
-
-        <Button dimension={props.dimension} appearance="secondary" iconPlace="right" icon={<StarSolid />}>
-          Button 56
-        </Button>
-
-        <Button dimension={props.dimension} appearance="secondary" displayAsSquare icon={<StarSolid />} />
-      </ButtonContainer>
-      <ButtonContainer>
-        <Button dimension={props.dimension} appearance="ghost">
-          Button 56
-        </Button>
-
-        <Button dimension={props.dimension} appearance="ghost" icon={<StarSolid />}>
-          Button 56
-        </Button>
-
-        <Button dimension={props.dimension} appearance="ghost" iconPlace="right" icon={<StarSolid />}>
-          Button 56
-        </Button>
-
-        <Button dimension={props.dimension} appearance="ghost" displayAsSquare icon={<StarSolid />} />
-      </ButtonContainer>
-      <ButtonContainer>
-        <Button dimension={props.dimension} appearance="danger">
-          Button 56
-        </Button>
-
-        <Button dimension={props.dimension} appearance="danger" icon={<StarSolid />}>
-          Button 56
-        </Button>
-
-        <Button dimension={props.dimension} appearance="danger" iconPlace="right" icon={<StarSolid />}>
-          Button 56
-        </Button>
-
-        <Button dimension={props.dimension} appearance="danger" displayAsSquare icon={<StarSolid />} />
-      </ButtonContainer>
-      <ButtonContainer>
-        <Button dimension={props.dimension} appearance="success">
-          Button 56
-        </Button>
-
-        <Button dimension={props.dimension} appearance="success" icon={<StarSolid />}>
-          Button 56
-        </Button>
-
-        <Button dimension={props.dimension} appearance="success" iconPlace="right" icon={<StarSolid />}>
-          Button 56
-        </Button>
-
-        <Button dimension={props.dimension} appearance="success" displayAsSquare icon={<StarSolid />} />
-      </ButtonContainer>
-      <ButtonContainer appearance="white">
-        <Button dimension={props.dimension} appearance="white">
-          Button 56
-        </Button>
-
-        <Button dimension={props.dimension} appearance="white" icon={<StarSolid />}>
-          Button 56
-        </Button>
-
-        <Button dimension={props.dimension} appearance="white" iconPlace="right" icon={<StarSolid />}>
-          Button 56
-        </Button>
-
-        <Button dimension={props.dimension} appearance="white" displayAsSquare icon={<StarSolid />} />
-      </ButtonContainer>
-    </ThemeProvider>
-  );
+export const ButtonStyles = ButtonStylesStory.bind({});
+ButtonStyles.parameters = {
+  docs: {
+    source: {
+      code: ButtonStylesRaw,
+    },
+  },
 };
+ButtonStyles.storyName = 'Button. Стили';
+ButtonStyles.args = {};
+//</editor-fold>
 
-const ButtonVariants: ComponentStory<typeof Button> = (args) => {
-  return <TemplateVariants {...args} />;
+//<editor-fold desc="Button с иконкой">
+const ButtonWithIconStory: ComponentStory<typeof Button> = (args) => {
+  return <ButtonWithIconTemplate {...args} />;
 };
-
-const TemplateWithIcon = (props: ButtonProps) => {
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
-  return (
-    <ThemeProvider theme={swapBorder}>
-      <WrapperButton>
-        <div>
-          <T font="Body/Body 1 Long" as="div">
-            Dimension - xl
-          </T>
-          <Button dimension="xl" appearance="primary" iconPlace="right" icon={<StarSolid />}>
-            Button 56
-          </Button>
-        </div>
-        <div>
-          <T font="Body/Body 1 Long" as="div">
-            Dimension - l
-          </T>
-          <Button dimension="l" appearance="secondary" icon={<StarSolid />}>
-            Button 48
-          </Button>
-        </div>
-        <div>
-          <T font="Body/Body 1 Long" as="div">
-            Dimension - m
-          </T>
-          <Button dimension="m" appearance="danger" iconPlace="right" icon={<StarSolid />}>
-            Button 40
-          </Button>
-        </div>
-        <div>
-          <T font="Body/Body 1 Long" as="div">
-            Ghost - xl
-          </T>
-          <Button dimension="xl" appearance="ghost" iconPlace="right" icon={<StarSolid />}>
-            Button 56
-          </Button>
-        </div>
-        <>
-          <DarkDiv>
-            <T font="Body/Body 1 Long" as="div" style={{ color: 'white' }}>
-              White - l
-            </T>
-            <Button dimension="l" appearance="white" iconPlace="right" icon={<StarSolid />}>
-              Button 48
-            </Button>
-          </DarkDiv>
-        </>
-        <div>
-          <T font="Body/Body 1 Long" as="div">
-            Dimension - s
-          </T>
-          <Button dimension="s" appearance="success" icon={<StarSolid />}>
-            Button 32
-          </Button>
-        </div>
-      </WrapperButton>
-      <Separator />
-      <div>
-        <T font="Body/Body 1 Long" as="div">
-          Button with icon stretch
-        </T>
-        <Button dimension="l" appearance="primary" style={{ width: '100%' }} icon={<StarSolid />}>
-          Button
-        </Button>
-      </div>
-    </ThemeProvider>
-  );
+export const ButtonWithIcon = ButtonWithIconStory.bind({});
+ButtonWithIcon.parameters = {
+  docs: {
+    source: {
+      code: ButtonWithIconRaw,
+    },
+  },
 };
-
-const ButtonWithIconDemo: ComponentStory<typeof Button> = (args) => {
-  return <TemplateWithIcon {...args} />;
-};
-
-export const Playground = ButtonPlaygroundDemo.bind({});
-Playground.storyName = 'Button. Playground';
-Playground.args = {};
-export const PlaygroundVariants = ButtonVariants.bind({});
-PlaygroundVariants.storyName = 'Button. Стили';
-PlaygroundVariants.args = {};
-export const ButtonWithIcon = ButtonWithIconDemo.bind({});
 ButtonWithIcon.storyName = 'Button с иконкой';
 ButtonWithIcon.args = {};
+//</editor-fold>
 
 //<editor-fold desc="Button. Загрузка">
 const ButtonLoaderStory: ComponentStory<typeof Button> = (args) => {
