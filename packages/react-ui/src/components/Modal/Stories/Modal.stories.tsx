@@ -1,23 +1,26 @@
 import * as React from 'react';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
-import styled, { css } from 'styled-components';
-import {
-  Modal,
-  ModalButtonPanel,
-  ModalContent,
-  ModalTitle,
-  Button,
-  ALL_BORDER_RADIUS_VALUES,
-} from '@admiral-ds/react-ui';
+import styled from 'styled-components';
+import { Modal, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
-import { ModalTwoButtonsTemplate, ModalOneButtonTemplate, ModalWithoutButtonsTemplate } from './Templates';
+import {
+  ModalTwoButtonsTemplate,
+  ModalOneButtonTemplate,
+  ModalWithoutButtonsTemplate,
+  ModalScrollTemplate,
+  ModalCustomContentTemplate,
+  ModalCustomOverlayTemplate,
+} from './Templates';
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
 import ModalTwoButtonsRaw from '!!raw-loader!./Templates/ModalTwoButtons';
 import ModalOneButtonRaw from '!!raw-loader!./Templates/ModalOneButton';
 import ModalWithoutButtonsRaw from '!!raw-loader!./Templates/ModalWithoutButtons';
+import ModalScrollRaw from '!!raw-loader!./Templates/ModalScroll';
+import ModalCustomContentRaw from '!!raw-loader!./Templates/ModalCustomContent';
+import ModalCustomOverlayRaw from '!!raw-loader!./Templates/ModalCustomOverlay';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -83,138 +86,6 @@ export default {
   },
 } as ComponentMeta<typeof Modal>;
 
-const Template4: ComponentStory<typeof Modal> = (args) => {
-  const [opened, setOpened] = React.useState(false);
-  return (
-    <>
-      <Button onClick={() => setOpened(true)}>Open modal with scrollable content</Button>
-      {opened && (
-        <Modal
-          {...args}
-          onClose={() => {
-            setOpened(false);
-          }}
-          aria-labelledby="modal-title"
-          style={{ height: '90vh' }} // IE bug https://github.com/philipwalton/flexbugs#flexbug-3
-        >
-          <ModalTitle id="modal-title">Modal title</ModalTitle>
-          <ModalContent>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. At cupiditate ducimus nisi nulla numquam obcaecati
-            quam quasi quod ut veritatis? Lorem ipsum dolor sit amet, consectetur adipisicing elit. At cupiditate
-            ducimus nisi nulla numquam obcaecati quam quasi quod ut veritatis? Lorem ipsum dolor sit amet, consectetur
-            adipisicing elit. At cupiditate ducimus nisi nulla numquam obcaecati quam quasi quod ut veritatis? Lorem
-            ipsum dolor sit amet, consectetur adipisicing elit. At cupiditate ducimus nisi nulla numquam obcaecati quam
-            quasi quod ut veritatis? Lorem ipsum dolor sit amet, consectetur adipisicing elit. At cupiditate ducimus
-            nisi nulla numquam obcaecati quam quasi quod ut veritatis? Lorem ipsum dolor sit amet, consectetur
-            adipisicing elit. At cupiditate ducimus nisi nulla numquam obcaecati quam quasi quod ut veritatis? Lorem
-            ipsum dolor sit amet, consectetur adipisicing elit. At cupiditate ducimus nisi nulla numquam obcaecati quam
-            quasi quod ut veritatis? Lorem ipsum dolor sit amet, consectetur adipisicing elit. At cupiditate ducimus
-            nisi nulla numquam obcaecati quam quasi quod ut veritatis? Lorem ipsum dolor sit amet, consectetur
-            adipisicing elit. At cupiditate ducimus nisi nulla numquam obcaecati quam quasi quod ut veritatis? Lorem
-            ipsum dolor sit amet, consectetur adipisicing elit. At cupiditate ducimus nisi nulla numquam obcaecati quam
-            quasi quod ut veritatis? Lorem ipsum dolor sit amet, consectetur adipisicing elit. At cupiditate ducimus
-            nisi nulla numquam obcaecati quam quasi quod ut veritatis? Lorem ipsum dolor sit amet, consectetur
-            adipisicing elit. At cupiditate ducimus nisi nulla numquam obcaecati quam quasi quod ut veritatis? Lorem
-            ipsum dolor sit amet, consectetur adipisicing elit. At cupiditate ducimus nisi nulla numquam obcaecati quam
-            quasi quod ut veritatis? Lorem ipsum dolor sit amet, consectetur adipisicing elit. At cupiditate ducimus
-            nisi nulla numquam obcaecati quam quasi quod ut veritatis? Lorem ipsum dolor sit amet, consectetur
-            adipisicing elit. At cupiditate ducimus nisi nulla numquam obcaecati quam quasi quod ut veritatis? Lorem
-            ipsum dolor sit amet, consectetur adipisicing elit. At cupiditate ducimus nisi nulla numquam obcaecati quam
-            quasi quod ut veritatis? Lorem ipsum dolor sit amet, consectetur adipisicing elit. At cupiditate ducimus
-            nisi nulla numquam obcaecati quam quasi quod ut veritatis? Lorem ipsum dolor sit amet, consectetur
-            adipisicing elit. At cupiditate ducimus nisi nulla numquam obcaecati quam quasi quod ut veritatis? Lorem
-            ipsum dolor sit amet, consectetur adipisicing elit. At cupiditate ducimus nisi nulla numquam obcaecati quam
-            quasi quod ut veritatis?
-          </ModalContent>
-          <ModalButtonPanel>
-            <Button appearance="primary" dimension="m" onClick={() => setOpened(false)}>
-              Yes button
-            </Button>
-            <Button appearance="secondary" dimension="m" onClick={() => setOpened(false)}>
-              No button
-            </Button>
-          </ModalButtonPanel>
-        </Modal>
-      )}
-    </>
-  );
-};
-
-const Template5: ComponentStory<typeof Modal> = (args) => {
-  const [opened, setOpened] = React.useState(false);
-  return (
-    <>
-      <Button onClick={() => setOpened(true)}>Open modal with custom content</Button>
-      {opened && (
-        <Modal
-          {...args}
-          dimension="l"
-          onClose={() => {
-            setOpened(false);
-          }}
-          aria-labelledby="modal-title"
-        >
-          <h1 id="modal-title" style={{ paddingLeft: '24px' }}>
-            <strong>Modal title</strong>
-          </h1>
-          <i style={{ paddingLeft: '24px' }}>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. At cupiditate ducimus nisi nulla numquam obcaecati
-            quam quasi quod ut veritatis?
-          </i>
-          <div
-            style={{
-              marginTop: '40px',
-              width: '80%',
-              display: 'flex',
-              justifyContent: 'space-between',
-              paddingLeft: '24px',
-            }}
-          >
-            <Button appearance="primary" dimension="m" onClick={() => setOpened(false)}>
-              First button
-            </Button>
-            <Button appearance="primary" dimension="m" onClick={() => setOpened(false)}>
-              Second button
-            </Button>
-            <Button appearance="primary" dimension="m" onClick={() => setOpened(false)}>
-              Third button
-            </Button>
-          </div>
-        </Modal>
-      )}
-    </>
-  );
-};
-
-const overlayStyles = css`
-  background-color: ${({ theme }) => `${theme.color['Error/Error 20']}66`};
-`;
-
-const Template6: ComponentStory<typeof Modal> = (args) => {
-  const [opened, setOpened] = React.useState(false);
-  return (
-    <>
-      <Button onClick={() => setOpened(true)}>Open modal with custom overlay</Button>
-      {opened && (
-        <Modal
-          {...args}
-          onClose={() => {
-            setOpened(false);
-          }}
-          aria-labelledby="modal-title"
-          overlayStyledCss={overlayStyles}
-        >
-          <ModalTitle id="modal-title">Modal title</ModalTitle>
-          <ModalContent>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. At cupiditate ducimus nisi nulla numquam obcaecati
-            quam quasi quod ut veritatis?
-          </ModalContent>
-        </Modal>
-      )}
-    </>
-  );
-};
-
 //<editor-fold desc="Пример c двумя кнопками">
 const ModalTwoButtonsStory: ComponentStory<typeof Modal> = (props) => (
   <ModalTwoButtonsTemplate {...cleanUpProps(props)} />
@@ -260,19 +131,44 @@ ModalWithoutButtonsExample.parameters = {
 ModalWithoutButtonsExample.storyName = 'Modal. Пример без кнопок.';
 //</editor-fold>
 
-export const ModalScroll = Template4.bind({});
-ModalScroll.args = {};
-ModalScroll.storyName = 'Modal. Пример со скроллом.';
-
-export const CustomModal = Template5.bind({});
-CustomModal.args = {};
-CustomModal.storyName = 'Modal. Свободное (кастомизированное) наполнение.';
-
-export const CustomOverlay = Template6.bind({});
-CustomOverlay.args = {};
-CustomOverlay.storyName = 'Modal. Кастомизация подложки модального окна.';
-CustomOverlay.parameters = {
+//<editor-fold desc="Пример со скроллом">
+const ModalScrollStory: ComponentStory<typeof Modal> = (props) => <ModalScrollTemplate {...cleanUpProps(props)} />;
+export const ModalScrollExample = ModalScrollStory.bind({});
+ModalScrollExample.parameters = {
   docs: {
+    source: {
+      code: ModalScrollRaw,
+    },
+  },
+};
+ModalScrollExample.storyName = 'Modal. Пример со скроллом.';
+//</editor-fold>
+
+//<editor-fold desc="Свободное (кастомизированное) наполнение">
+const ModalCustomContentStory: ComponentStory<typeof Modal> = (props) => (
+  <ModalCustomContentTemplate {...cleanUpProps(props)} />
+);
+export const ModalCustomContentExample = ModalCustomContentStory.bind({});
+ModalCustomContentExample.parameters = {
+  docs: {
+    source: {
+      code: ModalCustomContentRaw,
+    },
+  },
+};
+ModalCustomContentExample.storyName = 'Modal. Свободное (кастомизированное) наполнение.';
+//</editor-fold>
+
+//<editor-fold desc="Кастомизация подложки модального окна">
+const ModalCustomOverlayStory: ComponentStory<typeof Modal> = (props) => (
+  <ModalCustomOverlayTemplate {...cleanUpProps(props)} />
+);
+export const ModalCustomOverlayExample = ModalCustomOverlayStory.bind({});
+ModalCustomOverlayExample.parameters = {
+  docs: {
+    source: {
+      code: ModalCustomOverlayRaw,
+    },
     description: {
       story: `У пользователя есть возможность кастомизировать внешний вид подложки модального окна.
       Для этого можно воспользоваться параметром overlayStyledCss, чтобы задать миксин со стилями для подложки.
@@ -280,3 +176,5 @@ CustomOverlay.parameters = {
     },
   },
 };
+ModalCustomOverlayExample.storyName = 'Modal. Кастомизация подложки модального окна.';
+//</editor-fold>
