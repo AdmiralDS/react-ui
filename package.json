@@ -4,10 +4,11 @@
     "packages/*"
   ],
   "scripts": {
+    "postinstall": "turbo run build",
     "build": "turbo run build",
     "dev": "turbo run dev --no-cache --continue",
     "storybook": "npm run storybook -w @admiral-ds/react-ui",
-    "clean": "rm -rf ./**/node_modules ./**/package-lock.json",
+    "clean": "rm -rf ./**/node_modules package-lock.json",
     "test": "npm run test --workspaces --if-present",
     "test:update": "npm run test --workspaces --if-present -- -u",
     "build-storybook": "npm run build-storybook -w @admiral-ds/react-ui"

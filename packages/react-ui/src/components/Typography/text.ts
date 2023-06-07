@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 import type { Typography } from './typography';
 import { TYPOGRAPHY } from './typography';
 
-type TextProps = {
+export type TextProps = {
   color?: string;
 };
 
