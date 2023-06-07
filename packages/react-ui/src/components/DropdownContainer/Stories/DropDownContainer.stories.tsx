@@ -6,6 +6,7 @@ import { withDesign } from 'storybook-addon-designs';
 import { DropdownContainer, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
 import { MenuContainerTemplate, SimpleContainerTemplate } from './Templates';
+import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
 import SimpleContainerRaw from '!!raw-loader!./Templates/SimpleContainer';
@@ -53,11 +54,19 @@ export default {
     dropContainerCssMixin: {
       control: false,
     },
+    targetRef: {
+      control: false,
+    },
+    targetElement: {
+      control: false,
+    },
   },
 } as ComponentMeta<typeof DropdownContainer>;
 
 //<editor-fold desc="Простой контейнер">
-const SimpleContainerStory: ComponentStory<typeof DropdownContainer> = (args) => <SimpleContainerTemplate {...args} />;
+const SimpleContainerStory: ComponentStory<typeof DropdownContainer> = ({ targetRef, ...props }) => (
+  <SimpleContainerTemplate targetRef={targetRef} {...cleanUpProps(props)} />
+);
 
 export const SimpleContainer = SimpleContainerStory.bind({});
 SimpleContainer.parameters = {
@@ -71,7 +80,9 @@ SimpleContainer.storyName = 'Простой контейнер';
 //</editor-fold>
 
 //<editor-fold desc="Контейнер с меню">
-const MenuContainerStory: ComponentStory<typeof DropdownContainer> = (args) => <MenuContainerTemplate {...args} />;
+const MenuContainerStory: ComponentStory<typeof DropdownContainer> = ({ targetRef, ...props }) => (
+  <MenuContainerTemplate targetRef={targetRef} {...cleanUpProps(props)} />
+);
 
 export const MenuContainer = MenuContainerStory.bind({});
 MenuContainer.parameters = {
