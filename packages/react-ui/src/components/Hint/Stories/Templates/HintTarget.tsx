@@ -7,32 +7,37 @@ import { ThemeProvider } from 'styled-components';
 const text = `At breakpoint boundaries, mini units divide the screen into a fixed master grid, and multiples
 of mini units map to fluid grid column widths and row heights.`;
 
-export const HintBaseTemplate = (args: HintProps) => {
+export const HintTargetTemplate = (args: HintProps) => {
   function swapBorder(theme: Theme): Theme {
     theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
+  const btnRef = React.useRef<HTMLButtonElement>(null);
   const [visible, setVisible] = React.useState(false);
   const handleVisibilityChange = (visible: boolean) => setVisible(visible);
 
   return (
     <ThemeProvider theme={swapBorder}>
-      <Hint
-        {...args}
-        renderContent={() => text}
-        anchorId="hint_base"
-        visible={visible}
-        onVisibilityChange={handleVisibilityChange}
+      <Button
+        ref={btnRef}
+        dimension="xl"
+        appearance="primary"
+        iconPlace="right"
+        icon={
+          <Hint
+            {...args}
+            visible={visible}
+            onVisibilityChange={handleVisibilityChange}
+            renderContent={() => text}
+            target={btnRef}
+            anchorId="hint_target"
+          >
+            <HelpOutline tabIndex={0} height={24} width={24} aria-label="Help Icon" aria-describedby="hint_target" />
+          </Hint>
+        }
       >
-        <Button
-          dimension="xl"
-          appearance="primary"
-          displayAsSquare
-          icon={<HelpOutline aria-hidden />}
-          aria-label="Additional information"
-          aria-describedby="hint_base"
-        />
-      </Hint>
+        Hover on icon
+      </Button>
     </ThemeProvider>
   );
 };
