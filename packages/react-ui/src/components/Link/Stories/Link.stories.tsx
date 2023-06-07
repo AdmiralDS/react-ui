@@ -1,20 +1,25 @@
 import * as React from 'react';
-import { Link as RouterLink, MemoryRouter as Router } from 'react-router-dom';
-import styled from 'styled-components';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
-import { Link, LinkComponentCssMixin, T, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
-import type { LinkComponent } from '@admiral-ds/react-ui';
-import { ReactComponent as ArrowLeftOutline } from '@admiral-ds/icons/build/system/ArrowLeftOutline.svg';
-import { ReactComponent as ArrowRightOutline } from '@admiral-ds/icons/build/system/ArrowRightOutline.svg';
+import { Link, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
-import { LinkPlaygroundTemplate, LinkPrimaryTemplate, LinkSecondaryTemplate } from './Templates';
+import {
+  LinkPlaygroundTemplate,
+  LinkPrimaryTemplate,
+  LinkSecondaryTemplate,
+  LinkWithIconTemplate,
+  LinkMixinTemplate,
+  LinkAsPropTemplate,
+} from './Templates';
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
 import LinkPlaygroundRaw from '!!raw-loader!./Templates/LinkPlayground';
 import LinkPrimaryRaw from '!!raw-loader!./Templates/LinkPrimary';
 import LinkSecondaryRaw from '!!raw-loader!./Templates/LinkSecondary';
+import LinkWithIconRaw from '!!raw-loader!./Templates/LinkWithIcon';
+import LinkMixinRaw from '!!raw-loader!./Templates/LinkMixin';
+import LinkAsPropRaw from '!!raw-loader!./Templates/LinkAsProp';
 
 export default {
   title: 'Admiral-2.1/Link',
@@ -60,78 +65,9 @@ export default {
   },
 } as ComponentMeta<typeof Link>;
 
-const Separator = styled.div`
-  margin-top: 10px;
-`;
-
-const Divider = styled.div`
-  width: 10px;
-  height: 12px;
-`;
-
-const LinkWithIcon: ComponentStory<typeof Link> = () => {
-  return (
-    <>
-      <T font="Body/Body 1 Long" as="div">
-        Link with icon. Dimension - m
-      </T>
-      <Separator />
-      <Link appearance={'primary'} href="" onClick={(e: any) => e.preventDefault()}>
-        <ArrowLeftOutline width={24} />
-        <Divider />
-        Link
-      </Link>
-      <Separator />
-      <T font="Body/Body 1 Long" as="div">
-        Link with icon. Dimension - s
-      </T>
-      <Separator />
-      <Link appearance={'secondary'} dimension="s" href="" onClick={(e: any) => e.preventDefault()}>
-        Link
-        <Divider />
-        <ArrowRightOutline width={20} />
-      </Link>
-    </>
-  );
-};
-
-const StyledRouterLink = styled(RouterLink)<LinkComponent>`
-  ${LinkComponentCssMixin}
-`;
-
-const LinkMixin: ComponentStory<typeof Link> = () => (
-  <Router>
-    <StyledRouterLink to="">Styled RouterLink - dimension m</StyledRouterLink>
-    <Divider />
-    <StyledRouterLink to="" dimension="s">
-      Styled RouterLink - dimension s
-    </StyledRouterLink>
-    <Divider />
-    <StyledRouterLink to="" appearance="secondary">
-      Styled RouterLink - appearance secondary
-    </StyledRouterLink>
-  </Router>
-);
-
-const LinkPolymorphic: ComponentStory<typeof Link> = () => (
-  <>
-    <Link as="button">Render button instead of anchor</Link>
-    <Divider />
-    <Link as="div" dimension="s">
-      Render div instead of anchor
-    </Link>
-    <Divider />
-    <Router>
-      <Link as={RouterLink} to="">
-        Render RouterLink instead of anchor
-      </Link>
-    </Router>
-  </>
-);
-
 //<editor-fold desc="Playground">
 const LinkPlaygroundStory: ComponentStory<typeof Link> = (props) => (
-  <LinkPlaygroundTemplate children={[]} {...cleanUpProps(props)} />
+  <LinkPlaygroundTemplate children={props.children} {...cleanUpProps(props)} />
 );
 export const Playground = LinkPlaygroundStory.bind({});
 Playground.parameters = {
@@ -167,10 +103,26 @@ Secondary.parameters = {
 };
 //</editor-fold>
 
-export const IconLink = LinkWithIcon.bind({});
-export const CssMixin = LinkMixin.bind({});
+//<editor-fold desc="With icon">
+const LinkWithIconStory: ComponentStory<typeof Link> = () => <LinkWithIconTemplate />;
+export const IconLink = LinkWithIconStory.bind({});
+IconLink.parameters = {
+  docs: {
+    source: {
+      code: LinkWithIconRaw,
+    },
+  },
+};
+//</editor-fold>
+
+//<editor-fold desc="Mixin">
+const LinkMixinStory: ComponentStory<typeof Link> = () => <LinkMixinTemplate />;
+export const CssMixin = LinkMixinStory.bind({});
 CssMixin.parameters = {
   docs: {
+    source: {
+      code: LinkMixinRaw,
+    },
     description: {
       story: `Помимо компонента Link библиотека предоставляет LinkComponentCssMixin - миксин, включающий в себя 
       все стили компонента Link согласно дизайну Admiral 2.1. Данный миксин целесообразно применять, если 
@@ -178,9 +130,16 @@ CssMixin.parameters = {
     },
   },
 };
-export const LinkAsProp = LinkPolymorphic.bind({});
+//</editor-fold>
+
+//<editor-fold desc="As prop">
+const LinkAsPropStory: ComponentStory<typeof Link> = () => <LinkAsPropTemplate />;
+export const LinkAsProp = LinkAsPropStory.bind({});
 LinkAsProp.parameters = {
   docs: {
+    source: {
+      code: LinkAsPropRaw,
+    },
     description: {
       story: `Компонент Link является полиморфным компонентом. По умолчанию компонент Link возвращает стандартный html anchor элемент. 
       Однако с помощью параметра as можно перезадать тип элемента, который будет отрисован. 
@@ -188,3 +147,4 @@ LinkAsProp.parameters = {
     },
   },
 };
+//</editor-fold>
