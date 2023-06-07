@@ -328,6 +328,8 @@ export const InputEx = React.forwardRef<HTMLInputElement, InputExProps>(
     const inputRef = React.useRef<HTMLInputElement>(null);
     const [overflowActive, setOverflowActive] = React.useState<boolean>(false);
     const [tooltipVisible, setTooltipVisible] = React.useState<boolean>(false);
+    const [innerValueState, setInnerValueState] = React.useState(props.defaultValue ?? undefined);
+    const innerValue = props.value ?? innerValueState;
 
     React.useEffect(() => {
       if (checkOverflow(inputRef.current)) {
@@ -357,9 +359,14 @@ export const InputEx = React.forwardRef<HTMLInputElement, InputExProps>(
       }
     }, [setTooltipVisible]);
 
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      setInnerValueState(e.currentTarget.value);
+      props.onChange?.(e);
+    };
+
     const iconArray = React.Children.toArray(icons);
 
-    if (!props.readOnly && displayClearIcon) {
+    if (!props.readOnly && displayClearIcon && !!innerValue) {
       iconArray.unshift(
         <InputIconButton
           icon={CloseOutlineSvg}
@@ -398,7 +405,13 @@ export const InputEx = React.forwardRef<HTMLInputElement, InputExProps>(
               {prefix}
             </PrefixContainer>
           )}
-          <Input ref={refSetter(ref, inputRef)} {...props} placeholder={placeholder} iconCount={iconCount} />
+          <Input
+            ref={refSetter(ref, inputRef)}
+            {...props}
+            onChange={handleChange}
+            placeholder={placeholder}
+            iconCount={iconCount}
+          />
           <InputBorderedDiv status={status} disabled={props.disabled || props.readOnly} />
           {iconCount > 0 && (
             <IconPanel disabled={props.disabled} dimension={props.dimension}>

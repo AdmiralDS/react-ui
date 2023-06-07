@@ -248,7 +248,6 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
             activateItem(itemProps.disabled ? undefined : id);
           },
           onClickItem: () => selectItem(id),
-          disabled: itemProps.disabled,
           containerRef,
           ...itemProps,
         }),

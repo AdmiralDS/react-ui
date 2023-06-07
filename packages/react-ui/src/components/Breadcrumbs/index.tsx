@@ -48,15 +48,40 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
   const visible = items.slice(1, items.length - 1);
   const wrapperRef = React.useRef<HTMLOListElement>(null);
   const overflowRef = React.useRef<HTMLOListElement>(null);
+  const hasMounted = React.useRef(false);
   const [visibilityMap, setVisibilityMap] = React.useState<{ [index: number | string]: boolean }>({ 0: true });
 
+  React.useEffect(() => {
+    if (!hasMounted.current) {
+      hasMounted.current = true;
+    }
+  }, []);
+
+  // Если компонент в режиме mobile, нужно отслеживать изменение размера крошек,
+  // вызванное подгрузкой шрифтов или изменением dimension, для того чтобы скорректировать позицию скролла
   React.useLayoutEffect(() => {
-    if (mobile) {
-      wrapperRef.current?.lastElementChild?.scrollIntoView({
-        behavior: 'smooth',
-        inline: 'center',
-        block: 'nearest',
+    const firstCrumb = wrapperRef.current?.firstElementChild;
+    if (firstCrumb && mobile) {
+      const resizeObserver = new ResizeObserver(() => {
+        wrapperRef.current?.scrollBy({ left: wrapperRef.current.scrollWidth, behavior: 'smooth' });
       });
+      resizeObserver.observe(firstCrumb);
+      return () => {
+        resizeObserver.disconnect();
+      };
+    }
+  }, [mobile]);
+
+  React.useLayoutEffect(() => {
+    if (mobile && wrapperRef.current) {
+      if (!hasMounted.current) {
+        // При mountе компонента в режиме mobile доскролл до активной крошки должен происходить моментально
+        wrapperRef.current?.scrollBy({ left: wrapperRef.current.scrollWidth });
+      } else {
+        // Если в ходе существования компонента меняется параметр items или компонент переходит
+        // в режим mobile, то доскролл до активной крошки должен происходить плавно
+        wrapperRef.current.scrollBy({ left: wrapperRef.current.scrollWidth, behavior: 'smooth' });
+      }
     }
   }, [items, mobile]);
 
