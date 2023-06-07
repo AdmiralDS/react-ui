@@ -2,7 +2,13 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { withDesign } from 'storybook-addon-designs';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { PaginationSimple, PaginationSimpleItem } from '@admiral-ds/react-ui';
+import { PaginationSimple } from '@admiral-ds/react-ui';
+
+import { PaginationPlaygroundTemplate } from './Templates';
+import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+
+// Imports of text sources
+import PaginationPlaygroundRaw from '!!raw-loader!./Templates/PaginationPlayground';
 
 const Separator = styled.div`
   height: 20px;
@@ -47,23 +53,16 @@ export default {
   },
 } as ComponentMeta<typeof PaginationSimple>;
 
-const Template1: ComponentStory<typeof PaginationSimple> = ({ currentItem = 1, ...args }) => {
-  const [current, setCurrent] = React.useState(currentItem);
-
-  React.useEffect(() => {
-    setCurrent(currentItem);
-  }, [currentItem]);
-
-  return (
-    <>
-      <PaginationSimple {...args} currentItem={current} onChange={(_, item) => setCurrent(item)}>
-        {[...Array(5).keys()].map((item) => {
-          return <PaginationSimpleItem aria-label={`Item ${item}`} key={item} />;
-        })}
-      </PaginationSimple>
-    </>
-  );
+//<editor-fold desc="Playground">
+const PaginationPlaygroundStory: ComponentStory<typeof PaginationSimple> = ({ currentItem, onChange, ...props }) => (
+  <PaginationPlaygroundTemplate currentItem={currentItem} onChange={onChange} {...cleanUpProps(props)} />
+);
+export const Playground = PaginationPlaygroundStory.bind({});
+Playground.parameters = {
+  docs: {
+    source: {
+      code: PaginationPlaygroundRaw,
+    },
+  },
 };
-
-export const Playground = Template1.bind({});
-Playground.args = {};
+//</editor-fold>

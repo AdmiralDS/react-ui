@@ -3,7 +3,7 @@ import { PaginationOne } from '@admiral-ds/react-ui';
 import type { PaginationOneProps, Theme } from '@admiral-ds/react-ui';
 import { ThemeProvider } from 'styled-components';
 
-export const PaginationPlaygroundTemplate = (args: Partial<PaginationOneProps>) => {
+export const PaginationPlaygroundTemplate = (args: PaginationOneProps) => {
   const [pageSize, setPageSize] = React.useState(8);
   const [page, setPage] = React.useState(1);
   const pageSizes = [8, 20, 50, 100, 200];

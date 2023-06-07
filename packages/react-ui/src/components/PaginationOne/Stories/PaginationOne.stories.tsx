@@ -79,8 +79,22 @@ export default {
 } as ComponentMeta<typeof PaginationOne>;
 
 //<editor-fold desc="Playground">
-const PaginationPlaygroundStory: ComponentStory<typeof PaginationOne> = (props) => (
-  <PaginationPlaygroundTemplate {...cleanUpProps(props)} />
+const PaginationPlaygroundStory: ComponentStory<typeof PaginationOne> = ({
+  page,
+  pageSize,
+  pageSizes,
+  totalItems,
+  onChange,
+  ...props
+}) => (
+  <PaginationPlaygroundTemplate
+    page={page}
+    pageSize={pageSize}
+    pageSizes={pageSizes}
+    totalItems={totalItems}
+    onChange={onChange}
+    {...cleanUpProps(props)}
+  />
 );
 export const Playground = PaginationPlaygroundStory.bind({});
 Playground.parameters = {
@@ -93,8 +107,22 @@ Playground.parameters = {
 //</editor-fold>
 
 //<editor-fold desc="Complex and Simple">
-const PaginationTypesStory: ComponentStory<typeof PaginationOne> = (props) => (
-  <PaginationTypesTemplate {...cleanUpProps(props)} />
+const PaginationTypesStory: ComponentStory<typeof PaginationOne> = ({
+  page,
+  pageSize,
+  pageSizes,
+  totalItems,
+  onChange,
+  ...props
+}) => (
+  <PaginationTypesTemplate
+    page={page}
+    pageSize={pageSize}
+    pageSizes={pageSizes}
+    totalItems={totalItems}
+    onChange={onChange}
+    {...cleanUpProps(props)}
+  />
 );
 export const PaginationTypesExample = PaginationTypesStory.bind({});
 PaginationTypesExample.parameters = {
