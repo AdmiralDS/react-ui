@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.0.0](https://github.com/AdmiralDS/react-ui/compare/v4.17.0...v5.0.0) (2023-06-06)
+
+
+### ⚠ BREAKING CHANGES
+
+* add component Flex
+
+### Features
+
+* add component Flex ([3f4bd14](https://github.com/AdmiralDS/react-ui/commit/3f4bd14452ad38ad06804b899025dd2e4e52e4fb))
+* **InputEx:** show clearIcon only when value is present ([dc973e5](https://github.com/AdmiralDS/react-ui/commit/dc973e5fe2f61b72af3d5d3578b4fdac9cafc563))
+* **TextInput:** show clearIcon only when value is present ([b3c044d](https://github.com/AdmiralDS/react-ui/commit/b3c044dd749cb64493f9b59fbd1d00da3192b420))
+
+
+### Bug Fixes
+
+* **Menu:** fix horizontal scroll ([6e75516](https://github.com/AdmiralDS/react-ui/commit/6e75516dcf5ab87593ee88597633b6d1d0183d4c))
+* **Table:** fix bug with column width and vertical scroll ([5439d43](https://github.com/AdmiralDS/react-ui/commit/5439d43c090baba11197f81202120b0e2570dce7))
+
 ## [4.17.0](https://github.com/AdmiralDS/react-ui/compare/v4.16.1...v4.17.0) (2023-05-31)
 
 
