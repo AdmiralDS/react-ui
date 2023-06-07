@@ -2,10 +2,16 @@ import React, { useRef } from 'react';
 import styled, { css } from 'styled-components';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
-import { Hint, Button, TextButton, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
+import { Hint, Button, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 import { ReactComponent as HelpOutline } from '@admiral-ds/icons/build/service/HelpOutline.svg';
 
-import { HintBaseTemplate, HintClassNameTemplate, HintClickTemplate, HintPositionTemplate } from './Templates';
+import {
+  HintBaseTemplate,
+  HintClassNameTemplate,
+  HintClickTemplate,
+  HintPositionTemplate,
+  HintTextButtonTemplate,
+} from './Templates';
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
@@ -13,6 +19,7 @@ import HintBaseRaw from '!!raw-loader!./Templates/HintBase';
 import HintClassNameRaw from '!!raw-loader!./Templates/HintClassName';
 import HintClickRaw from '!!raw-loader!./Templates/HintClick';
 import HintPositionRaw from '!!raw-loader!./Templates/HintPosition';
+import HintTextButtonRaw from '!!raw-loader!./Templates/HintTextButton';
 
 const Separator = styled.div<{ height?: number }>`
   height: ${({ height }) => (height ? height : 20)}px;
@@ -123,34 +130,6 @@ const Template3: ComponentStory<typeof Hint> = ({ anchorId, ...args }) => {
   );
 };
 
-const Template4: ComponentStory<typeof Hint> = ({ anchorId, ...args }) => {
-  const [visible, setVisible] = React.useState(false);
-  const handleVisibilityChange = (visible: boolean) => setVisible(visible);
-
-  return (
-    <>
-      <Hint
-        {...args}
-        visible={visible}
-        onVisibilityChange={handleVisibilityChange}
-        visibilityTrigger="click"
-        renderContent={() => (
-          <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
-            {text}
-            <Separator height={4} />
-            <TextButton appearance="primary" dimension="s" text="Text Button" />
-          </div>
-        )}
-        anchorId={anchorId}
-      >
-        <StyledButton dimension="s" aria-label="Additional information" aria-describedby={anchorId}>
-          <HelpOutline />
-        </StyledButton>
-      </Hint>
-    </>
-  );
-};
-
 const Template5: ComponentStory<typeof Hint> = ({ anchorId, ...args }) => {
   // import {css} from 'styled-components;
   const anchorCss = css`
@@ -230,7 +209,7 @@ HintPositionExample.parameters = {
 HintPositionExample.storyName = 'Hint. Позиционирование.';
 //</editor-fold>
 
-//<editor-fold desc="Hint. Появление по клику">
+//<editor-fold desc="Появление по клику">
 const HintClickStory: ComponentStory<typeof Hint> = (props) => (
   <HintClickTemplate visible renderContent={() => ''} {...cleanUpProps(props)} />
 );
@@ -245,23 +224,31 @@ HintClickExample.parameters = {
 HintClickExample.storyName = 'Hint. Появление по клику.';
 //</editor-fold>
 
-export const HintLink = Template4.bind({});
-HintLink.args = { anchorId: 'hint_link' };
-HintLink.storyName = 'Hint. Текст с ссылкой.';
-HintLink.parameters = {
+//<editor-fold desc="С кнопкой">
+const HintTextButtonStory: ComponentStory<typeof Hint> = (props) => (
+  <HintTextButtonTemplate visible renderContent={() => ''} {...cleanUpProps(props)} />
+);
+export const HintTextButtonExample = HintTextButtonStory.bind({});
+HintTextButtonExample.parameters = {
   docs: {
+    source: {
+      code: HintTextButtonRaw,
+    },
     description: {
-      story: `В качества контента хинта может выступать любой ReactNode. В случае если 
-    хинт содержит в себе ссылку, триггером его появления должен быть click.`,
+      story: `В качества контента хинта может выступать любой ReactNode, 
+      например допускается использование TextButton внутри хинта. В случае если 
+    хинт содержит в себе TextButton, триггером его появления должен быть click.`,
     },
   },
 };
+HintTextButtonExample.storyName = 'Hint. Пример с кнопкой.';
+//</editor-fold>
 
 export const HintTarget = Template3.bind({});
 HintTarget.args = { anchorId: 'hint_target' };
 HintTarget.storyName = 'Hint. Позиционирование относительно target.';
 
-//<editor-fold desc="Hint. ClassName">
+//<editor-fold desc="ClassName">
 const HintClassNameStory: ComponentStory<typeof Hint> = (props) => (
   <HintClassNameTemplate visible renderContent={() => ''} {...cleanUpProps(props)} />
 );
