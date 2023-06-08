@@ -75,17 +75,14 @@ const slots: SlotProps[] = [
 const StyledMenu = styled(Menu)`
   &[data-dimension='xl'] {
     ${typography['Body/Body 1 Long']};
-    width: 84px;
     height: 288px;
   }
   &[data-dimension='m'] {
     ${typography['Body/Body 1 Long']};
-    width: 84px;
     height: 240px;
   }
   &[data-dimension='s'] {
     ${typography['Body/Body 2 Long']};
-    width: 68px;
     height: 192px;
   }
 `;
