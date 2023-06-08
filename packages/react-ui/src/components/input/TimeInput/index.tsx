@@ -151,6 +151,8 @@ export const TimeInput = React.forwardRef<HTMLInputElement, TimeInputProps>(
     const inputRef = useRef<HTMLInputElement>(null);
     const [isOpened, setIsOpened] = useState<boolean>(false);
 
+    const menuDimension = dimension === 'xl' ? 'l' : dimension;
+
     const handleButtonClick = (e: React.MouseEvent) => {
       e.preventDefault();
       if (inputRef.current !== document.activeElement) {
@@ -234,7 +236,13 @@ export const TimeInput = React.forwardRef<HTMLInputElement, TimeInputProps>(
         return availableSlots.map((slot, index) => ({
           id: slot.value,
           render: (options: RenderOptionProps) => (
-            <StyledMenuItem key={index} data-dimension={dimension} disabled={slot.disabled} {...options}>
+            <StyledMenuItem
+              key={index}
+              dimension={menuDimension}
+              data-dimension={dimension}
+              disabled={slot.disabled}
+              {...options}
+            >
               {slot.value}
             </StyledMenuItem>
           ),
@@ -269,6 +277,7 @@ export const TimeInput = React.forwardRef<HTMLInputElement, TimeInputProps>(
               selected={timeValue}
               active={activeOption}
               model={model}
+              dimension={menuDimension}
               data-dimension={dimension}
               onSelectItem={handleSelectOption}
               onActivateItem={setActiveOption}
