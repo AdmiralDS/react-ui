@@ -2,12 +2,17 @@ import * as React from 'react';
 import { Hint, Button } from '@admiral-ds/react-ui';
 import type { HintProps, Theme } from '@admiral-ds/react-ui';
 import { ReactComponent as HelpOutline } from '@admiral-ds/icons/build/service/HelpOutline.svg';
-import { ThemeProvider } from 'styled-components';
+import { ThemeProvider, css } from 'styled-components';
 
 const text = `At breakpoint boundaries, mini units divide the screen into a fixed master grid, and multiples
 of mini units map to fluid grid column widths and row heights.`;
 
-export const HintBaseTemplate = (args: HintProps) => {
+const anchorCss = css`
+  padding: 10px;
+  border: 2px dotted red;
+`;
+
+export const HintAnchorCssTemplate = (args: HintProps) => {
   function swapBorder(theme: Theme): Theme {
     theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
@@ -19,10 +24,11 @@ export const HintBaseTemplate = (args: HintProps) => {
     <ThemeProvider theme={swapBorder}>
       <Hint
         {...args}
-        renderContent={() => text}
-        anchorId="hint_base"
         visible={visible}
         onVisibilityChange={handleVisibilityChange}
+        renderContent={() => text}
+        anchorId="hint_css"
+        anchorCssMixin={anchorCss}
       >
         <Button
           dimension="xl"
@@ -30,7 +36,7 @@ export const HintBaseTemplate = (args: HintProps) => {
           displayAsSquare
           icon={<HelpOutline aria-hidden />}
           aria-label="Additional information"
-          aria-describedby="hint_base"
+          aria-describedby="hint_css"
         />
       </Hint>
     </ThemeProvider>
