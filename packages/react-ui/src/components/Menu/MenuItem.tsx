@@ -88,7 +88,9 @@ export const MenuItem = React.forwardRef<HTMLDivElement, MenuItemProps>(
         onMouseDown={handleClick}
         {...props}
       >
-        {children}
+        {React.Children.toArray(children).map((child, index) =>
+          typeof child === 'string' ? <TextWrapper key={child + index}>{child}</TextWrapper> : child,
+        )}
         {hasSubmenu && expandIcon}
       </Item>
     );
@@ -113,6 +115,7 @@ const Item = styled.div<{
   white-space: pre;
   margin: 0;
   cursor: pointer;
+  box-sizing: border-box;
   ${paddings}
   ${styleTextMixin}
   ${colorTextMixin}
@@ -129,4 +132,9 @@ const Item = styled.div<{
       fill: ${(p) => p.theme.color['Neutral/Neutral 00']};
     }
   }
+`;
+
+const TextWrapper = styled.span`
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
