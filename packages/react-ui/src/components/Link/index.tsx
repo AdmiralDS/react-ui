@@ -3,9 +3,6 @@ import type { AppearanceLink, Dimension } from '#src/components/Link/LinkCompone
 import { LinkComponent } from '#src/components/Link/LinkComponent';
 import type { PolymorphicComponentPropsWithRef, PolymorphicRef } from '../common/polymorphicProps';
 
-export { LinkComponentCssMixin } from '#src/components/Link/LinkComponent';
-export type { LinkComponent } from '#src/components/Link/LinkComponent';
-
 export interface LinkProps {
   /** Текст ссылки */
   children: React.ReactNode;
@@ -40,3 +37,6 @@ export const Link: LinkComp = React.forwardRef(
 );
 
 (Link as any).displayName = 'Link';
+
+export { LinkComponentCssMixin } from '#src/components/Link/LinkComponent';
+export type { LinkComponent } from '#src/components/Link/LinkComponent';

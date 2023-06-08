@@ -2,11 +2,11 @@ import { withDesign } from 'storybook-addon-designs';
 import * as React from 'react';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import styled from 'styled-components';
-import type { AvatarGroupProps } from '@admiral-ds/react-ui';
+
 import { AvatarGroup } from '@admiral-ds/react-ui';
+import type { AvatarGroupProps } from '@admiral-ds/react-ui';
 
 import { AvatarGroupPlaygroundTemplate, AvatarGroupWidthTemplate } from './Templates';
-
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
@@ -77,7 +77,6 @@ const AvatarGroupPlaygroundStory: ComponentStory<typeof AvatarGroup> = (props: A
 );
 
 export const AvatarGroupPlayground = AvatarGroupPlaygroundStory.bind({});
-AvatarGroupPlayground.args = {};
 AvatarGroupPlayground.storyName = 'Playground';
 AvatarGroupPlayground.parameters = {
   docs: {
@@ -94,7 +93,6 @@ const AvatarGroupWidthStory: ComponentStory<typeof AvatarGroup> = (props) => (
 );
 
 export const AvatarGroupWidth = AvatarGroupWidthStory.bind({});
-AvatarGroupWidth.args = {};
 AvatarGroupWidth.storyName = 'Пример с ограниченной шириной';
 AvatarGroupWidth.parameters = {
   docs: {

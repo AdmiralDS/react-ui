@@ -5,6 +5,7 @@ import { withDesign } from 'storybook-addon-designs';
 import { Checkbox, ALL_BORDER_RADIUS_VALUES, ALL_DIMENSIONS_VALUES } from '@admiral-ds/react-ui';
 
 import { CheckboxDemoTemplate } from './Templates';
+import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
 import CheckboxDemoRaw from '!!raw-loader!./Templates/CheckboxDemo';
@@ -71,14 +72,7 @@ export default {
 } as ComponentMeta<typeof Checkbox>;
 
 //<editor-fold desc="Checkbox. Пример">
-const CheckboxDemoStory: ComponentStory<typeof Checkbox> = (props) => {
-  const args = (Object.keys(props) as Array<keyof typeof props>).reduce((acc, key) => {
-    if (props[key] !== undefined) acc[key] = props[key];
-
-    return acc;
-  }, {} as Record<any, any>);
-  return <CheckboxDemoTemplate {...args} />;
-};
+const CheckboxDemoStory: ComponentStory<typeof Checkbox> = (props) => <CheckboxDemoTemplate {...cleanUpProps(props)} />;
 
 export const CheckboxDemo = CheckboxDemoStory.bind({});
 CheckboxDemo.parameters = {
@@ -89,5 +83,4 @@ CheckboxDemo.parameters = {
   },
 };
 CheckboxDemo.storyName = 'Checkbox. Пример';
-CheckboxDemo.args = {};
 //</editor-fold>

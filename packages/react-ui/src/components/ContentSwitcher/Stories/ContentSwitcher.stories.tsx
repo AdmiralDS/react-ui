@@ -11,6 +11,7 @@ import {
   ContentSwitcherWithBadgeTemplate,
   ContentSwitcherWithIconTemplate,
 } from './Templates';
+import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
 import ContentSwitcherPlaygroundRaw from '!!raw-loader!./Templates/ContentSwitcherPlayground';
@@ -81,7 +82,7 @@ export default {
 
 //<editor-fold desc="ContentSwitcher. Playground">
 const ContentSwitcherPlaygroundStory: ComponentStory<typeof ContentSwitcher> = (props) => (
-  <ContentSwitcherPlaygroundTemplate {...props} />
+  <ContentSwitcherPlaygroundTemplate {...cleanUpProps(props)} />
 );
 
 export const ContentSwitcherPlayground = ContentSwitcherPlaygroundStory.bind({});
@@ -93,7 +94,6 @@ ContentSwitcherPlayground.parameters = {
   },
 };
 ContentSwitcherPlayground.storyName = 'ContentSwitcher. Playground';
-ContentSwitcherPlayground.args = {};
 //</editor-fold>
 
 //<editor-fold desc="Базовый пример">
