@@ -4,6 +4,14 @@ import { withDesign } from 'storybook-addon-designs';
 import styled from 'styled-components';
 import { Slider } from '@admiral-ds/react-ui';
 
+import { SliderPlaygroundTemplate, SliderSimpleTemplate, SliderRangeTemplate } from './Templates';
+import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+
+// Imports of text sources
+import PlaygroundRaw from '!!raw-loader!./Templates/SliderPlayground';
+import SimpleRaw from '!!raw-loader!./Templates/SliderSimple';
+import RangeRaw from '!!raw-loader!./Templates/SliderRange';
+
 const Separator = styled.div`
   height: 20px;
 `;
@@ -74,68 +82,43 @@ export default {
   },
 } as ComponentMeta<typeof Slider>;
 
-const Template0: ComponentStory<typeof Slider> = (args) => {
-  const [rangeValue, setRangeValue] = React.useState(args.value);
-  React.useEffect(() => {
-    setRangeValue(args.value);
-  }, [args.value]);
-  return (
-    <>
-      <Slider
-        {...args}
-        value={rangeValue}
-        onChange={(e: any, value: number) => {
-          console.log({ event: e.type, value });
-          setRangeValue(value);
-        }}
-      />
-    </>
-  );
+//<editor-fold desc="Playground">
+const PlaygroundStory: ComponentStory<typeof Slider> = ({ value, onChange, ...props }) => (
+  <SliderPlaygroundTemplate value={value} onChange={onChange} {...cleanUpProps(props)} />
+);
+export const Playground = PlaygroundStory.bind({});
+Playground.parameters = {
+  docs: {
+    source: {
+      code: PlaygroundRaw,
+    },
+  },
 };
-
-const Template1: ComponentStory<typeof Slider> = () => {
-  const [rangeValue, setRangeValue] = React.useState(0);
-  return (
-    <>
-      <Slider
-        value={rangeValue}
-        onChange={(e: any, value: number) => {
-          console.log({ event: e.type, value });
-          setRangeValue(value);
-        }}
-        minValue={10}
-        maxValue={100}
-      />
-    </>
-  );
-};
-
-const Template2: ComponentStory<typeof Slider> = () => {
-  const [rangeValue, setRangeValue] = React.useState(50);
-  return (
-    <>
-      <Slider
-        tickMarks={[25, 50, 75]}
-        value={rangeValue}
-        maxValue={100}
-        onChange={(e: any, value: number) => {
-          console.log({ event: e.type, value });
-          setRangeValue(value);
-        }}
-        renderTickMark={(mark: string) => mark + ' ₽'}
-      />
-    </>
-  );
-};
-
-export const Playground = Template0.bind({});
-Playground.args = {};
 Playground.storyName = 'Slider. Playground.';
+//</editor-fold>
 
-export const SliderSimple = Template1.bind({});
-SliderSimple.args = {};
-SliderSimple.storyName = 'Slider с настройками minValue, maxValue.';
+//<editor-fold desc="Simple">
+const SimpleStory: ComponentStory<typeof Slider> = () => <SliderSimpleTemplate />;
+export const SimpleExample = SimpleStory.bind({});
+SimpleExample.parameters = {
+  docs: {
+    source: {
+      code: SimpleRaw,
+    },
+  },
+};
+SimpleExample.storyName = 'Slider с настройками minValue, maxValue.';
+//</editor-fold>
 
-export const SliderRange = Template2.bind({});
-SliderRange.args = {};
-SliderRange.storyName = 'Slider с отметками и кастомизированными подписями к ним.';
+//<editor-fold desc="Range">
+const RangeStory: ComponentStory<typeof Slider> = () => <SliderRangeTemplate />;
+export const RangeExample = RangeStory.bind({});
+RangeExample.parameters = {
+  docs: {
+    source: {
+      code: RangeRaw,
+    },
+  },
+};
+RangeExample.storyName = 'Slider с отметками и кастомизированными подписями к ним.';
+//</editor-fold>
