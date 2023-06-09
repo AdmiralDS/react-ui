@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [5.0.1](https://github.com/AdmiralDS/react-ui/compare/v5.0.0...v5.0.1) (2023-06-08)
+
+
+### Bug Fixes
+
+* **Breadcrumbs:** fix scroll behavior in mobile mode ([fef01aa](https://github.com/AdmiralDS/react-ui/commit/fef01aabf0e881a8a421a50eccec44f7d781bbcb))
+* **TimeInput:** fix drop overflow ([7933966](https://github.com/AdmiralDS/react-ui/commit/7933966929423693278c1c4b476d9b0ed2dbff56))
+* **TimeInput:** fix menu dimension ([dafdbe7](https://github.com/AdmiralDS/react-ui/commit/dafdbe7ba0083b7efbc6d2546f49a4b90999dc21))
+
 ## [5.0.0](https://github.com/AdmiralDS/react-ui/compare/v4.17.0...v5.0.0) (2023-06-06)
 
 
