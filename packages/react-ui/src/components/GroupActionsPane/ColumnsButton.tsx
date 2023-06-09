@@ -32,7 +32,15 @@ export interface ItemProps {
   disabled?: boolean;
 }
 
-type ItemValue = { name: string; visible: boolean };
+type ItemValue = {
+  /**
+   * @deprecated Используйте id title
+   */
+  name?: string;
+  id?: string;
+  title?: string;
+  visible: boolean;
+};
 
 export interface ColumnsButtonProps extends HTMLAttributes<HTMLButtonElement>, RenderOptionProps {
   columns?: Array<ItemValue>;
@@ -81,10 +89,10 @@ export const ColumnsButton = React.forwardRef<HTMLButtonElement, ColumnsButtonPr
       setOpened((prevOpened) => !prevOpened);
     };
 
-    const handleChangeColumn = ({ name, visible }: ItemValue) => {
+    const handleChangeColumn = ({ id, visible }: ItemValue) => {
       if (onColumnsChange && columns.length > 0) {
         const newValue = [...columns];
-        const item = newValue.find((column) => column.name === name);
+        const item = newValue.find((column) => (column.name ? column.name === id : column.id === id));
         if (item) item.visible = visible;
         onColumnsChange(newValue);
       }
@@ -99,7 +107,7 @@ export const ColumnsButton = React.forwardRef<HTMLButtonElement, ColumnsButtonPr
               {...options}
               dimension={menuDimension}
               onClickItem={() => {
-                handleChangeColumn({ name: column.name, visible: !column.visible });
+                handleChangeColumn({ id: column.name || column.id, visible: !column.visible });
               }}
               key={index}
             >
@@ -110,7 +118,7 @@ export const ColumnsButton = React.forwardRef<HTMLButtonElement, ColumnsButtonPr
                   e.stopPropagation();
                 }}
               />
-              {column.name}
+              {column.name || column.title}
             </ColumnsMenuItem>
           ),
         }),
