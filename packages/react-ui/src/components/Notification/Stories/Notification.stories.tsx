@@ -1,13 +1,17 @@
 import * as React from 'react';
-import styled, { ThemeProvider } from 'styled-components';
+import styled from 'styled-components';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
-import { Notification, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
-import type { Theme } from '@admiral-ds/react-ui';
 
-const Layout = styled.div`
-  margin: 20px;
-`;
+import { Notification, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
+
+import { StaticNotificationBaseTemplate, StaticNotificationBaseStatusTemplate } from './Templates';
+import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+
+// Imports of text sources
+import StaticNotificationBaseRaw from '!!raw-loader!./Templates/StaticNotificationBase';
+import StaticNotificationBaseStatusRaw from '!!raw-loader!./Templates/StaticNotificationBaseStatus';
+
 const Desc = styled.div`
   font-family: 'VTB Group UI';
   font-size: 16px;
@@ -20,11 +24,6 @@ const Description = () => (
     сообщение, предупреждение, ошибка и положительные действия. Применяется как самостоятельный элемент.
   </Desc>
 );
-
-const title = 'Заголовок оповещения';
-const body = 'Тут находится текст короткого оповещения';
-const linkText = 'Link';
-const href = 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=37%3A26531';
 
 export default {
   title: 'Deprecated/Notification (Deprecated используйте NotificationItem компонент)',
@@ -52,14 +51,6 @@ export default {
       },
     ],
   },
-  args: {
-    status: 'info',
-    title: title,
-    linkText: linkText,
-    href: href,
-    displayStatusIcon: true,
-    isClosable: true,
-  },
   argTypes: {
     title: {
       type: 'string',
@@ -86,48 +77,34 @@ export default {
   },
 } as ComponentMeta<typeof Notification>;
 
-const Template1: ComponentStory<typeof Notification> = (args) => {
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
+//<editor-fold desc="Статическая нотификация. Базовый пример.">
+const StaticNotificationBaseStory: ComponentStory<typeof Notification> = (props) => (
+  <StaticNotificationBaseTemplate {...cleanUpProps(props)} />
+);
 
-  return (
-    <ThemeProvider theme={swapBorder}>
-      <Notification {...args}>{body}</Notification>
-    </ThemeProvider>
-  );
+export const StaticNotificationBase = StaticNotificationBaseStory.bind({});
+StaticNotificationBase.parameters = {
+  docs: {
+    source: {
+      code: StaticNotificationBaseRaw,
+    },
+  },
 };
-
-const Template2: ComponentStory<typeof Notification> = (args) => {
-  return (
-    <>
-      <Layout>
-        <Notification {...args} status="info" title={title}>
-          {body}
-        </Notification>
-      </Layout>
-      <Layout>
-        <Notification {...args} status="warning" title={title}>
-          {body}
-        </Notification>
-      </Layout>
-      <Layout>
-        <Notification {...args} status="error" title={title}>
-          {body}
-        </Notification>
-      </Layout>
-      <Layout>
-        <Notification {...args} status="success" title={title}>
-          {body}
-        </Notification>
-      </Layout>
-    </>
-  );
-};
-
-export const StaticNotificationBase = Template1.bind({});
 StaticNotificationBase.storyName = 'Статическая нотификация. Базовый пример.';
+//</editor-fold>
 
-export const StaticNotificationBaseStatus = Template2.bind({});
+//<editor-fold desc="Статусы статических нотификаций.">
+const StaticNotificationBaseStatusStory: ComponentStory<typeof Notification> = (props) => (
+  <StaticNotificationBaseStatusTemplate {...cleanUpProps(props)} />
+);
+
+export const StaticNotificationBaseStatus = StaticNotificationBaseStatusStory.bind({});
+StaticNotificationBaseStatus.parameters = {
+  docs: {
+    source: {
+      code: StaticNotificationBaseStatusRaw,
+    },
+  },
+};
 StaticNotificationBaseStatus.storyName = 'Статусы статических нотификаций';
+//</editor-fold>

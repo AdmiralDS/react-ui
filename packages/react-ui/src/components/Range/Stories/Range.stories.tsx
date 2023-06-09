@@ -4,6 +4,12 @@ import { withDesign } from 'storybook-addon-designs';
 import styled from 'styled-components';
 import { Range } from '@admiral-ds/react-ui';
 
+import { RangePlaygroundTemplate } from './Templates';
+import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+
+// Imports of text sources
+import PlaygroundRaw from '!!raw-loader!./Templates/RangePlayground';
+
 const Desc = styled.div`
   font-family: 'VTB Group UI';
   font-size: 16px;
@@ -58,23 +64,16 @@ export default {
   },
 } as ComponentMeta<typeof Range>;
 
-const Template0: ComponentStory<typeof Range> = (args) => {
-  const [rangeValue, setRangeValue] = React.useState<[number, number]>([4, 5]);
-
-  return (
-    <>
-      <Range
-        {...args}
-        value={rangeValue}
-        onChange={(e: any, value: [number, number]) => {
-          console.log({ e, value });
-          setRangeValue(value);
-        }}
-      />
-    </>
-  );
+//<editor-fold desc="Playground">
+const PlaygroundStory: ComponentStory<typeof Range> = ({ value, onChange, ...props }) => (
+  <RangePlaygroundTemplate value={value} onChange={onChange} {...cleanUpProps(props)} />
+);
+export const Playground = PlaygroundStory.bind({});
+Playground.parameters = {
+  docs: {
+    source: {
+      code: PlaygroundRaw,
+    },
+  },
 };
-
-export const Playground = Template0.bind({});
-Playground.args = {};
-Playground.storyName = 'Playground.';
+//</editor-fold>
