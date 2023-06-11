@@ -52,7 +52,11 @@ export default {
     },
 
     multiple: {
-      control: { type: 'boolean' },
+      control: false,
+    },
+
+    mode: {
+      control: false,
     },
 
     readOnly: {
@@ -76,6 +80,10 @@ export default {
     },
 
     showCheckbox: {
+      control: { type: 'boolean' },
+    },
+
+    forceHideOverflowTooltip: {
       control: { type: 'boolean' },
     },
 
@@ -139,16 +147,16 @@ export default {
       control: false,
     },
     value: {
-      control: { type: 'text' },
+      control: false,
     },
     inputValue: {
-      control: { type: 'text' },
+      control: false,
     },
     defaultValue: {
-      control: { type: 'text' },
+      control: false,
     },
     defaultInputValue: {
-      control: { type: 'text' },
+      control: false,
     },
     label: {
       control: { type: 'text' },
@@ -260,9 +268,6 @@ const SimpleStory: ComponentStory<typeof SelectField> = (props) => {
   return <SimpleTemplate {...cleanUpProps(props)} />;
 };
 export const SimpleSearchSelectStory = SimpleStory.bind({});
-SimpleSearchSelectStory.args = {
-  placeholder: 'Начните ввод для поиска',
-};
 SimpleSearchSelectStory.parameters = {
   docs: {
     source: {
@@ -285,9 +290,6 @@ const CustomOptionStory: ComponentStory<typeof SelectField> = (props) => {
 };
 
 export const CustomOptionSearchSelectStory = CustomOptionStory.bind({});
-CustomOptionSearchSelectStory.args = {
-  placeholder: 'Начните ввод для поиска',
-};
 CustomOptionSearchSelectStory.parameters = {
   docs: {
     source: {
@@ -538,37 +540,19 @@ const TemplateMultiSelectCustomOption: ComponentStory<typeof SelectField> = () =
 };
 
 export const RenderPropsSearchSelectStory = RenderPropsTemplate.bind({});
-RenderPropsSearchSelectStory.args = {
-  placeholder: 'Начните ввод для поиска',
-};
 RenderPropsSearchSelectStory.storyName = 'SearchSelect с кастомными опциями через renderProps';
 
 export const OptionGroupSearchSelectStory = OptionGroupTemplate.bind({});
-OptionGroupSearchSelectStory.args = {
-  placeholder: 'Начните ввод для поиска',
-};
 OptionGroupSearchSelectStory.storyName = 'SearchSelect с группами';
 
 export const AsyncSearchSelectStory = AsyncTemplate.bind({});
-AsyncSearchSelectStory.args = {
-  placeholder: 'Начните ввод для поиска',
-};
 AsyncSearchSelectStory.storyName = 'Асинхронный SearchSelect';
 
 export const SimpleMultiSearchSelectStory = TemplateSimpleMultiSelect.bind({});
-SimpleMultiSearchSelectStory.args = {
-  placeholder: 'Начните ввод для поиска',
-};
 SimpleMultiSearchSelectStory.storyName = 'Простой MultiSearchSelect';
 
 export const ExpandedHeightMultiSearchSelectStory = TemplateNotFixedMultiSelect.bind({});
-ExpandedHeightMultiSearchSelectStory.args = {
-  placeholder: 'Начните ввод для поиска',
-};
 ExpandedHeightMultiSearchSelectStory.storyName = 'MultiSearchSelect с увеличенной по умолчанию высотой';
 
 export const CustomOptionMultiSearchSelectStory = TemplateMultiSelectCustomOption.bind({});
-CustomOptionMultiSearchSelectStory.args = {
-  placeholder: 'Начните ввод для поиска',
-};
 CustomOptionMultiSearchSelectStory.storyName = 'MultiSearchSelect с кастомными опциями';

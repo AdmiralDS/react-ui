@@ -66,7 +66,7 @@ export default {
     },
 
     multiple: {
-      control: { type: 'boolean' },
+      control: false,
     },
 
     readOnly: {
@@ -122,10 +122,22 @@ export default {
     dropContainerStyle: {
       control: false,
     },
+    ref: {
+      control: false,
+    },
+    theme: {
+      control: false,
+    },
+    as: {
+      control: false,
+    },
+    forwardedAs: {
+      control: false,
+    },
   },
 } as ComponentMeta<typeof Select>;
 
-const TemplateSearchSelectWithFilter: ComponentStory<typeof Select> = (props) => {
+const TemplateSearchSelectWithFilter: ComponentStory<typeof Select> = ({ placeholder = 'Placeholder', ...props }) => {
   const cleanProps = cleanUpProps(props);
 
   const renderOptions = () => {
@@ -138,7 +150,7 @@ const TemplateSearchSelectWithFilter: ComponentStory<typeof Select> = (props) =>
 
   return (
     <>
-      <Select {...cleanProps} placeholder="Placeholder" mode="searchSelect" dropContainerClassName="dropContainerClass">
+      <Select {...cleanProps} placeholder={placeholder} mode="searchSelect" dropContainerClassName="dropContainerClass">
         {renderOptions()}
       </Select>
     </>
@@ -625,9 +637,6 @@ const TemplateWithAddButton: ComponentStory<typeof Select> = (props) => {
 };
 
 export const SearchSelectWithFilter = TemplateSearchSelectWithFilter.bind({});
-SearchSelectWithFilter.args = {
-  placeholder: 'Начните ввод для поиска',
-};
 SearchSelectWithFilter.storyName = 'Фильтрация опций';
 SearchSelectWithFilter.parameters = {
   docs: {
