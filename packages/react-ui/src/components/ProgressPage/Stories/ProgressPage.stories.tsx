@@ -1,8 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import * as React from 'react';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import styled from 'styled-components';
+
 import { ProgressPage } from '@admiral-ds/react-ui';
+
+import { ProgressPageAnimationTemplate, ProgressPageBaseTemplate } from './Templates';
+import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+
+// Imports of text sources
+import ProgressPageBaseRaw from '!!raw-loader!./Templates/ProgressPageBase';
+import ProgressPageAnimationRaw from '!!raw-loader!./Templates/ProgressPageAnimation';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -56,67 +64,34 @@ export default {
   },
 } as ComponentMeta<typeof ProgressPage>;
 
-const Template1: ComponentStory<typeof ProgressPage> = ({ ...args }) => {
-  return (
-    <>
-      <ProgressPage
-        {...args}
-        label={
-          args.label ? (
-            <>
-              <div>{args.label}</div>
-            </>
-          ) : (
-            <>
-              <div>{args.appearance === 'error' ? 'Ошибка загрузки' : 'Загрузка данных...'}</div>
-              <div> {args.percent}%</div>
-            </>
-          )
-        }
-        percent={args.percent}
-        role="alert"
-        aria-live="assertive"
-      />
-    </>
-  );
+//<editor-fold desc="Базовый пример">
+const ProgressPageBaseStory: ComponentStory<typeof ProgressPage> = (props) => (
+  <ProgressPageBaseTemplate {...cleanUpProps(props)} />
+);
+
+export const ProgressPageBase = ProgressPageBaseStory.bind({});
+ProgressPageBase.parameters = {
+  docs: {
+    source: {
+      code: ProgressPageBaseRaw,
+    },
+  },
 };
+ProgressPageBase.storyName = 'Базовый пример';
+//</editor-fold>
 
-const Template2: ComponentStory<typeof ProgressPage> = ({ ...args }) => {
-  const [tik, setTick] = useState(0);
+//<editor-fold desc="Прогресс бар с анимацией">
+const ProgressPageAnimationStory: ComponentStory<typeof ProgressPage> = (props) => (
+  <ProgressPageAnimationTemplate {...cleanUpProps(props)} />
+);
 
-  useEffect(() => {
-    const counter = () => setTick((prev) => prev + 1);
-    const timerId = setTimeout(counter, 1000);
-    if (tik >= 20) {
-      clearTimeout(timerId);
-    }
-    return () => {
-      clearTimeout(timerId);
-    };
-  }, [tik]);
-
-  return (
-    <>
-      <ProgressPage
-        {...args}
-        label={
-          <>
-            <div>{args.appearance === 'error' ? 'Ошибка загрузки' : 'Загрузка данных...'}</div>
-            <div> {args.percent || tik}%</div>
-          </>
-        }
-        percent={args.percent || tik}
-        role="alert"
-        aria-live="assertive"
-      />
-    </>
-  );
+export const ProgressPageAnimation = ProgressPageAnimationStory.bind({});
+ProgressPageAnimation.parameters = {
+  docs: {
+    source: {
+      code: ProgressPageAnimationRaw,
+    },
+  },
 };
-
-export const Progress = Template1.bind({});
-export const ProgressAnimation = Template2.bind({});
-Progress.storyName = 'Базовый пример';
-ProgressAnimation.storyName = 'Прогресс бар с анимацией';
-Progress.args = {
-  percent: 50,
-};
+ProgressPageAnimation.storyName = 'Прогресс бар с анимацией';
+//</editor-fold>
