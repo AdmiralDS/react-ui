@@ -1,69 +1,13 @@
 import * as React from 'react';
-import styled, { css, useTheme } from 'styled-components';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
-import { FONTS, NEW_FONTS } from './storyDescriptions';
-import {
-  T,
-  TYPOGRAPHY,
-  typography,
-  DefaultFontColorName,
-  LIGHT_THEME,
-  MainPrimaryColorName,
-  TooltipHoc,
-} from '@admiral-ds/react-ui';
+import styled, { useTheme } from 'styled-components';
+
+import { DefaultFontColorName, LIGHT_THEME, T, TooltipHoc, typography, TYPOGRAPHY } from '@admiral-ds/react-ui';
 import { ReactComponent as CopyOutline } from '@admiral-ds/icons/build/documents/CopyOutline.svg';
 
-const Desc = styled.div`
-  font-family: 'VTB Group UI', serif;
-  font-size: 16px;
-  line-height: 24px;
-`;
+import { FONTS, NEW_FONTS } from '#src/components/T/Stories/storyDescriptions';
 
 const Separator = styled.div`
   height: 20px;
-`;
-
-const Description = () => (
-  <Desc>
-    Text — компонент для работы с Typography. Компонент отображает текст в соответствии с заданными HTML-тегом и стилем
-    шрифта.
-  </Desc>
-);
-
-export default {
-  title: 'Admiral-2.1/T',
-  decorators: [withDesign],
-  component: T,
-  parameters: {
-    docs: {
-      source: {
-        code: null,
-      },
-    },
-    componentSubtitle: <Description />,
-    design: {
-      type: 'figma',
-      url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=9%3A24',
-    },
-  },
-  argTypes: {
-    skeleton: {
-      control: { type: 'boolean' },
-    },
-  },
-} as ComponentMeta<typeof T>;
-
-const BlueText = styled(T)`
-  color: ${(p) => p.theme.color[MainPrimaryColorName]};
-`;
-
-const CustomParagraph = styled(T)`
-  color: ${(p) => p.theme.color['Neutral/Neutral 70']};
-`;
-
-const OrangeColor = css`
-  color: ${(p) => p.theme.color['Warning/Warning 50 Main']};
 `;
 
 const Wrapper = styled.div`
@@ -133,43 +77,10 @@ const CopyIcon = React.forwardRef<HTMLDivElement, { text: string }>(({ text }, r
     </CopyOutlineWrapper>
   );
 });
+
 const CopyButton = TooltipHoc(CopyIcon);
 
-const Template1: ComponentStory<typeof T> = (args) => {
-  return (
-    <>
-      <BlueText font={'Body/Body 1 Short'} as={'a'} href={'https://'}>
-        Это ссылка со стилем Body/Body 1 Short, цветом шрифта Primary.
-      </BlueText>
-      <br />
-      <T font="Body/Body 1 Long" as="h3" cssMixin={OrangeColor}>
-        Это заголовок третьего уровня и стилем Body/Body 1 Long.
-      </T>
-      <T font="Body/Body 2 Long" as="h3" color="Purple/Purple 60 Main">
-        Это заголовок третьего уровня и стилем Body/Body 2 Long цвета Purple/Purple 60 Main.
-      </T>
-      <T font="Body/Body 2 Long" as="h2" skeleton={args.skeleton}>
-        Это заголовок второго уровня. Для активации состояния skeleton необходимо сменить состяние.
-      </T>
-      <T font="Body/Body 2 Long" as="h2" skeleton={args.skeleton}>
-        Для отображения в состоянии skeleton должен быть указан текст.
-      </T>
-      <CustomParagraph font="Header/H5" as="p">
-        Это параграф со стилем Header/H5 и цветом шрифта Tertiary.
-      </CustomParagraph>
-
-      <T font="Header/H3" as="h3">
-        Выбор конфигурации
-      </T>
-    </>
-  );
-};
-
-export const TextStatus = Template1.bind({});
-TextStatus.args = {};
-TextStatus.storyName = 'Text';
-
-const Template: ComponentStory<typeof T> = () => {
+export const FontsDemoTemplate = () => {
   return (
     <Wrapper>
       <Table>
@@ -294,21 +205,4 @@ const Template: ComponentStory<typeof T> = () => {
       </Table>
     </Wrapper>
   );
-};
-export const Fonts = Template.bind({});
-Fonts.args = {};
-Fonts.storyName = 'Список стилей';
-Fonts.parameters = {
-  docs: {
-    description: {
-      story: `Ниже представлены таблицы стилей типографики, старая и обновленная версия, на которую постепенно будет произведен перевод библиотеки.
-      Каждый из этих стилей можно передавать в компонент T в виде параметра font и в качестве результата получать StyledComponent с
-      необходимыми стилями. \n\nТакже возможен случай, когда пользователю нужен css миксин (ThemedCssFunction) с определенными
-      стилями типографики для последующего использования этого миксина в своих styled-компонентах.
-      В таком случае можно воспользоваться объектом typography, экспортируемым из нашей библиотеки. Ключами
-      этого объекта служат названия стилей типографики, а значениями css миксины.\n\nРядом с названием стиля типографики
-      находится иконка копирования, по нажатию на которую можно будет скопировать
-      пример кода для каждого стиля в отдельности.`,
-    },
-  },
 };
