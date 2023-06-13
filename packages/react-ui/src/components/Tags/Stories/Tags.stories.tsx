@@ -1,9 +1,14 @@
 import * as React from 'react';
-import styled, { ThemeProvider } from 'styled-components';
+import styled from 'styled-components';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
-import { Tags, Tag, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
-import type { Theme } from '@admiral-ds/react-ui';
+import { Tags, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
+
+import { TagsKindTemplate } from './Templates';
+import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+
+// Imports of text sources
+import KindRaw from '!!raw-loader!./Templates/TagsKind';
 
 const Separator = styled.div`
   height: 20px;
@@ -64,47 +69,15 @@ export default {
   },
 } as ComponentMeta<typeof Tags>;
 
-const Template1: ComponentStory<typeof Tags> = (args) => {
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
-  return (
-    <>
-      <ThemeProvider theme={swapBorder}>
-        <Tags
-          dimension={args.dimension}
-          width={50}
-          kind={args.kind}
-          onClick={(event) => console.log(`click tag with id: ${event.currentTarget.id}`)}
-        >
-          <Tag id="1">Tag in group</Tag>
-          <Tag id="2">Tag in group</Tag>
-          <Tag id="3">Tag in group</Tag>
-          <Tag id="4" kind="neutral">
-            Neutral
-          </Tag>
-          <Tag id="5" kind="success">
-            Success
-          </Tag>
-          <Tag id="6" kind="primary">
-            Primary
-          </Tag>
-          <Tag id="7" kind="danger" width="auto" onClick={() => console.log('click danger tag')}>
-            Danger
-          </Tag>
-          <Tag id="8" kind="warning">
-            Warning
-          </Tag>
-        </Tags>
-      </ThemeProvider>
-    </>
-  );
+//<editor-fold desc="Tags">
+const KindStory: ComponentStory<typeof Tags> = (props) => <TagsKindTemplate {...cleanUpProps(props)} />;
+export const KindExample = KindStory.bind({});
+KindExample.parameters = {
+  docs: {
+    source: {
+      code: KindRaw,
+    },
+  },
 };
-
-export const TagStatus = Template1.bind({});
-TagStatus.args = {
-  kind: 'success',
-};
-TagStatus.storyName = 'Tags';
+KindExample.storyName = 'Tags';
+//</editor-fold>
