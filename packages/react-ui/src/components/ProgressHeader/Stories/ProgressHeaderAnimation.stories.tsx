@@ -2,7 +2,14 @@ import * as React from 'react';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import styled from 'styled-components';
+
 import { ProgressHeader } from '@admiral-ds/react-ui';
+
+import { ProgressHeaderAnimationTemplate } from './Templates';
+import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+
+// Imports of text sources
+import ProgressHeaderAnimationRaw from '!!raw-loader!./Templates/ProgressHeaderAnimation';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -18,7 +25,7 @@ const Description = () => (
 );
 
 export default {
-  title: 'Admiral-2.1/ProgressHeader/Base',
+  title: 'Admiral-2.1/ProgressHeader/Animation',
   decorators: [withDesign],
   component: ProgressHeader,
   parameters: {
@@ -39,26 +46,23 @@ export default {
       control: { type: 'radio' },
     },
     percent: {
-      control: { type: 'number' },
+      control: false,
     },
   },
 } as ComponentMeta<typeof ProgressHeader>;
 
-const StyledProgressHeader = styled(ProgressHeader)`
-  bottom: 90%;
-`;
+const ProgressHeaderAnimationStory: ComponentStory<typeof ProgressHeader> = (props) => (
+  <ProgressHeaderAnimationTemplate {...cleanUpProps(props)} />
+);
 
-const Template1: ComponentStory<typeof ProgressHeader> = ({ ...args }) => {
-  return (
-    <>
-      <StyledProgressHeader {...args} percent={args.percent} role="alert" aria-live="assertive" />
-    </>
-  );
+//<editor-fold desc="Прогресс бар с анимацией">
+export const ProgressHeaderAnimation = ProgressHeaderAnimationStory.bind({});
+ProgressHeaderAnimation.parameters = {
+  docs: {
+    source: {
+      code: ProgressHeaderAnimationRaw,
+    },
+  },
 };
-
-export const Progress = Template1.bind({});
-Progress.storyName = 'Базовый пример';
-Progress.args = {
-  appearance: 'primary',
-  percent: 50,
-};
+ProgressHeaderAnimation.storyName = 'Прогресс бар с анимацией';
+//</editor-fold>

@@ -2,7 +2,14 @@ import * as React from 'react';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import styled from 'styled-components';
+
 import { ProgressHeader } from '@admiral-ds/react-ui';
+
+import { ProgressHeaderBaseTemplate } from './Templates';
+import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+
+// Imports of text sources
+import ProgressHeaderBaseRaw from '!!raw-loader!./Templates/ProgressHeaderBase';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -18,7 +25,7 @@ const Description = () => (
 );
 
 export default {
-  title: 'Admiral-2.1/ProgressHeader/Animation',
+  title: 'Admiral-2.1/ProgressHeader/Base',
   decorators: [withDesign],
   component: ProgressHeader,
   parameters: {
@@ -39,38 +46,23 @@ export default {
       control: { type: 'radio' },
     },
     percent: {
-      control: false,
+      control: { type: 'number' },
     },
   },
 } as ComponentMeta<typeof ProgressHeader>;
 
-const StyledProgressHeader = styled(ProgressHeader)`
-  bottom: 90%;
-`;
+const ProgressHeaderBaseStory: ComponentStory<typeof ProgressHeader> = (props) => (
+  <ProgressHeaderBaseTemplate {...cleanUpProps(props)} />
+);
 
-const Template2: ComponentStory<typeof ProgressHeader> = ({ ...args }) => {
-  const [tik, setTick] = React.useState(0);
-
-  React.useEffect(() => {
-    const counter = () => setTick((prev) => prev + 1);
-    const timerId = setTimeout(counter, 1000);
-    if (tik >= 20) {
-      clearTimeout(timerId);
-    }
-    return () => {
-      clearTimeout(timerId);
-    };
-  }, [tik]);
-
-  return (
-    <>
-      <StyledProgressHeader {...args} percent={args.percent || tik} role="alert" aria-live="assertive" />
-    </>
-  );
+//<editor-fold desc="Базовый пример">
+export const ProgressHeaderBase = ProgressHeaderBaseStory.bind({});
+ProgressHeaderBase.parameters = {
+  docs: {
+    source: {
+      code: ProgressHeaderBaseRaw,
+    },
+  },
 };
-
-export const ProgressAnimation = Template2.bind({});
-ProgressAnimation.storyName = 'Прогресс бар с анимацией';
-ProgressAnimation.args = {
-  appearance: 'primary',
-};
+ProgressHeaderBase.storyName = 'Базовый пример';
+//</editor-fold>
