@@ -3,7 +3,6 @@ import styled, { css } from 'styled-components';
 import { typography } from '#src/components/Typography';
 import type { ColorName } from '#src/components/themes';
 import { DefaultFontColorName } from '#src/components/themes';
-// import { color } from '@storybook/theming';
 import { skeletonAnimationMixin } from '#src/components/skeleton/animation';
 
 export type FontName = keyof typeof typography;
