@@ -46,13 +46,13 @@ const IconsBlock = styled.div<{ dimension?: PaneDimension }>`
 `;
 
 // TODO: в дальнейшем удалить параметр name, сделать параметры id и title обязательными
-export type PaneColumn = {
+export interface PaneColumn {
   /** @deprecated Используйте id для уникального идентификатора колонки и title для заголовка колонки */
   name?: string;
   id?: string;
   title?: string;
   visible: boolean;
-};
+}
 
 export interface ActionRenderProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   dimension: ButtonDimension;

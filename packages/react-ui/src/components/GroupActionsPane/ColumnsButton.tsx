@@ -69,15 +69,15 @@ const TextWrapper = styled.span`
 `;
 
 const ColumnText: React.FC<{ targetRef: React.RefObject<HTMLElement> }> = ({ children, targetRef }) => {
-  const contentRef = useRef<HTMLDivElement | null>(null);
+  const wrapperRef = useRef<HTMLSpanElement | null>(null);
   const [overflow, setOverflow] = useState(false);
   const [tooltipVisible, setTooltipVisible] = useState(false);
 
   useLayoutEffect(() => {
-    if (contentRef.current && checkOverflow(contentRef.current) !== overflow) {
-      setOverflow(checkOverflow(contentRef.current));
+    if (wrapperRef.current && checkOverflow(wrapperRef.current) !== overflow) {
+      setOverflow(checkOverflow(wrapperRef.current));
     }
-  }, [tooltipVisible, setOverflow]);
+  }, [tooltipVisible, overflow]);
 
   useLayoutEffect(() => {
     function show() {
@@ -86,7 +86,7 @@ const ColumnText: React.FC<{ targetRef: React.RefObject<HTMLElement> }> = ({ chi
     function hide() {
       setTooltipVisible(false);
     }
-    const wrapper = contentRef.current;
+    const wrapper = wrapperRef.current;
     if (wrapper) {
       wrapper.addEventListener('mouseenter', show);
       wrapper.addEventListener('mouseleave', hide);
@@ -99,7 +99,7 @@ const ColumnText: React.FC<{ targetRef: React.RefObject<HTMLElement> }> = ({ chi
 
   return (
     <>
-      <TextWrapper ref={contentRef}>{children}</TextWrapper>
+      <TextWrapper ref={wrapperRef}>{children}</TextWrapper>
       {tooltipVisible && overflow && <Tooltip targetRef={targetRef} renderContent={() => children} />}
     </>
   );
@@ -140,14 +140,14 @@ export const ColumnsButton = React.forwardRef<HTMLButtonElement, ColumnsButtonPr
         (column, index): ItemProps => ({
           id: index.toString(),
           render: (options: RenderOptionProps) => {
-            const itemRef = useRef<HTMLDivElement>(null);
+            const itemRef = useRef<HTMLDivElement | null>(null);
             return (
               <ColumnsMenuItem
                 {...options}
                 ref={itemRef}
                 dimension={menuDimension}
                 onClickItem={() => {
-                  handleChangeColumn({ id: column.name || column.id, visible: !column.visible });
+                  handleChangeColumn({ id: column.name ?? column.id, visible: !column.visible });
                 }}
                 key={index}
               >
@@ -158,7 +158,7 @@ export const ColumnsButton = React.forwardRef<HTMLButtonElement, ColumnsButtonPr
                     e.stopPropagation();
                   }}
                 />
-                <ColumnText targetRef={itemRef}>{column.name || column.title}</ColumnText>
+                <ColumnText targetRef={itemRef}>{column.name ?? column.title}</ColumnText>
               </ColumnsMenuItem>
             );
           },
