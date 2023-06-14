@@ -1,11 +1,18 @@
-import React, { useRef } from 'react';
-import styled, { css } from 'styled-components';
+import React from 'react';
+import styled from 'styled-components';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
-import { Hint, Button, TextButton, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
-import { ReactComponent as HelpOutline } from '@admiral-ds/icons/build/service/HelpOutline.svg';
+import { Hint, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
-import { HintBaseTemplate, HintClassNameTemplate, HintClickTemplate, HintPositionTemplate } from './Templates';
+import {
+  HintBaseTemplate,
+  HintClassNameTemplate,
+  HintClickTemplate,
+  HintPositionTemplate,
+  HintTextButtonTemplate,
+  HintTargetTemplate,
+  HintAnchorCssTemplate,
+} from './Templates';
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
@@ -13,6 +20,9 @@ import HintBaseRaw from '!!raw-loader!./Templates/HintBase';
 import HintClassNameRaw from '!!raw-loader!./Templates/HintClassName';
 import HintClickRaw from '!!raw-loader!./Templates/HintClick';
 import HintPositionRaw from '!!raw-loader!./Templates/HintPosition';
+import HintTextButtonRaw from '!!raw-loader!./Templates/HintTextButton';
+import HintTargetRaw from '!!raw-loader!./Templates/HintTarget';
+import HintAnchorCssRaw from '!!raw-loader!./Templates/HintAnchorCss';
 
 const Separator = styled.div<{ height?: number }>`
   height: ${({ height }) => (height ? height : 20)}px;
@@ -22,9 +32,7 @@ const Desc = styled.div`
   font-size: 16px;
   line-height: 24px;
 `;
-const StyledButton = styled(Button)`
-  padding: 4px;
-`;
+
 const Description = () => (
   <Desc>
     Всплывающая подсказка используется для ситуаций, когда требуется пояснить или раскрыть информацию более детально.
@@ -91,94 +99,6 @@ export default {
   },
 } as ComponentMeta<typeof Hint>;
 
-const text = `At breakpoint boundaries, mini units divide the screen into a fixed master grid, and multiples
-of mini units map to fluid grid column widths and row heights.`;
-
-const Template3: ComponentStory<typeof Hint> = ({ anchorId, ...args }) => {
-  const btnRef = useRef<HTMLButtonElement>(null);
-  const anchorCss = css`
-    height: 100%;
-  `;
-
-  const [visible, setVisible] = React.useState(false);
-  const handleVisibilityChange = (visible: boolean) => setVisible(visible);
-
-  return (
-    <>
-      <StyledButton dimension="s" ref={btnRef}>
-        Hover on icon&nbsp;&nbsp;&nbsp;
-        <Hint
-          {...args}
-          visible={visible}
-          onVisibilityChange={handleVisibilityChange}
-          renderContent={() => text}
-          target={btnRef}
-          anchorId={anchorId}
-          anchorCssMixin={anchorCss}
-        >
-          <HelpOutline tabIndex={0} height={20} width={20} aria-label="Help Icon" aria-describedby={anchorId} />
-        </Hint>
-      </StyledButton>
-    </>
-  );
-};
-
-const Template4: ComponentStory<typeof Hint> = ({ anchorId, ...args }) => {
-  const [visible, setVisible] = React.useState(false);
-  const handleVisibilityChange = (visible: boolean) => setVisible(visible);
-
-  return (
-    <>
-      <Hint
-        {...args}
-        visible={visible}
-        onVisibilityChange={handleVisibilityChange}
-        visibilityTrigger="click"
-        renderContent={() => (
-          <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
-            {text}
-            <Separator height={4} />
-            <TextButton appearance="primary" dimension="s" text="Text Button" />
-          </div>
-        )}
-        anchorId={anchorId}
-      >
-        <StyledButton dimension="s" aria-label="Additional information" aria-describedby={anchorId}>
-          <HelpOutline />
-        </StyledButton>
-      </Hint>
-    </>
-  );
-};
-
-const Template5: ComponentStory<typeof Hint> = ({ anchorId, ...args }) => {
-  // import {css} from 'styled-components;
-  const anchorCss = css`
-    padding: 10px;
-    border: 2px dotted red;
-  `;
-
-  const [visible, setVisible] = React.useState(false);
-  const handleVisibilityChange = (visible: boolean) => setVisible(visible);
-
-  return (
-    <>
-      <Hint
-        {...args}
-        visible={visible}
-        onVisibilityChange={handleVisibilityChange}
-        renderContent={() => text}
-        anchorId={anchorId}
-        anchorCssMixin={anchorCss}
-      >
-        <StyledButton dimension="s" aria-label="Additional information" aria-describedby={anchorId}>
-          <HelpOutline aria-hidden />
-        </StyledButton>
-      </Hint>
-    </>
-  );
-};
-
 //<editor-fold desc="Базовый пример">
 const HintBaseStory: ComponentStory<typeof Hint> = (props) => (
   <HintBaseTemplate visible renderContent={() => ''} {...cleanUpProps(props)} />
@@ -230,7 +150,7 @@ HintPositionExample.parameters = {
 HintPositionExample.storyName = 'Hint. Позиционирование.';
 //</editor-fold>
 
-//<editor-fold desc="Hint. Появление по клику">
+//<editor-fold desc="Появление по клику">
 const HintClickStory: ComponentStory<typeof Hint> = (props) => (
   <HintClickTemplate visible renderContent={() => ''} {...cleanUpProps(props)} />
 );
@@ -245,23 +165,42 @@ HintClickExample.parameters = {
 HintClickExample.storyName = 'Hint. Появление по клику.';
 //</editor-fold>
 
-export const HintLink = Template4.bind({});
-HintLink.args = { anchorId: 'hint_link' };
-HintLink.storyName = 'Hint. Текст с ссылкой.';
-HintLink.parameters = {
+//<editor-fold desc="С кнопкой">
+const HintTextButtonStory: ComponentStory<typeof Hint> = (props) => (
+  <HintTextButtonTemplate visible renderContent={() => ''} {...cleanUpProps(props)} />
+);
+export const HintTextButtonExample = HintTextButtonStory.bind({});
+HintTextButtonExample.parameters = {
   docs: {
+    source: {
+      code: HintTextButtonRaw,
+    },
     description: {
-      story: `В качества контента хинта может выступать любой ReactNode. В случае если 
-    хинт содержит в себе ссылку, триггером его появления должен быть click.`,
+      story: `В качества контента хинта может выступать любой ReactNode, 
+      например допускается использование TextButton внутри хинта. В случае если 
+    хинт содержит в себе TextButton, триггером его появления должен быть click.`,
     },
   },
 };
+HintTextButtonExample.storyName = 'Hint. Пример с кнопкой.';
+//</editor-fold>
 
-export const HintTarget = Template3.bind({});
-HintTarget.args = { anchorId: 'hint_target' };
-HintTarget.storyName = 'Hint. Позиционирование относительно target.';
+//<editor-fold desc="Позиционирование относительно target">
+const HintTargetStory: ComponentStory<typeof Hint> = (props) => (
+  <HintTargetTemplate visible renderContent={() => ''} {...cleanUpProps(props)} />
+);
+export const HintTargetExample = HintTargetStory.bind({});
+HintTargetExample.parameters = {
+  docs: {
+    source: {
+      code: HintTargetRaw,
+    },
+  },
+};
+HintTargetExample.storyName = 'Hint. Позиционирование относительно target.';
+//</editor-fold>
 
-//<editor-fold desc="Hint. ClassName">
+//<editor-fold desc="ClassName">
 const HintClassNameStory: ComponentStory<typeof Hint> = (props) => (
   <HintClassNameTemplate visible renderContent={() => ''} {...cleanUpProps(props)} />
 );
@@ -279,6 +218,17 @@ HintClassNameExample.parameters = {
 HintClassNameExample.storyName = 'Hint. ClassName.';
 //</editor-fold>
 
-export const HintAnchorCss = Template5.bind({});
-HintAnchorCss.args = { anchorId: 'hint_css' };
-HintAnchorCss.storyName = 'Hint. Стилизация внешнего контейнера (AnchorWrapper) с помощью anchorCssMixin.';
+//<editor-fold desc="Стилизация внешнего контейнера">
+const HintAnchorCssStory: ComponentStory<typeof Hint> = (props) => (
+  <HintAnchorCssTemplate visible renderContent={() => ''} {...cleanUpProps(props)} />
+);
+export const HintAnchorCssExample = HintAnchorCssStory.bind({});
+HintAnchorCssExample.parameters = {
+  docs: {
+    source: {
+      code: HintAnchorCssRaw,
+    },
+  },
+};
+HintAnchorCssExample.storyName = 'Hint. Стилизация внешнего контейнера (AnchorWrapper) с помощью anchorCssMixin.';
+//</editor-fold>

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 
 import { Accordion, AccordionItem } from '@admiral-ds/react-ui';
+
 import {
   AccordionDimensionTemplate,
   AccordionDividerTemplate,
@@ -10,6 +11,7 @@ import {
   AccordionModesTemplate,
   AccordionPlaygroundTemplate,
 } from './Templates';
+import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
 import AccordionDividerRaw from '!!raw-loader!./Templates/AccordionDivider';
@@ -85,7 +87,9 @@ export default {
 } as ComponentMeta<typeof Accordion>;
 
 //<editor-fold desc="Размеры">
-const AccordionPlaygroundStory: ComponentStory<typeof Accordion> = (args) => <AccordionPlaygroundTemplate {...args} />;
+const AccordionPlaygroundStory: ComponentStory<typeof Accordion> = (props) => (
+  <AccordionPlaygroundTemplate {...cleanUpProps(props)} />
+);
 
 export const AccordionPlayground = AccordionPlaygroundStory.bind({});
 AccordionPlayground.parameters = {
@@ -95,7 +99,6 @@ AccordionPlayground.parameters = {
     },
   },
 };
-AccordionPlayground.args = {};
 AccordionPlayground.storyName = 'Accordion. Playground.';
 //</editor-fold>
 
@@ -113,12 +116,13 @@ AccordionDimension.parameters = {
     },
   },
 };
-AccordionDimension.args = {};
 AccordionDimension.storyName = 'Accordion. Размеры.';
 //</editor-fold>
 
 //<editor-fold desc="Режимы использования">
-const AccordionModesStory: ComponentStory<typeof Accordion> = (args) => <AccordionModesTemplate {...args} />;
+const AccordionModesStory: ComponentStory<typeof Accordion> = (props) => (
+  <AccordionModesTemplate {...cleanUpProps(props)} />
+);
 
 export const AccordionModes = AccordionModesStory.bind({});
 AccordionModes.parameters = {
@@ -135,7 +139,6 @@ AccordionModes.parameters = {
     },
   },
 };
-AccordionModes.args = {};
 AccordionModes.storyName = 'Accordion. Режимы использования.';
 //</editor-fold>
 
@@ -143,7 +146,6 @@ AccordionModes.storyName = 'Accordion. Режимы использования.'
 const AccordionIconStory: ComponentStory<typeof Accordion> = () => <AccordionIconTemplate />;
 
 export const AccordionIcon = AccordionIconStory.bind({});
-AccordionIcon.args = {};
 AccordionIcon.storyName = 'Accordion. Расположение шеврона слева.';
 AccordionIcon.parameters = {
   docs: {
@@ -178,6 +180,5 @@ AccordionDivider.parameters = {
     },
   },
 };
-AccordionDivider.args = {};
 AccordionDivider.storyName = 'Accordion. Скрытие разделителей.';
 //</editor-fold>

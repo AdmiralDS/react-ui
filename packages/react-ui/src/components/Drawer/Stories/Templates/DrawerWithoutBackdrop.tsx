@@ -42,36 +42,36 @@ const DrawerForm = ({ onYesClick, onNoClick }: Props) => {
 };
 
 export const DrawerWithoutBackdropTemplate = (props: DrawerProps) => {
-    const [opened, setOpened] = React.useState(false);
-  
-    function swapBorder(theme: Theme): Theme {
-      theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
-      return theme;
-    }
-  
-    return (
-      <ThemeProvider theme={swapBorder}>
-        <Button onClick={() => setOpened(true)}>Open drawer without backdrop</Button>
-        <Drawer
-          {...props}
-          isOpen={opened}
-          onClose={() => {
+  const [opened, setOpened] = React.useState(false);
+
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    return theme;
+  }
+
+  return (
+    <ThemeProvider theme={swapBorder}>
+      <Button onClick={() => setOpened(true)}>Open drawer without backdrop</Button>
+      <Drawer
+        {...props}
+        isOpen={opened}
+        onClose={() => {
+          setOpened(false);
+        }}
+        backdrop={false}
+        closeOnEscapeKeyDown
+        style={{ width: '480px' }}
+        aria-labelledby="drawer-title"
+      >
+        <DrawerTitle id="drawer-title">Drawer title</DrawerTitle>
+        <DrawerForm
+          onYesClick={(p) => {
+            console.log(`value ${p.inputValue}`);
             setOpened(false);
           }}
-          backdrop={false}
-          closeOnEscapeKeyDown
-          style={{ width: '480px' }}
-          aria-labelledby="drawer-title"
-        >
-          <DrawerTitle id="drawer-title">Drawer title</DrawerTitle>
-          <DrawerForm
-            onYesClick={(p) => {
-              console.log(`value ${p.inputValue}`);
-              setOpened(false);
-            }}
-            onNoClick={() => setOpened(false)}
-          />
-        </Drawer>
-      </ThemeProvider>
-    );
+          onNoClick={() => setOpened(false)}
+        />
+      </Drawer>
+    </ThemeProvider>
+  );
 };

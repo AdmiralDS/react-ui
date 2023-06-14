@@ -4,13 +4,13 @@ import { withDesign } from 'storybook-addon-designs';
 
 import { Button, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
-import { filterKeysWithUndefinedValues } from '#src/components/common/utils/filterKeysWithUndefinedValues';
 import {
   ButtonLoaderTemplate,
   ButtonPlaygroundTemplate,
   ButtonStylesTemplate,
   ButtonWithIconTemplate,
 } from './Templates';
+import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
 import ButtonLoaderRaw from '!!raw-loader!./Templates/ButtonLoader';
@@ -90,8 +90,8 @@ export default {
 } as ComponentMeta<typeof Button>;
 
 //<editor-fold desc="Button. Playground">
-const ButtonPlaygroundStory: ComponentStory<typeof Button> = (args) => {
-  return <ButtonPlaygroundTemplate {...filterKeysWithUndefinedValues(args)} />;
+const ButtonPlaygroundStory: ComponentStory<typeof Button> = (props) => {
+  return <ButtonPlaygroundTemplate {...cleanUpProps(props)} />;
 };
 
 export const ButtonPlayground = ButtonPlaygroundStory.bind({});
@@ -103,12 +103,11 @@ ButtonPlayground.parameters = {
   },
 };
 ButtonPlayground.storyName = 'Button. Playground';
-ButtonPlayground.args = {};
 //</editor-fold>
 
 //<editor-fold desc="Button. Стили">
-const ButtonStylesStory: ComponentStory<typeof Button> = (args) => {
-  return <ButtonStylesTemplate {...args} />;
+const ButtonStylesStory: ComponentStory<typeof Button> = (props) => {
+  return <ButtonStylesTemplate {...cleanUpProps(props)} />;
 };
 
 export const ButtonStyles = ButtonStylesStory.bind({});
@@ -120,12 +119,11 @@ ButtonStyles.parameters = {
   },
 };
 ButtonStyles.storyName = 'Button. Стили';
-ButtonStyles.args = {};
 //</editor-fold>
 
 //<editor-fold desc="Button с иконкой">
-const ButtonWithIconStory: ComponentStory<typeof Button> = (args) => {
-  return <ButtonWithIconTemplate {...args} />;
+const ButtonWithIconStory: ComponentStory<typeof Button> = (props) => {
+  return <ButtonWithIconTemplate {...cleanUpProps(props)} />;
 };
 export const ButtonWithIcon = ButtonWithIconStory.bind({});
 ButtonWithIcon.parameters = {
@@ -136,12 +134,11 @@ ButtonWithIcon.parameters = {
   },
 };
 ButtonWithIcon.storyName = 'Button с иконкой';
-ButtonWithIcon.args = {};
 //</editor-fold>
 
 //<editor-fold desc="Button. Загрузка">
-const ButtonLoaderStory: ComponentStory<typeof Button> = (args) => {
-  return <ButtonLoaderTemplate {...args} />;
+const ButtonLoaderStory: ComponentStory<typeof Button> = (props) => {
+  return <ButtonLoaderTemplate {...cleanUpProps(props)} />;
 };
 
 export const ButtonLoader = ButtonLoaderStory.bind({});
@@ -153,5 +150,4 @@ ButtonLoader.parameters = {
   },
 };
 ButtonLoader.storyName = 'Button. Загрузка';
-ButtonLoader.args = {};
 //</editor-fold>
