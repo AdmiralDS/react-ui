@@ -68,14 +68,16 @@ const TextWrapper = styled.span`
   text-overflow: ellipsis;
 `;
 
-const ColumnText: React.FC<{ targetRef: React.RefObject<HTMLElement> }> = ({ children, targetRef }) => {
-  const wrapperRef = useRef<HTMLSpanElement | null>(null);
+const ColumnMenuItem = ({ visible, title, ...props }: any) => {
+  const itemRef = useRef<HTMLDivElement | null>(null);
+  const textRef = useRef<HTMLSpanElement | null>(null);
+
   const [overflow, setOverflow] = useState(false);
   const [tooltipVisible, setTooltipVisible] = useState(false);
 
   useLayoutEffect(() => {
-    if (wrapperRef.current && checkOverflow(wrapperRef.current) !== overflow) {
-      setOverflow(checkOverflow(wrapperRef.current));
+    if (textRef.current && checkOverflow(textRef.current) !== overflow) {
+      setOverflow(checkOverflow(textRef.current));
     }
   }, [tooltipVisible, overflow]);
 
@@ -86,22 +88,29 @@ const ColumnText: React.FC<{ targetRef: React.RefObject<HTMLElement> }> = ({ chi
     function hide() {
       setTooltipVisible(false);
     }
-    const wrapper = wrapperRef.current;
-    if (wrapper) {
-      wrapper.addEventListener('mouseenter', show);
-      wrapper.addEventListener('mouseleave', hide);
+    const text = textRef.current;
+    if (text) {
+      text.addEventListener('mouseenter', show);
+      text.addEventListener('mouseleave', hide);
       return () => {
-        wrapper.removeEventListener('mouseenter', show);
-        wrapper.removeEventListener('mouseleave', hide);
+        text.removeEventListener('mouseenter', show);
+        text.removeEventListener('mouseleave', hide);
       };
     }
   }, []);
 
   return (
-    <>
-      <TextWrapper ref={wrapperRef}>{children}</TextWrapper>
-      {tooltipVisible && overflow && <Tooltip targetRef={targetRef} renderContent={() => children} />}
-    </>
+    <ColumnsMenuItem {...props} ref={itemRef}>
+      <StyledCheckbox
+        checked={visible}
+        onChange={(e: React.FormEvent<HTMLInputElement>) => {
+          e.preventDefault();
+          e.stopPropagation();
+        }}
+      />
+      <TextWrapper ref={textRef}>{title}</TextWrapper>
+      {tooltipVisible && overflow && <Tooltip targetRef={itemRef} renderContent={() => title} />}
+    </ColumnsMenuItem>
   );
 };
 
@@ -140,26 +149,19 @@ export const ColumnsButton = React.forwardRef<HTMLButtonElement, ColumnsButtonPr
         (column, index): ItemProps => ({
           id: index.toString(),
           render: (options: RenderOptionProps) => {
-            const itemRef = useRef<HTMLDivElement | null>(null);
+            const title = column.name ?? column.title;
+            const id = column.name ?? column.id;
             return (
-              <ColumnsMenuItem
+              <ColumnMenuItem
                 {...options}
-                ref={itemRef}
+                title={title}
+                visible={column.visible}
                 dimension={menuDimension}
                 onClickItem={() => {
-                  handleChangeColumn({ id: column.name ?? column.id, visible: !column.visible });
+                  handleChangeColumn({ id, visible: !column.visible });
                 }}
                 key={index}
-              >
-                <StyledCheckbox
-                  checked={column.visible}
-                  onChange={(e: React.FormEvent<HTMLInputElement>) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                  }}
-                />
-                <ColumnText targetRef={itemRef}>{column.name ?? column.title}</ColumnText>
-              </ColumnsMenuItem>
+              />
             );
           },
         }),
