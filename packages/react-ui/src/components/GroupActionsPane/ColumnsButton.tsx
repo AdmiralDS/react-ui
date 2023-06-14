@@ -2,14 +2,17 @@ import type { CSSProperties, HTMLAttributes } from 'react';
 import * as React from 'react';
 import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import styled from 'styled-components';
-import { useMemo, useRef, useState } from 'react';
+import { useMemo, useRef, useState, useLayoutEffect } from 'react';
 import { Checkbox } from '#src/components/Checkbox';
 import { IconButton } from '#src/components/IconButton';
 import { StyledDropdownContainer } from '#src/components/DropdownContainer';
 import { ReactComponent as PlusOutline } from '@admiral-ds/icons/build/service/PlusOutline.svg';
 import { Menu } from '#src/components/Menu';
 import { MenuItem } from '#src/components/Menu/MenuItem';
+import { Tooltip } from '#src/components/Tooltip';
 import { refSetter } from '#src/components/common/utils/refSetter';
+import { checkOverflow } from '#src/components/common/utils/checkOverflow';
+import type { PaneColumn } from '#src/components/GroupActionsPane';
 
 export type MenuDimension = 's' | 'm' | 'l';
 
@@ -32,19 +35,9 @@ export interface ItemProps {
   disabled?: boolean;
 }
 
-type ItemValue = {
-  /**
-   * @deprecated Используйте id title
-   */
-  name?: string;
-  id?: string;
-  title?: string;
-  visible: boolean;
-};
-
 export interface ColumnsButtonProps extends HTMLAttributes<HTMLButtonElement>, RenderOptionProps {
-  columns?: Array<ItemValue>;
-  onColumnsChange?: (columns: Array<ItemValue>) => void;
+  columns?: Array<PaneColumn>;
+  onColumnsChange?: (columns: Array<PaneColumn>) => void;
   buttonDimension?: 's' | 'l';
   menuDimension?: MenuDimension;
   /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
@@ -62,11 +55,55 @@ const ColumnsMenu = styled(Menu)`
 const ColumnsMenuItem = styled(MenuItem)`
   display: flex;
   justify-content: flex-start;
+  flex-flow: nowrap;
 `;
 
 const StyledCheckbox = styled(Checkbox)`
+  flex-shrink: 0;
   margin-right: 10px;
 `;
+
+const TextWrapper = styled.span`
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
+
+const ColumnText: React.FC<{ targetRef: React.RefObject<HTMLElement> }> = ({ children, targetRef }) => {
+  const contentRef = useRef<HTMLDivElement | null>(null);
+  const [overflow, setOverflow] = useState(false);
+  const [tooltipVisible, setTooltipVisible] = useState(false);
+
+  useLayoutEffect(() => {
+    if (contentRef.current && checkOverflow(contentRef.current) !== overflow) {
+      setOverflow(checkOverflow(contentRef.current));
+    }
+  }, [tooltipVisible, setOverflow]);
+
+  useLayoutEffect(() => {
+    function show() {
+      setTooltipVisible(true);
+    }
+    function hide() {
+      setTooltipVisible(false);
+    }
+    const wrapper = contentRef.current;
+    if (wrapper) {
+      wrapper.addEventListener('mouseenter', show);
+      wrapper.addEventListener('mouseleave', hide);
+      return () => {
+        wrapper.removeEventListener('mouseenter', show);
+        wrapper.removeEventListener('mouseleave', hide);
+      };
+    }
+  }, []);
+
+  return (
+    <>
+      <TextWrapper ref={contentRef}>{children}</TextWrapper>
+      {tooltipVisible && overflow && <Tooltip targetRef={targetRef} renderContent={() => children} />}
+    </>
+  );
+};
 
 export const ColumnsButton = React.forwardRef<HTMLButtonElement, ColumnsButtonProps>(
   (
@@ -89,7 +126,7 @@ export const ColumnsButton = React.forwardRef<HTMLButtonElement, ColumnsButtonPr
       setOpened((prevOpened) => !prevOpened);
     };
 
-    const handleChangeColumn = ({ id, visible }: ItemValue) => {
+    const handleChangeColumn = ({ id, visible }: PaneColumn) => {
       if (onColumnsChange && columns.length > 0) {
         const newValue = [...columns];
         const item = newValue.find((column) => (column.name ? column.name === id : column.id === id));
@@ -102,25 +139,29 @@ export const ColumnsButton = React.forwardRef<HTMLButtonElement, ColumnsButtonPr
       return columns.map(
         (column, index): ItemProps => ({
           id: index.toString(),
-          render: (options: RenderOptionProps) => (
-            <ColumnsMenuItem
-              {...options}
-              dimension={menuDimension}
-              onClickItem={() => {
-                handleChangeColumn({ id: column.name || column.id, visible: !column.visible });
-              }}
-              key={index}
-            >
-              <StyledCheckbox
-                checked={column.visible}
-                onChange={(e: React.FormEvent<HTMLInputElement>) => {
-                  e.preventDefault();
-                  e.stopPropagation();
+          render: (options: RenderOptionProps) => {
+            const itemRef = useRef<HTMLDivElement>(null);
+            return (
+              <ColumnsMenuItem
+                {...options}
+                ref={itemRef}
+                dimension={menuDimension}
+                onClickItem={() => {
+                  handleChangeColumn({ id: column.name || column.id, visible: !column.visible });
                 }}
-              />
-              {column.name || column.title}
-            </ColumnsMenuItem>
-          ),
+                key={index}
+              >
+                <StyledCheckbox
+                  checked={column.visible}
+                  onChange={(e: React.FormEvent<HTMLInputElement>) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                  }}
+                />
+                <ColumnText targetRef={itemRef}>{column.name || column.title}</ColumnText>
+              </ColumnsMenuItem>
+            );
+          },
         }),
       );
     }, [columns, menuDimension]);

@@ -22,12 +22,6 @@ const SettingsMenu = styled.div`
 `;
 
 const columns: GroupActionsPaneProps['columns'] = [
-  // { name: 'Тип сделки', visible: true },
-  // { name: 'Дата сделки', visible: true },
-  // { name: 'Сумма', visible: false },
-  // { name: 'Валюта', visible: true },
-  // { name: 'Ставка', visible: true },
-  // { name: 'Статус', visible: true },
   { id: 'transfer_type', title: 'Тип сделки', visible: true },
   { id: 'transfer_date', title: 'Дата сделки', visible: true },
   { id: 'transfer_amount', title: 'Сумма', visible: false },

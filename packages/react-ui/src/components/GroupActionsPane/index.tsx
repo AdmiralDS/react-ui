@@ -45,10 +45,9 @@ const IconsBlock = styled.div<{ dimension?: PaneDimension }>`
   justify-content: flex-end;
 `;
 
-type Column = {
-  /**
-   * @deprecated Используйте id title
-   */
+// TODO: в дальнейшем удалить параметр name, сделать параметры id и title обязательными
+export type PaneColumn = {
+  /** @deprecated Используйте id для уникального идентификатора колонки и title для заголовка колонки */
   name?: string;
   id?: string;
   title?: string;
@@ -64,13 +63,13 @@ export interface GroupActionsPaneProps extends HTMLAttributes<HTMLDivElement> {
   dimension?: PaneDimension;
 
   /** Массив объектов с видимостью колонок */
-  columns?: Array<Column>;
+  columns?: Array<PaneColumn>;
 
   /** Значение строки поиска */
   searchValue?: string;
 
   /** Обработчик изменения видимости колонок */
-  onColumnsChange?: (columns: Array<Column>) => void;
+  onColumnsChange?: (columns: Array<PaneColumn>) => void;
 
   /** Обработчик открытия строки поиска */
   onSearchEnter?: () => void;
