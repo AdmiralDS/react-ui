@@ -56,7 +56,7 @@ const Overlay = styled.div<{
   left: 0;
   bottom: 0;
   right: 0;
-  z-index: ${({ theme }) => theme.zIndex.modal};
+  z-index: ${({ theme }) => theme.zIndex.drawer};
   ${(p) => p.overlayCssMixin}
   outline: none;
   pointer-events: none;

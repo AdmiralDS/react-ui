@@ -3,11 +3,20 @@ import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import styled from 'styled-components';
 
-import { Tooltip, TooltipHoc, Button, InputField, ALL_BORDER_RADIUS_VALUES, refSetter } from '@admiral-ds/react-ui';
-import type { InputFieldProps } from '@admiral-ds/react-ui';
+import { Tooltip, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
 import { TooltipHocStory } from './TooltipHOCStory';
-import { TooltipBaseTemplate, TooltipDelayTemplate, TooltipRefTemplate, TooltipMenuButtonTemplate } from './Templates';
+import {
+  TooltipBaseTemplate,
+  TooltipDelayTemplate,
+  TooltipRefTemplate,
+  TooltipMenuButtonTemplate,
+  TooltipHocBaseTemplate,
+  TooltipHocClassTemplate,
+  TooltipHocFCTemplate,
+  TooltipHocRefSetterTemplate,
+  TooltipHocRefTemplate,
+} from './Templates';
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
@@ -15,6 +24,11 @@ import TooltipBaseRaw from '!!raw-loader!./Templates/TooltipBase';
 import TooltipDelayRaw from '!!raw-loader!./Templates/TooltipDelay';
 import TooltipRefRaw from '!!raw-loader!./Templates/TooltipRef';
 import TooltipMenuButtonRaw from '!!raw-loader!./Templates/TooltipMenuButton';
+import TooltipHocBaseRaw from '!!raw-loader!./Templates/TooltipHocBase';
+import TooltipHocClassRaw from '!!raw-loader!./Templates/TooltipHocClass';
+import TooltipHocFCRaw from '!!raw-loader!./Templates/TooltipHocFC';
+import TooltipHocRefSetterRaw from '!!raw-loader!./Templates/TooltipHocRefSetter';
+import TooltipHocRefRaw from '!!raw-loader!./Templates/TooltipHocRef';
 
 const Separator = styled.div<{ height?: number }>`
   height: ${({ height }) => (height ? height : 20)}px;
@@ -97,92 +111,6 @@ export default {
   },
 } as ComponentMeta<typeof Tooltip>;
 
-const TooltipedInput = TooltipHoc(InputField);
-const Template4: ComponentStory<typeof Tooltip> = () => {
-  return (
-    <TooltipedInput
-      renderContent={() => `Contrary to popular belief, Lorem Ipsum is not simply random text.`}
-      label={'TooltipHoc. Базовый пример.'}
-    />
-  );
-};
-
-type TestType = {
-  innerRef: React.ForwardedRef<HTMLHeadingElement>;
-  label: string;
-};
-class Test extends React.Component<TestType> {
-  render() {
-    const { innerRef, label } = this.props;
-    return <h2 ref={innerRef}>{label}</h2>;
-  }
-}
-const TestForwardingRef = React.forwardRef<HTMLHeadingElement, Omit<TestType, 'innerRef'>>((props, ref) => (
-  <Test innerRef={ref} {...props} />
-));
-const TooltipedTest = TooltipHoc(TestForwardingRef);
-const Template5: ComponentStory<typeof Tooltip> = () => {
-  return (
-    <TooltipedTest
-      renderContent={() => `Пример использования TooltipHoc с классовым компонентом.`}
-      label={'Наведи на меня мышью и увидишь тултип'}
-    />
-  );
-};
-
-const H2 = React.forwardRef<HTMLHeadingElement, React.HTMLAttributes<HTMLElement>>((props, ref) => {
-  return (
-    <h2 ref={ref} {...props}>
-      Наведи на меня мышью и увидишь тултип
-    </h2>
-  );
-});
-const TooltipedHeading = TooltipHoc(H2);
-const Template6: ComponentStory<typeof Tooltip> = () => {
-  return <TooltipedHeading renderContent={() => `Пример использования TooltipHoc с функциональным компонентом.`} />;
-};
-
-const Component = React.forwardRef<HTMLInputElement, InputFieldProps>((props, ref) => {
-  const inputRef = React.useRef<HTMLInputElement | null>(null);
-  const handleBtnClick = () => {
-    inputRef.current?.focus();
-  };
-  return (
-    <>
-      <InputField ref={refSetter(ref, inputRef)} {...props} />
-      <Separator />
-      <Button onClick={handleBtnClick}>Click me and focus input</Button>
-    </>
-  );
-});
-const TooltipedComponent = TooltipHoc(Component);
-const Template7: ComponentStory<typeof Tooltip> = () => {
-  return (
-    <TooltipedComponent
-      renderContent={() => `Contrary to popular belief, Lorem Ipsum is not simply random text.`}
-      label={'Использование утилиты refSetter'}
-    />
-  );
-};
-
-const Template8: ComponentStory<typeof Tooltip> = () => {
-  const inputRef = React.useRef<HTMLInputElement | null>(null);
-  const handleBtnClick = () => {
-    inputRef.current?.focus();
-  };
-  return (
-    <>
-      <TooltipedInput
-        renderContent={() => `Contrary to popular belief, Lorem Ipsum is not simply random text.`}
-        ref={inputRef}
-        label={'Прокидывание ref на результат вызова TooltipHoc'}
-      />
-      <Separator />
-      <Button onClick={handleBtnClick}>Click me and focus input</Button>
-    </>
-  );
-};
-
 //<editor-fold desc="Базовый пример">
 const TooltipBaseStory: ComponentStory<typeof Tooltip> = ({ renderContent, targetRef, ...props }) => (
   <TooltipBaseTemplate renderContent={renderContent} targetRef={targetRef} {...cleanUpProps(props)} />
@@ -239,30 +167,71 @@ TooltipRefExample.parameters = {
 TooltipRefExample.storyName = 'Tooltip. Пример с получением ref тултипа.';
 //</editor-fold>
 
-export const TooltipHocBase = Template4.bind({});
-TooltipHocBase.args = {};
-TooltipHocBase.storyName = 'TooltipHoc. Базовый пример.';
-
-export const TooltipHocClass = Template5.bind({});
-TooltipHocClass.args = {};
-TooltipHocClass.storyName = 'TooltipHoc. Пример использования с классовым компонентом.';
-
-export const TooltipHocFC = Template6.bind({});
-TooltipHocFC.args = {};
-TooltipHocFC.storyName = 'TooltipHoc. Пример использования с функциональным компонентом.';
-
-export const TooltipHocRefSetter = Template7.bind({});
-TooltipHocRefSetter.args = {};
-TooltipHocRefSetter.storyName = 'TooltipHoc. Утилита refSetter для мерджа рефов.';
-TooltipHocRefSetter.parameters = {
+//<editor-fold desc="TooltipHoc. Базовый пример.">
+const TooltipHocBaseStory: ComponentStory<typeof TooltipHocStory> = () => <TooltipHocBaseTemplate />;
+export const TooltipHocBaseExample = TooltipHocBaseStory.bind({});
+TooltipHocBaseExample.parameters = {
   docs: {
+    source: {
+      code: TooltipHocBaseRaw,
+    },
+  },
+};
+TooltipHocBaseExample.storyName = 'TooltipHoc. Базовый пример.';
+//</editor-fold>
+
+//<editor-fold desc="TooltipHoc. Пример использования с классовым компонентом.">
+const TooltipHocClassStory: ComponentStory<typeof TooltipHocStory> = () => <TooltipHocClassTemplate />;
+export const TooltipHocClassExample = TooltipHocClassStory.bind({});
+TooltipHocClassExample.parameters = {
+  docs: {
+    source: {
+      code: TooltipHocClassRaw,
+    },
+  },
+};
+TooltipHocClassExample.storyName = 'TooltipHoc. Пример использования с классовым компонентом.';
+//</editor-fold>
+
+//<editor-fold desc="TooltipHoc. Пример использования с функциональным компонентом.">
+const TooltipHocFCStory: ComponentStory<typeof TooltipHocStory> = () => <TooltipHocFCTemplate />;
+export const TooltipHocFCExample = TooltipHocFCStory.bind({});
+TooltipHocFCExample.parameters = {
+  docs: {
+    source: {
+      code: TooltipHocFCRaw,
+    },
+  },
+};
+TooltipHocFCExample.storyName = 'TooltipHoc. Пример использования с функциональным компонентом.';
+//</editor-fold>
+
+//<editor-fold desc="TooltipHoc. Утилита refSetter для мерджа рефов.">
+const TooltipHocRefSetterStory: ComponentStory<typeof TooltipHocStory> = () => <TooltipHocRefSetterTemplate />;
+export const TooltipHocRefSetterExample = TooltipHocRefSetterStory.bind({});
+TooltipHocRefSetterExample.parameters = {
+  docs: {
+    source: {
+      code: TooltipHocRefSetterRaw,
+    },
     description: {
       story: `Если в ваш компонент извне передан параметр ref и у вас есть внутренний
       ref в компоненте, для синхронной работы данных рефов и их мерджа вы можете воспользоваться утилитой refSetter.`,
     },
   },
 };
+TooltipHocRefSetterExample.storyName = 'TooltipHoc. Утилита refSetter для мерджа рефов.';
+//</editor-fold>
 
-export const TooltipHocRef = Template8.bind({});
-TooltipHocRef.args = {};
-TooltipHocRef.storyName = 'TooltipHoc. Прокидывание ref на результат вызова TooltipHoc.';
+//<editor-fold desc="TooltipHoc. Прокидывание ref на результат вызова TooltipHoc.">
+const TooltipHocRefStory: ComponentStory<typeof TooltipHocStory> = () => <TooltipHocRefTemplate />;
+export const TooltipHocRefExample = TooltipHocRefStory.bind({});
+TooltipHocRefExample.parameters = {
+  docs: {
+    source: {
+      code: TooltipHocRefRaw,
+    },
+  },
+};
+TooltipHocRefExample.storyName = 'TooltipHoc. Прокидывание ref на результат вызова TooltipHoc.';
+//</editor-fold>

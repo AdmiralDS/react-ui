@@ -39,4 +39,5 @@ export const Portal = styled(PositionInPortal)<{ flexDirection?: any }>`
   display: flex;
   flex-wrap: nowrap;
   ${({ flexDirection }) => (flexDirection ? `flex-direction: ${flexDirection};` : '')}
+  z-index: ${({ theme }) => theme.zIndex.tooltip};
 `;
