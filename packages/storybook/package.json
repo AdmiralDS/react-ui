@@ -17,9 +17,11 @@
   },
   "devDependencies": {
     "@admiral-ds/react-ui": "*",
+    "@rollup/plugin-commonjs": "^25.0.1",
     "@storybook/addon-essentials": "^7.0.1",
     "@storybook/addon-interactions": "^7.0.1",
     "@storybook/addon-links": "^7.0.1",
+    "@storybook/addon-styling": "^1.3.0",
     "@storybook/blocks": "^7.0.1",
     "@storybook/react": "^7.0.1",
     "@storybook/react-vite": "^7.0.1",

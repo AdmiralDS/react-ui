@@ -10,7 +10,8 @@ import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { skeletonAnimationMixin } from '#src/components/skeleton/animation';
 import { IconContainer } from '#src/components/TextButton/commonMixin';
 
-export type { ButtonAppearance } from '#src/components/Button/types';
+export type { ButtonAppearance } from './types';
+export * from './dimensionMixin';
 
 type IconPlace = 'left' | 'right';
 
