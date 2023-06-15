@@ -1,9 +1,16 @@
 import * as React from 'react';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
-import styled, { ThemeProvider } from 'styled-components';
+import styled from 'styled-components';
 import { SliderRange, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
-import type { Theme } from '@admiral-ds/react-ui';
+
+import { SliderRangePlaygroundTemplate, SliderRangeCustomTemplate, SliderRangeControlledTemplate } from './Templates';
+import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+
+// Imports of text sources
+import PlaygroundRaw from '!!raw-loader!./Templates/SliderRangePlayground';
+import CustomRaw from '!!raw-loader!./Templates/SliderRangeCustom';
+import ControlledRaw from '!!raw-loader!./Templates/SliderRangeControlled';
 
 const Separator = styled.div`
   height: 20px;
@@ -102,60 +109,43 @@ export default {
   },
 } as unknown as ComponentMeta<typeof SliderRange>;
 
-const Template1: ComponentStory<typeof SliderRange> = ({ defaultValue, onChange, ...args }) => {
-  const handleChange = (value: any) => console.log(value);
-
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
-  return (
-    <ThemeProvider theme={swapBorder}>
-      <SliderRange defaultValue={defaultValue || ['2', '6']} onChange={onChange || handleChange} {...args} />
-    </ThemeProvider>
-  );
+//<editor-fold desc="SliderRange. Playground">
+const PlaygroundStory: ComponentStory<typeof SliderRange> = (props) => (
+  <SliderRangePlaygroundTemplate {...cleanUpProps(props)} />
+);
+export const PlaygroundExample = PlaygroundStory.bind({});
+PlaygroundExample.parameters = {
+  docs: {
+    source: {
+      code: PlaygroundRaw,
+    },
+  },
 };
+PlaygroundExample.storyName = 'SliderRange. Playground';
+//</editor-fold>
 
-const Template2: ComponentStory<typeof SliderRange> = () => {
-  return (
-    <>
-      <SliderRange
-        onChange={(value: any) => console.log(value)}
-        minValue={10}
-        maxValue={100}
-        prefix={['From', 'To']}
-        suffix="$"
-      />
-    </>
-  );
+//<editor-fold desc="SliderRange. Пример изменения настроек (prefix, suffix, minValue, maxValue)">
+const CustomStory: ComponentStory<typeof SliderRange> = () => <SliderRangeCustomTemplate />;
+export const CustomExample = CustomStory.bind({});
+CustomExample.parameters = {
+  docs: {
+    source: {
+      code: CustomRaw,
+    },
+  },
 };
+CustomExample.storyName = 'SliderRange. Пример изменения настроек (prefix, suffix, minValue, maxValue)';
+//</editor-fold>
 
-const Template3: ComponentStory<typeof SliderRange> = () => {
-  const [value, setValue] = React.useState<[string, string]>(['2', '5']);
-  return (
-    <>
-      <SliderRange
-        value={value}
-        onChange={(value: any) => {
-          console.log(value);
-          setValue([value[0].str, value[1].str]);
-        }}
-        prefix={['From', 'To']}
-        suffix="$"
-      />
-    </>
-  );
+//<editor-fold desc="SliderRange. Пример контролируемого компонента.">
+const ControlledStory: ComponentStory<typeof SliderRange> = () => <SliderRangeControlledTemplate />;
+export const ControlledExample = ControlledStory.bind({});
+ControlledExample.parameters = {
+  docs: {
+    source: {
+      code: ControlledRaw,
+    },
+  },
 };
-
-export const Playground = Template1.bind({});
-Playground.args = {};
-Playground.storyName = 'SliderRange. Playground';
-
-export const Custom = Template2.bind({});
-Custom.args = {};
-Custom.storyName = 'SliderRange. Пример изменения настроек (prefix, suffix, minValue, maxValue)';
-
-export const Controlled = Template3.bind({});
-Controlled.args = {};
-Controlled.storyName = 'SliderRange. Пример контролируемого компонента.';
+ControlledExample.storyName = 'SliderRange. Пример контролируемого компонента.';
+//</editor-fold>
