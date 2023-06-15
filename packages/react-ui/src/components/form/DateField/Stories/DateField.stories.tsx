@@ -1,15 +1,20 @@
 import * as React from 'react';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import styled, { ThemeProvider } from 'styled-components';
 import { withDesign } from 'storybook-addon-designs';
+
 import {
   DateField,
   INPUT_DIMENSIONS_VALUES,
   INPUT_STATUS_VALUES,
   ALL_BORDER_RADIUS_VALUES,
 } from '@admiral-ds/react-ui';
-import type { Theme } from '@admiral-ds/react-ui';
+
+import { DateFieldBaseTemplate } from './Templates';
+import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 import { DataAttributesDescription } from '#src/components/form/common';
+
+// Imports of text sources
+import DateFieldBaseRaw from '!!raw-loader!./Templates/DateFieldBase';
 
 export default {
   title: 'Admiral-2.1/Form Field/DateField',
@@ -144,78 +149,18 @@ export default {
   },
 } as ComponentMeta<typeof DateField>;
 
-const FormContainer = styled.form`
-  > * {
-    margin-bottom: 24px;
-  }
-`;
+//<editor-fold desc="DateField example">
+const DateFieldBaseStory: ComponentStory<typeof DateField> = (props) => (
+  <DateFieldBaseTemplate {...cleanUpProps(props)} />
+);
 
-const Template: ComponentStory<typeof DateField> = (props) => {
-  const [localValue, setValue] = React.useState<string>('');
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const inputValue = e.currentTarget.value;
-    console.log(`handleChange ${inputValue}`);
-    setValue(inputValue);
-  };
-
-  const handleFormBlur = (e: React.FocusEvent<HTMLFormElement>) => {
-    console.log(`form blur:
-    current target: ${e.currentTarget.id}
-    target: ${e.target.id}
-    related target: ${e.relatedTarget?.id}
-    `);
-  };
-
-  const handleFormFocus = (e: React.FocusEvent<HTMLFormElement>) => {
-    console.log(`form focus:
-    current target: ${e.currentTarget.id}
-    target: ${e.target.id}
-    related target: ${e.relatedTarget?.id}
-    `);
-  };
-
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
-  return (
-    <ThemeProvider theme={swapBorder}>
-      <FormContainer id="form 1" onBlur={handleFormBlur} onFocus={handleFormFocus}>
-        <DateField
-          data-container-id="dateFieldIdOne"
-          {...props}
-          value={localValue}
-          onChange={handleChange}
-          id={'date 1'}
-          placeholder="Это placeholder"
-          dropContainerClassName="dropContainerClass"
-        />
-        <DateField
-          data-container-id="dateFieldIdTwo"
-          required
-          label="uncontrolled input"
-          id={'date 2'}
-          dropContainerClassName="dropContainerClass"
-        />
-        <DateField
-          data-container-id="dateFieldIdThree"
-          type="date-range"
-          id="date range 1"
-          label="uncontrolled date range"
-          placeholder={'Введите отрезок времени'}
-          dropContainerClassName="dropContainerClass"
-        />
-      </FormContainer>
-    </ThemeProvider>
-  );
+export const DateFieldBase = DateFieldBaseStory.bind({});
+DateFieldBase.parameters = {
+  docs: {
+    source: {
+      code: DateFieldBaseRaw,
+    },
+  },
 };
-
-export const InputFieldInput = Template.bind({});
-
-InputFieldInput.args = {
-  label: 'Label',
-};
-
-InputFieldInput.storyName = 'DateField example';
+DateFieldBase.storyName = 'DateField example';
+//</editor-fold>
