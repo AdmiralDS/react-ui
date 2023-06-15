@@ -1,10 +1,13 @@
-import type { ChangeEvent } from 'react';
-import React, { useState } from 'react';
+import * as React from 'react';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
-import { ThemeProvider } from 'styled-components';
+
 import { TextArea, INPUT_DIMENSIONS_VALUES, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
-import type { Theme } from '@admiral-ds/react-ui';
+import { TextAreaPlaygroundTemplate } from './Templates';
+import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+
+// Imports of text sources
+import TextAreaPlaygroundRaw from '!!raw-loader!./Templates/TextAreaPlayground';
 
 export default {
   title: 'Admiral-2.1/Input/TextArea',
@@ -86,36 +89,18 @@ export default {
   },
 } as ComponentMeta<typeof TextArea>;
 
-const Template: ComponentStory<typeof TextArea> = (props) => {
-  const cleanProps = (Object.keys(props) as Array<keyof typeof props>).reduce((acc, key) => {
-    if (props[key] !== undefined) acc[key] = props[key];
+//<editor-fold desc="Базовый textarea компонент">
+const TextAreaPlaygroundStory: ComponentStory<typeof TextArea> = (props) => (
+  <TextAreaPlaygroundTemplate {...cleanUpProps(props)} />
+);
 
-    return acc;
-  }, {} as Record<any, any>);
-
-  const [localValue, setValue] = useState<string>(String(props.value) ?? '');
-
-  const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    const inputValue = e.currentTarget.value;
-    setValue(inputValue);
-    props.onChange?.(e);
-  };
-
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
-  return (
-    <ThemeProvider theme={swapBorder}>
-      <TextArea {...cleanProps} value={localValue} onChange={handleChange} />
-    </ThemeProvider>
-  );
+export const TextAreaPlayground = TextAreaPlaygroundStory.bind({});
+TextAreaPlayground.parameters = {
+  docs: {
+    source: {
+      code: TextAreaPlaygroundRaw,
+    },
+  },
 };
-
-export const TextAreaStory = Template.bind({});
-TextAreaStory.args = {
-  value: 'Привет!',
-  placeholder: 'Placeholder',
-};
-TextAreaStory.storyName = 'Базовый textarea компонент';
+TextAreaPlayground.storyName = 'Базовый textarea компонент';
+//</editor-fold>
