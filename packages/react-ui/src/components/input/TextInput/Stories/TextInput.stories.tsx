@@ -1,15 +1,19 @@
-import type { ChangeEvent } from 'react';
-import React, { useState } from 'react';
+import * as React from 'react';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
-import { ThemeProvider } from 'styled-components';
+
 import {
   TextInput,
   INPUT_DIMENSIONS_VALUES,
   INPUT_STATUS_VALUES,
   ALL_BORDER_RADIUS_VALUES,
 } from '@admiral-ds/react-ui';
-import type { Theme } from '@admiral-ds/react-ui';
+
+import { TextInputPlaygroundTemplate } from './Templates';
+import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+
+// Imports of text sources
+import TextInputPlaygroundRaw from '!!raw-loader!./Templates/TextInputPlayground';
 
 export default {
   title: 'Admiral-2.1/Input/TextInput',
@@ -94,36 +98,18 @@ export default {
   },
 } as ComponentMeta<typeof TextInput>;
 
-const Template: ComponentStory<typeof TextInput> = (props) => {
-  const cleanProps = (Object.keys(props) as Array<keyof typeof props>).reduce((acc, key) => {
-    if (props[key] !== undefined) acc[key] = props[key];
+//<editor-fold desc="Базовый input компонент">
+const TextInputPlaygroundStory: ComponentStory<typeof TextInput> = (props) => (
+  <TextInputPlaygroundTemplate {...cleanUpProps(props)} />
+);
 
-    return acc;
-  }, {} as Record<any, any>);
-
-  const [localValue, setValue] = useState<string>(String(props.value) ?? '');
-
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const inputValue = e.target.value;
-    setValue(inputValue);
-    props.onChange?.(e);
-  };
-
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
-  return (
-    <ThemeProvider theme={swapBorder}>
-      <TextInput {...cleanProps} value={localValue} placeholder={props.placeholder} onChange={handleChange} />
-    </ThemeProvider>
-  );
+export const TextInputPlayground = TextInputPlaygroundStory.bind({});
+TextInputPlayground.parameters = {
+  docs: {
+    source: {
+      code: TextInputPlaygroundRaw,
+    },
+  },
 };
-
-export const TextInputStory = Template.bind({});
-TextInputStory.args = {
-  value: 'Привет!',
-  placeholder: 'Placeholder',
-};
-TextInputStory.storyName = 'Базовый input компонент';
+TextInputPlayground.storyName = 'Базовый input компонент';
+//</editor-fold>
