@@ -1,9 +1,24 @@
 import * as React from 'react';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
-import styled, { ThemeProvider } from 'styled-components';
-import { clearValue, NumberInput, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
-import type { Theme } from '@admiral-ds/react-ui';
+import styled from 'styled-components';
+import { NumberInput, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
+
+import {
+  NumberInputPlaygroundTemplate,
+  NumberInputDisabledTemplate,
+  NumberInputMinMaxTemplate,
+  NumberInputCustomisedTemplate,
+  NumberInputControlledTemplate,
+} from './Templates';
+import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+
+// Imports of text sources
+import PlaygroundRaw from '!!raw-loader!./Templates/NumberInputPlayground';
+import DisabledRaw from '!!raw-loader!./Templates/NumberInputDisabled';
+import MinMaxRaw from '!!raw-loader!./Templates/NumberInputMinMax';
+import CustomRaw from '!!raw-loader!./Templates/NumberInputCustomised';
+import ControlledRaw from '!!raw-loader!./Templates/NumberInputControlled';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -107,124 +122,45 @@ export default {
   },
 } as ComponentMeta<typeof NumberInput>;
 
-const Template0: ComponentStory<typeof NumberInput> = (args) => {
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
-  return (
-    <ThemeProvider theme={swapBorder}>
-      <NumberInput
-        prefix="От"
-        defaultValue="2.00"
-        onChange={(event) => {
-          console.log(event.target.value);
-        }}
-        {...args}
-      />
-    </ThemeProvider>
-  );
-};
-
-const Template1: ComponentStory<typeof NumberInput> = (args) => {
-  return (
-    <>
-      <NumberInput {...args} disabled />
-    </>
-  );
-};
-
-const Template2: ComponentStory<typeof NumberInput> = (args) => {
-  return (
-    <>
-      <NumberInput
-        {...args}
-        onChange={(event) => {
-          console.log(event.target.value);
-        }}
-        minValue={0}
-        maxValue={2000}
-      />
-    </>
-  );
-};
-
-const Template3: ComponentStory<typeof NumberInput> = (args) => {
-  return (
-    <>
-      <NumberInput
-        {...args}
-        onChange={(event) => {
-          console.log(event.target.value);
-        }}
-        suffix="$"
-        thousand=","
-        precision={1}
-        placeholder="0.0 $"
-      />
-    </>
-  );
-};
-
-const Template4: ComponentStory<typeof NumberInput> = () => {
-  const [value1, setValue1] = React.useState<string | undefined>('50.00');
-  const [value2, setValue2] = React.useState<string | undefined>('1');
-  const [suffix, setSuffix] = React.useState('минута');
-
-  function declOfNum(n: number, text_forms: Array<string>) {
-    n = Math.abs(n) % 100;
-    const n1 = n % 10;
-    if (n > 10 && n < 20) {
-      return text_forms[2];
-    }
-    if (n1 > 1 && n1 < 5) {
-      return text_forms[1];
-    }
-    if (n1 == 1) {
-      return text_forms[0];
-    }
-    return text_forms[2];
-  }
-
-  return (
-    <>
-      <NumberInput
-        value={value1}
-        onChange={(event) => {
-          console.log(event.target.value);
-          setValue1(event.target.value);
-        }}
-        prefix="From"
-        suffix="$"
-        style={{ marginBottom: '40px' }}
-      />
-      <NumberInput
-        value={value2}
-        onChange={(event) => {
-          console.log(event.target.value);
-          setValue2(event.target.value);
-          setSuffix(declOfNum(Number(clearValue(event.target.value, 0)), ['минута', 'минуты', 'минут']));
-        }}
-        suffix={suffix}
-        precision={0}
-      />
-    </>
-  );
-};
-
-export const Playground = Template0.bind({});
-Playground.args = {};
-
-export const Disabled = Template1.bind({});
-Disabled.args = {};
-Disabled.storyName = 'NumberInput. Задизейбленный.';
-
-export const MinMax = Template2.bind({});
-MinMax.args = {};
-MinMax.storyName = 'NumberInput. Пример с minValue, maxValue.';
-MinMax.parameters = {
+//<editor-fold desc="Playground">
+const PlaygroundStory: ComponentStory<typeof NumberInput> = (props) => (
+  <NumberInputPlaygroundTemplate {...cleanUpProps(props)} />
+);
+export const Playground = PlaygroundStory.bind({});
+Playground.parameters = {
   docs: {
+    source: {
+      code: PlaygroundRaw,
+    },
+  },
+};
+//</editor-fold>
+
+//<editor-fold desc="NumberInput. Задизейбленный.">
+const DisabledStory: ComponentStory<typeof NumberInput> = (props) => (
+  <NumberInputDisabledTemplate {...cleanUpProps(props)} />
+);
+export const DisabledExample = DisabledStory.bind({});
+DisabledExample.parameters = {
+  docs: {
+    source: {
+      code: DisabledRaw,
+    },
+  },
+};
+DisabledExample.storyName = 'NumberInput. Задизейбленный.';
+//</editor-fold>
+
+//<editor-fold desc="NumberInput. Пример с minValue, maxValue.">
+const MinMaxStory: ComponentStory<typeof NumberInput> = (props) => (
+  <NumberInputMinMaxTemplate {...cleanUpProps(props)} />
+);
+export const MinMaxExample = MinMaxStory.bind({});
+MinMaxExample.parameters = {
+  docs: {
+    source: {
+      code: MinMaxRaw,
+    },
     description: {
       story: `Максимальное, минимальное значение. При достижении лимита, кнопки “+” или “-” принимают состояние Disabled.
       Если вручную введенное значение больше-меньше указанного диапазона, то оно принимает наиболее близкое
@@ -232,12 +168,19 @@ MinMax.parameters = {
     },
   },
 };
+MinMaxExample.storyName = 'NumberInput. Пример с minValue, maxValue.';
+//</editor-fold>
 
-export const Customised = Template3.bind({});
-Customised.args = {};
-Customised.storyName = 'NumberInput. Пример изменения настроек (suffix, precision, thousand).';
-Customised.parameters = {
+//<editor-fold desc="NumberInput. Пример изменения настроек (suffix, precision, thousand).">
+const CustomStory: ComponentStory<typeof NumberInput> = (props) => (
+  <NumberInputCustomisedTemplate {...cleanUpProps(props)} />
+);
+export const CustomExample = CustomStory.bind({});
+CustomExample.parameters = {
   docs: {
+    source: {
+      code: CustomRaw,
+    },
     description: {
       story: `Пользователь может указать с помощью параметра precision (по умолчанию равен 2), 
       с какой точностью компонент должен выводить число (сколько разрядов должно быть в дробной части числа). 
@@ -246,12 +189,17 @@ Customised.parameters = {
     },
   },
 };
+CustomExample.storyName = 'NumberInput. Пример изменения настроек (suffix, precision, thousand).';
+//</editor-fold>
 
-export const Controlled = Template4.bind({});
-Controlled.args = {};
-Controlled.storyName = 'NumberInput. Примеры контролируемого инпута.';
-Controlled.parameters = {
+//<editor-fold desc="NumberInput. Примеры контролируемого инпута.">
+const ControlledStory: ComponentStory<typeof NumberInput> = () => <NumberInputControlledTemplate />;
+export const ControlledExample = ControlledStory.bind({});
+ControlledExample.parameters = {
   docs: {
+    source: {
+      code: ControlledRaw,
+    },
     description: {
       story: `В случае использования контролируемого инпута в value необходимо передавать уже
       отформатированную строку с разделителями тысяч (суффикс/префикс в value вносить не нужно).\n\nБиблиотека 
@@ -262,3 +210,5 @@ Controlled.parameters = {
     },
   },
 };
+ControlledExample.storyName = 'NumberInput. Примеры контролируемого инпута.';
+//</editor-fold>
