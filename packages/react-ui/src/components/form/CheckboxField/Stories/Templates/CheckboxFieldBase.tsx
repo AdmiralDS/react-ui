@@ -1,68 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
+import * as React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
-import { CheckboxField, ALL_DIMENSIONS_VALUES, Hint, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
-import type { CheckboxDimension, Theme } from '@admiral-ds/react-ui';
+import { CheckboxField, Hint } from '@admiral-ds/react-ui';
+import type { CheckboxFieldProps, Theme, CheckboxDimension } from '@admiral-ds/react-ui';
 import { ReactComponent as InfoSolidSVG } from '@admiral-ds/icons/build/service/InfoSolid.svg';
-
-export default {
-  title: 'Admiral-2.1/Form Field/CheckboxField',
-  decorators: [withDesign],
-  component: CheckboxField,
-  parameters: {
-    docs: {
-      source: {
-        code: null,
-      },
-    },
-    design: [
-      {
-        type: 'figma',
-        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=37%3A21015',
-      },
-      {
-        type: 'figma',
-        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=37%3A21143',
-      },
-    ],
-  },
-  argTypes: {
-    dimension: {
-      options: ALL_DIMENSIONS_VALUES,
-      control: { type: 'radio' },
-    },
-    indeterminate: {
-      control: { type: 'boolean' },
-    },
-    checked: {
-      control: { type: 'boolean' },
-    },
-    disabled: {
-      control: { type: 'boolean' },
-    },
-    readOnly: {
-      control: { type: 'boolean' },
-    },
-    error: {
-      control: { type: 'boolean' },
-    },
-    hovered: {
-      control: { type: 'boolean' },
-    },
-    extraText: {
-      control: { type: 'text' },
-    },
-    themeBorderKind: {
-      options: ALL_BORDER_RADIUS_VALUES,
-      control: { type: 'radio' },
-    },
-    children: {
-      control: false,
-    },
-  },
-} as ComponentMeta<typeof CheckboxField>;
 
 const Container = styled.div`
   display: flex;
@@ -93,23 +34,17 @@ const CheckboxWithInformer = styled.div`
   align-items: flex-start;
 `;
 
-const CheckboxFieldDemo: ComponentStory<typeof CheckboxField> = (props) => {
-  const args = (Object.keys(props) as Array<keyof typeof props>).reduce((acc, key) => {
-    if (props[key] !== undefined) acc[key] = props[key];
+export const CheckboxFieldBaseTemplate = (props: CheckboxFieldProps) => {
+  const [checked, setChecked] = React.useState<boolean>(props.checked ?? false);
 
-    return acc;
-  }, {} as Record<any, any>);
-
-  const [checked, setChecked] = useState<boolean>(args.checked ?? false);
-
-  const [visible1, setVisible1] = useState(false);
-  const [visible2, setVisible2] = useState(false);
+  const [visible1, setVisible1] = React.useState(false);
+  const [visible2, setVisible2] = React.useState(false);
   const handleHintChange1 = (visible: boolean) => setVisible1(visible);
   const handleHintChange2 = (visible: boolean) => setVisible2(visible);
 
-  useEffect(() => {
-    setChecked(Boolean(args.checked));
-  }, [args.checked]);
+  React.useEffect(() => {
+    setChecked(Boolean(props.checked));
+  }, [props.checked]);
 
   function swapBorder(theme: Theme): Theme {
     theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
@@ -120,7 +55,7 @@ const CheckboxFieldDemo: ComponentStory<typeof CheckboxField> = (props) => {
     <ThemeProvider theme={swapBorder}>
       <Container>
         <CheckboxField
-          {...args}
+          {...props}
           checked={checked}
           onChange={(e) => {
             setChecked(e.target.checked);
@@ -184,7 +119,7 @@ const CheckboxFieldDemo: ComponentStory<typeof CheckboxField> = (props) => {
             Чекбокс с информером
           </CheckboxField>
           <Hint
-            {...args}
+            {...props}
             visible={visible1}
             onVisibilityChange={handleHintChange1}
             renderContent={() =>
@@ -199,7 +134,7 @@ const CheckboxFieldDemo: ComponentStory<typeof CheckboxField> = (props) => {
             Маленький чекбокс с информером
           </CheckboxField>
           <Hint
-            {...args}
+            {...props}
             visible={visible2}
             onVisibilityChange={handleHintChange2}
             renderContent={() =>
@@ -213,5 +148,3 @@ const CheckboxFieldDemo: ComponentStory<typeof CheckboxField> = (props) => {
     </ThemeProvider>
   );
 };
-
-export const CheckboxFieldDemoExample = CheckboxFieldDemo.bind({});
