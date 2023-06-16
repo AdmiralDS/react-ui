@@ -1,17 +1,20 @@
 import * as React from 'react';
-import type { ChangeEvent } from 'react';
-import { useEffect, useState } from 'react';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
-import styled, { ThemeProvider } from 'styled-components';
+
 import {
   TimeField,
   INPUT_DIMENSIONS_VALUES,
   INPUT_STATUS_VALUES,
   ALL_BORDER_RADIUS_VALUES,
 } from '@admiral-ds/react-ui';
-import type { Theme } from '@admiral-ds/react-ui';
+
+import { TimeFieldInputTemplate } from './Templates';
+import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 import { DataAttributesDescription } from '#src/components/form/common';
+
+// Imports of text sources
+import TimeFieldInputRaw from '!!raw-loader!./Templates/TimeFieldInput';
 
 export default {
   title: 'Admiral-2.1/Form Field/TimeField',
@@ -75,6 +78,9 @@ export default {
     endTime: {
       type: 'string',
     },
+    label: {
+      type: 'string',
+    },
     disabledSlots: {
       control: false,
     },
@@ -115,61 +121,18 @@ export default {
   },
 } as ComponentMeta<typeof TimeField>;
 
-const DisplayContainer = styled.div`
-  max-width: 320px;
-  > * {
-    margin-bottom: 24px;
-  }
-`;
+//<editor-fold desc="TimeField example">
+const TimeFieldInputStory: ComponentStory<typeof TimeField> = (props) => (
+  <TimeFieldInputTemplate {...cleanUpProps(props)} />
+);
 
-const Template: ComponentStory<typeof TimeField> = (props) => {
-  const cleanProps = (Object.keys(props) as Array<keyof typeof props>).reduce((acc, key) => {
-    if (props[key] !== undefined) acc[key] = props[key];
-
-    return acc;
-  }, {} as Record<any, any>);
-
-  const [localValue, setValue] = useState<string>(String(props.value) ?? '');
-
-  useEffect(() => {
-    if (props.value !== undefined) {
-      setValue(String(props.value));
-    }
-  }, [props.value]);
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const inputValue = e.currentTarget.value;
-    setValue(inputValue);
-    props.onChange?.(e);
-  };
-
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
-  return (
-    <ThemeProvider theme={swapBorder}>
-      <DisplayContainer>
-        <TimeField
-          data-container-id="timeFieldIdOne"
-          {...cleanProps}
-          // style={{ maxWidth: '320px' }}
-          startTime="09:00"
-          endTime="18:00"
-          value={localValue}
-          onChange={handleChange}
-          dropContainerClassName="dropContainerClass"
-        />
-      </DisplayContainer>
-    </ThemeProvider>
-  );
+export const TimeFieldInput = TimeFieldInputStory.bind({});
+TimeFieldInput.parameters = {
+  docs: {
+    source: {
+      code: TimeFieldInputRaw,
+    },
+  },
 };
-
-export const TimeFieldInput = Template.bind({});
-
-TimeFieldInput.args = {
-  placeholder: 'Наберите несколько символов...',
-  label: 'Поле ввода времени',
-};
-
 TimeFieldInput.storyName = 'TimeField example';
+//</editor-fold>
