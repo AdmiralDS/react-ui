@@ -48,7 +48,7 @@ export default {
       control: { type: 'radio' },
     },
     maxLength: {
-      type: { name: 'number', required: false },
+      control: { type: { name: 'number', required: false } },
     },
     extraText: {
       control: { type: 'text' },

@@ -44,15 +44,15 @@ export default {
     },
 
     rows: {
-      type: { name: 'number', required: false },
+      control: { type: { name: 'number', required: false } },
     },
 
     maxRows: {
-      type: { name: 'number', required: false },
+      control: { type: { name: 'number', required: false } },
     },
 
     maxLength: {
-      type: { name: 'number', required: false },
+      control: { type: { name: 'number', required: false } },
     },
 
     extraText: {

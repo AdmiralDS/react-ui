@@ -52,7 +52,7 @@ export default {
       options: INPUT_STATUS_VALUES,
     },
     maxLength: {
-      type: { name: 'number', required: false },
+      control: { type: { name: 'number', required: false } },
     },
     extraText: {
       control: { type: 'text' },
