@@ -63,6 +63,9 @@ export default {
     suffixValue: {
       control: { type: 'text' },
     },
+    label: {
+      control: { type: 'text' },
+    },
     displayClearIcon: {
       control: { type: 'boolean' },
     },
@@ -100,6 +103,12 @@ export default {
       control: false,
     },
     dropContainerStyle: {
+      control: false,
+    },
+    prefixDropContainerStyle: {
+      control: false,
+    },
+    suffixDropContainerStyle: {
       control: false,
     },
     themeBorderKind: {

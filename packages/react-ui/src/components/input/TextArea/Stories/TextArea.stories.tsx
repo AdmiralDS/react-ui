@@ -48,6 +48,10 @@ export default {
       type: 'number',
     },
 
+    maxRows: {
+      type: 'number',
+    },
+
     maxLength: {
       type: 'number',
     },

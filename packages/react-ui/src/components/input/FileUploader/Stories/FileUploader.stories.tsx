@@ -85,6 +85,18 @@ export default {
     title: {
       control: false,
     },
+    description: {
+      control: false,
+    },
+    accept: {
+      control: false,
+    },
+    uploadedFiles: {
+      control: false,
+    },
+    children: {
+      control: false,
+    },
     disabled: {
       control: { type: 'boolean' },
     },

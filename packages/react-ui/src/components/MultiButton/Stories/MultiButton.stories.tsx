@@ -97,10 +97,19 @@ export default {
     dropContainerStyle: {
       control: false,
     },
+    options: {
+      control: false,
+    },
+    items: {
+      control: false,
+    },
     selected: {
       control: { type: 'text' },
     },
     active: {
+      control: { type: 'text' },
+    },
+    menuMaxHeight: {
       control: { type: 'text' },
     },
     isVisible: {

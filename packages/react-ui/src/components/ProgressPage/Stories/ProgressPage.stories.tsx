@@ -61,6 +61,9 @@ export default {
     label: {
       control: { type: 'text' },
     },
+    percent: {
+      control: { type: 'number' },
+    },
   },
 } as ComponentMeta<typeof ProgressPage>;
 

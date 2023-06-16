@@ -88,6 +88,9 @@ export default {
     forwardedAs: {
       control: false,
     },
+    ref: {
+      control: false,
+    },
     themeBorderKind: {
       options: ALL_BORDER_RADIUS_VALUES,
       control: { type: 'radio' },

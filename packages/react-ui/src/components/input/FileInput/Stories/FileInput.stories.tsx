@@ -82,6 +82,9 @@ export default {
       options: ALL_BORDER_RADIUS_VALUES,
       control: { type: 'radio' },
     },
+    width: {
+      control: { type: 'text' },
+    },
     description: {
       control: false,
     },

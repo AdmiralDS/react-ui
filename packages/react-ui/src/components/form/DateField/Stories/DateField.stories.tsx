@@ -55,6 +55,9 @@ export default {
       options: [undefined, 'DAY', 'MONTH', 'YEAR'],
       control: { type: 'radio' },
     },
+    isVisible: {
+      control: { type: 'boolean' },
+    },
     disabled: {
       control: { type: 'boolean' },
     },
@@ -86,6 +89,9 @@ export default {
       control: { type: 'boolean' },
     },
     extraText: {
+      control: { type: 'text' },
+    },
+    label: {
       control: { type: 'text' },
     },
     handleInput: {
