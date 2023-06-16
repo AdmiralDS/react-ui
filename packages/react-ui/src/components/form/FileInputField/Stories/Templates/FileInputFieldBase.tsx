@@ -1,82 +1,12 @@
 import * as React from 'react';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
 import { ThemeProvider } from 'styled-components';
-import {
-  FileInputField,
-  FileItem,
-  fullWidthPositionMixin,
-  halfWidthPositionMixin,
-  ALL_BORDER_RADIUS_VALUES,
-} from '@admiral-ds/react-ui';
-import type { InputStatus, FileAttributeProps, Theme } from '@admiral-ds/react-ui';
-import { DataAttributesDescription } from '#src/components/form/common';
+
+import { FileInputField, FileItem, fullWidthPositionMixin, halfWidthPositionMixin } from '@admiral-ds/react-ui';
+import type { FileAttributeProps, FileInputFieldProps, InputStatus, Theme } from '@admiral-ds/react-ui';
+
 import { uid } from '#src/components/common/uid';
 
-export default {
-  title: 'Admiral-2.1/Form Field/FileInputField',
-  component: FileInputField,
-  decorators: [withDesign],
-  parameters: {
-    docs: {
-      source: {
-        code: null,
-      },
-    },
-    componentSubtitle: <DataAttributesDescription />,
-    design: [
-      {
-        type: 'figma',
-        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A27281',
-      },
-      {
-        type: 'figma',
-        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A27389',
-      },
-      {
-        type: 'figma',
-        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A27519',
-      },
-      {
-        type: 'figma',
-        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A27563',
-      },
-    ],
-  },
-  argTypes: {
-    dimension: {
-      options: ['xl', 'm'],
-      control: { type: 'radio' },
-    },
-    extraText: {
-      type: 'string',
-    },
-    title: {
-      type: 'string',
-    },
-    description: {
-      type: 'string',
-    },
-    themeBorderKind: {
-      options: ALL_BORDER_RADIUS_VALUES,
-      control: { type: 'radio' },
-    },
-    skeleton: {
-      control: { type: 'boolean' },
-    },
-    displayCharacterCounter: {
-      control: { type: 'boolean' },
-    },
-    width: {
-      control: false,
-    },
-    files: {
-      control: false,
-    },
-  },
-} as ComponentMeta<typeof FileInputField>;
-
-const FileInputFieldDemo: ComponentStory<typeof FileInputField> = ({ dimension = 'xl', ...props }) => {
+export const FileInputFieldBaseTemplate = ({ dimension = 'xl', label = 'Label', ...props }: FileInputFieldProps) => {
   function swapBorder(theme: Theme): Theme {
     theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
@@ -190,6 +120,7 @@ const FileInputFieldDemo: ComponentStory<typeof FileInputField> = ({ dimension =
           files={fileList}
           status={status}
           extraText={extraText}
+          label={label}
         >
           {renderFileList()}
         </FileInputField>
@@ -197,17 +128,3 @@ const FileInputFieldDemo: ComponentStory<typeof FileInputField> = ({ dimension =
     </ThemeProvider>
   );
 };
-
-export const Demo = FileInputFieldDemo.bind({});
-Demo.args = {
-  label: 'Label',
-};
-Demo.storyName = 'FileInputField. Example';
-
-export const Required = FileInputFieldDemo.bind({});
-
-Required.args = {
-  label: 'Обязательно для заполнения',
-  required: true,
-};
-Required.storyName = 'FileInputField. Required';
