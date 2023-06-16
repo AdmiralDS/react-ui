@@ -1,69 +1,14 @@
 import * as React from 'react';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
 import styled, { ThemeProvider } from 'styled-components';
-import {
-  Field,
-  DateField,
-  InputField,
-  PhoneInputField,
-  InputIconButton,
-  INPUT_DIMENSIONS_VALUES,
-  ALL_BORDER_RADIUS_VALUES,
-} from '@admiral-ds/react-ui';
-import type { FieldProps, ComponentDimension, Theme } from '@admiral-ds/react-ui';
+
+import { DateField, InputField, InputIconButton, PhoneInputField } from '@admiral-ds/react-ui';
+import type { ComponentDimension, FieldProps, Theme } from '@admiral-ds/react-ui';
 import { ReactComponent as EyeCloseOutlineSvg } from '@admiral-ds/icons/build/service/EyeCloseOutline.svg';
 import { ReactComponent as EyeOutlineSvg } from '@admiral-ds/icons/build/service/EyeOutline.svg';
-import { DataAttributesDescription } from '#src/components/form/common';
 
 interface FieldPropsWithDimension extends FieldProps {
   dimension?: ComponentDimension;
 }
-
-export default {
-  title: 'Admiral-2.1/Form Field/ReadOnlyMaskedField',
-  component: Field,
-  decorators: [withDesign],
-  parameters: {
-    docs: {
-      source: {
-        code: null,
-      },
-    },
-    componentSubtitle: <DataAttributesDescription />,
-    design: [
-      {
-        type: 'figma',
-        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=149351%3A119027&t=0hLwy6SkOu2Lc4PO-1',
-      },
-    ],
-  },
-  args: {
-    dimension: 'm',
-  },
-  argTypes: {
-    dimension: {
-      options: INPUT_DIMENSIONS_VALUES,
-      control: { type: 'radio' },
-    },
-    themeBorderKind: {
-      options: ALL_BORDER_RADIUS_VALUES,
-      control: { type: 'radio' },
-    },
-    skeleton: {
-      control: false,
-    },
-    theme: {
-      control: false,
-    },
-    as: {
-      control: false,
-    },
-    forwardedAs: {
-      control: false,
-    },
-  },
-} as ComponentMeta<typeof Field>;
 
 const FormContainer = styled.form`
   > * {
@@ -86,7 +31,7 @@ const maskedSurname = 'С••••••а';
 const initialPhoneNumber = '+7 095 364 83 75';
 const maskedPhoneNumber = '+7 095 ••• •• 75';
 
-const Template = (props: FieldPropsWithDimension) => {
+export const ReadOnlyMaskedFieldTemplate = (props: FieldPropsWithDimension) => {
   function swapBorder(theme: Theme): Theme {
     theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
@@ -208,10 +153,3 @@ const Template = (props: FieldPropsWithDimension) => {
     </ThemeProvider>
   );
 };
-
-const TemplateDemo: ComponentStory<typeof Field> = (args: FieldPropsWithDimension) => {
-  return <Template {...args} />;
-};
-
-export const Demo = TemplateDemo.bind({});
-Demo.storyName = 'ReadOnly masked field';
