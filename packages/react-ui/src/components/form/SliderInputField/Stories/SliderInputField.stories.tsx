@@ -1,10 +1,15 @@
 import * as React from 'react';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
-import { ThemeProvider } from 'styled-components';
+
 import { SliderInputField, INPUT_DIMENSIONS_VALUES, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
-import type { Theme } from '@admiral-ds/react-ui';
+
+import { SliderInputFieldPlaygroundTemplate } from '#src/components/form/SliderInputField/Stories/Templates';
+import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 import { DataAttributesDescription } from '#src/components/form/common';
+
+// Imports of text sources
+import SliderInputFieldPlaygroundRaw from '!!raw-loader!./Templates/SliderInputFieldPlayground';
 
 export default {
   title: 'Admiral-2.1/Form Field/SliderInputField',
@@ -110,24 +115,18 @@ export default {
   },
 } as ComponentMeta<typeof SliderInputField>;
 
-const Template: ComponentStory<typeof SliderInputField> = (props) => {
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
+//<editor-fold desc="SliderInputField example">
+const SliderInputFieldPlaygroundStory: ComponentStory<typeof SliderInputField> = (props) => (
+  <SliderInputFieldPlaygroundTemplate {...cleanUpProps(props)} />
+);
 
-  return (
-    <ThemeProvider theme={swapBorder}>
-      <SliderInputField data-container-id="sliderInputFieldIdOne" {...props} minValue={1000} maxValue={10000} />
-    </ThemeProvider>
-  );
+export const SliderInputFieldPlayground = SliderInputFieldPlaygroundStory.bind({});
+SliderInputFieldPlayground.parameters = {
+  docs: {
+    source: {
+      code: SliderInputFieldPlaygroundRaw,
+    },
+  },
 };
-
-export const InputFieldInput = Template.bind({});
-
-InputFieldInput.args = {
-  defaultValue: '2000 ₽',
-  label: 'Введите сумму',
-};
-
-InputFieldInput.storyName = 'SliderInputField example';
+SliderInputFieldPlayground.storyName = 'SliderInputField example';
+//</editor-fold>
