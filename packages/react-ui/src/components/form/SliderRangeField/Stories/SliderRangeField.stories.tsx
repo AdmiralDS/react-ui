@@ -1,10 +1,15 @@
 import * as React from 'react';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
-import { ThemeProvider } from 'styled-components';
+
 import { SliderRangeField, INPUT_DIMENSIONS_VALUES, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
-import type { Theme } from '@admiral-ds/react-ui';
+
+import { SliderRangeFieldPlaygroundTemplate } from '#src/components/form/SliderRangeField/Stories/Templates';
+import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 import { DataAttributesDescription } from '#src/components/form/common';
+
+// Imports of text sources
+import SliderRangeFieldPlaygroundRaw from '!!raw-loader!./Templates/SliderRangeFieldPlayground';
 
 export default {
   title: 'Admiral-2.1/Form Field/SliderRangeField',
@@ -107,23 +112,18 @@ export default {
   },
 } as ComponentMeta<typeof SliderRangeField>;
 
-const Template: ComponentStory<typeof SliderRangeField> = (props) => {
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
+//<editor-fold desc="SliderRangeField example">
+const SliderRangeFieldPlaygroundStory: ComponentStory<typeof SliderRangeField> = (props) => (
+  <SliderRangeFieldPlaygroundTemplate {...cleanUpProps(props)} />
+);
 
-  return (
-    <ThemeProvider theme={swapBorder}>
-      <SliderRangeField data-container-id="sliderRangeFieldIdOne" {...props} />
-    </ThemeProvider>
-  );
+export const SliderRangeFieldPlayground = SliderRangeFieldPlaygroundStory.bind({});
+SliderRangeFieldPlayground.parameters = {
+  docs: {
+    source: {
+      code: SliderRangeFieldPlaygroundRaw,
+    },
+  },
 };
-
-export const InputFieldInput = Template.bind({});
-
-InputFieldInput.args = {
-  label: 'Введите диапазон',
-};
-
-InputFieldInput.storyName = 'SliderRangeField example';
+SliderRangeFieldPlayground.storyName = 'SliderRangeField example';
+//</editor-fold>
