@@ -90,6 +90,9 @@ export default {
     mobile: {
       control: { type: 'boolean' },
     },
+    stepWidth: {
+      control: false,
+    },
   },
 } as ComponentMeta<typeof Stepper>;
 

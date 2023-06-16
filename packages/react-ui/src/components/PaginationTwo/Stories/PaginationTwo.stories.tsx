@@ -77,6 +77,9 @@ export default {
     disabledPages: {
       control: false,
     },
+    locale: {
+      control: false,
+    },
   },
 } as ComponentMeta<typeof PaginationTwo>;
 

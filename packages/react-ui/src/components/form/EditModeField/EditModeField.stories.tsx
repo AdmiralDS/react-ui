@@ -67,6 +67,9 @@ export default {
     isLoading: {
       control: { type: 'boolean' },
     },
+    multilineView: {
+      control: { type: 'boolean' },
+    },
     placeholder: {
       control: { type: 'text' },
     },

@@ -64,6 +64,9 @@ export default {
     dropContainerStyle: {
       control: false,
     },
+    tabs: {
+      control: false,
+    },
   },
 } as ComponentMeta<typeof TabMenu>;
 

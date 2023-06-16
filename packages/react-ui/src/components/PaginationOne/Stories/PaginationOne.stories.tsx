@@ -75,6 +75,9 @@ export default {
     pageNumberDropContainerStyle: {
       control: false,
     },
+    locale: {
+      control: false,
+    },
   },
 } as ComponentMeta<typeof PaginationOne>;
 

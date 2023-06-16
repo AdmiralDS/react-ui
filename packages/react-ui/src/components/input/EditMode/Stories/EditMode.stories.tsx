@@ -57,6 +57,9 @@ export default {
       control: { type: 'radio' },
       options: INPUT_STATUS_VALUES,
     },
+    value: {
+      control: { type: 'text' },
+    },
     bold: {
       control: { type: 'boolean' },
     },

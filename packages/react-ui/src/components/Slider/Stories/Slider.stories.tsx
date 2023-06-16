@@ -73,11 +73,20 @@ export default {
     maxValue: {
       control: { type: 'number' },
     },
+    precision: {
+      control: { type: 'number' },
+    },
     tickMarks: {
-      control: { type: 'array' },
+      control: false,
     },
     skeleton: {
       control: { type: 'boolean' },
+    },
+    decimal: {
+      control: { type: 'text' },
+    },
+    thousand: {
+      control: { type: 'text' },
     },
   },
 } as ComponentMeta<typeof Slider>;
