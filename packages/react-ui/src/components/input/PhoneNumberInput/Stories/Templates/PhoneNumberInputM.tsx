@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ChangeEvent } from 'react';
+import type { ChangeEvent } from 'react';
 
 import { PhoneNumberInput } from '@admiral-ds/react-ui';
 import type { PhoneNumberInputProps } from '@admiral-ds/react-ui';

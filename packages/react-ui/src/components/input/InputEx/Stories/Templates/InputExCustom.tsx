@@ -2,8 +2,8 @@ import * as React from 'react';
 import type { ChangeEvent } from 'react';
 import styled, { css, ThemeProvider } from 'styled-components';
 
-import { InputEx, MenuItem, MenuItemProps, RenderProps, RenderPropsType } from '@admiral-ds/react-ui';
-import type { InputExProps, Theme, ValueType } from '@admiral-ds/react-ui';
+import { InputEx, MenuItem } from '@admiral-ds/react-ui';
+import type { InputExProps, Theme, ValueType, MenuItemProps, RenderProps, RenderPropsType } from '@admiral-ds/react-ui';
 
 const Separator = styled.div`
   height: 20px;

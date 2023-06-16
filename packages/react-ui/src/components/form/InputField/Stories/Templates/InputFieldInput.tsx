@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-import { InputField, Theme } from '@admiral-ds/react-ui';
-import type { InputFieldProps } from '@admiral-ds/react-ui';
+import { InputField } from '@admiral-ds/react-ui';
+import type { InputFieldProps, Theme } from '@admiral-ds/react-ui';
 import styled, { ThemeProvider } from 'styled-components';
 
 const DisplayContainer = styled.div`
