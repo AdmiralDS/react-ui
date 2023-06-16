@@ -1,10 +1,15 @@
 import * as React from 'react';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
-import { ThemeProvider } from 'styled-components';
+
 import { NumberInputField, INPUT_DIMENSIONS_VALUES, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
-import type { Theme } from '@admiral-ds/react-ui';
+
+import { NumberInputFieldPlaygroundTemplate } from './Templates';
+import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 import { DataAttributesDescription } from '#src/components/form/common';
+
+// Imports of text sources
+import NumberInputFieldPlaygroundRaw from '!!raw-loader!./Templates/NumberInputFieldPlayground';
 
 export default {
   title: 'Admiral-2.1/Form Field/NumberInputField',
@@ -110,25 +115,18 @@ export default {
   },
 } as ComponentMeta<typeof NumberInputField>;
 
-const Template: ComponentStory<typeof NumberInputField> = (props) => {
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
+//<editor-fold desc="NumberInputField example">
+const NumberInputFieldStory: ComponentStory<typeof NumberInputField> = (props) => (
+  <NumberInputFieldPlaygroundTemplate {...cleanUpProps(props)} />
+);
 
-  return (
-    <ThemeProvider theme={swapBorder}>
-      <NumberInputField data-container-id="numberInputFieldIdOne" {...props} minValue={1000} maxValue={10000} />
-    </ThemeProvider>
-  );
+export const NumberInputFieldPlayground = NumberInputFieldStory.bind({});
+NumberInputFieldPlayground.parameters = {
+  docs: {
+    source: {
+      code: NumberInputFieldPlaygroundRaw,
+    },
+  },
 };
-
-export const InputFieldInput = Template.bind({});
-
-InputFieldInput.args = {
-  defaultValue: '2000 ₽',
-  label: 'Введите сумму',
-  precision: 0,
-};
-
-InputFieldInput.storyName = 'NumberInputField example';
+NumberInputFieldPlayground.storyName = 'NumberInputField example';
+//</editor-fold>
