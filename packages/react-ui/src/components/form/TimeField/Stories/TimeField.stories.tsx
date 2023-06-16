@@ -73,13 +73,13 @@ export default {
       control: { type: 'boolean' },
     },
     startTime: {
-      type: 'string',
+      control: { type: 'text' },
     },
     endTime: {
-      type: 'string',
+      control: { type: 'text' },
     },
     label: {
-      type: 'string',
+      control: { type: 'text' },
     },
     disabledSlots: {
       control: false,

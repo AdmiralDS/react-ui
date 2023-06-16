@@ -56,11 +56,11 @@ export default {
     },
 
     extraText: {
-      type: 'string',
+      control: { type: 'text' },
     },
 
     label: {
-      type: 'string',
+      control: { type: 'text' },
     },
 
     displayClearIcon: {

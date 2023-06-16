@@ -79,7 +79,7 @@ export default {
       control: { type: 'radio' },
     },
     placeholder: {
-      type: 'string',
+      control: { type: 'text' },
     },
     minDate: {
       control: false,

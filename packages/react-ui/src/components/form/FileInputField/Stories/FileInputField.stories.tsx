@@ -48,16 +48,16 @@ export default {
       control: { type: 'radio' },
     },
     extraText: {
-      type: 'string',
+      control: { type: 'text' },
     },
     title: {
-      type: 'string',
+      control: { type: 'text' },
     },
     description: {
-      type: 'string',
+      control: { type: 'text' },
     },
     label: {
-      type: 'string',
+      control: { type: 'text' },
     },
     themeBorderKind: {
       options: ALL_BORDER_RADIUS_VALUES,

@@ -68,7 +68,7 @@ export default {
       control: { type: 'boolean' },
     },
     placeholder: {
-      type: 'string',
+      control: { type: 'text' },
     },
     onChange: {
       action: 'onChange',

@@ -65,13 +65,13 @@ export default {
       control: { type: 'boolean' },
     },
     placeholder: {
-      type: 'string',
+      control: { type: 'text' },
     },
     prefixValue: {
-      type: 'string',
+      control: { type: 'text' },
     },
     suffixValue: {
-      type: 'string',
+      control: { type: 'text' },
     },
     onChange: {
       action: 'onChange',

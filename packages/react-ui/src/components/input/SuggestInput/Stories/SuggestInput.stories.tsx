@@ -78,10 +78,10 @@ export default {
       control: { type: 'radio' },
     },
     placeholder: {
-      type: 'string',
+      control: { type: 'text' },
     },
     value: {
-      type: 'string',
+      control: { type: 'text' },
     },
     onChange: {
       action: 'onChange',

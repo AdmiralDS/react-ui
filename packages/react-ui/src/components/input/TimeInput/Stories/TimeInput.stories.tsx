@@ -112,10 +112,10 @@ export default {
       control: false,
     },
     startTime: {
-      type: 'string',
+      control: { type: 'text' },
     },
     endTime: {
-      type: 'string',
+      control: { type: 'text' },
     },
     disabledSlots: {
       control: false,

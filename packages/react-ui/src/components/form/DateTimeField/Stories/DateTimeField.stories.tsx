@@ -51,13 +51,13 @@ export default {
       type: { name: 'number', required: false },
     },
     extraText: {
-      type: 'string',
+      control: { type: 'text' },
     },
     prefixValue: {
-      type: 'string',
+      control: { type: 'text' },
     },
     suffixValue: {
-      type: 'string',
+      control: { type: 'text' },
     },
     displayClearIcon: {
       control: { type: 'boolean' },

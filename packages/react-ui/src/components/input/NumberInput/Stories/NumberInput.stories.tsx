@@ -56,19 +56,19 @@ export default {
   },
   argTypes: {
     placeholder: {
-      type: 'string',
+      control: { type: 'text' },
     },
     thousand: {
-      type: 'string',
+      control: { type: 'text' },
     },
     prefix: {
-      type: 'string',
+      control: { type: 'text' },
     },
     suffix: {
-      type: 'string',
+      control: { type: 'text' },
     },
     decimal: {
-      type: 'string',
+      control: { type: 'text' },
     },
     precision: {
       type: 'number',

@@ -64,16 +64,16 @@ export default {
   },
   argTypes: {
     thousand: {
-      type: 'string',
+      control: { type: 'text' },
     },
     prefix: {
-      type: 'string',
+      control: { type: 'text' },
     },
     suffix: {
-      type: 'string',
+      control: { type: 'text' },
     },
     placeholder: {
-      type: 'string',
+      control: { type: 'text' },
     },
     precision: {
       type: 'number',

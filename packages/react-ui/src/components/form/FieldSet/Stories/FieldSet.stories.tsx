@@ -59,7 +59,7 @@ export default {
       control: { type: 'text' },
     },
     extraText: {
-      type: 'string',
+      control: { type: 'text' },
     },
     required: {
       control: { type: 'boolean' },
