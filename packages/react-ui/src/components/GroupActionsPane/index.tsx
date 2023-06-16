@@ -45,6 +45,15 @@ const IconsBlock = styled.div<{ dimension?: PaneDimension }>`
   justify-content: flex-end;
 `;
 
+// TODO: в дальнейшем удалить параметр name, сделать параметры id и title обязательными
+export interface PaneColumn {
+  /** @deprecated Используйте id для уникального идентификатора колонки и title для заголовка колонки */
+  name?: string;
+  id?: string;
+  title?: string;
+  visible: boolean;
+}
+
 export interface ActionRenderProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   dimension: ButtonDimension;
 }
@@ -54,13 +63,13 @@ export interface GroupActionsPaneProps extends HTMLAttributes<HTMLDivElement> {
   dimension?: PaneDimension;
 
   /** Массив объектов с видимостью колонок */
-  columns?: Array<{ name: string; visible: boolean }>;
+  columns?: Array<PaneColumn>;
 
   /** Значение строки поиска */
   searchValue?: string;
 
   /** Обработчик изменения видимости колонок */
-  onColumnsChange?: (columns: Array<{ name: string; visible: boolean }>) => void;
+  onColumnsChange?: (columns: Array<PaneColumn>) => void;
 
   /** Обработчик открытия строки поиска */
   onSearchEnter?: () => void;
