@@ -61,7 +61,7 @@ export default {
       control: { type: 'boolean' },
     },
     text: {
-      type: 'string',
+      control: { type: 'text' },
     },
     themeBorderKind: {
       options: ALL_BORDER_RADIUS_VALUES,

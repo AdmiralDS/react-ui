@@ -92,6 +92,27 @@ export default {
       options: ['bottom', 'top', 'left', 'right'],
       control: { type: 'radio' },
     },
+    container: {
+      control: false,
+    },
+    target: {
+      control: false,
+    },
+    locale: {
+      control: false,
+    },
+    hintRef: {
+      control: false,
+    },
+    anchorClassName: {
+      control: false,
+    },
+    anchorId: {
+      control: false,
+    },
+    anchorCssMixin: {
+      control: false,
+    },
     themeBorderKind: {
       options: ALL_BORDER_RADIUS_VALUES,
       control: { type: 'radio' },

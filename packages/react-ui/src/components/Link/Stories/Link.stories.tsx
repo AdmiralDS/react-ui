@@ -58,6 +58,15 @@ export default {
     disabled: {
       control: { type: 'boolean' },
     },
+    as: {
+      control: false,
+    },
+    children: {
+      control: false,
+    },
+    ref: {
+      control: false,
+    },
     themeBorderKind: {
       options: ALL_BORDER_RADIUS_VALUES,
       control: { type: 'radio' },

@@ -62,6 +62,9 @@ export default {
     dropContainerStyle: {
       control: false,
     },
+    items: {
+      control: false,
+    },
     selected: {
       control: { type: 'text' },
     },
@@ -69,6 +72,9 @@ export default {
       control: { type: 'text' },
     },
     menuWidth: {
+      control: { type: 'text' },
+    },
+    menuMaxHeight: {
       control: { type: 'text' },
     },
     isVisible: {

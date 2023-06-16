@@ -53,13 +53,13 @@ export default {
   },
   argTypes: {
     title: {
-      type: 'string',
+      control: { type: 'text' },
     },
     linkText: {
-      type: 'string',
+      control: { type: 'text' },
     },
     href: {
-      type: 'string',
+      control: { type: 'text' },
     },
     displayStatusIcon: {
       type: 'boolean',

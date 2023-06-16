@@ -61,6 +61,9 @@ export default {
     skeleton: {
       control: { type: 'boolean' },
     },
+    value: {
+      control: false,
+    },
   },
 } as ComponentMeta<typeof Range>;
 

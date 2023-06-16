@@ -91,7 +91,7 @@ export default {
     },
 
     placeholder: {
-      type: 'string',
+      control: { type: 'text' },
     },
 
     onChange: {

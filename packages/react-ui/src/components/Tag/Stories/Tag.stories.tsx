@@ -78,6 +78,9 @@ export default {
     statusIcon: {
       control: false,
     },
+    icon: {
+      control: false,
+    },
     as: {
       options: ['div', 'span', 'button'],
       control: { type: 'radio' },
