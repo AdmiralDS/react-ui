@@ -55,6 +55,18 @@ export default {
       options: ['l', 'm', 's'],
       control: { type: 'radio' },
     },
+    targetRef: {
+      control: false,
+    },
+    setMenuFocus: {
+      control: false,
+    },
+    dropContainerCssMixin: {
+      control: false,
+    },
+    disableAutoAlign: {
+      control: { type: 'boolean' },
+    },
     themeBorderKind: {
       options: ALL_BORDER_RADIUS_VALUES,
       control: { type: 'radio' },

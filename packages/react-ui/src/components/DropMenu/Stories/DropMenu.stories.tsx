@@ -108,6 +108,9 @@ export default {
     alignMenuRef: {
       control: false,
     },
+    targetElement: {
+      control: false,
+    },
   },
 } as ComponentMeta<typeof DropMenu>;
 

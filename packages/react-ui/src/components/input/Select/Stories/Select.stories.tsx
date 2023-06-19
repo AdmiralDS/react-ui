@@ -62,7 +62,7 @@ export default {
     },
 
     multiple: {
-      control: { type: 'boolean' },
+      control: false,
     },
 
     readOnly: {
@@ -87,7 +87,7 @@ export default {
     },
 
     placeholder: {
-      type: 'string',
+      control: { type: 'text' },
     },
 
     onChange: {
@@ -118,6 +118,18 @@ export default {
     dropContainerStyle: {
       control: false,
     },
+    ref: {
+      control: false,
+    },
+    theme: {
+      control: false,
+    },
+    as: {
+      control: false,
+    },
+    forwardedAs: {
+      control: false,
+    },
   },
 } as ComponentMeta<typeof Select>;
 
@@ -127,7 +139,7 @@ const CustomOptionWrapper = styled(MenuItem)`
   white-space: pre-wrap;
 `;
 
-const SelectSimpleTemplate: ComponentStory<typeof Select> = (props) => {
+const SelectSimpleTemplate: ComponentStory<typeof Select> = ({ placeholder = 'Select option', ...props }) => {
   const cleanProps = cleanUpProps(props);
 
   const [selectValue, setSelectValue] = React.useState('');
@@ -145,7 +157,7 @@ const SelectSimpleTemplate: ComponentStory<typeof Select> = (props) => {
         {...cleanProps}
         value={selectValue}
         onChange={onChange}
-        placeholder="Select option"
+        placeholder={placeholder}
         dropContainerClassName="dropContainerClass"
       >
         <Option value="Анигиляторная пушка">Анигиляторная пушка</Option>
@@ -596,9 +608,6 @@ const SearchSelectWithBottomPaneTemplate: ComponentStory<typeof Select> = (props
 };
 
 export const SimpleSelectStory = SelectSimpleTemplate.bind({});
-SimpleSelectStory.args = {
-  placeholder: 'Начните ввод для поиска',
-};
 SimpleSelectStory.storyName = 'Select. Простой Select';
 
 const SelectWithTitleStory: ComponentStory<typeof Select> = (props) => {

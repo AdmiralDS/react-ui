@@ -1,0 +1,118 @@
+import * as React from 'react';
+import type { ComponentMeta, ComponentStory } from '@storybook/react';
+import { withDesign } from 'storybook-addon-designs';
+
+import {
+  TextInput,
+  INPUT_DIMENSIONS_VALUES,
+  INPUT_STATUS_VALUES,
+  ALL_BORDER_RADIUS_VALUES,
+} from '@admiral-ds/react-ui';
+
+import { TextInputPlaygroundTemplate } from './Templates';
+import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+
+// Imports of text sources
+import TextInputPlaygroundRaw from '!!raw-loader!./Templates/TextInputPlayground';
+
+export default {
+  title: 'Admiral-2.1/Input/TextInput',
+  component: TextInput,
+  decorators: [withDesign],
+  parameters: {
+    docs: {
+      source: {
+        code: null,
+      },
+    },
+    design: [
+      {
+        type: 'figma',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A60376',
+      },
+      {
+        type: 'figma',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A60982',
+      },
+      {
+        type: 'figma',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A61046',
+      },
+    ],
+  },
+  argTypes: {
+    dimension: {
+      options: INPUT_DIMENSIONS_VALUES,
+      control: { type: 'radio' },
+    },
+    status: {
+      control: { type: 'radio' },
+      options: INPUT_STATUS_VALUES,
+    },
+    disabled: {
+      control: { type: 'boolean' },
+    },
+    readOnly: {
+      control: { type: 'boolean' },
+    },
+    isLoading: {
+      control: { type: 'boolean' },
+    },
+    disableCopying: {
+      control: { type: 'boolean' },
+    },
+    displayClearIcon: {
+      control: { type: 'boolean' },
+    },
+    placeholder: {
+      control: { type: 'text' },
+    },
+    onChange: {
+      action: 'onChange',
+    },
+    icons: {
+      control: false,
+    },
+    containerRef: {
+      control: false,
+    },
+    handleInput: {
+      control: false,
+    },
+    theme: {
+      control: false,
+    },
+    as: {
+      control: false,
+    },
+    forwardedAs: {
+      control: false,
+    },
+    ref: {
+      control: false,
+    },
+    themeBorderKind: {
+      options: ALL_BORDER_RADIUS_VALUES,
+      control: { type: 'radio' },
+    },
+    skeleton: {
+      control: { type: 'boolean' },
+    },
+  },
+} as ComponentMeta<typeof TextInput>;
+
+//<editor-fold desc="Базовый input компонент">
+const TextInputPlaygroundStory: ComponentStory<typeof TextInput> = (props) => (
+  <TextInputPlaygroundTemplate {...cleanUpProps(props)} />
+);
+
+export const TextInputPlayground = TextInputPlaygroundStory.bind({});
+TextInputPlayground.parameters = {
+  docs: {
+    source: {
+      code: TextInputPlaygroundRaw,
+    },
+  },
+};
+TextInputPlayground.storyName = 'Базовый input компонент';
+//</editor-fold>

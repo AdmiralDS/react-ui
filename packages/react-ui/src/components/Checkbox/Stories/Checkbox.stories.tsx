@@ -68,6 +68,9 @@ export default {
     forwardedAs: {
       control: false,
     },
+    ref: {
+      control: false,
+    },
   },
 } as ComponentMeta<typeof Checkbox>;
 
