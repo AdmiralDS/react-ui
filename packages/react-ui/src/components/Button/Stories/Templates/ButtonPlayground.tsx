@@ -5,7 +5,7 @@ import { Button, T } from '@admiral-ds/react-ui';
 import type { ButtonProps, ButtonAppearance, Theme } from '@admiral-ds/react-ui';
 import { ReactComponent as StarSolid } from '@admiral-ds/icons/build/system/StarSolid.svg';
 
-import { PaddingForButtonWithIconLeft, PaddingForButtonWithIconRight } from '#src/components/Button/dimensionMixin';
+import { PaddingForButtonWithIconLeft, PaddingForButtonWithIconRight } from '@admiral-ds/react-ui';
 
 const ButtonContainer = styled.div<{ appearance?: ButtonAppearance }>`
   padding: 24px;
