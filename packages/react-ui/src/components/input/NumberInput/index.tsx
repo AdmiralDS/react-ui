@@ -142,7 +142,7 @@ export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       step = 1,
       minValue,
       maxValue,
-      placeholder = '0 ₽',
+      placeholder = 'От 0 ₽',
       align = 'left',
       skeleton = false,
       onChange,
@@ -153,12 +153,18 @@ export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
   ) => {
     const [plusDisabled, setPlusDisabled] = React.useState(false);
     const [minusDisabled, setMinusDisabled] = React.useState(false);
+    const [innerValueState, setInnerValueState] = React.useState(props.defaultValue);
+    const innerValue = props.value ?? innerValueState;
 
     const inputRef = React.useRef<HTMLInputElement>(null);
 
     // thousand, decimal - не более одного символа
     const thousand = validateThousand(userThousand) ? userThousand.slice(0, 1) : ' ';
     const decimal = userDecimal.slice(0, 1);
+
+    React.useEffect(() => {
+      setInnerValueState(props.defaultValue);
+    }, [props.defaultValue]);
 
     React.useEffect(() => {
       // проверка на undefined и пустую строку
@@ -212,7 +218,7 @@ export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
 
     const iconArray = React.Children.toArray(icons);
 
-    if (!props.readOnly && displayClearIcon) {
+    if (!props.readOnly && displayClearIcon && !!innerValue) {
       iconArray.unshift(
         <InputIconButton
           icon={CloseOutlineSvg}
@@ -293,6 +299,7 @@ export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
         plusDisabled && setPlusDisabled(false);
       }
 
+      setInnerValueState(event.currentTarget.value);
       onChange?.(event);
     };
 
