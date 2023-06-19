@@ -104,8 +104,6 @@ export { ReactComponent as HomeAutocreditOutline } from '@admiral-ds/icons/build
 export { ReactComponent as HomeAutocreditSolid } from '@admiral-ds/icons/build/category/HomeAutocreditSolid.svg';
 export { ReactComponent as HookOutline } from '@admiral-ds/icons/build/category/HookOutline.svg';
 export { ReactComponent as HookSolid } from '@admiral-ds/icons/build/category/HookSolid.svg';
-export { ReactComponent as HugeProcentOutline } from '@admiral-ds/icons/build/category/HugeProcentOutline.svg';
-export { ReactComponent as HugeProcentSolid } from '@admiral-ds/icons/build/category/HugeProcentSolid.svg';
 export { ReactComponent as IconsOutline } from '@admiral-ds/icons/build/category/IconsOutline.svg';
 export { ReactComponent as IconsSolid } from '@admiral-ds/icons/build/category/IconsSolid.svg';
 export { ReactComponent as IdeaOutline } from '@admiral-ds/icons/build/category/IdeaOutline.svg';
@@ -140,8 +138,6 @@ export { ReactComponent as MobileOutline } from '@admiral-ds/icons/build/categor
 export { ReactComponent as MobileSolid } from '@admiral-ds/icons/build/category/MobileSolid.svg';
 export { ReactComponent as MultibonusOutline } from '@admiral-ds/icons/build/category/MultibonusOutline.svg';
 export { ReactComponent as MultibonusSolid } from '@admiral-ds/icons/build/category/MultibonusSolid.svg';
-export { ReactComponent as NFCOutline } from '@admiral-ds/icons/build/category/NFCOutline.svg';
-export { ReactComponent as NFCSolid } from '@admiral-ds/icons/build/category/NFCSolid.svg';
 export { ReactComponent as PensionOutline } from '@admiral-ds/icons/build/category/PensionOutline.svg';
 export { ReactComponent as PensionSolid } from '@admiral-ds/icons/build/category/PensionSolid.svg';
 export { ReactComponent as PickupOutline } from '@admiral-ds/icons/build/category/PickupOutline.svg';
@@ -168,12 +164,8 @@ export { ReactComponent as ReceiptOutline } from '@admiral-ds/icons/build/catego
 export { ReactComponent as ReceiptSolid } from '@admiral-ds/icons/build/category/ReceiptSolid.svg';
 export { ReactComponent as ReceiptUpdateOutline } from '@admiral-ds/icons/build/category/ReceiptUpdateOutline.svg';
 export { ReactComponent as ReceiptUpdateSolid } from '@admiral-ds/icons/build/category/ReceiptUpdateSolid.svg';
-export { ReactComponent as RelizOutline } from '@admiral-ds/icons/build/category/RelizOutline.svg';
-export { ReactComponent as RelizSolid } from '@admiral-ds/icons/build/category/RelizSolid.svg';
 export { ReactComponent as SchemeOutline } from '@admiral-ds/icons/build/category/SchemeOutline.svg';
 export { ReactComponent as SchemeSolid } from '@admiral-ds/icons/build/category/SchemeSolid.svg';
-export { ReactComponent as ServiceRequestOutline } from '@admiral-ds/icons/build/category/ServiceRequestOutline.svg';
-export { ReactComponent as ServiceRequestSolid } from '@admiral-ds/icons/build/category/ServiceRequestSolid.svg';
 export { ReactComponent as ShopCartOutline } from '@admiral-ds/icons/build/category/ShopCartOutline.svg';
 export { ReactComponent as ShopCartSolid } from '@admiral-ds/icons/build/category/ShopCartSolid.svg';
 export { ReactComponent as ShoppingBagOutline } from '@admiral-ds/icons/build/category/ShoppingBagOutline.svg';
@@ -184,8 +176,6 @@ export { ReactComponent as SourceOutline } from '@admiral-ds/icons/build/categor
 export { ReactComponent as SourceSolid } from '@admiral-ds/icons/build/category/SourceSolid.svg';
 export { ReactComponent as StoreOutline } from '@admiral-ds/icons/build/category/StoreOutline.svg';
 export { ReactComponent as StoreSolid } from '@admiral-ds/icons/build/category/StoreSolid.svg';
-export { ReactComponent as StrimOutline } from '@admiral-ds/icons/build/category/StrimOutline.svg';
-export { ReactComponent as StrimSolid } from '@admiral-ds/icons/build/category/StrimSolid.svg';
 export { ReactComponent as StudyOutline } from '@admiral-ds/icons/build/category/StudyOutline.svg';
 export { ReactComponent as StudySolid } from '@admiral-ds/icons/build/category/StudySolid.svg';
 export { ReactComponent as TabletOutline } from '@admiral-ds/icons/build/category/TabletOutline.svg';

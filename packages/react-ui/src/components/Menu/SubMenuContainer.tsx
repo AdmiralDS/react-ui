@@ -6,13 +6,11 @@ import { getScrollableParents } from '#src/components/common/utils/getScrollable
 import { uid } from '#src/components/common/uid';
 import { keyboardKey } from '#src/components/common/keyboardKey';
 
-// import { FakeTarget, Portal } from './style';
-// import { getHintDirection } from './utils';
-// import type { HintPositionType, InternalHintPositionType } from './utils';
 import { HintContainer } from './HintContainer';
-import { DropdownContext, useDropdown } from '#src/components/DropdownProvider';
+import { DropdownContext, useDropdown, useDropdownsClickOutside } from '#src/components/DropdownProvider';
 import styled from 'styled-components';
 import { PositionInPortal } from '#src/components/PositionInPortal';
+import { useClickOutside } from '#src/components/common/hooks/useClickOutside';
 
 export const AnchorWrapper = styled.div<{ anchorCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>> }>`
   display: inline-block;
@@ -74,21 +72,21 @@ export interface SubMenuProps extends React.HTMLAttributes<HTMLDivElement> {
     /** Атрибут aria-label, описывающий назначение кнопки с крестиком, закрывающей хинт */
     closeButtonAriaLabel?: string;
   };
+  onClickOutside: (e: Event) => void;
 }
 
 export const SubMenuContainer = ({
   visible,
   onVisibilityChange,
   renderContent,
-  // hintPosition,
   target,
-  // visibilityTrigger = 'hover',
   hintRef,
   children,
   anchorClassName,
   anchorId: anchorIdProp,
   anchorCssMixin,
   locale,
+  onClickOutside,
   ...props
 }: SubMenuProps) => {
   const { rootRef } = React.useContext(DropdownContext);
@@ -106,6 +104,13 @@ export const SubMenuContainer = ({
 
   const showHint = () => onVisibilityChange?.(true);
   const hideHint = () => onVisibilityChange?.(false);
+
+  const { addDropdown, removeDropdown, dropdowns } = useDropdown(hintElementRef);
+
+  const handleClickOutside = (e: Event) => {
+    if (useDropdownsClickOutside(e, dropdowns)) onClickOutside(e);
+  };
+  useClickOutside([hintElementRef], handleClickOutside);
 
   React.useLayoutEffect(() => {
     const hint = hintElementRef.current;
@@ -205,6 +210,7 @@ export const SubMenuContainer = ({
   }, [target, visible, recalculation, content]);
 
   const attachRef = (node: HTMLDivElement) => handleRef(node, hintRef, hintElementRef);
+
   const scrollableParents = React.useMemo(
     () => getScrollableParents(anchorElementRef.current) ?? [],
     [anchorElementRef.current],

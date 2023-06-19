@@ -7,8 +7,8 @@ import { keyboardKey } from '#src/components/common/keyboardKey';
 import { VirtualBody } from '#src/components/Menu/VirtualBody';
 import { refSetter } from '#src/components/common/utils/refSetter';
 import type { MenuDimensions } from '#src/components/Menu/types';
-import { DropdownContainer } from '#src/components/DropdownContainer';
 import { SubMenuContainer } from '#src/components/Menu/SubMenuContainer';
+import { useDropdown } from '#src/components/DropdownProvider';
 
 // export type MenuDimensions = 'l' | 'm' | 's';
 
@@ -121,6 +121,9 @@ export interface MenuProps extends HTMLAttributes<HTMLDivElement> {
      */
     itemHeight: 'auto' | number;
   };
+
+  parentMenuRef?: React.RefObject<HTMLElement>;
+  onCloseSubMenu?: () => void;
 }
 
 export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
@@ -142,6 +145,8 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
       containerRef,
       virtualScroll,
       rowCount = 6,
+      parentMenuRef,
+      onCloseSubMenu,
       ...props
     },
     ref,
@@ -189,7 +194,9 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
     const [activeState, setActiveState] = React.useState<string | undefined>(uncontrolledActiveValue);
     const [lastScrollEvent, setLastScrollEvent] = React.useState<number>();
     const wrapperRef = React.useRef<HTMLDivElement | null>(null);
+    const subMenuRef = React.useRef<HTMLDivElement | null>(null);
     const activeItemRef = React.useRef<HTMLDivElement | null>(null);
+    const [submenuVisible, setSubmenuVisible] = React.useState<boolean>(false);
 
     const selectedId =
       multiSelection || disableSelectedOptionHighlight ? undefined : selected === undefined ? selectedState : selected;
@@ -212,8 +219,12 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
       if (item && !item.disabled && !item.readOnly) onSelectItem?.(id);
     };
 
+    const { currentActiveMenu, activateMenu, deactivateMenu } = useDropdown(wrapperRef);
+
     React.useEffect(() => {
       function handleKeyDown(e: KeyboardEvent) {
+        if (currentActiveMenu?.current !== wrapperRef.current) return;
+
         const code = keyboardKey.getCode(e);
         switch (code) {
           case keyboardKey[' ']:
@@ -234,6 +245,23 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
             e.preventDefault();
             break;
           }
+          case keyboardKey.ArrowRight: {
+            const item = model.find((item) => item.id === activeId);
+            if (item && !item.disabled && !item.readOnly && item.subItems && !submenuVisible) {
+              setSubmenuVisible(true);
+            }
+
+            if (subMenuRef && subMenuRef.current) {
+              activateMenu?.(subMenuRef);
+            }
+            break;
+          }
+          case keyboardKey.ArrowLeft: {
+            if (parentMenuRef && parentMenuRef.current) {
+              onCloseSubMenu?.();
+            }
+            break;
+          }
         }
       }
 
@@ -241,7 +269,12 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
       return () => {
         document.removeEventListener('keydown', handleKeyDown);
       };
-    }, [active, activeState]);
+    }, [active, activeState, currentActiveMenu]);
+
+    const handleSubMenuClose = () => {
+      setSubmenuVisible(false);
+      activateMenu?.(wrapperRef);
+    };
 
     const renderChildren = () => {
       return model.map(({ id, subItems, ...itemProps }) =>
@@ -250,12 +283,12 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
           selected: selectedId === id,
           onHover: () => {
             activateItem(itemProps.disabled ? undefined : id);
+            setSubmenuVisible(!!subItems && subItems.length > 0);
           },
           onClickItem: () => selectItem(id),
           hasSubmenu: subItems && subItems.length > 0,
           selfRef: (ref) => {
             if (activeId === id && subItems && subItems.length > 0) {
-              console.log(ref);
               activeItemRef.current = ref;
             }
           },
@@ -306,8 +339,31 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
       const activeItem = model.find((item) => item.id === activeId);
 
       return (
-        activeItem && activeItem.subItems && activeItem.subItems.length > 0 && <Menu model={activeItem.subItems} />
+        activeItem &&
+        activeItem.subItems &&
+        activeItem.subItems.length > 0 && (
+          <Menu
+            ref={subMenuRef}
+            parentMenuRef={wrapperRef}
+            model={activeItem.subItems}
+            onCloseSubMenu={handleSubMenuClose}
+          />
+        )
       );
+    };
+
+    const handleMouseEnter = (e: React.MouseEvent<HTMLDivElement>) => {
+      if (currentActiveMenu !== wrapperRef) activateMenu?.(wrapperRef);
+      props.onMouseEnter?.(e);
+    };
+
+    const handleMouseLeave = (e: React.MouseEvent<HTMLDivElement>) => {
+      if (currentActiveMenu === wrapperRef) deactivateMenu?.(wrapperRef);
+      props.onMouseLeave?.(e);
+    };
+
+    const handleClickOutside = () => {
+      setSubmenuVisible(false);
     };
 
     return (
@@ -317,14 +373,16 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
         hasTopPanel={hasTopPanel}
         hasBottomPanel={hasBottomPanel}
         rowCount={rowCount}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
         {...props}
       >
         {hasTopPanel && renderTopPanel({ dimension })}
         <StyledDiv ref={menuRef} hasTopPanel={hasTopPanel} hasBottomPanel={hasBottomPanel}>
           {virtualScroll ? renderVirtualChildren() : renderChildren()}
         </StyledDiv>
-        {activeItemRef && activeItemRef.current && (
-          <SubMenuContainer target={activeItemRef} visible={true}>
+        {submenuVisible && activeItemRef.current && (
+          <SubMenuContainer target={activeItemRef} onClickOutside={handleClickOutside} visible={true}>
             {renderSubMenu()}
           </SubMenuContainer>
         )}
