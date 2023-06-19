@@ -15,7 +15,7 @@ const OPTIONS = [
   'Ответ на «Главный вопрос жизни, вселенной и всего такого»',
   'text 69',
 ];
-export const SimpleTemplate = ({placeholder = 'Placeholder', ...props}: SearchSelectFieldProps) => {
+export const SimpleTemplate = ({ placeholder = 'Placeholder', ...props }: SearchSelectFieldProps) => {
   const [selectValue, setSelectValue] = React.useState('');
 
   const renderOptions = () => {

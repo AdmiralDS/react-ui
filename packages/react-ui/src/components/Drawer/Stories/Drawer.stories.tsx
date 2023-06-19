@@ -99,6 +99,21 @@ export default {
     displayCloseIcon: {
       control: { type: 'boolean' },
     },
+    overlayClassName: {
+      control: { type: 'text' },
+    },
+    container: {
+      control: false,
+    },
+    overlayCssMixin: {
+      control: false,
+    },
+    overlayStyle: {
+      control: false,
+    },
+    locale: {
+      control: false,
+    },
     themeBorderKind: {
       options: ALL_BORDER_RADIUS_VALUES,
       control: { type: 'radio' },

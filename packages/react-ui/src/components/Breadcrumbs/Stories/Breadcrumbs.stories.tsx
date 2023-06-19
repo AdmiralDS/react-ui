@@ -84,6 +84,9 @@ export default {
     dropContainerStyle: {
       control: false,
     },
+    items: {
+      control: false,
+    },
   },
 } as ComponentMeta<typeof Breadcrumbs>;
 

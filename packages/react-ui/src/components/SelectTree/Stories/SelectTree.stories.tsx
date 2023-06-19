@@ -60,6 +60,9 @@ export default {
     expandAll: {
       control: { type: 'boolean' },
     },
+    list: {
+      control: false,
+    },
   },
 } as ComponentMeta<typeof SelectTree>;
 

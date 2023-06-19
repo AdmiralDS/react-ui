@@ -104,6 +104,15 @@ export default {
       options: ['bottom', 'top', 'left', 'right'],
       control: { type: 'radio' },
     },
+    targetRef: {
+      control: false,
+    },
+    targetElement: {
+      control: false,
+    },
+    container: {
+      control: false,
+    },
     themeBorderKind: {
       options: ALL_BORDER_RADIUS_VALUES,
       control: { type: 'radio' },

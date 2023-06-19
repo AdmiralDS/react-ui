@@ -150,6 +150,18 @@ export default {
     showLastRowUnderline: {
       control: { type: 'boolean' },
     },
+    columnList: {
+      control: false,
+    },
+    rowList: {
+      control: false,
+    },
+    virtualScroll: {
+      control: false,
+    },
+    locale: {
+      control: false,
+    },
   },
 } as ComponentMeta<typeof Table>;
 

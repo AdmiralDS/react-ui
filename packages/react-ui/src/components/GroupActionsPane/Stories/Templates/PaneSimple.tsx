@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { GroupActionsPane, PaneSeparator, typography, TextButton } from '@admiral-ds/react-ui';
-import type { GroupActionsPaneProps, Theme } from '@admiral-ds/react-ui';
+import type { GroupActionsPaneProps, PaneColumn, Theme } from '@admiral-ds/react-ui';
 import { ReactComponent as GovernmentOutline } from '@admiral-ds/icons/build/category/GovernmentOutline.svg';
 import { ReactComponent as TelegramOutline } from '@admiral-ds/icons/build/communication/TelegrammOutline.svg';
 import { ReactComponent as AlertOutline } from '@admiral-ds/icons/build/category/AlertOutline.svg';
@@ -21,13 +21,13 @@ const SettingsMenu = styled.div`
   justify-content: center;
 `;
 
-const columns = [
-  { name: 'Тип сделки', visible: true },
-  { name: 'Дата сделки', visible: true },
-  { name: 'Сумма', visible: false },
-  { name: 'Валюта', visible: true },
-  { name: 'Ставка', visible: true },
-  { name: 'Статус', visible: true },
+const columns: PaneColumn[] = [
+  { id: 'transfer_type', title: 'Тип сделки', visible: true },
+  { id: 'transfer_date', title: 'Дата сделки', visible: true },
+  { id: 'transfer_amount', title: 'Сумма', visible: false },
+  { id: 'currency', title: 'Валюта', visible: true },
+  { id: 'rate', title: 'Ставка', visible: true },
+  { id: 'status', title: 'Статус', visible: true },
 ];
 
 export const PaneSimpleTemplate = (args: GroupActionsPaneProps) => {

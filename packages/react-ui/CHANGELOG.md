@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.1.0](https://github.com/AdmiralDS/react-ui/compare/v5.0.1...v5.1.0) (2023-06-16)
+
+
+### Features
+
+* **GroupActionsPane:** add props id and title in columns api, add tooltip for long column titles ([50d9b53](https://github.com/AdmiralDS/react-ui/commit/50d9b530c8323d5fc8d479b99b461be2932726db))
+
+
+### Bug Fixes
+
+* **Hint, Tooltip:** fix bug with z-index ([b60467c](https://github.com/AdmiralDS/react-ui/commit/b60467ce425e1d7c2d5fc7aaadc38486f772b915))
+
 ### [5.0.1](https://github.com/AdmiralDS/react-ui/compare/v5.0.0...v5.0.1) (2023-06-08)
 
 

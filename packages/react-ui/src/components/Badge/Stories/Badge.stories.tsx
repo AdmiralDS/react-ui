@@ -77,6 +77,18 @@ export default {
       ],
       control: { type: 'select' },
     },
+    theme: {
+      control: false,
+    },
+    as: {
+      control: false,
+    },
+    forwardedAs: {
+      control: false,
+    },
+    ref: {
+      control: false,
+    },
   },
 } as ComponentMeta<typeof Badge>;
 

@@ -65,6 +65,12 @@ export default {
     activeStep: {
       control: { type: 'number' },
     },
+    steps: {
+      control: false,
+    },
+    locale: {
+      control: false,
+    },
   },
 } as ComponentMeta<typeof ProgressStepper>;
 

@@ -62,6 +62,9 @@ export default {
     defaultSelected: { control: 'text' },
     selected: { control: 'text' },
     active: { control: 'text' },
+    model: {
+      control: false,
+    },
   },
 } as ComponentMeta<typeof Tree>;
 

@@ -54,6 +54,9 @@ export default {
     settingsButtonsDisabled: {
       control: 'boolean',
     },
+    searchValue: {
+      control: { type: 'text' },
+    },
     dropContainerCssMixin: {
       control: false,
     },
@@ -61,6 +64,15 @@ export default {
       control: false,
     },
     settingsButtonDropContainerStyle: {
+      control: false,
+    },
+    columns: {
+      control: false,
+    },
+    settingsMenu: {
+      control: false,
+    },
+    locale: {
       control: false,
     },
   },

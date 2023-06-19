@@ -1,8 +1,8 @@
 import * as React from 'react';
 import styled, { css, ThemeProvider } from 'styled-components';
 
-import { Color, DropMenu, MenuItem, Pill, refSetter } from '@admiral-ds/react-ui';
-import type { Theme, RenderOptionProps } from '@admiral-ds/react-ui';
+import { DropMenu, MenuItem, Pill, refSetter } from '@admiral-ds/react-ui';
+import type { Theme, RenderOptionProps, Color } from '@admiral-ds/react-ui';
 import { ReactComponent as HeartOutline } from '@admiral-ds/icons/build/category/HeartOutline.svg';
 import { ReactComponent as AlertOutline } from '@admiral-ds/icons/build/category/AlertOutline.svg';
 import { ReactComponent as BonusOutline } from '@admiral-ds/icons/build/category/BonusOutline.svg';
