@@ -1,41 +1,24 @@
-import type { ChangeEvent } from 'react';
 import * as React from 'react';
-import styled, { ThemeProvider } from 'styled-components';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { useState } from '@storybook/addons';
 import { withDesign } from 'storybook-addon-designs';
 
-import {
-  Option,
-  OptionGroup,
-  Select,
-  Modal,
-  ModalButtonPanel,
-  ModalContent,
-  ModalTitle,
-  MenuActionsPanel,
-  Button,
-  TextButton,
-  INPUT_DIMENSIONS_VALUES,
-  INPUT_STATUS_VALUES,
-  ALL_BORDER_RADIUS_VALUES,
-  MenuItem,
-} from '@admiral-ds/react-ui';
-import type { RenderOptionProps, Theme } from '@admiral-ds/react-ui';
-import { ReactComponent as Cuba } from '@admiral-ds/icons/build/flags/Cuba.svg';
+import { Select, INPUT_DIMENSIONS_VALUES, INPUT_STATUS_VALUES, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
-import { createOptions, formDataToObject, wait } from './utils';
-import { OPTIONS, OPTIONS_ASYNC, OPTIONS_SIMPLE } from './data';
-import { ExtraText, Form, FormValuesWrapper, Icon, StyledGroup, TextWrapper } from './styled';
-import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 import {
   CustomRenderMultipleValuesTemplate,
   CustomRenderValueTemplate,
+  MultiSelectTemplate,
+  SelectSimpleTemplate,
   SelectWithTitleTemplate,
-} from '#src/components/input/Select/Stories/Templates';
+} from '#src/components/input/Select/Stories/Templates/Select';
+import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+
+// Imports of text sources
 import CustomRenderValueRaw from '!!raw-loader!./Templates/Select/CustomRenderValue';
 import CustomRenderMultipleValuesRaw from '!!raw-loader!./Templates/Select/CustomRenderMultipleValues';
 import SelectWithTitleRaw from '!!raw-loader!./Templates/Select/SelectWithTitle';
+import SelectSimpleRaw from '!!raw-loader!./Templates/Select/SelectSimple';
+import MultiSelectRaw from '!!raw-loader!./Templates/Select/MultiSelect';
 
 export default {
   title: 'Admiral-2.1/Input/Select/режим "select"',
@@ -133,483 +116,21 @@ export default {
   },
 } as ComponentMeta<typeof Select>;
 
-const CustomOptionWrapper = styled(MenuItem)`
-  justify-content: flex-start;
-  flex-wrap: nowrap;
-  white-space: pre-wrap;
-`;
+//<editor-fold desc="Select. Простой Select">
+const SelectSimpleStory: ComponentStory<typeof Select> = (props) => <SelectSimpleTemplate {...cleanUpProps(props)} />;
 
-const SelectSimpleTemplate: ComponentStory<typeof Select> = ({ placeholder = 'Select option', ...props }) => {
-  const cleanProps = cleanUpProps(props);
-
-  const [selectValue, setSelectValue] = React.useState('');
-
-  const onChange = (e: ChangeEvent<HTMLSelectElement>) => setSelectValue(e.target.value);
-
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (cleanProps as any).themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
-  return (
-    <ThemeProvider theme={swapBorder}>
-      <Select
-        {...cleanProps}
-        value={selectValue}
-        onChange={onChange}
-        placeholder={placeholder}
-        dropContainerClassName="dropContainerClass"
-      >
-        <Option value="Анигиляторная пушка">Анигиляторная пушка</Option>
-        <Option value="Похо Торо Моронго">Похо Торо Моронго</Option>
-        <Option value="Саша Даль">Саша Даль</Option>
-      </Select>
-    </ThemeProvider>
-  );
-};
-
-const CustomOptionTemplate: ComponentStory<typeof Select> = (props) => {
-  const [selectValue, setSelectValue] = React.useState(props.value ? String(props.value) : OPTIONS[2].value);
-
-  const onChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    setSelectValue(e.target.value);
-    props.onChange?.(e);
-  };
-
-  return (
-    <>
-      <Select {...props} value={selectValue} mode="searchSelect" onChange={onChange}>
-        {OPTIONS.map((option) => (
-          <Option key={option.value} value={option.value}>
-            <Icon />
-            <TextWrapper>
-              {option.text}
-              <ExtraText>{option.extraText}</ExtraText>
-            </TextWrapper>
-          </Option>
-        ))}
-      </Select>
-    </>
-  );
-};
-
-interface MyIncredibleOptionProps extends RenderOptionProps {
-  shouldAnimate?: boolean;
-  text: string;
-}
-
-const MyIncredibleOption = ({ text, shouldAnimate, ...props }: MyIncredibleOptionProps) => (
-  <CustomOptionWrapper {...props}>
-    <Icon shouldAnimate={shouldAnimate} />
-    <TextWrapper>{text}</TextWrapper>
-  </CustomOptionWrapper>
-);
-
-const RenderPropsTemplate: ComponentStory<typeof Select> = (props) => {
-  const [selectValue, setSelectValue] = React.useState(props.value ? String(props.value) : OPTIONS[2].value);
-
-  const onChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    setSelectValue(e.target.value);
-    props.onChange?.(e);
-  };
-
-  return (
-    <>
-      <Select {...props} value={selectValue} mode="searchSelect" onChange={onChange}>
-        {OPTIONS.map(({ text, value }) => (
-          <Option
-            key={value}
-            value={value}
-            renderOption={(options) => (
-              <MyIncredibleOption text={text} shouldAnimate={options.hovered && value !== selectValue} {...options} />
-            )}
-          />
-        ))}
-      </Select>
-    </>
-  );
-};
-
-const OptionGroupTemplate: ComponentStory<typeof Select> = (props) => {
-  const [selectValue, setSelectValue] = React.useState('Похо Торо Моронго');
-
-  const onChange = (e: ChangeEvent<HTMLSelectElement>) => setSelectValue(e.target.value);
-
-  return (
-    <>
-      <Select {...props} value={selectValue} mode="searchSelect" onChange={onChange} dimension="xl">
-        <StyledGroup label="Сегодня выступают">
-          <Option value="Анигиляторная пушка">Анигиляторная пушка</Option>
-          <Option value="Похо Торо Моронго">Похо Торо Моронго</Option>
-        </StyledGroup>
-        <OptionGroup label="Группа фрукты" disabled>
-          <Option value="Саша Даль">Саша Даль</Option>
-          <Option value="Алексей Елесин">Алексей Елесин</Option>
-          <Option value="Константин Ионочкин">Константин Ионочкин</Option>
-          <Option value="Анна Корженко">Анна Корженко</Option>
-          <Option value="Фидель">Фидель</Option>
-          <Option value="Константин Колешонок">Константин Колешонок</Option>
-          <Option value="Алексей Орлов">Алексей Орлов</Option>
-        </OptionGroup>
-      </Select>
-    </>
-  );
-};
-
-const AsyncTemplate: ComponentStory<typeof Select> = (props) => {
-  const [selectValue, setSelectValue] = React.useState(props.value ? String(props.value) : OPTIONS[2].value);
-  const [options, setOptions] = React.useState<Array<{ value: string; text: string }>>([]);
-  const [searchValue, setSearchValue] = React.useState('');
-  const [isLoading, setIsLoading] = React.useState(true);
-
-  const onChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    setSelectValue(e.target.value);
-    props.onChange?.(e);
-  };
-
-  const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setSearchValue(e.target.value);
-  };
-
-  React.useEffect(() => {
-    (async () => {
-      setIsLoading(true);
-      await wait(1500);
-      if (searchValue.length === 0) setOptions([...OPTIONS_ASYNC]);
-      if (searchValue.length === 1) setOptions([...OPTIONS_ASYNC.slice(0, 2), { value: 'new', text: 'neeeew' }]);
-      if (searchValue.length === 2)
-        setOptions([
-          { value: 'new', text: 'neeeew' },
-          ...OPTIONS_ASYNC.slice(2, 3),
-          { value: 'new2', text: 'neeeew2' },
-          { value: 'new3', text: '33neeeew' },
-        ]);
-      if (searchValue.length >= 3) setOptions([]);
-      setIsLoading(false);
-    })();
-  }, [searchValue]);
-
-  return (
-    <>
-      <Select
-        {...props}
-        value={selectValue}
-        isLoading={isLoading}
-        onChange={onChange}
-        onInputChange={onInputChange}
-        mode="searchSelect"
-      >
-        {options.map((option) => (
-          <Option key={option.value} value={option.value}>
-            {option.text}
-          </Option>
-        ))}
-      </Select>
-    </>
-  );
-};
-
-const UncontrolledTemplate: ComponentStory<typeof Select> = (props) => {
-  const [submitValues, setSubmitValues] = useState<null | Record<string, any>>(null);
-
-  const onSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
-    evt.preventDefault();
-    const formElem = evt.target as HTMLFormElement;
-
-    if (formElem) {
-      setSubmitValues(formDataToObject(new FormData(formElem)));
-    }
-  };
-
-  return (
-    <>
-      <Form action="#src/components/input/Select/Stories/Select.stories" onSubmit={onSubmit}>
-        <Select {...props} name="myOwesomeField" mode="searchSelect" defaultValue={OPTIONS_SIMPLE[0]}>
-          {OPTIONS_SIMPLE.map((option, ind) => (
-            <Option key={option} value={option} disabled={ind === 4}>
-              {option}
-            </Option>
-          ))}
-        </Select>
-        <Button type="submit" dimension="m">
-          Cабмить меня, чего ты медлишь?!
-        </Button>
-        <FormValuesWrapper>
-          {submitValues === null
-            ? 'Здесь будут выводится значения, которые ты засабмитишь...'
-            : JSON.stringify(submitValues)}
-        </FormValuesWrapper>
-      </Form>
-    </>
-  );
-};
-
-const MULTISELECT_OPTIONS = [
-  {
-    text: 'Здесь ооооочень большой текст, который может, так сказать, и не поместиться в одну строку',
-    value: 'big',
+export const SelectSimple = SelectSimpleStory.bind({});
+SelectSimple.parameters = {
+  docs: {
+    source: {
+      code: SelectSimpleRaw,
+    },
   },
-];
-
-const TemplateSimpleMultiSelect: ComponentStory<typeof Select> = (props) => {
-  const [selectValue, setSelectValue] = React.useState<string[]>([]);
-  const [searchValue, setSearchValue] = React.useState('');
-  const [options, setOptions] = React.useState(createOptions(20));
-
-  const onChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    const newValues = Array.from(e.target.selectedOptions).map((option) => option.value);
-    setSelectValue(newValues);
-    props.onChange?.(e);
-  };
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchValue(e.target.value);
-  };
-
-  const renderOptions = () => {
-    return options.map((option, ind) => (
-      <Option key={option.value} value={option.value} disabled={[2, 4].includes(ind)}>
-        {option.text}
-      </Option>
-    ));
-  };
-
-  const handleAddButtonClick = () => {
-    if (searchValue && !options.find((item) => item.text === searchValue)) {
-      setOptions([...options, { text: searchValue, value: searchValue }]);
-      // setSelectValue([...selectValue, searchValue]);
-    }
-  };
-
-  const menuPanelContentDimension = props.dimension === undefined || props.dimension === 'xl' ? 'l' : props.dimension;
-
-  return (
-    <>
-      <Select
-        {...props}
-        value={selectValue}
-        multiple={true}
-        onChange={onChange}
-        dimension="xl"
-        displayClearIcon={true}
-        placeholder="Placeholder"
-        mode="searchSelect"
-        onInputChange={handleInputChange}
-        renderDropDownBottomPanel={({ dimension = menuPanelContentDimension }) => {
-          return (
-            <MenuActionsPanel dimension={dimension}>
-              <TextButton text={'Добавить'} disabled={false} iconStart={<Cuba />} onClick={handleAddButtonClick} />
-            </MenuActionsPanel>
-          );
-        }}
-      >
-        {renderOptions()}
-      </Select>
-    </>
-  );
 };
+SelectSimple.storyName = 'Select. Простой Select';
+//</editor-fold>
 
-const TemplateMultiSelect: ComponentStory<typeof Select> = (props) => {
-  const cleanProps = cleanUpProps(props);
-
-  const [selectValue, setSelectValue] = React.useState<string[]>(
-    Array.from({ length: 20 })
-      .map((_, ind) => String(ind))
-      .slice(0, 10),
-  );
-
-  const onChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    const newValues = Array.from(e.target.selectedOptions).map((option) => option.value);
-    setSelectValue(newValues);
-    props.onChange?.(e);
-  };
-
-  return (
-    <>
-      <Select
-        {...cleanProps}
-        value={selectValue}
-        multiple={true}
-        onChange={onChange}
-        dimension="xl"
-        displayClearIcon={true}
-        placeholder="Placeholder"
-      >
-        <Option value="big">
-          Здесь ооооочень большой текст, который может, так сказать, и не поместиться в одну строку
-        </Option>
-        {Array.from({ length: 20 }).map((_option, ind) => (
-          <Option key={ind} value={String(ind)} disabled={[1, 3].includes(ind)}>
-            {`${ind}0000`}
-          </Option>
-        ))}
-      </Select>
-    </>
-  );
-};
-
-const TemplateNotFixedMultiSelect: ComponentStory<typeof Select> = (props) => {
-  const [selectValue, setSelectValue] = React.useState<string[]>(
-    Array.from({ length: 20 }).map((_, ind) => String(ind)),
-  );
-
-  const onChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    const newValues = Array.from(e.target.selectedOptions).map((option) => option.value);
-    setSelectValue(newValues);
-    props.onChange?.(e);
-  };
-
-  return (
-    <>
-      <Select {...props} value={selectValue} mode="searchSelect" multiple={true} onChange={onChange} idleHeight="full">
-        {Array.from({ length: 20 }).map((_option, ind) => (
-          <Option key={ind} value={String(ind)}>
-            {`${ind}0000`}
-          </Option>
-        ))}
-      </Select>
-    </>
-  );
-};
-
-const TemplateMultiSelectCustomOption: ComponentStory<typeof Select> = (props) => {
-  const [selectValue, setSelectValue] = React.useState<string[]>(
-    Array.from({ length: 15 }).map((_, ind) => String(ind)),
-  );
-
-  const onChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    setSelectValue(Array.from(e.target.selectedOptions).map((option) => option.value));
-  };
-
-  return (
-    <>
-      <Select {...props} value={selectValue} multiple={true} onChange={onChange} mode="searchSelect">
-        {Array.from({ length: 20 }).map((_option, ind) => (
-          <Option key={ind} value={String(ind)} renderChip={() => String(ind)}>
-            <TextWrapper>
-              {`${ind}0000`}
-              <ExtraText>{`Доп ${ind}`}</ExtraText>
-            </TextWrapper>
-          </Option>
-        ))}
-      </Select>
-    </>
-  );
-};
-
-const TemplateMultiSelectCustomChip: ComponentStory<typeof Select> = (props) => {
-  const [selectValue, setSelectValue] = React.useState<string[]>(
-    Array.from({ length: 5 }).map((_, ind) => String(ind)),
-  );
-  const [modalOpened, setModalOpened] = React.useState(false);
-  const [valueToDelete, setValueToDelete] = React.useState<string | null>(null);
-
-  const onChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    setSelectValue(Array.from(e.target.selectedOptions).map((option) => option.value));
-  };
-  const deleteValue = (value: string) => setSelectValue((prev) => prev.filter((prevValue) => prevValue !== value));
-
-  const onCloseModal = () => {
-    setValueToDelete(null);
-    setModalOpened(false);
-  };
-  const onOpenModal = () => setModalOpened(true);
-
-  // TODO: use interface instead of any
-  const onChipClose = ({ value }: any) => {
-    setValueToDelete(value);
-    onOpenModal();
-  };
-  const renderChip = (ind: number) => () => ({ children: `${ind} $`, onClose: onChipClose });
-
-  const onYes = () => {
-    if (valueToDelete) deleteValue(valueToDelete);
-    onCloseModal();
-  };
-
-  return (
-    <>
-      <Select {...props} value={selectValue} multiple={true} onChange={onChange} mode="searchSelect">
-        {Array.from({ length: 20 }).map((_option, ind) => (
-          <Option key={ind} value={String(ind)} renderChip={renderChip(ind)} disabled={[0, 2].includes(ind)}>
-            {ind}
-          </Option>
-        ))}
-      </Select>
-      {modalOpened && (
-        <Modal onClose={onCloseModal}>
-          <ModalTitle>Попап неуверенности</ModalTitle>
-          <ModalContent>Уверены, что хотите удалить опцию?</ModalContent>
-          <ModalButtonPanel>
-            <Button appearance="primary" dimension="m" onClick={onYes}>
-              О да
-            </Button>
-            <Button appearance="secondary" dimension="m" onClick={onCloseModal}>
-              Нет, был не прав
-            </Button>
-          </ModalButtonPanel>
-        </Modal>
-      )}
-    </>
-  );
-};
-
-const SearchSelectWithBottomPaneTemplate: ComponentStory<typeof Select> = (props) => {
-  const [selectValue, setSelectValue] = React.useState('');
-  const [searchValue, setSearchValue] = React.useState('');
-  const [options, setOptions] = React.useState(OPTIONS_SIMPLE);
-
-  const onChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    setSelectValue(e.target.value);
-    props.onChange?.(e);
-  };
-
-  const renderOptions = () => {
-    return options.map((option, ind) => (
-      <Option key={option} value={option} disabled={ind === 4}>
-        {option}
-      </Option>
-    ));
-  };
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchValue(e.target.value);
-  };
-
-  const handleAddButtonClick = () => {
-    if (searchValue && !options.includes(searchValue)) {
-      setOptions([...options, searchValue]);
-    }
-  };
-
-  const menuPanelContentDimension = props.dimension === undefined || props.dimension === 'xl' ? 'l' : props.dimension;
-
-  return (
-    <>
-      <Select
-        {...props}
-        onInputChange={handleInputChange}
-        placeholder="Placeholder"
-        mode="searchSelect"
-        value={selectValue}
-        onChange={onChange}
-        renderDropDownBottomPanel={({ dimension = menuPanelContentDimension }) => {
-          return (
-            <MenuActionsPanel dimension={dimension}>
-              <TextButton text={'Добавить'} disabled={false} iconStart={<Cuba />} onClick={handleAddButtonClick} />
-            </MenuActionsPanel>
-          );
-        }}
-      >
-        {renderOptions()}
-      </Select>
-    </>
-  );
-};
-
-export const SimpleSelectStory = SelectSimpleTemplate.bind({});
-SimpleSelectStory.storyName = 'Select. Простой Select';
-
+//<editor-fold desc="Отображается Title, tooltip скрыт">
 const SelectWithTitleStory: ComponentStory<typeof Select> = (props) => {
   return <SelectWithTitleTemplate {...cleanUpProps(props)} />;
 };
@@ -628,7 +149,9 @@ SelectWithTitleExample.parameters = {
   },
 };
 SelectWithTitleExample.storyName = 'Отображается Title, tooltip скрыт';
+//</editor-fold>
 
+//<editor-fold desc="Кастомное отображение значения">
 const CustomRenderValueStory: ComponentStory<typeof Select> = (props) => {
   return <CustomRenderValueTemplate {...cleanUpProps(props)} />;
 };
@@ -650,7 +173,9 @@ CustomRenderValueExample.parameters = {
   },
 };
 CustomRenderValueExample.storyName = 'Кастомное отображение значения';
+//</editor-fold>
 
+//<editor-fold desc="Кастомное отображение значения с множественным выбором">
 const CustomRenderMultipleValuesStory: ComponentStory<typeof Select> = (props) => {
   return <CustomRenderMultipleValuesTemplate {...cleanUpProps(props)} />;
 };
@@ -672,37 +197,18 @@ CustomRenderMultipleValuesExample.parameters = {
   },
 };
 CustomRenderMultipleValuesExample.storyName = 'Кастомное отображение значения с множественным выбором';
+//</editor-fold>
 
-export const MultiSelectStory = TemplateMultiSelect.bind({});
-MultiSelectStory.storyName = 'Select. Простой MultiSelect';
+//<editor-fold desc="Select. Простой MultiSelect">
+const MultiSelectStory: ComponentStory<typeof Select> = (props) => <MultiSelectTemplate {...cleanUpProps(props)} />;
 
-//
-// export const CustomOptionSearchSelectStory = CustomOptionTemplate.bind({});
-// CustomOptionSearchSelectStory.storyName = 'SearchSelect. С кастомными опциями';
-//
-// export const RenderPropsSearchSelectStory = RenderPropsTemplate.bind({});
-// RenderPropsSearchSelectStory.storyName = 'SearchSelect. С кастомными опциями через renderProps';
-//
-// export const OptionGroupSearchSelectStory = OptionGroupTemplate.bind({});
-// OptionGroupSearchSelectStory.storyName = 'SearchSelect. С группами';
-//
-// export const AsyncSearchSelectStory = AsyncTemplate.bind({});
-// AsyncSearchSelectStory.storyName = 'SearchSelect. Асинхронный';
-//
-// export const UncontrolledSearchSelectStory = UncontrolledTemplate.bind({});
-// UncontrolledSearchSelectStory.storyName = 'SearchSelect. Некотролируемый';
-//
-// export const SimpleMultiSearchSelectStory = TemplateSimpleMultiSelect.bind({});
-// SimpleMultiSearchSelectStory.storyName = 'SearchSelect. Простой MultiSearchSelect';
-//
-// export const ExpandedHeightMultiSearchSelectStory = TemplateNotFixedMultiSelect.bind({});
-// ExpandedHeightMultiSearchSelectStory.storyName = 'MultiSearchSelect с увеличенной по умолчанию высотой';
-//
-// export const CustomOptionMultiSearchSelectStory = TemplateMultiSelectCustomOption.bind({});
-// CustomOptionMultiSearchSelectStory.storyName = 'MultiSearchSelect с кастомными опциями';
-//
-// export const CustomChipMultiSearchSelectStory = TemplateMultiSelectCustomChip.bind({});
-// CustomChipMultiSearchSelectStory.storyName = 'MultiSearchSelect с кастомным обработчиком удаления чипса';
-//
-// export const SearchSelectWithBottomPaneStory = SearchSelectWithBottomPaneTemplate.bind({});
-// SearchSelectWithBottomPaneStory.storyName = 'С нижней панелью';
+export const MultiSelect = MultiSelectStory.bind({});
+MultiSelect.parameters = {
+  docs: {
+    source: {
+      code: MultiSelectRaw,
+    },
+  },
+};
+MultiSelect.storyName = 'Select. Простой MultiSelect';
+//</editor-fold>
