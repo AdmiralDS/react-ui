@@ -1,43 +1,43 @@
 import * as React from 'react';
-import type { ChangeEvent } from 'react';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { useState } from '@storybook/addons';
 import { withDesign } from 'storybook-addon-designs';
-import styled from 'styled-components';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
-import {
-  Option,
-  OptionGroup,
-  Select,
-  Modal,
-  ModalButtonPanel,
-  ModalContent,
-  ModalTitle,
-  MenuActionsPanel,
-  Button,
-  TextButton,
-  T,
-  defaultFilterItem,
-  INPUT_DIMENSIONS_VALUES,
-  INPUT_STATUS_VALUES,
-  ALL_BORDER_RADIUS_VALUES,
-} from '@admiral-ds/react-ui';
-import type { SearchFormat } from '@admiral-ds/react-ui';
-import { ReactComponent as PlusOutline } from '@admiral-ds/icons/build/service/PlusOutline.svg';
-import { ReactComponent as Cuba } from '@admiral-ds/icons/build/flags/Cuba.svg';
-import { ReactComponent as Belarus } from '@admiral-ds/icons/build/flags/Belarus.svg';
-import { ReactComponent as RussianFederation } from '@admiral-ds/icons/build/flags/RussianFederation.svg';
+import { Select, INPUT_DIMENSIONS_VALUES, INPUT_STATUS_VALUES, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
-import { createOptions, formDataToObject } from './utils';
-import { OPTIONS, OPTIONS_NAMES, OPTIONS_SIMPLE } from './data';
-import { ExtraText, Form, FormValuesWrapper, Icon, Separator, StyledGroup, TextWrapper } from './styled';
+import {
+  CustomOptionTemplate,
+  LoadOnScrollTemplate,
+  RenderPropsTemplate,
+  RenderValueTemplate,
+  SearchSelectWithFilterTemplate,
+  SelectWithAsyncLoading,
+  WithAddButtonTemplate,
+  SearchSelectOptionGroupTemplate,
+  UncontrolledSearchSelectTemplate,
+  MultipleWithAddOptionTemplate,
+  MultipleWithApplyTemplate,
+  ExpandedHeightMultiSearchSelectTemplate,
+  CustomOptionMultiSearchSelectTemplate,
+  CustomChipMultiSearchSelectTemplate,
+} from './Templates/SearchSelect';
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
-import { LoadOnScrollTemplate, RenderPropsTemplate, SelectWithAsyncLoading } from './Templates';
-import RenderPropsRaw from '!!raw-loader!./Templates/RenderProps';
-import LoadOnScrollRaw from '!!raw-loader!./Templates/LoadingOnScroll';
-import SelectWithAsyncLoadingRaw from '!!raw-loader!./Templates/Select/SelectWithAsyncLoading';
-// import VirtualScrollRaw from '!!raw-loader!./Templates/VirtualScroll';
+
+// Imports of text sources
+import RenderPropsRaw from '!!raw-loader!./Templates/SearchSelect/RenderProps';
+import LoadOnScrollRaw from '!!raw-loader!./Templates/SearchSelect/LoadingOnScroll';
+import SelectWithAsyncLoadingRaw from '!!raw-loader!./Templates/SearchSelect/SelectWithAsyncLoading';
+import SearchSelectWithFilterRaw from '!!raw-loader!./Templates/SearchSelect/SearchSelectWithFilter';
+import CustomOptionRaw from '!!raw-loader!./Templates/SearchSelect/CustomOption';
+import RenderValueRaw from '!!raw-loader!./Templates/SearchSelect/RenderValue';
+import WithAddButtonRaw from '!!raw-loader!./Templates/SearchSelect/WithAddButton';
+import SearchSelectOptionGroupRaw from '!!raw-loader!./Templates/SearchSelect/SearchSelectOptionGroup';
+import UncontrolledSearchSelectRaw from '!!raw-loader!./Templates/SearchSelect/UncontrolledSearchSelect';
+import MultipleWithAddOptionRaw from '!!raw-loader!./Templates/SearchSelect/MultipleWithAddOption';
+import MultipleWithApplyRaw from '!!raw-loader!./Templates/SearchSelect/MultipleWithApply';
+import ExpandedHeightMultiSearchSelectRaw from '!!raw-loader!./Templates/SearchSelect/ExpandedHeightMultiSearchSelect';
+import CustomOptionMultiSearchSelectRaw from '!!raw-loader!./Templates/SearchSelect/CustomOptionMultiSearchSelect';
+import CustomChipMultiSearchSelectRaw from '!!raw-loader!./Templates/SearchSelect/CustomChipMultiSearchSelect';
 
 const queryClient = new QueryClient();
 
@@ -137,523 +137,45 @@ export default {
   },
 } as ComponentMeta<typeof Select>;
 
-const TemplateSearchSelectWithFilter: ComponentStory<typeof Select> = ({ placeholder = 'Placeholder', ...props }) => {
-  const cleanProps = cleanUpProps(props);
-
-  const renderOptions = () => {
-    return OPTIONS_SIMPLE.map((option, ind) => (
-      <Option key={option} value={option} disabled={ind === 4}>
-        {option}
-      </Option>
-    ));
-  };
-
-  return (
-    <>
-      <Select {...cleanProps} placeholder={placeholder} mode="searchSelect" dropContainerClassName="dropContainerClass">
-        {renderOptions()}
-      </Select>
-    </>
-  );
-};
-
-const TemplateCustomOption: ComponentStory<typeof Select> = (props) => {
-  const cleanProps = cleanUpProps(props);
-
-  const [selectValue, setSelectValue] = React.useState(cleanProps.value ? String(cleanProps.value) : OPTIONS[2].value);
-
-  const onChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    setSelectValue(e.target.value);
-    props.onChange?.(e);
-  };
-
-  const handleFilterItem = (value: string, searchValue: string, searchFormat: SearchFormat) => {
-    const option = OPTIONS.find((item) => item.value === value);
-    return (
-      !!option &&
-      (defaultFilterItem(value, searchValue, searchFormat) ||
-        defaultFilterItem(option.text, searchValue, searchFormat) ||
-        defaultFilterItem(option.extraText, searchValue, searchFormat))
-    );
-  };
-
-  return (
-    <>
-      <T font="Body/Body 2 Long" as="div">
-        Фильтрация элементов значению, тексту и дополнительному тексту
-      </T>
-      <Separator />
-      <Select
-        {...cleanProps}
-        value={selectValue}
-        mode="searchSelect"
-        onFilterItem={handleFilterItem}
-        onChange={onChange}
-      >
-        {OPTIONS.map((option) => (
-          <Option key={option.value} value={option.value}>
-            <Icon />
-            <TextWrapper>
-              {option.text}
-              <ExtraText>{option.extraText}</ExtraText>
-            </TextWrapper>
-          </Option>
-        ))}
-      </Select>
-    </>
-  );
-};
-
-const RenderingValue = styled.div`
-  color: ${(p) => p.theme.color['Teal/Teal 80']};
-  display: flex;
-  flex: 1 1 100%;
-  column-gap: 8px;
-  padding: 0 3px;
-  border-width: 1px;
-  border-style: dotted;
-  border-radius: 4px;
-  border-color: ${(p) => p.theme.color['Teal/Teal 80']};
-  background-color: ${(p) => p.theme.color['Teal/Teal 10']};
-  box-sizing: border-box;
-`;
-
-const getFlag = (value: string) => {
-  return value === 'Фидель' ? Cuba : value === 'Константин Колешонок' ? Belarus : RussianFederation;
-};
-
-const RenderValueTemplate: ComponentStory<typeof Select> = (props) => {
-  const cleanProps = cleanUpProps(props);
-
-  const renderOptions = () => {
-    return OPTIONS_NAMES.map((option) => (
-      <Option key={option} value={option}>
-        {option}
-      </Option>
-    ));
-  };
-
-  const renderValue = (value: string | string[] | undefined) => {
-    if (typeof value === 'string' && !!value) {
-      const Flag = getFlag(value);
-
-      return (
-        <RenderingValue>
-          <Flag height={24} />
-          {value}
-        </RenderingValue>
-      );
-    }
-  };
-
-  return (
-    <>
-      <Select
-        {...cleanProps}
-        mode="searchSelect"
-        multiple={false}
-        placeholder="Placeholder"
-        renderSelectValue={renderValue}
-      >
-        {renderOptions()}
-      </Select>
-    </>
-  );
-};
-
-const TemplateOptionGroup: ComponentStory<typeof Select> = (props) => {
-  const cleanProps = cleanUpProps(props);
-
-  const [selectValue, setSelectValue] = React.useState('Похо Торо Моронго');
-
-  const onChange = (e: ChangeEvent<HTMLSelectElement>) => setSelectValue(e.target.value);
-
-  return (
-    <>
-      <Select {...cleanProps} value={selectValue} mode="searchSelect" onChange={onChange} dimension="xl">
-        <StyledGroup label="Сегодня выступают">
-          <Option value="Анигиляторная пушка">Анигиляторная пушка</Option>
-          <Option value="Похо Торо Моронго">Похо Торо Моронго</Option>
-        </StyledGroup>
-        <OptionGroup label="Группа фрукты" disabled>
-          <Option value="Саша Даль">Саша Даль</Option>
-          <Option value="Алексей Елесин">Алексей Елесин</Option>
-          <Option value="Константин Ионочкин">Константин Ионочкин</Option>
-          <Option value="Анна Корженко">Анна Корженко</Option>
-          <Option value="Фидель">Фидель</Option>
-          <Option value="Константин Колешонок">Константин Колешонок</Option>
-          <Option value="Алексей Орлов">Алексей Орлов</Option>
-        </OptionGroup>
-      </Select>
-    </>
-  );
-};
-
-const UncontrolledTemplate: ComponentStory<typeof Select> = (props) => {
-  const cleanProps = cleanUpProps(props);
-
-  const [submitValues, setSubmitValues] = useState<null | Record<string, any>>(null);
-
-  const onSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
-    evt.preventDefault();
-    const formElem = evt.target as HTMLFormElement;
-
-    if (formElem) {
-      setSubmitValues(formDataToObject(new FormData(formElem)));
-    }
-  };
-
-  return (
-    <>
-      <Form action="" onSubmit={onSubmit}>
-        <Select {...cleanProps} name="myOwesomeField" mode="searchSelect" defaultValue={OPTIONS_SIMPLE[0]}>
-          {OPTIONS_SIMPLE.map((option, ind) => (
-            <Option key={option} value={option} disabled={ind === 4}>
-              {option}
-            </Option>
-          ))}
-        </Select>
-        <Button type="submit" dimension="m">
-          Cабмить меня, чего ты медлишь?!
-        </Button>
-        <FormValuesWrapper>
-          {submitValues === null
-            ? 'Здесь будут выводится значения, которые ты засабмитишь...'
-            : JSON.stringify(submitValues)}
-        </FormValuesWrapper>
-      </Form>
-    </>
-  );
-};
-
-const TemplateMultipleWithAddOption: ComponentStory<typeof Select> = (props) => {
-  const cleanProps = cleanUpProps(props);
-
-  const [selectValue, setSelectValue] = React.useState<string[]>([]);
-  const [searchValue, setSearchValue] = React.useState('');
-  const [options, setOptions] = React.useState(createOptions(20));
-
-  const onChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    const newValues = Array.from(e.target.selectedOptions).map((option) => option.value);
-    setSelectValue(newValues);
-    props.onChange?.(e);
-  };
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchValue(e.target.value);
-  };
-
-  const renderOptions = () => {
-    return options.map((option, ind) => (
-      <Option key={option.value} value={option.value} disabled={[2, 4].includes(ind)}>
-        {option.text}
-      </Option>
-    ));
-  };
-
-  const handleAddButtonClick = () => {
-    if (searchValue && !options.find((item) => item.text === searchValue)) {
-      setOptions([...options, { text: searchValue, value: searchValue }]);
-      setSelectValue([...selectValue, searchValue]);
-      setSearchValue('');
-    }
-  };
-
-  const addButtonProps = React.useMemo(() => {
-    return {
-      disabled: !!options.find((item) => item.text === searchValue) || !searchValue,
-      text: searchValue ? `Добавить «${searchValue}»` : 'Добавить',
-    };
-  }, [searchValue, options]);
-
-  const menuPanelContentDimension =
-    cleanProps.dimension === undefined || cleanProps.dimension === 'xl' ? 'l' : cleanProps.dimension;
-
-  return (
-    <>
-      <Select
-        {...cleanProps}
-        value={selectValue}
-        inputValue={searchValue}
-        multiple={true}
-        onChange={onChange}
-        dimension="xl"
-        displayClearIcon={true}
-        placeholder="Placeholder"
-        mode="searchSelect"
-        onInputChange={handleInputChange}
-        renderDropDownBottomPanel={({ dimension = menuPanelContentDimension }) => {
-          return (
-            <MenuActionsPanel dimension={dimension}>
-              <TextButton {...addButtonProps} iconStart={<PlusOutline />} onClick={handleAddButtonClick} />
-            </MenuActionsPanel>
-          );
-        }}
-      >
-        {renderOptions()}
-      </Select>
-    </>
-  );
-};
-
-const MultipleWithApplyOptions = createOptions(10);
-
-const TemplateMultipleWithApply: ComponentStory<typeof Select> = (props) => {
-  const cleanProps = cleanUpProps(props);
-
-  const [selectValue, setSelectValue] = React.useState<string[]>(['big', '1', '3']);
-  const [forcedOpen, setForcedOpen] = React.useState(false);
-
-  const onChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    const newValues = Array.from(e.target.selectedOptions).map((option) => option.value);
-    setSelectValue(newValues);
-    props.onChange?.(e);
-  };
-
-  const renderOptions = () => {
-    return MultipleWithApplyOptions.map((option, ind) => (
-      <Option key={option.value} value={option.value} disabled={[0, 2, 4].includes(ind)}>
-        {option.text}
-      </Option>
-    ));
-  };
-
-  const handleApplyButtonClick = () => {
-    setForcedOpen(false);
-    // eslint-disable-next-line no-console
-    console.log('selected', selectValue.toString());
-  };
-
-  const menuPanelContentDimension =
-    cleanProps.dimension === undefined || cleanProps.dimension === 'xl' ? 'l' : cleanProps.dimension;
-
-  return (
-    <>
-      <Select
-        {...cleanProps}
-        forcedOpen={forcedOpen}
-        value={selectValue}
-        multiple={true}
-        onChange={onChange}
-        displayClearIcon={true}
-        placeholder="Placeholder"
-        mode="searchSelect"
-        onChangeDropDownState={setForcedOpen}
-        renderDropDownBottomPanel={({ dimension = menuPanelContentDimension }) => {
-          return (
-            <MenuActionsPanel dimension={dimension}>
-              <Button dimension={'m'} disabled={selectValue.length === 0} onClick={handleApplyButtonClick}>
-                Применить
-              </Button>
-            </MenuActionsPanel>
-          );
-        }}
-      >
-        {renderOptions()}
-      </Select>
-    </>
-  );
-};
-
-const TemplateNotFixedMultiSelect: ComponentStory<typeof Select> = (props) => {
-  const cleanProps = cleanUpProps(props);
-
-  const [selectValue, setSelectValue] = React.useState<string[]>(
-    Array.from({ length: 20 }).map((_, ind) => String(ind)),
-  );
-
-  const onChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    const newValues = Array.from(e.target.selectedOptions).map((option) => option.value);
-    setSelectValue(newValues);
-    props.onChange?.(e);
-  };
-
-  return (
-    <>
-      <Select
-        {...cleanProps}
-        value={selectValue}
-        mode="searchSelect"
-        multiple={true}
-        onChange={onChange}
-        maxRowCount={3}
-      >
-        {Array.from({ length: 20 }).map((_option, ind) => (
-          <Option key={ind} value={String(ind)}>
-            {`${ind}0000`}
-          </Option>
-        ))}
-      </Select>
-    </>
-  );
-};
-
-const TemplateMultiSelectCustomOption: ComponentStory<typeof Select> = (props) => {
-  const cleanProps = cleanUpProps(props);
-
-  const [selectValue, setSelectValue] = React.useState<string[]>(
-    Array.from({ length: 15 }).map((_, ind) => String(ind)),
-  );
-
-  const onChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    setSelectValue(Array.from(e.target.selectedOptions).map((option) => option.value));
-  };
-
-  return (
-    <>
-      <Select {...cleanProps} value={selectValue} multiple={true} onChange={onChange} mode="searchSelect">
-        {Array.from({ length: 20 }).map((_option, ind) => (
-          <Option key={ind} value={String(ind)} renderChip={() => String(ind)}>
-            <TextWrapper>
-              {`${ind}0000`}
-              <ExtraText>{`Доп ${ind}`}</ExtraText>
-            </TextWrapper>
-          </Option>
-        ))}
-      </Select>
-    </>
-  );
-};
-
-const TemplateMultiSelectCustomChip: ComponentStory<typeof Select> = (props) => {
-  const cleanProps = cleanUpProps(props);
-
-  const [selectValue, setSelectValue] = React.useState<string[]>(
-    Array.from({ length: 5 }).map((_, ind) => String(ind)),
-  );
-  const [modalOpened, setModalOpened] = React.useState(false);
-  const [valueToDelete, setValueToDelete] = React.useState<string | null>(null);
-
-  const onChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    setSelectValue(Array.from(e.target.selectedOptions).map((option) => option.value));
-  };
-  const deleteValue = (value: string) => setSelectValue((prev) => prev.filter((prevValue) => prevValue !== value));
-
-  const onCloseModal = () => {
-    setValueToDelete(null);
-    setModalOpened(false);
-  };
-  const onOpenModal = () => setModalOpened(true);
-
-  // TODO: use interface instead of any
-  const onChipClose = ({ value }: any) => {
-    setValueToDelete(value);
-    onOpenModal();
-  };
-  const renderChip = (ind: number) => () => ({ children: `${ind} $`, onClose: onChipClose });
-
-  const onYes = () => {
-    if (valueToDelete) deleteValue(valueToDelete);
-    onCloseModal();
-  };
-
-  return (
-    <>
-      <Select {...cleanProps} value={selectValue} multiple={true} onChange={onChange} mode="searchSelect">
-        {Array.from({ length: 20 }).map((_option, ind) => (
-          <Option key={ind} value={String(ind)} renderChip={renderChip(ind)} disabled={[0, 2].includes(ind)}>
-            {ind}
-          </Option>
-        ))}
-      </Select>
-      {modalOpened && (
-        <Modal onClose={onCloseModal}>
-          <ModalTitle>Попап неуверенности</ModalTitle>
-          <ModalContent>Уверены, что хотите удалить опцию?</ModalContent>
-          <ModalButtonPanel>
-            <Button appearance="primary" dimension="m" onClick={onYes}>
-              О да
-            </Button>
-            <Button appearance="secondary" dimension="m" onClick={onCloseModal}>
-              Нет, был не прав
-            </Button>
-          </ModalButtonPanel>
-        </Modal>
-      )}
-    </>
-  );
-};
-
-const TemplateWithAddButton: ComponentStory<typeof Select> = (props) => {
-  const cleanProps = cleanUpProps(props);
-
-  const [selectValue, setSelectValue] = React.useState('');
-  const [searchValue, setSearchValue] = React.useState('');
-  const [options, setOptions] = React.useState(OPTIONS_SIMPLE);
-
-  const onChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    setSelectValue(e.target.value);
-    props.onChange?.(e);
-  };
-
-  const renderOptions = () => {
-    return options.map((option, ind) => (
-      <Option key={option} value={option} disabled={ind === 4}>
-        {option}
-      </Option>
-    ));
-  };
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchValue(e.target.value);
-  };
-
-  const handleAddButtonClick = () => {
-    if (searchValue && !options.includes(searchValue)) {
-      setOptions([...options, searchValue]);
-    }
-  };
-
-  const addButtonProps = React.useMemo(() => {
-    return {
-      disabled: options.includes(searchValue) || !searchValue,
-      text: searchValue ? `Добавить «${searchValue}»` : 'Добавить',
-    };
-  }, [searchValue, options]);
-
-  const menuPanelContentDimension = props.dimension === undefined || props.dimension === 'xl' ? 'l' : props.dimension;
-
-  return (
-    <>
-      <Select
-        {...cleanProps}
-        onInputChange={handleInputChange}
-        placeholder="Placeholder"
-        mode="searchSelect"
-        value={selectValue}
-        onChange={onChange}
-        renderDropDownBottomPanel={({ dimension = menuPanelContentDimension }) => {
-          return (
-            <MenuActionsPanel dimension={dimension}>
-              <TextButton {...addButtonProps} iconStart={<PlusOutline />} onClick={handleAddButtonClick} />
-            </MenuActionsPanel>
-          );
-        }}
-      >
-        {renderOptions()}
-      </Select>
-    </>
-  );
-};
-
-export const SearchSelectWithFilter = TemplateSearchSelectWithFilter.bind({});
+//<editor-fold desc="Фильтрация опций">
+const SearchSelectWithFilterStory: ComponentStory<typeof Select> = (props) => (
+  <SearchSelectWithFilterTemplate {...cleanUpProps(props)} />
+);
+
+export const SearchSelectWithFilter = SearchSelectWithFilterStory.bind({});
 SearchSelectWithFilter.storyName = 'Фильтрация опций';
 SearchSelectWithFilter.parameters = {
   docs: {
+    source: {
+      code: SearchSelectWithFilterRaw,
+    },
     description: {
       story: `Фильтрация списка опций осуществляется вызывающим кодом.\n\n В данном примере показан один из возможных способов`,
     },
   },
 };
+//</editor-fold>
 
-export const CustomOption = TemplateCustomOption.bind({});
+//<editor-fold desc="Кастомные опции с кастомной фильтрацией">
+const CustomOptionStory: ComponentStory<typeof Select> = (props) => <CustomOptionTemplate {...cleanUpProps(props)} />;
+
+export const CustomOption = CustomOptionStory.bind({});
+CustomOption.parameters = {
+  docs: {
+    source: {
+      code: CustomOptionRaw,
+    },
+  },
+};
 CustomOption.storyName = 'Кастомные опции с кастомной фильтрацией';
+//</editor-fold>
 
+//<editor-fold desc="Кастомные опции через renderProps">
 const RenderPropsStory: ComponentStory<typeof Select> = (props) => {
   return <RenderPropsTemplate {...cleanUpProps(props)} />;
 };
-export const RenderPropsExample = RenderPropsStory.bind({});
-RenderPropsExample.parameters = {
+export const RenderProps = RenderPropsStory.bind({});
+RenderProps.parameters = {
   docs: {
     source: {
       code: RenderPropsRaw,
@@ -663,13 +185,15 @@ RenderPropsExample.parameters = {
     },
   },
 };
-RenderPropsExample.storyName = 'Кастомные опции через renderProps';
+RenderProps.storyName = 'Кастомные опции через renderProps';
+//</editor-fold>
 
+//<editor-fold desc="Подгрузка данных при scroll">
 const LoadOnScrollStory: ComponentStory<typeof Select> = (props) => {
   return <LoadOnScrollTemplate {...cleanUpProps(props)} />;
 };
-export const LoadOnScrollExample = LoadOnScrollStory.bind({});
-LoadOnScrollExample.parameters = {
+export const LoadOnScroll = LoadOnScrollStory.bind({});
+LoadOnScroll.parameters = {
   docs: {
     source: {
       code: LoadOnScrollRaw,
@@ -682,45 +206,66 @@ LoadOnScrollExample.parameters = {
     },
   },
 };
-LoadOnScrollExample.storyName = 'Подгрузка данных при scroll';
+LoadOnScroll.storyName = 'Подгрузка данных при scroll';
+//</editor-fold>
 
-// const VirtualScrollStory: ComponentStory<typeof Select> = (props) => {
-//   return <VirtualScrollTemplate {...cleanUpProps(props)} />;
-// };
-// export const VirtualScrollExample = VirtualScrollStory.bind({});
-// VirtualScrollExample.parameters = {
-//   docs: {
-//     source: {
-//       code: VirtualScrollRaw,
-//     },
-//     description: {
-//       story: 'Пример использования виртуального скролла в select',
-//     },
-//   },
-// };
-// VirtualScrollExample.storyName = 'Виртуальный scroll';
+//<editor-fold desc="Кастомное отображение значения">
+const RenderValueStory: ComponentStory<typeof Select> = (props) => <RenderValueTemplate {...cleanUpProps(props)} />;
 
-export const RenderValueStory = RenderValueTemplate.bind({});
-RenderValueStory.args = {
+export const RenderValue = RenderValueStory.bind({});
+RenderValue.parameters = {
+  docs: {
+    source: {
+      code: RenderValueRaw,
+    },
+  },
+};
+RenderValue.args = {
   defaultValue: 'Фидель',
 };
-RenderValueStory.storyName = 'Кастомное отображение значения';
+RenderValue.storyName = 'Кастомное отображение значения';
+//</editor-fold>
 
-export const WithAddButton = TemplateWithAddButton.bind({});
+//<editor-fold desc="Нижняя панель с кнопкой "Добавить"">
+const WithAddButtonStory: ComponentStory<typeof Select> = (props) => <WithAddButtonTemplate {...cleanUpProps(props)} />;
+
+export const WithAddButton = WithAddButtonStory.bind({});
+WithAddButton.parameters = {
+  docs: {
+    source: {
+      code: WithAddButtonRaw,
+    },
+  },
+};
 WithAddButton.storyName = 'Нижняя панель с кнопкой "Добавить"';
+//</editor-fold>
 
-export const OptionGroupStory = TemplateOptionGroup.bind({});
-OptionGroupStory.storyName = 'Использование групп';
+//<editor-fold desc="Использование групп">
+const SearchSelectOptionGroupStory: ComponentStory<typeof Select> = (props) => (
+  <SearchSelectOptionGroupTemplate {...cleanUpProps(props)} />
+);
 
-const AsyncTemplate: ComponentStory<typeof Select> = (props) => {
+export const SearchSelectOptionGroup = SearchSelectOptionGroupStory.bind({});
+SearchSelectOptionGroup.parameters = {
+  docs: {
+    source: {
+      code: SearchSelectOptionGroupRaw,
+    },
+  },
+};
+SearchSelectOptionGroup.storyName = 'Использование групп';
+//</editor-fold>
+
+//<editor-fold desc="SearchSelect. Асинхронный">
+const AsyncSearchSelectStory: ComponentStory<typeof Select> = (props) => {
   return (
     <QueryClientProvider client={queryClient}>
       <SelectWithAsyncLoading {...cleanUpProps(props)} />
     </QueryClientProvider>
   );
 };
-export const AsyncSearchSelectStory = AsyncTemplate.bind({});
-AsyncSearchSelectStory.parameters = {
+export const AsyncSearchSelect = AsyncSearchSelectStory.bind({});
+AsyncSearchSelect.parameters = {
   docs: {
     source: {
       code: SelectWithAsyncLoadingRaw,
@@ -731,22 +276,101 @@ AsyncSearchSelectStory.parameters = {
     },
   },
 };
-AsyncSearchSelectStory.storyName = 'SearchSelect. Асинхронный';
+AsyncSearchSelect.storyName = 'SearchSelect. Асинхронный';
+//</editor-fold>
 
-export const UncontrolledSearchSelectStory = UncontrolledTemplate.bind({});
-UncontrolledSearchSelectStory.storyName = 'SearchSelect. Некотролируемый';
+//<editor-fold desc="SearchSelect. Неконтролируемый">
+const UncontrolledSearchSelectStory: ComponentStory<typeof Select> = (props) => (
+  <UncontrolledSearchSelectTemplate {...cleanUpProps(props)} />
+);
 
-export const MultipleWithAddOption = TemplateMultipleWithAddOption.bind({});
+export const UncontrolledSearchSelect = UncontrolledSearchSelectStory.bind({});
+UncontrolledSearchSelect.parameters = {
+  docs: {
+    source: {
+      code: UncontrolledSearchSelectRaw,
+    },
+  },
+};
+UncontrolledSearchSelect.storyName = 'SearchSelect. Неконтролируемый';
+//</editor-fold>
+
+//<editor-fold desc="Multiple с добавлением опций">
+const MultipleWithAddOptionStory: ComponentStory<typeof Select> = (props) => (
+  <MultipleWithAddOptionTemplate {...cleanUpProps(props)} />
+);
+
+export const MultipleWithAddOption = MultipleWithAddOptionStory.bind({});
+MultipleWithAddOption.parameters = {
+  docs: {
+    source: {
+      code: MultipleWithAddOptionRaw,
+    },
+  },
+};
 MultipleWithAddOption.storyName = 'Multiple с добавлением опций';
+//</editor-fold>
 
-export const MultipleWithApply = TemplateMultipleWithApply.bind({});
+//<editor-fold desc="Multiple с кнопкой "Применить"">
+const MultipleWithApplyStory: ComponentStory<typeof Select> = (props) => (
+  <MultipleWithApplyTemplate {...cleanUpProps(props)} />
+);
+
+export const MultipleWithApply = MultipleWithApplyStory.bind({});
+MultipleWithApply.parameters = {
+  docs: {
+    source: {
+      code: MultipleWithApplyRaw,
+    },
+  },
+};
 MultipleWithApply.storyName = 'Multiple с кнопкой "Применить"';
+//</editor-fold>
 
-export const ExpandedHeightMultiSearchSelectStory = TemplateNotFixedMultiSelect.bind({});
-ExpandedHeightMultiSearchSelectStory.storyName = 'Multiple с увеличенной по умолчанию высотой';
+//<editor-fold desc="Multiple с увеличенной по умолчанию высотой">
+const ExpandedHeightMultiSearchSelectStory: ComponentStory<typeof Select> = (props) => (
+  <ExpandedHeightMultiSearchSelectTemplate {...cleanUpProps(props)} />
+);
 
-export const CustomOptionMultiSearchSelectStory = TemplateMultiSelectCustomOption.bind({});
-CustomOptionMultiSearchSelectStory.storyName = 'Multiple с кастомными опциями';
+export const ExpandedHeightMultiSearchSelect = ExpandedHeightMultiSearchSelectStory.bind({});
+ExpandedHeightMultiSearchSelect.parameters = {
+  docs: {
+    source: {
+      code: ExpandedHeightMultiSearchSelectRaw,
+    },
+  },
+};
+ExpandedHeightMultiSearchSelect.storyName = 'Multiple с увеличенной по умолчанию высотой';
+//</editor-fold>
 
-export const CustomChipMultiSearchSelectStory = TemplateMultiSelectCustomChip.bind({});
-CustomChipMultiSearchSelectStory.storyName = 'Multiple с кастомным обработчиком удаления чипса';
+//<editor-fold desc="Multiple с кастомными опциями">
+const CustomOptionMultiSearchSelectStory: ComponentStory<typeof Select> = (props) => (
+  <CustomOptionMultiSearchSelectTemplate {...cleanUpProps(props)} />
+);
+
+export const CustomOptionMultiSearchSelect = CustomOptionMultiSearchSelectStory.bind({});
+CustomOptionMultiSearchSelect.parameters = {
+  docs: {
+    source: {
+      code: CustomOptionMultiSearchSelectRaw,
+    },
+  },
+};
+CustomOptionMultiSearchSelect.storyName = 'Multiple с кастомными опциями';
+//</editor-fold>
+
+//<editor-fold desc="Multiple с кастомным обработчиком удаления чипса">
+const CustomChipMultiSearchSelectStory: ComponentStory<typeof Select> = (props) => (
+  <CustomChipMultiSearchSelectTemplate {...cleanUpProps(props)} />
+);
+
+export const CustomChipMultiSearchSelect = CustomChipMultiSearchSelectStory.bind({});
+CustomChipMultiSearchSelect.parameters = {
+  docs: {
+    source: {
+      code: CustomChipMultiSearchSelectRaw,
+    },
+  },
+};
+CustomChipMultiSearchSelect.storyName = 'Multiple с кастомным обработчиком удаления чипса';
+//</editor-fold>
