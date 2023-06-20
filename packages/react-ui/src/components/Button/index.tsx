@@ -98,6 +98,12 @@ const StyledSpinner = styled(Spinner)`
   transform: translate(-50%, -50%);
 `;
 
+const AdditionalPadding = styled.div`
+  display: inline-block;
+  width: 2px;
+  height: 20px;
+`;
+
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {
@@ -135,6 +141,9 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         {...props}
       >
         {loading && <StyledSpinner dimension={spinnerDimension} inverse={spinnerInverse} />}
+        {!loading && !props.displayAsSquare && !hasIconStart && (
+          <AdditionalPadding />
+        )}
         <ButtonContent>
           {hasIconStart ? <ButtonIconContainer>{iconStart || icon}</ButtonIconContainer> : null}
           {React.Children.toArray(children).map((child, index) =>
@@ -142,6 +151,9 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           )}
           {hasIconEnd ? <ButtonIconContainer>{iconEnd || icon}</ButtonIconContainer> : null}
         </ButtonContent>
+        {!loading && !props.displayAsSquare && !hasIconEnd && (
+          <AdditionalPadding />
+        )}
       </StyledButton>
     );
   },
