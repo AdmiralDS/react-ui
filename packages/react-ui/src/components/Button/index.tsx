@@ -118,8 +118,8 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ) => {
     const spinnerDimension = dimension === 's' ? 'ms' : 'm';
     const spinnerInverse = appearance !== 'secondary' && appearance !== 'ghost';
-    const hasIconLeft = !!icon && iconPlace === 'left';
-    const hasIconRight = !!icon && iconPlace === 'right';
+    const hasIconStart = !!icon && iconPlace === 'left';
+    const hasIconEnd = !!icon && iconPlace === 'right';
 
     return (
       <StyledButton
@@ -129,8 +129,8 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         type={type}
         $loading={loading}
         skeleton={skeleton}
-        hasIconLeft={!!iconStart || hasIconLeft}
-        hasIconRight={!!iconEnd || hasIconRight}
+        hasIconLeft={!!iconStart || hasIconStart}
+        hasIconRight={!!iconEnd || hasIconEnd}
         buttonCssMixin={buttonCssMixin}
         {...props}
       >
@@ -138,7 +138,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         <ButtonContent>
           {iconStart ? (
             <ButtonIconContainer>{iconStart}</ButtonIconContainer>
-          ) : hasIconLeft ? (
+          ) : hasIconStart ? (
             <ButtonIconContainer>{icon}</ButtonIconContainer>
           ) : null}
           {React.Children.toArray(children).map((child, index) =>
@@ -146,7 +146,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           )}
           {iconEnd ? (
             <ButtonIconContainer>{iconEnd}</ButtonIconContainer>
-          ) : hasIconRight && <ButtonIconContainer>{icon}</ButtonIconContainer> ? (
+          ) : hasIconEnd ? (
             <ButtonIconContainer>{icon}</ButtonIconContainer>
           ) : null}
         </ButtonContent>
