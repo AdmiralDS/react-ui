@@ -1,7 +1,5 @@
 import * as React from 'react';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
-
+import type { Meta, StoryFn } from '@storybook/react';
 import { IconButton, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
@@ -14,7 +12,7 @@ import IconButtonAppearanceRaw from '!!raw-loader!./Templates/IconButtonAppearan
 
 export default {
   title: 'Admiral-2.1/IconButton',
-  decorators: [withDesign],
+  decorators: undefined,
   component: IconButton,
   parameters: {
     docs: {
@@ -65,52 +63,64 @@ export default {
       control: { type: 'boolean' },
     },
   },
-} as ComponentMeta<typeof IconButton>;
+} as Meta<typeof IconButton>;
 
-const IconButtonDimensionStory: ComponentStory<typeof IconButton> = (props) => (
+const IconButtonDimensionStory: StoryFn<typeof IconButton> = (props) => (
   <IconButtonDimensionTemplate {...cleanUpProps(props)} />
 );
 
-//<editor-fold desc="IconButton. Размеры">
-export const IconButtonDimension = IconButtonDimensionStory.bind({});
-IconButtonDimension.parameters = {
-  docs: {
-    source: {
-      code: IconButtonDimensionRaw,
+export const IconButtonDimension = {
+  render: IconButtonDimensionStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: IconButtonDimensionRaw,
+      },
     },
   },
+
+  name: 'IconButton. Размеры',
 };
-IconButtonDimension.storyName = 'IconButton. Размеры';
+
 //</editor-fold>
 
 //<editor-fold desc="IconButton. Состояния">
-const IconButtonStateStory: ComponentStory<typeof IconButton> = (props) => (
+const IconButtonStateStory: StoryFn<typeof IconButton> = (props) => (
   <IconButtonStateTemplate {...cleanUpProps(props)} />
 );
 
-export const IconButtonState = IconButtonStateStory.bind({});
-IconButtonState.parameters = {
-  docs: {
-    source: {
-      code: IconButtonStateRaw,
+export const IconButtonState = {
+  render: IconButtonStateStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: IconButtonStateRaw,
+      },
     },
   },
+
+  name: 'IconButton. Состояния',
 };
-IconButtonState.storyName = 'IconButton. Состояния';
+
 //</editor-fold>
 
 //<editor-fold desc="IconButton. Appearance">
-const IconButtonAppearanceStory: ComponentStory<typeof IconButton> = (props) => (
+const IconButtonAppearanceStory: StoryFn<typeof IconButton> = (props) => (
   <IconButtonAppearanceTemplate {...cleanUpProps(props)} />
 );
 
-export const IconButtonAppearance = IconButtonAppearanceStory.bind({});
-IconButtonAppearance.parameters = {
-  docs: {
-    source: {
-      code: IconButtonAppearanceRaw,
+export const IconButtonAppearance = {
+  render: IconButtonAppearanceStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: IconButtonAppearanceRaw,
+      },
     },
   },
+
+  name: 'IconButton. Appearance',
 };
-IconButtonAppearance.storyName = 'IconButton. Appearance';
-//</editor-fold>

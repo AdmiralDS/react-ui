@@ -1,7 +1,5 @@
 import * as React from 'react';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
-
+import type { Meta, StoryFn } from '@storybook/react';
 import { SelectField, INPUT_DIMENSIONS_VALUES, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
 import {
@@ -30,7 +28,7 @@ import SimpleMultiSearchSelectRaw from '!!raw-loader!./Templates/SimpleMultiSear
 export default {
   title: 'Admiral-2.1/Form Field/SelectField',
   component: SelectField,
-  decorators: [withDesign],
+  decorators: undefined,
   parameters: {
     docs: {
       source: {
@@ -177,140 +175,177 @@ export default {
       control: { type: 'number' },
     },
   },
-} as ComponentMeta<typeof SelectField>;
+} as Meta<typeof SelectField>;
 
 //<editor-fold desc="Простой SearchSelect">
-const SimpleStory: ComponentStory<typeof SelectField> = (props) => {
+const SimpleStory: StoryFn<typeof SelectField> = (props) => {
   return <SimpleTemplate {...cleanUpProps(props)} />;
 };
-export const SimpleSearchSelectStory = SimpleStory.bind({});
-SimpleSearchSelectStory.parameters = {
-  docs: {
-    source: {
-      code: SimpleRaw,
-    },
-    description: {
-      story:
-        'Селект с возможностью контекстного поиска среди вариантов.\n' +
-        'Используется при большом количестве элементов в списке.\n' +
-        '\n' +
-        'При клике на любом месте поля (кроме иконки крестика) открывается меню выбора и активируется поле ввода текста. ' +
-        'Меню закрывается при повторном клике в поле, либо при клике вне компонента, либо при выборе опции в меню.',
+
+export const SimpleSearchSelectStory = {
+  render: SimpleStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: SimpleRaw,
+      },
+      description: {
+        story:
+          'Селект с возможностью контекстного поиска среди вариантов.\n' +
+          'Используется при большом количестве элементов в списке.\n' +
+          '\n' +
+          'При клике на любом месте поля (кроме иконки крестика) открывается меню выбора и активируется поле ввода текста. ' +
+          'Меню закрывается при повторном клике в поле, либо при клике вне компонента, либо при выборе опции в меню.',
+      },
     },
   },
+
+  name: 'Простой SearchSelect',
 };
-SimpleSearchSelectStory.storyName = 'Простой SearchSelect';
+
 //</editor-fold>
 
 //<editor-fold desc="SearchSelect с кастомными опциями">
-const CustomOptionStory: ComponentStory<typeof SelectField> = (props) => {
+const CustomOptionStory: StoryFn<typeof SelectField> = (props) => {
   return <CustomOptionsTemplate {...cleanUpProps(props)} />;
 };
 
-export const CustomOptionSearchSelectStory = CustomOptionStory.bind({});
-CustomOptionSearchSelectStory.parameters = {
-  docs: {
-    source: {
-      code: CustomOptionsRaw,
-    },
-    description: {
-      story: 'Пример отображения кастомных опций с использованием компонента Option',
+export const CustomOptionSearchSelectStory = {
+  render: CustomOptionStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: CustomOptionsRaw,
+      },
+      description: {
+        story: 'Пример отображения кастомных опций с использованием компонента Option',
+      },
     },
   },
+
+  name: 'SearchSelect с кастомными опциями',
 };
-CustomOptionSearchSelectStory.storyName = 'SearchSelect с кастомными опциями';
+
 //</editor-fold>
 
 //<editor-fold desc="SearchSelect с кастомными опциями через renderProps">
-const RenderPropsSearchSelectStory: ComponentStory<typeof SelectField> = (props) => (
+const RenderPropsSearchSelectStory: StoryFn<typeof SelectField> = (props) => (
   <RenderPropsSearchSelectTemplate {...cleanUpProps(props)} />
 );
 
-export const RenderPropsSearchSelect = RenderPropsSearchSelectStory.bind({});
-RenderPropsSearchSelect.parameters = {
-  docs: {
-    source: {
-      code: RenderPropsSearchSelectRaw,
+export const RenderPropsSearchSelect = {
+  render: RenderPropsSearchSelectStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: RenderPropsSearchSelectRaw,
+      },
     },
   },
+
+  name: 'SearchSelect с кастомными опциями через renderProps',
 };
-RenderPropsSearchSelect.storyName = 'SearchSelect с кастомными опциями через renderProps';
+
 //</editor-fold>
 
 //<editor-fold desc="SearchSelect с группами">
-const OptionGroupSearchSelectStory: ComponentStory<typeof SelectField> = () => <OptionGroupSearchSelectTemplate />;
+const OptionGroupSearchSelectStory: StoryFn<typeof SelectField> = () => <OptionGroupSearchSelectTemplate />;
 
-export const OptionGroupSearchSelect = OptionGroupSearchSelectStory.bind({});
-OptionGroupSearchSelect.parameters = {
-  docs: {
-    source: {
-      code: OptionGroupSearchSelectRaw,
+export const OptionGroupSearchSelect = {
+  render: OptionGroupSearchSelectStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: OptionGroupSearchSelectRaw,
+      },
     },
   },
+
+  name: 'SearchSelect с группами',
 };
-OptionGroupSearchSelect.storyName = 'SearchSelect с группами';
+
 //</editor-fold>
 
 //<editor-fold desc="Асинхронный SearchSelect">
-const AsyncSearchSelectStory: ComponentStory<typeof SelectField> = (props) => (
+const AsyncSearchSelectStory: StoryFn<typeof SelectField> = (props) => (
   <AsyncSearchSelectTemplate {...cleanUpProps(props)} />
 );
 
-export const AsyncSearchSelect = AsyncSearchSelectStory.bind({});
-AsyncSearchSelect.parameters = {
-  docs: {
-    source: {
-      code: AsyncSearchSelectRaw,
+export const AsyncSearchSelect = {
+  render: AsyncSearchSelectStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: AsyncSearchSelectRaw,
+      },
     },
   },
+
+  name: 'Асинхронный SearchSelect',
 };
-AsyncSearchSelect.storyName = 'Асинхронный SearchSelect';
+
 //</editor-fold>
 
 //<editor-fold desc="Простой MultiSearchSelect">
-const SimpleMultiSearchSelectStory: ComponentStory<typeof SelectField> = (props) => (
+const SimpleMultiSearchSelectStory: StoryFn<typeof SelectField> = (props) => (
   <SimpleMultiSearchSelectTemplate {...cleanUpProps(props)} />
 );
 
-export const SimpleMultiSearchSelect = SimpleMultiSearchSelectStory.bind({});
-SimpleMultiSearchSelect.parameters = {
-  docs: {
-    source: {
-      code: SimpleMultiSearchSelectRaw,
+export const SimpleMultiSearchSelect = {
+  render: SimpleMultiSearchSelectStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: SimpleMultiSearchSelectRaw,
+      },
     },
   },
+
+  name: 'Простой MultiSearchSelect',
 };
-SimpleMultiSearchSelect.storyName = 'Простой MultiSearchSelect';
+
 //</editor-fold>
 
 //<editor-fold desc="MultiSearchSelect с увеличенной по умолчанию высотой">
-const ExpandedHeightMultiSearchSelectStory: ComponentStory<typeof SelectField> = (props) => (
+const ExpandedHeightMultiSearchSelectStory: StoryFn<typeof SelectField> = (props) => (
   <ExpandedHeightMultiSearchSelectTemplate {...cleanUpProps(props)} />
 );
 
-export const ExpandedHeightMultiSearchSelect = ExpandedHeightMultiSearchSelectStory.bind({});
-ExpandedHeightMultiSearchSelect.parameters = {
-  docs: {
-    source: {
-      code: ExpandedHeightMultiSearchSelectRaw,
+export const ExpandedHeightMultiSearchSelect = {
+  render: ExpandedHeightMultiSearchSelectStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: ExpandedHeightMultiSearchSelectRaw,
+      },
     },
   },
+
+  name: 'MultiSearchSelect с увеличенной по умолчанию высотой',
 };
-ExpandedHeightMultiSearchSelect.storyName = 'MultiSearchSelect с увеличенной по умолчанию высотой';
+
 //</editor-fold>
 
 //<editor-fold desc="MultiSearchSelect с кастомными опциями">
-const CustomOptionMultiSearchSelectStory: ComponentStory<typeof SelectField> = () => (
-  <CustomOptionMultiSearchSelectTemplate />
-);
+const CustomOptionMultiSearchSelectStory: StoryFn<typeof SelectField> = () => <CustomOptionMultiSearchSelectTemplate />;
 
-export const CustomOptionMultiSearchSelect = CustomOptionMultiSearchSelectStory.bind({});
-CustomOptionMultiSearchSelect.parameters = {
-  docs: {
-    source: {
-      code: CustomOptionMultiSearchSelectRaw,
+export const CustomOptionMultiSearchSelect = {
+  render: CustomOptionMultiSearchSelectStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: CustomOptionMultiSearchSelectRaw,
+      },
     },
   },
+
+  name: 'MultiSearchSelect с кастомными опциями',
 };
-CustomOptionMultiSearchSelect.storyName = 'MultiSearchSelect с кастомными опциями';
-//</editor-fold>

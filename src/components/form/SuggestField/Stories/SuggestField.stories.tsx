@@ -1,7 +1,5 @@
 import * as React from 'react';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
-
+import type { Meta, StoryFn } from '@storybook/react';
 import {
   SuggestField,
   INPUT_DIMENSIONS_VALUES,
@@ -19,7 +17,7 @@ import SuggestFieldExampleRaw from '!!raw-loader!./Templates/SuggestFieldExample
 export default {
   title: 'Admiral-2.1/Form Field/SuggestField',
   component: SuggestField,
-  decorators: [withDesign],
+  decorators: undefined,
   parameters: {
     docs: {
       source: {
@@ -122,20 +120,23 @@ export default {
       control: { type: 'boolean' },
     },
   },
-} as ComponentMeta<typeof SuggestField>;
+} as Meta<typeof SuggestField>;
 
 //<editor-fold desc="SuggestField example">
-const SuggestFieldExampleStory: ComponentStory<typeof SuggestField> = (props) => (
+const SuggestFieldExampleStory: StoryFn<typeof SuggestField> = (props) => (
   <SuggestFieldExampleTemplate {...cleanUpProps(props)} />
 );
 
-export const SuggestFieldExample = SuggestFieldExampleStory.bind({});
-SuggestFieldExample.parameters = {
-  docs: {
-    source: {
-      code: SuggestFieldExampleRaw,
+export const SuggestFieldExample = {
+  render: SuggestFieldExampleStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: SuggestFieldExampleRaw,
+      },
     },
   },
+
+  name: 'SuggestField example',
 };
-SuggestFieldExample.storyName = 'SuggestField example';
-//</editor-fold>

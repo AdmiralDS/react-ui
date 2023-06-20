@@ -1,7 +1,5 @@
 import * as React from 'react';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
-
+import type { Meta, StoryFn } from '@storybook/react';
 import {
   TimeField,
   INPUT_DIMENSIONS_VALUES,
@@ -19,7 +17,7 @@ import TimeFieldInputRaw from '!!raw-loader!./Templates/TimeFieldInput';
 export default {
   title: 'Admiral-2.1/Form Field/TimeField',
   component: TimeField,
-  decorators: [withDesign],
+  decorators: undefined,
   parameters: {
     docs: {
       source: {
@@ -119,20 +117,21 @@ export default {
       control: { type: 'boolean' },
     },
   },
-} as ComponentMeta<typeof TimeField>;
+} as Meta<typeof TimeField>;
 
 //<editor-fold desc="TimeField example">
-const TimeFieldInputStory: ComponentStory<typeof TimeField> = (props) => (
-  <TimeFieldInputTemplate {...cleanUpProps(props)} />
-);
+const TimeFieldInputStory: StoryFn<typeof TimeField> = (props) => <TimeFieldInputTemplate {...cleanUpProps(props)} />;
 
-export const TimeFieldInput = TimeFieldInputStory.bind({});
-TimeFieldInput.parameters = {
-  docs: {
-    source: {
-      code: TimeFieldInputRaw,
+export const TimeFieldInput = {
+  render: TimeFieldInputStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: TimeFieldInputRaw,
+      },
     },
   },
+
+  name: 'TimeField example',
 };
-TimeFieldInput.storyName = 'TimeField example';
-//</editor-fold>

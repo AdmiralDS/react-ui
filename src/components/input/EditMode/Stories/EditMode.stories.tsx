@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
+import type { Meta, StoryFn } from '@storybook/react';
 import { EditMode, INPUT_STATUS_VALUES, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
 import {
@@ -29,7 +28,7 @@ const Description = () => <Desc>Компонент для редактирова
 export default {
   title: 'Admiral-2.1/Input/EditMode',
   component: EditMode,
-  decorators: [withDesign],
+  decorators: undefined,
   parameters: {
     docs: {
       source: {
@@ -110,71 +109,92 @@ export default {
       control: { type: 'boolean' },
     },
   },
-} as ComponentMeta<typeof EditMode>;
+} as Meta<typeof EditMode>;
 
 //<editor-fold desc="Playground">
-const PlaygroundStory: ComponentStory<typeof EditMode> = ({ value, onChange, ...props }) => (
+const PlaygroundStory: StoryFn<typeof EditMode> = ({ value, onChange, ...props }) => (
   <EditModePlaygroundTemplate value={value} onChange={onChange} {...cleanUpProps(props)} />
 );
-export const Playground = PlaygroundStory.bind({});
-Playground.parameters = {
-  docs: {
-    source: {
-      code: PlaygroundRaw,
+
+export const Playground = {
+  render: PlaygroundStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: PlaygroundRaw,
+      },
     },
   },
 };
+
 //</editor-fold>
 
 //<editor-fold desc="Варианты размеров и начертания компонента">
-const DimensionStory: ComponentStory<typeof EditMode> = ({ value, onChange, ...props }) => (
+const DimensionStory: StoryFn<typeof EditMode> = ({ value, onChange, ...props }) => (
   <EditModeDimensionTemplate value={value} onChange={onChange} {...cleanUpProps(props)} />
 );
-export const DimensionExample = DimensionStory.bind({});
-DimensionExample.parameters = {
-  docs: {
-    source: {
-      code: DimensionRaw,
-    },
-    description: {
-      story: `Компонент разработан в трех размерах S, M (имеют написание Regular и Bold) и XL (только Bold). 
-      Переключение между Regular и Bold не изменяют размеры компонента.\n\nПо умолчанию размер компонента M, 
-      для смены размера используйте параметр dimension. Для переключения в написание Bold испольуйте одноименный парамтер bold.`,
+
+export const DimensionExample = {
+  render: DimensionStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: DimensionRaw,
+      },
+      description: {
+        story: `Компонент разработан в трех размерах S, M (имеют написание Regular и Bold) и XL (только Bold). 
+        Переключение между Regular и Bold не изменяют размеры компонента.\n\nПо умолчанию размер компонента M, 
+        для смены размера используйте параметр dimension. Для переключения в написание Bold испольуйте одноименный парамтер bold.`,
+      },
     },
   },
+
+  name: 'Варианты размеров и начертания компонента',
 };
-DimensionExample.storyName = 'Варианты размеров и начертания компонента';
+
 //</editor-fold>
 
 //<editor-fold desc="Компонент в состоянии disabled">
-const DisabledStory: ComponentStory<typeof EditMode> = ({ value, onChange, ...props }) => (
+const DisabledStory: StoryFn<typeof EditMode> = ({ value, onChange, ...props }) => (
   <EditModeDisabledTemplate value={value} onChange={onChange} {...cleanUpProps(props)} />
 );
-export const DisabledExample = DisabledStory.bind({});
-DisabledExample.parameters = {
-  docs: {
-    source: {
-      code: DisabledRaw,
+
+export const DisabledExample = {
+  render: DisabledStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: DisabledRaw,
+      },
     },
   },
+
+  name: 'Компонент в состоянии disabled',
 };
-DisabledExample.storyName = 'Компонент в состоянии disabled';
+
 //</editor-fold>
 
 //<editor-fold desc="Стилизация компонента">
-const CssMixinStory: ComponentStory<typeof EditMode> = ({ value, onChange, ...props }) => (
+const CssMixinStory: StoryFn<typeof EditMode> = ({ value, onChange, ...props }) => (
   <EditModeCssMixinTemplate value={value} onChange={onChange} {...cleanUpProps(props)} />
 );
-export const CssMixinExample = CssMixinStory.bind({});
-CssMixinExample.parameters = {
-  docs: {
-    source: {
-      code: CssMixinRaw,
-    },
-    description: {
-      story: `Для изменения стилей компонента в контейнер компонента можно передать стили в виде containerCssMixin.`,
+
+export const CssMixinExample = {
+  render: CssMixinStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: CssMixinRaw,
+      },
+      description: {
+        story: `Для изменения стилей компонента в контейнер компонента можно передать стили в виде containerCssMixin.`,
+      },
     },
   },
+
+  name: 'Стилизация компонента',
 };
-CssMixinExample.storyName = 'Стилизация компонента';
-//</editor-fold>

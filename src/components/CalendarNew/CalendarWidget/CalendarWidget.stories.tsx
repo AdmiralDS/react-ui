@@ -1,7 +1,6 @@
 import * as React from 'react';
-import { withDesign } from 'storybook-addon-designs';
 import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { Meta, StoryFn } from '@storybook/react';
 import type { CalendarWidgetProps } from '#src/components/CalendarNew/CalendarWidget/index';
 import { CalendarWidget } from '#src/components/CalendarNew/CalendarWidget/index';
 import type { Dayjs } from 'dayjs';
@@ -10,7 +9,7 @@ import styled from 'styled-components';
 
 export default {
   title: 'Admiral-2.1/CalendarNew/CalendarWidget',
-  decorators: [withDesign],
+  decorators: undefined,
   component: CalendarWidget,
   parameters: {
     docs: {
@@ -63,14 +62,14 @@ export default {
       control: { type: 'radio' },
     },
   },
-} as ComponentMeta<typeof CalendarWidget>;
+} as Meta<typeof CalendarWidget>;
 
 const Separator = styled.div`
   height: 20px;
   width: 20px;
 `;
 
-const Template2: ComponentStory<typeof CalendarWidget> = (args: CalendarWidgetProps) => {
+const Template2: StoryFn<typeof CalendarWidget> = (args: CalendarWidgetProps) => {
   const [selected, setSelected] = React.useState(dayjs());
 
   const handleOnChange = (date: Dayjs) => {
@@ -86,6 +85,8 @@ const Template2: ComponentStory<typeof CalendarWidget> = (args: CalendarWidgetPr
   );
 };
 
-export const CalendarWidgetSimple = Template2.bind({});
-CalendarWidgetSimple.args = {};
-CalendarWidgetSimple.storyName = 'Simple.';
+export const CalendarWidgetSimple = {
+  render: Template2,
+  args: {},
+  name: 'Simple.',
+};

@@ -1,6 +1,5 @@
 import * as React from 'react';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
+import type { Meta, StoryFn } from '@storybook/react';
 import styled from 'styled-components';
 import { Range } from '@admiral-ds/react-ui';
 
@@ -22,7 +21,7 @@ const Description = () => (
 
 export default {
   title: 'Admiral-2.1/Range',
-  decorators: [withDesign],
+  decorators: undefined,
   component: Range,
   parameters: {
     componentSubtitle: <Description />,
@@ -65,18 +64,21 @@ export default {
       control: false,
     },
   },
-} as ComponentMeta<typeof Range>;
+} as Meta<typeof Range>;
 
 //<editor-fold desc="Playground">
-const PlaygroundStory: ComponentStory<typeof Range> = ({ value, onChange, ...props }) => (
+const PlaygroundStory: StoryFn<typeof Range> = ({ value, onChange, ...props }) => (
   <RangePlaygroundTemplate value={value} onChange={onChange} {...cleanUpProps(props)} />
 );
-export const Playground = PlaygroundStory.bind({});
-Playground.parameters = {
-  docs: {
-    source: {
-      code: PlaygroundRaw,
+
+export const Playground = {
+  render: PlaygroundStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: PlaygroundRaw,
+      },
     },
   },
 };
-//</editor-fold>

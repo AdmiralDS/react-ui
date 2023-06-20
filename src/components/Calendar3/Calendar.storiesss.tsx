@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import type { Dayjs } from 'dayjs';
 import dayjs from 'dayjs';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
 import { Button } from '#src/components/Button';
 
 import type { CalendarPropType } from './index';
@@ -17,7 +16,7 @@ import { startOfDay } from '#src/components/Calendar3/date-utils';
 
 export default {
   title: 'Admiral-2.1/Calendar3',
-  decorators: [withDesign],
+  decorators: undefined,
   component: Calendar,
   parameters: {
     docs: {

@@ -1,6 +1,5 @@
 import * as React from 'react';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
+import type { Meta, StoryFn } from '@storybook/react';
 import styled from 'styled-components';
 import { ProgressStepper } from '@admiral-ds/react-ui';
 
@@ -40,7 +39,7 @@ const Description = () => (
 
 export default {
   title: 'Admiral-2.1/ProgressStepper',
-  decorators: [withDesign],
+  decorators: undefined,
   component: ProgressStepper,
   parameters: {
     docs: {
@@ -72,34 +71,44 @@ export default {
       control: false,
     },
   },
-} as ComponentMeta<typeof ProgressStepper>;
+} as Meta<typeof ProgressStepper>;
 
 //<editor-fold desc="Playground">
-const PlaygroundStory: ComponentStory<typeof ProgressStepper> = (props) => (
+const PlaygroundStory: StoryFn<typeof ProgressStepper> = (props) => (
   <ProgressStepperPlaygroundTemplate steps={[]} {...cleanUpProps(props)} />
 );
-export const PlaygroundExample = PlaygroundStory.bind({});
-PlaygroundExample.parameters = {
-  docs: {
-    source: {
-      code: PlaygroundRaw,
+
+export const PlaygroundExample = {
+  render: PlaygroundStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: PlaygroundRaw,
+      },
     },
   },
+
+  name: 'StepperProgress. Playground.',
 };
-PlaygroundExample.storyName = 'StepperProgress. Playground.';
+
 //</editor-fold>
 
 //<editor-fold desc="Variants">
-const VariantsStory: ComponentStory<typeof ProgressStepper> = (props) => (
+const VariantsStory: StoryFn<typeof ProgressStepper> = (props) => (
   <ProgressStepperVariantsTemplate steps={[]} {...cleanUpProps(props)} />
 );
-export const VariantsExample = VariantsStory.bind({});
-VariantsExample.parameters = {
-  docs: {
-    source: {
-      code: VariantsRaw,
+
+export const VariantsExample = {
+  render: VariantsStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: VariantsRaw,
+      },
     },
   },
+
+  name: 'StepperProgress. Примеры использования.',
 };
-VariantsExample.storyName = 'StepperProgress. Примеры использования.';
-//</editor-fold>

@@ -1,6 +1,5 @@
 import * as React from 'react';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
+import type { Meta, StoryFn } from '@storybook/react';
 import styled from 'styled-components';
 import { Slider } from '@admiral-ds/react-ui';
 
@@ -32,7 +31,7 @@ const Description = () => (
 
 export default {
   title: 'Admiral-2.1/Slider',
-  decorators: [withDesign],
+  decorators: undefined,
   component: Slider,
   parameters: {
     docs: {
@@ -89,45 +88,61 @@ export default {
       control: { type: 'text' },
     },
   },
-} as ComponentMeta<typeof Slider>;
+} as Meta<typeof Slider>;
 
 //<editor-fold desc="Playground">
-const PlaygroundStory: ComponentStory<typeof Slider> = ({ value, onChange, ...props }) => (
+const PlaygroundStory: StoryFn<typeof Slider> = ({ value, onChange, ...props }) => (
   <SliderPlaygroundTemplate value={value} onChange={onChange} {...cleanUpProps(props)} />
 );
-export const Playground = PlaygroundStory.bind({});
-Playground.parameters = {
-  docs: {
-    source: {
-      code: PlaygroundRaw,
+
+export const Playground = {
+  render: PlaygroundStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: PlaygroundRaw,
+      },
     },
   },
+
+  name: 'Slider. Playground.',
 };
-Playground.storyName = 'Slider. Playground.';
+
 //</editor-fold>
 
 //<editor-fold desc="Simple">
-const SimpleStory: ComponentStory<typeof Slider> = () => <SliderSimpleTemplate />;
-export const SimpleExample = SimpleStory.bind({});
-SimpleExample.parameters = {
-  docs: {
-    source: {
-      code: SimpleRaw,
+const SimpleStory: StoryFn<typeof Slider> = () => <SliderSimpleTemplate />;
+
+export const SimpleExample = {
+  render: SimpleStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: SimpleRaw,
+      },
     },
   },
+
+  name: 'Slider с настройками minValue, maxValue.',
 };
-SimpleExample.storyName = 'Slider с настройками minValue, maxValue.';
+
 //</editor-fold>
 
 //<editor-fold desc="Range">
-const RangeStory: ComponentStory<typeof Slider> = () => <SliderRangeTemplate />;
-export const RangeExample = RangeStory.bind({});
-RangeExample.parameters = {
-  docs: {
-    source: {
-      code: RangeRaw,
+const RangeStory: StoryFn<typeof Slider> = () => <SliderRangeTemplate />;
+
+export const RangeExample = {
+  render: RangeStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: RangeRaw,
+      },
     },
   },
+
+  name: 'Slider с отметками и кастомизированными подписями к ним.',
 };
-RangeExample.storyName = 'Slider с отметками и кастомизированными подписями к ним.';
-//</editor-fold>

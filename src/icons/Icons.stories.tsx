@@ -1,6 +1,5 @@
 import * as React from 'react';
-import type { Meta, Story } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
+import type { Meta, StoryFn } from '@storybook/react';
 import styled from 'styled-components';
 import { TooltipHoc, typography } from '@admiral-ds/react-ui';
 import { ReactComponent as CopyOutline } from '@admiral-ds/icons/build/documents/CopyOutline.svg';
@@ -139,7 +138,7 @@ const CATEGORIES = [
 
 export default {
   title: 'Icons/Icons',
-  decorators: [withDesign],
+  decorators: undefined,
   component: CopyOutline,
   parameters: {
     docs: {
@@ -154,7 +153,7 @@ export default {
   },
 } as Meta;
 
-const Template: Story = () => (
+const Template: StoryFn = () => (
   <>
     <Title style={{ fontWeight: 400 }}>
       Иконки — гафические символы используемые для представления действий, идей или объектов. Позволяют быстро
@@ -181,7 +180,7 @@ const Template: Story = () => (
   </>
 );
 
-const Template2: Story = () => {
+const Template2: StoryFn = () => {
   const exm = `
   config.module.rules.unshift({
     test: /\\.svg$/,
@@ -279,10 +278,14 @@ const Template2: Story = () => {
   );
 };
 
-export const Icons = Template.bind({});
-Icons.args = {};
-Icons.storyName = 'Список иконок';
+export const Icons = {
+  render: Template,
+  args: {},
+  name: 'Список иконок',
+};
 
-export const Loaders = Template2.bind({});
-Loaders.args = {};
-Loaders.storyName = 'Использование иконок';
+export const Loaders = {
+  render: Template2,
+  args: {},
+  name: 'Использование иконок',
+};

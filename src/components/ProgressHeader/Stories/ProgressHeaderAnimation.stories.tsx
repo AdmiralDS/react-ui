@@ -1,6 +1,5 @@
 import * as React from 'react';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
+import type { Meta, StoryFn } from '@storybook/react';
 import styled from 'styled-components';
 
 import { ProgressHeader } from '@admiral-ds/react-ui';
@@ -26,7 +25,7 @@ const Description = () => (
 
 export default {
   title: 'Admiral-2.1/ProgressHeader/Animation',
-  decorators: [withDesign],
+  decorators: undefined,
   component: ProgressHeader,
   parameters: {
     docs: {
@@ -49,20 +48,22 @@ export default {
       control: false,
     },
   },
-} as ComponentMeta<typeof ProgressHeader>;
+} as Meta<typeof ProgressHeader>;
 
-const ProgressHeaderAnimationStory: ComponentStory<typeof ProgressHeader> = (props) => (
+const ProgressHeaderAnimationStory: StoryFn<typeof ProgressHeader> = (props) => (
   <ProgressHeaderAnimationTemplate {...cleanUpProps(props)} />
 );
 
-//<editor-fold desc="Прогресс бар с анимацией">
-export const ProgressHeaderAnimation = ProgressHeaderAnimationStory.bind({});
-ProgressHeaderAnimation.parameters = {
-  docs: {
-    source: {
-      code: ProgressHeaderAnimationRaw,
+export const ProgressHeaderAnimation = {
+  render: ProgressHeaderAnimationStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: ProgressHeaderAnimationRaw,
+      },
     },
   },
+
+  name: 'Прогресс бар с анимацией',
 };
-ProgressHeaderAnimation.storyName = 'Прогресс бар с анимацией';
-//</editor-fold>

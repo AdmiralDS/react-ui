@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { withDesign } from 'storybook-addon-designs';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { Meta, StoryFn } from '@storybook/react';
 import { Tree } from '@admiral-ds/react-ui';
 import { TreeWithCheckboxesTemplate, SimpleTreeTemplate } from './Templates';
 import TreeWithCheckboxesRaw from '!!raw-loader!./Templates/TreeWithCheckboxes';
@@ -23,7 +22,7 @@ const Description = () => (
 
 export default {
   title: 'Admiral-2.1/Tree',
-  decorators: [withDesign],
+  decorators: undefined,
   component: Tree,
   parameters: {
     docs: {
@@ -66,37 +65,44 @@ export default {
       control: false,
     },
   },
-} as ComponentMeta<typeof Tree>;
+} as Meta<typeof Tree>;
 
-const TreeWithCheckboxesStory: ComponentStory<typeof Tree> = (props) => (
+const TreeWithCheckboxesStory: StoryFn<typeof Tree> = (props) => (
   <TreeWithCheckboxesTemplate model={[]} {...cleanUpProps(props)} />
 );
 
-export const Demo1_Tree = TreeWithCheckboxesStory.bind({});
-Demo1_Tree.parameters = {
-  docs: {
-    source: {
-      code: TreeWithCheckboxesRaw,
-    },
-    description: {
-      story: 'Контроллируемое дерево с checkbox',
-    },
-  },
-};
-Demo1_Tree.storyName = 'Контроллируемое дерево с checkbox';
+export const Demo1_Tree = {
+  render: TreeWithCheckboxesStory,
 
-const SimpleTreeStory: ComponentStory<typeof Tree> = (props) => (
-  <SimpleTreeTemplate model={[]} {...cleanUpProps(props)} />
-);
-export const Demo2_Tree = SimpleTreeStory.bind({});
-Demo2_Tree.parameters = {
-  docs: {
-    source: {
-      code: SimpleTreeRaw,
-    },
-    description: {
-      story: 'Дерево без checkbox',
+  parameters: {
+    docs: {
+      source: {
+        code: TreeWithCheckboxesRaw,
+      },
+      description: {
+        story: 'Контроллируемое дерево с checkbox',
+      },
     },
   },
+
+  name: 'Контроллируемое дерево с checkbox',
 };
-Demo2_Tree.storyName = 'Дерево без checkbox';
+
+const SimpleTreeStory: StoryFn<typeof Tree> = (props) => <SimpleTreeTemplate model={[]} {...cleanUpProps(props)} />;
+
+export const Demo2_Tree = {
+  render: SimpleTreeStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: SimpleTreeRaw,
+      },
+      description: {
+        story: 'Дерево без checkbox',
+      },
+    },
+  },
+
+  name: 'Дерево без checkbox',
+};

@@ -1,7 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
+import type { Meta, StoryFn } from '@storybook/react';
 import { Drawer, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
 import {
@@ -52,7 +51,7 @@ const Description = () => (
 
 export default {
   title: 'Admiral-2.1/Drawer',
-  decorators: [withDesign],
+  decorators: undefined,
   component: Drawer,
   parameters: {
     docs: {
@@ -119,154 +118,197 @@ export default {
       control: { type: 'radio' },
     },
   },
-} as ComponentMeta<typeof Drawer>;
+} as Meta<typeof Drawer>;
 
 //<editor-fold desc="Playground">
-const PlaygroundStory: ComponentStory<typeof Drawer> = (props) => <DrawerPlaygroundTemplate {...cleanUpProps(props)} />;
-export const Playground = PlaygroundStory.bind({});
-Playground.parameters = {
-  docs: {
-    source: {
-      code: PlaygroundRaw,
+const PlaygroundStory: StoryFn<typeof Drawer> = (props) => <DrawerPlaygroundTemplate {...cleanUpProps(props)} />;
+
+export const Playground = {
+  render: PlaygroundStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: PlaygroundRaw,
+      },
     },
   },
 };
+
 //</editor-fold>
 
 //<editor-fold desc="Drawer с блокировкой контента страницы">
-const DrawerWithBackdropStory: ComponentStory<typeof Drawer> = (props) => (
+const DrawerWithBackdropStory: StoryFn<typeof Drawer> = (props) => (
   <DrawerWithBackdropTemplate {...cleanUpProps(props)} />
 );
-export const DrawerWithBackdropExample = DrawerWithBackdropStory.bind({});
-DrawerWithBackdropExample.parameters = {
-  docs: {
-    source: {
-      code: DrawerWithBackdropRaw,
-    },
-    description: {
-      story: `По умолчанию Drawer блокирует контент страницы, за это отвечает параметр backdrop, равный по умолчанию true. 
-      В этом случае страница затемняется, поверх экрана накладывается цвет Opacity/Modal. Взаимодействовать с контентом 
-      страницы при открытой панели нельзя. Закрытие Drawer может происходить по клику на крестик, по клику на кнопке в футере панели, 
-      по нажатию на затемненную область (при closeOnBackdropClick = true), по нажатию на клавишу Escape (при closeOnEscapeKeyDown = true).`,
+
+export const DrawerWithBackdropExample = {
+  render: DrawerWithBackdropStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: DrawerWithBackdropRaw,
+      },
+      description: {
+        story: `По умолчанию Drawer блокирует контент страницы, за это отвечает параметр backdrop, равный по умолчанию true. 
+        В этом случае страница затемняется, поверх экрана накладывается цвет Opacity/Modal. Взаимодействовать с контентом 
+        страницы при открытой панели нельзя. Закрытие Drawer может происходить по клику на крестик, по клику на кнопке в футере панели, 
+        по нажатию на затемненную область (при closeOnBackdropClick = true), по нажатию на клавишу Escape (при closeOnEscapeKeyDown = true).`,
+      },
     },
   },
+
+  name: 'Drawer с блокировкой контента страницы (Backdrop = True)',
 };
-DrawerWithBackdropExample.storyName = 'Drawer с блокировкой контента страницы (Backdrop = True)';
+
 //</editor-fold>
 
 //<editor-fold desc="Drawer без блокировки контента страницы">
-const DrawerWithoutBackdropStory: ComponentStory<typeof Drawer> = (props) => (
+const DrawerWithoutBackdropStory: StoryFn<typeof Drawer> = (props) => (
   <DrawerWithoutBackdropTemplate {...cleanUpProps(props)} />
 );
-export const DrawerWithoutBackdropExample = DrawerWithoutBackdropStory.bind({});
-DrawerWithoutBackdropExample.parameters = {
-  docs: {
-    source: {
-      code: DrawerWithoutBackdropRaw,
-    },
-    description: {
-      story: `Если необходим Drawer без блокировки контента страницы, то необходимо использовать параметр backdrop равный false.
-      В этом случае пользователь сможет одновременно взаимодействовать и с Drawer, и с содержимым страницы. 
-      Закрытие Drawer может происходить по клику на крестик, по клику на кнопке в футере панели, 
-      по нажатию на клавишу Escape (при closeOnEscapeKeyDown = true).`,
+
+export const DrawerWithoutBackdropExample = {
+  render: DrawerWithoutBackdropStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: DrawerWithoutBackdropRaw,
+      },
+      description: {
+        story: `Если необходим Drawer без блокировки контента страницы, то необходимо использовать параметр backdrop равный false.
+        В этом случае пользователь сможет одновременно взаимодействовать и с Drawer, и с содержимым страницы. 
+        Закрытие Drawer может происходить по клику на крестик, по клику на кнопке в футере панели, 
+        по нажатию на клавишу Escape (при closeOnEscapeKeyDown = true).`,
+      },
     },
   },
+
+  name: 'Drawer без блокировки контента страницы (Backdrop = False)',
 };
-DrawerWithoutBackdropExample.storyName = 'Drawer без блокировки контента страницы (Backdrop = False)';
+
 //</editor-fold>
 
 //<editor-fold desc="Drawer с обязательным условием">
-const DrawerNonClosableStory: ComponentStory<typeof Drawer> = (props) => (
+const DrawerNonClosableStory: StoryFn<typeof Drawer> = (props) => (
   <DrawerNonClosableTemplate {...cleanUpProps(props)} />
 );
-export const DrawerNonClosableExample = DrawerNonClosableStory.bind({});
-DrawerNonClosableExample.parameters = {
-  docs: {
-    source: {
-      code: DrawerNonClosableRaw,
-    },
-    description: {
-      story: `В некоторых случаях применим Drawer с обязательным условием (non-closable Drawer), то есть такая панель, 
-      которую можно закрыть только нажав одну из кнопок в футере. Крестик закрытия отсутствует, 
-      нажатие на затемненную область ни к чему не приводит. Для того чтобы крестик закрытия отсутствовал используйте параметр
-      displayCloseIcon равный false.`,
+
+export const DrawerNonClosableExample = {
+  render: DrawerNonClosableStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: DrawerNonClosableRaw,
+      },
+      description: {
+        story: `В некоторых случаях применим Drawer с обязательным условием (non-closable Drawer), то есть такая панель, 
+        которую можно закрыть только нажав одну из кнопок в футере. Крестик закрытия отсутствует, 
+        нажатие на затемненную область ни к чему не приводит. Для того чтобы крестик закрытия отсутствовал используйте параметр
+        displayCloseIcon равный false.`,
+      },
     },
   },
+
+  name: 'Drawer с обязательным условием (non-closable Drawer)',
 };
-DrawerNonClosableExample.storyName = 'Drawer с обязательным условием (non-closable Drawer)';
+
 //</editor-fold>
 
 //<editor-fold desc="Расположение компонента">
-const DrawerPositionStory: ComponentStory<typeof Drawer> = (props) => (
-  <DrawerPositionTemplate {...cleanUpProps(props)} />
-);
-export const DrawerPositionExample = DrawerPositionStory.bind({});
-DrawerPositionExample.parameters = {
-  docs: {
-    source: {
-      code: DrawerPositionRaw,
-    },
-    description: {
-      story: `Drawer может располагаться как справа (по умолчанию), так и слева. Расположение Drawerа определяется параметром position.
-      При этом, компоновка элементов внутри панели не изменяется в зависимости от расположения.`,
+const DrawerPositionStory: StoryFn<typeof Drawer> = (props) => <DrawerPositionTemplate {...cleanUpProps(props)} />;
+
+export const DrawerPositionExample = {
+  render: DrawerPositionStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: DrawerPositionRaw,
+      },
+      description: {
+        story: `Drawer может располагаться как справа (по умолчанию), так и слева. Расположение Drawerа определяется параметром position.
+        При этом, компоновка элементов внутри панели не изменяется в зависимости от расположения.`,
+      },
     },
   },
+
+  name: 'Drawer. Расположение компонента',
 };
-DrawerPositionExample.storyName = 'Drawer. Расположение компонента';
+
 //</editor-fold>
 
 //<editor-fold desc="Адаптив">
-const DrawerMobileStory: ComponentStory<typeof Drawer> = (props) => <DrawerMobileTemplate {...cleanUpProps(props)} />;
-export const DrawerMobileExample = DrawerMobileStory.bind({});
-DrawerMobileExample.parameters = {
-  docs: {
-    source: {
-      code: DrawerMobileRaw,
-    },
-    description: {
-      story: `Адаптируясь на мобильных устройствах, компонент имеет несколько иную структуру, отступы и размеры.
-      На мобильных устройствах компонент всегда появляется с правой стороны экрана. 
-      Заполняет весь экран по ширине, кроме стандартного отступа для контента с левой стороны.\nДля того чтобы 
-      перевести компонент в адаптивный режим, используйте параметр mobile.`,
+const DrawerMobileStory: StoryFn<typeof Drawer> = (props) => <DrawerMobileTemplate {...cleanUpProps(props)} />;
+
+export const DrawerMobileExample = {
+  render: DrawerMobileStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: DrawerMobileRaw,
+      },
+      description: {
+        story: `Адаптируясь на мобильных устройствах, компонент имеет несколько иную структуру, отступы и размеры.
+        На мобильных устройствах компонент всегда появляется с правой стороны экрана. 
+        Заполняет весь экран по ширине, кроме стандартного отступа для контента с левой стороны.\nДля того чтобы 
+        перевести компонент в адаптивный режим, используйте параметр mobile.`,
+      },
     },
   },
+
+  name: 'Drawer. Адаптив (mobile)',
 };
-DrawerMobileExample.storyName = 'Drawer. Адаптив (mobile)';
+
 //</editor-fold>
 
 //<editor-fold desc="Ширина компонента">
-const DrawerWidthStory: ComponentStory<typeof Drawer> = (props) => <DrawerWidthTemplate {...cleanUpProps(props)} />;
-export const DrawerWidthExample = DrawerWidthStory.bind({});
-DrawerWidthExample.parameters = {
-  docs: {
-    source: {
-      code: DrawerWidthRaw,
-    },
-    description: {
-      story: `Ширина компонента задается пользователем, но не меньше 320 px. Drawer подстраивает свою ширину под ширину контента,
-      либо пользователь может задать ширину компонента напрямую через параметры style или используя classname.`,
+const DrawerWidthStory: StoryFn<typeof Drawer> = (props) => <DrawerWidthTemplate {...cleanUpProps(props)} />;
+
+export const DrawerWidthExample = {
+  render: DrawerWidthStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: DrawerWidthRaw,
+      },
+      description: {
+        story: `Ширина компонента задается пользователем, но не меньше 320 px. Drawer подстраивает свою ширину под ширину контента,
+        либо пользователь может задать ширину компонента напрямую через параметры style или используя classname.`,
+      },
     },
   },
+
+  name: 'Drawer. Ширина компонента',
 };
-DrawerWidthExample.storyName = 'Drawer. Ширина компонента';
+
 //</editor-fold>
 
 //<editor-fold desc="Свободное (кастомизированное) наполнение">
-const DrawerCustomContentStory: ComponentStory<typeof Drawer> = (props) => (
+const DrawerCustomContentStory: StoryFn<typeof Drawer> = (props) => (
   <DrawerCustomContentTemplate {...cleanUpProps(props)} />
 );
-export const DrawerCustomContentExample = DrawerCustomContentStory.bind({});
-DrawerCustomContentExample.parameters = {
-  docs: {
-    source: {
-      code: DrawerCustomContentRaw,
-    },
-    description: {
-      story: `Наполнение Drawer контентом полностью контролируется пользователем. Пользователь может разместить внутри Drawer
-      любые свои компоненты, а также может воспользоваться вспомогательными компонентами DrawerTitle, DrawerContent, DrawerButtonPanel, 
-      экспортируемыми из библиотеки @admiral-ds/react-ui.`,
+
+export const DrawerCustomContentExample = {
+  render: DrawerCustomContentStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: DrawerCustomContentRaw,
+      },
+      description: {
+        story: `Наполнение Drawer контентом полностью контролируется пользователем. Пользователь может разместить внутри Drawer
+        любые свои компоненты, а также может воспользоваться вспомогательными компонентами DrawerTitle, DrawerContent, DrawerButtonPanel, 
+        экспортируемыми из библиотеки @admiral-ds/react-ui.`,
+      },
     },
   },
+
+  name: 'Drawer. Свободное (кастомизированное) наполнение',
 };
-DrawerCustomContentExample.storyName = 'Drawer. Свободное (кастомизированное) наполнение';
-//</editor-fold>

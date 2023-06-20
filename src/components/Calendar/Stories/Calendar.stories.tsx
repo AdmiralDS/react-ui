@@ -1,7 +1,5 @@
 import React from 'react';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
-
+import type { Meta, StoryFn } from '@storybook/react';
 import type { CalendarPropType } from '@admiral-ds/react-ui';
 import { Calendar, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
@@ -31,7 +29,7 @@ import CalendarSimpleRaw from '!!raw-loader!./Templates/CalendarSimple';
 
 export default {
   title: 'Admiral-2.1/Calendar',
-  decorators: [withDesign],
+  decorators: undefined,
   component: Calendar,
   parameters: {
     docs: {
@@ -84,189 +82,230 @@ export default {
       control: { type: 'radio' },
     },
   },
-} as ComponentMeta<typeof Calendar>;
+} as Meta<typeof Calendar>;
 
 //<editor-fold desc="Пример календаря с выбором даты>">
-const CalendarSimpleStory: ComponentStory<typeof Calendar> = (args) => (
+const CalendarSimpleStory: StoryFn<typeof Calendar> = (args) => (
   <CalendarSimpleTemplate onChange={() => undefined} {...cleanUpProps(args)} />
 );
 
-export const CalendarSimple = CalendarSimpleStory.bind({});
-CalendarSimple.parameters = {
-  docs: {
-    source: {
-      code: CalendarSimpleRaw,
-    },
-    description: {
-      story: 'Пример календаря с выбором даты>.',
+export const CalendarSimple = {
+  render: CalendarSimpleStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: CalendarSimpleRaw,
+      },
+      description: {
+        story: 'Пример календаря с выбором даты>.',
+      },
     },
   },
+
+  args: {},
+  name: 'Simple.',
 };
-CalendarSimple.args = {};
-CalendarSimple.storyName = 'Simple.';
+
 //</editor-fold>
 
 //<editor-fold desc="Пример с выбором диапазона">
-const RangeStory: ComponentStory<typeof Calendar> = (args: CalendarPropType) => (
+const RangeStory: StoryFn<typeof Calendar> = (args: CalendarPropType) => (
   <RangeTemplate onChange={() => undefined} {...cleanUpProps(args)} />
 );
 
-export const Range = RangeStory.bind({});
-Range.parameters = {
-  docs: {
-    source: {
-      code: RangeRaw,
-    },
-    description: {
-      story: 'Пример с выбором диапазона.',
+export const Range = {
+  render: RangeStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: RangeRaw,
+      },
+      description: {
+        story: 'Пример с выбором диапазона.',
+      },
     },
   },
+
+  args: {},
+  name: 'Range.',
 };
-Range.args = {};
-Range.storyName = 'Range.';
+
 //</editor-fold>
 
 //<editor-fold desc="Пример с ограничением максимальной даты">
-const SimpleWithMaxDateStory: ComponentStory<typeof Calendar> = ({ range, ...args }: CalendarPropType) => (
+const SimpleWithMaxDateStory: StoryFn<typeof Calendar> = ({ range, ...args }: CalendarPropType) => (
   <SimpleWithMaxDateTemplate onChange={() => undefined} {...cleanUpProps(args)} />
 );
 
-export const SimpleWithMaxDate = SimpleWithMaxDateStory.bind({});
-SimpleWithMaxDate.parameters = {
-  docs: {
-    source: {
-      code: SimpleWithMaxDateRaw,
-    },
-    description: {
-      story: 'Пример с ограничением максимальной даты.',
+export const SimpleWithMaxDate = {
+  render: SimpleWithMaxDateStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: SimpleWithMaxDateRaw,
+      },
+      description: {
+        story: 'Пример с ограничением максимальной даты.',
+      },
     },
   },
+
+  args: {},
+  name: 'maxDate.',
 };
-SimpleWithMaxDate.args = {};
-SimpleWithMaxDate.storyName = 'maxDate.';
+
 //</editor-fold>
 
 //<editor-fold desc="Пример с недоступными для выбора датами">
-const SimpleWithFilterDateStory: ComponentStory<typeof Calendar> = ({ range, ...args }: CalendarPropType) => (
+const SimpleWithFilterDateStory: StoryFn<typeof Calendar> = ({ range, ...args }: CalendarPropType) => (
   <SimpleWithFilterDateTemplate onChange={() => undefined} {...cleanUpProps(args)} />
 );
 
-export const SimpleWithFilterDate = SimpleWithFilterDateStory.bind({});
-SimpleWithFilterDate.parameters = {
-  docs: {
-    source: {
-      code: SimpleWithFilterDateRaw,
-    },
-    description: {
-      story: 'Пример с недоступными для выбора датами.',
+export const SimpleWithFilterDate = {
+  render: SimpleWithFilterDateStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: SimpleWithFilterDateRaw,
+      },
+      description: {
+        story: 'Пример с недоступными для выбора датами.',
+      },
     },
   },
+
+  args: {},
+  name: 'FilterDate.',
 };
-SimpleWithFilterDate.args = {};
-SimpleWithFilterDate.storyName = 'FilterDate.';
+
 //</editor-fold>
 
 //<editor-fold desc="Пример с коллбеками">
-const SimpleWithChangeViewDateStory: ComponentStory<typeof Calendar> = ({ range, ...args }: CalendarPropType) => (
+const SimpleWithChangeViewDateStory: StoryFn<typeof Calendar> = ({ range, ...args }: CalendarPropType) => (
   <SimpleWithChangeViewDateTemplate onChange={() => undefined} {...cleanUpProps(args)} />
 );
 
-export const SimpleWithChangeViewDate = SimpleWithChangeViewDateStory.bind({});
-SimpleWithChangeViewDate.parameters = {
-  docs: {
-    source: {
-      code: SimpleWithChangeViewDateRaw,
-    },
-    description: {
-      story: 'Пример с коллбеками.',
+export const SimpleWithChangeViewDate = {
+  render: SimpleWithChangeViewDateStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: SimpleWithChangeViewDateRaw,
+      },
+      description: {
+        story: 'Пример с коллбеками.',
+      },
     },
   },
+
+  args: {},
+  name: 'Callback',
 };
-SimpleWithChangeViewDate.args = {};
-SimpleWithChangeViewDate.storyName = 'Callback';
+
 //</editor-fold>
 
 //<editor-fold desc="Пример с переключением экранов выбора дат">
-const SimpleWithSetActiveViewDateStory: ComponentStory<typeof Calendar> = ({ range, ...args }: CalendarPropType) => (
+const SimpleWithSetActiveViewDateStory: StoryFn<typeof Calendar> = ({ range, ...args }: CalendarPropType) => (
   <SimpleWithSetActiveViewDateTemplate onChange={() => undefined} {...cleanUpProps(args)} />
 );
 
-export const SimpleWithSetActiveViewDate = SimpleWithSetActiveViewDateStory.bind({});
-SimpleWithSetActiveViewDate.parameters = {
-  docs: {
-    source: {
-      code: SimpleWithSetActiveViewDateRaw,
-    },
-    description: {
-      story: 'Пример с переключением экранов выбора дат.',
+export const SimpleWithSetActiveViewDate = {
+  render: SimpleWithSetActiveViewDateStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: SimpleWithSetActiveViewDateRaw,
+      },
+      description: {
+        story: 'Пример с переключением экранов выбора дат.',
+      },
     },
   },
+
+  args: {},
+  name: 'Active ViewDate screen',
 };
-SimpleWithSetActiveViewDate.args = {};
-SimpleWithSetActiveViewDate.storyName = 'Active ViewDate screen';
+
 //</editor-fold>
 
 //<editor-fold desc="Пример с выбором только месяца/года">
-const SimpleWithSetActiveViewDateAfterChooseYearStory: ComponentStory<typeof Calendar> = ({
+const SimpleWithSetActiveViewDateAfterChooseYearStory: StoryFn<typeof Calendar> = ({
   range,
   ...args
 }: CalendarPropType) => (
   <SimpleWithSetActiveViewDateAfterChooseYearTemplate onChange={() => undefined} {...cleanUpProps(args)} />
 );
 
-export const SimpleWithSetActiveViewDateAfterChooseYear = SimpleWithSetActiveViewDateAfterChooseYearStory.bind({});
-SimpleWithSetActiveViewDateAfterChooseYear.parameters = {
-  docs: {
-    source: {
-      code: SimpleWithSetActiveViewDateAfterChooseYearRaw,
-    },
-    description: {
-      story: 'Пример с открытием экрана выбора месяца после выбора года.',
+export const SimpleWithSetActiveViewDateAfterChooseYear = {
+  render: SimpleWithSetActiveViewDateAfterChooseYearStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: SimpleWithSetActiveViewDateAfterChooseYearRaw,
+      },
+      description: {
+        story: 'Пример с открытием экрана выбора месяца после выбора года.',
+      },
     },
   },
+
+  args: {},
+  name: 'ViewDate screen after choose year',
 };
-SimpleWithSetActiveViewDateAfterChooseYear.args = {};
-SimpleWithSetActiveViewDateAfterChooseYear.storyName = 'ViewDate screen after choose year';
+
 //</editor-fold>
 
 //<editor-fold desc="Пример с выбором только месяца/года">
-const SimpleWithSetActiveViewWithoutDayStory: ComponentStory<typeof Calendar> = ({
-  range,
-  ...args
-}: CalendarPropType) => (
+const SimpleWithSetActiveViewWithoutDayStory: StoryFn<typeof Calendar> = ({ range, ...args }: CalendarPropType) => (
   <SimpleWithSetActiveViewWithoutDayTemplate onChange={() => undefined} {...cleanUpProps(args)} />
 );
 
-export const SimpleWithSetActiveViewWithoutDay = SimpleWithSetActiveViewWithoutDayStory.bind({});
-SimpleWithSetActiveViewWithoutDay.parameters = {
-  docs: {
-    source: {
-      code: SimpleWithSetActiveViewWithoutDayRaw,
-    },
-    description: {
-      story: 'Пример с выбором только месяца/года.',
+export const SimpleWithSetActiveViewWithoutDay = {
+  render: SimpleWithSetActiveViewWithoutDayStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: SimpleWithSetActiveViewWithoutDayRaw,
+      },
+      description: {
+        story: 'Пример с выбором только месяца/года.',
+      },
     },
   },
+
+  args: {},
+  name: 'ViewDate year/month',
 };
-SimpleWithSetActiveViewWithoutDay.args = {};
-SimpleWithSetActiveViewWithoutDay.storyName = 'ViewDate year/month';
+
 //</editor-fold>
 
 //<editor-fold desc="Пример с подсветкой выходных, праздничный и специальных дат">
-const SimpleWithSpecialDatesStory: ComponentStory<typeof Calendar> = (args) => (
+const SimpleWithSpecialDatesStory: StoryFn<typeof Calendar> = (args) => (
   <SimpleWithSpecialDatesTemplate onChange={() => undefined} {...cleanUpProps(args)} />
 );
-export const SimpleWithSpecialDates = SimpleWithSpecialDatesStory.bind({});
-SimpleWithSpecialDates.parameters = {
-  docs: {
-    source: {
-      code: SimpleWithSpecialDatesRaw,
-    },
-    description: {
-      story: 'Пример с подсветкой выходных, праздничный и специальных дат.',
+
+export const SimpleWithSpecialDates = {
+  render: SimpleWithSpecialDatesStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: SimpleWithSpecialDatesRaw,
+      },
+      description: {
+        story: 'Пример с подсветкой выходных, праздничный и специальных дат.',
+      },
     },
   },
+
+  args: {},
+  name: 'Highlight special dates',
 };
-SimpleWithSpecialDates.args = {};
-SimpleWithSpecialDates.storyName = 'Highlight special dates';
-//</editor-fold>

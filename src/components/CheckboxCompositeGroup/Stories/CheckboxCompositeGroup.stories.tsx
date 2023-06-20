@@ -1,7 +1,5 @@
 import * as React from 'react';
-import type { ComponentMeta, Story } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
-
+import type { Meta, StoryFn } from '@storybook/react';
 import { CheckboxCompositeGroup, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 import type { CheckboxCompositeGroupProps } from '@admiral-ds/react-ui';
 
@@ -13,7 +11,7 @@ import CheckboxCompositeGroupExampleRaw from '!!raw-loader!./Templates/CheckboxC
 
 export default {
   title: 'Admiral-2.1/CheckboxCompositeGroup',
-  decorators: [withDesign],
+  decorators: undefined,
   component: CheckboxCompositeGroup,
   parameters: {
     docs: {
@@ -41,20 +39,23 @@ export default {
       control: { type: 'radio' },
     },
   },
-} as ComponentMeta<typeof CheckboxCompositeGroup>;
+} as Meta<typeof CheckboxCompositeGroup>;
 
 //<editor-fold desc="CheckboxCompositeGroup. Пример">
-const CheckboxCompositeGroupExampleStory: Story = (props: CheckboxCompositeGroupProps) => (
+const CheckboxCompositeGroupExampleStory: StoryFn = (props: CheckboxCompositeGroupProps) => (
   <CheckboxCompositeGroupExampleTemplate {...cleanUpProps(props)} />
 );
 
-export const CheckboxCompositeGroupExample = CheckboxCompositeGroupExampleStory.bind({});
-CheckboxCompositeGroupExample.parameters = {
-  docs: {
-    source: {
-      code: CheckboxCompositeGroupExampleRaw,
+export const CheckboxCompositeGroupExample = {
+  render: CheckboxCompositeGroupExampleStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: CheckboxCompositeGroupExampleRaw,
+      },
     },
   },
+
+  name: 'CheckboxCompositeGroup. Пример',
 };
-CheckboxCompositeGroupExample.storyName = 'CheckboxCompositeGroup. Пример';
-//</editor-fold>

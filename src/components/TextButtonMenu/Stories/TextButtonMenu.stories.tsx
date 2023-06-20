@@ -1,7 +1,5 @@
 import * as React from 'react';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
-
+import type { Meta, StoryFn } from '@storybook/react';
 import { TextButtonMenu, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
 import {
@@ -18,7 +16,7 @@ import TextButtonMenuWithIconRaw from '!!raw-loader!./Templates/TextButtonMenuWi
 
 export default {
   title: 'Admiral-2.1/TextButtonMenu',
-  decorators: [withDesign],
+  decorators: undefined,
   component: TextButtonMenu,
   parameters: {
     docs: {
@@ -104,52 +102,65 @@ export default {
       control: { type: 'text' },
     },
   },
-} as ComponentMeta<typeof TextButtonMenu>;
+} as Meta<typeof TextButtonMenu>;
 
 //<editor-fold desc="TextButtonMenu. Playground">
-const TextButtonMenuPlaygroundStory: ComponentStory<typeof TextButtonMenu> = (props) => (
+const TextButtonMenuPlaygroundStory: StoryFn<typeof TextButtonMenu> = (props) => (
   <TextButtonMenuPlaygroundTemplate items={[]} {...cleanUpProps(props)} />
 );
 
-export const TextButtonMenuPlayground = TextButtonMenuPlaygroundStory.bind({});
-TextButtonMenuPlayground.parameters = {
-  docs: {
-    source: {
-      code: TextButtonMenuPlaygroundRaw,
+export const TextButtonMenuPlayground = {
+  render: TextButtonMenuPlaygroundStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: TextButtonMenuPlaygroundRaw,
+      },
     },
   },
+
+  name: 'TextButtonMenu. Playground',
 };
-TextButtonMenuPlayground.storyName = 'TextButtonMenu. Playground';
+
 //</editor-fold>
 
 //<editor-fold desc="TextButtonMenu. Размеры и стили.">
-const TextButtonMenuDimensionStory: ComponentStory<typeof TextButtonMenu> = (props) => (
+const TextButtonMenuDimensionStory: StoryFn<typeof TextButtonMenu> = (props) => (
   <TextButtonMenuDimensionTemplate items={[]} {...cleanUpProps(props)} />
 );
 
-export const TextButtonMenuDimension = TextButtonMenuDimensionStory.bind({});
-TextButtonMenuDimension.parameters = {
-  docs: {
-    source: {
-      code: TextButtonMenuDimensionRaw,
+export const TextButtonMenuDimension = {
+  render: TextButtonMenuDimensionStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: TextButtonMenuDimensionRaw,
+      },
     },
   },
+
+  name: 'TextButtonMenu. Размеры и стили.',
 };
-TextButtonMenuDimension.storyName = 'TextButtonMenu. Размеры и стили.';
+
 //</editor-fold>
 
 //<editor-fold desc="TextButtonMenu. С иконкой.">
-const TextButtonMenuWithIconStory: ComponentStory<typeof TextButtonMenu> = (props) => (
+const TextButtonMenuWithIconStory: StoryFn<typeof TextButtonMenu> = (props) => (
   <TextButtonMenuWithIconTemplate items={[]} {...cleanUpProps(props)} />
 );
 
-export const TextButtonMenuWithIcon = TextButtonMenuWithIconStory.bind({});
-TextButtonMenuWithIcon.parameters = {
-  docs: {
-    source: {
-      code: TextButtonMenuWithIconRaw,
+export const TextButtonMenuWithIcon = {
+  render: TextButtonMenuWithIconStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: TextButtonMenuWithIconRaw,
+      },
     },
   },
+
+  name: 'TextButtonMenu. С иконкой.',
 };
-TextButtonMenuWithIcon.storyName = 'TextButtonMenu. С иконкой.';
-//</editor-fold>

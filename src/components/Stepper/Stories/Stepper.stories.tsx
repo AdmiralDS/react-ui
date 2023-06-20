@@ -1,7 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
+import type { Meta, StoryFn } from '@storybook/react';
 import { Stepper } from '@admiral-ds/react-ui';
 
 import {
@@ -51,7 +50,7 @@ const Description = () => (
 
 export default {
   title: 'Admiral-2.1/Stepper',
-  decorators: [withDesign],
+  decorators: undefined,
   component: Stepper,
   parameters: {
     docs: {
@@ -94,135 +93,181 @@ export default {
       control: false,
     },
   },
-} as ComponentMeta<typeof Stepper>;
+} as Meta<typeof Stepper>;
 
 //<editor-fold desc="Playground">
-const PlaygroundStory: ComponentStory<typeof Stepper> = ({ activeStep, ...props }) => (
+const PlaygroundStory: StoryFn<typeof Stepper> = ({ activeStep, ...props }) => (
   <StepperPlaygroundTemplate activeStep={activeStep} {...cleanUpProps(props)} />
 );
-export const Playground = PlaygroundStory.bind({});
-Playground.parameters = {
-  docs: {
-    source: {
-      code: PlaygroundRaw,
+
+export const Playground = {
+  render: PlaygroundStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: PlaygroundRaw,
+      },
     },
   },
+
+  name: 'Stepper. Playground.',
 };
-Playground.storyName = 'Stepper. Playground.';
+
 //</editor-fold>
 
 //<editor-fold desc="Виды шагов">
-const StepKindsStory: ComponentStory<typeof Stepper> = () => <StepperStepKindsTemplate />;
-export const StepKindsExample = StepKindsStory.bind({});
-StepKindsExample.parameters = {
-  docs: {
-    source: {
-      code: StepKindsRaw,
-    },
-    description: {
-      story: `Для обозначения активного шага в компонент Stepper нужно передать параметр activeStep, равный индексу активного шага.
-      Либо для самого Step можно задать параметр active (перезаписывает собой параметр activeStep). \n\n Чтобы обозначить завершенные 
-      (пройденные) шаги, для соответствующих шагов необходимо задать параметр completed. Также компонент Step имеет параметры disabled, 
-      error, warning.\n\nПройденные шаги могут быть кликабельными, для этого у них 
-      должен быть задан колбек onClick или параметр link.`,
+const StepKindsStory: StoryFn<typeof Stepper> = () => <StepperStepKindsTemplate />;
+
+export const StepKindsExample = {
+  render: StepKindsStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: StepKindsRaw,
+      },
+      description: {
+        story: `Для обозначения активного шага в компонент Stepper нужно передать параметр activeStep, равный индексу активного шага.
+        Либо для самого Step можно задать параметр active (перезаписывает собой параметр activeStep). \n\n Чтобы обозначить завершенные 
+        (пройденные) шаги, для соответствующих шагов необходимо задать параметр completed. Также компонент Step имеет параметры disabled, 
+        error, warning.\n\nПройденные шаги могут быть кликабельными, для этого у них 
+        должен быть задан колбек onClick или параметр link.`,
+      },
     },
   },
+
+  name: 'Stepper. Виды шагов.',
 };
-StepKindsExample.storyName = 'Stepper. Виды шагов.';
+
 //</editor-fold>
 
 //<editor-fold desc="Адаптив">
-const AdaptiveStory: ComponentStory<typeof Stepper> = () => <StepperAddaptiveTemplate />;
-export const AdaptiveExample = AdaptiveStory.bind({});
-AdaptiveExample.parameters = {
-  docs: {
-    source: {
-      code: AdaptiveRaw,
-    },
-    description: {
-      story: `С помощью параметра stepWidth можно задать ширину шага. Если данный параметр не задан, 
-      то ширина шага будет рассчитываться следующим образом:\n\n- при горизонтальной ориентации все 
-      шаги будут в равной степени делить между собой свободное пространство;\n\n- при вертикальной 
-      ориентации каждый шаг займет 100% ширины степпера.\n\nТаким образом шаги будут пропорционально 
-      увеличиваться/уменьшаться при изменении ширины степпера.`,
+const AdaptiveStory: StoryFn<typeof Stepper> = () => <StepperAddaptiveTemplate />;
+
+export const AdaptiveExample = {
+  render: AdaptiveStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: AdaptiveRaw,
+      },
+      description: {
+        story: `С помощью параметра stepWidth можно задать ширину шага. Если данный параметр не задан, 
+        то ширина шага будет рассчитываться следующим образом:\n\n- при горизонтальной ориентации все 
+        шаги будут в равной степени делить между собой свободное пространство;\n\n- при вертикальной 
+        ориентации каждый шаг займет 100% ширины степпера.\n\nТаким образом шаги будут пропорционально 
+        увеличиваться/уменьшаться при изменении ширины степпера.`,
+      },
     },
   },
+
+  name: 'Stepper. Адаптив.',
 };
-AdaptiveExample.storyName = 'Stepper. Адаптив.';
+
 //</editor-fold>
 
 //<editor-fold desc="Кастомный StepContent">
-const CustomStepContentStory: ComponentStory<typeof Stepper> = () => <StepperCustomStepContentTemplate />;
-export const CustomStepContentExample = CustomStepContentStory.bind({});
-CustomStepContentExample.parameters = {
-  docs: {
-    source: {
-      code: CustomStepContentRaw,
+const CustomStepContentStory: StoryFn<typeof Stepper> = () => <StepperCustomStepContentTemplate />;
+
+export const CustomStepContentExample = {
+  render: CustomStepContentStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: CustomStepContentRaw,
+      },
     },
   },
+
+  name: 'Stepper. Кастомный StepContent.',
 };
-CustomStepContentExample.storyName = 'Stepper. Кастомный StepContent.';
+
 //</editor-fold>
 
 //<editor-fold desc="Шаги в виде ссылок">
-const ClickableLinksStory: ComponentStory<typeof Stepper> = () => <StepperClickableLinksTemplate />;
-export const ClickableLinksExample = ClickableLinksStory.bind({});
-ClickableLinksExample.parameters = {
-  docs: {
-    source: {
-      code: ClickableLinksRaw,
+const ClickableLinksStory: StoryFn<typeof Stepper> = () => <StepperClickableLinksTemplate />;
+
+export const ClickableLinksExample = {
+  render: ClickableLinksStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: ClickableLinksRaw,
+      },
     },
   },
+
+  name: 'Stepper. Шаги в виде ссылок.',
 };
-ClickableLinksExample.storyName = 'Stepper. Шаги в виде ссылок.';
+
 //</editor-fold>
 
 //<editor-fold desc="Кликабельные шаги">
-const ClickPropStory: ComponentStory<typeof Stepper> = () => <StepperClickPropTemplate />;
-export const ClickPropExample = ClickPropStory.bind({});
-ClickPropExample.parameters = {
-  docs: {
-    source: {
-      code: ClickPropRaw,
+const ClickPropStory: StoryFn<typeof Stepper> = () => <StepperClickPropTemplate />;
+
+export const ClickPropExample = {
+  render: ClickPropStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: ClickPropRaw,
+      },
     },
   },
+
+  name: 'Stepper. Кликабельные шаги.',
 };
-ClickPropExample.storyName = 'Stepper. Кликабельные шаги.';
+
 //</editor-fold>
 
 //<editor-fold desc="Возврат к предыдущим шагам">
-const PreviousStepsStory: ComponentStory<typeof Stepper> = () => <StepperPreviousStepsTemplate />;
-export const PreviousStepsExample = PreviousStepsStory.bind({});
-PreviousStepsExample.parameters = {
-  docs: {
-    source: {
-      code: PreviousStepsRaw,
-    },
-    description: {
-      story: `В случаях необходимости и когда это позволяет логика шагов, например, результаты предыдущих 
-      шагов не влияют на последующие, допускается возможность возврата к предыдущим шагам.`,
+const PreviousStepsStory: StoryFn<typeof Stepper> = () => <StepperPreviousStepsTemplate />;
+
+export const PreviousStepsExample = {
+  render: PreviousStepsStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: PreviousStepsRaw,
+      },
+      description: {
+        story: `В случаях необходимости и когда это позволяет логика шагов, например, результаты предыдущих 
+        шагов не влияют на последующие, допускается возможность возврата к предыдущим шагам.`,
+      },
     },
   },
+
+  name: 'Stepper. Возврат к предыдущим шагам.',
 };
-PreviousStepsExample.storyName = 'Stepper. Возврат к предыдущим шагам.';
+
 //</editor-fold>
 
 //<editor-fold desc="Mobile">
-const MobileStory: ComponentStory<typeof Stepper> = () => <StepperMobileTemplate />;
-export const MobileExample = MobileStory.bind({});
-MobileExample.parameters = {
-  docs: {
-    source: {
-      code: MobileRaw,
-    },
-    description: {
-      story: `В мобильной версии применяется только горизонтальный вариант компонента
-      с автоматическим скроллом по горизонтали по мере прохождения шагов.\n\nКомпонент можно скроллить пальцем,
-      если нужно посмотреть пройденные или будущие шаги.\n\nПри переходе на следующий шаг, который становится
-      текущим, он выравнивается относительно левого края на расстоянии 16px (боковой падинг). Шаг перед текущим
-      уходит за границы экрана.\n\nДля перевода компонента в мобильный вид используйте параметр mobile.`,
+const MobileStory: StoryFn<typeof Stepper> = () => <StepperMobileTemplate />;
+
+export const MobileExample = {
+  render: MobileStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: MobileRaw,
+      },
+      description: {
+        story: `В мобильной версии применяется только горизонтальный вариант компонента
+        с автоматическим скроллом по горизонтали по мере прохождения шагов.\n\nКомпонент можно скроллить пальцем,
+        если нужно посмотреть пройденные или будущие шаги.\n\nПри переходе на следующий шаг, который становится
+        текущим, он выравнивается относительно левого края на расстоянии 16px (боковой падинг). Шаг перед текущим
+        уходит за границы экрана.\n\nДля перевода компонента в мобильный вид используйте параметр mobile.`,
+      },
     },
   },
+
+  name: 'Stepper. Мобильная версия.',
 };
-MobileExample.storyName = 'Stepper. Мобильная версия.';
-//</editor-fold>

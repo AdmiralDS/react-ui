@@ -1,7 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
+import type { Meta, StoryFn } from '@storybook/react';
 import { Breadcrumbs } from '@admiral-ds/react-ui';
 
 import {
@@ -44,7 +43,7 @@ const Description = () => (
 
 export default {
   title: 'Admiral-2.1/Breadcrumbs',
-  decorators: [withDesign],
+  decorators: undefined,
   component: Breadcrumbs,
   parameters: {
     docs: {
@@ -88,86 +87,113 @@ export default {
       control: false,
     },
   },
-} as ComponentMeta<typeof Breadcrumbs>;
+} as Meta<typeof Breadcrumbs>;
 
 //<editor-fold desc="Playground">
-const PlaygroundStory: ComponentStory<typeof Breadcrumbs> = (props) => (
+const PlaygroundStory: StoryFn<typeof Breadcrumbs> = (props) => (
   <BreadcrumbsPlaygroundTemplate items={[]} {...cleanUpProps(props)} />
 );
-export const Playground = PlaygroundStory.bind({});
-Playground.parameters = {
-  docs: {
-    source: {
-      code: PlaygroundRaw,
+
+export const Playground = {
+  render: PlaygroundStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: PlaygroundRaw,
+      },
     },
   },
 };
+
 //</editor-fold>
 
 //<editor-fold desc="Sizes">
-const SizesStory: ComponentStory<typeof Breadcrumbs> = () => <BreadcrumbsSizesTemplate />;
-export const SizesExample = SizesStory.bind({});
-SizesExample.parameters = {
-  docs: {
-    source: {
-      code: SizesRaw,
+const SizesStory: StoryFn<typeof Breadcrumbs> = () => <BreadcrumbsSizesTemplate />;
+
+export const SizesExample = {
+  render: SizesStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: SizesRaw,
+      },
     },
   },
+
+  name: 'Breadcrumbs. Размеры.',
 };
-SizesExample.storyName = 'Breadcrumbs. Размеры.';
+
 //</editor-fold>
 
 //<editor-fold desc="Mobile">
-const MobileStory: ComponentStory<typeof Breadcrumbs> = () => <BreadcrumbsMobileTemplate />;
-export const MobileExample = MobileStory.bind({});
-MobileExample.parameters = {
-  docs: {
-    source: {
-      code: MobileRaw,
-    },
-    description: {
-      story: `На мобильных устройствах предполагается использовать компонент в режиме адаптива (mobile). 
-      Компонент настроен таким образом, что если закладки не помещаются в ширину экрана, 
-      то они “выходят” за область экрана и их можно прокручивать свайпом, при этом текущая вкладка 
-      видна по дефолту, а вкладки, которые не помещаются, “уходят” за левую часть экрана (как на примере).`,
+const MobileStory: StoryFn<typeof Breadcrumbs> = () => <BreadcrumbsMobileTemplate />;
+
+export const MobileExample = {
+  render: MobileStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: MobileRaw,
+      },
+      description: {
+        story: `На мобильных устройствах предполагается использовать компонент в режиме адаптива (mobile). 
+        Компонент настроен таким образом, что если закладки не помещаются в ширину экрана, 
+        то они “выходят” за область экрана и их можно прокручивать свайпом, при этом текущая вкладка 
+        видна по дефолту, а вкладки, которые не помещаются, “уходят” за левую часть экрана (как на примере).`,
+      },
     },
   },
+
+  name: 'Breadcrumbs. Mobile.',
 };
-MobileExample.storyName = 'Breadcrumbs. Mobile.';
+
 //</editor-fold>
 
 //<editor-fold desc="Link">
-const LinkStory: ComponentStory<typeof Breadcrumbs> = () => <BreadcrumbsLinkTemplate />;
-export const LinkExample = LinkStory.bind({});
-LinkExample.parameters = {
-  docs: {
-    source: {
-      code: LinkRaw,
-    },
-    description: {
-      story: `С помощью параметров linkAs и linkProps (входят в состав BreadcrumbProps) 
-      можно вместо обычного anchor отрендерить внутри хлебной крошки любой другой компонент. 
-      Этот компонент можно задать с помощью свойства  linkAs и передать в него необходимые параметры через linkProps.`,
+const LinkStory: StoryFn<typeof Breadcrumbs> = () => <BreadcrumbsLinkTemplate />;
+
+export const LinkExample = {
+  render: LinkStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: LinkRaw,
+      },
+      description: {
+        story: `С помощью параметров linkAs и linkProps (входят в состав BreadcrumbProps) 
+        можно вместо обычного anchor отрендерить внутри хлебной крошки любой другой компонент. 
+        Этот компонент можно задать с помощью свойства  linkAs и передать в него необходимые параметры через linkProps.`,
+      },
     },
   },
+
+  name: 'Breadcrumbs. Пример с react-router.',
 };
-LinkExample.storyName = 'Breadcrumbs. Пример с react-router.';
+
 //</editor-fold>
 
 //<editor-fold desc="Active crumb">
-const ActiveCrumbStory: ComponentStory<typeof Breadcrumbs> = () => <BreadcrumbsActiveCrumbTemplate />;
-export const ActiveCrumbExample = ActiveCrumbStory.bind({});
-ActiveCrumbExample.parameters = {
-  docs: {
-    source: {
-      code: ActiveCrumbRaw,
-    },
-    description: {
-      story: `Последняя вкладка в компоненте может быть либо неактивной (по умолчанию), в таком случае она отображает 
-      текущее местоположение. Либо последняя вкладка активна и отображает предыдущий уровень сайта. Управляет 
-      поведением последней вкладки параметр lastBreadcrumbActive.`,
+const ActiveCrumbStory: StoryFn<typeof Breadcrumbs> = () => <BreadcrumbsActiveCrumbTemplate />;
+
+export const ActiveCrumbExample = {
+  render: ActiveCrumbStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: ActiveCrumbRaw,
+      },
+      description: {
+        story: `Последняя вкладка в компоненте может быть либо неактивной (по умолчанию), в таком случае она отображает 
+        текущее местоположение. Либо последняя вкладка активна и отображает предыдущий уровень сайта. Управляет 
+        поведением последней вкладки параметр lastBreadcrumbActive.`,
+      },
     },
   },
+
+  name: 'Breadcrumbs. Пример с активной/неактивной последней вкладкой.',
 };
-ActiveCrumbExample.storyName = 'Breadcrumbs. Пример с активной/неактивной последней вкладкой.';
-//</editor-fold>

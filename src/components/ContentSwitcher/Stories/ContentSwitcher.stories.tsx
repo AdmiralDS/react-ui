@@ -1,7 +1,5 @@
 import * as React from 'react';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
-
+import type { Meta, StoryFn } from '@storybook/react';
 import { ContentSwitcher } from '@admiral-ds/react-ui';
 
 import {
@@ -22,7 +20,7 @@ import ContentSwitcherWithBadgeRaw from '!!raw-loader!./Templates/ContentSwitche
 
 export default {
   title: 'Admiral-2.1/ContentSwitcher',
-  decorators: [withDesign],
+  decorators: undefined,
   component: ContentSwitcher,
   parameters: {
     docs: {
@@ -78,78 +76,99 @@ export default {
       control: false,
     },
   },
-} as ComponentMeta<typeof ContentSwitcher>;
+} as Meta<typeof ContentSwitcher>;
 
 //<editor-fold desc="ContentSwitcher. Playground">
-const ContentSwitcherPlaygroundStory: ComponentStory<typeof ContentSwitcher> = (props) => (
+const ContentSwitcherPlaygroundStory: StoryFn<typeof ContentSwitcher> = (props) => (
   <ContentSwitcherPlaygroundTemplate {...cleanUpProps(props)} />
 );
 
-export const ContentSwitcherPlayground = ContentSwitcherPlaygroundStory.bind({});
-ContentSwitcherPlayground.parameters = {
-  docs: {
-    source: {
-      code: ContentSwitcherPlaygroundRaw,
+export const ContentSwitcherPlayground = {
+  render: ContentSwitcherPlaygroundStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: ContentSwitcherPlaygroundRaw,
+      },
     },
   },
+
+  name: 'ContentSwitcher. Playground',
 };
-ContentSwitcherPlayground.storyName = 'ContentSwitcher. Playground';
+
 //</editor-fold>
 
 //<editor-fold desc="Базовый пример">
-const ContentSwitcherStory: ComponentStory<typeof ContentSwitcher> = () => <ContentSwitcherExampleTemplate />;
+const ContentSwitcherStory: StoryFn<typeof ContentSwitcher> = () => <ContentSwitcherExampleTemplate />;
 
-export const ContentSwitcherExample = ContentSwitcherStory.bind({});
-ContentSwitcherExample.parameters = {
-  docs: {
-    source: {
-      code: ContentSwitcherExampleRaw,
+export const ContentSwitcherExample = {
+  render: ContentSwitcherStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: ContentSwitcherExampleRaw,
+      },
     },
   },
+
+  name: 'Базовый пример',
 };
-ContentSwitcherExample.storyName = 'Базовый пример';
+
 //</editor-fold>
 
 //<editor-fold desc="ContentSwitcher с иконками">
-const ContentSwitcherWithIconStory: ComponentStory<typeof ContentSwitcher> = () => <ContentSwitcherWithIconTemplate />;
+const ContentSwitcherWithIconStory: StoryFn<typeof ContentSwitcher> = () => <ContentSwitcherWithIconTemplate />;
 
-export const ContentSwitcherWithIcon = ContentSwitcherWithIconStory.bind({});
-ContentSwitcherWithIcon.parameters = {
-  docs: {
-    source: {
-      code: ContentSwitcherWithIconRaw,
+export const ContentSwitcherWithIcon = {
+  render: ContentSwitcherWithIconStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: ContentSwitcherWithIconRaw,
+      },
     },
   },
+
+  name: 'ContentSwitcher с иконками',
 };
-ContentSwitcherWithIcon.storyName = 'ContentSwitcher с иконками';
+
 //</editor-fold>
 
 //<editor-fold desc="ContentSwitcher только с иконками">
-const ContentSwitcherIconOnlyStory: ComponentStory<typeof ContentSwitcher> = () => <ContentSwitcherIconOnlyTemplate />;
+const ContentSwitcherIconOnlyStory: StoryFn<typeof ContentSwitcher> = () => <ContentSwitcherIconOnlyTemplate />;
 
-export const ContentSwitcherIconOnly = ContentSwitcherIconOnlyStory.bind({});
-ContentSwitcherIconOnly.parameters = {
-  docs: {
-    source: {
-      code: ContentSwitcherIconOnlyRaw,
+export const ContentSwitcherIconOnly = {
+  render: ContentSwitcherIconOnlyStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: ContentSwitcherIconOnlyRaw,
+      },
     },
   },
+
+  name: 'ContentSwitcher только с иконками',
 };
-ContentSwitcherIconOnly.storyName = 'ContentSwitcher только с иконками';
+
 //</editor-fold>
 
 //<editor-fold desc="ContentSwitcher с Badge">
-const ContentSwitcherWithBadgeStory: ComponentStory<typeof ContentSwitcher> = () => (
-  <ContentSwitcherWithBadgeTemplate />
-);
+const ContentSwitcherWithBadgeStory: StoryFn<typeof ContentSwitcher> = () => <ContentSwitcherWithBadgeTemplate />;
 
-export const ContentSwitcherWithBadge = ContentSwitcherWithBadgeStory.bind({});
-ContentSwitcherWithBadge.parameters = {
-  docs: {
-    source: {
-      code: ContentSwitcherWithBadgeRaw,
+export const ContentSwitcherWithBadge = {
+  render: ContentSwitcherWithBadgeStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: ContentSwitcherWithBadgeRaw,
+      },
     },
   },
+
+  name: 'ContentSwitcher с Badge',
 };
-ContentSwitcherWithBadge.storyName = 'ContentSwitcher с Badge';
-//</editor-fold>

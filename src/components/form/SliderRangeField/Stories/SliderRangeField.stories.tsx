@@ -1,7 +1,5 @@
 import * as React from 'react';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
-
+import type { Meta, StoryFn } from '@storybook/react';
 import { SliderRangeField, INPUT_DIMENSIONS_VALUES, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
 import { SliderRangeFieldPlaygroundTemplate } from '#src/components/form/SliderRangeField/Stories/Templates';
@@ -14,7 +12,7 @@ import SliderRangeFieldPlaygroundRaw from '!!raw-loader!./Templates/SliderRangeF
 export default {
   title: 'Admiral-2.1/Form Field/SliderRangeField',
   component: SliderRangeField,
-  decorators: [withDesign],
+  decorators: undefined,
   parameters: {
     docs: {
       source: {
@@ -110,20 +108,23 @@ export default {
       control: false,
     },
   },
-} as ComponentMeta<typeof SliderRangeField>;
+} as Meta<typeof SliderRangeField>;
 
 //<editor-fold desc="SliderRangeField example">
-const SliderRangeFieldPlaygroundStory: ComponentStory<typeof SliderRangeField> = (props) => (
+const SliderRangeFieldPlaygroundStory: StoryFn<typeof SliderRangeField> = (props) => (
   <SliderRangeFieldPlaygroundTemplate {...cleanUpProps(props)} />
 );
 
-export const SliderRangeFieldPlayground = SliderRangeFieldPlaygroundStory.bind({});
-SliderRangeFieldPlayground.parameters = {
-  docs: {
-    source: {
-      code: SliderRangeFieldPlaygroundRaw,
+export const SliderRangeFieldPlayground = {
+  render: SliderRangeFieldPlaygroundStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: SliderRangeFieldPlaygroundRaw,
+      },
     },
   },
+
+  name: 'SliderRangeField example',
 };
-SliderRangeFieldPlayground.storyName = 'SliderRangeField example';
-//</editor-fold>

@@ -1,7 +1,5 @@
 import * as React from 'react';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
-
+import type { Meta, StoryFn } from '@storybook/react';
 import { MenuButton, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
@@ -22,7 +20,7 @@ import MenuButtonWithPanelRaw from '!!raw-loader!./Templates/MenuButtonWithPanel
 
 export default {
   title: 'Admiral-2.1/MenuButton',
-  decorators: [withDesign],
+  decorators: undefined,
   component: MenuButton,
   parameters: {
     docs: {
@@ -167,84 +165,107 @@ export default {
       control: false,
     },
   },
-} as ComponentMeta<typeof MenuButton>;
+} as Meta<typeof MenuButton>;
 
 //<editor-fold desc="MenuButton. Базовый пример.">
-const MenuButtonBaseStory: ComponentStory<typeof MenuButton> = (props) => (
+const MenuButtonBaseStory: StoryFn<typeof MenuButton> = (props) => (
   <MenuButtonBaseTemplate items={[]} {...cleanUpProps(props)} />
 );
 
-export const MenuButtonBase = MenuButtonBaseStory.bind({});
-MenuButtonBase.parameters = {
-  docs: {
-    source: {
-      code: MenuButtonBaseRaw,
+export const MenuButtonBase = {
+  render: MenuButtonBaseStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: MenuButtonBaseRaw,
+      },
     },
   },
+
+  name: 'MenuButton. Базовый пример.',
 };
-MenuButtonBase.storyName = 'MenuButton. Базовый пример.';
+
 //</editor-fold>
 
 //<editor-fold desc="MenuButton. Задизейбленные и кастомизированные опции и панель с кнопками">
-const MenuButtonOptionsStory: ComponentStory<typeof MenuButton> = (props) => (
+const MenuButtonOptionsStory: StoryFn<typeof MenuButton> = (props) => (
   <MenuButtonOptionsTemplate items={[]} {...cleanUpProps(props)} />
 );
 
-export const MenuButtonOptions = MenuButtonOptionsStory.bind({});
-MenuButtonOptions.parameters = {
-  docs: {
-    source: {
-      code: MenuButtonOptionsRaw,
+export const MenuButtonOptions = {
+  render: MenuButtonOptionsStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: MenuButtonOptionsRaw,
+      },
     },
   },
+
+  name: 'MenuButton. Задизейбленные и кастомизированные опции и панель с кнопками',
 };
-MenuButtonOptions.storyName = 'MenuButton. Задизейбленные и кастомизированные опции и панель с кнопками';
+
 //</editor-fold>
 
 //<editor-fold desc="MenuButton. Размеры и стили.">
-const MenuButtonVariantsStory: ComponentStory<typeof MenuButton> = (props) => (
+const MenuButtonVariantsStory: StoryFn<typeof MenuButton> = (props) => (
   <MenuButtonVariantsTemplate items={[]} {...cleanUpProps(props)} />
 );
 
-export const MenuButtonVariants = MenuButtonVariantsStory.bind({});
-MenuButtonVariants.parameters = {
-  docs: {
-    source: {
-      code: MenuButtonVariantsRaw,
+export const MenuButtonVariants = {
+  render: MenuButtonVariantsStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: MenuButtonVariantsRaw,
+      },
     },
   },
+
+  name: 'MenuButton. Размеры и стили.',
 };
-MenuButtonVariants.storyName = 'MenuButton. Размеры и стили.';
+
 //</editor-fold>
 
 //<editor-fold desc="MenuButton с иконкой">
-const MenuButtonIconStory: ComponentStory<typeof MenuButton> = (props) => (
+const MenuButtonIconStory: StoryFn<typeof MenuButton> = (props) => (
   <MenuButtonIconTemplate items={[]} {...cleanUpProps(props)} />
 );
 
-export const MenuButtonIcon = MenuButtonIconStory.bind({});
-MenuButtonIcon.parameters = {
-  docs: {
-    source: {
-      code: MenuButtonIconRaw,
+export const MenuButtonIcon = {
+  render: MenuButtonIconStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: MenuButtonIconRaw,
+      },
     },
   },
+
+  name: 'MenuButton с иконкой',
 };
-MenuButtonIcon.storyName = 'MenuButton с иконкой';
+
 //</editor-fold>
 
 //<editor-fold desc="MenuButton с чекбоксами и нижней панелью в выпадающем меню">
-const MenuButtonWithPanelStory: ComponentStory<typeof MenuButton> = (props) => (
+const MenuButtonWithPanelStory: StoryFn<typeof MenuButton> = (props) => (
   <MenuButtonWithPanelTemplate items={[]} {...cleanUpProps(props)} />
 );
 
-export const MenuButtonWithPanel = MenuButtonWithPanelStory.bind({});
-MenuButtonWithPanel.parameters = {
-  docs: {
-    source: {
-      code: MenuButtonWithPanelRaw,
+export const MenuButtonWithPanel = {
+  render: MenuButtonWithPanelStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: MenuButtonWithPanelRaw,
+      },
     },
   },
+
+  name: 'MenuButton с чекбоксами и нижней панелью в выпадающем меню',
 };
-MenuButtonWithPanel.storyName = 'MenuButton с чекбоксами и нижней панелью в выпадающем меню';
-//</editor-fold>

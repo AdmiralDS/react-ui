@@ -2,8 +2,7 @@ import * as React from 'react';
 import dayjs from 'dayjs';
 import type { Dayjs } from 'dayjs';
 import styled, { css, ThemeProvider } from 'styled-components';
-import { withDesign } from 'storybook-addon-designs';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { Meta, StoryFn } from '@storybook/react';
 import type { Theme } from '#src/components/themes';
 import { ALL_BORDER_RADIUS_VALUES } from '#src/components/themes';
 import { CalendarTry } from '#src/components/CalendarTry/index';
@@ -12,7 +11,7 @@ import { DAY_BORDER_RADIUS, DayCellWrapper } from '#src/components/CalendarTry/C
 
 export default {
   title: 'Admiral-2.1/CalendarTry',
-  decorators: [withDesign],
+  decorators: undefined,
   component: CalendarTry,
   parameters: {
     docs: {
@@ -57,7 +56,7 @@ export default {
       control: { type: 'radio' },
     },
   },
-} as ComponentMeta<typeof CalendarTry>;
+} as Meta<typeof CalendarTry>;
 
 const Separator = styled.div`
   height: 20px;
@@ -79,7 +78,7 @@ const highlightSundays = (date: Dayjs) => {
   return undefined;
 };
 
-const Template1: ComponentStory<typeof CalendarTry> = (args) => {
+const Template1: StoryFn<typeof CalendarTry> = (args) => {
   function swapBorder(theme: Theme): Theme {
     theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
@@ -208,7 +207,7 @@ const Template1: ComponentStory<typeof CalendarTry> = (args) => {
   );
 };
 
-const Template2: ComponentStory<typeof CalendarTry> = (args) => {
+const Template2: StoryFn<typeof CalendarTry> = (args) => {
   function swapBorder(theme: Theme): Theme {
     theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
@@ -339,16 +338,24 @@ const Template2: ComponentStory<typeof CalendarTry> = (args) => {
   );
 };
 
-export const CalendarWidgetSimple = Template1.bind({});
-CalendarWidgetSimple.args = {
-  rangePicker: true,
-  doubleView: true,
-};
-CalendarWidgetSimple.storyName = 'Simple.';
+export const CalendarWidgetSimple = {
+  render: Template1,
 
-export const CalendarWidgetCustom = Template2.bind({});
-CalendarWidgetCustom.args = {
-  //rangePicker: true,
-  //doubleView: true,
+  args: {
+    rangePicker: true,
+    doubleView: true,
+  },
+
+  name: 'Simple.',
 };
-CalendarWidgetCustom.storyName = 'Custom.';
+
+export const CalendarWidgetCustom = {
+  render: Template2,
+
+  args: {
+    //rangePicker: true,
+    //doubleView: true,
+  },
+
+  name: 'Custom.',
+};

@@ -1,6 +1,6 @@
 import type { ChangeEvent, HTMLAttributes } from 'react';
 import * as React from 'react';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { Meta, StoryFn } from '@storybook/react';
 import {
   Menu,
   MenuItem,
@@ -21,7 +21,6 @@ import {
 } from '@admiral-ds/react-ui';
 import type { MenuModelItemProps, RenderOptionProps, Theme, CheckboxGroupItemProps } from '@admiral-ds/react-ui';
 import styled, { css, useTheme, ThemeProvider } from 'styled-components';
-import { withDesign } from 'storybook-addon-designs';
 import { ReactComponent as PlusOutline } from '@admiral-ds/icons/build/service/PlusOutline.svg';
 import { uid } from '#src/components/common/uid';
 import {
@@ -55,7 +54,7 @@ const Description = () => (
 );
 export default {
   title: 'Admiral-2.1/Menu',
-  decorators: [withDesign],
+  decorators: undefined,
   component: Menu,
   parameters: {
     docs: {
@@ -109,7 +108,7 @@ export default {
       control: { type: 'radio' },
     },
   },
-} as ComponentMeta<typeof Menu>;
+} as Meta<typeof Menu>;
 
 const Wrapper = styled.div`
   border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
@@ -164,7 +163,7 @@ const STORY_ITEMS: Array<StoryItem> = [
   },
 ];
 
-const SimpleTemplate: ComponentStory<typeof Menu> = (args) => {
+const SimpleTemplate: StoryFn<typeof Menu> = (args) => {
   const model = React.useMemo(() => {
     return STORY_ITEMS.map((item) => ({
       id: item.id,
@@ -270,7 +269,7 @@ const MyMenuItem = ({
 };
 //</editor-fold>
 
-const CustomItemTemplate: ComponentStory<typeof Menu> = (args) => {
+const CustomItemTemplate: StoryFn<typeof Menu> = (args) => {
   const model = React.useMemo(() => {
     return STORY_ITEMS.map((item) => ({
       id: item.id,
@@ -290,7 +289,7 @@ const CustomItemTemplate: ComponentStory<typeof Menu> = (args) => {
   );
 };
 
-const MenuRadiobuttonTemplate: ComponentStory<typeof Menu> = (args) => {
+const MenuRadiobuttonTemplate: StoryFn<typeof Menu> = (args) => {
   const model = React.useMemo(() => {
     return STORY_ITEMS.map((item) => ({
       id: item.id,
@@ -357,7 +356,7 @@ const itemsLongText = [
 ];
 const MenuItemWithTooltip = TooltipHoc(MenuItem);
 
-const MenuTooltipTemplate: ComponentStory<typeof Menu> = (args) => {
+const MenuTooltipTemplate: StoryFn<typeof Menu> = (args) => {
   const model = React.useMemo(() => {
     return itemsLongText.map((item) => {
       const tooltip = item.label.length > 20;
@@ -396,7 +395,7 @@ const MultiLineMenuItem = styled(MenuItem)`
   white-space: pre-wrap;
 `;
 
-const MultiLineMenuTemplate: ComponentStory<typeof Menu> = (args) => {
+const MultiLineMenuTemplate: StoryFn<typeof Menu> = (args) => {
   const model = React.useMemo(() => {
     return itemsLongText.map((item) => {
       return {
@@ -429,7 +428,7 @@ const ActionPanelFlex = css`
   gap: 8px;
 `;
 
-const MenuActionsTwoButtonsTemplate: ComponentStory<typeof Menu> = (props) => {
+const MenuActionsTwoButtonsTemplate: StoryFn<typeof Menu> = (props) => {
   const model = React.useMemo(() => {
     return STORY_ITEMS.map((item) => ({
       id: item.id,
@@ -481,7 +480,7 @@ const MenuActionsTwoButtonsTemplate: ComponentStory<typeof Menu> = (props) => {
   );
 };
 
-const MenuActionsAddUserValueTemplate: ComponentStory<typeof Menu> = (props) => {
+const MenuActionsAddUserValueTemplate: StoryFn<typeof Menu> = (props) => {
   const initialButtonText = 'Добавить';
   const theme = useTheme() || LIGHT_THEME;
 
@@ -635,7 +634,7 @@ const itemsCheckboxGroup: Array<CheckboxGroupItemProps> = [
   },
 ];
 
-const MenuCheckboxGroupTemplate: ComponentStory<typeof Menu> = (args) => {
+const MenuCheckboxGroupTemplate: StoryFn<typeof Menu> = (args) => {
   const [internalModel, setInternalModel] = React.useState<Array<CheckboxGroupItemProps>>([...itemsCheckboxGroup]);
   const [activeOption, setActiveOption] = React.useState<string | undefined>();
 
@@ -738,135 +737,180 @@ const MenuCheckboxGroupTemplate: ComponentStory<typeof Menu> = (args) => {
   );
 };
 
-export const Simple = SimpleTemplate.bind({});
-Simple.storyName = 'Базовый пример';
+export const Simple = {
+  render: SimpleTemplate,
+  name: 'Базовый пример',
+};
 
 //<editor-fold desc="Пример с иконками и дополнительным текстом">
-const IconsStory: ComponentStory<typeof Menu> = (props) => (
+const IconsStory: StoryFn<typeof Menu> = (props) => (
   <IconsAndAdditionalTextTemplate model={[]} {...cleanUpProps(props)} />
 );
-export const IconsExample = IconsStory.bind({});
-IconsExample.parameters = {
-  docs: {
-    source: {
-      code: IconsAndAdditionalTextRaw,
-    },
-    description: {
-      story: 'Пример меню с иконками и дополнительным текстом',
+
+export const IconsExample = {
+  render: IconsStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: IconsAndAdditionalTextRaw,
+      },
+      description: {
+        story: 'Пример меню с иконками и дополнительным текстом',
+      },
     },
   },
+
+  name: 'Пример с иконками и дополнительным текстом',
 };
-IconsExample.storyName = 'Пример с иконками и дополнительным текстом';
+
 //</editor-fold>
 
 //<editor-fold desc="Пример с большим количеством item">
-const CardGroupsStory: ComponentStory<typeof Menu> = (props) => (
-  <CardGroupsTemplate model={[]} {...cleanUpProps(props)} />
-);
-export const CardGroupsExample = CardGroupsStory.bind({});
-CardGroupsExample.parameters = {
-  docs: {
-    source: {
-      code: CardGroupsRaw,
-    },
-    description: {
-      story: 'Пример построения меню с группированием пунктов',
+const CardGroupsStory: StoryFn<typeof Menu> = (props) => <CardGroupsTemplate model={[]} {...cleanUpProps(props)} />;
+
+export const CardGroupsExample = {
+  render: CardGroupsStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: CardGroupsRaw,
+      },
+      description: {
+        story: 'Пример построения меню с группированием пунктов',
+      },
     },
   },
-};
-CardGroupsExample.storyName = 'Пример с группами карт';
-//</editor-fold>
 
-export const CustomItems = CustomItemTemplate.bind({});
+  name: 'Пример с группами карт',
+};
+
+export const CustomItems = {
+  render: CustomItemTemplate,
+  name: 'Пример с кастомными пунктами меню',
+};
 
 //<editor-fold desc="Меню с checkbox">
-const CheckboxMenuStory: ComponentStory<typeof Menu> = (props) => (
-  <CheckboxMenuTemplate model={[]} {...cleanUpProps(props)} />
-);
-export const CheckboxMenuExample = CheckboxMenuStory.bind({});
-CheckboxMenuExample.parameters = {
-  docs: {
-    source: {
-      code: CheckboxMenuRaw,
-    },
-    description: {
-      story: 'Пример меню с пунктами, содержащими Checkbox.',
+const CheckboxMenuStory: StoryFn<typeof Menu> = (props) => <CheckboxMenuTemplate model={[]} {...cleanUpProps(props)} />;
+
+export const CheckboxMenuExample = {
+  render: CheckboxMenuStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: CheckboxMenuRaw,
+      },
+      description: {
+        story: 'Пример меню с пунктами, содержащими Checkbox.',
+      },
     },
   },
-};
-CheckboxMenuExample.storyName = 'Меню с checkbox';
-//</editor-fold>
 
-export const MenuRadiobutton = MenuRadiobuttonTemplate.bind({});
-export const MenuTooltip = MenuTooltipTemplate.bind({});
-export const MultiLineMenu = MultiLineMenuTemplate.bind({});
-export const MenuActionsTwoButtons = MenuActionsTwoButtonsTemplate.bind({});
-export const MenuActionsAddUserValue = MenuActionsAddUserValueTemplate.bind({});
-export const MenuCheckboxGroup = MenuCheckboxGroupTemplate.bind({});
+  name: 'Меню с checkbox',
+};
+
+export const MenuRadiobutton = {
+  render: MenuRadiobuttonTemplate,
+  name: 'Пример с Radiobutton',
+};
+
+export const MenuTooltip = {
+  render: MenuTooltipTemplate,
+  name: 'Пример с Tooltip',
+};
+
+export const MultiLineMenu = {
+  render: MultiLineMenuTemplate,
+  name: 'Пример с многострочными пунктами',
+};
+
+export const MenuActionsTwoButtons = {
+  render: MenuActionsTwoButtonsTemplate,
+  name: 'Пример с Actions с двумя кнопками',
+};
+
+export const MenuActionsAddUserValue = {
+  render: MenuActionsAddUserValueTemplate,
+  name: 'Пример с Actions и Search',
+};
+
+export const MenuCheckboxGroup = {
+  render: MenuCheckboxGroupTemplate,
+  name: 'Пример с CheckboxGroup',
+};
 
 //<editor-fold desc="Пример с большим количеством item">
-const LargeNumberOfItemsStory: ComponentStory<typeof Menu> = (props) => (
+const LargeNumberOfItemsStory: StoryFn<typeof Menu> = (props) => (
   <LargeNumberOfItemsTemplate model={[]} {...cleanUpProps(props)} />
 );
-export const LargeNumberOfItemsExample = LargeNumberOfItemsStory.bind({});
-LargeNumberOfItemsExample.parameters = {
-  docs: {
-    source: {
-      code: LargeNumberOfItemsRaw,
-    },
-    description: {
-      story: 'Пример с большим количеством item. Для проверки прокрутки меню при быстрой смене активного элемента.',
+
+export const LargeNumberOfItemsExample = {
+  render: LargeNumberOfItemsStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: LargeNumberOfItemsRaw,
+      },
+      description: {
+        story: 'Пример с большим количеством item. Для проверки прокрутки меню при быстрой смене активного элемента.',
+      },
     },
   },
+
+  name: 'Пример с большим количеством item',
 };
-LargeNumberOfItemsExample.storyName = 'Пример с большим количеством item';
+
 //</editor-fold>
 
 //<editor-fold desc="Пример без цикла обхода пунктов">
-const MenuWithLockCycleScrollStory: ComponentStory<typeof Menu> = (props) => (
+const MenuWithLockCycleScrollStory: StoryFn<typeof Menu> = (props) => (
   <MenuWithLockCycleScrollTemplate model={[]} {...cleanUpProps(props)} />
 );
 
-export const MenuWithLockCycleScrollExample = MenuWithLockCycleScrollStory.bind({});
-MenuWithLockCycleScrollExample.parameters = {
-  docs: {
-    source: {
-      code: MenuWithLockCycleScrollRaw,
-    },
-    description: {
-      story:
-        'Для блокировки цикличного обхода пунктов меню можно использовать onForwardCycleApprove и onBackwardCycleApprove.',
+export const MenuWithLockCycleScrollExample = {
+  render: MenuWithLockCycleScrollStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: MenuWithLockCycleScrollRaw,
+      },
+      description: {
+        story:
+          'Для блокировки цикличного обхода пунктов меню можно использовать onForwardCycleApprove и onBackwardCycleApprove.',
+      },
     },
   },
+
+  name: 'Пример без цикла обхода пунктов',
 };
-MenuWithLockCycleScrollExample.storyName = 'Пример без цикла обхода пунктов';
+
 //</editor-fold>
 
 //<editor-fold desc="Виртуальный скролл">
-const VirtualScrollStory: ComponentStory<typeof Menu> = (props) => (
+const VirtualScrollStory: StoryFn<typeof Menu> = (props) => (
   <VirtualScrollTemplate model={[]} {...cleanUpProps(props)} />
 );
-export const VirtualScrollExample = VirtualScrollStory.bind({});
-VirtualScrollExample.parameters = {
-  docs: {
-    source: {
-      code: VirtualScrollRaw,
-    },
-    description: {
-      story:
-        'Для включения виртуального скролла, необходимо передать в параметр virtualScroll объект, ' +
-        'содержаний размер 1 элемента меню, для расчета максимальной высоты контейнера меню. ' +
-        'Или установить значение "auto". В этом случае максимальная высота будет рассчитана исходя из свойства "dimension"',
+
+export const VirtualScrollExample = {
+  render: VirtualScrollStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: VirtualScrollRaw,
+      },
+      description: {
+        story:
+          'Для включения виртуального скролла, необходимо передать в параметр virtualScroll объект, ' +
+          'содержаний размер 1 элемента меню, для расчета максимальной высоты контейнера меню. ' +
+          'Или установить значение "auto". В этом случае максимальная высота будет рассчитана исходя из свойства "dimension"',
+      },
     },
   },
-};
-VirtualScrollExample.storyName = 'Виртуальный скролл';
-//</editor-fold>
 
-CustomItems.storyName = 'Пример с кастомными пунктами меню';
-MenuRadiobutton.storyName = 'Пример с Radiobutton';
-MenuTooltip.storyName = 'Пример с Tooltip';
-MultiLineMenu.storyName = 'Пример с многострочными пунктами';
-MenuActionsTwoButtons.storyName = 'Пример с Actions с двумя кнопками';
-MenuActionsAddUserValue.storyName = 'Пример с Actions и Search';
-MenuCheckboxGroup.storyName = 'Пример с CheckboxGroup';
+  name: 'Виртуальный скролл',
+};

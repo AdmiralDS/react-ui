@@ -1,6 +1,5 @@
 import * as React from 'react';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
+import type { Meta, StoryFn } from '@storybook/react';
 import styled, { ThemeProvider } from 'styled-components';
 import { Calendar, Label, ProgressStepper, Button } from '@admiral-ds/react-ui';
 import type { Locale, Theme } from '@admiral-ds/react-ui';
@@ -37,7 +36,7 @@ const Description = () => (
 
 export default {
   title: 'Locales',
-  decorators: [withDesign],
+  decorators: undefined,
   parameters: {
     docs: {
       source: {
@@ -46,7 +45,7 @@ export default {
     },
     componentSubtitle: <Description />,
   },
-} as ComponentMeta<any>;
+} as Meta<any>;
 
 const Wrapper = styled.div`
   display: flex;
@@ -59,7 +58,7 @@ const Wrapper = styled.div`
   }
 `;
 
-const Template1: ComponentStory<any> = (args) => {
+const Template1: StoryFn<any> = (args) => {
   function setUSALocale(theme: Theme): Theme {
     const newTheme = { ...theme, currentLocale: 'en-US' };
     return newTheme;
@@ -89,7 +88,7 @@ const Template1: ComponentStory<any> = (args) => {
   );
 };
 
-const Template2: ComponentStory<any> = () => {
+const Template2: StoryFn<any> = () => {
   function setDeLocale(theme: Theme): Theme {
     const deLocale: Locale = {
       /** Число от 0 до 6, где 0 - это воскресенье */
@@ -167,7 +166,7 @@ const Template2: ComponentStory<any> = () => {
   );
 };
 
-const Template3: ComponentStory<any> = () => {
+const Template3: StoryFn<any> = () => {
   const steps = [
     'Определение стратегии',
     'Анализ',
@@ -205,37 +204,44 @@ const Template3: ComponentStory<any> = () => {
   );
 };
 
-export const ThemeCurrentLocale = Template1.bind({});
-ThemeCurrentLocale.args = {};
-ThemeCurrentLocale.storyName = 'Пример использования календаря в русской и американской локалях';
+export const ThemeCurrentLocale = {
+  render: Template1,
+  args: {},
+  name: 'Пример использования календаря в русской и американской локалях',
+};
 
-export const ThemeNewLocale = Template2.bind({});
-ThemeNewLocale.args = {};
-ThemeNewLocale.storyName = 'Пример определения новой локали (немецкой)';
-ThemeNewLocale.parameters = {
-  docs: {
-    description: {
-      story: `Пользователь может создать свою локаль. Для этого в объект theme.locales 
-      добавляется соответсвующий ключ, значением которого является объект типа Locale.
-      Данный объект содержит в себе перечисление текстовых констант для компонентов библиотеки, а также содержит
-      свойство firstDayOfWeek. Свойство firstDayOfWeek (значение св-ва - число от 0 до 6) обозначает, 
-      с какого дня начинается неделя для данной локали, где 0 - это воскресенье.`,
+export const ThemeNewLocale = {
+  render: Template2,
+  args: {},
+  name: 'Пример определения новой локали (немецкой)',
+
+  parameters: {
+    docs: {
+      description: {
+        story: `Пользователь может создать свою локаль. Для этого в объект theme.locales 
+        добавляется соответсвующий ключ, значением которого является объект типа Locale.
+        Данный объект содержит в себе перечисление текстовых констант для компонентов библиотеки, а также содержит
+        свойство firstDayOfWeek. Свойство firstDayOfWeek (значение св-ва - число от 0 до 6) обозначает, 
+        с какого дня начинается неделя для данной локали, где 0 - это воскресенье.`,
+      },
     },
   },
 };
 
-export const RedeclareLocaleParams = Template3.bind({});
-RedeclareLocaleParams.args = {};
-RedeclareLocaleParams.storyName =
-  'Пример переопределения текстовых констант с помощью пропса locale в компоненте ProgressStepper';
-RedeclareLocaleParams.parameters = {
-  docs: {
-    description: {
-      story: `В некоторых случаях может быть необходимо изменить значения текстовых констант для отдельных
-        компонентов. Для этого у компонентов, использующих текстовые константы, есть специальный параметр locale - объект, в
-        котором можно задать альтернативные значения текстовых констант, отличные от тех, что заданы в theme.locales.
-        Текстовая константа, заданная через пропс locale компонента имеет больший приоритет, чем та же константа, заданная в
-        theme.locale.`,
+export const RedeclareLocaleParams = {
+  render: Template3,
+  args: {},
+  name: 'Пример переопределения текстовых констант с помощью пропса locale в компоненте ProgressStepper',
+
+  parameters: {
+    docs: {
+      description: {
+        story: `В некоторых случаях может быть необходимо изменить значения текстовых констант для отдельных
+          компонентов. Для этого у компонентов, использующих текстовые константы, есть специальный параметр locale - объект, в
+          котором можно задать альтернативные значения текстовых констант, отличные от тех, что заданы в theme.locales.
+          Текстовая константа, заданная через пропс locale компонента имеет больший приоритет, чем та же константа, заданная в
+          theme.locale.`,
+      },
     },
   },
 };

@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { withDesign } from 'storybook-addon-designs';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { Meta, StoryFn } from '@storybook/react';
 
 import { IconPlacement, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
@@ -20,7 +19,7 @@ import IconPlacementSizesRaw from '!!raw-loader!./Templates/IconPlacementSizes';
 
 export default {
   title: 'Admiral-2.1/IconPlacement',
-  decorators: [withDesign],
+  decorators: undefined,
   component: IconPlacement,
   parameters: {
     docs: {
@@ -68,68 +67,86 @@ export default {
       control: { type: 'radio' },
     },
   },
-} as ComponentMeta<typeof IconPlacement>;
+} as Meta<typeof IconPlacement>;
 
 //<editor-fold desc="IconPlacement. Playground">
-const IconPlacementPlaygroundStory: ComponentStory<typeof IconPlacement> = (props) => (
+const IconPlacementPlaygroundStory: StoryFn<typeof IconPlacement> = (props) => (
   <IconPlacementPlaygroundTemplate {...cleanUpProps(props)} />
 );
 
-export const IconPlacementPlayground = IconPlacementPlaygroundStory.bind({});
-IconPlacementPlayground.parameters = {
-  docs: {
-    source: {
-      code: IconPlacementPlaygroundRaw,
+export const IconPlacementPlayground = {
+  render: IconPlacementPlaygroundStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: IconPlacementPlaygroundRaw,
+      },
     },
   },
+
+  name: 'IconPlacement. Playground',
 };
-IconPlacementPlayground.storyName = 'IconPlacement. Playground';
+
 //</editor-fold>
 
 //<editor-fold desc="IconPlacement. Размеры">
-const IconPlacementSizesStory: ComponentStory<typeof IconPlacement> = (props) => (
+const IconPlacementSizesStory: StoryFn<typeof IconPlacement> = (props) => (
   <IconPlacementSizesTemplate {...cleanUpProps(props)} />
 );
 
-export const IconPlacementSizes = IconPlacementSizesStory.bind({});
-IconPlacementSizes.parameters = {
-  docs: {
-    source: {
-      code: IconPlacementSizesRaw,
+export const IconPlacementSizes = {
+  render: IconPlacementSizesStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: IconPlacementSizesRaw,
+      },
     },
   },
+
+  name: 'IconPlacement. Размеры',
 };
-IconPlacementSizes.storyName = 'IconPlacement. Размеры';
+
 //</editor-fold>
 
 //<editor-fold desc="IconPlacement. Appearance">
-const IconPlacementAppearanceStory: ComponentStory<typeof IconPlacement> = (props) => (
+const IconPlacementAppearanceStory: StoryFn<typeof IconPlacement> = (props) => (
   <IconPlacementAppearanceTemplate {...cleanUpProps(props)} />
 );
 
-export const IconPlacementAppearance = IconPlacementAppearanceStory.bind({});
-IconPlacementAppearance.parameters = {
-  docs: {
-    source: {
-      code: IconPlacementAppearanceRaw,
+export const IconPlacementAppearance = {
+  render: IconPlacementAppearanceStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: IconPlacementAppearanceRaw,
+      },
     },
   },
+
+  name: 'IconPlacement. Appearance',
 };
-IconPlacementAppearance.storyName = 'IconPlacement. Appearance';
+
 //</editor-fold>
 
 //<editor-fold desc="IconPlacement. Варианты использования">
-const IconPlacementVariantsStory: ComponentStory<typeof IconPlacement> = (props) => (
+const IconPlacementVariantsStory: StoryFn<typeof IconPlacement> = (props) => (
   <IconPlacementVariantsTemplate {...cleanUpProps(props)} />
 );
 
-export const IconPlacementVariants = IconPlacementVariantsStory.bind({});
-IconPlacementVariants.parameters = {
-  docs: {
-    source: {
-      code: IconPlacementVariantsRaw,
+export const IconPlacementVariants = {
+  render: IconPlacementVariantsStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: IconPlacementVariantsRaw,
+      },
     },
   },
+
+  name: 'IconPlacement. Варианты использования',
 };
-IconPlacementVariants.storyName = 'IconPlacement. Варианты использования';
-//</editor-fold>

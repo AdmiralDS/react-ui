@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { Meta, StoryFn } from '@storybook/react';
 
 import { Accordion, AccordionItem } from '@admiral-ds/react-ui';
 
@@ -14,11 +14,11 @@ import {
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
-import AccordionDividerRaw from '!!raw-loader!./Templates/AccordionDivider';
-import AccordionIconRaw from '!!raw-loader!./Templates/AccordionIcon';
-import AccordionModesRaw from '!!raw-loader!./Templates/AccordionModes';
-import AccordionDimensionRaw from '!!raw-loader!./Templates/AccordionDimension';
-import AccordionPlaygroundRaw from '!!raw-loader!./Templates/AccordionPlayground';
+import AccordionDividerRaw from './Templates/AccordionDivider?raw';
+import AccordionIconRaw from './Templates/AccordionIcon?raw';
+import AccordionModesRaw from './Templates/AccordionModes?raw';
+import AccordionDimensionRaw from './Templates/AccordionDimension?raw';
+import AccordionPlaygroundRaw from './Templates/AccordionPlayground?raw';
 
 const Separator = styled.div`
   height: 20px;
@@ -84,101 +84,121 @@ export default {
       control: { type: 'boolean' },
     },
   },
-} as ComponentMeta<typeof Accordion>;
+} as Meta<typeof Accordion>;
 
 //<editor-fold desc="Размеры">
-const AccordionPlaygroundStory: ComponentStory<typeof Accordion> = (props) => (
+const AccordionPlaygroundStory: StoryFn<typeof Accordion> = (props) => (
   <AccordionPlaygroundTemplate {...cleanUpProps(props)} />
 );
 
-export const AccordionPlayground = AccordionPlaygroundStory.bind({});
-AccordionPlayground.parameters = {
-  docs: {
-    source: {
-      code: AccordionPlaygroundRaw,
+export const AccordionPlayground = {
+  render: AccordionPlaygroundStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: AccordionPlaygroundRaw,
+      },
     },
   },
+
+  name: 'Accordion. Playground.',
 };
-AccordionPlayground.storyName = 'Accordion. Playground.';
+
 //</editor-fold>
 
 //<editor-fold desc="Размеры">
-const AccordionDimensionStory: ComponentStory<typeof Accordion> = () => <AccordionDimensionTemplate />;
+const AccordionDimensionStory: StoryFn<typeof Accordion> = () => <AccordionDimensionTemplate />;
 
-export const AccordionDimension = AccordionDimensionStory.bind({});
-AccordionDimension.parameters = {
-  docs: {
-    source: {
-      code: AccordionDimensionRaw,
-    },
-    description: {
-      story: `Существует в двух размерах - L и M.`,
+export const AccordionDimension = {
+  render: AccordionDimensionStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: AccordionDimensionRaw,
+      },
+      description: {
+        story: `Существует в двух размерах - L и M.`,
+      },
     },
   },
+
+  name: 'Accordion. Размеры.',
 };
-AccordionDimension.storyName = 'Accordion. Размеры.';
+
 //</editor-fold>
 
 //<editor-fold desc="Режимы использования">
-const AccordionModesStory: ComponentStory<typeof Accordion> = (props) => (
-  <AccordionModesTemplate {...cleanUpProps(props)} />
-);
+const AccordionModesStory: StoryFn<typeof Accordion> = (props) => <AccordionModesTemplate {...cleanUpProps(props)} />;
 
-export const AccordionModes = AccordionModesStory.bind({});
-AccordionModes.parameters = {
-  docs: {
-    source: {
-      code: AccordionModesRaw,
-    },
-    description: {
-      story: `Компонент AccordionItem может работать в контролируемом и неконтролируемом режимах.
-      Параметр expanded задает состояние компонента в контролируемом режиме:\n\n - если true,
-      разворачивает тело аккордеона;\n\n- если false, сворачивает тело аккордеона.\n\nЕсли свойство
-      expanded передано - автоматическое сворачивание/разворачивание блокируется. В неконтролируемом режиме дефолтное
-      состояние аккордеона можно задать с помощью свойства defaultExpanded.`,
+export const AccordionModes = {
+  render: AccordionModesStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: AccordionModesRaw,
+      },
+      description: {
+        story: `Компонент AccordionItem может работать в контролируемом и неконтролируемом режимах.
+        Параметр expanded задает состояние компонента в контролируемом режиме:\n\n - если true,
+        разворачивает тело аккордеона;\n\n- если false, сворачивает тело аккордеона.\n\nЕсли свойство
+        expanded передано - автоматическое сворачивание/разворачивание блокируется. В неконтролируемом режиме дефолтное
+        состояние аккордеона можно задать с помощью свойства defaultExpanded.`,
+      },
     },
   },
+
+  name: 'Accordion. Режимы использования.',
 };
-AccordionModes.storyName = 'Accordion. Режимы использования.';
+
 //</editor-fold>
 
 //<editor-fold desc="Расположение шеврона слева">
-const AccordionIconStory: ComponentStory<typeof Accordion> = () => <AccordionIconTemplate />;
+const AccordionIconStory: StoryFn<typeof Accordion> = () => <AccordionIconTemplate />;
 
-export const AccordionIcon = AccordionIconStory.bind({});
-AccordionIcon.storyName = 'Accordion. Расположение шеврона слева.';
-AccordionIcon.parameters = {
-  docs: {
-    source: {
-      code: AccordionIconRaw,
-    },
-    description: {
-      story: `Альтернативным вариантом является расположение шеврона слева от заголовка. Текст заголовка и иконка 
-      шеврона просто меняются местами с сохранением всех расстояний и размеров. При этом компоновка остальных 
-      элементов компонента никак не меняются.\n\nИспользуйте параметр iconPosition, чтобы управлять расположением шеврона.`,
+export const AccordionIcon = {
+  render: AccordionIconStory,
+  name: 'Accordion. Расположение шеврона слева.',
+
+  parameters: {
+    docs: {
+      source: {
+        code: AccordionIconRaw,
+      },
+      description: {
+        story: `Альтернативным вариантом является расположение шеврона слева от заголовка. Текст заголовка и иконка 
+        шеврона просто меняются местами с сохранением всех расстояний и размеров. При этом компоновка остальных 
+        элементов компонента никак не меняются.\n\nИспользуйте параметр iconPosition, чтобы управлять расположением шеврона.`,
+      },
     },
   },
 };
+
 //</editor-fold>
 
 //<editor-fold desc="Скрытие разделителей">
-const AccordionDividerStory: ComponentStory<typeof Accordion> = () => <AccordionDividerTemplate />;
+const AccordionDividerStory: StoryFn<typeof Accordion> = () => <AccordionDividerTemplate />;
 
-export const AccordionDivider = AccordionDividerStory.bind({});
-AccordionDivider.parameters = {
-  docs: {
-    source: {
-      code: AccordionDividerRaw,
-    },
-    description: {
-      story: `В зависимости от контекста можно включать-выключать разделители блоков компонента 
-      (верхнюю и нижнюю полоски). Например при использовании на подложке. Высота компонента при 
-      этом не меняется.\n\nДля отключения верхнего разделителя используйте параметр hideTopDivider, данный параметр 
-      скрывает верхний разделитель у первого AccordionItem, заданного внутри Accordion. Для отключения
-      нижнего разделителя используйте параметр hideBottomDivider, данный параметр скрывает нижний 
-      разделитель у последнего AccordionItem, заданного внутри Accordion.`,
+export const AccordionDivider = {
+  render: AccordionDividerStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: AccordionDividerRaw,
+      },
+      description: {
+        story: `В зависимости от контекста можно включать-выключать разделители блоков компонента 
+        (верхнюю и нижнюю полоски). Например при использовании на подложке. Высота компонента при 
+        этом не меняется.\n\nДля отключения верхнего разделителя используйте параметр hideTopDivider, данный параметр 
+        скрывает верхний разделитель у первого AccordionItem, заданного внутри Accordion. Для отключения
+        нижнего разделителя используйте параметр hideBottomDivider, данный параметр скрывает нижний 
+        разделитель у последнего AccordionItem, заданного внутри Accordion.`,
+      },
     },
   },
+
+  name: 'Accordion. Скрытие разделителей.',
 };
-AccordionDivider.storyName = 'Accordion. Скрытие разделителей.';
-//</editor-fold>

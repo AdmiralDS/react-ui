@@ -1,8 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
-
+import type { Meta, StoryFn } from '@storybook/react';
 import { Spinner } from '@admiral-ds/react-ui';
 
 import { SpinnerBaseTemplate, SpinnerDarkTemplate, SpinnerLightTemplate, SpinnerOthersTemplate } from './Templates';
@@ -34,7 +32,7 @@ const Description = () => (
 
 export default {
   title: 'Admiral-2.1/Spinner',
-  decorators: [withDesign],
+  decorators: undefined,
   component: Spinner,
   parameters: {
     docs: {
@@ -60,62 +58,81 @@ export default {
       control: false,
     },
   },
-} as ComponentMeta<typeof Spinner>;
+} as Meta<typeof Spinner>;
 
 //<editor-fold desc="Spinner. Базовый пример.">
-const SpinnerBaseStory: ComponentStory<typeof Spinner> = (props) => <SpinnerBaseTemplate {...cleanUpProps(props)} />;
+const SpinnerBaseStory: StoryFn<typeof Spinner> = (props) => <SpinnerBaseTemplate {...cleanUpProps(props)} />;
 
-export const SpinnerBase = SpinnerBaseStory.bind({});
-SpinnerBase.parameters = {
-  docs: {
-    source: {
-      code: SpinnerBaseRaw,
+export const SpinnerBase = {
+  render: SpinnerBaseStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: SpinnerBaseRaw,
+      },
     },
   },
+
+  name: 'Spinner. Базовый пример.',
 };
-SpinnerBase.storyName = 'Spinner. Базовый пример.';
+
 //</editor-fold>
 
 //<editor-fold desc="Spinner. Светлый фон.">
-const SpinnerLightStory: ComponentStory<typeof Spinner> = (props) => <SpinnerLightTemplate {...cleanUpProps(props)} />;
+const SpinnerLightStory: StoryFn<typeof Spinner> = (props) => <SpinnerLightTemplate {...cleanUpProps(props)} />;
 
-export const SpinnerLight = SpinnerLightStory.bind({});
-SpinnerLight.parameters = {
-  docs: {
-    source: {
-      code: SpinnerLightRaw,
+export const SpinnerLight = {
+  render: SpinnerLightStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: SpinnerLightRaw,
+      },
     },
   },
+
+  name: 'Spinner. Светлый фон.',
 };
-SpinnerLight.storyName = 'Spinner. Светлый фон.';
+
 //</editor-fold>
 
 //<editor-fold desc="Spinner. Темный фон.">
-const SpinnerDarkStory: ComponentStory<typeof Spinner> = (props) => <SpinnerDarkTemplate {...cleanUpProps(props)} />;
-export const SpinnerDark = SpinnerDarkStory.bind({});
-SpinnerDark.parameters = {
-  docs: {
-    source: {
-      code: SpinnerDarkRaw,
-    },
-    description: {
-      story: `На темных поверхностях применяется белый спинер`,
+const SpinnerDarkStory: StoryFn<typeof Spinner> = (props) => <SpinnerDarkTemplate {...cleanUpProps(props)} />;
+
+export const SpinnerDark = {
+  render: SpinnerDarkStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: SpinnerDarkRaw,
+      },
+      description: {
+        story: `На темных поверхностях применяется белый спинер`,
+      },
     },
   },
+
+  name: 'Spinner. Темный фон.',
 };
-SpinnerDark.storyName = 'Spinner. Темный фон.';
+
 //</editor-fold>
 
 //<editor-fold desc="Spinner. В составе других компонентов.">
-const SpinnerOthersStory: ComponentStory<typeof Spinner> = () => <SpinnerOthersTemplate />;
+const SpinnerOthersStory: StoryFn<typeof Spinner> = () => <SpinnerOthersTemplate />;
 
-export const SpinnerOthers = SpinnerOthersStory.bind({});
-SpinnerOthers.parameters = {
-  docs: {
-    source: {
-      code: SpinnerOthersRaw,
+export const SpinnerOthers = {
+  render: SpinnerOthersStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: SpinnerOthersRaw,
+      },
     },
   },
+
+  name: 'Spinner. В составе других компонентов.',
 };
-SpinnerOthers.storyName = 'Spinner. В составе других компонентов.';
-//</editor-fold>

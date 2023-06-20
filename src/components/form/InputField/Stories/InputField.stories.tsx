@@ -1,7 +1,5 @@
 import * as React from 'react';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
-
+import type { Meta, StoryFn } from '@storybook/react';
 import {
   InputField,
   INPUT_DIMENSIONS_VALUES,
@@ -19,7 +17,7 @@ import InputFieldInputRaw from '!!raw-loader!./Templates/InputFieldInput';
 export default {
   title: 'Admiral-2.1/Form Field/InputField',
   component: InputField,
-  decorators: [withDesign],
+  decorators: undefined,
   parameters: {
     docs: {
       source: {
@@ -101,20 +99,23 @@ export default {
       control: { type: 'boolean' },
     },
   },
-} as ComponentMeta<typeof InputField>;
+} as Meta<typeof InputField>;
 
 //<editor-fold desc="Input field example">
-const InputFieldInputStory: ComponentStory<typeof InputField> = (props) => (
+const InputFieldInputStory: StoryFn<typeof InputField> = (props) => (
   <InputFieldInputTemplate {...cleanUpProps(props)} />
 );
 
-export const InputFieldInput = InputFieldInputStory.bind({});
-InputFieldInput.parameters = {
-  docs: {
-    source: {
-      code: InputFieldInputRaw,
+export const InputFieldInput = {
+  render: InputFieldInputStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: InputFieldInputRaw,
+      },
     },
   },
+
+  name: 'Input field example',
 };
-InputFieldInput.storyName = 'Input field example';
-//</editor-fold>

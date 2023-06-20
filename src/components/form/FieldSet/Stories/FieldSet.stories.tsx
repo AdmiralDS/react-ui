@@ -1,6 +1,5 @@
 import * as React from 'react';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
+import type { Meta, StoryFn } from '@storybook/react';
 import styled from 'styled-components';
 
 import { FieldSet, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
@@ -27,7 +26,7 @@ const Description = () => (
 
 export default {
   title: 'Admiral-2.1/Form Field/FieldSet',
-  decorators: [withDesign],
+  decorators: undefined,
   component: FieldSet,
   parameters: {
     docs: {
@@ -69,36 +68,44 @@ export default {
       control: { type: 'radio' },
     },
   },
-} as ComponentMeta<typeof FieldSet>;
+} as Meta<typeof FieldSet>;
 
 //<editor-fold desc="">
-const FieldSetCheckboxStory: ComponentStory<typeof FieldSet> = (props: FieldSetPropsType) => (
+const FieldSetCheckboxStory: StoryFn<typeof FieldSet> = (props: FieldSetPropsType) => (
   <FieldSetCheckboxTemplate {...cleanUpProps(props)} />
 );
 
-export const FieldSetCheckbox = FieldSetCheckboxStory.bind({});
-FieldSetCheckbox.parameters = {
-  docs: {
-    source: {
-      code: FieldSetCheckboxRaw,
+export const FieldSetCheckbox = {
+  render: FieldSetCheckboxStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: FieldSetCheckboxRaw,
+      },
     },
   },
+
+  name: 'Checkbox Fieldset',
 };
-FieldSetCheckbox.storyName = 'Checkbox Fieldset';
+
 //</editor-fold>
 
 //<editor-fold desc="">
-const FieldSetRadioButtonStory: ComponentStory<typeof FieldSet> = (props) => (
+const FieldSetRadioButtonStory: StoryFn<typeof FieldSet> = (props) => (
   <FieldSetRadioButtonTemplate {...cleanUpProps(props)} />
 );
 
-export const FieldSetRadioButton = FieldSetRadioButtonStory.bind({});
-FieldSetRadioButton.parameters = {
-  docs: {
-    source: {
-      code: FieldSetRadioButtonRaw,
+export const FieldSetRadioButton = {
+  render: FieldSetRadioButtonStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: FieldSetRadioButtonRaw,
+      },
     },
   },
+
+  name: 'RadioGroup Fieldset',
 };
-FieldSetRadioButton.storyName = 'RadioGroup Fieldset';
-//</editor-fold>

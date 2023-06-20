@@ -1,7 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
+import type { Meta, StoryFn } from '@storybook/react';
 import { Badge } from '@admiral-ds/react-ui';
 
 import { BadgePlaygroundTemplate, BadgeVariantsTemplate, BadgeAccessabilityTemplate } from './Templates';
@@ -34,7 +33,7 @@ const Description = () => (
 
 export default {
   title: 'Admiral-2.1/Badge',
-  decorators: [withDesign],
+  decorators: undefined,
   component: Badge,
   parameters: {
     docs: {
@@ -90,48 +89,64 @@ export default {
       control: false,
     },
   },
-} as ComponentMeta<typeof Badge>;
+} as Meta<typeof Badge>;
 
 //<editor-fold desc="Playground">
-const PlaygroundStory: ComponentStory<typeof Badge> = (props) => <BadgePlaygroundTemplate {...cleanUpProps(props)} />;
-export const PlaygroundExample = PlaygroundStory.bind({});
-PlaygroundExample.parameters = {
-  docs: {
-    source: {
-      code: PlaygroundRaw,
+const PlaygroundStory: StoryFn<typeof Badge> = (props) => <BadgePlaygroundTemplate {...cleanUpProps(props)} />;
+
+export const PlaygroundExample = {
+  render: PlaygroundStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: PlaygroundRaw,
+      },
     },
   },
+
+  name: 'Playground',
 };
-PlaygroundExample.storyName = 'Playground';
+
 //</editor-fold>
 
 //<editor-fold desc="Варианты использования">
-const VariantsStory: ComponentStory<typeof Badge> = () => <BadgeVariantsTemplate />;
-export const VariantsExample = VariantsStory.bind({});
-VariantsExample.parameters = {
-  docs: {
-    source: {
-      code: VariantsRaw,
+const VariantsStory: StoryFn<typeof Badge> = () => <BadgeVariantsTemplate />;
+
+export const VariantsExample = {
+  render: VariantsStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: VariantsRaw,
+      },
     },
   },
+
+  name: 'Badge. Варианты использования.',
 };
-VariantsExample.storyName = 'Badge. Варианты использования.';
+
 //</editor-fold>
 
 //<editor-fold desc="Accessability">
-const AccessabilityStory: ComponentStory<typeof Badge> = () => <BadgeAccessabilityTemplate />;
-export const AccessabilityExample = AccessabilityStory.bind({});
-AccessabilityExample.parameters = {
-  docs: {
-    source: {
-      code: AccessabilityRaw,
-    },
-    description: {
-      story: `При фокусе на компоненте, включающем в себя компонент Badge, осуществляется следующая озвучка: 
-        "Количество <число, указанное в Badge>". При желании текст озвучки можно поменять с помощью атрибута 
-        aria-label, как это сделано во второй кнопке.`,
+const AccessabilityStory: StoryFn<typeof Badge> = () => <BadgeAccessabilityTemplate />;
+
+export const AccessabilityExample = {
+  render: AccessabilityStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: AccessabilityRaw,
+      },
+      description: {
+        story: `При фокусе на компоненте, включающем в себя компонент Badge, осуществляется следующая озвучка: 
+          "Количество <число, указанное в Badge>". При желании текст озвучки можно поменять с помощью атрибута 
+          aria-label, как это сделано во второй кнопке.`,
+      },
     },
   },
+
+  name: 'Badge. Accessability.',
 };
-AccessabilityExample.storyName = 'Badge. Accessability.';
-//</editor-fold>

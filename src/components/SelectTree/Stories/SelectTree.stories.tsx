@@ -1,6 +1,5 @@
 import * as React from 'react';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
+import type { Meta, StoryFn } from '@storybook/react';
 import styled from 'styled-components';
 
 import { SelectTree } from '@admiral-ds/react-ui';
@@ -29,7 +28,7 @@ const Description = () => (
 
 export default {
   title: 'Deprecated/SelectTree (Deprecated используйте Tree компонент)',
-  decorators: [withDesign],
+  decorators: undefined,
   component: SelectTree,
   parameters: {
     docs: {
@@ -64,52 +63,65 @@ export default {
       control: false,
     },
   },
-} as ComponentMeta<typeof SelectTree>;
+} as Meta<typeof SelectTree>;
 
 //<editor-fold desc="Select Tree. Размер М">
-const SelectTreeMStory: ComponentStory<typeof SelectTree> = (props) => (
+const SelectTreeMStory: StoryFn<typeof SelectTree> = (props) => (
   <SelectTreeMTemplate list={[]} {...cleanUpProps(props)} />
 );
 
-export const SelectTreeM = SelectTreeMStory.bind({});
-SelectTreeM.parameters = {
-  docs: {
-    source: {
-      code: SelectTreeMRaw,
+export const SelectTreeM = {
+  render: SelectTreeMStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: SelectTreeMRaw,
+      },
     },
   },
+
+  name: 'Select Tree. Размер М',
 };
-SelectTreeM.storyName = 'Select Tree. Размер М';
+
 //</editor-fold>
 
 //<editor-fold desc="Select Tree. Размер S">
-const SelectTreeSStory: ComponentStory<typeof SelectTree> = (props) => (
+const SelectTreeSStory: StoryFn<typeof SelectTree> = (props) => (
   <SelectTreeSTemplate list={[]} {...cleanUpProps(props)} />
 );
 
-export const SelectTreeS = SelectTreeSStory.bind({});
-SelectTreeS.parameters = {
-  docs: {
-    source: {
-      code: SelectTreeSRaw,
+export const SelectTreeS = {
+  render: SelectTreeSStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: SelectTreeSRaw,
+      },
     },
   },
+
+  name: 'Select Tree. Размер S',
 };
-SelectTreeS.storyName = 'Select Tree. Размер S';
+
 //</editor-fold>
 
 //<editor-fold desc="Select Tree. Развернутый список без опции выбора">
-const SelectTreeNoCheckboxStory: ComponentStory<typeof SelectTree> = (props) => (
+const SelectTreeNoCheckboxStory: StoryFn<typeof SelectTree> = (props) => (
   <SelectTreeNoCheckboxTemplate list={[]} {...cleanUpProps(props)} />
 );
 
-export const SelectTreeNoCheckbox = SelectTreeNoCheckboxStory.bind({});
-SelectTreeNoCheckbox.parameters = {
-  docs: {
-    source: {
-      code: SelectTreeNoCheckboxRaw,
+export const SelectTreeNoCheckbox = {
+  render: SelectTreeNoCheckboxStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: SelectTreeNoCheckboxRaw,
+      },
     },
   },
+
+  name: 'Select Tree. Развернутый список без опции выбора',
 };
-SelectTreeNoCheckbox.storyName = 'Select Tree. Развернутый список без опции выбора';
-//</editor-fold>

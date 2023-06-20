@@ -1,8 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
-
+import type { Meta, StoryFn } from '@storybook/react';
 import { StatusIndicator, T } from '@admiral-ds/react-ui';
 
 import {
@@ -29,7 +27,7 @@ const Description = () => (
 
 export default {
   title: 'Admiral-2.1/StatusIndicator',
-  decorators: [withDesign],
+  decorators: undefined,
   component: StatusIndicator,
   parameters: {
     docs: {
@@ -62,55 +60,64 @@ export default {
       control: false,
     },
   },
-} as ComponentMeta<typeof StatusIndicator>;
+} as Meta<typeof StatusIndicator>;
 
 //<editor-fold desc="Status Indicator. Playground">
-const StatusIndicatorPlaygroundStory: ComponentStory<typeof StatusIndicator> = (props) => (
+const StatusIndicatorPlaygroundStory: StoryFn<typeof StatusIndicator> = (props) => (
   <StatusIndicatorPlaygroundTemplate text={''} {...cleanUpProps(props)} />
 );
-export const StatusIndicatorPlayground = StatusIndicatorPlaygroundStory.bind({});
-StatusIndicatorPlayground.parameters = {
-  docs: {
-    source: {
-      code: StatusIndicatorPlaygroundRaw,
+
+export const StatusIndicatorPlayground = {
+  render: StatusIndicatorPlaygroundStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: StatusIndicatorPlaygroundRaw,
+      },
     },
   },
 };
+
 //</editor-fold>
 
 //<editor-fold desc="Status Indicator. Размеры компонента">
-const StatusIndicatorDimensionStory: ComponentStory<typeof StatusIndicator> = () => (
-  <StatusIndicatorDimensionTemplate />
-);
+const StatusIndicatorDimensionStory: StoryFn<typeof StatusIndicator> = () => <StatusIndicatorDimensionTemplate />;
 
-export const StatusIndicatorDimension = StatusIndicatorDimensionStory.bind({});
-StatusIndicatorDimension.storyName = 'Status Indicator. Размеры компонента';
-StatusIndicatorDimension.parameters = {
-  docs: {
-    source: {
-      code: StatusIndicatorDimensionRaw,
-    },
-    description: {
-      story: `Компонент регулируется только по высоте и представлен в размерах M (24px) и S (20px), ширина подстраивается под контент.`,
+export const StatusIndicatorDimension = {
+  render: StatusIndicatorDimensionStory,
+  name: 'Status Indicator. Размеры компонента',
+
+  parameters: {
+    docs: {
+      source: {
+        code: StatusIndicatorDimensionRaw,
+      },
+      description: {
+        story: `Компонент регулируется только по высоте и представлен в размерах M (24px) и S (20px), ширина подстраивается под контент.`,
+      },
     },
   },
 };
+
 //</editor-fold>
 
 //<editor-fold desc="Status Indicator. Альтернативные варианты отображения">
-const StatusIndicatorPositionStory: ComponentStory<typeof StatusIndicator> = () => <StatusIndicatorPositionTemplate />;
+const StatusIndicatorPositionStory: StoryFn<typeof StatusIndicator> = () => <StatusIndicatorPositionTemplate />;
 
-export const StatusIndicatorPosition = StatusIndicatorPositionStory.bind({});
-StatusIndicatorPosition.storyName = 'Status Indicator. Альтернативные варианты отображения';
-StatusIndicatorPosition.parameters = {
-  docs: {
-    source: {
-      code: StatusIndicatorPositionRaw,
-    },
-    description: {
-      story: `Через параметр cssMixin можно изменять цветовое отображение статуса. Также с помощью 
-      параметра displayRight можно управлять позиционированием иконки.`,
+export const StatusIndicatorPosition = {
+  render: StatusIndicatorPositionStory,
+  name: 'Status Indicator. Альтернативные варианты отображения',
+
+  parameters: {
+    docs: {
+      source: {
+        code: StatusIndicatorPositionRaw,
+      },
+      description: {
+        story: `Через параметр cssMixin можно изменять цветовое отображение статуса. Также с помощью 
+        параметра displayRight можно управлять позиционированием иконки.`,
+      },
     },
   },
 };
-//</editor-fold>

@@ -1,6 +1,5 @@
 import * as React from 'react';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
+import type { Meta, StoryFn } from '@storybook/react';
 import styled from 'styled-components';
 
 import { ProgressHeader } from '@admiral-ds/react-ui';
@@ -26,7 +25,7 @@ const Description = () => (
 
 export default {
   title: 'Admiral-2.1/ProgressHeader/Base',
-  decorators: [withDesign],
+  decorators: undefined,
   component: ProgressHeader,
   parameters: {
     docs: {
@@ -49,20 +48,22 @@ export default {
       control: { type: 'number' },
     },
   },
-} as ComponentMeta<typeof ProgressHeader>;
+} as Meta<typeof ProgressHeader>;
 
-const ProgressHeaderBaseStory: ComponentStory<typeof ProgressHeader> = (props) => (
+const ProgressHeaderBaseStory: StoryFn<typeof ProgressHeader> = (props) => (
   <ProgressHeaderBaseTemplate {...cleanUpProps(props)} />
 );
 
-//<editor-fold desc="Базовый пример">
-export const ProgressHeaderBase = ProgressHeaderBaseStory.bind({});
-ProgressHeaderBase.parameters = {
-  docs: {
-    source: {
-      code: ProgressHeaderBaseRaw,
+export const ProgressHeaderBase = {
+  render: ProgressHeaderBaseStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: ProgressHeaderBaseRaw,
+      },
     },
   },
+
+  name: 'Базовый пример',
 };
-ProgressHeaderBase.storyName = 'Базовый пример';
-//</editor-fold>

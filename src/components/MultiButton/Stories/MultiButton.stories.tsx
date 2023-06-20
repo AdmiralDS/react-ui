@@ -1,7 +1,5 @@
 import * as React from 'react';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
-
+import type { Meta, StoryFn } from '@storybook/react';
 import { MultiButton, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
@@ -14,7 +12,7 @@ import MultiButtonAppearanceRaw from '!!raw-loader!./Templates/MultiButtonAppear
 
 export default {
   title: 'Admiral-2.1/MultiButton',
-  decorators: [withDesign],
+  decorators: undefined,
   component: MultiButton,
   parameters: {
     docs: {
@@ -119,52 +117,65 @@ export default {
       control: { type: 'boolean' },
     },
   },
-} as ComponentMeta<typeof MultiButton>;
+} as Meta<typeof MultiButton>;
 
 //<editor-fold desc="MultiButton. Внешний вид.">
-const MultiButtonAppearanceStory: ComponentStory<typeof MultiButton> = (props) => (
+const MultiButtonAppearanceStory: StoryFn<typeof MultiButton> = (props) => (
   <MultiButtonAppearanceTemplate {...cleanUpProps(props)} />
 );
 
-export const MultiButtonAppearance = MultiButtonAppearanceStory.bind({});
-MultiButtonAppearance.parameters = {
-  docs: {
-    source: {
-      code: MultiButtonAppearanceRaw,
+export const MultiButtonAppearance = {
+  render: MultiButtonAppearanceStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: MultiButtonAppearanceRaw,
+      },
     },
   },
+
+  name: 'MultiButton. Внешний вид.',
 };
-MultiButtonAppearance.storyName = 'MultiButton. Внешний вид.';
+
 //</editor-fold>
 
 //<editor-fold desc="MultiButton. Задизейбленность.">
-const MultiButtonDisabledStory: ComponentStory<typeof MultiButton> = (props) => (
+const MultiButtonDisabledStory: StoryFn<typeof MultiButton> = (props) => (
   <MultiButtonDisabledTemplate {...cleanUpProps(props)} />
 );
 
-export const MultiButtonDisabled = MultiButtonDisabledStory.bind({});
-MultiButtonDisabled.parameters = {
-  docs: {
-    source: {
-      code: MultiButtonDisabledRaw,
+export const MultiButtonDisabled = {
+  render: MultiButtonDisabledStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: MultiButtonDisabledRaw,
+      },
     },
   },
+
+  name: 'MultiButton. Задизейбленность.',
 };
-MultiButtonDisabled.storyName = 'MultiButton. Задизейбленность.';
+
 //</editor-fold>
 
 //<editor-fold desc="MultiButton с иконкой.">
-const MultiButtonIconStory: ComponentStory<typeof MultiButton> = (props) => (
+const MultiButtonIconStory: StoryFn<typeof MultiButton> = (props) => (
   <MultiButtonIconTemplate {...cleanUpProps(props)} />
 );
 
-export const MultiButtonIcon = MultiButtonIconStory.bind({});
-MultiButtonIcon.parameters = {
-  docs: {
-    source: {
-      code: MultiButtonIconRaw,
+export const MultiButtonIcon = {
+  render: MultiButtonIconStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: MultiButtonIconRaw,
+      },
     },
   },
+
+  name: 'MultiButton с иконкой.',
 };
-MultiButtonIcon.storyName = 'MultiButton с иконкой.';
-//</editor-fold>

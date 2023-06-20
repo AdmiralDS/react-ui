@@ -1,6 +1,5 @@
 import * as React from 'react';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
+import type { Meta, StoryFn } from '@storybook/react';
 import { PaginationOne, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
 import { PaginationPlaygroundTemplate, PaginationTypesTemplate } from './Templates';
@@ -12,7 +11,7 @@ import PaginationTypesRaw from '!!raw-loader!./Templates/PaginationTypes';
 
 export default {
   title: 'Admiral-2.1/Data Table/PaginationOne',
-  decorators: [withDesign],
+  decorators: undefined,
   component: PaginationOne,
   parameters: {
     docs: {
@@ -79,10 +78,10 @@ export default {
       control: false,
     },
   },
-} as ComponentMeta<typeof PaginationOne>;
+} as Meta<typeof PaginationOne>;
 
 //<editor-fold desc="Playground">
-const PaginationPlaygroundStory: ComponentStory<typeof PaginationOne> = ({
+const PaginationPlaygroundStory: StoryFn<typeof PaginationOne> = ({
   page,
   pageSize,
   pageSizes,
@@ -99,18 +98,23 @@ const PaginationPlaygroundStory: ComponentStory<typeof PaginationOne> = ({
     {...cleanUpProps(props)}
   />
 );
-export const Playground = PaginationPlaygroundStory.bind({});
-Playground.parameters = {
-  docs: {
-    source: {
-      code: PaginationPlaygroundRaw,
+
+export const Playground = {
+  render: PaginationPlaygroundStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: PaginationPlaygroundRaw,
+      },
     },
   },
 };
+
 //</editor-fold>
 
 //<editor-fold desc="Complex and Simple">
-const PaginationTypesStory: ComponentStory<typeof PaginationOne> = ({
+const PaginationTypesStory: StoryFn<typeof PaginationOne> = ({
   page,
   pageSize,
   pageSizes,
@@ -127,13 +131,17 @@ const PaginationTypesStory: ComponentStory<typeof PaginationOne> = ({
     {...cleanUpProps(props)}
   />
 );
-export const PaginationTypesExample = PaginationTypesStory.bind({});
-PaginationTypesExample.parameters = {
-  docs: {
-    source: {
-      code: PaginationTypesRaw,
+
+export const PaginationTypesExample = {
+  render: PaginationTypesStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: PaginationTypesRaw,
+      },
     },
   },
+
+  name: 'PaginationOne: Complex and Simple',
 };
-PaginationTypesExample.storyName = 'PaginationOne: Complex and Simple';
-//</editor-fold>

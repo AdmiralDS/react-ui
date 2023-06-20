@@ -1,7 +1,5 @@
 import * as React from 'react';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
-
+import type { Meta, StoryFn } from '@storybook/react';
 import { Select, INPUT_DIMENSIONS_VALUES, INPUT_STATUS_VALUES, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
 import {
@@ -23,7 +21,7 @@ import MultiSelectRaw from '!!raw-loader!./Templates/Select/MultiSelect';
 export default {
   title: 'Admiral-2.1/Input/Select/режим "select"',
   component: Select,
-  decorators: [withDesign],
+  decorators: undefined,
   parameters: {
     design: {
       type: 'figma',
@@ -114,101 +112,127 @@ export default {
       control: false,
     },
   },
-} as ComponentMeta<typeof Select>;
+} as Meta<typeof Select>;
 
 //<editor-fold desc="Select. Простой Select">
-const SelectSimpleStory: ComponentStory<typeof Select> = (props) => <SelectSimpleTemplate {...cleanUpProps(props)} />;
+const SelectSimpleStory: StoryFn<typeof Select> = (props) => <SelectSimpleTemplate {...cleanUpProps(props)} />;
 
-export const SelectSimple = SelectSimpleStory.bind({});
-SelectSimple.parameters = {
-  docs: {
-    source: {
-      code: SelectSimpleRaw,
+export const SelectSimple = {
+  render: SelectSimpleStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: SelectSimpleRaw,
+      },
     },
   },
+
+  name: 'Select. Простой Select',
 };
-SelectSimple.storyName = 'Select. Простой Select';
+
 //</editor-fold>
 
 //<editor-fold desc="Отображается Title, tooltip скрыт">
-const SelectWithTitleStory: ComponentStory<typeof Select> = (props) => {
+const SelectWithTitleStory: StoryFn<typeof Select> = (props) => {
   return <SelectWithTitleTemplate {...cleanUpProps(props)} />;
 };
-export const SelectWithTitleExample = SelectWithTitleStory.bind({});
-SelectWithTitleExample.parameters = {
-  docs: {
-    source: {
-      code: SelectWithTitleRaw,
-    },
-    description: {
-      story:
-        'Для того чтобы скрыть tooltip, отображаемый при переполнении, необходимо установить свойство ' +
-        'forceHideOverflowTooltip={true}. Title является отображается стандартными средствами браузера, ' +
-        'поэтому не кастомизируется.',
+
+export const SelectWithTitleExample = {
+  render: SelectWithTitleStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: SelectWithTitleRaw,
+      },
+      description: {
+        story:
+          'Для того чтобы скрыть tooltip, отображаемый при переполнении, необходимо установить свойство ' +
+          'forceHideOverflowTooltip={true}. Title является отображается стандартными средствами браузера, ' +
+          'поэтому не кастомизируется.',
+      },
     },
   },
+
+  name: 'Отображается Title, tooltip скрыт',
 };
-SelectWithTitleExample.storyName = 'Отображается Title, tooltip скрыт';
+
 //</editor-fold>
 
 //<editor-fold desc="Кастомное отображение значения">
-const CustomRenderValueStory: ComponentStory<typeof Select> = (props) => {
+const CustomRenderValueStory: StoryFn<typeof Select> = (props) => {
   return <CustomRenderValueTemplate {...cleanUpProps(props)} />;
 };
 
-export const CustomRenderValueExample = CustomRenderValueStory.bind({});
-CustomRenderValueExample.args = {
-  defaultValue: 'Фидель',
-};
-CustomRenderValueExample.parameters = {
-  docs: {
-    source: {
-      code: CustomRenderValueRaw,
-    },
-    description: {
-      story:
-        'Для кастомного отображения выбранного значения необходимо использовать свойство renderSelectValue.' +
-        'Туда передается функция, получающая выбранные значения, и, возвращающая отображаемый ReactNode',
+export const CustomRenderValueExample = {
+  render: CustomRenderValueStory,
+
+  args: {
+    defaultValue: 'Фидель',
+  },
+
+  parameters: {
+    docs: {
+      source: {
+        code: CustomRenderValueRaw,
+      },
+      description: {
+        story:
+          'Для кастомного отображения выбранного значения необходимо использовать свойство renderSelectValue.' +
+          'Туда передается функция, получающая выбранные значения, и, возвращающая отображаемый ReactNode',
+      },
     },
   },
+
+  name: 'Кастомное отображение значения',
 };
-CustomRenderValueExample.storyName = 'Кастомное отображение значения';
+
 //</editor-fold>
 
 //<editor-fold desc="Кастомное отображение значения с множественным выбором">
-const CustomRenderMultipleValuesStory: ComponentStory<typeof Select> = (props) => {
+const CustomRenderMultipleValuesStory: StoryFn<typeof Select> = (props) => {
   return <CustomRenderMultipleValuesTemplate {...cleanUpProps(props)} />;
 };
 
-export const CustomRenderMultipleValuesExample = CustomRenderMultipleValuesStory.bind({});
-CustomRenderMultipleValuesExample.args = {
-  defaultValue: ['Фидель', 'Саша Даль'],
-};
-CustomRenderMultipleValuesExample.parameters = {
-  docs: {
-    source: {
-      code: CustomRenderMultipleValuesRaw,
-    },
-    description: {
-      story:
-        'Для кастомного отображения выбранного значения необходимо использовать свойство renderSelectValue.' +
-        'Туда передается функция, получающая выбранные значения, и, возвращающая массив отображаемых ReactNode',
+export const CustomRenderMultipleValuesExample = {
+  render: CustomRenderMultipleValuesStory,
+
+  args: {
+    defaultValue: ['Фидель', 'Саша Даль'],
+  },
+
+  parameters: {
+    docs: {
+      source: {
+        code: CustomRenderMultipleValuesRaw,
+      },
+      description: {
+        story:
+          'Для кастомного отображения выбранного значения необходимо использовать свойство renderSelectValue.' +
+          'Туда передается функция, получающая выбранные значения, и, возвращающая массив отображаемых ReactNode',
+      },
     },
   },
+
+  name: 'Кастомное отображение значения с множественным выбором',
 };
-CustomRenderMultipleValuesExample.storyName = 'Кастомное отображение значения с множественным выбором';
+
 //</editor-fold>
 
 //<editor-fold desc="Select. Простой MultiSelect">
-const MultiSelectStory: ComponentStory<typeof Select> = (props) => <MultiSelectTemplate {...cleanUpProps(props)} />;
+const MultiSelectStory: StoryFn<typeof Select> = (props) => <MultiSelectTemplate {...cleanUpProps(props)} />;
 
-export const MultiSelect = MultiSelectStory.bind({});
-MultiSelect.parameters = {
-  docs: {
-    source: {
-      code: MultiSelectRaw,
+export const MultiSelect = {
+  render: MultiSelectStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: MultiSelectRaw,
+      },
     },
   },
+
+  name: 'Select. Простой MultiSelect',
 };
-MultiSelect.storyName = 'Select. Простой MultiSelect';
-//</editor-fold>

@@ -1,6 +1,5 @@
 import * as React from 'react';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
+import type { Meta, StoryFn } from '@storybook/react';
 import styled from 'styled-components';
 
 import { Tooltip, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
@@ -75,7 +74,7 @@ const Description = () => (
 
 export default {
   title: 'Admiral-2.1/Tooltip',
-  decorators: [withDesign],
+  decorators: undefined,
   component: Tooltip,
   subcomponents: {
     TooltipHoc: TooltipHocStory,
@@ -118,129 +117,181 @@ export default {
       control: { type: 'radio' },
     },
   },
-} as ComponentMeta<typeof Tooltip>;
+} as Meta<typeof Tooltip>;
 
 //<editor-fold desc="Базовый пример">
-const TooltipBaseStory: ComponentStory<typeof Tooltip> = ({ renderContent, targetRef, ...props }) => (
+const TooltipBaseStory: StoryFn<typeof Tooltip> = ({ renderContent, targetRef, ...props }) => (
   <TooltipBaseTemplate renderContent={renderContent} targetRef={targetRef} {...cleanUpProps(props)} />
 );
-export const TooltipBaseExample = TooltipBaseStory.bind({});
-TooltipBaseExample.parameters = {
-  docs: {
-    source: {
-      code: TooltipBaseRaw,
+
+export const TooltipBaseExample = {
+  render: TooltipBaseStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: TooltipBaseRaw,
+      },
     },
   },
+
+  name: 'Tooltip. Базовый пример.',
 };
-TooltipBaseExample.storyName = 'Tooltip. Базовый пример.';
+
 //</editor-fold>
 
 //<editor-fold desc="Пример с MenuButton">
-const TooltipMenuButtonStory: ComponentStory<typeof Tooltip> = ({ renderContent, targetRef, ...props }) => (
+const TooltipMenuButtonStory: StoryFn<typeof Tooltip> = ({ renderContent, targetRef, ...props }) => (
   <TooltipMenuButtonTemplate renderContent={renderContent} targetRef={targetRef} {...cleanUpProps(props)} />
 );
-export const TooltipMenuButtonExample = TooltipMenuButtonStory.bind({});
-TooltipMenuButtonExample.parameters = {
-  docs: {
-    source: {
-      code: TooltipMenuButtonRaw,
+
+export const TooltipMenuButtonExample = {
+  render: TooltipMenuButtonStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: TooltipMenuButtonRaw,
+      },
     },
   },
+
+  name: 'Tooltip. Базовый пример с MenuButton.',
 };
-TooltipMenuButtonExample.storyName = 'Tooltip. Базовый пример с MenuButton.';
+
 //</editor-fold>
 
 //<editor-fold desc="Пример с задержкой в появлении">
-const TooltipDelayStory: ComponentStory<typeof Tooltip> = () => <TooltipDelayTemplate />;
-export const TooltipDelayExample = TooltipDelayStory.bind({});
-TooltipDelayExample.parameters = {
-  docs: {
-    source: {
-      code: TooltipDelayRaw,
+const TooltipDelayStory: StoryFn<typeof Tooltip> = () => <TooltipDelayTemplate />;
+
+export const TooltipDelayExample = {
+  render: TooltipDelayStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: TooltipDelayRaw,
+      },
     },
   },
+
+  name: 'Tooltip. Пример с задержкой в появлении.',
 };
-TooltipDelayExample.storyName = 'Tooltip. Пример с задержкой в появлении.';
+
 //</editor-fold>
 
 //<editor-fold desc="Пример с получением ref тултипа">
-const TooltipRefStory: ComponentStory<typeof Tooltip> = () => <TooltipRefTemplate />;
-export const TooltipRefExample = TooltipRefStory.bind({});
-TooltipRefExample.parameters = {
-  docs: {
-    source: {
-      code: TooltipRefRaw,
+const TooltipRefStory: StoryFn<typeof Tooltip> = () => <TooltipRefTemplate />;
+
+export const TooltipRefExample = {
+  render: TooltipRefStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: TooltipRefRaw,
+      },
     },
   },
+
+  name: 'Tooltip. Пример с получением ref тултипа.',
 };
-TooltipRefExample.storyName = 'Tooltip. Пример с получением ref тултипа.';
+
 //</editor-fold>
 
 //<editor-fold desc="TooltipHoc. Базовый пример.">
-const TooltipHocBaseStory: ComponentStory<typeof TooltipHocStory> = () => <TooltipHocBaseTemplate />;
-export const TooltipHocBaseExample = TooltipHocBaseStory.bind({});
-TooltipHocBaseExample.parameters = {
-  docs: {
-    source: {
-      code: TooltipHocBaseRaw,
+const TooltipHocBaseStory: StoryFn<typeof TooltipHocStory> = () => <TooltipHocBaseTemplate />;
+
+export const TooltipHocBaseExample = {
+  render: TooltipHocBaseStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: TooltipHocBaseRaw,
+      },
     },
   },
+
+  name: 'TooltipHoc. Базовый пример.',
 };
-TooltipHocBaseExample.storyName = 'TooltipHoc. Базовый пример.';
+
 //</editor-fold>
 
 //<editor-fold desc="TooltipHoc. Пример использования с классовым компонентом.">
-const TooltipHocClassStory: ComponentStory<typeof TooltipHocStory> = () => <TooltipHocClassTemplate />;
-export const TooltipHocClassExample = TooltipHocClassStory.bind({});
-TooltipHocClassExample.parameters = {
-  docs: {
-    source: {
-      code: TooltipHocClassRaw,
+const TooltipHocClassStory: StoryFn<typeof TooltipHocStory> = () => <TooltipHocClassTemplate />;
+
+export const TooltipHocClassExample = {
+  render: TooltipHocClassStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: TooltipHocClassRaw,
+      },
     },
   },
+
+  name: 'TooltipHoc. Пример использования с классовым компонентом.',
 };
-TooltipHocClassExample.storyName = 'TooltipHoc. Пример использования с классовым компонентом.';
+
 //</editor-fold>
 
 //<editor-fold desc="TooltipHoc. Пример использования с функциональным компонентом.">
-const TooltipHocFCStory: ComponentStory<typeof TooltipHocStory> = () => <TooltipHocFCTemplate />;
-export const TooltipHocFCExample = TooltipHocFCStory.bind({});
-TooltipHocFCExample.parameters = {
-  docs: {
-    source: {
-      code: TooltipHocFCRaw,
+const TooltipHocFCStory: StoryFn<typeof TooltipHocStory> = () => <TooltipHocFCTemplate />;
+
+export const TooltipHocFCExample = {
+  render: TooltipHocFCStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: TooltipHocFCRaw,
+      },
     },
   },
+
+  name: 'TooltipHoc. Пример использования с функциональным компонентом.',
 };
-TooltipHocFCExample.storyName = 'TooltipHoc. Пример использования с функциональным компонентом.';
+
 //</editor-fold>
 
 //<editor-fold desc="TooltipHoc. Утилита refSetter для мерджа рефов.">
-const TooltipHocRefSetterStory: ComponentStory<typeof TooltipHocStory> = () => <TooltipHocRefSetterTemplate />;
-export const TooltipHocRefSetterExample = TooltipHocRefSetterStory.bind({});
-TooltipHocRefSetterExample.parameters = {
-  docs: {
-    source: {
-      code: TooltipHocRefSetterRaw,
-    },
-    description: {
-      story: `Если в ваш компонент извне передан параметр ref и у вас есть внутренний
-      ref в компоненте, для синхронной работы данных рефов и их мерджа вы можете воспользоваться утилитой refSetter.`,
+const TooltipHocRefSetterStory: StoryFn<typeof TooltipHocStory> = () => <TooltipHocRefSetterTemplate />;
+
+export const TooltipHocRefSetterExample = {
+  render: TooltipHocRefSetterStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: TooltipHocRefSetterRaw,
+      },
+      description: {
+        story: `Если в ваш компонент извне передан параметр ref и у вас есть внутренний
+        ref в компоненте, для синхронной работы данных рефов и их мерджа вы можете воспользоваться утилитой refSetter.`,
+      },
     },
   },
+
+  name: 'TooltipHoc. Утилита refSetter для мерджа рефов.',
 };
-TooltipHocRefSetterExample.storyName = 'TooltipHoc. Утилита refSetter для мерджа рефов.';
+
 //</editor-fold>
 
 //<editor-fold desc="TooltipHoc. Прокидывание ref на результат вызова TooltipHoc.">
-const TooltipHocRefStory: ComponentStory<typeof TooltipHocStory> = () => <TooltipHocRefTemplate />;
-export const TooltipHocRefExample = TooltipHocRefStory.bind({});
-TooltipHocRefExample.parameters = {
-  docs: {
-    source: {
-      code: TooltipHocRefRaw,
+const TooltipHocRefStory: StoryFn<typeof TooltipHocStory> = () => <TooltipHocRefTemplate />;
+
+export const TooltipHocRefExample = {
+  render: TooltipHocRefStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: TooltipHocRefRaw,
+      },
     },
   },
+
+  name: 'TooltipHoc. Прокидывание ref на результат вызова TooltipHoc.',
 };
-TooltipHocRefExample.storyName = 'TooltipHoc. Прокидывание ref на результат вызова TooltipHoc.';
-//</editor-fold>

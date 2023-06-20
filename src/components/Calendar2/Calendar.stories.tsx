@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
+import type { Meta, StoryFn } from '@storybook/react';
 import { Button } from '#src/components/Button';
 
 import type { CalendarPropType } from '#src/components/Calendar2/index';
@@ -15,7 +14,7 @@ import { startOfDay } from '#src/components/Calendar/date-utils';
 
 export default {
   title: 'Admiral-2.1/Calendar2',
-  decorators: [withDesign],
+  decorators: undefined,
   component: Calendar,
   parameters: {
     docs: {
@@ -68,9 +67,9 @@ export default {
       control: { type: 'radio' },
     },
   },
-} as ComponentMeta<typeof Calendar>;
+} as Meta<typeof Calendar>;
 
-const Template1: ComponentStory<typeof Calendar> = (args) => {
+const Template1: StoryFn<typeof Calendar> = (args) => {
   const [selected, setSelected] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
 
@@ -105,7 +104,7 @@ const Template1: ComponentStory<typeof Calendar> = (args) => {
   );
 };
 
-const Template2: ComponentStory<typeof Calendar> = (args: CalendarPropType) => {
+const Template2: StoryFn<typeof Calendar> = (args: CalendarPropType) => {
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
   return (
@@ -124,7 +123,7 @@ const Template2: ComponentStory<typeof Calendar> = (args: CalendarPropType) => {
   );
 };
 
-const Template3: ComponentStory<typeof Calendar> = ({ range, ...args }: CalendarPropType) => {
+const Template3: StoryFn<typeof Calendar> = ({ range, ...args }: CalendarPropType) => {
   const [selected, setSelected] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
   const tomorrow = new Date();
@@ -157,7 +156,7 @@ const Template3: ComponentStory<typeof Calendar> = ({ range, ...args }: Calendar
   );
 };
 
-const Template4: ComponentStory<typeof Calendar> = ({ range, ...args }: CalendarPropType) => {
+const Template4: StoryFn<typeof Calendar> = ({ range, ...args }: CalendarPropType) => {
   const [selected, setSelected] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
   const isWeekday = (date: Date) => {
@@ -192,7 +191,7 @@ const Template4: ComponentStory<typeof Calendar> = ({ range, ...args }: Calendar
   );
 };
 
-const Template5: ComponentStory<typeof Calendar> = ({ range, ...args }: CalendarPropType) => {
+const Template5: StoryFn<typeof Calendar> = ({ range, ...args }: CalendarPropType) => {
   const [selected, setSelected] = useState<Date | null>(null);
 
   return (
@@ -227,7 +226,7 @@ const Template5: ComponentStory<typeof Calendar> = ({ range, ...args }: Calendar
   );
 };
 
-const Template6: ComponentStory<typeof Calendar> = ({ range, ...args }: CalendarPropType) => {
+const Template6: StoryFn<typeof Calendar> = ({ range, ...args }: CalendarPropType) => {
   const [selected, setSelected] = useState<Date | null>(null);
   const [currentActiveView, setCurrentActiveView] = useState<ViewScreenType | null>(null);
 
@@ -281,7 +280,7 @@ const Template6: ComponentStory<typeof Calendar> = ({ range, ...args }: Calendar
   );
 };
 
-const Template7: ComponentStory<typeof Calendar> = ({ range, ...args }: CalendarPropType) => {
+const Template7: StoryFn<typeof Calendar> = ({ range, ...args }: CalendarPropType) => {
   const [selected, setSelected] = useState<Date | null>(null);
   const [currentActiveView, setActiveViewDateScreen] = useState<ViewScreenType | null>(null);
 
@@ -310,7 +309,7 @@ const Template7: ComponentStory<typeof Calendar> = ({ range, ...args }: Calendar
   );
 };
 
-const Template8: ComponentStory<typeof Calendar> = ({ range, ...args }: CalendarPropType) => {
+const Template8: StoryFn<typeof Calendar> = ({ range, ...args }: CalendarPropType) => {
   const [selected, setSelected] = useState<Date | null>(null);
   const [currentActiveView, setCurrentActiveView] = useState<ViewScreenType | null>('MONTH');
 
@@ -617,7 +616,7 @@ const holidayDates = new Map(
   }),
 );
 
-const Template9: ComponentStory<typeof Calendar> = (args) => {
+const Template9: StoryFn<typeof Calendar> = (args) => {
   const [selected, setSelected] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
 
@@ -669,38 +668,56 @@ const Template9: ComponentStory<typeof Calendar> = (args) => {
   );
 };
 
-export const CalendarSimple = Template1.bind({});
-CalendarSimple.args = {};
-CalendarSimple.storyName = 'Simple.';
+export const CalendarSimple = {
+  render: Template1,
+  args: {},
+  name: 'Simple.',
+};
 
-export const Range = Template2.bind({});
-Range.args = {};
-Range.storyName = 'Range.';
+export const Range = {
+  render: Template2,
+  args: {},
+  name: 'Range.',
+};
 
-export const SimpleWithMaxDate = Template3.bind({});
-SimpleWithMaxDate.args = {};
-SimpleWithMaxDate.storyName = 'maxDate.';
+export const SimpleWithMaxDate = {
+  render: Template3,
+  args: {},
+  name: 'maxDate.',
+};
 
-export const SimpleWithFilterDate = Template4.bind({});
-SimpleWithFilterDate.args = {};
-SimpleWithFilterDate.storyName = 'FilterDate.';
+export const SimpleWithFilterDate = {
+  render: Template4,
+  args: {},
+  name: 'FilterDate.',
+};
 
-export const SimpleWithChangeViewDate = Template5.bind({});
-SimpleWithChangeViewDate.args = {};
-SimpleWithChangeViewDate.storyName = 'Callback';
+export const SimpleWithChangeViewDate = {
+  render: Template5,
+  args: {},
+  name: 'Callback',
+};
 
-export const SimpleWithSetActiveViewDate = Template6.bind({});
-SimpleWithSetActiveViewDate.args = {};
-SimpleWithSetActiveViewDate.storyName = 'Active ViewDate screen';
+export const SimpleWithSetActiveViewDate = {
+  render: Template6,
+  args: {},
+  name: 'Active ViewDate screen',
+};
 
-export const SimpleWithSetActiveViewDateAfterChooseYear = Template7.bind({});
-SimpleWithSetActiveViewDateAfterChooseYear.args = {};
-SimpleWithSetActiveViewDateAfterChooseYear.storyName = 'ViewDate screen after choose year';
+export const SimpleWithSetActiveViewDateAfterChooseYear = {
+  render: Template7,
+  args: {},
+  name: 'ViewDate screen after choose year',
+};
 
-export const SimpleWithSetActiveViewWithOutDay = Template8.bind({});
-SimpleWithSetActiveViewWithOutDay.args = {};
-SimpleWithSetActiveViewWithOutDay.storyName = 'ViewDate year/month';
+export const SimpleWithSetActiveViewWithOutDay = {
+  render: Template8,
+  args: {},
+  name: 'ViewDate year/month',
+};
 
-export const SimpleWithSpecialDates = Template9.bind({});
-SimpleWithSpecialDates.args = {};
-SimpleWithSpecialDates.storyName = 'Highlight special dates';
+export const SimpleWithSpecialDates = {
+  render: Template9,
+  args: {},
+  name: 'Highlight special dates',
+};

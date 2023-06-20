@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { withDesign } from 'storybook-addon-designs';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { Meta, StoryFn } from '@storybook/react';
 
 import { Pill, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
@@ -15,7 +14,7 @@ import PillWithTooltipRaw from '!!raw-loader!./Templates/PillWithTooltip';
 
 export default {
   title: 'Admiral-2.1/Pills',
-  decorators: [withDesign],
+  decorators: undefined,
   component: Pill,
   parameters: {
     layout: 'centered',
@@ -44,60 +43,78 @@ export default {
       control: { type: 'radio' },
     },
   },
-} as ComponentMeta<typeof Pill>;
+} as Meta<typeof Pill>;
 
 //<editor-fold desc="Pills. Базовый пример.">
-const SimplePillsStory: ComponentStory<typeof Pill> = (props) => <SimplePillsTemplate {...cleanUpProps(props)} />;
+const SimplePillsStory: StoryFn<typeof Pill> = (props) => <SimplePillsTemplate {...cleanUpProps(props)} />;
 
-export const SimplePills = SimplePillsStory.bind({});
-SimplePills.parameters = {
-  docs: {
-    source: {
-      code: SimplePillsRaw,
+export const SimplePills = {
+  render: SimplePillsStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: SimplePillsRaw,
+      },
     },
   },
+
+  name: 'Pills. Базовый пример.',
 };
-SimplePills.storyName = 'Pills. Базовый пример.';
+
 //</editor-fold>
 
 //<editor-fold desc="PillMenu. Pill с выпадающим списком.">
-const PillMenuStory: ComponentStory<typeof Pill> = (props) => <PillsMenuTemplate {...cleanUpProps(props)} />;
+const PillMenuStory: StoryFn<typeof Pill> = (props) => <PillsMenuTemplate {...cleanUpProps(props)} />;
 
-export const PillsMenu = PillMenuStory.bind({});
-PillsMenu.parameters = {
-  docs: {
-    source: {
-      code: PillsMenuRaw,
+export const PillsMenu = {
+  render: PillMenuStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: PillsMenuRaw,
+      },
     },
   },
+
+  name: 'PillMenu. Pill с выпадающим списком.',
 };
-PillsMenu.storyName = 'PillMenu. Pill с выпадающим списком.';
+
 //</editor-fold>
 
 //<editor-fold desc="NestedPills.">
-const NestedPillsStory: ComponentStory<typeof Pill> = () => <NestedPillsTemplate />;
+const NestedPillsStory: StoryFn<typeof Pill> = () => <NestedPillsTemplate />;
 
-export const NestedPills = NestedPillsStory.bind({});
-NestedPills.parameters = {
-  docs: {
-    source: {
-      code: NestedPillsRaw,
+export const NestedPills = {
+  render: NestedPillsStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: NestedPillsRaw,
+      },
     },
   },
+
+  name: 'NestedPills.',
 };
-NestedPills.storyName = 'NestedPills.';
+
 //</editor-fold>
 
 //<editor-fold desc="Pill с Tooltip.">
-const PillWithTooltipStory: ComponentStory<typeof Pill> = () => <PillWithTooltipTemplate />;
+const PillWithTooltipStory: StoryFn<typeof Pill> = () => <PillWithTooltipTemplate />;
 
-export const PillWithTooltip = PillWithTooltipStory.bind({});
-PillWithTooltip.parameters = {
-  docs: {
-    source: {
-      code: PillWithTooltipRaw,
+export const PillWithTooltip = {
+  render: PillWithTooltipStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: PillWithTooltipRaw,
+      },
     },
   },
+
+  name: 'Pill с Tooltip.',
 };
-PillWithTooltip.storyName = 'Pill с Tooltip.';
-//</editor-fold>

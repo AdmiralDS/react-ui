@@ -1,7 +1,5 @@
 import * as React from 'react';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
-
+import type { Meta, StoryFn } from '@storybook/react';
 import {
   DateInput,
   INPUT_DIMENSIONS_VALUES,
@@ -20,7 +18,7 @@ import DateInputPickMonthRaw from '!!raw-loader!./Templates/DateInputPickMonth';
 export default {
   title: 'Admiral-2.1/Input/DateInput',
   component: DateInput,
-  decorators: [withDesign],
+  decorators: undefined,
   parameters: {
     docs: {
       source: {
@@ -165,52 +163,65 @@ export default {
       control: { type: 'radio' },
     },
   },
-} as ComponentMeta<typeof DateInput>;
+} as Meta<typeof DateInput>;
 
 //<editor-fold desc="DateInput (input type="date")">
-const DateInputPlaygroundStory: ComponentStory<typeof DateInput> = (props) => (
+const DateInputPlaygroundStory: StoryFn<typeof DateInput> = (props) => (
   <DateInputPlaygroundTemplate {...cleanUpProps(props)} defaultIsCalendarOpen={true} />
 );
 
-export const DateInputPlayground = DateInputPlaygroundStory.bind({});
-DateInputPlayground.parameters = {
-  docs: {
-    source: {
-      code: DateInputPlaygroundRaw,
+export const DateInputPlayground = {
+  render: DateInputPlaygroundStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: DateInputPlaygroundRaw,
+      },
     },
   },
+
+  name: 'DateInput (input type="date")',
 };
-DateInputPlayground.storyName = 'DateInput (input type="date")';
+
 //</editor-fold>
 
 //<editor-fold desc="DateInput. Альтернативная иконка">
-const DateInputCustomIconStory: ComponentStory<typeof DateInput> = (props) => (
+const DateInputCustomIconStory: StoryFn<typeof DateInput> = (props) => (
   <DateInputPlaygroundTemplate {...cleanUpProps(props)} icon={CalendarSolidSVG} />
 );
 
-export const DateInputCustomIcon = DateInputCustomIconStory.bind({});
-DateInputCustomIcon.parameters = {
-  docs: {
-    source: {
-      code: DateInputPlaygroundRaw,
+export const DateInputCustomIcon = {
+  render: DateInputCustomIconStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: DateInputPlaygroundRaw,
+      },
     },
   },
+
+  name: 'DateInput. Альтернативная иконка',
 };
-DateInputCustomIcon.storyName = 'DateInput. Альтернативная иконка';
+
 //</editor-fold>
 
 //<editor-fold desc="DateInput. Выбор месяца">
-const DateInputPickMonthStory: ComponentStory<typeof DateInput> = (props) => (
+const DateInputPickMonthStory: StoryFn<typeof DateInput> = (props) => (
   <DateInputPickMonthTemplate {...cleanUpProps(props)} />
 );
 
-export const DateInputPickMonth = DateInputPickMonthStory.bind({});
-DateInputPickMonth.parameters = {
-  docs: {
-    source: {
-      code: DateInputPickMonthRaw,
+export const DateInputPickMonth = {
+  render: DateInputPickMonthStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: DateInputPickMonthRaw,
+      },
     },
   },
+
+  name: 'DateInput. Выбор месяца',
 };
-DateInputPickMonth.storyName = 'DateInput. Выбор месяца';
-//</editor-fold>

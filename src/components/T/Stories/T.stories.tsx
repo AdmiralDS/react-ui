@@ -1,8 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
-
+import type { Meta, StoryFn } from '@storybook/react';
 import { T } from '@admiral-ds/react-ui';
 
 import { FontsDemoTemplate, TextStatusTemplate } from './Templates';
@@ -27,7 +25,7 @@ const Description = () => (
 
 export default {
   title: 'Admiral-2.1/T',
-  decorators: [withDesign],
+  decorators: undefined,
   component: T,
   parameters: {
     docs: {
@@ -46,44 +44,49 @@ export default {
       control: { type: 'boolean' },
     },
   },
-} as ComponentMeta<typeof T>;
+} as Meta<typeof T>;
 
 //<editor-fold desc="Text">
-const TextStatusStory: ComponentStory<typeof T> = (props) => (
-  <TextStatusTemplate font={'Main/XXL'} {...cleanUpProps(props)} />
-);
+const TextStatusStory: StoryFn<typeof T> = (props) => <TextStatusTemplate font={'Main/XXL'} {...cleanUpProps(props)} />;
 
-export const TextStatus = TextStatusStory.bind({});
-TextStatus.parameters = {
-  docs: {
-    source: {
-      code: TextStatusRaw,
+export const TextStatus = {
+  render: TextStatusStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: TextStatusRaw,
+      },
     },
   },
+
+  name: 'Text',
 };
-TextStatus.storyName = 'Text';
+
 //</editor-fold>
 
 //<editor-fold desc="Список стилей">
-const FontsDemoStory: ComponentStory<typeof T> = () => <FontsDemoTemplate />;
+const FontsDemoStory: StoryFn<typeof T> = () => <FontsDemoTemplate />;
 
-export const FontsDemo = FontsDemoStory.bind({});
-FontsDemo.storyName = 'Список стилей';
-FontsDemo.parameters = {
-  docs: {
-    source: {
-      code: FontsDemoRaw,
-    },
-    description: {
-      story: `Ниже представлены таблицы стилей типографики, старая и обновленная версия, на которую постепенно будет произведен перевод библиотеки.
-      Каждый из этих стилей можно передавать в компонент T в виде параметра font и в качестве результата получать StyledComponent с
-      необходимыми стилями. \n\nТакже возможен случай, когда пользователю нужен css миксин (ThemedCssFunction) с определенными
-      стилями типографики для последующего использования этого миксина в своих styled-компонентах.
-      В таком случае можно воспользоваться объектом typography, экспортируемым из нашей библиотеки. Ключами
-      этого объекта служат названия стилей типографики, а значениями css миксины.\n\nРядом с названием стиля типографики
-      находится иконка копирования, по нажатию на которую можно будет скопировать
-      пример кода для каждого стиля в отдельности.`,
+export const FontsDemo = {
+  render: FontsDemoStory,
+  name: 'Список стилей',
+
+  parameters: {
+    docs: {
+      source: {
+        code: FontsDemoRaw,
+      },
+      description: {
+        story: `Ниже представлены таблицы стилей типографики, старая и обновленная версия, на которую постепенно будет произведен перевод библиотеки.
+        Каждый из этих стилей можно передавать в компонент T в виде параметра font и в качестве результата получать StyledComponent с
+        необходимыми стилями. \n\nТакже возможен случай, когда пользователю нужен css миксин (ThemedCssFunction) с определенными
+        стилями типографики для последующего использования этого миксина в своих styled-компонентах.
+        В таком случае можно воспользоваться объектом typography, экспортируемым из нашей библиотеки. Ключами
+        этого объекта служат названия стилей типографики, а значениями css миксины.\n\nРядом с названием стиля типографики
+        находится иконка копирования, по нажатию на которую можно будет скопировать
+        пример кода для каждого стиля в отдельности.`,
+      },
     },
   },
 };
-//</editor-fold>

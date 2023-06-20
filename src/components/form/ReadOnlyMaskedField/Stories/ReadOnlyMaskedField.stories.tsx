@@ -1,7 +1,5 @@
 import * as React from 'react';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
-
+import type { Meta, StoryFn } from '@storybook/react';
 import { Field, INPUT_DIMENSIONS_VALUES, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
 import { ReadOnlyMaskedFieldTemplate } from './Templates';
@@ -14,7 +12,7 @@ import ReadOnlyMaskedFieldRaw from '!!raw-loader!./Templates/ReadOnlyMaskedField
 export default {
   title: 'Admiral-2.1/Form Field/ReadOnlyMaskedField',
   component: Field,
-  decorators: [withDesign],
+  decorators: undefined,
   parameters: {
     docs: {
       source: {
@@ -57,20 +55,23 @@ export default {
       control: false,
     },
   },
-} as ComponentMeta<typeof Field>;
+} as Meta<typeof Field>;
 
 //<editor-fold desc="ReadOnly masked field">
-const ReadOnlyMaskedFieldStory: ComponentStory<typeof Field> = (props) => {
+const ReadOnlyMaskedFieldStory: StoryFn<typeof Field> = (props) => {
   return <ReadOnlyMaskedFieldTemplate {...cleanUpProps(props)} />;
 };
 
-export const ReadOnlyMaskedField = ReadOnlyMaskedFieldStory.bind({});
-ReadOnlyMaskedField.parameters = {
-  docs: {
-    source: {
-      code: ReadOnlyMaskedFieldRaw,
+export const ReadOnlyMaskedField = {
+  render: ReadOnlyMaskedFieldStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: ReadOnlyMaskedFieldRaw,
+      },
     },
   },
+
+  name: 'ReadOnly masked field',
 };
-ReadOnlyMaskedField.storyName = 'ReadOnly masked field';
-//</editor-fold>

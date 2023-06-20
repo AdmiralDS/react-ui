@@ -1,6 +1,5 @@
 import * as React from 'react';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
+import type { Meta, StoryFn } from '@storybook/react';
 import styled from 'styled-components';
 
 import { Toggle } from '@admiral-ds/react-ui';
@@ -45,7 +44,7 @@ const Description = () => (
 
 export default {
   title: 'Admiral-2.1/Toggle',
-  decorators: [withDesign],
+  decorators: undefined,
   component: Toggle,
   parameters: {
     docs: {
@@ -94,100 +93,123 @@ export default {
       control: { type: 'text' },
     },
   },
-} as ComponentMeta<typeof Toggle>;
+} as Meta<typeof Toggle>;
 
 //<editor-fold desc="Toggle. Playground">
-const TogglePlaygroundStory: ComponentStory<typeof Toggle> = (props) => (
-  <TogglePlaygroundTemplate {...cleanUpProps(props)} />
-);
+const TogglePlaygroundStory: StoryFn<typeof Toggle> = (props) => <TogglePlaygroundTemplate {...cleanUpProps(props)} />;
 
-export const TogglePlayground = TogglePlaygroundStory.bind({});
-TogglePlayground.parameters = {
-  docs: {
-    source: {
-      code: TogglePlaygroundRaw,
+export const TogglePlayground = {
+  render: TogglePlaygroundStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: TogglePlaygroundRaw,
+      },
     },
   },
+
+  name: 'Toggle. Playground',
 };
-TogglePlayground.storyName = 'Toggle. Playground';
+
 //</editor-fold>
 
 //<editor-fold desc="Toggle. Размеры">
-const ToggleDimensionStory: ComponentStory<typeof Toggle> = () => <ToggleDimensionTemplate />;
+const ToggleDimensionStory: StoryFn<typeof Toggle> = () => <ToggleDimensionTemplate />;
 
-export const ToggleDimension = ToggleDimensionStory.bind({});
-ToggleDimension.parameters = {
-  docs: {
-    source: {
-      code: ToggleDimensionRaw,
+export const ToggleDimension = {
+  render: ToggleDimensionStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: ToggleDimensionRaw,
+      },
     },
   },
+
+  name: 'Toggle. Размеры',
 };
-ToggleDimension.storyName = 'Toggle. Размеры';
+
 //</editor-fold>
 
 //<editor-fold desc="Toggle. Состояния">
-const ToggleStateStory: ComponentStory<typeof Toggle> = () => <ToggleStateTemplate />;
+const ToggleStateStory: StoryFn<typeof Toggle> = () => <ToggleStateTemplate />;
 
-export const ToggleState = ToggleStateStory.bind({});
-ToggleState.parameters = {
-  docs: {
-    source: {
-      code: ToggleStateRaw,
+export const ToggleState = {
+  render: ToggleStateStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: ToggleStateRaw,
+      },
     },
   },
+
+  name: 'Toggle. Состояния',
 };
-ToggleState.storyName = 'Toggle. Состояния';
+
 //</editor-fold>
 
 //<editor-fold desc="Toggle. Расположение подписи">
-const ToggleLabelStory: ComponentStory<typeof Toggle> = () => <ToggleLabelTemplate />;
+const ToggleLabelStory: StoryFn<typeof Toggle> = () => <ToggleLabelTemplate />;
 
-export const ToggleLabel = ToggleLabelStory.bind({});
-ToggleLabel.storyName = 'Toggle. Расположение подписи';
-ToggleLabel.parameters = {
-  docs: {
-    source: {
-      code: ToggleLabelRaw,
-    },
-    description: {
-      story: `Варианты компонента без подписи, с подписью слева и справа.`,
+export const ToggleLabel = {
+  render: ToggleLabelStory,
+  name: 'Toggle. Расположение подписи',
+
+  parameters: {
+    docs: {
+      source: {
+        code: ToggleLabelRaw,
+      },
+      description: {
+        story: `Варианты компонента без подписи, с подписью слева и справа.`,
+      },
     },
   },
 };
+
 //</editor-fold>
 
 //<editor-fold desc="Toggle. Дополнительный текст">
-const ToggleHintStory: ComponentStory<typeof Toggle> = () => <ToggleHintTemplate />;
+const ToggleHintStory: StoryFn<typeof Toggle> = () => <ToggleHintTemplate />;
 
-export const ToggleHint = ToggleHintStory.bind({});
-ToggleHint.storyName = 'Toggle. Дополнительный текст';
-ToggleHint.parameters = {
-  docs: {
-    source: {
-      code: ToggleHintRaw,
-    },
-    description: {
-      story: `Варианты компонента с дополнительным текстом.`,
+export const ToggleHint = {
+  render: ToggleHintStory,
+  name: 'Toggle. Дополнительный текст',
+
+  parameters: {
+    docs: {
+      source: {
+        code: ToggleHintRaw,
+      },
+      description: {
+        story: `Варианты компонента с дополнительным текстом.`,
+      },
     },
   },
 };
+
 //</editor-fold>
 
 //<editor-fold desc="Toggle. Адаптив">
-const ToggleMobileStory: ComponentStory<typeof Toggle> = () => <ToggleMobileTemplate />;
+const ToggleMobileStory: StoryFn<typeof Toggle> = () => <ToggleMobileTemplate />;
 
-export const ToggleMobile = ToggleMobileStory.bind({});
-ToggleMobile.storyName = 'Toggle. Адаптив';
-ToggleMobile.parameters = {
-  docs: {
-    source: {
-      code: ToggleMobileRaw,
-    },
-    description: {
-      story: `При создании отдельных макетов для мобильных устройств, рекомендуется использовать вариацию комопнента размера M с текстом слева, который можно
-      вытянуть на всю ширину экрана.`,
+export const ToggleMobile = {
+  render: ToggleMobileStory,
+  name: 'Toggle. Адаптив',
+
+  parameters: {
+    docs: {
+      source: {
+        code: ToggleMobileRaw,
+      },
+      description: {
+        story: `При создании отдельных макетов для мобильных устройств, рекомендуется использовать вариацию комопнента размера M с текстом слева, который можно
+        вытянуть на всю ширину экрана.`,
+      },
     },
   },
 };
-//</editor-fold>

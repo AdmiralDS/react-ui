@@ -1,7 +1,5 @@
 import * as React from 'react';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
-
+import type { Meta, StoryFn } from '@storybook/react';
 import { NumberInputField, INPUT_DIMENSIONS_VALUES, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
 import { NumberInputFieldPlaygroundTemplate } from './Templates';
@@ -14,7 +12,7 @@ import NumberInputFieldPlaygroundRaw from '!!raw-loader!./Templates/NumberInputF
 export default {
   title: 'Admiral-2.1/Form Field/NumberInputField',
   component: NumberInputField,
-  decorators: [withDesign],
+  decorators: undefined,
   parameters: {
     docs: {
       source: {
@@ -113,20 +111,23 @@ export default {
       control: { type: 'boolean' },
     },
   },
-} as ComponentMeta<typeof NumberInputField>;
+} as Meta<typeof NumberInputField>;
 
 //<editor-fold desc="NumberInputField example">
-const NumberInputFieldStory: ComponentStory<typeof NumberInputField> = (props) => (
+const NumberInputFieldStory: StoryFn<typeof NumberInputField> = (props) => (
   <NumberInputFieldPlaygroundTemplate {...cleanUpProps(props)} />
 );
 
-export const NumberInputFieldPlayground = NumberInputFieldStory.bind({});
-NumberInputFieldPlayground.parameters = {
-  docs: {
-    source: {
-      code: NumberInputFieldPlaygroundRaw,
+export const NumberInputFieldPlayground = {
+  render: NumberInputFieldStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: NumberInputFieldPlaygroundRaw,
+      },
     },
   },
+
+  name: 'NumberInputField example',
 };
-NumberInputFieldPlayground.storyName = 'NumberInputField example';
-//</editor-fold>

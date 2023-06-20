@@ -1,7 +1,5 @@
 import * as React from 'react';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
-
+import type { Meta, StoryFn } from '@storybook/react';
 import { Checkbox, ALL_BORDER_RADIUS_VALUES, ALL_DIMENSIONS_VALUES } from '@admiral-ds/react-ui';
 
 import { CheckboxDemoTemplate } from './Templates';
@@ -12,7 +10,7 @@ import CheckboxDemoRaw from '!!raw-loader!./Templates/CheckboxDemo';
 
 export default {
   title: 'Admiral-2.1/Atoms/Checkbox',
-  decorators: [withDesign],
+  decorators: undefined,
   component: Checkbox,
   parameters: {
     docs: {
@@ -72,18 +70,21 @@ export default {
       control: false,
     },
   },
-} as ComponentMeta<typeof Checkbox>;
+} as Meta<typeof Checkbox>;
 
 //<editor-fold desc="Checkbox. Пример">
-const CheckboxDemoStory: ComponentStory<typeof Checkbox> = (props) => <CheckboxDemoTemplate {...cleanUpProps(props)} />;
+const CheckboxDemoStory: StoryFn<typeof Checkbox> = (props) => <CheckboxDemoTemplate {...cleanUpProps(props)} />;
 
-export const CheckboxDemo = CheckboxDemoStory.bind({});
-CheckboxDemo.parameters = {
-  docs: {
-    source: {
-      code: CheckboxDemoRaw,
+export const CheckboxDemo = {
+  render: CheckboxDemoStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: CheckboxDemoRaw,
+      },
     },
   },
+
+  name: 'Checkbox. Пример',
 };
-CheckboxDemo.storyName = 'Checkbox. Пример';
-//</editor-fold>

@@ -1,7 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
+import type { Meta, StoryFn } from '@storybook/react';
 import { Tags, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
 import { TagsKindTemplate } from './Templates';
@@ -33,7 +32,7 @@ const Description = () => (
 
 export default {
   title: 'Admiral-2.1/Tag/Tags',
-  decorators: [withDesign],
+  decorators: undefined,
   component: Tags,
   parameters: {
     docs: {
@@ -67,17 +66,21 @@ export default {
       control: { type: 'radio' },
     },
   },
-} as ComponentMeta<typeof Tags>;
+} as Meta<typeof Tags>;
 
 //<editor-fold desc="Tags">
-const KindStory: ComponentStory<typeof Tags> = (props) => <TagsKindTemplate {...cleanUpProps(props)} />;
-export const KindExample = KindStory.bind({});
-KindExample.parameters = {
-  docs: {
-    source: {
-      code: KindRaw,
+const KindStory: StoryFn<typeof Tags> = (props) => <TagsKindTemplate {...cleanUpProps(props)} />;
+
+export const KindExample = {
+  render: KindStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: KindRaw,
+      },
     },
   },
+
+  name: 'Tags',
 };
-KindExample.storyName = 'Tags';
-//</editor-fold>

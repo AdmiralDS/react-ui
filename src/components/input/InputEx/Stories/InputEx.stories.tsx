@@ -1,7 +1,5 @@
 import * as React from 'react';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
-
+import type { Meta, StoryFn } from '@storybook/react';
 import { InputEx, INPUT_DIMENSIONS_VALUES, INPUT_STATUS_VALUES, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
 import { InputExBaseTemplate, InputExCustomTemplate, InputExPrefixSuffixSelectTemplate } from './Templates';
@@ -15,7 +13,7 @@ import InputExCustomRaw from '!!raw-loader!./Templates/InputExCustom';
 export default {
   title: 'Admiral-2.1/Input/InputEx',
   component: InputEx,
-  decorators: [withDesign],
+  decorators: undefined,
   parameters: {
     docs: {
       source: {
@@ -108,50 +106,61 @@ export default {
       control: { type: 'radio' },
     },
   },
-} as ComponentMeta<typeof InputEx>;
+} as Meta<typeof InputEx>;
 
 //<editor-fold desc="Базовый InputExtended">
-const InputExBaseStory: ComponentStory<typeof InputEx> = (props) => <InputExBaseTemplate {...cleanUpProps(props)} />;
+const InputExBaseStory: StoryFn<typeof InputEx> = (props) => <InputExBaseTemplate {...cleanUpProps(props)} />;
 
-export const InputExBase = InputExBaseStory.bind({});
-InputExBase.parameters = {
-  docs: {
-    source: {
-      code: InputExBaseRaw,
+export const InputExBase = {
+  render: InputExBaseStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: InputExBaseRaw,
+      },
     },
   },
+
+  name: 'Базовый InputExtended',
 };
-InputExBase.storyName = 'Базовый InputExtended';
+
 //</editor-fold>
 
 //<editor-fold desc="InputExtended с выбором префикса и суффикса">
-const InputExPrefixSuffixSelectStory: ComponentStory<typeof InputEx> = (props) => (
+const InputExPrefixSuffixSelectStory: StoryFn<typeof InputEx> = (props) => (
   <InputExPrefixSuffixSelectTemplate {...cleanUpProps(props)} />
 );
 
-export const InputExPrefixSuffixSelect = InputExPrefixSuffixSelectStory.bind({});
-InputExPrefixSuffixSelect.parameters = {
-  docs: {
-    source: {
-      code: InputExPrefixSuffixSelectRaw,
+export const InputExPrefixSuffixSelect = {
+  render: InputExPrefixSuffixSelectStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: InputExPrefixSuffixSelectRaw,
+      },
     },
   },
+
+  name: 'InputExtended с выбором префикса и суффикса',
 };
-InputExPrefixSuffixSelect.storyName = 'InputExtended с выбором префикса и суффикса';
+
 //</editor-fold>
 
 //<editor-fold desc="InputExtended. Кастомизация">
-const InputExCustomStory: ComponentStory<typeof InputEx> = (props) => (
-  <InputExCustomTemplate {...cleanUpProps(props)} />
-);
+const InputExCustomStory: StoryFn<typeof InputEx> = (props) => <InputExCustomTemplate {...cleanUpProps(props)} />;
 
-export const InputExCustom = InputExCustomStory.bind({});
-InputExCustom.parameters = {
-  docs: {
-    source: {
-      code: InputExCustomRaw,
+export const InputExCustom = {
+  render: InputExCustomStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: InputExCustomRaw,
+      },
     },
   },
+
+  name: 'InputExtended. Кастомизация',
 };
-InputExCustom.storyName = 'InputExtended. Кастомизация';
-//</editor-fold>

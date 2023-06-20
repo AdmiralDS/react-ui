@@ -1,6 +1,5 @@
-import { withDesign } from 'storybook-addon-designs';
 import * as React from 'react';
-import type { Meta, Story } from '@storybook/react';
+import type { Meta, StoryFn } from '@storybook/react';
 import { useDarkMode } from 'storybook-dark-mode';
 import styled, { useTheme, ThemeProvider } from 'styled-components';
 import { ReactComponent as CopyOutline } from '@admiral-ds/icons/build/documents/CopyOutline.svg';
@@ -156,7 +155,7 @@ const Description = () => (
 
 export default {
   title: 'Colors/Colors',
-  decorators: [withDesign],
+  decorators: undefined,
   component: CopyOutline,
   parameters: {
     docs: {
@@ -174,7 +173,7 @@ export default {
   },
 } as Meta;
 
-const Template: Story = () => (
+const Template: StoryFn = () => (
   <Wrapper>
     {[...Object.keys(COLORS)].map((item) => {
       return <Category key={item} categoryName={item} />;
@@ -182,12 +181,16 @@ const Template: Story = () => (
   </Wrapper>
 );
 
-const Template2: Story = () => <Table rowList={VERSIONS_ROWS} columnList={VERSION_COLUMNS} greyHeader />;
+const Template2: StoryFn = () => <Table rowList={VERSIONS_ROWS} columnList={VERSION_COLUMNS} greyHeader />;
 
-export const Colors = Template.bind({});
-Colors.args = {};
-Colors.storyName = 'Группы цветов и их назначение';
+export const Colors = {
+  render: Template,
+  args: {},
+  name: 'Группы цветов и их назначение',
+};
 
-export const Themes = Template2.bind({});
-Themes.args = {};
-Themes.storyName = 'Сопоставление стилей цветов 2.0 и 2.1';
+export const Themes = {
+  render: Template2,
+  args: {},
+  name: 'Сопоставление стилей цветов 2.0 и 2.1',
+};

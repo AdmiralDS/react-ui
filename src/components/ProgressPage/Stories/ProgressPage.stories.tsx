@@ -1,6 +1,5 @@
 import * as React from 'react';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
+import type { Meta, StoryFn } from '@storybook/react';
 import styled from 'styled-components';
 
 import { ProgressPage } from '@admiral-ds/react-ui';
@@ -30,7 +29,7 @@ const Description = () => (
 
 export default {
   title: 'Admiral-2.1/ProgressPage',
-  decorators: [withDesign],
+  decorators: undefined,
   component: ProgressPage,
   parameters: {
     docs: {
@@ -65,36 +64,44 @@ export default {
       control: { type: 'number' },
     },
   },
-} as ComponentMeta<typeof ProgressPage>;
+} as Meta<typeof ProgressPage>;
 
 //<editor-fold desc="Базовый пример">
-const ProgressPageBaseStory: ComponentStory<typeof ProgressPage> = (props) => (
+const ProgressPageBaseStory: StoryFn<typeof ProgressPage> = (props) => (
   <ProgressPageBaseTemplate {...cleanUpProps(props)} />
 );
 
-export const ProgressPageBase = ProgressPageBaseStory.bind({});
-ProgressPageBase.parameters = {
-  docs: {
-    source: {
-      code: ProgressPageBaseRaw,
+export const ProgressPageBase = {
+  render: ProgressPageBaseStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: ProgressPageBaseRaw,
+      },
     },
   },
+
+  name: 'Базовый пример',
 };
-ProgressPageBase.storyName = 'Базовый пример';
+
 //</editor-fold>
 
 //<editor-fold desc="Прогресс бар с анимацией">
-const ProgressPageAnimationStory: ComponentStory<typeof ProgressPage> = (props) => (
+const ProgressPageAnimationStory: StoryFn<typeof ProgressPage> = (props) => (
   <ProgressPageAnimationTemplate {...cleanUpProps(props)} />
 );
 
-export const ProgressPageAnimation = ProgressPageAnimationStory.bind({});
-ProgressPageAnimation.parameters = {
-  docs: {
-    source: {
-      code: ProgressPageAnimationRaw,
+export const ProgressPageAnimation = {
+  render: ProgressPageAnimationStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: ProgressPageAnimationRaw,
+      },
     },
   },
+
+  name: 'Прогресс бар с анимацией',
 };
-ProgressPageAnimation.storyName = 'Прогресс бар с анимацией';
-//</editor-fold>

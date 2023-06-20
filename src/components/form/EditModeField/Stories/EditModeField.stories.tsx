@@ -1,7 +1,5 @@
 import * as React from 'react';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
-
+import type { Meta, StoryFn } from '@storybook/react';
 import { EditModeField, INPUT_STATUS_VALUES, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
 import {
@@ -20,7 +18,7 @@ import EditModeFieldExtraTextRaw from '!!raw-loader!./Templates/EditModeFieldExt
 export default {
   title: 'Admiral-2.1/Form Field/EditModeField',
   component: EditModeField,
-  decorators: [withDesign],
+  decorators: undefined,
   parameters: {
     docs: {
       source: {
@@ -110,55 +108,67 @@ export default {
       control: { type: 'radio' },
     },
   },
-} as ComponentMeta<typeof EditModeField>;
+} as Meta<typeof EditModeField>;
 
 //<editor-fold desc="Playground">
-const EditModeFieldPlaygroundStory: ComponentStory<typeof EditModeField> = (props) => (
+const EditModeFieldPlaygroundStory: StoryFn<typeof EditModeField> = (props) => (
   <EditModeFieldPlaygroundTemplate value={''} onChange={() => undefined} {...cleanUpProps(props)} />
 );
 
-export const EditModeFieldPlayground = EditModeFieldPlaygroundStory.bind({});
-EditModeFieldPlayground.parameters = {
-  docs: {
-    source: {
-      code: EditModeFieldPlaygroundRaw,
+export const EditModeFieldPlayground = {
+  render: EditModeFieldPlaygroundStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: EditModeFieldPlaygroundRaw,
+      },
     },
   },
+
+  name: 'EditModeField. Playground',
 };
-EditModeFieldPlayground.storyName = 'EditModeField. Playground';
+
 //</editor-fold>
 
 //<editor-fold desc="Пример с поясняющим текстом">
-const EditModeFieldExtraTextStory: ComponentStory<typeof EditModeField> = (props) => (
+const EditModeFieldExtraTextStory: StoryFn<typeof EditModeField> = (props) => (
   <EditModeFieldExtraTextTemplate value={''} onChange={() => undefined} {...cleanUpProps(props)} />
 );
 
-export const EditModeFieldExtraText = EditModeFieldExtraTextStory.bind({});
-EditModeFieldExtraText.storyName = 'Пример с поясняющим текстом';
-EditModeFieldExtraText.parameters = {
-  docs: {
-    source: {
-      code: EditModeFieldExtraTextRaw,
-    },
-    description: {
-      story: `В режиме редактирования допускается использование поясняющего текста для инпута.`,
+export const EditModeFieldExtraText = {
+  render: EditModeFieldExtraTextStory,
+  name: 'Пример с поясняющим текстом',
+
+  parameters: {
+    docs: {
+      source: {
+        code: EditModeFieldExtraTextRaw,
+      },
+      description: {
+        story: `В режиме редактирования допускается использование поясняющего текста для инпута.`,
+      },
     },
   },
 };
+
 //</editor-fold>
 
 //<editor-fold desc="Пример с состоянием ошибки">
-const EditModeFieldErrorStateStory: ComponentStory<typeof EditModeField> = (props) => (
+const EditModeFieldErrorStateStory: StoryFn<typeof EditModeField> = (props) => (
   <EditModeFieldErrorStateTemplate value={''} onChange={() => undefined} {...cleanUpProps(props)} />
 );
 
-export const EditModeFieldErrorState = EditModeFieldErrorStateStory.bind({});
-EditModeFieldErrorState.parameters = {
-  docs: {
-    source: {
-      code: EditModeFieldErrorStateRaw,
+export const EditModeFieldErrorState = {
+  render: EditModeFieldErrorStateStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: EditModeFieldErrorStateRaw,
+      },
     },
   },
+
+  name: 'Пример с состоянием ошибки',
 };
-EditModeFieldErrorState.storyName = 'Пример с состоянием ошибки';
-//</editor-fold>

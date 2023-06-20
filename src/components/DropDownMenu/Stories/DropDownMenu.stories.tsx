@@ -1,6 +1,5 @@
 import * as React from 'react';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
+import type { Meta, StoryFn } from '@storybook/react';
 import styled from 'styled-components';
 
 import { DropDownMenu, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
@@ -27,7 +26,7 @@ const Description = () => (
 );
 export default {
   title: 'Deprecated/DropDownMenu (Deprecated используйте DropMenu)',
-  decorators: [withDesign],
+  decorators: undefined,
   component: DropDownMenu,
   parameters: {
     docs: {
@@ -72,36 +71,44 @@ export default {
       control: { type: 'radio' },
     },
   },
-} as ComponentMeta<typeof DropDownMenu>;
+} as Meta<typeof DropDownMenu>;
 
 //<editor-fold desc="Базовый пример">
-const BaseDropDownStory: ComponentStory<typeof DropDownMenu> = ({ targetRef, ...props }) => (
+const BaseDropDownStory: StoryFn<typeof DropDownMenu> = ({ targetRef, ...props }) => (
   <BaseDropDownTemplate targetRef={targetRef} {...cleanUpProps(props)} />
 );
 
-export const BaseDropDown = BaseDropDownStory.bind({});
-BaseDropDown.parameters = {
-  docs: {
-    source: {
-      code: BaseDropDownRaw,
+export const BaseDropDown = {
+  render: BaseDropDownStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: BaseDropDownRaw,
+      },
     },
   },
+
+  name: 'Базовый пример',
 };
-BaseDropDown.storyName = 'Базовый пример';
+
 //</editor-fold>
 
 //<editor-fold desc="Категории">
-const CategoryStory: ComponentStory<typeof DropDownMenu> = ({ targetRef, ...props }) => (
+const CategoryStory: StoryFn<typeof DropDownMenu> = ({ targetRef, ...props }) => (
   <CategoryTemplate targetRef={targetRef} {...cleanUpProps(props)} />
 );
 
-export const Category = CategoryStory.bind({});
-Category.parameters = {
-  docs: {
-    source: {
-      code: CategoryRaw,
+export const Category = {
+  render: CategoryStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: CategoryRaw,
+      },
     },
   },
+
+  name: 'Категории',
 };
-Category.storyName = 'Категории';
-//</editor-fold>

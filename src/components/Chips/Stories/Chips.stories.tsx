@@ -1,7 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { withDesign } from 'storybook-addon-designs';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { Meta, StoryFn } from '@storybook/react';
 
 import { Chips } from '@admiral-ds/react-ui';
 
@@ -43,7 +42,7 @@ const Description = () => (
 export default {
   title: 'Admiral-2.1/Chips',
   component: Chips,
-  decorators: [withDesign],
+  decorators: undefined,
   parameters: {
     docs: {
       source: {
@@ -96,132 +95,156 @@ export default {
       control: { type: 'number' },
     },
   },
-} as ComponentMeta<typeof Chips>;
+} as Meta<typeof Chips>;
 
 //<editor-fold desc="Chips базовый пример">
-const ChipsTagsStory: ComponentStory<typeof Chips> = (props) => <ChipsTagsTemplate {...cleanUpProps(props)} />;
+const ChipsTagsStory: StoryFn<typeof Chips> = (props) => <ChipsTagsTemplate {...cleanUpProps(props)} />;
 
-export const ChipsTags = ChipsTagsStory.bind({});
-ChipsTags.parameters = {
-  docs: {
-    source: {
-      code: ChipsTagsRaw,
+export const ChipsTags = {
+  render: ChipsTagsStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: ChipsTagsRaw,
+      },
     },
   },
+
+  name: 'Chips базовый пример',
 };
-ChipsTags.storyName = 'Chips базовый пример';
+
 //</editor-fold>
 
 //<editor-fold desc="Chips с текстом и иконкой закрыть">
-const ChipsTagsCloseStory: ComponentStory<typeof Chips> = (props) => (
-  <ChipsTagsCloseTemplate {...cleanUpProps(props)} />
-);
+const ChipsTagsCloseStory: StoryFn<typeof Chips> = (props) => <ChipsTagsCloseTemplate {...cleanUpProps(props)} />;
 
-export const ChipsTagsClose = ChipsTagsCloseStory.bind({});
-ChipsTagsClose.storyName = 'Chips с текстом и иконкой закрыть';
-ChipsTagsClose.parameters = {
-  docs: {
-    source: {
-      code: ChipsTagsCloseRaw,
-    },
-    description: {
-      story: `Взаимодействовать можно только с чипсами имеющими иконку закрытия “Close”. При 
-      нажатии на иконку закрытия элемент удаляется из списка выбранных.`,
+export const ChipsTagsClose = {
+  render: ChipsTagsCloseStory,
+  name: 'Chips с текстом и иконкой закрыть',
+
+  parameters: {
+    docs: {
+      source: {
+        code: ChipsTagsCloseRaw,
+      },
+      description: {
+        story: `Взаимодействовать можно только с чипсами имеющими иконку закрытия “Close”. При 
+        нажатии на иконку закрытия элемент удаляется из списка выбранных.`,
+      },
     },
   },
 };
+
 //</editor-fold>
 
 //<editor-fold desc="Chips с иконкой">
-const ChipsIconStory: ComponentStory<typeof Chips> = (props) => <ChipsIconTemplate {...cleanUpProps(props)} />;
+const ChipsIconStory: StoryFn<typeof Chips> = (props) => <ChipsIconTemplate {...cleanUpProps(props)} />;
 
-export const ChipsIcon = ChipsIconStory.bind({});
-ChipsIcon.storyName = 'Chips с иконкой';
-ChipsIcon.parameters = {
-  docs: {
-    source: {
-      code: ChipsIconRaw,
-    },
-    description: {
-      story: `В компоненте можно включать иконки справа и/или слева от текста.`,
+export const ChipsIcon = {
+  render: ChipsIconStory,
+  name: 'Chips с иконкой',
+
+  parameters: {
+    docs: {
+      source: {
+        code: ChipsIconRaw,
+      },
+      description: {
+        story: `В компоненте можно включать иконки справа и/или слева от текста.`,
+      },
     },
   },
 };
+
 //</editor-fold>
 
 //<editor-fold desc="Chips с текстом и выбором">
-const ChipsSelectStory: ComponentStory<typeof Chips> = (props) => <ChipsSelectTemplate {...cleanUpProps(props)} />;
+const ChipsSelectStory: StoryFn<typeof Chips> = (props) => <ChipsSelectTemplate {...cleanUpProps(props)} />;
 
-export const ChipsSelect = ChipsSelectStory.bind({});
-ChipsSelect.storyName = 'Chips с текстом и выбором';
-ChipsSelect.parameters = {
-  docs: {
-    source: {
-      code: ChipsSelectRaw,
-    },
-    description: {
-      story: `Набор из двух и более чипсов, которые могут быть в активном (выбранном) состоянии 
-      или пассивном (выключенном) состоянии. Chips в режиме радио кнопок, когда можно выбрать 
-      только одно значение из списка. `,
+export const ChipsSelect = {
+  render: ChipsSelectStory,
+  name: 'Chips с текстом и выбором',
+
+  parameters: {
+    docs: {
+      source: {
+        code: ChipsSelectRaw,
+      },
+      description: {
+        story: `Набор из двух и более чипсов, которые могут быть в активном (выбранном) состоянии 
+        или пассивном (выключенном) состоянии. Chips в режиме радио кнопок, когда можно выбрать 
+        только одно значение из списка. `,
+      },
     },
   },
 };
+
 //</editor-fold>
 
 //<editor-fold desc="Chips для множественного выбора">
-const ChipsMultiSelectStory: ComponentStory<typeof Chips> = (props) => (
-  <ChipsMultiSelectTemplate {...cleanUpProps(props)} />
-);
+const ChipsMultiSelectStory: StoryFn<typeof Chips> = (props) => <ChipsMultiSelectTemplate {...cleanUpProps(props)} />;
 
-export const ChipsMultiSelect = ChipsMultiSelectStory.bind({});
-ChipsMultiSelect.storyName = 'Chips для множественного выбора';
-ChipsMultiSelect.parameters = {
-  docs: {
-    source: {
-      code: ChipsMultiSelectRaw,
-    },
-    description: {
-      story: `Chips в режиме чекбоксов, когда можно выбрать любое количество значений`,
+export const ChipsMultiSelect = {
+  render: ChipsMultiSelectStory,
+  name: 'Chips для множественного выбора',
+
+  parameters: {
+    docs: {
+      source: {
+        code: ChipsMultiSelectRaw,
+      },
+      description: {
+        story: `Chips в режиме чекбоксов, когда можно выбрать любое количество значений`,
+      },
     },
   },
 };
+
 //</editor-fold>
 
 //<editor-fold desc="Chips с Tooltip">
-const ChipsTooltipStory: ComponentStory<typeof Chips> = (props) => <ChipsTooltipTemplate {...cleanUpProps(props)} />;
+const ChipsTooltipStory: StoryFn<typeof Chips> = (props) => <ChipsTooltipTemplate {...cleanUpProps(props)} />;
 
-export const ChipsTooltip = ChipsTooltipStory.bind({});
-ChipsTooltip.storyName = 'Chips с Tooltip';
-ChipsTooltip.parameters = {
-  docs: {
-    source: {
-      code: ChipsTooltipRaw,
-    },
-    description: {
-      story: `По дефолту в компоненте (в коде) задано граничение ширины в 190 px, после которой 
-      происходит уход в троеточие. Но можно изменять этот параметр стилизуя компонент через styled 
-      components. В случае сокращения, над компонентом при ховере появляется Тултип с расшифровкой.`,
+export const ChipsTooltip = {
+  render: ChipsTooltipStory,
+  name: 'Chips с Tooltip',
+
+  parameters: {
+    docs: {
+      source: {
+        code: ChipsTooltipRaw,
+      },
+      description: {
+        story: `По дефолту в компоненте (в коде) задано граничение ширины в 190 px, после которой 
+        происходит уход в троеточие. Но можно изменять этот параметр стилизуя компонент через styled 
+        components. В случае сокращения, над компонентом при ховере появляется Тултип с расшифровкой.`,
+      },
     },
   },
 };
+
 //</editor-fold>
 
 //<editor-fold desc="Chips с Badge">
-const ChipsBadgesStory: ComponentStory<typeof Chips> = (props) => <ChipsBadgesTemplate {...cleanUpProps(props)} />;
+const ChipsBadgesStory: StoryFn<typeof Chips> = (props) => <ChipsBadgesTemplate {...cleanUpProps(props)} />;
 
-export const ChipsBadges = ChipsBadgesStory.bind({});
-ChipsBadges.storyName = 'Chips с Badge';
-ChipsBadges.parameters = {
-  docs: {
-    source: {
-      code: ChipsBadgesRaw,
-    },
-    description: {
-      story: `В компоненте можно включать бейджи.`,
+export const ChipsBadges = {
+  render: ChipsBadgesStory,
+  name: 'Chips с Badge',
+
+  parameters: {
+    docs: {
+      source: {
+        code: ChipsBadgesRaw,
+      },
+      description: {
+        story: `В компоненте можно включать бейджи.`,
+      },
     },
   },
+
+  args: {
+    badge: 5,
+  },
 };
-ChipsBadges.args = {
-  badge: 5,
-};
-//</editor-fold>

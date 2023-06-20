@@ -1,7 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
+import type { Meta, StoryFn } from '@storybook/react';
 import { PaginationTwo } from '@admiral-ds/react-ui';
 
 import { PaginationPlaygroundTemplate, PaginationVariantsTemplate, PaginationMobileTemplate } from './Templates';
@@ -32,7 +31,7 @@ const Description = () => (
 
 export default {
   title: 'Admiral-2.1/Data Table/PaginationTwo',
-  decorators: [withDesign],
+  decorators: undefined,
   component: PaginationTwo,
   parameters: {
     docs: {
@@ -81,48 +80,63 @@ export default {
       control: false,
     },
   },
-} as ComponentMeta<typeof PaginationTwo>;
+} as Meta<typeof PaginationTwo>;
 
 //<editor-fold desc="Playground">
-const PaginationPlaygroundStory: ComponentStory<typeof PaginationTwo> = ({ page, onChange, ...props }) => (
+const PaginationPlaygroundStory: StoryFn<typeof PaginationTwo> = ({ page, onChange, ...props }) => (
   <PaginationPlaygroundTemplate page={page} onChange={onChange} {...cleanUpProps(props)} />
 );
-export const Playground = PaginationPlaygroundStory.bind({});
-Playground.parameters = {
-  docs: {
-    source: {
-      code: PaginationPlaygroundRaw,
+
+export const Playground = {
+  render: PaginationPlaygroundStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: PaginationPlaygroundRaw,
+      },
     },
   },
 };
+
 //</editor-fold>
 
 //<editor-fold desc="Примеры">
-const PaginationVariantsStory: ComponentStory<typeof PaginationTwo> = ({ page, onChange, ...props }) => (
+const PaginationVariantsStory: StoryFn<typeof PaginationTwo> = ({ page, onChange, ...props }) => (
   <PaginationVariantsTemplate page={page} onChange={onChange} {...cleanUpProps(props)} />
 );
-export const PaginationVariantsExample = PaginationVariantsStory.bind({});
-PaginationVariantsExample.parameters = {
-  docs: {
-    source: {
-      code: PaginationVariantsRaw,
+
+export const PaginationVariantsExample = {
+  render: PaginationVariantsStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: PaginationVariantsRaw,
+      },
     },
   },
+
+  name: 'Примеры.',
 };
-PaginationVariantsExample.storyName = 'Примеры.';
+
 //</editor-fold>
 
 //<editor-fold desc="Мобильная версия">
-const PaginationMobileStory: ComponentStory<typeof PaginationTwo> = ({ page, onChange, ...props }) => (
+const PaginationMobileStory: StoryFn<typeof PaginationTwo> = ({ page, onChange, ...props }) => (
   <PaginationMobileTemplate page={page} onChange={onChange} {...cleanUpProps(props)} />
 );
-export const PaginationMobileExample = PaginationMobileStory.bind({});
-PaginationMobileExample.parameters = {
-  docs: {
-    source: {
-      code: PaginationMobileRaw,
+
+export const PaginationMobileExample = {
+  render: PaginationMobileStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: PaginationMobileRaw,
+      },
     },
   },
+
+  name: 'Мобильная версия.',
 };
-PaginationMobileExample.storyName = 'Мобильная версия.';
-//</editor-fold>

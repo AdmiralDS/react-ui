@@ -1,7 +1,5 @@
 import * as React from 'react';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
-
+import type { Meta, StoryFn } from '@storybook/react';
 import {
   SuggestInput,
   INPUT_DIMENSIONS_VALUES,
@@ -27,7 +25,7 @@ import SuggestInputNoMatchRaw from '!!raw-loader!./Templates/SuggestInputNoMatch
 export default {
   title: 'Admiral-2.1/Input/SuggestInput',
   component: SuggestInput,
-  decorators: [withDesign],
+  decorators: undefined,
   parameters: {
     docs: {
       source: {
@@ -133,84 +131,107 @@ export default {
       control: false,
     },
   },
-} as ComponentMeta<typeof SuggestInput>;
+} as Meta<typeof SuggestInput>;
 
 //<editor-fold desc="Suggest Input компонент">
-const SuggestInputPlaygroundStory: ComponentStory<typeof SuggestInput> = (props) => (
+const SuggestInputPlaygroundStory: StoryFn<typeof SuggestInput> = (props) => (
   <SuggestInputPlaygroundTemplate {...cleanUpProps(props)} />
 );
 
-export const SuggestInputPlayground = SuggestInputPlaygroundStory.bind({});
-SuggestInputPlayground.parameters = {
-  docs: {
-    source: {
-      code: SuggestInputPlaygroundRaw,
+export const SuggestInputPlayground = {
+  render: SuggestInputPlaygroundStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: SuggestInputPlaygroundRaw,
+      },
     },
   },
+
+  name: 'Suggest Input компонент',
 };
-SuggestInputPlayground.storyName = 'Suggest Input компонент';
+
 //</editor-fold>
 
 //<editor-fold desc="Suggest Input альтернативная иконка">
-const SuggestInputCustomIconStory: ComponentStory<typeof SuggestInput> = (props) => (
+const SuggestInputCustomIconStory: StoryFn<typeof SuggestInput> = (props) => (
   <SuggestInputPlaygroundTemplate {...cleanUpProps(props)} icon={SearchSolidSVG} />
 );
 
-export const SuggestInputCustomIcon = SuggestInputCustomIconStory.bind({});
-SuggestInputCustomIcon.parameters = {
-  docs: {
-    source: {
-      code: SuggestInputPlaygroundRaw,
+export const SuggestInputCustomIcon = {
+  render: SuggestInputCustomIconStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: SuggestInputPlaygroundRaw,
+      },
     },
   },
+
+  name: 'Suggest Input альтернативная иконка',
 };
-SuggestInputCustomIcon.storyName = 'Suggest Input альтернативная иконка';
+
 //</editor-fold>
 
 //<editor-fold desc="Suggest Input неконтроллируемый">
-const SuggestInputUncontrolledStory: ComponentStory<typeof SuggestInput> = (props) => (
+const SuggestInputUncontrolledStory: StoryFn<typeof SuggestInput> = (props) => (
   <SuggestInputUncontrolledTemplate {...cleanUpProps(props)} />
 );
 
-export const SuggestInputUncontrolled = SuggestInputUncontrolledStory.bind({});
-SuggestInputUncontrolled.parameters = {
-  docs: {
-    source: {
-      code: SuggestInputUncontrolledRaw,
+export const SuggestInputUncontrolled = {
+  render: SuggestInputUncontrolledStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: SuggestInputUncontrolledRaw,
+      },
     },
   },
+
+  name: 'Suggest Input неконтроллируемый',
 };
-SuggestInputUncontrolled.storyName = 'Suggest Input неконтроллируемый';
+
 //</editor-fold>
 
 //<editor-fold desc="Suggest Input "Нет совпадений"">
-const SuggestInputNoMatchStory: ComponentStory<typeof SuggestInput> = (props) => (
+const SuggestInputNoMatchStory: StoryFn<typeof SuggestInput> = (props) => (
   <SuggestInputNoMatchTemplate {...cleanUpProps(props)} />
 );
 
-export const SuggestInputNoMatch = SuggestInputNoMatchStory.bind({});
-SuggestInputNoMatch.parameters = {
-  docs: {
-    source: {
-      code: SuggestInputNoMatchRaw,
+export const SuggestInputNoMatch = {
+  render: SuggestInputNoMatchStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: SuggestInputNoMatchRaw,
+      },
     },
   },
+
+  name: 'Suggest Input "Нет совпадений"',
 };
-SuggestInputNoMatch.storyName = 'Suggest Input "Нет совпадений"';
+
 //</editor-fold>
 
 //<editor-fold desc="Suggest Input с фильтрацией">
-const SuggestInputFilterStory: ComponentStory<typeof SuggestInput> = (props) => (
+const SuggestInputFilterStory: StoryFn<typeof SuggestInput> = (props) => (
   <SuggestInputFilterTemplate {...cleanUpProps(props)} />
 );
 
-export const SuggestInputFilter = SuggestInputFilterStory.bind({});
-SuggestInputFilter.parameters = {
-  docs: {
-    source: {
-      code: SuggestInputFilterRaw,
+export const SuggestInputFilter = {
+  render: SuggestInputFilterStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: SuggestInputFilterRaw,
+      },
     },
   },
+
+  name: 'Suggest Input с фильтрацией',
 };
-SuggestInputFilter.storyName = 'Suggest Input с фильтрацией';
-//</editor-fold>

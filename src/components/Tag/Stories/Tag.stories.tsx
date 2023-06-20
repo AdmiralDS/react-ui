@@ -1,7 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
+import type { Meta, StoryFn } from '@storybook/react';
 import { Tag, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
 import {
@@ -39,7 +38,7 @@ const Description = () => (
 
 export default {
   title: 'Admiral-2.1/Tag',
-  decorators: [withDesign],
+  decorators: undefined,
   component: Tag,
   parameters: {
     docs: {
@@ -90,122 +89,162 @@ export default {
       control: { type: 'radio' },
     },
   },
-} as ComponentMeta<typeof Tag>;
+} as Meta<typeof Tag>;
 
 //<editor-fold desc="Playground">
-const PlaygroundStory: ComponentStory<typeof Tag> = (props) => <TagPlaygroundTemplate {...cleanUpProps(props)} />;
-export const Playground = PlaygroundStory.bind({});
-Playground.parameters = {
-  docs: {
-    source: {
-      code: PlaygroundRaw,
+const PlaygroundStory: StoryFn<typeof Tag> = (props) => <TagPlaygroundTemplate {...cleanUpProps(props)} />;
+
+export const Playground = {
+  render: PlaygroundStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: PlaygroundRaw,
+      },
     },
   },
+
+  name: 'Tag. Playground.',
 };
-Playground.storyName = 'Tag. Playground.';
+
 //</editor-fold>
 
 //<editor-fold desc="Tag. Статус через цветную статусную метку.">
-const StatusStory: ComponentStory<typeof Tag> = () => <TagStatusTemplate />;
-export const StatusExample = StatusStory.bind({});
-StatusExample.parameters = {
-  docs: {
-    source: {
-      code: StatusRaw,
-    },
-    description: {
-      story: `Тэг может иметь цветную статусную метку.`,
+const StatusStory: StoryFn<typeof Tag> = () => <TagStatusTemplate />;
+
+export const StatusExample = {
+  render: StatusStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: StatusRaw,
+      },
+      description: {
+        story: `Тэг может иметь цветную статусную метку.`,
+      },
     },
   },
+
+  name: 'Tag. Статус через цветную статусную метку.',
 };
-StatusExample.storyName = 'Tag. Статус через цветную статусную метку.';
+
 //</editor-fold>
 
 //<editor-fold desc="Tag. Статус через цвет обводки и фона.">
-const StatusBackgroundStory: ComponentStory<typeof Tag> = () => <TagStatusBackgroundTemplate />;
-export const StatusBackgroundExample = StatusBackgroundStory.bind({});
-StatusBackgroundExample.parameters = {
-  docs: {
-    source: {
-      code: StatusBackgroundRaw,
-    },
-    description: {
-      story: `Тэг может отображать статус через цвет обводки и фона, когда нужен выраженный цветовой акцент (опция).
-      В этом случае цвет статусов берется из палитры Special, допускается окрашивание тэга в любой парный цвет
-      (фон, обводка) из этой палитры. \n\nЧтобы отобразить статус через цвет обводки и фона необходимо передать
-      в компонент параметр statusViaBackground, установленный в true.`,
+const StatusBackgroundStory: StoryFn<typeof Tag> = () => <TagStatusBackgroundTemplate />;
+
+export const StatusBackgroundExample = {
+  render: StatusBackgroundStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: StatusBackgroundRaw,
+      },
+      description: {
+        story: `Тэг может отображать статус через цвет обводки и фона, когда нужен выраженный цветовой акцент (опция).
+        В этом случае цвет статусов берется из палитры Special, допускается окрашивание тэга в любой парный цвет
+        (фон, обводка) из этой палитры. \n\nЧтобы отобразить статус через цвет обводки и фона необходимо передать
+        в компонент параметр statusViaBackground, установленный в true.`,
+      },
     },
   },
+
+  name: 'Tag. Статус через цвет обводки и фона.',
 };
-StatusBackgroundExample.storyName = 'Tag. Статус через цвет обводки и фона.';
+
 //</editor-fold>
 
 //<editor-fold desc="Tag. Кастомные цвета.">
-const CustomColorsStory: ComponentStory<typeof Tag> = () => <TagCustomColorsTemplate />;
-export const CustomColorsExample = CustomColorsStory.bind({});
-CustomColorsExample.parameters = {
-  docs: {
-    source: {
-      code: CustomColorsRaw,
-    },
-    description: {
-      story: `Тэг может иметь цветную статусную метку. Помимо предложенных вариантов, метка может быть
-      окрашена в любой цвет на усмотрение пользователя с помощью свойства background. \n\n Либо тэг может отображать
-      статус через цвет обводки и фона, когда нужен выраженный цветовой акцент (опция).
-      В этом случае, помимо предложенных вариантов, цвет фона и обводки можно задать через свойства background и border.
-      Следует учесть, что цвета надо брать из палитры Special, допускается окрашивание тэга в любой парный цвет (фон, обводка) из этой палитры.`,
+const CustomColorsStory: StoryFn<typeof Tag> = () => <TagCustomColorsTemplate />;
+
+export const CustomColorsExample = {
+  render: CustomColorsStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: CustomColorsRaw,
+      },
+      description: {
+        story: `Тэг может иметь цветную статусную метку. Помимо предложенных вариантов, метка может быть
+        окрашена в любой цвет на усмотрение пользователя с помощью свойства background. \n\n Либо тэг может отображать
+        статус через цвет обводки и фона, когда нужен выраженный цветовой акцент (опция).
+        В этом случае, помимо предложенных вариантов, цвет фона и обводки можно задать через свойства background и border.
+        Следует учесть, что цвета надо брать из палитры Special, допускается окрашивание тэга в любой парный цвет (фон, обводка) из этой палитры.`,
+      },
     },
   },
+
+  name: 'Tag. Кастомные цвета.',
 };
-CustomColorsExample.storyName = 'Tag. Кастомные цвета.';
+
 //</editor-fold>
 
 //<editor-fold desc="Tag. Активный и пассивный.">
-const StateStory: ComponentStory<typeof Tag> = () => <TagStateTemplate />;
-export const StateExample = StateStory.bind({});
-StateExample.parameters = {
-  docs: {
-    source: {
-      code: StateRaw,
-    },
-    description: {
-      story: `Тэги могут быть как активными и служить, например, каталагизаторами, так и пассивными, просто отображая
-            принадлежность элемента к некоторой группе элементов имеющих общий признак.`,
+const StateStory: StoryFn<typeof Tag> = () => <TagStateTemplate />;
+
+export const StateExample = {
+  render: StateStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: StateRaw,
+      },
+      description: {
+        story: `Тэги могут быть как активными и служить, например, каталагизаторами, так и пассивными, просто отображая
+              принадлежность элемента к некоторой группе элементов имеющих общий признак.`,
+      },
     },
   },
+
+  name: 'Tag. Активный и пассивный.',
 };
-StateExample.storyName = 'Tag. Активный и пассивный.';
+
 //</editor-fold>
 
 //<editor-fold desc="Tag. Тултип.">
-const TooltipStory: ComponentStory<typeof Tag> = () => <TagTooltipTemplate />;
-export const TooltipExample = TooltipStory.bind({});
-TooltipExample.parameters = {
-  docs: {
-    source: {
-      code: TooltipRaw,
-    },
-    description: {
-      story: `В случае ограниченного пространства используется тултип.`,
+const TooltipStory: StoryFn<typeof Tag> = () => <TagTooltipTemplate />;
+
+export const TooltipExample = {
+  render: TooltipStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: TooltipRaw,
+      },
+      description: {
+        story: `В случае ограниченного пространства используется тултип.`,
+      },
     },
   },
+
+  name: 'Tag. Тултип.',
 };
-TooltipExample.storyName = 'Tag. Тултип.';
+
 //</editor-fold>
 
 //<editor-fold desc="Tag. С иконкой.">
-const IconStory: ComponentStory<typeof Tag> = () => <TagIconTemplate />;
-export const IconExample = IconStory.bind({});
-IconExample.parameters = {
-  docs: {
-    source: {
-      code: IconRaw,
-    },
-    description: {
-      story: `Тэги могут быть с иконками, но только в том случае, если статус отображается
-      через цвет обводки и фона (параметр statusViaBackground установлен в true)`,
+const IconStory: StoryFn<typeof Tag> = () => <TagIconTemplate />;
+
+export const IconExample = {
+  render: IconStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: IconRaw,
+      },
+      description: {
+        story: `Тэги могут быть с иконками, но только в том случае, если статус отображается
+        через цвет обводки и фона (параметр statusViaBackground установлен в true)`,
+      },
     },
   },
+
+  name: 'Tag. С иконкой.',
 };
-IconExample.storyName = 'Tag. С иконкой.';
-//</editor-fold>

@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { withDesign } from 'storybook-addon-designs';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { Meta, StoryFn } from '@storybook/react';
 import styled from 'styled-components';
 import { TagMenu, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
@@ -27,7 +26,7 @@ const Description = () => (
 
 export default {
   title: 'Admiral-2.1/TagMenu',
-  decorators: [withDesign],
+  decorators: undefined,
   component: TagMenu,
   parameters: {
     docs: {
@@ -98,32 +97,40 @@ export default {
       control: false,
     },
   },
-} as ComponentMeta<typeof TagMenu>;
+} as Meta<typeof TagMenu>;
 
 //<editor-fold desc="Playground">
-const PlaygroundStory: ComponentStory<typeof TagMenu> = (props) => (
-  <TagMenuPlaygroundTemplate {...cleanUpProps(props)} />
-);
-export const Playground = PlaygroundStory.bind({});
-Playground.parameters = {
-  docs: {
-    source: {
-      code: PlaygroundRaw,
+const PlaygroundStory: StoryFn<typeof TagMenu> = (props) => <TagMenuPlaygroundTemplate {...cleanUpProps(props)} />;
+
+export const Playground = {
+  render: PlaygroundStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: PlaygroundRaw,
+      },
     },
   },
+
+  name: 'TagMenu. Playground.',
 };
-Playground.storyName = 'TagMenu. Playground.';
+
 //</editor-fold>
 
 //<editor-fold desc="TagMenu. Размеры.">
-const SizesStory: ComponentStory<typeof TagMenu> = (props) => <TagMenuSizesTemplate {...cleanUpProps(props)} />;
-export const SizesExample = SizesStory.bind({});
-SizesExample.parameters = {
-  docs: {
-    source: {
-      code: SizesRaw,
+const SizesStory: StoryFn<typeof TagMenu> = (props) => <TagMenuSizesTemplate {...cleanUpProps(props)} />;
+
+export const SizesExample = {
+  render: SizesStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: SizesRaw,
+      },
     },
   },
+
+  name: 'TagMenu. Размеры.',
 };
-SizesExample.storyName = 'TagMenu. Размеры.';
-//</editor-fold>

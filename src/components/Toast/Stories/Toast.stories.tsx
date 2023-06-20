@@ -1,7 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
+import type { Meta, StoryFn } from '@storybook/react';
 import LinkTo from '@storybook/addon-links/react';
 
 import { Toast, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
@@ -53,7 +52,7 @@ const Description = () => (
 
 export default {
   title: 'Admiral-2.1/Toast',
-  decorators: [withDesign],
+  decorators: undefined,
   component: Toast,
   parameters: {
     docs: {
@@ -86,100 +85,128 @@ export default {
       control: { type: 'radio' },
     },
   },
-} as ComponentMeta<typeof Toast>;
+} as Meta<typeof Toast>;
 
 //<editor-fold desc="Toast. Настройка места всплытия через стили.">
-const ToastNotificationStory: ComponentStory<typeof Toast> = (props: ToastProps) => {
+const ToastNotificationStory: StoryFn<typeof Toast> = (props: ToastProps) => {
   return <ToastNotificationTemplate {...cleanUpProps(props)} />;
 };
 
-export const ToastNotification = ToastNotificationStory.bind({});
-ToastNotification.parameters = {
-  docs: {
-    source: {
-      code: ToastNotificationRaw,
+export const ToastNotification = {
+  render: ToastNotificationStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: ToastNotificationRaw,
+      },
     },
   },
+
+  name: 'Toast. Настройка места всплытия через стили.',
 };
-ToastNotification.storyName = 'Toast. Настройка места всплытия через стили.';
+
 //</editor-fold>
 
 //<editor-fold desc="Toast. Базовый пример.">
-const ToastNotificationBaseStory: ComponentStory<typeof Toast> = (props: ToastProps) => {
+const ToastNotificationBaseStory: StoryFn<typeof Toast> = (props: ToastProps) => {
   return <ToastNotificationBaseTemplate {...cleanUpProps(props)} />;
 };
 
-export const ToastNotificationBase = ToastNotificationBaseStory.bind({});
-ToastNotificationBase.parameters = {
-  docs: {
-    source: {
-      code: ToastNotificationBaseRaw,
+export const ToastNotificationBase = {
+  render: ToastNotificationBaseStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: ToastNotificationBaseRaw,
+      },
     },
   },
+
+  name: 'Toast. Базовый пример.',
 };
-ToastNotificationBase.storyName = 'Toast. Базовый пример.';
+
 //</editor-fold>
 
 //<editor-fold desc="Line Notification.">
-const ToastLineNotificationStory: ComponentStory<typeof Toast> = (props: ToastProps) => {
+const ToastLineNotificationStory: StoryFn<typeof Toast> = (props: ToastProps) => {
   return <ToastLineNotificationTemplate {...cleanUpProps(props)} />;
 };
 
-export const ToastLineNotification = ToastLineNotificationStory.bind({});
-ToastLineNotification.parameters = {
-  docs: {
-    source: {
-      code: ToastLineNotificationRaw,
+export const ToastLineNotification = {
+  render: ToastLineNotificationStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: ToastLineNotificationRaw,
+      },
     },
   },
+
+  name: 'Line Notification.',
 };
-ToastLineNotification.storyName = 'Line Notification.';
+
 //</editor-fold>
 
 //<editor-fold desc="'Toast. Custom component.">
-const ToastCustomComponentStory: ComponentStory<typeof Toast> = (props: ToastProps) => {
+const ToastCustomComponentStory: StoryFn<typeof Toast> = (props: ToastProps) => {
   return <ToastCustomComponentTemplate {...cleanUpProps(props)} />;
 };
 
-export const ToastCustomComponent = ToastCustomComponentStory.bind({});
-ToastCustomComponent.parameters = {
-  docs: {
-    source: {
-      code: ToastCustomComponentRaw,
+export const ToastCustomComponent = {
+  render: ToastCustomComponentStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: ToastCustomComponentRaw,
+      },
     },
   },
+
+  name: 'Toast. Custom component.',
 };
-ToastCustomComponent.storyName = 'Toast. Custom component.';
+
 //</editor-fold>
 
 //<editor-fold desc="Toast. Custom component with Progress.">
-const ToastProgressComponentStory: ComponentStory<typeof Toast> = (props: ToastProps) => {
+const ToastProgressComponentStory: StoryFn<typeof Toast> = (props: ToastProps) => {
   return <ToastProgressComponentTemplate {...cleanUpProps(props)} />;
 };
 
-export const ToastProgressComponent = ToastProgressComponentStory.bind({});
-ToastProgressComponent.parameters = {
-  docs: {
-    source: {
-      code: ToastProgressComponentRaw,
+export const ToastProgressComponent = {
+  render: ToastProgressComponentStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: ToastProgressComponentRaw,
+      },
     },
   },
+
+  name: 'Toast. Custom component with Progress.',
 };
-ToastProgressComponent.storyName = 'Toast. Custom component with Progress.';
+
 //</editor-fold>
 
 //<editor-fold desc="Toast. Backward compatibility.">
-const ToastBackwardCompatibilityStory: ComponentStory<typeof Toast> = (props: ToastProps) => {
+const ToastBackwardCompatibilityStory: StoryFn<typeof Toast> = (props: ToastProps) => {
   return <ToastBackwardCompatibilityTemplate {...cleanUpProps(props)} />;
 };
 
-export const ToastBackwardCompatibility = ToastBackwardCompatibilityStory.bind({});
-ToastBackwardCompatibility.parameters = {
-  docs: {
-    source: {
-      code: ToastBackwardCompatibilityRaw,
+export const ToastBackwardCompatibility = {
+  render: ToastBackwardCompatibilityStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: ToastBackwardCompatibilityRaw,
+      },
     },
   },
+
+  name: 'Toast. Backward compatibility.',
 };
-ToastBackwardCompatibility.storyName = 'Toast. Backward compatibility.';
-//</editor-fold>

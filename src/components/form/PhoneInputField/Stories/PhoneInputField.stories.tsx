@@ -1,7 +1,5 @@
 import * as React from 'react';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
-
+import type { Meta, StoryFn } from '@storybook/react';
 import { PhoneInputField, INPUT_DIMENSIONS_VALUES, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
 import { PhoneInputFieldExampleTemplate } from '#src/components/form/PhoneInputField/Stories/Templates';
@@ -14,7 +12,7 @@ import PhoneInputFieldExampleRaw from '!!raw-loader!./Templates/PhoneInputFieldE
 export default {
   title: 'Admiral-2.1/Form Field/PhoneInputField',
   component: PhoneInputField,
-  decorators: [withDesign],
+  decorators: undefined,
   parameters: {
     docs: {
       source: {
@@ -74,20 +72,23 @@ export default {
       control: false,
     },
   },
-} as ComponentMeta<typeof PhoneInputField>;
+} as Meta<typeof PhoneInputField>;
 
 //<editor-fold desc="PhoneInputField example">
-const PhoneInputFieldExampleStory: ComponentStory<typeof PhoneInputField> = (props) => (
+const PhoneInputFieldExampleStory: StoryFn<typeof PhoneInputField> = (props) => (
   <PhoneInputFieldExampleTemplate {...cleanUpProps(props)} />
 );
 
-export const PhoneInputFieldExample = PhoneInputFieldExampleStory.bind({});
-PhoneInputFieldExample.parameters = {
-  docs: {
-    source: {
-      code: PhoneInputFieldExampleRaw,
+export const PhoneInputFieldExample = {
+  render: PhoneInputFieldExampleStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: PhoneInputFieldExampleRaw,
+      },
     },
   },
+
+  name: 'PhoneInputField example',
 };
-PhoneInputFieldExample.storyName = 'PhoneInputField example';
-//</editor-fold>

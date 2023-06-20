@@ -1,6 +1,5 @@
 import * as React from 'react';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
+import type { Meta, StoryFn } from '@storybook/react';
 import { Link, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
 import {
@@ -23,7 +22,7 @@ import LinkAsPropRaw from '!!raw-loader!./Templates/LinkAsProp';
 
 export default {
   title: 'Admiral-2.1/Link',
-  decorators: [withDesign],
+  decorators: undefined,
   component: Link,
   parameters: {
     docs: {
@@ -72,88 +71,116 @@ export default {
       control: { type: 'radio' },
     },
   },
-} as ComponentMeta<typeof Link>;
+} as Meta<typeof Link>;
 
 //<editor-fold desc="Playground">
-const LinkPlaygroundStory: ComponentStory<typeof Link> = (props) => (
+const LinkPlaygroundStory: StoryFn<typeof Link> = (props) => (
   <LinkPlaygroundTemplate children={props.children} {...cleanUpProps(props)} />
 );
-export const Playground = LinkPlaygroundStory.bind({});
-Playground.parameters = {
-  docs: {
-    source: {
-      code: LinkPlaygroundRaw,
+
+export const Playground = {
+  render: LinkPlaygroundStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: LinkPlaygroundRaw,
+      },
     },
   },
 };
+
 //</editor-fold>
 
 //<editor-fold desc="Primary">
-const LinkPrimaryStory: ComponentStory<typeof Link> = () => <LinkPrimaryTemplate />;
-export const Primary = LinkPrimaryStory.bind({});
-Primary.parameters = {
-  docs: {
-    source: {
-      code: LinkPrimaryRaw,
+const LinkPrimaryStory: StoryFn<typeof Link> = () => <LinkPrimaryTemplate />;
+
+export const Primary = {
+  render: LinkPrimaryStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: LinkPrimaryRaw,
+      },
     },
   },
 };
+
 //</editor-fold>
 
 //<editor-fold desc="Secondary">
-const LinkSecondaryStory: ComponentStory<typeof Link> = () => <LinkSecondaryTemplate />;
-export const Secondary = LinkSecondaryStory.bind({});
-Secondary.parameters = {
-  docs: {
-    source: {
-      code: LinkSecondaryRaw,
+const LinkSecondaryStory: StoryFn<typeof Link> = () => <LinkSecondaryTemplate />;
+
+export const Secondary = {
+  render: LinkSecondaryStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: LinkSecondaryRaw,
+      },
     },
   },
 };
+
 //</editor-fold>
 
 //<editor-fold desc="With icon">
-const LinkWithIconStory: ComponentStory<typeof Link> = () => <LinkWithIconTemplate />;
-export const IconLink = LinkWithIconStory.bind({});
-IconLink.parameters = {
-  docs: {
-    source: {
-      code: LinkWithIconRaw,
+const LinkWithIconStory: StoryFn<typeof Link> = () => <LinkWithIconTemplate />;
+
+export const IconLink = {
+  render: LinkWithIconStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: LinkWithIconRaw,
+      },
     },
   },
 };
+
 //</editor-fold>
 
 //<editor-fold desc="Mixin">
-const LinkMixinStory: ComponentStory<typeof Link> = () => <LinkMixinTemplate />;
-export const CssMixin = LinkMixinStory.bind({});
-CssMixin.parameters = {
-  docs: {
-    source: {
-      code: LinkMixinRaw,
-    },
-    description: {
-      story: `Помимо компонента Link библиотека предоставляет LinkComponentCssMixin - миксин, включающий в себя 
-      все стили компонента Link согласно дизайну Admiral 2.1. Данный миксин целесообразно применять, если 
-      пользователь хочет использовать свой собственный компонент, стилизованный согласно дизайну Admiral 2.1.`,
+const LinkMixinStory: StoryFn<typeof Link> = () => <LinkMixinTemplate />;
+
+export const CssMixin = {
+  render: LinkMixinStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: LinkMixinRaw,
+      },
+      description: {
+        story: `Помимо компонента Link библиотека предоставляет LinkComponentCssMixin - миксин, включающий в себя 
+        все стили компонента Link согласно дизайну Admiral 2.1. Данный миксин целесообразно применять, если 
+        пользователь хочет использовать свой собственный компонент, стилизованный согласно дизайну Admiral 2.1.`,
+      },
     },
   },
 };
+
 //</editor-fold>
 
 //<editor-fold desc="As prop">
-const LinkAsPropStory: ComponentStory<typeof Link> = () => <LinkAsPropTemplate />;
-export const LinkAsProp = LinkAsPropStory.bind({});
-LinkAsProp.parameters = {
-  docs: {
-    source: {
-      code: LinkAsPropRaw,
-    },
-    description: {
-      story: `Компонент Link является полиморфным компонентом. По умолчанию компонент Link возвращает стандартный html anchor элемент. 
-      Однако с помощью параметра as можно перезадать тип элемента, который будет отрисован. 
-      В качестве значения as можно передать строку, в которой будет прописан тип html элемента, или компонент.`,
+const LinkAsPropStory: StoryFn<typeof Link> = () => <LinkAsPropTemplate />;
+
+export const LinkAsProp = {
+  render: LinkAsPropStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: LinkAsPropRaw,
+      },
+      description: {
+        story: `Компонент Link является полиморфным компонентом. По умолчанию компонент Link возвращает стандартный html anchor элемент. 
+        Однако с помощью параметра as можно перезадать тип элемента, который будет отрисован. 
+        В качестве значения as можно передать строку, в которой будет прописан тип html элемента, или компонент.`,
+      },
     },
   },
 };
-//</editor-fold>

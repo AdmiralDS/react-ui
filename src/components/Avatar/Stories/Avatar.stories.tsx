@@ -1,6 +1,5 @@
-import { withDesign } from 'storybook-addon-designs';
 import * as React from 'react';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { Meta, StoryFn } from '@storybook/react';
 import styled from 'styled-components';
 
 import { Avatar } from '@admiral-ds/react-ui';
@@ -20,7 +19,7 @@ const Desc = styled.div`
 
 export default {
   title: 'Admiral-2.1/Avatar',
-  decorators: [withDesign],
+  decorators: undefined,
   component: Avatar,
   parameters: {
     docs: {
@@ -80,34 +79,42 @@ export default {
       control: false,
     },
   },
-} as ComponentMeta<typeof Avatar>;
+} as Meta<typeof Avatar>;
 
 //<editor-fold desc="Avatar Playground">
-const AvatarPlaygroundStory: ComponentStory<typeof Avatar> = ({ userName, ...props }) => (
+const AvatarPlaygroundStory: StoryFn<typeof Avatar> = ({ userName, ...props }) => (
   <AvatarPlaygroundTemplate userName={userName} {...cleanUpProps(props)} />
 );
 
-export const AvatarPlayground = AvatarPlaygroundStory.bind({});
-AvatarPlayground.parameters = {
-  docs: {
-    source: {
-      code: AvatarPlaygroundRaw,
+export const AvatarPlayground = {
+  render: AvatarPlaygroundStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: AvatarPlaygroundRaw,
+      },
     },
   },
+
+  name: 'Playground',
 };
-AvatarPlayground.storyName = 'Playground';
+
 //</editor-fold>
 
 //<editor-fold desc="Single Avatar">
-const SingleAvatarStory: ComponentStory<typeof Avatar> = () => <SingleAvatarTemplate />;
+const SingleAvatarStory: StoryFn<typeof Avatar> = () => <SingleAvatarTemplate />;
 
-export const SingleAvatar = SingleAvatarStory.bind({});
-SingleAvatar.parameters = {
-  docs: {
-    source: {
-      code: SingleAvatarRaw,
+export const SingleAvatar = {
+  render: SingleAvatarStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: SingleAvatarRaw,
+      },
     },
   },
+
+  name: 'Avatar',
 };
-SingleAvatar.storyName = 'Avatar';
-//</editor-fold>

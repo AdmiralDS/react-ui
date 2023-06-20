@@ -1,7 +1,5 @@
 import * as React from 'react';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
-
+import type { Meta, StoryFn } from '@storybook/react';
 import { Flex } from '@admiral-ds/react-ui';
 
 import { FlexPlaygroundTemplate } from './Templates';
@@ -26,7 +24,7 @@ export default {
       },
     ],
   },
-  decorators: [withDesign],
+  decorators: undefined,
   argTypes: {
     rowGap: {
       control: { type: 'number' },
@@ -35,20 +33,23 @@ export default {
       control: { type: 'number' },
     },
   },
-} as ComponentMeta<typeof Flex.Container>;
+} as Meta<typeof Flex.Container>;
 
 //<editor-fold desc="Пример работы с Flex">
-const FlexPlaygroundStory: ComponentStory<typeof Flex.Container> = (props) => (
+const FlexPlaygroundStory: StoryFn<typeof Flex.Container> = (props) => (
   <FlexPlaygroundTemplate {...cleanUpProps(props)} />
 );
 
-export const FlexPlayground = FlexPlaygroundStory.bind({});
-FlexPlayground.parameters = {
-  docs: {
-    source: {
-      code: FlexPlaygroundRaw,
+export const FlexPlayground = {
+  render: FlexPlaygroundStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: FlexPlaygroundRaw,
+      },
     },
   },
+
+  name: 'Пример работы с Flex',
 };
-FlexPlayground.storyName = 'Пример работы с Flex';
-//</editor-fold>

@@ -1,7 +1,5 @@
 import * as React from 'react';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
-
+import type { Meta, StoryFn } from '@storybook/react';
 import { TextArea, INPUT_DIMENSIONS_VALUES, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 import { TextAreaPlaygroundTemplate } from './Templates';
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
@@ -12,7 +10,7 @@ import TextAreaPlaygroundRaw from '!!raw-loader!./Templates/TextAreaPlayground';
 export default {
   title: 'Admiral-2.1/Input/TextArea',
   component: TextArea,
-  decorators: [withDesign],
+  decorators: undefined,
   parameters: {
     docs: {
       source: {
@@ -91,20 +89,23 @@ export default {
       control: { type: 'boolean' },
     },
   },
-} as ComponentMeta<typeof TextArea>;
+} as Meta<typeof TextArea>;
 
 //<editor-fold desc="Базовый textarea компонент">
-const TextAreaPlaygroundStory: ComponentStory<typeof TextArea> = (props) => (
+const TextAreaPlaygroundStory: StoryFn<typeof TextArea> = (props) => (
   <TextAreaPlaygroundTemplate {...cleanUpProps(props)} />
 );
 
-export const TextAreaPlayground = TextAreaPlaygroundStory.bind({});
-TextAreaPlayground.parameters = {
-  docs: {
-    source: {
-      code: TextAreaPlaygroundRaw,
+export const TextAreaPlayground = {
+  render: TextAreaPlaygroundStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: TextAreaPlaygroundRaw,
+      },
     },
   },
+
+  name: 'Базовый textarea компонент',
 };
-TextAreaPlayground.storyName = 'Базовый textarea компонент';
-//</editor-fold>

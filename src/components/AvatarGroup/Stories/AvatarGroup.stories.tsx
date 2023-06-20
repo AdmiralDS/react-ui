@@ -1,6 +1,5 @@
-import { withDesign } from 'storybook-addon-designs';
 import * as React from 'react';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { Meta, StoryFn } from '@storybook/react';
 import styled from 'styled-components';
 
 import { AvatarGroup } from '@admiral-ds/react-ui';
@@ -21,7 +20,7 @@ const Desc = styled.div`
 
 export default {
   title: 'Admiral-2.1/AvatarGroup',
-  decorators: [withDesign],
+  decorators: undefined,
   component: AvatarGroup,
   parameters: {
     docs: {
@@ -69,44 +68,50 @@ export default {
       control: false,
     },
   },
-} as ComponentMeta<typeof AvatarGroup>;
+} as Meta<typeof AvatarGroup>;
 
 //<editor-fold desc="Playground">
-const AvatarGroupPlaygroundStory: ComponentStory<typeof AvatarGroup> = (props: AvatarGroupProps) => (
+const AvatarGroupPlaygroundStory: StoryFn<typeof AvatarGroup> = (props: AvatarGroupProps) => (
   <AvatarGroupPlaygroundTemplate items={[]} {...cleanUpProps(props)} />
 );
 
-export const AvatarGroupPlayground = AvatarGroupPlaygroundStory.bind({});
-AvatarGroupPlayground.storyName = 'Playground';
-AvatarGroupPlayground.parameters = {
-  docs: {
-    source: {
-      code: AvatarGroupPlaygroundRaw,
+export const AvatarGroupPlayground = {
+  render: AvatarGroupPlaygroundStory,
+  name: 'Playground',
+
+  parameters: {
+    docs: {
+      source: {
+        code: AvatarGroupPlaygroundRaw,
+      },
     },
   },
 };
+
 //</editor-fold>
 
 //<editor-fold desc="Пример с ограниченной шириной">
-const AvatarGroupWidthStory: ComponentStory<typeof AvatarGroup> = (props) => (
+const AvatarGroupWidthStory: StoryFn<typeof AvatarGroup> = (props) => (
   <AvatarGroupWidthTemplate items={[]} {...cleanUpProps(props)} />
 );
 
-export const AvatarGroupWidth = AvatarGroupWidthStory.bind({});
-AvatarGroupWidth.storyName = 'Пример с ограниченной шириной';
-AvatarGroupWidth.parameters = {
-  docs: {
-    source: {
-      code: AvatarGroupWidthRaw,
-    },
-    description: {
-      story: `При достижении условного максимума отображаемых аватаров, последним ставится аватар с отображением количества
-      скрытых элементов. Внешний вид такого аватара (цвет заливки и текста) контролируется с помощью параметра appearance, переданного в 
-      компонент AvatarGroup.\n\nЧтобы задать для всех аватаров, входящих в группу, единый внешний вид, достаточно задать 
-      для компонента AvatarGroup соответствующее значение параметра appearance. Если для каких-то аватаров 
-      нужно задать отличный от остальных внешний вид, необходимо задать параметр appearance непосредственно для компонента Avatar. Параметр
-      appearance, заданный для Avatar, имеет больший приоритет, чем параметр appearance, заданный для AvatarGroup.`,
+export const AvatarGroupWidth = {
+  render: AvatarGroupWidthStory,
+  name: 'Пример с ограниченной шириной',
+
+  parameters: {
+    docs: {
+      source: {
+        code: AvatarGroupWidthRaw,
+      },
+      description: {
+        story: `При достижении условного максимума отображаемых аватаров, последним ставится аватар с отображением количества
+        скрытых элементов. Внешний вид такого аватара (цвет заливки и текста) контролируется с помощью параметра appearance, переданного в 
+        компонент AvatarGroup.\n\nЧтобы задать для всех аватаров, входящих в группу, единый внешний вид, достаточно задать 
+        для компонента AvatarGroup соответствующее значение параметра appearance. Если для каких-то аватаров 
+        нужно задать отличный от остальных внешний вид, необходимо задать параметр appearance непосредственно для компонента Avatar. Параметр
+        appearance, заданный для Avatar, имеет больший приоритет, чем параметр appearance, заданный для AvatarGroup.`,
+      },
     },
   },
 };
-//</editor-fold>

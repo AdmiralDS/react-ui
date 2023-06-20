@@ -1,7 +1,5 @@
 import * as React from 'react';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
-
+import type { Meta, StoryFn } from '@storybook/react';
 import { TextField, INPUT_DIMENSIONS_VALUES, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
 import { DataAttributesDescription } from '#src/components/form/common';
@@ -14,7 +12,7 @@ import TextFieldInputRaw from '!!raw-loader!./Templates/TextFieldInput';
 export default {
   title: 'Admiral-2.1/Form Field/TextField',
   component: TextField,
-  decorators: [withDesign],
+  decorators: undefined,
   parameters: {
     docs: {
       source: {
@@ -100,23 +98,22 @@ export default {
       control: { type: 'boolean' },
     },
   },
-} as ComponentMeta<typeof TextField>;
+} as Meta<typeof TextField>;
 
 //<editor-fold desc="Text field example">
-const TextFieldInputStory: ComponentStory<typeof TextField> = (props) => (
-  <TextFieldInputTemplate {...cleanUpProps(props)} />
-);
+const TextFieldInputStory: StoryFn<typeof TextField> = (props) => <TextFieldInputTemplate {...cleanUpProps(props)} />;
 
-export const TextFieldInput = TextFieldInputStory.bind({});
-TextFieldInput.parameters = {
-  docs: {
-    source: {
-      code: TextFieldInputRaw,
+export const TextFieldInput = {
+  render: TextFieldInputStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: TextFieldInputRaw,
+      },
     },
   },
+
+  args: {},
+  name: 'Text field example',
 };
-
-TextFieldInput.args = {};
-
-TextFieldInput.storyName = 'Text field example';
-//</editor-fold>

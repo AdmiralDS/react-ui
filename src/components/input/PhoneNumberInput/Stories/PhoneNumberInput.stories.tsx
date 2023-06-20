@@ -1,6 +1,5 @@
 import * as React from 'react';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
+import type { Meta, StoryFn } from '@storybook/react';
 import styled from 'styled-components';
 
 import { INPUT_STATUS_VALUES, PhoneNumberInput, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
@@ -34,7 +33,7 @@ const Description = () => (
 export default {
   title: 'Admiral-2.1/Input/PhoneNumberInput',
   component: PhoneNumberInput,
-  decorators: [withDesign],
+  decorators: undefined,
   parameters: {
     docs: {
       source: {
@@ -118,52 +117,65 @@ export default {
       control: { type: 'boolean' },
     },
   },
-} as ComponentMeta<typeof PhoneNumberInput>;
+} as Meta<typeof PhoneNumberInput>;
 
 //<editor-fold desc="Phone Number Input. Размер XL">
-const PhoneNumberInputXLStory: ComponentStory<typeof PhoneNumberInput> = (props) => (
+const PhoneNumberInputXLStory: StoryFn<typeof PhoneNumberInput> = (props) => (
   <PhoneNumberInputXLTemplate {...cleanUpProps(props)} />
 );
 
-export const PhoneNumberInputXL = PhoneNumberInputXLStory.bind({});
-PhoneNumberInputXL.parameters = {
-  docs: {
-    source: {
-      code: PhoneNumberInputXLRaw,
+export const PhoneNumberInputXL = {
+  render: PhoneNumberInputXLStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: PhoneNumberInputXLRaw,
+      },
     },
   },
+
+  name: 'Phone Number Input. Размер XL',
 };
-PhoneNumberInputXL.storyName = 'Phone Number Input. Размер XL';
+
 //</editor-fold>
 
 //<editor-fold desc="Phone Number Input. Размер M c фильтрацией списка">
-const PhoneNumberInputMStory: ComponentStory<typeof PhoneNumberInput> = (props) => (
+const PhoneNumberInputMStory: StoryFn<typeof PhoneNumberInput> = (props) => (
   <PhoneNumberInputMTemplate {...cleanUpProps(props)} />
 );
 
-export const PhoneNumberInputM = PhoneNumberInputMStory.bind({});
-PhoneNumberInputM.parameters = {
-  docs: {
-    source: {
-      code: PhoneNumberInputMRaw,
+export const PhoneNumberInputM = {
+  render: PhoneNumberInputMStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: PhoneNumberInputMRaw,
+      },
     },
   },
+
+  name: 'Phone Number Input. Размер M c фильтрацией списка',
 };
-PhoneNumberInputM.storyName = 'Phone Number Input. Размер M c фильтрацией списка';
+
 //</editor-fold>
 
 //<editor-fold desc="Phone Number Input. Размер S с заданной страной по умолчанию">
-const PhoneNumberInputSStory: ComponentStory<typeof PhoneNumberInput> = (props) => (
+const PhoneNumberInputSStory: StoryFn<typeof PhoneNumberInput> = (props) => (
   <PhoneNumberInputSTemplate {...cleanUpProps(props)} />
 );
 
-export const PhoneNumberInputS = PhoneNumberInputSStory.bind({});
-PhoneNumberInputS.parameters = {
-  docs: {
-    source: {
-      code: PhoneNumberInputSRaw,
+export const PhoneNumberInputS = {
+  render: PhoneNumberInputSStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: PhoneNumberInputSRaw,
+      },
     },
   },
+
+  name: 'Phone Number Input. Размер S с заданной страной по умолчанию',
 };
-PhoneNumberInputS.storyName = 'Phone Number Input. Размер S с заданной страной по умолчанию';
-//</editor-fold>

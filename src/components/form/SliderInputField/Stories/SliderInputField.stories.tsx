@@ -1,7 +1,5 @@
 import * as React from 'react';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
-
+import type { Meta, StoryFn } from '@storybook/react';
 import { SliderInputField, INPUT_DIMENSIONS_VALUES, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
 import { SliderInputFieldPlaygroundTemplate } from '#src/components/form/SliderInputField/Stories/Templates';
@@ -14,7 +12,7 @@ import SliderInputFieldPlaygroundRaw from '!!raw-loader!./Templates/SliderInputF
 export default {
   title: 'Admiral-2.1/Form Field/SliderInputField',
   component: SliderInputField,
-  decorators: [withDesign],
+  decorators: undefined,
   parameters: {
     docs: {
       source: {
@@ -113,20 +111,23 @@ export default {
       control: { type: 'boolean' },
     },
   },
-} as ComponentMeta<typeof SliderInputField>;
+} as Meta<typeof SliderInputField>;
 
 //<editor-fold desc="SliderInputField example">
-const SliderInputFieldPlaygroundStory: ComponentStory<typeof SliderInputField> = (props) => (
+const SliderInputFieldPlaygroundStory: StoryFn<typeof SliderInputField> = (props) => (
   <SliderInputFieldPlaygroundTemplate {...cleanUpProps(props)} />
 );
 
-export const SliderInputFieldPlayground = SliderInputFieldPlaygroundStory.bind({});
-SliderInputFieldPlayground.parameters = {
-  docs: {
-    source: {
-      code: SliderInputFieldPlaygroundRaw,
+export const SliderInputFieldPlayground = {
+  render: SliderInputFieldPlaygroundStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: SliderInputFieldPlaygroundRaw,
+      },
     },
   },
+
+  name: 'SliderInputField example',
 };
-SliderInputFieldPlayground.storyName = 'SliderInputField example';
-//</editor-fold>

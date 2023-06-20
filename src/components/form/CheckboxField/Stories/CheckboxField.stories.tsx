@@ -1,7 +1,5 @@
 import * as React from 'react';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
-
+import type { Meta, StoryFn } from '@storybook/react';
 import { CheckboxField, ALL_DIMENSIONS_VALUES, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
 import { CheckboxFieldBaseTemplate } from '#src/components/form/CheckboxField/Stories/Templates';
@@ -12,7 +10,7 @@ import CheckboxFieldBaseRaw from '!!raw-loader!./Templates/CheckboxFieldBase';
 
 export default {
   title: 'Admiral-2.1/Form Field/CheckboxField',
-  decorators: [withDesign],
+  decorators: undefined,
   component: CheckboxField,
   parameters: {
     docs: {
@@ -65,20 +63,23 @@ export default {
       control: false,
     },
   },
-} as ComponentMeta<typeof CheckboxField>;
+} as Meta<typeof CheckboxField>;
 
 //<editor-fold desc="CheckboxField example">
-const CheckboxFieldBaseStory: ComponentStory<typeof CheckboxField> = (props) => (
+const CheckboxFieldBaseStory: StoryFn<typeof CheckboxField> = (props) => (
   <CheckboxFieldBaseTemplate {...cleanUpProps(props)} />
 );
 
-export const CheckboxFieldBase = CheckboxFieldBaseStory.bind({});
-CheckboxFieldBase.parameters = {
-  docs: {
-    source: {
-      code: CheckboxFieldBaseRaw,
+export const CheckboxFieldBase = {
+  render: CheckboxFieldBaseStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: CheckboxFieldBaseRaw,
+      },
     },
   },
+
+  name: 'CheckboxField example',
 };
-CheckboxFieldBase.storyName = 'CheckboxField example';
-//</editor-fold>

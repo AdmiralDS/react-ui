@@ -1,6 +1,5 @@
 import * as React from 'react';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
+import type { Meta, StoryFn } from '@storybook/react';
 import styled from 'styled-components';
 
 import {
@@ -48,7 +47,7 @@ const Description = () => (
 export default {
   title: 'Admiral-2.1/Input/TimeInput',
   component: TimeInput,
-  decorators: [withDesign],
+  decorators: undefined,
   parameters: {
     docs: {
       source: {
@@ -140,84 +139,103 @@ export default {
       control: { type: 'boolean' },
     },
   },
-} as ComponentMeta<typeof TimeInput>;
+} as Meta<typeof TimeInput>;
 
 //<editor-fold desc="Базовый компонент">
-const TimeInputSimpleStory: ComponentStory<typeof TimeInput> = (props) => (
-  <TimeInputSimpleTemplate {...cleanUpProps(props)} />
-);
+const TimeInputSimpleStory: StoryFn<typeof TimeInput> = (props) => <TimeInputSimpleTemplate {...cleanUpProps(props)} />;
 
-export const TimeInputSimple = TimeInputSimpleStory.bind({});
-TimeInputSimple.parameters = {
-  docs: {
-    source: {
-      code: TimeInputSimpleRaw,
+export const TimeInputSimple = {
+  render: TimeInputSimpleStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: TimeInputSimpleRaw,
+      },
     },
   },
+
+  name: 'Базовый компонент',
 };
-TimeInputSimple.storyName = 'Базовый компонент';
+
 //</editor-fold>
 
 //<editor-fold desc="Компонент с дополнительной иконкой и альтернативной иконкой компонента">
-const TimeInputIconAlternativeStory: ComponentStory<typeof TimeInput> = (props) => (
+const TimeInputIconAlternativeStory: StoryFn<typeof TimeInput> = (props) => (
   <TimeInputIconAlternativeTemplate {...cleanUpProps(props)} />
 );
 
-export const TimeInputIconAlternative = TimeInputIconAlternativeStory.bind({});
-TimeInputIconAlternative.parameters = {
-  docs: {
-    source: {
-      code: TimeInputIconAlternativeRaw,
+export const TimeInputIconAlternative = {
+  render: TimeInputIconAlternativeStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: TimeInputIconAlternativeRaw,
+      },
     },
   },
+
+  name: 'Компонент с дополнительной иконкой и альтернативной иконкой компонента',
 };
-TimeInputIconAlternative.storyName = 'Компонент с дополнительной иконкой и альтернативной иконкой компонента';
+
 //</editor-fold>
 
 //<editor-fold desc="C диапазоном времени">
-const TimeInputRangeStory: ComponentStory<typeof TimeInput> = (props) => (
-  <TimeInputRangeTemplate {...cleanUpProps(props)} />
-);
+const TimeInputRangeStory: StoryFn<typeof TimeInput> = (props) => <TimeInputRangeTemplate {...cleanUpProps(props)} />;
 
-export const TimeInputRange = TimeInputRangeStory.bind({});
-TimeInputRange.parameters = {
-  docs: {
-    source: {
-      code: TimeInputRangeRaw,
+export const TimeInputRange = {
+  render: TimeInputRangeStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: TimeInputRangeRaw,
+      },
     },
   },
+
+  name: 'C диапазоном времени',
 };
-TimeInputRange.storyName = 'C диапазоном времени';
+
 //</editor-fold>
 
 //<editor-fold desc="C диапазоном времени и задизейбленными значениями">
-const TimeInputRangeDisabledStory: ComponentStory<typeof TimeInput> = (props) => (
+const TimeInputRangeDisabledStory: StoryFn<typeof TimeInput> = (props) => (
   <TimeInputRangeDisabledTemplate {...cleanUpProps(props)} />
 );
 
-export const TimeInputRangeDisabled = TimeInputRangeDisabledStory.bind({});
-TimeInputRangeDisabled.parameters = {
-  docs: {
-    source: {
-      code: TimeInputRangeDisabledRaw,
+export const TimeInputRangeDisabled = {
+  render: TimeInputRangeDisabledStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: TimeInputRangeDisabledRaw,
+      },
     },
   },
+
+  name: 'C диапазоном времени и задизейбленными значениями',
 };
-TimeInputRangeDisabled.storyName = 'C диапазоном времени и задизейбленными значениями';
+
 //</editor-fold>
 
 //<editor-fold desc="Базовый с задизейбленными значениями">
-const TimeInputSimpleDisabledStory: ComponentStory<typeof TimeInput> = (props) => (
+const TimeInputSimpleDisabledStory: StoryFn<typeof TimeInput> = (props) => (
   <TimeInputSimpleDisabledTemplate {...cleanUpProps(props)} />
 );
 
-export const TimeInputSimpleDisabled = TimeInputSimpleDisabledStory.bind({});
-TimeInputSimpleDisabled.parameters = {
-  docs: {
-    source: {
-      code: TimeInputSimpleDisabledRaw,
+export const TimeInputSimpleDisabled = {
+  render: TimeInputSimpleDisabledStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: TimeInputSimpleDisabledRaw,
+      },
     },
   },
+
+  name: 'Базовый с задизейбленными значениями',
 };
-TimeInputSimpleDisabled.storyName = 'Базовый с задизейбленными значениями';
-//</editor-fold>

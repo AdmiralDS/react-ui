@@ -1,7 +1,5 @@
 import * as React from 'react';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
-
+import type { Meta, StoryFn } from '@storybook/react';
 import {
   InputExField,
   INPUT_DIMENSIONS_VALUES,
@@ -19,7 +17,7 @@ import InputExFieldInputRaw from '!!raw-loader!./Templates/InputExFieldInput';
 export default {
   title: 'Admiral-2.1/Form Field/InputExField',
   component: InputExField,
-  decorators: [withDesign],
+  decorators: undefined,
   parameters: {
     docs: {
       source: {
@@ -119,20 +117,23 @@ export default {
       control: { type: 'boolean' },
     },
   },
-} as ComponentMeta<typeof InputExField>;
+} as Meta<typeof InputExField>;
 
 //<editor-fold desc="InputEx field example">
-const InputExFieldInputStory: ComponentStory<typeof InputExField> = (props) => (
+const InputExFieldInputStory: StoryFn<typeof InputExField> = (props) => (
   <InputExFieldInputTemplate {...cleanUpProps(props)} />
 );
 
-export const InputExFieldInput = InputExFieldInputStory.bind({});
-InputExFieldInput.parameters = {
-  docs: {
-    source: {
-      code: InputExFieldInputRaw,
+export const InputExFieldInput = {
+  render: InputExFieldInputStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: InputExFieldInputRaw,
+      },
     },
   },
+
+  name: 'InputEx field example',
 };
-InputExFieldInput.storyName = 'InputEx field example';
-//</editor-fold>

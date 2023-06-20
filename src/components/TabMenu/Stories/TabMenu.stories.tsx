@@ -1,6 +1,5 @@
 import * as React from 'react';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
+import type { Meta, StoryFn } from '@storybook/react';
 import { TabMenu, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
 import {
@@ -21,7 +20,7 @@ import DynamicAddRaw from '!!raw-loader!./Templates/TabMenuDynamicAdd';
 
 export default {
   title: 'Admiral-2.1/TabMenu',
-  decorators: [withDesign],
+  decorators: undefined,
   component: TabMenu,
   parameters: {
     docs: {
@@ -68,79 +67,107 @@ export default {
       control: false,
     },
   },
-} as ComponentMeta<typeof TabMenu>;
+} as Meta<typeof TabMenu>;
 
 //<editor-fold desc="TabMenu. Базовый пример.">
-const BaseStory: ComponentStory<typeof TabMenu> = ({ tabs, activeTab, onChange, ...props }) => (
+const BaseStory: StoryFn<typeof TabMenu> = ({ tabs, activeTab, onChange, ...props }) => (
   <TabMenuBaseTemplate tabs={tabs} activeTab={activeTab} onChange={onChange} {...cleanUpProps(props)} />
 );
-export const BaseExample = BaseStory.bind({});
-BaseExample.parameters = {
-  docs: {
-    source: {
-      code: BaseRaw,
+
+export const BaseExample = {
+  render: BaseStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: BaseRaw,
+      },
     },
   },
+
+  name: 'TabMenu. Базовый пример.',
 };
-BaseExample.storyName = 'TabMenu. Базовый пример.';
+
 //</editor-fold>
 
 //<editor-fold desc="TabMenu. Пример с нижней серой полосой.">
-const UnderlineStory: ComponentStory<typeof TabMenu> = ({ tabs, activeTab, onChange, ...props }) => (
+const UnderlineStory: StoryFn<typeof TabMenu> = ({ tabs, activeTab, onChange, ...props }) => (
   <TabMenuUnderlineTemplate tabs={tabs} activeTab={activeTab} onChange={onChange} {...cleanUpProps(props)} />
 );
-export const UnderlineExample = UnderlineStory.bind({});
-UnderlineExample.parameters = {
-  docs: {
-    source: {
-      code: UnderlineRaw,
+
+export const UnderlineExample = {
+  render: UnderlineStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: UnderlineRaw,
+      },
     },
   },
+
+  name: 'TabMenu. Пример с нижней серой полосой.',
 };
-UnderlineExample.storyName = 'TabMenu. Пример с нижней серой полосой.';
+
 //</editor-fold>
 
 //<editor-fold desc="TabMenu. Пример с задизейбленными табами.">
-const DisabledStory: ComponentStory<typeof TabMenu> = ({ tabs, activeTab, onChange, ...props }) => (
+const DisabledStory: StoryFn<typeof TabMenu> = ({ tabs, activeTab, onChange, ...props }) => (
   <TabMenuDisabledTemplate tabs={tabs} activeTab={activeTab} onChange={onChange} {...cleanUpProps(props)} />
 );
-export const DisabledExample = DisabledStory.bind({});
-DisabledExample.parameters = {
-  docs: {
-    source: {
-      code: DisabledRaw,
+
+export const DisabledExample = {
+  render: DisabledStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: DisabledRaw,
+      },
     },
   },
+
+  name: 'TabMenu. Пример с задизейбленными табами.',
 };
-DisabledExample.storyName = 'TabMenu. Пример с задизейбленными табами.';
+
 //</editor-fold>
 
 //<editor-fold desc="TabMenu. Пример с OverflowMenu.">
-const OverflowMenuStory: ComponentStory<typeof TabMenu> = ({ tabs, activeTab, onChange, ...props }) => (
+const OverflowMenuStory: StoryFn<typeof TabMenu> = ({ tabs, activeTab, onChange, ...props }) => (
   <TabMenuOverflowTemplate tabs={tabs} activeTab={activeTab} onChange={onChange} {...cleanUpProps(props)} />
 );
-export const OverflowMenuExample = OverflowMenuStory.bind({});
-OverflowMenuExample.parameters = {
-  docs: {
-    source: {
-      code: OverflowRaw,
+
+export const OverflowMenuExample = {
+  render: OverflowMenuStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: OverflowRaw,
+      },
     },
   },
+
+  name: 'TabMenu. Пример с OverflowMenu.',
 };
-OverflowMenuExample.storyName = 'TabMenu. Пример с OverflowMenu.';
+
 //</editor-fold>
 
 //<editor-fold desc="TabMenu. Динамическое добавление вкладок.">
-const DynamicAddStory: ComponentStory<typeof TabMenu> = ({ tabs, activeTab, onChange, ...props }) => (
+const DynamicAddStory: StoryFn<typeof TabMenu> = ({ tabs, activeTab, onChange, ...props }) => (
   <TabMenuDynamicAddTemplate tabs={tabs} activeTab={activeTab} onChange={onChange} {...cleanUpProps(props)} />
 );
-export const DynamicAddExample = DynamicAddStory.bind({});
-DynamicAddExample.parameters = {
-  docs: {
-    source: {
-      code: DynamicAddRaw,
+
+export const DynamicAddExample = {
+  render: DynamicAddStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: DynamicAddRaw,
+      },
     },
   },
+
+  name: 'TabMenu. Динамическое добавление вкладок.',
 };
-DynamicAddExample.storyName = 'TabMenu. Динамическое добавление вкладок.';
-//</editor-fold>

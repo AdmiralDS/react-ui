@@ -1,7 +1,5 @@
 import * as React from 'react';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
-
+import type { Meta, StoryFn } from '@storybook/react';
 import { Button, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
 import {
@@ -21,7 +19,7 @@ import ButtonPlaygroundRaw from '!!raw-loader!./Templates/ButtonPlayground';
 export default {
   title: 'Admiral-2.1/Button',
   component: Button,
-  decorators: [withDesign],
+  decorators: undefined,
   parameters: {
     docs: {
       source: {
@@ -87,67 +85,86 @@ export default {
       control: false,
     },
   },
-} as ComponentMeta<typeof Button>;
+} as Meta<typeof Button>;
 
 //<editor-fold desc="Button. Playground">
-const ButtonPlaygroundStory: ComponentStory<typeof Button> = (props) => {
+const ButtonPlaygroundStory: StoryFn<typeof Button> = (props) => {
   return <ButtonPlaygroundTemplate {...cleanUpProps(props)} />;
 };
 
-export const ButtonPlayground = ButtonPlaygroundStory.bind({});
-ButtonPlayground.parameters = {
-  docs: {
-    source: {
-      code: ButtonPlaygroundRaw,
+export const ButtonPlayground = {
+  render: ButtonPlaygroundStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: ButtonPlaygroundRaw,
+      },
     },
   },
+
+  name: 'Button. Playground',
 };
-ButtonPlayground.storyName = 'Button. Playground';
+
 //</editor-fold>
 
 //<editor-fold desc="Button. Стили">
-const ButtonStylesStory: ComponentStory<typeof Button> = (props) => {
+const ButtonStylesStory: StoryFn<typeof Button> = (props) => {
   return <ButtonStylesTemplate {...cleanUpProps(props)} />;
 };
 
-export const ButtonStyles = ButtonStylesStory.bind({});
-ButtonStyles.parameters = {
-  docs: {
-    source: {
-      code: ButtonStylesRaw,
+export const ButtonStyles = {
+  render: ButtonStylesStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: ButtonStylesRaw,
+      },
     },
   },
+
+  name: 'Button. Стили',
 };
-ButtonStyles.storyName = 'Button. Стили';
+
 //</editor-fold>
 
 //<editor-fold desc="Button с иконкой">
-const ButtonWithIconStory: ComponentStory<typeof Button> = (props) => {
+const ButtonWithIconStory: StoryFn<typeof Button> = (props) => {
   return <ButtonWithIconTemplate {...cleanUpProps(props)} />;
 };
-export const ButtonWithIcon = ButtonWithIconStory.bind({});
-ButtonWithIcon.parameters = {
-  docs: {
-    source: {
-      code: ButtonWithIconRaw,
+
+export const ButtonWithIcon = {
+  render: ButtonWithIconStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: ButtonWithIconRaw,
+      },
     },
   },
+
+  name: 'Button с иконкой',
 };
-ButtonWithIcon.storyName = 'Button с иконкой';
+
 //</editor-fold>
 
 //<editor-fold desc="Button. Загрузка">
-const ButtonLoaderStory: ComponentStory<typeof Button> = (props) => {
+const ButtonLoaderStory: StoryFn<typeof Button> = (props) => {
   return <ButtonLoaderTemplate {...cleanUpProps(props)} />;
 };
 
-export const ButtonLoader = ButtonLoaderStory.bind({});
-ButtonLoader.parameters = {
-  docs: {
-    source: {
-      code: ButtonLoaderRaw,
+export const ButtonLoader = {
+  render: ButtonLoaderStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: ButtonLoaderRaw,
+      },
     },
   },
+
+  name: 'Button. Загрузка',
 };
-ButtonLoader.storyName = 'Button. Загрузка';
-//</editor-fold>

@@ -1,6 +1,5 @@
 import * as React from 'react';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
+import type { Meta, StoryFn } from '@storybook/react';
 import styled from 'styled-components';
 import { SliderInput, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
@@ -38,7 +37,7 @@ const Description = () => (
 
 export default {
   title: 'Admiral-2.1/Input/SliderInput',
-  decorators: [withDesign],
+  decorators: undefined,
   component: SliderInput,
   parameters: {
     docs: {
@@ -128,64 +127,84 @@ export default {
       control: { type: 'boolean' },
     },
   },
-} as ComponentMeta<typeof SliderInput>;
+} as Meta<typeof SliderInput>;
 
 //<editor-fold desc="SliderInput. Пример контролируемого инпута.">
-const ControlledStory: ComponentStory<typeof SliderInput> = (props) => (
+const ControlledStory: StoryFn<typeof SliderInput> = (props) => (
   <SliderInputControlledTemplate {...cleanUpProps(props)} />
 );
-export const ControlledExample = ControlledStory.bind({});
-ControlledExample.parameters = {
-  docs: {
-    source: {
-      code: ControlledRaw,
+
+export const ControlledExample = {
+  render: ControlledStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: ControlledRaw,
+      },
     },
   },
+
+  name: 'SliderInput. Пример контролируемого инпута.',
 };
-ControlledExample.storyName = 'SliderInput. Пример контролируемого инпута.';
+
 //</editor-fold>
 
 //<editor-fold desc="SliderInput. С промежуточными отметками.">
-const TickMarksStory: ComponentStory<typeof SliderInput> = (props) => (
+const TickMarksStory: StoryFn<typeof SliderInput> = (props) => (
   <SliderInputTickMarksTemplate {...cleanUpProps(props)} />
 );
-export const TickmarksExample = TickMarksStory.bind({});
-TickmarksExample.parameters = {
-  docs: {
-    source: {
-      code: TickMarksRaw,
+
+export const TickmarksExample = {
+  render: TickMarksStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: TickMarksRaw,
+      },
     },
   },
+
+  name: 'SliderInput. С промежуточными отметками.',
 };
-TickmarksExample.storyName = 'SliderInput. С промежуточными отметками.';
+
 //</editor-fold>
 
 //<editor-fold desc="SliderInput. Пример изменения настроек (suffix, precision, thousand).">
-const CustomStory: ComponentStory<typeof SliderInput> = (props) => (
-  <SliderInputCustomisedTemplate {...cleanUpProps(props)} />
-);
-export const CustomExample = CustomStory.bind({});
-CustomExample.parameters = {
-  docs: {
-    source: {
-      code: CustomRaw,
+const CustomStory: StoryFn<typeof SliderInput> = (props) => <SliderInputCustomisedTemplate {...cleanUpProps(props)} />;
+
+export const CustomExample = {
+  render: CustomStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: CustomRaw,
+      },
     },
   },
+
+  name: 'SliderInput. Пример изменения настроек (suffix, precision, thousand).',
 };
-CustomExample.storyName = 'SliderInput. Пример изменения настроек (suffix, precision, thousand).';
+
 //</editor-fold>
 
 //<editor-fold desc="SliderInput. Пример кастомизирования текстовых подписей к отметкам слайдера.">
-const CustomMarkStory: ComponentStory<typeof SliderInput> = (props) => (
+const CustomMarkStory: StoryFn<typeof SliderInput> = (props) => (
   <SliderInputCustomMarkTemplate {...cleanUpProps(props)} />
 );
-export const CustomMarkExample = CustomMarkStory.bind({});
-CustomMarkExample.parameters = {
-  docs: {
-    source: {
-      code: CustomMarkRaw,
+
+export const CustomMarkExample = {
+  render: CustomMarkStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: CustomMarkRaw,
+      },
     },
   },
+
+  name: 'SliderInput. Пример кастомизирования текстовых подписей к отметкам слайдера.',
 };
-CustomMarkExample.storyName = 'SliderInput. Пример кастомизирования текстовых подписей к отметкам слайдера.';
-//</editor-fold>

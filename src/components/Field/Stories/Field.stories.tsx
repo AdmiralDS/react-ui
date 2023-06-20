@@ -1,7 +1,5 @@
 import * as React from 'react';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
-
+import type { Meta, StoryFn } from '@storybook/react';
 import { Field, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
 import { FieldWithTextInputTemplate } from './Templates';
@@ -20,7 +18,7 @@ export default {
       },
     },
   },
-  decorators: [withDesign],
+  decorators: undefined,
   argTypes: {
     required: {
       control: { type: 'boolean' },
@@ -57,20 +55,23 @@ export default {
       control: { type: 'boolean' },
     },
   },
-} as ComponentMeta<typeof Field>;
+} as Meta<typeof Field>;
 
 //<editor-fold desc="Пример обертывания компонента TextInput">
-const FieldWithTextInputStory: ComponentStory<typeof Field> = (props) => (
+const FieldWithTextInputStory: StoryFn<typeof Field> = (props) => (
   <FieldWithTextInputTemplate {...cleanUpProps(props)} />
 );
 
-export const FieldWithTextInput = FieldWithTextInputStory.bind({});
-FieldWithTextInput.parameters = {
-  docs: {
-    source: {
-      code: FieldWithTextInputRaw,
+export const FieldWithTextInput = {
+  render: FieldWithTextInputStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: FieldWithTextInputRaw,
+      },
     },
   },
+
+  name: 'Пример обертывания компонента TextInput',
 };
-FieldWithTextInput.storyName = 'Пример обертывания компонента TextInput';
-//</editor-fold>

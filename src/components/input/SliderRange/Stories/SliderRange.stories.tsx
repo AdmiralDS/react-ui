@@ -1,6 +1,5 @@
 import * as React from 'react';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
 import styled from 'styled-components';
 import { SliderRange, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
@@ -32,7 +31,7 @@ const Description = () => (
 
 export default {
   title: 'Admiral-2.1/Input/SliderRange',
-  decorators: [withDesign],
+  decorators: undefined,
   component: SliderRange,
   parameters: {
     docs: {

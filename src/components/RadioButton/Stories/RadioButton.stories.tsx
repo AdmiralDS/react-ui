@@ -1,6 +1,5 @@
 import * as React from 'react';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
+import type { Meta, StoryFn } from '@storybook/react';
 import styled from 'styled-components';
 
 import { RadioButton } from '@admiral-ds/react-ui';
@@ -35,7 +34,7 @@ const Description = () => (
 
 export default {
   title: 'Admiral-2.1/RadioButton',
-  decorators: [withDesign],
+  decorators: undefined,
   component: RadioButton,
   parameters: {
     docs: {
@@ -80,75 +79,97 @@ export default {
       control: { type: 'text' },
     },
   },
-} as ComponentMeta<typeof RadioButton>;
+} as Meta<typeof RadioButton>;
 
 //<editor-fold desc="RadioButton. Playground">
-const RadioButtonPlaygroundStory: ComponentStory<typeof RadioButton> = (props) => (
+const RadioButtonPlaygroundStory: StoryFn<typeof RadioButton> = (props) => (
   <RadioButtonPlaygroundTemplate {...cleanUpProps(props)} />
 );
 
-export const RadioButtonPlayground = RadioButtonPlaygroundStory.bind({});
-RadioButtonPlayground.parameters = {
-  docs: {
-    source: {
-      code: RadioButtonPlaygroundRaw,
+export const RadioButtonPlayground = {
+  render: RadioButtonPlaygroundStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: RadioButtonPlaygroundRaw,
+      },
     },
   },
 };
+
 //</editor-fold>
 
 //<editor-fold desc="RadioButton. Размеры">
-const RadioButtonSizeStory: ComponentStory<typeof RadioButton> = () => <RadioButtonSizeTemplate />;
+const RadioButtonSizeStory: StoryFn<typeof RadioButton> = () => <RadioButtonSizeTemplate />;
 
-export const RadioButtonSize = RadioButtonSizeStory.bind({});
-RadioButtonSize.parameters = {
-  docs: {
-    source: {
-      code: RadioButtonSizeRaw,
+export const RadioButtonSize = {
+  render: RadioButtonSizeStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: RadioButtonSizeRaw,
+      },
     },
   },
+
+  name: 'RadioButton. Размеры',
 };
-RadioButtonSize.storyName = 'RadioButton. Размеры';
+
 //</editor-fold>
 
 //<editor-fold desc="RadioButton. Состояния">
-const RadioButtonStateStory: ComponentStory<typeof RadioButton> = () => <RadioButtonStateTemplate />;
+const RadioButtonStateStory: StoryFn<typeof RadioButton> = () => <RadioButtonStateTemplate />;
 
-export const RadioButtonState = RadioButtonStateStory.bind({});
-RadioButtonState.parameters = {
-  docs: {
-    source: {
-      code: RadioButtonStateRaw,
+export const RadioButtonState = {
+  render: RadioButtonStateStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: RadioButtonStateRaw,
+      },
     },
   },
+
+  name: 'RadioButton. Состояния',
 };
-RadioButtonState.storyName = 'RadioButton. Состояния';
+
 //</editor-fold>
 
 //<editor-fold desc="RadioButton. Дополнительный текст">
-const RadioButtonExtraTextStory: ComponentStory<typeof RadioButton> = () => <RadioButtonExtraTextTemplate />;
+const RadioButtonExtraTextStory: StoryFn<typeof RadioButton> = () => <RadioButtonExtraTextTemplate />;
 
-export const RadioButtonExtraText = RadioButtonExtraTextStory.bind({});
-RadioButtonExtraText.parameters = {
-  docs: {
-    source: {
-      code: RadioButtonExtraTextRaw,
+export const RadioButtonExtraText = {
+  render: RadioButtonExtraTextStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: RadioButtonExtraTextRaw,
+      },
     },
   },
+
+  name: 'RadioButton. Дополнительный текст',
 };
-RadioButtonExtraText.storyName = 'RadioButton. Дополнительный текст';
+
 //</editor-fold>
 
 //<editor-fold desc="RadioButton. Информер">
-const RadioButtonInformerStory: ComponentStory<typeof RadioButton> = () => <RadioButtonInformerTemplate />;
+const RadioButtonInformerStory: StoryFn<typeof RadioButton> = () => <RadioButtonInformerTemplate />;
 
-export const RadioButtonInformer = RadioButtonInformerStory.bind({});
-RadioButtonInformer.parameters = {
-  docs: {
-    source: {
-      code: RadioButtonInformerRaw,
+export const RadioButtonInformer = {
+  render: RadioButtonInformerStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: RadioButtonInformerRaw,
+      },
     },
   },
+
+  name: 'RadioButton. Информер',
 };
-RadioButtonInformer.storyName = 'RadioButton. Информер';
-//</editor-fold>

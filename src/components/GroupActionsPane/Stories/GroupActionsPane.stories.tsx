@@ -1,6 +1,5 @@
 import React from 'react';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
+import type { Meta, StoryFn } from '@storybook/react';
 import styled from 'styled-components';
 import { GroupActionsPane } from '@admiral-ds/react-ui';
 
@@ -27,7 +26,7 @@ const Description = () => (
 );
 export default {
   title: 'Admiral-2.1/Data Table/GroupActionsPane',
-  decorators: [withDesign],
+  decorators: undefined,
   component: GroupActionsPane,
   parameters: {
     docs: {
@@ -76,25 +75,27 @@ export default {
       control: false,
     },
   },
-} as ComponentMeta<typeof GroupActionsPane>;
+} as Meta<typeof GroupActionsPane>;
 
 //<editor-fold desc="Simple">
-const PaneSimpleStory: ComponentStory<typeof GroupActionsPane> = (props) => (
-  <PaneSimpleTemplate {...cleanUpProps(props)} />
-);
-export const PaneSimpleExample = PaneSimpleStory.bind({});
-PaneSimpleExample.parameters = {
-  docs: {
-    source: {
-      code: PaneSimpleRaw,
-    },
-    description: {
-      story:
-        'Для того чтобы была видна кнопка поиска("лупа") необходимо определить свойства searchValue и onChangeSearchValue, ' +
-        'для кнопки настройки видимости колонок("плюс") - columns и onColumnsChange, для кнопки настроек("шестерёнка") - ' +
-        'settingsMenu',
+const PaneSimpleStory: StoryFn<typeof GroupActionsPane> = (props) => <PaneSimpleTemplate {...cleanUpProps(props)} />;
+
+export const PaneSimpleExample = {
+  render: PaneSimpleStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: PaneSimpleRaw,
+      },
+      description: {
+        story:
+          'Для того чтобы была видна кнопка поиска("лупа") необходимо определить свойства searchValue и onChangeSearchValue, ' +
+          'для кнопки настройки видимости колонок("плюс") - columns и onColumnsChange, для кнопки настроек("шестерёнка") - ' +
+          'settingsMenu',
+      },
     },
   },
+
+  name: 'Простой пример',
 };
-PaneSimpleExample.storyName = 'Простой пример';
-//</editor-fold>

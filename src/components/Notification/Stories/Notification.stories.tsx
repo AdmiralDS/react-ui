@@ -1,8 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
-
+import type { Meta, StoryFn } from '@storybook/react';
 import { Notification, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
 import { StaticNotificationBaseTemplate, StaticNotificationBaseStatusTemplate } from './Templates';
@@ -27,7 +25,7 @@ const Description = () => (
 
 export default {
   title: 'Deprecated/Notification (Deprecated используйте NotificationItem компонент)',
-  decorators: [withDesign],
+  decorators: undefined,
   component: Notification,
   parameters: {
     docs: {
@@ -75,36 +73,44 @@ export default {
       control: { type: 'radio' },
     },
   },
-} as ComponentMeta<typeof Notification>;
+} as Meta<typeof Notification>;
 
 //<editor-fold desc="Статическая нотификация. Базовый пример.">
-const StaticNotificationBaseStory: ComponentStory<typeof Notification> = (props) => (
+const StaticNotificationBaseStory: StoryFn<typeof Notification> = (props) => (
   <StaticNotificationBaseTemplate {...cleanUpProps(props)} />
 );
 
-export const StaticNotificationBase = StaticNotificationBaseStory.bind({});
-StaticNotificationBase.parameters = {
-  docs: {
-    source: {
-      code: StaticNotificationBaseRaw,
+export const StaticNotificationBase = {
+  render: StaticNotificationBaseStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: StaticNotificationBaseRaw,
+      },
     },
   },
+
+  name: 'Статическая нотификация. Базовый пример.',
 };
-StaticNotificationBase.storyName = 'Статическая нотификация. Базовый пример.';
+
 //</editor-fold>
 
 //<editor-fold desc="Статусы статических нотификаций.">
-const StaticNotificationBaseStatusStory: ComponentStory<typeof Notification> = (props) => (
+const StaticNotificationBaseStatusStory: StoryFn<typeof Notification> = (props) => (
   <StaticNotificationBaseStatusTemplate {...cleanUpProps(props)} />
 );
 
-export const StaticNotificationBaseStatus = StaticNotificationBaseStatusStory.bind({});
-StaticNotificationBaseStatus.parameters = {
-  docs: {
-    source: {
-      code: StaticNotificationBaseStatusRaw,
+export const StaticNotificationBaseStatus = {
+  render: StaticNotificationBaseStatusStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: StaticNotificationBaseStatusRaw,
+      },
     },
   },
+
+  name: 'Статусы статических нотификаций',
 };
-StaticNotificationBaseStatus.storyName = 'Статусы статических нотификаций';
-//</editor-fold>

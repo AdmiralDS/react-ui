@@ -1,7 +1,5 @@
 import * as React from 'react';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
-
+import type { Meta, StoryFn } from '@storybook/react';
 import {
   DateField,
   INPUT_DIMENSIONS_VALUES,
@@ -19,7 +17,7 @@ import DateFieldBaseRaw from '!!raw-loader!./Templates/DateFieldBase';
 export default {
   title: 'Admiral-2.1/Form Field/DateField',
   component: DateField,
-  decorators: [withDesign],
+  decorators: undefined,
   parameters: {
     docs: {
       source: {
@@ -153,20 +151,21 @@ export default {
       control: { type: 'boolean' },
     },
   },
-} as ComponentMeta<typeof DateField>;
+} as Meta<typeof DateField>;
 
 //<editor-fold desc="DateField example">
-const DateFieldBaseStory: ComponentStory<typeof DateField> = (props) => (
-  <DateFieldBaseTemplate {...cleanUpProps(props)} />
-);
+const DateFieldBaseStory: StoryFn<typeof DateField> = (props) => <DateFieldBaseTemplate {...cleanUpProps(props)} />;
 
-export const DateFieldBase = DateFieldBaseStory.bind({});
-DateFieldBase.parameters = {
-  docs: {
-    source: {
-      code: DateFieldBaseRaw,
+export const DateFieldBase = {
+  render: DateFieldBaseStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: DateFieldBaseRaw,
+      },
     },
   },
+
+  name: 'DateField example',
 };
-DateFieldBase.storyName = 'DateField example';
-//</editor-fold>

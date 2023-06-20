@@ -1,7 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { withDesign } from 'storybook-addon-designs';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { Meta, StoryFn } from '@storybook/react';
 import { PaginationSimple } from '@admiral-ds/react-ui';
 
 import { PaginationPlaygroundTemplate } from './Templates';
@@ -29,7 +28,7 @@ const Description = () => (
 
 export default {
   title: 'Admiral-2.1/PaginationSimple',
-  decorators: [withDesign],
+  decorators: undefined,
   component: PaginationSimple,
   parameters: {
     docs: {
@@ -51,18 +50,21 @@ export default {
       control: { type: 'number' },
     },
   },
-} as ComponentMeta<typeof PaginationSimple>;
+} as Meta<typeof PaginationSimple>;
 
 //<editor-fold desc="Playground">
-const PaginationPlaygroundStory: ComponentStory<typeof PaginationSimple> = ({ currentItem, onChange, ...props }) => (
+const PaginationPlaygroundStory: StoryFn<typeof PaginationSimple> = ({ currentItem, onChange, ...props }) => (
   <PaginationPlaygroundTemplate currentItem={currentItem} onChange={onChange} {...cleanUpProps(props)} />
 );
-export const Playground = PaginationPlaygroundStory.bind({});
-Playground.parameters = {
-  docs: {
-    source: {
-      code: PaginationPlaygroundRaw,
+
+export const Playground = {
+  render: PaginationPlaygroundStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: PaginationPlaygroundRaw,
+      },
     },
   },
 };
-//</editor-fold>

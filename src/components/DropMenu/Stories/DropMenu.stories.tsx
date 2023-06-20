@@ -1,7 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { withDesign } from 'storybook-addon-designs';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { Meta, StoryFn } from '@storybook/react';
 import { DropMenu, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 import {
   SimpleTemplate,
@@ -34,7 +33,7 @@ const Description = () => (
 
 export default {
   title: 'Admiral-2.1/DropMenu',
-  decorators: [withDesign],
+  decorators: undefined,
   component: DropMenu,
   parameters: {
     docs: {
@@ -112,99 +111,122 @@ export default {
       control: false,
     },
   },
-} as ComponentMeta<typeof DropMenu>;
+} as Meta<typeof DropMenu>;
 
 //<editor-fold desc="Базовый пример">
-const SimpleStory: ComponentStory<typeof DropMenu> = (props) => (
+const SimpleStory: StoryFn<typeof DropMenu> = (props) => (
   <SimpleTemplate items={[]} renderContentProp={() => false} {...cleanUpProps(props)} />
 );
 
-export const SimpleExample = SimpleStory.bind({});
-SimpleExample.parameters = {
-  docs: {
-    source: {
-      code: SimpleRaw,
-    },
-    description: {
-      story: 'Базовый пример использования DropMenu',
+export const SimpleExample = {
+  render: SimpleStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: SimpleRaw,
+      },
+      description: {
+        story: 'Базовый пример использования DropMenu',
+      },
     },
   },
+
+  name: 'Базовый пример',
 };
-SimpleExample.storyName = 'Базовый пример';
+
 //</editor-fold>
 
 // <editor-fold desc="Пример с группами">
-const CategoryStory: ComponentStory<typeof DropMenu> = (props) => (
+const CategoryStory: StoryFn<typeof DropMenu> = (props) => (
   <CategoryTemplate items={[]} renderContentProp={() => false} {...cleanUpProps(props)} />
 );
 
-export const CategoryExample = CategoryStory.bind({});
-CategoryExample.parameters = {
-  docs: {
-    source: {
-      code: CategoryRaw,
-    },
-    description: {
-      story: 'Пример с группировкой опций по категориям',
+export const CategoryExample = {
+  render: CategoryStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: CategoryRaw,
+      },
+      description: {
+        story: 'Пример с группировкой опций по категориям',
+      },
     },
   },
+
+  name: 'Пример с группами',
 };
-CategoryExample.storyName = 'Пример с группами';
+
 //</editor-fold>
 
 //<editor-fold desc="Пример с Tooltip">
-const DropMenuTooltipStory: ComponentStory<typeof DropMenu> = (props) => (
+const DropMenuTooltipStory: StoryFn<typeof DropMenu> = (props) => (
   <DropMenuTooltipTemplate items={[]} renderContentProp={() => false} {...cleanUpProps(props)} />
 );
 
-export const DropMenuTooltipExample = DropMenuTooltipStory.bind({});
-DropMenuTooltipExample.parameters = {
-  docs: {
-    source: {
-      code: DropMenuTooltipRaw,
-    },
-    description: {
-      story: 'Для того чтобы добавить tooltip к пункту меню, его необходимо обернуть TooltipHoc',
+export const DropMenuTooltipExample = {
+  render: DropMenuTooltipStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: DropMenuTooltipRaw,
+      },
+      description: {
+        story: 'Для того чтобы добавить tooltip к пункту меню, его необходимо обернуть TooltipHoc',
+      },
     },
   },
+
+  name: 'Пример с Tooltip',
 };
-DropMenuTooltipExample.storyName = 'Пример с Tooltip';
+
 //</editor-fold>
 
 //<editor-fold desc="Пример с Checkbox">
-const DropMenuCheckboxStory: ComponentStory<typeof DropMenu> = (props) => (
+const DropMenuCheckboxStory: StoryFn<typeof DropMenu> = (props) => (
   <DropMenuCheckboxTemplate items={[]} renderContentProp={() => false} {...cleanUpProps(props)} />
 );
 
-export const DropMenuCheckboxExample = DropMenuCheckboxStory.bind({});
-DropMenuCheckboxExample.parameters = {
-  docs: {
-    source: {
-      code: DropMenuCheckboxRaw,
-    },
-    description: {
-      story: 'Пример меню с пунктами, содержащими Checkbox',
+export const DropMenuCheckboxExample = {
+  render: DropMenuCheckboxStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: DropMenuCheckboxRaw,
+      },
+      description: {
+        story: 'Пример меню с пунктами, содержащими Checkbox',
+      },
     },
   },
+
+  name: 'Пример с Checkbox',
 };
-DropMenuCheckboxExample.storyName = 'Пример с Checkbox';
+
 //</editor-fold>
 
 //<editor-fold desc="Меню с checkbox">
-const DropMenuRadiobuttonStory: ComponentStory<typeof DropMenu> = (props) => (
+const DropMenuRadiobuttonStory: StoryFn<typeof DropMenu> = (props) => (
   <DropMenuRadiobuttonTemplate items={[]} renderContentProp={() => false} {...cleanUpProps(props)} />
 );
 
-export const DropMenuRadiobuttonExample = DropMenuRadiobuttonStory.bind({});
-DropMenuRadiobuttonExample.parameters = {
-  docs: {
-    source: {
-      code: DropMenuRadiobuttonRaw,
-    },
-    description: {
-      story: 'Пример меню с пунктами, содержащими RadioButton',
+export const DropMenuRadiobuttonExample = {
+  render: DropMenuRadiobuttonStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: DropMenuRadiobuttonRaw,
+      },
+      description: {
+        story: 'Пример меню с пунктами, содержащими RadioButton',
+      },
     },
   },
+
+  name: 'Пример с Radiobutton',
 };
-DropMenuRadiobuttonExample.storyName = 'Пример с Radiobutton';
-//</editor-fold>

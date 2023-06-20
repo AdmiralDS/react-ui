@@ -1,7 +1,5 @@
 import * as React from 'react';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
-
+import type { Meta, StoryFn } from '@storybook/react';
 import { FileInputField, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
 import { DataAttributesDescription } from '#src/components/form/common';
@@ -15,7 +13,7 @@ import FileInputFieldRequiredRaw from '!!raw-loader!./Templates/FileInputFieldRe
 export default {
   title: 'Admiral-2.1/Form Field/FileInputField',
   component: FileInputField,
-  decorators: [withDesign],
+  decorators: undefined,
   parameters: {
     docs: {
       source: {
@@ -79,36 +77,44 @@ export default {
       control: false,
     },
   },
-} as ComponentMeta<typeof FileInputField>;
+} as Meta<typeof FileInputField>;
 
 //<editor-fold desc="FileInputField. Example">
-const FileInputFieldBaseStory: ComponentStory<typeof FileInputField> = (props) => (
+const FileInputFieldBaseStory: StoryFn<typeof FileInputField> = (props) => (
   <FileInputFieldBaseTemplate dimension={'xl'} {...cleanUpProps(props)} />
 );
 
-export const FileInputFieldBase = FileInputFieldBaseStory.bind({});
-FileInputFieldBase.parameters = {
-  docs: {
-    source: {
-      code: FileInputFieldBaseRaw,
+export const FileInputFieldBase = {
+  render: FileInputFieldBaseStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: FileInputFieldBaseRaw,
+      },
     },
   },
+
+  name: 'FileInputField. Example',
 };
-FileInputFieldBase.storyName = 'FileInputField. Example';
+
 //</editor-fold>
 
 //<editor-fold desc="FileInputField. Required">
-const FileInputFieldRequiredStory: ComponentStory<typeof FileInputField> = (props) => (
+const FileInputFieldRequiredStory: StoryFn<typeof FileInputField> = (props) => (
   <FileInputFieldRequiredTemplate dimension={'xl'} {...cleanUpProps(props)} />
 );
 
-export const FileInputFieldRequired = FileInputFieldRequiredStory.bind({});
-FileInputFieldRequired.parameters = {
-  docs: {
-    source: {
-      code: FileInputFieldRequiredRaw,
+export const FileInputFieldRequired = {
+  render: FileInputFieldRequiredStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: FileInputFieldRequiredRaw,
+      },
     },
   },
+
+  name: 'FileInputField. Required',
 };
-FileInputFieldRequired.storyName = 'FileInputField. Required';
-//</editor-fold>

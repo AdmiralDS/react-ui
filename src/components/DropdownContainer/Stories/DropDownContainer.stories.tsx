@@ -1,8 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
-
+import type { Meta, StoryFn } from '@storybook/react';
 import { DropdownContainer, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
 import { MenuContainerTemplate, SimpleContainerTemplate } from './Templates';
@@ -26,7 +24,7 @@ const Description = () => (
 );
 export default {
   title: 'Admiral-2.1/DropDownContainer',
-  decorators: [withDesign],
+  decorators: undefined,
   component: DropdownContainer,
   parameters: {
     docs: {
@@ -61,36 +59,44 @@ export default {
       control: false,
     },
   },
-} as ComponentMeta<typeof DropdownContainer>;
+} as Meta<typeof DropdownContainer>;
 
 //<editor-fold desc="Простой контейнер">
-const SimpleContainerStory: ComponentStory<typeof DropdownContainer> = ({ targetRef, ...props }) => (
+const SimpleContainerStory: StoryFn<typeof DropdownContainer> = ({ targetRef, ...props }) => (
   <SimpleContainerTemplate targetRef={targetRef} {...cleanUpProps(props)} />
 );
 
-export const SimpleContainer = SimpleContainerStory.bind({});
-SimpleContainer.parameters = {
-  docs: {
-    source: {
-      code: SimpleContainerRaw,
+export const SimpleContainer = {
+  render: SimpleContainerStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: SimpleContainerRaw,
+      },
     },
   },
+
+  name: 'Простой контейнер',
 };
-SimpleContainer.storyName = 'Простой контейнер';
+
 //</editor-fold>
 
 //<editor-fold desc="Контейнер с меню">
-const MenuContainerStory: ComponentStory<typeof DropdownContainer> = ({ targetRef, ...props }) => (
+const MenuContainerStory: StoryFn<typeof DropdownContainer> = ({ targetRef, ...props }) => (
   <MenuContainerTemplate targetRef={targetRef} {...cleanUpProps(props)} />
 );
 
-export const MenuContainer = MenuContainerStory.bind({});
-MenuContainer.parameters = {
-  docs: {
-    source: {
-      code: MenuContainerRaw,
+export const MenuContainer = {
+  render: MenuContainerStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: MenuContainerRaw,
+      },
     },
   },
+
+  name: 'Контейнер с меню',
 };
-MenuContainer.storyName = 'Контейнер с меню';
-//</editor-fold>

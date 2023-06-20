@@ -1,7 +1,5 @@
 import * as React from 'react';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
-
+import type { Meta, StoryFn } from '@storybook/react';
 import {
   TextInput,
   INPUT_DIMENSIONS_VALUES,
@@ -18,7 +16,7 @@ import TextInputPlaygroundRaw from '!!raw-loader!./Templates/TextInputPlayground
 export default {
   title: 'Admiral-2.1/Input/TextInput',
   component: TextInput,
-  decorators: [withDesign],
+  decorators: undefined,
   parameters: {
     docs: {
       source: {
@@ -99,20 +97,23 @@ export default {
       control: { type: 'boolean' },
     },
   },
-} as ComponentMeta<typeof TextInput>;
+} as Meta<typeof TextInput>;
 
 //<editor-fold desc="Базовый input компонент">
-const TextInputPlaygroundStory: ComponentStory<typeof TextInput> = (props) => (
+const TextInputPlaygroundStory: StoryFn<typeof TextInput> = (props) => (
   <TextInputPlaygroundTemplate {...cleanUpProps(props)} />
 );
 
-export const TextInputPlayground = TextInputPlaygroundStory.bind({});
-TextInputPlayground.parameters = {
-  docs: {
-    source: {
-      code: TextInputPlaygroundRaw,
+export const TextInputPlayground = {
+  render: TextInputPlaygroundStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: TextInputPlaygroundRaw,
+      },
     },
   },
+
+  name: 'Базовый input компонент',
 };
-TextInputPlayground.storyName = 'Базовый input компонент';
-//</editor-fold>

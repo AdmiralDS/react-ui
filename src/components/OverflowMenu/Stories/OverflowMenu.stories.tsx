@@ -1,7 +1,5 @@
 import * as React from 'react';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
-
+import type { Meta, StoryFn } from '@storybook/react';
 import { OverflowMenu, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
 import {
@@ -18,7 +16,7 @@ import OverflowMenuSizesOrientationRaw from '!!raw-loader!./Templates/OverflowMe
 
 export default {
   title: 'Admiral-2.1/OverflowMenu',
-  decorators: [withDesign],
+  decorators: undefined,
   component: OverflowMenu,
   parameters: {
     docs: {
@@ -84,52 +82,65 @@ export default {
       control: { type: 'boolean' },
     },
   },
-} as ComponentMeta<typeof OverflowMenu>;
+} as Meta<typeof OverflowMenu>;
 
 //<editor-fold desc="OverflowMenu. Базовый пример.">
-const OverflowMenuBaseStory: ComponentStory<typeof OverflowMenu> = (props) => (
+const OverflowMenuBaseStory: StoryFn<typeof OverflowMenu> = (props) => (
   <OverflowMenuBaseTemplate items={[]} {...cleanUpProps(props)} />
 );
 
-export const OverflowMenuBase = OverflowMenuBaseStory.bind({});
-OverflowMenuBase.parameters = {
-  docs: {
-    source: {
-      code: OverflowMenuBaseRaw,
+export const OverflowMenuBase = {
+  render: OverflowMenuBaseStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: OverflowMenuBaseRaw,
+      },
     },
   },
+
+  name: 'OverflowMenu. Базовый пример.',
 };
-OverflowMenuBase.storyName = 'OverflowMenu. Базовый пример.';
+
 //</editor-fold>
 
 //<editor-fold desc="OverflowMenu. Задизейбленные и кастомизированные опции.">
-const OverflowMenuOptionsStory: ComponentStory<typeof OverflowMenu> = (props) => (
+const OverflowMenuOptionsStory: StoryFn<typeof OverflowMenu> = (props) => (
   <OverflowMenuOptionsTemplate items={[]} {...cleanUpProps(props)} />
 );
 
-export const OverflowMenuOptions = OverflowMenuOptionsStory.bind({});
-OverflowMenuOptions.parameters = {
-  docs: {
-    source: {
-      code: OverflowMenuOptionsRaw,
+export const OverflowMenuOptions = {
+  render: OverflowMenuOptionsStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: OverflowMenuOptionsRaw,
+      },
     },
   },
+
+  name: 'OverflowMenu. Задизейбленные и кастомизированные опции.',
 };
-OverflowMenuOptions.storyName = 'OverflowMenu. Задизейбленные и кастомизированные опции.';
+
 //</editor-fold>
 
 //<editor-fold desc="OverflowMenu. Размеры и ориентация.">
-const OverflowMenuSizesOrientationStory: ComponentStory<typeof OverflowMenu> = (props) => (
+const OverflowMenuSizesOrientationStory: StoryFn<typeof OverflowMenu> = (props) => (
   <OverflowMenuSizesOrientationTemplate items={[]} {...cleanUpProps(props)} />
 );
 
-export const OverflowMenuSizesOrientation = OverflowMenuSizesOrientationStory.bind({});
-OverflowMenuSizesOrientation.parameters = {
-  docs: {
-    source: {
-      code: OverflowMenuSizesOrientationRaw,
+export const OverflowMenuSizesOrientation = {
+  render: OverflowMenuSizesOrientationStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: OverflowMenuSizesOrientationRaw,
+      },
     },
   },
+
+  name: 'OverflowMenu. Размеры и ориентация.',
 };
-OverflowMenuSizesOrientation.storyName = 'OverflowMenu. Размеры и ориентация.';
-//</editor-fold>

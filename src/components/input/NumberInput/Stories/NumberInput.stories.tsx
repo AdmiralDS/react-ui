@@ -1,6 +1,5 @@
 import * as React from 'react';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
+import type { Meta, StoryFn } from '@storybook/react';
 import styled from 'styled-components';
 import { NumberInput, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
@@ -30,7 +29,7 @@ const Description = () => <Desc>Поле ввода с возможностью 
 
 export default {
   title: 'Admiral-2.1/Input/NumberInput',
-  decorators: [withDesign],
+  decorators: undefined,
   component: NumberInput,
   parameters: {
     docs: {
@@ -120,95 +119,116 @@ export default {
       control: { type: 'boolean' },
     },
   },
-} as ComponentMeta<typeof NumberInput>;
+} as Meta<typeof NumberInput>;
 
 //<editor-fold desc="Playground">
-const PlaygroundStory: ComponentStory<typeof NumberInput> = (props) => (
+const PlaygroundStory: StoryFn<typeof NumberInput> = (props) => (
   <NumberInputPlaygroundTemplate {...cleanUpProps(props)} />
 );
-export const Playground = PlaygroundStory.bind({});
-Playground.parameters = {
-  docs: {
-    source: {
-      code: PlaygroundRaw,
+
+export const Playground = {
+  render: PlaygroundStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: PlaygroundRaw,
+      },
     },
   },
 };
+
 //</editor-fold>
 
 //<editor-fold desc="NumberInput. Задизейбленный.">
-const DisabledStory: ComponentStory<typeof NumberInput> = (props) => (
-  <NumberInputDisabledTemplate {...cleanUpProps(props)} />
-);
-export const DisabledExample = DisabledStory.bind({});
-DisabledExample.parameters = {
-  docs: {
-    source: {
-      code: DisabledRaw,
+const DisabledStory: StoryFn<typeof NumberInput> = (props) => <NumberInputDisabledTemplate {...cleanUpProps(props)} />;
+
+export const DisabledExample = {
+  render: DisabledStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: DisabledRaw,
+      },
     },
   },
+
+  name: 'NumberInput. Задизейбленный.',
 };
-DisabledExample.storyName = 'NumberInput. Задизейбленный.';
+
 //</editor-fold>
 
 //<editor-fold desc="NumberInput. Пример с minValue, maxValue.">
-const MinMaxStory: ComponentStory<typeof NumberInput> = (props) => (
-  <NumberInputMinMaxTemplate {...cleanUpProps(props)} />
-);
-export const MinMaxExample = MinMaxStory.bind({});
-MinMaxExample.parameters = {
-  docs: {
-    source: {
-      code: MinMaxRaw,
-    },
-    description: {
-      story: `Максимальное, минимальное значение. При достижении лимита, кнопки “+” или “-” принимают состояние Disabled.
-      Если вручную введенное значение больше-меньше указанного диапазона, то оно принимает наиболее близкое
-      значение из возможных при выводе фокуса из поля.`,
+const MinMaxStory: StoryFn<typeof NumberInput> = (props) => <NumberInputMinMaxTemplate {...cleanUpProps(props)} />;
+
+export const MinMaxExample = {
+  render: MinMaxStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: MinMaxRaw,
+      },
+      description: {
+        story: `Максимальное, минимальное значение. При достижении лимита, кнопки “+” или “-” принимают состояние Disabled.
+        Если вручную введенное значение больше-меньше указанного диапазона, то оно принимает наиболее близкое
+        значение из возможных при выводе фокуса из поля.`,
+      },
     },
   },
+
+  name: 'NumberInput. Пример с minValue, maxValue.',
 };
-MinMaxExample.storyName = 'NumberInput. Пример с minValue, maxValue.';
+
 //</editor-fold>
 
 //<editor-fold desc="NumberInput. Пример изменения настроек (suffix, precision, thousand).">
-const CustomStory: ComponentStory<typeof NumberInput> = (props) => (
-  <NumberInputCustomisedTemplate {...cleanUpProps(props)} />
-);
-export const CustomExample = CustomStory.bind({});
-CustomExample.parameters = {
-  docs: {
-    source: {
-      code: CustomRaw,
-    },
-    description: {
-      story: `Пользователь может указать с помощью параметра precision (по умолчанию равен 2), 
-      с какой точностью компонент должен выводить число (сколько разрядов должно быть в дробной части числа). 
-      В этом случае при потере фокуса, если число содержит не все разряды в дробной части или дробная 
-      часть отсутствует, должна произойти корректировка значения и недостающее количество разрядов должно быть заполнено нулями.`,
+const CustomStory: StoryFn<typeof NumberInput> = (props) => <NumberInputCustomisedTemplate {...cleanUpProps(props)} />;
+
+export const CustomExample = {
+  render: CustomStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: CustomRaw,
+      },
+      description: {
+        story: `Пользователь может указать с помощью параметра precision (по умолчанию равен 2), 
+        с какой точностью компонент должен выводить число (сколько разрядов должно быть в дробной части числа). 
+        В этом случае при потере фокуса, если число содержит не все разряды в дробной части или дробная 
+        часть отсутствует, должна произойти корректировка значения и недостающее количество разрядов должно быть заполнено нулями.`,
+      },
     },
   },
+
+  name: 'NumberInput. Пример изменения настроек (suffix, precision, thousand).',
 };
-CustomExample.storyName = 'NumberInput. Пример изменения настроек (suffix, precision, thousand).';
+
 //</editor-fold>
 
 //<editor-fold desc="NumberInput. Примеры контролируемого инпута.">
-const ControlledStory: ComponentStory<typeof NumberInput> = () => <NumberInputControlledTemplate />;
-export const ControlledExample = ControlledStory.bind({});
-ControlledExample.parameters = {
-  docs: {
-    source: {
-      code: ControlledRaw,
-    },
-    description: {
-      story: `В случае использования контролируемого инпута в value необходимо передавать уже
-      отформатированную строку с разделителями тысяч (суффикс/префикс в value вносить не нужно).\n\nБиблиотека 
-      предоставляет утилиту fitToCurrency, котороая возвращает строку отформатированную в денежном формате. В качестве параметров 
-      данная утилита принимает value - значение, которое надо отформатировать, а также параметры precision, decimal, thousand. 
-      Также библиотека предоставляет утилиту clearValue, которая возвращает входную строку, из которой удалены все символы кроме 
-      цифр, символа decimal и минуса`,
+const ControlledStory: StoryFn<typeof NumberInput> = () => <NumberInputControlledTemplate />;
+
+export const ControlledExample = {
+  render: ControlledStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: ControlledRaw,
+      },
+      description: {
+        story: `В случае использования контролируемого инпута в value необходимо передавать уже
+        отформатированную строку с разделителями тысяч (суффикс/префикс в value вносить не нужно).\n\nБиблиотека 
+        предоставляет утилиту fitToCurrency, котороая возвращает строку отформатированную в денежном формате. В качестве параметров 
+        данная утилита принимает value - значение, которое надо отформатировать, а также параметры precision, decimal, thousand. 
+        Также библиотека предоставляет утилиту clearValue, которая возвращает входную строку, из которой удалены все символы кроме 
+        цифр, символа decimal и минуса`,
+      },
     },
   },
+
+  name: 'NumberInput. Примеры контролируемого инпута.',
 };
-ControlledExample.storyName = 'NumberInput. Примеры контролируемого инпута.';
-//</editor-fold>
