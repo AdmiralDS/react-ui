@@ -3,7 +3,7 @@
     "composite": true,
     "target": "ES2019",
     "lib": ["DOM", "DOM.Iterable", "ES2019"],
-    "types": ["@types/jest", "@testing-library/dom", "@testing-library/react", "@types/testing-library__jest-dom"],
+    "types": ["@types/jest", "@testing-library/dom", "@types/testing-library__jest-dom"],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
