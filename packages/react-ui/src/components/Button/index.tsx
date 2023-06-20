@@ -59,6 +59,7 @@ const ButtonContent = styled.div<{ dimension?: Dimension; $loading?: boolean }>`
   vertical-align: top;
 
   display: inline-flex;
+  gap: 8px;
   flex-direction: row;
   overflow: hidden;
   flex-wrap: nowrap;
@@ -70,10 +71,6 @@ const ButtonContent = styled.div<{ dimension?: Dimension; $loading?: boolean }>`
     display: inline-block;
     flex: 0 1 auto;
     white-space: nowrap;
-  }
-
-  > *:not(:first-child) {
-    margin-left: 8px;
   }
 
   & > svg {
@@ -124,8 +121,8 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ) => {
     const spinnerDimension = dimension === 's' ? 'ms' : 'm';
     const spinnerInverse = appearance !== 'secondary' && appearance !== 'ghost';
-    const hasIconStart = !!icon && iconPlace === 'left';
-    const hasIconEnd = !!icon && iconPlace === 'right';
+    const hasIconStart = !!iconStart || (!!icon && iconPlace === 'left');
+    const hasIconEnd = !!iconEnd || (!!icon && iconPlace === 'right');
 
     return (
       <StyledButton
@@ -135,15 +132,11 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         type={type}
         $loading={loading}
         skeleton={skeleton}
-        hasIconLeft={!!iconStart || hasIconStart}
-        hasIconRight={!!iconEnd || hasIconEnd}
         buttonCssMixin={buttonCssMixin}
         {...props}
       >
         {loading && <StyledSpinner dimension={spinnerDimension} inverse={spinnerInverse} />}
-        {!loading && !props.displayAsSquare && !hasIconStart && (
-          <AdditionalPadding />
-        )}
+        {!loading && !props.displayAsSquare && !hasIconStart && <AdditionalPadding />}
         <ButtonContent>
           {hasIconStart ? <ButtonIconContainer>{iconStart || icon}</ButtonIconContainer> : null}
           {React.Children.toArray(children).map((child, index) =>
@@ -151,9 +144,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           )}
           {hasIconEnd ? <ButtonIconContainer>{iconEnd || icon}</ButtonIconContainer> : null}
         </ButtonContent>
-        {!loading && !props.displayAsSquare && !hasIconEnd && (
-          <AdditionalPadding />
-        )}
+        {!loading && !props.displayAsSquare && !hasIconEnd && <AdditionalPadding />}
       </StyledButton>
     );
   },
