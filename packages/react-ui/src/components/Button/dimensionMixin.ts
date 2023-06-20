@@ -1,7 +1,8 @@
-import { css } from 'styled-components';
+import styled, { css } from 'styled-components';
 import { typography } from '#src/components/Typography';
-import { IconContainer } from '#src/components/TextButton/commonMixin';
 import type { Dimension } from '#src/components/Button/types';
+
+export const ButtonIconContainer = styled.div``;
 
 function getHorizontalIconPadding(dimension: Dimension) {
   switch (dimension) {
@@ -55,7 +56,7 @@ const defaultDimensionMixin = css<{ displayAsSquare?: boolean; hasIconLeft?: boo
   padding: 0;
   height: 56px;
   ${(props) => (props.displayAsSquare ? 'width: 56px;' : 'padding: 0 31px;')}
-  ${IconContainer} {
+  ${ButtonIconContainer} {
     width: 24px;
     height: 24px;
   }
@@ -83,7 +84,7 @@ export const dimensionMixin = css<{ displayAsSquare?: boolean; hasIconLeft?: boo
   &[data-dimension='s'] {
     height: 32px;
     ${(props) => (props.displayAsSquare ? 'width: 32px;' : 'padding: 0 15px;')}
-    ${IconContainer} {
+    ${ButtonIconContainer} {
       width: 20px;
       height: 20px;
     }
