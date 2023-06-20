@@ -11,6 +11,7 @@ import { skeletonAnimationMixin } from '#src/components/skeleton/animation';
 import { IconContainer } from '#src/components/TextButton/commonMixin';
 
 export type { ButtonAppearance } from '#src/components/Button/types';
+export * from './dimensionMixin';
 
 type IconPlace = 'left' | 'right';
 
@@ -151,18 +152,17 @@ const StyledButton = styled.button.attrs<
   vertical-align: center;
   pointer-events: ${(p) => (p.$loading || p.disabled || p.skeleton ? 'none' : 'all')};
 
-  ${appearanceMixin}
-  ${dimensionMixin}
-  ${(p) => p.buttonCssMixin}
+  ${appearanceMixin};
+  ${dimensionMixin};
+  ${(p) => p.buttonCssMixin};
   ${({ skeleton }) => skeleton && skeletonAnimationMixin}};
 
   ${ButtonContent} {
-    ${(p) => (p.$loading || p.skeleton ? 'visibility: hidden' : '')};
+    ${(p) => (p.$loading || p.skeleton ? 'visibility: hidden;' : '')}
   }
 
   &:hover {
     cursor: pointer;
   }
 `;
-
 Button.displayName = 'Button';

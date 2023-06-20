@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
-import { ThemeProvider } from 'styled-components';
 
-import type { CalendarPropType, Theme } from '#src/index';
-import { Calendar, ALL_BORDER_RADIUS_VALUES } from '#src/index';
+import type { CalendarPropType } from '@admiral-ds/react-ui';
+import { Calendar, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
 import {
   SimpleWithSpecialDatesTemplate,

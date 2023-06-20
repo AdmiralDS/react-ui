@@ -1,6 +1,7 @@
 import * as React from 'react';
 import type { ChangeEvent } from 'react';
 import { ThemeProvider } from 'styled-components';
+
 import { SelectField, Option } from '@admiral-ds/react-ui';
 import type { SearchSelectFieldProps, Theme } from '@admiral-ds/react-ui';
 

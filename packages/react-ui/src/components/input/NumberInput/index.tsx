@@ -142,7 +142,7 @@ export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       step = 1,
       minValue,
       maxValue,
-      placeholder = '0 ₽',
+      placeholder = 'От 0 ₽',
       align = 'left',
       skeleton = false,
       onChange,
@@ -153,6 +153,8 @@ export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
   ) => {
     const [plusDisabled, setPlusDisabled] = React.useState(false);
     const [minusDisabled, setMinusDisabled] = React.useState(false);
+    const [innerValueState, setInnerValueState] = React.useState(props.defaultValue);
+    const innerValue = props.value ?? innerValueState;
 
     const inputRef = React.useRef<HTMLInputElement>(null);
 
@@ -161,25 +163,21 @@ export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
     const decimal = userDecimal.slice(0, 1);
 
     React.useEffect(() => {
-      // проверка на undefined и пустую строку
-      const valueExist = props.value !== undefined && !!String(props.value);
-      const defaultValueExist = props.defaultValue !== undefined && !!String(props.defaultValue);
-      const value = valueExist ? String(props.value) : String(props.defaultValue);
-      if (valueExist || defaultValueExist) {
+      if (innerValue) {
         if (typeof minValue === 'number') {
-          const minusDsb = Number(clearValue(value, precision, decimal)) - step < minValue;
-          minusDisabled !== minusDsb && setMinusDisabled(minusDsb);
+          const minusDsb = Number(clearValue(String(innerValue), precision, decimal)) - step < minValue;
+          setMinusDisabled(minusDsb);
         }
         if (typeof maxValue === 'number') {
-          const plusDsb = Number(clearValue(value, precision, decimal)) + step > maxValue;
-          plusDisabled !== plusDsb && setPlusDisabled(plusDsb);
+          const plusDsb = Number(clearValue(String(innerValue), precision, decimal)) + step > maxValue;
+          setPlusDisabled(plusDsb);
         }
       } else {
         // Если параметры value, defaultValue не заданы или являются пустыми строками, тогда кнопки +/- не могут быть задизейблены
-        minusDisabled && setMinusDisabled(false);
-        plusDisabled && setPlusDisabled(false);
+        setMinusDisabled(false);
+        setPlusDisabled(false);
       }
-    }, [props.value, props.defaultValue]);
+    }, [innerValue]);
 
     const handleMinus = () => {
       const current = inputRef.current?.value || '';
@@ -212,7 +210,7 @@ export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
 
     const iconArray = React.Children.toArray(icons);
 
-    if (!props.readOnly && displayClearIcon) {
+    if (!props.readOnly && displayClearIcon && !!innerValue) {
       iconArray.unshift(
         <InputIconButton
           icon={CloseOutlineSvg}
@@ -277,22 +275,7 @@ export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
     };
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-      const newVal = event.currentTarget.value;
-
-      if (typeof minValue === 'number' && newVal) {
-        const minusDsb = Number(clearValue(newVal, precision, decimal)) - step < minValue;
-        minusDisabled !== minusDsb && setMinusDisabled(minusDsb);
-      }
-      if (typeof maxValue === 'number' && newVal) {
-        const plusDsb = Number(clearValue(newVal, precision, decimal)) + step > maxValue;
-        plusDisabled !== plusDsb && setPlusDisabled(plusDsb);
-      }
-      if (newVal === '') {
-        // когда в инпут ничего не введено, кнопки +/- не должны быть задизейблены
-        minusDisabled && setMinusDisabled(false);
-        plusDisabled && setPlusDisabled(false);
-      }
-
+      setInnerValueState(event.currentTarget.value);
       onChange?.(event);
     };
 
