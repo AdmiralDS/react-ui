@@ -136,19 +136,11 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       >
         {loading && <StyledSpinner dimension={spinnerDimension} inverse={spinnerInverse} />}
         <ButtonContent>
-          {iconStart ? (
-            <ButtonIconContainer>{iconStart}</ButtonIconContainer>
-          ) : hasIconStart ? (
-            <ButtonIconContainer>{icon}</ButtonIconContainer>
-          ) : null}
+          {hasIconStart ? <ButtonIconContainer>{iconStart || icon}</ButtonIconContainer> : null}
           {React.Children.toArray(children).map((child, index) =>
             typeof child === 'string' ? <div key={child + index}>{child}</div> : child,
           )}
-          {iconEnd ? (
-            <ButtonIconContainer>{iconEnd}</ButtonIconContainer>
-          ) : hasIconEnd ? (
-            <ButtonIconContainer>{icon}</ButtonIconContainer>
-          ) : null}
+          {hasIconEnd ? <ButtonIconContainer>{iconEnd || icon}</ButtonIconContainer> : null}
         </ButtonContent>
       </StyledButton>
     );
