@@ -2,11 +2,17 @@
   "name": "@admiral-ds/react-ui",
   "version": "5.1.0",
   "description": "React component library for Admiral design system 2.1",
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "AdmiralDS",
+    "Admiral",
+    "ui",
+    "react",
+    "library"
+  ],
+  "author": "Admiral DS team",
   "license": "See license in ./LICENSE",
   "engines": {
-    "node": ">=14"
+    "node": ">=16"
   },
   "files": [
     "dist",
@@ -112,7 +118,7 @@
     "vite": "^3.2.5",
     "vite-plugin-svgr": "^2.4.0"
   },
-  "repository": "AdmiralDS/react-ui",
+  "repository": "https://github.com/AdmiralDS/react-ui",
   "bugs": {
     "url": "https://github.com/AdmiralDS/react-ui/issues"
   },
