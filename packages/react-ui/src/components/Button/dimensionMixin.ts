@@ -33,6 +33,7 @@ export const PaddingForButtonWithIconLeft = css<{ displayAsSquare?: boolean }>`
 
   &[data-dimension='s'] {
     ${(props) => !props.displayAsSquare && `padding-left: ${getHorizontalIconPadding('s')}px;`}
+  }
 `;
 
 export const PaddingForButtonWithIconRight = css<{ displayAsSquare?: boolean }>`
@@ -50,6 +51,7 @@ export const PaddingForButtonWithIconRight = css<{ displayAsSquare?: boolean }>`
 
   &[data-dimension='s'] {
     ${(props) => !props.displayAsSquare && `padding-right: ${getHorizontalIconPadding('s')}px;`}
+  }
 `;
 
 const defaultDimensionMixin = css<{ displayAsSquare?: boolean; hasIconLeft?: boolean; hasIconRight?: boolean }>`

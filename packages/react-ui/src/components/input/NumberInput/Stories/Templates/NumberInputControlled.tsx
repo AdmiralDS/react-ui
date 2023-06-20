@@ -31,6 +31,7 @@ export const NumberInputControlledTemplate = () => {
         }}
         prefix="From"
         suffix="$"
+        placeholder="From 0 $"
         style={{ marginBottom: '40px' }}
       />
       <NumberInput
@@ -42,6 +43,7 @@ export const NumberInputControlledTemplate = () => {
         }}
         suffix={suffix}
         precision={0}
+        placeholder="0 минут"
       />
     </>
   );
