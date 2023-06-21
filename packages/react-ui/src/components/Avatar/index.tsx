@@ -32,11 +32,15 @@ const WrapperWithTooltip = TooltipHoc(Wrapper);
 const getTextColor = css<{ appearance: AvatarAppearance | { background?: string; text?: string; icon?: string } }>`
   ${({ theme, appearance }) => {
     switch (appearance) {
-      case 'light':
+      case 'neutral1':
       case 'white':
+      case 'neutral2':
+      case 'light':
         return theme.color[DefaultFontColorName];
+      case 'neutral3':
       case 'grey':
         return theme.color['Special/Static White'];
+      case 'neutral4':
       case 'dark':
         return theme.color['Neutral/Neutral 00'];
       default:
@@ -95,11 +99,15 @@ const getIconSize = css<{ dimension: Dimension }>`
 const getIconColor = css<{ appearance: AvatarAppearance | { background?: string; text?: string; icon?: string } }>`
   ${({ theme, appearance }) => {
     switch (appearance) {
-      case 'light':
+      case 'neutral1':
       case 'white':
+      case 'neutral2':
+      case 'light':
         return theme.color['Neutral/Neutral 50'];
+      case 'neutral3':
       case 'grey':
         return theme.color['Special/Static White'];
+      case 'neutral4':
       case 'dark':
         return theme.color['Neutral/Neutral 00'];
       default:
@@ -129,7 +137,11 @@ const IconWrapper = styled.div<{
 `;
 
 type Dimension = 'xs' | 's' | 'm' | 'l' | 'xl';
-type AvatarAppearance = 'light' | 'white' | 'grey' | 'dark';
+/**
+ * @deprecated Use alternative values 'neutral1' | 'neutral2' | 'neutral3' | 'neutral4'
+ */
+type Appearance = 'white' | 'light' | 'grey' | 'dark';
+export type AvatarAppearance = 'neutral1' | 'neutral2' | 'neutral3' | 'neutral4' | Appearance;
 type Status = 'success' | 'danger' | 'warn' | 'inactive';
 
 export interface AvatarProps extends React.HTMLAttributes<HTMLButtonElement> {
@@ -148,7 +160,7 @@ export interface AvatarProps extends React.HTMLAttributes<HTMLButtonElement> {
   /** Внешний вид компонента (цвет заливки, текста, иконки) -
    * можно выбрать один из четырех исходных вариантов, либо задать свою комбинацию цветов.
    * Параметры background, text и icon являются опциональными, если какие-то из них не заданы,
-   * то по умолчанию будут применены те же цвета, что и при appearance='light'
+   * то по умолчанию будут применены те же цвета, что и при appearance='neutral2'
    * */
   appearance?: AvatarAppearance | { background?: string; text?: string; icon?: string };
   /** Размер компонента */
@@ -175,7 +187,7 @@ export const Avatar = React.forwardRef<HTMLButtonElement, AvatarProps & AvatarIn
       status,
       dimension = 'xl',
       icon: Icon,
-      appearance = 'light',
+      appearance = 'neutral2',
       group = false,
       showTooltip = true,
       isMenuAvatar = false,

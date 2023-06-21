@@ -60,7 +60,7 @@ const MenuAvatar = styled(Avatar)`
 export const AvatarGroup: React.FC<AvatarGroupProps> = ({
   items,
   dimension = 'xl',
-  appearance = 'light',
+  appearance = 'neutral2',
   onAvatarSelect,
   menuWidth,
   menuMaxHeight,
