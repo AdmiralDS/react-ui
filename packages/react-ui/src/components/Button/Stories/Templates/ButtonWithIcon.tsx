@@ -41,7 +41,7 @@ export const ButtonWithIconTemplate = (props: ButtonProps) => {
           <T font="Body/Body 1 Long" as="div">
             Dimension - xl
           </T>
-          <Button dimension="xl" appearance="primary" iconPlace="right" icon={<StarSolid />}>
+          <Button dimension="xl" appearance="primary" iconEnd={<StarSolid />}>
             Button 56
           </Button>
         </div>
@@ -49,7 +49,7 @@ export const ButtonWithIconTemplate = (props: ButtonProps) => {
           <T font="Body/Body 1 Long" as="div">
             Dimension - l
           </T>
-          <Button dimension="l" appearance="secondary" icon={<StarSolid />}>
+          <Button dimension="l" appearance="secondary" iconStart={<StarSolid />}>
             Button 48
           </Button>
         </div>
@@ -57,7 +57,7 @@ export const ButtonWithIconTemplate = (props: ButtonProps) => {
           <T font="Body/Body 1 Long" as="div">
             Dimension - m
           </T>
-          <Button dimension="m" appearance="danger" iconPlace="right" icon={<StarSolid />}>
+          <Button dimension="m" appearance="danger" iconEnd={<StarSolid />}>
             Button 40
           </Button>
         </div>
@@ -65,7 +65,7 @@ export const ButtonWithIconTemplate = (props: ButtonProps) => {
           <T font="Body/Body 1 Long" as="div">
             Ghost - xl
           </T>
-          <Button dimension="xl" appearance="ghost" iconPlace="right" icon={<StarSolid />}>
+          <Button dimension="xl" appearance="ghost" iconEnd={<StarSolid />}>
             Button 56
           </Button>
         </div>
@@ -74,7 +74,7 @@ export const ButtonWithIconTemplate = (props: ButtonProps) => {
             <T font="Body/Body 1 Long" as="div" style={{ color: 'white' }}>
               White - l
             </T>
-            <Button dimension="l" appearance="white" iconPlace="right" icon={<StarSolid />}>
+            <Button dimension="l" appearance="white" iconEnd={<StarSolid />}>
               Button 48
             </Button>
           </DarkDiv>
@@ -83,7 +83,7 @@ export const ButtonWithIconTemplate = (props: ButtonProps) => {
           <T font="Body/Body 1 Long" as="div">
             Dimension - s
           </T>
-          <Button dimension="s" appearance="success" icon={<StarSolid />}>
+          <Button dimension="s" appearance="success" iconStart={<StarSolid />}>
             Button 32
           </Button>
         </div>
@@ -93,7 +93,7 @@ export const ButtonWithIconTemplate = (props: ButtonProps) => {
         <T font="Body/Body 1 Long" as="div">
           Button with icon stretch
         </T>
-        <Button dimension="l" appearance="primary" style={{ width: '100%' }} icon={<StarSolid />}>
+        <Button dimension="l" appearance="primary" style={{ width: '100%' }} iconStart={<StarSolid />}>
           Button
         </Button>
       </div>

@@ -5,8 +5,6 @@ import { Button, T } from '@admiral-ds/react-ui';
 import type { ButtonProps, ButtonAppearance, Theme } from '@admiral-ds/react-ui';
 import { ReactComponent as StarSolid } from '@admiral-ds/icons/build/system/StarSolid.svg';
 
-import { PaddingForButtonWithIconLeft, PaddingForButtonWithIconRight } from '@admiral-ds/react-ui';
-
 const ButtonContainer = styled.div<{ appearance?: ButtonAppearance }>`
   padding: 24px;
   position: relative;
@@ -28,46 +26,25 @@ export const ButtonPlaygroundTemplate = (props: ButtonProps) => {
   return (
     <ThemeProvider theme={swapBorder}>
       <T font="Body/Body 1 Long" as="div">
-        В связи с корректировкой внутренних отступов при наличии иконок рекомендуется их передавать через props "icon" и
-        "iconPlace" = "left" | "right".
+        Кнопки представлены в четырех размерностях XL, L, M и S. Для дополнительных акцентов и более прозрачных действий
+        могут применяться кнопки с иконками и текстом. Иконка может быть как перед надписью, так и после
+        (iconStart/iconEnd). В некоторых случаях могут использоваться кнопки только с иконками. Как правило, это иконки
+        значениях которых общепонятны и не вызывают сомнений.
       </T>
       <ButtonContainer appearance={props.appearance}>
         <Button {...props} displayAsSquare={false}>
           Button 56
         </Button>
 
-        <Button {...props} displayAsSquare={false} icon={<StarSolid />}>
+        <Button {...props} displayAsSquare={false} iconStart={<StarSolid />}>
           Button 56
         </Button>
 
-        <Button {...props} displayAsSquare={false} icon={<StarSolid />} iconPlace="right">
+        <Button {...props} displayAsSquare={false} iconEnd={<StarSolid />}>
           Button 56
         </Button>
 
-        <Button {...props} icon={<StarSolid />} displayAsSquare />
-      </ButtonContainer>
-      <T font="Body/Body 1 Long" as="div">
-        При передаче иконок через children необходимо прокидывать соответствующий css mixin
-        (PaddingForButtonWithIconLeft | PaddingForButtonWithIconRight).
-      </T>
-      <ButtonContainer appearance={props.appearance}>
-        <Button {...props} displayAsSquare={false}>
-          Button 56
-        </Button>
-
-        <Button {...props} buttonCssMixin={PaddingForButtonWithIconLeft} displayAsSquare={false}>
-          <StarSolid />
-          Button 56
-        </Button>
-
-        <Button {...props} buttonCssMixin={PaddingForButtonWithIconRight} displayAsSquare={false}>
-          Button 56
-          <StarSolid />
-        </Button>
-
-        <Button {...props} displayAsSquare>
-          <StarSolid />
-        </Button>
+        <Button {...props} iconStart={<StarSolid />} displayAsSquare />
       </ButtonContainer>
     </ThemeProvider>
   );
