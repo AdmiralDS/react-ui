@@ -18,3 +18,4 @@ export * from './TableCustomTitle';
 export * from './TableRenderCell';
 export * from './TableRenderGroupTitle';
 export * from './Playground';
+export * from './TableUploadOnScroll';
