@@ -98,7 +98,6 @@ const StyledSpinner = styled(Spinner)`
 const AdditionalPadding = styled.div`
   display: inline-block;
   width: 2px;
-  height: 20px;
 `;
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
@@ -162,10 +161,11 @@ const StyledButton = styled.button.attrs<
   position: relative;
   box-sizing: border-box;
   display: inline-block;
+  white-space: nowrap;
   border: none;
   border-radius: ${(p) => (p.skeleton ? 0 : mediumGroupBorderRadius(p.theme.shape))};
   appearance: none;
-  vertical-align: center;
+  vertical-align: middle;
   pointer-events: ${(p) => (p.$loading || p.disabled || p.skeleton ? 'none' : 'all')};
 
   ${appearanceMixin};

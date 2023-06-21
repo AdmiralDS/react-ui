@@ -32,15 +32,13 @@ export const ButtonPlaygroundTemplate = (props: ButtonProps) => {
         значениях которых общепонятны и не вызывают сомнений.
       </T>
       <ButtonContainer appearance={props.appearance}>
-        <Button {...props} displayAsSquare={false}>
+        <Button {...props}>Button 56</Button>
+
+        <Button {...props} iconStart={<StarSolid />}>
           Button 56
         </Button>
 
-        <Button {...props} displayAsSquare={false} iconStart={<StarSolid />}>
-          Button 56
-        </Button>
-
-        <Button {...props} displayAsSquare={false} iconEnd={<StarSolid />}>
+        <Button {...props} iconEnd={<StarSolid />}>
           Button 56
         </Button>
 
