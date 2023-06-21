@@ -29,7 +29,7 @@ const Wrapper = styled.button<{ size: string }>`
 
 const WrapperWithTooltip = TooltipHoc(Wrapper);
 
-const getTextColor = css<{ appearance: Appearance | { background?: string; text?: string; icon?: string } }>`
+const getTextColor = css<{ appearance: AvatarAppearance | { background?: string; text?: string; icon?: string } }>`
   ${({ theme, appearance }) => {
     switch (appearance) {
       case 'light':
@@ -62,7 +62,7 @@ const getTypography = css<{ dimension: Dimension }>`
 `;
 
 const Text = styled.span<{
-  appearance: Appearance | { background?: string; text?: string; icon?: string };
+  appearance: AvatarAppearance | { background?: string; text?: string; icon?: string };
   dimension: Dimension;
 }>`
   position: absolute;
@@ -92,7 +92,7 @@ const getIconSize = css<{ dimension: Dimension }>`
   }}
 `;
 
-const getIconColor = css<{ appearance: Appearance | { background?: string; text?: string; icon?: string } }>`
+const getIconColor = css<{ appearance: AvatarAppearance | { background?: string; text?: string; icon?: string } }>`
   ${({ theme, appearance }) => {
     switch (appearance) {
       case 'light':
@@ -110,7 +110,7 @@ const getIconColor = css<{ appearance: Appearance | { background?: string; text?
 
 const IconWrapper = styled.div<{
   dimension: Dimension;
-  appearance: Appearance | { background?: string; text?: string; icon?: string };
+  appearance: AvatarAppearance | { background?: string; text?: string; icon?: string };
 }>`
   position: absolute;
   top: 50%;
@@ -129,7 +129,7 @@ const IconWrapper = styled.div<{
 `;
 
 type Dimension = 'xs' | 's' | 'm' | 'l' | 'xl';
-type Appearance = 'light' | 'white' | 'grey' | 'dark';
+type AvatarAppearance = 'light' | 'white' | 'grey' | 'dark';
 type Status = 'success' | 'danger' | 'warn' | 'inactive';
 
 export interface AvatarProps extends React.HTMLAttributes<HTMLButtonElement> {
@@ -150,7 +150,7 @@ export interface AvatarProps extends React.HTMLAttributes<HTMLButtonElement> {
    * Параметры background, text и icon являются опциональными, если какие-то из них не заданы,
    * то по умолчанию будут применены те же цвета, что и при appearance='light'
    * */
-  appearance?: Appearance | { background?: string; text?: string; icon?: string };
+  appearance?: AvatarAppearance | { background?: string; text?: string; icon?: string };
   /** Размер компонента */
   dimension?: Dimension;
   /** Уникальный идентификатор svg маски */
