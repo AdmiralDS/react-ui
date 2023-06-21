@@ -277,6 +277,8 @@ export interface TableProps extends React.HTMLAttributes<HTMLDivElement> {
    * Если nextColumnName равен null, значит столбец передвигают в самый конец списка.
    */
   onColumnDrag?: (columnName: string, nextColumnName: string | null) => void;
+  /** Отображение иконки (вертикальное многоточие) для контекстного меню (OverflowMenu) */
+  showOverflowMenuIcon?: boolean;
 }
 
 type GroupInfo = {
@@ -322,6 +324,7 @@ export const Table: React.FC<TableProps> = ({
   virtualScroll,
   locale,
   onColumnDrag,
+  showOverflowMenuIcon,
   ...props
 }) => {
   const theme = useTheme() || LIGHT_THEME;
@@ -824,6 +827,7 @@ export const Table: React.FC<TableProps> = ({
         scrollbar={scrollbar}
         grey={zebraRows[row.id]?.includes('even')}
         key={`row_${row.id}`}
+        showOverflowMenuIcon={showOverflowMenuIcon}
       >
         {isGroupRow ? renderGroupRow(row) : renderRegularRow(row, index)}
       </RowWrapper>

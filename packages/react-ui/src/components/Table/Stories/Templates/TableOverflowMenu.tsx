@@ -154,5 +154,7 @@ export const OverflowMenuTemplate = (props: TableProps) => {
     setCols(newCols);
   };
 
-  return <Table {...props} dimension="m" rowList={rowList} columnList={cols} onColumnResize={handleResize} />;
+  return <Table {...props} dimension="m" rowList={rowList} columnList={cols} onColumnResize={handleResize} 
+  showOverflowMenuIcon={true}
+  />;
 };

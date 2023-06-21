@@ -47,7 +47,7 @@ export const NormalWrapper = styled.div`
   display: flex;
 `;
 
-export const OverflowMenuWrapper = styled.div<{ $offset: number; dimension: TableProps['dimension'] }>`
+export const OverflowMenuWrapper = styled.div<{ $offset: number; dimension: TableProps['dimension']; showOverflowMenuIcon?: boolean }>`
   box-sizing: border-box;
   display: flex;
   align-items: center;
@@ -57,7 +57,8 @@ export const OverflowMenuWrapper = styled.div<{ $offset: number; dimension: Tabl
   will-change: margin-left;
   z-index: 5;
   ${overflowMenuStyle};
-  visibility: hidden;
+  visibility: ${({ showOverflowMenuIcon }) =>
+  showOverflowMenuIcon ? 'visible' : 'hidden'};
 
   &:hover {
     visibility: visible;
