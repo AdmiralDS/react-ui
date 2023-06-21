@@ -70,6 +70,7 @@ const CountryContainer = styled.div<{
   left: 16px;
   transform: translateY(-50%);
   display: flex;
+  height: ${(p) => (p.dimension === 's' ? '20px' : '24px')};
 
   & ${Chevron} {
     & *[fill^='#'] {
@@ -85,6 +86,10 @@ const CountryContainer = styled.div<{
 
 const PhoneInputDropContainer = styled(StyledDropdownContainer)`
   width: 100%;
+`;
+
+const FlagContainer = styled.div<{ dimension: Dimension }>`
+  width: ${(p) => (p.dimension === 's' ? '18' : '22')}px;
 `;
 
 export interface PhoneNumberInputProps extends Omit<TextInputProps, 'value'> {
@@ -326,7 +331,7 @@ export const PhoneNumberInput = React.forwardRef<HTMLInputElement, PhoneNumberIn
           disabled={disabled}
           onClick={handleButtonClick}
         >
-          {IconComponent}
+          <FlagContainer dimension={dimension}>{IconComponent}</FlagContainer>
           {!props.readOnly && <Chevron disabled={disabled || props.readOnly} />}
         </CountryContainer>
       </PhoneContainer>

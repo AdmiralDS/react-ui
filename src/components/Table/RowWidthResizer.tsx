@@ -56,29 +56,30 @@ export function RowWidthResizer({ name, disabled, dimension, columnMinWidth, onC
   const handleResize = (e: any) => {
     e.preventDefault();
     const width = node.current?.parentElement?.getBoundingClientRect().width || 100;
-    let newWidth = width - (clientXRef.current - e.clientX);
+    const clientX = e.changedTouches ? e.changedTouches[0].clientX : e.clientX;
+    let newWidth = width - (clientXRef.current - clientX);
     newWidth = newWidth >= columnMinWidth ? newWidth : columnMinWidth;
     if (width !== newWidth) {
       onChange({ name, width: newWidth });
     }
-    clientXRef.current = e.clientX;
+    clientXRef.current = clientX;
   };
 
-  const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleClick = (e: any) => {
     e.preventDefault();
     // block column drag
     e.stopPropagation();
     setTaken(true);
-    clientXRef.current = e.clientX;
+    clientXRef.current = e.changedTouches ? e.changedTouches[0].clientX : e.clientX;
   };
 
-  const handleMouseMove = (e: MouseEvent) => {
+  const handleMouseMove = (e: MouseEvent | TouchEvent) => {
     if (isTaken) {
       handleResize(e);
     }
   };
 
-  const handleMouseUp = (e: MouseEvent) => {
+  const handleMouseUp = (e: MouseEvent | TouchEvent) => {
     if (isTaken) {
       handleResize(e);
       setTaken(false);
@@ -91,17 +92,27 @@ export function RowWidthResizer({ name, disabled, dimension, columnMinWidth, onC
     if (!disabled) {
       document.addEventListener('mousemove', updateOnMove);
       document.addEventListener('mouseup', handleMouseUp);
+      document.addEventListener('touchmove', updateOnMove);
+      document.addEventListener('touchend', handleMouseUp);
 
       return () => {
         freeResources();
         document.removeEventListener('mousemove', updateOnMove);
         document.removeEventListener('mouseup', handleMouseUp);
+        document.removeEventListener('touchmove', updateOnMove);
+        document.removeEventListener('touchend', handleMouseUp);
       };
     }
   });
 
   return (
-    <ResizerWrapper ref={node} disabled={disabled} dimension={dimension} onMouseDown={handleMouseDown}>
+    <ResizerWrapper
+      ref={node}
+      disabled={disabled}
+      dimension={dimension}
+      onMouseDown={handleClick}
+      onTouchStart={handleClick}
+    >
       <Resizer />
     </ResizerWrapper>
   );
