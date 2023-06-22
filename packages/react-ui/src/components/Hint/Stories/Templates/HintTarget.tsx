@@ -22,8 +22,7 @@ export const HintTargetTemplate = (args: HintProps) => {
         ref={btnRef}
         dimension="xl"
         appearance="primary"
-        iconPlace="right"
-        icon={
+        iconEnd={
           <Hint
             {...args}
             visible={visible}
