@@ -27,6 +27,7 @@ import {
   RenderCellTemplate,
   RenderGroupTitleTemplate,
   PlaygroundTemplate,
+  LoadOnScrollTemplate,
 } from './Templates';
 // Imports of text sources
 import VirtualScrollRaw from '!!raw-loader!./Templates/TableVirtualScroll';
@@ -49,6 +50,7 @@ import CustomTitleRaw from '!!raw-loader!./Templates/TableCustomTitle';
 import RenderCellRaw from '!!raw-loader!./Templates/TableRenderCell';
 import RenderGroupTitleRaw from '!!raw-loader!./Templates/TableRenderGroupTitle';
 import PlaygroundRaw from '!!raw-loader!./Templates/Playground';
+import LoadScrollRaw from '!!raw-loader!./Templates/TableLoadOnScroll';
 
 const Separator = styled.div`
   height: 20px;
@@ -534,6 +536,27 @@ VirtualScrollExample.parameters = {
   },
 };
 VirtualScrollExample.storyName = 'Table. Виртуальный скролл.';
+//</editor-fold>
+
+//<editor-fold desc="Table. Подгрузка данных при скролле.">
+const LoadScrollStory: ComponentStory<typeof Table> = (props) => (
+  <LoadOnScrollTemplate columnList={[]} rowList={[]} {...cleanUpProps(props)} />
+);
+export const LoadScrollExample = LoadScrollStory.bind({});
+LoadScrollExample.parameters = {
+  docs: {
+    source: {
+      code: LoadScrollRaw,
+    },
+    description: {
+      story: `Пользователь может реализовать подгрузку новых строк по мере скролла тела таблицы, например, следующим образом. С
+      помощью функции renderRowWrapper можно создать элемент-обёртку над последней строкой в таблице, 
+      и через IntersectionObserver отслеживать момент, когда элемент-обёртка станет видим в пределах тела таблицы (т.е. момент доскролла до последней строки). 
+      Это событие будет являться триггером для загрузки новой порции строк.`,
+    },
+  },
+};
+LoadScrollExample.storyName = 'Table. Подгрузка данных при скролле.';
 //</editor-fold>
 
 //<editor-fold desc="Пример с группировкой строк">
