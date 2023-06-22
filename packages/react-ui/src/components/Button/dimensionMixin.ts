@@ -1,7 +1,8 @@
-import { css } from 'styled-components';
+import styled, { css } from 'styled-components';
 import { typography } from '#src/components/Typography';
-import { IconContainer } from '#src/components/TextButton/commonMixin';
 import type { Dimension } from '#src/components/Button/types';
+
+export const ButtonIconContainer = styled.div``;
 
 function getHorizontalIconPadding(dimension: Dimension) {
   switch (dimension) {
@@ -17,6 +18,10 @@ function getHorizontalIconPadding(dimension: Dimension) {
   }
 }
 
+/**
+ * @deprecated Используйте iconStart
+ * css mixin для установки правильного отступа у иконки
+ */
 export const PaddingForButtonWithIconLeft = css<{ displayAsSquare?: boolean }>`
   &[data-dimension='xl'] {
     ${(props) => !props.displayAsSquare && `padding-left: ${getHorizontalIconPadding('xl')}px;`}
@@ -35,6 +40,10 @@ export const PaddingForButtonWithIconLeft = css<{ displayAsSquare?: boolean }>`
   }
 `;
 
+/**
+ * @deprecated Используйте iconEnd
+ * css mixin для установки правильного отступа у иконки
+ */
 export const PaddingForButtonWithIconRight = css<{ displayAsSquare?: boolean }>`
   &[data-dimension='xl'] {
     ${(props) => !props.displayAsSquare && `padding-right: ${getHorizontalIconPadding('xl')}px;`}
@@ -53,11 +62,11 @@ export const PaddingForButtonWithIconRight = css<{ displayAsSquare?: boolean }>`
   }
 `;
 
-const defaultDimensionMixin = css<{ displayAsSquare?: boolean; hasIconLeft?: boolean; hasIconRight?: boolean }>`
+const defaultDimensionMixin = css<{ displayAsSquare?: boolean }>`
   padding: 0;
   height: 56px;
-  ${(props) => (props.displayAsSquare ? 'width: 56px;' : 'padding: 0 31px;')}
-  ${IconContainer} {
+  ${(props) => (props.displayAsSquare ? 'width: 56px;' : 'padding: 0 29px;')}
+  ${ButtonIconContainer} {
     width: 24px;
     height: 24px;
   }
@@ -65,7 +74,7 @@ const defaultDimensionMixin = css<{ displayAsSquare?: boolean; hasIconLeft?: boo
   ${typography['Button/Button 1']}
 `;
 
-export const dimensionMixin = css<{ displayAsSquare?: boolean; hasIconLeft?: boolean; hasIconRight?: boolean }>`
+export const dimensionMixin = css<{ displayAsSquare?: boolean }>`
   ${defaultDimensionMixin}
 
   &[data-dimension='xl'] {
@@ -74,24 +83,21 @@ export const dimensionMixin = css<{ displayAsSquare?: boolean; hasIconLeft?: boo
 
   &[data-dimension='l'] {
     height: 48px;
-    ${(props) => (props.displayAsSquare ? 'width: 48px;' : 'padding: 0 23px;')}
+    ${(props) => (props.displayAsSquare ? 'width: 48px;' : 'padding: 0 21px;')}
   }
 
   &[data-dimension='m'] {
     height: 40px;
-    ${(props) => (props.displayAsSquare ? 'width: 40px;' : 'padding: 0 19px;')}
+    ${(props) => (props.displayAsSquare ? 'width: 40px;' : 'padding: 0 17px;')}
   }
 
   &[data-dimension='s'] {
     height: 32px;
-    ${(props) => (props.displayAsSquare ? 'width: 32px;' : 'padding: 0 15px;')}
-    ${IconContainer} {
+    ${(props) => (props.displayAsSquare ? 'width: 32px;' : 'padding: 0 13px;')}
+    ${ButtonIconContainer} {
       width: 20px;
       height: 20px;
     }
     ${typography['Button/Button 2']}
   }
-
-  ${(p) => p.hasIconLeft && PaddingForButtonWithIconLeft}
-  ${(p) => p.hasIconRight && PaddingForButtonWithIconRight}
 `;

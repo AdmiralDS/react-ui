@@ -28,90 +28,90 @@ export const ButtonStylesTemplate = (props: ButtonProps) => {
       <ButtonContainer>
         <Button dimension={props.dimension}>Button 56</Button>
 
-        <Button dimension={props.dimension} icon={<StarSolid />}>
+        <Button dimension={props.dimension} iconStart={<StarSolid />}>
           Button 56
         </Button>
 
-        <Button dimension={props.dimension} iconPlace="right" icon={<StarSolid />}>
+        <Button dimension={props.dimension} iconEnd={<StarSolid />}>
           Button 56
         </Button>
 
-        <Button dimension={props.dimension} displayAsSquare icon={<StarSolid />} />
+        <Button dimension={props.dimension} displayAsSquare iconStart={<StarSolid />} />
       </ButtonContainer>
       <ButtonContainer>
         <Button dimension={props.dimension} appearance="secondary">
           Button 56
         </Button>
 
-        <Button dimension={props.dimension} appearance="secondary" icon={<StarSolid />}>
+        <Button dimension={props.dimension} appearance="secondary" iconStart={<StarSolid />}>
           Button 56
         </Button>
 
-        <Button dimension={props.dimension} appearance="secondary" iconPlace="right" icon={<StarSolid />}>
+        <Button dimension={props.dimension} appearance="secondary" iconEnd={<StarSolid />}>
           Button 56
         </Button>
 
-        <Button dimension={props.dimension} appearance="secondary" displayAsSquare icon={<StarSolid />} />
+        <Button dimension={props.dimension} appearance="secondary" displayAsSquare iconStart={<StarSolid />} />
       </ButtonContainer>
       <ButtonContainer>
         <Button dimension={props.dimension} appearance="ghost">
           Button 56
         </Button>
 
-        <Button dimension={props.dimension} appearance="ghost" icon={<StarSolid />}>
+        <Button dimension={props.dimension} appearance="ghost" iconStart={<StarSolid />}>
           Button 56
         </Button>
 
-        <Button dimension={props.dimension} appearance="ghost" iconPlace="right" icon={<StarSolid />}>
+        <Button dimension={props.dimension} appearance="ghost" iconEnd={<StarSolid />}>
           Button 56
         </Button>
 
-        <Button dimension={props.dimension} appearance="ghost" displayAsSquare icon={<StarSolid />} />
+        <Button dimension={props.dimension} appearance="ghost" displayAsSquare iconStart={<StarSolid />} />
       </ButtonContainer>
       <ButtonContainer>
         <Button dimension={props.dimension} appearance="danger">
           Button 56
         </Button>
 
-        <Button dimension={props.dimension} appearance="danger" icon={<StarSolid />}>
+        <Button dimension={props.dimension} appearance="danger" iconStart={<StarSolid />}>
           Button 56
         </Button>
 
-        <Button dimension={props.dimension} appearance="danger" iconPlace="right" icon={<StarSolid />}>
+        <Button dimension={props.dimension} appearance="danger" iconEnd={<StarSolid />}>
           Button 56
         </Button>
 
-        <Button dimension={props.dimension} appearance="danger" displayAsSquare icon={<StarSolid />} />
+        <Button dimension={props.dimension} appearance="danger" displayAsSquare iconStart={<StarSolid />} />
       </ButtonContainer>
       <ButtonContainer>
         <Button dimension={props.dimension} appearance="success">
           Button 56
         </Button>
 
-        <Button dimension={props.dimension} appearance="success" icon={<StarSolid />}>
+        <Button dimension={props.dimension} appearance="success" iconStart={<StarSolid />}>
           Button 56
         </Button>
 
-        <Button dimension={props.dimension} appearance="success" iconPlace="right" icon={<StarSolid />}>
+        <Button dimension={props.dimension} appearance="success" iconEnd={<StarSolid />}>
           Button 56
         </Button>
 
-        <Button dimension={props.dimension} appearance="success" displayAsSquare icon={<StarSolid />} />
+        <Button dimension={props.dimension} appearance="success" displayAsSquare iconStart={<StarSolid />} />
       </ButtonContainer>
       <ButtonContainer appearance="white">
         <Button dimension={props.dimension} appearance="white">
           Button 56
         </Button>
 
-        <Button dimension={props.dimension} appearance="white" icon={<StarSolid />}>
+        <Button dimension={props.dimension} appearance="white" iconStart={<StarSolid />}>
           Button 56
         </Button>
 
-        <Button dimension={props.dimension} appearance="white" iconPlace="right" icon={<StarSolid />}>
+        <Button dimension={props.dimension} appearance="white" iconEnd={<StarSolid />}>
           Button 56
         </Button>
 
-        <Button dimension={props.dimension} appearance="white" displayAsSquare icon={<StarSolid />} />
+        <Button dimension={props.dimension} appearance="white" displayAsSquare iconStart={<StarSolid />} />
       </ButtonContainer>
     </ThemeProvider>
   );

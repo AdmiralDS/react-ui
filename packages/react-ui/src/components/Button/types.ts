@@ -11,7 +11,5 @@ export interface StyledButtonProps {
   displayAsDisabled?: boolean;
   $loading?: boolean;
   skeleton?: boolean;
-  hasIconLeft?: boolean;
-  hasIconRight?: boolean;
   buttonCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
 }
