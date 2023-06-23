@@ -55,14 +55,18 @@ export const AvatarSVG: React.FC<AvatarSVGProps> = ({
 
   const getBackgroundColor = (appearance: AvatarProps['appearance']) => {
     switch (appearance) {
+      case 'neutral1':
       case 'white':
         return theme.color['Neutral/Neutral 00'];
-      case 'grey':
-        return theme.color['Neutral/Neutral 50'];
-      case 'dark':
-        return theme.color['Neutral/Neutral 80'];
+      case 'neutral2':
       case 'light':
         return theme.color['Neutral/Neutral 10'];
+      case 'neutral3':
+      case 'grey':
+        return theme.color['Neutral/Neutral 50'];
+      case 'neutral4':
+      case 'dark':
+        return theme.color['Neutral/Neutral 80'];
       default:
         return appearance?.background || theme.color['Neutral/Neutral 10'];
     }

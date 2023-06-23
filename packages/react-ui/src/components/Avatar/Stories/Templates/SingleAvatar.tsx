@@ -38,10 +38,10 @@ export const SingleAvatarTemplate = () => (
       или самостоятельная настройка цвета фона, текста, иконки
     </Text>
     <Container style={{ background: '#F1F2F4' }}>
-      <Avatar userName="Light Appearance" />
-      <Avatar userName="White Appearance" appearance="white" />
-      <Avatar userName="Grey Appearance" appearance="grey" />
-      <Avatar userName="Dark Appearance" appearance="dark" />
+      <Avatar userName="Neutral 1 Appearance" appearance="neutral1" />
+      <Avatar userName="Neutral 2 Appearance" />
+      <Avatar userName="Neutral 3 Appearance" appearance="neutral3" />
+      <Avatar userName="Neutral 4 Appearance" appearance="neutral4" />
       <Avatar userName="Custom Appearance" appearance={{ background: '#3F7DFE', text: '#001157' }} />
       <Avatar
         userName="Custom Appearance"

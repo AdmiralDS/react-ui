@@ -108,7 +108,6 @@ export const TextButton = React.forwardRef<HTMLButtonElement, TextButtonProps>(
         ) : icon && !displayRight ? (
           <IconContainer>{icon}</IconContainer>
         ) : null}
-        {/*{icon && !displayRight && <IconContainer>{icon}</IconContainer>}*/}
         <ButtonContainer>
           <span>{text}</span>
         </ButtonContainer>
@@ -117,7 +116,6 @@ export const TextButton = React.forwardRef<HTMLButtonElement, TextButtonProps>(
         ) : icon && displayRight ? (
           <IconContainer>{icon}</IconContainer>
         ) : null}
-        {/*{icon && displayRight && <IconContainer>{icon}</IconContainer>}*/}
       </StyledButton>
     );
   },

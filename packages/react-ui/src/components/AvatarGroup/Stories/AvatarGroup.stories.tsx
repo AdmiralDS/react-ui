@@ -50,7 +50,7 @@ export default {
       control: false,
     },
     appearance: {
-      options: ['light', 'white', 'grey', 'dark'],
+      options: ['neutral1', 'neutral2', 'neutral3', 'neutral4'],
       control: { type: 'radio' },
     },
     dropContainerCssMixin: {
