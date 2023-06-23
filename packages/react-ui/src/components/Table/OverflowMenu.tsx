@@ -9,7 +9,7 @@ interface OverflowMenuProps extends React.HTMLAttributes<HTMLDivElement> {
   row: any;
   verticalScroll: boolean;
   scrollbar: number;
-  showOverflowMenuIcon: boolean;
+  showRowsActions: boolean;
 }
 
 export const OverflowMenu: React.FC<OverflowMenuProps> = ({
@@ -18,7 +18,7 @@ export const OverflowMenu: React.FC<OverflowMenuProps> = ({
   dimension,
   verticalScroll,
   scrollbar,
-  showOverflowMenuIcon,
+  showRowsActions,
   ...props
 }) => {
   const oveflowMenuRef = React.useRef<HTMLDivElement>(null);
@@ -38,7 +38,7 @@ export const OverflowMenu: React.FC<OverflowMenuProps> = ({
       data-opened={false}
       $offset={tableWidth - (verticalScroll ? scrollbar : 0)}
       dimension={dimension}
-      showOverflowMenuIcon={showOverflowMenuIcon}
+      showRowsActions={showRowsActions}
       {...props}
     >
       {row.actionRender ? row.actionRender(row) : row.overflowMenuRender?.(row, handleVisibilityChange)}

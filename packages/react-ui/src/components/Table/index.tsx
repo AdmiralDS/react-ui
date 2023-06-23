@@ -256,6 +256,9 @@ export interface TableProps extends React.HTMLAttributes<HTMLDivElement> {
   disableColumnResize?: boolean;
   /** Отображение серой линии подчеркивания для последней строки. По умолчанию линия отображается */
   showLastRowUnderline?: boolean;
+  /** Включение постоянной видимости иконок действий над строками (OverflowMenu и иконки одиночных действий).
+   * По умолчанию showRowsActions = false, при этом иконки действий видны только при ховере строк. */
+  showRowsActions?: boolean;
   /** Включение виртуального скролла для тела таблицы.
    * У таблицы обязательно должна быть задана высота, тогда тело таблицы растянется по высоте и подстроится под высоту таблицы.
    */
@@ -278,8 +281,6 @@ export interface TableProps extends React.HTMLAttributes<HTMLDivElement> {
    * Если nextColumnName равен null, значит столбец передвигают в самый конец списка.
    */
   onColumnDrag?: (columnName: string, nextColumnName: string | null) => void;
-  /** Отображение иконки (вертикальное многоточие) для контекстного меню (OverflowMenu) */
-  showOverflowMenuIcon?: boolean;
 }
 
 type GroupInfo = {
@@ -324,7 +325,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
       showDividerForLastColumn = false,
       disableColumnResize = false,
       showLastRowUnderline = true,
-      showOverflowMenuIcon = false,
+      showRowsActions = false,
       virtualScroll,
       locale,
       onColumnDrag,
@@ -831,7 +832,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
           verticalScroll={verticalScroll}
           scrollbar={scrollbar}
           grey={zebraRows[row.id]?.includes('even')}
-          showOverflowMenuIcon={showOverflowMenuIcon}
+          showRowsActions={showRowsActions}
           key={`row_${row.id}`}
         >
           {isGroupRow ? renderGroupRow(row) : renderRegularRow(row, index)}

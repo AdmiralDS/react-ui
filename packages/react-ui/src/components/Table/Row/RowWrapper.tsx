@@ -27,8 +27,8 @@ export interface RowWrapperProps extends HTMLAttributes<HTMLDivElement> {
   rowWidth?: number;
   /** Окрашивание строки в серый цвет при greyZebraRows */
   grey?: boolean;
-  /** Отображение иконки (вертикальное многоточие) для контекстного меню (OverflowMenu) */
-  showOverflowMenuIcon?: boolean;
+  /** Включение постоянной видимости иконок действий над строками */
+  showRowsActions: boolean;
 }
 
 export const RowWrapper = ({
@@ -44,7 +44,7 @@ export const RowWrapper = ({
   verticalScroll,
   scrollbar,
   grey,
-  showOverflowMenuIcon,
+  showRowsActions,
   ...props
 }: RowWrapperProps) => {
   const rowRef = React.useRef<HTMLDivElement>(null);
@@ -101,7 +101,7 @@ export const RowWrapper = ({
           verticalScroll={verticalScroll}
           scrollbar={scrollbar}
           onClick={handleOverflowMenuClick}
-          showOverflowMenuIcon={showOverflowMenuIcon}
+          showRowsActions={showRowsActions}
         />
       )}
       {row.expandedRowRender && (
