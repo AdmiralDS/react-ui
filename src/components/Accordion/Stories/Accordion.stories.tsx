@@ -49,7 +49,7 @@ export default {
   parameters: {
     docs: {
       source: {
-        code: null,
+        language: 'tsx',
       },
     },
     componentSubtitle: <Description />,

@@ -13,7 +13,7 @@ const config: StorybookConfig = {
     options: {},
   },
   docs: {
-    autodocs: 'tag',
+    autodocs: true,
   },
   webpackFinal: async (config) => {
     if (config.resolve)
@@ -30,25 +30,35 @@ const config: StorybookConfig = {
       //   .filter((rule: any) => rule.test.test('.svg'))
       //   .forEach((rule: any) => (rule.exclude = /\.svg$/i));
 
+      config.module.rules
+        .filter((rule: any) => rule.test?.test('.tsx'))
+        .forEach((rule: any) => (rule.resourceQuery = { not: [/raw/] }));
+
       // add SVGR instead
-      config.module.rules.push({
-        test: /\.svg$/,
-        use: [
-          {
-            loader: '@svgr/webpack',
-          },
-          {
-            loader: 'file-loader',
-            options: {
-              name: 'static/media/[path][name].[ext]',
-            },
-          },
-        ],
-        type: 'javascript/auto',
-        issuer: {
-          and: [/\.(ts|tsx|js|jsx|md|mdx)$/],
+      config.module.rules.push(
+        {
+          resourceQuery: /raw/,
+          type: 'asset/source',
         },
-      });
+        {
+          test: /\.svg$/,
+          use: [
+            {
+              loader: '@svgr/webpack',
+            },
+            {
+              loader: 'file-loader',
+              options: {
+                name: 'static/media/[path][name].[ext]',
+              },
+            },
+          ],
+          type: 'javascript/auto',
+          issuer: {
+            and: [/\.(ts|tsx|js|jsx|md|mdx)$/],
+          },
+        },
+      );
     }
     return config;
   },

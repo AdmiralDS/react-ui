@@ -39,7 +39,7 @@
     "test:update": "jest -u",
     "test:watch": "jest --watch",
     "lint": "eslint './src/**/*.{js,jsx,ts,tsx}' --quiet --fix",
-    "storybook": "npm run generate-svg-icon-exports && NODE_OPTIONS=--openssl-legacy-provider storybook dev -p 6006",
+    "storybook": "npm run generate-svg-icon-exports && storybook dev -p 6006",
     "build-storybook": "npm run generate-svg-icon-exports && storybook build",
     "release": "standard-version",
     "generate-svg-icon-exports": "node scripts/generate-svg-icon-exports.cjs",
