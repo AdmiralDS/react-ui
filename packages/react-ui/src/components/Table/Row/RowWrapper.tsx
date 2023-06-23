@@ -85,6 +85,7 @@ export const RowWrapper = ({
     >
       <SimpleRow
         className="tr-simple"
+        showRowsActions={showRowsActions}
         selected={!!row.selected}
         disabled={!!row.disabled}
         error={!!row.error}

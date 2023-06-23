@@ -61,11 +61,15 @@ export const OverflowMenuWrapper = styled.div<{
   will-change: margin-left;
   z-index: 5;
   ${overflowMenuStyle};
-  visibility: ${({ showRowsActions }) => (showRowsActions ? 'visible' : 'hidden')};
 
-  &:hover {
-    visibility: visible;
-  }
+  ${({ showRowsActions }) =>
+    !showRowsActions &&
+    css`
+      visibility: hidden;
+      &:hover {
+        visibility: visible;
+      }
+    `}
 `;
 
 export const Filler = styled.div`
@@ -362,6 +366,7 @@ export const Row = styled.div<{
 `;
 
 export const SimpleRow = styled.div<{
+  showRowsActions: boolean;
   selected?: boolean;
   disabled?: boolean;
   error?: boolean;
@@ -376,14 +381,18 @@ export const SimpleRow = styled.div<{
     background: ${rowBackground};
   }
 
-  &:hover {
-    & + ${OverflowMenuWrapper} {
-      visibility: visible;
-    }
-  }
-  & + div[data-opened='true'] {
-    visibility: visible;
-  }
+  ${({ showRowsActions }) =>
+    !showRowsActions &&
+    css`
+      &:hover {
+        & + ${OverflowMenuWrapper} {
+          visibility: visible;
+        }
+      }
+      & + div[data-opened='true'] {
+        visibility: visible;
+      }
+    `}
 `;
 
 export const ExpandedRow = styled.div<{ opened?: boolean; contentMaxHeight?: number | string }>`
