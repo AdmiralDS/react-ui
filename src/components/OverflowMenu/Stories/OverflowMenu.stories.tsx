@@ -10,9 +10,9 @@ import {
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
-import OverflowMenuBaseRaw from '!!raw-loader!./Templates/OverflowMenuBase';
-import OverflowMenuOptionsRaw from '!!raw-loader!./Templates/OverflowMenuOptions';
-import OverflowMenuSizesOrientationRaw from '!!raw-loader!./Templates/OverflowMenuSizesOrientation';
+import OverflowMenuBaseRaw from './Templates/OverflowMenuBase?raw';
+import OverflowMenuOptionsRaw from './Templates/OverflowMenuOptions?raw';
+import OverflowMenuSizesOrientationRaw from './Templates/OverflowMenuSizesOrientation?raw';
 
 export default {
   title: 'Admiral-2.1/OverflowMenu',

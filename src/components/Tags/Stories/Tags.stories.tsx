@@ -7,7 +7,7 @@ import { TagsKindTemplate } from './Templates';
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
-import KindRaw from '!!raw-loader!./Templates/TagsKind';
+import KindRaw from './Templates/TagsKind?raw';
 
 const Separator = styled.div`
   height: 20px;

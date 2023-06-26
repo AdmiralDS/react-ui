@@ -16,14 +16,14 @@ import {
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
-import PlaygroundRaw from '!!raw-loader!./Templates/DrawerPlayground';
-import DrawerWithBackdropRaw from '!!raw-loader!./Templates/DrawerWithBackdrop';
-import DrawerWithoutBackdropRaw from '!!raw-loader!./Templates/DrawerWithoutBackdrop';
-import DrawerNonClosableRaw from '!!raw-loader!./Templates/DrawerNonClosable';
-import DrawerPositionRaw from '!!raw-loader!./Templates/DrawerPosition';
-import DrawerMobileRaw from '!!raw-loader!./Templates/DrawerMobile';
-import DrawerWidthRaw from '!!raw-loader!./Templates/DrawerWidth';
-import DrawerCustomContentRaw from '!!raw-loader!./Templates/DrawerCustomContent';
+import PlaygroundRaw from './Templates/DrawerPlayground?raw';
+import DrawerWithBackdropRaw from './Templates/DrawerWithBackdrop?raw';
+import DrawerWithoutBackdropRaw from './Templates/DrawerWithoutBackdrop?raw';
+import DrawerNonClosableRaw from './Templates/DrawerNonClosable?raw';
+import DrawerPositionRaw from './Templates/DrawerPosition?raw';
+import DrawerMobileRaw from './Templates/DrawerMobile?raw';
+import DrawerWidthRaw from './Templates/DrawerWidth?raw';
+import DrawerCustomContentRaw from './Templates/DrawerCustomContent?raw';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';

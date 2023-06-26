@@ -9,8 +9,8 @@ import { AvatarGroupPlaygroundTemplate, AvatarGroupWidthTemplate } from './Templ
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
-import AvatarGroupWidthRaw from '!!raw-loader!./Templates/AvatarGroupWidth';
-import AvatarGroupPlaygroundRaw from '!!raw-loader!./Templates/AvatarGroupPlayground';
+import AvatarGroupWidthRaw from './Templates/AvatarGroupWidth?raw';
+import AvatarGroupPlaygroundRaw from './Templates/AvatarGroupPlayground?raw';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';

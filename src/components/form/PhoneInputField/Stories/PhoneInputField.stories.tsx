@@ -7,7 +7,7 @@ import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 import { DataAttributesDescription } from '#src/components/form/common';
 
 // Imports of text sources
-import PhoneInputFieldExampleRaw from '!!raw-loader!./Templates/PhoneInputFieldExample';
+import PhoneInputFieldExampleRaw from './Templates/PhoneInputFieldExample?raw';
 
 export default {
   title: 'Admiral-2.1/Form Field/PhoneInputField',

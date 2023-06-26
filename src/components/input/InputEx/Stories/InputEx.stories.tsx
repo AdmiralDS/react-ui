@@ -6,9 +6,9 @@ import { InputExBaseTemplate, InputExCustomTemplate, InputExPrefixSuffixSelectTe
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
-import InputExBaseRaw from '!!raw-loader!./Templates/InputExBase';
-import InputExPrefixSuffixSelectRaw from '!!raw-loader!./Templates/InputExPrefixSuffixSelect';
-import InputExCustomRaw from '!!raw-loader!./Templates/InputExCustom';
+import InputExBaseRaw from './Templates/InputExBase?raw';
+import InputExPrefixSuffixSelectRaw from './Templates/InputExPrefixSuffixSelect?raw';
+import InputExCustomRaw from './Templates/InputExCustom?raw';
 
 export default {
   title: 'Admiral-2.1/Input/InputEx',

@@ -17,12 +17,12 @@ import {
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
-import ToastNotificationRaw from '!!raw-loader!./Templates/ToastNotification';
-import ToastNotificationBaseRaw from '!!raw-loader!./Templates/ToastNotificationBase';
-import ToastLineNotificationRaw from '!!raw-loader!./Templates/ToastLineNotification';
-import ToastCustomComponentRaw from '!!raw-loader!./Templates/ToastCustomComponent';
-import ToastProgressComponentRaw from '!!raw-loader!./Templates/ToastProgressComponent';
-import ToastBackwardCompatibilityRaw from '!!raw-loader!./Templates/ToastBackwardCompatibility';
+import ToastNotificationRaw from './Templates/ToastNotification?raw';
+import ToastNotificationBaseRaw from './Templates/ToastNotificationBase?raw';
+import ToastLineNotificationRaw from './Templates/ToastLineNotification?raw';
+import ToastCustomComponentRaw from './Templates/ToastCustomComponent?raw';
+import ToastProgressComponentRaw from './Templates/ToastProgressComponent?raw';
+import ToastBackwardCompatibilityRaw from './Templates/ToastBackwardCompatibility?raw';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';

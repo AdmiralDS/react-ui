@@ -15,13 +15,13 @@ import {
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
-import HintBaseRaw from '!!raw-loader!./Templates/HintBase';
-import HintClassNameRaw from '!!raw-loader!./Templates/HintClassName';
-import HintClickRaw from '!!raw-loader!./Templates/HintClick';
-import HintPositionRaw from '!!raw-loader!./Templates/HintPosition';
-import HintTextButtonRaw from '!!raw-loader!./Templates/HintTextButton';
-import HintTargetRaw from '!!raw-loader!./Templates/HintTarget';
-import HintAnchorCssRaw from '!!raw-loader!./Templates/HintAnchorCss';
+import HintBaseRaw from './Templates/HintBase?raw';
+import HintClassNameRaw from './Templates/HintClassName?raw';
+import HintClickRaw from './Templates/HintClick?raw';
+import HintPositionRaw from './Templates/HintPosition?raw';
+import HintTextButtonRaw from './Templates/HintTextButton?raw';
+import HintTargetRaw from './Templates/HintTarget?raw';
+import HintAnchorCssRaw from './Templates/HintAnchorCss?raw';
 
 const Separator = styled.div<{ height?: number }>`
   height: ${({ height }) => (height ? height : 20)}px;

@@ -23,20 +23,20 @@ import {
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
-import RenderPropsRaw from '!!raw-loader!./Templates/SearchSelect/RenderProps';
-import LoadOnScrollRaw from '!!raw-loader!./Templates/SearchSelect/LoadingOnScroll';
-import SelectWithAsyncLoadingRaw from '!!raw-loader!./Templates/SearchSelect/SelectWithAsyncLoading';
-import SearchSelectWithFilterRaw from '!!raw-loader!./Templates/SearchSelect/SearchSelectWithFilter';
-import CustomOptionRaw from '!!raw-loader!./Templates/SearchSelect/CustomOption';
-import RenderValueRaw from '!!raw-loader!./Templates/SearchSelect/RenderValue';
-import WithAddButtonRaw from '!!raw-loader!./Templates/SearchSelect/WithAddButton';
-import SearchSelectOptionGroupRaw from '!!raw-loader!./Templates/SearchSelect/SearchSelectOptionGroup';
-import UncontrolledSearchSelectRaw from '!!raw-loader!./Templates/SearchSelect/UncontrolledSearchSelect';
-import MultipleWithAddOptionRaw from '!!raw-loader!./Templates/SearchSelect/MultipleWithAddOption';
-import MultipleWithApplyRaw from '!!raw-loader!./Templates/SearchSelect/MultipleWithApply';
-import ExpandedHeightMultiSearchSelectRaw from '!!raw-loader!./Templates/SearchSelect/ExpandedHeightMultiSearchSelect';
-import CustomOptionMultiSearchSelectRaw from '!!raw-loader!./Templates/SearchSelect/CustomOptionMultiSearchSelect';
-import CustomChipMultiSearchSelectRaw from '!!raw-loader!./Templates/SearchSelect/CustomChipMultiSearchSelect';
+import RenderPropsRaw from './Templates/SearchSelect/RenderProps?raw';
+import LoadOnScrollRaw from './Templates/SearchSelect/LoadingOnScroll?raw';
+import SelectWithAsyncLoadingRaw from './Templates/SearchSelect/SelectWithAsyncLoading?raw';
+import SearchSelectWithFilterRaw from './Templates/SearchSelect/SearchSelectWithFilter?raw';
+import CustomOptionRaw from './Templates/SearchSelect/CustomOption?raw';
+import RenderValueRaw from './Templates/SearchSelect/RenderValue?raw';
+import WithAddButtonRaw from './Templates/SearchSelect/WithAddButton?raw';
+import SearchSelectOptionGroupRaw from './Templates/SearchSelect/SearchSelectOptionGroup?raw';
+import UncontrolledSearchSelectRaw from './Templates/SearchSelect/UncontrolledSearchSelect?raw';
+import MultipleWithAddOptionRaw from './Templates/SearchSelect/MultipleWithAddOption?raw';
+import MultipleWithApplyRaw from './Templates/SearchSelect/MultipleWithApply?raw';
+import ExpandedHeightMultiSearchSelectRaw from './Templates/SearchSelect/ExpandedHeightMultiSearchSelect?raw';
+import CustomOptionMultiSearchSelectRaw from './Templates/SearchSelect/CustomOptionMultiSearchSelect?raw';
+import CustomChipMultiSearchSelectRaw from './Templates/SearchSelect/CustomChipMultiSearchSelect?raw';
 
 const queryClient = new QueryClient();
 

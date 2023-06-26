@@ -7,8 +7,8 @@ import { FontsDemoTemplate, TextStatusTemplate } from './Templates';
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
-import TextStatusRaw from '!!raw-loader!./Templates/TextStatus';
-import FontsDemoRaw from '!!raw-loader!./Templates/FontsDemo';
+import TextStatusRaw from './Templates/TextStatus?raw';
+import FontsDemoRaw from './Templates/FontsDemo?raw';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI', serif;

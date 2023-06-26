@@ -7,7 +7,7 @@ import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 import { DataAttributesDescription } from '#src/components/form/common';
 
 // Imports of text sources
-import SliderInputFieldPlaygroundRaw from '!!raw-loader!./Templates/SliderInputFieldPlayground';
+import SliderInputFieldPlaygroundRaw from './Templates/SliderInputFieldPlayground?raw';
 
 export default {
   title: 'Admiral-2.1/Form Field/SliderInputField',

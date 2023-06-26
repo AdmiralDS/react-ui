@@ -12,7 +12,7 @@ import { DataAttributesDescription } from '#src/components/form/common';
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
-import SuggestFieldExampleRaw from '!!raw-loader!./Templates/SuggestFieldExample';
+import SuggestFieldExampleRaw from './Templates/SuggestFieldExample?raw';
 
 export default {
   title: 'Admiral-2.1/Form Field/SuggestField',

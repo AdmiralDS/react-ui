@@ -12,7 +12,7 @@ import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 import { DataAttributesDescription } from '#src/components/form/common';
 
 // Imports of text sources
-import InputFieldInputRaw from '!!raw-loader!./Templates/InputFieldInput';
+import InputFieldInputRaw from './Templates/InputFieldInput?raw';
 
 export default {
   title: 'Admiral-2.1/Form Field/InputField',

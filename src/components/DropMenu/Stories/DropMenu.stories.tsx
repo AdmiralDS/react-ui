@@ -12,11 +12,11 @@ import {
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
-import SimpleRaw from '!!raw-loader!./Templates/Simple';
-import CategoryRaw from '!!raw-loader!./Templates/Category';
-import DropMenuTooltipRaw from '!!raw-loader!./Templates/DropMenuTooltip';
-import DropMenuCheckboxRaw from '!!raw-loader!./Templates/DropMenuCheckbox';
-import DropMenuRadiobuttonRaw from '!!raw-loader!./Templates/DropMenuRadiobutton';
+import SimpleRaw from './Templates/Simple?raw';
+import CategoryRaw from './Templates/Category?raw';
+import DropMenuTooltipRaw from './Templates/DropMenuTooltip?raw';
+import DropMenuCheckboxRaw from './Templates/DropMenuCheckbox?raw';
+import DropMenuRadiobuttonRaw from './Templates/DropMenuRadiobutton?raw';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';

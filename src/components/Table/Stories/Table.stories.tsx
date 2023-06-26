@@ -28,26 +28,26 @@ import {
   PlaygroundTemplate,
 } from './Templates';
 // Imports of text sources
-import VirtualScrollRaw from '!!raw-loader!./Templates/TableVirtualScroll';
-import OverflowMenuRaw from '!!raw-loader!./Templates/TableOverflowMenu';
-import GroupRaw from '!!raw-loader!./Templates/TableGroup';
-import ExtraTextRaw from '!!raw-loader!./Templates/TableExtraText';
-import ExpandRaw from '!!raw-loader!./Templates/TableExpand';
-import ZebraRaw from '!!raw-loader!./Templates/TableZebra';
-import ColumnDragDropRaw from '!!raw-loader!./Templates/TableColumnDragDrop';
-import RowStateRaw from '!!raw-loader!./Templates/TableRowState';
-import StickyRaw from '!!raw-loader!./Templates/TableSticky';
-import MultilineRaw from '!!raw-loader!./Templates/TableMultiline';
-import FilterRaw from '!!raw-loader!./Templates/TableFilter';
-import SortRaw from '!!raw-loader!./Templates/TableSort';
-import OrientationRaw from '!!raw-loader!./Templates/TableOrientation';
-import CheckboxRaw from '!!raw-loader!./Templates/TableCheckbox';
-import ColumnWidthRaw from '!!raw-loader!./Templates/TableColumnWidth';
-import StyleRaw from '!!raw-loader!./Templates/TableStyle';
-import CustomTitleRaw from '!!raw-loader!./Templates/TableCustomTitle';
-import RenderCellRaw from '!!raw-loader!./Templates/TableRenderCell';
-import RenderGroupTitleRaw from '!!raw-loader!./Templates/TableRenderGroupTitle';
-import PlaygroundRaw from '!!raw-loader!./Templates/Playground';
+import VirtualScrollRaw from './Templates/TableVirtualScroll?raw';
+import OverflowMenuRaw from './Templates/TableOverflowMenu?raw';
+import GroupRaw from './Templates/TableGroup?raw';
+import ExtraTextRaw from './Templates/TableExtraText?raw';
+import ExpandRaw from './Templates/TableExpand?raw';
+import ZebraRaw from './Templates/TableZebra?raw';
+import ColumnDragDropRaw from './Templates/TableColumnDragDrop?raw';
+import RowStateRaw from './Templates/TableRowState?raw';
+import StickyRaw from './Templates/TableSticky?raw';
+import MultilineRaw from './Templates/TableMultiline?raw';
+import FilterRaw from './Templates/TableFilter?raw';
+import SortRaw from './Templates/TableSort?raw';
+import OrientationRaw from './Templates/TableOrientation?raw';
+import CheckboxRaw from './Templates/TableCheckbox?raw';
+import ColumnWidthRaw from './Templates/TableColumnWidth?raw';
+import StyleRaw from './Templates/TableStyle?raw';
+import CustomTitleRaw from './Templates/TableCustomTitle?raw';
+import RenderCellRaw from './Templates/TableRenderCell?raw';
+import RenderGroupTitleRaw from './Templates/TableRenderGroupTitle?raw';
+import PlaygroundRaw from './Templates/Playground?raw';
 
 const Separator = styled.div`
   height: 20px;

@@ -11,9 +11,9 @@ import {
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
-import StatusIndicatorPlaygroundRaw from '!!raw-loader!./Templates/StatusIndicatorPlayground';
-import StatusIndicatorDimensionRaw from '!!raw-loader!./Templates/StatusIndicatorDimension';
-import StatusIndicatorPositionRaw from '!!raw-loader!./Templates/StatusIndicatorPosition';
+import StatusIndicatorPlaygroundRaw from './Templates/StatusIndicatorPlayground?raw';
+import StatusIndicatorDimensionRaw from './Templates/StatusIndicatorDimension?raw';
+import StatusIndicatorPositionRaw from './Templates/StatusIndicatorPosition?raw';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI', serif;

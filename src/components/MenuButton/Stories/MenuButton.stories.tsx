@@ -12,11 +12,11 @@ import {
 } from './Templates';
 
 // Imports of text sources
-import MenuButtonIconRaw from '!!raw-loader!./Templates/MenuButtonIcon';
-import MenuButtonBaseRaw from '!!raw-loader!./Templates/MenuButtonBase';
-import MenuButtonOptionsRaw from '!!raw-loader!./Templates/MenuButtonOptions';
-import MenuButtonVariantsRaw from '!!raw-loader!./Templates/MenuButtonVariants';
-import MenuButtonWithPanelRaw from '!!raw-loader!./Templates/MenuButtonWithPanel';
+import MenuButtonIconRaw from './Templates/MenuButtonIcon?raw';
+import MenuButtonBaseRaw from './Templates/MenuButtonBase?raw';
+import MenuButtonOptionsRaw from './Templates/MenuButtonOptions?raw';
+import MenuButtonVariantsRaw from './Templates/MenuButtonVariants?raw';
+import MenuButtonWithPanelRaw from './Templates/MenuButtonWithPanel?raw';
 
 export default {
   title: 'Admiral-2.1/MenuButton',

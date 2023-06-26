@@ -7,10 +7,10 @@ import { SimplePillsTemplate, PillsMenuTemplate, NestedPillsTemplate, PillWithTo
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
-import SimplePillsRaw from '!!raw-loader!./Templates/SimplePills';
-import PillsMenuRaw from '!!raw-loader!./Templates/PillsMenu';
-import NestedPillsRaw from '!!raw-loader!./Templates/NestedPills';
-import PillWithTooltipRaw from '!!raw-loader!./Templates/PillWithTooltip';
+import SimplePillsRaw from './Templates/SimplePills?raw';
+import PillsMenuRaw from './Templates/PillsMenu?raw';
+import NestedPillsRaw from './Templates/NestedPills?raw';
+import PillWithTooltipRaw from './Templates/PillWithTooltip?raw';
 
 export default {
   title: 'Admiral-2.1/Pills',

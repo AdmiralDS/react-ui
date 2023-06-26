@@ -6,7 +6,7 @@ import { FieldWithTextInputTemplate } from './Templates';
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
-import FieldWithTextInputRaw from '!!raw-loader!./Templates/FieldWithTextInput';
+import FieldWithTextInputRaw from './Templates/FieldWithTextInput?raw';
 
 export default {
   title: 'Admiral-2.1/Atoms/Field',

@@ -12,10 +12,10 @@ import {
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
-import ControlledRaw from '!!raw-loader!./Templates/SliderInputControlled';
-import TickMarksRaw from '!!raw-loader!./Templates/SliderInputTickMarks';
-import CustomRaw from '!!raw-loader!./Templates/SliderInputCustomised';
-import CustomMarkRaw from '!!raw-loader!./Templates/SliderInputCustomMark';
+import ControlledRaw from './Templates/SliderInputControlled?raw';
+import TickMarksRaw from './Templates/SliderInputTickMarks?raw';
+import CustomRaw from './Templates/SliderInputCustomised?raw';
+import CustomMarkRaw from './Templates/SliderInputCustomMark?raw';
 
 const Separator = styled.div`
   height: 20px;

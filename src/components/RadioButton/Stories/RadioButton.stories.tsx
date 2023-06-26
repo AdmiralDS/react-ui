@@ -14,11 +14,11 @@ import {
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
-import RadioButtonPlaygroundRaw from '!!raw-loader!./Templates/RadioButtonPlayground';
-import RadioButtonSizeRaw from '!!raw-loader!./Templates/RadioButtonSize';
-import RadioButtonStateRaw from '!!raw-loader!./Templates/RadioButtonState';
-import RadioButtonExtraTextRaw from '!!raw-loader!./Templates/RadioButtonExtraText';
-import RadioButtonInformerRaw from '!!raw-loader!./Templates/RadioButtonInformer';
+import RadioButtonPlaygroundRaw from './Templates/RadioButtonPlayground?raw';
+import RadioButtonSizeRaw from './Templates/RadioButtonSize?raw';
+import RadioButtonStateRaw from './Templates/RadioButtonState?raw';
+import RadioButtonExtraTextRaw from './Templates/RadioButtonExtraText?raw';
+import RadioButtonInformerRaw from './Templates/RadioButtonInformer?raw';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';

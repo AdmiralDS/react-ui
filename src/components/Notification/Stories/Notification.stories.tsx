@@ -7,8 +7,8 @@ import { StaticNotificationBaseTemplate, StaticNotificationBaseStatusTemplate } 
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
-import StaticNotificationBaseRaw from '!!raw-loader!./Templates/StaticNotificationBase';
-import StaticNotificationBaseStatusRaw from '!!raw-loader!./Templates/StaticNotificationBaseStatus';
+import StaticNotificationBaseRaw from './Templates/StaticNotificationBase?raw';
+import StaticNotificationBaseStatusRaw from './Templates/StaticNotificationBaseStatus?raw';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';

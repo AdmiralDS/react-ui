@@ -14,11 +14,11 @@ import {
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
-import FileUploaderCustomRaw from '!!raw-loader!./Templates/FileUploaderCustom';
-import FileUploaderXLRaw from '!!raw-loader!./Templates/FileUploaderXL';
-import FileUploaderCustomFilesRaw from '!!raw-loader!./Templates/FileUploaderCustomFiles';
-import FileUploaderMRaw from '!!raw-loader!./Templates/FileUploaderM';
-import FileUploaderWithStatusRaw from '!!raw-loader!./Templates/FileUploaderWithStatus';
+import FileUploaderCustomRaw from './Templates/FileUploaderCustom?raw';
+import FileUploaderXLRaw from './Templates/FileUploaderXL?raw';
+import FileUploaderCustomFilesRaw from './Templates/FileUploaderCustomFiles?raw';
+import FileUploaderMRaw from './Templates/FileUploaderM?raw';
+import FileUploaderWithStatusRaw from './Templates/FileUploaderWithStatus?raw';
 
 const Separator = styled.div`
   height: 40px;

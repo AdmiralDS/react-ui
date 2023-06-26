@@ -34,12 +34,12 @@ import {
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
-import LargeNumberOfItemsRaw from '!!raw-loader!./Templates/LargeNumberOfItems';
-import MenuWithLockCycleScrollRaw from '!!raw-loader!./Templates/MenuWithLockCycleScroll';
-import VirtualScrollRaw from '!!raw-loader!./Templates/VirtualScroll';
-import CardGroupsRaw from '!!raw-loader!./Templates/CardGroups';
-import IconsAndAdditionalTextRaw from '!!raw-loader!./Templates/IconsAndAdditionalText';
-import CheckboxMenuRaw from '!!raw-loader!./Templates/CheckboxMenu';
+import LargeNumberOfItemsRaw from './Templates/LargeNumberOfItems?raw';
+import MenuWithLockCycleScrollRaw from './Templates/MenuWithLockCycleScroll?raw';
+import VirtualScrollRaw from './Templates/VirtualScroll?raw';
+import CardGroupsRaw from './Templates/CardGroups?raw';
+import IconsAndAdditionalTextRaw from './Templates/IconsAndAdditionalText?raw';
+import CheckboxMenuRaw from './Templates/CheckboxMenu?raw';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';

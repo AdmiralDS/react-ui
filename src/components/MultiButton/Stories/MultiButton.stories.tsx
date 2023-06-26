@@ -6,9 +6,9 @@ import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 import { MultiButtonAppearanceTemplate, MultiButtonDisabledTemplate, MultiButtonIconTemplate } from './Templates';
 
 // Imports of text sources
-import MultiButtonIconRaw from '!!raw-loader!./Templates/MultiButtonIcon';
-import MultiButtonDisabledRaw from '!!raw-loader!./Templates/MultiButtonDisabled';
-import MultiButtonAppearanceRaw from '!!raw-loader!./Templates/MultiButtonAppearance';
+import MultiButtonIconRaw from './Templates/MultiButtonIcon?raw';
+import MultiButtonDisabledRaw from './Templates/MultiButtonDisabled?raw';
+import MultiButtonAppearanceRaw from './Templates/MultiButtonAppearance?raw';
 
 export default {
   title: 'Admiral-2.1/MultiButton',

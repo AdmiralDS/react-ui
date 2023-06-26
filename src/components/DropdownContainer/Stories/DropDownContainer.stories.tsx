@@ -7,8 +7,8 @@ import { MenuContainerTemplate, SimpleContainerTemplate } from './Templates';
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
-import SimpleContainerRaw from '!!raw-loader!./Templates/SimpleContainer';
-import MenuContainerRaw from '!!raw-loader!./Templates/MenuContainer';
+import SimpleContainerRaw from './Templates/SimpleContainer?raw';
+import MenuContainerRaw from './Templates/MenuContainer?raw';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';

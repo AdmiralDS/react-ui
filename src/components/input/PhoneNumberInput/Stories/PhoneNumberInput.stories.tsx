@@ -8,9 +8,9 @@ import { PhoneNumberInputMTemplate, PhoneNumberInputSTemplate, PhoneNumberInputX
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
-import PhoneNumberInputXLRaw from '!!raw-loader!./Templates/PhoneNumberInputXL';
-import PhoneNumberInputMRaw from '!!raw-loader!./Templates/PhoneNumberInputM';
-import PhoneNumberInputSRaw from '!!raw-loader!./Templates/PhoneNumberInputS';
+import PhoneNumberInputXLRaw from './Templates/PhoneNumberInputXL?raw';
+import PhoneNumberInputMRaw from './Templates/PhoneNumberInputM?raw';
+import PhoneNumberInputSRaw from './Templates/PhoneNumberInputS?raw';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';

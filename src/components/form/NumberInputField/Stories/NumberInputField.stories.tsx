@@ -7,7 +7,7 @@ import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 import { DataAttributesDescription } from '#src/components/form/common';
 
 // Imports of text sources
-import NumberInputFieldPlaygroundRaw from '!!raw-loader!./Templates/NumberInputFieldPlayground';
+import NumberInputFieldPlaygroundRaw from './Templates/NumberInputFieldPlayground?raw';
 
 export default {
   title: 'Admiral-2.1/Form Field/NumberInputField',

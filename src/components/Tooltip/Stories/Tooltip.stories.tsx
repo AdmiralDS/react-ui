@@ -19,15 +19,15 @@ import {
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
-import TooltipBaseRaw from '!!raw-loader!./Templates/TooltipBase';
-import TooltipDelayRaw from '!!raw-loader!./Templates/TooltipDelay';
-import TooltipRefRaw from '!!raw-loader!./Templates/TooltipRef';
-import TooltipMenuButtonRaw from '!!raw-loader!./Templates/TooltipMenuButton';
-import TooltipHocBaseRaw from '!!raw-loader!./Templates/TooltipHocBase';
-import TooltipHocClassRaw from '!!raw-loader!./Templates/TooltipHocClass';
-import TooltipHocFCRaw from '!!raw-loader!./Templates/TooltipHocFC';
-import TooltipHocRefSetterRaw from '!!raw-loader!./Templates/TooltipHocRefSetter';
-import TooltipHocRefRaw from '!!raw-loader!./Templates/TooltipHocRef';
+import TooltipBaseRaw from './Templates/TooltipBase?raw';
+import TooltipDelayRaw from './Templates/TooltipDelay?raw';
+import TooltipRefRaw from './Templates/TooltipRef?raw';
+import TooltipMenuButtonRaw from './Templates/TooltipMenuButton?raw';
+import TooltipHocBaseRaw from './Templates/TooltipHocBase?raw';
+import TooltipHocClassRaw from './Templates/TooltipHocClass?raw';
+import TooltipHocFCRaw from './Templates/TooltipHocFC?raw';
+import TooltipHocRefSetterRaw from './Templates/TooltipHocRefSetter?raw';
+import TooltipHocRefRaw from './Templates/TooltipHocRef?raw';
 
 const Separator = styled.div<{ height?: number }>`
   height: ${({ height }) => (height ? height : 20)}px;

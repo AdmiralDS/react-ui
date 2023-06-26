@@ -11,9 +11,9 @@ import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 import { DataAttributesDescription } from '#src/components/form/common';
 
 // Imports of text sources
-import EditModeFieldPlaygroundRaw from '!!raw-loader!./Templates/EditModeFieldPlayground';
-import EditModeFieldErrorStateRaw from '!!raw-loader!./Templates/EditModeFieldErrorState';
-import EditModeFieldExtraTextRaw from '!!raw-loader!./Templates/EditModeFieldExtraText';
+import EditModeFieldPlaygroundRaw from './Templates/EditModeFieldPlayground?raw';
+import EditModeFieldErrorStateRaw from './Templates/EditModeFieldErrorState?raw';
+import EditModeFieldExtraTextRaw from './Templates/EditModeFieldExtraText?raw';
 
 export default {
   title: 'Admiral-2.1/Form Field/EditModeField',

@@ -7,8 +7,8 @@ import { ProgressStepperPlaygroundTemplate, ProgressStepperVariantsTemplate } fr
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
-import PlaygroundRaw from '!!raw-loader!./Templates/ProgressStepperPlayground';
-import VariantsRaw from '!!raw-loader!./Templates/ProgressStepperVariants';
+import PlaygroundRaw from './Templates/ProgressStepperPlayground?raw';
+import VariantsRaw from './Templates/ProgressStepperVariants?raw';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';

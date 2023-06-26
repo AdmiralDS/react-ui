@@ -12,11 +12,11 @@ import {
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
-import BaseRaw from '!!raw-loader!./Templates/TabMenuBase';
-import UnderlineRaw from '!!raw-loader!./Templates/TabMenuUnderline';
-import DisabledRaw from '!!raw-loader!./Templates/TabMenuDisabled';
-import OverflowRaw from '!!raw-loader!./Templates/TabMenuOverflow';
-import DynamicAddRaw from '!!raw-loader!./Templates/TabMenuDynamicAdd';
+import BaseRaw from './Templates/TabMenuBase?raw';
+import UnderlineRaw from './Templates/TabMenuUnderline?raw';
+import DisabledRaw from './Templates/TabMenuDisabled?raw';
+import OverflowRaw from './Templates/TabMenuOverflow?raw';
+import DynamicAddRaw from './Templates/TabMenuDynamicAdd?raw';
 
 export default {
   title: 'Admiral-2.1/TabMenu',

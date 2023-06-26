@@ -7,8 +7,8 @@ import { FileInputFieldBaseTemplate, FileInputFieldRequiredTemplate } from './Te
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
-import FileInputFieldBaseRaw from '!!raw-loader!./Templates/FileInputFieldBase';
-import FileInputFieldRequiredRaw from '!!raw-loader!./Templates/FileInputFieldRequired';
+import FileInputFieldBaseRaw from './Templates/FileInputFieldBase?raw';
+import FileInputFieldRequiredRaw from './Templates/FileInputFieldRequired?raw';
 
 export default {
   title: 'Admiral-2.1/Form Field/FileInputField',

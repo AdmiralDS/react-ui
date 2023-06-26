@@ -13,10 +13,10 @@ import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 import { DataAttributesDescription } from '#src/components/form/common';
 
 // Imports of text sources
-import DateTimeFieldBaseRaw from '!!raw-loader!./Templates/DateTimeFieldBase';
-import DateTimeFieldDisabledRaw from '!!raw-loader!./Templates/DateTimeFieldDisabled';
-import DateTimeFieldReadOnlyRaw from '!!raw-loader!./Templates/DateTimeFieldReadOnly';
-import DateTimeFieldStatusRaw from '!!raw-loader!./Templates/DateTimeFieldStatus';
+import DateTimeFieldBaseRaw from './Templates/DateTimeFieldBase?raw';
+import DateTimeFieldDisabledRaw from './Templates/DateTimeFieldDisabled?raw';
+import DateTimeFieldReadOnlyRaw from './Templates/DateTimeFieldReadOnly?raw';
+import DateTimeFieldStatusRaw from './Templates/DateTimeFieldStatus?raw';
 
 interface DateTimeFieldProps extends FieldProps {
   dimension?: ComponentDimension;

@@ -7,7 +7,7 @@ import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 import { DataAttributesDescription } from '#src/components/form/common';
 
 // Imports of text sources
-import SliderRangeFieldPlaygroundRaw from '!!raw-loader!./Templates/SliderRangeFieldPlayground';
+import SliderRangeFieldPlaygroundRaw from './Templates/SliderRangeFieldPlayground?raw';
 
 export default {
   title: 'Admiral-2.1/Form Field/SliderRangeField',

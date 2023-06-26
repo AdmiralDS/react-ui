@@ -12,7 +12,7 @@ import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 import { DataAttributesDescription } from '#src/components/form/common';
 
 // Imports of text sources
-import DateFieldBaseRaw from '!!raw-loader!./Templates/DateFieldBase';
+import DateFieldBaseRaw from './Templates/DateFieldBase?raw';
 
 export default {
   title: 'Admiral-2.1/Form Field/DateField',

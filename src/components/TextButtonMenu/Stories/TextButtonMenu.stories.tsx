@@ -10,9 +10,9 @@ import {
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
-import TextButtonMenuPlaygroundRaw from '!!raw-loader!./Templates/TextButtonMenuPlayground';
-import TextButtonMenuDimensionRaw from '!!raw-loader!./Templates/TextButtonMenuDimension';
-import TextButtonMenuWithIconRaw from '!!raw-loader!./Templates/TextButtonMenuWithIcon';
+import TextButtonMenuPlaygroundRaw from './Templates/TextButtonMenuPlayground?raw';
+import TextButtonMenuDimensionRaw from './Templates/TextButtonMenuDimension?raw';
+import TextButtonMenuWithIconRaw from './Templates/TextButtonMenuWithIcon?raw';
 
 export default {
   title: 'Admiral-2.1/TextButtonMenu',

@@ -15,12 +15,12 @@ import {
 } from './Templates';
 
 // Imports of text sources
-import ToggleHintRaw from '!!raw-loader!./Templates/ToggleHint';
-import ToggleDimensionRaw from '!!raw-loader!./Templates/ToggleDimension';
-import ToggleMobileRaw from '!!raw-loader!./Templates/ToggleMobile';
-import TogglePlaygroundRaw from '!!raw-loader!./Templates/TogglePlayground';
-import ToggleLabelRaw from '!!raw-loader!./Templates/ToggleLabel';
-import ToggleStateRaw from '!!raw-loader!./Templates/ToggleState';
+import ToggleHintRaw from './Templates/ToggleHint?raw';
+import ToggleDimensionRaw from './Templates/ToggleDimension?raw';
+import ToggleMobileRaw from './Templates/ToggleMobile?raw';
+import TogglePlaygroundRaw from './Templates/TogglePlayground?raw';
+import ToggleLabelRaw from './Templates/ToggleLabel?raw';
+import ToggleStateRaw from './Templates/ToggleState?raw';
 
 const Separator = styled.div`
   height: 20px;

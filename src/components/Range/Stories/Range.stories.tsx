@@ -7,7 +7,7 @@ import { RangePlaygroundTemplate } from './Templates';
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
-import PlaygroundRaw from '!!raw-loader!./Templates/RangePlayground';
+import PlaygroundRaw from './Templates/RangePlayground?raw';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';

@@ -12,8 +12,8 @@ import { DateInputPlaygroundTemplate, DateInputPickMonthTemplate } from './Templ
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
-import DateInputPlaygroundRaw from '!!raw-loader!./Templates/DateInputPlayground';
-import DateInputPickMonthRaw from '!!raw-loader!./Templates/DateInputPickMonth';
+import DateInputPlaygroundRaw from './Templates/DateInputPlayground?raw';
+import DateInputPickMonthRaw from './Templates/DateInputPickMonth?raw';
 
 export default {
   title: 'Admiral-2.1/Input/DateInput',

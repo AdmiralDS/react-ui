@@ -13,11 +13,11 @@ import {
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
-import PlaygroundRaw from '!!raw-loader!./Templates/BreadcrumbsPlayground';
-import SizesRaw from '!!raw-loader!./Templates/BreadcrumbsSizes';
-import MobileRaw from '!!raw-loader!./Templates/BreadcrumbsMobile';
-import LinkRaw from '!!raw-loader!./Templates/BreadcrumbsLink';
-import ActiveCrumbRaw from '!!raw-loader!./Templates/BreadcrumbsActiveCrumb';
+import PlaygroundRaw from './Templates/BreadcrumbsPlayground?raw';
+import SizesRaw from './Templates/BreadcrumbsSizes?raw';
+import MobileRaw from './Templates/BreadcrumbsMobile?raw';
+import LinkRaw from './Templates/BreadcrumbsLink?raw';
+import ActiveCrumbRaw from './Templates/BreadcrumbsActiveCrumb?raw';
 
 const Separator = styled.div`
   height: 20px;

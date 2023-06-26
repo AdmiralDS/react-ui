@@ -10,9 +10,9 @@ import {
 } from '#src/components/TextButton/Stories/Templates';
 
 // Imports of text sources
-import TextButtonPlaygroundRaw from '!!raw-loader!./Templates/TextButtonPlayground';
-import TextButtonDimensionRaw from '!!raw-loader!./Templates/TextButtonDimension';
-import TextButtonStatusRaw from '!!raw-loader!./Templates/TextButtonStatus';
+import TextButtonPlaygroundRaw from './Templates/TextButtonPlayground?raw';
+import TextButtonDimensionRaw from './Templates/TextButtonDimension?raw';
+import TextButtonStatusRaw from './Templates/TextButtonStatus?raw';
 
 export default {
   title: 'Admiral-2.1/Text Button',

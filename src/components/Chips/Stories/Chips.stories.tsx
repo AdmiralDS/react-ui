@@ -16,13 +16,13 @@ import {
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
-import ChipsTagsRaw from '!!raw-loader!./Templates/ChipsTags';
-import ChipsTagsCloseRaw from '!!raw-loader!./Templates/ChipsTagsClose';
-import ChipsIconRaw from '!!raw-loader!./Templates/ChipsIcon';
-import ChipsSelectRaw from '!!raw-loader!./Templates/ChipsSelect';
-import ChipsMultiSelectRaw from '!!raw-loader!./Templates/ChipsMultiSelect';
-import ChipsTooltipRaw from '!!raw-loader!./Templates/ChipsTooltip';
-import ChipsBadgesRaw from '!!raw-loader!./Templates/ChipsBadges';
+import ChipsTagsRaw from './Templates/ChipsTags?raw';
+import ChipsTagsCloseRaw from './Templates/ChipsTagsClose?raw';
+import ChipsIconRaw from './Templates/ChipsIcon?raw';
+import ChipsSelectRaw from './Templates/ChipsSelect?raw';
+import ChipsMultiSelectRaw from './Templates/ChipsMultiSelect?raw';
+import ChipsTooltipRaw from './Templates/ChipsTooltip?raw';
+import ChipsBadgesRaw from './Templates/ChipsBadges?raw';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';

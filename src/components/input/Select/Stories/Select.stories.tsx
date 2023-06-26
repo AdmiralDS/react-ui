@@ -12,11 +12,11 @@ import {
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
-import CustomRenderValueRaw from '!!raw-loader!./Templates/Select/CustomRenderValue';
-import CustomRenderMultipleValuesRaw from '!!raw-loader!./Templates/Select/CustomRenderMultipleValues';
-import SelectWithTitleRaw from '!!raw-loader!./Templates/Select/SelectWithTitle';
-import SelectSimpleRaw from '!!raw-loader!./Templates/Select/SelectSimple';
-import MultiSelectRaw from '!!raw-loader!./Templates/Select/MultiSelect';
+import CustomRenderValueRaw from './Templates/Select/CustomRenderValue?raw';
+import CustomRenderMultipleValuesRaw from './Templates/Select/CustomRenderMultipleValues?raw';
+import SelectWithTitleRaw from './Templates/Select/SelectWithTitle?raw';
+import SelectSimpleRaw from './Templates/Select/SelectSimple?raw';
+import MultiSelectRaw from './Templates/Select/MultiSelect?raw';
 
 export default {
   title: 'Admiral-2.1/Input/Select/режим "select"',

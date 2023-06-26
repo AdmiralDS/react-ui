@@ -12,7 +12,7 @@ import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 import { DataAttributesDescription } from '#src/components/form/common';
 
 // Imports of text sources
-import TimeFieldInputRaw from '!!raw-loader!./Templates/TimeFieldInput';
+import TimeFieldInputRaw from './Templates/TimeFieldInput?raw';
 
 export default {
   title: 'Admiral-2.1/Form Field/TimeField',

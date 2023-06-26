@@ -13,12 +13,12 @@ import {
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
-import LinkPlaygroundRaw from '!!raw-loader!./Templates/LinkPlayground';
-import LinkPrimaryRaw from '!!raw-loader!./Templates/LinkPrimary';
-import LinkSecondaryRaw from '!!raw-loader!./Templates/LinkSecondary';
-import LinkWithIconRaw from '!!raw-loader!./Templates/LinkWithIcon';
-import LinkMixinRaw from '!!raw-loader!./Templates/LinkMixin';
-import LinkAsPropRaw from '!!raw-loader!./Templates/LinkAsProp';
+import LinkPlaygroundRaw from './Templates/LinkPlayground?raw';
+import LinkPrimaryRaw from './Templates/LinkPrimary?raw';
+import LinkSecondaryRaw from './Templates/LinkSecondary?raw';
+import LinkWithIconRaw from './Templates/LinkWithIcon?raw';
+import LinkMixinRaw from './Templates/LinkMixin?raw';
+import LinkAsPropRaw from './Templates/LinkAsProp?raw';
 
 export default {
   title: 'Admiral-2.1/Link',

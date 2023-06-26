@@ -11,10 +11,10 @@ import {
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
-import ButtonLoaderRaw from '!!raw-loader!./Templates/ButtonLoader';
-import ButtonWithIconRaw from '!!raw-loader!./Templates/ButtonWithIcon';
-import ButtonStylesRaw from '!!raw-loader!./Templates/ButtonStyles';
-import ButtonPlaygroundRaw from '!!raw-loader!./Templates/ButtonPlayground';
+import ButtonLoaderRaw from './Templates/ButtonLoader?raw';
+import ButtonWithIconRaw from './Templates/ButtonWithIcon?raw';
+import ButtonStylesRaw from './Templates/ButtonStyles?raw';
+import ButtonPlaygroundRaw from './Templates/ButtonPlayground?raw';
 
 export default {
   title: 'Admiral-2.1/Button',

@@ -14,12 +14,12 @@ import {
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
-import ModalTwoButtonsRaw from '!!raw-loader!./Templates/ModalTwoButtons';
-import ModalOneButtonRaw from '!!raw-loader!./Templates/ModalOneButton';
-import ModalWithoutButtonsRaw from '!!raw-loader!./Templates/ModalWithoutButtons';
-import ModalScrollRaw from '!!raw-loader!./Templates/ModalScroll';
-import ModalCustomContentRaw from '!!raw-loader!./Templates/ModalCustomContent';
-import ModalCustomOverlayRaw from '!!raw-loader!./Templates/ModalCustomOverlay';
+import ModalTwoButtonsRaw from './Templates/ModalTwoButtons?raw';
+import ModalOneButtonRaw from './Templates/ModalOneButton?raw';
+import ModalWithoutButtonsRaw from './Templates/ModalWithoutButtons?raw';
+import ModalScrollRaw from './Templates/ModalScroll?raw';
+import ModalCustomContentRaw from './Templates/ModalCustomContent?raw';
+import ModalCustomOverlayRaw from './Templates/ModalCustomOverlay?raw';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';

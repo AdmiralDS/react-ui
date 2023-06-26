@@ -7,8 +7,8 @@ import { TagMenuPlaygroundTemplate, TagMenuSizesTemplate } from './Templates';
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
-import PlaygroundRaw from '!!raw-loader!./Templates/TagMenuPlayground';
-import SizesRaw from '!!raw-loader!./Templates/TagMenuSizes';
+import PlaygroundRaw from './Templates/TagMenuPlayground?raw';
+import SizesRaw from './Templates/TagMenuSizes?raw';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';

@@ -11,7 +11,7 @@ import { TextInputPlaygroundTemplate } from './Templates';
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
-import TextInputPlaygroundRaw from '!!raw-loader!./Templates/TextInputPlayground';
+import TextInputPlaygroundRaw from './Templates/TextInputPlayground?raw';
 
 export default {
   title: 'Admiral-2.1/Input/TextInput',

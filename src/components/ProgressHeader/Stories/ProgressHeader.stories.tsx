@@ -8,7 +8,7 @@ import { ProgressHeaderBaseTemplate } from './Templates';
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
-import ProgressHeaderBaseRaw from '!!raw-loader!./Templates/ProgressHeaderBase';
+import ProgressHeaderBaseRaw from './Templates/ProgressHeaderBase?raw';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';

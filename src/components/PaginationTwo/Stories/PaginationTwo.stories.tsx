@@ -7,9 +7,9 @@ import { PaginationPlaygroundTemplate, PaginationVariantsTemplate, PaginationMob
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
-import PaginationPlaygroundRaw from '!!raw-loader!./Templates/PaginationPlayground';
-import PaginationVariantsRaw from '!!raw-loader!./Templates/PaginationVariants';
-import PaginationMobileRaw from '!!raw-loader!./Templates/PaginationMobile';
+import PaginationPlaygroundRaw from './Templates/PaginationPlayground?raw';
+import PaginationVariantsRaw from './Templates/PaginationVariants?raw';
+import PaginationMobileRaw from './Templates/PaginationMobile?raw';
 
 const Separator = styled.div`
   height: 20px;

@@ -6,9 +6,9 @@ import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 import { IconButtonAppearanceTemplate, IconButtonDimensionTemplate, IconButtonStateTemplate } from './Templates';
 
 // Imports of text sources
-import IconButtonDimensionRaw from '!!raw-loader!./Templates/IconButtonDimension';
-import IconButtonStateRaw from '!!raw-loader!./Templates/IconButtonState';
-import IconButtonAppearanceRaw from '!!raw-loader!./Templates/IconButtonAppearance';
+import IconButtonDimensionRaw from './Templates/IconButtonDimension?raw';
+import IconButtonStateRaw from './Templates/IconButtonState?raw';
+import IconButtonAppearanceRaw from './Templates/IconButtonAppearance?raw';
 
 export default {
   title: 'Admiral-2.1/IconButton',

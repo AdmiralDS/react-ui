@@ -8,8 +8,8 @@ import { ProgressPageAnimationTemplate, ProgressPageBaseTemplate } from './Templ
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
-import ProgressPageBaseRaw from '!!raw-loader!./Templates/ProgressPageBase';
-import ProgressPageAnimationRaw from '!!raw-loader!./Templates/ProgressPageAnimation';
+import ProgressPageBaseRaw from './Templates/ProgressPageBase?raw';
+import ProgressPageAnimationRaw from './Templates/ProgressPageAnimation?raw';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';

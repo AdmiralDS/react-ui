@@ -12,10 +12,10 @@ import {
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
-import IconPlacementPlaygroundRaw from '!!raw-loader!./Templates/IconPlacementPlayground';
-import IconPlacementVariantsRaw from '!!raw-loader!./Templates/IconPlacementVariants';
-import IconPlacementAppearanceRaw from '!!raw-loader!./Templates/IconPlacementAppearance';
-import IconPlacementSizesRaw from '!!raw-loader!./Templates/IconPlacementSizes';
+import IconPlacementPlaygroundRaw from './Templates/IconPlacementPlayground?raw';
+import IconPlacementVariantsRaw from './Templates/IconPlacementVariants?raw';
+import IconPlacementAppearanceRaw from './Templates/IconPlacementAppearance?raw';
+import IconPlacementSizesRaw from './Templates/IconPlacementSizes?raw';
 
 export default {
   title: 'Admiral-2.1/IconPlacement',

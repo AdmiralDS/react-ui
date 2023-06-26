@@ -8,9 +8,9 @@ import { SelectTreeMTemplate, SelectTreeNoCheckboxTemplate, SelectTreeSTemplate 
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
-import SelectTreeMRaw from '!!raw-loader!./Templates/SelectTreeM';
-import SelectTreeSRaw from '!!raw-loader!./Templates/SelectTreeS';
-import SelectTreeNoCheckboxRaw from '!!raw-loader!./Templates/SelectTreeNoCheckbox';
+import SelectTreeMRaw from './Templates/SelectTreeM?raw';
+import SelectTreeSRaw from './Templates/SelectTreeS?raw';
+import SelectTreeNoCheckboxRaw from './Templates/SelectTreeNoCheckbox?raw';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';

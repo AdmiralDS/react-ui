@@ -12,11 +12,11 @@ import {
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
-import ContentSwitcherPlaygroundRaw from '!!raw-loader!./Templates/ContentSwitcherPlayground';
-import ContentSwitcherExampleRaw from '!!raw-loader!./Templates/ContentSwitcherExample';
-import ContentSwitcherWithIconRaw from '!!raw-loader!./Templates/ContentSwitcherWithIcon';
-import ContentSwitcherIconOnlyRaw from '!!raw-loader!./Templates/ContentSwitcherIconOnly';
-import ContentSwitcherWithBadgeRaw from '!!raw-loader!./Templates/ContentSwitcherWithBadge';
+import ContentSwitcherPlaygroundRaw from './Templates/ContentSwitcherPlayground?raw';
+import ContentSwitcherExampleRaw from './Templates/ContentSwitcherExample?raw';
+import ContentSwitcherWithIconRaw from './Templates/ContentSwitcherWithIcon?raw';
+import ContentSwitcherIconOnlyRaw from './Templates/ContentSwitcherIconOnly?raw';
+import ContentSwitcherWithBadgeRaw from './Templates/ContentSwitcherWithBadge?raw';
 
 export default {
   title: 'Admiral-2.1/ContentSwitcher',

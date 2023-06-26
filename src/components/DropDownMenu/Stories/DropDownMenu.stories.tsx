@@ -8,8 +8,8 @@ import { BaseDropDownTemplate, CategoryTemplate } from './Templates';
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
-import CategoryRaw from '!!raw-loader!./Templates/Category';
-import BaseDropDownRaw from '!!raw-loader!./Templates/BaseDropDown';
+import CategoryRaw from './Templates/Category?raw';
+import BaseDropDownRaw from './Templates/BaseDropDown?raw';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';

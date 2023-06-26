@@ -16,14 +16,14 @@ import {
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
-import PlaygroundRaw from '!!raw-loader!./Templates/StepperPlayground';
-import StepKindsRaw from '!!raw-loader!./Templates/StepperStepKinds';
-import AdaptiveRaw from '!!raw-loader!./Templates/StepperAdaptive';
-import ClickableLinksRaw from '!!raw-loader!./Templates/StepperClickableLinks';
-import CustomStepContentRaw from '!!raw-loader!./Templates/StepperCustomStepContent';
-import ClickPropRaw from '!!raw-loader!./Templates/StepperClickProp';
-import PreviousStepsRaw from '!!raw-loader!./Templates/StepperPreviousSteps';
-import MobileRaw from '!!raw-loader!./Templates/StepperMobile';
+import PlaygroundRaw from './Templates/StepperPlayground?raw';
+import StepKindsRaw from './Templates/StepperStepKinds?raw';
+import AdaptiveRaw from './Templates/StepperAdaptive?raw';
+import ClickableLinksRaw from './Templates/StepperClickableLinks?raw';
+import CustomStepContentRaw from './Templates/StepperCustomStepContent?raw';
+import ClickPropRaw from './Templates/StepperClickProp?raw';
+import PreviousStepsRaw from './Templates/StepperPreviousSteps?raw';
+import MobileRaw from './Templates/StepperMobile?raw';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';

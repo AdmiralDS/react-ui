@@ -6,7 +6,7 @@ import { CheckboxFieldBaseTemplate } from '#src/components/form/CheckboxField/St
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
-import CheckboxFieldBaseRaw from '!!raw-loader!./Templates/CheckboxFieldBase';
+import CheckboxFieldBaseRaw from './Templates/CheckboxFieldBase?raw';
 
 export default {
   title: 'Admiral-2.1/Form Field/CheckboxField',

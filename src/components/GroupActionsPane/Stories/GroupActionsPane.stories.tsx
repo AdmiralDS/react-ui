@@ -7,7 +7,7 @@ import { PaneSimpleTemplate } from './Templates';
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
-import PaneSimpleRaw from '!!raw-loader!./Templates/PaneSimple';
+import PaneSimpleRaw from './Templates/PaneSimple?raw';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';

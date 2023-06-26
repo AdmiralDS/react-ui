@@ -17,15 +17,15 @@ import {
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
-import SimpleWithSpecialDatesRaw from '!!raw-loader!./Templates/SimpleWithSpecialDates';
-import SimpleWithSetActiveViewWithoutDayRaw from '!!raw-loader!./Templates/SimpleWithSetActiveViewWithoutDay';
-import SimpleWithSetActiveViewDateAfterChooseYearRaw from '!!raw-loader!./Templates/SimpleWithSetActiveViewDateAfterChooseYear';
-import SimpleWithSetActiveViewDateRaw from '!!raw-loader!./Templates/SimpleWithSetActiveViewDate';
-import SimpleWithChangeViewDateRaw from '!!raw-loader!./Templates/SimpleWithChangeViewDate';
-import SimpleWithFilterDateRaw from '!!raw-loader!./Templates/SimpleWithFilterDate';
-import SimpleWithMaxDateRaw from '!!raw-loader!./Templates/SimpleWithMaxDate';
-import RangeRaw from '!!raw-loader!./Templates/Range';
-import CalendarSimpleRaw from '!!raw-loader!./Templates/CalendarSimple';
+import SimpleWithSpecialDatesRaw from './Templates/SimpleWithSpecialDates?raw';
+import SimpleWithSetActiveViewWithoutDayRaw from './Templates/SimpleWithSetActiveViewWithoutDay?raw';
+import SimpleWithSetActiveViewDateAfterChooseYearRaw from './Templates/SimpleWithSetActiveViewDateAfterChooseYear?raw';
+import SimpleWithSetActiveViewDateRaw from './Templates/SimpleWithSetActiveViewDate?raw';
+import SimpleWithChangeViewDateRaw from './Templates/SimpleWithChangeViewDate?raw';
+import SimpleWithFilterDateRaw from './Templates/SimpleWithFilterDate?raw';
+import SimpleWithMaxDateRaw from './Templates/SimpleWithMaxDate?raw';
+import RangeRaw from './Templates/Range?raw';
+import CalendarSimpleRaw from './Templates/CalendarSimple?raw';
 
 export default {
   title: 'Admiral-2.1/Calendar',

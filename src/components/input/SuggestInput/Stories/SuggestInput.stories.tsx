@@ -17,10 +17,10 @@ import {
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
-import SuggestInputPlaygroundRaw from '!!raw-loader!./Templates/SuggestInputPlayground';
-import SuggestInputUncontrolledRaw from '!!raw-loader!./Templates/SuggestInputUncontrolled';
-import SuggestInputFilterRaw from '!!raw-loader!./Templates/SuggestInputFilter';
-import SuggestInputNoMatchRaw from '!!raw-loader!./Templates/SuggestInputNoMatch';
+import SuggestInputPlaygroundRaw from './Templates/SuggestInputPlayground?raw';
+import SuggestInputUncontrolledRaw from './Templates/SuggestInputUncontrolled?raw';
+import SuggestInputFilterRaw from './Templates/SuggestInputFilter?raw';
+import SuggestInputNoMatchRaw from './Templates/SuggestInputNoMatch?raw';
 
 export default {
   title: 'Admiral-2.1/Input/SuggestInput',

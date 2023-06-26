@@ -8,8 +8,8 @@ import { AvatarPlaygroundTemplate, SingleAvatarTemplate } from './Templates';
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
-import SingleAvatarRaw from '!!raw-loader!./Templates/SingleAvatar';
-import AvatarPlaygroundRaw from '!!raw-loader!./Templates/AvatarPlayground';
+import SingleAvatarRaw from './Templates/SingleAvatar?raw';
+import AvatarPlaygroundRaw from './Templates/AvatarPlayground?raw';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';

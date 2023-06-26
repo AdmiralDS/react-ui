@@ -7,9 +7,9 @@ import { BadgePlaygroundTemplate, BadgeVariantsTemplate, BadgeAccessabilityTempl
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
-import PlaygroundRaw from '!!raw-loader!./Templates/BadgePlayground';
-import VariantsRaw from '!!raw-loader!./Templates/BadgeVariants';
-import AccessabilityRaw from '!!raw-loader!./Templates/BadgeAccessability';
+import PlaygroundRaw from './Templates/BadgePlayground?raw';
+import VariantsRaw from './Templates/BadgeVariants?raw';
+import AccessabilityRaw from './Templates/BadgeAccessability?raw';
 
 const Separator = styled.div`
   height: 20px;

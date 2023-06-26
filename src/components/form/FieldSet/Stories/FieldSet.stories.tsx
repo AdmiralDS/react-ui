@@ -9,8 +9,8 @@ import { FieldSetCheckboxTemplate, FieldSetRadioButtonTemplate } from '#src/comp
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
-import FieldSetCheckboxRaw from '!!raw-loader!./Templates/FieldSetCheckbox';
-import FieldSetRadioButtonRaw from '!!raw-loader!./Templates/FieldSetRadioButton';
+import FieldSetCheckboxRaw from './Templates/FieldSetCheckbox?raw';
+import FieldSetRadioButtonRaw from './Templates/FieldSetRadioButton?raw';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';

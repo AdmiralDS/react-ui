@@ -5,7 +5,7 @@ import { TextAreaPlaygroundTemplate } from './Templates';
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
-import TextAreaPlaygroundRaw from '!!raw-loader!./Templates/TextAreaPlayground';
+import TextAreaPlaygroundRaw from './Templates/TextAreaPlayground?raw';
 
 export default {
   title: 'Admiral-2.1/Input/TextArea',

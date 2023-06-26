@@ -7,9 +7,9 @@ import { SliderPlaygroundTemplate, SliderSimpleTemplate, SliderRangeTemplate } f
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
-import PlaygroundRaw from '!!raw-loader!./Templates/SliderPlayground';
-import SimpleRaw from '!!raw-loader!./Templates/SliderSimple';
-import RangeRaw from '!!raw-loader!./Templates/SliderRange';
+import PlaygroundRaw from './Templates/SliderPlayground?raw';
+import SimpleRaw from './Templates/SliderSimple?raw';
+import RangeRaw from './Templates/SliderRange?raw';
 
 const Separator = styled.div`
   height: 20px;

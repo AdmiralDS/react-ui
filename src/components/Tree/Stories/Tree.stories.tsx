@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import type { Meta, StoryFn } from '@storybook/react';
 import { Tree } from '@admiral-ds/react-ui';
 import { TreeWithCheckboxesTemplate, SimpleTreeTemplate } from './Templates';
-import TreeWithCheckboxesRaw from '!!raw-loader!./Templates/TreeWithCheckboxes';
-import SimpleTreeRaw from '!!raw-loader!./Templates/SimpleTree';
+import TreeWithCheckboxesRaw from './Templates/TreeWithCheckboxes?raw';
+import SimpleTreeRaw from './Templates/SimpleTree?raw';
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 const Desc = styled.div`

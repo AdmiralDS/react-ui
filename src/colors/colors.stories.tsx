@@ -1,6 +1,5 @@
 import * as React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
-import { useDarkMode } from 'storybook-dark-mode';
 import styled, { useTheme, ThemeProvider } from 'styled-components';
 import { ReactComponent as CopyOutline } from '@admiral-ds/icons/build/documents/CopyOutline.svg';
 import { TooltipHoc, typography, LIGHT_THEME, DARK_THEME, Table } from '@admiral-ds/react-ui';
@@ -83,12 +82,12 @@ const CopyButton = TooltipHoc(CopyIcon);
 const Category = ({ categoryName }: { categoryName: string }) => {
   const theme = useTheme() || LIGHT_THEME;
   const colors = [...Object.keys(COLORS[categoryName])] as Array<keyof Color>;
+  const contrastMode = theme.name;
   return (
     <CategoryWrapper>
       <Title>{categoryName == 'Opacity' ? 'Overlay opacity' : categoryName}</Title>
       <SubTitle>{COLORS_DESC[categoryName]}</SubTitle>
       {colors.map((colorName: keyof Color) => {
-        const contrastMode = useDarkMode() ? 'dark' : 'light';
         return (
           <ThemeProvider
             theme={

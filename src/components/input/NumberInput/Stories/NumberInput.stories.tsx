@@ -13,11 +13,11 @@ import {
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
-import PlaygroundRaw from '!!raw-loader!./Templates/NumberInputPlayground';
-import DisabledRaw from '!!raw-loader!./Templates/NumberInputDisabled';
-import MinMaxRaw from '!!raw-loader!./Templates/NumberInputMinMax';
-import CustomRaw from '!!raw-loader!./Templates/NumberInputCustomised';
-import ControlledRaw from '!!raw-loader!./Templates/NumberInputControlled';
+import PlaygroundRaw from './Templates/NumberInputPlayground?raw';
+import DisabledRaw from './Templates/NumberInputDisabled?raw';
+import MinMaxRaw from './Templates/NumberInputMinMax?raw';
+import CustomRaw from './Templates/NumberInputCustomised?raw';
+import ControlledRaw from './Templates/NumberInputControlled?raw';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';

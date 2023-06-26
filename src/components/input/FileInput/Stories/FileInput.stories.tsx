@@ -8,9 +8,9 @@ import { FileInputBaseTemplate, FileInputCustomTemplate, FileInputWithStatusTemp
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
-import FileInputBaseRaw from '!!raw-loader!./Templates/FileInputBase';
-import FileInputWithStatusRaw from '!!raw-loader!./Templates/FileInputWithStatus';
-import FileInputCustomRaw from '!!raw-loader!./Templates/FileInputCustom';
+import FileInputBaseRaw from './Templates/FileInputBase?raw';
+import FileInputWithStatusRaw from './Templates/FileInputWithStatus?raw';
+import FileInputCustomRaw from './Templates/FileInputCustom?raw';
 
 const Separator = styled.div`
   height: 40px;

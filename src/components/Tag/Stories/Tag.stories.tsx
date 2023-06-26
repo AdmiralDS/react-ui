@@ -15,13 +15,13 @@ import {
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
-import PlaygroundRaw from '!!raw-loader!./Templates/TagPlayground';
-import StatusRaw from '!!raw-loader!./Templates/TagStatus';
-import StatusBackgroundRaw from '!!raw-loader!./Templates/TagStatusBackground';
-import CustomColorsRaw from '!!raw-loader!./Templates/TagCustomColors';
-import StateRaw from '!!raw-loader!./Templates/TagState';
-import TooltipRaw from '!!raw-loader!./Templates/TagTooltip';
-import IconRaw from '!!raw-loader!./Templates/TagIcon';
+import PlaygroundRaw from './Templates/TagPlayground?raw';
+import StatusRaw from './Templates/TagStatus?raw';
+import StatusBackgroundRaw from './Templates/TagStatusBackground?raw';
+import CustomColorsRaw from './Templates/TagCustomColors?raw';
+import StateRaw from './Templates/TagState?raw';
+import TooltipRaw from './Templates/TagTooltip?raw';
+import IconRaw from './Templates/TagIcon?raw';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';

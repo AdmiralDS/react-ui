@@ -1,5 +1,5 @@
 import * as React from 'react';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { Meta, StoryFn } from '@storybook/react';
 import styled from 'styled-components';
 import { SliderRange, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
@@ -7,9 +7,9 @@ import { SliderRangePlaygroundTemplate, SliderRangeCustomTemplate, SliderRangeCo
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
-import PlaygroundRaw from '!!raw-loader!./Templates/SliderRangePlayground';
-import CustomRaw from '!!raw-loader!./Templates/SliderRangeCustom';
-import ControlledRaw from '!!raw-loader!./Templates/SliderRangeControlled';
+import PlaygroundRaw from './Templates/SliderRangePlayground?raw';
+import CustomRaw from './Templates/SliderRangeCustom?raw';
+import ControlledRaw from './Templates/SliderRangeControlled?raw';
 
 const Separator = styled.div`
   height: 20px;
@@ -106,10 +106,10 @@ export default {
       control: false,
     },
   },
-} as unknown as ComponentMeta<typeof SliderRange>;
+} as Meta<typeof SliderRange>;
 
 //<editor-fold desc="SliderRange. Playground">
-const PlaygroundStory: ComponentStory<typeof SliderRange> = (props) => (
+const PlaygroundStory: StoryFn<typeof SliderRange> = (props) => (
   <SliderRangePlaygroundTemplate {...cleanUpProps(props)} />
 );
 export const PlaygroundExample = PlaygroundStory.bind({});
@@ -124,7 +124,7 @@ PlaygroundExample.storyName = 'SliderRange. Playground';
 //</editor-fold>
 
 //<editor-fold desc="SliderRange. Пример изменения настроек (prefix, suffix, minValue, maxValue)">
-const CustomStory: ComponentStory<typeof SliderRange> = () => <SliderRangeCustomTemplate />;
+const CustomStory: StoryFn<typeof SliderRange> = () => <SliderRangeCustomTemplate />;
 export const CustomExample = CustomStory.bind({});
 CustomExample.parameters = {
   docs: {
@@ -137,7 +137,7 @@ CustomExample.storyName = 'SliderRange. Пример изменения наст
 //</editor-fold>
 
 //<editor-fold desc="SliderRange. Пример контролируемого компонента.">
-const ControlledStory: ComponentStory<typeof SliderRange> = () => <SliderRangeControlledTemplate />;
+const ControlledStory: StoryFn<typeof SliderRange> = () => <SliderRangeControlledTemplate />;
 export const ControlledExample = ControlledStory.bind({});
 ControlledExample.parameters = {
   docs: {

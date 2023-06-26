@@ -7,7 +7,7 @@ import { TextFieldInputTemplate } from '#src/components/form/TextField/Stories/T
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
-import TextFieldInputRaw from '!!raw-loader!./Templates/TextFieldInput';
+import TextFieldInputRaw from './Templates/TextFieldInput?raw';
 
 export default {
   title: 'Admiral-2.1/Form Field/TextField',

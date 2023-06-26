@@ -12,10 +12,10 @@ import {
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
-import PlaygroundRaw from '!!raw-loader!./Templates/EditModePlayground';
-import DimensionRaw from '!!raw-loader!./Templates/EditModeDimension';
-import DisabledRaw from '!!raw-loader!./Templates/EditModeDisabled';
-import CssMixinRaw from '!!raw-loader!./Templates/EditModeCssMixin';
+import PlaygroundRaw from './Templates/EditModePlayground?raw';
+import DimensionRaw from './Templates/EditModeDimension?raw';
+import DisabledRaw from './Templates/EditModeDisabled?raw';
+import CssMixinRaw from './Templates/EditModeCssMixin?raw';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';

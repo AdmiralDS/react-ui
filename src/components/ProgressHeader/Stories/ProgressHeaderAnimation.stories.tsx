@@ -8,7 +8,7 @@ import { ProgressHeaderAnimationTemplate } from './Templates';
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
-import ProgressHeaderAnimationRaw from '!!raw-loader!./Templates/ProgressHeaderAnimation';
+import ProgressHeaderAnimationRaw from './Templates/ProgressHeaderAnimation?raw';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';

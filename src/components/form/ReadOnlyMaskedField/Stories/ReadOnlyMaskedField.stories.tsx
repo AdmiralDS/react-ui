@@ -7,7 +7,7 @@ import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 import { DataAttributesDescription } from '#src/components/form/common';
 
 // Imports of text sources
-import ReadOnlyMaskedFieldRaw from '!!raw-loader!./Templates/ReadOnlyMaskedField';
+import ReadOnlyMaskedFieldRaw from './Templates/ReadOnlyMaskedField?raw';
 
 export default {
   title: 'Admiral-2.1/Form Field/ReadOnlyMaskedField',

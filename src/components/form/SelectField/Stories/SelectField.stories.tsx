@@ -16,14 +16,14 @@ import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 import { DataAttributesDescription } from '#src/components/form/common';
 
 // Imports of text sources
-import SimpleRaw from '!!raw-loader!./Templates/Simple';
-import CustomOptionsRaw from '!!raw-loader!./Templates/CustomOptions';
-import AsyncSearchSelectRaw from '!!raw-loader!./Templates/AsyncSearchSelect';
-import CustomOptionMultiSearchSelectRaw from '!!raw-loader!./Templates/CustomOptionMultiSearchSelect';
-import ExpandedHeightMultiSearchSelectRaw from '!!raw-loader!./Templates/ExpandedHeightMultiSearchSelect';
-import OptionGroupSearchSelectRaw from '!!raw-loader!./Templates/OptionGroupSearchSelect';
-import RenderPropsSearchSelectRaw from '!!raw-loader!./Templates/RenderPropsSearchSelect';
-import SimpleMultiSearchSelectRaw from '!!raw-loader!./Templates/SimpleMultiSearchSelect';
+import SimpleRaw from './Templates/Simple?raw';
+import CustomOptionsRaw from './Templates/CustomOptions?raw';
+import AsyncSearchSelectRaw from './Templates/AsyncSearchSelect?raw';
+import CustomOptionMultiSearchSelectRaw from './Templates/CustomOptionMultiSearchSelect?raw';
+import ExpandedHeightMultiSearchSelectRaw from './Templates/ExpandedHeightMultiSearchSelect?raw';
+import OptionGroupSearchSelectRaw from './Templates/OptionGroupSearchSelect?raw';
+import RenderPropsSearchSelectRaw from './Templates/RenderPropsSearchSelect?raw';
+import SimpleMultiSearchSelectRaw from './Templates/SimpleMultiSearchSelect?raw';
 
 export default {
   title: 'Admiral-2.1/Form Field/SelectField',

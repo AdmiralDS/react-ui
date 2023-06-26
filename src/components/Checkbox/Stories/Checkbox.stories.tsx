@@ -6,7 +6,7 @@ import { CheckboxDemoTemplate } from './Templates';
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
-import CheckboxDemoRaw from '!!raw-loader!./Templates/CheckboxDemo';
+import CheckboxDemoRaw from './Templates/CheckboxDemo?raw';
 
 export default {
   title: 'Admiral-2.1/Atoms/Checkbox',

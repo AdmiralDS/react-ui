@@ -7,7 +7,7 @@ import { CheckboxCompositeGroupExampleTemplate } from './Templates';
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
-import CheckboxCompositeGroupExampleRaw from '!!raw-loader!./Templates/CheckboxCompositeGroupExample';
+import CheckboxCompositeGroupExampleRaw from './Templates/CheckboxCompositeGroupExample?raw';
 
 export default {
   title: 'Admiral-2.1/CheckboxCompositeGroup',

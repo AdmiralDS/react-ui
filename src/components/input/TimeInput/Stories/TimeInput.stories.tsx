@@ -19,11 +19,11 @@ import {
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
-import TimeInputIconAlternativeRaw from '!!raw-loader!./Templates/TimeInputIconAlternative';
-import TimeInputRangeRaw from '!!raw-loader!./Templates/TimeInputRange';
-import TimeInputRangeDisabledRaw from '!!raw-loader!./Templates/TimeInputRangeDisabled';
-import TimeInputSimpleRaw from '!!raw-loader!./Templates/TimeInputSimple';
-import TimeInputSimpleDisabledRaw from '!!raw-loader!./Templates/TimeInputSimpleDisabled';
+import TimeInputIconAlternativeRaw from './Templates/TimeInputIconAlternative?raw';
+import TimeInputRangeRaw from './Templates/TimeInputRange?raw';
+import TimeInputRangeDisabledRaw from './Templates/TimeInputRangeDisabled?raw';
+import TimeInputSimpleRaw from './Templates/TimeInputSimple?raw';
+import TimeInputSimpleDisabledRaw from './Templates/TimeInputSimpleDisabled?raw';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';

@@ -6,8 +6,8 @@ import { PaginationPlaygroundTemplate, PaginationTypesTemplate } from './Templat
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
-import PaginationPlaygroundRaw from '!!raw-loader!./Templates/PaginationPlayground';
-import PaginationTypesRaw from '!!raw-loader!./Templates/PaginationTypes';
+import PaginationPlaygroundRaw from './Templates/PaginationPlayground?raw';
+import PaginationTypesRaw from './Templates/PaginationTypes?raw';
 
 export default {
   title: 'Admiral-2.1/Data Table/PaginationOne',

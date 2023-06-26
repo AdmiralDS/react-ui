@@ -7,10 +7,10 @@ import { SpinnerBaseTemplate, SpinnerDarkTemplate, SpinnerLightTemplate, Spinner
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
-import SpinnerBaseRaw from '!!raw-loader!./Templates/SpinnerBase';
-import SpinnerLightRaw from '!!raw-loader!./Templates/SpinnerLight';
-import SpinnerDarkRaw from '!!raw-loader!./Templates/SpinnerDark';
-import SpinnerOthersRaw from '!!raw-loader!./Templates/SpinnerOthers';
+import SpinnerBaseRaw from './Templates/SpinnerBase?raw';
+import SpinnerLightRaw from './Templates/SpinnerLight?raw';
+import SpinnerDarkRaw from './Templates/SpinnerDark?raw';
+import SpinnerOthersRaw from './Templates/SpinnerOthers?raw';
 
 const Separator = styled.div`
   height: 20px;

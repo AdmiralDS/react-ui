@@ -6,7 +6,7 @@ import { FlexPlaygroundTemplate } from './Templates';
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
-import FlexPlaygroundRaw from '!!raw-loader!./Templates/FlexPlayground';
+import FlexPlaygroundRaw from './Templates/FlexPlayground?raw';
 
 export default {
   title: 'Admiral-2.1/Flex.Container',
