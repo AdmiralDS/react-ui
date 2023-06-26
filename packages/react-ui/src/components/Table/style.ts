@@ -106,6 +106,9 @@ export const HeaderWrapper = styled.div<{ scrollbar: number; greyHeader?: boolea
     & > div.tr {
       overflow-y: scroll;
     }
+    & > [data-overflowmenu='true'] {
+      margin-right: ${({ scrollbar }) => scrollbar}px;
+    }
   }
 
   ${({ greyHeader }) =>
