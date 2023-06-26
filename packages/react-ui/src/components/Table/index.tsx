@@ -33,6 +33,7 @@ import {
   HiddenHeader,
   Mirror,
   MirrorText,
+  ActionBG,
 } from './style';
 import { VirtualBody } from './VirtualBody';
 import { ReactComponent as CursorGrabbing } from './icons/cursorGrabbing.svg';
@@ -325,7 +326,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
       showDividerForLastColumn = false,
       disableColumnResize = false,
       showLastRowUnderline = true,
-      showRowsActions = false,
+      showRowsActions: userShowRowsActions = false,
       virtualScroll,
       locale,
       onColumnDrag,
@@ -348,6 +349,13 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
 
     const isAnyColumnDraggable = columnList.filter((col) => !col.sticky && col.draggable).length > 0;
     const isAnyStickyColumnDraggable = columnList.filter((col) => col.sticky && col.draggable).length > 0;
+
+    // show column with backgrounds for row actions only if there are some strokes with
+    // overflow menu or single action and userShowRowsActions = true
+    const showRowsActions = React.useMemo(
+      () => rowList.some((row) => row.actionRender || row.overflowMenuRender) && userShowRowsActions,
+      [rowList, userShowRowsActions],
+    );
 
     const tableRef = React.useRef<HTMLDivElement>(null);
     const headerRef = React.useRef<HTMLDivElement>(null);
@@ -938,6 +946,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
             </NormalWrapper>
             <Filler />
           </Header>
+          {showRowsActions && <ActionBG data-overflowmenu dimension={dimension} greyHeader={greyHeader} />}
         </HeaderWrapper>
         {renderBody()}
         {(isAnyColumnDraggable || isAnyStickyColumnDraggable) &&

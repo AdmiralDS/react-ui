@@ -94,7 +94,7 @@ export const RowWrapper = ({
       >
         {children}
       </SimpleRow>
-      {(row.overflowMenuRender || row.actionRender) && (
+      {(showRowsActions || row.overflowMenuRender || row.actionRender) && (
         <OverflowMenu
           dimension={dimension}
           tableWidth={tableWidth}
