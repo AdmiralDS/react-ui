@@ -15,8 +15,8 @@ export const SliderInputControlledTemplate = (args: SliderInputProps) => {
       <SliderInput
         {...args}
         value={slider1}
-        onChange={(full, short) => {
-          console.log({ full, short });
+        onChange={(full, short, e) => {
+          console.log({ full, short, e });
           setSlider1(short);
         }}
       />
