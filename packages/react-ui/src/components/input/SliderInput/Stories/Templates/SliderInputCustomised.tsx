@@ -14,7 +14,7 @@ export const SliderInputCustomisedTemplate = (args: SliderInputProps) => {
       <SliderInput
         {...args}
         defaultValue="5.000"
-        onChange={(full, short) => console.log({ full, short })}
+        onChange={(full, short, event) => console.log({ full, short, event })}
         suffix="$"
         thousand=","
         precision={3}
