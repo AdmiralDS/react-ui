@@ -19,33 +19,25 @@
     "src",
     "tsconfig.json"
   ],
-  "main": "dist/react-ui.cjs.js",
-  "module": "dist/react-ui.es.js",
-  "exports": {
-    "./package.json": "./package.json",
-    ".": {
-      "types": "./dist/src/index.d.ts",
-      "require": "./dist/react-ui.cjs.js",
-      "import": "./dist/react-ui.es.js"
-    }
-  },
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.esm.js",
+  "types": "./dist/src/index.d.ts",
+  "type": "module",
   "imports": {
     "#src/*": "./src/*"
   },
-  "types": "./dist/src/index.d.ts",
   "scripts": {
-    "build": "vite build && ttsc --emitDeclarationOnly",
+    "build": "rollup -c",
     "test": "jest",
     "test:update": "jest -u",
     "test:watch": "jest --watch",
-    "lint": "eslint './src/**/*.{js,jsx,ts,tsx}' --quiet --fix",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx --quiet --fix",
     "storybook": "npm run generate-svg-icon-exports && storybook dev -p 6006",
     "build-storybook": "npm run generate-svg-icon-exports && storybook build",
     "release": "standard-version",
     "generate-svg-icon-exports": "node scripts/generate-svg-icon-exports.cjs",
     "prepublishOnly": "npm run build",
-    "deploy-storybook": "NODE_OPTIONS=--openssl-legacy-provider storybook-to-ghpages",
-    "clean": "rm -rf .turbo && rm -rf node_modules"
+    "deploy-storybook": "NODE_OPTIONS=--openssl-legacy-provider storybook-to-ghpages"
   },
   "dependencies": {
     "@admiral-ds/flags": "^2.0.0",

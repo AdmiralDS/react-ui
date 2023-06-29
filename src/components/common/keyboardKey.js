@@ -1,9 +1,15 @@
 // https://github.com/levithomason/keyboard-key
 
+/**
+ * @param {string | number | object | null} val
+ */
 function isObject(val) {
   return val !== null && !Array.isArray(val) && typeof val === 'object';
 }
 
+/**
+ * @type Record<number,string | Array<string>>
+ */
 const codes = {
   // ----------------------------------------
   // By Code
@@ -88,7 +94,7 @@ for (let j = 0; j < 26; j += 1) {
   codes[n] = [String.fromCharCode(n + 32), String.fromCharCode(n)];
 }
 
-const keyboardKey = {
+export const keyboardKey = {
   codes: codes,
 
   /**
@@ -351,5 +357,3 @@ keyboardKey.LeftAngleBracket = keyboardKey['<'];
 keyboardKey.RightAngleBracket = keyboardKey['>'];
 keyboardKey.LeftSquareBracket = keyboardKey['['];
 keyboardKey.RightSquareBracket = keyboardKey[']'];
-
-export { keyboardKey };
