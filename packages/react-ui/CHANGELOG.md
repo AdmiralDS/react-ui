@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.3.0](https://github.com/AdmiralDS/react-ui/compare/v5.2.0...v5.3.0) (2023-06-30)
+
+
+### Features
+
+* **Table:** add showRowsActions prop to display row actions (overflow menus and single action icons) permanently ([5e7d58e](https://github.com/AdmiralDS/react-ui/commit/5e7d58ee267410d73d38f9c694019322530bd64d))
+
 ## [5.2.0](https://github.com/AdmiralDS/react-ui/compare/v5.1.0...v5.2.0) (2023-06-22)
 
 

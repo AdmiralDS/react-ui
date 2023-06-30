@@ -33,6 +33,7 @@ import {
   HiddenHeader,
   Mirror,
   MirrorText,
+  ActionBG,
 } from './style';
 import { VirtualBody } from './VirtualBody';
 import { ReactComponent as CursorGrabbing } from './icons/cursorGrabbing.svg';
@@ -256,6 +257,9 @@ export interface TableProps extends React.HTMLAttributes<HTMLDivElement> {
   disableColumnResize?: boolean;
   /** Отображение серой линии подчеркивания для последней строки. По умолчанию линия отображается */
   showLastRowUnderline?: boolean;
+  /** Включение постоянной видимости иконок действий над строками (OverflowMenu и иконки одиночных действий).
+   * По умолчанию showRowsActions = false, при этом иконки действий видны только при ховере строк. */
+  showRowsActions?: boolean;
   /** Включение виртуального скролла для тела таблицы.
    * У таблицы обязательно должна быть задана высота, тогда тело таблицы растянется по высоте и подстроится под высоту таблицы.
    */
@@ -322,6 +326,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
       showDividerForLastColumn = false,
       disableColumnResize = false,
       showLastRowUnderline = true,
+      showRowsActions: userShowRowsActions = false,
       virtualScroll,
       locale,
       onColumnDrag,
@@ -344,6 +349,13 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
 
     const isAnyColumnDraggable = columnList.filter((col) => !col.sticky && col.draggable).length > 0;
     const isAnyStickyColumnDraggable = columnList.filter((col) => col.sticky && col.draggable).length > 0;
+
+    // show column with backgrounds for row actions only if there are some strokes with
+    // overflow menu or single action and userShowRowsActions = true
+    const showRowsActions = React.useMemo(
+      () => rowList.some((row) => row.actionRender || row.overflowMenuRender) && userShowRowsActions,
+      [rowList, userShowRowsActions],
+    );
 
     const tableRef = React.useRef<HTMLDivElement>(null);
     const headerRef = React.useRef<HTMLDivElement>(null);
@@ -828,6 +840,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
           verticalScroll={verticalScroll}
           scrollbar={scrollbar}
           grey={zebraRows[row.id]?.includes('even')}
+          showRowsActions={showRowsActions}
           key={`row_${row.id}`}
         >
           {isGroupRow ? renderGroupRow(row) : renderRegularRow(row, index)}
@@ -933,6 +946,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
             </NormalWrapper>
             <Filler />
           </Header>
+          {showRowsActions && <ActionBG data-overflowmenu dimension={dimension} greyHeader={greyHeader} />}
         </HeaderWrapper>
         {renderBody()}
         {(isAnyColumnDraggable || isAnyStickyColumnDraggable) &&
