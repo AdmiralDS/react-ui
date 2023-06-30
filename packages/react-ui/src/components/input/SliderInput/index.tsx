@@ -38,28 +38,8 @@ const Input = styled(NumberInput)`
   border-radius: ${(p) => (p.skeleton ? 0 : sliderBorderRadius(p.theme.shape))};
 `;
 
-// export interface IFormatter {
-//   /**
-//    * Formats linter results
-//    * @param failures - Linter failures that were not fixed
-//    */
-//   format(failures: number[]): string;
-
-//   /**
-//    * @deprecated Use {@link IFormatter.(format:1)} instead.
-//    */
-//   format(failures: number[], fixes?: number[]): string;
-// }
-
-// interface ChangeProp {
-//   /** native input handler */
-//   onChange?(event: React.ChangeEvent<HTMLInputElement>): void;
-//   /**
-//    * @deprecated Use {@link TextInputProps.onChange} instead.
-//    * Колбек на изменение значения компонента (fullStr - строка вместе с префиксом/суффиксом/разделителями, shortStr - строка только с числом)
-//    **/
-//   onChange?(fullStr: string, shortStr: string): void;
-// }
+// TODO: in next major version rename onChange to OLD_onChange deprecated method,
+// and create new native input onChange with event
 
 export interface SliderInputProps extends Omit<TextInputProps, 'onChange'> {
   /** Колбек на изменение значения компонента (fullStr - строка вместе с префиксом/суффиксом/разделителями, shortStr - строка только с числом) */
@@ -152,8 +132,6 @@ export const SliderInput = React.forwardRef<HTMLInputElement, SliderInputProps>(
         setSliderValue(+short);
       }
       onChange?.(full, short, event);
-      // onChange?.(full, short);
-      // onChange?.(event);
     };
     return (
       <Wrapper data-dimension={dimension} dimension={dimension} {...wrapperProps}>
