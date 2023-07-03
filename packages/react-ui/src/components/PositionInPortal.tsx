@@ -10,9 +10,18 @@ export const PositionedPortalContainer = styled.div`
   z-index: ${({ theme }) => theme.zIndex.dropdown};
 `;
 
+type RequireAtLeastOne<T, Keys extends keyof T = keyof T> = Pick<T, Exclude<keyof T, Keys>> &
+  {
+    [K in Keys]-?: Required<Pick<T, K>> & Partial<Pick<T, Exclude<Keys, K>>>;
+  }[Keys];
+
+type RequireAtLeastOne2<T> = {
+  [K in keyof T]-?: Required<Pick<T, K>> & Partial<Pick<T, Exclude<keyof T, K>>>;
+}[keyof T];
+
 export interface PositionInPortalProps {
   /** Ref на элемент, относительно которого позиционируется портал */
-  targetRef: React.RefObject<HTMLElement>;
+  targetRef?: React.RefObject<HTMLElement>;
 
   /** Элемент, относительно которого позиционируется портал */
   targetElement?: Element;
@@ -23,6 +32,8 @@ export interface PositionInPortalProps {
   /** Отрисовка портала на всю ширину контейнера */
   fullContainerWidth?: boolean;
 }
+
+type Test = RequireAtLeastOne<PositionInPortalProps, 'targetRef' | 'targetElement'>;
 
 /**
  * При фиксированном позиционировании (как у PositionedPortalContainer) элемент позиционируется
@@ -42,12 +53,12 @@ export const PositionInPortal = ({
   rootRef,
   fullContainerWidth,
   ...props
-}: React.PropsWithChildren<PositionInPortalProps>) => {
+}: React.PropsWithChildren<Test>) => {
   const positionedPortalContainerRef = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
     const node = positionedPortalContainerRef.current;
-    const targetNode = targetRef.current ?? targetElement;
+    const targetNode = targetRef?.current ?? targetElement;
     if (node && targetNode) {
       const observer = observeRect(targetNode, (rect) => {
         if (rect) {
