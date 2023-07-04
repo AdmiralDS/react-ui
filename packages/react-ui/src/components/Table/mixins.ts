@@ -84,34 +84,54 @@ export const rowBackground = css<{
   }}
 `;
 
-export const overflowMenuStyle = css<{ $offset: number; dimension: TableProps['dimension'] }>`
-  ${({ dimension, $offset }) => {
+export const actionsBGStyle = css<{ dimension: TableProps['dimension'] }>`
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  z-index: 5;
+  ${({ dimension }) => {
     switch (dimension) {
       case 's':
         return css`
           width: 31px;
           height: 31px;
-          left: ${$offset - 32}px;
         `;
       case 'l':
         return css`
           width: 47px;
           height: 47px;
-          left: ${$offset - 47}px;
         `;
       case 'xl':
         return css`
           width: 55px;
           height: 55px;
-          left: ${$offset - 55}px;
         `;
       case 'm':
       default:
         return css`
           width: 39px;
           height: 39px;
-          left: ${$offset - 39}px;
         `;
     }
   }}
+`;
+
+export const overflowMenuStyle = css<{ $offset: number; dimension: TableProps['dimension'] }>`
+  ${actionsBGStyle}
+  left: ${({ dimension, $offset }) => {
+    switch (dimension) {
+      case 's':
+        return $offset - 32;
+      case 'l':
+        return $offset - 47;
+      case 'xl':
+        return $offset - 55;
+      case 'm':
+      default:
+        return $offset - 39;
+    }
+  }}px;
 `;

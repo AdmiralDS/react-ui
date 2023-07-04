@@ -5,6 +5,7 @@ import type { ItemProps } from '#src/components/Menu/MenuItem';
 import type { DropMenuComponentProps, RenderContentProps } from '#src/components/DropMenu';
 import { DropMenu } from '#src/components/DropMenu';
 import { uid } from '#src/components/common/uid';
+import type { ButtonProps } from '#src/components/Button';
 import { Button } from '#src/components/Button';
 import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import { passDropdownDataAttributes } from '#src/components/common/utils/splitDataAttributes';
@@ -13,7 +14,10 @@ import { refSetter } from '#src/components/common/utils/refSetter';
 export type MenuButtonDimension = 'xl' | 'l' | 'm' | 's';
 export type MenuButtonAppearance = 'primary' | 'secondary' | 'ghost' | 'white';
 
-export interface MenuButtonProps extends Omit<HTMLAttributes<HTMLButtonElement>, 'onChange'>, DropMenuComponentProps {
+export interface MenuButtonProps
+  extends Omit<HTMLAttributes<HTMLButtonElement>, 'onChange'>,
+    DropMenuComponentProps,
+    Omit<ButtonProps, 'onChange'> {
   /** Массив опций */
   items: Array<ItemProps>;
   /** Выбранная опция */
@@ -104,11 +108,11 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
           onClick={handleClick}
           aria-expanded={menuState}
           className={'menu-button-with-dropdown' + (className ? ` ${className}` : '')}
+          iconEnd={statusIcon}
         >
           {React.Children.toArray(children).map((child) =>
             typeof child === 'string' ? <span key={uid()}>{child}</span> : child,
           )}
-          {statusIcon}
         </Button>
       );
     };

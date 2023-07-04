@@ -350,12 +350,15 @@ export const EditMode = React.forwardRef<HTMLInputElement, EditModeProps>(
                 displayAsSquare
                 disabled={props.status === 'error'}
                 onClick={disabledEdit}
-              >
-                <CheckIcon height={iconSize} width={iconSize} />
-              </EditButton>
-              <EditButton appearance="secondary" dimension={editDimension} displayAsSquare onClick={handleClear}>
-                <ClearIcon height={iconSize} width={iconSize} />
-              </EditButton>
+                iconStart={<CheckIcon height={iconSize} width={iconSize} />}
+              />
+              <EditButton
+                appearance="secondary"
+                dimension={editDimension}
+                displayAsSquare
+                onClick={handleClear}
+                iconStart={<ClearIcon height={iconSize} width={iconSize} />}
+              />
             </>
           )
         ) : (

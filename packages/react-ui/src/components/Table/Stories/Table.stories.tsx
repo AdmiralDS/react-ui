@@ -27,6 +27,7 @@ import {
   RenderCellTemplate,
   RenderGroupTitleTemplate,
   PlaygroundTemplate,
+  LoadOnScrollTemplate,
 } from './Templates';
 // Imports of text sources
 import VirtualScrollRaw from '!!raw-loader!./Templates/TableVirtualScroll';
@@ -49,6 +50,7 @@ import CustomTitleRaw from '!!raw-loader!./Templates/TableCustomTitle';
 import RenderCellRaw from '!!raw-loader!./Templates/TableRenderCell';
 import RenderGroupTitleRaw from '!!raw-loader!./Templates/TableRenderGroupTitle';
 import PlaygroundRaw from '!!raw-loader!./Templates/Playground';
+import LoadScrollRaw from '!!raw-loader!./Templates/TableLoadOnScroll';
 
 const Separator = styled.div`
   height: 20px;
@@ -492,9 +494,9 @@ OverflowMenuExample.parameters = {
     },
     description: {
       story: `Опционально со строками можно производить набор действий через Overflow Menu, 
-      которое появляется при ховере над строкой. При этом, чтобы не накладываться на возможный текст, 
+      которое по умолчанию появляется при ховере над строкой. При этом, чтобы не накладываться на возможный текст, 
       под иконкой меню добавляется квадратная подложка белого цвета. В примере ниже Overflow Menu 
-      задано для первых двух строк.\n\nДля того чтобы задать для строки OverflowMenu необходимо 
+      задано для первых двух строк в таблицах.\n\nДля того чтобы задать для строки OverflowMenu необходимо 
       для строки прописать функцию overflowMenuRender. Входные параметры функции: сама 
       строка и колбек onVisibilityChange. Колбек необходимо вызывать 
       при открытии/закрытии меню для того, чтобы таблица могла управлять видимостью OverflowMenu.
@@ -504,7 +506,11 @@ OverflowMenuExample.parameters = {
       c dimension="l"\n\nЕсли подразумевается только одно действие над строкой, то вместо overflowMenuRender следует
       использовать функцию actionRender (в примере используется для 3-4 строк). 
       На вход функция получает саму строку, а возвращает компонент RowAction (экспортируется из библиотеки),
-      внутрь которого необходимо передать иконку для обозначения действия над строкой.`,
+      внутрь которого необходимо передать иконку для обозначения действия над строкой.\n\nОпционально допускается, чтобы 
+      Overflow Menu и иконки одиночных действий были видны постоянно, а не только по ховеру. Данное поведение можно задать
+      с помощью параметра showRowsActions. Если showRowsActions равен true, то все иконки меню и иконки одиночных действий во всех 
+      строках таблицы отображаются постоянно. При этом в область заголовков и в строки, для которых не заданы действия, 
+      добавляется подложка, для того чтобы визуально был выделен столбец с действиями над строками.`,
     },
   },
 };
@@ -534,6 +540,27 @@ VirtualScrollExample.parameters = {
   },
 };
 VirtualScrollExample.storyName = 'Table. Виртуальный скролл.';
+//</editor-fold>
+
+//<editor-fold desc="Table. Подгрузка данных при скролле.">
+const LoadScrollStory: ComponentStory<typeof Table> = (props) => (
+  <LoadOnScrollTemplate columnList={[]} rowList={[]} {...cleanUpProps(props)} />
+);
+export const LoadScrollExample = LoadScrollStory.bind({});
+LoadScrollExample.parameters = {
+  docs: {
+    source: {
+      code: LoadScrollRaw,
+    },
+    description: {
+      story: `Пользователь может реализовать подгрузку новых строк по мере скролла тела таблицы, например, следующим образом. С
+      помощью функции renderRowWrapper можно создать элемент-обёртку над последней строкой в таблице, 
+      и через IntersectionObserver отслеживать момент, когда элемент-обёртка станет видим в пределах тела таблицы (т.е. момент доскролла до последней строки). 
+      Это событие будет являться триггером для загрузки новой порции строк.`,
+    },
+  },
+};
+LoadScrollExample.storyName = 'Table. Подгрузка данных при скролле.';
 //</editor-fold>
 
 //<editor-fold desc="Пример с группировкой строк">

@@ -25,12 +25,12 @@ const items2: AvatarGroupProps['items'] = [
   { userName: 'Petr Lesov', icon: <PersonSolid />, id: '2' },
   { userName: 'Agata Petrova', icon: <PersonSolid />, id: '3' },
   { userName: 'Arina Leskova', icon: <PersonSolid />, id: '4' },
-  { userName: 'Rita', appearance: 'dark', id: '5' },
+  { userName: 'Rita', appearance: 'neutral4', id: '5' },
   { userName: 'Drune', icon: <PersonSolid />, href: imageURL, id: '6' },
   { userName: 'Lisa Kotova', icon: <PersonSolid />, id: '7' },
   { userName: 'Ирина Глушко', icon: <PersonSolid />, id: '8' },
   { userName: 'Rosa Farrel', icon: <PersonSolid />, id: '9' },
-  { userName: 'Tom Hidlton', appearance: 'dark', id: '10' },
+  { userName: 'Tom Hidlton', appearance: 'neutral4', id: '10' },
 ];
 
 const items3: AvatarGroupProps['items'] = [
@@ -43,12 +43,12 @@ const items3: AvatarGroupProps['items'] = [
   { userName: 'Petr Lesov', icon: <PersonSolid />, id: '2' },
   { userName: 'Agata Petrova', id: '3', appearance: { background: '#D92020', text: '#FFFFFF' } },
   { userName: 'Arina Leskova', icon: <PersonSolid />, id: '4' },
-  { userName: 'Rita', appearance: 'light', id: '5' },
+  { userName: 'Rita', appearance: 'neutral2', id: '5' },
   { userName: 'Drune', icon: <PersonSolid />, href: imageURL, id: '6' },
   { userName: 'Lisa Kotova', icon: <PersonSolid />, id: '7' },
   { userName: 'Ирина Глушко', icon: <PersonSolid />, id: '8' },
   { userName: 'Rosa Farrel', icon: <PersonSolid />, id: '9' },
-  { userName: 'Tom Hidlton', appearance: 'light', id: '10' },
+  { userName: 'Tom Hidlton', appearance: 'neutral2', id: '10' },
 ];
 
 export const AvatarGroupWidthTemplate = (props: AvatarGroupProps) => {
@@ -69,7 +69,7 @@ export const AvatarGroupWidthTemplate = (props: AvatarGroupProps) => {
         style={{ width: '300px' }}
         items={items3}
         onAvatarSelect={onSelectAvatar}
-        appearance="dark"
+        appearance="neutral4"
         dropContainerClassName="dropContainerClass"
         dropContainerStyle={{ width: '250px' }}
       />

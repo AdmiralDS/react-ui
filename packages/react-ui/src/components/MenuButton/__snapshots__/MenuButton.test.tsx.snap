@@ -3,7 +3,7 @@
 exports[`MenuButton should render component 1`] = `
 Object {
   "asFragment": [Function],
-  "baseElement": .c4 {
+  "baseElement": .c5 {
   -webkit-transition: -webkit-transform 0.3s ease-in-out;
   -webkit-transition: transform 0.3s ease-in-out;
   transition: transform 0.3s ease-in-out;
@@ -12,28 +12,29 @@ Object {
   transform: rotate(0deg);
 }
 
-.c4 *[fill^='#'] {
+.c5 *[fill^='#'] {
   fill: #717681;
 }
 
-.c4:hover *[fill^='#'] {
+.c5:hover *[fill^='#'] {
   fill: #0046E2;
 }
 
-.c4[data-disabled] {
+.c5[data-disabled] {
   pointer-events: none;
 }
 
-.c4[data-disabled] *[fill^='#'] {
+.c5[data-disabled] *[fill^='#'] {
   fill: #B0B5BD;
 }
 
-.c3 {
+.c4 {
   vertical-align: top;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
   display: inline-flex;
+  gap: 8px;
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
@@ -52,7 +53,7 @@ Object {
   height: 24px;
 }
 
-.c3 > * {
+.c4 > * {
   display: inline-block;
   -webkit-flex: 0 1 auto;
   -ms-flex: 0 1 auto;
@@ -60,38 +61,40 @@ Object {
   white-space: nowrap;
 }
 
-.c3 > *:not(:first-child) {
-  margin-left: 8px;
-}
-
-.c3 > svg {
+.c4 > svg {
   width: 24px;
   height: 24px;
 }
 
-[data-dimension='s'] .c2 {
+[data-dimension='s'] .c3 {
   height: 20px;
 }
 
-[data-dimension='s'] .c2 > svg {
+[data-dimension='s'] .c3 > svg {
   width: 20px;
   height: 20px;
+}
+
+.c2 {
+  display: inline-block;
+  width: 2px;
 }
 
 .c1 {
   position: relative;
   box-sizing: border-box;
   display: inline-block;
+  white-space: nowrap;
   border: none;
   border-radius: 4px;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  vertical-align: center;
+  vertical-align: middle;
   pointer-events: all;
   padding: 0;
   height: 56px;
-  padding: 0 31px;
+  padding: 0 29px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -330,7 +333,7 @@ Object {
 .c1[data-dimension='xl'] {
   padding: 0;
   height: 56px;
-  padding: 0 31px;
+  padding: 0 29px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -342,17 +345,17 @@ Object {
 
 .c1[data-dimension='l'] {
   height: 48px;
-  padding: 0 23px;
+  padding: 0 21px;
 }
 
 .c1[data-dimension='m'] {
   height: 40px;
-  padding: 0 19px;
+  padding: 0 17px;
 }
 
 .c1[data-dimension='s'] {
   height: 32px;
-  padding: 0 15px;
+  padding: 0 13px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -377,20 +380,27 @@ Object {
         type="button"
       >
         <div
-          class="c2 c3"
+          class="c2"
+        />
+        <div
+          class="c3 c4"
         >
           <span>
             test
           </span>
           <div
-            aria-hidden="true"
-            class="c4"
-          />
+            class=""
+          >
+            <div
+              aria-hidden="true"
+              class="c5"
+            />
+          </div>
         </div>
       </button>
     </div>
   </body>,
-  "container": .c4 {
+  "container": .c5 {
   -webkit-transition: -webkit-transform 0.3s ease-in-out;
   -webkit-transition: transform 0.3s ease-in-out;
   transition: transform 0.3s ease-in-out;
@@ -399,28 +409,29 @@ Object {
   transform: rotate(0deg);
 }
 
-.c4 *[fill^='#'] {
+.c5 *[fill^='#'] {
   fill: #717681;
 }
 
-.c4:hover *[fill^='#'] {
+.c5:hover *[fill^='#'] {
   fill: #0046E2;
 }
 
-.c4[data-disabled] {
+.c5[data-disabled] {
   pointer-events: none;
 }
 
-.c4[data-disabled] *[fill^='#'] {
+.c5[data-disabled] *[fill^='#'] {
   fill: #B0B5BD;
 }
 
-.c3 {
+.c4 {
   vertical-align: top;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
   display: inline-flex;
+  gap: 8px;
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
@@ -439,7 +450,7 @@ Object {
   height: 24px;
 }
 
-.c3 > * {
+.c4 > * {
   display: inline-block;
   -webkit-flex: 0 1 auto;
   -ms-flex: 0 1 auto;
@@ -447,38 +458,40 @@ Object {
   white-space: nowrap;
 }
 
-.c3 > *:not(:first-child) {
-  margin-left: 8px;
-}
-
-.c3 > svg {
+.c4 > svg {
   width: 24px;
   height: 24px;
 }
 
-[data-dimension='s'] .c2 {
+[data-dimension='s'] .c3 {
   height: 20px;
 }
 
-[data-dimension='s'] .c2 > svg {
+[data-dimension='s'] .c3 > svg {
   width: 20px;
   height: 20px;
+}
+
+.c2 {
+  display: inline-block;
+  width: 2px;
 }
 
 .c1 {
   position: relative;
   box-sizing: border-box;
   display: inline-block;
+  white-space: nowrap;
   border: none;
   border-radius: 4px;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  vertical-align: center;
+  vertical-align: middle;
   pointer-events: all;
   padding: 0;
   height: 56px;
-  padding: 0 31px;
+  padding: 0 29px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -717,7 +730,7 @@ Object {
 .c1[data-dimension='xl'] {
   padding: 0;
   height: 56px;
-  padding: 0 31px;
+  padding: 0 29px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -729,17 +742,17 @@ Object {
 
 .c1[data-dimension='l'] {
   height: 48px;
-  padding: 0 23px;
+  padding: 0 21px;
 }
 
 .c1[data-dimension='m'] {
   height: 40px;
-  padding: 0 19px;
+  padding: 0 17px;
 }
 
 .c1[data-dimension='s'] {
   height: 32px;
-  padding: 0 15px;
+  padding: 0 13px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -763,15 +776,22 @@ Object {
       type="button"
     >
       <div
-        class="c2 c3"
+        class="c2"
+      />
+      <div
+        class="c3 c4"
       >
         <span>
           test
         </span>
         <div
-          aria-hidden="true"
-          class="c4"
-        />
+          class=""
+        >
+          <div
+            aria-hidden="true"
+            class="c5"
+          />
+        </div>
       </div>
     </button>
   </div>,
@@ -878,6 +898,7 @@ Object {
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
   display: inline-flex;
+  gap: 8px;
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
@@ -902,10 +923,6 @@ Object {
   -ms-flex: 0 1 auto;
   flex: 0 1 auto;
   white-space: nowrap;
-}
-
-.c5 > *:not(:first-child) {
-  margin-left: 8px;
 }
 
 .c5 > svg {
@@ -935,16 +952,17 @@ Object {
   position: relative;
   box-sizing: border-box;
   display: inline-block;
+  white-space: nowrap;
   border: none;
   border-radius: 4px;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  vertical-align: center;
+  vertical-align: middle;
   pointer-events: none;
   padding: 0;
   height: 56px;
-  padding: 0 31px;
+  padding: 0 29px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -1183,7 +1201,7 @@ Object {
 .c1[data-dimension='xl'] {
   padding: 0;
   height: 56px;
-  padding: 0 31px;
+  padding: 0 29px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -1195,17 +1213,17 @@ Object {
 
 .c1[data-dimension='l'] {
   height: 48px;
-  padding: 0 23px;
+  padding: 0 21px;
 }
 
 .c1[data-dimension='m'] {
   height: 40px;
-  padding: 0 19px;
+  padding: 0 17px;
 }
 
 .c1[data-dimension='s'] {
   height: 32px;
-  padding: 0 15px;
+  padding: 0 13px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -1247,9 +1265,13 @@ Object {
             test
           </span>
           <div
-            aria-hidden="true"
-            class="c6"
-          />
+            class=""
+          >
+            <div
+              aria-hidden="true"
+              class="c6"
+            />
+          </div>
         </div>
       </button>
     </div>
@@ -1300,6 +1322,7 @@ Object {
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
   display: inline-flex;
+  gap: 8px;
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
@@ -1324,10 +1347,6 @@ Object {
   -ms-flex: 0 1 auto;
   flex: 0 1 auto;
   white-space: nowrap;
-}
-
-.c5 > *:not(:first-child) {
-  margin-left: 8px;
 }
 
 .c5 > svg {
@@ -1357,16 +1376,17 @@ Object {
   position: relative;
   box-sizing: border-box;
   display: inline-block;
+  white-space: nowrap;
   border: none;
   border-radius: 4px;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  vertical-align: center;
+  vertical-align: middle;
   pointer-events: none;
   padding: 0;
   height: 56px;
-  padding: 0 31px;
+  padding: 0 29px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -1605,7 +1625,7 @@ Object {
 .c1[data-dimension='xl'] {
   padding: 0;
   height: 56px;
-  padding: 0 31px;
+  padding: 0 29px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -1617,17 +1637,17 @@ Object {
 
 .c1[data-dimension='l'] {
   height: 48px;
-  padding: 0 23px;
+  padding: 0 21px;
 }
 
 .c1[data-dimension='m'] {
   height: 40px;
-  padding: 0 19px;
+  padding: 0 17px;
 }
 
 .c1[data-dimension='s'] {
   height: 32px;
-  padding: 0 15px;
+  padding: 0 13px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -1668,9 +1688,13 @@ Object {
           test
         </span>
         <div
-          aria-hidden="true"
-          class="c6"
-        />
+          class=""
+        >
+          <div
+            aria-hidden="true"
+            class="c6"
+          />
+        </div>
       </div>
     </button>
   </div>,
@@ -1731,7 +1755,7 @@ Object {
 exports[`MenuButton should render component with skeleton state 1`] = `
 Object {
   "asFragment": [Function],
-  "baseElement": .c4 {
+  "baseElement": .c5 {
   -webkit-transition: -webkit-transform 0.3s ease-in-out;
   -webkit-transition: transform 0.3s ease-in-out;
   transition: transform 0.3s ease-in-out;
@@ -1740,28 +1764,29 @@ Object {
   transform: rotate(0deg);
 }
 
-.c4 *[fill^='#'] {
+.c5 *[fill^='#'] {
   fill: #717681;
 }
 
-.c4:hover *[fill^='#'] {
+.c5:hover *[fill^='#'] {
   fill: #0046E2;
 }
 
-.c4[data-disabled] {
+.c5[data-disabled] {
   pointer-events: none;
 }
 
-.c4[data-disabled] *[fill^='#'] {
+.c5[data-disabled] *[fill^='#'] {
   fill: #B0B5BD;
 }
 
-.c3 {
+.c4 {
   vertical-align: top;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
   display: inline-flex;
+  gap: 8px;
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
@@ -1780,7 +1805,7 @@ Object {
   height: 24px;
 }
 
-.c3 > * {
+.c4 > * {
   display: inline-block;
   -webkit-flex: 0 1 auto;
   -ms-flex: 0 1 auto;
@@ -1788,38 +1813,40 @@ Object {
   white-space: nowrap;
 }
 
-.c3 > *:not(:first-child) {
-  margin-left: 8px;
-}
-
-.c3 > svg {
+.c4 > svg {
   width: 24px;
   height: 24px;
 }
 
-[data-dimension='s'] .c2 {
+[data-dimension='s'] .c3 {
   height: 20px;
 }
 
-[data-dimension='s'] .c2 > svg {
+[data-dimension='s'] .c3 > svg {
   width: 20px;
   height: 20px;
+}
+
+.c2 {
+  display: inline-block;
+  width: 2px;
 }
 
 .c1 {
   position: relative;
   box-sizing: border-box;
   display: inline-block;
+  white-space: nowrap;
   border: none;
   border-radius: 0;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  vertical-align: center;
+  vertical-align: middle;
   pointer-events: none;
   padding: 0;
   height: 56px;
-  padding: 0 31px;
+  padding: 0 29px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -2060,7 +2087,7 @@ Object {
 .c1[data-dimension='xl'] {
   padding: 0;
   height: 56px;
-  padding: 0 31px;
+  padding: 0 29px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -2072,17 +2099,17 @@ Object {
 
 .c1[data-dimension='l'] {
   height: 48px;
-  padding: 0 23px;
+  padding: 0 21px;
 }
 
 .c1[data-dimension='m'] {
   height: 40px;
-  padding: 0 19px;
+  padding: 0 17px;
 }
 
 .c1[data-dimension='s'] {
   height: 32px;
-  padding: 0 15px;
+  padding: 0 13px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -2092,7 +2119,7 @@ Object {
   text-rendering: geometricPrecision;
 }
 
-.c1 .c2 {
+.c1 .c3 {
   visibility: hidden;
 }
 
@@ -2112,20 +2139,27 @@ Object {
         type="button"
       >
         <div
-          class="c2 c3"
+          class="c2"
+        />
+        <div
+          class="c3 c4"
         >
           <span>
             test
           </span>
           <div
-            aria-hidden="true"
-            class="c4"
-          />
+            class=""
+          >
+            <div
+              aria-hidden="true"
+              class="c5"
+            />
+          </div>
         </div>
       </button>
     </div>
   </body>,
-  "container": .c4 {
+  "container": .c5 {
   -webkit-transition: -webkit-transform 0.3s ease-in-out;
   -webkit-transition: transform 0.3s ease-in-out;
   transition: transform 0.3s ease-in-out;
@@ -2134,28 +2168,29 @@ Object {
   transform: rotate(0deg);
 }
 
-.c4 *[fill^='#'] {
+.c5 *[fill^='#'] {
   fill: #717681;
 }
 
-.c4:hover *[fill^='#'] {
+.c5:hover *[fill^='#'] {
   fill: #0046E2;
 }
 
-.c4[data-disabled] {
+.c5[data-disabled] {
   pointer-events: none;
 }
 
-.c4[data-disabled] *[fill^='#'] {
+.c5[data-disabled] *[fill^='#'] {
   fill: #B0B5BD;
 }
 
-.c3 {
+.c4 {
   vertical-align: top;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
   display: inline-flex;
+  gap: 8px;
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
@@ -2174,7 +2209,7 @@ Object {
   height: 24px;
 }
 
-.c3 > * {
+.c4 > * {
   display: inline-block;
   -webkit-flex: 0 1 auto;
   -ms-flex: 0 1 auto;
@@ -2182,38 +2217,40 @@ Object {
   white-space: nowrap;
 }
 
-.c3 > *:not(:first-child) {
-  margin-left: 8px;
-}
-
-.c3 > svg {
+.c4 > svg {
   width: 24px;
   height: 24px;
 }
 
-[data-dimension='s'] .c2 {
+[data-dimension='s'] .c3 {
   height: 20px;
 }
 
-[data-dimension='s'] .c2 > svg {
+[data-dimension='s'] .c3 > svg {
   width: 20px;
   height: 20px;
+}
+
+.c2 {
+  display: inline-block;
+  width: 2px;
 }
 
 .c1 {
   position: relative;
   box-sizing: border-box;
   display: inline-block;
+  white-space: nowrap;
   border: none;
   border-radius: 0;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  vertical-align: center;
+  vertical-align: middle;
   pointer-events: none;
   padding: 0;
   height: 56px;
-  padding: 0 31px;
+  padding: 0 29px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -2454,7 +2491,7 @@ Object {
 .c1[data-dimension='xl'] {
   padding: 0;
   height: 56px;
-  padding: 0 31px;
+  padding: 0 29px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -2466,17 +2503,17 @@ Object {
 
 .c1[data-dimension='l'] {
   height: 48px;
-  padding: 0 23px;
+  padding: 0 21px;
 }
 
 .c1[data-dimension='m'] {
   height: 40px;
-  padding: 0 19px;
+  padding: 0 17px;
 }
 
 .c1[data-dimension='s'] {
   height: 32px;
-  padding: 0 15px;
+  padding: 0 13px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -2486,7 +2523,7 @@ Object {
   text-rendering: geometricPrecision;
 }
 
-.c1 .c2 {
+.c1 .c3 {
   visibility: hidden;
 }
 
@@ -2505,15 +2542,22 @@ Object {
       type="button"
     >
       <div
-        class="c2 c3"
+        class="c2"
+      />
+      <div
+        class="c3 c4"
       >
         <span>
           test
         </span>
         <div
-          aria-hidden="true"
-          class="c4"
-        />
+          class=""
+        >
+          <div
+            aria-hidden="true"
+            class="c5"
+          />
+        </div>
       </div>
     </button>
   </div>,
