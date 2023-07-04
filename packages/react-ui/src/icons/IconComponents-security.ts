@@ -2,6 +2,8 @@ export { ReactComponent as FaceIDOutline } from '@admiral-ds/icons/build/securit
 export { ReactComponent as FaceIDSolid } from '@admiral-ds/icons/build/security/FaceIDSolid.svg';
 export { ReactComponent as FingerprintOutline } from '@admiral-ds/icons/build/security/FingerprintOutline.svg';
 export { ReactComponent as FingerprintSolid } from '@admiral-ds/icons/build/security/FingerprintSolid.svg';
+export { ReactComponent as IncognitoOutline } from '@admiral-ds/icons/build/security/IncognitoOutline.svg';
+export { ReactComponent as IncognitoSolid } from '@admiral-ds/icons/build/security/IncognitoSolid.svg';
 export { ReactComponent as KeyOutline } from '@admiral-ds/icons/build/security/KeyOutline.svg';
 export { ReactComponent as KeySolid } from '@admiral-ds/icons/build/security/KeySolid.svg';
 export { ReactComponent as LockOutline } from '@admiral-ds/icons/build/security/LockOutline.svg';
