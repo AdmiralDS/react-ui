@@ -6,6 +6,7 @@ import userEvent from '@testing-library/user-event';
 import type { ChangeEvent, PropsWithChildren } from 'react';
 import React, { useState } from 'react';
 import { ThemeProvider } from 'styled-components';
+import { DropdownProvider } from '#src/components/DropdownProvider';
 
 const options = ['one', 'two', 'three'];
 
@@ -34,18 +35,20 @@ const SelectComponent = ({
 
   return (
     <ThemeProvider theme={LIGHT_THEME}>
-      <div id="parent">
-        <Select
-          mode="searchSelect"
-          className="searchSelect"
-          value={selectValue}
-          onChange={onChange}
-          multiple={multiple}
-          {...restSelectProps}
-        >
-          {children}
-        </Select>
-      </div>
+      <DropdownProvider>
+        <div id="parent">
+          <Select
+            mode="searchSelect"
+            className="searchSelect"
+            value={selectValue}
+            onChange={onChange}
+            multiple={multiple}
+            {...restSelectProps}
+          >
+            {children}
+          </Select>
+        </div>
+      </DropdownProvider>
     </ThemeProvider>
   );
 };
