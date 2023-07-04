@@ -15,7 +15,7 @@ import {
   StyledBadge,
 } from './style';
 import type { BadgeAppearance } from '#src/components/Badge';
-import { keyboardKey } from '#src/components/common/keyboardKey';
+import { keyboardKey } from '../common/keyboardKey';
 import { refSetter } from '#src/components/common/utils/refSetter';
 
 export type ChipDimension = 's' | 'm';

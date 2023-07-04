@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { keyboardKey } from '#src/components/common/keyboardKey';
+import { keyboardKey } from '../common/keyboardKey';
 
 import { moveFocus, nextItem, previousItem } from './utils';
 import { AccordionWrapper } from './style';

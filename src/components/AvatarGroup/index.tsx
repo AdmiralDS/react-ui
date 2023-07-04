@@ -8,7 +8,7 @@ import { Avatar } from '#src/components/Avatar';
 import type { RenderOptionProps } from '#src/components/Menu/MenuItem';
 import { MenuItem } from '#src/components/Menu/MenuItem';
 import { DropMenu } from '#src/components/DropMenu';
-import { keyboardKey } from '#src/components/common/keyboardKey';
+import { keyboardKey } from '../common/keyboardKey';
 import { passDropdownDataAttributes } from '#src/components/common/utils/splitDataAttributes';
 
 export interface AvatarGroupProps extends React.HTMLAttributes<HTMLDivElement> {

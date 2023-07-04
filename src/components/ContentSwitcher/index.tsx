@@ -3,7 +3,7 @@ import React, { useRef } from 'react';
 import type { Dimension } from '#src/components/ContentSwitcher/ContentSwitcherComponent';
 import { ContentSwitcherComponent } from '#src/components/ContentSwitcher/ContentSwitcherComponent';
 import { moveFocus, nextItem, previousItem } from '#src/components/ContentSwitcher/utils';
-import { keyboardKey } from '#src/components/common/keyboardKey';
+import { keyboardKey } from '../common/keyboardKey';
 
 export interface ContentSwitcherProps extends HTMLAttributes<HTMLDivElement> {
   /** Размер компонента */

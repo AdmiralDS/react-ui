@@ -1,6 +1,6 @@
 import type { CSSProperties, HTMLAttributes } from 'react';
 import * as React from 'react';
-import { keyboardKey } from '#src/components/common/keyboardKey';
+import { keyboardKey } from '../common/keyboardKey';
 import { OpenStatusButton } from '#src/components/OpenStatusButton';
 import type { ItemProps } from '#src/components/Menu/MenuItem';
 import type { DropdownContainerProps } from '#src/components/DropdownContainer';

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { keyboardKey } from '#src/components/common/keyboardKey';
+import { keyboardKey } from '../common/keyboardKey';
 import { throttle } from '#src/components/common/utils/throttle';
 
 import { calcValue } from './utils';

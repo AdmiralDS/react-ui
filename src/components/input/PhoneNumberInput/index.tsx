@@ -26,7 +26,7 @@ import type { ComponentName, CountryAlpha3Code } from '@admiral-ds/flags';
 import { ComponentsNames, CountriesRusNames, FlagsPack } from '@admiral-ds/flags';
 import { StyledDropdownContainer } from '#src/components/DropdownContainer';
 import type { MenuDimensions } from '#src/components/Menu';
-import { keyboardKey } from '#src/components/common/keyboardKey';
+import { keyboardKey } from '../../common/keyboardKey';
 
 const Chevron = styled(SmallArrowDownOutline)<{ disabled?: boolean }>`
   transition: transform 0.3s;

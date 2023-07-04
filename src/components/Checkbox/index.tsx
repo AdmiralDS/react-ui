@@ -5,7 +5,7 @@ import { ReactComponent as CheckSVG } from './Success.svg';
 import { ReactComponent as IndeterminateSVG } from './Minus.svg';
 import type { CheckboxDimension } from './CheckboxDimension';
 import { smallGroupBorderRadius } from '#src/components/themes/borderRadius';
-import { keyboardKey } from '#src/components/common/keyboardKey';
+import { keyboardKey } from '../common/keyboardKey';
 
 export * from './CheckboxDimension';
 

@@ -4,7 +4,7 @@ import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-comp
 import styled, { useTheme } from 'styled-components';
 import { LIGHT_THEME } from '#src/components/themes';
 import { OpenStatusButton } from '#src/components/OpenStatusButton';
-import { keyboardKey } from '#src/components/common/keyboardKey';
+import { keyboardKey } from '../../common/keyboardKey';
 import { refSetter } from '#src/components/common/utils/refSetter';
 import { InputIconButton } from '#src/components/InputIconButton';
 import { ReactComponent as CloseOutlineSvg } from '@admiral-ds/icons/build/service/CloseOutline.svg';

@@ -27,6 +27,7 @@
     "#src/*": "./src/*"
   },
   "scripts": {
+    "postinstall": "npm run build",
     "build": "rollup -c",
     "test": "jest",
     "test:update": "jest -u",
@@ -64,6 +65,7 @@
     "@rollup/plugin-commonjs": "^25.0.1",
     "@rollup/plugin-node-resolve": "^15.0.2",
     "@rollup/plugin-typescript": "^11.1.0",
+    "@rollup/plugin-url": "^8.0.1",
     "@storybook/addon-essentials": "^7.0.8",
     "@storybook/addon-interactions": "^7.0.8",
     "@storybook/addon-links": "^7.0.8",
@@ -72,6 +74,7 @@
     "@storybook/react": "^7.0.8",
     "@storybook/react-webpack5": "^7.0.8",
     "@storybook/testing-library": "^0.2.0",
+    "@svgr/rollup": "^8.0.1",
     "@svgr/webpack": "^8.0.1",
     "@tanstack/react-query": "^4.29.5",
     "@testing-library/jest-dom": "^5.16.5",
@@ -88,11 +91,10 @@
     "react-router-dom": "^6.13.0",
     "rollup": "^3.0.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
-    "rollup-plugin-typescript-paths": "^1.4.0",
     "storybook": "^7.0.8",
     "ts-jest": "^29.1.0",
     "tsconfig-paths-webpack-plugin": "^4.0.1",
-    "typescript": "4.8.4"
+    "typescript": "^5.1.0"
   },
   "repository": "https://github.com/AdmiralDS/react-ui",
   "bugs": {

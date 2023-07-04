@@ -9,7 +9,7 @@ import { ReactComponent as CloseOutlineSvg } from '@admiral-ds/icons/build/servi
 import { ReactComponent as MinusOutline } from '@admiral-ds/icons/build/service/MinusOutline.svg';
 import { ReactComponent as PlusOutline } from '@admiral-ds/icons/build/service/PlusOutline.svg';
 import { InputIconButton } from '#src/components/InputIconButton';
-import { keyboardKey } from '#src/components/common/keyboardKey';
+import { keyboardKey } from '../../common/keyboardKey';
 
 import { HeightLimitedContainer } from '../Container';
 

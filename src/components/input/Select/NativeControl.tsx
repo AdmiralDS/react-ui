@@ -2,7 +2,7 @@ import type { SelectHTMLAttributes } from 'react';
 import { forwardRef } from 'react';
 import * as React from 'react';
 import styled from 'styled-components';
-import { keyboardKey } from '#src/components/common/keyboardKey';
+import { keyboardKey } from '../../common/keyboardKey';
 import type { IConstantOption } from '#src/components/input/Select/types';
 import { refSetter } from '#src/components/common/utils/refSetter';
 

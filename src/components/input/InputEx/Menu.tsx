@@ -1,7 +1,7 @@
 import type { HTMLAttributes } from 'react';
 import * as React from 'react';
 import styled, { css } from 'styled-components';
-import { keyboardKey } from '#src/components/common/keyboardKey';
+import { keyboardKey } from '../../common/keyboardKey';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 import type { RenderPropsType } from '#src/components/input/InputEx/SuffixSelect';
 import type { MenuItemProps } from '#src/components/Menu/MenuItem';

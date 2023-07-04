@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { Hint, Input, InputContainer, RadioButtonComponent, Span } from '#src/components/RadioButton/style';
-import { keyboardKey } from '#src/components/common/keyboardKey';
+import { keyboardKey } from '../common/keyboardKey';
 
 type Dimension = 'm' | 's';
 

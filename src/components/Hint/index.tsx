@@ -4,7 +4,7 @@ import type { RefCallback, RefObject } from '#src/components/common/utils/handle
 import { handleRef } from '#src/components/common/utils/handleRef';
 import { getScrollableParents } from '#src/components/common/utils/getScrollableParents';
 import { uid } from '#src/components/common/uid';
-import { keyboardKey } from '#src/components/common/keyboardKey';
+import { keyboardKey } from '../common/keyboardKey';
 
 import type { Dimension } from './style';
 import { AnchorWrapper, FakeTarget, Portal } from './style';

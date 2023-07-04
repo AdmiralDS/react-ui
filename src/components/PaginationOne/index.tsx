@@ -12,7 +12,7 @@ import { MenuButton } from '#src/components/PaginationOne/Menu';
 import { passDropdownDataAttributes } from '#src/components/common/utils/splitDataAttributes';
 import { MenuActionsPanel } from '#src/components/Menu/MenuActionsPanel';
 import { TextInput } from '#src/components/input';
-import { keyboardKey } from '#src/components/common/keyboardKey';
+import { keyboardKey } from '../common/keyboardKey';
 import type { DropContainerStyles } from '#src/components/DropdownContainer';
 
 const ComplexWrapper = styled.div`

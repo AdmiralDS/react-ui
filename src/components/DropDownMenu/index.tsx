@@ -3,7 +3,7 @@ import type { ReactElement } from 'react';
 import styled, { css } from 'styled-components';
 import type { DropdownProps } from '#src/components/Dropdown';
 import { Dropdown } from '#src/components/Dropdown';
-import { keyboardKey } from '#src/components/common/keyboardKey';
+import { keyboardKey } from '../common/keyboardKey';
 
 export type DropDownDimensions = 'l' | 'm' | 's';
 

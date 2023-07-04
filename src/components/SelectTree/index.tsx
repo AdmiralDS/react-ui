@@ -3,7 +3,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 import type { Dimension, SelectTreeNodeProps } from '#src/components/SelectTree/SelectTreeNode';
 import { SelectTreeNode } from '#src/components/SelectTree/SelectTreeNode';
-import { keyboardKey } from '#src/components/common/keyboardKey';
+import { keyboardKey } from '../common/keyboardKey';
 import { checkParent, setNodeStatus, updateNodeStatus } from '#src/components/SelectTree/utils';
 
 const TreeItem = styled.ul`

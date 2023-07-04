@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { keyboardKey } from '#src/components/common/keyboardKey';
+import { keyboardKey } from '../../common/keyboardKey';
 import { refSetter } from '#src/components/common/utils/refSetter';
 import { StyledDropdownContainer } from '#src/components/DropdownContainer';
 import type { TableProps, Column } from '#src/components/Table';

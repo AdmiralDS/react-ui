@@ -6,7 +6,7 @@ import { typography } from '#src/components/Typography';
 
 import type { Dimension, LabelPosition } from '#src/components/Toggle/mixins';
 import { hoverSizes, sizes, SLIDER_SIZE_M, SLIDER_SIZE_S, sliderSizes } from '#src/components/Toggle/mixins';
-import { keyboardKey } from '#src/components/common/keyboardKey';
+import { keyboardKey } from '../common/keyboardKey';
 
 export interface ToggleProps extends InputHTMLAttributes<HTMLInputElement> {
   /** Состояние компонента */
