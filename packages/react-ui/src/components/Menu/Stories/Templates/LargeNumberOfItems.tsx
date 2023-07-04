@@ -33,7 +33,7 @@ export const LargeNumberOfItemsTemplate = (props: MenuProps) => {
   return (
     <ThemeProvider theme={swapBorder}>
       <Wrapper style={{ width: 'fit-content' }}>
-        <Menu {...props} model={model} />
+        <Menu {...props} defaultIsActive={false} model={model} />
       </Wrapper>
     </ThemeProvider>
   );

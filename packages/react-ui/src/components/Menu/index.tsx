@@ -9,8 +9,7 @@ import { refSetter } from '#src/components/common/utils/refSetter';
 import type { MenuDimensions } from '#src/components/Menu/types';
 import { SubMenuContainer } from '#src/components/Menu/SubMenuContainer';
 import { useDropdown } from '#src/components/DropdownProvider';
-
-// export type MenuDimensions = 'l' | 'm' | 's';
+import type { RenderDirection } from '#src/components/Menu/utils';
 
 export const getItemHeight = (dimension?: MenuDimensions) => {
   switch (dimension) {
@@ -32,7 +31,7 @@ const getHeight = (rowCount: number, dimension?: MenuDimensions) => {
 const menuListHeights = css<{ dimension?: MenuDimensions; maxHeight?: string | number; rowCount: number }>`
   max-height: ${({ dimension, maxHeight, rowCount }) => {
     if (maxHeight) return maxHeight;
-    return `${getHeight(rowCount, dimension)}px`;
+    return `min(calc(100vh - 16px), ${getHeight(rowCount, dimension)}px)`;
   }};
 `;
 
@@ -55,6 +54,10 @@ const Wrapper = styled.div<{
   max-width: calc(100vw - 32px);
   border-color: transparent;
   ${menuListHeights};
+  &:focus-visible {
+    border: 0;
+    outline: none;
+  }
 `;
 
 const StyledDiv = styled.div<{ hasTopPanel: boolean; hasBottomPanel: boolean }>`
@@ -121,9 +124,20 @@ export interface MenuProps extends HTMLAttributes<HTMLDivElement> {
      */
     itemHeight: 'auto' | number;
   };
-
+  /**
+   * Сторона от родительского меню, в которой по умолчанию будет появляться дочернее меню при наличии места
+   * */
+  subMenuRenderDirection?: RenderDirection;
+  /** @internal
+   * Ссылка на родительское меню для subMenu */
   parentMenuRef?: React.RefObject<HTMLElement>;
-  onCloseSubMenu?: () => void;
+  /** @internal
+   * Обработчик события при попытке закрыть subMenu */
+  onCloseQuery?: () => void;
+  /**
+   * Признак необходимости активировать меню сразу при появлении
+   */
+  defaultIsActive?: boolean;
 }
 
 export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
@@ -146,7 +160,9 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
       virtualScroll,
       rowCount = 6,
       parentMenuRef,
-      onCloseSubMenu,
+      onCloseQuery,
+      defaultIsActive = true,
+      subMenuRenderDirection,
       ...props
     },
     ref,
@@ -207,6 +223,17 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
     const hasTopPanel = !!renderTopPanel;
     const hasBottomPanel = !!renderBottomPanel;
 
+    const findModelItem = (items: Array<MenuModelItemProps>, id: string): MenuModelItemProps | undefined => {
+      for (let i = 0; i < items.length; i++) {
+        const item = items[i];
+
+        if (item.id === id) return item;
+        if (item.subItems && item.subItems.length > 0) {
+          return findModelItem(item.subItems, id);
+        }
+      }
+    };
+
     const activateItem = (id?: string) => {
       if (activeId !== id) setActiveState(id);
       onActivateItem?.(id);
@@ -215,7 +242,7 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
     const selectItem = (id: string) => {
       if (selectedId !== id && !multiSelection && !disableSelectedOptionHighlight) setSelectedState(id);
 
-      const item = model.find((item) => item.id === id);
+      const item = findModelItem(model, id);
       if (item && !item.disabled && !item.readOnly) onSelectItem?.(id);
     };
 
@@ -258,7 +285,7 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
           }
           case keyboardKey.ArrowLeft: {
             if (parentMenuRef && parentMenuRef.current) {
-              onCloseSubMenu?.();
+              onCloseQuery?.();
             }
             break;
           }
@@ -271,32 +298,44 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
       };
     }, [active, activeState, currentActiveMenu]);
 
+    React.useEffect(() => {
+      if (defaultIsActive) activateMenu?.(wrapperRef);
+
+      return () => {
+        if (defaultIsActive && currentActiveMenu === wrapperRef) deactivateMenu?.(wrapperRef);
+      };
+    }, [defaultIsActive]);
+
     const handleSubMenuClose = () => {
       setSubmenuVisible(false);
       activateMenu?.(wrapperRef);
     };
 
     const renderChildren = () => {
-      return model.map(({ id, subItems, ...itemProps }) =>
-        itemProps.render({
-          hovered: activeId === id,
-          selected: selectedId === id,
+      return model.map(({ id, subItems, ...itemProps }) => {
+        const hasSubmenu = !!subItems && subItems.length > 0;
+        const hovered = activeId === id;
+        const selected = selectedId === id || (!!selectedId && hasSubmenu && !!findModelItem(subItems, selectedId));
+
+        return itemProps.render({
+          hovered,
+          selected,
           onHover: () => {
             activateItem(itemProps.disabled ? undefined : id);
-            setSubmenuVisible(!!subItems && subItems.length > 0);
+            setSubmenuVisible(hasSubmenu);
           },
           onClickItem: () => selectItem(id),
-          hasSubmenu: subItems && subItems.length > 0,
+          hasSubmenu,
           selfRef: (ref) => {
-            if (activeId === id && subItems && subItems.length > 0) {
+            if (activeId === id && hasSubmenu) {
               activeItemRef.current = ref;
             }
           },
           disabled: itemProps.disabled,
           containerRef,
           ...itemProps,
-        }),
-      );
+        });
+      });
     };
 
     const renderVirtualChildren = () => {
@@ -346,7 +385,10 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
             ref={subMenuRef}
             parentMenuRef={wrapperRef}
             model={activeItem.subItems}
-            onCloseSubMenu={handleSubMenuClose}
+            subMenuRenderDirection={subMenuRenderDirection}
+            onCloseQuery={handleSubMenuClose}
+            selected={selectedId}
+            onSelectItem={(id) => selectItem(id)}
           />
         )
       );
@@ -357,13 +399,18 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
       props.onMouseEnter?.(e);
     };
 
-    const handleMouseLeave = (e: React.MouseEvent<HTMLDivElement>) => {
-      if (currentActiveMenu === wrapperRef) deactivateMenu?.(wrapperRef);
-      props.onMouseLeave?.(e);
-    };
-
     const handleClickOutside = () => {
       setSubmenuVisible(false);
+    };
+
+    const handleFocus = (e: React.FocusEvent<HTMLDivElement>) => {
+      if (currentActiveMenu !== wrapperRef) activateMenu?.(wrapperRef);
+      props.onFocus?.(e);
+    };
+
+    const handleBlur = (e: React.FocusEvent<HTMLDivElement>) => {
+      if (currentActiveMenu === wrapperRef) deactivateMenu?.(wrapperRef);
+      props.onBlur?.(e);
     };
 
     return (
@@ -374,7 +421,8 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
         hasBottomPanel={hasBottomPanel}
         rowCount={rowCount}
         onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
         {...props}
       >
         {hasTopPanel && renderTopPanel({ dimension })}
@@ -382,7 +430,11 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
           {virtualScroll ? renderVirtualChildren() : renderChildren()}
         </StyledDiv>
         {submenuVisible && activeItemRef.current && (
-          <SubMenuContainer target={activeItemRef} onClickOutside={handleClickOutside} visible={true}>
+          <SubMenuContainer
+            target={activeItemRef}
+            defaultRenderDirection={subMenuRenderDirection}
+            onClickOutside={handleClickOutside}
+          >
             {renderSubMenu()}
           </SubMenuContainer>
         )}

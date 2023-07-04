@@ -3,7 +3,6 @@ import { SmallArrowRightOutline } from '#src/icons/IconComponents-system';
 
 export const Chevron = styled(SmallArrowRightOutline)`
   transition: all 0.3s;
-  //transform: rotate(-90deg);
   flex-shrink: 0;
   width: 24px;
   height: 24px;
@@ -19,7 +18,7 @@ export const Chevron = styled(SmallArrowRightOutline)`
       fill: ${({ theme }) => theme.color['Neutral/Neutral 30']};
     }
   }
-  [data-dimension='m'] & {
+  [data-dimension='s'] & {
     width: 20px;
     height: 20px;
   }

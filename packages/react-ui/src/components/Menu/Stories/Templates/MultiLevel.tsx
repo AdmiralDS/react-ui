@@ -1,11 +1,7 @@
 import * as React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
-import { Menu } from '#src/components/Menu';
-import { MenuItem } from '#src/components/Menu/MenuItem';
-import { mediumGroupBorderRadius } from '#src/components/themes';
-import type { Theme } from '#src/components/themes';
-import type { MenuProps } from '#src/components/Menu';
-import type { RenderOptionProps, ItemProps } from '#src/components/Menu/MenuItem';
+import { Menu, MenuItem, mediumGroupBorderRadius } from '@admiral-ds/react-ui';
+import type { Theme, MenuProps, RenderOptionProps, MenuModelItemProps } from '@admiral-ds/react-ui';
 
 type StoryItem = {
   id: string;
@@ -39,7 +35,7 @@ const STORY_ITEMS: Array<StoryItem> = [
     children: [
       {
         id: '4-1',
-        label: 'SubOption 4-1',
+        label: 'SubOption with long text 4-1',
         value: 41,
       },
       {
@@ -64,6 +60,36 @@ const STORY_ITEMS: Array<StoryItem> = [
           },
           {
             id: '4-3-3',
+            label: 'SubOption 4-3-3',
+            value: 433,
+          },
+          {
+            id: '4-3-4',
+            label: 'SubOption 4-3-4',
+            value: 434,
+          },
+          {
+            id: '4-3-5',
+            label: 'SubOption 4-3-3',
+            value: 435,
+          },
+          {
+            id: '4-3-6',
+            label: 'SubOption 4-3-3',
+            value: 433,
+          },
+          {
+            id: '4-3-7',
+            label: 'SubOption 4-3-3',
+            value: 433,
+          },
+          {
+            id: '4-3-8',
+            label: 'SubOption 4-3-3',
+            value: 433,
+          },
+          {
+            id: '4-3-9',
             label: 'SubOption 4-3-3',
             value: 433,
           },
@@ -95,9 +121,16 @@ const Wrapper = styled.div`
   ${(p) => p.theme.shadow['Shadow 08']}
 `;
 
+const Container = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`;
+
 export const MultiLevelTemplate = (props: MenuProps) => {
-  const convertStoryItem = (storyItem: StoryItem): ItemProps => {
-    const item: ItemProps = {
+  const convertStoryItem = (storyItem: StoryItem): MenuModelItemProps => {
+    const item: MenuModelItemProps = {
       id: storyItem.id,
       render: (options: RenderOptionProps) => (
         <MenuItem dimension={props.dimension} {...options} key={storyItem.id}>
@@ -113,7 +146,7 @@ export const MultiLevelTemplate = (props: MenuProps) => {
     return item;
   };
 
-  const model: Array<ItemProps> = React.useMemo(() => {
+  const model: Array<MenuModelItemProps> = React.useMemo(() => {
     return STORY_ITEMS.map((item) => convertStoryItem(item));
   }, [props.dimension]);
 
@@ -124,9 +157,14 @@ export const MultiLevelTemplate = (props: MenuProps) => {
 
   return (
     <ThemeProvider theme={swapBorder}>
-      <Wrapper style={{ width: 'fit-content' }}>
-        <Menu {...props} model={model} />
-      </Wrapper>
+      <Container>
+        <Wrapper style={{ width: 'fit-content' }}>
+          <Menu tabIndex={1} {...props} defaultIsActive={false} model={model} />
+        </Wrapper>
+        <Wrapper style={{ width: 'fit-content' }}>
+          <Menu tabIndex={2} defaultIsActive={false} subMenuRenderDirection={'left'} {...props} model={model} />
+        </Wrapper>
+      </Container>
     </ThemeProvider>
   );
 };

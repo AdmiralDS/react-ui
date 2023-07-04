@@ -24,7 +24,7 @@ const STORY_ITEMS: Array<StoryItem> = [
   },
   {
     id: '3',
-    label: 'Option three',
+    label: 'Привет, пупсик! Хотел тебе сказать, что ты андроид.',
     value: 3,
   },
   {
@@ -56,22 +56,22 @@ const Wrapper = styled.div`
   ${(p) => p.theme.shadow['Shadow 08']}
 `;
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: row;
-  column-gap: 50px;
+const MultiLineMenuItem = styled(MenuItem)`
+  white-space: pre-wrap;
 `;
 
-export const SimpleTemplate = (props: MenuProps) => {
+export const MultiLineMenuTemplate = (props: MenuProps) => {
   const model = React.useMemo(() => {
-    return STORY_ITEMS.map((item) => ({
-      id: item.id,
-      render: (options: RenderOptionProps) => (
-        <MenuItem dimension={props.dimension} {...options} key={item.id}>
-          {item.label}
-        </MenuItem>
-      ),
-    }));
+    return STORY_ITEMS.map((item) => {
+      return {
+        id: item.id,
+        render: (options: RenderOptionProps) => (
+          <MultiLineMenuItem dimension={props.dimension} {...options} key={item.id}>
+            {item.label}
+          </MultiLineMenuItem>
+        ),
+      };
+    });
   }, [props.dimension]);
 
   function swapBorder(theme: Theme): Theme {
@@ -81,14 +81,9 @@ export const SimpleTemplate = (props: MenuProps) => {
 
   return (
     <ThemeProvider theme={swapBorder}>
-      <Container>
-        <Wrapper style={{ width: 'fit-content' }}>
-          <Menu {...props} defaultIsActive={false} model={model} />
-        </Wrapper>
-        <Wrapper style={{ width: 'fit-content' }}>
-          <Menu {...props} defaultIsActive={false} model={model} />
-        </Wrapper>
-      </Container>
+      <Wrapper style={{ maxWidth: '200px' }}>
+        <Menu {...props} defaultIsActive={false} model={model} />
+      </Wrapper>
     </ThemeProvider>
   );
 };

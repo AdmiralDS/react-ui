@@ -20,7 +20,7 @@ export interface RenderOptionProps {
   containerRef?: React.RefObject<HTMLElement>;
   expandIcon?: React.ReactNode;
   hasSubmenu?: boolean;
-  selfRef: ((instance: HTMLDivElement | null) => void) | React.RefObject<HTMLDivElement> | null;
+  selfRef?: ((instance: HTMLDivElement | null) => void) | React.RefObject<HTMLDivElement> | null;
   /** Отключение секции */
   disabled?: boolean;
   /** Только для чтения */
@@ -71,19 +71,17 @@ export const MenuItem = React.forwardRef<HTMLDivElement, MenuItemProps>(
       if (!disabled) onClickItem?.();
     };
 
-    const callbackRef = (node: HTMLDivElement) => {
-      if (hovered) console.log('Attached node: ', node);
-    };
+    const resolvedRef = selfRef ? refSetter(ref, selfRef) : ref;
 
     return (
       <Item
-        ref={refSetter(ref, selfRef)}
-        // ref={callbackRef}
+        ref={resolvedRef}
         dimension={dimension}
         selected={selected}
         hovered={hovered}
         data-hovered={hovered}
         data-disabled={disabled}
+        data-dimension={dimension}
         onMouseMove={handleMouseMove}
         onMouseDown={handleClick}
         {...props}
@@ -108,7 +106,6 @@ const Item = styled.div<{
   display: flex;
   align-items: center;
   user-select: none;
-  flex-flow: wrap;
   position: relative;
   justify-content: space-between;
   outline: none;

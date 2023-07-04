@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
-import { Menu, MenuItem, mediumGroupBorderRadius } from '@admiral-ds/react-ui';
+import { Menu, RadioButton, MenuItem, mediumGroupBorderRadius } from '@admiral-ds/react-ui';
 import type { Theme, MenuProps, RenderOptionProps } from '@admiral-ds/react-ui';
 
 type StoryItem = {
@@ -40,12 +40,12 @@ const STORY_ITEMS: Array<StoryItem> = [
   {
     id: '6',
     label: 'Option six',
-    value: 7,
+    value: 6,
   },
   {
     id: '7',
     label: 'Option seven',
-    value: 6,
+    value: 7,
   },
 ];
 
@@ -56,19 +56,15 @@ const Wrapper = styled.div`
   ${(p) => p.theme.shadow['Shadow 08']}
 `;
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: row;
-  column-gap: 50px;
-`;
-
-export const SimpleTemplate = (props: MenuProps) => {
+export const RadioButtonMenuTemplate = (props: MenuProps) => {
   const model = React.useMemo(() => {
     return STORY_ITEMS.map((item) => ({
       id: item.id,
       render: (options: RenderOptionProps) => (
         <MenuItem dimension={props.dimension} {...options} key={item.id}>
-          {item.label}
+          <RadioButton dimension={props.dimension !== 's' ? 'm' : props.dimension} name="menuListOption" key={item.id}>
+            {item.label}
+          </RadioButton>
         </MenuItem>
       ),
     }));
@@ -81,14 +77,9 @@ export const SimpleTemplate = (props: MenuProps) => {
 
   return (
     <ThemeProvider theme={swapBorder}>
-      <Container>
-        <Wrapper style={{ width: 'fit-content' }}>
-          <Menu {...props} defaultIsActive={false} model={model} />
-        </Wrapper>
-        <Wrapper style={{ width: 'fit-content' }}>
-          <Menu {...props} defaultIsActive={false} model={model} />
-        </Wrapper>
-      </Container>
+      <Wrapper style={{ width: 'fit-content' }}>
+        <Menu {...props} defaultIsActive={false} model={model} />
+      </Wrapper>
     </ThemeProvider>
   );
 };

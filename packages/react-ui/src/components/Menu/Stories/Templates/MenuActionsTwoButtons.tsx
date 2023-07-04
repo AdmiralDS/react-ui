@@ -1,6 +1,6 @@
 import * as React from 'react';
-import styled, { ThemeProvider } from 'styled-components';
-import { Menu, MenuItem, mediumGroupBorderRadius } from '@admiral-ds/react-ui';
+import styled, { css, ThemeProvider } from 'styled-components';
+import { Button, MenuActionsPanel, Menu, MenuItem, mediumGroupBorderRadius } from '@admiral-ds/react-ui';
 import type { Theme, MenuProps, RenderOptionProps } from '@admiral-ds/react-ui';
 
 type StoryItem = {
@@ -49,6 +49,11 @@ const STORY_ITEMS: Array<StoryItem> = [
   },
 ];
 
+const ActionPanelFlex = css`
+  display: flex;
+  gap: 8px;
+`;
+
 const Wrapper = styled.div`
   border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
   overflow: hidden;
@@ -56,13 +61,7 @@ const Wrapper = styled.div`
   ${(p) => p.theme.shadow['Shadow 08']}
 `;
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: row;
-  column-gap: 50px;
-`;
-
-export const SimpleTemplate = (props: MenuProps) => {
+export const MenuActionsTwoButtonsTemplate = (props: MenuProps) => {
   const model = React.useMemo(() => {
     return STORY_ITEMS.map((item) => ({
       id: item.id,
@@ -72,7 +71,7 @@ export const SimpleTemplate = (props: MenuProps) => {
         </MenuItem>
       ),
     }));
-  }, [props.dimension]);
+  }, [props.dimension, STORY_ITEMS]);
 
   function swapBorder(theme: Theme): Theme {
     theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
@@ -81,14 +80,36 @@ export const SimpleTemplate = (props: MenuProps) => {
 
   return (
     <ThemeProvider theme={swapBorder}>
-      <Container>
-        <Wrapper style={{ width: 'fit-content' }}>
-          <Menu {...props} defaultIsActive={false} model={model} />
-        </Wrapper>
-        <Wrapper style={{ width: 'fit-content' }}>
-          <Menu {...props} defaultIsActive={false} model={model} />
-        </Wrapper>
-      </Container>
+      <Wrapper style={{ width: 'fit-content' }}>
+        <Menu
+          {...props}
+          defaultIsActive={false}
+          model={model}
+          renderBottomPanel={({ dimension, menuActionsPanelCssMixin = ActionPanelFlex }) => {
+            return (
+              <MenuActionsPanel dimension={dimension} menuActionsPanelCssMixin={menuActionsPanelCssMixin}>
+                <Button
+                  dimension={'s'}
+                  onClick={() => {
+                    console.log('Button 1 clicked');
+                  }}
+                >
+                  Action 1
+                </Button>
+                <Button
+                  dimension={'s'}
+                  appearance="secondary"
+                  onClick={() => {
+                    console.log('Button 2 clicked');
+                  }}
+                >
+                  Action 2
+                </Button>
+              </MenuActionsPanel>
+            );
+          }}
+        />
+      </Wrapper>
     </ThemeProvider>
   );
 };
