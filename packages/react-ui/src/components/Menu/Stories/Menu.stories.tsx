@@ -1,36 +1,24 @@
-import type { ChangeEvent, HTMLAttributes } from 'react';
 import * as React from 'react';
+import styled from 'styled-components';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import {
-  Menu,
-  MenuItem,
-  typography,
-  LIGHT_THEME,
-  RadioButton,
-  TooltipHoc,
-  TextInput,
-  TextButton,
-  getHighlightedFilteredOptions,
-  MenuActionsPanel,
-  Button,
-  keyboardKey,
-  mediumGroupBorderRadius,
-  ALL_BORDER_RADIUS_VALUES,
-  checkboxTreeToMap,
-  MenuItemWithCheckbox,
-} from '@admiral-ds/react-ui';
-import type { MenuModelItemProps, RenderOptionProps, Theme, CheckboxGroupItemProps } from '@admiral-ds/react-ui';
-import styled, { css, useTheme, ThemeProvider } from 'styled-components';
+import { Menu, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 import { withDesign } from 'storybook-addon-designs';
-import { ReactComponent as PlusOutline } from '@admiral-ds/icons/build/service/PlusOutline.svg';
-import { uid } from '#src/components/common/uid';
 import {
   CardGroupsTemplate,
   LargeNumberOfItemsTemplate,
   MenuWithLockCycleScrollTemplate,
-  VirtualScrollTemplate,
   IconsAndAdditionalTextTemplate,
+  SimpleTemplate,
+  VirtualScrollTemplate,
+  MultiLevelTemplate,
   CheckboxMenuTemplate,
+  RadioButtonMenuTemplate,
+  MenuWithCustomItemsTemplate,
+  TooltipMenuTemplate,
+  MultiLineMenuTemplate,
+  MenuActionsTwoButtonsTemplate,
+  MenuActionsAddUserValueTemplate,
+  MenuCheckboxGroupTemplate,
 } from './Templates';
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
@@ -39,8 +27,17 @@ import LargeNumberOfItemsRaw from '!!raw-loader!./Templates/LargeNumberOfItems';
 import MenuWithLockCycleScrollRaw from '!!raw-loader!./Templates/MenuWithLockCycleScroll';
 import VirtualScrollRaw from '!!raw-loader!./Templates/VirtualScroll';
 import CardGroupsRaw from '!!raw-loader!./Templates/CardGroups';
+import SimpleRaw from '!!raw-loader!./Templates/Simple';
+import MultiLevelRaw from '!!raw-loader!./Templates/MultiLevel';
 import IconsAndAdditionalTextRaw from '!!raw-loader!./Templates/IconsAndAdditionalText';
 import CheckboxMenuRaw from '!!raw-loader!./Templates/CheckboxMenu';
+import RadioButtonMenuRaw from '!!raw-loader!./Templates/RadioButtonMenu';
+import MenuWithCustomItemsRaw from '!!raw-loader!./Templates/MenuWithCustomItems';
+import TooltipMenuRaw from '!!raw-loader!./Templates/TooltipMenu';
+import MultiLineMenuRaw from '!!raw-loader!./Templates/MultiLineMenu';
+import MenuActionsTwoButtonsRaw from '!!raw-loader!./Templates/MenuActionsTwoButtons';
+import MenuActionsAddUserValueRaw from '!!raw-loader!./Templates/MenuActionsAddUserValue';
+import MenuCheckboxGroupRaw from '!!raw-loader!./Templates/MenuCheckboxGroup';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -111,640 +108,28 @@ export default {
   },
 } as ComponentMeta<typeof Menu>;
 
-const Wrapper = styled.div`
-  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
-  overflow: hidden;
-  border-color: transparent;
-  ${(p) => p.theme.shadow['Shadow 08']}
-`;
+//<editor-fold desc="Базовый пример">
+const SimpleStory: ComponentStory<typeof Menu> = (props) => <SimpleTemplate model={[]} {...cleanUpProps(props)} />;
 
-type StoryItem = {
-  id: string;
-  label: string;
-  value: number;
-  disabled?: boolean;
-  readOnly?: boolean;
+export const SimpleExample = SimpleStory.bind({});
+SimpleExample.parameters = {
+  docs: {
+    source: {
+      code: SimpleRaw,
+    },
+    description: {
+      story: 'Базовый пример построения Menu.',
+    },
+  },
 };
-
-const STORY_ITEMS: Array<StoryItem> = [
-  {
-    id: '1',
-    label: 'Option one',
-    value: 1,
-  },
-  {
-    id: '2',
-    label: 'Option two',
-    value: 2,
-  },
-  {
-    id: '3',
-    label: 'Option three',
-    value: 3,
-  },
-  {
-    id: '4',
-    label: 'Option four',
-    value: 4,
-  },
-  {
-    id: '5',
-    label: 'Option five',
-    value: 5,
-  },
-  {
-    id: '6',
-    label: 'Option six',
-    value: 7,
-  },
-  {
-    id: '7',
-    label: 'Option seven',
-    value: 6,
-  },
-];
-
-const SimpleTemplate: ComponentStory<typeof Menu> = (args) => {
-  const model = React.useMemo(() => {
-    return STORY_ITEMS.map((item) => ({
-      id: item.id,
-      render: (options: RenderOptionProps) => (
-        <MenuItem dimension={args.dimension} {...options} key={item.id}>
-          {item.label}
-        </MenuItem>
-      ),
-    }));
-  }, [args.dimension]);
-
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
-  return (
-    <ThemeProvider theme={swapBorder}>
-      <Wrapper style={{ width: 'fit-content' }}>
-        <Menu {...args} model={model} />
-      </Wrapper>
-    </ThemeProvider>
-  );
-};
-
-interface MyMenuItemProps extends HTMLAttributes<HTMLDivElement>, RenderOptionProps {
-  text: string;
-  success?: boolean;
-}
-
-//<editor-fold desc="MyMenuItem">
-const MyItem = styled.div<{
-  selected?: boolean;
-  hovered?: boolean;
-  width?: number;
-  success?: boolean;
-}>`
-  display: flex;
-  align-items: center;
-  user-select: none;
-  flex-flow: wrap;
-  position: relative;
-  justify-content: space-between;
-  outline: none;
-  white-space: pre;
-  margin: 0;
-  cursor: pointer;
-  padding: 12px 16px;
-
-  ${typography['Body/Body 1 Long']}
-
-  background: ${({ theme, selected }) =>
-    selected ? theme.color['Opacity/Focus'] : theme.color['Special/Elevated BG']};
-
-  &&[data-disabled='true'] {
-    cursor: default;
-    background-color: ${({ theme, selected }) =>
-      selected ? theme.color['Opacity/Focus'] : theme.color['Special/Elevated BG']};
-    color: ${(p) => p.theme.color['Neutral/Neutral 30']};
-  }
-
-  &&[data-hovered='true'] {
-    background-color: ${(p) => p.theme.color['Opacity/Hover']};
-    color: ${({ theme, success }) =>
-      success ? theme.color['Success/Success 70'] : theme.color['Magenta/Magenta 60 Main']};
-  }
-
-  color: ${({ theme, success }) =>
-    success ? theme.color['Success/Success 50 Main'] : theme.color['Purple/Purple 60 Main']};
-`;
-
-const MyMenuItem = ({
-  text,
-  onHover,
-  onClickItem,
-  disabled,
-  hovered,
-  selected = false,
-  success = false,
-  ...props
-}: MyMenuItemProps) => {
-  const handleMouseMove = () => {
-    onHover?.();
-  };
-
-  const handleClick = () => {
-    if (!disabled) onClickItem?.();
-  };
-
-  return (
-    <MyItem
-      selected={selected}
-      data-disabled={disabled}
-      data-hovered={hovered}
-      success={success}
-      onMouseMove={handleMouseMove}
-      onClick={handleClick}
-      {...props}
-    >
-      {text}
-    </MyItem>
-  );
-};
+SimpleExample.storyName = 'Базовый пример';
 //</editor-fold>
-
-const CustomItemTemplate: ComponentStory<typeof Menu> = (args) => {
-  const model = React.useMemo(() => {
-    return STORY_ITEMS.map((item) => ({
-      id: item.id,
-      render: (options: RenderOptionProps) => (
-        <MyMenuItem success={item.id === '3'} {...options} key={item.id} text={item.label} />
-      ),
-      disabled: item.value === 4,
-    }));
-  }, []);
-
-  return (
-    <>
-      <Wrapper style={{ width: 'fit-content' }}>
-        <Menu {...args} model={model} defaultSelected={'4'} />
-      </Wrapper>
-    </>
-  );
-};
-
-const MenuRadiobuttonTemplate: ComponentStory<typeof Menu> = (args) => {
-  const model = React.useMemo(() => {
-    return STORY_ITEMS.map((item) => ({
-      id: item.id,
-      render: (options: RenderOptionProps) => (
-        <MenuItem dimension={args.dimension} {...options} key={item.id}>
-          <RadioButton dimension={args.dimension !== 's' ? 'm' : args.dimension} name="menuListOption" key={item.id}>
-            {item.label}
-          </RadioButton>
-        </MenuItem>
-      ),
-    }));
-  }, [args.dimension]);
-
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
-  return (
-    <ThemeProvider theme={swapBorder}>
-      <Wrapper style={{ width: 'fit-content' }}>
-        <Menu {...args} model={model} />
-      </Wrapper>
-    </ThemeProvider>
-  );
-};
-
-const itemsLongText = [
-  {
-    id: '1',
-    label: 'Option one',
-    value: 1,
-  },
-  {
-    id: '2',
-    label: 'Option two',
-    value: 2,
-  },
-  {
-    id: '3',
-    label: 'Привет, пупсик! Хотел тебе сказать, что ты андроид.',
-    value: 3,
-  },
-  {
-    id: '4',
-    label: 'Option four',
-    value: 4,
-  },
-  {
-    id: '5',
-    label: 'Option five',
-    value: 5,
-  },
-  {
-    id: '6',
-    label: 'Option six',
-    value: 7,
-  },
-  {
-    id: '7',
-    label: 'Option seven',
-    value: 6,
-  },
-];
-const MenuItemWithTooltip = TooltipHoc(MenuItem);
-
-const MenuTooltipTemplate: ComponentStory<typeof Menu> = (args) => {
-  const model = React.useMemo(() => {
-    return itemsLongText.map((item) => {
-      const tooltip = item.label.length > 20;
-
-      return {
-        id: item.id,
-        render: (options: RenderOptionProps) =>
-          tooltip ? (
-            <MenuItemWithTooltip renderContent={() => item.label} dimension={args.dimension} {...options} key={item.id}>
-              {item.label.slice(0, 17) + '...'}
-            </MenuItemWithTooltip>
-          ) : (
-            <MenuItem dimension={args.dimension} {...options} key={item.id}>
-              {item.label}
-            </MenuItem>
-          ),
-      };
-    });
-  }, [args.dimension]);
-
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
-  return (
-    <ThemeProvider theme={swapBorder}>
-      <Wrapper style={{ width: 'fit-content' }}>
-        <Menu {...args} model={model} />
-      </Wrapper>
-    </ThemeProvider>
-  );
-};
-
-const MultiLineMenuItem = styled(MenuItem)`
-  white-space: pre-wrap;
-`;
-
-const MultiLineMenuTemplate: ComponentStory<typeof Menu> = (args) => {
-  const model = React.useMemo(() => {
-    return itemsLongText.map((item) => {
-      return {
-        id: item.id,
-        render: (options: RenderOptionProps) => (
-          <MultiLineMenuItem dimension={args.dimension} {...options} key={item.id}>
-            {item.label}
-          </MultiLineMenuItem>
-        ),
-      };
-    });
-  }, [args.dimension]);
-
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
-  return (
-    <ThemeProvider theme={swapBorder}>
-      <Wrapper style={{ maxWidth: '200px' }}>
-        <Menu {...args} model={model} />
-      </Wrapper>
-    </ThemeProvider>
-  );
-};
-
-const ActionPanelFlex = css`
-  display: flex;
-  gap: 8px;
-`;
-
-const MenuActionsTwoButtonsTemplate: ComponentStory<typeof Menu> = (props) => {
-  const model = React.useMemo(() => {
-    return STORY_ITEMS.map((item) => ({
-      id: item.id,
-      render: (options: RenderOptionProps) => (
-        <MenuItem dimension={props.dimension} {...options} key={item.id}>
-          {item.label}
-        </MenuItem>
-      ),
-    }));
-  }, [props.dimension, STORY_ITEMS]);
-
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
-  return (
-    <ThemeProvider theme={swapBorder}>
-      <Wrapper style={{ width: 'fit-content' }}>
-        <Menu
-          {...props}
-          model={model}
-          renderBottomPanel={({ dimension, menuActionsPanelCssMixin = ActionPanelFlex }) => {
-            return (
-              <MenuActionsPanel dimension={dimension} menuActionsPanelCssMixin={menuActionsPanelCssMixin}>
-                <Button
-                  dimension={'s'}
-                  onClick={() => {
-                    console.log('Button 1 clicked');
-                  }}
-                >
-                  Action 1
-                </Button>
-                <Button
-                  dimension={'s'}
-                  appearance="secondary"
-                  onClick={() => {
-                    console.log('Button 2 clicked');
-                  }}
-                >
-                  Action 2
-                </Button>
-              </MenuActionsPanel>
-            );
-          }}
-        />
-      </Wrapper>
-    </ThemeProvider>
-  );
-};
-
-const MenuActionsAddUserValueTemplate: ComponentStory<typeof Menu> = (props) => {
-  const initialButtonText = 'Добавить';
-  const theme = useTheme() || LIGHT_THEME;
-
-  const [options, setOptions] = React.useState([...STORY_ITEMS]);
-  const [inputValue, setInputValue] = React.useState<string>('');
-  const [buttonText, setButtonText] = React.useState<string>(initialButtonText);
-  const [buttonDisabled, setButtonDisabled] = React.useState<boolean>(true);
-  const [active, setActive] = React.useState<string | undefined>(options[0].id);
-
-  const model = React.useMemo(() => {
-    return getHighlightedFilteredOptions(
-      options,
-      inputValue,
-      theme.locales[theme.currentLocale].suggestInput.emptyMessage,
-      props.dimension,
-    );
-  }, [props.dimension, options, inputValue]);
-
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const inputValue = e.target.value;
-    setInputValue(inputValue);
-  };
-
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    const code = keyboardKey.getCode(e);
-
-    // prevent selecting option on Space press
-    if (code === keyboardKey[' ']) {
-      e.stopPropagation();
-    }
-  };
-
-  const handleTextButtonClick = () => {
-    const newId = uid();
-    const newValue = Math.floor(Math.random());
-    const newOption = { id: newId, label: inputValue, value: newValue };
-    const newOptions = [newOption, ...options];
-    setOptions(newOptions);
-    setActive(newId);
-  };
-
-  React.useEffect(() => {
-    if (inputValue === '') {
-      setButtonText(initialButtonText);
-      setButtonDisabled(true);
-    } else {
-      setButtonText(`${initialButtonText} «${inputValue}»`);
-      setButtonDisabled(false);
-    }
-  }, [inputValue]);
-
-  const menuPanelContentDimension = props.dimension === undefined || props.dimension === 'l' ? 'm' : props.dimension;
-
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
-  return (
-    <ThemeProvider theme={swapBorder}>
-      <Wrapper style={{ width: 'fit-content' }}>
-        <Menu
-          {...props}
-          model={model}
-          active={active}
-          onActivateItem={setActive}
-          onSelectItem={(id) => console.log(`Selected id: ${id}`)}
-          renderTopPanel={({ dimension = menuPanelContentDimension }) => {
-            return (
-              <MenuActionsPanel dimension={dimension}>
-                <TextInput
-                  dimension={menuPanelContentDimension}
-                  value={inputValue}
-                  onChange={handleChange}
-                  onKeyDown={(...p) => {
-                    props.onKeyDown?.(...p);
-                    handleKeyDown(...p);
-                  }}
-                />
-              </MenuActionsPanel>
-            );
-          }}
-          renderBottomPanel={({ dimension = menuPanelContentDimension }) => {
-            return (
-              <MenuActionsPanel dimension={dimension}>
-                <TextButton
-                  text={buttonText}
-                  disabled={buttonDisabled}
-                  icon={<PlusOutline />}
-                  dimension={menuPanelContentDimension}
-                  onClick={handleTextButtonClick}
-                />
-              </MenuActionsPanel>
-            );
-          }}
-        />
-      </Wrapper>
-    </ThemeProvider>
-  );
-};
-
-const itemsCheckboxGroup: Array<CheckboxGroupItemProps> = [
-  {
-    id: '1',
-    label: 'Опция 1',
-    checked: false,
-    children: [
-      {
-        id: '1.1',
-        label: 'Опция 1.1',
-        checked: false,
-      },
-      {
-        id: '1.2',
-        label: 'Опция 1.2',
-        checked: false,
-        children: [
-          {
-            id: '1.2.1',
-            label: 'Опция 1.2.1',
-            checked: false,
-          },
-          {
-            id: '1.2.2',
-            label: 'Опция 1.2.2',
-            checked: false,
-          },
-          {
-            id: '1.2.3',
-            label: 'Опция 1.2.3',
-            checked: false,
-          },
-        ],
-      },
-      {
-        id: '1.3',
-        label: 'Опция 1.3',
-        checked: false,
-      },
-    ],
-  },
-  {
-    id: '2',
-    label: 'Опция 2',
-    checked: false,
-  },
-  {
-    id: '3',
-    label: 'Опция 3',
-    checked: false,
-  },
-];
-
-const MenuCheckboxGroupTemplate: ComponentStory<typeof Menu> = (args) => {
-  const [internalModel, setInternalModel] = React.useState<Array<CheckboxGroupItemProps>>([...itemsCheckboxGroup]);
-  const [activeOption, setActiveOption] = React.useState<string | undefined>();
-
-  const map = React.useMemo(() => {
-    return checkboxTreeToMap(internalModel);
-  }, [internalModel]);
-
-  const setChecked = (id: string, value: boolean) => {
-    const mapItem = map.get(id);
-    if (mapItem?.node.disabled) return;
-    if (mapItem) {
-      mapItem.node.checked = value;
-    }
-
-    if (mapItem?.dependencies?.length) {
-      mapItem?.dependencies?.forEach((depId: string) => setChecked(depId, value));
-    }
-  };
-
-  const toggleCheck = (id: string) => {
-    const item = map.get(id);
-    const hasChildren = !!item?.node.children;
-
-    const indeterminate =
-      item?.dependencies?.some((depId: string) => map.get(depId)?.node.checked) &&
-      item?.dependencies?.some((depId: string) => !map.get(depId)?.node.checked);
-
-    const checked = hasChildren
-      ? indeterminate
-        ? true
-        : item?.dependencies?.every((depId: string) => map.get(depId)?.node.checked)
-      : item?.node.checked;
-
-    setChecked(id, !checked);
-
-    setInternalModel([...internalModel]);
-  };
-
-  const model = React.useMemo(() => {
-    const menuModel: MenuModelItemProps[] = [];
-    map.forEach((item) => {
-      const node = item.node;
-      const hasChildren = !!node.children;
-      const indeterminate =
-        item.dependencies?.some((depId: string) => map.get(depId)?.node.checked) &&
-        item.dependencies?.some((depId: string) => !map.get(depId)?.node.checked);
-      const checked = hasChildren
-        ? item.dependencies?.every((depId: string) => map.get(depId)?.node.checked)
-        : !!node.checked;
-      menuModel.push({
-        id: node.id,
-        render: (options: RenderOptionProps) => (
-          <MenuItemWithCheckbox
-            key={node.id}
-            id={node.id}
-            dimension={args.dimension}
-            disabled={node.disabled}
-            checked={checked}
-            indeterminate={indeterminate}
-            level={item.level}
-            {...options}
-          >
-            {node.label}
-          </MenuItemWithCheckbox>
-        ),
-        disabled: node.disabled,
-      });
-    });
-
-    return menuModel;
-  }, [args.dimension, map, activeOption]);
-
-  const handleSelectItem = (id: string) => {
-    console.log(`Option ${id} selected`);
-    toggleCheck(id);
-  };
-
-  const handleActivateItem = (id: string | undefined) => {
-    setActiveOption(id);
-  };
-
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
-  return (
-    <ThemeProvider theme={swapBorder}>
-      <Wrapper style={{ width: 'fit-content' }}>
-        <Menu
-          {...args}
-          model={model}
-          onSelectItem={handleSelectItem}
-          active={activeOption}
-          onActivateItem={handleActivateItem}
-          disableSelectedOptionHighlight={true}
-        />
-      </Wrapper>
-    </ThemeProvider>
-  );
-};
-
-export const Simple = SimpleTemplate.bind({});
-Simple.storyName = 'Базовый пример';
 
 //<editor-fold desc="Пример с иконками и дополнительным текстом">
 const IconsStory: ComponentStory<typeof Menu> = (props) => (
   <IconsAndAdditionalTextTemplate model={[]} {...cleanUpProps(props)} />
 );
+
 export const IconsExample = IconsStory.bind({});
 IconsExample.parameters = {
   docs: {
@@ -759,7 +144,7 @@ IconsExample.parameters = {
 IconsExample.storyName = 'Пример с иконками и дополнительным текстом';
 //</editor-fold>
 
-//<editor-fold desc="Пример с большим количеством item">
+//<editor-fold desc="Пример с группами карт">
 const CardGroupsStory: ComponentStory<typeof Menu> = (props) => (
   <CardGroupsTemplate model={[]} {...cleanUpProps(props)} />
 );
@@ -777,7 +162,23 @@ CardGroupsExample.parameters = {
 CardGroupsExample.storyName = 'Пример с группами карт';
 //</editor-fold>
 
-export const CustomItems = CustomItemTemplate.bind({});
+//<editor-fold desc="Пример с кастомными пунктами меню">
+const MenuWithCustomItemsStory: ComponentStory<typeof Menu> = (props) => (
+  <MenuWithCustomItemsTemplate model={[]} {...cleanUpProps(props)} />
+);
+export const MenuWithCustomItemsExample = MenuWithCustomItemsStory.bind({});
+MenuWithCustomItemsExample.parameters = {
+  docs: {
+    source: {
+      code: MenuWithCustomItemsRaw,
+    },
+    description: {
+      story: 'Пример меню с использованием собственных пунктов',
+    },
+  },
+};
+MenuWithCustomItemsExample.storyName = 'Пример с кастомными пунктами меню';
+//</editor-fold>
 
 //<editor-fold desc="Меню с checkbox">
 const CheckboxMenuStory: ComponentStory<typeof Menu> = (props) => (
@@ -797,12 +198,113 @@ CheckboxMenuExample.parameters = {
 CheckboxMenuExample.storyName = 'Меню с checkbox';
 //</editor-fold>
 
-export const MenuRadiobutton = MenuRadiobuttonTemplate.bind({});
-export const MenuTooltip = MenuTooltipTemplate.bind({});
-export const MultiLineMenu = MultiLineMenuTemplate.bind({});
-export const MenuActionsTwoButtons = MenuActionsTwoButtonsTemplate.bind({});
-export const MenuActionsAddUserValue = MenuActionsAddUserValueTemplate.bind({});
-export const MenuCheckboxGroup = MenuCheckboxGroupTemplate.bind({});
+//<editor-fold desc="Меню с radioButton">
+const RadioButtonMenuStory: ComponentStory<typeof Menu> = (props) => (
+  <RadioButtonMenuTemplate model={[]} {...cleanUpProps(props)} />
+);
+export const RadioButtonMenuExample = RadioButtonMenuStory.bind({});
+RadioButtonMenuExample.parameters = {
+  docs: {
+    source: {
+      code: RadioButtonMenuRaw,
+    },
+    description: {
+      story: 'Пример меню с пунктами, содержащими RadioButton.',
+    },
+  },
+};
+RadioButtonMenuExample.storyName = 'Меню с RadioButton';
+//</editor-fold>
+
+//<editor-fold desc="Пример с Tooltip">
+const TooltipMenuStory: ComponentStory<typeof Menu> = (props) => (
+  <TooltipMenuTemplate model={[]} {...cleanUpProps(props)} />
+);
+export const TooltipMenuExample = TooltipMenuStory.bind({});
+TooltipMenuExample.parameters = {
+  docs: {
+    source: {
+      code: TooltipMenuRaw,
+    },
+    description: {
+      story: 'Пример меню с пунктами, имеющими tooltip',
+    },
+  },
+};
+TooltipMenuExample.storyName = 'Пример с Tooltip';
+//</editor-fold>
+
+//<editor-fold desc="Пример с многострочными пунктами">
+const MultiLineMenuStory: ComponentStory<typeof Menu> = (props) => (
+  <MultiLineMenuTemplate model={[]} {...cleanUpProps(props)} />
+);
+export const MultiLineMenuExample = MultiLineMenuStory.bind({});
+MultiLineMenuExample.parameters = {
+  docs: {
+    source: {
+      code: MultiLineMenuRaw,
+    },
+    description: {
+      story: 'Пример с многострочными пунктами',
+    },
+  },
+};
+MultiLineMenuExample.storyName = 'Пример с многострочными пунктами';
+//</editor-fold>
+
+//<editor-fold desc="Пример с Actions с двумя кнопками">
+const MenuActionsTwoButtonsStory: ComponentStory<typeof Menu> = (props) => (
+  <MenuActionsTwoButtonsTemplate model={[]} {...cleanUpProps(props)} />
+);
+export const MenuActionsTwoButtonsExample = MenuActionsTwoButtonsStory.bind({});
+MenuActionsTwoButtonsExample.parameters = {
+  docs: {
+    source: {
+      code: MenuActionsTwoButtonsRaw,
+    },
+    description: {
+      story: 'Пример с Actions с двумя кнопками',
+    },
+  },
+};
+MenuActionsTwoButtonsExample.storyName = 'Пример с Actions с двумя кнопками';
+//</editor-fold>
+
+//<editor-fold desc="Пример с Actions и Search">
+const MenuActionsAddUserValueStory: ComponentStory<typeof Menu> = (props) => (
+  <MenuActionsAddUserValueTemplate model={[]} {...cleanUpProps(props)} />
+);
+export const MenuActionsAddUserValueExample = MenuActionsAddUserValueStory.bind({});
+MenuActionsAddUserValueExample.parameters = {
+  docs: {
+    source: {
+      code: MenuActionsAddUserValueRaw,
+    },
+    description: {
+      story: 'Пример с Actions и Search',
+    },
+  },
+};
+MenuActionsAddUserValueExample.storyName = 'Пример с Actions и Search';
+//</editor-fold>
+
+//<editor-fold desc="Пример с CheckboxGroup">
+const MenuCheckboxGroupStory: ComponentStory<typeof Menu> = (props) => (
+  <MenuCheckboxGroupTemplate model={[]} {...cleanUpProps(props)} />
+);
+export const MenuCheckboxGroupExample = MenuCheckboxGroupStory.bind({});
+MenuCheckboxGroupExample.parameters = {
+  docs: {
+    source: {
+      code: MenuCheckboxGroupRaw,
+    },
+    description: {
+      story: 'Пример с CheckboxGroup',
+    },
+  },
+};
+MenuCheckboxGroupExample.storyName = 'Пример с CheckboxGroup';
+//</editor-fold>
 
 //<editor-fold desc="Пример с большим количеством item">
 const LargeNumberOfItemsStory: ComponentStory<typeof Menu> = (props) => (
@@ -863,10 +365,23 @@ VirtualScrollExample.parameters = {
 VirtualScrollExample.storyName = 'Виртуальный скролл';
 //</editor-fold>
 
-CustomItems.storyName = 'Пример с кастомными пунктами меню';
-MenuRadiobutton.storyName = 'Пример с Radiobutton';
-MenuTooltip.storyName = 'Пример с Tooltip';
-MultiLineMenu.storyName = 'Пример с многострочными пунктами';
-MenuActionsTwoButtons.storyName = 'Пример с Actions с двумя кнопками';
-MenuActionsAddUserValue.storyName = 'Пример с Actions и Search';
-MenuCheckboxGroup.storyName = 'Пример с CheckboxGroup';
+//<editor-fold desc="Многоуровневое меню">
+const MultiLevelStory: ComponentStory<typeof Menu> = (props) => (
+  <MultiLevelTemplate model={[]} {...cleanUpProps(props)} />
+);
+export const MultiLevelExample = MultiLevelStory.bind({});
+MultiLevelExample.parameters = {
+  docs: {
+    source: {
+      code: MultiLevelRaw,
+    },
+    description: {
+      story:
+        'Для включения виртуального скролла, необходимо передать в параметр virtualScroll объект, ' +
+        'содержаний размер 1 элемента меню, для расчета максимальной высоты контейнера меню. ' +
+        'Или установить значение "auto". В этом случае максимальная высота будет рассчитана исходя из свойства "dimension"',
+    },
+  },
+};
+MultiLevelExample.storyName = 'Многоуровневое меню';
+//</editor-fold>

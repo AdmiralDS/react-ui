@@ -110,6 +110,7 @@ export const CardGroupsTemplate = (props: MenuProps) => {
       <Wrapper style={{ width: 'fit-content' }}>
         <Menu
           {...props}
+          defaultIsActive={false}
           model={model}
           selected={selected}
           onSelectItem={setSelected}

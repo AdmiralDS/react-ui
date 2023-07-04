@@ -177,6 +177,7 @@ export const IconsAndAdditionalTextTemplate = (props: MenuProps) => {
       <Wrapper>
         <Menu
           {...props}
+          defaultIsActive={false}
           dimension="l"
           model={modelBase}
           selected={selected1}
@@ -188,6 +189,7 @@ export const IconsAndAdditionalTextTemplate = (props: MenuProps) => {
       <Wrapper>
         <Menu
           {...props}
+          defaultIsActive={false}
           dimension="l"
           model={modelTwoIcons}
           selected={selected2}
@@ -199,6 +201,7 @@ export const IconsAndAdditionalTextTemplate = (props: MenuProps) => {
       <Wrapper>
         <Menu
           {...props}
+          defaultIsActive={false}
           dimension="l"
           model={modelIconBefore}
           selected={selected3}
@@ -210,6 +213,7 @@ export const IconsAndAdditionalTextTemplate = (props: MenuProps) => {
       <Wrapper>
         <Menu
           {...props}
+          defaultIsActive={false}
           dimension="l"
           model={modelIconAfter}
           selected={selected4}

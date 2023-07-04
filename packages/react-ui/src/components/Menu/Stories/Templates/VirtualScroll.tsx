@@ -33,7 +33,7 @@ export const VirtualScrollTemplate = (props: MenuProps) => {
   return (
     <ThemeProvider theme={swapBorder}>
       <Wrapper style={{ width: 'fit-content' }}>
-        <Menu {...props} virtualScroll={{ itemHeight: 'auto' }} model={model} />
+        <Menu {...props} defaultIsActive={false} virtualScroll={{ itemHeight: 'auto' }} model={model} />
       </Wrapper>
     </ThemeProvider>
   );

@@ -3,6 +3,8 @@ import * as React from 'react';
 import styled from 'styled-components';
 import type { ItemDimension } from './menuItemMixins';
 import { backgroundColor, colorTextMixin, paddings, styleTextMixin } from './menuItemMixins';
+import { Chevron } from '#src/components/Menu/styled';
+import { refSetter } from '#src/components/common/utils/refSetter';
 
 export interface RenderOptionProps {
   key?: string | number;
@@ -16,6 +18,9 @@ export interface RenderOptionProps {
   onHover?: () => void;
   /** ссылка на контейнер, в котором находится Menu*/
   containerRef?: React.RefObject<HTMLElement>;
+  expandIcon?: React.ReactNode;
+  hasSubmenu?: boolean;
+  selfRef?: ((instance: HTMLDivElement | null) => void) | React.RefObject<HTMLDivElement> | null;
   /** Отключение секции */
   disabled?: boolean;
   /** Только для чтения */
@@ -27,6 +32,8 @@ export interface MenuModelItemProps {
   render: (options: RenderOptionProps) => React.ReactNode;
   disabled?: boolean;
   readOnly?: boolean;
+  subItems?: Array<MenuModelItemProps>;
+  expandIcon?: React.ReactNode;
 }
 
 /** @deprecated use MenuModeItemProps instead */
@@ -38,7 +45,22 @@ export interface MenuItemProps extends HTMLAttributes<HTMLDivElement>, RenderOpt
 }
 
 export const MenuItem = React.forwardRef<HTMLDivElement, MenuItemProps>(
-  ({ children, onHover, onClickItem, disabled = false, hovered, dimension = 'l', selected = false, ...props }, ref) => {
+  (
+    {
+      children,
+      expandIcon = <Chevron />,
+      hasSubmenu,
+      onHover,
+      onClickItem,
+      disabled,
+      hovered,
+      dimension = 'l',
+      selected = false,
+      selfRef,
+      ...props
+    },
+    ref,
+  ) => {
     const handleMouseMove = () => {
       onHover?.();
     };
@@ -49,14 +71,17 @@ export const MenuItem = React.forwardRef<HTMLDivElement, MenuItemProps>(
       if (!disabled) onClickItem?.();
     };
 
+    const resolvedRef = selfRef ? refSetter(ref, selfRef) : ref;
+
     return (
       <Item
-        ref={ref}
+        ref={resolvedRef}
         dimension={dimension}
         selected={selected}
         hovered={hovered}
         data-hovered={hovered}
         data-disabled={disabled}
+        data-dimension={dimension}
         onMouseMove={handleMouseMove}
         onMouseDown={handleClick}
         {...props}
@@ -64,6 +89,7 @@ export const MenuItem = React.forwardRef<HTMLDivElement, MenuItemProps>(
         {React.Children.toArray(children).map((child, index) =>
           typeof child === 'string' ? <TextWrapper key={child + index}>{child}</TextWrapper> : child,
         )}
+        {hasSubmenu && expandIcon}
       </Item>
     );
   },
@@ -80,7 +106,6 @@ const Item = styled.div<{
   display: flex;
   align-items: center;
   user-select: none;
-  flex-flow: wrap;
   position: relative;
   justify-content: space-between;
   outline: none;

@@ -6,6 +6,9 @@ export interface DropdownContextProps {
   dropdowns: React.RefObject<HTMLElement>[];
   /** ref на дом элемент внутри которого будут создаваться все дроп контейнеры */
   rootRef?: React.RefObject<HTMLElement>;
+  activateMenu?: (menuRef: React.RefObject<HTMLElement>) => void;
+  deactivateMenu?: (menuRef: React.RefObject<HTMLElement>) => void;
+  currentActiveMenu: React.RefObject<HTMLElement> | undefined;
 }
 export const DropdownContext = React.createContext({} as DropdownContextProps);
 
@@ -17,6 +20,17 @@ interface ProviderProps {
 
 export const DropdownProvider = ({ rootRef, ...props }: ProviderProps) => {
   const [dropdowns, setDropdowns] = React.useState<React.RefObject<HTMLElement>[]>([]);
+  const [currentActiveMenu, setCurrentActiveMenu] = React.useState<React.RefObject<HTMLElement> | undefined>(undefined);
+
+  const activateMenu = React.useCallback((menuRef: React.RefObject<HTMLElement>) => {
+    setCurrentActiveMenu(menuRef);
+  }, []);
+
+  const deactivateMenu = React.useCallback((menuRef: React.RefObject<HTMLElement>) => {
+    setCurrentActiveMenu((prevValue) => {
+      return prevValue === menuRef ? undefined : prevValue;
+    });
+  }, []);
 
   const removeDropdown = React.useCallback((removeDropdown: React.RefObject<HTMLElement>) => {
     setDropdowns((prevDrops) => {
@@ -30,20 +44,35 @@ export const DropdownProvider = ({ rootRef, ...props }: ProviderProps) => {
   }, []);
 
   const providerValue = React.useMemo(
-    () => ({ addDropdown, removeDropdown, dropdowns, rootRef }),
-    [addDropdown, removeDropdown, dropdowns, rootRef],
+    () => ({
+      addDropdown,
+      removeDropdown,
+      dropdowns,
+      rootRef,
+      activateMenu,
+      deactivateMenu,
+      currentActiveMenu,
+    }),
+    [addDropdown, removeDropdown, dropdowns, rootRef, activateMenu, deactivateMenu, currentActiveMenu],
   );
 
   return <DropdownContext.Provider value={providerValue} children={props.children} />;
 };
 
 export function useDropdown(dropdownRef: React.RefObject<HTMLElement>): DropdownContextProps {
-  const { dropdowns = [], addDropdown, removeDropdown } = React.useContext(DropdownContext);
+  const {
+    dropdowns = [],
+    addDropdown,
+    removeDropdown,
+    activateMenu,
+    deactivateMenu,
+    currentActiveMenu,
+  } = React.useContext(DropdownContext);
 
   const dropdownIndex = dropdowns.indexOf(dropdownRef);
   const childrenDropdowns = dropdownIndex > -1 ? dropdowns.slice(dropdownIndex + 1, dropdowns.length) : [];
 
-  return { addDropdown, removeDropdown, dropdowns: childrenDropdowns };
+  return { addDropdown, removeDropdown, dropdowns: childrenDropdowns, activateMenu, deactivateMenu, currentActiveMenu };
 }
 
 /** Функция возращает true, если клик не произошёл ни в одном из дропдаунов и был вне их; иначе возвращает false */

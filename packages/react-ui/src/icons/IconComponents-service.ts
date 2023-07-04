@@ -50,8 +50,6 @@ export { ReactComponent as SizeChangerHorizontalOutline } from '@admiral-ds/icon
 export { ReactComponent as SizeChangerVerticalOutline } from '@admiral-ds/icons/build/service/SizeChangerVerticalOutline.svg';
 export { ReactComponent as SmallCloseOutline } from '@admiral-ds/icons/build/service/SmallCloseOutline.svg';
 export { ReactComponent as SmallCloseSolid } from '@admiral-ds/icons/build/service/SmallCloseSolid.svg';
-export { ReactComponent as StopOutline } from '@admiral-ds/icons/build/service/StopOutline.svg';
-export { ReactComponent as StopSolid } from '@admiral-ds/icons/build/service/StopSolid.svg';
 export { ReactComponent as StructureOutline } from '@admiral-ds/icons/build/service/StructureOutline.svg';
 export { ReactComponent as StructureSolid } from '@admiral-ds/icons/build/service/StructureSolid.svg';
 export { ReactComponent as ThumbsDownOutline } from '@admiral-ds/icons/build/service/ThumbsDownOutline.svg';

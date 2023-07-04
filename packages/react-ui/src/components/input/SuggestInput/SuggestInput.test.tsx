@@ -4,6 +4,7 @@ import { act, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import * as React from 'react';
 import { ThemeProvider } from 'styled-components';
+import { DropdownProvider } from '#src/components/DropdownProvider';
 
 const options = ['one', 'two', 'three'];
 
@@ -12,7 +13,9 @@ describe('SuggestInput', () => {
     window.HTMLElement.prototype.scrollIntoView = jest.fn();
     render(
       <ThemeProvider theme={LIGHT_THEME}>
-        <SuggestInput options={options} placeholder="numbers" />
+        <DropdownProvider>
+          <SuggestInput options={options} placeholder="numbers" />
+        </DropdownProvider>
       </ThemeProvider>,
     );
 
@@ -31,7 +34,9 @@ describe('SuggestInput', () => {
     render(
       <form onSubmit={submit}>
         <ThemeProvider theme={LIGHT_THEME}>
-          <SuggestInput options={options} placeholder="numbers" />
+          <DropdownProvider>
+            <SuggestInput options={options} placeholder="numbers" />
+          </DropdownProvider>
         </ThemeProvider>
       </form>,
     );

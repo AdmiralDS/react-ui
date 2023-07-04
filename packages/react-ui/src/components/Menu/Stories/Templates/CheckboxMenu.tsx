@@ -88,6 +88,7 @@ export const CheckboxMenuTemplate = (props: MenuProps) => {
       <Wrapper style={{ width: 'fit-content' }}>
         <Menu
           {...props}
+          defaultIsActive={false}
           model={model}
           selected={selected}
           onSelectItem={handleSelectItem}
