@@ -1,7 +1,10 @@
 import * as React from 'react';
 import type { AppearanceLink, Dimension } from '#src/components/Link/LinkComponent';
 import { LinkComponent } from '#src/components/Link/LinkComponent';
-import type { PolymorphicComponentPropsWithRef, PolymorphicRef } from '../common/polymorphicProps';
+import type {
+  PolymorphicComponentPropsWithRef,
+  PolymorphicRef,
+} from '#src/components/common/tsGenerics/polymorphicProps';
 
 export interface LinkProps {
   /** Текст ссылки */

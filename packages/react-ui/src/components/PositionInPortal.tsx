@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import * as React from 'react';
 import observeRect from '#src/components/common/observeRect';
 import { createPortal } from 'react-dom';
+import type { RequireAtLeastOne } from '#src/components/common/tsGenerics/requireAtLeastOneProp';
 
 export const PositionedPortalContainer = styled.div`
   pointer-events: none;
@@ -10,21 +11,12 @@ export const PositionedPortalContainer = styled.div`
   z-index: ${({ theme }) => theme.zIndex.dropdown};
 `;
 
-type RequireAtLeastOne<T, Keys extends keyof T = keyof T> = Pick<T, Exclude<keyof T, Keys>> &
-  {
-    [K in Keys]-?: Required<Pick<T, K>> & Partial<Pick<T, Exclude<Keys, K>>>;
-  }[Keys];
-
-type RequireAtLeastOne2<T> = {
-  [K in keyof T]-?: Required<Pick<T, K>> & Partial<Pick<T, Exclude<keyof T, K>>>;
-}[keyof T];
-
 export interface PositionInPortalProps {
-  /** Ref на элемент, относительно которого позиционируется портал */
-  targetRef?: React.RefObject<HTMLElement>;
-
   /** Элемент, относительно которого позиционируется портал */
   targetElement?: Element;
+
+  /** Ref на элемент, относительно которого позиционируется портал */
+  targetRef?: React.RefObject<HTMLElement>;
 
   /** Контейнер, внутри которого будет отрисован портал, по умолчанию портал рендерится в document.body */
   rootRef?: React.RefObject<HTMLElement>;
@@ -33,7 +25,11 @@ export interface PositionInPortalProps {
   fullContainerWidth?: boolean;
 }
 
-type Test = RequireAtLeastOne<PositionInPortalProps, 'targetRef' | 'targetElement'>;
+/** Хотя бы один из параметров, определяющих target (targetRef или targetElement), должен быть задан */
+export type PositionInPortalPropsWithSpecifiedTarget = RequireAtLeastOne<
+  PositionInPortalProps,
+  'targetElement' | 'targetRef'
+>;
 
 /**
  * При фиксированном позиционировании (как у PositionedPortalContainer) элемент позиционируется
@@ -53,7 +49,7 @@ export const PositionInPortal = ({
   rootRef,
   fullContainerWidth,
   ...props
-}: React.PropsWithChildren<Test>) => {
+}: React.PropsWithChildren<PositionInPortalPropsWithSpecifiedTarget>) => {
   const positionedPortalContainerRef = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
