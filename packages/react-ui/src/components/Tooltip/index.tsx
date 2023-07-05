@@ -2,6 +2,7 @@ import * as React from 'react';
 
 import { refSetter } from '#src/components/common/utils/refSetter';
 import { getScrollbarSize } from '#src/components/common/dom/scrollbarUtil';
+import type { RequireAtLeastOne, RequireOnlyOne } from '#src/components/common/tsGenerics/requireAtLeastOneProp';
 
 import { FakeTarget, Portal, TooltipContainer, TooltipWrapper } from './style';
 import type { TooltipPositionType, InternalTooltipPositionType } from './utils';
@@ -27,7 +28,7 @@ export interface ITooltipProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export const TOOLTIP_DELAY = 1500;
 
-export const Tooltip = React.forwardRef<HTMLDivElement, ITooltipProps>(
+export const Tooltip = React.forwardRef<HTMLDivElement, RequireOnlyOne<ITooltipProps, 'targetElement' | 'targetRef'>>(
   ({ renderContent, targetRef, targetElement, tooltipPosition, ...props }, ref) => {
     const tooltipElementRef = React.useRef<HTMLDivElement | null>(null);
     const tooltipHeight = React.useRef(0);
@@ -41,9 +42,9 @@ export const Tooltip = React.forwardRef<HTMLDivElement, ITooltipProps>(
     const [recalculation, startRecalculation] = React.useState({});
 
     const manageTooltip = (scrollbarSize: number) => {
-      if (targetRef.current && tooltipElementRef.current) {
+      if (targetRef?.current && tooltipElementRef.current) {
         const direction: InternalTooltipPositionType = getTooltipDirection(
-          targetRef.current,
+          targetRef?.current,
           tooltipElementRef.current,
           scrollbarSize,
           tooltipPosition,
@@ -127,8 +128,9 @@ export const Tooltip = React.forwardRef<HTMLDivElement, ITooltipProps>(
 
     return emptyContent ? null : (
       <Portal
-        targetRef={targetRef}
-        targetElement={targetElement}
+        // targetRef={targetRef}
+        // targetElement={targetElement}
+        {...(targetRef ? { targetRef } : { targetElement })}
         rootRef={rootRef}
         flexDirection={portalFlexDirection}
         fullContainerWidth={portalFullWidth}

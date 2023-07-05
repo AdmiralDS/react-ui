@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import * as React from 'react';
 import observeRect from '#src/components/common/observeRect';
 import { createPortal } from 'react-dom';
-import type { RequireAtLeastOne } from '#src/components/common/tsGenerics/requireAtLeastOneProp';
+import type { RequireAtLeastOne, RequireOnlyOne } from '#src/components/common/tsGenerics/requireAtLeastOneProp';
 
 export const PositionedPortalContainer = styled.div`
   pointer-events: none;
@@ -26,7 +26,7 @@ export interface PositionInPortalProps {
 }
 
 /** Хотя бы один из параметров, определяющих target (targetRef или targetElement), должен быть задан */
-export type PositionInPortalPropsWithSpecifiedTarget = RequireAtLeastOne<
+export type PositionInPortalPropsWithSpecifiedTarget = RequireOnlyOne<
   PositionInPortalProps,
   'targetElement' | 'targetRef'
 >;
