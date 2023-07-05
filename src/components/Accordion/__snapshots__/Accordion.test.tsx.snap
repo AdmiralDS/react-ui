@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Spinner should render component with dimension m 1`] = `
-Object {
+{
   "asFragment": [Function],
   "baseElement": .c9 {
   -webkit-transition: all 0.3s;
@@ -678,7 +678,7 @@ Object {
 `;
 
 exports[`Spinner should render default component 1`] = `
-Object {
+{
   "asFragment": [Function],
   "baseElement": .c9 {
   -webkit-transition: all 0.3s;

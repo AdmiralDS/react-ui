@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`DropDown should render component 1`] = `
-Object {
+{
   "asFragment": [Function],
   "baseElement": .c7 {
   display: -webkit-box;
@@ -214,7 +214,7 @@ ul[data-dimension='s'] .c6 {
 `;
 
 exports[`DropDown should render group components 1`] = `
-Object {
+{
   "asFragment": [Function],
   "baseElement": .c7 {
   display: -webkit-box;
@@ -1149,7 +1149,7 @@ ul[data-selectedid="13"] .c15.c15 {
 `;
 
 exports[`DropDown should render small components 1`] = `
-Object {
+{
   "asFragment": [Function],
   "baseElement": .c7 {
   display: -webkit-box;

@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`NotificationItem should render error components with all properties 1`] = `
-Object {
+{
   "asFragment": [Function],
   "baseElement": .c6 {
   position: relative;

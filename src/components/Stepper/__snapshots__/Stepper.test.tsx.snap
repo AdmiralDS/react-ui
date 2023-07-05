@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Spinner should render component with lineClamp equal 1 1`] = `
-Object {
+{
   "asFragment": [Function],
   "baseElement": .c5 {
   box-sizing: border-box;
@@ -796,7 +796,7 @@ Object {
 `;
 
 exports[`Spinner should render component with lineClamp equal 2 1`] = `
-Object {
+{
   "asFragment": [Function],
   "baseElement": .c5 {
   box-sizing: border-box;
@@ -1591,7 +1591,7 @@ Object {
 `;
 
 exports[`Spinner should render component with stepWidth 1`] = `
-Object {
+{
   "asFragment": [Function],
   "baseElement": .c5 {
   box-sizing: border-box;
@@ -2386,7 +2386,7 @@ Object {
 `;
 
 exports[`Spinner should render default component 1`] = `
-Object {
+{
   "asFragment": [Function],
   "baseElement": .c5 {
   box-sizing: border-box;
@@ -3181,7 +3181,7 @@ Object {
 `;
 
 exports[`Spinner should render vertical component 1`] = `
-Object {
+{
   "asFragment": [Function],
   "baseElement": .c5 {
   box-sizing: border-box;

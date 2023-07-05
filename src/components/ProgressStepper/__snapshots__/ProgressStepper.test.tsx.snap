@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Spinner should render component with custom nextStepName 1`] = `
-Object {
+{
   "asFragment": [Function],
   "baseElement": .c0 {
   display: -webkit-box;
@@ -308,7 +308,7 @@ Object {
 `;
 
 exports[`Spinner should render component with custom stepName 1`] = `
-Object {
+{
   "asFragment": [Function],
   "baseElement": .c0 {
   display: -webkit-box;
@@ -615,7 +615,7 @@ Object {
 `;
 
 exports[`Spinner should render component without nextStepName 1`] = `
-Object {
+{
   "asFragment": [Function],
   "baseElement": .c0 {
   display: -webkit-box;
@@ -870,7 +870,7 @@ Object {
 `;
 
 exports[`Spinner should render default component 1`] = `
-Object {
+{
   "asFragment": [Function],
   "baseElement": .c0 {
   display: -webkit-box;
@@ -1177,7 +1177,7 @@ Object {
 `;
 
 exports[`Spinner should render mobile component 1`] = `
-Object {
+{
   "asFragment": [Function],
   "baseElement": .c0 {
   display: -webkit-box;

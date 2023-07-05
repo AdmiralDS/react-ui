@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Badge should render component with small dimension 1`] = `
-Object {
+{
   "asFragment": [Function],
   "baseElement": .c0 {
   position: relative;
@@ -142,7 +142,7 @@ Object {
 `;
 
 exports[`Badge should render default component 1`] = `
-Object {
+{
   "asFragment": [Function],
   "baseElement": .c0 {
   position: relative;

@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`SelectTree should render component 1`] = `
-Object {
+{
   "asFragment": [Function],
   "baseElement": .c10 {
   pointer-events: none;
@@ -616,7 +616,7 @@ fieldset[data-dimension='s'] .c4 {
 `;
 
 exports[`SelectTree should render component with expanded lists 1`] = `
-Object {
+{
   "asFragment": [Function],
   "baseElement": .c10 {
   pointer-events: none;
@@ -1231,7 +1231,7 @@ fieldset[data-dimension='s'] .c4 {
 `;
 
 exports[`SelectTree should render small components 1`] = `
-Object {
+{
   "asFragment": [Function],
   "baseElement": .c10 {
   pointer-events: none;
