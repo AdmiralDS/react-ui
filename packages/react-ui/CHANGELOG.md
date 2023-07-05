@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.4.0](https://github.com/AdmiralDS/react-ui/compare/v5.3.0...v5.4.0) (2023-07-05)
+
+
+### Features
+
+* **Menu:** добавлена возможность использовать многоуровневые меню ([2f607b7](https://github.com/AdmiralDS/react-ui/commit/2f607b7e5ca688f198c3a7fa5f8762c373107a85)), closes [#259](https://github.com/AdmiralDS/react-ui/issues/259)
+
+
+### Bug Fixes
+
+* **SliderInput:** fix incorrect value of fullStr param in onChange callback, add event param in onChange callback ([58b9d99](https://github.com/AdmiralDS/react-ui/commit/58b9d99c6236b67de32160b9f82e1b47c1379066))
+
 ## [5.3.0](https://github.com/AdmiralDS/react-ui/compare/v5.2.0...v5.3.0) (2023-06-30)
 
 
