@@ -4,7 +4,7 @@ import { ReactComponent as DeleteOutline } from '@admiral-ds/icons/build/system/
 
 export const TooltipRefTemplate = () => {
   const tooltipRef = React.useRef(null);
-  const btnRef = React.useRef<any>(null);
+  const btnRef = React.useRef<HTMLButtonElement>(null);
   const [visible, setVisible] = React.useState(false);
 
   React.useEffect(() => {
@@ -38,7 +38,9 @@ export const TooltipRefTemplate = () => {
       <Button ref={btnRef} dimension="m" displayAsSquare aria-label="Delete" aria-describedby="test3">
         <DeleteOutline height={24} width={24} />
       </Button>
-      {visible && <Tooltip targetRef={btnRef} renderContent={() => 'Delete file'} ref={tooltipRef} id="test3" />}
+      {visible && (
+        <Tooltip targetElement={btnRef.current} renderContent={() => 'Delete file'} ref={tooltipRef} id="test3" />
+      )}
     </>
   );
 };

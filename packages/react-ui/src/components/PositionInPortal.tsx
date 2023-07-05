@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import * as React from 'react';
 import observeRect from '#src/components/common/observeRect';
 import { createPortal } from 'react-dom';
-import type { RequireAtLeastOne, RequireOnlyOne } from '#src/components/common/tsGenerics/requireAtLeastOneProp';
 
 export const PositionedPortalContainer = styled.div`
   pointer-events: none;
@@ -13,10 +12,10 @@ export const PositionedPortalContainer = styled.div`
 
 export interface PositionInPortalProps {
   /** Элемент, относительно которого позиционируется портал */
-  targetElement?: Element;
+  targetElement: Element | null;
 
   /** Ref на элемент, относительно которого позиционируется портал */
-  targetRef?: React.RefObject<HTMLElement>;
+  // targetRef?: React.RefObject<HTMLElement>;
 
   /** Контейнер, внутри которого будет отрисован портал, по умолчанию портал рендерится в document.body */
   rootRef?: React.RefObject<HTMLElement>;
@@ -24,12 +23,6 @@ export interface PositionInPortalProps {
   /** Отрисовка портала на всю ширину контейнера */
   fullContainerWidth?: boolean;
 }
-
-/** Хотя бы один из параметров, определяющих target (targetRef или targetElement), должен быть задан */
-export type PositionInPortalPropsWithSpecifiedTarget = RequireOnlyOne<
-  PositionInPortalProps,
-  'targetElement' | 'targetRef'
->;
 
 /**
  * При фиксированном позиционировании (как у PositionedPortalContainer) элемент позиционируется
@@ -44,17 +37,17 @@ export type PositionInPortalPropsWithSpecifiedTarget = RequireOnlyOne<
  * чтобы избежать возможных конфликтов стилей.
  */
 export const PositionInPortal = ({
-  targetRef,
+  // targetRef,
   targetElement,
   rootRef,
   fullContainerWidth,
   ...props
-}: React.PropsWithChildren<PositionInPortalPropsWithSpecifiedTarget>) => {
+}: React.PropsWithChildren<PositionInPortalProps>) => {
   const positionedPortalContainerRef = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
     const node = positionedPortalContainerRef.current;
-    const targetNode = targetRef?.current ?? targetElement;
+    const targetNode = targetElement;
     if (node && targetNode) {
       const observer = observeRect(targetNode, (rect) => {
         if (rect) {
@@ -71,7 +64,7 @@ export const PositionInPortal = ({
         observer.unobserve();
       };
     }
-  }, [targetRef, targetElement, fullContainerWidth]);
+  }, [targetElement, fullContainerWidth]);
 
   return createPortal(
     <PositionedPortalContainer ref={positionedPortalContainerRef} {...props} />,
