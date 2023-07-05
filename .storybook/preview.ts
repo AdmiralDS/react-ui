@@ -12,6 +12,13 @@ const preview: Preview = {
         date: /Date$/,
       },
     },
+    options: {
+      storySort: {
+        includeName: true,
+        locales: 'en-US',
+        order: ['Admiral-2.1', ['Atoms', 'Input', 'Form Field', 'Data Table']],
+      },
+    },
   },
   decorators: [
     withThemeFromJSXProvider({
