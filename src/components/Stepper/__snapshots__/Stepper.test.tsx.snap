@@ -1,0 +1,3974 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Spinner should render component with lineClamp equal 1 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": .c5 {
+  box-sizing: border-box;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-align-self: stretch;
+  -ms-flex-item-align: stretch;
+  align-self: stretch;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  width: 100%;
+  margin: 0 0 8px 0;
+}
+
+[data-orientation='vertical'] .c4 {
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 20px;
+  margin: 0 8px 0 0;
+}
+
+.c7 {
+  margin: 0 4px 0 0;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+}
+
+[data-orientation='vertical'] .c6 {
+  margin: 0 0 4px 0;
+}
+
+[data-active='true'] .c6 path {
+  fill: #0062FF;
+}
+
+[data-error='true'] .c6 path {
+  fill: #D92020;
+}
+
+[data-warning='true'] .c6 path {
+  fill: #FF5C22;
+}
+
+[data-disabled='true'] .c6 path {
+  fill: #A7C7FF;
+}
+
+.c9 {
+  height: 2px;
+  width: 100%;
+  background-color: #D5D8DE;
+  border-radius: 1px;
+}
+
+[data-orientation='vertical'] .c8 {
+  height: 100%;
+  width: 2px;
+}
+
+[data-completed='true'] .c8 {
+  background-color: #0062FF;
+}
+
+[data-error='true'] .c8 {
+  background-color: #D92020;
+}
+
+[data-warning='true'] .c8 {
+  background-color: #FF5C22;
+}
+
+[data-disabled='true'] .c8 {
+  background-color: #A7C7FF;
+}
+
+.c3 {
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+[data-orientation='vertical'] .c2 {
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+  box-sizing: border-box;
+  width: 25%;
+  background: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+  border: none;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.c1:focus {
+  outline: none;
+}
+
+.c1:focus:before {
+  position: absolute;
+  content: '';
+  border: 2px solid #0062FF;
+  border-radius: 4px;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  right: 0px;
+}
+
+.c1:focus,
+.c1 > .c2 {
+  outline: none;
+}
+
+.c11 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+}
+
+[data-orientation='vertical'] .c10 {
+  margin: 0 0 20px 0;
+}
+
+.c13 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+  color: #23262D;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+  margin: 0 12px 0 0;
+}
+
+[data-disabled='true'] .c12 {
+  color: #B0B5BD;
+}
+
+.c0 {
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  box-sizing: border-box;
+  -webkit-scroll-behavior: smooth;
+  -moz-scroll-behavior: smooth;
+  -ms-scroll-behavior: smooth;
+  scroll-behavior: smooth;
+  padding: 0;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  overflow-x: scroll;
+  overflow: -moz-scrollbars-none;
+  -ms-overflow-style: none;
+  -webkit-scrollbar-width: none;
+  -moz-scrollbar-width: none;
+  -ms-scrollbar-width: none;
+  scrollbar-width: none;
+  -webkit-scrollbar-height: none;
+  -moz-scrollbar-height: none;
+  -ms-scrollbar-height: none;
+  scrollbar-height: none;
+}
+
+.c0 > * {
+  padding: 2px;
+}
+
+.c0::-webkit-scrollbar {
+  width: 0 !important;
+  height: 0 !important;
+}
+
+<body>
+    <div>
+      <ul
+        class="c0"
+        orientation="horizontal"
+        role="list"
+      >
+        <li
+          class="c1"
+          content="Завершенный шаг, текст занимает максимум три строки, далее идет сокращение"
+          data-active="false"
+          data-completed="false"
+          data-orientation="horizontal"
+          orientation="horizontal"
+          role="listitem"
+        >
+          <span
+            class="c2 c3"
+            tabindex="-1"
+          >
+            <div
+              aria-hidden="true"
+              class="c4 c5"
+            >
+              <div
+                class="c6 c7"
+                height="20"
+                width="20"
+              />
+              <div
+                class="c8 c9"
+              />
+            </div>
+            <div
+              class="c10 c11"
+            >
+              <div
+                class="c12 c13"
+              >
+                Завершенный шаг, текст занимает максимум три строки, далее идет сокращение
+              </div>
+            </div>
+          </span>
+        </li>
+        <li
+          class="c1"
+          content="Шаг с ошибкой, текст занимает максимум три строки"
+          data-active="false"
+          data-completed="false"
+          data-error="true"
+          data-orientation="horizontal"
+          orientation="horizontal"
+          role="listitem"
+        >
+          <span
+            class="c2 c3"
+            tabindex="-1"
+          >
+            <div
+              aria-hidden="true"
+              class="c4 c5"
+            >
+              <div
+                class="c6 c7"
+                height="20"
+                width="20"
+              />
+              <div
+                class="c8 c9"
+              />
+            </div>
+            <div
+              class="c10 c11"
+            >
+              <div
+                class="c12 c13"
+              >
+                Шаг с ошибкой, текст занимает максимум три строки
+              </div>
+            </div>
+          </span>
+        </li>
+        <li
+          class="c1"
+          content="Активный шаг, текст занимает максимум три строки"
+          data-active="false"
+          data-completed="false"
+          data-orientation="horizontal"
+          orientation="horizontal"
+          role="listitem"
+        >
+          <span
+            class="c2 c3"
+            tabindex="-1"
+          >
+            <div
+              aria-hidden="true"
+              class="c4 c5"
+            >
+              <div
+                class="c6 c7"
+                height="20"
+                width="20"
+              />
+              <div
+                class="c8 c9"
+              />
+            </div>
+            <div
+              class="c10 c11"
+            >
+              <div
+                class="c12 c13"
+              >
+                Активный шаг, текст занимает максимум три строки
+              </div>
+            </div>
+          </span>
+        </li>
+        <li
+          class="c1"
+          content="Неактивный шаг, текст занимает максимум три строки"
+          data-active="false"
+          data-completed="false"
+          data-orientation="horizontal"
+          orientation="horizontal"
+          role="listitem"
+        >
+          <span
+            class="c2 c3"
+            tabindex="-1"
+          >
+            <div
+              aria-hidden="true"
+              class="c4 c5"
+            >
+              <div
+                class="c6 c7"
+                height="20"
+                width="20"
+              />
+              <div
+                class="c8 c9"
+              />
+            </div>
+            <div
+              class="c10 c11"
+            >
+              <div
+                class="c12 c13"
+              >
+                Неактивный шаг, текст занимает максимум три строки
+              </div>
+            </div>
+          </span>
+        </li>
+      </ul>
+    </div>
+  </body>,
+  "container": .c5 {
+  box-sizing: border-box;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-align-self: stretch;
+  -ms-flex-item-align: stretch;
+  align-self: stretch;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  width: 100%;
+  margin: 0 0 8px 0;
+}
+
+[data-orientation='vertical'] .c4 {
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 20px;
+  margin: 0 8px 0 0;
+}
+
+.c7 {
+  margin: 0 4px 0 0;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+}
+
+[data-orientation='vertical'] .c6 {
+  margin: 0 0 4px 0;
+}
+
+[data-active='true'] .c6 path {
+  fill: #0062FF;
+}
+
+[data-error='true'] .c6 path {
+  fill: #D92020;
+}
+
+[data-warning='true'] .c6 path {
+  fill: #FF5C22;
+}
+
+[data-disabled='true'] .c6 path {
+  fill: #A7C7FF;
+}
+
+.c9 {
+  height: 2px;
+  width: 100%;
+  background-color: #D5D8DE;
+  border-radius: 1px;
+}
+
+[data-orientation='vertical'] .c8 {
+  height: 100%;
+  width: 2px;
+}
+
+[data-completed='true'] .c8 {
+  background-color: #0062FF;
+}
+
+[data-error='true'] .c8 {
+  background-color: #D92020;
+}
+
+[data-warning='true'] .c8 {
+  background-color: #FF5C22;
+}
+
+[data-disabled='true'] .c8 {
+  background-color: #A7C7FF;
+}
+
+.c3 {
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+[data-orientation='vertical'] .c2 {
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+  box-sizing: border-box;
+  width: 25%;
+  background: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+  border: none;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.c1:focus {
+  outline: none;
+}
+
+.c1:focus:before {
+  position: absolute;
+  content: '';
+  border: 2px solid #0062FF;
+  border-radius: 4px;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  right: 0px;
+}
+
+.c1:focus,
+.c1 > .c2 {
+  outline: none;
+}
+
+.c11 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+}
+
+[data-orientation='vertical'] .c10 {
+  margin: 0 0 20px 0;
+}
+
+.c13 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+  color: #23262D;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+  margin: 0 12px 0 0;
+}
+
+[data-disabled='true'] .c12 {
+  color: #B0B5BD;
+}
+
+.c0 {
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  box-sizing: border-box;
+  -webkit-scroll-behavior: smooth;
+  -moz-scroll-behavior: smooth;
+  -ms-scroll-behavior: smooth;
+  scroll-behavior: smooth;
+  padding: 0;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  overflow-x: scroll;
+  overflow: -moz-scrollbars-none;
+  -ms-overflow-style: none;
+  -webkit-scrollbar-width: none;
+  -moz-scrollbar-width: none;
+  -ms-scrollbar-width: none;
+  scrollbar-width: none;
+  -webkit-scrollbar-height: none;
+  -moz-scrollbar-height: none;
+  -ms-scrollbar-height: none;
+  scrollbar-height: none;
+}
+
+.c0 > * {
+  padding: 2px;
+}
+
+.c0::-webkit-scrollbar {
+  width: 0 !important;
+  height: 0 !important;
+}
+
+<div>
+    <ul
+      class="c0"
+      orientation="horizontal"
+      role="list"
+    >
+      <li
+        class="c1"
+        content="Завершенный шаг, текст занимает максимум три строки, далее идет сокращение"
+        data-active="false"
+        data-completed="false"
+        data-orientation="horizontal"
+        orientation="horizontal"
+        role="listitem"
+      >
+        <span
+          class="c2 c3"
+          tabindex="-1"
+        >
+          <div
+            aria-hidden="true"
+            class="c4 c5"
+          >
+            <div
+              class="c6 c7"
+              height="20"
+              width="20"
+            />
+            <div
+              class="c8 c9"
+            />
+          </div>
+          <div
+            class="c10 c11"
+          >
+            <div
+              class="c12 c13"
+            >
+              Завершенный шаг, текст занимает максимум три строки, далее идет сокращение
+            </div>
+          </div>
+        </span>
+      </li>
+      <li
+        class="c1"
+        content="Шаг с ошибкой, текст занимает максимум три строки"
+        data-active="false"
+        data-completed="false"
+        data-error="true"
+        data-orientation="horizontal"
+        orientation="horizontal"
+        role="listitem"
+      >
+        <span
+          class="c2 c3"
+          tabindex="-1"
+        >
+          <div
+            aria-hidden="true"
+            class="c4 c5"
+          >
+            <div
+              class="c6 c7"
+              height="20"
+              width="20"
+            />
+            <div
+              class="c8 c9"
+            />
+          </div>
+          <div
+            class="c10 c11"
+          >
+            <div
+              class="c12 c13"
+            >
+              Шаг с ошибкой, текст занимает максимум три строки
+            </div>
+          </div>
+        </span>
+      </li>
+      <li
+        class="c1"
+        content="Активный шаг, текст занимает максимум три строки"
+        data-active="false"
+        data-completed="false"
+        data-orientation="horizontal"
+        orientation="horizontal"
+        role="listitem"
+      >
+        <span
+          class="c2 c3"
+          tabindex="-1"
+        >
+          <div
+            aria-hidden="true"
+            class="c4 c5"
+          >
+            <div
+              class="c6 c7"
+              height="20"
+              width="20"
+            />
+            <div
+              class="c8 c9"
+            />
+          </div>
+          <div
+            class="c10 c11"
+          >
+            <div
+              class="c12 c13"
+            >
+              Активный шаг, текст занимает максимум три строки
+            </div>
+          </div>
+        </span>
+      </li>
+      <li
+        class="c1"
+        content="Неактивный шаг, текст занимает максимум три строки"
+        data-active="false"
+        data-completed="false"
+        data-orientation="horizontal"
+        orientation="horizontal"
+        role="listitem"
+      >
+        <span
+          class="c2 c3"
+          tabindex="-1"
+        >
+          <div
+            aria-hidden="true"
+            class="c4 c5"
+          >
+            <div
+              class="c6 c7"
+              height="20"
+              width="20"
+            />
+            <div
+              class="c8 c9"
+            />
+          </div>
+          <div
+            class="c10 c11"
+          >
+            <div
+              class="c12 c13"
+            >
+              Неактивный шаг, текст занимает максимум три строки
+            </div>
+          </div>
+        </span>
+      </li>
+    </ul>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`Spinner should render component with lineClamp equal 2 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": .c5 {
+  box-sizing: border-box;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-align-self: stretch;
+  -ms-flex-item-align: stretch;
+  align-self: stretch;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  width: 100%;
+  margin: 0 0 8px 0;
+}
+
+[data-orientation='vertical'] .c4 {
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 20px;
+  margin: 0 8px 0 0;
+}
+
+.c7 {
+  margin: 0 4px 0 0;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+}
+
+[data-orientation='vertical'] .c6 {
+  margin: 0 0 4px 0;
+}
+
+[data-active='true'] .c6 path {
+  fill: #0062FF;
+}
+
+[data-error='true'] .c6 path {
+  fill: #D92020;
+}
+
+[data-warning='true'] .c6 path {
+  fill: #FF5C22;
+}
+
+[data-disabled='true'] .c6 path {
+  fill: #A7C7FF;
+}
+
+.c9 {
+  height: 2px;
+  width: 100%;
+  background-color: #D5D8DE;
+  border-radius: 1px;
+}
+
+[data-orientation='vertical'] .c8 {
+  height: 100%;
+  width: 2px;
+}
+
+[data-completed='true'] .c8 {
+  background-color: #0062FF;
+}
+
+[data-error='true'] .c8 {
+  background-color: #D92020;
+}
+
+[data-warning='true'] .c8 {
+  background-color: #FF5C22;
+}
+
+[data-disabled='true'] .c8 {
+  background-color: #A7C7FF;
+}
+
+.c3 {
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+[data-orientation='vertical'] .c2 {
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+  box-sizing: border-box;
+  width: 25%;
+  background: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+  border: none;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.c1:focus {
+  outline: none;
+}
+
+.c1:focus:before {
+  position: absolute;
+  content: '';
+  border: 2px solid #0062FF;
+  border-radius: 4px;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  right: 0px;
+}
+
+.c1:focus,
+.c1 > .c2 {
+  outline: none;
+}
+
+.c11 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+}
+
+[data-orientation='vertical'] .c10 {
+  margin: 0 0 20px 0;
+}
+
+.c13 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  color: #23262D;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+  margin: 0 12px 0 0;
+}
+
+[data-disabled='true'] .c12 {
+  color: #B0B5BD;
+}
+
+.c0 {
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  box-sizing: border-box;
+  -webkit-scroll-behavior: smooth;
+  -moz-scroll-behavior: smooth;
+  -ms-scroll-behavior: smooth;
+  scroll-behavior: smooth;
+  padding: 0;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  overflow-x: scroll;
+  overflow: -moz-scrollbars-none;
+  -ms-overflow-style: none;
+  -webkit-scrollbar-width: none;
+  -moz-scrollbar-width: none;
+  -ms-scrollbar-width: none;
+  scrollbar-width: none;
+  -webkit-scrollbar-height: none;
+  -moz-scrollbar-height: none;
+  -ms-scrollbar-height: none;
+  scrollbar-height: none;
+}
+
+.c0 > * {
+  padding: 2px;
+}
+
+.c0::-webkit-scrollbar {
+  width: 0 !important;
+  height: 0 !important;
+}
+
+<body>
+    <div>
+      <ul
+        class="c0"
+        orientation="horizontal"
+        role="list"
+      >
+        <li
+          class="c1"
+          content="Завершенный шаг, текст занимает максимум три строки, далее идет сокращение"
+          data-active="false"
+          data-completed="false"
+          data-orientation="horizontal"
+          orientation="horizontal"
+          role="listitem"
+        >
+          <span
+            class="c2 c3"
+            tabindex="-1"
+          >
+            <div
+              aria-hidden="true"
+              class="c4 c5"
+            >
+              <div
+                class="c6 c7"
+                height="20"
+                width="20"
+              />
+              <div
+                class="c8 c9"
+              />
+            </div>
+            <div
+              class="c10 c11"
+            >
+              <div
+                class="c12 c13"
+              >
+                Завершенный шаг, текст занимает максимум три строки, далее идет сокращение
+              </div>
+            </div>
+          </span>
+        </li>
+        <li
+          class="c1"
+          content="Шаг с ошибкой, текст занимает максимум три строки"
+          data-active="false"
+          data-completed="false"
+          data-error="true"
+          data-orientation="horizontal"
+          orientation="horizontal"
+          role="listitem"
+        >
+          <span
+            class="c2 c3"
+            tabindex="-1"
+          >
+            <div
+              aria-hidden="true"
+              class="c4 c5"
+            >
+              <div
+                class="c6 c7"
+                height="20"
+                width="20"
+              />
+              <div
+                class="c8 c9"
+              />
+            </div>
+            <div
+              class="c10 c11"
+            >
+              <div
+                class="c12 c13"
+              >
+                Шаг с ошибкой, текст занимает максимум три строки
+              </div>
+            </div>
+          </span>
+        </li>
+        <li
+          class="c1"
+          content="Активный шаг, текст занимает максимум три строки"
+          data-active="false"
+          data-completed="false"
+          data-orientation="horizontal"
+          orientation="horizontal"
+          role="listitem"
+        >
+          <span
+            class="c2 c3"
+            tabindex="-1"
+          >
+            <div
+              aria-hidden="true"
+              class="c4 c5"
+            >
+              <div
+                class="c6 c7"
+                height="20"
+                width="20"
+              />
+              <div
+                class="c8 c9"
+              />
+            </div>
+            <div
+              class="c10 c11"
+            >
+              <div
+                class="c12 c13"
+              >
+                Активный шаг, текст занимает максимум три строки
+              </div>
+            </div>
+          </span>
+        </li>
+        <li
+          class="c1"
+          content="Неактивный шаг, текст занимает максимум три строки"
+          data-active="false"
+          data-completed="false"
+          data-orientation="horizontal"
+          orientation="horizontal"
+          role="listitem"
+        >
+          <span
+            class="c2 c3"
+            tabindex="-1"
+          >
+            <div
+              aria-hidden="true"
+              class="c4 c5"
+            >
+              <div
+                class="c6 c7"
+                height="20"
+                width="20"
+              />
+              <div
+                class="c8 c9"
+              />
+            </div>
+            <div
+              class="c10 c11"
+            >
+              <div
+                class="c12 c13"
+              >
+                Неактивный шаг, текст занимает максимум три строки
+              </div>
+            </div>
+          </span>
+        </li>
+      </ul>
+    </div>
+  </body>,
+  "container": .c5 {
+  box-sizing: border-box;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-align-self: stretch;
+  -ms-flex-item-align: stretch;
+  align-self: stretch;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  width: 100%;
+  margin: 0 0 8px 0;
+}
+
+[data-orientation='vertical'] .c4 {
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 20px;
+  margin: 0 8px 0 0;
+}
+
+.c7 {
+  margin: 0 4px 0 0;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+}
+
+[data-orientation='vertical'] .c6 {
+  margin: 0 0 4px 0;
+}
+
+[data-active='true'] .c6 path {
+  fill: #0062FF;
+}
+
+[data-error='true'] .c6 path {
+  fill: #D92020;
+}
+
+[data-warning='true'] .c6 path {
+  fill: #FF5C22;
+}
+
+[data-disabled='true'] .c6 path {
+  fill: #A7C7FF;
+}
+
+.c9 {
+  height: 2px;
+  width: 100%;
+  background-color: #D5D8DE;
+  border-radius: 1px;
+}
+
+[data-orientation='vertical'] .c8 {
+  height: 100%;
+  width: 2px;
+}
+
+[data-completed='true'] .c8 {
+  background-color: #0062FF;
+}
+
+[data-error='true'] .c8 {
+  background-color: #D92020;
+}
+
+[data-warning='true'] .c8 {
+  background-color: #FF5C22;
+}
+
+[data-disabled='true'] .c8 {
+  background-color: #A7C7FF;
+}
+
+.c3 {
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+[data-orientation='vertical'] .c2 {
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+  box-sizing: border-box;
+  width: 25%;
+  background: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+  border: none;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.c1:focus {
+  outline: none;
+}
+
+.c1:focus:before {
+  position: absolute;
+  content: '';
+  border: 2px solid #0062FF;
+  border-radius: 4px;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  right: 0px;
+}
+
+.c1:focus,
+.c1 > .c2 {
+  outline: none;
+}
+
+.c11 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+}
+
+[data-orientation='vertical'] .c10 {
+  margin: 0 0 20px 0;
+}
+
+.c13 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  color: #23262D;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+  margin: 0 12px 0 0;
+}
+
+[data-disabled='true'] .c12 {
+  color: #B0B5BD;
+}
+
+.c0 {
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  box-sizing: border-box;
+  -webkit-scroll-behavior: smooth;
+  -moz-scroll-behavior: smooth;
+  -ms-scroll-behavior: smooth;
+  scroll-behavior: smooth;
+  padding: 0;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  overflow-x: scroll;
+  overflow: -moz-scrollbars-none;
+  -ms-overflow-style: none;
+  -webkit-scrollbar-width: none;
+  -moz-scrollbar-width: none;
+  -ms-scrollbar-width: none;
+  scrollbar-width: none;
+  -webkit-scrollbar-height: none;
+  -moz-scrollbar-height: none;
+  -ms-scrollbar-height: none;
+  scrollbar-height: none;
+}
+
+.c0 > * {
+  padding: 2px;
+}
+
+.c0::-webkit-scrollbar {
+  width: 0 !important;
+  height: 0 !important;
+}
+
+<div>
+    <ul
+      class="c0"
+      orientation="horizontal"
+      role="list"
+    >
+      <li
+        class="c1"
+        content="Завершенный шаг, текст занимает максимум три строки, далее идет сокращение"
+        data-active="false"
+        data-completed="false"
+        data-orientation="horizontal"
+        orientation="horizontal"
+        role="listitem"
+      >
+        <span
+          class="c2 c3"
+          tabindex="-1"
+        >
+          <div
+            aria-hidden="true"
+            class="c4 c5"
+          >
+            <div
+              class="c6 c7"
+              height="20"
+              width="20"
+            />
+            <div
+              class="c8 c9"
+            />
+          </div>
+          <div
+            class="c10 c11"
+          >
+            <div
+              class="c12 c13"
+            >
+              Завершенный шаг, текст занимает максимум три строки, далее идет сокращение
+            </div>
+          </div>
+        </span>
+      </li>
+      <li
+        class="c1"
+        content="Шаг с ошибкой, текст занимает максимум три строки"
+        data-active="false"
+        data-completed="false"
+        data-error="true"
+        data-orientation="horizontal"
+        orientation="horizontal"
+        role="listitem"
+      >
+        <span
+          class="c2 c3"
+          tabindex="-1"
+        >
+          <div
+            aria-hidden="true"
+            class="c4 c5"
+          >
+            <div
+              class="c6 c7"
+              height="20"
+              width="20"
+            />
+            <div
+              class="c8 c9"
+            />
+          </div>
+          <div
+            class="c10 c11"
+          >
+            <div
+              class="c12 c13"
+            >
+              Шаг с ошибкой, текст занимает максимум три строки
+            </div>
+          </div>
+        </span>
+      </li>
+      <li
+        class="c1"
+        content="Активный шаг, текст занимает максимум три строки"
+        data-active="false"
+        data-completed="false"
+        data-orientation="horizontal"
+        orientation="horizontal"
+        role="listitem"
+      >
+        <span
+          class="c2 c3"
+          tabindex="-1"
+        >
+          <div
+            aria-hidden="true"
+            class="c4 c5"
+          >
+            <div
+              class="c6 c7"
+              height="20"
+              width="20"
+            />
+            <div
+              class="c8 c9"
+            />
+          </div>
+          <div
+            class="c10 c11"
+          >
+            <div
+              class="c12 c13"
+            >
+              Активный шаг, текст занимает максимум три строки
+            </div>
+          </div>
+        </span>
+      </li>
+      <li
+        class="c1"
+        content="Неактивный шаг, текст занимает максимум три строки"
+        data-active="false"
+        data-completed="false"
+        data-orientation="horizontal"
+        orientation="horizontal"
+        role="listitem"
+      >
+        <span
+          class="c2 c3"
+          tabindex="-1"
+        >
+          <div
+            aria-hidden="true"
+            class="c4 c5"
+          >
+            <div
+              class="c6 c7"
+              height="20"
+              width="20"
+            />
+            <div
+              class="c8 c9"
+            />
+          </div>
+          <div
+            class="c10 c11"
+          >
+            <div
+              class="c12 c13"
+            >
+              Неактивный шаг, текст занимает максимум три строки
+            </div>
+          </div>
+        </span>
+      </li>
+    </ul>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`Spinner should render component with stepWidth 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": .c5 {
+  box-sizing: border-box;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-align-self: stretch;
+  -ms-flex-item-align: stretch;
+  align-self: stretch;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  width: 100%;
+  margin: 0 0 8px 0;
+}
+
+[data-orientation='vertical'] .c4 {
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 20px;
+  margin: 0 8px 0 0;
+}
+
+.c7 {
+  margin: 0 4px 0 0;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+}
+
+[data-orientation='vertical'] .c6 {
+  margin: 0 0 4px 0;
+}
+
+[data-active='true'] .c6 path {
+  fill: #0062FF;
+}
+
+[data-error='true'] .c6 path {
+  fill: #D92020;
+}
+
+[data-warning='true'] .c6 path {
+  fill: #FF5C22;
+}
+
+[data-disabled='true'] .c6 path {
+  fill: #A7C7FF;
+}
+
+.c9 {
+  height: 2px;
+  width: 100%;
+  background-color: #D5D8DE;
+  border-radius: 1px;
+}
+
+[data-orientation='vertical'] .c8 {
+  height: 100%;
+  width: 2px;
+}
+
+[data-completed='true'] .c8 {
+  background-color: #0062FF;
+}
+
+[data-error='true'] .c8 {
+  background-color: #D92020;
+}
+
+[data-warning='true'] .c8 {
+  background-color: #FF5C22;
+}
+
+[data-disabled='true'] .c8 {
+  background-color: #A7C7FF;
+}
+
+.c3 {
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+[data-orientation='vertical'] .c2 {
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+  box-sizing: border-box;
+  width: 100px;
+  background: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+  border: none;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.c1:focus {
+  outline: none;
+}
+
+.c1:focus:before {
+  position: absolute;
+  content: '';
+  border: 2px solid #0062FF;
+  border-radius: 4px;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  right: 0px;
+}
+
+.c1:focus,
+.c1 > .c2 {
+  outline: none;
+}
+
+.c11 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+}
+
+[data-orientation='vertical'] .c10 {
+  margin: 0 0 20px 0;
+}
+
+.c13 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  color: #23262D;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+  margin: 0 12px 0 0;
+}
+
+[data-disabled='true'] .c12 {
+  color: #B0B5BD;
+}
+
+.c0 {
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  box-sizing: border-box;
+  -webkit-scroll-behavior: smooth;
+  -moz-scroll-behavior: smooth;
+  -ms-scroll-behavior: smooth;
+  scroll-behavior: smooth;
+  padding: 0;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  overflow-x: scroll;
+  overflow: -moz-scrollbars-none;
+  -ms-overflow-style: none;
+  -webkit-scrollbar-width: none;
+  -moz-scrollbar-width: none;
+  -ms-scrollbar-width: none;
+  scrollbar-width: none;
+  -webkit-scrollbar-height: none;
+  -moz-scrollbar-height: none;
+  -ms-scrollbar-height: none;
+  scrollbar-height: none;
+}
+
+.c0 > * {
+  padding: 2px;
+}
+
+.c0::-webkit-scrollbar {
+  width: 0 !important;
+  height: 0 !important;
+}
+
+<body>
+    <div>
+      <ul
+        class="c0"
+        orientation="horizontal"
+        role="list"
+      >
+        <li
+          class="c1"
+          content="Завершенный шаг, текст занимает максимум три строки, далее идет сокращение"
+          data-active="false"
+          data-completed="false"
+          data-orientation="horizontal"
+          orientation="horizontal"
+          role="listitem"
+        >
+          <span
+            class="c2 c3"
+            tabindex="-1"
+          >
+            <div
+              aria-hidden="true"
+              class="c4 c5"
+            >
+              <div
+                class="c6 c7"
+                height="20"
+                width="20"
+              />
+              <div
+                class="c8 c9"
+              />
+            </div>
+            <div
+              class="c10 c11"
+            >
+              <div
+                class="c12 c13"
+              >
+                Завершенный шаг, текст занимает максимум три строки, далее идет сокращение
+              </div>
+            </div>
+          </span>
+        </li>
+        <li
+          class="c1"
+          content="Шаг с ошибкой, текст занимает максимум три строки"
+          data-active="false"
+          data-completed="false"
+          data-error="true"
+          data-orientation="horizontal"
+          orientation="horizontal"
+          role="listitem"
+        >
+          <span
+            class="c2 c3"
+            tabindex="-1"
+          >
+            <div
+              aria-hidden="true"
+              class="c4 c5"
+            >
+              <div
+                class="c6 c7"
+                height="20"
+                width="20"
+              />
+              <div
+                class="c8 c9"
+              />
+            </div>
+            <div
+              class="c10 c11"
+            >
+              <div
+                class="c12 c13"
+              >
+                Шаг с ошибкой, текст занимает максимум три строки
+              </div>
+            </div>
+          </span>
+        </li>
+        <li
+          class="c1"
+          content="Активный шаг, текст занимает максимум три строки"
+          data-active="false"
+          data-completed="false"
+          data-orientation="horizontal"
+          orientation="horizontal"
+          role="listitem"
+        >
+          <span
+            class="c2 c3"
+            tabindex="-1"
+          >
+            <div
+              aria-hidden="true"
+              class="c4 c5"
+            >
+              <div
+                class="c6 c7"
+                height="20"
+                width="20"
+              />
+              <div
+                class="c8 c9"
+              />
+            </div>
+            <div
+              class="c10 c11"
+            >
+              <div
+                class="c12 c13"
+              >
+                Активный шаг, текст занимает максимум три строки
+              </div>
+            </div>
+          </span>
+        </li>
+        <li
+          class="c1"
+          content="Неактивный шаг, текст занимает максимум три строки"
+          data-active="false"
+          data-completed="false"
+          data-orientation="horizontal"
+          orientation="horizontal"
+          role="listitem"
+        >
+          <span
+            class="c2 c3"
+            tabindex="-1"
+          >
+            <div
+              aria-hidden="true"
+              class="c4 c5"
+            >
+              <div
+                class="c6 c7"
+                height="20"
+                width="20"
+              />
+              <div
+                class="c8 c9"
+              />
+            </div>
+            <div
+              class="c10 c11"
+            >
+              <div
+                class="c12 c13"
+              >
+                Неактивный шаг, текст занимает максимум три строки
+              </div>
+            </div>
+          </span>
+        </li>
+      </ul>
+    </div>
+  </body>,
+  "container": .c5 {
+  box-sizing: border-box;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-align-self: stretch;
+  -ms-flex-item-align: stretch;
+  align-self: stretch;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  width: 100%;
+  margin: 0 0 8px 0;
+}
+
+[data-orientation='vertical'] .c4 {
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 20px;
+  margin: 0 8px 0 0;
+}
+
+.c7 {
+  margin: 0 4px 0 0;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+}
+
+[data-orientation='vertical'] .c6 {
+  margin: 0 0 4px 0;
+}
+
+[data-active='true'] .c6 path {
+  fill: #0062FF;
+}
+
+[data-error='true'] .c6 path {
+  fill: #D92020;
+}
+
+[data-warning='true'] .c6 path {
+  fill: #FF5C22;
+}
+
+[data-disabled='true'] .c6 path {
+  fill: #A7C7FF;
+}
+
+.c9 {
+  height: 2px;
+  width: 100%;
+  background-color: #D5D8DE;
+  border-radius: 1px;
+}
+
+[data-orientation='vertical'] .c8 {
+  height: 100%;
+  width: 2px;
+}
+
+[data-completed='true'] .c8 {
+  background-color: #0062FF;
+}
+
+[data-error='true'] .c8 {
+  background-color: #D92020;
+}
+
+[data-warning='true'] .c8 {
+  background-color: #FF5C22;
+}
+
+[data-disabled='true'] .c8 {
+  background-color: #A7C7FF;
+}
+
+.c3 {
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+[data-orientation='vertical'] .c2 {
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+  box-sizing: border-box;
+  width: 100px;
+  background: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+  border: none;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.c1:focus {
+  outline: none;
+}
+
+.c1:focus:before {
+  position: absolute;
+  content: '';
+  border: 2px solid #0062FF;
+  border-radius: 4px;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  right: 0px;
+}
+
+.c1:focus,
+.c1 > .c2 {
+  outline: none;
+}
+
+.c11 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+}
+
+[data-orientation='vertical'] .c10 {
+  margin: 0 0 20px 0;
+}
+
+.c13 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  color: #23262D;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+  margin: 0 12px 0 0;
+}
+
+[data-disabled='true'] .c12 {
+  color: #B0B5BD;
+}
+
+.c0 {
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  box-sizing: border-box;
+  -webkit-scroll-behavior: smooth;
+  -moz-scroll-behavior: smooth;
+  -ms-scroll-behavior: smooth;
+  scroll-behavior: smooth;
+  padding: 0;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  overflow-x: scroll;
+  overflow: -moz-scrollbars-none;
+  -ms-overflow-style: none;
+  -webkit-scrollbar-width: none;
+  -moz-scrollbar-width: none;
+  -ms-scrollbar-width: none;
+  scrollbar-width: none;
+  -webkit-scrollbar-height: none;
+  -moz-scrollbar-height: none;
+  -ms-scrollbar-height: none;
+  scrollbar-height: none;
+}
+
+.c0 > * {
+  padding: 2px;
+}
+
+.c0::-webkit-scrollbar {
+  width: 0 !important;
+  height: 0 !important;
+}
+
+<div>
+    <ul
+      class="c0"
+      orientation="horizontal"
+      role="list"
+    >
+      <li
+        class="c1"
+        content="Завершенный шаг, текст занимает максимум три строки, далее идет сокращение"
+        data-active="false"
+        data-completed="false"
+        data-orientation="horizontal"
+        orientation="horizontal"
+        role="listitem"
+      >
+        <span
+          class="c2 c3"
+          tabindex="-1"
+        >
+          <div
+            aria-hidden="true"
+            class="c4 c5"
+          >
+            <div
+              class="c6 c7"
+              height="20"
+              width="20"
+            />
+            <div
+              class="c8 c9"
+            />
+          </div>
+          <div
+            class="c10 c11"
+          >
+            <div
+              class="c12 c13"
+            >
+              Завершенный шаг, текст занимает максимум три строки, далее идет сокращение
+            </div>
+          </div>
+        </span>
+      </li>
+      <li
+        class="c1"
+        content="Шаг с ошибкой, текст занимает максимум три строки"
+        data-active="false"
+        data-completed="false"
+        data-error="true"
+        data-orientation="horizontal"
+        orientation="horizontal"
+        role="listitem"
+      >
+        <span
+          class="c2 c3"
+          tabindex="-1"
+        >
+          <div
+            aria-hidden="true"
+            class="c4 c5"
+          >
+            <div
+              class="c6 c7"
+              height="20"
+              width="20"
+            />
+            <div
+              class="c8 c9"
+            />
+          </div>
+          <div
+            class="c10 c11"
+          >
+            <div
+              class="c12 c13"
+            >
+              Шаг с ошибкой, текст занимает максимум три строки
+            </div>
+          </div>
+        </span>
+      </li>
+      <li
+        class="c1"
+        content="Активный шаг, текст занимает максимум три строки"
+        data-active="false"
+        data-completed="false"
+        data-orientation="horizontal"
+        orientation="horizontal"
+        role="listitem"
+      >
+        <span
+          class="c2 c3"
+          tabindex="-1"
+        >
+          <div
+            aria-hidden="true"
+            class="c4 c5"
+          >
+            <div
+              class="c6 c7"
+              height="20"
+              width="20"
+            />
+            <div
+              class="c8 c9"
+            />
+          </div>
+          <div
+            class="c10 c11"
+          >
+            <div
+              class="c12 c13"
+            >
+              Активный шаг, текст занимает максимум три строки
+            </div>
+          </div>
+        </span>
+      </li>
+      <li
+        class="c1"
+        content="Неактивный шаг, текст занимает максимум три строки"
+        data-active="false"
+        data-completed="false"
+        data-orientation="horizontal"
+        orientation="horizontal"
+        role="listitem"
+      >
+        <span
+          class="c2 c3"
+          tabindex="-1"
+        >
+          <div
+            aria-hidden="true"
+            class="c4 c5"
+          >
+            <div
+              class="c6 c7"
+              height="20"
+              width="20"
+            />
+            <div
+              class="c8 c9"
+            />
+          </div>
+          <div
+            class="c10 c11"
+          >
+            <div
+              class="c12 c13"
+            >
+              Неактивный шаг, текст занимает максимум три строки
+            </div>
+          </div>
+        </span>
+      </li>
+    </ul>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`Spinner should render default component 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": .c5 {
+  box-sizing: border-box;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-align-self: stretch;
+  -ms-flex-item-align: stretch;
+  align-self: stretch;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  width: 100%;
+  margin: 0 0 8px 0;
+}
+
+[data-orientation='vertical'] .c4 {
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 20px;
+  margin: 0 8px 0 0;
+}
+
+.c7 {
+  margin: 0 4px 0 0;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+}
+
+[data-orientation='vertical'] .c6 {
+  margin: 0 0 4px 0;
+}
+
+[data-active='true'] .c6 path {
+  fill: #0062FF;
+}
+
+[data-error='true'] .c6 path {
+  fill: #D92020;
+}
+
+[data-warning='true'] .c6 path {
+  fill: #FF5C22;
+}
+
+[data-disabled='true'] .c6 path {
+  fill: #A7C7FF;
+}
+
+.c9 {
+  height: 2px;
+  width: 100%;
+  background-color: #D5D8DE;
+  border-radius: 1px;
+}
+
+[data-orientation='vertical'] .c8 {
+  height: 100%;
+  width: 2px;
+}
+
+[data-completed='true'] .c8 {
+  background-color: #0062FF;
+}
+
+[data-error='true'] .c8 {
+  background-color: #D92020;
+}
+
+[data-warning='true'] .c8 {
+  background-color: #FF5C22;
+}
+
+[data-disabled='true'] .c8 {
+  background-color: #A7C7FF;
+}
+
+.c3 {
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+[data-orientation='vertical'] .c2 {
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+  box-sizing: border-box;
+  width: 25%;
+  background: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+  border: none;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.c1:focus {
+  outline: none;
+}
+
+.c1:focus:before {
+  position: absolute;
+  content: '';
+  border: 2px solid #0062FF;
+  border-radius: 4px;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  right: 0px;
+}
+
+.c1:focus,
+.c1 > .c2 {
+  outline: none;
+}
+
+.c11 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+}
+
+[data-orientation='vertical'] .c10 {
+  margin: 0 0 20px 0;
+}
+
+.c13 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  color: #23262D;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+  margin: 0 12px 0 0;
+}
+
+[data-disabled='true'] .c12 {
+  color: #B0B5BD;
+}
+
+.c0 {
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  box-sizing: border-box;
+  -webkit-scroll-behavior: smooth;
+  -moz-scroll-behavior: smooth;
+  -ms-scroll-behavior: smooth;
+  scroll-behavior: smooth;
+  padding: 0;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  overflow-x: scroll;
+  overflow: -moz-scrollbars-none;
+  -ms-overflow-style: none;
+  -webkit-scrollbar-width: none;
+  -moz-scrollbar-width: none;
+  -ms-scrollbar-width: none;
+  scrollbar-width: none;
+  -webkit-scrollbar-height: none;
+  -moz-scrollbar-height: none;
+  -ms-scrollbar-height: none;
+  scrollbar-height: none;
+}
+
+.c0 > * {
+  padding: 2px;
+}
+
+.c0::-webkit-scrollbar {
+  width: 0 !important;
+  height: 0 !important;
+}
+
+<body>
+    <div>
+      <ul
+        class="c0"
+        orientation="horizontal"
+        role="list"
+      >
+        <li
+          class="c1"
+          content="Завершенный шаг, текст занимает максимум три строки, далее идет сокращение"
+          data-active="false"
+          data-completed="false"
+          data-orientation="horizontal"
+          orientation="horizontal"
+          role="listitem"
+        >
+          <span
+            class="c2 c3"
+            tabindex="-1"
+          >
+            <div
+              aria-hidden="true"
+              class="c4 c5"
+            >
+              <div
+                class="c6 c7"
+                height="20"
+                width="20"
+              />
+              <div
+                class="c8 c9"
+              />
+            </div>
+            <div
+              class="c10 c11"
+            >
+              <div
+                class="c12 c13"
+              >
+                Завершенный шаг, текст занимает максимум три строки, далее идет сокращение
+              </div>
+            </div>
+          </span>
+        </li>
+        <li
+          class="c1"
+          content="Шаг с ошибкой, текст занимает максимум три строки"
+          data-active="false"
+          data-completed="false"
+          data-error="true"
+          data-orientation="horizontal"
+          orientation="horizontal"
+          role="listitem"
+        >
+          <span
+            class="c2 c3"
+            tabindex="-1"
+          >
+            <div
+              aria-hidden="true"
+              class="c4 c5"
+            >
+              <div
+                class="c6 c7"
+                height="20"
+                width="20"
+              />
+              <div
+                class="c8 c9"
+              />
+            </div>
+            <div
+              class="c10 c11"
+            >
+              <div
+                class="c12 c13"
+              >
+                Шаг с ошибкой, текст занимает максимум три строки
+              </div>
+            </div>
+          </span>
+        </li>
+        <li
+          class="c1"
+          content="Активный шаг, текст занимает максимум три строки"
+          data-active="false"
+          data-completed="false"
+          data-orientation="horizontal"
+          orientation="horizontal"
+          role="listitem"
+        >
+          <span
+            class="c2 c3"
+            tabindex="-1"
+          >
+            <div
+              aria-hidden="true"
+              class="c4 c5"
+            >
+              <div
+                class="c6 c7"
+                height="20"
+                width="20"
+              />
+              <div
+                class="c8 c9"
+              />
+            </div>
+            <div
+              class="c10 c11"
+            >
+              <div
+                class="c12 c13"
+              >
+                Активный шаг, текст занимает максимум три строки
+              </div>
+            </div>
+          </span>
+        </li>
+        <li
+          class="c1"
+          content="Неактивный шаг, текст занимает максимум три строки"
+          data-active="false"
+          data-completed="false"
+          data-orientation="horizontal"
+          orientation="horizontal"
+          role="listitem"
+        >
+          <span
+            class="c2 c3"
+            tabindex="-1"
+          >
+            <div
+              aria-hidden="true"
+              class="c4 c5"
+            >
+              <div
+                class="c6 c7"
+                height="20"
+                width="20"
+              />
+              <div
+                class="c8 c9"
+              />
+            </div>
+            <div
+              class="c10 c11"
+            >
+              <div
+                class="c12 c13"
+              >
+                Неактивный шаг, текст занимает максимум три строки
+              </div>
+            </div>
+          </span>
+        </li>
+      </ul>
+    </div>
+  </body>,
+  "container": .c5 {
+  box-sizing: border-box;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-align-self: stretch;
+  -ms-flex-item-align: stretch;
+  align-self: stretch;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  width: 100%;
+  margin: 0 0 8px 0;
+}
+
+[data-orientation='vertical'] .c4 {
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 20px;
+  margin: 0 8px 0 0;
+}
+
+.c7 {
+  margin: 0 4px 0 0;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+}
+
+[data-orientation='vertical'] .c6 {
+  margin: 0 0 4px 0;
+}
+
+[data-active='true'] .c6 path {
+  fill: #0062FF;
+}
+
+[data-error='true'] .c6 path {
+  fill: #D92020;
+}
+
+[data-warning='true'] .c6 path {
+  fill: #FF5C22;
+}
+
+[data-disabled='true'] .c6 path {
+  fill: #A7C7FF;
+}
+
+.c9 {
+  height: 2px;
+  width: 100%;
+  background-color: #D5D8DE;
+  border-radius: 1px;
+}
+
+[data-orientation='vertical'] .c8 {
+  height: 100%;
+  width: 2px;
+}
+
+[data-completed='true'] .c8 {
+  background-color: #0062FF;
+}
+
+[data-error='true'] .c8 {
+  background-color: #D92020;
+}
+
+[data-warning='true'] .c8 {
+  background-color: #FF5C22;
+}
+
+[data-disabled='true'] .c8 {
+  background-color: #A7C7FF;
+}
+
+.c3 {
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+[data-orientation='vertical'] .c2 {
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+  box-sizing: border-box;
+  width: 25%;
+  background: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+  border: none;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.c1:focus {
+  outline: none;
+}
+
+.c1:focus:before {
+  position: absolute;
+  content: '';
+  border: 2px solid #0062FF;
+  border-radius: 4px;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  right: 0px;
+}
+
+.c1:focus,
+.c1 > .c2 {
+  outline: none;
+}
+
+.c11 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+}
+
+[data-orientation='vertical'] .c10 {
+  margin: 0 0 20px 0;
+}
+
+.c13 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  color: #23262D;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+  margin: 0 12px 0 0;
+}
+
+[data-disabled='true'] .c12 {
+  color: #B0B5BD;
+}
+
+.c0 {
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  box-sizing: border-box;
+  -webkit-scroll-behavior: smooth;
+  -moz-scroll-behavior: smooth;
+  -ms-scroll-behavior: smooth;
+  scroll-behavior: smooth;
+  padding: 0;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  overflow-x: scroll;
+  overflow: -moz-scrollbars-none;
+  -ms-overflow-style: none;
+  -webkit-scrollbar-width: none;
+  -moz-scrollbar-width: none;
+  -ms-scrollbar-width: none;
+  scrollbar-width: none;
+  -webkit-scrollbar-height: none;
+  -moz-scrollbar-height: none;
+  -ms-scrollbar-height: none;
+  scrollbar-height: none;
+}
+
+.c0 > * {
+  padding: 2px;
+}
+
+.c0::-webkit-scrollbar {
+  width: 0 !important;
+  height: 0 !important;
+}
+
+<div>
+    <ul
+      class="c0"
+      orientation="horizontal"
+      role="list"
+    >
+      <li
+        class="c1"
+        content="Завершенный шаг, текст занимает максимум три строки, далее идет сокращение"
+        data-active="false"
+        data-completed="false"
+        data-orientation="horizontal"
+        orientation="horizontal"
+        role="listitem"
+      >
+        <span
+          class="c2 c3"
+          tabindex="-1"
+        >
+          <div
+            aria-hidden="true"
+            class="c4 c5"
+          >
+            <div
+              class="c6 c7"
+              height="20"
+              width="20"
+            />
+            <div
+              class="c8 c9"
+            />
+          </div>
+          <div
+            class="c10 c11"
+          >
+            <div
+              class="c12 c13"
+            >
+              Завершенный шаг, текст занимает максимум три строки, далее идет сокращение
+            </div>
+          </div>
+        </span>
+      </li>
+      <li
+        class="c1"
+        content="Шаг с ошибкой, текст занимает максимум три строки"
+        data-active="false"
+        data-completed="false"
+        data-error="true"
+        data-orientation="horizontal"
+        orientation="horizontal"
+        role="listitem"
+      >
+        <span
+          class="c2 c3"
+          tabindex="-1"
+        >
+          <div
+            aria-hidden="true"
+            class="c4 c5"
+          >
+            <div
+              class="c6 c7"
+              height="20"
+              width="20"
+            />
+            <div
+              class="c8 c9"
+            />
+          </div>
+          <div
+            class="c10 c11"
+          >
+            <div
+              class="c12 c13"
+            >
+              Шаг с ошибкой, текст занимает максимум три строки
+            </div>
+          </div>
+        </span>
+      </li>
+      <li
+        class="c1"
+        content="Активный шаг, текст занимает максимум три строки"
+        data-active="false"
+        data-completed="false"
+        data-orientation="horizontal"
+        orientation="horizontal"
+        role="listitem"
+      >
+        <span
+          class="c2 c3"
+          tabindex="-1"
+        >
+          <div
+            aria-hidden="true"
+            class="c4 c5"
+          >
+            <div
+              class="c6 c7"
+              height="20"
+              width="20"
+            />
+            <div
+              class="c8 c9"
+            />
+          </div>
+          <div
+            class="c10 c11"
+          >
+            <div
+              class="c12 c13"
+            >
+              Активный шаг, текст занимает максимум три строки
+            </div>
+          </div>
+        </span>
+      </li>
+      <li
+        class="c1"
+        content="Неактивный шаг, текст занимает максимум три строки"
+        data-active="false"
+        data-completed="false"
+        data-orientation="horizontal"
+        orientation="horizontal"
+        role="listitem"
+      >
+        <span
+          class="c2 c3"
+          tabindex="-1"
+        >
+          <div
+            aria-hidden="true"
+            class="c4 c5"
+          >
+            <div
+              class="c6 c7"
+              height="20"
+              width="20"
+            />
+            <div
+              class="c8 c9"
+            />
+          </div>
+          <div
+            class="c10 c11"
+          >
+            <div
+              class="c12 c13"
+            >
+              Неактивный шаг, текст занимает максимум три строки
+            </div>
+          </div>
+        </span>
+      </li>
+    </ul>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`Spinner should render vertical component 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": .c5 {
+  box-sizing: border-box;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-align-self: stretch;
+  -ms-flex-item-align: stretch;
+  align-self: stretch;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  width: 100%;
+  margin: 0 0 8px 0;
+}
+
+[data-orientation='vertical'] .c4 {
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 20px;
+  margin: 0 8px 0 0;
+}
+
+.c7 {
+  margin: 0 4px 0 0;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+}
+
+[data-orientation='vertical'] .c6 {
+  margin: 0 0 4px 0;
+}
+
+[data-active='true'] .c6 path {
+  fill: #0062FF;
+}
+
+[data-error='true'] .c6 path {
+  fill: #D92020;
+}
+
+[data-warning='true'] .c6 path {
+  fill: #FF5C22;
+}
+
+[data-disabled='true'] .c6 path {
+  fill: #A7C7FF;
+}
+
+.c9 {
+  height: 2px;
+  width: 100%;
+  background-color: #D5D8DE;
+  border-radius: 1px;
+}
+
+[data-orientation='vertical'] .c8 {
+  height: 100%;
+  width: 2px;
+}
+
+[data-completed='true'] .c8 {
+  background-color: #0062FF;
+}
+
+[data-error='true'] .c8 {
+  background-color: #D92020;
+}
+
+[data-warning='true'] .c8 {
+  background-color: #FF5C22;
+}
+
+[data-disabled='true'] .c8 {
+  background-color: #A7C7FF;
+}
+
+.c3 {
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+[data-orientation='vertical'] .c2 {
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  background: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+  border: none;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.c1:focus {
+  outline: none;
+}
+
+.c1:focus:before {
+  position: absolute;
+  content: '';
+  border: 2px solid #0062FF;
+  border-radius: 4px;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  right: 0px;
+}
+
+.c1:focus,
+.c1 > .c2 {
+  outline: none;
+}
+
+.c11 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+}
+
+[data-orientation='vertical'] .c10 {
+  margin: 0 0 20px 0;
+}
+
+.c13 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  color: #23262D;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+  margin: 0 12px 0 0;
+}
+
+[data-disabled='true'] .c12 {
+  color: #B0B5BD;
+}
+
+.c0 {
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  box-sizing: border-box;
+  -webkit-scroll-behavior: smooth;
+  -moz-scroll-behavior: smooth;
+  -ms-scroll-behavior: smooth;
+  scroll-behavior: smooth;
+  padding: 0;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  overflow: -moz-scrollbars-none;
+  -ms-overflow-style: none;
+  -webkit-scrollbar-width: none;
+  -moz-scrollbar-width: none;
+  -ms-scrollbar-width: none;
+  scrollbar-width: none;
+  -webkit-scrollbar-height: none;
+  -moz-scrollbar-height: none;
+  -ms-scrollbar-height: none;
+  scrollbar-height: none;
+}
+
+.c0 > * {
+  padding: 2px;
+}
+
+.c0::-webkit-scrollbar {
+  width: 0 !important;
+  height: 0 !important;
+}
+
+<body>
+    <div>
+      <ul
+        class="c0"
+        orientation="vertical"
+        role="list"
+      >
+        <li
+          class="c1"
+          content="Завершенный шаг, текст занимает максимум три строки, далее идет сокращение"
+          data-active="false"
+          data-completed="false"
+          data-orientation="vertical"
+          orientation="vertical"
+          role="listitem"
+        >
+          <span
+            class="c2 c3"
+            tabindex="-1"
+          >
+            <div
+              aria-hidden="true"
+              class="c4 c5"
+            >
+              <div
+                class="c6 c7"
+                height="20"
+                width="20"
+              />
+              <div
+                class="c8 c9"
+              />
+            </div>
+            <div
+              class="c10 c11"
+            >
+              <div
+                class="c12 c13"
+              >
+                Завершенный шаг, текст занимает максимум три строки, далее идет сокращение
+              </div>
+            </div>
+          </span>
+        </li>
+        <li
+          class="c1"
+          content="Шаг с ошибкой, текст занимает максимум три строки"
+          data-active="false"
+          data-completed="false"
+          data-error="true"
+          data-orientation="vertical"
+          orientation="vertical"
+          role="listitem"
+        >
+          <span
+            class="c2 c3"
+            tabindex="-1"
+          >
+            <div
+              aria-hidden="true"
+              class="c4 c5"
+            >
+              <div
+                class="c6 c7"
+                height="20"
+                width="20"
+              />
+              <div
+                class="c8 c9"
+              />
+            </div>
+            <div
+              class="c10 c11"
+            >
+              <div
+                class="c12 c13"
+              >
+                Шаг с ошибкой, текст занимает максимум три строки
+              </div>
+            </div>
+          </span>
+        </li>
+        <li
+          class="c1"
+          content="Активный шаг, текст занимает максимум три строки"
+          data-active="false"
+          data-completed="false"
+          data-orientation="vertical"
+          orientation="vertical"
+          role="listitem"
+        >
+          <span
+            class="c2 c3"
+            tabindex="-1"
+          >
+            <div
+              aria-hidden="true"
+              class="c4 c5"
+            >
+              <div
+                class="c6 c7"
+                height="20"
+                width="20"
+              />
+              <div
+                class="c8 c9"
+              />
+            </div>
+            <div
+              class="c10 c11"
+            >
+              <div
+                class="c12 c13"
+              >
+                Активный шаг, текст занимает максимум три строки
+              </div>
+            </div>
+          </span>
+        </li>
+        <li
+          class="c1"
+          content="Неактивный шаг, текст занимает максимум три строки"
+          data-active="false"
+          data-completed="false"
+          data-orientation="vertical"
+          orientation="vertical"
+          role="listitem"
+        >
+          <span
+            class="c2 c3"
+            tabindex="-1"
+          >
+            <div
+              aria-hidden="true"
+              class="c4 c5"
+            >
+              <div
+                class="c6 c7"
+                height="20"
+                width="20"
+              />
+              <div
+                class="c8 c9"
+              />
+            </div>
+            <div
+              class="c10 c11"
+            >
+              <div
+                class="c12 c13"
+              >
+                Неактивный шаг, текст занимает максимум три строки
+              </div>
+            </div>
+          </span>
+        </li>
+      </ul>
+    </div>
+  </body>,
+  "container": .c5 {
+  box-sizing: border-box;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-align-self: stretch;
+  -ms-flex-item-align: stretch;
+  align-self: stretch;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  width: 100%;
+  margin: 0 0 8px 0;
+}
+
+[data-orientation='vertical'] .c4 {
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 20px;
+  margin: 0 8px 0 0;
+}
+
+.c7 {
+  margin: 0 4px 0 0;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+}
+
+[data-orientation='vertical'] .c6 {
+  margin: 0 0 4px 0;
+}
+
+[data-active='true'] .c6 path {
+  fill: #0062FF;
+}
+
+[data-error='true'] .c6 path {
+  fill: #D92020;
+}
+
+[data-warning='true'] .c6 path {
+  fill: #FF5C22;
+}
+
+[data-disabled='true'] .c6 path {
+  fill: #A7C7FF;
+}
+
+.c9 {
+  height: 2px;
+  width: 100%;
+  background-color: #D5D8DE;
+  border-radius: 1px;
+}
+
+[data-orientation='vertical'] .c8 {
+  height: 100%;
+  width: 2px;
+}
+
+[data-completed='true'] .c8 {
+  background-color: #0062FF;
+}
+
+[data-error='true'] .c8 {
+  background-color: #D92020;
+}
+
+[data-warning='true'] .c8 {
+  background-color: #FF5C22;
+}
+
+[data-disabled='true'] .c8 {
+  background-color: #A7C7FF;
+}
+
+.c3 {
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+[data-orientation='vertical'] .c2 {
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  background: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+  border: none;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.c1:focus {
+  outline: none;
+}
+
+.c1:focus:before {
+  position: absolute;
+  content: '';
+  border: 2px solid #0062FF;
+  border-radius: 4px;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  right: 0px;
+}
+
+.c1:focus,
+.c1 > .c2 {
+  outline: none;
+}
+
+.c11 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+}
+
+[data-orientation='vertical'] .c10 {
+  margin: 0 0 20px 0;
+}
+
+.c13 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  color: #23262D;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+  margin: 0 12px 0 0;
+}
+
+[data-disabled='true'] .c12 {
+  color: #B0B5BD;
+}
+
+.c0 {
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  box-sizing: border-box;
+  -webkit-scroll-behavior: smooth;
+  -moz-scroll-behavior: smooth;
+  -ms-scroll-behavior: smooth;
+  scroll-behavior: smooth;
+  padding: 0;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  overflow: -moz-scrollbars-none;
+  -ms-overflow-style: none;
+  -webkit-scrollbar-width: none;
+  -moz-scrollbar-width: none;
+  -ms-scrollbar-width: none;
+  scrollbar-width: none;
+  -webkit-scrollbar-height: none;
+  -moz-scrollbar-height: none;
+  -ms-scrollbar-height: none;
+  scrollbar-height: none;
+}
+
+.c0 > * {
+  padding: 2px;
+}
+
+.c0::-webkit-scrollbar {
+  width: 0 !important;
+  height: 0 !important;
+}
+
+<div>
+    <ul
+      class="c0"
+      orientation="vertical"
+      role="list"
+    >
+      <li
+        class="c1"
+        content="Завершенный шаг, текст занимает максимум три строки, далее идет сокращение"
+        data-active="false"
+        data-completed="false"
+        data-orientation="vertical"
+        orientation="vertical"
+        role="listitem"
+      >
+        <span
+          class="c2 c3"
+          tabindex="-1"
+        >
+          <div
+            aria-hidden="true"
+            class="c4 c5"
+          >
+            <div
+              class="c6 c7"
+              height="20"
+              width="20"
+            />
+            <div
+              class="c8 c9"
+            />
+          </div>
+          <div
+            class="c10 c11"
+          >
+            <div
+              class="c12 c13"
+            >
+              Завершенный шаг, текст занимает максимум три строки, далее идет сокращение
+            </div>
+          </div>
+        </span>
+      </li>
+      <li
+        class="c1"
+        content="Шаг с ошибкой, текст занимает максимум три строки"
+        data-active="false"
+        data-completed="false"
+        data-error="true"
+        data-orientation="vertical"
+        orientation="vertical"
+        role="listitem"
+      >
+        <span
+          class="c2 c3"
+          tabindex="-1"
+        >
+          <div
+            aria-hidden="true"
+            class="c4 c5"
+          >
+            <div
+              class="c6 c7"
+              height="20"
+              width="20"
+            />
+            <div
+              class="c8 c9"
+            />
+          </div>
+          <div
+            class="c10 c11"
+          >
+            <div
+              class="c12 c13"
+            >
+              Шаг с ошибкой, текст занимает максимум три строки
+            </div>
+          </div>
+        </span>
+      </li>
+      <li
+        class="c1"
+        content="Активный шаг, текст занимает максимум три строки"
+        data-active="false"
+        data-completed="false"
+        data-orientation="vertical"
+        orientation="vertical"
+        role="listitem"
+      >
+        <span
+          class="c2 c3"
+          tabindex="-1"
+        >
+          <div
+            aria-hidden="true"
+            class="c4 c5"
+          >
+            <div
+              class="c6 c7"
+              height="20"
+              width="20"
+            />
+            <div
+              class="c8 c9"
+            />
+          </div>
+          <div
+            class="c10 c11"
+          >
+            <div
+              class="c12 c13"
+            >
+              Активный шаг, текст занимает максимум три строки
+            </div>
+          </div>
+        </span>
+      </li>
+      <li
+        class="c1"
+        content="Неактивный шаг, текст занимает максимум три строки"
+        data-active="false"
+        data-completed="false"
+        data-orientation="vertical"
+        orientation="vertical"
+        role="listitem"
+      >
+        <span
+          class="c2 c3"
+          tabindex="-1"
+        >
+          <div
+            aria-hidden="true"
+            class="c4 c5"
+          >
+            <div
+              class="c6 c7"
+              height="20"
+              width="20"
+            />
+            <div
+              class="c8 c9"
+            />
+          </div>
+          <div
+            class="c10 c11"
+          >
+            <div
+              class="c12 c13"
+            >
+              Неактивный шаг, текст занимает максимум три строки
+            </div>
+          </div>
+        </span>
+      </li>
+    </ul>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;

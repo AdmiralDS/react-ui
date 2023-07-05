@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "allowJs": true,
+    "checkJs": false,
+    "strict": true,
+    "skipLibCheck": true,
+    "jsx": "react-jsx",
+    "module": "ESNext",
+    "declaration": true,
+    "declarationMap": true,
+    "emitDeclarationOnly": true,
+    "sourceMap": true,
+    "outDir": "dist",
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "target": "ESNext",
+    "baseUrl": "./src",
+    "paths": {
+      "#src/*": ["./*"],
+      "@admiral-ds/react-ui": ["./index"]
+    },
+    "types": ["@types/jest"]
+  },
+  "include": ["./src"],
+  "exclude": ["dist", "**/node_modules/*"]
+}
