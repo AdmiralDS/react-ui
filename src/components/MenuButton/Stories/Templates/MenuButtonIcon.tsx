@@ -119,8 +119,8 @@ export const MenuButtonIconTemplate = (props: MenuButtonProps) => {
             }}
             items={modelL}
             onVisibilityChange={handleVisibilityChange}
+            iconStart={<StarSolid />}
           >
-            <StarSolid />
             Button 56
           </MenuButton>
           <MenuButton
@@ -134,8 +134,8 @@ export const MenuButtonIconTemplate = (props: MenuButtonProps) => {
             }}
             items={modelL}
             onVisibilityChange={handleVisibilityChange}
+            iconStart={<StarSolid />}
           >
-            <StarSolid />
             Button 56
           </MenuButton>
           <MenuButton
@@ -149,8 +149,8 @@ export const MenuButtonIconTemplate = (props: MenuButtonProps) => {
             }}
             items={modelL}
             onVisibilityChange={handleVisibilityChange}
+            iconStart={<StarSolid />}
           >
-            <StarSolid />
             Button 56
           </MenuButton>
           <DarkDiv>
@@ -165,8 +165,8 @@ export const MenuButtonIconTemplate = (props: MenuButtonProps) => {
               }}
               items={modelL}
               onVisibilityChange={handleVisibilityChange}
+              iconStart={<StarSolid />}
             >
-              <StarSolid />
               Button 56
             </MenuButton>
           </DarkDiv>
@@ -187,8 +187,8 @@ export const MenuButtonIconTemplate = (props: MenuButtonProps) => {
             }}
             items={modelL}
             onVisibilityChange={handleVisibilityChange}
+            iconStart={<StarSolid />}
           >
-            <StarSolid />
             Button 56
           </MenuButton>
           <MenuButton
@@ -202,8 +202,8 @@ export const MenuButtonIconTemplate = (props: MenuButtonProps) => {
             }}
             items={modelL}
             onVisibilityChange={handleVisibilityChange}
+            iconStart={<StarSolid />}
           >
-            <StarSolid />
             Button 56
           </MenuButton>
           <MenuButton
@@ -217,8 +217,8 @@ export const MenuButtonIconTemplate = (props: MenuButtonProps) => {
             }}
             items={modelL}
             onVisibilityChange={handleVisibilityChange}
+            iconStart={<StarSolid />}
           >
-            <StarSolid />
             Button 56
           </MenuButton>
           <DarkDiv>
@@ -233,8 +233,8 @@ export const MenuButtonIconTemplate = (props: MenuButtonProps) => {
               }}
               items={modelL}
               onVisibilityChange={handleVisibilityChange}
+              iconStart={<StarSolid />}
             >
-              <StarSolid />
               Button 56
             </MenuButton>
           </DarkDiv>
@@ -255,8 +255,8 @@ export const MenuButtonIconTemplate = (props: MenuButtonProps) => {
             }}
             items={modelM}
             onVisibilityChange={handleVisibilityChange}
+            iconStart={<StarSolid />}
           >
-            <StarSolid />
             Button 56
           </MenuButton>
           <MenuButton
@@ -270,8 +270,8 @@ export const MenuButtonIconTemplate = (props: MenuButtonProps) => {
             }}
             items={modelM}
             onVisibilityChange={handleVisibilityChange}
+            iconStart={<StarSolid />}
           >
-            <StarSolid />
             Button 56
           </MenuButton>
           <MenuButton
@@ -285,8 +285,8 @@ export const MenuButtonIconTemplate = (props: MenuButtonProps) => {
             }}
             items={modelM}
             onVisibilityChange={handleVisibilityChange}
+            iconStart={<StarSolid />}
           >
-            <StarSolid />
             Button 56
           </MenuButton>
           <DarkDiv>
@@ -301,8 +301,8 @@ export const MenuButtonIconTemplate = (props: MenuButtonProps) => {
               }}
               items={modelM}
               onVisibilityChange={handleVisibilityChange}
+              iconStart={<StarSolid />}
             >
-              <StarSolid />
               Button 56
             </MenuButton>
           </DarkDiv>
@@ -323,8 +323,8 @@ export const MenuButtonIconTemplate = (props: MenuButtonProps) => {
             }}
             items={modelS}
             onVisibilityChange={handleVisibilityChange}
+            iconStart={<StarSolid />}
           >
-            <StarSolid />
             Button 56
           </MenuButton>
           <MenuButton
@@ -338,8 +338,8 @@ export const MenuButtonIconTemplate = (props: MenuButtonProps) => {
             }}
             items={modelS}
             onVisibilityChange={handleVisibilityChange}
+            iconStart={<StarSolid />}
           >
-            <StarSolid />
             Button 56
           </MenuButton>
           <MenuButton
@@ -353,8 +353,8 @@ export const MenuButtonIconTemplate = (props: MenuButtonProps) => {
             }}
             items={modelS}
             onVisibilityChange={handleVisibilityChange}
+            iconStart={<StarSolid />}
           >
-            <StarSolid />
             Button 56
           </MenuButton>
           <DarkDiv>
@@ -369,8 +369,8 @@ export const MenuButtonIconTemplate = (props: MenuButtonProps) => {
               }}
               items={modelS}
               onVisibilityChange={handleVisibilityChange}
+              iconStart={<StarSolid />}
             >
-              <StarSolid />
               Button 56
             </MenuButton>
           </DarkDiv>

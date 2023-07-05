@@ -54,7 +54,6 @@ const Description = () => (
 );
 export default {
   title: 'Admiral-2.1/Menu',
-  decorators: undefined,
   component: Menu,
   parameters: {
     docs: {
@@ -746,10 +745,8 @@ export const Simple = {
 const IconsStory: StoryFn<typeof Menu> = (props) => (
   <IconsAndAdditionalTextTemplate model={[]} {...cleanUpProps(props)} />
 );
-
 export const IconsExample = {
   render: IconsStory,
-
   parameters: {
     docs: {
       source: {
@@ -760,18 +757,14 @@ export const IconsExample = {
       },
     },
   },
-
   name: 'Пример с иконками и дополнительным текстом',
 };
-
 //</editor-fold>
 
 //<editor-fold desc="Пример с большим количеством item">
 const CardGroupsStory: StoryFn<typeof Menu> = (props) => <CardGroupsTemplate model={[]} {...cleanUpProps(props)} />;
-
 export const CardGroupsExample = {
   render: CardGroupsStory,
-
   parameters: {
     docs: {
       source: {
@@ -782,9 +775,9 @@ export const CardGroupsExample = {
       },
     },
   },
-
   name: 'Пример с группами карт',
 };
+//</editor-fold>
 
 export const CustomItems = {
   render: CustomItemTemplate,
@@ -793,10 +786,8 @@ export const CustomItems = {
 
 //<editor-fold desc="Меню с checkbox">
 const CheckboxMenuStory: StoryFn<typeof Menu> = (props) => <CheckboxMenuTemplate model={[]} {...cleanUpProps(props)} />;
-
 export const CheckboxMenuExample = {
   render: CheckboxMenuStory,
-
   parameters: {
     docs: {
       source: {
@@ -807,48 +798,26 @@ export const CheckboxMenuExample = {
       },
     },
   },
-
   name: 'Меню с checkbox',
 };
+//</editor-fold>
 
-export const MenuRadiobutton = {
-  render: MenuRadiobuttonTemplate,
-  name: 'Пример с Radiobutton',
-};
-
-export const MenuTooltip = {
-  render: MenuTooltipTemplate,
-  name: 'Пример с Tooltip',
-};
-
-export const MultiLineMenu = {
-  render: MultiLineMenuTemplate,
-  name: 'Пример с многострочными пунктами',
-};
-
+export const MenuRadiobutton = { render: MenuRadiobuttonTemplate, name: 'Пример с Radiobutton' };
+export const MenuTooltip = { render: MenuTooltipTemplate, name: 'Пример с Tooltip' };
+export const MultiLineMenu = { render: MultiLineMenuTemplate, name: 'Пример с многострочными пунктами' };
 export const MenuActionsTwoButtons = {
   render: MenuActionsTwoButtonsTemplate,
   name: 'Пример с Actions с двумя кнопками',
 };
-
-export const MenuActionsAddUserValue = {
-  render: MenuActionsAddUserValueTemplate,
-  name: 'Пример с Actions и Search',
-};
-
-export const MenuCheckboxGroup = {
-  render: MenuCheckboxGroupTemplate,
-  name: 'Пример с CheckboxGroup',
-};
+export const MenuActionsAddUserValue = { render: MenuActionsAddUserValueTemplate, name: 'Пример с Actions и Search' };
+export const MenuCheckboxGroup = { render: MenuCheckboxGroupTemplate, name: 'Пример с CheckboxGroup' };
 
 //<editor-fold desc="Пример с большим количеством item">
 const LargeNumberOfItemsStory: StoryFn<typeof Menu> = (props) => (
   <LargeNumberOfItemsTemplate model={[]} {...cleanUpProps(props)} />
 );
-
 export const LargeNumberOfItemsExample = {
   render: LargeNumberOfItemsStory,
-
   parameters: {
     docs: {
       source: {
@@ -859,10 +828,8 @@ export const LargeNumberOfItemsExample = {
       },
     },
   },
-
   name: 'Пример с большим количеством item',
 };
-
 //</editor-fold>
 
 //<editor-fold desc="Пример без цикла обхода пунктов">
@@ -872,7 +839,6 @@ const MenuWithLockCycleScrollStory: StoryFn<typeof Menu> = (props) => (
 
 export const MenuWithLockCycleScrollExample = {
   render: MenuWithLockCycleScrollStory,
-
   parameters: {
     docs: {
       source: {
@@ -884,20 +850,16 @@ export const MenuWithLockCycleScrollExample = {
       },
     },
   },
-
   name: 'Пример без цикла обхода пунктов',
 };
-
 //</editor-fold>
 
 //<editor-fold desc="Виртуальный скролл">
 const VirtualScrollStory: StoryFn<typeof Menu> = (props) => (
   <VirtualScrollTemplate model={[]} {...cleanUpProps(props)} />
 );
-
 export const VirtualScrollExample = {
   render: VirtualScrollStory,
-
   parameters: {
     docs: {
       source: {
@@ -911,6 +873,6 @@ export const VirtualScrollExample = {
       },
     },
   },
-
   name: 'Виртуальный скролл',
 };
+//</editor-fold>

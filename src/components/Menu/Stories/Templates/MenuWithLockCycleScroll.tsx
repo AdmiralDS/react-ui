@@ -36,7 +36,13 @@ export const MenuWithLockCycleScrollTemplate = (props: MenuProps) => {
   return (
     <ThemeProvider theme={swapBorder}>
       <Wrapper style={{ width: 'fit-content' }}>
-        <Menu {...props} model={model} onForwardCycleApprove={() => false} onBackwardCycleApprove={() => false} />
+        <Menu
+          {...props}
+          defaultIsActive={false}
+          model={model}
+          onForwardCycleApprove={() => false}
+          onBackwardCycleApprove={() => false}
+        />
       </Wrapper>
     </ThemeProvider>
   );

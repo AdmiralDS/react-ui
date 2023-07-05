@@ -57,7 +57,7 @@ export default {
       control: { type: 'radio' },
     },
     appearance: {
-      options: ['light', 'white', 'grey', 'dark'],
+      options: ['neutral1', 'neutral2', 'neutral3', 'neutral4'],
       control: { type: 'radio' },
     },
     svgMaskId: {

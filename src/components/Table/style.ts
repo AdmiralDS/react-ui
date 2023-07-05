@@ -11,6 +11,7 @@ import {
   headerStyle,
   multiLineTitle,
   overflowMenuStyle,
+  actionsBGStyle,
   rowBackground,
   rowStyle,
   singleLineTitle,
@@ -47,21 +48,33 @@ export const NormalWrapper = styled.div`
   display: flex;
 `;
 
-export const OverflowMenuWrapper = styled.div<{ $offset: number; dimension: TableProps['dimension'] }>`
-  box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  top: 0;
-  will-change: margin-left;
-  z-index: 5;
-  ${overflowMenuStyle};
-  visibility: hidden;
+export const ActionBG = styled.div<{
+  dimension: TableProps['dimension'];
+  greyHeader?: boolean;
+}>`
+  ${actionsBGStyle};
+  right: 0;
+  background: ${({ theme, greyHeader }) =>
+    greyHeader ? theme.color['Neutral/Neutral 05'] : theme.color['Neutral/Neutral 00']};
+`;
 
-  &:hover {
-    visibility: visible;
-  }
+export const OverflowMenuWrapper = styled.div<{
+  $offset: number;
+  dimension: TableProps['dimension'];
+  showRowsActions?: boolean;
+}>`
+  will-change: margin-left;
+  transform: translate3d(0, 0, 0);
+  ${overflowMenuStyle};
+
+  ${({ showRowsActions }) =>
+    !showRowsActions &&
+    css`
+      visibility: hidden;
+      &:hover {
+        visibility: visible;
+      }
+    `}
 `;
 
 export const Filler = styled.div`
@@ -92,6 +105,9 @@ export const HeaderWrapper = styled.div<{ scrollbar: number; greyHeader?: boolea
     }
     & > div.tr {
       overflow-y: scroll;
+    }
+    & > [data-overflowmenu='true'] {
+      margin-right: ${({ scrollbar }) => scrollbar}px;
     }
   }
 
@@ -358,6 +374,7 @@ export const Row = styled.div<{
 `;
 
 export const SimpleRow = styled.div<{
+  showRowsActions: boolean;
   selected?: boolean;
   disabled?: boolean;
   error?: boolean;
@@ -372,14 +389,18 @@ export const SimpleRow = styled.div<{
     background: ${rowBackground};
   }
 
-  &:hover {
-    & + ${OverflowMenuWrapper} {
-      visibility: visible;
-    }
-  }
-  & + div[data-opened='true'] {
-    visibility: visible;
-  }
+  ${({ showRowsActions }) =>
+    !showRowsActions &&
+    css`
+      &:hover {
+        & + ${OverflowMenuWrapper} {
+          visibility: visible;
+        }
+      }
+      & + div[data-opened='true'] {
+        visibility: visible;
+      }
+    `}
 `;
 
 export const ExpandedRow = styled.div<{ opened?: boolean; contentMaxHeight?: number | string }>`

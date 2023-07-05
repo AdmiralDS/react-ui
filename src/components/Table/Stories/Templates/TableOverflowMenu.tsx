@@ -1,7 +1,12 @@
 import * as React from 'react';
-import { Table, RowAction, TooltipHoc, OverflowMenu, MenuItem } from '@admiral-ds/react-ui';
+import { Table, RowAction, TooltipHoc, OverflowMenu, MenuItem, T } from '@admiral-ds/react-ui';
 import type { TableProps, Column, TableRow, RenderOptionProps } from '@admiral-ds/react-ui';
 import { ReactComponent as DeleteOutline } from '@admiral-ds/icons/build/system/DeleteOutline.svg';
+import styled from 'styled-components';
+
+const Separator = styled.div`
+  height: 20px;
+`;
 
 const StrToDate = (str: string) => {
   const res = str.split('.').reverse().join('-');
@@ -147,12 +152,34 @@ const columnList: Column[] = [
 ];
 
 export const OverflowMenuTemplate = (props: TableProps) => {
-  const [cols, setCols] = React.useState(columnList);
+  const [cols, setCols] = React.useState([...columnList]);
+  const [cols2, setCols2] = React.useState([...columnList]);
 
   const handleResize = ({ name, width }: { name: string; width: string }) => {
     const newCols = cols.map((col) => (col.name === name ? { ...col, width } : col));
     setCols(newCols);
   };
+  const handleResize2 = ({ name, width }: { name: string; width: string }) => {
+    const newCols = cols2.map((col) => (col.name === name ? { ...col, width } : col));
+    setCols2(newCols);
+  };
 
-  return <Table {...props} dimension="m" rowList={rowList} columnList={cols} onColumnResize={handleResize} />;
+  return (
+    <>
+      <T font="Body/Body 2 Long">Пример с иконками действий над строками, которые видны только по ховеру</T>
+      <Separator />
+      <Table {...props} dimension="m" rowList={rowList} columnList={cols} onColumnResize={handleResize} />
+      <Separator style={{ height: '40px' }} />
+      <T font="Body/Body 2 Long">Пример с постоянно видимыми иконками действий над строками</T>
+      <Separator />
+      <Table
+        {...props}
+        dimension="m"
+        rowList={rowList}
+        columnList={cols2}
+        onColumnResize={handleResize2}
+        showRowsActions
+      />
+    </>
+  );
 };

@@ -14,7 +14,7 @@ export const SliderInputTickMarksTemplate = (args: SliderInputProps) => {
       <SliderInput
         {...args}
         defaultValue="15"
-        onChange={(full, short) => console.log({ full, short })}
+        onChange={(full, short, event) => console.log({ full, short, event })}
         tickMarks={[5, 10, 15]}
       />
     </ThemeProvider>

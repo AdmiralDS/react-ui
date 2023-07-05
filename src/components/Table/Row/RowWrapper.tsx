@@ -27,6 +27,8 @@ export interface RowWrapperProps extends HTMLAttributes<HTMLDivElement> {
   rowWidth?: number;
   /** Окрашивание строки в серый цвет при greyZebraRows */
   grey?: boolean;
+  /** Включение постоянной видимости иконок действий над строками */
+  showRowsActions: boolean;
 }
 
 export const RowWrapper = ({
@@ -42,6 +44,7 @@ export const RowWrapper = ({
   verticalScroll,
   scrollbar,
   grey,
+  showRowsActions,
   ...props
 }: RowWrapperProps) => {
   const rowRef = React.useRef<HTMLDivElement>(null);
@@ -82,6 +85,7 @@ export const RowWrapper = ({
     >
       <SimpleRow
         className="tr-simple"
+        showRowsActions={showRowsActions}
         selected={!!row.selected}
         disabled={!!row.disabled}
         error={!!row.error}
@@ -90,7 +94,7 @@ export const RowWrapper = ({
       >
         {children}
       </SimpleRow>
-      {(row.overflowMenuRender || row.actionRender) && (
+      {(showRowsActions || row.overflowMenuRender || row.actionRender) && (
         <OverflowMenu
           dimension={dimension}
           tableWidth={tableWidth}
@@ -98,6 +102,7 @@ export const RowWrapper = ({
           verticalScroll={verticalScroll}
           scrollbar={scrollbar}
           onClick={handleOverflowMenuClick}
+          showRowsActions={showRowsActions}
         />
       )}
       {row.expandedRowRender && (

@@ -20,7 +20,6 @@ const Desc = styled.div`
 
 export default {
   title: 'Admiral-2.1/AvatarGroup',
-  decorators: undefined,
   component: AvatarGroup,
   parameters: {
     docs: {
@@ -49,7 +48,7 @@ export default {
       control: false,
     },
     appearance: {
-      options: ['light', 'white', 'grey', 'dark'],
+      options: ['neutral1', 'neutral2', 'neutral3', 'neutral4'],
       control: { type: 'radio' },
     },
     dropContainerCssMixin: {
@@ -78,7 +77,6 @@ const AvatarGroupPlaygroundStory: StoryFn<typeof AvatarGroup> = (props: AvatarGr
 export const AvatarGroupPlayground = {
   render: AvatarGroupPlaygroundStory,
   name: 'Playground',
-
   parameters: {
     docs: {
       source: {
@@ -87,7 +85,6 @@ export const AvatarGroupPlayground = {
     },
   },
 };
-
 //</editor-fold>
 
 //<editor-fold desc="Пример с ограниченной шириной">
@@ -98,7 +95,6 @@ const AvatarGroupWidthStory: StoryFn<typeof AvatarGroup> = (props) => (
 export const AvatarGroupWidth = {
   render: AvatarGroupWidthStory,
   name: 'Пример с ограниченной шириной',
-
   parameters: {
     docs: {
       source: {
@@ -106,12 +102,13 @@ export const AvatarGroupWidth = {
       },
       description: {
         story: `При достижении условного максимума отображаемых аватаров, последним ставится аватар с отображением количества
-        скрытых элементов. Внешний вид такого аватара (цвет заливки и текста) контролируется с помощью параметра appearance, переданного в 
-        компонент AvatarGroup.\n\nЧтобы задать для всех аватаров, входящих в группу, единый внешний вид, достаточно задать 
-        для компонента AvatarGroup соответствующее значение параметра appearance. Если для каких-то аватаров 
-        нужно задать отличный от остальных внешний вид, необходимо задать параметр appearance непосредственно для компонента Avatar. Параметр
-        appearance, заданный для Avatar, имеет больший приоритет, чем параметр appearance, заданный для AvatarGroup.`,
+      скрытых элементов. Внешний вид такого аватара (цвет заливки и текста) контролируется с помощью параметра appearance, переданного в 
+      компонент AvatarGroup.\n\nЧтобы задать для всех аватаров, входящих в группу, единый внешний вид, достаточно задать 
+      для компонента AvatarGroup соответствующее значение параметра appearance. Если для каких-то аватаров 
+      нужно задать отличный от остальных внешний вид, необходимо задать параметр appearance непосредственно для компонента Avatar. Параметр
+      appearance, заданный для Avatar, имеет больший приоритет, чем параметр appearance, заданный для AvatarGroup.`,
       },
     },
   },
 };
+//</editor-fold>

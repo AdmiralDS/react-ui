@@ -29,7 +29,6 @@ const Description = () => <Desc>Поле ввода с возможностью 
 
 export default {
   title: 'Admiral-2.1/Input/NumberInput',
-  decorators: undefined,
   component: NumberInput,
   parameters: {
     docs: {
@@ -125,10 +124,8 @@ export default {
 const PlaygroundStory: StoryFn<typeof NumberInput> = (props) => (
   <NumberInputPlaygroundTemplate {...cleanUpProps(props)} />
 );
-
 export const Playground = {
   render: PlaygroundStory,
-
   parameters: {
     docs: {
       source: {
@@ -137,15 +134,12 @@ export const Playground = {
     },
   },
 };
-
 //</editor-fold>
 
 //<editor-fold desc="NumberInput. Задизейбленный.">
 const DisabledStory: StoryFn<typeof NumberInput> = (props) => <NumberInputDisabledTemplate {...cleanUpProps(props)} />;
-
 export const DisabledExample = {
   render: DisabledStory,
-
   parameters: {
     docs: {
       source: {
@@ -153,18 +147,14 @@ export const DisabledExample = {
       },
     },
   },
-
   name: 'NumberInput. Задизейбленный.',
 };
-
 //</editor-fold>
 
 //<editor-fold desc="NumberInput. Пример с minValue, maxValue.">
 const MinMaxStory: StoryFn<typeof NumberInput> = (props) => <NumberInputMinMaxTemplate {...cleanUpProps(props)} />;
-
 export const MinMaxExample = {
   render: MinMaxStory,
-
   parameters: {
     docs: {
       source: {
@@ -172,23 +162,19 @@ export const MinMaxExample = {
       },
       description: {
         story: `Максимальное, минимальное значение. При достижении лимита, кнопки “+” или “-” принимают состояние Disabled.
-        Если вручную введенное значение больше-меньше указанного диапазона, то оно принимает наиболее близкое
-        значение из возможных при выводе фокуса из поля.`,
+      Если вручную введенное значение больше-меньше указанного диапазона, то оно принимает наиболее близкое
+      значение из возможных при выводе фокуса из поля.`,
       },
     },
   },
-
   name: 'NumberInput. Пример с minValue, maxValue.',
 };
-
 //</editor-fold>
 
 //<editor-fold desc="NumberInput. Пример изменения настроек (suffix, precision, thousand).">
 const CustomStory: StoryFn<typeof NumberInput> = (props) => <NumberInputCustomisedTemplate {...cleanUpProps(props)} />;
-
 export const CustomExample = {
   render: CustomStory,
-
   parameters: {
     docs: {
       source: {
@@ -196,24 +182,20 @@ export const CustomExample = {
       },
       description: {
         story: `Пользователь может указать с помощью параметра precision (по умолчанию равен 2), 
-        с какой точностью компонент должен выводить число (сколько разрядов должно быть в дробной части числа). 
-        В этом случае при потере фокуса, если число содержит не все разряды в дробной части или дробная 
-        часть отсутствует, должна произойти корректировка значения и недостающее количество разрядов должно быть заполнено нулями.`,
+      с какой точностью компонент должен выводить число (сколько разрядов должно быть в дробной части числа). 
+      В этом случае при потере фокуса, если число содержит не все разряды в дробной части или дробная 
+      часть отсутствует, должна произойти корректировка значения и недостающее количество разрядов должно быть заполнено нулями.`,
       },
     },
   },
-
   name: 'NumberInput. Пример изменения настроек (suffix, precision, thousand).',
 };
-
 //</editor-fold>
 
 //<editor-fold desc="NumberInput. Примеры контролируемого инпута.">
 const ControlledStory: StoryFn<typeof NumberInput> = () => <NumberInputControlledTemplate />;
-
 export const ControlledExample = {
   render: ControlledStory,
-
   parameters: {
     docs: {
       source: {
@@ -221,14 +203,14 @@ export const ControlledExample = {
       },
       description: {
         story: `В случае использования контролируемого инпута в value необходимо передавать уже
-        отформатированную строку с разделителями тысяч (суффикс/префикс в value вносить не нужно).\n\nБиблиотека 
-        предоставляет утилиту fitToCurrency, котороая возвращает строку отформатированную в денежном формате. В качестве параметров 
-        данная утилита принимает value - значение, которое надо отформатировать, а также параметры precision, decimal, thousand. 
-        Также библиотека предоставляет утилиту clearValue, которая возвращает входную строку, из которой удалены все символы кроме 
-        цифр, символа decimal и минуса`,
+      отформатированную строку с разделителями тысяч (суффикс/префикс в value вносить не нужно).\n\nБиблиотека 
+      предоставляет утилиту fitToCurrency, которая возвращает строку отформатированную в денежном формате. В качестве параметров 
+      данная утилита принимает value - значение, которое надо отформатировать, а также параметры precision, decimal, thousand. 
+      Также библиотека предоставляет утилиту clearValue, которая возвращает входную строку, из которой удалены все символы кроме 
+      цифр, символа decimal и минуса`,
       },
     },
   },
-
   name: 'NumberInput. Примеры контролируемого инпута.',
 };
+//</editor-fold>

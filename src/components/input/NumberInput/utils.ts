@@ -63,6 +63,18 @@ export const validateThousand = (thousand: string): boolean => {
   return /[^a-zA-Z]*/.test(thousand);
 };
 
+/**
+ * Возвращает строку отформатированную в денежный формат
+ * @param value введенная строка
+ * @param precision точность (количество знаков после точки)
+ * @param decimal десятичный разделитель
+ * @param thousand разделитель между тысячами
+ * @param fillEmptyDecimals если строка должна быть отформатирована как десятичное число (т.е. precision > 0 и в строке есть decimal)
+ * и данный флаг fillEmptyDecimals установлен в true, то утилита fitToCurrency проверит, сколько знаков в числе после разделителя decimal
+ * и если таких знаков меньше, чем precision, недостающее количество будет заполнено нулями.
+ * Например, при precision={3} строка '3.9' превратится '3.900'
+ * @param minValue если minValue >= 0, то при форматировании из строки будут удалены знаки минуса
+ */
 export function fitToCurrency(
   value: string | number,
   precision: number,

@@ -1,12 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Button should render component 1`] = `
-.c3 {
+.c4 {
   vertical-align: top;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
   display: inline-flex;
+  gap: 8px;
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
@@ -25,7 +26,7 @@ exports[`Button should render component 1`] = `
   height: 24px;
 }
 
-.c3 > * {
+.c4 > * {
   display: inline-block;
   -webkit-flex: 0 1 auto;
   -ms-flex: 0 1 auto;
@@ -33,38 +34,40 @@ exports[`Button should render component 1`] = `
   white-space: nowrap;
 }
 
-.c3 > *:not(:first-child) {
-  margin-left: 8px;
-}
-
-.c3 > svg {
+.c4 > svg {
   width: 24px;
   height: 24px;
 }
 
-[data-dimension='s'] .c2 {
+[data-dimension='s'] .c3 {
   height: 20px;
 }
 
-[data-dimension='s'] .c2 > svg {
+[data-dimension='s'] .c3 > svg {
   width: 20px;
   height: 20px;
+}
+
+.c2 {
+  display: inline-block;
+  width: 2px;
 }
 
 .c1 {
   position: relative;
   box-sizing: border-box;
   display: inline-block;
+  white-space: nowrap;
   border: none;
   border-radius: 4px;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  vertical-align: center;
+  vertical-align: middle;
   pointer-events: all;
   padding: 0;
   height: 56px;
-  padding: 0 31px;
+  padding: 0 29px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -303,7 +306,7 @@ exports[`Button should render component 1`] = `
 .c1[data-dimension='xl'] {
   padding: 0;
   height: 56px;
-  padding: 0 31px;
+  padding: 0 29px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -315,17 +318,17 @@ exports[`Button should render component 1`] = `
 
 .c1[data-dimension='l'] {
   height: 48px;
-  padding: 0 23px;
+  padding: 0 21px;
 }
 
 .c1[data-dimension='m'] {
   height: 40px;
-  padding: 0 19px;
+  padding: 0 17px;
 }
 
 .c1[data-dimension='s'] {
   height: 32px;
-  padding: 0 15px;
+  padding: 0 13px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -347,19 +350,26 @@ exports[`Button should render component 1`] = `
     type="button"
   >
     <div
-      class="c2 c3"
+      class="c2"
+    />
+    <div
+      class="c3 c4"
+    />
+    <div
+      class="c2"
     />
   </button>
 </div>
 `;
 
 exports[`Button should render component with text 1`] = `
-.c3 {
+.c4 {
   vertical-align: top;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
   display: inline-flex;
+  gap: 8px;
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
@@ -378,7 +388,7 @@ exports[`Button should render component with text 1`] = `
   height: 24px;
 }
 
-.c3 > * {
+.c4 > * {
   display: inline-block;
   -webkit-flex: 0 1 auto;
   -ms-flex: 0 1 auto;
@@ -386,38 +396,40 @@ exports[`Button should render component with text 1`] = `
   white-space: nowrap;
 }
 
-.c3 > *:not(:first-child) {
-  margin-left: 8px;
-}
-
-.c3 > svg {
+.c4 > svg {
   width: 24px;
   height: 24px;
 }
 
-[data-dimension='s'] .c2 {
+[data-dimension='s'] .c3 {
   height: 20px;
 }
 
-[data-dimension='s'] .c2 > svg {
+[data-dimension='s'] .c3 > svg {
   width: 20px;
   height: 20px;
+}
+
+.c2 {
+  display: inline-block;
+  width: 2px;
 }
 
 .c1 {
   position: relative;
   box-sizing: border-box;
   display: inline-block;
+  white-space: nowrap;
   border: none;
   border-radius: 4px;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  vertical-align: center;
+  vertical-align: middle;
   pointer-events: all;
   padding: 0;
   height: 56px;
-  padding: 0 31px;
+  padding: 0 29px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -656,7 +668,7 @@ exports[`Button should render component with text 1`] = `
 .c1[data-dimension='xl'] {
   padding: 0;
   height: 56px;
-  padding: 0 31px;
+  padding: 0 29px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -668,17 +680,17 @@ exports[`Button should render component with text 1`] = `
 
 .c1[data-dimension='l'] {
   height: 48px;
-  padding: 0 23px;
+  padding: 0 21px;
 }
 
 .c1[data-dimension='m'] {
   height: 40px;
-  padding: 0 19px;
+  padding: 0 17px;
 }
 
 .c1[data-dimension='s'] {
   height: 32px;
-  padding: 0 15px;
+  padding: 0 13px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -700,12 +712,18 @@ exports[`Button should render component with text 1`] = `
     type="button"
   >
     <div
-      class="c2 c3"
+      class="c2"
+    />
+    <div
+      class="c3 c4"
     >
       <div>
         Button
       </div>
     </div>
+    <div
+      class="c2"
+    />
   </button>
 </div>
 `;

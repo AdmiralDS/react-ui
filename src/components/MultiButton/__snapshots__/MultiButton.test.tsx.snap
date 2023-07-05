@@ -3,12 +3,13 @@
 exports[`MultiButton should render component with disabled state 1`] = `
 Object {
   "asFragment": [Function],
-  "baseElement": .c5 {
+  "baseElement": .c6 {
   vertical-align: top;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
   display: inline-flex;
+  gap: 8px;
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
@@ -27,7 +28,7 @@ Object {
   height: 24px;
 }
 
-.c5 > * {
+.c6 > * {
   display: inline-block;
   -webkit-flex: 0 1 auto;
   -ms-flex: 0 1 auto;
@@ -35,38 +36,40 @@ Object {
   white-space: nowrap;
 }
 
-.c5 > *:not(:first-child) {
-  margin-left: 8px;
-}
-
-.c5 > svg {
+.c6 > svg {
   width: 24px;
   height: 24px;
 }
 
-[data-dimension='s'] .c4 {
+[data-dimension='s'] .c5 {
   height: 20px;
 }
 
-[data-dimension='s'] .c4 > svg {
+[data-dimension='s'] .c5 > svg {
   width: 20px;
   height: 20px;
+}
+
+.c4 {
+  display: inline-block;
+  width: 2px;
 }
 
 .c2 {
   position: relative;
   box-sizing: border-box;
   display: inline-block;
+  white-space: nowrap;
   border: none;
   border-radius: 4px;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  vertical-align: center;
+  vertical-align: middle;
   pointer-events: none;
   padding: 0;
   height: 56px;
-  padding: 0 31px;
+  padding: 0 29px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -305,7 +308,7 @@ Object {
 .c2[data-dimension='xl'] {
   padding: 0;
   height: 56px;
-  padding: 0 31px;
+  padding: 0 29px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -317,17 +320,17 @@ Object {
 
 .c2[data-dimension='l'] {
   height: 48px;
-  padding: 0 23px;
+  padding: 0 21px;
 }
 
 .c2[data-dimension='m'] {
   height: 40px;
-  padding: 0 19px;
+  padding: 0 17px;
 }
 
 .c2[data-dimension='s'] {
   height: 32px;
-  padding: 0 15px;
+  padding: 0 13px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -341,16 +344,17 @@ Object {
   cursor: pointer;
 }
 
-.c7 {
+.c8 {
   position: relative;
   box-sizing: border-box;
   display: inline-block;
+  white-space: nowrap;
   border: none;
   border-radius: 4px;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  vertical-align: center;
+  vertical-align: middle;
   pointer-events: none;
   padding: 0;
   height: 56px;
@@ -364,233 +368,233 @@ Object {
   text-rendering: geometricPrecision;
 }
 
-.c7[data-appearance~='primary'] {
+.c8[data-appearance~='primary'] {
   background-color: #0062FF;
   color: #FFFFFF;
   border: 1px solid #0062FF;
 }
 
-.c7[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'] *[fill^='#'] {
+.c8[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'] *[fill^='#'] {
   fill: #FFFFFF;
 }
 
-.c7[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary']:hover {
+.c8[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary']:hover {
   background-color: #0046E2;
   border-color: #0046E2;
 }
 
-.c7[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary']:active {
+.c8[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary']:active {
   background-color: #0132B0;
   border-color: #0132B0;
 }
 
-.c7[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'][data-appearance~='disabled'],
-.c7[data-appearance~='primary'].c7[data-appearance~='primary'].c7[data-appearance~='primary']:disabled {
+.c8[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'][data-appearance~='disabled'],
+.c8[data-appearance~='primary'].c8[data-appearance~='primary'].c8[data-appearance~='primary']:disabled {
   background-color: #E5E7EB;
   color: #B0B5BD;
   border-color: #E5E7EB;
 }
 
-.c7[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'][data-appearance~='disabled'].c1[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'][data-appearance~='disabled'].c1[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'][data-appearance~='disabled'] *[fill^='#'],
-.c7[data-appearance~='primary'].c7[data-appearance~='primary'].c7[data-appearance~='primary']:disabled.c7[data-appearance~='primary'].c7[data-appearance~='primary'].c7[data-appearance~='primary']:disabled.c7[data-appearance~='primary'].c7[data-appearance~='primary'].c7[data-appearance~='primary']:disabled *[fill^='#'] {
+.c8[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'][data-appearance~='disabled'].c1[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'][data-appearance~='disabled'].c1[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'][data-appearance~='disabled'] *[fill^='#'],
+.c8[data-appearance~='primary'].c8[data-appearance~='primary'].c8[data-appearance~='primary']:disabled.c8[data-appearance~='primary'].c8[data-appearance~='primary'].c8[data-appearance~='primary']:disabled.c8[data-appearance~='primary'].c8[data-appearance~='primary'].c8[data-appearance~='primary']:disabled *[fill^='#'] {
   fill: #B0B5BD;
 }
 
-.c7[data-appearance~='secondary'] {
+.c8[data-appearance~='secondary'] {
   background-color: transparent;
   color: #0062FF;
   border: 1px solid #0062FF;
 }
 
-.c7[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary'] *[fill^='#'] {
+.c8[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary'] *[fill^='#'] {
   fill: #0062FF;
 }
 
-.c7[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary']:hover {
+.c8[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary']:hover {
   background-color: #0000000D;
   color: #0062FF;
   border-color: #0062FF;
 }
 
-.c7[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary']:hover.c1[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary']:hover.c1[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary']:hover *[fill^='#'] {
+.c8[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary']:hover.c1[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary']:hover.c1[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary']:hover *[fill^='#'] {
   fill: #0062FF;
 }
 
-.c7[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary']:active {
+.c8[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary']:active {
   background-color: #0000001F;
   color: #0062FF;
   border-color: #0062FF;
 }
 
-.c7[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary']:active *[fill^='#'] {
+.c8[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary']:active *[fill^='#'] {
   fill: #0062FF;
 }
 
-.c7[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary'][data-appearance~='disabled'],
-.c7[data-appearance~='secondary'].c7[data-appearance~='secondary'].c7[data-appearance~='secondary']:disabled {
+.c8[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary'][data-appearance~='disabled'],
+.c8[data-appearance~='secondary'].c8[data-appearance~='secondary'].c8[data-appearance~='secondary']:disabled {
   background-color: transparent;
   color: #B0B5BD;
   border-color: #B0B5BD;
 }
 
-.c7[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary'][data-appearance~='disabled'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary'][data-appearance~='disabled'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary'][data-appearance~='disabled'] *[fill^='#'],
-.c7[data-appearance~='secondary'].c7[data-appearance~='secondary'].c7[data-appearance~='secondary']:disabled.c7[data-appearance~='secondary'].c7[data-appearance~='secondary'].c7[data-appearance~='secondary']:disabled.c7[data-appearance~='secondary'].c7[data-appearance~='secondary'].c7[data-appearance~='secondary']:disabled *[fill^='#'] {
+.c8[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary'][data-appearance~='disabled'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary'][data-appearance~='disabled'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary'][data-appearance~='disabled'] *[fill^='#'],
+.c8[data-appearance~='secondary'].c8[data-appearance~='secondary'].c8[data-appearance~='secondary']:disabled.c8[data-appearance~='secondary'].c8[data-appearance~='secondary'].c8[data-appearance~='secondary']:disabled.c8[data-appearance~='secondary'].c8[data-appearance~='secondary'].c8[data-appearance~='secondary']:disabled *[fill^='#'] {
   fill: #B0B5BD;
 }
 
-.c7[data-appearance~='ghost'] {
+.c8[data-appearance~='ghost'] {
   background-color: transparent;
   color: #0062FF;
   border: 1px solid transparent;
 }
 
-.c7[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost'] *[fill^='#'] {
+.c8[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost'] *[fill^='#'] {
   fill: #0062FF;
 }
 
-.c7[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost']:hover {
+.c8[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost']:hover {
   background-color: #0000000D;
   color: #0062FF;
   border-color: transparent;
 }
 
-.c7[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost']:hover *[fill^='#'] {
+.c8[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost']:hover *[fill^='#'] {
   fill: #0062FF;
 }
 
-.c7[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost']:active {
+.c8[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost']:active {
   background-color: #0000001F;
   color: #0062FF;
   border-color: transparent;
 }
 
-.c7[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost']:active *[fill^='#'] {
+.c8[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost']:active *[fill^='#'] {
   fill: #0062FF;
 }
 
-.c7[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost'][data-appearance~='disabled'],
-.c7[data-appearance~='ghost'].c7[data-appearance~='ghost'].c7[data-appearance~='ghost']:disabled {
+.c8[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost'][data-appearance~='disabled'],
+.c8[data-appearance~='ghost'].c8[data-appearance~='ghost'].c8[data-appearance~='ghost']:disabled {
   background-color: transparent;
   color: #B0B5BD;
   border-color: transparent;
 }
 
-.c7[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost'][data-appearance~='disabled'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost'][data-appearance~='disabled'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost'][data-appearance~='disabled'] *[fill^='#'],
-.c7[data-appearance~='ghost'].c7[data-appearance~='ghost'].c7[data-appearance~='ghost']:disabled.c7[data-appearance~='ghost'].c7[data-appearance~='ghost'].c7[data-appearance~='ghost']:disabled.c7[data-appearance~='ghost'].c7[data-appearance~='ghost'].c7[data-appearance~='ghost']:disabled *[fill^='#'] {
+.c8[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost'][data-appearance~='disabled'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost'][data-appearance~='disabled'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost'][data-appearance~='disabled'] *[fill^='#'],
+.c8[data-appearance~='ghost'].c8[data-appearance~='ghost'].c8[data-appearance~='ghost']:disabled.c8[data-appearance~='ghost'].c8[data-appearance~='ghost'].c8[data-appearance~='ghost']:disabled.c8[data-appearance~='ghost'].c8[data-appearance~='ghost'].c8[data-appearance~='ghost']:disabled *[fill^='#'] {
   fill: #B0B5BD;
 }
 
-.c7[data-appearance~='white'] {
+.c8[data-appearance~='white'] {
   background-color: transparent;
   color: #FFFFFF;
   border: 1px solid #FFFFFF;
 }
 
-.c7[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white'] *[fill^='#'] {
+.c8[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white'] *[fill^='#'] {
   fill: #FFFFFF;
 }
 
-.c7[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:hover {
+.c8[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:hover {
   background-color: #FFFFFF0F;
   color: #FFFFFF;
   border-color: #FFFFFF;
 }
 
-.c7[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:hover.c1[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:hover.c1[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:hover *[fill^='#'] {
+.c8[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:hover.c1[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:hover.c1[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:hover *[fill^='#'] {
   fill: #FFFFFF;
 }
 
-.c7[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:active {
+.c8[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:active {
   background-color: #FFFFFF1F;
   color: #FFFFFF;
   border-color: #FFFFFF;
 }
 
-.c7[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:active.c1[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:active.c1[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:active *[fill^='#'] {
+.c8[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:active.c1[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:active.c1[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:active *[fill^='#'] {
   fill: #FFFFFF;
 }
 
-.c7[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white'][data-appearance~='disabled'],
-.c7[data-appearance~='white'].c7[data-appearance~='white'].c7[data-appearance~='white']:disabled {
+.c8[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white'][data-appearance~='disabled'],
+.c8[data-appearance~='white'].c8[data-appearance~='white'].c8[data-appearance~='white']:disabled {
   border-color: #4E535D;
   color: #4E535D;
 }
 
-.c7[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white'][data-appearance~='disabled'].c1[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white'][data-appearance~='disabled'].c1[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white'][data-appearance~='disabled'] *[fill^='#'],
-.c7[data-appearance~='white'].c7[data-appearance~='white'].c7[data-appearance~='white']:disabled.c7[data-appearance~='white'].c7[data-appearance~='white'].c7[data-appearance~='white']:disabled.c7[data-appearance~='white'].c7[data-appearance~='white'].c7[data-appearance~='white']:disabled *[fill^='#'] {
+.c8[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white'][data-appearance~='disabled'].c1[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white'][data-appearance~='disabled'].c1[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white'][data-appearance~='disabled'] *[fill^='#'],
+.c8[data-appearance~='white'].c8[data-appearance~='white'].c8[data-appearance~='white']:disabled.c8[data-appearance~='white'].c8[data-appearance~='white'].c8[data-appearance~='white']:disabled.c8[data-appearance~='white'].c8[data-appearance~='white'].c8[data-appearance~='white']:disabled *[fill^='#'] {
   fill: #4E535D;
 }
 
-.c7[data-appearance~='danger'] {
+.c8[data-appearance~='danger'] {
   background-color: #D92020;
   color: #FFFFFF;
   border: 1px solid #D92020;
 }
 
-.c7[data-appearance~='danger'].c1[data-appearance~='danger'].c1[data-appearance~='danger'] *[fill^='#'] {
+.c8[data-appearance~='danger'].c1[data-appearance~='danger'].c1[data-appearance~='danger'] *[fill^='#'] {
   fill: #FFFFFF;
 }
 
-.c7[data-appearance~='danger'].c1[data-appearance~='danger'].c1[data-appearance~='danger']:hover {
+.c8[data-appearance~='danger'].c1[data-appearance~='danger'].c1[data-appearance~='danger']:hover {
   background-color: #BA1717;
   border-color: #BA1717;
 }
 
-.c7[data-appearance~='danger'].c1[data-appearance~='danger'].c1[data-appearance~='danger']:active {
+.c8[data-appearance~='danger'].c1[data-appearance~='danger'].c1[data-appearance~='danger']:active {
   background-color: #981111;
   border-color: #981111;
 }
 
-.c7[data-appearance~='danger'].c1[data-appearance~='danger'].c1[data-appearance~='danger'][data-appearance~='disabled'],
-.c7[data-appearance~='danger'].c7[data-appearance~='danger'].c7[data-appearance~='danger']:disabled {
+.c8[data-appearance~='danger'].c1[data-appearance~='danger'].c1[data-appearance~='danger'][data-appearance~='disabled'],
+.c8[data-appearance~='danger'].c8[data-appearance~='danger'].c8[data-appearance~='danger']:disabled {
   background-color: #E5E7EB;
   color: #B0B5BD;
   border-color: #E5E7EB;
 }
 
-.c7[data-appearance~='danger'].c1[data-appearance~='danger'].c1[data-appearance~='danger'][data-appearance~='disabled'].c1[data-appearance~='danger'].c1[data-appearance~='danger'].c1[data-appearance~='danger'][data-appearance~='disabled'].c1[data-appearance~='danger'].c1[data-appearance~='danger'].c1[data-appearance~='danger'][data-appearance~='disabled'] *[fill^='#'],
-.c7[data-appearance~='danger'].c7[data-appearance~='danger'].c7[data-appearance~='danger']:disabled.c7[data-appearance~='danger'].c7[data-appearance~='danger'].c7[data-appearance~='danger']:disabled.c7[data-appearance~='danger'].c7[data-appearance~='danger'].c7[data-appearance~='danger']:disabled *[fill^='#'] {
+.c8[data-appearance~='danger'].c1[data-appearance~='danger'].c1[data-appearance~='danger'][data-appearance~='disabled'].c1[data-appearance~='danger'].c1[data-appearance~='danger'].c1[data-appearance~='danger'][data-appearance~='disabled'].c1[data-appearance~='danger'].c1[data-appearance~='danger'].c1[data-appearance~='danger'][data-appearance~='disabled'] *[fill^='#'],
+.c8[data-appearance~='danger'].c8[data-appearance~='danger'].c8[data-appearance~='danger']:disabled.c8[data-appearance~='danger'].c8[data-appearance~='danger'].c8[data-appearance~='danger']:disabled.c8[data-appearance~='danger'].c8[data-appearance~='danger'].c8[data-appearance~='danger']:disabled *[fill^='#'] {
   fill: #B0B5BD;
 }
 
-.c7[data-appearance~='success'] {
+.c8[data-appearance~='success'] {
   background-color: #1BA049;
   color: #FFFFFF;
   border: 1px solid #1BA049;
 }
 
-.c7[data-appearance~='success'].c1[data-appearance~='success'].c1[data-appearance~='success'] *[fill^='#'] {
+.c8[data-appearance~='success'].c1[data-appearance~='success'].c1[data-appearance~='success'] *[fill^='#'] {
   fill: #FFFFFF;
 }
 
-.c7[data-appearance~='success'].c1[data-appearance~='success'].c1[data-appearance~='success']:hover {
+.c8[data-appearance~='success'].c1[data-appearance~='success'].c1[data-appearance~='success']:hover {
   background-color: #128238;
   border-color: #128238;
 }
 
-.c7[data-appearance~='success'].c1[data-appearance~='success'].c1[data-appearance~='success']:active {
+.c8[data-appearance~='success'].c1[data-appearance~='success'].c1[data-appearance~='success']:active {
   background-color: #0B682A;
   border-color: #0B682A;
 }
 
-.c7[data-appearance~='success'].c1[data-appearance~='success'].c1[data-appearance~='success'][data-appearance~='disabled'],
-.c7[data-appearance~='success'].c7[data-appearance~='success'].c7[data-appearance~='success']:disabled {
+.c8[data-appearance~='success'].c1[data-appearance~='success'].c1[data-appearance~='success'][data-appearance~='disabled'],
+.c8[data-appearance~='success'].c8[data-appearance~='success'].c8[data-appearance~='success']:disabled {
   background-color: #E5E7EB;
   color: #B0B5BD;
   border-color: #E5E7EB;
 }
 
-.c7[data-appearance~='success'].c1[data-appearance~='success'].c1[data-appearance~='success'][data-appearance~='disabled'].c1[data-appearance~='success'].c1[data-appearance~='success'].c1[data-appearance~='success'][data-appearance~='disabled'].c1[data-appearance~='success'].c1[data-appearance~='success'].c1[data-appearance~='success'][data-appearance~='disabled'] *[fill^='#'],
-.c7[data-appearance~='success'].c7[data-appearance~='success'].c7[data-appearance~='success']:disabled.c7[data-appearance~='success'].c7[data-appearance~='success'].c7[data-appearance~='success']:disabled.c7[data-appearance~='success'].c7[data-appearance~='success'].c7[data-appearance~='success']:disabled *[fill^='#'] {
+.c8[data-appearance~='success'].c1[data-appearance~='success'].c1[data-appearance~='success'][data-appearance~='disabled'].c1[data-appearance~='success'].c1[data-appearance~='success'].c1[data-appearance~='success'][data-appearance~='disabled'].c1[data-appearance~='success'].c1[data-appearance~='success'].c1[data-appearance~='success'][data-appearance~='disabled'] *[fill^='#'],
+.c8[data-appearance~='success'].c8[data-appearance~='success'].c8[data-appearance~='success']:disabled.c8[data-appearance~='success'].c8[data-appearance~='success'].c8[data-appearance~='success']:disabled.c8[data-appearance~='success'].c8[data-appearance~='success'].c8[data-appearance~='success']:disabled *[fill^='#'] {
   fill: #B0B5BD;
 }
 
-.c7:focus-visible {
+.c8:focus-visible {
   outline-offset: 2px;
   outline: #0062FF solid 2px;
 }
 
-.c7[data-dimension='xl'] {
+.c8[data-dimension='xl'] {
   padding: 0;
   height: 56px;
   width: 56px;
@@ -603,17 +607,17 @@ Object {
   text-rendering: geometricPrecision;
 }
 
-.c7[data-dimension='l'] {
+.c8[data-dimension='l'] {
   height: 48px;
   width: 48px;
 }
 
-.c7[data-dimension='m'] {
+.c8[data-dimension='m'] {
   height: 40px;
   width: 40px;
 }
 
-.c7[data-dimension='s'] {
+.c8[data-dimension='s'] {
   height: 32px;
   width: 32px;
   font-family: 'VTB Group UI',sans-serif;
@@ -625,11 +629,11 @@ Object {
   text-rendering: geometricPrecision;
 }
 
-.c7:hover {
+.c8:hover {
   cursor: pointer;
 }
 
-.c9 {
+.c10 {
   -webkit-transition: -webkit-transform 0.3s ease-in-out;
   -webkit-transition: transform 0.3s ease-in-out;
   transition: transform 0.3s ease-in-out;
@@ -638,19 +642,19 @@ Object {
   transform: rotate(0deg);
 }
 
-.c9 *[fill^='#'] {
+.c10 *[fill^='#'] {
   fill: #717681;
 }
 
-.c9:hover *[fill^='#'] {
+.c10:hover *[fill^='#'] {
   fill: #0046E2;
 }
 
-.c9[data-disabled] {
+.c10[data-disabled] {
   pointer-events: none;
 }
 
-.c9[data-disabled] *[fill^='#'] {
+.c10[data-disabled] *[fill^='#'] {
   fill: #B0B5BD;
 }
 
@@ -675,36 +679,36 @@ Object {
   outline: #0062FF solid 2px;
 }
 
-.c8[data-appearance~='primary'] {
+.c9[data-appearance~='primary'] {
   border-radius: 0 4px 4px 0;
 }
 
-.c8[data-appearance~='secondary'] {
+.c9[data-appearance~='secondary'] {
   border-left: none;
   border-radius: 0 4px 4px 0;
 }
 
-.c8:focus-visible {
+.c9:focus-visible {
   outline-offset: -4px;
 }
 
-.c8:focus-visible[data-appearance~='primary'] {
+.c9:focus-visible[data-appearance~='primary'] {
   outline: #FFFFFF solid 2px;
 }
 
-.c8:focus-visible[data-appearance~='secondary'] {
+.c9:focus-visible[data-appearance~='secondary'] {
   outline: #0062FF solid 2px;
 }
 
-.c6 {
+.c7 {
   width: 1px;
 }
 
-.c6[data-appearance~='primary'] {
+.c7[data-appearance~='primary'] {
   background-color: transparent;
 }
 
-.c6[data-appearance~='secondary'] {
+.c7[data-appearance~='secondary'] {
   background-color: #B0B5BD;
 }
 
@@ -730,45 +734,52 @@ Object {
           type="button"
         >
           <div
-            class="c4 c5"
+            class="c4"
+          />
+          <div
+            class="c5 c6"
           >
             <div>
               one
             </div>
           </div>
+          <div
+            class="c4"
+          />
         </button>
         <div
           aria-hidden="true"
-          class="c6"
+          class="c7"
           data-appearance="primary"
           disabled=""
         />
         <button
           aria-expanded="false"
-          class="c1 c7 c8 multi-button-menu-button-with-dropdown"
+          class="c1 c8 c9 multi-button-menu-button-with-dropdown"
           data-appearance="primary"
           data-dimension="l"
           disabled=""
           type="button"
         >
           <div
-            class="c4 c5"
+            class="c5 c6"
           >
             <div
               aria-hidden="true"
-              class="c9"
+              class="c10"
             />
           </div>
         </button>
       </div>
     </div>
   </body>,
-  "container": .c5 {
+  "container": .c6 {
   vertical-align: top;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
   display: inline-flex;
+  gap: 8px;
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
@@ -787,7 +798,7 @@ Object {
   height: 24px;
 }
 
-.c5 > * {
+.c6 > * {
   display: inline-block;
   -webkit-flex: 0 1 auto;
   -ms-flex: 0 1 auto;
@@ -795,38 +806,40 @@ Object {
   white-space: nowrap;
 }
 
-.c5 > *:not(:first-child) {
-  margin-left: 8px;
-}
-
-.c5 > svg {
+.c6 > svg {
   width: 24px;
   height: 24px;
 }
 
-[data-dimension='s'] .c4 {
+[data-dimension='s'] .c5 {
   height: 20px;
 }
 
-[data-dimension='s'] .c4 > svg {
+[data-dimension='s'] .c5 > svg {
   width: 20px;
   height: 20px;
+}
+
+.c4 {
+  display: inline-block;
+  width: 2px;
 }
 
 .c2 {
   position: relative;
   box-sizing: border-box;
   display: inline-block;
+  white-space: nowrap;
   border: none;
   border-radius: 4px;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  vertical-align: center;
+  vertical-align: middle;
   pointer-events: none;
   padding: 0;
   height: 56px;
-  padding: 0 31px;
+  padding: 0 29px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -1065,7 +1078,7 @@ Object {
 .c2[data-dimension='xl'] {
   padding: 0;
   height: 56px;
-  padding: 0 31px;
+  padding: 0 29px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -1077,17 +1090,17 @@ Object {
 
 .c2[data-dimension='l'] {
   height: 48px;
-  padding: 0 23px;
+  padding: 0 21px;
 }
 
 .c2[data-dimension='m'] {
   height: 40px;
-  padding: 0 19px;
+  padding: 0 17px;
 }
 
 .c2[data-dimension='s'] {
   height: 32px;
-  padding: 0 15px;
+  padding: 0 13px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -1101,16 +1114,17 @@ Object {
   cursor: pointer;
 }
 
-.c7 {
+.c8 {
   position: relative;
   box-sizing: border-box;
   display: inline-block;
+  white-space: nowrap;
   border: none;
   border-radius: 4px;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  vertical-align: center;
+  vertical-align: middle;
   pointer-events: none;
   padding: 0;
   height: 56px;
@@ -1124,233 +1138,233 @@ Object {
   text-rendering: geometricPrecision;
 }
 
-.c7[data-appearance~='primary'] {
+.c8[data-appearance~='primary'] {
   background-color: #0062FF;
   color: #FFFFFF;
   border: 1px solid #0062FF;
 }
 
-.c7[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'] *[fill^='#'] {
+.c8[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'] *[fill^='#'] {
   fill: #FFFFFF;
 }
 
-.c7[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary']:hover {
+.c8[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary']:hover {
   background-color: #0046E2;
   border-color: #0046E2;
 }
 
-.c7[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary']:active {
+.c8[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary']:active {
   background-color: #0132B0;
   border-color: #0132B0;
 }
 
-.c7[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'][data-appearance~='disabled'],
-.c7[data-appearance~='primary'].c7[data-appearance~='primary'].c7[data-appearance~='primary']:disabled {
+.c8[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'][data-appearance~='disabled'],
+.c8[data-appearance~='primary'].c8[data-appearance~='primary'].c8[data-appearance~='primary']:disabled {
   background-color: #E5E7EB;
   color: #B0B5BD;
   border-color: #E5E7EB;
 }
 
-.c7[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'][data-appearance~='disabled'].c1[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'][data-appearance~='disabled'].c1[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'][data-appearance~='disabled'] *[fill^='#'],
-.c7[data-appearance~='primary'].c7[data-appearance~='primary'].c7[data-appearance~='primary']:disabled.c7[data-appearance~='primary'].c7[data-appearance~='primary'].c7[data-appearance~='primary']:disabled.c7[data-appearance~='primary'].c7[data-appearance~='primary'].c7[data-appearance~='primary']:disabled *[fill^='#'] {
+.c8[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'][data-appearance~='disabled'].c1[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'][data-appearance~='disabled'].c1[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'][data-appearance~='disabled'] *[fill^='#'],
+.c8[data-appearance~='primary'].c8[data-appearance~='primary'].c8[data-appearance~='primary']:disabled.c8[data-appearance~='primary'].c8[data-appearance~='primary'].c8[data-appearance~='primary']:disabled.c8[data-appearance~='primary'].c8[data-appearance~='primary'].c8[data-appearance~='primary']:disabled *[fill^='#'] {
   fill: #B0B5BD;
 }
 
-.c7[data-appearance~='secondary'] {
+.c8[data-appearance~='secondary'] {
   background-color: transparent;
   color: #0062FF;
   border: 1px solid #0062FF;
 }
 
-.c7[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary'] *[fill^='#'] {
+.c8[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary'] *[fill^='#'] {
   fill: #0062FF;
 }
 
-.c7[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary']:hover {
+.c8[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary']:hover {
   background-color: #0000000D;
   color: #0062FF;
   border-color: #0062FF;
 }
 
-.c7[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary']:hover.c1[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary']:hover.c1[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary']:hover *[fill^='#'] {
+.c8[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary']:hover.c1[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary']:hover.c1[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary']:hover *[fill^='#'] {
   fill: #0062FF;
 }
 
-.c7[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary']:active {
+.c8[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary']:active {
   background-color: #0000001F;
   color: #0062FF;
   border-color: #0062FF;
 }
 
-.c7[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary']:active *[fill^='#'] {
+.c8[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary']:active *[fill^='#'] {
   fill: #0062FF;
 }
 
-.c7[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary'][data-appearance~='disabled'],
-.c7[data-appearance~='secondary'].c7[data-appearance~='secondary'].c7[data-appearance~='secondary']:disabled {
+.c8[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary'][data-appearance~='disabled'],
+.c8[data-appearance~='secondary'].c8[data-appearance~='secondary'].c8[data-appearance~='secondary']:disabled {
   background-color: transparent;
   color: #B0B5BD;
   border-color: #B0B5BD;
 }
 
-.c7[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary'][data-appearance~='disabled'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary'][data-appearance~='disabled'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary'][data-appearance~='disabled'] *[fill^='#'],
-.c7[data-appearance~='secondary'].c7[data-appearance~='secondary'].c7[data-appearance~='secondary']:disabled.c7[data-appearance~='secondary'].c7[data-appearance~='secondary'].c7[data-appearance~='secondary']:disabled.c7[data-appearance~='secondary'].c7[data-appearance~='secondary'].c7[data-appearance~='secondary']:disabled *[fill^='#'] {
+.c8[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary'][data-appearance~='disabled'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary'][data-appearance~='disabled'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary'][data-appearance~='disabled'] *[fill^='#'],
+.c8[data-appearance~='secondary'].c8[data-appearance~='secondary'].c8[data-appearance~='secondary']:disabled.c8[data-appearance~='secondary'].c8[data-appearance~='secondary'].c8[data-appearance~='secondary']:disabled.c8[data-appearance~='secondary'].c8[data-appearance~='secondary'].c8[data-appearance~='secondary']:disabled *[fill^='#'] {
   fill: #B0B5BD;
 }
 
-.c7[data-appearance~='ghost'] {
+.c8[data-appearance~='ghost'] {
   background-color: transparent;
   color: #0062FF;
   border: 1px solid transparent;
 }
 
-.c7[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost'] *[fill^='#'] {
+.c8[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost'] *[fill^='#'] {
   fill: #0062FF;
 }
 
-.c7[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost']:hover {
+.c8[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost']:hover {
   background-color: #0000000D;
   color: #0062FF;
   border-color: transparent;
 }
 
-.c7[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost']:hover *[fill^='#'] {
+.c8[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost']:hover *[fill^='#'] {
   fill: #0062FF;
 }
 
-.c7[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost']:active {
+.c8[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost']:active {
   background-color: #0000001F;
   color: #0062FF;
   border-color: transparent;
 }
 
-.c7[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost']:active *[fill^='#'] {
+.c8[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost']:active *[fill^='#'] {
   fill: #0062FF;
 }
 
-.c7[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost'][data-appearance~='disabled'],
-.c7[data-appearance~='ghost'].c7[data-appearance~='ghost'].c7[data-appearance~='ghost']:disabled {
+.c8[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost'][data-appearance~='disabled'],
+.c8[data-appearance~='ghost'].c8[data-appearance~='ghost'].c8[data-appearance~='ghost']:disabled {
   background-color: transparent;
   color: #B0B5BD;
   border-color: transparent;
 }
 
-.c7[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost'][data-appearance~='disabled'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost'][data-appearance~='disabled'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost'][data-appearance~='disabled'] *[fill^='#'],
-.c7[data-appearance~='ghost'].c7[data-appearance~='ghost'].c7[data-appearance~='ghost']:disabled.c7[data-appearance~='ghost'].c7[data-appearance~='ghost'].c7[data-appearance~='ghost']:disabled.c7[data-appearance~='ghost'].c7[data-appearance~='ghost'].c7[data-appearance~='ghost']:disabled *[fill^='#'] {
+.c8[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost'][data-appearance~='disabled'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost'][data-appearance~='disabled'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost'][data-appearance~='disabled'] *[fill^='#'],
+.c8[data-appearance~='ghost'].c8[data-appearance~='ghost'].c8[data-appearance~='ghost']:disabled.c8[data-appearance~='ghost'].c8[data-appearance~='ghost'].c8[data-appearance~='ghost']:disabled.c8[data-appearance~='ghost'].c8[data-appearance~='ghost'].c8[data-appearance~='ghost']:disabled *[fill^='#'] {
   fill: #B0B5BD;
 }
 
-.c7[data-appearance~='white'] {
+.c8[data-appearance~='white'] {
   background-color: transparent;
   color: #FFFFFF;
   border: 1px solid #FFFFFF;
 }
 
-.c7[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white'] *[fill^='#'] {
+.c8[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white'] *[fill^='#'] {
   fill: #FFFFFF;
 }
 
-.c7[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:hover {
+.c8[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:hover {
   background-color: #FFFFFF0F;
   color: #FFFFFF;
   border-color: #FFFFFF;
 }
 
-.c7[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:hover.c1[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:hover.c1[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:hover *[fill^='#'] {
+.c8[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:hover.c1[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:hover.c1[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:hover *[fill^='#'] {
   fill: #FFFFFF;
 }
 
-.c7[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:active {
+.c8[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:active {
   background-color: #FFFFFF1F;
   color: #FFFFFF;
   border-color: #FFFFFF;
 }
 
-.c7[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:active.c1[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:active.c1[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:active *[fill^='#'] {
+.c8[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:active.c1[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:active.c1[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:active *[fill^='#'] {
   fill: #FFFFFF;
 }
 
-.c7[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white'][data-appearance~='disabled'],
-.c7[data-appearance~='white'].c7[data-appearance~='white'].c7[data-appearance~='white']:disabled {
+.c8[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white'][data-appearance~='disabled'],
+.c8[data-appearance~='white'].c8[data-appearance~='white'].c8[data-appearance~='white']:disabled {
   border-color: #4E535D;
   color: #4E535D;
 }
 
-.c7[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white'][data-appearance~='disabled'].c1[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white'][data-appearance~='disabled'].c1[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white'][data-appearance~='disabled'] *[fill^='#'],
-.c7[data-appearance~='white'].c7[data-appearance~='white'].c7[data-appearance~='white']:disabled.c7[data-appearance~='white'].c7[data-appearance~='white'].c7[data-appearance~='white']:disabled.c7[data-appearance~='white'].c7[data-appearance~='white'].c7[data-appearance~='white']:disabled *[fill^='#'] {
+.c8[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white'][data-appearance~='disabled'].c1[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white'][data-appearance~='disabled'].c1[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white'][data-appearance~='disabled'] *[fill^='#'],
+.c8[data-appearance~='white'].c8[data-appearance~='white'].c8[data-appearance~='white']:disabled.c8[data-appearance~='white'].c8[data-appearance~='white'].c8[data-appearance~='white']:disabled.c8[data-appearance~='white'].c8[data-appearance~='white'].c8[data-appearance~='white']:disabled *[fill^='#'] {
   fill: #4E535D;
 }
 
-.c7[data-appearance~='danger'] {
+.c8[data-appearance~='danger'] {
   background-color: #D92020;
   color: #FFFFFF;
   border: 1px solid #D92020;
 }
 
-.c7[data-appearance~='danger'].c1[data-appearance~='danger'].c1[data-appearance~='danger'] *[fill^='#'] {
+.c8[data-appearance~='danger'].c1[data-appearance~='danger'].c1[data-appearance~='danger'] *[fill^='#'] {
   fill: #FFFFFF;
 }
 
-.c7[data-appearance~='danger'].c1[data-appearance~='danger'].c1[data-appearance~='danger']:hover {
+.c8[data-appearance~='danger'].c1[data-appearance~='danger'].c1[data-appearance~='danger']:hover {
   background-color: #BA1717;
   border-color: #BA1717;
 }
 
-.c7[data-appearance~='danger'].c1[data-appearance~='danger'].c1[data-appearance~='danger']:active {
+.c8[data-appearance~='danger'].c1[data-appearance~='danger'].c1[data-appearance~='danger']:active {
   background-color: #981111;
   border-color: #981111;
 }
 
-.c7[data-appearance~='danger'].c1[data-appearance~='danger'].c1[data-appearance~='danger'][data-appearance~='disabled'],
-.c7[data-appearance~='danger'].c7[data-appearance~='danger'].c7[data-appearance~='danger']:disabled {
+.c8[data-appearance~='danger'].c1[data-appearance~='danger'].c1[data-appearance~='danger'][data-appearance~='disabled'],
+.c8[data-appearance~='danger'].c8[data-appearance~='danger'].c8[data-appearance~='danger']:disabled {
   background-color: #E5E7EB;
   color: #B0B5BD;
   border-color: #E5E7EB;
 }
 
-.c7[data-appearance~='danger'].c1[data-appearance~='danger'].c1[data-appearance~='danger'][data-appearance~='disabled'].c1[data-appearance~='danger'].c1[data-appearance~='danger'].c1[data-appearance~='danger'][data-appearance~='disabled'].c1[data-appearance~='danger'].c1[data-appearance~='danger'].c1[data-appearance~='danger'][data-appearance~='disabled'] *[fill^='#'],
-.c7[data-appearance~='danger'].c7[data-appearance~='danger'].c7[data-appearance~='danger']:disabled.c7[data-appearance~='danger'].c7[data-appearance~='danger'].c7[data-appearance~='danger']:disabled.c7[data-appearance~='danger'].c7[data-appearance~='danger'].c7[data-appearance~='danger']:disabled *[fill^='#'] {
+.c8[data-appearance~='danger'].c1[data-appearance~='danger'].c1[data-appearance~='danger'][data-appearance~='disabled'].c1[data-appearance~='danger'].c1[data-appearance~='danger'].c1[data-appearance~='danger'][data-appearance~='disabled'].c1[data-appearance~='danger'].c1[data-appearance~='danger'].c1[data-appearance~='danger'][data-appearance~='disabled'] *[fill^='#'],
+.c8[data-appearance~='danger'].c8[data-appearance~='danger'].c8[data-appearance~='danger']:disabled.c8[data-appearance~='danger'].c8[data-appearance~='danger'].c8[data-appearance~='danger']:disabled.c8[data-appearance~='danger'].c8[data-appearance~='danger'].c8[data-appearance~='danger']:disabled *[fill^='#'] {
   fill: #B0B5BD;
 }
 
-.c7[data-appearance~='success'] {
+.c8[data-appearance~='success'] {
   background-color: #1BA049;
   color: #FFFFFF;
   border: 1px solid #1BA049;
 }
 
-.c7[data-appearance~='success'].c1[data-appearance~='success'].c1[data-appearance~='success'] *[fill^='#'] {
+.c8[data-appearance~='success'].c1[data-appearance~='success'].c1[data-appearance~='success'] *[fill^='#'] {
   fill: #FFFFFF;
 }
 
-.c7[data-appearance~='success'].c1[data-appearance~='success'].c1[data-appearance~='success']:hover {
+.c8[data-appearance~='success'].c1[data-appearance~='success'].c1[data-appearance~='success']:hover {
   background-color: #128238;
   border-color: #128238;
 }
 
-.c7[data-appearance~='success'].c1[data-appearance~='success'].c1[data-appearance~='success']:active {
+.c8[data-appearance~='success'].c1[data-appearance~='success'].c1[data-appearance~='success']:active {
   background-color: #0B682A;
   border-color: #0B682A;
 }
 
-.c7[data-appearance~='success'].c1[data-appearance~='success'].c1[data-appearance~='success'][data-appearance~='disabled'],
-.c7[data-appearance~='success'].c7[data-appearance~='success'].c7[data-appearance~='success']:disabled {
+.c8[data-appearance~='success'].c1[data-appearance~='success'].c1[data-appearance~='success'][data-appearance~='disabled'],
+.c8[data-appearance~='success'].c8[data-appearance~='success'].c8[data-appearance~='success']:disabled {
   background-color: #E5E7EB;
   color: #B0B5BD;
   border-color: #E5E7EB;
 }
 
-.c7[data-appearance~='success'].c1[data-appearance~='success'].c1[data-appearance~='success'][data-appearance~='disabled'].c1[data-appearance~='success'].c1[data-appearance~='success'].c1[data-appearance~='success'][data-appearance~='disabled'].c1[data-appearance~='success'].c1[data-appearance~='success'].c1[data-appearance~='success'][data-appearance~='disabled'] *[fill^='#'],
-.c7[data-appearance~='success'].c7[data-appearance~='success'].c7[data-appearance~='success']:disabled.c7[data-appearance~='success'].c7[data-appearance~='success'].c7[data-appearance~='success']:disabled.c7[data-appearance~='success'].c7[data-appearance~='success'].c7[data-appearance~='success']:disabled *[fill^='#'] {
+.c8[data-appearance~='success'].c1[data-appearance~='success'].c1[data-appearance~='success'][data-appearance~='disabled'].c1[data-appearance~='success'].c1[data-appearance~='success'].c1[data-appearance~='success'][data-appearance~='disabled'].c1[data-appearance~='success'].c1[data-appearance~='success'].c1[data-appearance~='success'][data-appearance~='disabled'] *[fill^='#'],
+.c8[data-appearance~='success'].c8[data-appearance~='success'].c8[data-appearance~='success']:disabled.c8[data-appearance~='success'].c8[data-appearance~='success'].c8[data-appearance~='success']:disabled.c8[data-appearance~='success'].c8[data-appearance~='success'].c8[data-appearance~='success']:disabled *[fill^='#'] {
   fill: #B0B5BD;
 }
 
-.c7:focus-visible {
+.c8:focus-visible {
   outline-offset: 2px;
   outline: #0062FF solid 2px;
 }
 
-.c7[data-dimension='xl'] {
+.c8[data-dimension='xl'] {
   padding: 0;
   height: 56px;
   width: 56px;
@@ -1363,17 +1377,17 @@ Object {
   text-rendering: geometricPrecision;
 }
 
-.c7[data-dimension='l'] {
+.c8[data-dimension='l'] {
   height: 48px;
   width: 48px;
 }
 
-.c7[data-dimension='m'] {
+.c8[data-dimension='m'] {
   height: 40px;
   width: 40px;
 }
 
-.c7[data-dimension='s'] {
+.c8[data-dimension='s'] {
   height: 32px;
   width: 32px;
   font-family: 'VTB Group UI',sans-serif;
@@ -1385,11 +1399,11 @@ Object {
   text-rendering: geometricPrecision;
 }
 
-.c7:hover {
+.c8:hover {
   cursor: pointer;
 }
 
-.c9 {
+.c10 {
   -webkit-transition: -webkit-transform 0.3s ease-in-out;
   -webkit-transition: transform 0.3s ease-in-out;
   transition: transform 0.3s ease-in-out;
@@ -1398,19 +1412,19 @@ Object {
   transform: rotate(0deg);
 }
 
-.c9 *[fill^='#'] {
+.c10 *[fill^='#'] {
   fill: #717681;
 }
 
-.c9:hover *[fill^='#'] {
+.c10:hover *[fill^='#'] {
   fill: #0046E2;
 }
 
-.c9[data-disabled] {
+.c10[data-disabled] {
   pointer-events: none;
 }
 
-.c9[data-disabled] *[fill^='#'] {
+.c10[data-disabled] *[fill^='#'] {
   fill: #B0B5BD;
 }
 
@@ -1435,36 +1449,36 @@ Object {
   outline: #0062FF solid 2px;
 }
 
-.c8[data-appearance~='primary'] {
+.c9[data-appearance~='primary'] {
   border-radius: 0 4px 4px 0;
 }
 
-.c8[data-appearance~='secondary'] {
+.c9[data-appearance~='secondary'] {
   border-left: none;
   border-radius: 0 4px 4px 0;
 }
 
-.c8:focus-visible {
+.c9:focus-visible {
   outline-offset: -4px;
 }
 
-.c8:focus-visible[data-appearance~='primary'] {
+.c9:focus-visible[data-appearance~='primary'] {
   outline: #FFFFFF solid 2px;
 }
 
-.c8:focus-visible[data-appearance~='secondary'] {
+.c9:focus-visible[data-appearance~='secondary'] {
   outline: #0062FF solid 2px;
 }
 
-.c6 {
+.c7 {
   width: 1px;
 }
 
-.c6[data-appearance~='primary'] {
+.c7[data-appearance~='primary'] {
   background-color: transparent;
 }
 
-.c6[data-appearance~='secondary'] {
+.c7[data-appearance~='secondary'] {
   background-color: #B0B5BD;
 }
 
@@ -1489,33 +1503,39 @@ Object {
         type="button"
       >
         <div
-          class="c4 c5"
+          class="c4"
+        />
+        <div
+          class="c5 c6"
         >
           <div>
             one
           </div>
         </div>
+        <div
+          class="c4"
+        />
       </button>
       <div
         aria-hidden="true"
-        class="c6"
+        class="c7"
         data-appearance="primary"
         disabled=""
       />
       <button
         aria-expanded="false"
-        class="c1 c7 c8 multi-button-menu-button-with-dropdown"
+        class="c1 c8 c9 multi-button-menu-button-with-dropdown"
         data-appearance="primary"
         data-dimension="l"
         disabled=""
         type="button"
       >
         <div
-          class="c4 c5"
+          class="c5 c6"
         >
           <div
             aria-hidden="true"
-            class="c9"
+            class="c10"
           />
         </div>
       </button>
@@ -1578,12 +1598,13 @@ Object {
 exports[`MultiButton should render component with primary appearance 1`] = `
 Object {
   "asFragment": [Function],
-  "baseElement": .c5 {
+  "baseElement": .c6 {
   vertical-align: top;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
   display: inline-flex;
+  gap: 8px;
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
@@ -1602,7 +1623,7 @@ Object {
   height: 24px;
 }
 
-.c5 > * {
+.c6 > * {
   display: inline-block;
   -webkit-flex: 0 1 auto;
   -ms-flex: 0 1 auto;
@@ -1610,38 +1631,40 @@ Object {
   white-space: nowrap;
 }
 
-.c5 > *:not(:first-child) {
-  margin-left: 8px;
-}
-
-.c5 > svg {
+.c6 > svg {
   width: 24px;
   height: 24px;
 }
 
-[data-dimension='s'] .c4 {
+[data-dimension='s'] .c5 {
   height: 20px;
 }
 
-[data-dimension='s'] .c4 > svg {
+[data-dimension='s'] .c5 > svg {
   width: 20px;
   height: 20px;
+}
+
+.c4 {
+  display: inline-block;
+  width: 2px;
 }
 
 .c2 {
   position: relative;
   box-sizing: border-box;
   display: inline-block;
+  white-space: nowrap;
   border: none;
   border-radius: 4px;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  vertical-align: center;
+  vertical-align: middle;
   pointer-events: all;
   padding: 0;
   height: 56px;
-  padding: 0 31px;
+  padding: 0 29px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -1880,7 +1903,7 @@ Object {
 .c2[data-dimension='xl'] {
   padding: 0;
   height: 56px;
-  padding: 0 31px;
+  padding: 0 29px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -1892,17 +1915,17 @@ Object {
 
 .c2[data-dimension='l'] {
   height: 48px;
-  padding: 0 23px;
+  padding: 0 21px;
 }
 
 .c2[data-dimension='m'] {
   height: 40px;
-  padding: 0 19px;
+  padding: 0 17px;
 }
 
 .c2[data-dimension='s'] {
   height: 32px;
-  padding: 0 15px;
+  padding: 0 13px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -1916,16 +1939,17 @@ Object {
   cursor: pointer;
 }
 
-.c7 {
+.c8 {
   position: relative;
   box-sizing: border-box;
   display: inline-block;
+  white-space: nowrap;
   border: none;
   border-radius: 4px;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  vertical-align: center;
+  vertical-align: middle;
   pointer-events: all;
   padding: 0;
   height: 56px;
@@ -1939,233 +1963,233 @@ Object {
   text-rendering: geometricPrecision;
 }
 
-.c7[data-appearance~='primary'] {
+.c8[data-appearance~='primary'] {
   background-color: #0062FF;
   color: #FFFFFF;
   border: 1px solid #0062FF;
 }
 
-.c7[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'] *[fill^='#'] {
+.c8[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'] *[fill^='#'] {
   fill: #FFFFFF;
 }
 
-.c7[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary']:hover {
+.c8[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary']:hover {
   background-color: #0046E2;
   border-color: #0046E2;
 }
 
-.c7[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary']:active {
+.c8[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary']:active {
   background-color: #0132B0;
   border-color: #0132B0;
 }
 
-.c7[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'][data-appearance~='disabled'],
-.c7[data-appearance~='primary'].c7[data-appearance~='primary'].c7[data-appearance~='primary']:disabled {
+.c8[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'][data-appearance~='disabled'],
+.c8[data-appearance~='primary'].c8[data-appearance~='primary'].c8[data-appearance~='primary']:disabled {
   background-color: #E5E7EB;
   color: #B0B5BD;
   border-color: #E5E7EB;
 }
 
-.c7[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'][data-appearance~='disabled'].c1[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'][data-appearance~='disabled'].c1[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'][data-appearance~='disabled'] *[fill^='#'],
-.c7[data-appearance~='primary'].c7[data-appearance~='primary'].c7[data-appearance~='primary']:disabled.c7[data-appearance~='primary'].c7[data-appearance~='primary'].c7[data-appearance~='primary']:disabled.c7[data-appearance~='primary'].c7[data-appearance~='primary'].c7[data-appearance~='primary']:disabled *[fill^='#'] {
+.c8[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'][data-appearance~='disabled'].c1[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'][data-appearance~='disabled'].c1[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'][data-appearance~='disabled'] *[fill^='#'],
+.c8[data-appearance~='primary'].c8[data-appearance~='primary'].c8[data-appearance~='primary']:disabled.c8[data-appearance~='primary'].c8[data-appearance~='primary'].c8[data-appearance~='primary']:disabled.c8[data-appearance~='primary'].c8[data-appearance~='primary'].c8[data-appearance~='primary']:disabled *[fill^='#'] {
   fill: #B0B5BD;
 }
 
-.c7[data-appearance~='secondary'] {
+.c8[data-appearance~='secondary'] {
   background-color: transparent;
   color: #0062FF;
   border: 1px solid #0062FF;
 }
 
-.c7[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary'] *[fill^='#'] {
+.c8[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary'] *[fill^='#'] {
   fill: #0062FF;
 }
 
-.c7[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary']:hover {
+.c8[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary']:hover {
   background-color: #0000000D;
   color: #0062FF;
   border-color: #0062FF;
 }
 
-.c7[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary']:hover.c1[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary']:hover.c1[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary']:hover *[fill^='#'] {
+.c8[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary']:hover.c1[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary']:hover.c1[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary']:hover *[fill^='#'] {
   fill: #0062FF;
 }
 
-.c7[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary']:active {
+.c8[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary']:active {
   background-color: #0000001F;
   color: #0062FF;
   border-color: #0062FF;
 }
 
-.c7[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary']:active *[fill^='#'] {
+.c8[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary']:active *[fill^='#'] {
   fill: #0062FF;
 }
 
-.c7[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary'][data-appearance~='disabled'],
-.c7[data-appearance~='secondary'].c7[data-appearance~='secondary'].c7[data-appearance~='secondary']:disabled {
+.c8[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary'][data-appearance~='disabled'],
+.c8[data-appearance~='secondary'].c8[data-appearance~='secondary'].c8[data-appearance~='secondary']:disabled {
   background-color: transparent;
   color: #B0B5BD;
   border-color: #B0B5BD;
 }
 
-.c7[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary'][data-appearance~='disabled'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary'][data-appearance~='disabled'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary'][data-appearance~='disabled'] *[fill^='#'],
-.c7[data-appearance~='secondary'].c7[data-appearance~='secondary'].c7[data-appearance~='secondary']:disabled.c7[data-appearance~='secondary'].c7[data-appearance~='secondary'].c7[data-appearance~='secondary']:disabled.c7[data-appearance~='secondary'].c7[data-appearance~='secondary'].c7[data-appearance~='secondary']:disabled *[fill^='#'] {
+.c8[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary'][data-appearance~='disabled'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary'][data-appearance~='disabled'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary'][data-appearance~='disabled'] *[fill^='#'],
+.c8[data-appearance~='secondary'].c8[data-appearance~='secondary'].c8[data-appearance~='secondary']:disabled.c8[data-appearance~='secondary'].c8[data-appearance~='secondary'].c8[data-appearance~='secondary']:disabled.c8[data-appearance~='secondary'].c8[data-appearance~='secondary'].c8[data-appearance~='secondary']:disabled *[fill^='#'] {
   fill: #B0B5BD;
 }
 
-.c7[data-appearance~='ghost'] {
+.c8[data-appearance~='ghost'] {
   background-color: transparent;
   color: #0062FF;
   border: 1px solid transparent;
 }
 
-.c7[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost'] *[fill^='#'] {
+.c8[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost'] *[fill^='#'] {
   fill: #0062FF;
 }
 
-.c7[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost']:hover {
+.c8[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost']:hover {
   background-color: #0000000D;
   color: #0062FF;
   border-color: transparent;
 }
 
-.c7[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost']:hover *[fill^='#'] {
+.c8[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost']:hover *[fill^='#'] {
   fill: #0062FF;
 }
 
-.c7[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost']:active {
+.c8[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost']:active {
   background-color: #0000001F;
   color: #0062FF;
   border-color: transparent;
 }
 
-.c7[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost']:active *[fill^='#'] {
+.c8[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost']:active *[fill^='#'] {
   fill: #0062FF;
 }
 
-.c7[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost'][data-appearance~='disabled'],
-.c7[data-appearance~='ghost'].c7[data-appearance~='ghost'].c7[data-appearance~='ghost']:disabled {
+.c8[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost'][data-appearance~='disabled'],
+.c8[data-appearance~='ghost'].c8[data-appearance~='ghost'].c8[data-appearance~='ghost']:disabled {
   background-color: transparent;
   color: #B0B5BD;
   border-color: transparent;
 }
 
-.c7[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost'][data-appearance~='disabled'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost'][data-appearance~='disabled'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost'][data-appearance~='disabled'] *[fill^='#'],
-.c7[data-appearance~='ghost'].c7[data-appearance~='ghost'].c7[data-appearance~='ghost']:disabled.c7[data-appearance~='ghost'].c7[data-appearance~='ghost'].c7[data-appearance~='ghost']:disabled.c7[data-appearance~='ghost'].c7[data-appearance~='ghost'].c7[data-appearance~='ghost']:disabled *[fill^='#'] {
+.c8[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost'][data-appearance~='disabled'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost'][data-appearance~='disabled'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost'][data-appearance~='disabled'] *[fill^='#'],
+.c8[data-appearance~='ghost'].c8[data-appearance~='ghost'].c8[data-appearance~='ghost']:disabled.c8[data-appearance~='ghost'].c8[data-appearance~='ghost'].c8[data-appearance~='ghost']:disabled.c8[data-appearance~='ghost'].c8[data-appearance~='ghost'].c8[data-appearance~='ghost']:disabled *[fill^='#'] {
   fill: #B0B5BD;
 }
 
-.c7[data-appearance~='white'] {
+.c8[data-appearance~='white'] {
   background-color: transparent;
   color: #FFFFFF;
   border: 1px solid #FFFFFF;
 }
 
-.c7[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white'] *[fill^='#'] {
+.c8[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white'] *[fill^='#'] {
   fill: #FFFFFF;
 }
 
-.c7[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:hover {
+.c8[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:hover {
   background-color: #FFFFFF0F;
   color: #FFFFFF;
   border-color: #FFFFFF;
 }
 
-.c7[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:hover.c1[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:hover.c1[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:hover *[fill^='#'] {
+.c8[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:hover.c1[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:hover.c1[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:hover *[fill^='#'] {
   fill: #FFFFFF;
 }
 
-.c7[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:active {
+.c8[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:active {
   background-color: #FFFFFF1F;
   color: #FFFFFF;
   border-color: #FFFFFF;
 }
 
-.c7[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:active.c1[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:active.c1[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:active *[fill^='#'] {
+.c8[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:active.c1[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:active.c1[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:active *[fill^='#'] {
   fill: #FFFFFF;
 }
 
-.c7[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white'][data-appearance~='disabled'],
-.c7[data-appearance~='white'].c7[data-appearance~='white'].c7[data-appearance~='white']:disabled {
+.c8[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white'][data-appearance~='disabled'],
+.c8[data-appearance~='white'].c8[data-appearance~='white'].c8[data-appearance~='white']:disabled {
   border-color: #4E535D;
   color: #4E535D;
 }
 
-.c7[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white'][data-appearance~='disabled'].c1[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white'][data-appearance~='disabled'].c1[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white'][data-appearance~='disabled'] *[fill^='#'],
-.c7[data-appearance~='white'].c7[data-appearance~='white'].c7[data-appearance~='white']:disabled.c7[data-appearance~='white'].c7[data-appearance~='white'].c7[data-appearance~='white']:disabled.c7[data-appearance~='white'].c7[data-appearance~='white'].c7[data-appearance~='white']:disabled *[fill^='#'] {
+.c8[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white'][data-appearance~='disabled'].c1[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white'][data-appearance~='disabled'].c1[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white'][data-appearance~='disabled'] *[fill^='#'],
+.c8[data-appearance~='white'].c8[data-appearance~='white'].c8[data-appearance~='white']:disabled.c8[data-appearance~='white'].c8[data-appearance~='white'].c8[data-appearance~='white']:disabled.c8[data-appearance~='white'].c8[data-appearance~='white'].c8[data-appearance~='white']:disabled *[fill^='#'] {
   fill: #4E535D;
 }
 
-.c7[data-appearance~='danger'] {
+.c8[data-appearance~='danger'] {
   background-color: #D92020;
   color: #FFFFFF;
   border: 1px solid #D92020;
 }
 
-.c7[data-appearance~='danger'].c1[data-appearance~='danger'].c1[data-appearance~='danger'] *[fill^='#'] {
+.c8[data-appearance~='danger'].c1[data-appearance~='danger'].c1[data-appearance~='danger'] *[fill^='#'] {
   fill: #FFFFFF;
 }
 
-.c7[data-appearance~='danger'].c1[data-appearance~='danger'].c1[data-appearance~='danger']:hover {
+.c8[data-appearance~='danger'].c1[data-appearance~='danger'].c1[data-appearance~='danger']:hover {
   background-color: #BA1717;
   border-color: #BA1717;
 }
 
-.c7[data-appearance~='danger'].c1[data-appearance~='danger'].c1[data-appearance~='danger']:active {
+.c8[data-appearance~='danger'].c1[data-appearance~='danger'].c1[data-appearance~='danger']:active {
   background-color: #981111;
   border-color: #981111;
 }
 
-.c7[data-appearance~='danger'].c1[data-appearance~='danger'].c1[data-appearance~='danger'][data-appearance~='disabled'],
-.c7[data-appearance~='danger'].c7[data-appearance~='danger'].c7[data-appearance~='danger']:disabled {
+.c8[data-appearance~='danger'].c1[data-appearance~='danger'].c1[data-appearance~='danger'][data-appearance~='disabled'],
+.c8[data-appearance~='danger'].c8[data-appearance~='danger'].c8[data-appearance~='danger']:disabled {
   background-color: #E5E7EB;
   color: #B0B5BD;
   border-color: #E5E7EB;
 }
 
-.c7[data-appearance~='danger'].c1[data-appearance~='danger'].c1[data-appearance~='danger'][data-appearance~='disabled'].c1[data-appearance~='danger'].c1[data-appearance~='danger'].c1[data-appearance~='danger'][data-appearance~='disabled'].c1[data-appearance~='danger'].c1[data-appearance~='danger'].c1[data-appearance~='danger'][data-appearance~='disabled'] *[fill^='#'],
-.c7[data-appearance~='danger'].c7[data-appearance~='danger'].c7[data-appearance~='danger']:disabled.c7[data-appearance~='danger'].c7[data-appearance~='danger'].c7[data-appearance~='danger']:disabled.c7[data-appearance~='danger'].c7[data-appearance~='danger'].c7[data-appearance~='danger']:disabled *[fill^='#'] {
+.c8[data-appearance~='danger'].c1[data-appearance~='danger'].c1[data-appearance~='danger'][data-appearance~='disabled'].c1[data-appearance~='danger'].c1[data-appearance~='danger'].c1[data-appearance~='danger'][data-appearance~='disabled'].c1[data-appearance~='danger'].c1[data-appearance~='danger'].c1[data-appearance~='danger'][data-appearance~='disabled'] *[fill^='#'],
+.c8[data-appearance~='danger'].c8[data-appearance~='danger'].c8[data-appearance~='danger']:disabled.c8[data-appearance~='danger'].c8[data-appearance~='danger'].c8[data-appearance~='danger']:disabled.c8[data-appearance~='danger'].c8[data-appearance~='danger'].c8[data-appearance~='danger']:disabled *[fill^='#'] {
   fill: #B0B5BD;
 }
 
-.c7[data-appearance~='success'] {
+.c8[data-appearance~='success'] {
   background-color: #1BA049;
   color: #FFFFFF;
   border: 1px solid #1BA049;
 }
 
-.c7[data-appearance~='success'].c1[data-appearance~='success'].c1[data-appearance~='success'] *[fill^='#'] {
+.c8[data-appearance~='success'].c1[data-appearance~='success'].c1[data-appearance~='success'] *[fill^='#'] {
   fill: #FFFFFF;
 }
 
-.c7[data-appearance~='success'].c1[data-appearance~='success'].c1[data-appearance~='success']:hover {
+.c8[data-appearance~='success'].c1[data-appearance~='success'].c1[data-appearance~='success']:hover {
   background-color: #128238;
   border-color: #128238;
 }
 
-.c7[data-appearance~='success'].c1[data-appearance~='success'].c1[data-appearance~='success']:active {
+.c8[data-appearance~='success'].c1[data-appearance~='success'].c1[data-appearance~='success']:active {
   background-color: #0B682A;
   border-color: #0B682A;
 }
 
-.c7[data-appearance~='success'].c1[data-appearance~='success'].c1[data-appearance~='success'][data-appearance~='disabled'],
-.c7[data-appearance~='success'].c7[data-appearance~='success'].c7[data-appearance~='success']:disabled {
+.c8[data-appearance~='success'].c1[data-appearance~='success'].c1[data-appearance~='success'][data-appearance~='disabled'],
+.c8[data-appearance~='success'].c8[data-appearance~='success'].c8[data-appearance~='success']:disabled {
   background-color: #E5E7EB;
   color: #B0B5BD;
   border-color: #E5E7EB;
 }
 
-.c7[data-appearance~='success'].c1[data-appearance~='success'].c1[data-appearance~='success'][data-appearance~='disabled'].c1[data-appearance~='success'].c1[data-appearance~='success'].c1[data-appearance~='success'][data-appearance~='disabled'].c1[data-appearance~='success'].c1[data-appearance~='success'].c1[data-appearance~='success'][data-appearance~='disabled'] *[fill^='#'],
-.c7[data-appearance~='success'].c7[data-appearance~='success'].c7[data-appearance~='success']:disabled.c7[data-appearance~='success'].c7[data-appearance~='success'].c7[data-appearance~='success']:disabled.c7[data-appearance~='success'].c7[data-appearance~='success'].c7[data-appearance~='success']:disabled *[fill^='#'] {
+.c8[data-appearance~='success'].c1[data-appearance~='success'].c1[data-appearance~='success'][data-appearance~='disabled'].c1[data-appearance~='success'].c1[data-appearance~='success'].c1[data-appearance~='success'][data-appearance~='disabled'].c1[data-appearance~='success'].c1[data-appearance~='success'].c1[data-appearance~='success'][data-appearance~='disabled'] *[fill^='#'],
+.c8[data-appearance~='success'].c8[data-appearance~='success'].c8[data-appearance~='success']:disabled.c8[data-appearance~='success'].c8[data-appearance~='success'].c8[data-appearance~='success']:disabled.c8[data-appearance~='success'].c8[data-appearance~='success'].c8[data-appearance~='success']:disabled *[fill^='#'] {
   fill: #B0B5BD;
 }
 
-.c7:focus-visible {
+.c8:focus-visible {
   outline-offset: 2px;
   outline: #0062FF solid 2px;
 }
 
-.c7[data-dimension='xl'] {
+.c8[data-dimension='xl'] {
   padding: 0;
   height: 56px;
   width: 56px;
@@ -2178,17 +2202,17 @@ Object {
   text-rendering: geometricPrecision;
 }
 
-.c7[data-dimension='l'] {
+.c8[data-dimension='l'] {
   height: 48px;
   width: 48px;
 }
 
-.c7[data-dimension='m'] {
+.c8[data-dimension='m'] {
   height: 40px;
   width: 40px;
 }
 
-.c7[data-dimension='s'] {
+.c8[data-dimension='s'] {
   height: 32px;
   width: 32px;
   font-family: 'VTB Group UI',sans-serif;
@@ -2200,11 +2224,11 @@ Object {
   text-rendering: geometricPrecision;
 }
 
-.c7:hover {
+.c8:hover {
   cursor: pointer;
 }
 
-.c9 {
+.c10 {
   -webkit-transition: -webkit-transform 0.3s ease-in-out;
   -webkit-transition: transform 0.3s ease-in-out;
   transition: transform 0.3s ease-in-out;
@@ -2213,19 +2237,19 @@ Object {
   transform: rotate(0deg);
 }
 
-.c9 *[fill^='#'] {
+.c10 *[fill^='#'] {
   fill: #717681;
 }
 
-.c9:hover *[fill^='#'] {
+.c10:hover *[fill^='#'] {
   fill: #0046E2;
 }
 
-.c9[data-disabled] {
+.c10[data-disabled] {
   pointer-events: none;
 }
 
-.c9[data-disabled] *[fill^='#'] {
+.c10[data-disabled] *[fill^='#'] {
   fill: #B0B5BD;
 }
 
@@ -2250,36 +2274,36 @@ Object {
   outline: #0062FF solid 2px;
 }
 
-.c8[data-appearance~='primary'] {
+.c9[data-appearance~='primary'] {
   border-radius: 0 4px 4px 0;
 }
 
-.c8[data-appearance~='secondary'] {
+.c9[data-appearance~='secondary'] {
   border-left: none;
   border-radius: 0 4px 4px 0;
 }
 
-.c8:focus-visible {
+.c9:focus-visible {
   outline-offset: -4px;
 }
 
-.c8:focus-visible[data-appearance~='primary'] {
+.c9:focus-visible[data-appearance~='primary'] {
   outline: #FFFFFF solid 2px;
 }
 
-.c8:focus-visible[data-appearance~='secondary'] {
+.c9:focus-visible[data-appearance~='secondary'] {
   outline: #0062FF solid 2px;
 }
 
-.c6 {
+.c7 {
   width: 1px;
 }
 
-.c6[data-appearance~='primary'] {
+.c7[data-appearance~='primary'] {
   background-color: transparent;
 }
 
-.c6[data-appearance~='secondary'] {
+.c7[data-appearance~='secondary'] {
   background-color: #0062FF;
 }
 
@@ -2304,43 +2328,50 @@ Object {
           type="button"
         >
           <div
-            class="c4 c5"
+            class="c4"
+          />
+          <div
+            class="c5 c6"
           >
             <div>
               one
             </div>
           </div>
+          <div
+            class="c4"
+          />
         </button>
         <div
           aria-hidden="true"
-          class="c6"
+          class="c7"
           data-appearance="primary"
         />
         <button
           aria-expanded="false"
-          class="c1 c7 c8 multi-button-menu-button-with-dropdown"
+          class="c1 c8 c9 multi-button-menu-button-with-dropdown"
           data-appearance="primary"
           data-dimension="l"
           type="button"
         >
           <div
-            class="c4 c5"
+            class="c5 c6"
           >
             <div
               aria-hidden="true"
-              class="c9"
+              class="c10"
             />
           </div>
         </button>
       </div>
     </div>
   </body>,
-  "container": .c5 {
+  "container": .c6 {
   vertical-align: top;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
   display: inline-flex;
+  gap: 8px;
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
@@ -2359,7 +2390,7 @@ Object {
   height: 24px;
 }
 
-.c5 > * {
+.c6 > * {
   display: inline-block;
   -webkit-flex: 0 1 auto;
   -ms-flex: 0 1 auto;
@@ -2367,38 +2398,40 @@ Object {
   white-space: nowrap;
 }
 
-.c5 > *:not(:first-child) {
-  margin-left: 8px;
-}
-
-.c5 > svg {
+.c6 > svg {
   width: 24px;
   height: 24px;
 }
 
-[data-dimension='s'] .c4 {
+[data-dimension='s'] .c5 {
   height: 20px;
 }
 
-[data-dimension='s'] .c4 > svg {
+[data-dimension='s'] .c5 > svg {
   width: 20px;
   height: 20px;
+}
+
+.c4 {
+  display: inline-block;
+  width: 2px;
 }
 
 .c2 {
   position: relative;
   box-sizing: border-box;
   display: inline-block;
+  white-space: nowrap;
   border: none;
   border-radius: 4px;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  vertical-align: center;
+  vertical-align: middle;
   pointer-events: all;
   padding: 0;
   height: 56px;
-  padding: 0 31px;
+  padding: 0 29px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -2637,7 +2670,7 @@ Object {
 .c2[data-dimension='xl'] {
   padding: 0;
   height: 56px;
-  padding: 0 31px;
+  padding: 0 29px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -2649,17 +2682,17 @@ Object {
 
 .c2[data-dimension='l'] {
   height: 48px;
-  padding: 0 23px;
+  padding: 0 21px;
 }
 
 .c2[data-dimension='m'] {
   height: 40px;
-  padding: 0 19px;
+  padding: 0 17px;
 }
 
 .c2[data-dimension='s'] {
   height: 32px;
-  padding: 0 15px;
+  padding: 0 13px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -2673,16 +2706,17 @@ Object {
   cursor: pointer;
 }
 
-.c7 {
+.c8 {
   position: relative;
   box-sizing: border-box;
   display: inline-block;
+  white-space: nowrap;
   border: none;
   border-radius: 4px;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  vertical-align: center;
+  vertical-align: middle;
   pointer-events: all;
   padding: 0;
   height: 56px;
@@ -2696,233 +2730,233 @@ Object {
   text-rendering: geometricPrecision;
 }
 
-.c7[data-appearance~='primary'] {
+.c8[data-appearance~='primary'] {
   background-color: #0062FF;
   color: #FFFFFF;
   border: 1px solid #0062FF;
 }
 
-.c7[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'] *[fill^='#'] {
+.c8[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'] *[fill^='#'] {
   fill: #FFFFFF;
 }
 
-.c7[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary']:hover {
+.c8[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary']:hover {
   background-color: #0046E2;
   border-color: #0046E2;
 }
 
-.c7[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary']:active {
+.c8[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary']:active {
   background-color: #0132B0;
   border-color: #0132B0;
 }
 
-.c7[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'][data-appearance~='disabled'],
-.c7[data-appearance~='primary'].c7[data-appearance~='primary'].c7[data-appearance~='primary']:disabled {
+.c8[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'][data-appearance~='disabled'],
+.c8[data-appearance~='primary'].c8[data-appearance~='primary'].c8[data-appearance~='primary']:disabled {
   background-color: #E5E7EB;
   color: #B0B5BD;
   border-color: #E5E7EB;
 }
 
-.c7[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'][data-appearance~='disabled'].c1[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'][data-appearance~='disabled'].c1[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'][data-appearance~='disabled'] *[fill^='#'],
-.c7[data-appearance~='primary'].c7[data-appearance~='primary'].c7[data-appearance~='primary']:disabled.c7[data-appearance~='primary'].c7[data-appearance~='primary'].c7[data-appearance~='primary']:disabled.c7[data-appearance~='primary'].c7[data-appearance~='primary'].c7[data-appearance~='primary']:disabled *[fill^='#'] {
+.c8[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'][data-appearance~='disabled'].c1[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'][data-appearance~='disabled'].c1[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'][data-appearance~='disabled'] *[fill^='#'],
+.c8[data-appearance~='primary'].c8[data-appearance~='primary'].c8[data-appearance~='primary']:disabled.c8[data-appearance~='primary'].c8[data-appearance~='primary'].c8[data-appearance~='primary']:disabled.c8[data-appearance~='primary'].c8[data-appearance~='primary'].c8[data-appearance~='primary']:disabled *[fill^='#'] {
   fill: #B0B5BD;
 }
 
-.c7[data-appearance~='secondary'] {
+.c8[data-appearance~='secondary'] {
   background-color: transparent;
   color: #0062FF;
   border: 1px solid #0062FF;
 }
 
-.c7[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary'] *[fill^='#'] {
+.c8[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary'] *[fill^='#'] {
   fill: #0062FF;
 }
 
-.c7[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary']:hover {
+.c8[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary']:hover {
   background-color: #0000000D;
   color: #0062FF;
   border-color: #0062FF;
 }
 
-.c7[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary']:hover.c1[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary']:hover.c1[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary']:hover *[fill^='#'] {
+.c8[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary']:hover.c1[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary']:hover.c1[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary']:hover *[fill^='#'] {
   fill: #0062FF;
 }
 
-.c7[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary']:active {
+.c8[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary']:active {
   background-color: #0000001F;
   color: #0062FF;
   border-color: #0062FF;
 }
 
-.c7[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary']:active *[fill^='#'] {
+.c8[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary']:active *[fill^='#'] {
   fill: #0062FF;
 }
 
-.c7[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary'][data-appearance~='disabled'],
-.c7[data-appearance~='secondary'].c7[data-appearance~='secondary'].c7[data-appearance~='secondary']:disabled {
+.c8[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary'][data-appearance~='disabled'],
+.c8[data-appearance~='secondary'].c8[data-appearance~='secondary'].c8[data-appearance~='secondary']:disabled {
   background-color: transparent;
   color: #B0B5BD;
   border-color: #B0B5BD;
 }
 
-.c7[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary'][data-appearance~='disabled'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary'][data-appearance~='disabled'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary'][data-appearance~='disabled'] *[fill^='#'],
-.c7[data-appearance~='secondary'].c7[data-appearance~='secondary'].c7[data-appearance~='secondary']:disabled.c7[data-appearance~='secondary'].c7[data-appearance~='secondary'].c7[data-appearance~='secondary']:disabled.c7[data-appearance~='secondary'].c7[data-appearance~='secondary'].c7[data-appearance~='secondary']:disabled *[fill^='#'] {
+.c8[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary'][data-appearance~='disabled'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary'][data-appearance~='disabled'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary'][data-appearance~='disabled'] *[fill^='#'],
+.c8[data-appearance~='secondary'].c8[data-appearance~='secondary'].c8[data-appearance~='secondary']:disabled.c8[data-appearance~='secondary'].c8[data-appearance~='secondary'].c8[data-appearance~='secondary']:disabled.c8[data-appearance~='secondary'].c8[data-appearance~='secondary'].c8[data-appearance~='secondary']:disabled *[fill^='#'] {
   fill: #B0B5BD;
 }
 
-.c7[data-appearance~='ghost'] {
+.c8[data-appearance~='ghost'] {
   background-color: transparent;
   color: #0062FF;
   border: 1px solid transparent;
 }
 
-.c7[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost'] *[fill^='#'] {
+.c8[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost'] *[fill^='#'] {
   fill: #0062FF;
 }
 
-.c7[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost']:hover {
+.c8[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost']:hover {
   background-color: #0000000D;
   color: #0062FF;
   border-color: transparent;
 }
 
-.c7[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost']:hover *[fill^='#'] {
+.c8[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost']:hover *[fill^='#'] {
   fill: #0062FF;
 }
 
-.c7[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost']:active {
+.c8[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost']:active {
   background-color: #0000001F;
   color: #0062FF;
   border-color: transparent;
 }
 
-.c7[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost']:active *[fill^='#'] {
+.c8[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost']:active *[fill^='#'] {
   fill: #0062FF;
 }
 
-.c7[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost'][data-appearance~='disabled'],
-.c7[data-appearance~='ghost'].c7[data-appearance~='ghost'].c7[data-appearance~='ghost']:disabled {
+.c8[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost'][data-appearance~='disabled'],
+.c8[data-appearance~='ghost'].c8[data-appearance~='ghost'].c8[data-appearance~='ghost']:disabled {
   background-color: transparent;
   color: #B0B5BD;
   border-color: transparent;
 }
 
-.c7[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost'][data-appearance~='disabled'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost'][data-appearance~='disabled'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost'][data-appearance~='disabled'] *[fill^='#'],
-.c7[data-appearance~='ghost'].c7[data-appearance~='ghost'].c7[data-appearance~='ghost']:disabled.c7[data-appearance~='ghost'].c7[data-appearance~='ghost'].c7[data-appearance~='ghost']:disabled.c7[data-appearance~='ghost'].c7[data-appearance~='ghost'].c7[data-appearance~='ghost']:disabled *[fill^='#'] {
+.c8[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost'][data-appearance~='disabled'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost'][data-appearance~='disabled'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost'][data-appearance~='disabled'] *[fill^='#'],
+.c8[data-appearance~='ghost'].c8[data-appearance~='ghost'].c8[data-appearance~='ghost']:disabled.c8[data-appearance~='ghost'].c8[data-appearance~='ghost'].c8[data-appearance~='ghost']:disabled.c8[data-appearance~='ghost'].c8[data-appearance~='ghost'].c8[data-appearance~='ghost']:disabled *[fill^='#'] {
   fill: #B0B5BD;
 }
 
-.c7[data-appearance~='white'] {
+.c8[data-appearance~='white'] {
   background-color: transparent;
   color: #FFFFFF;
   border: 1px solid #FFFFFF;
 }
 
-.c7[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white'] *[fill^='#'] {
+.c8[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white'] *[fill^='#'] {
   fill: #FFFFFF;
 }
 
-.c7[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:hover {
+.c8[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:hover {
   background-color: #FFFFFF0F;
   color: #FFFFFF;
   border-color: #FFFFFF;
 }
 
-.c7[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:hover.c1[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:hover.c1[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:hover *[fill^='#'] {
+.c8[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:hover.c1[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:hover.c1[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:hover *[fill^='#'] {
   fill: #FFFFFF;
 }
 
-.c7[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:active {
+.c8[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:active {
   background-color: #FFFFFF1F;
   color: #FFFFFF;
   border-color: #FFFFFF;
 }
 
-.c7[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:active.c1[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:active.c1[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:active *[fill^='#'] {
+.c8[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:active.c1[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:active.c1[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:active *[fill^='#'] {
   fill: #FFFFFF;
 }
 
-.c7[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white'][data-appearance~='disabled'],
-.c7[data-appearance~='white'].c7[data-appearance~='white'].c7[data-appearance~='white']:disabled {
+.c8[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white'][data-appearance~='disabled'],
+.c8[data-appearance~='white'].c8[data-appearance~='white'].c8[data-appearance~='white']:disabled {
   border-color: #4E535D;
   color: #4E535D;
 }
 
-.c7[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white'][data-appearance~='disabled'].c1[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white'][data-appearance~='disabled'].c1[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white'][data-appearance~='disabled'] *[fill^='#'],
-.c7[data-appearance~='white'].c7[data-appearance~='white'].c7[data-appearance~='white']:disabled.c7[data-appearance~='white'].c7[data-appearance~='white'].c7[data-appearance~='white']:disabled.c7[data-appearance~='white'].c7[data-appearance~='white'].c7[data-appearance~='white']:disabled *[fill^='#'] {
+.c8[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white'][data-appearance~='disabled'].c1[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white'][data-appearance~='disabled'].c1[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white'][data-appearance~='disabled'] *[fill^='#'],
+.c8[data-appearance~='white'].c8[data-appearance~='white'].c8[data-appearance~='white']:disabled.c8[data-appearance~='white'].c8[data-appearance~='white'].c8[data-appearance~='white']:disabled.c8[data-appearance~='white'].c8[data-appearance~='white'].c8[data-appearance~='white']:disabled *[fill^='#'] {
   fill: #4E535D;
 }
 
-.c7[data-appearance~='danger'] {
+.c8[data-appearance~='danger'] {
   background-color: #D92020;
   color: #FFFFFF;
   border: 1px solid #D92020;
 }
 
-.c7[data-appearance~='danger'].c1[data-appearance~='danger'].c1[data-appearance~='danger'] *[fill^='#'] {
+.c8[data-appearance~='danger'].c1[data-appearance~='danger'].c1[data-appearance~='danger'] *[fill^='#'] {
   fill: #FFFFFF;
 }
 
-.c7[data-appearance~='danger'].c1[data-appearance~='danger'].c1[data-appearance~='danger']:hover {
+.c8[data-appearance~='danger'].c1[data-appearance~='danger'].c1[data-appearance~='danger']:hover {
   background-color: #BA1717;
   border-color: #BA1717;
 }
 
-.c7[data-appearance~='danger'].c1[data-appearance~='danger'].c1[data-appearance~='danger']:active {
+.c8[data-appearance~='danger'].c1[data-appearance~='danger'].c1[data-appearance~='danger']:active {
   background-color: #981111;
   border-color: #981111;
 }
 
-.c7[data-appearance~='danger'].c1[data-appearance~='danger'].c1[data-appearance~='danger'][data-appearance~='disabled'],
-.c7[data-appearance~='danger'].c7[data-appearance~='danger'].c7[data-appearance~='danger']:disabled {
+.c8[data-appearance~='danger'].c1[data-appearance~='danger'].c1[data-appearance~='danger'][data-appearance~='disabled'],
+.c8[data-appearance~='danger'].c8[data-appearance~='danger'].c8[data-appearance~='danger']:disabled {
   background-color: #E5E7EB;
   color: #B0B5BD;
   border-color: #E5E7EB;
 }
 
-.c7[data-appearance~='danger'].c1[data-appearance~='danger'].c1[data-appearance~='danger'][data-appearance~='disabled'].c1[data-appearance~='danger'].c1[data-appearance~='danger'].c1[data-appearance~='danger'][data-appearance~='disabled'].c1[data-appearance~='danger'].c1[data-appearance~='danger'].c1[data-appearance~='danger'][data-appearance~='disabled'] *[fill^='#'],
-.c7[data-appearance~='danger'].c7[data-appearance~='danger'].c7[data-appearance~='danger']:disabled.c7[data-appearance~='danger'].c7[data-appearance~='danger'].c7[data-appearance~='danger']:disabled.c7[data-appearance~='danger'].c7[data-appearance~='danger'].c7[data-appearance~='danger']:disabled *[fill^='#'] {
+.c8[data-appearance~='danger'].c1[data-appearance~='danger'].c1[data-appearance~='danger'][data-appearance~='disabled'].c1[data-appearance~='danger'].c1[data-appearance~='danger'].c1[data-appearance~='danger'][data-appearance~='disabled'].c1[data-appearance~='danger'].c1[data-appearance~='danger'].c1[data-appearance~='danger'][data-appearance~='disabled'] *[fill^='#'],
+.c8[data-appearance~='danger'].c8[data-appearance~='danger'].c8[data-appearance~='danger']:disabled.c8[data-appearance~='danger'].c8[data-appearance~='danger'].c8[data-appearance~='danger']:disabled.c8[data-appearance~='danger'].c8[data-appearance~='danger'].c8[data-appearance~='danger']:disabled *[fill^='#'] {
   fill: #B0B5BD;
 }
 
-.c7[data-appearance~='success'] {
+.c8[data-appearance~='success'] {
   background-color: #1BA049;
   color: #FFFFFF;
   border: 1px solid #1BA049;
 }
 
-.c7[data-appearance~='success'].c1[data-appearance~='success'].c1[data-appearance~='success'] *[fill^='#'] {
+.c8[data-appearance~='success'].c1[data-appearance~='success'].c1[data-appearance~='success'] *[fill^='#'] {
   fill: #FFFFFF;
 }
 
-.c7[data-appearance~='success'].c1[data-appearance~='success'].c1[data-appearance~='success']:hover {
+.c8[data-appearance~='success'].c1[data-appearance~='success'].c1[data-appearance~='success']:hover {
   background-color: #128238;
   border-color: #128238;
 }
 
-.c7[data-appearance~='success'].c1[data-appearance~='success'].c1[data-appearance~='success']:active {
+.c8[data-appearance~='success'].c1[data-appearance~='success'].c1[data-appearance~='success']:active {
   background-color: #0B682A;
   border-color: #0B682A;
 }
 
-.c7[data-appearance~='success'].c1[data-appearance~='success'].c1[data-appearance~='success'][data-appearance~='disabled'],
-.c7[data-appearance~='success'].c7[data-appearance~='success'].c7[data-appearance~='success']:disabled {
+.c8[data-appearance~='success'].c1[data-appearance~='success'].c1[data-appearance~='success'][data-appearance~='disabled'],
+.c8[data-appearance~='success'].c8[data-appearance~='success'].c8[data-appearance~='success']:disabled {
   background-color: #E5E7EB;
   color: #B0B5BD;
   border-color: #E5E7EB;
 }
 
-.c7[data-appearance~='success'].c1[data-appearance~='success'].c1[data-appearance~='success'][data-appearance~='disabled'].c1[data-appearance~='success'].c1[data-appearance~='success'].c1[data-appearance~='success'][data-appearance~='disabled'].c1[data-appearance~='success'].c1[data-appearance~='success'].c1[data-appearance~='success'][data-appearance~='disabled'] *[fill^='#'],
-.c7[data-appearance~='success'].c7[data-appearance~='success'].c7[data-appearance~='success']:disabled.c7[data-appearance~='success'].c7[data-appearance~='success'].c7[data-appearance~='success']:disabled.c7[data-appearance~='success'].c7[data-appearance~='success'].c7[data-appearance~='success']:disabled *[fill^='#'] {
+.c8[data-appearance~='success'].c1[data-appearance~='success'].c1[data-appearance~='success'][data-appearance~='disabled'].c1[data-appearance~='success'].c1[data-appearance~='success'].c1[data-appearance~='success'][data-appearance~='disabled'].c1[data-appearance~='success'].c1[data-appearance~='success'].c1[data-appearance~='success'][data-appearance~='disabled'] *[fill^='#'],
+.c8[data-appearance~='success'].c8[data-appearance~='success'].c8[data-appearance~='success']:disabled.c8[data-appearance~='success'].c8[data-appearance~='success'].c8[data-appearance~='success']:disabled.c8[data-appearance~='success'].c8[data-appearance~='success'].c8[data-appearance~='success']:disabled *[fill^='#'] {
   fill: #B0B5BD;
 }
 
-.c7:focus-visible {
+.c8:focus-visible {
   outline-offset: 2px;
   outline: #0062FF solid 2px;
 }
 
-.c7[data-dimension='xl'] {
+.c8[data-dimension='xl'] {
   padding: 0;
   height: 56px;
   width: 56px;
@@ -2935,17 +2969,17 @@ Object {
   text-rendering: geometricPrecision;
 }
 
-.c7[data-dimension='l'] {
+.c8[data-dimension='l'] {
   height: 48px;
   width: 48px;
 }
 
-.c7[data-dimension='m'] {
+.c8[data-dimension='m'] {
   height: 40px;
   width: 40px;
 }
 
-.c7[data-dimension='s'] {
+.c8[data-dimension='s'] {
   height: 32px;
   width: 32px;
   font-family: 'VTB Group UI',sans-serif;
@@ -2957,11 +2991,11 @@ Object {
   text-rendering: geometricPrecision;
 }
 
-.c7:hover {
+.c8:hover {
   cursor: pointer;
 }
 
-.c9 {
+.c10 {
   -webkit-transition: -webkit-transform 0.3s ease-in-out;
   -webkit-transition: transform 0.3s ease-in-out;
   transition: transform 0.3s ease-in-out;
@@ -2970,19 +3004,19 @@ Object {
   transform: rotate(0deg);
 }
 
-.c9 *[fill^='#'] {
+.c10 *[fill^='#'] {
   fill: #717681;
 }
 
-.c9:hover *[fill^='#'] {
+.c10:hover *[fill^='#'] {
   fill: #0046E2;
 }
 
-.c9[data-disabled] {
+.c10[data-disabled] {
   pointer-events: none;
 }
 
-.c9[data-disabled] *[fill^='#'] {
+.c10[data-disabled] *[fill^='#'] {
   fill: #B0B5BD;
 }
 
@@ -3007,36 +3041,36 @@ Object {
   outline: #0062FF solid 2px;
 }
 
-.c8[data-appearance~='primary'] {
+.c9[data-appearance~='primary'] {
   border-radius: 0 4px 4px 0;
 }
 
-.c8[data-appearance~='secondary'] {
+.c9[data-appearance~='secondary'] {
   border-left: none;
   border-radius: 0 4px 4px 0;
 }
 
-.c8:focus-visible {
+.c9:focus-visible {
   outline-offset: -4px;
 }
 
-.c8:focus-visible[data-appearance~='primary'] {
+.c9:focus-visible[data-appearance~='primary'] {
   outline: #FFFFFF solid 2px;
 }
 
-.c8:focus-visible[data-appearance~='secondary'] {
+.c9:focus-visible[data-appearance~='secondary'] {
   outline: #0062FF solid 2px;
 }
 
-.c6 {
+.c7 {
   width: 1px;
 }
 
-.c6[data-appearance~='primary'] {
+.c7[data-appearance~='primary'] {
   background-color: transparent;
 }
 
-.c6[data-appearance~='secondary'] {
+.c7[data-appearance~='secondary'] {
   background-color: #0062FF;
 }
 
@@ -3060,31 +3094,37 @@ Object {
         type="button"
       >
         <div
-          class="c4 c5"
+          class="c4"
+        />
+        <div
+          class="c5 c6"
         >
           <div>
             one
           </div>
         </div>
+        <div
+          class="c4"
+        />
       </button>
       <div
         aria-hidden="true"
-        class="c6"
+        class="c7"
         data-appearance="primary"
       />
       <button
         aria-expanded="false"
-        class="c1 c7 c8 multi-button-menu-button-with-dropdown"
+        class="c1 c8 c9 multi-button-menu-button-with-dropdown"
         data-appearance="primary"
         data-dimension="l"
         type="button"
       >
         <div
-          class="c4 c5"
+          class="c5 c6"
         >
           <div
             aria-hidden="true"
-            class="c9"
+            class="c10"
           />
         </div>
       </button>
@@ -3147,12 +3187,13 @@ Object {
 exports[`MultiButton should render component with secondary appearance 1`] = `
 Object {
   "asFragment": [Function],
-  "baseElement": .c5 {
+  "baseElement": .c6 {
   vertical-align: top;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
   display: inline-flex;
+  gap: 8px;
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
@@ -3171,7 +3212,7 @@ Object {
   height: 24px;
 }
 
-.c5 > * {
+.c6 > * {
   display: inline-block;
   -webkit-flex: 0 1 auto;
   -ms-flex: 0 1 auto;
@@ -3179,38 +3220,40 @@ Object {
   white-space: nowrap;
 }
 
-.c5 > *:not(:first-child) {
-  margin-left: 8px;
-}
-
-.c5 > svg {
+.c6 > svg {
   width: 24px;
   height: 24px;
 }
 
-[data-dimension='s'] .c4 {
+[data-dimension='s'] .c5 {
   height: 20px;
 }
 
-[data-dimension='s'] .c4 > svg {
+[data-dimension='s'] .c5 > svg {
   width: 20px;
   height: 20px;
+}
+
+.c4 {
+  display: inline-block;
+  width: 2px;
 }
 
 .c2 {
   position: relative;
   box-sizing: border-box;
   display: inline-block;
+  white-space: nowrap;
   border: none;
   border-radius: 4px;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  vertical-align: center;
+  vertical-align: middle;
   pointer-events: all;
   padding: 0;
   height: 56px;
-  padding: 0 31px;
+  padding: 0 29px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -3449,7 +3492,7 @@ Object {
 .c2[data-dimension='xl'] {
   padding: 0;
   height: 56px;
-  padding: 0 31px;
+  padding: 0 29px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -3461,17 +3504,17 @@ Object {
 
 .c2[data-dimension='l'] {
   height: 48px;
-  padding: 0 23px;
+  padding: 0 21px;
 }
 
 .c2[data-dimension='m'] {
   height: 40px;
-  padding: 0 19px;
+  padding: 0 17px;
 }
 
 .c2[data-dimension='s'] {
   height: 32px;
-  padding: 0 15px;
+  padding: 0 13px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -3485,16 +3528,17 @@ Object {
   cursor: pointer;
 }
 
-.c7 {
+.c8 {
   position: relative;
   box-sizing: border-box;
   display: inline-block;
+  white-space: nowrap;
   border: none;
   border-radius: 4px;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  vertical-align: center;
+  vertical-align: middle;
   pointer-events: all;
   padding: 0;
   height: 56px;
@@ -3508,233 +3552,233 @@ Object {
   text-rendering: geometricPrecision;
 }
 
-.c7[data-appearance~='primary'] {
+.c8[data-appearance~='primary'] {
   background-color: #0062FF;
   color: #FFFFFF;
   border: 1px solid #0062FF;
 }
 
-.c7[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'] *[fill^='#'] {
+.c8[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'] *[fill^='#'] {
   fill: #FFFFFF;
 }
 
-.c7[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary']:hover {
+.c8[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary']:hover {
   background-color: #0046E2;
   border-color: #0046E2;
 }
 
-.c7[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary']:active {
+.c8[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary']:active {
   background-color: #0132B0;
   border-color: #0132B0;
 }
 
-.c7[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'][data-appearance~='disabled'],
-.c7[data-appearance~='primary'].c7[data-appearance~='primary'].c7[data-appearance~='primary']:disabled {
+.c8[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'][data-appearance~='disabled'],
+.c8[data-appearance~='primary'].c8[data-appearance~='primary'].c8[data-appearance~='primary']:disabled {
   background-color: #E5E7EB;
   color: #B0B5BD;
   border-color: #E5E7EB;
 }
 
-.c7[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'][data-appearance~='disabled'].c1[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'][data-appearance~='disabled'].c1[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'][data-appearance~='disabled'] *[fill^='#'],
-.c7[data-appearance~='primary'].c7[data-appearance~='primary'].c7[data-appearance~='primary']:disabled.c7[data-appearance~='primary'].c7[data-appearance~='primary'].c7[data-appearance~='primary']:disabled.c7[data-appearance~='primary'].c7[data-appearance~='primary'].c7[data-appearance~='primary']:disabled *[fill^='#'] {
+.c8[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'][data-appearance~='disabled'].c1[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'][data-appearance~='disabled'].c1[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'][data-appearance~='disabled'] *[fill^='#'],
+.c8[data-appearance~='primary'].c8[data-appearance~='primary'].c8[data-appearance~='primary']:disabled.c8[data-appearance~='primary'].c8[data-appearance~='primary'].c8[data-appearance~='primary']:disabled.c8[data-appearance~='primary'].c8[data-appearance~='primary'].c8[data-appearance~='primary']:disabled *[fill^='#'] {
   fill: #B0B5BD;
 }
 
-.c7[data-appearance~='secondary'] {
+.c8[data-appearance~='secondary'] {
   background-color: transparent;
   color: #0062FF;
   border: 1px solid #0062FF;
 }
 
-.c7[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary'] *[fill^='#'] {
+.c8[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary'] *[fill^='#'] {
   fill: #0062FF;
 }
 
-.c7[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary']:hover {
+.c8[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary']:hover {
   background-color: #0000000D;
   color: #0062FF;
   border-color: #0062FF;
 }
 
-.c7[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary']:hover.c1[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary']:hover.c1[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary']:hover *[fill^='#'] {
+.c8[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary']:hover.c1[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary']:hover.c1[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary']:hover *[fill^='#'] {
   fill: #0062FF;
 }
 
-.c7[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary']:active {
+.c8[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary']:active {
   background-color: #0000001F;
   color: #0062FF;
   border-color: #0062FF;
 }
 
-.c7[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary']:active *[fill^='#'] {
+.c8[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary']:active *[fill^='#'] {
   fill: #0062FF;
 }
 
-.c7[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary'][data-appearance~='disabled'],
-.c7[data-appearance~='secondary'].c7[data-appearance~='secondary'].c7[data-appearance~='secondary']:disabled {
+.c8[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary'][data-appearance~='disabled'],
+.c8[data-appearance~='secondary'].c8[data-appearance~='secondary'].c8[data-appearance~='secondary']:disabled {
   background-color: transparent;
   color: #B0B5BD;
   border-color: #B0B5BD;
 }
 
-.c7[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary'][data-appearance~='disabled'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary'][data-appearance~='disabled'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary'][data-appearance~='disabled'] *[fill^='#'],
-.c7[data-appearance~='secondary'].c7[data-appearance~='secondary'].c7[data-appearance~='secondary']:disabled.c7[data-appearance~='secondary'].c7[data-appearance~='secondary'].c7[data-appearance~='secondary']:disabled.c7[data-appearance~='secondary'].c7[data-appearance~='secondary'].c7[data-appearance~='secondary']:disabled *[fill^='#'] {
+.c8[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary'][data-appearance~='disabled'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary'][data-appearance~='disabled'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary'][data-appearance~='disabled'] *[fill^='#'],
+.c8[data-appearance~='secondary'].c8[data-appearance~='secondary'].c8[data-appearance~='secondary']:disabled.c8[data-appearance~='secondary'].c8[data-appearance~='secondary'].c8[data-appearance~='secondary']:disabled.c8[data-appearance~='secondary'].c8[data-appearance~='secondary'].c8[data-appearance~='secondary']:disabled *[fill^='#'] {
   fill: #B0B5BD;
 }
 
-.c7[data-appearance~='ghost'] {
+.c8[data-appearance~='ghost'] {
   background-color: transparent;
   color: #0062FF;
   border: 1px solid transparent;
 }
 
-.c7[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost'] *[fill^='#'] {
+.c8[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost'] *[fill^='#'] {
   fill: #0062FF;
 }
 
-.c7[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost']:hover {
+.c8[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost']:hover {
   background-color: #0000000D;
   color: #0062FF;
   border-color: transparent;
 }
 
-.c7[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost']:hover *[fill^='#'] {
+.c8[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost']:hover *[fill^='#'] {
   fill: #0062FF;
 }
 
-.c7[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost']:active {
+.c8[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost']:active {
   background-color: #0000001F;
   color: #0062FF;
   border-color: transparent;
 }
 
-.c7[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost']:active *[fill^='#'] {
+.c8[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost']:active *[fill^='#'] {
   fill: #0062FF;
 }
 
-.c7[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost'][data-appearance~='disabled'],
-.c7[data-appearance~='ghost'].c7[data-appearance~='ghost'].c7[data-appearance~='ghost']:disabled {
+.c8[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost'][data-appearance~='disabled'],
+.c8[data-appearance~='ghost'].c8[data-appearance~='ghost'].c8[data-appearance~='ghost']:disabled {
   background-color: transparent;
   color: #B0B5BD;
   border-color: transparent;
 }
 
-.c7[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost'][data-appearance~='disabled'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost'][data-appearance~='disabled'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost'][data-appearance~='disabled'] *[fill^='#'],
-.c7[data-appearance~='ghost'].c7[data-appearance~='ghost'].c7[data-appearance~='ghost']:disabled.c7[data-appearance~='ghost'].c7[data-appearance~='ghost'].c7[data-appearance~='ghost']:disabled.c7[data-appearance~='ghost'].c7[data-appearance~='ghost'].c7[data-appearance~='ghost']:disabled *[fill^='#'] {
+.c8[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost'][data-appearance~='disabled'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost'][data-appearance~='disabled'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost'][data-appearance~='disabled'] *[fill^='#'],
+.c8[data-appearance~='ghost'].c8[data-appearance~='ghost'].c8[data-appearance~='ghost']:disabled.c8[data-appearance~='ghost'].c8[data-appearance~='ghost'].c8[data-appearance~='ghost']:disabled.c8[data-appearance~='ghost'].c8[data-appearance~='ghost'].c8[data-appearance~='ghost']:disabled *[fill^='#'] {
   fill: #B0B5BD;
 }
 
-.c7[data-appearance~='white'] {
+.c8[data-appearance~='white'] {
   background-color: transparent;
   color: #FFFFFF;
   border: 1px solid #FFFFFF;
 }
 
-.c7[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white'] *[fill^='#'] {
+.c8[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white'] *[fill^='#'] {
   fill: #FFFFFF;
 }
 
-.c7[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:hover {
+.c8[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:hover {
   background-color: #FFFFFF0F;
   color: #FFFFFF;
   border-color: #FFFFFF;
 }
 
-.c7[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:hover.c1[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:hover.c1[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:hover *[fill^='#'] {
+.c8[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:hover.c1[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:hover.c1[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:hover *[fill^='#'] {
   fill: #FFFFFF;
 }
 
-.c7[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:active {
+.c8[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:active {
   background-color: #FFFFFF1F;
   color: #FFFFFF;
   border-color: #FFFFFF;
 }
 
-.c7[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:active.c1[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:active.c1[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:active *[fill^='#'] {
+.c8[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:active.c1[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:active.c1[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:active *[fill^='#'] {
   fill: #FFFFFF;
 }
 
-.c7[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white'][data-appearance~='disabled'],
-.c7[data-appearance~='white'].c7[data-appearance~='white'].c7[data-appearance~='white']:disabled {
+.c8[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white'][data-appearance~='disabled'],
+.c8[data-appearance~='white'].c8[data-appearance~='white'].c8[data-appearance~='white']:disabled {
   border-color: #4E535D;
   color: #4E535D;
 }
 
-.c7[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white'][data-appearance~='disabled'].c1[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white'][data-appearance~='disabled'].c1[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white'][data-appearance~='disabled'] *[fill^='#'],
-.c7[data-appearance~='white'].c7[data-appearance~='white'].c7[data-appearance~='white']:disabled.c7[data-appearance~='white'].c7[data-appearance~='white'].c7[data-appearance~='white']:disabled.c7[data-appearance~='white'].c7[data-appearance~='white'].c7[data-appearance~='white']:disabled *[fill^='#'] {
+.c8[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white'][data-appearance~='disabled'].c1[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white'][data-appearance~='disabled'].c1[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white'][data-appearance~='disabled'] *[fill^='#'],
+.c8[data-appearance~='white'].c8[data-appearance~='white'].c8[data-appearance~='white']:disabled.c8[data-appearance~='white'].c8[data-appearance~='white'].c8[data-appearance~='white']:disabled.c8[data-appearance~='white'].c8[data-appearance~='white'].c8[data-appearance~='white']:disabled *[fill^='#'] {
   fill: #4E535D;
 }
 
-.c7[data-appearance~='danger'] {
+.c8[data-appearance~='danger'] {
   background-color: #D92020;
   color: #FFFFFF;
   border: 1px solid #D92020;
 }
 
-.c7[data-appearance~='danger'].c1[data-appearance~='danger'].c1[data-appearance~='danger'] *[fill^='#'] {
+.c8[data-appearance~='danger'].c1[data-appearance~='danger'].c1[data-appearance~='danger'] *[fill^='#'] {
   fill: #FFFFFF;
 }
 
-.c7[data-appearance~='danger'].c1[data-appearance~='danger'].c1[data-appearance~='danger']:hover {
+.c8[data-appearance~='danger'].c1[data-appearance~='danger'].c1[data-appearance~='danger']:hover {
   background-color: #BA1717;
   border-color: #BA1717;
 }
 
-.c7[data-appearance~='danger'].c1[data-appearance~='danger'].c1[data-appearance~='danger']:active {
+.c8[data-appearance~='danger'].c1[data-appearance~='danger'].c1[data-appearance~='danger']:active {
   background-color: #981111;
   border-color: #981111;
 }
 
-.c7[data-appearance~='danger'].c1[data-appearance~='danger'].c1[data-appearance~='danger'][data-appearance~='disabled'],
-.c7[data-appearance~='danger'].c7[data-appearance~='danger'].c7[data-appearance~='danger']:disabled {
+.c8[data-appearance~='danger'].c1[data-appearance~='danger'].c1[data-appearance~='danger'][data-appearance~='disabled'],
+.c8[data-appearance~='danger'].c8[data-appearance~='danger'].c8[data-appearance~='danger']:disabled {
   background-color: #E5E7EB;
   color: #B0B5BD;
   border-color: #E5E7EB;
 }
 
-.c7[data-appearance~='danger'].c1[data-appearance~='danger'].c1[data-appearance~='danger'][data-appearance~='disabled'].c1[data-appearance~='danger'].c1[data-appearance~='danger'].c1[data-appearance~='danger'][data-appearance~='disabled'].c1[data-appearance~='danger'].c1[data-appearance~='danger'].c1[data-appearance~='danger'][data-appearance~='disabled'] *[fill^='#'],
-.c7[data-appearance~='danger'].c7[data-appearance~='danger'].c7[data-appearance~='danger']:disabled.c7[data-appearance~='danger'].c7[data-appearance~='danger'].c7[data-appearance~='danger']:disabled.c7[data-appearance~='danger'].c7[data-appearance~='danger'].c7[data-appearance~='danger']:disabled *[fill^='#'] {
+.c8[data-appearance~='danger'].c1[data-appearance~='danger'].c1[data-appearance~='danger'][data-appearance~='disabled'].c1[data-appearance~='danger'].c1[data-appearance~='danger'].c1[data-appearance~='danger'][data-appearance~='disabled'].c1[data-appearance~='danger'].c1[data-appearance~='danger'].c1[data-appearance~='danger'][data-appearance~='disabled'] *[fill^='#'],
+.c8[data-appearance~='danger'].c8[data-appearance~='danger'].c8[data-appearance~='danger']:disabled.c8[data-appearance~='danger'].c8[data-appearance~='danger'].c8[data-appearance~='danger']:disabled.c8[data-appearance~='danger'].c8[data-appearance~='danger'].c8[data-appearance~='danger']:disabled *[fill^='#'] {
   fill: #B0B5BD;
 }
 
-.c7[data-appearance~='success'] {
+.c8[data-appearance~='success'] {
   background-color: #1BA049;
   color: #FFFFFF;
   border: 1px solid #1BA049;
 }
 
-.c7[data-appearance~='success'].c1[data-appearance~='success'].c1[data-appearance~='success'] *[fill^='#'] {
+.c8[data-appearance~='success'].c1[data-appearance~='success'].c1[data-appearance~='success'] *[fill^='#'] {
   fill: #FFFFFF;
 }
 
-.c7[data-appearance~='success'].c1[data-appearance~='success'].c1[data-appearance~='success']:hover {
+.c8[data-appearance~='success'].c1[data-appearance~='success'].c1[data-appearance~='success']:hover {
   background-color: #128238;
   border-color: #128238;
 }
 
-.c7[data-appearance~='success'].c1[data-appearance~='success'].c1[data-appearance~='success']:active {
+.c8[data-appearance~='success'].c1[data-appearance~='success'].c1[data-appearance~='success']:active {
   background-color: #0B682A;
   border-color: #0B682A;
 }
 
-.c7[data-appearance~='success'].c1[data-appearance~='success'].c1[data-appearance~='success'][data-appearance~='disabled'],
-.c7[data-appearance~='success'].c7[data-appearance~='success'].c7[data-appearance~='success']:disabled {
+.c8[data-appearance~='success'].c1[data-appearance~='success'].c1[data-appearance~='success'][data-appearance~='disabled'],
+.c8[data-appearance~='success'].c8[data-appearance~='success'].c8[data-appearance~='success']:disabled {
   background-color: #E5E7EB;
   color: #B0B5BD;
   border-color: #E5E7EB;
 }
 
-.c7[data-appearance~='success'].c1[data-appearance~='success'].c1[data-appearance~='success'][data-appearance~='disabled'].c1[data-appearance~='success'].c1[data-appearance~='success'].c1[data-appearance~='success'][data-appearance~='disabled'].c1[data-appearance~='success'].c1[data-appearance~='success'].c1[data-appearance~='success'][data-appearance~='disabled'] *[fill^='#'],
-.c7[data-appearance~='success'].c7[data-appearance~='success'].c7[data-appearance~='success']:disabled.c7[data-appearance~='success'].c7[data-appearance~='success'].c7[data-appearance~='success']:disabled.c7[data-appearance~='success'].c7[data-appearance~='success'].c7[data-appearance~='success']:disabled *[fill^='#'] {
+.c8[data-appearance~='success'].c1[data-appearance~='success'].c1[data-appearance~='success'][data-appearance~='disabled'].c1[data-appearance~='success'].c1[data-appearance~='success'].c1[data-appearance~='success'][data-appearance~='disabled'].c1[data-appearance~='success'].c1[data-appearance~='success'].c1[data-appearance~='success'][data-appearance~='disabled'] *[fill^='#'],
+.c8[data-appearance~='success'].c8[data-appearance~='success'].c8[data-appearance~='success']:disabled.c8[data-appearance~='success'].c8[data-appearance~='success'].c8[data-appearance~='success']:disabled.c8[data-appearance~='success'].c8[data-appearance~='success'].c8[data-appearance~='success']:disabled *[fill^='#'] {
   fill: #B0B5BD;
 }
 
-.c7:focus-visible {
+.c8:focus-visible {
   outline-offset: 2px;
   outline: #0062FF solid 2px;
 }
 
-.c7[data-dimension='xl'] {
+.c8[data-dimension='xl'] {
   padding: 0;
   height: 56px;
   width: 56px;
@@ -3747,17 +3791,17 @@ Object {
   text-rendering: geometricPrecision;
 }
 
-.c7[data-dimension='l'] {
+.c8[data-dimension='l'] {
   height: 48px;
   width: 48px;
 }
 
-.c7[data-dimension='m'] {
+.c8[data-dimension='m'] {
   height: 40px;
   width: 40px;
 }
 
-.c7[data-dimension='s'] {
+.c8[data-dimension='s'] {
   height: 32px;
   width: 32px;
   font-family: 'VTB Group UI',sans-serif;
@@ -3769,11 +3813,11 @@ Object {
   text-rendering: geometricPrecision;
 }
 
-.c7:hover {
+.c8:hover {
   cursor: pointer;
 }
 
-.c9 {
+.c10 {
   -webkit-transition: -webkit-transform 0.3s ease-in-out;
   -webkit-transition: transform 0.3s ease-in-out;
   transition: transform 0.3s ease-in-out;
@@ -3782,19 +3826,19 @@ Object {
   transform: rotate(0deg);
 }
 
-.c9 *[fill^='#'] {
+.c10 *[fill^='#'] {
   fill: #717681;
 }
 
-.c9:hover *[fill^='#'] {
+.c10:hover *[fill^='#'] {
   fill: #0046E2;
 }
 
-.c9[data-disabled] {
+.c10[data-disabled] {
   pointer-events: none;
 }
 
-.c9[data-disabled] *[fill^='#'] {
+.c10[data-disabled] *[fill^='#'] {
   fill: #B0B5BD;
 }
 
@@ -3819,36 +3863,36 @@ Object {
   outline: #0062FF solid 2px;
 }
 
-.c8[data-appearance~='primary'] {
+.c9[data-appearance~='primary'] {
   border-radius: 0 4px 4px 0;
 }
 
-.c8[data-appearance~='secondary'] {
+.c9[data-appearance~='secondary'] {
   border-left: none;
   border-radius: 0 4px 4px 0;
 }
 
-.c8:focus-visible {
+.c9:focus-visible {
   outline-offset: -4px;
 }
 
-.c8:focus-visible[data-appearance~='primary'] {
+.c9:focus-visible[data-appearance~='primary'] {
   outline: #FFFFFF solid 2px;
 }
 
-.c8:focus-visible[data-appearance~='secondary'] {
+.c9:focus-visible[data-appearance~='secondary'] {
   outline: #0062FF solid 2px;
 }
 
-.c6 {
+.c7 {
   width: 1px;
 }
 
-.c6[data-appearance~='primary'] {
+.c7[data-appearance~='primary'] {
   background-color: transparent;
 }
 
-.c6[data-appearance~='secondary'] {
+.c7[data-appearance~='secondary'] {
   background-color: #0062FF;
 }
 
@@ -3873,43 +3917,50 @@ Object {
           type="button"
         >
           <div
-            class="c4 c5"
+            class="c4"
+          />
+          <div
+            class="c5 c6"
           >
             <div>
               one
             </div>
           </div>
+          <div
+            class="c4"
+          />
         </button>
         <div
           aria-hidden="true"
-          class="c6"
+          class="c7"
           data-appearance="secondary"
         />
         <button
           aria-expanded="false"
-          class="c1 c7 c8 multi-button-menu-button-with-dropdown"
+          class="c1 c8 c9 multi-button-menu-button-with-dropdown"
           data-appearance="secondary"
           data-dimension="l"
           type="button"
         >
           <div
-            class="c4 c5"
+            class="c5 c6"
           >
             <div
               aria-hidden="true"
-              class="c9"
+              class="c10"
             />
           </div>
         </button>
       </div>
     </div>
   </body>,
-  "container": .c5 {
+  "container": .c6 {
   vertical-align: top;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
   display: inline-flex;
+  gap: 8px;
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
@@ -3928,7 +3979,7 @@ Object {
   height: 24px;
 }
 
-.c5 > * {
+.c6 > * {
   display: inline-block;
   -webkit-flex: 0 1 auto;
   -ms-flex: 0 1 auto;
@@ -3936,38 +3987,40 @@ Object {
   white-space: nowrap;
 }
 
-.c5 > *:not(:first-child) {
-  margin-left: 8px;
-}
-
-.c5 > svg {
+.c6 > svg {
   width: 24px;
   height: 24px;
 }
 
-[data-dimension='s'] .c4 {
+[data-dimension='s'] .c5 {
   height: 20px;
 }
 
-[data-dimension='s'] .c4 > svg {
+[data-dimension='s'] .c5 > svg {
   width: 20px;
   height: 20px;
+}
+
+.c4 {
+  display: inline-block;
+  width: 2px;
 }
 
 .c2 {
   position: relative;
   box-sizing: border-box;
   display: inline-block;
+  white-space: nowrap;
   border: none;
   border-radius: 4px;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  vertical-align: center;
+  vertical-align: middle;
   pointer-events: all;
   padding: 0;
   height: 56px;
-  padding: 0 31px;
+  padding: 0 29px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -4206,7 +4259,7 @@ Object {
 .c2[data-dimension='xl'] {
   padding: 0;
   height: 56px;
-  padding: 0 31px;
+  padding: 0 29px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -4218,17 +4271,17 @@ Object {
 
 .c2[data-dimension='l'] {
   height: 48px;
-  padding: 0 23px;
+  padding: 0 21px;
 }
 
 .c2[data-dimension='m'] {
   height: 40px;
-  padding: 0 19px;
+  padding: 0 17px;
 }
 
 .c2[data-dimension='s'] {
   height: 32px;
-  padding: 0 15px;
+  padding: 0 13px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -4242,16 +4295,17 @@ Object {
   cursor: pointer;
 }
 
-.c7 {
+.c8 {
   position: relative;
   box-sizing: border-box;
   display: inline-block;
+  white-space: nowrap;
   border: none;
   border-radius: 4px;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  vertical-align: center;
+  vertical-align: middle;
   pointer-events: all;
   padding: 0;
   height: 56px;
@@ -4265,233 +4319,233 @@ Object {
   text-rendering: geometricPrecision;
 }
 
-.c7[data-appearance~='primary'] {
+.c8[data-appearance~='primary'] {
   background-color: #0062FF;
   color: #FFFFFF;
   border: 1px solid #0062FF;
 }
 
-.c7[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'] *[fill^='#'] {
+.c8[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'] *[fill^='#'] {
   fill: #FFFFFF;
 }
 
-.c7[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary']:hover {
+.c8[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary']:hover {
   background-color: #0046E2;
   border-color: #0046E2;
 }
 
-.c7[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary']:active {
+.c8[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary']:active {
   background-color: #0132B0;
   border-color: #0132B0;
 }
 
-.c7[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'][data-appearance~='disabled'],
-.c7[data-appearance~='primary'].c7[data-appearance~='primary'].c7[data-appearance~='primary']:disabled {
+.c8[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'][data-appearance~='disabled'],
+.c8[data-appearance~='primary'].c8[data-appearance~='primary'].c8[data-appearance~='primary']:disabled {
   background-color: #E5E7EB;
   color: #B0B5BD;
   border-color: #E5E7EB;
 }
 
-.c7[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'][data-appearance~='disabled'].c1[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'][data-appearance~='disabled'].c1[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'][data-appearance~='disabled'] *[fill^='#'],
-.c7[data-appearance~='primary'].c7[data-appearance~='primary'].c7[data-appearance~='primary']:disabled.c7[data-appearance~='primary'].c7[data-appearance~='primary'].c7[data-appearance~='primary']:disabled.c7[data-appearance~='primary'].c7[data-appearance~='primary'].c7[data-appearance~='primary']:disabled *[fill^='#'] {
+.c8[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'][data-appearance~='disabled'].c1[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'][data-appearance~='disabled'].c1[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'].c1[data-appearance~='primary'][data-appearance~='disabled'] *[fill^='#'],
+.c8[data-appearance~='primary'].c8[data-appearance~='primary'].c8[data-appearance~='primary']:disabled.c8[data-appearance~='primary'].c8[data-appearance~='primary'].c8[data-appearance~='primary']:disabled.c8[data-appearance~='primary'].c8[data-appearance~='primary'].c8[data-appearance~='primary']:disabled *[fill^='#'] {
   fill: #B0B5BD;
 }
 
-.c7[data-appearance~='secondary'] {
+.c8[data-appearance~='secondary'] {
   background-color: transparent;
   color: #0062FF;
   border: 1px solid #0062FF;
 }
 
-.c7[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary'] *[fill^='#'] {
+.c8[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary'] *[fill^='#'] {
   fill: #0062FF;
 }
 
-.c7[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary']:hover {
+.c8[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary']:hover {
   background-color: #0000000D;
   color: #0062FF;
   border-color: #0062FF;
 }
 
-.c7[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary']:hover.c1[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary']:hover.c1[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary']:hover *[fill^='#'] {
+.c8[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary']:hover.c1[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary']:hover.c1[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary']:hover *[fill^='#'] {
   fill: #0062FF;
 }
 
-.c7[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary']:active {
+.c8[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary']:active {
   background-color: #0000001F;
   color: #0062FF;
   border-color: #0062FF;
 }
 
-.c7[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary']:active *[fill^='#'] {
+.c8[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary']:active *[fill^='#'] {
   fill: #0062FF;
 }
 
-.c7[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary'][data-appearance~='disabled'],
-.c7[data-appearance~='secondary'].c7[data-appearance~='secondary'].c7[data-appearance~='secondary']:disabled {
+.c8[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary'][data-appearance~='disabled'],
+.c8[data-appearance~='secondary'].c8[data-appearance~='secondary'].c8[data-appearance~='secondary']:disabled {
   background-color: transparent;
   color: #B0B5BD;
   border-color: #B0B5BD;
 }
 
-.c7[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary'][data-appearance~='disabled'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary'][data-appearance~='disabled'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary'][data-appearance~='disabled'] *[fill^='#'],
-.c7[data-appearance~='secondary'].c7[data-appearance~='secondary'].c7[data-appearance~='secondary']:disabled.c7[data-appearance~='secondary'].c7[data-appearance~='secondary'].c7[data-appearance~='secondary']:disabled.c7[data-appearance~='secondary'].c7[data-appearance~='secondary'].c7[data-appearance~='secondary']:disabled *[fill^='#'] {
+.c8[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary'][data-appearance~='disabled'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary'][data-appearance~='disabled'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary'].c1[data-appearance~='secondary'][data-appearance~='disabled'] *[fill^='#'],
+.c8[data-appearance~='secondary'].c8[data-appearance~='secondary'].c8[data-appearance~='secondary']:disabled.c8[data-appearance~='secondary'].c8[data-appearance~='secondary'].c8[data-appearance~='secondary']:disabled.c8[data-appearance~='secondary'].c8[data-appearance~='secondary'].c8[data-appearance~='secondary']:disabled *[fill^='#'] {
   fill: #B0B5BD;
 }
 
-.c7[data-appearance~='ghost'] {
+.c8[data-appearance~='ghost'] {
   background-color: transparent;
   color: #0062FF;
   border: 1px solid transparent;
 }
 
-.c7[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost'] *[fill^='#'] {
+.c8[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost'] *[fill^='#'] {
   fill: #0062FF;
 }
 
-.c7[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost']:hover {
+.c8[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost']:hover {
   background-color: #0000000D;
   color: #0062FF;
   border-color: transparent;
 }
 
-.c7[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost']:hover *[fill^='#'] {
+.c8[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost']:hover *[fill^='#'] {
   fill: #0062FF;
 }
 
-.c7[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost']:active {
+.c8[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost']:active {
   background-color: #0000001F;
   color: #0062FF;
   border-color: transparent;
 }
 
-.c7[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost']:active *[fill^='#'] {
+.c8[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost']:active *[fill^='#'] {
   fill: #0062FF;
 }
 
-.c7[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost'][data-appearance~='disabled'],
-.c7[data-appearance~='ghost'].c7[data-appearance~='ghost'].c7[data-appearance~='ghost']:disabled {
+.c8[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost'][data-appearance~='disabled'],
+.c8[data-appearance~='ghost'].c8[data-appearance~='ghost'].c8[data-appearance~='ghost']:disabled {
   background-color: transparent;
   color: #B0B5BD;
   border-color: transparent;
 }
 
-.c7[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost'][data-appearance~='disabled'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost'][data-appearance~='disabled'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost'][data-appearance~='disabled'] *[fill^='#'],
-.c7[data-appearance~='ghost'].c7[data-appearance~='ghost'].c7[data-appearance~='ghost']:disabled.c7[data-appearance~='ghost'].c7[data-appearance~='ghost'].c7[data-appearance~='ghost']:disabled.c7[data-appearance~='ghost'].c7[data-appearance~='ghost'].c7[data-appearance~='ghost']:disabled *[fill^='#'] {
+.c8[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost'][data-appearance~='disabled'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost'][data-appearance~='disabled'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost'].c1[data-appearance~='ghost'][data-appearance~='disabled'] *[fill^='#'],
+.c8[data-appearance~='ghost'].c8[data-appearance~='ghost'].c8[data-appearance~='ghost']:disabled.c8[data-appearance~='ghost'].c8[data-appearance~='ghost'].c8[data-appearance~='ghost']:disabled.c8[data-appearance~='ghost'].c8[data-appearance~='ghost'].c8[data-appearance~='ghost']:disabled *[fill^='#'] {
   fill: #B0B5BD;
 }
 
-.c7[data-appearance~='white'] {
+.c8[data-appearance~='white'] {
   background-color: transparent;
   color: #FFFFFF;
   border: 1px solid #FFFFFF;
 }
 
-.c7[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white'] *[fill^='#'] {
+.c8[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white'] *[fill^='#'] {
   fill: #FFFFFF;
 }
 
-.c7[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:hover {
+.c8[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:hover {
   background-color: #FFFFFF0F;
   color: #FFFFFF;
   border-color: #FFFFFF;
 }
 
-.c7[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:hover.c1[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:hover.c1[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:hover *[fill^='#'] {
+.c8[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:hover.c1[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:hover.c1[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:hover *[fill^='#'] {
   fill: #FFFFFF;
 }
 
-.c7[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:active {
+.c8[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:active {
   background-color: #FFFFFF1F;
   color: #FFFFFF;
   border-color: #FFFFFF;
 }
 
-.c7[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:active.c1[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:active.c1[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:active *[fill^='#'] {
+.c8[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:active.c1[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:active.c1[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white']:active *[fill^='#'] {
   fill: #FFFFFF;
 }
 
-.c7[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white'][data-appearance~='disabled'],
-.c7[data-appearance~='white'].c7[data-appearance~='white'].c7[data-appearance~='white']:disabled {
+.c8[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white'][data-appearance~='disabled'],
+.c8[data-appearance~='white'].c8[data-appearance~='white'].c8[data-appearance~='white']:disabled {
   border-color: #4E535D;
   color: #4E535D;
 }
 
-.c7[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white'][data-appearance~='disabled'].c1[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white'][data-appearance~='disabled'].c1[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white'][data-appearance~='disabled'] *[fill^='#'],
-.c7[data-appearance~='white'].c7[data-appearance~='white'].c7[data-appearance~='white']:disabled.c7[data-appearance~='white'].c7[data-appearance~='white'].c7[data-appearance~='white']:disabled.c7[data-appearance~='white'].c7[data-appearance~='white'].c7[data-appearance~='white']:disabled *[fill^='#'] {
+.c8[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white'][data-appearance~='disabled'].c1[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white'][data-appearance~='disabled'].c1[data-appearance~='white'].c1[data-appearance~='white'].c1[data-appearance~='white'][data-appearance~='disabled'] *[fill^='#'],
+.c8[data-appearance~='white'].c8[data-appearance~='white'].c8[data-appearance~='white']:disabled.c8[data-appearance~='white'].c8[data-appearance~='white'].c8[data-appearance~='white']:disabled.c8[data-appearance~='white'].c8[data-appearance~='white'].c8[data-appearance~='white']:disabled *[fill^='#'] {
   fill: #4E535D;
 }
 
-.c7[data-appearance~='danger'] {
+.c8[data-appearance~='danger'] {
   background-color: #D92020;
   color: #FFFFFF;
   border: 1px solid #D92020;
 }
 
-.c7[data-appearance~='danger'].c1[data-appearance~='danger'].c1[data-appearance~='danger'] *[fill^='#'] {
+.c8[data-appearance~='danger'].c1[data-appearance~='danger'].c1[data-appearance~='danger'] *[fill^='#'] {
   fill: #FFFFFF;
 }
 
-.c7[data-appearance~='danger'].c1[data-appearance~='danger'].c1[data-appearance~='danger']:hover {
+.c8[data-appearance~='danger'].c1[data-appearance~='danger'].c1[data-appearance~='danger']:hover {
   background-color: #BA1717;
   border-color: #BA1717;
 }
 
-.c7[data-appearance~='danger'].c1[data-appearance~='danger'].c1[data-appearance~='danger']:active {
+.c8[data-appearance~='danger'].c1[data-appearance~='danger'].c1[data-appearance~='danger']:active {
   background-color: #981111;
   border-color: #981111;
 }
 
-.c7[data-appearance~='danger'].c1[data-appearance~='danger'].c1[data-appearance~='danger'][data-appearance~='disabled'],
-.c7[data-appearance~='danger'].c7[data-appearance~='danger'].c7[data-appearance~='danger']:disabled {
+.c8[data-appearance~='danger'].c1[data-appearance~='danger'].c1[data-appearance~='danger'][data-appearance~='disabled'],
+.c8[data-appearance~='danger'].c8[data-appearance~='danger'].c8[data-appearance~='danger']:disabled {
   background-color: #E5E7EB;
   color: #B0B5BD;
   border-color: #E5E7EB;
 }
 
-.c7[data-appearance~='danger'].c1[data-appearance~='danger'].c1[data-appearance~='danger'][data-appearance~='disabled'].c1[data-appearance~='danger'].c1[data-appearance~='danger'].c1[data-appearance~='danger'][data-appearance~='disabled'].c1[data-appearance~='danger'].c1[data-appearance~='danger'].c1[data-appearance~='danger'][data-appearance~='disabled'] *[fill^='#'],
-.c7[data-appearance~='danger'].c7[data-appearance~='danger'].c7[data-appearance~='danger']:disabled.c7[data-appearance~='danger'].c7[data-appearance~='danger'].c7[data-appearance~='danger']:disabled.c7[data-appearance~='danger'].c7[data-appearance~='danger'].c7[data-appearance~='danger']:disabled *[fill^='#'] {
+.c8[data-appearance~='danger'].c1[data-appearance~='danger'].c1[data-appearance~='danger'][data-appearance~='disabled'].c1[data-appearance~='danger'].c1[data-appearance~='danger'].c1[data-appearance~='danger'][data-appearance~='disabled'].c1[data-appearance~='danger'].c1[data-appearance~='danger'].c1[data-appearance~='danger'][data-appearance~='disabled'] *[fill^='#'],
+.c8[data-appearance~='danger'].c8[data-appearance~='danger'].c8[data-appearance~='danger']:disabled.c8[data-appearance~='danger'].c8[data-appearance~='danger'].c8[data-appearance~='danger']:disabled.c8[data-appearance~='danger'].c8[data-appearance~='danger'].c8[data-appearance~='danger']:disabled *[fill^='#'] {
   fill: #B0B5BD;
 }
 
-.c7[data-appearance~='success'] {
+.c8[data-appearance~='success'] {
   background-color: #1BA049;
   color: #FFFFFF;
   border: 1px solid #1BA049;
 }
 
-.c7[data-appearance~='success'].c1[data-appearance~='success'].c1[data-appearance~='success'] *[fill^='#'] {
+.c8[data-appearance~='success'].c1[data-appearance~='success'].c1[data-appearance~='success'] *[fill^='#'] {
   fill: #FFFFFF;
 }
 
-.c7[data-appearance~='success'].c1[data-appearance~='success'].c1[data-appearance~='success']:hover {
+.c8[data-appearance~='success'].c1[data-appearance~='success'].c1[data-appearance~='success']:hover {
   background-color: #128238;
   border-color: #128238;
 }
 
-.c7[data-appearance~='success'].c1[data-appearance~='success'].c1[data-appearance~='success']:active {
+.c8[data-appearance~='success'].c1[data-appearance~='success'].c1[data-appearance~='success']:active {
   background-color: #0B682A;
   border-color: #0B682A;
 }
 
-.c7[data-appearance~='success'].c1[data-appearance~='success'].c1[data-appearance~='success'][data-appearance~='disabled'],
-.c7[data-appearance~='success'].c7[data-appearance~='success'].c7[data-appearance~='success']:disabled {
+.c8[data-appearance~='success'].c1[data-appearance~='success'].c1[data-appearance~='success'][data-appearance~='disabled'],
+.c8[data-appearance~='success'].c8[data-appearance~='success'].c8[data-appearance~='success']:disabled {
   background-color: #E5E7EB;
   color: #B0B5BD;
   border-color: #E5E7EB;
 }
 
-.c7[data-appearance~='success'].c1[data-appearance~='success'].c1[data-appearance~='success'][data-appearance~='disabled'].c1[data-appearance~='success'].c1[data-appearance~='success'].c1[data-appearance~='success'][data-appearance~='disabled'].c1[data-appearance~='success'].c1[data-appearance~='success'].c1[data-appearance~='success'][data-appearance~='disabled'] *[fill^='#'],
-.c7[data-appearance~='success'].c7[data-appearance~='success'].c7[data-appearance~='success']:disabled.c7[data-appearance~='success'].c7[data-appearance~='success'].c7[data-appearance~='success']:disabled.c7[data-appearance~='success'].c7[data-appearance~='success'].c7[data-appearance~='success']:disabled *[fill^='#'] {
+.c8[data-appearance~='success'].c1[data-appearance~='success'].c1[data-appearance~='success'][data-appearance~='disabled'].c1[data-appearance~='success'].c1[data-appearance~='success'].c1[data-appearance~='success'][data-appearance~='disabled'].c1[data-appearance~='success'].c1[data-appearance~='success'].c1[data-appearance~='success'][data-appearance~='disabled'] *[fill^='#'],
+.c8[data-appearance~='success'].c8[data-appearance~='success'].c8[data-appearance~='success']:disabled.c8[data-appearance~='success'].c8[data-appearance~='success'].c8[data-appearance~='success']:disabled.c8[data-appearance~='success'].c8[data-appearance~='success'].c8[data-appearance~='success']:disabled *[fill^='#'] {
   fill: #B0B5BD;
 }
 
-.c7:focus-visible {
+.c8:focus-visible {
   outline-offset: 2px;
   outline: #0062FF solid 2px;
 }
 
-.c7[data-dimension='xl'] {
+.c8[data-dimension='xl'] {
   padding: 0;
   height: 56px;
   width: 56px;
@@ -4504,17 +4558,17 @@ Object {
   text-rendering: geometricPrecision;
 }
 
-.c7[data-dimension='l'] {
+.c8[data-dimension='l'] {
   height: 48px;
   width: 48px;
 }
 
-.c7[data-dimension='m'] {
+.c8[data-dimension='m'] {
   height: 40px;
   width: 40px;
 }
 
-.c7[data-dimension='s'] {
+.c8[data-dimension='s'] {
   height: 32px;
   width: 32px;
   font-family: 'VTB Group UI',sans-serif;
@@ -4526,11 +4580,11 @@ Object {
   text-rendering: geometricPrecision;
 }
 
-.c7:hover {
+.c8:hover {
   cursor: pointer;
 }
 
-.c9 {
+.c10 {
   -webkit-transition: -webkit-transform 0.3s ease-in-out;
   -webkit-transition: transform 0.3s ease-in-out;
   transition: transform 0.3s ease-in-out;
@@ -4539,19 +4593,19 @@ Object {
   transform: rotate(0deg);
 }
 
-.c9 *[fill^='#'] {
+.c10 *[fill^='#'] {
   fill: #717681;
 }
 
-.c9:hover *[fill^='#'] {
+.c10:hover *[fill^='#'] {
   fill: #0046E2;
 }
 
-.c9[data-disabled] {
+.c10[data-disabled] {
   pointer-events: none;
 }
 
-.c9[data-disabled] *[fill^='#'] {
+.c10[data-disabled] *[fill^='#'] {
   fill: #B0B5BD;
 }
 
@@ -4576,36 +4630,36 @@ Object {
   outline: #0062FF solid 2px;
 }
 
-.c8[data-appearance~='primary'] {
+.c9[data-appearance~='primary'] {
   border-radius: 0 4px 4px 0;
 }
 
-.c8[data-appearance~='secondary'] {
+.c9[data-appearance~='secondary'] {
   border-left: none;
   border-radius: 0 4px 4px 0;
 }
 
-.c8:focus-visible {
+.c9:focus-visible {
   outline-offset: -4px;
 }
 
-.c8:focus-visible[data-appearance~='primary'] {
+.c9:focus-visible[data-appearance~='primary'] {
   outline: #FFFFFF solid 2px;
 }
 
-.c8:focus-visible[data-appearance~='secondary'] {
+.c9:focus-visible[data-appearance~='secondary'] {
   outline: #0062FF solid 2px;
 }
 
-.c6 {
+.c7 {
   width: 1px;
 }
 
-.c6[data-appearance~='primary'] {
+.c7[data-appearance~='primary'] {
   background-color: transparent;
 }
 
-.c6[data-appearance~='secondary'] {
+.c7[data-appearance~='secondary'] {
   background-color: #0062FF;
 }
 
@@ -4629,31 +4683,37 @@ Object {
         type="button"
       >
         <div
-          class="c4 c5"
+          class="c4"
+        />
+        <div
+          class="c5 c6"
         >
           <div>
             one
           </div>
         </div>
+        <div
+          class="c4"
+        />
       </button>
       <div
         aria-hidden="true"
-        class="c6"
+        class="c7"
         data-appearance="secondary"
       />
       <button
         aria-expanded="false"
-        class="c1 c7 c8 multi-button-menu-button-with-dropdown"
+        class="c1 c8 c9 multi-button-menu-button-with-dropdown"
         data-appearance="secondary"
         data-dimension="l"
         type="button"
       >
         <div
-          class="c4 c5"
+          class="c5 c6"
         >
           <div
             aria-hidden="true"
-            class="c9"
+            class="c10"
           />
         </div>
       </button>

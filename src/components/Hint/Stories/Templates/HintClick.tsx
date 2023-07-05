@@ -29,7 +29,7 @@ export const HintClickTemplate = (args: HintProps) => {
           dimension="xl"
           appearance="primary"
           displayAsSquare
-          icon={<HelpOutline aria-hidden />}
+          iconStart={<HelpOutline aria-hidden />}
           aria-label="Additional information"
           aria-describedby="hint_click"
         />

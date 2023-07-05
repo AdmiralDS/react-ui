@@ -2,6 +2,40 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.4.0](https://github.com/AdmiralDS/react-ui/compare/v5.3.0...v5.4.0) (2023-07-05)
+
+
+### Features
+
+* **Menu:** добавлена возможность использовать многоуровневые меню ([2f607b7](https://github.com/AdmiralDS/react-ui/commit/2f607b7e5ca688f198c3a7fa5f8762c373107a85)), closes [#259](https://github.com/AdmiralDS/react-ui/issues/259)
+
+
+### Bug Fixes
+
+* **SliderInput:** fix incorrect value of fullStr param in onChange callback, add event param in onChange callback ([58b9d99](https://github.com/AdmiralDS/react-ui/commit/58b9d99c6236b67de32160b9f82e1b47c1379066))
+
+## [5.3.0](https://github.com/AdmiralDS/react-ui/compare/v5.2.0...v5.3.0) (2023-06-30)
+
+
+### Features
+
+* **Table:** add showRowsActions prop to display row actions (overflow menus and single action icons) permanently ([5e7d58e](https://github.com/AdmiralDS/react-ui/commit/5e7d58ee267410d73d38f9c694019322530bd64d))
+
+## [5.2.0](https://github.com/AdmiralDS/react-ui/compare/v5.1.0...v5.2.0) (2023-06-22)
+
+
+### Features
+
+* **Avatar, AvatarGroup:** update appearance names ([3a8e312](https://github.com/AdmiralDS/react-ui/commit/3a8e3121cff33f82cc35a0160932e228a11a2c13))
+* **Button:** add props iconStart/iconEnd ([a55c4ce](https://github.com/AdmiralDS/react-ui/commit/a55c4cea73dd0f1f6ac550e8c830f5cab707b98f))
+
+
+### Bug Fixes
+
+* **NumberInput:** fix placeholder default value, hide clear icon when value is empty ([73d7531](https://github.com/AdmiralDS/react-ui/commit/73d75314641e8cde5738b399bc1f37bfde50c97f))
+* **PhoneNumberInput:** fix Chevron position ([06478ff](https://github.com/AdmiralDS/react-ui/commit/06478ff0adc6a3ef06b06e21bfdaad9226f12b4e))
+* **Table:** add touch support for column resize ([a903144](https://github.com/AdmiralDS/react-ui/commit/a90314446f0d2a66061f684b6f546abec0a39cf4))
+
 ## [5.1.0](https://github.com/AdmiralDS/react-ui/compare/v5.0.1...v5.1.0) (2023-06-16)
 
 
