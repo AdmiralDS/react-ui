@@ -26,7 +26,7 @@ const calcValueByPos = (
 
   let sliderValue = sliderPosition * onePixelVal;
 
-  if (!step || step >= 1) {
+  if (typeof step === 'number' && (!step || step >= 1)) {
     sliderValue = Math.round(sliderValue);
   }
   let calcValue = minValue + sliderValue;
