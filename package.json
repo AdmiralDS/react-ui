@@ -28,7 +28,6 @@
   },
   "scripts": {
     "prepare": "npm run build",
-    "postinstall": "npm run build",
     "build": "rollup -c",
     "test": "jest",
     "test:update": "jest -u",
