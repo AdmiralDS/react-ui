@@ -1,10 +1,8 @@
-import * as React from 'react';
-import { act, fireEvent, render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 import { ThemeProvider } from 'styled-components';
 import userEvent from '@testing-library/user-event';
-import { LIGHT_THEME } from '#src/components/themes';
 
-import { Chips } from '#src/components/Chips';
+import { Chips, LIGHT_THEME } from '@admiral-ds/react-ui';
 
 describe('Chips', () => {
   it('should render default component', () => {
@@ -45,16 +43,15 @@ describe('Chips', () => {
     expect(onClick).toBeCalledTimes(1);
   });
 
-  it('should focus on component when user on press key tab', () => {
+  it('should focus on component when user on press key tab', async () => {
+    const user = userEvent.setup();
     const wrapper = render(
       <ThemeProvider theme={LIGHT_THEME}>
         <Chips data-testid="test-element">test</Chips>
       </ThemeProvider>,
     );
     expect(document.body).toHaveFocus();
-    act(() => {
-      userEvent.tab();
-    });
+    await user.tab();
     expect(wrapper.getByTestId('test-element')).toHaveFocus();
   });
 });

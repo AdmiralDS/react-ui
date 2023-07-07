@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`MenuButton should render component 1`] = `
-Object {
+{
   "asFragment": [Function],
   "baseElement": .c5 {
   -webkit-transition: -webkit-transform 0.3s ease-in-out;
@@ -850,7 +850,7 @@ Object {
 `;
 
 exports[`MenuButton should render component with loading state 1`] = `
-Object {
+{
   "asFragment": [Function],
   "baseElement": .c6 {
   -webkit-transition: -webkit-transform 0.3s ease-in-out;
@@ -1753,7 +1753,7 @@ Object {
 `;
 
 exports[`MenuButton should render component with skeleton state 1`] = `
-Object {
+{
   "asFragment": [Function],
   "baseElement": .c5 {
   -webkit-transition: -webkit-transform 0.3s ease-in-out;

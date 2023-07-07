@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Chips should render component with appearanceTypeFilled prop  1`] = `
-Object {
+{
   "asFragment": [Function],
   "baseElement": .c0 {
   display: -webkit-inline-box;
@@ -254,7 +254,7 @@ Object {
 `;
 
 exports[`Chips should render component with selected prop  1`] = `
-Object {
+{
   "asFragment": [Function],
   "baseElement": .c0 {
   display: -webkit-inline-box;
@@ -507,7 +507,7 @@ Object {
 `;
 
 exports[`Chips should render default component 1`] = `
-Object {
+{
   "asFragment": [Function],
   "baseElement": .c0 {
   display: -webkit-inline-box;

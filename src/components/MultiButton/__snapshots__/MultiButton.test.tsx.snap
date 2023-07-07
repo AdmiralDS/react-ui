@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`MultiButton should render component with disabled state 1`] = `
-Object {
+{
   "asFragment": [Function],
   "baseElement": .c6 {
   vertical-align: top;
@@ -1596,7 +1596,7 @@ Object {
 `;
 
 exports[`MultiButton should render component with primary appearance 1`] = `
-Object {
+{
   "asFragment": [Function],
   "baseElement": .c6 {
   vertical-align: top;
@@ -3185,7 +3185,7 @@ Object {
 `;
 
 exports[`MultiButton should render component with secondary appearance 1`] = `
-Object {
+{
   "asFragment": [Function],
   "baseElement": .c6 {
   vertical-align: top;

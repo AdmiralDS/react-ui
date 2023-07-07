@@ -35,14 +35,15 @@ describe('Button', () => {
     expect(screen.getByRole('button')).toHaveTextContent(`${BUTTON_TEXT}`);
   });
 
-  test('should focus on component when user on press key tab', () => {
+  test('should focus on component when user on press key tab', async () => {
+    const user = userEvent.setup();
     render(
       <ThemeProvider theme={LIGHT_THEME}>
         <Button>{BUTTON_TEXT}</Button>
       </ThemeProvider>,
     );
     expect(document.body).toHaveFocus();
-    userEvent.tab();
+    await user.tab();
     expect(screen.getByRole('button')).toHaveFocus();
   });
 

@@ -1,8 +1,7 @@
 import { LIGHT_THEME } from '#src/components/themes';
-import * as React from 'react';
 import { ThemeProvider } from 'styled-components';
 import { fireEvent, render, screen } from '@testing-library/react';
-import userEvent, { specialChars } from '@testing-library/user-event';
+import userEvent from '@testing-library/user-event';
 
 import { Checkbox } from '../Checkbox';
 
@@ -56,37 +55,40 @@ describe('Checkbox', () => {
     expect(onChange).toBeCalledTimes(1);
   });
 
-  it('should focus input if user press Tab key', () => {
+  it('should focus input if user press Tab key', async () => {
+    const user = userEvent.setup();
     render(
       <ThemeProvider theme={LIGHT_THEME}>
         <Checkbox {...checkboxRequiredProps} />
       </ThemeProvider>,
     );
     const [radio] = screen.getAllByTestId('element');
-    userEvent.tab();
+    await user.tab();
     expect(radio).toHaveFocus();
   });
 
-  it('should call onChange if input is focused and user press Space key', () => {
+  it('should call onChange if input is focused and user press Space key', async () => {
+    const user = userEvent.setup();
     render(
       <ThemeProvider theme={LIGHT_THEME}>
         <Checkbox {...checkboxRequiredProps} />
       </ThemeProvider>,
     );
     const [checkbox] = screen.getAllByTestId('element');
-    userEvent.tab();
-    userEvent.type(checkbox, specialChars.space);
+    await user.tab();
+    await user.type(checkbox, '{Space}');
     const { onChange } = checkboxRequiredProps;
-    expect(onChange).toBeCalledTimes(2);
+    expect(onChange).toBeCalledTimes(1);
   });
 
-  it('base react checkbox', () => {
+  it('base react checkbox', async () => {
+    const user = userEvent.setup();
     render(<input type="checkbox" {...checkboxRequiredProps} />);
     const [checkbox] = screen.getAllByTestId('element');
-    userEvent.tab();
+    await user.tab();
     expect(checkbox).toHaveFocus();
-    userEvent.type(checkbox, specialChars.space);
+    await user.type(checkbox, '{Space}');
     const { onChange } = checkboxRequiredProps;
-    expect(onChange).toBeCalledTimes(2);
+    expect(onChange).toBeCalledTimes(1);
   });
 });
