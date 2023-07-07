@@ -16,8 +16,6 @@ import { HeightLimitedContainer } from '../Container';
 import { AutoSizeInput, BorderedDiv, horizontalPaddingValue, iconSizeValue } from './AutoSizeInput';
 import { clearValue, fitToCurrency, validateThousand } from './utils';
 
-export { fitToCurrency, clearValue } from './utils';
-
 const extraPadding = css<ExtraProps>`
   padding-right: ${(props) => horizontalPaddingValue(props) + (iconSizeValue(props) + 8) * (props.iconCount ?? 0)}px;
 `;
@@ -338,3 +336,5 @@ export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
 );
 
 NumberInput.displayName = 'NumberInput';
+
+export { fitToCurrency, clearValue } from './utils';

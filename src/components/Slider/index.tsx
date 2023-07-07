@@ -54,7 +54,7 @@ export const Slider = ({
   ...props
 }: SliderProps) => {
   const tickMarks = Array.isArray(points) ? points : undefined;
-  const step = userStep > 0 ? userStep : 1;
+  const step = (typeof userStep === 'number' && userStep > 0) || userStep === 'any' ? userStep : 1;
 
   const [isDraging, setDrag] = React.useState(false);
   const [animation, setAnimation] = React.useState(true);

@@ -76,9 +76,10 @@ export default {
   title: 'Admiral-2.1/Tooltip',
   decorators: undefined,
   component: Tooltip,
-  subcomponents: {
-    TooltipHoc: TooltipHocStory,
-  },
+  // TODO: refactor because subcomponents are deprecated in Storybook7
+  // subcomponents: {
+  //   TooltipHoc: TooltipHocStory,
+  // },
   parameters: {
     docs: {
       source: {
