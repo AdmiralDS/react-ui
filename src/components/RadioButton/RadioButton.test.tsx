@@ -1,10 +1,8 @@
-import { LIGHT_THEME } from '#src/components/themes';
-import * as React from 'react';
 import { ThemeProvider } from 'styled-components';
 import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { RadioButton } from '#src/components/RadioButton';
+import { RadioButton, LIGHT_THEME } from '@admiral-ds/react-ui';
 
 describe('RadioButton', () => {
   beforeEach(() => {
@@ -60,27 +58,29 @@ describe('RadioButton', () => {
     expect(onChange).toBeCalledTimes(1);
   });
 
-  it('should focus input if user press Tab key', () => {
+  it('should focus input if user press Tab key', async () => {
+    const user = userEvent.setup();
     render(
       <ThemeProvider theme={LIGHT_THEME}>
         <RadioButton {...radiobuttonRequiredProps}>text</RadioButton>
       </ThemeProvider>,
     );
     const [radio] = screen.getAllByTestId('element');
-    userEvent.tab();
+    await user.tab();
     expect(radio).toHaveFocus();
   });
 
-  it('should call onChange if input is focused and user press Space key', () => {
+  it('should call onChange if input is focused and user press Space key', async () => {
+    const user = userEvent.setup();
     render(
       <ThemeProvider theme={LIGHT_THEME}>
         <RadioButton {...radiobuttonRequiredProps}>text</RadioButton>
       </ThemeProvider>,
     );
     const [radio] = screen.getAllByTestId('element');
-    userEvent.tab();
-    userEvent.type(radio, '{space}');
+    await user.tab();
+    await user.type(radio, '{space}');
     const { onChange } = radiobuttonRequiredProps;
-    expect(onChange).toBeCalledTimes(2);
+    expect(onChange).toBeCalledTimes(1);
   });
 });

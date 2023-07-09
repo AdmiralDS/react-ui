@@ -21,8 +21,8 @@
       "#src/*": ["./*"],
       "@admiral-ds/react-ui": ["./index"]
     },
-    "types": ["@types/jest"]
+    "types": ["@types/jest", "@testing-library/dom", "@testing-library/react", "@testing-library/jest-dom"]
   },
-  "include": ["./src"],
+  "include": ["src",".jest",".storybook"],
   "exclude": ["dist", "**/node_modules/*"]
 }

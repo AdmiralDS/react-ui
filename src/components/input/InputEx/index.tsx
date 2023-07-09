@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { Children, forwardRef, useRef, useState, useEffect, useLayoutEffect } from 'react';
 import type { ForwardedRef, InputHTMLAttributes } from 'react';
 import { ReactComponent as CloseOutlineSvg } from '@admiral-ds/icons/build/service/CloseOutline.svg';
 import type { ComponentDimension, ExtraProps, InputStatus } from '#src/components/input/types';
@@ -247,7 +247,7 @@ export interface InputExProps extends Omit<InputHTMLAttributes<HTMLInputElement>
   showTooltip?: boolean;
 }
 
-export const InputEx = React.forwardRef<HTMLInputElement, InputExProps>(
+export const InputEx = forwardRef<HTMLInputElement, InputExProps>(
   (
     {
       displayClearIcon,
@@ -281,7 +281,7 @@ export const InputEx = React.forwardRef<HTMLInputElement, InputExProps>(
     },
     ref,
   ) => {
-    const innerContainerRef = React.useRef<HTMLDivElement | null>(null);
+    const innerContainerRef = useRef<HTMLDivElement | null>(null);
     const alignRef = alignDropRef || innerContainerRef;
     const renderPrefix = prefixValueList
       ? (props: RenderProps) => (
@@ -325,13 +325,13 @@ export const InputEx = React.forwardRef<HTMLInputElement, InputExProps>(
 
     const suffix = renderSuffix({ value: suffixValue, disabled: props.disabled, readOnly: props.readOnly });
 
-    const inputRef = React.useRef<HTMLInputElement>(null);
-    const [overflowActive, setOverflowActive] = React.useState<boolean>(false);
-    const [tooltipVisible, setTooltipVisible] = React.useState<boolean>(false);
-    const [innerValueState, setInnerValueState] = React.useState(props.defaultValue ?? undefined);
+    const inputRef = useRef<HTMLInputElement>(null);
+    const [overflowActive, setOverflowActive] = useState<boolean>(false);
+    const [tooltipVisible, setTooltipVisible] = useState<boolean>(false);
+    const [innerValueState, setInnerValueState] = useState(props.defaultValue ?? undefined);
     const innerValue = props.value ?? innerValueState;
 
-    React.useEffect(() => {
+    useEffect(() => {
       if (checkOverflow(inputRef.current)) {
         setOverflowActive(true);
         return;
@@ -339,7 +339,7 @@ export const InputEx = React.forwardRef<HTMLInputElement, InputExProps>(
       setOverflowActive(false);
     }, [tooltipVisible, setOverflowActive]);
 
-    React.useLayoutEffect(() => {
+    useLayoutEffect(() => {
       function show() {
         if (document.activeElement !== inputRef.current) setTooltipVisible(true);
       }
@@ -364,7 +364,7 @@ export const InputEx = React.forwardRef<HTMLInputElement, InputExProps>(
       props.onChange?.(e);
     };
 
-    const iconArray = React.Children.toArray(icons);
+    const iconArray = Children.toArray(icons);
 
     if (!props.readOnly && displayClearIcon && !!innerValue) {
       iconArray.unshift(

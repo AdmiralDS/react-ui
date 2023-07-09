@@ -79,7 +79,8 @@ describe('ContentSwitcher', () => {
     expect(handleClick).toHaveBeenCalledTimes(0);
   });
 
-  test('should focus on component when user on press key tab', () => {
+  test('should focus on component when user on press key tab', async () => {
+    const user = userEvent.setup();
     const handleClick = jest.fn();
     render(
       <ThemeProvider theme={LIGHT_THEME}>
@@ -97,11 +98,11 @@ describe('ContentSwitcher', () => {
       </ThemeProvider>,
     );
     expect(document.body).toHaveFocus();
-    userEvent.tab();
+    await user.tab();
     expect(screen.getByTestId(BUTTON_CLICK_TEXT)).toHaveFocus();
-    userEvent.tab();
+    await user.tab();
     expect(screen.getByTestId(BUTTON_TEXT)).toHaveFocus();
-    userEvent.tab();
+    await user.tab();
     expect(document.body).toHaveFocus();
   });
 });

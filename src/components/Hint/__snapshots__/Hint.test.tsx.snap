@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Hint should render component 1`] = `
-Object {
+{
   "asFragment": [Function],
   "baseElement": .c0 {
   display: inline-block;

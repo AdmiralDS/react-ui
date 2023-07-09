@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Toggle should render component with disabled state 1`] = `
-Object {
+{
   "asFragment": [Function],
   "baseElement": .c1 {
   position: absolute;
@@ -378,7 +378,7 @@ Object {
 `;
 
 exports[`Toggle should render component with left labelPosition 1`] = `
-Object {
+{
   "asFragment": [Function],
   "baseElement": .c1 {
   position: absolute;
@@ -749,7 +749,7 @@ Object {
 `;
 
 exports[`Toggle should render component with required properties 1`] = `
-Object {
+{
   "asFragment": [Function],
   "baseElement": .c1 {
   position: absolute;
@@ -1120,7 +1120,7 @@ Object {
 `;
 
 exports[`Toggle should render component with small dimension 1`] = `
-Object {
+{
   "asFragment": [Function],
   "baseElement": .c1 {
   position: absolute;

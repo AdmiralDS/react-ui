@@ -1,10 +1,8 @@
-import * as React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
-import userEvent, { specialChars } from '@testing-library/user-event';
+import userEvent from '@testing-library/user-event';
 import { ThemeProvider } from 'styled-components';
 
-import { Toggle } from '../Toggle';
-import { LIGHT_THEME } from '../themes';
+import { Toggle, LIGHT_THEME } from '@admiral-ds/react-ui';
 
 describe('Toggle', () => {
   beforeEach(() => {
@@ -52,19 +50,21 @@ describe('Toggle', () => {
     expect(onChange).toBeCalledTimes(1);
   });
 
-  it('should focus input if user press Tab key', () => {
+  it('should focus input if user press Tab key', async () => {
+    const user = userEvent.setup();
     render(<Component />);
     const [input] = screen.getAllByTestId('element');
-    userEvent.tab();
+    await user.tab();
     expect(input).toHaveFocus();
   });
 
-  it('should call onChange if input is focused and user press Space key', () => {
+  it('should call onChange if input is focused and user press Space key', async () => {
+    const user = userEvent.setup();
     render(<Component />);
     const [input] = screen.getAllByTestId('element');
-    userEvent.tab();
-    userEvent.type(input, specialChars.space);
+    await user.tab();
+    await user.type(input, '{Space}');
     const { onChange } = requiredProps;
-    expect(onChange).toBeCalledTimes(2);
+    expect(onChange).toBeCalledTimes(1);
   });
 });

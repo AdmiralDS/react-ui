@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`OverflowMenu should render component 1`] = `
-Object {
+{
   "asFragment": [Function],
   "baseElement": .c3 {
   position: absolute;

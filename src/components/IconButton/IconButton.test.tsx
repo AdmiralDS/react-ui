@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { ThemeProvider } from 'styled-components';
 import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -15,14 +14,15 @@ describe('IconButton', () => {
     expect(container).toMatchSnapshot();
   });
 
-  test('should focus on component when user on press key tab', () => {
+  test('should focus on component when user on press key tab', async () => {
+    const user = userEvent.setup();
     render(
       <ThemeProvider theme={LIGHT_THEME}>
         <IconButton />
       </ThemeProvider>,
     );
     expect(document.body).toHaveFocus();
-    userEvent.tab();
+    await user.tab();
     expect(screen.getByRole('button')).toHaveFocus();
   });
 

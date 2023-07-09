@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Link } from '#src/components/Link';
@@ -24,17 +23,19 @@ describe('Link', () => {
     expect(screen.getByRole('link')).toHaveTextContent(linkText);
   });
 
-  test('should focus on component when user on press key tab', () => {
+  test('should focus on component when user on press key tab', async () => {
+    const user = userEvent.setup();
     render(<Component data-testid="test-element" />);
     expect(document.body).toHaveFocus();
-    userEvent.tab();
+    await user.tab();
     expect(screen.getByTestId('test-element')).toHaveFocus();
   });
 
-  test('should dont focus component when user on press key tab', () => {
+  test('should dont focus component when user on press key tab', async () => {
+    const user = userEvent.setup();
     render(<Component disabled />);
     expect(document.body).toHaveFocus();
-    userEvent.tab();
+    await user.tab();
     expect(document.body).toHaveFocus();
   });
 

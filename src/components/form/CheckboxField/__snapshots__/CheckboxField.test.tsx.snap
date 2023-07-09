@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`CheckboxField should render component with disabled state 1`] = `
-Object {
+{
   "asFragment": [Function],
   "baseElement": .c8 {
   pointer-events: none;
@@ -422,7 +422,7 @@ fieldset:disabled .c0 {
 `;
 
 exports[`CheckboxField should render component with required properties 1`] = `
-Object {
+{
   "asFragment": [Function],
   "baseElement": .c8 {
   pointer-events: none;
@@ -839,7 +839,7 @@ fieldset:disabled .c0 {
 `;
 
 exports[`CheckboxField should render component with small dimension 1`] = `
-Object {
+{
   "asFragment": [Function],
   "baseElement": .c8 {
   pointer-events: none;
