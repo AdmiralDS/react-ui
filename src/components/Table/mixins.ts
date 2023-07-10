@@ -1,6 +1,6 @@
 import { css } from 'styled-components';
 import { typography } from '#src/components/Typography';
-import type { TableProps } from '#src/components/Table';
+import type { TableProps, TableRow } from '#src/components/Table';
 
 // padding-bottom меньше padding-top на 1px, т.к. 1px остается для border-bottom ячейки
 // padding-right больше padding-left на 1px, т.к. 1px остается для линии resizerа
@@ -73,10 +73,12 @@ export const rowBackground = css<{
   error?: boolean;
   success?: boolean;
   grey?: boolean;
+  status?: TableRow['status']
 }>`
-  ${({ theme, selected, error, success, disabled, grey }) => {
+  ${({ theme, selected, error, success, disabled, grey, status }) => {
     if (disabled) return theme.color['Neutral/Neutral 00'];
     if (selected) return theme.color['Primary/Primary 20'];
+    if (status?.background) return status.background;
     if (error) return theme.color['Error/Error 20'];
     if (success) return theme.color['Success/Success 20'];
     if (grey) return theme.color['Neutral/Neutral 05'];
@@ -125,5 +127,5 @@ export const actionsBGStyle = css<{ dimension: TableProps['dimension'] }>`
 
 export const overflowMenuStyle = css<{ $offset: number; dimension: TableProps['dimension'] }>`
   ${actionsBGStyle}
-  left: ${({ dimension, $offset }) => $offset - getActionSize(dimension)}px;
+  left: ${({dimension, $offset}) => $offset - getActionSize(dimension)}px;
 `;

@@ -50,7 +50,8 @@ export type Dimension = 'xl' | 'l' | 'm' | 's';
 type FilterProps = {
   /** Функция закрытия меню фильтра */
   closeMenu: () => void;
-  /** @deprecated - взамен используйте параметр isFilterActive, задаваемый для столбца
+  /** 
+   * @deprecated взамен используйте параметр isFilterActive, задаваемый для столбца
    * Функция установки состояния фильтра (активный/неактивный).
    * Необходимо для окрашивания иконки фильтра в синий цвет при активном фильтре и в серый при неактивном фильтре.
    */
@@ -123,6 +124,11 @@ export type Column = {
 export type RowId = string | number;
 type IdSelectionStatusMap = Record<RowId, boolean>;
 
+export type TableRowStatus = {
+  name: string;
+  background: string;
+}
+
 export interface TableRow {
   id: RowId;
   className?: string;
@@ -132,14 +138,26 @@ export interface TableRow {
   disabled?: boolean;
   /** Чекбокс строки в состоянии disabled */
   checkboxDisabled?: boolean;
-  /** Строка в состоянии error */
+  // TODO: Удалить в 7.x.x версии 
+  /** 
+   * @deprecated Будет удалено в 7.x.x версии 
+   * Взамен используйте параметр status
+   * Строка в состоянии error
+   **/
   error?: boolean;
-  /** Строка в состоянии success */
+  // TODO: Удалить в 7.x.x версии 
+  /** 
+   * @deprecated Будет удалено в 7.x.x версии 
+   * Взамен используйте параметр status
+   * Строка в состоянии success 
+   **/
   success?: boolean;
   /** Строка в раскрытом состоянии */
   expanded?: boolean;
   /** Окраска строки по Hover. Данная окраска должна применяться, если строка кликабельна и ведет к каким-либо действиям */
   hover?: boolean;
+  /** */
+  status?: TableRowStatus;
   /** Название группы */
   groupTitle?: string;
   /** Строки таблицы, находящиеся в группе */

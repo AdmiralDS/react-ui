@@ -88,6 +88,7 @@ export const RowWrapper = ({
         showRowsActions={showRowsActions}
         selected={!!row.selected}
         disabled={!!row.disabled}
+        status={row.status}
         error={!!row.error}
         success={!!row.success}
         grey={!!grey}
