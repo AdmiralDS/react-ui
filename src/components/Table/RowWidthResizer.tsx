@@ -105,13 +105,24 @@ export function RowWidthResizer({ name, disabled, dimension, columnMinWidth, onC
     }
   });
 
+  React.useEffect(() => {
+    const wrapper = node.current;
+    if (!disabled && wrapper) {
+      wrapper.addEventListener('mousedown', handleClick);
+      wrapper.addEventListener('touchstart', handleClick);
+
+      return () => {
+        wrapper.removeEventListener('mousedown', handleClick);
+        wrapper.removeEventListener('touchstart', handleClick);
+      };
+    }
+  }, [disabled]);
+
   return (
     <ResizerWrapper
       ref={node}
       disabled={disabled}
       dimension={dimension}
-      onMouseDown={handleClick}
-      onTouchStart={handleClick}
     >
       <Resizer />
     </ResizerWrapper>

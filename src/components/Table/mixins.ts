@@ -84,54 +84,46 @@ export const rowBackground = css<{
   }}
 `;
 
+const getActionSize = (dimension: TableProps['dimension']) => {
+  switch (dimension) {
+    case 's':
+      return 32;
+    case 'l':
+      return 48;
+    case 'xl':
+      return 56;
+    case 'm':
+    default:
+      return 40;
+  }
+};
+
 export const actionsBGStyle = css<{ dimension: TableProps['dimension'] }>`
   box-sizing: border-box;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   position: absolute;
   top: 0;
+  bottom: 0;
   z-index: 5;
-  ${({ dimension }) => {
+  width: ${({ dimension }) => getActionSize(dimension)}px;
+  padding: ${({ dimension }) => {
     switch (dimension) {
       case 's':
-        return css`
-          width: 31px;
-          height: 31px;
-        `;
+        return '0px';
       case 'l':
-        return css`
-          width: 47px;
-          height: 47px;
-        `;
+        return '6px 0 5px';
       case 'xl':
-        return css`
-          width: 55px;
-          height: 55px;
-        `;
+        return '10px 0 9px';
       case 'm':
       default:
-        return css`
-          width: 39px;
-          height: 39px;
-        `;
+        return '4px 0 3px';
     }
-  }}
+  }};
 `;
 
 export const overflowMenuStyle = css<{ $offset: number; dimension: TableProps['dimension'] }>`
   ${actionsBGStyle}
-  left: ${({ dimension, $offset }) => {
-    switch (dimension) {
-      case 's':
-        return $offset - 32;
-      case 'l':
-        return $offset - 47;
-      case 'xl':
-        return $offset - 55;
-      case 'm':
-      default:
-        return $offset - 39;
-    }
-  }}px;
+  left: ${({dimension, $offset}) => $offset - getActionSize(dimension)}px;
 `;
