@@ -22,10 +22,10 @@ const CustomMenuItem = styled(MenuItem)`
 `;
 
 function customValueRender({ value }: RenderProps) {
-  return <CustomValueStyle>{value}</CustomValueStyle>;
+  return <CustomValueStyle>{String(value)}</CustomValueStyle>;
 }
 function customOptionRender({ value, ...props }: RenderPropsType<ValueType> & MenuItemProps) {
-  return <CustomMenuItem {...props}>{value}</CustomMenuItem>;
+  return <CustomMenuItem {...props}>{String(value)}</CustomMenuItem>;
 }
 
 const containerContrastBorder = css`

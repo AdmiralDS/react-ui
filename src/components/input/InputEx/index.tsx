@@ -261,13 +261,13 @@ export const InputEx = forwardRef<HTMLInputElement, InputExProps>(
       placeholder,
 
       prefixValue,
-      renderPrefixValue = ({ value }) => value,
+      renderPrefixValue = ({ value }) => String(value),
       prefixValueList,
       onPrefixValueChange,
       renderPrefixOption,
 
       suffixValue,
-      renderSuffixValue = ({ value }) => value,
+      renderSuffixValue = ({ value }) => String(value),
       suffixValueList,
       onSuffixValueChange,
       renderSuffixOption,

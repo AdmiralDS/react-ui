@@ -16,7 +16,7 @@ const ICON_SIZE_S = 20;
 export type Dimension = 'm' | 's';
 export type SelectionStatus = 'checked' | 'indeterminate' | 'unchecked';
 
-export interface SelectTreeNodeProps extends HTMLAttributes<HTMLDivElement> {
+export interface SelectTreeNodeProps extends Omit<HTMLAttributes<HTMLDivElement>, 'children'> {
   label?: React.ReactNode;
   icon?: React.ReactNode;
   checked?: boolean;

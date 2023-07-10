@@ -100,7 +100,7 @@ export const Dropdown = React.forwardRef<HTMLDivElement, React.PropsWithChildren
     useClickOutside([containerRef], handleClickOutside);
 
     const handleKeyDown = React.useCallback(
-      (e) => {
+      (e: React.KeyboardEvent<HTMLDivElement>) => {
         const focusedOption = ((containerRef.current && containerRef.current.ownerDocument) || document).activeElement;
         const code = keyboardKey.getCode(e);
         if (menuFocus) {
@@ -170,12 +170,12 @@ export const Dropdown = React.forwardRef<HTMLDivElement, React.PropsWithChildren
       }
     }, [containerRef, menuFocus, nextItem, moveFocus]);
 
-    React.useEffect(() => {
-      containerRef.current?.addEventListener('keydown', handleKeyDown);
-      return () => {
-        containerRef.current?.removeEventListener('keydown', handleKeyDown);
-      };
-    }, [containerRef.current]);
+    // React.useEffect(() => {
+    //   containerRef.current?.addEventListener('keydown', handleKeyDown);
+    //   return () => {
+    //     containerRef.current?.removeEventListener('keydown', handleKeyDown);
+    //   };
+    // }, [containerRef.current]);
 
     const checkDropdownPosition = React.useCallback(() => {
       const node = containerRef.current;
@@ -230,7 +230,12 @@ export const Dropdown = React.forwardRef<HTMLDivElement, React.PropsWithChildren
     return (
       <Portal targetRef={targetRef} reverse={displayUpward} rootRef={rootRef}>
         <FakeTarget />
-        <Container ref={refSetter(ref, containerRef)} {...props} className={className + ' dropdown-container'} />
+        <Container
+          ref={refSetter(ref, containerRef)}
+          {...props}
+          onKeyDown={handleKeyDown}
+          className={className + ' dropdown-container'}
+        />
       </Portal>
     );
   },
