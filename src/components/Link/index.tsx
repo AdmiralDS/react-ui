@@ -1,6 +1,6 @@
 import * as React from 'react';
-import type { AppearanceLink, Dimension } from '#src/components/Link/LinkComponent';
-import { LinkComponent } from '#src/components/Link/LinkComponent';
+import type { AppearanceLink, Dimension } from './LinkComponent';
+import { LinkComponent } from './LinkComponent';
 import type { PolymorphicComponentPropsWithRef, PolymorphicRef } from '../common/polymorphicProps';
 
 export interface LinkProps {
@@ -16,9 +16,9 @@ export interface LinkProps {
 
 export type LinkPolymorphicProps<C extends React.ElementType> = PolymorphicComponentPropsWithRef<C, LinkProps>;
 
-type LinkComp = <C extends React.ElementType = 'a'>(props: LinkPolymorphicProps<C>) => React.ReactElement | null;
+// type LinkComp = <C extends React.ElementType = 'a'>(props: LinkPolymorphicProps<C>) => React.ReactElement | null;
 
-export const Link: LinkComp = React.forwardRef(
+export const Link = React.forwardRef(
   <C extends React.ElementType = 'a'>(
     { disabled = false, appearance = 'primary', dimension = 'm', ...props }: LinkPolymorphicProps<C>,
     ref: PolymorphicRef<C>,
@@ -36,7 +36,7 @@ export const Link: LinkComp = React.forwardRef(
   },
 );
 
-(Link as any).displayName = 'Link';
+Link.displayName = 'Link';
 
-export { LinkComponentCssMixin } from '#src/components/Link/LinkComponent';
-export type { LinkComponent } from '#src/components/Link/LinkComponent';
+export { LinkComponentCssMixin } from './LinkComponent';
+export type { LinkComponent } from './LinkComponent';
