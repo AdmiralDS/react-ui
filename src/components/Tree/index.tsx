@@ -41,8 +41,13 @@ type NodesMapItem = {
 
 type NodesMap = { [key: string]: NodesMapItem };
 
-const treeToMap = (tree: Array<TreeItemProps>, level = 0, indent = 0, dependencies?: Array<Array<string>>): NodesMap => {
-  const levelHasChildren = tree.some((item) => !!item.children)
+const treeToMap = (
+  tree: Array<TreeItemProps>,
+  level = 0,
+  indent = 0,
+  dependencies?: Array<Array<string>>,
+): NodesMap => {
+  const levelHasChildren = tree.some((item) => !!item.children);
 
   return tree.reduce((acc: NodesMap, item) => {
     const key = item.id.toString();

@@ -88,7 +88,9 @@ export const Demo1_Tree = {
   name: 'Контроллируемое дерево с checkbox',
 };
 
-const SimpleTreeStory: StoryFn<typeof Tree> = (props) => <SimpleTreeTemplate model={[]} {...cleanUpProps({...props, onChange: undefined})} />;
+const SimpleTreeStory: StoryFn<typeof Tree> = (props) => (
+  <SimpleTreeTemplate model={[]} {...cleanUpProps({ ...props, onChange: undefined })} />
+);
 
 export const Demo2_Tree = {
   render: SimpleTreeStory,

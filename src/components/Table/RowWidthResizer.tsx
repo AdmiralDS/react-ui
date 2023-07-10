@@ -119,11 +119,7 @@ export function RowWidthResizer({ name, disabled, dimension, columnMinWidth, onC
   }, [disabled]);
 
   return (
-    <ResizerWrapper
-      ref={node}
-      disabled={disabled}
-      dimension={dimension}
-    >
+    <ResizerWrapper ref={node} disabled={disabled} dimension={dimension}>
       <Resizer />
     </ResizerWrapper>
   );
