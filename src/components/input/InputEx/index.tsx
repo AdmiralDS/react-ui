@@ -283,10 +283,12 @@ export const InputEx = forwardRef<HTMLInputElement, InputExProps>(
   ) => {
     const innerContainerRef = useRef<HTMLDivElement | null>(null);
     const alignRef = alignDropRef || innerContainerRef;
+    const menuDimension = props.dimension === 'xl' ? 'l' : props.dimension;
     const renderPrefix = prefixValueList
       ? (props: RenderProps) => (
           <SuffixSelect
             dropAlign="flex-start"
+            dimension={menuDimension}
             alignRef={alignRef}
             value={props.value || ''}
             onChange={(value) => onPrefixValueChange?.(value)}
@@ -308,6 +310,7 @@ export const InputEx = forwardRef<HTMLInputElement, InputExProps>(
       ? (props: RenderProps) => (
           <SuffixSelect
             dropAlign="flex-end"
+            dimension={menuDimension}
             alignRef={alignRef}
             value={props.value || ''}
             onChange={(value) => onSuffixValueChange?.(value)}
