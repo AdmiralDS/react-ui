@@ -36,14 +36,18 @@ type NodesMapItem = {
   dependencies?: Array<string>;
   level: number;
   node: TreeItemProps;
+  indent: number;
 };
 
 type NodesMap = { [key: string]: NodesMapItem };
 
-const treeToMap = (tree: Array<TreeItemProps>, level = 0, dependencies?: Array<Array<string>>): NodesMap => {
+const treeToMap = (tree: Array<TreeItemProps>, level = 0, indent = 0, dependencies?: Array<Array<string>>): NodesMap => {
+  const levelHasChildren = tree.some((item) => !!item.children)
+
   return tree.reduce((acc: NodesMap, item) => {
     const key = item.id.toString();
-    acc[key] = { level, node: item };
+    const selfIndent = levelHasChildren && !!item.children ? indent : indent + 1;
+    acc[key] = { level, indent: selfIndent, node: item };
 
     if (dependencies && !item.children) {
       dependencies.forEach((dependency) => dependency.push(key));
@@ -53,7 +57,7 @@ const treeToMap = (tree: Array<TreeItemProps>, level = 0, dependencies?: Array<A
       const itemDependencies: Array<string> = [];
       acc[key].dependencies = itemDependencies;
       allDependencies.push(itemDependencies);
-      const map = treeToMap(item.children, level + 1, allDependencies);
+      const map = treeToMap(item.children, level + 1, indent + 1, allDependencies);
       return { ...acc, ...map };
     }
 
@@ -168,6 +172,7 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps>(
               indeterminate,
               hasChildren,
               level: node.level,
+              indent: node.indent,
               disabled: item.disabled,
               dimension: dimension,
               expanded: item.expanded,

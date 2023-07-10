@@ -23,6 +23,8 @@ export interface TreeNodeRenderOptionProps {
   indeterminate?: boolean;
   /** Уровень дерева item-а */
   level?: number;
+  /** Отступ item-а */
+  indent?: number;
   /** Наличие дочерних элемнтов у item-а */
   hasChildren?: boolean;
   /** Признак развернутого состояния item-а */
@@ -83,7 +85,7 @@ export const backgroundColor = css<{ selected?: boolean; hovered?: boolean }>`
 
 const RowWrapper = styled.div<{
   dimension?: Dimension;
-  level?: number;
+  indent?: number;
   selected?: boolean;
   hovered?: boolean;
   disabled?: boolean;
@@ -97,7 +99,7 @@ const RowWrapper = styled.div<{
   ${backgroundColor};
   cursor: ${(p) => (p.disabled ? 'default' : 'pointer')};
   padding: ${(p) =>
-    p.dimension === 'm' ? `8px 16px 8px ${16 + (p.level || 0) * 40}px` : `6px 16px 6px ${16 + (p.level || 0) * 36}px`};
+    p.dimension === 'm' ? `8px 16px 8px ${16 + (p.indent || 0) * 40}px` : `6px 16px 6px ${16 + (p.indent || 0) * 36}px`};
 `;
 
 const IconWrapper = styled.div<{ dimension?: Dimension }>`
@@ -134,6 +136,7 @@ export const TreeNode = ({
   checked,
   indeterminate,
   level,
+  indent,
   onChange,
   onHover,
   onClickItem,
@@ -173,7 +176,7 @@ export const TreeNode = ({
       className={className}
       style={style}
       dimension={dimension}
-      level={level}
+      indent={indent}
       onMouseMove={handleMouseMove}
       onClick={handleClick}
       selected={selected}
