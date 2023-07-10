@@ -28,7 +28,12 @@ export default [
     ],
     plugins: [
       url(),
-      svgr(),
+      svgr({
+        dimensions: false,
+        svgProps: {
+          focusable: '{false}',
+        },
+      }),
       peerDepsExternal(),
       resolve(),
       commonjs(),

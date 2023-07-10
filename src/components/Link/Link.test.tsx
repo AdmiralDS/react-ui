@@ -1,7 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { Link } from '#src/components/Link';
-import { LIGHT_THEME } from '../themes';
+import { Link, LIGHT_THEME } from '@admiral-ds/react-ui';
 import { ThemeProvider } from 'styled-components';
 
 const linkText = 'Link TextInput';
