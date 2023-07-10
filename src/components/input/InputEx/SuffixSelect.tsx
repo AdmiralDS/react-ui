@@ -142,7 +142,7 @@ export const SuffixSelect = <T extends ValueType>({
         data-read-only={props.readOnly ? true : undefined}
         onMouseDown={props.readOnly || disabled ? preventDefault : handleContainerClick}
       >
-        {renderValue ? renderValue({ value }) : <ValueContainer>{value}</ValueContainer>}
+        {renderValue ? renderValue({ value }) : <ValueContainer>{String(value)}</ValueContainer>}
         {!props.readOnly && <OpenStatusButton $isOpen={isOpen} aria-hidden data-disabled={disabled} />}
       </Container>
       {isOpen && (

@@ -48,7 +48,7 @@ const StyledDiv = styled.div`
 `;
 
 function defaultOptionRender({ value, ...props }: RenderPropsType<ValueType> & MenuItemProps) {
-  return <MenuItem {...props}>{value}</MenuItem>;
+  return <MenuItem {...props}>{String(value)}</MenuItem>;
 }
 
 export interface MenuProps<T> extends Omit<HTMLAttributes<HTMLDivElement>, 'onSelect'> {
