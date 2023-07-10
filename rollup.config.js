@@ -38,7 +38,7 @@ export default [
       resolve(),
       commonjs(),
       typescript({
-        exclude: ['*/**/*.stories.*', '*/**/*.test.*'],
+        exclude: ['*/**/*.stories.*', 'src/**/Stories/**', '*/**/*.test.*', 'src/colors/**', 'src/icons/**'],
       }),
     ],
   },

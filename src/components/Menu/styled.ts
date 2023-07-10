@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { SmallArrowRightOutline } from '#src/icons/IconComponents-system';
+import { ReactComponent as SmallArrowRightOutline } from '@admiral-ds/icons/build/system/SmallArrowRightOutline.svg';
 
 export const Chevron = styled(SmallArrowRightOutline)`
   transition: all 0.3s;
