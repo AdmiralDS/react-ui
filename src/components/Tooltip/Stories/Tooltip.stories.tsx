@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import { Tooltip, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
-import { TooltipHocStory } from './TooltipHOCStory';
+import type { TooltipHocStory } from './TooltipHOCStory';
 import {
   TooltipBaseTemplate,
   TooltipDelayTemplate,

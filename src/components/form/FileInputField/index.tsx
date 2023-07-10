@@ -1,7 +1,7 @@
 import { uid } from '#src/components/common/uid';
 import { refSetter } from '#src/components/common/utils/refSetter';
 import type { FieldOwnProps } from '#src/components/Field';
-import { Field as FieldComponent } from '#src/components/Field';
+import { Field as FieldComponent, ExtraTextContainer } from '#src/components/Field';
 import type { FileInputProps } from '#src/components/input';
 import { FileInput } from '#src/components/input';
 import * as React from 'react';
@@ -10,7 +10,6 @@ import {
   passFormFieldDataAttributes,
 } from '#src/components/common/utils/splitDataAttributes';
 import styled from 'styled-components';
-import { ExtraTextContainer } from '#src/components/Field';
 
 const Field = styled(FieldComponent)`
   & ${ExtraTextContainer} {

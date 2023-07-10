@@ -1,10 +1,9 @@
-import styled, { css } from 'styled-components';
+import styled, { css, useTheme } from 'styled-components';
 import type { InputHTMLAttributes } from 'react';
 import { useEffect, useRef, useState } from 'react';
 import * as React from 'react';
 import { typography } from '#src/components/Typography';
 import { refSetter } from '#src/components/common/utils/refSetter';
-import { useTheme } from 'styled-components';
 import { LIGHT_THEME } from '#src/components/themes';
 
 type InputDimension = 's' | 'l';

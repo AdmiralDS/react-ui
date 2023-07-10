@@ -125,5 +125,5 @@ export const actionsBGStyle = css<{ dimension: TableProps['dimension'] }>`
 
 export const overflowMenuStyle = css<{ $offset: number; dimension: TableProps['dimension'] }>`
   ${actionsBGStyle}
-  left: ${({dimension, $offset}) => $offset - getActionSize(dimension)}px;
+  left: ${({ dimension, $offset }) => $offset - getActionSize(dimension)}px;
 `;

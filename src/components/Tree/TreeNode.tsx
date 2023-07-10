@@ -99,7 +99,9 @@ const RowWrapper = styled.div<{
   ${backgroundColor};
   cursor: ${(p) => (p.disabled ? 'default' : 'pointer')};
   padding: ${(p) =>
-    p.dimension === 'm' ? `8px 16px 8px ${16 + (p.indent || 0) * 40}px` : `6px 16px 6px ${16 + (p.indent || 0) * 36}px`};
+    p.dimension === 'm'
+      ? `8px 16px 8px ${16 + (p.indent || 0) * 40}px`
+      : `6px 16px 6px ${16 + (p.indent || 0) * 36}px`};
 `;
 
 const IconWrapper = styled.div<{ dimension?: Dimension }>`

@@ -1,9 +1,7 @@
-import { SuggestInput } from '@admiral-ds/react-ui';
-import { LIGHT_THEME } from '@admiral-ds/react-ui';
+import { SuggestInput, LIGHT_THEME, DropdownProvider } from '@admiral-ds/react-ui';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { ThemeProvider } from 'styled-components';
-import { DropdownProvider } from '@admiral-ds/react-ui';
 
 const options = ['one', 'two', 'three'];
 
