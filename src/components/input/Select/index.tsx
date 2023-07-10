@@ -570,7 +570,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       onCloseSelect();
     };
 
-    const needShowClearIcon = shouldRenderSelectValue && (modeIsSelect ? !!selectedValue : !!selectedValue?.length);
+    const needShowClearIcon = shouldRenderSelectValue && (multiple ? !!selectedValue?.length : !!selectedValue);
 
     return (
       <SelectWrapper
