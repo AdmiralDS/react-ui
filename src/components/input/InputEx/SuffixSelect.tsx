@@ -4,7 +4,7 @@ import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-comp
 import styled, { css } from 'styled-components';
 import { OpenStatusButton } from '#src/components/OpenStatusButton';
 import { StyledDropdownContainer } from '#src/components/DropdownContainer';
-import { Menu } from '#src/components/input/InputEx/Menu';
+import {Menu, MenuDimensions} from '#src/components/input/InputEx/Menu';
 import type { ValueType } from '#src/components/input/InputEx/ValueType';
 import type { MenuItemProps } from '#src/components/Menu/MenuItem';
 
@@ -62,6 +62,9 @@ export type SuffixSelectProps<T> = {
   /** задает выравнивание дроп контейнера относительно компонента */
   dropAlign?: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
 
+  /** Размер Меню */
+  dimension?: MenuDimensions;
+
   /** Задает максимальную высоту дроп контейнера */
   dropMaxHeight?: string | number;
 
@@ -97,6 +100,7 @@ export type SuffixSelectProps<T> = {
 
 export const SuffixSelect = <T extends ValueType>({
   dropAlign,
+  dimension,
   dropMaxHeight,
   onChange,
   options,
@@ -161,6 +165,7 @@ export const SuffixSelect = <T extends ValueType>({
             selected={value}
             onSelect={handleOnSelect}
             renderOption={renderOption}
+            dimension={dimension}
           />
         </StyledDropdownContainer>
       )}

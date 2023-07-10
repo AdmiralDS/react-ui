@@ -71,7 +71,7 @@ export interface MenuProps<T> extends Omit<HTMLAttributes<HTMLDivElement>, 'onSe
 }
 
 export const Menu = React.forwardRef<HTMLDivElement, MenuProps<ValueType>>(
-  ({ options, selected, renderOption = defaultOptionRender, onSelect, ...props }, ref) => {
+  ({ options, selected, renderOption = defaultOptionRender, onSelect, dimension, ...props }, ref) => {
     const [activeOption, setActiveOption] = React.useState<null | ValueType>(null);
 
     const menuRef = React.useRef<HTMLDivElement | null>(null);
@@ -124,6 +124,7 @@ export const Menu = React.forwardRef<HTMLDivElement, MenuProps<ValueType>>(
           selected: option === selected,
           onHover: () => setActiveOption(option),
           onClickItem: () => onSelect(option),
+          dimension: dimension,
         }),
       );
 
@@ -138,7 +139,7 @@ export const Menu = React.forwardRef<HTMLDivElement, MenuProps<ValueType>>(
     }, [activeOption]);
 
     return (
-      <Wrapper ref={ref} {...props}>
+      <Wrapper ref={ref} dimension={dimension} {...props}>
         <StyledDiv ref={menuRef}>{renderChildren()}</StyledDiv>
       </Wrapper>
     );
