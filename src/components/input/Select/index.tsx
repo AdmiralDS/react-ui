@@ -266,6 +266,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       () => (multiple ? null : constantOptions.find((option) => option.value === selectedValue)),
       [multiple, constantOptions, selectedValue],
     );
+
     const selectedOptions = React.useMemo(
       () => (multiple ? constantOptions.filter((option) => selectedValue?.includes(option.value)) : []),
       [constantOptions, selectedValue, multiple],
@@ -427,7 +428,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
     };
 
     const onMultipleSelectBackSpace = () => {
-      const lastAbledSelectedOptionValue = findAbledOptionValue(selectedOptions.reverse());
+      const lastAbledSelectedOptionValue = findAbledOptionValue([...selectedOptions].reverse());
       if (!lastAbledSelectedOptionValue) return;
       handleOptionSelect(lastAbledSelectedOptionValue);
     };
@@ -503,7 +504,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       return () => {
         containerRef.current?.removeEventListener('keydown', handleKeyDown);
       };
-    }, [modeIsSelect, searchValue, isSearchPanelOpen]);
+    }, [modeIsSelect, searchValue, isSearchPanelOpen, selectedOptions]);
 
     const onFocus = (evt: React.FocusEvent<HTMLDivElement>) => {
       setIsFocused(true);
@@ -569,7 +570,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       onCloseSelect();
     };
 
-    const needShowClearIcon = shouldRenderSelectValue && (modeIsSelect ? !!selectedValue : !!selectedValue?.length);
+    const needShowClearIcon = shouldRenderSelectValue && (multiple ? !!selectedValue?.length : !!selectedValue);
 
     return (
       <SelectWrapper
