@@ -54,6 +54,7 @@ export const ActionBG = styled.div<{
 }>`
   ${actionsBGStyle};
   right: 0;
+  bottom: 1px;
   background: ${({ theme, greyHeader }) =>
     greyHeader ? theme.color['Neutral/Neutral 05'] : theme.color['Neutral/Neutral 00']};
 `;
