@@ -21,8 +21,13 @@
       "#src/*": ["./*"],
       "@admiral-ds/react-ui": ["./index"]
     },
-    "types": ["@types/jest", "@testing-library/dom", "@testing-library/react", "@testing-library/jest-dom"]
+    "types": ["@types/jest", "@testing-library/dom", "@testing-library/react", "@testing-library/jest-dom"],
+    "plugins": [
+      {
+        "name": "@styled/typescript-styled-plugin"
+      }
+    ]
   },
-  "include": ["src",".jest",".storybook"],
+  "include": ["src", ".jest", ".storybook"],
   "exclude": ["dist", "**/node_modules/*", "**/__snapshots__/*"]
 }
