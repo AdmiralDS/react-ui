@@ -27,7 +27,7 @@ import { ComponentsNames, CountriesRusNames, FlagsPack } from '@admiral-ds/flags
 import { StyledDropdownContainer } from '#src/components/DropdownContainer';
 import type { MenuDimensions } from '#src/components/Menu';
 import { keyboardKey } from '../../common/keyboardKey';
-import { GlobeOutline } from '#src/icons/IconComponents-category';
+import { ReactComponent as GlobeOutline } from '@admiral-ds/icons/build/category/GlobeOutline.svg';
 
 const Chevron = styled(SmallArrowDownOutline)<{ disabled?: boolean }>`
   transition: transform 0.3s;
