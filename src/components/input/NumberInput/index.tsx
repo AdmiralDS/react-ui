@@ -162,18 +162,20 @@ export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
 
     React.useEffect(() => {
       if (innerValue) {
+        let minusDsb = false;
+        let plusDsb = false;
         if (typeof minValue === 'number') {
-          const minusDsb = Number(clearValue(String(innerValue), precision, decimal)) - step < minValue;
-          setMinusDisabled(minusDsb);
+          minusDsb = Number(clearValue(String(innerValue), precision, decimal)) - step < minValue;
         }
         if (typeof maxValue === 'number') {
-          const plusDsb = Number(clearValue(String(innerValue), precision, decimal)) + step > maxValue;
-          setPlusDisabled(plusDsb);
+          plusDsb = Number(clearValue(String(innerValue), precision, decimal)) + step > maxValue;
         }
+        setMinusDisabled(minusDsb);
+        setPlusDisabled(plusDsb);
       } else {
-        // Если параметры value, defaultValue не заданы или являются пустыми строками, тогда кнопки +/- не могут быть задизейблены
-        setMinusDisabled(false);
-        setPlusDisabled(false);
+        // Если параметры value, defaultValue не заданы или являются пустыми строками, тогда кнопки +/- должны быть задизейблены
+        setMinusDisabled(true);
+        setPlusDisabled(true);
       }
     }, [innerValue]);
 
