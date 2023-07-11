@@ -81,6 +81,14 @@ export default {
       control: false,
     },
 
+    iconStart: {
+      control: false,
+    },
+
+    iconEnd: {
+      control: false,
+    },
+
     buttonCssMixin: {
       control: false,
     },
