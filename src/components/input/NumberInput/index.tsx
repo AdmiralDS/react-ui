@@ -251,23 +251,8 @@ export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
      */
     const handleBlur = (event: React.FocusEvent<HTMLInputElement>) => {
       const newValue = fitToCurrency(event.currentTarget.value, precision, decimal, thousand, true);
-      if (inputRef.current) {
-        // если введеное значение меньше minValue
-        if (typeof minValue === 'number' && Number(clearValue(newValue, precision, decimal)) < minValue) {
-          const fullValue = fitToCurrency(String(minValue), precision, decimal, thousand, true);
-
-          changeInputData(inputRef.current, { value: fullValue });
-        }
-        // если введеное значение меньше maxValue
-        else if (typeof maxValue === 'number' && Number(clearValue(newValue, precision, decimal)) > maxValue) {
-          const fullValue = fitToCurrency(String(maxValue), precision, decimal, thousand, true);
-
-          changeInputData(inputRef.current, { value: fullValue });
-        }
-        // если значение в инпуте неполностью отформатировано, например, не все разряды после запятой проставлены
-        else if (newValue !== event.currentTarget.value) {
-          changeInputData(inputRef.current, { value: newValue });
-        }
+      if (inputRef.current && newValue !== event.currentTarget.value) {
+        changeInputData(inputRef.current, { value: newValue });
       }
       onBlur?.(event);
     };

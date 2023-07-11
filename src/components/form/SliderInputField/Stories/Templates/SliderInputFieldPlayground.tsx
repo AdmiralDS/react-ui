@@ -5,7 +5,7 @@ import { SliderInputField } from '@admiral-ds/react-ui';
 import type { SliderInputFieldProps, Theme } from '@admiral-ds/react-ui';
 
 export const SliderInputFieldPlaygroundTemplate = ({
-  defaultValue = '2000 ₽',
+  defaultValue = '2 000',
   label = 'Введите сумму',
   ...props
 }: SliderInputFieldProps) => {
