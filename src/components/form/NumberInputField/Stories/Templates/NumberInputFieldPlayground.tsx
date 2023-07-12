@@ -8,6 +8,8 @@ export const NumberInputFieldPlaygroundTemplate = ({
   defaultValue = '2 000',
   label = 'Введите сумму',
   precision = 0,
+  maxValue = 10000,
+  decimal,
   ...props
 }: NumberInputFieldProps) => {
   function swapBorder(theme: Theme): Theme {
@@ -19,8 +21,8 @@ export const NumberInputFieldPlaygroundTemplate = ({
   const [extraText, setExtraText] = React.useState('');
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const numValue = Number(clearValue(event.target.value, precision, props.decimal));
-    if (event.currentTarget.value && numValue > 10000) {
+    const numValue = Number(clearValue(event.target.value, precision, decimal));
+    if (event.target.value && numValue > maxValue) {
       setStatus('error');
       setExtraText('Достигнуто максимальное значение');
     } else {
@@ -34,11 +36,12 @@ export const NumberInputFieldPlaygroundTemplate = ({
       <NumberInputField
         data-container-id="numberInputFieldIdOne"
         {...props}
-        maxValue={10000}
+        maxValue={maxValue}
         defaultValue={defaultValue}
         onChange={handleChange}
         label={label}
         precision={precision}
+        decimal={decimal}
         status={status}
         extraText={extraText}
       />

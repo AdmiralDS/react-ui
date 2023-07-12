@@ -1,9 +1,15 @@
 import * as React from 'react';
-import { NumberInput, clearValue } from '@admiral-ds/react-ui';
+import { NumberInput, T, clearValue } from '@admiral-ds/react-ui';
 import type { NumberInputProps, Theme } from '@admiral-ds/react-ui';
 import { ThemeProvider } from 'styled-components';
 
-export const NumberInputMinMaxTemplate = ({ precision = 2, decimal, ...args }: NumberInputProps) => {
+export const NumberInputMinMaxTemplate = ({
+  minValue = -1000,
+  maxValue = 2000,
+  precision = 2,
+  decimal,
+  ...args
+}: NumberInputProps) => {
   function swapBorder(theme: Theme): Theme {
     theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
@@ -13,7 +19,7 @@ export const NumberInputMinMaxTemplate = ({ precision = 2, decimal, ...args }: N
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const numValue = Number(clearValue(event.target.value, precision, decimal));
-    if (numValue < -1000 || numValue > 2000) {
+    if (event.target.value && (numValue < minValue || numValue > maxValue)) {
       setStatus('error');
     } else {
       setStatus(undefined);
@@ -22,11 +28,15 @@ export const NumberInputMinMaxTemplate = ({ precision = 2, decimal, ...args }: N
 
   return (
     <ThemeProvider theme={swapBorder}>
+      <T font="Body/Body 2 Long" as="div" style={{ marginBottom: '24px' }}>
+        В данном примере, если введенное значение выходит за границы диапазона minValue-maxValue, компонент переходит в
+        состояние ошибки.
+      </T>
       <NumberInput
         {...args}
         onChange={handleChange}
-        minValue={-1000}
-        maxValue={2000}
+        minValue={minValue}
+        maxValue={maxValue}
         status={status}
         precision={precision}
         decimal={decimal}

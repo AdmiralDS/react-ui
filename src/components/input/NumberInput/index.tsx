@@ -252,8 +252,8 @@ export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
      * Если условие выше несоблюдено, должна быть произведена корректировка значения. Например: '70.' => '70.00' при precision={2}
      */
     const handleBlur = (event: React.FocusEvent<HTMLInputElement>) => {
-      const newValue = fitToCurrency(event.currentTarget.value, precision, decimal, thousand, true);
-      if (inputRef.current && newValue !== event.currentTarget.value) {
+      const newValue = fitToCurrency(event.target.value, precision, decimal, thousand, true);
+      if (inputRef.current && newValue !== event.target.value) {
         changeInputData(inputRef.current, { value: newValue });
       }
       onBlur?.(event);
