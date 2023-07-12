@@ -19,10 +19,13 @@
     "src",
     "tsconfig.json"
   ],
-  "main": "dist/index.cjs.js",
-  "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
   "type": "module",
+  "exports": {
+    "import": "./dist/index.js",
+    "require": "./dist/index.cjs",
+    "types": "./dist/index.d.ts"
+  },
   "imports": {
     "#src/*": "./src/*"
   },

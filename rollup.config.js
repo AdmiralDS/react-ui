@@ -10,18 +10,18 @@ import { createRequire } from 'module';
 const require = createRequire(import.meta.url);
 const packageJson = require('./package.json');
 
-const { main, module: _module } = packageJson;
+const { exports } = packageJson;
 export default [
   {
     input: 'src/index.ts',
     output: [
       {
-        file: main,
+        file: exports.require,
         format: 'cjs',
         sourcemap: true,
       },
       {
-        file: _module,
+        file: exports.import,
         format: 'esm',
         sourcemap: true,
       },
