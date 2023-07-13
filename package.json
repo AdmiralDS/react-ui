@@ -16,16 +16,17 @@
   },
   "files": [
     "dist",
-    "src",
-    "tsconfig.json"
+    "src/components",
+    "README.md"
   ],
   "types": "dist/index.d.ts",
   "type": "module",
   "exports": {
     "import": "./dist/index.js",
-    "require": "./dist/index.cjs",
     "types": "./dist/index.d.ts"
   },
+  "sideEffects": false,
+  "outputDir": "./dist",
   "imports": {
     "#src/*": "./src/*"
   },
@@ -52,9 +53,7 @@
     "styled-components": "^5.1.0"
   },
   "peerDependencies": {
-    "@admiral-ds/flags": "^2.0.0",
     "@admiral-ds/fonts": "^2.0.0",
-    "@admiral-ds/icons": "^2.0.0",
     "react": ">=16",
     "react-dom": ">=16",
     "styled-components": "^5.1.0"
@@ -66,6 +65,7 @@
     "@babel/preset-typescript": "^7.21.5",
     "@rollup/plugin-commonjs": "^25.0.1",
     "@rollup/plugin-node-resolve": "^15.0.2",
+    "@rollup/plugin-terser": "^0.4.3",
     "@rollup/plugin-typescript": "^11.1.0",
     "@rollup/plugin-url": "^8.0.1",
     "@storybook/addon-essentials": "^7.0.8",

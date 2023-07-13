@@ -4,25 +4,32 @@ import typescript from '@rollup/plugin-typescript';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import svgr from '@svgr/rollup';
 import url from '@rollup/plugin-url';
+import terser from '@rollup/plugin-terser';
+import { getFiles } from './scripts/buildUtils.js';
 
-// import packageJson from "./package.json" assert { type: "json" };
-import { createRequire } from 'module';
-const require = createRequire(import.meta.url);
-const packageJson = require('./package.json');
+const extensions = ['.js', '.ts', '.jsx', '.tsx'];
+const excludeExtensions = [
+  'test.js',
+  'test.ts',
+  'test.jsx',
+  'test.tsx',
+  'stories.js',
+  'stories.ts',
+  'stories.jsx',
+  'stories.tsx',
+  'd.ts',
+  'Stories',
+];
 
-const { exports } = packageJson;
 export default [
   {
-    input: 'src/index.ts',
+    input: ['./src/index.ts', ...getFiles('./src/components', extensions, excludeExtensions)],
     output: [
       {
-        file: exports.require,
-        format: 'cjs',
-        sourcemap: true,
-      },
-      {
-        file: exports.import,
+        dir: 'dist',
         format: 'esm',
+        preserveModules: true,
+        preserveModulesRoot: 'src',
         sourcemap: true,
       },
     ],
@@ -40,6 +47,7 @@ export default [
       typescript({
         exclude: ['*/**/*.stories.*', 'src/**/Stories/**', '*/**/*.test.*', 'src/colors/**', 'src/icons/**'],
       }),
+      terser(),
     ],
   },
 ];
