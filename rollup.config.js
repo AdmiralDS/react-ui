@@ -5,25 +5,10 @@ import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import svgr from '@svgr/rollup';
 import url from '@rollup/plugin-url';
 import terser from '@rollup/plugin-terser';
-import { getFiles } from './scripts/buildUtils.js';
-
-const extensions = ['.js', '.ts', '.jsx', '.tsx'];
-const excludeExtensions = [
-  'test.js',
-  'test.ts',
-  'test.jsx',
-  'test.tsx',
-  'stories.js',
-  'stories.ts',
-  'stories.jsx',
-  'stories.tsx',
-  'd.ts',
-  'Stories',
-];
 
 export default [
   {
-    input: ['./src/index.ts', ...getFiles('./src/components', extensions, excludeExtensions)],
+    input: ['./src/index.ts'],
     output: [
       {
         dir: 'dist',
