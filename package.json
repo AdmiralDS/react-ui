@@ -27,7 +27,6 @@
     "types": "./dist/index.d.ts"
   },
   "sideEffects": false,
-  "outputDir": "./dist",
   "imports": {
     "#src/*": "./src/*"
   },

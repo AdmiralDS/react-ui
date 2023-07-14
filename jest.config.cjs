@@ -1,4 +1,6 @@
 /* eslint-env node */
+
+/** @type {import('ts-jest').JestConfigWithTsJest} */
 module.exports = {
   // The root of your source code, typically /src
   // `<rootDir>` is a token Jest substitutes
@@ -30,5 +32,6 @@ module.exports = {
     '\\.svg$': '<rootDir>/.jest/svgrMock.js',
     '\\.(jpg|jpeg|png|gif|eot|otf|webp|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$': '<rootDir>/.jest/fileMock.js',
     '^#src/(.+)$': '<rootDir>/src/$1',
+    '^@admiral-ds/react-ui$': '<rootDir>/src/index',
   },
 };
