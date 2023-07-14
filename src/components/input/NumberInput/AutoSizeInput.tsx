@@ -215,11 +215,11 @@ export const AutoSizeInput = React.forwardRef<HTMLInputElement, InputProps>(
       if (sizerRef.current) {
         sizerRef.current.innerHTML = newValue || placeholder || '';
       }
-      if (newValue) {
-        setPrefixSuffix?.(true);
-      } else {
-        setPrefixSuffix?.(false);
-      }
+      // if (newValue) {
+      //   setPrefixSuffix?.(true);
+      // } else {
+      //   setPrefixSuffix?.(false);
+      // }
     };
 
     const updateInputLeftPadding = () => {
@@ -308,6 +308,11 @@ export const AutoSizeInput = React.forwardRef<HTMLInputElement, InputProps>(
     React.useLayoutEffect(() => {
       if (inputRef.current) {
         updateHiddenContent(inputRef.current.value);
+        if (inputRef.current.value) {
+          setPrefixSuffix?.(true);
+        } else {
+          setPrefixSuffix?.(false);
+        }
       }
     }, [props.value, props.defaultValue, placeholder, inputRef.current, sizerRef.current]);
 
@@ -349,6 +354,15 @@ export const AutoSizeInput = React.forwardRef<HTMLInputElement, InputProps>(
       }
     }, [suffixRef.current, inputRef.current, showPrefixSuffix, suffix, align]);
 
+    const handleChange = (e: any) => {
+      if (e.target.value) {
+        setPrefixSuffix?.(true);
+      } else {
+        setPrefixSuffix?.(false);
+      }
+      props.onChange?.(e);
+    };
+
     return (
       <>
         <HiddenContent iconCount={iconCount} dimension={props.dimension}>
@@ -366,6 +380,7 @@ export const AutoSizeInput = React.forwardRef<HTMLInputElement, InputProps>(
         </HiddenContent>
         <Input
           {...props}
+          onChange={handleChange}
           ref={refSetter(ref, inputRef)}
           placeholder={placeholder}
           type="text"
