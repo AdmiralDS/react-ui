@@ -21,7 +21,7 @@
       "#src/*": ["./*"],
       "@admiral-ds/react-ui": ["./index"]
     },
-    "types": ["@types/jest", "@testing-library/dom", "@testing-library/react", "@testing-library/jest-dom"],
+    "types": ["@types/jest", "@types/testing-library__jest-dom"],
     "plugins": [
       {
         "name": "@styled/typescript-styled-plugin"
