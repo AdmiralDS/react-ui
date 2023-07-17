@@ -1,11 +1,10 @@
 import * as React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
 import styled from 'styled-components';
-
 import type { TooltipHoc } from '@admiral-ds/react-ui';
 import { ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
-import { TooltipHocStory } from './TooltipHOCStory';
 
+import { TooltipHocStory } from './TooltipHOCStory';
 import {
   TooltipHocBaseTemplate,
   TooltipHocClassTemplate,

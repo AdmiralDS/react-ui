@@ -8,7 +8,7 @@ export const TooltipRefTemplate = (args: ITooltipProps) => {
   function swapBorder(theme: Theme): Theme {
     theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
-  } 
+  }
 
   const tooltipRef = React.useRef(null);
   const btnRef = React.useRef<any>(null);
@@ -45,7 +45,15 @@ export const TooltipRefTemplate = (args: ITooltipProps) => {
       <Button ref={btnRef} dimension="m" displayAsSquare aria-label="Delete" aria-describedby="test3">
         <DeleteOutline height={24} width={24} />
       </Button>
-      {visible && <Tooltip targetRef={btnRef} renderContent={() => 'Delete file'} ref={tooltipRef} id="test3" />}
+      {visible && (
+        <Tooltip
+          targetRef={btnRef}
+          renderContent={() => 'Delete file'}
+          ref={tooltipRef}
+          tooltipPosition={args.tooltipPosition}
+          id="test3"
+        />
+      )}
     </ThemeProvider>
   );
 };
