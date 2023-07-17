@@ -162,7 +162,7 @@ fieldset[data-dimension='s'] .c4 {
   font-weight: 400;
   font-size: 16px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
   display: -webkit-box;
   display: -webkit-flex;
@@ -442,7 +442,7 @@ fieldset[data-dimension='s'] .c4 {
   font-weight: 400;
   font-size: 16px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
   display: -webkit-box;
   display: -webkit-flex;
@@ -777,7 +777,7 @@ fieldset[data-dimension='s'] .c4 {
   font-weight: 400;
   font-size: 16px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
   display: -webkit-box;
   display: -webkit-flex;
@@ -1057,7 +1057,7 @@ fieldset[data-dimension='s'] .c4 {
   font-weight: 400;
   font-size: 16px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
   display: -webkit-box;
   display: -webkit-flex;
@@ -1392,7 +1392,7 @@ fieldset[data-dimension='s'] .c4 {
   font-weight: 400;
   font-size: 14px;
   line-height: 16px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
   display: -webkit-box;
   display: -webkit-flex;
@@ -1672,7 +1672,7 @@ fieldset[data-dimension='s'] .c4 {
   font-weight: 400;
   font-size: 14px;
   line-height: 16px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
   display: -webkit-box;
   display: -webkit-flex;

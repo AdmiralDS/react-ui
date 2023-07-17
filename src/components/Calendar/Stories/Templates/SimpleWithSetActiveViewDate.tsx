@@ -3,7 +3,7 @@ import * as React from 'react';
 import type { CalendarPropType, ViewScreenType } from '@admiral-ds/react-ui';
 import { Button, Calendar, T } from '@admiral-ds/react-ui';
 
-export const SimpleWithSetActiveViewDateTemplate = ({ range, ...props }: CalendarPropType) => {
+export const SimpleWithSetActiveViewDateTemplate = ({ ...props }: CalendarPropType) => {
   const [selected, setSelected] = React.useState<Date | null>(null);
   const [currentActiveView, setCurrentActiveView] = React.useState<ViewScreenType | null>(null);
 

@@ -6,7 +6,9 @@ const Container = styled.div<{ error?: boolean; transparent?: boolean }>`
   white-space: nowrap;
   ${typography['Body/Body 2 Long']}
   color: ${(p) => (p.error ? p.theme.color['Error/Error 60 Main'] : p.theme.color['Neutral/Neutral 50'])};
-  transition: all 0.5s, color 0.5s;
+  transition:
+    all 0.5s,
+    color 0.5s;
   opacity: ${(p) => (p.transparent && !p.error ? 0 : 1)};
   max-width: ${(p) => (p.transparent && !p.error ? 0 : 'none')};
   overflow: hidden;

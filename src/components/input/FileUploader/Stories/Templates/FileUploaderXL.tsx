@@ -1,14 +1,12 @@
-import * as React from 'react';
 import { ThemeProvider } from 'styled-components';
-
 import { FileUploader } from '@admiral-ds/react-ui';
-import type { FileUploaderProps, Theme } from '@admiral-ds/react-ui';
+import type { BorderRadiusType, FileUploaderProps, Theme } from '@admiral-ds/react-ui';
 
-export const FileUploaderXLTemplate = (props: FileUploaderProps) => {
+export const FileUploaderXLTemplate = (props: FileUploaderProps & { themeBorderKind: BorderRadiusType }) => {
   const accept = ['image/*', '.pdf', 'application/json'];
 
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

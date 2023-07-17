@@ -22,7 +22,7 @@ const logSelectedId = (id: string) => {
   console.log(`selected: ${id}`);
 };
 
-const handleMainButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+const handleMainButtonClick = () => {
   console.log('Main button clicked');
 };
 

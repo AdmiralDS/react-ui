@@ -58,7 +58,7 @@ const Wrapper = styled.div`
   }
 `;
 
-const Template1: StoryFn<any> = (args) => {
+const Template1: StoryFn<any> = () => {
   function setUSALocale(theme: Theme): Theme {
     const newTheme = { ...theme, currentLocale: 'en-US' };
     return newTheme;

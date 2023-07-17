@@ -8,7 +8,6 @@ import {
   DateTimeTimeInput,
   Field,
 } from '@admiral-ds/react-ui';
-import type { ComponentDimension, FieldProps } from '@admiral-ds/react-ui';
 
 const DisplayContainer = styled.div`
   > * {
@@ -16,11 +15,7 @@ const DisplayContainer = styled.div`
   }
 `;
 
-interface DateTimeFieldProps extends FieldProps {
-  dimension?: ComponentDimension;
-}
-
-export const DateTimeFieldDisabledTemplate = (props: DateTimeFieldProps) => {
+export const DateTimeFieldDisabledTemplate = () => {
   return (
     <DisplayContainer>
       <Field label="Disabled control" disabled>

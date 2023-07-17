@@ -3,7 +3,7 @@ import type { ChangeEvent } from 'react';
 import { ThemeProvider } from 'styled-components';
 
 import { InputEx } from '@admiral-ds/react-ui';
-import type { InputExProps, Theme, ValueType } from '@admiral-ds/react-ui';
+import type { BorderRadiusType, InputExProps, Theme, ValueType } from '@admiral-ds/react-ui';
 
 const PREFIX_OPTIONS = ['prefix One', 'prefix Two', 'prefix Three'];
 const SUFFIX_OPTIONS = ['One', 'Two', 'Three'];
@@ -12,7 +12,7 @@ export const InputExPrefixSuffixSelectTemplate = ({
   value = 'Привет!',
   placeholder = 'Placeholder',
   ...props
-}: InputExProps) => {
+}: InputExProps & { themeBorderKind: BorderRadiusType }) => {
   const [localValue, setValue] = React.useState<string>(String(value) ?? '');
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -22,7 +22,7 @@ export const InputExPrefixSuffixSelectTemplate = ({
   };
 
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

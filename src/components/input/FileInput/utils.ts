@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { useTheme } from 'styled-components';
 import { LIGHT_THEME } from '#src/components/themes';
 import { ReactComponent as PDFSolid } from '@admiral-ds/icons/build/documents/PDFSolid.svg';

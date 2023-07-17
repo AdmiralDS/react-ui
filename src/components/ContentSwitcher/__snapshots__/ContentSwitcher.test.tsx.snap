@@ -21,7 +21,7 @@ exports[`ContentSwitcher should render component with Button 1`] = `
   font-weight: 500;
   font-size: 16px;
   line-height: 24px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
   white-space: nowrap;
   color: #717681;
@@ -116,7 +116,7 @@ exports[`ContentSwitcher should render component with Buttons 1`] = `
   font-weight: 500;
   font-size: 16px;
   line-height: 24px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
   white-space: nowrap;
   color: #717681;

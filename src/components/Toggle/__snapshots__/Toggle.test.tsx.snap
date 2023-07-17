@@ -53,7 +53,7 @@ exports[`Toggle should render component with disabled state 1`] = `
   font-weight: 400;
   font-size: 16px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
   color: #B0B5BD;
 }
@@ -214,7 +214,7 @@ exports[`Toggle should render component with disabled state 1`] = `
   font-weight: 400;
   font-size: 16px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
   color: #B0B5BD;
 }
@@ -430,7 +430,7 @@ exports[`Toggle should render component with left labelPosition 1`] = `
   font-weight: 400;
   font-size: 16px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
   color: #23262D;
 }
@@ -588,7 +588,7 @@ exports[`Toggle should render component with left labelPosition 1`] = `
   font-weight: 400;
   font-size: 16px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
   color: #23262D;
 }
@@ -801,7 +801,7 @@ exports[`Toggle should render component with required properties 1`] = `
   font-weight: 400;
   font-size: 16px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
   color: #23262D;
 }
@@ -959,7 +959,7 @@ exports[`Toggle should render component with required properties 1`] = `
   font-weight: 400;
   font-size: 16px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
   color: #23262D;
 }
@@ -1172,7 +1172,7 @@ exports[`Toggle should render component with small dimension 1`] = `
   font-weight: 400;
   font-size: 14px;
   line-height: 16px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
   color: #23262D;
 }
@@ -1330,7 +1330,7 @@ exports[`Toggle should render component with small dimension 1`] = `
   font-weight: 400;
   font-size: 14px;
   line-height: 16px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
   color: #23262D;
 }

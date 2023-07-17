@@ -198,7 +198,9 @@ export const SortOrder = styled.div`
   font-weight: 500;
   font-size: 8px;
   line-height: 9px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings:
+    'tnum' on,
+    'lnum' on;
   color: ${(p) => p.theme.color['Primary/Primary 60 Main']};
 `;
 

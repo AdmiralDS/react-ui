@@ -94,7 +94,9 @@ const DrawerComponent = styled.div<{ position: Position; mobile?: boolean }>`
   ${({ theme }) => theme.shadow['Shadow 16']}
   outline: none;
   transform: ${({ position }) => (position === 'right' ? 'translateX(100%)' : 'translateX(-100%)')};
-  transition: transform ${transitionMixin}, opacity 0ms linear 0.3s;
+  transition:
+    transform ${transitionMixin},
+    opacity 0ms linear 0.3s;
   pointer-events: auto;
   opacity: 0;
 `;

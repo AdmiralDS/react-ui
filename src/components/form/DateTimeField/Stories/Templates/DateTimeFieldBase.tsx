@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 import {
   DateTimeContainer,
   DateTimeDateInput,
@@ -7,7 +5,6 @@ import {
   DateTimeTimeInput,
   Field,
 } from '@admiral-ds/react-ui';
-import type { ComponentDimension, FieldProps } from '@admiral-ds/react-ui';
 import styled from 'styled-components';
 
 const DisplayContainer = styled.div`
@@ -16,11 +13,7 @@ const DisplayContainer = styled.div`
   }
 `;
 
-interface DateTimeFieldProps extends FieldProps {
-  dimension?: ComponentDimension;
-}
-
-export const DateTimeFieldBaseTemplate = (props: DateTimeFieldProps) => {
+export const DateTimeFieldBaseTemplate = () => {
   return (
     <DisplayContainer>
       <Field label="Введите дату">

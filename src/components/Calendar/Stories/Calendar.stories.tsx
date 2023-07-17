@@ -135,7 +135,7 @@ export const Range = {
 //</editor-fold>
 
 //<editor-fold desc="Пример с ограничением максимальной даты">
-const SimpleWithMaxDateStory: StoryFn<typeof Calendar> = ({ range, ...args }: CalendarPropType) => (
+const SimpleWithMaxDateStory: StoryFn<typeof Calendar> = ({ ...args }: CalendarPropType) => (
   <SimpleWithMaxDateTemplate onChange={() => undefined} {...cleanUpProps(args)} />
 );
 
@@ -160,7 +160,7 @@ export const SimpleWithMaxDate = {
 //</editor-fold>
 
 //<editor-fold desc="Пример с недоступными для выбора датами">
-const SimpleWithFilterDateStory: StoryFn<typeof Calendar> = ({ range, ...args }: CalendarPropType) => (
+const SimpleWithFilterDateStory: StoryFn<typeof Calendar> = ({ ...args }: CalendarPropType) => (
   <SimpleWithFilterDateTemplate onChange={() => undefined} {...cleanUpProps(args)} />
 );
 
@@ -185,7 +185,7 @@ export const SimpleWithFilterDate = {
 //</editor-fold>
 
 //<editor-fold desc="Пример с коллбеками">
-const SimpleWithChangeViewDateStory: StoryFn<typeof Calendar> = ({ range, ...args }: CalendarPropType) => (
+const SimpleWithChangeViewDateStory: StoryFn<typeof Calendar> = ({ ...args }: CalendarPropType) => (
   <SimpleWithChangeViewDateTemplate onChange={() => undefined} {...cleanUpProps(args)} />
 );
 
@@ -210,7 +210,7 @@ export const SimpleWithChangeViewDate = {
 //</editor-fold>
 
 //<editor-fold desc="Пример с переключением экранов выбора дат">
-const SimpleWithSetActiveViewDateStory: StoryFn<typeof Calendar> = ({ range, ...args }: CalendarPropType) => (
+const SimpleWithSetActiveViewDateStory: StoryFn<typeof Calendar> = ({ ...args }: CalendarPropType) => (
   <SimpleWithSetActiveViewDateTemplate onChange={() => undefined} {...cleanUpProps(args)} />
 );
 
@@ -235,10 +235,7 @@ export const SimpleWithSetActiveViewDate = {
 //</editor-fold>
 
 //<editor-fold desc="Пример с выбором только месяца/года">
-const SimpleWithSetActiveViewDateAfterChooseYearStory: StoryFn<typeof Calendar> = ({
-  range,
-  ...args
-}: CalendarPropType) => (
+const SimpleWithSetActiveViewDateAfterChooseYearStory: StoryFn<typeof Calendar> = ({ ...args }: CalendarPropType) => (
   <SimpleWithSetActiveViewDateAfterChooseYearTemplate onChange={() => undefined} {...cleanUpProps(args)} />
 );
 
@@ -263,7 +260,7 @@ export const SimpleWithSetActiveViewDateAfterChooseYear = {
 //</editor-fold>
 
 //<editor-fold desc="Пример с выбором только месяца/года">
-const SimpleWithSetActiveViewWithoutDayStory: StoryFn<typeof Calendar> = ({ range, ...args }: CalendarPropType) => (
+const SimpleWithSetActiveViewWithoutDayStory: StoryFn<typeof Calendar> = ({ ...args }: CalendarPropType) => (
   <SimpleWithSetActiveViewWithoutDayTemplate onChange={() => undefined} {...cleanUpProps(args)} />
 );
 

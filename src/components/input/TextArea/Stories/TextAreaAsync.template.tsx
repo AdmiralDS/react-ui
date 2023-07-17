@@ -2,7 +2,6 @@ import { useLayoutEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { TextArea } from '@admiral-ds/react-ui';
-import type { TextAreaProps } from '@admiral-ds/react-ui';
 
 const Form = styled.form`
   display: flex;
@@ -20,7 +19,7 @@ const TEXT =
   'heights.At breakpoint boundaries, mini units divide the screen into a fixed master ' +
   'grid, and multiples of mini units map to fluid grid column widths and row heights.';
 
-export const TextAreaAsyncTemplate = ({ value = 'Привет!', placeholder = 'Placeholder', ...props }: TextAreaProps) => {
+export const TextAreaAsyncTemplate = () => {
   const [textValue, setTextValue] = useState<string>('' /*TEXT*/);
 
   useLayoutEffect(() => {

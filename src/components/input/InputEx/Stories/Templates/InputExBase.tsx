@@ -3,13 +3,16 @@ import type { ChangeEvent } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
 import { InputEx } from '@admiral-ds/react-ui';
-import type { Theme, InputExProps } from '@admiral-ds/react-ui';
+import type { Theme, InputExProps, BorderRadiusType } from '@admiral-ds/react-ui';
 
 const Separator = styled.div`
   height: 20px;
 `;
 
-export const InputExBaseTemplate = ({ placeholder = 'Placeholder', ...props }: InputExProps) => {
+export const InputExBaseTemplate = ({
+  placeholder = 'Placeholder',
+  ...props
+}: InputExProps & { themeBorderKind: BorderRadiusType }) => {
   const [localValueOne, setValueOne] = React.useState<string>(
     props.value ? String(props.value) : 'Вариант с префиксом',
   );
@@ -39,7 +42,7 @@ export const InputExBaseTemplate = ({ placeholder = 'Placeholder', ...props }: I
   };
 
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 
