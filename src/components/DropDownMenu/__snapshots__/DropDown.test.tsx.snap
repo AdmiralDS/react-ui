@@ -33,7 +33,7 @@ exports[`DropDown should render component 1`] = `
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
   text-overflow: ellipsis;
   color: #23262D;
@@ -54,7 +54,7 @@ ul[data-dimension='s'] .c6 {
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -246,7 +246,7 @@ exports[`DropDown should render group components 1`] = `
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
   text-overflow: ellipsis;
   color: #23262D;
@@ -267,7 +267,7 @@ ul[data-dimension='s'] .c6 {
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -316,7 +316,7 @@ ul[data-dimension='s'] .c6 {
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
   text-overflow: ellipsis;
   color: #23262D;
@@ -337,7 +337,7 @@ ul[data-dimension='s'] .c6 {
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -390,7 +390,7 @@ ul[data-selectedid="2"] .c8.c8 {
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
   text-overflow: ellipsis;
   color: #23262D;
@@ -411,7 +411,7 @@ ul[data-dimension='s'] .c6 {
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -464,7 +464,7 @@ ul[data-selectedid="3"] .c9.c9 {
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
   text-overflow: ellipsis;
   color: #23262D;
@@ -485,7 +485,7 @@ ul[data-dimension='s'] .c6 {
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -538,7 +538,7 @@ ul[data-selectedid="4"] .c10.c10 {
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
   text-overflow: ellipsis;
   color: #23262D;
@@ -559,7 +559,7 @@ ul[data-dimension='s'] .c6 {
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -612,7 +612,7 @@ ul[data-selectedid="5"] .c11.c11 {
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
   text-overflow: ellipsis;
   color: #23262D;
@@ -633,7 +633,7 @@ ul[data-dimension='s'] .c6 {
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -686,7 +686,7 @@ ul[data-selectedid="10"] .c12.c12 {
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
   text-overflow: ellipsis;
   color: #23262D;
@@ -707,7 +707,7 @@ ul[data-dimension='s'] .c6 {
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -760,7 +760,7 @@ ul[data-selectedid="11"] .c13.c13 {
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
   text-overflow: ellipsis;
   color: #23262D;
@@ -781,7 +781,7 @@ ul[data-dimension='s'] .c6 {
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -834,7 +834,7 @@ ul[data-selectedid="12"] .c14.c14 {
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
   text-overflow: ellipsis;
   color: #23262D;
@@ -855,7 +855,7 @@ ul[data-dimension='s'] .c6 {
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -1181,7 +1181,7 @@ exports[`DropDown should render small components 1`] = `
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
   text-overflow: ellipsis;
   color: #23262D;
@@ -1202,7 +1202,7 @@ ul[data-dimension='s'] .c6 {
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
 }
 

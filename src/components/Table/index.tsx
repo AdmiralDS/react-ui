@@ -11,7 +11,7 @@ import { RowWrapper } from '#src/components/Table/Row/RowWrapper';
 import { DropdownContext } from '#src/components/DropdownProvider';
 import { refSetter } from '#src/components/common/utils/refSetter';
 import type { FlattenInterpolation, ThemeProps, DefaultTheme } from 'styled-components';
-import ReactDOM from 'react-dom';
+import { createPortal } from 'react-dom';
 
 import { HeaderCellComponent } from './HeaderCell';
 import { dragObserver } from './dragObserver';
@@ -950,7 +950,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
         </HeaderWrapper>
         {renderBody()}
         {(isAnyColumnDraggable || isAnyStickyColumnDraggable) &&
-          ReactDOM.createPortal(
+          createPortal(
             <Mirror dimension={dimension} ref={mirrorRef}>
               <CursorGrabbing className="icon-grabbing" />
               <CursorNotAllowed className="icon-not-allowed" />

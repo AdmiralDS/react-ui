@@ -49,7 +49,7 @@ export const DropDownText = styled(OptionWrapper)`
   color: ${({ theme }) => theme.color['Neutral/Neutral 50']};
 `;
 
-type PartialOption = { value: string; disabled: boolean } & Record<string, any>;
+type PartialOption = { value: string; disabled: boolean } & IConstantOption;
 const findAbledOptionValue = (options: PartialOption[]) => options.find(({ disabled }) => !disabled)?.value;
 
 const stopPropagation = (evt: React.BaseSyntheticEvent) => evt.stopPropagation();

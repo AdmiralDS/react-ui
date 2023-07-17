@@ -90,7 +90,7 @@ export const DateInput = React.forwardRef<HTMLInputElement, DateInputProps>(
       dropContainerClassName,
       dropContainerStyle,
       isVisible,
-      onVisibilityChange = (isVisible: boolean) => undefined,
+      onVisibilityChange = () => undefined,
       ...props
     },
     ref,

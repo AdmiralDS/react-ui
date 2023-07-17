@@ -15,7 +15,7 @@ describe('MultiButton', () => {
 
   const requiredProps = {
     selected: '1',
-    onChange: (id: string) => {
+    onChange: () => {
       /**/
     },
     options: [

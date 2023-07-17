@@ -1,5 +1,4 @@
 import type { FC, HTMLAttributes, ReactNode } from 'react';
-import * as React from 'react';
 import styled from 'styled-components';
 import { TYPOGRAPHY } from '#src/components/Typography';
 
@@ -45,13 +44,7 @@ const Label = styled.div<{ appearance?: AppearanceProgressPage }>`
 
 const Container = styled.div``;
 
-export const ProgressPage: FC<ProgressPageProps> = ({
-  percent = 0,
-  children,
-  label,
-  appearance = 'primary',
-  ...props
-}) => {
+export const ProgressPage: FC<ProgressPageProps> = ({ percent = 0, label, appearance = 'primary', ...props }) => {
   return (
     <Container {...props}>
       <Label appearance={appearance}>{label}</Label>

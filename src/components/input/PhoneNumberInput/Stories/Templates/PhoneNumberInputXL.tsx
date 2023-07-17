@@ -3,13 +3,13 @@ import type { ChangeEvent } from 'react';
 import { ThemeProvider } from 'styled-components';
 
 import { PhoneNumberInput } from '@admiral-ds/react-ui';
-import type { Theme, PhoneNumberInputProps } from '@admiral-ds/react-ui';
+import type { Theme, PhoneNumberInputProps, BorderRadiusType } from '@admiral-ds/react-ui';
 
 export const PhoneNumberInputXLTemplate = ({
   defaultCountry = 'RUS',
   value = '+7 123 456 78 90',
   ...props
-}: PhoneNumberInputProps) => {
+}: PhoneNumberInputProps & { themeBorderKind: BorderRadiusType }) => {
   const [localValue, setValue] = React.useState<string>(value ?? '');
 
   React.useEffect(() => {
@@ -25,7 +25,7 @@ export const PhoneNumberInputXLTemplate = ({
   };
 
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

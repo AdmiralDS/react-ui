@@ -1,10 +1,9 @@
-import * as React from 'react';
 import styled from 'styled-components';
 import type { TableRow } from '#src/components/Table';
 import { typography } from '#src/components/Typography';
 import type { Color } from '#src/components/themes';
 
-export const COLORS: any = {
+export const COLORS = {
   Neutral: {
     'Neutral/Neutral 00': {
       name: 'Neutral 00',
@@ -411,7 +410,7 @@ export const COLORS: any = {
   },
 };
 
-export const COLORS_DESC: any = {
+export const COLORS_DESC = {
   Neutral: `Набор динамичных (изменяемых в темной теме) оттенков серого цвета для построения основных элементов интерфейса.`,
   Primary: `Набор динамичных (изменяемых в темной теме) оттенков интерактивного цвета для построения элементов интерфейса.`,
   Special: `Набор статичных (неизменяемых в темной теме) оттенков цвета. Цвета используются для работы в Light Theme 
@@ -455,7 +454,7 @@ export const VERSION_COLUMNS = [
     name: 'version2.1',
     width: '300px',
     title: 'Admiral 2.1',
-    renderCell: (data: any) => (
+    renderCell: (data: keyof Color | 'Нет сопоставлений') => (
       <Cell>
         {data}
         {data !== 'Нет сопоставлений' && (
@@ -469,7 +468,9 @@ export const VERSION_COLUMNS = [
   },
 ];
 
-export const VERSIONS_ROWS: Array<TableRow & { 'version2.0'?: any; 'version2.1'?: any }> = [
+export const VERSIONS_ROWS: Array<
+  TableRow & { 'version2.0'?: string | object; 'version2.1'?: keyof Color | 'Нет сопоставлений' }
+> = [
   { id: '1', 'version2.0': <Group>Basic</Group> },
   { id: '2', 'version2.0': 'Light web/Basic/Primary', 'version2.1': 'Primary/Primary 60 Main' },
   { id: '3', 'version2.0': 'Light web/Basic/Secondary', 'version2.1': 'Neutral/Neutral 90' },

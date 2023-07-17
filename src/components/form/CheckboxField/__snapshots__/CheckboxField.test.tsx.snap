@@ -133,7 +133,7 @@ fieldset[data-dimension='s'] .c2 {
   font-weight: 400;
   font-size: 16px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
   color: #B0B5BD;
   cursor: default;
@@ -146,7 +146,7 @@ fieldset[data-dimension='s'] .c0 {
   font-weight: 400;
   font-size: 14px;
   line-height: 16px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -316,7 +316,7 @@ fieldset[data-dimension='s'] .c2 {
   font-weight: 400;
   font-size: 16px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
   color: #B0B5BD;
   cursor: default;
@@ -329,7 +329,7 @@ fieldset[data-dimension='s'] .c0 {
   font-weight: 400;
   font-size: 14px;
   line-height: 16px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -554,7 +554,7 @@ fieldset[data-dimension='s'] .c2 {
   font-weight: 400;
   font-size: 16px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
   color: #23262D;
   cursor: pointer;
@@ -567,7 +567,7 @@ fieldset[data-dimension='s'] .c0 {
   font-weight: 400;
   font-size: 14px;
   line-height: 16px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -735,7 +735,7 @@ fieldset[data-dimension='s'] .c2 {
   font-weight: 400;
   font-size: 16px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
   color: #23262D;
   cursor: pointer;
@@ -748,7 +748,7 @@ fieldset[data-dimension='s'] .c0 {
   font-weight: 400;
   font-size: 14px;
   line-height: 16px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -971,7 +971,7 @@ fieldset[data-dimension='s'] .c2 {
   font-weight: 400;
   font-size: 14px;
   line-height: 16px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
   color: #23262D;
   cursor: pointer;
@@ -984,7 +984,7 @@ fieldset[data-dimension='s'] .c0 {
   font-weight: 400;
   font-size: 14px;
   line-height: 16px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -1152,7 +1152,7 @@ fieldset[data-dimension='s'] .c2 {
   font-weight: 400;
   font-size: 14px;
   line-height: 16px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
   color: #23262D;
   cursor: pointer;
@@ -1165,7 +1165,7 @@ fieldset[data-dimension='s'] .c0 {
   font-weight: 400;
   font-size: 14px;
   line-height: 16px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
 }
 

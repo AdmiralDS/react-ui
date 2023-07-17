@@ -42,7 +42,7 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarPropType>(
       onViewLeave,
       onViewMonthSelect,
       onViewYearSelect,
-      highlightSpecialDay = (date: Date) => undefined,
+      highlightSpecialDay = () => undefined,
       ...props
     },
     ref,
@@ -166,7 +166,7 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarPropType>(
         return decrease;
       });
 
-    const handleDayMouseEnter = (day: Date, _: any) => setActiveDate(day);
+    const handleDayMouseEnter = (day: Date) => setActiveDate(day);
     const handleMonthMouseLeave = () => setActiveDate(null);
 
     const handleDayClick = (day: Date, event: any) => {
