@@ -76,6 +76,7 @@ export const TooltipMenuButtonTemplate = (args: ITooltipProps) => {
         <Tooltip
           targetRef={btnRef}
           renderContent={renderTooltipContent}
+          tooltipPosition={args.tooltipPosition}
           style={{ minWidth: '200px', maxWidth: '300px' }}
           id="test1"
         />

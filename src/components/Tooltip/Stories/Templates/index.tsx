@@ -2,8 +2,3 @@ export * from './TooltipBase';
 export * from './TooltipDelay';
 export * from './TooltipRef';
 export * from './TooltipMenuButton';
-export * from './TooltipHocBase';
-export * from './TooltipHocClass';
-export * from './TooltipHocFC';
-export * from './TooltipHocRefSetter';
-export * from './TooltipHocRef';
