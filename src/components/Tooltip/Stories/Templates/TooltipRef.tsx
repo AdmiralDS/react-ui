@@ -1,8 +1,15 @@
 import * as React from 'react';
 import { Tooltip, Button } from '@admiral-ds/react-ui';
+import type { ITooltipProps, Theme } from '@admiral-ds/react-ui';
 import { ReactComponent as DeleteOutline } from '@admiral-ds/icons/build/system/DeleteOutline.svg';
+import { ThemeProvider } from 'styled-components';
 
-export const TooltipRefTemplate = () => {
+export const TooltipRefTemplate = (args: ITooltipProps) => {
+  function swapBorder(theme: Theme): Theme {
+    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
+    return theme;
+  } 
+
   const tooltipRef = React.useRef(null);
   const btnRef = React.useRef<any>(null);
   const [visible, setVisible] = React.useState(false);
@@ -34,11 +41,11 @@ export const TooltipRefTemplate = () => {
   }, [setVisible]);
 
   return (
-    <>
+    <ThemeProvider theme={swapBorder}>
       <Button ref={btnRef} dimension="m" displayAsSquare aria-label="Delete" aria-describedby="test3">
         <DeleteOutline height={24} width={24} />
       </Button>
       {visible && <Tooltip targetRef={btnRef} renderContent={() => 'Delete file'} ref={tooltipRef} id="test3" />}
-    </>
+    </ThemeProvider>
   );
 };
