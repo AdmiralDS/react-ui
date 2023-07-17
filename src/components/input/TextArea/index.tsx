@@ -372,7 +372,7 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
           node.style.overflowY = '';
         };
       }
-    }, [autoHeight]);
+    }, [autoHeight, inputData.value, props.defaultValue]);
     return (
       <StyledContainer
         className={className}
