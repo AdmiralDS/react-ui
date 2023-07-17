@@ -320,7 +320,7 @@ describe('SearchSelect', () => {
       });
 
       await user.type(inputELem, '{arrowdown}');
-      await user.type(inputELem, '{enter}');
+      await user.keyboard('{enter}');
 
       dropDownOptions.forEach((optionElem, ind) => {
         const checkbox = within(optionElem).getByRole('checkbox') as HTMLInputElement;
@@ -360,7 +360,7 @@ describe('SearchSelect', () => {
       const valueWrapper = document.getElementById('selectValueWrapper') as HTMLElement;
 
       await user.tab();
-      await user.type(valueWrapper, '{enter}');
+      await user.keyboard('{enter}');
 
       const dropDownContainer = document.getElementsByClassName('dropdown-container')[0] as HTMLElement;
       const dropDownOptions = within(dropDownContainer).getAllByTestId('option');
@@ -496,7 +496,7 @@ describe('SearchSelect', () => {
       const inputELem = screen.getByRole('textbox') as HTMLInputElement;
 
       await user.tab();
-      await user.type(inputELem, '{enter}');
+      await user.keyboard('{enter}');
 
       Array.from(selectElem.options).forEach((nativeOption, nativeOptionInd) => {
         if ([1, 2].includes(nativeOptionInd)) expect(nativeOption.selected).toBeTruthy();

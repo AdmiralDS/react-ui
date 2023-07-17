@@ -119,7 +119,6 @@ export const DateInput = React.forwardRef<HTMLInputElement, DateInputProps>(
 
     const isCalendarOpen = isVisible ?? isCalendarOpenState;
     const setCalendarOpen = (newCalendarOpenState: boolean) => {
-      console.log(`setting menu state ${newCalendarOpenState}`);
       setCalendarOpenState(newCalendarOpenState);
       onVisibilityChange(newCalendarOpenState);
     };
