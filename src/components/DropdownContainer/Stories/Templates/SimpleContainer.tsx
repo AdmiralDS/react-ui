@@ -2,7 +2,7 @@ import * as React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
 import { Button, DropdownContainer, mediumGroupBorderRadius, typography } from '@admiral-ds/react-ui';
-import type { DropdownContainerProps, Theme } from '@admiral-ds/react-ui';
+import type { DropdownContainerProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
 
 const StyledText = styled.div`
   ${typography['Body/Body 1 Short']}
@@ -19,14 +19,14 @@ const Wrapper = styled.div`
   justify-content: center;
 `;
 
-export const SimpleContainerTemplate = (props: DropdownContainerProps) => {
+export const SimpleContainerTemplate = (props: DropdownContainerProps & { themeBorderKind?: BorderRadiusType }) => {
   const [open, setOpen] = React.useState(false);
   const buttonRef = React.useRef<HTMLButtonElement>(null);
 
   const { targetRef, ...other } = props;
 
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

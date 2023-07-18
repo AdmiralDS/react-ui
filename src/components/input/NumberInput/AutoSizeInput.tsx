@@ -307,7 +307,7 @@ export const AutoSizeInput = forwardRef<HTMLInputElement, InputProps>(
           node.removeEventListener('input', oninput);
         };
       }
-    }, [inputRef.current, placeholder]);
+    }, [inputRef.current, placeholder, precision, decimal, thousand, minValue]);
 
     useLayoutEffect(() => {
       if (inputRef.current) {

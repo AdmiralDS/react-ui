@@ -3,11 +3,11 @@ import type { ChangeEvent } from 'react';
 import { ThemeProvider } from 'styled-components';
 
 import { DateInput } from '@admiral-ds/react-ui';
-import type { DateInputProps, Theme } from '@admiral-ds/react-ui';
+import type { DateInputProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
 
-export const DateInputPickMonthTemplate = (props: DateInputProps) => {
+export const DateInputPickMonthTemplate = (props: DateInputProps & { themeBorderKind?: BorderRadiusType }) => {
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

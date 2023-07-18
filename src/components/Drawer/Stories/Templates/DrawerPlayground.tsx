@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Drawer, DrawerTitle, DrawerContent, DrawerButtonPanel, Button, InputField } from '@admiral-ds/react-ui';
-import type { DrawerProps, Theme } from '@admiral-ds/react-ui';
+import type { DrawerProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
 import styled, { ThemeProvider } from 'styled-components';
 
 const Separator = styled.div`
@@ -41,11 +41,11 @@ const DrawerForm = ({ onYesClick, onNoClick }: Props) => {
   );
 };
 
-export const DrawerPlaygroundTemplate = (props: DrawerProps) => {
+export const DrawerPlaygroundTemplate = (props: DrawerProps & { themeBorderKind?: BorderRadiusType }) => {
   const [opened, setOpened] = React.useState(false);
 
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

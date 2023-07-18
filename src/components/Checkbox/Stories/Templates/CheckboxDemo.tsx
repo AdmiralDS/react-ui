@@ -2,7 +2,7 @@ import * as React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
 import { Checkbox, T } from '@admiral-ds/react-ui';
-import type { CheckBoxProps, Theme } from '@admiral-ds/react-ui';
+import type { CheckBoxProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
 
 const Container = styled.div`
   display: flex;
@@ -25,9 +25,9 @@ const Row = styled.div`
   }
 `;
 
-export const CheckboxDemoTemplate = (props: CheckBoxProps) => {
+export const CheckboxDemoTemplate = (props: CheckBoxProps & { themeBorderKind?: BorderRadiusType }) => {
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

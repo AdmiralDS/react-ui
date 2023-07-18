@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import { Menu, MenuItem, mediumGroupBorderRadius } from '@admiral-ds/react-ui';
-import type { Theme, MenuProps, RenderOptionProps, MenuModelItemProps } from '@admiral-ds/react-ui';
+import type { Theme, MenuProps, RenderOptionProps, MenuModelItemProps, BorderRadiusType } from '@admiral-ds/react-ui';
 
 type StoryItem = {
   id: string;
@@ -128,7 +128,7 @@ const Container = styled.div`
   justify-content: space-between;
 `;
 
-export const MultiLevelTemplate = (props: MenuProps) => {
+export const MultiLevelTemplate = (props: MenuProps & { themeBorderKind?: BorderRadiusType }) => {
   const convertStoryItem = (storyItem: StoryItem): MenuModelItemProps => {
     const item: MenuModelItemProps = {
       id: storyItem.id,
@@ -151,7 +151,7 @@ export const MultiLevelTemplate = (props: MenuProps) => {
   }, [props.dimension]);
 
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

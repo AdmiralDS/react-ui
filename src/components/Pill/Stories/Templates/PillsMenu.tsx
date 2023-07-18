@@ -175,7 +175,7 @@ const items: Array<PillOptionProps> = [
 
 export const PillsMenuTemplate = (props: any) => {
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

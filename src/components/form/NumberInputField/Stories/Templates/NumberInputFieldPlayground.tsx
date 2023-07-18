@@ -2,7 +2,7 @@ import * as React from 'react';
 import { ThemeProvider } from 'styled-components';
 
 import { NumberInputField, clearValue } from '@admiral-ds/react-ui';
-import type { NumberInputFieldProps, Theme } from '@admiral-ds/react-ui';
+import type { NumberInputFieldProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
 
 export const NumberInputFieldPlaygroundTemplate = ({
   defaultValue = '2 000',
@@ -11,9 +11,9 @@ export const NumberInputFieldPlaygroundTemplate = ({
   maxValue = 10000,
   decimal,
   ...props
-}: NumberInputFieldProps) => {
+}: NumberInputFieldProps & { themeBorderKind?: BorderRadiusType }) => {
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

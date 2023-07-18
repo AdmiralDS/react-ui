@@ -2,7 +2,7 @@ import * as React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
 import { TextField } from '@admiral-ds/react-ui';
-import type { TextFieldProps, Theme } from '@admiral-ds/react-ui';
+import type { TextFieldProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
 
 const DisplayContainer = styled.div`
   > * {
@@ -21,7 +21,7 @@ export const TextFieldInputTemplate = ({
     'grid, and multiples of mini units map to fluid grid column widths and row heights.',
   label = 'Label',
   ...props
-}: TextFieldProps) => {
+}: TextFieldProps & { themeBorderKind?: BorderRadiusType }) => {
   const [localValue, setValue] = React.useState<string>(String(value) ?? '');
   const fieldRef = React.useRef(null);
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -31,7 +31,7 @@ export const TextFieldInputTemplate = ({
   };
 
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

@@ -3,13 +3,13 @@ import type { ChangeEvent } from 'react';
 import { ThemeProvider } from 'styled-components';
 
 import { TextArea } from '@admiral-ds/react-ui';
-import type { TextAreaProps, Theme } from '@admiral-ds/react-ui';
+import type { TextAreaProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
 
 export const TextAreaPlaygroundTemplate = ({
   value = 'Привет!',
   placeholder = 'Placeholder',
   ...props
-}: TextAreaProps) => {
+}: TextAreaProps & { themeBorderKind?: BorderRadiusType }) => {
   const [localValue, setValue] = React.useState<string>(String(value) ?? '');
 
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -19,7 +19,7 @@ export const TextAreaPlaygroundTemplate = ({
   };
 
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

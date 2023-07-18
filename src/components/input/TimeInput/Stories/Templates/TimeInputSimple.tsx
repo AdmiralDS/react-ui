@@ -3,9 +3,9 @@ import type { ChangeEvent } from 'react';
 import { ThemeProvider } from 'styled-components';
 
 import { TimeInput } from '@admiral-ds/react-ui';
-import type { TimeInputProps, Theme } from '@admiral-ds/react-ui';
+import type { TimeInputProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
 
-export const TimeInputSimpleTemplate = (props: TimeInputProps) => {
+export const TimeInputSimpleTemplate = (props: TimeInputProps & { themeBorderKind?: BorderRadiusType }) => {
   const [localValue, setValue] = React.useState<string>(String(props.value) ?? '');
 
   React.useEffect(() => {
@@ -20,7 +20,7 @@ export const TimeInputSimpleTemplate = (props: TimeInputProps) => {
   };
 
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

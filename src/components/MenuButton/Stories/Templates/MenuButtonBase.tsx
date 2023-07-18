@@ -2,7 +2,7 @@ import * as React from 'react';
 import { ThemeProvider } from 'styled-components';
 
 import { MenuButton, MenuItem } from '@admiral-ds/react-ui';
-import type { MenuButtonProps, RenderOptionProps, Theme } from '@admiral-ds/react-ui';
+import type { MenuButtonProps, RenderOptionProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
 
 const handleVisibilityChange = (isVisible: boolean) => {
   if (isVisible) {
@@ -48,11 +48,11 @@ const items = [
   },
 ];
 
-export const MenuButtonBaseTemplate = (props: MenuButtonProps) => {
+export const MenuButtonBaseTemplate = (props: MenuButtonProps & { themeBorderKind?: BorderRadiusType }) => {
   const [selected, setSelected] = React.useState<string | undefined>(undefined);
 
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

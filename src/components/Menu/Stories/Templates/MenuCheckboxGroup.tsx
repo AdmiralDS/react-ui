@@ -7,6 +7,7 @@ import type {
   RenderOptionProps,
   CheckboxGroupItemProps,
   MenuModelItemProps,
+  BorderRadiusType,
 } from '@admiral-ds/react-ui';
 
 const STORY_ITEMS: Array<CheckboxGroupItemProps> = [
@@ -68,7 +69,7 @@ const Wrapper = styled.div`
   ${(p) => p.theme.shadow['Shadow 08']}
 `;
 
-export const MenuCheckboxGroupTemplate = (props: MenuProps) => {
+export const MenuCheckboxGroupTemplate = (props: MenuProps & { themeBorderKind?: BorderRadiusType }) => {
   const [internalModel, setInternalModel] = React.useState<Array<CheckboxGroupItemProps>>([...STORY_ITEMS]);
   const [activeOption, setActiveOption] = React.useState<string | undefined>();
 
@@ -151,7 +152,7 @@ export const MenuCheckboxGroupTemplate = (props: MenuProps) => {
   };
 
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

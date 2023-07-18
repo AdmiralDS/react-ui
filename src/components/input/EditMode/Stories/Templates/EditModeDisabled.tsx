@@ -1,12 +1,15 @@
 import * as React from 'react';
 import type { ChangeEvent } from 'react';
 import { EditMode } from '@admiral-ds/react-ui';
-import type { EditModeProps, Theme } from '@admiral-ds/react-ui';
+import type { EditModeProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
 import { ThemeProvider } from 'styled-components';
 
-export const EditModeDisabledTemplate = ({ value = 'Привет!', ...props }: EditModeProps) => {
+export const EditModeDisabledTemplate = ({
+  value = 'Привет!',
+  ...props
+}: EditModeProps & { themeBorderKind?: BorderRadiusType }) => {
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

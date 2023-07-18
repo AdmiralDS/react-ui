@@ -44,7 +44,7 @@ export const InputExCustomTemplate = ({
   value = 'Привет!',
   placeholder = 'Placeholder',
   ...props
-}: InputExProps & { themeBorderKind: BorderRadiusType }) => {
+}: InputExProps & { themeBorderKind?: BorderRadiusType }) => {
   const [localValue, setValue] = React.useState<string>(String(value) ?? '');
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {

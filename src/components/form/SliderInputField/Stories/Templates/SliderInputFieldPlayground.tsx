@@ -2,15 +2,15 @@ import * as React from 'react';
 import { ThemeProvider } from 'styled-components';
 
 import { SliderInputField } from '@admiral-ds/react-ui';
-import type { SliderInputFieldProps, Theme } from '@admiral-ds/react-ui';
+import type { SliderInputFieldProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
 
 export const SliderInputFieldPlaygroundTemplate = ({
   defaultValue = '2 000',
   label = 'Введите сумму',
   ...props
-}: SliderInputFieldProps) => {
+}: SliderInputFieldProps & { themeBorderKind?: BorderRadiusType }) => {
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

@@ -8,6 +8,7 @@ import type {
   RenderOptionProps,
   RenderPanelProps,
   Theme,
+  BorderRadiusType,
 } from '@admiral-ds/react-ui';
 
 const ActionPanelFlex = css`
@@ -46,9 +47,9 @@ const itemsWithCheckbox: Array<ItemWithCheckbox> = [
   },
 ];
 
-export const MenuButtonWithPanelTemplate = (props: MenuButtonProps) => {
+export const MenuButtonWithPanelTemplate = (props: MenuButtonProps & { themeBorderKind?: BorderRadiusType }) => {
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

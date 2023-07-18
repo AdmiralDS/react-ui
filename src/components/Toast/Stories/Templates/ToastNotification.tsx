@@ -9,7 +9,7 @@ import {
   ToastProvider,
   useToast,
 } from '@admiral-ds/react-ui';
-import type { ID, IdentifyToast, Theme, ToastItemProps, ToastProps } from '@admiral-ds/react-ui';
+import type { ID, IdentifyToast, Theme, ToastItemProps, ToastProps, BorderRadiusType } from '@admiral-ds/react-ui';
 
 import { uid } from '#src/components/common/uid';
 
@@ -101,9 +101,9 @@ const NotificationEmitter = () => {
   );
 };
 
-export const ToastNotificationTemplate = (props: ToastProps) => {
+export const ToastNotificationTemplate = (props: ToastProps & { themeBorderKind?: BorderRadiusType }) => {
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 
