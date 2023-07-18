@@ -1,6 +1,6 @@
-import * as React from 'react';
+import { useState } from 'react';
 import { NumberInput, T, clearValue } from '@admiral-ds/react-ui';
-import type { NumberInputProps, Theme } from '@admiral-ds/react-ui';
+import type { BorderRadiusType, NumberInputProps, Theme } from '@admiral-ds/react-ui';
 import { ThemeProvider } from 'styled-components';
 
 export const NumberInputMinMaxTemplate = ({
@@ -9,13 +9,13 @@ export const NumberInputMinMaxTemplate = ({
   precision = 2,
   decimal,
   ...args
-}: NumberInputProps) => {
+}: NumberInputProps & { themeBorderKind: BorderRadiusType }) => {
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = args.themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 
-  const [status, setStatus] = React.useState<NumberInputProps['status'] | undefined>(undefined);
+  const [status, setStatus] = useState<NumberInputProps['status'] | undefined>(undefined);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const numValue = Number(clearValue(event.target.value, precision, decimal));

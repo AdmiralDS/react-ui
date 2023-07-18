@@ -81,7 +81,9 @@ export const typography = {
     font-weight: 550;
     font-size: 42px;
     line-height: 52px;
-    font-feature-settings: 'tnum' on, 'lnum' on;
+    font-feature-settings:
+      'tnum' on,
+      'lnum' on;
     text-rendering: geometricPrecision;
   `,
 
@@ -91,7 +93,9 @@ export const typography = {
     font-weight: 550;
     font-size: 36px;
     line-height: 44px;
-    font-feature-settings: 'tnum' on, 'lnum' on;
+    font-feature-settings:
+      'tnum' on,
+      'lnum' on;
     text-rendering: geometricPrecision;
   `,
 
@@ -101,7 +105,9 @@ export const typography = {
     font-weight: 500;
     font-size: 32px;
     line-height: 40px;
-    font-feature-settings: 'tnum' on, 'lnum' on;
+    font-feature-settings:
+      'tnum' on,
+      'lnum' on;
     text-rendering: geometricPrecision;
   `,
 
@@ -111,7 +117,9 @@ export const typography = {
     font-weight: 550;
     font-size: 28px;
     line-height: 36px;
-    font-feature-settings: 'tnum' on, 'lnum' on;
+    font-feature-settings:
+      'tnum' on,
+      'lnum' on;
     text-rendering: geometricPrecision;
   `,
 
@@ -121,7 +129,9 @@ export const typography = {
     font-weight: 550;
     font-size: 20px;
     line-height: 28px;
-    font-feature-settings: 'tnum' on, 'lnum' on;
+    font-feature-settings:
+      'tnum' on,
+      'lnum' on;
     text-rendering: geometricPrecision;
   `,
 
@@ -131,7 +141,9 @@ export const typography = {
     font-weight: 550;
     font-size: 18px;
     line-height: 24px;
-    font-feature-settings: 'tnum' on, 'lnum' on;
+    font-feature-settings:
+      'tnum' on,
+      'lnum' on;
     text-rendering: geometricPrecision;
   `,
 
@@ -141,7 +153,9 @@ export const typography = {
     font-weight: normal;
     font-size: 18px;
     line-height: 24px;
-    font-feature-settings: 'tnum' on, 'lnum' on;
+    font-feature-settings:
+      'tnum' on,
+      'lnum' on;
     text-rendering: geometricPrecision;
   `,
 
@@ -151,7 +165,9 @@ export const typography = {
     font-weight: 550;
     font-size: 16px;
     line-height: 24px;
-    font-feature-settings: 'tnum' on, 'lnum' on;
+    font-feature-settings:
+      'tnum' on,
+      'lnum' on;
     text-rendering: geometricPrecision;
   `,
 
@@ -161,7 +177,9 @@ export const typography = {
     font-weight: normal;
     font-size: 16px;
     line-height: 24px;
-    font-feature-settings: 'tnum' on, 'lnum' on;
+    font-feature-settings:
+      'tnum' on,
+      'lnum' on;
     text-rendering: geometricPrecision;
   `,
 
@@ -171,7 +189,9 @@ export const typography = {
     font-weight: normal;
     font-size: 16px;
     line-height: 20px;
-    font-feature-settings: 'tnum' on, 'lnum' on;
+    font-feature-settings:
+      'tnum' on,
+      'lnum' on;
     text-rendering: geometricPrecision;
   `,
 
@@ -181,7 +201,9 @@ export const typography = {
     font-weight: normal;
     font-size: 14px;
     line-height: 20px;
-    font-feature-settings: 'tnum' on, 'lnum' on;
+    font-feature-settings:
+      'tnum' on,
+      'lnum' on;
     text-rendering: geometricPrecision;
   `,
 
@@ -191,7 +213,9 @@ export const typography = {
     font-weight: 500;
     font-size: 14px;
     line-height: 20px;
-    font-feature-settings: 'tnum' on, 'lnum' on;
+    font-feature-settings:
+      'tnum' on,
+      'lnum' on;
     text-rendering: geometricPrecision;
   `,
 
@@ -201,7 +225,9 @@ export const typography = {
     font-weight: normal;
     font-size: 14px;
     line-height: 16px;
-    font-feature-settings: 'tnum' on, 'lnum' on;
+    font-feature-settings:
+      'tnum' on,
+      'lnum' on;
     text-rendering: geometricPrecision;
   `,
 
@@ -213,7 +239,9 @@ export const typography = {
     line-height: 24px;
     /* or 150% */
 
-    font-feature-settings: 'tnum' on, 'lnum' on;
+    font-feature-settings:
+      'tnum' on,
+      'lnum' on;
     text-rendering: geometricPrecision;
   `,
 
@@ -225,7 +253,9 @@ export const typography = {
     line-height: 20px;
     /* or 143% */
 
-    font-feature-settings: 'tnum' on, 'lnum' on;
+    font-feature-settings:
+      'tnum' on,
+      'lnum' on;
     text-rendering: geometricPrecision;
   `,
 
@@ -237,7 +267,9 @@ export const typography = {
     line-height: 16px;
     /* identical to box height, or 133% */
 
-    font-feature-settings: 'tnum' on, 'lnum' on;
+    font-feature-settings:
+      'tnum' on,
+      'lnum' on;
     text-rendering: geometricPrecision;
   `,
 
@@ -248,7 +280,9 @@ export const typography = {
     font-size: 72px;
     line-height: 80px;
     /* or 111% */
-    font-feature-settings: 'tnum' on, 'lnum' on;
+    font-feature-settings:
+      'tnum' on,
+      'lnum' on;
     text-rendering: geometricPrecision;
   `,
 
@@ -259,7 +293,9 @@ export const typography = {
     font-size: 56px;
     line-height: 64px;
     /* or 114% */
-    font-feature-settings: 'tnum' on, 'lnum' on;
+    font-feature-settings:
+      'tnum' on,
+      'lnum' on;
     text-rendering: geometricPrecision;
   `,
 
@@ -270,7 +306,9 @@ export const typography = {
     font-size: 48px;
     line-height: 56px;
     /* or 117% */
-    font-feature-settings: 'tnum' on, 'lnum' on;
+    font-feature-settings:
+      'tnum' on,
+      'lnum' on;
     text-rendering: geometricPrecision;
   `,
 
@@ -281,7 +319,9 @@ export const typography = {
     font-size: 40px;
     line-height: 48px;
     /* or 120% */
-    font-feature-settings: 'tnum' on, 'lnum' on;
+    font-feature-settings:
+      'tnum' on,
+      'lnum' on;
     text-rendering: geometricPrecision;
   `,
 
@@ -292,7 +332,9 @@ export const typography = {
     font-size: 34px;
     line-height: 40px;
     /* or 118% */
-    font-feature-settings: 'tnum' on, 'lnum' on;
+    font-feature-settings:
+      'tnum' on,
+      'lnum' on;
     text-rendering: geometricPrecision;
   `,
 
@@ -303,7 +345,9 @@ export const typography = {
     font-size: 28px;
     line-height: 36px;
     /* or 129% */
-    font-feature-settings: 'tnum' on, 'lnum' on;
+    font-feature-settings:
+      'tnum' on,
+      'lnum' on;
     text-rendering: geometricPrecision;
   `,
 
@@ -314,7 +358,9 @@ export const typography = {
     font-size: 24px;
     line-height: 32px;
     /* or 133% */
-    font-feature-settings: 'tnum' on, 'lnum' on;
+    font-feature-settings:
+      'tnum' on,
+      'lnum' on;
     text-rendering: geometricPrecision;
   `,
 
@@ -325,7 +371,9 @@ export const typography = {
     font-size: 20px;
     line-height: 28px;
     /* or 140% */
-    font-feature-settings: 'tnum' on, 'lnum' on;
+    font-feature-settings:
+      'tnum' on,
+      'lnum' on;
     text-rendering: geometricPrecision;
   `,
 
@@ -336,7 +384,9 @@ export const typography = {
     font-size: 18px;
     line-height: 24px;
     /* or 133% */
-    font-feature-settings: 'tnum' on, 'lnum' on;
+    font-feature-settings:
+      'tnum' on,
+      'lnum' on;
     text-rendering: geometricPrecision;
   `,
 
@@ -347,7 +397,9 @@ export const typography = {
     font-size: 18px;
     line-height: 24px;
     /* or 133% */
-    font-feature-settings: 'tnum' on, 'lnum' on;
+    font-feature-settings:
+      'tnum' on,
+      'lnum' on;
     text-rendering: geometricPrecision;
   `,
 
@@ -358,7 +410,9 @@ export const typography = {
     font-size: 16px;
     line-height: 24px;
     /* or 150% */
-    font-feature-settings: 'tnum' on, 'lnum' on;
+    font-feature-settings:
+      'tnum' on,
+      'lnum' on;
     text-rendering: geometricPrecision;
   `,
 
@@ -369,7 +423,9 @@ export const typography = {
     font-size: 14px;
     line-height: 20px;
     /* or 143% */
-    font-feature-settings: 'tnum' on, 'lnum' on;
+    font-feature-settings:
+      'tnum' on,
+      'lnum' on;
     text-rendering: geometricPrecision;
   `,
 
@@ -380,7 +436,9 @@ export const typography = {
     font-size: 16px;
     line-height: 24px;
     /* or 150% */
-    font-feature-settings: 'tnum' on, 'lnum' on;
+    font-feature-settings:
+      'tnum' on,
+      'lnum' on;
     text-rendering: geometricPrecision;
   `,
 
@@ -391,7 +449,9 @@ export const typography = {
     font-size: 16px;
     line-height: 20px;
     /* or 125% */
-    font-feature-settings: 'tnum' on, 'lnum' on;
+    font-feature-settings:
+      'tnum' on,
+      'lnum' on;
     text-rendering: geometricPrecision;
   `,
 
@@ -402,7 +462,9 @@ export const typography = {
     font-size: 14px;
     line-height: 20px;
     /* or 133% */
-    font-feature-settings: 'tnum' on, 'lnum' on;
+    font-feature-settings:
+      'tnum' on,
+      'lnum' on;
     text-rendering: geometricPrecision;
   `,
 
@@ -413,7 +475,9 @@ export const typography = {
     font-size: 14px;
     line-height: 16px;
     /* or 114% */
-    font-feature-settings: 'tnum' on, 'lnum' on;
+    font-feature-settings:
+      'tnum' on,
+      'lnum' on;
     text-rendering: geometricPrecision;
   `,
 
@@ -424,7 +488,9 @@ export const typography = {
     font-size: 16px;
     line-height: 24px;
     /* or 150% */
-    font-feature-settings: 'tnum' on, 'lnum' on;
+    font-feature-settings:
+      'tnum' on,
+      'lnum' on;
     text-rendering: geometricPrecision;
   `,
 
@@ -435,7 +501,9 @@ export const typography = {
     font-size: 14px;
     line-height: 20px;
     /* or 143% */
-    font-feature-settings: 'tnum' on, 'lnum' on;
+    font-feature-settings:
+      'tnum' on,
+      'lnum' on;
     text-rendering: geometricPrecision;
   `,
 
@@ -446,7 +514,9 @@ export const typography = {
     font-size: 12px;
     line-height: 16px;
     /* identical to box height, or 133% */
-    font-feature-settings: 'tnum' on, 'lnum' on;
+    font-feature-settings:
+      'tnum' on,
+      'lnum' on;
     text-rendering: geometricPrecision;
   `,
 
@@ -457,7 +527,9 @@ export const typography = {
     font-size: 10px;
     line-height: 12px;
     /* or 120% */
-    font-feature-settings: 'tnum' on, 'lnum' on;
+    font-feature-settings:
+      'tnum' on,
+      'lnum' on;
     text-rendering: geometricPrecision;
   `,
 } as const;

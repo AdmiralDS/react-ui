@@ -218,11 +218,11 @@ export const PaginationOne: React.FC<PaginationOneProps> = ({
 
   const dropMenuProps = passDropdownDataAttributes(props);
 
-  const handleClickOutside = (e: Event) => {
+  const handleClickOutside = () => {
     handleClosePageNumberDropMenu(selectedPageNumber);
   };
 
-  const handleMenuButtonClick = (e: React.MouseEvent<HTMLElement>) => {
+  const handleMenuButtonClick = () => {
     if (isVisible) {
       handleClosePageNumberDropMenu(selectedPageNumber);
     } else {

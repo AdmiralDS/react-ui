@@ -1,4 +1,3 @@
-import * as React from 'react';
 import styled from 'styled-components';
 import { smallGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { typography } from '#src/components/Typography';

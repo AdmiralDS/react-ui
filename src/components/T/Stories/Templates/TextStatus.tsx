@@ -1,4 +1,3 @@
-import * as React from 'react';
 import styled, { css } from 'styled-components';
 
 import { MainPrimaryColorName, T } from '@admiral-ds/react-ui';
@@ -16,7 +15,7 @@ const OrangeColor = css`
   color: ${(p) => p.theme.color['Warning/Warning 50 Main']};
 `;
 
-export const TextStatusTemplate = ({ font, ...props }: TProps) => {
+export const TextStatusTemplate = ({ ...props }: TProps) => {
   return (
     <>
       <BlueText font={'Body/Body 1 Short'} as={'a'} href={'https://'}>

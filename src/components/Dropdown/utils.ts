@@ -55,7 +55,6 @@ export const previousItem = (
   child: Element | null,
   stop?: boolean,
   onMenuReachTop?: () => void,
-  onMenuReachBottom?: () => void,
 ): Element | null | undefined | ChildNode => {
   if (child?.previousElementSibling) {
     return child.previousElementSibling;

@@ -118,8 +118,8 @@ export const Wrapper = styled.button<{
   ${({ dimension }) => `
     height: ${dimension === 's' ? TAG_HEIGHT_S : TAG_HEIGHT_M}px;
     padding: ${dimension === 's' ? TAG_PADDING_TOP_S : TAG_PADDING_TOP_M}px ${
-    dimension === 's' ? TAG_PADDING_LEFT_S : TAG_PADDING_LEFT_M
-  }px;
+      dimension === 's' ? TAG_PADDING_LEFT_S : TAG_PADDING_LEFT_M
+    }px;
   `}
 
   ${({ width }) => width && `width: ${typeof width === 'number' ? `${width}px` : width};`}

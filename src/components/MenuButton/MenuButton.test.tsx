@@ -21,7 +21,7 @@ describe('MenuButton', () => {
 
   const requiredProps = {
     selected: '1',
-    onChange: (id: string) => {
+    onChange: () => {
       /**/
     },
     items: options.map((item) => ({

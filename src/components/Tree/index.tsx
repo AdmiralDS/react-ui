@@ -22,14 +22,12 @@ export interface TreeProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChang
   model: Array<TreeItemProps>;
   /** Признак того, что дерево содержит checkbox-ы */
   withCheckbox?: boolean;
-  /** Ширина строк дерева */
-  width?: number;
 }
 
-const Wrapper = styled.div<{ $width?: number }>`
+const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: ${({ $width }) => `${$width}px` || '768px'};
+  width: 768px;
 `;
 
 type NodesMapItem = {
@@ -74,7 +72,6 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps>(
   (
     {
       dimension = 'm',
-      width,
       model,
       withCheckbox = true,
       selected,
@@ -203,7 +200,7 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps>(
     };
 
     return (
-      <Wrapper ref={ref} {...props} $width={width} onMouseLeave={handleMouseLeave}>
+      <Wrapper ref={ref} {...props} onMouseLeave={handleMouseLeave}>
         {renderChildren(model)}
       </Wrapper>
     );

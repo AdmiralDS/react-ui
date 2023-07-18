@@ -1,8 +1,6 @@
 import type { Color } from './color';
 import type { ZIndex } from './zIndex';
 import type { Locale } from './locales';
-import type { ThemedStyledInterface } from 'styled-components';
-import baseStyled from 'styled-components';
 
 export type ColorName = keyof Color;
 

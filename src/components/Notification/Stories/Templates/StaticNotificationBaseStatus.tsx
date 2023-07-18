@@ -1,6 +1,4 @@
-import * as React from 'react';
 import styled from 'styled-components';
-
 import { Notification } from '@admiral-ds/react-ui';
 import type { NotificationProps } from '@admiral-ds/react-ui';
 
@@ -14,7 +12,6 @@ const linkTextDefault = 'Link';
 const hrefDefault = 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=37%3A26531';
 
 export const StaticNotificationBaseStatusTemplate = ({
-  status = 'info',
   title = titleDefault,
   linkText = linkTextDefault,
   href = hrefDefault,

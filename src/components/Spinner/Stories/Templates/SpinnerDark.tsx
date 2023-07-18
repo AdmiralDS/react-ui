@@ -1,6 +1,4 @@
-import * as React from 'react';
 import styled from 'styled-components';
-
 import { DefaultBackgroundColorName, MainPrimaryColorName, Spinner } from '@admiral-ds/react-ui';
 import type { SpinnerProps } from '@admiral-ds/react-ui';
 
@@ -19,7 +17,7 @@ const Layout = styled.div<{
   }
 `;
 
-export const SpinnerDarkTemplate = ({ inverse = true, ...props }: SpinnerProps) => {
+export const SpinnerDarkTemplate = ({ inverse = true }: SpinnerProps) => {
   return (
     <>
       <Layout inverse={inverse}>

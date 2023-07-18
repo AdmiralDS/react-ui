@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useState, useRef, useLayoutEffect, forwardRef } from 'react';
 import type { InputData } from '#src/components/common/dom/changeInputData';
 import { changeInputData, isInputDataDifferent } from '#src/components/common/dom/changeInputData';
 import type { ComponentDimension, ExtraProps } from '#src/components/input/types';
@@ -186,7 +186,7 @@ export interface InputProps extends TextInputProps {
   align?: 'left' | 'right';
 }
 
-export const AutoSizeInput = React.forwardRef<HTMLInputElement, InputProps>(
+export const AutoSizeInput = forwardRef<HTMLInputElement, InputProps>(
   (
     {
       placeholder,
@@ -205,12 +205,12 @@ export const AutoSizeInput = React.forwardRef<HTMLInputElement, InputProps>(
     },
     ref,
   ) => {
-    const [showPrefixSuffix, setPrefixSuffix] = React.useState(false);
+    const [showPrefixSuffix, setPrefixSuffix] = useState(false);
 
-    const sizerRef = React.useRef<HTMLDivElement>(null);
-    const inputRef = React.useRef<HTMLInputElement>(null);
-    const prefixRef = React.useRef<HTMLDivElement>(null);
-    const suffixRef = React.useRef<HTMLDivElement>(null);
+    const sizerRef = useRef<HTMLDivElement>(null);
+    const inputRef = useRef<HTMLInputElement>(null);
+    const prefixRef = useRef<HTMLDivElement>(null);
+    const suffixRef = useRef<HTMLDivElement>(null);
 
     const updateHiddenContent = (newValue: any) => {
       if (sizerRef.current) {
@@ -272,7 +272,7 @@ export const AutoSizeInput = React.forwardRef<HTMLInputElement, InputProps>(
       }
     };
 
-    React.useLayoutEffect(() => {
+    useLayoutEffect(() => {
       const nullHandledValue = handleInput(null);
 
       function oninput(this: HTMLInputElement) {
@@ -309,24 +309,24 @@ export const AutoSizeInput = React.forwardRef<HTMLInputElement, InputProps>(
       }
     }, [inputRef.current, placeholder]);
 
-    React.useLayoutEffect(() => {
+    useLayoutEffect(() => {
       if (inputRef.current) {
         updateHiddenContent(inputRef.current.value);
         updatePrefixSuffixState(inputRef.current.value);
       }
     }, [props.value, props.defaultValue, placeholder, inputRef.current, sizerRef.current]);
 
-    React.useLayoutEffect(
+    useLayoutEffect(
       () => updateInputLeftPadding(),
       [prefix, props.dimension, prefixRef.current, inputRef.current, showPrefixSuffix],
     );
 
-    React.useLayoutEffect(
+    useLayoutEffect(
       () => updateInputRightPadding(),
       [suffix, props.dimension, suffixRef.current, inputRef.current, showPrefixSuffix, align],
     );
 
-    React.useLayoutEffect(() => {
+    useLayoutEffect(() => {
       if (prefixRef.current) {
         const resizeObserver = new ResizeObserver((entries) => {
           entries.forEach(() => {
@@ -340,7 +340,7 @@ export const AutoSizeInput = React.forwardRef<HTMLInputElement, InputProps>(
       }
     }, [prefixRef.current, inputRef.current, showPrefixSuffix, prefix]);
 
-    React.useLayoutEffect(() => {
+    useLayoutEffect(() => {
       if (suffixRef.current) {
         const resizeObserver = new ResizeObserver((entries) => {
           entries.forEach(() => {

@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { refSetter } from '#src/components/common/utils/refSetter';
 
 import { ScrollTableBody } from './style';
-import { throttle } from '#src/components/common/utils/throttle';
 
 const Spacer = styled.div`
   display: flex;

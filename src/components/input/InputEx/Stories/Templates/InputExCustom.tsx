@@ -3,7 +3,15 @@ import type { ChangeEvent } from 'react';
 import styled, { css, ThemeProvider } from 'styled-components';
 
 import { InputEx, MenuItem } from '@admiral-ds/react-ui';
-import type { InputExProps, Theme, ValueType, MenuItemProps, RenderProps, RenderPropsType } from '@admiral-ds/react-ui';
+import type {
+  InputExProps,
+  Theme,
+  ValueType,
+  MenuItemProps,
+  RenderProps,
+  RenderPropsType,
+  BorderRadiusType,
+} from '@admiral-ds/react-ui';
 
 const Separator = styled.div`
   height: 20px;
@@ -32,7 +40,11 @@ const containerContrastBorder = css`
   border: dashed 2px ${(p) => p.theme.color['Neutral/Neutral 90']};
 `;
 
-export const InputExCustomTemplate = ({ value = 'Привет!', placeholder = 'Placeholder', ...props }: InputExProps) => {
+export const InputExCustomTemplate = ({
+  value = 'Привет!',
+  placeholder = 'Placeholder',
+  ...props
+}: InputExProps & { themeBorderKind: BorderRadiusType }) => {
   const [localValue, setValue] = React.useState<string>(String(value) ?? '');
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -42,7 +54,7 @@ export const InputExCustomTemplate = ({ value = 'Привет!', placeholder = '
   };
 
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

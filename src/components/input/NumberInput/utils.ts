@@ -114,7 +114,7 @@ export function fitToCurrency(
   let newValue = '';
 
   // разбиваем левую (целую) часть на группы по три символа, разделенные thousand
-  const reducer = (previousValue: string, currentValue: string, index: number, arr: Array<string>) => {
+  const reducer = (previousValue: string, currentValue: string, index: number) => {
     return index === 0
       ? (previousValue += reverseString(currentValue))
       : (previousValue += reverseString(currentValue) + thousand);

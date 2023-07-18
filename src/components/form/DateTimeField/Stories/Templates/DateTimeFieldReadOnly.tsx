@@ -1,4 +1,3 @@
-import * as React from 'react';
 import styled from 'styled-components';
 
 import {
@@ -8,7 +7,6 @@ import {
   DateTimeTimeInput,
   Field,
 } from '@admiral-ds/react-ui';
-import type { ComponentDimension, FieldProps } from '@admiral-ds/react-ui';
 
 const DisplayContainer = styled.div`
   > * {
@@ -16,11 +14,7 @@ const DisplayContainer = styled.div`
   }
 `;
 
-interface DateTimeFieldProps extends FieldProps {
-  dimension?: ComponentDimension;
-}
-
-export const DateTimeFieldReadOnlyTemplate = (props: DateTimeFieldProps) => {
+export const DateTimeFieldReadOnlyTemplate = () => {
   return (
     <DisplayContainer>
       <Field label="read only control" readOnly>

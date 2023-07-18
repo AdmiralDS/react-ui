@@ -83,7 +83,6 @@ export const Dropdown = React.forwardRef<HTMLDivElement, React.PropsWithChildren
       className = '',
       onMenuReachBottom,
       onMenuReachTop,
-      setMenuFocus,
       menuFocus,
       ...props
     },

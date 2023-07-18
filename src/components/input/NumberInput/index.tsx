@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useState, useRef, useEffect, forwardRef, Children } from 'react';
 import styled, { css } from 'styled-components';
 import type { TextInputProps } from '#src/components/input/TextInput';
 import type { ComponentDimension, ExtraProps } from '#src/components/input/types';
@@ -122,7 +122,7 @@ export interface NumberInputProps extends TextInputProps {
   align?: 'left' | 'right';
 }
 
-export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
+export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
   (
     {
       className,
@@ -149,18 +149,18 @@ export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
     },
     ref,
   ) => {
-    const [plusDisabled, setPlusDisabled] = React.useState(false);
-    const [minusDisabled, setMinusDisabled] = React.useState(false);
-    const [innerValueState, setInnerValueState] = React.useState(props.defaultValue);
+    const [plusDisabled, setPlusDisabled] = useState(false);
+    const [minusDisabled, setMinusDisabled] = useState(false);
+    const [innerValueState, setInnerValueState] = useState(props.defaultValue);
     const innerValue = props.value ?? innerValueState;
 
-    const inputRef = React.useRef<HTMLInputElement>(null);
+    const inputRef = useRef<HTMLInputElement>(null);
 
     // thousand, decimal - не более одного символа
     const thousand = validateThousand(userThousand) ? userThousand.slice(0, 1) : ' ';
     const decimal = userDecimal.slice(0, 1);
 
-    React.useEffect(() => {
+    useEffect(() => {
       if (innerValue) {
         let minusDsb = false;
         let plusDsb = false;
@@ -208,7 +208,7 @@ export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       }
     };
 
-    const iconArray = React.Children.toArray(icons);
+    const iconArray = Children.toArray(icons);
 
     if (!props.readOnly && displayClearIcon && !!innerValue) {
       iconArray.unshift(

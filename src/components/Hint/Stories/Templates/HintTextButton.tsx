@@ -7,9 +7,6 @@ import styled, { ThemeProvider } from 'styled-components';
 const text = `At breakpoint boundaries, mini units divide the screen into a fixed master grid, and multiples
 of mini units map to fluid grid column widths and row heights.`;
 
-const StyledButton = styled(Button)`
-  padding: 4px;
-`;
 const Separator = styled.div<{ height?: number }>`
   height: ${({ height }) => (height ? height : 20)}px;
 `;
