@@ -1,4 +1,3 @@
-import * as React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
 import {
   DateInput,
@@ -6,19 +5,20 @@ import {
   INPUT_STATUS_VALUES,
   ALL_BORDER_RADIUS_VALUES,
 } from '@admiral-ds/react-ui';
-import { ReactComponent as CalendarSolidSVG } from '@admiral-ds/icons/build/system/CalendarSolid.svg';
 
-import { DateInputPlaygroundTemplate, DateInputPickMonthTemplate } from './Templates';
+import { DateInputPlaygroundTemplate } from './DateInputPlayground.template';
+import { DateInputPickMonthTemplate } from './DateInputPickMonth.template';
+import { DateInputAlternativeIconTemplate } from './DateInputAlternativeIcon.template';
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
-import DateInputPlaygroundRaw from './Templates/DateInputPlayground?raw';
-import DateInputPickMonthRaw from './Templates/DateInputPickMonth?raw';
+import DateInputPlaygroundRaw from './DateInputPlayground.template?raw';
+import DateInputPickMonthRaw from './DateInputPickMonth.template?raw';
+import DateInputAlternativeIconRaw from './DateInputAlternativeIcon.template?raw';
 
 export default {
   title: 'Admiral-2.1/Input/DateInput',
   component: DateInput,
-  decorators: undefined,
   parameters: {
     docs: {
       source: {
@@ -166,9 +166,7 @@ export default {
 } as Meta<typeof DateInput>;
 
 //<editor-fold desc="DateInput (input type="date")">
-const DateInputPlaygroundStory: StoryFn<typeof DateInput> = (props) => (
-  <DateInputPlaygroundTemplate {...cleanUpProps(props)} defaultIsCalendarOpen={true} />
-);
+const DateInputPlaygroundStory: StoryFn<typeof DateInput> = (props) => <DateInputPlaygroundTemplate {...props} />;
 
 export const DateInputPlayground = {
   render: DateInputPlaygroundStory,
@@ -187,9 +185,7 @@ export const DateInputPlayground = {
 //</editor-fold>
 
 //<editor-fold desc="DateInput. Альтернативная иконка">
-const DateInputCustomIconStory: StoryFn<typeof DateInput> = (props) => (
-  <DateInputPlaygroundTemplate {...cleanUpProps(props)} icon={CalendarSolidSVG} />
-);
+const DateInputCustomIconStory: StoryFn<typeof DateInput> = (props) => <DateInputAlternativeIconTemplate {...props} />;
 
 export const DateInputCustomIcon = {
   render: DateInputCustomIconStory,
@@ -197,11 +193,10 @@ export const DateInputCustomIcon = {
   parameters: {
     docs: {
       source: {
-        code: DateInputPlaygroundRaw,
+        code: DateInputAlternativeIconRaw,
       },
     },
   },
-
   name: 'DateInput. Альтернативная иконка',
 };
 
