@@ -23,8 +23,7 @@
   "types": "dist/index.d.ts",
   "type": "module",
   "exports": {
-    "import": "./dist/index.js",
-    "types": "./dist/index.d.ts"
+    ".": "./dist/index.js"
   },
   "sideEffects": false,
   "imports": {
@@ -39,10 +38,11 @@
     "lint": "eslint src --ext .js,.jsx,.ts,.tsx --fix",
     "storybook": "npm run generate-svg-icon-exports && storybook dev -p 6006",
     "build-storybook": "npm run generate-svg-icon-exports && storybook build",
+    "preview-storybook": "npx http-server ./storybook-static",
     "release": "standard-version",
     "generate-svg-icon-exports": "node scripts/generate-svg-icon-exports.cjs",
     "prepublishOnly": "npm run build",
-    "deploy-storybook": "NODE_OPTIONS=--openssl-legacy-provider storybook-to-ghpages"
+    "deploy-storybook": "storybook-to-ghpages"
   },
   "dependencies": {
     "@admiral-ds/flags": "^2.0.0",
@@ -75,6 +75,7 @@
     "@storybook/blocks": "^7.0.8",
     "@storybook/react": "^7.0.8",
     "@storybook/react-webpack5": "^7.0.8",
+    "@storybook/storybook-deployer": "^2.8.16",
     "@storybook/testing-library": "^0.2.0",
     "@styled/typescript-styled-plugin": "^1.0.0",
     "@svgr/rollup": "^8.0.1",
@@ -104,6 +105,7 @@
     "resize-observer-polyfill": "^1.5.1",
     "rollup": "^3.0.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
+    "standard-version": "^9.5.0",
     "storybook": "^7.0.8",
     "ts-jest": "^29.1.0",
     "tsconfig-paths-webpack-plugin": "^4.0.1",
