@@ -200,6 +200,7 @@ export const AutoSizeInput = React.forwardRef<HTMLInputElement, InputProps>(
       minValue,
       iconCount,
       align,
+      onChange,
       ...props
     },
     ref,
@@ -215,11 +216,14 @@ export const AutoSizeInput = React.forwardRef<HTMLInputElement, InputProps>(
       if (sizerRef.current) {
         sizerRef.current.innerHTML = newValue || placeholder || '';
       }
-      // if (newValue) {
-      //   setPrefixSuffix?.(true);
-      // } else {
-      //   setPrefixSuffix?.(false);
-      // }
+    };
+
+    const updatePrefixSuffixState = (newValue: any) => {
+      if (newValue) {
+        setPrefixSuffix(true);
+      } else {
+        setPrefixSuffix(false);
+      }
     };
 
     const updateInputLeftPadding = () => {
@@ -308,11 +312,7 @@ export const AutoSizeInput = React.forwardRef<HTMLInputElement, InputProps>(
     React.useLayoutEffect(() => {
       if (inputRef.current) {
         updateHiddenContent(inputRef.current.value);
-        if (inputRef.current.value) {
-          setPrefixSuffix?.(true);
-        } else {
-          setPrefixSuffix?.(false);
-        }
+        updatePrefixSuffixState(inputRef.current.value);
       }
     }, [props.value, props.defaultValue, placeholder, inputRef.current, sizerRef.current]);
 
@@ -354,13 +354,9 @@ export const AutoSizeInput = React.forwardRef<HTMLInputElement, InputProps>(
       }
     }, [suffixRef.current, inputRef.current, showPrefixSuffix, suffix, align]);
 
-    const handleChange = (e: any) => {
-      if (e.target.value) {
-        setPrefixSuffix?.(true);
-      } else {
-        setPrefixSuffix?.(false);
-      }
-      props.onChange?.(e);
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      updatePrefixSuffixState(e.target.value);
+      onChange?.(e);
     };
 
     return (
