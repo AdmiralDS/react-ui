@@ -84,13 +84,15 @@ export interface MenuProps extends HTMLAttributes<HTMLDivElement> {
   /** Активная секция Menu */
   active?: string;
   /** выбранная секция Menu */
-  selected?: string;
+  selected?: string | Array<string>;
   /** выбранная по умолчаниию секция Menu */
-  defaultSelected?: string;
+  defaultSelected?: string | Array<string>;
   /** Обработчик активации (hover) item в меню */
   onActivateItem?: (id?: string) => void;
   /** Обработчик выбора item в меню */
   onSelectItem?: (id: string) => void;
+  /** Обработчик выбора item в меню */
+  onDeselectItem?: (id: string) => void;
   /** Модель данных, с рендер-пропсами*/
   model: Array<MenuModelItemProps>;
   /** Задает максимальную высоту меню */
@@ -148,6 +150,7 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
       selected,
       active,
       onSelectItem,
+      onDeselectItem,
       onActivateItem,
       renderTopPanel,
       renderBottomPanel,
@@ -206,7 +209,9 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
     };
 
     const uncontrolledActiveValue = model.length > 0 ? findNextId() : undefined;
-    const [selectedState, setSelectedState] = React.useState<string | undefined>(defaultSelected);
+    const [selectedState, setSelectedState] = React.useState<Array<string>>(
+      defaultSelected ? [...defaultSelected] : [],
+    );
     const [activeState, setActiveState] = React.useState<string | undefined>(uncontrolledActiveValue);
     const [lastScrollEvent, setLastScrollEvent] = React.useState<number>();
     const wrapperRef = React.useRef<HTMLDivElement | null>(null);
@@ -214,8 +219,7 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
     const activeItemRef = React.useRef<HTMLDivElement | null>(null);
     const [submenuVisible, setSubmenuVisible] = React.useState<boolean>(false);
 
-    const selectedId =
-      multiSelection || disableSelectedOptionHighlight ? undefined : selected === undefined ? selectedState : selected;
+    const innerSelected = disableSelectedOptionHighlight ? [] : selected === undefined ? selectedState : selected;
     const activeId = active === undefined ? activeState : active;
 
     const menuRef = React.useRef<HTMLDivElement | null>(null);
@@ -239,11 +243,25 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
       onActivateItem?.(id);
     };
 
-    const selectItem = (id: string) => {
-      if (selectedId !== id && !multiSelection && !disableSelectedOptionHighlight) setSelectedState(id);
-
+    const handleClickItem = (id: string) => {
       const item = findModelItem(model, id);
-      if (item && !item.disabled && !item.readOnly) onSelectItem?.(id);
+      if (item && !item.disabled && !item.readOnly) {
+        const selectedIndex = selectedState.findIndex((itemId) => itemId === id);
+        if (multiSelection) {
+          if (selectedIndex > -1) {
+            setSelectedState(selectedState.splice(selectedIndex, 1));
+            onDeselectItem?.(id);
+          } else {
+            setSelectedState([...selectedState, id]);
+            onSelectItem?.(id);
+          }
+        } else {
+          if (selectedIndex === -1) {
+            setSelectedState([id]);
+            onSelectItem?.(id);
+          }
+        }
+      }
     };
 
     const { currentActiveMenu, activateMenu, deactivateMenu } = useDropdown(wrapperRef);
@@ -256,7 +274,7 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
         switch (code) {
           case keyboardKey[' ']:
           case keyboardKey.Enter: {
-            if (activeId) selectItem(activeId);
+            if (activeId) handleClickItem(activeId);
             e.preventDefault();
             break;
           }
@@ -311,11 +329,18 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
       activateMenu?.(wrapperRef);
     };
 
+    const hasSelectedChildren = (item: MenuModelItemProps): boolean => {
+      return item.subItems
+        ? item.subItems.some((item) => innerSelected.includes(item.id) || hasSelectedChildren(item))
+        : false;
+    };
+
     const renderChildren = () => {
-      return model.map(({ id, subItems, ...itemProps }) => {
+      return model.map((item) => {
+        const { id, subItems, ...itemProps } = item;
         const hasSubmenu = !!subItems && subItems.length > 0;
         const hovered = activeId === id;
-        const selected = selectedId === id || (!!selectedId && hasSubmenu && !!findModelItem(subItems, selectedId));
+        const selected = innerSelected.includes(id) || hasSelectedChildren(item);
 
         return itemProps.render({
           hovered,
@@ -324,7 +349,7 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
             activateItem(itemProps.disabled ? undefined : id);
             setSubmenuVisible(hasSubmenu);
           },
-          onClickItem: () => selectItem(id),
+          onClickItem: () => handleClickItem(id),
           hasSubmenu,
           selfRef: (ref) => {
             if (activeId === id && hasSubmenu) {
@@ -350,9 +375,9 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
           model={model}
           rowCount={rowCount}
           activeId={activeId}
-          selectedId={selectedId}
+          // selectedId={innerSelected}
           onActivateItem={activateItem}
-          onSelectItem={selectItem}
+          onSelectItem={handleClickItem}
         />
       );
     };
@@ -387,8 +412,8 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
             model={activeItem.subItems}
             subMenuRenderDirection={subMenuRenderDirection}
             onCloseQuery={handleSubMenuClose}
-            selected={selectedId}
-            onSelectItem={(id) => selectItem(id)}
+            selected={innerSelected}
+            onSelectItem={(id) => handleClickItem(id)}
           />
         )
       );
