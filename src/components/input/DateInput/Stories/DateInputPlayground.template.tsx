@@ -1,15 +1,13 @@
-import * as React from 'react';
+import { useState, useEffect } from 'react';
 import type { ChangeEvent } from 'react';
 import { ThemeProvider } from 'styled-components';
 
 import { DateInput } from '@admiral-ds/react-ui';
-import type { DateInputProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
+import type { BorderRadiusType, DateInputProps, Theme } from '@admiral-ds/react-ui';
 
-export const DateInputPlaygroundTemplate = (props: DateInputProps) => {
-  console.log(`После очистки:\n`);
-  console.dir(props);
-  const [localValue, setValue] = React.useState<string>(String(props.value) ?? '');
-  React.useEffect(() => {
+export const DateInputPlaygroundTemplate = (props: DateInputProps & { themeBorderKind?: BorderRadiusType }) => {
+  const [localValue, setValue] = useState<string>(String(props.value) ?? '');
+  useEffect(() => {
     if (props.value !== undefined) {
       setValue(String(props.value));
     }
