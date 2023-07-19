@@ -8,6 +8,12 @@ const config: StorybookConfig = {
     '@storybook/addon-designs',
     '@storybook/addon-interactions',
     '@storybook/addon-styling',
+    'storybook-dark-mode',
+    'storybook-addon-rtl',
+    {
+      name: '@storybook/addon-styling',
+      options: {},
+    },
   ],
   framework: {
     name: '@storybook/react-webpack5',
