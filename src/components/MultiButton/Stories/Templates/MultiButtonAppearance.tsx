@@ -9,7 +9,7 @@ const Separator = styled.div`
   height: 20px;
 `;
 
-const handleMainButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+const handleMainButtonClick = () => {
   console.log('Main button clicked');
 };
 

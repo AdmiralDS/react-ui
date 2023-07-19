@@ -1,18 +1,16 @@
-import * as React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
 import { TextField, INPUT_DIMENSIONS_VALUES, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
 import { DataAttributesDescription } from '#src/components/form/common';
-import { TextFieldInputTemplate } from '#src/components/form/TextField/Stories/Templates';
+import { TextFieldInputTemplate } from './TextFieldInput.template';
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
-import TextFieldInputRaw from './Templates/TextFieldInput?raw';
+import TextFieldInputRaw from './TextFieldInput.template?raw';
 
 export default {
   title: 'Admiral-2.1/Form Field/TextField',
   component: TextField,
-  decorators: undefined,
   parameters: {
     docs: {
       source: {
@@ -42,15 +40,15 @@ export default {
     },
 
     rows: {
-      control: { type: { name: 'number', required: false } },
+      control: { type: 'number' },
     },
 
     maxRows: {
-      control: { type: { name: 'number', required: false } },
+      control: { type: 'number' },
     },
 
     maxLength: {
-      control: { type: { name: 'number', required: false } },
+      control: { type: 'number' },
     },
 
     extraText: {
@@ -113,7 +111,5 @@ export const TextFieldInput = {
       },
     },
   },
-
-  args: {},
   name: 'Text field example',
 };

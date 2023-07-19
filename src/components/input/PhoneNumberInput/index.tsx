@@ -27,6 +27,7 @@ import { ComponentsNames, CountriesRusNames, FlagsPack } from '@admiral-ds/flags
 import { StyledDropdownContainer } from '#src/components/DropdownContainer';
 import type { MenuDimensions } from '#src/components/Menu';
 import { keyboardKey } from '../../common/keyboardKey';
+import { ReactComponent as GlobeOutline } from '@admiral-ds/icons/build/category/GlobeOutline.svg';
 
 const Chevron = styled(SmallArrowDownOutline)<{ disabled?: boolean }>`
   transition: transform 0.3s;
@@ -92,7 +93,7 @@ const FlagContainer = styled.div<{ dimension: Dimension }>`
   width: ${(p) => (p.dimension === 's' ? '18' : '22')}px;
 `;
 
-export interface PhoneNumberInputProps extends Omit<TextInputProps, 'value'> {
+export interface PhoneNumberInputProps extends Omit<TextInputProps, 'value | displayClearIcon'> {
   value?: string;
   /** Код ISO A3 страны для определения префикса номера по умолчанию */
   defaultCountry?: CountryAlpha3Code;
@@ -258,13 +259,11 @@ export const PhoneNumberInput = React.forwardRef<HTMLInputElement, PhoneNumberIn
     };
 
     const IconComponent = React.useMemo<JSX.Element | null>(() => {
-      if (selectedIndex > -1) {
-        const SvgComponent = (FlagsPack as { [key: ComponentName]: React.ElementType })[
-          countryList[selectedIndex].name
-        ];
-        return SvgComponent ? <Flag dimension={menuDimension} Component={SvgComponent} /> : null;
-      }
-      return null;
+      const SvgComponent =
+        selectedIndex > -1
+          ? (FlagsPack as { [key: ComponentName]: React.ElementType })[countryList[selectedIndex].name]
+          : GlobeOutline;
+      return <Flag dimension={menuDimension} Component={SvgComponent} />;
     }, [selectedIndex]);
 
     React.useEffect(() => {
@@ -299,6 +298,7 @@ export const PhoneNumberInput = React.forwardRef<HTMLInputElement, PhoneNumberIn
           disabled={disabled}
           dimension={dimension}
           skeleton={skeleton}
+          displayClearIcon={false}
           onKeyDown={(...p) => {
             props.onKeyDown?.(...p);
             handleKeyDown(...p);

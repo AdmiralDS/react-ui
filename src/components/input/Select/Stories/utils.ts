@@ -17,7 +17,7 @@ export const createClearOptions = (length: number) => {
 };
 
 export const formDataToObject = (data: FormData) => {
-  const obj = {} as Record<string, any>;
+  const obj = {} as Record<string, FormDataEntryValue>;
   data.forEach((value, key) => (obj[key] = value));
   return obj;
 };

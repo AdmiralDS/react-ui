@@ -22,11 +22,11 @@ export const CustomChipMultiSearchSelectTemplate = (props: SelectProps) => {
   };
   const onOpenModal = () => setModalOpened(true);
 
-  // TODO: use interface instead of any
-  const onChipClose = ({ value }: any) => {
+  const onChipClose = ({ value }: { value: string }) => {
     setValueToDelete(value);
     onOpenModal();
   };
+
   const renderChip = (ind: number) => () => ({ children: `${ind} $`, onClose: onChipClose });
 
   const onYes = () => {

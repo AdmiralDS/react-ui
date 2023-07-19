@@ -2,7 +2,7 @@ import { getKeyboardFocusableElements } from '#src/components/common/utils/getKe
 import { refSetter } from '#src/components/common/utils/refSetter';
 import { typography } from '#src/components/Typography';
 import * as React from 'react';
-import ReactDOM from 'react-dom';
+import { createPortal } from 'react-dom';
 import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import styled, { css, useTheme } from 'styled-components';
 import { LIGHT_THEME } from '#src/components/themes';
@@ -239,7 +239,7 @@ export const Modal = React.forwardRef<HTMLDivElement, ModalProps>(
       onClose?.();
     };
 
-    return ReactDOM.createPortal(
+    return createPortal(
       <Overlay
         ref={overlayRef}
         tabIndex={-1}

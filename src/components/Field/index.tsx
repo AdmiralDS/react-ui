@@ -151,10 +151,10 @@ export const Field = React.forwardRef<HTMLDivElement, FieldProps>(
     const labelProps = { htmlFor: id, children: label, required, disabled };
 
     React.useEffect(() => {
-      const onFocusIn = (ev: FocusEvent) => {
+      const onFocusIn = () => {
         setFocus(true);
       };
-      const onFocusOut = (ev: FocusEvent) => {
+      const onFocusOut = () => {
         setFocus(false);
       };
 

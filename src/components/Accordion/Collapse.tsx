@@ -9,7 +9,9 @@ export interface CollapseProps {
 
 export const Collapse = styled.div<CollapseProps>`
   overflow: hidden;
-  transition: max-height 250ms cubic-bezier(0.4, 0, 0.2, 1), visibility 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition:
+    max-height 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    visibility 250ms cubic-bezier(0.4, 0, 0.2, 1);
   max-height: ${(p) => (!p.opened ? 0 : p.contentMaxHeight)};
   visibility: ${(p) => (!p.opened ? 'hidden' : 'visible')};
 `;

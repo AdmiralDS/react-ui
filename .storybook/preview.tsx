@@ -1,7 +1,8 @@
 import type { Preview } from '@storybook/react';
 import { ThemeProvider } from 'styled-components';
 import { withThemeFromJSXProvider } from '@storybook/addon-styling';
-import { LIGHT_THEME, DARK_THEME } from '@admiral-ds/react-ui';
+import { LIGHT_THEME, DARK_THEME, DropdownProvider } from '@admiral-ds/react-ui';
+import * as React from 'react';
 
 const preview: Preview = {
   parameters: {
@@ -29,6 +30,11 @@ const preview: Preview = {
       defaultTheme: 'light',
       Provider: ThemeProvider,
     }),
+    (renderStory) => (
+      <DropdownProvider>
+        {renderStory()}
+      </DropdownProvider>
+    )
   ],
 };
 

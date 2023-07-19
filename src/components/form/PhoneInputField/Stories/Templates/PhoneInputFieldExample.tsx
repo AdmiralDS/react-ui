@@ -9,11 +9,14 @@ export const PhoneInputFieldExampleTemplate = ({
   label = 'Введите номер телефона',
   ...props
 }: PhoneInputFieldProps) => {
-  const cleanProps = (Object.keys(props) as Array<keyof typeof props>).reduce((acc, key) => {
-    if (props[key] !== undefined) acc[key] = props[key];
+  const cleanProps = (Object.keys(props) as Array<keyof typeof props>).reduce(
+    (acc, key) => {
+      if (props[key] !== undefined) acc[key] = props[key];
 
-    return acc;
-  }, {} as Record<any, any>);
+      return acc;
+    },
+    {} as Record<any, any>,
+  );
 
   const [localValue, setValue] = React.useState<string>(props.value ?? '');
 

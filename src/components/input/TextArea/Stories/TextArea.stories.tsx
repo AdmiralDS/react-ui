@@ -1,16 +1,16 @@
-import * as React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
 import { TextArea, INPUT_DIMENSIONS_VALUES, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
-import { TextAreaPlaygroundTemplate } from './Templates';
+import { TextAreaPlaygroundTemplate } from './TextAreaPlayground.template';
+import { TextAreaAsyncTemplate } from './TextAreaAsync.template';
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
-import TextAreaPlaygroundRaw from './Templates/TextAreaPlayground?raw';
+import TextAreaPlaygroundRaw from './TextAreaPlayground.template?raw';
+import TextAreaAsyncRaw from './TextAreaAsync.template?raw';
 
 export default {
   title: 'Admiral-2.1/Input/TextArea',
   component: TextArea,
-  decorators: undefined,
   parameters: {
     docs: {
       source: {
@@ -91,7 +91,6 @@ export default {
   },
 } as Meta<typeof TextArea>;
 
-//<editor-fold desc="Базовый textarea компонент">
 const TextAreaPlaygroundStory: StoryFn<typeof TextArea> = (props) => (
   <TextAreaPlaygroundTemplate {...cleanUpProps(props)} />
 );
@@ -108,4 +107,18 @@ export const TextAreaPlayground = {
   },
 
   name: 'Базовый textarea компонент',
+};
+
+export const TextAreaAsync = {
+  render: ((props) => <TextAreaAsyncTemplate {...cleanUpProps(props)} />) as StoryFn<typeof TextArea>,
+
+  parameters: {
+    docs: {
+      source: {
+        code: TextAreaAsyncRaw,
+      },
+    },
+  },
+
+  name: 'Асинхронное изменение значения',
 };

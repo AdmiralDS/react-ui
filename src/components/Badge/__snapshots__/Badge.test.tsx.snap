@@ -26,7 +26,7 @@ exports[`Badge should render component with small dimension 1`] = `
   font-weight: 400;
   font-size: 12px;
   line-height: 16px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
   background: #E5E7EB;
   color: #23262D;
@@ -69,7 +69,7 @@ exports[`Badge should render component with small dimension 1`] = `
   font-weight: 400;
   font-size: 12px;
   line-height: 16px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
   background: #E5E7EB;
   color: #23262D;
@@ -167,7 +167,7 @@ exports[`Badge should render default component 1`] = `
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
   background: #E5E7EB;
   color: #23262D;
@@ -210,7 +210,7 @@ exports[`Badge should render default component 1`] = `
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
   background: #E5E7EB;
   color: #23262D;

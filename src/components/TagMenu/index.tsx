@@ -61,7 +61,7 @@ export const TagMenu = React.forwardRef<HTMLButtonElement, TagMenuProps>(
       options,
       disableSelectedOptionHighlight,
       selected,
-      onSelectItem = (id: string) => undefined,
+      onSelectItem = () => undefined,
       active,
       onActivateItem,
       isVisible,

@@ -100,7 +100,7 @@ exports[`MenuButton should render component 1`] = `
   font-weight: 500;
   font-size: 16px;
   line-height: 24px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -339,7 +339,7 @@ exports[`MenuButton should render component 1`] = `
   font-weight: 500;
   font-size: 16px;
   line-height: 24px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -361,7 +361,7 @@ exports[`MenuButton should render component 1`] = `
   font-weight: 500;
   font-size: 14px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -497,7 +497,7 @@ exports[`MenuButton should render component 1`] = `
   font-weight: 500;
   font-size: 16px;
   line-height: 24px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -736,7 +736,7 @@ exports[`MenuButton should render component 1`] = `
   font-weight: 500;
   font-size: 16px;
   line-height: 24px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -758,7 +758,7 @@ exports[`MenuButton should render component 1`] = `
   font-weight: 500;
   font-size: 14px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -968,7 +968,7 @@ exports[`MenuButton should render component with loading state 1`] = `
   font-weight: 500;
   font-size: 16px;
   line-height: 24px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -1207,7 +1207,7 @@ exports[`MenuButton should render component with loading state 1`] = `
   font-weight: 500;
   font-size: 16px;
   line-height: 24px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -1229,7 +1229,7 @@ exports[`MenuButton should render component with loading state 1`] = `
   font-weight: 500;
   font-size: 14px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -1392,7 +1392,7 @@ exports[`MenuButton should render component with loading state 1`] = `
   font-weight: 500;
   font-size: 16px;
   line-height: 24px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -1631,7 +1631,7 @@ exports[`MenuButton should render component with loading state 1`] = `
   font-weight: 500;
   font-size: 16px;
   line-height: 24px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -1653,7 +1653,7 @@ exports[`MenuButton should render component with loading state 1`] = `
   font-weight: 500;
   font-size: 14px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -1852,7 +1852,7 @@ exports[`MenuButton should render component with skeleton state 1`] = `
   font-weight: 500;
   font-size: 16px;
   line-height: 24px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
   -webkit-animation: dZhwyk 2s ease infinite;
   animation: dZhwyk 2s ease infinite;
@@ -2093,7 +2093,7 @@ exports[`MenuButton should render component with skeleton state 1`] = `
   font-weight: 500;
   font-size: 16px;
   line-height: 24px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -2115,7 +2115,7 @@ exports[`MenuButton should render component with skeleton state 1`] = `
   font-weight: 500;
   font-size: 14px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -2256,7 +2256,7 @@ exports[`MenuButton should render component with skeleton state 1`] = `
   font-weight: 500;
   font-size: 16px;
   line-height: 24px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
   -webkit-animation: dZhwyk 2s ease infinite;
   animation: dZhwyk 2s ease infinite;
@@ -2497,7 +2497,7 @@ exports[`MenuButton should render component with skeleton state 1`] = `
   font-weight: 500;
   font-size: 16px;
   line-height: 24px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -2519,7 +2519,7 @@ exports[`MenuButton should render component with skeleton state 1`] = `
   font-weight: 500;
   font-size: 14px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
 }
 

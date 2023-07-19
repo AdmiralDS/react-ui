@@ -3,7 +3,7 @@ import * as React from 'react';
 import type { CalendarPropType, ViewScreenType } from '@admiral-ds/react-ui';
 import { Calendar, T } from '@admiral-ds/react-ui';
 
-export const SimpleWithChangeViewDateTemplate = ({ range, ...props }: CalendarPropType) => {
+export const SimpleWithChangeViewDateTemplate = ({ ...props }: CalendarPropType) => {
   const [selected, setSelected] = React.useState<Date | null>(null);
 
   return (

@@ -6,6 +6,8 @@ import { DateInput } from '@admiral-ds/react-ui';
 import type { DateInputProps, Theme } from '@admiral-ds/react-ui';
 
 export const DateInputPlaygroundTemplate = (props: DateInputProps) => {
+  console.log(`После очистки:\n`);
+  console.dir(props);
   const [localValue, setValue] = React.useState<string>(String(props.value) ?? '');
   React.useEffect(() => {
     if (props.value !== undefined) {

@@ -51,7 +51,7 @@ exports[`Spinner should render component with custom nextStepName 1`] = `
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
   color: #23262D;
 }
@@ -67,7 +67,7 @@ exports[`Spinner should render component with custom nextStepName 1`] = `
   font-weight: 400;
   font-size: 12px;
   line-height: 16px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -83,7 +83,7 @@ exports[`Spinner should render component with custom nextStepName 1`] = `
   font-weight: 400;
   font-size: 12px;
   line-height: 16px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -177,7 +177,7 @@ exports[`Spinner should render component with custom nextStepName 1`] = `
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
   color: #23262D;
 }
@@ -193,7 +193,7 @@ exports[`Spinner should render component with custom nextStepName 1`] = `
   font-weight: 400;
   font-size: 12px;
   line-height: 16px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -209,7 +209,7 @@ exports[`Spinner should render component with custom nextStepName 1`] = `
   font-weight: 400;
   font-size: 12px;
   line-height: 16px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -358,7 +358,7 @@ exports[`Spinner should render component with custom stepName 1`] = `
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
   color: #23262D;
 }
@@ -374,7 +374,7 @@ exports[`Spinner should render component with custom stepName 1`] = `
   font-weight: 400;
   font-size: 12px;
   line-height: 16px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -390,7 +390,7 @@ exports[`Spinner should render component with custom stepName 1`] = `
   font-weight: 400;
   font-size: 12px;
   line-height: 16px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -484,7 +484,7 @@ exports[`Spinner should render component with custom stepName 1`] = `
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
   color: #23262D;
 }
@@ -500,7 +500,7 @@ exports[`Spinner should render component with custom stepName 1`] = `
   font-weight: 400;
   font-size: 12px;
   line-height: 16px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -516,7 +516,7 @@ exports[`Spinner should render component with custom stepName 1`] = `
   font-weight: 400;
   font-size: 12px;
   line-height: 16px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -661,7 +661,7 @@ exports[`Spinner should render component without nextStepName 1`] = `
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
   color: #23262D;
 }
@@ -677,7 +677,7 @@ exports[`Spinner should render component without nextStepName 1`] = `
   font-weight: 400;
   font-size: 12px;
   line-height: 16px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -761,7 +761,7 @@ exports[`Spinner should render component without nextStepName 1`] = `
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
   color: #23262D;
 }
@@ -777,7 +777,7 @@ exports[`Spinner should render component without nextStepName 1`] = `
   font-weight: 400;
   font-size: 12px;
   line-height: 16px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -920,7 +920,7 @@ exports[`Spinner should render default component 1`] = `
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
   color: #23262D;
 }
@@ -936,7 +936,7 @@ exports[`Spinner should render default component 1`] = `
   font-weight: 400;
   font-size: 12px;
   line-height: 16px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -952,7 +952,7 @@ exports[`Spinner should render default component 1`] = `
   font-weight: 400;
   font-size: 12px;
   line-height: 16px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -1046,7 +1046,7 @@ exports[`Spinner should render default component 1`] = `
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
   color: #23262D;
 }
@@ -1062,7 +1062,7 @@ exports[`Spinner should render default component 1`] = `
   font-weight: 400;
   font-size: 12px;
   line-height: 16px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -1078,7 +1078,7 @@ exports[`Spinner should render default component 1`] = `
   font-weight: 400;
   font-size: 12px;
   line-height: 16px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -1223,7 +1223,7 @@ exports[`Spinner should render mobile component 1`] = `
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
   color: #23262D;
 }
@@ -1239,7 +1239,7 @@ exports[`Spinner should render mobile component 1`] = `
   font-weight: 400;
   font-size: 12px;
   line-height: 16px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -1255,7 +1255,7 @@ exports[`Spinner should render mobile component 1`] = `
   font-weight: 400;
   font-size: 12px;
   line-height: 16px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -1345,7 +1345,7 @@ exports[`Spinner should render mobile component 1`] = `
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
   color: #23262D;
 }
@@ -1361,7 +1361,7 @@ exports[`Spinner should render mobile component 1`] = `
   font-weight: 400;
   font-size: 12px;
   line-height: 16px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -1377,7 +1377,7 @@ exports[`Spinner should render mobile component 1`] = `
   font-weight: 400;
   font-size: 12px;
   line-height: 16px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
 }
 

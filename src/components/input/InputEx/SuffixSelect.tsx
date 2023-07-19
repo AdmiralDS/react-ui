@@ -4,7 +4,8 @@ import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-comp
 import styled, { css } from 'styled-components';
 import { OpenStatusButton } from '#src/components/OpenStatusButton';
 import { StyledDropdownContainer } from '#src/components/DropdownContainer';
-import {Menu, MenuDimensions} from '#src/components/input/InputEx/Menu';
+import type { MenuDimensions } from '#src/components/input/InputEx/Menu';
+import { Menu } from '#src/components/input/InputEx/Menu';
 import type { ValueType } from '#src/components/input/InputEx/ValueType';
 import type { MenuItemProps } from '#src/components/Menu/MenuItem';
 

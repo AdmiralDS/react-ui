@@ -73,7 +73,7 @@ exports[`Button should render component 1`] = `
   font-weight: 500;
   font-size: 16px;
   line-height: 24px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -312,7 +312,7 @@ exports[`Button should render component 1`] = `
   font-weight: 500;
   font-size: 16px;
   line-height: 24px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -334,7 +334,7 @@ exports[`Button should render component 1`] = `
   font-weight: 500;
   font-size: 14px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -435,7 +435,7 @@ exports[`Button should render component with text 1`] = `
   font-weight: 500;
   font-size: 16px;
   line-height: 24px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -674,7 +674,7 @@ exports[`Button should render component with text 1`] = `
   font-weight: 500;
   font-size: 16px;
   line-height: 24px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -696,7 +696,7 @@ exports[`Button should render component with text 1`] = `
   font-weight: 500;
   font-size: 14px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on,'lnum' on;
+  font-feature-settings: 'tnum' on, 'lnum' on;
   text-rendering: geometricPrecision;
 }
 

@@ -12,6 +12,7 @@ module.exports = {
     'prettier',
   ],
   rules: {
+    '@typescript-eslint/no-explicit-any': 1,
     'no-console': 1, // Means warning
     'prettier/prettier': 2, // Means error,
     'import/no-cycle': [2, { ignoreExternal: true }],

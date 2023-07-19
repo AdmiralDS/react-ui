@@ -1,8 +1,6 @@
-import * as React from 'react';
 import styled from 'styled-components';
 
 import { Button, T } from '@admiral-ds/react-ui';
-import type { ButtonProps } from '@admiral-ds/react-ui';
 
 const Separator = styled.div`
   height: 20px;
@@ -30,7 +28,7 @@ const handleClick = () => {
   console.log('clicked');
 };
 
-export const ButtonLoaderTemplate = (props: ButtonProps) => {
+export const ButtonLoaderTemplate = () => {
   return (
     <>
       <Wrapper>

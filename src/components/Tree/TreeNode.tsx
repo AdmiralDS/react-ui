@@ -137,7 +137,6 @@ export const TreeNode = ({
   expanded,
   checked,
   indeterminate,
-  level,
   indent,
   onChange,
   onHover,
