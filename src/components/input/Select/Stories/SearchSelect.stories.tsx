@@ -19,6 +19,7 @@ import {
   ExpandedHeightMultiSearchSelectTemplate,
   CustomOptionMultiSearchSelectTemplate,
   CustomChipMultiSearchSelectTemplate,
+  ExternalFilterTemplate,
 } from './Templates/SearchSelect';
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
@@ -37,6 +38,7 @@ import MultipleWithApplyRaw from './Templates/SearchSelect/MultipleWithApply?raw
 import ExpandedHeightMultiSearchSelectRaw from './Templates/SearchSelect/ExpandedHeightMultiSearchSelect?raw';
 import CustomOptionMultiSearchSelectRaw from './Templates/SearchSelect/CustomOptionMultiSearchSelect?raw';
 import CustomChipMultiSearchSelectRaw from './Templates/SearchSelect/CustomChipMultiSearchSelect?raw';
+import ExternalFilterRaw from './Templates/SearchSelect/ExternalFilter?raw';
 
 const queryClient = new QueryClient();
 
@@ -444,3 +446,22 @@ export const CustomChipMultiSearchSelect = {
 
   name: 'Multiple с кастомным обработчиком удаления чипса',
 };
+//</editor-fold>
+
+// <editor-fold desc="Внешняя фильтрация">
+const ExternalFilterStory: StoryFn<typeof Select> = (props) => <ExternalFilterTemplate {...cleanUpProps(props)} />;
+
+export const ExternalFilter = {
+  render: ExternalFilterStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: ExternalFilterRaw,
+      },
+    },
+  },
+
+  name: 'Внешняя фильтрация',
+};
+//</editor-fold>

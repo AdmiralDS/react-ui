@@ -5,7 +5,9 @@ import { ThemeProvider } from 'styled-components';
 import { DateInput } from '@admiral-ds/react-ui';
 import type { DateInputProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
 
-export const DateInputPlaygroundTemplate = (props: DateInputProps & { themeBorderKind?: BorderRadiusType }) => {
+export const DateInputPlaygroundTemplate = (props: DateInputProps) => {
+  console.log(`После очистки:\n`);
+  console.dir(props);
   const [localValue, setValue] = React.useState<string>(String(props.value) ?? '');
   React.useEffect(() => {
     if (props.value !== undefined) {

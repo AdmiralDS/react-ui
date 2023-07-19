@@ -9,6 +9,10 @@ import type { ItemDimension } from '#src/components/Menu/menuItemMixins';
 import { CustomOptionWrapper } from '#src/components/input/Select/styled';
 import type { SelectItemProps } from '#src/components/input/Select/types';
 
+interface OptionRenderProps {
+  selected?: boolean;
+}
+
 const convertDimension = (selectDimension?: ComponentDimension): ItemDimension | undefined => {
   return selectDimension === 'xl' ? 'l' : selectDimension;
 };
@@ -27,11 +31,11 @@ export const DropDownOption = ({
 
   const optionIsDisabled = optionGroupContext?.disabled || disabled;
 
-  const multipleOptionRender = () => (
+  const multipleOptionRender = ({ selected = false }: OptionRenderProps) => (
     <>
       {dropDownContext?.showCheckbox && (
         <StyledCheckbox
-          checked={dropDownContext?.selectValue?.includes(value)}
+          checked={selected}
           dimension={dropDownContext?.dimension === 's' ? 's' : 'm'}
           disabled={disabled}
           // Состояние контролируется через Item, по сути контролируемый readOnly
@@ -42,7 +46,8 @@ export const DropDownOption = ({
     </>
   );
 
-  const defaultOptionRender = dropDownContext?.multiple ? multipleOptionRender() : children;
+  const defaultOptionRender = (props: OptionRenderProps) =>
+    dropDownContext?.multiple ? multipleOptionRender(props) : children;
 
   React.useEffect(() => {
     const itemId = id ?? value;
@@ -62,7 +67,7 @@ export const DropDownOption = ({
             key={itemId}
             {...htmlProps}
           >
-            {defaultOptionRender}
+            {defaultOptionRender({ selected: options.selected })}
           </CustomOptionWrapper>
         );
       },
@@ -72,13 +77,7 @@ export const DropDownOption = ({
 
     dropDownContext?.onDropDownOptionMount?.(item);
     return () => dropDownContext?.onDropDownOptionUnMount?.(item);
-  }, [
-    dropDownContext?.onDropDownOptionMount,
-    dropDownContext?.onDropDownOptionUnMount,
-    dropDownContext?.activeItem,
-    dropDownContext?.selectValue,
-    dropDownContext?.dimension,
-  ]);
+  }, [dropDownContext?.onDropDownOptionMount, dropDownContext?.onDropDownOptionUnMount, dropDownContext?.dimension]);
 
   return null;
 };
