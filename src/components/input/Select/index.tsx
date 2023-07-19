@@ -29,7 +29,7 @@ import { DropdownContainer } from '#src/components/DropdownContainer';
 import type { RenderPanelProps } from '#src/components/Menu';
 import { NativeControl } from '#src/components/input/Select/NativeControl';
 import { DropDownProvider } from '#src/components/input/Select/DropDownContext';
-import type { ItemProps } from '#src/components/Menu/MenuItem';
+import type { MenuModelItemProps } from '#src/components/Menu/MenuItem';
 import type { SearchFormat, SelectItemProps, IConstantOption } from '#src/components/input/Select/types';
 import { defaultFilterItem } from '#src/components/input/Select/utils';
 
@@ -272,7 +272,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       [constantOptions, selectedValue, multiple],
     );
 
-    const dropDownModel = React.useMemo<Array<ItemProps>>(() => {
+    const dropDownModel = React.useMemo<Array<MenuModelItemProps>>(() => {
       const filteredItems = dropDownItems.filter((item) => {
         return onFilterItem(item.value, searchValue, searchFormat);
       });
@@ -308,15 +308,13 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       [],
     );
 
-    const handleDropDownOptionMount = React.useCallback(
-      (option: SelectItemProps) => setDropItems((prev) => [...prev, option]),
-      [],
-    );
+    const handleDropDownOptionMount = React.useCallback((option: SelectItemProps) => {
+      setDropItems((prev) => [...prev, option]);
+    }, []);
 
-    const handleDropDownOptionUnMount = React.useCallback(
-      (option: ItemProps) => setDropItems((prev) => prev.filter((prevOption) => prevOption.id !== option.id)),
-      [],
-    );
+    const handleDropDownOptionUnMount = React.useCallback((option: MenuModelItemProps) => {
+      setDropItems((prev) => prev.filter((prevOption) => prevOption.id !== option.id));
+    }, []);
 
     const onCloseSelect = React.useCallback(() => {
       setIsSearchPanelOpen(false);
@@ -572,6 +570,33 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
 
     const needShowClearIcon = shouldRenderSelectValue && (multiple ? !!selectedValue?.length : !!selectedValue);
 
+    const memorisedDropDownOptions = React.useMemo(
+      () => (
+        <DropDownProvider
+          onDropDownOptionMount={handleDropDownOptionMount}
+          onDropDownOptionUnMount={handleDropDownOptionUnMount}
+          dimension={dimension}
+          multiple={multiple}
+          showCheckbox={showCheckbox}
+        >
+          {children}
+        </DropDownProvider>
+      ),
+      [children, dimension, showCheckbox],
+    );
+
+    const memorisedConstantOptions = React.useMemo(
+      () => (
+        <ConstantSelectProvider
+          onConstantOptionMount={onConstantOptionMount}
+          onConstantOptionUnMount={onConstantOptionUnMount}
+        >
+          {children}
+        </ConstantSelectProvider>
+      ),
+      [children],
+    );
+
     return (
       <SelectWrapper
         className={className}
@@ -590,25 +615,8 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
         onBlur={handleWrapperBlur}
         title={title}
       >
-        <ConstantSelectProvider
-          onConstantOptionMount={onConstantOptionMount}
-          onConstantOptionUnMount={onConstantOptionUnMount}
-        >
-          {children}
-        </ConstantSelectProvider>
-        <DropDownProvider
-          onOptionClick={handleOptionSelect}
-          onActivateItem={setActiveItem}
-          onDropDownOptionMount={handleDropDownOptionMount}
-          onDropDownOptionUnMount={handleDropDownOptionUnMount}
-          selectValue={selectedValue}
-          activeItem={activeItem}
-          dimension={dimension}
-          multiple={multiple}
-          showCheckbox={showCheckbox}
-        >
-          {children}
-        </DropDownProvider>
+        {memorisedConstantOptions}
+        {memorisedDropDownOptions}
         <NativeControl
           ref={refSetter(ref, selectRef)}
           value={selectedValue}
@@ -666,9 +674,11 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
             <StyledMenu
               dimension={dimension === 'xl' ? 'l' : dimension}
               active={activeItem}
-              selected={Array.isArray(selectedValue) ? undefined : selectedValue}
+              selected={selectedValue}
               onActivateItem={setActiveItem}
               onSelectItem={handleOptionSelect}
+              onDeselectItem={handleOptionSelect}
+              multiSelection={multiple}
               model={dropDownModel}
               renderTopPanel={renderDropDownTopPanel}
               renderBottomPanel={renderDropDownBottomPanel}

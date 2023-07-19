@@ -13,3 +13,4 @@ export * from './MultipleWithApply';
 export * from './ExpandedHeightMultiSearchSelect';
 export * from './CustomOptionMultiSearchSelect';
 export * from './CustomChipMultiSearchSelect';
+export * from './ExternalFilter';
