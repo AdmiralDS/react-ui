@@ -3,7 +3,7 @@ import type { ChangeEvent } from 'react';
 import { ThemeProvider } from 'styled-components';
 
 import { SuggestInput } from '@admiral-ds/react-ui';
-import type { SuggestInputProps, Theme } from '@admiral-ds/react-ui';
+import type { SuggestInputProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
 
 const OPTIONS = [
   'text 1',
@@ -23,7 +23,7 @@ const OPTIONS = [
 export const SuggestInputPlaygroundTemplate = ({
   placeholder = 'Начните набирать text',
   ...props
-}: SuggestInputProps) => {
+}: SuggestInputProps & { themeBorderKind?: BorderRadiusType }) => {
   const [localValue, setValue] = React.useState<string>(props.value ? String(props.value) : '');
   const [isLoading, setIsLoading] = React.useState(false);
   const [options, setOptions] = React.useState<string[] | undefined>();
@@ -59,7 +59,7 @@ export const SuggestInputPlaygroundTemplate = ({
   }, [isLoading]);
 
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

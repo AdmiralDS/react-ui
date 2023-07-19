@@ -2,13 +2,23 @@ import * as React from 'react';
 import { ThemeProvider } from 'styled-components';
 
 import { FileInputField, FileItem, fullWidthPositionMixin, halfWidthPositionMixin } from '@admiral-ds/react-ui';
-import type { FileAttributeProps, FileInputFieldProps, InputStatus, Theme } from '@admiral-ds/react-ui';
+import type {
+  FileAttributeProps,
+  FileInputFieldProps,
+  InputStatus,
+  Theme,
+  BorderRadiusType,
+} from '@admiral-ds/react-ui';
 
 import { uid } from '#src/components/common/uid';
 
-export const FileInputFieldBaseTemplate = ({ dimension = 'xl', label = 'Label', ...props }: FileInputFieldProps) => {
+export const FileInputFieldBaseTemplate = ({
+  dimension = 'xl',
+  label = 'Label',
+  ...props
+}: FileInputFieldProps & { themeBorderKind?: BorderRadiusType }) => {
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

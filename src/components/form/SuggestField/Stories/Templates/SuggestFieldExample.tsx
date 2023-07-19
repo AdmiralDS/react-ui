@@ -3,7 +3,7 @@ import type { ChangeEvent } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
 import { SuggestField } from '@admiral-ds/react-ui';
-import type { SuggestFieldProps, Theme } from '@admiral-ds/react-ui';
+import type { SuggestFieldProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
 
 const DisplayContainer = styled.div`
   > * {
@@ -24,7 +24,7 @@ export const SuggestFieldExampleTemplate = ({
   placeholder = 'Наберите несколько символов...',
   label = 'Поле ввода с вариантами подстановки значений',
   ...props
-}: SuggestFieldProps) => {
+}: SuggestFieldProps & { themeBorderKind?: BorderRadiusType }) => {
   const cleanProps = (Object.keys(props) as Array<keyof typeof props>).reduce(
     (acc, key) => {
       if (props[key] !== undefined) acc[key] = props[key];
@@ -69,7 +69,7 @@ export const SuggestFieldExampleTemplate = ({
   }, [isLoading]);
 
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

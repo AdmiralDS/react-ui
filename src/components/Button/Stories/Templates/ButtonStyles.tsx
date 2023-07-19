@@ -2,7 +2,7 @@ import * as React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
 import { Button } from '@admiral-ds/react-ui';
-import type { ButtonProps, ButtonAppearance, Theme } from '@admiral-ds/react-ui';
+import type { ButtonProps, ButtonAppearance, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
 import { ReactComponent as StarSolid } from '@admiral-ds/icons/build/system/StarSolid.svg';
 
 const ButtonContainer = styled.div<{ appearance?: ButtonAppearance }>`
@@ -17,9 +17,9 @@ const ButtonContainer = styled.div<{ appearance?: ButtonAppearance }>`
   ${(p) => p.appearance === 'white' && 'background-color: #2B313B;'};
 `;
 
-export const ButtonStylesTemplate = (props: ButtonProps) => {
+export const ButtonStylesTemplate = (props: ButtonProps & { themeBorderKind?: BorderRadiusType }) => {
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

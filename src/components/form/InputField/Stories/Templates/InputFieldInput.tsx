@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { InputField } from '@admiral-ds/react-ui';
-import type { InputFieldProps, Theme } from '@admiral-ds/react-ui';
+import type { InputFieldProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
 import styled, { ThemeProvider } from 'styled-components';
 
 const DisplayContainer = styled.div`
@@ -10,7 +10,11 @@ const DisplayContainer = styled.div`
   }
 `;
 
-export const InputFieldInputTemplate = ({ value = 'Привет', label = 'Label', ...props }: InputFieldProps) => {
+export const InputFieldInputTemplate = ({
+  value = 'Привет',
+  label = 'Label',
+  ...props
+}: InputFieldProps & { themeBorderKind?: BorderRadiusType }) => {
   const [localValue, setValue] = React.useState<string>(String(value) ?? '');
   const [invalidInputValue, setInvalidInputValue] = React.useState<string>('Hello');
 
@@ -27,7 +31,7 @@ export const InputFieldInputTemplate = ({ value = 'Привет', label = 'Label
   };
 
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

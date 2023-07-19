@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useState, useRef, useEffect, forwardRef, Children } from 'react';
 import styled, { css } from 'styled-components';
 import type { TextInputProps } from '#src/components/input/TextInput';
 import type { ComponentDimension, ExtraProps } from '#src/components/input/types';
@@ -122,7 +122,7 @@ export interface NumberInputProps extends TextInputProps {
   align?: 'left' | 'right';
 }
 
-export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
+export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
   (
     {
       className,
@@ -149,31 +149,33 @@ export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
     },
     ref,
   ) => {
-    const [plusDisabled, setPlusDisabled] = React.useState(false);
-    const [minusDisabled, setMinusDisabled] = React.useState(false);
-    const [innerValueState, setInnerValueState] = React.useState(props.defaultValue);
+    const [plusDisabled, setPlusDisabled] = useState(false);
+    const [minusDisabled, setMinusDisabled] = useState(false);
+    const [innerValueState, setInnerValueState] = useState(props.defaultValue);
     const innerValue = props.value ?? innerValueState;
 
-    const inputRef = React.useRef<HTMLInputElement>(null);
+    const inputRef = useRef<HTMLInputElement>(null);
 
     // thousand, decimal - не более одного символа
     const thousand = validateThousand(userThousand) ? userThousand.slice(0, 1) : ' ';
     const decimal = userDecimal.slice(0, 1);
 
-    React.useEffect(() => {
+    useEffect(() => {
       if (innerValue) {
+        let minusDsb = false;
+        let plusDsb = false;
         if (typeof minValue === 'number') {
-          const minusDsb = Number(clearValue(String(innerValue), precision, decimal)) - step < minValue;
-          setMinusDisabled(minusDsb);
+          minusDsb = Number(clearValue(String(innerValue), precision, decimal)) - step < minValue;
         }
         if (typeof maxValue === 'number') {
-          const plusDsb = Number(clearValue(String(innerValue), precision, decimal)) + step > maxValue;
-          setPlusDisabled(plusDsb);
+          plusDsb = Number(clearValue(String(innerValue), precision, decimal)) + step > maxValue;
         }
+        setMinusDisabled(minusDsb);
+        setPlusDisabled(plusDsb);
       } else {
-        // Если параметры value, defaultValue не заданы или являются пустыми строками, тогда кнопки +/- не могут быть задизейблены
-        setMinusDisabled(false);
-        setPlusDisabled(false);
+        // Если параметры value, defaultValue не заданы или являются пустыми строками, тогда кнопки +/- должны быть задизейблены
+        setMinusDisabled(true);
+        setPlusDisabled(true);
       }
     }, [innerValue]);
 
@@ -206,7 +208,7 @@ export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       }
     };
 
-    const iconArray = React.Children.toArray(icons);
+    const iconArray = Children.toArray(icons);
 
     if (!props.readOnly && displayClearIcon && !!innerValue) {
       iconArray.unshift(
@@ -250,24 +252,9 @@ export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
      * Если условие выше несоблюдено, должна быть произведена корректировка значения. Например: '70.' => '70.00' при precision={2}
      */
     const handleBlur = (event: React.FocusEvent<HTMLInputElement>) => {
-      const newValue = fitToCurrency(event.currentTarget.value, precision, decimal, thousand, true);
-      if (inputRef.current) {
-        // если введеное значение меньше minValue
-        if (typeof minValue === 'number' && Number(clearValue(newValue, precision, decimal)) < minValue) {
-          const fullValue = fitToCurrency(String(minValue), precision, decimal, thousand, true);
-
-          changeInputData(inputRef.current, { value: fullValue });
-        }
-        // если введеное значение меньше maxValue
-        else if (typeof maxValue === 'number' && Number(clearValue(newValue, precision, decimal)) > maxValue) {
-          const fullValue = fitToCurrency(String(maxValue), precision, decimal, thousand, true);
-
-          changeInputData(inputRef.current, { value: fullValue });
-        }
-        // если значение в инпуте неполностью отформатировано, например, не все разряды после запятой проставлены
-        else if (newValue !== event.currentTarget.value) {
-          changeInputData(inputRef.current, { value: newValue });
-        }
+      const newValue = fitToCurrency(event.target.value, precision, decimal, thousand, true);
+      if (inputRef.current && newValue !== event.target.value) {
+        changeInputData(inputRef.current, { value: newValue });
       }
       onBlur?.(event);
     };

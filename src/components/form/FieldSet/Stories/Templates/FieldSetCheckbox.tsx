@@ -2,7 +2,7 @@ import * as React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
 import { CheckboxField, FieldSet } from '@admiral-ds/react-ui';
-import type { PropsType as FieldSetPropsType, Theme } from '@admiral-ds/react-ui';
+import type { PropsType as FieldSetPropsType, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
 
 const Container = styled.div`
   > * {
@@ -10,9 +10,9 @@ const Container = styled.div`
   }
 `;
 
-export const FieldSetCheckboxTemplate = (props: FieldSetPropsType) => {
+export const FieldSetCheckboxTemplate = (props: FieldSetPropsType & { themeBorderKind?: BorderRadiusType }) => {
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

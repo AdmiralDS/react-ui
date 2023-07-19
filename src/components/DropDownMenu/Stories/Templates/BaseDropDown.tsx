@@ -3,7 +3,7 @@ import type { KeyboardEventHandler, MouseEventHandler } from 'react';
 import { ThemeProvider } from 'styled-components';
 
 import { Button, DropDownItem, DropDownMenu } from '@admiral-ds/react-ui';
-import type { DropDownMenuProps, Theme } from '@admiral-ds/react-ui';
+import type { DropDownMenuProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
 
 const items = [
   {
@@ -39,7 +39,7 @@ const items = [
   },
 ];
 
-export const BaseDropDownTemplate = (props: DropDownMenuProps) => {
+export const BaseDropDownTemplate = (props: DropDownMenuProps & { themeBorderKind?: BorderRadiusType }) => {
   const [selected, setSelected] = React.useState<number | string>('');
   const [open, setOpen] = React.useState(false);
   const buttonRef = React.useRef(null);
@@ -60,7 +60,7 @@ export const BaseDropDownTemplate = (props: DropDownMenuProps) => {
   };
 
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

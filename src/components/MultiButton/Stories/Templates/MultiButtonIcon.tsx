@@ -2,7 +2,13 @@ import * as React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
 import { MenuItem, MultiButton } from '@admiral-ds/react-ui';
-import type { MultiButtonProps, MultiButtonItem, RenderOptionProps, Theme } from '@admiral-ds/react-ui';
+import type {
+  MultiButtonProps,
+  MultiButtonItem,
+  RenderOptionProps,
+  Theme,
+  BorderRadiusType,
+} from '@admiral-ds/react-ui';
 import { ReactComponent as BonusSolid } from '@admiral-ds/icons/build/category/BonusSolid.svg';
 
 const Separator = styled.div`
@@ -57,12 +63,12 @@ const itemsDemo: Array<MultiButtonItem> = [
   },
 ];
 
-export const MultiButtonIconTemplate = (props: MultiButtonProps) => {
+export const MultiButtonIconTemplate = (props: MultiButtonProps & { themeBorderKind?: BorderRadiusType }) => {
   const [selected, setSelected] = React.useState<string | undefined>(undefined);
   const [selected2, setSelected2] = React.useState<string | undefined>(undefined);
 
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

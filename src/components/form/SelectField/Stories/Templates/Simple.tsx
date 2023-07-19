@@ -3,7 +3,7 @@ import type { ChangeEvent } from 'react';
 import { ThemeProvider } from 'styled-components';
 
 import { SelectField, Option } from '@admiral-ds/react-ui';
-import type { SearchSelectFieldProps, Theme } from '@admiral-ds/react-ui';
+import type { SearchSelectFieldProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
 
 const OPTIONS = [
   'teeext 1',
@@ -16,7 +16,10 @@ const OPTIONS = [
   'Ответ на «Главный вопрос жизни, вселенной и всего такого»',
   'text 69',
 ];
-export const SimpleTemplate = ({ placeholder = 'Placeholder', ...props }: SearchSelectFieldProps) => {
+export const SimpleTemplate = ({
+  placeholder = 'Placeholder',
+  ...props
+}: SearchSelectFieldProps & { themeBorderKind?: BorderRadiusType }) => {
   const [selectValue, setSelectValue] = React.useState('');
 
   const renderOptions = () => {
@@ -33,7 +36,7 @@ export const SimpleTemplate = ({ placeholder = 'Placeholder', ...props }: Search
   };
 
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

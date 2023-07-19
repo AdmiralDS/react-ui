@@ -3,7 +3,7 @@ import type { ChangeEvent } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
 import { TimeField } from '@admiral-ds/react-ui';
-import type { Theme, TimeFieldProps } from '@admiral-ds/react-ui';
+import type { Theme, TimeFieldProps, BorderRadiusType } from '@admiral-ds/react-ui';
 
 const DisplayContainer = styled.div`
   max-width: 320px;
@@ -16,7 +16,7 @@ export const TimeFieldInputTemplate = ({
   placeholder = 'Наберите несколько символов...',
   label = 'Поле ввода времени',
   ...props
-}: TimeFieldProps) => {
+}: TimeFieldProps & { themeBorderKind?: BorderRadiusType }) => {
   const [localValue, setValue] = React.useState<string>(String(props.value) ?? '');
 
   React.useEffect(() => {
@@ -31,7 +31,7 @@ export const TimeFieldInputTemplate = ({
   };
 
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

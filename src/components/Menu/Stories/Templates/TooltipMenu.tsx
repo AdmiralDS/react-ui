@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import { Menu, MenuItem, TooltipHoc, mediumGroupBorderRadius } from '@admiral-ds/react-ui';
-import type { Theme, MenuProps, RenderOptionProps } from '@admiral-ds/react-ui';
+import type { Theme, MenuProps, RenderOptionProps, BorderRadiusType } from '@admiral-ds/react-ui';
 
 type StoryItem = {
   id: string;
@@ -58,7 +58,7 @@ const Wrapper = styled.div`
 
 const MenuItemWithTooltip = TooltipHoc(MenuItem);
 
-export const TooltipMenuTemplate = (props: MenuProps) => {
+export const TooltipMenuTemplate = (props: MenuProps & { themeBorderKind?: BorderRadiusType }) => {
   const model = React.useMemo(() => {
     return STORY_ITEMS.map((item) => {
       const tooltip = item.label.length > 20;
@@ -85,7 +85,7 @@ export const TooltipMenuTemplate = (props: MenuProps) => {
   }, [props.dimension]);
 
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

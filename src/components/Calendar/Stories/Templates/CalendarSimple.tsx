@@ -1,15 +1,15 @@
 import * as React from 'react';
 import { ThemeProvider } from 'styled-components';
 
-import type { CalendarPropType, Theme } from '@admiral-ds/react-ui';
+import type { CalendarPropType, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
 import { Calendar } from '@admiral-ds/react-ui';
 
-export const CalendarSimpleTemplate = (props: CalendarPropType) => {
+export const CalendarSimpleTemplate = (props: CalendarPropType & { themeBorderKind?: BorderRadiusType }) => {
   const [selected, setSelected] = React.useState<Date | null>(null);
   const [endDate, setEndDate] = React.useState<Date | null>(null);
 
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

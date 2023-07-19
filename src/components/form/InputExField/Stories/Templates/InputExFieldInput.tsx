@@ -2,7 +2,7 @@ import * as React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
 import { InputExField, Spinner } from '@admiral-ds/react-ui';
-import type { InputExFieldProps, Theme, ValueType } from '@admiral-ds/react-ui';
+import type { InputExFieldProps, Theme, ValueType, BorderRadiusType } from '@admiral-ds/react-ui';
 
 const DisplayContainer = styled.div`
   > * {
@@ -13,7 +13,11 @@ const DisplayContainer = styled.div`
 const PREFIX_OPTIONS = ['prefix One', 'prefix Two', 'prefix Three'];
 const SUFFIX_OPTIONS = ['suffix One', 'suffix Two', 'suffix Three'];
 
-export const InputExFieldInputTemplate = ({ value = 'Привет', label = 'Label', ...props }: InputExFieldProps) => {
+export const InputExFieldInputTemplate = ({
+  value = 'Привет',
+  label = 'Label',
+  ...props
+}: InputExFieldProps & { themeBorderKind?: BorderRadiusType }) => {
   const [localValue, setValue] = React.useState<string>(String(value) ?? '');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -23,7 +27,7 @@ export const InputExFieldInputTemplate = ({ value = 'Привет', label = 'Lab
   };
 
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 
