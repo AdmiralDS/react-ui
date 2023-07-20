@@ -2,12 +2,12 @@ import styled from 'styled-components';
 import { typography } from '#src/components/Typography';
 import type { CountryBlockProps } from '#src/components/input/PhoneNumberInput/CountryBlock';
 import { CountryBlock } from '#src/components/input/PhoneNumberInput/CountryBlock';
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import type { CountryAlpha3Code } from '@admiral-ds/flags';
 import type { CustomInputHandler } from '#src/components/common/dom/changeInputData';
 import type { MenuDimensions, MenuProps } from '#src/components/Menu';
 import { Menu } from '#src/components/Menu';
-import type { ItemProps, RenderOptionProps } from '#src/components/Menu/MenuItem';
+import type { RenderOptionProps, MenuModelItemProps } from '#src/components/Menu/MenuItem';
 
 export type CountryInfo = {
   uid: string;
@@ -40,7 +40,7 @@ const StyledCountriesList = styled(Menu)<{ dimension: MenuDimensions }>`
 `;
 
 export const CountriesList = ({ countries, dimension = 'l', ...props }: CountriesListProps) => {
-  const listModel = useMemo<Array<ItemProps>>(() => {
+  const listModel = useMemo<Array<MenuModelItemProps>>(() => {
     return countries.map((country) => {
       const countryBlockProps: CountryBlockProps = {
         dimension: dimension,

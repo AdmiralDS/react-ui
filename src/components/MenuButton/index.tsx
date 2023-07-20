@@ -1,7 +1,7 @@
 import * as React from 'react';
 import type { CSSProperties, HTMLAttributes } from 'react';
 
-import type { ItemProps } from '#src/components/Menu/MenuItem';
+import type { MenuModelItemProps } from '#src/components/Menu/MenuItem';
 import type { DropMenuComponentProps, RenderContentProps } from '#src/components/DropMenu';
 import { DropMenu } from '#src/components/DropMenu';
 import { uid } from '#src/components/common/uid';
@@ -19,7 +19,7 @@ export interface MenuButtonProps
     DropMenuComponentProps,
     Omit<ButtonProps, 'onChange'> {
   /** Массив опций */
-  items: Array<ItemProps>;
+  items: Array<MenuModelItemProps>;
   /** Выбранная опция */
   selected?: string;
   /** @deprecated use onSelectItem instead

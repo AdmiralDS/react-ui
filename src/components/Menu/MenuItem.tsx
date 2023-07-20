@@ -36,9 +36,6 @@ export interface MenuModelItemProps {
   expandIcon?: React.ReactNode;
 }
 
-/** @deprecated use MenuModeItemProps instead */
-export type ItemProps = MenuModelItemProps;
-
 export interface MenuItemProps extends HTMLAttributes<HTMLDivElement>, RenderOptionProps {
   /** Размер MenuItems */
   dimension?: ItemDimension;
