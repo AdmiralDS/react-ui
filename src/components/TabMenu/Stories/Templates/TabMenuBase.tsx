@@ -53,7 +53,7 @@ const onChangeTab = (id: string) => {
 
 const Wrapper = styled.div`
   width: 100%;
-  height: 900px;
+  height: 200px;
 `;
 
 export const TabMenuBaseTemplate = (args: TabMenuProps) => {
