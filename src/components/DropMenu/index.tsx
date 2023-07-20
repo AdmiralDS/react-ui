@@ -2,7 +2,7 @@ import type { CSSProperties, HTMLAttributes } from 'react';
 import * as React from 'react';
 import { keyboardKey } from '../common/keyboardKey';
 import { OpenStatusButton } from '#src/components/OpenStatusButton';
-import type { ItemProps } from '#src/components/Menu/MenuItem';
+import type { MenuModelItemProps } from '#src/components/Menu/MenuItem';
 import type { DropdownContainerProps } from '#src/components/DropdownContainer';
 import { StyledDropdownContainer } from '#src/components/DropdownContainer';
 import type { MenuDimensions as Dimension, MenuProps } from '#src/components/Menu';
@@ -74,7 +74,7 @@ export interface DropMenuProps
   /** Состояние загрузки */
   loading?: boolean;
   /** Опции выпадающего списка */
-  items: Array<ItemProps>;
+  items: Array<MenuModelItemProps>;
   /** Выбранная опция */
   selected?: string;
   /** @deprecated use onSelectItem instead

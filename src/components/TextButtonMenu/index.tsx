@@ -1,7 +1,7 @@
 import type { CSSProperties, HTMLAttributes, ReactNode } from 'react';
 import * as React from 'react';
 import type { Appearance, Dimension } from '#src/components/TextButton/types';
-import type { ItemProps } from '#src/components/Menu/MenuItem';
+import type { MenuModelItemProps } from '#src/components/Menu/MenuItem';
 import { TextButton } from '#src/components/TextButton';
 import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import styled from 'styled-components';
@@ -46,7 +46,7 @@ export interface TextButtonMenuProps
   /** Состояние загрузки */
   loading?: boolean;
   /** Опции выпадающего списка */
-  items: Array<ItemProps>;
+  items: Array<MenuModelItemProps>;
   /** Выбранная опция */
   selected?: string;
   /** @deprecated use onSelectItem instead

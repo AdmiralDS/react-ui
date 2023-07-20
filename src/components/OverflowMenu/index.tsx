@@ -5,7 +5,7 @@ import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-comp
 import { ReactComponent as MoreHorizontalOutline } from '@admiral-ds/icons/build/system/MoreHorizontalOutline.svg';
 import { ReactComponent as MoreVerticalOutline } from '@admiral-ds/icons/build/system/MoreVerticalOutline.svg';
 import { passDropdownDataAttributes } from '#src/components/common/utils/splitDataAttributes';
-import type { ItemProps } from '#src/components/Menu/MenuItem';
+import type { MenuModelItemProps } from '#src/components/Menu/MenuItem';
 import type { DropMenuComponentProps, RenderContentProps } from '#src/components/DropMenu';
 import { DropMenu } from '#src/components/DropMenu';
 import type { IconPlacementDimension } from '#src/components/IconPlacement';
@@ -47,7 +47,7 @@ export interface OverflowMenuProps
   /** Ориентация компонента */
   isVertical?: boolean;
   /** Опции выпадающего списка */
-  items: Array<ItemProps>;
+  items: Array<MenuModelItemProps>;
 }
 
 export const OverflowMenu = React.forwardRef<HTMLButtonElement, OverflowMenuProps>(
