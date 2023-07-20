@@ -1,7 +1,7 @@
 import * as React from 'react';
 import type { HTMLAttributes } from 'react';
 import { ExpandedRow, ExpandedRowContent, Row, SimpleRow } from '#src/components/Table/style';
-import type { Dimension, RowId, TableRow } from '#src/components/Table';
+import type { Dimension, RowId, TableRow, TableProps } from '#src/components/Table';
 import { OverflowMenu } from '#src/components/Table/OverflowMenu';
 
 export interface RowWrapperProps extends HTMLAttributes<HTMLDivElement> {
@@ -29,6 +29,7 @@ export interface RowWrapperProps extends HTMLAttributes<HTMLDivElement> {
   grey?: boolean;
   /** Включение постоянной видимости иконок действий над строками */
   showRowsActions: boolean;
+  rowStatusMap?: TableProps['rowStatusMap'];
 }
 
 export const RowWrapper = ({
@@ -45,6 +46,7 @@ export const RowWrapper = ({
   scrollbar,
   grey,
   showRowsActions,
+  rowStatusMap,
   ...props
 }: RowWrapperProps) => {
   const rowRef = React.useRef<HTMLDivElement>(null);
@@ -89,6 +91,7 @@ export const RowWrapper = ({
         selected={!!row.selected}
         disabled={!!row.disabled}
         status={row.status}
+        rowStatusMap={rowStatusMap}
         error={!!row.error}
         success={!!row.success}
         grey={!!grey}

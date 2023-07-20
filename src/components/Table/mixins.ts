@@ -67,22 +67,30 @@ export const underlineRow = css`
   border-bottom: 1px solid ${({ theme }) => theme.color['Neutral/Neutral 20']};
 `;
 
+const defaultRowBackground = css`background: ${({theme}) => theme.color['Neutral/Neutral 00']};`;
+const disabledRowBackground = css`background: ${({theme}) => theme.color['Neutral/Neutral 00']};`;
+const selectedRowBackground = css`background: ${({theme}) => theme.color['Primary/Primary 20']};`;
+const errorRowBackground = css`background: ${({theme}) => theme.color['Error/Error 20']};`;
+const successRowBackground = css`background: ${({theme}) => theme.color['Success/Success 20']};`;
+const greyRowBackground = css`background: ${({theme}) => theme.color['Neutral/Neutral 05']};`;
+
 export const rowBackground = css<{
   selected?: boolean;
   disabled?: boolean;
   error?: boolean;
   success?: boolean;
   grey?: boolean;
-  status?: TableRow['status']
+  status?: TableRow['status'];
+  rowStatusMap?: TableProps['rowStatusMap'];
 }>`
-  ${({ theme, selected, error, success, disabled, grey, status }) => {
-    if (disabled) return theme.color['Neutral/Neutral 00'];
-    if (selected) return theme.color['Primary/Primary 20'];
-    if (status?.background) return status.background;
-    if (error) return theme.color['Error/Error 20'];
-    if (success) return theme.color['Success/Success 20'];
-    if (grey) return theme.color['Neutral/Neutral 05'];
-    return theme.color['Neutral/Neutral 00'];
+  ${({ selected, error, success, disabled, grey, status, rowStatusMap }) => {
+    if (disabled) return disabledRowBackground;
+    if (selected) return selectedRowBackground;
+    if (status && rowStatusMap?.[status]) return rowStatusMap[status];
+    if (error) return errorRowBackground;
+    if (success) return successRowBackground;
+    if (grey) return greyRowBackground;
+    return defaultRowBackground;
   }}
 `;
 

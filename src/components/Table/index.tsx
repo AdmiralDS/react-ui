@@ -10,6 +10,7 @@ import { RegularRow } from '#src/components/Table/Row/RegularRow';
 import { RowWrapper } from '#src/components/Table/Row/RowWrapper';
 import { DropdownContext } from '#src/components/DropdownProvider';
 import { refSetter } from '#src/components/common/utils/refSetter';
+import { css } from 'styled-components';
 import type { FlattenInterpolation, ThemeProps, DefaultTheme } from 'styled-components';
 import { createPortal } from 'react-dom';
 
@@ -50,7 +51,7 @@ export type Dimension = 'xl' | 'l' | 'm' | 's';
 type FilterProps = {
   /** Функция закрытия меню фильтра */
   closeMenu: () => void;
-  /** 
+  /**
    * @deprecated взамен используйте параметр isFilterActive, задаваемый для столбца
    * Функция установки состояния фильтра (активный/неактивный).
    * Необходимо для окрашивания иконки фильтра в синий цвет при активном фильтре и в серый при неактивном фильтре.
@@ -124,10 +125,18 @@ export type Column = {
 export type RowId = string | number;
 type IdSelectionStatusMap = Record<RowId, boolean>;
 
-export type TableRowStatus = {
-  name: string;
-  background: string;
-}
+// export type TableRowStatus = 'error' | 'success' | {
+//   name: string;
+//   background: string;
+// }
+
+// export type TableRowStatus = {
+//   name: string;
+//   background: string;
+// };
+
+// export const TABLE_ROW_STATUS_ERROR = { name: 'error', background: 'Error/Error 20' };
+// theme.color[status.background] ? theme.color[status.background] : status.background
 
 export interface TableRow {
   id: RowId;
@@ -138,26 +147,26 @@ export interface TableRow {
   disabled?: boolean;
   /** Чекбокс строки в состоянии disabled */
   checkboxDisabled?: boolean;
-  // TODO: Удалить в 7.x.x версии 
-  /** 
-   * @deprecated Будет удалено в 7.x.x версии 
-   * Взамен используйте параметр status
+  // TODO: Удалить в 8.x.x версии
+  /**
+   * @deprecated Будет удалено в 8.x.x версии
+   * Взамен используйте параметр status='error'
    * Строка в состоянии error
    **/
   error?: boolean;
-  // TODO: Удалить в 7.x.x версии 
-  /** 
-   * @deprecated Будет удалено в 7.x.x версии 
-   * Взамен используйте параметр status
-   * Строка в состоянии success 
+  // TODO: Удалить в 8.x.x версии
+  /**
+   * @deprecated Будет удалено в 8.x.x версии
+   * Взамен используйте параметр status='success'
+   * Строка в состоянии success
    **/
   success?: boolean;
+  /** Status */
+  status?: any;
   /** Строка в раскрытом состоянии */
   expanded?: boolean;
   /** Окраска строки по Hover. Данная окраска должна применяться, если строка кликабельна и ведет к каким-либо действиям */
   hover?: boolean;
-  /** */
-  status?: TableRowStatus;
   /** Название группы */
   groupTitle?: string;
   /** Строки таблицы, находящиеся в группе */
@@ -300,6 +309,8 @@ export interface TableProps extends React.HTMLAttributes<HTMLDivElement> {
    * Если nextColumnName равен null, значит столбец передвигают в самый конец списка.
    */
   onColumnDrag?: (columnName: string, nextColumnName: string | null) => void;
+  /** */
+  rowStatusMap?: { [key: string]: FlattenInterpolation<ThemeProps<DefaultTheme>> };
 }
 
 type GroupInfo = {
@@ -315,6 +326,11 @@ type RowInfo = {
 type Group = Record<string, GroupInfo>;
 type GroupRows = Record<string, RowInfo>;
 type ZebraRows = Record<string, 'odd' | 'even' | 'ingroup odd' | 'ingroup even' | 'group'>;
+
+export const TABLE_ROW_STATUS_MAP = {
+  error: css`background: ${({theme}) => theme.color['Error/Error 20']};`,
+  success: css`background: ${({theme}) => theme.color['Success/Success 20']};`,
+};
 
 export const Table = React.forwardRef<HTMLDivElement, TableProps>(
   (
@@ -348,6 +364,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
       virtualScroll,
       locale,
       onColumnDrag,
+      rowStatusMap = TABLE_ROW_STATUS_MAP,
       ...props
     },
     ref,
@@ -859,6 +876,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
           scrollbar={scrollbar}
           grey={zebraRows[row.id]?.includes('even')}
           showRowsActions={showRowsActions}
+          rowStatusMap={rowStatusMap}
           key={`row_${row.id}`}
         >
           {isGroupRow ? renderGroupRow(row) : renderRegularRow(row, index)}

@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { Table, T, LIGHT_THEME } from '@admiral-ds/react-ui';
-import type { TableProps, Column, TableRow, Theme } from '@admiral-ds/react-ui';
-import styled, { useTheme } from 'styled-components';
+import { Table, T, TABLE_ROW_STATUS_MAP } from '@admiral-ds/react-ui';
+import type { TableProps, Column, TableRow } from '@admiral-ds/react-ui';
+import styled, { css } from 'styled-components';
 
 const AmountCell = styled.div`
   text-overflow: ellipsis;
@@ -24,7 +24,7 @@ type RowData = TableRow & {
   rate: number;
 };
 
-const prepareRowList = (theme: Theme): RowData[] => [
+const rowList: RowData[] = [
   {
     id: '0001',
     selected: true,
@@ -55,7 +55,8 @@ const prepareRowList = (theme: Theme): RowData[] => [
   {
     id: '0003',
     // error: true,
-    status:  {name: 'error',background: theme.color['Error/Error 20']},
+    status: 'error',
+    // status: TABLE_ROW_STATUS_ERROR,
     hover: true,
     transfer_type: 'МНО',
     transfer_date: new Date('2020-08-06').toLocaleDateString(),
@@ -70,7 +71,8 @@ const prepareRowList = (theme: Theme): RowData[] => [
   {
     id: '0004',
     // success: true,
-    status: {name: 'success', background: theme.color['Success/Success 20']},
+    status: 'success',
+    // status: {name: 'success', background: theme.color['Success/Success 20']},
     hover: true,
     transfer_type: 'МНО',
     transfer_date: new Date('2020-08-06').toLocaleDateString(),
@@ -84,8 +86,8 @@ const prepareRowList = (theme: Theme): RowData[] => [
   },
   {
     id: '0005',
-    // success: true,
-    status: {name: 'attention', background: theme.color['Attention/Attention 20']},
+    status: 'attention',
+    // status: {name: 'attention', background: 'Attention/Attention 20'},
     hover: true,
     transfer_type: 'МНО',
     transfer_date: new Date('2020-08-06').toLocaleDateString(),
@@ -138,7 +140,6 @@ const columnList: Column[] = [
 ];
 
 export const RowStateTemplate = (props: TableProps) => {
-  const theme = useTheme() || LIGHT_THEME;
   const [cols, setCols] = React.useState(columnList);
 
   const handleResize = ({ name, width }: { name: string; width: string }) => {
@@ -147,6 +148,13 @@ export const RowStateTemplate = (props: TableProps) => {
   };
 
   return (
-    <Table {...props} rowList={prepareRowList(theme)} columnList={cols} displayRowSelectionColumn onColumnResize={handleResize} />
+    <Table
+      {...props}
+      rowList={rowList}
+      columnList={cols}
+      displayRowSelectionColumn
+      onColumnResize={handleResize}
+      rowStatusMap={{ attention: css`background: ${({theme}) => theme.color['Attention/Attention 20']};`, ...TABLE_ROW_STATUS_MAP }}
+    />
   );
 };
