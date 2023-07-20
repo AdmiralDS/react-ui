@@ -93,6 +93,9 @@ const FlagContainer = styled.div<{ dimension: Dimension }>`
   width: ${(p) => (p.dimension === 's' ? '18' : '22')}px;
 `;
 
+// В данном компоненте согласно дизайну не предусмотрена очистка кнопкой
+// https://github.com/AdmiralDS/react-ui/issues/971
+
 export interface PhoneNumberInputProps extends Omit<TextInputProps, 'value | displayClearIcon'> {
   value?: string;
   /** Код ISO A3 страны для определения префикса номера по умолчанию */
