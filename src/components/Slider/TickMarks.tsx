@@ -9,6 +9,7 @@ const Wrapper = styled.div<{ position: number }>`
   display: flex;
   align-items: center;
   justify-content: center;
+  user-select: none;
 `;
 
 export const Content = styled.div`
