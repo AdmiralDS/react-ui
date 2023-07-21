@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { Table, T, TABLE_ROW_STATUS_MAP } from '@admiral-ds/react-ui';
-import type { TableProps, Column, TableRow } from '@admiral-ds/react-ui';
-import styled, { css } from 'styled-components';
+import { Table, T } from '@admiral-ds/react-ui';
+import type { TableProps, Column, TableRow, Color } from '@admiral-ds/react-ui';
+import styled from 'styled-components';
 
 const AmountCell = styled.div`
   text-overflow: ellipsis;
@@ -56,7 +56,6 @@ const rowList: RowData[] = [
     id: '0003',
     // error: true,
     status: 'error',
-    // status: TABLE_ROW_STATUS_ERROR,
     hover: true,
     transfer_type: 'МНО',
     transfer_date: new Date('2020-08-06').toLocaleDateString(),
@@ -72,7 +71,6 @@ const rowList: RowData[] = [
     id: '0004',
     // success: true,
     status: 'success',
-    // status: {name: 'success', background: theme.color['Success/Success 20']},
     hover: true,
     transfer_type: 'МНО',
     transfer_date: new Date('2020-08-06').toLocaleDateString(),
@@ -87,7 +85,6 @@ const rowList: RowData[] = [
   {
     id: '0005',
     status: 'attention',
-    // status: {name: 'attention', background: 'Attention/Attention 20'},
     hover: true,
     transfer_type: 'МНО',
     transfer_date: new Date('2020-08-06').toLocaleDateString(),
@@ -154,7 +151,7 @@ export const RowStateTemplate = (props: TableProps) => {
       columnList={cols}
       displayRowSelectionColumn
       onColumnResize={handleResize}
-      rowStatusMap={{ attention: css`background: ${({theme}) => theme.color['Attention/Attention 20']};`, ...TABLE_ROW_STATUS_MAP }}
+      rowBackgroundColorByStatusMap={{ attention: (color: Color) => color['Attention/Attention 20'] }}
     />
   );
 };

@@ -384,14 +384,14 @@ export const SimpleRow = styled.div<{
   success?: boolean;
   grey?: boolean;
   status?: TableRow['status'];
-  rowStatusMap?: TableProps['rowStatusMap'];
+  rowStatusMap?: TableProps['rowBackgroundColorByStatusMap'];
 }>`
   display: inline-flex;
   min-width: max-content;
 
   & > *,
   & + ${OverflowMenuWrapper} {
-    ${rowBackground}
+    background: ${rowBackground};
   }
 
   ${({ showRowsActions }) =>
@@ -407,7 +407,6 @@ export const SimpleRow = styled.div<{
       }
     `}
 `;
-// background: ${rowBackground};
 
 export const ExpandedRow = styled.div<{ opened?: boolean; contentMaxHeight?: number | string }>`
   display: inline-flex;

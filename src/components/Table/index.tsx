@@ -4,13 +4,13 @@ import { Checkbox } from '#src/components/Checkbox';
 import observeRect from '#src/components/common/observeRect';
 import { useTheme } from 'styled-components';
 import { LIGHT_THEME } from '#src/components/themes';
+import type { Color } from '#src/components/themes';
 import { getScrollbarSize } from '#src/components/common/dom/scrollbarUtil';
 import { GroupRow } from '#src/components/Table/Row/GroupRow';
 import { RegularRow } from '#src/components/Table/Row/RegularRow';
 import { RowWrapper } from '#src/components/Table/Row/RowWrapper';
 import { DropdownContext } from '#src/components/DropdownProvider';
 import { refSetter } from '#src/components/common/utils/refSetter';
-import { css } from 'styled-components';
 import type { FlattenInterpolation, ThemeProps, DefaultTheme } from 'styled-components';
 import { createPortal } from 'react-dom';
 
@@ -125,19 +125,6 @@ export type Column = {
 export type RowId = string | number;
 type IdSelectionStatusMap = Record<RowId, boolean>;
 
-// export type TableRowStatus = 'error' | 'success' | {
-//   name: string;
-//   background: string;
-// }
-
-// export type TableRowStatus = {
-//   name: string;
-//   background: string;
-// };
-
-// export const TABLE_ROW_STATUS_ERROR = { name: 'error', background: 'Error/Error 20' };
-// theme.color[status.background] ? theme.color[status.background] : status.background
-
 export interface TableRow {
   id: RowId;
   className?: string;
@@ -149,20 +136,22 @@ export interface TableRow {
   checkboxDisabled?: boolean;
   // TODO: Удалить в 8.x.x версии
   /**
-   * @deprecated Будет удалено в 8.x.x версии
+   * @deprecated Будет удалено в 8.x.x версии.
    * Взамен используйте параметр status='error'
    * Строка в состоянии error
    **/
   error?: boolean;
   // TODO: Удалить в 8.x.x версии
   /**
-   * @deprecated Будет удалено в 8.x.x версии
+   * @deprecated Будет удалено в 8.x.x версии.
    * Взамен используйте параметр status='success'
    * Строка в состоянии success
    **/
   success?: boolean;
-  /** Status */
-  status?: any;
+  /** Статус строки. По умолчанию таблица предоставляет статусы error и success.
+   * Также пользователь может создать свои кастомные статусы, для этого нужно будет придумать название статуса,
+   * описать его в параметре таблицы rowBackgroundColorByStatusMap и прописать данный статус в объектах строк */
+  status?: string;
   /** Строка в раскрытом состоянии */
   expanded?: boolean;
   /** Окраска строки по Hover. Данная окраска должна применяться, если строка кликабельна и ведет к каким-либо действиям */
@@ -309,8 +298,16 @@ export interface TableProps extends React.HTMLAttributes<HTMLDivElement> {
    * Если nextColumnName равен null, значит столбец передвигают в самый конец списка.
    */
   onColumnDrag?: (columnName: string, nextColumnName: string | null) => void;
-  /** */
-  rowStatusMap?: { [key: string]: FlattenInterpolation<ThemeProps<DefaultTheme>> };
+  /** Объект, который описывает соответствие цвета строки и её статуса.
+   *
+   * Данный параметр нужно применять при создании кастомных статусов строк,
+   * либо при желании перезадать цвета для статусов error и success, предоставляемых таблицей по умолчанию.
+   *
+   * Ключом объекта должно быть название статуса.
+   * Значением свойства объекта должен быть цвет строки, соответствующий статусу, заданному в ключе.
+   * Цвет можно задать либо в виде строки со значением цвета, либо в виде функции,
+   * которая на вход получает объект color (равный theme.color) и возвращает строку со значением цвета. */
+  rowBackgroundColorByStatusMap?: { [key: string]: ((color: Color) => string) | string };
 }
 
 type GroupInfo = {
@@ -327,9 +324,9 @@ type Group = Record<string, GroupInfo>;
 type GroupRows = Record<string, RowInfo>;
 type ZebraRows = Record<string, 'odd' | 'even' | 'ingroup odd' | 'ingroup even' | 'group'>;
 
-export const TABLE_ROW_STATUS_MAP = {
-  error: css`background: ${({theme}) => theme.color['Error/Error 20']};`,
-  success: css`background: ${({theme}) => theme.color['Success/Success 20']};`,
+const TABLE_ROW_STATUS_MAP = {
+  error: (color: Color) => color['Error/Error 20'],
+  success: (color: Color) => color['Success/Success 20'],
 };
 
 export const Table = React.forwardRef<HTMLDivElement, TableProps>(
@@ -364,7 +361,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
       virtualScroll,
       locale,
       onColumnDrag,
-      rowStatusMap = TABLE_ROW_STATUS_MAP,
+      rowBackgroundColorByStatusMap: userRowBackgroundColorByStatusMap,
       ...props
     },
     ref,
@@ -390,6 +387,11 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
     const showRowsActions = React.useMemo(
       () => rowList.some((row) => row.actionRender || row.overflowMenuRender) && userShowRowsActions,
       [rowList, userShowRowsActions],
+    );
+
+    const rowStatusMap = React.useMemo(
+      () => ({ ...TABLE_ROW_STATUS_MAP, ...userRowBackgroundColorByStatusMap }),
+      [userRowBackgroundColorByStatusMap],
     );
 
     const tableRef = React.useRef<HTMLDivElement>(null);

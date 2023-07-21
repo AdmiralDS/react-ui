@@ -29,7 +29,8 @@ export interface RowWrapperProps extends HTMLAttributes<HTMLDivElement> {
   grey?: boolean;
   /** Включение постоянной видимости иконок действий над строками */
   showRowsActions: boolean;
-  rowStatusMap?: TableProps['rowStatusMap'];
+  /** Объект с описанием статусов строки */
+  rowStatusMap?: TableProps['rowBackgroundColorByStatusMap'];
 }
 
 export const RowWrapper = ({
