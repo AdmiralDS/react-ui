@@ -194,8 +194,8 @@ export interface InputExProps extends Omit<InputHTMLAttributes<HTMLInputElement>
   /** Ref контейнера компонента */
   containerRef?: ForwardedRef<HTMLDivElement>;
 
-  /** Ref контейнера относительно которого нужно выравнивать дроп контейнеры,
-   * если не указан выравнивание произойдет относительно контейнера компонента
+  /** Ref контейнера, относительно которого нужно выравнивать дроп контейнеры,
+   * если не указан, выравнивание произойдет относительно контейнера компонента
    */
   alignDropRef?: React.RefObject<HTMLElement>;
 
