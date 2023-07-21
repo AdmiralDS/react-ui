@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState } from 'react';
 import { Tree, TreeNode } from '@admiral-ds/react-ui';
 import type { TreeItemProps, TreeNodeRenderOptionProps, TreeProps } from '@admiral-ds/react-ui';
 import { ReactComponent as FolderSolid } from '@admiral-ds/icons/build/documents/FolderSolid.svg';
@@ -210,10 +210,22 @@ const demo1_TreeModel: Array<TreeItemProps> = [
     id: '4',
     disabled: true,
   },
+  {
+    render: (options: TreeNodeRenderOptionProps) => (
+      <TreeNode
+        {...options}
+        icon={FolderSolid}
+        label={'Текст заголовка, первый уровень компонента, с пустым массивом children'}
+        key={'5'}
+      />
+    ),
+    id: '5',
+    children: [],
+  },
 ];
 
 export const TreeWithCheckboxesTemplate = (props: TreeProps) => {
-  const [dataList, setDataList] = React.useState<TreeItemProps[]>(demo1_TreeModel);
+  const [dataList, setDataList] = useState<TreeItemProps[]>(demo1_TreeModel);
 
   return <Tree {...props} model={dataList} onChange={(dataList) => setDataList(dataList)} />;
 };

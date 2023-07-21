@@ -2,7 +2,7 @@ import * as React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
 import { IconButton, T } from '@admiral-ds/react-ui';
-import type { IconButtonProps, Theme } from '@admiral-ds/react-ui';
+import type { IconButtonProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
 import { ReactComponent as StarSolid } from '@admiral-ds/icons/build/system/StarSolid.svg';
 
 const WrapperIconButton = styled.div`
@@ -23,9 +23,9 @@ const WrapperVertical = styled.div`
   gap: 10px;
 `;
 
-export const IconButtonDimensionTemplate = (props: IconButtonProps) => {
+export const IconButtonDimensionTemplate = (props: IconButtonProps & { themeBorderKind?: BorderRadiusType }) => {
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

@@ -1,8 +1,8 @@
 import * as React from 'react';
 import styled from 'styled-components';
 
-import { MenuItem, MultiButton } from '@admiral-ds/react-ui';
-import type { MultiButtonProps, MultiButtonItem, RenderOptionProps } from '@admiral-ds/react-ui';
+import { MultiButton } from '@admiral-ds/react-ui';
+import type { MultiButtonProps } from '@admiral-ds/react-ui';
 
 const Separator = styled.div`
   width: 20px;
@@ -25,67 +25,67 @@ const handleMainButtonClick = () => {
   console.log('Main button clicked');
 };
 
-const itemsDemo: Array<MultiButtonItem> = [
+const itemsDemo = [
   {
     id: '1',
-    display: 'Option one',
+    render: 'Option one',
   },
   {
     id: '2',
-    display: 'Option two',
+    render: 'Option two',
   },
   {
     id: '3',
-    display: 'Option three',
+    render: 'Option three',
   },
   {
     id: '4',
-    display: 'Option four',
+    render: 'Option four',
   },
   {
     id: '5',
-    display: 'Option five',
+    render: 'Option five',
   },
   {
     id: '6',
-    display: 'Option six',
+    render: 'Option six',
   },
   {
     id: '7',
-    display: 'Option seven',
+    render: 'Option seven',
   },
 ];
 
-const itemsDisabled: Array<MultiButtonItem> = [
+const itemsDisabled = [
   {
     id: '1',
-    display: 'Option one',
+    render: 'Option one',
   },
   {
     id: '2',
-    display: 'Option two',
+    render: 'Option two',
   },
   {
     id: '3',
-    display: 'Option three',
+    render: 'Option three',
     disabled: true,
   },
   {
     id: '4',
-    display: 'Option four',
+    render: 'Option four',
   },
   {
     id: '5',
-    display: 'Option five',
+    render: 'Option five',
     disabled: true,
   },
   {
     id: '6',
-    display: 'Option six',
+    render: 'Option six',
   },
   {
     id: '7',
-    display: 'Option seven',
+    render: 'Option seven',
   },
 ];
 
@@ -94,15 +94,7 @@ export const MultiButtonDisabledTemplate = (props: MultiButtonProps) => {
   const [selected2, setSelected2] = React.useState<string | undefined>(undefined);
 
   const model = React.useMemo(() => {
-    return itemsDisabled.slice(1, itemsDisabled.length).map((item) => ({
-      id: item.id,
-      render: (items: RenderOptionProps) => (
-        <MenuItem dimension={props.dimension === 'xl' ? 'l' : props.dimension} {...items} key={item.id}>
-          {item.display}
-        </MenuItem>
-      ),
-      disabled: item.disabled,
-    }));
+    return itemsDisabled.slice(1, itemsDisabled.length);
   }, [props.dimension, itemsDisabled]);
 
   return (
@@ -121,7 +113,7 @@ export const MultiButtonDisabledTemplate = (props: MultiButtonProps) => {
           onVisibilityChange={handleVisibilityChange}
           onMainButtonClick={handleMainButtonClick}
         >
-          {itemsDemo[0].display}
+          {itemsDemo[0].render}
         </MultiButton>
         <Separator />
         <MultiButton
@@ -137,7 +129,7 @@ export const MultiButtonDisabledTemplate = (props: MultiButtonProps) => {
           onVisibilityChange={handleVisibilityChange}
           onMainButtonClick={handleMainButtonClick}
         >
-          {itemsDemo[0].display}
+          {itemsDemo[0].render}
         </MultiButton>
       </div>
     </>

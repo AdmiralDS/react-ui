@@ -2,7 +2,7 @@ import * as React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
 import { MenuItem, TextButtonMenu } from '@admiral-ds/react-ui';
-import type { TextButtonMenuProps, RenderOptionProps, Theme } from '@admiral-ds/react-ui';
+import type { TextButtonMenuProps, RenderOptionProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
 
 const Wrapper = styled.div`
   display: flex;
@@ -52,7 +52,10 @@ const items = [
   },
 ];
 
-export const TextButtonMenuPlaygroundTemplate = ({ text = 'Text Button', ...props }: TextButtonMenuProps) => {
+export const TextButtonMenuPlaygroundTemplate = ({
+  text = 'Text Button',
+  ...props
+}: TextButtonMenuProps & { themeBorderKind?: BorderRadiusType }) => {
   const [selected, setSelected] = React.useState<string | undefined>(undefined);
   const model = React.useMemo(() => {
     return items.map((item) => ({
@@ -67,7 +70,7 @@ export const TextButtonMenuPlaygroundTemplate = ({ text = 'Text Button', ...prop
   }, [props.dimension]);
 
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

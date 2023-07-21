@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useState } from 'react';
 import { NumberInput, clearValue } from '@admiral-ds/react-ui';
 
 function declOfNum(n: number, text_forms: Array<string>) {
@@ -17,9 +17,9 @@ function declOfNum(n: number, text_forms: Array<string>) {
 }
 
 export const NumberInputControlledTemplate = () => {
-  const [value1, setValue1] = React.useState<string | undefined>('50.00');
-  const [value2, setValue2] = React.useState<string | undefined>('1');
-  const [suffix, setSuffix] = React.useState('минута');
+  const [value1, setValue1] = useState<string | undefined>('50.00');
+  const [value2, setValue2] = useState<string | undefined>('1');
+  const [suffix, setSuffix] = useState('минута');
 
   return (
     <>

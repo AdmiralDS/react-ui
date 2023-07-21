@@ -45,6 +45,13 @@ const demo2_TreeModel: Array<TreeItemProps> = [
     ),
     id: '4',
   },
+  {
+    render: (options: TreeNodeRenderOptionProps) => (
+      <TreeNode key={'5'} icon={FolderSolid} label={'Первый уровень с пустым массивом children'} {...options} />
+    ),
+    children: [],
+    id: '5',
+  },
 ];
 
 const StyledTree = styled(Tree)`

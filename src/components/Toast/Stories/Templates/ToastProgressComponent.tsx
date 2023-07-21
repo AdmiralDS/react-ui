@@ -14,7 +14,14 @@ import {
   ToastProvider,
   useToast,
 } from '@admiral-ds/react-ui';
-import type { ID, Theme, ToastItemProps, ToastProps, NotificationItemStatus } from '@admiral-ds/react-ui';
+import type {
+  ID,
+  Theme,
+  ToastItemProps,
+  ToastProps,
+  NotificationItemStatus,
+  BorderRadiusType,
+} from '@admiral-ds/react-ui';
 
 import { uid } from '#src/components/common/uid';
 
@@ -111,9 +118,9 @@ const MessageForm = () => {
   );
 };
 
-export const ToastProgressComponentTemplate = (props: ToastProps) => {
+export const ToastProgressComponentTemplate = (props: ToastProps & { themeBorderKind?: BorderRadiusType }) => {
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

@@ -10,7 +10,7 @@ import {
   TextInput,
   TextButton,
 } from '@admiral-ds/react-ui';
-import type { Theme, MenuProps } from '@admiral-ds/react-ui';
+import type { Theme, MenuProps, BorderRadiusType } from '@admiral-ds/react-ui';
 import type { ChangeEvent } from 'react';
 import { uid } from '#src/components/common/uid';
 import { ReactComponent as PlusOutline } from '@admiral-ds/icons/build/service/PlusOutline.svg';
@@ -68,7 +68,7 @@ const Wrapper = styled.div`
   ${(p) => p.theme.shadow['Shadow 08']}
 `;
 
-export const MenuActionsAddUserValueTemplate = (props: MenuProps) => {
+export const MenuActionsAddUserValueTemplate = (props: MenuProps & { themeBorderKind?: BorderRadiusType }) => {
   const initialButtonText = 'Добавить';
   const theme = useTheme() || LIGHT_THEME;
 
@@ -123,7 +123,7 @@ export const MenuActionsAddUserValueTemplate = (props: MenuProps) => {
   const menuPanelContentDimension = props.dimension === undefined || props.dimension === 'l' ? 'm' : props.dimension;
 
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

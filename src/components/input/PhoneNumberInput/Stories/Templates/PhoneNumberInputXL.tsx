@@ -9,7 +9,7 @@ export const PhoneNumberInputXLTemplate = ({
   defaultCountry = 'RUS',
   value = '+7 123 456 78 90',
   ...props
-}: PhoneNumberInputProps & { themeBorderKind: BorderRadiusType }) => {
+}: PhoneNumberInputProps & { themeBorderKind?: BorderRadiusType }) => {
   const [localValue, setValue] = React.useState<string>(value ?? '');
 
   React.useEffect(() => {

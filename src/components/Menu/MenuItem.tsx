@@ -29,15 +29,12 @@ export interface RenderOptionProps {
 
 export interface MenuModelItemProps {
   id: string;
-  render: (options: RenderOptionProps) => React.ReactNode;
+  render: ((options: RenderOptionProps) => React.ReactNode) | React.ReactNode;
   disabled?: boolean;
   readOnly?: boolean;
   subItems?: Array<MenuModelItemProps>;
   expandIcon?: React.ReactNode;
 }
-
-/** @deprecated use MenuModeItemProps instead */
-export type ItemProps = MenuModelItemProps;
 
 export interface MenuItemProps extends HTMLAttributes<HTMLDivElement>, RenderOptionProps {
   /** Размер MenuItems */

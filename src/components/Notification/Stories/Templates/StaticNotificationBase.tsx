@@ -2,7 +2,7 @@ import * as React from 'react';
 import { ThemeProvider } from 'styled-components';
 
 import { Notification } from '@admiral-ds/react-ui';
-import type { NotificationProps, Theme } from '@admiral-ds/react-ui';
+import type { NotificationProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
 
 const bodyDefault = 'Тут находится текст короткого оповещения';
 const titleDefault = 'Заголовок оповещения';
@@ -17,9 +17,9 @@ export const StaticNotificationBaseTemplate = ({
   displayStatusIcon = true,
   isClosable = true,
   ...props
-}: NotificationProps) => {
+}: NotificationProps & { themeBorderKind?: BorderRadiusType }) => {
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

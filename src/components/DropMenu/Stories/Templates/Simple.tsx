@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import { Button, DropMenu, MenuItem } from '@admiral-ds/react-ui';
-import type { DropMenuProps, RenderOptionProps, Theme } from '@admiral-ds/react-ui';
+import type { DropMenuProps, RenderOptionProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
 
 const STORY_ITEMS = [
   {
@@ -66,7 +66,7 @@ const handleVisibilityChangeUnControlledState = (isVisible: boolean) => {
   }
 };
 
-export const SimpleTemplate = (props: DropMenuProps) => {
+export const SimpleTemplate = (props: DropMenuProps & { themeBorderKind?: BorderRadiusType }) => {
   const [selected, setSelected] = React.useState<string | undefined>(undefined);
 
   const model = React.useMemo(() => {
@@ -81,7 +81,7 @@ export const SimpleTemplate = (props: DropMenuProps) => {
   }, [props.dimension]);
 
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

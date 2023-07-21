@@ -2,7 +2,7 @@ import * as React from 'react';
 import { css, ThemeProvider } from 'styled-components';
 
 import { Calendar, weekendMixin } from '@admiral-ds/react-ui';
-import type { CalendarPropType, Theme } from '@admiral-ds/react-ui';
+import type { CalendarPropType, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
 
 const startOfDay = (date: Date): Date => {
   date.setHours(0, 0, 0, 0);
@@ -274,12 +274,12 @@ const holidayDates = new Map(
   }),
 );
 
-export const SimpleWithSpecialDatesTemplate = (props: CalendarPropType) => {
+export const SimpleWithSpecialDatesTemplate = (props: CalendarPropType & { themeBorderKind?: BorderRadiusType }) => {
   const [selected, setSelected] = React.useState<Date | null>(null);
   const [endDate, setEndDate] = React.useState<Date | null>(null);
 
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

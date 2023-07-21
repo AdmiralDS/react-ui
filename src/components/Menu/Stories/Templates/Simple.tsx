@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import { Menu, MenuItem, mediumGroupBorderRadius } from '@admiral-ds/react-ui';
-import type { Theme, MenuProps, RenderOptionProps } from '@admiral-ds/react-ui';
+import type { Theme, MenuProps, RenderOptionProps, BorderRadiusType } from '@admiral-ds/react-ui';
 
 type StoryItem = {
   id: string;
@@ -62,7 +62,7 @@ const Container = styled.div`
   column-gap: 50px;
 `;
 
-export const SimpleTemplate = (props: MenuProps) => {
+export const SimpleTemplate = (props: MenuProps & { themeBorderKind?: BorderRadiusType }) => {
   const model = React.useMemo(() => {
     return STORY_ITEMS.map((item) => ({
       id: item.id,
@@ -75,7 +75,7 @@ export const SimpleTemplate = (props: MenuProps) => {
   }, [props.dimension]);
 
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

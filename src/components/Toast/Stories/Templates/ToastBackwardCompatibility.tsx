@@ -2,7 +2,7 @@ import * as React from 'react';
 import { ThemeProvider } from 'styled-components';
 
 import { Button, Toast, ToastProvider, useToast } from '@admiral-ds/react-ui';
-import type { IdentifyToast, Theme, ToastProps } from '@admiral-ds/react-ui';
+import type { IdentifyToast, Theme, ToastProps, BorderRadiusType } from '@admiral-ds/react-ui';
 
 const random = (min: number, max: number) => min + Number(Math.round(Math.random() * (max - min)));
 
@@ -72,9 +72,9 @@ const NotificationEmitter = () => {
   );
 };
 
-export const ToastBackwardCompatibilityTemplate = (props: ToastProps) => {
+export const ToastBackwardCompatibilityTemplate = (props: ToastProps & { themeBorderKind?: BorderRadiusType }) => {
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

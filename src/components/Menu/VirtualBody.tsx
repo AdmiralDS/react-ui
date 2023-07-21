@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import type { ItemProps } from '#src/components/Menu/MenuItem';
+import { MenuItem, type MenuModelItemProps } from '#src/components/Menu/MenuItem';
 
 const Spacer = styled.div`
   display: flex;
@@ -21,7 +21,7 @@ interface VirtualBodyProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Обработчик выбора item в меню */
   onSelectItem: (id: string) => void;
   /** Модель данных, с рендер-пропсами*/
-  model: Array<ItemProps>;
+  model: Array<MenuModelItemProps>;
   /** Id активного элемента */
   activeId?: string;
   /** Id выбранного элемента */
@@ -138,8 +138,8 @@ export const VirtualBody = ({
   const visibleChildren = React.useMemo(() => {
     const visibleItems = [...model].slice(partition.startIndex, partition.endIndex);
 
-    return visibleItems.map(({ id, render, ...itemProps }) =>
-      render({
+    return visibleItems.map(({ id, render, ...itemProps }, index) => {
+      const renderProps = {
         hovered: activeId === id,
         selected: selectedId === id,
         onHover: () => {
@@ -148,8 +148,14 @@ export const VirtualBody = ({
         onClickItem: () => onSelectItem(id),
         containerRef: scrollContainerRef,
         ...itemProps,
-      }),
-    );
+      };
+      if (typeof render === 'function') return render(renderProps);
+      return (
+        <MenuItem key={`${id}-${index}`} {...renderProps}>
+          {render}
+        </MenuItem>
+      );
+    });
   }, [model, activeId, onActivateItem, selectedId, onSelectItem, scrollContainerRef, partition]);
 
   return (

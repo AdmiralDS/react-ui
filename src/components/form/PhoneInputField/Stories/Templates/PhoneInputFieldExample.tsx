@@ -3,12 +3,12 @@ import type { ChangeEvent } from 'react';
 import { ThemeProvider } from 'styled-components';
 
 import { PhoneInputField } from '@admiral-ds/react-ui';
-import type { PhoneInputFieldProps, Theme } from '@admiral-ds/react-ui';
+import type { PhoneInputFieldProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
 
 export const PhoneInputFieldExampleTemplate = ({
   label = 'Введите номер телефона',
   ...props
-}: PhoneInputFieldProps) => {
+}: PhoneInputFieldProps & { themeBorderKind?: BorderRadiusType }) => {
   const cleanProps = (Object.keys(props) as Array<keyof typeof props>).reduce(
     (acc, key) => {
       if (props[key] !== undefined) acc[key] = props[key];
@@ -33,7 +33,7 @@ export const PhoneInputFieldExampleTemplate = ({
   };
 
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

@@ -1,17 +1,15 @@
-import type { CSSProperties, MouseEvent, ReactNode, HTMLAttributes } from 'react';
+import type { CSSProperties, MouseEvent, HTMLAttributes } from 'react';
 import * as React from 'react';
 import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import styled, { css } from 'styled-components';
 import { Button } from '#src/components/Button';
 import type { Shape } from '#src/components/themes/common';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
-import type { ItemProps, RenderOptionProps } from '#src/components/Menu/MenuItem';
-import { MenuItem } from '#src/components/Menu/MenuItem';
+import type { MenuModelItemProps } from '#src/components/Menu/MenuItem';
 import type { DropMenuComponentProps } from '#src/components/DropMenu';
 import { DropMenu } from '#src/components/DropMenu';
 import { skeletonAnimationMixin } from '#src/components/skeleton/animation';
 import { passDropdownDataAttributes } from '#src/components/common/utils/splitDataAttributes';
-import { uid } from '#src/components/common/uid';
 
 function mainButtonBorderRadius(shape: Shape): string {
   const radius = mediumGroupBorderRadius(shape);
@@ -68,7 +66,7 @@ const Separator = styled.div<SeparatorProps>`
       disabled ? theme.color['Neutral/Neutral 30'] : theme.color['Primary/Primary 60 Main']};
   }
 
-  ${({ skeleton }) => skeleton && skeletonAnimationMixin}};
+  ${({ skeleton }) => skeleton && skeletonAnimationMixin};
 `;
 
 const Wrapper = styled.div`
@@ -83,24 +81,9 @@ interface SeparatorProps {
   skeleton?: boolean;
 }
 
-export interface MultiButtonItem extends HTMLAttributes<HTMLElement> {
-  /** Содержимое опции, предназначенное для отображения */
-  display: ReactNode;
-  /** Уникальный идентификатор опции */
-  id: string;
-  /** Отключение опции */
-  disabled?: boolean;
-}
-
 export interface MultiButtonProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'>, DropMenuComponentProps {
   /** Опции выпадающего списка */
-  items?: Array<ItemProps>;
-  /**
-   * Массив опций
-   *
-   * @deprecated Do not use! Use `items` instead!
-   */
-  options?: Array<MultiButtonItem>;
+  items?: Array<MenuModelItemProps>;
   /** Id выбранной опции списка */
   selected?: string;
   /** Колбек на нажатие основной кнопки */
@@ -140,8 +123,7 @@ export const MultiButton = React.forwardRef<HTMLButtonElement, MultiButtonProps>
       dimension = 'l',
       appearance = 'primary',
       disabled,
-      items,
-      options,
+      items = [],
       onMainButtonClick,
       disableSelectedOptionHighlight,
       selected,
@@ -169,20 +151,6 @@ export const MultiButton = React.forwardRef<HTMLButtonElement, MultiButtonProps>
     const menuDimension = dimension === 'xl' ? 'l' : dimension;
     const menuWidth = dimension === 's' ? '240px' : '280px';
 
-    const model = React.useMemo(() => {
-      return options
-        ? options.slice(1, options.length).map((item) => ({
-            id: item.id,
-            render: (items: RenderOptionProps) => (
-              <MenuItem dimension={menuDimension} {...items} key={item.id}>
-                {item.display}
-              </MenuItem>
-            ),
-            disabled: item.disabled,
-          }))
-        : [];
-    }, [dimension, options]);
-
     const handleWrapperFocus = () => {
       wrapperRef.current?.setAttribute('data-focused', 'true');
     };
@@ -197,7 +165,7 @@ export const MultiButton = React.forwardRef<HTMLButtonElement, MultiButtonProps>
         dimension={menuDimension}
         menuWidth={menuWidth}
         menuMaxHeight={menuMaxHeight}
-        items={items || model}
+        items={items}
         disableSelectedOptionHighlight={disableSelectedOptionHighlight}
         selected={selected}
         onSelectItem={onSelectItem}
@@ -229,17 +197,12 @@ export const MultiButton = React.forwardRef<HTMLButtonElement, MultiButtonProps>
                 skeleton={skeleton}
                 dimension={dimension}
                 appearance={appearance}
-                disabled={disabled ? disabled : options ? options[0].disabled : false} //TODO: remove after removing deprecated options
+                disabled={disabled}
                 onClick={onMainButtonClick}
               >
-                {/*TODO: remove after removing deprecated options*/}
-                {children
-                  ? React.Children.toArray(children).map((child) =>
-                      typeof child === 'string' ? <span key={uid()}>{child}</span> : child,
-                    )
-                  : options
-                  ? options[0].display
-                  : ''}
+                {React.Children.toArray(children).map((child, index) =>
+                  typeof child === 'string' ? <span key={`${child}-${index}`}>{child}</span> : child,
+                )}
               </MainButton>
               <Separator disabled={disabled} skeleton={skeleton} data-appearance={appearance} aria-hidden />
               <MenuButton

@@ -2,7 +2,7 @@ import * as React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
 import { DateField } from '@admiral-ds/react-ui';
-import type { DateFieldProps, Theme } from '@admiral-ds/react-ui';
+import type { DateFieldProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
 
 const FormContainer = styled.form`
   > * {
@@ -10,7 +10,10 @@ const FormContainer = styled.form`
   }
 `;
 
-export const DateFieldBaseTemplate = ({ label = 'Label', ...props }: DateFieldProps) => {
+export const DateFieldBaseTemplate = ({
+  label = 'Label',
+  ...props
+}: DateFieldProps & { themeBorderKind?: BorderRadiusType }) => {
   const [localValue, setValue] = React.useState<string>('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -36,7 +39,7 @@ export const DateFieldBaseTemplate = ({ label = 'Label', ...props }: DateFieldPr
   };
 
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

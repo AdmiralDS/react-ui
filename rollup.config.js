@@ -5,6 +5,9 @@ import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import svgr from '@svgr/rollup';
 import url from '@rollup/plugin-url';
 import terser from '@rollup/plugin-terser';
+import { createTransformer } from 'typescript-plugin-styled-components';
+
+const styledComponentsTransformer = createTransformer({ ssr: true, displayName: true });
 
 export default [
   {
@@ -12,10 +15,11 @@ export default [
     output: [
       {
         dir: 'dist',
-        format: 'esm',
+        format: 'es',
         preserveModules: true,
         preserveModulesRoot: 'src',
         sourcemap: true,
+        interop: 'auto',
       },
     ],
     plugins: [
@@ -31,8 +35,13 @@ export default [
       commonjs(),
       typescript({
         exclude: ['*/**/*.stories.*', 'src/**/Stories/**', '*/**/*.test.*', 'src/colors/**', 'src/icons/**'],
+        transformers: [
+          () => ({
+            before: [styledComponentsTransformer],
+          }),
+        ],
       }),
-      terser(),
+      terser({ ecma: '2021', mangle: false }),
     ],
   },
 ];

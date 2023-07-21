@@ -1,8 +1,8 @@
 import * as React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
-import { MenuItem, MultiButton } from '@admiral-ds/react-ui';
-import type { MultiButtonProps, RenderOptionProps, Theme, MultiButtonItem } from '@admiral-ds/react-ui';
+import { MultiButton } from '@admiral-ds/react-ui';
+import type { MultiButtonProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
 
 const Separator = styled.div`
   width: 20px;
@@ -25,56 +25,48 @@ const logSelectedId = (id: string) => {
   console.log(`selected: ${id}`);
 };
 
-const itemsDemo: Array<MultiButtonItem> = [
+const itemsDemo = [
   {
     id: '1',
-    display: 'Option one',
+    render: 'Option one',
   },
   {
     id: '2',
-    display: 'Option two',
+    render: 'Option two',
   },
   {
     id: '3',
-    display: 'Option three',
+    render: 'Option three',
   },
   {
     id: '4',
-    display: 'Option four',
+    render: 'Option four',
   },
   {
     id: '5',
-    display: 'Option five',
+    render: 'Option five',
   },
   {
     id: '6',
-    display: 'Option six',
+    render: 'Option six',
   },
   {
     id: '7',
-    display: 'Option seven',
+    render: 'Option seven',
   },
 ];
 
-export const MultiButtonAppearanceTemplate = (props: MultiButtonProps) => {
+export const MultiButtonAppearanceTemplate = (props: MultiButtonProps & { themeBorderKind?: BorderRadiusType }) => {
   const [selected, setSelected] = React.useState<string | undefined>(undefined);
   const [selected2, setSelected2] = React.useState<string | undefined>(undefined);
 
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 
   const model = React.useMemo(() => {
-    return itemsDemo.slice(1, itemsDemo.length).map((item) => ({
-      id: item.id,
-      render: (items: RenderOptionProps) => (
-        <MenuItem dimension={props.dimension === 'xl' ? 'l' : props.dimension} {...items} key={item.id}>
-          {item.display}
-        </MenuItem>
-      ),
-      disabled: item.disabled,
-    }));
+    return itemsDemo.slice(1, itemsDemo.length);
   }, [props.dimension, itemsDemo]);
 
   return (
@@ -88,7 +80,7 @@ export const MultiButtonAppearanceTemplate = (props: MultiButtonProps) => {
             logSelectedId(id);
             setSelected(id);
           }}
-          items={model}
+          items={itemsDemo.slice(1, itemsDemo.length)}
           onVisibilityChange={handleVisibilityChange}
           data-dropdown-container-id="first-multi-button-with-dropdown"
           className="multi-button-class"
@@ -96,7 +88,7 @@ export const MultiButtonAppearanceTemplate = (props: MultiButtonProps) => {
           dropContainerClassName="dropContainerClass"
           dropContainerStyle={{ width: '250px' }}
         >
-          {itemsDemo[0].display}
+          {itemsDemo[0].render}
         </MultiButton>
         <Separator />
         <MultiButton
@@ -114,7 +106,7 @@ export const MultiButtonAppearanceTemplate = (props: MultiButtonProps) => {
           dropContainerClassName="dropContainerClass"
           dropContainerStyle={{ width: '250px' }}
         >
-          {itemsDemo[0].display}
+          {itemsDemo[0].render}
         </MultiButton>
       </div>
     </ThemeProvider>

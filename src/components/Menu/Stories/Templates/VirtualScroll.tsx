@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Menu, MenuItem, mediumGroupBorderRadius } from '@admiral-ds/react-ui';
-import type { MenuProps, RenderOptionProps, Theme } from '@admiral-ds/react-ui';
+import type { MenuProps, RenderOptionProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
 import styled, { ThemeProvider } from 'styled-components';
 import { createItems } from './utils';
 
@@ -13,7 +13,7 @@ const Wrapper = styled.div`
   ${(p) => p.theme.shadow['Shadow 08']}
 `;
 
-export const VirtualScrollTemplate = (props: MenuProps) => {
+export const VirtualScrollTemplate = (props: MenuProps & { themeBorderKind?: BorderRadiusType }) => {
   const model = React.useMemo(() => {
     return ITEMS.map((item) => ({
       id: item.id,
@@ -26,7 +26,7 @@ export const VirtualScrollTemplate = (props: MenuProps) => {
   }, [props.dimension]);
 
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

@@ -2,7 +2,7 @@ import * as React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
 import { CheckboxField, Hint } from '@admiral-ds/react-ui';
-import type { CheckboxFieldProps, Theme, CheckboxDimension } from '@admiral-ds/react-ui';
+import type { CheckboxFieldProps, Theme, CheckboxDimension, BorderRadiusType } from '@admiral-ds/react-ui';
 import { ReactComponent as InfoSolidSVG } from '@admiral-ds/icons/build/service/InfoSolid.svg';
 
 const Container = styled.div`
@@ -34,7 +34,7 @@ const CheckboxWithInformer = styled.div`
   align-items: flex-start;
 `;
 
-export const CheckboxFieldBaseTemplate = (props: CheckboxFieldProps) => {
+export const CheckboxFieldBaseTemplate = (props: CheckboxFieldProps & { themeBorderKind?: BorderRadiusType }) => {
   const [checked, setChecked] = React.useState<boolean>(props.checked ?? false);
 
   const [visible1, setVisible1] = React.useState(false);
@@ -47,7 +47,7 @@ export const CheckboxFieldBaseTemplate = (props: CheckboxFieldProps) => {
   }, [props.checked]);
 
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

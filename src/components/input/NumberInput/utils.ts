@@ -8,7 +8,13 @@ export const repeatStringNumTimes = (str: string, n: number) => {
   return repeatedString;
 };
 
-// возвращает входную строку str, из которой удалены все символы кроме цифр, символа decimal (по умолчанию точки) и минуса
+/**
+ * Возвращает входную строку str, из которой удалены все символы кроме цифр, символа decimal (по умолчанию точки) и минуса
+ * @param str входная строка
+ * @param precision точность (количество знаков после точки)
+ * @param decimal десятичный разделитель (по умолчанию точка)
+ * @param minValue если minValue >= 0, то при форматировании из строки будут удалены знаки минуса
+ */
 export const clearValue = (str: string, precision: number, decimal = '.', minValue?: number) => {
   let validChars =
     precision > 0

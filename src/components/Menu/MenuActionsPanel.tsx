@@ -2,7 +2,7 @@ import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-comp
 import styled from 'styled-components';
 import type { MenuDimensions } from '#src/components/Menu/index';
 import { getTextHighlightMeta } from '#src/components/common/utils/getTextHighlightMeta';
-import type { ItemProps, RenderOptionProps } from '#src/components/Menu/MenuItem';
+import type { RenderOptionProps, MenuModelItemProps } from '#src/components/Menu/MenuItem';
 import { MenuItem } from '#src/components/Menu/MenuItem';
 import * as React from 'react';
 import type { ItemDimension } from '#src/components/Menu/menuItemMixins';
@@ -50,7 +50,7 @@ export function getHighlightedFilteredOptions(
   dimension?: ItemDimension,
   highlightFunction = getTextHighlightMeta,
 ) {
-  const model: ItemProps[] = [];
+  const model: MenuModelItemProps[] = [];
 
   options.forEach((option) => {
     const { shouldHighlight, parts, chunks } = highlightFunction(option.label, searchValue, 'wholly');

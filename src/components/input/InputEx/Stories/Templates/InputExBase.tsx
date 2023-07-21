@@ -12,7 +12,7 @@ const Separator = styled.div`
 export const InputExBaseTemplate = ({
   placeholder = 'Placeholder',
   ...props
-}: InputExProps & { themeBorderKind: BorderRadiusType }) => {
+}: InputExProps & { themeBorderKind?: BorderRadiusType }) => {
   const [localValueOne, setValueOne] = React.useState<string>(
     props.value ? String(props.value) : 'Вариант с префиксом',
   );

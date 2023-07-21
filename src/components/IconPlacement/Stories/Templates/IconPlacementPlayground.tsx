@@ -2,7 +2,7 @@ import * as React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
 import { IconPlacement, T } from '@admiral-ds/react-ui';
-import type { IconPlacementProps, Theme } from '@admiral-ds/react-ui';
+import type { IconPlacementProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
 import { ReactComponent as CloseOutline } from '@admiral-ds/icons/build/service/CloseOutline.svg';
 
 const WrapperVertical = styled.div`
@@ -18,9 +18,9 @@ export const IconPlacementPlaygroundTemplate = ({
   disabled = false,
   highlightFocus = false,
   ...props
-}: IconPlacementProps) => {
+}: IconPlacementProps & { themeBorderKind?: BorderRadiusType }) => {
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
     console.log(`Current border ${theme.shape.borderRadiusKind}`);
     return theme;
   }

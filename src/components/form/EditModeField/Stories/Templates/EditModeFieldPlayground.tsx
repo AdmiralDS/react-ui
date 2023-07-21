@@ -1,10 +1,13 @@
 import * as React from 'react';
 
 import { EditModeField } from '@admiral-ds/react-ui';
-import type { EditModeFieldProps, Theme } from '@admiral-ds/react-ui';
+import type { EditModeFieldProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
 import { ThemeProvider } from 'styled-components';
 
-export const EditModeFieldPlaygroundTemplate = ({ value = 'Admin', ...props }: EditModeFieldProps) => {
+export const EditModeFieldPlaygroundTemplate = ({
+  value = 'Admin',
+  ...props
+}: EditModeFieldProps & { themeBorderKind?: BorderRadiusType }) => {
   const [localValue, setValue] = React.useState<string>(String(value) ?? '');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -14,7 +17,7 @@ export const EditModeFieldPlaygroundTemplate = ({ value = 'Admin', ...props }: E
   };
 
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

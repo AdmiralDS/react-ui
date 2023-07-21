@@ -2,7 +2,7 @@ import * as React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
 import { Field, TextInput } from '@admiral-ds/react-ui';
-import type { FieldProps, Theme } from '@admiral-ds/react-ui';
+import type { FieldProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
 
 const Container = styled.div`
   > *:not(:first-child) {
@@ -14,9 +14,9 @@ export const FieldWithTextInputTemplate = ({
   label = 'some label of wrapped component',
   id = 'props_id',
   ...props
-}: FieldProps) => {
+}: FieldProps & { themeBorderKind?: BorderRadiusType }) => {
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (props as any).themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 
