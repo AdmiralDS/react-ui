@@ -1,14 +1,8 @@
 import * as React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
-import { MenuItem, MultiButton } from '@admiral-ds/react-ui';
-import type {
-  MultiButtonProps,
-  MultiButtonItem,
-  RenderOptionProps,
-  Theme,
-  BorderRadiusType,
-} from '@admiral-ds/react-ui';
+import { MultiButton } from '@admiral-ds/react-ui';
+import type { MultiButtonProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
 import { ReactComponent as BonusSolid } from '@admiral-ds/icons/build/category/BonusSolid.svg';
 
 const Separator = styled.div`
@@ -32,34 +26,34 @@ const handleMainButtonClick = () => {
   console.log('Main button clicked');
 };
 
-const itemsDemo: Array<MultiButtonItem> = [
+const itemsDemo = [
   {
     id: '1',
-    display: 'Option one',
+    render: 'Option one',
   },
   {
     id: '2',
-    display: 'Option two',
+    render: 'Option two',
   },
   {
     id: '3',
-    display: 'Option three',
+    render: 'Option three',
   },
   {
     id: '4',
-    display: 'Option four',
+    render: 'Option four',
   },
   {
     id: '5',
-    display: 'Option five',
+    render: 'Option five',
   },
   {
     id: '6',
-    display: 'Option six',
+    render: 'Option six',
   },
   {
     id: '7',
-    display: 'Option seven',
+    render: 'Option seven',
   },
 ];
 
@@ -72,18 +66,6 @@ export const MultiButtonIconTemplate = (props: MultiButtonProps & { themeBorderK
     return theme;
   }
 
-  const model = React.useMemo(() => {
-    return itemsDemo.map((item) => ({
-      id: item.id,
-      render: (items: RenderOptionProps) => (
-        <MenuItem dimension={props.dimension === 'xl' ? 'l' : props.dimension} {...items} key={item.id}>
-          {item.display}
-        </MenuItem>
-      ),
-      disabled: item.disabled,
-    }));
-  }, [props.dimension, itemsDemo]);
-
   return (
     <ThemeProvider theme={swapBorder}>
       <div style={{ display: 'flex' }}>
@@ -95,7 +77,7 @@ export const MultiButtonIconTemplate = (props: MultiButtonProps & { themeBorderK
             logSelectedId(id);
             setSelected(id);
           }}
-          items={model}
+          items={itemsDemo}
           onVisibilityChange={handleVisibilityChange}
           data-dropdown-container-id="first-multi-button-with-dropdown"
           className="multi-button-class"
@@ -113,7 +95,7 @@ export const MultiButtonIconTemplate = (props: MultiButtonProps & { themeBorderK
             logSelectedId(id);
             setSelected2(id);
           }}
-          items={model}
+          items={itemsDemo}
           onVisibilityChange={handleVisibilityChange}
           data-dropdown-container-id="second-multi-button-with-dropdown"
           onMainButtonClick={handleMainButtonClick}
@@ -133,7 +115,7 @@ export const MultiButtonIconTemplate = (props: MultiButtonProps & { themeBorderK
             logSelectedId(id);
             setSelected(id);
           }}
-          items={model}
+          items={itemsDemo}
           onVisibilityChange={handleVisibilityChange}
           data-dropdown-container-id="first-multi-button-with-dropdown"
           className="multi-button-class"
@@ -152,7 +134,7 @@ export const MultiButtonIconTemplate = (props: MultiButtonProps & { themeBorderK
             logSelectedId(id);
             setSelected2(id);
           }}
-          items={model}
+          items={itemsDemo}
           onVisibilityChange={handleVisibilityChange}
           data-dropdown-container-id="second-multi-button-with-dropdown"
           onMainButtonClick={handleMainButtonClick}

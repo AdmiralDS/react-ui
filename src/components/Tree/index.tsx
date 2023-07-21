@@ -39,23 +39,26 @@ type NodesMapItem = {
 
 type NodesMap = { [key: string]: NodesMapItem };
 
+const itemHasChildren = (item: TreeItemProps) =>
+  !!item.children && Array.isArray(item.children) && item.children.length > 0;
+
 const treeToMap = (
   tree: Array<TreeItemProps>,
   level = 0,
   indent = 0,
   dependencies?: Array<Array<string>>,
 ): NodesMap => {
-  const levelHasChildren = tree.some((item) => !!item.children);
+  const levelHasChildren = tree.some((item) => itemHasChildren(item));
 
   return tree.reduce((acc: NodesMap, item) => {
     const key = item.id.toString();
-    const selfIndent = levelHasChildren && !!item.children ? indent : indent + 1;
+    const selfIndent = levelHasChildren && itemHasChildren(item) ? indent : indent + 1;
     acc[key] = { level, indent: selfIndent, node: item };
 
-    if (dependencies && !item.children) {
+    if (dependencies && !itemHasChildren(item)) {
       dependencies.forEach((dependency) => dependency.push(key));
     }
-    if (item.children) {
+    if (item.children && itemHasChildren(item)) {
       const allDependencies = dependencies ? [...dependencies] : [];
       const itemDependencies: Array<string> = [];
       acc[key].dependencies = itemDependencies;
@@ -135,7 +138,7 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps>(
     };
 
     const toggleCheck = (id: string | number) => {
-      const hasChildren = !!map[id].node.children;
+      const hasChildren = itemHasChildren(map[id].node);
 
       const indeterminate =
         map[id].dependencies?.some((depId: number | string) => map[depId].node.checked) &&
@@ -159,7 +162,7 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps>(
     const renderChildren = (items: Array<TreeItemProps>): React.ReactNode => {
       return items.map((item) => {
         const node = map[item.id];
-        const hasChildren = !!item.children;
+        const hasChildren = itemHasChildren(item);
         const indeterminate =
           node.dependencies?.some((depId: number | string) => map[depId].node.checked) &&
           node.dependencies?.some((depId: number | string) => !map[depId].node.checked);
@@ -187,7 +190,7 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps>(
               onClickItem: () => selectItem(item.id),
               onToggleExpand: () => toggleExpand(item.id),
             })}
-            {item.children && item.expanded && renderChildren(item.children)}
+            {item.children && hasChildren && item.expanded && renderChildren(item.children)}
           </React.Fragment>
         );
       });
