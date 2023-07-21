@@ -80,7 +80,7 @@ export default {
       control: { type: 'boolean' },
     },
     displayClearIcon: {
-      control: { type: 'boolean' },
+      control: false,
     },
     icons: {
       control: false,
