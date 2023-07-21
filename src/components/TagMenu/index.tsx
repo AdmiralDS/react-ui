@@ -4,7 +4,7 @@ import type { TagVisualProps, TagSizeProps } from '#src/components/Tag';
 import { Tag } from '#src/components/Tag';
 import type { DropMenuComponentProps } from '#src/components/DropMenu';
 import { DropMenu } from '#src/components/DropMenu';
-import type { ItemProps, RenderOptionProps } from '#src/components/Menu/MenuItem';
+import type { RenderOptionProps, MenuModelItemProps } from '#src/components/Menu/MenuItem';
 import { MenuItem } from '#src/components/Menu/MenuItem';
 import { passDropdownDataAttributes } from '#src/components/common/utils/splitDataAttributes';
 import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
@@ -20,7 +20,7 @@ export interface TagMenuProps
     TagSizeProps,
     DropMenuComponentProps {
   /** Опции выпадающего списка */
-  items?: Array<ItemProps>;
+  items?: Array<MenuModelItemProps>;
   /** @deprecated use items instead
    * Опции выпадающего списка */
   options?: Array<TagOptionProps>;

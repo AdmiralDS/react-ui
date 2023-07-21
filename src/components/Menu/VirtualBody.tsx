@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import type { ItemProps } from '#src/components/Menu/MenuItem';
+import type { MenuModelItemProps } from '#src/components/Menu/MenuItem';
 
 const Spacer = styled.div`
   display: flex;
@@ -21,7 +21,7 @@ interface VirtualBodyProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Обработчик выбора item в меню */
   onSelectItem: (id: string) => void;
   /** Модель данных, с рендер-пропсами*/
-  model: Array<ItemProps>;
+  model: Array<MenuModelItemProps>;
   /** Id активного элемента */
   activeId?: string;
   /** Id выбранного элемента */

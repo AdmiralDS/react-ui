@@ -2,7 +2,7 @@ import * as React from 'react';
 import type { CSSProperties } from 'react';
 import { keyboardKey } from '../common/keyboardKey';
 import { Badge } from '#src/components/Badge';
-import type { ItemProps, RenderOptionProps } from '#src/components/Menu/MenuItem';
+import type { RenderOptionProps, MenuModelItemProps } from '#src/components/Menu/MenuItem';
 import { MenuItem } from '#src/components/Menu/MenuItem';
 
 import {
@@ -160,7 +160,7 @@ export const TabMenu: React.FC<TabMenuProps> = ({
     });
   }, [dimension, tabs, tabsWithRef, activeTab]);
 
-  const containsActiveTab = (items: Array<ItemProps>) => {
+  const containsActiveTab = (items: Array<MenuModelItemProps>) => {
     return items.findIndex((item) => item.id === activeTab) != -1;
   };
 
