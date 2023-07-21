@@ -2,7 +2,7 @@ import type { HTMLAttributes } from 'react';
 import * as React from 'react';
 import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import styled, { css } from 'styled-components';
-import type { MenuModelItemProps } from '#src/components/Menu/MenuItem';
+import { MenuItem, type MenuModelItemProps } from '#src/components/Menu/MenuItem';
 import { keyboardKey } from '../common/keyboardKey';
 import { VirtualBody } from '#src/components/Menu/VirtualBody';
 import { refSetter } from '#src/components/common/utils/refSetter';
@@ -336,13 +336,12 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
     };
 
     const renderChildren = () => {
-      return model.map((item) => {
+      return model.map((item, index) => {
         const { id, subItems, ...itemProps } = item;
         const hasSubmenu = !!subItems && subItems.length > 0;
         const hovered = activeId === id;
         const selected = innerSelected.includes(id) || hasSelectedChildren(item);
-
-        return itemProps.render({
+        const renderProps = {
           hovered,
           selected,
           onHover: () => {
@@ -351,7 +350,7 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
           },
           onClickItem: () => handleClickItem(id),
           hasSubmenu,
-          selfRef: (ref) => {
+          selfRef: (ref: HTMLDivElement | null) => {
             if (activeId === id && hasSubmenu) {
               activeItemRef.current = ref;
             }
@@ -359,7 +358,14 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
           disabled: itemProps.disabled,
           containerRef,
           ...itemProps,
-        });
+        };
+        if (typeof itemProps.render === 'function') return itemProps.render(renderProps);
+
+        return (
+          <MenuItem key={`${item.id}-${index}`} {...renderProps}>
+            {itemProps.render}
+          </MenuItem>
+        );
       });
     };
 

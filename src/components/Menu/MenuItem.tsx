@@ -29,7 +29,7 @@ export interface RenderOptionProps {
 
 export interface MenuModelItemProps {
   id: string;
-  render: (options: RenderOptionProps) => React.ReactNode;
+  render: ((options: RenderOptionProps) => React.ReactNode) | React.ReactNode;
   disabled?: boolean;
   readOnly?: boolean;
   subItems?: Array<MenuModelItemProps>;
