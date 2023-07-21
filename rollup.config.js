@@ -4,7 +4,7 @@ import typescript from '@rollup/plugin-typescript';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import svgr from '@svgr/rollup';
 import url from '@rollup/plugin-url';
-// import terser from '@rollup/plugin-terser';
+import terser from '@rollup/plugin-terser';
 import { createTransformer } from 'typescript-plugin-styled-components';
 
 const styledComponentsTransformer = createTransformer({ ssr: true, displayName: true });
@@ -41,7 +41,7 @@ export default [
           }),
         ],
       }),
-      // terser(),
+      terser({ ecma: '2021', mangle: false }),
     ],
   },
 ];

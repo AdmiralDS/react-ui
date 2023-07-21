@@ -738,11 +738,7 @@ exports[`MultiButton should render component with disabled state 1`] = `
           />
           <div
             class="c5 c6"
-          >
-            <div>
-              one
-            </div>
-          </div>
+          />
           <div
             class="c4"
           />
@@ -1507,11 +1503,7 @@ exports[`MultiButton should render component with disabled state 1`] = `
         />
         <div
           class="c5 c6"
-        >
-          <div>
-            one
-          </div>
-        </div>
+        />
         <div
           class="c4"
         />
@@ -2332,11 +2324,7 @@ exports[`MultiButton should render component with primary appearance 1`] = `
           />
           <div
             class="c5 c6"
-          >
-            <div>
-              one
-            </div>
-          </div>
+          />
           <div
             class="c4"
           />
@@ -3098,11 +3086,7 @@ exports[`MultiButton should render component with primary appearance 1`] = `
         />
         <div
           class="c5 c6"
-        >
-          <div>
-            one
-          </div>
-        </div>
+        />
         <div
           class="c4"
         />
@@ -3921,11 +3905,7 @@ exports[`MultiButton should render component with secondary appearance 1`] = `
           />
           <div
             class="c5 c6"
-          >
-            <div>
-              one
-            </div>
-          </div>
+          />
           <div
             class="c4"
           />
@@ -4687,11 +4667,7 @@ exports[`MultiButton should render component with secondary appearance 1`] = `
         />
         <div
           class="c5 c6"
-        >
-          <div>
-            one
-          </div>
-        </div>
+        />
         <div
           class="c4"
         />

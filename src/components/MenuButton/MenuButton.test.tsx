@@ -1,10 +1,6 @@
-import * as React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { ThemeProvider } from 'styled-components';
-
 import { MenuButton } from '../MenuButton';
-import type { RenderOptionProps } from '#src/components/Menu/MenuItem';
-import { MenuItem } from '#src/components/Menu/MenuItem';
 import { LIGHT_THEME } from '../themes';
 
 describe('MenuButton', () => {
@@ -14,9 +10,9 @@ describe('MenuButton', () => {
   });
 
   const options = [
-    { id: '1', display: 'one' },
-    { id: '2', display: 'two' },
-    { id: '3', display: 'three' },
+    { id: '1', render: 'one' },
+    { id: '2', render: 'two' },
+    { id: '3', render: 'three' },
   ];
 
   const requiredProps = {
@@ -24,14 +20,7 @@ describe('MenuButton', () => {
     onChange: () => {
       /**/
     },
-    items: options.map((item) => ({
-      id: item.id,
-      render: (options: RenderOptionProps) => (
-        <MenuItem {...options} key={item.id}>
-          {item.display}
-        </MenuItem>
-      ),
-    })),
+    items: options,
   };
   const Component = (props: any) => (
     <ThemeProvider theme={LIGHT_THEME}>

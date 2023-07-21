@@ -1,4 +1,4 @@
-import type { CSSProperties, MouseEvent, ReactNode, HTMLAttributes } from 'react';
+import type { CSSProperties, MouseEvent, HTMLAttributes } from 'react';
 import * as React from 'react';
 import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import styled, { css } from 'styled-components';
@@ -79,15 +79,6 @@ type Appearance = 'primary' | 'secondary';
 interface SeparatorProps {
   disabled?: boolean;
   skeleton?: boolean;
-}
-
-export interface MultiButtonItem extends HTMLAttributes<HTMLElement> {
-  /** Содержимое опции, предназначенное для отображения */
-  display: ReactNode;
-  /** Уникальный идентификатор опции */
-  id: string;
-  /** Отключение опции */
-  disabled?: boolean;
 }
 
 export interface MultiButtonProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'>, DropMenuComponentProps {

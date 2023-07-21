@@ -18,10 +18,10 @@ describe('MultiButton', () => {
     onChange: () => {
       /**/
     },
-    options: [
-      { id: '1', display: 'one' },
-      { id: '2', display: 'two' },
-      { id: '3', display: 'three' },
+    items: [
+      { id: '1', render: 'one' },
+      { id: '2', render: 'two' },
+      { id: '3', render: 'three' },
     ],
   };
   const Component = (props: any) => (
