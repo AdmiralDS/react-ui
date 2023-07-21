@@ -91,7 +91,7 @@ const NotificationEmitter = () => {
   };
 
   return (
-    <div style={{ display: 'flex', alignItems: 'flex-start' }}>
+    <div style={{ display: 'flex', alignItems: 'flex-start', height: '200px' }}>
       <Button onClick={onClickHandlerAdd}>Добавить сообщение</Button>
       <div style={{ width: 20 }} />
       <Button disabled={toastStack.length === 0} onClick={onClickHandlerRemove}>
