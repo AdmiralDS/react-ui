@@ -54,7 +54,6 @@ const rowList: RowData[] = [
   },
   {
     id: '0003',
-    // error: true,
     status: 'error',
     hover: true,
     transfer_type: 'МНО',
@@ -69,7 +68,6 @@ const rowList: RowData[] = [
   },
   {
     id: '0004',
-    // success: true,
     status: 'success',
     hover: true,
     transfer_type: 'МНО',
@@ -98,6 +96,20 @@ const rowList: RowData[] = [
   },
   {
     id: '0006',
+    status: 'warning',
+    hover: true,
+    transfer_type: 'МНО',
+    transfer_date: new Date('2020-08-06').toLocaleDateString(),
+    transfer_amount: (
+      <AmountCell>
+        <T font="Body/Body 2 Short">{numberFormatter.format(32_500_000_000)}</T>
+      </AmountCell>
+    ),
+    currency: 'RUB',
+    rate: 2.5,
+  },
+  {
+    id: '0007',
     hover: true,
     transfer_type: 'МНО',
     transfer_date: new Date('2020-08-06').toLocaleDateString(),
@@ -151,7 +163,10 @@ export const RowStateTemplate = (props: TableProps) => {
       columnList={cols}
       displayRowSelectionColumn
       onColumnResize={handleResize}
-      rowBackgroundColorByStatusMap={{ attention: (color: Color) => color['Attention/Attention 20'] }}
+      rowBackgroundColorByStatusMap={{
+        attention: (color: Color) => color['Attention/Attention 20'],
+        warning: (color: Color) => color['Warning/Warning 20'],
+      }}
     />
   );
 };
