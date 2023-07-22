@@ -1,7 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
 import styled from 'styled-components';
-import type { TooltipHoc } from '@admiral-ds/react-ui';
 import { ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
 import { TooltipHocStory } from './TooltipHOCStory';
@@ -101,7 +100,7 @@ export default {
       control: { type: 'radio' },
     },
   },
-} as Meta<typeof TooltipHoc>;
+} as Meta<typeof TooltipHocStory>;
 
 //<editor-fold desc="TooltipHoc. Базовый пример.">
 const TooltipHocBaseStory: StoryFn<typeof TooltipHocStory> = ({ renderContent, ...props }) => (
