@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { version } from '../package.json';
+import packageJson from '../package.json';
 import { useEffect, useState } from 'react';
 import { addons } from '@storybook/preview-api';
 import { DARK_MODE_EVENT_NAME } from 'storybook-dark-mode';
@@ -23,7 +23,7 @@ initializeRTL();
 
 const customTheme = {
   brandImage: LogoSvg,
-  brandTitle: `version ${version}`,
+  brandTitle: `version ${packageJson.version}`,
 };
 
 export const parameters = {

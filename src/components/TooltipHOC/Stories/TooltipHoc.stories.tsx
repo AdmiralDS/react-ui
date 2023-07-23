@@ -1,9 +1,14 @@
-import * as React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
 import styled from 'styled-components';
-import { ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
+import { InputField, TooltipHoc, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
+import type { TooltipHocProps } from '@admiral-ds/react-ui';
 
-import { TooltipHocStory } from './TooltipHOCStory';
+const TooltipedInput = TooltipHoc(InputField);
+
+// Компонент для генерации таблицы с TooltipHocProps. К сожалению storybook пока не умеет корректно работать напрямую с HOC
+// В компонент обязательно должны передаваться TooltipHocProps для правильной генерации таблицы с пропсами в storybook
+const TooltipHocStory: React.FC<TooltipHocProps> = (props) => <TooltipedInput {...props} />;
+
 import {
   TooltipHocBaseTemplate,
   TooltipHocClassTemplate,
@@ -11,7 +16,6 @@ import {
   TooltipHocRefSetterTemplate,
   TooltipHocRefTemplate,
 } from './Templates';
-import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
 import TooltipHocBaseRaw from './Templates/TooltipHocBase?raw';
@@ -103,9 +107,7 @@ export default {
 } as Meta<typeof TooltipHocStory>;
 
 //<editor-fold desc="TooltipHoc. Базовый пример.">
-const TooltipHocBaseStory: StoryFn<typeof TooltipHocStory> = ({ renderContent, ...props }) => (
-  <TooltipHocBaseTemplate renderContent={renderContent} {...cleanUpProps(props)} />
-);
+const TooltipHocBaseStory: StoryFn<typeof TooltipHocStory> = (props) => <TooltipHocBaseTemplate {...props} />;
 
 export const TooltipHocBaseExample = {
   render: TooltipHocBaseStory,
@@ -124,9 +126,7 @@ export const TooltipHocBaseExample = {
 //</editor-fold>
 
 //<editor-fold desc="TooltipHoc. Пример использования с классовым компонентом.">
-const TooltipHocClassStory: StoryFn<typeof TooltipHocStory> = ({ renderContent, ...props }) => (
-  <TooltipHocClassTemplate renderContent={renderContent} {...cleanUpProps(props)} />
-);
+const TooltipHocClassStory: StoryFn<typeof TooltipHocStory> = (props) => <TooltipHocClassTemplate {...props} />;
 
 export const TooltipHocClassExample = {
   render: TooltipHocClassStory,
@@ -145,9 +145,7 @@ export const TooltipHocClassExample = {
 //</editor-fold>
 
 //<editor-fold desc="TooltipHoc. Пример использования с функциональным компонентом.">
-const TooltipHocFCStory: StoryFn<typeof TooltipHocStory> = ({ renderContent, ...props }) => (
-  <TooltipHocFCTemplate renderContent={renderContent} {...cleanUpProps(props)} />
-);
+const TooltipHocFCStory: StoryFn<typeof TooltipHocStory> = (props) => <TooltipHocFCTemplate {...props} />;
 
 export const TooltipHocFCExample = {
   render: TooltipHocFCStory,
@@ -166,9 +164,7 @@ export const TooltipHocFCExample = {
 //</editor-fold>
 
 //<editor-fold desc="TooltipHoc. Утилита refSetter для мерджа рефов.">
-const TooltipHocRefSetterStory: StoryFn<typeof TooltipHocStory> = ({ renderContent, ...props }) => (
-  <TooltipHocRefSetterTemplate renderContent={renderContent} {...cleanUpProps(props)} />
-);
+const TooltipHocRefSetterStory: StoryFn<typeof TooltipHocStory> = (props) => <TooltipHocRefSetterTemplate {...props} />;
 
 export const TooltipHocRefSetterExample = {
   render: TooltipHocRefSetterStory,
@@ -191,9 +187,7 @@ export const TooltipHocRefSetterExample = {
 //</editor-fold>
 
 //<editor-fold desc="TooltipHoc. Прокидывание ref на результат вызова TooltipHoc.">
-const TooltipHocRefStory: StoryFn<typeof TooltipHocStory> = ({ renderContent, ...props }) => (
-  <TooltipHocRefTemplate renderContent={renderContent} {...cleanUpProps(props)} />
-);
+const TooltipHocRefStory: StoryFn<typeof TooltipHocStory> = (props) => <TooltipHocRefTemplate {...props} />;
 
 export const TooltipHocRefExample = {
   render: TooltipHocRefStory,
