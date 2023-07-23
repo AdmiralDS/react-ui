@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 import { ReactComponent as ArrowUpOutline } from '@admiral-ds/icons/build/system/ArrowUpOutline.svg';
 import { ReactComponent as ChevronDownOutline } from '@admiral-ds/icons/build/system/ChevronDownOutline.svg';
-import type { TableProps } from '#src/components/Table';
+import type { TableProps, TableRow } from '#src/components/Table';
 
 import {
   cellStyle,
@@ -383,6 +383,8 @@ export const SimpleRow = styled.div<{
   error?: boolean;
   success?: boolean;
   grey?: boolean;
+  status?: TableRow['status'];
+  rowStatusMap?: TableProps['rowBackgroundColorByStatusMap'];
 }>`
   display: inline-flex;
   min-width: max-content;

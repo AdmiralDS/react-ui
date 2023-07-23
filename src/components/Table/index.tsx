@@ -4,6 +4,7 @@ import { Checkbox } from '#src/components/Checkbox';
 import observeRect from '#src/components/common/observeRect';
 import { useTheme } from 'styled-components';
 import { LIGHT_THEME } from '#src/components/themes';
+import type { Color } from '#src/components/themes';
 import { getScrollbarSize } from '#src/components/common/dom/scrollbarUtil';
 import { GroupRow } from '#src/components/Table/Row/GroupRow';
 import { RegularRow } from '#src/components/Table/Row/RegularRow';
@@ -50,7 +51,8 @@ export type Dimension = 'xl' | 'l' | 'm' | 's';
 type FilterProps = {
   /** Функция закрытия меню фильтра */
   closeMenu: () => void;
-  /** @deprecated - взамен используйте параметр isFilterActive, задаваемый для столбца
+  /**
+   * @deprecated взамен используйте параметр isFilterActive, задаваемый для столбца
    * Функция установки состояния фильтра (активный/неактивный).
    * Необходимо для окрашивания иконки фильтра в синий цвет при активном фильтре и в серый при неактивном фильтре.
    */
@@ -132,10 +134,24 @@ export interface TableRow {
   disabled?: boolean;
   /** Чекбокс строки в состоянии disabled */
   checkboxDisabled?: boolean;
-  /** Строка в состоянии error */
+  // TODO: Удалить в 8.x.x версии
+  /**
+   * @deprecated Будет удалено в 8.x.x версии.
+   * Взамен используйте параметр status='error'
+   * Строка в состоянии error
+   **/
   error?: boolean;
-  /** Строка в состоянии success */
+  // TODO: Удалить в 8.x.x версии
+  /**
+   * @deprecated Будет удалено в 8.x.x версии.
+   * Взамен используйте параметр status='success'
+   * Строка в состоянии success
+   **/
   success?: boolean;
+  /** Статус строки. По умолчанию таблица предоставляет статусы error и success.
+   * Также пользователь может создать свои кастомные статусы, для этого нужно будет придумать название статуса,
+   * описать его в параметре таблицы rowBackgroundColorByStatusMap и прописать данный статус в объектах строк */
+  status?: string;
   /** Строка в раскрытом состоянии */
   expanded?: boolean;
   /** Окраска строки по Hover. Данная окраска должна применяться, если строка кликабельна и ведет к каким-либо действиям */
@@ -282,6 +298,16 @@ export interface TableProps extends React.HTMLAttributes<HTMLDivElement> {
    * Если nextColumnName равен null, значит столбец передвигают в самый конец списка.
    */
   onColumnDrag?: (columnName: string, nextColumnName: string | null) => void;
+  /** Объект, который описывает соответствие цвета строки и её статуса.
+   *
+   * Данный параметр нужно применять при создании кастомных статусов строк,
+   * либо при желании перезадать цвета для статусов error и success, предоставляемых таблицей по умолчанию.
+   *
+   * Ключом объекта должно быть название статуса.
+   * Значением свойства объекта должен быть цвет строки, соответствующий статусу, заданному в ключе.
+   * Цвет можно задать либо в виде строки со значением цвета, либо в виде функции,
+   * которая на вход получает объект color (равный theme.color) и возвращает строку со значением цвета. */
+  rowBackgroundColorByStatusMap?: { [key: string]: ((color: Color) => string) | string };
 }
 
 type GroupInfo = {
@@ -297,6 +323,11 @@ type RowInfo = {
 type Group = Record<string, GroupInfo>;
 type GroupRows = Record<string, RowInfo>;
 type ZebraRows = Record<string, 'odd' | 'even' | 'ingroup odd' | 'ingroup even' | 'group'>;
+
+const TABLE_ROW_STATUS_MAP = {
+  error: (color: Color) => color['Error/Error 20'],
+  success: (color: Color) => color['Success/Success 20'],
+};
 
 export const Table = React.forwardRef<HTMLDivElement, TableProps>(
   (
@@ -330,6 +361,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
       virtualScroll,
       locale,
       onColumnDrag,
+      rowBackgroundColorByStatusMap: userRowBackgroundColorByStatusMap,
       ...props
     },
     ref,
@@ -355,6 +387,11 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
     const showRowsActions = React.useMemo(
       () => rowList.some((row) => row.actionRender || row.overflowMenuRender) && userShowRowsActions,
       [rowList, userShowRowsActions],
+    );
+
+    const rowStatusMap = React.useMemo(
+      () => ({ ...TABLE_ROW_STATUS_MAP, ...userRowBackgroundColorByStatusMap }),
+      [userRowBackgroundColorByStatusMap],
     );
 
     const tableRef = React.useRef<HTMLDivElement>(null);
@@ -841,6 +878,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
           scrollbar={scrollbar}
           grey={zebraRows[row.id]?.includes('even')}
           showRowsActions={showRowsActions}
+          rowStatusMap={rowStatusMap}
           key={`row_${row.id}`}
         >
           {isGroupRow ? renderGroupRow(row) : renderRegularRow(row, index)}

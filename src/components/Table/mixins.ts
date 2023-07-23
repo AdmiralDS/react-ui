@@ -1,6 +1,6 @@
 import { css } from 'styled-components';
 import { typography } from '#src/components/Typography';
-import type { TableProps } from '#src/components/Table';
+import type { TableProps, TableRow } from '#src/components/Table';
 
 // padding-bottom меньше padding-top на 1px, т.к. 1px остается для border-bottom ячейки
 // padding-right больше padding-left на 1px, т.к. 1px остается для линии resizerа
@@ -67,16 +67,23 @@ export const underlineRow = css`
   border-bottom: 1px solid ${({ theme }) => theme.color['Neutral/Neutral 20']};
 `;
 
+// TODO: Удалить error, success в 8.x.x версии
 export const rowBackground = css<{
   selected?: boolean;
   disabled?: boolean;
   error?: boolean;
   success?: boolean;
   grey?: boolean;
+  status?: TableRow['status'];
+  rowStatusMap?: TableProps['rowBackgroundColorByStatusMap'];
 }>`
-  ${({ theme, selected, error, success, disabled, grey }) => {
+  ${({ theme, selected, error, success, disabled, grey, status, rowStatusMap }) => {
     if (disabled) return theme.color['Neutral/Neutral 00'];
     if (selected) return theme.color['Primary/Primary 20'];
+    if (status && rowStatusMap?.[status])
+      return typeof rowStatusMap[status] === 'string'
+        ? rowStatusMap[status]
+        : (rowStatusMap[status] as any)(theme.color);
     if (error) return theme.color['Error/Error 20'];
     if (success) return theme.color['Success/Success 20'];
     if (grey) return theme.color['Neutral/Neutral 05'];
