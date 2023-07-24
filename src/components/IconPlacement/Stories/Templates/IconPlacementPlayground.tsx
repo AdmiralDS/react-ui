@@ -39,7 +39,7 @@ export const IconPlacementPlaygroundTemplate = ({
         </T>
         <T font="Body/Body 1 Short" as="div">
           У компонента есть три размера иконки: L 24, M 20 и S 16. У размеров L и M два размера Hover-круга для
-          различных ситуаций, что бы вписываться внутрь небольших компонентов. БОльшие размеры круга обозначены в
+          различных ситуаций, чтобы вписываться внутрь небольших компонентов. БОльшие размеры круга обозначены в
           названии вариантов компонента как Big, малые — Small.
         </T>
         <IconPlacement {...props} dimension={dimension} disabled={disabled} highlightFocus={highlightFocus}>

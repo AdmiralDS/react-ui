@@ -65,9 +65,6 @@ export default {
     disableCopying: {
       control: { type: 'boolean' },
     },
-    range: {
-      control: { type: 'boolean' },
-    },
     displayCharacterCounter: {
       control: { type: 'boolean' },
     },
