@@ -10,10 +10,6 @@ const config: StorybookConfig = {
     '@storybook/addon-styling',
     'storybook-dark-mode',
     'storybook-addon-rtl',
-    {
-      name: '@storybook/addon-styling',
-      options: {},
-    },
   ],
   framework: {
     name: '@storybook/react-webpack5',
@@ -23,56 +19,59 @@ const config: StorybookConfig = {
     autodocs: true,
   },
   webpackFinal: async (config) => {
-    if (config.resolve)
-      config.resolve.plugins = [
-        ...(config.resolve.plugins || []),
-        new TsconfigPathsPlugin({
-          extensions: config.resolve.extensions,
-        }),
-      ];
+    config.resolve ??= {};
+    config.resolve.plugins ??= [];
 
-    if (config.module?.rules) {
-      // disable whatever is already set to load SVGs
-      // config.module.rules
-      //   .filter((rule: any) => rule.test.test('.svg'))
-      //   .forEach((rule: any) => (rule.exclude = /\.svg$/i));
+    config.resolve.plugins.push(
+      new TsconfigPathsPlugin({
+        extensions: config.resolve.extensions,
+      }),
+    );
 
-      config.module.rules
-        .filter((rule: any) => rule.test?.test('.tsx'))
-        .forEach((rule: any) => (rule.resourceQuery = { not: [/raw/] }));
+    config.module ??= {};
+    config.module.rules ??= [];
 
-      // add SVGR instead
-      config.module.rules.push(
-        {
-          resourceQuery: /raw/,
-          type: 'asset/source',
-        },
-        {
-          test: /\.svg$/,
-          use: [
-            {
-              loader: '@svgr/webpack',
-              options: {
-                dimensions: false,
-                svgProps: {
-                  focusable: '{false}',
-                },
+    // disable whatever is already set to load SVGs
+    // config.module.rules
+    //   .filter((rule: any) => rule.test.test('.svg'))
+    //   .forEach((rule: any) => (rule.exclude = /\.svg$/i));
+
+    config.module.rules
+      .filter((rule: any) => rule.test?.test('.tsx'))
+      .forEach((rule: any) => (rule.resourceQuery = { not: [/raw/] }));
+
+    // add SVGR instead
+    config.module.rules.push(
+      {
+        resourceQuery: /raw/,
+        type: 'asset/source',
+      },
+      {
+        test: /\.svg$/,
+        use: [
+          {
+            loader: '@svgr/webpack',
+            options: {
+              dimensions: false,
+              svgProps: {
+                focusable: '{false}',
               },
             },
-            {
-              loader: 'file-loader',
-              options: {
-                name: 'static/media/[path][name].[ext]',
-              },
-            },
-          ],
-          type: 'javascript/auto',
-          issuer: {
-            and: [/\.(ts|tsx|js|jsx|md|mdx)$/],
           },
+          {
+            loader: 'file-loader',
+            options: {
+              name: 'static/media/[path][name].[ext]',
+            },
+          },
+        ],
+        type: 'javascript/auto',
+        issuer: {
+          and: [/\.(ts|tsx|js|jsx|md|mdx)$/],
         },
-      );
-    }
+      },
+    );
+
     return config;
   },
 };
