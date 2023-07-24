@@ -227,7 +227,7 @@ export interface EditModeProps extends Omit<TextInputProps, 'dimension'> {
   onChange: React.ChangeEventHandler<HTMLInputElement>;
   /** Размер компонента */
   dimension?: Dimension;
-  /** Жирное начертание текста. В размере xl/xxl оно всегда такое */
+  /** Жирное начертание текста. В размерах xl и xxl текст всегда жирный */
   bold?: boolean;
   /** Позволяет добавлять миксин на контейнер компонента, созданный с помощью styled css. */
   containerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;

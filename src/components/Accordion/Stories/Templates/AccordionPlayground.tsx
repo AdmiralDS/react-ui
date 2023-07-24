@@ -49,13 +49,13 @@ export const AccordionPlaygroundTemplate = (props: AccordionProps) => {
             legend="Управляемая группа радиокнопок:"
             dimension={props.dimension === 'm' ? 's' : 'm'}
           >
-            <RadioButton value={values[0]} name="test1" checked={values[0] === selected} readOnly>
+            <RadioButton value={values[0]} name="test1" defaultChecked={values[0] === selected}>
               First option
             </RadioButton>
-            <RadioButton value={values[1]} name="test1" checked={values[1] === selected} readOnly>
+            <RadioButton value={values[1]} name="test1" defaultChecked={values[1] === selected}>
               Second option
             </RadioButton>
-            <RadioButton value={values[2]} name="test1" checked={values[2] === selected} readOnly>
+            <RadioButton value={values[2]} name="test1" defaultChecked={values[2] === selected}>
               Third option
             </RadioButton>
           </FieldSet>

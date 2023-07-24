@@ -69,9 +69,6 @@ export default {
     disableCopying: {
       control: { type: 'boolean' },
     },
-    range: {
-      control: false,
-    },
     type: {
       options: ['date', 'date-range'],
       control: { type: 'radio' },

@@ -29,7 +29,7 @@ function defaultFormatter(isoValues: string[], joinString = ' - '): string {
     .join(joinString);
 }
 
-export interface DateInputProps extends TextInputProps, Omit<CalendarPropType, 'onChange'> {
+export interface DateInputProps extends TextInputProps, Omit<CalendarPropType, 'onChange' | 'range'> {
   /** Устанавливает тип ввода даты или интервала даты*/
   type?: 'date' | 'date-range';
 

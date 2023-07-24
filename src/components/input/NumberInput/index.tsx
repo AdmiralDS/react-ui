@@ -116,7 +116,7 @@ export interface NumberInputProps extends TextInputProps {
   minValue?: number;
   /** Максимальное значение */
   maxValue?: number;
-  /** Отображать иконки плюса минуса */
+  /** Отображать иконки плюса и минуса */
   displayPlusMinusIcons?: boolean;
   /** Выравнивание контента. По умолчанию выравнивание происходит по левому краю */
   align?: 'left' | 'right';

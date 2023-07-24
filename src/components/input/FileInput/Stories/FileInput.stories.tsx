@@ -133,12 +133,7 @@ export const FileInputDimensionM = {
   parameters: {
     docs: {
       source: {
-        code: FileInputCustomRaw,
-      },
-      description: {
-        story: `Функцию загрузки файла можно “повесить” на другие компоненты, например, кнопки, сделав соответствующие 
-        текстовые инструкции. В этом случае нужно воспользоваться методом renderCustomFileInput для отрисовки реакт-компонента. 
-        Для отображения выбранных файлов можно использовать кастомные компоненты.`,
+        code: FileInputBaseRaw,
       },
     },
   },
@@ -177,4 +172,17 @@ const FileInputCustomStory: StoryFn<typeof FileInput> = (props) => (
 export const FileInputCustom = {
   render: FileInputCustomStory,
   name: 'FileInput. Кастомизация',
+
+  parameters: {
+    docs: {
+      source: {
+        code: FileInputCustomRaw,
+      },
+      description: {
+        story: `Функцию загрузки файла можно “повесить” на другие компоненты, например, кнопки, сделав соответствующие 
+        текстовые инструкции. В этом случае нужно воспользоваться методом renderCustomFileInput для отрисовки реакт-компонента. 
+        Для отображения выбранных файлов можно использовать кастомные компоненты.`,
+      },
+    },
+  },
 };
