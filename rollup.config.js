@@ -1,6 +1,7 @@
 import commonjs from '@rollup/plugin-commonjs';
 import resolve from '@rollup/plugin-node-resolve';
 import typescript from '@rollup/plugin-typescript';
+import tscAlias from 'rollup-plugin-tsc-alias';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import svgr from '@svgr/rollup';
 import url from '@rollup/plugin-url';
@@ -34,13 +35,21 @@ export default [
       resolve(),
       commonjs(),
       typescript({
-        exclude: ['*/**/*.stories.*', 'src/**/Stories/**', '*/**/*.test.*', 'src/colors/**', 'src/icons/**'],
+        exclude: [
+          '*/**/*.stories.*',
+          'src/**/stories/**',
+          'src/**/Stories/**',
+          '*/**/*.test.*',
+          'src/colors/**',
+          'src/icons/**',
+        ],
         transformers: [
           () => ({
             before: [styledComponentsTransformer],
           }),
         ],
       }),
+      tscAlias(),
       terser({ ecma: '2021', mangle: false }),
     ],
   },
