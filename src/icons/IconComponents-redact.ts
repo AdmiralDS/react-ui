@@ -22,8 +22,6 @@ export { ReactComponent as BorderVerticalOutline } from '@admiral-ds/icons/build
 export { ReactComponent as CellsDisconnectOutline } from '@admiral-ds/icons/build/redact/CellsDisconnectOutline.svg';
 export { ReactComponent as CellsMergeOutline } from '@admiral-ds/icons/build/redact/CellsMergeOutline.svg';
 export { ReactComponent as ChangeFieldOutline } from '@admiral-ds/icons/build/redact/ChangeFieldOutline.svg';
-export { ReactComponent as ChartBarOutline } from '@admiral-ds/icons/build/redact/ChartBarOutline.svg';
-export { ReactComponent as ChartTrendingOutline } from '@admiral-ds/icons/build/redact/ChartTrendingOutline.svg';
 export { ReactComponent as ColumnDeleteOutline } from '@admiral-ds/icons/build/redact/ColumnDeleteOutline.svg';
 export { ReactComponent as ColumnInsertAfterOutline } from '@admiral-ds/icons/build/redact/ColumnInsertAfterOutline.svg';
 export { ReactComponent as ColumnInsertBeforeOutline } from '@admiral-ds/icons/build/redact/ColumnInsertBeforeOutline.svg';

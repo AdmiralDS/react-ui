@@ -51,12 +51,6 @@ const config: StorybookConfig = {
         use: [
           {
             loader: '@svgr/webpack',
-            options: {
-              dimensions: false,
-              svgProps: {
-                focusable: '{false}',
-              },
-            },
           },
           {
             loader: 'file-loader',
