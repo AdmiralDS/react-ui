@@ -104,11 +104,11 @@ const EditIcon = styled(EditSolid)<{ $multiline: boolean }>`
   ${(p) => p.$multiline && multilineIcon}
 `;
 
-const CheckIcon = styled(CheckClearOutline)`
+const ConfirmIcon = styled(CheckClearOutline)`
   ${iconStyle}
 `;
 
-const ClearIcon = styled(CloseOutline)`
+const CancelIcon = styled(CloseOutline)`
   ${iconStyle}
 `;
 
@@ -304,14 +304,14 @@ export const EditMode = React.forwardRef<HTMLInputElement, EditModeProps>(
       setEdit(true);
       onEdit?.();
     };
-    const disabledEdit = () => {
+    const handleConfirm = () => {
       setEdit(false);
       if (inputRef.current) {
         onConfirm?.(inputRef.current.value);
         setLocalVal(inputRef.current.value);
       }
     };
-    const handleClear = () => {
+    const handleCancel = () => {
       setEdit(false);
       if (inputRef.current) {
         changeInputData(inputRef.current, { value: localVal.toString() });
@@ -349,15 +349,15 @@ export const EditMode = React.forwardRef<HTMLInputElement, EditModeProps>(
                 dimension={editDimension}
                 displayAsSquare
                 disabled={props.status === 'error'}
-                onClick={disabledEdit}
-                iconStart={<CheckIcon height={iconSize} width={iconSize} />}
+                onClick={handleConfirm}
+                iconStart={<ConfirmIcon height={iconSize} width={iconSize} />}
               />
               <EditButton
                 appearance="secondary"
                 dimension={editDimension}
                 displayAsSquare
-                onClick={handleClear}
-                iconStart={<ClearIcon height={iconSize} width={iconSize} />}
+                onClick={handleCancel}
+                iconStart={<CancelIcon height={iconSize} width={iconSize} />}
               />
             </>
           )
