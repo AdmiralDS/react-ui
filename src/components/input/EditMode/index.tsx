@@ -220,7 +220,7 @@ const stopEvent = (e: React.MouseEvent) => e.preventDefault();
 
 type Dimension = 's' | 'm' | 'xl' | 'xxl';
 
-export interface EditModeProps extends Omit<TextInputProps, 'dimension'> {
+export interface EditModeProps extends Omit<TextInputProps, 'dimension' | 'displayClearIcon'> {
   /** Значение компонента */
   value: string | number;
   /** Колбек на изменение значения компонента */
