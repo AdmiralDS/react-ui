@@ -1,4 +1,3 @@
-import * as React from 'react';
 import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import styled, { css } from 'styled-components';
 import { Button } from '#src/components/Button';
@@ -13,6 +12,7 @@ import { ReactComponent as CheckClearOutline } from '@admiral-ds/icons/build/ser
 import { ReactComponent as CloseOutline } from '@admiral-ds/icons/build/service/CloseOutline.svg';
 import { Tooltip } from '#src/components/Tooltip';
 import { checkOverflow } from '#src/components/common/utils/checkOverflow';
+import { forwardRef, useEffect, useLayoutEffect, useRef, useState } from 'react';
 
 const TypographyMixin = css`
   [data-dimension='s'] & {
@@ -243,7 +243,7 @@ export interface EditModeProps extends Omit<TextInputProps, 'dimension' | 'displ
   multilineView?: boolean;
 }
 
-export const EditMode = React.forwardRef<HTMLInputElement, EditModeProps>(
+export const EditMode = forwardRef<HTMLInputElement, EditModeProps>(
   (
     {
       dimension = 'm',
@@ -260,18 +260,18 @@ export const EditMode = React.forwardRef<HTMLInputElement, EditModeProps>(
     },
     ref,
   ) => {
-    const [edit, setEdit] = React.useState(false);
-    const [localVal, setLocalVal] = React.useState(value);
+    const [localVal, setLocalVal] = useState(value);
+    const [edit, setEdit] = useState(false);
     const iconSize = dimension === 's' ? 20 : 24;
-    const inputRef = React.useRef<HTMLInputElement>(null);
-    const wrapperRef = React.useRef<HTMLDivElement>(null);
+    const inputRef = useRef<HTMLInputElement>(null);
+    const wrapperRef = useRef<HTMLDivElement>(null);
 
-    const [overflowActive, setOverflowActive] = React.useState<boolean>(false);
-    const [tooltipVisible, setTooltipVisible] = React.useState<boolean>(false);
-    const [node, setNode] = React.useState<HTMLElement | null>(null);
-    const textRef = React.useRef<HTMLDivElement>(null);
+    const [overflowActive, setOverflowActive] = useState<boolean>(false);
+    const [tooltipVisible, setTooltipVisible] = useState<boolean>(false);
+    const [node, setNode] = useState<HTMLElement | null>(null);
+    const textRef = useRef<HTMLDivElement>(null);
 
-    React.useLayoutEffect(() => {
+    useLayoutEffect(() => {
       function show() {
         setTooltipVisible(true);
       }
@@ -288,13 +288,13 @@ export const EditMode = React.forwardRef<HTMLInputElement, EditModeProps>(
       }
     }, [setTooltipVisible, node]);
 
-    React.useLayoutEffect(() => {
+    useLayoutEffect(() => {
       if (textRef.current && checkOverflow(textRef.current) !== overflowActive) {
         setOverflowActive(checkOverflow(textRef.current));
       }
     }, [tooltipVisible, textRef.current, setOverflowActive]);
 
-    React.useEffect(() => {
+    useEffect(() => {
       if (!localVal && value) {
         setLocalVal(value);
       }
