@@ -235,7 +235,12 @@ export interface EditModeProps extends Omit<TextInputProps, 'dimension' | 'displ
   onEdit?: () => void;
   /** Колбек на нажатие кнопки подтверждения введенного значения и выхода из режима редактирования */
   onConfirm?: (value: string) => void;
-  /** Колбек на нажатие кнопки очистки инпута */
+  /** Колбек на нажатие кнопки отмены ввода значения и выхода из режима редактирования */
+  onCancel?: (value: string) => void;
+  /**
+   * @deprecated Используйте onCancel
+   * Колбек на нажатие кнопки очистки инпута
+   */
   onClear?: () => void;
   /** Отображение тултипа, по умолчанию true */
   showTooltip?: boolean;
@@ -252,6 +257,7 @@ export const EditMode = forwardRef<HTMLInputElement, EditModeProps>(
       disabled = false,
       onEdit,
       onConfirm,
+      onCancel,
       onClear,
       value,
       showTooltip = true,
@@ -260,8 +266,8 @@ export const EditMode = forwardRef<HTMLInputElement, EditModeProps>(
     },
     ref,
   ) => {
-    const [localVal, setLocalVal] = useState(value);
     const [edit, setEdit] = useState(false);
+    const [localVal, setLocalVal] = useState(value);
     const iconSize = dimension === 's' ? 20 : 24;
     const inputRef = useRef<HTMLInputElement>(null);
     const wrapperRef = useRef<HTMLDivElement>(null);
@@ -315,6 +321,7 @@ export const EditMode = forwardRef<HTMLInputElement, EditModeProps>(
       setEdit(false);
       if (inputRef.current) {
         changeInputData(inputRef.current, { value: localVal.toString() });
+        onCancel?.(localVal.toString());
         onClear?.();
       }
     };
