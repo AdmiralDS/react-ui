@@ -1,3 +1,5 @@
+import type { ChangeEventHandler } from 'react';
+import { forwardRef, useLayoutEffect, useRef, useState } from 'react';
 import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import styled, { css } from 'styled-components';
 import { Button } from '#src/components/Button';
@@ -12,7 +14,6 @@ import { ReactComponent as CheckClearOutline } from '@admiral-ds/icons/build/ser
 import { ReactComponent as CloseOutline } from '@admiral-ds/icons/build/service/CloseOutline.svg';
 import { Tooltip } from '#src/components/Tooltip';
 import { checkOverflow } from '#src/components/common/utils/checkOverflow';
-import { forwardRef, useLayoutEffect, useRef, useState } from 'react';
 
 const TypographyMixin = css`
   [data-dimension='s'] & {
@@ -224,7 +225,7 @@ export interface EditModeProps extends Omit<TextInputProps, 'dimension' | 'displ
   /** Значение компонента */
   value: string | number;
   /** Колбек на изменение значения компонента */
-  onChange: React.ChangeEventHandler<HTMLInputElement>;
+  onChange: ChangeEventHandler<HTMLInputElement>;
   /** Размер компонента */
   dimension?: Dimension;
   /** Жирное начертание текста. В размерах xl и xxl текст всегда жирный */
