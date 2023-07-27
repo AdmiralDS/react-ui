@@ -308,8 +308,8 @@ export const EditMode = forwardRef<HTMLInputElement, EditModeProps>(
     const handleConfirm = () => {
       setEdit(false);
       if (inputRef.current) {
-        onConfirm?.(inputRef.current.value);
-        setLocalVal(inputRef.current.value);
+        const inputValue = inputRef.current.value;
+        onConfirm?.(inputValue);
       }
     };
     const handleCancel = () => {
