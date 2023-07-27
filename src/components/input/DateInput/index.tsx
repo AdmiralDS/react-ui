@@ -91,6 +91,9 @@ export const DateInput = React.forwardRef<HTMLInputElement, DateInputProps>(
       dropContainerStyle,
       isVisible,
       onVisibilityChange = () => undefined,
+      highlightSpecialDay,
+      locale,
+      onDateIncreaseDecrease,
       ...props
     },
     ref,
@@ -109,6 +112,9 @@ export const DateInput = React.forwardRef<HTMLInputElement, DateInputProps>(
       onViewMonthSelect,
       onViewYearSelect,
       selected,
+      highlightSpecialDay,
+      locale,
+      onDateIncreaseDecrease,
     };
     const isDateRange = type === 'date-range';
     const handleInput = props.handleInput || (isDateRange ? defaultDateRangeInputHandle : defaultDateInputHandle);
