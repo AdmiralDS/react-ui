@@ -300,15 +300,10 @@ export const EditMode = forwardRef<HTMLInputElement, EditModeProps>(
       }
     }, [tooltipVisible, textRef.current, setOverflowActive]);
 
-    useEffect(() => {
-      if (!localVal && value) {
-        setLocalVal(value);
-      }
-    }, [value, localVal]);
-
     const enableEdit = () => {
       setEdit(true);
       onEdit?.();
+      setLocalVal(value);
     };
     const handleConfirm = () => {
       setEdit(false);
