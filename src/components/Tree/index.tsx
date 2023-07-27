@@ -187,7 +187,7 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps>(
               onHover: () => {
                 activateItem(item.disabled ? undefined : item.id);
               },
-              onClickItem: () => selectItem(item.id),
+              onClick: () => selectItem(item.id),
               onToggleExpand: () => toggleExpand(item.id),
             })}
             {item.children && hasChildren && item.expanded && renderChildren(item.children)}

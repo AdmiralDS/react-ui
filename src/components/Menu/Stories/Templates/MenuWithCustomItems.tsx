@@ -57,7 +57,7 @@ const Wrapper = styled.div`
   ${(p) => p.theme.shadow['Shadow 08']}
 `;
 
-interface MyMenuItemProps extends HTMLAttributes<HTMLDivElement>, RenderOptionProps {
+interface MyMenuItemProps extends HTMLAttributes<HTMLElement>, RenderOptionProps {
   text: string;
   success?: boolean;
 }
@@ -106,7 +106,7 @@ const MyItem = styled.div<{
 const MyMenuItem = ({
   text,
   onHover,
-  onClickItem,
+  onClick,
   disabled,
   hovered,
   selected = false,
@@ -117,8 +117,8 @@ const MyMenuItem = ({
     onHover?.();
   };
 
-  const handleClick = () => {
-    if (!disabled) onClickItem?.();
+  const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!disabled) onClick?.(e);
   };
 
   return (
