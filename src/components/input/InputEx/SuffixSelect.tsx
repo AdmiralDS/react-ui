@@ -167,6 +167,7 @@ export const SuffixSelect = <T extends ValueType>({
             onSelect={handleOnSelect}
             renderOption={renderOption}
             dimension={dimension}
+            preventFocusSteal
           />
         </StyledDropdownContainer>
       )}

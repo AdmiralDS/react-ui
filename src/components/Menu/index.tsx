@@ -140,6 +140,9 @@ export interface MenuProps extends HTMLAttributes<HTMLDivElement> {
    * Признак необходимости активировать меню сразу при появлении
    */
   defaultIsActive?: boolean;
+
+  /** Клик по меню не преводит к перемещению фокуса */
+  preventFocusSteal?: boolean;
 }
 
 export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
@@ -166,6 +169,7 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
       onCloseQuery,
       defaultIsActive = true,
       subMenuRenderDirection,
+      preventFocusSteal,
       ...props
     },
     ref,
@@ -348,7 +352,8 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
             activateItem(itemProps.disabled ? undefined : id);
             setSubmenuVisible(hasSubmenu);
           },
-          onClickItem: () => handleClickItem(id),
+          onMouseDown: preventFocusSteal ? (e: React.MouseEvent<HTMLElement>) => e.preventDefault() : undefined,
+          onClick: () => handleClickItem(id),
           hasSubmenu,
           selfRef: (ref: HTMLDivElement | null) => {
             if (activeId === id && hasSubmenu) {
@@ -384,6 +389,7 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
           // selectedId={innerSelected}
           onActivateItem={activateItem}
           onSelectItem={handleClickItem}
+          preventFocusSteal={preventFocusSteal}
         />
       );
     };
@@ -420,6 +426,7 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
             onCloseQuery={handleSubMenuClose}
             selected={innerSelected}
             onSelectItem={(id) => handleClickItem(id)}
+            preventFocusSteal
           />
         )
       );

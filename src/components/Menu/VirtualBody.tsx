@@ -26,6 +26,8 @@ interface VirtualBodyProps extends React.HTMLAttributes<HTMLDivElement> {
   activeId?: string;
   /** Id выбранного элемента */
   selectedId?: string;
+  /** Клик по меню не преводит к перемещению фокуса */
+  preventFocusSteal?: boolean;
 }
 
 interface PreviousValues {
@@ -60,6 +62,7 @@ export const VirtualBody = ({
   selectedId,
   onActivateItem,
   onSelectItem,
+  preventFocusSteal,
 }: VirtualBodyProps) => {
   const [scrollTop, setScrollTop] = React.useState(0);
   const [partition, setPartition] = React.useState<PartitionExt>({
@@ -145,7 +148,8 @@ export const VirtualBody = ({
         onHover: () => {
           onActivateItem(itemProps.disabled ? undefined : id);
         },
-        onClickItem: () => onSelectItem(id),
+        onClick: () => onSelectItem(id),
+        onMouseDown: preventFocusSteal ? (e: React.MouseEvent<HTMLElement>) => e.preventDefault() : undefined,
         containerRef: scrollContainerRef,
         ...itemProps,
       };

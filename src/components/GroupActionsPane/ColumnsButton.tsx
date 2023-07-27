@@ -24,7 +24,7 @@ export interface RenderOptionProps {
   /** Отключение секции */
   disabled?: boolean;
   /** Обработчик клика по item */
-  onClickItem?: () => void;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
   /** Обработчик наведения мыши на item */
   onHover?: () => void;
 }
@@ -157,7 +157,7 @@ export const ColumnsButton = React.forwardRef<HTMLButtonElement, ColumnsButtonPr
                 title={title}
                 visible={column.visible}
                 dimension={menuDimension}
-                onClickItem={() => {
+                onClick={() => {
                   handleChangeColumn({ id, visible: !column.visible });
                 }}
                 key={index}

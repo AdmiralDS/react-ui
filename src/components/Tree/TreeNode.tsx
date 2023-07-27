@@ -30,7 +30,8 @@ export interface TreeNodeRenderOptionProps {
   /** Признак развернутого состояния item-а */
   expanded?: boolean;
   /** Обработчик клика мыши на item */
-  onClickItem?: () => void;
+  onClick?: React.MouseEventHandler<HTMLDivElement>;
+
   /** Обработчик наведения мыши на item */
   onHover?: () => void;
   /** обработчик изменения состояния открытости узла */
@@ -140,7 +141,7 @@ export const TreeNode = ({
   indent,
   onChange,
   onHover,
-  onClickItem,
+  onClick,
   onToggleExpand,
   children,
   className,
@@ -163,9 +164,9 @@ export const TreeNode = ({
     if (hasChildren) setMouseOnChevron(false);
   };
 
-  const handleClick = (e: React.MouseEvent) => {
+  const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === chevronRef.current) return;
-    if (!disabled) onClickItem?.();
+    if (!disabled) onClick?.(e);
   };
 
   const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
