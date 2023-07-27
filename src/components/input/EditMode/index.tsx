@@ -271,7 +271,7 @@ export const EditMode = forwardRef<HTMLInputElement, EditModeProps>(
     ref,
   ) => {
     const [edit, setEdit] = useState(false);
-    const [localVal, setLocalVal] = useState(value);
+    const [valueBeforeEdit, setValueBeforeEdit] = useState(value);
     const iconSize = dimension === 's' ? 20 : 24;
     const inputRef = useRef<HTMLInputElement>(null);
     const wrapperRef = useRef<HTMLDivElement>(null);
@@ -306,7 +306,7 @@ export const EditMode = forwardRef<HTMLInputElement, EditModeProps>(
 
     const enableEdit = () => {
       setEdit(true);
-      setLocalVal(value);
+      setValueBeforeEdit(value);
       onEdit?.(value);
     };
     const handleConfirm = () => {
@@ -319,8 +319,8 @@ export const EditMode = forwardRef<HTMLInputElement, EditModeProps>(
     const handleCancel = () => {
       setEdit(false);
       if (inputRef.current) {
-        changeInputData(inputRef.current, { value: localVal.toString() });
-        onCancel?.(localVal);
+        changeInputData(inputRef.current, { value: valueBeforeEdit.toString() });
+        onCancel?.(valueBeforeEdit);
         onClear?.();
       }
     };
