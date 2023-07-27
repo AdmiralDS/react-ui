@@ -12,7 +12,7 @@ import { ReactComponent as CheckClearOutline } from '@admiral-ds/icons/build/ser
 import { ReactComponent as CloseOutline } from '@admiral-ds/icons/build/service/CloseOutline.svg';
 import { Tooltip } from '#src/components/Tooltip';
 import { checkOverflow } from '#src/components/common/utils/checkOverflow';
-import { forwardRef, useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { forwardRef, useLayoutEffect, useRef, useState } from 'react';
 
 const TypographyMixin = css`
   [data-dimension='s'] & {
@@ -231,12 +231,15 @@ export interface EditModeProps extends Omit<TextInputProps, 'dimension' | 'displ
   bold?: boolean;
   /** Позволяет добавлять миксин на контейнер компонента, созданный с помощью styled css. */
   containerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
-  /** Колбек на переход в режим редактирования */
-  onEdit?: () => void;
-  /** Колбек на нажатие кнопки подтверждения введенного значения и выхода из режима редактирования */
-  onConfirm?: (value: string) => void;
-  /** Колбек на нажатие кнопки отмены ввода значения и выхода из режима редактирования */
-  onCancel?: (value: string) => void;
+  /** Функция обработчика события нажатия кнопки начала редактирования
+   * @param value - значение поля ввода для редактирования */
+  onEdit?: (value: string | number) => void;
+  /** Функция обработчика события нажатия кнопки подтверждения введенного значения
+   * @param value - отредактированное значение поля ввода */
+  onConfirm?: (value: string | number) => void;
+  /** Функция обработчика события нажатия кнопки отмены
+   * @param value - значение поля ввода до нажатия кнопки редактирования */
+  onCancel?: (value: string | number) => void;
   /**
    * @deprecated Используйте onCancel
    * Колбек на нажатие кнопки очистки инпута
@@ -302,8 +305,8 @@ export const EditMode = forwardRef<HTMLInputElement, EditModeProps>(
 
     const enableEdit = () => {
       setEdit(true);
-      onEdit?.();
       setLocalVal(value);
+      onEdit?.(value);
     };
     const handleConfirm = () => {
       setEdit(false);
@@ -316,7 +319,7 @@ export const EditMode = forwardRef<HTMLInputElement, EditModeProps>(
       setEdit(false);
       if (inputRef.current) {
         changeInputData(inputRef.current, { value: localVal.toString() });
-        onCancel?.(localVal.toString());
+        onCancel?.(localVal);
         onClear?.();
       }
     };
