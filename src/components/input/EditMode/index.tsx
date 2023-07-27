@@ -10,7 +10,7 @@ import { refSetter } from '#src/components/common/utils/refSetter';
 import { changeInputData } from '#src/components/common/dom/changeInputData';
 
 import { ReactComponent as EditSolid } from '@admiral-ds/icons/build/system/EditSolid.svg';
-import { ReactComponent as CheckClearOutline } from '@admiral-ds/icons/build/service/CheckClearOutline.svg';
+import { ReactComponent as SentOutline } from '@admiral-ds/icons/build/service/SentOutline.svg';
 import { ReactComponent as CloseOutline } from '@admiral-ds/icons/build/service/CloseOutline.svg';
 import { Tooltip } from '#src/components/Tooltip';
 import { checkOverflow } from '#src/components/common/utils/checkOverflow';
@@ -105,7 +105,7 @@ const EditIcon = styled(EditSolid)<{ $multiline: boolean }>`
   ${(p) => p.$multiline && multilineIcon}
 `;
 
-const ConfirmIcon = styled(CheckClearOutline)`
+const ConfirmIcon = styled(SentOutline)`
   ${iconStyle}
 `;
 

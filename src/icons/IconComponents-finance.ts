@@ -42,8 +42,6 @@ export { ReactComponent as PayCashOutline } from '@admiral-ds/icons/build/financ
 export { ReactComponent as PayCashSolid } from '@admiral-ds/icons/build/finance/PayCashSolid.svg';
 export { ReactComponent as PayrollCardOutline } from '@admiral-ds/icons/build/finance/PayrollCardOutline.svg';
 export { ReactComponent as PayrollCardSolid } from '@admiral-ds/icons/build/finance/PayrollCardSolid.svg';
-export { ReactComponent as PersonOutline } from '@admiral-ds/icons/build/finance/PersonOutline.svg';
-export { ReactComponent as PersonSolid } from '@admiral-ds/icons/build/finance/PersonSolid.svg';
 export { ReactComponent as PlatinumOutline } from '@admiral-ds/icons/build/finance/PlatinumOutline.svg';
 export { ReactComponent as PlatinumSolid } from '@admiral-ds/icons/build/finance/PlatinumSolid.svg';
 export { ReactComponent as RUBOutline } from '@admiral-ds/icons/build/finance/RUBOutline.svg';

@@ -257,6 +257,7 @@ export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps
                 active={activeOption}
                 onActivateItem={setActiveOption}
                 onSelectItem={handleOptionSelect}
+                preventFocusSteal
               />
             )}
           </SuggestDropdownContainer>

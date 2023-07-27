@@ -1,3 +1,5 @@
+export { ReactComponent as AdminOutline } from '@admiral-ds/icons/build/system/AdminOutline.svg';
+export { ReactComponent as AdminSolid } from '@admiral-ds/icons/build/system/AdminSolid.svg';
 export { ReactComponent as ArrowCrossOutline } from '@admiral-ds/icons/build/system/ArrowCrossOutline.svg';
 export { ReactComponent as ArrowCrossSolid } from '@admiral-ds/icons/build/system/ArrowCrossSolid.svg';
 export { ReactComponent as ArrowDownOneOutline } from '@admiral-ds/icons/build/system/ArrowDownOneOutline.svg';
@@ -50,6 +52,14 @@ export { ReactComponent as ChevronUpOutline } from '@admiral-ds/icons/build/syst
 export { ReactComponent as ChevronUpSolid } from '@admiral-ds/icons/build/system/ChevronUpSolid.svg';
 export { ReactComponent as CloseFullscreenOutline } from '@admiral-ds/icons/build/system/CloseFullscreenOutline.svg';
 export { ReactComponent as CloseFullscreenSolid } from '@admiral-ds/icons/build/system/CloseFullscreenSolid.svg';
+export { ReactComponent as CloudDoneOutline } from '@admiral-ds/icons/build/system/CloudDoneOutline.svg';
+export { ReactComponent as CloudDoneSolid } from '@admiral-ds/icons/build/system/CloudDoneSolid.svg';
+export { ReactComponent as CloudNotAvailableOutline } from '@admiral-ds/icons/build/system/CloudNotAvailableOutline.svg';
+export { ReactComponent as CloudNotAvailableSolid } from '@admiral-ds/icons/build/system/CloudNotAvailableSolid.svg';
+export { ReactComponent as CloudOutline } from '@admiral-ds/icons/build/system/CloudOutline.svg';
+export { ReactComponent as CloudSolid } from '@admiral-ds/icons/build/system/CloudSolid.svg';
+export { ReactComponent as CloudUploadOutline } from '@admiral-ds/icons/build/system/CloudUploadOutline.svg';
+export { ReactComponent as CloudUploadSolid } from '@admiral-ds/icons/build/system/CloudUploadSolid.svg';
 export { ReactComponent as DarkModeOutline } from '@admiral-ds/icons/build/system/DarkModeOutline.svg';
 export { ReactComponent as DarkModeSolid } from '@admiral-ds/icons/build/system/DarkModeSolid.svg';
 export { ReactComponent as DeleteOutline } from '@admiral-ds/icons/build/system/DeleteOutline.svg';
@@ -106,6 +116,8 @@ export { ReactComponent as MoreHorizontalOutline } from '@admiral-ds/icons/build
 export { ReactComponent as MoreHorizontalSolid } from '@admiral-ds/icons/build/system/MoreHorizontalSolid.svg';
 export { ReactComponent as MoreVerticalOutline } from '@admiral-ds/icons/build/system/MoreVerticalOutline.svg';
 export { ReactComponent as MoreVerticalSolid } from '@admiral-ds/icons/build/system/MoreVerticalSolid.svg';
+export { ReactComponent as NoAdminOutline } from '@admiral-ds/icons/build/system/NoAdminOutline.svg';
+export { ReactComponent as NoAdminSolid } from '@admiral-ds/icons/build/system/NoAdminSolid.svg';
 export { ReactComponent as NotificationsOffOutline } from '@admiral-ds/icons/build/system/NotificationsOffOutline.svg';
 export { ReactComponent as NotificationsOffSolid } from '@admiral-ds/icons/build/system/NotificationsOffSolid.svg';
 export { ReactComponent as NotificationsOutline } from '@admiral-ds/icons/build/system/NotificationsOutline.svg';
@@ -149,8 +161,6 @@ export { ReactComponent as SearchOutline } from '@admiral-ds/icons/build/system/
 export { ReactComponent as SearchSolid } from '@admiral-ds/icons/build/system/SearchSolid.svg';
 export { ReactComponent as SettingsOutline } from '@admiral-ds/icons/build/system/SettingsOutline.svg';
 export { ReactComponent as SettingsSolid } from '@admiral-ds/icons/build/system/SettingsSolid.svg';
-export { ReactComponent as ShapeOutline } from '@admiral-ds/icons/build/system/ShapeOutline.svg';
-export { ReactComponent as ShapeSolid } from '@admiral-ds/icons/build/system/ShapeSolid.svg';
 export { ReactComponent as SignInOutline } from '@admiral-ds/icons/build/system/SignInOutline.svg';
 export { ReactComponent as SignInSolid } from '@admiral-ds/icons/build/system/SignInSolid.svg';
 export { ReactComponent as SmallArrowDownOutline } from '@admiral-ds/icons/build/system/SmallArrowDownOutline.svg';
@@ -169,6 +179,8 @@ export { ReactComponent as SortUpOutline } from '@admiral-ds/icons/build/system/
 export { ReactComponent as SortUpSolid } from '@admiral-ds/icons/build/system/SortUpSolid.svg';
 export { ReactComponent as StarOutline } from '@admiral-ds/icons/build/system/StarOutline.svg';
 export { ReactComponent as StarSolid } from '@admiral-ds/icons/build/system/StarSolid.svg';
+export { ReactComponent as SwitchPinnedAreasOutline } from '@admiral-ds/icons/build/system/SwitchPinnedAreasOutline.svg';
+export { ReactComponent as SwitchPinnedAreasSolid } from '@admiral-ds/icons/build/system/SwitchPinnedAreasSolid.svg';
 export { ReactComponent as SyncForbidOutline } from '@admiral-ds/icons/build/system/SyncForbidOutline.svg';
 export { ReactComponent as SyncPermitOutline } from '@admiral-ds/icons/build/system/SyncPermitOutline.svg';
 export { ReactComponent as ThirdPersonOutline } from '@admiral-ds/icons/build/system/ThirdPersonOutline.svg';

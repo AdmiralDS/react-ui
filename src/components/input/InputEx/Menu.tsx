@@ -68,10 +68,16 @@ export interface MenuProps<T> extends Omit<HTMLAttributes<HTMLDivElement>, 'onSe
 
   /** Задает максимальную высоту меню */
   maxHeight?: string | number;
+
+  /** Клик по меню не преводит к перемещению фокуса */
+  preventFocusSteal?: boolean;
 }
 
 export const Menu = React.forwardRef<HTMLDivElement, MenuProps<ValueType>>(
-  ({ options, selected, renderOption = defaultOptionRender, onSelect, dimension, ...props }, ref) => {
+  (
+    { options, selected, renderOption = defaultOptionRender, onSelect, dimension, preventFocusSteal, ...props },
+    ref,
+  ) => {
     const [activeOption, setActiveOption] = React.useState<null | ValueType>(null);
 
     const menuRef = React.useRef<HTMLDivElement | null>(null);
@@ -123,7 +129,8 @@ export const Menu = React.forwardRef<HTMLDivElement, MenuProps<ValueType>>(
           hovered: option === activeOption,
           selected: option === selected,
           onHover: () => setActiveOption(option),
-          onClickItem: () => onSelect(option),
+          onClick: () => onSelect(option),
+          onMouseDown: preventFocusSteal ? (e: React.MouseEvent<HTMLElement>) => e.preventDefault() : undefined,
           dimension: dimension,
         }),
       );

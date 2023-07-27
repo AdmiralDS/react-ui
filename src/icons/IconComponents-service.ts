@@ -2,7 +2,6 @@ export { ReactComponent as AgreedOutline } from '@admiral-ds/icons/build/service
 export { ReactComponent as AgreedSolid } from '@admiral-ds/icons/build/service/AgreedSolid.svg';
 export { ReactComponent as ArchiveOutline } from '@admiral-ds/icons/build/service/ArchiveOutline.svg';
 export { ReactComponent as ArchiveSolid } from '@admiral-ds/icons/build/service/ArchiveSolid.svg';
-export { ReactComponent as CheckClearOutline } from '@admiral-ds/icons/build/service/CheckClearOutline.svg';
 export { ReactComponent as CheckOutline } from '@admiral-ds/icons/build/service/CheckOutline.svg';
 export { ReactComponent as CheckSolid } from '@admiral-ds/icons/build/service/CheckSolid.svg';
 export { ReactComponent as CloseCircleOutline } from '@admiral-ds/icons/build/service/CloseCircleOutline.svg';
@@ -22,6 +21,8 @@ export { ReactComponent as ErrorSolid } from '@admiral-ds/icons/build/service/Er
 export { ReactComponent as ErrorTriangleOutline } from '@admiral-ds/icons/build/service/ErrorTriangleOutline.svg';
 export { ReactComponent as ErrorTriangleSolid } from '@admiral-ds/icons/build/service/ErrorTriangleSolid.svg';
 export { ReactComponent as EyeCloseOutline } from '@admiral-ds/icons/build/service/EyeCloseOutline.svg';
+export { ReactComponent as EyeOffOutline } from '@admiral-ds/icons/build/service/EyeOffOutline.svg';
+export { ReactComponent as EyeOffSolid } from '@admiral-ds/icons/build/service/EyeOffSolid.svg';
 export { ReactComponent as EyeOutline } from '@admiral-ds/icons/build/service/EyeOutline.svg';
 export { ReactComponent as EyeSolid } from '@admiral-ds/icons/build/service/EyeSolid.svg';
 export { ReactComponent as HelpOutline } from '@admiral-ds/icons/build/service/HelpOutline.svg';
@@ -44,6 +45,8 @@ export { ReactComponent as PlusOutline } from '@admiral-ds/icons/build/service/P
 export { ReactComponent as PlusSolid } from '@admiral-ds/icons/build/service/PlusSolid.svg';
 export { ReactComponent as ProcessOutline } from '@admiral-ds/icons/build/service/ProcessOutline.svg';
 export { ReactComponent as ProcessSolid } from '@admiral-ds/icons/build/service/ProcessSolid.svg';
+export { ReactComponent as ReadCheckOutline } from '@admiral-ds/icons/build/service/ReadCheckOutline.svg';
+export { ReactComponent as SentOutline } from '@admiral-ds/icons/build/service/SentOutline.svg';
 export { ReactComponent as ShareOutline } from '@admiral-ds/icons/build/service/ShareOutline.svg';
 export { ReactComponent as ShareSolid } from '@admiral-ds/icons/build/service/ShareSolid.svg';
 export { ReactComponent as SizeChangerHorizontalOutline } from '@admiral-ds/icons/build/service/SizeChangerHorizontalOutline.svg';
