@@ -17,7 +17,7 @@ import type { RenderOptionProps } from '#src/components/Menu/MenuItem';
 import { MenuItem } from '#src/components/Menu/MenuItem';
 import { Menu } from '#src/components/Menu';
 
-export interface SlotProps extends HTMLAttributes<HTMLDivElement>, RenderOptionProps {
+export interface SlotProps extends HTMLAttributes<HTMLElement>, RenderOptionProps {
   value: string;
 }
 
@@ -278,6 +278,7 @@ export const TimeInput = React.forwardRef<HTMLInputElement, TimeInputProps>(
               data-dimension={dimension}
               onSelectItem={handleSelectOption}
               onActivateItem={setActiveOption}
+              preventFocusSteal
             />
           </StyledDropdownContainer>
         )}

@@ -1,4 +1,5 @@
-import * as React from 'react';
+import type { ChangeEventHandler } from 'react';
+import { forwardRef, useLayoutEffect, useRef, useState } from 'react';
 import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import styled, { css } from 'styled-components';
 import { Button } from '#src/components/Button';
@@ -9,7 +10,7 @@ import { refSetter } from '#src/components/common/utils/refSetter';
 import { changeInputData } from '#src/components/common/dom/changeInputData';
 
 import { ReactComponent as EditSolid } from '@admiral-ds/icons/build/system/EditSolid.svg';
-import { ReactComponent as CheckClearOutline } from '@admiral-ds/icons/build/service/CheckClearOutline.svg';
+import { ReactComponent as SentOutline } from '@admiral-ds/icons/build/service/SentOutline.svg';
 import { ReactComponent as CloseOutline } from '@admiral-ds/icons/build/service/CloseOutline.svg';
 import { Tooltip } from '#src/components/Tooltip';
 import { checkOverflow } from '#src/components/common/utils/checkOverflow';
@@ -104,11 +105,11 @@ const EditIcon = styled(EditSolid)<{ $multiline: boolean }>`
   ${(p) => p.$multiline && multilineIcon}
 `;
 
-const CheckIcon = styled(CheckClearOutline)`
+const ConfirmIcon = styled(SentOutline)`
   ${iconStyle}
 `;
 
-const ClearIcon = styled(CloseOutline)`
+const CancelIcon = styled(CloseOutline)`
   ${iconStyle}
 `;
 
@@ -220,22 +221,30 @@ const stopEvent = (e: React.MouseEvent) => e.preventDefault();
 
 type Dimension = 's' | 'm' | 'xl' | 'xxl';
 
-export interface EditModeProps extends Omit<TextInputProps, 'dimension'> {
+export interface EditModeProps extends Omit<TextInputProps, 'dimension' | 'displayClearIcon'> {
   /** Значение компонента */
   value: string | number;
   /** Колбек на изменение значения компонента */
-  onChange: React.ChangeEventHandler<HTMLInputElement>;
+  onChange: ChangeEventHandler<HTMLInputElement>;
   /** Размер компонента */
   dimension?: Dimension;
   /** Жирное начертание текста. В размерах xl и xxl текст всегда жирный */
   bold?: boolean;
   /** Позволяет добавлять миксин на контейнер компонента, созданный с помощью styled css. */
   containerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
-  /** Колбек на переход в режим редактирования */
-  onEdit?: () => void;
-  /** Колбек на нажатие кнопки подтверждения введенного значения и выхода из режима редактирования */
-  onConfirm?: (value: string) => void;
-  /** Колбек на нажатие кнопки очистки инпута */
+  /** Функция обработчика события нажатия кнопки начала редактирования
+   * @param value - значение поля ввода для редактирования */
+  onEdit?: (value: string | number) => void;
+  /** Функция обработчика события нажатия кнопки подтверждения введенного значения
+   * @param value - отредактированное значение поля ввода */
+  onConfirm?: (value: string | number) => void;
+  /** Функция обработчика события нажатия кнопки отмены
+   * @param value - значение поля ввода до нажатия кнопки редактирования */
+  onCancel?: (value: string | number) => void;
+  /**
+   * @deprecated Используйте onCancel
+   * Колбек на нажатие кнопки очистки инпута
+   */
   onClear?: () => void;
   /** Отображение тултипа, по умолчанию true */
   showTooltip?: boolean;
@@ -243,7 +252,7 @@ export interface EditModeProps extends Omit<TextInputProps, 'dimension'> {
   multilineView?: boolean;
 }
 
-export const EditMode = React.forwardRef<HTMLInputElement, EditModeProps>(
+export const EditMode = forwardRef<HTMLInputElement, EditModeProps>(
   (
     {
       dimension = 'm',
@@ -252,6 +261,7 @@ export const EditMode = React.forwardRef<HTMLInputElement, EditModeProps>(
       disabled = false,
       onEdit,
       onConfirm,
+      onCancel,
       onClear,
       value,
       showTooltip = true,
@@ -260,18 +270,18 @@ export const EditMode = React.forwardRef<HTMLInputElement, EditModeProps>(
     },
     ref,
   ) => {
-    const [edit, setEdit] = React.useState(false);
-    const [localVal, setLocalVal] = React.useState(value);
+    const [edit, setEdit] = useState(false);
+    const [valueBeforeEdit, setValueBeforeEdit] = useState(value);
     const iconSize = dimension === 's' ? 20 : 24;
-    const inputRef = React.useRef<HTMLInputElement>(null);
-    const wrapperRef = React.useRef<HTMLDivElement>(null);
+    const inputRef = useRef<HTMLInputElement>(null);
+    const wrapperRef = useRef<HTMLDivElement>(null);
 
-    const [overflowActive, setOverflowActive] = React.useState<boolean>(false);
-    const [tooltipVisible, setTooltipVisible] = React.useState<boolean>(false);
-    const [node, setNode] = React.useState<HTMLElement | null>(null);
-    const textRef = React.useRef<HTMLDivElement>(null);
+    const [overflowActive, setOverflowActive] = useState<boolean>(false);
+    const [tooltipVisible, setTooltipVisible] = useState<boolean>(false);
+    const [node, setNode] = useState<HTMLElement | null>(null);
+    const textRef = useRef<HTMLDivElement>(null);
 
-    React.useLayoutEffect(() => {
+    useLayoutEffect(() => {
       function show() {
         setTooltipVisible(true);
       }
@@ -288,33 +298,29 @@ export const EditMode = React.forwardRef<HTMLInputElement, EditModeProps>(
       }
     }, [setTooltipVisible, node]);
 
-    React.useLayoutEffect(() => {
+    useLayoutEffect(() => {
       if (textRef.current && checkOverflow(textRef.current) !== overflowActive) {
         setOverflowActive(checkOverflow(textRef.current));
       }
     }, [tooltipVisible, textRef.current, setOverflowActive]);
 
-    React.useEffect(() => {
-      if (!localVal && value) {
-        setLocalVal(value);
-      }
-    }, [value, localVal]);
-
     const enableEdit = () => {
       setEdit(true);
-      onEdit?.();
+      setValueBeforeEdit(value);
+      onEdit?.(value);
     };
-    const disabledEdit = () => {
+    const handleConfirm = () => {
       setEdit(false);
       if (inputRef.current) {
-        onConfirm?.(inputRef.current.value);
-        setLocalVal(inputRef.current.value);
+        const inputValue = inputRef.current.value;
+        onConfirm?.(inputValue);
       }
     };
-    const handleClear = () => {
+    const handleCancel = () => {
       setEdit(false);
       if (inputRef.current) {
-        changeInputData(inputRef.current, { value: localVal.toString() });
+        changeInputData(inputRef.current, { value: valueBeforeEdit.toString() });
+        onCancel?.(valueBeforeEdit);
         onClear?.();
       }
     };
@@ -349,15 +355,15 @@ export const EditMode = React.forwardRef<HTMLInputElement, EditModeProps>(
                 dimension={editDimension}
                 displayAsSquare
                 disabled={props.status === 'error'}
-                onClick={disabledEdit}
-                iconStart={<CheckIcon height={iconSize} width={iconSize} />}
+                onClick={handleConfirm}
+                iconStart={<ConfirmIcon height={iconSize} width={iconSize} />}
               />
               <EditButton
                 appearance="secondary"
                 dimension={editDimension}
                 displayAsSquare
-                onClick={handleClear}
-                iconStart={<ClearIcon height={iconSize} width={iconSize} />}
+                onClick={handleCancel}
+                iconStart={<CancelIcon height={iconSize} width={iconSize} />}
               />
             </>
           )

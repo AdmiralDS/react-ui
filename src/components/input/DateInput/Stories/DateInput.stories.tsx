@@ -9,12 +9,14 @@ import {
 import { DateInputPlaygroundTemplate } from './DateInputPlayground.template';
 import { DateInputPickMonthTemplate } from './DateInputPickMonth.template';
 import { DateInputAlternativeIconTemplate } from './DateInputAlternativeIcon.template';
+import { DateInputSpecialDatesTemplate } from './DateInputSpecialDates.template';
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
 import DateInputPlaygroundRaw from './DateInputPlayground.template?raw';
 import DateInputPickMonthRaw from './DateInputPickMonth.template?raw';
 import DateInputAlternativeIconRaw from './DateInputAlternativeIcon.template?raw';
+import DateInputSpecialDatesRaw from './DateInputSpecialDates.template?raw';
 
 export default {
   title: 'Admiral-2.1/Input/DateInput',
@@ -162,7 +164,7 @@ export default {
   },
 } as Meta<typeof DateInput>;
 
-//<editor-fold desc="DateInput (input type="date")">
+//<editor-fold desc="DateInput (input type=date)">
 const DateInputPlaygroundStory: StoryFn<typeof DateInput> = (props) => <DateInputPlaygroundTemplate {...props} />;
 
 export const DateInputPlayground = {
@@ -217,3 +219,26 @@ export const DateInputPickMonth = {
 
   name: 'DateInput. Выбор месяца',
 };
+
+//</editor-fold>
+
+//<editor-fold desc="DateInput. Выделение определенных дат">
+const DateInputSpecialDatesStory: StoryFn<typeof DateInput> = (props) => (
+  <DateInputSpecialDatesTemplate {...cleanUpProps(props)} />
+);
+
+export const DateInputSpecialDates = {
+  render: DateInputSpecialDatesStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: DateInputSpecialDatesRaw,
+      },
+    },
+  },
+
+  name: 'DateInput. Выделение определенных дат',
+};
+
+//</editor-fold>

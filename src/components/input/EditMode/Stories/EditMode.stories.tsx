@@ -71,9 +71,6 @@ export default {
     disableCopying: {
       control: { type: 'boolean' },
     },
-    displayClearIcon: {
-      control: { type: 'boolean' },
-    },
     placeholder: {
       control: { type: 'text' },
     },

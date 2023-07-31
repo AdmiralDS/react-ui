@@ -6,14 +6,23 @@ import { backgroundColor, colorTextMixin, paddings, styleTextMixin } from './men
 import { Chevron } from '#src/components/Menu/styled';
 import { refSetter } from '#src/components/common/utils/refSetter';
 
+const stopEventHandler = (e: React.MouseEvent) => {
+  e.preventDefault();
+  e.stopPropagation();
+};
+
 export interface RenderOptionProps {
   key?: string | number;
   /** Активная секция MenuItems */
   selected?: boolean;
   /** Акцентная секция MenuItems */
   hovered?: boolean;
+
   /** Обработчик клика по item */
-  onClickItem?: () => void;
+  //onClickItem?: () => void;
+
+  onClick?: React.MouseEventHandler<HTMLElement>;
+
   /** Обработчик наведения мыши на item */
   onHover?: () => void;
   /** ссылка на контейнер, в котором находится Menu*/
@@ -36,7 +45,7 @@ export interface MenuModelItemProps {
   expandIcon?: React.ReactNode;
 }
 
-export interface MenuItemProps extends HTMLAttributes<HTMLDivElement>, RenderOptionProps {
+export interface MenuItemProps extends HTMLAttributes<HTMLElement>, RenderOptionProps {
   /** Размер MenuItems */
   dimension?: ItemDimension;
 }
@@ -48,12 +57,12 @@ export const MenuItem = React.forwardRef<HTMLDivElement, MenuItemProps>(
       expandIcon = <Chevron />,
       hasSubmenu,
       onHover,
-      onClickItem,
       disabled,
       hovered,
       dimension = 'l',
       selected = false,
       selfRef,
+      onMouseDown,
       ...props
     },
     ref,
@@ -62,11 +71,7 @@ export const MenuItem = React.forwardRef<HTMLDivElement, MenuItemProps>(
       onHover?.();
     };
 
-    const handleClick = (e: React.MouseEvent) => {
-      e.preventDefault();
-      e.stopPropagation();
-      if (!disabled) onClickItem?.();
-    };
+    const handleMouseDown = !disabled ? onMouseDown : stopEventHandler;
 
     const resolvedRef = selfRef ? refSetter(ref, selfRef) : ref;
 
@@ -80,7 +85,7 @@ export const MenuItem = React.forwardRef<HTMLDivElement, MenuItemProps>(
         data-disabled={disabled}
         data-dimension={dimension}
         onMouseMove={handleMouseMove}
-        onMouseDown={handleClick}
+        onMouseDown={handleMouseDown}
         {...props}
       >
         {React.Children.toArray(children).map((child, index) =>

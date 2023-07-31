@@ -684,6 +684,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
               renderBottomPanel={renderDropDownBottomPanel}
               containerRef={dropDownRef}
               virtualScroll={virtualScroll}
+              preventFocusSteal
             />
           </DropdownContainer>
         )}
