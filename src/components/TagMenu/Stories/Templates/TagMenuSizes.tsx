@@ -28,26 +28,28 @@ const itemsDemoSizes: Array<TagOptionProps> = [
     id: '1',
     tagText: 'Option one',
     icon: <CheckOutline />,
-    kind: 'red',
+    kind: 'danger',
   },
   {
     id: '2',
     tagText: 'Option two',
-    kind: 'blue',
+    kind: 'primary',
   },
   {
     id: '3',
     tagText: 'Option three',
-    kind: 'green',
+    kind: 'success',
   },
   {
     id: '4',
     tagText: 'Option four',
     icon: <CheckOutline />,
+    kind: 'warning',
   },
   {
     id: '5',
     tagText: 'Option five',
+    kind: 'neutral',
   },
   {
     id: '6',
@@ -73,7 +75,9 @@ export const TagMenuSizesTemplate = (args: TagMenuProps) => {
       id: item.id,
       render: (options: RenderOptionProps) => (
         <StyledMenuItem dimension="m" {...options} key={item.id}>
-          {item.kind && !item.statusViaBackground && <TagCircle background={item.kind as TagKind} />}
+          {item.kind && item.kind !== 'neutral' && !item.statusViaBackground && (
+            <TagCircle background={item.kind as TagKind} />
+          )}
           {item.tagText}
         </StyledMenuItem>
       ),
@@ -85,7 +89,9 @@ export const TagMenuSizesTemplate = (args: TagMenuProps) => {
       id: item.id,
       render: (options: RenderOptionProps) => (
         <StyledMenuItem dimension="s" {...options} key={item.id}>
-          {item.kind && !item.statusViaBackground && <TagCircle background={item.kind as TagKind} />}
+          {item.kind && item.kind !== 'neutral' && !item.statusViaBackground && (
+            <TagCircle background={item.kind as TagKind} />
+          )}
           {item.tagText}
         </StyledMenuItem>
       ),
