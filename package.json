@@ -11,9 +11,6 @@
   ],
   "author": "Admiral DS team",
   "license": "See license in ./LICENSE",
-  "engines": {
-    "node": ">=18"
-  },
   "files": [
     "dist",
     "src/components",
