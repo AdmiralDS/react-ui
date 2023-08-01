@@ -2,6 +2,8 @@
 export type RectProps = {
   rafId?: number;
   rect?: DOMRect;
+  // isObserving should become false on node unmount
+  isObserving?: boolean;
 };
 
 const props: (keyof DOMRect)[] = ['bottom', 'height', 'left', 'right', 'top', 'width'];
@@ -18,23 +20,27 @@ export default function observeRect(
     observe() {
       if (state.rafId) cancelAnimationFrame(state.rafId);
       const run = () => {
-        const { bottom, height, left, right, top, width, x, y } = node.getBoundingClientRect();
+        if (state.isObserving) {
+          const { bottom, height, left, right, top, width, x, y } = node.getBoundingClientRect();
 
-        //IE fix: The returned object lacks x & y values
-        const newRect = { bottom, height, left, right, top, width, x: x || left, y: y || top } as DOMRect;
-
-        if (rectChanged(newRect, state.rect)) {
-          state.rect = newRect;
-          cb(state.rect);
+          //IE fix: The returned object lacks x & y values
+          const newRect = { bottom, height, left, right, top, width, x: x || left, y: y || top } as DOMRect;
+  
+          if (rectChanged(newRect, state.rect)) {
+            state.rect = newRect;
+            cb(state.rect);
+          }
+          state.rafId = window.requestAnimationFrame(run);
         }
-        state.rafId = requestAnimationFrame(run);
       };
 
       state.rafId = requestAnimationFrame(run);
+      state.isObserving = true;
     },
 
     unobserve() {
       if (state.rafId) cancelAnimationFrame(state.rafId);
+      if (state.isObserving) state.isObserving = false;
     },
   };
 }
