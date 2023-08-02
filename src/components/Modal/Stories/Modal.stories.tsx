@@ -10,6 +10,7 @@ import {
   ModalScrollTemplate,
   ModalCustomContentTemplate,
   ModalCustomOverlayTemplate,
+  ModalStatusIconTemplate,
 } from './Templates';
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
@@ -20,6 +21,7 @@ import ModalWithoutButtonsRaw from './Templates/ModalWithoutButtons?raw';
 import ModalScrollRaw from './Templates/ModalScroll?raw';
 import ModalCustomContentRaw from './Templates/ModalCustomContent?raw';
 import ModalCustomOverlayRaw from './Templates/ModalCustomOverlay?raw';
+import ModalStatusIconRaw from './Templates/ModalStatusIcon?raw';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -222,3 +224,28 @@ export const ModalCustomOverlayExample = {
 
   name: 'Modal. Кастомизация подложки модального окна.',
 };
+
+//</editor-fold>
+
+//<editor-fold desc="Статусные иконки">
+const ModalStatusIconStory: StoryFn<typeof Modal> = (props) => <ModalStatusIconTemplate {...cleanUpProps(props)} />;
+
+export const ModalStatusIconExample = {
+  render: ModalStatusIconStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: ModalStatusIconRaw,
+      },
+      description: {
+        story: `Используются в простых текстовых модальных окнах для оповещений пользователя о важных 
+        событиях. Статус модального окна может быть четырех типов: Success, Information, Danger, Warning.`,
+      },
+    },
+  },
+
+  name: 'Modal. Статусные иконки.',
+};
+
+//</editor-fold>
