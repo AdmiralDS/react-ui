@@ -33,7 +33,9 @@ export const GroupRow = ({
   indeterminate,
   checked,
 }: GroupRowProps) => {
-  const handleExpandClick = () => {
+  const handleExpandClick = (e: React.MouseEvent<HTMLElement>) => {
+    // клик по иконке стрелки не должен вызывать событие клика по строке
+    e.stopPropagation();
     onRowExpansionChange?.(row.id);
   };
 

@@ -11,6 +11,7 @@ import {
   HintTextButtonTemplate,
   HintTargetTemplate,
   HintAnchorCssTemplate,
+  HintWithHeaderTemplate,
 } from './Templates';
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
@@ -22,6 +23,7 @@ import HintPositionRaw from './Templates/HintPosition?raw';
 import HintTextButtonRaw from './Templates/HintTextButton?raw';
 import HintTargetRaw from './Templates/HintTarget?raw';
 import HintAnchorCssRaw from './Templates/HintAnchorCss?raw';
+import HintWithHeaderRaw from './Templates/HintWithHeader?raw';
 
 const Separator = styled.div<{ height?: number }>`
   height: ${({ height }) => (height ? height : 20)}px;
@@ -292,3 +294,30 @@ export const HintAnchorCssExample = {
 
   name: 'Hint. Стилизация внешнего контейнера (AnchorWrapper) с помощью anchorCssMixin.',
 };
+
+//</editor-fold>
+
+//<editor-fold desc="Hint с заголовком">
+const HintWithHeaderStory: StoryFn<typeof Hint> = (props) => (
+  <HintWithHeaderTemplate visible renderContent={() => ''} {...cleanUpProps(props)} />
+);
+
+export const HintWithHeaderExample = {
+  render: HintWithHeaderStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: HintWithHeaderRaw,
+      },
+      description: {
+        story: `В качества контента хинта может выступать любой ReactNode, 
+        можно добавить, например, заголовок.`,
+      },
+    },
+  },
+
+  name: 'Hint с заголовком.',
+};
+
+//</editor-fold>
