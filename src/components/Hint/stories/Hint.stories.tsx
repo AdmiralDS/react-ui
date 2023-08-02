@@ -3,27 +3,25 @@ import styled from 'styled-components';
 import type { Meta, StoryFn } from '@storybook/react';
 import { Hint, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
-import {
-  HintBaseTemplate,
-  HintClassNameTemplate,
-  HintClickTemplate,
-  HintPositionTemplate,
-  HintTextButtonTemplate,
-  HintTargetTemplate,
-  HintAnchorCssTemplate,
-  HintWithHeaderTemplate,
-} from './Templates';
+import { HintBaseTemplate } from './HintBase.template';
+import { HintClassNameTemplate } from './HintClassName.template';
+import { HintClickTemplate } from './HintClick.template';
+import { HintPositionTemplate } from './HintPosition.template';
+import { HintTextButtonTemplate } from './HintTextButton.template';
+import { HintTargetTemplate } from './HintTarget.template';
+import { HintAnchorCssTemplate } from './HintAnchorCss.template';
+import { HintWithHeaderTemplate } from './HintWithHeader.template';
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
-import HintBaseRaw from './Templates/HintBase?raw';
-import HintClassNameRaw from './Templates/HintClassName?raw';
-import HintClickRaw from './Templates/HintClick?raw';
-import HintPositionRaw from './Templates/HintPosition?raw';
-import HintTextButtonRaw from './Templates/HintTextButton?raw';
-import HintTargetRaw from './Templates/HintTarget?raw';
-import HintAnchorCssRaw from './Templates/HintAnchorCss?raw';
-import HintWithHeaderRaw from './Templates/HintWithHeader?raw';
+import HintBaseRaw from './HintBase.template?raw';
+import HintClassNameRaw from './HintClassName.template?raw';
+import HintClickRaw from './HintClick.template?raw';
+import HintPositionRaw from './HintPosition.template?raw';
+import HintTextButtonRaw from './HintTextButton.template?raw';
+import HintTargetRaw from './HintTarget.template?raw';
+import HintAnchorCssRaw from './HintAnchorCss.template?raw';
+import HintWithHeaderRaw from './HintWithHeader.template?raw';
 
 const Separator = styled.div<{ height?: number }>`
   height: ${({ height }) => (height ? height : 20)}px;
