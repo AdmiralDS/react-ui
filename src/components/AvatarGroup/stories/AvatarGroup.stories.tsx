@@ -5,12 +5,13 @@ import styled from 'styled-components';
 import { AvatarGroup } from '@admiral-ds/react-ui';
 import type { AvatarGroupProps } from '@admiral-ds/react-ui';
 
-import { AvatarGroupPlaygroundTemplate, AvatarGroupWidthTemplate } from './Templates';
+import { AvatarGroupWidthTemplate } from './AvatarGroupWidth.template';
+import { AvatarGroupPlaygroundTemplate } from './AvatarGroupPlayground.template';
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
-import AvatarGroupWidthRaw from './Templates/AvatarGroupWidth?raw';
-import AvatarGroupPlaygroundRaw from './Templates/AvatarGroupPlayground?raw';
+import AvatarGroupWidthRaw from './AvatarGroupWidth.template?raw';
+import AvatarGroupPlaygroundRaw from './AvatarGroupPlayground.template?raw';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
