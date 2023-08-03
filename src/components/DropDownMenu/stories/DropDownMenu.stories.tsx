@@ -4,12 +4,12 @@ import styled from 'styled-components';
 
 import { DropDownMenu, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
-import { BaseDropDownTemplate, CategoryTemplate } from './Templates';
-import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+import { CategoryTemplate } from './Category.template';
+import { BaseDropDownTemplate } from './BaseDropDown.template';
 
 // Imports of text sources
-import CategoryRaw from './Templates/Category?raw';
-import BaseDropDownRaw from './Templates/BaseDropDown?raw';
+import CategoryRaw from './Category.template?raw';
+import BaseDropDownRaw from './BaseDropDown.template?raw';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -75,7 +75,7 @@ export default {
 
 //<editor-fold desc="Базовый пример">
 const BaseDropDownStory: StoryFn<typeof DropDownMenu> = ({ targetRef, ...props }) => (
-  <BaseDropDownTemplate targetRef={targetRef} {...cleanUpProps(props)} />
+  <BaseDropDownTemplate targetRef={targetRef} {...props} />
 );
 
 export const BaseDropDown = {
@@ -96,7 +96,7 @@ export const BaseDropDown = {
 
 //<editor-fold desc="Категории">
 const CategoryStory: StoryFn<typeof DropDownMenu> = ({ targetRef, ...props }) => (
-  <CategoryTemplate targetRef={targetRef} {...cleanUpProps(props)} />
+  <CategoryTemplate targetRef={targetRef} {...props} />
 );
 
 export const Category = {
