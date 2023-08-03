@@ -3,12 +3,12 @@ import styled from 'styled-components';
 import type { Meta, StoryFn } from '@storybook/react';
 import { DropdownContainer, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
-import { MenuContainerTemplate, SimpleContainerTemplate } from './Templates';
-import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+import { SimpleContainerTemplate } from './SimpleContainer.template';
+import { MenuContainerTemplate } from './MenuContainer.template';
 
 // Imports of text sources
-import SimpleContainerRaw from './Templates/SimpleContainer?raw';
-import MenuContainerRaw from './Templates/MenuContainer?raw';
+import SimpleContainerRaw from './SimpleContainer.template?raw';
+import MenuContainerRaw from './MenuContainer.template?raw';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -63,7 +63,7 @@ export default {
 
 //<editor-fold desc="Простой контейнер">
 const SimpleContainerStory: StoryFn<typeof DropdownContainer> = ({ targetRef, ...props }) => (
-  <SimpleContainerTemplate targetRef={targetRef} {...cleanUpProps(props)} />
+  <SimpleContainerTemplate targetRef={targetRef} {...props} />
 );
 
 export const SimpleContainer = {
@@ -84,7 +84,7 @@ export const SimpleContainer = {
 
 //<editor-fold desc="Контейнер с меню">
 const MenuContainerStory: StoryFn<typeof DropdownContainer> = ({ targetRef, ...props }) => (
-  <MenuContainerTemplate targetRef={targetRef} {...cleanUpProps(props)} />
+  <MenuContainerTemplate targetRef={targetRef} {...props} />
 );
 
 export const MenuContainer = {
