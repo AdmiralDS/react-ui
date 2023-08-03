@@ -3,21 +3,18 @@ import styled from 'styled-components';
 import type { Meta, StoryFn } from '@storybook/react';
 import { Breadcrumbs } from '@admiral-ds/react-ui';
 
-import {
-  BreadcrumbsPlaygroundTemplate,
-  BreadcrumbsSizesTemplate,
-  BreadcrumbsMobileTemplate,
-  BreadcrumbsLinkTemplate,
-  BreadcrumbsActiveCrumbTemplate,
-} from './Templates';
-import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+import { BreadcrumbsPlaygroundTemplate } from './BreadcrumbsPlayground.template';
+import { BreadcrumbsSizesTemplate } from './BreadcrumbsSizes.template';
+import { BreadcrumbsMobileTemplate } from './BreadcrumbsMobile.template';
+import { BreadcrumbsLinkTemplate } from './BreadcrumbsLink.template';
+import { BreadcrumbsActiveCrumbTemplate } from './BreadcrumbsActiveCrumb.template';
 
 // Imports of text sources
-import PlaygroundRaw from './Templates/BreadcrumbsPlayground?raw';
-import SizesRaw from './Templates/BreadcrumbsSizes?raw';
-import MobileRaw from './Templates/BreadcrumbsMobile?raw';
-import LinkRaw from './Templates/BreadcrumbsLink?raw';
-import ActiveCrumbRaw from './Templates/BreadcrumbsActiveCrumb?raw';
+import BreadcrumbsPlaygroundRaw from './BreadcrumbsPlayground.template?raw';
+import BreadcrumbsSizesRaw from './BreadcrumbsSizes.template?raw';
+import BreadcrumbsMobileRaw from './BreadcrumbsMobile.template?raw';
+import BreadcrumbsLinkRaw from './BreadcrumbsLink.template?raw';
+import BreadcrumbsActiveCrumbRaw from './BreadcrumbsActiveCrumb.template?raw';
 
 const Separator = styled.div`
   height: 20px;
@@ -90,9 +87,7 @@ export default {
 } as Meta<typeof Breadcrumbs>;
 
 //<editor-fold desc="Playground">
-const PlaygroundStory: StoryFn<typeof Breadcrumbs> = (props) => (
-  <BreadcrumbsPlaygroundTemplate items={[]} {...cleanUpProps(props)} />
-);
+const PlaygroundStory: StoryFn<typeof Breadcrumbs> = (props) => <BreadcrumbsPlaygroundTemplate {...props} />;
 
 export const Playground = {
   render: PlaygroundStory,
@@ -100,7 +95,7 @@ export const Playground = {
   parameters: {
     docs: {
       source: {
-        code: PlaygroundRaw,
+        code: BreadcrumbsPlaygroundRaw,
       },
     },
   },
@@ -117,7 +112,7 @@ export const SizesExample = {
   parameters: {
     docs: {
       source: {
-        code: SizesRaw,
+        code: BreadcrumbsSizesRaw,
       },
     },
   },
@@ -136,7 +131,7 @@ export const MobileExample = {
   parameters: {
     docs: {
       source: {
-        code: MobileRaw,
+        code: BreadcrumbsMobileRaw,
       },
       description: {
         story: `На мобильных устройствах предполагается использовать компонент в режиме адаптива (mobile). 
@@ -161,7 +156,7 @@ export const LinkExample = {
   parameters: {
     docs: {
       source: {
-        code: LinkRaw,
+        code: BreadcrumbsLinkRaw,
       },
       description: {
         story: `С помощью параметров linkAs и linkProps (входят в состав BreadcrumbProps) 
@@ -185,7 +180,7 @@ export const ActiveCrumbExample = {
   parameters: {
     docs: {
       source: {
-        code: ActiveCrumbRaw,
+        code: BreadcrumbsActiveCrumbRaw,
       },
       description: {
         story: `Последняя вкладка в компоненте может быть либо неактивной (по умолчанию), в таком случае она отображает 
