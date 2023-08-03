@@ -2,19 +2,16 @@ import * as React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
 import { Button, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
-import {
-  ButtonLoaderTemplate,
-  ButtonPlaygroundTemplate,
-  ButtonStylesTemplate,
-  ButtonWithIconTemplate,
-} from './Templates';
-import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+import { ButtonLoaderTemplate } from './ButtonLoader.template';
+import { ButtonWithIconTemplate } from './ButtonWithIcon.template';
+import { ButtonStylesTemplate } from './ButtonStyles.template';
+import { ButtonPlaygroundTemplate } from './ButtonPlayground.template';
 
 // Imports of text sources
-import ButtonLoaderRaw from './Templates/ButtonLoader?raw';
-import ButtonWithIconRaw from './Templates/ButtonWithIcon?raw';
-import ButtonStylesRaw from './Templates/ButtonStyles?raw';
-import ButtonPlaygroundRaw from './Templates/ButtonPlayground?raw';
+import ButtonLoaderRaw from './ButtonLoader.template?raw';
+import ButtonWithIconRaw from './ButtonWithIcon.template?raw';
+import ButtonStylesRaw from './ButtonStyles.template?raw';
+import ButtonPlaygroundRaw from './ButtonPlayground.template?raw';
 
 export default {
   title: 'Admiral-2.1/Button',
@@ -97,7 +94,7 @@ export default {
 
 //<editor-fold desc="Button. Playground">
 const ButtonPlaygroundStory: StoryFn<typeof Button> = (props) => {
-  return <ButtonPlaygroundTemplate {...cleanUpProps(props)} />;
+  return <ButtonPlaygroundTemplate {...props} />;
 };
 
 export const ButtonPlayground = {
@@ -118,7 +115,7 @@ export const ButtonPlayground = {
 
 //<editor-fold desc="Button. Стили">
 const ButtonStylesStory: StoryFn<typeof Button> = (props) => {
-  return <ButtonStylesTemplate {...cleanUpProps(props)} />;
+  return <ButtonStylesTemplate {...props} />;
 };
 
 export const ButtonStyles = {
@@ -139,7 +136,7 @@ export const ButtonStyles = {
 
 //<editor-fold desc="Button с иконкой">
 const ButtonWithIconStory: StoryFn<typeof Button> = (props) => {
-  return <ButtonWithIconTemplate {...cleanUpProps(props)} />;
+  return <ButtonWithIconTemplate {...props} />;
 };
 
 export const ButtonWithIcon = {
@@ -160,7 +157,7 @@ export const ButtonWithIcon = {
 
 //<editor-fold desc="Button. Загрузка">
 const ButtonLoaderStory: StoryFn<typeof Button> = (props) => {
-  return <ButtonLoaderTemplate {...cleanUpProps(props)} />;
+  return <ButtonLoaderTemplate {...props} />;
 };
 
 export const ButtonLoader = {
