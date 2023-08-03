@@ -4,12 +4,13 @@ import styled from 'styled-components';
 
 import { Avatar } from '@admiral-ds/react-ui';
 
-import { AvatarPlaygroundTemplate, SingleAvatarTemplate } from './Templates';
+import { SingleAvatarTemplate } from './SingleAvatar.template';
+import { AvatarPlaygroundTemplate } from './AvatarPlayground.template';
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
-import SingleAvatarRaw from './Templates/SingleAvatar?raw';
-import AvatarPlaygroundRaw from './Templates/AvatarPlayground?raw';
+import SingleAvatarRaw from './SingleAvatar.template?raw';
+import AvatarPlaygroundRaw from './AvatarPlayground.template?raw';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
