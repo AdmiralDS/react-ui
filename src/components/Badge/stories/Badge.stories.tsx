@@ -3,13 +3,14 @@ import styled from 'styled-components';
 import type { Meta, StoryFn } from '@storybook/react';
 import { Badge } from '@admiral-ds/react-ui';
 
-import { BadgePlaygroundTemplate, BadgeVariantsTemplate, BadgeAccessabilityTemplate } from './Templates';
-import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+import { BadgePlaygroundTemplate } from './BadgePlayground.template';
+import { BadgeVariantsTemplate } from './BadgeVariants.template';
+import { BadgeAccessabilityTemplate } from './BadgeAccessability.template';
 
 // Imports of text sources
-import PlaygroundRaw from './Templates/BadgePlayground?raw';
-import VariantsRaw from './Templates/BadgeVariants?raw';
-import AccessabilityRaw from './Templates/BadgeAccessability?raw';
+import BadgePlaygroundRaw from './BadgePlayground.template?raw';
+import BadgeVariantsRaw from './BadgeVariants.template?raw';
+import BadgeAccessabilityRaw from './BadgeAccessability.template?raw';
 
 const Separator = styled.div`
   height: 20px;
@@ -92,7 +93,7 @@ export default {
 } as Meta<typeof Badge>;
 
 //<editor-fold desc="Playground">
-const PlaygroundStory: StoryFn<typeof Badge> = (props) => <BadgePlaygroundTemplate {...cleanUpProps(props)} />;
+const PlaygroundStory: StoryFn<typeof Badge> = (props) => <BadgePlaygroundTemplate {...props} />;
 
 export const PlaygroundExample = {
   render: PlaygroundStory,
@@ -100,7 +101,7 @@ export const PlaygroundExample = {
   parameters: {
     docs: {
       source: {
-        code: PlaygroundRaw,
+        code: BadgePlaygroundRaw,
       },
     },
   },
@@ -119,7 +120,7 @@ export const VariantsExample = {
   parameters: {
     docs: {
       source: {
-        code: VariantsRaw,
+        code: BadgeVariantsRaw,
       },
     },
   },
@@ -138,7 +139,7 @@ export const AccessabilityExample = {
   parameters: {
     docs: {
       source: {
-        code: AccessabilityRaw,
+        code: BadgeAccessabilityRaw,
       },
       description: {
         story: `При фокусе на компоненте, включающем в себя компонент Badge, осуществляется следующая озвучка: 
