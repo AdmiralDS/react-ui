@@ -2,11 +2,10 @@ import * as React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
 import { Checkbox, ALL_BORDER_RADIUS_VALUES, ALL_DIMENSIONS_VALUES } from '@admiral-ds/react-ui';
 
-import { CheckboxDemoTemplate } from './Templates';
-import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+import { CheckboxDemoTemplate } from './CheckboxDemo.template';
 
 // Imports of text sources
-import CheckboxDemoRaw from './Templates/CheckboxDemo?raw';
+import CheckboxDemoRaw from './CheckboxDemo.template?raw';
 
 export default {
   title: 'Admiral-2.1/Atoms/Checkbox',
@@ -73,7 +72,7 @@ export default {
 } as Meta<typeof Checkbox>;
 
 //<editor-fold desc="Checkbox. Пример">
-const CheckboxDemoStory: StoryFn<typeof Checkbox> = (props) => <CheckboxDemoTemplate {...cleanUpProps(props)} />;
+const CheckboxDemoStory: StoryFn<typeof Checkbox> = (props) => <CheckboxDemoTemplate {...props} />;
 
 export const CheckboxDemo = {
   render: CheckboxDemoStory,
