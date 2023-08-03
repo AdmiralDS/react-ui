@@ -2,7 +2,6 @@
 export type RectProps = {
   rafId?: number;
   rect?: DOMRect;
-  // isObserving should become false on node unmount
   isObserving?: boolean;
 };
 
@@ -25,12 +24,12 @@ export default function observeRect(
 
           //IE fix: The returned object lacks x & y values
           const newRect = { bottom, height, left, right, top, width, x: x || left, y: y || top } as DOMRect;
-  
+
           if (rectChanged(newRect, state.rect)) {
             state.rect = newRect;
             cb(state.rect);
           }
-          state.rafId = window.requestAnimationFrame(run);
+          state.rafId = requestAnimationFrame(run);
         }
       };
 
