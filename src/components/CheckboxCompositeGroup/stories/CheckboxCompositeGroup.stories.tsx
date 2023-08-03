@@ -3,11 +3,10 @@ import type { Meta, StoryFn } from '@storybook/react';
 import { CheckboxCompositeGroup, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 import type { CheckboxCompositeGroupProps } from '@admiral-ds/react-ui';
 
-import { CheckboxCompositeGroupExampleTemplate } from './Templates';
-import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+import { CheckboxCompositeGroupExampleTemplate } from './CheckboxCompositeGroupExample.template';
 
 // Imports of text sources
-import CheckboxCompositeGroupExampleRaw from './Templates/CheckboxCompositeGroupExample?raw';
+import CheckboxCompositeGroupExampleRaw from './CheckboxCompositeGroupExample.template?raw';
 
 export default {
   title: 'Admiral-2.1/CheckboxCompositeGroup',
@@ -43,7 +42,7 @@ export default {
 
 //<editor-fold desc="CheckboxCompositeGroup. Пример">
 const CheckboxCompositeGroupExampleStory: StoryFn = (props: CheckboxCompositeGroupProps) => (
-  <CheckboxCompositeGroupExampleTemplate {...cleanUpProps(props)} />
+  <CheckboxCompositeGroupExampleTemplate {...props} />
 );
 
 export const CheckboxCompositeGroupExample = {
