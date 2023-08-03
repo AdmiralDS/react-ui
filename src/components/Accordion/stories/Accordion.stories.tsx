@@ -4,21 +4,19 @@ import type { Meta, StoryFn } from '@storybook/react';
 
 import { Accordion, AccordionItem } from '@admiral-ds/react-ui';
 
-import {
-  AccordionDimensionTemplate,
-  AccordionDividerTemplate,
-  AccordionIconTemplate,
-  AccordionModesTemplate,
-  AccordionPlaygroundTemplate,
-} from './Templates';
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+import { AccordionDividerTemplate } from './AccordionDivider.template';
+import { AccordionIconTemplate } from './AccordionIcon.template';
+import { AccordionModesTemplate } from './AccordionModes.template';
+import { AccordionDimensionTemplate } from './AccordionDimension.template';
+import { AccordionPlaygroundTemplate } from './AccordionPlayground.template';
 
 // Imports of text sources
-import AccordionDividerRaw from './Templates/AccordionDivider?raw';
-import AccordionIconRaw from './Templates/AccordionIcon?raw';
-import AccordionModesRaw from './Templates/AccordionModes?raw';
-import AccordionDimensionRaw from './Templates/AccordionDimension?raw';
-import AccordionPlaygroundRaw from './Templates/AccordionPlayground?raw';
+import AccordionDividerRaw from './AccordionDivider.template?raw';
+import AccordionIconRaw from './AccordionIcon.template?raw';
+import AccordionModesRaw from './AccordionModes.template?raw';
+import AccordionDimensionRaw from './AccordionDimension.template?raw';
+import AccordionPlaygroundRaw from './AccordionPlayground.template?raw';
 
 const Separator = styled.div`
   height: 20px;
