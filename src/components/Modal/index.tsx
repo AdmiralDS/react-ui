@@ -10,9 +10,19 @@ import { manager } from './manager';
 import { largeGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { checkOverflow } from '#src/components/common/utils/checkOverflow';
 import { CloseIconPlacementButton } from '#src/components/IconPlacement';
-import type { CSSProperties } from 'react';
+import type { CSSProperties, FC } from 'react';
+import { ReactComponent as InfoOutline } from '@admiral-ds/icons/build/service/InfoOutline.svg';
+import { ReactComponent as CheckOutline } from '@admiral-ds/icons/build/service/CheckOutline.svg';
+import { ReactComponent as CloseCircleOutline } from '@admiral-ds/icons/build/service/CloseCircleOutline.svg';
+import { ReactComponent as ErrorOutline } from '@admiral-ds/icons/build/service/ErrorOutline.svg';
 
 type Dimension = 'xl' | 'l' | 'm' | 's';
+
+export type ModalStatusIconType = 'information' | 'success' | 'warning' | 'danger';
+
+export interface ModalStatusIconProps {
+  status: ModalStatusIconType;
+}
 
 const Overlay = styled.div<{ overlayStyledCss: FlattenInterpolation<ThemeProps<DefaultTheme>> }>`
   display: flex;
@@ -78,6 +88,45 @@ const ButtonPanel = styled.div<{ mobile: boolean }>`
 
   & > button:first-child {
     margin: 0;
+  }
+`;
+
+function getModalIcon(status: ModalStatusIconType) {
+  switch (status) {
+    case 'success':
+      return <CheckOutline />;
+    case 'warning':
+      return <ErrorOutline />;
+    case 'danger':
+      return <CloseCircleOutline />;
+    case 'information':
+    default:
+      return <InfoOutline />;
+  }
+}
+
+function getModalIconColor(status: ModalStatusIconType) {
+  switch (status) {
+    case 'success':
+      return 'Success/Success 50 Main';
+    case 'warning':
+      return 'Warning/Warning 50 Main';
+    case 'danger':
+      return 'Error/Error 60 Main';
+    case 'information':
+    default:
+      return 'Primary/Primary 60 Main';
+  }
+}
+
+const ModalStatusIconWrapper = styled.div<{ status: ModalStatusIconType; mobile: boolean }>`
+  margin-left: ${({ mobile }) => (mobile ? 16 : 24)}px;
+  margin-bottom: ${({ mobile }) => (mobile ? 6 : 8)}px;
+  width: 40px;
+  height: 40px;
+
+  & *[fill^='#'] {
+    fill: ${({ theme, status }) => theme.color[getModalIconColor(status)]};
   }
 `;
 
@@ -327,5 +376,14 @@ export const ModalButtonPanel: React.FC<React.HTMLAttributes<HTMLDivElement>> = 
     <ButtonPanel mobile={mobile} {...props}>
       {children}
     </ButtonPanel>
+  );
+};
+
+export const ModalStatusIcon: FC<ModalStatusIconProps> = ({ status }) => {
+  const mobile = React.useContext(ModalContext).mobile;
+  return (
+    <ModalStatusIconWrapper status={status} mobile={mobile}>
+      {getModalIcon(status)}
+    </ModalStatusIconWrapper>
   );
 };
