@@ -3,23 +3,23 @@ import type { Meta, StoryFn } from '@storybook/react';
 import styled from 'styled-components';
 import { Modal, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
-import {
-  ModalTwoButtonsTemplate,
-  ModalOneButtonTemplate,
-  ModalWithoutButtonsTemplate,
-  ModalScrollTemplate,
-  ModalCustomContentTemplate,
-  ModalCustomOverlayTemplate,
-} from './Templates';
+import { ModalTwoButtonsTemplate } from './ModalTwoButtons.template';
+import { ModalOneButtonTemplate } from './ModalOneButton.template';
+import { ModalWithoutButtonsTemplate } from './ModalWithoutButtons.template';
+import { ModalScrollTemplate } from './ModalScroll.template';
+import { ModalCustomContentTemplate } from './ModalCustomContent.template';
+import { ModalCustomOverlayTemplate } from './ModalCustomOverlay.template';
+import { ModalStatusIconTemplate } from './ModalStatusIcon.template';
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
-import ModalTwoButtonsRaw from './Templates/ModalTwoButtons?raw';
-import ModalOneButtonRaw from './Templates/ModalOneButton?raw';
-import ModalWithoutButtonsRaw from './Templates/ModalWithoutButtons?raw';
-import ModalScrollRaw from './Templates/ModalScroll?raw';
-import ModalCustomContentRaw from './Templates/ModalCustomContent?raw';
-import ModalCustomOverlayRaw from './Templates/ModalCustomOverlay?raw';
+import ModalTwoButtonsRaw from './ModalTwoButtons.template?raw';
+import ModalOneButtonRaw from './ModalOneButton.template?raw';
+import ModalWithoutButtonsRaw from './ModalWithoutButtons.template?raw';
+import ModalScrollRaw from './ModalScroll.template?raw';
+import ModalCustomContentRaw from './ModalCustomContent.template?raw';
+import ModalCustomOverlayRaw from './ModalCustomOverlay.template?raw';
+import ModalStatusIconRaw from './ModalStatusIcon.template?raw';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -222,3 +222,28 @@ export const ModalCustomOverlayExample = {
 
   name: 'Modal. Кастомизация подложки модального окна.',
 };
+
+//</editor-fold>
+
+//<editor-fold desc="Статусные иконки">
+const ModalStatusIconStory: StoryFn<typeof Modal> = (props) => <ModalStatusIconTemplate {...cleanUpProps(props)} />;
+
+export const ModalStatusIconExample = {
+  render: ModalStatusIconStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: ModalStatusIconRaw,
+      },
+      description: {
+        story: `Используются в простых текстовых модальных окнах для оповещений пользователя о важных 
+        событиях. Статус модального окна может быть четырех типов: Success, Information, Danger, Warning.`,
+      },
+    },
+  },
+
+  name: 'Modal. Статусные иконки.',
+};
+
+//</editor-fold>
