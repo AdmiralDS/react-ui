@@ -4,25 +4,22 @@ import type { Meta, StoryFn } from '@storybook/react';
 
 import { Chips } from '@admiral-ds/react-ui';
 
-import {
-  ChipsIconTemplate,
-  ChipsTagsCloseTemplate,
-  ChipsTagsTemplate,
-  ChipsSelectTemplate,
-  ChipsMultiSelectTemplate,
-  ChipsTooltipTemplate,
-  ChipsBadgesTemplate,
-} from './Templates';
-import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+import { ChipsTagsTemplate } from './ChipsTags.template';
+import { ChipsTagsCloseTemplate } from './ChipsTagsClose.template';
+import { ChipsIconTemplate } from './ChipsIcon.template';
+import { ChipsSelectTemplate } from './ChipsSelect.template';
+import { ChipsMultiSelectTemplate } from './ChipsMultiSelect.template';
+import { ChipsTooltipTemplate } from './ChipsTooltip.template';
+import { ChipsBadgesTemplate } from './ChipsBadges.template';
 
 // Imports of text sources
-import ChipsTagsRaw from './Templates/ChipsTags?raw';
-import ChipsTagsCloseRaw from './Templates/ChipsTagsClose?raw';
-import ChipsIconRaw from './Templates/ChipsIcon?raw';
-import ChipsSelectRaw from './Templates/ChipsSelect?raw';
-import ChipsMultiSelectRaw from './Templates/ChipsMultiSelect?raw';
-import ChipsTooltipRaw from './Templates/ChipsTooltip?raw';
-import ChipsBadgesRaw from './Templates/ChipsBadges?raw';
+import ChipsTagsRaw from './ChipsTags.template?raw';
+import ChipsTagsCloseRaw from './ChipsTagsClose.template?raw';
+import ChipsIconRaw from './ChipsIcon.template?raw';
+import ChipsSelectRaw from './ChipsSelect.template?raw';
+import ChipsMultiSelectRaw from './ChipsMultiSelect.template?raw';
+import ChipsTooltipRaw from './ChipsTooltip.template?raw';
+import ChipsBadgesRaw from './ChipsBadges.template?raw';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -98,7 +95,7 @@ export default {
 } as Meta<typeof Chips>;
 
 //<editor-fold desc="Chips базовый пример">
-const ChipsTagsStory: StoryFn<typeof Chips> = (props) => <ChipsTagsTemplate {...cleanUpProps(props)} />;
+const ChipsTagsStory: StoryFn<typeof Chips> = (props) => <ChipsTagsTemplate {...props} />;
 
 export const ChipsTags = {
   render: ChipsTagsStory,
@@ -117,7 +114,7 @@ export const ChipsTags = {
 //</editor-fold>
 
 //<editor-fold desc="Chips с текстом и иконкой закрыть">
-const ChipsTagsCloseStory: StoryFn<typeof Chips> = (props) => <ChipsTagsCloseTemplate {...cleanUpProps(props)} />;
+const ChipsTagsCloseStory: StoryFn<typeof Chips> = (props) => <ChipsTagsCloseTemplate {...props} />;
 
 export const ChipsTagsClose = {
   render: ChipsTagsCloseStory,
@@ -139,7 +136,7 @@ export const ChipsTagsClose = {
 //</editor-fold>
 
 //<editor-fold desc="Chips с иконкой">
-const ChipsIconStory: StoryFn<typeof Chips> = (props) => <ChipsIconTemplate {...cleanUpProps(props)} />;
+const ChipsIconStory: StoryFn<typeof Chips> = (props) => <ChipsIconTemplate {...props} />;
 
 export const ChipsIcon = {
   render: ChipsIconStory,
@@ -160,7 +157,7 @@ export const ChipsIcon = {
 //</editor-fold>
 
 //<editor-fold desc="Chips с текстом и выбором">
-const ChipsSelectStory: StoryFn<typeof Chips> = (props) => <ChipsSelectTemplate {...cleanUpProps(props)} />;
+const ChipsSelectStory: StoryFn<typeof Chips> = (props) => <ChipsSelectTemplate {...props} />;
 
 export const ChipsSelect = {
   render: ChipsSelectStory,
@@ -183,7 +180,7 @@ export const ChipsSelect = {
 //</editor-fold>
 
 //<editor-fold desc="Chips для множественного выбора">
-const ChipsMultiSelectStory: StoryFn<typeof Chips> = (props) => <ChipsMultiSelectTemplate {...cleanUpProps(props)} />;
+const ChipsMultiSelectStory: StoryFn<typeof Chips> = (props) => <ChipsMultiSelectTemplate {...props} />;
 
 export const ChipsMultiSelect = {
   render: ChipsMultiSelectStory,
@@ -204,7 +201,7 @@ export const ChipsMultiSelect = {
 //</editor-fold>
 
 //<editor-fold desc="Chips с Tooltip">
-const ChipsTooltipStory: StoryFn<typeof Chips> = (props) => <ChipsTooltipTemplate {...cleanUpProps(props)} />;
+const ChipsTooltipStory: StoryFn<typeof Chips> = (props) => <ChipsTooltipTemplate {...props} />;
 
 export const ChipsTooltip = {
   render: ChipsTooltipStory,
@@ -227,7 +224,7 @@ export const ChipsTooltip = {
 //</editor-fold>
 
 //<editor-fold desc="Chips с Badge">
-const ChipsBadgesStory: StoryFn<typeof Chips> = (props) => <ChipsBadgesTemplate {...cleanUpProps(props)} />;
+const ChipsBadgesStory: StoryFn<typeof Chips> = (props) => <ChipsBadgesTemplate {...props} />;
 
 export const ChipsBadges = {
   render: ChipsBadgesStory,
