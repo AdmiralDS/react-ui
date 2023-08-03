@@ -3,27 +3,24 @@ import styled from 'styled-components';
 import type { Meta, StoryFn } from '@storybook/react';
 import { Drawer, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
-import {
-  DrawerPlaygroundTemplate,
-  DrawerWithBackdropTemplate,
-  DrawerWithoutBackdropTemplate,
-  DrawerNonClosableTemplate,
-  DrawerPositionTemplate,
-  DrawerMobileTemplate,
-  DrawerWidthTemplate,
-  DrawerCustomContentTemplate,
-} from './Templates';
-import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+import { DrawerPlaygroundTemplate } from './DrawerPlayground.template';
+import { DrawerWithBackdropTemplate } from './DrawerWithBackdrop.template';
+import { DrawerWithoutBackdropTemplate } from './DrawerWithoutBackdrop.template';
+import { DrawerNonClosableTemplate } from './DrawerNonClosable.template';
+import { DrawerPositionTemplate } from './DrawerPosition.template';
+import { DrawerMobileTemplate } from './DrawerMobile.template';
+import { DrawerWidthTemplate } from './DrawerWidth.template';
+import { DrawerCustomContentTemplate } from './DrawerCustomContent.template';
 
 // Imports of text sources
-import PlaygroundRaw from './Templates/DrawerPlayground?raw';
-import DrawerWithBackdropRaw from './Templates/DrawerWithBackdrop?raw';
-import DrawerWithoutBackdropRaw from './Templates/DrawerWithoutBackdrop?raw';
-import DrawerNonClosableRaw from './Templates/DrawerNonClosable?raw';
-import DrawerPositionRaw from './Templates/DrawerPosition?raw';
-import DrawerMobileRaw from './Templates/DrawerMobile?raw';
-import DrawerWidthRaw from './Templates/DrawerWidth?raw';
-import DrawerCustomContentRaw from './Templates/DrawerCustomContent?raw';
+import DrawerPlaygroundRaw from './DrawerPlayground.template?raw';
+import DrawerWithBackdropRaw from './DrawerWithBackdrop.template?raw';
+import DrawerWithoutBackdropRaw from './DrawerWithoutBackdrop.template?raw';
+import DrawerNonClosableRaw from './DrawerNonClosable.template?raw';
+import DrawerPositionRaw from './DrawerPosition.template?raw';
+import DrawerMobileRaw from './DrawerMobile.template?raw';
+import DrawerWidthRaw from './DrawerWidth.template?raw';
+import DrawerCustomContentRaw from './DrawerCustomContent.template?raw';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -121,7 +118,7 @@ export default {
 } as Meta<typeof Drawer>;
 
 //<editor-fold desc="Playground">
-const PlaygroundStory: StoryFn<typeof Drawer> = (props) => <DrawerPlaygroundTemplate {...cleanUpProps(props)} />;
+const PlaygroundStory: StoryFn<typeof Drawer> = (props) => <DrawerPlaygroundTemplate {...props} />;
 
 export const Playground = {
   render: PlaygroundStory,
@@ -129,7 +126,7 @@ export const Playground = {
   parameters: {
     docs: {
       source: {
-        code: PlaygroundRaw,
+        code: DrawerPlaygroundRaw,
       },
     },
   },
@@ -138,9 +135,7 @@ export const Playground = {
 //</editor-fold>
 
 //<editor-fold desc="Drawer с блокировкой контента страницы">
-const DrawerWithBackdropStory: StoryFn<typeof Drawer> = (props) => (
-  <DrawerWithBackdropTemplate {...cleanUpProps(props)} />
-);
+const DrawerWithBackdropStory: StoryFn<typeof Drawer> = (props) => <DrawerWithBackdropTemplate {...props} />;
 
 export const DrawerWithBackdropExample = {
   render: DrawerWithBackdropStory,
@@ -165,9 +160,7 @@ export const DrawerWithBackdropExample = {
 //</editor-fold>
 
 //<editor-fold desc="Drawer без блокировки контента страницы">
-const DrawerWithoutBackdropStory: StoryFn<typeof Drawer> = (props) => (
-  <DrawerWithoutBackdropTemplate {...cleanUpProps(props)} />
-);
+const DrawerWithoutBackdropStory: StoryFn<typeof Drawer> = (props) => <DrawerWithoutBackdropTemplate {...props} />;
 
 export const DrawerWithoutBackdropExample = {
   render: DrawerWithoutBackdropStory,
@@ -192,9 +185,7 @@ export const DrawerWithoutBackdropExample = {
 //</editor-fold>
 
 //<editor-fold desc="Drawer с обязательным условием">
-const DrawerNonClosableStory: StoryFn<typeof Drawer> = (props) => (
-  <DrawerNonClosableTemplate {...cleanUpProps(props)} />
-);
+const DrawerNonClosableStory: StoryFn<typeof Drawer> = (props) => <DrawerNonClosableTemplate {...props} />;
 
 export const DrawerNonClosableExample = {
   render: DrawerNonClosableStory,
@@ -219,7 +210,7 @@ export const DrawerNonClosableExample = {
 //</editor-fold>
 
 //<editor-fold desc="Расположение компонента">
-const DrawerPositionStory: StoryFn<typeof Drawer> = (props) => <DrawerPositionTemplate {...cleanUpProps(props)} />;
+const DrawerPositionStory: StoryFn<typeof Drawer> = (props) => <DrawerPositionTemplate {...props} />;
 
 export const DrawerPositionExample = {
   render: DrawerPositionStory,
@@ -242,7 +233,7 @@ export const DrawerPositionExample = {
 //</editor-fold>
 
 //<editor-fold desc="Адаптив">
-const DrawerMobileStory: StoryFn<typeof Drawer> = (props) => <DrawerMobileTemplate {...cleanUpProps(props)} />;
+const DrawerMobileStory: StoryFn<typeof Drawer> = (props) => <DrawerMobileTemplate {...props} />;
 
 export const DrawerMobileExample = {
   render: DrawerMobileStory,
@@ -267,7 +258,7 @@ export const DrawerMobileExample = {
 //</editor-fold>
 
 //<editor-fold desc="Ширина компонента">
-const DrawerWidthStory: StoryFn<typeof Drawer> = (props) => <DrawerWidthTemplate {...cleanUpProps(props)} />;
+const DrawerWidthStory: StoryFn<typeof Drawer> = (props) => <DrawerWidthTemplate {...props} />;
 
 export const DrawerWidthExample = {
   render: DrawerWidthStory,
@@ -290,9 +281,7 @@ export const DrawerWidthExample = {
 //</editor-fold>
 
 //<editor-fold desc="Свободное (кастомизированное) наполнение">
-const DrawerCustomContentStory: StoryFn<typeof Drawer> = (props) => (
-  <DrawerCustomContentTemplate {...cleanUpProps(props)} />
-);
+const DrawerCustomContentStory: StoryFn<typeof Drawer> = (props) => <DrawerCustomContentTemplate {...props} />;
 
 export const DrawerCustomContentExample = {
   render: DrawerCustomContentStory,
