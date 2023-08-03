@@ -7,7 +7,6 @@ import type { AvatarGroupProps } from '@admiral-ds/react-ui';
 
 import { AvatarGroupWidthTemplate } from './AvatarGroupWidth.template';
 import { AvatarGroupPlaygroundTemplate } from './AvatarGroupPlayground.template';
-import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
 import AvatarGroupWidthRaw from './AvatarGroupWidth.template?raw';
@@ -72,7 +71,7 @@ export default {
 
 //<editor-fold desc="Playground">
 const AvatarGroupPlaygroundStory: StoryFn<typeof AvatarGroup> = (props: AvatarGroupProps) => (
-  <AvatarGroupPlaygroundTemplate items={[]} {...cleanUpProps(props)} />
+  <AvatarGroupPlaygroundTemplate {...props} />
 );
 
 export const AvatarGroupPlayground = {
@@ -90,7 +89,7 @@ export const AvatarGroupPlayground = {
 
 //<editor-fold desc="Пример с ограниченной шириной">
 const AvatarGroupWidthStory: StoryFn<typeof AvatarGroup> = (props) => (
-  <AvatarGroupWidthTemplate items={[]} {...cleanUpProps(props)} />
+  <AvatarGroupWidthTemplate {...props} />
 );
 
 export const AvatarGroupWidth = {

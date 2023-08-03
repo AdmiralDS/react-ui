@@ -4,7 +4,6 @@ import type { Meta, StoryFn } from '@storybook/react';
 
 import { Accordion, AccordionItem } from '@admiral-ds/react-ui';
 
-import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 import { AccordionDividerTemplate } from './AccordionDivider.template';
 import { AccordionIconTemplate } from './AccordionIcon.template';
 import { AccordionModesTemplate } from './AccordionModes.template';
@@ -86,7 +85,7 @@ export default {
 
 //<editor-fold desc="Размеры">
 const AccordionPlaygroundStory: StoryFn<typeof Accordion> = (props) => (
-  <AccordionPlaygroundTemplate {...cleanUpProps(props)} />
+  <AccordionPlaygroundTemplate {...props} />
 );
 
 export const AccordionPlayground = {
@@ -128,7 +127,7 @@ export const AccordionDimension = {
 //</editor-fold>
 
 //<editor-fold desc="Режимы использования">
-const AccordionModesStory: StoryFn<typeof Accordion> = (props) => <AccordionModesTemplate {...cleanUpProps(props)} />;
+const AccordionModesStory: StoryFn<typeof Accordion> = (props) => <AccordionModesTemplate {...props} />;
 
 export const AccordionModes = {
   render: AccordionModesStory,

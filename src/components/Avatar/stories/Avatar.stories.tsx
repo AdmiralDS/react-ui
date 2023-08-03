@@ -6,7 +6,6 @@ import { Avatar } from '@admiral-ds/react-ui';
 
 import { SingleAvatarTemplate } from './SingleAvatar.template';
 import { AvatarPlaygroundTemplate } from './AvatarPlayground.template';
-import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
 import SingleAvatarRaw from './SingleAvatar.template?raw';
@@ -84,7 +83,7 @@ export default {
 
 //<editor-fold desc="Avatar Playground">
 const AvatarPlaygroundStory: StoryFn<typeof Avatar> = ({ userName, ...props }) => (
-  <AvatarPlaygroundTemplate userName={userName} {...cleanUpProps(props)} />
+  <AvatarPlaygroundTemplate userName={userName} {...props} />
 );
 
 export const AvatarPlayground = {
@@ -128,3 +127,4 @@ export const SingleAvatar = {
 
   name: 'Avatar',
 };
+//</editor-fold>
