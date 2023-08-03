@@ -3,29 +3,26 @@ import type { Meta, StoryFn } from '@storybook/react';
 import type { CalendarPropType } from '@admiral-ds/react-ui';
 import { Calendar, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
-import {
-  SimpleWithSpecialDatesTemplate,
-  SimpleWithSetActiveViewWithoutDayTemplate,
-  SimpleWithSetActiveViewDateAfterChooseYearTemplate,
-  SimpleWithSetActiveViewDateTemplate,
-  SimpleWithChangeViewDateTemplate,
-  SimpleWithFilterDateTemplate,
-  SimpleWithMaxDateTemplate,
-  RangeTemplate,
-  CalendarSimpleTemplate,
-} from '#src/components/Calendar/Stories/Templates';
-import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+import { SimpleWithSpecialDatesTemplate } from './SimpleWithSpecialDates.template';
+import { SimpleWithSetActiveViewWithoutDayTemplate } from './SimpleWithSetActiveViewWithoutDay.template';
+import { SimpleWithSetActiveViewDateAfterChooseYearTemplate } from './SimpleWithSetActiveViewDateAfterChooseYear.template';
+import { SimpleWithSetActiveViewDateTemplate } from './SimpleWithSetActiveViewDate.template';
+import { SimpleWithChangeViewDateTemplate } from './SimpleWithChangeViewDate.template';
+import { SimpleWithFilterDateTemplate } from './SimpleWithFilterDate.template';
+import { SimpleWithMaxDateTemplate } from './SimpleWithMaxDate.template';
+import { RangeTemplate } from './Range.template';
+import { CalendarSimpleTemplate } from './CalendarSimple.template';
 
 // Imports of text sources
-import SimpleWithSpecialDatesRaw from './Templates/SimpleWithSpecialDates?raw';
-import SimpleWithSetActiveViewWithoutDayRaw from './Templates/SimpleWithSetActiveViewWithoutDay?raw';
-import SimpleWithSetActiveViewDateAfterChooseYearRaw from './Templates/SimpleWithSetActiveViewDateAfterChooseYear?raw';
-import SimpleWithSetActiveViewDateRaw from './Templates/SimpleWithSetActiveViewDate?raw';
-import SimpleWithChangeViewDateRaw from './Templates/SimpleWithChangeViewDate?raw';
-import SimpleWithFilterDateRaw from './Templates/SimpleWithFilterDate?raw';
-import SimpleWithMaxDateRaw from './Templates/SimpleWithMaxDate?raw';
-import RangeRaw from './Templates/Range?raw';
-import CalendarSimpleRaw from './Templates/CalendarSimple?raw';
+import SimpleWithSpecialDatesRaw from './SimpleWithSpecialDates.template?raw';
+import SimpleWithSetActiveViewWithoutDayRaw from './SimpleWithSetActiveViewWithoutDay.template?raw';
+import SimpleWithSetActiveViewDateAfterChooseYearRaw from './SimpleWithSetActiveViewDateAfterChooseYear.template?raw';
+import SimpleWithSetActiveViewDateRaw from './SimpleWithSetActiveViewDate.template?raw';
+import SimpleWithChangeViewDateRaw from './SimpleWithChangeViewDate.template?raw';
+import SimpleWithFilterDateRaw from './SimpleWithFilterDate.template?raw';
+import SimpleWithMaxDateRaw from './SimpleWithMaxDate.template?raw';
+import RangeRaw from './Range.template?raw';
+import CalendarSimpleRaw from './CalendarSimple.template?raw';
 
 export default {
   title: 'Admiral-2.1/Calendar',
@@ -85,9 +82,7 @@ export default {
 } as Meta<typeof Calendar>;
 
 //<editor-fold desc="Пример календаря с выбором даты>">
-const CalendarSimpleStory: StoryFn<typeof Calendar> = (args) => (
-  <CalendarSimpleTemplate onChange={() => undefined} {...cleanUpProps(args)} />
-);
+const CalendarSimpleStory: StoryFn<typeof Calendar> = (props) => <CalendarSimpleTemplate {...props} />;
 
 export const CalendarSimple = {
   render: CalendarSimpleStory,
@@ -110,9 +105,7 @@ export const CalendarSimple = {
 //</editor-fold>
 
 //<editor-fold desc="Пример с выбором диапазона">
-const RangeStory: StoryFn<typeof Calendar> = (args: CalendarPropType) => (
-  <RangeTemplate onChange={() => undefined} {...cleanUpProps(args)} />
-);
+const RangeStory: StoryFn<typeof Calendar> = (props: CalendarPropType) => <RangeTemplate {...props} />;
 
 export const Range = {
   render: RangeStory,
@@ -135,8 +128,8 @@ export const Range = {
 //</editor-fold>
 
 //<editor-fold desc="Пример с ограничением максимальной даты">
-const SimpleWithMaxDateStory: StoryFn<typeof Calendar> = ({ ...args }: CalendarPropType) => (
-  <SimpleWithMaxDateTemplate onChange={() => undefined} {...cleanUpProps(args)} />
+const SimpleWithMaxDateStory: StoryFn<typeof Calendar> = (props: CalendarPropType) => (
+  <SimpleWithMaxDateTemplate {...props} />
 );
 
 export const SimpleWithMaxDate = {
@@ -160,8 +153,8 @@ export const SimpleWithMaxDate = {
 //</editor-fold>
 
 //<editor-fold desc="Пример с недоступными для выбора датами">
-const SimpleWithFilterDateStory: StoryFn<typeof Calendar> = ({ ...args }: CalendarPropType) => (
-  <SimpleWithFilterDateTemplate onChange={() => undefined} {...cleanUpProps(args)} />
+const SimpleWithFilterDateStory: StoryFn<typeof Calendar> = (props: CalendarPropType) => (
+  <SimpleWithFilterDateTemplate {...props} />
 );
 
 export const SimpleWithFilterDate = {
@@ -185,8 +178,8 @@ export const SimpleWithFilterDate = {
 //</editor-fold>
 
 //<editor-fold desc="Пример с коллбеками">
-const SimpleWithChangeViewDateStory: StoryFn<typeof Calendar> = ({ ...args }: CalendarPropType) => (
-  <SimpleWithChangeViewDateTemplate onChange={() => undefined} {...cleanUpProps(args)} />
+const SimpleWithChangeViewDateStory: StoryFn<typeof Calendar> = (props: CalendarPropType) => (
+  <SimpleWithChangeViewDateTemplate {...props} />
 );
 
 export const SimpleWithChangeViewDate = {
@@ -210,8 +203,8 @@ export const SimpleWithChangeViewDate = {
 //</editor-fold>
 
 //<editor-fold desc="Пример с переключением экранов выбора дат">
-const SimpleWithSetActiveViewDateStory: StoryFn<typeof Calendar> = ({ ...args }: CalendarPropType) => (
-  <SimpleWithSetActiveViewDateTemplate onChange={() => undefined} {...cleanUpProps(args)} />
+const SimpleWithSetActiveViewDateStory: StoryFn<typeof Calendar> = (props: CalendarPropType) => (
+  <SimpleWithSetActiveViewDateTemplate {...props} />
 );
 
 export const SimpleWithSetActiveViewDate = {
@@ -235,8 +228,8 @@ export const SimpleWithSetActiveViewDate = {
 //</editor-fold>
 
 //<editor-fold desc="Пример с выбором только месяца/года">
-const SimpleWithSetActiveViewDateAfterChooseYearStory: StoryFn<typeof Calendar> = ({ ...args }: CalendarPropType) => (
-  <SimpleWithSetActiveViewDateAfterChooseYearTemplate onChange={() => undefined} {...cleanUpProps(args)} />
+const SimpleWithSetActiveViewDateAfterChooseYearStory: StoryFn<typeof Calendar> = (props: CalendarPropType) => (
+  <SimpleWithSetActiveViewDateAfterChooseYearTemplate {...props} />
 );
 
 export const SimpleWithSetActiveViewDateAfterChooseYear = {
@@ -260,8 +253,8 @@ export const SimpleWithSetActiveViewDateAfterChooseYear = {
 //</editor-fold>
 
 //<editor-fold desc="Пример с выбором только месяца/года">
-const SimpleWithSetActiveViewWithoutDayStory: StoryFn<typeof Calendar> = ({ ...args }: CalendarPropType) => (
-  <SimpleWithSetActiveViewWithoutDayTemplate onChange={() => undefined} {...cleanUpProps(args)} />
+const SimpleWithSetActiveViewWithoutDayStory: StoryFn<typeof Calendar> = (props: CalendarPropType) => (
+  <SimpleWithSetActiveViewWithoutDayTemplate {...props} />
 );
 
 export const SimpleWithSetActiveViewWithoutDay = {
@@ -285,8 +278,8 @@ export const SimpleWithSetActiveViewWithoutDay = {
 //</editor-fold>
 
 //<editor-fold desc="Пример с подсветкой выходных, праздничный и специальных дат">
-const SimpleWithSpecialDatesStory: StoryFn<typeof Calendar> = (args) => (
-  <SimpleWithSpecialDatesTemplate onChange={() => undefined} {...cleanUpProps(args)} />
+const SimpleWithSpecialDatesStory: StoryFn<typeof Calendar> = (props) => (
+  <SimpleWithSpecialDatesTemplate {...props} />
 );
 
 export const SimpleWithSpecialDates = {
