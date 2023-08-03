@@ -2,21 +2,18 @@ import * as React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
 import { ContentSwitcher } from '@admiral-ds/react-ui';
 
-import {
-  ContentSwitcherExampleTemplate,
-  ContentSwitcherIconOnlyTemplate,
-  ContentSwitcherPlaygroundTemplate,
-  ContentSwitcherWithBadgeTemplate,
-  ContentSwitcherWithIconTemplate,
-} from './Templates';
-import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+import { ContentSwitcherPlaygroundTemplate } from './ContentSwitcherPlayground.template';
+import { ContentSwitcherExampleTemplate } from './ContentSwitcherExample.template';
+import { ContentSwitcherWithIconTemplate } from './ContentSwitcherWithIcon.template';
+import { ContentSwitcherIconOnlyTemplate } from './ContentSwitcherIconOnly.template';
+import { ContentSwitcherWithBadgeTemplate } from './ContentSwitcherWithBadge.template';
 
 // Imports of text sources
-import ContentSwitcherPlaygroundRaw from './Templates/ContentSwitcherPlayground?raw';
-import ContentSwitcherExampleRaw from './Templates/ContentSwitcherExample?raw';
-import ContentSwitcherWithIconRaw from './Templates/ContentSwitcherWithIcon?raw';
-import ContentSwitcherIconOnlyRaw from './Templates/ContentSwitcherIconOnly?raw';
-import ContentSwitcherWithBadgeRaw from './Templates/ContentSwitcherWithBadge?raw';
+import ContentSwitcherPlaygroundRaw from './ContentSwitcherPlayground.template?raw';
+import ContentSwitcherExampleRaw from './ContentSwitcherExample.template?raw';
+import ContentSwitcherWithIconRaw from './ContentSwitcherWithIcon.template?raw';
+import ContentSwitcherIconOnlyRaw from './ContentSwitcherIconOnly.template?raw';
+import ContentSwitcherWithBadgeRaw from './ContentSwitcherWithBadge.template?raw';
 
 export default {
   title: 'Admiral-2.1/ContentSwitcher',
@@ -80,7 +77,7 @@ export default {
 
 //<editor-fold desc="ContentSwitcher. Playground">
 const ContentSwitcherPlaygroundStory: StoryFn<typeof ContentSwitcher> = (props) => (
-  <ContentSwitcherPlaygroundTemplate {...cleanUpProps(props)} />
+  <ContentSwitcherPlaygroundTemplate {...props} />
 );
 
 export const ContentSwitcherPlayground = {
