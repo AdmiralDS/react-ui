@@ -3,14 +3,16 @@ import type { Meta, StoryFn } from '@storybook/react';
 
 import { Pill, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
-import { SimplePillsTemplate, PillsMenuTemplate, NestedPillsTemplate, PillWithTooltipTemplate } from './Templates';
-import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+import { PillSimpleTemplate } from './PillSimple.template';
+import { PillMenuTemplate } from './PillMenu.template';
+import { PillNestedTemplate } from './PillNested.template';
+import { PillWithTooltipTemplate } from './PillWithTooltip.template';
 
 // Imports of text sources
-import SimplePillsRaw from './Templates/SimplePills?raw';
-import PillsMenuRaw from './Templates/PillsMenu?raw';
-import NestedPillsRaw from './Templates/NestedPills?raw';
-import PillWithTooltipRaw from './Templates/PillWithTooltip?raw';
+import PillSimpleRaw from './PillSimple.template?raw';
+import PillMenuRaw from './PillMenu.template?raw';
+import PillNestedRaw from './PillNested.template?raw';
+import PillWithTooltipRaw from './PillWithTooltip.template?raw';
 
 export default {
   title: 'Admiral-2.1/Pills',
@@ -46,7 +48,7 @@ export default {
 } as Meta<typeof Pill>;
 
 //<editor-fold desc="Pills. Базовый пример.">
-const SimplePillsStory: StoryFn<typeof Pill> = (props) => <SimplePillsTemplate {...cleanUpProps(props)} />;
+const SimplePillsStory: StoryFn<typeof Pill> = (props) => <PillSimpleTemplate {...props} />;
 
 export const SimplePills = {
   render: SimplePillsStory,
@@ -54,7 +56,7 @@ export const SimplePills = {
   parameters: {
     docs: {
       source: {
-        code: SimplePillsRaw,
+        code: PillSimpleRaw,
       },
     },
   },
@@ -65,7 +67,7 @@ export const SimplePills = {
 //</editor-fold>
 
 //<editor-fold desc="PillMenu. Pill с выпадающим списком.">
-const PillMenuStory: StoryFn<typeof Pill> = (props) => <PillsMenuTemplate {...cleanUpProps(props)} />;
+const PillMenuStory: StoryFn<typeof Pill> = (props) => <PillMenuTemplate {...props} />;
 
 export const PillsMenu = {
   render: PillMenuStory,
@@ -73,7 +75,7 @@ export const PillsMenu = {
   parameters: {
     docs: {
       source: {
-        code: PillsMenuRaw,
+        code: PillMenuRaw,
       },
     },
   },
@@ -84,7 +86,7 @@ export const PillsMenu = {
 //</editor-fold>
 
 //<editor-fold desc="NestedPills.">
-const NestedPillsStory: StoryFn<typeof Pill> = () => <NestedPillsTemplate />;
+const NestedPillsStory: StoryFn<typeof Pill> = () => <PillNestedTemplate />;
 
 export const NestedPills = {
   render: NestedPillsStory,
@@ -92,7 +94,7 @@ export const NestedPills = {
   parameters: {
     docs: {
       source: {
-        code: NestedPillsRaw,
+        code: PillNestedRaw,
       },
     },
   },

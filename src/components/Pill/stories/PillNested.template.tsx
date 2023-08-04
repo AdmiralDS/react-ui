@@ -216,7 +216,7 @@ const PillMenu = React.forwardRef<HTMLDivElement, PillMenuProps>(({ options, ...
   );
 });
 
-export const NestedPillsTemplate = () => {
+export const PillNestedTemplate = () => {
   return (
     <WrapperVertical>
       <Desc>

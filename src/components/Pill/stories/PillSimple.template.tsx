@@ -73,7 +73,7 @@ const StatusPill = styled(Pill).attrs<{ status?: Status }>((p) => ({
   }
 `;
 
-export const SimplePillsTemplate = (props: any) => {
+export const PillSimpleTemplate = (props: any) => {
   function swapBorder(theme: Theme): Theme {
     theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
