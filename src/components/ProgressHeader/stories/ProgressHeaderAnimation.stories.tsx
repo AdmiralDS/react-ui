@@ -4,11 +4,10 @@ import styled from 'styled-components';
 
 import { ProgressHeader } from '@admiral-ds/react-ui';
 
-import { ProgressHeaderBaseTemplate } from './Templates';
-import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+import { ProgressHeaderAnimationTemplate } from './ProgressHeaderAnimation.template';
 
 // Imports of text sources
-import ProgressHeaderBaseRaw from './Templates/ProgressHeaderBase?raw';
+import ProgressHeaderAnimationRaw from './ProgressHeaderAnimation.template?raw';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -24,7 +23,7 @@ const Description = () => (
 );
 
 export default {
-  title: 'Admiral-2.1/ProgressHeader/Base',
+  title: 'Admiral-2.1/ProgressHeader/Animation',
   decorators: undefined,
   component: ProgressHeader,
   parameters: {
@@ -45,25 +44,25 @@ export default {
       control: { type: 'radio' },
     },
     percent: {
-      control: { type: 'number' },
+      control: false,
     },
   },
 } as Meta<typeof ProgressHeader>;
 
-const ProgressHeaderBaseStory: StoryFn<typeof ProgressHeader> = (props) => (
-  <ProgressHeaderBaseTemplate {...cleanUpProps(props)} />
+const ProgressHeaderAnimationStory: StoryFn<typeof ProgressHeader> = (props) => (
+  <ProgressHeaderAnimationTemplate {...props} />
 );
 
-export const ProgressHeaderBase = {
-  render: ProgressHeaderBaseStory,
+export const ProgressHeaderAnimation = {
+  render: ProgressHeaderAnimationStory,
 
   parameters: {
     docs: {
       source: {
-        code: ProgressHeaderBaseRaw,
+        code: ProgressHeaderAnimationRaw,
       },
     },
   },
 
-  name: 'Базовый пример',
+  name: 'Прогресс бар с анимацией',
 };
