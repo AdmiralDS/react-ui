@@ -1,13 +1,13 @@
 import React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
 import styled from 'styled-components';
+
 import { GroupActionsPane } from '@admiral-ds/react-ui';
 
-import { PaneSimpleTemplate } from './Templates';
-import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+import { PaneSimpleTemplate } from './PaneSimple.template';
 
 // Imports of text sources
-import PaneSimpleRaw from './Templates/PaneSimple?raw';
+import PaneSimpleRaw from './PaneSimple.template?raw';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -78,7 +78,7 @@ export default {
 } as Meta<typeof GroupActionsPane>;
 
 //<editor-fold desc="Simple">
-const PaneSimpleStory: StoryFn<typeof GroupActionsPane> = (props) => <PaneSimpleTemplate {...cleanUpProps(props)} />;
+const PaneSimpleStory: StoryFn<typeof GroupActionsPane> = (props) => <PaneSimpleTemplate {...props} />;
 
 export const PaneSimpleExample = {
   render: PaneSimpleStory,
