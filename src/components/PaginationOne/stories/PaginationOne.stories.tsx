@@ -1,13 +1,14 @@
 import * as React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
+
 import { PaginationOne, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
-import { PaginationPlaygroundTemplate, PaginationTypesTemplate } from './Templates';
-import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+import { PaginationOnePlaygroundTemplate } from './PaginationOnePlayground.template';
+import { PaginationOneTypesTemplate } from './PaginationOneTypes.template';
 
 // Imports of text sources
-import PaginationPlaygroundRaw from './Templates/PaginationPlayground?raw';
-import PaginationTypesRaw from './Templates/PaginationTypes?raw';
+import PaginationOnePlaygroundRaw from './PaginationOnePlayground.template?raw';
+import PaginationOneTypesRaw from './PaginationOneTypes.template?raw';
 
 export default {
   title: 'Admiral-2.1/Data Table/PaginationOne',
@@ -89,13 +90,13 @@ const PaginationPlaygroundStory: StoryFn<typeof PaginationOne> = ({
   onChange,
   ...props
 }) => (
-  <PaginationPlaygroundTemplate
+  <PaginationOnePlaygroundTemplate
     page={page}
     pageSize={pageSize}
     pageSizes={pageSizes}
     totalItems={totalItems}
     onChange={onChange}
-    {...cleanUpProps(props)}
+    {...props}
   />
 );
 
@@ -105,7 +106,7 @@ export const Playground = {
   parameters: {
     docs: {
       source: {
-        code: PaginationPlaygroundRaw,
+        code: PaginationOnePlaygroundRaw,
       },
     },
   },
@@ -122,13 +123,13 @@ const PaginationTypesStory: StoryFn<typeof PaginationOne> = ({
   onChange,
   ...props
 }) => (
-  <PaginationTypesTemplate
+  <PaginationOneTypesTemplate
     page={page}
     pageSize={pageSize}
     pageSizes={pageSizes}
     totalItems={totalItems}
     onChange={onChange}
-    {...cleanUpProps(props)}
+    {...props}
   />
 );
 
@@ -138,7 +139,7 @@ export const PaginationTypesExample = {
   parameters: {
     docs: {
       source: {
-        code: PaginationTypesRaw,
+        code: PaginationOneTypesRaw,
       },
     },
   },

@@ -8,7 +8,7 @@ const Separator = styled.div`
   height: 40px;
 `;
 
-export const PaginationTypesTemplate = (args: PaginationOneProps) => {
+export const PaginationOneTypesTemplate = (args: PaginationOneProps) => {
   const [pageSize1, setPageSize1] = React.useState(8);
   const [page1, setPage1] = React.useState(1);
   const [pageSize2, setPageSize2] = React.useState(8);
