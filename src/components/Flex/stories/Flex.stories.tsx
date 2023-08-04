@@ -1,12 +1,13 @@
 import * as React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
+
+import type { FlexContainerProps } from '@admiral-ds/react-ui';
 import { Flex } from '@admiral-ds/react-ui';
 
-import { FlexPlaygroundTemplate } from './Templates';
-import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+import { FlexPlaygroundTemplate } from './FlexPlayground.template';
 
 // Imports of text sources
-import FlexPlaygroundRaw from './Templates/FlexPlayground?raw';
+import FlexPlaygroundRaw from './FlexPlayground.template?raw';
 
 export default {
   title: 'Admiral-2.1/Flex.Container',
@@ -36,8 +37,8 @@ export default {
 } as Meta<typeof Flex.Container>;
 
 //<editor-fold desc="Пример работы с Flex">
-const FlexPlaygroundStory: StoryFn<typeof Flex.Container> = (props) => (
-  <FlexPlaygroundTemplate {...cleanUpProps(props)} />
+const FlexPlaygroundStory: StoryFn<typeof Flex.Container> = (props: FlexContainerProps) => (
+  <FlexPlaygroundTemplate {...props} />
 );
 
 export const FlexPlayground = {
