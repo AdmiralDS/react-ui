@@ -2,11 +2,10 @@ import * as React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
 import { Field, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
-import { FieldWithTextInputTemplate } from './Templates';
-import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+import { FieldWithTextInputTemplate } from './FieldWithTextInput.template';
 
 // Imports of text sources
-import FieldWithTextInputRaw from './Templates/FieldWithTextInput?raw';
+import FieldWithTextInputRaw from './FieldWithTextInput.template?raw';
 
 export default {
   title: 'Admiral-2.1/Atoms/Field',
@@ -59,7 +58,7 @@ export default {
 
 //<editor-fold desc="Пример обертывания компонента TextInput">
 const FieldWithTextInputStory: StoryFn<typeof Field> = (props) => (
-  <FieldWithTextInputTemplate {...cleanUpProps(props)} />
+  <FieldWithTextInputTemplate {...props} />
 );
 
 export const FieldWithTextInput = {
