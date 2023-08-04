@@ -2,23 +2,20 @@ import * as React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
 import { Link, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
-import {
-  LinkPlaygroundTemplate,
-  LinkPrimaryTemplate,
-  LinkSecondaryTemplate,
-  LinkWithIconTemplate,
-  LinkMixinTemplate,
-  LinkAsPropTemplate,
-} from './Templates';
-import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+import { LinkPlaygroundTemplate } from './LinkPlayground.template';
+import { LinkPrimaryTemplate } from './LinkPrimary.template';
+import { LinkSecondaryTemplate } from './LinkSecondary.template';
+import { LinkWithIconTemplate } from './LinkWithIcon.template';
+import { LinkMixinTemplate } from './LinkMixin.template';
+import { LinkAsPropTemplate } from './LinkAsProp.template';
 
 // Imports of text sources
-import LinkPlaygroundRaw from './Templates/LinkPlayground?raw';
-import LinkPrimaryRaw from './Templates/LinkPrimary?raw';
-import LinkSecondaryRaw from './Templates/LinkSecondary?raw';
-import LinkWithIconRaw from './Templates/LinkWithIcon?raw';
-import LinkMixinRaw from './Templates/LinkMixin?raw';
-import LinkAsPropRaw from './Templates/LinkAsProp?raw';
+import LinkPlaygroundRaw from './LinkPlayground.template?raw';
+import LinkPrimaryRaw from './LinkPrimary.template?raw';
+import LinkSecondaryRaw from './LinkSecondary.template?raw';
+import LinkWithIconRaw from './LinkWithIcon.template?raw';
+import LinkMixinRaw from './LinkMixin.template?raw';
+import LinkAsPropRaw from './LinkAsProp.template?raw';
 
 export default {
   title: 'Admiral-2.1/Link',
@@ -75,7 +72,7 @@ export default {
 
 //<editor-fold desc="Playground">
 const LinkPlaygroundStory: StoryFn<typeof Link> = (props) => (
-  <LinkPlaygroundTemplate children={props.children} {...cleanUpProps(props)} />
+  <LinkPlaygroundTemplate children={props.children} {...props} />
 );
 
 export const Playground = {
