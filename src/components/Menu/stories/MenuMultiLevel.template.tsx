@@ -128,7 +128,7 @@ const Container = styled.div`
   justify-content: space-between;
 `;
 
-export const MultiLevelTemplate = (props: MenuProps & { themeBorderKind?: BorderRadiusType }) => {
+export const MenuMultiLevelTemplate = (props: MenuProps & { themeBorderKind?: BorderRadiusType }) => {
   const convertStoryItem = (storyItem: StoryItem): MenuModelItemProps => {
     const item: MenuModelItemProps = {
       id: storyItem.id,

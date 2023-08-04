@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
-import { Menu, RadioButton, MenuItem, mediumGroupBorderRadius } from '@admiral-ds/react-ui';
+import { Menu, MenuItem, mediumGroupBorderRadius } from '@admiral-ds/react-ui';
 import type { Theme, MenuProps, RenderOptionProps, BorderRadiusType } from '@admiral-ds/react-ui';
 
 type StoryItem = {
@@ -24,7 +24,7 @@ const STORY_ITEMS: Array<StoryItem> = [
   },
   {
     id: '3',
-    label: 'Option three',
+    label: 'Привет, пупсик! Хотел тебе сказать, что ты андроид.',
     value: 3,
   },
   {
@@ -40,12 +40,12 @@ const STORY_ITEMS: Array<StoryItem> = [
   {
     id: '6',
     label: 'Option six',
-    value: 6,
+    value: 7,
   },
   {
     id: '7',
     label: 'Option seven',
-    value: 7,
+    value: 6,
   },
 ];
 
@@ -56,18 +56,22 @@ const Wrapper = styled.div`
   ${(p) => p.theme.shadow['Shadow 08']}
 `;
 
-export const RadioButtonMenuTemplate = (props: MenuProps & { themeBorderKind?: BorderRadiusType }) => {
+const MultiLineMenuItem = styled(MenuItem)`
+  white-space: pre-wrap;
+`;
+
+export const MenuMultiLineTemplate = (props: MenuProps & { themeBorderKind?: BorderRadiusType }) => {
   const model = React.useMemo(() => {
-    return STORY_ITEMS.map((item) => ({
-      id: item.id,
-      render: (options: RenderOptionProps) => (
-        <MenuItem dimension={props.dimension} {...options} key={item.id}>
-          <RadioButton dimension={props.dimension !== 's' ? 'm' : props.dimension} name="menuListOption" key={item.id}>
+    return STORY_ITEMS.map((item) => {
+      return {
+        id: item.id,
+        render: (options: RenderOptionProps) => (
+          <MultiLineMenuItem dimension={props.dimension} {...options} key={item.id}>
             {item.label}
-          </RadioButton>
-        </MenuItem>
-      ),
-    }));
+          </MultiLineMenuItem>
+        ),
+      };
+    });
   }, [props.dimension]);
 
   function swapBorder(theme: Theme): Theme {
@@ -77,7 +81,7 @@ export const RadioButtonMenuTemplate = (props: MenuProps & { themeBorderKind?: B
 
   return (
     <ThemeProvider theme={swapBorder}>
-      <Wrapper style={{ width: 'fit-content' }}>
+      <Wrapper style={{ maxWidth: '200px' }}>
         <Menu {...props} defaultIsActive={false} model={model} />
       </Wrapper>
     </ThemeProvider>

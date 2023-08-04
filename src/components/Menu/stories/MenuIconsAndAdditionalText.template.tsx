@@ -113,7 +113,7 @@ const IconAfter = styled.div`
   ${iconSize}
 `;
 
-export const IconsAndAdditionalTextTemplate = (props: MenuProps) => {
+export const MenuIconsAndAdditionalTextTemplate = (props: MenuProps) => {
   const modelBase = items.map((item) => ({
     id: item.id,
     render: (options: RenderOptionProps) => (

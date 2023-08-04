@@ -4,7 +4,7 @@ import type { MenuProps, RenderOptionProps, Theme, BorderRadiusType } from '@adm
 import styled, { ThemeProvider } from 'styled-components';
 import { createItems } from './utils';
 
-const ITEMS = createItems(40);
+const ITEMS = createItems(200);
 
 const Wrapper = styled.div`
   border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
@@ -13,7 +13,7 @@ const Wrapper = styled.div`
   ${(p) => p.theme.shadow['Shadow 08']}
 `;
 
-export const VirtualScrollTemplate = (props: MenuProps & { themeBorderKind?: BorderRadiusType }) => {
+export const MenuLargeNumberOfItemsTemplate = (props: MenuProps & { themeBorderKind?: BorderRadiusType }) => {
   const model = React.useMemo(() => {
     return ITEMS.map((item) => ({
       id: item.id,
@@ -33,7 +33,7 @@ export const VirtualScrollTemplate = (props: MenuProps & { themeBorderKind?: Bor
   return (
     <ThemeProvider theme={swapBorder}>
       <Wrapper style={{ width: 'fit-content' }}>
-        <Menu {...props} defaultIsActive={false} virtualScroll={{ itemHeight: 'auto' }} model={model} />
+        <Menu {...props} defaultIsActive={false} model={model} />
       </Wrapper>
     </ThemeProvider>
   );

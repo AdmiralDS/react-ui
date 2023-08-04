@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
-import { Menu, MenuItem, TooltipHoc, mediumGroupBorderRadius } from '@admiral-ds/react-ui';
+import { Menu, MenuItem, mediumGroupBorderRadius } from '@admiral-ds/react-ui';
 import type { Theme, MenuProps, RenderOptionProps, BorderRadiusType } from '@admiral-ds/react-ui';
 
 type StoryItem = {
@@ -24,7 +24,7 @@ const STORY_ITEMS: Array<StoryItem> = [
   },
   {
     id: '3',
-    label: 'Привет, пупсик! Хотел тебе сказать, что ты андроид.',
+    label: 'Option three',
     value: 3,
   },
   {
@@ -56,32 +56,22 @@ const Wrapper = styled.div`
   ${(p) => p.theme.shadow['Shadow 08']}
 `;
 
-const MenuItemWithTooltip = TooltipHoc(MenuItem);
+const Container = styled.div`
+  display: flex;
+  flex-direction: row;
+  column-gap: 50px;
+`;
 
-export const TooltipMenuTemplate = (props: MenuProps & { themeBorderKind?: BorderRadiusType }) => {
+export const MenuSimpleTemplate = (props: MenuProps & { themeBorderKind?: BorderRadiusType }) => {
   const model = React.useMemo(() => {
-    return STORY_ITEMS.map((item) => {
-      const tooltip = item.label.length > 20;
-
-      return {
-        id: item.id,
-        render: (options: RenderOptionProps) =>
-          tooltip ? (
-            <MenuItemWithTooltip
-              renderContent={() => item.label}
-              dimension={props.dimension}
-              {...options}
-              key={item.id}
-            >
-              {item.label.slice(0, 17) + '...'}
-            </MenuItemWithTooltip>
-          ) : (
-            <MenuItem dimension={props.dimension} {...options} key={item.id}>
-              {item.label}
-            </MenuItem>
-          ),
-      };
-    });
+    return STORY_ITEMS.map((item) => ({
+      id: item.id,
+      render: (options: RenderOptionProps) => (
+        <MenuItem dimension={props.dimension} {...options} key={item.id}>
+          {item.label}
+        </MenuItem>
+      ),
+    }));
   }, [props.dimension]);
 
   function swapBorder(theme: Theme): Theme {
@@ -91,9 +81,14 @@ export const TooltipMenuTemplate = (props: MenuProps & { themeBorderKind?: Borde
 
   return (
     <ThemeProvider theme={swapBorder}>
-      <Wrapper style={{ width: 'fit-content' }}>
-        <Menu {...props} defaultIsActive={false} model={model} />
-      </Wrapper>
+      <Container>
+        <Wrapper style={{ width: 'fit-content' }}>
+          <Menu {...props} defaultIsActive={false} model={model} />
+        </Wrapper>
+        <Wrapper style={{ width: 'fit-content' }}>
+          <Menu {...props} defaultIsActive={false} model={model} />
+        </Wrapper>
+      </Container>
     </ThemeProvider>
   );
 };

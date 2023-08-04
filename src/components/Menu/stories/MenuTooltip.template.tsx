@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
-import { Menu, MenuItem, mediumGroupBorderRadius } from '@admiral-ds/react-ui';
+import { Menu, MenuItem, TooltipHoc, mediumGroupBorderRadius } from '@admiral-ds/react-ui';
 import type { Theme, MenuProps, RenderOptionProps, BorderRadiusType } from '@admiral-ds/react-ui';
 
 type StoryItem = {
@@ -56,20 +56,30 @@ const Wrapper = styled.div`
   ${(p) => p.theme.shadow['Shadow 08']}
 `;
 
-const MultiLineMenuItem = styled(MenuItem)`
-  white-space: pre-wrap;
-`;
+const MenuItemWithTooltip = TooltipHoc(MenuItem);
 
-export const MultiLineMenuTemplate = (props: MenuProps & { themeBorderKind?: BorderRadiusType }) => {
+export const MenuTooltipTemplate = (props: MenuProps & { themeBorderKind?: BorderRadiusType }) => {
   const model = React.useMemo(() => {
     return STORY_ITEMS.map((item) => {
+      const tooltip = item.label.length > 20;
+
       return {
         id: item.id,
-        render: (options: RenderOptionProps) => (
-          <MultiLineMenuItem dimension={props.dimension} {...options} key={item.id}>
-            {item.label}
-          </MultiLineMenuItem>
-        ),
+        render: (options: RenderOptionProps) =>
+          tooltip ? (
+            <MenuItemWithTooltip
+              renderContent={() => item.label}
+              dimension={props.dimension}
+              {...options}
+              key={item.id}
+            >
+              {item.label.slice(0, 17) + '...'}
+            </MenuItemWithTooltip>
+          ) : (
+            <MenuItem dimension={props.dimension} {...options} key={item.id}>
+              {item.label}
+            </MenuItem>
+          ),
       };
     });
   }, [props.dimension]);
@@ -81,7 +91,7 @@ export const MultiLineMenuTemplate = (props: MenuProps & { themeBorderKind?: Bor
 
   return (
     <ThemeProvider theme={swapBorder}>
-      <Wrapper style={{ maxWidth: '200px' }}>
+      <Wrapper style={{ width: 'fit-content' }}>
         <Menu {...props} defaultIsActive={false} model={model} />
       </Wrapper>
     </ThemeProvider>

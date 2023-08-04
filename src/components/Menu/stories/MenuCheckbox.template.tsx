@@ -50,7 +50,7 @@ const Wrapper = styled.div`
   ${(p) => p.theme.shadow['Shadow 08']}
 `;
 
-export const CheckboxMenuTemplate = (props: MenuProps & { themeBorderKind?: BorderRadiusType }) => {
+export const MenuCheckboxTemplate = (props: MenuProps & { themeBorderKind?: BorderRadiusType }) => {
   const [selected, setSelected] = React.useState<string | undefined>();
   const [checkedOptions, setCheckedOptions] = React.useState<Array<string>>([]);
 

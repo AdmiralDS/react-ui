@@ -72,7 +72,7 @@ const StyledAdditionalText = styled.div`
   pointer-events: none;
 `;
 
-export const CardGroupsTemplate = (props: MenuProps) => {
+export const MenuCardGroupsTemplate = (props: MenuProps) => {
   const model = React.useMemo(() => {
     return category.reduce((acc: any, item: any) => {
       acc.push({
