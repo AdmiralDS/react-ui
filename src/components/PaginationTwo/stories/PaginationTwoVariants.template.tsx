@@ -11,7 +11,7 @@ const Text = styled(T).attrs(() => ({
   margin-bottom: 8px;
 `;
 
-export const PaginationVariantsTemplate = (args: PaginationTwoProps) => {
+export const PaginationTwoVariantsTemplate = (args: PaginationTwoProps) => {
   const [page1, setPage1] = React.useState(1);
   const [page2, setPage2] = React.useState(1);
   const [page3, setPage3] = React.useState(1);

@@ -33,7 +33,7 @@ const Text = styled(T).attrs(() => ({
   margin-bottom: 8px;
 `;
 
-export const PaginationMobileTemplate = (args: PaginationTwoProps) => {
+export const PaginationTwoMobileTemplate = (args: PaginationTwoProps) => {
   const [page1, setPage1] = React.useState(1);
   const [page2, setPage2] = React.useState(1);
   const style = { marginBottom: '60px' };

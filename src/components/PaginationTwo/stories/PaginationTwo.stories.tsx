@@ -1,15 +1,17 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import type { Meta, StoryFn } from '@storybook/react';
+
 import { PaginationTwo } from '@admiral-ds/react-ui';
 
-import { PaginationPlaygroundTemplate, PaginationVariantsTemplate, PaginationMobileTemplate } from './Templates';
-import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+import { PaginationTwoPlaygroundTemplate } from './PaginationTwoPlayground.template';
+import { PaginationTwoVariantsTemplate } from './PaginationTwoVariants.template';
+import { PaginationTwoMobileTemplate } from './PaginationTwoMobile.template';
 
 // Imports of text sources
-import PaginationPlaygroundRaw from './Templates/PaginationPlayground?raw';
-import PaginationVariantsRaw from './Templates/PaginationVariants?raw';
-import PaginationMobileRaw from './Templates/PaginationMobile?raw';
+import PaginationTwoPlaygroundRaw from './PaginationTwoPlayground.template?raw';
+import PaginationTwoVariantsRaw from './PaginationTwoVariants.template?raw';
+import PaginationTwoMobileRaw from './PaginationTwoMobile.template?raw';
 
 const Separator = styled.div`
   height: 20px;
@@ -84,7 +86,7 @@ export default {
 
 //<editor-fold desc="Playground">
 const PaginationPlaygroundStory: StoryFn<typeof PaginationTwo> = ({ page, onChange, ...props }) => (
-  <PaginationPlaygroundTemplate page={page} onChange={onChange} {...cleanUpProps(props)} />
+  <PaginationTwoPlaygroundTemplate page={page} onChange={onChange} {...props} />
 );
 
 export const Playground = {
@@ -93,7 +95,7 @@ export const Playground = {
   parameters: {
     docs: {
       source: {
-        code: PaginationPlaygroundRaw,
+        code: PaginationTwoPlaygroundRaw,
       },
     },
   },
@@ -103,7 +105,7 @@ export const Playground = {
 
 //<editor-fold desc="Примеры">
 const PaginationVariantsStory: StoryFn<typeof PaginationTwo> = ({ page, onChange, ...props }) => (
-  <PaginationVariantsTemplate page={page} onChange={onChange} {...cleanUpProps(props)} />
+  <PaginationTwoVariantsTemplate page={page} onChange={onChange} {...props} />
 );
 
 export const PaginationVariantsExample = {
@@ -112,7 +114,7 @@ export const PaginationVariantsExample = {
   parameters: {
     docs: {
       source: {
-        code: PaginationVariantsRaw,
+        code: PaginationTwoVariantsRaw,
       },
     },
   },
@@ -124,7 +126,7 @@ export const PaginationVariantsExample = {
 
 //<editor-fold desc="Мобильная версия">
 const PaginationMobileStory: StoryFn<typeof PaginationTwo> = ({ page, onChange, ...props }) => (
-  <PaginationMobileTemplate page={page} onChange={onChange} {...cleanUpProps(props)} />
+  <PaginationTwoMobileTemplate page={page} onChange={onChange} {...props} />
 );
 
 export const PaginationMobileExample = {
@@ -133,7 +135,7 @@ export const PaginationMobileExample = {
   parameters: {
     docs: {
       source: {
-        code: PaginationMobileRaw,
+        code: PaginationTwoMobileRaw,
       },
     },
   },
