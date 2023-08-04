@@ -1,22 +1,20 @@
 import * as React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
+
 import { MenuButton, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
-import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
-import {
-  MenuButtonBaseTemplate,
-  MenuButtonIconTemplate,
-  MenuButtonOptionsTemplate,
-  MenuButtonVariantsTemplate,
-  MenuButtonWithPanelTemplate,
-} from './Templates';
+import { MenuButtonIconTemplate } from './MenuButtonIcon.template';
+import { MenuButtonBaseTemplate } from './MenuButtonBase.template';
+import { MenuButtonOptionsTemplate } from './MenuButtonOptions.template';
+import { MenuButtonVariantsTemplate } from './MenuButtonVariants.template';
+import { MenuButtonWithPanelTemplate } from './MenuButtonWithPanel.template';
 
 // Imports of text sources
-import MenuButtonIconRaw from './Templates/MenuButtonIcon?raw';
-import MenuButtonBaseRaw from './Templates/MenuButtonBase?raw';
-import MenuButtonOptionsRaw from './Templates/MenuButtonOptions?raw';
-import MenuButtonVariantsRaw from './Templates/MenuButtonVariants?raw';
-import MenuButtonWithPanelRaw from './Templates/MenuButtonWithPanel?raw';
+import MenuButtonIconRaw from './MenuButtonIcon.template?raw';
+import MenuButtonBaseRaw from './MenuButtonBase.template?raw';
+import MenuButtonOptionsRaw from './MenuButtonOptions.template?raw';
+import MenuButtonVariantsRaw from './MenuButtonVariants.template?raw';
+import MenuButtonWithPanelRaw from './MenuButtonWithPanel.template?raw';
 
 export default {
   title: 'Admiral-2.1/MenuButton',
@@ -168,9 +166,7 @@ export default {
 } as Meta<typeof MenuButton>;
 
 //<editor-fold desc="MenuButton. Базовый пример.">
-const MenuButtonBaseStory: StoryFn<typeof MenuButton> = (props) => (
-  <MenuButtonBaseTemplate items={[]} {...cleanUpProps(props)} />
-);
+const MenuButtonBaseStory: StoryFn<typeof MenuButton> = (props) => <MenuButtonBaseTemplate {...props} />;
 
 export const MenuButtonBase = {
   render: MenuButtonBaseStory,
@@ -189,9 +185,7 @@ export const MenuButtonBase = {
 //</editor-fold>
 
 //<editor-fold desc="MenuButton. Задизейбленные и кастомизированные опции и панель с кнопками">
-const MenuButtonOptionsStory: StoryFn<typeof MenuButton> = (props) => (
-  <MenuButtonOptionsTemplate items={[]} {...cleanUpProps(props)} />
-);
+const MenuButtonOptionsStory: StoryFn<typeof MenuButton> = (props) => <MenuButtonOptionsTemplate {...props} />;
 
 export const MenuButtonOptions = {
   render: MenuButtonOptionsStory,
@@ -210,9 +204,7 @@ export const MenuButtonOptions = {
 //</editor-fold>
 
 //<editor-fold desc="MenuButton. Размеры и стили.">
-const MenuButtonVariantsStory: StoryFn<typeof MenuButton> = (props) => (
-  <MenuButtonVariantsTemplate items={[]} {...cleanUpProps(props)} />
-);
+const MenuButtonVariantsStory: StoryFn<typeof MenuButton> = (props) => <MenuButtonVariantsTemplate {...props} />;
 
 export const MenuButtonVariants = {
   render: MenuButtonVariantsStory,
@@ -231,9 +223,7 @@ export const MenuButtonVariants = {
 //</editor-fold>
 
 //<editor-fold desc="MenuButton с иконкой">
-const MenuButtonIconStory: StoryFn<typeof MenuButton> = (props) => (
-  <MenuButtonIconTemplate items={[]} {...cleanUpProps(props)} />
-);
+const MenuButtonIconStory: StoryFn<typeof MenuButton> = (props) => <MenuButtonIconTemplate {...props} />;
 
 export const MenuButtonIcon = {
   render: MenuButtonIconStory,
@@ -252,9 +242,7 @@ export const MenuButtonIcon = {
 //</editor-fold>
 
 //<editor-fold desc="MenuButton с чекбоксами и нижней панелью в выпадающем меню">
-const MenuButtonWithPanelStory: StoryFn<typeof MenuButton> = (props) => (
-  <MenuButtonWithPanelTemplate items={[]} {...cleanUpProps(props)} />
-);
+const MenuButtonWithPanelStory: StoryFn<typeof MenuButton> = (props) => <MenuButtonWithPanelTemplate {...props} />;
 
 export const MenuButtonWithPanel = {
   render: MenuButtonWithPanelStory,
