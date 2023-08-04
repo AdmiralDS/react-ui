@@ -2,13 +2,14 @@ import * as React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
 import { IconButton, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
-import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
-import { IconButtonAppearanceTemplate, IconButtonDimensionTemplate, IconButtonStateTemplate } from './Templates';
+import { IconButtonDimensionTemplate } from './IconButtonDimension.template';
+import { IconButtonStateTemplate } from './IconButtonState.template';
+import { IconButtonAppearanceTemplate } from './IconButtonAppearance.template';
 
 // Imports of text sources
-import IconButtonDimensionRaw from './Templates/IconButtonDimension?raw';
-import IconButtonStateRaw from './Templates/IconButtonState?raw';
-import IconButtonAppearanceRaw from './Templates/IconButtonAppearance?raw';
+import IconButtonDimensionRaw from './IconButtonDimension.template?raw';
+import IconButtonStateRaw from './IconButtonState.template?raw';
+import IconButtonAppearanceRaw from './IconButtonAppearance.template?raw';
 
 export default {
   title: 'Admiral-2.1/IconButton',
@@ -65,9 +66,7 @@ export default {
   },
 } as Meta<typeof IconButton>;
 
-const IconButtonDimensionStory: StoryFn<typeof IconButton> = (props) => (
-  <IconButtonDimensionTemplate {...cleanUpProps(props)} />
-);
+const IconButtonDimensionStory: StoryFn<typeof IconButton> = (props) => <IconButtonDimensionTemplate {...props} />;
 
 export const IconButtonDimension = {
   render: IconButtonDimensionStory,
@@ -86,9 +85,7 @@ export const IconButtonDimension = {
 //</editor-fold>
 
 //<editor-fold desc="IconButton. Состояния">
-const IconButtonStateStory: StoryFn<typeof IconButton> = (props) => (
-  <IconButtonStateTemplate {...cleanUpProps(props)} />
-);
+const IconButtonStateStory: StoryFn<typeof IconButton> = (props) => <IconButtonStateTemplate {...props} />;
 
 export const IconButtonState = {
   render: IconButtonStateStory,
@@ -107,9 +104,7 @@ export const IconButtonState = {
 //</editor-fold>
 
 //<editor-fold desc="IconButton. Appearance">
-const IconButtonAppearanceStory: StoryFn<typeof IconButton> = (props) => (
-  <IconButtonAppearanceTemplate {...cleanUpProps(props)} />
-);
+const IconButtonAppearanceStory: StoryFn<typeof IconButton> = (props) => <IconButtonAppearanceTemplate {...props} />;
 
 export const IconButtonAppearance = {
   render: IconButtonAppearanceStory,
