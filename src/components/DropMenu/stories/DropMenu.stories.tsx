@@ -1,22 +1,21 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import type { Meta, StoryFn } from '@storybook/react';
+
 import { DropMenu, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
-import {
-  SimpleTemplate,
-  CategoryTemplate,
-  DropMenuTooltipTemplate,
-  DropMenuCheckboxTemplate,
-  DropMenuRadiobuttonTemplate,
-} from '#src/components/DropMenu/Stories/Templates';
-import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+
+import { DropMenuSimpleTemplate } from './DropMenuSimple.template';
+import { DropMenuCategoryTemplate } from './DropMenuCategory.template';
+import { DropMenuTooltipTemplate } from './DropMenuTooltip.template';
+import { DropMenuCheckboxTemplate } from './DropMenuCheckbox.template';
+import { DropMenuRadiobuttonTemplate } from './DropMenuRadiobutton.template';
 
 // Imports of text sources
-import SimpleRaw from './Templates/Simple?raw';
-import CategoryRaw from './Templates/Category?raw';
-import DropMenuTooltipRaw from './Templates/DropMenuTooltip?raw';
-import DropMenuCheckboxRaw from './Templates/DropMenuCheckbox?raw';
-import DropMenuRadiobuttonRaw from './Templates/DropMenuRadiobutton?raw';
+import DropMenuSimpleRaw from './DropMenuSimple.template?raw';
+import DropMenuCategoryRaw from './DropMenuCategory.template?raw';
+import DropMenuTooltipRaw from './DropMenuTooltip.template?raw';
+import DropMenuCheckboxRaw from './DropMenuCheckbox.template?raw';
+import DropMenuRadiobuttonRaw from './DropMenuRadiobutton.template?raw';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -114,9 +113,7 @@ export default {
 } as Meta<typeof DropMenu>;
 
 //<editor-fold desc="Базовый пример">
-const SimpleStory: StoryFn<typeof DropMenu> = (props) => (
-  <SimpleTemplate items={[]} renderContentProp={() => false} {...cleanUpProps(props)} />
-);
+const SimpleStory: StoryFn<typeof DropMenu> = (props) => <DropMenuSimpleTemplate {...props} />;
 
 export const SimpleExample = {
   render: SimpleStory,
@@ -124,7 +121,7 @@ export const SimpleExample = {
   parameters: {
     docs: {
       source: {
-        code: SimpleRaw,
+        code: DropMenuSimpleRaw,
       },
       description: {
         story: 'Базовый пример использования DropMenu',
@@ -138,9 +135,7 @@ export const SimpleExample = {
 //</editor-fold>
 
 // <editor-fold desc="Пример с группами">
-const CategoryStory: StoryFn<typeof DropMenu> = (props) => (
-  <CategoryTemplate items={[]} renderContentProp={() => false} {...cleanUpProps(props)} />
-);
+const CategoryStory: StoryFn<typeof DropMenu> = (props) => <DropMenuCategoryTemplate {...props} />;
 
 export const CategoryExample = {
   render: CategoryStory,
@@ -148,7 +143,7 @@ export const CategoryExample = {
   parameters: {
     docs: {
       source: {
-        code: CategoryRaw,
+        code: DropMenuCategoryRaw,
       },
       description: {
         story: 'Пример с группировкой опций по категориям',
@@ -162,9 +157,7 @@ export const CategoryExample = {
 //</editor-fold>
 
 //<editor-fold desc="Пример с Tooltip">
-const DropMenuTooltipStory: StoryFn<typeof DropMenu> = (props) => (
-  <DropMenuTooltipTemplate items={[]} renderContentProp={() => false} {...cleanUpProps(props)} />
-);
+const DropMenuTooltipStory: StoryFn<typeof DropMenu> = (props) => <DropMenuTooltipTemplate {...props} />;
 
 export const DropMenuTooltipExample = {
   render: DropMenuTooltipStory,
@@ -186,9 +179,7 @@ export const DropMenuTooltipExample = {
 //</editor-fold>
 
 //<editor-fold desc="Пример с Checkbox">
-const DropMenuCheckboxStory: StoryFn<typeof DropMenu> = (props) => (
-  <DropMenuCheckboxTemplate items={[]} renderContentProp={() => false} {...cleanUpProps(props)} />
-);
+const DropMenuCheckboxStory: StoryFn<typeof DropMenu> = (props) => <DropMenuCheckboxTemplate {...props} />;
 
 export const DropMenuCheckboxExample = {
   render: DropMenuCheckboxStory,
@@ -210,9 +201,7 @@ export const DropMenuCheckboxExample = {
 //</editor-fold>
 
 //<editor-fold desc="Меню с checkbox">
-const DropMenuRadiobuttonStory: StoryFn<typeof DropMenu> = (props) => (
-  <DropMenuRadiobuttonTemplate items={[]} renderContentProp={() => false} {...cleanUpProps(props)} />
-);
+const DropMenuRadiobuttonStory: StoryFn<typeof DropMenu> = (props) => <DropMenuRadiobuttonTemplate {...props} />;
 
 export const DropMenuRadiobuttonExample = {
   render: DropMenuRadiobuttonStory,

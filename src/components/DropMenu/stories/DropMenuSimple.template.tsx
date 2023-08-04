@@ -66,7 +66,7 @@ const handleVisibilityChangeUnControlledState = (isVisible: boolean) => {
   }
 };
 
-export const SimpleTemplate = (props: DropMenuProps & { themeBorderKind?: BorderRadiusType }) => {
+export const DropMenuSimpleTemplate = (props: DropMenuProps & { themeBorderKind?: BorderRadiusType }) => {
   const [selected, setSelected] = React.useState<string | undefined>(undefined);
 
   const model = React.useMemo(() => {

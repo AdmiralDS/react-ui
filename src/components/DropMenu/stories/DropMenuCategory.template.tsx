@@ -93,7 +93,7 @@ const CATEGORIES = [
   },
 ];
 
-export const CategoryTemplate = (props: DropMenuProps) => {
+export const DropMenuCategoryTemplate = (props: DropMenuProps) => {
   const model = React.useMemo(() => {
     return CATEGORIES.reduce((acc: any, item: any) => {
       acc.push({
