@@ -2,7 +2,7 @@ import * as React from 'react';
 import { PaginationSimple, PaginationSimpleItem } from '@admiral-ds/react-ui';
 import type { PaginationSimpleProps } from '@admiral-ds/react-ui';
 
-export const PaginationPlaygroundTemplate = ({ currentItem = 1, ...args }: PaginationSimpleProps) => {
+export const PaginationSimplePlaygroundTemplate = ({ currentItem = 1, ...args }: PaginationSimpleProps) => {
   const [current, setCurrent] = React.useState(currentItem);
 
   React.useEffect(() => {

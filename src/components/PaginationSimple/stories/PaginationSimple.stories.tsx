@@ -3,11 +3,10 @@ import styled from 'styled-components';
 import type { Meta, StoryFn } from '@storybook/react';
 import { PaginationSimple } from '@admiral-ds/react-ui';
 
-import { PaginationPlaygroundTemplate } from './Templates';
-import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+import { PaginationSimplePlaygroundTemplate } from './PaginationSimplePlayground.template';
 
 // Imports of text sources
-import PaginationPlaygroundRaw from './Templates/PaginationPlayground?raw';
+import PaginationSimplePlaygroundRaw from './PaginationSimplePlayground.template?raw';
 
 const Separator = styled.div`
   height: 20px;
@@ -54,7 +53,7 @@ export default {
 
 //<editor-fold desc="Playground">
 const PaginationPlaygroundStory: StoryFn<typeof PaginationSimple> = ({ currentItem, onChange, ...props }) => (
-  <PaginationPlaygroundTemplate currentItem={currentItem} onChange={onChange} {...cleanUpProps(props)} />
+  <PaginationSimplePlaygroundTemplate currentItem={currentItem} onChange={onChange} {...props} />
 );
 
 export const Playground = {
@@ -63,7 +62,7 @@ export const Playground = {
   parameters: {
     docs: {
       source: {
-        code: PaginationPlaygroundRaw,
+        code: PaginationSimplePlaygroundRaw,
       },
     },
   },
