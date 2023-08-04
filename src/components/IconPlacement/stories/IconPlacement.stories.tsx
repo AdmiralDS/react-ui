@@ -3,19 +3,16 @@ import type { Meta, StoryFn } from '@storybook/react';
 
 import { IconPlacement, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
-import {
-  IconPlacementAppearanceTemplate,
-  IconPlacementPlaygroundTemplate,
-  IconPlacementSizesTemplate,
-  IconPlacementVariantsTemplate,
-} from './Templates';
-import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+import { IconPlacementPlaygroundTemplate } from './IconPlacementPlayground.template';
+import { IconPlacementVariantsTemplate } from './IconPlacementVariants.template';
+import { IconPlacementAppearanceTemplate } from './IconPlacementAppearance.template';
+import { IconPlacementSizesTemplate } from './IconPlacementSizes.template';
 
 // Imports of text sources
-import IconPlacementPlaygroundRaw from './Templates/IconPlacementPlayground?raw';
-import IconPlacementVariantsRaw from './Templates/IconPlacementVariants?raw';
-import IconPlacementAppearanceRaw from './Templates/IconPlacementAppearance?raw';
-import IconPlacementSizesRaw from './Templates/IconPlacementSizes?raw';
+import IconPlacementPlaygroundRaw from './IconPlacementPlayground.template?raw';
+import IconPlacementVariantsRaw from './IconPlacementVariants.template?raw';
+import IconPlacementAppearanceRaw from './IconPlacementAppearance.template?raw';
+import IconPlacementSizesRaw from './IconPlacementSizes.template?raw';
 
 export default {
   title: 'Admiral-2.1/IconPlacement',
@@ -71,7 +68,7 @@ export default {
 
 //<editor-fold desc="IconPlacement. Playground">
 const IconPlacementPlaygroundStory: StoryFn<typeof IconPlacement> = (props) => (
-  <IconPlacementPlaygroundTemplate {...cleanUpProps(props)} />
+  <IconPlacementPlaygroundTemplate {...props} />
 );
 
 export const IconPlacementPlayground = {
@@ -91,9 +88,7 @@ export const IconPlacementPlayground = {
 //</editor-fold>
 
 //<editor-fold desc="IconPlacement. Размеры">
-const IconPlacementSizesStory: StoryFn<typeof IconPlacement> = (props) => (
-  <IconPlacementSizesTemplate {...cleanUpProps(props)} />
-);
+const IconPlacementSizesStory: StoryFn<typeof IconPlacement> = (props) => <IconPlacementSizesTemplate {...props} />;
 
 export const IconPlacementSizes = {
   render: IconPlacementSizesStory,
@@ -113,7 +108,7 @@ export const IconPlacementSizes = {
 
 //<editor-fold desc="IconPlacement. Appearance">
 const IconPlacementAppearanceStory: StoryFn<typeof IconPlacement> = (props) => (
-  <IconPlacementAppearanceTemplate {...cleanUpProps(props)} />
+  <IconPlacementAppearanceTemplate {...props} />
 );
 
 export const IconPlacementAppearance = {
@@ -134,7 +129,7 @@ export const IconPlacementAppearance = {
 
 //<editor-fold desc="IconPlacement. Варианты использования">
 const IconPlacementVariantsStory: StoryFn<typeof IconPlacement> = (props) => (
-  <IconPlacementVariantsTemplate {...cleanUpProps(props)} />
+  <IconPlacementVariantsTemplate {...props} />
 );
 
 export const IconPlacementVariants = {
