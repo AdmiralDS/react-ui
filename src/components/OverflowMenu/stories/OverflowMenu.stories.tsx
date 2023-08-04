@@ -2,17 +2,14 @@ import * as React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
 import { OverflowMenu, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
-import {
-  OverflowMenuBaseTemplate,
-  OverflowMenuOptionsTemplate,
-  OverflowMenuSizesOrientationTemplate,
-} from './Templates';
-import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+import { OverflowMenuBaseTemplate } from './OverflowMenuBase.template';
+import { OverflowMenuOptionsTemplate } from './OverflowMenuOptions.template';
+import { OverflowMenuSizesOrientationTemplate } from './OverflowMenuSizesOrientation.template';
 
 // Imports of text sources
-import OverflowMenuBaseRaw from './Templates/OverflowMenuBase?raw';
-import OverflowMenuOptionsRaw from './Templates/OverflowMenuOptions?raw';
-import OverflowMenuSizesOrientationRaw from './Templates/OverflowMenuSizesOrientation?raw';
+import OverflowMenuBaseRaw from './OverflowMenuBase.template?raw';
+import OverflowMenuOptionsRaw from './OverflowMenuOptions.template?raw';
+import OverflowMenuSizesOrientationRaw from './OverflowMenuSizesOrientation.template?raw';
 
 export default {
   title: 'Admiral-2.1/OverflowMenu',
@@ -85,9 +82,7 @@ export default {
 } as Meta<typeof OverflowMenu>;
 
 //<editor-fold desc="OverflowMenu. Базовый пример.">
-const OverflowMenuBaseStory: StoryFn<typeof OverflowMenu> = (props) => (
-  <OverflowMenuBaseTemplate items={[]} {...cleanUpProps(props)} />
-);
+const OverflowMenuBaseStory: StoryFn<typeof OverflowMenu> = (props) => <OverflowMenuBaseTemplate {...props} />;
 
 export const OverflowMenuBase = {
   render: OverflowMenuBaseStory,
@@ -106,9 +101,7 @@ export const OverflowMenuBase = {
 //</editor-fold>
 
 //<editor-fold desc="OverflowMenu. Задизейбленные и кастомизированные опции.">
-const OverflowMenuOptionsStory: StoryFn<typeof OverflowMenu> = (props) => (
-  <OverflowMenuOptionsTemplate items={[]} {...cleanUpProps(props)} />
-);
+const OverflowMenuOptionsStory: StoryFn<typeof OverflowMenu> = (props) => <OverflowMenuOptionsTemplate {...props} />;
 
 export const OverflowMenuOptions = {
   render: OverflowMenuOptionsStory,
@@ -128,7 +121,7 @@ export const OverflowMenuOptions = {
 
 //<editor-fold desc="OverflowMenu. Размеры и ориентация.">
 const OverflowMenuSizesOrientationStory: StoryFn<typeof OverflowMenu> = (props) => (
-  <OverflowMenuSizesOrientationTemplate items={[]} {...cleanUpProps(props)} />
+  <OverflowMenuSizesOrientationTemplate {...props} />
 );
 
 export const OverflowMenuSizesOrientation = {
