@@ -18,7 +18,7 @@ const title = 'Заголовок оповещения';
 const body = 'Тут находится текст короткого оповещения';
 const linkText = 'Link';
 
-export const StaticNotificationItemStatusTemplate = ({
+export const NotificationItemStatusTemplate = ({
   displayStatusIcon = true,
   isClosable = true,
   ...props

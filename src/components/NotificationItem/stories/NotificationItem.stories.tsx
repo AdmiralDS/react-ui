@@ -1,14 +1,15 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import type { Meta, StoryFn } from '@storybook/react';
+
 import { NotificationItem, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
-import { StaticNotificationItemBaseTemplate, StaticNotificationItemStatusTemplate } from './Templates';
-import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+import { NotificationItemBaseTemplate } from './NotificationItemBase.template';
+import { NotificationItemStatusTemplate } from './NotificationItemStatus.template';
 
 // Imports of text sources
-import StaticNotificationItemBaseRaw from './Templates/StaticNotificationItemBase?raw';
-import StaticNotificationItemStatusRaw from './Templates/StaticNotificationItemStatus?raw';
+import StaticNotificationItemBaseRaw from './NotificationItemBase.template?raw';
+import StaticNotificationItemStatusRaw from './NotificationItemStatus.template?raw';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -68,7 +69,7 @@ export default {
 
 //<editor-fold desc="Статическая нотификация. Базовый пример.">
 const StaticNotificationItemBaseStory: StoryFn<typeof NotificationItem> = (props) => {
-  return <StaticNotificationItemBaseTemplate {...cleanUpProps(props)} />;
+  return <NotificationItemBaseTemplate {...props} />;
 };
 
 export const StaticNotificationItemBase = {
@@ -89,7 +90,7 @@ export const StaticNotificationItemBase = {
 
 //<editor-fold desc="Статусы статических нотификаций">
 const StaticNotificationItemStatusStory: StoryFn<typeof NotificationItem> = (props) => {
-  return <StaticNotificationItemStatusTemplate {...cleanUpProps(props)} />;
+  return <NotificationItemStatusTemplate {...props} />;
 };
 
 export const StaticNotificationItemStatus = {
