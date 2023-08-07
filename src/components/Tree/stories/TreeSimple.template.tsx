@@ -58,7 +58,7 @@ const StyledTree = styled(Tree)`
   width: 500px;
 `;
 
-export const SimpleTreeTemplate = (props: TreeProps) => {
+export const TreeSimpleTemplate = (props: TreeProps) => {
   const [activeItem, setActiveItem] = useState<string | null>('1');
 
   const handleMouseLeave = () => {

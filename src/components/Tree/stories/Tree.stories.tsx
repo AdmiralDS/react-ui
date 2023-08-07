@@ -1,11 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 import type { Meta, StoryFn } from '@storybook/react';
+
 import { Tree } from '@admiral-ds/react-ui';
-import { TreeWithCheckboxesTemplate, SimpleTreeTemplate } from './Templates';
-import TreeWithCheckboxesRaw from './Templates/TreeWithCheckboxes?raw';
-import SimpleTreeRaw from './Templates/SimpleTree?raw';
-import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+
+import { TreeWithCheckboxesTemplate } from './TreeWithCheckboxes.template';
+import { TreeSimpleTemplate } from './TreeSimple.template';
+
+// Imports of text sources
+import TreeWithCheckboxesRaw from './TreeWithCheckboxes.template?raw';
+import TreeSimpleRaw from './TreeSimple.template?raw';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -67,9 +71,7 @@ export default {
   },
 } as Meta<typeof Tree>;
 
-const TreeWithCheckboxesStory: StoryFn<typeof Tree> = (props) => (
-  <TreeWithCheckboxesTemplate model={[]} {...cleanUpProps(props)} />
-);
+const TreeWithCheckboxesStory: StoryFn<typeof Tree> = (props) => <TreeWithCheckboxesTemplate {...props} />;
 
 export const Demo1_Tree = {
   render: TreeWithCheckboxesStory,
@@ -88,9 +90,7 @@ export const Demo1_Tree = {
   name: 'Контроллируемое дерево с checkbox',
 };
 
-const SimpleTreeStory: StoryFn<typeof Tree> = (props) => (
-  <SimpleTreeTemplate model={[]} {...cleanUpProps({ ...props, onChange: undefined })} />
-);
+const SimpleTreeStory: StoryFn<typeof Tree> = (props) => <TreeSimpleTemplate {...props} />;
 
 export const Demo2_Tree = {
   render: SimpleTreeStory,
@@ -98,7 +98,7 @@ export const Demo2_Tree = {
   parameters: {
     docs: {
       source: {
-        code: SimpleTreeRaw,
+        code: TreeSimpleRaw,
       },
       description: {
         story: 'Дерево без checkbox',
