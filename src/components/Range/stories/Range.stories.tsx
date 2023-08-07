@@ -3,11 +3,10 @@ import type { Meta, StoryFn } from '@storybook/react';
 import styled from 'styled-components';
 import { Range } from '@admiral-ds/react-ui';
 
-import { RangePlaygroundTemplate } from './Templates';
-import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+import { RangePlaygroundTemplate } from './RangePlayground.template';
 
 // Imports of text sources
-import PlaygroundRaw from './Templates/RangePlayground?raw';
+import PlaygroundRaw from './RangePlayground.template?raw';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -67,9 +66,7 @@ export default {
 } as Meta<typeof Range>;
 
 //<editor-fold desc="Playground">
-const PlaygroundStory: StoryFn<typeof Range> = ({ value, onChange, ...props }) => (
-  <RangePlaygroundTemplate value={value} onChange={onChange} {...cleanUpProps(props)} />
-);
+const PlaygroundStory: StoryFn<typeof Range> = (props) => <RangePlaygroundTemplate {...props} />;
 
 export const Playground = {
   render: PlaygroundStory,
