@@ -7,7 +7,6 @@ const config: StorybookConfig = {
     '@storybook/addon-essentials',
     '@storybook/addon-designs',
     '@storybook/addon-interactions',
-    '@storybook/addon-styling',
     'storybook-dark-mode',
     'storybook-addon-rtl',
   ],
