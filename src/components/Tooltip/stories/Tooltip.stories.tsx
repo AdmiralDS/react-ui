@@ -4,14 +4,16 @@ import styled from 'styled-components';
 
 import { Tooltip, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
-import { TooltipBaseTemplate, TooltipDelayTemplate, TooltipRefTemplate, TooltipMenuButtonTemplate } from './Templates';
-import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+import { TooltipBaseTemplate } from './TooltipBase.template';
+import { TooltipDelayTemplate } from './TooltipDelay.template';
+import { TooltipRefTemplate } from './TooltipRef.template';
+import { TooltipMenuButtonTemplate } from './TooltipMenuButton.template';
 
 // Imports of text sources
-import TooltipBaseRaw from './Templates/TooltipBase?raw';
-import TooltipDelayRaw from './Templates/TooltipDelay?raw';
-import TooltipRefRaw from './Templates/TooltipRef?raw';
-import TooltipMenuButtonRaw from './Templates/TooltipMenuButton?raw';
+import TooltipBaseRaw from './TooltipBase.template?raw';
+import TooltipDelayRaw from './TooltipDelay.template?raw';
+import TooltipRefRaw from './TooltipRef.template?raw';
+import TooltipMenuButtonRaw from './TooltipMenuButton.template?raw';
 
 const Separator = styled.div<{ height?: number }>`
   height: ${({ height }) => (height ? height : 20)}px;
@@ -95,9 +97,7 @@ export default {
 } as Meta<typeof Tooltip>;
 
 //<editor-fold desc="Базовый пример">
-const TooltipBaseStory: StoryFn<typeof Tooltip> = ({ renderContent, targetRef, ...props }) => (
-  <TooltipBaseTemplate renderContent={renderContent} targetRef={targetRef} {...cleanUpProps(props)} />
-);
+const TooltipBaseStory: StoryFn<typeof Tooltip> = (props) => <TooltipBaseTemplate {...props} />;
 
 export const TooltipBaseExample = {
   render: TooltipBaseStory,
@@ -116,9 +116,7 @@ export const TooltipBaseExample = {
 //</editor-fold>
 
 //<editor-fold desc="Пример с MenuButton">
-const TooltipMenuButtonStory: StoryFn<typeof Tooltip> = ({ renderContent, targetRef, ...props }) => (
-  <TooltipMenuButtonTemplate renderContent={renderContent} targetRef={targetRef} {...cleanUpProps(props)} />
-);
+const TooltipMenuButtonStory: StoryFn<typeof Tooltip> = (props) => <TooltipMenuButtonTemplate {...props} />;
 
 export const TooltipMenuButtonExample = {
   render: TooltipMenuButtonStory,
@@ -137,9 +135,7 @@ export const TooltipMenuButtonExample = {
 //</editor-fold>
 
 //<editor-fold desc="Пример с задержкой в появлении">
-const TooltipDelayStory: StoryFn<typeof Tooltip> = ({ renderContent, targetRef, ...props }) => (
-  <TooltipDelayTemplate renderContent={renderContent} targetRef={targetRef} {...cleanUpProps(props)} />
-);
+const TooltipDelayStory: StoryFn<typeof Tooltip> = (props) => <TooltipDelayTemplate {...props} />;
 
 export const TooltipDelayExample = {
   render: TooltipDelayStory,
@@ -158,9 +154,7 @@ export const TooltipDelayExample = {
 //</editor-fold>
 
 //<editor-fold desc="Пример с получением ref тултипа">
-const TooltipRefStory: StoryFn<typeof Tooltip> = ({ renderContent, targetRef, ...props }) => (
-  <TooltipRefTemplate renderContent={renderContent} targetRef={targetRef} {...cleanUpProps(props)} />
-);
+const TooltipRefStory: StoryFn<typeof Tooltip> = (props) => <TooltipRefTemplate {...props} />;
 
 export const TooltipRefExample = {
   render: TooltipRefStory,
