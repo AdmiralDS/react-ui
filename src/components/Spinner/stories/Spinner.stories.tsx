@@ -3,14 +3,16 @@ import styled from 'styled-components';
 import type { Meta, StoryFn } from '@storybook/react';
 import { Spinner } from '@admiral-ds/react-ui';
 
-import { SpinnerBaseTemplate, SpinnerDarkTemplate, SpinnerLightTemplate, SpinnerOthersTemplate } from './Templates';
-import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+import { SpinnerBaseTemplate } from './SpinnerBase.template';
+import { SpinnerLightTemplate } from './SpinnerLight.template';
+import { SpinnerDarkTemplate } from './SpinnerDark.template';
+import { SpinnerOthersTemplate } from './SpinnerOthers.template';
 
 // Imports of text sources
-import SpinnerBaseRaw from './Templates/SpinnerBase?raw';
-import SpinnerLightRaw from './Templates/SpinnerLight?raw';
-import SpinnerDarkRaw from './Templates/SpinnerDark?raw';
-import SpinnerOthersRaw from './Templates/SpinnerOthers?raw';
+import SpinnerBaseRaw from './SpinnerBase.template?raw';
+import SpinnerLightRaw from './SpinnerLight.template?raw';
+import SpinnerDarkRaw from './SpinnerDark.template?raw';
+import SpinnerOthersRaw from './SpinnerOthers.template?raw';
 
 const Separator = styled.div`
   height: 20px;
@@ -61,7 +63,7 @@ export default {
 } as Meta<typeof Spinner>;
 
 //<editor-fold desc="Spinner. Базовый пример.">
-const SpinnerBaseStory: StoryFn<typeof Spinner> = (props) => <SpinnerBaseTemplate {...cleanUpProps(props)} />;
+const SpinnerBaseStory: StoryFn<typeof Spinner> = (props) => <SpinnerBaseTemplate {...props} />;
 
 export const SpinnerBase = {
   render: SpinnerBaseStory,
@@ -80,7 +82,7 @@ export const SpinnerBase = {
 //</editor-fold>
 
 //<editor-fold desc="Spinner. Светлый фон.">
-const SpinnerLightStory: StoryFn<typeof Spinner> = (props) => <SpinnerLightTemplate {...cleanUpProps(props)} />;
+const SpinnerLightStory: StoryFn<typeof Spinner> = (props) => <SpinnerLightTemplate {...props} />;
 
 export const SpinnerLight = {
   render: SpinnerLightStory,
@@ -99,7 +101,7 @@ export const SpinnerLight = {
 //</editor-fold>
 
 //<editor-fold desc="Spinner. Темный фон.">
-const SpinnerDarkStory: StoryFn<typeof Spinner> = (props) => <SpinnerDarkTemplate {...cleanUpProps(props)} />;
+const SpinnerDarkStory: StoryFn<typeof Spinner> = (props) => <SpinnerDarkTemplate {...props} />;
 
 export const SpinnerDark = {
   render: SpinnerDarkStory,
