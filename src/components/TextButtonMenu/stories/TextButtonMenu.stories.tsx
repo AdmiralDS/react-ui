@@ -2,17 +2,14 @@ import * as React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
 import { TextButtonMenu, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
-import {
-  TextButtonMenuPlaygroundTemplate,
-  TextButtonMenuDimensionTemplate,
-  TextButtonMenuWithIconTemplate,
-} from './Templates';
-import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+import { TextButtonMenuPlaygroundTemplate } from './TextButtonMenuPlayground.template';
+import { TextButtonMenuDimensionTemplate } from './TextButtonMenuDimension.template';
+import { TextButtonMenuWithIconTemplate } from './TextButtonMenuWithIcon.template';
 
 // Imports of text sources
-import TextButtonMenuPlaygroundRaw from './Templates/TextButtonMenuPlayground?raw';
-import TextButtonMenuDimensionRaw from './Templates/TextButtonMenuDimension?raw';
-import TextButtonMenuWithIconRaw from './Templates/TextButtonMenuWithIcon?raw';
+import TextButtonMenuPlaygroundRaw from './TextButtonMenuPlayground.template?raw';
+import TextButtonMenuDimensionRaw from './TextButtonMenuDimension.template?raw';
+import TextButtonMenuWithIconRaw from './TextButtonMenuWithIcon.template?raw';
 
 export default {
   title: 'Admiral-2.1/TextButtonMenu',
@@ -106,7 +103,7 @@ export default {
 
 //<editor-fold desc="TextButtonMenu. Playground">
 const TextButtonMenuPlaygroundStory: StoryFn<typeof TextButtonMenu> = (props) => (
-  <TextButtonMenuPlaygroundTemplate items={[]} {...cleanUpProps(props)} />
+  <TextButtonMenuPlaygroundTemplate {...props} />
 );
 
 export const TextButtonMenuPlayground = {
@@ -127,7 +124,7 @@ export const TextButtonMenuPlayground = {
 
 //<editor-fold desc="TextButtonMenu. Размеры и стили.">
 const TextButtonMenuDimensionStory: StoryFn<typeof TextButtonMenu> = (props) => (
-  <TextButtonMenuDimensionTemplate items={[]} {...cleanUpProps(props)} />
+  <TextButtonMenuDimensionTemplate {...props} />
 );
 
 export const TextButtonMenuDimension = {
@@ -148,7 +145,7 @@ export const TextButtonMenuDimension = {
 
 //<editor-fold desc="TextButtonMenu. С иконкой.">
 const TextButtonMenuWithIconStory: StoryFn<typeof TextButtonMenu> = (props) => (
-  <TextButtonMenuWithIconTemplate items={[]} {...cleanUpProps(props)} />
+  <TextButtonMenuWithIconTemplate {...props} />
 );
 
 export const TextButtonMenuWithIcon = {
