@@ -3,11 +3,10 @@ import styled from 'styled-components';
 import type { Meta, StoryFn } from '@storybook/react';
 import { Tags, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
-import { TagsKindTemplate } from './Templates';
-import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+import { TagsKindTemplate } from './TagsKind.template';
 
 // Imports of text sources
-import KindRaw from './Templates/TagsKind?raw';
+import KindRaw from './TagsKind.template?raw';
 
 const Separator = styled.div`
   height: 20px;
@@ -69,7 +68,7 @@ export default {
 } as Meta<typeof Tags>;
 
 //<editor-fold desc="Tags">
-const KindStory: StoryFn<typeof Tags> = (props) => <TagsKindTemplate {...cleanUpProps(props)} />;
+const KindStory: StoryFn<typeof Tags> = (props) => <TagsKindTemplate {...props} />;
 
 export const KindExample = {
   render: KindStory,
