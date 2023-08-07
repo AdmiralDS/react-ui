@@ -3,12 +3,12 @@ import type { Meta, StoryFn } from '@storybook/react';
 import styled from 'styled-components';
 import { ProgressStepper } from '@admiral-ds/react-ui';
 
-import { ProgressStepperPlaygroundTemplate, ProgressStepperVariantsTemplate } from './Templates';
-import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+import { ProgressStepperPlaygroundTemplate } from './ProgressStepperPlayground.template';
+import { ProgressStepperVariantsTemplate } from './ProgressStepperVariants.template';
 
 // Imports of text sources
-import PlaygroundRaw from './Templates/ProgressStepperPlayground?raw';
-import VariantsRaw from './Templates/ProgressStepperVariants?raw';
+import ProgressStepperPlaygroundRaw from './ProgressStepperPlayground.template?raw';
+import ProgressStepperVariantsRaw from './ProgressStepperVariants.template?raw';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -74,9 +74,7 @@ export default {
 } as Meta<typeof ProgressStepper>;
 
 //<editor-fold desc="Playground">
-const PlaygroundStory: StoryFn<typeof ProgressStepper> = (props) => (
-  <ProgressStepperPlaygroundTemplate steps={[]} {...cleanUpProps(props)} />
-);
+const PlaygroundStory: StoryFn<typeof ProgressStepper> = (props) => <ProgressStepperPlaygroundTemplate {...props} />;
 
 export const PlaygroundExample = {
   render: PlaygroundStory,
@@ -84,7 +82,7 @@ export const PlaygroundExample = {
   parameters: {
     docs: {
       source: {
-        code: PlaygroundRaw,
+        code: ProgressStepperPlaygroundRaw,
       },
     },
   },
@@ -95,9 +93,7 @@ export const PlaygroundExample = {
 //</editor-fold>
 
 //<editor-fold desc="Variants">
-const VariantsStory: StoryFn<typeof ProgressStepper> = (props) => (
-  <ProgressStepperVariantsTemplate steps={[]} {...cleanUpProps(props)} />
-);
+const VariantsStory: StoryFn<typeof ProgressStepper> = (props) => <ProgressStepperVariantsTemplate {...props} />;
 
 export const VariantsExample = {
   render: VariantsStory,
@@ -105,10 +101,12 @@ export const VariantsExample = {
   parameters: {
     docs: {
       source: {
-        code: VariantsRaw,
+        code: ProgressStepperVariantsRaw,
       },
     },
   },
 
   name: 'StepperProgress. Примеры использования.',
 };
+
+//</editor-fold>
