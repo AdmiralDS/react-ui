@@ -5,7 +5,7 @@ import type { SelectTreeProps } from '@admiral-ds/react-ui';
 import { ReactComponent as FolderSolid } from '@admiral-ds/icons/build/documents/FolderSolid.svg';
 
 import type { SelectTreeNodeProps } from '#src/components/SelectTree/SelectTreeNode';
-import RNBLogoLight from '#src/components/SelectTree/Stories/RNBLogoLight.svg';
+import RNBLogoLight from '#src/components/SelectTree/stories/RNBLogoLight.svg';
 
 const selectTreeListM = [
   {

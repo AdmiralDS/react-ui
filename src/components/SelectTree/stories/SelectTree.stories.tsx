@@ -4,13 +4,14 @@ import styled from 'styled-components';
 
 import { SelectTree } from '@admiral-ds/react-ui';
 
-import { SelectTreeMTemplate, SelectTreeNoCheckboxTemplate, SelectTreeSTemplate } from './Templates';
-import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+import { SelectTreeMTemplate } from './SelectTreeM.template';
+import { SelectTreeSTemplate } from './SelectTreeS.template';
+import { SelectTreeNoCheckboxTemplate } from './SelectTreeNoCheckbox.template';
 
 // Imports of text sources
-import SelectTreeMRaw from './Templates/SelectTreeM?raw';
-import SelectTreeSRaw from './Templates/SelectTreeS?raw';
-import SelectTreeNoCheckboxRaw from './Templates/SelectTreeNoCheckbox?raw';
+import SelectTreeMRaw from './SelectTreeM.template?raw';
+import SelectTreeSRaw from './SelectTreeS.template?raw';
+import SelectTreeNoCheckboxRaw from './SelectTreeNoCheckbox.template?raw';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -66,9 +67,7 @@ export default {
 } as Meta<typeof SelectTree>;
 
 //<editor-fold desc="Select Tree. Размер М">
-const SelectTreeMStory: StoryFn<typeof SelectTree> = (props) => (
-  <SelectTreeMTemplate list={[]} {...cleanUpProps(props)} />
-);
+const SelectTreeMStory: StoryFn<typeof SelectTree> = (props) => <SelectTreeMTemplate {...props} />;
 
 export const SelectTreeM = {
   render: SelectTreeMStory,
@@ -87,9 +86,7 @@ export const SelectTreeM = {
 //</editor-fold>
 
 //<editor-fold desc="Select Tree. Размер S">
-const SelectTreeSStory: StoryFn<typeof SelectTree> = (props) => (
-  <SelectTreeSTemplate list={[]} {...cleanUpProps(props)} />
-);
+const SelectTreeSStory: StoryFn<typeof SelectTree> = (props) => <SelectTreeSTemplate {...props} />;
 
 export const SelectTreeS = {
   render: SelectTreeSStory,
@@ -108,9 +105,7 @@ export const SelectTreeS = {
 //</editor-fold>
 
 //<editor-fold desc="Select Tree. Развернутый список без опции выбора">
-const SelectTreeNoCheckboxStory: StoryFn<typeof SelectTree> = (props) => (
-  <SelectTreeNoCheckboxTemplate list={[]} {...cleanUpProps(props)} />
-);
+const SelectTreeNoCheckboxStory: StoryFn<typeof SelectTree> = (props) => <SelectTreeNoCheckboxTemplate {...props} />;
 
 export const SelectTreeNoCheckbox = {
   render: SelectTreeNoCheckboxStory,
@@ -125,3 +120,5 @@ export const SelectTreeNoCheckbox = {
 
   name: 'Select Tree. Развернутый список без опции выбора',
 };
+
+//</editor-fold>
