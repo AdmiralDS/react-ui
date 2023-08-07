@@ -4,21 +4,18 @@ import styled from 'styled-components';
 
 import { RadioButton } from '@admiral-ds/react-ui';
 
-import {
-  RadioButtonExtraTextTemplate,
-  RadioButtonInformerTemplate,
-  RadioButtonPlaygroundTemplate,
-  RadioButtonSizeTemplate,
-  RadioButtonStateTemplate,
-} from './Templates';
-import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+import { RadioButtonPlaygroundTemplate } from './RadioButtonPlayground.template';
+import { RadioButtonSizeTemplate } from './RadioButtonSize.template';
+import { RadioButtonStateTemplate } from './RadioButtonState.template';
+import { RadioButtonExtraTextTemplate } from './RadioButtonExtraText.template';
+import { RadioButtonInformerTemplate } from './RadioButtonInformer.template';
 
 // Imports of text sources
-import RadioButtonPlaygroundRaw from './Templates/RadioButtonPlayground?raw';
-import RadioButtonSizeRaw from './Templates/RadioButtonSize?raw';
-import RadioButtonStateRaw from './Templates/RadioButtonState?raw';
-import RadioButtonExtraTextRaw from './Templates/RadioButtonExtraText?raw';
-import RadioButtonInformerRaw from './Templates/RadioButtonInformer?raw';
+import RadioButtonPlaygroundRaw from './RadioButtonPlayground.template?raw';
+import RadioButtonSizeRaw from './RadioButtonSize.template?raw';
+import RadioButtonStateRaw from './RadioButtonState.template?raw';
+import RadioButtonExtraTextRaw from './RadioButtonExtraText.template?raw';
+import RadioButtonInformerRaw from './RadioButtonInformer.template?raw';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -82,9 +79,7 @@ export default {
 } as Meta<typeof RadioButton>;
 
 //<editor-fold desc="RadioButton. Playground">
-const RadioButtonPlaygroundStory: StoryFn<typeof RadioButton> = (props) => (
-  <RadioButtonPlaygroundTemplate {...cleanUpProps(props)} />
-);
+const RadioButtonPlaygroundStory: StoryFn<typeof RadioButton> = (props) => <RadioButtonPlaygroundTemplate {...props} />;
 
 export const RadioButtonPlayground = {
   render: RadioButtonPlaygroundStory,
