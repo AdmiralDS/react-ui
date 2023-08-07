@@ -24,7 +24,7 @@ const steps = [
   { key: 3, content: 'Неактивный шаг, текст занимает максимум три строки', link: '#' },
 ];
 
-export const StepperAddaptiveTemplate = () => {
+export const StepperAdaptiveTemplate = () => {
   return (
     <>
       <Stepper activeStep={2}>

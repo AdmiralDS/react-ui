@@ -3,27 +3,24 @@ import styled from 'styled-components';
 import type { Meta, StoryFn } from '@storybook/react';
 import { Stepper } from '@admiral-ds/react-ui';
 
-import {
-  StepperPlaygroundTemplate,
-  StepperStepKindsTemplate,
-  StepperAddaptiveTemplate,
-  StepperClickableLinksTemplate,
-  StepperCustomStepContentTemplate,
-  StepperClickPropTemplate,
-  StepperPreviousStepsTemplate,
-  StepperMobileTemplate,
-} from './Templates';
-import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+import { StepperPlaygroundTemplate } from './StepperPlayground.template';
+import { StepperStepKindsTemplate } from './StepperStepKinds.template';
+import { StepperAdaptiveTemplate } from './StepperAdaptive.template';
+import { StepperClickableLinksTemplate } from './StepperClickableLinks.template';
+import { StepperCustomStepContentTemplate } from './StepperCustomStepContent.template';
+import { StepperClickPropTemplate } from './StepperClickProp.template';
+import { StepperPreviousStepsTemplate } from './StepperPreviousSteps.template';
+import { StepperMobileTemplate } from './StepperMobile.template';
 
 // Imports of text sources
-import PlaygroundRaw from './Templates/StepperPlayground?raw';
-import StepKindsRaw from './Templates/StepperStepKinds?raw';
-import AdaptiveRaw from './Templates/StepperAdaptive?raw';
-import ClickableLinksRaw from './Templates/StepperClickableLinks?raw';
-import CustomStepContentRaw from './Templates/StepperCustomStepContent?raw';
-import ClickPropRaw from './Templates/StepperClickProp?raw';
-import PreviousStepsRaw from './Templates/StepperPreviousSteps?raw';
-import MobileRaw from './Templates/StepperMobile?raw';
+import StepperPlaygroundRaw from './StepperPlayground.template?raw';
+import StepperStepKindsRaw from './StepperStepKinds.template?raw';
+import StepperAdaptiveRaw from './StepperAdaptive.template?raw';
+import StepperClickableLinksRaw from './StepperClickableLinks.template?raw';
+import StepperCustomStepContentRaw from './StepperCustomStepContent.template?raw';
+import StepperClickPropRaw from './StepperClickProp.template?raw';
+import StepperPreviousStepsRaw from './StepperPreviousSteps.template?raw';
+import StepperMobileRaw from './StepperMobile.template?raw';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -96,9 +93,7 @@ export default {
 } as Meta<typeof Stepper>;
 
 //<editor-fold desc="Playground">
-const PlaygroundStory: StoryFn<typeof Stepper> = ({ activeStep, ...props }) => (
-  <StepperPlaygroundTemplate activeStep={activeStep} {...cleanUpProps(props)} />
-);
+const PlaygroundStory: StoryFn<typeof Stepper> = (props) => <StepperPlaygroundTemplate {...props} />;
 
 export const Playground = {
   render: PlaygroundStory,
@@ -106,7 +101,7 @@ export const Playground = {
   parameters: {
     docs: {
       source: {
-        code: PlaygroundRaw,
+        code: StepperPlaygroundRaw,
       },
     },
   },
@@ -125,7 +120,7 @@ export const StepKindsExample = {
   parameters: {
     docs: {
       source: {
-        code: StepKindsRaw,
+        code: StepperStepKindsRaw,
       },
       description: {
         story: `Для обозначения активного шага в компонент Stepper нужно передать параметр activeStep, равный индексу активного шага.
@@ -143,7 +138,7 @@ export const StepKindsExample = {
 //</editor-fold>
 
 //<editor-fold desc="Адаптив">
-const AdaptiveStory: StoryFn<typeof Stepper> = () => <StepperAddaptiveTemplate />;
+const AdaptiveStory: StoryFn<typeof Stepper> = () => <StepperAdaptiveTemplate />;
 
 export const AdaptiveExample = {
   render: AdaptiveStory,
@@ -151,7 +146,7 @@ export const AdaptiveExample = {
   parameters: {
     docs: {
       source: {
-        code: AdaptiveRaw,
+        code: StepperAdaptiveRaw,
       },
       description: {
         story: `С помощью параметра stepWidth можно задать ширину шага. Если данный параметр не задан, 
@@ -177,7 +172,7 @@ export const CustomStepContentExample = {
   parameters: {
     docs: {
       source: {
-        code: CustomStepContentRaw,
+        code: StepperCustomStepContentRaw,
       },
     },
   },
@@ -196,7 +191,7 @@ export const ClickableLinksExample = {
   parameters: {
     docs: {
       source: {
-        code: ClickableLinksRaw,
+        code: StepperClickableLinksRaw,
       },
     },
   },
@@ -215,7 +210,7 @@ export const ClickPropExample = {
   parameters: {
     docs: {
       source: {
-        code: ClickPropRaw,
+        code: StepperClickPropRaw,
       },
     },
   },
@@ -234,7 +229,7 @@ export const PreviousStepsExample = {
   parameters: {
     docs: {
       source: {
-        code: PreviousStepsRaw,
+        code: StepperPreviousStepsRaw,
       },
       description: {
         story: `В случаях необходимости и когда это позволяет логика шагов, например, результаты предыдущих 
@@ -257,7 +252,7 @@ export const MobileExample = {
   parameters: {
     docs: {
       source: {
-        code: MobileRaw,
+        code: StepperMobileRaw,
       },
       description: {
         story: `В мобильной версии применяется только горизонтальный вариант компонента
