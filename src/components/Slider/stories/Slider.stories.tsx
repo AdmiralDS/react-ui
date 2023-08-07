@@ -3,13 +3,14 @@ import type { Meta, StoryFn } from '@storybook/react';
 import styled from 'styled-components';
 import { Slider } from '@admiral-ds/react-ui';
 
-import { SliderPlaygroundTemplate, SliderSimpleTemplate, SliderRangeTemplate } from './Templates';
-import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+import { SliderPlaygroundTemplate } from './SliderPlayground.template';
+import { SliderSimpleTemplate } from './SliderSimple.template';
+import { SliderRangeTemplate } from './SliderRange.template';
 
 // Imports of text sources
-import PlaygroundRaw from './Templates/SliderPlayground?raw';
-import SimpleRaw from './Templates/SliderSimple?raw';
-import RangeRaw from './Templates/SliderRange?raw';
+import SliderPlaygroundRaw from './SliderPlayground.template?raw';
+import SliderSimpleRaw from './SliderSimple.template?raw';
+import SliderRangeRaw from './SliderRange.template?raw';
 
 const Separator = styled.div`
   height: 20px;
@@ -92,7 +93,7 @@ export default {
 
 //<editor-fold desc="Playground">
 const PlaygroundStory: StoryFn<typeof Slider> = ({ value, onChange, ...props }) => (
-  <SliderPlaygroundTemplate value={value} onChange={onChange} {...cleanUpProps(props)} />
+  <SliderPlaygroundTemplate value={value} onChange={onChange} {...props} />
 );
 
 export const Playground = {
@@ -101,7 +102,7 @@ export const Playground = {
   parameters: {
     docs: {
       source: {
-        code: PlaygroundRaw,
+        code: SliderPlaygroundRaw,
       },
     },
   },
@@ -120,7 +121,7 @@ export const SimpleExample = {
   parameters: {
     docs: {
       source: {
-        code: SimpleRaw,
+        code: SliderSimpleRaw,
       },
     },
   },
@@ -139,7 +140,7 @@ export const RangeExample = {
   parameters: {
     docs: {
       source: {
-        code: RangeRaw,
+        code: SliderRangeRaw,
       },
     },
   },
