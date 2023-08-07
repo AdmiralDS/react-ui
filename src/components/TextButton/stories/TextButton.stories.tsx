@@ -2,17 +2,14 @@ import * as React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
 import { TextButton, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
-import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
-import {
-  TextButtonDimensionTemplate,
-  TextButtonPlaygroundTemplate,
-  TextButtonStatusTemplate,
-} from '#src/components/TextButton/Stories/Templates';
+import { TextButtonPlaygroundTemplate } from './TextButtonPlayground.template';
+import { TextButtonDimensionTemplate } from './TextButtonDimension.template';
+import { TextButtonStatusTemplate } from './TextButtonStatus.template';
 
 // Imports of text sources
-import TextButtonPlaygroundRaw from './Templates/TextButtonPlayground?raw';
-import TextButtonDimensionRaw from './Templates/TextButtonDimension?raw';
-import TextButtonStatusRaw from './Templates/TextButtonStatus?raw';
+import TextButtonPlaygroundRaw from './TextButtonPlayground.template?raw';
+import TextButtonDimensionRaw from './TextButtonDimension.template?raw';
+import TextButtonStatusRaw from './TextButtonStatus.template?raw';
 
 export default {
   title: 'Admiral-2.1/Text Button',
@@ -77,9 +74,7 @@ export default {
 } as Meta<typeof TextButton>;
 
 //<editor-fold desc="TextButton. Playground">
-const TextButtonPlaygroundStory: StoryFn<typeof TextButton> = (props) => (
-  <TextButtonPlaygroundTemplate {...cleanUpProps(props)} />
-);
+const TextButtonPlaygroundStory: StoryFn<typeof TextButton> = (props) => <TextButtonPlaygroundTemplate {...props} />;
 
 export const TextButtonPlayground = {
   render: TextButtonPlaygroundStory,
@@ -98,9 +93,7 @@ export const TextButtonPlayground = {
 //</editor-fold>
 
 //<editor-fold desc="TextButton. Размеры'">
-const TextButtonDimensionStory: StoryFn<typeof TextButton> = (props) => (
-  <TextButtonDimensionTemplate {...cleanUpProps(props)} />
-);
+const TextButtonDimensionStory: StoryFn<typeof TextButton> = (props) => <TextButtonDimensionTemplate {...props} />;
 
 export const TextButtonDimension = {
   render: TextButtonDimensionStory,
@@ -119,9 +112,7 @@ export const TextButtonDimension = {
 //</editor-fold>
 
 //<editor-fold desc="TextButton. Скелетон, загрузка">
-const TextButtonStatusStory: StoryFn<typeof TextButton> = (props) => (
-  <TextButtonStatusTemplate {...cleanUpProps(props)} />
-);
+const TextButtonStatusStory: StoryFn<typeof TextButton> = (props) => <TextButtonStatusTemplate {...props} />;
 
 export const TextButtonStatus = {
   render: TextButtonStatusStory,
