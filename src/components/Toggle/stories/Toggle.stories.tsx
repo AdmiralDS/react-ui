@@ -4,23 +4,20 @@ import styled from 'styled-components';
 
 import { Toggle } from '@admiral-ds/react-ui';
 
-import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
-import {
-  ToggleDimensionTemplate,
-  ToggleHintTemplate,
-  ToggleLabelTemplate,
-  ToggleMobileTemplate,
-  TogglePlaygroundTemplate,
-  ToggleStateTemplate,
-} from './Templates';
+import { ToggleHintTemplate } from './ToggleHint.template';
+import { ToggleDimensionTemplate } from './ToggleDimension.template';
+import { ToggleMobileTemplate } from './ToggleMobile.template';
+import { TogglePlaygroundTemplate } from './TogglePlayground.template';
+import { ToggleLabelTemplate } from './ToggleLabel.template';
+import { ToggleStateTemplate } from './ToggleState.template';
 
 // Imports of text sources
-import ToggleHintRaw from './Templates/ToggleHint?raw';
-import ToggleDimensionRaw from './Templates/ToggleDimension?raw';
-import ToggleMobileRaw from './Templates/ToggleMobile?raw';
-import TogglePlaygroundRaw from './Templates/TogglePlayground?raw';
-import ToggleLabelRaw from './Templates/ToggleLabel?raw';
-import ToggleStateRaw from './Templates/ToggleState?raw';
+import ToggleHintRaw from './ToggleHint.template?raw';
+import ToggleDimensionRaw from './ToggleDimension.template?raw';
+import ToggleMobileRaw from './ToggleMobile.template?raw';
+import TogglePlaygroundRaw from './TogglePlayground.template?raw';
+import ToggleLabelRaw from './ToggleLabel.template?raw';
+import ToggleStateRaw from './ToggleState.template?raw';
 
 const Separator = styled.div`
   height: 20px;
@@ -96,7 +93,7 @@ export default {
 } as Meta<typeof Toggle>;
 
 //<editor-fold desc="Toggle. Playground">
-const TogglePlaygroundStory: StoryFn<typeof Toggle> = (props) => <TogglePlaygroundTemplate {...cleanUpProps(props)} />;
+const TogglePlaygroundStory: StoryFn<typeof Toggle> = (props) => <TogglePlaygroundTemplate {...props} />;
 
 export const TogglePlayground = {
   render: TogglePlaygroundStory,
