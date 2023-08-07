@@ -1,12 +1,11 @@
 import * as React from 'react';
-import type { CSSProperties } from 'react';
+import type { CSSProperties, ReactNode } from 'react';
 import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import styled, { css } from 'styled-components';
 import { OpenStatusButton } from '#src/components/OpenStatusButton';
 import { StyledDropdownContainer } from '#src/components/DropdownContainer';
 import type { MenuDimensions } from '#src/components/input/InputEx/Menu';
 import { Menu } from '#src/components/input/InputEx/Menu';
-import type { ValueType } from '#src/components/input/InputEx/ValueType';
 import type { MenuItemProps } from '#src/components/Menu/MenuItem';
 
 const StyledMenu = styled(Menu)<{ width?: string }>`
@@ -76,7 +75,7 @@ export type SuffixSelectProps<T> = {
   options: T[];
 
   /** обработчик события на выбор элемента */
-  onChange: (value: ValueType) => void;
+  onChange: (value: ReactNode) => void;
 
   /** состояние видимости контейнера с опциями */
   isOpen?: boolean;
@@ -85,7 +84,7 @@ export type SuffixSelectProps<T> = {
   onOpenChange?: (isOpen: boolean) => void;
 
   renderValue?: (props: RenderPropsType<T>) => React.ReactNode;
-  renderOption?: (props: RenderPropsType<ValueType> & MenuItemProps) => React.ReactNode;
+  renderOption?: (props: RenderPropsType<ReactNode> & MenuItemProps) => React.ReactNode;
 
   disabled?: boolean;
 
@@ -99,7 +98,7 @@ export type SuffixSelectProps<T> = {
   dropContainerStyle?: CSSProperties;
 };
 
-export const SuffixSelect = <T extends ValueType>({
+export const SuffixSelect = <T extends ReactNode>({
   dropAlign,
   dimension,
   dropMaxHeight,
@@ -127,7 +126,7 @@ export const SuffixSelect = <T extends ValueType>({
     setIsOpenState(newOpenStatus);
   };
 
-  const handleOnSelect = (value: ValueType) => {
+  const handleOnSelect = (value: ReactNode) => {
     onChange(value);
     setIsOpenState(false);
   };

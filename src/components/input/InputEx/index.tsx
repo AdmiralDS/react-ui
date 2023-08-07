@@ -1,5 +1,5 @@
 import { Children, forwardRef, useRef, useState, useEffect, useLayoutEffect } from 'react';
-import type { ForwardedRef, InputHTMLAttributes } from 'react';
+import type { ForwardedRef, InputHTMLAttributes, ReactNode } from 'react';
 import { ReactComponent as CloseOutlineSvg } from '@admiral-ds/icons/build/service/CloseOutline.svg';
 import type { ComponentDimension, ExtraProps, InputStatus } from '#src/components/input/types';
 import { containerHeights, skeletonMixin } from '#src/components/input/Container';
@@ -10,7 +10,6 @@ import { changeInputData } from '#src/components/common/dom/changeInputData';
 import { InputIconButton } from '#src/components/InputIconButton';
 import { refSetter } from '#src/components/common/utils/refSetter';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
-import type { ValueType } from '#src/components/input/InputEx/ValueType';
 import type { RenderPropsType } from '#src/components/input/InputEx/SuffixSelect';
 import { SuffixSelect } from '#src/components/input/InputEx/SuffixSelect';
 import type { MenuItemProps } from '#src/components/Menu/MenuItem';
@@ -20,7 +19,6 @@ import type { DropContainerStyles } from '#src/components/DropdownContainer';
 import { BorderedDivStyles, InputBorderedDiv } from '#src/components/input/TextInput';
 
 export type { RenderPropsType } from '#src/components/input/InputEx/SuffixSelect';
-export type { ValueType } from '#src/components/input/InputEx/ValueType';
 
 const iconSizeValue = (props: { dimension?: ComponentDimension }) => {
   switch (props.dimension) {
@@ -174,7 +172,7 @@ const Container = styled.div<{
 `;
 
 export interface RenderProps {
-  value?: ValueType;
+  value?: ReactNode;
   disabled?: boolean;
   readOnly?: boolean;
 }
@@ -203,34 +201,34 @@ export interface InputExProps extends Omit<InputHTMLAttributes<HTMLInputElement>
   disableCopying?: boolean;
 
   /** Значение префикса */
-  prefixValue?: ValueType;
+  prefixValue?: ReactNode;
 
   /** Список значений префикса */
-  prefixValueList?: ValueType[];
+  prefixValueList?: ReactNode[];
 
   /** Срабатывает при выборе нового значения префикса*/
-  onPrefixValueChange?: (value: ValueType) => void;
+  onPrefixValueChange?: (value: ReactNode) => void;
 
   /** Специальный метод для рендера компонента по значению префикса */
   renderPrefixValue?: (props: RenderProps) => React.ReactNode;
 
   /** Специальный метод для рендера опции списка префикса по значению */
-  renderPrefixOption?: (props: RenderPropsType<ValueType> & MenuItemProps) => React.ReactNode;
+  renderPrefixOption?: (props: RenderPropsType<ReactNode> & MenuItemProps) => React.ReactNode;
 
   /** Значение суффикса */
-  suffixValue?: ValueType;
+  suffixValue?: ReactNode;
 
   /** Список значений суффикса */
-  suffixValueList?: ValueType[];
+  suffixValueList?: ReactNode[];
 
   /** Срабатывает при выборе нового значения суффикса */
-  onSuffixValueChange?: (value: ValueType) => void;
+  onSuffixValueChange?: (value: ReactNode) => void;
 
   /** Специальный метод для рендера компонента по значению суффикса*/
   renderSuffixValue?: (props: RenderProps) => React.ReactNode;
 
   /** Специальный метод для рендера опции списка суффикса по значению */
-  renderSuffixOption?: (props: RenderPropsType<ValueType> & MenuItemProps) => React.ReactNode;
+  renderSuffixOption?: (props: RenderPropsType<ReactNode> & MenuItemProps) => React.ReactNode;
 
   /** Состояние skeleton */
   skeleton?: boolean;

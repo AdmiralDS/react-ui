@@ -29,7 +29,7 @@
   "scripts": {
     "prepare": "npm run build",
     "build": "rollup -c",
-    "test": "jest",
+    "test": "jest --detectOpenHandles",
     "test:update": "jest -u",
     "test:watch": "jest --watch",
     "lint": "eslint src --ext .js,.jsx,.ts,.tsx --fix",

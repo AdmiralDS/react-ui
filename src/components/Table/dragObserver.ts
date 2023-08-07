@@ -423,7 +423,6 @@ function getOffset(el: HTMLElement) {
 }
 
 function getElementBehindPoint(point: HTMLElement, x: number, y: number) {
-  point = point || {};
   const state = point.style.display;
   point.style.display = 'none';
   const el = document.elementFromPoint(x, y);
