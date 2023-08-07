@@ -3,25 +3,22 @@ import styled from 'styled-components';
 import type { Meta, StoryFn } from '@storybook/react';
 import { Tag, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
-import {
-  TagPlaygroundTemplate,
-  TagStatusTemplate,
-  TagStatusBackgroundTemplate,
-  TagCustomColorsTemplate,
-  TagStateTemplate,
-  TagTooltipTemplate,
-  TagIconTemplate,
-} from './Templates';
-import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+import { TagPlaygroundTemplate } from './TagPlayground.template';
+import { TagStatusTemplate } from './TagStatus.template';
+import { TagStatusBackgroundTemplate } from './TagStatusBackground.template';
+import { TagCustomColorsTemplate } from './TagCustomColors.template';
+import { TagStateTemplate } from './TagState.template';
+import { TagTooltipTemplate } from './TagTooltip.template';
+import { TagIconTemplate } from './TagIcon.template';
 
 // Imports of text sources
-import PlaygroundRaw from './Templates/TagPlayground?raw';
-import StatusRaw from './Templates/TagStatus?raw';
-import StatusBackgroundRaw from './Templates/TagStatusBackground?raw';
-import CustomColorsRaw from './Templates/TagCustomColors?raw';
-import StateRaw from './Templates/TagState?raw';
-import TooltipRaw from './Templates/TagTooltip?raw';
-import IconRaw from './Templates/TagIcon?raw';
+import TagPlaygroundRaw from './TagPlayground.template?raw';
+import TagStatusRaw from './TagStatus.template?raw';
+import TagStatusBackgroundRaw from './TagStatusBackground.template?raw';
+import TagCustomColorsRaw from './TagCustomColors.template?raw';
+import TagStateRaw from './TagState.template?raw';
+import TagTooltipRaw from './TagTooltip.template?raw';
+import TagIconRaw from './TagIcon.template?raw';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -92,7 +89,7 @@ export default {
 } as Meta<typeof Tag>;
 
 //<editor-fold desc="Playground">
-const PlaygroundStory: StoryFn<typeof Tag> = (props) => <TagPlaygroundTemplate {...cleanUpProps(props)} />;
+const PlaygroundStory: StoryFn<typeof Tag> = (props) => <TagPlaygroundTemplate {...props} />;
 
 export const Playground = {
   render: PlaygroundStory,
@@ -100,7 +97,7 @@ export const Playground = {
   parameters: {
     docs: {
       source: {
-        code: PlaygroundRaw,
+        code: TagPlaygroundRaw,
       },
     },
   },
@@ -119,7 +116,7 @@ export const StatusExample = {
   parameters: {
     docs: {
       source: {
-        code: StatusRaw,
+        code: TagStatusRaw,
       },
       description: {
         story: `Тэг может иметь цветную статусную метку.`,
@@ -141,7 +138,7 @@ export const StatusBackgroundExample = {
   parameters: {
     docs: {
       source: {
-        code: StatusBackgroundRaw,
+        code: TagStatusBackgroundRaw,
       },
       description: {
         story: `Тэг может отображать статус через цвет обводки и фона, когда нужен выраженный цветовой акцент (опция).
@@ -166,7 +163,7 @@ export const CustomColorsExample = {
   parameters: {
     docs: {
       source: {
-        code: CustomColorsRaw,
+        code: TagCustomColorsRaw,
       },
       description: {
         story: `Тэг может иметь цветную статусную метку. Помимо предложенных вариантов, метка может быть
@@ -192,7 +189,7 @@ export const StateExample = {
   parameters: {
     docs: {
       source: {
-        code: StateRaw,
+        code: TagStateRaw,
       },
       description: {
         story: `Тэги могут быть как активными и служить, например, каталагизаторами, так и пассивными, просто отображая
@@ -215,7 +212,7 @@ export const TooltipExample = {
   parameters: {
     docs: {
       source: {
-        code: TooltipRaw,
+        code: TagTooltipRaw,
       },
       description: {
         story: `В случае ограниченного пространства используется тултип.`,
@@ -237,7 +234,7 @@ export const IconExample = {
   parameters: {
     docs: {
       source: {
-        code: IconRaw,
+        code: TagIconRaw,
       },
       description: {
         story: `Тэги могут быть с иконками, но только в том случае, если статус отображается
