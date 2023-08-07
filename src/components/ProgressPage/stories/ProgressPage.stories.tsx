@@ -4,12 +4,12 @@ import styled from 'styled-components';
 
 import { ProgressPage } from '@admiral-ds/react-ui';
 
-import { ProgressPageAnimationTemplate, ProgressPageBaseTemplate } from './Templates';
-import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+import { ProgressPageBaseTemplate } from './ProgressPageBase.template';
+import { ProgressPageAnimationTemplate } from './ProgressPageAnimation.template';
 
 // Imports of text sources
-import ProgressPageBaseRaw from './Templates/ProgressPageBase?raw';
-import ProgressPageAnimationRaw from './Templates/ProgressPageAnimation?raw';
+import ProgressPageBaseRaw from './ProgressPageBase.template?raw';
+import ProgressPageAnimationRaw from './ProgressPageAnimation.template?raw';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -67,9 +67,7 @@ export default {
 } as Meta<typeof ProgressPage>;
 
 //<editor-fold desc="Базовый пример">
-const ProgressPageBaseStory: StoryFn<typeof ProgressPage> = (props) => (
-  <ProgressPageBaseTemplate {...cleanUpProps(props)} />
-);
+const ProgressPageBaseStory: StoryFn<typeof ProgressPage> = (props) => <ProgressPageBaseTemplate {...props} />;
 
 export const ProgressPageBase = {
   render: ProgressPageBaseStory,
@@ -89,7 +87,7 @@ export const ProgressPageBase = {
 
 //<editor-fold desc="Прогресс бар с анимацией">
 const ProgressPageAnimationStory: StoryFn<typeof ProgressPage> = (props) => (
-  <ProgressPageAnimationTemplate {...cleanUpProps(props)} />
+  <ProgressPageAnimationTemplate {...props} />
 );
 
 export const ProgressPageAnimation = {
