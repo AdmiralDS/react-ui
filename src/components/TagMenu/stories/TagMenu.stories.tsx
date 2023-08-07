@@ -3,12 +3,12 @@ import type { Meta, StoryFn } from '@storybook/react';
 import styled from 'styled-components';
 import { TagMenu, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
-import { TagMenuPlaygroundTemplate, TagMenuSizesTemplate } from './Templates';
-import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+import { TagMenuPlaygroundTemplate } from './TagMenuPlayground.template';
+import { TagMenuSizesTemplate } from './TagMenuSizes.template';
 
 // Imports of text sources
-import PlaygroundRaw from './Templates/TagMenuPlayground?raw';
-import SizesRaw from './Templates/TagMenuSizes?raw';
+import TagMenuPlaygroundRaw from './TagMenuPlayground.template?raw';
+import TagMenuSizesRaw from './TagMenuSizes.template?raw';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -100,7 +100,7 @@ export default {
 } as Meta<typeof TagMenu>;
 
 //<editor-fold desc="Playground">
-const PlaygroundStory: StoryFn<typeof TagMenu> = (props) => <TagMenuPlaygroundTemplate {...cleanUpProps(props)} />;
+const PlaygroundStory: StoryFn<typeof TagMenu> = (props) => <TagMenuPlaygroundTemplate {...props} />;
 
 export const Playground = {
   render: PlaygroundStory,
@@ -108,7 +108,7 @@ export const Playground = {
   parameters: {
     docs: {
       source: {
-        code: PlaygroundRaw,
+        code: TagMenuPlaygroundRaw,
       },
     },
   },
@@ -119,7 +119,7 @@ export const Playground = {
 //</editor-fold>
 
 //<editor-fold desc="TagMenu. Размеры.">
-const SizesStory: StoryFn<typeof TagMenu> = (props) => <TagMenuSizesTemplate {...cleanUpProps(props)} />;
+const SizesStory: StoryFn<typeof TagMenu> = (props) => <TagMenuSizesTemplate {...props} />;
 
 export const SizesExample = {
   render: SizesStory,
@@ -127,7 +127,7 @@ export const SizesExample = {
   parameters: {
     docs: {
       source: {
-        code: SizesRaw,
+        code: TagMenuSizesRaw,
       },
     },
   },
