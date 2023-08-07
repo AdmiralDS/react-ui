@@ -493,6 +493,35 @@ export const Mirror = styled(HeaderCell)<{ dimension: TableProps['dimension'] }>
   }
 `;
 
+export const MirrorRow = styled.div<{ dimension: TableProps['dimension'] }>`
+  position: fixed;
+  z-index: 6;
+  visibility: hidden;
+  display: flex;
+  ${({ theme }) => theme.shadow['Shadow 08']}
+  && {
+    cursor: none;
+    svg {
+      display: none;
+      width: 20px;
+      height: 20px;
+      margin-right: 8px;
+      flex-shrink: 0;
+    }
+  }
+
+  &[data-cursor='normal'] {
+    & .icon-grabbing {
+      display: block;
+    }
+  }
+  &[data-cursor='error'] {
+    & .icon-not-allowed {
+      display: block;
+    }
+  }
+`;
+
 export const MirrorText = styled.div`
   display: block;
   white-space: nowrap;

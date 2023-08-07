@@ -31,6 +31,7 @@ import {
   TableContainer,
   HiddenHeader,
   Mirror,
+  MirrorRow,
   MirrorText,
   ActionBG,
 } from './style';
@@ -92,6 +93,8 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
       virtualScroll,
       locale,
       onColumnDrag,
+      rowsDraggable = false,
+      onRowDrag,
       rowBackgroundColorByStatusMap: userRowBackgroundColorByStatusMap,
       ...props
     },
@@ -131,7 +134,8 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
     const scrollBodyRef = React.useRef<HTMLDivElement>(null);
     const stickyColumnsWrapperRef = React.useRef<HTMLDivElement>(null);
     const normalColumnsWrapperRef = React.useRef<HTMLDivElement>(null);
-    const mirrorRef = React.useRef<HTMLDivElement>(null);
+    const columnMirrorRef = React.useRef<HTMLDivElement>(null);
+    const rowMirrorRef = React.useRef<HTMLDivElement>(null);
     // save callback via useRef to not update dragObserver on each callback change
     const columnDragCallback = React.useRef(onColumnDrag);
 
@@ -318,8 +322,8 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
     }, [onColumnDrag]);
 
     React.useEffect(() => {
-      if (mirrorRef.current && columnDragging && (isAnyColumnDraggable || isAnyStickyColumnDraggable)) {
-        const observer = observeRect(mirrorRef.current, (rect: any) => {
+      if (columnMirrorRef.current && columnDragging && (isAnyColumnDraggable || isAnyStickyColumnDraggable)) {
+        const observer = observeRect(columnMirrorRef.current, (rect: any) => {
           const rightCoord = tableRef.current?.getBoundingClientRect().right || 0;
           const leftCoord =
             stickyColumnsWrapperRef.current?.getBoundingClientRect().right ||
@@ -373,7 +377,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
         const observer = dragObserver(
           [normalCols],
           {
-            mirrorRef,
+            mirrorRef: columnMirrorRef,
             dimension,
             direction: 'horizontal',
             invalid: (el: HTMLElement) => {
@@ -397,6 +401,31 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
         };
       }
     }, [isAnyColumnDraggable, isAnyStickyColumnDraggable, dimension]);
+
+    React.useEffect(() => {
+      const body = scrollBodyRef.current;
+
+      function handleDrop(item: HTMLElement | null, before: HTMLElement | null) {}
+      function handleDragStart() {}
+      function handleDragEnd() {}
+
+      if (body && rowsDraggable) {
+        const observer = dragObserver(
+          [body],
+          {
+            mirrorRef: rowMirrorRef,
+            dimension,
+            direction: 'vertical',
+          },
+          handleDrop,
+          handleDragStart,
+          handleDragEnd,
+        );
+        return () => {
+          observer.unobserve();
+        };
+      }
+    }, [rowsDraggable]);
 
     const calcGroupCheckStatus = (groupInfo: GroupInfo) => {
       const indeterminate =
@@ -720,11 +749,19 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
         {renderBody()}
         {(isAnyColumnDraggable || isAnyStickyColumnDraggable) &&
           createPortal(
-            <Mirror dimension={dimension} ref={mirrorRef}>
+            <Mirror dimension={dimension} ref={columnMirrorRef}>
               <CursorGrabbing className="icon-grabbing" />
               <CursorNotAllowed className="icon-not-allowed" />
               <MirrorText />
             </Mirror>,
+            rootRef?.current || document.body,
+          )}
+        {rowsDraggable &&
+          createPortal(
+            <MirrorRow dimension={dimension} style={{ minWidth: tableWidth + 'px' }} ref={rowMirrorRef}>
+              <CursorGrabbing className="icon-grabbing" />
+              <CursorNotAllowed className="icon-not-allowed" />
+            </MirrorRow>,
             rootRef?.current || document.body,
           )}
       </TableContainer>

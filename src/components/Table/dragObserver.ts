@@ -311,6 +311,19 @@ export function dragObserver(
         mirrorParent.style.userSelect = 'none';
       }
     }
+    if (mirrorElement && o.direction === 'vertical') {
+      const mirrorParent = mirrorElement.parentElement;
+      if (_item) mirrorElement.appendChild(_item.cloneNode(true));
+      mirrorElement.style.visibility = 'visible';
+      _mirror = o.mirrorRef.current;
+
+      touchy(document.documentElement, 'add', 'mousemove', drag);
+
+      if (mirrorParent) {
+        _mirrorContainerStyle = mirrorParent.style.userSelect;
+        mirrorParent.style.userSelect = 'none';
+      }
+    }
   }
 
   function removeMirrorImage() {
@@ -319,6 +332,10 @@ export function dragObserver(
       const mirrorParent = mirrorElement.parentElement;
       if (mirrorParent) {
         mirrorParent.style.userSelect = _mirrorContainerStyle;
+      }
+
+      if (o.direction === 'vertical' && mirrorElement.lastChild) {
+        mirrorElement.removeChild(mirrorElement.lastChild);
       }
 
       mirrorElement.style.visibility = 'hidden';
@@ -423,10 +440,10 @@ function getOffset(el: HTMLElement) {
 }
 
 function getElementBehindPoint(point: HTMLElement, x: number, y: number) {
-  const state = point.style.display;
-  point.style.display = 'none';
+  const state = point.style.pointerEvents;
+  point.style.pointerEvents = 'none';
   const el = document.elementFromPoint(x, y);
-  point.style.display = state;
+  point.style.pointerEvents = state;
   return el;
 }
 

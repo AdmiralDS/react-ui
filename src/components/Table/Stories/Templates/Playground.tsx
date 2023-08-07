@@ -204,5 +204,5 @@ export const PlaygroundTemplate = (props: TableProps) => {
     setCols(newCols);
   };
 
-  return <Table {...props} rowList={rowList} columnList={cols} onColumnResize={handleResize} />;
+  return <Table {...props} rowList={rowList} columnList={cols} onColumnResize={handleResize} rowsDraggable/>;
 };
