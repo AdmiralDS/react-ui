@@ -2,21 +2,18 @@ import * as React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
 import { TabMenu, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
-import {
-  TabMenuBaseTemplate,
-  TabMenuUnderlineTemplate,
-  TabMenuDisabledTemplate,
-  TabMenuOverflowTemplate,
-  TabMenuDynamicAddTemplate,
-} from './Templates';
-import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+import { TabMenuBaseTemplate } from './TabMenuBase.template';
+import { TabMenuUnderlineTemplate } from './TabMenuUnderline.template';
+import { TabMenuDisabledTemplate } from './TabMenuDisabled.template';
+import { TabMenuOverflowTemplate } from './TabMenuOverflow.template';
+import { TabMenuDynamicAddTemplate } from './TabMenuDynamicAdd.template';
 
 // Imports of text sources
-import BaseRaw from './Templates/TabMenuBase?raw';
-import UnderlineRaw from './Templates/TabMenuUnderline?raw';
-import DisabledRaw from './Templates/TabMenuDisabled?raw';
-import OverflowRaw from './Templates/TabMenuOverflow?raw';
-import DynamicAddRaw from './Templates/TabMenuDynamicAdd?raw';
+import TabMenuBaseRaw from './TabMenuBase.template?raw';
+import TabMenuUnderlineRaw from './TabMenuUnderline.template?raw';
+import TabMenuDisabledRaw from './TabMenuDisabled.template?raw';
+import TabMenuOverflowRaw from './TabMenuOverflow.template?raw';
+import TabMenuDynamicAddRaw from './TabMenuDynamicAdd.template?raw';
 
 export default {
   title: 'Admiral-2.1/TabMenu',
@@ -70,9 +67,7 @@ export default {
 } as Meta<typeof TabMenu>;
 
 //<editor-fold desc="TabMenu. Базовый пример.">
-const BaseStory: StoryFn<typeof TabMenu> = ({ tabs, activeTab, onChange, ...props }) => (
-  <TabMenuBaseTemplate tabs={tabs} activeTab={activeTab} onChange={onChange} {...cleanUpProps(props)} />
-);
+const BaseStory: StoryFn<typeof TabMenu> = (props) => <TabMenuBaseTemplate {...props} />;
 
 export const BaseExample = {
   render: BaseStory,
@@ -80,7 +75,7 @@ export const BaseExample = {
   parameters: {
     docs: {
       source: {
-        code: BaseRaw,
+        code: TabMenuBaseRaw,
       },
     },
   },
@@ -91,9 +86,7 @@ export const BaseExample = {
 //</editor-fold>
 
 //<editor-fold desc="TabMenu. Пример с нижней серой полосой.">
-const UnderlineStory: StoryFn<typeof TabMenu> = ({ tabs, activeTab, onChange, ...props }) => (
-  <TabMenuUnderlineTemplate tabs={tabs} activeTab={activeTab} onChange={onChange} {...cleanUpProps(props)} />
-);
+const UnderlineStory: StoryFn<typeof TabMenu> = (props) => <TabMenuUnderlineTemplate {...props} />;
 
 export const UnderlineExample = {
   render: UnderlineStory,
@@ -101,7 +94,7 @@ export const UnderlineExample = {
   parameters: {
     docs: {
       source: {
-        code: UnderlineRaw,
+        code: TabMenuUnderlineRaw,
       },
     },
   },
@@ -112,9 +105,7 @@ export const UnderlineExample = {
 //</editor-fold>
 
 //<editor-fold desc="TabMenu. Пример с задизейбленными табами.">
-const DisabledStory: StoryFn<typeof TabMenu> = ({ tabs, activeTab, onChange, ...props }) => (
-  <TabMenuDisabledTemplate tabs={tabs} activeTab={activeTab} onChange={onChange} {...cleanUpProps(props)} />
-);
+const DisabledStory: StoryFn<typeof TabMenu> = (props) => <TabMenuDisabledTemplate {...props} />;
 
 export const DisabledExample = {
   render: DisabledStory,
@@ -122,7 +113,7 @@ export const DisabledExample = {
   parameters: {
     docs: {
       source: {
-        code: DisabledRaw,
+        code: TabMenuDisabledRaw,
       },
     },
   },
@@ -133,9 +124,7 @@ export const DisabledExample = {
 //</editor-fold>
 
 //<editor-fold desc="TabMenu. Пример с OverflowMenu.">
-const OverflowMenuStory: StoryFn<typeof TabMenu> = ({ tabs, activeTab, onChange, ...props }) => (
-  <TabMenuOverflowTemplate tabs={tabs} activeTab={activeTab} onChange={onChange} {...cleanUpProps(props)} />
-);
+const OverflowMenuStory: StoryFn<typeof TabMenu> = (props) => <TabMenuOverflowTemplate {...props} />;
 
 export const OverflowMenuExample = {
   render: OverflowMenuStory,
@@ -143,7 +132,7 @@ export const OverflowMenuExample = {
   parameters: {
     docs: {
       source: {
-        code: OverflowRaw,
+        code: TabMenuOverflowRaw,
       },
     },
   },
@@ -154,9 +143,7 @@ export const OverflowMenuExample = {
 //</editor-fold>
 
 //<editor-fold desc="TabMenu. Динамическое добавление вкладок.">
-const DynamicAddStory: StoryFn<typeof TabMenu> = ({ tabs, activeTab, onChange, ...props }) => (
-  <TabMenuDynamicAddTemplate tabs={tabs} activeTab={activeTab} onChange={onChange} {...cleanUpProps(props)} />
-);
+const DynamicAddStory: StoryFn<typeof TabMenu> = (props) => <TabMenuDynamicAddTemplate {...props} />;
 
 export const DynamicAddExample = {
   render: DynamicAddStory,
@@ -164,7 +151,7 @@ export const DynamicAddExample = {
   parameters: {
     docs: {
       source: {
-        code: DynamicAddRaw,
+        code: TabMenuDynamicAddRaw,
       },
     },
   },
