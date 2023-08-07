@@ -4,7 +4,7 @@ import styled, { useTheme } from 'styled-components';
 import { DefaultFontColorName, LIGHT_THEME, T, TooltipHoc, typography, TYPOGRAPHY } from '@admiral-ds/react-ui';
 import { ReactComponent as CopyOutline } from '@admiral-ds/icons/build/documents/CopyOutline.svg';
 
-import { FONTS, NEW_FONTS } from '#src/components/T/Stories/storyDescriptions';
+import { FONTS, NEW_FONTS } from '#src/components/T/stories/storyDescriptions';
 
 const Separator = styled.div`
   height: 20px;
@@ -80,7 +80,7 @@ const CopyIcon = React.forwardRef<HTMLDivElement, { text: string }>(({ text }, r
 
 const CopyButton = TooltipHoc(CopyIcon);
 
-export const FontsDemoTemplate = () => {
+export const TFontsDemoTemplate = () => {
   return (
     <Wrapper>
       <Table>

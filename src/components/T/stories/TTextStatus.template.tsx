@@ -15,7 +15,7 @@ const OrangeColor = css`
   color: ${(p) => p.theme.color['Warning/Warning 50 Main']};
 `;
 
-export const TextStatusTemplate = ({ ...props }: TProps) => {
+export const TTextStatusTemplate = ({ ...props }: TProps) => {
   return (
     <>
       <BlueText font={'Body/Body 1 Short'} as={'a'} href={'https://'}>

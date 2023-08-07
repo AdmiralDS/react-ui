@@ -3,12 +3,12 @@ import styled from 'styled-components';
 import type { Meta, StoryFn } from '@storybook/react';
 import { T } from '@admiral-ds/react-ui';
 
-import { FontsDemoTemplate, TextStatusTemplate } from './Templates';
-import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+import { TTextStatusTemplate } from './TTextStatus.template';
+import { TFontsDemoTemplate } from './TFontsDemo.template';
 
 // Imports of text sources
-import TextStatusRaw from './Templates/TextStatus?raw';
-import FontsDemoRaw from './Templates/FontsDemo?raw';
+import TTextStatusRaw from './TTextStatus.template?raw';
+import TFontsDemoRaw from './TFontsDemo.template?raw';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI', serif;
@@ -47,7 +47,7 @@ export default {
 } as Meta<typeof T>;
 
 //<editor-fold desc="Text">
-const TextStatusStory: StoryFn<typeof T> = (props) => <TextStatusTemplate font={'Main/XXL'} {...cleanUpProps(props)} />;
+const TextStatusStory: StoryFn<typeof T> = (props) => <TTextStatusTemplate font={'Main/XXL'} {...props} />;
 
 export const TextStatus = {
   render: TextStatusStory,
@@ -55,7 +55,7 @@ export const TextStatus = {
   parameters: {
     docs: {
       source: {
-        code: TextStatusRaw,
+        code: TTextStatusRaw,
       },
     },
   },
@@ -66,7 +66,7 @@ export const TextStatus = {
 //</editor-fold>
 
 //<editor-fold desc="Список стилей">
-const FontsDemoStory: StoryFn<typeof T> = () => <FontsDemoTemplate />;
+const FontsDemoStory: StoryFn<typeof T> = () => <TFontsDemoTemplate />;
 
 export const FontsDemo = {
   render: FontsDemoStory,
@@ -75,7 +75,7 @@ export const FontsDemo = {
   parameters: {
     docs: {
       source: {
-        code: FontsDemoRaw,
+        code: TFontsDemoRaw,
       },
       description: {
         story: `Ниже представлены таблицы стилей типографики, старая и обновленная версия, на которую постепенно будет произведен перевод библиотеки.
