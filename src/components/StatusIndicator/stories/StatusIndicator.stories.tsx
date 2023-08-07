@@ -2,17 +2,14 @@ import styled from 'styled-components';
 import type { Meta, StoryFn } from '@storybook/react';
 import { StatusIndicator } from '@admiral-ds/react-ui';
 
-import {
-  StatusIndicatorDimensionTemplate,
-  StatusIndicatorPlaygroundTemplate,
-  StatusIndicatorPositionTemplate,
-} from './Templates';
-import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+import { StatusIndicatorPlaygroundTemplate } from './StatusIndicatorPlayground.template';
+import { StatusIndicatorDimensionTemplate } from './StatusIndicatorDimension.template';
+import { StatusIndicatorPositionTemplate } from './StatusIndicatorPosition.template';
 
 // Imports of text sources
-import StatusIndicatorPlaygroundRaw from './Templates/StatusIndicatorPlayground?raw';
-import StatusIndicatorDimensionRaw from './Templates/StatusIndicatorDimension?raw';
-import StatusIndicatorPositionRaw from './Templates/StatusIndicatorPosition?raw';
+import StatusIndicatorPlaygroundRaw from './StatusIndicatorPlayground.template?raw';
+import StatusIndicatorDimensionRaw from './StatusIndicatorDimension.template?raw';
+import StatusIndicatorPositionRaw from './StatusIndicatorPosition.template?raw';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI', serif;
@@ -63,7 +60,7 @@ export default {
 
 //<editor-fold desc="Status Indicator. Playground">
 const StatusIndicatorPlaygroundStory: StoryFn<typeof StatusIndicator> = (props) => (
-  <StatusIndicatorPlaygroundTemplate text={''} {...cleanUpProps(props)} />
+  <StatusIndicatorPlaygroundTemplate {...props} />
 );
 
 export const StatusIndicatorPlayground = {
