@@ -9,20 +9,18 @@ const TooltipedInput = TooltipHoc(InputField);
 // В компонент обязательно должны передаваться TooltipHocProps для правильной генерации таблицы с пропсами в storybook
 const TooltipHocStory: React.FC<TooltipHocProps> = (props) => <TooltipedInput {...props} />;
 
-import {
-  TooltipHocBaseTemplate,
-  TooltipHocClassTemplate,
-  TooltipHocFCTemplate,
-  TooltipHocRefSetterTemplate,
-  TooltipHocRefTemplate,
-} from './Templates';
+import { TooltipHocBaseTemplate } from './TooltipHocBase.template';
+import { TooltipHocClassTemplate } from './TooltipHocClass.template';
+import { TooltipHocFCTemplate } from './TooltipHocFC.template';
+import { TooltipHocRefSetterTemplate } from './TooltipHocRefSetter.template';
+import { TooltipHocRefTemplate } from './TooltipHocRef.template';
 
 // Imports of text sources
-import TooltipHocBaseRaw from './Templates/TooltipHocBase?raw';
-import TooltipHocClassRaw from './Templates/TooltipHocClass?raw';
-import TooltipHocFCRaw from './Templates/TooltipHocFC?raw';
-import TooltipHocRefSetterRaw from './Templates/TooltipHocRefSetter?raw';
-import TooltipHocRefRaw from './Templates/TooltipHocRef?raw';
+import TooltipHocBaseRaw from './TooltipHocBase.template?raw';
+import TooltipHocClassRaw from './TooltipHocClass.template?raw';
+import TooltipHocFCRaw from './TooltipHocFC.template?raw';
+import TooltipHocRefSetterRaw from './TooltipHocRefSetter.template?raw';
+import TooltipHocRefRaw from './TooltipHocRef.template?raw';
 
 const Separator = styled.div<{ height?: number }>`
   height: ${({ height }) => (height ? height : 20)}px;
