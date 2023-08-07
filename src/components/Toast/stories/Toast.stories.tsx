@@ -6,23 +6,20 @@ import LinkTo from '@storybook/addon-links/react';
 import { Toast, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 import type { ToastProps } from '@admiral-ds/react-ui';
 
-import {
-  ToastBackwardCompatibilityTemplate,
-  ToastCustomComponentTemplate,
-  ToastLineNotificationTemplate,
-  ToastNotificationBaseTemplate,
-  ToastNotificationTemplate,
-  ToastProgressComponentTemplate,
-} from './Templates';
-import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+import { ToastNotificationTemplate } from './ToastNotification.template';
+import { ToastNotificationBaseTemplate } from './ToastNotificationBase.template';
+import { ToastLineNotificationTemplate } from './ToastLineNotification.template';
+import { ToastCustomComponentTemplate } from './ToastCustomComponent.template';
+import { ToastProgressComponentTemplate } from './ToastProgressComponent.template';
+import { ToastBackwardCompatibilityTemplate } from './ToastBackwardCompatibility.template';
 
 // Imports of text sources
-import ToastNotificationRaw from './Templates/ToastNotification?raw';
-import ToastNotificationBaseRaw from './Templates/ToastNotificationBase?raw';
-import ToastLineNotificationRaw from './Templates/ToastLineNotification?raw';
-import ToastCustomComponentRaw from './Templates/ToastCustomComponent?raw';
-import ToastProgressComponentRaw from './Templates/ToastProgressComponent?raw';
-import ToastBackwardCompatibilityRaw from './Templates/ToastBackwardCompatibility?raw';
+import ToastNotificationRaw from './ToastNotification.template?raw';
+import ToastNotificationBaseRaw from './ToastNotificationBase.template?raw';
+import ToastLineNotificationRaw from './ToastLineNotification.template?raw';
+import ToastCustomComponentRaw from './ToastCustomComponent.template?raw';
+import ToastProgressComponentRaw from './ToastProgressComponent.template?raw';
+import ToastBackwardCompatibilityRaw from './ToastBackwardCompatibility.template?raw';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -89,7 +86,7 @@ export default {
 
 //<editor-fold desc="Toast. Настройка места всплытия через стили.">
 const ToastNotificationStory: StoryFn<typeof Toast> = (props: ToastProps) => {
-  return <ToastNotificationTemplate {...cleanUpProps(props)} />;
+  return <ToastNotificationTemplate {...props} />;
 };
 
 export const ToastNotification = {
@@ -110,7 +107,7 @@ export const ToastNotification = {
 
 //<editor-fold desc="Toast. Базовый пример.">
 const ToastNotificationBaseStory: StoryFn<typeof Toast> = (props: ToastProps) => {
-  return <ToastNotificationBaseTemplate {...cleanUpProps(props)} />;
+  return <ToastNotificationBaseTemplate {...props} />;
 };
 
 export const ToastNotificationBase = {
@@ -131,7 +128,7 @@ export const ToastNotificationBase = {
 
 //<editor-fold desc="Line Notification.">
 const ToastLineNotificationStory: StoryFn<typeof Toast> = (props: ToastProps) => {
-  return <ToastLineNotificationTemplate {...cleanUpProps(props)} />;
+  return <ToastLineNotificationTemplate {...props} />;
 };
 
 export const ToastLineNotification = {
@@ -152,7 +149,7 @@ export const ToastLineNotification = {
 
 //<editor-fold desc="'Toast. Custom component.">
 const ToastCustomComponentStory: StoryFn<typeof Toast> = (props: ToastProps) => {
-  return <ToastCustomComponentTemplate {...cleanUpProps(props)} />;
+  return <ToastCustomComponentTemplate {...props} />;
 };
 
 export const ToastCustomComponent = {
@@ -173,7 +170,7 @@ export const ToastCustomComponent = {
 
 //<editor-fold desc="Toast. Custom component with Progress.">
 const ToastProgressComponentStory: StoryFn<typeof Toast> = (props: ToastProps) => {
-  return <ToastProgressComponentTemplate {...cleanUpProps(props)} />;
+  return <ToastProgressComponentTemplate {...props} />;
 };
 
 export const ToastProgressComponent = {
@@ -194,7 +191,7 @@ export const ToastProgressComponent = {
 
 //<editor-fold desc="Toast. Backward compatibility.">
 const ToastBackwardCompatibilityStory: StoryFn<typeof Toast> = (props: ToastProps) => {
-  return <ToastBackwardCompatibilityTemplate {...cleanUpProps(props)} />;
+  return <ToastBackwardCompatibilityTemplate {...props} />;
 };
 
 export const ToastBackwardCompatibility = {
