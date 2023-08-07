@@ -6,14 +6,21 @@ module.exports = {
   // `<rootDir>` is a token Jest substitutes
   roots: ['<rootDir>/src'],
 
-  testEnvironment: 'jsdom',
+  testEnvironment: 'jest-environment-jsdom',
 
   // Jest transformations -- this adds support for TypeScript
   // using ts-jest
   transform: {
-    '^.+\\.(t|j)sx?$': 'ts-jest',
+    '^.+\\.(t|j)sx?$': [
+      'ts-jest',
+      {
+        tsconfig: 'tsconfig.test.json',
+      },
+    ],
     '^.+\\.mdx$': '@storybook/addon-docs/jest-transform-mdx',
   },
+
+  extensionsToTreatAsEsm: ['.ts'],
 
   // Runs special logic, such as cleaning up components
   // when using React Testing Library and adds special
@@ -27,7 +34,7 @@ module.exports = {
 
   // Module file extensions for importing
   moduleFileExtensions: ['js', 'json', 'jsx', 'ts', 'tsx', 'node', 'mdx'],
-
+  transformIgnorePatterns: ['/node_modules/(?!(@admiral-ds/flags)/)'],
   moduleNameMapper: {
     '\\.svg$': '<rootDir>/.jest/svgrMock.js',
     '\\.(jpg|jpeg|png|gif|eot|otf|webp|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$': '<rootDir>/.jest/fileMock.js',

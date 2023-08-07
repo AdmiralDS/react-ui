@@ -1,12 +1,10 @@
-import type { HTMLAttributes } from 'react';
-import * as React from 'react';
+import { useState, type HTMLAttributes, type ReactNode, forwardRef, useRef, useEffect } from 'react';
 import styled, { css } from 'styled-components';
 import { keyboardKey } from '../../common/keyboardKey';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 import type { RenderPropsType } from '#src/components/input/InputEx/SuffixSelect';
 import type { MenuItemProps } from '#src/components/Menu/MenuItem';
 import { MenuItem } from '#src/components/Menu/MenuItem';
-import type { ValueType } from './ValueType';
 
 export type MenuDimensions = 'l' | 'm' | 's';
 
@@ -47,7 +45,7 @@ const StyledDiv = styled.div`
   border: none;
 `;
 
-function defaultOptionRender({ value, ...props }: RenderPropsType<ValueType> & MenuItemProps) {
+function defaultOptionRender({ value, ...props }: RenderPropsType<ReactNode> & MenuItemProps) {
   return <MenuItem {...props}>{String(value)}</MenuItem>;
 }
 
@@ -73,14 +71,14 @@ export interface MenuProps<T> extends Omit<HTMLAttributes<HTMLDivElement>, 'onSe
   preventFocusSteal?: boolean;
 }
 
-export const Menu = React.forwardRef<HTMLDivElement, MenuProps<ValueType>>(
+export const Menu = forwardRef<HTMLDivElement, MenuProps<ReactNode>>(
   (
     { options, selected, renderOption = defaultOptionRender, onSelect, dimension, preventFocusSteal, ...props },
     ref,
   ) => {
-    const [activeOption, setActiveOption] = React.useState<null | ValueType>(null);
+    const [activeOption, setActiveOption] = useState<null | ReactNode>(null);
 
-    const menuRef = React.useRef<HTMLDivElement | null>(null);
+    const menuRef = useRef<HTMLDivElement | null>(null);
 
     const findNext = () => {
       const currentIndex = selected ? options.indexOf(activeOption || selected) : 0;
@@ -92,7 +90,7 @@ export const Menu = React.forwardRef<HTMLDivElement, MenuProps<ValueType>>(
       return currentIndex - 1 < 0 ? options[options.length - 1] : options[currentIndex - 1];
     };
 
-    React.useEffect(() => {
+    useEffect(() => {
       function handleKeyDown(e: KeyboardEvent) {
         const code = keyboardKey.getCode(e);
         switch (code) {
@@ -135,7 +133,7 @@ export const Menu = React.forwardRef<HTMLDivElement, MenuProps<ValueType>>(
         }),
       );
 
-    React.useEffect(() => {
+    useEffect(() => {
       const hoveredItem = menuRef.current?.querySelector('[data-hovered="true"]');
 
       hoveredItem?.scrollIntoView({

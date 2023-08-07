@@ -59,7 +59,7 @@ const IconPanel = styled.div<{ disabled?: boolean; dimension?: ComponentDimensio
   }
 `;
 
-const Content = styled.div`
+const Content = styled.div<ExtraProps>`
   display: flex;
   box-sizing: border-box;
   width: 100%;
