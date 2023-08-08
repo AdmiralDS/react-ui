@@ -34,7 +34,7 @@
     "test:watch": "jest --watch",
     "lint": "eslint src --ext .js,.jsx,.ts,.tsx --fix",
     "storybook": "npm run generate-svg-icon-exports && storybook dev -p 6006",
-    "build-storybook": "npm run generate-svg-icon-exports && storybook build",
+    "build-storybook": "npm run generate-svg-icon-exports && storybook build --docs --disable-telemetry --output-dir docs",
     "preview-storybook": "npx http-server ./storybook-static",
     "release": "standard-version",
     "generate-svg-icon-exports": "node scripts/generate-svg-icon-exports.cjs",
