@@ -20,6 +20,7 @@ import {
   CustomOptionMultiSearchSelectTemplate,
   CustomChipMultiSearchSelectTemplate,
   ExternalFilterTemplate,
+  VirtualScrollTemplate,
 } from './Templates/SearchSelect';
 import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
@@ -463,5 +464,23 @@ export const ExternalFilter = {
   },
 
   name: 'Внешняя фильтрация',
+};
+//</editor-fold>
+
+// <editor-fold desc="Внешняя фильтрация">
+const VirtualScrollStory: StoryFn<typeof Select> = (props) => <VirtualScrollTemplate {...cleanUpProps(props)} />;
+
+export const VirtualScroll = {
+  render: VirtualScrollStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: ExternalFilterRaw,
+      },
+    },
+  },
+
+  name: 'VirtualScroll',
 };
 //</editor-fold>

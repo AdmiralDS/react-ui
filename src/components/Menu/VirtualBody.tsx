@@ -1,5 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
+import { hasSelectedChildren } from '#src/components/Menu/utils';
 import { MenuItem, type MenuModelItemProps } from '#src/components/Menu/MenuItem';
 
 const Spacer = styled.div`
@@ -24,8 +25,8 @@ interface VirtualBodyProps extends React.HTMLAttributes<HTMLDivElement> {
   model: Array<MenuModelItemProps>;
   /** Id активного элемента */
   activeId?: string;
-  /** Id выбранного элемента */
-  selectedId?: string;
+  /** Id выбранных элементов */
+  selected: Array<string>;
   /** Клик по меню не преводит к перемещению фокуса */
   preventFocusSteal?: boolean;
 }
@@ -59,7 +60,7 @@ export const VirtualBody = ({
   aheadItemsCount = 3,
   model,
   activeId,
-  selectedId,
+  selected,
   onActivateItem,
   onSelectItem,
   preventFocusSteal,
@@ -141,16 +142,22 @@ export const VirtualBody = ({
   const visibleChildren = React.useMemo(() => {
     const visibleItems = [...model].slice(partition.startIndex, partition.endIndex);
 
-    return visibleItems.map(({ id, render, ...itemProps }, index) => {
+    return visibleItems.map((item, index) => {
+      const { id, subItems, render, ...itemProps } = item;
+      const hasSubmenu = !!subItems && subItems.length > 0;
+      const hovered = activeId === id;
+      const isSelected = selected.includes(id) || hasSelectedChildren(item, selected);
+
       const renderProps = {
-        hovered: activeId === id,
-        selected: selectedId === id,
+        hovered,
+        selected: isSelected,
         onHover: () => {
           onActivateItem(itemProps.disabled ? undefined : id);
         },
         onClick: () => onSelectItem(id),
         onMouseDown: preventFocusSteal ? (e: React.MouseEvent<HTMLElement>) => e.preventDefault() : undefined,
         containerRef: scrollContainerRef,
+        hasSubmenu,
         ...itemProps,
       };
       if (typeof render === 'function') return render(renderProps);
@@ -160,7 +167,7 @@ export const VirtualBody = ({
         </MenuItem>
       );
     });
-  }, [model, activeId, onActivateItem, selectedId, onSelectItem, scrollContainerRef, partition]);
+  }, [model, activeId, onActivateItem, selected, onSelectItem, scrollContainerRef, partition]);
 
   return (
     <>
