@@ -4,7 +4,7 @@ import type { ChangeEvent } from 'react';
 import { Button, Modal, ModalButtonPanel, ModalContent, ModalTitle, Option, Select } from '@admiral-ds/react-ui';
 import type { SelectProps } from '@admiral-ds/react-ui';
 
-export const CustomChipMultiSearchSelectTemplate = (props: SelectProps) => {
+export const SearchSelectCustomChipMultiTemplate = (props: SelectProps) => {
   const [selectValue, setSelectValue] = React.useState<string[]>(
     Array.from({ length: 5 }).map((_, ind) => String(ind)),
   );

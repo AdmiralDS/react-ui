@@ -19,37 +19,38 @@ const getFlag = (value: string) => {
 };
 
 const RenderingValue = styled.div`
-  color: ${(p) => p.theme.color['Teal/Teal 80']};
+  color: ${(p) => p.theme.color['Magenta/Magenta 50']};
   display: flex;
   column-gap: 8px;
+  margin: 0;
   padding: 0 3px;
   border-width: 1px;
   border-style: dotted;
   border-radius: 4px;
-  border-color: ${(p) => p.theme.color['Teal/Teal 80']};
-  background-color: ${(p) => p.theme.color['Teal/Teal 10']};
+  border-color: ${(p) => p.theme.color['Magenta/Magenta 50']};
 `;
 
 const CustomSelect = styled(Select)<{ multiple?: boolean }>`
   ${(p) => p.multiple && MultipleMixin}
 `;
-export const CustomRenderValueTemplate = (props: SelectProps) => {
+export const SelectCustomRenderMultipleValuesTemplate = (props: SelectProps) => {
   const renderValue = (value: string | string[] | undefined) => {
-    if (typeof value === 'string') {
-      const Flag = getFlag(value);
-
-      return (
-        <RenderingValue>
-          <Flag height={24} />
-          {value}
-        </RenderingValue>
-      );
+    if (Array.isArray(value)) {
+      return value.map((item) => {
+        const Flag = getFlag(item);
+        return (
+          <RenderingValue>
+            <Flag height={24} />
+            {item}
+          </RenderingValue>
+        );
+      });
     }
   };
 
   return (
     <>
-      <CustomSelect {...props} multiple={false} placeholder="Placeholder" renderSelectValue={renderValue}>
+      <CustomSelect {...props} multiple placeholder="Placeholder" renderSelectValue={renderValue}>
         <Option value="Саша Даль">Саша Даль</Option>
         <Option value="Алексей Елесин">Алексей Елесин</Option>
         <Option value="Константин Ионочкин">Константин Ионочкин</Option>

@@ -4,9 +4,9 @@ import type { ChangeEvent } from 'react';
 import { Option, Select } from '@admiral-ds/react-ui';
 import type { SelectProps } from '@admiral-ds/react-ui';
 
-import { ExtraText, TextWrapper } from '#src/components/input/Select/Stories/styled';
+import { ExtraText, TextWrapper } from '#src/components/input/Select/stories/styled';
 
-export const CustomOptionMultiSearchSelectTemplate = (props: SelectProps) => {
+export const SearchSelectCustomOptionMultiTemplate = (props: SelectProps) => {
   const [selectValue, setSelectValue] = React.useState<string[]>(
     Array.from({ length: 15 }).map((_, ind) => String(ind)),
   );

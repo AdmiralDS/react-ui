@@ -4,11 +4,11 @@ import type { ChangeEvent } from 'react';
 import { Button, MenuActionsPanel, Option, Select } from '@admiral-ds/react-ui';
 import type { SelectProps } from '@admiral-ds/react-ui';
 
-import { createOptions } from '#src/components/input/Select/Stories/utils';
+import { createOptions } from '#src/components/input/Select/stories/utils';
 
 const MultipleWithApplyOptions = createOptions(10);
 
-export const MultipleWithApplyTemplate = (props: SelectProps) => {
+export const SearchSelectMultipleWithApplyTemplate = (props: SelectProps) => {
   const [selectValue, setSelectValue] = React.useState<string[]>(['big', '1', '3']);
   const [forcedOpen, setForcedOpen] = React.useState(false);
 

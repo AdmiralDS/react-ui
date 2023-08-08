@@ -4,7 +4,7 @@ import type { ChangeEvent } from 'react';
 import { Option, OptionGroup, Select } from '@admiral-ds/react-ui';
 import type { SelectProps } from '@admiral-ds/react-ui';
 
-import { StyledGroup } from '#src/components/input/Select/Stories/styled';
+import { StyledGroup } from '#src/components/input/Select/stories/styled';
 
 export const SearchSelectOptionGroupTemplate = (props: SelectProps) => {
   const [selectValue, setSelectValue] = React.useState('Похо Торо Моронго');

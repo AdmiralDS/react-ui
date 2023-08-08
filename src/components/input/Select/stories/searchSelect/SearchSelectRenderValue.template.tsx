@@ -7,7 +7,7 @@ import { ReactComponent as Cuba } from '@admiral-ds/icons/build/flags/Cuba.svg';
 import { ReactComponent as Belarus } from '@admiral-ds/icons/build/flags/Belarus.svg';
 import { ReactComponent as RussianFederation } from '@admiral-ds/icons/build/flags/RussianFederation.svg';
 
-import { OPTIONS_NAMES } from '#src/components/input/Select/Stories/data';
+import { OPTIONS_NAMES } from '#src/components/input/Select/stories/data';
 
 const RenderingValue = styled.div`
   color: ${(p) => p.theme.color['Teal/Teal 80']};
@@ -27,7 +27,7 @@ const getFlag = (value: string) => {
   return value === 'Фидель' ? Cuba : value === 'Константин Колешонок' ? Belarus : RussianFederation;
 };
 
-export const RenderValueTemplate = (props: SelectProps) => {
+export const SearchSelectRenderValueTemplate = (props: SelectProps) => {
   const renderOptions = () => {
     return OPTIONS_NAMES.map((option) => (
       <Option key={option} value={option}>

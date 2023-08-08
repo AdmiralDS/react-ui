@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Option, Select } from '@admiral-ds/react-ui';
 import type { SelectProps } from '@admiral-ds/react-ui';
 
-import { OPTIONS_SIMPLE } from '#src/components/input/Select/Stories/data';
+import { OPTIONS_SIMPLE } from '#src/components/input/Select/stories/data';
 
 export const SearchSelectWithFilterTemplate = ({ placeholder = 'Placeholder', ...props }: SelectProps) => {
   const renderOptions = () => {

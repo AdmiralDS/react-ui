@@ -1,22 +1,18 @@
-import * as React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
 import { Select, INPUT_DIMENSIONS_VALUES, INPUT_STATUS_VALUES, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
-import {
-  CustomRenderMultipleValuesTemplate,
-  CustomRenderValueTemplate,
-  MultiSelectTemplate,
-  SelectSimpleTemplate,
-  SelectWithTitleTemplate,
-} from '#src/components/input/Select/Stories/Templates/Select';
-import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+import { SelectCustomRenderValueTemplate } from '#src/components/input/Select/stories/select/SelectCustomRenderValue.template';
+import { SelectCustomRenderMultipleValuesTemplate } from '#src/components/input/Select/stories/select/SelectCustomRenderMultipleValues.template';
+import { SelectWithTitleTemplate } from '#src/components/input/Select/stories/select/SelectWithTitle.template';
+import { SelectSimpleTemplate } from '#src/components/input/Select/stories/select/SelectSimple.template';
+import { SelectMultiTemplate } from '#src/components/input/Select/stories/select/SelectMulti.template';
 
 // Imports of text sources
-import CustomRenderValueRaw from './Templates/Select/CustomRenderValue?raw';
-import CustomRenderMultipleValuesRaw from './Templates/Select/CustomRenderMultipleValues?raw';
-import SelectWithTitleRaw from './Templates/Select/SelectWithTitle?raw';
-import SelectSimpleRaw from './Templates/Select/SelectSimple?raw';
-import MultiSelectRaw from './Templates/Select/MultiSelect?raw';
+import SelectCustomRenderValueRaw from '#src/components/input/Select/stories/select/SelectCustomRenderValue.template?raw';
+import SelectCustomRenderMultipleValuesRaw from '#src/components/input/Select/stories/select/SelectCustomRenderMultipleValues.template?raw';
+import SelectWithTitleRaw from '#src/components/input/Select/stories/select/SelectWithTitle.template?raw';
+import SelectSimpleRaw from '#src/components/input/Select/stories/select/SelectSimple.template?raw';
+import SelectMultiRaw from '#src/components/input/Select/stories/select/SelectMulti.template?raw';
 
 export default {
   title: 'Admiral-2.1/Input/Select/режим "select"',
@@ -115,7 +111,7 @@ export default {
 } as Meta<typeof Select>;
 
 //<editor-fold desc="Select. Простой Select">
-const SelectSimpleStory: StoryFn<typeof Select> = (props) => <SelectSimpleTemplate {...cleanUpProps(props)} />;
+const SelectSimpleStory: StoryFn<typeof Select> = (props) => <SelectSimpleTemplate {...props} />;
 
 export const SelectSimple = {
   render: SelectSimpleStory,
@@ -135,7 +131,7 @@ export const SelectSimple = {
 
 //<editor-fold desc="Отображается Title, tooltip скрыт">
 const SelectWithTitleStory: StoryFn<typeof Select> = (props) => {
-  return <SelectWithTitleTemplate {...cleanUpProps(props)} />;
+  return <SelectWithTitleTemplate {...props} />;
 };
 
 export const SelectWithTitleExample = {
@@ -162,7 +158,7 @@ export const SelectWithTitleExample = {
 
 //<editor-fold desc="Кастомное отображение значения">
 const CustomRenderValueStory: StoryFn<typeof Select> = (props) => {
-  return <CustomRenderValueTemplate {...cleanUpProps(props)} />;
+  return <SelectCustomRenderValueTemplate {...props} />;
 };
 
 export const CustomRenderValueExample = {
@@ -175,7 +171,7 @@ export const CustomRenderValueExample = {
   parameters: {
     docs: {
       source: {
-        code: CustomRenderValueRaw,
+        code: SelectCustomRenderValueRaw,
       },
       description: {
         story:
@@ -192,7 +188,7 @@ export const CustomRenderValueExample = {
 
 //<editor-fold desc="Кастомное отображение значения с множественным выбором">
 const CustomRenderMultipleValuesStory: StoryFn<typeof Select> = (props) => {
-  return <CustomRenderMultipleValuesTemplate {...cleanUpProps(props)} />;
+  return <SelectCustomRenderMultipleValuesTemplate {...props} />;
 };
 
 export const CustomRenderMultipleValuesExample = {
@@ -205,7 +201,7 @@ export const CustomRenderMultipleValuesExample = {
   parameters: {
     docs: {
       source: {
-        code: CustomRenderMultipleValuesRaw,
+        code: SelectCustomRenderMultipleValuesRaw,
       },
       description: {
         story:
@@ -221,7 +217,7 @@ export const CustomRenderMultipleValuesExample = {
 //</editor-fold>
 
 //<editor-fold desc="Select. Простой MultiSelect">
-const MultiSelectStory: StoryFn<typeof Select> = (props) => <MultiSelectTemplate {...cleanUpProps(props)} />;
+const MultiSelectStory: StoryFn<typeof Select> = (props) => <SelectMultiTemplate {...props} />;
 
 export const MultiSelect = {
   render: MultiSelectStory,
@@ -229,7 +225,7 @@ export const MultiSelect = {
   parameters: {
     docs: {
       source: {
-        code: MultiSelectRaw,
+        code: SelectMultiRaw,
       },
     },
   },

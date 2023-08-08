@@ -26,7 +26,7 @@ const OPTIONS = [
   },
 ] as Array<{ value: string; text: string; disabled?: boolean; extraText?: string }>;
 
-export const ExternalFilterTemplate = (props: SelectProps) => {
+export const SearchSelectExternalFilterTemplate = (props: SelectProps) => {
   const [selectValue, setSelectValue] = React.useState('');
   const [searchValue, setSearchValue] = React.useState('');
 

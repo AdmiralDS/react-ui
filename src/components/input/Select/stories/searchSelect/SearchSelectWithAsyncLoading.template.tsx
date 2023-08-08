@@ -17,7 +17,7 @@ async function searchPeopleByName(name: string) {
   return response.json();
 }
 
-export const SelectWithAsyncLoading = (props: SelectProps) => {
+export const SearchSelectWithAsyncLoadingTemplate = (props: SelectProps) => {
   const [selectValue, setSelectValue] = React.useState(props.value ? String(props.value) : '');
   const [options, setOptions] = React.useState<Array<{ value: string; text: string }>>([]);
 

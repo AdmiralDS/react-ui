@@ -1,4 +1,4 @@
-import { MULTISELECT_OPTIONS } from '#src/components/input/Select/Stories/data';
+import { MULTISELECT_OPTIONS } from '#src/components/input/Select/stories/data';
 
 export async function wait(ms: number) {
   return new Promise((resolve) => {

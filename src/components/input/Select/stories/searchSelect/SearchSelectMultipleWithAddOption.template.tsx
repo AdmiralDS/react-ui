@@ -5,39 +5,42 @@ import { MenuActionsPanel, Option, Select, TextButton } from '@admiral-ds/react-
 import type { SelectProps } from '@admiral-ds/react-ui';
 import { ReactComponent as PlusOutline } from '@admiral-ds/icons/build/service/PlusOutline.svg';
 
-import { OPTIONS_SIMPLE } from '#src/components/input/Select/Stories/data';
+import { createOptions } from '#src/components/input/Select/stories/utils';
 
-export const WithAddButtonTemplate = (props: SelectProps) => {
-  const [selectValue, setSelectValue] = React.useState('');
+export const SearchSelectMultipleWithAddOptionTemplate = (props: SelectProps) => {
+  const [selectValue, setSelectValue] = React.useState<string[]>([]);
   const [searchValue, setSearchValue] = React.useState('');
-  const [options, setOptions] = React.useState(OPTIONS_SIMPLE);
+  const [options, setOptions] = React.useState(createOptions(20));
 
   const onChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    setSelectValue(e.target.value);
+    const newValues = Array.from(e.target.selectedOptions).map((option) => option.value);
+    setSelectValue(newValues);
     props.onChange?.(e);
-  };
-
-  const renderOptions = () => {
-    return options.map((option, ind) => (
-      <Option key={option} value={option} disabled={ind === 4}>
-        {option}
-      </Option>
-    ));
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.target.value);
   };
 
+  const renderOptions = () => {
+    return options.map((option, ind) => (
+      <Option key={option.value} value={option.value} disabled={[2, 4].includes(ind)}>
+        {option.text}
+      </Option>
+    ));
+  };
+
   const handleAddButtonClick = () => {
-    if (searchValue && !options.includes(searchValue)) {
-      setOptions([...options, searchValue]);
+    if (searchValue && !options.find((item) => item.text === searchValue)) {
+      setOptions([...options, { text: searchValue, value: searchValue }]);
+      setSelectValue([...selectValue, searchValue]);
+      setSearchValue('');
     }
   };
 
   const addButtonProps = React.useMemo(() => {
     return {
-      disabled: options.includes(searchValue) || !searchValue,
+      disabled: !!options.find((item) => item.text === searchValue) || !searchValue,
       text: searchValue ? `Добавить «${searchValue}»` : 'Добавить',
     };
   }, [searchValue, options]);
@@ -48,11 +51,15 @@ export const WithAddButtonTemplate = (props: SelectProps) => {
     <>
       <Select
         {...props}
-        onInputChange={handleInputChange}
+        value={selectValue}
+        inputValue={searchValue}
+        multiple={true}
+        onChange={onChange}
+        dimension="xl"
+        displayClearIcon={true}
         placeholder="Placeholder"
         mode="searchSelect"
-        value={selectValue}
-        onChange={onChange}
+        onInputChange={handleInputChange}
         renderDropDownBottomPanel={({ dimension = menuPanelContentDimension }) => {
           return (
             <MenuActionsPanel dimension={dimension}>

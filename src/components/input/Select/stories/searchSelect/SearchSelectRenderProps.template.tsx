@@ -4,8 +4,8 @@ import styled from 'styled-components';
 import { MenuItem, Option, Select } from '@admiral-ds/react-ui';
 import type { SelectProps, RenderOptionProps } from '@admiral-ds/react-ui';
 
-import { OPTIONS } from '#src/components/input/Select/Stories/data';
-import { Icon, TextWrapper } from '#src/components/input/Select/Stories/styled';
+import { OPTIONS } from '#src/components/input/Select/stories/data';
+import { Icon, TextWrapper } from '#src/components/input/Select/stories/styled';
 
 interface MyIncredibleOptionProps extends RenderOptionProps {
   shouldAnimate?: boolean;
@@ -25,7 +25,7 @@ const MyIncredibleOption = ({ text, shouldAnimate, ...props }: MyIncredibleOptio
   </CustomOptionWrapper>
 );
 
-export const RenderPropsTemplate = (props: SelectProps) => {
+export const SearchSelectRenderPropsTemplate = (props: SelectProps) => {
   const [selectValue, setSelectValue] = React.useState(props.value ? String(props.value) : OPTIONS[2].value);
 
   const onChange = (e: React.ChangeEvent<HTMLSelectElement>) => {

@@ -4,7 +4,7 @@ import type { ChangeEvent } from 'react';
 import { Option, Select } from '@admiral-ds/react-ui';
 import type { SelectProps } from '@admiral-ds/react-ui';
 
-export const MultiSelectTemplate = (props: SelectProps) => {
+export const SelectMultiTemplate = (props: SelectProps) => {
   const [selectValue, setSelectValue] = React.useState<string[]>(
     Array.from({ length: 20 })
       .map((_, ind) => String(ind))

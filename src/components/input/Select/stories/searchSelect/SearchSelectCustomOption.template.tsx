@@ -4,10 +4,10 @@ import type { ChangeEvent } from 'react';
 import { defaultFilterItem, Option, Select, T } from '@admiral-ds/react-ui';
 import type { SearchFormat, SelectProps } from '@admiral-ds/react-ui';
 
-import { OPTIONS } from '#src/components/input/Select/Stories/data';
-import { ExtraText, Icon, Separator, TextWrapper } from '#src/components/input/Select/Stories/styled';
+import { OPTIONS } from '#src/components/input/Select/stories/data';
+import { ExtraText, Icon, Separator, TextWrapper } from '#src/components/input/Select/stories/styled';
 
-export const CustomOptionTemplate = (props: SelectProps) => {
+export const SearchSelectCustomOptionTemplate = (props: SelectProps) => {
   const [selectValue, setSelectValue] = React.useState(props.value ? String(props.value) : OPTIONS[2].value);
 
   const onChange = (e: ChangeEvent<HTMLSelectElement>) => {
