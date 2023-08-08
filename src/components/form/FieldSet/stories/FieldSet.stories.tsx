@@ -5,12 +5,12 @@ import styled from 'styled-components';
 import { FieldSet, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 import type { PropsType as FieldSetPropsType } from '@admiral-ds/react-ui';
 
-import { FieldSetCheckboxTemplate, FieldSetRadioButtonTemplate } from '#src/components/form/FieldSet/Stories/Templates';
-import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+import { FieldSetCheckboxTemplate } from './FieldSetCheckbox.template';
+import { FieldSetRadioButtonTemplate } from './FieldSetRadioButton.template';
 
 // Imports of text sources
-import FieldSetCheckboxRaw from './Templates/FieldSetCheckbox?raw';
-import FieldSetRadioButtonRaw from './Templates/FieldSetRadioButton?raw';
+import FieldSetCheckboxRaw from './FieldSetCheckbox.template?raw';
+import FieldSetRadioButtonRaw from './FieldSetRadioButton.template?raw';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -71,9 +71,7 @@ export default {
 } as Meta<typeof FieldSet>;
 
 //<editor-fold desc="">
-const FieldSetCheckboxStory: StoryFn<typeof FieldSet> = (props: FieldSetPropsType) => (
-  <FieldSetCheckboxTemplate {...cleanUpProps(props)} />
-);
+const FieldSetCheckboxStory: StoryFn<typeof FieldSet> = (props) => <FieldSetCheckboxTemplate {...props} />;
 
 export const FieldSetCheckbox = {
   render: FieldSetCheckboxStory,
@@ -92,9 +90,7 @@ export const FieldSetCheckbox = {
 //</editor-fold>
 
 //<editor-fold desc="">
-const FieldSetRadioButtonStory: StoryFn<typeof FieldSet> = (props) => (
-  <FieldSetRadioButtonTemplate {...cleanUpProps(props)} />
-);
+const FieldSetRadioButtonStory: StoryFn<typeof FieldSet> = (props) => <FieldSetRadioButtonTemplate {...props} />;
 
 export const FieldSetRadioButton = {
   render: FieldSetRadioButtonStory,
