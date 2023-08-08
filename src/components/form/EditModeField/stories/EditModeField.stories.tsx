@@ -1,19 +1,17 @@
 import * as React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
+
 import { EditModeField, INPUT_STATUS_VALUES, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
-import {
-  EditModeFieldErrorStateTemplate,
-  EditModeFieldExtraTextTemplate,
-  EditModeFieldPlaygroundTemplate,
-} from './Templates';
-import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+import { EditModeFieldPlaygroundTemplate } from './EditModeFieldPlayground.template';
+import { EditModeFieldErrorStateTemplate } from './EditModeFieldErrorState.template';
+import { EditModeFieldExtraTextTemplate } from './EditModeFieldExtraText.template';
 import { DataAttributesDescription } from '#src/components/form/common';
 
 // Imports of text sources
-import EditModeFieldPlaygroundRaw from './Templates/EditModeFieldPlayground?raw';
-import EditModeFieldErrorStateRaw from './Templates/EditModeFieldErrorState?raw';
-import EditModeFieldExtraTextRaw from './Templates/EditModeFieldExtraText?raw';
+import EditModeFieldPlaygroundRaw from './EditModeFieldPlayground.template?raw';
+import EditModeFieldErrorStateRaw from './EditModeFieldErrorState.template?raw';
+import EditModeFieldExtraTextRaw from './EditModeFieldExtraText.template?raw';
 
 export default {
   title: 'Admiral-2.1/Form Field/EditModeField',
@@ -112,7 +110,7 @@ export default {
 
 //<editor-fold desc="Playground">
 const EditModeFieldPlaygroundStory: StoryFn<typeof EditModeField> = (props) => (
-  <EditModeFieldPlaygroundTemplate value={''} onChange={() => undefined} {...cleanUpProps(props)} />
+  <EditModeFieldPlaygroundTemplate {...props} />
 );
 
 export const EditModeFieldPlayground = {
@@ -133,7 +131,7 @@ export const EditModeFieldPlayground = {
 
 //<editor-fold desc="Пример с поясняющим текстом">
 const EditModeFieldExtraTextStory: StoryFn<typeof EditModeField> = (props) => (
-  <EditModeFieldExtraTextTemplate value={''} onChange={() => undefined} {...cleanUpProps(props)} />
+  <EditModeFieldExtraTextTemplate {...props} />
 );
 
 export const EditModeFieldExtraText = {
@@ -156,7 +154,7 @@ export const EditModeFieldExtraText = {
 
 //<editor-fold desc="Пример с состоянием ошибки">
 const EditModeFieldErrorStateStory: StoryFn<typeof EditModeField> = (props) => (
-  <EditModeFieldErrorStateTemplate value={''} onChange={() => undefined} {...cleanUpProps(props)} />
+  <EditModeFieldErrorStateTemplate {...props} />
 );
 
 export const EditModeFieldErrorState = {
@@ -172,3 +170,5 @@ export const EditModeFieldErrorState = {
 
   name: 'Пример с состоянием ошибки',
 };
+
+//</editor-fold>
