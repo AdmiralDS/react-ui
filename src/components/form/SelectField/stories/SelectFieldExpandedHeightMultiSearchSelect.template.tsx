@@ -9,7 +9,7 @@ const containerContrastBorder = css`
   border: dashed 2px ${(p) => p.theme.color['Neutral/Neutral 90']};
 `;
 
-export const ExpandedHeightMultiSearchSelectTemplate = (props: SearchSelectFieldProps) => {
+export const SelectFieldExpandedHeightMultiSearchSelectTemplate = (props: SearchSelectFieldProps) => {
   const [selectValue, setSelectValue] = React.useState<string[]>(
     Array.from({ length: 20 }).map((_, ind) => String(ind)),
   );

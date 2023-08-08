@@ -13,7 +13,7 @@ const ExtraText = styled.div`
   color: #626f84;
 `;
 
-export const CustomOptionMultiSearchSelectTemplate = () => {
+export const SelectFieldCustomOptionMultiSearchSelectTemplate = () => {
   const [selectValue, setSelectValue] = React.useState<string[]>(
     Array.from({ length: 15 }).map((_, ind) => String(ind)),
   );

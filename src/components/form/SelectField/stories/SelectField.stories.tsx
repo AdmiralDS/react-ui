@@ -2,28 +2,25 @@ import * as React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
 import { SelectField, INPUT_DIMENSIONS_VALUES, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
-import {
-  CustomOptionsTemplate,
-  SimpleTemplate,
-  CustomOptionMultiSearchSelectTemplate,
-  ExpandedHeightMultiSearchSelectTemplate,
-  SimpleMultiSearchSelectTemplate,
-  AsyncSearchSelectTemplate,
-  OptionGroupSearchSelectTemplate,
-  RenderPropsSearchSelectTemplate,
-} from './Templates';
-import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+import { SelectFieldSimpleTemplate } from './SelectFieldSimple.template';
+import { SelectFieldCustomOptionsTemplate } from './SelectFieldCustomOptions.template';
+import { SelectFieldAsyncSearchSelectTemplate } from './SelectFieldAsyncSearchSelect.template';
+import { SelectFieldCustomOptionMultiSearchSelectTemplate } from './SelectFieldCustomOptionMultiSearchSelect.template';
+import { SelectFieldExpandedHeightMultiSearchSelectTemplate } from './SelectFieldExpandedHeightMultiSearchSelect.template';
+import { SelectFieldOptionGroupSearchSelectTemplate } from './SelectFieldOptionGroupSearchSelect.template';
+import { SelectFieldRenderPropsSearchSelectTemplate } from './SelectFieldRenderPropsSearchSelect.template';
+import { SelectFieldSimpleMultiSearchSelectTemplate } from './SelectFieldSimpleMultiSearchSelect.template';
 import { DataAttributesDescription } from '#src/components/form/common';
 
 // Imports of text sources
-import SimpleRaw from './Templates/Simple?raw';
-import CustomOptionsRaw from './Templates/CustomOptions?raw';
-import AsyncSearchSelectRaw from './Templates/AsyncSearchSelect?raw';
-import CustomOptionMultiSearchSelectRaw from './Templates/CustomOptionMultiSearchSelect?raw';
-import ExpandedHeightMultiSearchSelectRaw from './Templates/ExpandedHeightMultiSearchSelect?raw';
-import OptionGroupSearchSelectRaw from './Templates/OptionGroupSearchSelect?raw';
-import RenderPropsSearchSelectRaw from './Templates/RenderPropsSearchSelect?raw';
-import SimpleMultiSearchSelectRaw from './Templates/SimpleMultiSearchSelect?raw';
+import SelectFieldSimpleRaw from './SelectFieldSimple.template?raw';
+import SelectFieldCustomOptionsRaw from './SelectFieldCustomOptions.template?raw';
+import SelectFieldAsyncSearchSelectRaw from './SelectFieldAsyncSearchSelect.template?raw';
+import SelectFieldCustomOptionMultiSearchSelectRaw from './SelectFieldCustomOptionMultiSearchSelect.template?raw';
+import SelectFieldExpandedHeightMultiSearchSelectRaw from './SelectFieldExpandedHeightMultiSearchSelect.template?raw';
+import SelectFieldOptionGroupSearchSelectRaw from './SelectFieldOptionGroupSearchSelect.template?raw';
+import SelectFieldRenderPropsSearchSelectRaw from './SelectFieldRenderPropsSearchSelect.template?raw';
+import SelectFieldSimpleMultiSearchSelectRaw from './SelectFieldSimpleMultiSearchSelect.template?raw';
 
 export default {
   title: 'Admiral-2.1/Form Field/SelectField',
@@ -179,7 +176,7 @@ export default {
 
 //<editor-fold desc="Простой SearchSelect">
 const SimpleStory: StoryFn<typeof SelectField> = (props) => {
-  return <SimpleTemplate {...cleanUpProps(props)} />;
+  return <SelectFieldSimpleTemplate {...props} />;
 };
 
 export const SimpleSearchSelectStory = {
@@ -188,7 +185,7 @@ export const SimpleSearchSelectStory = {
   parameters: {
     docs: {
       source: {
-        code: SimpleRaw,
+        code: SelectFieldSimpleRaw,
       },
       description: {
         story:
@@ -208,7 +205,7 @@ export const SimpleSearchSelectStory = {
 
 //<editor-fold desc="SearchSelect с кастомными опциями">
 const CustomOptionStory: StoryFn<typeof SelectField> = (props) => {
-  return <CustomOptionsTemplate {...cleanUpProps(props)} />;
+  return <SelectFieldCustomOptionsTemplate {...props} />;
 };
 
 export const CustomOptionSearchSelectStory = {
@@ -217,7 +214,7 @@ export const CustomOptionSearchSelectStory = {
   parameters: {
     docs: {
       source: {
-        code: CustomOptionsRaw,
+        code: SelectFieldCustomOptionsRaw,
       },
       description: {
         story: 'Пример отображения кастомных опций с использованием компонента Option',
@@ -232,7 +229,7 @@ export const CustomOptionSearchSelectStory = {
 
 //<editor-fold desc="SearchSelect с кастомными опциями через renderProps">
 const RenderPropsSearchSelectStory: StoryFn<typeof SelectField> = (props) => (
-  <RenderPropsSearchSelectTemplate {...cleanUpProps(props)} />
+  <SelectFieldRenderPropsSearchSelectTemplate {...props} />
 );
 
 export const RenderPropsSearchSelect = {
@@ -241,7 +238,7 @@ export const RenderPropsSearchSelect = {
   parameters: {
     docs: {
       source: {
-        code: RenderPropsSearchSelectRaw,
+        code: SelectFieldRenderPropsSearchSelectRaw,
       },
     },
   },
@@ -252,7 +249,7 @@ export const RenderPropsSearchSelect = {
 //</editor-fold>
 
 //<editor-fold desc="SearchSelect с группами">
-const OptionGroupSearchSelectStory: StoryFn<typeof SelectField> = () => <OptionGroupSearchSelectTemplate />;
+const OptionGroupSearchSelectStory: StoryFn<typeof SelectField> = () => <SelectFieldOptionGroupSearchSelectTemplate />;
 
 export const OptionGroupSearchSelect = {
   render: OptionGroupSearchSelectStory,
@@ -260,7 +257,7 @@ export const OptionGroupSearchSelect = {
   parameters: {
     docs: {
       source: {
-        code: OptionGroupSearchSelectRaw,
+        code: SelectFieldOptionGroupSearchSelectRaw,
       },
     },
   },
@@ -272,7 +269,7 @@ export const OptionGroupSearchSelect = {
 
 //<editor-fold desc="Асинхронный SearchSelect">
 const AsyncSearchSelectStory: StoryFn<typeof SelectField> = (props) => (
-  <AsyncSearchSelectTemplate {...cleanUpProps(props)} />
+  <SelectFieldAsyncSearchSelectTemplate {...props} />
 );
 
 export const AsyncSearchSelect = {
@@ -281,7 +278,7 @@ export const AsyncSearchSelect = {
   parameters: {
     docs: {
       source: {
-        code: AsyncSearchSelectRaw,
+        code: SelectFieldAsyncSearchSelectRaw,
       },
     },
   },
@@ -293,7 +290,7 @@ export const AsyncSearchSelect = {
 
 //<editor-fold desc="Простой MultiSearchSelect">
 const SimpleMultiSearchSelectStory: StoryFn<typeof SelectField> = (props) => (
-  <SimpleMultiSearchSelectTemplate {...cleanUpProps(props)} />
+  <SelectFieldSimpleMultiSearchSelectTemplate {...props} />
 );
 
 export const SimpleMultiSearchSelect = {
@@ -302,7 +299,7 @@ export const SimpleMultiSearchSelect = {
   parameters: {
     docs: {
       source: {
-        code: SimpleMultiSearchSelectRaw,
+        code: SelectFieldSimpleMultiSearchSelectRaw,
       },
     },
   },
@@ -314,7 +311,7 @@ export const SimpleMultiSearchSelect = {
 
 //<editor-fold desc="MultiSearchSelect с увеличенной по умолчанию высотой">
 const ExpandedHeightMultiSearchSelectStory: StoryFn<typeof SelectField> = (props) => (
-  <ExpandedHeightMultiSearchSelectTemplate {...cleanUpProps(props)} />
+  <SelectFieldExpandedHeightMultiSearchSelectTemplate {...props} />
 );
 
 export const ExpandedHeightMultiSearchSelect = {
@@ -323,7 +320,7 @@ export const ExpandedHeightMultiSearchSelect = {
   parameters: {
     docs: {
       source: {
-        code: ExpandedHeightMultiSearchSelectRaw,
+        code: SelectFieldExpandedHeightMultiSearchSelectRaw,
       },
     },
   },
@@ -334,7 +331,9 @@ export const ExpandedHeightMultiSearchSelect = {
 //</editor-fold>
 
 //<editor-fold desc="MultiSearchSelect с кастомными опциями">
-const CustomOptionMultiSearchSelectStory: StoryFn<typeof SelectField> = () => <CustomOptionMultiSearchSelectTemplate />;
+const CustomOptionMultiSearchSelectStory: StoryFn<typeof SelectField> = () => (
+  <SelectFieldCustomOptionMultiSearchSelectTemplate />
+);
 
 export const CustomOptionMultiSearchSelect = {
   render: CustomOptionMultiSearchSelectStory,
@@ -342,7 +341,7 @@ export const CustomOptionMultiSearchSelect = {
   parameters: {
     docs: {
       source: {
-        code: CustomOptionMultiSearchSelectRaw,
+        code: SelectFieldCustomOptionMultiSearchSelectRaw,
       },
     },
   },

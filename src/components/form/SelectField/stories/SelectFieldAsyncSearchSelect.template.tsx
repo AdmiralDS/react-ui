@@ -33,7 +33,7 @@ async function wait(ms: number) {
   });
 }
 
-export const AsyncSearchSelectTemplate = (props: SearchSelectFieldProps) => {
+export const SelectFieldAsyncSearchSelectTemplate = (props: SearchSelectFieldProps) => {
   const [selectValue, setSelectValue] = React.useState(props.value ? String(props.value) : OPTIONS[2].value);
   const [options, setOptions] = React.useState<Array<{ value: string; text: string }>>([]);
   const [searchValue, setSearchValue] = React.useState('');

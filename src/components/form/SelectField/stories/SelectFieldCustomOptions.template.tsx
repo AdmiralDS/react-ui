@@ -58,7 +58,7 @@ const OPTIONS = [
   },
 ];
 
-export const CustomOptionsTemplate = (props: SearchSelectFieldProps) => {
+export const SelectFieldCustomOptionsTemplate = (props: SearchSelectFieldProps) => {
   const [selectValue, setSelectValue] = React.useState(props.value ? String(props.value) : OPTIONS[2].value);
 
   const onChange = (e: ChangeEvent<HTMLSelectElement>) => {

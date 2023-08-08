@@ -72,7 +72,7 @@ const MyIncredibleOption = ({ text, shouldAnimate, ...props }: MyIncredibleOptio
   </CustomOptionWrapper>
 );
 
-export const RenderPropsSearchSelectTemplate = (props: SearchSelectFieldProps) => {
+export const SelectFieldRenderPropsSearchSelectTemplate = (props: SearchSelectFieldProps) => {
   const [selectValue, setSelectValue] = React.useState(props.value ? String(props.value) : OPTIONS[2].value);
 
   const onChange = (e: ChangeEvent<HTMLSelectElement>) => {

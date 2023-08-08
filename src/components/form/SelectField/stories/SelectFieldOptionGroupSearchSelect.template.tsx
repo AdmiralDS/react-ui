@@ -3,7 +3,7 @@ import type { ChangeEvent } from 'react';
 
 import { Option, OptionGroup, SelectField } from '@admiral-ds/react-ui';
 
-export const OptionGroupSearchSelectTemplate = () => {
+export const SelectFieldOptionGroupSearchSelectTemplate = () => {
   const [selectValue, setSelectValue] = React.useState('Похо Торо Моронго');
 
   const onChange = (e: ChangeEvent<HTMLSelectElement>) => setSelectValue(e.target.value);

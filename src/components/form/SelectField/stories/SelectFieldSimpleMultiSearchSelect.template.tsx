@@ -34,7 +34,7 @@ const shouldRender = (text = '', searchValue = '', searchFormat: SearchFormat = 
   return !searchValue ? true : parts.some((part) => chunks.includes(part.toLowerCase()));
 };
 
-export const SimpleMultiSearchSelectTemplate = (props: SearchSelectFieldProps) => {
+export const SelectFieldSimpleMultiSearchSelectTemplate = (props: SearchSelectFieldProps) => {
   const [selectValue, setSelectValue] = React.useState<string[]>(createOptions(4));
   const [searchValue, setSearchValue] = React.useState('');
   const [options] = React.useState(createOptions(20));

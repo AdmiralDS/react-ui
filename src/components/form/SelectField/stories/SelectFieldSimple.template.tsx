@@ -16,7 +16,7 @@ const OPTIONS = [
   'Ответ на «Главный вопрос жизни, вселенной и всего такого»',
   'text 69',
 ];
-export const SimpleTemplate = ({
+export const SelectFieldSimpleTemplate = ({
   placeholder = 'Placeholder',
   ...props
 }: SearchSelectFieldProps & { themeBorderKind?: BorderRadiusType }) => {
